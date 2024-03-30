@@ -9464,6 +9464,69 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#style-of-image-game-object" class="md-nav__link">
+    Style of Image game object
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#style-of-nine-slice" class="md-nav__link">
+    Style of Nine-slice
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#style-of-nine-patch" class="md-nav__link">
+    Style of Nine-patch
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#style-of-round-rectangle" class="md-nav__link">
+    Style of Round-rectangle
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#style-of-text-game-object" class="md-nav__link">
+    Style of Text game object
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#style-of-bbcodetext" class="md-nav__link">
+    Style of BBCodeText
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#style-of-bitmaptext" class="md-nav__link">
+    Style of BitmapText
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#style-of-simplelabel" class="md-nav__link">
+    Style of SimpleLabel
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#style-of-textarea" class="md-nav__link">
+    Style of TextArea
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -9486,185 +9549,32 @@
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
 <p>Style in plain object for creating image, or text.</p>
 <h2 id="style-of-background">Style of Background<a class="headerlink" href="#style-of-background" title="Permanent link">&para;</a></h2>
-<p>Create round-rectangle, nine-slice, or image for background.</p>
+<p>Create <a href="../shape-roundrectangle/">Round-rectangle</a>, <a href="../nineslice/">Nine-slice</a>, <a href="../ninepatch/">Nine-patch</a>, or <a href="../image/">Image</a> for background.</p>
 <ul>
-<li>Create <a href="../shape-roundrectangle/">Round-rectangle</a>, if style hs <code>color</code>, or <code>strokeColor</code> key. Default type of Background.
-    <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">    </span><span class="c1">// $type: &#39;roundRectangle&#39;,</span>
-
-<span class="w">    </span><span class="c1">// width: 0,</span>
-<span class="w">    </span><span class="c1">// height: 0,</span>
-
-<span class="w">    </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="mh">0xffffff</span><span class="p">,</span>
-<span class="w">    </span><span class="c1">// alpha: 1,</span>
-<span class="w">    </span><span class="nx">strokeColor</span><span class="o">:</span><span class="w"> </span><span class="mh">0xffffff</span><span class="p">,</span>
-<span class="w">    </span><span class="c1">// strokeAlpha: 1,</span>
-<span class="w">    </span><span class="c1">// strokeWidth: 2,</span>
-<span class="w">    </span><span class="c1">// radius: 0,</span>
-
-<span class="w">    </span><span class="c1">// Style override in active state</span>
-<span class="w">    </span><span class="c1">// &#39;active.color&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;active.alpha&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;active.strokeColor&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;active.strokeAlpha&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;active.strokeWidth&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;active.radius&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;active.xxx&#39;: ...</span>
-
-<span class="w">    </span><span class="c1">// Style override in hover state</span>
-<span class="w">    </span><span class="c1">// &#39;hover.color&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;hover.alpha&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;hover.strokeColor&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;hover.strokeAlpha&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;hover.strokeWidth&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;hover.radius&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;hover.xxx&#39;: ...</span>
-
-<span class="w">    </span><span class="c1">// Style override in disable state</span>
-<span class="w">    </span><span class="c1">// &#39;disable.color&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;disable.alpha&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;disable.strokeColor&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;disable.strokeAlpha&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;disable.strokeWidth&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;disable.radius&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;disable.xxx&#39;: ...</span>
-<span class="p">}</span>
-</code></pre></div></li>
-<li>Create <a href="../nineslice/">Nine-slice</a>, if style has <code>leftWidth</code> key.
-    <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">    </span><span class="c1">// $type: &#39;nineSlice&#39;,</span>
-
-<span class="w">    </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="p">,</span>
-<span class="w">    </span><span class="nx">frame</span><span class="o">:</span><span class="w"> </span><span class="p">,</span>
-<span class="w">    </span><span class="nx">leftWidth</span><span class="o">:</span><span class="w"> </span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="nx">rightWidth</span><span class="o">:</span><span class="w"> </span><span class="p">,</span>
-<span class="w">    </span><span class="nx">topHeight</span><span class="o">:</span><span class="w"> </span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="nx">bottomHeight</span><span class="o">:</span><span class="w"> </span><span class="p">,</span>
-<span class="w">    </span><span class="c1">// tint: 0xffffff,</span>
-<span class="w">    </span><span class="c1">// alpha: 1,</span>
-<span class="w">    </span><span class="c1">// scale: 1,</span>
-
-<span class="w">    </span><span class="c1">// effects: true,</span>
-
-<span class="w">    </span><span class="c1">// Style override in active state</span>
-<span class="w">    </span><span class="c1">// &#39;active.key&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;active.frame&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;active.tint&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;active.alpha&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;active.scale&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;active.glowColor&#39;: null,</span>
-<span class="w">    </span><span class="c1">// ...</span>
-
-<span class="w">    </span><span class="c1">// Style override in hover state</span>
-<span class="w">    </span><span class="c1">// &#39;hover.key&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;hover.frame&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;hover.tint&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;hover.alpha&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;hover.scale&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;hover.glowColor&#39;: null,</span>
-<span class="w">    </span><span class="c1">// ...</span>
-
-<span class="w">    </span><span class="c1">// Style override in disable state</span>
-<span class="w">    </span><span class="c1">// &#39;disable.key&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;disable.frame&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;disable.tint&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;disable.alpha&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;disable.scale&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;disable.glowColor&#39;: null,</span>
-<span class="w">    </span><span class="c1">// ...  </span>
-<span class="p">}</span>
-</code></pre></div></li>
-<li>Create <a href="../ninepatch/">Nine-patch</a>, if style has <code>leftWidth</code> and <code>stretchMode</code> key.
-    <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">    </span><span class="c1">// $type: &#39;nineSlice&#39;,</span>
-
-<span class="w">    </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="p">,</span>
-<span class="w">    </span><span class="nx">frame</span><span class="o">:</span><span class="w"> </span><span class="p">,</span>
-<span class="w">    </span><span class="nx">leftWidth</span><span class="o">:</span><span class="w"> </span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="nx">rightWidth</span><span class="o">:</span><span class="w"> </span><span class="p">,</span>
-<span class="w">    </span><span class="nx">topHeight</span><span class="o">:</span><span class="w"> </span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="nx">bottomHeight</span><span class="o">:</span><span class="w"> </span><span class="p">,</span>
-<span class="w">    </span><span class="nx">stretchMode</span><span class="o">:</span><span class="w"> </span><span class="p">,</span>
-<span class="w">    </span><span class="c1">// tint: 0xffffff,</span>
-<span class="w">    </span><span class="c1">// alpha: 1,</span>
-<span class="w">    </span><span class="c1">// scale: 1,</span>
-
-<span class="w">    </span><span class="c1">// effects: true,</span>
-
-<span class="w">    </span><span class="c1">// Style override in active state</span>
-<span class="w">    </span><span class="c1">// &#39;active.key&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;active.frame&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;active.tint&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;active.alpha&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;active.scale&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;active.glowColor&#39;: null,</span>
-<span class="w">    </span><span class="c1">// ...</span>
-
-<span class="w">    </span><span class="c1">// Style override in hover state</span>
-<span class="w">    </span><span class="c1">// &#39;hover.key&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;hover.frame&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;hover.tint&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;hover.alpha&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;hover.scale&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;hover.glowColor&#39;: null,</span>
-<span class="w">    </span><span class="c1">// ...</span>
-
-<span class="w">    </span><span class="c1">// Style override in disable state</span>
-<span class="w">    </span><span class="c1">// &#39;disable.key&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;disable.frame&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;disable.tint&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;disable.alpha&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;disable.scale&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;disable.glowColor&#39;: null,</span>
-<span class="w">    </span><span class="c1">// ...  </span>
-<span class="p">}</span>
-</code></pre></div></li>
-<li>Create <a href="../image/">image</a>, if style has <code>key</code> key.
-    <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">    </span><span class="c1">// $type: &#39;image&#39;,</span>
-
-<span class="w">    </span><span class="nx">key</span><span class="o">:</span>
-<span class="w">    </span><span class="c1">// frame:</span>
-<span class="w">    </span><span class="c1">// tint: 0xffffff,</span>
-<span class="w">    </span><span class="c1">// alpha: 1,</span>
-<span class="w">    </span><span class="c1">// scale: 1,</span>
-
-<span class="w">    </span><span class="c1">// effects: true,</span>
-
-<span class="w">    </span><span class="c1">// Style override in active state</span>
-<span class="w">    </span><span class="c1">// &#39;active.key&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;active.frame&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;active.tint&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;active.alpha&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;active.scale&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;active.glowColor&#39;: null,</span>
-<span class="w">    </span><span class="c1">// ...</span>
-
-<span class="w">    </span><span class="c1">// Style override in hover state</span>
-<span class="w">    </span><span class="c1">// &#39;hover.key&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;hover.frame&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;hover.tint&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;hover.alpha&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;hover.scale&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;hover.glowColor&#39;: null,</span>
-<span class="w">    </span><span class="c1">// ...</span>
-
-<span class="w">    </span><span class="c1">// Style override in disable state</span>
-<span class="w">    </span><span class="c1">// &#39;disable.key&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;disable.frame&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;disable.tint&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;disable.alpha&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;disable.scale&#39;: undefined,</span>
-<span class="w">    </span><span class="c1">// &#39;disable.glowColor&#39;: null,</span>
-<span class="w">    </span><span class="c1">// ...    </span>
-<span class="p">}</span>
-</code></pre></div></li>
+<li>Create <a href="../shape-roundrectangle/">Round-rectangle</a>, if <a href="./#style-of-round-rectangle">style</a> has <code>color</code>, or <code>strokeColor</code> key. Default type of Background.</li>
+<li>Create <a href="../nineslice/">Nine-slice</a>, if <a href="./#style-of-nine-slice">style</a> has <code>leftWidth</code> key.</li>
+<li>Create <a href="../ninepatch/">Nine-patch</a>, if <a href="./#style-of-nine-patch">style</a> has <code>leftWidth</code> and <code>stretchMode</code> key.</li>
+<li>Create <a href="../image/">Image</a>, if <a href="./#style-of-image-game-object">style</a> has <code>key</code> key.</li>
 </ul>
 <h2 id="style-of-image">Style of Image<a class="headerlink" href="#style-of-image" title="Permanent link">&para;</a></h2>
-<p>Create image, nine-slice, or round-rectangle for image.</p>
+<p>Create <a href="../image/">Image</a>, <a href="../nineslice/">Nine-slice</a>, <a href="../ninepatch/">Nine-patch</a>, or <a href="../shape-roundrectangle/">Round-rectangle</a> for image.</p>
 <ul>
-<li>Create <a href="../image/">image</a>, if style has <code>key</code> key. Default type of Background.
-    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+<li>Create <a href="../image/">Image</a>, if <a href="./#style-of-image-game-object">style</a> has <code>key</code> key. Default type of Background.</li>
+<li>Create <a href="../nineslice/">Nine-slice</a>, if <a href="./#style-of-nine-slice">style</a> has <code>leftWidth</code> key.</li>
+<li>Create <a href="../ninepatch/">Nine-patch</a>, if <a href="./#style-of-nine-patch">style</a> has <code>leftWidth</code> and <code>stretchMode</code> key.</li>
+<li>Create <a href="../shape-roundrectangle/">Round-rectangle</a>, if <a href="./#style-of-round-rectangle">style</a> has <code>color</code>, or <code>strokeColor</code> key.</li>
+</ul>
+<h2 id="style-of-text">Style of Text<a class="headerlink" href="#style-of-text" title="Permanent link">&para;</a></h2>
+<p>Create <a href="../text/">Text</a>, <a href="../bbcodetext/">BBCodetext</a>, <a href="../bitmaptext/">BitmapText</a>, <a href="../ui-simplelabel/">SimpleLabel</a>, or <a href="../ui-textarea/">TextArea</a> for text.</p>
+<ul>
+<li><a href="../text/">Text</a>, by <a href="./#style-of-text-game-object">style</a>, default type of Text.</li>
+<li><a href="../bbcodetext/">BBCodetext</a>, by <a href="./#style-of-bbcodetext">style</a>.</li>
+<li><a href="../bitmaptext/">BitmapText</a>, by <a href="./#style-of-bitmaptext">style</a>.</li>
+<li><a href="../ui-simplelabel/">SimpleLabel</a>, by <a href="./#style-of-simplelabel">style</a>.</li>
+<li><a href="../ui-textarea/">TextArea</a>, by <a href="./#style-of-textarea">style</a>.</li>
+</ul>
+<h2 id="style-of-image-game-object">Style of Image game object<a class="headerlink" href="#style-of-image-game-object" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
 <span class="w">    </span><span class="c1">// $type: &#39;image&#39;,</span>
 
 <span class="w">    </span><span class="nx">key</span><span class="o">:</span>
@@ -9674,7 +9584,6 @@
 <span class="w">    </span><span class="c1">// scale: 1,</span>
 
 <span class="w">    </span><span class="c1">// effects: true,</span>
-
 <span class="w">    </span><span class="c1">// Style override in active state</span>
 <span class="w">    </span><span class="c1">// &#39;active.key&#39;: undefined,</span>
 <span class="w">    </span><span class="c1">// &#39;active.frame&#39;: undefined,</span>
@@ -9702,9 +9611,9 @@
 <span class="w">    </span><span class="c1">// &#39;disable.glowColor&#39;: null,</span>
 <span class="w">    </span><span class="c1">// ...    </span>
 <span class="p">}</span>
-</code></pre></div></li>
-<li>Create <a href="../nineslice/">Nine-slice</a>, if style has <code>leftWidth</code> key.
-    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+</code></pre></div>
+<h2 id="style-of-nine-slice">Style of Nine-slice<a class="headerlink" href="#style-of-nine-slice" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
 <span class="w">    </span><span class="c1">// $type: &#39;nineSlice&#39;,</span>
 
 <span class="w">    </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="p">,</span>
@@ -9746,10 +9655,9 @@
 <span class="w">    </span><span class="c1">// &#39;disable.glowColor&#39;: null,</span>
 <span class="w">    </span><span class="c1">// ...  </span>
 <span class="p">}</span>
-</code></pre></div></li>
-<li>
-<p>Create <a href="../ninepatch/">Nine-patch</a>, if style has <code>leftWidth</code> and <code>stretchMode</code> key.
-    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+</code></pre></div>
+<h2 id="style-of-nine-patch">Style of Nine-patch<a class="headerlink" href="#style-of-nine-patch" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
 <span class="w">    </span><span class="c1">// $type: &#39;nineSlice&#39;,</span>
 
 <span class="w">    </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="p">,</span>
@@ -9792,11 +9700,9 @@
 <span class="w">    </span><span class="c1">// &#39;disable.glowColor&#39;: null,</span>
 <span class="w">    </span><span class="c1">// ...  </span>
 <span class="p">}</span>
-</code></pre></div></p>
-</li>
-<li>
-<p>Create <a href="../shape-roundrectangle/">Round-rectangle</a>, if style hs <code>color</code>, or <code>strokeColor</code> key.
-    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+</code></pre></div>
+<h2 id="style-of-round-rectangle">Style of Round-rectangle<a class="headerlink" href="#style-of-round-rectangle" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
 <span class="w">    </span><span class="c1">// $type: &#39;roundRectangle&#39;,</span>
 
 <span class="w">    </span><span class="c1">// width: 0,</span>
@@ -9808,6 +9714,7 @@
 <span class="w">    </span><span class="c1">// strokeAlpha: 1,</span>
 <span class="w">    </span><span class="c1">// strokeWidth: 2,</span>
 <span class="w">    </span><span class="c1">// radius: 0,</span>
+<span class="w">    </span><span class="c1">// radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}</span>
 
 <span class="w">    </span><span class="c1">// Style override in active state</span>
 <span class="w">    </span><span class="c1">// &#39;active.color&#39;: undefined,</span>
@@ -9836,136 +9743,131 @@
 <span class="w">    </span><span class="c1">// &#39;disable.radius&#39;: undefined,</span>
 <span class="w">    </span><span class="c1">// &#39;disable.xxx&#39;: ...</span>
 <span class="p">}</span>
-</code></pre></div></p>
-</li>
-</ul>
-<h2 id="style-of-text">Style of Text<a class="headerlink" href="#style-of-text" title="Permanent link">&para;</a></h2>
-<p>Create text, BBCodeText, BitmapText, or SimpleLabel for text.</p>
-<ul>
-<li><a href="../text/">Text</a>, default type of Text.
-   <div class="highlight"><pre><span></span><code><span class="w"> </span><span class="p">{</span>
-<span class="w">     </span><span class="c1">// $type: &#39;text&#39;,</span>
+</code></pre></div>
+<h2 id="style-of-text-game-object">Style of Text game object<a class="headerlink" href="#style-of-text-game-object" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="c1">// $type: &#39;text&#39;,</span>
 
-<span class="w">     </span><span class="c1">// Normal text-style</span>
-<span class="w">     </span><span class="nx">fontFamily</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Courier&#39;</span><span class="p">,</span>
-<span class="w">     </span><span class="nx">fontSize</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;16px&#39;</span><span class="p">,</span>
-<span class="w">     </span><span class="nx">fontStyle</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span>
-<span class="w">     </span><span class="nx">backgroundColor</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">     </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
-<span class="w">     </span><span class="nx">stroke</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
-<span class="w">     </span><span class="nx">strokeThickness</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
-<span class="w">     </span><span class="nx">shadow</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">         </span><span class="nx">offsetX</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
-<span class="w">         </span><span class="nx">offsetY</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
-<span class="w">         </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;#000&#39;</span><span class="p">,</span>
-<span class="w">         </span><span class="nx">blur</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
-<span class="w">         </span><span class="nx">stroke</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">         </span><span class="nx">fill</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span>
-<span class="w">     </span><span class="p">},</span>
-<span class="w">     </span><span class="nx">align</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;left&#39;</span><span class="p">,</span><span class="w">  </span><span class="c1">// &#39;left&#39;|&#39;center&#39;|&#39;right&#39;|&#39;justify&#39;</span>
-<span class="w">     </span><span class="nx">padding</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">         </span><span class="nx">left</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
-<span class="w">         </span><span class="nx">right</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
-<span class="w">         </span><span class="nx">top</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
-<span class="w">         </span><span class="nx">bottom</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
-<span class="w">     </span><span class="p">},</span>
-<span class="w">     </span><span class="nx">maxLines</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
-<span class="w">     </span><span class="nx">lineSpacing</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
-<span class="w">     </span><span class="nx">fixedWidth</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
-<span class="w">     </span><span class="nx">fixedHeight</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
-<span class="w">     </span><span class="nx">rtl</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">     </span><span class="nx">testString</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;|MÉqgy&#39;</span><span class="p">,</span>
-<span class="w">     </span><span class="nx">wordWrap</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">         </span><span class="nx">width</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">         </span><span class="nx">callback</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">         </span><span class="nx">callbackScope</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">         </span><span class="nx">useAdvancedWrap</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span>
-<span class="w">     </span><span class="p">},</span>
-<span class="w">     </span><span class="nx">metrics</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">     </span><span class="c1">// metrics: {</span>
-<span class="w">     </span><span class="c1">//     ascent: 0,</span>
-<span class="w">     </span><span class="c1">//     descent: 0,</span>
-<span class="w">     </span><span class="c1">//     fontSize: 0</span>
-<span class="w">     </span><span class="c1">// },</span>
+<span class="w">    </span><span class="c1">// Normal text-style</span>
+<span class="w">    </span><span class="nx">fontFamily</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Courier&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">fontSize</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;16px&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">fontStyle</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">backgroundColor</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">stroke</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">strokeThickness</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">shadow</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">offsetX</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">offsetY</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;#000&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">blur</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">stroke</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">fill</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nx">align</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;left&#39;</span><span class="p">,</span><span class="w">  </span><span class="c1">// &#39;left&#39;|&#39;center&#39;|&#39;right&#39;|&#39;justify&#39;</span>
+<span class="w">    </span><span class="nx">padding</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">left</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">right</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">top</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">bottom</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nx">maxLines</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">lineSpacing</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">fixedWidth</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">fixedHeight</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">rtl</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">testString</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;|MÉqgy&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">wordWrap</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">width</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">callback</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">callbackScope</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">useAdvancedWrap</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nx">metrics</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="c1">// metrics: {</span>
+<span class="w">    </span><span class="c1">//     ascent: 0,</span>
+<span class="w">    </span><span class="c1">//     descent: 0,</span>
+<span class="w">    </span><span class="c1">//     fontSize: 0</span>
+<span class="w">    </span><span class="c1">// },</span>
 
-<span class="w">     </span><span class="c1">// Style override in active state</span>
-<span class="w">     </span><span class="s1">&#39;active.fontFamily&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
-<span class="w">     </span><span class="s1">&#39;active.fontSize&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
-<span class="w">     </span><span class="s1">&#39;active.fontStyle&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
-<span class="w">     </span><span class="s1">&#39;active.backgroundColor&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
-<span class="w">     </span><span class="s1">&#39;active.color&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
-<span class="w">     </span><span class="s1">&#39;active.fill&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
-<span class="w">     </span><span class="s1">&#39;active.stroke&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
-<span class="w">     </span><span class="s1">&#39;active.strokeThickness&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="c1">// Style override in active state</span>
+<span class="w">    </span><span class="s1">&#39;active.fontFamily&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;active.fontSize&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;active.fontStyle&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;active.backgroundColor&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;active.color&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;active.fill&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;active.stroke&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;active.strokeThickness&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 
-<span class="w">     </span><span class="c1">// Style override in hover state</span>
-<span class="w">     </span><span class="s1">&#39;hover.fontFamily&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
-<span class="w">     </span><span class="s1">&#39;hover.fontSize&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
-<span class="w">     </span><span class="s1">&#39;hover.fontStyle&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
-<span class="w">     </span><span class="s1">&#39;hover.backgroundColor&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
-<span class="w">     </span><span class="s1">&#39;hover.color&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
-<span class="w">     </span><span class="s1">&#39;hover.fill&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
-<span class="w">     </span><span class="s1">&#39;hover.stroke&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
-<span class="w">     </span><span class="s1">&#39;hover.strokeThickness&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="c1">// Style override in hover state</span>
+<span class="w">    </span><span class="s1">&#39;hover.fontFamily&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;hover.fontSize&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;hover.fontStyle&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;hover.backgroundColor&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;hover.color&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;hover.fill&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;hover.stroke&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;hover.strokeThickness&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 
-<span class="w">     </span><span class="c1">// Style override in disable state</span>
-<span class="w">     </span><span class="s1">&#39;disable.fontFamily&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
-<span class="w">     </span><span class="s1">&#39;disable.fontSize&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
-<span class="w">     </span><span class="s1">&#39;disable.fontStyle&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
-<span class="w">     </span><span class="s1">&#39;disable.backgroundColor&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
-<span class="w">     </span><span class="s1">&#39;disable.color&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
-<span class="w">     </span><span class="s1">&#39;disable.fill&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
-<span class="w">     </span><span class="s1">&#39;disable.stroke&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
-<span class="w">     </span><span class="s1">&#39;disable.strokeThickness&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
-<span class="w"> </span><span class="p">}</span>
-</code></pre></div></li>
-<li><a href="../bbcodetext/">BBCodetext</a>, if set <code>$type</code> to <code>'bbcodetext'</code>.
-   <div class="highlight"><pre><span></span><code><span class="w"> </span><span class="p">{</span>
-<span class="w">     </span><span class="nx">$type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;bbcodetext&#39;</span><span class="p">,</span><span class="w"> </span><span class="c1">// or &#39;bbcode&#39;</span>
+<span class="w">    </span><span class="c1">// Style override in disable state</span>
+<span class="w">    </span><span class="s1">&#39;disable.fontFamily&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;disable.fontSize&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;disable.fontStyle&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;disable.backgroundColor&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;disable.color&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;disable.fill&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;disable.stroke&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;disable.strokeThickness&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="style-of-bbcodetext">Style of BBCodeText<a class="headerlink" href="#style-of-bbcodetext" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nx">$type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;bbcodetext&#39;</span><span class="p">,</span><span class="w"> </span><span class="c1">// or &#39;bbcode&#39;</span>
 
-<span class="w">     </span><span class="nx">fontFamily</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Courier&#39;</span><span class="p">,</span>
-<span class="w">     </span><span class="nx">fontSize</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;16px&#39;</span><span class="p">,</span>
-<span class="w">     </span><span class="nx">fontStyle</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span>
-<span class="w">     </span><span class="nx">backgroundColor</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">     </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
-<span class="w">     </span><span class="nx">stroke</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
-<span class="w">     </span><span class="nx">strokeThickness</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
-<span class="w">     </span><span class="nx">shadow</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">         </span><span class="nx">offsetX</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
-<span class="w">         </span><span class="nx">offsetY</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
-<span class="w">         </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;#000&#39;</span><span class="p">,</span>
-<span class="w">         </span><span class="nx">blur</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
-<span class="w">         </span><span class="nx">stroke</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">         </span><span class="nx">fill</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span>
-<span class="w">     </span><span class="p">},</span>
-<span class="w">     </span><span class="nx">align</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;left&#39;</span><span class="p">,</span><span class="w">  </span><span class="c1">// &#39;left&#39;|&#39;center&#39;|&#39;right&#39;|&#39;justify&#39;</span>
-<span class="w">     </span><span class="nx">padding</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">         </span><span class="nx">left</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
-<span class="w">         </span><span class="nx">right</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
-<span class="w">         </span><span class="nx">top</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
-<span class="w">         </span><span class="nx">bottom</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
-<span class="w">     </span><span class="p">},</span>
-<span class="w">     </span><span class="nx">maxLines</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
-<span class="w">     </span><span class="nx">lineSpacing</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
-<span class="w">     </span><span class="nx">fixedWidth</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
-<span class="w">     </span><span class="nx">fixedHeight</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
-<span class="w">     </span><span class="nx">rtl</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">     </span><span class="nx">testString</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;|MÉqgy&#39;</span><span class="p">,</span>
-<span class="w">     </span><span class="nx">wrap</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">         </span><span class="nx">mode</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;none&#39;</span><span class="w">     </span><span class="c1">// 0|&#39;none&#39;|1|&#39;word&#39;|2|&#39;char&#39;|&#39;character&#39;|3|&#39;mix&#39;</span>
-<span class="w">         </span><span class="nx">width</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span>
-<span class="w">     </span><span class="p">},</span>
-<span class="w">     </span><span class="c1">// wordWrap: { width: 0 },   // Compatible with Text game object</span>
-<span class="w">     </span><span class="nx">metrics</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">     </span><span class="c1">// metrics: {</span>
-<span class="w">     </span><span class="c1">//     ascent: 0,</span>
-<span class="w">     </span><span class="c1">//     descent: 0,</span>
-<span class="w">     </span><span class="c1">//     fontSize: 0</span>
-<span class="w">     </span><span class="c1">// },</span>
-<span class="w"> </span><span class="p">}</span>
-</code></pre></div></li>
-<li>Style of <a href="../bitmaptext/">bitmapText</a>, if set <code>$type</code> to <code>'bitmaptext'</code>.
-    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nx">fontFamily</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Courier&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">fontSize</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;16px&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">fontStyle</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">backgroundColor</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">stroke</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">strokeThickness</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">shadow</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">offsetX</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">offsetY</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;#000&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">blur</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">stroke</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">fill</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nx">align</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;left&#39;</span><span class="p">,</span><span class="w">  </span><span class="c1">// &#39;left&#39;|&#39;center&#39;|&#39;right&#39;|&#39;justify&#39;</span>
+<span class="w">    </span><span class="nx">padding</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">left</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">right</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">top</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">bottom</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nx">maxLines</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">lineSpacing</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">fixedWidth</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">fixedHeight</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">rtl</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">testString</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;|MÉqgy&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">wrap</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">mode</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;none&#39;</span><span class="w">     </span><span class="c1">// 0|&#39;none&#39;|1|&#39;word&#39;|2|&#39;char&#39;|&#39;character&#39;|3|&#39;mix&#39;</span>
+<span class="w">        </span><span class="nx">width</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="c1">// wordWrap: { width: 0 },   // Compatible with Text game object</span>
+<span class="w">    </span><span class="nx">metrics</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="c1">// metrics: {</span>
+<span class="w">    </span><span class="c1">//     ascent: 0,</span>
+<span class="w">    </span><span class="c1">//     descent: 0,</span>
+<span class="w">    </span><span class="c1">//     fontSize: 0</span>
+<span class="w">    </span><span class="c1">// },</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="style-of-bitmaptext">Style of BitmapText<a class="headerlink" href="#style-of-bitmaptext" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
 <span class="w">    </span><span class="c1">// $type: &#39;bitmaptext&#39;,  // or &#39;bitmap&#39;</span>
 
 <span class="w">    </span><span class="nx">font</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span>
@@ -9995,11 +9897,10 @@
 <span class="w">    </span><span class="s1">&#39;disable.tint&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 <span class="w">    </span><span class="s1">&#39;disable.letterSpacing&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 <span class="w">    </span><span class="s1">&#39;disable.lineSpacing&#39;</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
-
 <span class="p">}</span>
-</code></pre></div></li>
-<li>Style of <a href="../ui-simplelabel/">simpleLabel</a>, if set <code>$type</code> to <code>'label'</code>.
-    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+</code></pre></div>
+<h2 id="style-of-simplelabel">Style of SimpleLabel<a class="headerlink" href="#style-of-simplelabel" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
 <span class="w">    </span><span class="nx">$type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;label&#39;</span><span class="p">,</span>
 
 <span class="w">    </span><span class="c1">// width: undefined,</span>
@@ -10034,8 +9935,84 @@
 
 <span class="w">    </span><span class="nx">align</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w">  </span><span class="c1">// &#39;left&#39; | &#39;top&#39; | &#39;right&#39; | &#39;bottom&#39; | &#39;center</span>
 <span class="p">}</span><span class="w">    </span>
-</code></pre></div></li>
+</code></pre></div>
+<ul>
+<li><code>background</code> : <ul>
+<li><a href="./#style-of-background">Style of Background</a> : Create Round-rectangle, Nine-slice, or Image as background element.</li>
+<li><code>null</code> : Don't create any game object.</li>
 </ul>
+</li>
+<li><code>text</code> : <ul>
+<li><a href="./#style-of-text">Style of Text</a> : Create Text, BBCodeText, BitmapText, SimpleLabel, or TextArea as text element.</li>
+<li><code>null</code> : Don't create any game object.</li>
+</ul>
+</li>
+<li><code>icon</code>, <code>action</code> : <ul>
+<li><a href="./#style-of-image">Style of Image</a> : Create Image, Nine-slice, or Round-rectangle as image, action element.</li>
+<li><code>null</code> : Don't create any game object.</li>
+</ul>
+</li>
+</ul>
+<h2 id="style-of-textarea">Style of TextArea<a class="headerlink" href="#style-of-textarea" title="Permanent link">&para;</a></h2>
+<p><div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nx">$type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;textarea&#39;</span><span class="p">,</span>
+
+<span class="w">    </span><span class="nx">space</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">left</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">right</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">top</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">bottom</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="p">},</span>
+
+<span class="w">    </span><span class="nx">background</span><span class="o">:</span><span class="w"> </span><span class="nx">backgroundStyle</span><span class="p">,</span>
+
+<span class="w">    </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="nx">textStyle</span><span class="p">,</span>
+
+<span class="w">    </span><span class="c1">// textWidth: undefined,</span>
+<span class="w">    </span><span class="c1">// textHeight: undefined,</span>
+<span class="w">    </span><span class="c1">// textMask: false,</span>
+<span class="w">    </span><span class="c1">// alwaysScrollable: false,</span>
+
+<span class="w">    </span><span class="nx">slider</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">track</span><span class="o">:</span><span class="w"> </span><span class="nx">backgroundStyle</span><span class="p">,</span>
+
+<span class="w">        </span><span class="nx">thumb</span><span class="o">:</span><span class="w"> </span><span class="nx">backgroundStyle</span><span class="p">,</span>
+
+<span class="w">        </span><span class="c1">// input: &#39;drag&#39;,</span>
+<span class="w">        </span><span class="c1">// position: &#39;right&#39;,</span>
+
+<span class="w">        </span><span class="c1">// hideUnscrollableSlider: false,</span>
+<span class="w">        </span><span class="c1">// adaptThumbSize: false,</span>
+<span class="w">        </span><span class="c1">// minThumbSize: undefined,</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="c1">// slider: null,</span>
+
+<span class="w">    </span><span class="c1">// scroller: {</span>
+<span class="w">    </span><span class="c1">//     threshold: 10,</span>
+<span class="w">    </span><span class="c1">//     slidingDeceleration: 5000,</span>
+<span class="w">    </span><span class="c1">//     backDeceleration: 2000,</span>
+<span class="w">    </span><span class="c1">//     pointerOutRelease: true,</span>
+<span class="w">    </span><span class="c1">//     dragRate: 1,</span>
+<span class="w">    </span><span class="c1">// },</span>
+
+<span class="w">    </span><span class="nx">mouseWheelScroller</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="c1">// mouseWheelScroller: {</span>
+<span class="w">    </span><span class="c1">//     focus: true,</span>
+<span class="w">    </span><span class="c1">//     speed: 0.1</span>
+<span class="w">    </span><span class="c1">// },</span>
+
+<span class="w">    </span><span class="nx">clamplChildOY</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div>
+- <code>background</code> : 
+    - <a href="./#style-of-background">Style of Background</a> : Create round-rectangle, nine-slice, or image as background element.
+    - <code>null</code> : Don't create any game object.
+- <code>text</code> : 
+    - <a href="./#style-of-text">Style of Text</a> : Create text, BBCodeText, BitmapText, or SimpleLabel as text element.
+    - <code>null</code> : Don't create any game object.
+- <code>slider</code> :
+    - <code>slider.track</code> : 
+        - <a href="./#style-of-background">Style of Background</a> : Create round-rectangle, nine-slice, or image as track element.
+        - <code>null</code> : Don't create any game object.  <br />
+    - <code>slider.thumb</code> :
+        - <a href="./#style-of-background">Style of Background</a> : Create round-rectangle, nine-slice, or image as thumb element.
+        - <code>null</code> : Don't create any game object.  <br />
+    - <code>null</code>, or <code>false</code> : Don't create any game object for slider.</p>
 
 
   

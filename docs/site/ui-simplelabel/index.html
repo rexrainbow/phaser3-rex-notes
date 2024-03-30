@@ -9847,19 +9847,24 @@
 <span class="w">    </span><span class="c1">// rtl: false,</span>
 
 <span class="w">    </span><span class="nx">background</span><span class="o">:</span><span class="w"> </span><span class="nx">backgroundStyle</span><span class="p">,</span>
+<span class="w">    </span><span class="c1">// background: null,</span>
 
 <span class="w">    </span><span class="nx">icon</span><span class="o">:</span><span class="w"> </span><span class="nx">iconStyle</span><span class="p">,</span>
+<span class="w">    </span><span class="c1">// icon: null,</span>
 
 <span class="w">    </span><span class="c1">// iconMask: false,</span>
 <span class="w">    </span><span class="c1">// squareFitIcon: false,</span>
 <span class="w">    </span><span class="c1">// iconSize: undefined, iconWidth: undefined, iconHeight: undefined,</span>
 
 <span class="w">    </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="nx">testStyle</span><span class="p">,</span>
+<span class="w">    </span><span class="c1">// text: null,</span>
+
 <span class="w">    </span><span class="c1">// wrapText: false,</span>
 <span class="w">    </span><span class="c1">// expandTextWidth: false,</span>
 <span class="w">    </span><span class="c1">// expandTextHeight: false,</span>
 
 <span class="w">    </span><span class="nx">action</span><span class="o">:</span><span class="w"> </span><span class="nx">actionStyle</span><span class="p">,</span>
+<span class="w">    </span><span class="c1">// action: null,</span>
 
 <span class="w">    </span><span class="c1">// squareFitAction: false,</span>
 <span class="w">    </span><span class="c1">// actionMask: false,</span>
@@ -9879,9 +9884,21 @@
 <span class="p">},</span><span class="w"> </span><span class="nx">creators</span><span class="p">);</span>
 </code></pre></div>
 <ul>
-<li><code>background</code> : Create round-rectangle, nine-slice, or image for background. See <a href="../ui-style/#style-of-background">Style of Background</a></li>
-<li><code>text</code> : Create text, BBCodeText, BitmapText, or SimpleLabel for text. See <a href="#style-of-text">Style of Text</a></li>
-<li><code>icon</code>, <code>action</code> : Create image, nine-slice, or round-rectangle for image. See <a href="../ui-style/#style-of-image">Style of Icon, Action</a></li>
+<li><code>background</code> : <ul>
+<li><a href="../ui-style/#style-of-background">Style of Background</a> : Create Round-rectangle, Nine-slice, or Image as background element.</li>
+<li><code>null</code> : Don't create any game object.</li>
+</ul>
+</li>
+<li><code>text</code> : <ul>
+<li><a href="../ui-style/#style-of-text">Style of Text</a> : Create Text, BBCodeText, BitmapText, SimpleLabel, or TextArea as text element.</li>
+<li><code>null</code> : Don't create any game object.</li>
+</ul>
+</li>
+<li><code>icon</code>, <code>action</code> : <ul>
+<li><a href="../ui-style/#style-of-image">Style of Image</a> : Create Image, Nine-slice, or Round-rectangle as image, action element.</li>
+<li><code>null</code> : Don't create any game object.</li>
+</ul>
+</li>
 <li><code>wrapText</code> : Enable WrapExpandText feature.<ul>
 <li><code>false</code>, <code>0</code> : No WrapExpandText feature. Default behavior.</li>
 <li><code>true</code>, <code>1</code>, <code>'word'</code> : Word WrapExpandText.</li>
