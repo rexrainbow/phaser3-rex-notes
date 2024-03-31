@@ -24864,7 +24864,7 @@
 
   // Game object type name
   var BG = 'BG'; // layer: BGLayer
-  var TEXT = 'TEXT'; // layer: UILayer
+  var TEXTBOX = 'TEXTBOX'; // layer: UILayer
   var SPRITE = 'SPRITE'; // layer: GOLayer
   var CHOICE = 'CHOICE'; // layer: UILayer
 
@@ -78771,15 +78771,15 @@
 
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
   var RegisterTextboxType = function RegisterTextboxType(commandExecutor, config) {
-    var createGameObjectCallback = GetValue$1(config, "creators.".concat(TEXT), undefined);
+    var createGameObjectCallback = GetValue$1(config, "creators.".concat(TEXTBOX), undefined);
     if (createGameObjectCallback === false) {
       return;
     } else if (createGameObjectCallback === undefined) {
-      var style = GetValue$1(config, "styles.".concat(TEXT));
+      var style = GetValue$1(config, "styles.".concat(TEXTBOX));
       createGameObjectCallback = GenerateDefaultCreateGameObjectCallback$1(style);
     }
     commandExecutor.addGameObjectManager({
-      name: TEXT,
+      name: TEXTBOX,
       createGameObject: createGameObjectCallback,
       fade: 0,
       // No fade-in when creating/destroying gameobject
