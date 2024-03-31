@@ -75,9 +75,9 @@ Using plain object to create [drop down list](ui-simpledropdownlist.md).
 
 ```javascript
 var dropDownList = scene.rexUI.add.simpleDropDownList({
-    label: SimpleLabelConfig,
+    label: labelStyle,
 
-    button: SimpleLabelConfig,
+    button: buttonStyle,
 
     list: {
         // easeIn: 500,
@@ -107,9 +107,10 @@ var dropDownList = scene.rexUI.add.simpleDropDownList({
 }, creators);
 ```
 
-- `label` : [Styles of simple-label](ui-simplelabel.md#add-label-object), for creating label.
-- `button` : [Styles of simple-label](ui-simplelabel.md#add-label-object), for creating each button on drop-down list.
-    - Use `label` parameter of `button` parameter is not given.
+- `label` :
+    - [Styles of simple-label](ui-style.md#style-of-simplelabel)
+- `button` : Use `label` parameter if `button` parameter is not given.
+    - [Styles of simple-label](ui-style.md#style-of-simplelabel)
 - `list` : Configuration of list panel.
     - `list.easeIn` : Pop-up duration in ms. Default value is `500`.
     - `list.transitIn` : Tween behavior of opening list panel.

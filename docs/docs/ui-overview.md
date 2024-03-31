@@ -124,6 +124,8 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
 1. [Scroll-able panel](ui-scrollablepanel.md): A container with a panel, slider, and scroller.
 1. [Simple drop down list](ui-simpledropdownlist.md): Using plain object to create [drop down list](ui-simpledropdownlist.md).
 1. [Simple label](ui-simplelabel.md): Using json style to create [label](ui-label.md).
+1. [Simple title label](ui-simpletitlelabel.md): Using json style to create [title label](ui-titlelabel.md).
+1. [Simple text box](ui-simpletextbox.md): Using json style to create [text box](ui-textbox.md).
 1. [Sizer](ui-sizer.md): Layout children game objects.
 1. [Slider](ui-slider.md): A container with a track, indicator, thumb and background.
 1. [Split panels](ui-splitpanels.md): A container with left(top) panel, right(bottom) panel, splitter, and background. Drag splitter to resize with left(top) panel, right(bottom) panel. 
@@ -601,54 +603,6 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
     class MyTransitionImagePack extends RexPlugins.UI.TransitionImagePack {
         constructor(scene, x, y, texture, frame, config) {
             super(scene, x, y, texture, frame, config);
-            // ...
-            scene.add.existing(this);
-        }
-        // ...
-    }
-    ```
-
-### States game objects
-
-1. [States image](ui-statesimage.md): Using plain object to create [Image game object](image.md), with active, hover, disable styles.
-    ```javascript
-    var image = scene.rexUI.add.statesImage(config);
-    ```
-    or
-    ```javascript
-    class MyStatesImage extends RexPlugins.UI.StatesImage {
-        constructor(scene, config) {
-            super(scene, config);
-            // ...
-            scene.add.existing(this);
-        }
-        // ...
-    }
-    ```
-1. [States text](ui-statestext.md): Using plain object to create [Text game object](text.md), with active, hover, disable styles.
-    ```javascript
-    var txt = scene.rexUI.add.statesText(config);
-    ```
-    or
-    ```javascript
-    class MyStatesText extends RexPlugins.UI.StatesText {
-        constructor(scene, config) {
-            super(scene, config);
-            // ...
-            scene.add.existing(this);
-        }
-        // ...
-    }
-    ```
-1. [States round-rectangle](ui-statesroundrectangle.md): Using plain object to create [round rectangle game object](shape-roundrectangle.md), with active, hover, disable styles.
-    ```javascript
-    var rect = scene.rexUI.add.statesRoundRectangle(config);
-    ```
-    or
-    ```javascript
-    class MyStatesRoundRectangle extends RexPlugins.UI.StatesRoundRectangle {
-        constructor(scene, config) {
-            super(scene, config);
             // ...
             scene.add.existing(this);
         }
