@@ -9733,9 +9733,9 @@
 </ul>
 <h3 id="add-drop-down-list-object">Add drop-down list object<a class="headerlink" href="#add-drop-down-list-object" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">dropDownList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">simpleDropDownList</span><span class="p">({</span>
-<span class="w">    </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="nx">SimpleLabelConfig</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="nx">labelStyle</span><span class="p">,</span>
 
-<span class="w">    </span><span class="nx">button</span><span class="o">:</span><span class="w"> </span><span class="nx">SimpleLabelConfig</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">button</span><span class="o">:</span><span class="w"> </span><span class="nx">buttonStyle</span><span class="p">,</span>
 
 <span class="w">    </span><span class="nx">list</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="c1">// easeIn: 500,</span>
@@ -9765,9 +9765,12 @@
 <span class="p">},</span><span class="w"> </span><span class="nx">creators</span><span class="p">);</span>
 </code></pre></div>
 <ul>
-<li><code>label</code> : <a href="../ui-simplelabel/#add-label-object">Styles of simple-label</a>, for creating label.</li>
-<li><code>button</code> : <a href="../ui-simplelabel/#add-label-object">Styles of simple-label</a>, for creating each button on drop-down list.<ul>
-<li>Use <code>label</code> parameter of <code>button</code> parameter is not given.</li>
+<li><code>label</code> :<ul>
+<li><a href="../ui-style/#style-of-simplelabel">Styles of simple-label</a></li>
+</ul>
+</li>
+<li><code>button</code> : Use <code>label</code> parameter if <code>button</code> parameter is not given.<ul>
+<li><a href="../ui-style/#style-of-simplelabel">Styles of simple-label</a></li>
 </ul>
 </li>
 <li><code>list</code> : Configuration of list panel.<ul>
