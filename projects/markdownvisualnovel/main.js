@@ -1,7 +1,7 @@
 import phaser from 'phaser/src/phaser.js';
-import MarkedEventSheetsPlugin from '../../plugins/markedeventsheets-plugin.js';
-import UIPlugin from '../../templates/ui/ui-plugin.js';
-import CreateCommandExecutor from './commandexecutor/CreateCommandExecutor.js';
+import MarkdownVisualNovel from '../../templates/markdownvisualnovel/MarkdownVisualNovel.js';
+import TextBoxStyle from './styles/TextBoxStyle.js';
+import ChoiceStyle from './styles/ChoiceStyle.js';
 
 class Demo extends Phaser.Scene {
 
@@ -38,8 +38,11 @@ class Demo extends Phaser.Scene {
         var print = this.add.text(0, 570, '', { fontSize: 20, backgroundColor: 'grey' }).setDepth(100);
         print.text = 'Any click to start';
 
-        var eventSheetManager = this.plugins.get('rexMarkedEventSheets').add({
-            commandExecutor: CreateCommandExecutor(this)
+        var eventSheetManager = new MarkdownVisualNovel(this, {
+            styles: {
+                TEXTBOX: TextBoxStyle,
+                CHOICE: ChoiceStyle,
+            }
         })
             .addEventSheet(this.cache.text.get('eventSheet0'))
 
@@ -74,19 +77,7 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo,
-    plugins: {
-        global: [{
-            key: 'rexMarkedEventSheets',
-            plugin: MarkedEventSheetsPlugin,
-            start: true
-        }],
-        scene: [{
-            key: 'rexUI',
-            plugin: UIPlugin,
-            mapping: 'rexUI'
-        }]
-    }
+    scene: Demo
 };
 
 var game = new Phaser.Game(config);
