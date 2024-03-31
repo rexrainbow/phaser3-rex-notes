@@ -38,7 +38,7 @@ class Demo extends Phaser.Scene {
 
         var eventSheetManager = this.plugins.get('rexMarkdownVisualNovel').add(this, {
             styles: {
-                TEXT: TextBoxStyle,
+                TEXTBOX: TextBoxStyle,
                 CHOICE: ChoiceStyle,
             }
         })

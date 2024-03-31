@@ -8,7 +8,7 @@ BG
   id=Background
   key=classroom
 
-TEXT
+TEXTBOX
   id=Dialog
   width=500
   height=120
