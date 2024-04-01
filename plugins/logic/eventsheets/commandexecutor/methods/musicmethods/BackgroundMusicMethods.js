@@ -1,5 +1,5 @@
 export default {
-    bgm(
+    'bgm.set'(
         {
             volume, mute, unmute
         } = {},

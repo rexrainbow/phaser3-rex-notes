@@ -16,17 +16,20 @@ TEXTBOX
 SPRITE
   id=CharacterA
   key=characters
-  frame=A-smile
+  name=A
+  expression=smile
 
 SPRITE
   id=CharacterB
   key=characters
-  frame=B-smile
+  name=B
+  expression=smile
 
 SPRITE
   id=CharacterC
   key=characters
-  frame=C-smile
+  name=C
+  expression=smile
 
 CHOICE
   id=Choice
@@ -48,23 +51,23 @@ log
   text=Start...
 
 
-Dialog
+Dialog.set
   vpy=0.99
   alpha=0.8
 
-CharacterA
+CharacterA.set
   vpx=-0.2
 
-CharacterB
+CharacterB.set
   vpx=-0.4
 
-CharacterC
+CharacterC.set
   vpx=-0.3
 
 bgm.play
   key=theme0
 
-camera
+camera.set
   x=0
   y=200
   rotate=-90
@@ -98,13 +101,13 @@ camera.flash
 
 
 CharacterA.to
-  vpx=0.75
+  vpx=0.8
   ease=Back
   duration=2000
   wait=false
 
 CharacterB.to
-  vpx=0.25
+  vpx=0.2
   ease=Back
   duration=2000
   wait=false
@@ -117,7 +120,7 @@ CharacterC.to
 
 // Ease all SPRITE game objects excluding CharacterA
 !CharacterA.to
-  alpha=0.3
+  alpha=0.5
   duration=300
 // Wait until tween complete
 
@@ -197,14 +200,16 @@ wait
   click
 // Wait until 3s or any touch
 
+SPRITE.set
+  alpha=1
+
 se.play
   key=explosion
   wait
 // Wait until playing se complete
 
-CharacterA.cross
-  key=characters
-  frame=A-dizzy
+SPRITE.cross
+  expression=dizzy
 
 bgm.cross
   key=theme1

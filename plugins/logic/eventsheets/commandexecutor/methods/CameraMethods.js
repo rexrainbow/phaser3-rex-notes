@@ -1,5 +1,5 @@
 export default {
-    camera(
+    'camera.set'(
         {
             x, y, rotate, zoom
         } = {},

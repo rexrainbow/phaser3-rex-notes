@@ -69,6 +69,55 @@ var CreateCommandExecutor = function (scene) {
         layers: ['bgLayer', 'gameLayer', 'uiLayer']
     })
         .addGameObjectManager({
+            name: 'SPRITE',
+            createGameObject(scene, config) {
+                var { name, expression } = config;
+                if (name && expression) {
+                    config.frame = `${name}-${expression}`;
+                }
+                return scene.rexUI.add.transitionImagePack(config);
+            },
+            fade: 0,  // No fade-in when creating/destroying gameobject
+            viewportCoordinate: true,
+            defaultLayer: 'gameLayer',
+
+            commands: {
+                cross(
+                    gameObject,
+                    {
+                        key, frame,
+                        name, expression,
+                        duration, mode = 'crossFade',
+                        wait = true
+                    } = {},
+                    commandExecutor, eventSheetManager, eventSheet
+                ) {
+                    if (!key) {
+                        key = gameObject.texture.key;
+                    }
+
+                    if (name || expression) {
+                        var tokens = gameObject.frame.name.split('-');
+                        name = name || tokens[0];
+                        expression = expression || tokens[1];
+                        frame = `${name}-${expression}`;
+                    }
+
+                    // Wait until transition complete
+                    if (wait) {
+                        commandExecutor.waitEvent(gameObject, 'complete');
+                    }
+
+                    var durationSave = gameObject.duration;
+                    if (duration !== undefined) {
+                        gameObject.setDuration(duration);
+                    }
+                    gameObject.transit(key, frame, mode);
+                    gameObject.setDuration(durationSave);
+                }
+            }
+        })
+        .addGameObjectManager({
             name: 'BG',
             createGameObject(scene, config) {
                 return scene.rexUI.add.transitionImagePack(config);
@@ -78,7 +127,16 @@ var CreateCommandExecutor = function (scene) {
             defaultLayer: 'bgLayer',
 
             commands: {
-                cross(gameObject, { key, frame, duration, mode = 'fade', wait = true } = {}, commandExecutor, eventSheetManager, tree) {
+                cross(
+                    gameObject,
+                    {
+                        key, frame,
+                        duration, mode = 'fade',
+                        wait = true
+                    } = {},
+                    commandExecutor, eventSheetManager, eventSheet
+                ) {
+
                     // Wait until transition complete
                     if (wait) {
                         commandExecutor.waitEvent(gameObject, 'complete');
@@ -101,7 +159,14 @@ var CreateCommandExecutor = function (scene) {
             defaultLayer: 'uiLayer',
 
             commands: {
-                typing(gameObject, { name, text, speed } = {}, commandExecutor, eventSheetManager, tree) {
+                typing(
+                    gameObject,
+                    {
+                        name, text, speed
+                    } = {},
+                    commandExecutor, eventSheetManager, eventSheet
+                ) {
+
                     if (name) {
                         var title = gameObject.getElement('title').setText(name);
                         gameObject.setChildVisible(title, true);
@@ -115,21 +180,6 @@ var CreateCommandExecutor = function (scene) {
                     commandExecutor.waitEvent(gameObject, 'complete');
                     gameObject.start(text, speed);
                 },
-            }
-        })
-        .addGameObjectManager({
-            name: 'SPRITE',
-            createGameObject(scene, { key, frame } = {}) {
-                return scene.add.image(0, 0, key, frame);
-            },
-            fade: 0,  // No fade-in when creating/destroying gameobject
-            viewportCoordinate: true,
-            defaultLayer: 'gameLayer',
-
-            commands: {
-                cross(gameObject, { key, frame } = {}, commandExecutor, eventSheetManager, tree) {
-                    gameObject.setTexture(key, frame);
-                }
             }
         })
         .addGameObjectManager({
@@ -148,8 +198,7 @@ var CreateCommandExecutor = function (scene) {
                         option1, option2, option3,
                         resultKey = 'choiceIndex'
                     } = {},
-                    commandExecutor,
-                    eventSheetManager
+                    commandExecutor, eventSheetManager
                 ) {
 
                     var choices = [];
@@ -185,7 +234,13 @@ var CreateCommandExecutor = function (scene) {
 const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
-var CreateTextBox = function (scene, { width = 0, height = 0 } = {}) {
+var CreateTextBox = function (
+    scene,
+    {
+        width = 0, height = 0
+    } = {}
+) {
+
     var wrapWidth = Math.max(0, width - 20);
     var textBox = scene.rexUI.add.textBox({
 
@@ -266,7 +321,13 @@ var CreateTextBox = function (scene, { width = 0, height = 0 } = {}) {
     return textBox;
 }
 
-var CreateChoiceBox = function (scene, { width = 0, height = 0 } = {}) {
+var CreateChoiceBox = function (
+    scene,
+    {
+        width = 0, height = 0
+    } = {}
+) {
+
     var dialog = scene.rexUI.add.confirmDialog({
         width: width, height: height,
         space: {

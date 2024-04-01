@@ -23,6 +23,9 @@ var DefaultHandler = function (name, config, eventSheetManager, eventsheet) {
         case 2:
             var commandName = tokens[1];
             switch (tokens[1]) {
+                case 'set':
+                    return this._setGOProperty(config, eventSheetManager, eventsheet);
+
                 case 'to':
                     return this._easeGOProperty(config, eventSheetManager, eventsheet);
 

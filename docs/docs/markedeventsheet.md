@@ -880,7 +880,7 @@ Reserved id : `time`, `click`, `key`, `bgm`, `bgm2`, `se`, `se2`, `camera`.
 - Set properties of a game object indexing by `NAME`
     ```
     
-    NAME
+    NAME.set
       x=
       vpx=
       y=
@@ -893,7 +893,7 @@ Reserved id : `time`, `click`, `key`, `bgm`, `bgm2`, `se`, `se2`, `camera`.
 - Set properties of all game objects belong GOTYPE
     ```
     
-    GOTYPE
+    GOTYPE.set
       x=
       vpx=
       y=
@@ -904,7 +904,7 @@ Reserved id : `time`, `click`, `key`, `bgm`, `bgm2`, `se`, `se2`, `camera`.
 - Set properties of all game objects belong GOTYPE excluding `NAME`
     ```
     
-    !NAME
+    !NAME.set
       x=
       vpx=
       y=
@@ -1129,7 +1129,7 @@ This command executor provides
 
 ```
 
-bgm
+bgm.set
   volume
   mute
   unmute
@@ -1252,7 +1252,7 @@ bgm.unmute
 
 ```
 
-camera
+camera.set
   x=
   y=
   rotate=

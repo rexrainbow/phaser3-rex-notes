@@ -73,7 +73,7 @@ declare class CommandExecutor {
     wait: CommandExecutor.WaitCommandCallbackType;
     click: CommandExecutor.WaitCommandCallbackType;
 
-    bgm: CommandExecutor.ImmediatelyCommandCallbackType;
+    'bgm.set': CommandExecutor.ImmediatelyCommandCallbackType;
     'bgm.play': CommandExecutor.CommandCallbackType;
     'bgm.cross': CommandExecutor.CommandCallbackType;
     'bgm.stop': CommandExecutor.ImmediatelyCommandCallbackType;
@@ -84,7 +84,7 @@ declare class CommandExecutor {
     'bgm.mute': CommandExecutor.ImmediatelyCommandCallbackType;
     'bgm.unmute': CommandExecutor.ImmediatelyCommandCallbackType;
 
-    bgm2: CommandExecutor.ImmediatelyCommandCallbackType;
+    'bgm2.set': CommandExecutor.ImmediatelyCommandCallbackType;
     'bgm2.play': CommandExecutor.CommandCallbackType;
     'bgm2.cross': CommandExecutor.CommandCallbackType;
     'bgm2.stop': CommandExecutor.ImmediatelyCommandCallbackType;
@@ -95,21 +95,21 @@ declare class CommandExecutor {
     'bgm2.mute': CommandExecutor.ImmediatelyCommandCallbackType;
     'bgm2.unmute': CommandExecutor.ImmediatelyCommandCallbackType;
 
-    se: CommandExecutor.ImmediatelyCommandCallbackType;
+    'se.set': CommandExecutor.ImmediatelyCommandCallbackType;
     'se.play': CommandExecutor.CommandCallbackType;
     'se.stop': CommandExecutor.ImmediatelyCommandCallbackType;
     'se.fadeOut': CommandExecutor.CommandCallbackType;
     'se.mute': CommandExecutor.ImmediatelyCommandCallbackType;
     'se.unmute': CommandExecutor.ImmediatelyCommandCallbackType;
 
-    se2: CommandExecutor.ImmediatelyCommandCallbackType;
+    'se2.set': CommandExecutor.ImmediatelyCommandCallbackType;
     'se2.play': CommandExecutor.CommandCallbackType;
     'se2.stop': CommandExecutor.ImmediatelyCommandCallbackType;
     'se2.fadeOut': CommandExecutor.CommandCallbackType;
     'se2.mute': CommandExecutor.ImmediatelyCommandCallbackType;
     'se2.unmute': CommandExecutor.ImmediatelyCommandCallbackType;
 
-    camera: CommandExecutor.ImmediatelyCommandCallbackType;
+    'camera.set': CommandExecutor.ImmediatelyCommandCallbackType;
     'camera.fadeIn': CommandExecutor.CommandCallbackType;
     'camera.fadeOut': CommandExecutor.CommandCallbackType;
     'camera.flash': CommandExecutor.CommandCallbackType;

@@ -1,5 +1,5 @@
 export default {
-    se2(
+    'se2.set'(
         {
             volume, mute, unmute
         } = {},

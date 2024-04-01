@@ -6,9 +6,9 @@ import RegisterTextboxType from './RegisterTextboxType.js';
 import RegisterChoiceDialogType from './RegisterChoiceDialogType.js';
 
 const RegisterHandlers = [
-    RegisterBackgroundType,
     RegisterSpriteType,
     RegisterTextboxType,
+    RegisterBackgroundType,
     RegisterChoiceDialogType
 ];
 
