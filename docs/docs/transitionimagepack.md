@@ -23,7 +23,7 @@ Transit texture to another one, with some pre-build effects, extended from [Tran
 
 - Load plugin (minify file) in preload stage
     ```javascript
-    scene.load.plugin('rextransitionimagpackplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rextransitionimagpackplugin.min.js', true);
+    scene.load.plugin('rextransitionimagepackplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rextransitionimagepackplugin.min.js', true);
     ```
 - Add image object
     ```javascript
