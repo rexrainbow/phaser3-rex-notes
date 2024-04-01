@@ -157,7 +157,7 @@ log
 
 Dialog.typing
   name=Me Me Me
-  text=Too cool
+  text=Not today
   speed=100
 
 setData
@@ -221,7 +221,7 @@ wait
 
 // Ease all SPRITE game objects
 SPRITE.to
-  vpx=-0.2
+  vpx=-0.3
 // Wait until tween complete
 
 uiLayer.to

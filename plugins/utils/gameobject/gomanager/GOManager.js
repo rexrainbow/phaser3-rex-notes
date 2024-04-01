@@ -45,7 +45,7 @@ class GOManager {
         this.removedGOs = [];
         this._timeScale = 1;
 
-        this.name = '';
+        this.name = GetValue(config, 'name');
     }
 
     destroy(fromScene) {

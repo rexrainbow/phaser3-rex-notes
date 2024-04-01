@@ -2,11 +2,14 @@ import GameObjectManagerBase from '../gameobject/gomanager/GOManager.js';
 
 export default {
     addGameObjectManager(config, GameObjectManagerClass) {
-        var gameobjectManager, gameobjectManagerName;
+        var gameobjectManager;
 
-        if (typeof (config) === 'string') {
+        if (config instanceof (GameObjectManagerBase)) {
+            gameobjectManager = config;
+
+        } else if (typeof (config) === 'string') {
             gameobjectManager = GameObjectManagerClass;
-            gameobjectManagerName = config
+            gameobjectManager.name = config;
 
         } else {
             if (config === undefined) {
@@ -21,11 +24,10 @@ export default {
             }
 
             gameobjectManager = new GameObjectManagerClass(this.managersScene, config);
-            gameobjectManagerName = config.name;
         }
 
-        gameobjectManager.name = gameobjectManagerName;
-        this.gameObjectManagers[gameobjectManagerName] = gameobjectManager;
+
+        this.gameObjectManagers[gameobjectManager.name] = gameobjectManager;
 
         return this;
     },

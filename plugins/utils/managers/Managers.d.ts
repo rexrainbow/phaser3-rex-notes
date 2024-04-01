@@ -78,6 +78,9 @@ declare class Managers extends Phaser.Events.EventEmitter {
         name: string,
         gameObjectManager: GOManager
     ): this;
+    addGameObjectManager(
+        gameObjectManager: GOManager
+    ): this;
 
     getGameObjectManager(
         managerName: string | null | undefined,

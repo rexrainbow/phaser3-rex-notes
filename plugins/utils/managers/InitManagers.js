@@ -16,11 +16,12 @@ var InitManagers = function (scene, config) {
     var layerNames = GetValue(config, 'layers', false);
     if (layerNames !== false) {
         var layerManager = new LayerManager(scene, {
+            name: 'LAYER',
             layers: layerNames,
             rootLayer: GetValue(config, 'rootLayer', undefined),
             depth: GetValue(config, 'layerDepth', undefined)
         });
-        this.addGameObjectManager('LAYER', layerManager);
+        this.addGameObjectManager(layerManager);
         this.layerManager = layerManager;
     }
 
