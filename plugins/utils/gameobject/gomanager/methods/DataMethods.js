@@ -1,9 +1,13 @@
+import IsSingleBob from './IsSingleBob.js';
+
 export default {
     hasData(name, dataKey) {
-        if (!this.has(name)) {
+        var bob = IsSingleBob(name) ? this.get(name) : this.getFitst(name);
+        if (!bob) {
             return false;
         }
-        return this.get(name).hasData(dataKey);
+
+        return bob.hasData(dataKey);
     },
 
     getData(name, dataKey) {
@@ -14,10 +18,17 @@ export default {
     },
 
     setData(name, dataKey, value) {
-        if (!this.has(name)) {
+        var bobs = this.get(name);
+        if (!bobs) {
             return this;
+        } else if (!Array.isArray(bobs)) {
+            bobs = [bobs];
         }
-        this.get(name).setData(dataKey, value);
+
+        bobs.forEach(function (bob) {
+            bob.setData(dataKey, value);
+        });
+
         return this;
     },
 }

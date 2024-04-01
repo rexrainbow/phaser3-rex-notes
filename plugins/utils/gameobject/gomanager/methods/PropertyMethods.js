@@ -1,16 +1,22 @@
+import IsSingleBob from './IsSingleBob.js';
+
 export default {
     hasProperty(name, property) {
-        if (!this.has(name)) {
+        var bob = IsSingleBob(name) ? this.get(name) : this.getFitst(name);
+        if (!bob) {
             return false;
         }
-        return this.get(name).hasProperty(property);
+
+        return bob.hasProperty(property);
     },
 
     getProperty(name, property) {
-        if (!this.has(name)) {
+        var bob = IsSingleBob(name) ? this.get(name) : this.getFitst(name);
+        if (!bob) {
             return undefined;
         }
-        return this.get(name).getProperty(property);
+
+        return bob.getProperty(property);
     },
 
     isNumberProperty(name, property) {
@@ -19,8 +25,11 @@ export default {
     },
 
     setProperty(name, property, value) {
-        if (!this.has(name)) {
+        var bobs = this.get(name);
+        if (!bobs) {
             return this;
+        } else if (!Array.isArray(bobs)) {
+            bobs = [bobs];
         }
 
         if (this.symbols &&
@@ -34,13 +43,19 @@ export default {
             }
         }
 
-        this.get(name).setProperty(property, value);
+        bobs.forEach(function (bob) {
+            bob.setProperty(property, value);
+        });
+
         return this;
     },
 
     easeProperty(name, property, value, duration, ease, repeat, isYoyo, onComplete) {
-        if (!this.has(name)) {
+        var bobs = this.get(name);
+        if (!bobs) {
             return this;
+        } else if (!Array.isArray(bobs)) {
+            bobs = [bobs];
         }
 
         if (duration === undefined) {
@@ -67,26 +82,28 @@ export default {
             }
         }
 
-        this.get(name).easeProperty(property, value, duration, ease, repeat, isYoyo, onComplete);
+        bobs.forEach(function (bob) {
+            bob.easeProperty(property, value, duration, ease, repeat, isYoyo, onComplete);
+        });
+
         return this;
     },
 
     hasTweenTask(name, property) {
-        if (!this.has(name)) {
+        var bob = IsSingleBob(name) ? this.get(name) : this.getFitst(name);
+        if (!bob) {
             return false;
         }
 
-        var tweenTasks = this.get(name).tweens;
-        return tweenTasks.hasOwnProperty(property);
+        return bob.tweens.hasOwnProperty(property);
     },
 
     getTweenTask(name, property) {
-        if (!this.has(name)) {
+        var bob = IsSingleBob(name) ? this.get(name) : this.getFitst(name);
+        if (!bob) {
             return null;
         }
 
-        var tweenTasks = this.get(name).tweens;
-        var tweenTask = tweenTasks[property];
-        return (tweenTask) ? tweenTask : null;
+        return bob.tweens[property] || null;
     }
 }

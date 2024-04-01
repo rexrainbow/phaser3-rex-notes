@@ -1,3 +1,5 @@
+import IsSingleBob from './IsSingleBob.js';
+
 export default {
     has(name) {
         return this.bobs.hasOwnProperty(name);
@@ -7,8 +9,36 @@ export default {
         return this.bobs.hasOwnProperty(name);
     },
 
-    get(name) {
-        return this.bobs[name];
+    get(name, out) {
+        // Pick single bob
+        if (IsSingleBob(name)) {
+            return this.bobs[name];
+        } else {
+            if (out === undefined) {
+                out = [];
+            }
+
+            if (name) {
+                name = name.substring(1);
+            }
+
+            for (var key in this.bobs) {
+                if (name && (key === name)) {
+                    continue;
+                }
+
+                out.push(this.bobs[key]);
+            }
+
+            return out;
+        }
+    },
+
+    getFitst() {
+        for (var name in this.bobs) {
+            return this.bobs[name];
+        }
+        return null;
     },
 
     getGO(name) {

@@ -59,7 +59,8 @@ declare class GOManager extends Phaser.Events.EventEmitter {
 
     has(name: string): boolean;
 
-    get(name: string): BobBase;
+    get(name: string): BobBase | BobBase[];
+    getFirst(): BobBase | null;
     getGO(name: string): Phaser.GameObjects.GameObject;
     getAllGO(out?: Phaser.GameObjects.GameObject[]): Phaser.GameObjects.GameObject[];
 

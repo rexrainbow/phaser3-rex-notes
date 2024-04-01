@@ -23,6 +23,10 @@ export default {
             var manager = this.gameObjectManagers[managerName]
             return manager;
         } else {
+            if (gameObjectName && (gameObjectName.charAt(0) === '!')) {
+                gameObjectName = gameObjectName.subString(1);
+            }
+
             for (var managerName in this.gameObjectManagers) {
                 var manager = this.gameObjectManagers[managerName]
                 if (manager.has(gameObjectName)) {

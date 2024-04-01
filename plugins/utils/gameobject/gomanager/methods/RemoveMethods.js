@@ -1,26 +1,31 @@
 export default {
     remove(name, ignoreFade) {
-        if (!this.has(name)) {
+        var bobs = this.get(name);
+        if (!bobs) {
             return this;
+        } else if (!Array.isArray(bobs)) {
+            bobs = [bobs];
         }
 
-        var bob = this.get(name);
-        delete this.bobs[name];
+        var self = this;
+        bobs.forEach(function (bob) {
+            delete self.bobs[name];
 
-        this.removedGOs.push(bob.gameObject);
+            self.removedGOs.push(bob.gameObject);
 
-        if (!ignoreFade) {
-            this.fadeBob(
-                bob,                  // bob
-                undefined,            // fromValue
-                0,                    // toValue
-                function () {         // onComplete
-                    bob.destroy();
-                }
-            )
-        } else {
-            bob.destroy();
-        }
+            if (!ignoreFade) {
+                self.fadeBob(
+                    bob,                  // bob
+                    undefined,            // fromValue
+                    0,                    // toValue
+                    function () {         // onComplete
+                        bob.destroy();
+                    }
+                )
+            } else {
+                bob.destroy();
+            }
+        });
 
         return this;
     },
