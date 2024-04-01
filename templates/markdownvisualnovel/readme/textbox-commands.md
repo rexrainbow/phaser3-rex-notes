@@ -11,13 +11,28 @@ TEXTBOX
 
 Create TextBox as Text-box game object
 
-## Destroy game object
+## Destroy
 
 ```
 NAME.destroy
 ```
 
-## Game Object properties
+## Set properties
+
+```
+NAME
+  x=
+  vpx=
+  y=
+  vpy=
+  alpha=
+  duration=1000
+  ease=Linear
+  repeat=0
+  wait=
+```
+
+## Ease properties
 
 ```
 NAME.to
@@ -47,7 +62,7 @@ NAME.yoyo
   wait=
 ```
 
-## Game object methods
+## Call methods
 
 ### Typing
 

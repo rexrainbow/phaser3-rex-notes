@@ -877,79 +877,192 @@ Reserved id : `time`, `click`, `key`, `bgm`, `bgm2`, `se`, `se2`, `camera`.
 
 ##### Set properties of custom game object
 
-```
-
-NAME
-  x=
-  vpx=
-  y=
-  vpy=
-  alpha=
-
-```
-
-- `vpx`, `vpy` : [viewportCoordinate properties](viewport-coordinate.md) injected if `viewportCoordinate` is `true`.
+- Set properties of a game object indexing by `NAME`
+    ```
+    
+    NAME
+      x=
+      vpx=
+      y=
+      vpy=
+      alpha=
+    
+    ```
+    - `vpx`, `vpy` : [viewportCoordinate properties](viewport-coordinate.md) injected if `viewportCoordinate` is `true`.
+    - Add empty line above and below this command block.
+- Set properties of all game objects belong GOTYPE
+    ```
+    
+    GOTYPE
+      x=
+      vpx=
+      y=
+      vpy=
+      alpha=
+    
+    ```
+- Set properties of all game objects belong GOTYPE excluding `NAME`
+    ```
+    
+    !NAME
+      x=
+      vpx=
+      y=
+      vpy=
+      alpha=
+    
+    ```
 
 ##### Ease properties of custom game object
 
-```
-
-NAME.to
-  x=
-  vpx=
-  y=
-  vpy=
-  alpha=
-  duration=1000
-  ease=Linear
-  repeat=0
-  wait=
-
-```
-
-```
-
-NAME.yoyo
-  x=
-  vpx=
-  y=
-  vpy=
-  alpha=
-  duration=1000
-  ease=Linear
-  repeat=0
-  wait=
-
-```
-
-- These properties are reserved : `id`, `duration`, `ease`, `repeat`, `yoyo`, `wait`
-- `wait` :
-    - `false` : Run next command immediately. Default behavior.
-    - `true` : Run next command after playing sound complete.
+- Ease properties of a game object indexing by `NAME`
+    ```
+    
+    NAME.to
+      x=
+      vpx=
+      y=
+      vpy=
+      alpha=
+      duration=1000
+      ease=Linear
+      repeat=0
+      wait=
+    
+    ```
+    ```
+    
+    NAME.yoyo
+      x=
+      vpx=
+      y=
+      vpy=
+      alpha=
+      duration=1000
+      ease=Linear
+      repeat=0
+      wait=
+    
+    ```
+    - These properties are reserved : `id`, `duration`, `ease`, `repeat`, `yoyo`, `wait`
+    - `wait` :
+        - `false` : Run next command immediately. Default behavior.
+        - `true` : Run next command after playing sound complete.
+    - Add empty line above and below this command block.
+- Ease properties of all game objects belong GOTYPE
+    ```
+    
+    GOTYPE.to
+      x=
+      vpx=
+      y=
+      vpy=
+      alpha=
+      duration=1000
+      ease=Linear
+      repeat=0
+      wait=
+    
+    ```
+    ```
+    
+    GOTYPE.yoyo
+      x=
+      vpx=
+      y=
+      vpy=
+      alpha=
+      duration=1000
+      ease=Linear
+      repeat=0
+      wait=
+    
+    ```
+- Ease properties of all game objects belong GOTYPE excluding `NAME`
+    ```
+    
+    !NAME.to
+      x=
+      vpx=
+      y=
+      vpy=
+      alpha=
+      duration=1000
+      ease=Linear
+      repeat=0
+      wait=
+    
+    ```
+    ```
+    
+    !NAME.yoyo
+      x=
+      vpx=
+      y=
+      vpy=
+      alpha=
+      duration=1000
+      ease=Linear
+      repeat=0
+      wait=
+    
+    ```
 
 ##### Invoke custom command 
 
-```
+- Invoke custom command of a game object indexing by `NAME`
+    ```
+    
+    NAME.commandName
+      param0=value
+      param1=value
+    
+    ```
+    - Invoke custom command `commandName` method with these parameters
+        - `gameObject` : Indexed by `NAME`
+        - `config` : `{param0, param1}`
+    - Add empty line above and below this command block.
+- Invoke custom command of all game objects belong GOTYPE
+    ```
+    
+    GOTYPE.commandName
+      param0=value
+      param1=value
+    
+    ```
+- Invoke custom command of all game objects belong GOTYPE excluding `NAME`
+    ```
+    
+    !NAME.commandName
+      param0=value
+      param1=value
+    
+    ```
 
-NAME.commandName
-  param0=value
-  param1=value
-
-```
-
-- Invoke custom command `commandName` method with these parameters
-    - `gameObject` : Indexed by `NAME`
-    - `config` : `{param0, param1}`
 
 Do nothing if gameObject or commandName is not found.
 
 ##### Destroy custom game object
 
-```
+- Destroy game object indexing by `NAME`
+    ```
+    
+    NAME.destroy
+    
+    ```
+- Destroy all game objects belong GOTYPE
+    ```
+    
+    GOTYPE.destroy
+    
+    ```
+- Destroy all game objects belong GOTYPE excluding `NAME`
+    ```
+    
+    !NAME.destroy
+    
+    ```
 
-NAME.destroy
-
-```
 
 #### Wait
 

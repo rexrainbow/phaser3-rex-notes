@@ -11312,63 +11312,156 @@ line2
 </ul>
 <p>Reserved id : <code>time</code>, <code>click</code>, <code>key</code>, <code>bgm</code>, <code>bgm2</code>, <code>se</code>, <code>se2</code>, <code>camera</code>.</p>
 <h5 id="set-properties-of-custom-game-object">Set properties of custom game object<a class="headerlink" href="#set-properties-of-custom-game-object" title="Permanent link">&para;</a></h5>
-<div class="highlight"><pre><span></span><code>NAME
+<ul>
+<li>Set properties of a game object indexing by <code>NAME</code>
+    <div class="highlight"><pre><span></span><code>NAME
   x=
   vpx=
   y=
   vpy=
   alpha=
-</code></pre></div>
-<ul>
+</code></pre></div><ul>
 <li><code>vpx</code>, <code>vpy</code> : <a href="../viewport-coordinate/">viewportCoordinate properties</a> injected if <code>viewportCoordinate</code> is <code>true</code>.</li>
+<li>Add empty line above and below this command block.</li>
+</ul>
+</li>
+<li>Set properties of all game objects belong GOTYPE
+    <div class="highlight"><pre><span></span><code>GOTYPE
+  x=
+  vpx=
+  y=
+  vpy=
+  alpha=
+</code></pre></div></li>
+<li>Set properties of all game objects belong GOTYPE excluding <code>NAME</code>
+    <div class="highlight"><pre><span></span><code>!NAME
+  x=
+  vpx=
+  y=
+  vpy=
+  alpha=
+</code></pre></div></li>
 </ul>
 <h5 id="ease-properties-of-custom-game-object">Ease properties of custom game object<a class="headerlink" href="#ease-properties-of-custom-game-object" title="Permanent link">&para;</a></h5>
-<div class="highlight"><pre><span></span><code>NAME.to
-  x=
-  vpx=
-  y=
-  vpy=
-  alpha=
-  duration=1000
-  ease=Linear
-  repeat=0
-  wait=
-</code></pre></div>
-<div class="highlight"><pre><span></span><code>NAME.yoyo
-  x=
-  vpx=
-  y=
-  vpy=
-  alpha=
-  duration=1000
-  ease=Linear
-  repeat=0
-  wait=
-</code></pre></div>
 <ul>
+<li>Ease properties of a game object indexing by <code>NAME</code>
+    <div class="highlight"><pre><span></span><code>NAME.to
+  x=
+  vpx=
+  y=
+  vpy=
+  alpha=
+  duration=1000
+  ease=Linear
+  repeat=0
+  wait=
+</code></pre></div>
+    <div class="highlight"><pre><span></span><code>NAME.yoyo
+  x=
+  vpx=
+  y=
+  vpy=
+  alpha=
+  duration=1000
+  ease=Linear
+  repeat=0
+  wait=
+</code></pre></div><ul>
 <li>These properties are reserved : <code>id</code>, <code>duration</code>, <code>ease</code>, <code>repeat</code>, <code>yoyo</code>, <code>wait</code></li>
 <li><code>wait</code> :<ul>
 <li><code>false</code> : Run next command immediately. Default behavior.</li>
 <li><code>true</code> : Run next command after playing sound complete.</li>
 </ul>
 </li>
+<li>Add empty line above and below this command block.</li>
+</ul>
+</li>
+<li>Ease properties of all game objects belong GOTYPE
+    <div class="highlight"><pre><span></span><code>GOTYPE.to
+  x=
+  vpx=
+  y=
+  vpy=
+  alpha=
+  duration=1000
+  ease=Linear
+  repeat=0
+  wait=
+</code></pre></div>
+    <div class="highlight"><pre><span></span><code>GOTYPE.yoyo
+  x=
+  vpx=
+  y=
+  vpy=
+  alpha=
+  duration=1000
+  ease=Linear
+  repeat=0
+  wait=
+</code></pre></div></li>
+<li>Ease properties of all game objects belong GOTYPE excluding <code>NAME</code>
+    <div class="highlight"><pre><span></span><code>!NAME.to
+  x=
+  vpx=
+  y=
+  vpy=
+  alpha=
+  duration=1000
+  ease=Linear
+  repeat=0
+  wait=
+</code></pre></div>
+    <div class="highlight"><pre><span></span><code>!NAME.yoyo
+  x=
+  vpx=
+  y=
+  vpy=
+  alpha=
+  duration=1000
+  ease=Linear
+  repeat=0
+  wait=
+</code></pre></div></li>
 </ul>
 <h5 id="invoke-custom-command">Invoke custom command<a class="headerlink" href="#invoke-custom-command" title="Permanent link">&para;</a></h5>
-<div class="highlight"><pre><span></span><code>NAME.commandName
+<ul>
+<li>Invoke custom command of a game object indexing by <code>NAME</code>
+    <div class="highlight"><pre><span></span><code>NAME.commandName
   param0=value
   param1=value
-</code></pre></div>
-<ul>
+</code></pre></div><ul>
 <li>Invoke custom command <code>commandName</code> method with these parameters<ul>
 <li><code>gameObject</code> : Indexed by <code>NAME</code></li>
 <li><code>config</code> : <code>{param0, param1}</code></li>
 </ul>
 </li>
+<li>Add empty line above and below this command block.</li>
+</ul>
+</li>
+<li>Invoke custom command of all game objects belong GOTYPE
+    <div class="highlight"><pre><span></span><code>GOTYPE.commandName
+  param0=value
+  param1=value
+</code></pre></div></li>
+<li>Invoke custom command of all game objects belong GOTYPE excluding <code>NAME</code>
+    <div class="highlight"><pre><span></span><code>!NAME.commandName
+  param0=value
+  param1=value
+</code></pre></div></li>
 </ul>
 <p>Do nothing if gameObject or commandName is not found.</p>
 <h5 id="destroy-custom-game-object">Destroy custom game object<a class="headerlink" href="#destroy-custom-game-object" title="Permanent link">&para;</a></h5>
-<div class="highlight"><pre><span></span><code>NAME.destroy
-</code></pre></div>
+<ul>
+<li>Destroy game object indexing by <code>NAME</code>
+    <div class="highlight"><pre><span></span><code>NAME.destroy
+</code></pre></div></li>
+<li>Destroy all game objects belong GOTYPE
+    <div class="highlight"><pre><span></span><code>GOTYPE.destroy
+</code></pre></div></li>
+<li>Destroy all game objects belong GOTYPE excluding <code>NAME</code>
+    <div class="highlight"><pre><span></span><code>!NAME.destroy
+</code></pre></div></li>
+</ul>
 <h4 id="wait">Wait<a class="headerlink" href="#wait" title="Permanent link">&para;</a></h4>
 <h5 id="wait-click">Wait click<a class="headerlink" href="#wait-click" title="Permanent link">&para;</a></h5>
 <div class="highlight"><pre><span></span><code>click

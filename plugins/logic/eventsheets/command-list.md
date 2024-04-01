@@ -168,7 +168,48 @@ GOTYPE
   param1=value
 ```
 
-### Game Object properties
+### Set properties
+
+```
+NAME
+  x=
+  vpx=
+  y=
+  vpy=
+  alpha=
+  duration=1000
+  ease=Linear
+  repeat=0
+  wait=
+```
+
+```
+GOTYPE
+  x=
+  vpx=
+  y=
+  vpy=
+  alpha=
+  duration=1000
+  ease=Linear
+  repeat=0
+  wait=
+```
+
+```
+!NAME
+  x=
+  vpx=
+  y=
+  vpy=
+  alpha=
+  duration=1000
+  ease=Linear
+  repeat=0
+  wait=
+```
+
+### Ease properties
 
 ```
 NAME.to
@@ -182,6 +223,33 @@ NAME.to
   repeat=0
   wait=
 ```
+
+```
+GOTYPE.to
+  x=
+  vpx=
+  y=
+  vpy=
+  alpha=
+  duration=1000
+  ease=Linear
+  repeat=0
+  wait=
+```
+
+```
+!NAME.to
+  x=
+  vpx=
+  y=
+  vpy=
+  alpha=
+  duration=1000
+  ease=Linear
+  repeat=0
+  wait=
+```
+
 
 or
 
@@ -198,10 +266,48 @@ NAME.yoyo
   wait=
 ```
 
-### Game object methods
+```
+GOTYPE.yoyo
+  x=
+  vpx=
+  y=
+  vpy=
+  alpha=
+  duration=1000
+  ease=Linear
+  repeat=0
+  wait=
+```
+
+```
+!NAME.yoyo
+  x=
+  vpx=
+  y=
+  vpy=
+  alpha=
+  duration=1000
+  ease=Linear
+  repeat=0
+  wait=
+```
+
+### Call methods
 
 ```
 NAME.commandName
+  param0=value
+  param1=value
+```
+
+```
+GOTYPE.commandName
+  param0=value
+  param1=value
+```
+
+```
+!NAME.commandName
   param0=value
   param1=value
 ```

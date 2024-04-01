@@ -17,7 +17,22 @@ Create ConfirmDialog as Choice dailog game object
 NAME.destroy
 ```
 
-## Game Object properties
+## Set properties
+
+```
+NAME
+  x=
+  vpx=
+  y=
+  vpy=
+  alpha=
+  duration=1000
+  ease=Linear
+  repeat=0
+  wait=
+```
+
+## Ease properties
 
 ```
 NAME.to
@@ -47,7 +62,7 @@ NAME.yoyo
   wait=
 ```
 
-## Game object methods
+## Call methods
 
 ### Choice
 
