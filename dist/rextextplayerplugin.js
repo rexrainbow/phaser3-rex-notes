@@ -3117,7 +3117,7 @@
       this.bobs = {};
       this.removedGOs = [];
       this._timeScale = 1;
-      this.name = '';
+      this.name = GetValue$u(config, 'name');
     }
     _createClass(GOManager, [{
       key: "destroy",
@@ -5919,11 +5919,12 @@
     var layerNames = GetValue$e(config, 'layers', false);
     if (layerNames !== false) {
       var layerManager = new LayerManager(scene, {
+        name: 'LAYER',
         layers: layerNames,
         rootLayer: GetValue$e(config, 'rootLayer', undefined),
         depth: GetValue$e(config, 'layerDepth', undefined)
       });
-      this.addGameObjectManager('LAYER', layerManager);
+      this.addGameObjectManager(layerManager);
       this.layerManager = layerManager;
     }
     var soundManagerConfig = GetValue$e(config, 'sounds');
@@ -5976,10 +5977,12 @@
 
   var GameObjectManagerMethods$1 = {
     addGameObjectManager: function addGameObjectManager(config, GameObjectManagerClass) {
-      var gameobjectManager, gameobjectManagerName;
-      if (typeof config === 'string') {
+      var gameobjectManager;
+      if (config instanceof GOManager) {
+        gameobjectManager = config;
+      } else if (typeof config === 'string') {
         gameobjectManager = GameObjectManagerClass;
-        gameobjectManagerName = config;
+        gameobjectManager.name = config;
       } else {
         if (config === undefined) {
           config = {};
@@ -5991,10 +5994,8 @@
           config.createGameObjectScope = this;
         }
         gameobjectManager = new GameObjectManagerClass(this.managersScene, config);
-        gameobjectManagerName = config.name;
       }
-      gameobjectManager.name = gameobjectManagerName;
-      this.gameObjectManagers[gameobjectManagerName] = gameobjectManager;
+      this.gameObjectManagers[gameobjectManager.name] = gameobjectManager;
       return this;
     },
     getGameObjectManager: function getGameObjectManager(managerName, gameObjectName) {

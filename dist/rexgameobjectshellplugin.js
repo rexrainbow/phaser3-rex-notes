@@ -6277,7 +6277,7 @@
       this.bobs = {};
       this.removedGOs = [];
       this._timeScale = 1;
-      this.name = '';
+      this.name = GetValue$25(config, 'name');
     }
     _createClass(GOManager, [{
       key: "destroy",

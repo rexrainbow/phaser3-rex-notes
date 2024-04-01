@@ -19652,7 +19652,7 @@
       this.bobs = {};
       this.removedGOs = [];
       this._timeScale = 1;
-      this.name = '';
+      this.name = GetValue$g(config, 'name');
     }
     _createClass(GOManager, [{
       key: "destroy",
@@ -22454,11 +22454,12 @@
     var layerNames = GetValue(config, 'layers', false);
     if (layerNames !== false) {
       var layerManager = new LayerManager(scene, {
+        name: 'LAYER',
         layers: layerNames,
         rootLayer: GetValue(config, 'rootLayer', undefined),
         depth: GetValue(config, 'layerDepth', undefined)
       });
-      this.addGameObjectManager('LAYER', layerManager);
+      this.addGameObjectManager(layerManager);
       this.layerManager = layerManager;
     }
     var soundManagerConfig = GetValue(config, 'sounds');
@@ -22511,10 +22512,12 @@
 
   var GameObjectManagerMethods = {
     addGameObjectManager: function addGameObjectManager(config, GameObjectManagerClass) {
-      var gameobjectManager, gameobjectManagerName;
-      if (typeof config === 'string') {
+      var gameobjectManager;
+      if (config instanceof GOManager) {
+        gameobjectManager = config;
+      } else if (typeof config === 'string') {
         gameobjectManager = GameObjectManagerClass;
-        gameobjectManagerName = config;
+        gameobjectManager.name = config;
       } else {
         if (config === undefined) {
           config = {};
@@ -22526,10 +22529,8 @@
           config.createGameObjectScope = this;
         }
         gameobjectManager = new GameObjectManagerClass(this.managersScene, config);
-        gameobjectManagerName = config.name;
       }
-      gameobjectManager.name = gameobjectManagerName;
-      this.gameObjectManagers[gameobjectManagerName] = gameobjectManager;
+      this.gameObjectManagers[gameobjectManager.name] = gameobjectManager;
       return this;
     },
     getGameObjectManager: function getGameObjectManager(managerName, gameObjectName) {
@@ -23639,7 +23640,7 @@
   };
 
   var BackgroundMusicMethods = {
-    bgm: function bgm() {
+    'bgm.set': function bgmSet() {
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
         volume = _ref.volume,
         mute = _ref.mute,
@@ -23783,7 +23784,7 @@
   };
 
   var BackgroundMusic2Methods = {
-    bgm2: function bgm2() {
+    'bgm2.set': function bgm2Set() {
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
         volume = _ref.volume,
         mute = _ref.mute,
@@ -23927,7 +23928,7 @@
   };
 
   var SoundEffectsMethods = {
-    se: function se() {
+    'se.set': function seSet() {
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
         volume = _ref.volume,
         mute = _ref.mute,
@@ -24024,7 +24025,7 @@
   };
 
   var SoundEffects2Methods = {
-    se2: function se2() {
+    'se2.set': function se2Set() {
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
         volume = _ref.volume,
         mute = _ref.mute,
@@ -24121,7 +24122,7 @@
   };
 
   var CameraMethods = {
-    camera: function camera() {
+    'camera.set': function cameraSet() {
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
         x = _ref.x,
         y = _ref.y,
@@ -24370,34 +24371,25 @@
   var DefaultHandler = function DefaultHandler(name, config, eventSheetManager, eventsheet) {
     var tokens = name.split('.');
     var gameObjectID = tokens[0];
+    if (this.sys.hasGameObjectMananger(gameObjectID)) {
+      config.goType = gameObjectID;
+      config.id = null;
+    } else if (this.sys.hasGameObject(undefined, gameObjectID)) {
+      config.goType = undefined;
+      config.id = gameObjectID;
+    } else {
+      // TODO
+      console.warn("CommandExecutor: '".concat(gameObjectID, "' does not exist"));
+      return;
+    }
     switch (tokens.length) {
       case 1:
-        if (this.sys.hasGameObjectMananger(gameObjectID)) {
-          config.goType = gameObjectID;
-          config.id = null;
-        } else if (this.sys.hasGameObject(undefined, gameObjectID)) {
-          config.goType = undefined;
-          config.id = gameObjectID;
-        } else {
-          // TODO
-          console.warn("CommandExecutor: '".concat(gameObjectID, "' does not exist"));
-          return;
-        }
         return this._setGOProperty(config, eventSheetManager, eventsheet);
       case 2:
-        if (this.sys.hasGameObjectMananger(gameObjectID)) {
-          config.goType = gameObjectID;
-          config.id = null;
-        } else if (this.sys.hasGameObject(undefined, gameObjectID)) {
-          config.goType = undefined;
-          config.id = gameObjectID;
-        } else {
-          // TODO
-          console.warn("CommandExecutor: '".concat(gameObjectID, "' does not exist"));
-          return;
-        }
         var commandName = tokens[1];
         switch (tokens[1]) {
+          case 'set':
+            return this._setGOProperty(config, eventSheetManager, eventsheet);
           case 'to':
             return this._easeGOProperty(config, eventSheetManager, eventsheet);
           case 'yoyo':
@@ -24412,7 +24404,7 @@
               var command = gameObjectManager.commands[commandName];
               if (command) {
                 this.clearWaitEventFlag();
-                var gameObjects = gameObjectManager.getGO(gameObjectID);
+                var gameObjects = gameObjectManager.getGO(config.id);
                 if (!Array.isArray(gameObjects)) {
                   gameObjects = [gameObjects];
                 }
