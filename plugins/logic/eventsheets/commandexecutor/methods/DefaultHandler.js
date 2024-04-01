@@ -4,35 +4,23 @@ var DefaultHandler = function (name, config, eventSheetManager, eventsheet) {
     var tokens = name.split('.');
 
     var gameObjectID = tokens[0];
+    if (this.sys.hasGameObjectMananger(gameObjectID)) {
+        config.goType = gameObjectID;
+        config.id = null;
+    } else if (this.sys.hasGameObject(undefined, gameObjectID)) {
+        config.goType = undefined;
+        config.id = gameObjectID;
+    } else {
+        // TODO
+        console.warn(`CommandExecutor: '${gameObjectID}' does not exist`);
+        return;
+    }
+
     switch (tokens.length) {
         case 1:
-            if (this.sys.hasGameObjectMananger(gameObjectID)) {
-                config.goType = gameObjectID;
-                config.id = null;
-            } else if (this.sys.hasGameObject(undefined, gameObjectID)) {
-                config.goType = undefined;
-                config.id = gameObjectID;
-            } else {
-                // TODO
-                console.warn(`CommandExecutor: '${gameObjectID}' does not exist`);
-                return;
-            }
-
             return this._setGOProperty(config, eventSheetManager, eventsheet);
 
         case 2:
-            if (this.sys.hasGameObjectMananger(gameObjectID)) {
-                config.goType = gameObjectID;
-                config.id = null;
-            } else if (this.sys.hasGameObject(undefined, gameObjectID)) {
-                config.goType = undefined;
-                config.id = gameObjectID;
-            } else {
-                // TODO
-                console.warn(`CommandExecutor: '${gameObjectID}' does not exist`);
-                return;
-            }
-
             var commandName = tokens[1];
             switch (tokens[1]) {
                 case 'to':
@@ -53,7 +41,7 @@ var DefaultHandler = function (name, config, eventSheetManager, eventsheet) {
                         if (command) {
                             this.clearWaitEventFlag();
 
-                            var gameObjects = gameObjectManager.getGO(gameObjectID);
+                            var gameObjects = gameObjectManager.getGO(config.id);
                             if (!Array.isArray(gameObjects)) {
                                 gameObjects = [gameObjects];
                             }
