@@ -20,7 +20,7 @@ var InitManagers = function (scene, config) {
             rootLayer: GetValue(config, 'rootLayer', undefined),
             depth: GetValue(config, 'layerDepth', undefined)
         });
-        this.gameObjectManagers.layer = layerManager;
+        this.addGameObjectManager('LAYER', layerManager);
         this.layerManager = layerManager;
     }
 

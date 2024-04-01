@@ -10,9 +10,9 @@ export default {
     },
 
     get(name, out) {
-        // Pick single bob
         if (IsSingleBob(name)) {
             return this.bobs[name];
+
         } else {
             if (out === undefined) {
                 out = [];
@@ -41,9 +41,26 @@ export default {
         return null;
     },
 
-    getGO(name) {
+    getGO(name, out) {
         var bob = this.get(name);
-        return (bob) ? bob.gameObject : null;
+        if (!bob) {
+            return null;
+
+        } else if (!Array.isArray(bob)) {
+            return bob.gameObject;
+
+        } else {
+            if (out === undefined) {
+                out = [];
+            }
+            var bobs = bob;
+            bobs.forEach(function (bob) {
+                out.push(bob.gameObject);
+            })
+
+            return out;
+
+        }
     },
 
     forEachGO(callback, scope) {

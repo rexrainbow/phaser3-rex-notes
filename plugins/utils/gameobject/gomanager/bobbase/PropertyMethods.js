@@ -42,7 +42,6 @@ export default {
                     onComplete(target, property);
                 }
             },
-            onCompleteScope: this
         }
         config[property] = value;
 

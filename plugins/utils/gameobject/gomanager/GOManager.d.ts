@@ -43,6 +43,8 @@ declare class GOManager extends Phaser.Events.EventEmitter {
         config?: GOManager.IConfig
     )
 
+    name: string;
+
     destroy(fromScene?: boolean): void;
 
     setTimeScale(timeScale: number): this;

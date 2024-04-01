@@ -44,6 +44,8 @@ class GOManager {
         this.bobs = {};
         this.removedGOs = [];
         this._timeScale = 1;
+
+        this.name = '';
     }
 
     destroy(fromScene) {

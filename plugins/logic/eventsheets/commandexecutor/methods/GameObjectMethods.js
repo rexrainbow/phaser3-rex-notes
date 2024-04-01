@@ -36,11 +36,18 @@ export default {
         return this;
     },
 
-    _setGOProperty(config, eventSheetManager, eventsheet) {
-        var { id } = config;
-        delete config.id;
+    _setGOProperty(
+        config,
+        eventSheetManager, eventsheet
+    ) {
 
-        var goType = this.sys.getGameObjectManagerName(id);
+        var { id, goType } = config;
+        delete config.id;
+        delete config.goType;
+
+        if (!goType) {
+            goType = this.sys.getGameObjectManagerName(id);
+        }
         if (!goType) {
             return;
         }
@@ -52,16 +59,23 @@ export default {
         // Execute next command
     },
 
-    _easeGOProperty(config, eventSheetManager, eventsheet) {
-        var { id, duration, ease, repeat, yoyo, wait = true } = config;
+    _easeGOProperty(
+        config,
+        eventSheetManager, eventsheet
+    ) {
+
+        var { id, goType, duration, ease, repeat, yoyo, wait = true } = config;
         delete config.id;
+        delete config.goType;
         delete config.duration;
         delete config.ease;
         delete config.repeat;
         delete config.yoyo;
         delete config.wait;
 
-        var goType = this.sys.getGameObjectManagerName(id);
+        if (!goType) {
+            goType = this.sys.getGameObjectManagerName(id);
+        }
         if (!goType) {
             return;
         }
@@ -70,7 +84,10 @@ export default {
         for (var prop in config) {
             var value = eventSheetManager.evalExpression(config[prop]);
             this.sys.easeGameObjectProperty(goType, id, prop, value, duration, ease, repeat, yoyo);
-            waitProperty = prop;
+
+            if (!waitProperty) {
+                waitProperty = prop;
+            }
         }
         if (wait && waitProperty) {
             return this.sys.waitEventManager.waitGameObjectTweenComplete(goType, id, waitProperty);
@@ -80,14 +97,15 @@ export default {
     },
 
     _destroyGO(
-        {
-            id,
-            wait = false
-        } = {},
+        config,
         eventSheetManager, eventsheet
     ) {
 
-        var goType = this.sys.getGameObjectManagerName(id);
+        var { id, goType, wait = false } = config;
+
+        if (!goType) {
+            goType = this.sys.getGameObjectManagerName(id);
+        }
         if (!goType) {
             return;
         }
@@ -98,8 +116,16 @@ export default {
         }
     },
 
-    _runGOMethod(config, eventSheetManager, eventsheet) {
-        var goType = this.sys.getGameObjectManagerName(id);
+    _runGOMethod(
+        config,
+        eventSheetManager, eventsheet
+    ) {
+
+        var { id, goType } = config;
+
+        if (!goType) {
+            goType = this.sys.getGameObjectManagerName(id);
+        }
         if (!goType) {
             return;
         }

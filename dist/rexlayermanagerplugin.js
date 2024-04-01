@@ -236,8 +236,7 @@
           if (_onComplete) {
             _onComplete(target, property);
           }
-        },
-        onCompleteScope: this
+        }
       };
       config[property] = value;
       tweenTask = this.scene.tweens.add(config);
@@ -359,6 +358,10 @@
     return true;
   };
 
+  var IsSingleBob = function IsSingleBob(name) {
+    return name && name.charAt(0) !== '!';
+  };
+
   var GetMethods = {
     has: function has(name) {
       return this.bobs.hasOwnProperty(name);
@@ -366,12 +369,47 @@
     exists: function exists(name) {
       return this.bobs.hasOwnProperty(name);
     },
-    get: function get(name) {
-      return this.bobs[name];
+    get: function get(name, out) {
+      if (IsSingleBob(name)) {
+        return this.bobs[name];
+      } else {
+        if (out === undefined) {
+          out = [];
+        }
+        if (name) {
+          name = name.substring(1);
+        }
+        for (var key in this.bobs) {
+          if (name && key === name) {
+            continue;
+          }
+          out.push(this.bobs[key]);
+        }
+        return out;
+      }
     },
-    getGO: function getGO(name) {
+    getFitst: function getFitst() {
+      for (var name in this.bobs) {
+        return this.bobs[name];
+      }
+      return null;
+    },
+    getGO: function getGO(name, out) {
       var bob = this.get(name);
-      return bob ? bob.gameObject : null;
+      if (!bob) {
+        return null;
+      } else if (!Array.isArray(bob)) {
+        return bob.gameObject;
+      } else {
+        if (out === undefined) {
+          out = [];
+        }
+        var bobs = bob;
+        bobs.forEach(function (bob) {
+          out.push(bob.gameObject);
+        });
+        return out;
+      }
     },
     forEachGO: function forEachGO(callback, scope) {
       for (var name in this.bobs) {
@@ -2406,26 +2444,31 @@
 
   var RemoveMethods = {
     remove: function remove(name, ignoreFade) {
-      if (!this.has(name)) {
+      var bobs = this.get(name);
+      if (!bobs) {
         return this;
+      } else if (!Array.isArray(bobs)) {
+        bobs = [bobs];
       }
-      var bob = this.get(name);
-      delete this.bobs[name];
-      this.removedGOs.push(bob.gameObject);
-      if (!ignoreFade) {
-        this.fadeBob(bob,
-        // bob
-        undefined,
-        // fromValue
-        0,
-        // toValue
-        function () {
-          // onComplete
+      var self = this;
+      bobs.forEach(function (bob) {
+        delete self.bobs[name];
+        self.removedGOs.push(bob.gameObject);
+        if (!ignoreFade) {
+          self.fadeBob(bob,
+          // bob
+          undefined,
+          // fromValue
+          0,
+          // toValue
+          function () {
+            // onComplete
+            bob.destroy();
+          });
+        } else {
           bob.destroy();
-        });
-      } else {
-        bob.destroy();
-      }
+        }
+      });
       return this;
     },
     removeAll: function removeAll() {
@@ -2453,24 +2496,29 @@
 
   var PropertyMethods = {
     hasProperty: function hasProperty(name, property) {
-      if (!this.has(name)) {
+      var bob = IsSingleBob(name) ? this.get(name) : this.getFitst(name);
+      if (!bob) {
         return false;
       }
-      return this.get(name).hasProperty(property);
+      return bob.hasProperty(property);
     },
     getProperty: function getProperty(name, property) {
-      if (!this.has(name)) {
+      var bob = IsSingleBob(name) ? this.get(name) : this.getFitst(name);
+      if (!bob) {
         return undefined;
       }
-      return this.get(name).getProperty(property);
+      return bob.getProperty(property);
     },
     isNumberProperty: function isNumberProperty(name, property) {
       var value = this.getProperty(name, property);
       return typeof value === 'number';
     },
     setProperty: function setProperty(name, property, value) {
-      if (!this.has(name)) {
+      var bobs = this.get(name);
+      if (!bobs) {
         return this;
+      } else if (!Array.isArray(bobs)) {
+        bobs = [bobs];
       }
       if (this.symbols && typeof value === 'string' && this.isNumberProperty(name, property)) {
         if (value in this.symbols) {
@@ -2479,12 +2527,17 @@
           console.warn("Can't find symbol ".concat(value));
         }
       }
-      this.get(name).setProperty(property, value);
+      bobs.forEach(function (bob) {
+        bob.setProperty(property, value);
+      });
       return this;
     },
     easeProperty: function easeProperty(name, property, value, duration, ease, repeat, isYoyo, onComplete) {
-      if (!this.has(name)) {
+      var bobs = this.get(name);
+      if (!bobs) {
         return this;
+      } else if (!Array.isArray(bobs)) {
+        bobs = [bobs];
       }
       if (duration === undefined) {
         duration = 1000;
@@ -2505,52 +2558,59 @@
           console.warn("Can't find symbol ".concat(value));
         }
       }
-      this.get(name).easeProperty(property, value, duration, ease, repeat, isYoyo, onComplete);
+      bobs.forEach(function (bob) {
+        bob.easeProperty(property, value, duration, ease, repeat, isYoyo, onComplete);
+      });
       return this;
     },
     hasTweenTask: function hasTweenTask(name, property) {
-      if (!this.has(name)) {
+      var bob = IsSingleBob(name) ? this.get(name) : this.getFitst(name);
+      if (!bob) {
         return false;
       }
-      var tweenTasks = this.get(name).tweens;
-      return tweenTasks.hasOwnProperty(property);
+      return bob.tweens.hasOwnProperty(property);
     },
     getTweenTask: function getTweenTask(name, property) {
-      if (!this.has(name)) {
+      var bob = IsSingleBob(name) ? this.get(name) : this.getFitst(name);
+      if (!bob) {
         return null;
       }
-      var tweenTasks = this.get(name).tweens;
-      var tweenTask = tweenTasks[property];
-      return tweenTask ? tweenTask : null;
+      return bob.tweens[property] || null;
     }
   };
 
   var CallMethods = {
     hasMethod: function hasMethod(name, methodName) {
-      if (!this.has(name)) {
+      var bob = IsSingleBob(name) ? this.get(name) : this.getFitst(name);
+      if (!bob) {
         return false;
       }
-      return this.get(name).hasMethod(methodName);
+      return bob.hasMethod(methodName);
     },
     call: function call(name, methodName) {
-      var _this$get;
-      if (!this.has(name)) {
-        return this;
-      }
       for (var _len = arguments.length, parameters = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
         parameters[_key - 2] = arguments[_key];
       }
-      (_this$get = this.get(name)).call.apply(_this$get, [methodName].concat(parameters));
+      var bobs = this.get(name);
+      if (!bobs) {
+        return this;
+      } else if (!Array.isArray(bobs)) {
+        bobs = [bobs];
+      }
+      bobs.forEach(function (bob) {
+        bob.call.apply(bob, [methodName].concat(parameters));
+      });
       return this;
     }
   };
 
   var DataMethods = {
     hasData: function hasData(name, dataKey) {
-      if (!this.has(name)) {
+      var bob = IsSingleBob(name) ? this.get(name) : this.getFitst(name);
+      if (!bob) {
         return false;
       }
-      return this.get(name).hasData(dataKey);
+      return bob.hasData(dataKey);
     },
     getData: function getData(name, dataKey) {
       if (!this.has(name)) {
@@ -2559,10 +2619,15 @@
       return this.get(name).getData(dataKey);
     },
     setData: function setData(name, dataKey, value) {
-      if (!this.has(name)) {
+      var bobs = this.get(name);
+      if (!bobs) {
         return this;
+      } else if (!Array.isArray(bobs)) {
+        bobs = [bobs];
       }
-      this.get(name).setData(dataKey, value);
+      bobs.forEach(function (bob) {
+        bob.setData(dataKey, value);
+      });
       return this;
     }
   };
@@ -2927,6 +2992,7 @@
       this.bobs = {};
       this.removedGOs = [];
       this._timeScale = 1;
+      this.name = '';
     }
     _createClass(GOManager, [{
       key: "destroy",

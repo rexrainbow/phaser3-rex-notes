@@ -2,18 +2,30 @@ import GameObjectManagerBase from '../gameobject/gomanager/GOManager.js';
 
 export default {
     addGameObjectManager(config, GameObjectManagerClass) {
-        if (config === undefined) {
-            config = {};
-        }
-        if (GameObjectManagerClass === undefined) {
-            GameObjectManagerClass = GameObjectManagerBase;
+        var gameobjectManager, gameobjectManagerName;
+
+        if (typeof (config) === 'string') {
+            gameobjectManager = GameObjectManagerClass;
+            gameobjectManagerName = config
+
+        } else {
+            if (config === undefined) {
+                config = {};
+            }
+            if (GameObjectManagerClass === undefined) {
+                GameObjectManagerClass = GameObjectManagerBase;
+            }
+
+            if (!config.createGameObjectScope) {
+                config.createGameObjectScope = this;
+            }
+
+            gameobjectManager = new GameObjectManagerClass(this.managersScene, config);
+            gameobjectManagerName = config.name;
         }
 
-        if (!config.createGameObjectScope) {
-            config.createGameObjectScope = this;
-        }
-        var gameobjectManager = new GameObjectManagerClass(this.managersScene, config);
-        this.gameObjectManagers[config.name] = gameobjectManager;
+        gameobjectManager.name = gameobjectManagerName;
+        this.gameObjectManagers[gameobjectManagerName] = gameobjectManager;
 
         return this;
     },
@@ -24,7 +36,7 @@ export default {
             return manager;
         } else {
             if (gameObjectName && (gameObjectName.charAt(0) === '!')) {
-                gameObjectName = gameObjectName.subString(1);
+                gameObjectName = gameObjectName.substring(1);
             }
 
             for (var managerName in this.gameObjectManagers) {
@@ -45,11 +57,11 @@ export default {
     },
 
     getGameObjectManagerName(gameObjectName) {
-        for (var managerName in this.gameObjectManagers) {
-            if (this.gameObjectManagers[managerName].has(gameObjectName)) {
-                return managerName;
-            }
+        var gameObjectManager = this.getGameObjectManager(undefined, gameObjectName);
+        if (!gameObjectManager) {
+            return undefined;
         }
+        return gameObjectManager.name;
     },
 
     hasGameObjectMananger(managerName) {

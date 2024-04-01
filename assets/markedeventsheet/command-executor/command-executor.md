@@ -18,6 +18,16 @@ SPRITE
   key=characters
   frame=A-smile
 
+SPRITE
+  id=CharacterB
+  key=characters
+  frame=B-smile
+
+SPRITE
+  id=CharacterC
+  key=characters
+  frame=C-smile
+
 CHOICE
   id=Choice
   width=500
@@ -44,6 +54,12 @@ Dialog
 
 CharacterA
   vpx=-0.2
+
+CharacterB
+  vpx=-0.4
+
+CharacterC
+  vpx=-0.3
 
 bgm.play
   key=theme0
@@ -82,9 +98,27 @@ camera.flash
 
 
 CharacterA.to
-  vpx=0.7
+  vpx=0.75
   ease=Back
   duration=2000
+  wait=false
+
+CharacterB.to
+  vpx=0.25
+  ease=Back
+  duration=2000
+  wait=false
+
+CharacterC.to
+  vpx=0.5
+  ease=Back
+  duration=2000
+// Wait until tween complete
+
+// Ease all SPRITE game objects excluding CharacterA
+!CharacterA.to
+  alpha=0.3
+  duration=300
 // Wait until tween complete
 
 ```Dialog.typing, name=Me Me Me, speed=100
@@ -185,7 +219,8 @@ Background.cross
 wait
   time=200
 
-CharacterA.to
+// Ease all SPRITE game objects
+SPRITE.to
   vpx=-0.2
 // Wait until tween complete
 
