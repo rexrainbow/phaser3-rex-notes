@@ -5,9 +5,12 @@ import { TransitionImagePack } from '../../ui/ui-components.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 var RegisterSpriteType = function (commandExecutor, config) {
-    var createGameObjectCallback = GetValue(config, `creators.${SPRITE}`, DefaultCreateGameObjectCallback);
+    var createGameObjectCallback = GetValue(config, `creators.${SPRITE}`, undefined);
     if (createGameObjectCallback === false) {
         return;
+    } else if (createGameObjectCallback === undefined) {
+        var style = GetValue(config, `styles.${SPRITE}`);
+        createGameObjectCallback = GenerateDefaultCreateGameObjectCallback(style);
     }
 
     commandExecutor.addGameObjectManager({
@@ -63,30 +66,35 @@ var RegisterSpriteType = function (commandExecutor, config) {
     })
 }
 
-var DefaultCreateGameObjectCallback = function (scene, config) {
-    var {
-        key,
-        name, expression,
-        frameDelimiter = '-'
-    } = config;
+var GenerateDefaultCreateGameObjectCallback = function (style = {}) {
+    var defaultKey = style.key;
+    var defaultFrameDelimiter = style.frameDelimiter || '-';
 
-    var isFrameNameMode = !!key;
-    if (isFrameNameMode) {
-        if (name && expression) {
-            config.frame = `${name}${frameDelimiter}${expression}`;
+    return function (scene, config) {
+        var {
+            key = defaultKey,
+            name, expression,
+            frameDelimiter = defaultFrameDelimiter
+        } = config;
+
+        var isFrameNameMode = !!key;
+        if (isFrameNameMode) {
+            if (name && expression) {
+                config.frame = `${name}${frameDelimiter}${expression}`;
+            }
+        } else {
+            config.key = name;
+            config.frame = expression;
         }
-    } else {
-        config.key = name;
-        config.frame = expression;
+
+        var gameObject = new TransitionImagePack(scene, config);
+        scene.add.existing(gameObject);
+
+        gameObject.isFrameNameMode = isFrameNameMode;
+        gameObject.frameDelimiter = frameDelimiter;
+
+        return gameObject;
     }
-
-    var gameObject = new TransitionImagePack(scene, config);
-    scene.add.existing(gameObject);
-
-    gameObject.isFrameNameMode = isFrameNameMode;
-    gameObject.frameDelimiter = frameDelimiter;
-
-    return gameObject;
 }
 
 export default RegisterSpriteType;
