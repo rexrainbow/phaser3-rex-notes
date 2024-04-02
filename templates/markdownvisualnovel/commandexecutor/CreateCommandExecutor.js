@@ -1,9 +1,9 @@
 import CommandExecutor from '../../../plugins/commandexecutor.js';
 import { LayerNames } from '../const/Layers.js';
-import RegisterBackgroundType from './RegisterBackgroundType.js';
-import RegisterSpriteType from './RegisterSpriteType.js';
-import RegisterTextboxType from './RegisterTextboxType.js';
-import RegisterChoiceDialogType from './RegisterChoiceDialogType.js';
+import RegisterBackgroundType from './background/RegisterBackgroundType.js';
+import RegisterSpriteType from './sprite/RegisterSpriteType.js';
+import RegisterTextboxType from './textbox/RegisterTextboxType.js';
+import RegisterChoiceDialogType from './choicedialog/RegisterChoiceDialogType.js';
 
 const RegisterHandlers = [
     RegisterSpriteType,
