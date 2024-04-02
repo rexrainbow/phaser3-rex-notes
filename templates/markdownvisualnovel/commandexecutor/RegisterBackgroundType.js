@@ -30,6 +30,11 @@ var RegisterBackgroundType = function (commandExecutor, config) {
                 eventSheetManager, eventSheet
             ) {
 
+
+                if (!key) {
+                    key = gameObject.texture.key;
+                }
+
                 // Wait until transition complete
                 if (wait) {
                     commandExecutor.waitEvent(gameObject, 'complete');

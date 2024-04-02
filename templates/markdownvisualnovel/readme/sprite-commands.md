@@ -3,10 +3,12 @@
 ## Create Game Object Instance
 
 ```
+
 SPRITE
   id=NAME
   param0=value
   param1=value
+
 ```
 
 Create Image as Sprite game object.
@@ -14,21 +16,28 @@ Create Image as Sprite game object.
 ## Destroy
 
 ```
+
 NAME.destroy
+
 ```
 
 ```
-GOTYPE.destroy
+
+SPRITE.destroy
+
 ```
 
 ```
+
 !NAME.destroy
+
 ```
 
 ## Set properties
 
 ```
-NAME
+
+NAME.set
   x=
   vpx=
   y=
@@ -38,10 +47,12 @@ NAME
   ease=Linear
   repeat=0
   wait=
+
 ```
 
 ```
-GOTYPE
+
+SPRITE.set
   x=
   vpx=
   y=
@@ -51,10 +62,12 @@ GOTYPE
   ease=Linear
   repeat=0
   wait=
+
 ```
 
 ```
-!NAME
+
+!NAME.set
   x=
   vpx=
   y=
@@ -64,11 +77,13 @@ GOTYPE
   ease=Linear
   repeat=0
   wait=
+
 ```
 
 ## Ease properties
 
 ```
+
 NAME.to
   x=
   vpx=
@@ -79,10 +94,12 @@ NAME.to
   ease=Linear
   repeat=0
   wait=
+
 ```
 
 ```
-GOTYPE.to
+
+SPRITE.to
   x=
   vpx=
   y=
@@ -92,9 +109,11 @@ GOTYPE.to
   ease=Linear
   repeat=0
   wait=
+
 ```
 
 ```
+
 !NAME.to
   x=
   vpx=
@@ -105,11 +124,13 @@ GOTYPE.to
   ease=Linear
   repeat=0
   wait=
+
 ```
 
 or
 
 ```
+
 NAME.yoyo
   x=
   vpx=
@@ -120,10 +141,12 @@ NAME.yoyo
   ease=Linear
   repeat=0
   wait=
+
 ```
 
 ```
-GOTYPE.yoyo
+
+SPRITE.yoyo
   x=
   vpx=
   y=
@@ -133,9 +156,11 @@ GOTYPE.yoyo
   ease=Linear
   repeat=0
   wait=
+
 ```
 
 ```
+
 !NAME.yoyo
   x=
   vpx=
@@ -146,26 +171,58 @@ GOTYPE.yoyo
   ease=Linear
   repeat=0
   wait=
+
 ```
 
 ## Call methods
 
-### Set frame
+### Transition image
 
 ```
+
 NAME.cross
   key=
   frame=
+  duration=
+  mode=fade
+  wait=true
+
 ```
 
 ```
-GOTYPE.cross
+
+SPRITE.cross
   key=
   frame=
+  duration=
+  mode=fade
+  wait=true
+
 ```
 
 ```
+
 !NAME.cross
   key=
   frame=
+  duration=
+  mode=fade
+  wait=true
+
 ```
+
+
+- `mode` : Pre-build effects
+    - Fade effects : 
+        - `'fade'` : Tint old image to black, then tint new image from black to origin color.
+        - `'crossFade'` : Ease alpha of old image from 1 to 0, and ease alpha of new image from 0 to 1 at the same time.
+    - Slide effects : `'slideLeft'`, `'slideRight'`, `'slideUp'`, `'slideDown'`, 
+      `'slideAwayLeft'`, `'slideAwayRight'`, `'slideAwayUp'`, `'slideAwayDown'`, 
+      `'pushLeft'`, `'pushRight'`, `'pushUp'`, `'pushDown'`.
+    - Zoom(scale) effects : `'zoomOut'`, `'zoomIn'`, `'zoomInOut'`.
+    - Mask effects : `'wipeLeft'`, `'wipeRight'`, `'wipeUp'`, `'wipeDown'`,
+      `'irisOut'`, `'irisIn'`,  `'irisInOut'`, `'pieOut'`, `'pieIn'`, `'pieInOut'`, 
+      `'blinds'`, `'squares'`, `'diamonds'`, `'circles'`, `'curtain'`.
+    - Shader effects : `'pixellate'`, `'dissolve'`, 
+      `'revealLeft'`, `'revealRight'`, `'revealUp'`, `'revealDown'`
+

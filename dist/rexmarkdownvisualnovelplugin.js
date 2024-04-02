@@ -20153,7 +20153,7 @@
       this.bobs = {};
       this.removedGOs = [];
       this._timeScale = 1;
-      this.name = '';
+      this.name = GetValue$3n(config, 'name');
     }
     _createClass(GOManager, [{
       key: "destroy",
@@ -22955,11 +22955,12 @@
     var layerNames = GetValue$37(config, 'layers', false);
     if (layerNames !== false) {
       var layerManager = new LayerManager(scene, {
+        name: 'LAYER',
         layers: layerNames,
         rootLayer: GetValue$37(config, 'rootLayer', undefined),
         depth: GetValue$37(config, 'layerDepth', undefined)
       });
-      this.addGameObjectManager('LAYER', layerManager);
+      this.addGameObjectManager(layerManager);
       this.layerManager = layerManager;
     }
     var soundManagerConfig = GetValue$37(config, 'sounds');
@@ -23012,10 +23013,12 @@
 
   var GameObjectManagerMethods$1 = {
     addGameObjectManager: function addGameObjectManager(config, GameObjectManagerClass) {
-      var gameobjectManager, gameobjectManagerName;
-      if (typeof config === 'string') {
+      var gameobjectManager;
+      if (config instanceof GOManager) {
+        gameobjectManager = config;
+      } else if (typeof config === 'string') {
         gameobjectManager = GameObjectManagerClass;
-        gameobjectManagerName = config;
+        gameobjectManager.name = config;
       } else {
         if (config === undefined) {
           config = {};
@@ -23027,10 +23030,8 @@
           config.createGameObjectScope = this;
         }
         gameobjectManager = new GameObjectManagerClass(this.managersScene, config);
-        gameobjectManagerName = config.name;
       }
-      gameobjectManager.name = gameobjectManagerName;
-      this.gameObjectManagers[gameobjectManagerName] = gameobjectManager;
+      this.gameObjectManagers[gameobjectManager.name] = gameobjectManager;
       return this;
     },
     getGameObjectManager: function getGameObjectManager(managerName, gameObjectName) {
@@ -24140,7 +24141,7 @@
   };
 
   var BackgroundMusicMethods = {
-    bgm: function bgm() {
+    'bgm.set': function bgmSet() {
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
         volume = _ref.volume,
         mute = _ref.mute,
@@ -24284,7 +24285,7 @@
   };
 
   var BackgroundMusic2Methods = {
-    bgm2: function bgm2() {
+    'bgm2.set': function bgm2Set() {
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
         volume = _ref.volume,
         mute = _ref.mute,
@@ -24428,7 +24429,7 @@
   };
 
   var SoundEffectsMethods = {
-    se: function se() {
+    'se.set': function seSet() {
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
         volume = _ref.volume,
         mute = _ref.mute,
@@ -24525,7 +24526,7 @@
   };
 
   var SoundEffects2Methods = {
-    se2: function se2() {
+    'se2.set': function se2Set() {
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
         volume = _ref.volume,
         mute = _ref.mute,
@@ -24622,7 +24623,7 @@
   };
 
   var CameraMethods = {
-    camera: function camera() {
+    'camera.set': function cameraSet() {
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
         x = _ref.x,
         y = _ref.y,
@@ -24871,68 +24872,54 @@
   var DefaultHandler = function DefaultHandler(name, config, eventSheetManager, eventsheet) {
     var tokens = name.split('.');
     var gameObjectID = tokens[0];
-    switch (tokens.length) {
-      case 1:
-        if (this.sys.hasGameObjectMananger(gameObjectID)) {
-          config.goType = gameObjectID;
-          config.id = null;
-        } else if (this.sys.hasGameObject(undefined, gameObjectID)) {
-          config.goType = undefined;
-          config.id = gameObjectID;
-        } else {
-          // TODO
-          console.warn("CommandExecutor: '".concat(gameObjectID, "' does not exist"));
-          return;
-        }
+    if (this.sys.hasGameObjectMananger(gameObjectID)) {
+      config.goType = gameObjectID;
+      config.id = null;
+    } else if (this.sys.hasGameObject(undefined, gameObjectID)) {
+      config.goType = undefined;
+      config.id = gameObjectID;
+    } else {
+      // TODO
+      console.warn("CommandExecutor: '".concat(gameObjectID, "' does not exist"));
+      return;
+    }
+    var commandName = tokens[1];
+    switch (tokens[1]) {
+      case 'set':
         return this._setGOProperty(config, eventSheetManager, eventsheet);
-      case 2:
-        if (this.sys.hasGameObjectMananger(gameObjectID)) {
-          config.goType = gameObjectID;
-          config.id = null;
-        } else if (this.sys.hasGameObject(undefined, gameObjectID)) {
-          config.goType = undefined;
-          config.id = gameObjectID;
-        } else {
-          // TODO
-          console.warn("CommandExecutor: '".concat(gameObjectID, "' does not exist"));
-          return;
-        }
-        var commandName = tokens[1];
-        switch (tokens[1]) {
-          case 'to':
-            return this._easeGOProperty(config, eventSheetManager, eventsheet);
-          case 'yoyo':
-            config.yoyo = true;
-            return this._easeGOProperty(config, eventSheetManager, eventsheet);
-          case 'destroy':
-            return this._destroyGO(config, eventSheetManager, eventsheet);
-          default:
-            var gameObjectManager = this.sys.getGameObjectManager(config.goType, config.id);
-            if (gameObjectManager) {
-              // Command registered in gameObjectManager
-              var command = gameObjectManager.commands[commandName];
-              if (command) {
-                this.clearWaitEventFlag();
-                var gameObjects = gameObjectManager.getGO(gameObjectID);
-                if (!Array.isArray(gameObjects)) {
-                  gameObjects = [gameObjects];
-                }
-                var self = this;
-                gameObjects.forEach(function (gameObject) {
-                  command(gameObject, config, self, eventSheetManager, eventsheet);
-                });
-                return this.hasAnyWaitEvent ? this.sys : undefined;
-              }
+      case 'to':
+        return this._easeGOProperty(config, eventSheetManager, eventsheet);
+      case 'yoyo':
+        config.yoyo = true;
+        return this._easeGOProperty(config, eventSheetManager, eventsheet);
+      case 'destroy':
+        return this._destroyGO(config, eventSheetManager, eventsheet);
+      default:
+        var gameObjectManager = this.sys.getGameObjectManager(config.goType, config.id);
+        if (gameObjectManager) {
+          // Command registered in gameObjectManager
+          var command = gameObjectManager.commands[commandName];
+          if (command) {
+            this.clearWaitEventFlag();
+            var gameObjects = gameObjectManager.getGO(config.id);
+            if (!Array.isArray(gameObjects)) {
+              gameObjects = [gameObjects];
             }
-            var parameters;
-            for (var key in config) {
-              parameters = config[key];
-              break;
-            }
-            config.methodName = commandName;
-            config.parameters = parameters ? StringToValues(parameters) : [];
-            return this._runGOMethod(config, eventSheetManager, eventsheet);
+            var self = this;
+            gameObjects.forEach(function (gameObject) {
+              command(gameObject, config, self, eventSheetManager, eventsheet);
+            });
+            return this.hasAnyWaitEvent ? this.sys : undefined;
+          }
         }
+        var parameters;
+        for (var key in config) {
+          parameters = config[key];
+          break;
+        }
+        config.methodName = commandName;
+        config.parameters = parameters ? StringToValues(parameters) : [];
+        return this._runGOMethod(config, eventSheetManager, eventsheet);
     }
   };
 
@@ -78830,6 +78817,10 @@
             _ref$wait = _ref.wait,
             wait = _ref$wait === void 0 ? true : _ref$wait;
           var commandExecutor = arguments.length > 2 ? arguments[2] : undefined;
+          if (!key) {
+            key = gameObject.texture.key;
+          }
+
           // Wait until transition complete
           if (wait) {
             commandExecutor.waitEvent(gameObject, 'complete');
@@ -78867,17 +78858,52 @@
         cross: function cross(gameObject) {
           var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
             key = _ref.key,
-            frame = _ref.frame;
-          gameObject.setTexture(key, frame);
+            frame = _ref.frame,
+            name = _ref.name,
+            expression = _ref.expression,
+            duration = _ref.duration,
+            _ref$mode = _ref.mode,
+            mode = _ref$mode === void 0 ? 'crossFade' : _ref$mode,
+            _ref$wait = _ref.wait,
+            wait = _ref$wait === void 0 ? true : _ref$wait;
+          var commandExecutor = arguments.length > 2 ? arguments[2] : undefined;
+          if (!key) {
+            key = gameObject.texture.key;
+          }
+          if (name || expression) {
+            var frameDelimiter = gameObject.frameDelimiter;
+            var tokens = gameObject.frame.name.split(frameDelimiter);
+            name = name || tokens[0];
+            expression = expression || tokens[1];
+            frame = "".concat(name).concat(frameDelimiter).concat(expression);
+          }
+
+          // Wait until transition complete
+          if (wait) {
+            commandExecutor.waitEvent(gameObject, 'complete');
+          }
+          var durationSave = gameObject.duration;
+          if (duration !== undefined) {
+            gameObject.setDuration(duration);
+          }
+          gameObject.transit(key, frame, mode);
+          gameObject.setDuration(durationSave);
         }
       }
     });
   };
-  var DefaultCreateGameObjectCallback = function DefaultCreateGameObjectCallback(scene) {
-    var _ref2 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
-      key = _ref2.key,
-      frame = _ref2.frame;
-    return scene.add.image(0, 0, key, frame);
+  var DefaultCreateGameObjectCallback = function DefaultCreateGameObjectCallback(scene, config) {
+    var name = config.name,
+      expression = config.expression,
+      _config$frameDelimite = config.frameDelimiter,
+      frameDelimiter = _config$frameDelimite === void 0 ? '-' : _config$frameDelimite;
+    if (name && expression) {
+      config.frame = "".concat(name).concat(frameDelimiter).concat(expression);
+    }
+    var gameObject = new TransitionImagePack(scene, config);
+    scene.add.existing(gameObject);
+    gameObject.frameDelimiter = frameDelimiter;
+    return gameObject;
   };
 
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
@@ -79045,7 +79071,7 @@
     };
   };
 
-  var RegisterHandlers = [RegisterBackgroundType, RegisterSpriteType, RegisterTextboxType, RegisterChoiceDialogType];
+  var RegisterHandlers = [RegisterSpriteType, RegisterTextboxType, RegisterBackgroundType, RegisterChoiceDialogType];
   var CreateCommandExecutor = function CreateCommandExecutor(scene, config) {
     var layerDepth = config.layerDepth;
     var commandExecutor = new CommandExecutor(scene, {

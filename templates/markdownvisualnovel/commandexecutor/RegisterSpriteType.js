@@ -1,5 +1,6 @@
 import { SPRITE } from '../const/GameObjects.js';
 import { GOLayer } from '../const/Layers.js';
+import { TransitionImagePack } from '../../ui/ui-components.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -20,26 +21,53 @@ var RegisterSpriteType = function (commandExecutor, config) {
             cross(
                 gameObject,
                 {
-                    key, frame
+                    key, frame,
+                    name, expression,
+                    duration, mode = 'crossFade',
+                    wait = true
                 } = {},
-                commandExecutor,
-                eventSheetManager, eventSheet
+                commandExecutor, eventSheetManager, eventSheet
             ) {
 
-                gameObject.setTexture(key, frame);
+                if (!key) {
+                    key = gameObject.texture.key;
+                }
+
+                if (name || expression) {
+                    var frameDelimiter = gameObject.frameDelimiter;
+                    var tokens = gameObject.frame.name.split(frameDelimiter);
+                    name = name || tokens[0];
+                    expression = expression || tokens[1];
+                    frame = `${name}${frameDelimiter}${expression}`;
+                }
+
+                // Wait until transition complete
+                if (wait) {
+                    commandExecutor.waitEvent(gameObject, 'complete');
+                }
+
+                var durationSave = gameObject.duration;
+                if (duration !== undefined) {
+                    gameObject.setDuration(duration);
+                }
+                gameObject.transit(key, frame, mode);
+                gameObject.setDuration(durationSave);
             }
         }
     })
 }
 
-var DefaultCreateGameObjectCallback = function (
-    scene,
-    {
-        key, frame
-    } = {}
-) {
+var DefaultCreateGameObjectCallback = function (scene, config) {
+    var { name, expression, frameDelimiter = '-' } = config;
+    if (name && expression) {
+        config.frame = `${name}${frameDelimiter}${expression}`;
+    }
+    var gameObject = new TransitionImagePack(scene, config);
+    scene.add.existing(gameObject);
 
-    return scene.add.image(0, 0, key, frame);
+    gameObject.frameDelimiter = frameDelimiter;
+
+    return gameObject;
 }
 
 export default RegisterSpriteType;

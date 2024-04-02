@@ -92,6 +92,7 @@ var CreateCommandExecutor = function (scene) {
                     } = {},
                     commandExecutor, eventSheetManager, eventSheet
                 ) {
+
                     if (!key) {
                         key = gameObject.texture.key;
                     }

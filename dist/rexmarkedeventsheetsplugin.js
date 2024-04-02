@@ -24382,48 +24382,43 @@
       console.warn("CommandExecutor: '".concat(gameObjectID, "' does not exist"));
       return;
     }
-    switch (tokens.length) {
-      case 1:
+    var commandName = tokens[1];
+    switch (tokens[1]) {
+      case 'set':
         return this._setGOProperty(config, eventSheetManager, eventsheet);
-      case 2:
-        var commandName = tokens[1];
-        switch (tokens[1]) {
-          case 'set':
-            return this._setGOProperty(config, eventSheetManager, eventsheet);
-          case 'to':
-            return this._easeGOProperty(config, eventSheetManager, eventsheet);
-          case 'yoyo':
-            config.yoyo = true;
-            return this._easeGOProperty(config, eventSheetManager, eventsheet);
-          case 'destroy':
-            return this._destroyGO(config, eventSheetManager, eventsheet);
-          default:
-            var gameObjectManager = this.sys.getGameObjectManager(config.goType, config.id);
-            if (gameObjectManager) {
-              // Command registered in gameObjectManager
-              var command = gameObjectManager.commands[commandName];
-              if (command) {
-                this.clearWaitEventFlag();
-                var gameObjects = gameObjectManager.getGO(config.id);
-                if (!Array.isArray(gameObjects)) {
-                  gameObjects = [gameObjects];
-                }
-                var self = this;
-                gameObjects.forEach(function (gameObject) {
-                  command(gameObject, config, self, eventSheetManager, eventsheet);
-                });
-                return this.hasAnyWaitEvent ? this.sys : undefined;
-              }
+      case 'to':
+        return this._easeGOProperty(config, eventSheetManager, eventsheet);
+      case 'yoyo':
+        config.yoyo = true;
+        return this._easeGOProperty(config, eventSheetManager, eventsheet);
+      case 'destroy':
+        return this._destroyGO(config, eventSheetManager, eventsheet);
+      default:
+        var gameObjectManager = this.sys.getGameObjectManager(config.goType, config.id);
+        if (gameObjectManager) {
+          // Command registered in gameObjectManager
+          var command = gameObjectManager.commands[commandName];
+          if (command) {
+            this.clearWaitEventFlag();
+            var gameObjects = gameObjectManager.getGO(config.id);
+            if (!Array.isArray(gameObjects)) {
+              gameObjects = [gameObjects];
             }
-            var parameters;
-            for (var key in config) {
-              parameters = config[key];
-              break;
-            }
-            config.methodName = commandName;
-            config.parameters = parameters ? StringToValues(parameters) : [];
-            return this._runGOMethod(config, eventSheetManager, eventsheet);
+            var self = this;
+            gameObjects.forEach(function (gameObject) {
+              command(gameObject, config, self, eventSheetManager, eventsheet);
+            });
+            return this.hasAnyWaitEvent ? this.sys : undefined;
+          }
         }
+        var parameters;
+        for (var key in config) {
+          parameters = config[key];
+          break;
+        }
+        config.methodName = commandName;
+        config.parameters = parameters ? StringToValues(parameters) : [];
+        return this._runGOMethod(config, eventSheetManager, eventsheet);
     }
   };
 

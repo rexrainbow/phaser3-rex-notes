@@ -3,10 +3,12 @@
 ## Create Game Object Instance
 
 ```
+
 CHOICE
   id=NAME
   param0=value
   param1=value
+
 ```
 
 Create ConfirmDialog as Choice dailog game object
@@ -14,13 +16,16 @@ Create ConfirmDialog as Choice dailog game object
 ## Destroy game object
 
 ```
+
 NAME.destroy
+
 ```
 
 ## Set properties
 
 ```
-NAME
+
+NAME.set
   x=
   vpx=
   y=
@@ -30,11 +35,13 @@ NAME
   ease=Linear
   repeat=0
   wait=
+
 ```
 
 ## Ease properties
 
 ```
+
 NAME.to
   x=
   vpx=
@@ -45,11 +52,13 @@ NAME.to
   ease=Linear
   repeat=0
   wait=
+
 ```
 
 or
 
 ```
+
 NAME.yoyo
   x=
   vpx=
@@ -60,6 +69,7 @@ NAME.yoyo
   ease=Linear
   repeat=0
   wait=
+
 ```
 
 ## Call methods
@@ -67,6 +77,7 @@ NAME.yoyo
 ### Choice
 
 ```
+
 NAME.choice
   title=
   content=
@@ -74,6 +85,7 @@ NAME.choice
   option2=
   option3=
   resultKey=choiceIndex
+
 ```
 
 - If click button1 (option1), resultKey( choiceIndex) will set to `1`

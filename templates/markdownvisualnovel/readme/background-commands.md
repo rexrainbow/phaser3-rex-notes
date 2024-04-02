@@ -3,10 +3,12 @@
 ## Create Game Object Instance
 
 ```
+
 BG
   id=NAME
   param0=value
   param1=value
+
 ```
 
 Create TransitionImagePack as Background game object.
@@ -14,13 +16,16 @@ Create TransitionImagePack as Background game object.
 ## Destroy
 
 ```
+
 NAME.destroy
+
 ```
 
 ## Set properties
 
 ```
-NAME
+
+NAME.set
   x=
   vpx=
   y=
@@ -30,11 +35,13 @@ NAME
   ease=Linear
   repeat=0
   wait=
+
 ```
 
 ## Ease properties
 
 ```
+
 NAME.to
   x=
   vpx=
@@ -45,11 +52,13 @@ NAME.to
   ease=Linear
   repeat=0
   wait=
+
 ```
 
 or
 
 ```
+
 NAME.yoyo
   x=
   vpx=
@@ -60,6 +69,7 @@ NAME.yoyo
   ease=Linear
   repeat=0
   wait=
+
 ```
 
 ## Call methods
@@ -67,12 +77,14 @@ NAME.yoyo
 ### Transition image
 
 ```
+
 NAME.cross
   key=
   frame=
   duration=
   mode=fade
   wait=true
+
 ```
 
 - `mode` : Pre-build effects

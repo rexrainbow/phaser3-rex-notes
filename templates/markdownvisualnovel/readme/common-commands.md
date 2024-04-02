@@ -106,54 +106,68 @@ or
 ### Print message
     
 ```
+
 log
   text=...
   // logType='log'
   // showTitle=true
   // title
   // titleColor='green'
+
 ```
 
 ### Disable printing
 
 ```
+
 log.disable
+
 ```
 
 or
 
 ```
+
 log.disable
   title=...
+
 ```
 
 ### Enable printing
 
 ```
+
 log.enable
+
 ```
 
 or
 
 ```
+
 log.disable
   title=...
+
 ```
 
 ### Dump memory
 
 
 ```
+
 log.memory
+
 ```
 
 or
 
 
 ```
+
 log.memory
   text=...
   keys=a,b,c
+
 ```
 
 ## Wait
@@ -161,16 +175,20 @@ log.memory
 ### Wait click
 
 ```
+
 click
+
 ```
 
 ### Wait any
 
 ```
+
 wait
   click
   key=keyName
   time=
+
 ```
 
 ## Music
@@ -178,10 +196,12 @@ wait
 ### Sound properties
 
 ```
-bgm
-  volume
+
+bgm.set
+  volume=
   mute
   unmute
+
 ```
 
 Command name : `bgm`, `bgm2`, `se`, `se2`
@@ -189,6 +209,7 @@ Command name : `bgm`, `bgm2`, `se`, `se2`
 ### Play sound
 
 ```
+
 bgm.play
   key=
   // volume
@@ -197,6 +218,7 @@ bgm.play
   fadeIn=0
   // loop
   wait=false
+
 ```
 
 Command name : `bgm.play`, `bgm2.play`, `se.play`, `se2.play`
@@ -204,7 +226,9 @@ Command name : `bgm.play`, `bgm2.play`, `se.play`, `se2.play`
 ### Pause sound
 
 ```
+
 bgm.pause
+
 ```
 
 Command name : `bgm.pause`, `bgm2.pause`
@@ -212,7 +236,9 @@ Command name : `bgm.pause`, `bgm2.pause`
 ### Resume sound
 
 ```
+
 bgm.resume
+
 ```
 
 Command name : `bgm.resume`, `bgm2.resume`
@@ -220,7 +246,9 @@ Command name : `bgm.resume`, `bgm2.resume`
 ### Mute sound
 
 ```
+
 bgm.mute
+
 ```
 
 Command name : `bgm.mute`, `bgm2.mute`, `se.mute`, `se2.mute`
@@ -228,7 +256,9 @@ Command name : `bgm.mute`, `bgm2.mute`, `se.mute`, `se2.mute`
 ### Unmute sound
 
 ```
+
 bgm.unmute
+
 ```
 
 Command name : `bgm.unmute`, `bgm2.unmute`, `se.unmute`, `se2.unmute`
@@ -237,10 +267,12 @@ Command name : `bgm.unmute`, `bgm2.unmute`, `se.unmute`, `se2.unmute`
 ### Cross fade sound
 
 ```
+
 bgm.cross
   key=
   duration=500
   wait=false
+
 ```
 
 Command name : `bgm.cross`, `bgm2.cross`
@@ -248,7 +280,9 @@ Command name : `bgm.cross`, `bgm2.cross`
 ### Stop sound
 
 ```
+
 bgm.stop
+
 ```
 
 Command name : `bgm.stop`, `bgm2.stop`, `se.stop`, `se2.stop`
@@ -256,8 +290,10 @@ Command name : `bgm.stop`, `bgm2.stop`, `se.stop`, `se2.stop`
 ### Fade in sound
 
 ```
+
 bgm.fadeIn
   duration=500
+
 ```
 
 Command name : `bgm.stop`, `bgm2.stop`
@@ -265,10 +301,12 @@ Command name : `bgm.stop`, `bgm2.stop`
 ### Fade out sound
 
 ```
+
 bgm.fadeOut
   duration=500
   stop=true
   wait=false
+
 ```
 
 Command name : `bgm.fadeOut`, `bgm2.fadeOut`, `se.fadeOut`, `se2.fadeOut`
@@ -278,83 +316,99 @@ Command name : `bgm.fadeOut`, `bgm2.fadeOut`, `se.fadeOut`, `se2.fadeOut`
 ### Camera properties
 
 ```
-camera
+
+camera.set
   x=
   y=
   rotate=
   zoom=
+
 ```
 
 ### Camera fade in
 
 ```
+
 camera.fadeIn
   duration=1000
   red
   green
   blue
   wait=false
+
 ```
 
 ### Camera fade out
 
 ```
+
 camera.fadeOut
   duration=1000
   red
   green
   blue
   wait=false
+
 ```
 
 ### Camera flash
 
 ```
+
 camera.flash
   duration=1000
   red
   green
   blue
   wait=false
+
 ```
 
 ### Camera shake
 
 ```
+
 camera.shake
   duration=1000
   intensity
   wait=false
+
 ```
 
 ### Camera zoom
 
 ```
+
 camera.zoomTo
   duration=1000
   zoom
   wait=false
+
 ```
 
 ### Camera rotate-to
 
 ```
+
 camera.rotateTo
   duration=1000
   rotate
   ease
   wait=false
+
 ```
 
 ### Camera scroll-to
 
 ```
+
 camera.scrollTo
   duration=1000
   x
   y
   ease
   wait=false
+
 ```
 
 
