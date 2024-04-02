@@ -1,5 +1,5 @@
 import FrameManager from '../../../texture/framemanager/FrameManager.js';
-import RandomPieceEdges from './RandomPieceEdges.js';
+import GenerateEdges from './GenerateEdges.js';
 import DefaultDrawShapeCallback from './jigsawpiece/DefaultDrawShapeCallback.js';
 import JigsawPieceRenderTexurue from './jigsawpiece/JigsawPieceRenderTexurue.js';
 import DrawCanvasPieceCallback from './jigsawpiece/DrawCanvasPieceCallback.js';
@@ -33,8 +33,10 @@ var GenerateFrames = function (scene, {
         edgeHeight = Math.floor((sourceFrameHeight / rows) / 7);
     }
 
-    if (edges === undefined) {
-        edges = RandomPieceEdges(columns, rows);
+    if (Array.isArray(edges)) {
+        // Do nothinh
+    } else {
+        edges = GenerateEdges(columns, rows, edges);
     }
 
     if (destinationKey === undefined) {

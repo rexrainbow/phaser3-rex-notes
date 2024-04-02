@@ -9,6 +9,10 @@ declare namespace GenerateFrames {
     };
 
     type EdgesType = (EdgeModeType | string)[][];
+    type GetEdgeCallbacksType = {
+        getRightEdge?: (c: number, r: number) => number,
+        getBottomEdge?: (c: number, r: number) => number,
+    }
 
     type DrawShapeCallbackType = (
         graphics: Phaser.GameObjects.Graphics,
@@ -25,7 +29,7 @@ declare namespace GenerateFrames {
         columns: number, rows: number,
         framePadding?: number,
         edgeWidth?: number, edgeHeight?: number,
-        edges?: EdgesType,
+        edges?: EdgesType | GetEdgeCallbacksType,
         drawShapeCallback?: DrawShapeCallbackType,
         useDynamicTexture?: boolean,
     }

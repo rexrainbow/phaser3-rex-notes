@@ -11,7 +11,7 @@ declare namespace CreatePieces {
         edgeWidth?: number, edgeHeight?: number,
 
         drawShapeCallback?: DrawShapeCallbackType,
-        edges?: GenerateFrames.EdgesType,
+        edges?: GenerateFrames.EdgesType | GenerateFrames.GetEdgeCallbacksType,
         useDynamicTexture?: boolean,
 
         createImageCallback?: (
