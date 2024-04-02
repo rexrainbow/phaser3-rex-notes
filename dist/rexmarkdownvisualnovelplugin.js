@@ -78867,10 +78867,10 @@
             _ref$wait = _ref.wait,
             wait = _ref$wait === void 0 ? true : _ref$wait;
           var commandExecutor = arguments.length > 2 ? arguments[2] : undefined;
-          if (!key) {
-            key = gameObject.texture.key;
-          }
           if (gameObject.isFrameNameMode) {
+            if (!key) {
+              key = gameObject.texture.key;
+            }
             if (name || expression) {
               var frameDelimiter = gameObject.frameDelimiter;
               var tokens = gameObject.frame.name.split(frameDelimiter);
@@ -78879,12 +78879,8 @@
               frame = "".concat(name).concat(frameDelimiter).concat(expression);
             }
           } else {
-            if (name) {
-              key = name;
-            }
-            if (expression) {
-              frame = expression;
-            }
+            key = name || gameObject.texture.key;
+            frame = expression || gameObject.frame.name;
           }
 
           // Wait until transition complete

@@ -9,7 +9,6 @@
       id=NAME
       name=
       expression=
-      frameDelimiter=-
     
     ```
     - `name`, `expression` : Set texture key to `name`, and frame name to `expression`.
@@ -225,7 +224,7 @@ SPRITE.cross
 
 ```
 
-- `name`, `expression` : 
+- `name`, `expression` : Using previous `name`, or `expression` if `name`, or `expression` are not given (`undefined`).
     - Multiple altas mode : Set texture key to `name`, and frame name to `expression`.
     - Single altas mode : Keep current texture key, set frame name to `name + frameDelimiter + expression`.
 - `mode` : Pre-build effects

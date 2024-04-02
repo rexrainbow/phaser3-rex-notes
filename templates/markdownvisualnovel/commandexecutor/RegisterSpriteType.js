@@ -29,11 +29,10 @@ var RegisterSpriteType = function (commandExecutor, config) {
                 commandExecutor, eventSheetManager, eventSheet
             ) {
 
-                if (!key) {
-                    key = gameObject.texture.key;
-                }
-
                 if (gameObject.isFrameNameMode) {
+                    if (!key) {
+                        key = gameObject.texture.key;
+                    }
                     if (name || expression) {
                         var frameDelimiter = gameObject.frameDelimiter;
                         var tokens = gameObject.frame.name.split(frameDelimiter);
@@ -43,12 +42,8 @@ var RegisterSpriteType = function (commandExecutor, config) {
                     }
 
                 } else {
-                    if (name) {
-                        key = name;
-                    }
-                    if (expression) {
-                        frame = expression;
-                    }
+                    key = name || gameObject.texture.key;
+                    frame = expression || gameObject.frame.name;
 
                 }
 
