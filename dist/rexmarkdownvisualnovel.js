@@ -78740,7 +78740,7 @@
 
   var GetValue$3 = Phaser.Utils.Objects.GetValue;
   var RegisterBackgroundType = function RegisterBackgroundType(commandExecutor, config) {
-    var createGameObjectCallback = GetValue$3(config, "creators.".concat(BG), DefaultCreateGameObjectCallback$1);
+    var createGameObjectCallback = GetValue$3(config, "creators.".concat(BG), DefaultCreateGameObjectCallback);
     if (createGameObjectCallback === false) {
       return;
     }
@@ -78780,7 +78780,7 @@
       }
     });
   };
-  var DefaultCreateGameObjectCallback$1 = function DefaultCreateGameObjectCallback(scene, config) {
+  var DefaultCreateGameObjectCallback = function DefaultCreateGameObjectCallback(scene, config) {
     var gameObject = new TransitionImagePack(scene, config);
     scene.add.existing(gameObject);
     return gameObject;
@@ -78788,9 +78788,12 @@
 
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
   var RegisterSpriteType = function RegisterSpriteType(commandExecutor, config) {
-    var createGameObjectCallback = GetValue$2(config, "creators.".concat(SPRITE), DefaultCreateGameObjectCallback);
+    var createGameObjectCallback = GetValue$2(config, "creators.".concat(SPRITE), undefined);
     if (createGameObjectCallback === false) {
       return;
+    } else if (createGameObjectCallback === undefined) {
+      var style = GetValue$2(config, "styles.".concat(SPRITE));
+      createGameObjectCallback = GenerateDefaultCreateGameObjectCallback$2(style);
     }
     commandExecutor.addGameObjectManager({
       name: SPRITE,
@@ -78825,7 +78828,7 @@
             }
           } else {
             key = name || gameObject.texture.key;
-            frame = expression || gameObject.frame.name;
+            frame = expression;
           }
 
           // Wait until transition complete
@@ -78842,26 +78845,32 @@
       }
     });
   };
-  var DefaultCreateGameObjectCallback = function DefaultCreateGameObjectCallback(scene, config) {
-    var key = config.key,
-      name = config.name,
-      expression = config.expression,
-      _config$frameDelimite = config.frameDelimiter,
-      frameDelimiter = _config$frameDelimite === void 0 ? '-' : _config$frameDelimite;
-    var isFrameNameMode = !!key;
-    if (isFrameNameMode) {
-      if (name && expression) {
-        config.frame = "".concat(name).concat(frameDelimiter).concat(expression);
+  var GenerateDefaultCreateGameObjectCallback$2 = function GenerateDefaultCreateGameObjectCallback() {
+    var style = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    var defaultKey = style.key;
+    var defaultFrameDelimiter = style.frameDelimiter || '-';
+    return function (scene, config) {
+      var _config$key = config.key,
+        key = _config$key === void 0 ? defaultKey : _config$key,
+        name = config.name,
+        expression = config.expression,
+        _config$frameDelimite = config.frameDelimiter,
+        frameDelimiter = _config$frameDelimite === void 0 ? defaultFrameDelimiter : _config$frameDelimite;
+      var isFrameNameMode = !!key;
+      if (isFrameNameMode) {
+        if (name && expression) {
+          config.frame = "".concat(name).concat(frameDelimiter).concat(expression);
+        }
+      } else {
+        config.key = name;
+        config.frame = expression;
       }
-    } else {
-      config.key = name;
-      config.frame = expression;
-    }
-    var gameObject = new TransitionImagePack(scene, config);
-    scene.add.existing(gameObject);
-    gameObject.isFrameNameMode = isFrameNameMode;
-    gameObject.frameDelimiter = frameDelimiter;
-    return gameObject;
+      var gameObject = new TransitionImagePack(scene, config);
+      scene.add.existing(gameObject);
+      gameObject.isFrameNameMode = isFrameNameMode;
+      gameObject.frameDelimiter = frameDelimiter;
+      return gameObject;
+    };
   };
 
   var GetValue$1 = Phaser.Utils.Objects.GetValue;

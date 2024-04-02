@@ -46,7 +46,7 @@ var RegisterSpriteType = function (commandExecutor, config) {
 
                 } else {
                     key = name || gameObject.texture.key;
-                    frame = expression || gameObject.frame.name;
+                    frame = expression;
 
                 }
 
