@@ -20,12 +20,14 @@ export default {
             AddEffectProperties(gameObject, this.effectPropertiesConfig);
         }
 
-        gameObject.once('destroy', function () {
-            RemoveItem(this.removedGOs, gameObject);
-            if (this.isEmpty) {
-                this.emit('empty');
-            }
-        }, this);
+        gameObject
+            .setName(name)
+            .once('destroy', function () {
+                RemoveItem(this.removedGOs, gameObject);
+                if (this.isEmpty) {
+                    this.emit('empty');
+                }
+            }, this);
 
         var bob = new this.BobClass(this, gameObject, name);
         this.bobs[name] = bob;

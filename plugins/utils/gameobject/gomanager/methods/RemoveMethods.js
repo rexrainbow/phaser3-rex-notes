@@ -11,7 +11,9 @@ export default {
         bobs.forEach(function (bob) {
             delete self.bobs[name];
 
-            self.removedGOs.push(bob.gameObject);
+            var gameObject = bob.gameObject;
+            self.removedGOs.push(gameObject);
+            gameObject.setName();
 
             if (!ignoreFade) {
                 self.fadeBob(
