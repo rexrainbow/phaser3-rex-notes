@@ -78815,12 +78815,21 @@
           if (!key) {
             key = gameObject.texture.key;
           }
-          if (name || expression) {
-            var frameDelimiter = gameObject.frameDelimiter;
-            var tokens = gameObject.frame.name.split(frameDelimiter);
-            name = name || tokens[0];
-            expression = expression || tokens[1];
-            frame = "".concat(name).concat(frameDelimiter).concat(expression);
+          if (gameObject.isFrameNameMode) {
+            if (name || expression) {
+              var frameDelimiter = gameObject.frameDelimiter;
+              var tokens = gameObject.frame.name.split(frameDelimiter);
+              name = name || tokens[0];
+              expression = expression || tokens[1];
+              frame = "".concat(name).concat(frameDelimiter).concat(expression);
+            }
+          } else {
+            if (name) {
+              key = name;
+            }
+            if (expression) {
+              frame = expression;
+            }
           }
 
           // Wait until transition complete
@@ -78838,15 +78847,23 @@
     });
   };
   var DefaultCreateGameObjectCallback = function DefaultCreateGameObjectCallback(scene, config) {
-    var name = config.name,
+    var key = config.key,
+      name = config.name,
       expression = config.expression,
       _config$frameDelimite = config.frameDelimiter,
       frameDelimiter = _config$frameDelimite === void 0 ? '-' : _config$frameDelimite;
-    if (name && expression) {
-      config.frame = "".concat(name).concat(frameDelimiter).concat(expression);
+    var isFrameNameMode = !!key;
+    if (isFrameNameMode) {
+      if (name && expression) {
+        config.frame = "".concat(name).concat(frameDelimiter).concat(expression);
+      }
+    } else {
+      config.key = name;
+      config.frame = expression;
     }
     var gameObject = new TransitionImagePack(scene, config);
     scene.add.existing(gameObject);
+    gameObject.isFrameNameMode = isFrameNameMode;
     gameObject.frameDelimiter = frameDelimiter;
     return gameObject;
   };

@@ -33,12 +33,23 @@ var RegisterSpriteType = function (commandExecutor, config) {
                     key = gameObject.texture.key;
                 }
 
-                if (name || expression) {
-                    var frameDelimiter = gameObject.frameDelimiter;
-                    var tokens = gameObject.frame.name.split(frameDelimiter);
-                    name = name || tokens[0];
-                    expression = expression || tokens[1];
-                    frame = `${name}${frameDelimiter}${expression}`;
+                if (gameObject.isFrameNameMode) {
+                    if (name || expression) {
+                        var frameDelimiter = gameObject.frameDelimiter;
+                        var tokens = gameObject.frame.name.split(frameDelimiter);
+                        name = name || tokens[0];
+                        expression = expression || tokens[1];
+                        frame = `${name}${frameDelimiter}${expression}`;
+                    }
+
+                } else {
+                    if (name) {
+                        key = name;
+                    }
+                    if (expression) {
+                        frame = expression;
+                    }
+
                 }
 
                 // Wait until transition complete
@@ -58,13 +69,26 @@ var RegisterSpriteType = function (commandExecutor, config) {
 }
 
 var DefaultCreateGameObjectCallback = function (scene, config) {
-    var { name, expression, frameDelimiter = '-' } = config;
-    if (name && expression) {
-        config.frame = `${name}${frameDelimiter}${expression}`;
+    var {
+        key,
+        name, expression,
+        frameDelimiter = '-'
+    } = config;
+
+    var isFrameNameMode = !!key;
+    if (isFrameNameMode) {
+        if (name && expression) {
+            config.frame = `${name}${frameDelimiter}${expression}`;
+        }
+    } else {
+        config.key = name;
+        config.frame = expression;
     }
+
     var gameObject = new TransitionImagePack(scene, config);
     scene.add.existing(gameObject);
 
+    gameObject.isFrameNameMode = isFrameNameMode;
     gameObject.frameDelimiter = frameDelimiter;
 
     return gameObject;

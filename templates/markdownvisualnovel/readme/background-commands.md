@@ -6,8 +6,8 @@
 
 BG
   id=NAME
-  param0=value
-  param1=value
+  key=value
+  frame=value
 
 ```
 

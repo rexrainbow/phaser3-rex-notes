@@ -2,16 +2,31 @@
 
 ## Create Game Object Instance
 
-```
+- Multiple altas
+    ```
+    
+    SPRITE
+      id=NAME
+      name=
+      expression=
+      frameDelimiter=-
+    
+    ```
+    - `name`, `expression` : Set texture key as `name`. Set frame name as `expression`.
+- Single altas
+    ```
+    
+    SPRITE
+      id=NAME
+      key=
+      name=
+      expression=
+      frameDelimiter=-
+    
+    ```
+    - `name`, `expression` : Set frame name as `name + frameDelimiter + expression`
 
-SPRITE
-  id=NAME
-  param0=value
-  param1=value
-
-```
-
-Create Image as Sprite game object.
+Create TransitionImagePack as Sprite game object.
 
 ## Destroy
 
@@ -178,51 +193,97 @@ SPRITE.yoyo
 
 ### Transition image
 
-```
-
-NAME.cross
-  key=
-  frame=
-  duration=
-  mode=fade
-  wait=true
-
-```
-
-```
-
-SPRITE.cross
-  key=
-  frame=
-  duration=
-  mode=fade
-  wait=true
-
-```
-
-```
-
-!NAME.cross
-  key=
-  frame=
-  duration=
-  mode=fade
-  wait=true
-
-```
-
-
-- `mode` : Pre-build effects
-    - Fade effects : 
-        - `'fade'` : Tint old image to black, then tint new image from black to origin color.
-        - `'crossFade'` : Ease alpha of old image from 1 to 0, and ease alpha of new image from 0 to 1 at the same time.
-    - Slide effects : `'slideLeft'`, `'slideRight'`, `'slideUp'`, `'slideDown'`, 
-      `'slideAwayLeft'`, `'slideAwayRight'`, `'slideAwayUp'`, `'slideAwayDown'`, 
-      `'pushLeft'`, `'pushRight'`, `'pushUp'`, `'pushDown'`.
-    - Zoom(scale) effects : `'zoomOut'`, `'zoomIn'`, `'zoomInOut'`.
-    - Mask effects : `'wipeLeft'`, `'wipeRight'`, `'wipeUp'`, `'wipeDown'`,
-      `'irisOut'`, `'irisIn'`,  `'irisInOut'`, `'pieOut'`, `'pieIn'`, `'pieInOut'`, 
-      `'blinds'`, `'squares'`, `'diamonds'`, `'circles'`, `'curtain'`.
-    - Shader effects : `'pixellate'`, `'dissolve'`, 
-      `'revealLeft'`, `'revealRight'`, `'revealUp'`, `'revealDown'`
+- Multiple altas
+    ```
+    
+    NAME.cross      
+      name=
+      expression=
+      duration=
+      mode=fade
+      wait=true
+    
+    ```
+    ```
+    
+    SPRITE.cross
+      name=
+      expression=
+      duration=
+      mode=fade
+      wait=true
+    
+    ```
+    ```
+    
+    !NAME.cross
+      name=
+      expression=
+      duration=
+      mode=fade
+      wait=true
+    
+    ```
+    - `name`, `expression` : Set texture key as `name`. Set frame name as `expression`.
+    - `mode` : Pre-build effects
+        - Fade effects : 
+            - `'fade'` : Tint old image to black, then tint new image from black to origin color.
+            - `'crossFade'` : Ease alpha of old image from 1 to 0, and ease alpha of new image from 0 to 1 at the same time.
+        - Slide effects : `'slideLeft'`, `'slideRight'`, `'slideUp'`, `'slideDown'`, 
+          `'slideAwayLeft'`, `'slideAwayRight'`, `'slideAwayUp'`, `'slideAwayDown'`, 
+          `'pushLeft'`, `'pushRight'`, `'pushUp'`, `'pushDown'`.
+        - Zoom(scale) effects : `'zoomOut'`, `'zoomIn'`, `'zoomInOut'`.
+        - Mask effects : `'wipeLeft'`, `'wipeRight'`, `'wipeUp'`, `'wipeDown'`,
+          `'irisOut'`, `'irisIn'`,  `'irisInOut'`, `'pieOut'`, `'pieIn'`, `'pieInOut'`, 
+          `'blinds'`, `'squares'`, `'diamonds'`, `'circles'`, `'curtain'`.
+        - Shader effects : `'pixellate'`, `'dissolve'`, 
+          `'revealLeft'`, `'revealRight'`, `'revealUp'`, `'revealDown'`
+- Single altas
+    ```
+    
+    NAME.cross
+      key=
+      name=
+      expression=
+      duration=
+      mode=fade
+      wait=true
+    
+    ```
+    ```
+    
+    SPRITE.cross
+      key=
+      name=
+      expression=
+      duration=
+      mode=fade
+      wait=true
+    
+    ```
+    ```
+    
+    !NAME.cross
+      key=
+      name=
+      expression=
+      duration=
+      mode=fade
+      wait=true
+    
+    ```
+    - `name`, `expression` : Set frame name as `name + frameDelimiter + expression`.
+    - `mode` : Pre-build effects
+        - Fade effects : 
+            - `'fade'` : Tint old image to black, then tint new image from black to origin color.
+            - `'crossFade'` : Ease alpha of old image from 1 to 0, and ease alpha of new image from 0 to 1 at the same time.
+        - Slide effects : `'slideLeft'`, `'slideRight'`, `'slideUp'`, `'slideDown'`, 
+          `'slideAwayLeft'`, `'slideAwayRight'`, `'slideAwayUp'`, `'slideAwayDown'`, 
+          `'pushLeft'`, `'pushRight'`, `'pushUp'`, `'pushDown'`.
+        - Zoom(scale) effects : `'zoomOut'`, `'zoomIn'`, `'zoomInOut'`.
+        - Mask effects : `'wipeLeft'`, `'wipeRight'`, `'wipeUp'`, `'wipeDown'`,
+          `'irisOut'`, `'irisIn'`,  `'irisInOut'`, `'pieOut'`, `'pieIn'`, `'pieInOut'`, 
+          `'blinds'`, `'squares'`, `'diamonds'`, `'circles'`, `'curtain'`.
+        - Shader effects : `'pixellate'`, `'dissolve'`, 
+          `'revealLeft'`, `'revealRight'`, `'revealUp'`, `'revealDown'`
 
