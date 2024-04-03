@@ -1,5 +1,4 @@
 import ConvertEdgeMode from './ConvertEdgeMode.js';
-import DefaultDrawShapeCallback from './DefaultDrawShapeCallback.js';
 
 var DrawCanvasPieceCallback = function (
     image,
@@ -28,9 +27,21 @@ var DrawCanvasPieceCallback = function (
 
     context.clip();
 
+    if (sx < 0) {
+        sx = 0;
+    }
+
+    if (sy < 0) {
+        sy = 0;
+    }
+
     context.drawImage(
         image,  // image
+
+        // sx, sy, sWidth, sHeight
         sx, sy, width, height,
+
+        // dx, dy, dWidth, dHeight
         0, 0, width, height
     );
 
