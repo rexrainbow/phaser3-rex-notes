@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import 'phaser';
 import RoundrRctanglePlugin from '../../plugins/roundrectangle-plugin';
 
 class Demo extends Phaser.Scene {
