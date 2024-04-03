@@ -13,7 +13,7 @@ declare class BBCodeText extends Text {
     constructor(
         scene: Phaser.Scene,
         x?: number, y?: number,
-        content?: string,
+        text?: string,
         style?: BBCodeText.TextStyle
     );
 
