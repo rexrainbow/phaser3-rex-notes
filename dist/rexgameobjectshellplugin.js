@@ -5893,7 +5893,7 @@
       if (this.effectPropertiesConfig) {
         AddEffectProperties(gameObject, this.effectPropertiesConfig);
       }
-      gameObject.once('destroy', function () {
+      gameObject.setName(name).once('destroy', function () {
         RemoveItem$9(this.removedGOs, gameObject);
         if (this.isEmpty) {
           this.emit('empty');
@@ -5932,7 +5932,9 @@
       var self = this;
       bobs.forEach(function (bob) {
         delete self.bobs[name];
-        self.removedGOs.push(bob.gameObject);
+        var gameObject = bob.gameObject;
+        self.removedGOs.push(gameObject);
+        gameObject.setName();
         if (!ignoreFade) {
           self.fadeBob(bob,
           // bob

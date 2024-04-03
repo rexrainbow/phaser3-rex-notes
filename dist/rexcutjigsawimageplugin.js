@@ -573,42 +573,53 @@
   }();
   Object.assign(FrameManager.prototype, methods);
 
-  var RandomPieceEdges = function RandomPieceEdges(columns, rows) {
+  var GenerateEdges = function GenerateEdges(columns, rows, callbacks) {
+    var getRightEdgeCallback = callbacks ? callbacks.getRightEdge : undefined;
+    var getBottomEdgeCallback = callbacks ? callbacks.getBottomEdge : undefined;
+    if (!getRightEdgeCallback) {
+      getRightEdgeCallback = DefaultGetEdgeCallback;
+    }
+    if (!getBottomEdgeCallback) {
+      getBottomEdgeCallback = DefaultGetEdgeCallback;
+    }
     var edges = [];
     for (var c = 0; c < columns; c++) {
       edges.push(new Array(rows));
     }
+    var lastColumnIndex = columns - 1;
+    var lastRowIndex = rows - 1;
     var left, right, top, bottom;
+    var neighborEdge;
     for (var r = 0; r < rows; r++) {
       for (var c = 0; c < columns; c++) {
         // left
         if (c === 0) {
           left = 0;
         } else {
-          var neighborEdge = edges[c - 1][r].right;
-          left = neighborEdge === 1 ? 2 : 1;
+          neighborEdge = edges[c - 1][r].right;
+          left = OppositeEdgeMap[neighborEdge] || 0;
         }
 
         // top
         if (r === 0) {
           top = 0;
         } else {
-          var neighborEdge = edges[c][r - 1].bottom;
-          top = neighborEdge === 1 ? 2 : 1;
+          neighborEdge = edges[c][r - 1].bottom;
+          top = OppositeEdgeMap[neighborEdge] || 0;
         }
 
         // right
-        if (c === columns - 1) {
+        if (c === lastColumnIndex) {
           right = 0;
         } else {
-          right = Math.random() > 0.5 ? 2 : 1;
+          right = getRightEdgeCallback(c, r);
         }
 
         // bottom
-        if (r === rows - 1) {
+        if (r === lastRowIndex) {
           bottom = 0;
         } else {
-          bottom = Math.random() > 0.5 ? 2 : 1;
+          bottom = getBottomEdgeCallback(c, r);
         }
         edges[c][r] = {
           left: left,
@@ -619,6 +630,13 @@
       }
     }
     return edges;
+  };
+  var DefaultGetEdgeCallback = function DefaultGetEdgeCallback(c, r) {
+    return Math.random() > 0.5 ? 2 : 1;
+  };
+  var OppositeEdgeMap = {
+    1: 2,
+    2: 1
   };
 
   var DegToRad = Phaser.Math.DegToRad;
@@ -810,9 +828,19 @@
     context.clearRect(0, 0, width, height);
     drawShapeCallback(context, width, height, edgeWidth, edgeHeight, edgeMode);
     context.clip();
+    if (sx < 0) {
+      sx = 0;
+    }
+    if (sy < 0) {
+      sy = 0;
+    }
     context.drawImage(image,
     // image
-    sx, sy, width, height, 0, 0, width, height);
+
+    // sx, sy, sWidth, sHeight
+    sx, sy, width, height,
+    // dx, dy, dWidth, dHeight
+    0, 0, width, height);
 
     // context.restore();
   };
@@ -850,8 +878,8 @@
     if (edgeHeight === undefined) {
       edgeHeight = Math.floor(sourceFrameHeight / rows / 7);
     }
-    if (edges === undefined) {
-      edges = RandomPieceEdges(columns, rows);
+    if (Array.isArray(edges)) ; else {
+      edges = GenerateEdges(columns, rows, edges);
     }
     if (destinationKey === undefined) {
       destinationKey = "".concat(sourceKey, "_pieces");

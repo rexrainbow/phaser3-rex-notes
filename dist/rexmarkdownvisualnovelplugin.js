@@ -19517,7 +19517,7 @@
       if (this.effectPropertiesConfig) {
         AddEffectProperties(gameObject, this.effectPropertiesConfig);
       }
-      gameObject.once('destroy', function () {
+      gameObject.setName(name).once('destroy', function () {
         RemoveItem$d(this.removedGOs, gameObject);
         if (this.isEmpty) {
           this.emit('empty');
@@ -19556,7 +19556,9 @@
       var self = this;
       bobs.forEach(function (bob) {
         delete self.bobs[name];
-        self.removedGOs.push(bob.gameObject);
+        var gameObject = bob.gameObject;
+        self.removedGOs.push(gameObject);
+        gameObject.setName();
         if (!ignoreFade) {
           self.fadeBob(bob,
           // bob
@@ -36249,7 +36251,7 @@
   var TypingDelayTimerType = 'delay';
   var TypingAnimationTimerType = 'anim';
 
-  var Typing = function Typing(offsetTime) {
+  var Typing$1 = function Typing(offsetTime) {
     if (offsetTime === undefined) {
       offsetTime = 0;
     }
@@ -36567,7 +36569,7 @@
   var Methods$d = {
     fadeOutPage: FadeOutPage,
     start: Start,
-    typing: Typing,
+    typing: Typing$1,
     pause: Pause,
     resume: Resume,
     pauseTyping: PauseTyping,
@@ -78793,11 +78795,46 @@
 
   Phaser.Utils.Objects.GetValue;
 
+  var GenerateDefaultCreateGameObjectCallback$3 = function GenerateDefaultCreateGameObjectCallback(style) {
+    return function (scene, config) {
+      var gameObject = new TransitionImagePack(scene, config);
+      scene.add.existing(gameObject);
+      return gameObject;
+    };
+  };
+
+  var Cross$1 = function Cross(gameObject) {
+    var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+      key = _ref.key,
+      frame = _ref.frame,
+      duration = _ref.duration,
+      _ref$mode = _ref.mode,
+      mode = _ref$mode === void 0 ? 'fade' : _ref$mode,
+      _ref$wait = _ref.wait,
+      wait = _ref$wait === void 0 ? true : _ref$wait;
+    var commandExecutor = arguments.length > 2 ? arguments[2] : undefined;
+    key = key || gameObject.texture.key;
+
+    // Wait until transition complete
+    if (wait) {
+      commandExecutor.waitEvent(gameObject, 'complete');
+    }
+    var durationSave = gameObject.duration;
+    if (duration !== undefined) {
+      gameObject.setDuration(duration);
+    }
+    gameObject.transit(key, frame, mode);
+    gameObject.setDuration(durationSave);
+  };
+
   var GetValue$3 = Phaser.Utils.Objects.GetValue;
   var RegisterBackgroundType = function RegisterBackgroundType(commandExecutor, config) {
-    var createGameObjectCallback = GetValue$3(config, "creators.".concat(BG), DefaultCreateGameObjectCallback);
+    var createGameObjectCallback = GetValue$3(config, "creators.".concat(BG), undefined);
     if (createGameObjectCallback === false) {
       return;
+    } else if (createGameObjectCallback === undefined) {
+      GetValue$3(config, "styles.".concat(BG));
+      createGameObjectCallback = GenerateDefaultCreateGameObjectCallback$3();
     }
     commandExecutor.addGameObjectManager({
       name: BG,
@@ -78807,38 +78844,75 @@
       viewportCoordinate: true,
       defaultLayer: BGLayer,
       commands: {
-        cross: function cross(gameObject) {
-          var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
-            key = _ref.key,
-            frame = _ref.frame,
-            duration = _ref.duration,
-            _ref$mode = _ref.mode,
-            mode = _ref$mode === void 0 ? 'fade' : _ref$mode,
-            _ref$wait = _ref.wait,
-            wait = _ref$wait === void 0 ? true : _ref$wait;
-          var commandExecutor = arguments.length > 2 ? arguments[2] : undefined;
-          if (!key) {
-            key = gameObject.texture.key;
-          }
-
-          // Wait until transition complete
-          if (wait) {
-            commandExecutor.waitEvent(gameObject, 'complete');
-          }
-          var durationSave = gameObject.duration;
-          if (duration !== undefined) {
-            gameObject.setDuration(duration);
-          }
-          gameObject.transit(key, frame, mode);
-          gameObject.setDuration(durationSave);
-        }
+        cross: Cross$1
       }
     });
   };
-  var DefaultCreateGameObjectCallback = function DefaultCreateGameObjectCallback(scene, config) {
-    var gameObject = new TransitionImagePack(scene, config);
-    scene.add.existing(gameObject);
-    return gameObject;
+
+  var GenerateDefaultCreateGameObjectCallback$2 = function GenerateDefaultCreateGameObjectCallback() {
+    var style = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    var defaultKey = style.key;
+    var defaultFrameDelimiter = style.frameDelimiter || '-';
+    return function (scene, config) {
+      var _config$key = config.key,
+        key = _config$key === void 0 ? defaultKey : _config$key,
+        name = config.name,
+        expression = config.expression,
+        _config$frameDelimite = config.frameDelimiter,
+        frameDelimiter = _config$frameDelimite === void 0 ? defaultFrameDelimiter : _config$frameDelimite;
+      var isFrameNameMode = !!key;
+      if (isFrameNameMode) {
+        if (name && expression) {
+          config.frame = name + frameDelimiter + expression;
+        }
+      } else {
+        config.key = name;
+        config.frame = expression;
+      }
+      var gameObject = new TransitionImagePack(scene, config);
+      scene.add.existing(gameObject);
+      gameObject.isFrameNameMode = isFrameNameMode;
+      gameObject.frameDelimiter = frameDelimiter;
+      return gameObject;
+    };
+  };
+
+  var Cross = function Cross(gameObject) {
+    var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+      key = _ref.key,
+      frame = _ref.frame,
+      name = _ref.name,
+      expression = _ref.expression,
+      duration = _ref.duration,
+      _ref$mode = _ref.mode,
+      mode = _ref$mode === void 0 ? 'crossFade' : _ref$mode,
+      _ref$wait = _ref.wait,
+      wait = _ref$wait === void 0 ? true : _ref$wait;
+    var commandExecutor = arguments.length > 2 ? arguments[2] : undefined;
+    if (gameObject.isFrameNameMode) {
+      key = key || gameObject.texture.key;
+      if (name || expression) {
+        var frameDelimiter = gameObject.frameDelimiter;
+        var tokens = gameObject.frame.name.split(frameDelimiter);
+        name = name || tokens[0];
+        expression = expression || tokens[1];
+        frame = name + frameDelimiter + expression;
+      }
+    } else {
+      key = name || gameObject.texture.key;
+      frame = expression;
+    }
+
+    // Wait until transition complete
+    if (wait) {
+      commandExecutor.waitEvent(gameObject, 'complete');
+    }
+    var durationSave = gameObject.duration;
+    if (duration !== undefined) {
+      gameObject.setDuration(duration);
+    }
+    gameObject.transit(key, frame, mode);
+    gameObject.setDuration(durationSave);
   };
 
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
@@ -78858,123 +78932,19 @@
       viewportCoordinate: true,
       defaultLayer: GOLayer,
       commands: {
-        cross: function cross(gameObject) {
-          var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
-            key = _ref.key,
-            frame = _ref.frame,
-            name = _ref.name,
-            expression = _ref.expression,
-            duration = _ref.duration,
-            _ref$mode = _ref.mode,
-            mode = _ref$mode === void 0 ? 'crossFade' : _ref$mode,
-            _ref$wait = _ref.wait,
-            wait = _ref$wait === void 0 ? true : _ref$wait;
-          var commandExecutor = arguments.length > 2 ? arguments[2] : undefined;
-          if (gameObject.isFrameNameMode) {
-            if (!key) {
-              key = gameObject.texture.key;
-            }
-            if (name || expression) {
-              var frameDelimiter = gameObject.frameDelimiter;
-              var tokens = gameObject.frame.name.split(frameDelimiter);
-              name = name || tokens[0];
-              expression = expression || tokens[1];
-              frame = "".concat(name).concat(frameDelimiter).concat(expression);
-            }
-          } else {
-            key = name || gameObject.texture.key;
-            frame = expression;
-          }
-
-          // Wait until transition complete
-          if (wait) {
-            commandExecutor.waitEvent(gameObject, 'complete');
-          }
-          var durationSave = gameObject.duration;
-          if (duration !== undefined) {
-            gameObject.setDuration(duration);
-          }
-          gameObject.transit(key, frame, mode);
-          gameObject.setDuration(durationSave);
-        }
+        cross: Cross
       }
     });
   };
-  var GenerateDefaultCreateGameObjectCallback$2 = function GenerateDefaultCreateGameObjectCallback() {
-    var style = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-    var defaultKey = style.key;
-    var defaultFrameDelimiter = style.frameDelimiter || '-';
-    return function (scene, config) {
-      var _config$key = config.key,
-        key = _config$key === void 0 ? defaultKey : _config$key,
-        name = config.name,
-        expression = config.expression,
-        _config$frameDelimite = config.frameDelimiter,
-        frameDelimiter = _config$frameDelimite === void 0 ? defaultFrameDelimiter : _config$frameDelimite;
-      var isFrameNameMode = !!key;
-      if (isFrameNameMode) {
-        if (name && expression) {
-          config.frame = "".concat(name).concat(frameDelimiter).concat(expression);
-        }
-      } else {
-        config.key = name;
-        config.frame = expression;
-      }
-      var gameObject = new TransitionImagePack(scene, config);
-      scene.add.existing(gameObject);
-      gameObject.isFrameNameMode = isFrameNameMode;
-      gameObject.frameDelimiter = frameDelimiter;
-      return gameObject;
-    };
-  };
 
-  var GetValue$1 = Phaser.Utils.Objects.GetValue;
-  var RegisterTextboxType = function RegisterTextboxType(commandExecutor, config) {
-    var createGameObjectCallback = GetValue$1(config, "creators.".concat(TEXTBOX), undefined);
-    if (createGameObjectCallback === false) {
-      return;
-    } else if (createGameObjectCallback === undefined) {
-      var style = GetValue$1(config, "styles.".concat(TEXTBOX));
-      createGameObjectCallback = GenerateDefaultCreateGameObjectCallback$1(style);
-    }
-    commandExecutor.addGameObjectManager({
-      name: TEXTBOX,
-      createGameObject: createGameObjectCallback,
-      fade: 0,
-      // No fade-in when creating/destroying gameobject
-      viewportCoordinate: true,
-      defaultLayer: UILayer,
-      commands: {
-        typing: function typing(gameObject) {
-          var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
-            name = _ref.name,
-            text = _ref.text,
-            speed = _ref.speed;
-          var commandExecutor = arguments.length > 2 ? arguments[2] : undefined;
-          if (name) {
-            var title = gameObject.getElement('title').setText(name);
-            gameObject.setChildAlpha(title, 1);
-          } else {
-            var title = gameObject.getElement('title').setText('');
-            gameObject.setChildAlpha(title, 0);
-          }
-          gameObject.layout();
-
-          // Wait until typing complete
-          commandExecutor.waitEvent(gameObject, 'complete');
-          gameObject.start(text, speed);
-        }
-      }
-    });
-  };
   var GenerateDefaultCreateGameObjectCallback$1 = function GenerateDefaultCreateGameObjectCallback() {
     var style = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
     return function (scene) {
-      var _ref2 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
-        _ref2$width = _ref2.width,
-        width = _ref2$width === void 0 ? 0 : _ref2$width,
-        _ref2$height = _ref2.height,
-        height = _ref2$height === void 0 ? 0 : _ref2$height;
+      var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+        _ref$width = _ref.width,
+        width = _ref$width === void 0 ? 0 : _ref$width,
+        _ref$height = _ref.height,
+        height = _ref$height === void 0 ? 0 : _ref$height;
       var wrapWidth = Math.max(0, width - 20);
       SetValue(style, 'text.fixedWidth', width);
       SetValue(style, 'text.fixedHeight', height);
@@ -79013,6 +78983,109 @@
     };
   };
 
+  var Typing = function Typing(gameObject) {
+    var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+      name = _ref.name,
+      text = _ref.text,
+      speed = _ref.speed;
+    var commandExecutor = arguments.length > 2 ? arguments[2] : undefined;
+    if (name) {
+      var title = gameObject.getElement('title').setText(name);
+      gameObject.setChildAlpha(title, 1);
+    } else {
+      var title = gameObject.getElement('title').setText('');
+      gameObject.setChildAlpha(title, 0);
+    }
+    gameObject.layout();
+
+    // Wait until typing complete
+    commandExecutor.waitEvent(gameObject, 'complete');
+    gameObject.start(text, speed);
+  };
+
+  var GetValue$1 = Phaser.Utils.Objects.GetValue;
+  var RegisterTextboxType = function RegisterTextboxType(commandExecutor, config) {
+    var createGameObjectCallback = GetValue$1(config, "creators.".concat(TEXTBOX), undefined);
+    if (createGameObjectCallback === false) {
+      return;
+    } else if (createGameObjectCallback === undefined) {
+      var style = GetValue$1(config, "styles.".concat(TEXTBOX));
+      createGameObjectCallback = GenerateDefaultCreateGameObjectCallback$1(style);
+    }
+    commandExecutor.addGameObjectManager({
+      name: TEXTBOX,
+      createGameObject: createGameObjectCallback,
+      fade: 0,
+      // No fade-in when creating/destroying gameobject
+      viewportCoordinate: true,
+      defaultLayer: UILayer,
+      commands: {
+        typing: Typing
+      }
+    });
+  };
+
+  var GenerateDefaultCreateGameObjectCallback = function GenerateDefaultCreateGameObjectCallback(style) {
+    return function (scene) {
+      var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+        _ref$width = _ref.width,
+        width = _ref$width === void 0 ? 0 : _ref$width,
+        _ref$height = _ref.height,
+        height = _ref$height === void 0 ? 0 : _ref$height;
+      var dialog = new ConfirmDialog(scene, style);
+      dialog.setMinSize(width, height).setVisible(false);
+      scene.add.existing(dialog);
+      return dialog;
+    };
+  };
+
+  var Choice = function Choice(gameObject) {
+    var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+      _ref$title = _ref.title,
+      title = _ref$title === void 0 ? null : _ref$title,
+      _ref$content = _ref.content,
+      content = _ref$content === void 0 ? null : _ref$content,
+      option1 = _ref.option1,
+      option2 = _ref.option2,
+      option3 = _ref.option3,
+      _ref$resultKey = _ref.resultKey,
+      resultKey = _ref$resultKey === void 0 ? 'choiceIndex' : _ref$resultKey;
+    var commandExecutor = arguments.length > 2 ? arguments[2] : undefined;
+    var eventSheetManager = arguments.length > 3 ? arguments[3] : undefined;
+    var choices = [];
+    if (option1) {
+      choices.push({
+        text: option1,
+        value: 1
+      });
+    }
+    if (option2) {
+      choices.push({
+        text: option2,
+        value: 2
+      });
+    }
+    if (option3) {
+      choices.push({
+        text: option3,
+        value: 3
+      });
+    }
+    var displayContent = {
+      title: title,
+      content: content,
+      choices: choices
+    };
+    gameObject.setVisible(true).resetDisplayContent(displayContent).layout();
+    commandExecutor.waitEvent(gameObject, 'complete');
+    gameObject.modalPromise({
+      destroy: false
+    }).then(function (data) {
+      eventSheetManager.setData(resultKey, data.value);
+      gameObject.emit('complete');
+    });
+  };
+
   var GetValue = Phaser.Utils.Objects.GetValue;
   var RegisterChoiceDialogType = function RegisterChoiceDialogType(commandExecutor, config) {
     var createGameObjectCallback = GetValue(config, "creators.".concat(CHOICE), undefined);
@@ -79030,67 +79103,9 @@
       viewportCoordinate: true,
       defaultLayer: UILayer,
       commands: {
-        choice: function choice(gameObject) {
-          var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
-            _ref$title = _ref.title,
-            title = _ref$title === void 0 ? null : _ref$title,
-            _ref$content = _ref.content,
-            content = _ref$content === void 0 ? null : _ref$content,
-            option1 = _ref.option1,
-            option2 = _ref.option2,
-            option3 = _ref.option3,
-            _ref$resultKey = _ref.resultKey,
-            resultKey = _ref$resultKey === void 0 ? 'choiceIndex' : _ref$resultKey;
-          var commandExecutor = arguments.length > 2 ? arguments[2] : undefined;
-          var eventSheetManager = arguments.length > 3 ? arguments[3] : undefined;
-          var choices = [];
-          if (option1) {
-            choices.push({
-              text: option1,
-              value: 1
-            });
-          }
-          if (option2) {
-            choices.push({
-              text: option2,
-              value: 2
-            });
-          }
-          if (option3) {
-            choices.push({
-              text: option3,
-              value: 3
-            });
-          }
-          var displayContent = {
-            title: title,
-            content: content,
-            choices: choices
-          };
-          gameObject.setVisible(true).resetDisplayContent(displayContent).layout();
-          commandExecutor.waitEvent(gameObject, 'complete');
-          gameObject.modalPromise({
-            destroy: false
-          }).then(function (data) {
-            eventSheetManager.setData(resultKey, data.value);
-            gameObject.emit('complete');
-          });
-        }
+        choice: Choice
       }
     });
-  };
-  var GenerateDefaultCreateGameObjectCallback = function GenerateDefaultCreateGameObjectCallback(style) {
-    return function (scene) {
-      var _ref2 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
-        _ref2$width = _ref2.width,
-        width = _ref2$width === void 0 ? 0 : _ref2$width,
-        _ref2$height = _ref2.height,
-        height = _ref2$height === void 0 ? 0 : _ref2$height;
-      var dialog = new ConfirmDialog(scene, style);
-      dialog.setMinSize(width, height).setVisible(false);
-      scene.add.existing(dialog);
-      return dialog;
-    };
   };
 
   var RegisterHandlers = [RegisterSpriteType, RegisterTextboxType, RegisterBackgroundType, RegisterChoiceDialogType];
