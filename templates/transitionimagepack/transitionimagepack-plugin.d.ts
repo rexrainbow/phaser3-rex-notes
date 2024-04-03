@@ -3,7 +3,6 @@ import Creator from './Creator';
 
 export default class extends Phaser.Plugins.BasePlugin { }
 
-import 'phaser';
 declare module 'phaser' {
     namespace GameObjects {
         interface GameObjectFactory {
