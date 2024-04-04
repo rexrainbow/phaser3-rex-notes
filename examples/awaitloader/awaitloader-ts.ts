@@ -1,5 +1,5 @@
 import 'phaser';
-import AwaitLoader from '../../plugins/awaitloader';
+import AwaitLoaderPlugin from '../../plugins/awaitloader-plugin';
 
 class Demo extends Phaser.Scene {
     print: Phaser.GameObjects.Text;
@@ -13,12 +13,12 @@ class Demo extends Phaser.Scene {
     preload() {
         var textObject = this.add.text(0, 0, 'Preload\n');
 
-        AwaitLoader.call(this.load, function (successCallback: Function, failureCallback: Function) {
+        this.load.rexAwait(function (successCallback: Function, failureCallback: Function) {
             textObject.text += 'Loader1\n';
             setTimeout(successCallback, 1000);
         })
 
-        AwaitLoader.call(this.load, function (successCallback: Function, failureCallback: Function) {
+        this.load.rexAwait(function (successCallback: Function, failureCallback: Function) {
             textObject.text += 'Loader2\n';
             setTimeout(successCallback, 2000);
         })
@@ -43,7 +43,14 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexAwaitLoader',
+            plugin: AwaitLoaderPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

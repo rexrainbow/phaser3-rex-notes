@@ -8,7 +8,7 @@ class WebFontLoaderPlugin extends Phaser.Plugins.BasePlugin {
     }
 
     addToScene(scene) {
-        scene.sys.load['rexWebFont'] = LoaderCallback;
+        scene.sys.load.rexWebFont = LoaderCallback;
     }
 }
 

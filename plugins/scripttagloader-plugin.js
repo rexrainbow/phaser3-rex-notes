@@ -9,7 +9,7 @@ class ScriptTagLoaderPlugin extends Phaser.Plugins.BasePlugin {
     }
 
     addToScene(scene) {
-        scene.sys.load['rexScriptTag'] = LoaderCallback;
+        scene.sys.load.rexScriptTag = LoaderCallback;
     }
 }
 
