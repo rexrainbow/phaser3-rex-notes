@@ -112,6 +112,12 @@ declare namespace TextPlayer {
 declare class TextPlayer extends DynamicText {
     constructor(
         scene: Phaser.Scene,
+        x?: number, y?: number,
+        fixedWidth?: number, fixedHeight?: number,
+        config?: TextPlayer.IConfig
+    );
+    constructor(
+        scene: Phaser.Scene,
         config?: TextPlayer.IConfig
     );
 

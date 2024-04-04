@@ -1,4 +1,4 @@
-import Factory from './gameobjects/dynamictext/textplayer/Factory';
+import Factory from './gameobjects/dynamictext/textplayer/Factory.js';
 import Creator from './gameobjects/dynamictext/textplayer/Creator.js';
 import TextPlayer from './gameobjects/dynamictext/textplayer/TextPlayer.js';
 import SetValue from './utils/object/SetValue.js';
