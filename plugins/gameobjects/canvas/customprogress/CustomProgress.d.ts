@@ -34,13 +34,13 @@ declare namespace CustomProgress {
 declare class CustomProgress extends Canvas {
     constructor(
         scene: Phaser.Scene,
-        x?: number, y?: number,
-        width?: number, height?: number,
         config?: CustomProgress.IConfig
     );
 
     constructor(
         scene: Phaser.Scene,
+        x?: number, y?: number,
+        width?: number, height?: number,
         config?: CustomProgress.IConfig
     );
 
