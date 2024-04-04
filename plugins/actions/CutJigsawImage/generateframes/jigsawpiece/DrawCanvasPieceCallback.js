@@ -27,22 +27,25 @@ var DrawCanvasPieceCallback = function (
 
     context.clip();
 
+    var dx = 0,
+        dy = 0,
+        dWidth = width,
+        dHeight = height;
     if (sx < 0) {
+        dx -= sx;
+        dWidth += sx;
         sx = 0;
     }
-
     if (sy < 0) {
+        dy -= sy;
+        dHeight += sy;
         sy = 0;
     }
 
     context.drawImage(
         image,  // image
-
-        // sx, sy, sWidth, sHeight
-        sx, sy, width, height,
-
-        // dx, dy, dWidth, dHeight
-        0, 0, width, height
+        sx, sy, dWidth, dHeight,
+        dx, dy, dWidth, dHeight
     );
 
     // context.restore();
