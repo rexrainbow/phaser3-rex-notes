@@ -255,7 +255,7 @@
     _createClass(ScriptTagLoaderPlugin, [{
       key: "addToScene",
       value: function addToScene(scene) {
-        scene.sys.load['rexScriptTag'] = LoaderCallback;
+        scene.sys.load.rexScriptTag = LoaderCallback;
       }
     }]);
     return ScriptTagLoaderPlugin;

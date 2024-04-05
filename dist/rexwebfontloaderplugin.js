@@ -304,7 +304,7 @@
     _createClass(WebFontLoaderPlugin, [{
       key: "addToScene",
       value: function addToScene(scene) {
-        scene.sys.load['rexWebFont'] = loaderCallback;
+        scene.sys.load.rexWebFont = loaderCallback;
       }
     }]);
     return WebFontLoaderPlugin;

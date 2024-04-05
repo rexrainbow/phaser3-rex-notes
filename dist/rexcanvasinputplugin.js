@@ -6900,7 +6900,7 @@
   };
   Object.assign(CanvasInput.prototype, SetTextOXYMethods);
 
-  function CanvasInputFactory (x, y, width, height, config) {
+  function Factory (x, y, width, height, config) {
     var gameObject = new CanvasInput(this.scene, x, y, width, height, config);
     this.scene.add.existing(gameObject);
     return gameObject;
@@ -6908,7 +6908,7 @@
 
   var GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
   var BuildGameObject = Phaser.GameObjects.BuildGameObject;
-  function CanvasInputCreator (config, addToScene) {
+  function Creator (config, addToScene) {
     if (config === undefined) {
       config = {};
     }
@@ -6930,7 +6930,7 @@
       _this = _callSuper(this, CanvasInputPlugin, [pluginManager]);
 
       //  Register our new Game Object type
-      pluginManager.registerGameObject('rexCanvasInput', CanvasInputFactory, CanvasInputCreator);
+      pluginManager.registerGameObject('rexCanvasInput', Factory, Creator);
       return _this;
     }
     _createClass(CanvasInputPlugin, [{

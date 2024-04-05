@@ -8088,24 +8088,35 @@
   var IsPointerInBounds = function IsPointerInBounds(gameObject, pointer, preTest, postTest) {
     var mainCamera = gameObject.scene.sys.cameras.main,
       worldXY;
+    var useScreenXY = gameObject.scrollFactorX === 0 && gameObject.scrollFactorY === 0;
     if (pointer) {
-      worldXY = GetPointerWorldXY(pointer, mainCamera, true);
-      if (!worldXY) {
-        return false;
+      if (useScreenXY) {
+        return IsPointInBounds(gameObject, pointer.x, pointer.y, preTest, postTest);
+      } else {
+        worldXY = GetPointerWorldXY(pointer, mainCamera, true);
+        if (!worldXY) {
+          return false;
+        }
+        return IsPointInBounds(gameObject, worldXY.x, worldXY.y, preTest, postTest);
       }
-      return IsPointInBounds(gameObject, worldXY.x, worldXY.y, preTest, postTest);
     } else {
       var inputManager = gameObject.scene.input.manager;
       var pointersTotal = inputManager.pointersTotal;
       var pointers = inputManager.pointers;
       for (var i = 0; i < pointersTotal; i++) {
         pointer = pointers[i];
-        worldXY = GetPointerWorldXY(pointer, mainCamera, true);
-        if (!worldXY) {
-          continue;
-        }
-        if (IsPointInBounds(gameObject, worldXY.x, worldXY.y, preTest, postTest)) {
-          return true;
+        if (useScreenXY) {
+          if (IsPointInBounds(gameObject, pointer.x, pointer.y, preTest, postTest)) {
+            return true;
+          }
+        } else {
+          worldXY = GetPointerWorldXY(pointer, mainCamera, true);
+          if (!worldXY) {
+            continue;
+          }
+          if (IsPointInBounds(gameObject, worldXY.x, worldXY.y, preTest, postTest)) {
+            return true;
+          }
         }
       }
       return false;
@@ -16176,29 +16187,7 @@
   }(PhaserText);
   Object.assign(StatesText.prototype, HelperMethods);
 
-  /**
-   * @author       Richard Davey <rich@photonstorm.com>
-   * @copyright    2019 Photon Storm Ltd.
-   * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
-   */
-
   var Utils$1 = Phaser.Renderer.WebGL.Utils;
-
-  /**
-   * Renders this Game Object with the WebGL Renderer to the given Camera.
-   * The object will not render if any of its renderFlags are set or it is being actively filtered out by the Camera.
-   * This method should not be called directly. It is a utility function of the Render module.
-   *
-   * @method Phaser.GameObjects.Text#renderWebGL
-   * @since 3.0.0
-   * @private
-   *
-   * @param {Phaser.Renderer.WebGL.WebGLRenderer} renderer - A reference to the current active WebGL renderer.
-   * @param {Phaser.GameObjects.Text} src - The Game Object being rendered in this call.
-   * @param {number} interpolationPercentage - Reserved for future use and custom pipelines.
-   * @param {Phaser.Cameras.Scene2D.Camera} camera - The Camera that is rendering the Game Object.
-   * @param {Phaser.GameObjects.Components.TransformMatrix} parentMatrix - This transform matrix is defined if the game object is nested
-   */
   var WebGLRenderer$2 = function WebGLRenderer(renderer, src, camera, parentMatrix) {
     if (src.width === 0 || src.height === 0) {
       return;
@@ -16215,27 +16204,6 @@
     renderer.pipelines.postBatch(src);
   };
 
-  /**
-   * @author       Richard Davey <rich@photonstorm.com>
-   * @copyright    2019 Photon Storm Ltd.
-   * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
-   */
-
-  /**
-   * Renders this Game Object with the Canvas Renderer to the given Camera.
-   * The object will not render if any of its renderFlags are set or it is being actively filtered out by the Camera.
-   * This method should not be called directly. It is a utility function of the Render module.
-   *
-   * @method Phaser.GameObjects.Text#renderCanvas
-   * @since 3.0.0
-   * @private
-   *
-   * @param {Phaser.Renderer.Canvas.CanvasRenderer} renderer - A reference to the current active Canvas renderer.
-   * @param {Phaser.GameObjects.Text} src - The Game Object being rendered in this call.
-   * @param {number} interpolationPercentage - Reserved for future use and custom pipelines.
-   * @param {Phaser.Cameras.Scene2D.Camera} camera - The Camera that is rendering the Game Object.
-   * @param {Phaser.GameObjects.Components.TransformMatrix} parentMatrix - This transform matrix is defined if the game object is nested
-   */
   var CanvasRenderer$2 = function CanvasRenderer(renderer, src, camera, parentMatrix) {
     if (src.width === 0 || src.height === 0) {
       return;

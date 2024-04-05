@@ -914,11 +914,9 @@
     if (addToScene !== undefined) {
       config.add = addToScene;
     }
-    var x = GetAdvancedValue$2(config, 'x', 0);
-    var y = GetAdvancedValue$2(config, 'y', 0);
     var width = GetAdvancedValue$2(config, 'width', 32);
     var height = GetAdvancedValue$2(config, 'height', 32);
-    var gameObject = new RenderTexture$1(this.scene, x, y, width, height, config);
+    var gameObject = new RenderTexture$1(this.scene, 0, 0, width, height, config);
     BuildGameObject$4(this.scene, gameObject, config);
     return gameObject;
   }
