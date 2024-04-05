@@ -6,7 +6,7 @@ import QuadRenderTextureFactory from './gameobjects/mesh/quad/rendertexture/Fact
 import QuadRenderTextureCreator from './gameobjects/mesh/quad/rendertexture/Creator.js';
 import QuadRenderTexture from './gameobjects/mesh/quad/rendertexture/RenderTexture.js';
 
-import SkewImageFactory from './gameobjects/mesh/quad/skewimage/Factory';
+import SkewImageFactory from './gameobjects/mesh/quad/skewimage/Factory.js';
 import SkewImageCreator from './gameobjects/mesh/quad/skewimage/Creator.js';
 import SkewImage from './gameobjects/mesh/quad/skewimage/SkewImage.js';
 

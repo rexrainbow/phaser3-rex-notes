@@ -26,6 +26,11 @@ declare class RenderTexture extends Image {
         config?: RenderTexture.IConfig
     )
 
+    constructor(
+        scene: Phaser.Scene,
+        config?: RenderTexture.IConfig
+    )
+
     readonly rt: Phaser.GameObjects.RenderTexture;
 
     snapshot(
