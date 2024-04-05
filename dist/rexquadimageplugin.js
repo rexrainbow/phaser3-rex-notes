@@ -944,11 +944,9 @@
     if (addToScene !== undefined) {
       config.add = addToScene;
     }
-    var x = GetAdvancedValue$2(config, 'x', 0);
-    var y = GetAdvancedValue$2(config, 'y', 0);
     var width = GetAdvancedValue$2(config, 'width', 32);
     var height = GetAdvancedValue$2(config, 'height', 32);
-    var gameObject = new RenderTexture(this.scene, x, y, width, height, config);
+    var gameObject = new RenderTexture(this.scene, 0, 0, width, height, config);
     BuildGameObject$2(this.scene, gameObject, config);
     return gameObject;
   }
@@ -1154,11 +1152,9 @@
     if (addToScene !== undefined) {
       config.add = addToScene;
     }
-    var x = GetAdvancedValue(config, 'x', 0);
-    var y = GetAdvancedValue(config, 'y', 0);
     var width = GetAdvancedValue(config, 'width', 32);
     var height = GetAdvancedValue(config, 'height', 32);
-    var gameObject = new SkewRenderTexture(this.scene, x, y, width, height);
+    var gameObject = new SkewRenderTexture(this.scene, 0, 0, width, height);
     BuildGameObject(this.scene, gameObject, config);
     return gameObject;
   }
