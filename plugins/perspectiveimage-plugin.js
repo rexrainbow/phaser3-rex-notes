@@ -18,7 +18,7 @@ import PerspectiveCarouselFactory from './gameobjects/mesh/perspective/carousel/
 import PerspectiveCarouselCreator from './gameobjects/mesh/perspective/carousel/Creator.js';
 import PerspectiveCarousel from './gameobjects/mesh/perspective/carousel/Carousel.js';
 
-import PerspectiveImageCarouselFactory from './gameobjects/mesh/perspective/imagecarousel/Factory';
+import PerspectiveImageCarouselFactory from './gameobjects/mesh/perspective/imagecarousel/Factory.js';
 import PerspectiveImageCarouselCreator from './gameobjects/mesh/perspective/imagecarousel/Creator.js';
 import PerspectiveImageCarousel from './gameobjects/mesh/perspective/imagecarousel/ImageCarousel.js';
 
