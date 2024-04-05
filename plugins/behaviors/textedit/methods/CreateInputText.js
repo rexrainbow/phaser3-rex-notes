@@ -30,8 +30,13 @@ var CreateInputText = function (text, config) {
         config.align = 'right';
     }
 
-    // config.paddingLeft = 0;
-    // config.paddingRight = 0;
+    var padding = text.padding;
+    if (padding.left > 0) {
+        config.paddingLeft = `${padding.left}px`;
+    }
+    if (padding.right > 0) {
+        config.paddingRight = `${padding.right}px`;
+    }
     // config.paddingTop = 0;
     // config.paddingBottom = 0;
     // var valign = GetVAlign(style);
