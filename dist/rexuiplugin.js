@@ -38298,6 +38298,8 @@
       var height = GetValue$20(config, 'height', frontImage.height);
       _this = _callSuper(this, TransitionImage, [scene, x, y, width, height]);
       _this.type = 'rexTransitionImage';
+      _this._flipX = false;
+      _this._flipY = false;
       backImage.setVisible(false);
       _this.addMultiple([backImage, frontImage]);
       _this.backImage = backImage;
@@ -38375,6 +38377,25 @@
         return this.nextImage.frame;
       }
     }, {
+      key: "tint",
+      get: function get() {
+        return this._tint;
+      },
+      set: function set(value) {
+        if (this._tint === value) {
+          return;
+        }
+        this._tint = value;
+        this.backImage.setTint(value);
+        this.frontImage.setTint(value);
+      }
+    }, {
+      key: "setTint",
+      value: function setTint(value) {
+        this.tint = value;
+        return this;
+      }
+    }, {
       key: "flipX",
       get: function get() {
         return this._flipX;
@@ -38388,6 +38409,18 @@
         this.frontImage.setFlipX(value);
       }
     }, {
+      key: "setFlipX",
+      value: function setFlipX(value) {
+        this.flipX = value;
+        return this;
+      }
+    }, {
+      key: "toggleFlipX",
+      value: function toggleFlipX() {
+        this.flipX = !this.flipX;
+        return this;
+      }
+    }, {
       key: "flipY",
       get: function get() {
         return this._flipY;
@@ -38399,6 +38432,25 @@
         this._flipY = value;
         this.backImage.setFlipY(value);
         this.frontImage.setFlipY(value);
+      }
+    }, {
+      key: "setFlipY",
+      value: function setFlipY(value) {
+        this.flipY = value;
+        return this;
+      }
+    }, {
+      key: "toggleFlipY",
+      value: function toggleFlipY() {
+        this.flipY = !this.flipY;
+        return this;
+      }
+    }, {
+      key: "setFlip",
+      value: function setFlip(flipX, flipY) {
+        this.flipX = flipX;
+        this.flipY = flipY;
+        return this;
       }
     }, {
       key: "t",

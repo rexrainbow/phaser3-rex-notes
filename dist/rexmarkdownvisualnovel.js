@@ -54477,6 +54477,8 @@
       var height = GetValue$1S(config, 'height', frontImage.height);
       _this = _callSuper(this, TransitionImage, [scene, x, y, width, height]);
       _this.type = 'rexTransitionImage';
+      _this._flipX = false;
+      _this._flipY = false;
       backImage.setVisible(false);
       _this.addMultiple([backImage, frontImage]);
       _this.backImage = backImage;
@@ -54554,6 +54556,25 @@
         return this.nextImage.frame;
       }
     }, {
+      key: "tint",
+      get: function get() {
+        return this._tint;
+      },
+      set: function set(value) {
+        if (this._tint === value) {
+          return;
+        }
+        this._tint = value;
+        this.backImage.setTint(value);
+        this.frontImage.setTint(value);
+      }
+    }, {
+      key: "setTint",
+      value: function setTint(value) {
+        this.tint = value;
+        return this;
+      }
+    }, {
       key: "flipX",
       get: function get() {
         return this._flipX;
@@ -54567,6 +54588,18 @@
         this.frontImage.setFlipX(value);
       }
     }, {
+      key: "setFlipX",
+      value: function setFlipX(value) {
+        this.flipX = value;
+        return this;
+      }
+    }, {
+      key: "toggleFlipX",
+      value: function toggleFlipX() {
+        this.flipX = !this.flipX;
+        return this;
+      }
+    }, {
       key: "flipY",
       get: function get() {
         return this._flipY;
@@ -54578,6 +54611,25 @@
         this._flipY = value;
         this.backImage.setFlipY(value);
         this.frontImage.setFlipY(value);
+      }
+    }, {
+      key: "setFlipY",
+      value: function setFlipY(value) {
+        this.flipY = value;
+        return this;
+      }
+    }, {
+      key: "toggleFlipY",
+      value: function toggleFlipY() {
+        this.flipY = !this.flipY;
+        return this;
+      }
+    }, {
+      key: "setFlip",
+      value: function setFlip(flipX, flipY) {
+        this.flipX = flipX;
+        this.flipY = flipY;
+        return this;
       }
     }, {
       key: "t",
@@ -78851,32 +78903,24 @@
     gameObject.setDuration(durationSave);
   };
 
-  var Focus = function Focus(gameObject) {
+  var Focus$1 = function Focus(gameObject) {
     var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
-      _ref$bringToTop = _ref.bringToTop,
-      bringToTop = _ref$bringToTop === void 0 ? true : _ref$bringToTop,
       _ref$fadeOutOthers = _ref.fadeOutOthers,
-      fadeOutOthers = _ref$fadeOutOthers === void 0 ? 0.5 : _ref$fadeOutOthers,
-      _ref$duration = _ref.duration,
-      duration = _ref$duration === void 0 ? 300 : _ref$duration,
-      _ref$wait = _ref.wait,
-      wait = _ref$wait === void 0 ? true : _ref$wait;
+      fadeOutOthers = _ref$fadeOutOthers === void 0 ? 0x000000 : _ref$fadeOutOthers;
     var commandExecutor = arguments.length > 2 ? arguments[2] : undefined;
     var eventSheetManager = arguments.length > 3 ? arguments[3] : undefined;
-    if (bringToTop) {
-      gameObject.bringMeToTop();
-    }
-    if (typeof fadeOutOthers === 'number') {
-      if (wait) {
-        commandExecutor.setWaitEventFlag();
-      }
-      commandExecutor.easeGOProperty({
-        id: '!' + gameObject.name,
-        alpha: fadeOutOthers,
-        duration: duration,
-        wait: wait
-      }, eventSheetManager);
-    }
+    gameObject.bringMeToTop();
+    commandExecutor.setGOProperty({
+      id: '!' + gameObject.name,
+      tint: fadeOutOthers
+    }, eventSheetManager);
+  };
+
+  var Focus = function Focus(gameObject, config, commandExecutor, eventSheetManager, eventSheet) {
+    commandExecutor.setGOProperty({
+      goType: SPRITE,
+      tint: 0xffffff
+    }, eventSheetManager);
   };
 
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
@@ -78897,7 +78941,8 @@
       defaultLayer: GOLayer,
       commands: {
         cross: Cross,
-        focus: Focus
+        focus: Focus$1,
+        unfocus: Focus
       }
     });
   };
