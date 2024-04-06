@@ -1,44 +1,7 @@
 export default {
-    addGameObjectManager(config) {
-        // Register GameObjectManager
-        var sys = this.sys;
-        sys.addGameObjectManager(config);
-
-        var { name, defaultLayer, commands = {} } = config;
-
-        // Add custom commands
-        sys.getGameObjectManager(name).commands = commands;
-
-        // Add createGameObject command
-        var createGameObjectCallback = function (config, eventSheetManager) {
-            var { id, layer = defaultLayer } = config;
-            delete config.id;
-            delete config.layer;
-
-            sys.createGameObject(name, id, config);
-            // Execute next command
-
-            if (layer) {
-                var layerManager = sys.layerManager;
-                if (layerManager) {
-                    var gameObject = sys.getGameObject(name, id);
-                    layerManager.addToLayer(layer, gameObject);
-                }
-            }
-        }
-        this.addCommand(name, createGameObjectCallback, null);
-
-        return this;
-    },
-
-    addGameObjectCommand(goType, commandName, callback) {
-        this.sys.getGameObjectManager(goType).commands[commandName] = callback;
-        return this;
-    },
-
-    _setGOProperty(
+    setGOProperty(
         config,
-        eventSheetManager, eventsheet
+        eventSheetManager, eventSheet
     ) {
 
         var { id, goType } = config;
@@ -59,9 +22,9 @@ export default {
         // Execute next command
     },
 
-    _easeGOProperty(
+    easeGOProperty(
         config,
-        eventSheetManager, eventsheet
+        eventSheetManager, eventSheet
     ) {
 
         var { id, goType, duration, ease, repeat, yoyo, wait = true } = config;
@@ -96,9 +59,9 @@ export default {
         // Execute next command
     },
 
-    _destroyGO(
+    destroyGO(
         config,
-        eventSheetManager, eventsheet
+        eventSheetManager, eventSheet
     ) {
 
         var { id, goType, wait = false } = config;
@@ -118,7 +81,7 @@ export default {
 
     _runGOMethod(
         config,
-        eventSheetManager, eventsheet
+        eventSheetManager, eventSheet
     ) {
 
         var { id, goType } = config;

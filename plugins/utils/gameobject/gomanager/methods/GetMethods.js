@@ -34,8 +34,16 @@ export default {
         }
     },
 
-    getFitst() {
+    getFitst(excluded) {
+        if (excluded && (excluded.charAt(0) === '!')) {
+            excluded = excluded.substring(1);
+        }
+
         for (var name in this.bobs) {
+            if (excluded && (excluded === name)) {
+                continue;
+            }
+
             return this.bobs[name];
         }
         return null;

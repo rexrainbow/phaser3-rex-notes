@@ -1,6 +1,6 @@
 import StringToValues from '../../../../utils/string/StringToValues.js';
 
-var DefaultHandler = function (name, config, eventSheetManager, eventsheet) {
+var DefaultHandler = function (name, config, eventSheetManager, eventSheet) {
     var tokens = name.split('.');
 
     var gameObjectID = tokens[0];
@@ -19,17 +19,17 @@ var DefaultHandler = function (name, config, eventSheetManager, eventsheet) {
     var commandName = tokens[1];
     switch (tokens[1]) {
         case 'set':
-            return this._setGOProperty(config, eventSheetManager, eventsheet);
+            return this.setGOProperty(config, eventSheetManager, eventSheet);
 
         case 'to':
-            return this._easeGOProperty(config, eventSheetManager, eventsheet);
+            return this.easeGOProperty(config, eventSheetManager, eventSheet);
 
         case 'yoyo':
             config.yoyo = true;
-            return this._easeGOProperty(config, eventSheetManager, eventsheet);
+            return this.easeGOProperty(config, eventSheetManager, eventSheet);
 
         case 'destroy':
-            return this._destroyGO(config, eventSheetManager, eventsheet);
+            return this.destroyGO(config, eventSheetManager, eventSheet);
 
         default:
             var gameObjectManager = this.sys.getGameObjectManager(config.goType, config.id);
@@ -45,7 +45,7 @@ var DefaultHandler = function (name, config, eventSheetManager, eventsheet) {
                     }
                     var self = this;
                     gameObjects.forEach(function (gameObject) {
-                        command(gameObject, config, self, eventSheetManager, eventsheet);
+                        command(gameObject, config, self, eventSheetManager, eventSheet);
                     })
 
                     return (this.hasAnyWaitEvent) ? this.sys : undefined;
@@ -59,7 +59,7 @@ var DefaultHandler = function (name, config, eventSheetManager, eventsheet) {
             }
             config.methodName = commandName;
             config.parameters = (parameters) ? StringToValues(parameters) : [];
-            return this._runGOMethod(config, eventSheetManager, eventsheet);
+            return this._runGOMethod(config, eventSheetManager, eventSheet);
 
     }
 }

@@ -63,10 +63,27 @@ declare class CommandExecutor {
         eventSheetManager: EventSheetManager
     ): void | Phaser.Events.EventEmitter;
 
+    setGOProperty(
+        config: { [name: string]: any },
+        eventSheetManager: EventSheetManager,
+    ): CommandExecutor.ImmediatelyCommandCallbackType;
+
+    easeGOProperty(
+        config: { [name: string]: any },
+        eventSheetManager: EventSheetManager,
+    ): CommandExecutor.ImmediatelyCommandCallbackType;
+
+    destroyGO(
+        config: { id?: string, goType?: string, wait?: boolean },
+        eventSheetManager: EventSheetManager,
+    ): CommandExecutor.ImmediatelyCommandCallbackType;
+
     waitEvent(
         eventEmitter: Phaser.Events.EventEmitter,
         eventName: string
     ): this;
+
+    setWaitEventFlag(): this;
 
     set: CommandExecutor.ImmediatelyCommandCallbackType;
 

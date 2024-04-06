@@ -119,10 +119,15 @@ CharacterC.to
 // Wait until tween complete
 
 // Ease all SPRITE game objects excluding CharacterA
-!CharacterA.to
-  alpha=0.5
-  duration=300
+// !CharacterA.to
+//   alpha=0.5
+//   duration=300
 // Wait until tween complete
+
+CharacterA.focus
+//  alpha=0.5
+//  duration=300
+// Wait until fade out complete
 
 ```Dialog.typing, name=Me Me Me, speed=100
 Line0...

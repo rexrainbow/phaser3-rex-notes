@@ -1,6 +1,7 @@
 import AddCommand from './AddCommand.js';
 import EventSheetManagerMethods from './EventSheetManagerMethods.js';
 import WaitMethods from './WaitMethods.js';
+import GameObjectManagerMethods from './GameObjectManagerMethods.js';
 import GameObjectMethods from './GameObjectMethods.js';
 import BackgroundMusicMethods from './musicmethods/BackgroundMusicMethods.js';
 import BackgroundMusic2Methods from './musicmethods/BackgroundMusic2Methods.js';
@@ -19,6 +20,7 @@ Object.assign(
     Methods,
     EventSheetManagerMethods,
     WaitMethods,
+    GameObjectManagerMethods,
     GameObjectMethods,
     BackgroundMusicMethods,
     BackgroundMusic2Methods,
