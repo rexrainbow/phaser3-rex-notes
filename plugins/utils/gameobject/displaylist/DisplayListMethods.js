@@ -29,7 +29,7 @@ export default {
             return this;
         }
 
-        ArrayUtils.MoveBelow(list, gameObject, this);
+        ArrayUtils.MoveBelow(list, this, gameObject);
 
         return this;
     },
@@ -40,7 +40,7 @@ export default {
             return this;
         }
 
-        ArrayUtils.MoveAbove(list, gameObject, this);
+        ArrayUtils.MoveAbove(list, this, gameObject);
 
         return this;
     },
