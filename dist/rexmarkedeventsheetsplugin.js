@@ -17048,8 +17048,14 @@
         return out;
       }
     },
-    getFitst: function getFitst() {
+    getFitst: function getFitst(excluded) {
+      if (excluded && excluded.charAt(0) === '!') {
+        excluded = excluded.substring(1);
+      }
       for (var name in this.bobs) {
+        if (excluded && excluded === name) {
+          continue;
+        }
         return this.bobs[name];
       }
       return null;
@@ -22512,7 +22518,7 @@
     this.managersScene = undefined;
   };
 
-  var GameObjectManagerMethods = {
+  var GameObjectManagerMethods$1 = {
     addGameObjectManager: function addGameObjectManager(config, GameObjectManagerClass) {
       var gameobjectManager;
       if (config instanceof GOManager) {
@@ -22674,7 +22680,7 @@
       getTimeScale: GetTimeScale,
       destroyManagers: DestroyManagers
     };
-    Object.assign(Managers.prototype, Methods, GameObjectManagerMethods, GameObjectMethods$1);
+    Object.assign(Managers.prototype, Methods, GameObjectManagerMethods$1, GameObjectMethods$1);
     return Managers;
   };
 
@@ -23519,7 +23525,7 @@
     }
   };
 
-  var GameObjectMethods = {
+  var GameObjectManagerMethods = {
     addGameObjectManager: function addGameObjectManager(config) {
       // Register GameObjectManager
       var sys = this.sys;
@@ -23556,8 +23562,11 @@
     addGameObjectCommand: function addGameObjectCommand(goType, commandName, callback) {
       this.sys.getGameObjectManager(goType).commands[commandName] = callback;
       return this;
-    },
-    _setGOProperty: function _setGOProperty(config, eventSheetManager, eventsheet) {
+    }
+  };
+
+  var GameObjectMethods = {
+    setGOProperty: function setGOProperty(config, eventSheetManager, eventSheet) {
       var id = config.id,
         goType = config.goType;
       delete config.id;
@@ -23574,7 +23583,7 @@
       }
       // Execute next command
     },
-    _easeGOProperty: function _easeGOProperty(config, eventSheetManager, eventsheet) {
+    easeGOProperty: function easeGOProperty(config, eventSheetManager, eventSheet) {
       var id = config.id,
         goType = config.goType,
         duration = config.duration,
@@ -23610,7 +23619,7 @@
 
       // Execute next command
     },
-    _destroyGO: function _destroyGO(config, eventSheetManager, eventsheet) {
+    destroyGO: function destroyGO(config, eventSheetManager, eventSheet) {
       var id = config.id,
         goType = config.goType,
         _config$wait2 = config.wait,
@@ -23626,17 +23635,19 @@
         return this.sys.waitEventManager.waitGameObjectDestroy(goType, id);
       }
     },
-    _runGOMethod: function _runGOMethod(config, eventSheetManager, eventsheet) {
+    runGOMethod: function runGOMethod(config, eventSheetManager, eventSheet) {
       var _this$sys;
       var id = config.id,
-        goType = config.goType;
+        goType = config.goType,
+        methodName = config.methodName,
+        parameters = config.parameters;
       if (!goType) {
         goType = this.sys.getGameObjectManagerName(id);
       }
       if (!goType) {
         return;
       }
-      (_this$sys = this.sys).callGameObjectMethod.apply(_this$sys, [goType, config.id, config.methodName].concat(_toConsumableArray(config.parameters)));
+      (_this$sys = this.sys).callGameObjectMethod.apply(_this$sys, [goType, config.id, methodName].concat(_toConsumableArray(parameters)));
       // Execute next command
     }
   };
@@ -24370,7 +24381,7 @@
     }
   };
 
-  var DefaultHandler = function DefaultHandler(name, config, eventSheetManager, eventsheet) {
+  var DefaultHandler = function DefaultHandler(name, config, eventSheetManager, eventSheet) {
     var tokens = name.split('.');
     var gameObjectID = tokens[0];
     if (this.sys.hasGameObjectMananger(gameObjectID)) {
@@ -24387,14 +24398,14 @@
     var commandName = tokens[1];
     switch (tokens[1]) {
       case 'set':
-        return this._setGOProperty(config, eventSheetManager, eventsheet);
+        return this.setGOProperty(config, eventSheetManager, eventSheet);
       case 'to':
-        return this._easeGOProperty(config, eventSheetManager, eventsheet);
+        return this.easeGOProperty(config, eventSheetManager, eventSheet);
       case 'yoyo':
         config.yoyo = true;
-        return this._easeGOProperty(config, eventSheetManager, eventsheet);
+        return this.easeGOProperty(config, eventSheetManager, eventSheet);
       case 'destroy':
-        return this._destroyGO(config, eventSheetManager, eventsheet);
+        return this.destroyGO(config, eventSheetManager, eventSheet);
       default:
         var gameObjectManager = this.sys.getGameObjectManager(config.goType, config.id);
         if (gameObjectManager) {
@@ -24408,7 +24419,7 @@
             }
             var self = this;
             gameObjects.forEach(function (gameObject) {
-              command(gameObject, config, self, eventSheetManager, eventsheet);
+              command(gameObject, config, self, eventSheetManager, eventSheet);
             });
             return this.hasAnyWaitEvent ? this.sys : undefined;
           }
@@ -24420,7 +24431,7 @@
         }
         config.methodName = commandName;
         config.parameters = parameters ? StringToValues(parameters) : [];
-        return this._runGOMethod(config, eventSheetManager, eventsheet);
+        return this.runGOMethod(config, eventSheetManager, eventSheet);
     }
   };
 
@@ -24428,7 +24439,7 @@
     addCommand: AddCommand,
     defaultHandler: DefaultHandler
   };
-  Object.assign(Methods, EventSheetManagerMethods, WaitMethods, GameObjectMethods, BackgroundMusicMethods, BackgroundMusic2Methods, SoundEffectsMethods, SoundEffects2Methods, CameraMethods, LogMethods);
+  Object.assign(Methods, EventSheetManagerMethods, WaitMethods, GameObjectManagerMethods, GameObjectMethods, BackgroundMusicMethods, BackgroundMusic2Methods, SoundEffectsMethods, SoundEffects2Methods, CameraMethods, LogMethods);
 
   var CommandExecutor = /*#__PURE__*/function () {
     function CommandExecutor(scene) {

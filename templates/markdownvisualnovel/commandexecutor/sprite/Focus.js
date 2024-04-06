@@ -14,6 +14,10 @@ var Focus = function (
     }
 
     if (typeof (fadeOutOthers) === 'number') {
+        if (wait) {
+            commandExecutor.setWaitEventFlag();
+        }
+
         commandExecutor.easeGOProperty(
             {
                 id: '!' + gameObject.name,
@@ -23,9 +27,6 @@ var Focus = function (
             },
             eventSheetManager
         )
-        if (wait) {
-            commandExecutor.setWaitEventFlag();
-        }
     }
 }
 
