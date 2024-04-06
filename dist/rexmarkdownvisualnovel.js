@@ -68704,9 +68704,17 @@
       }
     }, {
       key: "setColumnCount",
-      value: function setColumnCount(cnt) {
-        this.colCount = cnt;
+      value: function setColumnCount(columns) {
+        this.colCount = columns;
         this.resetTotalRowsHeight();
+
+        // Set cellWith according to parent width/height and columns
+        var parent = this.parent;
+        if (parent.expandCellSize) {
+          var width = parent.scrollMode === 0 ? parent.width : parent.height;
+          var cellWidth = width / columns;
+          this.setDefaultCellWidth(cellWidth);
+        }
         return this;
       }
     }, {
