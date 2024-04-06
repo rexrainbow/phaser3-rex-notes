@@ -421,7 +421,7 @@ table.scrollToBottom();
     ```
 - Set
     ```javascript
-    table.setColumnCount(count).updateTable();
+    table.setColumnCount(count).updateTable(true);
     ```
 
 ### Table size in pixels
