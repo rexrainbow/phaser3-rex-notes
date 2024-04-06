@@ -134,6 +134,10 @@ var CreateCommandExecutor = function (scene) {
                     }
 
                     if (typeof (fadeOutOthers) === 'number') {
+                        if (wait) {
+                            commandExecutor.setWaitEventFlag();
+                        }
+
                         commandExecutor.easeGOProperty(
                             {
                                 id: '!' + gameObject.name,
@@ -143,9 +147,6 @@ var CreateCommandExecutor = function (scene) {
                             },
                             eventSheetManager
                         )
-                        if (wait) {
-                            commandExecutor.setWaitEventFlag();
-                        }
                     }
                 }
             },

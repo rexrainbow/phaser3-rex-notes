@@ -79,12 +79,12 @@ export default {
         }
     },
 
-    _runGOMethod(
+    runGOMethod(
         config,
         eventSheetManager, eventSheet
     ) {
 
-        var { id, goType } = config;
+        var { id, goType, methodName, parameters } = config;
 
         if (!goType) {
             goType = this.sys.getGameObjectManagerName(id);
@@ -93,7 +93,7 @@ export default {
             return;
         }
 
-        this.sys.callGameObjectMethod(goType, config.id, config.methodName, ...config.parameters);
+        this.sys.callGameObjectMethod(goType, config.id, methodName, ...parameters);
         // Execute next command
     },
 }

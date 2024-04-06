@@ -59,7 +59,7 @@ var DefaultHandler = function (name, config, eventSheetManager, eventSheet) {
             }
             config.methodName = commandName;
             config.parameters = (parameters) ? StringToValues(parameters) : [];
-            return this._runGOMethod(config, eventSheetManager, eventSheet);
+            return this.runGOMethod(config, eventSheetManager, eventSheet);
 
     }
 }

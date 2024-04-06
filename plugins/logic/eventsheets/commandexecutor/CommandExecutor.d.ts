@@ -71,10 +71,15 @@ declare class CommandExecutor {
     easeGOProperty(
         config: { [name: string]: any },
         eventSheetManager: EventSheetManager,
-    ): CommandExecutor.ImmediatelyCommandCallbackType;
+    ): CommandExecutor.CommandCallbackType;
 
     destroyGO(
         config: { id?: string, goType?: string, wait?: boolean },
+        eventSheetManager: EventSheetManager,
+    ): CommandExecutor.CommandCallbackType;
+
+    runGOMethod(
+        config: { id?: string, goType?: string, methodName: string, parameters: any[] },
         eventSheetManager: EventSheetManager,
     ): CommandExecutor.ImmediatelyCommandCallbackType;
 
