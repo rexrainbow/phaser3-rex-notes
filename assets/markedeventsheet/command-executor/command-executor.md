@@ -125,9 +125,6 @@ CharacterC.to
 // Wait until tween complete
 
 CharacterA.focus
-//  alpha=0.5
-//  duration=300
-// Wait until fade out complete
 
 ```Dialog.typing, name=Me Me Me, speed=100
 Line0...
@@ -205,8 +202,10 @@ wait
   click
 // Wait until 3s or any touch
 
-SPRITE.set
-  alpha=1
+// SPRITE.set
+//  tint=0xffffff
+
+CharacterA.unfocus
 
 se.play
   key=explosion

@@ -1,16 +1,15 @@
+import { SPRITE } from '../../const/GameObjects.js';
+
 var Focus = function (
     gameObject,
-    {
-        fadeOutOthers = 0x000000,
-    } = {},
+    config,
     commandExecutor, eventSheetManager, eventSheet
 ) {
 
-    gameObject.bringMeToTop();
     commandExecutor.setGOProperty(
         {
-            id: '!' + gameObject.name,
-            tint: fadeOutOthers,
+            goType: SPRITE,
+            tint: 0xffffff,
         },
         eventSheetManager
     )

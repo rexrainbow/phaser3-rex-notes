@@ -36,6 +36,8 @@ class TransitionImage extends Container {
 
         super(scene, x, y, width, height);
         this.type = 'rexTransitionImage';
+        this._flipX = false;
+        this._flipY = false;
 
         backImage.setVisible(false);
         this.addMultiple([backImage, frontImage])
@@ -130,6 +132,25 @@ class TransitionImage extends Container {
         return this.nextImage.frame;
     }
 
+    get tint() {
+        return this._tint;
+    }
+
+    set tint(value) {
+        if (this._tint === value) {
+            return;
+        }
+
+        this._tint = value;
+        this.backImage.setTint(value);
+        this.frontImage.setTint(value);
+    }
+
+    setTint(value) {
+        this.tint = value;
+        return this;
+    }
+
     get flipX() {
         return this._flipX;
     }
@@ -144,6 +165,16 @@ class TransitionImage extends Container {
         this.frontImage.setFlipX(value);
     }
 
+    setFlipX(value) {
+        this.flipX = value;
+        return this;
+    }
+
+    toggleFlipX() {
+        this.flipX = !this.flipX;
+        return this;
+    }
+
     get flipY() {
         return this._flipY;
     }
@@ -155,6 +186,22 @@ class TransitionImage extends Container {
         this._flipY = value;
         this.backImage.setFlipY(value);
         this.frontImage.setFlipY(value);
+    }
+
+    setFlipY(value) {
+        this.flipY = value;
+        return this;
+    }
+
+    toggleFlipY() {
+        this.flipY = !this.flipY;
+        return this;
+    }
+
+    setFlip(flipX, flipY) {
+        this.flipX = flipX;
+        this.flipY = flipY;
+        return this;
     }
 
     get t() {

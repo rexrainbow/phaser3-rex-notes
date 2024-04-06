@@ -3,6 +3,7 @@ import { GOLayer } from '../../const/Layers.js';
 import GenerateDefaultCreateGameObjectCallback from './GenerateDefaultCreateGameObjectCallback.js';
 import Cross from './Cross.js';
 import Focus from './Focus.js';
+import Unfocus from './Unfocus.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -25,6 +26,7 @@ var RegisterSpriteType = function (commandExecutor, config) {
         commands: {
             cross: Cross,
             focus: Focus,
+            unfocus: Unfocus,
         }
     })
 }

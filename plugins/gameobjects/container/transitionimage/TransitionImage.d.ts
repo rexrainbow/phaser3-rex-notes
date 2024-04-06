@@ -120,4 +120,7 @@ declare class TransitionImage extends ContainerLite {
     setFlip(x: boolean, y: boolean): this;
     flipX: boolean;
     flipY: boolean;
+
+    setTint(value: number): this;
+    tint: number;
 }

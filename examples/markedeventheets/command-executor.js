@@ -121,34 +121,35 @@ var CreateCommandExecutor = function (scene) {
                 focus(
                     gameObject,
                     {
-                        bringToTop = true,
-                        fadeOutOthers = 0.5,
-                        duration = 300,
-                        wait = true
+                        fadeOutOthers = 0x000000,
                     } = {},
                     commandExecutor, eventSheetManager, eventSheet
                 ) {
 
-                    if (bringToTop) {
-                        gameObject.bringMeToTop();
-                    }
+                    gameObject.bringMeToTop();
+                    commandExecutor.setGOProperty(
+                        {
+                            id: '!' + gameObject.name,
+                            tint: fadeOutOthers,
+                        },
+                        eventSheetManager
+                    )
+                },
 
-                    if (typeof (fadeOutOthers) === 'number') {
-                        if (wait) {
-                            commandExecutor.setWaitEventFlag();
-                        }
+                unfocus(
+                    gameObject,
+                    config,
+                    commandExecutor, eventSheetManager, eventSheet
+                ) {
 
-                        commandExecutor.easeGOProperty(
-                            {
-                                id: '!' + gameObject.name,
-                                alpha: fadeOutOthers,
-                                duration: duration,
-                                wait: wait,
-                            },
-                            eventSheetManager
-                        )
-                    }
-                }
+                    commandExecutor.setGOProperty(
+                        {
+                            goType: 'SPRITE',
+                            tint: 0xffffff,
+                        },
+                        eventSheetManager
+                    )
+                },
             },
 
         })

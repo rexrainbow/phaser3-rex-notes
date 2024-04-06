@@ -448,6 +448,8 @@ Also will fire `'complete'` event.
 
 ### Flip
 
+Apply `flipX`, `flipY` to both current and next trextures.
+
 - Flip
     ```javascript
     image.flipX(value);
@@ -459,6 +461,14 @@ Also will fire `'complete'` event.
     image.toggleFlipX();
     image.toggleFlipY();
     ```
+
+### Tint
+
+Apply `tint` to both current and next trextures.
+
+```javascript
+image.setTint(value);
+```
 
 ### Use cases
 

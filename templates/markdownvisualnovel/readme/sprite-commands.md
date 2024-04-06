@@ -243,14 +243,11 @@ SPRITE.cross
 
 ### Focus
 
-Bring me to top and fade-out other sprites
+Bring me to top and set tint to 0x0 to other sprites
 
 ```
 
 NAME.focus
-  bringToTop=true  
-  fadeOutOthers=0.5
-  duration=300
-  wait=true
+  fadeOutOthers=0x0
 
 ```
