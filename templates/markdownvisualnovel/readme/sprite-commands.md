@@ -251,3 +251,13 @@ NAME.focus
   fadeOutOthers=0x0
 
 ```
+
+### Unfocus
+
+Set tint to 0xffffff to all sprites
+
+```
+
+NAME.unfocus
+
+```
