@@ -195,7 +195,7 @@ SPRITE.yoyo
 
 ```
 
-NAME.cross      
+NAME.cross
   name=
   expression=
   duration=
@@ -240,3 +240,17 @@ SPRITE.cross
       `'blinds'`, `'squares'`, `'diamonds'`, `'circles'`, `'curtain'`.
     - Shader effects : `'pixellate'`, `'dissolve'`, 
       `'revealLeft'`, `'revealRight'`, `'revealUp'`, `'revealDown'`
+
+### Focus
+
+Bring me to top and fade-out other sprites
+
+```
+
+NAME.focus
+  bringToTop=true  
+  fadeOutOthers=0.5
+  duration=300
+  wait=true
+
+```
