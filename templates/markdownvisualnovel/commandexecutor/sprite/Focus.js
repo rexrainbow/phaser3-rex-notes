@@ -1,3 +1,5 @@
+import { SPRITE } from '../../const/GameObjects.js';
+
 var Focus = function (
     gameObject,
     {
@@ -9,6 +11,7 @@ var Focus = function (
     gameObject.bringMeToTop();
     commandExecutor.setGOProperty(
         {
+            goType: SPRITE,
             id: '!' + gameObject.name,
             tint: fadeOutOthers,
         },

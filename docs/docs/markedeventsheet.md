@@ -852,9 +852,7 @@ commandExecutor.addGameObjectManager({
     - `commandName` : Command name. These command names are reserved : [`to`](markedeventsheet.md#ease-properties-of-custom-game-object), [`yoyo`](markedeventsheet.md#ease-properties-of-custom-game-object), [`destroy`](markedeventsheet.md#destroy-custom-game-object)
     - `gameObject` : Game object instance.
     - `config` : Parameters passed from [event sheet](markedeventsheet.md#invoke-custom-command).
-    - `commandExecutor` : This command executor instance.
-        - `commandExecutor.waitEvent(eventEmitter, eventName)` : Invoke this method to 
-          Run next command after `eventEmitter` emitting event `eventName`.
+    - `commandExecutor` : This command executor instance. [See also](#methods-used-in-command)
     - `eventSheetManager` : This event sheet manager instance.
         - Store variable into blackboard of eventSheetManager : `eventSheetManager.setData(key, value)`
 
@@ -1062,6 +1060,50 @@ Do nothing if gameObject or commandName is not found.
     !NAME.destroy
     
     ```
+
+##### Methods used in command
+
+- Hold command execution until `eventEmitter` emits `eventName` event.
+    ```javascript
+    commandExecutor.waitEvent(eventEmitter, eventName);
+    ```
+- Apply value to property of 
+    ```javascript
+    commandExecutor.setGOProperty({
+        goType, id, 
+        property, ... 
+    });
+    ```
+    - `goType` : GameObject type assigned by `commandExecutor.addGameObjectManager({name...})`.
+    - `id` : `NAME` of game object, which will store in `gameObject.name`.
+        - `gameObject.name` : Apply value to property of this game object.
+        - `'!' + gameObject.name` : Apply value to property of all game objects exclude this game object.
+        - `undefined` : All game objects.
+    - `propertyName: value` : Assign value to property. Can assign one or many properties.
+- Ease value of game object(s)' property
+    ```javascript
+    if (wait) {
+        commandExecutor.setWaitEventFlag();
+    }
+    commandExecutor.easeGOProperty({
+        goType, id, 
+        duration, ease, repeat, yoyo, 
+        wait, 
+        property, ... 
+    });
+    ```
+    - `goType` : GameObject type assigned by `commandExecutor.addGameObjectManager({name...})`.
+    - `id` : `NAME` of game object, which will store in `gameObject.name`.
+        - `gameObject.name` : Apply value to property of this game object.
+        - `'!' + gameObject.name` : Apply value to property of all game objects exclude this game object.
+        - `undefined` : All game objects.
+    - `duration` : Duration of easing task.
+    - `ease` : [Ease function](tween.md#ease-equations)
+    - `repeat` : Repeat times.
+    - `yoyo` : Yoyo flag.
+    - `wait` : Wait until easing task complete.
+        - Invoke `commandExecutor.setWaitEventFlag()`. 
+    - `propertyName: value` : Ease value of property. Can assign one or many properties.
 
 
 #### Wait

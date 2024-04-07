@@ -129,6 +129,7 @@ var CreateCommandExecutor = function (scene) {
                     gameObject.bringMeToTop();
                     commandExecutor.setGOProperty(
                         {
+                            goType: 'SPRITE',
                             id: '!' + gameObject.name,
                             tint: fadeOutOthers,
                         },
