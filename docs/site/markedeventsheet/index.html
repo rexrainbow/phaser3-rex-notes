@@ -5979,6 +5979,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#methods-used-in-command" class="md-nav__link">
+    Methods used in command
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -10329,6 +10336,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#methods-used-in-command" class="md-nav__link">
+    Methods used in command
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -11289,11 +11303,7 @@ line2
 <li><code>commandName</code> : Command name. These command names are reserved : <a href="./#ease-properties-of-custom-game-object"><code>to</code></a>, <a href="./#ease-properties-of-custom-game-object"><code>yoyo</code></a>, <a href="./#destroy-custom-game-object"><code>destroy</code></a></li>
 <li><code>gameObject</code> : Game object instance.</li>
 <li><code>config</code> : Parameters passed from <a href="./#invoke-custom-command">event sheet</a>.</li>
-<li><code>commandExecutor</code> : This command executor instance.<ul>
-<li><code>commandExecutor.waitEvent(eventEmitter, eventName)</code> : Invoke this method to 
-  Run next command after <code>eventEmitter</code> emitting event <code>eventName</code>.</li>
-</ul>
-</li>
+<li><code>commandExecutor</code> : This command executor instance. <a href="#methods-used-in-command">See also</a></li>
 <li><code>eventSheetManager</code> : This event sheet manager instance.<ul>
 <li>Store variable into blackboard of eventSheetManager : <code>eventSheetManager.setData(key, value)</code></li>
 </ul>
@@ -11461,6 +11471,57 @@ line2
 <li>Destroy all game objects belong GOTYPE excluding <code>NAME</code>
     <div class="highlight"><pre><span></span><code>!NAME.destroy
 </code></pre></div></li>
+</ul>
+<h5 id="methods-used-in-command">Methods used in command<a class="headerlink" href="#methods-used-in-command" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Hold command execution until <code>eventEmitter</code> emits <code>eventName</code> event.
+    <div class="highlight"><pre><span></span><code><span class="nx">commandExecutor</span><span class="p">.</span><span class="nx">waitEvent</span><span class="p">(</span><span class="nx">eventEmitter</span><span class="p">,</span><span class="w"> </span><span class="nx">eventName</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Apply value to property of 
+    <div class="highlight"><pre><span></span><code><span class="nx">commandExecutor</span><span class="p">.</span><span class="nx">setGOProperty</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">goType</span><span class="p">,</span><span class="w"> </span><span class="nx">id</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="nx">property</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="w"> </span>
+<span class="p">});</span>
+</code></pre></div><ul>
+<li><code>goType</code> : GameObject type assigned by <code>commandExecutor.addGameObjectManager({name...})</code>.</li>
+<li><code>id</code> : <code>NAME</code> of game object, which will store in <code>gameObject.name</code>.<ul>
+<li><code>gameObject.name</code> : Apply value to property of this game object.</li>
+<li><code>'!' + gameObject.name</code> : Apply value to property of all game objects exclude this game object.</li>
+<li><code>undefined</code> : All game objects.</li>
+</ul>
+</li>
+<li><code>propertyName: value</code> : Assign value to property. Can assign one or many properties.</li>
+</ul>
+</li>
+<li>Ease value of game object(s)' property
+    <div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">wait</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">commandExecutor</span><span class="p">.</span><span class="nx">setWaitEventFlag</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="nx">commandExecutor</span><span class="p">.</span><span class="nx">easeGOProperty</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">goType</span><span class="p">,</span><span class="w"> </span><span class="nx">id</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="nx">duration</span><span class="p">,</span><span class="w"> </span><span class="nx">ease</span><span class="p">,</span><span class="w"> </span><span class="nx">repeat</span><span class="p">,</span><span class="w"> </span><span class="nx">yoyo</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="nx">wait</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="nx">property</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="w"> </span>
+<span class="p">});</span>
+</code></pre></div><ul>
+<li><code>goType</code> : GameObject type assigned by <code>commandExecutor.addGameObjectManager({name...})</code>.</li>
+<li><code>id</code> : <code>NAME</code> of game object, which will store in <code>gameObject.name</code>.<ul>
+<li><code>gameObject.name</code> : Apply value to property of this game object.</li>
+<li><code>'!' + gameObject.name</code> : Apply value to property of all game objects exclude this game object.</li>
+<li><code>undefined</code> : All game objects.</li>
+</ul>
+</li>
+<li><code>duration</code> : Duration of easing task.</li>
+<li><code>ease</code> : <a href="../tween/#ease-equations">Ease function</a></li>
+<li><code>repeat</code> : Repeat times.</li>
+<li><code>yoyo</code> : Yoyo flag.</li>
+<li><code>wait</code> : Wait until easing task complete.<ul>
+<li>Invoke <code>commandExecutor.setWaitEventFlag()</code>. </li>
+</ul>
+</li>
+<li><code>propertyName: value</code> : Ease value of property. Can assign one or many properties.</li>
+</ul>
+</li>
 </ul>
 <h4 id="wait">Wait<a class="headerlink" href="#wait" title="Permanent link">&para;</a></h4>
 <h5 id="wait-click">Wait click<a class="headerlink" href="#wait-click" title="Permanent link">&para;</a></h5>

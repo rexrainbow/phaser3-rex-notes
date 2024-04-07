@@ -78911,6 +78911,7 @@
     var eventSheetManager = arguments.length > 3 ? arguments[3] : undefined;
     gameObject.bringMeToTop();
     commandExecutor.setGOProperty({
+      goType: SPRITE,
       id: '!' + gameObject.name,
       tint: fadeOutOthers
     }, eventSheetManager);
