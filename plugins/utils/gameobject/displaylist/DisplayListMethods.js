@@ -2,7 +2,12 @@ const ArrayUtils = Phaser.Utils.Array;
 
 export default {
     bringMeToTop() {
-        var list = (this.parentContainer) ? this.parentContainer.list : this.displayList.list;
+        var list;
+        if (this.parentContainer) {
+            list = this.parentContainer.list;
+        } else if (this.displayList) {
+            list = this.displayList.list;
+        }
         if (!list) {
             return this;
         }
@@ -13,7 +18,12 @@ export default {
     },
 
     sendMeToBack() {
-        var list = (this.parentContainer) ? this.parentContainer.list : this.displayList.list;
+        var list;
+        if (this.parentContainer) {
+            list = this.parentContainer.list;
+        } else if (this.displayList) {
+            list = this.displayList.list;
+        }
         if (!list) {
             return this;
         }
@@ -24,7 +34,12 @@ export default {
     },
 
     moveMyDepthBelow(gameObject) {
-        var list = (this.parentContainer) ? this.parentContainer.list : this.displayList.list;
+        var list;
+        if (this.parentContainer) {
+            list = this.parentContainer.list;
+        } else if (this.displayList) {
+            list = this.displayList.list;
+        }
         if (!list) {
             return this;
         }
@@ -35,7 +50,12 @@ export default {
     },
 
     moveMyDepthAbove(gameObject) {
-        var list = (this.parentContainer) ? this.parentContainer.list : this.displayList.list;
+        var list;
+        if (this.parentContainer) {
+            list = this.parentContainer.list;
+        } else if (this.displayList) {
+            list = this.displayList.list;
+        }
         if (!list) {
             return this;
         }
