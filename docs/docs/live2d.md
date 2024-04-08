@@ -340,3 +340,8 @@ var isHit = live2dGameObject.hitTest(hitAreaName, x, y);
     var parameters = live2dGameObject.getParameters();  // {name: value}
     parameters[name] = value;
     ```
+
+### Limitation
+
+- `alpha`, `tint` properties does not work
+- Can't apply any post-fx effect or blend mode.
