@@ -1,5 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import AlphaTintPipelinePlugin from '../../plugins/alphatintpipeline-plugin.js'
+import AlphaTintPipelinePlugin from '../../plugins/alphatintpipeline-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

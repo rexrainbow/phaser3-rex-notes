@@ -25,21 +25,6 @@ class Live2dGameObject extends Live2dGameObjectBase {
         this.model = undefined;
     }
 
-    get alpha() {
-        return super.alpha;
-    }
-
-    set alpha(value) {
-        if (super.alpha === value) {
-            return;
-        }
-        super.alpha = value;
-
-        this.model.setOpacity(value);
-        // But it won't change render result
-        // Only work for hitTest
-    }
-
     get expressionName() {
         return this.model._currentExpressionName;
     }
