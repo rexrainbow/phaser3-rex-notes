@@ -1,7 +1,7 @@
-import FadeIn from './audio/fade/FadeIn.js';
-import FadeOut from './audio/fade/FadeOut.js';
+import SoundFadeIn from './audio/fade/FadeIn.js';
+import SoundFadeOut from './audio/fade/FadeOut.js';
 
 export default {
-    fadeIn: FadeIn,
-    fadeOut: FadeOut
+    fadeIn: SoundFadeIn,
+    fadeOut: SoundFadeOut
 };
