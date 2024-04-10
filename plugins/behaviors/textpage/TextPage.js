@@ -34,7 +34,7 @@ class TextPage extends ComponentBase {
         this.setMaxLines(GetValue(o, 'maxLines', undefined));
         this.setPageBreak(GetValue(o, 'pageBreak', '\f\n'));
         this.setText(GetValue(o, 'text', ''));
-        this.setStartLineIndex(GetValue(o, 'start', 0));
+        this.startLineIndex = GetValue(o, 'start', 0);
         this.setPageIndex(GetValue(o, 'page', -1));
         return this;
     }
@@ -116,11 +116,6 @@ class TextPage extends ComponentBase {
         this._startLineIndex = value;
     }
 
-    setStartLineIndex(idx) {
-        this.startLineIndex = idx;
-        return this;
-    }
-
     get pageLinesCount() {
         if (this.maxLines !== undefined) {
             return this.maxLines;
@@ -144,6 +139,10 @@ class TextPage extends ComponentBase {
             return count;
 
         }
+    }
+
+    get isLastLine() {
+        return this.endLineIndex === (this.totalLinesCount - 1);
     }
 
     get content() {

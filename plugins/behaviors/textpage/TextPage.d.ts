@@ -52,5 +52,8 @@ declare class TextPage extends ComponentBase {
     getPageByLineIndex(lineIndex: number): string;
 
     readonly startLineIndex: number;
+    readonly endLineIndex: number;
+    readonly totalLinesCount: number;
+    readonly isLastLine: boolean;
 
 }

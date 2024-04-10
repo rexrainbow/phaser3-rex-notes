@@ -14,7 +14,7 @@ class Demo extends Phaser.Scene {
         this.textPage = this.plugins.get('rexTextPage');
 
         var lines = [];
-        for (var i = 0; i < 50; i++) {
+        for (var i = 0; i < 20; i++) {
             lines.push(i.toString());
         }
 

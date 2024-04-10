@@ -38,7 +38,16 @@ export default {
         return this;
     },
 
+    setStartLineIndex(idx) {        
+        var lastStartLineIndex = Math.max(this.totalLinesCount - this.pageLinesCount, 0);
+        idx = Clamp(idx, 0, lastStartLineIndex);
+
+        this.startLineIndex = idx;
+        this.endLineIndex = idx + this.pageLinesCount;
+        return this;
+    },
+
     getPageByLineIndex(idx) {
-        return this.setStartLineIndex(idx).getLines();
+        return this.setStartLineIndex(idx).getLines(this.startLineIndex, this.endLineIndex);
     }
 }
