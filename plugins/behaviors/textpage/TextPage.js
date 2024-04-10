@@ -35,6 +35,7 @@ class TextPage extends ComponentBase {
         this.setPageBreak(GetValue(o, 'pageBreak', '\f\n'));
         this.setText(GetValue(o, 'text', ''));
         this.startLineIndex = GetValue(o, 'start', 0);
+        this.endLineIndex = GetValue(o, 'end');
         this.setPageIndex(GetValue(o, 'page', -1));
         return this;
     }
@@ -44,6 +45,7 @@ class TextPage extends ComponentBase {
             maxLines: this.maxLines,
             text: this.content,
             start: this.startLineIndex,
+            end: this.endLineIndex,
             page: this.pageIndex,
             pageBreak: this.pageBreak
         };
