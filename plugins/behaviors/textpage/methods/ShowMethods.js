@@ -43,16 +43,23 @@ export default {
         return this;
     },
 
+    showPageByLineIndex(lineIndex) {
+        this.displayText(
+            this.getPageByLineIndex(lineIndex)
+        );
+        return this;
+    },
+
     showNextLine() {
         this.displayText(
-            this.setStartLineIndex(this.startLineIndex + 1).getLines()
+            this.getPageByLineIndex(this.startLineIndex + 1)
         );
         return this;
     },
 
     showPreviousLine() {
         this.displayText(
-            this.setStartLineIndex(this.startLineIndex - 1).getLines()
+            this.getPageByLineIndex(this.startLineIndex - 1)
         );
         return this;
     },

@@ -44,4 +44,13 @@ declare class TextPage extends ComponentBase {
 
     readonly pageIndex: number;
     readonly pageCount: number;
+
+    showPageByLineIndex(lineIndex: number): this;
+    showNextLine(): this;
+    showPreviousLine(): this;
+
+    getPageByLineIndex(lineIndex: number): string;
+
+    readonly startLineIndex: number;
+
 }

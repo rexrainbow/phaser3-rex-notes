@@ -37,4 +37,8 @@ export default {
         this.endLineIndex = this.pageStartIndexes[idx + 1];
         return this;
     },
+
+    getPageByLineIndex(idx) {
+        return this.setStartLineIndex(idx).getLines();
+    }
 }

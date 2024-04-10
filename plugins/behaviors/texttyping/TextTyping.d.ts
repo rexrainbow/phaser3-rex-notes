@@ -31,8 +31,14 @@ declare class TextTyping extends ComponentBase {
         config?: TextTyping.IConfig
     );
 
-    start(content: string, speed?: number): this;
+    start(
+        content: string,
+        speed?: number,
+        startIdx?: number
+    ): this;
+
     appendText(content: string): this;
+
     stop(showAllText?: boolean): this;
 
     pause(): this;
