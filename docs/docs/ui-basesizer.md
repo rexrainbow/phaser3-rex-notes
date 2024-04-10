@@ -1203,6 +1203,12 @@ sizer.setChildrenInteractive({
 sizer.pin(gameObject);
 ```
 
+or
+
+```javascript
+sizer.pinLocal(gameObject);
+```
+
 !!! note
     Method `sizer.add` is override in each sizer class usually.
 

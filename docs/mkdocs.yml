@@ -479,6 +479,7 @@ nav:
         - Mini board: board-miniboard.md
     - Bejeweled: board-bejeweled.md
 - Firebase:
+    - Overview : firebase-overview.md
     - Authentication: firebase-auth.md
     - Firestore: firebase-firestore.md
     - Storage: firebase-storage.md
