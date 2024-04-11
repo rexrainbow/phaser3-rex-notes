@@ -1,10 +1,11 @@
 import phaser from 'phaser/src/phaser.js';
 import TextPagePlugin from '../../plugins/textpage-plugin.js'
 import TextTypingPlugin from '../../plugins/texttyping-plugin.js';
+import BBCodeText from '../../plugins/bbcodetext.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 
-class LineTypingText extends Phaser.GameObjects.Text {
+class LineTypingText extends BBCodeText {
     constructor(scene, x, y, text, config) {
         super(scene, x, y, text, config);
 
@@ -26,15 +27,15 @@ class LineTypingText extends Phaser.GameObjects.Text {
         if (!this.page.isLastLine) {
             var txt = this.page.getPageOfNextLine();
 
+            var startLineIndex;
             if (this.page.isFirstLine) {
                 // Typing from 1st line to page end
-                this.typing.start(txt);
+                startLineIndex = 0;
             } else {
-                var lines = txt.split('\n');
-                lines.pop();
-                var skipText = lines.join('\n');
-                this.typing.start(txt, undefined, skipText.length + 1);
+                startLineIndex = this.page.pageLinesCount - 1;
             }
+            this.typing.startFromLine(txt, startLineIndex);
+
         } else {
             this.emit('complete');
         }
@@ -53,11 +54,12 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var content = 'Phaser is a fast, free, and fun open source HTML5 game framework that offers WebGL and Canvas rendering across desktop and mobile web browsers. Games can be compiled to iOS, Android and native apps by using 3rd party tools. You can use JavaScript or TypeScript for development.';
+        var content = '[color=gray]Phaser is a fast, free, and [color=yellow]fun open source [color=blue]HTML5 game framework that offers [color=brown]WebGL and Canvas rendering across [color=green]desktop and mobile web browsers. [color=blue]Games can be compiled to iOS, [color=red]Android and native apps by using 3rd party tools. [color=green]You can use JavaScript or TypeScript for development.';
 
         var txt = new LineTypingText(this, 100, 100, '', {
+            fontSize: 30,
             wordWrap: {
-                width: 300
+                width: 500
             },
             maxLines: 3
         });

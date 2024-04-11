@@ -3,7 +3,7 @@ import Methods from './methods/Methods.js';
 import GetWrapText from '../../utils/text/GetWrapText.js';
 import SetNoWrapText from '../../utils/text/SetNoWrapText.js';
 import GetTypingString from './utils/GetTypingString.js';
-import GetTextLength from './utils/GetTextLength.js';
+import GetPlainText from './utils/GetPlainText.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -97,7 +97,7 @@ class TextTyping extends ComponentBase {
 
     setTypingContent(text) {
         this.text = text;
-        this.textLen = GetTextLength(this.parent, this.text);
+        this.textLen = GetPlainText(this.parent, this.text).length;
         return this;
     }
 
