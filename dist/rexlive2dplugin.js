@@ -60,20 +60,6 @@
     });
     return Constructor;
   }
-  function _defineProperty(obj, key, value) {
-    key = _toPropertyKey(key);
-    if (key in obj) {
-      Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-      });
-    } else {
-      obj[key] = value;
-    }
-    return obj;
-  }
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
@@ -139,44 +125,6 @@
       };
     }
     return _get.apply(this, arguments);
-  }
-  function set(target, property, value, receiver) {
-    if (typeof Reflect !== "undefined" && Reflect.set) {
-      set = Reflect.set;
-    } else {
-      set = function set(target, property, value, receiver) {
-        var base = _superPropBase(target, property);
-        var desc;
-        if (base) {
-          desc = Object.getOwnPropertyDescriptor(base, property);
-          if (desc.set) {
-            desc.set.call(receiver, value);
-            return true;
-          } else if (!desc.writable) {
-            return false;
-          }
-        }
-        desc = Object.getOwnPropertyDescriptor(receiver, property);
-        if (desc) {
-          if (!desc.writable) {
-            return false;
-          }
-          desc.value = value;
-          Object.defineProperty(receiver, property, desc);
-        } else {
-          _defineProperty(receiver, property, value);
-        }
-        return true;
-      };
-    }
-    return set(target, property, value, receiver);
-  }
-  function _set(target, property, value, receiver, isStrict) {
-    var s = set(target, property, value, receiver || target);
-    if (!s && isStrict) {
-      throw new TypeError('failed to set property');
-    }
-    return value;
   }
 
   var MinVersion = 60;
@@ -12682,20 +12630,6 @@
       value: function preDestroy() {
         this.model.release();
         this.model = undefined;
-      }
-    }, {
-      key: "alpha",
-      get: function get() {
-        return _get(_getPrototypeOf(Live2dGameObject.prototype), "alpha", this);
-      },
-      set: function set(value) {
-        if (_get(_getPrototypeOf(Live2dGameObject.prototype), "alpha", this) === value) {
-          return;
-        }
-        _set(_getPrototypeOf(Live2dGameObject.prototype), "alpha", value, this, true);
-        this.model.setOpacity(value);
-        // But it won't change render result
-        // Only work for hitTest
       }
     }, {
       key: "expressionName",

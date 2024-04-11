@@ -147,6 +147,8 @@ var page = scene.plugins.get('rexTextPage').add(textGameObject, {
 
 ### Get lines of page
 
+#### Page by page
+
 - Get lines of current page
     ```javascript
     var lines = page.getPage();
@@ -171,12 +173,25 @@ var page = scene.plugins.get('rexTextPage').add(textGameObject, {
     ```javascript
     var lines = page.getPage(index);
     ```
+
+#### Page of line
+
 - Get line of page by line index
     ```javascript
     var lines = page.getPageByLineIndex(index);
     ```
+- Get page of next line
+    ```javascript
+    var lines = page.getPageOfNextLine(index);
+    ```
+- Get page of previous line
+    ```javascript
+    var lines = page.getPageOfPreviousLine(index);
+    ```
 
 ### Other properties
+
+### Page by page
 
 - Is last page
     ```javascript
@@ -184,7 +199,7 @@ var page = scene.plugins.get('rexTextPage').add(textGameObject, {
     ```
 - Is first page
     ```javascript
-    var isLastPage = page.isFirstPage;
+    var isFirstPage = page.isFirstPage;
     ```
 - Current page index
     ```javascript
@@ -193,4 +208,27 @@ var page = scene.plugins.get('rexTextPage').add(textGameObject, {
 - Number of pages
     ```javascript
     var pageIndex = page.pageCount;
+    ```
+
+#### Page of line
+
+- Is last line
+    ```javascript
+    var isLastLine = page.isLastLine;
+    ```
+- Is first line
+    ```javascript
+    var isFirstLine = page.isFirstLine;
+    ```
+- Start line index
+    ```javascript
+    var startLineIndex = page.startLineIndex;
+    ```
+- End line index
+    ```javascript
+    var endLineIndex = page.endLineIndex;
+    ```
+- Number of lines
+    ```javascript
+    var totalLinesCount = page.totalLinesCount;
     ```

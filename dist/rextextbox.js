@@ -528,12 +528,12 @@
       }
       return this;
     },
-    setText: function setText(text, resetPageIdx) {
-      if (resetPageIdx === undefined) {
-        resetPageIdx = true;
+    setText: function setText(text, resetIndex) {
+      if (resetIndex === undefined) {
+        resetIndex = true;
       }
-      if (resetPageIdx) {
-        this.resetPageIdx();
+      if (resetIndex) {
+        this.resetIndex();
       }
       this.clearText();
       var sections = GetString(text).split(this.pageBreak);
@@ -553,8 +553,21 @@
     }
   };
 
-  var Clamp$2 = Phaser.Math.Clamp;
+  var Clamp$1 = Phaser.Math.Clamp;
   var GetPageMethods = {
+    resetIndex: function resetIndex() {
+      this.pageIndex = -1;
+      this.startLineIndex = -1;
+      this.endLineIndex = undefined;
+      return this;
+    },
+    setPageIndex: function setPageIndex(idx) {
+      idx = Clamp$1(idx, 0, this.lastPageIndex);
+      this.pageIndex = idx;
+      this.startLineIndex = this.pageStartIndexes[idx];
+      this.endLineIndex = this.pageStartIndexes[idx + 1];
+      return this;
+    },
     getPage: function getPage(idx) {
       if (idx === undefined) {
         idx = this.pageIndex;
@@ -573,16 +586,21 @@
     getLastPage: function getLastPage() {
       return this.getPage(this.lastPageIndex);
     },
-    resetPageIdx: function resetPageIdx() {
-      this.pageIndex = -1;
+    setStartLineIndex: function setStartLineIndex(idx) {
+      var lastStartLineIndex = Math.max(this.totalLinesCount - this.pageLinesCount, 0);
+      idx = Clamp$1(idx, 0, lastStartLineIndex);
+      this.startLineIndex = idx;
+      this.endLineIndex = idx + this.pageLinesCount;
       return this;
     },
-    setPageIndex: function setPageIndex(idx) {
-      idx = Clamp$2(idx, 0, this.lastPageIndex);
-      this.pageIndex = idx;
-      this.startLineIndex = this.pageStartIndexes[idx];
-      this.endLineIndex = this.pageStartIndexes[idx + 1];
-      return this;
+    getPageByLineIndex: function getPageByLineIndex(idx) {
+      return this.setStartLineIndex(idx).getLines(this.startLineIndex, this.endLineIndex);
+    },
+    getPageOfNextLine: function getPageOfNextLine() {
+      return this.getPageByLineIndex(this.startLineIndex + 1);
+    },
+    getPageOfPreviousLine: function getPageOfPreviousLine() {
+      return this.getPageByLineIndex(this.startLineIndex - 1);
     }
   };
 
@@ -652,12 +670,16 @@
       this.displayText(this.getLines());
       return this;
     },
+    showPageByLineIndex: function showPageByLineIndex(lineIndex) {
+      this.displayText(this.getPageByLineIndex(lineIndex));
+      return this;
+    },
     showNextLine: function showNextLine() {
-      this.displayText(this.setStartLineIndex(this.startLineIndex + 1).getLines());
+      this.displayText(this.getPageOfNextLine());
       return this;
     },
     showPreviousLine: function showPreviousLine() {
-      this.displayText(this.setStartLineIndex(this.startLineIndex - 1).getLines());
+      this.displayText(this.getPageOfPreviousLine());
       return this;
     },
     displayText: function displayText(text) {
@@ -671,7 +693,7 @@
   Object.assign(Methods, SetContentMethods, GetPageMethods, ShowMethods);
 
   var GetValue$L = Phaser.Utils.Objects.GetValue;
-  var Clamp$1 = Phaser.Math.Clamp;
+  Phaser.Math.Clamp;
   var TextPage = /*#__PURE__*/function (_ComponentBase) {
     _inherits(TextPage, _ComponentBase);
     function TextPage(gameObject, config) {
@@ -700,7 +722,8 @@
         this.setMaxLines(GetValue$L(o, 'maxLines', undefined));
         this.setPageBreak(GetValue$L(o, 'pageBreak', '\f\n'));
         this.setText(GetValue$L(o, 'text', ''));
-        this.setStartLineIndex(GetValue$L(o, 'start', 0));
+        this.startLineIndex = GetValue$L(o, 'start', -1);
+        this.endLineIndex = GetValue$L(o, 'end', undefined);
         this.setPageIndex(GetValue$L(o, 'page', -1));
         return this;
       }
@@ -711,6 +734,7 @@
           maxLines: this.maxLines,
           text: this.content,
           start: this.startLineIndex,
+          end: this.endLineIndex,
           page: this.pageIndex,
           pageBreak: this.pageBreak
         };
@@ -778,21 +802,6 @@
         return this.lines ? this.lines.length : 0;
       }
     }, {
-      key: "startLineIndex",
-      get: function get() {
-        return this._startLineIndex;
-      },
-      set: function set(value) {
-        value = Clamp$1(value, 0, this.totalLinesCount - 1);
-        this._startLineIndex = value;
-      }
-    }, {
-      key: "setStartLineIndex",
-      value: function setStartLineIndex(idx) {
-        this.startLineIndex = idx;
-        return this;
-      }
-    }, {
       key: "pageLinesCount",
       get: function get() {
         if (this.maxLines !== undefined) {
@@ -815,6 +824,16 @@
           }
           return count;
         }
+      }
+    }, {
+      key: "isFirstLine",
+      get: function get() {
+        return this.startLineIndex <= 0;
+      }
+    }, {
+      key: "isLastLine",
+      get: function get() {
+        return this.endLineIndex === this.totalLinesCount;
       }
     }, {
       key: "content",

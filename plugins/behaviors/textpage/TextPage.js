@@ -134,8 +134,12 @@ class TextPage extends ComponentBase {
         }
     }
 
+    get isFirstLine() {
+        return (this.startLineIndex <= 0);
+    }
+
     get isLastLine() {
-        return this.endLineIndex === (this.totalLinesCount - 1);
+        return this.endLineIndex === this.totalLinesCount;
     }
 
     get content() {

@@ -52,14 +52,14 @@ export default {
 
     showNextLine() {
         this.displayText(
-            this.getPageByLineIndex(this.startLineIndex + 1)
+            this.getPageOfNextLine()
         );
         return this;
     },
 
     showPreviousLine() {
         this.displayText(
-            this.getPageByLineIndex(this.startLineIndex - 1)
+            this.getPageOfPreviousLine()
         );
         return this;
     },

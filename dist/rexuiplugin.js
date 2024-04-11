@@ -14859,7 +14859,7 @@
   };
 
   var GetValue$3c = Phaser.Utils.Objects.GetValue;
-  var Clamp$g = Phaser.Math.Clamp;
+  var Clamp$f = Phaser.Math.Clamp;
   var Timer$1 = /*#__PURE__*/function () {
     function Timer(config) {
       _classCallCheck(this, Timer);
@@ -14991,10 +14991,10 @@
             t = 1;
             break;
         }
-        return Clamp$g(t, 0, 1);
+        return Clamp$f(t, 0, 1);
       },
       set: function set(value) {
-        value = Clamp$g(value, -1, 1);
+        value = Clamp$f(value, -1, 1);
         if (value < 0) {
           this.state = DELAY;
           this.nowTime = -this.delay * value;
@@ -16244,7 +16244,7 @@
     return t;
   };
 
-  var Clamp$f = Phaser.Math.Clamp;
+  var Clamp$e = Phaser.Math.Clamp;
   var Timer = /*#__PURE__*/function () {
     function Timer(timeline, config) {
       _classCallCheck(this, Timer);
@@ -16334,7 +16334,7 @@
       key: "getProgress",
       value: function getProgress() {
         var value = 1 - this.remainder / this.duration;
-        value = Clamp$f(value, 0, 1);
+        value = Clamp$e(value, 0, 1);
         if (this.yoyo) {
           value = Yoyo$1(value);
         }
@@ -16343,7 +16343,7 @@
     }, {
       key: "setProgress",
       value: function setProgress(value) {
-        value = Clamp$f(value, 0, 1);
+        value = Clamp$e(value, 0, 1);
         this.remainder = this.duration * (1 - value);
       }
     }, {
@@ -26017,7 +26017,7 @@
   };
 
   var GetValue$2L = Phaser.Utils.Objects.GetValue;
-  var Clamp$e = Phaser.Math.Clamp;
+  var Clamp$d = Phaser.Math.Clamp;
   function ProgressBase (BaseClass) {
     var ProgressBase = /*#__PURE__*/function (_BaseClass) {
       _inherits(ProgressBase, _BaseClass);
@@ -26043,7 +26043,7 @@
           return this._value;
         },
         set: function set(value) {
-          value = Clamp$e(value, 0, 1);
+          value = Clamp$d(value, 0, 1);
           var oldValue = this._value;
           var valueChanged = oldValue != value;
           this.dirty = this.dirty || valueChanged;
@@ -26131,7 +26131,7 @@
 
   var GetValue$2K = Phaser.Utils.Objects.GetValue;
   var IsPlainObject$H = Phaser.Utils.Objects.IsPlainObject;
-  var Clamp$d = Phaser.Math.Clamp;
+  var Clamp$c = Phaser.Math.Clamp;
   var DefaultStartAngle$1 = Phaser.Math.DegToRad(270);
   var CircularProgress$1 = /*#__PURE__*/function (_ProgressBase) {
     _inherits(CircularProgress, _ProgressBase);
@@ -26261,7 +26261,7 @@
         return this._thickness;
       },
       set: function set(value) {
-        value = Clamp$d(value, 0, 1);
+        value = Clamp$c(value, 0, 1);
         this.dirty = this.dirty || this._thickness != value;
         this._thickness = value;
       }
@@ -26422,7 +26422,7 @@
   var GetValue$2J = Phaser.Utils.Objects.GetValue;
   var IsPlainObject$G = Phaser.Utils.Objects.IsPlainObject;
   var NormalizeAngle$1 = Phaser.Math.Angle.Normalize;
-  var Clamp$c = Phaser.Math.Clamp;
+  var Clamp$b = Phaser.Math.Clamp;
   var DefaultStartAngle = Phaser.Math.DegToRad(270);
   var PI2 = Phaser.Math.PI2;
   var CircularProgress = /*#__PURE__*/function (_ProgressBase) {
@@ -26598,7 +26598,7 @@
         return this._thickness;
       },
       set: function set(value) {
-        value = Clamp$c(value, 0, 1);
+        value = Clamp$b(value, 0, 1);
         this.dirty = this.dirty || this._thickness != value;
         this._thickness = value;
       }
@@ -38270,7 +38270,7 @@
 
   var IsPlainObject$o = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$20 = Phaser.Utils.Objects.GetValue;
-  var Clamp$b = Phaser.Math.Clamp;
+  var Clamp$a = Phaser.Math.Clamp;
   var TransitionImage = /*#__PURE__*/function (_Container) {
     _inherits(TransitionImage, _Container);
     function TransitionImage(scene, x, y, texture, frame, config) {
@@ -38458,7 +38458,7 @@
         return this._t;
       },
       set: function set(value) {
-        value = Clamp$b(value, 0, 1);
+        value = Clamp$a(value, 0, 1);
         if (this._t === value) {
           return;
         }
@@ -39395,7 +39395,7 @@
 
   var PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
   var GetValue$1$ = Phaser.Utils.Objects.GetValue;
-  var Clamp$a = Phaser.Math.Clamp;
+  var Clamp$9 = Phaser.Math.Clamp;
   var DissolvePostFxPipeline = /*#__PURE__*/function (_PostFXPipeline) {
     _inherits(DissolvePostFxPipeline, _PostFXPipeline);
     function DissolvePostFxPipeline(game) {
@@ -39462,7 +39462,7 @@
         return this._progress;
       },
       set: function set(value) {
-        this._progress = Clamp$a(value, 0, 1);
+        this._progress = Clamp$9(value, 0, 1);
       }
     }, {
       key: "setProgress",
@@ -44811,7 +44811,7 @@
 
   var GetValue$1A = Phaser.Utils.Objects.GetValue;
   var IsPlainObject$d = Phaser.Utils.Objects.IsPlainObject;
-  var Clamp$9 = Phaser.Math.Clamp;
+  var Clamp$8 = Phaser.Math.Clamp;
   var SnapTo = Phaser.Math.Snap.To;
   var Slider = /*#__PURE__*/function (_ProgressBase) {
     _inherits(Slider, _ProgressBase);
@@ -44936,7 +44936,7 @@
           value = SnapTo(value, this.gap);
         }
         var oldValue = this._value;
-        this._value = Clamp$9(value, 0, 1);
+        this._value = Clamp$8(value, 0, 1);
         if (oldValue !== this._value) {
           this.updateThumb(this._value);
           this.updateIndicator(this._value);
@@ -45719,7 +45719,7 @@
   }();
 
   var GetValue$1w = Phaser.Utils.Objects.GetValue;
-  var Clamp$8 = Phaser.Math.Clamp;
+  var Clamp$7 = Phaser.Math.Clamp;
   var Scroller = /*#__PURE__*/function (_ComponentBase) {
     _inherits(Scroller, _ComponentBase);
     function Scroller(gameObject, config) {
@@ -45916,7 +45916,7 @@
           clamp = false;
         }
         if (clamp) {
-          value = Clamp$8(value, this.minValue, this.maxValue);
+          value = Clamp$7(value, this.minValue, this.maxValue);
         }
         this.value = value;
         return this;
@@ -46621,7 +46621,7 @@
   };
 
   var GetValue$1s = Phaser.Utils.Objects.GetValue;
-  var Clamp$7 = Phaser.Math.Clamp;
+  var Clamp$6 = Phaser.Math.Clamp;
   var Scrollable = /*#__PURE__*/function (_Sizer) {
     _inherits(Scrollable, _Sizer);
     function Scrollable(scene, config) {
@@ -46877,7 +46877,7 @@
           clamp = false;
         }
         if (clamp) {
-          value = Clamp$7(value, this.bottomChildOY, this.topChildOY);
+          value = Clamp$6(value, this.bottomChildOY, this.topChildOY);
         }
         this.childOY = value;
         return this;
@@ -46895,7 +46895,7 @@
           clamp = false;
         }
         if (clamp) {
-          value = Clamp$7(value, 0, 1);
+          value = Clamp$6(value, 0, 1);
         }
         this.t = value;
         return this;
@@ -46934,7 +46934,7 @@
           clamp = false;
         }
         if (clamp) {
-          value = Clamp$7(value, this.leftChildOX, this.rightChildOX);
+          value = Clamp$6(value, this.leftChildOX, this.rightChildOX);
         }
         this.childOX = value;
         return this;
@@ -46952,7 +46952,7 @@
           clamp = false;
         }
         if (clamp) {
-          value = Clamp$7(value, 0, 1);
+          value = Clamp$6(value, 0, 1);
         }
         this.s = value;
         return this;
@@ -48808,7 +48808,7 @@
     return value.toString();
   };
 
-  var Clamp$6 = Phaser.Math.Clamp;
+  var Clamp$5 = Phaser.Math.Clamp;
   var SetValueMethods = {
     setValueTextFormatCallback: function setValueTextFormatCallback(callback, scope) {
       this.valueTextFormatCallback = callback;
@@ -48844,7 +48844,7 @@
       return this;
     },
     setValue: function setValue(value, min, max) {
-      value = Clamp$6(value, min, max);
+      value = Clamp$5(value, min, max);
       this.value = value;
       this.minValue = min;
       this.maxValue = max;
@@ -53797,7 +53797,7 @@
     return this;
   };
 
-  var Clamp$5 = Phaser.Math.Clamp;
+  var Clamp$4 = Phaser.Math.Clamp;
   var InsertNewCells = function InsertNewCells(cellIdx, count) {
     if (_typeof(cellIdx) === 'object') {
       cellIdx = cellIdx.index;
@@ -53808,7 +53808,7 @@
     if (count <= 0) {
       return this;
     }
-    cellIdx = Clamp$5(cellIdx, 0, this.cellsCount);
+    cellIdx = Clamp$4(cellIdx, 0, this.cellsCount);
     this.table.insertNewCells(cellIdx, count);
     return this;
   };
@@ -55839,12 +55839,12 @@
       }
       return this;
     },
-    setText: function setText(text, resetPageIdx) {
-      if (resetPageIdx === undefined) {
-        resetPageIdx = true;
+    setText: function setText(text, resetIndex) {
+      if (resetIndex === undefined) {
+        resetIndex = true;
       }
-      if (resetPageIdx) {
-        this.resetPageIdx();
+      if (resetIndex) {
+        this.resetIndex();
       }
       this.clearText();
       var sections = GetString(text).split(this.pageBreak);
@@ -55864,8 +55864,21 @@
     }
   };
 
-  var Clamp$4 = Phaser.Math.Clamp;
+  var Clamp$3 = Phaser.Math.Clamp;
   var GetPageMethods = {
+    resetIndex: function resetIndex() {
+      this.pageIndex = -1;
+      this.startLineIndex = -1;
+      this.endLineIndex = undefined;
+      return this;
+    },
+    setPageIndex: function setPageIndex(idx) {
+      idx = Clamp$3(idx, 0, this.lastPageIndex);
+      this.pageIndex = idx;
+      this.startLineIndex = this.pageStartIndexes[idx];
+      this.endLineIndex = this.pageStartIndexes[idx + 1];
+      return this;
+    },
     getPage: function getPage(idx) {
       if (idx === undefined) {
         idx = this.pageIndex;
@@ -55884,16 +55897,21 @@
     getLastPage: function getLastPage() {
       return this.getPage(this.lastPageIndex);
     },
-    resetPageIdx: function resetPageIdx() {
-      this.pageIndex = -1;
+    setStartLineIndex: function setStartLineIndex(idx) {
+      var lastStartLineIndex = Math.max(this.totalLinesCount - this.pageLinesCount, 0);
+      idx = Clamp$3(idx, 0, lastStartLineIndex);
+      this.startLineIndex = idx;
+      this.endLineIndex = idx + this.pageLinesCount;
       return this;
     },
-    setPageIndex: function setPageIndex(idx) {
-      idx = Clamp$4(idx, 0, this.lastPageIndex);
-      this.pageIndex = idx;
-      this.startLineIndex = this.pageStartIndexes[idx];
-      this.endLineIndex = this.pageStartIndexes[idx + 1];
-      return this;
+    getPageByLineIndex: function getPageByLineIndex(idx) {
+      return this.setStartLineIndex(idx).getLines(this.startLineIndex, this.endLineIndex);
+    },
+    getPageOfNextLine: function getPageOfNextLine() {
+      return this.getPageByLineIndex(this.startLineIndex + 1);
+    },
+    getPageOfPreviousLine: function getPageOfPreviousLine() {
+      return this.getPageByLineIndex(this.startLineIndex - 1);
     }
   };
 
@@ -55922,12 +55940,16 @@
       this.displayText(this.getLines());
       return this;
     },
+    showPageByLineIndex: function showPageByLineIndex(lineIndex) {
+      this.displayText(this.getPageByLineIndex(lineIndex));
+      return this;
+    },
     showNextLine: function showNextLine() {
-      this.displayText(this.setStartLineIndex(this.startLineIndex + 1).getLines());
+      this.displayText(this.getPageOfNextLine());
       return this;
     },
     showPreviousLine: function showPreviousLine() {
-      this.displayText(this.setStartLineIndex(this.startLineIndex - 1).getLines());
+      this.displayText(this.getPageOfPreviousLine());
       return this;
     },
     displayText: function displayText(text) {
@@ -55941,7 +55963,7 @@
   Object.assign(Methods$1, SetContentMethods, GetPageMethods, ShowMethods);
 
   var GetValue$U = Phaser.Utils.Objects.GetValue;
-  var Clamp$3 = Phaser.Math.Clamp;
+  Phaser.Math.Clamp;
   var TextPage = /*#__PURE__*/function (_ComponentBase) {
     _inherits(TextPage, _ComponentBase);
     function TextPage(gameObject, config) {
@@ -55970,7 +55992,8 @@
         this.setMaxLines(GetValue$U(o, 'maxLines', undefined));
         this.setPageBreak(GetValue$U(o, 'pageBreak', '\f\n'));
         this.setText(GetValue$U(o, 'text', ''));
-        this.setStartLineIndex(GetValue$U(o, 'start', 0));
+        this.startLineIndex = GetValue$U(o, 'start', -1);
+        this.endLineIndex = GetValue$U(o, 'end', undefined);
         this.setPageIndex(GetValue$U(o, 'page', -1));
         return this;
       }
@@ -55981,6 +56004,7 @@
           maxLines: this.maxLines,
           text: this.content,
           start: this.startLineIndex,
+          end: this.endLineIndex,
           page: this.pageIndex,
           pageBreak: this.pageBreak
         };
@@ -56048,21 +56072,6 @@
         return this.lines ? this.lines.length : 0;
       }
     }, {
-      key: "startLineIndex",
-      get: function get() {
-        return this._startLineIndex;
-      },
-      set: function set(value) {
-        value = Clamp$3(value, 0, this.totalLinesCount - 1);
-        this._startLineIndex = value;
-      }
-    }, {
-      key: "setStartLineIndex",
-      value: function setStartLineIndex(idx) {
-        this.startLineIndex = idx;
-        return this;
-      }
-    }, {
       key: "pageLinesCount",
       get: function get() {
         if (this.maxLines !== undefined) {
@@ -56085,6 +56094,16 @@
           }
           return count;
         }
+      }
+    }, {
+      key: "isFirstLine",
+      get: function get() {
+        return this.startLineIndex <= 0;
+      }
+    }, {
+      key: "isLastLine",
+      get: function get() {
+        return this.endLineIndex === this.totalLinesCount;
       }
     }, {
       key: "content",

@@ -1,6 +1,22 @@
 const Clamp = Phaser.Math.Clamp;
 
 export default {
+
+    resetIndex() {
+        this.pageIndex = -1;
+        this.startLineIndex = -1;
+        this.endLineIndex = undefined;
+        return this;
+    },
+
+    setPageIndex(idx) {
+        idx = Clamp(idx, 0, this.lastPageIndex);
+        this.pageIndex = idx;
+        this.startLineIndex = this.pageStartIndexes[idx];
+        this.endLineIndex = this.pageStartIndexes[idx + 1];
+        return this;
+    },
+
     getPage(idx) {
         if (idx === undefined) {
             idx = this.pageIndex;
@@ -25,21 +41,6 @@ export default {
         return this.getPage(this.lastPageIndex);
     },
 
-    resetIndex() {
-        this.pageIndex = -1;
-        this.startLineIndex = -1;
-        this.endLineIndex = undefined;
-        return this;
-    },
-
-    setPageIndex(idx) {
-        idx = Clamp(idx, 0, this.lastPageIndex);
-        this.pageIndex = idx;
-        this.startLineIndex = this.pageStartIndexes[idx];
-        this.endLineIndex = this.pageStartIndexes[idx + 1];
-        return this;
-    },
-
     setStartLineIndex(idx) {
         var lastStartLineIndex = Math.max(this.totalLinesCount - this.pageLinesCount, 0);
         idx = Clamp(idx, 0, lastStartLineIndex);
@@ -51,5 +52,13 @@ export default {
 
     getPageByLineIndex(idx) {
         return this.setStartLineIndex(idx).getLines(this.startLineIndex, this.endLineIndex);
+    },
+
+    getPageOfNextLine() {
+        return this.getPageByLineIndex(this.startLineIndex + 1);
+    },
+
+    getPageOfPreviousLine() {
+        return this.getPageByLineIndex(this.startLineIndex - 1);
     }
 }
