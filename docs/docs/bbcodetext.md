@@ -360,6 +360,9 @@ var txt = scene.make.rexBBCodeText({
     ```javascript
     var plainText = txt.getPlainText();
     ```
+    ```javascript
+    var plainText = txt.getPlainText(content);
+    ```
 - Get sub-string
     ```javascript
     var text = txt.getText(start, end);
