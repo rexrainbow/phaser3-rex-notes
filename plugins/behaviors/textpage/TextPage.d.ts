@@ -48,10 +48,14 @@ declare class TextPage extends ComponentBase {
     showPageByLineIndex(lineIndex: number): this;
     showNextLine(): this;
     showPreviousLine(): this;
+    showFirstLine(): this;
+    showLastLine(): this;
 
     getPageByLineIndex(lineIndex: number): string;
     getPageOfNextLine(): string;
     getPageOfPreviousLine(): string;
+    getPageOfFirstLine(): string;
+    getPageOfLastLine(): string;
 
     readonly isFirstLine: boolean;
     readonly isLastLine: boolean;

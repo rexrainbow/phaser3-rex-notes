@@ -64,6 +64,20 @@ export default {
         return this;
     },
 
+    showFirstLine() {
+        this.displayText(
+            this.getPageOfFirstLine()
+        );
+        return this;
+    },
+
+    showLastLine() {
+        this.displayText(
+            this.getPageOfLastLine()
+        );
+        return this;
+    },
+
     displayText(text) {
         SetNoWrapText(this.parent, text);
     }

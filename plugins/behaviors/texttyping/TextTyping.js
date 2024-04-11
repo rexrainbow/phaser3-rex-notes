@@ -1,6 +1,9 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
+import Methods from './methods/Methods.js';
 import GetWrapText from '../../utils/text/GetWrapText.js';
 import SetNoWrapText from '../../utils/text/SetNoWrapText.js';
+import GetTypingString from './utils/GetTypingString.js';
+import GetTextLength from './utils/GetTextLength.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -92,84 +95,14 @@ class TextTyping extends ComponentBase {
         return (this.typingIdx === this.textLen);
     }
 
-    start(text, speed, startIdx, timerStartAt) {
-        if (text !== undefined) {
-            this.setTypingContent(text);
-        }
-        if (speed !== undefined) {
-            this.speed = speed;
-        }
-        if (startIdx === undefined) {
-            startIdx = 0;
-        }
-
-        this.typingIdx = startIdx + 1;
-        if (this.speed === 0) {
-            this.stop(true);
-        } else {
-            this.setText('');
-            this.startTimer(timerStartAt);
-        }
-
-        return this;
-    }
-
-    appendText(text) {
-        var newText = this.text.concat(TransferText(text));
-        if (this.isTyping) {
-            this.setTypingContent(newText);
-        } else {
-            this.start(newText, undefined, this.textLen);
-        }
-
-        return this;
-    }
-
-    stop(showAllText) {
-        var timer = this.getTimer();
-        if (timer) {
-            this.freeTimer();
-        }
-        if (showAllText) {
-            // Fire 'type' event for remainder characters until lastChar
-            while (!this.isLastChar) {
-                this.getTypingString(this.text, this.typingIdx, this.textLen, this.typeMode);
-                this.emit('typechar', this.insertChar);
-                this.typingIdx++;
-            }
-            // Display all characters on text game object
-            this.setText(this.text);
-            this.emit('type');
-            this.emit('complete', this, this.parent);
-        }
-
-        return this;
-    }
-
-    pause() {
-        var timer = this.getTimer();
-        if (timer) {
-            timer.paused = true;
-        }
-        return this;
-    }
-
-    resume() {
-        var timer = this.getTimer();
-        if (timer) {
-            timer.paused = false;
-        }
-        return this;
-    }
-
     setTypingContent(text) {
         this.text = text;
-        this.textLen = this.getTextLength(this.text);
+        this.textLen = GetTextLength(this.parent, this.text);
         return this;
     }
 
     onTyping() {
-        var newText = this.getTypingString(this.text, this.typingIdx, this.textLen, this.typeMode);
+        var newText = GetTypingString.call(this, this.text, this.typingIdx, this.textLen, this.typeMode);
 
         this.setText(newText);
 
@@ -183,57 +116,6 @@ class TextTyping extends ComponentBase {
             this.timer.delay = this.speed; // delay of next typing            
             this.typingIdx++;
         }
-    }
-
-    getTypingString(text, typeIdx, textLen, typeMode) {
-        var result;
-        if (typeMode === 0) { //left-to-right
-            var startIdx = 0;
-            var endIdx = typeIdx;
-            this.insertIdx = endIdx;
-            result = this.getSubString(text, startIdx, endIdx);
-
-        } else if (typeMode === 1) { //right-to-left
-            var endIdx = textLen;
-            var startIdx = endIdx - typeIdx;
-            this.insertIdx = 0;
-            result = this.getSubString(text, startIdx, endIdx);
-
-        } else if (typeMode === 2) { //middle-to-sides
-            var midIdx = textLen / 2;
-            var startIdx = Math.floor(midIdx - (typeIdx / 2));
-            var endIdx = startIdx + typeIdx;
-            this.insertIdx = (typeIdx % 2) ? typeIdx : 0;
-            result = this.getSubString(text, startIdx, endIdx);
-
-        } else if (typeMode === 3) { //sides-to-middle
-            var lowerLen = Math.floor(typeIdx / 2);
-            var lowerResult;
-            if (lowerLen > 0) {
-                var endIdx = textLen;
-                var startIdx = endIdx - lowerLen;
-                lowerResult = this.getSubString(text, startIdx, endIdx);
-            } else {
-                lowerResult = "";
-            }
-
-            var upperLen = typeIdx - lowerLen;
-            var upperResult;
-            if (upperLen > 0) {
-                var startIdx = 0;
-                var endIdx = startIdx + upperLen;
-                this.insertIdx = endIdx;
-                upperResult = this.getSubString(text, startIdx, endIdx);
-            } else {
-                upperResult = "";
-                this.insertIdx = 0;
-            }
-            result = upperResult + lowerResult;
-        }
-
-        this.insertChar = result.charAt(this.insertIdx - 1);
-
-        return result;
     }
 
     startTimer(timerStartAt) {
@@ -289,30 +171,6 @@ class TextTyping extends ComponentBase {
             this.parent.setText(text);
         }
     }
-
-    getTextLength(text) {
-        var gameObject = this.parent;
-        var len;
-        if (gameObject.getPlainText) {
-            len = gameObject.getPlainText(text).length;
-        } else {
-            len = text.length;
-        }
-
-        return len;
-    }
-
-    getSubString(text, startIdx, endIdx) {
-        var gameObject = this.parent;
-        var result;
-        if (gameObject.getSubString) {
-            result = gameObject.getSubString(text, startIdx, endIdx);
-        } else {
-            result = text.slice(startIdx, endIdx);
-        }
-
-        return result;
-    }
 }
 
 var TransferText = function (text) {
@@ -330,6 +188,11 @@ const TYPEMODE = {
     'middle-to-sides': 2,
     'sides-to-middle': 3
 };
+
+Object.assign(
+    TextTyping.prototype,
+    Methods
+)
 
 
 export default TextTyping;

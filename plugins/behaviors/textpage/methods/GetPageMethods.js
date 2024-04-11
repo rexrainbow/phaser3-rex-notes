@@ -60,5 +60,14 @@ export default {
 
     getPageOfPreviousLine() {
         return this.getPageByLineIndex(this.startLineIndex - 1);
-    }
+    },
+
+    getPageOfFirstLine() {
+        return this.getPageByLineIndex(0);
+    },
+
+    getPageOfLastLine() {
+        return this.getPageByLineIndex(this.totalLinesCount);
+    },
+
 }
