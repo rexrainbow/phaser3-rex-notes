@@ -37,6 +37,12 @@ declare class TextTyping extends ComponentBase {
         startIdx?: number
     ): this;
 
+    startFromLine(
+        content: string,
+        lineIdx?: number,
+        speed?: number
+    ): this;
+
     appendText(content: string): this;
 
     stop(showAllText?: boolean): this;
