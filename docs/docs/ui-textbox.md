@@ -90,6 +90,8 @@ var textBox = scene.rexUI.add.textBox({
 
     rtl: false,
 
+    typingMode: 0,
+
     background: backgroundGameObject,
 
     innerBackground: backgroundGameObject,
@@ -155,6 +157,9 @@ var textBox = scene.rexUI.add.textBox({
 - `rtl` : 
     - `false` : Layout children (`icon`, `text`, `action`) from left to right. Default behavior.
     - `true` : Layout children (`icon`, `text`, `action`) from right to left.
+- `typingMode` :
+    - `0`, `'page'` : Typing content page by page. Default behavior.
+    - `1`, `'line'` : Typing content line by line until finished.
 - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of label.
 - `innerBackground` : [Game object of background](ui-basesizer.md#background) inside innerSizer, optional.
     - In [mode 0](ui-titlelabel.md#mode-0), innerSizer contains `title`, `separator`, and `text`.

@@ -110,6 +110,17 @@ typing.start(text);
 - `text` : Typing content string.
 - `speed` : Typing speed in ms.
 
+### Start typing from line
+
+```javascript
+typing.startFromLine(text, lineIndex);
+// typing.startFromLine(text, lineIndex, speed);
+```
+
+- `text` : Typing content string.
+- `lineIndex` : Start from line.
+- `speed` : Typing speed in ms.
+
 #### Typing more text
 
 ```javascript

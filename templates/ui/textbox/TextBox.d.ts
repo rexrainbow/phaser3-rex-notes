@@ -7,6 +7,8 @@ export default TextBox;
 declare namespace TextBox {
 
     interface IConfig extends TitleLabel.IConfig {
+        typingMode?: 0 | 1 | 'page' | 'line',
+
         page?: {
             maxLines?: number,
             pageBreak?: string,

@@ -90,14 +90,16 @@ var createTextBox = function (scene, x, y, config) {
     textBox
         .setInteractive()
         .on('pointerdown', function () {
-            var icon = this.getElement('action').setVisible(false);
-            this.resetChildVisibleState(icon);
-            if (this.isTyping) {
-                this.stop(true);
-            } else if (!this.isLastPage) {
-                this.typeNextPage();
-            } else {
-                // Next actions
+            if (typingMode === 'page') {
+                var icon = this.getElement('action').setVisible(false);
+                this.resetChildVisibleState(icon);
+                if (this.isTyping) {
+                    this.stop(true);
+                } else if (!this.isLastPage) {
+                    this.typeNextPage();
+                } else {
+                    // Next actions
+                }
             }
         }, textBox)
         .on('pageend', function () {
