@@ -19,8 +19,16 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        createTextBox(this, 100, 100, {
+        createTextBox(this, 100, 50, {
             wrapWidth: 500,
+        })
+            .start(content, 50);
+
+        createTextBox(this, 100, 200, {
+            wrapWidth: 500,
+            fixedWidth: 500,
+            fixedHeight: 65,
+            title: 'Title'
         })
             .start(content, 50);
 
@@ -28,7 +36,7 @@ class Demo extends Phaser.Scene {
             wrapWidth: 500,
             fixedWidth: 500,
             fixedHeight: 65,
-            title: 'Title'
+            typingMode: 'line'
         })
             .start(content, 50);
     }
@@ -43,11 +51,13 @@ var createTextBox = function (scene, x, y, config) {
     var fixedWidth = GetValue(config, 'fixedWidth', 0);
     var fixedHeight = GetValue(config, 'fixedHeight', 0);
     var titleText = GetValue(config, 'title', undefined);
+    var typingMode = GetValue(config, 'typingMode', 'page');
 
 
     var textBox = scene.rexUI.add.textBox({
-        x: x,
-        y: y,
+        x: x, y: y,
+
+        typingMode: typingMode,
 
         background: scene.rexUI.add.roundRectangle({ radius: 20, color: COLOR_MAIN, strokeColor: COLOR_LIGHT, strokeWidth: 2 }),
 
