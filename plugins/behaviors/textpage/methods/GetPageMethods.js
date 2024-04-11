@@ -25,8 +25,10 @@ export default {
         return this.getPage(this.lastPageIndex);
     },
 
-    resetPageIdx() {
+    resetIndex() {
         this.pageIndex = -1;
+        this.startLineIndex = -1;
+        this.endLineIndex = undefined;
         return this;
     },
 
@@ -38,7 +40,7 @@ export default {
         return this;
     },
 
-    setStartLineIndex(idx) {        
+    setStartLineIndex(idx) {
         var lastStartLineIndex = Math.max(this.totalLinesCount - this.pageLinesCount, 0);
         idx = Clamp(idx, 0, lastStartLineIndex);
 

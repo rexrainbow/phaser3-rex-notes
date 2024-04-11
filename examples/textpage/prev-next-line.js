@@ -8,7 +8,7 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {}
+    preload() { }
 
     create() {
         this.textPage = this.plugins.get('rexTextPage');
@@ -28,13 +28,13 @@ class Demo extends Phaser.Scene {
             //text: lines
         });
         txt.page.setText(lines);
-        txt.page.showPage();
+        txt.page.showNextLine();
 
         this.input.keyboard.on('keydown-DOWN', txt.page.showNextLine, txt.page);
         this.input.keyboard.on('keydown-UP', txt.page.showPreviousLine, txt.page);
     }
 
-    update() {}
+    update() { }
 }
 
 var config = {

@@ -36,13 +36,13 @@ export default {
         return this;
     },
 
-    setText(text, resetPageIdx) {
-        if (resetPageIdx === undefined) {
-            resetPageIdx = true;
+    setText(text, resetIndex) {
+        if (resetIndex === undefined) {
+            resetIndex = true;
         }
 
-        if (resetPageIdx) {
-            this.resetPageIdx();
+        if (resetIndex) {
+            this.resetIndex();
         }
 
         this.clearText();
