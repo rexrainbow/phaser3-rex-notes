@@ -16604,7 +16604,14 @@
     } else {
       var name = s.substring(0, index);
       var expression = s.substring(index + 1);
-      out[name] = TypeConvert(expression);
+      var value = TypeConvert(expression);
+
+      // String post-processor
+      // Replace '\n' (2 characters) by '\n' (newline character, 1 character)
+      if (typeof value === 'string') {
+        value = value.replace(/\\n/g, '\n');
+      }
+      out[name] = value;
     }
     return out;
   };
@@ -25542,7 +25549,7 @@
     }
   };
 
-  var methods$C = {
+  var methods$D = {
     setTexture: SetTexture,
     resize: Resize$1,
     setSize: Resize$1,
@@ -25553,7 +25560,7 @@
     getLastAppendedChildren: GetLastAppendedChildren$1,
     getChildren: GetChildren$1
   };
-  Object.assign(methods$C, TintMethods);
+  Object.assign(methods$D, TintMethods);
 
   var GetValue$34 = Phaser.Utils.Objects.GetValue;
   var Pools$1 = {};
@@ -25702,7 +25709,7 @@
     return childA._depth - childB._depth;
   };
   var Components$4 = Phaser.GameObjects.Components;
-  Phaser.Class.mixin(Blitter, [Components$4.Alpha, Components$4.BlendMode, Components$4.ComputedSize, Components$4.Depth, Components$4.GetBounds, Components$4.Mask, Components$4.Origin, Components$4.Pipeline, Components$4.PostPipeline, Components$4.ScrollFactor, Components$4.Transform, Components$4.Visible, Render$4, methods$C]);
+  Phaser.Class.mixin(Blitter, [Components$4.Alpha, Components$4.BlendMode, Components$4.ComputedSize, Components$4.Depth, Components$4.GetBounds, Components$4.Mask, Components$4.Origin, Components$4.Pipeline, Components$4.PostPipeline, Components$4.ScrollFactor, Components$4.Transform, Components$4.Visible, Render$4, methods$D]);
 
   var ImageTypeName$1 = 'image';
 
@@ -26361,11 +26368,11 @@
     }]);
     return ImageData;
   }(RenderBase$1);
-  var methods$B = {
+  var methods$C = {
     webglRender: WebglRender,
     canvasRender: CanvasRender
   };
-  Object.assign(ImageData$1.prototype, methods$B);
+  Object.assign(ImageData$1.prototype, methods$C);
 
   var AddImage$2 = function AddImage(blitter, config) {
     if (typeof config === 'string') {
@@ -29993,10 +30000,10 @@
     }]);
     return CanvasText;
   }();
-  var methods$A = {
+  var methods$B = {
     setInteractive: SetInteractive$1
   };
-  Object.assign(CanvasText.prototype, DrawMethods, methods$A);
+  Object.assign(CanvasText.prototype, DrawMethods, methods$B);
 
   var WrapTextLinesPool = /*#__PURE__*/function (_Pool) {
     _inherits(WrapTextLinesPool, _Pool);
@@ -30218,12 +30225,12 @@
     }]);
     return ImageManager;
   }();
-  var methods$z = {
+  var methods$A = {
     draw: DrawImage
   };
-  Object.assign(ImageManager.prototype, methods$z);
+  Object.assign(ImageManager.prototype, methods$A);
 
-  var AppendText$1 = function AppendText(value, addCR) {
+  var AppendText$2 = function AppendText(value, addCR) {
     if (!value && value !== 0) {
       value = '';
     }
@@ -30761,10 +30768,10 @@
     }]);
     return Text;
   }(TextBase);
-  var methods$y = {
-    appendText: AppendText$1
+  var methods$z = {
+    appendText: AppendText$2
   };
-  Object.assign(Text.prototype, methods$y);
+  Object.assign(Text.prototype, methods$z);
 
   var SplitText = function SplitText(text, mode) {
     var TagRegex = this.tagRegex;
@@ -31305,13 +31312,13 @@
     }]);
     return Parser;
   }();
-  var methods$x = {
+  var methods$y = {
     splitText: SplitText,
     tagTextToProp: TagTextToProp,
     propToContextStyle: PropToContextStyle,
     propToTagText: PropToTagText
   };
-  Object.assign(Parser$1.prototype, methods$x);
+  Object.assign(Parser$1.prototype, methods$y);
 
   var BBCodeText = /*#__PURE__*/function (_Text) {
     _inherits(BBCodeText, _Text);
@@ -33117,7 +33124,7 @@
     return children;
   };
 
-  var AppendText = function AppendText(text, style) {
+  var AppendText$1 = function AppendText(text, style) {
     var children = this.createCharChildren(text, style);
     this.addChild(children);
     return this;
@@ -33128,7 +33135,7 @@
       text = '';
     }
     this.removeChildren();
-    AppendText.call(this, text, style); // this.appendText might be override
+    AppendText$1.call(this, text, style); // this.appendText might be override
 
     this.dirty = true;
     return this;
@@ -34656,7 +34663,7 @@
     createCharChild: CreateCharChild,
     createCharChildren: CreateCharChildren,
     setText: SetText$2,
-    appendText: AppendText,
+    appendText: AppendText$1,
     insertText: InsertText,
     removeText: RemoveText,
     getText: GetText,
@@ -35926,7 +35933,7 @@
   var OnParseNewLineTag = function OnParseNewLineTag(textPlayer, parser, config) {
     var tagName = 'r';
     parser.on("+".concat(tagName), function () {
-      AppendText.call(textPlayer, '\n');
+      AppendText$1.call(textPlayer, '\n');
       parser.skipEvent();
     }).on("-".concat(tagName), function () {
       parser.skipEvent();
@@ -35938,7 +35945,7 @@
     for (var i = 0, cnt = tagNames.length; i < cnt; i++) {
       var tagName = tagNames[i];
       parser.on("+".concat(tagName), function () {
-        AppendText.call(textPlayer, '\f');
+        AppendText$1.call(textPlayer, '\f');
         parser.skipEvent();
       }).on("-".concat(tagName), function () {
         parser.skipEvent();
@@ -35965,7 +35972,7 @@
   var OnParseContent = function OnParseContent(textPlayer, parser, config) {
     parser.on('content', function (content) {
       if (parser.contentOutputEnable) {
-        AppendText.call(textPlayer, content);
+        AppendText$1.call(textPlayer, content);
       } else {
         var startTag = "+".concat(parser.lastTagStart);
         textPlayer.emit("parser.".concat(startTag, "#content"), parser, content);
@@ -36259,7 +36266,7 @@
     return this;
   };
 
-  var PauseTyping = function PauseTyping() {
+  var PauseTyping$1 = function PauseTyping() {
     // Already in typingPaused state
     if (this.isTypingPaused) {
       return this;
@@ -36276,7 +36283,7 @@
     return this;
   };
 
-  var ResumeTyping = function ResumeTyping(offsetTime) {
+  var ResumeTyping$1 = function ResumeTyping(offsetTime) {
     // Already not in typingPaused state
     if (!this.isTypingPaused) {
       return this;
@@ -36485,8 +36492,8 @@
     typing: Typing$1,
     pause: Pause,
     resume: Resume,
-    pauseTyping: PauseTyping,
-    resumeTyping: ResumeTyping,
+    pauseTyping: PauseTyping$1,
+    resumeTyping: ResumeTyping$1,
     wait: Wait$1,
     setIgnoreWait: SetIgnoreWait$1,
     setSkipSpaceEnable: SetSkipSpaceEnable,
@@ -41678,8 +41685,8 @@
     }
   };
 
-  var methods$w = {};
-  Object.assign(methods$w, StyleMethods$2, SizeMethods$1, ShapesUpdateMethods$4, CheckerAnimationMethods);
+  var methods$x = {};
+  Object.assign(methods$x, StyleMethods$2, SizeMethods$1, ShapesUpdateMethods$4, CheckerAnimationMethods);
 
   var GetValue$2C = Phaser.Utils.Objects.GetValue;
   var IsPlainObject$F = Phaser.Utils.Objects.IsPlainObject;
@@ -41792,7 +41799,7 @@
     }]);
     return CheckboxShape;
   }(BaseShapes);
-  Object.assign(CheckboxShape.prototype, methods$w);
+  Object.assign(CheckboxShape.prototype, methods$x);
 
   var GetValue$2B = Phaser.Utils.Objects.GetValue;
   var Button = /*#__PURE__*/function (_ComponentBase) {
@@ -42188,8 +42195,8 @@
     }
   };
 
-  var methods$v = {};
-  Object.assign(methods$v, StyleMethods, SizeMethods, PositionMethods, ShapesUpdateMethods$3, ToggleAnimationMethods);
+  var methods$w = {};
+  Object.assign(methods$w, StyleMethods, SizeMethods, PositionMethods, ShapesUpdateMethods$3, ToggleAnimationMethods);
 
   var GrayScale = function GrayScale(color) {
     var shade = 0.3 * GetR(color) + 0.59 * GetG(color) + 0.11 * GetB(color);
@@ -42288,7 +42295,7 @@
     }]);
     return ToggleSwitchShape;
   }(BaseShapes);
-  Object.assign(ToggleSwitchShape.prototype, methods$v);
+  Object.assign(ToggleSwitchShape.prototype, methods$w);
 
   Phaser.Utils.Objects.GetValue;
 
@@ -45781,11 +45788,11 @@
     return this;
   };
 
-  var methods$u = {
+  var methods$v = {
     changeOrigin: ChangeOrigin,
     drawBounds: DrawBounds$1
   };
-  Object.assign(methods$u, Parent, AddChild$2, RemoveChild$1, ChildState, Transform, Position, Rotation, Scale$1, Visible$1, Alpha, Active, ScrollFactor, CameraFilter, Mask, Depth, Children, Tween, P3Container, RenderLayer, RenderTexture$1);
+  Object.assign(methods$v, Parent, AddChild$2, RemoveChild$1, ChildState, Transform, Position, Rotation, Scale$1, Visible$1, Alpha, Active, ScrollFactor, CameraFilter, Mask, Depth, Children, Tween, P3Container, RenderLayer, RenderTexture$1);
 
   var ContainerLite = /*#__PURE__*/function (_Base) {
     _inherits(ContainerLite, _Base);
@@ -46066,7 +46073,7 @@
     }]);
     return ContainerLite;
   }(Base$1);
-  Object.assign(ContainerLite.prototype, methods$u);
+  Object.assign(ContainerLite.prototype, methods$v);
 
   var GetSizerConfig$1 = function GetSizerConfig(gameObject) {
     if (!gameObject.hasOwnProperty('rexSizer')) {
@@ -49599,8 +49606,8 @@
     }
   };
 
-  var methods$t = {};
-  Object.assign(methods$t, DelayCallMethods$1, ConfigurationMethods$2, OpenMethods$1, CloseMethods);
+  var methods$u = {};
+  Object.assign(methods$u, DelayCallMethods$1, ConfigurationMethods$2, OpenMethods$1, CloseMethods);
 
   var GetValue$2j = Phaser.Utils.Objects.GetValue;
   var OpenCloseTransition = /*#__PURE__*/function (_ComponentBase) {
@@ -49648,7 +49655,7 @@
     }]);
     return OpenCloseTransition;
   }(ComponentBase);
-  Object.assign(OpenCloseTransition.prototype, methods$t);
+  Object.assign(OpenCloseTransition.prototype, methods$u);
 
   var GetFirstRenderCamera = function GetFirstRenderCamera(scene, gameObject) {
     var cameras = scene.sys.cameras.cameras;
@@ -52589,10 +52596,10 @@
     }]);
     return Rotate;
   }(TwoPointersTracer);
-  var methods$s = {
+  var methods$t = {
     spinObject: SpinObject
   };
-  Object.assign(Rotate.prototype, methods$s);
+  Object.assign(Rotate.prototype, methods$t);
   var IDLE = 'IDLE';
   var BEGIN = 'BEGIN';
   var RECOGNIZED = 'RECOGNIZED';
@@ -52687,7 +52694,7 @@
     return this;
   };
 
-  var methods$r = {
+  var methods$s = {
     getSizerConfig: GetSizerConfig,
     getChildPrevState: GetChildPrevState,
     pushIntoBounds: PushIntoBounds,
@@ -52727,7 +52734,7 @@
     setChildrenInteractive: SetChildrenInteractiveWrap,
     broadcastEvent: BroadcastEvent
   };
-  Object.assign(methods$r, PaddingMethods, AddChildMethods$8, RemoveChildMethods$7, GetParentSizerMethods, ScaleMethods, FadeMethods, EaseMoveMethods, ShakeMethods, EaseDataMethods, ClickMethods, ClickOutsideMethods, TouchingMethods, HideMethods, ModalMethods$1, GetShownChildrenMethods);
+  Object.assign(methods$s, PaddingMethods, AddChildMethods$8, RemoveChildMethods$7, GetParentSizerMethods, ScaleMethods, FadeMethods, EaseMoveMethods, ShakeMethods, EaseDataMethods, ClickMethods, ClickOutsideMethods, TouchingMethods, HideMethods, ModalMethods$1, GetShownChildrenMethods);
 
   var GetValue$1$ = Phaser.Utils.Objects.GetValue;
   var Base = /*#__PURE__*/function (_Container) {
@@ -52986,7 +52993,7 @@
     }]);
     return Base;
   }(ContainerLite);
-  Object.assign(Base.prototype, methods$r);
+  Object.assign(Base.prototype, methods$s);
 
   var GetChildrenWidth$4 = function GetChildrenWidth() {
     if (this.rexSizer.hidden) {
@@ -53361,7 +53368,7 @@
     }
   };
 
-  var methods$q = {
+  var methods$r = {
     getChildrenWidth: GetChildrenWidth$4,
     getChildrenHeight: GetChildrenHeight$4,
     getExpandedChildWidth: GetExpandedChildWidth$2,
@@ -53369,7 +53376,7 @@
     getChildrenSizers: GetChildrenSizers$4,
     layoutChildren: LayoutChildren$5
   };
-  Object.assign(methods$q, AddChildMethods$7, RemoveChildMethods$6);
+  Object.assign(methods$r, AddChildMethods$7, RemoveChildMethods$6);
 
   var IndexOf = function IndexOf(obj, child) {
     if (Array.isArray(obj)) {
@@ -53424,7 +53431,7 @@
     }]);
     return OverlapSizer;
   }(Base);
-  Object.assign(OverlapSizer.prototype, methods$q);
+  Object.assign(OverlapSizer.prototype, methods$r);
 
   var GetDistance = Phaser.Math.Distance.Between;
   var IsLocalPointInKnob = function IsLocalPointInKnob(knob, localX, localY) {
@@ -54436,8 +54443,8 @@
     }
   };
 
-  var methods$p = {};
-  Object.assign(methods$p, SetTransitionCallbackMethods, TransitionMethods, MaskMethods, GridCutMethods, FlipMethods);
+  var methods$q = {};
+  Object.assign(methods$q, SetTransitionCallbackMethods, TransitionMethods, MaskMethods, GridCutMethods, FlipMethods);
 
   var OnStart = function OnStart(parent, currentImage, nextImage, t) {};
   var OnProgress = function OnProgress(parent, currentImage, nextImage, t) {
@@ -54712,7 +54719,7 @@
   };
 
   // mixin
-  Object.assign(TransitionImage.prototype, methods$p);
+  Object.assign(TransitionImage.prototype, methods$q);
 
   // Slide modes
   var SlideLeft = 'slideLeft';
@@ -55875,10 +55882,10 @@
     return this;
   };
 
-  var methods$o = {
+  var methods$p = {
     scaleImage: ScaleImage
   };
-  Object.assign(methods$o, FlipMethods);
+  Object.assign(methods$p, FlipMethods);
 
   var ResizeBackground = function ResizeBackground() {
     var background = this.background;
@@ -55991,7 +55998,7 @@
     }]);
     return ImageBox;
   }(ContainerLite);
-  Object.assign(ImageBox.prototype, methods$o);
+  Object.assign(ImageBox.prototype, methods$p);
 
   var GetChildrenWidth$3 = function GetChildrenWidth(minimumMode) {
     if (this.rexSizer.hidden) {
@@ -56723,7 +56730,7 @@
     return this;
   };
 
-  var methods$n = {
+  var methods$o = {
     getChildrenWidth: GetChildrenWidth$3,
     getChildrenHeight: GetChildrenHeight$3,
     getExpandedChildWidth: GetExpandedChildWidth$1,
@@ -56739,7 +56746,7 @@
     runHeightWrap: RunHeightWrap$2,
     setChildrenAlignMode: SetChildrenAlignMode
   };
-  Object.assign(methods$n, AddChildMethods$6, RemoveChildMethods$5, AlignMethods, ProportionMethods, ExpandMethods$1);
+  Object.assign(methods$o, AddChildMethods$6, RemoveChildMethods$5, AlignMethods, ProportionMethods, ExpandMethods$1);
 
   var GetChildrenProportion = function GetChildrenProportion() {
     var result = 0;
@@ -56851,7 +56858,7 @@
     }]);
     return Sizer;
   }(Base);
-  Object.assign(Sizer.prototype, methods$n);
+  Object.assign(Sizer.prototype, methods$o);
 
   var SetDisplaySize = function SetDisplaySize(gameObject, width, height) {
     if (!gameObject) {
@@ -56926,8 +56933,8 @@
     return this;
   };
 
-  var methods$m = {
-    appendText: AppendText$1,
+  var methods$n = {
+    appendText: AppendText$2,
     resetDisplayContent: ResetDisplayContent$1
   };
 
@@ -57111,7 +57118,7 @@
     }]);
     return LabelBase;
   }(Sizer);
-  Object.assign(LabelBase.prototype, methods$m);
+  Object.assign(LabelBase.prototype, methods$n);
 
   var AddChildMask = function AddChildMask(maskTarget, sizeTarget, shape, padding) {
     var maskGameObject = new DefaultMaskGraphics(sizeTarget, shape, padding); // A Graphics game object
@@ -57587,11 +57594,11 @@
     }]);
     return FileChooser;
   }(DOMElement$2);
-  var methods$l = {
+  var methods$m = {
     resize: Resize,
     syncTo: SyncTo
   };
-  Object.assign(FileChooser.prototype, methods$l, LoadFileMethods);
+  Object.assign(FileChooser.prototype, methods$m, LoadFileMethods);
 
   var Config = {
     accept: 'image/*',
@@ -57674,11 +57681,11 @@
     return this;
   };
 
-  var methods$k = {
+  var methods$l = {
     getFileName: GetFileName,
     saveTexture: SaveTexture
   };
-  Object.assign(methods$k, OpenMethods);
+  Object.assign(methods$l, OpenMethods);
 
   var GetValue$1G = Phaser.Utils.Objects.GetValue;
 
@@ -57727,7 +57734,7 @@
     }]);
     return ImageInputLabel;
   }(Label);
-  Object.assign(ImageInputLabel.prototype, methods$k);
+  Object.assign(ImageInputLabel.prototype, methods$l);
 
   var ElementProperties = {
     id: ['id', undefined],
@@ -58091,10 +58098,10 @@
     }]);
     return InputText;
   }(DOMElement$1);
-  var methods$j = {
+  var methods$k = {
     resize: Resize
   };
-  Object.assign(InputText.prototype, methods$j);
+  Object.assign(InputText.prototype, methods$k);
 
   var DropEnableMethods = {
     setDropEnable: function setDropEnable(enable) {
@@ -58928,14 +58935,14 @@
     }]);
     return Chart;
   }(Canvas);
-  var methods$i = {
+  var methods$j = {
     setChart: SetChart,
     getChartDataset: GetChartDataset,
     getChartData: GetChartData,
     setChartData: SetChartData,
     updateChart: UpdateChart
   };
-  Object.assign(Chart$1.prototype, methods$i);
+  Object.assign(Chart$1.prototype, methods$j);
 
   var Sum = function Sum() {
     return Array.prototype.reduce.call(arguments, Add$5, 0);
@@ -59587,7 +59594,7 @@
     return this;
   };
 
-  var methods$h = {
+  var methods$i = {
     getChildrenWidth: GetChildrenWidth$2,
     getChildrenHeight: GetChildrenHeight$2,
     getExpandedChildWidth: GetExpandedChildWidth,
@@ -59607,7 +59614,7 @@
     insertEmptyColumn: InsertEmptyColumn,
     addEmptyColumn: AddEmptyColumn
   };
-  Object.assign(methods$h, AddChildMethods$5, RemoveChildMethods$4, SetSpaceMethods);
+  Object.assign(methods$i, AddChildMethods$5, RemoveChildMethods$4, SetSpaceMethods);
 
   var GetTotalColumnProportions = function GetTotalColumnProportions() {
     var result = 0,
@@ -59778,7 +59785,7 @@
     }]);
     return GridSizer;
   }(Base);
-  Object.assign(GridSizer.prototype, methods$h);
+  Object.assign(GridSizer.prototype, methods$i);
 
   var GetChildrenWidth$1 = function GetChildrenWidth(minimumMode) {
     if (this.rexSizer.hidden) {
@@ -60276,7 +60283,7 @@
     }
   };
 
-  var methods$g = {
+  var methods$h = {
     getChildrenWidth: GetChildrenWidth$1,
     getChildrenHeight: GetChildrenHeight$1,
     getChildrenSizers: GetChildrenSizers$1,
@@ -60287,7 +60294,7 @@
     hasHeightWrap: HasHeightWrap,
     runHeightWrap: RunHeightWrap
   };
-  Object.assign(methods$g, AddChildMethods$4, RemoveChildMethods$3);
+  Object.assign(methods$h, AddChildMethods$4, RemoveChildMethods$3);
 
   var GetMaxChildWidth = function GetMaxChildWidth(children) {
     if (children === undefined) {
@@ -60465,7 +60472,7 @@
     'justify-bottom': 4,
     'justify-center': 5
   };
-  Object.assign(FixWidthSizer.prototype, methods$g);
+  Object.assign(FixWidthSizer.prototype, methods$h);
 
   var Properties = ['alpha', 'tint'];
   var DecorateGameObject = function DecorateGameObject(gameObject, config) {
@@ -60976,13 +60983,13 @@
     click: 1,
     none: -1
   };
-  var methods$f = {
+  var methods$g = {
     getStartPoint: GetStartPoint,
     getEndPoint: GetEndoint,
     updateThumb: UpdateThumb,
     updateIndicator: UpdateIndicator
   };
-  Object.assign(Slider.prototype, methods$f);
+  Object.assign(Slider.prototype, methods$g);
 
   var GetValue$1p = Phaser.Utils.Objects.GetValue;
   var ScrollBar = /*#__PURE__*/function (_Sizer) {
@@ -66209,10 +66216,10 @@
     }]);
     return ButtonGroup;
   }();
-  var methods$e = {
+  var methods$f = {
     fireEvent: FireEvent
   };
-  Object.assign(ButtonGroup.prototype, AddMethods, RemoveMethods, ButtonsTypeMethods, ButtonMethods$2, methods$e);
+  Object.assign(ButtonGroup.prototype, AddMethods, RemoveMethods, ButtonsTypeMethods, ButtonMethods$2, methods$f);
 
   // Include in Buttons/GridButtons/FixedWidthButtons class
 
@@ -68043,10 +68050,10 @@
     }
     return _createClass(HolyGrail);
   }(Sizer);
-  var methods$d = {
+  var methods$e = {
     build: Build
   };
-  Object.assign(HolyGrail.prototype, methods$d);
+  Object.assign(HolyGrail.prototype, methods$e);
 
   var ButtonMethods = {
     getButtonsSizer: function getButtonsSizer(groupName) {
@@ -69603,7 +69610,7 @@
     return this;
   };
 
-  var methods$c = {
+  var methods$d = {
     setTableOY: SetTableOY,
     setTableOX: SetTableOX,
     showCells: ShowCells,
@@ -69627,7 +69634,7 @@
     setGridSize: SetGridSize,
     updateVisibleCell: UpdateVisibleCell
   };
-  Object.assign(methods$c, ChildrenMaskMethods);
+  Object.assign(methods$d, ChildrenMaskMethods);
 
   var Group = Phaser.GameObjects.Group;
   var Set$1 = Phaser.Structs.Set;
@@ -70022,7 +70029,7 @@
   }(ContainerLite);
 
   // mixin
-  Object.assign(GridTable$1.prototype, methods$c);
+  Object.assign(GridTable$1.prototype, methods$d);
   var SCROLLMODE = {
     v: 0,
     vertical: 0,
@@ -70386,10 +70393,10 @@
     }]);
     return GridTable;
   }(Scrollable);
-  var methods$b = {
+  var methods$c = {
     setItems: SetItems
   };
-  Object.assign(GridTable.prototype, ScrollMethods$1, methods$b);
+  Object.assign(GridTable.prototype, ScrollMethods$1, methods$c);
 
   var GetEaseConfig = function GetEaseConfig(easeConfig, menu) {
     if (easeConfig.sameOrientation) {
@@ -70807,7 +70814,7 @@
   };
   Object.assign(Menu.prototype, Methods$3);
 
-  var methods$a = {
+  var methods$b = {
     setWrapEnable: function setWrapEnable(enable) {
       if (enable === undefined) {
         enable = true;
@@ -71305,7 +71312,7 @@
     emitButtonClick: EmitListButtonClick,
     emitButtonOver: EmitButtonOver
   };
-  Object.assign(Methods$2, methods$a, FocusButtonMethods);
+  Object.assign(Methods$2, methods$b, FocusButtonMethods);
 
   var GetValue$M = Phaser.Utils.Objects.GetValue;
   var DropDownList = /*#__PURE__*/function (_Label) {
@@ -71563,6 +71570,12 @@
     },
     getPageOfPreviousLine: function getPageOfPreviousLine() {
       return this.getPageByLineIndex(this.startLineIndex - 1);
+    },
+    getPageOfFirstLine: function getPageOfFirstLine() {
+      return this.getPageByLineIndex(0);
+    },
+    getPageOfLastLine: function getPageOfLastLine() {
+      return this.getPageByLineIndex(this.totalLinesCount);
     }
   };
 
@@ -71601,6 +71614,14 @@
     },
     showPreviousLine: function showPreviousLine() {
       this.displayText(this.getPageOfPreviousLine());
+      return this;
+    },
+    showFirstLine: function showFirstLine() {
+      this.displayText(this.getPageOfFirstLine());
+      return this;
+    },
+    showLastLine: function showLastLine() {
+      this.displayText(this.getPageOfLastLine());
       return this;
     },
     displayText: function displayText(text) {
@@ -71766,6 +71787,167 @@
   }(ComponentBase);
   Object.assign(TextPage.prototype, Methods$1);
 
+  var StartTyping = function StartTyping(text, speed, startIdx, timerStartAt) {
+    if (text !== undefined) {
+      this.setTypingContent(text);
+    }
+    if (speed !== undefined) {
+      this.speed = speed;
+    }
+    if (startIdx === undefined) {
+      startIdx = 0;
+    }
+    this.typingIdx = startIdx + 1;
+    if (this.speed === 0) {
+      this.stop(true);
+    } else {
+      this.setText('');
+      this.startTimer(timerStartAt);
+    }
+    return this;
+  };
+
+  var GetPlainText = function GetPlainText(textObject, text) {
+    if (textObject.getPlainText) {
+      text = textObject.getPlainText(text);
+    }
+    return text;
+  };
+
+  var StartTypingFromLine = function StartTypingFromLine(text, lineIndex, speed, timerStartAt) {
+    var startIdx;
+    if (lineIndex > 0) {
+      var plainText = GetPlainText(this.parent, text);
+      startIdx = GetNewLineIndex(plainText, lineIndex);
+    }
+    return this.start(text, speed, startIdx, timerStartAt);
+  };
+  var GetNewLineIndex = function GetNewLineIndex(s, n) {
+    var index = undefined;
+    for (var i = 0; i < n; i++) {
+      index = s.indexOf('\n', index + 1);
+      if (index === -1) {
+        break;
+      }
+    }
+    return index;
+  };
+
+  var GetSubString = function GetSubString(textObject, text, startIdx, endIdx) {
+    var result;
+    if (textObject.getSubString) {
+      result = textObject.getSubString(text, startIdx, endIdx);
+    } else {
+      result = text.slice(startIdx, endIdx);
+    }
+    return result;
+  };
+
+  var GetTypingString = function GetTypingString(text, typeIdx, textLen, typeMode) {
+    var textObject = this.parent;
+    var result;
+    if (typeMode === 0) {
+      //left-to-right
+      var startIdx = 0;
+      var endIdx = typeIdx;
+      this.insertIdx = endIdx;
+      result = GetSubString(textObject, text, startIdx, endIdx);
+    } else if (typeMode === 1) {
+      //right-to-left
+      var endIdx = textLen;
+      var startIdx = endIdx - typeIdx;
+      this.insertIdx = 0;
+      result = GetSubString(textObject, text, startIdx, endIdx);
+    } else if (typeMode === 2) {
+      //middle-to-sides
+      var midIdx = textLen / 2;
+      var startIdx = Math.floor(midIdx - typeIdx / 2);
+      var endIdx = startIdx + typeIdx;
+      this.insertIdx = typeIdx % 2 ? typeIdx : 0;
+      result = GetSubString(textObject, text, startIdx, endIdx);
+    } else if (typeMode === 3) {
+      //sides-to-middle
+      var lowerLen = Math.floor(typeIdx / 2);
+      var lowerResult;
+      if (lowerLen > 0) {
+        var endIdx = textLen;
+        var startIdx = endIdx - lowerLen;
+        lowerResult = GetSubString(textObject, text, startIdx, endIdx);
+      } else {
+        lowerResult = "";
+      }
+      var upperLen = typeIdx - lowerLen;
+      var upperResult;
+      if (upperLen > 0) {
+        var startIdx = 0;
+        var endIdx = startIdx + upperLen;
+        this.insertIdx = endIdx;
+        upperResult = GetSubString(textObject, text, startIdx, endIdx);
+      } else {
+        upperResult = "";
+        this.insertIdx = 0;
+      }
+      result = upperResult + lowerResult;
+    }
+    this.insertChar = result.charAt(this.insertIdx - 1);
+    return result;
+  };
+
+  var StopTyping = function StopTyping(showAllText) {
+    var timer = this.getTimer();
+    if (timer) {
+      this.freeTimer();
+    }
+    if (showAllText) {
+      // Fire 'type' event for remainder characters until lastChar
+      while (!this.isLastChar) {
+        GetTypingString.call(this, this.text, this.typingIdx, this.textLen, this.typeMode);
+        this.emit('typechar', this.insertChar);
+        this.typingIdx++;
+      }
+      // Display all characters on text game object
+      this.setText(this.text);
+      this.emit('type');
+      this.emit('complete', this, this.parent);
+    }
+    return this;
+  };
+
+  var PauseTyping = function PauseTyping() {
+    var timer = this.getTimer();
+    if (timer) {
+      timer.paused = true;
+    }
+    return this;
+  };
+
+  var ResumeTyping = function ResumeTyping() {
+    var timer = this.getTimer();
+    if (timer) {
+      timer.paused = false;
+    }
+    return this;
+  };
+
+  var AppendText = function AppendText(text) {
+    var newText = this.text.concat(TransferText(text));
+    if (this.isTyping) {
+      this.setTypingContent(newText);
+    } else {
+      this.start(newText, undefined, this.textLen);
+    }
+    return this;
+  };
+
+  var methods$a = {
+    start: StartTyping,
+    startFromLine: StartTypingFromLine,
+    stop: StopTyping,
+    pause: PauseTyping,
+    resumeTyping: ResumeTyping,
+    appendText: AppendText
+  };
+
   var GetWrapText = function GetWrapText(textObject, text) {
     var textObjectType = GetTextObjectType(textObject);
     switch (textObjectType) {
@@ -71861,7 +72043,7 @@
         return this._text;
       },
       set: function set(value) {
-        var text = TransferText(value);
+        var text = TransferText$1(value);
         if (this.textWrapEnable) {
           text = GetWrapText(this.parent, text);
         }
@@ -71878,87 +72060,16 @@
         return this.typingIdx === this.textLen;
       }
     }, {
-      key: "start",
-      value: function start(text, speed, startIdx, timerStartAt) {
-        if (text !== undefined) {
-          this.setTypingContent(text);
-        }
-        if (speed !== undefined) {
-          this.speed = speed;
-        }
-        if (startIdx === undefined) {
-          startIdx = 0;
-        }
-        this.typingIdx = startIdx + 1;
-        if (this.speed === 0) {
-          this.stop(true);
-        } else {
-          this.setText('');
-          this.startTimer(timerStartAt);
-        }
-        return this;
-      }
-    }, {
-      key: "appendText",
-      value: function appendText(text) {
-        var newText = this.text.concat(TransferText(text));
-        if (this.isTyping) {
-          this.setTypingContent(newText);
-        } else {
-          this.start(newText, undefined, this.textLen);
-        }
-        return this;
-      }
-    }, {
-      key: "stop",
-      value: function stop(showAllText) {
-        var timer = this.getTimer();
-        if (timer) {
-          this.freeTimer();
-        }
-        if (showAllText) {
-          // Fire 'type' event for remainder characters until lastChar
-          while (!this.isLastChar) {
-            this.getTypingString(this.text, this.typingIdx, this.textLen, this.typeMode);
-            this.emit('typechar', this.insertChar);
-            this.typingIdx++;
-          }
-          // Display all characters on text game object
-          this.setText(this.text);
-          this.emit('type');
-          this.emit('complete', this, this.parent);
-        }
-        return this;
-      }
-    }, {
-      key: "pause",
-      value: function pause() {
-        var timer = this.getTimer();
-        if (timer) {
-          timer.paused = true;
-        }
-        return this;
-      }
-    }, {
-      key: "resume",
-      value: function resume() {
-        var timer = this.getTimer();
-        if (timer) {
-          timer.paused = false;
-        }
-        return this;
-      }
-    }, {
       key: "setTypingContent",
       value: function setTypingContent(text) {
         this.text = text;
-        this.textLen = this.getTextLength(this.text);
+        this.textLen = GetPlainText(this.parent, this.text).length;
         return this;
       }
     }, {
       key: "onTyping",
       value: function onTyping() {
-        var newText = this.getTypingString(this.text, this.typingIdx, this.textLen, this.typeMode);
+        var newText = GetTypingString.call(this, this.text, this.typingIdx, this.textLen, this.typeMode);
         this.setText(newText);
         this.emit('typechar', this.insertChar);
         this.emit('type');
@@ -71969,56 +72080,6 @@
           this.timer.delay = this.speed; // delay of next typing            
           this.typingIdx++;
         }
-      }
-    }, {
-      key: "getTypingString",
-      value: function getTypingString(text, typeIdx, textLen, typeMode) {
-        var result;
-        if (typeMode === 0) {
-          //left-to-right
-          var startIdx = 0;
-          var endIdx = typeIdx;
-          this.insertIdx = endIdx;
-          result = this.getSubString(text, startIdx, endIdx);
-        } else if (typeMode === 1) {
-          //right-to-left
-          var endIdx = textLen;
-          var startIdx = endIdx - typeIdx;
-          this.insertIdx = 0;
-          result = this.getSubString(text, startIdx, endIdx);
-        } else if (typeMode === 2) {
-          //middle-to-sides
-          var midIdx = textLen / 2;
-          var startIdx = Math.floor(midIdx - typeIdx / 2);
-          var endIdx = startIdx + typeIdx;
-          this.insertIdx = typeIdx % 2 ? typeIdx : 0;
-          result = this.getSubString(text, startIdx, endIdx);
-        } else if (typeMode === 3) {
-          //sides-to-middle
-          var lowerLen = Math.floor(typeIdx / 2);
-          var lowerResult;
-          if (lowerLen > 0) {
-            var endIdx = textLen;
-            var startIdx = endIdx - lowerLen;
-            lowerResult = this.getSubString(text, startIdx, endIdx);
-          } else {
-            lowerResult = "";
-          }
-          var upperLen = typeIdx - lowerLen;
-          var upperResult;
-          if (upperLen > 0) {
-            var startIdx = 0;
-            var endIdx = startIdx + upperLen;
-            this.insertIdx = endIdx;
-            upperResult = this.getSubString(text, startIdx, endIdx);
-          } else {
-            upperResult = "";
-            this.insertIdx = 0;
-          }
-          result = upperResult + lowerResult;
-        }
-        this.insertChar = result.charAt(this.insertIdx - 1);
-        return result;
       }
     }, {
       key: "startTimer",
@@ -72074,34 +72135,10 @@
           this.parent.setText(text);
         }
       }
-    }, {
-      key: "getTextLength",
-      value: function getTextLength(text) {
-        var gameObject = this.parent;
-        var len;
-        if (gameObject.getPlainText) {
-          len = gameObject.getPlainText(text).length;
-        } else {
-          len = text.length;
-        }
-        return len;
-      }
-    }, {
-      key: "getSubString",
-      value: function getSubString(text, startIdx, endIdx) {
-        var gameObject = this.parent;
-        var result;
-        if (gameObject.getSubString) {
-          result = gameObject.getSubString(text, startIdx, endIdx);
-        } else {
-          result = text.slice(startIdx, endIdx);
-        }
-        return result;
-      }
     }]);
     return TextTyping;
   }(ComponentBase);
-  var TransferText = function TransferText(text) {
+  var TransferText$1 = function TransferText(text) {
     if (Array.isArray(text)) {
       text = text.join('\n');
     } else if (typeof text === 'number') {
@@ -72115,6 +72152,7 @@
     'middle-to-sides': 2,
     'sides-to-middle': 3
   };
+  Object.assign(TextTyping.prototype, methods$a);
 
   var GetValue$J = Phaser.Utils.Objects.GetValue;
   var TextBoxBase = function TextBoxBase(GOClass, type) {
@@ -72131,14 +72169,24 @@
 
         // childrenMap must have 'text' element
         var text = _this.childrenMap.text;
+        _this.setTypingMode(GetValue$J(config, 'typingMode', 'page'));
         _this.page = new TextPage(text, GetValue$J(config, 'page', undefined));
         _this.typing = new TextTyping(text, GetValue$J(config, 'typing', config.type));
-        _this.typing.on('complete', _this.onPageEnd, _assertThisInitialized(_this)).on('type', _this.onType, _assertThisInitialized(_this)).on('typechar', _this.onTypeChar, _assertThisInitialized(_this));
+        _this.typing.on('complete', _this.onTypingComplete, _assertThisInitialized(_this)).on('type', _this.onType, _assertThisInitialized(_this)).on('typechar', _this.onTypeChar, _assertThisInitialized(_this));
         _this.textWidth = text.width;
         _this.textHeight = text.height;
         return _this;
       }
       _createClass(TextBox, [{
+        key: "setTypingMode",
+        value: function setTypingMode(mode) {
+          if (typeof mode === 'string') {
+            mode = TypingMode[mode];
+          }
+          this.typingMode = mode;
+          return this;
+        }
+      }, {
         key: "start",
         value: function start(text, speed) {
           this.page.setText(text);
@@ -72146,7 +72194,13 @@
             this.setTypingSpeed(speed);
           }
           this.emit('start');
-          this.typeNextPage();
+          if (this.typingMode === 0) {
+            // Typing page by page
+            this.typeNextPage();
+          } else {
+            // Typing line by line
+            this.typeNextLine();
+          }
           return this;
         }
       }, {
@@ -72159,6 +72213,24 @@
             this.emit('complete');
           }
           return this;
+        }
+      }, {
+        key: "typeNextLine",
+        value: function typeNextLine() {
+          if (!this.isLastLine) {
+            var txt = this.page.getPageOfNextLine();
+            var startLineIndex;
+            if (this.isFirstLine) {
+              // Typing from 1st line
+              startLineIndex = 0;
+            } else {
+              // Typing last line
+              startLineIndex = this.page.pageLinesCount - 1;
+            }
+            this.typing.startFromLine(txt, startLineIndex);
+          } else {
+            this.emit('complete');
+          }
         }
       }, {
         key: "pause",
@@ -72188,9 +72260,13 @@
         key: "showLastPage",
         value: function showLastPage() {
           this.typing.stop();
-          this.page.showLastPage();
+          if (this.typingMode === 0) {
+            this.page.showLastPage();
+          } else {
+            this.page.showLastLine();
+          }
           this.emit('type');
-          this.onPageEnd();
+          this.onTypingComplete();
           return this;
         }
       }, {
@@ -72231,6 +72307,31 @@
           return this.page.pageIndex;
         }
       }, {
+        key: "isLastLine",
+        get: function get() {
+          return this.page.isLastLine;
+        }
+      }, {
+        key: "isFirstLine",
+        get: function get() {
+          return this.page.isFirstLine;
+        }
+      }, {
+        key: "lineCound",
+        get: function get() {
+          return this.page.totalLinesCount;
+        }
+      }, {
+        key: "startLineIndex",
+        get: function get() {
+          return this.page.startLineIndex;
+        }
+      }, {
+        key: "endLineIndex",
+        get: function get() {
+          return this.page.endLineIndex;
+        }
+      }, {
         key: "typingSpeed",
         get: function get() {
           return this.typing.speed;
@@ -72252,22 +72353,31 @@
           this.emit('typechar', _char);
         }
       }, {
-        key: "onPageEnd",
-        value: function onPageEnd() {
-          var isLastPage = this.isLastPage;
-          this.emit('pageend');
-          /*
-          Might enter this method immediately, if invoking typeNextPage() in this 'pageend' event.
-          */
+        key: "onTypingComplete",
+        value: function onTypingComplete() {
+          if (this.typingMode === 0) {
+            var isLastPage = this.isLastPage;
+            this.emit('pageend');
+            /*
+            Might enter this method immediately, if invoking typeNextPage() in this 'pageend' event.
+            */
 
-          if (isLastPage) {
-            this.emit('complete');
+            if (isLastPage) {
+              this.emit('complete');
+            }
+          } else {
+            // Typing next line continually
+            this.typeNextLine();
           }
         }
       }]);
       return TextBox;
     }(GOClass);
     return TextBox;
+  };
+  var TypingMode = {
+    page: 0,
+    line: 1
   };
 
   var TextBox = /*#__PURE__*/function (_TextBoxBase) {

@@ -534,6 +534,12 @@
     },
     getPageOfPreviousLine: function getPageOfPreviousLine() {
       return this.getPageByLineIndex(this.startLineIndex - 1);
+    },
+    getPageOfFirstLine: function getPageOfFirstLine() {
+      return this.getPageByLineIndex(0);
+    },
+    getPageOfLastLine: function getPageOfLastLine() {
+      return this.getPageByLineIndex(this.totalLinesCount);
     }
   };
 
@@ -613,6 +619,14 @@
     },
     showPreviousLine: function showPreviousLine() {
       this.displayText(this.getPageOfPreviousLine());
+      return this;
+    },
+    showFirstLine: function showFirstLine() {
+      this.displayText(this.getPageOfFirstLine());
+      return this;
+    },
+    showLastLine: function showLastLine() {
+      this.displayText(this.getPageOfLastLine());
       return this;
     },
     displayText: function displayText(text) {

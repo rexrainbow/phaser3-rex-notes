@@ -16161,7 +16161,14 @@
     } else {
       var name = s.substring(0, index);
       var expression = s.substring(index + 1);
-      out[name] = TypeConvert(expression);
+      var value = TypeConvert(expression);
+
+      // String post-processor
+      // Replace '\n' (2 characters) by '\n' (newline character, 1 character)
+      if (typeof value === 'string') {
+        value = value.replace(/\\n/g, '\n');
+      }
+      out[name] = value;
     }
     return out;
   };

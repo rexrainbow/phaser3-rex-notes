@@ -611,6 +611,12 @@
     },
     getPageOfPreviousLine: function getPageOfPreviousLine() {
       return this.getPageByLineIndex(this.startLineIndex - 1);
+    },
+    getPageOfFirstLine: function getPageOfFirstLine() {
+      return this.getPageByLineIndex(0);
+    },
+    getPageOfLastLine: function getPageOfLastLine() {
+      return this.getPageByLineIndex(this.totalLinesCount);
     }
   };
 
@@ -690,6 +696,14 @@
     },
     showPreviousLine: function showPreviousLine() {
       this.displayText(this.getPageOfPreviousLine());
+      return this;
+    },
+    showFirstLine: function showFirstLine() {
+      this.displayText(this.getPageOfFirstLine());
+      return this;
+    },
+    showLastLine: function showLastLine() {
+      this.displayText(this.getPageOfLastLine());
       return this;
     },
     displayText: function displayText(text) {
@@ -855,6 +869,167 @@
   }(ComponentBase);
   Object.assign(TextPage.prototype, Methods);
 
+  var StartTyping = function StartTyping(text, speed, startIdx, timerStartAt) {
+    if (text !== undefined) {
+      this.setTypingContent(text);
+    }
+    if (speed !== undefined) {
+      this.speed = speed;
+    }
+    if (startIdx === undefined) {
+      startIdx = 0;
+    }
+    this.typingIdx = startIdx + 1;
+    if (this.speed === 0) {
+      this.stop(true);
+    } else {
+      this.setText('');
+      this.startTimer(timerStartAt);
+    }
+    return this;
+  };
+
+  var GetPlainText = function GetPlainText(textObject, text) {
+    if (textObject.getPlainText) {
+      text = textObject.getPlainText(text);
+    }
+    return text;
+  };
+
+  var StartTypingFromLine = function StartTypingFromLine(text, lineIndex, speed, timerStartAt) {
+    var startIdx;
+    if (lineIndex > 0) {
+      var plainText = GetPlainText(this.parent, text);
+      startIdx = GetNewLineIndex(plainText, lineIndex);
+    }
+    return this.start(text, speed, startIdx, timerStartAt);
+  };
+  var GetNewLineIndex = function GetNewLineIndex(s, n) {
+    var index = undefined;
+    for (var i = 0; i < n; i++) {
+      index = s.indexOf('\n', index + 1);
+      if (index === -1) {
+        break;
+      }
+    }
+    return index;
+  };
+
+  var GetSubString = function GetSubString(textObject, text, startIdx, endIdx) {
+    var result;
+    if (textObject.getSubString) {
+      result = textObject.getSubString(text, startIdx, endIdx);
+    } else {
+      result = text.slice(startIdx, endIdx);
+    }
+    return result;
+  };
+
+  var GetTypingString = function GetTypingString(text, typeIdx, textLen, typeMode) {
+    var textObject = this.parent;
+    var result;
+    if (typeMode === 0) {
+      //left-to-right
+      var startIdx = 0;
+      var endIdx = typeIdx;
+      this.insertIdx = endIdx;
+      result = GetSubString(textObject, text, startIdx, endIdx);
+    } else if (typeMode === 1) {
+      //right-to-left
+      var endIdx = textLen;
+      var startIdx = endIdx - typeIdx;
+      this.insertIdx = 0;
+      result = GetSubString(textObject, text, startIdx, endIdx);
+    } else if (typeMode === 2) {
+      //middle-to-sides
+      var midIdx = textLen / 2;
+      var startIdx = Math.floor(midIdx - typeIdx / 2);
+      var endIdx = startIdx + typeIdx;
+      this.insertIdx = typeIdx % 2 ? typeIdx : 0;
+      result = GetSubString(textObject, text, startIdx, endIdx);
+    } else if (typeMode === 3) {
+      //sides-to-middle
+      var lowerLen = Math.floor(typeIdx / 2);
+      var lowerResult;
+      if (lowerLen > 0) {
+        var endIdx = textLen;
+        var startIdx = endIdx - lowerLen;
+        lowerResult = GetSubString(textObject, text, startIdx, endIdx);
+      } else {
+        lowerResult = "";
+      }
+      var upperLen = typeIdx - lowerLen;
+      var upperResult;
+      if (upperLen > 0) {
+        var startIdx = 0;
+        var endIdx = startIdx + upperLen;
+        this.insertIdx = endIdx;
+        upperResult = GetSubString(textObject, text, startIdx, endIdx);
+      } else {
+        upperResult = "";
+        this.insertIdx = 0;
+      }
+      result = upperResult + lowerResult;
+    }
+    this.insertChar = result.charAt(this.insertIdx - 1);
+    return result;
+  };
+
+  var StopTyping = function StopTyping(showAllText) {
+    var timer = this.getTimer();
+    if (timer) {
+      this.freeTimer();
+    }
+    if (showAllText) {
+      // Fire 'type' event for remainder characters until lastChar
+      while (!this.isLastChar) {
+        GetTypingString.call(this, this.text, this.typingIdx, this.textLen, this.typeMode);
+        this.emit('typechar', this.insertChar);
+        this.typingIdx++;
+      }
+      // Display all characters on text game object
+      this.setText(this.text);
+      this.emit('type');
+      this.emit('complete', this, this.parent);
+    }
+    return this;
+  };
+
+  var PauseTyping = function PauseTyping() {
+    var timer = this.getTimer();
+    if (timer) {
+      timer.paused = true;
+    }
+    return this;
+  };
+
+  var ResumeTyping = function ResumeTyping() {
+    var timer = this.getTimer();
+    if (timer) {
+      timer.paused = false;
+    }
+    return this;
+  };
+
+  var AppendText$1 = function AppendText(text) {
+    var newText = this.text.concat(TransferText(text));
+    if (this.isTyping) {
+      this.setTypingContent(newText);
+    } else {
+      this.start(newText, undefined, this.textLen);
+    }
+    return this;
+  };
+
+  var methods$6 = {
+    start: StartTyping,
+    startFromLine: StartTypingFromLine,
+    stop: StopTyping,
+    pause: PauseTyping,
+    resumeTyping: ResumeTyping,
+    appendText: AppendText$1
+  };
+
   var GetWrapText = function GetWrapText(textObject, text) {
     var textObjectType = GetTextObjectType(textObject);
     switch (textObjectType) {
@@ -950,7 +1125,7 @@
         return this._text;
       },
       set: function set(value) {
-        var text = TransferText(value);
+        var text = TransferText$1(value);
         if (this.textWrapEnable) {
           text = GetWrapText(this.parent, text);
         }
@@ -967,87 +1142,16 @@
         return this.typingIdx === this.textLen;
       }
     }, {
-      key: "start",
-      value: function start(text, speed, startIdx, timerStartAt) {
-        if (text !== undefined) {
-          this.setTypingContent(text);
-        }
-        if (speed !== undefined) {
-          this.speed = speed;
-        }
-        if (startIdx === undefined) {
-          startIdx = 0;
-        }
-        this.typingIdx = startIdx + 1;
-        if (this.speed === 0) {
-          this.stop(true);
-        } else {
-          this.setText('');
-          this.startTimer(timerStartAt);
-        }
-        return this;
-      }
-    }, {
-      key: "appendText",
-      value: function appendText(text) {
-        var newText = this.text.concat(TransferText(text));
-        if (this.isTyping) {
-          this.setTypingContent(newText);
-        } else {
-          this.start(newText, undefined, this.textLen);
-        }
-        return this;
-      }
-    }, {
-      key: "stop",
-      value: function stop(showAllText) {
-        var timer = this.getTimer();
-        if (timer) {
-          this.freeTimer();
-        }
-        if (showAllText) {
-          // Fire 'type' event for remainder characters until lastChar
-          while (!this.isLastChar) {
-            this.getTypingString(this.text, this.typingIdx, this.textLen, this.typeMode);
-            this.emit('typechar', this.insertChar);
-            this.typingIdx++;
-          }
-          // Display all characters on text game object
-          this.setText(this.text);
-          this.emit('type');
-          this.emit('complete', this, this.parent);
-        }
-        return this;
-      }
-    }, {
-      key: "pause",
-      value: function pause() {
-        var timer = this.getTimer();
-        if (timer) {
-          timer.paused = true;
-        }
-        return this;
-      }
-    }, {
-      key: "resume",
-      value: function resume() {
-        var timer = this.getTimer();
-        if (timer) {
-          timer.paused = false;
-        }
-        return this;
-      }
-    }, {
       key: "setTypingContent",
       value: function setTypingContent(text) {
         this.text = text;
-        this.textLen = this.getTextLength(this.text);
+        this.textLen = GetPlainText(this.parent, this.text).length;
         return this;
       }
     }, {
       key: "onTyping",
       value: function onTyping() {
-        var newText = this.getTypingString(this.text, this.typingIdx, this.textLen, this.typeMode);
+        var newText = GetTypingString.call(this, this.text, this.typingIdx, this.textLen, this.typeMode);
         this.setText(newText);
         this.emit('typechar', this.insertChar);
         this.emit('type');
@@ -1058,56 +1162,6 @@
           this.timer.delay = this.speed; // delay of next typing            
           this.typingIdx++;
         }
-      }
-    }, {
-      key: "getTypingString",
-      value: function getTypingString(text, typeIdx, textLen, typeMode) {
-        var result;
-        if (typeMode === 0) {
-          //left-to-right
-          var startIdx = 0;
-          var endIdx = typeIdx;
-          this.insertIdx = endIdx;
-          result = this.getSubString(text, startIdx, endIdx);
-        } else if (typeMode === 1) {
-          //right-to-left
-          var endIdx = textLen;
-          var startIdx = endIdx - typeIdx;
-          this.insertIdx = 0;
-          result = this.getSubString(text, startIdx, endIdx);
-        } else if (typeMode === 2) {
-          //middle-to-sides
-          var midIdx = textLen / 2;
-          var startIdx = Math.floor(midIdx - typeIdx / 2);
-          var endIdx = startIdx + typeIdx;
-          this.insertIdx = typeIdx % 2 ? typeIdx : 0;
-          result = this.getSubString(text, startIdx, endIdx);
-        } else if (typeMode === 3) {
-          //sides-to-middle
-          var lowerLen = Math.floor(typeIdx / 2);
-          var lowerResult;
-          if (lowerLen > 0) {
-            var endIdx = textLen;
-            var startIdx = endIdx - lowerLen;
-            lowerResult = this.getSubString(text, startIdx, endIdx);
-          } else {
-            lowerResult = "";
-          }
-          var upperLen = typeIdx - lowerLen;
-          var upperResult;
-          if (upperLen > 0) {
-            var startIdx = 0;
-            var endIdx = startIdx + upperLen;
-            this.insertIdx = endIdx;
-            upperResult = this.getSubString(text, startIdx, endIdx);
-          } else {
-            upperResult = "";
-            this.insertIdx = 0;
-          }
-          result = upperResult + lowerResult;
-        }
-        this.insertChar = result.charAt(this.insertIdx - 1);
-        return result;
       }
     }, {
       key: "startTimer",
@@ -1163,34 +1217,10 @@
           this.parent.setText(text);
         }
       }
-    }, {
-      key: "getTextLength",
-      value: function getTextLength(text) {
-        var gameObject = this.parent;
-        var len;
-        if (gameObject.getPlainText) {
-          len = gameObject.getPlainText(text).length;
-        } else {
-          len = text.length;
-        }
-        return len;
-      }
-    }, {
-      key: "getSubString",
-      value: function getSubString(text, startIdx, endIdx) {
-        var gameObject = this.parent;
-        var result;
-        if (gameObject.getSubString) {
-          result = gameObject.getSubString(text, startIdx, endIdx);
-        } else {
-          result = text.slice(startIdx, endIdx);
-        }
-        return result;
-      }
     }]);
     return TextTyping;
   }(ComponentBase);
-  var TransferText = function TransferText(text) {
+  var TransferText$1 = function TransferText(text) {
     if (Array.isArray(text)) {
       text = text.join('\n');
     } else if (typeof text === 'number') {
@@ -1204,6 +1234,7 @@
     'middle-to-sides': 2,
     'sides-to-middle': 3
   };
+  Object.assign(TextTyping.prototype, methods$6);
 
   var GetValue$J = Phaser.Utils.Objects.GetValue;
   var TextBoxBase = function TextBoxBase(GOClass, type) {
@@ -1220,14 +1251,24 @@
 
         // childrenMap must have 'text' element
         var text = _this.childrenMap.text;
+        _this.setTypingMode(GetValue$J(config, 'typingMode', 'page'));
         _this.page = new TextPage(text, GetValue$J(config, 'page', undefined));
         _this.typing = new TextTyping(text, GetValue$J(config, 'typing', config.type));
-        _this.typing.on('complete', _this.onPageEnd, _assertThisInitialized(_this)).on('type', _this.onType, _assertThisInitialized(_this)).on('typechar', _this.onTypeChar, _assertThisInitialized(_this));
+        _this.typing.on('complete', _this.onTypingComplete, _assertThisInitialized(_this)).on('type', _this.onType, _assertThisInitialized(_this)).on('typechar', _this.onTypeChar, _assertThisInitialized(_this));
         _this.textWidth = text.width;
         _this.textHeight = text.height;
         return _this;
       }
       _createClass(TextBox, [{
+        key: "setTypingMode",
+        value: function setTypingMode(mode) {
+          if (typeof mode === 'string') {
+            mode = TypingMode[mode];
+          }
+          this.typingMode = mode;
+          return this;
+        }
+      }, {
         key: "start",
         value: function start(text, speed) {
           this.page.setText(text);
@@ -1235,7 +1276,13 @@
             this.setTypingSpeed(speed);
           }
           this.emit('start');
-          this.typeNextPage();
+          if (this.typingMode === 0) {
+            // Typing page by page
+            this.typeNextPage();
+          } else {
+            // Typing line by line
+            this.typeNextLine();
+          }
           return this;
         }
       }, {
@@ -1248,6 +1295,24 @@
             this.emit('complete');
           }
           return this;
+        }
+      }, {
+        key: "typeNextLine",
+        value: function typeNextLine() {
+          if (!this.isLastLine) {
+            var txt = this.page.getPageOfNextLine();
+            var startLineIndex;
+            if (this.isFirstLine) {
+              // Typing from 1st line
+              startLineIndex = 0;
+            } else {
+              // Typing last line
+              startLineIndex = this.page.pageLinesCount - 1;
+            }
+            this.typing.startFromLine(txt, startLineIndex);
+          } else {
+            this.emit('complete');
+          }
         }
       }, {
         key: "pause",
@@ -1277,9 +1342,13 @@
         key: "showLastPage",
         value: function showLastPage() {
           this.typing.stop();
-          this.page.showLastPage();
+          if (this.typingMode === 0) {
+            this.page.showLastPage();
+          } else {
+            this.page.showLastLine();
+          }
           this.emit('type');
-          this.onPageEnd();
+          this.onTypingComplete();
           return this;
         }
       }, {
@@ -1320,6 +1389,31 @@
           return this.page.pageIndex;
         }
       }, {
+        key: "isLastLine",
+        get: function get() {
+          return this.page.isLastLine;
+        }
+      }, {
+        key: "isFirstLine",
+        get: function get() {
+          return this.page.isFirstLine;
+        }
+      }, {
+        key: "lineCound",
+        get: function get() {
+          return this.page.totalLinesCount;
+        }
+      }, {
+        key: "startLineIndex",
+        get: function get() {
+          return this.page.startLineIndex;
+        }
+      }, {
+        key: "endLineIndex",
+        get: function get() {
+          return this.page.endLineIndex;
+        }
+      }, {
         key: "typingSpeed",
         get: function get() {
           return this.typing.speed;
@@ -1341,22 +1435,31 @@
           this.emit('typechar', _char);
         }
       }, {
-        key: "onPageEnd",
-        value: function onPageEnd() {
-          var isLastPage = this.isLastPage;
-          this.emit('pageend');
-          /*
-          Might enter this method immediately, if invoking typeNextPage() in this 'pageend' event.
-          */
+        key: "onTypingComplete",
+        value: function onTypingComplete() {
+          if (this.typingMode === 0) {
+            var isLastPage = this.isLastPage;
+            this.emit('pageend');
+            /*
+            Might enter this method immediately, if invoking typeNextPage() in this 'pageend' event.
+            */
 
-          if (isLastPage) {
-            this.emit('complete');
+            if (isLastPage) {
+              this.emit('complete');
+            }
+          } else {
+            // Typing next line continually
+            this.typeNextLine();
           }
         }
       }]);
       return TextBox;
     }(GOClass);
     return TextBox;
+  };
+  var TypingMode = {
+    page: 0,
+    line: 1
   };
 
   var MinVersion = 60;
