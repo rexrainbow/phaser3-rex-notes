@@ -12,7 +12,11 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var textObject = this.add.text(200, 200, '一二三四五六七八九零一二三四五六七八九零一二三四五六七八九零一二三四五六七八九零', {
+        var content = `\
+一二三四五六七八九零一二三四五六七八九零一二三四五六七八九零一二三四五六七八九零
+一二三四五六七八九零一二三四五六七八九零\
+`
+        var textObject = this.add.text(200, 200, content, {
             backgroundColor: 'grey',
             testString: '|MÉqgy回',
             fixedWidth: 200,

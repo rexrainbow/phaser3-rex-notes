@@ -1,18 +1,27 @@
 var TextWrapByCharCallback = function (text, textObject) {
+    var output = [];
+
+    var textLines = text.split('\n');
     var context = textObject.context;
     var wrapWidth = textObject.style.wordWrapWidth;
+    for (var i = 0, cnt = textLines.length; i < cnt; i++) {
+        WrapLine(context, textLines[i], wrapWidth, output);
+    }
 
-    // Short string testing
+    return output;
+}
+
+var WrapLine = function (context, text, wrapWidth, output) {
     if (text.length <= 100) {
         var textWidth = context.measureText(text).width;
         if (textWidth <= wrapWidth) {
-            return text;
+            output.push(text);
+            return output;
         }
     }
 
     var tokenArray = text.split('');
     var token, tokenWidth;
-    var lines = [];
     var line = [], remainderLineWidth = wrapWidth;
     for (var j = 0, tokenLen = tokenArray.length; j < tokenLen; j++) {
         token = tokenArray[j];
@@ -20,7 +29,7 @@ var TextWrapByCharCallback = function (text, textObject) {
 
         remainderLineWidth -= tokenWidth;
         if (remainderLineWidth < 0) {
-            lines.push(line.join(''));
+            output.push(line.join(''));
             line.length = 0;
             remainderLineWidth = wrapWidth - tokenWidth;
         }
@@ -29,10 +38,10 @@ var TextWrapByCharCallback = function (text, textObject) {
     }
 
     if (line.length > 0) {
-        lines.push(line.join(''));
+        output.push(line.join(''));
     }
 
-    return lines;
+    return output;
 }
 
 export default TextWrapByCharCallback;
