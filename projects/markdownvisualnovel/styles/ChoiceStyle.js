@@ -26,6 +26,7 @@ export default {
         text: {
             fontSize: 20
         },
+        wrapText: 'word',
     },
 
     choicesType: 'radio',
