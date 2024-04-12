@@ -19,6 +19,7 @@ class Demo extends Phaser.Scene {
         this.load.image('nextPage', 'assets/images/arrow-down-left.png');
 
         this.load.atlas('characters', 'assets/images/characters/characters.png', 'assets/images/characters/characters.json');
+        this.load.atlas('portraits', 'assets/images/characters/portraits.png', 'assets/images/characters/portraits.json');
 
         this.load.audio('theme0', [
             'assets/audio/oedipus_wizball_highscore.ogg',
@@ -200,17 +201,35 @@ var CreateCommandExecutor = function (scene) {
                 typing(
                     gameObject,
                     {
-                        name, text, speed
+                        text,
+                        name,
+                        icon, iconFrame,
+                        expression,
+                        speed
                     } = {},
-                    commandExecutor, eventSheetManager, eventSheet
+                    commandExecutor,
+                    eventSheetManager, eventSheet
                 ) {
 
                     if (name) {
                         var title = gameObject.getElement('title').setText(name);
-                        gameObject.setChildVisible(title, true);
+                        gameObject.setChildAlpha(title, 1);
                     } else {
                         var title = gameObject.getElement('title').setText('');
-                        gameObject.setChildVisible(title, false);
+                        gameObject.setChildAlpha(title, 0);
+                    }
+
+                    if (expression) {
+                        var frameDelimiter = gameObject.frameDelimiter;
+                        iconFrame = name + frameDelimiter + expression;
+                    }
+
+                    if (icon || iconFrame) {
+                        var iconGameObject = gameObject.getElement('icon');
+                        if (!icon) {
+                            icon = iconGameObject.texture.key;
+                        }
+                        iconGameObject.setTexture(icon, iconFrame);
                     }
                     gameObject.layout();
 
@@ -286,7 +305,8 @@ var CreateTextBox = function (
             color: COLOR_MAIN, strokeColor: COLOR_LIGHT, strokeWidth: 2, radius: 20,
         }),
 
-        icon: scene.rexUI.add.roundRectangle({ width: 120, height: 120, color: COLOR_DARK }),
+        icon: scene.add.image(0, 0, '__WHITE'),
+        iconWidth: 120, iconHeight: 120,
 
         text: scene.add.text(0, 0, '', {
             fontSize: 30,
