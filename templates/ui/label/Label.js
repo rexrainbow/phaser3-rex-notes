@@ -1,8 +1,9 @@
 import LabelBase from './Base.js';
 import AddChildMask from '../../../plugins/gameobjects/container/containerlite/mask/AddChildMask.js';
 
+import SetWrapMode from '../../../plugins/utils/text/SetWrapMode.js';
 import WrapExpandText from '../utils/wrapexpandtext/WrapExpandText.js';
-import SetValue from '../../../plugins/utils/object/SetValue.js';
+
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -79,8 +80,8 @@ class Label extends LabelBase {
                 if (wrapText === true) {
                     wrapText = 'word';
                 }
-                SetValue(config, 'text.wrap.mode', wrapText);
-                SetValue(config, 'expandTextWidth', true);
+                SetWrapMode(text, wrapText);
+                config.expandTextWidth = true;
                 WrapExpandText(text);
             }
 

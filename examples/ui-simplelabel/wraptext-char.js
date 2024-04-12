@@ -31,6 +31,7 @@ class Demo extends Phaser.Scene {
             text: {
                 $type: 'bbcodetext',
                 fontSize: 24,
+                testString: '|MÉqgy回',
             }
         }
 

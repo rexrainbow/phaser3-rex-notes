@@ -1,6 +1,7 @@
 import DefaultPropertyMap from './PropertyMap.js';
 import MeasureText from './MeasureText.js';
 import CONST from '../const.js';
+import WRAPMODE from './WrapModes.js';
 import GetStyle from '../../../utils/canvas/GetStyle.js';
 
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
@@ -620,13 +621,5 @@ class TextStyle {
     }
 
 }
-
-const WRAPMODE = {
-    none: CONST.NO_WRAP,
-    word: CONST.WORD_WRAP,
-    char: CONST.CHAR_WRAP,
-    character: CONST.CHAR_WRAP,
-    mix: CONST.MIX_WRAP
-};
 
 export default TextStyle;

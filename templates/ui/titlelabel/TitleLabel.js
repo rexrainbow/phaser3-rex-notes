@@ -2,8 +2,8 @@ import LabelBase from '../label/Base.js';
 import LayoutMode0 from './methods/LayoutMode0.js';
 import LayoutMode1 from './methods/LayoutMode1.js';
 
+import SetWrapMode from '../../../plugins/utils/text/SetWrapMode.js';
 import WrapExpandText from '../utils/wrapexpandtext/WrapExpandText.js';
-import SetValue from '../../../plugins/utils/object/SetValue.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const LayoutCallbacks = [LayoutMode0, LayoutMode1];
@@ -34,8 +34,9 @@ class TitleLabel extends LabelBase {
                 if (wrapTitle === true) {
                     wrapTitle = 'word';
                 }
-                SetValue(config, 'title.wrap.mode', wrapText);
-                SetValue(config, 'expandTitleWidth', true);
+
+                SetWrapMode(title, wrapTitle);
+                config.expandTitleWidth = true;
                 WrapExpandText(title);
             }
         }
@@ -46,8 +47,9 @@ class TitleLabel extends LabelBase {
                 if (wrapText === true) {
                     wrapText = 'word';
                 }
-                SetValue(config, 'text.wrap.mode', wrapText);
-                SetValue(config, 'expandTextWidth', true);
+
+                SetWrapMode(text, wrapText);
+                config.expandTextWidth = true;
                 WrapExpandText(text);
             }
         }
