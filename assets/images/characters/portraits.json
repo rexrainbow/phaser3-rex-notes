@@ -1,0 +1,216 @@
+{
+    "frames": [
+        {
+            "filename": "c-smile",
+            "frame": {
+                "w": 226,
+                "h": 226,
+                "x": 0,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "a-anger",
+            "frame": {
+                "w": 226,
+                "h": 226,
+                "x": 226,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "a-confuse",
+            "frame": {
+                "w": 226,
+                "h": 226,
+                "x": 0,
+                "y": 226
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "a-dizzy",
+            "frame": {
+                "w": 226,
+                "h": 226,
+                "x": 226,
+                "y": 226
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "a-happy",
+            "frame": {
+                "w": 226,
+                "h": 226,
+                "x": 452,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "a-none",
+            "frame": {
+                "w": 226,
+                "h": 226,
+                "x": 452,
+                "y": 226
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "a-shock",
+            "frame": {
+                "w": 226,
+                "h": 226,
+                "x": 0,
+                "y": 452
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "a-smile",
+            "frame": {
+                "w": 226,
+                "h": 226,
+                "x": 226,
+                "y": 452
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "b-anger",
+            "frame": {
+                "w": 226,
+                "h": 226,
+                "x": 452,
+                "y": 452
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "b-confuse",
+            "frame": {
+                "w": 226,
+                "h": 226,
+                "x": 678,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "b-dizzy",
+            "frame": {
+                "w": 226,
+                "h": 226,
+                "x": 678,
+                "y": 226
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "b-smile",
+            "frame": {
+                "w": 226,
+                "h": 226,
+                "x": 678,
+                "y": 452
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "b-happy",
+            "frame": {
+                "w": 226,
+                "h": 226,
+                "x": 0,
+                "y": 678
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "b-none",
+            "frame": {
+                "w": 226,
+                "h": 226,
+                "x": 226,
+                "y": 678
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "b-shock",
+            "frame": {
+                "w": 226,
+                "h": 226,
+                "x": 452,
+                "y": 678
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "c-anger",
+            "frame": {
+                "w": 226,
+                "h": 226,
+                "x": 678,
+                "y": 678
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        }
+    ],
+    "meta": {
+        "description": "Atlas generado con Atlas Packer Gamma V2",
+        "web": "https://gammafp.github.io/atlas-packer-phaser/"
+    }
+}
