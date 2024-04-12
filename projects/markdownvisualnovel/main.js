@@ -20,6 +20,7 @@ class Demo extends Phaser.Scene {
         this.load.image('nextPage', 'assets/images/arrow-down-left.png');
 
         this.load.atlas('characters', 'assets/images/characters/characters.png', 'assets/images/characters/characters.json');
+        this.load.atlas('portraits', 'assets/images/characters/portraits.png', 'assets/images/characters/portraits.json');
 
         this.load.audio('theme0', [
             'assets/audio/oedipus_wizball_highscore.ogg',
