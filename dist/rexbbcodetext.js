@@ -2364,7 +2364,7 @@
       }
       remainWidth = i === 0 ? wrapWidth - offset : wrapWidth;
 
-      // short string testing
+      // Short string testing
       if (line.length <= 100) {
         var textWidth = getTextWidth(line);
         if (textWidth <= remainWidth) {
