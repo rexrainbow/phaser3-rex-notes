@@ -2,11 +2,14 @@ import { SimpleTextBox } from '../../../ui/ui-components.js';
 import SetValue from '../../../../plugins/utils/object/SetValue.js';
 
 var GenerateDefaultCreateGameObjectCallback = function (style = {}) {
+    var defaultFrameDelimiter = style.frameDelimiter || '-';
+
     return function (
         scene,
         {
             width = 0,
-            height = 0
+            height = 0,
+            frameDelimiter = defaultFrameDelimiter
         } = {}
     ) {
         var wrapWidth = Math.max(0, width - 20);
@@ -15,16 +18,16 @@ var GenerateDefaultCreateGameObjectCallback = function (style = {}) {
         SetValue(style, 'text.fixedHeight', height);
         SetValue(style, 'text.wordWrap.width', wrapWidth)
 
-        var textBox = new SimpleTextBox(scene, style);
+        var gameObject = new SimpleTextBox(scene, style);
 
-        textBox
+        gameObject
             .setMinSize(width, height)
             .setOrigin(0.5, 1)
             .layout();
 
-        scene.add.existing(textBox);
+        scene.add.existing(gameObject);
 
-        textBox
+        gameObject
             .setInteractive()
             .on('pointerdown', function () {
                 var icon = this.getElement('action');
@@ -34,7 +37,7 @@ var GenerateDefaultCreateGameObjectCallback = function (style = {}) {
                 } else {
                     this.typeNextPage();
                 }
-            }, textBox)
+            }, gameObject)
             .on('pageend', function () {
                 if (this.isLastPage) {
                     return;
@@ -51,9 +54,11 @@ var GenerateDefaultCreateGameObjectCallback = function (style = {}) {
                     repeat: 0, // -1: infinity
                     yoyo: false
                 });
-            }, textBox)
+            }, gameObject)
 
-        return textBox;
+        gameObject.frameDelimiter = frameDelimiter;
+
+        return gameObject;
     }
 }
 

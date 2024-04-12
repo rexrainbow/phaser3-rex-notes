@@ -4,6 +4,7 @@ var Typing = function (
         text,
         name,
         icon, iconFrame,
+        expression,
         speed
     } = {},
     commandExecutor,
@@ -16,6 +17,11 @@ var Typing = function (
     } else {
         var title = gameObject.getElement('title').setText('');
         gameObject.setChildAlpha(title, 0);
+    }
+
+    if (expression) {
+        var frameDelimiter = gameObject.frameDelimiter;
+        iconFrame = name + frameDelimiter + expression;
     }
 
     if (icon || iconFrame) {
