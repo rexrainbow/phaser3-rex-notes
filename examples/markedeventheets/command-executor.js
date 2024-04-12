@@ -393,6 +393,7 @@ var CreateChoiceBox = function (
 
         content: {
             space: { left: 5, right: 5, top: 5, bottom: 5 },
+            wrapText: 'word',
             text: {
                 fontSize: 20
             },
