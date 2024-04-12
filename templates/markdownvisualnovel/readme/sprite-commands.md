@@ -248,7 +248,7 @@ Bring me to top and set tint to 0x0 to other sprites
 ```
 
 NAME.focus
-  fadeOutOthers=0x0
+  tintOthers=0x0
 
 ```
 

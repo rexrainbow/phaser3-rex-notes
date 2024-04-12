@@ -3,7 +3,7 @@ import { SPRITE } from '../../const/GameObjects.js';
 var Focus = function (
     gameObject,
     {
-        fadeOutOthers = 0x000000,
+        tintOthers = 0x000000,
     } = {},
     commandExecutor, eventSheetManager, eventSheet
 ) {
@@ -13,7 +13,7 @@ var Focus = function (
         {
             goType: SPRITE,
             id: '!' + gameObject.name,
-            tint: fadeOutOthers,
+            tint: tintOthers,
         },
         eventSheetManager
     )

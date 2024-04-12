@@ -122,7 +122,7 @@ var CreateCommandExecutor = function (scene) {
                 focus(
                     gameObject,
                     {
-                        fadeOutOthers = 0x000000,
+                        tintOthers = 0x000000,
                     } = {},
                     commandExecutor, eventSheetManager, eventSheet
                 ) {
@@ -132,7 +132,7 @@ var CreateCommandExecutor = function (scene) {
                         {
                             goType: 'SPRITE',
                             id: '!' + gameObject.name,
-                            tint: fadeOutOthers,
+                            tint: tintOthers,
                         },
                         eventSheetManager
                     )
