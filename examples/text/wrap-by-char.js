@@ -1,4 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
+import TextWrapByCharCallback from '../../plugins/utils/text/TextWrapByCharCallback';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -17,42 +18,7 @@ class Demo extends Phaser.Scene {
             fixedWidth: 200,
             wordWrap: {
                 width: 200,
-                callback: function (text, textObject) {
-                    var context = textObject.context;
-                    var wrapWidth = textObject.style.wordWrapWidth;
-
-                    // Short string testing
-                    if (text.length <= 100) {
-                        var textWidth = context.measureText(text).width;
-                        if (textWidth <= wrapWidth) {
-                            return text;
-                        }
-                    }
-
-                    var lines = [];
-                    var line = [], remainderLineWidth = wrapWidth;
-                    var tokenArray = text.split('');
-                    var token, tokenWidth;
-                    for (var j = 0, tokenLen = tokenArray.length; j < tokenLen; j++) {
-                        token = tokenArray[j];
-                        tokenWidth = context.measureText(token).width;
-
-                        remainderLineWidth -= tokenWidth;
-                        if (remainderLineWidth < 0) {
-                            lines.push(line.join(''));
-                            line.length = 0;
-                            remainderLineWidth = wrapWidth - tokenWidth;
-                        }
-
-                        line.push(token);
-                    }
-
-                    if (line.length > 0) {
-                        lines.push(line.join(''));
-                    }
-
-                    return lines;
-                }
+                callback: TextWrapByCharCallback
             }
         });
     }
