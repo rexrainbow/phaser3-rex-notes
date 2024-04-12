@@ -28254,6 +28254,14 @@
     SPLITREGEXP: /(?:\r\n|\r|\n)/
   };
 
+  var WRAPMODE = {
+    none: CONST.NO_WRAP,
+    word: CONST.WORD_WRAP,
+    "char": CONST.CHAR_WRAP,
+    character: CONST.CHAR_WRAP,
+    mix: CONST.MIX_WRAP
+  };
+
   var GetAdvancedValue$3 = Phaser.Utils.Objects.GetAdvancedValue;
   var GetValue$2$ = Phaser.Utils.Objects.GetValue;
   var TextStyle$1 = /*#__PURE__*/function () {
@@ -28845,13 +28853,6 @@
     }]);
     return TextStyle;
   }();
-  var WRAPMODE = {
-    none: CONST.NO_WRAP,
-    word: CONST.WORD_WRAP,
-    "char": CONST.CHAR_WRAP,
-    character: CONST.CHAR_WRAP,
-    mix: CONST.MIX_WRAP
-  };
 
   var DrawMethods = {
     draw: function draw(startX, startY, textWidth, textHeight) {
@@ -57135,14 +57136,44 @@
     return maskGameObject;
   };
 
+  var TextClass = Phaser.GameObjects.Text;
+  var IsTextGameObject = function IsTextGameObject(gameObject) {
+    return gameObject instanceof TextClass;
+  };
+
   var BitmapTextClass = Phaser.GameObjects.BitmapText;
   var IsBitmapTextGameObject = function IsBitmapTextGameObject(gameObject) {
     return gameObject instanceof BitmapTextClass;
   };
 
-  var TextClass = Phaser.GameObjects.Text;
-  var IsTextGameObject = function IsTextGameObject(gameObject) {
-    return gameObject instanceof TextClass;
+  var TextType = 0;
+  var TagTextType = 1;
+  var BitmapTextType = 2;
+  var GetTextObjectType = function GetTextObjectType(textObject) {
+    var textObjectType;
+    if (IsBitmapTextGameObject(textObject)) {
+      textObjectType = BitmapTextType;
+    } else if (IsTextGameObject(textObject)) {
+      textObjectType = TextType;
+    } else {
+      textObjectType = TagTextType;
+    }
+    return textObjectType;
+  };
+
+  var SetWrapMode = function SetWrapMode(textObject, mode) {
+    var textObjectType = GetTextObjectType(textObject);
+    switch (textObjectType) {
+      case TextType:
+        // Do nothing
+        break;
+      case TagTextType:
+        if (typeof mode === 'string') {
+          mode = WRAPMODE[mode] || 0;
+        }
+        textObject.style.wrapMode = mode;
+        break;
+    }
   };
 
   var TextRunWidthWrap = function TextRunWidthWrap(textObject) {
@@ -57270,8 +57301,8 @@
           if (wrapText === true) {
             wrapText = 'word';
           }
-          SetValue(config, 'text.wrap.mode', wrapText);
-          SetValue(config, 'expandTextWidth', true);
+          SetWrapMode(text, wrapText);
+          config.expandTextWidth = true;
           WrapExpandText(text);
         }
         var textSpace = GetValue$1N(config, 'space.text', 0);
@@ -63302,21 +63333,6 @@
   // mixin
   Object.assign(Scrollable.prototype, Methods$7);
 
-  var TextType = 0;
-  var TagTextType = 1;
-  var BitmapTextType = 2;
-  var GetTextObjectType = function GetTextObjectType(textObject) {
-    var textObjectType;
-    if (IsBitmapTextGameObject(textObject)) {
-      textObjectType = BitmapTextType;
-    } else if (IsTextGameObject(textObject)) {
-      textObjectType = TextType;
-    } else {
-      textObjectType = TagTextType;
-    }
-    return textObjectType;
-  };
-
   var TextToLines = function TextToLines(textObject, text, lines) {
     var textObjectType = GetTextObjectType(textObject);
     switch (textObjectType) {
@@ -64518,8 +64534,8 @@
           if (wrapTitle === true) {
             wrapTitle = 'word';
           }
-          SetValue(config, 'title.wrap.mode', wrapText);
-          SetValue(config, 'expandTitleWidth', true);
+          SetWrapMode(title, wrapTitle);
+          config.expandTitleWidth = true;
           WrapExpandText(title);
         }
       }
@@ -64529,8 +64545,8 @@
           if (wrapText === true) {
             wrapText = 'word';
           }
-          SetValue(config, 'text.wrap.mode', wrapText);
-          SetValue(config, 'expandTextWidth', true);
+          SetWrapMode(text, wrapText);
+          config.expandTextWidth = true;
           WrapExpandText(text);
         }
       }
@@ -79036,6 +79052,7 @@
         config.frame = expression;
       }
       var gameObject = new TransitionImagePack(scene, config);
+      gameObject.setOrigin(0.5, 1);
       scene.add.existing(gameObject);
       gameObject.isFrameNameMode = isFrameNameMode;
       gameObject.frameDelimiter = frameDelimiter;
@@ -79083,15 +79100,15 @@
 
   var Focus$1 = function Focus(gameObject) {
     var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
-      _ref$fadeOutOthers = _ref.fadeOutOthers,
-      fadeOutOthers = _ref$fadeOutOthers === void 0 ? 0x000000 : _ref$fadeOutOthers;
+      _ref$tintOthers = _ref.tintOthers,
+      tintOthers = _ref$tintOthers === void 0 ? 0x000000 : _ref$tintOthers;
     var commandExecutor = arguments.length > 2 ? arguments[2] : undefined;
     var eventSheetManager = arguments.length > 3 ? arguments[3] : undefined;
     gameObject.bringMeToTop();
     commandExecutor.setGOProperty({
       goType: SPRITE,
       id: '!' + gameObject.name,
-      tint: fadeOutOthers
+      tint: tintOthers
     }, eventSheetManager);
   };
 
@@ -79128,20 +79145,23 @@
 
   var GenerateDefaultCreateGameObjectCallback$1 = function GenerateDefaultCreateGameObjectCallback() {
     var style = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    var defaultFrameDelimiter = style.frameDelimiter || '-';
     return function (scene) {
       var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
         _ref$width = _ref.width,
         width = _ref$width === void 0 ? 0 : _ref$width,
         _ref$height = _ref.height,
-        height = _ref$height === void 0 ? 0 : _ref$height;
+        height = _ref$height === void 0 ? 0 : _ref$height,
+        _ref$frameDelimiter = _ref.frameDelimiter,
+        frameDelimiter = _ref$frameDelimiter === void 0 ? defaultFrameDelimiter : _ref$frameDelimiter;
       var wrapWidth = Math.max(0, width - 20);
       SetValue(style, 'text.fixedWidth', width);
       SetValue(style, 'text.fixedHeight', height);
       SetValue(style, 'text.wordWrap.width', wrapWidth);
-      var textBox = new SimpleTextBox(scene, style);
-      textBox.setMinSize(width, height).setOrigin(0.5, 1).layout();
-      scene.add.existing(textBox);
-      textBox.setInteractive().on('pointerdown', function () {
+      var gameObject = new SimpleTextBox(scene, style);
+      gameObject.setMinSize(width, height).setOrigin(0.5, 1).layout();
+      scene.add.existing(gameObject);
+      gameObject.setInteractive().on('pointerdown', function () {
         var icon = this.getElement('action');
         this.setChildAlpha(icon, 0);
         if (this.isTyping) {
@@ -79149,7 +79169,7 @@
         } else {
           this.typeNextPage();
         }
-      }, textBox).on('pageend', function () {
+      }, gameObject).on('pageend', function () {
         if (this.isLastPage) {
           return;
         }
@@ -79167,15 +79187,19 @@
           // -1: infinity
           yoyo: false
         });
-      }, textBox);
-      return textBox;
+      }, gameObject);
+      gameObject.frameDelimiter = frameDelimiter;
+      return gameObject;
     };
   };
 
   var Typing = function Typing(gameObject) {
     var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
-      name = _ref.name,
       text = _ref.text,
+      name = _ref.name,
+      icon = _ref.icon,
+      iconFrame = _ref.iconFrame,
+      expression = _ref.expression,
       speed = _ref.speed;
     var commandExecutor = arguments.length > 2 ? arguments[2] : undefined;
     if (name) {
@@ -79184,6 +79208,17 @@
     } else {
       var title = gameObject.getElement('title').setText('');
       gameObject.setChildAlpha(title, 0);
+    }
+    if (expression) {
+      var frameDelimiter = gameObject.frameDelimiter;
+      iconFrame = name + frameDelimiter + expression;
+    }
+    if (icon || iconFrame) {
+      var iconGameObject = gameObject.getElement('icon');
+      if (!icon) {
+        icon = iconGameObject.texture.key;
+      }
+      iconGameObject.setTexture(icon, iconFrame);
     }
     gameObject.layout();
 

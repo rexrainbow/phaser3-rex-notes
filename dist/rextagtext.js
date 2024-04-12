@@ -636,6 +636,14 @@
     SPLITREGEXP: /(?:\r\n|\r|\n)/
   };
 
+  var WRAPMODE = {
+    none: CONST.NO_WRAP,
+    word: CONST.WORD_WRAP,
+    "char": CONST.CHAR_WRAP,
+    character: CONST.CHAR_WRAP,
+    mix: CONST.MIX_WRAP
+  };
+
   var GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
   var GetValue$6 = Phaser.Utils.Objects.GetValue;
   var TextStyle = /*#__PURE__*/function () {
@@ -1227,13 +1235,6 @@
     }]);
     return TextStyle;
   }();
-  var WRAPMODE = {
-    none: CONST.NO_WRAP,
-    word: CONST.WORD_WRAP,
-    "char": CONST.CHAR_WRAP,
-    character: CONST.CHAR_WRAP,
-    mix: CONST.MIX_WRAP
-  };
 
   var GetValue$5 = Phaser.Utils.Objects.GetValue;
   var RoundRectangle = /*#__PURE__*/function () {

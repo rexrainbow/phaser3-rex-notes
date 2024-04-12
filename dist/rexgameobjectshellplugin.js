@@ -16205,6 +16205,68 @@
     return maskGameObject;
   };
 
+  var TextClass = Phaser.GameObjects.Text;
+  var IsTextGameObject = function IsTextGameObject(gameObject) {
+    return gameObject instanceof TextClass;
+  };
+
+  var BitmapTextClass = Phaser.GameObjects.BitmapText;
+  var IsBitmapTextGameObject = function IsBitmapTextGameObject(gameObject) {
+    return gameObject instanceof BitmapTextClass;
+  };
+
+  var TextType = 0;
+  var TagTextType = 1;
+  var BitmapTextType = 2;
+  var GetTextObjectType = function GetTextObjectType(textObject) {
+    var textObjectType;
+    if (IsBitmapTextGameObject(textObject)) {
+      textObjectType = BitmapTextType;
+    } else if (IsTextGameObject(textObject)) {
+      textObjectType = TextType;
+    } else {
+      textObjectType = TagTextType;
+    }
+    return textObjectType;
+  };
+
+  var CONST = {
+    // new line mode
+    NO_NEWLINE: 0,
+    RAW_NEWLINE: 1,
+    WRAPPED_NEWLINE: 2,
+    // wrap mode
+    NO_WRAP: 0,
+    WORD_WRAP: 1,
+    CHAR_WRAP: 2,
+    MIX_WRAP: 3,
+    // split lines
+    SPLITREGEXP: /(?:\r\n|\r|\n)/
+  };
+
+  var WRAPMODE = {
+    none: CONST.NO_WRAP,
+    word: CONST.WORD_WRAP,
+    "char": CONST.CHAR_WRAP,
+    character: CONST.CHAR_WRAP,
+    mix: CONST.MIX_WRAP
+  };
+
+  var SetWrapMode = function SetWrapMode(textObject, mode) {
+    var textObjectType = GetTextObjectType(textObject);
+    switch (textObjectType) {
+      case TextType:
+        // Do nothing
+        break;
+      case TagTextType:
+        if (typeof mode === 'string') {
+          mode = WRAPMODE[mode] || 0;
+        }
+        textObject.style.wrapMode = mode;
+        break;
+    }
+  };
+
   // copy from Phaser.GameObjects.Text
 
   var Utils$3 = Phaser.Renderer.WebGL.Utils;
@@ -20564,16 +20626,6 @@
   }(Canvas$1);
   Object.assign(DynamicText.prototype, Methods$7);
 
-  var BitmapTextClass = Phaser.GameObjects.BitmapText;
-  var IsBitmapTextGameObject = function IsBitmapTextGameObject(gameObject) {
-    return gameObject instanceof BitmapTextClass;
-  };
-
-  var TextClass = Phaser.GameObjects.Text;
-  var IsTextGameObject = function IsTextGameObject(gameObject) {
-    return gameObject instanceof TextClass;
-  };
-
   var TextRunWidthWrap = function TextRunWidthWrap(textObject) {
     var RunWidthWrap = function RunWidthWrap(width) {
       var padding = textObject.padding;
@@ -20699,8 +20751,8 @@
           if (wrapText === true) {
             wrapText = 'word';
           }
-          SetValue(config, 'text.wrap.mode', wrapText);
-          SetValue(config, 'expandTextWidth', true);
+          SetWrapMode(text, wrapText);
+          config.expandTextWidth = true;
           WrapExpandText(text);
         }
         var textSpace = GetValue$1j(config, 'space.text', 0);
@@ -22799,20 +22851,6 @@
     return output;
   };
 
-  var CONST = {
-    // new line mode
-    NO_NEWLINE: 0,
-    RAW_NEWLINE: 1,
-    WRAPPED_NEWLINE: 2,
-    // wrap mode
-    NO_WRAP: 0,
-    WORD_WRAP: 1,
-    CHAR_WRAP: 2,
-    MIX_WRAP: 3,
-    // split lines
-    SPLITREGEXP: /(?:\r\n|\r|\n)/
-  };
-
   var GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
   var GetValue$1a = Phaser.Utils.Objects.GetValue;
   var TextStyle = /*#__PURE__*/function () {
@@ -23404,13 +23442,6 @@
     }]);
     return TextStyle;
   }();
-  var WRAPMODE = {
-    none: CONST.NO_WRAP,
-    word: CONST.WORD_WRAP,
-    "char": CONST.CHAR_WRAP,
-    character: CONST.CHAR_WRAP,
-    mix: CONST.MIX_WRAP
-  };
 
   var DrawMethods = {
     draw: function draw(startX, startY, textWidth, textHeight) {
@@ -29668,21 +29699,6 @@
 
   // mixin
   Object.assign(Scrollable.prototype, Methods$4);
-
-  var TextType = 0;
-  var TagTextType = 1;
-  var BitmapTextType = 2;
-  var GetTextObjectType = function GetTextObjectType(textObject) {
-    var textObjectType;
-    if (IsBitmapTextGameObject(textObject)) {
-      textObjectType = BitmapTextType;
-    } else if (IsTextGameObject(textObject)) {
-      textObjectType = TextType;
-    } else {
-      textObjectType = TagTextType;
-    }
-    return textObjectType;
-  };
 
   var TextToLines = function TextToLines(textObject, text, lines) {
     var textObjectType = GetTextObjectType(textObject);

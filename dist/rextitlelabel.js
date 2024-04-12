@@ -12749,6 +12749,68 @@
     this.addChildrenMap('actionMask', actionMask);
   };
 
+  var TextClass = Phaser.GameObjects.Text;
+  var IsTextGameObject = function IsTextGameObject(gameObject) {
+    return gameObject instanceof TextClass;
+  };
+
+  var BitmapTextClass = Phaser.GameObjects.BitmapText;
+  var IsBitmapTextGameObject = function IsBitmapTextGameObject(gameObject) {
+    return gameObject instanceof BitmapTextClass;
+  };
+
+  var TextType = 0;
+  var TagTextType = 1;
+  var BitmapTextType = 2;
+  var GetTextObjectType = function GetTextObjectType(textObject) {
+    var textObjectType;
+    if (IsBitmapTextGameObject(textObject)) {
+      textObjectType = BitmapTextType;
+    } else if (IsTextGameObject(textObject)) {
+      textObjectType = TextType;
+    } else {
+      textObjectType = TagTextType;
+    }
+    return textObjectType;
+  };
+
+  var CONST = {
+    // new line mode
+    NO_NEWLINE: 0,
+    RAW_NEWLINE: 1,
+    WRAPPED_NEWLINE: 2,
+    // wrap mode
+    NO_WRAP: 0,
+    WORD_WRAP: 1,
+    CHAR_WRAP: 2,
+    MIX_WRAP: 3,
+    // split lines
+    SPLITREGEXP: /(?:\r\n|\r|\n)/
+  };
+
+  var WRAPMODE = {
+    none: CONST.NO_WRAP,
+    word: CONST.WORD_WRAP,
+    "char": CONST.CHAR_WRAP,
+    character: CONST.CHAR_WRAP,
+    mix: CONST.MIX_WRAP
+  };
+
+  var SetWrapMode = function SetWrapMode(textObject, mode) {
+    var textObjectType = GetTextObjectType(textObject);
+    switch (textObjectType) {
+      case TextType:
+        // Do nothing
+        break;
+      case TagTextType:
+        if (typeof mode === 'string') {
+          mode = WRAPMODE[mode] || 0;
+        }
+        textObject.style.wrapMode = mode;
+        break;
+    }
+  };
+
   // copy from Phaser.GameObjects.Text
 
   var Utils = Phaser.Renderer.WebGL.Utils;
@@ -17175,16 +17237,6 @@
   }(Canvas);
   Object.assign(DynamicText.prototype, Methods);
 
-  var BitmapTextClass = Phaser.GameObjects.BitmapText;
-  var IsBitmapTextGameObject = function IsBitmapTextGameObject(gameObject) {
-    return gameObject instanceof BitmapTextClass;
-  };
-
-  var TextClass = Phaser.GameObjects.Text;
-  var IsTextGameObject = function IsTextGameObject(gameObject) {
-    return gameObject instanceof TextClass;
-  };
-
   var TextRunWidthWrap = function TextRunWidthWrap(textObject) {
     var RunWidthWrap = function RunWidthWrap(width) {
       var padding = textObject.padding;
@@ -17242,67 +17294,6 @@
     return textObject;
   };
 
-  var IsInValidKey = function IsInValidKey(keys) {
-    return keys == null || keys === '' || keys.length === 0;
-  };
-  var GetEntry = function GetEntry(target, keys, defaultEntry) {
-    var entry = target;
-    if (IsInValidKey(keys)) ; else {
-      if (typeof keys === 'string') {
-        keys = keys.split('.');
-      }
-      var key;
-      for (var i = 0, cnt = keys.length; i < cnt; i++) {
-        key = keys[i];
-        if (entry[key] == null || _typeof(entry[key]) !== 'object') {
-          var newEntry;
-          if (i === cnt - 1) {
-            if (defaultEntry === undefined) {
-              newEntry = {};
-            } else {
-              newEntry = defaultEntry;
-            }
-          } else {
-            newEntry = {};
-          }
-          entry[key] = newEntry;
-        }
-        entry = entry[key];
-      }
-    }
-    return entry;
-  };
-  var SetValue = function SetValue(target, keys, value, delimiter) {
-    if (delimiter === undefined) {
-      delimiter = '.';
-    }
-
-    // no object
-    if (_typeof(target) !== 'object') {
-      return;
-    }
-
-    // invalid key
-    else if (IsInValidKey(keys)) {
-      // don't erase target
-      if (value == null) {
-        return;
-      }
-      // set target to another object
-      else if (_typeof(value) === 'object') {
-        target = value;
-      }
-    } else {
-      if (typeof keys === 'string') {
-        keys = keys.split(delimiter);
-      }
-      var lastKey = keys.pop();
-      var entry = GetEntry(target, keys);
-      entry[lastKey] = value;
-    }
-    return target;
-  };
-
   var GetValue = Phaser.Utils.Objects.GetValue;
   var LayoutCallbacks = [LayoutMode0, LayoutMode1];
   var TitleLabel = /*#__PURE__*/function (_LabelBase) {
@@ -17333,8 +17324,8 @@
           if (wrapTitle === true) {
             wrapTitle = 'word';
           }
-          SetValue(config, 'title.wrap.mode', wrapText);
-          SetValue(config, 'expandTitleWidth', true);
+          SetWrapMode(title, wrapTitle);
+          config.expandTitleWidth = true;
           WrapExpandText(title);
         }
       }
@@ -17344,8 +17335,8 @@
           if (wrapText === true) {
             wrapText = 'word';
           }
-          SetValue(config, 'text.wrap.mode', wrapText);
-          SetValue(config, 'expandTextWidth', true);
+          SetWrapMode(text, wrapText);
+          config.expandTextWidth = true;
           WrapExpandText(text);
         }
       }
