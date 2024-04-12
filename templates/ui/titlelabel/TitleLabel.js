@@ -2,11 +2,18 @@ import LabelBase from '../label/Base.js';
 import LayoutMode0 from './methods/LayoutMode0.js';
 import LayoutMode1 from './methods/LayoutMode1.js';
 
+import WrapExpandText from '../utils/wrapexpandtext/WrapExpandText.js';
+import SetValue from '../../../plugins/utils/object/SetValue.js';
+
 const GetValue = Phaser.Utils.Objects.GetValue;
 const LayoutCallbacks = [LayoutMode0, LayoutMode1];
 
 class TitleLabel extends LabelBase {
     constructor(scene, config) {
+        if (config === undefined) {
+            config = {};
+        }
+
         // Create sizer
         super(scene, config);
         this.type = 'rexTitleLabel';
@@ -15,6 +22,34 @@ class TitleLabel extends LabelBase {
         var background = GetValue(config, 'background', undefined);
         if (background) {
             this.addBackground(background);
+        }
+
+        // Wrap title, text
+        var title = GetValue(config, 'title', undefined);
+        var text = GetValue(config, 'text', undefined);
+
+        if (title) {
+            var wrapTitle = GetValue(config, 'wrapTitle', false);
+            if (wrapTitle) {
+                if (wrapTitle === true) {
+                    wrapTitle = 'word';
+                }
+                SetValue(config, 'title.wrap.mode', wrapText);
+                SetValue(config, 'expandTitleWidth', true);
+                WrapExpandText(title);
+            }
+        }
+
+        if (text) {
+            var wrapText = GetValue(config, 'wrapText', false);
+            if (wrapText) {
+                if (wrapText === true) {
+                    wrapText = 'word';
+                }
+                SetValue(config, 'text.wrap.mode', wrapText);
+                SetValue(config, 'expandTextWidth', true);
+                WrapExpandText(text);
+            }
         }
 
         var layoutMode = GetValue(config, 'layoutMode', 0);

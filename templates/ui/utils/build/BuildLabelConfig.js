@@ -1,8 +1,6 @@
 import DeepClone from '../../../../plugins/utils/object/DeepClone.js';
-import SetValue from '../../../../plugins/utils/object/SetValue.js';
 import DefaultCreateBackground from './CreateBackground.js';
 import DefaultCreateText from './CreateText.js';
-import WrapExpandText from '../wrapexpandtext/WrapExpandText.js';
 import DefaultCreateImage from './CreateImage.js';
 
 

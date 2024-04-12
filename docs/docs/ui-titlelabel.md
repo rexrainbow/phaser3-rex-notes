@@ -91,6 +91,9 @@ var label = scene.rexUI.add.titleLabel({
     innerBackground: backgroundGameObject,
 
     title: titleGameObject,
+    // wrapTitle: false,
+    // expandTitleWidth: false,
+    // expandTitleHeight: false,
     
     separator: separatorGameObject,
 
@@ -98,6 +101,9 @@ var label = scene.rexUI.add.titleLabel({
     iconMask: false,
 
     text: textGameObject,
+    // wrapText: false,
+    // expandTextWidth: false,
+    // expandTextHeight: false,
 
     action: actionGameObject,
     actionMask: false,
@@ -148,11 +154,31 @@ var label = scene.rexUI.add.titleLabel({
     - In [mode 0](ui-titlelabel.md#mode-0), innerSizer contains `title`, `separator`, and `text`.
     - In [mode 1](ui-titlelabel.md#mode-1), innerSizer contains `icon`, `text`, and `action`.
 - `title` : Game object of title, optional.
+- `wrapTitle` : Enable WrapExpandText feature.
+    - `false`, `0` : No WrapExpandText feature. Default behavior.
+    - `true`, `1`, `'word'` : Word WrapExpandText.
+    - `2`, `'char'` : Character WrapExpandText.
+- `expandTitleWidth` : 
+    - `false` : Keep width of title to original size. Default behavior.
+    - `true` : Expand width of title object. Will set display width by default.
+        - Must set to `true` if using [`scene.rexUI.wrapExpandText` method](ui-overview.md#behaviors-of-text) with any text game object.
+        - Can't work with `squareFitIcon: true`.
+- `expandTitleHeight` : Set `true` to expand height of title object.
 - `separator` : Game object of separator, optional.
 - `icon` : Game object of icon, optional.
 - `iconMask` : Set true to add a *circle* mask on icon game object.
     - *Phaser 3 engine does not support nested mask*, uses [circle mask image](circlemaskimage.md) instead.   
 - `text` : Game object of text.
+- `wrapText` : Enable WrapExpandText feature.
+    - `false`, `0` : No WrapExpandText feature. Default behavior.
+    - `true`, `1`, `'word'` : Word WrapExpandText.
+    - `2`, `'char'` : Character WrapExpandText.
+- `expandTextWidth` : 
+    - `false` : Keep width of text to original size. Default behavior.
+    - `true` : Expand width of text object. Will set display width by default.
+        - Must set to `true` if using [`scene.rexUI.wrapExpandText` method](ui-overview.md#behaviors-of-text) with any text game object.
+        - Can't work with `squareFitIcon: true`.
+- `expandTextHeight` : Set `true` to expand height of text object.
 - `action` : Game object of action icon, optional.
 - `actionMask` : Set true to add a *circle* mask on action icon game object.
     - *Phaser 3 engine does not support nested mask*, uses [circle mask image](circlemaskimage.md) instead.

@@ -1,8 +1,6 @@
 import BuildLabelConfig from './BuildLabelConfig.js';
 import DefaultCreateBackground from './CreateBackground.js';
 import DefaultCreateText from './CreateText.js';
-import SetValue from '../../../../plugins/utils/object/SetValue.js';
-import WrapExpandText from '../wrapexpandtext/WrapExpandText.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -38,21 +36,7 @@ var BuildTitleLabelConfig = function (scene, config, creators) {
     }
 
     if ((config.title !== null) && createTitle) {
-        var wrapTitle = GetValue(config, 'wrapTitle', false);
-
-        if (wrapTitle) {
-            if (wrapTitle === true) {
-                wrapTitle = 'word';
-            }
-            SetValue(config, 'title.wrap.mode', wrapTitle);
-            config.expandTitleWidth = true;
-        }
-
         config.title = createTitle(scene, config.title);
-
-        if (wrapTitle) {
-            config.title = WrapExpandText(config.title);
-        }
     } else {
         delete config.title;
     }

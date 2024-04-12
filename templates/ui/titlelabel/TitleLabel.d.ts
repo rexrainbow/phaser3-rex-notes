@@ -27,10 +27,14 @@ declare namespace TitleLabel {
         innerBackground?: Phaser.GameObjects.GameObject,
 
         title?: Phaser.GameObjects.GameObject,
+        wrapTitle?: boolean | 0 | 1 | 2 | 'none' | 'word' | 'char' | 'character',
+        expandTitleWidth?: boolean,
+        expandTitleHeight?: boolean,
 
         separator?: Phaser.GameObjects.GameObject,
 
         text?: Phaser.GameObjects.GameObject,
+        wrapText?: boolean | 0 | 1 | 2 | 'none' | 'word' | 'char' | 'character',
         expandTextWidth?: boolean,
         expandTextHeight?: boolean,
 

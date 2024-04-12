@@ -167,14 +167,6 @@ var label = scene.rexUI.add.simpleLabel({
 - `icon`, `action` : 
     - [Style of Image](ui-style.md#style-of-image) : Create Image, Nine-slice, or Round-rectangle as image, action element.
     - `null` : Don't create any game object.
-- `wrapTitle` : Enable WrapExpandText feature.
-    - `false`, `0` : No WrapExpandText feature. Default behavior.
-    - `true`, `1`, `'word'` : Word WrapExpandText.
-    - `2`, `'char'` : Character WrapExpandText.
-- `wrapText` : Enable WrapExpandText feature.
-    - `false`, `0` : No WrapExpandText feature. Default behavior.
-    - `true`, `1`, `'word'` : Word WrapExpandText.
-    - `2`, `'char'` : Character WrapExpandText.
 
 
 ### Custom class

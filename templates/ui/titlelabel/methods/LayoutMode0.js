@@ -79,14 +79,19 @@ var LayoutMode0 = function (config) {
 
     if (title) {
         var align = GetValue(config, 'align.title', 'left');
-        var padding = {
+        var expandTitleWidth = GetValue(config, 'expandTitleWidth', false);
+        var expandTitleHeight = GetValue(config, 'expandTitleHeight', false);
+        var proportion, padding, expand;
+        proportion = (expandTitleHeight) ? 1 : 0;
+        expand = expandTitleWidth;
+        padding = {
             bottom: (!separator && text) ? separatorSpace : 0,
             left: GetValue(config, 'space.titleLeft', 0),
             right: GetValue(config, 'space.titleRight', 0),
         }
         innerSizer.add(
             title,
-            { proportion: 0, align: align, padding: padding }
+            { proportion: proportion, expand: expand, align: align, padding: padding }
         );
     }
 
@@ -106,13 +111,18 @@ var LayoutMode0 = function (config) {
 
     if (text) {
         var align = GetValue(config, 'align.text', 'left');
-        var padding = {            
+        var expandTextWidth = GetValue(config, 'expandTextWidth', false);
+        var expandTextHeight = GetValue(config, 'expandTextHeight', false);
+        var proportion, padding, expand;
+        proportion = (expandTextHeight) ? 1 : 0;
+        expand = expandTextWidth;
+        padding = {
             left: GetValue(config, 'space.textLeft', 0),
             right: GetValue(config, 'space.textRight', 0),
         }
         innerSizer.add(
             text,
-            { proportion: 0, align: align, padding: padding }
+            { proportion: proportion, expand: expand, align: align, padding: padding }
         );
     }
 

@@ -31,14 +31,19 @@ var LayoutMode1 = function (config) {
 
     if (title) {
         var align = GetValue(config, 'align.title', 'left');
-        var padding = {
+        var expandTitleWidth = GetValue(config, 'expandTitleWidth', false);
+        var expandTitleHeight = GetValue(config, 'expandTitleHeight', false);
+        var proportion, padding, expand;
+        proportion = (expandTitleHeight) ? 1 : 0;
+        expand = expandTitleWidth;
+        padding = {
             bottom: GetValue(config, 'space.title', 0),
             left: GetValue(config, 'space.titleLeft', 0),
             right: GetValue(config, 'space.titleRight', 0),
         }
         this.add(
             title,
-            { proportion: 0, align: align, padding: padding }
+            { proportion: proportion, expand: expand, align: align, padding: padding }
         );
     }
 
