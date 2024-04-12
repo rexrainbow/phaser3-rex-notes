@@ -9851,8 +9851,9 @@
 <span class="w">    </span><span class="c1">// iconSize: undefined, iconWidth: undefined, iconHeight: undefined,</span>
 
 <span class="w">    </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="nx">textGameObject</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">expandTextWidth</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">expandTextHeight</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="c1">// wrapText: false,</span>
+<span class="w">    </span><span class="c1">// expandTextWidth: false,</span>
+<span class="w">    </span><span class="c1">// expandTextHeight: false,</span>
 
 <span class="w">    </span><span class="nx">action</span><span class="o">:</span><span class="w"> </span><span class="nx">actionGameObject</span><span class="p">,</span>
 <span class="w">    </span><span class="c1">// actionMask: false,</span>
@@ -9932,6 +9933,12 @@
 </ul>
 </li>
 <li><code>text</code> : Game object of text, optional.</li>
+<li><code>wrapText</code> : Enable WrapExpandText feature.<ul>
+<li><code>false</code>, <code>0</code> : No WrapExpandText feature. Default behavior.</li>
+<li><code>true</code>, <code>1</code>, <code>'word'</code> : Word WrapExpandText.</li>
+<li><code>2</code>, <code>'char'</code> : Character WrapExpandText.</li>
+</ul>
+</li>
 <li><code>expandTextWidth</code> : <ul>
 <li><code>false</code> : Keep width of text to original size. Default behavior.</li>
 <li><code>true</code> : Expand width of text object. Will set display width by default.<ul>

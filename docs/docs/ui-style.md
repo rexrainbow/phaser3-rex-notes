@@ -403,7 +403,7 @@ Create [Text](text.md), [BBCodetext](bbcodetext.md), [BitmapText](bitmaptext.md)
     // iconSize: undefined, iconWidth: undefined, iconHeight: undefined,
 
     text: testStyle,
-    // wrapText: false,
+    // wrapText: false,  // false|'word'|'char'
     // expandTextWidth: false,
     // expandTextHeight: false,
 

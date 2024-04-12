@@ -41777,12 +41777,83 @@
     return maskGameObject;
   };
 
+  var BitmapTextClass = Phaser.GameObjects.BitmapText;
+  var IsBitmapTextGameObject = function IsBitmapTextGameObject(gameObject) {
+    return gameObject instanceof BitmapTextClass;
+  };
+
+  var TextClass = Phaser.GameObjects.Text;
+  var IsTextGameObject = function IsTextGameObject(gameObject) {
+    return gameObject instanceof TextClass;
+  };
+
+  var TextRunWidthWrap = function TextRunWidthWrap(textObject) {
+    var RunWidthWrap = function RunWidthWrap(width) {
+      var padding = textObject.padding;
+      var wrapWidth = width - padding.left - padding.right;
+      var style = textObject.style;
+      if (IsTextGameObject(textObject)) {
+        style.wordWrapWidth = wrapWidth;
+        style.maxLines = 0;
+      } else {
+        // BBCode text, Tag text
+        if (style.wrapMode === 0) {
+          // Turn no-wrap to word-wrap
+          style.wrapMode = 1;
+        }
+        style.wrapWidth = wrapWidth;
+        style.maxLines = 0;
+      }
+      style.fixedWidth = width;
+      style.fixedHeight = 0;
+      textObject.updateText(); // Redraw text
+
+      textObject.minHeight = textObject.height;
+      return textObject;
+    };
+    return RunWidthWrap;
+  };
+
+  var DynamicTextRunWidthWrap = function DynamicTextRunWidthWrap(textObject) {
+    var RunWidthWrap = function RunWidthWrap(width) {
+      textObject.setFixedSize(width, 0).runWordWrap();
+      textObject.minHeight = textObject.height;
+      return textObject;
+    };
+    return RunWidthWrap;
+  };
+
+  var BitmapTextRunWidthWrap = function BitmapTextRunWidthWrap(textObject) {
+    var RunWidthWrap = function RunWidthWrap(width) {
+      textObject.setMaxWidth(width);
+      textObject.minHeight = textObject.height;
+      return textObject;
+    };
+    return RunWidthWrap;
+  };
+
+  var IsDynamicTextGameObject = function IsDynamicTextGameObject(gameObject) {
+    return gameObject instanceof DynamicText;
+  };
+  var WrapExpandText = function WrapExpandText(textObject, minWidth) {
+    if (minWidth === undefined) {
+      minWidth = 0;
+    }
+    textObject._minWidth = minWidth;
+    textObject.runWidthWrap = IsDynamicTextGameObject(textObject) ? DynamicTextRunWidthWrap(textObject) : IsBitmapTextGameObject(textObject) ? BitmapTextRunWidthWrap(textObject) : TextRunWidthWrap(textObject);
+    return textObject;
+  };
+
   var GetValue$1R = Phaser.Utils.Objects.GetValue;
   var Label = /*#__PURE__*/function (_LabelBase) {
     _inherits(Label, _LabelBase);
     function Label(scene, config) {
       var _this;
       _classCallCheck(this, Label);
+      if (config === undefined) {
+        config = {};
+      }
+
       // Create sizer
       _this = _callSuper(this, Label, [scene, config]);
       _this.type = 'rexLabel';
@@ -41836,6 +41907,15 @@
         }
       }
       if (text) {
+        var wrapText = GetValue$1R(config, 'wrapText', false);
+        if (wrapText) {
+          if (wrapText === true) {
+            wrapText = 'word';
+          }
+          SetValue(config, 'text.wrap.mode', wrapText);
+          SetValue(config, 'expandTextWidth', true);
+          WrapExpandText(text);
+        }
         var textSpace = GetValue$1R(config, 'space.text', 0);
         var expandTextWidth = GetValue$1R(config, 'expandTextWidth', false);
         var expandTextHeight = GetValue$1R(config, 'expandTextHeight', false);
@@ -47198,16 +47278,6 @@
   // mixin
   Object.assign(Scrollable.prototype, Methods$7);
 
-  var TextClass = Phaser.GameObjects.Text;
-  var IsTextGameObject = function IsTextGameObject(gameObject) {
-    return gameObject instanceof TextClass;
-  };
-
-  var BitmapTextClass = Phaser.GameObjects.BitmapText;
-  var IsBitmapTextGameObject = function IsBitmapTextGameObject(gameObject) {
-    return gameObject instanceof BitmapTextClass;
-  };
-
   var TextType = 0;
   var TagTextType = 1;
   var BitmapTextType = 2;
@@ -47945,63 +48015,6 @@
     return gameObject;
   };
 
-  var TextRunWidthWrap = function TextRunWidthWrap(textObject) {
-    var RunWidthWrap = function RunWidthWrap(width) {
-      var padding = textObject.padding;
-      var wrapWidth = width - padding.left - padding.right;
-      var style = textObject.style;
-      if (IsTextGameObject(textObject)) {
-        style.wordWrapWidth = wrapWidth;
-        style.maxLines = 0;
-      } else {
-        // BBCode text, Tag text
-        if (style.wrapMode === 0) {
-          // Turn no-wrap to word-wrap
-          style.wrapMode = 1;
-        }
-        style.wrapWidth = wrapWidth;
-        style.maxLines = 0;
-      }
-      style.fixedWidth = width;
-      style.fixedHeight = 0;
-      textObject.updateText(); // Redraw text
-
-      textObject.minHeight = textObject.height;
-      return textObject;
-    };
-    return RunWidthWrap;
-  };
-
-  var DynamicTextRunWidthWrap = function DynamicTextRunWidthWrap(textObject) {
-    var RunWidthWrap = function RunWidthWrap(width) {
-      textObject.setFixedSize(width, 0).runWordWrap();
-      textObject.minHeight = textObject.height;
-      return textObject;
-    };
-    return RunWidthWrap;
-  };
-
-  var BitmapTextRunWidthWrap = function BitmapTextRunWidthWrap(textObject) {
-    var RunWidthWrap = function RunWidthWrap(width) {
-      textObject.setMaxWidth(width);
-      textObject.minHeight = textObject.height;
-      return textObject;
-    };
-    return RunWidthWrap;
-  };
-
-  var IsDynamicTextGameObject = function IsDynamicTextGameObject(gameObject) {
-    return gameObject instanceof DynamicText;
-  };
-  var WrapExpandText = function WrapExpandText(textObject, minWidth) {
-    if (minWidth === undefined) {
-      minWidth = 0;
-    }
-    textObject._minWidth = minWidth;
-    textObject.runWidthWrap = IsDynamicTextGameObject(textObject) ? DynamicTextRunWidthWrap(textObject) : IsBitmapTextGameObject(textObject) ? BitmapTextRunWidthWrap(textObject) : TextRunWidthWrap(textObject);
-    return textObject;
-  };
-
   var CreateImage = function CreateImage(scene, config) {
     var gameObjectType;
     if (config) {
@@ -48049,18 +48062,7 @@
       delete config.background;
     }
     if (config.text !== null && createText) {
-      var wrapText = GetValue$1o(config, 'wrapText', false);
-      if (wrapText) {
-        if (wrapText === true) {
-          wrapText = 'word';
-        }
-        SetValue(config, 'text.wrap.mode', wrapText);
-        config.expandTextWidth = true;
-      }
       config.text = createText(scene, config.text);
-      if (wrapText) {
-        config.text = WrapExpandText(config.text);
-      }
     } else {
       delete config.text;
     }
@@ -48190,13 +48192,19 @@
     var separatorSpace = GetValue$1n(config, 'space.separator', 0);
     if (title) {
       var align = GetValue$1n(config, 'align.title', 'left');
-      var padding = {
+      var expandTitleWidth = GetValue$1n(config, 'expandTitleWidth', false);
+      var expandTitleHeight = GetValue$1n(config, 'expandTitleHeight', false);
+      var proportion, padding, expand;
+      proportion = expandTitleHeight ? 1 : 0;
+      expand = expandTitleWidth;
+      padding = {
         bottom: !separator && text ? separatorSpace : 0,
         left: GetValue$1n(config, 'space.titleLeft', 0),
         right: GetValue$1n(config, 'space.titleRight', 0)
       };
       innerSizer.add(title, {
-        proportion: 0,
+        proportion: proportion,
+        expand: expand,
         align: align,
         padding: padding
       });
@@ -48217,12 +48225,18 @@
     }
     if (text) {
       var align = GetValue$1n(config, 'align.text', 'left');
-      var padding = {
+      var expandTextWidth = GetValue$1n(config, 'expandTextWidth', false);
+      var expandTextHeight = GetValue$1n(config, 'expandTextHeight', false);
+      var proportion, padding, expand;
+      proportion = expandTextHeight ? 1 : 0;
+      expand = expandTextWidth;
+      padding = {
         left: GetValue$1n(config, 'space.textLeft', 0),
         right: GetValue$1n(config, 'space.textRight', 0)
       };
       innerSizer.add(text, {
-        proportion: 0,
+        proportion: proportion,
+        expand: expand,
         align: align,
         padding: padding
       });
@@ -48305,13 +48319,19 @@
     var actionMask = GetValue$1m(config, 'actionMask', undefined);
     if (title) {
       var align = GetValue$1m(config, 'align.title', 'left');
-      var padding = {
+      var expandTitleWidth = GetValue$1m(config, 'expandTitleWidth', false);
+      var expandTitleHeight = GetValue$1m(config, 'expandTitleHeight', false);
+      var proportion, padding, expand;
+      proportion = expandTitleHeight ? 1 : 0;
+      expand = expandTitleWidth;
+      padding = {
         bottom: GetValue$1m(config, 'space.title', 0),
         left: GetValue$1m(config, 'space.titleLeft', 0),
         right: GetValue$1m(config, 'space.titleRight', 0)
       };
       this.add(title, {
-        proportion: 0,
+        proportion: proportion,
+        expand: expand,
         align: align,
         padding: padding
       });
@@ -48458,6 +48478,10 @@
     function TitleLabel(scene, config) {
       var _this;
       _classCallCheck(this, TitleLabel);
+      if (config === undefined) {
+        config = {};
+      }
+
       // Create sizer
       _this = _callSuper(this, TitleLabel, [scene, config]);
       _this.type = 'rexTitleLabel';
@@ -48466,6 +48490,32 @@
       var background = GetValue$1l(config, 'background', undefined);
       if (background) {
         _this.addBackground(background);
+      }
+
+      // Wrap title, text
+      var title = GetValue$1l(config, 'title', undefined);
+      var text = GetValue$1l(config, 'text', undefined);
+      if (title) {
+        var wrapTitle = GetValue$1l(config, 'wrapTitle', false);
+        if (wrapTitle) {
+          if (wrapTitle === true) {
+            wrapTitle = 'word';
+          }
+          SetValue(config, 'title.wrap.mode', wrapText);
+          SetValue(config, 'expandTitleWidth', true);
+          WrapExpandText(title);
+        }
+      }
+      if (text) {
+        var wrapText = GetValue$1l(config, 'wrapText', false);
+        if (wrapText) {
+          if (wrapText === true) {
+            wrapText = 'word';
+          }
+          SetValue(config, 'text.wrap.mode', wrapText);
+          SetValue(config, 'expandTextWidth', true);
+          WrapExpandText(text);
+        }
       }
       var layoutMode = GetValue$1l(config, 'layoutMode', 0);
       var layoutCallback = LayoutCallbacks$1[layoutMode] || LayoutCallbacks$1[0];
@@ -48563,18 +48613,7 @@
       delete config.separator;
     }
     if (config.title !== null && createTitle) {
-      var wrapTitle = GetValue$1k(config, 'wrapTitle', false);
-      if (wrapTitle) {
-        if (wrapTitle === true) {
-          wrapTitle = 'word';
-        }
-        SetValue(config, 'title.wrap.mode', wrapTitle);
-        config.expandTitleWidth = true;
-      }
       config.title = createTitle(scene, config.title);
-      if (wrapTitle) {
-        config.title = WrapExpandText(config.title);
-      }
     } else {
       delete config.title;
     }

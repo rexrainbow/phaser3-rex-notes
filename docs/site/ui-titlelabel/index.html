@@ -9873,6 +9873,9 @@
 <span class="w">    </span><span class="nx">innerBackground</span><span class="o">:</span><span class="w"> </span><span class="nx">backgroundGameObject</span><span class="p">,</span>
 
 <span class="w">    </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="nx">titleGameObject</span><span class="p">,</span>
+<span class="w">    </span><span class="c1">// wrapTitle: false,</span>
+<span class="w">    </span><span class="c1">// expandTitleWidth: false,</span>
+<span class="w">    </span><span class="c1">// expandTitleHeight: false,</span>
 
 <span class="w">    </span><span class="nx">separator</span><span class="o">:</span><span class="w"> </span><span class="nx">separatorGameObject</span><span class="p">,</span>
 
@@ -9880,6 +9883,9 @@
 <span class="w">    </span><span class="nx">iconMask</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 
 <span class="w">    </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="nx">textGameObject</span><span class="p">,</span>
+<span class="w">    </span><span class="c1">// wrapText: false,</span>
+<span class="w">    </span><span class="c1">// expandTextWidth: false,</span>
+<span class="w">    </span><span class="c1">// expandTextHeight: false,</span>
 
 <span class="w">    </span><span class="nx">action</span><span class="o">:</span><span class="w"> </span><span class="nx">actionGameObject</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">actionMask</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
@@ -9944,6 +9950,22 @@
 </ul>
 </li>
 <li><code>title</code> : Game object of title, optional.</li>
+<li><code>wrapTitle</code> : Enable WrapExpandText feature.<ul>
+<li><code>false</code>, <code>0</code> : No WrapExpandText feature. Default behavior.</li>
+<li><code>true</code>, <code>1</code>, <code>'word'</code> : Word WrapExpandText.</li>
+<li><code>2</code>, <code>'char'</code> : Character WrapExpandText.</li>
+</ul>
+</li>
+<li><code>expandTitleWidth</code> : <ul>
+<li><code>false</code> : Keep width of title to original size. Default behavior.</li>
+<li><code>true</code> : Expand width of title object. Will set display width by default.<ul>
+<li>Must set to <code>true</code> if using <a href="../ui-overview/#behaviors-of-text"><code>scene.rexUI.wrapExpandText</code> method</a> with any text game object.</li>
+<li>Can't work with <code>squareFitIcon: true</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>expandTitleHeight</code> : Set <code>true</code> to expand height of title object.</li>
 <li><code>separator</code> : Game object of separator, optional.</li>
 <li><code>icon</code> : Game object of icon, optional.</li>
 <li><code>iconMask</code> : Set true to add a <em>circle</em> mask on icon game object.<ul>
@@ -9951,6 +9973,22 @@
 </ul>
 </li>
 <li><code>text</code> : Game object of text.</li>
+<li><code>wrapText</code> : Enable WrapExpandText feature.<ul>
+<li><code>false</code>, <code>0</code> : No WrapExpandText feature. Default behavior.</li>
+<li><code>true</code>, <code>1</code>, <code>'word'</code> : Word WrapExpandText.</li>
+<li><code>2</code>, <code>'char'</code> : Character WrapExpandText.</li>
+</ul>
+</li>
+<li><code>expandTextWidth</code> : <ul>
+<li><code>false</code> : Keep width of text to original size. Default behavior.</li>
+<li><code>true</code> : Expand width of text object. Will set display width by default.<ul>
+<li>Must set to <code>true</code> if using <a href="../ui-overview/#behaviors-of-text"><code>scene.rexUI.wrapExpandText</code> method</a> with any text game object.</li>
+<li>Can't work with <code>squareFitIcon: true</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>expandTextHeight</code> : Set <code>true</code> to expand height of text object.</li>
 <li><code>action</code> : Game object of action icon, optional.</li>
 <li><code>actionMask</code> : Set true to add a <em>circle</em> mask on action icon game object.<ul>
 <li><em>Phaser 3 engine does not support nested mask</em>, uses <a href="../circlemaskimage/">circle mask image</a> instead.</li>

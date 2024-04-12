@@ -152,7 +152,7 @@ Choice.choice
   resultKey=choiceIndex
   option1=Ice cream
   option2=Burger
-  option3=Cola
+  option3=Cola Cola Cola Cola Cola Cola Cola Cola Cola Cola Cola Cola
 // Wait until clicking any chioce button
 
 log

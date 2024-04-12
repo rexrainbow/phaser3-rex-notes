@@ -20673,12 +20673,83 @@
     return maskGameObject;
   };
 
+  var BitmapTextClass = Phaser.GameObjects.BitmapText;
+  var IsBitmapTextGameObject = function IsBitmapTextGameObject(gameObject) {
+    return gameObject instanceof BitmapTextClass;
+  };
+
+  var TextClass = Phaser.GameObjects.Text;
+  var IsTextGameObject = function IsTextGameObject(gameObject) {
+    return gameObject instanceof TextClass;
+  };
+
+  var TextRunWidthWrap = function TextRunWidthWrap(textObject) {
+    var RunWidthWrap = function RunWidthWrap(width) {
+      var padding = textObject.padding;
+      var wrapWidth = width - padding.left - padding.right;
+      var style = textObject.style;
+      if (IsTextGameObject(textObject)) {
+        style.wordWrapWidth = wrapWidth;
+        style.maxLines = 0;
+      } else {
+        // BBCode text, Tag text
+        if (style.wrapMode === 0) {
+          // Turn no-wrap to word-wrap
+          style.wrapMode = 1;
+        }
+        style.wrapWidth = wrapWidth;
+        style.maxLines = 0;
+      }
+      style.fixedWidth = width;
+      style.fixedHeight = 0;
+      textObject.updateText(); // Redraw text
+
+      textObject.minHeight = textObject.height;
+      return textObject;
+    };
+    return RunWidthWrap;
+  };
+
+  var DynamicTextRunWidthWrap = function DynamicTextRunWidthWrap(textObject) {
+    var RunWidthWrap = function RunWidthWrap(width) {
+      textObject.setFixedSize(width, 0).runWordWrap();
+      textObject.minHeight = textObject.height;
+      return textObject;
+    };
+    return RunWidthWrap;
+  };
+
+  var BitmapTextRunWidthWrap = function BitmapTextRunWidthWrap(textObject) {
+    var RunWidthWrap = function RunWidthWrap(width) {
+      textObject.setMaxWidth(width);
+      textObject.minHeight = textObject.height;
+      return textObject;
+    };
+    return RunWidthWrap;
+  };
+
+  var IsDynamicTextGameObject = function IsDynamicTextGameObject(gameObject) {
+    return gameObject instanceof DynamicText;
+  };
+  var WrapExpandText = function WrapExpandText(textObject, minWidth) {
+    if (minWidth === undefined) {
+      minWidth = 0;
+    }
+    textObject._minWidth = minWidth;
+    textObject.runWidthWrap = IsDynamicTextGameObject(textObject) ? DynamicTextRunWidthWrap(textObject) : IsBitmapTextGameObject(textObject) ? BitmapTextRunWidthWrap(textObject) : TextRunWidthWrap(textObject);
+    return textObject;
+  };
+
   var GetValue$B = Phaser.Utils.Objects.GetValue;
   var Label = /*#__PURE__*/function (_LabelBase) {
     _inherits(Label, _LabelBase);
     function Label(scene, config) {
       var _this;
       _classCallCheck(this, Label);
+      if (config === undefined) {
+        config = {};
+      }
+
       // Create sizer
       _this = _callSuper(this, Label, [scene, config]);
       _this.type = 'rexLabel';
@@ -20732,6 +20803,15 @@
         }
       }
       if (text) {
+        var wrapText = GetValue$B(config, 'wrapText', false);
+        if (wrapText) {
+          if (wrapText === true) {
+            wrapText = 'word';
+          }
+          SetValue(config, 'text.wrap.mode', wrapText);
+          SetValue(config, 'expandTextWidth', true);
+          WrapExpandText(text);
+        }
         var textSpace = GetValue$B(config, 'space.text', 0);
         var expandTextWidth = GetValue$B(config, 'expandTextWidth', false);
         var expandTextHeight = GetValue$B(config, 'expandTextHeight', false);
@@ -30701,16 +30781,6 @@
   // mixin
   Object.assign(Scrollable.prototype, Methods$1);
 
-  var TextClass = Phaser.GameObjects.Text;
-  var IsTextGameObject = function IsTextGameObject(gameObject) {
-    return gameObject instanceof TextClass;
-  };
-
-  var BitmapTextClass = Phaser.GameObjects.BitmapText;
-  var IsBitmapTextGameObject = function IsBitmapTextGameObject(gameObject) {
-    return gameObject instanceof BitmapTextClass;
-  };
-
   var TextType = 0;
   var TagTextType = 1;
   var BitmapTextType = 2;
@@ -31448,63 +31518,6 @@
     return gameObject;
   };
 
-  var TextRunWidthWrap = function TextRunWidthWrap(textObject) {
-    var RunWidthWrap = function RunWidthWrap(width) {
-      var padding = textObject.padding;
-      var wrapWidth = width - padding.left - padding.right;
-      var style = textObject.style;
-      if (IsTextGameObject(textObject)) {
-        style.wordWrapWidth = wrapWidth;
-        style.maxLines = 0;
-      } else {
-        // BBCode text, Tag text
-        if (style.wrapMode === 0) {
-          // Turn no-wrap to word-wrap
-          style.wrapMode = 1;
-        }
-        style.wrapWidth = wrapWidth;
-        style.maxLines = 0;
-      }
-      style.fixedWidth = width;
-      style.fixedHeight = 0;
-      textObject.updateText(); // Redraw text
-
-      textObject.minHeight = textObject.height;
-      return textObject;
-    };
-    return RunWidthWrap;
-  };
-
-  var DynamicTextRunWidthWrap = function DynamicTextRunWidthWrap(textObject) {
-    var RunWidthWrap = function RunWidthWrap(width) {
-      textObject.setFixedSize(width, 0).runWordWrap();
-      textObject.minHeight = textObject.height;
-      return textObject;
-    };
-    return RunWidthWrap;
-  };
-
-  var BitmapTextRunWidthWrap = function BitmapTextRunWidthWrap(textObject) {
-    var RunWidthWrap = function RunWidthWrap(width) {
-      textObject.setMaxWidth(width);
-      textObject.minHeight = textObject.height;
-      return textObject;
-    };
-    return RunWidthWrap;
-  };
-
-  var IsDynamicTextGameObject = function IsDynamicTextGameObject(gameObject) {
-    return gameObject instanceof DynamicText;
-  };
-  var WrapExpandText = function WrapExpandText(textObject, minWidth) {
-    if (minWidth === undefined) {
-      minWidth = 0;
-    }
-    textObject._minWidth = minWidth;
-    textObject.runWidthWrap = IsDynamicTextGameObject(textObject) ? DynamicTextRunWidthWrap(textObject) : IsBitmapTextGameObject(textObject) ? BitmapTextRunWidthWrap(textObject) : TextRunWidthWrap(textObject);
-    return textObject;
-  };
-
   var CreateImage = function CreateImage(scene, config) {
     var gameObjectType;
     if (config) {
@@ -31552,18 +31565,7 @@
       delete config.background;
     }
     if (config.text !== null && createText) {
-      var wrapText = GetValue$5(config, 'wrapText', false);
-      if (wrapText) {
-        if (wrapText === true) {
-          wrapText = 'word';
-        }
-        SetValue(config, 'text.wrap.mode', wrapText);
-        config.expandTextWidth = true;
-      }
       config.text = createText(scene, config.text);
-      if (wrapText) {
-        config.text = WrapExpandText(config.text);
-      }
     } else {
       delete config.text;
     }

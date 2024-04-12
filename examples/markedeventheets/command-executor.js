@@ -385,6 +385,7 @@ var CreateChoiceBox = function (
             text: {
                 fontSize: 24
             },
+            wrapText: 'word',
             background: {
                 color: COLOR_DARK
             }
@@ -400,6 +401,7 @@ var CreateChoiceBox = function (
         choicesType: 'radio',
         choice: {
             space: { left: 10, right: 10, top: 10, bottom: 10 },
+            wrapText: 'word',
             background: {
                 color: COLOR_DARK,
                 strokeWidth: 0,
