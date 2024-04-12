@@ -621,6 +621,8 @@ commandName
 
 ```
 
+- `'\n'`
+
 ### Command executor
 
 A command executor for phaser3 engine.
@@ -1020,6 +1022,8 @@ Reserved id : `time`, `click`, `key`, `bgm`, `bgm2`, `se`, `se2`, `camera`.
         - `gameObject` : Indexed by `NAME`
         - `config` : `{param0, param1}`
     - Add empty line above and below this command block.
+    - `value` :
+        - For string value, characters `\n` (2 characters) will be replaced by `\n` new line character (1 character)
 - Invoke custom command of all game objects belong GOTYPE
     ```
     
