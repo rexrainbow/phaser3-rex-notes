@@ -22,6 +22,8 @@ var GenerateDefaultCreateGameObjectCallback = function (style = {}) {
         }
 
         var gameObject = new TransitionImagePack(scene, config);
+        gameObject.setOrigin(0.5, 1);
+
         scene.add.existing(gameObject);
 
         gameObject.isFrameNameMode = isFrameNameMode;

@@ -57,12 +57,15 @@ Dialog.set
 
 CharacterA.set
   vpx=-0.2
+  vpy=1
 
 CharacterB.set
   vpx=-0.4
+  vpy=1
 
 CharacterC.set
   vpx=-0.3
+  vpy=1
 
 bgm.play
   key=theme0

@@ -75,7 +75,8 @@ var CreateCommandExecutor = function (scene) {
                 if (name && expression) {
                     config.frame = `${name}-${expression}`;
                 }
-                return scene.rexUI.add.transitionImagePack(config);
+                return scene.rexUI.add.transitionImagePack(config)
+                    .setOrigin(0.5, 1)
             },
             fade: 0,  // No fade-in when creating/destroying gameobject
             viewportCoordinate: true,
