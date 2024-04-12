@@ -1,8 +1,9 @@
 var Typing = function (
     gameObject,
     {
-        name,
         text,
+        name,
+        icon, iconFrame,
         speed
     } = {},
     commandExecutor,
@@ -15,6 +16,14 @@ var Typing = function (
     } else {
         var title = gameObject.getElement('title').setText('');
         gameObject.setChildAlpha(title, 0);
+    }
+
+    if (icon || iconFrame) {
+        var iconGameObject = gameObject.getElement('icon');
+        if (!icon) {
+            icon = iconGameObject.texture.key;
+        }
+        iconGameObject.setTexture(icon, iconFrame);
     }
     gameObject.layout();
 
