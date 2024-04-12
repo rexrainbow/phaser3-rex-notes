@@ -22,8 +22,8 @@ class Demo extends Phaser.Scene {
             width: 400,
             orientation: 'x',
             background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_MAIN).setStrokeStyle(2, COLOR_LIGHT),
-            text: this.rexUI.wrapExpandText(this.add.text(0, 0, content)),
-            expandTextWidth: true,
+            text: this.add.text(0, 0, content),
+            wrapText: true,
             icon: this.rexUI.add.roundRectangle(0, 0, 40, 40, 10, COLOR_DARK),
             space: { left: 20, right: 20, top: 20, bottom: 20, icon: 10, }
         })

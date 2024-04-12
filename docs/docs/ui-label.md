@@ -97,8 +97,9 @@ var label = scene.rexUI.add.label({
     // iconSize: undefined, iconWidth: undefined, iconHeight: undefined,
     
     text: textGameObject,
-    expandTextWidth: false,
-    expandTextHeight: false,
+    // wrapText: false,
+    // expandTextWidth: false,
+    // expandTextHeight: false,
 
     action: actionGameObject,
     // actionMask: false,
@@ -156,6 +157,10 @@ var label = scene.rexUI.add.label({
 - `iconHeight` : Set display height of icon game object to `iconHeight`. 
     - If `iconWidth` is `undefined`, set `scaleX` of icon game object to `scaleY` of icon game object, to keep size ratio.
 - `text` : Game object of text, optional.
+- `wrapText` : Enable WrapExpandText feature.
+    - `false`, `0` : No WrapExpandText feature. Default behavior.
+    - `true`, `1`, `'word'` : Word WrapExpandText.
+    - `2`, `'char'` : Character WrapExpandText.
 - `expandTextWidth` : 
     - `false` : Keep width of text to original size. Default behavior.
     - `true` : Expand width of text object. Will set display width by default.

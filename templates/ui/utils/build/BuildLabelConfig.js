@@ -23,21 +23,7 @@ var BuildLabelConfig = function (scene, config, creators) {
     }
 
     if ((config.text !== null) && createText) {
-        var wrapText = GetValue(config, 'wrapText', false);
-
-        if (wrapText) {
-            if (wrapText === true) {
-                wrapText = 'word';
-            }
-            SetValue(config, 'text.wrap.mode', wrapText);
-            config.expandTextWidth = true;
-        }
-
         config.text = createText(scene, config.text);
-
-        if (wrapText) {
-            config.text = WrapExpandText(config.text);
-        }
     } else {
         delete config.text;
     }

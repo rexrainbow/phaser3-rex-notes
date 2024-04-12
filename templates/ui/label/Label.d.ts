@@ -28,6 +28,7 @@ declare namespace Label {
         iconSize?: number, iconWidth?: number, iconHeight?: number,
 
         text?: Phaser.GameObjects.GameObject,
+        wrapText?: boolean | 0 | 1 | 2 | 'none' | 'word' | 'char' | 'character',
         expandTextWidth?: boolean,
         expandTextHeight?: boolean,
 

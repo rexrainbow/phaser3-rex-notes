@@ -1,10 +1,17 @@
 import LabelBase from './Base.js';
 import AddChildMask from '../../../plugins/gameobjects/container/containerlite/mask/AddChildMask.js';
 
+import WrapExpandText from '../utils/wrapexpandtext/WrapExpandText.js';
+import SetValue from '../../../plugins/utils/object/SetValue.js';
+
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Label extends LabelBase {
     constructor(scene, config) {
+        if (config === undefined) {
+            config = {};
+        }
+
         // Create sizer
         super(scene, config);
         this.type = 'rexLabel';
@@ -67,6 +74,16 @@ class Label extends LabelBase {
 
 
         if (text) {
+            var wrapText = GetValue(config, 'wrapText', false);
+            if (wrapText) {
+                if (wrapText === true) {
+                    wrapText = 'word';
+                }
+                SetValue(config, 'text.wrap.mode', wrapText);
+                SetValue(config, 'expandTextWidth', true);
+                WrapExpandText(text);
+            }
+
             var textSpace = GetValue(config, 'space.text', 0);
             var expandTextWidth = GetValue(config, 'expandTextWidth', false);
             var expandTextHeight = GetValue(config, 'expandTextHeight', false);
