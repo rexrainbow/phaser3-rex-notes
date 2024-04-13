@@ -13,6 +13,8 @@ TEXTBOX
 
 Create TextBox as Text-box game object
 
+- Default origin is `(0.5, 1)`
+
 ## Destroy
 
 ```
@@ -79,6 +81,9 @@ NAME.yoyo
 
 NAME.typing
   name=
+  // expression=
+  // icon=
+  // iconFrame=
   text=
   speed=
 
@@ -88,10 +93,15 @@ or
 
 ~~~
 
-```NAME.typing,name=,speed=
+```NAME.typing,name=,expression=,icon=,iconFrame=,speed=
 text-line0
 text-line1
 text-line2
 ```
 
 ~~~
+
+- `name` : Display `name` at title element.
+    - `undefined` : Hide title element.
+- `icon`, `iconFrame` : Texture key and frame name of icon element.
+- `expression` : Generate `iconFrame` by `${name}-${expression}`.

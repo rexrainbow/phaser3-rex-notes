@@ -1,5 +1,6 @@
 import { SimpleTextBox } from '../../../ui/ui-components.js';
 import SetValue from '../../../../plugins/utils/object/SetValue.js';
+import AddEvent from '../../../../plugins/utils/gameobject/addevent/AddEvent.js';
 
 var GenerateDefaultCreateGameObjectCallback = function (style = {}) {
     var defaultFrameDelimiter = style.frameDelimiter || '-';
@@ -57,6 +58,30 @@ var GenerateDefaultCreateGameObjectCallback = function (style = {}) {
             }, gameObject)
 
         gameObject.frameDelimiter = frameDelimiter;
+
+        // Hide icon element when window height > window width
+        AddEvent(
+            gameObject,  // target
+            scene.scale, 'resize',  // eventEmitter, eventName
+            // callback
+            function (gameSize, baseSize, displaySize, previousWidth, previousHeight) {
+                // TODO
+                var icon = gameObject.getElement('icon');
+                if (!icon) {
+                    return;
+                }
+
+                if (baseSize.width >= baseSize.height) {
+                    if (!icon.visible) {
+                        gameObject.show(icon).layout();
+                    }
+                } else {
+                    if (icon.visible) {
+                        gameObject.hide(icon).layout();
+                    }
+                }
+            }
+        )
 
         return gameObject;
     }

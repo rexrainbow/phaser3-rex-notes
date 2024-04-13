@@ -50,6 +50,7 @@ class Dialog extends Sizer {
                 click: clickConfig,
                 eventEmitter: this.eventEmitter,
             });
+            scene.add.existing(toolbarSizer);
         }
 
         var leftToolbarSizer;
@@ -63,6 +64,7 @@ class Dialog extends Sizer {
                 click: clickConfig,
                 eventEmitter: this.eventEmitter,
             });
+            scene.add.existing(leftToolbarSizer);
         }
 
         // title or toolbar or leftToolbar
@@ -219,6 +221,7 @@ class Dialog extends Sizer {
             }
 
             choicesSizer = new ButtonsClass(scene, choicesConfig);
+            scene.add.existing(choicesSizer);
             var choicesSpace = GetValue(config, 'space.choices', 0);
             var padding = {
                 left: GetValue(config, 'space.choicesLeft', 0),
@@ -248,6 +251,7 @@ class Dialog extends Sizer {
                 click: clickConfig,
                 eventEmitter: this.eventEmitter,
             })
+            scene.add.existing(actionsSizer);
             var padding = {
                 left: GetValue(config, 'space.actionsLeft', 0),
                 right: GetValue(config, 'space.actionsRight', 0),

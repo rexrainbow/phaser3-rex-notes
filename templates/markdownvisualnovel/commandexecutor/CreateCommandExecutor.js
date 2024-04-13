@@ -14,10 +14,15 @@ const RegisterHandlers = [
 
 
 var CreateCommandExecutor = function (scene, config) {
-    var { layerDepth, } = config;
+    var {
+        layerDepth,
+        rootLayer,
+    } = config;
+
     var commandExecutor = new CommandExecutor(scene, {
         layers: LayerNames,
-        layerDepth: layerDepth,
+        layerDepth,
+        rootLayer,
     });
 
     for (var i = 0, cnt = RegisterHandlers.length; i < cnt; i++) {

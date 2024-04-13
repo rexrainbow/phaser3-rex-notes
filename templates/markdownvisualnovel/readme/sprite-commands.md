@@ -28,6 +28,8 @@
 
 Create TransitionImagePack as Sprite game object.
 
+- Default origin is `(0.5, 1)`
+
 ## Destroy
 
 ```
