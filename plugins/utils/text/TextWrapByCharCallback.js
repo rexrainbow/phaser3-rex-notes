@@ -15,16 +15,9 @@ var TextWrapByCharCallback = function (text, textObject) {
     return output;
 }
 
-var WrapLine = function (context, text, wrapWidth, wrapMode, output) {
-    if (text.length <= 100) {
-        var textWidth = context.measureText(text).width;
-        if (textWidth <= wrapWidth) {
-            output.push(text);
-            return output;
-        }
-    }
-
+var GetTokenArray = function (text, wrapMode) {
     var tokenArray;
+
     if (wrapMode === 2) {  // CHAR_WRAP
         tokenArray = text.split('');
     } else {  // MIX_WRAP
@@ -33,7 +26,7 @@ var WrapLine = function (context, text, wrapWidth, wrapMode, output) {
         for (var i = 0, wordCount = words.length; i < wordCount; i++) {
             word = words[i];
 
-            if (i < (wordCount-1)){
+            if (i < (wordCount - 1)) {
                 if (IsASCIIString(word)) {
                     tokenArray.push(word + ' ');
                 } else {
@@ -55,6 +48,20 @@ var WrapLine = function (context, text, wrapWidth, wrapMode, output) {
 
         }
     }
+
+    return tokenArray;
+}
+
+var WrapLine = function (context, text, wrapWidth, wrapMode, output) {
+    if (text.length <= 100) {
+        var textWidth = context.measureText(text).width;
+        if (textWidth <= wrapWidth) {
+            output.push(text);
+            return output;
+        }
+    }
+
+    var tokenArray = GetTokenArray(text, wrapMode);
 
     var token, tokenWidth;
     var line = [], remainderLineWidth = wrapWidth;
