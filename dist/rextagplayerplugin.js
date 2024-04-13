@@ -591,6 +591,7 @@
 
   var EventEmitter$2 = Phaser.Events.EventEmitter;
   var MonitorViewport = function MonitorViewport(viewport) {
+    // Don't monitor properties again
     if (viewport.events) {
       return viewport;
     }

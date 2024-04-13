@@ -17612,6 +17612,7 @@
 
   var EventEmitter$1 = Phaser.Events.EventEmitter;
   var MonitorViewport = function MonitorViewport(viewport) {
+    // Don't monitor properties again
     if (viewport.events) {
       return viewport;
     }
@@ -67267,6 +67268,7 @@
           click: clickConfig,
           eventEmitter: _this.eventEmitter
         });
+        scene.add.existing(toolbarSizer);
       }
       var leftToolbarSizer;
       if (leftToolbar) {
@@ -67282,6 +67284,7 @@
           click: clickConfig,
           eventEmitter: _this.eventEmitter
         });
+        scene.add.existing(leftToolbarSizer);
       }
 
       // title or toolbar or leftToolbar
@@ -67302,6 +67305,7 @@
         } else {
           titleSizer = new OverlapSizer(scene);
         }
+        scene.add.existing(titleSizer);
         var titleChildExpand = useSizer ? true : {
           height: true
         };
@@ -67437,6 +67441,7 @@
           choicesConfig.orientation = Contains(choicesType, 'x') ? 0 : 1;
         }
         choicesSizer = new ButtonsClass(scene, choicesConfig);
+        scene.add.existing(choicesSizer);
         var choicesSpace = GetValue$11(config, 'space.choices', 0);
         var padding = {
           left: GetValue$11(config, 'space.choicesLeft', 0),
@@ -67469,6 +67474,7 @@
           click: clickConfig,
           eventEmitter: _this.eventEmitter
         });
+        scene.add.existing(actionsSizer);
         var padding = {
           left: GetValue$11(config, 'space.actionsLeft', 0),
           right: GetValue$11(config, 'space.actionsRight', 0),
@@ -79239,6 +79245,21 @@
     });
   };
 
+  var AddEvent = function AddEvent(target, eventEmitter, eventName, callback, scope) {
+    eventEmitter.on(eventName, callback, scope);
+    if (!IsSceneObject(target)) {
+      target.once('destroy', function () {
+        eventEmitter.off(eventName, callback, scope);
+      });
+    } else {
+      // target is scene
+      target.sys.events.once('shutdown', function () {
+        eventEmitter.off(eventName, callback, scope);
+      });
+    }
+    return target;
+  };
+
   var GenerateDefaultCreateGameObjectCallback$1 = function GenerateDefaultCreateGameObjectCallback() {
     var style = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
     var defaultFrameDelimiter = style.frameDelimiter || '-';
@@ -79285,6 +79306,29 @@
         });
       }, gameObject);
       gameObject.frameDelimiter = frameDelimiter;
+
+      // Hide icon element when window height > window width
+      AddEvent(gameObject,
+      // target
+      scene.scale, 'resize',
+      // eventEmitter, eventName
+      // callback
+      function (gameSize, baseSize, displaySize, previousWidth, previousHeight) {
+        // TODO
+        var icon = gameObject.getElement('icon');
+        if (!icon) {
+          return;
+        }
+        if (baseSize.width >= baseSize.height) {
+          if (!icon.visible) {
+            gameObject.show(icon).layout();
+          }
+        } else {
+          if (icon.visible) {
+            gameObject.hide(icon).layout();
+          }
+        }
+      });
       return gameObject;
     };
   };
@@ -79430,10 +79474,12 @@
 
   var RegisterHandlers = [RegisterSpriteType, RegisterTextboxType, RegisterBackgroundType, RegisterChoiceDialogType];
   var CreateCommandExecutor = function CreateCommandExecutor(scene, config) {
-    var layerDepth = config.layerDepth;
+    var layerDepth = config.layerDepth,
+      rootLayer = config.rootLayer;
     var commandExecutor = new CommandExecutor(scene, {
       layers: LayerNames,
-      layerDepth: layerDepth
+      layerDepth: layerDepth,
+      rootLayer: rootLayer
     });
     for (var i = 0, cnt = RegisterHandlers.length; i < cnt; i++) {
       RegisterHandlers[i](commandExecutor, config);

@@ -15310,6 +15310,7 @@
           click: clickConfig,
           eventEmitter: _this.eventEmitter
         });
+        scene.add.existing(toolbarSizer);
       }
       var leftToolbarSizer;
       if (leftToolbar) {
@@ -15325,6 +15326,7 @@
           click: clickConfig,
           eventEmitter: _this.eventEmitter
         });
+        scene.add.existing(leftToolbarSizer);
       }
 
       // title or toolbar or leftToolbar
@@ -15345,6 +15347,7 @@
         } else {
           titleSizer = new OverlapSizer(scene);
         }
+        scene.add.existing(titleSizer);
         var titleChildExpand = useSizer ? true : {
           height: true
         };
@@ -15480,6 +15483,7 @@
           choicesConfig.orientation = Contains(choicesType, 'x') ? 0 : 1;
         }
         choicesSizer = new ButtonsClass(scene, choicesConfig);
+        scene.add.existing(choicesSizer);
         var choicesSpace = GetValue(config, 'space.choices', 0);
         var padding = {
           left: GetValue(config, 'space.choicesLeft', 0),
@@ -15512,6 +15516,7 @@
           click: clickConfig,
           eventEmitter: _this.eventEmitter
         });
+        scene.add.existing(actionsSizer);
         var padding = {
           left: GetValue(config, 'space.actionsLeft', 0),
           right: GetValue(config, 'space.actionsRight', 0),
