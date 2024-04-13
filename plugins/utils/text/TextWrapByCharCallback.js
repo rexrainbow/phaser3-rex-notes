@@ -6,7 +6,7 @@ var TextWrapByCharCallback = function (text, textObject) {
     var textLines = text.split('\n');
     var style = textObject.style;
     var wrapWidth = style.wordWrapWidth;
-    var wrapMode = (style.hasOwnProperty('wrapMode')) ? style.wrapMode : 2;
+    var wrapMode = (style.hasOwnProperty('wrapMode')) ? style.wrapMode : 3;
     var context = textObject.context;
     for (var i = 0, cnt = textLines.length; i < cnt; i++) {
         WrapLine(context, textLines[i], wrapWidth, wrapMode, output);
