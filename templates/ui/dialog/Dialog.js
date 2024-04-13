@@ -84,6 +84,7 @@ class Dialog extends Sizer {
             } else {
                 titleSizer = new OverlapSizer(scene);
             }
+            scene.add.existing(titleSizer);
 
             var titleChildExpand = (useSizer) ? true : { height: true };
 
