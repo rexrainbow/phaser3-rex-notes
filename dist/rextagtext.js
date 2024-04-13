@@ -2452,9 +2452,10 @@
     return retLines;
   };
   var ParseLine = function ParseLine(s, mode) {
-    var tokens = [];
+    var tokens;
     switch (mode) {
       case WORD_WRAP:
+        tokens = [];
         s = s.split(' ');
         for (var i = 0, icnt = s.length; i < icnt; i++) {
           var token = s[i];
@@ -2469,10 +2470,11 @@
         }
         break;
       case CHAR_WRAP:
-        tokens.push.apply(tokens, _toConsumableArray(s.split('')));
+        tokens = s.split('');
         break;
       default:
         // MIX_WRAP
+        tokens = [];
         s = s.split(' ');
         for (var i = 0, icnt = s.length; i < icnt; i++) {
           var token = s[i];
@@ -2480,7 +2482,8 @@
             if (IsASCIIString(token)) {
               tokens.push(token + ' ');
             } else {
-              tokens.push.apply(tokens, _toConsumableArray(token.split('')));
+              var _tokens;
+              (_tokens = tokens).push.apply(_tokens, _toConsumableArray(token.split('')));
               // Add space as last token
               tokens.push(' ');
             }
@@ -2490,7 +2493,8 @@
               if (IsASCIIString(token)) {
                 tokens.push(token);
               } else {
-                tokens.push.apply(tokens, _toConsumableArray(token.split('')));
+                var _tokens2;
+                (_tokens2 = tokens).push.apply(_tokens2, _toConsumableArray(token.split('')));
               }
             }
           }

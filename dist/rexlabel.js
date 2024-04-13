@@ -12429,17 +12429,59 @@
     return textObjectType;
   };
 
+  var IsASCIIString = function IsASCIIString(s) {
+    return /^[\x00-\x7F]+$/.test(s);
+  };
+
   var TextWrapByCharCallback = function TextWrapByCharCallback(text, textObject) {
     var output = [];
     var textLines = text.split('\n');
+    var style = textObject.style;
+    var wrapWidth = style.wordWrapWidth;
+    var wrapMode = style.hasOwnProperty('wrapMode') ? style.wrapMode : 3;
     var context = textObject.context;
-    var wrapWidth = textObject.style.wordWrapWidth;
     for (var i = 0, cnt = textLines.length; i < cnt; i++) {
-      WrapLine(context, textLines[i], wrapWidth, output);
+      WrapLine(context, textLines[i], wrapWidth, wrapMode, output);
     }
     return output;
   };
-  var WrapLine = function WrapLine(context, text, wrapWidth, output) {
+  var GetTokenArray = function GetTokenArray(text, wrapMode) {
+    var tokenArray;
+    if (wrapMode === 2) {
+      // CHAR_WRAP
+      tokenArray = text.split('');
+    } else {
+      // MIX_WRAP
+      tokenArray = [];
+      var words = text.split(' '),
+        word;
+      for (var i = 0, wordCount = words.length; i < wordCount; i++) {
+        word = words[i];
+        if (i < wordCount - 1) {
+          if (IsASCIIString(word)) {
+            tokenArray.push(word + ' ');
+          } else {
+            var _tokenArray;
+            (_tokenArray = tokenArray).push.apply(_tokenArray, _toConsumableArray(word.split('')));
+            // Add space as last token
+            tokenArray.push(' ');
+          }
+        } else {
+          // The last word
+          if (word !== '') {
+            if (IsASCIIString(word)) {
+              tokenArray.push(word);
+            } else {
+              var _tokenArray2;
+              (_tokenArray2 = tokenArray).push.apply(_tokenArray2, _toConsumableArray(word.split('')));
+            }
+          }
+        }
+      }
+    }
+    return tokenArray;
+  };
+  var WrapLine = function WrapLine(context, text, wrapWidth, wrapMode, output) {
     if (text.length <= 100) {
       var textWidth = context.measureText(text).width;
       if (textWidth <= wrapWidth) {
@@ -12447,7 +12489,7 @@
         return output;
       }
     }
-    var tokenArray = text.split('');
+    var tokenArray = GetTokenArray(text, wrapMode);
     var token, tokenWidth;
     var line = [],
       remainderLineWidth = wrapWidth;
@@ -12497,8 +12539,18 @@
         if (typeof mode === 'string') {
           mode = WRAPMODE[mode] || 0;
         }
-        if (mode === 2) {
-          textObject.style.wordWrapCallback = TextWrapByCharCallback;
+        textObject.style.wrapMode = mode;
+        switch (mode) {
+          case 2: // CHAR_WRAP
+          case 3:
+            // MIX_WRAP
+            textObject.style.wordWrapCallback = TextWrapByCharCallback;
+            break;
+          case 1: // WORD_WRAP
+          default:
+            // NO_WRAP
+            textObject.style.wordWrapCallback = null;
+            break;
         }
         break;
       case TagTextType:

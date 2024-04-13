@@ -29697,9 +29697,10 @@
     return retLines;
   };
   var ParseLine = function ParseLine(s, mode) {
-    var tokens = [];
+    var tokens;
     switch (mode) {
       case WORD_WRAP:
+        tokens = [];
         s = s.split(' ');
         for (var i = 0, icnt = s.length; i < icnt; i++) {
           var token = s[i];
@@ -29714,10 +29715,11 @@
         }
         break;
       case CHAR_WRAP:
-        tokens.push.apply(tokens, _toConsumableArray(s.split('')));
+        tokens = s.split('');
         break;
       default:
         // MIX_WRAP
+        tokens = [];
         s = s.split(' ');
         for (var i = 0, icnt = s.length; i < icnt; i++) {
           var token = s[i];
@@ -29725,7 +29727,8 @@
             if (IsASCIIString(token)) {
               tokens.push(token + ' ');
             } else {
-              tokens.push.apply(tokens, _toConsumableArray(token.split('')));
+              var _tokens;
+              (_tokens = tokens).push.apply(_tokens, _toConsumableArray(token.split('')));
               // Add space as last token
               tokens.push(' ');
             }
@@ -29735,7 +29738,8 @@
               if (IsASCIIString(token)) {
                 tokens.push(token);
               } else {
-                tokens.push.apply(tokens, _toConsumableArray(token.split('')));
+                var _tokens2;
+                (_tokens2 = tokens).push.apply(_tokens2, _toConsumableArray(token.split('')));
               }
             }
           }
@@ -57219,14 +57223,52 @@
   var TextWrapByCharCallback = function TextWrapByCharCallback(text, textObject) {
     var output = [];
     var textLines = text.split('\n');
+    var style = textObject.style;
+    var wrapWidth = style.wordWrapWidth;
+    var wrapMode = style.hasOwnProperty('wrapMode') ? style.wrapMode : 3;
     var context = textObject.context;
-    var wrapWidth = textObject.style.wordWrapWidth;
     for (var i = 0, cnt = textLines.length; i < cnt; i++) {
-      WrapLine(context, textLines[i], wrapWidth, output);
+      WrapLine(context, textLines[i], wrapWidth, wrapMode, output);
     }
     return output;
   };
-  var WrapLine = function WrapLine(context, text, wrapWidth, output) {
+  var GetTokenArray = function GetTokenArray(text, wrapMode) {
+    var tokenArray;
+    if (wrapMode === 2) {
+      // CHAR_WRAP
+      tokenArray = text.split('');
+    } else {
+      // MIX_WRAP
+      tokenArray = [];
+      var words = text.split(' '),
+        word;
+      for (var i = 0, wordCount = words.length; i < wordCount; i++) {
+        word = words[i];
+        if (i < wordCount - 1) {
+          if (IsASCIIString(word)) {
+            tokenArray.push(word + ' ');
+          } else {
+            var _tokenArray;
+            (_tokenArray = tokenArray).push.apply(_tokenArray, _toConsumableArray(word.split('')));
+            // Add space as last token
+            tokenArray.push(' ');
+          }
+        } else {
+          // The last word
+          if (word !== '') {
+            if (IsASCIIString(word)) {
+              tokenArray.push(word);
+            } else {
+              var _tokenArray2;
+              (_tokenArray2 = tokenArray).push.apply(_tokenArray2, _toConsumableArray(word.split('')));
+            }
+          }
+        }
+      }
+    }
+    return tokenArray;
+  };
+  var WrapLine = function WrapLine(context, text, wrapWidth, wrapMode, output) {
     if (text.length <= 100) {
       var textWidth = context.measureText(text).width;
       if (textWidth <= wrapWidth) {
@@ -57234,7 +57276,7 @@
         return output;
       }
     }
-    var tokenArray = text.split('');
+    var tokenArray = GetTokenArray(text, wrapMode);
     var token, tokenWidth;
     var line = [],
       remainderLineWidth = wrapWidth;
@@ -57262,8 +57304,18 @@
         if (typeof mode === 'string') {
           mode = WRAPMODE[mode] || 0;
         }
-        if (mode === 2) {
-          textObject.style.wordWrapCallback = TextWrapByCharCallback;
+        textObject.style.wrapMode = mode;
+        switch (mode) {
+          case 2: // CHAR_WRAP
+          case 3:
+            // MIX_WRAP
+            textObject.style.wordWrapCallback = TextWrapByCharCallback;
+            break;
+          case 1: // WORD_WRAP
+          default:
+            // NO_WRAP
+            textObject.style.wordWrapCallback = null;
+            break;
         }
         break;
       case TagTextType:
