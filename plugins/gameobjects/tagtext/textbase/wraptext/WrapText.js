@@ -110,10 +110,11 @@ var WrapText = function (text, getTextWidth, wrapMode, wrapWidth, offset, wrapTe
 };
 
 var ParseLine = function (s, mode) {
-    var tokens = [];
+    var tokens;
 
     switch (mode) {
         case WORD_WRAP:
+            tokens = []
             s = s.split(' ');
             for (var i = 0, icnt = s.length; i < icnt; i++) {
                 var token = s[i];
@@ -128,10 +129,11 @@ var ParseLine = function (s, mode) {
             break;
 
         case CHAR_WRAP:
-            tokens.push(...s.split(''));
+            tokens = s.split('');
             break;
 
         default: // MIX_WRAP
+            tokens = []
             s = s.split(' ');
             for (var i = 0, icnt = s.length; i < icnt; i++) {
                 var token = s[i];

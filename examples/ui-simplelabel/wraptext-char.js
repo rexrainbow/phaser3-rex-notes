@@ -27,7 +27,7 @@ class Demo extends Phaser.Scene {
                 radius: 10,
             },
 
-            wrapText: 'char',
+            wrapText: 'mix', // 'char', 'mix'
             text: {
                 fontSize: 24,
                 testString: '|MÉqgy回',
@@ -60,7 +60,7 @@ class Demo extends Phaser.Scene {
                 this.rexUI.add.simpleLabel(style)
                     .resetDisplayContent({
                         icon: 'pause',
-                        text: '一二三四五六七八九零一二三四五六七八九零一二三四五六七八九零一二三四五六七八九零'
+                        text: '一二三四五六七八九零一二三四五六七八九零一二三四五六七八九零一二三四五 hello world'
                     }),
 
                 { expand: true }

@@ -12,9 +12,20 @@ var SetWrapMode = function (textObject, mode) {
             if (typeof mode === 'string') {
                 mode = WRAPMODE[mode] || 0;
             }
-            if (mode === 2) {
-                textObject.style.wordWrapCallback = TextWrapByCharCallback;
+
+            textObject.style.wrapMode = mode;
+            switch (mode) {
+                case 2:  // CHAR_WRAP
+                case 3:  // MIX_WRAP
+                    textObject.style.wordWrapCallback = TextWrapByCharCallback;
+                    break;
+
+                case 1:  // WORD_WRAP
+                default:  // NO_WRAP
+                    textObject.style.wordWrapCallback = null;
+                    break;
             }
+
             break;
 
         case TagTextType:

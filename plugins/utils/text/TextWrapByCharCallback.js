@@ -1,17 +1,21 @@
+import IsASCIIString from '../string/IsASCIIString.js';
+
 var TextWrapByCharCallback = function (text, textObject) {
     var output = [];
 
     var textLines = text.split('\n');
+    var style = textObject.style;
+    var wrapWidth = style.wordWrapWidth;
+    var wrapMode = (style.hasOwnProperty('wrapMode')) ? style.wrapMode : 2;
     var context = textObject.context;
-    var wrapWidth = textObject.style.wordWrapWidth;
     for (var i = 0, cnt = textLines.length; i < cnt; i++) {
-        WrapLine(context, textLines[i], wrapWidth, output);
+        WrapLine(context, textLines[i], wrapWidth, wrapMode, output);
     }
 
     return output;
 }
 
-var WrapLine = function (context, text, wrapWidth, output) {
+var WrapLine = function (context, text, wrapWidth, wrapMode, output) {
     if (text.length <= 100) {
         var textWidth = context.measureText(text).width;
         if (textWidth <= wrapWidth) {
@@ -20,7 +24,38 @@ var WrapLine = function (context, text, wrapWidth, output) {
         }
     }
 
-    var tokenArray = text.split('');
+    var tokenArray;
+    if (wrapMode === 2) {  // CHAR_WRAP
+        tokenArray = text.split('');
+    } else {  // MIX_WRAP
+        tokenArray = [];
+        var words = text.split(' '), word;
+        for (var i = 0, wordCount = words.length; i < wordCount; i++) {
+            word = words[i];
+
+            if (i < (wordCount-1)){
+                if (IsASCIIString(word)) {
+                    tokenArray.push(word + ' ');
+                } else {
+                    tokenArray.push(...word.split(''));
+                    // Add space as last token
+                    tokenArray.push(' ');
+                }
+
+            } else {  // The last word
+                if (word !== '') {
+                    if (IsASCIIString(word)) {
+                        tokenArray.push(word);
+                    } else {
+                        tokenArray.push(...word.split(''));
+                    }
+                }
+
+            }
+
+        }
+    }
+
     var token, tokenWidth;
     var line = [], remainderLineWidth = wrapWidth;
     for (var j = 0, tokenLen = tokenArray.length; j < tokenLen; j++) {
