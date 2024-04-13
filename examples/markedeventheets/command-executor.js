@@ -294,7 +294,8 @@ const COLOR_DARK = 0x260e04;
 var CreateTextBox = function (
     scene,
     {
-        width = 0, height = 0
+        width = 0, height = 0,
+        frameDelimiter = '-'
     } = {}
 ) {
 
@@ -375,6 +376,8 @@ var CreateTextBox = function (
         }, textBox)
     //.on('type', function () {
     //})
+
+    textBox.frameDelimiter = frameDelimiter;
 
     return textBox;
 }

@@ -129,7 +129,7 @@ CharacterC.to
 
 CharacterA.focus
 
-```Dialog.typing, name=A, speed=100, icon=portraits, iconFrame=A-smile
+```Dialog.typing, name=A, expression=smile, icon=portraits, speed=100
 Line0...
 Line1...
 Line2...
@@ -164,7 +164,8 @@ log
 ### [IF choiceIndex == 1]
 
 Dialog.typing
-  name=Me Me Me
+  name=A
+  expression=anger
   text=Not today
   speed=100
 
@@ -175,7 +176,8 @@ setData
 ### [IF choiceIndex == 2]
 
 Dialog.typing
-  name=Me Me Me
+  name=A
+  expression=dizzy
   text=Too fat
   speed=100
 
@@ -186,7 +188,8 @@ incData
 ### [IF choiceIndex == 3]
 
 Dialog.typing
-  name=Me Me Me
+  name=A
+  expression=happy
   text=Another bottle!
   speed=100
 
