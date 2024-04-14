@@ -40,13 +40,15 @@ class Demo extends Phaser.Scene {
         print.text = 'Any click to start';
 
         var rootLayer = this.add.layer().setName('root');
+        var viewport = this.scale.getViewPort();
 
         var eventSheetManager = new MarkdownVisualNovel(this, {
             styles: {
                 TEXTBOX: TextBoxStyle,
                 CHOICE: ChoiceStyle,
             },
-            rootLayer
+            rootLayer,
+            viewport
         })
             .addEventSheet(this.cache.text.get('eventSheet0'))
 
