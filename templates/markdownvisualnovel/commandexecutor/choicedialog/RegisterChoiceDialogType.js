@@ -6,19 +6,25 @@ import Choice from './Choice.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 var RegisterChoiceDialogType = function (commandExecutor, config) {
+    var { viewport } = config;
     var createGameObjectCallback = GetValue(config, `creators.${CHOICE}`, undefined);
     if (createGameObjectCallback === false) {
         return;
     } else if (createGameObjectCallback === undefined) {
-        var style = GetValue(config, `styles.${CHOICE}`);
-        createGameObjectCallback = GenerateDefaultCreateGameObjectCallback(style);
+        var style = GetValue(config, `styles.${CHOICE}`, {});
+        createGameObjectCallback = GenerateDefaultCreateGameObjectCallback(
+            style,
+            {
+                viewport
+            }
+        );
     }
 
     commandExecutor.addGameObjectManager({
         name: CHOICE,
         createGameObject: createGameObjectCallback,
         fade: 0,  // No fade-in when creating/destroying gameobject
-        viewportCoordinate: true,
+        viewportCoordinate: { viewport },
         defaultLayer: UILayer,
 
         commands: {

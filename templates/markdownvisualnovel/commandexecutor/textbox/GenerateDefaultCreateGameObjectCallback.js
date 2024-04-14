@@ -1,18 +1,35 @@
 import { SimpleTextBox } from '../../../ui/ui-components.js';
 import SetValue from '../../../../plugins/utils/object/SetValue.js';
-import AddEvent from '../../../../plugins/utils/gameobject/addevent/AddEvent.js';
+import AddViewportCoordinateProperties from '../../../../plugins/behaviors/viewportcoordinate/AddViewportCoordinateProperties.js';
 
-var GenerateDefaultCreateGameObjectCallback = function (style = {}) {
+var GenerateDefaultCreateGameObjectCallback = function (
+    style,
+    {
+        viewport
+    } = {}
+) {
+
     var defaultFrameDelimiter = style.frameDelimiter || '-';
 
     return function (
         scene,
         {
-            width = 0,
-            height = 0,
+            vpw, vph,
+            width = 0, height = 0,
+            vpx = 0.5, vpy = 1,
+
             frameDelimiter = defaultFrameDelimiter
         } = {}
     ) {
+
+        if (vpw !== undefined) {
+            width = viewport.width * vpw;
+        }
+
+        if (vph !== undefined) {
+            height = viewport.height * vph;
+        }
+
         var wrapWidth = Math.max(0, width - 20);
 
         SetValue(style, 'text.fixedWidth', width);
@@ -23,7 +40,7 @@ var GenerateDefaultCreateGameObjectCallback = function (style = {}) {
 
         gameObject
             .setMinSize(width, height)
-            .setOrigin(0.5, 1)
+            .setOrigin(0.5, 1)  // Align to bottom
             .layout();
 
         scene.add.existing(gameObject);
@@ -59,29 +76,10 @@ var GenerateDefaultCreateGameObjectCallback = function (style = {}) {
 
         gameObject.frameDelimiter = frameDelimiter;
 
-        // Hide icon element when window height > window width
-        AddEvent(
-            gameObject,  // target
-            scene.scale, 'resize',  // eventEmitter, eventName
-            // callback
-            function (gameSize, baseSize, displaySize, previousWidth, previousHeight) {
-                // TODO
-                var icon = gameObject.getElement('icon');
-                if (!icon) {
-                    return;
-                }
+        AddViewportCoordinateProperties(gameObject, viewport);
 
-                if (baseSize.width >= baseSize.height) {
-                    if (!icon.visible) {
-                        gameObject.show(icon).layout();
-                    }
-                } else {
-                    if (icon.visible) {
-                        gameObject.hide(icon).layout();
-                    }
-                }
-            }
-        )
+        gameObject.vpx = vpx;
+        gameObject.vpy = vpy;
 
         return gameObject;
     }

@@ -1,22 +1,43 @@
-import { ConfirmDialog } from '../../../ui/ui-components.js'
+import { ConfirmDialog } from '../../../ui/ui-components.js';
+import AddViewportCoordinateProperties from '../../../../plugins/behaviors/viewportcoordinate/AddViewportCoordinateProperties.js';
 
-var GenerateDefaultCreateGameObjectCallback = function (style) {
+var GenerateDefaultCreateGameObjectCallback = function (
+    style,
+    {
+        viewport
+    } = {}
+) {
+
     return function (
         scene,
         {
-            width = 0,
-            height = 0
+            vpw, vph,
+            width = 0, height = 0,
+            vpx = 0.5, vpy = 0.5,
         } = {}
     ) {
-        var dialog = new ConfirmDialog(scene, style);
 
-        dialog
+        if (vpw !== undefined) {
+            width = viewport.width * vpw;
+        }
+
+        if (vph !== undefined) {
+            height = viewport.height * vph;
+        }
+
+        var gameObject = new ConfirmDialog(scene, style);
+
+        gameObject
             .setMinSize(width, height)
             .setVisible(false)
 
-        scene.add.existing(dialog);
+        scene.add.existing(gameObject);
+        AddViewportCoordinateProperties(gameObject, viewport);
 
-        return dialog;
+        gameObject.vpx = vpx;
+        gameObject.vpy = vpy;
+
+        return gameObject;
     }
 }
 

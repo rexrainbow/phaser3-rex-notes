@@ -1,4 +1,5 @@
 import CommandExecutor from '../../../plugins/commandexecutor.js';
+import GetViewport from '../../../plugins/utils/system/GetViewport.js';
 import { LayerNames } from '../const/Layers.js';
 import RegisterBackgroundType from './background/RegisterBackgroundType.js';
 import RegisterSpriteType from './sprite/RegisterSpriteType.js';
@@ -17,7 +18,12 @@ var CreateCommandExecutor = function (scene, config) {
     var {
         layerDepth,
         rootLayer,
+        viewport
     } = config;
+
+    if (viewport === undefined) {
+        config.viewport = GetViewport(scene, scene.cameras.main);
+    }
 
     var commandExecutor = new CommandExecutor(scene, {
         layers: LayerNames,
