@@ -6,8 +6,13 @@
 
 TEXTBOX
   id=NAME
-  param0=value
-  param1=value
+  vpw=
+  vph=
+  width=0
+  height=0
+  vpx=0.5
+  vpy=1
+  frameDelimiter=-
 
 ```
 

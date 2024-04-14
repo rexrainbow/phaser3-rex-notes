@@ -9,6 +9,8 @@
       id=NAME
       name=
       expression=
+      vpx=0.5
+      vpy=1
     
     ```
     - `name`, `expression` : Set texture key to `name`, and frame name to `expression`.
@@ -21,6 +23,8 @@
       name=
       expression=
       frameDelimiter=-
+      vpx=0.5
+      vpy=1
     
     ```
     - `key` : Set texture key to `key`.
