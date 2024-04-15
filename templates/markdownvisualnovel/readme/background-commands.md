@@ -8,6 +8,11 @@ BG
   id=NAME
   key=value
   frame=value
+  vpx=0.5
+  vpy=0.5
+  vpw=
+  vph=
+  scaleMode=
 
 ```
 

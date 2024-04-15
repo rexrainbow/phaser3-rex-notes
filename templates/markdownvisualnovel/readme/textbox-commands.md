@@ -6,13 +6,13 @@
 
 TEXTBOX
   id=NAME
-  vpw=
-  vph=
   width=0
   height=0
+  frameDelimiter=-
   vpx=0.5
   vpy=1
-  frameDelimiter=-
+  vpw=
+  vph=
 
 ```
 

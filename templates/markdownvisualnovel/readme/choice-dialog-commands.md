@@ -6,12 +6,12 @@
 
 CHOICE
   id=NAME
-  vpw=
-  vph=
   width=0
   height=0
   vpx=0.5
   vpy=0.5
+  vpw=
+  vph=
 
 ```
 
