@@ -114,6 +114,11 @@ var viewport = scene.scale.getViewPort();
     var displaySize = scene.scale.displaySize;
     ```
     - `displaySize.width`, `displaySize.height`
+- The size of parent dom element
+    ```javascript
+    var parentSize = scene.scale.parentSize;
+    ```
+    - `parentSize.width`, `parentSize.height`
 
 ### Events
 
@@ -188,6 +193,27 @@ as will the user pressing the ESC key.
     ```
 
 ### Orientation 
+
+#### Properties
+
+- Is portrait orientation
+    ```javascript
+    var isPortrait = scene.scale.isPortrait;
+    ```
+- Is landscape orientation
+    ```javascript
+    var isLandscape = scene.scale.isLandscape;
+    ```
+
+#### Lock orientation
+
+```javascript
+scene.scale.lockOrientation(orientation);
+```
+
+- `orientation` : `'landscape'`, or `'portrait'`;
+
+#### Events
 
 ```javascript
 scene.scale.on('orientationchange', function(orientation) {

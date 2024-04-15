@@ -538,6 +538,33 @@
     Orientation
   </a>
   
+    <nav class="md-nav" aria-label="Orientation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#properties" class="md-nav__link">
+    Properties
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lock-orientation" class="md-nav__link">
+    Lock orientation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events_2" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
       </ul>
@@ -9659,6 +9686,33 @@
     Orientation
   </a>
   
+    <nav class="md-nav" aria-label="Orientation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#properties" class="md-nav__link">
+    Properties
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lock-orientation" class="md-nav__link">
+    Lock orientation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events_2" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
       </ul>
@@ -9794,6 +9848,12 @@
 <li><code>displaySize.width</code>, <code>displaySize.height</code></li>
 </ul>
 </li>
+<li>The size of parent dom element
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">parentSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">parentSize</span><span class="p">;</span>
+</code></pre></div><ul>
+<li><code>parentSize.width</code>, <code>parentSize.height</code></li>
+</ul>
+</li>
 </ul>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;resize&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">gameSize</span><span class="p">,</span><span class="w"> </span><span class="nx">baseSize</span><span class="p">,</span><span class="w"> </span><span class="nx">displaySize</span><span class="p">,</span><span class="w"> </span><span class="nx">previousWidth</span><span class="p">,</span><span class="w"> </span><span class="nx">previousHeight</span><span class="p">)</span><span class="w"> </span><span class="p">{});</span>
@@ -9856,6 +9916,22 @@ as will the user pressing the ESC key.</p>
 </code></pre></div></li>
 </ul>
 <h3 id="orientation">Orientation<a class="headerlink" href="#orientation" title="Permanent link">&para;</a></h3>
+<h4 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Is portrait orientation
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">isPortrait</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">isPortrait</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Is landscape orientation
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">isLandscape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">isLandscape</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+<h4 id="lock-orientation">Lock orientation<a class="headerlink" href="#lock-orientation" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">lockOrientation</span><span class="p">(</span><span class="nx">orientation</span><span class="p">);</span>
+</code></pre></div>
+<ul>
+<li><code>orientation</code> : <code>'landscape'</code>, or <code>'portrait'</code>;</li>
+</ul>
+<h4 id="events_2">Events<a class="headerlink" href="#events_2" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;orientationchange&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">orientation</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">orientation</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scale</span><span class="p">.</span><span class="nx">PORTRAIT</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
