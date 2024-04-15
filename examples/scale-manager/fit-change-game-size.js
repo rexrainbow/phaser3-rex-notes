@@ -19,21 +19,19 @@ class Demo extends Phaser.Scene {
         var printSize = this.add.text(200, 300, '');
 
         this.scale.on('resize', function (gameSize, baseSize, displaySize, previousWidth, previousHeight) {
-            printSize.text = `${gameSize.width}x${gameSize.height}`;
-
             var parentSize = this.scale.parentSize;
-            var isParentSizeLandscape = parentSize.width > parentSize.height;
-            var isGameSizeLandscape = gameSize.width > gameSize.height;
-            if (isParentSizeLandscape != isGameSizeLandscape) {
+            if ((parentSize.width > parentSize.height) != (gameSize.width > gameSize.height)) {
                 this.scale.setGameSize(gameSize.height, gameSize.width);
-                this.scale.refresh();
-                return;
-            }
+                // Will fire this event again
 
-            var viewport = this.scale.getViewPort();
-            rect
-                .setPosition(viewport.x, viewport.y)
-                .setSize(viewport.width, viewport.height)
+            } else {
+                var viewport = this.scale.getViewPort();
+                rect
+                    .setPosition(viewport.x, viewport.y)
+                    .setSize(viewport.width, viewport.height)
+
+                printSize.text = `${Math.floor(viewport.left)}x${Math.floor(viewport.top)}\n${Math.floor(viewport.right)}x${Math.floor(viewport.bottom)}`;
+            }
 
         }, this);
 

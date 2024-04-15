@@ -20,6 +20,8 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
+        this.cameras.main.centerOn(400, 400);
+
         this.add.image(400, 400, 'bg');
 
         var rect = this.add.rectangle(0, 0, 0, 0).setOrigin(0).setStrokeStyle(10, 0xff0000);
@@ -28,20 +30,21 @@ class Demo extends Phaser.Scene {
 
         this.scale.on('resize', function (gameSize, baseSize, displaySize, previousWidth, previousHeight) {
             var parentSize = this.scale.parentSize;
-            var isParentSizeLandscape = parentSize.width > parentSize.height;
-            var isGameSizeLandscape = gameSize.width > gameSize.height;
-            if (isParentSizeLandscape != isGameSizeLandscape) {
+            if ((parentSize.width >= parentSize.height) !== (gameSize.width >= gameSize.height)) {
                 this.scale.setGameSize(gameSize.height, gameSize.width);
-                this.scale.refresh();
-                return;
+                // Will fire this event again
+
+            } else {
+                this.cameras.main.centerOn(400, 400);
+
+                var viewport = this.scale.getViewPort(this.cameras.main);
+                rect
+                    .setPosition(viewport.x, viewport.y)
+                    .setSize(viewport.width, viewport.height)
+
+                printSize.text = `${Math.floor(viewport.left)}x${Math.floor(viewport.top)}\n${Math.floor(viewport.right)}x${Math.floor(viewport.bottom)}`;
+
             }
-
-            var viewport = this.scale.getViewPort();
-            rect
-                .setPosition(viewport.x, viewport.y)
-                .setSize(viewport.width, viewport.height)
-
-            printSize.text = `${Math.floor(viewport.left)}x${Math.floor(viewport.top)}\n${Math.floor(viewport.right)}x${Math.floor(viewport.bottom)}`;
         }, this);
 
         this.scale.refresh();
