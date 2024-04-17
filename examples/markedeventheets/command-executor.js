@@ -57,7 +57,7 @@ class Demo extends Phaser.Scene {
 
         this.input.once('pointerdown', function () {
             print.text = '';
-            eventSheetManager.start();
+            eventSheetManager.startGroup();
         })
 
     }

@@ -64,4 +64,4 @@ eventSheetManager.once('eventsheet.enter', OnEnterEventSheet)
 eventSheetManager
     .setData('金幣', 1)
     .setData('hp', 4)
-    .start()
+    .startGroup()

@@ -71,6 +71,6 @@ eventSheetManager
     .on('complete', function () {
         console.log('..Execute events complete..')
     })
-    .start()
+    .startGroup()
 
 console.log(eventSheetManager.memory)

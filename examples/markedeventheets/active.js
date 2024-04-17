@@ -54,10 +54,10 @@ eventSheetManager.on('complete', function () {
             eventSheetManager.setEventSheetActiveState('Task');
         }
 
-        eventSheetManager.start()
+        eventSheetManager.startGroup()
     }
 })
 
-eventSheetManager.start()
+eventSheetManager.startGroup()
 
 

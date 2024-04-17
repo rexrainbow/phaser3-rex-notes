@@ -54,6 +54,9 @@ declare class EventSheetManager extends EventEmitter {
 
     renderString(template: string): string;
 
+    // Start groupName, or 'default' eventSheetGroup
+    startGroup(groupName?: string): this;
+
     // Start 'default' eventSheetGroup
     start(): this;
 

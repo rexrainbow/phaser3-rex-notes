@@ -21,6 +21,6 @@ var eventSheetManager = new MarkedEventSheets({
 eventSheetManager.addEventSheet(content);
 console.log(eventSheetManager.dumpTrees())
 
-eventSheetManager.start()
+eventSheetManager.startGroup()
 
 console.log(eventSheetManager.memory)

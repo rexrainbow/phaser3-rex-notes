@@ -37,7 +37,7 @@ var eventSheetManager = new MarkedEventSheets({
     .addEventSheet(content)
 
 console.log('Run event with condition')
-eventSheetManager.start()
+eventSheetManager.startGroup()
 
 console.log('Run event without condition')
 eventSheetManager.start('Title')

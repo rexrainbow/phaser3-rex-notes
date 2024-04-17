@@ -52,10 +52,10 @@ eventSheetManager.on('complete', function () {
         // Run next round
         eventSheetManager.updateRoundCounter();
         console.log(`---- Round : ${eventSheetManager.$roundCounter} ----`)
-        eventSheetManager.start();
+        eventSheetManager.startGroup();
     }
 })
 
-eventSheetManager.start()
+eventSheetManager.startGroup()
 
 

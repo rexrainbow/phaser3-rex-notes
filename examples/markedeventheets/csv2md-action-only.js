@@ -70,6 +70,6 @@ eventSheetManager
     .setData('name', 'rex')
     .setData('coin', 10)
     .setData('hp', 4)
-    .start()
+    .startGroup()
 
 console.log(eventSheetManager.memory)
