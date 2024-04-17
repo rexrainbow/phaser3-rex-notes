@@ -33,7 +33,7 @@ class BobBase {
     setGO(gameObject, name) {
         gameObject.setName(name);
         this.gameObject = gameObject;
-        this.GOName = name;
+        this.name = name;
         this.freeTweens();
         return this;
     }
