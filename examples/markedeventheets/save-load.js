@@ -5,19 +5,19 @@ import eventSheet1 from 'raw-loader!/assets/markedeventsheet/save-load/eventshee
 import eventSheet2 from 'raw-loader!/assets/markedeventsheet/save-load/eventsheet2.md';
 
 class CommandExecutor extends EventEmitter {
-    print({ text = '' } = {}, eventSheetManager, tree) {
+    print({ text = '' } = {}, eventSheetManager, eventSheet) {
         console.log(text);
         // return this;
         // Task will be running until 'complete' event fired
     }
 
-    set(config, eventSheetManager, tree) {
+    set(config, eventSheetManager, eventSheet) {
         for (var name in config) {
             eventSheetManager.setData(name, config[name]);
         }
     }
 
-    wait({ duration = 1000 } = {}, eventSheetManager, tree) {
+    wait({ duration = 1000 } = {}, eventSheetManager, eventSheet) {
         var self = this;
         setTimeout(function () {
             self.complete();
@@ -40,7 +40,7 @@ eventSheetManager
     .addEventSheet(eventSheet1)
     .addEventSheet(eventSheet2)
 
-var OnEnterEventSheet = function (title, groupName, eventSheetManager, tree) {
+var OnEnterEventSheet = function (title, groupName, eventSheetManager, eventSheet) {
     console.log(`eventsheet.enter: '${title}'`);
 
     if (title !== 'Event sheet 1') {

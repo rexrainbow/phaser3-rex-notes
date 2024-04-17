@@ -1,7 +1,7 @@
 import MarkedEventSheets from '../../plugins/markedeventsheets.js';
 import EventEmitter from 'eventemitter3';
-import eventSheet0 from 'raw-loader!/assets/markedeventsheet/parallel/parallel0.md';
-import eventSheet1 from 'raw-loader!/assets/markedeventsheet/parallel/parallel1.md';
+import eventSheet0 from 'raw-loader!/assets/markedeventsheet/parallel-groups/parallel0.md';
+import eventSheet1 from 'raw-loader!/assets/markedeventsheet/parallel-groups/parallel1.md';
 
 class CommandExecutor extends EventEmitter {
     constructor({
@@ -41,29 +41,21 @@ class CommandExecutor extends EventEmitter {
 }
 
 var eventSheetManager = new MarkedEventSheets({
-    commandExecutor: new CommandExecutor(),    
+    commandExecutor: new CommandExecutor(),
 });
 
 eventSheetManager
-    .addEventSheet(eventSheet0)
-    .addEventSheet(eventSheet1);
+    .addEventSheet(eventSheet0, 'main')
+    .addEventSheet(eventSheet1, 'service')
+    .on('complete', function(groupName){
+        console.log(`Group '${groupName}' complete`)
+    })
 
-console.log(eventSheetManager.dumpEventSheetGroup())
+console.log(eventSheetManager.dumpEventSheetGroup('main'))
+console.log(eventSheetManager.dumpEventSheetGroup('service'))
 
-eventSheetManager
-    .setData('coin', 10)
-    .on('eventsheet.enter', function (title) {
-        console.log(`..Enter event sheet '${title}'..`)
-    })
-    .on('eventsheet.exit', function (title) {
-        console.log(`..Exit event sheet '${title}'..`)
-    })
-    .on('eventsheet.catch', function (title) {
-        console.log(`..Fail event sheet '${title}'..`)
-    })
-    .on('complete', function () {
-        console.log('..Execute events complete..')
-    })
-    .startGroup()
+eventSheetManager.startGroup('main')
 
-console.log(eventSheetManager.memory)
+setTimeout(function () {
+    eventSheetManager.startGroup('service')
+}, 1000);

@@ -6,20 +6,20 @@ import TestRoundCounterEventSheet from 'raw-loader!/assets/markedeventsheet/next
 
 
 class CommandExecutor extends EventEmitter {
-    print({ text = '' } = {}, eventSheetManager, tree) {
+    print({ text = '' } = {}, eventSheetManager, eventSheet) {
         console.log(text);
         this.wait({ duration: 1000 });
         return this;
         // Task will be running until 'complete' event fired
     }
 
-    set(config, eventSheetManager, tree) {
+    set(config, eventSheetManager, eventSheet) {
         for (var name in config) {
             eventSheetManager.setData(name, config[name]);
         }
     }
 
-    wait({ duration = 1000 } = {}, eventSheetManager, tree) {
+    wait({ duration = 1000 } = {}, eventSheetManager, eventSheet) {
         var self = this;
         setTimeout(function () {
             self.complete();
@@ -42,7 +42,7 @@ eventSheetManager
     .addEventSheet(TaskEventSheet)
     .addEventSheet(TestRoundCounterEventSheet)
 
-console.log(eventSheetManager.dumpTrees())
+console.log(eventSheetManager.dumpEventSheetGroup())
 
 eventSheetManager.setData('coin', 3)
 console.log(eventSheetManager.memory)
