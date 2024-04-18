@@ -5,7 +5,7 @@ var Focus = function (
     {
         tintOthers = 0x000000,
     } = {},
-    commandExecutor, eventSheetManager
+    commandExecutor, eventSheetManager, eventSheet
 ) {
 
     gameObject.bringMeToTop();

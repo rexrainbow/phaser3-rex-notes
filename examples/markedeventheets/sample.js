@@ -3,20 +3,20 @@ import EventEmitter from 'eventemitter3';
 import content from 'raw-loader!/assets/markedeventsheet/sample/sample.md';
 
 class CommandExecutor extends EventEmitter {
-    print({ text = '' } = {}, eventSheetManager) {
+    print({ text = '' } = {}, eventSheetManager, eventSheet) {
         console.log(text);
         this.wait({ duration: 1000 });
         return this;
         // Task will be running until 'complete' event fired
     }
 
-    set(config, eventSheetManager) {
+    set(config, eventSheetManager, eventSheet) {
         for (var name in config) {
             eventSheetManager.setData(name, config[name]);
         }
     }
 
-    wait({ duration = 1000 } = {}, eventSheetManager) {
+    wait({ duration = 1000 } = {}, eventSheetManager, eventSheet) {
         var self = this;
         setTimeout(function () {
             self.complete();

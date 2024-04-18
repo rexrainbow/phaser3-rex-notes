@@ -1,5 +1,4 @@
 export default {
-    // EventGroup = thread, run all event sheets in eventGroup, until IDLE
     startGroup(groupName) {
         if (groupName === undefined) {
             groupName = this.defaultTreeGroupName;

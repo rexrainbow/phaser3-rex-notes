@@ -53,11 +53,11 @@ class TaskAction extends Action {
         var eventEmitter;
         var handler = commandExecutor[taskName];
         if (handler) {
-            eventEmitter = handler.call(commandExecutor, parametersCopy, eventSheetManager);
+            eventEmitter = handler.call(commandExecutor, parametersCopy, eventSheetManager, eventsheet);
         } else {
             handler = commandExecutor.defaultHandler;
             if (handler) {
-                eventEmitter = handler.call(commandExecutor, taskName, parametersCopy, eventSheetManager);
+                eventEmitter = handler.call(commandExecutor, taskName, parametersCopy, eventSheetManager, eventsheet);
             }
         }
 

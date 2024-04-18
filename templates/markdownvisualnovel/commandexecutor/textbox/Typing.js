@@ -8,7 +8,7 @@ var Typing = function (
         speed
     } = {},
     commandExecutor,
-    eventSheetManager
+    eventSheetManager, eventSheet
 ) {
 
     if (name) {

@@ -3,7 +3,7 @@ import { SPRITE } from '../../const/GameObjects.js';
 var Focus = function (
     gameObject,
     config,
-    commandExecutor, eventSheetManager
+    commandExecutor, eventSheetManager, eventSheet
 ) {
 
     commandExecutor.setGOProperty(

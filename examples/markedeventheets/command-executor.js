@@ -92,7 +92,7 @@ var CreateCommandExecutor = function (scene) {
                         duration, mode = 'crossFade',
                         wait = true
                     } = {},
-                    commandExecutor, eventSheetManager
+                    commandExecutor, eventSheetManager, eventSheet
                 ) {
 
                     if (!key) {
@@ -125,7 +125,7 @@ var CreateCommandExecutor = function (scene) {
                     {
                         tintOthers = 0x000000,
                     } = {},
-                    commandExecutor, eventSheetManager
+                    commandExecutor, eventSheetManager, eventSheet
                 ) {
 
                     gameObject.bringMeToTop();
@@ -142,7 +142,7 @@ var CreateCommandExecutor = function (scene) {
                 unfocus(
                     gameObject,
                     config,
-                    commandExecutor, eventSheetManager
+                    commandExecutor, eventSheetManager, eventSheet
                 ) {
 
                     commandExecutor.setGOProperty(
@@ -173,7 +173,7 @@ var CreateCommandExecutor = function (scene) {
                         duration, mode = 'fade',
                         wait = true
                     } = {},
-                    commandExecutor, eventSheetManager
+                    commandExecutor, eventSheetManager, eventSheet
                 ) {
 
                     // Wait until transition complete
@@ -208,7 +208,7 @@ var CreateCommandExecutor = function (scene) {
                         speed
                     } = {},
                     commandExecutor,
-                    eventSheetManager
+                    eventSheetManager, eventSheet
                 ) {
 
                     if (name) {

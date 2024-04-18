@@ -16,7 +16,7 @@ class CommandExecutor extends EventEmitter {
         {
             text = ''
         } = {},
-        eventSheetManager
+        eventSheetManager, eventSheet
     ) {
 
         console.log(text);
@@ -26,7 +26,7 @@ class CommandExecutor extends EventEmitter {
         {
             duration = this.defaultWaitDuration
         } = {},
-        eventSheetManager
+        eventSheetManager, eventSheet
     ) {
 
         var resumeEventName = eventSheetManager.pause();
