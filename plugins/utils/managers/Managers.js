@@ -8,7 +8,8 @@ class Managers extends Extend(EventEmitter) {
             config = {};
         }
 
-        config.completeEventName = 'complete';
+        // Fire 'complete' event to resume running of eventSheetGroup
+        config.completeEventName = 'complete';  
 
         if (!config.hasOwnProperty('layers')) {
             config.layers = undefined;

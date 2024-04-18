@@ -62,20 +62,30 @@ class TaskAction extends Action {
         }
 
         if (IsEventEmitter(eventEmitter)) {
-            this.isRunning = true;
-
-            eventEmitter.once('complete', this.onTaskComplete, this);
-
-            this.continueCallback = eventSheetGroup.continue.bind(eventSheetGroup);
-            this.continueEE = eventEmitter;
+            this.pauseEventSheet(eventSheetGroup, eventEmitter, 'complete');
         }
     }
 
-    onTaskComplete() {
-        this.isRunning = false;
-        this.continueEE = undefined;
+    pauseEventSheet(eventSheetGroup, eventEmitter, resumeEventName) {
+        // Pause eventSheetGroup, wait until eventEmitter fires resumeEventName
+        this.isRunning = true;
 
-        this.continueCallback();
+        var self = this;
+        var taskCompleteCallback = function () {
+            // Resume event sheet group
+            self.isRunning = false;
+            self.removeTaskCompleteCallback = undefined;
+            eventSheetGroup.continue();
+        }
+        // Remove task-complete callback when aborting this node
+        this.removeTaskCompleteCallback = function () {
+            eventEmitter.off(resumeEventName, taskCompleteCallback);
+            self.removeTaskCompleteCallback = undefined;
+        }
+
+        eventEmitter.once(resumeEventName, taskCompleteCallback);
+
+        return resumeEventName;
     }
 
     tick(tick) {
@@ -86,9 +96,8 @@ class TaskAction extends Action {
     }
 
     abort(tick) {
-        if (this.continueEE) {
-            this.continueEE.off('complete', this.onTaskComplete, this);
-            this.continueEE = undefined;
+        if (this.removeTaskCompleteCallback) {
+            this.removeTaskCompleteCallback();
         }
     }
 }
