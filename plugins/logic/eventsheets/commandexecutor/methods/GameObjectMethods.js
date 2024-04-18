@@ -12,14 +12,14 @@ export default {
             goType = this.sys.getGameObjectManagerName(id);
         }
         if (!goType) {
-            return;
+            return this;
         }
 
         for (var prop in config) {
             var value = eventSheetManager.evalExpression(config[prop]);
             this.sys.setGameObjectProperty(goType, id, prop, value);
         }
-        // Execute next command
+        return this;
     },
 
     easeGOProperty(
@@ -40,7 +40,7 @@ export default {
             goType = this.sys.getGameObjectManagerName(id);
         }
         if (!goType) {
-            return;
+            return this;
         }
 
         var waitProperty;
@@ -53,10 +53,10 @@ export default {
             }
         }
         if (wait && waitProperty) {
-            return this.sys.waitEventManager.waitGameObjectTweenComplete(goType, id, waitProperty);
+            this.sys.waitEventManager.waitGameObjectTweenComplete(goType, id, waitProperty);
+            this._waitComplete();
         }
-
-        // Execute next command
+        return this;
     },
 
     destroyGO(
@@ -70,13 +70,15 @@ export default {
             goType = this.sys.getGameObjectManagerName(id);
         }
         if (!goType) {
-            return;
+            return this;
         }
 
         this.sys.destroyGameObject(goType, id);
         if (wait) {
-            return this.sys.waitEventManager.waitGameObjectDestroy(goType, id);
+            this.sys.waitEventManager.waitGameObjectDestroy(goType, id);
+            this._waitComplete();
         }
+        return this;
     },
 
     runGOMethod(
@@ -90,10 +92,10 @@ export default {
             goType = this.sys.getGameObjectManagerName(id);
         }
         if (!goType) {
-            return;
+            return this;
         }
 
         this.sys.callGameObjectMethod(goType, config.id, methodName, ...parameters);
-        // Execute next command
+        return this;
     },
 }

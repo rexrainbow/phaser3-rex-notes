@@ -1,13 +1,7 @@
 export default {
     // Called by commandExecutor -> eventSheetManager
     pauseEventSheet(tick) {
-        // Pause eventSheetGroup, wait until eventEmitter fires resumeEventName        
-
-        // Already paused, return invalid callback
-        if (this.isRunning) {
-            return null;
-        }
-
+        // Pause eventSheetGroup, wait until eventEmitter fires resumeEventName
         var eventSheetGroup = tick.tree.eventSheetGroup;
 
         // Pause eventSheetGroup

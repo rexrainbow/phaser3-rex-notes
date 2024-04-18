@@ -13,7 +13,7 @@ export default {
         eventSheetManager, eventsheet
     ) {
         if (!CanLog(eventsheet)) {
-            return;
+            return this;
         }
 
         if (showTitle) {
@@ -23,6 +23,7 @@ export default {
             text = `[round][bgcolor=${titleColor}]${title}[/bgcolor][/round] ${text}`
         }
         this.sys.logger.log(text, logType);
+        return this;
     },
 
     'log.disable'(
@@ -41,7 +42,7 @@ export default {
         }
 
         eventsheet.logEnable = false;
-
+        return this;
     },
 
     'log.enable'(
@@ -56,16 +57,16 @@ export default {
         }
 
         if (!eventsheet.hasOwnProperty('logEnable')) {
-            return
+            return this;
         }
 
         eventsheet.logEnable = true;
-
+        return this;
     },
 
     'log.memory'(config, eventSheetManager, eventsheet) {
         if (!CanLog(eventsheet)) {
-            return;
+            return this;
         }
 
         this.log(config, eventSheetManager, eventsheet);
@@ -84,5 +85,6 @@ export default {
         }
 
         this.sys.logger.log(table, 'table');
+        return this;
     },
 }

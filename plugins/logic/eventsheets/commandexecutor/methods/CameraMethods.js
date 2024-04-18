@@ -8,7 +8,7 @@ export default {
 
         var camera = this.sys.cameraTarget;
         if (!camera) {
-            return;
+            return this;
         }
 
         if ((x !== undefined) || (y !== undefined)) {
@@ -20,7 +20,7 @@ export default {
         if (zoom !== undefined) {
             camera.setZoom(zoom);
         }
-
+        return this;
     },
 
     'camera.fadeIn'
@@ -35,13 +35,14 @@ export default {
 
         var camera = this.sys.cameraTarget;
         if (!camera) {
-            return;
+            return this;
         }
 
         camera.fadeIn(duration, red, green, blue);
         if (wait) {
-            return this.wait({ camera: 'fadeIn' }, eventSheetManager);
+            this.wait({ camera: 'fadeIn' }, eventSheetManager);
         }
+        return this;
     },
 
     'camera.fadeOut'(
@@ -55,13 +56,14 @@ export default {
 
         var camera = this.sys.cameraTarget;
         if (!camera) {
-            return;
+            return this;
         }
 
         camera.fadeOut(duration, red, green, blue);
         if (wait) {
-            return this.wait({ camera: 'fadeOut' }, eventSheetManager);
+            this.wait({ camera: 'fadeOut' }, eventSheetManager);
         }
+        return this;
     },
 
     'camera.flash'(
@@ -75,13 +77,14 @@ export default {
 
         var camera = this.sys.cameraTarget;
         if (!camera) {
-            return;
+            return this;
         }
 
         camera.flash(duration, red, green, blue);
         if (wait) {
-            return this.wait({ camera: 'flash' }, eventSheetManager);
+            this.wait({ camera: 'flash' }, eventSheetManager);
         }
+        return this;
     },
 
     'camera.shake'(
@@ -95,13 +98,14 @@ export default {
 
         var camera = this.sys.cameraTarget;
         if (!camera) {
-            return;
+            return this;
         }
 
         camera.shake(duration, intensity);
         if (wait) {
-            return this.wait({ camera: 'shake' }, eventSheetManager);
+            this.wait({ camera: 'shake' }, eventSheetManager);
         }
+        return this;
     },
 
     'camera.zoomTo'(
@@ -115,13 +119,14 @@ export default {
 
         var camera = this.sys.cameraTarget;
         if (!camera) {
-            return;
+            return this;
         }
 
         camera.zoomTo(zoom, duration);
         if (wait) {
-            return this.wait({ camera: 'zoom' }, eventSheetManager);
+            this.wait({ camera: 'zoom' }, eventSheetManager);
         }
+        return this;
     },
 
     'camera.rotateTo'(
@@ -134,13 +139,14 @@ export default {
 
         var camera = this.sys.cameraTarget;
         if (!camera) {
-            return;
+            return this;
         }
 
         camera.rotateTo(rotate, false, duration, ease);
         if (wait) {
-            return this.wait({ camera: 'rotate' }, eventSheetManager);
+            this.wait({ camera: 'rotate' }, eventSheetManager);
         }
+        return this;
     },
 
     'camera.scrollTo'(
@@ -154,7 +160,7 @@ export default {
 
         var camera = this.sys.cameraTarget;
         if (!camera) {
-            return;
+            return this;
         }
 
         var xSave = camera.scrollX;
@@ -168,8 +174,9 @@ export default {
         camera.pan(x, y, duration, ease);
 
         if (wait) {
-            return this.wait({ camera: 'scroll' }, eventSheetManager);
+            this.wait({ camera: 'scroll' }, eventSheetManager);
         }
+        return this;
     },
 
 }

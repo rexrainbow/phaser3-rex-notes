@@ -1,17 +1,20 @@
 export default {
-    clearWaitEventFlag() {
-        this.hasAnyWaitEvent = false;
-        return this;
+    // Internal method
+    bindEventSheetManager(eventSheetManager) {
+        this.__eventSheetManager = eventSheetManager;
     },
 
-    setWaitEventFlag() {
-        this.hasAnyWaitEvent = true;
-        return this;
+    unBindEventSheetManager() {
+        this.__eventSheetManager = undefined;
+    },
+
+    _waitComplete() {
+        this.__eventSheetManager.pauseEventSheetUnitlEvent(this.sys);
     },
 
     waitEvent(eventEmitter, eventName) {
         this.sys.waitEventManager.waitEvent(eventEmitter, eventName);
-        this.setWaitEventFlag();
+        this._waitComplete();
         return this;
     },
 
@@ -34,10 +37,12 @@ export default {
         }
 
         this.sys.waitEventManager.waitAny(config);
-        return this.sys;
+        eventSheetManager.pauseEventSheetUnitlEvent(this.sys);
+        return this;
     },
 
     click(config, eventSheetManager, eventsheet) {
-        return this.wait({ click: true }, eventSheetManager);
+        this.wait({ click: true }, eventSheetManager);
+        return this;
     }
 }

@@ -37,7 +37,7 @@ export default {
         }
 
         var tick = this.__bindTick[this.__bindTick.length - 1];
-        node.pauseEventSheet(tick, eventEmitter, eventName);
+        node.pauseEventSheetUnitlEvent(tick, eventEmitter, eventName);
 
         return this;
     }

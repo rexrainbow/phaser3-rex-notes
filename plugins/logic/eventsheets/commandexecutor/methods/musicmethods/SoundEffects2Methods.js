@@ -8,7 +8,7 @@ export default {
 
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
-            return;
+            return this;
         }
 
         if (volume !== undefined) {
@@ -20,6 +20,7 @@ export default {
         } else if (unmute !== undefined) {
             soundManager.setSoundEffect2Mute(!unmute);
         }
+        return this;
     },
 
     'se2.play'(
@@ -33,10 +34,10 @@ export default {
 
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
-            return;
+            return this;
         }
         if (!key) {
-            return;
+            return this;
         }
 
         soundManager.playSoundEffect2(key);
@@ -58,17 +59,19 @@ export default {
         }
 
         if (wait) {
-            return this.wait({ se: true }, eventSheetManager);
+            this.wait({ se: true }, eventSheetManager);
         }
+        return this;
     },
 
     'se2.stop'(config, eventSheetManager, eventsheet) {
 
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
-            return;
+            return this;
         }
         soundManager.stopAllSoundEffects2();
+        return this;
     },
 
     'se2.fadeOut'(
@@ -82,32 +85,35 @@ export default {
 
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
-            return;
+            return this;
         }
         soundManager.fadeOutSoundEffect2(duration, stop);
 
         if (wait) {
-            return this.wait({ bgm: true }, eventSheetManager);
+            this.wait({ bgm: true }, eventSheetManager);
         }
+        return this;
     },
 
     'se2.mute'(config, eventSheetManager, eventsheet) {
 
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
-            return;
+            return this;
         }
 
         soundManager.setSoundEffect2Mute(true);
+        return this;
     },
 
     'se2.unmute'(config, eventSheetManager, eventsheet) {
 
         var soundManager = this.sys.soundManager;
         if (!soundManager) {
-            return;
+            return this;
         }
 
         soundManager.setSoundEffect2Mute(false);
+        return this;
     },
 }

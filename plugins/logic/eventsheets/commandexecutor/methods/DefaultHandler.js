@@ -13,23 +13,29 @@ var DefaultHandler = function (name, config, eventSheetManager, eventSheet) {
     } else {
         // TODO
         console.warn(`CommandExecutor: '${gameObjectID}' does not exist`);
-        return;
+        return this;
     }
+
+    this.bindEventSheetManager(eventSheetManager); // For _waitComplete() / waitEvent()
 
     var commandName = tokens[1];
     switch (tokens[1]) {
         case 'set':
-            return this.setGOProperty(config, eventSheetManager, eventSheet);
+            this.setGOProperty(config, eventSheetManager, eventSheet);
+            break;
 
         case 'to':
-            return this.easeGOProperty(config, eventSheetManager, eventSheet);
+            this.easeGOProperty(config, eventSheetManager, eventSheet);
+            break;
 
         case 'yoyo':
             config.yoyo = true;
-            return this.easeGOProperty(config, eventSheetManager, eventSheet);
+            this.easeGOProperty(config, eventSheetManager, eventSheet);
+            break;
 
         case 'destroy':
-            return this.destroyGO(config, eventSheetManager, eventSheet);
+            this.destroyGO(config, eventSheetManager, eventSheet);
+            break;
 
         default:
             var gameObjectManager = this.sys.getGameObjectManager(config.goType, config.id);
@@ -37,8 +43,6 @@ var DefaultHandler = function (name, config, eventSheetManager, eventSheet) {
                 // Command registered in gameObjectManager
                 var command = gameObjectManager.commands[commandName];
                 if (command) {
-                    this.clearWaitEventFlag();
-
                     var gameObjects = gameObjectManager.getGO(config.id);
                     if (!Array.isArray(gameObjects)) {
                         gameObjects = [gameObjects];
@@ -47,21 +51,24 @@ var DefaultHandler = function (name, config, eventSheetManager, eventSheet) {
                     gameObjects.forEach(function (gameObject) {
                         command(gameObject, config, self, eventSheetManager, eventSheet);
                     })
-
-                    return (this.hasAnyWaitEvent) ? this.sys : undefined;
                 }
-            }
+            } else {
+                var parameters;
+                for (var key in config) {
+                    parameters = config[key];
+                    break;
+                }
+                config.methodName = commandName;
+                config.parameters = (parameters) ? StringToValues(parameters) : [];
+                this.runGOMethod(config, eventSheetManager, eventSheet);
 
-            var parameters;
-            for (var key in config) {
-                parameters = config[key];
-                break;
             }
-            config.methodName = commandName;
-            config.parameters = (parameters) ? StringToValues(parameters) : [];
-            return this.runGOMethod(config, eventSheetManager, eventSheet);
-
+            break;
     }
+
+    this.unBindEventSheetManager();
+
+    return this;
 }
 
 export default DefaultHandler;
