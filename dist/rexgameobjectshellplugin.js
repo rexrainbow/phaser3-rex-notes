@@ -3807,7 +3807,8 @@
     }, {
       key: "setGO",
       value: function setGO(gameObject, name) {
-        gameObject.setName(name);
+        gameObject.goName = name;
+        gameObject.goType = this.GOManager.name;
         this.gameObject = gameObject;
         this.name = name;
         this.freeTweens();
@@ -16231,8 +16232,9 @@
     return textObjectType;
   };
 
+  var RE_ASCII = /^[\x00-\x7F]+$/;
   var IsASCIIString = function IsASCIIString(s) {
-    return /^[\x00-\x7F]+$/.test(s);
+    return RE_ASCII.test(s);
   };
 
   var TextWrapByCharCallback = function TextWrapByCharCallback(text, textObject) {

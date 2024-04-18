@@ -5131,6 +5131,43 @@
     return Blackboard;
   }(Blackboard$1);
 
+  var PauseEventSheetMethods$1 = {
+    // Internal method
+    bindTaskActionNode: function bindTaskActionNode(tick, node) {
+      if (!this.__bindTick) {
+        this.__bindTick = [];
+        this.__bindNode = [];
+      }
+      this.__bindTick.push(tick);
+      this.__bindNode.push(node);
+    },
+    // Internal method
+    unBindTaskAction: function unBindTaskAction() {
+      if (!this.__bindTick) {
+        return;
+      }
+      this.__bindTick.pop();
+      this.__bindNode.pop();
+    },
+    pauseEventSheet: function pauseEventSheet() {
+      var node = this.__bindNode[this.__bindNode.length - 1];
+      if (!node) {
+        return null;
+      }
+      var tick = this.__bindTick[this.__bindTick.length - 1];
+      return node.pauseEventSheet(tick);
+    },
+    pauseEventSheetUnitlEvent: function pauseEventSheetUnitlEvent(eventEmitter, eventName) {
+      var node = this.__bindNode[this.__bindNode.length - 1];
+      if (!node) {
+        return null;
+      }
+      var tick = this.__bindTick[this.__bindTick.length - 1];
+      node.pauseEventSheetUnitlEvent(tick, eventEmitter, eventName);
+      return this;
+    }
+  };
+
   var TreeMethods$1 = {
     getTree: function getTree(title) {
       var trees = this.trees;
@@ -5222,10 +5259,10 @@
       value: function open(tick) {
         _get(_getPrototypeOf(TaskSequence.prototype), "open", this).call(this, tick);
         var blackboard = tick.blackboard;
-        var treeManager = blackboard.treeManager;
+        var eventSheetManager = blackboard.eventSheetManager;
         var eventsheet = tick.tree;
         var eventSheetGroup = eventsheet.eventSheetGroup;
-        treeManager.emit('label.enter', this.title, eventsheet.title, eventSheetGroup.name, treeManager);
+        eventSheetManager.emit('label.enter', this.title, eventsheet.title, eventSheetGroup.name, eventSheetManager);
       }
     }, {
       key: "tick",
@@ -5242,14 +5279,56 @@
       value: function close(tick) {
         _get(_getPrototypeOf(TaskSequence.prototype), "close", this).call(this, tick);
         var blackboard = tick.blackboard;
-        var treeManager = blackboard.treeManager;
+        var eventSheetManager = blackboard.eventSheetManager;
         var eventsheet = tick.tree;
         var eventSheetGroup = eventsheet.eventSheetGroup;
-        treeManager.emit('label.exit', this.title, eventsheet.title, eventSheetGroup.name, treeManager);
+        eventSheetManager.emit('label.exit', this.title, eventsheet.title, eventSheetGroup.name, eventSheetManager);
       }
     }]);
     return TaskSequence;
   }(Sequence);
+
+  var PauseEventSheetMethods = {
+    // Called by commandExecutor -> eventSheetManager
+    pauseEventSheet: function pauseEventSheet(tick) {
+      // Pause eventSheetGroup, wait until eventEmitter fires resumeEventName
+      var eventSheetGroup = tick.tree.eventSheetGroup;
+
+      // Pause eventSheetGroup
+      this.isRunning = true;
+      var self = this;
+      var waitId = this.waitId;
+      var taskCompleteCallback = function taskCompleteCallback() {
+        // Expired
+        if (waitId < self.waitId) {
+          return;
+        }
+        self.waitId++;
+
+        // Resume event sheet group
+        self.isRunning = false;
+        eventSheetGroup["continue"]();
+      };
+      return taskCompleteCallback;
+    },
+    pauseEventSheetUnitlEvent: function pauseEventSheetUnitlEvent(tick, eventEmitter) {
+      var eventName = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'complete';
+      var resumeCallback = this.pauseEventSheet(tick);
+      var self = this;
+      var wrapResumeCallback = function wrapResumeCallback() {
+        self.removeTaskCompleteCallback = undefined;
+        resumeCallback();
+      };
+
+      // Remove task-complete callback when aborting this node            
+      this.removeTaskCompleteCallback = function () {
+        eventEmitter.off(eventName, wrapResumeCallback);
+        self.removeTaskCompleteCallback = undefined;
+      };
+      eventEmitter.once(eventName, wrapResumeCallback);
+      return this;
+    }
+  };
 
   var IsEventEmitter = function IsEventEmitter(obj) {
     if (obj && _typeof(obj) === 'object') {
@@ -6032,13 +6111,14 @@
         title: config.name,
         properties: config
       }]);
-      _this.isRunning = false;
       var sourceParameters = config.parameters;
       var taskParameters = {};
       for (var name in sourceParameters) {
         taskParameters[name] = CompileExpression(sourceParameters[name]);
       }
       _this.taskParameters = taskParameters;
+      _this.isRunning = false;
+      _this.waitId = 0;
       return _this;
     }
     _createClass(TaskAction, [{
@@ -6051,10 +6131,9 @@
           return;
         }
         var blackboard = tick.blackboard;
-        var treeManager = blackboard.treeManager;
-        var eventsheet = tick.tree;
-        var eventSheetGroup = eventsheet.eventSheetGroup;
-        var memory = treeManager.memory;
+        var eventSheetManager = blackboard.eventSheetManager;
+        var eventSheet = tick.tree;
+        var memory = eventSheetManager.memory;
         var taskParameters = this.taskParameters;
         var parametersCopy = {};
         for (var name in taskParameters) {
@@ -6064,30 +6143,26 @@
           }
           parametersCopy[name] = value;
         }
+        eventSheetManager.bindTaskActionNode(tick, this);
+        // Invoke eventSheetManager.pauseEventSheet() to generate new resumeEventName
+
         var commandExecutor = tick.target;
         var eventEmitter;
         var handler = commandExecutor[taskName];
         if (handler) {
-          eventEmitter = handler.call(commandExecutor, parametersCopy, treeManager, eventsheet);
+          eventEmitter = handler.call(commandExecutor, parametersCopy, eventSheetManager, eventSheet);
         } else {
           handler = commandExecutor.defaultHandler;
           if (handler) {
-            eventEmitter = handler.call(commandExecutor, taskName, parametersCopy, treeManager, eventsheet);
+            eventEmitter = handler.call(commandExecutor, taskName, parametersCopy, eventSheetManager, eventSheet);
           }
         }
-        if (IsEventEmitter(eventEmitter)) {
-          this.isRunning = true;
-          eventEmitter.once('complete', this.onTaskComplete, this);
-          this.continueCallback = eventSheetGroup["continue"].bind(eventSheetGroup);
-          this.continueEE = eventEmitter;
+        eventSheetManager.unBindTaskAction(tick, this);
+
+        // Event-emitter mode
+        if (!this.isRunning && IsEventEmitter(eventEmitter)) {
+          this.pauseEventSheetUnitlEvent(tick, eventEmitter);
         }
-      }
-    }, {
-      key: "onTaskComplete",
-      value: function onTaskComplete() {
-        this.isRunning = false;
-        this.continueEE = undefined;
-        this.continueCallback();
       }
     }, {
       key: "tick",
@@ -6100,9 +6175,8 @@
     }, {
       key: "abort",
       value: function abort(tick) {
-        if (this.continueEE) {
-          this.continueEE.off('complete', this.onTaskComplete, this);
-          this.continueEE = undefined;
+        if (this.removeTaskCompleteCallback) {
+          this.removeTaskCompleteCallback();
         }
       }
     }]);
@@ -6123,6 +6197,7 @@
     }
     return s;
   };
+  Object.assign(TaskAction.prototype, PauseEventSheetMethods);
 
   var WaitNextRound = /*#__PURE__*/function (_Wait) {
     _inherits(WaitNextRound, _Wait);
@@ -6184,7 +6259,7 @@
         if (!this.activateTreeTitle || this.activateTreeTitle === '') {
           eventsheet.setActive(true);
         } else {
-          eventsheet.treeManager.setEventSheetActiveState(this.activateTreeTitle, eventsheet.groupName, true);
+          eventsheet.eventSheetManager.setEventSheetActiveState(this.activateTreeTitle, eventsheet.groupName, true);
         }
         return this.SUCCESS;
       }
@@ -6221,7 +6296,7 @@
         if (!this.deactivateTreeTitle || this.deactivateTreeTitle === '') {
           eventsheet.setActive(false);
         } else {
-          eventsheet.treeManager.setEventSheetActiveState(this.deactivateTreeTitle, eventsheet.groupName, false);
+          eventsheet.eventSheetManager.setEventSheetActiveState(this.deactivateTreeTitle, eventsheet.groupName, false);
         }
         return this.SUCCESS;
       }
@@ -6292,28 +6367,28 @@
     }
   };
 
-  var OpenEventSheet = function OpenEventSheet(treeManager, eventsheet) {
-    var blackboard = treeManager.blackboard;
-    var commandExecutor = treeManager.commandExecutor;
+  var OpenEventSheet = function OpenEventSheet(eventSheetManager, eventsheet) {
+    var blackboard = eventSheetManager.blackboard;
+    var commandExecutor = eventSheetManager.commandExecutor;
     var result = eventsheet.start(blackboard, commandExecutor);
     if (!result) {
       return;
     }
     if (eventsheet.conditionPassed) {
-      treeManager.emit('eventsheet.enter', eventsheet.title, this.name, treeManager);
+      eventSheetManager.emit('eventsheet.enter', eventsheet.title, this.name, eventSheetManager);
     } else {
-      treeManager.emit('eventsheet.catch', eventsheet.title, this.name, treeManager);
+      eventSheetManager.emit('eventsheet.catch', eventsheet.title, this.name, eventSheetManager);
     }
   };
-  var TickEventSheet = function TickEventSheet(treeManager, eventsheet) {
-    var blackboard = treeManager.blackboard;
-    var commandExecutor = treeManager.commandExecutor;
+  var TickEventSheet = function TickEventSheet(eventSheetManager, eventsheet) {
+    var blackboard = eventSheetManager.blackboard;
+    var commandExecutor = eventSheetManager.commandExecutor;
     var status = eventsheet.tick(blackboard, commandExecutor);
     return status;
   };
-  var CloseEventSheet = function CloseEventSheet(treeManager, eventsheet) {
+  var CloseEventSheet = function CloseEventSheet(eventSheetManager, eventsheet) {
     if (eventsheet.conditionPassed) {
-      treeManager.emit('eventsheet.exit', eventsheet.title, this.name, treeManager);
+      eventSheetManager.emit('eventsheet.exit', eventsheet.title, this.name, eventSheetManager);
     }
   };
   var RunMethods$1 = {
@@ -6340,10 +6415,10 @@
         return this;
       }
       this.isRunning = true;
-      var treeManager = this.parent;
+      var eventSheetManager = this.parent;
       var trees = this.trees;
       var pendingTrees = this.pendingTrees;
-      var blackboard = treeManager.blackboard;
+      var blackboard = eventSheetManager.blackboard;
 
       // pendingTrees.length = 0;
 
@@ -6356,7 +6431,7 @@
         eventsheet.resetState(blackboard);
         if (eventsheet.parallel) {
           // Open all event sheets
-          OpenEventSheet.call(this, treeManager, eventsheet);
+          OpenEventSheet.call(this, eventSheetManager, eventsheet);
         }
         pendingTrees.push(eventsheet);
       }
@@ -6375,26 +6450,26 @@
       if (!this.isRunning) {
         return this;
       }
-      var treeManager = this.parent;
+      var eventSheetManager = this.parent;
       var trees = this.pendingTrees;
       var closedTrees = this.closedTrees;
-      var blackboard = treeManager.blackboard;
+      var blackboard = eventSheetManager.blackboard;
       closedTrees.length = 0;
       for (var i = 0, cnt = trees.length; i < cnt; i++) {
         var eventsheet = trees[i];
 
         // Do nothing if event sheet has been opened
-        OpenEventSheet.call(this, treeManager, eventsheet);
+        OpenEventSheet.call(this, eventSheetManager, eventsheet);
         if (!this.isRunning) {
           // Can break here
           break;
         }
 
         // Will goto RUNNING, or SUCCESS/FAILURE/ERROR state
-        var status = TickEventSheet(treeManager, eventsheet);
+        var status = TickEventSheet(eventSheetManager, eventsheet);
         if (eventsheet.roundComplete) {
           closedTrees.push(eventsheet);
-          CloseEventSheet.call(this, treeManager, eventsheet);
+          CloseEventSheet.call(this, eventSheetManager, eventsheet);
         } else if (status === RUNNING$1) {
           // Stall command execution here
           break;
@@ -6410,15 +6485,15 @@
       }
       if (trees.length === 0) {
         this.isRunning = false;
-        treeManager.emit('complete', this.name, treeManager);
+        eventSheetManager.emit('complete', this.name, eventSheetManager);
       }
       return this;
     },
     stop: function stop() {
       this.isRunning = false;
-      var treeManager = this.parent;
-      var blackboard = treeManager.blackboard;
-      var commandExecutor = treeManager.commandExecutor;
+      var eventSheetManager = this.parent;
+      var blackboard = eventSheetManager.blackboard;
+      var commandExecutor = eventSheetManager.commandExecutor;
       this.pendingTrees.forEach(function (eventsheet) {
         eventsheet.abort(blackboard, commandExecutor);
       });
@@ -6437,13 +6512,13 @@
         return this;
       }
       this.isRunning = true;
-      var treeManager = this.parent;
+      var eventSheetManager = this.parent;
       var pendingTrees = this.pendingTrees;
-      var blackboard = treeManager.blackboard;
+      var blackboard = eventSheetManager.blackboard;
       pendingTrees.length = 0;
       eventsheet.resetState(blackboard);
       eventsheet.setConditionEnable(!ignoreCondition);
-      OpenEventSheet.call(this, treeManager, eventsheet);
+      OpenEventSheet.call(this, eventSheetManager, eventsheet);
       eventsheet.setConditionEnable(true);
       pendingTrees.push(eventsheet);
       this["continue"]();
@@ -14650,13 +14725,24 @@
   };
 
   var RunMethods = {
+    startGroup: function startGroup(groupName) {
+      if (groupName === undefined) {
+        groupName = this.defaultTreeGroupName;
+      }
+      this.getTreeGroup(groupName).start();
+      return this;
+    },
     start: function start() {
       var argumentsCount = arguments.length;
       switch (argumentsCount) {
         case 0:
+          // Run all event sheets in default group
           this.getTreeGroup(this.defaultTreeGroupName).start();
           break;
         case 1:
+          // Start an event sheet by name (arg[0]), 
+          // in default group,
+          // will check condition
           var name = arguments[0];
           if (this.hasTreeGroup(name)) {
             this.getTreeGroup(name).start();
@@ -14665,6 +14751,9 @@
           }
           break;
         case 2:
+          // Start an event sheet by name (arg[0]),
+          // in a group by name (arg[1]), will check condition, or
+          // in default group, ignore condition checking (arg[1])
           var title = arguments[0];
           var ignoreCondition, groupName;
           if (typeof arguments[1] === 'string') {
@@ -14677,6 +14766,9 @@
           this.getTreeGroup(groupName).startTree(title, ignoreCondition);
           break;
         default:
+          // Start an event sheet by name (arg[0]), 
+          // in a group by name (arg[1]), 
+          // can ignore condition checking (arg[2])
           var title = arguments[0];
           var groupName = arguments[1];
           var ignoreCondition = arguments[2];
@@ -14720,7 +14812,7 @@
   };
 
   var Methods$4 = {};
-  Object.assign(Methods$4, TreeMethods, AddTreeMethods, RemoveTreeMethods, TreeActiveStateMethods, SaveLoadTreesMethods, DataMethods$2, StateMethods, ValueConvertMethods, RunMethods, RoundCounterMethods);
+  Object.assign(Methods$4, PauseEventSheetMethods$1, TreeMethods, AddTreeMethods, RemoveTreeMethods, TreeActiveStateMethods, SaveLoadTreesMethods, DataMethods$2, StateMethods, ValueConvertMethods, RunMethods, RoundCounterMethods);
 
   BehaviorTree.setStartIDValue(0);
   var EventSheetManager = /*#__PURE__*/function (_EventEmitter) {
@@ -14739,7 +14831,7 @@
       _this.blackboard = new Blackboard({
         currentTimeKey: '$roundCounter'
       });
-      _this.blackboard.treeManager = _assertThisInitialized(_this); // For TaskAction
+      _this.blackboard.eventSheetManager = _assertThisInitialized(_this); // For TaskAction
 
       _this.treeGroups = {};
       _this.setRoundCounter(0);
@@ -14796,7 +14888,7 @@
   };
   var EventSheet = /*#__PURE__*/function (_BehaviorTree) {
     _inherits(EventSheet, _BehaviorTree);
-    function EventSheet(treeManager, config) {
+    function EventSheet(eventSheetManager, config) {
       var _this;
       _classCallCheck(this, EventSheet);
       if (config === undefined) {
@@ -14838,8 +14930,8 @@
       }
 
       // Store references
-      _this.treeManager = treeManager;
-      _this.blackboard = treeManager.blackboard;
+      _this.eventSheetManager = eventSheetManager;
+      _this.blackboard = eventSheetManager.blackboard;
       _this.setTreeGroup(groupName);
       var root = new IfSelector({
         title: _this.title,
@@ -14869,7 +14961,7 @@
       key: "setTreeGroup",
       value: function setTreeGroup(groupName) {
         this.groupName = groupName;
-        this.eventSheetGroup = this.treeManager.getTreeGroup(groupName);
+        this.eventSheetGroup = this.eventSheetManager.getTreeGroup(groupName);
         return this;
       }
     }, {
@@ -16633,7 +16725,7 @@
     return expression;
   };
 
-  var Marked2Tree = function Marked2Tree(treeManager, markedString) {
+  var Marked2Tree = function Marked2Tree(eventSheetManager, markedString) {
     var _ref = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {},
       groupName = _ref.groupName,
       _ref$lineBreak = _ref.lineBreak,
@@ -16660,7 +16752,7 @@
       lineBreak: lineBreak,
       commentLineStart: commentLineStart
     };
-    var eventsheet = new EventSheet(treeManager, {
+    var eventsheet = new EventSheet(eventSheetManager, {
       title: headingTree.title,
       groupName: groupName,
       condition: GetConditionExpression$1(conditionNodes),
@@ -16995,7 +17087,8 @@
     }, {
       key: "setGO",
       value: function setGO(gameObject, name) {
-        gameObject.setName(name);
+        gameObject.goName = name;
+        gameObject.goType = this.GOManager.name;
         this.gameObject = gameObject;
         this.name = name;
         this.freeTweens();
@@ -22701,6 +22794,8 @@
       if (config === undefined) {
         config = {};
       }
+
+      // Fire 'complete' event to resume running of eventSheetGroup
       config.completeEventName = 'complete';
       if (!config.hasOwnProperty('layers')) {
         config.layers = undefined;
@@ -23495,17 +23590,19 @@
   };
 
   var WaitMethods = {
-    clearWaitEventFlag: function clearWaitEventFlag() {
-      this.hasAnyWaitEvent = false;
-      return this;
+    // Internal method
+    bindEventSheetManager: function bindEventSheetManager(eventSheetManager) {
+      this.__eventSheetManager = eventSheetManager;
     },
-    setWaitEventFlag: function setWaitEventFlag() {
-      this.hasAnyWaitEvent = true;
-      return this;
+    unBindEventSheetManager: function unBindEventSheetManager() {
+      this.__eventSheetManager = undefined;
+    },
+    _waitComplete: function _waitComplete() {
+      this.__eventSheetManager.pauseEventSheetUnitlEvent(this.sys);
     },
     waitEvent: function waitEvent(eventEmitter, eventName) {
       this.sys.waitEventManager.waitEvent(eventEmitter, eventName);
-      this.setWaitEventFlag();
+      this._waitComplete();
       return this;
     },
     wait: function wait(config, eventSheetManager, eventsheet) {
@@ -23524,12 +23621,14 @@
         });
       }
       this.sys.waitEventManager.waitAny(config);
-      return this.sys;
+      eventSheetManager.pauseEventSheetUnitlEvent(this.sys);
+      return this;
     },
     click: function click(config, eventSheetManager, eventsheet) {
-      return this.wait({
+      this.wait({
         click: true
       }, eventSheetManager);
+      return this;
     }
   };
 
@@ -23583,13 +23682,13 @@
         goType = this.sys.getGameObjectManagerName(id);
       }
       if (!goType) {
-        return;
+        return this;
       }
       for (var prop in config) {
         var value = eventSheetManager.evalExpression(config[prop]);
         this.sys.setGameObjectProperty(goType, id, prop, value);
       }
-      // Execute next command
+      return this;
     },
     easeGOProperty: function easeGOProperty(config, eventSheetManager, eventSheet) {
       var id = config.id,
@@ -23611,7 +23710,7 @@
         goType = this.sys.getGameObjectManagerName(id);
       }
       if (!goType) {
-        return;
+        return this;
       }
       var waitProperty;
       for (var prop in config) {
@@ -23622,10 +23721,10 @@
         }
       }
       if (wait && waitProperty) {
-        return this.sys.waitEventManager.waitGameObjectTweenComplete(goType, id, waitProperty);
+        this.sys.waitEventManager.waitGameObjectTweenComplete(goType, id, waitProperty);
+        this._waitComplete();
       }
-
-      // Execute next command
+      return this;
     },
     destroyGO: function destroyGO(config, eventSheetManager, eventSheet) {
       var id = config.id,
@@ -23636,12 +23735,14 @@
         goType = this.sys.getGameObjectManagerName(id);
       }
       if (!goType) {
-        return;
+        return this;
       }
       this.sys.destroyGameObject(goType, id);
       if (wait) {
-        return this.sys.waitEventManager.waitGameObjectDestroy(goType, id);
+        this.sys.waitEventManager.waitGameObjectDestroy(goType, id);
+        this._waitComplete();
       }
+      return this;
     },
     runGOMethod: function runGOMethod(config, eventSheetManager, eventSheet) {
       var _this$sys;
@@ -23653,10 +23754,10 @@
         goType = this.sys.getGameObjectManagerName(id);
       }
       if (!goType) {
-        return;
+        return this;
       }
       (_this$sys = this.sys).callGameObjectMethod.apply(_this$sys, [goType, config.id, methodName].concat(_toConsumableArray(parameters)));
-      // Execute next command
+      return this;
     }
   };
 
@@ -23668,7 +23769,7 @@
         unmute = _ref.unmute;
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
-        return;
+        return this;
       }
       if (volume !== undefined) {
         soundManager.setBackgroundMusicVolume(volume);
@@ -23693,10 +23794,10 @@
       var eventSheetManager = arguments.length > 1 ? arguments[1] : undefined;
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
-        return;
+        return this;
       }
       if (!key) {
-        return;
+        return this;
       }
       if (loop !== undefined) {
         soundManager.setBackgroundMusicLoopValue(loop);
@@ -23715,10 +23816,11 @@
         soundManager.fadeInBackgroundMusic(fadeIn);
       }
       if (wait) {
-        return this.wait({
+        this.wait({
           bgm: true
         }, eventSheetManager);
       }
+      return this;
     },
     'bgm.cross': function bgmCross(_ref3, eventSheetManager, eventsheet) {
       var key = _ref3.key,
@@ -23728,24 +23830,26 @@
         wait = _ref3$wait === void 0 ? false : _ref3$wait;
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
-        return;
+        return this;
       }
       if (!key) {
-        return;
+        return this;
       }
       soundManager.crossFadeBackgroundMusic(key, duration);
       if (wait) {
-        return this.wait({
+        this.wait({
           bgm: true
         }, eventSheetManager);
       }
+      return this;
     },
     'bgm.stop': function bgmStop(config, eventSheetManager, eventsheet) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
-        return;
+        return this;
       }
       soundManager.stopBackgroundMusic();
+      return this;
     },
     'bgm.fadeOut': function bgmFadeOut(_ref4, eventSheetManager) {
       var _ref4$duration = _ref4.duration,
@@ -23756,51 +23860,57 @@
         wait = _ref4$wait === void 0 ? false : _ref4$wait;
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
-        return;
+        return this;
       }
       soundManager.fadeOutBackgroundMusic2(duration, stop);
       if (wait) {
-        return this.wait({
+        this.wait({
           bgm: true
         }, eventSheetManager);
       }
+      return this;
     },
     'bgm.fadeIn': function bgmFadeIn(_ref5, eventSheetManager, eventsheet) {
       var _ref5$duration = _ref5.duration,
         duration = _ref5$duration === void 0 ? 500 : _ref5$duration;
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
-        return;
+        return this;
       }
       soundManager.fadeInBackgroundMusic(duration);
+      return this;
     },
     'bgm.pause': function bgmPause(config, eventSheetManager, eventsheet) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
-        return;
+        return this;
       }
       soundManager.pauseBackgroundMusic();
+      return this;
     },
     'bgm.resume': function bgmResume(config, eventSheetManager, eventsheet) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
-        return;
+        return this;
       }
       soundManager.resumeBackgroundMusic();
+      return this;
     },
     'bgm.mute': function bgmMute(config, eventSheetManager, eventsheet) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
-        return;
+        return this;
       }
       soundManager.setBackgroundMusicMute(true);
+      return this;
     },
     'bgm.unmute': function bgmUnmute(config, eventSheetManager, eventsheet) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
-        return;
+        return this;
       }
       soundManager.setBackgroundMusicMute(false);
+      return this;
     }
   };
 
@@ -23812,7 +23922,7 @@
         unmute = _ref.unmute;
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
-        return;
+        return this;
       }
       if (volume !== undefined) {
         soundManager.setBackgroundMusic2Volume(volume);
@@ -23822,6 +23932,7 @@
       } else if (unmute !== undefined) {
         soundManager.setBackgroundMusic2Mute(!unmute);
       }
+      return this;
     },
     'bgm2.play': function bgm2Play() {
       var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
@@ -23837,10 +23948,10 @@
       var eventSheetManager = arguments.length > 1 ? arguments[1] : undefined;
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
-        return;
+        return this;
       }
       if (!key) {
-        return;
+        return this;
       }
       if (loop !== undefined) {
         soundManager.setBackgroundMusic2LoopValue(loop);
@@ -23859,10 +23970,11 @@
         soundManager.fadeInBackgroundMusic2(fadeIn);
       }
       if (wait) {
-        return this.wait({
+        this.wait({
           bgm: true
         }, eventSheetManager);
       }
+      return this;
     },
     'bgm2.cross': function bgm2Cross(_ref3, eventSheetManager, eventsheet) {
       var key = _ref3.key,
@@ -23872,24 +23984,26 @@
         wait = _ref3$wait === void 0 ? false : _ref3$wait;
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
-        return;
+        return this;
       }
       if (!key) {
-        return;
+        return this;
       }
       soundManager.crossFadeBackgroundMusic2(key, duration);
       if (wait) {
-        return this.wait({
+        this.wait({
           bgm: true
         }, eventSheetManager);
       }
+      return this;
     },
     'bgm2.stop': function bgm2Stop(config, eventSheetManager, eventsheet) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
-        return;
+        return this;
       }
       soundManager.stopBackgroundMusic2();
+      return this;
     },
     'bgm2.fadeOut': function bgm2FadeOut(_ref4, eventSheetManager) {
       var _ref4$duration = _ref4.duration,
@@ -23900,51 +24014,57 @@
         wait = _ref4$wait === void 0 ? false : _ref4$wait;
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
-        return;
+        return this;
       }
       soundManager.fadeOutBackgroundMusic2(duration, stop);
       if (wait) {
-        return this.wait({
+        this.wait({
           bgm: true
         }, eventSheetManager);
       }
+      return this;
     },
     'bgm2.fadeIn': function bgm2FadeIn(_ref5, eventSheetManager, eventsheet) {
       var _ref5$duration = _ref5.duration,
         duration = _ref5$duration === void 0 ? 500 : _ref5$duration;
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
-        return;
+        return this;
       }
       soundManager.fadeInBackgroundMusic2(duration);
+      return this;
     },
     'bgm2.pause': function bgm2Pause(config, eventSheetManager, eventsheet) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
-        return;
+        return this;
       }
       soundManager.pauseBackgroundMusic2();
+      return this;
     },
     'bgm2.resume': function bgm2Resume(config, eventSheetManager, eventsheet) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
-        return;
+        return this;
       }
       soundManager.resumeBackgroundMusic2();
+      return this;
     },
     'bgm2.mute': function bgm2Mute(config, eventSheetManager, eventsheet) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
-        return;
+        return this;
       }
       soundManager.setBackgroundMusic2Mute(true);
+      return this;
     },
     'bgm2.unmute': function bgm2Unmute(config, eventSheetManager, eventsheet) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
-        return;
+        return this;
       }
       soundManager.setBackgroundMusic2Mute(false);
+      return this;
     }
   };
 
@@ -23956,7 +24076,7 @@
         unmute = _ref.unmute;
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
-        return;
+        return this;
       }
       if (volume !== undefined) {
         soundManager.setSoundEffectVolume(volume);
@@ -23966,6 +24086,7 @@
       } else if (unmute !== undefined) {
         soundManager.setSoundEffectMute(!unmute);
       }
+      return this;
     },
     'se.play': function sePlay() {
       var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
@@ -23980,10 +24101,10 @@
       var eventSheetManager = arguments.length > 1 ? arguments[1] : undefined;
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
-        return;
+        return this;
       }
       if (!key) {
-        return;
+        return this;
       }
       soundManager.playSoundEffect(key);
       if (volume !== undefined) {
@@ -23999,17 +24120,19 @@
         soundManager.fadeInSoundEffect(fadeIn);
       }
       if (wait) {
-        return this.wait({
+        this.wait({
           se: true
         }, eventSheetManager);
       }
+      return this;
     },
     'se.stop': function seStop(config, eventSheetManager, eventsheet) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
-        return;
+        return this;
       }
       soundManager.stopAllSoundEffects();
+      return this;
     },
     'se.fadeOut': function seFadeOut(_ref3, eventSheetManager, eventsheet) {
       var _ref3$duration = _ref3.duration,
@@ -24020,28 +24143,31 @@
         wait = _ref3$wait === void 0 ? false : _ref3$wait;
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
-        return;
+        return this;
       }
       soundManager.fadeOutSoundEffect(duration, stop);
       if (wait) {
-        return this.wait({
+        this.wait({
           bgm: true
         }, eventSheetManager);
       }
+      return this;
     },
     'se.mute': function seMute(config, eventSheetManager, eventsheet) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
-        return;
+        return this;
       }
       soundManager.setSoundEffectMute(true);
+      return this;
     },
     'se.unmute': function seUnmute(config, eventSheetManager, eventsheet) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
-        return;
+        return this;
       }
       soundManager.setSoundEffectMute(false);
+      return this;
     }
   };
 
@@ -24053,7 +24179,7 @@
         unmute = _ref.unmute;
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
-        return;
+        return this;
       }
       if (volume !== undefined) {
         soundManager.setSoundEffect2Volume(volume);
@@ -24063,6 +24189,7 @@
       } else if (unmute !== undefined) {
         soundManager.setSoundEffect2Mute(!unmute);
       }
+      return this;
     },
     'se2.play': function se2Play() {
       var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
@@ -24077,10 +24204,10 @@
       var eventSheetManager = arguments.length > 1 ? arguments[1] : undefined;
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
-        return;
+        return this;
       }
       if (!key) {
-        return;
+        return this;
       }
       soundManager.playSoundEffect2(key);
       if (volume !== undefined) {
@@ -24096,17 +24223,19 @@
         soundManager.fadeInSoundEffect2(fadeIn);
       }
       if (wait) {
-        return this.wait({
+        this.wait({
           se: true
         }, eventSheetManager);
       }
+      return this;
     },
     'se2.stop': function se2Stop(config, eventSheetManager, eventsheet) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
-        return;
+        return this;
       }
       soundManager.stopAllSoundEffects2();
+      return this;
     },
     'se2.fadeOut': function se2FadeOut(_ref3, eventSheetManager, eventsheet) {
       var _ref3$duration = _ref3.duration,
@@ -24117,28 +24246,31 @@
         wait = _ref3$wait === void 0 ? false : _ref3$wait;
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
-        return;
+        return this;
       }
       soundManager.fadeOutSoundEffect2(duration, stop);
       if (wait) {
-        return this.wait({
+        this.wait({
           bgm: true
         }, eventSheetManager);
       }
+      return this;
     },
     'se2.mute': function se2Mute(config, eventSheetManager, eventsheet) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
-        return;
+        return this;
       }
       soundManager.setSoundEffect2Mute(true);
+      return this;
     },
     'se2.unmute': function se2Unmute(config, eventSheetManager, eventsheet) {
       var soundManager = this.sys.soundManager;
       if (!soundManager) {
-        return;
+        return this;
       }
       soundManager.setSoundEffect2Mute(false);
+      return this;
     }
   };
 
@@ -24151,7 +24283,7 @@
         zoom = _ref.zoom;
       var camera = this.sys.cameraTarget;
       if (!camera) {
-        return;
+        return this;
       }
       if (x !== undefined || y !== undefined) {
         camera.setScroll(x, y);
@@ -24162,6 +24294,7 @@
       if (zoom !== undefined) {
         camera.setZoom(zoom);
       }
+      return this;
     },
     'camera.fadeIn': function cameraFadeIn() {
       var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
@@ -24175,14 +24308,15 @@
       var eventSheetManager = arguments.length > 1 ? arguments[1] : undefined;
       var camera = this.sys.cameraTarget;
       if (!camera) {
-        return;
+        return this;
       }
       camera.fadeIn(duration, red, green, blue);
       if (wait) {
-        return this.wait({
+        this.wait({
           camera: 'fadeIn'
         }, eventSheetManager);
       }
+      return this;
     },
     'camera.fadeOut': function cameraFadeOut() {
       var _ref3 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
@@ -24196,14 +24330,15 @@
       var eventSheetManager = arguments.length > 1 ? arguments[1] : undefined;
       var camera = this.sys.cameraTarget;
       if (!camera) {
-        return;
+        return this;
       }
       camera.fadeOut(duration, red, green, blue);
       if (wait) {
-        return this.wait({
+        this.wait({
           camera: 'fadeOut'
         }, eventSheetManager);
       }
+      return this;
     },
     'camera.flash': function cameraFlash() {
       var _ref4 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
@@ -24217,14 +24352,15 @@
       var eventSheetManager = arguments.length > 1 ? arguments[1] : undefined;
       var camera = this.sys.cameraTarget;
       if (!camera) {
-        return;
+        return this;
       }
       camera.flash(duration, red, green, blue);
       if (wait) {
-        return this.wait({
+        this.wait({
           camera: 'flash'
         }, eventSheetManager);
       }
+      return this;
     },
     'camera.shake': function cameraShake() {
       var _ref5 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
@@ -24236,14 +24372,15 @@
       var eventSheetManager = arguments.length > 1 ? arguments[1] : undefined;
       var camera = this.sys.cameraTarget;
       if (!camera) {
-        return;
+        return this;
       }
       camera.shake(duration, intensity);
       if (wait) {
-        return this.wait({
+        this.wait({
           camera: 'shake'
         }, eventSheetManager);
       }
+      return this;
     },
     'camera.zoomTo': function cameraZoomTo() {
       var _ref6 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
@@ -24255,14 +24392,15 @@
       var eventSheetManager = arguments.length > 1 ? arguments[1] : undefined;
       var camera = this.sys.cameraTarget;
       if (!camera) {
-        return;
+        return this;
       }
       camera.zoomTo(zoom, duration);
       if (wait) {
-        return this.wait({
+        this.wait({
           camera: 'zoom'
         }, eventSheetManager);
       }
+      return this;
     },
     'camera.rotateTo': function cameraRotateTo() {
       var _ref7 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
@@ -24275,14 +24413,15 @@
       var eventSheetManager = arguments.length > 1 ? arguments[1] : undefined;
       var camera = this.sys.cameraTarget;
       if (!camera) {
-        return;
+        return this;
       }
       camera.rotateTo(rotate, false, duration, ease);
       if (wait) {
-        return this.wait({
+        this.wait({
           camera: 'rotate'
         }, eventSheetManager);
       }
+      return this;
     },
     'camera.scrollTo': function cameraScrollTo() {
       var _ref8 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
@@ -24296,7 +24435,7 @@
       var eventSheetManager = arguments.length > 1 ? arguments[1] : undefined;
       var camera = this.sys.cameraTarget;
       if (!camera) {
-        return;
+        return this;
       }
       var xSave = camera.scrollX;
       var ySave = camera.scrollY;
@@ -24308,10 +24447,11 @@
       // x,y in pan() is the centerX, centerY
       camera.pan(x, y, duration, ease);
       if (wait) {
-        return this.wait({
+        this.wait({
           camera: 'scroll'
         }, eventSheetManager);
       }
+      return this;
     }
   };
 
@@ -24333,7 +24473,7 @@
         titleColor = _ref$titleColor === void 0 ? 'green' : _ref$titleColor;
       var eventsheet = arguments.length > 2 ? arguments[2] : undefined;
       if (!CanLog(eventsheet)) {
-        return;
+        return this;
       }
       if (showTitle) {
         if (title === undefined) {
@@ -24342,6 +24482,7 @@
         text = "[round][bgcolor=".concat(titleColor, "]").concat(title, "[/bgcolor][/round] ").concat(text);
       }
       this.sys.logger.log(text, logType);
+      return this;
     },
     'log.disable': function logDisable() {
       var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
@@ -24355,6 +24496,7 @@
         eventsheet.wrapProperty('logEnable');
       }
       eventsheet.logEnable = false;
+      return this;
     },
     'log.enable': function logEnable() {
       var _ref3 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
@@ -24365,13 +24507,14 @@
         eventsheet = eventSheetManager.getTree(title, eventsheet.groupName);
       }
       if (!eventsheet.hasOwnProperty('logEnable')) {
-        return;
+        return this;
       }
       eventsheet.logEnable = true;
+      return this;
     },
     'log.memory': function logMemory(config, eventSheetManager, eventsheet) {
       if (!CanLog(eventsheet)) {
-        return;
+        return this;
       }
       this.log(config, eventSheetManager, eventsheet);
       var memory = eventSheetManager.memory;
@@ -24386,6 +24529,7 @@
         table = memory;
       }
       this.sys.logger.log(table, 'table');
+      return this;
     }
   };
 
@@ -24401,26 +24545,31 @@
     } else {
       // TODO
       console.warn("CommandExecutor: '".concat(gameObjectID, "' does not exist"));
-      return;
+      return this;
     }
+    this.bindEventSheetManager(eventSheetManager); // For _waitComplete() / waitEvent()
+
     var commandName = tokens[1];
     switch (tokens[1]) {
       case 'set':
-        return this.setGOProperty(config, eventSheetManager, eventSheet);
+        this.setGOProperty(config, eventSheetManager, eventSheet);
+        break;
       case 'to':
-        return this.easeGOProperty(config, eventSheetManager, eventSheet);
+        this.easeGOProperty(config, eventSheetManager, eventSheet);
+        break;
       case 'yoyo':
         config.yoyo = true;
-        return this.easeGOProperty(config, eventSheetManager, eventSheet);
+        this.easeGOProperty(config, eventSheetManager, eventSheet);
+        break;
       case 'destroy':
-        return this.destroyGO(config, eventSheetManager, eventSheet);
+        this.destroyGO(config, eventSheetManager, eventSheet);
+        break;
       default:
         var gameObjectManager = this.sys.getGameObjectManager(config.goType, config.id);
         if (gameObjectManager) {
           // Command registered in gameObjectManager
           var command = gameObjectManager.commands[commandName];
           if (command) {
-            this.clearWaitEventFlag();
             var gameObjects = gameObjectManager.getGO(config.id);
             if (!Array.isArray(gameObjects)) {
               gameObjects = [gameObjects];
@@ -24429,18 +24578,21 @@
             gameObjects.forEach(function (gameObject) {
               command(gameObject, config, self, eventSheetManager, eventSheet);
             });
-            return this.hasAnyWaitEvent ? this.sys : undefined;
           }
+        } else {
+          var parameters;
+          for (var key in config) {
+            parameters = config[key];
+            break;
+          }
+          config.methodName = commandName;
+          config.parameters = parameters ? StringToValues(parameters) : [];
+          this.runGOMethod(config, eventSheetManager, eventSheet);
         }
-        var parameters;
-        for (var key in config) {
-          parameters = config[key];
-          break;
-        }
-        config.methodName = commandName;
-        config.parameters = parameters ? StringToValues(parameters) : [];
-        return this.runGOMethod(config, eventSheetManager, eventSheet);
+        break;
     }
+    this.unBindEventSheetManager();
+    return this;
   };
 
   var Methods = {

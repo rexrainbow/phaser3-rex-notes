@@ -328,7 +328,8 @@
     }, {
       key: "setGO",
       value: function setGO(gameObject, name) {
-        gameObject.setName(name);
+        gameObject.goName = name;
+        gameObject.goType = this.GOManager.name;
         this.gameObject = gameObject;
         this.name = name;
         this.freeTweens();

@@ -11042,29 +11042,41 @@ actions...
 <li>First line is the command name.<ol>
 <li>Invoke <code>commandExecutor.commandName</code> method if this <code>commandName</code> method is existed.
     <div class="highlight"><pre><span></span><code><span class="nx">commandName</span><span class="p">(</span><span class="nx">config</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// return eventEmitter;</span>
+<span class="w">    </span><span class="c1">// var resumeCallback = eventSheetManager.pauseEventSheet();</span>
+<span class="w">    </span><span class="c1">// ... </span>
+<span class="w">    </span><span class="c1">// resumeCallback()</span>
 <span class="p">}</span>
 </code></pre></div><ul>
 <li><code>config</code> : Parameter and value in a dictionary.</li>
-<li><code>eventSheetManager</code> : This event mangager.</li>
-<li>Return value :<ul>
-<li><code>undefined</code>, <code>null</code> : Run next command immediately.</li>
-<li><code>eventEmitter</code> : Run next command after <code>eventEmitter</code> emitting <code>'complete'</code> event.</li>
+<li><code>eventSheetManager</code> : This event mangager.<ul>
+<li>Pause running of current event sheet
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">resumeCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">pauseEventSheet</span><span class="p">();</span><span class="w">  </span>
+<span class="c1">//  resumeCallback();  // Resume running of current event sheet      </span>
+</code></pre></div></li>
+<li>Pause running of current event sheet until another <code>eventName</code> firing from <code>eventEmitter</code>
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">pauseEventSheetUnitlEvent</span><span class="p">(</span><span class="nx">eventEmitter</span><span class="p">,</span><span class="w"> </span><span class="nx">eventName</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
 </li>
 </ul>
 </li>
 <li>Otherwise, invoke <code>commandExecutor.defaultHandler</code>.
-    <div class="highlight"><pre><span></span><code><span class="nx">defaultHandler</span><span class="p">(</span><span class="nx">commandName</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">,</span><span class="w"> </span><span class="nx">manager</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// return eventEmitter;</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">defaultHandler</span><span class="p">(</span><span class="nx">commandName</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// var resumeCallback = eventSheetManager.pauseEventSheet();</span>
+<span class="w">    </span><span class="c1">// ... </span>
+<span class="w">    </span><span class="c1">// resumeCallback()</span>
 <span class="p">}</span>
 </code></pre></div><ul>
 <li><code>commandName</code> : Command name.</li>
 <li><code>config</code> : Parameter and value in a dictionary.</li>
-<li><code>manager</code> : This event mangager.</li>
-<li>Return value :<ul>
-<li><code>undefined</code>, <code>null</code> : Run next command immediately.</li>
-<li><code>eventEmitter</code> : Run next command after <code>eventEmitter</code> emitting <code>'complete'</code> event.</li>
+<li><code>eventSheetManager</code> : This event mangager.<ul>
+<li>Pause running of current event sheet
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">resumeCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">pauseEventSheet</span><span class="p">();</span><span class="w"> </span>
+<span class="c1">//  resumeCallback();  // Resume running of current event sheet</span>
+</code></pre></div></li>
+<li>Pause running of current event sheet until another <code>eventName</code> firing from <code>eventEmitter</code>
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">pauseEventSheetUnitlEvent</span><span class="p">(</span><span class="nx">eventEmitter</span><span class="p">,</span><span class="w"> </span><span class="nx">eventName</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
 </li>
 </ul>
@@ -11808,15 +11820,21 @@ line2
 </ul>
 <h4 id="add-custom-command">Add custom command<a class="headerlink" href="#add-custom-command" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">commandExecutor</span><span class="p">.</span><span class="nx">addCommand</span><span class="p">(</span><span class="nx">commandName</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">config</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">){</span>
-<span class="w">    </span><span class="c1">// return eventEmitter;</span>
+<span class="w">    </span><span class="c1">// var resumeCallback = eventSheetManager.pauseEventSheet();</span>
+<span class="w">    </span><span class="c1">// ... </span>
+<span class="w">    </span><span class="c1">// resumeCallback()</span>
 <span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
 <ul>
 <li><code>config</code> : Parameters passed from <a href="./#custom-command">event sheet</a>.</li>
-<li><code>eventSheetManager</code> : This event mangager.</li>
-<li>Return value :<ul>
-<li><code>undefined</code>, <code>null</code> : Run next command immediately.</li>
-<li><code>eventEmitter</code> : Run next command after <code>eventEmitter</code> emitting <code>'complete'</code> event.</li>
+<li><code>eventSheetManager</code> : This event mangager.<ul>
+<li>Pause running of current event sheet
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">resumeCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">pauseEventSheet</span><span class="p">();</span>
+<span class="c1">//  resumeCallback();  // Resume running of current event sheet</span>
+</code></pre></div></li>
+<li>Pause running of current event sheet until another <code>eventName</code> firing from <code>eventEmitter</code>
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">pauseEventSheetUnitlEvent</span><span class="p">(</span><span class="nx">eventEmitter</span><span class="p">,</span><span class="w"> </span><span class="nx">eventName</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
 </li>
 </ul>

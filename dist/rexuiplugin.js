@@ -5683,8 +5683,9 @@
     this.parent.emit(eventName, key, pointer, localX, localY, event);
   };
 
+  var RE_ASCII = /^[\x00-\x7F]+$/;
   var IsASCIIString = function IsASCIIString(s) {
-    return /^[\x00-\x7F]+$/.test(s);
+    return RE_ASCII.test(s);
   };
 
   var NO_NEWLINE$1 = CONST.NO_NEWLINE;
@@ -11561,7 +11562,8 @@
     }, {
       key: "setGO",
       value: function setGO(gameObject, name) {
-        gameObject.setName(name);
+        gameObject.goName = name;
+        gameObject.goType = this.GOManager.name;
         this.gameObject = gameObject;
         this.name = name;
         this.freeTweens();
