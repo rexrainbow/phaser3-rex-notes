@@ -13,7 +13,7 @@ const PropertyTable = {
 }
 
 class EventSheet extends BehaviorTree {
-    constructor(treeManager, config) {
+    constructor(eventSheetManager, config) {
         if (config === undefined) {
             config = {};
         }
@@ -55,8 +55,8 @@ class EventSheet extends BehaviorTree {
         }
 
         // Store references
-        this.treeManager = treeManager;
-        this.blackboard = treeManager.blackboard;
+        this.eventSheetManager = eventSheetManager;
+        this.blackboard = eventSheetManager.blackboard;
         this.setTreeGroup(groupName);
 
         var root = new IfSelector({
@@ -85,7 +85,7 @@ class EventSheet extends BehaviorTree {
 
     setTreeGroup(groupName) {
         this.groupName = groupName;
-        this.eventSheetGroup = this.treeManager.getTreeGroup(groupName);
+        this.eventSheetGroup = this.eventSheetManager.getTreeGroup(groupName);
         return this;
     }
 

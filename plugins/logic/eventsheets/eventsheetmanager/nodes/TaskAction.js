@@ -33,10 +33,10 @@ class TaskAction extends Action {
         }
 
         var blackboard = tick.blackboard;
-        var treeManager = blackboard.treeManager;
+        var eventSheetManager = blackboard.eventSheetManager;
         var eventsheet = tick.tree;
         var eventSheetGroup = eventsheet.eventSheetGroup;
-        var memory = treeManager.memory;
+        var memory = eventSheetManager.memory;
 
         var taskParameters = this.taskParameters;
         var parametersCopy = {};
@@ -53,11 +53,11 @@ class TaskAction extends Action {
         var eventEmitter;
         var handler = commandExecutor[taskName];
         if (handler) {
-            eventEmitter = handler.call(commandExecutor, parametersCopy, treeManager, eventsheet);
+            eventEmitter = handler.call(commandExecutor, parametersCopy, eventSheetManager, eventsheet);
         } else {
             handler = commandExecutor.defaultHandler;
             if (handler) {
-                eventEmitter = handler.call(commandExecutor, taskName, parametersCopy, treeManager, eventsheet);
+                eventEmitter = handler.call(commandExecutor, taskName, parametersCopy, eventSheetManager, eventsheet);
             }
         }
 

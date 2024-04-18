@@ -1,9 +1,9 @@
 import { RUNNING, IDLE, SUCCESS } from '../../../behaviortree';
 import RemoveItem from '../../../../utils/array/Remove.js';
 
-var OpenEventSheet = function (treeManager, eventsheet) {
-    var blackboard = treeManager.blackboard;
-    var commandExecutor = treeManager.commandExecutor;
+var OpenEventSheet = function (eventSheetManager, eventsheet) {
+    var blackboard = eventSheetManager.blackboard;
+    var commandExecutor = eventSheetManager.commandExecutor;
     var result = eventsheet.start(blackboard, commandExecutor);
 
     if (!result) {
@@ -11,22 +11,22 @@ var OpenEventSheet = function (treeManager, eventsheet) {
     }
 
     if (eventsheet.conditionPassed) {
-        treeManager.emit('eventsheet.enter', eventsheet.title, this.name, treeManager);
+        eventSheetManager.emit('eventsheet.enter', eventsheet.title, this.name, eventSheetManager);
     } else {
-        treeManager.emit('eventsheet.catch', eventsheet.title, this.name, treeManager);
+        eventSheetManager.emit('eventsheet.catch', eventsheet.title, this.name, eventSheetManager);
     }
 }
 
-var TickEventSheet = function (treeManager, eventsheet) {
-    var blackboard = treeManager.blackboard;
-    var commandExecutor = treeManager.commandExecutor;
+var TickEventSheet = function (eventSheetManager, eventsheet) {
+    var blackboard = eventSheetManager.blackboard;
+    var commandExecutor = eventSheetManager.commandExecutor;
     var status = eventsheet.tick(blackboard, commandExecutor);
     return status;
 }
 
-var CloseEventSheet = function (treeManager, eventsheet) {
+var CloseEventSheet = function (eventSheetManager, eventsheet) {
     if (eventsheet.conditionPassed) {
-        treeManager.emit('eventsheet.exit', eventsheet.title, this.name, treeManager);
+        eventSheetManager.emit('eventsheet.exit', eventsheet.title, this.name, eventSheetManager);
     }
 }
 
@@ -59,10 +59,10 @@ export default {
 
         this.isRunning = true;
 
-        var treeManager = this.parent;
+        var eventSheetManager = this.parent;
         var trees = this.trees;
         var pendingTrees = this.pendingTrees;
-        var blackboard = treeManager.blackboard;
+        var blackboard = eventSheetManager.blackboard;
 
         // pendingTrees.length = 0;
 
@@ -77,7 +77,7 @@ export default {
             eventsheet.resetState(blackboard);
             if (eventsheet.parallel) {
                 // Open all event sheets
-                OpenEventSheet.call(this, treeManager, eventsheet);
+                OpenEventSheet.call(this, eventSheetManager, eventsheet);
             }
 
             pendingTrees.push(eventsheet);
@@ -102,10 +102,10 @@ export default {
             return this;
         }
 
-        var treeManager = this.parent;
+        var eventSheetManager = this.parent;
         var trees = this.pendingTrees;
         var closedTrees = this.closedTrees;
-        var blackboard = treeManager.blackboard;
+        var blackboard = eventSheetManager.blackboard;
 
         closedTrees.length = 0;
 
@@ -113,7 +113,7 @@ export default {
             var eventsheet = trees[i];
 
             // Do nothing if event sheet has been opened
-            OpenEventSheet.call(this, treeManager, eventsheet);
+            OpenEventSheet.call(this, eventSheetManager, eventsheet);
 
             if (!this.isRunning) {
                 // Can break here
@@ -121,11 +121,11 @@ export default {
             }
 
             // Will goto RUNNING, or SUCCESS/FAILURE/ERROR state
-            var status = TickEventSheet(treeManager, eventsheet);
+            var status = TickEventSheet(eventSheetManager, eventsheet);
 
             if (eventsheet.roundComplete) {
                 closedTrees.push(eventsheet);
-                CloseEventSheet.call(this, treeManager, eventsheet);
+                CloseEventSheet.call(this, eventSheetManager, eventsheet);
             } else if (status === RUNNING) {
                 // Stall command execution here
                 break;
@@ -146,7 +146,7 @@ export default {
 
         if (trees.length === 0) {
             this.isRunning = false;
-            treeManager.emit('complete', this.name, treeManager);
+            eventSheetManager.emit('complete', this.name, eventSheetManager);
         }
 
         return this;
@@ -155,9 +155,9 @@ export default {
     stop() {
         this.isRunning = false;
 
-        var treeManager = this.parent;
-        var blackboard = treeManager.blackboard;
-        var commandExecutor = treeManager.commandExecutor;
+        var eventSheetManager = this.parent;
+        var blackboard = eventSheetManager.blackboard;
+        var commandExecutor = eventSheetManager.commandExecutor;
 
         this.pendingTrees.forEach(function (eventsheet) {
             eventsheet.abort(blackboard, commandExecutor);
@@ -181,9 +181,9 @@ export default {
 
         this.isRunning = true;
 
-        var treeManager = this.parent;
+        var eventSheetManager = this.parent;
         var pendingTrees = this.pendingTrees;
-        var blackboard = treeManager.blackboard;
+        var blackboard = eventSheetManager.blackboard;
 
         pendingTrees.length = 0;
 
@@ -191,7 +191,7 @@ export default {
 
         eventsheet.setConditionEnable(!ignoreCondition);
 
-        OpenEventSheet.call(this, treeManager, eventsheet);
+        OpenEventSheet.call(this, eventSheetManager, eventsheet);
 
         eventsheet.setConditionEnable(true);
 

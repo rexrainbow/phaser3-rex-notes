@@ -8,7 +8,7 @@ import GetConditionExpression from './GetConditionExpression.js';
 import CreateParentNode from './CreateParentNode.js';
 
 var Marked2Tree = function (
-    treeManager,
+    eventSheetManager,
     markedString,
     {
         groupName,
@@ -31,7 +31,7 @@ var Marked2Tree = function (
     var taskSequenceConfig = { lineBreak, commentLineStart };
 
     var eventsheet = new EventSheet(
-        treeManager,
+        eventSheetManager,
         {
             title: headingTree.title,
 

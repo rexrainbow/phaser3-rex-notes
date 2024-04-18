@@ -5,10 +5,10 @@ class TaskSequence extends Sequence {
         super.open(tick);
 
         var blackboard = tick.blackboard;
-        var treeManager = blackboard.treeManager;
+        var eventSheetManager = blackboard.eventSheetManager;
         var eventsheet = tick.tree;
         var eventSheetGroup = eventsheet.eventSheetGroup;
-        treeManager.emit('label.enter', this.title, eventsheet.title, eventSheetGroup.name, treeManager);
+        eventSheetManager.emit('label.enter', this.title, eventsheet.title, eventSheetGroup.name, eventSheetManager);
 
     }
 
@@ -25,10 +25,10 @@ class TaskSequence extends Sequence {
         super.close(tick);
 
         var blackboard = tick.blackboard;
-        var treeManager = blackboard.treeManager;
+        var eventSheetManager = blackboard.eventSheetManager;
         var eventsheet = tick.tree;
         var eventSheetGroup = eventsheet.eventSheetGroup;
-        treeManager.emit('label.exit', this.title, eventsheet.title, eventSheetGroup.name, treeManager);
+        eventSheetManager.emit('label.exit', this.title, eventsheet.title, eventSheetGroup.name, eventSheetManager);
     }
 }
 

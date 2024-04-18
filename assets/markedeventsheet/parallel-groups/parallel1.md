@@ -3,10 +3,10 @@
 ## Script
 
 print
-  text=Service task start
+  text=Task1 start
 
 wait
   duration=2000
 
 print
-  text=Service task end
+  text=Task1 end

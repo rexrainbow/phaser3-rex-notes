@@ -12,21 +12,23 @@ class CommandExecutor extends EventEmitter {
         this.defaultWaitDuration = waitDuration;
     }
 
-    print({
-        text = ''
-    } = {}, eventSheetManager, eventSheet) {
+    print(
+        {
+            text = ''
+        } = {},
+        eventSheetManager, eventSheet
+    ) {
+
         console.log(text);
     }
 
-    set(config, eventSheetManager, eventSheet) {
-        for (var name in config) {
-            eventSheetManager.setData(name, config[name]);
-        }
-    }
+    wait(
+        {
+            duration = this.defaultWaitDuration
+        } = {},
+        eventSheetManager, eventSheet
+    ) {
 
-    wait({
-        duration = this.defaultWaitDuration
-    } = {}, eventSheetManager, eventSheet) {
         var self = this;
         setTimeout(function () {
             self.complete();
@@ -35,6 +37,7 @@ class CommandExecutor extends EventEmitter {
     }
 
     complete() {
+        console.log('Executor fires complete event')
         this.emit('complete');
         return this;
     }
@@ -45,17 +48,17 @@ var eventSheetManager = new MarkedEventSheets({
 });
 
 eventSheetManager
-    .addEventSheet(eventSheet0, 'main')
-    .addEventSheet(eventSheet1, 'service')
-    .on('complete', function(groupName){
+    .addEventSheet(eventSheet0, 'task0')
+    .addEventSheet(eventSheet1, 'task1')
+    .on('complete', function (groupName) {
         console.log(`Group '${groupName}' complete`)
     })
 
-console.log(eventSheetManager.dumpEventSheetGroup('main'))
-console.log(eventSheetManager.dumpEventSheetGroup('service'))
+console.log(eventSheetManager.dumpEventSheetGroup('task0'))
+console.log(eventSheetManager.dumpEventSheetGroup('task1'))
 
-eventSheetManager.startGroup('main')
+eventSheetManager.startGroup('task0')
 
 setTimeout(function () {
-    eventSheetManager.startGroup('service')
+    eventSheetManager.startGroup('task1')
 }, 1000);

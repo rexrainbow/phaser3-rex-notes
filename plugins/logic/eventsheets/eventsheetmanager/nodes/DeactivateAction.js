@@ -25,7 +25,7 @@ class DeactivateAction extends Action {
         if (!this.deactivateTreeTitle || (this.deactivateTreeTitle === '')) {
             eventsheet.setActive(false);
         } else {
-            eventsheet.treeManager.setEventSheetActiveState(this.deactivateTreeTitle, eventsheet.groupName, false);
+            eventsheet.eventSheetManager.setEventSheetActiveState(this.deactivateTreeTitle, eventsheet.groupName, false);
         }
         return this.SUCCESS;
     }

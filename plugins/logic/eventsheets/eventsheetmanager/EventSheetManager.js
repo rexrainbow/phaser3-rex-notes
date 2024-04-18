@@ -20,7 +20,7 @@ class EventSheetManager extends EventEmitter {
         this.blackboard = new Blackboard({
             currentTimeKey: '$roundCounter'
         });
-        this.blackboard.treeManager = this; // For TaskAction
+        this.blackboard.eventSheetManager = this; // For TaskAction
 
         this.treeGroups = {};
 
