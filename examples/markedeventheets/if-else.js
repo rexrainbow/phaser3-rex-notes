@@ -1,8 +1,7 @@
 import MarkedEventSheets from '../../plugins/markedeventsheets.js';
-import EventEmitter from 'eventemitter3';
 import content from 'raw-loader!/assets/markedeventsheet/if-else/if-else.md';
 
-class CommandExecutor extends EventEmitter {
+class CommandExecutor {
     print({ text = '' } = {}, eventSheetManager, eventSheet) {
         console.log(text);
     }

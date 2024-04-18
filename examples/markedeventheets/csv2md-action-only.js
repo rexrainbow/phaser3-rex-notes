@@ -1,5 +1,4 @@
 import { MarkedEventSheets, CSV2MD } from '../../plugins/markedeventsheets';
-import EventEmitter from 'eventemitter3';
 
 // https://docs.google.com/spreadsheets/d/e/2PACX-1vRIKdxVu0RnGTdlBahIDWAkMnVlkD2yFgJcE_WW0vJqr3yPHRDlSv_RpjVs8y0lGciwuCpagMeAztU7/pubhtml
 var csv = `\
@@ -24,12 +23,10 @@ text={{name}} have {{coin}} coin
 */
 
 
-class CommandExecutor extends EventEmitter {
+class CommandExecutor {
     print({ text = '' } = {}, eventSheetManager, eventSheet) {
         console.log(text);
-        this.wait({ duration: 1000 });
-        return this;
-        // Task will be running until 'complete' event fired
+        this.wait({ duration: 1000 }, eventSheetManager, eventSheet);
     }
 
     set(config, eventSheetManager, eventSheet) {
@@ -39,15 +36,8 @@ class CommandExecutor extends EventEmitter {
     }
 
     wait({ duration = 1000 } = {}, eventSheetManager, eventSheet) {
-        var self = this;
-        setTimeout(function () {
-            self.complete();
-        }, duration)
-        return this;
-    }
-
-    complete() {
-        this.emit('complete');
+        var resumeCallback = eventSheetManager.pauseEventSheet();
+        setTimeout(resumeCallback, duration);
         return this;
     }
 }

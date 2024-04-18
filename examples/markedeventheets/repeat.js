@@ -1,12 +1,10 @@
 import MarkedEventSheets from '../../plugins/markedeventsheets.js';
-import EventEmitter from 'eventemitter3';
 import content from 'raw-loader!/assets/markedeventsheet/repeat/repeat.md';
 
-class CommandExecutor extends EventEmitter {
+class CommandExecutor {
     print({ text = '' } = {}, eventSheetManager, eventSheet) {
         console.log(text);
-        this.wait({ duration: 1000 });
-        return this;
+        this.wait({ duration: 1000 }, eventSheetManager, eventSheet);
         // Task will be running until 'complete' event fired
     }
 
@@ -16,16 +14,12 @@ class CommandExecutor extends EventEmitter {
         }
     }
 
-    wait({ duration = 1000 } = {}, eventSheetManager, eventSheet) {
-        var self = this;
-        setTimeout(function () {
-            self.complete();
-        }, duration)
-        return this;
-    }
+    wait({
+        duration = this.defaultWaitDuration
+    } = {}, eventSheetManager, eventSheet) {
 
-    complete() {
-        this.emit('complete');
+        var resumeCallback = eventSheetManager.pauseEventSheet();
+        setTimeout(resumeCallback, duration);
         return this;
     }
 }

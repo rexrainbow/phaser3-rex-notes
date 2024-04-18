@@ -1,17 +1,14 @@
 import MarkedEventSheets from '../../plugins/markedeventsheets.js';
-import EventEmitter from 'eventemitter3';
 import beforeEventSheet from 'raw-loader!/assets/markedeventsheet/branch/0.before.md';
 import ifAEventSheet from 'raw-loader!/assets/markedeventsheet/branch/1.if-a.md';
 import ifBEventSheet from 'raw-loader!/assets/markedeventsheet/branch/2.if-b.md';
 import elseEventSheet from 'raw-loader!/assets/markedeventsheet/branch/3.else.md';
 import afterEventSheet from 'raw-loader!/assets/markedeventsheet/branch/4.after.md';
 
-class CommandExecutor extends EventEmitter {
+class CommandExecutor {
     constructor({
         waitDuration = 1000
     } = {}) {
-        super();
-
         this.defaultWaitDuration = waitDuration;
     }
 
@@ -30,15 +27,9 @@ class CommandExecutor extends EventEmitter {
     wait({
         duration = this.defaultWaitDuration
     } = {}, eventSheetManager, eventSheet) {
-        var self = this;
-        setTimeout(function () {
-            self.complete();
-        }, duration)
-        return this;
-    }
 
-    complete() {
-        this.emit('complete');
+        var resumeCallback = eventSheetManager.pauseEventSheet();
+        setTimeout(resumeCallback, duration);
         return this;
     }
 }
