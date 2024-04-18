@@ -34,6 +34,7 @@ class TaskAction extends Action {
 
         var blackboard = tick.blackboard;
         var eventSheetManager = blackboard.eventSheetManager;
+        var eventSheet = tick.tree;
         var memory = eventSheetManager.memory;
 
         var taskParameters = this.taskParameters;
@@ -53,11 +54,11 @@ class TaskAction extends Action {
         var eventEmitter;
         var handler = commandExecutor[taskName];
         if (handler) {
-            eventEmitter = handler.call(commandExecutor, parametersCopy, eventSheetManager, eventsheet);
+            eventEmitter = handler.call(commandExecutor, parametersCopy, eventSheetManager, eventSheet);
         } else {
             handler = commandExecutor.defaultHandler;
             if (handler) {
-                eventEmitter = handler.call(commandExecutor, taskName, parametersCopy, eventSheetManager, eventsheet);
+                eventEmitter = handler.call(commandExecutor, taskName, parametersCopy, eventSheetManager, eventSheet);
             }
         }
 
