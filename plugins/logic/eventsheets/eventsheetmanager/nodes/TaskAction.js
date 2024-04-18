@@ -2,7 +2,6 @@ import { Action, } from '../../../behaviortree/index.js';
 import IsEventEmitter from '../../../../utils/system/IsEventEmitter.js';
 import Compile from '../../../../math/expressionparser/utils/Complile.js';
 import mustache from 'mustache';
-import UUID from '../../../../utils/string/UUID.js';
 
 class TaskAction extends Action {
     constructor(config) {
@@ -21,6 +20,8 @@ class TaskAction extends Action {
             taskParameters[name] = CompileExpression(sourceParameters[name]);
         }
         this.taskParameters = taskParameters;
+
+        this.waitId = 0;
     }
 
     open(tick) {
@@ -98,15 +99,14 @@ class TaskAction extends Action {
         // Pause eventSheetGroup
         this.isRunning = true;
 
-        this.waitId = UUID();
-        var waitId = this.waitId;
-
         var self = this;
+        var waitId = this.waitId;
         var taskCompleteCallback = function () {
             // Expired
-            if (waitId !== self.waitId) {
+            if (waitId < self.waitId) {
                 return;
             }
+            self.waitId++;
 
             // Resume event sheet group
             self.isRunning = false;
