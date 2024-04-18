@@ -12,8 +12,6 @@ class TaskAction extends Action {
             properties: config,
         });
 
-        this.isRunning = false;
-
         var sourceParameters = config.parameters;
         var taskParameters = {};
         for (var name in sourceParameters) {
@@ -21,6 +19,7 @@ class TaskAction extends Action {
         }
         this.taskParameters = taskParameters;
 
+        this.isRunning = false;
         this.waitId = 0;
     }
 
