@@ -22,7 +22,6 @@ export default {
 
     pauseEventSheet() {
         var node = this.__bindNode[this.__bindNode.length - 1];
-
         if (!node) {
             return null;
         }
@@ -30,4 +29,16 @@ export default {
         var tick = this.__bindTick[this.__bindTick.length - 1];
         return node.pauseEventSheet(tick);
     },
+
+    pauseEventSheetUnitlEvent(eventEmitter, eventName) {
+        var node = this.__bindNode[this.__bindNode.length - 1];
+        if (!node) {
+            return null;
+        }
+
+        var tick = this.__bindTick[this.__bindTick.length - 1];
+        node.pauseEventSheet(tick, eventEmitter, eventName);
+
+        return this;
+    }
 }

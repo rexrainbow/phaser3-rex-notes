@@ -2,7 +2,7 @@ import { Abort, Failer } from '../../../behaviortree/index.js';
 import { ActionCommandTypes } from './BuiltInCommandTypes.js';
 import ParseType from './ParseType.js';
 import ParseProperty from './ParseProperty.js';
-import TaskAction from '../../eventsheetmanager/nodes/TaskAction.js';
+import TaskAction from '../../eventsheetmanager/nodes/taskaction/TaskAction.js';
 import WaitNextRound from '../../eventsheetmanager/nodes/WaitNextRound.js';
 import ActivateAction from '../../eventsheetmanager/nodes/ActivateAction.js';
 import DeactivateAction from '../../eventsheetmanager/nodes/DeactivateAction.js';

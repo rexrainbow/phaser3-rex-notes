@@ -1,5 +1,5 @@
 import TaskSequence from './TaskSequence.js';
-import TaskAction from './TaskAction.js';
+import TaskAction from './taskaction/TaskAction.js';
 import WaitNextRound from './WaitNextRound.js';
 import ActivateAction from './ActivateAction.js';
 import DeactivateAction from './DeactivateAction.js';

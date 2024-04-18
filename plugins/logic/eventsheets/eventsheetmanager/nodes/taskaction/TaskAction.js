@@ -1,6 +1,7 @@
-import { Action, } from '../../../behaviortree/index.js';
-import IsEventEmitter from '../../../../utils/system/IsEventEmitter.js';
-import Compile from '../../../../math/expressionparser/utils/Complile.js';
+import { Action, } from '../../../../behaviortree/index.js';
+import PauseEventSheetMethods from './PauseEventSheetMethods.js';
+import IsEventEmitter from '../../../../../utils/system/IsEventEmitter.js';
+import Compile from '../../../../../math/expressionparser/utils/Complile.js';
 import mustache from 'mustache';
 
 class TaskAction extends Action {
@@ -67,52 +68,8 @@ class TaskAction extends Action {
 
         // Event-emitter mode
         if (!this.isRunning && IsEventEmitter(eventEmitter)) {
-            var resumeCallback = this.pauseEventSheet(tick);
-
-            var self = this;
-            var wrapResumeCallback = function () {
-                self.removeTaskCompleteCallback = undefined;
-                resumeCallback();
-            }
-
-            // Remove task-complete callback when aborting this node            
-            this.removeTaskCompleteCallback = function () {
-                eventEmitter.off('complete', wrapResumeCallback);
-                self.removeTaskCompleteCallback = undefined;
-            }
-
-            eventEmitter.once('complete', wrapResumeCallback);
+            this.pauseEventSheetUnitlEvent(tick, eventEmitter);
         }
-    }
-
-    pauseEventSheet(tick) {
-        // Pause eventSheetGroup, wait until eventEmitter fires resumeEventName        
-
-        // Already paused, return invalid callback
-        if (this.isRunning) {
-            return null;
-        }
-
-        var eventSheetGroup = tick.tree.eventSheetGroup;
-
-        // Pause eventSheetGroup
-        this.isRunning = true;
-
-        var self = this;
-        var waitId = this.waitId;
-        var taskCompleteCallback = function () {
-            // Expired
-            if (waitId < self.waitId) {
-                return;
-            }
-            self.waitId++;
-
-            // Resume event sheet group
-            self.isRunning = false;
-            eventSheetGroup.continue();
-        }
-
-        return taskCompleteCallback;
     }
 
     tick(tick) {
@@ -144,5 +101,10 @@ var CompileExpression = function (s) {
     }
     return s;
 }
+
+Object.assign(
+    TaskAction.prototype,
+    PauseEventSheetMethods,
+)
 
 export default TaskAction

@@ -570,26 +570,42 @@ commandName
     1. Invoke `commandExecutor.commandName` method if this `commandName` method is existed.
         ```javascript
         commandName(config, eventSheetManager) {
-            // return eventEmitter;
+            // var resumeCallback = eventSheetManager.pauseEventSheet();
+            // ... 
+            // resumeCallback()
         }
         ``` 
         - `config` : Parameter and value in a dictionary.
         - `eventSheetManager` : This event mangager.
-        - Return value :
-            - `undefined`, `null` : Run next command immediately.
-            - `eventEmitter` : Run next command after `eventEmitter` emitting `'complete'` event.
+            - Pause running of current event sheet
+                ```javascript
+                var resumeCallback = eventSheetManager.pauseEventSheet();  
+                //  resumeCallback();  // Resume running of current event sheet      
+                ```
+            - Pause running of current event sheet until another `eventName` firing from `eventEmitter`
+                ```javascript
+                eventSheetManager.pauseEventSheetUnitlEvent(eventEmitter, eventName);
+                ```
     1. Otherwise, invoke `commandExecutor.defaultHandler`.
         ```javascript
-        defaultHandler(commandName, config, manager) {
-            // return eventEmitter;
+        defaultHandler(commandName, config, eventSheetManager) {
+            // var resumeCallback = eventSheetManager.pauseEventSheet();
+            // ... 
+            // resumeCallback()
         }
         ```
         - `commandName` : Command name.
         - `config` : Parameter and value in a dictionary.
-        - `manager` : This event mangager.
-        - Return value :
-            - `undefined`, `null` : Run next command immediately.
-            - `eventEmitter` : Run next command after `eventEmitter` emitting `'complete'` event.
+        - `eventSheetManager` : This event mangager.
+            - Pause running of current event sheet
+                ```javascript
+                var resumeCallback = eventSheetManager.pauseEventSheet(); 
+                //  resumeCallback();  // Resume running of current event sheet
+                ```
+            - Pause running of current event sheet until another `eventName` firing from `eventEmitter`
+                ```javascript
+                eventSheetManager.pauseEventSheetUnitlEvent(eventEmitter, eventName);
+                ```
 - Remainder lines are parameter composed of parameter name and value, with `=`
     - Space characters at line start will be discarded.
     - Value will be parsed to number, boolean, or string.
@@ -1435,12 +1451,20 @@ camera.scrollTo
 
 ```javascript
 commandExecutor.addCommand(commandName, function(config, eventSheetManager){
-    // return eventEmitter;
+    // var resumeCallback = eventSheetManager.pauseEventSheet();
+    // ... 
+    // resumeCallback()
 }, scope);
 ```
 
 - `config` : Parameters passed from [event sheet](markedeventsheet.md#custom-command).
 - `eventSheetManager` : This event mangager.
-- Return value :
-    - `undefined`, `null` : Run next command immediately.
-    - `eventEmitter` : Run next command after `eventEmitter` emitting `'complete'` event.
+    - Pause running of current event sheet
+        ```javascript
+        var resumeCallback = eventSheetManager.pauseEventSheet();
+        //  resumeCallback();  // Resume running of current event sheet
+        ```
+    - Pause running of current event sheet until another `eventName` firing from `eventEmitter`
+        ```javascript
+        eventSheetManager.pauseEventSheetUnitlEvent(eventEmitter, eventName);
+        ```
