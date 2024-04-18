@@ -2,6 +2,7 @@ import { Action, } from '../../../behaviortree/index.js';
 import IsEventEmitter from '../../../../utils/system/IsEventEmitter.js';
 import Compile from '../../../../math/expressionparser/utils/Complile.js';
 import mustache from 'mustache';
+import UUID from '../../../../utils/string/UUID.js';
 
 class TaskAction extends Action {
     constructor(config) {
@@ -47,8 +48,8 @@ class TaskAction extends Action {
             parametersCopy[name] = value;
         }
 
-        eventSheetManager.clearResumeEventName();
-        // Invoke eventSheetManager.pause() to generate new resumeEventName
+        eventSheetManager.bindTaskActionNode(tick, this);
+        // Invoke eventSheetManager.pauseEventSheet() to generate new resumeEventName
 
         var commandExecutor = tick.target;
         var eventEmitter;
@@ -62,38 +63,57 @@ class TaskAction extends Action {
             }
         }
 
-        if (IsEventEmitter(eventEmitter)) {
-            var resumeEventName = eventSheetManager.getResumeEventName();
-            if (resumeEventName === undefined) {
-                resumeEventName = 'complete'
+        eventSheetManager.unBindTaskAction(tick, this);
+
+        // Event-emitter mode
+        if (!this.isRunning && IsEventEmitter(eventEmitter)) {
+            var resumeCallback = this.pauseEventSheet(tick);
+
+            var self = this;
+            var wrapResumeCallback = function () {
+                self.removeTaskCompleteCallback = undefined;
+                resumeCallback();
             }
-            this.pauseEventSheet(tick, eventEmitter, resumeEventName);
+
+            // Remove task-complete callback when aborting this node            
+            this.removeTaskCompleteCallback = function () {
+                eventEmitter.off('complete', wrapResumeCallback);
+                self.removeTaskCompleteCallback = undefined;
+            }
+
+            eventEmitter.once('complete', wrapResumeCallback);
         }
     }
 
-    pauseEventSheet(tick, eventEmitter, resumeEventName) {
+    pauseEventSheet(tick) {
         // Pause eventSheetGroup, wait until eventEmitter fires resumeEventName        
+
+        // Already paused, return invalid callback
+        if (this.isRunning) {
+            return null;
+        }
+
         var eventSheetGroup = tick.tree.eventSheetGroup;
 
         // Pause eventSheetGroup
         this.isRunning = true;
 
+        this.waitId = UUID();
+        var waitId = this.waitId;
+
         var self = this;
         var taskCompleteCallback = function () {
+            // Expired
+            if (waitId !== self.waitId) {
+                return;
+            }
+
             // Resume event sheet group
             self.isRunning = false;
-            self.removeTaskCompleteCallback = undefined;
             eventSheetGroup.continue();
         }
-        // Remove task-complete callback when aborting this node
-        this.removeTaskCompleteCallback = function () {
-            eventEmitter.off(resumeEventName, taskCompleteCallback);
-            self.removeTaskCompleteCallback = undefined;
-        }
 
-        eventEmitter.once(resumeEventName, taskCompleteCallback);
-
-        return resumeEventName;
+        return taskCompleteCallback;
     }
 
     tick(tick) {

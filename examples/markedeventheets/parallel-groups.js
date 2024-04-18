@@ -1,14 +1,11 @@
 import MarkedEventSheets from '../../plugins/markedeventsheets.js';
-import EventEmitter from 'eventemitter3';
 import eventSheet0 from 'raw-loader!/assets/markedeventsheet/parallel-groups/parallel0.md';
 import eventSheet1 from 'raw-loader!/assets/markedeventsheet/parallel-groups/parallel1.md';
 
-class CommandExecutor extends EventEmitter {
+class CommandExecutor {
     constructor({
         waitDuration = 1000
-    } = {}) {
-        super();
-
+    } = {}) {        
         this.defaultWaitDuration = waitDuration;
     }
 
@@ -29,21 +26,8 @@ class CommandExecutor extends EventEmitter {
         eventSheetManager, eventSheet
     ) {
 
-        var resumeEventName = eventSheetManager.pauseEventSheet();
-
-        var self = this;
-        setTimeout(function () {
-            self.complete(resumeEventName);
-        }, duration)
-        return this;
-    }
-
-    complete(resumeEventName) {
-        if (resumeEventName === undefined) {
-            resumeEventName = 'complete'
-        }
-        this.emit(resumeEventName);
-        return this;
+        var resumeCallback = eventSheetManager.pauseEventSheet();
+        setTimeout(resumeCallback, duration);
     }
 }
 

@@ -5,7 +5,7 @@
 print
   text=Task0 start
 
-## [Repeat 10]
+## [Repeat 7]
 
 print
   text=Task0 loop

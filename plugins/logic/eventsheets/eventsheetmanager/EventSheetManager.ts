@@ -80,5 +80,5 @@ declare class EventSheetManager extends EventEmitter {
     roundCounter: number;
 
     // Invoked by Handler of TaskAction node
-    pause(): string;
+    pauseEventSheet(): Function | null;
 }

@@ -1,24 +1,33 @@
-import UUID from '../../../../utils/string/UUID.js';
-
 export default {
     // Internal method
-    clearResumeEventName() {
-        this.__resumeEventName = undefined;
-        return this;
+    bindTaskActionNode(tick, node) {
+        if (!this.__bindTick) {
+            this.__bindTick = [];
+            this.__bindNode = [];
+        }
+
+        this.__bindTick.push(tick);
+        this.__bindNode.push(node);
     },
 
     // Internal method
-    getResumeEventName() {
-        return this.__resumeEventName;
-    },
-
-    pauseEventSheet(resumeEventName) {
-        if (resumeEventName === undefined) {
-            resumeEventName = UUID();
+    unBindTaskAction() {
+        if (!this.__bindTick) {
+            return;
         }
 
-        this.__resumeEventName = resumeEventName;
+        this.__bindTick.pop();
+        this.__bindNode.pop();
+    },
 
-        return resumeEventName;
+    pauseEventSheet() {
+        var node = this.__bindNode[this.__bindNode.length - 1];
+
+        if (!node) {
+            return null;
+        }
+
+        var tick = this.__bindTick[this.__bindTick.length - 1];
+        return node.pauseEventSheet(tick);
     },
 }
