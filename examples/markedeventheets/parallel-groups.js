@@ -29,7 +29,7 @@ class CommandExecutor extends EventEmitter {
         eventSheetManager, eventSheet
     ) {
 
-        var resumeEventName = eventSheetManager.pause();
+        var resumeEventName = eventSheetManager.pauseEventSheet();
 
         var self = this;
         setTimeout(function () {
@@ -41,7 +41,7 @@ class CommandExecutor extends EventEmitter {
     complete(resumeEventName) {
         if (resumeEventName === undefined) {
             resumeEventName = 'complete'
-        }        
+        }
         this.emit(resumeEventName);
         return this;
     }

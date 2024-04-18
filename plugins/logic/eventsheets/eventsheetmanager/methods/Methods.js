@@ -1,4 +1,4 @@
-import PauseMethods from './PauseMethods.js';
+import PauseEventSheetMethods from './PauseEventSheetMethods.js';
 import TreeMethods from './TreeMethods.js';
 import AddTreeMethods from './AddTreeMethods.js';
 import RemoveTreeMethods from './RemoveTreeMethods.js';
@@ -14,7 +14,7 @@ var Methods = {};
 
 Object.assign(
     Methods,
-    PauseMethods,
+    PauseEventSheetMethods,
     TreeMethods,
     AddTreeMethods,
     RemoveTreeMethods,

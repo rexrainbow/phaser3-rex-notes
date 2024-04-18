@@ -12,7 +12,7 @@ export default {
         return this.__resumeEventName;
     },
 
-    pause(resumeEventName) {
+    pauseEventSheet(resumeEventName) {
         if (resumeEventName === undefined) {
             resumeEventName = UUID();
         }
