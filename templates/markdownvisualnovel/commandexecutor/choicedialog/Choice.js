@@ -7,7 +7,7 @@ var Choice = function (
         resultKey = 'choiceIndex'
     } = {},
     commandExecutor,
-    eventSheetManager, eventSheet
+    eventSheetManager
 ) {
 
     var choices = [];

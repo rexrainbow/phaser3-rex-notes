@@ -17,11 +17,11 @@ class CommandExecutor extends EventEmitter {
 
     print({
         text = ''
-    } = {}, eventSheetManager, eventSheet) {
+    } = {}, eventSheetManager) {
         console.log(text);
     }
 
-    set(config, eventSheetManager, eventSheet) {
+    set(config, eventSheetManager) {
         for (var name in config) {
             eventSheetManager.setData(name, config[name]);
         }
@@ -29,7 +29,7 @@ class CommandExecutor extends EventEmitter {
 
     wait({
         duration = this.defaultWaitDuration
-    } = {}, eventSheetManager, eventSheet) {
+    } = {}, eventSheetManager) {
         var self = this;
         setTimeout(function () {
             self.complete();

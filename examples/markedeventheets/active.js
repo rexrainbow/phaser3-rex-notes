@@ -5,20 +5,20 @@ import DeactivateEventSheet from 'raw-loader!/assets/markedeventsheet/active/dea
 
 
 class CommandExecutor extends EventEmitter {
-    print({ text = '' } = {}, eventSheetManager, eventSheet) {
+    print({ text = '' } = {}, eventSheetManager) {
         console.log(text);
         this.wait({ duration: 1000 });
         return this;
         // Task will be running until 'complete' event fired
     }
 
-    set(config, eventSheetManager, eventSheet) {
+    set(config, eventSheetManager) {
         for (var name in config) {
             eventSheetManager.setData(name, config[name]);
         }
     }
 
-    wait({ duration = 1000 } = {}, eventSheetManager, eventSheet) {
+    wait({ duration = 1000 } = {}, eventSheetManager) {
         var self = this;
         setTimeout(function () {
             self.complete();

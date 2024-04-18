@@ -6,7 +6,7 @@ var Cross = function (
         duration, mode = 'crossFade',
         wait = true
     } = {},
-    commandExecutor, eventSheetManager, eventSheet
+    commandExecutor, eventSheetManager
 ) {
 
     if (gameObject.isFrameNameMode) {

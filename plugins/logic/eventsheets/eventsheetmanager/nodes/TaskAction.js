@@ -53,11 +53,11 @@ class TaskAction extends Action {
         var eventEmitter;
         var handler = commandExecutor[taskName];
         if (handler) {
-            eventEmitter = handler.call(commandExecutor, parametersCopy, eventSheetManager, eventsheet);
+            eventEmitter = handler.call(commandExecutor, parametersCopy, eventSheetManager);
         } else {
             handler = commandExecutor.defaultHandler;
             if (handler) {
-                eventEmitter = handler.call(commandExecutor, taskName, parametersCopy, eventSheetManager, eventsheet);
+                eventEmitter = handler.call(commandExecutor, taskName, parametersCopy, eventSheetManager);
             }
         }
 
@@ -69,12 +69,14 @@ class TaskAction extends Action {
     pauseEventSheet(eventSheetGroup, eventEmitter, resumeEventName) {
         // Pause eventSheetGroup, wait until eventEmitter fires resumeEventName
         this.isRunning = true;
+        console.log(`Pause eventSheetGroup '${eventSheetGroup.name}'`)
 
         var self = this;
         var taskCompleteCallback = function () {
             // Resume event sheet group
             self.isRunning = false;
             self.removeTaskCompleteCallback = undefined;
+            console.log(`Resume eventSheetGroup '${eventSheetGroup.name}'`)
             eventSheetGroup.continue();
         }
         // Remove task-complete callback when aborting this node

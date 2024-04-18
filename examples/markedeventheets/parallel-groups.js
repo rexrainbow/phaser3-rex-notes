@@ -16,7 +16,7 @@ class CommandExecutor extends EventEmitter {
         {
             text = ''
         } = {},
-        eventSheetManager, eventSheet
+        eventSheetManager
     ) {
 
         console.log(text);
@@ -26,7 +26,7 @@ class CommandExecutor extends EventEmitter {
         {
             duration = this.defaultWaitDuration
         } = {},
-        eventSheetManager, eventSheet
+        eventSheetManager
     ) {
 
         var self = this;

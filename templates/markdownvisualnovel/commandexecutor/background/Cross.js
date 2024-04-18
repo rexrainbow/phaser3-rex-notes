@@ -7,7 +7,7 @@ var Cross = function (
         wait = true
     } = {},
     commandExecutor,
-    eventSheetManager, eventSheet
+    eventSheetManager
 ) {
 
     key = key || gameObject.texture.key;

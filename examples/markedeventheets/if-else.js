@@ -3,11 +3,11 @@ import EventEmitter from 'eventemitter3';
 import content from 'raw-loader!/assets/markedeventsheet/if-else/if-else.md';
 
 class CommandExecutor extends EventEmitter {
-    print({ text = '' } = {}, eventSheetManager, eventSheet) {
+    print({ text = '' } = {}, eventSheetManager) {
         console.log(text);
     }
 
-    set(config, eventSheetManager, eventSheet) {
+    set(config, eventSheetManager) {
         for (var name in config) {
             eventSheetManager.setData(name, config[name]);
         }
