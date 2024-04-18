@@ -34,8 +34,6 @@ class TaskAction extends Action {
 
         var blackboard = tick.blackboard;
         var eventSheetManager = blackboard.eventSheetManager;
-        var eventsheet = tick.tree;
-        var eventSheetGroup = eventsheet.eventSheetGroup;
         var memory = eventSheetManager.memory;
 
         var taskParameters = this.taskParameters;
@@ -48,8 +46,10 @@ class TaskAction extends Action {
             parametersCopy[name] = value;
         }
 
-        var commandExecutor = tick.target;
+        eventSheetManager.clearResumeEventName();
+        // Invoke eventSheetManager.pause() to generate new resumeEventName
 
+        var commandExecutor = tick.target;
         var eventEmitter;
         var handler = commandExecutor[taskName];
         if (handler) {
@@ -62,21 +62,26 @@ class TaskAction extends Action {
         }
 
         if (IsEventEmitter(eventEmitter)) {
-            this.pauseEventSheet(eventSheetGroup, eventEmitter, 'complete');
+            var resumeEventName = eventSheetManager.getResumeEventName();
+            if (resumeEventName === undefined) {
+                resumeEventName = 'complete'
+            }
+            this.pauseEventSheet(tick, eventEmitter, resumeEventName);
         }
     }
 
-    pauseEventSheet(eventSheetGroup, eventEmitter, resumeEventName) {
-        // Pause eventSheetGroup, wait until eventEmitter fires resumeEventName
+    pauseEventSheet(tick, eventEmitter, resumeEventName) {
+        // Pause eventSheetGroup, wait until eventEmitter fires resumeEventName        
+        var eventSheetGroup = tick.tree.eventSheetGroup;
+
+        // Pause eventSheetGroup
         this.isRunning = true;
-        console.log(`Pause eventSheetGroup '${eventSheetGroup.name}'`)
 
         var self = this;
         var taskCompleteCallback = function () {
             // Resume event sheet group
             self.isRunning = false;
             self.removeTaskCompleteCallback = undefined;
-            console.log(`Resume eventSheetGroup '${eventSheetGroup.name}'`)
             eventSheetGroup.continue();
         }
         // Remove task-complete callback when aborting this node

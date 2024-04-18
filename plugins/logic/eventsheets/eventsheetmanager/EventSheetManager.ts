@@ -79,4 +79,6 @@ declare class EventSheetManager extends EventEmitter {
     setRoundCounter(value: number): this;
     roundCounter: number;
 
+    // Invoked by Handler of TaskAction node
+    pause(): string;
 }

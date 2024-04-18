@@ -29,16 +29,20 @@ class CommandExecutor extends EventEmitter {
         eventSheetManager
     ) {
 
+        var resumeEventName = eventSheetManager.pause();
+
         var self = this;
         setTimeout(function () {
-            self.complete();
+            self.complete(resumeEventName);
         }, duration)
         return this;
     }
 
-    complete() {
-        console.log('Executor fires complete event')
-        this.emit('complete');
+    complete(resumeEventName) {
+        if (resumeEventName === undefined) {
+            resumeEventName = 'complete'
+        }        
+        this.emit(resumeEventName);
         return this;
     }
 }
