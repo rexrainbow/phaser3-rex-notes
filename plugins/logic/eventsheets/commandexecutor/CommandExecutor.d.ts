@@ -7,18 +7,6 @@ export default CommandExecutor;
 declare namespace CommandExecutor {
     type GeneralConfigType = { [name: string]: any };
 
-    type ImmediatelyCommandCallbackType = (
-        config: GeneralConfigType,
-        eventSheetManager: EventSheetManager,
-    ) => void;
-
-    type WaitCommandCallbackType = (
-        config: GeneralConfigType,
-        eventSheetManager: EventSheetManager,
-    ) => Phaser.Events.EventEmitter;
-
-    type CommandCallbackType = ImmediatelyCommandCallbackType | WaitCommandCallbackType;
-
     type GameObjectCommandType = (
         gameObject: Phaser.GameObjects.GameObject,
         config: GeneralConfigType,
@@ -53,7 +41,7 @@ declare class CommandExecutor {
 
     addCommand(
         name: string,
-        callback: CommandExecutor.CommandCallbackType,
+        callback: this,
         scope?: Object
     ): this;
 
@@ -66,22 +54,22 @@ declare class CommandExecutor {
     setGOProperty(
         config: { [name: string]: any },
         eventSheetManager: EventSheetManager,
-    ): CommandExecutor.ImmediatelyCommandCallbackType;
+    ): this;
 
     easeGOProperty(
         config: { [name: string]: any },
         eventSheetManager: EventSheetManager,
-    ): CommandExecutor.CommandCallbackType;
+    ): this;
 
     destroyGO(
         config: { id?: string, goType?: string, wait?: boolean },
         eventSheetManager: EventSheetManager,
-    ): CommandExecutor.CommandCallbackType;
+    ): this;
 
     runGOMethod(
         config: { id?: string, goType?: string, methodName: string, parameters: any[] },
         eventSheetManager: EventSheetManager,
-    ): CommandExecutor.ImmediatelyCommandCallbackType;
+    ): this;
 
     waitEvent(
         eventEmitter: Phaser.Events.EventEmitter,
@@ -90,54 +78,54 @@ declare class CommandExecutor {
 
     setWaitEventFlag(): this;
 
-    set: CommandExecutor.ImmediatelyCommandCallbackType;
+    set: this;
 
-    wait: CommandExecutor.WaitCommandCallbackType;
-    click: CommandExecutor.WaitCommandCallbackType;
+    wait: this;
+    click: this;
 
-    'bgm.set': CommandExecutor.ImmediatelyCommandCallbackType;
-    'bgm.play': CommandExecutor.CommandCallbackType;
-    'bgm.cross': CommandExecutor.CommandCallbackType;
-    'bgm.stop': CommandExecutor.ImmediatelyCommandCallbackType;
-    'bgm.fadeOut': CommandExecutor.CommandCallbackType;
-    'bgm.fadeIn': CommandExecutor.ImmediatelyCommandCallbackType;
-    'bgm.pause': CommandExecutor.ImmediatelyCommandCallbackType;
-    'bgm.resume': CommandExecutor.ImmediatelyCommandCallbackType;
-    'bgm.mute': CommandExecutor.ImmediatelyCommandCallbackType;
-    'bgm.unmute': CommandExecutor.ImmediatelyCommandCallbackType;
+    'bgm.set': this;
+    'bgm.play': this;
+    'bgm.cross': this;
+    'bgm.stop': this;
+    'bgm.fadeOut': this;
+    'bgm.fadeIn': this;
+    'bgm.pause': this;
+    'bgm.resume': this;
+    'bgm.mute': this;
+    'bgm.unmute': this;
 
-    'bgm2.set': CommandExecutor.ImmediatelyCommandCallbackType;
-    'bgm2.play': CommandExecutor.CommandCallbackType;
-    'bgm2.cross': CommandExecutor.CommandCallbackType;
-    'bgm2.stop': CommandExecutor.ImmediatelyCommandCallbackType;
-    'bgm2.fadeOut': CommandExecutor.CommandCallbackType;
-    'bgm2.fadeIn': CommandExecutor.ImmediatelyCommandCallbackType;
-    'bgm2.pause': CommandExecutor.ImmediatelyCommandCallbackType;
-    'bgm2.resume': CommandExecutor.ImmediatelyCommandCallbackType;
-    'bgm2.mute': CommandExecutor.ImmediatelyCommandCallbackType;
-    'bgm2.unmute': CommandExecutor.ImmediatelyCommandCallbackType;
+    'bgm2.set': this;
+    'bgm2.play': this;
+    'bgm2.cross': this;
+    'bgm2.stop': this;
+    'bgm2.fadeOut': this;
+    'bgm2.fadeIn': this;
+    'bgm2.pause': this;
+    'bgm2.resume': this;
+    'bgm2.mute': this;
+    'bgm2.unmute': this;
 
-    'se.set': CommandExecutor.ImmediatelyCommandCallbackType;
-    'se.play': CommandExecutor.CommandCallbackType;
-    'se.stop': CommandExecutor.ImmediatelyCommandCallbackType;
-    'se.fadeOut': CommandExecutor.CommandCallbackType;
-    'se.mute': CommandExecutor.ImmediatelyCommandCallbackType;
-    'se.unmute': CommandExecutor.ImmediatelyCommandCallbackType;
+    'se.set': this;
+    'se.play': this;
+    'se.stop': this;
+    'se.fadeOut': this;
+    'se.mute': this;
+    'se.unmute': this;
 
-    'se2.set': CommandExecutor.ImmediatelyCommandCallbackType;
-    'se2.play': CommandExecutor.CommandCallbackType;
-    'se2.stop': CommandExecutor.ImmediatelyCommandCallbackType;
-    'se2.fadeOut': CommandExecutor.CommandCallbackType;
-    'se2.mute': CommandExecutor.ImmediatelyCommandCallbackType;
-    'se2.unmute': CommandExecutor.ImmediatelyCommandCallbackType;
+    'se2.set': this;
+    'se2.play': this;
+    'se2.stop': this;
+    'se2.fadeOut': this;
+    'se2.mute': this;
+    'se2.unmute': this;
 
-    'camera.set': CommandExecutor.ImmediatelyCommandCallbackType;
-    'camera.fadeIn': CommandExecutor.CommandCallbackType;
-    'camera.fadeOut': CommandExecutor.CommandCallbackType;
-    'camera.flash': CommandExecutor.CommandCallbackType;
-    'camera.shake': CommandExecutor.CommandCallbackType;
-    'camera.zoomTo': CommandExecutor.CommandCallbackType;
-    'camera.rotateTo': CommandExecutor.CommandCallbackType;
-    'camera.scrollTo': CommandExecutor.CommandCallbackType;
+    'camera.set': this;
+    'camera.fadeIn': this;
+    'camera.fadeOut': this;
+    'camera.flash': this;
+    'camera.shake': this;
+    'camera.zoomTo': this;
+    'camera.rotateTo': this;
+    'camera.scrollTo': this;
 
 }
