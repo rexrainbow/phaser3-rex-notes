@@ -81,4 +81,6 @@ declare class EventSheetManager extends EventEmitter {
 
     // Invoked by Handler of TaskAction node
     pauseEventSheet(): Function | null;
+    pauseEventSheetUnitlEvent(eventEmitter: EventEmitter, eventName?: string): this;
+
 }
