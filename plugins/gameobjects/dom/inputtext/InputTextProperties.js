@@ -22,6 +22,7 @@ const StyleProperties = {
     backgroundColor: ['backgroundColor', 'transparent'],
     border: ['border', 0],
     borderColor: ['borderColor', 'transparent'],
+    borderRadius: ['border-radius', undefined],
     outline: ['outline', 'none'],
     direction: ['direction', undefined]
 };

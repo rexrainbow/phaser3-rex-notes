@@ -47,6 +47,9 @@ var CreateInputText = function (text, config) {
     //         break;
     // }
 
+    config.borderRadius = GetValue(config, 'borderRadius', `${style.backgroundCornerRadius}px`);
+
+
     var inputText = new InputText(scene,
         text.x, text.y,
         GetValue(config, 'width', text.width),

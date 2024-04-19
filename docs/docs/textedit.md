@@ -203,7 +203,7 @@ var editor = scene.plugins.get('rexTextEdit').edit(textObject, {
 
 Create a text editor ([input element](textedit.md)) above text object.
 
-- Size, font size, font family, font color, background color of text editor will be equal to text object.
+- Size, font size, font family, font color, background color, background corner radius, padding-left, padding-right of text editor will be assigned from text object.
 - Text object will be invisible when text editor is opened.
 - Store reference of text editor at `textObject._editor`.
 - Text editor will be closed when 

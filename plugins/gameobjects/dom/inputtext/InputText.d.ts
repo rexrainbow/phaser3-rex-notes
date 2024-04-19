@@ -33,6 +33,7 @@ declare namespace InputText {
         border?: number,
         backgroundColor?: string,
         borderColor?: string,
+        borderRadius?: string,
         outline?: string,
 
         selectAll?: boolean,

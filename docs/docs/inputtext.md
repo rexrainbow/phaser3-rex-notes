@@ -172,6 +172,7 @@ Default configuration
     border: 0,
     backgroundColor: 'transparent',
     borderColor: 'transparent',
+    borderRadius: undefined,
     outline: 'none',
     direction: 'ltr',
 
@@ -200,7 +201,7 @@ Default configuration
     - `fontSize` : `font-size` style property.
     - `color` : `color` style property.
     - `backgroundColor` : `backgroundColor` style property.
-    - `border`, `borderColor` : `border`, `borderColor` style property.
+    - `border`, `borderColor`, `borderRadius` : `border`, `borderColor`, `border-radius` style property.
     - `outline` : `outline` style property.
     - `direction` : `direction` style property.
 - `selectAll` : Set `true` to select all text.

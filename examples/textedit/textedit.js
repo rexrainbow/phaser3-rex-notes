@@ -18,7 +18,9 @@ class Demo extends Phaser.Scene {
             fixedWidth: 200,
             fixedHeight: 80,
             backgroundColor: '#333333',
-            valign: 'center'
+            valign: 'center',
+            padding: { left: 10, right: 10 },
+            backgroundCornerRadius: 20
         }).setOrigin(0.5)
 
         this.plugins.get('rexTextEdit').add(printText, {
