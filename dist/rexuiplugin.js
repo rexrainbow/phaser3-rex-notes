@@ -39895,6 +39895,7 @@
     backgroundColor: ['backgroundColor', 'transparent'],
     border: ['border', 0],
     borderColor: ['borderColor', 'transparent'],
+    borderRadius: ['border-radius', undefined],
     outline: ['outline', 'none'],
     direction: ['direction', undefined]
   };
@@ -65595,6 +65596,7 @@
     //         break;
     // }
 
+    config.borderRadius = GetValue$3(config, 'borderRadius', "".concat(style.backgroundCornerRadius, "px"));
     var inputText = new InputText(scene, text.x, text.y, GetValue$3(config, 'width', text.width), GetValue$3(config, 'height', text.height), config);
     inputText
     // Sync scale
