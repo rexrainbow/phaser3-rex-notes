@@ -1,6 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
 import VirtualJoyStickPlugin from '../../plugins/virtualjoystick-plugin.js';
-import Button from '../../plugins/input/button/Button.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -12,8 +11,12 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
+        this.input.addPointer(1);
+
+        var print = this.add.text(0, 0, '');
+
         var joyStick = this.plugins.get('rexVirtualJoyStick').add(this, {
-            x: 200,
+            x: 300,
             y: 300,
             radius: 100,
             // base: this.add.circle(0, 0, 100, 0x888888),
@@ -23,13 +26,11 @@ class Demo extends Phaser.Scene {
             // enable: true
         })
 
-        var print = this.add.text(0, 0, '');
-        var sprite = this.add.circle(500, 300, 50).setStrokeStyle(2, 0xff0000);
-        this.input.addPointer(1);
-        var btn = new Button(sprite);
-        btn.on('click', function () {
-            print.text += 'Click Button\n';
-        })
+        var button = this.add.circle(500, 300, 50).setStrokeStyle(2, 0xff0000)
+            .setInteractive()
+            .on('pointerdown', function () {
+                print.text += 'Click Button\n';
+            })
     }
 
 }
