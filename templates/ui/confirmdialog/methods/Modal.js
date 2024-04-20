@@ -1,4 +1,5 @@
 import IsFunction from '../../../../plugins/utils/object/IsFunction.js';
+import Merge from '../../../../plugins/utils/object/Merge.js';
 import ModalMethods from '../../basesizer/ModalMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -8,10 +9,12 @@ var Modal = function (config, onClose) {
         onClose = config;
         config = undefined;
     }
-
+       
     if (config === undefined) {
         config = {};
     }
+
+    config = Merge(config, this.modalStyle)
 
     var zeroButtonMode;
     if (this.buttonMode === 0) {

@@ -165,7 +165,36 @@ var dialog = scene.rexUI.add.confirmDialog({
     click: {
         mode: 'pointerup',
         clickInterval: 100
-    }
+    },
+
+    modal: {
+        cover: {
+            color: 0x0,
+            alpha: 0.8,
+            transitIn: function(gameObject, duration) { },
+            transitOut: function(gameObject, duration) { },
+        },
+        // cover: false, 
+
+        // When to close modal dialog?
+        touchOutsideClose: false,
+        anyTouchClose: false,
+        timeOutClose: false,
+        manualClose: false,
+
+        duration: {
+            in: 200,
+            hold: 2000,
+            out: 200
+        }
+
+        transitIn: 0,
+        transitOut: 0,
+
+        destroy: true,
+
+        defaultBehavior: true,
+    },
 
     // name: '',
     // draggable: false,
@@ -245,6 +274,7 @@ var dialog = scene.rexUI.add.confirmDialog({
         - `'pointerdown'`, `'press'`, or `0` : Fire 'click' event when touch pressed.
         - `'pointerup'`, `'release'`, or `1` : Fire 'click' event when touch released after pressed.
     - `click.clickInterval` : Interval between 2 'click' events, in ms.
+- `modal` : Configuration of [modal](#modal), See [Modal behavior](modal.md#create-instance).
 - `name` : Set name of this game object.
 - `draggable` : Set `true` to drag top-most object.
 - `sizerEvents` : Set `true` to fire [sizer events](ui-basesizer.md#events). Default value is `false`..

@@ -86,7 +86,9 @@ declare namespace ConfirmDialog {
             choices?: AlignTypes,
         },
 
-        click?: IConfigClick
+        click?: IConfigClick,
+
+        modal?: Dialog.IModalConfig
     }
 
     interface IResetChoiceDisplayContentConfig extends Label.IResetDisplayContentConfig {

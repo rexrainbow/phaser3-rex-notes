@@ -96,6 +96,8 @@ class ConfirmDialog extends Dialog {
         // Assign button index for comfirm, cancel events
         this.setConfirmButtonIndex(GetValue(config, 'confirmButtonIndex', 0));
         this.setCancelButtonIndex(GetValue(config, 'cancelButtonIndex', 1));
+
+        this.modalStyle = config.modal || {};
     }
 }
 

@@ -51,6 +51,10 @@ class Demo extends Phaser.Scene {
                 text: {
                     fontSize: 20
                 },
+            },
+
+            modal: {
+                cover: { color: 0xff0000, alpha: 0.3 }
             }
         }
         this.rexUI.add.confirmDialog(style)
