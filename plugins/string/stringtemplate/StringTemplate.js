@@ -43,26 +43,17 @@ class StringTemplate {
         var delimiterLeftSave, delimiterRightSave;
         var expressionParserSave;
         if (config) {
-            if (config instanceof (ExpressionParser)) {
-                var expressionParser = config;
-                if (expressionParser) {
-                    expressionParserSave = this.expressionParser;
-                    this.setExpressionParser(expressionParser);
-                }
+            var delimiters = config.delimiters;
+            if (delimiters) {
+                delimiterLeftSave = this.delimiterLeft;
+                delimiterRightSave = this.delimiterRight;
+                this.setDelimiters(delimiters[0], delimiters[1]);
+            }
 
-            } else {
-                var delimiters = config.delimiters;
-                if (delimiters) {
-                    delimiterLeftSave = this.delimiterLeft;
-                    delimiterRightSave = this.delimiterRight;
-                    this.setDelimiters(delimiters[0], delimiters[1]);
-                }
-
-                var expressionParser = config.expressionParser;
-                if (expressionParser) {
-                    expressionParserSave = this.expressionParser;
-                    this.setExpressionParser(expressionParser);
-                }
+            var expressionParser = config.expressionParser;
+            if (expressionParser) {
+                expressionParserSave = this.expressionParser;
+                this.setExpressionParser(expressionParser);
             }
         }
 

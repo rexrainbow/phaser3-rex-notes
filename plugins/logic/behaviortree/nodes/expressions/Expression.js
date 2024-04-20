@@ -1,7 +1,8 @@
 import BaseExpression from './BaseExpression.js';
+import Compile from '../../../../math/expressionparser/utils/Complile.js';
 
 class Expression extends BaseExpression {
-    constructor(expression, parser) {
+    constructor(expression) {
         super();
 
         var callback;
@@ -10,7 +11,7 @@ class Expression extends BaseExpression {
                 return expression;
             }
         } else {
-            callback = parser.compile(expression);
+            callback = Compile(expression);
         }
 
         this.setExpressionHandler(callback);
