@@ -51,6 +51,11 @@ log.enable
 log
   text=Start...
 
+setData
+  coin=#(randomInt(1,10))
+
+log
+  text=I have {{coin}} coins
 
 Dialog.set
   alpha=0.8
