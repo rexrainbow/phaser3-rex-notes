@@ -1,11 +1,12 @@
 import BaseExpression from './BaseExpression.js';
-import Compile from '../../../../string/stringtemplate/utils/Complile.js';
+import StringTemplate from '../../../../string/stringtemplate/StringTemplate.js';
 
+var stringTemplate = new StringTemplate();
 class StringTemplateExpression extends BaseExpression {
-    constructor(expression) {
+    constructor(expression, parser) {
         super();
 
-        var callback = Compile(expression);
+        var callback = stringTemplate.compile(expression, parser);
         this.setExpressionHandler(callback);
     }
 }

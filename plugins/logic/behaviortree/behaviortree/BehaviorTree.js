@@ -5,6 +5,7 @@ import Dump from './Dump.js';
 import Load from './Load.js';
 import Tick from '../tick/Tick.js';
 import { BreadthFirstSearch } from './Traversal.js';
+import expressionParser from '../nodes/expressions/ExpressionParser.js';
 
 class BehaviorTree {
 
@@ -159,6 +160,10 @@ class BehaviorTree {
 
     static setSerialIDPrefix(prefix) {
         SetSerialNumberPrefix(prefix);
+    }
+
+    static getExpressionParser() {
+        return expressionParser;
     }
 };
 

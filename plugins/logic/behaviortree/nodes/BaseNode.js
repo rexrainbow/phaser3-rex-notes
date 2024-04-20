@@ -1,6 +1,7 @@
 import { CreateID } from '../utils/CreateID.js';
 import { Expression, BooleanExpression, StringTemplateExpression } from './expressions';
 import { TREE, SUCCESS, FAILURE, RUNNING, ABORT, ERROR } from '../constants.js';
+import expressionParser from './expressions/ExpressionParser.js';
 
 export default class BaseNode {
 
@@ -32,6 +33,7 @@ export default class BaseNode {
         this.description = description || '';
 
         this.properties = properties || {};
+
     }
 
     setTitle(title) {
@@ -74,16 +76,16 @@ export default class BaseNode {
     }
 
     addExpression(expression) {
-        return new Expression(expression);
+        return new Expression(expression, expressionParser);
     }
 
     addBooleanExpression(expression) {
-        return new BooleanExpression(expression);
+        return new BooleanExpression(expression, expressionParser);
     }
 
     addStringTemplateExpression(expression) {
         // TODO: Use mustache or handlebars ?
-        return new StringTemplateExpression(expression);
+        return new StringTemplateExpression(expression, expressionParser);
     }
 
     _execute(tick) {
@@ -190,5 +192,9 @@ export default class BaseNode {
 
     get ERROR() {
         return ERROR;
+    }
+
+    static getExpressionParser() {
+        return expressionParser;
     }
 };
