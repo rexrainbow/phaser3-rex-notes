@@ -18,6 +18,8 @@ BG
 
 Create TransitionImagePack as Background game object.
 
+- `scaleMode` : `FIT` or `ENVELOP`
+
 ## Destroy
 
 ```
