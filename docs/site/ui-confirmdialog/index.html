@@ -9895,7 +9895,36 @@
 <span class="w">    </span><span class="nx">click</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">mode</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;pointerup&#39;</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">clickInterval</span><span class="o">:</span><span class="w"> </span><span class="mf">100</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+
+<span class="w">    </span><span class="nx">modal</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">cover</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="mh">0x0</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">alpha</span><span class="o">:</span><span class="w"> </span><span class="mf">0.8</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">transitIn</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">duration</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">},</span>
+<span class="w">            </span><span class="nx">transitOut</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">duration</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="c1">// cover: false, </span>
+
+<span class="w">        </span><span class="c1">// When to close modal dialog?</span>
+<span class="w">        </span><span class="nx">touchOutsideClose</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">anyTouchClose</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">timeOutClose</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">manualClose</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+
+<span class="w">        </span><span class="nx">duration</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="ow">in</span><span class="o">:</span><span class="w"> </span><span class="mf">200</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">hold</span><span class="o">:</span><span class="w"> </span><span class="mf">2000</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">out</span><span class="o">:</span><span class="w"> </span><span class="mf">200</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="nx">transitIn</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">transitOut</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+
+<span class="w">        </span><span class="nx">destroy</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+
+<span class="w">        </span><span class="nx">defaultBehavior</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="p">},</span>
 
 <span class="w">    </span><span class="c1">// name: &#39;&#39;,</span>
 <span class="w">    </span><span class="c1">// draggable: false,</span>
@@ -10019,6 +10048,7 @@
 <li><code>click.clickInterval</code> : Interval between 2 'click' events, in ms.</li>
 </ul>
 </li>
+<li><code>modal</code> : Configuration of <a href="#modal">modal</a>, See <a href="../modal/#create-instance">Modal behavior</a>.</li>
 <li><code>name</code> : Set name of this game object.</li>
 <li><code>draggable</code> : Set <code>true</code> to drag top-most object.</li>
 <li><code>sizerEvents</code> : Set <code>true</code> to fire <a href="../ui-basesizer/#events">sizer events</a>. Default value is <code>false</code>..</li>

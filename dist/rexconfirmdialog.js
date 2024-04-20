@@ -19675,12 +19675,12 @@
     return result;
   };
 
-  var Merge$1 = Phaser.Utils.Objects.Merge;
+  var Merge$2 = Phaser.Utils.Objects.Merge;
   var RunWordWrap = function RunWordWrap(config) {
     if (config === undefined) {
       config = {};
     }
-    return RunWordWrap$1.call(this, Merge$1(config, this.wrapConfig));
+    return RunWordWrap$1.call(this, Merge$2(config, this.wrapConfig));
   };
 
   var AlignLines = function AlignLines(result, width, height) {
@@ -19913,12 +19913,12 @@
     return result;
   };
 
-  var Merge = Phaser.Utils.Objects.Merge;
+  var Merge$1 = Phaser.Utils.Objects.Merge;
   var RunVerticalWrap = function RunVerticalWrap(config) {
     if (config === undefined) {
       config = {};
     }
-    return RunVerticalWrap$1.call(this, Merge(config, this.wrapConfig));
+    return RunVerticalWrap$1.call(this, Merge$1(config, this.wrapConfig));
   };
 
   var GetValue$y = Phaser.Utils.Objects.GetValue;
@@ -31431,6 +31431,38 @@
     }
   };
 
+  /**
+   * @author       Richard Davey <rich@photonstorm.com>
+   * @copyright    2019 Photon Storm Ltd.
+   * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+   */
+
+
+  /**
+   * Creates a new Object using all values from obj1 and obj2.
+   * If a value exists in both obj1 and obj2, the value in obj1 is used.
+   * 
+   * This is only a shallow copy. Deeply nested objects are not cloned, so be sure to only use this
+   * function on shallow objects.
+   *
+   * @function Phaser.Utils.Objects.Merge
+   * @since 3.0.0
+   *
+   * @param {object} obj1 - The first object.
+   * @param {object} obj2 - The second object.
+   *
+   * @return {object} A new object containing the union of obj1's and obj2's properties.
+   */
+  var Merge = function Merge(obj1, obj2) {
+    var clone = Clone(obj1);
+    for (var key in obj2) {
+      if (!clone.hasOwnProperty(key)) {
+        clone[key] = obj2[key];
+      }
+    }
+    return clone;
+  };
+
   Phaser.Utils.Objects.GetValue;
   var Modal = function Modal(config, onClose) {
     if (IsFunction(config)) {
@@ -31440,6 +31472,7 @@
     if (config === undefined) {
       config = {};
     }
+    config = Merge(config, this.modalStyle);
     var zeroButtonMode;
     if (this.buttonMode === 0) {
       if (this.hasAnyChoice()) {
@@ -31691,6 +31724,7 @@
       // Assign button index for comfirm, cancel events
       _this.setConfirmButtonIndex(GetValue(config, 'confirmButtonIndex', 0));
       _this.setCancelButtonIndex(GetValue(config, 'cancelButtonIndex', 1));
+      _this.modalStyle = config.modal || {};
       return _this;
     }
     return _createClass(ConfirmDialog);
