@@ -28,7 +28,7 @@ print\
  text=I have {{coin}} coin
 
 set\
-  coin=#( coin + 10 )
+  coin=#( coin + randomInt(1, 10) )
 
 print\
  text=Now I have {{coin}} coin

@@ -252,6 +252,14 @@ Local memory is shared for all event sheets.
     var data = eventSheetManager.memory;
     ```
 
+### Custom expression
+
+```javascript
+eventSheetManager.setData('randomInt', function (a, b) {
+    return Math.floor(a + Math.random() * (b - a + 1));
+});
+```
+
 ### States
 
 - Dump state of event sheets of all groups

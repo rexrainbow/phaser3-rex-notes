@@ -40,6 +40,10 @@ eventSheetManager
     .setData('name', 'rex')
     .setData('coin', 1)
     .setData('hp', 4)
+    .setData('randomInt', function (a, b) {
+        console.log('-- run custom method randomInt--')
+        return Math.floor(a + Math.random() * (b - a + 1));
+    })
     .startGroup()
 
 console.log(eventSheetManager.memory)
