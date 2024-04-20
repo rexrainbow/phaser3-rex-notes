@@ -47,4 +47,8 @@ export default {
     align: {
         actions: 'right'
     },
+
+    modal: {
+        cover: { color: 0xff0000, alpha: 0.3 }
+    }
 }
