@@ -79122,7 +79122,9 @@
     //         break;
     // }
 
-    config.borderRadius = GetValue$6(config, 'borderRadius', "".concat(style.backgroundCornerRadius, "px"));
+    if (style.backgroundCornerRadius) {
+      config.borderRadius = GetValue$6(config, 'borderRadius', "".concat(style.backgroundCornerRadius, "px"));
+    }
     var inputText = new InputText(scene, text.x, text.y, GetValue$6(config, 'width', text.width), GetValue$6(config, 'height', text.height), config);
     inputText
     // Sync scale
