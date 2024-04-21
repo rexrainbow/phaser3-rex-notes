@@ -8,6 +8,7 @@ import DataMethods from './DataMethods.js';
 import StateMethods from './StateMethods';
 import ValueConvertMethods from './ValueConvertMethods';
 import RunMethods from './RunMethods.js';
+import BindEventMethods from './BindEventMethods.js';
 import RoundCounterMethods from './RoundCounterMethods.js';
 
 var Methods = {};
@@ -24,6 +25,7 @@ Object.assign(
     StateMethods,
     ValueConvertMethods,
     RunMethods,
+    BindEventMethods,
     RoundCounterMethods,
 )
 

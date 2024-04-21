@@ -7,6 +7,12 @@ declare namespace EventSheetManager {
         commandExecutor?: Object,
         parallel?: boolean,
     }
+
+    interface IStartGroupByEventConfig {
+        eventName: string,
+        groupName: string,
+        once?: boolean
+    }
 }
 
 declare class EventSheetManager extends EventEmitter {
@@ -80,9 +86,12 @@ declare class EventSheetManager extends EventEmitter {
     start(title: string, ignoreCondition: boolean): this;
 
     // startTree by title in groupName eventSheetGroup
-    start(title: string, groupName: string, ignoreCondition: boolean,): this;
+    start(title: string, groupName: string, ignoreCondition: boolean): this;
 
     stop(groupName?: string): this;
+
+    startGroupByEvent(eventName: string, groupName: string, once?: boolean): this;
+    startGroupByEvent(config: EventSheetManager.IStartGroupByEventConfig): this;
 
     updateRoundCounter(value?: number): this;
     getRoundCounter(): number;

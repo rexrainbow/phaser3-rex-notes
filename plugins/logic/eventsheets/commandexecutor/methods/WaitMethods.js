@@ -1,7 +1,7 @@
 export default {
 
     wait(config, eventSheetManager, eventsheet) {
-        var { click, key } = config;
+        var { click, key, event } = config;
 
         if (click) {
             eventSheetManager.emit('pause.click');
@@ -16,6 +16,10 @@ export default {
             this.sys.once('complete', function () {
                 eventSheetManager.emit('resume.input');
             })
+        }
+
+        if (event) {
+            this.sys.waitEventManager.waitEvent(eventSheetManager, event);
         }
 
         this.sys.waitEventManager.waitAny(config);

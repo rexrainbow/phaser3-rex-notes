@@ -89,6 +89,8 @@ var eventSheetManager = scene.plugins.get('rexMarkedEventSheets').add({
 
 ### Add event sheet
 
+Each event sheet belong a group.
+
 ```javascript
 eventSheetManager.addEventSheet(content, {
     commentLineStart: '\/\/',
@@ -146,13 +148,24 @@ eventSheetManager.addEventSheet(content, groupName, {
 
 ### Start running
 
+Starting command will be ignored if group is running.
+
+#### Start running a group of event sheets
+
 - Start running default group
     ```javascript
-    eventSheetManager.start();
+    eventSheetManager.startGroup();
     ```
 - Start running a specific group of event sheets
     ```javascript
-    eventSheetManager.start(groupName);
+    eventSheetManager.startGroup(groupName);
+    ```
+
+#### Start running a event sheet in a group
+
+- Start running default group
+    ```javascript
+    eventSheetManager.start();
     ```
 - Start running an event sheet (indexed by `title`) without condition testing, in default group.
     ```javascript
@@ -170,6 +183,23 @@ eventSheetManager.addEventSheet(content, groupName, {
     ```javascript
     eventSheetManager.start(title, groupName, false);
     ```
+
+#### Start running a group by event
+
+```javascript
+eventSheetManager.startGroup(eventName, groupName);
+// eventSheetManager.startGroup(eventName, groupName, once);
+```
+
+or
+
+```javascript
+eventSheetManager.startGroup({
+    eventName:
+    groupName:
+    once: false
+});
+```
 
 ### Round counter
 
@@ -1174,6 +1204,8 @@ wait
   GONAME.PROPNAME
   GONAME.DATAKEY
   GONAME.EVTNAME
+  event=EVENTNAME
+
 ```
 
 - `click` : Run next command after clicking.
@@ -1183,6 +1215,8 @@ wait
 - `GONAME.PROPNAME` (ex. `GONAME.x`) : Run next command after [game object](#create-custom-game-object)'s property tween complete
 - `GONAME.DATAKEY`, `GONAME.!DATAKEY` (ex. `GONAME.!hp`) : Run next command after [game object](#create-custom-game-object)'s data is `true` (or `> 0`) or `false` (or `<= 0`). Will check PROPNAME first.
 - `GONAME.EVTNAME` : Run next command after [game object](#create-custom-game-object)'s `EVTNAME` firing. Will check `PROPNAME` and `DATAKEY` first.
+- `event` : Run next command after eventSheetManager firing `EVENTNAME` event.
+
 
 Emit these events from eventSheetManager
 

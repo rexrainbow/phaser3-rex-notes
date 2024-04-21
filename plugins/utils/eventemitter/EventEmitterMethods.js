@@ -19,70 +19,70 @@ export default {
         return this._eventEmitter;
     },
 
-    on: function () {
+    on() {
         if (this._eventEmitter) {
             this._eventEmitter.on.apply(this._eventEmitter, arguments);
         }
         return this;
     },
 
-    once: function () {
+    once() {
         if (this._eventEmitter) {
             this._eventEmitter.once.apply(this._eventEmitter, arguments);
         }
         return this;
     },
 
-    off: function () {
+    off() {
         if (this._eventEmitter) {
             this._eventEmitter.off.apply(this._eventEmitter, arguments);
         }
         return this;
     },
 
-    emit: function (event) {
+    emit(event) {
         if (this._eventEmitter && event) {
             this._eventEmitter.emit.apply(this._eventEmitter, arguments);
         }
         return this;
     },
 
-    addListener: function () {
+    addListener() {
         if (this._eventEmitter) {
             this._eventEmitter.addListener.apply(this._eventEmitter, arguments);
         }
         return this;
     },
 
-    removeListener: function () {
+    removeListener() {
         if (this._eventEmitter) {
             this._eventEmitter.removeListener.apply(this._eventEmitter, arguments);
         }
         return this;
     },
 
-    removeAllListeners: function () {
+    removeAllListeners() {
         if (this._eventEmitter) {
             this._eventEmitter.removeAllListeners.apply(this._eventEmitter, arguments);
         }
         return this;
     },
 
-    listenerCount: function () {
+    listenerCount() {
         if (this._eventEmitter) {
             return this._eventEmitter.listenerCount.apply(this._eventEmitter, arguments);
         }
         return 0;
     },
 
-    listeners: function () {
+    listeners() {
         if (this._eventEmitter) {
             return this._eventEmitter.listeners.apply(this._eventEmitter, arguments);
         }
         return [];
     },
 
-    eventNames: function () {
+    eventNames() {
         if (this._eventEmitter) {
             return this._eventEmitter.eventNames.apply(this._eventEmitter, arguments);
         }
