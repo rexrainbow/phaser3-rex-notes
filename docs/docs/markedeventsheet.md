@@ -255,10 +255,24 @@ Local memory is shared for all event sheets.
 ### Custom expression
 
 ```javascript
-eventSheetManager.setData('randomInt', function (a, b) {
+eventSheetManager.addExpression(name, callback);
+```
+
+- `name` : A string value
+- `callback` : A function object retuen a number
+    ```javascript
+    function(a, b, c, ...) { return x; }
+    ```
+
+For example :
+
+```javascript
+eventSheetManager.addExpression('randomInt', function (a, b) {
     return Math.floor(a + Math.random() * (b - a + 1));
 });
 ```
+
+Expression will store at [local memory](#local-memory)
 
 ### States
 

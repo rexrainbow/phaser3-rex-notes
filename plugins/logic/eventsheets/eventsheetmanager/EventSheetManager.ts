@@ -46,6 +46,16 @@ declare class EventSheetManager extends EventEmitter {
 
     getData(key: string): any;
 
+    addExpression(
+        key: string,
+        callback: (...args: number[]) => number
+    ): this;
+    addExpressions(
+        expressions: {
+            [key: string]: (...args: number[]) => number
+        }
+    ): this;
+
     dumpState(includeTree?: boolean, groupName?: string): Object;
 
     loadState(state: Object, groupName?: string): this;

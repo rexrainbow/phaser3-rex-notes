@@ -21,4 +21,14 @@ export default {
     getData(key) {
         return this.blackboard.getData(key);
     },
+
+    addExpression(name, callback) {
+        this.setData(name, callback);
+        return this;
+    },
+
+    addExpressions(data) {
+        this.setData(data);
+        return this;
+    },
 }

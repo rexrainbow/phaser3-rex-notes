@@ -1,5 +1,5 @@
 var RegisterRandomExpression = function (eventSheetManager) {
-    eventSheetManager.setData('random', function () {
+    eventSheetManager.addExpression('random', function () {
         return Math.random();
     })
 }
