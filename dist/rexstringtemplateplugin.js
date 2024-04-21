@@ -1640,16 +1640,24 @@
         var delimiterLeftSave, delimiterRightSave;
         var expressionParserSave;
         if (config) {
-          var delimiters = config.delimiters;
-          if (delimiters) {
-            delimiterLeftSave = this.delimiterLeft;
-            delimiterRightSave = this.delimiterRight;
-            this.setDelimiters(delimiters[0], delimiters[1]);
-          }
-          var expressionParser = config.expressionParser;
-          if (expressionParser) {
-            expressionParserSave = this.expressionParser;
-            this.setExpressionParser(expressionParser);
+          if (config instanceof FormulaParser) {
+            var expressionParser = config;
+            if (expressionParser) {
+              expressionParserSave = this.expressionParser;
+              this.setExpressionParser(expressionParser);
+            }
+          } else {
+            var delimiters = config.delimiters;
+            if (delimiters) {
+              delimiterLeftSave = this.delimiterLeft;
+              delimiterRightSave = this.delimiterRight;
+              this.setDelimiters(delimiters[0], delimiters[1]);
+            }
+            var expressionParser = config.expressionParser;
+            if (expressionParser) {
+              expressionParserSave = this.expressionParser;
+              this.setExpressionParser(expressionParser);
+            }
           }
         }
 

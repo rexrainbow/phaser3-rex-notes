@@ -2790,16 +2790,24 @@
         var delimiterLeftSave, delimiterRightSave;
         var expressionParserSave;
         if (config) {
-          var delimiters = config.delimiters;
-          if (delimiters) {
-            delimiterLeftSave = this.delimiterLeft;
-            delimiterRightSave = this.delimiterRight;
-            this.setDelimiters(delimiters[0], delimiters[1]);
-          }
-          var expressionParser = config.expressionParser;
-          if (expressionParser) {
-            expressionParserSave = this.expressionParser;
-            this.setExpressionParser(expressionParser);
+          if (config instanceof FormulaParser) {
+            var expressionParser = config;
+            if (expressionParser) {
+              expressionParserSave = this.expressionParser;
+              this.setExpressionParser(expressionParser);
+            }
+          } else {
+            var delimiters = config.delimiters;
+            if (delimiters) {
+              delimiterLeftSave = this.delimiterLeft;
+              delimiterRightSave = this.delimiterRight;
+              this.setDelimiters(delimiters[0], delimiters[1]);
+            }
+            var expressionParser = config.expressionParser;
+            if (expressionParser) {
+              expressionParserSave = this.expressionParser;
+              this.setExpressionParser(expressionParser);
+            }
           }
         }
 
@@ -7108,6 +7116,14 @@
     },
     getData: function getData(key) {
       return this.blackboard.getData(key);
+    },
+    addExpression: function addExpression(name, callback) {
+      this.setData(name, callback);
+      return this;
+    },
+    addExpressions: function addExpressions(data) {
+      this.setData(data);
+      return this;
     }
   };
 
@@ -15236,6 +15252,29 @@
     }
   };
 
+  var BindEventMethods = {
+    startGroupByEvent: function startGroupByEvent(eventName, groupName, once) {
+      if (IsPlainObject$Q(eventName)) {
+        var config = eventName;
+        eventName = config.eventName;
+        groupName = config.groupName;
+        once = config.once;
+      }
+      if (once === undefined) {
+        once = false;
+      }
+      var callback = function callback() {
+        this.startGroup(groupName);
+      };
+      if (!once) {
+        this.on(eventName, callback, this);
+      } else {
+        this.once(eventName, callback, this);
+      }
+      return this;
+    }
+  };
+
   var RoundCounterMethods = {
     getRoundCounter: function getRoundCounter() {
       return this.blackboard.getCurrentTime();
@@ -15255,7 +15294,7 @@
   };
 
   var Methods$n = {};
-  Object.assign(Methods$n, PauseEventSheetMethods$1, TreeMethods, AddTreeMethods$1, RemoveTreeMethods$1, TreeActiveStateMethods, SaveLoadTreesMethods, DataMethods$3, StateMethods, ValueConvertMethods, RunMethods, RoundCounterMethods);
+  Object.assign(Methods$n, PauseEventSheetMethods$1, TreeMethods, AddTreeMethods$1, RemoveTreeMethods$1, TreeActiveStateMethods, SaveLoadTreesMethods, DataMethods$3, StateMethods, ValueConvertMethods, RunMethods, BindEventMethods, RoundCounterMethods);
 
   BehaviorTree.setStartIDValue(0);
   var EventSheetManager = /*#__PURE__*/function (_EventEmitter) {
@@ -24091,6 +24130,35 @@
   };
 
   var WaitMethods = {
+    wait: function wait(config, eventSheetManager, eventsheet) {
+      var click = config.click,
+        key = config.key,
+        event = config.event;
+      if (click) {
+        eventSheetManager.emit('pause.click');
+      }
+      if (key) {
+        eventSheetManager.emit('pause.key', config.key);
+      }
+      if (click | key) {
+        eventSheetManager.emit('pause.input');
+        this.sys.once('complete', function () {
+          eventSheetManager.emit('resume.input');
+        });
+      }
+      if (event) {
+        this.sys.waitEventManager.waitEvent(eventSheetManager, event);
+      }
+      this.sys.waitEventManager.waitAny(config);
+      eventSheetManager.pauseEventSheetUnitlEvent(this.sys);
+      return this;
+    },
+    click: function click(config, eventSheetManager, eventsheet) {
+      this.wait({
+        click: true
+      }, eventSheetManager);
+      return this;
+    },
     // Internal method
     bindEventSheetManager: function bindEventSheetManager(eventSheetManager) {
       this.__eventSheetManager = eventSheetManager;
@@ -24104,31 +24172,6 @@
     waitEvent: function waitEvent(eventEmitter, eventName) {
       this.sys.waitEventManager.waitEvent(eventEmitter, eventName);
       this._waitComplete();
-      return this;
-    },
-    wait: function wait(config, eventSheetManager, eventsheet) {
-      var click = config.click,
-        key = config.key;
-      if (click) {
-        eventSheetManager.emit('pause.click');
-      }
-      if (key) {
-        eventSheetManager.emit('pause.key', config.key);
-      }
-      if (click | key) {
-        eventSheetManager.emit('pause.input');
-        this.sys.once('complete', function () {
-          eventSheetManager.emit('resume.input');
-        });
-      }
-      this.sys.waitEventManager.waitAny(config);
-      eventSheetManager.pauseEventSheetUnitlEvent(this.sys);
-      return this;
-    },
-    click: function click(config, eventSheetManager, eventsheet) {
-      this.wait({
-        click: true
-      }, eventSheetManager);
       return this;
     }
   };
@@ -67862,39 +67905,8 @@
     }
   };
 
-  /**
-   * @author       Richard Davey <rich@photonstorm.com>
-   * @copyright    2019 Photon Storm Ltd.
-   * @license      {@link https://opensource.org/licenses/MIT|MIT License}
-   */
-
-
-  /**
-   * Creates a new Object using all values from obj1 and obj2.
-   * If a value exists in both obj1 and obj2, the value in obj1 is used.
-   * 
-   * This is only a shallow copy. Deeply nested objects are not cloned, so be sure to only use this
-   * function on shallow objects.
-   *
-   * @function Phaser.Utils.Objects.Merge
-   * @since 3.0.0
-   *
-   * @param {object} obj1 - The first object.
-   * @param {object} obj2 - The second object.
-   *
-   * @return {object} A new object containing the union of obj1's and obj2's properties.
-   */
-  var Merge$2 = function Merge(obj1, obj2) {
-    var clone = Clone$2(obj1);
-    for (var key in obj2) {
-      if (!clone.hasOwnProperty(key)) {
-        clone[key] = obj2[key];
-      }
-    }
-    return clone;
-  };
-
   Phaser.Utils.Objects.GetValue;
+  var Merge$2 = Phaser.Utils.Objects.Merge;
   var Modal = function Modal(config, onClose) {
     if (IsFunction(config)) {
       onClose = config;
@@ -79776,7 +79788,7 @@
     });
   };
 
-  var RegisterHandlers = [RegisterSpriteType, RegisterTextboxType, RegisterBackgroundType, RegisterChoiceDialogType];
+  var RegisterHandlers$1 = [RegisterSpriteType, RegisterTextboxType, RegisterBackgroundType, RegisterChoiceDialogType];
   var CreateCommandExecutor = function CreateCommandExecutor(scene, config) {
     var layerDepth = config.layerDepth,
       rootLayer = config.rootLayer,
@@ -79789,19 +79801,44 @@
       layerDepth: layerDepth,
       rootLayer: rootLayer
     });
-    for (var i = 0, cnt = RegisterHandlers.length; i < cnt; i++) {
-      RegisterHandlers[i](commandExecutor, config);
+    for (var i = 0, cnt = RegisterHandlers$1.length; i < cnt; i++) {
+      RegisterHandlers$1[i](commandExecutor, config);
     }
     return commandExecutor;
+  };
+
+  var RegisterRandomExpression = function RegisterRandomExpression(eventSheetManager) {
+    eventSheetManager.addExpression('random', function () {
+      return Math.random();
+    });
+  };
+
+  var RegisterRandomIntExpression = function RegisterRandomIntExpression(eventSheetManager) {
+    eventSheetManager.addExpression('randomInt', function (a, b) {
+      return Math.floor(a + Math.random() * (b - a + 1));
+    });
+  };
+
+  var RegisterHandlers = [RegisterRandomExpression, RegisterRandomIntExpression];
+  var RegisterExpressions = function RegisterExpressions(eventSheetManager) {
+    for (var i = 0, cnt = RegisterHandlers.length; i < cnt; i++) {
+      RegisterHandlers[i](eventSheetManager);
+    }
   };
 
   var MarkdownVisualNovel = /*#__PURE__*/function (_MarkedEventSheets) {
     _inherits(MarkdownVisualNovel, _MarkedEventSheets);
     function MarkdownVisualNovel(scene) {
+      var _this;
       var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       _classCallCheck(this, MarkdownVisualNovel);
       config.commandExecutor = CreateCommandExecutor(scene, config);
-      return _callSuper(this, MarkdownVisualNovel, [config]); // this.commandExecutor;
+      _this = _callSuper(this, MarkdownVisualNovel, [config]);
+
+      // this.commandExecutor;
+
+      RegisterExpressions(_assertThisInitialized(_this));
+      return _this;
     }
     return _createClass(MarkdownVisualNovel);
   }(MarkedEventSheets);

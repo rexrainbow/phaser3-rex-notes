@@ -2347,16 +2347,24 @@
         var delimiterLeftSave, delimiterRightSave;
         var expressionParserSave;
         if (config) {
-          var delimiters = config.delimiters;
-          if (delimiters) {
-            delimiterLeftSave = this.delimiterLeft;
-            delimiterRightSave = this.delimiterRight;
-            this.setDelimiters(delimiters[0], delimiters[1]);
-          }
-          var expressionParser = config.expressionParser;
-          if (expressionParser) {
-            expressionParserSave = this.expressionParser;
-            this.setExpressionParser(expressionParser);
+          if (config instanceof FormulaParser) {
+            var expressionParser = config;
+            if (expressionParser) {
+              expressionParserSave = this.expressionParser;
+              this.setExpressionParser(expressionParser);
+            }
+          } else {
+            var delimiters = config.delimiters;
+            if (delimiters) {
+              delimiterLeftSave = this.delimiterLeft;
+              delimiterRightSave = this.delimiterRight;
+              this.setDelimiters(delimiters[0], delimiters[1]);
+            }
+            var expressionParser = config.expressionParser;
+            if (expressionParser) {
+              expressionParserSave = this.expressionParser;
+              this.setExpressionParser(expressionParser);
+            }
           }
         }
 
@@ -6665,6 +6673,14 @@
     },
     getData: function getData(key) {
       return this.blackboard.getData(key);
+    },
+    addExpression: function addExpression(name, callback) {
+      this.setData(name, callback);
+      return this;
+    },
+    addExpressions: function addExpressions(data) {
+      this.setData(data);
+      return this;
     }
   };
 
@@ -14793,6 +14809,29 @@
     }
   };
 
+  var BindEventMethods = {
+    startGroupByEvent: function startGroupByEvent(eventName, groupName, once) {
+      if (IsPlainObject(eventName)) {
+        var config = eventName;
+        eventName = config.eventName;
+        groupName = config.groupName;
+        once = config.once;
+      }
+      if (once === undefined) {
+        once = false;
+      }
+      var callback = function callback() {
+        this.startGroup(groupName);
+      };
+      if (!once) {
+        this.on(eventName, callback, this);
+      } else {
+        this.once(eventName, callback, this);
+      }
+      return this;
+    }
+  };
+
   var RoundCounterMethods = {
     getRoundCounter: function getRoundCounter() {
       return this.blackboard.getCurrentTime();
@@ -14812,7 +14851,7 @@
   };
 
   var Methods$4 = {};
-  Object.assign(Methods$4, PauseEventSheetMethods$1, TreeMethods, AddTreeMethods, RemoveTreeMethods, TreeActiveStateMethods, SaveLoadTreesMethods, DataMethods$2, StateMethods, ValueConvertMethods, RunMethods, RoundCounterMethods);
+  Object.assign(Methods$4, PauseEventSheetMethods$1, TreeMethods, AddTreeMethods, RemoveTreeMethods, TreeActiveStateMethods, SaveLoadTreesMethods, DataMethods$2, StateMethods, ValueConvertMethods, RunMethods, BindEventMethods, RoundCounterMethods);
 
   BehaviorTree.setStartIDValue(0);
   var EventSheetManager = /*#__PURE__*/function (_EventEmitter) {
@@ -23590,6 +23629,35 @@
   };
 
   var WaitMethods = {
+    wait: function wait(config, eventSheetManager, eventsheet) {
+      var click = config.click,
+        key = config.key,
+        event = config.event;
+      if (click) {
+        eventSheetManager.emit('pause.click');
+      }
+      if (key) {
+        eventSheetManager.emit('pause.key', config.key);
+      }
+      if (click | key) {
+        eventSheetManager.emit('pause.input');
+        this.sys.once('complete', function () {
+          eventSheetManager.emit('resume.input');
+        });
+      }
+      if (event) {
+        this.sys.waitEventManager.waitEvent(eventSheetManager, event);
+      }
+      this.sys.waitEventManager.waitAny(config);
+      eventSheetManager.pauseEventSheetUnitlEvent(this.sys);
+      return this;
+    },
+    click: function click(config, eventSheetManager, eventsheet) {
+      this.wait({
+        click: true
+      }, eventSheetManager);
+      return this;
+    },
     // Internal method
     bindEventSheetManager: function bindEventSheetManager(eventSheetManager) {
       this.__eventSheetManager = eventSheetManager;
@@ -23603,31 +23671,6 @@
     waitEvent: function waitEvent(eventEmitter, eventName) {
       this.sys.waitEventManager.waitEvent(eventEmitter, eventName);
       this._waitComplete();
-      return this;
-    },
-    wait: function wait(config, eventSheetManager, eventsheet) {
-      var click = config.click,
-        key = config.key;
-      if (click) {
-        eventSheetManager.emit('pause.click');
-      }
-      if (key) {
-        eventSheetManager.emit('pause.key', config.key);
-      }
-      if (click | key) {
-        eventSheetManager.emit('pause.input');
-        this.sys.once('complete', function () {
-          eventSheetManager.emit('resume.input');
-        });
-      }
-      this.sys.waitEventManager.waitAny(config);
-      eventSheetManager.pauseEventSheetUnitlEvent(this.sys);
-      return this;
-    },
-    click: function click(config, eventSheetManager, eventsheet) {
-      this.wait({
-        click: true
-      }, eventSheetManager);
       return this;
     }
   };

@@ -5726,6 +5726,33 @@
     Start running
   </a>
   
+    <nav class="md-nav" aria-label="Start running">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#start-running-a-group-of-event-sheets" class="md-nav__link">
+    Start running a group of event sheets
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#start-running-a-event-sheet-in-a-group" class="md-nav__link">
+    Start running a event sheet in a group
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#start-running-a-group-by-event" class="md-nav__link">
+    Start running a group by event
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -5752,6 +5779,13 @@
           <li class="md-nav__item">
   <a href="#local-memory" class="md-nav__link">
     Local memory
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-expression" class="md-nav__link">
+    Custom expression
   </a>
   
 </li>
@@ -10097,6 +10131,33 @@
     Start running
   </a>
   
+    <nav class="md-nav" aria-label="Start running">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#start-running-a-group-of-event-sheets" class="md-nav__link">
+    Start running a group of event sheets
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#start-running-a-event-sheet-in-a-group" class="md-nav__link">
+    Start running a event sheet in a group
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#start-running-a-group-by-event" class="md-nav__link">
+    Start running a group by event
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -10123,6 +10184,13 @@
           <li class="md-nav__item">
   <a href="#local-memory" class="md-nav__link">
     Local memory
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-expression" class="md-nav__link">
+    Custom expression
   </a>
   
 </li>
@@ -10659,6 +10727,7 @@
 </li>
 </ul>
 <h3 id="add-event-sheet">Add event sheet<a class="headerlink" href="#add-event-sheet" title="Permanent link">&para;</a></h3>
+<p>Each event sheet belong a group.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">addEventSheet</span><span class="p">(</span><span class="nx">content</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">commentLineStart</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;\/\/&#39;</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">lineBreak</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;\\&#39;</span><span class="p">,</span>
@@ -10715,12 +10784,20 @@
 </code></pre></div></li>
 </ul>
 <h3 id="start-running">Start running<a class="headerlink" href="#start-running" title="Permanent link">&para;</a></h3>
+<p>Starting command will be ignored if group is running.</p>
+<h4 id="start-running-a-group-of-event-sheets">Start running a group of event sheets<a class="headerlink" href="#start-running-a-group-of-event-sheets" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Start running default group
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">startGroup</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Start running a specific group of event sheets
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">startGroup</span><span class="p">(</span><span class="nx">groupName</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h4 id="start-running-a-event-sheet-in-a-group">Start running a event sheet in a group<a class="headerlink" href="#start-running-a-event-sheet-in-a-group" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Start running default group
     <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
-</code></pre></div></li>
-<li>Start running a specific group of event sheets
-    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="nx">groupName</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Start running an event sheet (indexed by <code>title</code>) without condition testing, in default group.
     <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="nx">title</span><span class="p">);</span>
@@ -10735,6 +10812,17 @@
     <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="nx">title</span><span class="p">,</span><span class="w"> </span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
+<h4 id="start-running-a-group-by-event">Start running a group by event<a class="headerlink" href="#start-running-a-group-by-event" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">startGroup</span><span class="p">(</span><span class="nx">eventName</span><span class="p">,</span><span class="w"> </span><span class="nx">groupName</span><span class="p">);</span>
+<span class="c1">// eventSheetManager.startGroup(eventName, groupName, once);</span>
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">startGroup</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">eventName</span><span class="o">:</span>
+<span class="w">    </span><span class="nx">groupName</span><span class="o">:</span>
+<span class="w">    </span><span class="nx">once</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="p">});</span>
+</code></pre></div>
 <h3 id="round-counter">Round counter<a class="headerlink" href="#round-counter" title="Permanent link">&para;</a></h3>
 <p>Round counter is started from <code>0</code>.</p>
 <ul>
@@ -10800,6 +10888,21 @@ when exection of this event sheet is complete. </p>
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">memory</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
+<h3 id="custom-expression">Custom expression<a class="headerlink" href="#custom-expression" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">addExpression</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">callback</span><span class="p">);</span>
+</code></pre></div>
+<ul>
+<li><code>name</code> : A string value</li>
+<li><code>callback</code> : A function object retuen a number
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="p">,</span><span class="w"> </span><span class="p">...)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">x</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div></li>
+</ul>
+<p>For example :</p>
+<div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">addExpression</span><span class="p">(</span><span class="s1">&#39;randomInt&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="nx">b</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">));</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>Expression will store at <a href="#local-memory">local memory</a></p>
 <h3 id="states">States<a class="headerlink" href="#states" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Dump state of event sheets of all groups
@@ -11564,15 +11667,26 @@ line2
 <li>Run next command after clicking.</li>
 </ul>
 <h5 id="wait-any">Wait any<a class="headerlink" href="#wait-any" title="Permanent link">&para;</a></h5>
+<p>Run next command after...</p>
 <div class="highlight"><pre><span></span><code>wait
   click
   key=keyName
   time=
+  GONAME.destroy
+  GONAME.PROPNAME
+  GONAME.DATAKEY
+  GONAME.EVTNAME
+  event=EVENTNAME
 </code></pre></div>
 <ul>
 <li><code>click</code> : Run next command after clicking.</li>
 <li><code>key</code> : Run next command after key down</li>
 <li><code>time</code> : Run next command after time-out.</li>
+<li><code>GONAME.destroy</code> : Run next command after <a href="#create-custom-game-object">game object</a> has destroyed.</li>
+<li><code>GONAME.PROPNAME</code> (ex. <code>GONAME.x</code>) : Run next command after <a href="#create-custom-game-object">game object</a>'s property tween complete</li>
+<li><code>GONAME.DATAKEY</code>, <code>GONAME.!DATAKEY</code> (ex. <code>GONAME.!hp</code>) : Run next command after <a href="#create-custom-game-object">game object</a>'s data is <code>true</code> (or <code>&gt; 0</code>) or <code>false</code> (or <code>&lt;= 0</code>). Will check PROPNAME first.</li>
+<li><code>GONAME.EVTNAME</code> : Run next command after <a href="#create-custom-game-object">game object</a>'s <code>EVTNAME</code> firing. Will check <code>PROPNAME</code> and <code>DATAKEY</code> first.</li>
+<li><code>event</code> : Run next command after eventSheetManager firing <code>EVENTNAME</code> event.</li>
 </ul>
 <p>Emit these events from eventSheetManager</p>
 <ul>
