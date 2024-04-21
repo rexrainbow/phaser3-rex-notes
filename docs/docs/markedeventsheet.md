@@ -1162,18 +1162,27 @@ click
 
 ##### Wait any
 
+Run next command after...
+
 ```
 
 wait
   click
   key=keyName
   time=
-
+  GONAME.destroy
+  GONAME.PROPNAME
+  GONAME.DATAKEY
+  GONAME.EVTNAME
 ```
 
 - `click` : Run next command after clicking.
 - `key` : Run next command after key down
 - `time` : Run next command after time-out.
+- `GONAME.destroy` : Run next command after [game object](#create-custom-game-object) has destroyed.
+- `GONAME.PROPNAME` (ex. `GONAME.x`) : Run next command after [game object](#create-custom-game-object)'s property tween complete
+- `GONAME.DATAKEY`, `GONAME.!DATAKEY` (ex. `GONAME.!hp`) : Run next command after [game object](#create-custom-game-object)'s data is `true` (or `> 0`) or `false` (or `<= 0`). Will check PROPNAME first.
+- `GONAME.EVTNAME` : Run next command after [game object](#create-custom-game-object)'s `EVTNAME` firing. Will check `PROPNAME` and `DATAKEY` first.
 
 Emit these events from eventSheetManager
 

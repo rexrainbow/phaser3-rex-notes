@@ -1,22 +1,4 @@
 export default {
-    // Internal method
-    bindEventSheetManager(eventSheetManager) {
-        this.__eventSheetManager = eventSheetManager;
-    },
-
-    unBindEventSheetManager() {
-        this.__eventSheetManager = undefined;
-    },
-
-    _waitComplete() {
-        this.__eventSheetManager.pauseEventSheetUnitlEvent(this.sys);
-    },
-
-    waitEvent(eventEmitter, eventName) {
-        this.sys.waitEventManager.waitEvent(eventEmitter, eventName);
-        this._waitComplete();
-        return this;
-    },
 
     wait(config, eventSheetManager, eventsheet) {
         var { click, key } = config;
@@ -44,5 +26,25 @@ export default {
     click(config, eventSheetManager, eventsheet) {
         this.wait({ click: true }, eventSheetManager);
         return this;
-    }
+    },
+
+    // Internal method
+    bindEventSheetManager(eventSheetManager) {
+        this.__eventSheetManager = eventSheetManager;
+    },
+
+    unBindEventSheetManager() {
+        this.__eventSheetManager = undefined;
+    },
+
+    _waitComplete() {
+        this.__eventSheetManager.pauseEventSheetUnitlEvent(this.sys);
+    },
+
+    waitEvent(eventEmitter, eventName) {
+        this.sys.waitEventManager.waitEvent(eventEmitter, eventName);
+        this._waitComplete();
+        return this;
+    },
+
 }
