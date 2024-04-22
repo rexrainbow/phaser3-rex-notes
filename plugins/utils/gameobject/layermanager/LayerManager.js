@@ -1,5 +1,5 @@
 import GOManager from '../gomanager/GOManager.js';
-import LayerMethods from './LayerMethods.js';
+import Methods from './methods/Methods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -81,7 +81,7 @@ var CreateLayer = function (scene, depth) {
 
 Object.assign(
     LayerManager.prototype,
-    LayerMethods
+    Methods
 )
 
 

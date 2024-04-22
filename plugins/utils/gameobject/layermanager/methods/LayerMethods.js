@@ -1,4 +1,4 @@
-import SortGameObjectsByDepth from '../../system/SortGameObjectsByDepth.js';
+import SortGameObjectsByDepth from '../../../system/SortGameObjectsByDepth.js';
 
 export default {
     getLayer(name) {
