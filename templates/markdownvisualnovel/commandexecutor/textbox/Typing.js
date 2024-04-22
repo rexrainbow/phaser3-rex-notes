@@ -2,17 +2,17 @@ var Typing = function (
     gameObject,
     {
         text,
-        name,
+        displayName,
         icon, iconFrame,
-        expression,
+        name, expression,
         speed
     } = {},
     commandExecutor,
     eventSheetManager, eventSheet
 ) {
 
-    if (name) {
-        var title = gameObject.getElement('title').setText(name);
+    if (displayName) {
+        var title = gameObject.getElement('title').setText(displayName);
         gameObject.setChildAlpha(title, 1);
     } else {
         var title = gameObject.getElement('title').setText('');
@@ -20,6 +20,9 @@ var Typing = function (
     }
 
     if (expression) {
+        if (name === undefined) {
+            name = displayName;
+        }
         var frameDelimiter = gameObject.frameDelimiter;
         iconFrame = name + frameDelimiter + expression;
     }

@@ -85,10 +85,11 @@ NAME.yoyo
 ```
 
 NAME.typing
-  name=
-  // expression=
+  displayName=
   // icon=
   // iconFrame=
+  // name=
+  // expression=
   text=
   speed=
 
@@ -106,7 +107,8 @@ text-line2
 
 ~~~
 
-- `name` : Display `name` at title element.
+- `displayName` : Display `displayName` at title element.
     - `undefined` : Hide title element.
 - `icon`, `iconFrame` : Texture key and frame name of icon element.
 - `expression` : Generate `iconFrame` by `${name}-${expression}`.
+    - Use `displayName` if `name` is not given here.
