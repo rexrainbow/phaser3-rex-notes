@@ -258,12 +258,12 @@ NAME.focus
 
 ```
 
-### Focus all
+### Unfocus
 
 Set tint to 0xffffff to all sprites
 
 ```
 
-NAME.focusAll
+NAME.unfocus
 
 ```
