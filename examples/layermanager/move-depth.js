@@ -16,9 +16,13 @@ class Demo extends Phaser.Scene {
             'layer0', 'layer1'
         ]);
 
-        var gameObject = this.add.circle(400, 300, 20, 0xff0000);
-        this.layers.addToLayer('layer1', gameObject);
+        var gameObject1 = this.add.circle(400, 300, 20, 0xff0000);
+        this.layers.addToLayer('layer1', gameObject1);
 
+        var gameObject0 = this.add.circle(400, 300, 30, 0x00ff00);
+        this.layers.addToLayer('layer0', gameObject0);
+
+        this.layers.moveLayerAbove('layer0', 'layer1')
     }
 
     update() { }

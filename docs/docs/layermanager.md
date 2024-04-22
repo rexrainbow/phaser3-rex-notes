@@ -145,3 +145,14 @@ var hasLayer = layerManager.has(name);
     ```javascript
     layerManager.clearLayer(name, false);
     ```
+
+### Change depth
+
+- Move a layer (`layerName`) above another layer (`baseLayerName`)
+    ```javascript
+    layerManager.moveLayerAbove(layerName, baseLayerName)
+    ```
+- Move a layer (`layerName`) below another layer (`baseLayerName`)
+    ```javascript
+    layerManager.moveLayerBelow(layerName, baseLayerName)
+    ```
