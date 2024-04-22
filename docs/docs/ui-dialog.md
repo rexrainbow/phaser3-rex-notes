@@ -366,8 +366,11 @@ dialog.modal({
     //     out: 200
     // }
 
-    // transitIn: 0,
-    // transitOut: 0,
+    // transitIn: 0, // 0|'popUp'|1|'fadeIn'
+    // transitIn: function(gameObject, duration) { },
+
+    // transitOut: 0, // 0|'scaleDown'|1|'fadeOut'
+    // transitOut: function(gameObject, duration) { },
 
     // destroy: true,
 
