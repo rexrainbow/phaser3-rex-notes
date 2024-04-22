@@ -1,6 +1,6 @@
 import { SPRITE } from '../../const/GameObjects.js';
 
-var Focus = function (
+var FocusAll = function (
     gameObject,
     config,
     commandExecutor, eventSheetManager, eventSheet
@@ -15,4 +15,4 @@ var Focus = function (
     )
 }
 
-export default Focus;
+export default FocusAll;
