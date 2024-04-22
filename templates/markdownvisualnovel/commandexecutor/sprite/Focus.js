@@ -9,6 +9,16 @@ var Focus = function (
 ) {
 
     gameObject.bringMeToTop();
+
+    commandExecutor.setGOProperty(
+        {
+            goType: SPRITE,
+            id: gameObject.name,
+            tint: 0xffffff,
+        },
+        eventSheetManager
+    )
+
     commandExecutor.setGOProperty(
         {
             goType: SPRITE,
