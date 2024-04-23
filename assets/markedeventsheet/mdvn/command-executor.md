@@ -69,6 +69,10 @@ CharacterB.set
 CharacterC.set
   vpx=-0.3
 
+```Dialog.typing, icon=null
+
+```
+
 bgm.play
   key=theme0
 

@@ -110,5 +110,6 @@ text-line2
 - `displayName` : Display `displayName` at title element.
     - `undefined` : Hide title element.
 - `icon`, `iconFrame` : Texture key and frame name of icon element.
+  - Set `icon` to `null` : Hide icon element.
 - `expression` : Generate `iconFrame` by `${name}-${expression}`.
     - Use `displayName` if `name` is not given here.

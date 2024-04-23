@@ -31,6 +31,13 @@ var Typing = function (
         speed = eventSheetManager.getData('$typingSpeed');
     }
 
+    var iconGameObject = gameObject.getElement('icon');
+    if (icon === null) {
+        gameObject.hide(iconGameObject);
+    } else {
+        gameObject.show(iconGameObject);
+    }
+
     if (icon || iconFrame) {
         var iconGameObject = gameObject.getElement('icon');
         if (!icon) {
@@ -40,9 +47,11 @@ var Typing = function (
     }
     gameObject.layout();
 
-    // Wait until typing complete
-    commandExecutor.waitEvent(gameObject, 'complete');
-    gameObject.start(text, speed);
+    if (text) {
+        // Wait until typing complete
+        commandExecutor.waitEvent(gameObject, 'complete');
+        gameObject.start(text, speed);
+    }
 };
 
 export default Typing;
