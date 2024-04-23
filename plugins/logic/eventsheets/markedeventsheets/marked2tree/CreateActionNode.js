@@ -3,7 +3,6 @@ import { ActionCommandTypes } from './BuiltInCommandTypes.js';
 import ParseType from './ParseType.js';
 import ParseProperty from './ParseProperty.js';
 import TaskAction from '../../eventsheetmanager/nodes/taskaction/TaskAction.js';
-import WaitNextRound from '../../eventsheetmanager/nodes/WaitNextRound.js';
 import ActivateAction from '../../eventsheetmanager/nodes/ActivateAction.js';
 import DeactivateAction from '../../eventsheetmanager/nodes/DeactivateAction.js';
 
@@ -21,17 +20,6 @@ var CreateActionNode = function (paragraph, config) {
 
         case 'break':
             actionNode = new Failer({ title: '[break]' });
-            break;
-
-        case 'next round':
-            var duration = commandData.match[1].trim();
-            if (duration === '') {
-                duration = 1;
-            }
-            actionNode = new WaitNextRound({
-                title: '[next round]',
-                duration: duration
-            });
             break;
 
         case 'activate':

@@ -38,6 +38,7 @@ var eventSheetManager = new MarkedEventSheets({
 eventSheetManager
     .addEventSheet(eventSheet0, 'event.eventA')
     .startGroupByEvent('eventA', 'event.eventA')
+    // Event 'eventA' -> Start Group 'event.eventA' -> Run event sheets
     .on('complete', function (groupName) {
         console.log(`Group '${groupName}' complete`)
     })

@@ -529,43 +529,6 @@ actions...
 
 - Action line with `[exit]` : Skip remainder label (heading) and actions.
 
-
-##### Next round
-
-```
-
-[next round]
-
-```
-
-or
-
-```
-
-[next N round]
-
-```
-
-or
-
-```
-
-[next var round]
-
-```
-
-- Action line with `[next round]`, `[next N round]`, `[next var round]` : Run remainder actions at next N round.
-
-
-Invoke 
-
-```javascript
-eventSheetManager.updateRoundCounter().start()
-```
-
-to start next round.
-
-
 ##### Deactivate
 
 ```

@@ -64,19 +64,6 @@ actions...
 [exit]
 ```
 
-### Wait until Next Round
-
-```
-[next round]
-```
-
-or
-
-
-```
-[next N round]
-```
-
 ### Deactive Event Sheet
 
 ```
