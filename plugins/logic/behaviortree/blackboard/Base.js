@@ -1,4 +1,7 @@
 import DeepClone from '../../../utils/object/DeepClone.js';
+import SetValue from '../../../utils/object/SetValue.js';
+import GetValue from '../../../utils/object/GetValue.js';
+import HasValue from '../../../utils/object/HasValue.js';
 
 class Blackboard {
 
@@ -47,7 +50,7 @@ class Blackboard {
 
     set(key, value, treeID, nodeID) {
         var memory = this._getMemory(treeID, nodeID);
-        memory[key] = value;
+        SetValue(memory, key, value);
         return this;
     }
 
@@ -57,7 +60,7 @@ class Blackboard {
 
     get(key, treeID, nodeID) {
         var memory = this._getMemory(treeID, nodeID);
-        return memory[key];
+        return GetValue(memory, key);
     }
 
     getData(key, treeID, nodeID) {
@@ -76,7 +79,7 @@ class Blackboard {
         }
 
         if (memory) {
-            return memory.hasOwnProperty(key);
+            return HasValue(memory, key);
         } else {
             return false;
         }
