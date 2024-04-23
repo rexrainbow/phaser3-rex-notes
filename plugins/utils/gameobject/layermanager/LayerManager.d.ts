@@ -43,6 +43,11 @@ declare class LayerManager extends GOManager {
         destroyChildren?: boolean
     ): this;
 
+
+    bringLayerToTop(layer: string): this;
+
+    sendLayerToBack(layer: string): this;
+
     moveLayerBelow(layer: string, baseLayerName: string): this;
 
     moveLayerAbove(layer: string, baseLayerName: string): this;

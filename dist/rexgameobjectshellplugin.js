@@ -1352,7 +1352,7 @@
     }
   };
 
-  var ArrayUtils = Phaser.Utils.Array;
+  var ArrayUtils$1 = Phaser.Utils.Array;
   var Children = {
     getChildren: function getChildren(out) {
       if (!out) {
@@ -1424,7 +1424,7 @@
     },
     getByName: function getByName(name, recursive) {
       if (!recursive) {
-        return ArrayUtils.GetFirst(this.children, 'name', name); // object, or null if not found
+        return ArrayUtils$1.GetFirst(this.children, 'name', name); // object, or null if not found
       } else {
         // recursive
         // Breadth-first search
@@ -1445,23 +1445,23 @@
       }
     },
     getRandom: function getRandom(startIndex, length) {
-      return ArrayUtils.GetRandom(this.children, startIndex, length);
+      return ArrayUtils$1.GetRandom(this.children, startIndex, length);
     },
     getFirst: function getFirst(property, value, startIndex, endIndex) {
-      return ArrayUtils.GetFirstElement(this.children, property, value, startIndex, endIndex);
+      return ArrayUtils$1.GetFirstElement(this.children, property, value, startIndex, endIndex);
     },
     getAll: function getAll(property, value, startIndex, endIndex) {
-      return ArrayUtils.GetAll(this.children, property, value, startIndex, endIndex);
+      return ArrayUtils$1.GetAll(this.children, property, value, startIndex, endIndex);
     },
     count: function count(property, value, startIndex, endIndex) {
-      return ArrayUtils.CountAllMatching(this.children, property, value, startIndex, endIndex);
+      return ArrayUtils$1.CountAllMatching(this.children, property, value, startIndex, endIndex);
     },
     swap: function swap(child1, child2) {
-      ArrayUtils.Swap(this.children, child1, child2);
+      ArrayUtils$1.Swap(this.children, child1, child2);
       return this;
     },
     setAll: function setAll(property, value, startIndex, endIndex) {
-      ArrayUtils.SetAll(this.children, property, value, startIndex, endIndex);
+      ArrayUtils$1.SetAll(this.children, property, value, startIndex, endIndex);
       return this;
     }
   };
@@ -2253,11 +2253,11 @@
     return this;
   };
 
-  var methods$m = {
+  var methods$n = {
     changeOrigin: ChangeOrigin,
     drawBounds: DrawBounds$1
   };
-  Object.assign(methods$m, Parent, AddChild$3, RemoveChild$2, ChildState, Transform, Position, Rotation$1, Scale$2, Visible, Alpha, Active, ScrollFactor, CameraFilter, Mask, Depth, Children, Tween, P3Container, RenderLayer, RenderTexture$1);
+  Object.assign(methods$n, Parent, AddChild$3, RemoveChild$2, ChildState, Transform, Position, Rotation$1, Scale$2, Visible, Alpha, Active, ScrollFactor, CameraFilter, Mask, Depth, Children, Tween, P3Container, RenderLayer, RenderTexture$1);
 
   var ContainerLite = /*#__PURE__*/function (_Base) {
     _inherits(ContainerLite, _Base);
@@ -2538,7 +2538,7 @@
     }]);
     return ContainerLite;
   }(Base$2);
-  Object.assign(ContainerLite.prototype, methods$m);
+  Object.assign(ContainerLite.prototype, methods$n);
 
   var AddChildrenMap = function AddChildrenMap(key, gameObject) {
     if (typeof key === 'string') {
@@ -6374,6 +6374,175 @@
   }();
   Object.assign(GOManager.prototype, EventEmitterMethods$1, Methods$9);
 
+  var LayerMethods = {
+    getLayer: function getLayer(name) {
+      return this.getGO(name);
+    },
+    getLayers: function getLayers(out) {
+      if (out === undefined) {
+        out = [];
+      }
+      this.forEachGO(function (gameObject) {
+        out.push(gameObject);
+      });
+      SortGameObjectsByDepth(out, false);
+      return out;
+    },
+    addToLayer: function addToLayer(name, gameObject) {
+      var layer = this.getGO(name);
+      if (!layer) {
+        console.warn("[LayerManager] Can't get layer \"".concat(name, "\""));
+        return;
+      }
+      if (gameObject.isRexContainerLite) {
+        gameObject.addToLayer(layer);
+      } else {
+        layer.add(gameObject);
+      }
+      return this;
+    },
+    removeFromLayer: function removeFromLayer(name, gameObject, addToScene) {
+      var layer = this.getGO(name);
+      if (!layer) {
+        console.warn("[LayerManager] Can't get layer \"".concat(name, "\""));
+        return;
+      }
+      if (addToScene === undefined) {
+        addToScene = true;
+      }
+      if (gameObject.isRexContainerLite) {
+        gameObject.removeFromLayer(layer, addToScene);
+      } else {
+        layer.remove(gameObject);
+        if (addToScene) {
+          gameObject.addToDisplayList();
+        }
+      }
+      return this;
+    },
+    clearLayer: function clearLayer(name, destroyChildren) {
+      if (destroyChildren === undefined) {
+        destroyChildren = true;
+      }
+      var layer = this.getGO(name);
+      if (!layer) {
+        console.warn("Can't get layer \"".concat(name, "\""));
+        return;
+      }
+      if (destroyChildren) {
+        var children = layer.getAll();
+        for (var i = 0, cnt = children.length; i < cnt; i++) {
+          children.destroy();
+        }
+      } else {
+        layer.removeAll();
+      }
+      return this;
+    }
+  };
+
+  var ArrayUtils = Phaser.Utils.Array;
+  var DisplayListMethods = {
+    bringMeToTop: function bringMeToTop() {
+      var list;
+      if (this.parentContainer) {
+        list = this.parentContainer.list;
+      } else if (this.displayList) {
+        list = this.displayList.list;
+      }
+      if (!list) {
+        return this;
+      }
+      ArrayUtils.BringToTop(list, this);
+      return this;
+    },
+    sendMeToBack: function sendMeToBack() {
+      var list;
+      if (this.parentContainer) {
+        list = this.parentContainer.list;
+      } else if (this.displayList) {
+        list = this.displayList.list;
+      }
+      if (!list) {
+        return this;
+      }
+      ArrayUtils.SendToBack(list, this);
+      return this;
+    },
+    moveMyDepthBelow: function moveMyDepthBelow(gameObject) {
+      var list;
+      if (this.parentContainer) {
+        list = this.parentContainer.list;
+      } else if (this.displayList) {
+        list = this.displayList.list;
+      }
+      if (!list) {
+        return this;
+      }
+      ArrayUtils.MoveBelow(list, this, gameObject);
+      return this;
+    },
+    moveMyDepthAbove: function moveMyDepthAbove(gameObject) {
+      var list;
+      if (this.parentContainer) {
+        list = this.parentContainer.list;
+      } else if (this.displayList) {
+        list = this.displayList.list;
+      }
+      if (!list) {
+        return this;
+      }
+      ArrayUtils.MoveAbove(list, this, gameObject);
+      return this;
+    }
+  };
+
+  var DepthMethods = {
+    bringLayerToTop: function bringLayerToTop(layerName) {
+      var layer = this.getLayer(layerName);
+      if (!layer) {
+        return this;
+      }
+      DisplayListMethods.bringMeToTop.call(layer);
+      return this;
+    },
+    sendLayerToBack: function sendLayerToBack(layerName) {
+      var layer = this.getLayer(layerName);
+      if (!layer) {
+        return this;
+      }
+      DisplayListMethods.sendMeToBack.call(layer);
+      return this;
+    },
+    moveLayerBelow: function moveLayerBelow(layerName, baseLayerName) {
+      if (layerName === baseLayerName) {
+        return this;
+      }
+      var layer = this.getLayer(layerName);
+      var baseLayer = this.getLayer(baseLayerName);
+      if (!layer || !baseLayer) {
+        return this;
+      }
+      DisplayListMethods.moveMyDepthBelow.call(layer, baseLayer);
+      return this;
+    },
+    moveLayerAbove: function moveLayerAbove(layerName, baseLayerName) {
+      if (layerName === baseLayerName) {
+        return this;
+      }
+      var layer = this.getLayer(layerName);
+      var baseLayer = this.getLayer(baseLayerName);
+      if (!layer || !baseLayer) {
+        return this;
+      }
+      DisplayListMethods.moveMyDepthAbove.call(layer, baseLayer);
+      return this;
+    }
+  };
+
+  var methods$m = {};
+  Object.assign(methods$m, LayerMethods, DepthMethods);
+
   var GetValue$24 = Phaser.Utils.Objects.GetValue;
   var LayerManager = /*#__PURE__*/function (_GOManager) {
     _inherits(LayerManager, _GOManager);
@@ -6438,82 +6607,6 @@
         }
         return this;
       }
-
-      // New methods
-    }, {
-      key: "getLayer",
-      value: function getLayer(name) {
-        return this.getGO(name);
-      }
-    }, {
-      key: "getLayers",
-      value: function getLayers(out) {
-        if (out === undefined) {
-          out = [];
-        }
-        this.forEachGO(function (gameObject) {
-          out.push(gameObject);
-        });
-        SortGameObjectsByDepth(out, false);
-        return out;
-      }
-    }, {
-      key: "addToLayer",
-      value: function addToLayer(name, gameObject) {
-        var layer = this.getGO(name);
-        if (!layer) {
-          console.warn("[LayerManager] Can't get layer \"".concat(name, "\""));
-          return;
-        }
-        if (gameObject.isRexContainerLite) {
-          gameObject.addToLayer(layer);
-        } else {
-          layer.add(gameObject);
-        }
-        return this;
-      }
-    }, {
-      key: "removeFromLayer",
-      value: function removeFromLayer(name, gameObject, addToScene) {
-        var layer = this.getGO(name);
-        if (!layer) {
-          console.warn("[LayerManager] Can't get layer \"".concat(name, "\""));
-          return;
-        }
-        if (addToScene === undefined) {
-          addToScene = true;
-        }
-        if (gameObject.isRexContainerLite) {
-          gameObject.removeFromLayer(layer, addToScene);
-        } else {
-          layer.remove(gameObject);
-          if (addToScene) {
-            gameObject.addToDisplayList();
-          }
-        }
-        return this;
-      }
-    }, {
-      key: "clearLayer",
-      value: function clearLayer(name, destroyChildren) {
-        if (destroyChildren === undefined) {
-          destroyChildren = true;
-        }
-        var layer = this.getGO(name);
-        if (!layer) {
-          console.warn("Can't get layer \"".concat(name, "\""));
-          return;
-        }
-        if (destroyChildren) {
-          var children = layer.getAll();
-          for (var i = 0, cnt = children.length; i < cnt; i++) {
-            children.destroy();
-          }
-        } else {
-          layer.removeAll();
-        }
-        return this;
-      }
     }]);
     return LayerManager;
   }(GOManager);
@@ -6524,6 +6617,7 @@
     }
     return layer;
   };
+  Object.assign(LayerManager.prototype, methods$m);
 
   ObjectFactory.register('layerManager', function (config) {
     var layermanager = new LayerManager(this.scene, config);

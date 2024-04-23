@@ -2736,6 +2736,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#change-depth" class="md-nav__link">
+    Change depth
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9673,6 +9680,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#change-depth" class="md-nav__link">
+    Change depth
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9814,6 +9828,21 @@
 </code></pre></div></li>
 <li>Move all children from layer to scene's display list
     <div class="highlight"><pre><span></span><code><span class="nx">layerManager</span><span class="p">.</span><span class="nx">clearLayer</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h3 id="change-depth">Change depth<a class="headerlink" href="#change-depth" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Bring a layer (<code>layerName</code>) to top of displayList
+    <div class="highlight"><pre><span></span><code><span class="nx">layerManager</span><span class="p">.</span><span class="nx">bringLayerToTop</span><span class="p">(</span><span class="nx">layerName</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Send a layer (<code>layerName</code>) to bottom of displayList
+    <div class="highlight"><pre><span></span><code><span class="nx">layerManager</span><span class="p">.</span><span class="nx">sendLayerToBack</span><span class="p">(</span><span class="nx">layerName</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Move a layer (<code>layerName</code>) above another layer (<code>baseLayerName</code>)
+    <div class="highlight"><pre><span></span><code><span class="nx">layerManager</span><span class="p">.</span><span class="nx">moveLayerAbove</span><span class="p">(</span><span class="nx">layerName</span><span class="p">,</span><span class="w"> </span><span class="nx">baseLayerName</span><span class="p">)</span>
+</code></pre></div></li>
+<li>Move a layer (<code>layerName</code>) below another layer (<code>baseLayerName</code>)
+    <div class="highlight"><pre><span></span><code><span class="nx">layerManager</span><span class="p">.</span><span class="nx">moveLayerBelow</span><span class="p">(</span><span class="nx">layerName</span><span class="p">,</span><span class="w"> </span><span class="nx">baseLayerName</span><span class="p">)</span>
 </code></pre></div></li>
 </ul>
 

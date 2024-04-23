@@ -148,6 +148,14 @@ var hasLayer = layerManager.has(name);
 
 ### Change depth
 
+- Bring a layer (`layerName`) to top of displayList
+    ```javascript
+    layerManager.bringLayerToTop(layerName);
+    ```
+- Send a layer (`layerName`) to bottom of displayList
+    ```javascript
+    layerManager.sendLayerToBack(layerName);
+    ```
 - Move a layer (`layerName`) above another layer (`baseLayerName`)
     ```javascript
     layerManager.moveLayerAbove(layerName, baseLayerName)

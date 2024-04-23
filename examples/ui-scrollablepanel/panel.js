@@ -109,20 +109,20 @@ class Demo extends Phaser.Scene {
         //     })
 
         // Solution B: targets is an array of hit-targets
-        scrollablePanel.setChildrenInteractive({
-            targets: [
-                ...scrollablePanel.getByName('skills', true).getElement('items'),
-                ...scrollablePanel.getByName('items', true).getElement('items')
-            ],
-            targetMode: 'direct',
-        })
-            .on('child.click', function (child) {
-                var category = child.getParentSizer().name;
-                print.text += `${category}:${child.text}\n`;
-            })
+        // scrollablePanel.setChildrenInteractive({
+        //     targets: [
+        //         ...scrollablePanel.getByName('skills', true).getElement('items'),
+        //         ...scrollablePanel.getByName('items', true).getElement('items')
+        //     ],
+        //     targetMode: 'direct',
+        // })
+        //     .on('child.click', function (child) {
+        //         var category = child.getParentSizer().name;
+        //         print.text += `${category}:${child.text}\n`;
+        //     })
 
         // Solution C:
-        /*
+        
         this.input.topOnly = false;
         var labels = [];
         labels.push(...scrollablePanel.getElement('#skills.items', true));
@@ -135,14 +135,14 @@ class Demo extends Phaser.Scene {
 
             var click = scene.rexUI.add.click(label.getElement('icon'))
                 .on('click', function () {
-                    if (!label.getTopmostSizer().isInTouching()) {
+                    if (!scrollablePanel.isInTouching('mask')) {
                         return;
                     }
                     var category = label.getParentSizer().name;
                     print.text += `${category}:${label.text}\n`;
                 });
         })
-        */
+        
 
         scrollablePanel.getElement('scroller')
             .on('dragstart', function () {
