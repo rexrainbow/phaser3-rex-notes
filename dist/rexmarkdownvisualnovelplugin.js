@@ -1028,7 +1028,7 @@
     return "".concat(snPrefix).concat(sn);
   };
 
-  var DataMethods$4 = {
+  var DataMethods$5 = {
     getTreeMemory: function getTreeMemory(blackboard) {
       return blackboard.getTreeMemory(this.id);
     },
@@ -5341,7 +5341,7 @@
     dump: Dump,
     load: Load
   };
-  Object.assign(BehaviorTree.prototype, Methods$p, DataMethods$4);
+  Object.assign(BehaviorTree.prototype, Methods$p, DataMethods$5);
 
   var Blackboard$1 = /*#__PURE__*/function () {
     function Blackboard() {
@@ -6650,37 +6650,6 @@
   };
   Object.assign(TaskAction.prototype, PauseEventSheetMethods);
 
-  var WaitNextRound = /*#__PURE__*/function (_Wait) {
-    _inherits(WaitNextRound, _Wait);
-    function WaitNextRound() {
-      var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-        _ref$duration = _ref.duration,
-        duration = _ref$duration === void 0 ? 1 : _ref$duration,
-        services = _ref.services,
-        title = _ref.title,
-        _ref$name = _ref.name,
-        name = _ref$name === void 0 ? 'NextRound' : _ref$name;
-      _classCallCheck(this, WaitNextRound);
-      return _callSuper(this, WaitNextRound, [{
-        duration: duration,
-        services: services,
-        title: title,
-        name: name
-      }]);
-    }
-    _createClass(WaitNextRound, [{
-      key: "tick",
-      value: function tick(_tick) {
-        var state = _get(_getPrototypeOf(WaitNextRound.prototype), "tick", this).call(this, _tick);
-        if (state === RUNNING$1) {
-          this.getTree(_tick).roundComplete = true;
-        }
-        return state;
-      }
-    }]);
-    return WaitNextRound;
-  }(Wait$3);
-
   var ActivateAction = /*#__PURE__*/function (_Action) {
     _inherits(ActivateAction, _Action);
     function ActivateAction() {
@@ -6758,7 +6727,6 @@
   var CustomNodeMapping = {
     TaskSequence: TaskSequence,
     TaskAction: TaskAction,
-    WaitNextRound: WaitNextRound,
     ActivateAction: ActivateAction,
     DeactivateAction: DeactivateAction
   };
@@ -7098,7 +7066,7 @@
     }
   };
 
-  var DataMethods$3 = {
+  var DataMethods$4 = {
     setData: function setData(key, value) {
       this.blackboard.setData(key, value);
       return this;
@@ -15294,7 +15262,7 @@
   };
 
   var Methods$n = {};
-  Object.assign(Methods$n, PauseEventSheetMethods$1, TreeMethods, AddTreeMethods$1, RemoveTreeMethods$1, TreeActiveStateMethods, SaveLoadTreesMethods, DataMethods$3, StateMethods, ValueConvertMethods, RunMethods, BindEventMethods, RoundCounterMethods);
+  Object.assign(Methods$n, PauseEventSheetMethods$1, TreeMethods, AddTreeMethods$1, RemoveTreeMethods$1, TreeActiveStateMethods, SaveLoadTreesMethods, DataMethods$4, StateMethods, ValueConvertMethods, RunMethods, BindEventMethods, RoundCounterMethods);
 
   BehaviorTree.setStartIDValue(0);
   var EventSheetManager = /*#__PURE__*/function (_EventEmitter) {
@@ -16787,9 +16755,6 @@
   }, {
     name: 'break'
   }, {
-    name: 'next round',
-    pattern: new RegExp('^next\\s*(.*)\\s*round', 'i')
-  }, {
     name: 'activate',
     pattern: new RegExp('^activate\\s*(.*)', 'i')
   }, {
@@ -16932,16 +16897,6 @@
       case 'break':
         actionNode = new Failer({
           title: '[break]'
-        });
-        break;
-      case 'next round':
-        var duration = commandData.match[1].trim();
-        if (duration === '') {
-          duration = 1;
-        }
-        actionNode = new WaitNextRound({
-          title: '[next round]',
-          duration: duration
         });
         break;
       case 'activate':
@@ -17520,7 +17475,7 @@
     }
   };
 
-  var DataMethods$2 = {
+  var DataMethods$3 = {
     hasData: function hasData(dataKey) {
       var gameObject = this.gameObject;
       return gameObject.data ? gameObject.data.has(dataKey) : false;
@@ -17591,7 +17546,7 @@
     }]);
     return BobBase;
   }();
-  Object.assign(BobBase.prototype, PropertyMethods$1, CallMethods$1, DataMethods$2);
+  Object.assign(BobBase.prototype, PropertyMethods$1, CallMethods$1, DataMethods$3);
 
   var IsEmpty = function IsEmpty(source) {
     for (var k in source) {
@@ -19855,7 +19810,7 @@
     }
   };
 
-  var DataMethods$1 = {
+  var DataMethods$2 = {
     hasData: function hasData(name, dataKey) {
       var bob = IsSingleBob(name) ? this.get(name) : this.getFitst(name);
       if (!bob) {
@@ -20245,7 +20200,7 @@
   var Methods$m = {
     drawGameObjectsBounds: DrawGameObjectsBounds
   };
-  Object.assign(Methods$m, GetMethods, AddMethods$1, RemoveMethods$1, PropertyMethods, CallMethods, DataMethods$1, FadeMethods$1);
+  Object.assign(Methods$m, GetMethods, AddMethods$1, RemoveMethods$1, PropertyMethods, CallMethods, DataMethods$2, FadeMethods$1);
 
   var CameraClass = Phaser.Cameras.Scene2D.BaseCamera;
   var IsCameraObject = function IsCameraObject(object) {
@@ -24204,8 +24159,7 @@
     return this;
   };
 
-  var EventSheetManagerMethods = {
-    // TODO: More commands
+  var DataMethods$1 = {
     setData: function setData(config, eventSheetManager, eventsheet) {
       for (var name in config) {
         eventSheetManager.setData(name, config[name]);
@@ -25237,7 +25191,7 @@
     addCommand: AddCommand,
     defaultHandler: DefaultHandler
   };
-  Object.assign(Methods$j, EventSheetManagerMethods, WaitMethods, GameObjectManagerMethods$1, GameObjectMethods, BackgroundMusicMethods, BackgroundMusic2Methods, SoundEffectsMethods, SoundEffects2Methods, CameraMethods, LogMethods);
+  Object.assign(Methods$j, DataMethods$1, WaitMethods, GameObjectManagerMethods$1, GameObjectMethods, BackgroundMusicMethods, BackgroundMusic2Methods, SoundEffectsMethods, SoundEffects2Methods, CameraMethods, LogMethods);
 
   var CommandExecutor = /*#__PURE__*/function () {
     function CommandExecutor(scene) {
@@ -34297,12 +34251,12 @@
     return result;
   };
 
-  var Merge$4 = Phaser.Utils.Objects.Merge;
+  var Merge$5 = Phaser.Utils.Objects.Merge;
   var RunWordWrap = function RunWordWrap(config) {
     if (config === undefined) {
       config = {};
     }
-    return RunWordWrap$1.call(this, Merge$4(config, this.wrapConfig));
+    return RunWordWrap$1.call(this, Merge$5(config, this.wrapConfig));
   };
 
   var AlignLines = function AlignLines(result, width, height) {
@@ -34535,12 +34489,12 @@
     return result;
   };
 
-  var Merge$3 = Phaser.Utils.Objects.Merge;
+  var Merge$4 = Phaser.Utils.Objects.Merge;
   var RunVerticalWrap = function RunVerticalWrap(config) {
     if (config === undefined) {
       config = {};
     }
-    return RunVerticalWrap$1.call(this, Merge$3(config, this.wrapConfig));
+    return RunVerticalWrap$1.call(this, Merge$4(config, this.wrapConfig));
   };
 
   var GetValue$2O = Phaser.Utils.Objects.GetValue;
@@ -68000,7 +67954,7 @@
   };
 
   Phaser.Utils.Objects.GetValue;
-  var Merge$2 = Phaser.Utils.Objects.Merge;
+  var Merge$3 = Phaser.Utils.Objects.Merge;
   var Modal = function Modal(config, onClose) {
     if (IsFunction(config)) {
       onClose = config;
@@ -68009,7 +67963,7 @@
     if (config === undefined) {
       config = {};
     }
-    config = Merge$2(config, this.modalStyle);
+    config = Merge$3(config, this.modalStyle);
     var zeroButtonMode;
     if (this.buttonMode === 0) {
       if (this.hasAnyChoice()) {
@@ -75108,7 +75062,7 @@
   };
 
   var Clone$1 = Phaser.Utils.Objects.Clone;
-  var Merge$1 = function Merge(defaultConfig, overrideConfig) {
+  var Merge$2 = function Merge(defaultConfig, overrideConfig) {
     var config = defaultConfig ? Clone$1(defaultConfig) : {};
     if (!overrideConfig) {
       return config;
@@ -75205,7 +75159,7 @@
     return Tree;
   }(ExtendNodeClass(Folder$1)); // Static method
   Tree.CreateTree = function (scene, defaultConfig, overrideConfig) {
-    return new Tree(scene, Merge$1(defaultConfig, overrideConfig));
+    return new Tree(scene, Merge$2(defaultConfig, overrideConfig));
   };
   Object.assign(Tree.prototype, methods$8);
 
@@ -79296,12 +79250,12 @@
   };
 
   var GetValue$5 = Phaser.Utils.Objects.GetValue;
-  var Merge = Phaser.Utils.Objects.Merge;
+  var Merge$1 = Phaser.Utils.Objects.Merge;
   var Open = function Open(config, onCloseCallback) {
     if (config === undefined) {
       config = {};
     }
-    config = Merge(config, this.openConfig);
+    config = Merge$1(config, this.openConfig);
     SetLastOpenedEditor(this);
     if (IsFunction(config)) {
       onCloseCallback = config;
@@ -79482,11 +79436,15 @@
       _ref$wait = _ref.wait,
       wait = _ref$wait === void 0 ? true : _ref$wait;
     var commandExecutor = arguments.length > 2 ? arguments[2] : undefined;
+    var eventSheetManager = arguments.length > 3 ? arguments[3] : undefined;
     key = key || gameObject.texture.key;
 
     // Wait until transition complete
     if (wait) {
       commandExecutor.waitEvent(gameObject, 'complete');
+    }
+    if (duration === undefined) {
+      duration = eventSheetManager.getData('$transitionDuration');
     }
     var durationSave = gameObject.duration;
     if (duration !== undefined) {
@@ -79573,6 +79531,7 @@
       _ref$wait = _ref.wait,
       wait = _ref$wait === void 0 ? true : _ref$wait;
     var commandExecutor = arguments.length > 2 ? arguments[2] : undefined;
+    var eventSheetManager = arguments.length > 3 ? arguments[3] : undefined;
     if (gameObject.isFrameNameMode) {
       key = key || gameObject.texture.key;
       if (name || expression) {
@@ -79585,6 +79544,9 @@
     } else {
       key = name || gameObject.texture.key;
       frame = expression;
+    }
+    if (duration === undefined) {
+      duration = eventSheetManager.getData('$transitionDuration');
     }
 
     // Wait until transition complete
@@ -79601,10 +79563,12 @@
 
   var Focus$1 = function Focus(gameObject) {
     var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
-      _ref$tintOthers = _ref.tintOthers,
-      tintOthers = _ref$tintOthers === void 0 ? 0x000000 : _ref$tintOthers;
+      tintOthers = _ref.tintOthers;
     var commandExecutor = arguments.length > 2 ? arguments[2] : undefined;
     var eventSheetManager = arguments.length > 3 ? arguments[3] : undefined;
+    if (tintOthers === undefined) {
+      tintOthers = eventSheetManager.getData('$tintOthers');
+    }
     gameObject.bringMeToTop();
     commandExecutor.setGOProperty({
       goType: SPRITE,
@@ -79731,6 +79695,7 @@
       expression = _ref.expression,
       speed = _ref.speed;
     var commandExecutor = arguments.length > 2 ? arguments[2] : undefined;
+    var eventSheetManager = arguments.length > 3 ? arguments[3] : undefined;
     if (displayName) {
       var title = gameObject.getElement('title').setText(displayName);
       gameObject.setChildAlpha(title, 1);
@@ -79744,6 +79709,9 @@
       }
       var frameDelimiter = gameObject.frameDelimiter;
       iconFrame = name + frameDelimiter + expression;
+    }
+    if (speed === undefined) {
+      speed = eventSheetManager.getData('$typingSpeed');
     }
     if (icon || iconFrame) {
       var iconGameObject = gameObject.getElement('icon');
@@ -79923,9 +79891,57 @@
   };
 
   var RegisterHandlers = [RegisterRandomExpression, RegisterRandomIntExpression];
-  var RegisterExpressions = function RegisterExpressions(eventSheetManager) {
+  var RegisterExpressions = function RegisterExpressions(eventSheetManager, config) {
     for (var i = 0, cnt = RegisterHandlers.length; i < cnt; i++) {
       RegisterHandlers[i](eventSheetManager);
+    }
+  };
+
+  var DefaultVariables = {
+    $typingSpeed: 100,
+    // TEXTBOX.typing
+    $transitionDuration: 500,
+    // SPRITE.cross, BG.cross
+    $tintOthers: 0x333333 // SPRITE.focus
+  };
+
+  /**
+   * @author       Richard Davey <rich@photonstorm.com>
+   * @copyright    2019 Photon Storm Ltd.
+   * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+   */
+
+
+  /**
+   * Creates a new Object using all values from obj1 and obj2.
+   * If a value exists in both obj1 and obj2, the value in obj1 is used.
+   * 
+   * This is only a shallow copy. Deeply nested objects are not cloned, so be sure to only use this
+   * function on shallow objects.
+   *
+   * @function Phaser.Utils.Objects.Merge
+   * @since 3.0.0
+   *
+   * @param {object} obj1 - The first object.
+   * @param {object} obj2 - The second object.
+   *
+   * @return {object} A new object containing the union of obj1's and obj2's properties.
+   */
+  var Merge = function Merge(obj1, obj2) {
+    var clone = Clone$2(obj1);
+    for (var key in obj2) {
+      if (!clone.hasOwnProperty(key)) {
+        clone[key] = obj2[key];
+      }
+    }
+    return clone;
+  };
+
+  var RegisterDefaultVariables = function RegisterDefaultVariables(eventSheetManager, config) {
+    var defaultVariables = config.defaultVariables;
+    defaultVariables = Merge(defaultVariables, DefaultVariables);
+    for (var key in defaultVariables) {
+      eventSheetManager.setData(key, defaultVariables[key]);
     }
   };
 
@@ -79941,6 +79957,7 @@
       // this.commandExecutor;
 
       RegisterExpressions(_assertThisInitialized(_this));
+      RegisterDefaultVariables(_assertThisInitialized(_this), config);
       return _this;
     }
     return _createClass(MarkdownVisualNovel);

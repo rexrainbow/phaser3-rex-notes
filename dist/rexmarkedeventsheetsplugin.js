@@ -585,7 +585,7 @@
     return "".concat(snPrefix).concat(sn);
   };
 
-  var DataMethods$3 = {
+  var DataMethods$4 = {
     getTreeMemory: function getTreeMemory(blackboard) {
       return blackboard.getTreeMemory(this.id);
     },
@@ -4898,7 +4898,7 @@
     dump: Dump,
     load: Load
   };
-  Object.assign(BehaviorTree.prototype, Methods$6, DataMethods$3);
+  Object.assign(BehaviorTree.prototype, Methods$6, DataMethods$4);
 
   var Blackboard$1 = /*#__PURE__*/function () {
     function Blackboard() {
@@ -6207,37 +6207,6 @@
   };
   Object.assign(TaskAction.prototype, PauseEventSheetMethods);
 
-  var WaitNextRound = /*#__PURE__*/function (_Wait) {
-    _inherits(WaitNextRound, _Wait);
-    function WaitNextRound() {
-      var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-        _ref$duration = _ref.duration,
-        duration = _ref$duration === void 0 ? 1 : _ref$duration,
-        services = _ref.services,
-        title = _ref.title,
-        _ref$name = _ref.name,
-        name = _ref$name === void 0 ? 'NextRound' : _ref$name;
-      _classCallCheck(this, WaitNextRound);
-      return _callSuper(this, WaitNextRound, [{
-        duration: duration,
-        services: services,
-        title: title,
-        name: name
-      }]);
-    }
-    _createClass(WaitNextRound, [{
-      key: "tick",
-      value: function tick(_tick) {
-        var state = _get(_getPrototypeOf(WaitNextRound.prototype), "tick", this).call(this, _tick);
-        if (state === RUNNING$1) {
-          this.getTree(_tick).roundComplete = true;
-        }
-        return state;
-      }
-    }]);
-    return WaitNextRound;
-  }(Wait);
-
   var ActivateAction = /*#__PURE__*/function (_Action) {
     _inherits(ActivateAction, _Action);
     function ActivateAction() {
@@ -6315,7 +6284,6 @@
   var CustomNodeMapping = {
     TaskSequence: TaskSequence,
     TaskAction: TaskAction,
-    WaitNextRound: WaitNextRound,
     ActivateAction: ActivateAction,
     DeactivateAction: DeactivateAction
   };
@@ -6655,7 +6623,7 @@
     }
   };
 
-  var DataMethods$2 = {
+  var DataMethods$3 = {
     setData: function setData(key, value) {
       this.blackboard.setData(key, value);
       return this;
@@ -14851,7 +14819,7 @@
   };
 
   var Methods$4 = {};
-  Object.assign(Methods$4, PauseEventSheetMethods$1, TreeMethods, AddTreeMethods, RemoveTreeMethods, TreeActiveStateMethods, SaveLoadTreesMethods, DataMethods$2, StateMethods, ValueConvertMethods, RunMethods, BindEventMethods, RoundCounterMethods);
+  Object.assign(Methods$4, PauseEventSheetMethods$1, TreeMethods, AddTreeMethods, RemoveTreeMethods, TreeActiveStateMethods, SaveLoadTreesMethods, DataMethods$3, StateMethods, ValueConvertMethods, RunMethods, BindEventMethods, RoundCounterMethods);
 
   BehaviorTree.setStartIDValue(0);
   var EventSheetManager = /*#__PURE__*/function (_EventEmitter) {
@@ -16344,9 +16312,6 @@
   }, {
     name: 'break'
   }, {
-    name: 'next round',
-    pattern: new RegExp('^next\\s*(.*)\\s*round', 'i')
-  }, {
     name: 'activate',
     pattern: new RegExp('^activate\\s*(.*)', 'i')
   }, {
@@ -16489,16 +16454,6 @@
       case 'break':
         actionNode = new Failer({
           title: '[break]'
-        });
-        break;
-      case 'next round':
-        var duration = commandData.match[1].trim();
-        if (duration === '') {
-          duration = 1;
-        }
-        actionNode = new WaitNextRound({
-          title: '[next round]',
-          duration: duration
         });
         break;
       case 'activate':
@@ -17077,7 +17032,7 @@
     }
   };
 
-  var DataMethods$1 = {
+  var DataMethods$2 = {
     hasData: function hasData(dataKey) {
       var gameObject = this.gameObject;
       return gameObject.data ? gameObject.data.has(dataKey) : false;
@@ -17148,7 +17103,7 @@
     }]);
     return BobBase;
   }();
-  Object.assign(BobBase.prototype, PropertyMethods$1, CallMethods$1, DataMethods$1);
+  Object.assign(BobBase.prototype, PropertyMethods$1, CallMethods$1, DataMethods$2);
 
   var IsEmpty = function IsEmpty(source) {
     for (var k in source) {
@@ -19412,7 +19367,7 @@
     }
   };
 
-  var DataMethods = {
+  var DataMethods$1 = {
     hasData: function hasData(name, dataKey) {
       var bob = IsSingleBob(name) ? this.get(name) : this.getFitst(name);
       if (!bob) {
@@ -19744,7 +19699,7 @@
   var Methods$3 = {
     drawGameObjectsBounds: DrawGameObjectsBounds
   };
-  Object.assign(Methods$3, GetMethods, AddMethods, RemoveMethods, PropertyMethods, CallMethods, DataMethods, FadeMethods);
+  Object.assign(Methods$3, GetMethods, AddMethods, RemoveMethods, PropertyMethods, CallMethods, DataMethods$1, FadeMethods);
 
   var CameraClass = Phaser.Cameras.Scene2D.BaseCamera;
   var IsCameraObject = function IsCameraObject(object) {
@@ -23703,8 +23658,7 @@
     return this;
   };
 
-  var EventSheetManagerMethods = {
-    // TODO: More commands
+  var DataMethods = {
     setData: function setData(config, eventSheetManager, eventsheet) {
       for (var name in config) {
         eventSheetManager.setData(name, config[name]);
@@ -24736,7 +24690,7 @@
     addCommand: AddCommand,
     defaultHandler: DefaultHandler
   };
-  Object.assign(Methods, EventSheetManagerMethods, WaitMethods, GameObjectManagerMethods, GameObjectMethods, BackgroundMusicMethods, BackgroundMusic2Methods, SoundEffectsMethods, SoundEffects2Methods, CameraMethods, LogMethods);
+  Object.assign(Methods, DataMethods, WaitMethods, GameObjectManagerMethods, GameObjectMethods, BackgroundMusicMethods, BackgroundMusic2Methods, SoundEffectsMethods, SoundEffects2Methods, CameraMethods, LogMethods);
 
   var CommandExecutor = /*#__PURE__*/function () {
     function CommandExecutor(scene) {
