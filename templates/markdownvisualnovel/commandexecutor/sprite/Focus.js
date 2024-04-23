@@ -3,10 +3,14 @@ import { SPRITE } from '../../const/GameObjects.js';
 var Focus = function (
     gameObject,
     {
-        tintOthers = 0x000000,
+        tintOthers,
     } = {},
     commandExecutor, eventSheetManager, eventSheet
 ) {
+
+    if (tintOthers === undefined) {
+        tintOthers = eventSheetManager.getData('$tintOthers');
+    }
 
     gameObject.bringMeToTop();
 

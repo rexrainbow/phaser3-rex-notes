@@ -27,6 +27,10 @@ var Typing = function (
         iconFrame = name + frameDelimiter + expression;
     }
 
+    if (speed === undefined) {
+        speed = eventSheetManager.getData('$typingSpeed');
+    }
+
     if (icon || iconFrame) {
         var iconGameObject = gameObject.getElement('icon');
         if (!icon) {

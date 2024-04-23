@@ -1,6 +1,7 @@
 import MarkedEventSheets from '../../plugins/markedeventsheets.js';
 import CreateCommandExecutor from './commandexecutor/CreateCommandExecutor.js';
 import RegisterExpressions from './expressions/RegisterExpressions.js';
+import RegisterDefaultVariables from './defaultvariable/RegisterDefaultVariables.js';
 
 class MarkdownVisualNovel extends MarkedEventSheets {
     constructor(scene, config = {}) {
@@ -9,7 +10,9 @@ class MarkdownVisualNovel extends MarkedEventSheets {
 
         // this.commandExecutor;
 
-        RegisterExpressions(this);
+        RegisterExpressions(this, config);
+
+        RegisterDefaultVariables(this, config);
     }
 }
 

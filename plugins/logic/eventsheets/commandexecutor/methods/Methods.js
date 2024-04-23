@@ -1,5 +1,5 @@
 import AddCommand from './AddCommand.js';
-import EventSheetManagerMethods from './EventSheetManagerMethods.js';
+import DataMethods from './DataMethods.js';
 import WaitMethods from './WaitMethods.js';
 import GameObjectManagerMethods from './GameObjectManagerMethods.js';
 import GameObjectMethods from './GameObjectMethods.js';
@@ -18,7 +18,7 @@ var Methods = {
 
 Object.assign(
     Methods,
-    EventSheetManagerMethods,
+    DataMethods,
     WaitMethods,
     GameObjectManagerMethods,
     GameObjectMethods,

@@ -6,7 +6,7 @@ var RegisterHandlers = [
     RegisterRandomIntExpression,
 ]
 
-var RegisterExpressions = function (eventSheetManager) {
+var RegisterExpressions = function (eventSheetManager, config) {
     for (var i = 0, cnt = RegisterHandlers.length; i < cnt; i++) {
         RegisterHandlers[i](eventSheetManager);
     }

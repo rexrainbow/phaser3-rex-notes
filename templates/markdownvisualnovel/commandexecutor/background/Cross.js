@@ -17,6 +17,10 @@ var Cross = function (
         commandExecutor.waitEvent(gameObject, 'complete');
     }
 
+    if (duration === undefined) {
+        duration = eventSheetManager.getData('$transitionDuration');
+    }
+
     var durationSave = gameObject.duration;
     if (duration !== undefined) {
         gameObject.setDuration(duration);

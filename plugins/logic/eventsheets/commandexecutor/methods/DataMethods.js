@@ -1,5 +1,4 @@
 export default {
-    // TODO: More commands
     setData(config, eventSheetManager, eventsheet) {
         for (var name in config) {
             eventSheetManager.setData(name, config[name]);

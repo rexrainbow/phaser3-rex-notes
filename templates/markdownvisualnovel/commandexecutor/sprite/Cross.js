@@ -22,7 +22,10 @@ var Cross = function (
     } else {
         key = name || gameObject.texture.key;
         frame = expression;
+    }
 
+    if (duration === undefined) {
+        duration = eventSheetManager.getData('$transitionDuration');
     }
 
     // Wait until transition complete
