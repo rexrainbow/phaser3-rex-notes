@@ -4900,6 +4900,141 @@
   };
   Object.assign(BehaviorTree.prototype, Methods$6, DataMethods$4);
 
+  var IsInValidKey = function IsInValidKey(keys) {
+    return keys == null || keys === '' || keys.length === 0;
+  };
+  var GetEntry = function GetEntry(target, keys, defaultEntry) {
+    var entry = target;
+    if (IsInValidKey(keys)) ; else {
+      if (typeof keys === 'string') {
+        keys = keys.split('.');
+      }
+      var key;
+      for (var i = 0, cnt = keys.length; i < cnt; i++) {
+        key = keys[i];
+        if (entry[key] == null || _typeof(entry[key]) !== 'object') {
+          var newEntry;
+          if (i === cnt - 1) {
+            if (defaultEntry === undefined) {
+              newEntry = {};
+            } else {
+              newEntry = defaultEntry;
+            }
+          } else {
+            newEntry = {};
+          }
+          entry[key] = newEntry;
+        }
+        entry = entry[key];
+      }
+    }
+    return entry;
+  };
+  var SetValue = function SetValue(target, keys, value, delimiter) {
+    if (delimiter === undefined) {
+      delimiter = '.';
+    }
+
+    // no object
+    if (_typeof(target) !== 'object') {
+      return;
+    }
+
+    // invalid key
+    else if (IsInValidKey(keys)) {
+      // don't erase target
+      if (value == null) {
+        return;
+      }
+      // set target to another object
+      else if (_typeof(value) === 'object') {
+        target = value;
+      }
+    } else {
+      if (typeof keys === 'string') {
+        keys = keys.split(delimiter);
+      }
+      var lastKey = keys.pop();
+      var entry = GetEntry(target, keys);
+      entry[lastKey] = value;
+    }
+    return target;
+  };
+
+  /**
+   * @author       Richard Davey <rich@photonstorm.com>
+   * @copyright    2019 Photon Storm Ltd.
+   * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
+   */
+
+  //  Source object
+  //  The key as a string, or an array of keys, i.e. 'banner', or 'banner.hideBanner'
+  //  The default value to use if the key doesn't exist
+
+  /**
+   * Retrieves a value from an object.
+   *
+   * @function Phaser.Utils.Objects.GetValue
+   * @since 3.0.0
+   *
+   * @param {object} source - The object to retrieve the value from.
+   * @param {string} key - The name of the property to retrieve from the object. If a property is nested, the names of its preceding properties should be separated by a dot (`.`) - `banner.hideBanner` would return the value of the `hideBanner` property from the object stored in the `banner` property of the `source` object.
+   * @param {*} defaultValue - The value to return if the `key` isn't found in the `source` object.
+   *
+   * @return {*} The value of the requested key.
+   */
+  var GetValue$h = function GetValue(source, key, defaultValue) {
+    if (!source || typeof source === 'number') {
+      return defaultValue;
+    } else if (source.hasOwnProperty(key)) {
+      return source[key];
+    } else if (key.indexOf('.') !== -1) {
+      var keys = key.split('.');
+      var parent = source;
+      var value = defaultValue;
+
+      //  Use for loop here so we can break early
+      for (var i = 0; i < keys.length; i++) {
+        if (parent.hasOwnProperty(keys[i])) {
+          //  Yes it has a key property, let's carry on down
+          value = parent[keys[i]];
+          parent = parent[keys[i]];
+        } else {
+          //  Can't go any further, so reset to default
+          value = defaultValue;
+          break;
+        }
+      }
+      return value;
+    } else {
+      return defaultValue;
+    }
+  };
+
+  var HasValue = function HasValue(source, key) {
+    if (!source || typeof source === 'number') {
+      return false;
+    } else if (source.hasOwnProperty(key)) {
+      return true;
+    } else if (key.indexOf('.') !== -1) {
+      var keys = key.split('.');
+      var parent = source;
+
+      //  Use for loop here so we can break early
+      for (var i = 0; i < keys.length; i++) {
+        if (parent.hasOwnProperty(keys[i])) {
+          parent = parent[keys[i]];
+        } else {
+          //  Can't go any further
+          return false;
+        }
+      }
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   var Blackboard$1 = /*#__PURE__*/function () {
     function Blackboard() {
       _classCallCheck(this, Blackboard);
@@ -4947,7 +5082,7 @@
       key: "set",
       value: function set(key, value, treeID, nodeID) {
         var memory = this._getMemory(treeID, nodeID);
-        memory[key] = value;
+        SetValue(memory, key, value);
         return this;
       }
     }, {
@@ -4959,7 +5094,7 @@
       key: "get",
       value: function get(key, treeID, nodeID) {
         var memory = this._getMemory(treeID, nodeID);
-        return memory[key];
+        return GetValue$h(memory, key);
       }
     }, {
       key: "getData",
@@ -4979,7 +5114,7 @@
           memory = this._baseMemory;
         }
         if (memory) {
-          return memory.hasOwnProperty(key);
+          return HasValue(memory, key);
         } else {
           return false;
         }
@@ -19213,7 +19348,7 @@
       }
       var self = this;
       bobs.forEach(function (bob) {
-        delete self.bobs[name];
+        delete self.bobs[bob.name];
         var gameObject = bob.gameObject;
         self.removedGOs.push(gameObject);
         gameObject.setName();
@@ -19612,17 +19747,17 @@
     return output;
   };
 
-  var GetValue$h = Phaser.Utils.Objects.GetValue;
+  var GetValue$g = Phaser.Utils.Objects.GetValue;
   var DrawBounds = function DrawBounds(gameObjects, graphics, config) {
     var strokeColor, lineWidth, fillColor, fillAlpha, padding;
     if (typeof config === 'number') {
       strokeColor = config;
     } else {
-      strokeColor = GetValue$h(config, 'color');
-      lineWidth = GetValue$h(config, 'lineWidth');
-      fillColor = GetValue$h(config, 'fillColor');
-      fillAlpha = GetValue$h(config, 'fillAlpha', 1);
-      padding = GetValue$h(config, 'padding', 0);
+      strokeColor = GetValue$g(config, 'color');
+      lineWidth = GetValue$g(config, 'lineWidth');
+      fillColor = GetValue$g(config, 'fillColor');
+      fillAlpha = GetValue$g(config, 'fillAlpha', 1);
+      padding = GetValue$g(config, 'padding', 0);
     }
     if (Array.isArray(gameObjects)) {
       for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
@@ -19725,37 +19860,37 @@
   };
   var globRect = new Rectangle();
 
-  var GetValue$g = Phaser.Utils.Objects.GetValue;
+  var GetValue$f = Phaser.Utils.Objects.GetValue;
   var GOManager = /*#__PURE__*/function () {
     function GOManager(scene, config) {
       _classCallCheck(this, GOManager);
       this.scene = scene;
-      this.BobClass = GetValue$g(config, 'BobClass', BobBase);
-      this.setCreateGameObjectCallback(GetValue$g(config, 'createGameObject'), GetValue$g(config, 'createGameObjectScope'));
-      this.setEventEmitter(GetValue$g(config, 'eventEmitter', undefined));
-      this.setGameObjectDepth(GetValue$g(config, 'depth', undefined));
-      var fadeConfig = GetValue$g(config, 'fade', 500);
+      this.BobClass = GetValue$f(config, 'BobClass', BobBase);
+      this.setCreateGameObjectCallback(GetValue$f(config, 'createGameObject'), GetValue$f(config, 'createGameObjectScope'));
+      this.setEventEmitter(GetValue$f(config, 'eventEmitter', undefined));
+      this.setGameObjectDepth(GetValue$f(config, 'depth', undefined));
+      var fadeConfig = GetValue$f(config, 'fade', 500);
       if (typeof fadeConfig === 'number') {
         this.setGOFadeMode();
         this.setGOFadeTime(fadeConfig);
       } else {
-        this.setGOFadeMode(GetValue$g(fadeConfig, 'mode'));
-        this.setGOFadeTime(GetValue$g(fadeConfig, 'time', 500));
+        this.setGOFadeMode(GetValue$f(fadeConfig, 'mode'));
+        this.setGOFadeTime(GetValue$f(fadeConfig, 'time', 500));
       }
-      var viewportCoordinateConfig = GetValue$g(config, 'viewportCoordinate', false);
+      var viewportCoordinateConfig = GetValue$f(config, 'viewportCoordinate', false);
       if (viewportCoordinateConfig !== false) {
-        this.setViewportCoordinateEnable(GetValue$g(config, 'enable', true));
-        this.setViewport(GetValue$g(viewportCoordinateConfig, 'viewport'));
+        this.setViewportCoordinateEnable(GetValue$f(config, 'enable', true));
+        this.setViewport(GetValue$f(viewportCoordinateConfig, 'viewport'));
       } else {
         this.setViewportCoordinateEnable(false);
       }
-      var effectPropertiesConfig = GetValue$g(config, 'effectProperties', false);
+      var effectPropertiesConfig = GetValue$f(config, 'effectProperties', false);
       this.setEffectPropertiesConfig(effectPropertiesConfig);
-      this.setSymbols(GetValue$g(config, 'symbols'));
+      this.setSymbols(GetValue$f(config, 'symbols'));
       this.bobs = {};
       this.removedGOs = [];
       this._timeScale = 1;
-      this.name = GetValue$g(config, 'name');
+      this.name = GetValue$f(config, 'name');
     }
     _createClass(GOManager, [{
       key: "destroy",
@@ -20056,7 +20191,7 @@
   var methods$1 = {};
   Object.assign(methods$1, LayerMethods, DepthMethods);
 
-  var GetValue$f = Phaser.Utils.Objects.GetValue;
+  var GetValue$e = Phaser.Utils.Objects.GetValue;
   var LayerManager = /*#__PURE__*/function (_GOManager) {
     _inherits(LayerManager, _GOManager);
     function LayerManager(scene, config) {
@@ -20074,9 +20209,9 @@
       }
       config.viewportCoordinate = false;
       _this = _callSuper(this, LayerManager, [scene, config]);
-      var rootLayer = GetValue$f(config, 'rootLayer');
+      var rootLayer = GetValue$e(config, 'rootLayer');
       _this.setRootLayer(rootLayer);
-      var initLayers = GetValue$f(config, 'layers');
+      var initLayers = GetValue$e(config, 'layers');
       if (initLayers) {
         for (var i = 0, cnt = initLayers.length; i < cnt; i++) {
           _this.add(initLayers[i]);
@@ -20186,7 +20321,7 @@
     }
   };
 
-  var GetValue$e = Phaser.Utils.Objects.GetValue;
+  var GetValue$d = Phaser.Utils.Objects.GetValue;
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
       _classCallCheck(this, ComponentBase);
@@ -20195,7 +20330,7 @@
       this.isShutdown = false;
 
       // Event emitter, default is private event emitter
-      this.setEventEmitter(GetValue$e(config, 'eventEmitter', true));
+      this.setEventEmitter(GetValue$d(config, 'eventEmitter', true));
 
       // Register callback of parent destroy event, also see `shutdown` method
       if (this.parent) {
@@ -20271,7 +20406,7 @@
   }();
   Object.assign(ComponentBase.prototype, EventEmitterMethods$1);
 
-  var GetValue$d = Phaser.Utils.Objects.GetValue;
+  var GetValue$c = Phaser.Utils.Objects.GetValue;
   var TickTask = /*#__PURE__*/function (_ComponentBase) {
     _inherits(TickTask, _ComponentBase);
     function TickTask(parent, config) {
@@ -20281,7 +20416,7 @@
       _this._isRunning = false;
       _this.isPaused = false;
       _this.tickingState = false;
-      _this.setTickingMode(GetValue$d(config, 'tickingMode', 1));
+      _this.setTickingMode(GetValue$c(config, 'tickingMode', 1));
       // boot() later
       return _this;
     }
@@ -20398,7 +20533,7 @@
     'always': 2
   };
 
-  var GetValue$c = Phaser.Utils.Objects.GetValue;
+  var GetValue$b = Phaser.Utils.Objects.GetValue;
   var SceneUpdateTickTask = /*#__PURE__*/function (_TickTask) {
     _inherits(SceneUpdateTickTask, _TickTask);
     function SceneUpdateTickTask(parent, config) {
@@ -20411,7 +20546,7 @@
 
       // If this.scene is not available, use game's 'step' event
       var defaultEventName = _this.scene ? 'update' : 'step';
-      _this.tickEventName = GetValue$c(config, 'tickEventName', defaultEventName);
+      _this.tickEventName = GetValue$b(config, 'tickEventName', defaultEventName);
       _this.isSceneTicker = !IsGameUpdateEvent(_this.tickEventName);
       return _this;
     }
@@ -20447,7 +20582,7 @@
     return eventName === 'step' || eventName === 'poststep';
   };
 
-  var GetValue$b = Phaser.Utils.Objects.GetValue;
+  var GetValue$a = Phaser.Utils.Objects.GetValue;
   var Clamp$1 = Phaser.Math.Clamp;
   var Timer$1 = /*#__PURE__*/function () {
     function Timer(config) {
@@ -20457,15 +20592,15 @@
     _createClass(Timer, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.state = GetValue$b(o, 'state', IDLE);
-        this.timeScale = GetValue$b(o, 'timeScale', 1);
-        this.delay = GetValue$b(o, 'delay', 0);
-        this.repeat = GetValue$b(o, 'repeat', 0);
-        this.repeatCounter = GetValue$b(o, 'repeatCounter', 0);
-        this.repeatDelay = GetValue$b(o, 'repeatDelay', 0);
-        this.duration = GetValue$b(o, 'duration', 0);
-        this.nowTime = GetValue$b(o, 'nowTime', 0);
-        this.justRestart = GetValue$b(o, 'justRestart', false);
+        this.state = GetValue$a(o, 'state', IDLE);
+        this.timeScale = GetValue$a(o, 'timeScale', 1);
+        this.delay = GetValue$a(o, 'delay', 0);
+        this.repeat = GetValue$a(o, 'repeat', 0);
+        this.repeatCounter = GetValue$a(o, 'repeatCounter', 0);
+        this.repeatDelay = GetValue$a(o, 'repeatDelay', 0);
+        this.duration = GetValue$a(o, 'duration', 0);
+        this.nowTime = GetValue$a(o, 'nowTime', 0);
+        this.justRestart = GetValue$a(o, 'justRestart', false);
       }
     }, {
       key: "toJSON",
@@ -20693,7 +20828,7 @@
     return TimerTickTask;
   }(SceneUpdateTickTask);
 
-  var GetValue$a = Phaser.Utils.Objects.GetValue;
+  var GetValue$9 = Phaser.Utils.Objects.GetValue;
   var GetAdvancedValue$1 = Phaser.Utils.Objects.GetAdvancedValue;
   var GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
   var EaseValueTaskBase = /*#__PURE__*/function (_TimerTask) {
@@ -20705,13 +20840,13 @@
     _createClass(EaseValueTaskBase, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.timer.resetFromJSON(GetValue$a(o, 'timer'));
-        this.setEnable(GetValue$a(o, 'enable', true));
-        this.setTarget(GetValue$a(o, 'target', this.parent));
+        this.timer.resetFromJSON(GetValue$9(o, 'timer'));
+        this.setEnable(GetValue$9(o, 'enable', true));
+        this.setTarget(GetValue$9(o, 'target', this.parent));
         this.setDelay(GetAdvancedValue$1(o, 'delay', 0));
         this.setDuration(GetAdvancedValue$1(o, 'duration', 1000));
-        this.setEase(GetValue$a(o, 'ease', 'Linear'));
-        this.setRepeat(GetValue$a(o, 'repeat', 0));
+        this.setEase(GetValue$9(o, 'ease', 'Linear'));
+        this.setRepeat(GetValue$9(o, 'repeat', 0));
         return this;
       }
     }, {
@@ -20836,7 +20971,7 @@
     return object instanceof SoundObjectClass;
   };
 
-  var GetValue$9 = Phaser.Utils.Objects.GetValue;
+  var GetValue$8 = Phaser.Utils.Objects.GetValue;
   var GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
   var Linear = Phaser.Math.Linear;
   var Fade = /*#__PURE__*/function (_EaseValueTaskBase) {
@@ -20864,8 +20999,8 @@
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         _get(_getPrototypeOf(Fade.prototype), "resetFromJSON", this).call(this, o);
-        this.setMode(GetValue$9(o, 'mode', 0));
-        this.setEnable(GetValue$9(o, 'enable', true));
+        this.setMode(GetValue$8(o, 'mode', 0));
+        this.setEnable(GetValue$8(o, 'enable', true));
         this.setVolumeRange(GetAdvancedValue(o, 'volume.start', this.parent.volume), GetAdvancedValue(o, 'volume.end', 0));
         return this;
       }
@@ -21000,7 +21135,7 @@
     return sound;
   };
 
-  var GetValue$8 = Phaser.Utils.Objects.GetValue;
+  var GetValue$7 = Phaser.Utils.Objects.GetValue;
   var BackgroundMusicMethods$1 = {
     setBackgroundMusicLoop: function setBackgroundMusicLoop(value) {
       if (value === undefined) {
@@ -21049,11 +21184,11 @@
       this.stopBackgroundMusic(); // Stop previous background music
 
       var music = this.sound.add(key, {
-        loop: GetValue$8(config, 'loop', this.backgroundMusicLoop),
-        mute: GetValue$8(config, 'mute', this.backgroundMusicMute),
-        volume: GetValue$8(config, 'volume', this.backgroundMusicVolume),
-        detune: GetValue$8(config, 'detune', 0),
-        rate: GetValue$8(config, 'rate', 1)
+        loop: GetValue$7(config, 'loop', this.backgroundMusicLoop),
+        mute: GetValue$7(config, 'mute', this.backgroundMusicMute),
+        volume: GetValue$7(config, 'volume', this.backgroundMusicVolume),
+        detune: GetValue$7(config, 'detune', 0),
+        rate: GetValue$7(config, 'rate', 1)
       });
       this.setCurrentBackgroundMusic(music);
 
@@ -21135,7 +21270,7 @@
     }
   };
 
-  var GetValue$7 = Phaser.Utils.Objects.GetValue;
+  var GetValue$6 = Phaser.Utils.Objects.GetValue;
   var BackgroundMusic2Methods$1 = {
     setBackgroundMusic2Loop: function setBackgroundMusic2Loop(value) {
       if (value === undefined) {
@@ -21184,11 +21319,11 @@
       this.stopBackgroundMusic2(); // Stop previous background music
 
       var music = this.sound.add(key, {
-        loop: GetValue$7(config, 'loop', this.backgroundMusicLoop),
-        mute: GetValue$7(config, 'mute', this.backgroundMusic2Mute),
-        volume: GetValue$7(config, 'volume', this.backgroundMusic2Volume),
-        detune: GetValue$7(config, 'detune', 0),
-        rate: GetValue$7(config, 'rate', 1)
+        loop: GetValue$6(config, 'loop', this.backgroundMusicLoop),
+        mute: GetValue$6(config, 'mute', this.backgroundMusic2Mute),
+        volume: GetValue$6(config, 'volume', this.backgroundMusic2Volume),
+        detune: GetValue$6(config, 'detune', 0),
+        rate: GetValue$6(config, 'rate', 1)
       });
       this.setCurrentBackgroundMusic2(music);
 
@@ -21271,7 +21406,7 @@
   };
 
   var RemoveItem$1 = Phaser.Utils.Array.Remove;
-  var GetValue$6 = Phaser.Utils.Objects.GetValue;
+  var GetValue$5 = Phaser.Utils.Objects.GetValue;
   var SoundEffectsMethods$1 = {
     getSoundEffects: function getSoundEffects() {
       return this.soundEffects;
@@ -21285,10 +21420,10 @@
         return this;
       }
       var music = this.sound.add(key, {
-        mute: GetValue$6(config, 'mute', this.soundEffectsMute),
-        volume: GetValue$6(config, 'volume', this.soundEffectsVolume),
-        detune: GetValue$6(config, 'detune', 0),
-        rate: GetValue$6(config, 'rate', 1)
+        mute: GetValue$5(config, 'mute', this.soundEffectsMute),
+        volume: GetValue$5(config, 'volume', this.soundEffectsVolume),
+        detune: GetValue$5(config, 'detune', 0),
+        rate: GetValue$5(config, 'rate', 1)
       });
       this.soundEffects.push(music);
       music.once('complete', function () {
@@ -21404,7 +21539,7 @@
   };
 
   var RemoveItem = Phaser.Utils.Array.Remove;
-  var GetValue$5 = Phaser.Utils.Objects.GetValue;
+  var GetValue$4 = Phaser.Utils.Objects.GetValue;
   var SoundEffects2Methods$1 = {
     getSoundEffects2: function getSoundEffects2() {
       return this.soundEffects2;
@@ -21418,10 +21553,10 @@
         return this;
       }
       var music = this.sound.add(key, {
-        mute: GetValue$5(config, 'mute', this.soundEffects2Mute),
-        volume: GetValue$5(config, 'volume', this.soundEffects2Volume),
-        detune: GetValue$5(config, 'detune', 0),
-        rate: GetValue$5(config, 'rate', 1)
+        mute: GetValue$4(config, 'mute', this.soundEffects2Mute),
+        volume: GetValue$4(config, 'volume', this.soundEffects2Volume),
+        detune: GetValue$4(config, 'detune', 0),
+        rate: GetValue$4(config, 'rate', 1)
       });
       this.soundEffects2.push(music);
       music.once('complete', function () {
@@ -21541,7 +21676,7 @@
   };
   Object.assign(Methods$2, BackgroundMusicMethods$1, BackgroundMusic2Methods$1, SoundEffectsMethods$1, SoundEffects2Methods$1);
 
-  var GetValue$4 = Phaser.Utils.Objects.GetValue;
+  var GetValue$3 = Phaser.Utils.Objects.GetValue;
   var SoundManager = /*#__PURE__*/function () {
     function SoundManager(game, config) {
       _classCallCheck(this, SoundManager);
@@ -21549,26 +21684,26 @@
 
       // Background music will be (fade out)destroyed when play next one.
       this.backgroundMusic = undefined;
-      this._backgroundMusicVolume = GetValue$4(config, 'bgm.volume', 1);
-      this._backgroundMusicMute = GetValue$4(config, 'bgm.mute', false);
-      this.setBackgroundMusicLoop(GetValue$4(config, 'bgm.loop', true));
-      this.setBackgroundMusicFadeTime(GetValue$4(config, 'bgm.fade', 500));
+      this._backgroundMusicVolume = GetValue$3(config, 'bgm.volume', 1);
+      this._backgroundMusicMute = GetValue$3(config, 'bgm.mute', false);
+      this.setBackgroundMusicLoop(GetValue$3(config, 'bgm.loop', true));
+      this.setBackgroundMusicFadeTime(GetValue$3(config, 'bgm.fade', 500));
       this.backgroundMusic2 = undefined;
-      this._backgroundMusic2Volume = GetValue$4(config, 'bgm2.volume', 1);
-      this._backgroundMusic2Mute = GetValue$4(config, 'bgm2.mute', false);
-      this.setBackgroundMusic2Loop(GetValue$4(config, 'bgm2.loop', true));
-      this.setBackgroundMusic2FadeTime(GetValue$4(config, 'bgm2.fade', 500));
+      this._backgroundMusic2Volume = GetValue$3(config, 'bgm2.volume', 1);
+      this._backgroundMusic2Mute = GetValue$3(config, 'bgm2.mute', false);
+      this.setBackgroundMusic2Loop(GetValue$3(config, 'bgm2.loop', true));
+      this.setBackgroundMusic2FadeTime(GetValue$3(config, 'bgm2.fade', 500));
 
       // Sound effect will be destroyed when completed
       this.soundEffects = [];
-      this._soundEffectsVolume = GetValue$4(config, 'soundEffect.volume', 1);
+      this._soundEffectsVolume = GetValue$3(config, 'soundEffect.volume', 1);
       this.soundEffects2 = [];
-      this._soundEffects2Volume = GetValue$4(config, 'soundEffect2.volume', 1);
-      var initialBackgroundMusic = GetValue$4(config, 'bgm.initial', undefined);
+      this._soundEffects2Volume = GetValue$3(config, 'soundEffect2.volume', 1);
+      var initialBackgroundMusic = GetValue$3(config, 'bgm.initial', undefined);
       if (initialBackgroundMusic) {
         this.setCurrentBackgroundMusic(initialBackgroundMusic);
       }
-      var initialBackgroundMusic2 = GetValue$4(config, 'bgm2.initial', undefined);
+      var initialBackgroundMusic2 = GetValue$3(config, 'bgm2.initial', undefined);
       if (initialBackgroundMusic2) {
         this.setCurrentBackgroundMusic2(initialBackgroundMusic2);
       }
@@ -21716,7 +21851,7 @@
   }();
   Object.assign(SoundManager.prototype, Methods$2);
 
-  var GetValue$3 = Phaser.Utils.Objects.GetValue;
+  var GetValue$2 = Phaser.Utils.Objects.GetValue;
   var BaseClock = /*#__PURE__*/function (_TickTask) {
     _inherits(BaseClock, _TickTask);
     function BaseClock(parent, config) {
@@ -21730,9 +21865,9 @@
     _createClass(BaseClock, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.isRunning = GetValue$3(o, 'isRunning', false);
-        this.timeScale = GetValue$3(o, 'timeScale', 1);
-        this.now = GetValue$3(o, 'now', 0);
+        this.isRunning = GetValue$2(o, 'isRunning', false);
+        this.timeScale = GetValue$2(o, 'timeScale', 1);
+        this.now = GetValue$2(o, 'now', 0);
         return this;
       }
     }, {
@@ -22032,7 +22167,7 @@
     return TimerPool;
   }(Stack);
 
-  var GetValue$2 = Phaser.Utils.Objects.GetValue;
+  var GetValue$1 = Phaser.Utils.Objects.GetValue;
   var TimerPool = new TimerPool$1();
   var Timeline = /*#__PURE__*/function (_Clock) {
     _inherits(Timeline, _Clock);
@@ -22042,7 +22177,7 @@
       _this = _callSuper(this, Timeline, [parent, config]);
       _this.addedTimers = [];
       _this.timers = [];
-      _this.timerPool = GetValue$2(config, 'pool', TimerPool);
+      _this.timerPool = GetValue$1(config, 'pool', TimerPool);
       return _this;
     }
     _createClass(Timeline, [{
@@ -22545,65 +22680,15 @@
     return this.parent;
   };
 
-  /**
-   * @author       Richard Davey <rich@photonstorm.com>
-   * @copyright    2019 Photon Storm Ltd.
-   * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
-   */
-
-  //  Source object
-  //  The key as a string, or an array of keys, i.e. 'banner', or 'banner.hideBanner'
-  //  The default value to use if the key doesn't exist
-
-  /**
-   * Retrieves a value from an object.
-   *
-   * @function Phaser.Utils.Objects.GetValue
-   * @since 3.0.0
-   *
-   * @param {object} source - The object to retrieve the value from.
-   * @param {string} key - The name of the property to retrieve from the object. If a property is nested, the names of its preceding properties should be separated by a dot (`.`) - `banner.hideBanner` would return the value of the `hideBanner` property from the object stored in the `banner` property of the `source` object.
-   * @param {*} defaultValue - The value to return if the `key` isn't found in the `source` object.
-   *
-   * @return {*} The value of the requested key.
-   */
-  var GetValue$1 = function GetValue(source, key, defaultValue) {
-    if (!source || typeof source === 'number') {
-      return defaultValue;
-    } else if (source.hasOwnProperty(key)) {
-      return source[key];
-    } else if (key.indexOf('.') !== -1) {
-      var keys = key.split('.');
-      var parent = source;
-      var value = defaultValue;
-
-      //  Use for loop here so we can break early
-      for (var i = 0; i < keys.length; i++) {
-        if (parent.hasOwnProperty(keys[i])) {
-          //  Yes it has a key property, let's carry on down
-          value = parent[keys[i]];
-          parent = parent[keys[i]];
-        } else {
-          //  Can't go any further, so reset to default
-          value = defaultValue;
-          break;
-        }
-      }
-      return value;
-    } else {
-      return defaultValue;
-    }
-  };
-
   var WaitEventManager = /*#__PURE__*/function (_WaitEvent) {
     _inherits(WaitEventManager, _WaitEvent);
     function WaitEventManager(parent, config) {
       var _this;
       _classCallCheck(this, WaitEventManager);
       _this = _callSuper(this, WaitEventManager, [parent]);
-      _this.waitCompleteEventName = GetValue$1(config, 'completeEventName', _this.waitCompleteEventName);
-      _this.setClickTarget(GetValue$1(config, 'clickTarget', _this.scene));
-      _this.setCameraTarget(GetValue$1(config, 'camera', _this.scene.cameras.main));
+      _this.waitCompleteEventName = GetValue$h(config, 'completeEventName', _this.waitCompleteEventName);
+      _this.setClickTarget(GetValue$h(config, 'clickTarget', _this.scene));
+      _this.setCameraTarget(GetValue$h(config, 'camera', _this.scene.cameras.main));
       return _this;
     }
     _createClass(WaitEventManager, [{
@@ -23000,20 +23085,20 @@
     function BracketParser(config) {
       _classCallCheck(this, BracketParser);
       // Event emitter
-      this.setEventEmitter(GetValue$1(config, 'eventEmitter', undefined));
+      this.setEventEmitter(GetValue$h(config, 'eventEmitter', undefined));
 
       // Value convert
-      this.setValueConverter(GetValue$1(config, 'valueConvert', true));
+      this.setValueConverter(GetValue$h(config, 'valueConvert', true));
       // Loop
-      this.setLoopEnable(GetValue$1(config, 'loop', false));
+      this.setLoopEnable(GetValue$h(config, 'loop', false));
 
       // Brackets and generate regex
-      this.setMultipleLinesTagEnable(GetValue$1(config, 'multipleLinesTag', false));
-      var delimiters = GetValue$1(config, 'delimiters', '<>');
+      this.setMultipleLinesTagEnable(GetValue$h(config, 'multipleLinesTag', false));
+      var delimiters = GetValue$h(config, 'delimiters', '<>');
       this.setDelimiters(delimiters[0], delimiters[1]);
 
       // Translate tagName callback
-      this.setTranslateTagNameCallback(GetValue$1(config, 'translateTagNameCallback'));
+      this.setTranslateTagNameCallback(GetValue$h(config, 'translateTagNameCallback'));
       this.isRunning = false;
       this.isPaused = false;
       this.skipEventFlag = false;
@@ -23285,10 +23370,10 @@
       _this = _callSuper(this, BracketParser, [config]);
 
       // Parameters for regex
-      _this.setTagExpression(GetValue$1(config, 'regex.tag', undefined));
-      _this.setValueExpression(GetValue$1(config, 'regex.value', undefined));
+      _this.setTagExpression(GetValue$h(config, 'regex.tag', undefined));
+      _this.setValueExpression(GetValue$h(config, 'regex.value', undefined));
       // Brackets and generate regex
-      var delimiters = GetValue$1(config, 'delimiters', '<>');
+      var delimiters = GetValue$h(config, 'delimiters', '<>');
       _this.setDelimiters(delimiters[0], delimiters[1]);
       return _this;
     }
@@ -23723,6 +23808,21 @@
     }
   };
 
+  var AddEvent = function AddEvent(target, eventEmitter, eventName, callback, scope) {
+    eventEmitter.on(eventName, callback, scope);
+    if (!IsSceneObject(target)) {
+      target.once('destroy', function () {
+        eventEmitter.off(eventName, callback, scope);
+      });
+    } else {
+      // target is scene
+      target.sys.events.once('shutdown', function () {
+        eventEmitter.off(eventName, callback, scope);
+      });
+    }
+    return target;
+  };
+
   var GameObjectManagerMethods = {
     addGameObjectManager: function addGameObjectManager(config) {
       // Register GameObjectManager
@@ -23731,16 +23831,22 @@
       var name = config.name,
         defaultLayer = config.defaultLayer,
         _config$commands = config.commands,
-        commands = _config$commands === void 0 ? {} : _config$commands;
+        commands = _config$commands === void 0 ? {} : _config$commands,
+        _config$autoClear = config.autoClear,
+        autoClear = _config$autoClear === void 0 ? true : _config$autoClear;
 
       // Add custom commands
-      sys.getGameObjectManager(name).commands = commands;
+      var gameObjectManager = sys.getGameObjectManager(name);
+      gameObjectManager.commands = commands;
+      var defaultAutoClear = autoClear;
 
       // Add createGameObject command
-      var createGameObjectCallback = function createGameObjectCallback(config, eventSheetManager) {
+      var createGameObjectCallback = function createGameObjectCallback(config, eventSheetManager, eventsheet) {
         var id = config.id,
           _config$layer = config.layer,
-          layer = _config$layer === void 0 ? defaultLayer : _config$layer;
+          layer = _config$layer === void 0 ? defaultLayer : _config$layer,
+          _config$autoClear2 = config.autoClear,
+          autoClear = _config$autoClear2 === void 0 ? defaultAutoClear : _config$autoClear2;
         delete config.id;
         delete config.layer;
         sys.createGameObject(name, id, config);
@@ -23752,6 +23858,16 @@
             var gameObject = sys.getGameObject(name, id);
             layerManager.addToLayer(layer, gameObject);
           }
+        }
+        if (autoClear) {
+          var gameObject = sys.getGameObject(name, id);
+
+          // When exit this eventsheet, destroy this game object (remove from gameObjectManager)
+          AddEvent(gameObject, eventSheetManager, 'eventsheet.exit', function (title, groupName, eventSheetManager) {
+            if (eventsheet.title === title && eventsheet.groupName === groupName) {
+              gameObjectManager.remove(id, true);
+            }
+          });
         }
       };
       this.addCommand(name, createGameObjectCallback, null);

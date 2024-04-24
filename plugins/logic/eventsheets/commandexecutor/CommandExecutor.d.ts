@@ -16,6 +16,7 @@ declare namespace CommandExecutor {
 
     interface IAddGameObjectManagerConfig extends Managers.IAddGameObjectManagerConfig {
         defaultLayer?: string,
+        autoClear?: boolean,
         commands?: { [name: string]: GameObjectCommandType; }
     }
 

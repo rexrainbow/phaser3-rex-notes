@@ -1,17 +1,30 @@
+import AddEvent from '../../../../utils/gameobject/addevent/AddEvent.js';
+
 export default {
     addGameObjectManager(config) {
         // Register GameObjectManager
         var sys = this.sys;
         sys.addGameObjectManager(config);
 
-        var { name, defaultLayer, commands = {} } = config;
+        var {
+            name, defaultLayer,
+            commands = {},
+            autoClear = true
+        } = config;
 
         // Add custom commands
-        sys.getGameObjectManager(name).commands = commands;
+        var gameObjectManager = sys.getGameObjectManager(name);
+        gameObjectManager.commands = commands;
+
+        var defaultAutoClear = autoClear;
 
         // Add createGameObject command
-        var createGameObjectCallback = function (config, eventSheetManager) {
-            var { id, layer = defaultLayer } = config;
+        var createGameObjectCallback = function (config, eventSheetManager, eventsheet) {
+            var { 
+                id, 
+                layer = defaultLayer,
+                autoClear = defaultAutoClear
+            } = config;
             delete config.id;
             delete config.layer;
 
@@ -24,6 +37,21 @@ export default {
                     var gameObject = sys.getGameObject(name, id);
                     layerManager.addToLayer(layer, gameObject);
                 }
+            }
+
+            if (autoClear) {
+                var gameObject = sys.getGameObject(name, id);
+
+                // When exit this eventsheet, destroy this game object (remove from gameObjectManager)
+                AddEvent(
+                    gameObject,
+                    eventSheetManager, 'eventsheet.exit',
+                    function (title, groupName, eventSheetManager) {
+                        if ((eventsheet.title === title) && (eventsheet.groupName === groupName)) {
+                            gameObjectManager.remove(id, true);
+                        }
+                    }
+                );
             }
         }
         this.addCommand(name, createGameObjectCallback, null);

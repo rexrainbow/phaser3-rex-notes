@@ -840,6 +840,8 @@ commandExecutor.addGameObjectManager({
     // fade: {mode: 'tint', time: 500},
     
     defaultLayer: layerName,
+
+    autoClear: true,
     
     commands: {
         commandName(gameObject, config, commandExecutor, eventSheetManager, eventSheet) {
@@ -876,6 +878,9 @@ commandExecutor.addGameObjectManager({
             - `'revealRight'`, or `5` : [Reveal](shader-builtin.md#reveal) right for fade-in.
         - `fade.time` : Duration of fading. Default value is `500`.
 - `defaultLayer` : A layer name defined in `layers` parameter of [`addCommandExecutor` method](markedeventsheet.md#create-command-executor-instance)
+- `autoClear` : 
+    - `true` : Clear game objects when exiting current event sheet. Default behavior.
+    - `false` : Ignore this behavior.
 - `commands` : Custom commands, each command is a callback indexed by command name
     ```javascript
     commandName: function(gameObject, config, commandExecutor, eventSheetManager) {
