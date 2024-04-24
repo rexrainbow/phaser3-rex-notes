@@ -10794,15 +10794,16 @@
     startGroup --&gt; foreacheventsheet((For each\nevent sheet))
 
     foreacheventsheet --&gt; |Next| activate{activate}
-    activate --&gt; |True| enterevent&gt;eventsheet.enter]
-    enterevent --&gt; condition{Test\ncondition}
+    activate --&gt; |True| enterevent&gt;Fire event\neventsheet.enter]
+    enterevent --&gt; condition{"Test\n[condition]"}
     condition --&gt; |True| actions[Run\nactions]    
-    actions --&gt; exitevent&gt;eventsheet.exit]   
-    condition --&gt; |False| exitevent    
+    actions --&gt; exitevent&gt;Fire event\neventsheet.exit]   
+    condition --&gt; |False| catch["Run\n[catch]"]    
+    catch --&gt; exitevent
     exitevent --&gt; foreacheventsheet
     activate --&gt; |False| foreacheventsheet
 
-    foreacheventsheet --&gt; completeevent&gt;complete]
+    foreacheventsheet --&gt; completeevent&gt;Fire event\ncomplete]
     completeevent --&gt; endnode</code></pre>
 <h4 id="start-running-a-event-sheet-in-a-group">Start running a event sheet in a group<a class="headerlink" href="#start-running-a-event-sheet-in-a-group" title="Permanent link">&para;</a></h4>
 <ul>
@@ -11447,11 +11448,21 @@ line2
 <h5 id="create-custom-game-object">Create custom game object<a class="headerlink" href="#create-custom-game-object" title="Permanent link">&para;</a></h5>
 <div class="highlight"><pre><span></span><code>GOTYPE
   id=NAME
+  layer=
+  autoClear=
   param0=value
   param1=value
 </code></pre></div>
 <ul>
 <li>Create custom game object <code>GOTYPE</code> with config <code>{param0, param1}</code>, indexed by <code>id</code></li>
+<li><code>layer</code> : Put this game object at <code>layer</code>. <ul>
+<li><code>undefined</code> : Put this game object at default layer</li>
+</ul>
+</li>
+<li><code>autoClear</code> : Clear game objects when exiting current event sheet.<ul>
+<li><code>undefined</code> : Use default value of <code>autoClear</code></li>
+</ul>
+</li>
 </ul>
 <p>Reserved id : <code>time</code>, <code>click</code>, <code>key</code>, <code>bgm</code>, <code>bgm2</code>, <code>se</code>, <code>se2</code>, <code>camera</code>.</p>
 <h5 id="set-properties-of-custom-game-object">Set properties of custom game object<a class="headerlink" href="#set-properties-of-custom-game-object" title="Permanent link">&para;</a></h5>
