@@ -161,6 +161,34 @@ Starting command will be ignored if group is running.
     eventSheetManager.startGroup(groupName);
     ```
 
+Procedure of running a group of event sheets
+
+```mermaid
+graph TD
+
+    subgraph Start
+    startGroup{{"startGroup()"}} 
+    end
+
+    subgraph End
+    endnode{{End}}
+    end
+
+    startGroup --> foreacheventsheet((For each\nevent sheet))
+
+    foreacheventsheet --> |Next| activate{activate}
+    activate --> |True| enterevent>eventsheet.enter]
+    enterevent --> condition{Test\ncondition}
+    condition --> |True| actions[Run\nactions]    
+    actions --> exitevent>eventsheet.exit]   
+    condition --> |False| exitevent    
+    exitevent --> foreacheventsheet
+    activate --> |False| foreacheventsheet
+
+    foreacheventsheet --> completeevent>complete]
+    completeevent --> endnode
+```
+
 #### Start running a event sheet in a group
 
 - Start running default group
