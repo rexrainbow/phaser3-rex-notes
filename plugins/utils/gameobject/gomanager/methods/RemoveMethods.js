@@ -9,7 +9,7 @@ export default {
 
         var self = this;
         bobs.forEach(function (bob) {
-            delete self.bobs[name];
+            delete self.bobs[bob.name];
 
             var gameObject = bob.gameObject;
             self.removedGOs.push(gameObject);
