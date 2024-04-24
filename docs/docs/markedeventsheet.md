@@ -177,15 +177,16 @@ graph TD
     startGroup --> foreacheventsheet((For each\nevent sheet))
 
     foreacheventsheet --> |Next| activate{activate}
-    activate --> |True| enterevent>eventsheet.enter]
-    enterevent --> condition{Test\ncondition}
+    activate --> |True| enterevent>Fire event\neventsheet.enter]
+    enterevent --> condition{"Test\n[condition]"}
     condition --> |True| actions[Run\nactions]    
-    actions --> exitevent>eventsheet.exit]   
-    condition --> |False| exitevent    
+    actions --> exitevent>Fire event\neventsheet.exit]   
+    condition --> |False| catch["Run\n[catch]"]    
+    catch --> exitevent
     exitevent --> foreacheventsheet
     activate --> |False| foreacheventsheet
 
-    foreacheventsheet --> completeevent>complete]
+    foreacheventsheet --> completeevent>Fire event\ncomplete]
     completeevent --> endnode
 ```
 
@@ -928,12 +929,18 @@ commandExecutor.addGameObjectManager({
 
 GOTYPE
   id=NAME
+  layer=
+  autoClear=
   param0=value
   param1=value
 
 ```
 
 - Create custom game object `GOTYPE` with config `{param0, param1}`, indexed by `id`
+- `layer` : Put this game object at `layer`. 
+    - `undefined` : Put this game object at default layer
+- `autoClear` : Clear game objects when exiting current event sheet.
+    - `undefined` : Use default value of `autoClear`
 
 
 Reserved id : `time`, `click`, `key`, `bgm`, `bgm2`, `se`, `se2`, `camera`.
