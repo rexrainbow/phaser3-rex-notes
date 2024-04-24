@@ -10780,6 +10780,30 @@
     <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">startGroup</span><span class="p">(</span><span class="nx">groupName</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
+<p>Procedure of running a group of event sheets</p>
+<pre class="mermaid"><code>graph TD
+
+    subgraph Start
+    startGroup{{"startGroup()"}} 
+    end
+
+    subgraph End
+    endnode{{End}}
+    end
+
+    startGroup --&gt; foreacheventsheet((For each\nevent sheet))
+
+    foreacheventsheet --&gt; |Next| activate{activate}
+    activate --&gt; |True| enterevent&gt;eventsheet.enter]
+    enterevent --&gt; condition{Test\ncondition}
+    condition --&gt; |True| actions[Run\nactions]    
+    actions --&gt; exitevent&gt;eventsheet.exit]   
+    condition --&gt; |False| exitevent    
+    exitevent --&gt; foreacheventsheet
+    activate --&gt; |False| foreacheventsheet
+
+    foreacheventsheet --&gt; completeevent&gt;complete]
+    completeevent --&gt; endnode</code></pre>
 <h4 id="start-running-a-event-sheet-in-a-group">Start running a event sheet in a group<a class="headerlink" href="#start-running-a-event-sheet-in-a-group" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Start running default group
