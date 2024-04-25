@@ -166,28 +166,33 @@ Procedure of running a group of event sheets
 ```mermaid
 graph TD
 
-    subgraph Start
-    startGroup{{"startGroup()"}} 
-    end
-
-    subgraph End
-    endnode{{End}}
-    end
-
-    startGroup --> foreacheventsheet((For each\nevent sheet))
-
+    startGroup{{"startGroup()"}}  ------>  eventstart>Fire event\nstart]
+    eventstart --> foreacheventsheet((For each\nevent sheet))
     foreacheventsheet --> |Next| activate{activate}
-    activate --> |True| enterevent>Fire event\neventsheet.enter]
-    enterevent --> condition{"Test\n[condition]"}
-    condition --> |True| actions[Run\nactions]    
-    actions --> exitevent>Fire event\neventsheet.exit]   
-    condition --> |False| catch["Run\n[catch]"]    
-    catch --> exitevent
+    
+    subgraph Event sheet
+    activate --> |True| condition{"Test\n[condition]"}
+    condition --> |True| enterevent>Fire event\neventsheet.enter]
+    condition --> |False| eventcatch>Fire event\neventsheet.catch] 
+
+    subgraph Run
+    enterevent --> actions[Run\nactions\n...\n...]
+    actions --> exitevent>Fire event\neventsheet.exit]    
+    end
+
+    subgraph Catch
+    eventcatch --> catch["Run\n[catch]"]
+    end
+   
+    end
+
     exitevent --> foreacheventsheet
+    catch --> foreacheventsheet
+
     activate --> |False| foreacheventsheet
 
-    foreacheventsheet --> completeevent>Fire event\ncomplete]
-    completeevent --> endnode
+    foreacheventsheet --> eventcomplete>Fire event\ncomplete]
+    eventcomplete --> endnode{{End}}
 ```
 
 #### Start running a event sheet in a group

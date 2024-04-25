@@ -10783,28 +10783,33 @@
 <p>Procedure of running a group of event sheets</p>
 <pre class="mermaid"><code>graph TD
 
-    subgraph Start
-    startGroup{{"startGroup()"}} 
-    end
-
-    subgraph End
-    endnode{{End}}
-    end
-
-    startGroup --&gt; foreacheventsheet((For each\nevent sheet))
-
+    startGroup{{"startGroup()"}}  ------&gt;  eventstart&gt;Fire event\nstart]
+    eventstart --&gt; foreacheventsheet((For each\nevent sheet))
     foreacheventsheet --&gt; |Next| activate{activate}
-    activate --&gt; |True| enterevent&gt;Fire event\neventsheet.enter]
-    enterevent --&gt; condition{"Test\n[condition]"}
-    condition --&gt; |True| actions[Run\nactions]    
-    actions --&gt; exitevent&gt;Fire event\neventsheet.exit]   
-    condition --&gt; |False| catch["Run\n[catch]"]    
-    catch --&gt; exitevent
+
+    subgraph Event sheet
+    activate --&gt; |True| condition{"Test\n[condition]"}
+    condition --&gt; |True| enterevent&gt;Fire event\neventsheet.enter]
+    condition --&gt; |False| eventcatch&gt;Fire event\neventsheet.catch] 
+
+    subgraph Run
+    enterevent --&gt; actions[Run\nactions\n...\n...]
+    actions --&gt; exitevent&gt;Fire event\neventsheet.exit]    
+    end
+
+    subgraph Catch
+    eventcatch --&gt; catch["Run\n[catch]"]
+    end
+
+    end
+
     exitevent --&gt; foreacheventsheet
+    catch --&gt; foreacheventsheet
+
     activate --&gt; |False| foreacheventsheet
 
-    foreacheventsheet --&gt; completeevent&gt;Fire event\ncomplete]
-    completeevent --&gt; endnode</code></pre>
+    foreacheventsheet --&gt; eventcomplete&gt;Fire event\ncomplete]
+    eventcomplete --&gt; endnode{{End}}</code></pre>
 <h4 id="start-running-a-event-sheet-in-a-group">Start running a event sheet in a group<a class="headerlink" href="#start-running-a-event-sheet-in-a-group" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Start running default group

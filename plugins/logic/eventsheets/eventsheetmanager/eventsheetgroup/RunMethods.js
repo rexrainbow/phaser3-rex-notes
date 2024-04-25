@@ -64,6 +64,8 @@ export default {
         var pendingTrees = this.pendingTrees;
         var blackboard = eventSheetManager.blackboard;
 
+        eventSheetManager.emit('start', this.name, eventSheetManager);
+
         // pendingTrees.length = 0;
 
         // Run parallel eventsheet, will return running, or failure
