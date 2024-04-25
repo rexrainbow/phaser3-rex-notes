@@ -88,8 +88,10 @@ declare class EventSheetManager extends EventEmitter {
     // startTree by title in groupName eventSheetGroup
     start(title: string, groupName: string, ignoreCondition: boolean): this;
 
-    stop(groupName?: string): this;
     stopGroup(groupName?: string): this;
+    stop(groupName?: string): this;
+    stopAllGroups(): this;
+    stopAll(): this;
 
     startGroupByEvent(eventName: string, groupName: string, once?: boolean): this;
     startGroupByEvent(config: EventSheetManager.IStartGroupByEventConfig): this;
