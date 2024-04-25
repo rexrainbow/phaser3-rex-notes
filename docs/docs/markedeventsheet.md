@@ -278,11 +278,22 @@ Round counter is started from `0`.
 
 ### Stop running
 
+Stop running a group of event sheet, also fires `'eventsheet.exit'` event. 
+And game objects with `'autoClear'` will be destroyed.
+
 - Stop running default group
+    ```javascript
+    eventSheetManager.stopGroup();
+    ```
+    or
     ```javascript
     eventSheetManager.stop();
     ```
 - Stop running a specific group of event sheets
+    ```javascript
+    eventSheetManager.stopGroup(groupName);
+    ```
+    or
     ```javascript
     eventSheetManager.stop(groupName);
     ```

@@ -89,6 +89,7 @@ declare class EventSheetManager extends EventEmitter {
     start(title: string, groupName: string, ignoreCondition: boolean): this;
 
     stop(groupName?: string): this;
+    stopGroup(groupName?: string): this;
 
     startGroupByEvent(eventName: string, groupName: string, once?: boolean): this;
     startGroupByEvent(config: EventSheetManager.IStartGroupByEventConfig): this;

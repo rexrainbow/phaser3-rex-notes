@@ -1,7 +1,7 @@
 import { RUNNING, IDLE, SUCCESS } from '../../../behaviortree';
 import RemoveItem from '../../../../utils/array/Remove.js';
 
-var OpenEventSheet = function (eventSheetManager, eventsheet) {
+export var OpenEventSheet = function (eventSheetManager, eventsheet) {
     var blackboard = eventSheetManager.blackboard;
     var commandExecutor = eventSheetManager.commandExecutor;
     var result = eventsheet.start(blackboard, commandExecutor);
@@ -17,14 +17,14 @@ var OpenEventSheet = function (eventSheetManager, eventsheet) {
     }
 }
 
-var TickEventSheet = function (eventSheetManager, eventsheet) {
+export var TickEventSheet = function (eventSheetManager, eventsheet) {
     var blackboard = eventSheetManager.blackboard;
     var commandExecutor = eventSheetManager.commandExecutor;
     var status = eventsheet.tick(blackboard, commandExecutor);
     return status;
 }
 
-var CloseEventSheet = function (eventSheetManager, eventsheet) {
+export var CloseEventSheet = function (eventSheetManager, eventsheet) {
     if (eventsheet.conditionPassed) {
         eventSheetManager.emit('eventsheet.exit', eventsheet.title, this.name, eventSheetManager);
     }
@@ -150,21 +150,6 @@ export default {
             this.isRunning = false;
             eventSheetManager.emit('complete', this.name, eventSheetManager);
         }
-
-        return this;
-    },
-
-    stop() {
-        this.isRunning = false;
-
-        var eventSheetManager = this.parent;
-        var blackboard = eventSheetManager.blackboard;
-        var commandExecutor = eventSheetManager.commandExecutor;
-
-        this.pendingTrees.forEach(function (eventsheet) {
-            eventsheet.abort(blackboard, commandExecutor);
-        })
-        this.pendingTrees.length = 0;
 
         return this;
     },

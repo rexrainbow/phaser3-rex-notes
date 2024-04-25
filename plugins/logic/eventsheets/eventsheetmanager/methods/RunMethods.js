@@ -63,12 +63,4 @@ export default {
         this.getTreeGroup(groupName).continue();
         return this;
     },
-
-    stop(groupName) {
-        if (groupName === undefined) {
-            groupName = this.defaultTreeGroupName;
-        }
-        this.getTreeGroup(groupName).stop();
-        return this;
-    },
 }
