@@ -161,7 +161,7 @@ Starting command will be ignored if group is running.
     eventSheetManager.startGroup(groupName);
     ```
 
-Procedure of running a group of event sheets
+##### Flow chart
 
 ```mermaid
 graph TD
@@ -351,6 +351,12 @@ Expression will store at [local memory](#local-memory)
 
 ### Events
 
+- Start A group of event sheets
+    ```javascript
+    eventSheetManager.on('start', function(groupName, eventSheetManager){ 
+
+    });
+    ```
 - A group of event sheets has been executed completed
     ```javascript
     eventSheetManager.on('complete', function(groupName, eventSheetManager){ 

@@ -5734,6 +5734,19 @@
     Start running a group of event sheets
   </a>
   
+    <nav class="md-nav" aria-label="Start running a group of event sheets">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#flow-chart" class="md-nav__link">
+    Flow chart
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -10132,6 +10145,19 @@
     Start running a group of event sheets
   </a>
   
+    <nav class="md-nav" aria-label="Start running a group of event sheets">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#flow-chart" class="md-nav__link">
+    Flow chart
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -10780,7 +10806,7 @@
     <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">startGroup</span><span class="p">(</span><span class="nx">groupName</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-<p>Procedure of running a group of event sheets</p>
+<h5 id="flow-chart">Flow chart<a class="headerlink" href="#flow-chart" title="Permanent link">&para;</a></h5>
 <pre class="mermaid"><code>graph TD
 
     startGroup{{"startGroup()"}}  ------&gt;  eventstart&gt;Fire event\nstart]
@@ -10930,6 +10956,11 @@ when exection of this event sheet is complete. </p>
 </ul>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
+<li>Start A group of event sheets
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">){</span><span class="w"> </span>
+
+<span class="p">});</span>
+</code></pre></div></li>
 <li>A group of event sheets has been executed completed
     <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">){</span><span class="w"> </span>
 

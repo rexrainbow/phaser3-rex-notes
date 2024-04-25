@@ -6973,6 +6973,7 @@
       var trees = this.trees;
       var pendingTrees = this.pendingTrees;
       var blackboard = eventSheetManager.blackboard;
+      eventSheetManager.emit('start', this.name, eventSheetManager);
 
       // pendingTrees.length = 0;
 
