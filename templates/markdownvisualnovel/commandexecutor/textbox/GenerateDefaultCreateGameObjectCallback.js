@@ -6,7 +6,8 @@ var GenerateDefaultCreateGameObjectCallback = function (
     style,
     {
         viewport
-    } = {}
+    } = {},
+    creators
 ) {
 
     var defaultFrameDelimiter = style.frameDelimiter || '-';
@@ -36,7 +37,7 @@ var GenerateDefaultCreateGameObjectCallback = function (
         SetValue(style, 'text.fixedHeight', height);
         SetValue(style, 'text.wordWrap.width', wrapWidth)
 
-        var gameObject = new SimpleTextBox(scene, style);
+        var gameObject = new SimpleTextBox(scene, style, creators);
 
         gameObject
             .setMinSize(width, height)

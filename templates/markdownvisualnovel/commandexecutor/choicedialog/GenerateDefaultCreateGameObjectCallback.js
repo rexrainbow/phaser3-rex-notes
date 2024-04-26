@@ -5,7 +5,8 @@ var GenerateDefaultCreateGameObjectCallback = function (
     style,
     {
         viewport
-    } = {}
+    } = {},
+    creators
 ) {
 
     return function (
@@ -25,7 +26,7 @@ var GenerateDefaultCreateGameObjectCallback = function (
             height = viewport.height * vph;
         }
 
-        var gameObject = new ConfirmDialog(scene, style);
+        var gameObject = new ConfirmDialog(scene, style, creators);
 
         gameObject
             .setMinSize(width, height)

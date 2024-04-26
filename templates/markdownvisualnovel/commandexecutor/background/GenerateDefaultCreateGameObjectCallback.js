@@ -5,7 +5,8 @@ var GenerateDefaultCreateGameObjectCallback = function (
     style,
     {
         viewport
-    } = {}
+    } = {},
+    creators
 ) {
 
     return function (scene, config) {

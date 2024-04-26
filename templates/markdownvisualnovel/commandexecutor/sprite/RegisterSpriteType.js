@@ -6,19 +6,29 @@ import Focus from './Focus.js';
 import Unfocus from './Unfocus.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
+const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
 var RegisterSpriteType = function (commandExecutor, config) {
     var { viewport } = config;
     var createGameObjectCallback = GetValue(config, `creators.${SPRITE}`, undefined);
     if (createGameObjectCallback === false) {
         return;
-    } else if (createGameObjectCallback === undefined) {
+    }
+
+    var creators;
+    if (IsPlainObject(createGameObjectCallback)) {
+        creators = createGameObjectCallback;
+        createGameObjectCallback = undefined;
+    }
+
+    if (createGameObjectCallback === undefined) {
         var style = GetValue(config, `styles.${SPRITE}`, {});
         createGameObjectCallback = GenerateDefaultCreateGameObjectCallback(
             style,
             {
                 viewport
-            }
+            },
+            creators
         );
     }
 

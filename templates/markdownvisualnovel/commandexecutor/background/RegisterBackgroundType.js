@@ -4,19 +4,29 @@ import GenerateDefaultCreateGameObjectCallback from './GenerateDefaultCreateGame
 import Cross from './Cross.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
+const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
 var RegisterBackgroundType = function (commandExecutor, config) {
     var { viewport } = config;
     var createGameObjectCallback = GetValue(config, `creators.${BG}`, undefined);
     if (createGameObjectCallback === false) {
         return;
-    } else if (createGameObjectCallback === undefined) {
+    }
+
+    var creators;
+    if (IsPlainObject(createGameObjectCallback)) {
+        creators = createGameObjectCallback;
+        createGameObjectCallback = undefined;
+    }
+
+    if (createGameObjectCallback === undefined) {
         var style = GetValue(config, `styles.${BG}`, {});
         createGameObjectCallback = GenerateDefaultCreateGameObjectCallback(
             style,
             {
                 viewport
-            }
+            },
+            creators
         );
     }
 
