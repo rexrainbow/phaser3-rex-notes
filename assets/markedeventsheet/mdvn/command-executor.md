@@ -245,9 +245,5 @@ SPRITE.to
   vpx=-0.3
 // Wait until tween complete
 
-uiLayer.to
-  alpha=0
-// Wait until ui layer fade-out
-
 bgm.stop
 

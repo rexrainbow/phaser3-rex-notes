@@ -1,4 +1,6 @@
 import { SimpleTextBox } from '../../../ui/ui-components.js';
+import { TransitionImagePack } from '../../../ui/ui-components.js';
+import DecorateGameObject from '../../../ui/utils/build/DecorateGameObject.js';
 import SetValue from '../../../../plugins/utils/object/SetValue.js';
 import AddViewportCoordinateProperties from '../../../../plugins/behaviors/viewportcoordinate/AddViewportCoordinateProperties.js';
 
@@ -35,7 +37,22 @@ var GenerateDefaultCreateGameObjectCallback = function (
 
         SetValue(style, 'text.fixedWidth', width);
         SetValue(style, 'text.fixedHeight', height);
-        SetValue(style, 'text.wordWrap.width', wrapWidth)
+        SetValue(style, 'text.wordWrap.width', wrapWidth);
+
+        if (creators === undefined) {
+            creators = {};
+        }
+
+        if (!creators.hasOwnProperty('icon')) {
+            creators.icon = function (scene, config) {
+                var gameObject = new TransitionImagePack(scene, config);
+                DecorateGameObject(gameObject, config);
+                gameObject.setOrigin(0.5, 1);
+
+                scene.add.existing(gameObject);
+                return gameObject;
+            }
+        }
 
         var gameObject = new SimpleTextBox(scene, style, creators);
 

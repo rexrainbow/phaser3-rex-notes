@@ -5,7 +5,8 @@ var Typing = function (
         displayName,
         icon, iconFrame,
         name, expression,
-        speed
+        speed,
+        iconCrossDuration, iconCrossMode = 'crossFade'
     } = {},
     commandExecutor,
     eventSheetManager, eventSheet
@@ -39,11 +40,16 @@ var Typing = function (
     }
 
     if (icon || iconFrame) {
-        var iconGameObject = gameObject.getElement('icon');
+        var iconGameObject = gameObject.getElement('icon'); // TransitionImagePack
         if (!icon) {
             icon = iconGameObject.texture.key;
         }
-        iconGameObject.setTexture(icon, iconFrame);
+
+        if (iconCrossDuration === undefined) {
+            iconCrossDuration = eventSheetManager.getData('$transitionDuration');
+        }
+        iconGameObject.setDuration(iconCrossDuration);
+        iconGameObject.transit(icon, iconFrame, iconCrossMode);
     }
     gameObject.layout();
 

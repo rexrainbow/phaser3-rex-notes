@@ -33,12 +33,8 @@ var Cross = function (
         commandExecutor.waitEvent(gameObject, 'complete');
     }
 
-    var durationSave = gameObject.duration;
-    if (duration !== undefined) {
-        gameObject.setDuration(duration);
-    }
+    gameObject.setDuration(duration);
     gameObject.transit(key, frame, mode);
-    gameObject.setDuration(durationSave);
 }
 
 export default Cross;
