@@ -286,6 +286,7 @@ class TransitionImage extends Container {
         // Without transition
         this.frontImage.setTexture(texture, frame);
         this.backImage.setTexture(texture, frame).setVisible(false);
+        this.resize(this.frontImage.width, this.frontImage.height);
         return this;
     }
 }

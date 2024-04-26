@@ -40,6 +40,7 @@ export default {
 
     setNextTexture(texture, frame) {
         this.nextImage.setTexture(texture, frame);
+        this.resize(this.nextImage.width, this.nextImage.height);
         return this;
     },
 
