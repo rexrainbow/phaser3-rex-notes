@@ -16,7 +16,10 @@ declare namespace EventSheetManager {
 }
 
 declare class EventSheetManager extends EventEmitter {
+    constructor(scene: unknown, config?: EventSheetManager.IConfig);
     constructor(config?: EventSheetManager.IConfig);
+
+    destroy(): void;
 
     readonly memory: { [key: string]: any };
 

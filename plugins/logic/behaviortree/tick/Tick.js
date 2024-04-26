@@ -22,6 +22,13 @@ class Tick {
         this._currentTime = undefined;
     }
 
+    destroy() {
+        this.tree = null;
+        this.blackboard = null;
+        this.target = null;
+        this._openNodes.length = 0;
+    }
+
     // Set members
     setTree(tree) {
         this.tree = tree;

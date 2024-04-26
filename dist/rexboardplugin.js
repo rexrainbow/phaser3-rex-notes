@@ -6454,11 +6454,16 @@
     hexagonGrid: HexagonGrid
   };
 
-  var Board$1 = /*#__PURE__*/function (_EE) {
-    _inherits(Board, _EE);
+  var Board$1 = /*#__PURE__*/function (_EventEmitter) {
+    _inherits(Board, _EventEmitter);
     function Board(scene, config) {
       var _this;
       _classCallCheck(this, Board);
+      if (IsPlainObject(scene) && config === undefined) {
+        config = scene;
+        scene = undefined;
+      }
+
       // scene: scene instance, or undefined
       _this = _callSuper(this, Board);
       _this.isShutdown = false;
@@ -6481,19 +6486,12 @@
       }
     }, {
       key: "boot",
-      value: function boot() {
-        if (this.scene && this.isBoard) {
-          this.scene.sys.events.once('shutdown', this.destroy, this);
-        }
-      }
+      value: function boot() {}
     }, {
       key: "shutdown",
       value: function shutdown(fromScene) {
         if (this.isShutdown) {
           return;
-        }
-        if (this.scene && this.isBoard) {
-          this.scene.sys.events.off('shutdown', this.destroy, this);
         }
         if (this.isBoard) {
           this.removeAllChess(!fromScene, true);
@@ -8688,6 +8686,26 @@
       return _callSuper(this, Board, arguments);
     }
     _createClass(Board, [{
+      key: "boot",
+      value: function boot() {
+        _get(_getPrototypeOf(Board.prototype), "boot", this).call(this);
+        if (this.scene && this.isBoard) {
+          this.scene.sys.events.once('shutdown', this.destroy, this);
+        }
+      }
+    }, {
+      key: "shutdown",
+      value: function shutdown(fromScene) {
+        if (this.isShutdown) {
+          return;
+        }
+        if (this.scene && this.isBoard) {
+          this.scene.sys.events.off('shutdown', this.destroy, this);
+        }
+        _get(_getPrototypeOf(Board.prototype), "shutdown", this).call(this, fromScene);
+        return this;
+      }
+    }, {
       key: "touchZone",
       get: function get() {
         if (this.input) {

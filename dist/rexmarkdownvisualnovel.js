@@ -964,6 +964,49 @@
     return EventEmitter;
   }(EE);
 
+  /**
+   * @author       Richard Davey <rich@photonstorm.com>
+   * @copyright    2018 Photon Storm Ltd.
+   * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
+   */
+
+  /**
+   * This is a slightly modified version of jQuery.isPlainObject.
+   * A plain object is an object whose internal class property is [object Object].
+   *
+   * @function Phaser.Utils.Objects.IsPlainObject
+   * @since 3.0.0
+   *
+   * @param {object} obj - The object to inspect.
+   *
+   * @return {boolean} `true` if the object is plain, otherwise `false`.
+   */
+  var IsPlainObject$Q = function IsPlainObject(obj) {
+    // Not plain objects:
+    // - Any object or value whose internal [[Class]] property is not "[object Object]"
+    // - DOM nodes
+    // - window
+    if (_typeof(obj) !== 'object' || obj.nodeType || obj === obj.window) {
+      return false;
+    }
+
+    // Support: Firefox <20
+    // The try/catch suppresses exceptions thrown when attempting to access
+    // the "constructor" property of certain host objects, ie. |window.location|
+    // https://bugzilla.mozilla.org/show_bug.cgi?id=814622
+    try {
+      if (obj.constructor && !{}.hasOwnProperty.call(obj.constructor.prototype, 'isPrototypeOf')) {
+        return false;
+      }
+    } catch (e) {
+      return false;
+    }
+
+    // If the function hasn't returned already, we're confident that
+    // |obj| is a plain object, created by {} or constructed with new Object
+    return true;
+  };
+
   var IDLE$7 = 0;
   var SUCCESS$1 = 1;
   var FAILURE = 2;
@@ -1075,49 +1118,6 @@
           break;
       }
     }
-  };
-
-  /**
-   * @author       Richard Davey <rich@photonstorm.com>
-   * @copyright    2018 Photon Storm Ltd.
-   * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
-   */
-
-  /**
-   * This is a slightly modified version of jQuery.isPlainObject.
-   * A plain object is an object whose internal class property is [object Object].
-   *
-   * @function Phaser.Utils.Objects.IsPlainObject
-   * @since 3.0.0
-   *
-   * @param {object} obj - The object to inspect.
-   *
-   * @return {boolean} `true` if the object is plain, otherwise `false`.
-   */
-  var IsPlainObject$Q = function IsPlainObject(obj) {
-    // Not plain objects:
-    // - Any object or value whose internal [[Class]] property is not "[object Object]"
-    // - DOM nodes
-    // - window
-    if (_typeof(obj) !== 'object' || obj.nodeType || obj === obj.window) {
-      return false;
-    }
-
-    // Support: Firefox <20
-    // The try/catch suppresses exceptions thrown when attempting to access
-    // the "constructor" property of certain host objects, ie. |window.location|
-    // https://bugzilla.mozilla.org/show_bug.cgi?id=814622
-    try {
-      if (obj.constructor && !{}.hasOwnProperty.call(obj.constructor.prototype, 'isPrototypeOf')) {
-        return false;
-      }
-    } catch (e) {
-      return false;
-    }
-
-    // If the function hasn't returned already, we're confident that
-    // |obj| is a plain object, created by {} or constructed with new Object
-    return true;
   };
 
   var DeepClone = function DeepClone(inObject) {
@@ -2911,6 +2911,12 @@
       this.properties = properties || {};
     }
     _createClass(BaseNode, [{
+      key: "destroy",
+      value: function destroy() {
+        this.parent = undefined;
+        this.properties = undefined;
+      }
+    }, {
       key: "setTitle",
       value: function setTitle(title) {
         this.title = title;
@@ -3128,6 +3134,17 @@
       return _this;
     }
     _createClass(Action, [{
+      key: "destroy",
+      value: function destroy() {
+        if (this.services) {
+          for (var i = 0, cnt = this.services.length; i < cnt; i++) {
+            this.services[i].destroy();
+          }
+        }
+        this.services = undefined;
+        _get(_getPrototypeOf(Action.prototype), "destroy", this).call(this);
+      }
+    }, {
       key: "addService",
       value: function addService(node, nodePool) {
         if (typeof node === 'string') {
@@ -3190,6 +3207,21 @@
       return _this;
     }
     _createClass(Composite, [{
+      key: "destroy",
+      value: function destroy() {
+        for (var i = 0, cnt = this.children.length; i < cnt; i++) {
+          this.children[i].destroy();
+        }
+        if (this.services) {
+          for (var i = 0, cnt = this.services.length; i < cnt; i++) {
+            this.services[i].destroy();
+          }
+        }
+        this.children = undefined;
+        this.services = undefined;
+        _get(_getPrototypeOf(Composite.prototype), "destroy", this).call(this);
+      }
+    }, {
       key: "insertChild",
       value: function insertChild(node, nodePool, index) {
         if (typeof node === 'string') {
@@ -3282,6 +3314,15 @@
       return _this;
     }
     _createClass(Decorator, [{
+      key: "destroy",
+      value: function destroy() {
+        if (this.child) {
+          this.child.destroy();
+        }
+        this.child = undefined;
+        _get(_getPrototypeOf(Decorator.prototype), "destroy", this).call(this);
+      }
+    }, {
       key: "addChild",
       value: function addChild(node, nodePool) {
         if (typeof node === 'string') {
@@ -5095,9 +5136,17 @@
       this._currentNode = null;
       this._currentTime = undefined;
     }
-
-    // Set members
     _createClass(Tick, [{
+      key: "destroy",
+      value: function destroy() {
+        this.tree = null;
+        this.blackboard = null;
+        this.target = null;
+        this._openNodes.length = 0;
+      }
+
+      // Set members
+    }, {
       key: "setTree",
       value: function setTree(tree) {
         this.tree = tree;
@@ -5210,6 +5259,14 @@
       this.ticker = new Tick().setTree(this);
     }
     _createClass(BehaviorTree, [{
+      key: "destroy",
+      value: function destroy() {
+        this._root.destroy();
+        this.ticker.destroy();
+        this._root = undefined;
+        this.ticker = undefined;
+      }
+    }, {
       key: "setTitle",
       value: function setTitle(title) {
         this.title = title;
@@ -5489,6 +5546,12 @@
       // Node memory : this._treeMemory[treeID].nodeMemory[nodeID]
     }
     _createClass(Blackboard, [{
+      key: "destroy",
+      value: function destroy() {
+        this._baseMemory = undefined;
+        this._treeMemory = undefined;
+      }
+    }, {
       key: "_getTreeMemory",
       value: function _getTreeMemory(treeID) {
         if (!this._treeMemory[treeID]) {
@@ -7044,17 +7107,6 @@
       }
       return this;
     },
-    stop: function stop() {
-      this.isRunning = false;
-      var eventSheetManager = this.parent;
-      var blackboard = eventSheetManager.blackboard;
-      var commandExecutor = eventSheetManager.commandExecutor;
-      this.pendingTrees.forEach(function (eventsheet) {
-        eventsheet.abort(blackboard, commandExecutor);
-      });
-      this.pendingTrees.length = 0;
-      return this;
-    },
     startTree: function startTree(title) {
       var ignoreCondition = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
       // Run a single event sheet(eventsheet)
@@ -7081,23 +7133,55 @@
     }
   };
 
+  var StopMethods$1 = {
+    stop: function stop() {
+      var eventSheetManager = this.parent;
+      var blackboard = eventSheetManager.blackboard;
+      var commandExecutor = eventSheetManager.commandExecutor;
+      var trees = this.pendingTrees;
+      for (var i = 0, cnt = trees.length; i < cnt; i++) {
+        var eventsheet = trees[i];
+        eventsheet.abort(blackboard, commandExecutor);
+        CloseEventSheet.call(this, eventSheetManager, eventsheet);
+      }
+      trees.length = 0;
+      this.isRunning = false;
+      return this;
+    }
+  };
+
   var Methods$o = {};
-  Object.assign(Methods$o, TreeMethods$1, AddTreeMethods$2, RemoveTreeMethods$2, TreeActiveStateMethods$1, SaveLoadTreeMethods, StateMethods$1, RunMethods$1);
+  Object.assign(Methods$o, TreeMethods$1, AddTreeMethods$2, RemoveTreeMethods$2, TreeActiveStateMethods$1, SaveLoadTreeMethods, StateMethods$1, RunMethods$1, StopMethods$1);
 
-  var EventBehaviorTreeGroup = /*#__PURE__*/_createClass(function EventBehaviorTreeGroup(parent) {
-    var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
-      _ref$name = _ref.name,
-      name = _ref$name === void 0 ? '' : _ref$name;
-    _classCallCheck(this, EventBehaviorTreeGroup);
-    this.parent = parent;
-    this.name = name;
-    this.trees = [];
-    this.pendingTrees = [];
-    this.closedTrees = []; // Temporary eventsheet array
+  var EventBehaviorTreeGroup = /*#__PURE__*/function () {
+    function EventBehaviorTreeGroup(parent) {
+      var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+        _ref$name = _ref.name,
+        name = _ref$name === void 0 ? '' : _ref$name;
+      _classCallCheck(this, EventBehaviorTreeGroup);
+      this.parent = parent;
+      this.name = name;
+      this.trees = [];
+      this.pendingTrees = [];
+      this.closedTrees = []; // Temporary eventsheet array
 
-    this.isRunning = false;
-    this._threadKey = null;
-  });
+      this.isRunning = false;
+      this._threadKey = null;
+    }
+    _createClass(EventBehaviorTreeGroup, [{
+      key: "destroy",
+      value: function destroy() {
+        this.stop();
+        this.pendingTrees.length = 0;
+        this.closedTrees.length = 0;
+        this.isRunning = false;
+        for (var i = 0, cnt = this.trees.length; i < cnt; i++) {
+          this.trees[i].destroy();
+        }
+      }
+    }]);
+    return EventBehaviorTreeGroup;
+  }();
   Object.assign(EventBehaviorTreeGroup.prototype, Methods$o);
 
   var TreeMethods = {
@@ -15346,12 +15430,29 @@
       }
       this.getTreeGroup(groupName)["continue"]();
       return this;
-    },
-    stop: function stop(groupName) {
+    }
+  };
+
+  var StopMethods = {
+    stopGroup: function stopGroup(groupName) {
       if (groupName === undefined) {
         groupName = this.defaultTreeGroupName;
       }
       this.getTreeGroup(groupName).stop();
+      return this;
+    },
+    stop: function stop(groupName) {
+      this.stopGroup(groupName);
+      return this;
+    },
+    stopAllGroups: function stopAllGroups() {
+      for (var name in this.treeGroups) {
+        this.treeGroups[name].stop();
+      }
+      return this;
+    },
+    stopAll: function stopAll() {
+      this.stopAllGroups();
       return this;
     }
   };
@@ -15398,19 +15499,28 @@
   };
 
   var Methods$n = {};
-  Object.assign(Methods$n, PauseEventSheetMethods$1, TreeMethods, AddTreeMethods$1, RemoveTreeMethods$1, TreeActiveStateMethods, SaveLoadTreesMethods, DataMethods$4, StateMethods, ValueConvertMethods, RunMethods, BindEventMethods, RoundCounterMethods);
+  Object.assign(Methods$n, PauseEventSheetMethods$1, TreeMethods, AddTreeMethods$1, RemoveTreeMethods$1, TreeActiveStateMethods, SaveLoadTreesMethods, DataMethods$4, StateMethods, ValueConvertMethods, RunMethods, StopMethods, BindEventMethods, RoundCounterMethods);
 
   BehaviorTree.setStartIDValue(0);
   var EventSheetManager = /*#__PURE__*/function (_EventEmitter) {
     _inherits(EventSheetManager, _EventEmitter);
-    function EventSheetManager() {
+    function EventSheetManager(scene, config) {
       var _this;
-      var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-        commandExecutor = _ref.commandExecutor,
-        _ref$parallel = _ref.parallel,
-        parallel = _ref$parallel === void 0 ? false : _ref$parallel;
       _classCallCheck(this, EventSheetManager);
+      if (IsPlainObject$Q(scene) && config === undefined) {
+        config = scene;
+        scene = undefined;
+      }
+      if (config === undefined) {
+        config = {};
+      }
       _this = _callSuper(this, EventSheetManager);
+      _this.isShutdown = false;
+      _this.scene = scene;
+      var _config = config,
+        commandExecutor = _config.commandExecutor,
+        _config$parallel = _config.parallel,
+        parallel = _config$parallel === void 0 ? false : _config$parallel;
       _this.defaultTreeGroupName = '_';
       _this.setCommandExecutor(commandExecutor);
       _this.parallel = parallel;
@@ -15421,9 +15531,42 @@
 
       _this.treeGroups = {};
       _this.setRoundCounter(0);
+      _this.boot();
       return _this;
     }
     _createClass(EventSheetManager, [{
+      key: "boot",
+      value: function boot() {}
+    }, {
+      key: "shutdown",
+      value: function shutdown(fromScene) {
+        if (this.isShutdown) {
+          return;
+        }
+        if (this.commandExecutor && this.commandExecutor.destroy) {
+          this.commandExecutor.destroy(fromScene);
+        }
+        for (var name in this.treeGroups) {
+          this.treeGroups[name].destroy();
+        }
+        this.blackboard.destroy();
+        _get(_getPrototypeOf(EventSheetManager.prototype), "shutdown", this).call(this);
+        this.scene = undefined;
+        this.commandExecutor = undefined;
+        this.blackboard = undefined;
+        this.isShutdown = true;
+        return this;
+      }
+    }, {
+      key: "destroy",
+      value: function destroy(fromScene) {
+        if (this.isShutdown) {
+          return;
+        }
+        this.emit('destroy', this, fromScene);
+        this.shutdown(fromScene);
+      }
+    }, {
       key: "memory",
       get: function get() {
         return this.blackboard.getGlobalMemory();

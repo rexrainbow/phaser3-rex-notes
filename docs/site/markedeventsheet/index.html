@@ -10900,11 +10900,19 @@
 when exection of this event sheet is complete. </p>
 </div>
 <h3 id="stop-running">Stop running<a class="headerlink" href="#stop-running" title="Permanent link">&para;</a></h3>
+<p>Stop running a group of event sheet, also fires <code>'eventsheet.exit'</code> event. 
+And game objects with <code>'autoClear'</code> will be destroyed.</p>
 <ul>
 <li>Stop running default group
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">stopGroup</span><span class="p">();</span>
+</code></pre></div>
+    or
     <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
 </code></pre></div></li>
 <li>Stop running a specific group of event sheets
+    <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">stopGroup</span><span class="p">(</span><span class="nx">groupName</span><span class="p">);</span>
+</code></pre></div>
+    or
     <div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">stop</span><span class="p">(</span><span class="nx">groupName</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>

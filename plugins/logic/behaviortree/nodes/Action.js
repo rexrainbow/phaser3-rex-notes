@@ -27,6 +27,17 @@ class Action extends BaseNode {
         }
     }
 
+    destroy() {
+        if (this.services) {
+            for (var i = 0, cnt = this.services.length; i < cnt; i++) {
+                this.services[i].destroy();
+            }
+        }
+        this.services = undefined;
+
+        super.destroy();
+    }
+
     addService(node, nodePool) {
         if (typeof (node) === 'string') {  // Node ID
             node = nodePool[node];

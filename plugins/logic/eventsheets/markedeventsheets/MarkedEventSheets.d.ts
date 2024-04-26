@@ -17,6 +17,9 @@ declare namespace MarkedEventSheets {
 }
 
 declare class MarkedEventSheets extends EventSheetManager {
+    constructor(scene: unknown, config?: MarkedEventSheets.IConfig);
+    constructor(config?: MarkedEventSheets.IConfig);
+
     addEventSheet(
         markedString: string,
         groupName?: string,

@@ -14,6 +14,11 @@ class Blackboard {
         // Node memory : this._treeMemory[treeID].nodeMemory[nodeID]
     }
 
+    destroy() {
+        this._baseMemory = undefined;
+        this._treeMemory = undefined;
+    }
+
     _getTreeMemory(treeID) {
         if (!this._treeMemory[treeID]) {
             this._treeMemory[treeID] = {

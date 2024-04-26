@@ -14,6 +14,18 @@ class EventBehaviorTreeGroup {
         this.isRunning = false;
         this._threadKey = null;
     }
+
+    destroy() {
+        this.stop();
+
+        this.pendingTrees.length = 0;
+        this.closedTrees.length = 0;
+        this.isRunning = false;
+
+        for (var i = 0, cnt = this.trees.length; i < cnt; i++) {
+            this.trees[i].destroy();
+        }
+    }
 }
 
 Object.assign(

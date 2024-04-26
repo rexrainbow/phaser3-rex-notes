@@ -48,7 +48,7 @@ declare namespace Board {
 
 declare class Board<ChessType = unknown> extends EE {
     constructor(scene: unknown, config?: Board.IConfig);
-    constructor(config: Board.IConfig);
+    constructor(config?: Board.IConfig);
 
     scene: unknown;
 

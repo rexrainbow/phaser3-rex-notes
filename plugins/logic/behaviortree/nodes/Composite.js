@@ -33,6 +33,23 @@ class Composite extends BaseNode {
         }
     }
 
+    destroy() {
+        for (var i = 0, cnt = this.children.length; i < cnt; i++) {
+            this.children[i].destroy();
+        }
+
+        if (this.services) {
+            for (var i = 0, cnt = this.services.length; i < cnt; i++) {
+                this.services[i].destroy();
+            }
+        }
+
+        this.children = undefined;
+        this.services = undefined;
+
+        super.destroy();
+    }
+
     insertChild(node, nodePool, index) {
         if (typeof (node) === 'string') {  // Node ID
             node = nodePool[node];

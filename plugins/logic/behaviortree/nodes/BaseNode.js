@@ -34,6 +34,11 @@ export default class BaseNode {
         this.properties = properties || {};
     }
 
+    destroy() {
+        this.parent = undefined;
+        this.properties = undefined;
+    }
+
     setTitle(title) {
         this.title = title;
         return this;

@@ -69,7 +69,8 @@ class Demo extends Phaser.Scene {
             eventSheetManager.start();
 
             setTimeout(function () {
-                eventSheetManager.stop();
+                // eventSheetManager.stop();
+                eventSheetManager.destroy();
             }, 8000)
         })
 

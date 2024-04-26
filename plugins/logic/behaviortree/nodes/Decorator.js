@@ -26,6 +26,16 @@ class Decorator extends BaseNode {
         }
     }
 
+    destroy() {
+        if (this.child) {
+            this.child.destroy();
+        }
+
+        this.child = undefined;
+
+        super.destroy();
+    }
+
     addChild(node, nodePool) {
         if (typeof (node) === 'string') {  // Node ID
             node = nodePool[node];

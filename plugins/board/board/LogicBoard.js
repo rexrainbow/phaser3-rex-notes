@@ -1,4 +1,4 @@
-import EE from '../../utils/eventemitter/EventEmitter.js';
+import EventEmitter from '../../utils/eventemitter/EventEmitter.js';
 import LogicMethods from './LogicMethods.js';
 import BoardData from './boarddata/BoardData.js';
 import DefaultGrids from '../grid/index.js';
@@ -6,9 +6,9 @@ import GetValue from '../../utils/object/GetValue.js';
 import IsPlainObject from '../../utils/object/IsPlainObject.js';
 import GetBoard from './chess/GetBoard.js';
 
-class Board extends EE {
+class Board extends EventEmitter {
     constructor(scene, config) {
-        if (IsPlainObject(scene) && config === undefined) {
+        if (IsPlainObject(scene) && (config === undefined)) {
             config = scene;
             scene = undefined;
         }

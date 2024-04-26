@@ -37,6 +37,14 @@ class BehaviorTree {
         this.ticker = (new Tick()).setTree(this);
     }
 
+    destroy() {
+        this._root.destroy();
+        this.ticker.destroy();
+
+        this._root = undefined;
+        this.ticker = undefined;
+    }
+
     setTitle(title) {
         this.title = title;
         return this;
