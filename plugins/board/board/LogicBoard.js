@@ -8,6 +8,11 @@ import GetBoard from './chess/GetBoard.js';
 
 class Board extends EE {
     constructor(scene, config) {
+        if (IsPlainObject(scene) && config === undefined) {
+            config = scene;
+            scene = undefined;
+        }
+
         // scene: scene instance, or undefined
         super();
 
@@ -29,18 +34,11 @@ class Board extends EE {
     }
 
     boot() {
-        if (this.scene && this.isBoard) {
-            this.scene.sys.events.once('shutdown', this.destroy, this);
-        }
     }
 
     shutdown(fromScene) {
         if (this.isShutdown) {
             return;
-        }
-
-        if (this.scene && this.isBoard) {
-            this.scene.sys.events.off('shutdown', this.destroy, this);
         }
 
         if (this.isBoard) {
