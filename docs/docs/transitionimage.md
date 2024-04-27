@@ -97,8 +97,6 @@ var image = scene.add.rexTransitionImage(x, y, texture, frame, {
     // duration: 1000,
     // ease: 'Linear',
     // mask: undefined,
-
-    // width: undefined, height: undefined,
 });
 ```
 or
@@ -119,8 +117,6 @@ var image = scene.add.rexTransitionImage(x, y, texture, frame, {
     // duration: 1000,
     // ease: 'Linear',
     // mask: undefined,
-
-    // width: undefined, height: undefined,
 });
 ```
 
@@ -135,8 +131,6 @@ var image = scene.add.rexTransitionImage(x, y, texture, frame, {
 - `mask` : Mask game object.
     - `true` : Default graphics game object.
     - Any shape game object, or [custom shape](shape-custom-shapes.md), [custom progress](shape-custom-progress.md) game object.
-- `width`, `height` : Scale images to fit this size (`width`x`height`).
-    - `undefined` : Don't scale images.
 
 
 If `onStart`, `onProgress` and `onComplete` are all `undefined`, it will use **cross-fade** as default transition callbacks.
@@ -160,8 +154,6 @@ var image = scene.make.rexTransitionImage({
     // duration: 1000,
     // ease: 'Linear',
     // mask: undefined,
-
-    // width: undefined, height: undefined,
 
     // origin: {x: 0.5, y: 0.5},
     add: true
