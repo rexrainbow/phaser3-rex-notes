@@ -237,21 +237,21 @@ class TransitionImage extends Container {
                 .setChildVisible(this.frontImage, true)
                 .setChildVisible(this.backImage, true)
 
-            RunCallback(
+            RunCallback.call(this,
                 this.onStartCallback, this.onStartCallbackScope,
                 this, currentImage, nextImage, value
             );
         }
 
         // Progress
-        RunCallback(
+        RunCallback.call(this,
             this.onProgressCallback, this.onProgressCallbackScope,
             this, currentImage, nextImage, value
         );
 
         // Complete
         if (value === 1) {
-            RunCallback(
+            RunCallback.call(this,
                 this.onCompleteCallback, this.onCompleteCallbackScope,
                 this, currentImage, nextImage, value
             );
@@ -322,10 +322,32 @@ var RunCallback = function (callback, scope, parent, currentImage, nextImage, t)
         return;
     }
 
+    var currentImageScaleSave = currentImage.scale;
+    var nextImageScaleSave = nextImage.scale;
+
+    // Scale image back to 1
+    if (currentImageScaleSave !== 1) {
+        currentImage.setScale(1);
+    }
+    if (nextImageScaleSave !== 1) {
+        nextImage.setScale(1);
+    }
+
     if (scope) {
         callback.call(scope, parent, currentImage, nextImage, t);
     } else {
         callback(parent, currentImage, nextImage, t);
+    }
+
+    // Scale image by related value
+    if (currentImageScaleSave !== 1) {
+        currentImage.setScale(currentImageScaleSave * currentImage.scale);
+        this.resetChildScaleState(currentImage);
+    }
+
+    if (nextImageScaleSave !== 1) {
+        nextImage.setScale(nextImageScaleSave * nextImage.scale);
+        this.resetChildScaleState(nextImage);
     }
 }
 
