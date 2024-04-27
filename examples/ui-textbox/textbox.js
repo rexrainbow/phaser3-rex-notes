@@ -56,6 +56,7 @@ var createTextBox = function (scene, x, y, config) {
     var fixedHeight = GetValue(config, 'fixedHeight', 0);
     var titleText = GetValue(config, 'title', undefined);
     var typingMode = GetValue(config, 'typingMode', 'page');
+    var maxLines = (width > 0) ? 0 : 3;
 
     var textBox = scene.rexUI.add.textBox({
         x: x, y: y,
@@ -68,7 +69,7 @@ var createTextBox = function (scene, x, y, config) {
         icon: scene.rexUI.add.roundRectangle({ radius: 20, color: COLOR_DARK }),
 
         // text: getBuiltInText(scene, wrapWidth, fixedWidth, fixedHeight),
-        text: getBBcodeText(scene, wrapWidth, fixedWidth, fixedHeight),
+        text: getBBcodeText(scene, wrapWidth, fixedWidth, fixedHeight, maxLines),
         expandTextWidth: (width > 0),
         expandTextHeight: (height > 0),
 
@@ -134,7 +135,7 @@ var createTextBox = function (scene, x, y, config) {
     return textBox;
 }
 
-var getBuiltInText = function (scene, wrapWidth, fixedWidth, fixedHeight) {
+var getBuiltInText = function (scene, wrapWidth, fixedWidth, fixedHeight, maxLines) {
     return scene.add.text(0, 0, '', {
         fontSize: '20px',
         fixedWidth: fixedWidth,
@@ -142,11 +143,11 @@ var getBuiltInText = function (scene, wrapWidth, fixedWidth, fixedHeight) {
         wordWrap: {
             width: wrapWidth
         },
-        maxLines: 3
+        maxLines: maxLines
     })
 }
 
-var getBBcodeText = function (scene, wrapWidth, fixedWidth, fixedHeight) {
+var getBBcodeText = function (scene, wrapWidth, fixedWidth, fixedHeight, maxLines) {
     return scene.rexUI.add.BBCodeText(0, 0, '', {
         fixedWidth: fixedWidth,
         fixedHeight: fixedHeight,
@@ -156,7 +157,7 @@ var getBBcodeText = function (scene, wrapWidth, fixedWidth, fixedHeight) {
             mode: 'word',
             width: wrapWidth
         },
-        maxLines: 3
+        maxLines: maxLines
     })
 }
 

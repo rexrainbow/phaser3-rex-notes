@@ -40,6 +40,13 @@ var TextBoxBase = function (GOClass, type) {
                         break;
 
                 }
+
+                if (expandTextWidth) {
+                    text._minWidth = 0;
+                }
+                if (expandTextHeight) {
+                    text._minHeight = 0;
+                }
             }
 
             // Build typing and page behaviors
