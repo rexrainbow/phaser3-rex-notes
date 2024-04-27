@@ -19,20 +19,22 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
+        // Size of text game object is changing when typing
         createTextBox(this, 100, 50, {
             wrapWidth: 500,
         })
             .start(content, 50);
 
+        // Fixed size of textbox, and text game object
         createTextBox(this, 100, 200, {
-            wrapWidth: 500,
-            fixedWidth: 500,
-            fixedHeight: 65,
+            width: 600,
+            height: 150,
             title: 'Title'
         })
             .start(content, 50);
 
-        createTextBox(this, 100, 400, {
+        // Fixed size of text game object
+        createTextBox(this, 100, 450, {
             wrapWidth: 500,
             fixedWidth: 500,
             fixedHeight: 65,
@@ -47,15 +49,17 @@ class Demo extends Phaser.Scene {
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 var createTextBox = function (scene, x, y, config) {
+    var width = GetValue(config, 'width', 0);
+    var height = GetValue(config, 'height', 0);
     var wrapWidth = GetValue(config, 'wrapWidth', 0);
     var fixedWidth = GetValue(config, 'fixedWidth', 0);
     var fixedHeight = GetValue(config, 'fixedHeight', 0);
     var titleText = GetValue(config, 'title', undefined);
     var typingMode = GetValue(config, 'typingMode', 'page');
 
-
     var textBox = scene.rexUI.add.textBox({
         x: x, y: y,
+        width: width, height: height,
 
         typingMode: typingMode,
 
@@ -65,6 +69,8 @@ var createTextBox = function (scene, x, y, config) {
 
         // text: getBuiltInText(scene, wrapWidth, fixedWidth, fixedHeight),
         text: getBBcodeText(scene, wrapWidth, fixedWidth, fixedHeight),
+        expandTextWidth: (width > 0),
+        expandTextHeight: (height > 0),
 
         action: scene.add.image(0, 0, 'nextPage').setTint(COLOR_LIGHT).setVisible(false),
 

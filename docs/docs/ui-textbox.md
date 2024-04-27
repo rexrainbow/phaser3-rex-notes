@@ -104,6 +104,8 @@ var textBox = scene.rexUI.add.textBox({
     iconMask: false,
 
     text: textGameObject,
+    expandTextWidth: false,
+    expandTextHeight: false,
 
     action: actionGameObject,
     actionMask: false,
@@ -178,6 +180,10 @@ var textBox = scene.rexUI.add.textBox({
         - [Built-in text object](text.md) : `fixedWidth` and `fixedHeight`, set to `0` to disable this feature.
         - [BBcode text object](bbcodetext.md) : `fixedWidth` and `fixedHeight`, set to `0` to disable this feature.
         - [Tag text object](tagtext.md) : `fixedWidth` and `fixedHeight`, set to `0` to disable this feature.
+- `expandTextWidth` : 
+    - `true` : Expand `fixedWidth` and `wrapWidth` when layout, to change width of text game object to fit this textbox.
+- `expandTextHeight` : 
+    - `true` : Expand `fixedHeight` when layout, to change height of text game object to fit this textbox.
 - `action` : Game object of action icon, optional.
 - `actionMask` : Set true to add a *circle* mask on action icon game object.
 - `align` : Alignment of title, text game objects.

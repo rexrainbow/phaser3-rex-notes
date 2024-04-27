@@ -1,6 +1,10 @@
 import TextPage from '../textpage/TextPage.js';
 import TextTyping from '../texttyping/TextTyping.js';
-import { TextType, TagTextType, BitmapTextType } from '../../../plugins/utils/text/GetTextObjectType.js';
+import {
+    TextType, TagTextType, BitmapTextType
+} from '../../../plugins/utils/text/GetTextObjectType.js';
+
+import GetTextObjectType from '../../../plugins/utils/text/GetTextObjectType.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -15,6 +19,30 @@ var TextBoxBase = function (GOClass, type) {
 
             // childrenMap must have 'text' element
             var text = this.childrenMap.text;
+
+            // Expand text size
+            var expandTextWidth = GetValue(config, 'expandTextWidth', false);
+            var expandTextHeight = GetValue(config, 'expandTextHeight', false);
+            if (expandTextWidth || expandTextHeight) {
+                var textObjectType = GetTextObjectType(text);
+                switch (textObjectType) {
+                    case TextType:
+                    case TagTextType:
+                        text.resize = function (width, height) {
+                            var fixedWidth = (expandTextWidth) ? width : 0;
+                            var fixedHeight = (expandTextHeight) ? height : 0;
+                            text.setFixedSize(fixedWidth, fixedHeight);
+
+                            if (fixedWidth > 0) {
+                                text.setWordWrapWidth(fixedWidth);
+                            }
+                        }
+                        break;
+
+                }
+            }
+
+            // Build typing and page behaviors
             this.setTypingMode(GetValue(config, 'typingMode', 'page'));
             this.page = new TextPage(text, GetValue(config, 'page', undefined));
             this.typing = new TextTyping(text, GetValue(config, 'typing', config.type));
@@ -23,8 +51,9 @@ var TextBoxBase = function (GOClass, type) {
                 .on('type', this.onType, this)
                 .on('typechar', this.onTypeChar, this)
 
-            this.textWidth = text.width;
-            this.textHeight = text.height;
+            // Run layout again when size of text game object has changed
+            this.textWidthSave = text.width;
+            this.textHeightSave = text.height;
         }
 
         setTypingMode(mode) {
@@ -173,9 +202,9 @@ var TextBoxBase = function (GOClass, type) {
 
         onType() {
             var text = this.childrenMap.text;
-            if ((this.textWidth !== text.width) || (this.textHeight !== text.height)) {
-                this.textWidth = text.width;
-                this.textHeight = text.height;
+            if ((this.textWidthSave !== text.width) || (this.textHeightSave !== text.height)) {
+                this.textWidthSave = text.width;
+                this.textHeightSave = text.height;
                 this.getTopmostSizer().layout();
             }
             this.emit('type');

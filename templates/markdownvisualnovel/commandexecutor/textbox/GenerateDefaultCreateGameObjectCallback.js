@@ -33,11 +33,12 @@ var GenerateDefaultCreateGameObjectCallback = function (
             height = viewport.height * vph;
         }
 
-        var wrapWidth = Math.max(0, width - 20);
-
-        SetValue(style, 'text.fixedWidth', width);
-        SetValue(style, 'text.fixedHeight', height);
-        SetValue(style, 'text.wordWrap.width', wrapWidth);
+        if (width > 0) {
+            SetValue(style, 'expandTextWidth', true);
+        }
+        if (height > 0) {
+            SetValue(style, 'expandTextHeight', true);
+        }
 
         if (creators === undefined) {
             creators = {};
