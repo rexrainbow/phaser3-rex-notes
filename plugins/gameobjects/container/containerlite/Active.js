@@ -14,7 +14,7 @@ export default {
         }
         return this;
     },
-    
+
     resetChildActiveState(child) {
         var localState = GetLocalState(child);
         localState.active = child.active;
@@ -43,5 +43,10 @@ export default {
             parent.resetChildActiveState(this);
         }
         return this;
-    }
+    },
+
+    getChildLocalActive(child) {
+        var localState = GetLocalState(child);
+        return localState.active;
+    },
 };

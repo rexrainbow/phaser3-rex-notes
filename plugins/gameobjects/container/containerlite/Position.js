@@ -6,22 +6,22 @@ export default {
         if (child.isRexContainerLite) {
             child.syncChildrenEnable = false;
         }
-        var state = GetLocalState(child);
-        var parent = state.parent;
+        var localState = GetLocalState(child);
+        var parent = localState.parent;
 
-        if (state.syncPosition) {
-            child.x = state.x;
-            child.y = state.y;
+        if (localState.syncPosition) {
+            child.x = localState.x;
+            child.y = localState.y;
             parent.localToWorld(child);
         }
 
-        if (state.syncRotation) {
-            child.rotation = state.rotation + parent.rotation;
+        if (localState.syncRotation) {
+            child.rotation = localState.rotation + parent.rotation;
         }
 
-        if (state.syncScale) {
-            child.scaleX = state.scaleX * parent.scaleX;
-            child.scaleY = state.scaleY * parent.scaleY;
+        if (localState.syncScale) {
+            child.scaleX = localState.scaleX * parent.scaleX;
+            child.scaleY = localState.scaleY * parent.scaleY;
         }
 
         if (child.isRexContainerLite) {
@@ -39,16 +39,16 @@ export default {
     },
 
     resetChildPositionState(child) {
-        var state = GetLocalState(child);
-        var parent = state.parent;
-        state.x = child.x;
-        state.y = child.y;
-        parent.worldToLocal(state);
+        var localState = GetLocalState(child);
+        var parent = localState.parent;
+        localState.x = child.x;
+        localState.y = child.y;
+        parent.worldToLocal(localState);
 
-        state.scaleX = GetScale(child.scaleX, parent.scaleX);
-        state.scaleY = GetScale(child.scaleY, parent.scaleY);
+        localState.scaleX = GetScale(child.scaleX, parent.scaleX);
+        localState.scaleY = GetScale(child.scaleY, parent.scaleY);
 
-        state.rotation = child.rotation - parent.rotation;
+        localState.rotation = child.rotation - parent.rotation;
         return this;
     },
 
@@ -60,9 +60,9 @@ export default {
     },
 
     setChildLocalPosition(child, x, y) {
-        var state = GetLocalState(child);
-        state.x = x;
-        state.y = y;
+        var localState = GetLocalState(child);
+        localState.x = x;
+        localState.y = y;
         this.updateChildPosition(child);
         return this;
     },
@@ -73,5 +73,16 @@ export default {
             parent.resetChildPositionState(this);
         }
         return this;
-    }
+    },
+
+    getChildLocalX(child) {
+        var localState = GetLocalState(child);
+        return localState.x;
+    },
+
+    getChildLocalY(child) {
+        var localState = GetLocalState(child);
+        return localState.y;
+    },
+
 };

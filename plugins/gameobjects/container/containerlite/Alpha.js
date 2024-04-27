@@ -44,5 +44,10 @@ export default {
             parent.resetChildAlphaState(this);
         }
         return this;
-    }
+    },
+
+    getChildLocalAlpha(child) {
+        var localState = GetLocalState(child);
+        return localState.alpha;
+    },
 };

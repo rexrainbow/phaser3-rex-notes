@@ -74,5 +74,10 @@ export default {
             parent.resetChildVisibleState(this);
         }
         return this;
-    }
+    },
+
+    getChildLocalVisible(child) {
+        var localState = GetLocalState(child);
+        return localState.visible;
+    },
 };

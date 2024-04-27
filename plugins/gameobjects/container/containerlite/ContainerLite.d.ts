@@ -96,10 +96,20 @@ declare class ContainerLite extends Base {
         y: number
     ): this;
 
+    getChildLocalX(
+        child: Phaser.GameObjects.GameObject
+    ): number;
+
+    getChildLocalY(
+        child: Phaser.GameObjects.GameObject
+    ): number;
+
     setChildRotation(
         child: Phaser.GameObjects.GameObject,
         rotation: number
     ): this;
+
+
 
     setChildAngle(
         child: Phaser.GameObjects.GameObject,
@@ -116,6 +126,10 @@ declare class ContainerLite extends Base {
         angle: number
     ): this;
 
+    getChildLocalRotation(
+        child: Phaser.GameObjects.GameObject
+    ): number;
+
     setChildScale(
         child: Phaser.GameObjects.GameObject,
         scaleX: number,
@@ -128,6 +142,14 @@ declare class ContainerLite extends Base {
         scaleY: number
     ): this;
 
+    getChildLocalScaleX(
+        child: Phaser.GameObjects.GameObject
+    ): number;
+
+    getChildLocalScaleY(
+        child: Phaser.GameObjects.GameObject
+    ): number;
+
     setChildDisplaySize(
         child: Phaser.GameObjects.GameObject,
         width: number,
@@ -139,6 +161,14 @@ declare class ContainerLite extends Base {
         visible: boolean
     ): this;
 
+    setChildLocalVisible(
+        child: Phaser.GameObjects.GameObject,
+        visible: boolean): this;
+
+    getChildLocalVisible(
+        child: Phaser.GameObjects.GameObject
+    ): boolean;
+
     setChildAlpha(
         child: Phaser.GameObjects.GameObject,
         alpha: number
@@ -148,6 +178,10 @@ declare class ContainerLite extends Base {
         child: Phaser.GameObjects.GameObject,
         alpha: number
     ): this;
+
+    getChildLocalAlpha(
+        child: Phaser.GameObjects.GameObject
+    ): number;
 
     resetChildState(
         child: Phaser.GameObjects.GameObject
@@ -176,6 +210,20 @@ declare class ContainerLite extends Base {
     resetChildActiveState(
         child: Phaser.GameObjects.GameObject
     ): this;
+
+    setChildActive(
+        child: Phaser.GameObjects.GameObject,
+        active: boolean
+    ): this;
+
+    setChildLocalActive(
+        child: Phaser.GameObjects.GameObject,
+        active: boolean
+    ): this;
+
+    getChildLocalActive(
+        child: Phaser.GameObjects.GameObject
+    ): boolean;
 
     setMask(
         mask: Phaser.Display.Masks.BitmapMask | Phaser.Display.Masks.GeometryMask

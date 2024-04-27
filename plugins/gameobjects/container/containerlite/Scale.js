@@ -61,4 +61,14 @@ export default {
         }
         return this;
     },
+
+    getChildLocalScaleX(child) {
+        var localState = GetLocalState(child);
+        return localState.scaleX;
+    },
+
+    getChildLocalScaleY(child) {
+        var localState = GetLocalState(child);
+        return localState.scaleY;
+    },
 }

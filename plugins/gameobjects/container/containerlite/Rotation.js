@@ -4,10 +4,10 @@ const DegToRad = Phaser.Math.DegToRad;
 
 export default {
     updateChildRotation(child) {
-        var state = GetLocalState(child);
-        var parent = state.parent;
-        if (state.syncRotation) {
-            child.rotation = parent.rotation + state.rotation;
+        var localState = GetLocalState(child);
+        var parent = localState.parent;
+        if (localState.syncRotation) {
+            child.rotation = parent.rotation + localState.rotation;
         }
         return this;
     },
@@ -20,9 +20,9 @@ export default {
     },
 
     resetChildRotationState(child) {
-        var state = GetLocalState(child);
-        var parent = state.parent;
-        state.rotation = child.rotation - parent.rotation;
+        var localState = GetLocalState(child);
+        var parent = localState.parent;
+        localState.rotation = child.rotation - parent.rotation;
         return this;
     },
 
@@ -39,15 +39,15 @@ export default {
     },
 
     setChildLocalRotation(child, rotation) {
-        var state = GetLocalState(child);
-        state.rotation = rotation;
+        var localState = GetLocalState(child);
+        localState.rotation = rotation;
         this.updateChildRotation(child);
         return this;
     },
 
     setChildLocalAngle(child, angle) {
-        var state = GetLocalState(child);
-        state.rotation = DegToRad(angle);
+        var localState = GetLocalState(child);
+        localState.rotation = DegToRad(angle);
         this.updateChildRotation(child);
         return this;
     },
@@ -59,4 +59,10 @@ export default {
         }
         return this;
     },
+
+    getChildLocalRotation(child) {
+        var localState = GetLocalState(child);
+        return localState.rotation;
+    },
+
 }

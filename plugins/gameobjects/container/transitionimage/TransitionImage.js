@@ -98,6 +98,8 @@ class TransitionImage extends Container {
         this.setMaskEnable(false);
 
         this.ignoreCompleteEvent = false;
+
+        OnTextureChange.call(this, this.frontImage);
     }
 
     destroy(fromScene) {
@@ -237,21 +239,21 @@ class TransitionImage extends Container {
                 .setChildVisible(this.frontImage, true)
                 .setChildVisible(this.backImage, true)
 
-            RunCallback(
+            RunCallback.call(this,
                 this.onStartCallback, this.onStartCallbackScope,
                 this, currentImage, nextImage, value
             );
         }
 
         // Progress
-        RunCallback(
+        RunCallback.call(this,
             this.onProgressCallback, this.onProgressCallbackScope,
             this, currentImage, nextImage, value
         );
 
         // Complete
         if (value === 1) {
-            RunCallback(
+            RunCallback.call(this,
                 this.onCompleteCallback, this.onCompleteCallbackScope,
                 this, currentImage, nextImage, value
             );
@@ -322,10 +324,38 @@ var RunCallback = function (callback, scope, parent, currentImage, nextImage, t)
         return;
     }
 
+    if (this.fixedSizeMode) {
+        var localScale;
+        if (currentImage.biasScale > 0) {
+            localScale = this.getChildLocalScaleX(currentImage);
+            localScale = localScale / currentImage.biasScale;
+            this.setChildLocalScale(currentImage, localScale);
+        }
+        if (nextImage.biasScale) {
+            localScale = this.getChildLocalScaleX(nextImage);
+            localScale = localScale / nextImage.biasScale;
+            this.setChildLocalScale(nextImage, localScale);
+        }
+    }
+
     if (scope) {
         callback.call(scope, parent, currentImage, nextImage, t);
     } else {
         callback(parent, currentImage, nextImage, t);
+    }
+
+    if (this.fixedSizeMode) {
+        var localScale;
+        if (currentImage.biasScale > 0) {
+            localScale = this.getChildLocalScaleX(currentImage);
+            localScale = localScale * currentImage.biasScale;
+            this.setChildLocalScale(currentImage, localScale);
+        }
+        if (nextImage.biasScale) {
+            localScale = this.getChildLocalScaleX(nextImage);
+            localScale = localScale * nextImage.biasScale;
+            this.setChildLocalScale(nextImage, localScale);
+        }
     }
 }
 

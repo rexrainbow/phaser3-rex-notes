@@ -4,8 +4,9 @@ var FitImages = function () {
     for (var i = 0, cnt = this.images.length; i < cnt; i++) {
         var image = this.images[i];
         var result = FitToSize(image, this, true, true);
-        image.setDisplaySize(result.width, result.height);
-        this.resetChildScaleState(image);
+        var biasScale = result.width / image.width;
+        this.setChildLocalScale(image, biasScale);
+        image.biasScale = biasScale;
     }
 }
 
