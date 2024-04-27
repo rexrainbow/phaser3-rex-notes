@@ -72867,12 +72867,36 @@
 
         // childrenMap must have 'text' element
         var text = _this.childrenMap.text;
+
+        // Expand text size
+        var expandTextWidth = GetValue$J(config, 'expandTextWidth', false);
+        var expandTextHeight = GetValue$J(config, 'expandTextHeight', false);
+        if (expandTextWidth || expandTextHeight) {
+          var textObjectType = GetTextObjectType(text);
+          switch (textObjectType) {
+            case TextType:
+            case TagTextType:
+              text.resize = function (width, height) {
+                var fixedWidth = expandTextWidth ? width : 0;
+                var fixedHeight = expandTextHeight ? height : 0;
+                text.setFixedSize(fixedWidth, fixedHeight);
+                if (fixedWidth > 0) {
+                  text.setWordWrapWidth(fixedWidth);
+                }
+              };
+              break;
+          }
+        }
+
+        // Build typing and page behaviors
         _this.setTypingMode(GetValue$J(config, 'typingMode', 'page'));
         _this.page = new TextPage(text, GetValue$J(config, 'page', undefined));
         _this.typing = new TextTyping(text, GetValue$J(config, 'typing', config.type));
         _this.typing.on('complete', _this.onTypingComplete, _assertThisInitialized(_this)).on('type', _this.onType, _assertThisInitialized(_this)).on('typechar', _this.onTypeChar, _assertThisInitialized(_this));
-        _this.textWidth = text.width;
-        _this.textHeight = text.height;
+
+        // Run layout again when size of text game object has changed
+        _this.textWidthSave = text.width;
+        _this.textHeightSave = text.height;
         return _this;
       }
       _createClass(TextBox, [{
@@ -73038,9 +73062,9 @@
         key: "onType",
         value: function onType() {
           var text = this.childrenMap.text;
-          if (this.textWidth !== text.width || this.textHeight !== text.height) {
-            this.textWidth = text.width;
-            this.textHeight = text.height;
+          if (this.textWidthSave !== text.width || this.textHeightSave !== text.height) {
+            this.textWidthSave = text.width;
+            this.textHeightSave = text.height;
             this.getTopmostSizer().layout();
           }
           this.emit('type');
@@ -79676,6 +79700,13 @@
     var commandExecutor = arguments.length > 2 ? arguments[2] : undefined;
     var eventSheetManager = arguments.length > 3 ? arguments[3] : undefined;
     key = key || gameObject.texture.key;
+    if (!frame) {
+      frame = '__BASE';
+    }
+    // Don't do transition if texture is not changed
+    if (key === gameObject.texture.key && frame === gameObject.frame.name) {
+      return;
+    }
 
     // Wait until transition complete
     if (wait) {
@@ -79790,6 +79821,13 @@
       key = name || gameObject.texture.key;
       frame = expression;
     }
+    if (!frame) {
+      frame = '__BASE';
+    }
+    // Don't do transition if texture is not changed
+    if (key === gameObject.texture.key && frame === gameObject.frame.name) {
+      return;
+    }
     if (duration === undefined) {
       duration = eventSheetManager.getData('$transitionDuration');
     }
@@ -79891,10 +79929,12 @@
       if (vph !== undefined) {
         height = viewport.height * vph;
       }
-      var wrapWidth = Math.max(0, width - 20);
-      SetValue(style, 'text.fixedWidth', width);
-      SetValue(style, 'text.fixedHeight', height);
-      SetValue(style, 'text.wordWrap.width', wrapWidth);
+      if (width > 0) {
+        SetValue(style, 'expandTextWidth', true);
+      }
+      if (height > 0) {
+        SetValue(style, 'expandTextHeight', true);
+      }
       if (creators === undefined) {
         creators = {};
       }
@@ -79988,11 +80028,18 @@
       if (!icon) {
         icon = iconGameObject.texture.key;
       }
-      if (iconCrossDuration === undefined) {
-        iconCrossDuration = eventSheetManager.getData('$transitionDuration');
+      if (!iconFrame) {
+        iconFrame = '__BASE';
       }
-      iconGameObject.setDuration(iconCrossDuration);
-      iconGameObject.transit(icon, iconFrame, iconCrossMode);
+
+      // Don't do transition if texture is not changed
+      if (icon !== iconGameObject.texture.key || iconFrame !== iconGameObject.frame.name) {
+        if (iconCrossDuration === undefined) {
+          iconCrossDuration = eventSheetManager.getData('$transitionDuration');
+        }
+        iconGameObject.setDuration(iconCrossDuration);
+        iconGameObject.transit(icon, iconFrame, iconCrossMode);
+      }
     }
     gameObject.layout();
     if (text) {

@@ -56875,12 +56875,36 @@
 
         // childrenMap must have 'text' element
         var text = _this.childrenMap.text;
+
+        // Expand text size
+        var expandTextWidth = GetValue$S(config, 'expandTextWidth', false);
+        var expandTextHeight = GetValue$S(config, 'expandTextHeight', false);
+        if (expandTextWidth || expandTextHeight) {
+          var textObjectType = GetTextObjectType(text);
+          switch (textObjectType) {
+            case TextType:
+            case TagTextType:
+              text.resize = function (width, height) {
+                var fixedWidth = expandTextWidth ? width : 0;
+                var fixedHeight = expandTextHeight ? height : 0;
+                text.setFixedSize(fixedWidth, fixedHeight);
+                if (fixedWidth > 0) {
+                  text.setWordWrapWidth(fixedWidth);
+                }
+              };
+              break;
+          }
+        }
+
+        // Build typing and page behaviors
         _this.setTypingMode(GetValue$S(config, 'typingMode', 'page'));
         _this.page = new TextPage(text, GetValue$S(config, 'page', undefined));
         _this.typing = new TextTyping(text, GetValue$S(config, 'typing', config.type));
         _this.typing.on('complete', _this.onTypingComplete, _assertThisInitialized(_this)).on('type', _this.onType, _assertThisInitialized(_this)).on('typechar', _this.onTypeChar, _assertThisInitialized(_this));
-        _this.textWidth = text.width;
-        _this.textHeight = text.height;
+
+        // Run layout again when size of text game object has changed
+        _this.textWidthSave = text.width;
+        _this.textHeightSave = text.height;
         return _this;
       }
       _createClass(TextBox, [{
@@ -57046,9 +57070,9 @@
         key: "onType",
         value: function onType() {
           var text = this.childrenMap.text;
-          if (this.textWidth !== text.width || this.textHeight !== text.height) {
-            this.textWidth = text.width;
-            this.textHeight = text.height;
+          if (this.textWidthSave !== text.width || this.textHeightSave !== text.height) {
+            this.textWidthSave = text.width;
+            this.textHeightSave = text.height;
             this.getTopmostSizer().layout();
           }
           this.emit('type');
