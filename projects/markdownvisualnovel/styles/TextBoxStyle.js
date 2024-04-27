@@ -10,8 +10,7 @@ export default {
 
     innerBackground: { color: COLOR_MAIN, strokeColor: COLOR_LIGHT, strokeWidth: 2, radius: 20, },
 
-    icon: { key: '__WHITE' },
-    iconWidth: 120, iconHeight: 120,
+    icon: { width: 120, height: 120 },
 
     action: { tint: COLOR_LIGHT, alpha: 0, },
 
