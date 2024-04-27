@@ -5,6 +5,7 @@ import {
     OnProgress as DefaultOnProgress,
     OnComplete as DefaultOnComplete
 } from './methods/CrossFadeTransition.js';
+import OnTextureChange from './methods/OnTextureChange.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -31,19 +32,30 @@ class TransitionImage extends Container {
         if (!frontImage) {
             frontImage = scene.add.image(x, y, texture, frame);
         }
-        var width = GetValue(config, 'width', frontImage.width);
-        var height = GetValue(config, 'height', frontImage.height);
+
+        var width = GetValue(config, 'width', undefined);
+        var height = GetValue(config, 'height', undefined);
+        var fixedSizeMode = (width !== undefined) && (height !== undefined);
+
+        if (width === undefined) {
+            width = frontImage.width;
+        }
+        if (height === undefined) {
+            height = frontImage.height;
+        }
 
         super(scene, x, y, width, height);
         this.type = 'rexTransitionImage';
         this._flipX = false;
         this._flipY = false;
+        this.fixedSizeMode = GetValue(config, 'fixedSize', fixedSizeMode);
 
         backImage.setVisible(false);
         this.addMultiple([backImage, frontImage])
 
         this.backImage = backImage;
         this.frontImage = frontImage;
+        this.images = [this.backImage, this.frontImage];
         this.maskGameObject = undefined;
         this.cellImages = [];
         this.imagesPool = [];
@@ -100,6 +112,7 @@ class TransitionImage extends Container {
         }
         this.backImage = undefined;
         this.frontImage = undefined;
+        this.images.length = 0;
         this.maskGameObject = undefined;
         this.cellImages.length = 0;
         this.imagesPool.length = 0;
@@ -247,6 +260,7 @@ class TransitionImage extends Container {
                 frame = nextImage.frame.name;
             this.frontImage.setTexture(key, frame);
             this.backImage.setTexture(key, frame);
+            OnTextureChange.call(this, nextImage);
 
             this
                 .setChildVisible(this.frontImage, true)
@@ -286,7 +300,19 @@ class TransitionImage extends Container {
         // Without transition
         this.frontImage.setTexture(texture, frame);
         this.backImage.setTexture(texture, frame).setVisible(false);
-        this.resize(this.frontImage.width, this.frontImage.height);
+
+        OnTextureChange.call(this, this.frontImage);
+
+        return this;
+    }
+
+    setSize(width, height) {
+        super.setSize(width, height);
+
+        if (this.fixedSizeMode) {
+            FitImages.call(this);
+        }
+
         return this;
     }
 }

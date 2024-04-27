@@ -1,4 +1,5 @@
 import EaseValueTask from '../../../../utils/ease/EaseValueTask.js';
+import OnTextureChange from './OnTextureChange.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -40,7 +41,8 @@ export default {
 
     setNextTexture(texture, frame) {
         this.nextImage.setTexture(texture, frame);
-        this.resize(this.nextImage.width, this.nextImage.height);
+
+        OnTextureChange.call(this, this.nextImage);
         return this;
     },
 

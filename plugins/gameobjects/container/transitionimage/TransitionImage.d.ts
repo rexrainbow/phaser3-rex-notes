@@ -39,6 +39,8 @@ declare namespace TransitionImage {
 
     interface IConfig extends ITransitConfigBase {
         x?: number, y?: number,
+        width?: number, height?: number,
+        fixedSize?: boolean,
     }
 }
 

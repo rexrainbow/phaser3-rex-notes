@@ -9,14 +9,20 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('classroom', 'assets/images/backgrounds/classroom.png');
-        this.load.image('road', 'assets/images/backgrounds/road.png');
+        this.load.image('user', 'assets/images/user.png');
+        this.load.image('A-smile', 'assets/images/characters/portrait-src/A-smile.png');
     }
 
     create() {
-        var image = this.add.rexTransitionImage(400, 300).setScale(0.5);
+        var image = this.add.rexTransitionImage(400, 300, 'user', undefined, {
+            width: 120, height: 120
+        })
+            .on('complete', function () {
+                console.log(image.currentImage.scaleX, image.currentImage.scaleY);
+            })
+
         console.log(image.texture.key, image.width, image.height);
-        image.transit('road');
+        image.transit('A-smile');
         console.log(image.texture.key, image.width, image.height);
     }
 
