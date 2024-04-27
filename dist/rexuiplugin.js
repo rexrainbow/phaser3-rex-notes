@@ -28253,19 +28253,19 @@
       if (child.isRexContainerLite) {
         child.syncChildrenEnable = false;
       }
-      var state = GetLocalState(child);
-      var parent = state.parent;
-      if (state.syncPosition) {
-        child.x = state.x;
-        child.y = state.y;
+      var localState = GetLocalState(child);
+      var parent = localState.parent;
+      if (localState.syncPosition) {
+        child.x = localState.x;
+        child.y = localState.y;
         parent.localToWorld(child);
       }
-      if (state.syncRotation) {
-        child.rotation = state.rotation + parent.rotation;
+      if (localState.syncRotation) {
+        child.rotation = localState.rotation + parent.rotation;
       }
-      if (state.syncScale) {
-        child.scaleX = state.scaleX * parent.scaleX;
-        child.scaleY = state.scaleY * parent.scaleY;
+      if (localState.syncScale) {
+        child.scaleX = localState.scaleX * parent.scaleX;
+        child.scaleY = localState.scaleY * parent.scaleY;
       }
       if (child.isRexContainerLite) {
         child.syncChildrenEnable = true;
@@ -28280,14 +28280,14 @@
       return this;
     },
     resetChildPositionState: function resetChildPositionState(child) {
-      var state = GetLocalState(child);
-      var parent = state.parent;
-      state.x = child.x;
-      state.y = child.y;
-      parent.worldToLocal(state);
-      state.scaleX = GetScale(child.scaleX, parent.scaleX);
-      state.scaleY = GetScale(child.scaleY, parent.scaleY);
-      state.rotation = child.rotation - parent.rotation;
+      var localState = GetLocalState(child);
+      var parent = localState.parent;
+      localState.x = child.x;
+      localState.y = child.y;
+      parent.worldToLocal(localState);
+      localState.scaleX = GetScale(child.scaleX, parent.scaleX);
+      localState.scaleY = GetScale(child.scaleY, parent.scaleY);
+      localState.rotation = child.rotation - parent.rotation;
       return this;
     },
     setChildPosition: function setChildPosition(child, x, y) {
@@ -28297,9 +28297,9 @@
       return this;
     },
     setChildLocalPosition: function setChildLocalPosition(child, x, y) {
-      var state = GetLocalState(child);
-      state.x = x;
-      state.y = y;
+      var localState = GetLocalState(child);
+      localState.x = x;
+      localState.y = y;
       this.updateChildPosition(child);
       return this;
     },
@@ -28309,16 +28309,24 @@
         parent.resetChildPositionState(this);
       }
       return this;
+    },
+    getChildLocalX: function getChildLocalX(child) {
+      var localState = GetLocalState(child);
+      return localState.x;
+    },
+    getChildLocalY: function getChildLocalY(child) {
+      var localState = GetLocalState(child);
+      return localState.y;
     }
   };
 
   var DegToRad$5 = Phaser.Math.DegToRad;
   var Rotation = {
     updateChildRotation: function updateChildRotation(child) {
-      var state = GetLocalState(child);
-      var parent = state.parent;
-      if (state.syncRotation) {
-        child.rotation = parent.rotation + state.rotation;
+      var localState = GetLocalState(child);
+      var parent = localState.parent;
+      if (localState.syncRotation) {
+        child.rotation = parent.rotation + localState.rotation;
       }
       return this;
     },
@@ -28329,9 +28337,9 @@
       return this;
     },
     resetChildRotationState: function resetChildRotationState(child) {
-      var state = GetLocalState(child);
-      var parent = state.parent;
-      state.rotation = child.rotation - parent.rotation;
+      var localState = GetLocalState(child);
+      var parent = localState.parent;
+      localState.rotation = child.rotation - parent.rotation;
       return this;
     },
     setChildRotation: function setChildRotation(child, rotation) {
@@ -28345,14 +28353,14 @@
       return this;
     },
     setChildLocalRotation: function setChildLocalRotation(child, rotation) {
-      var state = GetLocalState(child);
-      state.rotation = rotation;
+      var localState = GetLocalState(child);
+      localState.rotation = rotation;
       this.updateChildRotation(child);
       return this;
     },
     setChildLocalAngle: function setChildLocalAngle(child, angle) {
-      var state = GetLocalState(child);
-      state.rotation = DegToRad$5(angle);
+      var localState = GetLocalState(child);
+      localState.rotation = DegToRad$5(angle);
       this.updateChildRotation(child);
       return this;
     },
@@ -28362,6 +28370,10 @@
         parent.resetChildRotationState(this);
       }
       return this;
+    },
+    getChildLocalRotation: function getChildLocalRotation(child) {
+      var localState = GetLocalState(child);
+      return localState.rotation;
     }
   };
 
@@ -28418,6 +28430,14 @@
         parent.resetChildScaleState(this);
       }
       return this;
+    },
+    getChildLocalScaleX: function getChildLocalScaleX(child) {
+      var localState = GetLocalState(child);
+      return localState.scaleX;
+    },
+    getChildLocalScaleY: function getChildLocalScaleY(child) {
+      var localState = GetLocalState(child);
+      return localState.scaleY;
     }
   };
 
@@ -28489,6 +28509,10 @@
         parent.resetChildVisibleState(this);
       }
       return this;
+    },
+    getChildLocalVisible: function getChildLocalVisible(child) {
+      var localState = GetLocalState(child);
+      return localState.visible;
     }
   };
 
@@ -28530,6 +28554,10 @@
         parent.resetChildAlphaState(this);
       }
       return this;
+    },
+    getChildLocalAlpha: function getChildLocalAlpha(child) {
+      var localState = GetLocalState(child);
+      return localState.alpha;
     }
   };
 
@@ -28571,14 +28599,18 @@
         parent.resetChildActiveState(this);
       }
       return this;
+    },
+    getChildLocalActive: function getChildLocalActive(child) {
+      var localState = GetLocalState(child);
+      return localState.active;
     }
   };
 
   var ScrollFactor = {
     updateChildScrollFactor: function updateChildScrollFactor(child) {
-      var state = GetLocalState(child);
-      var parent = state.parent;
-      if (state.syncScrollFactor) {
+      var localState = GetLocalState(child);
+      var parent = localState.parent;
+      if (localState.syncScrollFactor) {
         child.scrollFactorX = parent.scrollFactorX;
         child.scrollFactorY = parent.scrollFactorY;
       }
@@ -37811,6 +37843,25 @@
     }
   };
 
+  var FitImages$1 = function FitImages() {
+    for (var i = 0, cnt = this.images.length; i < cnt; i++) {
+      var image = this.images[i];
+      var result = FitTo(image, this, true, true);
+      var biasScale = result.width / image.width;
+      this.setChildLocalScale(image, biasScale);
+      image.biasScale = biasScale;
+    }
+  };
+
+  var OnTextureChange = function OnTextureChange(newImage) {
+    if (!this.fixedSizeMode) {
+      this.resize(newImage.width, newImage.height);
+    } else {
+      // Fit all images to parent's size
+      FitImages$1.call(this);
+    }
+  };
+
   var IsPlainObject$q = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$22 = Phaser.Utils.Objects.GetValue;
   var GetRandomItem = Phaser.Utils.Array.GetRandom;
@@ -37845,6 +37896,7 @@
     },
     setNextTexture: function setNextTexture(texture, frame) {
       this.nextImage.setTexture(texture, frame);
+      OnTextureChange.call(this, this.nextImage);
       return this;
     },
     transit: function transit(texture, frame, mode) {
@@ -38396,16 +38448,25 @@
       if (!frontImage) {
         frontImage = scene.add.image(x, y, texture, frame);
       }
-      var width = GetValue$20(config, 'width', frontImage.width);
-      var height = GetValue$20(config, 'height', frontImage.height);
+      var width = GetValue$20(config, 'width', undefined);
+      var height = GetValue$20(config, 'height', undefined);
+      var fixedSizeMode = width !== undefined && height !== undefined;
+      if (width === undefined) {
+        width = frontImage.width;
+      }
+      if (height === undefined) {
+        height = frontImage.height;
+      }
       _this = _callSuper(this, TransitionImage, [scene, x, y, width, height]);
       _this.type = 'rexTransitionImage';
       _this._flipX = false;
       _this._flipY = false;
+      _this.fixedSizeMode = GetValue$20(config, 'fixedSize', fixedSizeMode);
       backImage.setVisible(false);
       _this.addMultiple([backImage, frontImage]);
       _this.backImage = backImage;
       _this.frontImage = frontImage;
+      _this.images = [_this.backImage, _this.frontImage];
       _this.maskGameObject = undefined;
       _this.cellImages = [];
       _this.imagesPool = [];
@@ -38430,6 +38491,7 @@
       }
       _this.setMaskEnable(false);
       _this.ignoreCompleteEvent = false;
+      OnTextureChange.call(_assertThisInitialized(_this), _this.frontImage);
       return _this;
     }
     _createClass(TransitionImage, [{
@@ -38445,6 +38507,7 @@
         }
         this.backImage = undefined;
         this.frontImage = undefined;
+        this.images.length = 0;
         this.maskGameObject = undefined;
         this.cellImages.length = 0;
         this.imagesPool.length = 0;
@@ -38571,19 +38634,20 @@
         // Start
         if (value === 0) {
           this.setChildVisible(this.frontImage, true).setChildVisible(this.backImage, true);
-          RunCallback(this.onStartCallback, this.onStartCallbackScope, this, currentImage, nextImage, value);
+          RunCallback.call(this, this.onStartCallback, this.onStartCallbackScope, this, currentImage, nextImage, value);
         }
 
         // Progress
-        RunCallback(this.onProgressCallback, this.onProgressCallbackScope, this, currentImage, nextImage, value);
+        RunCallback.call(this, this.onProgressCallback, this.onProgressCallbackScope, this, currentImage, nextImage, value);
 
         // Complete
         if (value === 1) {
-          RunCallback(this.onCompleteCallback, this.onCompleteCallbackScope, this, currentImage, nextImage, value);
+          RunCallback.call(this, this.onCompleteCallback, this.onCompleteCallbackScope, this, currentImage, nextImage, value);
           var key = nextImage.texture.key,
             frame = nextImage.frame.name;
           this.frontImage.setTexture(key, frame);
           this.backImage.setTexture(key, frame);
+          OnTextureChange.call(this, nextImage);
           this.setChildVisible(this.frontImage, true).setChildVisible(this.backImage, false).setMaskEnable(false).freeCellImages();
         }
         if (value === 1 && !this.ignoreCompleteEvent) {
@@ -38618,6 +38682,16 @@
         // Without transition
         this.frontImage.setTexture(texture, frame);
         this.backImage.setTexture(texture, frame).setVisible(false);
+        OnTextureChange.call(this, this.frontImage);
+        return this;
+      }
+    }, {
+      key: "setSize",
+      value: function setSize(width, height) {
+        _get(_getPrototypeOf(TransitionImage.prototype), "setSize", this).call(this, width, height);
+        if (this.fixedSizeMode) {
+          FitImages.call(this);
+        }
         return this;
       }
     }]);
@@ -38627,10 +38701,36 @@
     if (!callback) {
       return;
     }
+    if (this.fixedSizeMode) {
+      var localScale;
+      if (currentImage.biasScale > 0) {
+        localScale = this.getChildLocalScaleX(currentImage);
+        localScale = localScale / currentImage.biasScale;
+        this.setChildLocalScale(currentImage, localScale);
+      }
+      if (nextImage.biasScale) {
+        localScale = this.getChildLocalScaleX(nextImage);
+        localScale = localScale / nextImage.biasScale;
+        this.setChildLocalScale(nextImage, localScale);
+      }
+    }
     if (scope) {
       callback.call(scope, parent, currentImage, nextImage, t);
     } else {
       callback(parent, currentImage, nextImage, t);
+    }
+    if (this.fixedSizeMode) {
+      var localScale;
+      if (currentImage.biasScale > 0) {
+        localScale = this.getChildLocalScaleX(currentImage);
+        localScale = localScale * currentImage.biasScale;
+        this.setChildLocalScale(currentImage, localScale);
+      }
+      if (nextImage.biasScale) {
+        localScale = this.getChildLocalScaleX(nextImage);
+        localScale = localScale * nextImage.biasScale;
+        this.setChildLocalScale(nextImage, localScale);
+      }
     }
   };
 
@@ -39803,10 +39903,7 @@
 
   var ScaleImage = function ScaleImage() {
     var image = this.image;
-    var result = FitTo(image, {
-      width: this.width,
-      height: this.height
-    }, this.scaleUp, true);
+    var result = FitTo(image, this, this.scaleUp, true);
     image.setDisplaySize(result.width, result.height);
     this.resetChildScaleState(image);
     return this;

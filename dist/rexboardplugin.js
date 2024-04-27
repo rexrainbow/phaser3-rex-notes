@@ -12478,19 +12478,19 @@
       if (child.isRexContainerLite) {
         child.syncChildrenEnable = false;
       }
-      var state = GetLocalState(child);
-      var parent = state.parent;
-      if (state.syncPosition) {
-        child.x = state.x;
-        child.y = state.y;
+      var localState = GetLocalState(child);
+      var parent = localState.parent;
+      if (localState.syncPosition) {
+        child.x = localState.x;
+        child.y = localState.y;
         parent.localToWorld(child);
       }
-      if (state.syncRotation) {
-        child.rotation = state.rotation + parent.rotation;
+      if (localState.syncRotation) {
+        child.rotation = localState.rotation + parent.rotation;
       }
-      if (state.syncScale) {
-        child.scaleX = state.scaleX * parent.scaleX;
-        child.scaleY = state.scaleY * parent.scaleY;
+      if (localState.syncScale) {
+        child.scaleX = localState.scaleX * parent.scaleX;
+        child.scaleY = localState.scaleY * parent.scaleY;
       }
       if (child.isRexContainerLite) {
         child.syncChildrenEnable = true;
@@ -12505,14 +12505,14 @@
       return this;
     },
     resetChildPositionState: function resetChildPositionState(child) {
-      var state = GetLocalState(child);
-      var parent = state.parent;
-      state.x = child.x;
-      state.y = child.y;
-      parent.worldToLocal(state);
-      state.scaleX = GetScale(child.scaleX, parent.scaleX);
-      state.scaleY = GetScale(child.scaleY, parent.scaleY);
-      state.rotation = child.rotation - parent.rotation;
+      var localState = GetLocalState(child);
+      var parent = localState.parent;
+      localState.x = child.x;
+      localState.y = child.y;
+      parent.worldToLocal(localState);
+      localState.scaleX = GetScale(child.scaleX, parent.scaleX);
+      localState.scaleY = GetScale(child.scaleY, parent.scaleY);
+      localState.rotation = child.rotation - parent.rotation;
       return this;
     },
     setChildPosition: function setChildPosition(child, x, y) {
@@ -12522,9 +12522,9 @@
       return this;
     },
     setChildLocalPosition: function setChildLocalPosition(child, x, y) {
-      var state = GetLocalState(child);
-      state.x = x;
-      state.y = y;
+      var localState = GetLocalState(child);
+      localState.x = x;
+      localState.y = y;
       this.updateChildPosition(child);
       return this;
     },
@@ -12534,16 +12534,24 @@
         parent.resetChildPositionState(this);
       }
       return this;
+    },
+    getChildLocalX: function getChildLocalX(child) {
+      var localState = GetLocalState(child);
+      return localState.x;
+    },
+    getChildLocalY: function getChildLocalY(child) {
+      var localState = GetLocalState(child);
+      return localState.y;
     }
   };
 
   var DegToRad = Phaser.Math.DegToRad;
   var Rotation = {
     updateChildRotation: function updateChildRotation(child) {
-      var state = GetLocalState(child);
-      var parent = state.parent;
-      if (state.syncRotation) {
-        child.rotation = parent.rotation + state.rotation;
+      var localState = GetLocalState(child);
+      var parent = localState.parent;
+      if (localState.syncRotation) {
+        child.rotation = parent.rotation + localState.rotation;
       }
       return this;
     },
@@ -12554,9 +12562,9 @@
       return this;
     },
     resetChildRotationState: function resetChildRotationState(child) {
-      var state = GetLocalState(child);
-      var parent = state.parent;
-      state.rotation = child.rotation - parent.rotation;
+      var localState = GetLocalState(child);
+      var parent = localState.parent;
+      localState.rotation = child.rotation - parent.rotation;
       return this;
     },
     setChildRotation: function setChildRotation(child, rotation) {
@@ -12570,14 +12578,14 @@
       return this;
     },
     setChildLocalRotation: function setChildLocalRotation(child, rotation) {
-      var state = GetLocalState(child);
-      state.rotation = rotation;
+      var localState = GetLocalState(child);
+      localState.rotation = rotation;
       this.updateChildRotation(child);
       return this;
     },
     setChildLocalAngle: function setChildLocalAngle(child, angle) {
-      var state = GetLocalState(child);
-      state.rotation = DegToRad(angle);
+      var localState = GetLocalState(child);
+      localState.rotation = DegToRad(angle);
       this.updateChildRotation(child);
       return this;
     },
@@ -12587,6 +12595,10 @@
         parent.resetChildRotationState(this);
       }
       return this;
+    },
+    getChildLocalRotation: function getChildLocalRotation(child) {
+      var localState = GetLocalState(child);
+      return localState.rotation;
     }
   };
 
@@ -12643,6 +12655,14 @@
         parent.resetChildScaleState(this);
       }
       return this;
+    },
+    getChildLocalScaleX: function getChildLocalScaleX(child) {
+      var localState = GetLocalState(child);
+      return localState.scaleX;
+    },
+    getChildLocalScaleY: function getChildLocalScaleY(child) {
+      var localState = GetLocalState(child);
+      return localState.scaleY;
     }
   };
 
@@ -12714,6 +12734,10 @@
         parent.resetChildVisibleState(this);
       }
       return this;
+    },
+    getChildLocalVisible: function getChildLocalVisible(child) {
+      var localState = GetLocalState(child);
+      return localState.visible;
     }
   };
 
@@ -12755,6 +12779,10 @@
         parent.resetChildAlphaState(this);
       }
       return this;
+    },
+    getChildLocalAlpha: function getChildLocalAlpha(child) {
+      var localState = GetLocalState(child);
+      return localState.alpha;
     }
   };
 
@@ -12796,14 +12824,18 @@
         parent.resetChildActiveState(this);
       }
       return this;
+    },
+    getChildLocalActive: function getChildLocalActive(child) {
+      var localState = GetLocalState(child);
+      return localState.active;
     }
   };
 
   var ScrollFactor = {
     updateChildScrollFactor: function updateChildScrollFactor(child) {
-      var state = GetLocalState(child);
-      var parent = state.parent;
-      if (state.syncScrollFactor) {
+      var localState = GetLocalState(child);
+      var parent = localState.parent;
+      if (localState.syncScrollFactor) {
         child.scrollFactorX = parent.scrollFactorX;
         child.scrollFactorY = parent.scrollFactorY;
       }

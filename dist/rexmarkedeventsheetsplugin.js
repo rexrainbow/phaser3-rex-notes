@@ -17050,6 +17050,26 @@
       return _callSuper(this, MarkedEventSheets, arguments);
     }
     _createClass(MarkedEventSheets, [{
+      key: "boot",
+      value: function boot() {
+        _get(_getPrototypeOf(MarkedEventSheets.prototype), "boot", this).call(this);
+        if (this.scene) {
+          this.scene.sys.events.once('shutdown', this.destroy, this);
+        }
+      }
+    }, {
+      key: "shutdown",
+      value: function shutdown(fromScene) {
+        if (this.isShutdown) {
+          return;
+        }
+        if (this.scene) {
+          this.scene.sys.events.off('shutdown', this.destroy, this);
+        }
+        _get(_getPrototypeOf(MarkedEventSheets.prototype), "shutdown", this).call(this, fromScene);
+        return this;
+      }
+    }, {
       key: "addEventSheet",
       value: function addEventSheet(markedString, groupName, config) {
         if (typeof groupName !== 'string') {
