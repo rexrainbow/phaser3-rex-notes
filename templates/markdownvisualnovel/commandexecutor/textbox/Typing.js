@@ -45,11 +45,19 @@ var Typing = function (
             icon = iconGameObject.texture.key;
         }
 
-        if (iconCrossDuration === undefined) {
-            iconCrossDuration = eventSheetManager.getData('$transitionDuration');
+        if (!iconFrame) {
+            iconFrame = '__BASE';
         }
-        iconGameObject.setDuration(iconCrossDuration);
-        iconGameObject.transit(icon, iconFrame, iconCrossMode);
+
+        // Don't do transition if texture is not changed
+        if ((icon !== iconGameObject.texture.key) || (iconFrame !== iconGameObject.frame.name)) {
+            if (iconCrossDuration === undefined) {
+                iconCrossDuration = eventSheetManager.getData('$transitionDuration');
+            }
+            iconGameObject.setDuration(iconCrossDuration);
+            iconGameObject.transit(icon, iconFrame, iconCrossMode);
+        }
+
     }
     gameObject.layout();
 

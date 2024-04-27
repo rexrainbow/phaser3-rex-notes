@@ -12,6 +12,15 @@ var Cross = function (
 
     key = key || gameObject.texture.key;
 
+
+    if (!frame) {
+        frame = '__BASE';
+    }
+    // Don't do transition if texture is not changed
+    if ((key === gameObject.texture.key) && (frame === gameObject.frame.name)) {
+        return;
+    }
+
     // Wait until transition complete
     if (wait) {
         commandExecutor.waitEvent(gameObject, 'complete');

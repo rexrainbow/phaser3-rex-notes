@@ -24,6 +24,14 @@ var Cross = function (
         frame = expression;
     }
 
+    if (!frame) {
+        frame = '__BASE';
+    }
+    // Don't do transition if texture is not changed
+    if ((key === gameObject.texture.key) && (frame === gameObject.frame.name)) {
+        return;
+    }
+
     if (duration === undefined) {
         duration = eventSheetManager.getData('$transitionDuration');
     }
