@@ -80,6 +80,7 @@ Transit texture to another one, with some pre-build effects, extended from [Tran
 ```javascript
 var image = scene.add.rexTransitionImagePack(x, y, texture, frame, {   
     // duration: 1000,
+    // width: undefined, height: undefined,
 });
 ```
 or
@@ -91,10 +92,13 @@ var image = scene.add.rexTransitionImagePack(x, y, texture, frame, {
     // key: 
     // frame: 
     // duration: 1000,
+    // width: undefined, height: undefined,
 });
 ```
 
 - `duration` : Duration of transition.
+- `width`, `height` : Scale images to fit this size (`width`x`height`).
+    - `undefined` : Don't scale images.
 
 Add transitionimage from JSON
 
@@ -106,6 +110,7 @@ var image = scene.make.rexTransitionImagePack({
     frame: null,
 
     // duration: 1000,
+    // width: undefined, height: undefined,
 
     // origin: {x: 0.5, y: 0.5},
     add: true

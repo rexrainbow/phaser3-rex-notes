@@ -28,14 +28,18 @@ var TextBoxBase = function (GOClass, type) {
                 switch (textObjectType) {
                     case TextType:
                     case TagTextType:
-                        text.resize = function (width, height) {
-                            var fixedWidth = (expandTextWidth) ? width : 0;
-                            var fixedHeight = (expandTextHeight) ? height : 0;
-                            text.setFixedSize(fixedWidth, fixedHeight);
+                        // Don't overwrite resize method if text has it already
+                        if (!text.resize) {
+                            text.resize = function (width, height) {
+                                var fixedWidth = (expandTextWidth) ? width : 0;
+                                var fixedHeight = (expandTextHeight) ? height : 0;
+                                text.setFixedSize(fixedWidth, fixedHeight);
 
-                            if (fixedWidth > 0) {
-                                text.setWordWrapWidth(fixedWidth);
+                                if (fixedWidth > 0) {
+                                    text.setWordWrapWidth(fixedWidth);
+                                }
                             }
+
                         }
                         break;
 
