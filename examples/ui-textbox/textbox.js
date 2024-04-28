@@ -102,10 +102,8 @@ var createTextBox = function (scene, x, y, config) {
                 this.resetChildVisibleState(icon);
                 if (this.isTyping) {
                     this.stop(true);
-                } else if (!this.isLastPage) {
-                    this.typeNextPage();
                 } else {
-                    // Next actions
+                    this.typeNextPage();
                 }
             }
         }, textBox)

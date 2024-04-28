@@ -16,6 +16,7 @@ var TextBoxBase = function (GOClass, type) {
         constructor(scene, config) {
             super(scene, config);
             this.type = type;
+            this.isRunning = false;
 
             // childrenMap must have 'text' element
             var text = this.childrenMap.text;
@@ -76,6 +77,9 @@ var TextBoxBase = function (GOClass, type) {
         }
 
         start(text, speed) {
+            // Start typing task
+            this.isRunning = true;
+
             this.page.setText(text);
             if (speed !== undefined) {
                 this.setTypingSpeed(speed);
@@ -93,6 +97,11 @@ var TextBoxBase = function (GOClass, type) {
         }
 
         typeNextPage() {
+            // Do nothing if typing task does not start
+            if (!this.isRunning) {
+                return this;
+            }
+
             if (!this.isLastPage) {
                 var txt = this.page.getNextPage();
                 this.typing.start(txt);
@@ -105,6 +114,11 @@ var TextBoxBase = function (GOClass, type) {
         }
 
         typeNextLine() {
+            // Do nothing if typing task does not start
+            if (!this.isRunning) {
+                return this;
+            }
+
             if (!this.isLastLine) {
                 var txt = this.page.getPageOfNextLine();
 
@@ -119,12 +133,20 @@ var TextBoxBase = function (GOClass, type) {
                 this.typing.startFromLine(txt, startLineIndex);
 
             } else {
+                // Stop typing tasl if typing complete at last line
+
+                this.isRunning = false;
                 this.emit('complete');
 
             }
         }
 
         pause() {
+            // Do nothing if typing task does not start
+            if (!this.isRunning) {
+                return this;
+            }
+
             if (this.isTyping) {
                 this.typing.pause();
                 this.emit('pause');
@@ -133,6 +155,11 @@ var TextBoxBase = function (GOClass, type) {
         }
 
         resume() {
+            // Do nothing if typing task does not start
+            if (!this.isRunning) {
+                return this;
+            }
+
             if (!this.isTyping) {
                 this.emit('resume');
                 this.typing.resume();
@@ -141,11 +168,21 @@ var TextBoxBase = function (GOClass, type) {
         }
 
         stop(showAllText) {
+            // Do nothing if typing task does not start
+            if (!this.isRunning) {
+                return this;
+            }
+
             this.typing.stop(showAllText);
             return this;
         }
 
         showLastPage() {
+            // Do nothing if typing task does not start
+            if (!this.isRunning) {
+                return this;
+            }
+
             this.typing.stop();
             if (this.typingMode === 0) {
                 this.page.showLastPage();
@@ -228,6 +265,9 @@ var TextBoxBase = function (GOClass, type) {
         onTypingComplete() {
             if (this.typingMode === 0) {
                 var isLastPage = this.isLastPage;
+
+                // Stop typing tasl if typing complete at last page
+                this.isRunning = !isLastPage;
 
                 this.emit('pageend');
                 /*
