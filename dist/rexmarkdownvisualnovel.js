@@ -72876,15 +72876,24 @@
           switch (textObjectType) {
             case TextType:
             case TagTextType:
-              text.resize = function (width, height) {
-                var fixedWidth = expandTextWidth ? width : 0;
-                var fixedHeight = expandTextHeight ? height : 0;
-                text.setFixedSize(fixedWidth, fixedHeight);
-                if (fixedWidth > 0) {
-                  text.setWordWrapWidth(fixedWidth);
-                }
-              };
+              // Don't overwrite resize method if text has it already
+              if (!text.resize) {
+                text.resize = function (width, height) {
+                  var fixedWidth = expandTextWidth ? width : 0;
+                  var fixedHeight = expandTextHeight ? height : 0;
+                  text.setFixedSize(fixedWidth, fixedHeight);
+                  if (fixedWidth > 0) {
+                    text.setWordWrapWidth(fixedWidth);
+                  }
+                };
+              }
               break;
+          }
+          if (expandTextWidth) {
+            text._minWidth = 0;
+          }
+          if (expandTextHeight) {
+            text._minHeight = 0;
           }
         }
 
