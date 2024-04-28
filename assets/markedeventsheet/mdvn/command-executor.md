@@ -141,7 +141,15 @@ Line1...
 Line2...
 Line3...
 ```
-// Wait until typing complete
+// Wait until typing complete + one more click
+
+```Dialog.typing, displayName=A, icon=portraits, name=A, expression=smile, speed=100
+AAAA
+BBBB
+CCCC
+DDDD
+```
+// Wait until typing complete + one more click
 
 ## Section B
 

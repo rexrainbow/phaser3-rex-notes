@@ -66,9 +66,22 @@ var GenerateDefaultCreateGameObjectCallback = function (
 
         gameObject
             .setInteractive()
+            .on('complete', function () {
+                // Wait addition pointerdown after complete
+                this.complete2 = true;
+            }, gameObject)
             .on('pointerdown', function () {
+                if (this.complete2) {
+                    this.complete2 = false;
+                    this.emit('complete2');
+                    return;
+                }
+
+                // Decorator
                 var icon = this.getElement('action');
                 this.setChildAlpha(icon, 0);
+
+                // Show this page, or typing next page
                 if (this.isTyping) {
                     this.stop(true);
                 } else {
@@ -80,6 +93,7 @@ var GenerateDefaultCreateGameObjectCallback = function (
                     return;
                 }
 
+                // Decorator
                 var icon = this.getElement('action');
                 this.setChildAlpha(icon, 1);
                 icon.y -= 30;

@@ -63,7 +63,7 @@ var Typing = function (
 
     if (text) {
         // Wait until typing complete
-        commandExecutor.waitEvent(gameObject, 'complete');
+        commandExecutor.waitEvent(gameObject, 'complete2');
         gameObject.start(text, speed);
     }
 };
