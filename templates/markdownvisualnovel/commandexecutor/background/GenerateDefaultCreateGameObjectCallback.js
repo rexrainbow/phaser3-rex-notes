@@ -44,12 +44,12 @@ var GenerateDefaultCreateGameObjectCallback = function (
                         scale = Math.max(scaleX, scaleY);
                         break;
                 }
+                gameObject.setScale(scale);
 
-                width = gameObject.width * scale;
-                height = gameObject.height * scale;
+            } else {
+                gameObject.setDisplaySize(width, height);
+
             }
-
-            gameObject.setDisplaySize(width, height);
         }
 
 

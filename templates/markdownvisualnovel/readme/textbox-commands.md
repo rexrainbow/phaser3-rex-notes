@@ -131,5 +131,4 @@ text-line2
     - Shader effects : `'pixellate'`, `'dissolve'`, 
       `'revealLeft'`, `'revealRight'`, `'revealUp'`, `'revealDown'`
 
-!!! note
-    Wait an extra clicking after typing complete internally.
+Wait an extra clicking after typing complete internally.

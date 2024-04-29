@@ -254,7 +254,7 @@ Bring me to top and set tint to 0x0 to other sprites
 ```
 
 NAME.focus
-  tintOthers=0x0
+  tintOthers=
 
 ```
 
@@ -270,7 +270,7 @@ NAME.unfocus
 
 ### Say
 
-SPRITE.corss + SPRITE.focus + TEXTBOX.typing
+SPRITE.cross + SPRITE.focus + TEXTBOX.typing
 
 ```
 
@@ -279,7 +279,7 @@ NAME.say
   expression=
   duration=
   mode=fade
-  tintOthers=0x0
+  tintOthers=
   displayName=
   icon=
   iconFrame=
@@ -292,5 +292,4 @@ NAME.say
 ```
 
 
-!!! note
-    Wait an extra clicking after typing complete internally.
+Wait an extra clicking after typing complete internally.

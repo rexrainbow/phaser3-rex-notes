@@ -36,7 +36,7 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var print = this.add.text(0, 570, '', { fontSize: 20, backgroundColor: 'grey' }).setDepth(100);
+        var print = this.add.text(0, 1050, '', { fontSize: 20, backgroundColor: 'grey' }).setDepth(100);
         print.text = 'Any click to start';
 
         var rootLayer = this.add.layer().setName('root');
@@ -77,8 +77,8 @@ class Demo extends Phaser.Scene {
 var config = {
     type: Phaser.AUTO,
     parent: 'phaser-example',
-    width: 800,
-    height: 600,
+    width: 1920,
+    height: 1080,
     scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,

@@ -7,6 +7,9 @@
 BG
   id=Background
   key=classroom
+  vpw=1
+  vph=1
+  scaleMode=FIT
 
 TEXTBOX
   id=Dialog
