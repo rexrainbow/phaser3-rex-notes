@@ -6,64 +6,65 @@ var Typing = function (
         icon, iconFrame,
         name, expression,
         speed,
-        iconCrossDuration, iconCrossMode = 'crossFade'
+        iconCrossDuration, iconCrossMode = 'crossFade',
+        wait = true,
     } = {},
     commandExecutor,
     eventSheetManager, eventSheet
 ) {
 
-    if (displayName) {
-        var title = gameObject.getElement('title').setText(displayName);
-        gameObject.setChildAlpha(title, 1);
-    } else {
+    if (displayName === null) {
         var title = gameObject.getElement('title').setText('');
         gameObject.setChildAlpha(title, 0);
-    }
-
-    if (expression) {
-        if (name === undefined) {
-            name = displayName;
-        }
-        var frameDelimiter = gameObject.frameDelimiter;
-        iconFrame = name + frameDelimiter + expression;
-    }
-
-    if (speed === undefined) {
-        speed = eventSheetManager.getData('$typingSpeed');
+    } else if (displayName) {
+        var title = gameObject.getElement('title').setText(displayName);
+        gameObject.setChildAlpha(title, 1);
     }
 
     var iconGameObject = gameObject.getElement('icon');
-    if (icon === null) {
-        gameObject.hide(iconGameObject);
-    } else {
-        gameObject.show(iconGameObject);
-    }
-
-    if (icon || iconFrame) {
-        var iconGameObject = gameObject.getElement('icon'); // TransitionImagePack
-        if (!icon) {
-            icon = iconGameObject.texture.key;
+    if (iconGameObject) {
+        if (name || expression) {
+            var frameDelimiter = gameObject.frameDelimiter;
+            var tokens = gameObject.frame.name.split(frameDelimiter);
+            name = name || tokens[0];
+            expression = expression || tokens[1];
+            iconFrame = name + frameDelimiter + expression;
         }
 
-        if (!iconFrame) {
-            iconFrame = '__BASE';
-        }
+        if (icon || iconFrame) {
+            icon = icon || iconGameObject.texture.key;
+            iconFrame = iconFrame || '__BASE';
 
-        // Don't do transition if texture is not changed
-        if ((icon !== iconGameObject.texture.key) || (iconFrame !== iconGameObject.frame.name)) {
-            if (iconCrossDuration === undefined) {
-                iconCrossDuration = eventSheetManager.getData('$transitionDuration');
+            // Don't do transition if texture is not changed
+            if ((icon !== iconGameObject.texture.key) || (iconFrame !== iconGameObject.frame.name)) {
+                if (iconCrossDuration === undefined) {
+                    iconCrossDuration = eventSheetManager.getData('$transitionDuration');
+                }
+                iconGameObject.setDuration(iconCrossDuration);
+                iconGameObject.transit(icon, iconFrame, iconCrossMode);
             }
-            iconGameObject.setDuration(iconCrossDuration);
-            iconGameObject.transit(icon, iconFrame, iconCrossMode);
+
         }
 
+        if (icon === null) {
+            gameObject.hide(iconGameObject);
+        } else {
+            gameObject.show(iconGameObject);
+        }
     }
+
     gameObject.layout();
 
     if (text) {
-        // Wait until typing complete
-        commandExecutor.waitEvent(gameObject, 'complete2');
+        if (speed === undefined) {
+            speed = eventSheetManager.getData('$typingSpeed');
+        }
+
+        if (wait) {
+            // Wait until typing complete
+            commandExecutor.waitEvent(gameObject, 'complete2');
+        }
+
         gameObject.start(text, speed);
     }
 };

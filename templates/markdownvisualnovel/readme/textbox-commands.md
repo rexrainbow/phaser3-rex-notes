@@ -86,12 +86,15 @@ NAME.yoyo
 
 NAME.typing
   displayName=
-  // icon=
-  // iconFrame=
-  // name=
-  // expression=
+  icon=
+  iconFrame=
+  name=
+  expression=
   text=
   speed=
+  iconCrossDuration=
+  iconCrossMode='crossFade'
+  wait=true
 
 ```
 
@@ -99,7 +102,7 @@ or
 
 ~~~
 
-```NAME.typing,name=,expression=,icon=,iconFrame=,speed=
+```NAME.typing, name=, expression=, icon=, iconFrame=, speed=, iconCrossDuration=, iconCrossMode='crossFade', wait=true
 text-line0
 text-line1
 text-line2
@@ -108,8 +111,25 @@ text-line2
 ~~~
 
 - `displayName` : Display `displayName` at title element.
-    - `undefined` : Hide title element.
+    - `null` : Hide title element.
+    - `undefined` : Don't change title element.
 - `icon`, `iconFrame` : Texture key and frame name of icon element.
+  - `undefined` : Using previous texture.
   - Set `icon` to `null` : Hide icon element.
 - `expression` : Generate `iconFrame` by `${name}-${expression}`.
-    - Use `displayName` if `name` is not given here.
+- `iconCrossMode` : Pre-build effects
+    - Fade effects : 
+        - `'fade'` : Tint old image to black, then tint new image from black to origin color.
+        - `'crossFade'` : Ease alpha of old image from 1 to 0, and ease alpha of new image from 0 to 1 at the same time.
+    - Slide effects : `'slideLeft'`, `'slideRight'`, `'slideUp'`, `'slideDown'`, 
+      `'slideAwayLeft'`, `'slideAwayRight'`, `'slideAwayUp'`, `'slideAwayDown'`, 
+      `'pushLeft'`, `'pushRight'`, `'pushUp'`, `'pushDown'`.
+    - Zoom(scale) effects : `'zoomOut'`, `'zoomIn'`, `'zoomInOut'`.
+    - Mask effects : `'wipeLeft'`, `'wipeRight'`, `'wipeUp'`, `'wipeDown'`,
+      `'irisOut'`, `'irisIn'`,  `'irisInOut'`, `'pieOut'`, `'pieIn'`, `'pieInOut'`, 
+      `'blinds'`, `'squares'`, `'diamonds'`, `'circles'`, `'curtain'`.
+    - Shader effects : `'pixellate'`, `'dissolve'`, 
+      `'revealLeft'`, `'revealRight'`, `'revealUp'`, `'revealDown'`
+
+!!! note
+    Wait an extra clicking after typing complete internally.

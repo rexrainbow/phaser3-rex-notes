@@ -4,6 +4,7 @@ import GenerateDefaultCreateGameObjectCallback from './GenerateDefaultCreateGame
 import Cross from './Cross.js';
 import Focus from './Focus.js';
 import Unfocus from './Unfocus.js';
+import Say from './Say.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
@@ -43,6 +44,7 @@ var RegisterSpriteType = function (commandExecutor, config) {
             cross: Cross,
             focus: Focus,
             unfocus: Unfocus,
+            say: Say,
         }
     })
 }

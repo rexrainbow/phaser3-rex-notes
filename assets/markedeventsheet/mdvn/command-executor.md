@@ -69,7 +69,7 @@ CharacterB.set
 CharacterC.set
   vpx=-0.3
 
-```Dialog.typing, icon=null
+```Dialog.typing, displayName=null, icon=null
 
 ```
 
@@ -133,9 +133,19 @@ CharacterC.to
 //   duration=300
 // Wait until tween complete
 
-CharacterA.focus
 
-```Dialog.typing, displayName=A, icon=portraits, name=A, expression=smile, speed=100
+CharacterA.say
+  name=A
+  expression=smile
+  displayName=???
+  icon=portraits
+  text=Hi
+
+CharacterA.say
+  expression=happy
+  text=Hello
+
+```Dialog.typing, displayName=A, icon=portraits, name=A, expression=smile
 Line0...
 Line1...
 Line2...
@@ -143,7 +153,7 @@ Line3...
 ```
 // Wait until typing complete + one more click
 
-```Dialog.typing, displayName=A, icon=portraits, name=A, expression=smile, speed=100
+```Dialog.typing
 AAAA
 BBBB
 CCCC

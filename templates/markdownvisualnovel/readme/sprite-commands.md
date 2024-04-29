@@ -267,3 +267,30 @@ Set tint to 0xffffff to all sprites
 NAME.unfocus
 
 ```
+
+### Say
+
+SPRITE.corss + SPRITE.focus + TEXTBOX.typing
+
+```
+
+NAME.say
+  name=
+  expression=
+  duration=
+  mode=fade
+  tintOthers=0x0
+  displayName=
+  icon=
+  iconFrame=
+  text=
+  typingSpeed=
+  iconCrossDuration=
+  iconCrossMode='crossFade'
+  wait=
+
+```
+
+
+!!! note
+    Wait an extra clicking after typing complete internally.
