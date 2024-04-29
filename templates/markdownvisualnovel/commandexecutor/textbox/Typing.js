@@ -5,7 +5,7 @@ var Typing = function (
         displayName,
         icon, iconFrame,
         name, expression,
-        speed,
+        typingSpeed,
         iconCrossDuration, iconCrossMode = 'crossFade',
         wait = true,
     } = {},
@@ -56,8 +56,8 @@ var Typing = function (
     gameObject.layout();
 
     if (text) {
-        if (speed === undefined) {
-            speed = eventSheetManager.getData('$typingSpeed');
+        if (typingSpeed === undefined) {
+            typingSpeed = eventSheetManager.getData('$typingSpeed');
         }
 
         if (wait) {
@@ -65,7 +65,7 @@ var Typing = function (
             commandExecutor.waitEvent(gameObject, 'complete2');
         }
 
-        gameObject.start(text, speed);
+        gameObject.start(text, typingSpeed);
     }
 };
 

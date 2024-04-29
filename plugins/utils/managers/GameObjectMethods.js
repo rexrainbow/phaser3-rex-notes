@@ -45,16 +45,25 @@ export default {
         if (typeof (name) === 'string') {
             return gameobjectManager.getGO(name);
         } else {
+            if (out === undefined) {
+                out = {};
+            }
+
             var names = name;
             if (names === undefined) {
                 names = gameobjectManager.bobs;
             }
-            if (out === undefined) {
-                out = {};
-            }
+
+            var isArrayOutput = Array.isArray(out);
             for (name in names) {
-                out[name] = gameobjectManager.getGO(name);
+                if (isArrayOutput) {
+                    out.push(gameobjectManager.getGO(name));
+                } else {
+                    out[name] = gameobjectManager.getGO(name);
+                }
+
             }
+
             return out;
         }
     },

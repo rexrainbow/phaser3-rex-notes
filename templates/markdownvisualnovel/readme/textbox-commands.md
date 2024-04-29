@@ -91,7 +91,7 @@ NAME.typing
   name=
   expression=
   text=
-  speed=
+  typingSpeed=
   iconCrossDuration=
   iconCrossMode='crossFade'
   wait=true
@@ -102,7 +102,7 @@ or
 
 ~~~
 
-```NAME.typing, name=, expression=, icon=, iconFrame=, speed=, iconCrossDuration=, iconCrossMode='crossFade', wait=true
+```NAME.typing, name=, expression=, icon=, iconFrame=, typingSpeed=, iconCrossDuration=, iconCrossMode='crossFade', wait=true
 text-line0
 text-line1
 text-line2

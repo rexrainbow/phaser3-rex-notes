@@ -39,8 +39,7 @@ var Say = function (
         commandExecutor, eventSheetManager, eventSheet
     );
 
-    var textboxGameObjectManager = commandExecutor.sys.getGameObjectManager(TEXTBOX);
-    var textbox = textboxGameObjectManager.getGO()[0];
+    var textbox = commandExecutor.sys.getGameObject(TEXTBOX, undefined, [])[0];
     if (textbox) {
         Typing(
             textbox,
@@ -49,7 +48,7 @@ var Say = function (
                 displayName,
                 icon, iconFrame,
                 name, expression,
-                speed: typingSpeed,
+                typingSpeed,
                 iconCrossDuration, iconCrossMode,
                 wait
             },
