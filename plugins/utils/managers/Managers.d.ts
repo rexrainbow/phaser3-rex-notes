@@ -129,16 +129,20 @@ declare class Managers extends Phaser.Events.EventEmitter {
     ): Phaser.GameObjects.GameObject;
 
     getGameObject(
-        goType: string,
-        name?: { [name: string]: string },
-        out?: { [name: string]: Phaser.GameObjects.GameObject },
-    ): { [name: string]: Phaser.GameObjects.GameObject };
+        goType: string | undefined,
+    ): Phaser.GameObjects.GameObject[];
 
     getGameObject(
         goType: string,
-        name?: { [name: string]: string },
+        name: string[],
         out?: Phaser.GameObjects.GameObject[]
     ): Phaser.GameObjects.GameObject[];
+
+    getGameObject(
+        goType: string,
+        name: string[],
+        out: { [name: string]: Phaser.GameObjects.GameObject },
+    ): { [name: string]: Phaser.GameObjects.GameObject };
 
     addGameObject(
         goType: string, name: string,

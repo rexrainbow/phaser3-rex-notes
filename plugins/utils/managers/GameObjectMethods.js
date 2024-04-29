@@ -46,20 +46,26 @@ export default {
             return gameobjectManager.getGO(name);
         } else {
             if (out === undefined) {
-                out = {};
+                out = [];
             }
 
             var names = name;
             if (names === undefined) {
-                names = gameobjectManager.bobs;
+                names = Object.keys(gameobjectManager.bobs);
             }
 
             var isArrayOutput = Array.isArray(out);
-            for (name in names) {
+            for (var i = 0, cnt = names.length; i < cnt; i++) {
+                name = names[i];
+                var gameObject = gameobjectManager.getGO(name);
+                if (!gameObject) {
+                    continue;
+                }
+
                 if (isArrayOutput) {
-                    out.push(gameobjectManager.getGO(name));
+                    out.push(gameObject);
                 } else {
-                    out[name] = gameobjectManager.getGO(name);
+                    out[name] = gameObject;
                 }
 
             }
