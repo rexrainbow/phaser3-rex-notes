@@ -25,6 +25,7 @@ A container with a panel, slider, and scroller.
     - [With scroller](https://codepen.io/rexrainbow/pen/jOXPXOg)
     - [Without scroller](https://codepen.io/rexrainbow/pen/KKbdPRy)
 - [Nested scroll-able panel](https://codepen.io/rexrainbow/pen/RwEoLzy)
+- [Typing on Label](https://codepen.io/rexrainbow/pen/QWPRGVB)
 
 
 ## Usage

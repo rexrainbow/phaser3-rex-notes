@@ -14,8 +14,7 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {
-    }
+    preload() { }
 
     create() {
         var scrollablePanel = this.rexUI.add.scrollablePanel({
@@ -29,7 +28,12 @@ class Demo extends Phaser.Scene {
             background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 10, COLOR_MAIN),
 
             panel: {
-                child: createTextBox(this),
+                child: this.rexUI.add.label({
+                    text: this.rexUI.add.BBCodeText(0, 0, '', {
+                        fontSize: '20px'
+                    }),
+                    wrapText: 'word'
+                }),
 
                 mask: {
                     padding: 1
@@ -52,30 +56,22 @@ class Demo extends Phaser.Scene {
         })
             .layout()
 
-        var textbox = scrollablePanel.getElement('panel');
-        textbox
+        var textObject = scrollablePanel.getElement('panel.text');
+        scrollablePanel.typing = this.rexUI.add.textTyping(textObject, {
+            wrap: true,
+        });
+        scrollablePanel.typing
             .on('type', function () {
-                scrollablePanel.scrollToBottom();
+                scrollablePanel
+                    .layout()
+                    .scrollToBottom()
             })
 
-
-        textbox.start(content, 30)
-
+        scrollablePanel.typing.start(content, 30);
 
     }
 
     update() { }
-}
-
-var createTextBox = function (scene) {
-    var textBox = scene.rexUI.add.textBox({
-        text: scene.rexUI.add.BBCodeText(0, 0, '', {
-            fontSize: '20px'
-        }),
-        expandTextWidth: true,
-    })
-
-    return textBox;
 }
 
 var config = {
