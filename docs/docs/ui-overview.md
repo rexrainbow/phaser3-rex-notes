@@ -552,11 +552,11 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
         - [Text object](text.md), [bbcode text object](bbcodetext.md), [tag text object](tagtext.md), [bitmap text game object](bitmaptext.md)
 1. [Text typing](texttyping.md)
     ```javascript
-    var textTyping = scene.rexUI.textTyping(textObject, config);
+    var textTyping = scene.rexUI.add.textTyping(textObject, config);
     ```
 1. [Text page](textpage.md)
     ```javascript
-    var textPage = scene.rexUI.textPage(textObject, config);
+    var textPage = scene.rexUI.add.textPage(textObject, config);
     ```
 
 ### Scaled image

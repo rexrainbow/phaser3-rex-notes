@@ -14,6 +14,7 @@ A container with a text, slider, and scroller.
 - [Scroll to line](https://codepen.io/rexrainbow/pen/yLxxWaY)
 - [Modal dialog](https://codepen.io/rexrainbow/pen/qByGPpP)
 - [Min height](https://codepen.io/rexrainbow/pen/oNQJxZN)
+- [Typing](https://codepen.io/rexrainbow/pen/jORoMmV)
 
 ## Usage
 
