@@ -484,7 +484,12 @@
       startLineIndex = this.startLineIndex;
     }
     if (endLineIdx === undefined) {
-      endLineIdx = startLineIndex + this.pageLinesCount;
+      var pageLinesCount = this.pageLinesCount;
+      if (pageLinesCount > 0) {
+        endLineIdx = startLineIndex + pageLinesCount;
+      } else {
+        endLineIdx = this.totalLinesCount;
+      }
     }
     if (endLineIdx > this.totalLinesCount) {
       endLineIdx = this.totalLinesCount;
@@ -532,7 +537,14 @@
       var text = this.sections.join('\n');
       this.lines = TextToLines(this.parent, text, this.lines);
       var newLinesCount = this.totalLinesCount - pageStartIndex;
-      var pageCount = Math.ceil(newLinesCount / this.pageLinesCount);
+      var pageLinesCount = this.pageLinesCount;
+      var pageCount;
+      if (pageLinesCount > 0) {
+        pageCount = Math.ceil(newLinesCount / this.pageLinesCount);
+      } else {
+        // Height of Text object might be 0
+        pageCount = 1;
+      }
       for (var i = 0; i < pageCount; i++) {
         this.pageStartIndexes.push(pageStartIndex + i * this.pageLinesCount);
       }
@@ -1248,6 +1260,7 @@
         _classCallCheck(this, TextBox);
         _this = _callSuper(this, TextBox, [scene, config]);
         _this.type = type;
+        _this.isRunning = false;
 
         // childrenMap must have 'text' element
         var text = _this.childrenMap.text;
@@ -1261,15 +1274,20 @@
             case TextType:
             case TagTextType:
               // Don't overwrite resize method if text has it already
-              if (!text.resize) {
-                text.resize = function (width, height) {
-                  var fixedWidth = expandTextWidth ? width : 0;
-                  var fixedHeight = expandTextHeight ? height : 0;
-                  text.setFixedSize(fixedWidth, fixedHeight);
-                  if (fixedWidth > 0) {
-                    text.setWordWrapWidth(fixedWidth);
-                  }
-                };
+              text.resize = function (width, height) {
+                var fixedWidth = expandTextWidth ? width : 0;
+                var fixedHeight = expandTextHeight ? height : 0;
+                text.setFixedSize(fixedWidth, fixedHeight);
+                if (fixedWidth > 0) {
+                  text.setWordWrapWidth(fixedWidth);
+                }
+              };
+              if (textObjectType === TagTextType) {
+                var style = text.style;
+                if (style.wrapMode === 0) {
+                  // Turn no-wrap to word-wrap
+                  style.wrapMode = 1;
+                }
               }
               break;
           }
@@ -1304,6 +1322,8 @@
       }, {
         key: "start",
         value: function start(text, speed) {
+          // Start typing task
+          this.isRunning = true;
           this.page.setText(text);
           if (speed !== undefined) {
             this.setTypingSpeed(speed);
@@ -1321,6 +1341,10 @@
       }, {
         key: "typeNextPage",
         value: function typeNextPage() {
+          // Do nothing if typing task does not start
+          if (!this.isRunning) {
+            return this;
+          }
           if (!this.isLastPage) {
             var txt = this.page.getNextPage();
             this.typing.start(txt);
@@ -1332,6 +1356,10 @@
       }, {
         key: "typeNextLine",
         value: function typeNextLine() {
+          // Do nothing if typing task does not start
+          if (!this.isRunning) {
+            return this;
+          }
           if (!this.isLastLine) {
             var txt = this.page.getPageOfNextLine();
             var startLineIndex;
@@ -1344,12 +1372,19 @@
             }
             this.typing.startFromLine(txt, startLineIndex);
           } else {
+            // Stop typing tasl if typing complete at last line
+
+            this.isRunning = false;
             this.emit('complete');
           }
         }
       }, {
         key: "pause",
         value: function pause() {
+          // Do nothing if typing task does not start
+          if (!this.isRunning) {
+            return this;
+          }
           if (this.isTyping) {
             this.typing.pause();
             this.emit('pause');
@@ -1359,6 +1394,10 @@
       }, {
         key: "resume",
         value: function resume() {
+          // Do nothing if typing task does not start
+          if (!this.isRunning) {
+            return this;
+          }
           if (!this.isTyping) {
             this.emit('resume');
             this.typing.resume();
@@ -1368,12 +1407,20 @@
       }, {
         key: "stop",
         value: function stop(showAllText) {
+          // Do nothing if typing task does not start
+          if (!this.isRunning) {
+            return this;
+          }
           this.typing.stop(showAllText);
           return this;
         }
       }, {
         key: "showLastPage",
         value: function showLastPage() {
+          // Do nothing if typing task does not start
+          if (!this.isRunning) {
+            return this;
+          }
           this.typing.stop();
           if (this.typingMode === 0) {
             this.page.showLastPage();
@@ -1472,6 +1519,9 @@
         value: function onTypingComplete() {
           if (this.typingMode === 0) {
             var isLastPage = this.isLastPage;
+
+            // Stop typing tasl if typing complete at last page
+            this.isRunning = !isLastPage;
             this.emit('pageend');
             /*
             Might enter this method immediately, if invoking typeNextPage() in this 'pageend' event.

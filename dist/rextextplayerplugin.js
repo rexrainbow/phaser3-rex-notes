@@ -6182,15 +6182,25 @@
       if (typeof name === 'string') {
         return gameobjectManager.getGO(name);
       } else {
+        if (out === undefined) {
+          out = [];
+        }
         var names = name;
         if (names === undefined) {
-          names = gameobjectManager.bobs;
+          names = Object.keys(gameobjectManager.bobs);
         }
-        if (out === undefined) {
-          out = {};
-        }
-        for (name in names) {
-          out[name] = gameobjectManager.getGO(name);
+        var isArrayOutput = Array.isArray(out);
+        for (var i = 0, cnt = names.length; i < cnt; i++) {
+          name = names[i];
+          var gameObject = gameobjectManager.getGO(name);
+          if (!gameObject) {
+            continue;
+          }
+          if (isArrayOutput) {
+            out.push(gameObject);
+          } else {
+            out[name] = gameObject;
+          }
         }
         return out;
       }

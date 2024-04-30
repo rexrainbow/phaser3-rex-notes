@@ -407,7 +407,12 @@
       startLineIndex = this.startLineIndex;
     }
     if (endLineIdx === undefined) {
-      endLineIdx = startLineIndex + this.pageLinesCount;
+      var pageLinesCount = this.pageLinesCount;
+      if (pageLinesCount > 0) {
+        endLineIdx = startLineIndex + pageLinesCount;
+      } else {
+        endLineIdx = this.totalLinesCount;
+      }
     }
     if (endLineIdx > this.totalLinesCount) {
       endLineIdx = this.totalLinesCount;
@@ -455,7 +460,14 @@
       var text = this.sections.join('\n');
       this.lines = TextToLines(this.parent, text, this.lines);
       var newLinesCount = this.totalLinesCount - pageStartIndex;
-      var pageCount = Math.ceil(newLinesCount / this.pageLinesCount);
+      var pageLinesCount = this.pageLinesCount;
+      var pageCount;
+      if (pageLinesCount > 0) {
+        pageCount = Math.ceil(newLinesCount / this.pageLinesCount);
+      } else {
+        // Height of Text object might be 0
+        pageCount = 1;
+      }
       for (var i = 0; i < pageCount; i++) {
         this.pageStartIndexes.push(pageStartIndex + i * this.pageLinesCount);
       }

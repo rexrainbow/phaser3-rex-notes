@@ -23505,15 +23505,25 @@
       if (typeof name === 'string') {
         return gameobjectManager.getGO(name);
       } else {
+        if (out === undefined) {
+          out = [];
+        }
         var names = name;
         if (names === undefined) {
-          names = gameobjectManager.bobs;
+          names = Object.keys(gameobjectManager.bobs);
         }
-        if (out === undefined) {
-          out = {};
-        }
-        for (name in names) {
-          out[name] = gameobjectManager.getGO(name);
+        var isArrayOutput = Array.isArray(out);
+        for (var i = 0, cnt = names.length; i < cnt; i++) {
+          name = names[i];
+          var gameObject = gameobjectManager.getGO(name);
+          if (!gameObject) {
+            continue;
+          }
+          if (isArrayOutput) {
+            out.push(gameObject);
+          } else {
+            out[name] = gameObject;
+          }
         }
         return out;
       }
@@ -72141,7 +72151,12 @@
       startLineIndex = this.startLineIndex;
     }
     if (endLineIdx === undefined) {
-      endLineIdx = startLineIndex + this.pageLinesCount;
+      var pageLinesCount = this.pageLinesCount;
+      if (pageLinesCount > 0) {
+        endLineIdx = startLineIndex + pageLinesCount;
+      } else {
+        endLineIdx = this.totalLinesCount;
+      }
     }
     if (endLineIdx > this.totalLinesCount) {
       endLineIdx = this.totalLinesCount;
@@ -72189,7 +72204,14 @@
       var text = this.sections.join('\n');
       this.lines = TextToLines(this.parent, text, this.lines);
       var newLinesCount = this.totalLinesCount - pageStartIndex;
-      var pageCount = Math.ceil(newLinesCount / this.pageLinesCount);
+      var pageLinesCount = this.pageLinesCount;
+      var pageCount;
+      if (pageLinesCount > 0) {
+        pageCount = Math.ceil(newLinesCount / this.pageLinesCount);
+      } else {
+        // Height of Text object might be 0
+        pageCount = 1;
+      }
       for (var i = 0; i < pageCount; i++) {
         this.pageStartIndexes.push(pageStartIndex + i * this.pageLinesCount);
       }
@@ -72864,6 +72886,7 @@
         _classCallCheck(this, TextBox);
         _this = _callSuper(this, TextBox, [scene, config]);
         _this.type = type;
+        _this.isRunning = false;
 
         // childrenMap must have 'text' element
         var text = _this.childrenMap.text;
@@ -72877,15 +72900,20 @@
             case TextType:
             case TagTextType:
               // Don't overwrite resize method if text has it already
-              if (!text.resize) {
-                text.resize = function (width, height) {
-                  var fixedWidth = expandTextWidth ? width : 0;
-                  var fixedHeight = expandTextHeight ? height : 0;
-                  text.setFixedSize(fixedWidth, fixedHeight);
-                  if (fixedWidth > 0) {
-                    text.setWordWrapWidth(fixedWidth);
-                  }
-                };
+              text.resize = function (width, height) {
+                var fixedWidth = expandTextWidth ? width : 0;
+                var fixedHeight = expandTextHeight ? height : 0;
+                text.setFixedSize(fixedWidth, fixedHeight);
+                if (fixedWidth > 0) {
+                  text.setWordWrapWidth(fixedWidth);
+                }
+              };
+              if (textObjectType === TagTextType) {
+                var style = text.style;
+                if (style.wrapMode === 0) {
+                  // Turn no-wrap to word-wrap
+                  style.wrapMode = 1;
+                }
               }
               break;
           }
@@ -72920,6 +72948,8 @@
       }, {
         key: "start",
         value: function start(text, speed) {
+          // Start typing task
+          this.isRunning = true;
           this.page.setText(text);
           if (speed !== undefined) {
             this.setTypingSpeed(speed);
@@ -72937,6 +72967,10 @@
       }, {
         key: "typeNextPage",
         value: function typeNextPage() {
+          // Do nothing if typing task does not start
+          if (!this.isRunning) {
+            return this;
+          }
           if (!this.isLastPage) {
             var txt = this.page.getNextPage();
             this.typing.start(txt);
@@ -72948,6 +72982,10 @@
       }, {
         key: "typeNextLine",
         value: function typeNextLine() {
+          // Do nothing if typing task does not start
+          if (!this.isRunning) {
+            return this;
+          }
           if (!this.isLastLine) {
             var txt = this.page.getPageOfNextLine();
             var startLineIndex;
@@ -72960,12 +72998,19 @@
             }
             this.typing.startFromLine(txt, startLineIndex);
           } else {
+            // Stop typing tasl if typing complete at last line
+
+            this.isRunning = false;
             this.emit('complete');
           }
         }
       }, {
         key: "pause",
         value: function pause() {
+          // Do nothing if typing task does not start
+          if (!this.isRunning) {
+            return this;
+          }
           if (this.isTyping) {
             this.typing.pause();
             this.emit('pause');
@@ -72975,6 +73020,10 @@
       }, {
         key: "resume",
         value: function resume() {
+          // Do nothing if typing task does not start
+          if (!this.isRunning) {
+            return this;
+          }
           if (!this.isTyping) {
             this.emit('resume');
             this.typing.resume();
@@ -72984,12 +73033,20 @@
       }, {
         key: "stop",
         value: function stop(showAllText) {
+          // Do nothing if typing task does not start
+          if (!this.isRunning) {
+            return this;
+          }
           this.typing.stop(showAllText);
           return this;
         }
       }, {
         key: "showLastPage",
         value: function showLastPage() {
+          // Do nothing if typing task does not start
+          if (!this.isRunning) {
+            return this;
+          }
           this.typing.stop();
           if (this.typingMode === 0) {
             this.page.showLastPage();
@@ -73088,6 +73145,9 @@
         value: function onTypingComplete() {
           if (this.typingMode === 0) {
             var isLastPage = this.isLastPage;
+
+            // Stop typing tasl if typing complete at last page
+            this.isRunning = !isLastPage;
             this.emit('pageend');
             /*
             Might enter this method immediately, if invoking typeNextPage() in this 'pageend' event.
@@ -79688,10 +79748,10 @@
               scale = Math.max(scaleX, scaleY);
               break;
           }
-          width = gameObject.width * scale;
-          height = gameObject.height * scale;
+          gameObject.setScale(scale);
+        } else {
+          gameObject.setDisplaySize(width, height);
         }
-        gameObject.setDisplaySize(width, height);
       }
       return gameObject;
     };
@@ -79877,6 +79937,122 @@
     }, eventSheetManager);
   };
 
+  var Typing = function Typing(gameObject) {
+    var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+      text = _ref.text,
+      displayName = _ref.displayName,
+      icon = _ref.icon,
+      iconFrame = _ref.iconFrame,
+      name = _ref.name,
+      expression = _ref.expression,
+      typingSpeed = _ref.typingSpeed,
+      iconCrossDuration = _ref.iconCrossDuration,
+      _ref$iconCrossMode = _ref.iconCrossMode,
+      iconCrossMode = _ref$iconCrossMode === void 0 ? 'crossFade' : _ref$iconCrossMode,
+      _ref$wait = _ref.wait,
+      wait = _ref$wait === void 0 ? true : _ref$wait;
+    var commandExecutor = arguments.length > 2 ? arguments[2] : undefined;
+    var eventSheetManager = arguments.length > 3 ? arguments[3] : undefined;
+    if (displayName === null) {
+      var title = gameObject.getElement('title').setText('');
+      gameObject.setChildAlpha(title, 0);
+    } else if (displayName) {
+      var title = gameObject.getElement('title').setText(displayName);
+      gameObject.setChildAlpha(title, 1);
+    }
+    var iconGameObject = gameObject.getElement('icon');
+    if (iconGameObject) {
+      if (name || expression) {
+        var frameDelimiter = gameObject.frameDelimiter;
+        var tokens = gameObject.frame.name.split(frameDelimiter);
+        name = name || tokens[0];
+        expression = expression || tokens[1];
+        iconFrame = name + frameDelimiter + expression;
+      }
+      if (icon || iconFrame) {
+        icon = icon || iconGameObject.texture.key;
+        iconFrame = iconFrame || '__BASE';
+
+        // Don't do transition if texture is not changed
+        if (icon !== iconGameObject.texture.key || iconFrame !== iconGameObject.frame.name) {
+          if (iconCrossDuration === undefined) {
+            iconCrossDuration = eventSheetManager.getData('$transitionDuration');
+          }
+          iconGameObject.setDuration(iconCrossDuration);
+          iconGameObject.transit(icon, iconFrame, iconCrossMode);
+        }
+      }
+      if (icon === null) {
+        gameObject.hide(iconGameObject);
+      } else {
+        gameObject.show(iconGameObject);
+      }
+    }
+    gameObject.layout();
+    if (text) {
+      if (typingSpeed === undefined) {
+        typingSpeed = eventSheetManager.getData('$typingSpeed');
+      }
+      if (wait) {
+        // Wait until typing complete
+        commandExecutor.waitEvent(gameObject, 'complete2');
+      }
+      gameObject.start(text, typingSpeed);
+    }
+  };
+
+  var Say = function Say(gameObject) {
+    var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+      key = _ref.key,
+      frame = _ref.frame,
+      name = _ref.name,
+      expression = _ref.expression,
+      duration = _ref.duration,
+      _ref$mode = _ref.mode,
+      mode = _ref$mode === void 0 ? 'crossFade' : _ref$mode,
+      tintOthers = _ref.tintOthers,
+      text = _ref.text,
+      displayName = _ref.displayName,
+      typingSpeed = _ref.typingSpeed,
+      icon = _ref.icon,
+      iconFrame = _ref.iconFrame,
+      iconCrossDuration = _ref.iconCrossDuration,
+      _ref$iconCrossMode = _ref.iconCrossMode,
+      iconCrossMode = _ref$iconCrossMode === void 0 ? 'crossFade' : _ref$iconCrossMode,
+      _ref$wait = _ref.wait,
+      wait = _ref$wait === void 0 ? true : _ref$wait;
+    var commandExecutor = arguments.length > 2 ? arguments[2] : undefined;
+    var eventSheetManager = arguments.length > 3 ? arguments[3] : undefined;
+    var eventSheet = arguments.length > 4 ? arguments[4] : undefined;
+    Cross(gameObject, {
+      key: key,
+      frame: frame,
+      name: name,
+      expression: expression,
+      duration: duration,
+      mode: mode,
+      wait: false
+    }, commandExecutor, eventSheetManager, eventSheet);
+    Focus$1(gameObject, {
+      tintOthers: tintOthers
+    }, commandExecutor, eventSheetManager, eventSheet);
+    var textbox = commandExecutor.sys.getGameObject(TEXTBOX, undefined)[0];
+    if (textbox) {
+      Typing(textbox, {
+        text: text,
+        displayName: displayName,
+        icon: icon,
+        iconFrame: iconFrame,
+        name: name,
+        expression: expression,
+        typingSpeed: typingSpeed,
+        iconCrossDuration: iconCrossDuration,
+        iconCrossMode: iconCrossMode,
+        wait: wait
+      }, commandExecutor, eventSheetManager, eventSheet);
+    }
+  };
+
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
   var IsPlainObject$2 = Phaser.Utils.Objects.IsPlainObject;
   var RegisterSpriteType = function RegisterSpriteType(commandExecutor, config) {
@@ -79908,7 +80084,8 @@
       commands: {
         cross: Cross,
         focus: Focus$1,
-        unfocus: Focus
+        unfocus: Focus,
+        say: Say
       }
     });
   };
@@ -79960,9 +80137,21 @@
       gameObject.setMinSize(width, height).setOrigin(0.5, 1) // Align to bottom
       .layout();
       scene.add.existing(gameObject);
-      gameObject.setInteractive().on('pointerdown', function () {
+      gameObject.setInteractive().on('complete', function () {
+        // Wait addition pointerdown after complete
+        this.complete2 = true;
+      }, gameObject).on('pointerdown', function () {
+        if (this.complete2) {
+          this.complete2 = false;
+          this.emit('complete2');
+          return;
+        }
+
+        // Decorator
         var icon = this.getElement('action');
         this.setChildAlpha(icon, 0);
+
+        // Show this page, or typing next page
         if (this.isTyping) {
           this.stop(true);
         } else {
@@ -79972,6 +80161,8 @@
         if (this.isLastPage) {
           return;
         }
+
+        // Decorator
         var icon = this.getElement('action');
         this.setChildAlpha(icon, 1);
         icon.y -= 30;
@@ -79993,69 +80184,6 @@
       gameObject.vpy = vpy;
       return gameObject;
     };
-  };
-
-  var Typing = function Typing(gameObject) {
-    var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
-      text = _ref.text,
-      displayName = _ref.displayName,
-      icon = _ref.icon,
-      iconFrame = _ref.iconFrame,
-      name = _ref.name,
-      expression = _ref.expression,
-      speed = _ref.speed,
-      iconCrossDuration = _ref.iconCrossDuration,
-      _ref$iconCrossMode = _ref.iconCrossMode,
-      iconCrossMode = _ref$iconCrossMode === void 0 ? 'crossFade' : _ref$iconCrossMode;
-    var commandExecutor = arguments.length > 2 ? arguments[2] : undefined;
-    var eventSheetManager = arguments.length > 3 ? arguments[3] : undefined;
-    if (displayName) {
-      var title = gameObject.getElement('title').setText(displayName);
-      gameObject.setChildAlpha(title, 1);
-    } else {
-      var title = gameObject.getElement('title').setText('');
-      gameObject.setChildAlpha(title, 0);
-    }
-    if (expression) {
-      if (name === undefined) {
-        name = displayName;
-      }
-      var frameDelimiter = gameObject.frameDelimiter;
-      iconFrame = name + frameDelimiter + expression;
-    }
-    if (speed === undefined) {
-      speed = eventSheetManager.getData('$typingSpeed');
-    }
-    var iconGameObject = gameObject.getElement('icon');
-    if (icon === null) {
-      gameObject.hide(iconGameObject);
-    } else {
-      gameObject.show(iconGameObject);
-    }
-    if (icon || iconFrame) {
-      var iconGameObject = gameObject.getElement('icon'); // TransitionImagePack
-      if (!icon) {
-        icon = iconGameObject.texture.key;
-      }
-      if (!iconFrame) {
-        iconFrame = '__BASE';
-      }
-
-      // Don't do transition if texture is not changed
-      if (icon !== iconGameObject.texture.key || iconFrame !== iconGameObject.frame.name) {
-        if (iconCrossDuration === undefined) {
-          iconCrossDuration = eventSheetManager.getData('$transitionDuration');
-        }
-        iconGameObject.setDuration(iconCrossDuration);
-        iconGameObject.transit(icon, iconFrame, iconCrossMode);
-      }
-    }
-    gameObject.layout();
-    if (text) {
-      // Wait until typing complete
-      commandExecutor.waitEvent(gameObject, 'complete');
-      gameObject.start(text, speed);
-    }
   };
 
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
@@ -80225,8 +80353,15 @@
   };
 
   var RegisterRandomExpression = function RegisterRandomExpression(eventSheetManager) {
-    eventSheetManager.addExpression('random', function () {
-      return Math.random();
+    eventSheetManager.addExpression('random', function (a, b) {
+      if (a === undefined && b === undefined) {
+        a = 0;
+        b = 1;
+      } else if (b === undefined) {
+        b = a;
+        a = 0;
+      }
+      return a + Math.random() * (b - a);
     });
   };
 
