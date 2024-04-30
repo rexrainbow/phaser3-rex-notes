@@ -7,7 +7,12 @@ var GetLines = function (startLineIndex, endLineIdx) {
         startLineIndex = this.startLineIndex;
     }
     if (endLineIdx === undefined) {
-        endLineIdx = startLineIndex + this.pageLinesCount;
+        var pageLinesCount = this.pageLinesCount;
+        if (pageLinesCount > 0) {
+            endLineIdx = startLineIndex + pageLinesCount;
+        } else {
+            endLineIdx = this.totalLinesCount
+        }
     }
     if (endLineIdx > this.totalLinesCount) {
         endLineIdx = this.totalLinesCount;

@@ -30,17 +30,21 @@ var TextBoxBase = function (GOClass, type) {
                     case TextType:
                     case TagTextType:
                         // Don't overwrite resize method if text has it already
-                        if (!text.resize) {
-                            text.resize = function (width, height) {
-                                var fixedWidth = (expandTextWidth) ? width : 0;
-                                var fixedHeight = (expandTextHeight) ? height : 0;
-                                text.setFixedSize(fixedWidth, fixedHeight);
+                        text.resize = function (width, height) {
+                            var fixedWidth = (expandTextWidth) ? width : 0;
+                            var fixedHeight = (expandTextHeight) ? height : 0;
+                            text.setFixedSize(fixedWidth, fixedHeight);
 
-                                if (fixedWidth > 0) {
-                                    text.setWordWrapWidth(fixedWidth);
-                                }
+                            if (fixedWidth > 0) {
+                                text.setWordWrapWidth(fixedWidth);
                             }
+                        }
 
+                        if (textObjectType === TagTextType) {
+                            var style = text.style;
+                            if (style.wrapMode === 0) { // Turn no-wrap to word-wrap
+                                style.wrapMode = 1;
+                            }
                         }
                         break;
 
