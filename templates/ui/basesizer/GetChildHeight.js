@@ -12,6 +12,8 @@ var GetChildHeight = function (child) {
     } else {  // Normal game object
         if (child.minHeight !== undefined) {  // Force minHeight
             childHeight = child.minHeight;
+        } else if (child._minHeight !== undefined) {
+            childHeight = child._minHeight;
         } else {
             childHeight = GetDisplayHeight(child);
         }

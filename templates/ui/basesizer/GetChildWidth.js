@@ -12,6 +12,8 @@ var GetChildWidth = function (child) {
     } else {  // Normal game object
         if (child.minWidth !== undefined) {  // Force minWidth
             childWidth = child.minWidth;
+        } else if (child._minWidth !== undefined) {  // Force minWidth
+            childWidth = child._minWidth;
         } else {
             childWidth = GetDisplayWidth(child);
         }
