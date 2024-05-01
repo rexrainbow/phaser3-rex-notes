@@ -150,4 +150,18 @@ declare class GridSizer extends BaseSizer {
             row?: number | number[],
         }
     ): this;
+
+    sortChildren(
+        callback: (childA: Phaser.GameObjects.GameObject, childB: Phaser.GameObjects.GameObject) => number
+    ): this;
+
+    sortChildrenByData(
+        key: string,
+        descending?: boolean
+    ): this;
+
+    sortChildrenByProperty(
+        key: string,
+        descending?: boolean
+    ): this;
 }

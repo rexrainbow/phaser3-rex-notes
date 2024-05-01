@@ -190,4 +190,19 @@ declare class Sizer extends BaseSizer {
     setChildrenAlignMode(
         mode: 'center' | 'left' | 'right' | 'top' | 'bottom'
     ): this;
+
+    sortChildren(
+        callback: (childA: Phaser.GameObjects.GameObject, childB: Phaser.GameObjects.GameObject) => number
+    ): this;
+
+    sortChildrenByData(
+        key: string,
+        descending?: boolean
+    ): this;
+
+    sortChildrenByProperty(
+        key: string,
+        descending?: boolean
+    ): this;
+
 }

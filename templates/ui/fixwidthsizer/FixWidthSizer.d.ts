@@ -121,4 +121,18 @@ declare class FixWidthSizer extends BaseSizer {
     clear(
         destroyChild?: boolean
     ): this;
+
+    sortChildren(
+        callback: (childA: Phaser.GameObjects.GameObject, childB: Phaser.GameObjects.GameObject) => number
+    ): this;
+
+    sortChildrenByData(
+        key: string,
+        descending?: boolean
+    ): this;
+
+    sortChildrenByProperty(
+        key: string,
+        descending?: boolean
+    ): this;
 }

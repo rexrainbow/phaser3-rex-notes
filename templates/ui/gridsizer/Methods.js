@@ -17,6 +17,7 @@ import SetSpaceMethods from './SetSpaceMethods.js';
 import ResetGrid from './ResetGrid.js';
 import { InseryEmptyRow, AddEmptyRow } from './InsertEmptyRow.js';
 import { InsertEmptyColumn, AddEmptyColumn } from './InsertEmptyColumn.js';
+import SortChildrenMethods from '../basesizer/utils/SortChildrenMethods.js';
 
 
 var methods = {
@@ -45,7 +46,8 @@ Object.assign(
     methods,
     AddChildMethods,
     RemoveChildMethods,
-    SetSpaceMethods
+    SetSpaceMethods,
+    SortChildrenMethods
 );
 
 export default methods;

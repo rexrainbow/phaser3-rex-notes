@@ -17,6 +17,7 @@ import AlignMethods from './AlignMethods.js';
 import ProportionMethods from './ProportionMethods.js';
 import ExpandMethods from './ExpandMethods.js';
 import SetChildrenAlignMode from './SetChildrenAlignMode.js';
+import SortChildrenMethods from '../basesizer/utils/SortChildrenMethods.js';
 
 var methods = {
     getChildrenWidth: GetChildrenWidth,
@@ -43,6 +44,7 @@ Object.assign(
     AlignMethods,
     ProportionMethods,
     ExpandMethods,
+    SortChildrenMethods,
 );
 
 export default methods;

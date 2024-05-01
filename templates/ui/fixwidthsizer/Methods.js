@@ -9,6 +9,7 @@ import HasHeightWrap from './HasHeightWrap.js';
 import RunHeightWrap from './RunHeightWrap.js';
 import AddChildMethods from './AddChildMethods.js';
 import RemoveChildMethods from './RemoveChildMethods.js';
+import SortChildrenMethods from '../basesizer/utils/SortChildrenMethods.js';
 
 var methods = {
     getChildrenWidth: GetChildrenWidth,
@@ -25,7 +26,8 @@ var methods = {
 Object.assign(
     methods,
     AddChildMethods,
-    RemoveChildMethods
+    RemoveChildMethods,
+    SortChildrenMethods
 );
 
 export default methods;
