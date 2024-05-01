@@ -5,6 +5,7 @@ var HideCell = function (cell) {
     if (this.cellContainersPool) {
         var cellContainer = cell.popContainer(); // null if already been removed
         if (cellContainer) {
+            cellContainer.setScale(1).setAlpha(1);
             this.cellContainersPool.killAndHide(cellContainer);
         }
     }
