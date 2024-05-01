@@ -19,6 +19,7 @@ It is inspired from [wxSizer](https://docs.wxwidgets.org/3.0/overview_sizer.html
 - [Drag drop child](https://codepen.io/rexrainbow/pen/YzEaRwd)
 - [Bring child to top](https://codepen.io/rexrainbow/pen/gOqNbRr)
 - [Fit-ratio](https://codepen.io/rexrainbow/pen/ZEPwrom)
+- [Sort](https://codepen.io/rexrainbow/pen/poBmWMY)
 
 ## Usage
 
@@ -429,6 +430,34 @@ See also - [dirty](ui-basesizer.md#dirty)
     ```javascript
     sizer.removeFromParentSizer();
     ```
+
+### Sort children
+
+- Sort by [data](gameobject.md#data)
+    ```javascript
+    sizer.sortChildrenByData(key, descending);
+    ```
+    - `key` : Data key
+    - `descending` : 
+        - `true` : Descending order
+        - `false` : Ascending order, default behavior.
+- Sort by property of child
+    ```javascript
+    sizer.sortChildrenByProperty(key, descending);
+    ```
+    - `key` : Property key
+    - `descending` : 
+        - `true` : Descending order
+        - `false` : Ascending order, default behavior.
+- Sort by callback
+    ```javascript
+    sizer.sortChildren(function(childA, childB){
+        // var valueA = childA.getData(key);
+        // var valueB = childB.getData(key);
+        // return valueB - valueA
+    })
+    ```
+    - `childA`, `childB` : 2 children of this size
 
 ### Get element
 

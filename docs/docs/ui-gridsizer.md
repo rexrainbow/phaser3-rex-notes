@@ -439,6 +439,33 @@ See also - [dirty](ui-basesizer.md#dirty)
     ```javascript
     sizer.removeFromParentSizer();
     ```
+### Sort children
+
+- Sort by [data](gameobject.md#data)
+    ```javascript
+    gridSizer.sortChildrenByData(key, descending);
+    ```
+    - `key` : Data key
+    - `descending` : 
+        - `true` : Descending order
+        - `false` : Ascending order, default behavior.
+- Sort by property of child
+    ```javascript
+    gridSizer.sortChildrenByProperty(key, descending);
+    ```
+    - `key` : Property key
+    - `descending` : 
+        - `true` : Descending order
+        - `false` : Ascending order, default behavior.
+- Sort by callback
+    ```javascript
+    gridSizer.sortChildren(function(childA, childB){
+        // var valueA = childA.getData(key);
+        // var valueB = childB.getData(key);
+        // return valueB - valueA
+    })
+    ```
+    - `childA`, `childB` : 2 children of this size
 
 ### Grid size
 
