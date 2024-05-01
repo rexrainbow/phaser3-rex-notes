@@ -3529,6 +3529,9 @@
       if (child.minWidth !== undefined) {
         // Force minWidth
         childWidth = child.minWidth;
+      } else if (child._minWidth !== undefined) {
+        // Force minWidth
+        childWidth = child._minWidth;
       } else {
         childWidth = GetDisplayWidth(child);
       }
@@ -3550,6 +3553,8 @@
       if (child.minHeight !== undefined) {
         // Force minHeight
         childHeight = child.minHeight;
+      } else if (child._minHeight !== undefined) {
+        childHeight = child._minHeight;
       } else {
         childHeight = GetDisplayHeight(child);
       }
@@ -11862,6 +11867,37 @@
     return this;
   };
 
+  var SortChildrenMethods = {
+    sortChildren: function sortChildren(callback) {
+      this.sizerChildren.sort(callback);
+      return this;
+    },
+    sortChildrenByData: function sortChildrenByData(key, descending) {
+      this.sizerChildren.sort(function (childA, childB) {
+        var valueA = childA.getData(key);
+        var valueB = childB.getData(key);
+        if (descending) {
+          return valueB - valueA;
+        } else {
+          return valueA - valueB;
+        }
+      });
+      return this;
+    },
+    sortChildrenByProperty: function sortChildrenByProperty(key, descending) {
+      this.sizerChildren.sort(function (childA, childB) {
+        var valueA = childA[key];
+        var valueB = childB[key];
+        if (descending) {
+          return valueB - valueA;
+        } else {
+          return valueA - valueB;
+        }
+      });
+      return this;
+    }
+  };
+
   var methods$4 = {
     getChildrenWidth: GetChildrenWidth$1,
     getChildrenHeight: GetChildrenHeight$1,
@@ -11878,7 +11914,7 @@
     runHeightWrap: RunHeightWrap$1,
     setChildrenAlignMode: SetChildrenAlignMode
   };
-  Object.assign(methods$4, AddChildMethods$3, RemoveChildMethods$3, AlignMethods, ProportionMethods, ExpandMethods);
+  Object.assign(methods$4, AddChildMethods$3, RemoveChildMethods$3, AlignMethods, ProportionMethods, ExpandMethods, SortChildrenMethods);
 
   var GetChildrenProportion = function GetChildrenProportion() {
     var result = 0;
@@ -18512,7 +18548,7 @@
     hasHeightWrap: HasHeightWrap,
     runHeightWrap: RunHeightWrap
   };
-  Object.assign(methods, AddChildMethods$1, RemoveChildMethods$1);
+  Object.assign(methods, AddChildMethods$1, RemoveChildMethods$1, SortChildrenMethods);
 
   var GetMaxChildWidth = function GetMaxChildWidth(children) {
     if (children === undefined) {

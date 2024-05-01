@@ -3529,6 +3529,9 @@
       if (child.minWidth !== undefined) {
         // Force minWidth
         childWidth = child.minWidth;
+      } else if (child._minWidth !== undefined) {
+        // Force minWidth
+        childWidth = child._minWidth;
       } else {
         childWidth = GetDisplayWidth(child);
       }
@@ -3550,6 +3553,8 @@
       if (child.minHeight !== undefined) {
         // Force minHeight
         childHeight = child.minHeight;
+      } else if (child._minHeight !== undefined) {
+        childHeight = child._minHeight;
       } else {
         childHeight = GetDisplayHeight(child);
       }
@@ -11782,6 +11787,37 @@
     return this;
   };
 
+  var SortChildrenMethods = {
+    sortChildren: function sortChildren(callback) {
+      this.sizerChildren.sort(callback);
+      return this;
+    },
+    sortChildrenByData: function sortChildrenByData(key, descending) {
+      this.sizerChildren.sort(function (childA, childB) {
+        var valueA = childA.getData(key);
+        var valueB = childB.getData(key);
+        if (descending) {
+          return valueB - valueA;
+        } else {
+          return valueA - valueB;
+        }
+      });
+      return this;
+    },
+    sortChildrenByProperty: function sortChildrenByProperty(key, descending) {
+      this.sizerChildren.sort(function (childA, childB) {
+        var valueA = childA[key];
+        var valueB = childB[key];
+        if (descending) {
+          return valueB - valueA;
+        } else {
+          return valueA - valueB;
+        }
+      });
+      return this;
+    }
+  };
+
   var methods$2 = {
     getChildrenWidth: GetChildrenWidth$1,
     getChildrenHeight: GetChildrenHeight$1,
@@ -11802,7 +11838,7 @@
     insertEmptyColumn: InsertEmptyColumn,
     addEmptyColumn: AddEmptyColumn
   };
-  Object.assign(methods$2, AddChildMethods$2, RemoveChildMethods$2, SetSpaceMethods);
+  Object.assign(methods$2, AddChildMethods$2, RemoveChildMethods$2, SetSpaceMethods, SortChildrenMethods);
 
   var GetTotalColumnProportions = function GetTotalColumnProportions() {
     var result = 0,
@@ -12721,7 +12757,7 @@
     runHeightWrap: RunHeightWrap,
     setChildrenAlignMode: SetChildrenAlignMode
   };
-  Object.assign(methods$1, AddChildMethods$1, RemoveChildMethods$1, AlignMethods, ProportionMethods, ExpandMethods);
+  Object.assign(methods$1, AddChildMethods$1, RemoveChildMethods$1, AlignMethods, ProportionMethods, ExpandMethods, SortChildrenMethods);
 
   var GetChildrenProportion = function GetChildrenProportion() {
     var result = 0;

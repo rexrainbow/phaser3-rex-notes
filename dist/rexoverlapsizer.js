@@ -3529,6 +3529,9 @@
       if (child.minWidth !== undefined) {
         // Force minWidth
         childWidth = child.minWidth;
+      } else if (child._minWidth !== undefined) {
+        // Force minWidth
+        childWidth = child._minWidth;
       } else {
         childWidth = GetDisplayWidth(child);
       }
@@ -3550,6 +3553,8 @@
       if (child.minHeight !== undefined) {
         // Force minHeight
         childHeight = child.minHeight;
+      } else if (child._minHeight !== undefined) {
+        childHeight = child._minHeight;
       } else {
         childHeight = GetDisplayHeight(child);
       }

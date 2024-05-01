@@ -3529,6 +3529,9 @@
       if (child.minWidth !== undefined) {
         // Force minWidth
         childWidth = child.minWidth;
+      } else if (child._minWidth !== undefined) {
+        // Force minWidth
+        childWidth = child._minWidth;
       } else {
         childWidth = GetDisplayWidth(child);
       }
@@ -3550,6 +3553,8 @@
       if (child.minHeight !== undefined) {
         // Force minHeight
         childHeight = child.minHeight;
+      } else if (child._minHeight !== undefined) {
+        childHeight = child._minHeight;
       } else {
         childHeight = GetDisplayHeight(child);
       }
@@ -11615,6 +11620,37 @@
     }
   };
 
+  var SortChildrenMethods = {
+    sortChildren: function sortChildren(callback) {
+      this.sizerChildren.sort(callback);
+      return this;
+    },
+    sortChildrenByData: function sortChildrenByData(key, descending) {
+      this.sizerChildren.sort(function (childA, childB) {
+        var valueA = childA.getData(key);
+        var valueB = childB.getData(key);
+        if (descending) {
+          return valueB - valueA;
+        } else {
+          return valueA - valueB;
+        }
+      });
+      return this;
+    },
+    sortChildrenByProperty: function sortChildrenByProperty(key, descending) {
+      this.sizerChildren.sort(function (childA, childB) {
+        var valueA = childA[key];
+        var valueB = childB[key];
+        if (descending) {
+          return valueB - valueA;
+        } else {
+          return valueA - valueB;
+        }
+      });
+      return this;
+    }
+  };
+
   var methods = {
     getChildrenWidth: GetChildrenWidth,
     getChildrenHeight: GetChildrenHeight,
@@ -11626,7 +11662,7 @@
     hasHeightWrap: HasHeightWrap,
     runHeightWrap: RunHeightWrap
   };
-  Object.assign(methods, AddChildMethods, RemoveChildMethods);
+  Object.assign(methods, AddChildMethods, RemoveChildMethods, SortChildrenMethods);
 
   var OrientationMode = {
     x: 0,
