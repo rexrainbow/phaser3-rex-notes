@@ -7,6 +7,7 @@ declare namespace WaitEventManager {
     interface IConfig {
         completeEventName?: string,
         clickTarget?: Phaser.Scene | Phaser.GameObjects.GameObject;
+        clickShortcutKeys?: string,
         camera?: Phaser.Cameras.Scene2D.Camera
     }
 
@@ -29,6 +30,16 @@ declare class WaitEventManager extends WaitEvent {
         parent: Managers,
         config?: WaitEventManager.IConfig,
     );
+
+    setClickTarget(
+        target?: Phaser.GameObjects.GameObject | Phaser.Scene
+    ): this;
+
+    clearClickTarget(): this;
+
+    setClickShortcutKeys(keys?: string): this;
+
+    clearClickShortcutKeys(): this;
 
     waitEvent(
         eventEmitter: Phaser.Events.EventEmitter,

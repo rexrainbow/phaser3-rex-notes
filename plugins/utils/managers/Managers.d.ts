@@ -61,6 +61,7 @@ declare class Managers extends Phaser.Events.EventEmitter {
     );
 
     readonly clickTarget: Phaser.Scene | Phaser.GameObjects.GameObject;
+    readonly clickShortcutKeys: string;
     readonly cameraTarget: Phaser.Cameras.Scene2D.Camera;
 
     gameObjectManagers: { [name: string]: GOManager };

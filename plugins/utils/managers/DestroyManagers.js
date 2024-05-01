@@ -26,6 +26,7 @@ var DestroyManagers = function (fromScene) {
     }
 
     this.clickTarget = undefined;
+    this.clickShortcutKeys = undefined;
     this.cameraTarget = undefined;
     this.managersScene = undefined;
 }

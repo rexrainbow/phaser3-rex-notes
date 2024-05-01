@@ -1,10 +1,5 @@
 import WaitEvent from '../../waitevent/WaitEvent.js';
-import WaitTimeMethods from './WaitTimeMethods.js';
-import WaitInputMethods from './WaitInputMethods.js';
-import WaitGameObjectMethods from './WaitGameObjectMethods.js';
-import WaitCameraMethods from './WaitCameraMethods.js';
-import WaitMusicMethods from './WaitMusicMethods.js';
-import WaitAny from './WaitAny.js';
+import Methods from './Methods.js';
 import GetValue from '../../object/GetValue.js';
 
 class WaitEventManager extends WaitEvent {
@@ -14,6 +9,7 @@ class WaitEventManager extends WaitEvent {
         this.waitCompleteEventName = GetValue(config, 'completeEventName', this.waitCompleteEventName);
 
         this.setClickTarget(GetValue(config, 'clickTarget', this.scene));
+        this.setClickShortcutKeys(GetValue(config, 'clickShortcutKeys', undefined));
         this.setCameraTarget(GetValue(config, 'camera', this.scene.cameras.main));
     }
 
@@ -22,6 +18,14 @@ class WaitEventManager extends WaitEvent {
     }
 
     set clickTarget(value) {
+        this.parent.clickTarget = value;
+    }
+
+    get clickShortcutKeys() {
+        return this.parent.clickShortcutKeys;
+    }
+
+    set clickShortcutKeys(value) {
         this.parent.clickTarget = value;
     }
 
@@ -44,17 +48,8 @@ class WaitEventManager extends WaitEvent {
     }
 }
 
-var Methods = {
-    waitAny: WaitAny,
-}
-
 Object.assign(
     WaitEventManager.prototype,
-    WaitTimeMethods,
-    WaitInputMethods,
-    WaitGameObjectMethods,
-    WaitCameraMethods,
-    WaitMusicMethods,
     Methods,
 )
 

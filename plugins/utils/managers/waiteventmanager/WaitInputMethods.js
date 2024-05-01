@@ -6,20 +6,45 @@ export default {
         this.clickTarget = target;
 
         if (!target) {
-            this.clickEE = null;
+            this.touchEE = null;
         } else if (IsSceneObject(target)) {
-            this.clickEE = target.input;
+            this.touchEE = target.input;
         } else {  // Assume that target is a gameObject
-            this.clickEE = target.setInteractive();
+            this.touchEE = target.setInteractive();
         }
+        return this;
+    },
+
+    clearClickTarget() {
+        this.setClickTarget();
+        return this;
+    },
+
+    setClickShortcutKeys(keys) {
+        this.clickShortcutKeys = keys;
+        return this;
+    },
+
+    clearClickShortcutKeys() {
+        this.setShortcutKeys();
+        return this;
     },
 
     waitClick() {
-        if (!this.clickEE) {
-            return this.waitTime(0);
+        var touchEE = this.touchEE;
+        var clickShortcutKeys = this.clickShortcutKeys;
+        if (touchEE || clickShortcutKeys) {
+            if (touchEE) {
+                this.waitEvent(touchEE, 'pointerdown');
+            }
+            if (clickShortcutKeys) {
+                this.waitKeyDown(clickShortcutKeys);
+            }
+        } else {
+            this.waitTime(0);
         }
 
-        return this.waitEvent(this.clickEE, 'pointerdown');
+        return this;
     },
 
     waitKeyDown(key) {
