@@ -67,7 +67,8 @@ class Demo extends Phaser.Scene {
 
 var CreateCommandExecutor = function (scene) {
     var commandExecutor = scene.plugins.get('rexMarkedEventSheets').addCommandExecutor(scene, {
-        layers: ['bgLayer', 'gameLayer', 'uiLayer']
+        layers: ['bgLayer', 'gameLayer', 'uiLayer'],
+        clickShortcutKeys: 'ENTER|SPACE'
     })
         .addGameObjectManager({
             name: 'SPRITE',

@@ -55,7 +55,7 @@ export default {
             } else {
                 var keys = Split(key, '|');
                 for (var i = 0, cnt = keys.length; i < cnt; i++) {
-                    this.waitEvent(eventEmitter, `keydown-${key.toUpperCase()}`)
+                    this.waitEvent(eventEmitter, `keydown-${keys[i].toUpperCase()}`)
                 }
                 return this.parent;
             }

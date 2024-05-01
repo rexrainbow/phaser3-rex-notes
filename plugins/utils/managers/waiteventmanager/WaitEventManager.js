@@ -26,7 +26,7 @@ class WaitEventManager extends WaitEvent {
     }
 
     set clickShortcutKeys(value) {
-        this.parent.clickTarget = value;
+        this.parent.clickShortcutKeys = value;
     }
 
     get cameraTarget() {
