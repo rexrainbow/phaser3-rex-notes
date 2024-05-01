@@ -7837,6 +7837,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#sort-children" class="md-nav__link">
+    Sort children
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#grid-size" class="md-nav__link">
     Grid size
   </a>
@@ -9751,6 +9758,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#sort-children" class="md-nav__link">
+    Sort children
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#grid-size" class="md-nav__link">
     Grid size
   </a>
@@ -10245,6 +10259,41 @@
 <li>Remove from parent sizer
     <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">removeFromParentSizer</span><span class="p">();</span>
 </code></pre></div></li>
+</ul>
+<h3 id="sort-children">Sort children<a class="headerlink" href="#sort-children" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Sort by <a href="../gameobject/#data">data</a>
+    <div class="highlight"><pre><span></span><code><span class="nx">gridSizer</span><span class="p">.</span><span class="nx">sortChildrenByData</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">descending</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>key</code> : Data key</li>
+<li><code>descending</code> : <ul>
+<li><code>true</code> : Descending order</li>
+<li><code>false</code> : Ascending order, default behavior.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Sort by property of child
+    <div class="highlight"><pre><span></span><code><span class="nx">gridSizer</span><span class="p">.</span><span class="nx">sortChildrenByProperty</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">descending</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>key</code> : Property key</li>
+<li><code>descending</code> : <ul>
+<li><code>true</code> : Descending order</li>
+<li><code>false</code> : Ascending order, default behavior.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Sort by callback
+    <div class="highlight"><pre><span></span><code><span class="nx">gridSizer</span><span class="p">.</span><span class="nx">sortChildren</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">childA</span><span class="p">,</span><span class="w"> </span><span class="nx">childB</span><span class="p">){</span>
+<span class="w">    </span><span class="c1">// var valueA = childA.getData(key);</span>
+<span class="w">    </span><span class="c1">// var valueB = childB.getData(key);</span>
+<span class="w">    </span><span class="c1">// return valueB - valueA</span>
+<span class="p">})</span>
+</code></pre></div><ul>
+<li><code>childA</code>, <code>childB</code> : 2 children of this size</li>
+</ul>
+</li>
 </ul>
 <h3 id="grid-size">Grid size<a class="headerlink" href="#grid-size" title="Permanent link">&para;</a></h3>
 <ul>

@@ -70135,6 +70135,14 @@
     if (this.cellsCount === 0) {
       return;
     }
+
+    // Save scale
+    var scaleXSave = this.scaleX;
+    var scaleYSave = this.scaleY;
+    var scale1 = scaleXSave === 1 && scaleYSave === 1;
+    if (!scale1) {
+      this.setScale(1);
+    }
     var table = this.table;
     this.startRowIndex = Math.max(table.heightToRowIndex(-this.tableOY, 2), 0);
     var rowIndex = this.startRowIndex;
@@ -70181,6 +70189,11 @@
         rowIndex += 1;
       }
       cellIdx = table.colRowToCellIndex(columnIndex, rowIndex);
+    }
+
+    // Restore scale
+    if (!scale1) {
+      this.setScale(scaleXSave, scaleYSave);
     }
   };
 
@@ -70246,6 +70259,7 @@
     if (this.cellContainersPool) {
       var cellContainer = cell.popContainer(); // null if already been removed
       if (cellContainer) {
+        cellContainer.setScale(1).setAlpha(1);
         this.cellContainersPool.killAndHide(cellContainer);
       }
     }
