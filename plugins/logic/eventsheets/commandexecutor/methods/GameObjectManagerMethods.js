@@ -20,16 +20,20 @@ export default {
 
         // Add createGameObject command
         var createGameObjectCallback = function (config, eventSheetManager, eventsheet) {
-            var { 
-                id, 
+            var {
+                id,
                 layer = defaultLayer,
                 autoClear = defaultAutoClear
             } = config;
-            delete config.id;
-            delete config.layer;
+
+            config.eventSheetManager = eventSheetManager;
+            config.eventsheet = eventsheet;
 
             sys.createGameObject(name, id, config);
             // Execute next command
+
+            delete config.eventSheetManager;
+            delete config.eventsheet;
 
             if (layer) {
                 var layerManager = sys.layerManager;

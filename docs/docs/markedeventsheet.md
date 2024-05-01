@@ -910,7 +910,8 @@ commandExecutor.addGameObjectManager({
     }
     ```
     - `config` : Parameters passed from [event sheet](markedeventsheet.md#create-custom-game-object).
-        - `id` : Parameter `id` is reserved.
+        - `id`, `layer`, `autoClear`, `eventSheetManager`, `eventsheet` : These parameters are reserved.
+        - `eventSheetManager` : This event sheet manager.
 - `viewportCoordinate` : Apply [viewportCoordinate behavior](viewport-coordinate.md) to game object.
     - `true` : Attach `vpx`, `vpy`, `vp` to sprite game object.
         - `vpx`, `vpy` : Number between `0`~`1`. Proportion of viewport.
