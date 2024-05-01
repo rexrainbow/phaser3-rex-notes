@@ -237,6 +237,7 @@ class Demo extends Phaser.Scene {
                     color: COLOR_DARK
                 },
                 text: {
+                    $type: 'bbcodetext',
                     fontSize: 20
                 },
                 typing: {
