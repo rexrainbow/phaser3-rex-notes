@@ -38,8 +38,9 @@ class WaitEventManager extends WaitEvent {
     }
 
     destroy() {
-        this.setClickTarget();
-        this.setCameraTarget();
+        this.clearClickTarget();
+        this.clearClickShortcutKeys();
+        this.clearCameraTarget();
         super.destroy();
     }
 

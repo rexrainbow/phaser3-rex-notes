@@ -24,11 +24,14 @@ class WaitEvent {
     }
 
     waitEvent(eventEmitter, eventName, completeNextTick, waitCompleteEventName) {
+        // Emit completeEvent (default value is 'complete') when eventEmitter firing eventName
         var callback = this.getWaitCompleteTriggerCallback(completeNextTick, waitCompleteEventName);
         eventEmitter.once(eventName, callback, this);
+        // Once completeEvent firing, remove pending eventName from eventEmitter
         this.parent.once(this.removeWaitEventsEventName, function () {
             eventEmitter.off(eventName, callback, this);
         });
+        // All pending eventName from eventEmitter will be removed at last
         return this.parent;
     }
 

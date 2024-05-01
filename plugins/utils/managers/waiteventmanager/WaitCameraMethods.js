@@ -4,6 +4,11 @@ export default {
         return this;
     },
 
+    clearCameraTarget() {
+        this.setCameraTarget();
+        return this;
+    },
+
     waitCameraEffectComplete(effectName) {
         var camera = this.cameraTarget;
         if (!camera) {
