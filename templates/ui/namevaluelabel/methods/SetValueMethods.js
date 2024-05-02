@@ -52,7 +52,8 @@ export default {
             this.maxValue = max;
         }
 
-        this.value = Clamp(value, min, max);
+        value = Clamp(value, min, max);
+        this.value = value;
         this.updateValueText(value, min, max);
         this.setBarValue(value, min, max);
         return this;
