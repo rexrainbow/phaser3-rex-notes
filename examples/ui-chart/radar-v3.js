@@ -41,10 +41,10 @@ class Demo extends Phaser.Scene {
 
 class Card extends RexPlugins.UI.Sizer {
     constructor(scene, x, y, data) {
-        var background = scene.rexUI.add.roundRectangle(0, 0, 0, 0, 20, COLOR_MAIN);
+        var background = scene.rexUI.add.roundRectangle(0, 0, 0, 0, 20, COLOR_DARK);
 
-        var nameColor = Phaser.Display.Color.IntegerToColor(COLOR_LIGHT);
-        var titleColor = Phaser.Display.Color.IntegerToColor(COLOR_DARK);
+        var nameColor = Phaser.Display.Color.IntegerToColor(0xffffff);
+        var titleColor = Phaser.Display.Color.IntegerToColor(COLOR_LIGHT);
         var icon = scene.rexUI.add.roundRectangle(0, 0, 80, 80, 20, COLOR_LIGHT);
         var nameText = scene.add.text(0, 0, '', {
             fontSize: 28,
@@ -57,8 +57,8 @@ class Card extends RexPlugins.UI.Sizer {
         });
 
         var dataColor = Phaser.Display.Color.IntegerToColor(COLOR_LIGHT);
-        var gridColor = Phaser.Display.Color.IntegerToColor(COLOR_DARK);
-        var attributesChart = scene.rexUI.add.chart(0, 0, 240, 240, {
+        var gridColor = Phaser.Display.Color.IntegerToColor(0xffffff);
+        var attributesChart = scene.rexUI.add.chart(0, 0, 300, 300, {
             type: 'radar',
             data: {
                 labels: ['A', 'B', 'C', 'D', 'E', 'F'],
@@ -87,11 +87,14 @@ class Card extends RexPlugins.UI.Sizer {
                         min: 0,
                         max: 100,
                         ticks: {
-                            color: GetRGBAString(gridColor, 1),
-                            showLabelBackdrop: false,
+                            display: false,
+                            stepSize: 50,
                         },
                         pointLabels: {
                             color: GetRGBAString(gridColor, 1),
+                            font: {
+                                size: 16,
+                            },
                         },
                         angleLines: {
                             color: GetRGBAString(gridColor, 1),
