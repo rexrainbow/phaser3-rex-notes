@@ -41,10 +41,18 @@ export default {
     },
 
     setValue(value, min, max) {
-        value = Clamp(value, min, max);
-        this.value = value;
-        this.minValue = min;
-        this.maxValue = max;
+        if (min === undefined) {
+            min = this.minValue;
+        } else {
+            this.minValue = min;
+        }
+        if (max === undefined) {
+            max = this.maxValue;
+        } else {
+            this.maxValue = max;
+        }
+
+        this.value = Clamp(value, min, max);
         this.updateValueText(value, min, max);
         this.setBarValue(value, min, max);
         return this;
@@ -56,8 +64,16 @@ export default {
     },
 
     easeValueTo(value, min, max) {
-        this.minValue = min;
-        this.maxValue = max;
+        if (min === undefined) {
+            min = this.minValue;
+        } else {
+            this.minValue = min;
+        }
+        if (max === undefined) {
+            max = this.maxValue;
+        } else {
+            this.maxValue = max;
+        }
 
         if (this.easeValueTask === undefined) {
             this.easeValueTask = new EaseValueTask(this);

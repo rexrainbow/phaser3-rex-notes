@@ -10292,7 +10292,7 @@
 <h3 id="sort-children">Sort children<a class="headerlink" href="#sort-children" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Sort by <a href="../gameobject/#data">data</a>
-    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">sortChildrenByData</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">descending</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">sortChildrenByData</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">descending</span><span class="p">).</span><span class="nx">layout</span><span class="p">();</span>
 </code></pre></div><ul>
 <li><code>key</code> : Data key</li>
 <li><code>descending</code> : <ul>
@@ -10303,7 +10303,7 @@
 </ul>
 </li>
 <li>Sort by property of child
-    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">sortChildrenByProperty</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">descending</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">sortChildrenByProperty</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">descending</span><span class="p">).</span><span class="nx">layout</span><span class="p">();</span>
 </code></pre></div><ul>
 <li><code>key</code> : Property key</li>
 <li><code>descending</code> : <ul>
@@ -10318,7 +10318,7 @@
 <span class="w">    </span><span class="c1">// var valueA = childA.getData(key);</span>
 <span class="w">    </span><span class="c1">// var valueB = childB.getData(key);</span>
 <span class="w">    </span><span class="c1">// return valueB - valueA</span>
-<span class="p">})</span>
+<span class="p">}).</span><span class="nx">layout</span><span class="p">();</span>
 </code></pre></div><ul>
 <li><code>childA</code>, <code>childB</code> : 2 children of this size</li>
 </ul>

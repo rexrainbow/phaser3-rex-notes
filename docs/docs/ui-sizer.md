@@ -435,7 +435,7 @@ See also - [dirty](ui-basesizer.md#dirty)
 
 - Sort by [data](gameobject.md#data)
     ```javascript
-    sizer.sortChildrenByData(key, descending);
+    sizer.sortChildrenByData(key, descending).layout();
     ```
     - `key` : Data key
     - `descending` : 
@@ -443,7 +443,7 @@ See also - [dirty](ui-basesizer.md#dirty)
         - `false` : Ascending order, default behavior.
 - Sort by property of child
     ```javascript
-    sizer.sortChildrenByProperty(key, descending);
+    sizer.sortChildrenByProperty(key, descending).layout();
     ```
     - `key` : Property key
     - `descending` : 
@@ -455,7 +455,7 @@ See also - [dirty](ui-basesizer.md#dirty)
         // var valueA = childA.getData(key);
         // var valueB = childB.getData(key);
         // return valueB - valueA
-    })
+    }).layout();
     ```
     - `childA`, `childB` : 2 children of this size
 

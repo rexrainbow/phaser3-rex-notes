@@ -268,45 +268,6 @@ label.layout();
 
 See also - [dirty](ui-basesizer.md#dirty)
 
-### Get element
-
-- Get element
-    - Background game object
-        ```javascript
-        var background = label.getElement('background');
-        ```
-    - Icon game object
-        ```javascript
-        var icon = label.getElement('icon');
-        ```
-    - NameText game object
-        ```javascript
-        var nameTextObject = label.getElement('name');
-        ```
-    - ValueText game object
-        ```javascript
-        var valueTextObject = label.getElement('value');
-        ```
-    - Bar game object
-        ```javascript
-        var textObject = label.getElement('bar');
-        ```
-    - Action icon game object
-        ```javascript
-        var action = label.getElement('action');
-        ```
-- Get by name
-    ```javascript
-    var gameObject = label.getElement('#' + name);
-    // var gameObject = label.getElement('#' + name, recursive);
-    ```
-    or
-    ```javascript
-    var gameObject = label.getByName(name);
-    // var gameObject = label.getByName(name, recursive);
-    ```
-    - `recursive` : Set `true` to search all children recursively.
-
 ### Name text
 
 - Get nameText string
@@ -389,26 +350,75 @@ See also - [dirty](ui-basesizer.md#dirty)
 
 ### Set value
 
-Set valueText game object and bar game object.
+- Set valueText game object and bar game object.
+    ```javascript
+    label.setValue(value, min, max);
+    // label.setValue(value);  // min, max are not changed
+    ```
+    or
+    ```javascript
+    label.setValue(value);  // min, max are not changed
+    ```
+    Will invoke `valueTextFormatCallback` callback.
+- Ease valueText game object and bar game object.
+    ```javascript
+    label
+        .setEaseValueDuration(duration)
+        .easeValueTo(value, min, max);
+    ```
+    or
+    ```javascript
+    label
+        .setEaseValueDuration(duration)
+        .easeValueTo(value);  // min, max are not changed
+    ```
+    Will invoke `valueTextFormatCallback` callback.
+- Get values
+    ```javascript
+    var value = label.value;
+    var max = label.maxValue;
+    var min = label.minValue;
+    ```
+    - `value` will ease during `label.easeValueTo()` task.
 
-```javascript
-label.setValue(value, min, max);
-```
+### Get element
 
-Will invoke `valueTextFormatCallback` callback.
-
-### Ease value
-
-Ease valueText game object and bar game object.
-
-```javascript
-label
-    .setEaseValueDuration(duration)
-    .easeValueTo(value, min, max);
-```
-
-Will invoke `valueTextFormatCallback` callback.
-
+- Get element
+    - Background game object
+        ```javascript
+        var background = label.getElement('background');
+        ```
+    - Icon game object
+        ```javascript
+        var icon = label.getElement('icon');
+        ```
+    - NameText game object
+        ```javascript
+        var nameTextObject = label.getElement('name');
+        ```
+    - ValueText game object
+        ```javascript
+        var valueTextObject = label.getElement('value');
+        ```
+    - Bar game object
+        ```javascript
+        var textObject = label.getElement('bar');
+        ```
+    - Action icon game object
+        ```javascript
+        var action = label.getElement('action');
+        ```
+- Get by name
+    ```javascript
+    var gameObject = label.getElement('#' + name);
+    // var gameObject = label.getElement('#' + name, recursive);
+    ```
+    or
+    ```javascript
+    var gameObject = label.getByName(name);
+    // var gameObject = label.getByName(name, recursive);
+    ```
+    - `recursive` : Set `true` to search all children recursively.
 
 ### Other properties
 

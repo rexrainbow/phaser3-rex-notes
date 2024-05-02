@@ -97,8 +97,8 @@ declare class NameValueLabel extends Sizer {
 
     setValue(
         value: number,
-        min: number,
-        max: number
+        min?: number,
+        max?: number
     ): this;
     value: number;
     minValue: number;
@@ -108,8 +108,8 @@ declare class NameValueLabel extends Sizer {
 
     easeValueTo(
         value: number,
-        min: number,
-        max: number
+        min?: number,
+        max?: number
     ): this;
 
 }

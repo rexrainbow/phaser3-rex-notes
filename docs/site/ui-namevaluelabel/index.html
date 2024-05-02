@@ -7927,13 +7927,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-element" class="md-nav__link">
-    Get element
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#name-text" class="md-nav__link">
     Name text
   </a>
@@ -7969,8 +7962,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ease-value" class="md-nav__link">
-    Ease value
+  <a href="#get-element" class="md-nav__link">
+    Get element
   </a>
   
 </li>
@@ -9688,13 +9681,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-element" class="md-nav__link">
-    Get element
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#name-text" class="md-nav__link">
     Name text
   </a>
@@ -9730,8 +9716,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ease-value" class="md-nav__link">
-    Ease value
+  <a href="#get-element" class="md-nav__link">
+    Get element
   </a>
   
 </li>
@@ -10054,41 +10040,6 @@
 <div class="highlight"><pre><span></span><code><span class="nx">label</span><span class="p">.</span><span class="nx">layout</span><span class="p">();</span>
 </code></pre></div>
 <p>See also - <a href="../ui-basesizer/#dirty">dirty</a></p>
-<h3 id="get-element">Get element<a class="headerlink" href="#get-element" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Get element<ul>
-<li>Background game object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">label</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;background&#39;</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Icon game object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">icon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">label</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;icon&#39;</span><span class="p">);</span>
-</code></pre></div></li>
-<li>NameText game object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">nameTextObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">label</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span>
-</code></pre></div></li>
-<li>ValueText game object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">valueTextObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">label</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Bar game object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">textObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">label</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Action icon game object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">action</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">label</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;action&#39;</span><span class="p">);</span>
-</code></pre></div></li>
-</ul>
-</li>
-<li>Get by name
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">gameObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">label</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">name</span><span class="p">);</span>
-<span class="c1">// var gameObject = label.getElement(&#39;#&#39; + name, recursive);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">gameObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">label</span><span class="p">.</span><span class="nx">getByName</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
-<span class="c1">// var gameObject = label.getByName(name, recursive);</span>
-</code></pre></div><ul>
-<li><code>recursive</code> : Set <code>true</code> to search all children recursively.</li>
-</ul>
-</li>
-</ul>
 <h3 id="name-text">Name text<a class="headerlink" href="#name-text" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get nameText string
@@ -10154,17 +10105,70 @@
 </code></pre></div></li>
 </ul>
 <h3 id="set-value">Set value<a class="headerlink" href="#set-value" title="Permanent link">&para;</a></h3>
-<p>Set valueText game object and bar game object.</p>
-<div class="highlight"><pre><span></span><code><span class="nx">label</span><span class="p">.</span><span class="nx">setValue</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">min</span><span class="p">,</span><span class="w"> </span><span class="nx">max</span><span class="p">);</span>
+<ul>
+<li>Set valueText game object and bar game object.
+    <div class="highlight"><pre><span></span><code><span class="nx">label</span><span class="p">.</span><span class="nx">setValue</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">min</span><span class="p">,</span><span class="w"> </span><span class="nx">max</span><span class="p">);</span>
+<span class="c1">// label.setValue(value);  // min, max are not changed</span>
 </code></pre></div>
-<p>Will invoke <code>valueTextFormatCallback</code> callback.</p>
-<h3 id="ease-value">Ease value<a class="headerlink" href="#ease-value" title="Permanent link">&para;</a></h3>
-<p>Ease valueText game object and bar game object.</p>
-<div class="highlight"><pre><span></span><code><span class="nx">label</span>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">label</span><span class="p">.</span><span class="nx">setValue</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span><span class="w">  </span><span class="c1">// min, max are not changed</span>
+</code></pre></div>
+    Will invoke <code>valueTextFormatCallback</code> callback.</li>
+<li>Ease valueText game object and bar game object.
+    <div class="highlight"><pre><span></span><code><span class="nx">label</span>
 <span class="w">    </span><span class="p">.</span><span class="nx">setEaseValueDuration</span><span class="p">(</span><span class="nx">duration</span><span class="p">)</span>
 <span class="w">    </span><span class="p">.</span><span class="nx">easeValueTo</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">min</span><span class="p">,</span><span class="w"> </span><span class="nx">max</span><span class="p">);</span>
 </code></pre></div>
-<p>Will invoke <code>valueTextFormatCallback</code> callback.</p>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">label</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">setEaseValueDuration</span><span class="p">(</span><span class="nx">duration</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">easeValueTo</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span><span class="w">  </span><span class="c1">// min, max are not changed</span>
+</code></pre></div>
+    Will invoke <code>valueTextFormatCallback</code> callback.</li>
+<li>Get values
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">label</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">label</span><span class="p">.</span><span class="nx">maxValue</span><span class="p">;</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">label</span><span class="p">.</span><span class="nx">minValue</span><span class="p">;</span>
+</code></pre></div><ul>
+<li><code>value</code> will ease during <code>label.easeValueTo()</code> task.</li>
+</ul>
+</li>
+</ul>
+<h3 id="get-element">Get element<a class="headerlink" href="#get-element" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get element<ul>
+<li>Background game object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">label</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;background&#39;</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Icon game object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">icon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">label</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;icon&#39;</span><span class="p">);</span>
+</code></pre></div></li>
+<li>NameText game object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">nameTextObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">label</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span>
+</code></pre></div></li>
+<li>ValueText game object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">valueTextObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">label</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Bar game object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">textObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">label</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Action icon game object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">action</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">label</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;action&#39;</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Get by name
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">gameObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">label</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">name</span><span class="p">);</span>
+<span class="c1">// var gameObject = label.getElement(&#39;#&#39; + name, recursive);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">gameObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">label</span><span class="p">.</span><span class="nx">getByName</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+<span class="c1">// var gameObject = label.getByName(name, recursive);</span>
+</code></pre></div><ul>
+<li><code>recursive</code> : Set <code>true</code> to search all children recursively.</li>
+</ul>
+</li>
+</ul>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
 <p>See <a href="../ui-sizer/">sizer object</a>, <a href="../ui-basesizer/">base sizer object</a>, <a href="../containerlite/">container-lite</a>.</p>
 
