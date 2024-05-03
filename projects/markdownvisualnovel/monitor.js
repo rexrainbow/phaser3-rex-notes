@@ -27,7 +27,14 @@ class Demo extends Phaser.Scene {
             coin: 10,
             charA: {
                 hp: 100,
-                mp: 100
+                mp: 100,
+
+                poisoned: true,
+                chaos: false,
+
+                str: 5,
+                agi: 3,
+                int: 2
             }
         }
 
@@ -37,8 +44,35 @@ class Demo extends Phaser.Scene {
             {
                 $type: 'folder', title: 'CharA',
                 $properties: [
-                    { $key: 'charA.hp', int: true },
-                    { $key: 'charA.mp', int: true }
+                    {
+                        $type: 'tab',
+                        pages: [
+                            {
+                                title: 'Status',
+                                $properties: [
+                                    { $key: 'charA.hp', int: true },
+                                    { $key: 'charA.mp', int: true }
+                                ]
+                            },
+
+                            {
+                                title: 'States',
+                                $properties: [
+                                    { $key: 'charA.poisoned' },
+                                    { $key: 'charA.chaos' }
+                                ]
+                            },
+
+                            {
+                                title: 'Traits',
+                                $properties: [
+                                    { $key: 'charA.str', max: 100, min: 0, step: 1 },
+                                    { $key: 'charA.agi', max: 100, min: 0, step: 1 },
+                                    { $key: 'charA.int', max: 100, min: 0, step: 1 }
+                                ]
+                            }
+                        ]
+                    },
                 ]
             }
         ]
