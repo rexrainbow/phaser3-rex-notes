@@ -36,6 +36,7 @@ declare namespace Scrollable {
         slidingDeceleration?: number | false,
         backDeceleration?: number | false,
         dragRate?: number,
+        pointerOutRelease?: boolean,
     }
 
     interface IMouseWheelScroller {
