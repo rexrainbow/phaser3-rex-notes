@@ -46,7 +46,7 @@ var AddProperties = function (panel, target, properties) {
                         bindingTarget = bindingTarget[keys[k]];
                         if (!target) {
                             console.warn(`[Monitor] Key path '${property.$key}' is invalid`)
-                            return;
+                            continue;
                         }
                     }
                     property.bindingTarget = bindingTarget;
