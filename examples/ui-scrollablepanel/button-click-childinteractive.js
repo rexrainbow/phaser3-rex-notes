@@ -43,14 +43,20 @@ class Demo extends Phaser.Scene {
         })
             .layout()
 
+        var print = this.add.text(0, 0, '');
         panel.setChildrenInteractive({
             targets: [
                 panel.getElement('panel')
             ]
         })
             .on('child.click', function (child) {
-                // child : Label from CreateButton()
-                console.log(`Click ${child.text}`);
+                // child : Label from CreateItem()  
+                print.text += `Click ${child.name}`;
+                console.log(`Click ${child.name}`);
+                if (child.isInTouching('actions[0]')) {
+                    print.text += `'s action button`;
+                }
+                print.text += '\n';
             })
     }
 
@@ -66,7 +72,7 @@ var CreatePanel = function (scene) {
     for (var i = 0; i < 30; i++) {
         panel
             .add(
-                CreateButton(scene, i.toString()),
+                CreateItem(scene, i.toString()),
                 { expand: true }
             )
     }
@@ -74,19 +80,46 @@ var CreatePanel = function (scene) {
     return panel;
 }
 
-var CreateButton = function (scene, text) {
-    return scene.rexUI.add.label({
-        height: 30,
+var CreateItem = function (scene, text) {
+    var item = scene.rexUI.add.dialog({
+        height: 80,
+
+        space: { left: 10, right: 10, top: 10, bottom: 10 },
 
         background: scene.rexUI.add.roundRectangle({
             radius: 10,
             color: COLOR_MAIN
         }),
-        text: scene.add.text(0, 0, text),
 
-        align: 'center'
+        title: scene.rexUI.add.label({
+            text: scene.add.text(0, 0, text),
+        }),
+
+        content: scene.rexUI.add.label({
+            text: scene.add.text(0, 0, 'AAAAAAAA'),
+        }),
+
+        actions: [
+            scene.rexUI.add.label({
+                space: { left: 5, right: 5, top: 5, bottom: 5 },
+                background: scene.rexUI.add.roundRectangle({
+                    color: COLOR_DARK
+                }),
+                text: scene.add.text(0, 0, 'OK'),
+            }),
+        ],
+
+        proportion: {
+            content: 1,
+        },
+
+        align: {
+            actions: 'right'
+        },
+
+        name: text
     })
-
+    return item;
 }
 
 var config = {
