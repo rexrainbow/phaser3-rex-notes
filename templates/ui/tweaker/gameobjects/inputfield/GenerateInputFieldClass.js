@@ -42,6 +42,10 @@ var GenerateInputFieldClass = function (BaseClass) {
                 value = this._value;  // Back to previous value
             }
 
+            if (this.filterValueCallback) {
+                value = this.filterValueCallback(this, value);
+            }
+
             if (this.displayValueCallback) {
                 this.displayValueCallback(this, value)
             }
@@ -102,6 +106,11 @@ var GenerateInputFieldClass = function (BaseClass) {
 
         setSetupCallback(callback) {
             this.setupCallback = callback;
+            return this;
+        }
+
+        setFilterValueCallback(callback) {
+            this.filterValueCallback = callback;
             return this;
         }
 

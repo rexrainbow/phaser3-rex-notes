@@ -12,6 +12,7 @@ var CreateInputField = function (scene, config, style) {
 
             inputField
                 .setSetupCallback(handler.setup)
+                .setFilterValueCallback(handler.filterValue)
                 .setDisplayValueCallback(handler.displayValue);
 
             handler.build(inputField, style);

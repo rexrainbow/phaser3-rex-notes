@@ -38,8 +38,8 @@ class Demo extends Phaser.Scene {
                 $type: 'folder', title: 'CharA',
                 $key: 'charA',
                 $properties: [
-                    { $key: 'hp' },
-                    { $key: 'mp' }
+                    { $key: 'hp', int: true },
+                    { $key: 'mp', int: true }
                 ]
             }
         ]

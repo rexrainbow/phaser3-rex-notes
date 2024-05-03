@@ -13,7 +13,7 @@ export default {
 
     accept(config) {
         if (config.hasOwnProperty('view')) {
-            return (config.view === 'number')
+            return (config.view === 'number');
         }
 
         return typeof (config.value) === 'number';
@@ -43,6 +43,17 @@ export default {
     setup(gameObject, config, setDefaults) {
         if (setDefaults || config.hasOwnProperty('inputTextReadOnly')) {
             SetInputTextReadOnly(gameObject, !!config.inputTextReadOnly);
+        }
+
+        gameObject.isFloatType = !config.int;
+    },
+
+    // Callback inside `setValue()`
+    filterValue(gameObject, value) {
+        if (gameObject.isFloatType) {
+            return value;
+        } else {
+            return Math.floor(value);
         }
     },
 

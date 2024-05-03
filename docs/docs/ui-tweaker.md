@@ -566,6 +566,7 @@ See [Styles of buttons input](ui-tweaker.md#styles-of-buttons-input)
 ```javascript
 tweaker.addInput(object, key, {
     // view: 'number',
+    // int: undefined,
 
     // icon: undefined,
     // iconFrame: undefined,
@@ -588,6 +589,7 @@ tweaker.addInput({
     bindingTarget: object,
     bindingKey: key,
     // view: 'number',
+    // int: undefined,
 
     // icon: undefined,
     // iconFrame: undefined,
@@ -607,6 +609,7 @@ tweaker.addInput({
     - Can bind target later via `tweaker.setBindingTarget(object)`.
 - `bindingKey` : Bind to target's property key. Necessary field
 - `view` : Set to `'number'`, if `bindingTarget` is not given.
+- `int` : Set to `true` to truncate float number to integer number.
 - `icon`, `iconFrame` : Texture key, frame name of icon on title-label.
 - `iconSize` : Fixed icon size
 - `title` : Display text of title-label. Default value is equal to `key`.
@@ -639,6 +642,7 @@ tweaker.addInput(object, key, {
 
     min: minValue, 
     max: maxValue,
+    step: undefined,
 
     // format: function(value) { return s; },
     // inputTextReadOnly: false,
