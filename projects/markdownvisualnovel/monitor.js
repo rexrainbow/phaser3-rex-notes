@@ -44,14 +44,13 @@ class Demo extends Phaser.Scene {
             }
         ]
 
-        var centerX = 1024 / 2;
-        var centerY = 768 / 2;
+        var viewport = this.scale.getViewPort();
         var panel0 = CreateMonitorPanel(this, style, memory, properties)
-            .setPosition(centerX - 220, centerY)
+            .setPosition(viewport.centerX - 220, viewport.centerY)
             .layout()
 
         var panel1 = CreateMonitorPanel(this, style, memory, properties)
-            .setPosition(centerX + 220, centerY)
+            .setPosition(viewport.centerX + 220, viewport.centerY)
             .layout()
 
     }
