@@ -22,7 +22,7 @@ var AddProperties = function (panel, target, properties) {
         switch (type) {
             case 'folder':
                 panel = panel.addFolder(property);
-                AddProperties(panel, target[property.$key], property.$properties);
+                AddProperties(panel, target, property.$properties);
                 break;
 
             case 'tab':
@@ -33,8 +33,26 @@ var AddProperties = function (panel, target, properties) {
                 break;
 
             default:
-                property.bindingTarget = target;
-                property.bindingKey = property.$key;
+                if (property.$key.indexOf('.') === -1) {
+                    property.bindingTarget = target;
+                    property.bindingKey = property.$key;
+
+                } else {
+                    var keys = property.$key.split('.');
+                    property.bindingKey = keys.pop();
+
+                    var bindingTarget = target;
+                    for (var k = 0, kcnt = keys.length; k < kcnt; k++) {
+                        bindingTarget = bindingTarget[keys[k]];
+                        if (!target) {
+                            console.warn(`[Monitor] Key path '${property.$key}' is invalid`)
+                            return;
+                        }
+                    }
+                    property.bindingTarget = bindingTarget;
+
+                }
+
                 if (!property.hasOwnProperty('monitor')) {
                     property.monitor = true;
                 }

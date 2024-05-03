@@ -36,10 +36,9 @@ class Demo extends Phaser.Scene {
             { $key: 'coin', max: 100, min: 10, step: 1 },
             {
                 $type: 'folder', title: 'CharA',
-                $key: 'charA',
                 $properties: [
-                    { $key: 'hp', int: true },
-                    { $key: 'mp', int: true }
+                    { $key: 'charA.hp', int: true },
+                    { $key: 'charA.mp', int: true }
                 ]
             }
         ]
