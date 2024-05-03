@@ -17,6 +17,8 @@ export const GetTweakStyle = function ({
         width: width,
 
         styles: {
+            space: { left: 10, right: 10, top: 10, bottom: 10 },
+
             background: {
                 radius: 10,
                 color: 0x0,
@@ -31,9 +33,9 @@ export const GetTweakStyle = function ({
                 },
 
                 title: {
+                    space: { icon: 2 },
                     iconSize: 30,
                     text: { fontSize: fontSize },
-                    space: { icon: 2 }
                 },
 
                 inputText: {
@@ -70,29 +72,29 @@ export const GetTweakStyle = function ({
 
                 list: {
                     label: {
+                        space: { left: 5, right: 5 },
                         background: {
                             color: COLOR_DARK,
                         },
-                        space: { left: 5, right: 5 }
                     },
                     button: {
+                        space: { left: 5, right: 5, top: 8, bottom: 8 },
                         background: {
                             color: COLOR_DARK,
                             strokeColor: COLOR_LIGHT,
 
                             'hover.color': COLOR_LIGHT,
                         },
-                        space: { left: 5, right: 5, top: 8, bottom: 8 }
                     },
                 },
 
                 button: {
+                    space: { left: 8, right: 8, top: 8, bottom: 8 },
                     background: {
                         color: COLOR_DARK,
                         strokeColor: COLOR_LIGHT,
                         'active.color': COLOR_LIGHT,
                     },
-                    space: { left: 8, right: 8, top: 8, bottom: 8 }
                 },
 
                 checkbox: {
@@ -134,16 +136,13 @@ export const GetTweakStyle = function ({
             },
 
             folder: {
-                space: {
-                    left: 10
-                },
+                space: { left: 10 },
 
                 title: {
                     space: { left: 5, top: 2, bottom: 2 },
                     text: { fontSize: fontSize },
                     iconSize: 30,
                     background: { color: COLOR_DARK },
-                    space: { icon: 2 },
 
                     expandedIcon: {
                         color: COLOR_MAIN,
@@ -159,6 +158,7 @@ export const GetTweakStyle = function ({
             tab: {
                 tab: {
                     space: { left: 3, right: 3, top: 3, bottom: 3 },
+
                     text: { fontSize: fontSize },
                     background: {
                         color: COLOR_DARK,
@@ -180,9 +180,6 @@ export const GetTweakStyle = function ({
                 color: COLOR_DARK
             },
 
-            space: {
-                left: 10, right: 10, top: 10, bottom: 10
-            }
         },
     }
 }

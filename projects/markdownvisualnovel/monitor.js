@@ -32,15 +32,14 @@ class Demo extends Phaser.Scene {
         }
 
         // Formatter of text
-        var textFormat = function (value) { return value.toFixed(0); }
         var properties = [
-            { $key: 'coin', max: 100, min: 10, format: textFormat },
+            { $key: 'coin', max: 100, min: 10, step: 1 },
             {
                 $type: 'folder', title: 'CharA',
                 $key: 'charA',
                 $properties: [
-                    { $key: 'hp', format: textFormat },
-                    { $key: 'mp', format: textFormat }
+                    { $key: 'hp' },
+                    { $key: 'mp' }
                 ]
             }
         ]
