@@ -122,7 +122,8 @@ export const GetTweakStyle = function ({
                             },
                             style: {
                                 backgroundBottomY: 4,
-                                backgroundHeight: 18,
+                                backgroundHeight: fontSize,
+                                fontSize: fontSize,
                             },
                             cursorStyle: {
                                 color: 'black',
