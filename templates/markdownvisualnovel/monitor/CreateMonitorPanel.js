@@ -21,8 +21,8 @@ var AddProperties = function (panel, target, properties) {
         var type = property.$type;
         switch (type) {
             case 'folder':
-                panel = panel.addFolder(property);
-                AddProperties(panel, target, property.$properties);
+                var folder = panel.addFolder(property);
+                AddProperties(folder, target, property.$properties);
                 break;
 
             case 'tab':
