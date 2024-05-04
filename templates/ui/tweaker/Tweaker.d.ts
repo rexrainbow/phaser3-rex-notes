@@ -221,6 +221,45 @@ declare namespace Tweaker {
         key?: string,
     }
 
+    interface IAddInputRowProperty extends IAddInputConfig {
+        $key: string
+    }
+
+    interface IAddFolderRowProperty extends IAddFolderConfig {
+        $type: 'folder',
+        $target?: Object,
+        $properties: RowsPropertyType[]
+    }
+
+    interface IAddTabRowProperty extends IAddTabConfig {
+        $type: 'tab',
+        $target?: Object,
+        pages: {
+            title: string,
+            show?: boolean,
+
+            key?: string,
+
+            $properties: RowsPropertyType[]
+        }[]
+    }
+
+    interface IAddSeparatorRowProperty {
+        $type: 'separator',
+    }
+
+    interface IAddButtonRowProperty extends IAddButtonConfig {
+        $type: 'button',
+    }
+
+    interface IAddButtonsRowProperty extends IAddButtonsConfig {
+        $type: 'buttons',
+    }
+
+    type RowsPropertyType = IAddInputRowProperty |
+        IAddFolderRowProperty | IAddTabRowProperty |
+        IAddSeparatorRowProperty | IAddButtonRowProperty | IAddButtonsRowProperty;
+
     interface IAcceptConfig extends IAddInputConfig {
         value: unknown
     }
@@ -295,6 +334,11 @@ declare class Tweaker extends Sizer {
     addTab(
         config: Tweaker.IAddTabConfig
     ): Tweaker[];
+
+    addRows(
+        properties: Tweaker.RowsPropertyType[],
+        target?: Object
+    ): this;
 
     setBindingTarget(
         object: Object

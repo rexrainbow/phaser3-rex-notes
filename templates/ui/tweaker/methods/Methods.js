@@ -6,6 +6,7 @@ import AddInput from './AddInput.js';
 import AddButtons from './AddButtons.js';
 import AddButton from './AddButton.js';
 import AddSeparator from './AddSeparator.js';
+import AddRows from './AddRows.js';
 import SetBindingTarget from './SetBindingTarget.js';
 import GetMaxInputRowTitleWidth from './GetMaxInputRowTitleWidth.js';
 import SetInputRowTitleWidth from './SetInputRowTitleWidth.js';
@@ -20,6 +21,7 @@ var methods = {
     addButtons: AddButtons,
     addButton: AddButton,
     addSeparator: AddSeparator,
+    addRows: AddRows,
 
     setBindingTarget: SetBindingTarget,
 
