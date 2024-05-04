@@ -306,6 +306,10 @@ Local memory is shared for all event sheets.
     ```javascript
     eventSheetManager.setData(key, value);
     ```
+    or
+    ```javascript
+    eventSheetManager.setData(data);  // data : a plain json object
+    ```
 - Toggle value
     ```javascript
     eventSheetManager.toggleData(key, value);

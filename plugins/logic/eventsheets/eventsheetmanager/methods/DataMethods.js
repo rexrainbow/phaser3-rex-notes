@@ -1,6 +1,14 @@
 export default {
     setData(key, value) {
-        this.blackboard.setData(key, value);
+        if (typeof (key) === 'string') {
+            this.blackboard.setData(key, value);
+        } else {
+            var data = key;
+            for (key in data) {
+                this.blackboard.setData(key, data[key]);
+            }
+        }
+
         return this;
     },
 

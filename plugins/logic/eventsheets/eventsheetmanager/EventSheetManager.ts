@@ -48,6 +48,7 @@ declare class EventSheetManager extends EventEmitter {
     loadEventSheetGroup(data: Object[], groupName?: string): this;
 
     setData(key: string, value: any): this;
+    setData(data: { [key: string]: any }): this;
 
     hasData(key: string): this;
 
