@@ -17,7 +17,7 @@ export const GetTweakStyle = function ({
         width: width,
 
         styles: {
-            space: { left: 10, right: 10, top: 10, bottom: 10 },
+            space: { left: 10, right: 10, top: 10, bottom: 10, item: 3 },
 
             background: {
                 radius: 10,

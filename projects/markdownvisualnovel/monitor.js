@@ -41,6 +41,7 @@ class Demo extends Phaser.Scene {
         // Formatter of text
         var properties = [
             { $key: 'coin', max: 100, min: 10, step: 1 },
+            { $type: 'separator' },
             {
                 $type: 'folder', title: 'CharA',
                 $properties: [
@@ -74,6 +75,13 @@ class Demo extends Phaser.Scene {
                         ]
                     },
                 ]
+            },
+            { $type: 'separator' },
+            {
+                $type: 'button', title: 'Action', label: 'Dump',
+                callback(target) {
+                    console.log(target)
+                }
             }
         ]
 

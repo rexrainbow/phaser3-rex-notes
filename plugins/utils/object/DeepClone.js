@@ -1,31 +1,32 @@
-import IsPlainObject from './IsPlainObject.js';
-
-var DeepClone = function (inObject) {
-    var outObject;
-    var value;
-    var key;
-
-    if ((inObject == null) || (typeof inObject !== 'object')) {
-        //  inObject is not an object
-        return inObject;
+function DeepClone(obj) {
+    if (obj === null || typeof obj !== "object") {
+        // If obj is a primitive value or null, return it directly
+        return obj;
     }
 
-    //  Create an array or object to hold the values
-    outObject = Array.isArray(inObject) ? [] : {};
+    if (Array.isArray(obj)) {
+        // If obj is an array, create a new array and clone each element
+        return obj.map(item => DeepClone(item));
+    }
 
-    if (IsPlainObject(inObject)) {
-        for (key in inObject) {
-            value = inObject[key];
+    if (obj instanceof Date) {
+        // If obj is a Date object, create a new Date object with the same value
+        return new Date(obj);
+    }
 
-            //  Recursively (deep) copy for nested objects, including arrays
-            outObject[key] = DeepClone(value);
+    if (obj instanceof RegExp) {
+        // If obj is a RegExp object, create a new RegExp object with the same pattern and flags
+        return new RegExp(obj);
+    }
+
+    // If obj is a plain object or a custom object, create a new object and clone each property
+    const clonedObj = {};
+    for (let key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            clonedObj[key] = DeepClone(obj[key]);
         }
-
-    } else {
-        outObject = inObject;
     }
-
-    return outObject;
-};
+    return clonedObj;
+}
 
 export default DeepClone;

@@ -32,6 +32,20 @@ var AddProperties = function (panel, target, properties) {
                 }
                 break;
 
+            case 'separator':
+                panel.addSeparator();
+                break;
+
+            case 'button':
+                property.bindingTarget = target;
+                panel.addButton(property);
+                break;
+
+            case 'buttons':
+                property.bindingTarget = target;
+                panel.addButtons(property);
+                break;
+
             default:
                 if (property.$key.indexOf('.') === -1) {
                     property.bindingTarget = target;
