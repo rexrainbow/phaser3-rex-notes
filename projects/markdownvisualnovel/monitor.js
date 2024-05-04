@@ -20,7 +20,8 @@ class Demo extends Phaser.Scene {
                 main: 0x424242,
                 light: 0x6d6d6d,
                 dark: 0x1b1b1b
-            }
+            },
+            fontSize: 24
         }
 
         var memory = {

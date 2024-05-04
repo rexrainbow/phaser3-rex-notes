@@ -1,6 +1,6 @@
 export const GetTweakStyle = function ({
     width = 340,
-    fontSize = 20,
+    fontSize = 24,
     colors
 }) {
     var {
@@ -47,7 +47,8 @@ export const GetTweakStyle = function ({
                     },
                     style: {
                         backgroundBottomY: 4,
-                        backgroundHeight: 18,
+                        backgroundHeight: fontSize,
+                        fontSize: fontSize,
                     },
                     cursorStyle: {
                         color: 'black',
@@ -95,6 +96,9 @@ export const GetTweakStyle = function ({
                         strokeColor: COLOR_LIGHT,
                         'active.color': COLOR_LIGHT,
                     },
+                    text: {
+                        fontSize: fontSize
+                    }
                 },
 
                 checkbox: {
