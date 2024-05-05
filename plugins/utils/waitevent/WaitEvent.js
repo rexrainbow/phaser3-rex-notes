@@ -23,9 +23,9 @@ class WaitEvent {
         this.parent = null;
     }
 
-    waitEvent(eventEmitter, eventName, completeNextTick, waitCompleteEventName) {
-        // Emit completeEvent (default value is 'complete') when eventEmitter firing eventName
-        var callback = this.getWaitCompleteTriggerCallback(completeNextTick, waitCompleteEventName);
+    // Emit completeEvent (default value is 'complete') when eventEmitter firing eventName
+    waitEvent(eventEmitter, eventName, completeNextTick) {
+        var callback = this.getWaitCompleteTriggerCallback(completeNextTick);
         eventEmitter.once(eventName, callback, this);
         // Once completeEvent firing, remove pending eventName from eventEmitter
         this.parent.once(this.removeWaitEventsEventName, function () {
@@ -35,12 +35,9 @@ class WaitEvent {
         return this.parent;
     }
 
-    getWaitCompleteTriggerCallback(completeNextTick, waitCompleteEventName) {
+    getWaitCompleteTriggerCallback(completeNextTick) {
         if (completeNextTick === undefined) {
             completeNextTick = true;
-        }
-        if (waitCompleteEventName === undefined) {
-            waitCompleteEventName = this.waitCompleteEventName;
         }
 
         var waitId = this.waitId;
