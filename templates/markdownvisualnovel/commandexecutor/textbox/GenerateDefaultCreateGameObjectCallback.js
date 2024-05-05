@@ -3,6 +3,8 @@ import { TransitionImagePack } from '../../../ui/ui-components.js';
 import DecorateGameObject from '../../../ui/utils/build/DecorateGameObject.js';
 import SetValue from '../../../../plugins/utils/object/SetValue.js';
 import AddViewportCoordinateProperties from '../../../../plugins/behaviors/viewportcoordinate/AddViewportCoordinateProperties.js';
+import AddEvent from '../../../../plugins/utils/gameobject/addevent/AddEvent.js';
+import KeyMap from '../../../../plugins/utils/input/KeyMap.js';
 
 var GenerateDefaultCreateGameObjectCallback = function (
     style,
@@ -21,8 +23,12 @@ var GenerateDefaultCreateGameObjectCallback = function (
             width = 0, height = 0,
             vpx = 0.5, vpy = 1,
 
-            frameDelimiter = defaultFrameDelimiter
-        } = {}
+            frameDelimiter = defaultFrameDelimiter,
+
+            eventSheetManager, eventsheet,
+            clickTarget,
+            clickShortcutKeys
+        } = {},
     ) {
 
         if (vpw !== undefined) {
@@ -64,55 +70,63 @@ var GenerateDefaultCreateGameObjectCallback = function (
 
         scene.add.existing(gameObject);
 
-        gameObject
-            .setInteractive()
-            .on('complete', function () {
-                // Wait addition pointerdown after complete
-                this.complete2 = true;
-            }, gameObject)
-            .on('pointerdown', function () {
-                if (this.complete2) {
-                    this.complete2 = false;
-                    this.emit('complete2');
-                    return;
-                }
-
-                // Decorator
-                var icon = this.getElement('action');
-                this.setChildAlpha(icon, 0);
-
-                // Show this page, or typing next page
-                if (this.isTyping) {
-                    this.stop(true);
-                } else {
-                    this.typeNextPage();
-                }
-            }, gameObject)
-            .on('pageend', function () {
-                if (this.isLastPage) {
-                    return;
-                }
-
-                // Decorator
-                var icon = this.getElement('action');
-                this.setChildAlpha(icon, 1);
-                icon.y -= 30;
-                var tween = scene.tweens.add({
-                    targets: icon,
-                    y: '+=30', // '+=100'
-                    ease: 'Bounce', // 'Cubic', 'Elastic', 'Bounce', 'Back'
-                    duration: 500,
-                    repeat: 0, // -1: infinity
-                    yoyo: false
-                });
-            }, gameObject)
-
-        gameObject.frameDelimiter = frameDelimiter;
-
         AddViewportCoordinateProperties(gameObject, viewport);
 
         gameObject.vpx = vpx;
         gameObject.vpy = vpy;
+
+        gameObject.frameDelimiter = frameDelimiter;
+
+        /*
+        Fire 'click' event when
+
+        - Pointer-down on clickTarget (screen or this textbox) 
+        - Press keyboard's key
+
+        */
+
+        var onClick = function () {
+            gameObject.emit('click');
+        }
+
+        var touchEE;
+        if (clickTarget === undefined) {
+            clickTarget = eventSheetManager.getData('$clickTarget');
+        }
+        if (clickTarget === null) {
+            // No click target
+        } else if (clickTarget.toLowerCase() === 'screen') {
+            touchEE = scene.input;
+        } else {
+            touchEE = gameObject.setInteractive();
+        }
+
+        if (touchEE) {
+            AddEvent(
+                gameObject,              // target
+                touchEE, 'pointerdown',  // eventEmitter, eventName
+                onClick                  // callback
+            );
+        }
+
+        AddEvent(
+            gameObject,                       // target
+            scene.input.keyboard, 'keydown',  // eventEmitter, eventName
+            function (event) {                // callback
+                if (clickShortcutKeys === undefined) {
+                    clickShortcutKeys = eventSheetManager.getData('$clickShortcutKeys');
+                }
+                if (!clickShortcutKeys) {
+                    return;
+                }
+
+                var keys = clickShortcutKeys.split('|');
+                var inputKey = KeyMap[event.keyCode]
+                if (keys.indexOf(inputKey) !== -1) {
+                    onClick();
+                }
+            }
+        );
 
         return gameObject;
     }

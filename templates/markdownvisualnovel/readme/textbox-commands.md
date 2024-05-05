@@ -7,18 +7,26 @@
 TEXTBOX
   id=NAME
   width=0
-  height=0
-  frameDelimiter=-
+  height=0  
   vpx=0.5
   vpy=1
   vpw=
   vph=
-
+  frameDelimiter=-
+  clickTarget=
+  clickShortcutKeys=
 ```
 
 Create TextBox as Text-box game object
 
 - Default origin is `(0.5, 1)`
+- `clickTarget` : Click target to type next page, or finish typing
+    - `screen` : Any click on screen to type next page, or finish typing
+    - `textbox` : Click on textbox to type next page, or finish typing
+    - `null` : Disable this feature
+- `clickShortcutKeys` : Press keyboard's key to type next page, or finish typing
+    - Key string combined by `'|'`, e.x. `'SPACE|ENTER'`
+    - `null` : Disable this feature
 
 ## Destroy
 
