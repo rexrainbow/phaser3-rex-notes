@@ -48,7 +48,7 @@ class WaitEvent {
             }
             self.waitId++;
             self.removeWaitEvents();
-            self.parent.emit(waitCompleteEventName);
+            self.parent.emit(self.waitCompleteEventName);
         }
 
         if (completeNextTick) {
