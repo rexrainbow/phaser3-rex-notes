@@ -13,7 +13,7 @@ var WaitAny = function (config) {
 
             case 'click':
                 hasAnyWaitEvent = true;
-                this.waitClick(config.key);
+                this.waitClick();
                 break;
 
 
