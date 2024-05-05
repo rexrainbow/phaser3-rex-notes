@@ -15,6 +15,7 @@ TEXTBOX
   frameDelimiter=-
   clickTarget=
   clickShortcutKeys=
+
 ```
 
 Create TextBox as Text-box game object
