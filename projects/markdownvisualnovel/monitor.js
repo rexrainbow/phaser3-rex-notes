@@ -41,7 +41,13 @@ class Demo extends Phaser.Scene {
 
         // Formatter of text
         var properties = [
-            { $key: 'coin', max: 100, min: 10, step: 1 },
+            { 
+                $key: 'coin', 
+                max: 100, min: 10, step: 1,
+                onValueChange(newValue, oldValue, bindingTarget, bindingKey) {
+                    console.log(`${oldValue} -> ${newValue}`)
+                }
+             },
             { $type: 'separator' },
             {
                 $type: 'folder', title: 'CharA',
