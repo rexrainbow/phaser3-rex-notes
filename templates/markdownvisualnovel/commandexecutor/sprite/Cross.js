@@ -17,6 +17,8 @@ var Cross = function (
             name = name || tokens[0];
             expression = expression || tokens[1];
             frame = name + frameDelimiter + expression;
+        } else {
+            frame = gameObject.frame.name;
         }
 
     } else {

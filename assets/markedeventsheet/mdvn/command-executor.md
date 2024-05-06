@@ -147,9 +147,11 @@ CharacterA.say
 CharacterA.say
   expression=happy
   text=Hello
+  clickAfterComplete=false
 
 CharacterA.say
-  text=World
+  text= World
+  typingSpeed=500
   more=true
 
 ```Dialog.typing, displayName=A, icon=portraits, name=A, expression=smile

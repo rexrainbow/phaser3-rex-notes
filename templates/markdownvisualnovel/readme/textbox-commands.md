@@ -104,6 +104,7 @@ NAME.typing
   typingSpeed=
   iconCrossDuration=
   iconCrossMode='crossFade'
+  clickAfterComplete=true
   wait=true
 
 ```

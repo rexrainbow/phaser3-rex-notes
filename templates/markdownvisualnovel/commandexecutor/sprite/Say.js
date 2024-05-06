@@ -16,6 +16,7 @@ var Say = function (
         typingSpeed,
         icon, iconFrame,
         iconCrossDuration, iconCrossMode = 'crossFade',
+        clickAfterComplete = true,
         wait = true
     } = {},
     commandExecutor, eventSheetManager, eventSheet
@@ -52,6 +53,7 @@ var Say = function (
                 typingSpeed,
                 iconCrossDuration, iconCrossMode,
                 more,
+                clickAfterComplete,
                 wait
             },
             commandExecutor, eventSheetManager, eventSheet

@@ -8,6 +8,7 @@ var Typing = function (
         typingSpeed,
         iconCrossDuration, iconCrossMode = 'crossFade',
         more = false,
+        clickAfterComplete = true,
         wait = true,
     } = {},
     commandExecutor,
@@ -63,7 +64,11 @@ var Typing = function (
 
         if (wait) {
             // Wait until typing complete
-            commandExecutor.waitEvent(gameObject, 'complete2');
+            if (clickAfterComplete) {
+                commandExecutor.waitEvent(gameObject, 'complete2');
+            } else {
+                commandExecutor.waitEvent(gameObject, 'complete');
+            }
         }
 
         if (!more) {
