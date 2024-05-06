@@ -2832,6 +2832,15 @@ All input rows will bind to this new target, and update display status.
 tweaker.setBindingTarget(object);
 ```
 
+### Events
+
+- On value change of any bindingKey
+    ```javascript
+    tweaker.on('valuechange', function(newValue, oldValue, bindingTarget, bindingKey) {
+
+    })
+    ```
+
 
 ### Get element
 

@@ -18,6 +18,12 @@ var GenerateInputFieldClass = function (BaseClass) {
             return this._value;
         }
 
+        get root() {
+            var inputRow = this.getParentSizer();
+            var tweaker = inputRow.getParentSizer();
+            return tweaker.root;
+        }
+
         validate(newValue) {
             if (this.syncValueFlag || !this.validateCallback) {
                 return true;
@@ -58,7 +64,10 @@ var GenerateInputFieldClass = function (BaseClass) {
             this._value = value;
 
             if (!this.syncValueFlag) {
-                this.emit('valuechange', value, oldValue, this.bindingTarget, this.bindingKey);
+                var bindingTarget = this.bindingTarget;
+                var bindingKey = this.bindingKey;
+                this.emit('valuechange', value, oldValue, bindingTarget, bindingKey);
+                this.root.emit('valuechange', value, oldValue, bindingTarget, bindingKey);
             }
         }
 

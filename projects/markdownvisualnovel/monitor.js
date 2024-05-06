@@ -41,13 +41,14 @@ class Demo extends Phaser.Scene {
 
         // Formatter of text
         var properties = [
-            { 
-                $key: 'coin', 
+            {
+                $key: 'coin',
                 max: 100, min: 10, step: 1,
                 onValueChange(newValue, oldValue, bindingTarget, bindingKey) {
-                    console.log(`${oldValue} -> ${newValue}`)
+                    // ValueChange callback only for this bindingKey
+                    // console.log(`${oldValue} -> ${newValue}`)
                 }
-             },
+            },
             { $type: 'separator' },
             {
                 $type: 'folder', title: 'CharA',
@@ -100,6 +101,12 @@ class Demo extends Phaser.Scene {
         var panel1 = CreateMonitorPanel(this, style, memory, properties)
             .setPosition(viewport.centerX + 220, viewport.centerY)
             .layout()
+
+
+        panel0.on('valuechange', function (newValue, oldValue, bindingTarget, bindingKey) {
+            // ValueChange callback for all keys
+            console.log(`${bindingKey}: ${oldValue} -> ${newValue}`)
+        })
 
     }
 
