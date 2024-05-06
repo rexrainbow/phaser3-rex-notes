@@ -2,41 +2,15 @@ import phaser from 'phaser/src/phaser.js';
 import AwaitLoaderPlugin from '../../plugins/awaitloader-plugin.js';
 import SpinnerPlugin from '../../templates/spinner/spinner-plugin.js';
 
-// Extend scene from this BaseScene
-class BaseScene extends Phaser.Scene {
-    create() {
-        this._preload();
-        if ((this.load.list.size + this.load.inflight.size) > 0) {
-            this._loadingAnimation(this._create.bind(this));
-            this.load.start();
-        } else {
-            this._create();
-        }
-    }
-
-    _preload() { }
-
-    _loadingAnimation(onComplete) {
-        this.load.once('complete', function (loader) {
-            if (onComplete) {
-                onComplete();
-            }
-        });
-    }
-
-    _create() { }
-}
-// ----
-
-class Demo extends BaseScene {
+class Demo extends Phaser.Scene {
     constructor() {
         super({
             key: 'Demo'
         })
     }
 
-    _preload() {
-        console.log('_preload()')
+    preload() {
+        AddLoadingAnimation(this);
 
         // Loading task
         this.load.image('classroom', 'assets/images/backgrounds/classroom.png');
@@ -56,52 +30,31 @@ class Demo extends BaseScene {
         });
     }
 
-    _loadingAnimation(onComplete) {
-        console.log('_loadingAnimation()')
-
-        // loading animation
+    loadingAnimation() {
         var spinner = this.rexSpinner.add.facebook({
             x: 400, y: 300,
             width: 200, height: 200
         });
-        this.tweens.add({
-            targets: spinner,
-            scale: { start: 0, to: 1 },
-            duration: 500
-        });
-
-        // loading progress bar
-        var progressBar = this.add.rectangle(0, 500, 800, 10, 0x880000).setOrigin(0, 0.5);
-        var onProgress = function (progress) {
-            console.log('_loadAnimation().progress', progress)
-
-            progressBar.scaleX = progress;
-        }
-        this.load.on('progress', onProgress);
 
         this.load.once('complete', function (loader) {
-            this.load.off('progress', onProgress);
-
-            this.tweens.add({
-                targets: spinner,
-                scale: 0,
-                duration: 500,
-                onComplete: function () {
-                    spinner.destroy();
-                    progressBar.destroy();
-                    if (onComplete) {
-                        onComplete();
-                    }
-                }
-            })
-        }, this);
+            spinner.destroy();
+        });
     }
 
-    _create() {
-        console.log('_create()')
-
+    create() {
         this.add.image(400, 300, 'classroom');
     }
+}
+
+var AddLoadingAnimation = function (scene) {
+    var spinner = scene.rexSpinner.add.facebook({
+        x: 400, y: 300,
+        width: 200, height: 200
+    }).setDepth(100);
+
+    scene.load.once('complete', function (loader) {
+        spinner.destroy();
+    });
 }
 
 var config = {
