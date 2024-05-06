@@ -1,4 +1,49 @@
-export const GetTweakStyle = function ({
+import phaser from 'phaser/src/phaser.js';
+import MarkedEventSheetsPlugin from '../../plugins/markedeventsheets-plugin.js';
+import UIPlugin from '../../templates/ui/ui-plugin.js';
+
+class Demo extends Phaser.Scene {
+
+    constructor() {
+        super({
+            key: 'examples'
+        })
+    }
+
+    preload() {
+        this.load.text('eventSheet0', 'assets/markedeventsheet/memory-monitor/memory-monitor.md');
+    }
+
+    create() {
+        var eventSheetManager = this.plugins.get('rexMarkedEventSheets').add({
+            commandExecutor: this.plugins.get('rexMarkedEventSheets').addCommandExecutor(this)
+        })
+            .addEventSheet(this.cache.text.get('eventSheet0'))
+            .setData('coin', 8)
+
+        var properties = [
+            { $key: 'coin', max: 20, min: 0, step: 1, },
+            {
+                $type: 'button', title: 'Action', label: 'Start',
+                callback(target) {
+                    eventSheetManager.start()
+                }
+            }
+        ]
+
+        var viewport = this.scale.getViewPort();
+        var monitorPanel = this.rexUI.add.tweaker(GetTweakStyle())
+            .addRows(properties, eventSheetManager.memory)
+            .setOrigin(1, 0)
+            .setPosition(viewport.right, viewport.top)
+            .layout()
+
+    }
+
+    update() { }
+}
+
+var GetTweakStyle = function ({
     width = 340,
     fontSize = 24,
     colors = {}
@@ -189,4 +234,28 @@ export const GetTweakStyle = function ({
     }
 }
 
-export default GetTweakStyle;
+var config = {
+    type: Phaser.AUTO,
+    parent: 'phaser-example',
+    width: 800,
+    height: 600,
+    scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+    },
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexMarkedEventSheets',
+            plugin: MarkedEventSheetsPlugin,
+            start: true
+        }],
+        scene: [{
+            key: 'rexUI',
+            plugin: UIPlugin,
+            mapping: 'rexUI'
+        }]
+    }
+};
+
+var game = new Phaser.Game(config);

@@ -51,7 +51,7 @@ set
 print\
   text=(coin > 10)
 
-### [Else If (coin > 5) && (coin <10)]
+### [Else If (coin > 5) && (coin <=10)]
 
 print\
   text=(coin > 5 and coin <10)
