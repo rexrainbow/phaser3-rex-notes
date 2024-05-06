@@ -7,6 +7,7 @@ var Typing = function (
         name, expression,
         typingSpeed,
         iconCrossDuration, iconCrossMode = 'crossFade',
+        more = false,
         wait = true,
     } = {},
     commandExecutor,
@@ -65,34 +66,8 @@ var Typing = function (
             commandExecutor.waitEvent(gameObject, 'complete2');
         }
 
-        var onClick = function () {
-            if (gameObject.isTyping) {
-                // Wait clicking for typing next page, 
-                // or emitting 'complete2' event
-                gameObject
-                    .once('click', onClick)
-                    .stop(true);
-
-                eventSheetManager.emit('pause.input');
-                gameObject.once('click', function () {
-                    eventSheetManager.emit('resume.input');
-                })
-
-            } else if (!gameObject.isLastPage) {
-                // Typing next page, interrupted by click event
-                gameObject
-                    .once('click', onClick)
-                    .typeNextPage();
-
-            } else {
-                gameObject.emit('complete2');
-
-            }
-        }
-
-        gameObject
-            .once('click', onClick)
-            .start(text, typingSpeed);
+        gameObject.start(text, typingSpeed);
+        // Fire 'start' event, see GenerateDefaultCreateGameObjectCallback
     }
 };
 

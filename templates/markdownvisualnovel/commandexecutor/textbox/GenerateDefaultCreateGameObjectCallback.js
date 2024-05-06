@@ -85,7 +85,7 @@ var GenerateDefaultCreateGameObjectCallback = function (
 
         */
 
-        var onClick = function () {
+        gameObject.emitClick = function () {
             gameObject.emit('click');
         }
 
@@ -105,7 +105,7 @@ var GenerateDefaultCreateGameObjectCallback = function (
             AddEvent(
                 gameObject,              // target
                 touchEE, 'pointerdown',  // eventEmitter, eventName
-                onClick                  // callback
+                gameObject.emitClick     // callback
             );
         }
 
@@ -123,10 +123,44 @@ var GenerateDefaultCreateGameObjectCallback = function (
                 var keys = clickShortcutKeys.split('|');
                 var inputKey = KeyMap[event.keyCode]
                 if (keys.indexOf(inputKey) !== -1) {
-                    onClick();
+                    gameObject.emitClick();
                 }
             }
         );
+
+        // On click
+        var onClick = function () {
+            if (gameObject.isTyping) {
+                // Wait clicking for typing next page, 
+                // or emitting 'complete2' event
+                gameObject
+                    .once('click', onClick)
+                    .stop(true);
+
+                eventSheetManager.emit('pause.input');
+                gameObject.once('click', function () {
+                    eventSheetManager.emit('resume.input');
+                })
+
+            } else if (!gameObject.isLastPage) {
+                // Typing next page, interrupted by click event
+                gameObject
+                    .once('click', onClick)
+                    .typeNextPage();
+
+            } else {
+                gameObject.emit('complete2');
+
+            }
+        }
+
+        gameObject
+            .on('start', function () {
+                // Remove pending callback, add new one
+                gameObject
+                    .off('click', onClick)
+                    .once('click', onClick)
+            });
 
         return gameObject;
     }
