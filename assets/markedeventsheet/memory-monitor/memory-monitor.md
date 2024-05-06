@@ -1,7 +1,5 @@
 # Title
 
-coin < 10
-
 ## Initial
 
 log.memory
