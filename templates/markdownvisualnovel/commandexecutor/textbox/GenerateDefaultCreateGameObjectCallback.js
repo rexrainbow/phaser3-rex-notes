@@ -137,11 +137,6 @@ var GenerateDefaultCreateGameObjectCallback = function (
                     .once('click', onClick)
                     .stop(true);
 
-                eventSheetManager.emit('pause.input');
-                gameObject.once('click', function () {
-                    eventSheetManager.emit('resume.input');
-                })
-
             } else if (!gameObject.isLastPage) {
                 // Typing next page, interrupted by click event
                 gameObject
@@ -155,6 +150,12 @@ var GenerateDefaultCreateGameObjectCallback = function (
         }
 
         gameObject
+            .on('pageend', function () {
+                eventSheetManager.emit('pause.input');
+                gameObject.once('click', function () {
+                    eventSheetManager.emit('resume.input');
+                })
+            })
             .on('start', function () {
                 // Remove pending callback, add new one
                 gameObject
