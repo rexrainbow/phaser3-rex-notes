@@ -13722,10 +13722,18 @@
       return this;
     },
     setValue: function setValue(value, min, max) {
+      if (min === undefined) {
+        min = this.minValue;
+      } else {
+        this.minValue = min;
+      }
+      if (max === undefined) {
+        max = this.maxValue;
+      } else {
+        this.maxValue = max;
+      }
       value = Clamp(value, min, max);
       this.value = value;
-      this.minValue = min;
-      this.maxValue = max;
       this.updateValueText(value, min, max);
       this.setBarValue(value, min, max);
       return this;
@@ -13735,8 +13743,16 @@
       return this;
     },
     easeValueTo: function easeValueTo(value, min, max) {
-      this.minValue = min;
-      this.maxValue = max;
+      if (min === undefined) {
+        min = this.minValue;
+      } else {
+        this.minValue = min;
+      }
+      if (max === undefined) {
+        max = this.maxValue;
+      } else {
+        this.maxValue = max;
+      }
       if (this.easeValueTask === undefined) {
         this.easeValueTask = new EaseValueTask(this);
         this.easeValueTask.on('update', function () {

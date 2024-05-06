@@ -5201,7 +5201,7 @@
     return WaitEvent(eventEmitter, 'complete');
   };
 
-  var IsPlainObject$l = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$k = Phaser.Utils.Objects.IsPlainObject;
   var OnInitScale = function OnInitScale(gameObject, scale) {
     // Route 'complete' of scale to gameObject
     scale.completeEventName = undefined;
@@ -5222,7 +5222,7 @@
   };
   var ScaleMethods = {
     popUp: function popUp(duration, orientation, ease) {
-      if (IsPlainObject$l(duration)) {
+      if (IsPlainObject$k(duration)) {
         var config = duration;
         duration = config.duration;
         orientation = config.orientation;
@@ -5241,7 +5241,7 @@
       return WaitComplete(this._scaleBehavior);
     },
     scaleDownDestroy: function scaleDownDestroy(duration, orientation, ease, destroyMode) {
-      if (IsPlainObject$l(duration)) {
+      if (IsPlainObject$k(duration)) {
         var config = duration;
         duration = config.duration;
         orientation = config.orientation;
@@ -5269,7 +5269,7 @@
       return WaitComplete(this._scaleBehavior);
     },
     scaleYoyo: function scaleYoyo(duration, peakValue, repeat, orientation, ease) {
-      if (IsPlainObject$l(duration)) {
+      if (IsPlainObject$k(duration)) {
         var config = duration;
         duration = config.duration;
         peakValue = config.peakValue;
@@ -5372,10 +5372,10 @@
     yoyo: 2
   };
 
-  var IsPlainObject$k = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$j = Phaser.Utils.Objects.IsPlainObject;
   var FadeIn = function FadeIn(gameObject, duration, alpha, fade) {
     var startAlpha, endAlpha;
-    if (IsPlainObject$k(alpha)) {
+    if (IsPlainObject$j(alpha)) {
       startAlpha = alpha.start;
       endAlpha = alpha.end;
     } else {
@@ -5424,7 +5424,7 @@
     return fade;
   };
 
-  var IsPlainObject$j = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$i = Phaser.Utils.Objects.IsPlainObject;
   var OnInitFade = function OnInitFade(gameObject, fade) {
     // Route 'complete' of fade to gameObject
     fade.completeEventName = undefined;
@@ -5445,7 +5445,7 @@
   };
   var FadeMethods = {
     fadeIn: function fadeIn(duration, alpha) {
-      if (IsPlainObject$j(duration)) {
+      if (IsPlainObject$i(duration)) {
         var config = duration;
         duration = config.duration;
         alpha = config.alpha;
@@ -5463,7 +5463,7 @@
       return WaitComplete(this._fade);
     },
     fadeOutDestroy: function fadeOutDestroy(duration, destroyMode) {
-      if (IsPlainObject$j(duration)) {
+      if (IsPlainObject$i(duration)) {
         var config = duration;
         duration = config.duration;
         destroyMode = config.destroy;
@@ -5680,7 +5680,7 @@
     return easeMove;
   };
 
-  var IsPlainObject$i = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$h = Phaser.Utils.Objects.IsPlainObject;
   var DistanceBetween$5 = Phaser.Math.Distance.Between;
   var OnInitEaseMove = function OnInitEaseMove(gameObject, easeMove) {
     // Route 'complete' of easeMove to gameObject
@@ -5702,7 +5702,7 @@
   };
   var EaseMoveMethods = {
     moveFrom: function moveFrom(duration, x, y, ease, destroyMode) {
-      if (IsPlainObject$i(duration)) {
+      if (IsPlainObject$h(duration)) {
         var config = duration;
         x = config.x;
         y = config.y;
@@ -5734,7 +5734,7 @@
       return WaitComplete(this._easeMove);
     },
     moveTo: function moveTo(duration, x, y, ease, destroyMode) {
-      if (IsPlainObject$i(duration)) {
+      if (IsPlainObject$h(duration)) {
         var config = duration;
         x = config.x;
         y = config.y;
@@ -6024,7 +6024,7 @@
     decay: 1
   };
 
-  var IsPlainObject$h = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$g = Phaser.Utils.Objects.IsPlainObject;
   var OnInitShake = function OnInitShake(gameObject, shake) {
     // Route 'complete' of shake to gameObject
     shake.on('complete', function () {
@@ -6035,7 +6035,7 @@
   };
   var ShakeMethods = {
     shake: function shake(duration, magnitude, magnitudeMode) {
-      if (IsPlainObject$h(duration)) {
+      if (IsPlainObject$g(duration)) {
         var config = duration;
         duration = config.duration;
         magnitude = config.magnitude;
@@ -6113,7 +6113,7 @@
     return EaseValueTask;
   }(EaseValueTaskBase);
 
-  var IsPlainObject$g = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$f = Phaser.Utils.Objects.IsPlainObject;
   var EaseData = /*#__PURE__*/function (_ComponentBase) {
     _inherits(EaseData, _ComponentBase);
     function EaseData(parent, config) {
@@ -6146,7 +6146,7 @@
     }, {
       key: "easeTo",
       value: function easeTo(key, value, duration, ease) {
-        if (IsPlainObject$g(key)) {
+        if (IsPlainObject$f(key)) {
           var config = key;
           key = config.key;
           value = config.value;
@@ -6175,7 +6175,7 @@
     }, {
       key: "easeFrom",
       value: function easeFrom(key, value, duration, ease) {
-        if (IsPlainObject$g(key)) {
+        if (IsPlainObject$f(key)) {
           var config = key;
           key = config.key;
           value = config.value;
@@ -8279,9 +8279,9 @@
     }
   };
 
-  var IsPlainObject$f = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$e = Phaser.Utils.Objects.IsPlainObject;
   var SetDraggable = function SetDraggable(sensor, draggable, dragTarget) {
-    if (IsPlainObject$f(sensor)) {
+    if (IsPlainObject$e(sensor)) {
       var config = sensor;
       sensor = config.sensor;
       dragTarget = config.target;
@@ -11613,7 +11613,7 @@
     return nearestIndex;
   };
 
-  var IsPlainObject$e = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$d = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$Q = Phaser.Utils.Objects.GetValue;
   var ALIGN_CENTER$2 = Phaser.Display.Align.CENTER;
   var PROPORTIONMODE = {
@@ -11628,7 +11628,7 @@
       return this;
     } else if (proportionType === 'number') ; else if (proportionType === 'string') {
       proportion = PROPORTIONMODE[proportion];
-    } else if (IsPlainObject$e(proportion)) {
+    } else if (IsPlainObject$d(proportion)) {
       var config = proportion;
       proportion = GetValue$Q(config, 'proportion', undefined);
       align = GetValue$Q(config, 'align', ALIGN_CENTER$2);
@@ -11736,7 +11736,7 @@
       return this;
     },
     insert: function insert(index, gameObject, proportion, align, paddingConfig, expand, childKey, minSize) {
-      if (IsPlainObject$e(proportion)) {
+      if (IsPlainObject$d(proportion)) {
         proportion.index = index;
       }
       Add$5.call(this, gameObject, proportion, align, paddingConfig, expand, childKey, index, minSize);
@@ -11952,26 +11952,26 @@
     return orientation;
   };
 
-  var IsPlainObject$d = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$c = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$P = Phaser.Utils.Objects.GetValue;
   var Sizer = /*#__PURE__*/function (_BaseSizer) {
     _inherits(Sizer, _BaseSizer);
     function Sizer(scene, x, y, minWidth, minHeight, orientation, config) {
       var _this;
       _classCallCheck(this, Sizer);
-      if (IsPlainObject$d(x)) {
+      if (IsPlainObject$c(x)) {
         config = x;
         x = GetValue$P(config, 'x', 0);
         y = GetValue$P(config, 'y', 0);
         minWidth = GetValue$P(config, 'width', undefined);
         minHeight = GetValue$P(config, 'height', undefined);
         orientation = GetValue$P(config, 'orientation', 0);
-      } else if (IsPlainObject$d(minWidth)) {
+      } else if (IsPlainObject$c(minWidth)) {
         config = minWidth;
         minWidth = GetValue$P(config, 'width', undefined);
         minHeight = GetValue$P(config, 'height', undefined);
         orientation = GetValue$P(config, 'orientation', 0);
-      } else if (IsPlainObject$d(orientation)) {
+      } else if (IsPlainObject$c(orientation)) {
         config = orientation;
         orientation = GetValue$P(config, 'orientation', 0);
       }
@@ -15705,72 +15705,35 @@
     return this;
   };
 
-  /**
-   * @author       Richard Davey <rich@photonstorm.com>
-   * @copyright    2018 Photon Storm Ltd.
-   * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
-   */
-
-  /**
-   * This is a slightly modified version of jQuery.isPlainObject.
-   * A plain object is an object whose internal class property is [object Object].
-   *
-   * @function Phaser.Utils.Objects.IsPlainObject
-   * @since 3.0.0
-   *
-   * @param {object} obj - The object to inspect.
-   *
-   * @return {boolean} `true` if the object is plain, otherwise `false`.
-   */
-  var IsPlainObject$c = function IsPlainObject(obj) {
-    // Not plain objects:
-    // - Any object or value whose internal [[Class]] property is not "[object Object]"
-    // - DOM nodes
-    // - window
-    if (_typeof(obj) !== 'object' || obj.nodeType || obj === obj.window) {
-      return false;
+  function DeepClone(obj) {
+    if (obj === null || _typeof(obj) !== "object") {
+      // If obj is a primitive value or null, return it directly
+      return obj;
+    }
+    if (Array.isArray(obj)) {
+      // If obj is an array, create a new array and clone each element
+      return obj.map(function (item) {
+        return DeepClone(item);
+      });
+    }
+    if (obj instanceof Date) {
+      // If obj is a Date object, create a new Date object with the same value
+      return new Date(obj);
+    }
+    if (obj instanceof RegExp) {
+      // If obj is a RegExp object, create a new RegExp object with the same pattern and flags
+      return new RegExp(obj);
     }
 
-    // Support: Firefox <20
-    // The try/catch suppresses exceptions thrown when attempting to access
-    // the "constructor" property of certain host objects, ie. |window.location|
-    // https://bugzilla.mozilla.org/show_bug.cgi?id=814622
-    try {
-      if (obj.constructor && !{}.hasOwnProperty.call(obj.constructor.prototype, 'isPrototypeOf')) {
-        return false;
+    // If obj is a plain object or a custom object, create a new object and clone each property
+    var clonedObj = {};
+    for (var key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        clonedObj[key] = DeepClone(obj[key]);
       }
-    } catch (e) {
-      return false;
     }
-
-    // If the function hasn't returned already, we're confident that
-    // |obj| is a plain object, created by {} or constructed with new Object
-    return true;
-  };
-
-  var DeepClone = function DeepClone(inObject) {
-    var outObject;
-    var value;
-    var key;
-    if (inObject == null || _typeof(inObject) !== 'object') {
-      //  inObject is not an object
-      return inObject;
-    }
-
-    //  Create an array or object to hold the values
-    outObject = Array.isArray(inObject) ? [] : {};
-    if (IsPlainObject$c(inObject)) {
-      for (key in inObject) {
-        value = inObject[key];
-
-        //  Recursively (deep) copy for nested objects, including arrays
-        outObject[key] = DeepClone(value);
-      }
-    } else {
-      outObject = inObject;
-    }
-    return outObject;
-  };
+    return clonedObj;
+  }
 
   var SetWrapConfig = function SetWrapConfig(config) {
     if (config === undefined) {

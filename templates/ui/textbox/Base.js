@@ -81,13 +81,15 @@ var TextBoxBase = function (GOClass, type) {
         }
 
         start(text, speed) {
+            if (speed !== undefined) {
+                this.setTypingSpeed(speed);
+            }
+
             // Start typing task
             this.isRunning = true;
 
             this.page.setText(text);
-            if (speed !== undefined) {
-                this.setTypingSpeed(speed);
-            }
+
             this.emit('start');
 
             if (this.typingMode === 0) {
@@ -98,6 +100,34 @@ var TextBoxBase = function (GOClass, type) {
                 this.typeNextLine();
             }
             return this;
+        }
+
+        more(text, speed) {
+            if (speed !== undefined) {
+                this.setTypingSpeed(speed);
+            }
+
+            if (this.isRunning) {
+                this.page.appendText(text);
+                this.typing.appendText(text);
+
+            } else {
+                this.isRunning = true;
+
+                this.page.appendText(text);
+
+                this.emit('start');
+
+                if (this.typingMode === 0) {
+                    var txt = this.page.getPage();
+                    var startIndex = this.typing.textLength;
+                    this.typing.start(txt, undefined, startIndex);
+
+                } else {
+                    // Typing line by line : Not support yet
+                }
+                return this;
+            }
         }
 
         typeNextPage() {
@@ -140,6 +170,7 @@ var TextBoxBase = function (GOClass, type) {
                 // Stop typing tasl if typing complete at last line
 
                 this.isRunning = false;
+                this.emit('pageend');
                 this.emit('complete');
 
             }

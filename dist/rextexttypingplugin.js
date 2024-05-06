@@ -335,17 +335,17 @@
   }();
   Object.assign(ComponentBase.prototype, EventEmitterMethods);
 
-  var StartTyping = function StartTyping(text, speed, startIdx, timerStartAt) {
+  var StartTyping = function StartTyping(text, speed, startIndex, timerStartAt) {
     if (text !== undefined) {
       this.setTypingContent(text);
     }
     if (speed !== undefined) {
       this.speed = speed;
     }
-    if (startIdx === undefined) {
-      startIdx = 0;
+    if (startIndex === undefined) {
+      startIndex = 0;
     }
-    this.typingIdx = startIdx + 1;
+    this.typingIndex = startIndex + 1;
     if (this.speed === 0) {
       this.stop(true);
     } else {
@@ -362,11 +362,14 @@
     return text;
   };
 
-  var StartTypingFromLine = function StartTypingFromLine(text, lineIndex, speed, timerStartAt) {
+  var StartTypingFromLine = function StartTypingFromLine(text, lineIndex, speed, offsetIndex, timerStartAt) {
     var startIdx;
     if (lineIndex > 0) {
+      if (offsetIndex === undefined) {
+        offsetIndex = 0;
+      }
       var plainText = GetPlainText(this.parent, text);
-      startIdx = GetNewLineIndex(plainText, lineIndex);
+      startIdx = GetNewLineIndex(plainText, lineIndex) + offsetIndex;
     }
     return this.start(text, speed, startIdx, timerStartAt);
   };
@@ -391,34 +394,34 @@
     return result;
   };
 
-  var GetTypingString = function GetTypingString(text, typeIdx, textLen, typeMode) {
+  var GetTypingString = function GetTypingString(text, typeIdx, textLength, typeMode) {
     var textObject = this.parent;
     var result;
     if (typeMode === 0) {
       //left-to-right
       var startIdx = 0;
       var endIdx = typeIdx;
-      this.insertIdx = endIdx;
+      this.insertIndex = endIdx;
       result = GetSubString(textObject, text, startIdx, endIdx);
     } else if (typeMode === 1) {
       //right-to-left
-      var endIdx = textLen;
+      var endIdx = textLength;
       var startIdx = endIdx - typeIdx;
-      this.insertIdx = 0;
+      this.insertIndex = 0;
       result = GetSubString(textObject, text, startIdx, endIdx);
     } else if (typeMode === 2) {
       //middle-to-sides
-      var midIdx = textLen / 2;
+      var midIdx = textLength / 2;
       var startIdx = Math.floor(midIdx - typeIdx / 2);
       var endIdx = startIdx + typeIdx;
-      this.insertIdx = typeIdx % 2 ? typeIdx : 0;
+      this.insertIndex = typeIdx % 2 ? typeIdx : 0;
       result = GetSubString(textObject, text, startIdx, endIdx);
     } else if (typeMode === 3) {
       //sides-to-middle
       var lowerLen = Math.floor(typeIdx / 2);
       var lowerResult;
       if (lowerLen > 0) {
-        var endIdx = textLen;
+        var endIdx = textLength;
         var startIdx = endIdx - lowerLen;
         lowerResult = GetSubString(textObject, text, startIdx, endIdx);
       } else {
@@ -429,15 +432,15 @@
       if (upperLen > 0) {
         var startIdx = 0;
         var endIdx = startIdx + upperLen;
-        this.insertIdx = endIdx;
+        this.insertIndex = endIdx;
         upperResult = GetSubString(textObject, text, startIdx, endIdx);
       } else {
         upperResult = "";
-        this.insertIdx = 0;
+        this.insertIndex = 0;
       }
       result = upperResult + lowerResult;
     }
-    this.insertChar = result.charAt(this.insertIdx - 1);
+    this.insertChar = result.charAt(this.insertIndex - 1);
     return result;
   };
 
@@ -449,9 +452,9 @@
     if (showAllText) {
       // Fire 'type' event for remainder characters until lastChar
       while (!this.isLastChar) {
-        GetTypingString.call(this, this.text, this.typingIdx, this.textLen, this.typeMode);
+        GetTypingString.call(this, this.text, this.typingIndex, this.textLength, this.typeMode);
         this.emit('typechar', this.insertChar);
-        this.typingIdx++;
+        this.typingIndex++;
       }
       // Display all characters on text game object
       this.setText(this.text);
@@ -482,7 +485,7 @@
     if (this.isTyping) {
       this.setTypingContent(newText);
     } else {
-      this.start(newText, undefined, this.textLen);
+      this.start(newText, undefined, this.textLength);
     }
     return this;
   };
@@ -602,12 +605,12 @@
         this.setTextCallback = GetFastValue(o, 'setTextCallback', null);
         this.setTextCallbackScope = GetFastValue(o, 'setTextCallbackScope', null);
         this.setTypingContent(GetFastValue(o, 'text', ''));
-        this.typingIdx = GetFastValue(o, 'typingIdx', 0);
-        this.insertIdx = null;
+        this.typingIndex = GetFastValue(o, 'typingIndex', 0);
+        this.insertIndex = null;
         this.insertChar = null;
         var elapsed = GetFastValue(o, 'elapsed', null);
         if (elapsed !== null) {
-          this.start(undefined, undefined, this.typingIdx, elapsed);
+          this.start(undefined, undefined, this.typingIndex, elapsed);
         }
         return this;
       }
@@ -671,19 +674,19 @@
     }, {
       key: "isLastChar",
       get: function get() {
-        return this.typingIdx === this.textLen;
+        return this.typingIndex === this.textLength;
       }
     }, {
       key: "setTypingContent",
       value: function setTypingContent(text) {
         this.text = text;
-        this.textLen = GetPlainText(this.parent, this.text).length;
+        this.textLength = GetPlainText(this.parent, this.text).length;
         return this;
       }
     }, {
       key: "onTyping",
       value: function onTyping() {
-        var newText = GetTypingString.call(this, this.text, this.typingIdx, this.textLen, this.typeMode);
+        var newText = GetTypingString.call(this, this.text, this.typingIndex, this.textLength, this.typeMode);
         this.setText(newText);
         this.emit('typechar', this.insertChar);
         this.emit('type');
@@ -692,7 +695,7 @@
           this.emit('complete', this, this.parent);
         } else {
           this.timer.delay = this.speed; // delay of next typing            
-          this.typingIdx++;
+          this.typingIndex++;
         }
       }
     }, {
@@ -738,9 +741,9 @@
       value: function setText(text) {
         if (this.setTextCallback) {
           if (this.setTextCallbackScope) {
-            text = this.setTextCallback.call(this.setTextCallbackScope, text, this.isLastChar, this.insertIdx);
+            text = this.setTextCallback.call(this.setTextCallbackScope, text, this.isLastChar, this.insertIndex);
           } else {
-            text = this.setTextCallback(text, this.isLastChar, this.insertIdx);
+            text = this.setTextCallback(text, this.isLastChar, this.insertIndex);
           }
         }
         if (this.textWrapEnable) {

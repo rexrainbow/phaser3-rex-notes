@@ -2834,72 +2834,35 @@
     }
   };
 
-  /**
-   * @author       Richard Davey <rich@photonstorm.com>
-   * @copyright    2018 Photon Storm Ltd.
-   * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
-   */
-
-  /**
-   * This is a slightly modified version of jQuery.isPlainObject.
-   * A plain object is an object whose internal class property is [object Object].
-   *
-   * @function Phaser.Utils.Objects.IsPlainObject
-   * @since 3.0.0
-   *
-   * @param {object} obj - The object to inspect.
-   *
-   * @return {boolean} `true` if the object is plain, otherwise `false`.
-   */
-  var IsPlainObject$t = function IsPlainObject(obj) {
-    // Not plain objects:
-    // - Any object or value whose internal [[Class]] property is not "[object Object]"
-    // - DOM nodes
-    // - window
-    if (_typeof(obj) !== 'object' || obj.nodeType || obj === obj.window) {
-      return false;
+  function DeepClone(obj) {
+    if (obj === null || _typeof(obj) !== "object") {
+      // If obj is a primitive value or null, return it directly
+      return obj;
+    }
+    if (Array.isArray(obj)) {
+      // If obj is an array, create a new array and clone each element
+      return obj.map(function (item) {
+        return DeepClone(item);
+      });
+    }
+    if (obj instanceof Date) {
+      // If obj is a Date object, create a new Date object with the same value
+      return new Date(obj);
+    }
+    if (obj instanceof RegExp) {
+      // If obj is a RegExp object, create a new RegExp object with the same pattern and flags
+      return new RegExp(obj);
     }
 
-    // Support: Firefox <20
-    // The try/catch suppresses exceptions thrown when attempting to access
-    // the "constructor" property of certain host objects, ie. |window.location|
-    // https://bugzilla.mozilla.org/show_bug.cgi?id=814622
-    try {
-      if (obj.constructor && !{}.hasOwnProperty.call(obj.constructor.prototype, 'isPrototypeOf')) {
-        return false;
+    // If obj is a plain object or a custom object, create a new object and clone each property
+    var clonedObj = {};
+    for (var key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        clonedObj[key] = DeepClone(obj[key]);
       }
-    } catch (e) {
-      return false;
     }
-
-    // If the function hasn't returned already, we're confident that
-    // |obj| is a plain object, created by {} or constructed with new Object
-    return true;
-  };
-
-  var DeepClone = function DeepClone(inObject) {
-    var outObject;
-    var value;
-    var key;
-    if (inObject == null || _typeof(inObject) !== 'object') {
-      //  inObject is not an object
-      return inObject;
-    }
-
-    //  Create an array or object to hold the values
-    outObject = Array.isArray(inObject) ? [] : {};
-    if (IsPlainObject$t(inObject)) {
-      for (key in inObject) {
-        value = inObject[key];
-
-        //  Recursively (deep) copy for nested objects, including arrays
-        outObject[key] = DeepClone(value);
-      }
-    } else {
-      outObject = inObject;
-    }
-    return outObject;
-  };
+    return clonedObj;
+  }
 
   var IsFunction = function IsFunction(obj) {
     return obj && typeof obj === 'function';
@@ -35625,6 +35588,9 @@
           if (!this.validate(value)) {
             value = this._value; // Back to previous value
           }
+          if (this.filterValueCallback) {
+            value = this.filterValueCallback(this, value);
+          }
           if (this.displayValueCallback) {
             this.displayValueCallback(this, value);
           }
@@ -35704,6 +35670,12 @@
           return this;
         }
       }, {
+        key: "setFilterValueCallback",
+        value: function setFilterValueCallback(callback) {
+          this.filterValueCallback = callback;
+          return this;
+        }
+      }, {
         key: "setDisplayValueCallback",
         value: function setDisplayValueCallback(callback) {
           this.displayValueCallback = callback;
@@ -35736,7 +35708,7 @@
         var InputFieldClass = GenerateInputFieldClass(handler.baseClass);
         inputField = new InputFieldClass(scene);
         scene.add.existing(inputField);
-        inputField.setSetupCallback(handler.setup).setDisplayValueCallback(handler.displayValue);
+        inputField.setSetupCallback(handler.setup).setFilterValueCallback(handler.filterValue).setDisplayValueCallback(handler.displayValue);
         handler.build(inputField, style);
         break;
       }
@@ -35953,6 +35925,68 @@
     return this;
   };
 
+  var AddRows = function AddRows(properties, target) {
+    AddProperties$1(this, properties, target);
+    return this;
+  };
+  var AddProperties$1 = function AddProperties(tweaker, properties, target) {
+    if (!properties) {
+      return;
+    }
+    for (var i = 0, cnt = properties.length; i < cnt; i++) {
+      var property = properties[i];
+      if (property.hasOwnProperty('$target')) {
+        target = property.$target;
+      }
+      var type = property.$type;
+      switch (type) {
+        case 'folder':
+          var folder = tweaker.addFolder(property);
+          AddProperties(folder, property.$properties, target);
+          break;
+        case 'tab':
+          var pages = tweaker.addTab(property);
+          for (var pIdx = 0, pcnt = pages.length; pIdx < pcnt; pIdx++) {
+            AddProperties(pages[pIdx], property.pages[pIdx].$properties, target);
+          }
+          break;
+        case 'separator':
+          tweaker.addSeparator();
+          break;
+        case 'button':
+          property.bindingTarget = target;
+          tweaker.addButton(property);
+          break;
+        case 'buttons':
+          property.bindingTarget = target;
+          tweaker.addButtons(property);
+          break;
+        default:
+          if (property.$key.indexOf('.') === -1) {
+            property.bindingTarget = target;
+            property.bindingKey = property.$key;
+          } else {
+            var keys = property.$key.split('.');
+            property.bindingKey = keys.pop();
+            var bindingTarget = target;
+            for (var k = 0, kcnt = keys.length; k < kcnt; k++) {
+              bindingTarget = bindingTarget[keys[k]];
+              if (!target) {
+                console.warn("[Monitor] Key path '".concat(property.$key, "' is invalid"));
+                continue;
+              }
+            }
+            property.bindingTarget = bindingTarget;
+          }
+          if (!property.hasOwnProperty('monitor')) {
+            property.monitor = true;
+          }
+          tweaker.addInput(property);
+          break;
+      }
+    }
+  };
+
   var SetBindingTarget = function SetBindingTarget(target) {
     var children = this.sizerChildren;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
@@ -36012,6 +36046,7 @@
     addButtons: AddButtons,
     addButton: AddButton,
     addSeparator: AddSeparator,
+    addRows: AddRows,
     setBindingTarget: SetBindingTarget,
     getMaxInputRowTitleWidth: GetMaxInputRowTitleWidth,
     setInputRowTitleWidth: SetInputRowTitleWidth
@@ -38195,6 +38230,15 @@
     setup: function setup(gameObject, config, setDefaults) {
       if (setDefaults || config.hasOwnProperty('inputTextReadOnly')) {
         SetInputTextReadOnly$1(gameObject, !!config.inputTextReadOnly);
+      }
+      gameObject.isFloatType = !config["int"];
+    },
+    // Callback inside `setValue()`
+    filterValue: function filterValue(gameObject, value) {
+      if (gameObject.isFloatType) {
+        return value;
+      } else {
+        return Math.floor(value);
       }
     },
     // Callback inside `setValue()`

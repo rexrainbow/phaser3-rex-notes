@@ -3068,10 +3068,10 @@
     return this;
   };
 
-  var Methods$7 = {
+  var Methods$6 = {
     drawGameObjectsBounds: DrawGameObjectsBounds
   };
-  Object.assign(Methods$7, GetMethods, AddMethods, RemoveMethods, PropertyMethods, CallMethods, DataMethods$1, FadeMethods);
+  Object.assign(Methods$6, GetMethods, AddMethods, RemoveMethods, PropertyMethods, CallMethods, DataMethods$1, FadeMethods);
 
   var CameraClass = Phaser.Cameras.Scene2D.BaseCamera;
   var IsCameraObject = function IsCameraObject(object) {
@@ -3212,7 +3212,7 @@
     }]);
     return GOManager;
   }();
-  Object.assign(GOManager.prototype, EventEmitterMethods$1, Methods$7);
+  Object.assign(GOManager.prototype, EventEmitterMethods$1, Methods$6);
 
   var SortGameObjectsByDepth = function SortGameObjectsByDepth(gameObjects, descending) {
     if (gameObjects.length <= 1) {
@@ -3425,8 +3425,8 @@
     }
   };
 
-  var methods$1 = {};
-  Object.assign(methods$1, LayerMethods, DepthMethods);
+  var methods$2 = {};
+  Object.assign(methods$2, LayerMethods, DepthMethods);
 
   var GetValue$t = Phaser.Utils.Objects.GetValue;
   var LayerManager = /*#__PURE__*/function (_GOManager) {
@@ -3502,7 +3502,7 @@
     }
     return layer;
   };
-  Object.assign(LayerManager.prototype, methods$1);
+  Object.assign(LayerManager.prototype, methods$2);
 
   var SceneClass = Phaser.Scene;
   var IsSceneObject = function IsSceneObject(object) {
@@ -4908,10 +4908,10 @@
     }
   };
 
-  var Methods$6 = {
+  var Methods$5 = {
     hasAudio: HasaAudio
   };
-  Object.assign(Methods$6, BackgroundMusicMethods, BackgroundMusic2Methods, SoundEffectsMethods, SoundEffects2Methods);
+  Object.assign(Methods$5, BackgroundMusicMethods, BackgroundMusic2Methods, SoundEffectsMethods, SoundEffects2Methods);
 
   var GetValue$i = Phaser.Utils.Objects.GetValue;
   var SoundManager = /*#__PURE__*/function () {
@@ -5086,7 +5086,7 @@
     }]);
     return SoundManager;
   }();
-  Object.assign(SoundManager.prototype, Methods$6);
+  Object.assign(SoundManager.prototype, Methods$5);
 
   var GetValue$h = Phaser.Utils.Objects.GetValue;
   var BaseClock = /*#__PURE__*/function (_TickTask) {
@@ -5563,14 +5563,18 @@
         this.clearWaitCompleteCallbacks();
         this.parent = null;
       }
+
+      // Emit completeEvent (default value is 'complete') when eventEmitter firing eventName
     }, {
       key: "waitEvent",
       value: function waitEvent(eventEmitter, eventName, completeNextTick) {
         var callback = this.getWaitCompleteTriggerCallback(completeNextTick);
         eventEmitter.once(eventName, callback, this);
+        // Once completeEvent firing, remove pending eventName from eventEmitter
         this.parent.once(this.removeWaitEventsEventName, function () {
           eventEmitter.off(eventName, callback, this);
         });
+        // All pending eventName from eventEmitter will be removed at last
         return this.parent;
       }
     }, {
@@ -5646,19 +5650,41 @@
     setClickTarget: function setClickTarget(target) {
       this.clickTarget = target;
       if (!target) {
-        this.clickEE = null;
+        this.touchEE = null;
       } else if (IsSceneObject(target)) {
-        this.clickEE = target.input;
+        this.touchEE = target.input;
       } else {
         // Assume that target is a gameObject
-        this.clickEE = target.setInteractive();
+        this.touchEE = target.setInteractive();
       }
+      return this;
+    },
+    clearClickTarget: function clearClickTarget() {
+      this.setClickTarget();
+      return this;
+    },
+    setClickShortcutKeys: function setClickShortcutKeys(keys) {
+      this.clickShortcutKeys = keys;
+      return this;
+    },
+    clearClickShortcutKeys: function clearClickShortcutKeys() {
+      this.setShortcutKeys();
+      return this;
     },
     waitClick: function waitClick() {
-      if (!this.clickEE) {
-        return this.waitTime(0);
+      var touchEE = this.touchEE;
+      var clickShortcutKeys = this.clickShortcutKeys;
+      if (touchEE || clickShortcutKeys) {
+        if (touchEE) {
+          this.waitEvent(touchEE, 'pointerdown');
+        }
+        if (clickShortcutKeys) {
+          this.waitKeyDown(clickShortcutKeys);
+        }
+      } else {
+        this.waitTime(0);
       }
-      return this.waitEvent(this.clickEE, 'pointerdown');
+      return this;
     },
     waitKeyDown: function waitKeyDown(key) {
       var eventEmitter = this.scene.input.keyboard;
@@ -5668,7 +5694,7 @@
         } else {
           var keys = Split(key, '|');
           for (var i = 0, cnt = keys.length; i < cnt; i++) {
-            this.waitEvent(eventEmitter, "keydown-".concat(key.toUpperCase()));
+            this.waitEvent(eventEmitter, "keydown-".concat(keys[i].toUpperCase()));
           }
           return this.parent;
         }
@@ -5740,6 +5766,10 @@
   var WaitCameraMethods = {
     setCameraTarget: function setCameraTarget(camera) {
       this.cameraTarget = camera;
+      return this;
+    },
+    clearCameraTarget: function clearCameraTarget() {
+      this.setCameraTarget();
       return this;
     },
     waitCameraEffectComplete: function waitCameraEffectComplete(effectName) {
@@ -5841,7 +5871,7 @@
           break;
         case 'click':
           hasAnyWaitEvent = true;
-          this.waitClick(config.key);
+          this.waitClick();
           break;
         case 'key':
           hasAnyWaitEvent = true;
@@ -5917,6 +5947,11 @@
     return this.parent;
   };
 
+  var methods$1 = {
+    waitAny: WaitAny$1
+  };
+  Object.assign(methods$1, WaitTimeMethods, WaitInputMethods, WaitGameObjectMethods, WaitCameraMethods, WaitMusicMethods);
+
   /**
    * @author       Richard Davey <rich@photonstorm.com>
    * @copyright    2019 Photon Storm Ltd.
@@ -5975,6 +6010,7 @@
       _this = _callSuper(this, WaitEventManager, [parent]);
       _this.waitCompleteEventName = GetValue$f(config, 'completeEventName', _this.waitCompleteEventName);
       _this.setClickTarget(GetValue$f(config, 'clickTarget', _this.scene));
+      _this.setClickShortcutKeys(GetValue$f(config, 'clickShortcutKeys', undefined));
       _this.setCameraTarget(GetValue$f(config, 'camera', _this.scene.cameras.main));
       return _this;
     }
@@ -5987,6 +6023,14 @@
         this.parent.clickTarget = value;
       }
     }, {
+      key: "clickShortcutKeys",
+      get: function get() {
+        return this.parent.clickShortcutKeys;
+      },
+      set: function set(value) {
+        this.parent.clickShortcutKeys = value;
+      }
+    }, {
       key: "cameraTarget",
       get: function get() {
         return this.parent.cameraTarget;
@@ -5997,8 +6041,9 @@
     }, {
       key: "destroy",
       value: function destroy() {
-        this.setClickTarget();
-        this.setCameraTarget();
+        this.clearClickTarget();
+        this.clearClickShortcutKeys();
+        this.clearCameraTarget();
         _get(_getPrototypeOf(WaitEventManager.prototype), "destroy", this).call(this);
       }
     }, {
@@ -6009,14 +6054,12 @@
     }]);
     return WaitEventManager;
   }(WaitEvent$1);
-  var Methods$5 = {
-    waitAny: WaitAny$1
-  };
-  Object.assign(WaitEventManager.prototype, WaitTimeMethods, WaitInputMethods, WaitGameObjectMethods, WaitCameraMethods, WaitMusicMethods, Methods$5);
+  Object.assign(WaitEventManager.prototype, methods$1);
 
   var GetValue$e = Phaser.Utils.Objects.GetValue;
   var InitManagers = function InitManagers(scene, config) {
     this.clickTarget = undefined;
+    this.clickShortcutKeys = undefined;
     this.cameraTarget = undefined;
     this.managersScene = scene;
     this.gameObjectManagers = {};
@@ -6075,6 +6118,7 @@
       this.timeline = undefined;
     }
     this.clickTarget = undefined;
+    this.clickShortcutKeys = undefined;
     this.cameraTarget = undefined;
     this.managersScene = undefined;
   };
@@ -9396,72 +9440,35 @@
     return this;
   };
 
-  /**
-   * @author       Richard Davey <rich@photonstorm.com>
-   * @copyright    2018 Photon Storm Ltd.
-   * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
-   */
-
-  /**
-   * This is a slightly modified version of jQuery.isPlainObject.
-   * A plain object is an object whose internal class property is [object Object].
-   *
-   * @function Phaser.Utils.Objects.IsPlainObject
-   * @since 3.0.0
-   *
-   * @param {object} obj - The object to inspect.
-   *
-   * @return {boolean} `true` if the object is plain, otherwise `false`.
-   */
-  var IsPlainObject$3 = function IsPlainObject(obj) {
-    // Not plain objects:
-    // - Any object or value whose internal [[Class]] property is not "[object Object]"
-    // - DOM nodes
-    // - window
-    if (_typeof(obj) !== 'object' || obj.nodeType || obj === obj.window) {
-      return false;
+  function DeepClone(obj) {
+    if (obj === null || _typeof(obj) !== "object") {
+      // If obj is a primitive value or null, return it directly
+      return obj;
+    }
+    if (Array.isArray(obj)) {
+      // If obj is an array, create a new array and clone each element
+      return obj.map(function (item) {
+        return DeepClone(item);
+      });
+    }
+    if (obj instanceof Date) {
+      // If obj is a Date object, create a new Date object with the same value
+      return new Date(obj);
+    }
+    if (obj instanceof RegExp) {
+      // If obj is a RegExp object, create a new RegExp object with the same pattern and flags
+      return new RegExp(obj);
     }
 
-    // Support: Firefox <20
-    // The try/catch suppresses exceptions thrown when attempting to access
-    // the "constructor" property of certain host objects, ie. |window.location|
-    // https://bugzilla.mozilla.org/show_bug.cgi?id=814622
-    try {
-      if (obj.constructor && !{}.hasOwnProperty.call(obj.constructor.prototype, 'isPrototypeOf')) {
-        return false;
+    // If obj is a plain object or a custom object, create a new object and clone each property
+    var clonedObj = {};
+    for (var key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        clonedObj[key] = DeepClone(obj[key]);
       }
-    } catch (e) {
-      return false;
     }
-
-    // If the function hasn't returned already, we're confident that
-    // |obj| is a plain object, created by {} or constructed with new Object
-    return true;
-  };
-
-  var DeepClone = function DeepClone(inObject) {
-    var outObject;
-    var value;
-    var key;
-    if (inObject == null || _typeof(inObject) !== 'object') {
-      //  inObject is not an object
-      return inObject;
-    }
-
-    //  Create an array or object to hold the values
-    outObject = Array.isArray(inObject) ? [] : {};
-    if (IsPlainObject$3(inObject)) {
-      for (key in inObject) {
-        value = inObject[key];
-
-        //  Recursively (deep) copy for nested objects, including arrays
-        outObject[key] = DeepClone(value);
-      }
-    } else {
-      outObject = inObject;
-    }
-    return outObject;
-  };
+    return clonedObj;
+  }
 
   var SetWrapConfig = function SetWrapConfig(config) {
     if (config === undefined) {

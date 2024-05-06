@@ -244,34 +244,41 @@ See also - [dirty](ui-basesizer.md#dirty)
 
 ### Typing
 
-- Start
+- Start typing
     ```javascript
     textBox.start(content, typingSpeed);
     ```
     - `content` : Content string.
     - `speed` : Typing speed in ms.
         - `undefined` : Use previous typing speed.
-- Stop
+- Append and continue typing
+    ```javascript
+    textBox.more(content, typingSpeed);
+    ```
+    - `content` : Content string.
+    - `speed` : Typing speed in ms.
+        - `undefined` : Use previous typing speed.
+- Stop typing
     ```javascript
     textBox.stop();
     ```
     - Will fire `'stop'` event.
-- Stop and show all text
+- Stop typing and show all text
     ```javascript
     textBox.stop(true);
     ```
     - Will fire `'stop'`, `'type'`, `'pageend'` event.
-- Stop and show all text at last page
+- Stop typing and show all text at last page
     ```javascript
     textBox.showLastPage();
     ```
     - Will fire `'type'`, `'pageend'`, `'complete'` events.
-- Pause
+- Pause typing
     ```javascript
     textBox.pause();
     ```
     - Will fire `'pause'` event.
-- Resume
+- Resume typing
     ```javascript
     textBox.resume();
     ```

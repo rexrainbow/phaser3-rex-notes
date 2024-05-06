@@ -5,7 +5,7 @@ export default TextTyping;
 declare namespace TextTyping {
 
     type TypeModeType = 0 | 1 | 2 | 3 | 'left-to-right' | 'right-to-left' | 'middle-to-sides' | 'sides-to-middle';
-    type SetTextCallbackType = (text: string, isLastChar: boolean, insertIdx: number) => string;
+    type SetTextCallbackType = (text: string, isLastChar: boolean, insertIndex: number) => string;
 
     interface IConfig {
         speed?: number,
@@ -15,7 +15,7 @@ declare namespace TextTyping {
         wrap?: boolean,
 
         text?: string,
-        typingIdx?: number,
+        typingIndex?: number,
         elapsed?: number | null,
     }
 
@@ -34,14 +34,18 @@ declare class TextTyping extends ComponentBase {
     start(
         content: string,
         speed?: number,
-        startIdx?: number
+        startIndex?: number
     ): this;
 
     startFromLine(
         content: string,
-        lineIdx?: number,
-        speed?: number
+        lineIndex?: number,
+        speed?: number,
+        offsetIndex?: number,
     ): this;
+
+    readonly typingIndex: number;
+    readonly textLength: number;
 
     appendText(content: string): this;
 

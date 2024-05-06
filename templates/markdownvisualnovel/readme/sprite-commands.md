@@ -284,6 +284,7 @@ NAME.say
   icon=
   iconFrame=
   text=
+  more=false
   typingSpeed=
   iconCrossDuration=
   iconCrossMode='crossFade'

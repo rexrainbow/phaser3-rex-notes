@@ -99,6 +99,7 @@ NAME.typing
   iconFrame=
   name=
   expression=
+  more=false
   text=
   typingSpeed=
   iconCrossDuration=
@@ -139,5 +140,9 @@ text-line2
       `'blinds'`, `'squares'`, `'diamonds'`, `'circles'`, `'curtain'`.
     - Shader effects : `'pixellate'`, `'dissolve'`, 
       `'revealLeft'`, `'revealRight'`, `'revealUp'`, `'revealDown'`
+- `more` :
+  - `false` : Clear and start a new typing task. Default behavior.
+  - `true` : Append text and continue typing.
+  
 
 Wait an extra clicking after typing complete internally.

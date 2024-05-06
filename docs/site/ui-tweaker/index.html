@@ -10699,6 +10699,7 @@
 <p><code>object[key]</code> is a number value.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">tweaker</span><span class="p">.</span><span class="nx">addInput</span><span class="p">(</span><span class="nx">object</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// view: &#39;number&#39;,</span>
+<span class="w">    </span><span class="c1">// int: undefined,</span>
 
 <span class="w">    </span><span class="c1">// icon: undefined,</span>
 <span class="w">    </span><span class="c1">// iconFrame: undefined,</span>
@@ -10718,6 +10719,7 @@
 <span class="w">    </span><span class="nx">bindingTarget</span><span class="o">:</span><span class="w"> </span><span class="nx">object</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">bindingKey</span><span class="o">:</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span>
 <span class="w">    </span><span class="c1">// view: &#39;number&#39;,</span>
+<span class="w">    </span><span class="c1">// int: undefined,</span>
 
 <span class="w">    </span><span class="c1">// icon: undefined,</span>
 <span class="w">    </span><span class="c1">// iconFrame: undefined,</span>
@@ -10739,6 +10741,7 @@
 </li>
 <li><code>bindingKey</code> : Bind to target's property key. Necessary field</li>
 <li><code>view</code> : Set to <code>'number'</code>, if <code>bindingTarget</code> is not given.</li>
+<li><code>int</code> : Set to <code>true</code> to truncate float number to integer number.</li>
 <li><code>icon</code>, <code>iconFrame</code> : Texture key, frame name of icon on title-label.</li>
 <li><code>iconSize</code> : Fixed icon size</li>
 <li><code>title</code> : Display text of title-label. Default value is equal to <code>key</code>.</li>
@@ -10768,6 +10771,7 @@
 
 <span class="w">    </span><span class="nx">min</span><span class="o">:</span><span class="w"> </span><span class="nx">minValue</span><span class="p">,</span><span class="w"> </span>
 <span class="w">    </span><span class="nx">max</span><span class="o">:</span><span class="w"> </span><span class="nx">maxValue</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">step</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 
 <span class="w">    </span><span class="c1">// format: function(value) { return s; },</span>
 <span class="w">    </span><span class="c1">// inputTextReadOnly: false,</span>

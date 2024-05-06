@@ -34,9 +34,17 @@ class TextPage extends ComponentBase {
         this.setMaxLines(GetValue(o, 'maxLines', undefined));
         this.setPageBreak(GetValue(o, 'pageBreak', '\f\n'));
         this.setText(GetValue(o, 'text', ''));
+
         this.startLineIndex = GetValue(o, 'start', -1);
         this.endLineIndex = GetValue(o, 'end', undefined);
-        this.setPageIndex(GetValue(o, 'page', -1));
+
+        var pageIndex = GetValue(o, 'page');
+        if (pageIndex === undefined) {
+            this.resetIndex();
+        } else {
+            this.setPageIndex(pageIndex);
+        }
+
         return this;
     }
 

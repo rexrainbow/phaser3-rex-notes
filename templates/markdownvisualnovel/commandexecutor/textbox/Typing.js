@@ -66,7 +66,11 @@ var Typing = function (
             commandExecutor.waitEvent(gameObject, 'complete2');
         }
 
-        gameObject.start(text, typingSpeed);
+        if (!more) {
+            gameObject.start(text, typingSpeed);
+        } else {
+            gameObject.more(text, typingSpeed);
+        }
         // Fire 'start' event, see GenerateDefaultCreateGameObjectCallback
     }
 };

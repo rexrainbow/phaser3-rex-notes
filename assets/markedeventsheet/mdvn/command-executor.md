@@ -148,6 +148,10 @@ CharacterA.say
   expression=happy
   text=Hello
 
+CharacterA.say
+  text=World
+  more=true
+
 ```Dialog.typing, displayName=A, icon=portraits, name=A, expression=smile
 Line0...
 Line1...

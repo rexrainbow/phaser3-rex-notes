@@ -11,6 +11,7 @@ var Say = function (
         duration, mode = 'crossFade',
         tintOthers,
         text,
+        more = false,
         displayName,
         typingSpeed,
         icon, iconFrame,
@@ -50,6 +51,7 @@ var Say = function (
                 name, expression,
                 typingSpeed,
                 iconCrossDuration, iconCrossMode,
+                more,
                 wait
             },
             commandExecutor, eventSheetManager, eventSheet

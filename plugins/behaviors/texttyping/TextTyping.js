@@ -25,13 +25,13 @@ class TextTyping extends ComponentBase {
         this.setTextCallbackScope = GetFastValue(o, 'setTextCallbackScope', null);
 
         this.setTypingContent(GetFastValue(o, 'text', ''));
-        this.typingIdx = GetFastValue(o, 'typingIdx', 0);
-        this.insertIdx = null;
+        this.typingIndex = GetFastValue(o, 'typingIndex', 0);
+        this.insertIndex = null;
         this.insertChar = null;
 
         var elapsed = GetFastValue(o, 'elapsed', null);
         if (elapsed !== null) {
-            this.start(undefined, undefined, this.typingIdx, elapsed);
+            this.start(undefined, undefined, this.typingIndex, elapsed);
         }
 
         return this;
@@ -92,17 +92,17 @@ class TextTyping extends ComponentBase {
     }
 
     get isLastChar() {
-        return (this.typingIdx === this.textLen);
+        return (this.typingIndex === this.textLength);
     }
 
     setTypingContent(text) {
         this.text = text;
-        this.textLen = GetPlainText(this.parent, this.text).length;
+        this.textLength = GetPlainText(this.parent, this.text).length;
         return this;
     }
 
     onTyping() {
-        var newText = GetTypingString.call(this, this.text, this.typingIdx, this.textLen, this.typeMode);
+        var newText = GetTypingString.call(this, this.text, this.typingIndex, this.textLength, this.typeMode);
 
         this.setText(newText);
 
@@ -114,7 +114,7 @@ class TextTyping extends ComponentBase {
             this.emit('complete', this, this.parent);
         } else {
             this.timer.delay = this.speed; // delay of next typing            
-            this.typingIdx++;
+            this.typingIndex++;
         }
     }
 
@@ -159,9 +159,9 @@ class TextTyping extends ComponentBase {
     setText(text) {
         if (this.setTextCallback) {
             if (this.setTextCallbackScope) {
-                text = this.setTextCallback.call(this.setTextCallbackScope, text, this.isLastChar, this.insertIdx);
+                text = this.setTextCallback.call(this.setTextCallbackScope, text, this.isLastChar, this.insertIndex);
             } else {
-                text = this.setTextCallback(text, this.isLastChar, this.insertIdx);
+                text = this.setTextCallback(text, this.isLastChar, this.insertIndex);
             }
         }
 

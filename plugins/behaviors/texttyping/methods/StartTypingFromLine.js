@@ -1,10 +1,14 @@
 import GetPlainText from '../utils/GetPlainText.js';
 
-var StartTypingFromLine = function (text, lineIndex, speed, timerStartAt) {
+var StartTypingFromLine = function (text, lineIndex, speed, offsetIndex, timerStartAt) {
     var startIdx;
     if (lineIndex > 0) {
+        if (offsetIndex === undefined) {
+            offsetIndex = 0;
+        }
+
         var plainText = GetPlainText(this.parent, text);
-        startIdx = GetNewLineIndex(plainText, lineIndex);
+        startIdx = GetNewLineIndex(plainText, lineIndex) + offsetIndex;
     }
     return this.start(text, speed, startIdx, timerStartAt);
 }

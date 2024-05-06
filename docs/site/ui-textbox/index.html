@@ -10017,7 +10017,7 @@
 <p>See also - <a href="../ui-basesizer/#dirty">dirty</a></p>
 <h3 id="typing">Typing<a class="headerlink" href="#typing" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Start
+<li>Start typing
     <div class="highlight"><pre><span></span><code><span class="nx">textBox</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="nx">content</span><span class="p">,</span><span class="w"> </span><span class="nx">typingSpeed</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>content</code> : Content string.</li>
@@ -10027,31 +10027,41 @@
 </li>
 </ul>
 </li>
-<li>Stop
+<li>Append and continue typing
+    <div class="highlight"><pre><span></span><code><span class="nx">textBox</span><span class="p">.</span><span class="nx">more</span><span class="p">(</span><span class="nx">content</span><span class="p">,</span><span class="w"> </span><span class="nx">typingSpeed</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>content</code> : Content string.</li>
+<li><code>speed</code> : Typing speed in ms.<ul>
+<li><code>undefined</code> : Use previous typing speed.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Stop typing
     <div class="highlight"><pre><span></span><code><span class="nx">textBox</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
 </code></pre></div><ul>
 <li>Will fire <code>'stop'</code> event.</li>
 </ul>
 </li>
-<li>Stop and show all text
+<li>Stop typing and show all text
     <div class="highlight"><pre><span></span><code><span class="nx">textBox</span><span class="p">.</span><span class="nx">stop</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
 </code></pre></div><ul>
 <li>Will fire <code>'stop'</code>, <code>'type'</code>, <code>'pageend'</code> event.</li>
 </ul>
 </li>
-<li>Stop and show all text at last page
+<li>Stop typing and show all text at last page
     <div class="highlight"><pre><span></span><code><span class="nx">textBox</span><span class="p">.</span><span class="nx">showLastPage</span><span class="p">();</span>
 </code></pre></div><ul>
 <li>Will fire <code>'type'</code>, <code>'pageend'</code>, <code>'complete'</code> events.</li>
 </ul>
 </li>
-<li>Pause
+<li>Pause typing
     <div class="highlight"><pre><span></span><code><span class="nx">textBox</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
 </code></pre></div><ul>
 <li>Will fire <code>'pause'</code> event.</li>
 </ul>
 </li>
-<li>Resume
+<li>Resume typing
     <div class="highlight"><pre><span></span><code><span class="nx">textBox</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
 </code></pre></div><ul>
 <li>Will fire <code>'resume'</code> event.</li>

@@ -2977,10 +2977,10 @@
     return this;
   };
 
-  var Methods$5 = {
+  var Methods$4 = {
     drawGameObjectsBounds: DrawGameObjectsBounds
   };
-  Object.assign(Methods$5, GetMethods, AddMethods, RemoveMethods, PropertyMethods, CallMethods, DataMethods, FadeMethods);
+  Object.assign(Methods$4, GetMethods, AddMethods, RemoveMethods, PropertyMethods, CallMethods, DataMethods, FadeMethods);
 
   var CameraClass = Phaser.Cameras.Scene2D.BaseCamera;
   var IsCameraObject = function IsCameraObject(object) {
@@ -3121,7 +3121,7 @@
     }]);
     return GOManager;
   }();
-  Object.assign(GOManager.prototype, EventEmitterMethods$1, Methods$5);
+  Object.assign(GOManager.prototype, EventEmitterMethods$1, Methods$4);
 
   var SortGameObjectsByDepth = function SortGameObjectsByDepth(gameObjects, descending) {
     if (gameObjects.length <= 1) {
@@ -3334,8 +3334,8 @@
     }
   };
 
-  var methods$1 = {};
-  Object.assign(methods$1, LayerMethods, DepthMethods);
+  var methods$2 = {};
+  Object.assign(methods$2, LayerMethods, DepthMethods);
 
   var GetValue$i = Phaser.Utils.Objects.GetValue;
   var LayerManager = /*#__PURE__*/function (_GOManager) {
@@ -3411,7 +3411,7 @@
     }
     return layer;
   };
-  Object.assign(LayerManager.prototype, methods$1);
+  Object.assign(LayerManager.prototype, methods$2);
 
   var SceneClass = Phaser.Scene;
   var IsSceneObject = function IsSceneObject(object) {
@@ -4817,10 +4817,10 @@
     }
   };
 
-  var Methods$4 = {
+  var Methods$3 = {
     hasAudio: HasaAudio
   };
-  Object.assign(Methods$4, BackgroundMusicMethods, BackgroundMusic2Methods, SoundEffectsMethods, SoundEffects2Methods);
+  Object.assign(Methods$3, BackgroundMusicMethods, BackgroundMusic2Methods, SoundEffectsMethods, SoundEffects2Methods);
 
   var GetValue$7 = Phaser.Utils.Objects.GetValue;
   var SoundManager = /*#__PURE__*/function () {
@@ -4995,7 +4995,7 @@
     }]);
     return SoundManager;
   }();
-  Object.assign(SoundManager.prototype, Methods$4);
+  Object.assign(SoundManager.prototype, Methods$3);
 
   var GetValue$6 = Phaser.Utils.Objects.GetValue;
   var BaseClock = /*#__PURE__*/function (_TickTask) {
@@ -5472,14 +5472,18 @@
         this.clearWaitCompleteCallbacks();
         this.parent = null;
       }
+
+      // Emit completeEvent (default value is 'complete') when eventEmitter firing eventName
     }, {
       key: "waitEvent",
       value: function waitEvent(eventEmitter, eventName, completeNextTick) {
         var callback = this.getWaitCompleteTriggerCallback(completeNextTick);
         eventEmitter.once(eventName, callback, this);
+        // Once completeEvent firing, remove pending eventName from eventEmitter
         this.parent.once(this.removeWaitEventsEventName, function () {
           eventEmitter.off(eventName, callback, this);
         });
+        // All pending eventName from eventEmitter will be removed at last
         return this.parent;
       }
     }, {
@@ -5555,19 +5559,41 @@
     setClickTarget: function setClickTarget(target) {
       this.clickTarget = target;
       if (!target) {
-        this.clickEE = null;
+        this.touchEE = null;
       } else if (IsSceneObject(target)) {
-        this.clickEE = target.input;
+        this.touchEE = target.input;
       } else {
         // Assume that target is a gameObject
-        this.clickEE = target.setInteractive();
+        this.touchEE = target.setInteractive();
       }
+      return this;
+    },
+    clearClickTarget: function clearClickTarget() {
+      this.setClickTarget();
+      return this;
+    },
+    setClickShortcutKeys: function setClickShortcutKeys(keys) {
+      this.clickShortcutKeys = keys;
+      return this;
+    },
+    clearClickShortcutKeys: function clearClickShortcutKeys() {
+      this.setShortcutKeys();
+      return this;
     },
     waitClick: function waitClick() {
-      if (!this.clickEE) {
-        return this.waitTime(0);
+      var touchEE = this.touchEE;
+      var clickShortcutKeys = this.clickShortcutKeys;
+      if (touchEE || clickShortcutKeys) {
+        if (touchEE) {
+          this.waitEvent(touchEE, 'pointerdown');
+        }
+        if (clickShortcutKeys) {
+          this.waitKeyDown(clickShortcutKeys);
+        }
+      } else {
+        this.waitTime(0);
       }
-      return this.waitEvent(this.clickEE, 'pointerdown');
+      return this;
     },
     waitKeyDown: function waitKeyDown(key) {
       var eventEmitter = this.scene.input.keyboard;
@@ -5577,7 +5603,7 @@
         } else {
           var keys = Split(key, '|');
           for (var i = 0, cnt = keys.length; i < cnt; i++) {
-            this.waitEvent(eventEmitter, "keydown-".concat(key.toUpperCase()));
+            this.waitEvent(eventEmitter, "keydown-".concat(keys[i].toUpperCase()));
           }
           return this.parent;
         }
@@ -5649,6 +5675,10 @@
   var WaitCameraMethods = {
     setCameraTarget: function setCameraTarget(camera) {
       this.cameraTarget = camera;
+      return this;
+    },
+    clearCameraTarget: function clearCameraTarget() {
+      this.setCameraTarget();
       return this;
     },
     waitCameraEffectComplete: function waitCameraEffectComplete(effectName) {
@@ -5750,7 +5780,7 @@
           break;
         case 'click':
           hasAnyWaitEvent = true;
-          this.waitClick(config.key);
+          this.waitClick();
           break;
         case 'key':
           hasAnyWaitEvent = true;
@@ -5826,6 +5856,11 @@
     return this.parent;
   };
 
+  var methods$1 = {
+    waitAny: WaitAny$1
+  };
+  Object.assign(methods$1, WaitTimeMethods, WaitInputMethods, WaitGameObjectMethods, WaitCameraMethods, WaitMusicMethods);
+
   /**
    * @author       Richard Davey <rich@photonstorm.com>
    * @copyright    2019 Photon Storm Ltd.
@@ -5884,6 +5919,7 @@
       _this = _callSuper(this, WaitEventManager, [parent]);
       _this.waitCompleteEventName = GetValue$4(config, 'completeEventName', _this.waitCompleteEventName);
       _this.setClickTarget(GetValue$4(config, 'clickTarget', _this.scene));
+      _this.setClickShortcutKeys(GetValue$4(config, 'clickShortcutKeys', undefined));
       _this.setCameraTarget(GetValue$4(config, 'camera', _this.scene.cameras.main));
       return _this;
     }
@@ -5896,6 +5932,14 @@
         this.parent.clickTarget = value;
       }
     }, {
+      key: "clickShortcutKeys",
+      get: function get() {
+        return this.parent.clickShortcutKeys;
+      },
+      set: function set(value) {
+        this.parent.clickShortcutKeys = value;
+      }
+    }, {
       key: "cameraTarget",
       get: function get() {
         return this.parent.cameraTarget;
@@ -5906,8 +5950,9 @@
     }, {
       key: "destroy",
       value: function destroy() {
-        this.setClickTarget();
-        this.setCameraTarget();
+        this.clearClickTarget();
+        this.clearClickShortcutKeys();
+        this.clearCameraTarget();
         _get(_getPrototypeOf(WaitEventManager.prototype), "destroy", this).call(this);
       }
     }, {
@@ -5918,14 +5963,12 @@
     }]);
     return WaitEventManager;
   }(WaitEvent$1);
-  var Methods$3 = {
-    waitAny: WaitAny$1
-  };
-  Object.assign(WaitEventManager.prototype, WaitTimeMethods, WaitInputMethods, WaitGameObjectMethods, WaitCameraMethods, WaitMusicMethods, Methods$3);
+  Object.assign(WaitEventManager.prototype, methods$1);
 
   var GetValue$3 = Phaser.Utils.Objects.GetValue;
   var InitManagers = function InitManagers(scene, config) {
     this.clickTarget = undefined;
+    this.clickShortcutKeys = undefined;
     this.cameraTarget = undefined;
     this.managersScene = scene;
     this.gameObjectManagers = {};
@@ -5984,6 +6027,7 @@
       this.timeline = undefined;
     }
     this.clickTarget = undefined;
+    this.clickShortcutKeys = undefined;
     this.cameraTarget = undefined;
     this.managersScene = undefined;
   };
@@ -7724,17 +7768,17 @@
     this.addGameObjectManager(config, SpriteManager);
   };
 
-  var StartTyping = function StartTyping(text, speed, startIdx, timerStartAt) {
+  var StartTyping = function StartTyping(text, speed, startIndex, timerStartAt) {
     if (text !== undefined) {
       this.setTypingContent(text);
     }
     if (speed !== undefined) {
       this.speed = speed;
     }
-    if (startIdx === undefined) {
-      startIdx = 0;
+    if (startIndex === undefined) {
+      startIndex = 0;
     }
-    this.typingIdx = startIdx + 1;
+    this.typingIndex = startIndex + 1;
     if (this.speed === 0) {
       this.stop(true);
     } else {
@@ -7751,11 +7795,14 @@
     return text;
   };
 
-  var StartTypingFromLine = function StartTypingFromLine(text, lineIndex, speed, timerStartAt) {
+  var StartTypingFromLine = function StartTypingFromLine(text, lineIndex, speed, offsetIndex, timerStartAt) {
     var startIdx;
     if (lineIndex > 0) {
+      if (offsetIndex === undefined) {
+        offsetIndex = 0;
+      }
       var plainText = GetPlainText(this.parent, text);
-      startIdx = GetNewLineIndex(plainText, lineIndex);
+      startIdx = GetNewLineIndex(plainText, lineIndex) + offsetIndex;
     }
     return this.start(text, speed, startIdx, timerStartAt);
   };
@@ -7780,34 +7827,34 @@
     return result;
   };
 
-  var GetTypingString = function GetTypingString(text, typeIdx, textLen, typeMode) {
+  var GetTypingString = function GetTypingString(text, typeIdx, textLength, typeMode) {
     var textObject = this.parent;
     var result;
     if (typeMode === 0) {
       //left-to-right
       var startIdx = 0;
       var endIdx = typeIdx;
-      this.insertIdx = endIdx;
+      this.insertIndex = endIdx;
       result = GetSubString(textObject, text, startIdx, endIdx);
     } else if (typeMode === 1) {
       //right-to-left
-      var endIdx = textLen;
+      var endIdx = textLength;
       var startIdx = endIdx - typeIdx;
-      this.insertIdx = 0;
+      this.insertIndex = 0;
       result = GetSubString(textObject, text, startIdx, endIdx);
     } else if (typeMode === 2) {
       //middle-to-sides
-      var midIdx = textLen / 2;
+      var midIdx = textLength / 2;
       var startIdx = Math.floor(midIdx - typeIdx / 2);
       var endIdx = startIdx + typeIdx;
-      this.insertIdx = typeIdx % 2 ? typeIdx : 0;
+      this.insertIndex = typeIdx % 2 ? typeIdx : 0;
       result = GetSubString(textObject, text, startIdx, endIdx);
     } else if (typeMode === 3) {
       //sides-to-middle
       var lowerLen = Math.floor(typeIdx / 2);
       var lowerResult;
       if (lowerLen > 0) {
-        var endIdx = textLen;
+        var endIdx = textLength;
         var startIdx = endIdx - lowerLen;
         lowerResult = GetSubString(textObject, text, startIdx, endIdx);
       } else {
@@ -7818,15 +7865,15 @@
       if (upperLen > 0) {
         var startIdx = 0;
         var endIdx = startIdx + upperLen;
-        this.insertIdx = endIdx;
+        this.insertIndex = endIdx;
         upperResult = GetSubString(textObject, text, startIdx, endIdx);
       } else {
         upperResult = "";
-        this.insertIdx = 0;
+        this.insertIndex = 0;
       }
       result = upperResult + lowerResult;
     }
-    this.insertChar = result.charAt(this.insertIdx - 1);
+    this.insertChar = result.charAt(this.insertIndex - 1);
     return result;
   };
 
@@ -7838,9 +7885,9 @@
     if (showAllText) {
       // Fire 'type' event for remainder characters until lastChar
       while (!this.isLastChar) {
-        GetTypingString.call(this, this.text, this.typingIdx, this.textLen, this.typeMode);
+        GetTypingString.call(this, this.text, this.typingIndex, this.textLength, this.typeMode);
         this.emit('typechar', this.insertChar);
-        this.typingIdx++;
+        this.typingIndex++;
       }
       // Display all characters on text game object
       this.setText(this.text);
@@ -7871,7 +7918,7 @@
     if (this.isTyping) {
       this.setTypingContent(newText);
     } else {
-      this.start(newText, undefined, this.textLen);
+      this.start(newText, undefined, this.textLength);
     }
     return this;
   };
@@ -7991,12 +8038,12 @@
         this.setTextCallback = GetFastValue(o, 'setTextCallback', null);
         this.setTextCallbackScope = GetFastValue(o, 'setTextCallbackScope', null);
         this.setTypingContent(GetFastValue(o, 'text', ''));
-        this.typingIdx = GetFastValue(o, 'typingIdx', 0);
-        this.insertIdx = null;
+        this.typingIndex = GetFastValue(o, 'typingIndex', 0);
+        this.insertIndex = null;
         this.insertChar = null;
         var elapsed = GetFastValue(o, 'elapsed', null);
         if (elapsed !== null) {
-          this.start(undefined, undefined, this.typingIdx, elapsed);
+          this.start(undefined, undefined, this.typingIndex, elapsed);
         }
         return this;
       }
@@ -8060,19 +8107,19 @@
     }, {
       key: "isLastChar",
       get: function get() {
-        return this.typingIdx === this.textLen;
+        return this.typingIndex === this.textLength;
       }
     }, {
       key: "setTypingContent",
       value: function setTypingContent(text) {
         this.text = text;
-        this.textLen = GetPlainText(this.parent, this.text).length;
+        this.textLength = GetPlainText(this.parent, this.text).length;
         return this;
       }
     }, {
       key: "onTyping",
       value: function onTyping() {
-        var newText = GetTypingString.call(this, this.text, this.typingIdx, this.textLen, this.typeMode);
+        var newText = GetTypingString.call(this, this.text, this.typingIndex, this.textLength, this.typeMode);
         this.setText(newText);
         this.emit('typechar', this.insertChar);
         this.emit('type');
@@ -8081,7 +8128,7 @@
           this.emit('complete', this, this.parent);
         } else {
           this.timer.delay = this.speed; // delay of next typing            
-          this.typingIdx++;
+          this.typingIndex++;
         }
       }
     }, {
@@ -8127,9 +8174,9 @@
       value: function setText(text) {
         if (this.setTextCallback) {
           if (this.setTextCallbackScope) {
-            text = this.setTextCallback.call(this.setTextCallbackScope, text, this.isLastChar, this.insertIdx);
+            text = this.setTextCallback.call(this.setTextCallbackScope, text, this.isLastChar, this.insertIndex);
           } else {
-            text = this.setTextCallback(text, this.isLastChar, this.insertIdx);
+            text = this.setTextCallback(text, this.isLastChar, this.insertIndex);
           }
         }
         if (this.textWrapEnable) {

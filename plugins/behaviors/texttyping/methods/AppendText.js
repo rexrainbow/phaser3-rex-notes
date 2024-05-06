@@ -3,7 +3,7 @@ var AppendText = function (text) {
     if (this.isTyping) {
         this.setTypingContent(newText);
     } else {
-        this.start(newText, undefined, this.textLen);
+        this.start(newText, undefined, this.textLength);
     }
 
     return this;

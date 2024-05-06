@@ -521,23 +521,6 @@
     return EventEmitter;
   }(EE);
 
-  /**
-   * @author       Richard Davey <rich@photonstorm.com>
-   * @copyright    2018 Photon Storm Ltd.
-   * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
-   */
-
-  /**
-   * This is a slightly modified version of jQuery.isPlainObject.
-   * A plain object is an object whose internal class property is [object Object].
-   *
-   * @function Phaser.Utils.Objects.IsPlainObject
-   * @since 3.0.0
-   *
-   * @param {object} obj - The object to inspect.
-   *
-   * @return {boolean} `true` if the object is plain, otherwise `false`.
-   */
   var IsPlainObject = function IsPlainObject(obj) {
     // Not plain objects:
     // - Any object or value whose internal [[Class]] property is not "[object Object]"
@@ -677,29 +660,35 @@
     }
   };
 
-  var DeepClone = function DeepClone(inObject) {
-    var outObject;
-    var value;
-    var key;
-    if (inObject == null || _typeof(inObject) !== 'object') {
-      //  inObject is not an object
-      return inObject;
+  function DeepClone(obj) {
+    if (obj === null || _typeof(obj) !== "object") {
+      // If obj is a primitive value or null, return it directly
+      return obj;
+    }
+    if (Array.isArray(obj)) {
+      // If obj is an array, create a new array and clone each element
+      return obj.map(function (item) {
+        return DeepClone(item);
+      });
+    }
+    if (obj instanceof Date) {
+      // If obj is a Date object, create a new Date object with the same value
+      return new Date(obj);
+    }
+    if (obj instanceof RegExp) {
+      // If obj is a RegExp object, create a new RegExp object with the same pattern and flags
+      return new RegExp(obj);
     }
 
-    //  Create an array or object to hold the values
-    outObject = Array.isArray(inObject) ? [] : {};
-    if (IsPlainObject(inObject)) {
-      for (key in inObject) {
-        value = inObject[key];
-
-        //  Recursively (deep) copy for nested objects, including arrays
-        outObject[key] = DeepClone(value);
+    // If obj is a plain object or a custom object, create a new object and clone each property
+    var clonedObj = {};
+    for (var key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        clonedObj[key] = DeepClone(obj[key]);
       }
-    } else {
-      outObject = inObject;
     }
-    return outObject;
-  };
+    return clonedObj;
+  }
 
   var Dump = function Dump() {
     var data = {
@@ -4951,11 +4940,11 @@
     }]);
     return BehaviorTree;
   }();
-  var Methods$6 = {
+  var Methods$5 = {
     dump: Dump,
     load: Load
   };
-  Object.assign(BehaviorTree.prototype, Methods$6, DataMethods$4);
+  Object.assign(BehaviorTree.prototype, Methods$5, DataMethods$4);
 
   var IsInValidKey = function IsInValidKey(keys) {
     return keys == null || keys === '' || keys.length === 0;
@@ -6707,8 +6696,8 @@
     }
   };
 
-  var Methods$5 = {};
-  Object.assign(Methods$5, TreeMethods$1, AddTreeMethods$1, RemoveTreeMethods$1, TreeActiveStateMethods$1, SaveLoadTreeMethods, StateMethods$1, RunMethods$1, StopMethods$1);
+  var Methods$4 = {};
+  Object.assign(Methods$4, TreeMethods$1, AddTreeMethods$1, RemoveTreeMethods$1, TreeActiveStateMethods$1, SaveLoadTreeMethods, StateMethods$1, RunMethods$1, StopMethods$1);
 
   var EventBehaviorTreeGroup = /*#__PURE__*/function () {
     function EventBehaviorTreeGroup(parent) {
@@ -6739,7 +6728,7 @@
     }]);
     return EventBehaviorTreeGroup;
   }();
-  Object.assign(EventBehaviorTreeGroup.prototype, Methods$5);
+  Object.assign(EventBehaviorTreeGroup.prototype, Methods$4);
 
   var TreeMethods = {
     hasTreeGroup: function hasTreeGroup(name) {
@@ -6845,7 +6834,14 @@
 
   var DataMethods$3 = {
     setData: function setData(key, value) {
-      this.blackboard.setData(key, value);
+      if (typeof key === 'string') {
+        this.blackboard.setData(key, value);
+      } else {
+        var data = key;
+        for (key in data) {
+          this.blackboard.setData(key, data[key]);
+        }
+      }
       return this;
     },
     hasData: function hasData(key) {
@@ -15055,8 +15051,8 @@
     }
   };
 
-  var Methods$4 = {};
-  Object.assign(Methods$4, PauseEventSheetMethods$1, TreeMethods, AddTreeMethods, RemoveTreeMethods, TreeActiveStateMethods, SaveLoadTreesMethods, DataMethods$3, StateMethods, ValueConvertMethods, RunMethods, StopMethods, BindEventMethods, RoundCounterMethods);
+  var Methods$3 = {};
+  Object.assign(Methods$3, PauseEventSheetMethods$1, TreeMethods, AddTreeMethods, RemoveTreeMethods, TreeActiveStateMethods, SaveLoadTreesMethods, DataMethods$3, StateMethods, ValueConvertMethods, RunMethods, StopMethods, BindEventMethods, RoundCounterMethods);
 
   BehaviorTree.setStartIDValue(0);
   var EventSheetManager = /*#__PURE__*/function (_EventEmitter) {
@@ -15145,7 +15141,7 @@
     }]);
     return EventSheetManager;
   }(EventEmitter$2);
-  Object.assign(EventSheetManager.prototype, Methods$4);
+  Object.assign(EventSheetManager.prototype, Methods$3);
 
   var RoundIdle = 0;
   var RoundRun = 1;
@@ -19995,10 +19991,10 @@
     return this;
   };
 
-  var Methods$3 = {
+  var Methods$2 = {
     drawGameObjectsBounds: DrawGameObjectsBounds
   };
-  Object.assign(Methods$3, GetMethods, AddMethods, RemoveMethods, PropertyMethods, CallMethods, DataMethods$1, FadeMethods);
+  Object.assign(Methods$2, GetMethods, AddMethods, RemoveMethods, PropertyMethods, CallMethods, DataMethods$1, FadeMethods);
 
   var CameraClass = Phaser.Cameras.Scene2D.BaseCamera;
   var IsCameraObject = function IsCameraObject(object) {
@@ -20139,7 +20135,7 @@
     }]);
     return GOManager;
   }();
-  Object.assign(GOManager.prototype, EventEmitterMethods$1, Methods$3);
+  Object.assign(GOManager.prototype, EventEmitterMethods$1, Methods$2);
 
   var SortGameObjectsByDepth = function SortGameObjectsByDepth(gameObjects, descending) {
     if (gameObjects.length <= 1) {
@@ -20352,8 +20348,8 @@
     }
   };
 
-  var methods$1 = {};
-  Object.assign(methods$1, LayerMethods, DepthMethods);
+  var methods$2 = {};
+  Object.assign(methods$2, LayerMethods, DepthMethods);
 
   var GetValue$e = Phaser.Utils.Objects.GetValue;
   var LayerManager = /*#__PURE__*/function (_GOManager) {
@@ -20429,7 +20425,7 @@
     }
     return layer;
   };
-  Object.assign(LayerManager.prototype, methods$1);
+  Object.assign(LayerManager.prototype, methods$2);
 
   var SceneClass = Phaser.Scene;
   var IsSceneObject = function IsSceneObject(object) {
@@ -21835,10 +21831,10 @@
     }
   };
 
-  var Methods$2 = {
+  var Methods$1 = {
     hasAudio: HasaAudio
   };
-  Object.assign(Methods$2, BackgroundMusicMethods$1, BackgroundMusic2Methods$1, SoundEffectsMethods$1, SoundEffects2Methods$1);
+  Object.assign(Methods$1, BackgroundMusicMethods$1, BackgroundMusic2Methods$1, SoundEffectsMethods$1, SoundEffects2Methods$1);
 
   var GetValue$3 = Phaser.Utils.Objects.GetValue;
   var SoundManager = /*#__PURE__*/function () {
@@ -22013,7 +22009,7 @@
     }]);
     return SoundManager;
   }();
-  Object.assign(SoundManager.prototype, Methods$2);
+  Object.assign(SoundManager.prototype, Methods$1);
 
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
   var BaseClock = /*#__PURE__*/function (_TickTask) {
@@ -22490,14 +22486,18 @@
         this.clearWaitCompleteCallbacks();
         this.parent = null;
       }
+
+      // Emit completeEvent (default value is 'complete') when eventEmitter firing eventName
     }, {
       key: "waitEvent",
       value: function waitEvent(eventEmitter, eventName, completeNextTick) {
         var callback = this.getWaitCompleteTriggerCallback(completeNextTick);
         eventEmitter.once(eventName, callback, this);
+        // Once completeEvent firing, remove pending eventName from eventEmitter
         this.parent.once(this.removeWaitEventsEventName, function () {
           eventEmitter.off(eventName, callback, this);
         });
+        // All pending eventName from eventEmitter will be removed at last
         return this.parent;
       }
     }, {
@@ -22573,19 +22573,41 @@
     setClickTarget: function setClickTarget(target) {
       this.clickTarget = target;
       if (!target) {
-        this.clickEE = null;
+        this.touchEE = null;
       } else if (IsSceneObject(target)) {
-        this.clickEE = target.input;
+        this.touchEE = target.input;
       } else {
         // Assume that target is a gameObject
-        this.clickEE = target.setInteractive();
+        this.touchEE = target.setInteractive();
       }
+      return this;
+    },
+    clearClickTarget: function clearClickTarget() {
+      this.setClickTarget();
+      return this;
+    },
+    setClickShortcutKeys: function setClickShortcutKeys(keys) {
+      this.clickShortcutKeys = keys;
+      return this;
+    },
+    clearClickShortcutKeys: function clearClickShortcutKeys() {
+      this.setShortcutKeys();
+      return this;
     },
     waitClick: function waitClick() {
-      if (!this.clickEE) {
-        return this.waitTime(0);
+      var touchEE = this.touchEE;
+      var clickShortcutKeys = this.clickShortcutKeys;
+      if (touchEE || clickShortcutKeys) {
+        if (touchEE) {
+          this.waitEvent(touchEE, 'pointerdown');
+        }
+        if (clickShortcutKeys) {
+          this.waitKeyDown(clickShortcutKeys);
+        }
+      } else {
+        this.waitTime(0);
       }
-      return this.waitEvent(this.clickEE, 'pointerdown');
+      return this;
     },
     waitKeyDown: function waitKeyDown(key) {
       var eventEmitter = this.scene.input.keyboard;
@@ -22595,7 +22617,7 @@
         } else {
           var keys = Split(key, '|');
           for (var i = 0, cnt = keys.length; i < cnt; i++) {
-            this.waitEvent(eventEmitter, "keydown-".concat(key.toUpperCase()));
+            this.waitEvent(eventEmitter, "keydown-".concat(keys[i].toUpperCase()));
           }
           return this.parent;
         }
@@ -22667,6 +22689,10 @@
   var WaitCameraMethods = {
     setCameraTarget: function setCameraTarget(camera) {
       this.cameraTarget = camera;
+      return this;
+    },
+    clearCameraTarget: function clearCameraTarget() {
+      this.setCameraTarget();
       return this;
     },
     waitCameraEffectComplete: function waitCameraEffectComplete(effectName) {
@@ -22768,7 +22794,7 @@
           break;
         case 'click':
           hasAnyWaitEvent = true;
-          this.waitClick(config.key);
+          this.waitClick();
           break;
         case 'key':
           hasAnyWaitEvent = true;
@@ -22844,6 +22870,11 @@
     return this.parent;
   };
 
+  var methods$1 = {
+    waitAny: WaitAny
+  };
+  Object.assign(methods$1, WaitTimeMethods, WaitInputMethods, WaitGameObjectMethods, WaitCameraMethods, WaitMusicMethods);
+
   var WaitEventManager = /*#__PURE__*/function (_WaitEvent) {
     _inherits(WaitEventManager, _WaitEvent);
     function WaitEventManager(parent, config) {
@@ -22852,6 +22883,7 @@
       _this = _callSuper(this, WaitEventManager, [parent]);
       _this.waitCompleteEventName = GetValue$h(config, 'completeEventName', _this.waitCompleteEventName);
       _this.setClickTarget(GetValue$h(config, 'clickTarget', _this.scene));
+      _this.setClickShortcutKeys(GetValue$h(config, 'clickShortcutKeys', undefined));
       _this.setCameraTarget(GetValue$h(config, 'camera', _this.scene.cameras.main));
       return _this;
     }
@@ -22864,6 +22896,14 @@
         this.parent.clickTarget = value;
       }
     }, {
+      key: "clickShortcutKeys",
+      get: function get() {
+        return this.parent.clickShortcutKeys;
+      },
+      set: function set(value) {
+        this.parent.clickShortcutKeys = value;
+      }
+    }, {
       key: "cameraTarget",
       get: function get() {
         return this.parent.cameraTarget;
@@ -22874,8 +22914,9 @@
     }, {
       key: "destroy",
       value: function destroy() {
-        this.setClickTarget();
-        this.setCameraTarget();
+        this.clearClickTarget();
+        this.clearClickShortcutKeys();
+        this.clearCameraTarget();
         _get(_getPrototypeOf(WaitEventManager.prototype), "destroy", this).call(this);
       }
     }, {
@@ -22886,14 +22927,12 @@
     }]);
     return WaitEventManager;
   }(WaitEvent);
-  var Methods$1 = {
-    waitAny: WaitAny
-  };
-  Object.assign(WaitEventManager.prototype, WaitTimeMethods, WaitInputMethods, WaitGameObjectMethods, WaitCameraMethods, WaitMusicMethods, Methods$1);
+  Object.assign(WaitEventManager.prototype, methods$1);
 
   var GetValue = Phaser.Utils.Objects.GetValue;
   var InitManagers = function InitManagers(scene, config) {
     this.clickTarget = undefined;
+    this.clickShortcutKeys = undefined;
     this.cameraTarget = undefined;
     this.managersScene = scene;
     this.gameObjectManagers = {};
@@ -22952,6 +22991,7 @@
       this.timeline = undefined;
     }
     this.clickTarget = undefined;
+    this.clickShortcutKeys = undefined;
     this.cameraTarget = undefined;
     this.managersScene = undefined;
   };
@@ -24021,11 +24061,13 @@
           layer = _config$layer === void 0 ? defaultLayer : _config$layer,
           _config$autoClear2 = config.autoClear,
           autoClear = _config$autoClear2 === void 0 ? defaultAutoClear : _config$autoClear2;
-        delete config.id;
-        delete config.layer;
+        config.eventSheetManager = eventSheetManager;
+        config.eventsheet = eventsheet;
         sys.createGameObject(name, id, config);
         // Execute next command
 
+        delete config.eventSheetManager;
+        delete config.eventsheet;
         if (layer) {
           var layerManager = sys.layerManager;
           if (layerManager) {

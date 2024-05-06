@@ -1,15 +1,15 @@
-var StartTyping = function (text, speed, startIdx, timerStartAt) {
+var StartTyping = function (text, speed, startIndex, timerStartAt) {
     if (text !== undefined) {
         this.setTypingContent(text);
     }
     if (speed !== undefined) {
         this.speed = speed;
     }
-    if (startIdx === undefined) {
-        startIdx = 0;
+    if (startIndex === undefined) {
+        startIndex = 0;
     }
 
-    this.typingIdx = startIdx + 1;
+    this.typingIndex = startIndex + 1;
     if (this.speed === 0) {
         this.stop(true);
     } else {

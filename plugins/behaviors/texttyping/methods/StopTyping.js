@@ -8,9 +8,9 @@ var StopTyping = function (showAllText) {
     if (showAllText) {
         // Fire 'type' event for remainder characters until lastChar
         while (!this.isLastChar) {
-            GetTypingString.call(this, this.text, this.typingIdx, this.textLen, this.typeMode);
+            GetTypingString.call(this, this.text, this.typingIndex, this.textLength, this.typeMode);
             this.emit('typechar', this.insertChar);
-            this.typingIdx++;
+            this.typingIndex++;
         }
         // Display all characters on text game object
         this.setText(this.text);

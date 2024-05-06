@@ -634,72 +634,35 @@
     }
   };
 
-  /**
-   * @author       Richard Davey <rich@photonstorm.com>
-   * @copyright    2018 Photon Storm Ltd.
-   * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
-   */
-
-  /**
-   * This is a slightly modified version of jQuery.isPlainObject.
-   * A plain object is an object whose internal class property is [object Object].
-   *
-   * @function Phaser.Utils.Objects.IsPlainObject
-   * @since 3.0.0
-   *
-   * @param {object} obj - The object to inspect.
-   *
-   * @return {boolean} `true` if the object is plain, otherwise `false`.
-   */
-  var IsPlainObject$U = function IsPlainObject(obj) {
-    // Not plain objects:
-    // - Any object or value whose internal [[Class]] property is not "[object Object]"
-    // - DOM nodes
-    // - window
-    if (_typeof(obj) !== 'object' || obj.nodeType || obj === obj.window) {
-      return false;
+  function DeepClone(obj) {
+    if (obj === null || _typeof(obj) !== "object") {
+      // If obj is a primitive value or null, return it directly
+      return obj;
+    }
+    if (Array.isArray(obj)) {
+      // If obj is an array, create a new array and clone each element
+      return obj.map(function (item) {
+        return DeepClone(item);
+      });
+    }
+    if (obj instanceof Date) {
+      // If obj is a Date object, create a new Date object with the same value
+      return new Date(obj);
+    }
+    if (obj instanceof RegExp) {
+      // If obj is a RegExp object, create a new RegExp object with the same pattern and flags
+      return new RegExp(obj);
     }
 
-    // Support: Firefox <20
-    // The try/catch suppresses exceptions thrown when attempting to access
-    // the "constructor" property of certain host objects, ie. |window.location|
-    // https://bugzilla.mozilla.org/show_bug.cgi?id=814622
-    try {
-      if (obj.constructor && !{}.hasOwnProperty.call(obj.constructor.prototype, 'isPrototypeOf')) {
-        return false;
+    // If obj is a plain object or a custom object, create a new object and clone each property
+    var clonedObj = {};
+    for (var key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        clonedObj[key] = DeepClone(obj[key]);
       }
-    } catch (e) {
-      return false;
     }
-
-    // If the function hasn't returned already, we're confident that
-    // |obj| is a plain object, created by {} or constructed with new Object
-    return true;
-  };
-
-  var DeepClone = function DeepClone(inObject) {
-    var outObject;
-    var value;
-    var key;
-    if (inObject == null || _typeof(inObject) !== 'object') {
-      //  inObject is not an object
-      return inObject;
-    }
-
-    //  Create an array or object to hold the values
-    outObject = Array.isArray(inObject) ? [] : {};
-    if (IsPlainObject$U(inObject)) {
-      for (key in inObject) {
-        value = inObject[key];
-
-        //  Recursively (deep) copy for nested objects, including arrays
-        outObject[key] = DeepClone(value);
-      }
-    } else {
-      outObject = inObject;
-    }
-    return outObject;
-  };
+    return clonedObj;
+  }
 
   var SetBaseTexture = function SetBaseTexture(key, baseFrameName, columns, rows) {
     if (Array.isArray(baseFrameName)) {
@@ -963,7 +926,7 @@
     //  NOOP
   };
 
-  var Methods$l = {
+  var Methods$k = {
     _beginDraw: NOOP,
     _drawImage: NOOP,
     _drawTileSprite: NOOP,
@@ -1118,7 +1081,7 @@
       }]);
       return NinePatch;
     }(GOClass);
-    Object.assign(NinePatch.prototype, Methods$l);
+    Object.assign(NinePatch.prototype, Methods$k);
     return NinePatch;
   };
 
@@ -1188,11 +1151,11 @@
     }
     return _createClass(NinePatch);
   }(NinePatchBase(RenderTexture$2, 'rexNinePatch'));
-  var Methods$k = {
+  var Methods$j = {
     _drawImage: DrawImage$2,
     _drawTileSprite: DrawTileSprite$1
   };
-  Object.assign(NinePatch$1.prototype, Methods$k);
+  Object.assign(NinePatch$1.prototype, Methods$j);
 
   var IsInValidKey = function IsInValidKey(keys) {
     return keys == null || keys === '' || keys.length === 0;
@@ -1398,7 +1361,7 @@
     }
   };
 
-  var methods$F = {
+  var methods$G = {
     setTexture: SetTexture,
     resize: Resize$1,
     setSize: Resize$1,
@@ -1409,7 +1372,7 @@
     getLastAppendedChildren: GetLastAppendedChildren$1,
     getChildren: GetChildren$1
   };
-  Object.assign(methods$F, TintMethods);
+  Object.assign(methods$G, TintMethods);
 
   var Stack = /*#__PURE__*/function () {
     function Stack() {
@@ -1597,7 +1560,7 @@
     return childA._depth - childB._depth;
   };
   var Components$4 = Phaser.GameObjects.Components;
-  Phaser.Class.mixin(Blitter, [Components$4.Alpha, Components$4.BlendMode, Components$4.ComputedSize, Components$4.Depth, Components$4.GetBounds, Components$4.Mask, Components$4.Origin, Components$4.Pipeline, Components$4.PostPipeline, Components$4.ScrollFactor, Components$4.Transform, Components$4.Visible, Render$4, methods$F]);
+  Phaser.Class.mixin(Blitter, [Components$4.Alpha, Components$4.BlendMode, Components$4.ComputedSize, Components$4.Depth, Components$4.GetBounds, Components$4.Mask, Components$4.Origin, Components$4.Pipeline, Components$4.PostPipeline, Components$4.ScrollFactor, Components$4.Transform, Components$4.Visible, Render$4, methods$G]);
 
   var ImageTypeName$1 = 'image';
 
@@ -2320,11 +2283,11 @@
     }]);
     return ImageData;
   }(RenderBase$1);
-  var methods$E = {
+  var methods$F = {
     webglRender: WebglRender,
     canvasRender: CanvasRender
   };
-  Object.assign(ImageData$1.prototype, methods$E);
+  Object.assign(ImageData$1.prototype, methods$F);
 
   var AddImage$2 = function AddImage(blitter, config) {
     if (typeof config === 'string') {
@@ -2373,7 +2336,7 @@
     }
   };
 
-  var Methods$j = {
+  var Methods$i = {
     _drawImage: DrawImage$1,
     _drawTileSprite: DrawTileSprite
   };
@@ -2394,7 +2357,7 @@
     }]);
     return NinePatch;
   }(NinePatchBase(Blitter, 'rexNinePatch2'));
-  Object.assign(NinePatch.prototype, Methods$j);
+  Object.assign(NinePatch.prototype, Methods$i);
 
   ObjectFactory.register('ninePatch2', function (x, y, width, height, key, columns, rows, config) {
     var gameObject = new NinePatch(this.scene, x, y, width, height, key, columns, rows, config);
@@ -6146,10 +6109,10 @@
     }]);
     return CanvasText;
   }();
-  var methods$D = {
+  var methods$E = {
     setInteractive: SetInteractive$1
   };
-  Object.assign(CanvasText.prototype, DrawMethods, methods$D);
+  Object.assign(CanvasText.prototype, DrawMethods, methods$E);
 
   var WrapTextLinesPool = /*#__PURE__*/function (_Pool) {
     _inherits(WrapTextLinesPool, _Pool);
@@ -6371,10 +6334,10 @@
     }]);
     return ImageManager;
   }();
-  var methods$C = {
+  var methods$D = {
     draw: DrawImage
   };
-  Object.assign(ImageManager.prototype, methods$C);
+  Object.assign(ImageManager.prototype, methods$D);
 
   var AppendText$2 = function AppendText(value, addCR) {
     if (!value && value !== 0) {
@@ -6914,10 +6877,10 @@
     }]);
     return Text;
   }(TextBase);
-  var methods$B = {
+  var methods$C = {
     appendText: AppendText$2
   };
-  Object.assign(Text.prototype, methods$B);
+  Object.assign(Text.prototype, methods$C);
 
   var SplitText = function SplitText(text, mode) {
     var TagRegex = this.tagRegex;
@@ -7466,13 +7429,13 @@
     }]);
     return Parser;
   }();
-  var methods$A = {
+  var methods$B = {
     splitText: SplitText,
     tagTextToProp: TagTextToProp,
     propToContextStyle: PropToContextStyle,
     propToTagText: PropToTagText
   };
-  Object.assign(Parser$2.prototype, methods$A);
+  Object.assign(Parser$2.prototype, methods$B);
 
   var BBCodeText = /*#__PURE__*/function (_Text) {
     _inherits(BBCodeText, _Text);
@@ -8120,11 +8083,11 @@
     return GetBobWorldPosition(this.parent, this, offsetX, offsetY, out);
   };
 
-  var Methods$i = {
+  var Methods$h = {
     contains: Contains$1,
     getWorldPosition: GetWorldPosition
   };
-  Object.assign(Methods$i, RenderMethods);
+  Object.assign(Methods$h, RenderMethods);
 
   var DegToRad$d = Phaser.Math.DegToRad;
   var RadToDeg$8 = Phaser.Math.RadToDeg;
@@ -8552,7 +8515,7 @@
     }]);
     return RenderBase;
   }(Base$2);
-  Object.assign(RenderBase.prototype, Methods$i);
+  Object.assign(RenderBase.prototype, Methods$h);
 
   var GetProperty = function GetProperty(name, config, defaultConfig) {
     if (config.hasOwnProperty(name)) {
@@ -11161,7 +11124,7 @@
     }
   };
 
-  var Methods$h = {
+  var Methods$g = {
     setFixedSize: SetFixedSize,
     setPadding: SetPadding,
     getPadding: GetPadding,
@@ -11210,7 +11173,7 @@
     setChildrenInteractiveEnable: SetChildrenInteractiveEnable,
     setInteractive: SetInteractive
   };
-  Object.assign(Methods$h, MoveChildMethods, BackgroundMethods, InnerBoundsMethods, SetAlignMethods, SetTextOXYMethods$1);
+  Object.assign(Methods$g, MoveChildMethods, BackgroundMethods, InnerBoundsMethods, SetAlignMethods, SetTextOXYMethods$1);
 
   var GetFastValue$1 = Phaser.Utils.Objects.GetFastValue;
   var Pools = {};
@@ -11343,7 +11306,7 @@
     }]);
     return DynamicText;
   }(Canvas$1);
-  Object.assign(DynamicText.prototype, Methods$h);
+  Object.assign(DynamicText.prototype, Methods$g);
 
   ObjectFactory.register('dynamicText', function (x, y, width, height, config) {
     var gameObject = new DynamicText(this.scene, x, y, width, height, config);
@@ -14235,10 +14198,10 @@
     return this;
   };
 
-  var Methods$g = {
+  var Methods$f = {
     drawGameObjectsBounds: DrawGameObjectsBounds
   };
-  Object.assign(Methods$g, GetMethods, AddMethods$1, RemoveMethods$1, PropertyMethods, CallMethods, DataMethods, FadeMethods$1);
+  Object.assign(Methods$f, GetMethods, AddMethods$1, RemoveMethods$1, PropertyMethods, CallMethods, DataMethods, FadeMethods$1);
 
   var CameraClass = Phaser.Cameras.Scene2D.BaseCamera;
   var IsCameraObject = function IsCameraObject(object) {
@@ -14379,7 +14342,7 @@
     }]);
     return GOManager;
   }();
-  Object.assign(GOManager.prototype, EventEmitterMethods$1, Methods$g);
+  Object.assign(GOManager.prototype, EventEmitterMethods$1, Methods$f);
 
   var SortGameObjectsByDepth = function SortGameObjectsByDepth(gameObjects, descending) {
     if (gameObjects.length <= 1) {
@@ -14592,8 +14555,8 @@
     }
   };
 
-  var methods$z = {};
-  Object.assign(methods$z, LayerMethods, DepthMethods);
+  var methods$A = {};
+  Object.assign(methods$A, LayerMethods, DepthMethods);
 
   var GetValue$3g = Phaser.Utils.Objects.GetValue;
   var LayerManager = /*#__PURE__*/function (_GOManager) {
@@ -14669,7 +14632,7 @@
     }
     return layer;
   };
-  Object.assign(LayerManager.prototype, methods$z);
+  Object.assign(LayerManager.prototype, methods$A);
 
   var GetSoundManager = function GetSoundManager(game) {
     if (IsSceneObject(game)) {
@@ -16049,10 +16012,10 @@
     }
   };
 
-  var Methods$f = {
+  var Methods$e = {
     hasAudio: HasaAudio
   };
-  Object.assign(Methods$f, BackgroundMusicMethods, BackgroundMusic2Methods, SoundEffectsMethods, SoundEffects2Methods);
+  Object.assign(Methods$e, BackgroundMusicMethods, BackgroundMusic2Methods, SoundEffectsMethods, SoundEffects2Methods);
 
   var GetValue$35 = Phaser.Utils.Objects.GetValue;
   var SoundManager = /*#__PURE__*/function () {
@@ -16227,7 +16190,7 @@
     }]);
     return SoundManager;
   }();
-  Object.assign(SoundManager.prototype, Methods$f);
+  Object.assign(SoundManager.prototype, Methods$e);
 
   var GetValue$34 = Phaser.Utils.Objects.GetValue;
   var BaseClock = /*#__PURE__*/function (_TickTask) {
@@ -16665,14 +16628,18 @@
         this.clearWaitCompleteCallbacks();
         this.parent = null;
       }
+
+      // Emit completeEvent (default value is 'complete') when eventEmitter firing eventName
     }, {
       key: "waitEvent",
       value: function waitEvent(eventEmitter, eventName, completeNextTick) {
         var callback = this.getWaitCompleteTriggerCallback(completeNextTick);
         eventEmitter.once(eventName, callback, this);
+        // Once completeEvent firing, remove pending eventName from eventEmitter
         this.parent.once(this.removeWaitEventsEventName, function () {
           eventEmitter.off(eventName, callback, this);
         });
+        // All pending eventName from eventEmitter will be removed at last
         return this.parent;
       }
     }, {
@@ -16748,19 +16715,41 @@
     setClickTarget: function setClickTarget(target) {
       this.clickTarget = target;
       if (!target) {
-        this.clickEE = null;
+        this.touchEE = null;
       } else if (IsSceneObject(target)) {
-        this.clickEE = target.input;
+        this.touchEE = target.input;
       } else {
         // Assume that target is a gameObject
-        this.clickEE = target.setInteractive();
+        this.touchEE = target.setInteractive();
       }
+      return this;
+    },
+    clearClickTarget: function clearClickTarget() {
+      this.setClickTarget();
+      return this;
+    },
+    setClickShortcutKeys: function setClickShortcutKeys(keys) {
+      this.clickShortcutKeys = keys;
+      return this;
+    },
+    clearClickShortcutKeys: function clearClickShortcutKeys() {
+      this.setShortcutKeys();
+      return this;
     },
     waitClick: function waitClick() {
-      if (!this.clickEE) {
-        return this.waitTime(0);
+      var touchEE = this.touchEE;
+      var clickShortcutKeys = this.clickShortcutKeys;
+      if (touchEE || clickShortcutKeys) {
+        if (touchEE) {
+          this.waitEvent(touchEE, 'pointerdown');
+        }
+        if (clickShortcutKeys) {
+          this.waitKeyDown(clickShortcutKeys);
+        }
+      } else {
+        this.waitTime(0);
       }
-      return this.waitEvent(this.clickEE, 'pointerdown');
+      return this;
     },
     waitKeyDown: function waitKeyDown(key) {
       var eventEmitter = this.scene.input.keyboard;
@@ -16770,7 +16759,7 @@
         } else {
           var keys = Split(key, '|');
           for (var i = 0, cnt = keys.length; i < cnt; i++) {
-            this.waitEvent(eventEmitter, "keydown-".concat(key.toUpperCase()));
+            this.waitEvent(eventEmitter, "keydown-".concat(keys[i].toUpperCase()));
           }
           return this.parent;
         }
@@ -16842,6 +16831,10 @@
   var WaitCameraMethods = {
     setCameraTarget: function setCameraTarget(camera) {
       this.cameraTarget = camera;
+      return this;
+    },
+    clearCameraTarget: function clearCameraTarget() {
+      this.setCameraTarget();
       return this;
     },
     waitCameraEffectComplete: function waitCameraEffectComplete(effectName) {
@@ -16943,7 +16936,7 @@
           break;
         case 'click':
           hasAnyWaitEvent = true;
-          this.waitClick(config.key);
+          this.waitClick();
           break;
         case 'key':
           hasAnyWaitEvent = true;
@@ -17019,6 +17012,11 @@
     return this.parent;
   };
 
+  var methods$z = {
+    waitAny: WaitAny$1
+  };
+  Object.assign(methods$z, WaitTimeMethods, WaitInputMethods, WaitGameObjectMethods, WaitCameraMethods, WaitMusicMethods);
+
   var WaitEventManager = /*#__PURE__*/function (_WaitEvent) {
     _inherits(WaitEventManager, _WaitEvent);
     function WaitEventManager(parent, config) {
@@ -17027,6 +17025,7 @@
       _this = _callSuper(this, WaitEventManager, [parent]);
       _this.waitCompleteEventName = GetValue$3D(config, 'completeEventName', _this.waitCompleteEventName);
       _this.setClickTarget(GetValue$3D(config, 'clickTarget', _this.scene));
+      _this.setClickShortcutKeys(GetValue$3D(config, 'clickShortcutKeys', undefined));
       _this.setCameraTarget(GetValue$3D(config, 'camera', _this.scene.cameras.main));
       return _this;
     }
@@ -17039,6 +17038,14 @@
         this.parent.clickTarget = value;
       }
     }, {
+      key: "clickShortcutKeys",
+      get: function get() {
+        return this.parent.clickShortcutKeys;
+      },
+      set: function set(value) {
+        this.parent.clickShortcutKeys = value;
+      }
+    }, {
       key: "cameraTarget",
       get: function get() {
         return this.parent.cameraTarget;
@@ -17049,8 +17056,9 @@
     }, {
       key: "destroy",
       value: function destroy() {
-        this.setClickTarget();
-        this.setCameraTarget();
+        this.clearClickTarget();
+        this.clearClickShortcutKeys();
+        this.clearCameraTarget();
         _get(_getPrototypeOf(WaitEventManager.prototype), "destroy", this).call(this);
       }
     }, {
@@ -17061,14 +17069,12 @@
     }]);
     return WaitEventManager;
   }(WaitEvent$1);
-  var Methods$e = {
-    waitAny: WaitAny$1
-  };
-  Object.assign(WaitEventManager.prototype, WaitTimeMethods, WaitInputMethods, WaitGameObjectMethods, WaitCameraMethods, WaitMusicMethods, Methods$e);
+  Object.assign(WaitEventManager.prototype, methods$z);
 
   var GetValue$32 = Phaser.Utils.Objects.GetValue;
   var InitManagers = function InitManagers(scene, config) {
     this.clickTarget = undefined;
+    this.clickShortcutKeys = undefined;
     this.cameraTarget = undefined;
     this.managersScene = scene;
     this.gameObjectManagers = {};
@@ -17127,6 +17133,7 @@
       this.timeline = undefined;
     }
     this.clickTarget = undefined;
+    this.clickShortcutKeys = undefined;
     this.cameraTarget = undefined;
     this.managersScene = undefined;
   };
@@ -49236,10 +49243,18 @@
       return this;
     },
     setValue: function setValue(value, min, max) {
+      if (min === undefined) {
+        min = this.minValue;
+      } else {
+        this.minValue = min;
+      }
+      if (max === undefined) {
+        max = this.maxValue;
+      } else {
+        this.maxValue = max;
+      }
       value = Clamp$5(value, min, max);
       this.value = value;
-      this.minValue = min;
-      this.maxValue = max;
       this.updateValueText(value, min, max);
       this.setBarValue(value, min, max);
       return this;
@@ -49249,8 +49264,16 @@
       return this;
     },
     easeValueTo: function easeValueTo(value, min, max) {
-      this.minValue = min;
-      this.maxValue = max;
+      if (min === undefined) {
+        min = this.minValue;
+      } else {
+        this.minValue = min;
+      }
+      if (max === undefined) {
+        max = this.maxValue;
+      } else {
+        this.maxValue = max;
+      }
       if (this.easeValueTask === undefined) {
         this.easeValueTask = new EaseValueTask(this);
         this.easeValueTask.on('update', function () {
@@ -56444,7 +56467,12 @@
         this.setText(GetValue$U(o, 'text', ''));
         this.startLineIndex = GetValue$U(o, 'start', -1);
         this.endLineIndex = GetValue$U(o, 'end', undefined);
-        this.setPageIndex(GetValue$U(o, 'page', -1));
+        var pageIndex = GetValue$U(o, 'page');
+        if (pageIndex === undefined) {
+          this.resetIndex();
+        } else {
+          this.setPageIndex(pageIndex);
+        }
         return this;
       }
     }, {
@@ -56565,17 +56593,17 @@
   }(ComponentBase);
   Object.assign(TextPage.prototype, Methods$1);
 
-  var StartTyping = function StartTyping(text, speed, startIdx, timerStartAt) {
+  var StartTyping = function StartTyping(text, speed, startIndex, timerStartAt) {
     if (text !== undefined) {
       this.setTypingContent(text);
     }
     if (speed !== undefined) {
       this.speed = speed;
     }
-    if (startIdx === undefined) {
-      startIdx = 0;
+    if (startIndex === undefined) {
+      startIndex = 0;
     }
-    this.typingIdx = startIdx + 1;
+    this.typingIndex = startIndex + 1;
     if (this.speed === 0) {
       this.stop(true);
     } else {
@@ -56592,11 +56620,14 @@
     return text;
   };
 
-  var StartTypingFromLine = function StartTypingFromLine(text, lineIndex, speed, timerStartAt) {
+  var StartTypingFromLine = function StartTypingFromLine(text, lineIndex, speed, offsetIndex, timerStartAt) {
     var startIdx;
     if (lineIndex > 0) {
+      if (offsetIndex === undefined) {
+        offsetIndex = 0;
+      }
       var plainText = GetPlainText(this.parent, text);
-      startIdx = GetNewLineIndex(plainText, lineIndex);
+      startIdx = GetNewLineIndex(plainText, lineIndex) + offsetIndex;
     }
     return this.start(text, speed, startIdx, timerStartAt);
   };
@@ -56621,34 +56652,34 @@
     return result;
   };
 
-  var GetTypingString = function GetTypingString(text, typeIdx, textLen, typeMode) {
+  var GetTypingString = function GetTypingString(text, typeIdx, textLength, typeMode) {
     var textObject = this.parent;
     var result;
     if (typeMode === 0) {
       //left-to-right
       var startIdx = 0;
       var endIdx = typeIdx;
-      this.insertIdx = endIdx;
+      this.insertIndex = endIdx;
       result = GetSubString(textObject, text, startIdx, endIdx);
     } else if (typeMode === 1) {
       //right-to-left
-      var endIdx = textLen;
+      var endIdx = textLength;
       var startIdx = endIdx - typeIdx;
-      this.insertIdx = 0;
+      this.insertIndex = 0;
       result = GetSubString(textObject, text, startIdx, endIdx);
     } else if (typeMode === 2) {
       //middle-to-sides
-      var midIdx = textLen / 2;
+      var midIdx = textLength / 2;
       var startIdx = Math.floor(midIdx - typeIdx / 2);
       var endIdx = startIdx + typeIdx;
-      this.insertIdx = typeIdx % 2 ? typeIdx : 0;
+      this.insertIndex = typeIdx % 2 ? typeIdx : 0;
       result = GetSubString(textObject, text, startIdx, endIdx);
     } else if (typeMode === 3) {
       //sides-to-middle
       var lowerLen = Math.floor(typeIdx / 2);
       var lowerResult;
       if (lowerLen > 0) {
-        var endIdx = textLen;
+        var endIdx = textLength;
         var startIdx = endIdx - lowerLen;
         lowerResult = GetSubString(textObject, text, startIdx, endIdx);
       } else {
@@ -56659,15 +56690,15 @@
       if (upperLen > 0) {
         var startIdx = 0;
         var endIdx = startIdx + upperLen;
-        this.insertIdx = endIdx;
+        this.insertIndex = endIdx;
         upperResult = GetSubString(textObject, text, startIdx, endIdx);
       } else {
         upperResult = "";
-        this.insertIdx = 0;
+        this.insertIndex = 0;
       }
       result = upperResult + lowerResult;
     }
-    this.insertChar = result.charAt(this.insertIdx - 1);
+    this.insertChar = result.charAt(this.insertIndex - 1);
     return result;
   };
 
@@ -56679,9 +56710,9 @@
     if (showAllText) {
       // Fire 'type' event for remainder characters until lastChar
       while (!this.isLastChar) {
-        GetTypingString.call(this, this.text, this.typingIdx, this.textLen, this.typeMode);
+        GetTypingString.call(this, this.text, this.typingIndex, this.textLength, this.typeMode);
         this.emit('typechar', this.insertChar);
-        this.typingIdx++;
+        this.typingIndex++;
       }
       // Display all characters on text game object
       this.setText(this.text);
@@ -56712,7 +56743,7 @@
     if (this.isTyping) {
       this.setTypingContent(newText);
     } else {
-      this.start(newText, undefined, this.textLen);
+      this.start(newText, undefined, this.textLength);
     }
     return this;
   };
@@ -56766,12 +56797,12 @@
         this.setTextCallback = GetFastValue(o, 'setTextCallback', null);
         this.setTextCallbackScope = GetFastValue(o, 'setTextCallbackScope', null);
         this.setTypingContent(GetFastValue(o, 'text', ''));
-        this.typingIdx = GetFastValue(o, 'typingIdx', 0);
-        this.insertIdx = null;
+        this.typingIndex = GetFastValue(o, 'typingIndex', 0);
+        this.insertIndex = null;
         this.insertChar = null;
         var elapsed = GetFastValue(o, 'elapsed', null);
         if (elapsed !== null) {
-          this.start(undefined, undefined, this.typingIdx, elapsed);
+          this.start(undefined, undefined, this.typingIndex, elapsed);
         }
         return this;
       }
@@ -56835,19 +56866,19 @@
     }, {
       key: "isLastChar",
       get: function get() {
-        return this.typingIdx === this.textLen;
+        return this.typingIndex === this.textLength;
       }
     }, {
       key: "setTypingContent",
       value: function setTypingContent(text) {
         this.text = text;
-        this.textLen = GetPlainText(this.parent, this.text).length;
+        this.textLength = GetPlainText(this.parent, this.text).length;
         return this;
       }
     }, {
       key: "onTyping",
       value: function onTyping() {
-        var newText = GetTypingString.call(this, this.text, this.typingIdx, this.textLen, this.typeMode);
+        var newText = GetTypingString.call(this, this.text, this.typingIndex, this.textLength, this.typeMode);
         this.setText(newText);
         this.emit('typechar', this.insertChar);
         this.emit('type');
@@ -56856,7 +56887,7 @@
           this.emit('complete', this, this.parent);
         } else {
           this.timer.delay = this.speed; // delay of next typing            
-          this.typingIdx++;
+          this.typingIndex++;
         }
       }
     }, {
@@ -56902,9 +56933,9 @@
       value: function setText(text) {
         if (this.setTextCallback) {
           if (this.setTextCallbackScope) {
-            text = this.setTextCallback.call(this.setTextCallbackScope, text, this.isLastChar, this.insertIdx);
+            text = this.setTextCallback.call(this.setTextCallbackScope, text, this.isLastChar, this.insertIndex);
           } else {
-            text = this.setTextCallback(text, this.isLastChar, this.insertIdx);
+            text = this.setTextCallback(text, this.isLastChar, this.insertIndex);
           }
         }
         if (this.textWrapEnable) {
@@ -57006,12 +57037,13 @@
       }, {
         key: "start",
         value: function start(text, speed) {
-          // Start typing task
-          this.isRunning = true;
-          this.page.setText(text);
           if (speed !== undefined) {
             this.setTypingSpeed(speed);
           }
+
+          // Start typing task
+          this.isRunning = true;
+          this.page.setText(text);
           this.emit('start');
           if (this.typingMode === 0) {
             // Typing page by page
@@ -57021,6 +57053,27 @@
             this.typeNextLine();
           }
           return this;
+        }
+      }, {
+        key: "more",
+        value: function more(text, speed) {
+          if (speed !== undefined) {
+            this.setTypingSpeed(speed);
+          }
+          if (this.isRunning) {
+            this.page.appendText(text);
+            this.typing.appendText(text);
+          } else {
+            this.isRunning = true;
+            this.page.appendText(text);
+            this.emit('start');
+            if (this.typingMode === 0) {
+              var txt = this.page.getPage();
+              var startIndex = this.typing.textLength;
+              this.typing.start(txt, undefined, startIndex);
+            }
+            return this;
+          }
         }
       }, {
         key: "typeNextPage",
@@ -57059,6 +57112,7 @@
             // Stop typing tasl if typing complete at last line
 
             this.isRunning = false;
+            this.emit('pageend');
             this.emit('complete');
           }
         }
@@ -64061,6 +64115,9 @@
           if (!this.validate(value)) {
             value = this._value; // Back to previous value
           }
+          if (this.filterValueCallback) {
+            value = this.filterValueCallback(this, value);
+          }
           if (this.displayValueCallback) {
             this.displayValueCallback(this, value);
           }
@@ -64140,6 +64197,12 @@
           return this;
         }
       }, {
+        key: "setFilterValueCallback",
+        value: function setFilterValueCallback(callback) {
+          this.filterValueCallback = callback;
+          return this;
+        }
+      }, {
         key: "setDisplayValueCallback",
         value: function setDisplayValueCallback(callback) {
           this.displayValueCallback = callback;
@@ -64172,7 +64235,7 @@
         var InputFieldClass = GenerateInputFieldClass(handler.baseClass);
         inputField = new InputFieldClass(scene);
         scene.add.existing(inputField);
-        inputField.setSetupCallback(handler.setup).setDisplayValueCallback(handler.displayValue);
+        inputField.setSetupCallback(handler.setup).setFilterValueCallback(handler.filterValue).setDisplayValueCallback(handler.displayValue);
         handler.build(inputField, style);
         break;
       }
@@ -64389,6 +64452,68 @@
     return this;
   };
 
+  var AddRows = function AddRows(properties, target) {
+    AddProperties(this, properties, target);
+    return this;
+  };
+  var AddProperties = function AddProperties(tweaker, properties, target) {
+    if (!properties) {
+      return;
+    }
+    for (var i = 0, cnt = properties.length; i < cnt; i++) {
+      var property = properties[i];
+      if (property.hasOwnProperty('$target')) {
+        target = property.$target;
+      }
+      var type = property.$type;
+      switch (type) {
+        case 'folder':
+          var folder = tweaker.addFolder(property);
+          AddProperties(folder, property.$properties, target);
+          break;
+        case 'tab':
+          var pages = tweaker.addTab(property);
+          for (var pIdx = 0, pcnt = pages.length; pIdx < pcnt; pIdx++) {
+            AddProperties(pages[pIdx], property.pages[pIdx].$properties, target);
+          }
+          break;
+        case 'separator':
+          tweaker.addSeparator();
+          break;
+        case 'button':
+          property.bindingTarget = target;
+          tweaker.addButton(property);
+          break;
+        case 'buttons':
+          property.bindingTarget = target;
+          tweaker.addButtons(property);
+          break;
+        default:
+          if (property.$key.indexOf('.') === -1) {
+            property.bindingTarget = target;
+            property.bindingKey = property.$key;
+          } else {
+            var keys = property.$key.split('.');
+            property.bindingKey = keys.pop();
+            var bindingTarget = target;
+            for (var k = 0, kcnt = keys.length; k < kcnt; k++) {
+              bindingTarget = bindingTarget[keys[k]];
+              if (!target) {
+                console.warn("[Monitor] Key path '".concat(property.$key, "' is invalid"));
+                continue;
+              }
+            }
+            property.bindingTarget = bindingTarget;
+          }
+          if (!property.hasOwnProperty('monitor')) {
+            property.monitor = true;
+          }
+          tweaker.addInput(property);
+          break;
+      }
+    }
+  };
+
   var SetBindingTarget = function SetBindingTarget(target) {
     var children = this.sizerChildren;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
@@ -64448,6 +64573,7 @@
     addButtons: AddButtons,
     addButton: AddButton,
     addSeparator: AddSeparator,
+    addRows: AddRows,
     setBindingTarget: SetBindingTarget,
     getMaxInputRowTitleWidth: GetMaxInputRowTitleWidth,
     setInputRowTitleWidth: SetInputRowTitleWidth
@@ -64651,6 +64777,15 @@
     setup: function setup(gameObject, config, setDefaults) {
       if (setDefaults || config.hasOwnProperty('inputTextReadOnly')) {
         SetInputTextReadOnly$1(gameObject, !!config.inputTextReadOnly);
+      }
+      gameObject.isFloatType = !config["int"];
+    },
+    // Callback inside `setValue()`
+    filterValue: function filterValue(gameObject, value) {
+      if (gameObject.isFloatType) {
+        return value;
+      } else {
+        return Math.floor(value);
       }
     },
     // Callback inside `setValue()`

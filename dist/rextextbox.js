@@ -760,7 +760,12 @@
         this.setText(GetValue$U(o, 'text', ''));
         this.startLineIndex = GetValue$U(o, 'start', -1);
         this.endLineIndex = GetValue$U(o, 'end', undefined);
-        this.setPageIndex(GetValue$U(o, 'page', -1));
+        var pageIndex = GetValue$U(o, 'page');
+        if (pageIndex === undefined) {
+          this.resetIndex();
+        } else {
+          this.setPageIndex(pageIndex);
+        }
         return this;
       }
     }, {
@@ -881,17 +886,17 @@
   }(ComponentBase);
   Object.assign(TextPage.prototype, Methods$2);
 
-  var StartTyping = function StartTyping(text, speed, startIdx, timerStartAt) {
+  var StartTyping = function StartTyping(text, speed, startIndex, timerStartAt) {
     if (text !== undefined) {
       this.setTypingContent(text);
     }
     if (speed !== undefined) {
       this.speed = speed;
     }
-    if (startIdx === undefined) {
-      startIdx = 0;
+    if (startIndex === undefined) {
+      startIndex = 0;
     }
-    this.typingIdx = startIdx + 1;
+    this.typingIndex = startIndex + 1;
     if (this.speed === 0) {
       this.stop(true);
     } else {
@@ -908,11 +913,14 @@
     return text;
   };
 
-  var StartTypingFromLine = function StartTypingFromLine(text, lineIndex, speed, timerStartAt) {
+  var StartTypingFromLine = function StartTypingFromLine(text, lineIndex, speed, offsetIndex, timerStartAt) {
     var startIdx;
     if (lineIndex > 0) {
+      if (offsetIndex === undefined) {
+        offsetIndex = 0;
+      }
       var plainText = GetPlainText(this.parent, text);
-      startIdx = GetNewLineIndex(plainText, lineIndex);
+      startIdx = GetNewLineIndex(plainText, lineIndex) + offsetIndex;
     }
     return this.start(text, speed, startIdx, timerStartAt);
   };
@@ -937,34 +945,34 @@
     return result;
   };
 
-  var GetTypingString = function GetTypingString(text, typeIdx, textLen, typeMode) {
+  var GetTypingString = function GetTypingString(text, typeIdx, textLength, typeMode) {
     var textObject = this.parent;
     var result;
     if (typeMode === 0) {
       //left-to-right
       var startIdx = 0;
       var endIdx = typeIdx;
-      this.insertIdx = endIdx;
+      this.insertIndex = endIdx;
       result = GetSubString(textObject, text, startIdx, endIdx);
     } else if (typeMode === 1) {
       //right-to-left
-      var endIdx = textLen;
+      var endIdx = textLength;
       var startIdx = endIdx - typeIdx;
-      this.insertIdx = 0;
+      this.insertIndex = 0;
       result = GetSubString(textObject, text, startIdx, endIdx);
     } else if (typeMode === 2) {
       //middle-to-sides
-      var midIdx = textLen / 2;
+      var midIdx = textLength / 2;
       var startIdx = Math.floor(midIdx - typeIdx / 2);
       var endIdx = startIdx + typeIdx;
-      this.insertIdx = typeIdx % 2 ? typeIdx : 0;
+      this.insertIndex = typeIdx % 2 ? typeIdx : 0;
       result = GetSubString(textObject, text, startIdx, endIdx);
     } else if (typeMode === 3) {
       //sides-to-middle
       var lowerLen = Math.floor(typeIdx / 2);
       var lowerResult;
       if (lowerLen > 0) {
-        var endIdx = textLen;
+        var endIdx = textLength;
         var startIdx = endIdx - lowerLen;
         lowerResult = GetSubString(textObject, text, startIdx, endIdx);
       } else {
@@ -975,15 +983,15 @@
       if (upperLen > 0) {
         var startIdx = 0;
         var endIdx = startIdx + upperLen;
-        this.insertIdx = endIdx;
+        this.insertIndex = endIdx;
         upperResult = GetSubString(textObject, text, startIdx, endIdx);
       } else {
         upperResult = "";
-        this.insertIdx = 0;
+        this.insertIndex = 0;
       }
       result = upperResult + lowerResult;
     }
-    this.insertChar = result.charAt(this.insertIdx - 1);
+    this.insertChar = result.charAt(this.insertIndex - 1);
     return result;
   };
 
@@ -995,9 +1003,9 @@
     if (showAllText) {
       // Fire 'type' event for remainder characters until lastChar
       while (!this.isLastChar) {
-        GetTypingString.call(this, this.text, this.typingIdx, this.textLen, this.typeMode);
+        GetTypingString.call(this, this.text, this.typingIndex, this.textLength, this.typeMode);
         this.emit('typechar', this.insertChar);
-        this.typingIdx++;
+        this.typingIndex++;
       }
       // Display all characters on text game object
       this.setText(this.text);
@@ -1028,7 +1036,7 @@
     if (this.isTyping) {
       this.setTypingContent(newText);
     } else {
-      this.start(newText, undefined, this.textLen);
+      this.start(newText, undefined, this.textLength);
     }
     return this;
   };
@@ -1082,12 +1090,12 @@
         this.setTextCallback = GetFastValue$1(o, 'setTextCallback', null);
         this.setTextCallbackScope = GetFastValue$1(o, 'setTextCallbackScope', null);
         this.setTypingContent(GetFastValue$1(o, 'text', ''));
-        this.typingIdx = GetFastValue$1(o, 'typingIdx', 0);
-        this.insertIdx = null;
+        this.typingIndex = GetFastValue$1(o, 'typingIndex', 0);
+        this.insertIndex = null;
         this.insertChar = null;
         var elapsed = GetFastValue$1(o, 'elapsed', null);
         if (elapsed !== null) {
-          this.start(undefined, undefined, this.typingIdx, elapsed);
+          this.start(undefined, undefined, this.typingIndex, elapsed);
         }
         return this;
       }
@@ -1151,19 +1159,19 @@
     }, {
       key: "isLastChar",
       get: function get() {
-        return this.typingIdx === this.textLen;
+        return this.typingIndex === this.textLength;
       }
     }, {
       key: "setTypingContent",
       value: function setTypingContent(text) {
         this.text = text;
-        this.textLen = GetPlainText(this.parent, this.text).length;
+        this.textLength = GetPlainText(this.parent, this.text).length;
         return this;
       }
     }, {
       key: "onTyping",
       value: function onTyping() {
-        var newText = GetTypingString.call(this, this.text, this.typingIdx, this.textLen, this.typeMode);
+        var newText = GetTypingString.call(this, this.text, this.typingIndex, this.textLength, this.typeMode);
         this.setText(newText);
         this.emit('typechar', this.insertChar);
         this.emit('type');
@@ -1172,7 +1180,7 @@
           this.emit('complete', this, this.parent);
         } else {
           this.timer.delay = this.speed; // delay of next typing            
-          this.typingIdx++;
+          this.typingIndex++;
         }
       }
     }, {
@@ -1218,9 +1226,9 @@
       value: function setText(text) {
         if (this.setTextCallback) {
           if (this.setTextCallbackScope) {
-            text = this.setTextCallback.call(this.setTextCallbackScope, text, this.isLastChar, this.insertIdx);
+            text = this.setTextCallback.call(this.setTextCallbackScope, text, this.isLastChar, this.insertIndex);
           } else {
-            text = this.setTextCallback(text, this.isLastChar, this.insertIdx);
+            text = this.setTextCallback(text, this.isLastChar, this.insertIndex);
           }
         }
         if (this.textWrapEnable) {
@@ -1322,12 +1330,13 @@
       }, {
         key: "start",
         value: function start(text, speed) {
-          // Start typing task
-          this.isRunning = true;
-          this.page.setText(text);
           if (speed !== undefined) {
             this.setTypingSpeed(speed);
           }
+
+          // Start typing task
+          this.isRunning = true;
+          this.page.setText(text);
           this.emit('start');
           if (this.typingMode === 0) {
             // Typing page by page
@@ -1337,6 +1346,27 @@
             this.typeNextLine();
           }
           return this;
+        }
+      }, {
+        key: "more",
+        value: function more(text, speed) {
+          if (speed !== undefined) {
+            this.setTypingSpeed(speed);
+          }
+          if (this.isRunning) {
+            this.page.appendText(text);
+            this.typing.appendText(text);
+          } else {
+            this.isRunning = true;
+            this.page.appendText(text);
+            this.emit('start');
+            if (this.typingMode === 0) {
+              var txt = this.page.getPage();
+              var startIndex = this.typing.textLength;
+              this.typing.start(txt, undefined, startIndex);
+            }
+            return this;
+          }
         }
       }, {
         key: "typeNextPage",
@@ -1375,6 +1405,7 @@
             // Stop typing tasl if typing complete at last line
 
             this.isRunning = false;
+            this.emit('pageend');
             this.emit('complete');
           }
         }
@@ -6334,7 +6365,7 @@
     return WaitEvent(eventEmitter, 'complete');
   };
 
-  var IsPlainObject$a = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$9 = Phaser.Utils.Objects.IsPlainObject;
   var OnInitScale = function OnInitScale(gameObject, scale) {
     // Route 'complete' of scale to gameObject
     scale.completeEventName = undefined;
@@ -6355,7 +6386,7 @@
   };
   var ScaleMethods = {
     popUp: function popUp(duration, orientation, ease) {
-      if (IsPlainObject$a(duration)) {
+      if (IsPlainObject$9(duration)) {
         var config = duration;
         duration = config.duration;
         orientation = config.orientation;
@@ -6374,7 +6405,7 @@
       return WaitComplete(this._scaleBehavior);
     },
     scaleDownDestroy: function scaleDownDestroy(duration, orientation, ease, destroyMode) {
-      if (IsPlainObject$a(duration)) {
+      if (IsPlainObject$9(duration)) {
         var config = duration;
         duration = config.duration;
         orientation = config.orientation;
@@ -6402,7 +6433,7 @@
       return WaitComplete(this._scaleBehavior);
     },
     scaleYoyo: function scaleYoyo(duration, peakValue, repeat, orientation, ease) {
-      if (IsPlainObject$a(duration)) {
+      if (IsPlainObject$9(duration)) {
         var config = duration;
         duration = config.duration;
         peakValue = config.peakValue;
@@ -6505,10 +6536,10 @@
     yoyo: 2
   };
 
-  var IsPlainObject$9 = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$8 = Phaser.Utils.Objects.IsPlainObject;
   var FadeIn = function FadeIn(gameObject, duration, alpha, fade) {
     var startAlpha, endAlpha;
-    if (IsPlainObject$9(alpha)) {
+    if (IsPlainObject$8(alpha)) {
       startAlpha = alpha.start;
       endAlpha = alpha.end;
     } else {
@@ -6557,7 +6588,7 @@
     return fade;
   };
 
-  var IsPlainObject$8 = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$7 = Phaser.Utils.Objects.IsPlainObject;
   var OnInitFade = function OnInitFade(gameObject, fade) {
     // Route 'complete' of fade to gameObject
     fade.completeEventName = undefined;
@@ -6578,7 +6609,7 @@
   };
   var FadeMethods = {
     fadeIn: function fadeIn(duration, alpha) {
-      if (IsPlainObject$8(duration)) {
+      if (IsPlainObject$7(duration)) {
         var config = duration;
         duration = config.duration;
         alpha = config.alpha;
@@ -6596,7 +6627,7 @@
       return WaitComplete(this._fade);
     },
     fadeOutDestroy: function fadeOutDestroy(duration, destroyMode) {
-      if (IsPlainObject$8(duration)) {
+      if (IsPlainObject$7(duration)) {
         var config = duration;
         duration = config.duration;
         destroyMode = config.destroy;
@@ -6813,7 +6844,7 @@
     return easeMove;
   };
 
-  var IsPlainObject$7 = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$6 = Phaser.Utils.Objects.IsPlainObject;
   var DistanceBetween$3 = Phaser.Math.Distance.Between;
   var OnInitEaseMove = function OnInitEaseMove(gameObject, easeMove) {
     // Route 'complete' of easeMove to gameObject
@@ -6835,7 +6866,7 @@
   };
   var EaseMoveMethods = {
     moveFrom: function moveFrom(duration, x, y, ease, destroyMode) {
-      if (IsPlainObject$7(duration)) {
+      if (IsPlainObject$6(duration)) {
         var config = duration;
         x = config.x;
         y = config.y;
@@ -6867,7 +6898,7 @@
       return WaitComplete(this._easeMove);
     },
     moveTo: function moveTo(duration, x, y, ease, destroyMode) {
-      if (IsPlainObject$7(duration)) {
+      if (IsPlainObject$6(duration)) {
         var config = duration;
         x = config.x;
         y = config.y;
@@ -7157,7 +7188,7 @@
     decay: 1
   };
 
-  var IsPlainObject$6 = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$5 = Phaser.Utils.Objects.IsPlainObject;
   var OnInitShake = function OnInitShake(gameObject, shake) {
     // Route 'complete' of shake to gameObject
     shake.on('complete', function () {
@@ -7168,7 +7199,7 @@
   };
   var ShakeMethods = {
     shake: function shake(duration, magnitude, magnitudeMode) {
-      if (IsPlainObject$6(duration)) {
+      if (IsPlainObject$5(duration)) {
         var config = duration;
         duration = config.duration;
         magnitude = config.magnitude;
@@ -7246,7 +7277,7 @@
     return EaseValueTask;
   }(EaseValueTaskBase);
 
-  var IsPlainObject$5 = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$4 = Phaser.Utils.Objects.IsPlainObject;
   var EaseData = /*#__PURE__*/function (_ComponentBase) {
     _inherits(EaseData, _ComponentBase);
     function EaseData(parent, config) {
@@ -7279,7 +7310,7 @@
     }, {
       key: "easeTo",
       value: function easeTo(key, value, duration, ease) {
-        if (IsPlainObject$5(key)) {
+        if (IsPlainObject$4(key)) {
           var config = key;
           key = config.key;
           value = config.value;
@@ -7308,7 +7339,7 @@
     }, {
       key: "easeFrom",
       value: function easeFrom(key, value, duration, ease) {
-        if (IsPlainObject$5(key)) {
+        if (IsPlainObject$4(key)) {
           var config = key;
           key = config.key;
           value = config.value;
@@ -9412,9 +9443,9 @@
     }
   };
 
-  var IsPlainObject$4 = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$3 = Phaser.Utils.Objects.IsPlainObject;
   var SetDraggable = function SetDraggable(sensor, draggable, dragTarget) {
-    if (IsPlainObject$4(sensor)) {
+    if (IsPlainObject$3(sensor)) {
       var config = sensor;
       sensor = config.sensor;
       dragTarget = config.target;
@@ -12746,7 +12777,7 @@
     return nearestIndex;
   };
 
-  var IsPlainObject$3 = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$2 = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$d = Phaser.Utils.Objects.GetValue;
   var ALIGN_CENTER = Phaser.Display.Align.CENTER;
   var PROPORTIONMODE = {
@@ -12761,7 +12792,7 @@
       return this;
     } else if (proportionType === 'number') ; else if (proportionType === 'string') {
       proportion = PROPORTIONMODE[proportion];
-    } else if (IsPlainObject$3(proportion)) {
+    } else if (IsPlainObject$2(proportion)) {
       var config = proportion;
       proportion = GetValue$d(config, 'proportion', undefined);
       align = GetValue$d(config, 'align', ALIGN_CENTER);
@@ -12869,7 +12900,7 @@
       return this;
     },
     insert: function insert(index, gameObject, proportion, align, paddingConfig, expand, childKey, minSize) {
-      if (IsPlainObject$3(proportion)) {
+      if (IsPlainObject$2(proportion)) {
         proportion.index = index;
       }
       Add.call(this, gameObject, proportion, align, paddingConfig, expand, childKey, index, minSize);
@@ -13085,26 +13116,26 @@
     return orientation;
   };
 
-  var IsPlainObject$2 = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$c = Phaser.Utils.Objects.GetValue;
   var Sizer = /*#__PURE__*/function (_BaseSizer) {
     _inherits(Sizer, _BaseSizer);
     function Sizer(scene, x, y, minWidth, minHeight, orientation, config) {
       var _this;
       _classCallCheck(this, Sizer);
-      if (IsPlainObject$2(x)) {
+      if (IsPlainObject$1(x)) {
         config = x;
         x = GetValue$c(config, 'x', 0);
         y = GetValue$c(config, 'y', 0);
         minWidth = GetValue$c(config, 'width', undefined);
         minHeight = GetValue$c(config, 'height', undefined);
         orientation = GetValue$c(config, 'orientation', 0);
-      } else if (IsPlainObject$2(minWidth)) {
+      } else if (IsPlainObject$1(minWidth)) {
         config = minWidth;
         minWidth = GetValue$c(config, 'width', undefined);
         minHeight = GetValue$c(config, 'height', undefined);
         orientation = GetValue$c(config, 'orientation', 0);
-      } else if (IsPlainObject$2(orientation)) {
+      } else if (IsPlainObject$1(orientation)) {
         config = orientation;
         orientation = GetValue$c(config, 'orientation', 0);
       }
@@ -17158,72 +17189,35 @@
     return this;
   };
 
-  /**
-   * @author       Richard Davey <rich@photonstorm.com>
-   * @copyright    2018 Photon Storm Ltd.
-   * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
-   */
-
-  /**
-   * This is a slightly modified version of jQuery.isPlainObject.
-   * A plain object is an object whose internal class property is [object Object].
-   *
-   * @function Phaser.Utils.Objects.IsPlainObject
-   * @since 3.0.0
-   *
-   * @param {object} obj - The object to inspect.
-   *
-   * @return {boolean} `true` if the object is plain, otherwise `false`.
-   */
-  var IsPlainObject$1 = function IsPlainObject(obj) {
-    // Not plain objects:
-    // - Any object or value whose internal [[Class]] property is not "[object Object]"
-    // - DOM nodes
-    // - window
-    if (_typeof(obj) !== 'object' || obj.nodeType || obj === obj.window) {
-      return false;
+  function DeepClone(obj) {
+    if (obj === null || _typeof(obj) !== "object") {
+      // If obj is a primitive value or null, return it directly
+      return obj;
+    }
+    if (Array.isArray(obj)) {
+      // If obj is an array, create a new array and clone each element
+      return obj.map(function (item) {
+        return DeepClone(item);
+      });
+    }
+    if (obj instanceof Date) {
+      // If obj is a Date object, create a new Date object with the same value
+      return new Date(obj);
+    }
+    if (obj instanceof RegExp) {
+      // If obj is a RegExp object, create a new RegExp object with the same pattern and flags
+      return new RegExp(obj);
     }
 
-    // Support: Firefox <20
-    // The try/catch suppresses exceptions thrown when attempting to access
-    // the "constructor" property of certain host objects, ie. |window.location|
-    // https://bugzilla.mozilla.org/show_bug.cgi?id=814622
-    try {
-      if (obj.constructor && !{}.hasOwnProperty.call(obj.constructor.prototype, 'isPrototypeOf')) {
-        return false;
+    // If obj is a plain object or a custom object, create a new object and clone each property
+    var clonedObj = {};
+    for (var key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        clonedObj[key] = DeepClone(obj[key]);
       }
-    } catch (e) {
-      return false;
     }
-
-    // If the function hasn't returned already, we're confident that
-    // |obj| is a plain object, created by {} or constructed with new Object
-    return true;
-  };
-
-  var DeepClone = function DeepClone(inObject) {
-    var outObject;
-    var value;
-    var key;
-    if (inObject == null || _typeof(inObject) !== 'object') {
-      //  inObject is not an object
-      return inObject;
-    }
-
-    //  Create an array or object to hold the values
-    outObject = Array.isArray(inObject) ? [] : {};
-    if (IsPlainObject$1(inObject)) {
-      for (key in inObject) {
-        value = inObject[key];
-
-        //  Recursively (deep) copy for nested objects, including arrays
-        outObject[key] = DeepClone(value);
-      }
-    } else {
-      outObject = inObject;
-    }
-    return outObject;
-  };
+    return clonedObj;
+  }
 
   var SetWrapConfig = function SetWrapConfig(config) {
     if (config === undefined) {
