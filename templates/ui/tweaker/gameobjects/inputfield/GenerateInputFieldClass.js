@@ -7,11 +7,13 @@ var GenerateInputFieldClass = function (BaseClass) {
 
     class InputFiled extends BaseClass {
         get bindingTarget() {
-            return this.getParentSizer().bindingTarget;
+            var inputRow = this.getParentSizer();
+            return inputRow.bindingTarget;
         }
 
         get bindingKey() {
-            return this.getParentSizer().bindTargetKey;
+            var inputRow = this.getParentSizer();
+            return inputRow.bindTargetKey;
         }
 
         get value() {

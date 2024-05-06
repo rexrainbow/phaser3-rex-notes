@@ -78700,12 +78700,14 @@
       _createClass(InputFiled, [{
         key: "bindingTarget",
         get: function get() {
-          return this.getParentSizer().bindingTarget;
+          var inputRow = this.getParentSizer();
+          return inputRow.bindingTarget;
         }
       }, {
         key: "bindingKey",
         get: function get() {
-          return this.getParentSizer().bindTargetKey;
+          var inputRow = this.getParentSizer();
+          return inputRow.bindTargetKey;
         }
       }, {
         key: "value",
@@ -78731,8 +78733,18 @@
           var oldValue = this._value;
           this._value = value;
           if (!this.syncValueFlag) {
-            this.emit('valuechange', value, oldValue, this.bindingTarget, this.bindingKey);
+            var bindingTarget = this.bindingTarget;
+            var bindingKey = this.bindingKey;
+            this.emit('valuechange', value, oldValue, bindingTarget, bindingKey);
+            this.root.emit('valuechange', value, oldValue, bindingTarget, bindingKey);
           }
+        }
+      }, {
+        key: "root",
+        get: function get() {
+          var inputRow = this.getParentSizer();
+          var tweaker = inputRow.getParentSizer();
+          return tweaker.root;
         }
       }, {
         key: "validate",
