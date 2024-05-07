@@ -1122,8 +1122,12 @@
       // If obj is a RegExp object, create a new RegExp object with the same pattern and flags
       return new RegExp(obj);
     }
+    if (Object.getPrototypeOf(obj) !== Object.prototype) {
+      // If obj is a custom object, return a reference to it
+      return obj;
+    }
 
-    // If obj is a plain object or a custom object, create a new object and clone each property
+    // If obj is a plain object, create a new object and clone each property
     var clonedObj = {};
     for (var key in obj) {
       if (obj.hasOwnProperty(key)) {
@@ -80108,6 +80112,8 @@
         name = name || tokens[0];
         expression = expression || tokens[1];
         frame = name + frameDelimiter + expression;
+      } else {
+        frame = gameObject.frame.name;
       }
     } else {
       key = name || gameObject.texture.key;
@@ -80174,6 +80180,8 @@
       iconCrossMode = _ref$iconCrossMode === void 0 ? 'crossFade' : _ref$iconCrossMode,
       _ref$more = _ref.more,
       more = _ref$more === void 0 ? false : _ref$more,
+      _ref$clickAfterComple = _ref.clickAfterComplete,
+      clickAfterComplete = _ref$clickAfterComple === void 0 ? true : _ref$clickAfterComple,
       _ref$wait = _ref.wait,
       wait = _ref$wait === void 0 ? true : _ref$wait;
     var commandExecutor = arguments.length > 2 ? arguments[2] : undefined;
@@ -80220,7 +80228,11 @@
       }
       if (wait) {
         // Wait until typing complete
-        commandExecutor.waitEvent(gameObject, 'complete2');
+        if (clickAfterComplete) {
+          commandExecutor.waitEvent(gameObject, 'complete2');
+        } else {
+          commandExecutor.waitEvent(gameObject, 'complete');
+        }
       }
       if (!more) {
         gameObject.start(text, typingSpeed);
@@ -80251,6 +80263,8 @@
       iconCrossDuration = _ref.iconCrossDuration,
       _ref$iconCrossMode = _ref.iconCrossMode,
       iconCrossMode = _ref$iconCrossMode === void 0 ? 'crossFade' : _ref$iconCrossMode,
+      _ref$clickAfterComple = _ref.clickAfterComplete,
+      clickAfterComplete = _ref$clickAfterComple === void 0 ? true : _ref$clickAfterComple,
       _ref$wait = _ref.wait,
       wait = _ref$wait === void 0 ? true : _ref$wait;
     var commandExecutor = arguments.length > 2 ? arguments[2] : undefined;
@@ -80281,6 +80295,7 @@
         iconCrossDuration: iconCrossDuration,
         iconCrossMode: iconCrossMode,
         more: more,
+        clickAfterComplete: clickAfterComplete,
         wait: wait
       }, commandExecutor, eventSheetManager, eventSheet);
     }

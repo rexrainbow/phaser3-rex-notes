@@ -19,7 +19,12 @@ function DeepClone(obj) {
         return new RegExp(obj);
     }
 
-    // If obj is a plain object or a custom object, create a new object and clone each property
+    if (Object.getPrototypeOf(obj) !== Object.prototype) {
+        // If obj is a custom object, return a reference to it
+        return obj;
+    }
+
+    // If obj is a plain object, create a new object and clone each property
     const clonedObj = {};
     for (let key in obj) {
         if (obj.hasOwnProperty(key)) {

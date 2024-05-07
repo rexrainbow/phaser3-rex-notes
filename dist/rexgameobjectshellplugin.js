@@ -2853,8 +2853,12 @@
       // If obj is a RegExp object, create a new RegExp object with the same pattern and flags
       return new RegExp(obj);
     }
+    if (Object.getPrototypeOf(obj) !== Object.prototype) {
+      // If obj is a custom object, return a reference to it
+      return obj;
+    }
 
-    // If obj is a plain object or a custom object, create a new object and clone each property
+    // If obj is a plain object, create a new object and clone each property
     var clonedObj = {};
     for (var key in obj) {
       if (obj.hasOwnProperty(key)) {
