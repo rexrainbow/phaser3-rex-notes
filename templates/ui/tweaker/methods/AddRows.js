@@ -1,5 +1,7 @@
+import DeepClone from '../../../../plugins/utils/object/DeepClone.js';
+
 var AddRows = function (properties, target) {
-    AddProperties(this, properties, target);
+    AddProperties(this, DeepClone(properties), target);
     return this;
 }
 
@@ -13,9 +15,12 @@ var AddProperties = function (tweaker, properties, target) {
 
         if (property.hasOwnProperty('$target')) {
             target = property.$target;
+            delete property.$target;
         }
 
         var type = property.$type;
+        delete property.$type;
+
         switch (type) {
             case 'folder':
                 var folder = tweaker.addFolder(property);
@@ -44,19 +49,22 @@ var AddProperties = function (tweaker, properties, target) {
                 break;
 
             default:
-                if (property.$key.indexOf('.') === -1) {
+                var key = property.$key;
+                delete property.$key;
+                if (key.indexOf('.') === -1) {
                     property.bindingTarget = target;
-                    property.bindingKey = property.$key;
+                    property.bindingKey = key;
 
                 } else {
-                    var keys = property.$key.split('.');
+                    var keys = key.split('.');
+
                     property.bindingKey = keys.pop();
 
                     var bindingTarget = target;
                     for (var k = 0, kcnt = keys.length; k < kcnt; k++) {
                         bindingTarget = bindingTarget[keys[k]];
                         if (!target) {
-                            console.warn(`[Monitor] Key path '${property.$key}' is invalid`)
+                            console.warn(`[Monitor] Key path '${key}' is invalid`)
                             continue;
                         }
                     }
