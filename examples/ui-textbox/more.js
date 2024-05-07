@@ -29,12 +29,14 @@ class Demo extends Phaser.Scene {
             title: 'Title'
         })
 
+        var typingSpeed = 20;
         for (var i = 0, cnt = content.length; i < cnt; i++) {
             await new Promise(function (resolve) {
                 textbox
-                    .more(content[i], 30)
-                    .once('complete2', resolve)
+                    .more(content[i], typingSpeed)
+                    .once('complete', resolve)
             });
+            typingSpeed = (typingSpeed === 20) ? 100 : 20;
         }
     }
 
@@ -136,6 +138,7 @@ var createTextBox = function (scene, x, y, config) {
             })
         })
         .on('start', function () {
+            textBox.emit('!waitclick');
             // Remove pending callback, add new one
             textBox
                 .off('click', onClick)
