@@ -7,7 +7,7 @@ var AddRows = function (properties, target, monitor) {
     }
 
     if (monitor === undefined) {
-        monitor = false;
+        monitor = true;
     }
 
     AddProperties(this, DeepClone(properties), target, monitor);
