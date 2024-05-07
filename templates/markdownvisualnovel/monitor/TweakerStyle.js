@@ -1,7 +1,8 @@
 export const GetTweakStyle = function ({
     width = 340,
     fontSize = 24,
-    colors = {}
+    colors = {},
+    background
 } = {}) {
     var {
         main = 0x424242,
@@ -13,17 +14,21 @@ export const GetTweakStyle = function ({
     const COLOR_LIGHT = light;
     const COLOR_DARK = dark;
 
+    if (background === undefined) {
+        background = {
+            radius: 10,
+            color: 0x0,
+            strokeColor: 0xffffff,
+        }
+    }
+
     return {
         width: width,
 
         styles: {
             space: { left: 10, right: 10, top: 10, bottom: 10, item: 3 },
 
-            background: {
-                radius: 10,
-                color: 0x0,
-                strokeColor: 0xffffff,
-            },
+            background: background,
 
             inputRow: {
                 space: { left: 5, right: 5, top: 2, bottom: 2 },

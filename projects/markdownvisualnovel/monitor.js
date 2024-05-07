@@ -10,7 +10,7 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-
+        this.load.image('black_icon', 'assets/images/ninepatch/black_icon.png');
     }
 
     create() {
@@ -21,7 +21,14 @@ class Demo extends Phaser.Scene {
                 light: 0x6d6d6d,
                 dark: 0x1b1b1b
             },
-            fontSize: 24
+            fontSize: 24,
+            background: {
+                key: 'black_icon',
+                leftWidth: 10,
+                rightWidth: 10,
+                topHeight: 10,
+                bottomHeight: 10,
+            }
         }
 
         var memory = {
