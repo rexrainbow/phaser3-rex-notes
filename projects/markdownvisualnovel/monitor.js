@@ -10,7 +10,8 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('black_icon', 'assets/images/ninepatch/black_icon.png');
+        // this.load.image('bg', 'assets/images/ninepatch/black_icon.png');
+        this.load.image('bg', 'assets/images/ninepatch/blue_icon.png');
     }
 
     create() {
@@ -23,7 +24,7 @@ class Demo extends Phaser.Scene {
             },
             fontSize: 24,
             background: {
-                key: 'black_icon',
+                key: 'bg',
                 leftWidth: 10,
                 rightWidth: 10,
                 topHeight: 10,

@@ -12,6 +12,7 @@ class Demo extends Phaser.Scene {
 
     preload() {
         this.load.text('eventSheet0', 'assets/markedeventsheet/memory-monitor/memory-monitor.md');
+        this.load.image('bg', 'assets/images/ninepatch/blue_icon.png');
     }
 
     create() {
@@ -32,7 +33,15 @@ class Demo extends Phaser.Scene {
         ]
 
         var viewport = this.scale.getViewPort();
-        var monitorPanel = this.rexUI.add.tweaker(GetTweakStyle())
+        var monitorPanel = this.rexUI.add.tweaker(GetTweakStyle({
+            background: {
+                key: 'bg',
+                leftWidth: 10,
+                rightWidth: 10,
+                topHeight: 10,
+                bottomHeight: 10,
+            }
+        }))
             .addRows(properties, eventSheetManager.memory, true)
             .setOrigin(1, 0)
             .setPosition(viewport.right, viewport.top)
@@ -46,7 +55,12 @@ class Demo extends Phaser.Scene {
 var GetTweakStyle = function ({
     width = 340,
     fontSize = 24,
-    colors = {}
+    colors = {},
+    background = {
+        radius: 10,
+        color: 0x0,
+        strokeColor: 0xffffff,
+    }
 } = {}) {
     var {
         main = 0x424242,
@@ -64,11 +78,7 @@ var GetTweakStyle = function ({
         styles: {
             space: { left: 10, right: 10, top: 10, bottom: 10, item: 3 },
 
-            background: {
-                radius: 10,
-                color: 0x0,
-                strokeColor: 0xffffff,
-            },
+            background: background,
 
             inputRow: {
                 space: { left: 5, right: 5, top: 2, bottom: 2 },
