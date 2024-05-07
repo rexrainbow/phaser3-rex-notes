@@ -54,6 +54,8 @@ declare class GridTable extends Scrollable {
     );
 
     setItems(items?: unknown[]): this;
+    items: unknown[];
+
     refresh(): this;
     updateVisibleCell(cellIndex: number): this;
 
