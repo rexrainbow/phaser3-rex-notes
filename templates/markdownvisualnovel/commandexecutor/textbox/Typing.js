@@ -62,13 +62,13 @@ var Typing = function (
             typingSpeed = eventSheetManager.getData('$typingSpeed');
         }
 
-        if (wait) {
+        
+        if (clickAfterComplete) {
+            // Wait until typing complete, then one more clicking.
+            commandExecutor.waitEvent(gameObject, 'complete2');
+        } else if (wait) {
             // Wait until typing complete
-            if (clickAfterComplete) {
-                commandExecutor.waitEvent(gameObject, 'complete2');
-            } else {
-                commandExecutor.waitEvent(gameObject, 'complete');
-            }
+            commandExecutor.waitEvent(gameObject, 'complete');
         }
 
         if (!more) {

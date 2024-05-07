@@ -144,6 +144,11 @@ text-line2
 - `more` :
   - `false` : Clear and start a new typing task. Default behavior.
   - `true` : Append text and continue typing.
-  
+- `clickAfterComplete` : 
+  - `false` : if `wait` is `true`, wait until typing complete
+  - `true` : Wait until typing complete, then one more clicking. Default behavior.
+- `wait` :
+  - `false` : If `clickAfterComplete` is `false`, running next command immediately.
+  - `true` : If `clickAfterComplete` is `false`, wait until typing complete. Default value is `true`.
 
 Wait an extra clicking after typing complete internally.
