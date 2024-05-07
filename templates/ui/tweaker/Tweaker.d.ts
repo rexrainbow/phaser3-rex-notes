@@ -337,7 +337,13 @@ declare class Tweaker extends Sizer {
 
     addRows(
         properties: Tweaker.RowsPropertyType[],
-        target?: Object
+        target?: Object,
+        monitor?: boolean,
+    ): this;
+
+    addRows(
+        properties: Tweaker.RowsPropertyType[],
+        monitor?: boolean,
     ): this;
 
     setBindingTarget(

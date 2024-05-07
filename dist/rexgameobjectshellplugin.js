@@ -7601,54 +7601,38 @@
     }
   };
 
-  /**
-   * @author       Richard Davey <rich@photonstorm.com>
-   * @copyright    2019 Photon Storm Ltd.
-   * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
-   */
-
-  //  Source object
-  //  The key as a string, or an array of keys, i.e. 'banner', or 'banner.hideBanner'
-  //  The default value to use if the key doesn't exist
-
-  /**
-   * Retrieves a value from an object.
-   *
-   * @function Phaser.Utils.Objects.GetValue
-   * @since 3.0.0
-   *
-   * @param {object} source - The object to retrieve the value from.
-   * @param {string} key - The name of the property to retrieve from the object. If a property is nested, the names of its preceding properties should be separated by a dot (`.`) - `banner.hideBanner` would return the value of the `hideBanner` property from the object stored in the `banner` property of the `source` object.
-   * @param {*} defaultValue - The value to return if the `key` isn't found in the `source` object.
-   *
-   * @return {*} The value of the requested key.
-   */
   var GetValue$21 = function GetValue(source, key, defaultValue) {
     if (!source || typeof source === 'number') {
       return defaultValue;
-    } else if (source.hasOwnProperty(key)) {
-      return source[key];
-    } else if (key.indexOf('.') !== -1) {
-      var keys = key.split('.');
-      var parent = source;
-      var value = defaultValue;
-
-      //  Use for loop here so we can break early
-      for (var i = 0; i < keys.length; i++) {
-        if (parent.hasOwnProperty(keys[i])) {
-          //  Yes it has a key property, let's carry on down
-          value = parent[keys[i]];
-          parent = parent[keys[i]];
-        } else {
-          //  Can't go any further, so reset to default
-          value = defaultValue;
-          break;
-        }
-      }
-      return value;
-    } else {
-      return defaultValue;
     }
+    if (typeof key === 'string') {
+      if (source.hasOwnProperty(key)) {
+        return source[key];
+      }
+      if (key.indexOf('.') !== -1) {
+        key = key.split('.');
+      } else {
+        return defaultValue;
+      }
+    }
+    var keys = key;
+    var parent = source;
+    var value = defaultValue;
+
+    //  Use for loop here so we can break early
+    for (var i = 0; i < keys.length; i++) {
+      key = keys[i];
+      if (parent.hasOwnProperty(key)) {
+        //  Yes it has a key property, let's carry on down
+        value = parent[key];
+        parent = value;
+      } else {
+        //  Can't go any further, so reset to default
+        value = defaultValue;
+        break;
+      }
+    }
+    return value;
   };
 
   var StateProperties$1 = ['next', 'exit', 'enter'];
@@ -35941,11 +35925,18 @@
     return this;
   };
 
-  var AddRows = function AddRows(properties, target) {
-    AddProperties$1(this, properties, target);
+  var AddRows = function AddRows(properties, target, monitor) {
+    if (typeof target === 'boolean') {
+      monitor = target;
+      target = undefined;
+    }
+    if (monitor === undefined) {
+      monitor = false;
+    }
+    AddProperties$1(this, DeepClone(properties), target, monitor);
     return this;
   };
-  var AddProperties$1 = function AddProperties(tweaker, properties, target) {
+  var AddProperties$1 = function AddProperties(tweaker, properties, target, monitor) {
     if (!properties) {
       return;
     }
@@ -35953,17 +35944,19 @@
       var property = properties[i];
       if (property.hasOwnProperty('$target')) {
         target = property.$target;
+        delete property.$target;
       }
       var type = property.$type;
+      delete property.$type;
       switch (type) {
         case 'folder':
           var folder = tweaker.addFolder(property);
-          AddProperties(folder, property.$properties, target);
+          AddProperties(folder, property.$properties, target, monitor);
           break;
         case 'tab':
           var pages = tweaker.addTab(property);
           for (var pIdx = 0, pcnt = pages.length; pIdx < pcnt; pIdx++) {
-            AddProperties(pages[pIdx], property.pages[pIdx].$properties, target);
+            AddProperties(pages[pIdx], property.pages[pIdx].$properties, target, monitor);
           }
           break;
         case 'separator':
@@ -35978,24 +35971,26 @@
           tweaker.addButtons(property);
           break;
         default:
-          if (property.$key.indexOf('.') === -1) {
+          var key = property.$key;
+          delete property.$key;
+          if (key.indexOf('.') === -1) {
             property.bindingTarget = target;
-            property.bindingKey = property.$key;
+            property.bindingKey = key;
           } else {
-            var keys = property.$key.split('.');
+            var keys = key.split('.');
             property.bindingKey = keys.pop();
             var bindingTarget = target;
             for (var k = 0, kcnt = keys.length; k < kcnt; k++) {
               bindingTarget = bindingTarget[keys[k]];
               if (!target) {
-                console.warn("[Monitor] Key path '".concat(property.$key, "' is invalid"));
+                console.warn("[Monitor] Key path '".concat(key, "' is invalid"));
                 continue;
               }
             }
             property.bindingTarget = bindingTarget;
           }
           if (!property.hasOwnProperty('monitor')) {
-            property.monitor = true;
+            property.monitor = monitor;
           }
           tweaker.addInput(property);
           break;

@@ -1,11 +1,20 @@
 import DeepClone from '../../../../plugins/utils/object/DeepClone.js';
 
-var AddRows = function (properties, target) {
-    AddProperties(this, DeepClone(properties), target);
+var AddRows = function (properties, target, monitor) {
+    if (typeof (target) === 'boolean') {
+        monitor = target;
+        target = undefined;
+    }
+
+    if (monitor === undefined) {
+        monitor = false;
+    }
+
+    AddProperties(this, DeepClone(properties), target, monitor);
     return this;
 }
 
-var AddProperties = function (tweaker, properties, target) {
+var AddProperties = function (tweaker, properties, target, monitor) {
     if (!properties) {
         return;
     }
@@ -24,13 +33,13 @@ var AddProperties = function (tweaker, properties, target) {
         switch (type) {
             case 'folder':
                 var folder = tweaker.addFolder(property);
-                AddProperties(folder, property.$properties, target);
+                AddProperties(folder, property.$properties, target, monitor);
                 break;
 
             case 'tab':
                 var pages = tweaker.addTab(property);
                 for (var pIdx = 0, pcnt = pages.length; pIdx < pcnt; pIdx++) {
-                    AddProperties(pages[pIdx], property.pages[pIdx].$properties, target);
+                    AddProperties(pages[pIdx], property.pages[pIdx].$properties, target, monitor);
                 }
                 break;
 
@@ -73,7 +82,7 @@ var AddProperties = function (tweaker, properties, target) {
                 }
 
                 if (!property.hasOwnProperty('monitor')) {
-                    property.monitor = true;
+                    property.monitor = monitor;
                 }
                 tweaker.addInput(property);
                 break;

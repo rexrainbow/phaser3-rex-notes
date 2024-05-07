@@ -33,7 +33,7 @@ class Demo extends Phaser.Scene {
 
         var viewport = this.scale.getViewPort();
         var monitorPanel = this.rexUI.add.tweaker(GetTweakStyle())
-            .addRows(properties, eventSheetManager.memory)
+            .addRows(properties, eventSheetManager.memory, true)
             .setOrigin(1, 0)
             .setPosition(viewport.right, viewport.top)
             .layout()
