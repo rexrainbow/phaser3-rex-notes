@@ -28,10 +28,6 @@ export const GetTweakStyle = function ({
             inputRow: {
                 space: { left: 5, right: 5, top: 2, bottom: 2 },
 
-                background: {
-                    strokeColor: COLOR_MAIN
-                },
-
                 title: {
                     space: { icon: 2 },
                     iconSize: 30,
@@ -90,7 +86,6 @@ export const GetTweakStyle = function ({
                 },
 
                 button: {
-                    space: { left: 8, right: 8, top: 8, bottom: 8 },
                     background: {
                         color: COLOR_DARK,
                         strokeColor: COLOR_LIGHT,
