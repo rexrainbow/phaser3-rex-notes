@@ -4,13 +4,15 @@ import { LayerNames } from '../const/Layers.js';
 import RegisterBackgroundType from './background/RegisterBackgroundType.js';
 import RegisterSpriteType from './sprite/RegisterSpriteType.js';
 import RegisterTextboxType from './textbox/RegisterTextboxType.js';
+import RegisterTitleType from './title/RegisterTitleType.js';
 import RegisterChoiceDialogType from './choicedialog/RegisterChoiceDialogType.js';
 
 const RegisterHandlers = [
     RegisterSpriteType,
     RegisterTextboxType,
     RegisterBackgroundType,
-    RegisterChoiceDialogType
+    RegisterChoiceDialogType,
+    RegisterTitleType,
 ];
 
 

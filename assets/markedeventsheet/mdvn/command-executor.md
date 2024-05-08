@@ -17,6 +17,13 @@ TEXTBOX
   vph=0.2
   vpy=0.99
 
+TITLE
+  id=Title
+  vpx=0.9
+  vpy=0.1
+  text0=Day0
+  text1=Classroom
+
 SPRITE
   id=CharacterA
   key=characters
@@ -62,6 +69,13 @@ log
 
 Dialog.set
   alpha=0.8
+
+Title.set
+  alpha=0.7
+
+// Title.display
+//   text0=Day0
+//   text1=Classroom
 
 CharacterA.set
   vpx=-0.2
@@ -232,6 +246,9 @@ incData
 
 
 ## Section C
+
+Title.display
+  text0=Day1
 
 log.memory
   text=After choice

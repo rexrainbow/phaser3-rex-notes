@@ -2,6 +2,7 @@ import phaser from 'phaser/src/phaser.js';
 import MarkdownVisualNovel from '../../templates/markdownvisualnovel/MarkdownVisualNovel.js';
 import TextBoxStyle from './styles/TextBoxStyle.js';
 import ChoiceStyle from './styles/ChoiceStyle.js';
+import TitleStyle from './styles/TitleStyle.js';
 
 class Demo extends Phaser.Scene {
 
@@ -46,6 +47,7 @@ class Demo extends Phaser.Scene {
             styles: {
                 TEXTBOX: TextBoxStyle,
                 CHOICE: ChoiceStyle,
+                TITLE: TitleStyle,
             },
             rootLayer,
             viewport
