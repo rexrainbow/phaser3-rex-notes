@@ -837,6 +837,35 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#replace" class="md-nav__link">
+    Replace
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cache" class="md-nav__link">
+    Cache
+  </a>
+  
+    <nav class="md-nav" aria-label="Cache">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-data" class="md-nav__link">
+    Get data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-data" class="md-nav__link">
+    Add data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#release-data" class="md-nav__link">
     Release data
   </a>
@@ -863,10 +892,8 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#replace" class="md-nav__link">
-    Replace
-  </a>
+      </ul>
+    </nav>
   
 </li>
         
@@ -10005,6 +10032,35 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#replace" class="md-nav__link">
+    Replace
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cache" class="md-nav__link">
+    Cache
+  </a>
+  
+    <nav class="md-nav" aria-label="Cache">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-data" class="md-nav__link">
+    Get data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-data" class="md-nav__link">
+    Add data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#release-data" class="md-nav__link">
     Release data
   </a>
@@ -10031,10 +10087,8 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#replace" class="md-nav__link">
-    Replace
-  </a>
+      </ul>
+    </nav>
   
 </li>
         
@@ -10501,16 +10555,30 @@
 <span class="kd">var</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div>
 <p>Event name in <code>'filecomplete'</code> event : <code>'filecomplete-packfile-' + key</code></p>
-<h3 id="release-data">Release data<a class="headerlink" href="#release-data" title="Permanent link">&para;</a></h3>
+<h3 id="replace">Replace<a class="headerlink" href="#replace" title="Permanent link">&para;</a></h3>
+<ol>
+<li><a href="./#release-data">Remove key</a>.</li>
+<li>Load file again.</li>
+</ol>
+<h3 id="cache">Cache<a class="headerlink" href="#cache" title="Permanent link">&para;</a></h3>
+<h4 id="get-data">Get data<a class="headerlink" href="#get-data" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">cache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">text</span><span class="p">;</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</code></pre></div>
+<h4 id="add-data">Add data<a class="headerlink" href="#add-data" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">cache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">text</span><span class="p">;</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cache</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</code></pre></div>
+<h4 id="release-data">Release data<a class="headerlink" href="#release-data" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">cache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">text</span><span class="p">;</span>
 <span class="nx">cache</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div>
-<h3 id="data-in-cache">Data in cache<a class="headerlink" href="#data-in-cache" title="Permanent link">&para;</a></h3>
+<h4 id="data-in-cache">Data in cache<a class="headerlink" href="#data-in-cache" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">cache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">text</span><span class="p">;</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">hasData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cache</span><span class="p">.</span><span class="nx">exists</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 <span class="c1">// var hasData = cache.has(key);</span>
 </code></pre></div>
-<h4 id="cache-events">Cache events<a class="headerlink" href="#cache-events" title="Permanent link">&para;</a></h4>
+<h5 id="cache-events">Cache events<a class="headerlink" href="#cache-events" title="Permanent link">&para;</a></h5>
 <ul>
 <li>Add any item
     <div class="highlight"><pre><span></span><code><span class="nx">cache</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;add&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">cache</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">item</span><span class="p">){</span>
@@ -10523,11 +10591,6 @@
 <span class="p">})</span>
 </code></pre></div></li>
 </ul>
-<h3 id="replace">Replace<a class="headerlink" href="#replace" title="Permanent link">&para;</a></h3>
-<ol>
-<li><a href="./#release-data">Remove key</a>.</li>
-<li>Load file again.</li>
-</ol>
 <h3 id="xhr-settings-object">XHR Settings Object<a class="headerlink" href="#xhr-settings-object" title="Permanent link">&para;</a></h3>
 <p>Parameter <code>xhrSettings</code> </p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>

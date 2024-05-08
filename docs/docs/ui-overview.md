@@ -567,7 +567,7 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
     ```
     or
     ```javascript
-    class MyTransitionImage extends RexPlugins.UI.ImageBox {
+    class MyImageBox extends RexPlugins.UI.ImageBox {
         constructor(scene, x, y, texture, frame, config) {
             super(scene, x, y, texture, frame, config);
             // ...

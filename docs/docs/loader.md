@@ -566,14 +566,36 @@ var data = cache.get(key);
 
 Event name in `'filecomplete'` event : `'filecomplete-packfile-' + key`
 
-### Release data
+### Replace
+
+1. [Remove key](loader.md#release-data).
+1. Load file again.
+
+### Cache
+
+#### Get data
+
+```javascript
+var cache = scene.cache.text;
+var data = cache.get(key);
+```
+
+
+#### Add data
+
+```javascript
+var cache = scene.cache.text;
+var data = cache.add(key);
+```
+
+#### Release data
 
 ```javascript
 var cache = scene.cache.text;
 cache.remove(key);
 ```
 
-### Data in cache
+#### Data in cache
 
 ```javascript
 var cache = scene.cache.text;
@@ -581,7 +603,7 @@ var hasData = cache.exists(key);
 // var hasData = cache.has(key);
 ```
 
-#### Cache events
+##### Cache events
 
 - Add any item
     ```javascript
@@ -595,11 +617,6 @@ var hasData = cache.exists(key);
 
     })
     ```
-
-### Replace
-
-1. [Remove key](loader.md#release-data).
-1. Load file again.
 
 ### XHR Settings Object
 
