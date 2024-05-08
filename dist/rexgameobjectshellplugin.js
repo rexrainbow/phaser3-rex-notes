@@ -35931,7 +35931,7 @@
       target = undefined;
     }
     if (monitor === undefined) {
-      monitor = false;
+      monitor = true;
     }
     AddProperties$1(this, DeepClone(properties), target, monitor);
     return this;

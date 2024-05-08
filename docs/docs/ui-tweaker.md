@@ -11,6 +11,7 @@ Fine-tuning properties of target object. [Reference](https://cocopon.github.io/t
 - [Bind target](https://codepen.io/rexrainbow/pen/vYraBBY)
 - [Horizontal tweaker](https://codepen.io/rexrainbow/pen/MWBGqzN)
 - [Buttons](https://codepen.io/rexrainbow/pen/vYvbpXY)
+- [Add rows](https://codepen.io/rexrainbow/pen/NWVKyKW)
 
 ## Usage
 
@@ -292,7 +293,7 @@ tweaker.addInput({
 - `iconSize` : Fixed icon size
 - `title` : Display text of title-label. Default value is equal to `key`.
 - `monitor` : 
-    - `false` : Don't update input text from current object. Default behavior.
+    - `false` : Don't update input text every tick from target. Default behavior.
     - `true` : Update input text from current object, in `postupdate` event of scene.
 - `key` : Add this child into childMap, which could be read back by `tweaker.getElement(key)`.
     - `undefined` : Don't add this child. Default value.
@@ -380,7 +381,7 @@ tweaker.addInput({
 - `iconSize` : Fixed icon size
 - `title` : Display text of title-label. Default value is equal to `key`.
 - `monitor` : 
-    - `false` : Don't update input text from current object. Default behavior.
+    - `false` : Don't update input text every tick from target. Default behavior.
     - `true` : Update input text from current object, in `postupdate` event of scene.
 - `key` : Add this child into childMap, which could be read back by `tweaker.getElement(key)`.
     - `undefined` : Don't add this child. Default value.
@@ -476,7 +477,7 @@ tweaker.addInput({
     - `value` : Set `key` to this value.
     - `icon`, `iconFrame`, ... : See [Reset display content of Label](ui-label.md#reset-display-content)
 - `monitor` : 
-    - `false` : Don't update input text from current object. Default behavior.
+    - `false` : Don't update input text every tick from target. Default behavior.
     - `true` : Update input text from current object, in `postupdate` event of scene.
 - `key` : Add this child into childMap, which could be read back by `tweaker.getElement(key)`.
     - `undefined` : Don't add this child. Default value.
@@ -551,7 +552,7 @@ tweaker.addInput({
     - `text` : Display text.
     - `value` : Set `key` to this value.
 - `monitor` : 
-    - `false` : Don't update input text from current object. Default behavior.
+    - `false` : Don't update input text every tick from target. Default behavior.
     - `true` : Update input text from current object, in `postupdate` event of scene.
 - `key` : Add this child into childMap, which could be read back by `tweaker.getElement(key)`.
     - `undefined` : Don't add this child. Default value.
@@ -614,7 +615,7 @@ tweaker.addInput({
 - `iconSize` : Fixed icon size
 - `title` : Display text of title-label. Default value is equal to `key`.
 - `monitor` : 
-    - `false` : Don't update input text from current object. Default behavior.
+    - `false` : Don't update input text every tick from target. Default behavior.
     - `true` : Update input text from current object, in `postupdate` event of scene.
 - `key` : Add this child into childMap, which could be read back by `tweaker.getElement(key)`.
     - `undefined` : Don't add this child. Default value.
@@ -699,7 +700,7 @@ tweaker.addInput({
     - `false` : Input text field is editable. Default behavior.
     - `true` : Input text field is read-only.
 - `monitor` : 
-    - `false` : Don't update input text from current object. Default behavior.
+    - `false` : Don't update input text every tick from target. Default behavior.
     - `true` : Update input text from current object, in `postupdate` event of scene.
 - `key` : Add this child into childMap, which could be read back by `tweaker.getElement(key)`.
     - `undefined` : Don't add this child. Default value.
@@ -775,7 +776,7 @@ tweaker.addInput({
     - `text` : Display text.
     - `value` : Set `key` to this value.
 - `monitor` : 
-    - `false` : Don't update input text from current object. Default behavior.
+    - `false` : Don't update input text every tick from target. Default behavior.
     - `true` : Update input text from current object, in `postupdate` event of scene.
 - `key` : Add this child into childMap, which could be read back by `tweaker.getElement(key)`.
     - `undefined` : Don't add this child. Default value.
@@ -851,7 +852,7 @@ tweaker.addInput({
     - `text` : Display text.
     - `value` : Set `key` to this value.
 - `monitor` : 
-    - `false` : Don't update input text from current object. Default behavior.
+    - `false` : Don't update input text every tick from target. Default behavior.
     - `true` : Update input text from current object, in `postupdate` event of scene.
 - `key` : Add this child into childMap, which could be read back by `tweaker.getElement(key)`.
     - `undefined` : Don't add this child. Default value.
@@ -912,7 +913,7 @@ tweaker.addInput({
 - `iconSize` : Fixed icon size
 - `title` : Display text of title-label. Default value is equal to `key`.
 - `monitor` : 
-    - `false` : Don't update input text from current object. Default behavior.
+    - `false` : Don't update input text every tick from target. Default behavior.
     - `true` : Update input text from current object, in `postupdate` event of scene.
 - `key` : Add this child into childMap, which could be read back by `tweaker.getElement(key)`.
     - `undefined` : Don't add this child. Default value.
@@ -975,7 +976,7 @@ tweaker.addInput({
 - `iconSize` : Fixed icon size
 - `title` : Display text of title-label. Default value is equal to `key`.
 - `monitor` : 
-    - `false` : Don't update input text from current object. Default behavior.
+    - `false` : Don't update input text every tick from target. Default behavior.
     - `true` : Update input text from current object, in `postupdate` event of scene.
 - `key` : Add this child into childMap, which could be read back by `tweaker.getElement(key)`.
     - `undefined` : Don't add this child. Default value.
@@ -1033,7 +1034,7 @@ tweaker.addInput({
 - `iconSize` : Fixed icon size
 - `title` : Display text of title-label. Default value is equal to `key`.
 - `monitor` : 
-    - `false` : Don't update input text from current object. Default behavior.
+    - `false` : Don't update input text every tick from target. Default behavior.
     - `true` : Update input text from current object, in `postupdate` event of scene.
 - `key` : Add this child into childMap, which could be read back by `tweaker.getElement(key)`.
     - `undefined` : Don't add this child. Default value.
@@ -1234,6 +1235,93 @@ var childrenTweakers = tweaker.addTab({
 
 
 See [Styles of tab](ui-tweaker.md#styles-of-tab)
+
+
+### Add rows
+
+Add mutiple rows (input row, button, buttons, separator, folder, tab) in a single method
+
+```javascript
+tweaker.addRows(properties, target);
+// tweaker.addRows(properties, target, monitor);
+```
+
+- `properties` : A list of properties, each property could be one of 
+    - Input row
+        ```javascript
+        {
+            $key: '',
+            // $target:
+            // More properties...
+        }
+        ```
+        - `$key` : Assign this value to `bindingKey`       
+        - `$target` : Assign this value to `bindingTarget`
+            - `undefined` : Use `target` parameter from `addRows` method. Default behavior
+        - More properties. See 
+            - [Text input row](#text-input-row), 
+            - [Text area input row](#text-area-input-row), 
+            - [Text input from list](#text-input-from-list)
+            - [Text input from buttons](#text-input-from-buttons)
+            - [Number input row](#number-input-row)
+            - [Number input in a range](#number-input-in-a-range)
+            - [Number input from list](#number-input-from-list)
+            - [Number input from buttons](#number-input-from-buttons)
+            - [Color input row](#color-input)
+            - [Boolean input row](#boolean-input-row)
+            - [Value callback row](#value-callbacks-row)
+    - Button
+        ```javascript
+        {
+            $type: 'button', title: '', label: '',
+            callback(target) {
+            }
+        }
+        ```
+    - Buttons
+    - Separator
+        ```javascript
+        { $type: 'separator' }
+        ```
+    - Folder
+        ```javascript
+        {
+            $type: 'folder', title: '',
+            // $target: 
+            $properties: [
+                // ...
+            ]
+        }
+        ```
+        - `$target` : Override `target` value pass to remainder `$properties`.
+            - `undefined` : Use previous `target` value. Default behavior.
+    - Tab
+        ```javascript
+        {
+            $type: 'tab',
+            // $target:
+            pages: [
+                {
+                    title: '',
+                    $properties: [
+                        // ...
+                    ]
+                },
+                {
+                    title: '',
+                    $properties: [
+                        // ...
+                    ]
+                },
+                // ... More pages
+            ]
+        }
+        ```
+        - `$target` : Override `target` value pass to remainder `$properties`.
+            - `undefined` : Use previous `target` value. Default behavior.
+- `monitor` : 
+    - `false` : Don't update input text every tick from target.
+    - `true` : Update input text from current object, in `postupdate` event of scene. Default behavior.
 
 
 ### Layout children
