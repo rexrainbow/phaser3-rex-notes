@@ -8,10 +8,12 @@ declare namespace ImageBox {
         x?: number, y?: number,
         texture?: string, frame?: string,
 
+        scaleUp?: boolean,
         width?: number, height?: number,
 
         background?: Phaser.GameObjects.GameObject,
         image?: Phaser.GameObjects.GameObject,
+
     }
 }
 

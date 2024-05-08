@@ -9846,6 +9846,7 @@ A <a href="../containerlite/">containerLite game object </a> with 1 <a href="../
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexImageBox</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">texture</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// scaleUp: false,</span>
 <span class="w">    </span><span class="c1">// width: undefined,</span>
 <span class="w">    </span><span class="c1">// height: undefined,</span>
 
@@ -9854,6 +9855,11 @@ A <a href="../containerlite/">containerLite game object </a> with 1 <a href="../
 <span class="p">});</span>
 </code></pre></div>
 <ul>
+<li><code>scaleUp</code> : Scale up or keep original size of image when size of imageBox is larger.<ul>
+<li><code>true</code> : Scale up image when size of imageBox is larger.</li>
+<li><code>false</code> : Keep original size of image size of imageBox is larger. Default behavior.</li>
+</ul>
+</li>
 <li><code>width</code>, <code>height</code> : Resize this game object.<ul>
 <li><code>undefined</code> : Use original size. Default behavior.</li>
 </ul>

@@ -76,6 +76,7 @@ A [containerLite game object ](containerlite.md) with 1 [image game object](imag
 
 ```javascript
 var image = scene.add.rexImageBox(x, y, texture, frame, {
+    // scaleUp: false,
     // width: undefined,
     // height: undefined,
 
@@ -84,6 +85,9 @@ var image = scene.add.rexImageBox(x, y, texture, frame, {
 });
 ```
 
+- `scaleUp` : Scale up or keep original size of image when size of imageBox is larger.
+    - `true` : Scale up image when size of imageBox is larger.
+    - `false` : Keep original size of image size of imageBox is larger. Default behavior.
 - `width`, `height` : Resize this game object.
     - `undefined` : Use original size. Default behavior.
 - `background` : Game object of background, optional. This background game object will be resized to fit the size of imageBox.
