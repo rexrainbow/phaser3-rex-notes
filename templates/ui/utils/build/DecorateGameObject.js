@@ -1,5 +1,5 @@
 const Properties = [
-    'alpha', 'tint'
+    'alpha', 'tint', 'originX', 'originY'
 ]
 
 var DecorateGameObject = function (gameObject, config) {
