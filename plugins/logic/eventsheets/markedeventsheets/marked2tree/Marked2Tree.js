@@ -24,7 +24,7 @@ var Marked2Tree = function (
     var { conditionNodes, mainTaskNodes, catchNodes } = ParseTopLevelNodes(headingTree.children);
 
     var treeConfig = Object.assign(
-        { parallel, active, once },
+        { groupName, parallel, active, once },
         GetTreeConfig(headingTree.paragraphs, commentLineStart)
     );
 
@@ -34,10 +34,7 @@ var Marked2Tree = function (
         eventSheetManager,
         {
             title: headingTree.title,
-
-            groupName,
             condition: GetConditionExpression(conditionNodes),
-
             properties: treeConfig
         }
     );

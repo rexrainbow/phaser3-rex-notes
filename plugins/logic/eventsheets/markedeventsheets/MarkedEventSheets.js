@@ -41,6 +41,7 @@ class MarkedEventSheets extends EventSheetManager {
             lineBreak = '\\',
             commentLineStart = '\/\/',
             parallel = this.parallel,
+            groupName = groupName
         } = config;
 
         var eventsheet = Marked2Tree(
@@ -54,7 +55,8 @@ class MarkedEventSheets extends EventSheetManager {
             }
         );
 
-        this.addTree(eventsheet, groupName);
+        this.addTree(eventsheet, eventsheet.groupName);
+
         return this;
     }
 }

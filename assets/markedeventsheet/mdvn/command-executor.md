@@ -1,5 +1,7 @@
 # Example
 
+groupName=Story
+
 ## Initialize
 
 // Create gameobjects

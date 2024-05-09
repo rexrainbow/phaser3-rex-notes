@@ -5,6 +5,7 @@ const RoundRun = 1;
 const RoundComplete = 2;
 
 const PropertyTable = {
+    'groupName': { defaultValue: '_', rewritable: true },
     'parallel': { defaultValue: false, rewritable: true },
     'active': { defaultValue: true, rewritable: true },
     'once': { defaultValue: false, rewritable: true },
@@ -17,9 +18,6 @@ class EventSheet extends BehaviorTree {
         if (config === undefined) {
             config = {};
         }
-
-        var { groupName } = config;
-        delete config.groupName;
 
         var { condition = true } = config;
         delete config.condition;
@@ -55,6 +53,7 @@ class EventSheet extends BehaviorTree {
         }
 
         // Store references
+        var groupName = this.groupName;
         this.eventSheetManager = eventSheetManager;
         this.blackboard = eventSheetManager.blackboard;
         this.setTreeGroup(groupName);

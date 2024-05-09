@@ -113,6 +113,19 @@ eventSheetManager.addEventSheet(content, groupName, {
 })
 ```
 
+or
+
+```javascript
+eventSheetManager.addEventSheet(content, {
+    groupName: '_'
+    commentLineStart: '\/\/',
+    lineBreak: '\\',
+    parallel: undefined,
+    active: true,
+    once: false
+})
+```
+
 - `content` : See [structure of event sheet](markedeventsheet.md#structure-of-event-sheet)
 - `commentLineStart` : Content line start by this symobl (default value is `//`) will be ignored as a comment line.
 - `lineBreak` : Markdown will use `\` as line break. So the last character `\` will be discarded.
@@ -418,6 +431,7 @@ Expression will store at [local memory](#local-memory)
 ```
 # Title
 
+groupName
 parallel
 active=false
 once
@@ -434,6 +448,7 @@ coin > 5
 
 - H1 heading : Title of this event sheet
 - Content under Title (H1 heading) : Setting of this event sheet, optional.
+    - `groupName` : Assign `groupName` in event sheet, put this event sheet in to that group.
     - `parallel` : Set `parallel` property of this event sheet to `true`.
     - `active=false` : Set `active` property of this event sheet to `false`.
     - `once` : Set `once` property of this event sheet to `true`.
