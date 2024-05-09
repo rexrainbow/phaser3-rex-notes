@@ -84,6 +84,9 @@ var sizer = scene.rexUI.add.perspectiveCard({
     // anchor: undefined,
     // width: undefined,
     // height: undefined,
+    // origin: 0.5
+    // originX:
+    // originY:
 
     back: backGameObject,
     front: frontGameObject,
@@ -119,6 +122,7 @@ var sizer = scene.rexUI.add.perspectiveCard({
         - Padding : `'+n'`, or `'-n'`.
     - `onResizeCallback` : A default resize callback will be assigned interanlly. 
 - `width`, `height` : Minimum width, minimum height.
+- `origin`, `originX`, `originY` : Set origin of this sizer. Default value is (0.5, 0.5).
 - `front`, `back` : Any game object for front or back face.
 - `face` : Show front or back face.
     - `'front'`, or `0` : Show front face.

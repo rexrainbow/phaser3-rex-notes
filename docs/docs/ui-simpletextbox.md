@@ -84,6 +84,9 @@ var textBox = scene.rexUI.add.simpleTextBox({
     // anchor: undefined,
     // width: undefined,
     // height: undefined,
+    // origin: 0.5
+    // originX:
+    // originY:
 
     layoutMode: 0,
 

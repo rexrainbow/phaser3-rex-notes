@@ -80,6 +80,9 @@ var badgeLabel = scene.rexUI.add.badgeLabel({
     // anchor: undefined,
     // width: undefined,
     // height: undefined,
+    // origin: 0.5
+    // originX:
+    // originY:
 
     background: backgroundGameObject,
     main: mainItemGameObject,
@@ -120,6 +123,7 @@ var badgeLabel = scene.rexUI.add.badgeLabel({
         - Padding : `'+n'`, or `'-n'`.
     - `onResizeCallback` : A default resize callback will be assigned interanlly.    
 - `width`, `height` : Minimum width, minimum height.
+- `origin`, `originX`, `originY` : Set origin of this sizer. Default value is (0.5, 0.5).
 - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of badgeLabel.
 - `main` : Game object of main item, optional.
 - `leftTop` : Badge game object at leftTop side, optional.

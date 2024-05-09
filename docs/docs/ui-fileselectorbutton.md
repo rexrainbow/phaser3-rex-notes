@@ -137,6 +137,9 @@ var button = scene.add.fileSelectorButton({
     // anchor: undefined,
     // width: undefined,
     // height: undefined,
+    // origin: 0.5
+    // originX:
+    // originY:
 
     orientation: 0,
     // rtl: false,
@@ -192,6 +195,7 @@ var button = scene.add.fileSelectorButton({
         - Padding : `'+n'`, or `'-n'`.
     - `onResizeCallback` : A default resize callback will be assigned interanlly. 
 - `width`, `height` : Minimum width, minimum height.
+- `origin`, `originX`, `originY` : Set origin of this sizer. Default value is (0.5, 0.5).
 - `orientation` :
     - `'left-to-right'`, `'horizontal'`,`'h'`, `'x'`, or `0` : Put icon at left side, and text at right side.
     - `'top-to-bottom'`, `'vertical'`,`'v'`, `'y'`, or `1` : Put icon at top side, and text at bottom side.

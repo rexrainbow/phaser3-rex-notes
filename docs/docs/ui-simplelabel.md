@@ -89,6 +89,9 @@ var label = scene.rexUI.add.simpleLabel({
     // anchor: undefined,
     // width: undefined,
     // height: undefined,
+    // origin: 0.5
+    // originX:
+    // originY:
 
     orientation: 0,
     // rtl: false,

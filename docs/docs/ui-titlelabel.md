@@ -81,6 +81,9 @@ var label = scene.rexUI.add.titleLabel({
     // anchor: undefined,
     // width: undefined,
     // height: undefined,
+    // origin: 0.5
+    // originX:
+    // originY:
 
     layoutMode: 0,
 
@@ -143,6 +146,7 @@ var label = scene.rexUI.add.titleLabel({
         - Padding : `'+n'`, or `'-n'`.
     - `onResizeCallback` : A default resize callback will be assigned interanlly. 
 - `width`, `height` : Minimum width, minimum height.
+- `origin`, `originX`, `originY` : Set origin of this sizer. Default value is (0.5, 0.5).
 - `layoutMode` : 
     - `0` : [`title`, `separator`, and `text` will be layout vertically, then layout with `icon`, `action` horizontally](ui-titlelabel.md#mode-0).
     - `1` : [`icon`, `text`, and `action` will be layout horizontally, then layout with `title`, `separator` vertically](ui-titlelabel.md#mode-1).

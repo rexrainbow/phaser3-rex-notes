@@ -83,6 +83,9 @@ var slider = scene.rexUI.add.slider({
     // anchor: undefined,
     // width: undefined,
     // height: undefined,
+    // origin: 0.5
+    // originX:
+    // originY:
 
     orientation: 0,
     reverseAxis: false,
@@ -169,6 +172,7 @@ var slider = scene.rexUI.add.slider({
         - Padding : `'+n'`, or `'-n'`.
     - `onResizeCallback` : A default resize callback will be assigned interanlly. 
 - `width`, `height` : Minimum width, minimum height.
+- `origin`, `originX`, `originY` : Set origin of this sizer. Default value is (0.5, 0.5).
 - `orientation` :
     - `'left-to-right'`, `'horizontal'`,`'h'`, `'x'`, or `0` : Horizontal slider.
     - `'top-to-bottom'`, `'vertical'`,`'v'`, `'y'`, or `1` : Vertical slider.

@@ -88,6 +88,9 @@ var dialog = scene.rexUI.add.confirmDialog({
     // anchor: undefined,
     // width: undefined,
     // height: undefined,
+    // origin: 0.5
+    // originX:
+    // originY:
 
     // Elements
     background: backgroundStyle,
@@ -219,6 +222,7 @@ var dialog = scene.rexUI.add.confirmDialog({
         - Padding : `'+n'`, or `'-n'`.
     - `onResizeCallback` : A default resize callback will be assigned interanlly. 
 - `width`, `height` : Minimum width, minimum height.
+- `origin`, `originX`, `originY` : Set origin of this sizer. Default value is (0.5, 0.5).
 - `background` : 
     - [Style of Background](ui-style.md#style-of-background) : Create Round-rectangle, Nine-slice, or Image as background element.
     - `null` : Don't create any game object.

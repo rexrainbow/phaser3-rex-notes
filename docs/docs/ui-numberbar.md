@@ -88,6 +88,9 @@ var numberBar = scene.rexUI.add.numberBar({
     // anchor: undefined,
     // width: undefined,
     // height: undefined,
+    // origin: 0.5
+    // originX:
+    // originY:
 
     background: backgroundGameObject,
     icon: iconGameObject,
@@ -180,6 +183,7 @@ var numberBar = scene.rexUI.add.numberBar({
         - Padding : `'+n'`, or `'-n'`.
     - `onResizeCallback` : A default resize callback will be assigned interanlly. 
 - `width`, `height` : Minimum width, minimum height.
+- `origin`, `originX`, `originY` : Set origin of this sizer. Default value is (0.5, 0.5).
 - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of numberBar.
 - `icon` : Game object of icon, optional.
 - `iconMask` : Set true to add a _circle_ mask on icon game object.

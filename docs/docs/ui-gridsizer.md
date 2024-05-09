@@ -87,6 +87,9 @@ var gridSizer = scene.rexUI.add.gridSizer({
     // anchor: undefined,
     // width: undefined,
     // height: undefined,
+    // origin: 0.5
+    // originX:
+    // originY:
 
     column: 0,  // col: 0
     row: 0,
@@ -198,6 +201,7 @@ var gridSizer = scene.rexUI.add.gridSizer(x, y, width, height, column, row, {
     - `onResizeCallback` : A default resize callback will be assigned interanlly. 
 - `width` : Minimum width. i.e. Width of this gridSizer will larger then this value.
 - `height` : Minimum height. i.e. Hieght of this gridSizer will larger then this value.
+- `origin`, `originX`, `originY` : Set origin of this sizer. Default value is (0.5, 0.5).
 - `column`, or `col` : Amount of column grids.
 - `row` : Amount of row grids.
 - `columnProportions`, `rowProportions` : Proportion of each column/row.

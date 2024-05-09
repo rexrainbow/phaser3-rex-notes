@@ -80,6 +80,9 @@ var colorComponents = scene.rexUI.add.colorComponents({
     // anchor: undefined,
     // width: undefined,
     // height: undefined,
+    // origin: 0.5
+    // originX:
+    // originY:
 
     background: backgroundGameObject,
 
@@ -264,6 +267,7 @@ var colorComponents = scene.rexUI.add.colorComponents({
         - Padding : `'+n'`, or `'-n'`.
     - `onResizeCallback` : A default resize callback will be assigned interanlly. 
 - `width`, `height` : Minimum width, minimum height.
+- `origin`, `originX`, `originY` : Set origin of this sizer. Default value is (0.5, 0.5).
 - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of colorComponents.
 - `formatLabel` : Clicking this label can switch color format between *RGB* and *HSV*
     - A [label](ui-label.md) game object, or a [text](text.md) game object.

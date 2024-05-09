@@ -82,6 +82,9 @@ var tabs = scene.rexUI.add.tabs({
     // anchor: undefined,
     // width: undefined,
     // height: undefined,
+    // origin: 0.5
+    // originX:
+    // originY:
 
     // Elements
     background: backgroundGameObject,
@@ -168,6 +171,7 @@ var tabs = scene.rexUI.add.tabs({
         - Padding : `'+n'`, or `'-n'`.
     - `onResizeCallback` : A default resize callback will be assigned interanlly. 
 - `width`, `height` : Minimum width, minimum height.
+- `origin`, `originX`, `originY` : Set origin of this sizer. Default value is (0.5, 0.5).
 - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of grid table.
 - `panel` : Game object of center panel.
 - `leftButtons`, `rightButtons`, `topButtons`, `bottomButtons` : Array of button game object.

@@ -84,6 +84,9 @@ var button = scene.rexUI.confirmActionButton({
     // anchor: undefined,
     // width: undefined,
     // height: undefined,
+    // origin: 0.5
+    // originX:
+    // originY:
 
     orientation: 0,
     // rtl: false,

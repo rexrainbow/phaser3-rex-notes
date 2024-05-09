@@ -8,8 +8,13 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 class Base extends Container {
     constructor(scene, x, y, minWidth, minHeight, config) {
         super(scene, x, y, 1, 1);
-
         this.isRexSizer = true;
+
+        var origin = GetValue(config, 'origin', 0.5);
+        var originX = GetValue(config, 'originX', origin);
+        var originY = GetValue(config, 'originY', origin);
+        this.setOrigin(originX, originY);
+
         this.setMinSize(minWidth, minHeight);
         this.setName(GetValue(config, 'name', ''));
         this.rexSizer = {};

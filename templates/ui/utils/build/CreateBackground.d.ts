@@ -4,7 +4,10 @@ export default CreateBackground;
 
 declare namespace CreateBackground {
     interface IConfig extends StatesRoundRectangle.IConfig {
-
+        alpha?: number,
+        tint?: number,
+        flipX?: boolean, flipY?: boolean,
+        origin?: number, originX?: number, originY?: number,
     }
 }
 

@@ -84,6 +84,9 @@ var tweaker = scene.rexUI.add.tweaker({
     // anchor: undefined,
     // width: undefined,
     // height: undefined,
+    // origin: 0.5
+    // originX:
+    // originY:
     // orientation: 0,
 
     // style: { ... }
@@ -196,6 +199,7 @@ var tweaker = scene.rexUI.add.tweaker({
         - Padding : `'+n'`, or `'-n'`.
     - `onResizeCallback` : A default resize callback will be assigned interanlly. 
 - `width`, `height` : Minimum width, minimum height.
+- `origin`, `originX`, `originY` : Set origin of this sizer. Default value is (0.5, 0.5).
 - `orientation` : Main orientation of the tweaker.
     - `'left-to-right'`, `'horizontal'`,`'h'`, `'x'`, or `0` : Arrange game objects from left ot right.
     - `'top-to-bottom'`, `'vertical'`,`'v'`, `'y'`, or `1` : Arrange game objects from top to bottom. Default value is `1`.

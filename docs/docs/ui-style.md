@@ -43,6 +43,11 @@ Create [Text](text.md), [BBCodetext](bbcodetext.md), [BitmapText](bitmaptext.md)
     // tint: 0xffffff,
     // alpha: 1,
     // scale: 1,
+    // flipX: false,
+    // flipY: false,
+    // origin:
+    // originX: 
+    // originY:
 
     // effects: true,
     // Style override in active state
@@ -89,6 +94,11 @@ Create [Text](text.md), [BBCodetext](bbcodetext.md), [BitmapText](bitmaptext.md)
     // tint: 0xffffff,
     // alpha: 1,
     // scale: 1,
+    // flipX: false,
+    // flipY: false,
+    // origin:
+    // originX: 
+    // originY:
     // width: 0,
     // height: 0,
 
@@ -139,6 +149,11 @@ Create [Text](text.md), [BBCodetext](bbcodetext.md), [BitmapText](bitmaptext.md)
     // tint: 0xffffff,
     // alpha: 1,
     // scale: 1,
+    // flipX: false,
+    // flipY: false,
+    // origin:
+    // originX: 
+    // originY:
     // width: 0,
     // height: 0,
 
@@ -181,6 +196,11 @@ Create [Text](text.md), [BBCodetext](bbcodetext.md), [BitmapText](bitmaptext.md)
 
     color: 0xffffff,
     // alpha: 1,
+    // flipX: false,
+    // flipY: false,
+    // origin:
+    // originX: 
+    // originY:
     strokeColor: 0xffffff,
     // strokeAlpha: 1,
     // strokeWidth: 2,
@@ -265,6 +285,15 @@ Create [Text](text.md), [BBCodetext](bbcodetext.md), [BitmapText](bitmaptext.md)
     //     descent: 0,
     //     fontSize: 0
     // },
+
+    // tint: 0xffffff,
+    // alpha: 1,
+    // scale: 1,
+    // flipX: false,
+    // flipY: false,
+    // origin:
+    // originX: 
+    // originY:
     
     // Style override in active state
     'active.fontFamily': undefined,
@@ -343,6 +372,15 @@ Create [Text](text.md), [BBCodetext](bbcodetext.md), [BitmapText](bitmaptext.md)
     //     descent: 0,
     //     fontSize: 0
     // },
+
+    // tint: 0xffffff,
+    // alpha: 1,
+    // scale: 1,
+    // flipX: false,
+    // flipY: false,
+    // origin:
+    // originX: 
+    // originY:
 }
 ```
 
@@ -358,6 +396,13 @@ Create [Text](text.md), [BBCodetext](bbcodetext.md), [BitmapText](bitmaptext.md)
     tint: undefined,
     letterSpacing: undefined,
     lineSpacing: undefined,
+
+    // tint: 0xffffff,
+    // alpha: 1,
+    // scale: 1,
+    // origin:
+    // originX: 
+    // originY:
 
     // Style override in active state
     'active.font': undefined,
@@ -390,6 +435,9 @@ Create [Text](text.md), [BBCodetext](bbcodetext.md), [BitmapText](bitmaptext.md)
 
     // width: undefined,
     // height: undefined,
+    // origin:
+    // originX:
+    // originY:
 
     orientation: 0,
     // rtl: false,
@@ -439,6 +487,12 @@ Create [Text](text.md), [BBCodetext](bbcodetext.md), [BitmapText](bitmaptext.md)
     $type: 'textarea',
 
     space: { left: 0, right: 0, top: 0, bottom: 0, text: 0, },
+    
+    // width:
+    // height:
+    // origin:
+    // originX:
+    // originY:
 
     background: backgroundStyle,
 

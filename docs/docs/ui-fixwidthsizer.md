@@ -85,6 +85,9 @@ var sizer = scene.rexUI.add.fixWidthSizer({
     // anchor: undefined,    
     // width: undefined,
     // height: undefined,
+    // origin: 0.5
+    // originX:
+    // originY:
     // orientation: 0,
 
     // space: {
@@ -156,6 +159,7 @@ var sizer = scene.rexUI.add.fixWidthSizer(x, y, width, height, {
         - Padding : `'+n'`, or `'-n'`.
     - `onResizeCallback` : A default resize callback will be assigned interanlly. 
 - `width`, `height` : Minimum width, minimum height.
+- `origin`, `originX`, `originY` : Set origin of this sizer. Default value is (0.5, 0.5).
 - `orientation` : Orientation of the sizer.
     - `'left-to-right'`, `'horizontal'`,`'h'`, `'x'`, or `0` : Arrange game objects from left ot right. Default value is `0`.
     - `'top-to-bottom'`, `'vertical'`,`'v'`, `'y'`, or `1` : Arrange game objects from top to bottom.

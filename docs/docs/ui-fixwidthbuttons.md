@@ -82,6 +82,9 @@ var buttons = scene.rexUI.add.fixWidthButtons({
     // anchor: undefined,
     // width: undefined,
     // height: undefined,
+    // origin: 0.5
+    // originX:
+    // originY:
 
     // Elements
     // background: backgroundGameObject,
@@ -131,6 +134,7 @@ var buttons = scene.rexUI.add.fixWidthButtons({
         - Padding : `'+n'`, or `'-n'`.
     - `onResizeCallback` : A default resize callback will be assigned interanlly. 
 - `width`, `height` : Minimum width, minimum height.
+- `origin`, `originX`, `originY` : Set origin of this sizer. Default value is (0.5, 0.5).
 - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of grid table.
 - `buttons` : 1d/2d array of button game objects.
 - `align` : Align children of a line.

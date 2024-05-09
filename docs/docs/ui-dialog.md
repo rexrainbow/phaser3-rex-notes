@@ -95,6 +95,9 @@ var dialog = scene.rexUI.add.dialog({
     // anchor: undefined,
     // width: undefined,
     // height: undefined,
+    // origin: 0.5
+    // originX:
+    // originY:
 
     // Elements
     background: backgroundGameObject,
@@ -226,6 +229,7 @@ var dialog = scene.rexUI.add.dialog({
         - Padding : `'+n'`, or `'-n'`.
     - `onResizeCallback` : A default resize callback will be assigned interanlly. 
 - `width`, `height` : Minimum width, minimum height.
+- `origin`, `originX`, `originY` : Set origin of this sizer. Default value is (0.5, 0.5).
 - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of dialog.
 - `title` : Game object of title, optional.
 - `toolbar` : Array of Game objects for toolbar-buttons group which arranged from left to right, optional.

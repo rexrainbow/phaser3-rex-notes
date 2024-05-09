@@ -16521,7 +16521,7 @@
     if (index === -1) {
       out[s] = true;
     } else {
-      var name = s.substring(0, index);
+      var name = s.substring(0, index).trimRight();
       var expression = s.substring(index + 1);
       var value = TypeConvert(expression);
 

@@ -86,6 +86,9 @@ var textArea = scene.rexUI.add.textArea({
     // anchor: undefined,
     // width: undefined,
     // height: undefined,
+    // origin: 0.5
+    // originX:
+    // originY:
 
     // Elements
     background: backgroundGameObject,
@@ -212,6 +215,7 @@ var textArea = scene.rexUI.add.textArea({
         - Padding : `'+n'`, or `'-n'`.
     - `onResizeCallback` : A default resize callback will be assigned interanlly. 
 - `width`, `height` : Minimum width, minimum height.
+- `origin`, `originX`, `originY` : Set origin of this sizer. Default value is (0.5, 0.5).
 - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of text area.
 - `text` : [Text object](text.md), [bbcode text object](bbcodetext.md), [tag text object](tagtext.md), or [bitmap text object](bitmaptext.md)
 - `textWidth` : Fixed width of text game object. Set `undefined` to ignore this feature.

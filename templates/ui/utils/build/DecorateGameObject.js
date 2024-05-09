@@ -1,5 +1,5 @@
 const Properties = [
-    'alpha', 'tint', 'originX', 'originY'
+    'alpha', 'tint', 'flipX', 'flipY'
 ]
 
 var DecorateGameObject = function (gameObject, config) {
@@ -11,6 +11,21 @@ var DecorateGameObject = function (gameObject, config) {
         var propertyName = Properties[i];
         if ((propertyName in config) && (propertyName in gameObject)) {
             gameObject[propertyName] = config[propertyName];
+        }
+    }
+
+    if (('origin' in config) && ('originX' in gameObject)) {
+        gameObject.setOrigin(config.origin);
+    } else {
+        var originX, originY;
+        if (('originX' in config) && ('originX' in gameObject)) {
+            originX = config.originX;
+        }
+        if (('originY' in config) && ('originY' in gameObject)) {
+            originY = config.originY;
+        }
+        if ((originX !== undefined) && (originY !== undefined)) {
+            gameObject.setOrigin(originX, originY);
         }
     }
 

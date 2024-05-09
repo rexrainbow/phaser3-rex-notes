@@ -100,6 +100,9 @@ var panel = scene.rexUI.add.scrollablePanel({
     // anchor: undefined,
     // width: undefined,
     // height: undefined,
+    // origin: 0.5
+    // originX:
+    // originY:
 
     // scrollMode: 0,
 
@@ -241,6 +244,7 @@ var panel = scene.rexUI.add.scrollablePanel({
         - Padding : `'+n'`, or `'-n'`.
     - `onResizeCallback` : A default resize callback will be assigned interanlly. 
 - `width`, `height` : Minimum width, minimum height.
+- `origin`, `originX`, `originY` : Set origin of this sizer. Default value is (0.5, 0.5).
 - `scrollMode` : Scroll panel vertically, or horizontally.
     - `0`, `'vertical'`, or `'v'`, `'y'` : Scroll panel vertically. Default value.
     - `1`, `'horizontal'`, or `'h'`. `'x'` : Scroll panel horizontally.

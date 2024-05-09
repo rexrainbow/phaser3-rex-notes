@@ -95,6 +95,9 @@ var table = scene.rexUI.add.gridTable({
     // anchor: undefined,
     // width: undefined,
     // height: undefined,
+    // origin: 0.5
+    // originX:
+    // originY:
 
     // scrollMode: 0,
 
@@ -266,6 +269,7 @@ var table = scene.rexUI.add.gridTable({
 - `width`, `height` : Minimum width, minimum height.
     - Set `width` to `undefined`, and `table.width` is not `undefined`, will count width via table + slider.
     - Set `height` to `undefined`, and `table.height` is not `undefined`, will count height via table + slider.
+- `origin`, `originX`, `originY` : Set origin of this sizer. Default value is (0.5, 0.5).
 - `scrollMode` : Scroll panel vertically, or horizontally.
     - `0`, `'vertical'`, or `'v'`, `'y'` : Scroll panel vertically. Default value.
     - `1`, `'horizontal'`, or `'h'`. `'x'` : Scroll panel horizontally.

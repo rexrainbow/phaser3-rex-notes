@@ -10835,6 +10835,10 @@
       _classCallCheck(this, Base);
       _this = _callSuper(this, Base, [scene, x, y, 1, 1]);
       _this.isRexSizer = true;
+      var origin = GetValue$2(config, 'origin', 0.5);
+      var originX = GetValue$2(config, 'originX', origin);
+      var originY = GetValue$2(config, 'originY', origin);
+      _this.setOrigin(originX, originY);
       _this.setMinSize(minWidth, minHeight);
       _this.setName(GetValue$2(config, 'name', ''));
       _this.rexSizer = {};

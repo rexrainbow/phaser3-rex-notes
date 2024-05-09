@@ -81,6 +81,9 @@ var pages = scene.rexUI.add.pages({
     // anchor: undefined,
     // width: undefined,
     // height: undefined,
+    // origin: 0.5
+    // originX:
+    // originY:
     // space: { left: 0, right:0, top:0, bottom:0 },
     // swapMode: 0,
     // fadeIn: 0,
@@ -104,6 +107,7 @@ var pages = scene.rexUI.add.pages({
         - Padding : `'+n'`, or `'-n'`.
     - `onResizeCallback` : A default resize callback will be assigned interanlly. 
 - `width`, `height` : Minimum width, minimum height.
+- `origin`, `originX`, `originY` : Set origin of this sizer. Default value is (0.5, 0.5).
 - `space` : Pads spaces.
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
 - `swapMode` : Set to invisible or destroy swapped page.

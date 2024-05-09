@@ -10835,6 +10835,10 @@
       _classCallCheck(this, Base);
       _this = _callSuper(this, Base, [scene, x, y, 1, 1]);
       _this.isRexSizer = true;
+      var origin = GetValue$J(config, 'origin', 0.5);
+      var originX = GetValue$J(config, 'originX', origin);
+      var originY = GetValue$J(config, 'originY', origin);
+      _this.setOrigin(originX, originY);
       _this.setMinSize(minWidth, minHeight);
       _this.setName(GetValue$J(config, 'name', ''));
       _this.rexSizer = {};
@@ -20430,7 +20434,7 @@
   }(NinePatch);
   Object.assign(StatesNinePatch.prototype, HelperMethods);
 
-  var Properties = ['alpha', 'tint'];
+  var Properties = ['alpha', 'tint', 'flipX', 'flipY'];
   var DecorateGameObject = function DecorateGameObject(gameObject, config) {
     if (!config) {
       return gameObject;
@@ -20439,6 +20443,20 @@
       var propertyName = Properties[i];
       if (propertyName in config && propertyName in gameObject) {
         gameObject[propertyName] = config[propertyName];
+      }
+    }
+    if ('origin' in config && 'originX' in gameObject) {
+      gameObject.setOrigin(config.origin);
+    } else {
+      var originX, originY;
+      if ('originX' in config && 'originX' in gameObject) {
+        originX = config.originX;
+      }
+      if ('originY' in config && 'originY' in gameObject) {
+        originY = config.originY;
+      }
+      if (originX !== undefined && originY !== undefined) {
+        gameObject.setOrigin(originX, originY);
       }
     }
     return gameObject;

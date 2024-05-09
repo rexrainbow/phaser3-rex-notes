@@ -80,6 +80,9 @@ var textAreaInput = scene.rexUI.add.textAreaInput({
     // anchor: undefined,
     // width: undefined,
     // height: undefined,
+    // origin: 0.5
+    // originX:
+    // originY:
 
     // Elements
     background: backgroundGameObject,
@@ -307,6 +310,7 @@ var textAreaInput = scene.rexUI.add.textAreaInput({
         - Padding : `'+n'`, or `'-n'`.
     - `onResizeCallback` : A default resize callback will be assigned interanlly. 
 - `width`, `height` : Minimum width, minimum height.
+- `origin`, `originX`, `originY` : Set origin of this sizer. Default value is (0.5, 0.5).
 - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of text area.
 - `text` : [Configuration of CanvasInput](canvasinput.md#create-instance), or a CanvasInput game object.
 - `slider` : Componments of slider, optional.

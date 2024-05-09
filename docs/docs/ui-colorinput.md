@@ -80,6 +80,9 @@ var colorInput = scene.rexUI.add.colorInput({
     // anchor: undefined,
     // width: undefined,
     // height: undefined,
+    // origin: 0.5
+    // originX:
+    // originY:
 
     background: backgroundGameObject,
 
@@ -158,6 +161,7 @@ var colorInput = scene.rexUI.add.colorInput({
         - Padding : `'+n'`, or `'-n'`.
     - `onResizeCallback` : A default resize callback will be assigned interanlly. 
 - `width`, `height` : Minimum width, minimum height.
+- `origin`, `originX`, `originY` : Set origin of this sizer. Default value is (0.5, 0.5).
 - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of colorInput.
 - `swatch` : Display color value on a square, circle shape, or an image game object with tint.
     - `undefein` : A square swatch. Default game object.

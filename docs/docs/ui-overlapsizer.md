@@ -81,7 +81,10 @@ var sizer = scene.rexUI.add.overlapSizer({
     // y: 0,
     // anchor: undefined,
     // width: undefined,
-    // height: undefined,
+    // height: undefined,    
+    // origin: 0.5
+    // originX:
+    // originY:
     // space: { left: 0, right:0, top:0, bottom:0 },
 
     // name: '',
@@ -97,7 +100,10 @@ or
 var sizer = scene.rexUI.add.overlapSizer(x, y, {
     // width: undefined,
     // height: undefined,
-    // anchor: undefined,
+    // anchor: undefined,    
+    // origin: 0.5
+    // originX:
+    // originY:
     // space: { left: 0, right:0, top:0, bottom:0 },
 
     // name: '',
@@ -112,6 +118,9 @@ or
 ```javascript
 var sizer = scene.rexUI.add.overlapSizer(x, y, width, height, {
     // anchor: undefined,
+    // origin: 0.5
+    // originX:
+    // originY:
     // space: { left: 0, right:0, top:0, bottom:0 },
 
     // name: '',
@@ -133,6 +142,7 @@ var sizer = scene.rexUI.add.overlapSizer(x, y, width, height, {
         - Padding : `'+n'`, or `'-n'`.
     - `onResizeCallback` : A default resize callback will be assigned interanlly. 
 - `width`, `height` : Minimum width, minimum height.
+- `origin`, `originX`, `originY` : Set origin of this sizer. Default value is (0.5, 0.5).
 - `space` : Pads spaces.
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
 - `name` : Set name of this game object.

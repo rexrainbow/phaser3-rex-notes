@@ -83,6 +83,9 @@ var holyGrail = scene.rexUI.add.holyGrail({
     // anchor: undefined,
     // width: undefined,
     // height: undefined,
+    // origin: 0.5
+    // originX:
+    // originY:
 
     layoutMode: 0,
 
@@ -155,6 +158,7 @@ var holyGrail = scene.rexUI.add.holyGrail({
         - Padding : `'+n'`, or `'-n'`.
     - `onResizeCallback` : A default resize callback will be assigned interanlly. 
 - `width`, `height` : Minimum width, minimum height.
+- `origin`, `originX`, `originY` : Set origin of this sizer. Default value is (0.5, 0.5).
 - `layoutMode` : Expand left side, right side to bottom row.
     - `0`, or `'FFF'` : [Bottom row is footer](ui-holygrail.md#mode-0). Default behavior
     - `1`, or `'LFF'` : [Left side will expand down to bottom row](ui-holygrail.md#mode-1).

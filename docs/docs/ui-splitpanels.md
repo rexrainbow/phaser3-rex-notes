@@ -80,6 +80,9 @@ var splitPanels = scene.rexUI.add.splitPanels({
     // anchor: undefined,
     // width: undefined,
     // height: undefined,
+    // origin: 0.5
+    // originX:
+    // originY:
 
     background: backgroundGameObject,
 
@@ -131,6 +134,7 @@ var splitPanels = scene.rexUI.add.splitPanels({
         - Padding : `'+n'`, or `'-n'`.
     - `onResizeCallback` : A default resize callback will be assigned interanlly. 
 - `width`, `height` : Minimum width, minimum height.
+- `origin`, `originX`, `originY` : Set origin of this sizer. Default value is (0.5, 0.5).
 - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of label.
 - `leftPanel`(`topPanel`), `rightPanel`(`bottomPanel`) : First and second panel children.
 - `splitter` : Game object of splitter.

@@ -80,6 +80,9 @@ var tabPages = scene.rexUI.add.tabPages({
     // anchor: undefined,
     // width: undefined,
     // height: undefined,
+    // origin: 0.5
+    // originX:
+    // originY:
 
     // background: backgroundGameObject,
 
@@ -136,6 +139,7 @@ var tabPages = scene.rexUI.add.tabPages({
         - Padding : `'+n'`, or `'-n'`.
     - `onResizeCallback` : A default resize callback will be assigned interanlly. 
 - `width`, `height` : Minimum width, minimum height.
+- `origin`, `originX`, `originY` : Set origin of this sizer. Default value is (0.5, 0.5).
 - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of label.
 - `tabsPosition` (or `tabPosition`) : Put tabs at top, bottom, left, right of pages.
     - `'top'`, `'bottom'`, `'left'`, `'right'` : Default value is `'top'`.

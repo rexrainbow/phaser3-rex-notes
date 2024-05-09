@@ -80,6 +80,9 @@ var colorPicker = scene.rexUI.add.colorPicker({
     // anchor: undefined,
     // width: undefined,
     // height: undefined,
+    // origin: 0.5
+    // originX:
+    // originY:
 
     background: backgroundGameObject,
 
@@ -122,6 +125,7 @@ var colorPicker = scene.rexUI.add.colorPicker({
         - Padding : `'+n'`, or `'-n'`.
     - `onResizeCallback` : A default resize callback will be assigned interanlly. 
 - `width`, `height` : Minimum width, minimum height.
+- `origin`, `originX`, `originY` : Set origin of this sizer. Default value is (0.5, 0.5).
 - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of colorPicker.
 - `hPalette` : Configuration of h-palette. H-palette is rendered on a [canvas game object](canvas.md).
     - `hPalette.position` : Position of h-palette.

@@ -30,6 +30,8 @@ declare namespace BaseSizer {
 
         anchor?: Anchor.IConfig,
 
+        origin?: number, originX?: number, originY?: number,
+
         name?: string,
 
         enableLayer?: boolean,
