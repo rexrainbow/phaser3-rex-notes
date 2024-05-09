@@ -47,6 +47,9 @@ var GenerateDefaultCreateGameObjectCallback = function (
         gameObject.vpx = vpx;
         gameObject.vpy = vpy;
 
+        var { scale = 1, scaleX = scale, scaleY = scale } = config;
+        gameObject.setScale(scaleX, scaleY);
+
         return gameObject;
     }
 }

@@ -11,6 +11,9 @@
       expression=
       vpx=0.5
       vpy=1
+      scale=1
+      scaleX=
+      scaleY=
     
     ```
     - `name`, `expression` : Set texture key to `name`, and frame name to `expression`.
