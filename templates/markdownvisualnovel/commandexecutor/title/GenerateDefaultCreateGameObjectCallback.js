@@ -2,6 +2,7 @@ import { SimpleTitleLabel } from '../../../ui/ui-components.js';
 import { TransitionImagePack } from '../../../ui/ui-components.js';
 import DecorateGameObject from '../../../ui/utils/build/DecorateGameObject.js';
 import AddViewportCoordinateProperties from '../../../../plugins/behaviors/viewportcoordinate/AddViewportCoordinateProperties.js';
+import { AddShakeBehavior } from '../utils/Shake.js';
 
 var GenerateDefaultCreateGameObjectCallback = function (
     style,
@@ -61,19 +62,19 @@ var GenerateDefaultCreateGameObjectCallback = function (
 
         var originX;
         if (alignLeft) {
-            originX=0;
+            originX = 0;
         } else if (alignRight) {
-            originX=1;
-        }else {
-            originX=0.5
+            originX = 1;
+        } else {
+            originX = 0.5
         }
         var originY;
         if (alignTop) {
-            originY=0;
+            originY = 0;
         } else if (alignBottom) {
-            originY=1;
-        }else {
-            originY=0.5
+            originY = 1;
+        } else {
+            originY = 0.5
         }
 
 
@@ -88,6 +89,8 @@ var GenerateDefaultCreateGameObjectCallback = function (
 
         gameObject.vpx = vpx;
         gameObject.vpy = vpy;
+
+        AddShakeBehavior(gameObject);
 
         return gameObject;
     }

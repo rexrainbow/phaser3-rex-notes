@@ -170,6 +170,11 @@ CharacterA.say
   typingSpeed=500
   more=true
 
+!CharacterA.shake
+
+Dialog.shake
+  wait=false
+
 ```Dialog.typing, displayName=A, icon=portraits, name=A, expression=smile
 Line0...
 Line1...

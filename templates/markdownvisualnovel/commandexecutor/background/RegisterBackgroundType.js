@@ -1,7 +1,8 @@
 import { BG } from '../../const/GameObjects.js';
 import { BGLayer } from '../../const/Layers.js';
 import GenerateDefaultCreateGameObjectCallback from './GenerateDefaultCreateGameObjectCallback.js';
-import Cross from './Cross.js';
+import Cross from '../utils/Cross.js';
+import Shake from '../utils/Shake.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
@@ -39,6 +40,7 @@ var RegisterBackgroundType = function (commandExecutor, config) {
 
         commands: {
             cross: Cross,
+            shake: Shake,
         }
     })
 }

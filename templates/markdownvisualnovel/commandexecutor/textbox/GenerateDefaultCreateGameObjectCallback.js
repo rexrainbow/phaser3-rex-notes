@@ -5,6 +5,7 @@ import SetValue from '../../../../plugins/utils/object/SetValue.js';
 import AddViewportCoordinateProperties from '../../../../plugins/behaviors/viewportcoordinate/AddViewportCoordinateProperties.js';
 import AddEvent from '../../../../plugins/utils/gameobject/addevent/AddEvent.js';
 import KeyMap from '../../../../plugins/utils/input/KeyMap.js';
+import { AddShakeBehavior } from '../utils/Shake.js';
 
 var GenerateDefaultCreateGameObjectCallback = function (
     style,
@@ -162,6 +163,8 @@ var GenerateDefaultCreateGameObjectCallback = function (
                     .off('click', onClick)
                     .once('click', onClick)
             });
+
+        AddShakeBehavior(gameObject);
 
         return gameObject;
     }

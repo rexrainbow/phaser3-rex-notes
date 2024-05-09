@@ -1,5 +1,6 @@
 import { TransitionImagePack } from '../../../ui/ui-components.js';
 import AddViewportCoordinateProperties from '../../../../plugins/behaviors/viewportcoordinate/AddViewportCoordinateProperties.js';
+import { AddShakeBehavior } from '../utils/Shake.js';
 
 var GenerateDefaultCreateGameObjectCallback = function (
     style,
@@ -52,7 +53,7 @@ var GenerateDefaultCreateGameObjectCallback = function (
             }
         }
 
-
+        AddShakeBehavior(gameObject);
 
         return gameObject;
     }

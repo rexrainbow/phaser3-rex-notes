@@ -1,3 +1,5 @@
+import CrossBase from '../utils/Cross.js';
+
 var Cross = function (
     gameObject,
     {
@@ -26,25 +28,15 @@ var Cross = function (
         frame = expression;
     }
 
-    if (!frame) {
-        frame = '__BASE';
-    }
-    // Don't do transition if texture is not changed
-    if ((key === gameObject.texture.key) && (frame === gameObject.frame.name)) {
-        return;
-    }
-
-    if (duration === undefined) {
-        duration = eventSheetManager.getData('$transitionDuration');
-    }
-
-    // Wait until transition complete
-    if (wait) {
-        commandExecutor.waitEvent(gameObject, 'complete');
-    }
-
-    gameObject.setDuration(duration);
-    gameObject.transit(key, frame, mode);
+    CrossBase(
+        gameObject,
+        {
+            key, frame,
+            duration, mode,
+            wait
+        },
+        commandExecutor, eventSheetManager, eventSheet
+    );
 }
 
 export default Cross;

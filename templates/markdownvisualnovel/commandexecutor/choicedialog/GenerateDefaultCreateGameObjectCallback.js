@@ -1,5 +1,6 @@
 import { ConfirmDialog } from '../../../ui/ui-components.js';
 import AddViewportCoordinateProperties from '../../../../plugins/behaviors/viewportcoordinate/AddViewportCoordinateProperties.js';
+import { AddShakeBehavior } from '../utils/Shake.js';
 
 var GenerateDefaultCreateGameObjectCallback = function (
     style,
@@ -37,6 +38,8 @@ var GenerateDefaultCreateGameObjectCallback = function (
 
         gameObject.vpx = vpx;
         gameObject.vpy = vpy;
+
+        AddShakeBehavior(gameObject);
 
         return gameObject;
     }

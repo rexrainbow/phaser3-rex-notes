@@ -96,3 +96,14 @@ NAME.typing
   text1
 
 ```
+
+### Shake
+
+```
+
+NAME.shake
+  duration=
+  Magnitude=
+  wait=true
+
+```

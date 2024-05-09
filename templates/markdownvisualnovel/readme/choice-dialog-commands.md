@@ -95,3 +95,14 @@ NAME.choice
 - If click button1 (option1), resultKey( choiceIndex) will set to `1`
 - If click button2 (option2), resultKey( choiceIndex) will set to `2`
 - If click button3 (option3), resultKey( choiceIndex) will set to `3`
+
+### Shake
+
+```
+
+NAME.shake
+  duration=
+  Magnitude=
+  wait=true
+
+```

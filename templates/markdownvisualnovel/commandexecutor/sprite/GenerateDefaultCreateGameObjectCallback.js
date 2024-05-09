@@ -1,5 +1,6 @@
 import { TransitionImagePack } from '../../../ui/ui-components.js';
 import AddViewportCoordinateProperties from '../../../../plugins/behaviors/viewportcoordinate/AddViewportCoordinateProperties.js';
+import { AddShakeBehavior } from '../utils/Shake.js';
 
 var GenerateDefaultCreateGameObjectCallback = function (
     style,
@@ -49,6 +50,8 @@ var GenerateDefaultCreateGameObjectCallback = function (
 
         var { scale = 1, scaleX = scale, scaleY = scale } = config;
         gameObject.setScale(scaleX, scaleY);
+
+        AddShakeBehavior(gameObject);
 
         return gameObject;
     }

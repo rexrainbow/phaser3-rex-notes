@@ -108,3 +108,13 @@ NAME.cross
     - Shader effects : `'pixellate'`, `'dissolve'`, 
       `'revealLeft'`, `'revealRight'`, `'revealUp'`, `'revealDown'`
 
+### Shake
+
+```
+
+NAME.shake
+  duration=
+  Magnitude=
+  wait=true
+
+```

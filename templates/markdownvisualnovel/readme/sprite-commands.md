@@ -305,3 +305,14 @@ Wait an extra clicking after typing complete internally.
 - `wait` :
   - `false` : If `clickAfterComplete` is `false`, running next command immediately.
   - `true` : If `clickAfterComplete` is `false`, wait until typing complete.
+
+### Shake
+
+```
+
+NAME.shake
+  duration=
+  Magnitude=
+  wait=true
+
+```

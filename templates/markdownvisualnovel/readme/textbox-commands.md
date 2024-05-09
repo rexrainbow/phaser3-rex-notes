@@ -152,3 +152,14 @@ text-line2
   - `true` : If `clickAfterComplete` is `false`, wait until typing complete. Default value is `true`.
 
 Wait an extra clicking after typing complete internally.
+
+### Shake
+
+```
+
+NAME.shake
+  duration=
+  Magnitude=
+  wait=true
+
+```
