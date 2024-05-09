@@ -42,6 +42,7 @@ class Demo extends Phaser.Scene {
             commandExecutor: CreateCommandExecutor(this)
         })
             .addEventSheet(this.cache.text.get('eventSheet0'))
+            .setData('charA', { hp: 10, mp: 20 })
 
         eventSheetManager
             .on('pause.input', function () {

@@ -1,5 +1,5 @@
 function DeepClone(obj) {
-    if (obj === null || typeof obj !== "object") {
+    if (obj === null || typeof obj !== 'object') {
         // If obj is a primitive value or null, return it directly
         return obj;
     }

@@ -43,6 +43,16 @@ export default {
                 }
             }
 
+            // Put reference of game object into memory
+            var memoryKey = `@${id}`;
+            if (eventSheetManager.hasData(memoryKey)) {
+                console.warn(`CommandExecutor: Duplicated GameObject ID=${id}`);
+            }
+            eventSheetManager.setData(memoryKey, gameObject);
+            gameObject.once('destroy', function () {
+                eventSheetManager.removeData(memoryKey);
+            })
+
             if (autoClear) {
                 var gameObject = sys.getGameObject(name, id);
 

@@ -2,6 +2,7 @@ import DeepClone from '../../../utils/object/DeepClone.js';
 import SetValue from '../../../utils/object/SetValue.js';
 import GetValue from '../../../utils/object/GetValue.js';
 import HasValue from '../../../utils/object/HasValue.js';
+import RemoveKey from '../../../utils/object/RemoveKey.js';
 
 class Blackboard {
 
@@ -128,6 +129,11 @@ class Blackboard {
 
     toggleData(key, treeID, nodeID, startValue) {
         return this.toggle(key, treeID, nodeID, startValue);
+    }
+
+    removeData(key, treeID, nodeID) {
+        var memory = this._getMemory(treeID, nodeID);
+        RemoveKey(memory, key);
     }
 
     removeTree(treeID) {

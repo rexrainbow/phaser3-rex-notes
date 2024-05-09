@@ -30,6 +30,11 @@ export default {
         return this.blackboard.getData(key);
     },
 
+    removeData(key) {
+        this.blackboard.removeData(key);
+        return this;
+    },
+
     addExpression(name, callback) {
         this.setData(name, callback);
         return this;

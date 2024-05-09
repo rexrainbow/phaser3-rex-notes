@@ -81,10 +81,10 @@ export default {
                 table[key] = memory[key];
             })
         } else {
-            table = memory;
+            table = memory
         }
 
-        this.sys.logger.log(table, 'table');
+        this.sys.logger.log(table);
         return this;
     },
 }

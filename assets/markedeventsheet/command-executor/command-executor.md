@@ -121,6 +121,10 @@ CharacterC.to
   duration=2000
 // Wait until tween complete
 
+log
+  text=CharacterA.x = {{@CharacterA.x}}
+
+
 // Ease all SPRITE game objects excluding CharacterA
 // !CharacterA.to
 //   alpha=0.5

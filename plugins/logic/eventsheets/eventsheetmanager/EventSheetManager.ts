@@ -56,6 +56,8 @@ declare class EventSheetManager extends EventEmitter {
 
     getData(key: string): any;
 
+    removeData(key: string): this;
+
     addExpression(
         key: string,
         callback: (...args: number[]) => number

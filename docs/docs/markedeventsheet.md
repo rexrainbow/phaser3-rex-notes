@@ -987,6 +987,9 @@ GOTYPE
 
 Reserved id : `time`, `click`, `key`, `bgm`, `bgm2`, `se`, `se2`, `camera`.
 
+Will store reference of this game object into memory at key `@NAME`, 
+can see it by `log.memory`, or get property of game object via `#(@NAME.x + 3)`.
+
 
 ##### Set properties of custom game object
 
