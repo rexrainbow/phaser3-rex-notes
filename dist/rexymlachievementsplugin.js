@@ -4146,12 +4146,10 @@
   (function (exports) {
     /*
       Returns a Parser object of the following structure:
-    
-      Parser: {
+    	  Parser: {
         yy: {}
       }
-    
-      Parser.prototype: {
+    	  Parser.prototype: {
         yy: {},
         trace: function(),
         symbols_: {associative list: name ==> number},
@@ -4162,8 +4160,7 @@
         defaultActions: {...},
         parseError: function(str, hash),
         parse: function(input),
-    
-        lexer: {
+    	    lexer: {
             EOF: 1,
             parseError: function(str, hash),
             setInput: function(input),
@@ -4182,19 +4179,16 @@
             _currentRules: function(),
             topState: function(),
             pushState: function(condition),
-    
-            options: {
+    	        options: {
                 ranges: boolean           (optional: true ==> token location info will include a .range[] member)
                 flex: boolean             (optional: true ==> flex-like lexing behaviour where the rules are tested exhaustively to find the longest match)
                 backtrack_lexer: boolean  (optional: true ==> lexer regexes are tested in order and for each matching regex the action code is invoked; the lexer terminates the scan when a token is returned by the action code)
             },
-    
-            performAction: function(yy, yy_, $avoiding_name_collisions, YY_START),
+    	        performAction: function(yy, yy_, $avoiding_name_collisions, YY_START),
             rules: [...],
             conditions: {associative list: name ==> set},
         }
       }
-    
     
       token location info (@$, _$, etc.): {
         first_line: n,
@@ -4203,7 +4197,6 @@
         last_column: n,
         range: [start_number, end_number]       (where the numbers are indexes into the input string, regular zero-based)
       }
-    
     
       the parseError function receives a 'hash' object with these members for lexer and parser errors: {
         text:        (matched text)
@@ -5462,7 +5455,7 @@
                 return 'INVALID';
             }
           },
-          rules: [/^(?:\s+)/, /^(?:[0-9]+(\.[0-9]+)?\b)/, /^(?:\b0x[0-9A-Fa-f]+\b)/, /^(?:\*)/, /^(?:\/)/, /^(?:-)/, /^(?:\+)/, /^(?:\^)/, /^(?:%)/, /^(?:>=)/, /^(?:<=)/, /^(?:>)/, /^(?:<)/, /^(?:==)/, /^(?:!=)/, /^(?:\|\|)/, /^(?:&&)/, /^(?:\?)/, /^(?::)/, /^(?:\()/, /^(?:\))/, /^(?:\[)/, /^(?:\])/, /^(?:,)/, /^(?:\.)/, /^(?:true\b)/, /^(?:false\b)/, /^(?:[^\s\*\/\-\+\^\%\>\=\<\!\|\&\?\:\(\)\[\]\,\.]+)/, /^(?:"(\\.|[^\"\\])*"|'(\\.|[^\'\\])*')/, /^(?:$)/, /^(?:.)/],
+          rules: [/^(?:\s+)/, /^(?:[0-9]+(\.[0-9]+)?\b)/, /^(?:\b0x[0-9A-Fa-f]+\b)/, /^(?:\*)/, /^(?:\/)/, /^(?:-)/, /^(?:\+)/, /^(?:\^)/, /^(?:%)/, /^(?:>=)/, /^(?:<=)/, /^(?:>)/, /^(?:<)/, /^(?:==)/, /^(?:!=)/, /^(?:\|\|)/, /^(?:&&)/, /^(?:\?)/, /^(?::)/, /^(?:\()/, /^(?:\))/, /^(?:\[)/, /^(?:\])/, /^(?:,)/, /^(?:\.)/, /^(?:true\b)/, /^(?:false\b)/, /^(?:[^\s\*\/\-\+\^\%\>\=\<\!\|\&\?\:\(\)\[\]\,\.\"\']+)/, /^(?:"(\\.|[^\"\\])*"|'(\\.|[^\'\\])*')/, /^(?:$)/, /^(?:.)/],
           conditions: {
             "INITIAL": {
               "rules": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30],

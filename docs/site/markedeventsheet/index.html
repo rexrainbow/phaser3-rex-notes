@@ -10757,6 +10757,16 @@
 <span class="w">    </span><span class="nx">once</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span>
 <span class="p">})</span>
 </code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">addEventSheet</span><span class="p">(</span><span class="nx">content</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">groupName</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;_&#39;</span>
+<span class="w">    </span><span class="nx">commentLineStart</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;\/\/&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">lineBreak</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;\\&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">parallel</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">active</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">once</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="p">})</span>
+</code></pre></div>
 <ul>
 <li><code>content</code> : See <a href="./#structure-of-event-sheet">structure of event sheet</a></li>
 <li><code>commentLineStart</code> : Content line start by this symobl (default value is <code>//</code>) will be ignored as a comment line.</li>
@@ -11008,6 +11018,7 @@ And game objects with <code>'autoClear'</code> will be destroyed.</p>
 <h4 id="main-headings">Main headings<a class="headerlink" href="#main-headings" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code># Title
 
+groupName
 parallel
 active=false
 once
@@ -11023,6 +11034,7 @@ coin &gt; 5
 <ul>
 <li>H1 heading : Title of this event sheet</li>
 <li>Content under Title (H1 heading) : Setting of this event sheet, optional.<ul>
+<li><code>groupName</code> : Assign <code>groupName</code> in event sheet, put this event sheet in to that group.</li>
 <li><code>parallel</code> : Set <code>parallel</code> property of this event sheet to <code>true</code>.</li>
 <li><code>active=false</code> : Set <code>active</code> property of this event sheet to <code>false</code>.</li>
 <li><code>once</code> : Set <code>once</code> property of this event sheet to <code>true</code>.</li>
@@ -11513,6 +11525,8 @@ line2
 </li>
 </ul>
 <p>Reserved id : <code>time</code>, <code>click</code>, <code>key</code>, <code>bgm</code>, <code>bgm2</code>, <code>se</code>, <code>se2</code>, <code>camera</code>.</p>
+<p>Will store reference of this game object into memory at key <code>@NAME</code>, 
+can see it by <code>log.memory</code>, or get property of game object via <code>#(@NAME.x + 3)</code>.</p>
 <h5 id="set-properties-of-custom-game-object">Set properties of custom game object<a class="headerlink" href="#set-properties-of-custom-game-object" title="Permanent link">&para;</a></h5>
 <ul>
 <li>Set properties of a game object indexing by <code>NAME</code>

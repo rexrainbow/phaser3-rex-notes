@@ -2835,7 +2835,7 @@
   };
 
   function DeepClone(obj) {
-    if (obj === null || _typeof(obj) !== "object") {
+    if (obj === null || _typeof(obj) !== 'object') {
       // If obj is a primitive value or null, return it directly
       return obj;
     }

@@ -661,7 +661,7 @@
   };
 
   function DeepClone(obj) {
-    if (obj === null || _typeof(obj) !== "object") {
+    if (obj === null || _typeof(obj) !== 'object') {
       // If obj is a primitive value or null, return it directly
       return obj;
     }
@@ -778,12 +778,10 @@
   (function (exports) {
     /*
       Returns a Parser object of the following structure:
-    
-      Parser: {
+    	  Parser: {
         yy: {}
       }
-    
-      Parser.prototype: {
+    	  Parser.prototype: {
         yy: {},
         trace: function(),
         symbols_: {associative list: name ==> number},
@@ -794,8 +792,7 @@
         defaultActions: {...},
         parseError: function(str, hash),
         parse: function(input),
-    
-        lexer: {
+    	    lexer: {
             EOF: 1,
             parseError: function(str, hash),
             setInput: function(input),
@@ -814,19 +811,16 @@
             _currentRules: function(),
             topState: function(),
             pushState: function(condition),
-    
-            options: {
+    	        options: {
                 ranges: boolean           (optional: true ==> token location info will include a .range[] member)
                 flex: boolean             (optional: true ==> flex-like lexing behaviour where the rules are tested exhaustively to find the longest match)
                 backtrack_lexer: boolean  (optional: true ==> lexer regexes are tested in order and for each matching regex the action code is invoked; the lexer terminates the scan when a token is returned by the action code)
             },
-    
-            performAction: function(yy, yy_, $avoiding_name_collisions, YY_START),
+    	        performAction: function(yy, yy_, $avoiding_name_collisions, YY_START),
             rules: [...],
             conditions: {associative list: name ==> set},
         }
       }
-    
     
       token location info (@$, _$, etc.): {
         first_line: n,
@@ -835,7 +829,6 @@
         last_column: n,
         range: [start_number, end_number]       (where the numbers are indexes into the input string, regular zero-based)
       }
-    
     
       the parseError function receives a 'hash' object with these members for lexer and parser errors: {
         text:        (matched text)
@@ -2094,7 +2087,7 @@
                 return 'INVALID';
             }
           },
-          rules: [/^(?:\s+)/, /^(?:[0-9]+(\.[0-9]+)?\b)/, /^(?:\b0x[0-9A-Fa-f]+\b)/, /^(?:\*)/, /^(?:\/)/, /^(?:-)/, /^(?:\+)/, /^(?:\^)/, /^(?:%)/, /^(?:>=)/, /^(?:<=)/, /^(?:>)/, /^(?:<)/, /^(?:==)/, /^(?:!=)/, /^(?:\|\|)/, /^(?:&&)/, /^(?:\?)/, /^(?::)/, /^(?:\()/, /^(?:\))/, /^(?:\[)/, /^(?:\])/, /^(?:,)/, /^(?:\.)/, /^(?:true\b)/, /^(?:false\b)/, /^(?:[^\s\*\/\-\+\^\%\>\=\<\!\|\&\?\:\(\)\[\]\,\.]+)/, /^(?:"(\\.|[^\"\\])*"|'(\\.|[^\'\\])*')/, /^(?:$)/, /^(?:.)/],
+          rules: [/^(?:\s+)/, /^(?:[0-9]+(\.[0-9]+)?\b)/, /^(?:\b0x[0-9A-Fa-f]+\b)/, /^(?:\*)/, /^(?:\/)/, /^(?:-)/, /^(?:\+)/, /^(?:\^)/, /^(?:%)/, /^(?:>=)/, /^(?:<=)/, /^(?:>)/, /^(?:<)/, /^(?:==)/, /^(?:!=)/, /^(?:\|\|)/, /^(?:&&)/, /^(?:\?)/, /^(?::)/, /^(?:\()/, /^(?:\))/, /^(?:\[)/, /^(?:\])/, /^(?:,)/, /^(?:\.)/, /^(?:true\b)/, /^(?:false\b)/, /^(?:[^\s\*\/\-\+\^\%\>\=\<\!\|\&\?\:\(\)\[\]\,\.\"\']+)/, /^(?:"(\\.|[^\"\\])*"|'(\\.|[^\'\\])*')/, /^(?:$)/, /^(?:.)/],
           conditions: {
             "INITIAL": {
               "rules": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30],
@@ -4950,12 +4943,12 @@
   };
   Object.assign(BehaviorTree.prototype, Methods$5, DataMethods$4);
 
-  var IsInValidKey = function IsInValidKey(keys) {
+  var IsInValidKey$1 = function IsInValidKey(keys) {
     return keys == null || keys === '' || keys.length === 0;
   };
-  var GetEntry = function GetEntry(target, keys, defaultEntry) {
+  var GetEntry$1 = function GetEntry(target, keys, defaultEntry) {
     var entry = target;
-    if (IsInValidKey(keys)) ; else {
+    if (IsInValidKey$1(keys)) ; else {
       if (typeof keys === 'string') {
         keys = keys.split('.');
       }
@@ -4991,7 +4984,7 @@
     }
 
     // invalid key
-    else if (IsInValidKey(keys)) {
+    else if (IsInValidKey$1(keys)) {
       // don't erase target
       if (value == null) {
         return;
@@ -5005,7 +4998,7 @@
         keys = keys.split(delimiter);
       }
       var lastKey = keys.pop();
-      var entry = GetEntry(target, keys);
+      var entry = GetEntry$1(target, keys);
       entry[lastKey] = value;
     }
     return target;
@@ -5067,6 +5060,50 @@
     } else {
       return false;
     }
+  };
+
+  var IsInValidKey = function IsInValidKey(keys) {
+    return keys == null || keys === '' || keys.length === 0;
+  };
+  var GetEntry = function GetEntry(target, keys, defaultEntry) {
+    var entry = target;
+    if (IsInValidKey(keys)) ; else {
+      if (typeof keys === 'string') {
+        keys = keys.split('.');
+      }
+      var key;
+      for (var i = 0, cnt = keys.length; i < cnt; i++) {
+        key = keys[i];
+        if (entry[key] == null || _typeof(entry[key]) !== 'object') {
+          return;
+        }
+        entry = entry[key];
+      }
+    }
+    return entry;
+  };
+  var RemoveKey = function RemoveKey(target, keys, delimiter) {
+    if (delimiter === undefined) {
+      delimiter = '.';
+    }
+
+    // no object
+    if (_typeof(target) !== 'object') {
+      return;
+    }
+
+    // invalid key
+    else if (IsInValidKey(keys)) ; else {
+      if (typeof keys === 'string') {
+        keys = keys.split(delimiter);
+      }
+      var lastKey = keys.pop();
+      var entry = GetEntry(target, keys);
+      if (entry) {
+        delete entry[lastKey];
+      }
+    }
+    return target;
   };
 
   var Blackboard$1 = /*#__PURE__*/function () {
@@ -5203,6 +5240,12 @@
       key: "toggleData",
       value: function toggleData(key, treeID, nodeID, startValue) {
         return this.toggle(key, treeID, nodeID, startValue);
+      }
+    }, {
+      key: "removeData",
+      value: function removeData(key, treeID, nodeID) {
+        var memory = this._getMemory(treeID, nodeID);
+        RemoveKey(memory, key);
       }
     }, {
       key: "removeTree",
@@ -6845,6 +6888,10 @@
     },
     getData: function getData(key) {
       return this.blackboard.getData(key);
+    },
+    removeData: function removeData(key) {
+      this.blackboard.removeData(key);
+      return this;
     },
     addExpression: function addExpression(name, callback) {
       this.setData(name, callback);
@@ -15135,6 +15182,10 @@
   var RoundRun = 1;
   var RoundComplete = 2;
   var PropertyTable = {
+    'groupName': {
+      defaultValue: '_',
+      rewritable: true
+    },
     'parallel': {
       defaultValue: false,
       rewritable: true
@@ -15165,11 +15216,8 @@
         config = {};
       }
       var _config = config,
-        groupName = _config.groupName;
-      delete config.groupName;
-      var _config2 = config,
-        _config2$condition = _config2.condition,
-        condition = _config2$condition === void 0 ? true : _config2$condition;
+        _config$condition = _config.condition,
+        condition = _config$condition === void 0 ? true : _config$condition;
       delete config.condition;
       var properties = config.properties;
       delete config.properties;
@@ -15200,6 +15248,7 @@
       }
 
       // Store references
+      var groupName = _this.groupName;
       _this.eventSheetManager = eventSheetManager;
       _this.blackboard = eventSheetManager.blackboard;
       _this.setTreeGroup(groupName);
@@ -17001,6 +17050,7 @@
       mainTaskNodes = _ParseTopLevelNodes.mainTaskNodes,
       catchNodes = _ParseTopLevelNodes.catchNodes;
     var treeConfig = Object.assign({
+      groupName: groupName,
       parallel: parallel,
       active: active,
       once: once
@@ -17011,7 +17061,6 @@
     };
     var eventsheet = new EventSheet(eventSheetManager, {
       title: headingTree.title,
-      groupName: groupName,
       condition: GetConditionExpression$1(conditionNodes),
       properties: treeConfig
     });
@@ -17072,14 +17121,16 @@
           _config$commentLineSt = _config.commentLineStart,
           commentLineStart = _config$commentLineSt === void 0 ? '\/\/' : _config$commentLineSt,
           _config$parallel = _config.parallel,
-          parallel = _config$parallel === void 0 ? this.parallel : _config$parallel;
+          parallel = _config$parallel === void 0 ? this.parallel : _config$parallel,
+          _config$groupName = _config.groupName,
+          groupName = _config$groupName === void 0 ? groupName : _config$groupName;
         var eventsheet = Marked2Tree(this, markedString, {
           groupName: groupName,
           lineBreak: lineBreak,
           commentLineStart: commentLineStart,
           parallel: parallel
         });
-        this.addTree(eventsheet, groupName);
+        this.addTree(eventsheet, eventsheet.groupName);
         return this;
       }
     }]);
@@ -24063,6 +24114,16 @@
             layerManager.addToLayer(layer, gameObject);
           }
         }
+
+        // Put reference of game object into memory
+        var memoryKey = "@".concat(id);
+        if (eventSheetManager.hasData(memoryKey)) {
+          console.warn("CommandExecutor: Duplicated GameObject ID=".concat(id));
+        }
+        eventSheetManager.setData(memoryKey, gameObject);
+        gameObject.once('destroy', function () {
+          eventSheetManager.removeData(memoryKey);
+        });
         if (autoClear) {
           var gameObject = sys.getGameObject(name, id);
 
@@ -24939,7 +25000,7 @@
       } else {
         table = memory;
       }
-      this.sys.logger.log(table, 'table');
+      this.sys.logger.log(table);
       return this;
     }
   };
