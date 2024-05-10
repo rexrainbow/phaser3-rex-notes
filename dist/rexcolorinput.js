@@ -28494,6 +28494,8 @@
       endPoint = this.getStartPoint();
     }
     PercentToPosition(t, startPoint, endPoint, thumb);
+    thumb.x += this.thumbOffsetX;
+    thumb.y += this.thumbOffsetY;
     this.resetChildPositionState(thumb);
     return this;
   };
@@ -28605,6 +28607,10 @@
           thumb = CreateBackground(scene, thumb);
         }
         _this.pin(thumb); // Put into container but not layout it
+
+        var thumbOffsetX = GetValue$h(config, 'thumbOffsetX', 0);
+        var thumbOffsetY = GetValue$h(config, 'thumbOffsetY', 0);
+        _this.setThumbOffset(thumbOffsetX, thumbOffsetY);
       }
 
       // Input
@@ -28667,6 +28673,13 @@
           gap = gap / (max - min);
         }
         this.gap = gap;
+        return this;
+      }
+    }, {
+      key: "setThumbOffset",
+      value: function setThumbOffset(x, y) {
+        this.thumbOffsetX = x;
+        this.thumbOffsetY = y;
         return this;
       }
 
