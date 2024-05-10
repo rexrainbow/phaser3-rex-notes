@@ -31,7 +31,7 @@
 "."                                                  return '.'
 'true'                                               return 'true'
 'false'                                              return 'false'
-[^\s\*\/\-\+\^\%\>\=\<\!\|\&\?\:\(\)\[\]\,\.]+       return 'NAME'
+[^\s\*\/\-\+\^\%\>\=\<\!\|\&\?\:\(\)\[\]\,\.\"\']+   return 'NAME'
 \"(\\.|[^\"\\])*\"|\'(\\.|[^\'\\])*\'                return 'QUOTED_STRING'
 <<EOF>>                                              return 'EOF'
 .                                                    return 'INVALID'
