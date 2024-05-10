@@ -25,6 +25,7 @@ class Demo extends Phaser.Scene {
 
             track: this.rexUI.add.roundRectangle(0, 0, 0, 0, 6, COLOR_DARK),
             thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_LIGHT),
+            // thumbOffsetY: -10,
 
             valuechangeCallback: function (value) {
                 print0.text = value;

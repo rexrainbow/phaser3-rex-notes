@@ -19,6 +19,8 @@ var UpdateThumb = function (t) {
         endPoint = this.getStartPoint();
     }
     PercentToPosition(t, startPoint, endPoint, thumb);
+    thumb.x += this.thumbOffsetX;
+    thumb.y += this.thumbOffsetY;
     this.resetChildPositionState(thumb);
     return this;
 }

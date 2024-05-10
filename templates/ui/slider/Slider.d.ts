@@ -15,6 +15,8 @@ declare namespace Slider {
         track?: Phaser.GameObjects.GameObject | RoundRecrangle.IConfig,
         indicator?: Phaser.GameObjects.GameObject | RoundRecrangle.IConfig,
         thumb?: Phaser.GameObjects.GameObject | RoundRecrangle.IConfig,
+        thumbOffsetX?: number,
+        thumbOffsetY?: number,
 
         input?: InputTypes,
 

@@ -132,6 +132,8 @@ var slider = scene.rexUI.add.slider({
         shape: undefined
     }
     */
+   thumbOffsetX: 0,
+   thumbOffsetY: 0,
 
     input: 'drag',
 
@@ -226,6 +228,7 @@ var slider = scene.rexUI.add.slider({
             shape: undefined
         }
         ```
+- `thumbOffsetX`, `thumbOffsetY` : Shift thumb, default value is `0`.
 - `input` :
     - `'pan'`, `'drag'`, or `0` : Control slider by panning/dragging thumb game object. Default setting.
     - `'click'`, or `1` : Control slider by touching track game object.

@@ -63,6 +63,9 @@ class Slider extends ProgressBase(Sizer) {
             }
             this.pin(thumb); // Put into container but not layout it
 
+            var thumbOffsetX = GetValue(config, 'thumbOffsetX', 0);
+            var thumbOffsetY = GetValue(config, 'thumbOffsetY', 0);
+            this.setThumbOffset(thumbOffsetX, thumbOffsetY);
         }
 
         // Input
@@ -136,6 +139,12 @@ class Slider extends ProgressBase(Sizer) {
         }
 
         this.gap = gap;
+        return this;
+    }
+
+    setThumbOffset(x, y) {
+        this.thumbOffsetX = x;
+        this.thumbOffsetY = y;
         return this;
     }
 
