@@ -7773,6 +7773,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#delay-call" class="md-nav__link">
+    Delay call
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#modal" class="md-nav__link">
     Modal
   </a>
@@ -8912,10 +8919,58 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_13" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_15_13" id="__nav_15_13_label" tabindex="0">
+          Notification
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_13_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_15_13">
+          <span class="md-nav__icon md-icon"></span>
+          Notification
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
       <a href="../ui-toast/" class="md-nav__link">
         Toast
       </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ui-toastqueue/" class="md-nav__link">
+        Toast queue
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -9977,6 +10032,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#delay-call" class="md-nav__link">
+    Delay call
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#modal" class="md-nav__link">
     Modal
   </a>
@@ -10880,6 +10942,10 @@ i.e. user can invoke <code>sizer.addBackground(gameObject)</code> many times.</p
 </ul>
 </li>
 </ul>
+<h3 id="delay-call">Delay call<a class="headerlink" href="#delay-call" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">delayCall</span><span class="p">(</span><span class="nx">delay</span><span class="p">,</span><span class="w"> </span><span class="nx">callback</span><span class="p">,</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
+</code></pre></div>
+<p>Timer will be removed when destroying game object.</p>
 <h3 id="modal">Modal<a class="headerlink" href="#modal" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Assign <code>sizer.onCreateModalBehavior</code> callback, or register events to close modal sizer directly.<ul>

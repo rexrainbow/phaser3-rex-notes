@@ -76968,7 +76968,9 @@
 
   var QueueDirectionMap = {
     'bottom-to-top': 1,
-    'top-to-bottom': 0
+    'top-to-bottom': 0,
+    'right-to-left': 1,
+    'left-to-right': 0
   };
   var ConfigurationMethods = {
     setQueueDirection: function setQueueDirection(direction) {
@@ -77033,7 +77035,7 @@
   var DelayCall = DelayCallMethods$2.delayCall;
   var MoveTo = EaseMoveMethods.moveTo;
   var CreateChild = function CreateChild(parent, callback, message) {
-    var child = callback(parent.scene, message);
+    var child = callback(parent.scene, message, parent);
 
     // Destroy this child when
     // Click
@@ -77213,8 +77215,8 @@
       }
       _this = _callSuper(this, ToastQueue, [scene, config]);
       _this.type = 'rexToastQueue';
-      _this.setQueueDirection(GetValue$q(config, 'queueDirection', 1));
       _this.setCreateMessageLabelCallback(GetValue$q(config, 'createMessageLabelCallback'));
+      _this.setQueueDirection(GetValue$q(config, 'queueDirection', 1));
       _this.setTransitInTime(GetValue$q(config, 'duration.in', 200));
       _this.setDisplayTime(GetValue$q(config, 'duration.hold', 2000));
       _this.setTransitOutTime(GetValue$q(config, 'duration.out', 200));
