@@ -1,7 +1,7 @@
 import NOOP from '../../../../plugins/utils/object/NOOP.js';
 
 export default {
-    showMessage(callback) {
+    showMessage(message) {
         // Remember first scaleX, scaleY as initial scale
         if (this.scaleX0 === undefined) {
             this.scaleX0 = this.scaleX;
@@ -10,17 +10,17 @@ export default {
             this.scaleY0 = this.scaleY;
         }
 
-        if (callback === undefined) {
+        if (message === undefined) {
             // Try pop up a pendding message
             if (this.messages.length === 0) {
                 return this;
             }
-            callback = this.messages.shift();
+            message = this.messages.shift();
         }
 
         if (this.player.isPlaying) {
             // Pend message
-            this.messages.push(callback);
+            this.messages.push(message);
             return this;
         }
 
@@ -28,10 +28,10 @@ export default {
         this
             .setScale(this.scaleX0, this.scaleY0)
             .setVisible(true);
-        if (typeof (callback) === 'string') {
-            this.setText(callback);
+        if (typeof (message) === 'string') {
+            this.setText(message);
         } else {
-            callback(this);
+            message(this);
         }
         this.layout();
 

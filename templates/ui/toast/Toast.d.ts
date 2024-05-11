@@ -28,7 +28,10 @@ declare class Toast extends Label {
     );
 
     showMessage(
-        message: string | ((toast: Toast) => void)
+        message: string
+    ): this;
+    showMessage(
+        message: (toast: Toast) => void
     ): this;
 
     removeAllMessages(): this;
