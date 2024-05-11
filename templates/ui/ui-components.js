@@ -80,6 +80,7 @@ import TextAreaInput from './textareainput/TextAreaInput.js';
 import ScrollablePanel from './scrollablepanel/ScrollablePanel.js';
 import ScrollBar from './scrollbar/ScrollBar.js';
 import Toast from './toast/Toast.js';
+import ToastQueue from './toastqueue/ToastQueue.js';
 import ColorComponents from './colorinput/colorcomponents/ColorComponents.js';
 import ColorInput from './colorinput/colorinput/ColorInput.js';
 import ColorInputBase from './colorinput/colorinputbase/ColorInputBase.js';
@@ -215,6 +216,7 @@ export {
     ScrollablePanel,
     ScrollBar,
     Toast,
+    ToastQueue,
     ColorComponents,
     ColorInput,
     ColorInputBase,

@@ -1,4 +1,4 @@
-import DefaultTransitCallbacks from './DefaultTransitCallbacks.js';
+import DefaultTransitionCallbacks from './DefaultTransitionCallbacks.js';
 import NOOP from '../../../../plugins/utils/object/NOOP.js';
 import TransitionMode from './TransitionMode.js';
 
@@ -25,10 +25,10 @@ export default {
 
         switch (callback) {
             case TransitionMode.popUp:
-                callback = DefaultTransitCallbacks.popUp;
+                callback = DefaultTransitionCallbacks.popUp;
                 break;
             case TransitionMode.fadeIn:
-                callback = DefaultTransitCallbacks.fadeIn;
+                callback = DefaultTransitionCallbacks.fadeIn;
                 break;
         }
 
@@ -48,10 +48,10 @@ export default {
 
         switch (callback) {
             case TransitionMode.scaleDown:
-                callback = DefaultTransitCallbacks.scaleDown;
+                callback = DefaultTransitionCallbacks.scaleDown;
                 break;
             case TransitionMode.fadeOut:
-                callback = DefaultTransitCallbacks.fadeOut;
+                callback = DefaultTransitionCallbacks.fadeOut;
                 break;
         }
 

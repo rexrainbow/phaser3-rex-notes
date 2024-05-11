@@ -67,6 +67,10 @@ export default {
         return WaitComplete(this._easeMove);
     },
 
+    isRunningMoveFrom() {
+        return this._easeMove && (this._easeMove.completeEventName = 'movefrom.complete');
+    },
+
     moveTo(duration, x, y, ease, destroyMode) {
         if (IsPlainObject(duration)) {
             var config = duration;
@@ -89,7 +93,7 @@ export default {
             OnInitEaseMove(this, this._easeMove);
         }
 
-        this._easeMove.completeEventName = 'moveto.complete';
+        this._easeMove.completeEventName === 'moveto.complete';
 
         return this;
     },
@@ -107,6 +111,14 @@ export default {
     moveToDestroyPromise(duration, x, y, ease) {
         this.moveToDestroy(duration, x, y, ease, true);
         return WaitComplete(this._easeMove);
+    },
+
+    isRunningMoveTo() {
+        return this._easeMove && (this._easeMove.completeEventName === 'moveto.complete');
+    },
+
+    isRunningEaseMove() {
+        return this.isRunningMoveFrom() || this.isRunningMoveTo();
     },
 
     moveStop(toEnd) {

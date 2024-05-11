@@ -306,6 +306,8 @@ declare class BaseSizer extends ContainerLite {
         }
     ): Promise<any>;
 
+    isRunningMoveFrom(): boolean;
+
     moveTo(
         duration: number,
         x: number,
@@ -373,6 +375,10 @@ declare class BaseSizer extends ContainerLite {
             ease?: string,
         }
     ): Promise<any>;
+
+    isRunningMoveTo(): boolean;
+
+    isRunningEaseMove(): boolean;
 
     moveStop(toEnd?: boolean): this;
 
@@ -385,6 +391,8 @@ declare class BaseSizer extends ContainerLite {
         duration: number,
         alpha?: number
     ): Promise<any>;
+
+    isRunningFadeIn(): boolean;
 
     fadeOutDestroy(
         duration: number
@@ -402,6 +410,10 @@ declare class BaseSizer extends ContainerLite {
         duration: number
     ): Promise<any>;
 
+    isRunningFadeOut(): boolean;
+
+    isRunningEaseFade(): boolean;
+
     popUp(
         duration: number,
         orientation?: 0 | 1 | 'x' | 'y',
@@ -413,6 +425,8 @@ declare class BaseSizer extends ContainerLite {
         orientation?: 0 | 1 | 'x' | 'y',
         ease?: string
     ): Promise<any>;
+
+    isRunningPopUp(): boolean;
 
     scaleDownDestroy(
         duration: number,
@@ -438,6 +452,8 @@ declare class BaseSizer extends ContainerLite {
         ease?: string
     ): Promise<any>;
 
+    isRunningScaleDown(): boolean;
+
     scaleYoyo(
         duration: number,
         peakValue?: number,
@@ -453,6 +469,10 @@ declare class BaseSizer extends ContainerLite {
         orientation?: 0 | 1 | 'x' | 'y',
         ease?: string
     ): Promise<any>;
+
+    isRunningScaleYoyo(): boolean;
+
+    isRunningEaseScale(): boolean;
 
     shake(
         duration?: number,
@@ -507,6 +527,12 @@ declare class BaseSizer extends ContainerLite {
 
     stopAllEaseData(
         toEnd?: boolean
+    ): this;
+
+    delayCall(
+        delay: number,
+        callback: Function,
+        scope?: object,
     ): this;
 
     setAnchor(config: {

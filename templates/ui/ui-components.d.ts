@@ -79,6 +79,7 @@ import TextArea from './textarea/TextArea';
 import TextAreaInput from './textareainput/TextAreaInput';
 import ScrollablePanel from './scrollablepanel/ScrollablePanel';
 import Toast from './toast/Toast';
+import ToastQueue from './toastqueue/ToastQueue';
 import ColorComponents from './colorinput/colorcomponents/ColorComponents';
 import ColorInput from './colorinput/colorinput/ColorInput';
 import ColorInputBase from './colorinput/colorinputbase/ColorInputBase';
@@ -214,6 +215,7 @@ export {
     TextAreaInput,
     ScrollablePanel,
     Toast,
+    ToastQueue,
     ColorComponents,
     ColorInput,
     ColorInputBase,

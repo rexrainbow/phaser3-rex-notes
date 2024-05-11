@@ -49,6 +49,10 @@ export default {
         return WaitComplete(this._fade);
     },
 
+    isRunningFadeIn() {
+        return this._fade && (this._fade.completeEventName === 'fadein.complete');
+    },
+
     fadeOutDestroy(duration, destroyMode) {
         if (IsPlainObject(duration)) {
             var config = duration;
@@ -82,5 +86,13 @@ export default {
     fadeOutPromise(duration) {
         this.fadeOut(duration);
         return WaitComplete(this._fade);
+    },
+
+    isRunningFadeOut() {
+        return this._fade && (this._fade.completeEventName === 'fadeout.complete');
+    },
+
+    isRunningEaseFade() {
+        return this.isRunningFadeIn() || this.isRunningFadeOut();
     }
 }

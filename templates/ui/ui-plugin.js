@@ -81,6 +81,7 @@ import TextAreaFactory from './textarea/Factory.js';
 import TextAreaInputFactory from './textareainput/Factory.js';
 import ScrollablePanelFactory from './scrollablepanel/Factory.js';
 import ToastFactory from './toast/Factory.js';
+import ToastQueueFactory from './toastqueue/Factory.js';
 import ColorInputFactory from './colorinput/colorinput/Factory.js';
 import ColorInputLiteFactory from './colorinput/colorinputbase/Factory.js';
 import ColorPickerFactory from './colorinput/colorpicker/Factory.js';

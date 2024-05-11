@@ -41,6 +41,7 @@ import FadeMethods from './FadeMethods.js';
 import EaseMoveMethods from './EaseMoveMethods.js';
 import ShakeMethods from './ShakeMethods.js';
 import EaseDataMethods from './EaseDataMethods.js';
+import DelayCallMethods from './DelayCallMethods.js';
 import HideMethods from './HideMethods.js';
 import ModalMethods from './ModalMethods.js';
 import IsInTouching from './IsInTouching.js';
@@ -110,6 +111,7 @@ Object.assign(
     EaseMoveMethods,
     ShakeMethods,
     EaseDataMethods,
+    DelayCallMethods,
     ClickMethods,
     ClickOutsideMethods,
     TouchingMethods,

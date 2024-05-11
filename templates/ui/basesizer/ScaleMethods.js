@@ -52,6 +52,10 @@ export default {
         return WaitComplete(this._scaleBehavior);
     },
 
+    isRunningPopUp() {
+        return this._scaleBehavior && (this._scaleBehavior.completeEventName === 'popup.complete');
+    },
+
     scaleDownDestroy(duration, orientation, ease, destroyMode) {
         if (IsPlainObject(duration)) {
             var config = duration;
@@ -89,6 +93,10 @@ export default {
         return WaitComplete(this._scaleBehavior);
     },
 
+    isRunningScaleDown() {
+        return this._scaleBehavior && (this._scaleBehavior.completeEventName === 'scaledown.complete');
+    },
+
     scaleYoyo(duration, peakValue, repeat, orientation, ease) {
         if (IsPlainObject(duration)) {
             var config = duration;
@@ -117,5 +125,11 @@ export default {
         return WaitComplete(this._scaleBehavior);
     },
 
+    isRunningScaleYoyo() {
+        return this._scaleBehavior && (this._scaleBehavior.completeEventName = 'scaleyoyo.complete');
+    },
 
+    isRunningEaseScale() {
+        return this.isRunningPopUp() || this.isRunningScaleDown() || this.isRunningScaleYoyo();
+    },
 }
