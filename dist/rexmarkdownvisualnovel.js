@@ -76057,9 +76057,11 @@
         }
       }, _assertThisInitialized(_this));
 
-      // Route 'textchange' event
+      // Route 'textchange', 'close' events
       inputText.on('textchange', function (text) {
         this.emit('textchange', text, this);
+      }, _assertThisInitialized(_this)).on('close', function () {
+        this.emit('close', this.text, this);
       }, _assertThisInitialized(_this));
 
       // Set initial text if given
@@ -76073,6 +76075,17 @@
       key: "text",
       get: function get() {
         return this.childrenMap.child.text;
+      },
+      set: function set(value) {
+        if (value == null) {
+          value = '';
+        } else {
+          value = value.toString();
+        }
+        if (this.childrenMap.child.text === value) {
+          return;
+        }
+        this.setText(value);
       }
     }, {
       key: "lineHeight",
@@ -76113,6 +76126,14 @@
         var inputText = this.childrenMap.child;
         inputText.setReadOnly(value);
         return this;
+      }
+    }, {
+      key: "value",
+      get: function get() {
+        return this.text;
+      },
+      set: function set(value) {
+        this.text = value;
       }
     }]);
     return TextAreaInput;
