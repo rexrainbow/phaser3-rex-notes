@@ -49,7 +49,7 @@ class Demo extends Phaser.Scene {
         var items = CreateItems(20);
         gridTable.setItems(items);
 
-        gridTable.on('cell.down', function (cellContainer, cellIndex) {
+        gridTable.on('cell.up', function (cellContainer, cellIndex) {
             var item = gridTable.items[cellIndex];
             editor.setBindingTarget(item);
         }, this)
