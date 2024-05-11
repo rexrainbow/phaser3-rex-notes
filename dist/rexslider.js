@@ -223,7 +223,7 @@
   CheckP3Version();
   var Zone$1 = Phaser.GameObjects.Zone;
   var AddItem = Phaser.Utils.Array.Add;
-  var RemoveItem$3 = Phaser.Utils.Array.Remove;
+  var RemoveItem$4 = Phaser.Utils.Array.Remove;
   var Base$1 = /*#__PURE__*/function (_Zone) {
     _inherits(Base, _Zone);
     function Base(scene, x, y, width, height) {
@@ -291,7 +291,7 @@
       key: "remove",
       value: function remove(gameObjects, destroyChild) {
         var parent = this;
-        RemoveItem$3(this.children, gameObjects,
+        RemoveItem$4(this.children, gameObjects,
         // Callback of item removed
         function (gameObject) {
           gameObject.off('destroy', parent.onChildDestroy, parent);
@@ -3134,7 +3134,7 @@
     }
   };
 
-  var RemoveItem$2 = Phaser.Utils.Array.Remove;
+  var RemoveItem$3 = Phaser.Utils.Array.Remove;
   var ContainerRemove = ContainerLite.prototype.remove;
   var GetParentSizer$1 = GetParentSizerMethods.getParentSizer;
   var RemoveChild = function RemoveChild(gameObject, destroyChild) {
@@ -3147,7 +3147,7 @@
       parent = GetParentSizer$1(parent);
     }
     if (this.isBackground(gameObject)) {
-      RemoveItem$2(this.backgroundChildren, gameObject);
+      RemoveItem$3(this.backgroundChildren, gameObject);
     }
     ContainerRemove.call(this, gameObject, destroyChild);
     if (!destroyChild && this.sizerEventsEnable) {
@@ -3157,7 +3157,7 @@
     return this;
   };
 
-  var RemoveItem$1 = Phaser.Utils.Array.Remove;
+  var RemoveItem$2 = Phaser.Utils.Array.Remove;
   var GetParentSizer = GetParentSizerMethods.getParentSizer;
   var RemoveChildMethods$1 = {
     removeFromParentSizer: function removeFromParentSizer() {
@@ -3174,7 +3174,7 @@
       if (this.getParentSizer(gameObject) !== this) {
         return this;
       }
-      RemoveItem$1(this.backgroundChildren, gameObject);
+      RemoveItem$2(this.backgroundChildren, gameObject);
       RemoveChild.call(this, gameObject, destroyChild);
       return this;
     },
@@ -5240,6 +5240,9 @@
       this.popUp(duration, orientation, ease);
       return WaitComplete(this._scaleBehavior);
     },
+    isRunningPopUp: function isRunningPopUp() {
+      return this._scaleBehavior && this._scaleBehavior.completeEventName === 'popup.complete';
+    },
     scaleDownDestroy: function scaleDownDestroy(duration, orientation, ease, destroyMode) {
       if (IsPlainObject$c(duration)) {
         var config = duration;
@@ -5268,6 +5271,9 @@
       this.scaleDown(duration, orientation, ease);
       return WaitComplete(this._scaleBehavior);
     },
+    isRunningScaleDown: function isRunningScaleDown() {
+      return this._scaleBehavior && this._scaleBehavior.completeEventName === 'scaledown.complete';
+    },
     scaleYoyo: function scaleYoyo(duration, peakValue, repeat, orientation, ease) {
       if (IsPlainObject$c(duration)) {
         var config = duration;
@@ -5288,6 +5294,12 @@
     scaleYoyoPromise: function scaleYoyoPromise(duration, peakValue, repeat, orientation, ease) {
       this.scaleYoyo(duration, peakValue, repeat, orientation, ease);
       return WaitComplete(this._scaleBehavior);
+    },
+    isRunningScaleYoyo: function isRunningScaleYoyo() {
+      return this._scaleBehavior && (this._scaleBehavior.completeEventName = 'scaleyoyo.complete');
+    },
+    isRunningEaseScale: function isRunningEaseScale() {
+      return this.isRunningPopUp() || this.isRunningScaleDown() || this.isRunningScaleYoyo();
     }
   };
 
@@ -5462,6 +5474,9 @@
       this.fadeIn(duration, alpha);
       return WaitComplete(this._fade);
     },
+    isRunningFadeIn: function isRunningFadeIn() {
+      return this._fade && this._fade.completeEventName === 'fadein.complete';
+    },
     fadeOutDestroy: function fadeOutDestroy(duration, destroyMode) {
       if (IsPlainObject$a(duration)) {
         var config = duration;
@@ -5487,6 +5502,12 @@
     fadeOutPromise: function fadeOutPromise(duration) {
       this.fadeOut(duration);
       return WaitComplete(this._fade);
+    },
+    isRunningFadeOut: function isRunningFadeOut() {
+      return this._fade && this._fade.completeEventName === 'fadeout.complete';
+    },
+    isRunningEaseFade: function isRunningEaseFade() {
+      return this.isRunningFadeIn() || this.isRunningFadeOut();
     }
   };
 
@@ -5733,6 +5754,9 @@
       this.moveFromDestroy(duration, x, y, ease);
       return WaitComplete(this._easeMove);
     },
+    isRunningMoveFrom: function isRunningMoveFrom() {
+      return this._easeMove && (this._easeMove.completeEventName = 'movefrom.complete');
+    },
     moveTo: function moveTo(duration, x, y, ease, destroyMode) {
       if (IsPlainObject$9(duration)) {
         var config = duration;
@@ -5750,7 +5774,7 @@
       if (isInit) {
         OnInitEaseMove(this, this._easeMove);
       }
-      this._easeMove.completeEventName = 'moveto.complete';
+      this._easeMove.completeEventName === 'moveto.complete';
       return this;
     },
     moveToPromise: function moveToPromise(duration, x, y, ease, destroyMode) {
@@ -5764,6 +5788,12 @@
     moveToDestroyPromise: function moveToDestroyPromise(duration, x, y, ease) {
       this.moveToDestroy(duration, x, y, ease, true);
       return WaitComplete(this._easeMove);
+    },
+    isRunningMoveTo: function isRunningMoveTo() {
+      return this._easeMove && this._easeMove.completeEventName === 'moveto.complete';
+    },
+    isRunningEaseMove: function isRunningEaseMove() {
+      return this.isRunningMoveFrom() || this.isRunningMoveTo();
     },
     moveStop: function moveStop(toEnd) {
       if (!this._easeMove) {
@@ -6260,6 +6290,39 @@
         return this;
       }
       this._easeData.stopAll(toEnd);
+      return this;
+    }
+  };
+
+  var RemoveItem$1 = Phaser.Utils.Array.Remove;
+  var OnInitDelayCallTimers = function OnInitDelayCallTimers(gameObject) {
+    gameObject._delayCallTimers = [];
+    gameObject.once('destroy', function () {
+      var timers = gameObject._delayCallTimers;
+      for (var i = 0, cnt = timers.length; i < cnt; i++) {
+        timers[i].remove();
+      }
+      gameObject._delayCallTimers = undefined;
+    });
+  };
+  var DelayCallMethods$1 = {
+    delayCall: function delayCall(delay, callback, scope) {
+      var timers = this._delayCallTimers;
+      if (timers === undefined) {
+        OnInitDelayCallTimers(this);
+      }
+      var timer;
+      var self = this;
+      var OnTimeOut = function OnTimeOut() {
+        RemoveItem$1(self._delayCallTimers, timer);
+        if (scope) {
+          callback.call(scope);
+        } else {
+          callback();
+        }
+      };
+      timer = this.scene.time.delayedCall(delay, OnTimeOut);
+      this._delayCallTimers.push(timer);
       return this;
     }
   };
@@ -10825,7 +10888,7 @@
     setChildrenInteractive: SetChildrenInteractiveWrap,
     broadcastEvent: BroadcastEvent
   };
-  Object.assign(methods$2, PaddingMethods, AddChildMethods$1, RemoveChildMethods$1, GetParentSizerMethods, ScaleMethods, FadeMethods, EaseMoveMethods, ShakeMethods, EaseDataMethods, ClickMethods, ClickOutsideMethods, TouchingMethods, HideMethods, ModalMethods, GetShownChildrenMethods);
+  Object.assign(methods$2, PaddingMethods, AddChildMethods$1, RemoveChildMethods$1, GetParentSizerMethods, ScaleMethods, FadeMethods, EaseMoveMethods, ShakeMethods, EaseDataMethods, DelayCallMethods$1, ClickMethods, ClickOutsideMethods, TouchingMethods, HideMethods, ModalMethods, GetShownChildrenMethods);
 
   var GetValue$c = Phaser.Utils.Objects.GetValue;
   var Base = /*#__PURE__*/function (_Container) {
