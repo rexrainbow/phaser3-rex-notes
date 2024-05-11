@@ -1,17 +1,25 @@
+import ClickMethods from '../../basesizer/ClickMethods.js'
+import DelayCallMethods from '../../basesizer/DelayCallMethods.js';
+import EaseMoveMethods from '../../basesizer/EaseMoveMethods.js';
+
+const OnClick = ClickMethods.onClick;
+const DelayCall = DelayCallMethods.delayCall;
+const MoveTo = EaseMoveMethods.moveTo;
+
 var CreateChild = function (parent, callback, message) {
     var child = callback(parent.scene, message);
 
     // Destroy this child when
     // Click
-    child.onClick(function () {
-        DestroyChild(parent, child);
-    })
+    OnClick.call(child, function () {
+        parent.removeMessage(child);
+    });
 
     // Timeout 
     if (parent.displayTime) {
         var delay = parent.transitInTime + parent.displayTime + 10;
-        child.delayCall(delay, function () {
-            DestroyChild(parent, child);
+        DelayCall.call(child, delay, function () {
+            parent.removeMessage(child);
         })
     }
 
@@ -59,6 +67,7 @@ var RunLayout = function (parent) {
 var EaseChildren = function (parent, prevPositionList, newPositionList, duration) {
     var children = parent.childrenMap.items;
     var listLength = Math.min(prevPositionList.length, newPositionList.length, children.length);
+
     var child, prevPositionData, newPostionData;
     var queueDirection = parent.queueDirection;
     for (var i = 0; i < listLength; i++) {
@@ -94,23 +103,8 @@ var EaseChildren = function (parent, prevPositionList, newPositionList, duration
                 break;
         }
 
-        child.moveTo(duration, newPostionData.x, newPostionData.y);
+        MoveTo.call(child, duration, newPostionData.x, newPostionData.y);
     }
-}
-
-var DestroyChild = function (parent, child) {
-    if (child.__isDestroying) {
-        return;
-    }
-
-    child.__isDestroying = true;
-
-    var duration = parent.transitOutTime;
-    parent.transitOutCallback(child, duration, parent);
-    child.delayCall(duration + 10, function () {
-        delete child.__isDestroying;
-        child.destroy();
-    })
 }
 
 var PushChild = function (parent, child, duration) {
@@ -130,10 +124,31 @@ export default {
         return this;
     },
 
+    removeMessage(messageLabel) {
+        if (this.getParentSizer(messageLabel) !== this) {
+            return this;
+        }
+
+        if (messageLabel.__isDestroying) {
+            return;
+        }
+
+        messageLabel.__isDestroying = true;
+
+        var duration = this.transitOutTime;
+        this.transitOutCallback(messageLabel, duration, this);
+        DelayCall.call(messageLabel, duration + 10, function () {
+            delete messageLabel.__isDestroying;
+            messageLabel.destroy();
+        })
+
+        return this;
+    },
+
     removeAllMessages() {
         var children = this.childrenMap.items;
         for (var i = 0, cnt = children.length; i < cnt; i++) {
-            DestroyChild(this, children[i]);
+            this.removeMessage(children[i]);
         }
         return this;
     }

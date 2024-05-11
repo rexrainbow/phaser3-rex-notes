@@ -1,7 +1,5 @@
 // import * as Phaser from 'phaser';
 import Sizer from '../sizer/Sizer';
-import BaseSizer from '../basesizer/BaseSizer';
-
 
 export default ToastQueue;
 
@@ -11,10 +9,10 @@ declare namespace ToastQueue {
     type CreateMessageLabelCallbackType = (
         scene: Phaser.Scene,
         message: MessageType,
-    ) => BaseSizer;
+    ) => Phaser.GameObjects.GameObject;
 
     type TransitionCallbackType = (
-        messageLabel: BaseSizer,
+        messageLabel: Phaser.GameObjects.GameObject,
         duration: number,
         toastQueue: ToastQueue
     ) => void;
@@ -44,6 +42,7 @@ declare class ToastQueue extends Sizer {
         message: ToastQueue.MessageType
     ): this;
 
+    removeMessage(messageLabel: Phaser.GameObjects.GameObject): this;
     removeAllMessages(): this;
 
     transitInTime: number;
