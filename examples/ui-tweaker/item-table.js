@@ -27,19 +27,23 @@ class Demo extends Phaser.Scene {
                 { $key: 'c', view: 'boolean' },
             ])
 
-        var panel = this.rexUI.add.sizer({
-            height: 300,
-            orientation: 'x'
+        var panel = this.rexUI.add.splitPanels({
+            x: 400, y: 300,
+            width: 700, height: 300,
+
+            space: {
+                item: 10
+            },
+
+            leftPanel: gridTable,
+            rightPanel: editor,
+            splitter: this.rexUI.add.roundRectangle(0, 0, 15, 1, 0, COLOR_DARK),
+
+            minLeftPanelWidth: 200,
+            minRightPanelWidth: 250,
+
+            splitRatio: 0.5
         })
-            .add(
-                gridTable,
-                { expand: true }
-            )
-            .add(
-                editor,
-                { expand: true }
-            )
-            .setPosition(400, 300)
             .layout()
 
         var items = CreateItems(20);
@@ -91,8 +95,8 @@ var CreateGridTable = function (scene) {
         },
 
         slider: {
-            track: scene.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_DARK),
-            thumb: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 13, COLOR_LIGHT),
+            track: scene.rexUI.add.roundRectangle(0, 0, 20, 10, 8, COLOR_DARK),
+            thumb: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_LIGHT),
         },
 
         space: {
