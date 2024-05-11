@@ -1,21 +1,17 @@
 ## Introduction
 
-Show text message for a short while.
+Queue messages for a short while.
 
 - Author: Rex
 - Game object
 
 ## Live demos
 
-- [Toast](https://codepen.io/rexrainbow/pen/KjEgVO)
-- Depth
-    - [Set depth](https://codepen.io/rexrainbow/pen/wvOxBbN)
-    - [Bring to top](https://codepen.io/rexrainbow/pen/rNRrVxW)
-    - [Add to layer](https://codepen.io/rexrainbow/pen/BabPRZg)
+- [Toast queue](https://codepen.io/rexrainbow/pen/ZENYQzm)
 
 ## Usage
 
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-toast)
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-toastqueue)
 
 ### Install plugin
 
@@ -25,9 +21,9 @@ Show text message for a short while.
     ```javascript
     scene.load.scenePlugin('rexuiplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js', 'rexUI', 'rexUI');
     ```
-- Add toast object
+- Add toast-queue object
     ```javascript
-    var toast = scene.rexUI.add.toast(config);
+    var toastQueue = scene.rexUI.add.toastQueue(config);
     ```
 
 #### Import plugin
@@ -54,9 +50,9 @@ Show text message for a short while.
     };
     var game = new Phaser.Game(config);
     ```
-- Add toast object
+- Add toast-queue object
     ```javascript
-    var toast = scene.rexUI.add.toast(config);
+    var toastQueue = scene.rexUI.add.toastQueue(config);
     ```
 
 #### Import class
@@ -67,18 +63,18 @@ Show text message for a short while.
     ```
 - Import class
     ```javascript
-    import { Toast } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
+    import { ToastQueue } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
     ```
-- Add toast object
+- Add toast-queue object
     ```javascript    
-    var toast = new Toast(scene, config);
-    scene.add.existing(toast);
+    var toastQueue = new ToastQueue(scene, config);
+    scene.add.existing(toastQueue);
     ```
 
-### Add toast object
+### Add toast-queue object
 
 ```javascript
-var toast = scene.rexUI.add.toast({
+var toastQueue = scene.rexUI.add.toastQueue({
     x: 0,
     y: 0,
     // anchor: undefined,
@@ -88,14 +84,7 @@ var toast = scene.rexUI.add.toast({
     // originX:
     // originY:
 
-    orientation: 0,
-
-    background: backgroundGameObject,
-    icon: iconGameObject,
-    iconMask: false,
-    text: textGameObject,
-    action: actionGameObject,
-    actionMask: false,
+    orientation: 1,
 
     space: {
         left: 0,
@@ -103,18 +92,23 @@ var toast = scene.rexUI.add.toast({
         top: 0,
         bottom: 0,
 
-        icon: 0,
-        text: 0,
+        item: 0,
     },
+
+    createMessageLabelCallback(scene, message, toastQueue) {
+        // return gameObject;
+    },
+
+    queueDirection: 1, // 'bottom-to-top', or 'top-to-bottom'
 
     duration: {
         in: 200,
-        hold: 1200,
+        hold: 2000,
         out: 200,
     },
 
-    // transitIn: 0,
-    // transitOut: 0,
+    // transitIn: undefined,
+    // transitOut: undefined,
 
     // name: '',
     // draggable: false,
@@ -139,54 +133,55 @@ var toast = scene.rexUI.add.toast({
 - `orientation` :
     - `'left-to-right'`, `'horizontal'`,`'h'`, `'x'`, or `0` : Put icon at left side, and text at right side.
     - `'top-to-bottom'`, `'vertical'`,`'v'`, `'y'`, or `1` : Put icon at top side, and text at bottom side.
-- `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of toast.
-- `icon` : Game object of icon, optional.
-- `iconMask` : Set true to add a *circle* mask on icon game object.
-- `text` : Game object of text.
-- `action` : Game object of action icon, optional.
-- `actionMask` : Set true to add a *circle* mask on action icon game object.
-- `space` : Pads spaces
-    - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds
-    - `space.icon` : Space between icon game object and text game object.
-    - `space.text` : Space between text game object and action icon game object.
+- `space` : Pads spaces.
+    - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
+    - `space.item` : Space between 2 children game objects.
 - `name` : Set name of this game object.
 - `draggable` : Set `true` to drag top-most object.
 - `sizerEvents` : Set `true` to fire [sizer events](ui-basesizer.md#events). Default value is `false`.
 - `enableLayer` : 
     - `false` : Add child game objects into scene's display list. Default behavior.
     - `true` : Add child game objects into an internal [layer game object](layer.md). [See also](containerlite.md#layer).
+- `createMessageLabelCallback` : Callback for creating message label game object
+    ```javascript
+    function(scene, message, toastQueue) {
+        // 
+        return gameObject;
+    }
+    ```
+    - `message` : `message` parameter passing from [`showMessage` method](#show-message).
+    - `toastQueue` : This toast-queue game object.
+- `queueDirection` : Direction of message queue
+    - `1`, or `'bottom-to-top'` : Message queue from bottom to top. Default value.
+    - `0`, or `'top-to-bottom'` : Message queue from top to bottom.
 - `duration` : Duration of displaying message
     - `duration.in` : Duration of transit-in stage.
     - `duration.hold` : Duration of hold stage.
     - `duration.out` : Duration of transit-out stage.
 - `transitIn` : Transit-in action.
-    - `0`, or `'popUp'` : Pop-up.
-    - `1`, or `'fadeIn'` : Fade-in.
+    - `undefined` (not gived) : Pop up message label.
     - A callback : Custom transit-in function
         ```javascript
-        function(toast, duration) {
+        function(messageLabel, duration, toastQueue) {
             // ...
         }
         ```
-    - `false`, `null` : No transitIn.
+    - `false`, `null` : No transitOut.
 - `transitOut` : Transit-out action.
-    - `0`, or `'scaleDown'` : Scale-down.
-    - `1`, or `'fadeOut'` : Fade-out.
+    - `undefined` (not gived) : Fade out message label.
     - A callback : Custom transit-out function
         ```javascript
-        function(toast, duration) {
+        function(messageLabel, duration, toastQueue) {
             // ...
         }
         ```
     - `false`, `null` : No transitOut.
 
-Toast object will be invisible at beginning.
-
 ### Custom class
 
 - Define class
     ```javascript
-    class MyToast extends RexPlugins.UI.Toast {
+    class MyToastQueue extends RexPlugins.UI.ToastQueue {
         constructor(scene, config) {
             super(scene, config);
             // ...
@@ -197,109 +192,78 @@ Toast object will be invisible at beginning.
     ```
 - Create instance
     ```javascript
-    var toast = new MyToast(scene, config);
+    var toastQueue = new MyToastQueue(scene, config);
     ```
 
 ### Show message
 
 ```javascript
-toast.showMessage(message);
+toastQueue.showMessage(message);
 ```
 
-- `message` : A string, or a callback.
-    - A string. Apply this content to `text` game object.
-    - Callback. Invoke this callback to configurate toast object.
-        ```javascript
-        function(toast) {
-            // var icon = toast.getElement('icon');
-            // var text = toast.getElement('text');
-            // var action = toast.getElement('action');
-        }
-        ```
-
-Toast displays message follows these steps : *transit-in*, *hold*, *transit-out*.
-New message will be pending until toast is back to idle.
+- `message` : A string, or an object. Will pass to `createMessageLabelCallback` callback.
 
 ### Clear messages
 
 ```javascript
-toast.removeAllMessages();
+toastQueuetoast.removeAllMessages();
 ```
+
+Invoke transition-out of all message labels.
 
 ### Display time
 
 - Transit-in time (`duration.in`)
     - Get
         ```javascript
-        var time = toast.transitInTime;
+        var time = toastQueue.transitInTime;
         ```
     - Set
         ```javascript
-        toast.setTransitInTime(time);
+        toastQueue.setTransitInTime(time);
         ```
 - Display time (`duration.hold`)
     - Get
         ```javascript
-        var time = toast.displayTime;
+        var time = toastQueue.displayTime;
         ```
     - Set
         ```javascript
-        toast.setDisplayTime(time);
+        toastQueue.setDisplayTime(time);
         ```
 - Transit-out time (`duration.out`)
     - Get
         ```javascript
-        var time = toast.transitOutTime;
+        var time = toastQueue.transitOutTime;
         ```
     - Set
         ```javascript
-        toast.setTransitOutTime(time);
+        toastQueue.setTransitOutTime(time);
         ```
 
 ### Transit action
 
 - Set transit-in action
     ```javascript
-    toast.setTransitInCallback(callback);
+    toastQueue.setTransitInCallback(callback);
     ```
     - `callback` : Transit-in action
-        - `0`, or `'popUp'` : Pop-up.
-        - `1`, or `'fadeIn'` : Fade-in.
-        - A callback : Custom transit-in function
-            ```javascript
-            function(toast, duration) {
-                // ...
-            }
-            ```
+        ```javascript
+        function(messageLabel, duration, toastQueue) {
+            // ...
+        }
+        ```
 - Set transit-out action
     ```javascript
-    toast.setTransitOutCallback(callback);
+    toastQueue.setTransitOutCallback(callback);
     ```
     - `callback` : Transit-out action
-        - `0`, or `'scaleDown'` : Scale-down.
-        - `1`, or `'fadeOut'` : Fade-out.
-        - A callback : Custom transit-out function
-            ```javascript
-            function(toast, duration) {
-                // ...
-            }
-            ```
-
-### Event
-
-- Transit-in
-    ```javascript
-    toast.on('transitin', function(toast, transitInTime) {
-        // ...
-    })
-    ```
-- Transit-out
-    ```javascript
-    toast.on('transitout', function(toast, transitOutTime) {
-        // ...
-    })
-    ```
+        ```javascript
+        function(messageLabel, duration, toastQueue) {
+            // ...
+        }
+        ```
 
 ### Other properties
 
-See [label object](ui-label.md), [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md), [container-lite](containerlite.md).
+See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md), [container-lite](containerlite.md).

@@ -663,6 +663,13 @@ sizer.pushIntoBounds(bounds);
         sizer.on('easedata.complete', function(key, sizer) { });
         ```
 
+### Delay call
+
+```javascript
+sizer.delayCall(delay, callback, scope);
+```
+
+Timer will be removed when destroying game object.
 
 ### Modal
 

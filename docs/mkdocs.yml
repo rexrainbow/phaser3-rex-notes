@@ -448,7 +448,9 @@ nav:
     - Text box:
         - Text box: ui-textbox.md
         - Simple text box: ui-simpletextbox.md
-    - Toast: ui-toast.md
+    - Notification:
+        - Toast: ui-toast.md
+        - Toast queue: ui-toastqueue.md
     - Tabs: ui-tabs.md
     - Folder: ui-folder.md     
     - Holy grail: ui-holygrail.md

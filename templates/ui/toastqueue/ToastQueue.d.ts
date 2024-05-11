@@ -9,6 +9,7 @@ declare namespace ToastQueue {
     type CreateMessageLabelCallbackType = (
         scene: Phaser.Scene,
         message: MessageType,
+        toastQueue: ToastQueue,
     ) => Phaser.GameObjects.GameObject;
 
     type TransitionCallbackType = (
@@ -19,6 +20,8 @@ declare namespace ToastQueue {
 
     interface IConfig extends Sizer.IConfig {
         createMessageLabelCallback: CreateMessageLabelCallbackType,
+
+        queueDirection?: 1 | 0 | 'bottom-to-top' | 'top-to-bottom' | 'right-to-left' | 'left-to-right',
 
         duration?: {
             in?: number,

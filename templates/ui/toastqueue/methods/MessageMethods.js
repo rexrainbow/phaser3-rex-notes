@@ -7,7 +7,7 @@ const DelayCall = DelayCallMethods.delayCall;
 const MoveTo = EaseMoveMethods.moveTo;
 
 var CreateChild = function (parent, callback, message) {
-    var child = callback(parent.scene, message);
+    var child = callback(parent.scene, message, parent);
 
     // Destroy this child when
     // Click

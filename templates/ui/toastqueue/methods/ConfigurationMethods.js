@@ -3,6 +3,8 @@ import NOOP from '../../../../plugins/utils/object/NOOP.js';
 var QueueDirectionMap = {
     'bottom-to-top': 1,
     'top-to-bottom': 0,
+    'right-to-left': 1,
+    'left-to-right': 0,
 }
 
 export default {

@@ -237,6 +237,7 @@
 234. [UI/Text box](ui-textbox.md): A container with an icon, (typing and paging) text, and background.
 235. [UI/Title label](ui-titlelabel.md): A container with title, text in two rows, and an icon, background.
 236. [UI/Toast](ui-toast.md): Show text message for a short while.
+237. [UI/Toast queue](ui-toastqueue.md): Queue messages for a short while.
 237. [UI/Tweaker](ui-tweaker.md): Fine-tuning properties of target object.
 238. [Unique item list](uniqueitemlist.md): List of unique items. Support array and set methods.
 239. [Viewport-coordinate](viewport-coordinate.md): Attach `vpx`, `vpy` properties to a game object, to set position according to proportion of viewport.
