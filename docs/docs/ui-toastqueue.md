@@ -177,6 +177,11 @@ var toastQueue = scene.rexUI.add.toastQueue({
         ```
     - `false`, `null` : No transitOut.
 
+Message Label will be destroyed when
+
+- Clicking, or
+- Timeout
+
 ### Custom class
 
 - Define class
