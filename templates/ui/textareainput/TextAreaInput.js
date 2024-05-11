@@ -80,10 +80,14 @@ class TextAreaInput extends Scrollable {
 
         }, this)
 
-        // Route 'textchange' event
-        inputText.on('textchange', function (text) {
-            this.emit('textchange', text, this);
-        }, this)
+        // Route 'textchange', 'close' events
+        inputText
+            .on('textchange', function (text) {
+                this.emit('textchange', text, this);
+            }, this)
+            .on('close', function () {
+                this.emit('close', this.text, this);
+            }, this)
 
         // Set initial text if given
         var content = GetValue(config, 'content', undefined);
@@ -94,6 +98,19 @@ class TextAreaInput extends Scrollable {
 
     get text() {
         return this.childrenMap.child.text;
+    }
+
+    set text(value) {
+        if (value == null) {
+            value = '';
+        } else {
+            value = value.toString();
+        }
+        if (this.childrenMap.child.text === value) {
+            return;
+        }
+
+        this.setText(value)
     }
 
     get lineHeight() {
@@ -129,6 +146,14 @@ class TextAreaInput extends Scrollable {
         var inputText = this.childrenMap.child;
         inputText.setReadOnly(value);
         return this;
+    }
+
+    get value() {
+        return this.text;
+    }
+
+    set value(value) {
+        this.text = value;
     }
 
 }

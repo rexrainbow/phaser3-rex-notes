@@ -566,6 +566,12 @@ See also - [dirty](ui-basesizer.md#dirty)
 
 ### Event
 
+- On close text-editor
+    ```javascript
+    textAreaInput.on('close', function(text, textAreaInput) {
+        
+    })
+    ```
 - Text changed
     ```javascript
     textAreaInput.on('textchange', function(text, textAreaInput){

@@ -35,9 +35,10 @@ declare class TextAreaInput extends Scrollable {
         config?: TextAreaInput.IConfig
     );
 
-    text: string;
     setText(text: string): this;
     appendText(text: string): this;
+    text: string;
+    value: string;
 
     setReadOnly(enable?: boolean): this;
     readOnly: boolean;
