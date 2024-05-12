@@ -4,6 +4,7 @@ import TextAreaInputHandler from '../inputhandlers/TextAreaInputHandler.js';
 // number
 import NumberInputHandler from '../inputhandlers/NumberInputHandler.js';
 import RangeInputHandler from '../inputhandlers/RangeInputHandler.js';
+import IncDecInputHandler from '../inputhandlers/IncDecInputHandler.js';
 import ColorInputHandler from '../inputhandlers/ColorInputHandler.js';
 // boolean
 import CheckboxInputHandler from '../inputhandlers/CheckboxInputHandler.js';
@@ -20,6 +21,7 @@ var RegisterDefaultInputHandlers = function () {
         // number
         .registerInputHandler(NumberInputHandler)
         .registerInputHandler(RangeInputHandler)
+        .registerInputHandler(IncDecInputHandler)
         .registerInputHandler(ColorInputHandler)
         // boolean
         .registerInputHandler(CheckboxInputHandler)

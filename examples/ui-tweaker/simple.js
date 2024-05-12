@@ -14,6 +14,7 @@ class Demo extends Phaser.Scene {
 
     preload() {
         this.load.image('settings', 'assets/images/settings.png');
+        this.load.image('arrow-down', 'assets/images/arrow-down.png');
     }
 
     create() {
@@ -131,7 +132,8 @@ class Demo extends Phaser.Scene {
                 {
                     title: 'stroke-\nwidth',    // Custom title
                     icon: 'settings',           // Title icon
-                    min: 0, max: 10,            // Range
+                    view: 'incdec',
+                    min: 0, max: 10
                 }
             )
 
@@ -181,8 +183,8 @@ var CreatePanel = function (scene) {
                 },
 
                 title: {
+                    space: { icon: 2 },
                     iconSize: 30,
-                    space: { icon: 2 }
                 },
 
                 inputText: {
@@ -229,23 +231,25 @@ var CreatePanel = function (scene) {
                         space: { left: 5, right: 5 }
                     },
                     button: {
+                        space: { left: 5, right: 5, top: 8, bottom: 8 },
                         background: {
                             color: COLOR_DARK,
                             strokeColor: COLOR_LIGHT,
 
                             'hover.color': COLOR_LIGHT,
                         },
-                        space: { left: 5, right: 5, top: 8, bottom: 8 }
+
                     },
                 },
 
                 button: {
+                    space: { left: 8, right: 8, top: 8, bottom: 8 },
                     background: {
                         color: COLOR_DARK,
                         strokeColor: COLOR_LIGHT,
                         'active.color': COLOR_LIGHT,
                     },
-                    space: { left: 8, right: 8, top: 8, bottom: 8 }
+
                 },
 
                 checkbox: {
@@ -283,6 +287,30 @@ var CreatePanel = function (scene) {
                         }
                     }
                 },
+
+                incDec: {
+                    incButton: {
+                        space: { left: 5, right: 5 },
+                        icon: { key: 'arrow-down', flipY: true },
+                        iconSize: 20,
+                        background: {
+                            color: COLOR_DARK,
+                            strokeColor: COLOR_LIGHT,
+                        },
+
+                    },
+                    decButton: {
+                        space: { left: 5, right: 5 },
+                        icon: { key: 'arrow-down' },
+                        iconSize: 20,
+                        background: {
+                            color: COLOR_DARK,
+                            strokeColor: COLOR_LIGHT,
+                        },
+
+                    },
+                },
+
             },
 
             folder: {
