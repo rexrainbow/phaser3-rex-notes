@@ -38,6 +38,12 @@ class Demo extends Phaser.Scene {
 
         var items = CreateItems(20);
         gridTable.setItems(items);
+
+        gridTable.on('cell.up', function (cellContainer, cellIndex) {
+            var item = gridTable.items[cellIndex];
+            editor.setBindingTarget(item);
+        }, this)
+
         editor.addRows([
             {
                 $key: 'name', title: 'Name', view: 'string',
@@ -48,12 +54,6 @@ class Demo extends Phaser.Scene {
             { $key: 'b', view: 'number' },
             { $key: 'c', view: 'boolean' },
         ], false)
-
-        gridTable.on('cell.up', function (cellContainer, cellIndex) {
-            var item = gridTable.items[cellIndex];
-            editor.setBindingTarget(item);
-        }, this)
-
 
         panel.layout();
     }
