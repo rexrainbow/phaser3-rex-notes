@@ -10215,6 +10215,7 @@
 <li><a href="https://codepen.io/rexrainbow/pen/MWBGqzN">Horizontal tweaker</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/vYvbpXY">Buttons</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/NWVKyKW">Add rows</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/vYwEXQe">Edit item</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-tweaker">Sample code</a></p>
@@ -10537,6 +10538,7 @@
 <div class="highlight"><pre><span></span><code><span class="nx">tweaker</span><span class="p">.</span><span class="nx">addInput</span><span class="p">(</span><span class="nx">object</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w">    </span>
 <span class="w">    </span><span class="nx">view</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;textarea&#39;</span><span class="p">,</span>
 
+<span class="w">    </span><span class="c1">// height: undefined,</span>
 <span class="w">    </span><span class="c1">// icon: undefined,</span>
 <span class="w">    </span><span class="c1">// iconFrame: undefined,</span>
 <span class="w">    </span><span class="c1">// iconSize: undefined,</span>
@@ -10560,6 +10562,7 @@
 <span class="w">    </span><span class="nx">bindingKey</span><span class="o">:</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">view</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;textarea&#39;</span><span class="p">,</span>
 
+<span class="w">    </span><span class="c1">// height: undefined,</span>
 <span class="w">    </span><span class="c1">// icon: undefined,</span>
 <span class="w">    </span><span class="c1">// iconFrame: undefined,</span>
 <span class="w">    </span><span class="c1">// iconSize: undefined,</span>
@@ -10584,6 +10587,10 @@
 </li>
 <li><code>bindingKey</code> : Bind to target's property key. Necessary field</li>
 <li><code>view</code> : <code>'textarea'</code>.</li>
+<li><code>height</code> : Height of this input row.<ul>
+<li><code>undefined</code> : Use children height.</li>
+</ul>
+</li>
 <li><code>icon</code>, <code>iconFrame</code> : Texture key, frame name of icon on title-label.</li>
 <li><code>iconSize</code> : Fixed icon size</li>
 <li><code>title</code> : Display text of title-label. Default value is equal to <code>key</code>.</li>
