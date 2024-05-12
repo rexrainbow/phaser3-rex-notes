@@ -78827,7 +78827,7 @@
     if (expanded !== undefined) {
       folder.setExpandedState(expanded);
     }
-    var childTweaker = folder.getElement('child');
+    var childTweaker = folder.childrenMap.child;
     if (config.key) {
       this.root.addChildrenMap(config.key, childTweaker);
     }
@@ -79732,6 +79732,8 @@
   Phaser.Utils.Objects.GetValue;
   Phaser.Math.Linear;
   Phaser.Math.Snap.Floor;
+
+  Phaser.Utils.Objects.GetValue;
 
   Phaser.Utils.Objects.GetValue;
 
