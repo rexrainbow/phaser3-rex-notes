@@ -10,7 +10,7 @@ var SetRange = function (gameObject, min, max, step) {
     gameObject.maxValue = max;
     gameObject.step = step;
 
-    var slider = gameObject.getElement('slider');
+    var slider = gameObject.childrenMap.slider;
     slider.setGap(step, min, max);
 }
 
@@ -19,7 +19,7 @@ var SetInputTextReadOnly = function (gameObject, enable) {
         enable = true;
     }
 
-    var inputText = gameObject.getElement('inputText');
+    var inputText = gameObject.childrenMap.inputText;
     inputText.setReadOnly(enable);
 }
 
@@ -93,10 +93,10 @@ export default {
 
     // Callback inside `setValue()`
     displayValue(gameObject, value) {
-        var slider = gameObject.getElement('slider');
+        var slider = gameObject.childrenMap.slider;
         slider.setValue(value, gameObject.minValue, gameObject.maxValue);
 
-        var inputText = gameObject.getElement('inputText');
+        var inputText = gameObject.childrenMap.inputText;
         inputText.setText('').setText(gameObject.getFotmatText(value));
 
     },

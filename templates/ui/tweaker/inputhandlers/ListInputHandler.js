@@ -2,7 +2,7 @@ import CreateDropDownList from './utils/CreateDropDownList.js';
 import { GetOption } from './utils/OptionsMethods.js';
 
 var SetOptions = function (gameObject, options) {
-    var list = gameObject.getElement('list');
+    var list = gameObject.childrenMap.list;
     list.setOptions(options);
 }
 
@@ -44,8 +44,8 @@ export default {
 
     // Callback inside `setValue()`
     displayValue(gameObject, value) {
-        var list = gameObject.getElement('list');
-        var option = GetOption(list.options, value);        
+        var list = gameObject.childrenMap.list;
+        var option = GetOption(list.options, value);
         list
             .resetDisplayContent(option)
             .setMinSize(list.width, list.height)

@@ -28,7 +28,7 @@ var AddFolder = function (config) {
         folder.setExpandedState(expanded);
     }
 
-    var childTweaker = folder.getElement('child');
+    var childTweaker = folder.childrenMap.child;
 
     if (config.key) {
         this.root.addChildrenMap(config.key, childTweaker);

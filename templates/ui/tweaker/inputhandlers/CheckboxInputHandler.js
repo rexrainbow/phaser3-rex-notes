@@ -38,7 +38,7 @@ export default {
 
     // Callback inside `setValue()`
     displayValue(gameObject, value) {
-        var checkbox = gameObject.getElement('checkbox');
+        var checkbox = gameObject.childrenMap.checkbox;
         checkbox.setValue(value);
     }
 }

@@ -38,7 +38,7 @@ export default {
 
     // Callback inside `setValue()`
     displayValue(gameObject, value) {
-        var colorInput = gameObject.getElement('colorInput');
+        var colorInput = gameObject.childrenMap.colorInput;
         colorInput.setValue(value);
     },
 }

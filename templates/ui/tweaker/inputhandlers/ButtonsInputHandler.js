@@ -7,7 +7,7 @@ import SetButtonsActiveStateByIndex from './utils/SetButtonsActiveState.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 var SetOptions = function (gameObject, options) {
-    var list = gameObject.getElement('list');
+    var list = gameObject.childrenMap.list;
     list.options = options;
 
     var scene = gameObject.scene;
@@ -79,11 +79,11 @@ export default {
 
     // Callback inside `setValue()`
     displayValue(gameObject, value) {
-        var list = gameObject.getElement('list');
+        var list = gameObject.childrenMap.list;
         var index = gameObject._selectedIndex;  // See list's 'button.click' event
         if (index === undefined) {
             index = GetOptionIndex(list.options, value);
         }
-        SetButtonsActiveStateByIndex(list.getElement('buttons'), index);
+        SetButtonsActiveStateByIndex(list.childrenMap.buttons, index);
     },
 }

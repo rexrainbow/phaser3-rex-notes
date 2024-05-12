@@ -5,7 +5,7 @@ var SetInputTextReadOnly = function (gameObject, enable) {
         enable = true;
     }
 
-    var inputText = gameObject.getElement('inputText');
+    var inputText = gameObject.childrenMap.inputText;
     inputText.setReadOnly(enable);
 }
 
@@ -48,7 +48,7 @@ export default {
 
     // Callback inside `setValue()`
     displayValue(gameObject, value) {
-        var inputText = gameObject.getElement('inputText');
+        var inputText = gameObject.childrenMap.inputText;
         inputText.setText(gameObject.getFotmatText(value));
     },
 

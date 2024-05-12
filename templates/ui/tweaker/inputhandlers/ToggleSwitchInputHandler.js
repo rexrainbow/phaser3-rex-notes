@@ -41,7 +41,7 @@ export default {
 
     // Callback inside `setValue()`
     displayValue(gameObject, value) {
-        var toggleSwitch = gameObject.getElement('toggleSwitch');
+        var toggleSwitch = gameObject.childrenMap.toggleSwitch;
         toggleSwitch.setValue(value);
     },
 }
