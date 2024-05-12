@@ -12,6 +12,7 @@ Fine-tuning properties of target object. [Reference](https://cocopon.github.io/t
 - [Horizontal tweaker](https://codepen.io/rexrainbow/pen/MWBGqzN)
 - [Buttons](https://codepen.io/rexrainbow/pen/vYvbpXY)
 - [Add rows](https://codepen.io/rexrainbow/pen/NWVKyKW)
+- [Edit item](https://codepen.io/rexrainbow/pen/vYwEXQe)
 
 ## Usage
 
@@ -333,6 +334,7 @@ See [Styles of text input](ui-tweaker.md#styles-of-text-input)
 tweaker.addInput(object, key, {    
     view: 'textarea',
 
+    // height: undefined,
     // icon: undefined,
     // iconFrame: undefined,
     // iconSize: undefined,
@@ -359,6 +361,7 @@ tweaker.addInput({
     bindingKey: key,
     view: 'textarea',
 
+    // height: undefined,
     // icon: undefined,
     // iconFrame: undefined,
     // iconSize: undefined,
@@ -381,6 +384,8 @@ tweaker.addInput({
     - Can bind target later via `tweaker.setBindingTarget(object)`.
 - `bindingKey` : Bind to target's property key. Necessary field
 - `view` : `'textarea'`.
+- `height` : Height of this input row.
+    - `undefined` : Use children height.
 - `icon`, `iconFrame` : Texture key, frame name of icon on title-label.
 - `iconSize` : Fixed icon size
 - `title` : Display text of title-label. Default value is equal to `key`.

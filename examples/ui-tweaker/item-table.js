@@ -16,23 +16,14 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var gridTable = CreateGridTable(this)
-
-        var editor = CreateEditor(this)
-            .addRows([
-                { $key: 'name', title: 'Name', view: 'string', },
-                { $key: 'description', title: 'Descr-\niption', view: 'textarea', height: 100 },
-                { $key: 'a', view: 'number' },
-                { $key: 'b', view: 'number' },
-                { $key: 'c', view: 'boolean' },
-            ])
-
+        var gridTable = CreateGridTable(this);
+        var editor = CreateEditor(this);
         var panel = this.rexUI.add.splitPanels({
             x: 400, y: 300,
             width: 700, height: 300,
 
             space: {
-                item: 10
+                item: 5
             },
 
             leftPanel: gridTable,
@@ -44,16 +35,27 @@ class Demo extends Phaser.Scene {
 
             splitRatio: 0.5
         })
-            .layout()
 
         var items = CreateItems(20);
         gridTable.setItems(items);
+        editor.addRows([
+            {
+                $key: 'name', title: 'Name', view: 'string',
+                onValueChange() { gridTable.setItems(items) }
+            },
+            { $key: 'description', title: 'Descr-\niption', view: 'textarea', height: 100 },
+            { $key: 'a', view: 'number' },
+            { $key: 'b', view: 'number' },
+            { $key: 'c', view: 'boolean' },
+        ], false)
 
         gridTable.on('cell.up', function (cellContainer, cellIndex) {
             var item = gridTable.items[cellIndex];
             editor.setBindingTarget(item);
         }, this)
 
+
+        panel.layout();
     }
 
     update() {
