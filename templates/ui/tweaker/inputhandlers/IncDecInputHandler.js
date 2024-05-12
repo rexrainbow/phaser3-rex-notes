@@ -39,7 +39,7 @@ export default {
         */
 
         var incDecConfig = GetValue(style, 'incDec') || {};
-        var buttonConfig = { text: null, action: null };
+        var buttonConfigBase = { text: null, action: null };
 
         // buttons
         var buttons = CreateButtons(scene, {
@@ -52,7 +52,7 @@ export default {
         );
 
         // inputText
-        var inputTextConfig = incDecConfig.inputNumber || style.inputNumber || style.inputText;
+        var inputTextConfig = incDecConfig.inputText || style.inputNumber || style.inputText;
         var inputText = CreateInputText(scene, inputTextConfig)
             .setNumberInput();
 
@@ -61,20 +61,20 @@ export default {
         });
 
         // incButton
-        var incButtonConfig = Object.assign(DeepClone(buttonConfig), (incDecConfig.incButton || {}));
+        var incButtonConfig = Object.assign(DeepClone(buttonConfigBase), (incDecConfig.incButton || {}));
         var incButton = CreateLabel(scene, incButtonConfig);
 
         // decButton
-        var decButtonConfig = Object.assign(DeepClone(buttonConfig), (incDecConfig.decButton || {}));
+        var decButtonConfig = Object.assign(DeepClone(buttonConfigBase), (incDecConfig.decButton || {}));
         var decButton = CreateLabel(scene, decButtonConfig);
 
-        // position
+        // inputTextIndex
         buttons.addButton(incButton);
         buttons.addButton(decButton);
 
-        var position = incDecConfig.position || 0;
+        var inputTextIndex = incDecConfig.inputTextIndex || 0;
         buttons.insert(
-            position, inputText,
+            inputTextIndex, inputText,
             { proportion: 1, expand: true }
         );
 

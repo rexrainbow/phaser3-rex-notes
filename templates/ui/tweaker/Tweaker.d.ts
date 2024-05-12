@@ -32,6 +32,13 @@ declare namespace Tweaker {
         expand?: boolean,
     }
 
+    interface IIncDecConfig {
+        inputText?: InputText.IConfig,
+        incButton?: SimpleLabel.IConfig,
+        decButton?: SimpleLabel.IConfig,
+        inputTextIndex?: 0 | 1 | 2
+    }
+
     interface IFolderTitleConfig extends SimpleLabel.IConfig {
         expandedIcon?: {
             color?: number,
@@ -74,6 +81,8 @@ declare namespace Tweaker {
         toggleSwitch?: ToggleSwitch.IConfig,
 
         colorInput?: ColorInput.IConfig,
+
+        incDec?: IIncDecConfig,
 
         proportion?: {
             title?: number,
@@ -146,8 +155,11 @@ declare namespace Tweaker {
 
         orientation?: Sizer.OrientationTypes,
 
-        // range
+        // range, incdec
         min?: number, max?: number,
+
+        // incdec
+        step?: number,
 
         // list, buttons
         options?: IOptionConfig[],
