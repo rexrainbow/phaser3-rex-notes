@@ -29,8 +29,14 @@ TITLE
 Title.set
   a=100
 
+Title.set
+  b=#( @Title.a + 100 )
+
 log
   text=I add a new property to Title : Title.a = {{@Title.a}}
+
+log
+  text=Another property of Title : Title.b = {{@Title.b}}
 
 SPRITE
   id=CharacterA
