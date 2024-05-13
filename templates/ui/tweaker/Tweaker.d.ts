@@ -33,7 +33,6 @@ declare namespace Tweaker {
     }
 
     interface IIncDecConfig {
-        inputText?: InputText.IConfig,
         incButton?: SimpleLabel.IConfig,
         decButton?: SimpleLabel.IConfig,
         inputTextIndex?: 0 | 1 | 2
@@ -156,10 +155,7 @@ declare namespace Tweaker {
         orientation?: Sizer.OrientationTypes,
 
         // range, incdec
-        min?: number, max?: number,
-
-        // incdec
-        step?: number,
+        min?: number, max?: number, step?: number,
 
         // list, buttons
         options?: IOptionConfig[],

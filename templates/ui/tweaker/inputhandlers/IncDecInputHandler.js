@@ -52,7 +52,7 @@ export default {
         );
 
         // inputText
-        var inputTextConfig = incDecConfig.inputText || style.inputNumber || style.inputText;
+        var inputTextConfig = style.inputNumber || style.inputText;
         var inputText = CreateInputText(scene, inputTextConfig)
             .setNumberInput();
 
@@ -78,7 +78,7 @@ export default {
             { proportion: 1, expand: true }
         );
 
-        gameObject.step = undefined;
+        gameObject.step = 1;
         gameObject.minValue = undefined;
         gameObject.maxValue = undefined;
         buttons.on('button.click', function (button, index, pointer, event) {

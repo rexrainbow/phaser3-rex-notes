@@ -65311,7 +65311,7 @@
       */
 
       var incDecConfig = GetValue$a(style, 'incDec') || {};
-      var buttonConfig = {
+      var buttonConfigBase = {
         text: null,
         action: null
       };
@@ -65327,29 +65327,29 @@
       });
 
       // inputText
-      var inputTextConfig = incDecConfig.inputNumber || style.inputNumber || style.inputText;
+      var inputTextConfig = style.inputNumber || style.inputText;
       var inputText = CreateInputText$1(scene, inputTextConfig).setNumberInput();
       inputText.on('close', function () {
         gameObject.setValue(inputText.value);
       });
 
       // incButton
-      var incButtonConfig = Object.assign(DeepClone(buttonConfig), incDecConfig.incButton || {});
+      var incButtonConfig = Object.assign(DeepClone(buttonConfigBase), incDecConfig.incButton || {});
       var incButton = CreateLabel(scene, incButtonConfig);
 
       // decButton
-      var decButtonConfig = Object.assign(DeepClone(buttonConfig), incDecConfig.decButton || {});
+      var decButtonConfig = Object.assign(DeepClone(buttonConfigBase), incDecConfig.decButton || {});
       var decButton = CreateLabel(scene, decButtonConfig);
 
-      // position
+      // inputTextIndex
       buttons.addButton(incButton);
       buttons.addButton(decButton);
-      var position = incDecConfig.position || 0;
-      buttons.insert(position, inputText, {
+      var inputTextIndex = incDecConfig.inputTextIndex || 0;
+      buttons.insert(inputTextIndex, inputText, {
         proportion: 1,
         expand: true
       });
-      gameObject.step = undefined;
+      gameObject.step = 1;
       gameObject.minValue = undefined;
       gameObject.maxValue = undefined;
       buttons.on('button.click', function (button, index, pointer, event) {

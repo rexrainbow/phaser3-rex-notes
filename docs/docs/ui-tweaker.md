@@ -324,7 +324,7 @@ tweaker.addInput({
         ```
     - `undefined` : Ignore this feature. Default value.
 
-See [Styles of text input](ui-tweaker.md#styles-of-text-input)
+See [Style of text input](#style-of-text-input)
 
 #### Text-Area input row
 
@@ -416,7 +416,7 @@ tweaker.addInput({
         ```
     - `undefined` : Ignore this feature. Default value.
 
-See [Styles of text-area input](ui-tweaker.md#styles-of-text-area-input)
+See [Style of text-area input](#style-of-text-area-input)
 
 #### Text input from list
 
@@ -492,7 +492,7 @@ tweaker.addInput({
     - `undefined` : Don't add this child. Default value.
 
 
-See [Styles of list input](ui-tweaker.md#styles-of-list-input)
+See [Style of list input](#style-of-list-input)
 
 #### Text input from buttons
 
@@ -567,7 +567,7 @@ tweaker.addInput({
     - `undefined` : Don't add this child. Default value.
 
 
-See [Styles of buttons input](ui-tweaker.md#styles-of-buttons-input)
+See [Style of buttons input](#style-of-buttons-input)
 
 #### Number input row
 
@@ -630,7 +630,7 @@ tweaker.addInput({
     - `undefined` : Don't add this child. Default value.
 
 
-See [Styles of text input](ui-tweaker.md#styles-of-text-input)
+See [Style of text input](#style-of-text-input)
 
 
 
@@ -652,7 +652,7 @@ tweaker.addInput(object, key, {
 
     min: minValue, 
     max: maxValue,
-    step: undefined,
+    // step: undefined,
 
     // format: function(value) { return s; },
     // inputTextReadOnly: false,
@@ -681,6 +681,7 @@ tweaker.addInput({
 
     min: minValue, 
     max: maxValue,
+    // step: undefined,
 
     // format: function(value) { return s; },
     // inputTextReadOnly: false,
@@ -699,6 +700,7 @@ tweaker.addInput({
 - `iconSize` : Fixed icon size
 - `title` : Display text of title-label. Default value is equal to `key`.
 - `min`, `max` : Minimum, maximun value of range.
+- `step` : Step/gap of slider, optional.
 - `format` : Callback to return formatted string for input text field.
     ```javascript
     function(value) {
@@ -715,7 +717,93 @@ tweaker.addInput({
     - `undefined` : Don't add this child. Default value.
 
 
-See [Styles of range input](ui-tweaker.md#styles-of-range-inputut)
+See [Style of range input](#style-of-range-input)
+
+
+#### Number input in inc-dec buttons
+
+`object[key]` is a number value.
+
+```javascript
+tweaker.addInput(object, key, {
+    view: 'incdec',
+
+    // icon: undefined,
+    // iconFrame: undefined,
+    // iconSize: undefined,
+
+    // title: undefined,
+
+    // orientation: 'x',
+
+    // min: undefined, 
+    // max: undefined,
+    // step: 1,
+
+    // format: function(value) { return s; },
+    // inputTextReadOnly: false,
+    
+    // monitor: false,
+
+    // key: undefined,
+})
+```
+
+or
+
+```javascript
+tweaker.addInput({
+    bindingTarget: object,
+    bindingKey: key,
+    // view: 'incdec',
+
+    // icon: undefined,
+    // iconFrame: undefined,
+    // iconSize: undefined,
+
+    // title: undefined,
+
+    // orientation: 'x',
+
+    // min: undefined, 
+    // max: undefined,
+    // step: 1,
+
+    // format: function(value) { return s; },
+    // inputTextReadOnly: false,
+    
+    // monitor: false,
+
+    // key: undefined,
+})
+```
+
+- `bindingTarget` : Binding target object.
+    - Can bind target later via `tweaker.setBindingTarget(object)`.
+- `bindingKey` : Bind to target's property key. Necessary field
+- `view` : Set to `'incdec'`, if `bindingTarget` is not given.
+- `icon`, `iconFrame` : Texture key, frame name of icon on title-label.
+- `iconSize` : Fixed icon size
+- `title` : Display text of title-label. Default value is equal to `key`.
+- `step` : Incremental or decremental value when clicking inc-button, or dec-button
+- `min`, `max` : Minimum, maximun value of range, optional.
+- `format` : Callback to return formatted string for input text field.
+    ```javascript
+    function(value) {
+        return s;
+    }
+    ```
+- `inputTextReadOnly` :
+    - `false` : Input text field is editable. Default behavior.
+    - `true` : Input text field is read-only.
+- `monitor` : 
+    - `false` : Don't update input text every tick from target. Default behavior.
+    - `true` : Update input text from current object, in `postupdate` event of scene.
+- `key` : Add this child into childMap, which could be read back by `tweaker.getElement(key)`.
+    - `undefined` : Don't add this child. Default value.
+
+
+See [Style of incdec input](#style-of-incdec-inputut)
 
 
 #### Number input from list
@@ -791,7 +879,7 @@ tweaker.addInput({
     - `undefined` : Don't add this child. Default value.
 
 
-See [Styles of list input](ui-tweaker.md#styles-of-list-input)
+See [Style of list input](#style-of-list-input)
 
 
 #### Number input from buttons
@@ -867,7 +955,7 @@ tweaker.addInput({
     - `undefined` : Don't add this child. Default value.
 
 
-See [Styles of buttons input](ui-tweaker.md#styles-of-buttons-input)
+See [Style of buttons input](#style-of-buttons-input)
 
 
 #### Color input
@@ -927,7 +1015,7 @@ tweaker.addInput({
 - `key` : Add this child into childMap, which could be read back by `tweaker.getElement(key)`.
     - `undefined` : Don't add this child. Default value.
 
-See [Styles of color input](ui-tweaker.md#styles-of-color-input)
+See [Style of color input](#style-of-color-input)
 
 
 #### Boolean input row
@@ -990,7 +1078,7 @@ tweaker.addInput({
 - `key` : Add this child into childMap, which could be read back by `tweaker.getElement(key)`.
     - `undefined` : Don't add this child. Default value.
 
-See [Styles of boolean input](ui-tweaker.md#styles-of-boolean-input)
+See [Style of boolean input](#style-of-boolean-input)
 
 
 #### Value callbacks row
@@ -1101,7 +1189,7 @@ tweaker.addButton({
     - `undefined` : Don't add this child. Default value.
 
 
-See [Styles of botton](ui-tweaker.md#styles-of-botton)
+See [Style of botton](#style-of-botton)
 
 ### Add buttons
 
@@ -1171,7 +1259,7 @@ tweaker.addButtons({
     - `undefined` : Don't add this child. Default value.
 
 
-See [Styles of botton](ui-tweaker.md#styles-of-botton)
+See [Style of botton](#style-of-botton)
 
 
 ### Add separator
@@ -1181,7 +1269,7 @@ tweaker.addSeparator();
 ```
 
 
-See [Styles of separator](ui-tweaker.md#styles-of-separator)
+See [Style of separator](#style-of-separator)
 
 
 ### Add folder
@@ -1205,7 +1293,7 @@ var childTweaker = tweaker.addFolder({
     - `false` : Collapse child tweaker game object at beginning.
 
 
-See [Styles of folder](ui-tweaker.md#styles-of-folder)
+See [Style of folder](#style-of-folder)
 
 
 ### Add tab
@@ -1243,7 +1331,7 @@ var childrenTweakers = tweaker.addTab({
     - `show` : Set to `true` to show this page at beginning
 
 
-See [Styles of tab](ui-tweaker.md#styles-of-tab)
+See [Style of tab](#style-of-tab)
 
 
 ### Add rows
@@ -1346,7 +1434,7 @@ See also - [dirty](ui-basesizer.md#dirty)
 
 ### Styles
 
-#### Styles of text input 
+#### Style of text input 
 
 Style of text-area input is defined in 
 
@@ -1491,7 +1579,7 @@ Style of text-area input is defined in
 }
 ```
 
-#### Styles of text-area input 
+#### Style of text-area input 
 
 Style of text-area input is defined in 
 
@@ -1698,7 +1786,7 @@ Style of text-area is defined at `styles.inputRow.inputTextArea` :
 - Define style of slider at `styles.inputRow.inputTextArea.slider`, if not given, it will use
   `styles.inputRow.slider`.
 
-#### Styles of list input 
+#### Style of list input 
 
 Style of text/number list input is defined in 
 
@@ -1889,7 +1977,7 @@ Style of text/number list input is defined in
 ```
 
 
-#### Styles of buttons input
+#### Style of buttons input
 
 Style of buttons input is defined in 
 
@@ -2023,11 +2111,11 @@ Style of buttons input is defined in
 ```
 
 
-#### Styles of range input
+#### Style of range input
 
 Style of range input is defined in 
 
-- `styles.inputRow.title`, 
+- `styles.inputRow.title`
 - `styles.inputRow.slider`
 - `styles.inputRow.inputText` 
 - `styles.inputRow.background`
@@ -2133,7 +2221,7 @@ Style of range input is defined in
                     strokeAlpha: undefined,
                     strokeWidth: undefined,
                 }
-            }
+            },
 
             inputText: {
                 background: {
@@ -2217,11 +2305,225 @@ Style of range input is defined in
 
 - Set `proportion.range.slider` and `proportion.range.inputText` to layout slider and inputText.
 
-#### Styles of color input
+#### Style of inc-dec input
+
+Style of range input is defined in 
+
+- `styles.inputRow.title`
+- `styles.inputRow.incDec`
+- `styles.inputRow.inputText` 
+- `styles.inputRow.background`
+
+```javascript
+{
+    // style: {...}
+    styles: {
+        inputRow: {
+            background: {
+                radius: 0,
+                // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
+
+                color: undefined,
+                alpha: undefined,
+                strokeColor: undefined,
+                strokeAlpha: undefined,
+                strokeWidth: undefined,
+            },
+
+            title: {
+                background: {
+                    radius: 0,
+                    // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
+    
+                    color: undefined,
+                    alpha: undefined,
+                    strokeColor: undefined,
+                    strokeAlpha: undefined,
+                    strokeWidth: undefined,
+                },
+    
+                text: {
+                    fontFamily: 'Courier',
+                    fontSize: '16px',
+                    fontStyle: '',
+                    backgroundColor: null,
+                    color: '#fff',
+                    stroke: '#fff',
+                    strokeThickness: 0,
+                    shadow: {
+                        offsetX: 0,
+                        offsetY: 0,
+                        color: '#000',
+                        blur: 0,
+                        stroke: false,
+                        fill: false
+                    },                  
+                    padding: {
+                        left: 0,
+                        right: 0,
+                        top: 0,
+                        bottom: 0,
+                    },
+                    // more text styles
+                },
+
+                iconSize: undefined,
+                iconWidth: undefined, iconHeight: undefined,
+
+                space: {
+                    left: 0, right: 0, top: 0, bottom:0, 
+                    icon: 0, text: 0
+                }
+            },
+
+            incDec: {
+                incButton: {
+                    background: {
+                        radius: 0,
+                        // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
+        
+                        color: undefined,
+                        alpha: undefined,
+                        strokeColor: undefined,
+                        strokeAlpha: undefined,
+                        strokeWidth: undefined,
+                    },
+    
+                    icon: {
+                        key:,
+                        frame:,
+                    },
+    
+                    text: null,
+                    action: null,
+
+                    iconSize: undefined,
+                    iconWidth: undefined, iconHeight: undefined,
+    
+                    space: {
+                        left: 0, right: 0, top: 0, bottom:0, 
+                        icon: 0, text: 0
+                    }
+                },
+
+                decButton: {
+                    background: {
+                        radius: 0,
+                        // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
+        
+                        color: undefined,
+                        alpha: undefined,
+                        strokeColor: undefined,
+                        strokeAlpha: undefined,
+                        strokeWidth: undefined,
+                    },
+    
+                    icon: {
+                        key:,
+                        frame:,
+                    },
+    
+                    text: null,
+                    action: null,
+
+                    iconSize: undefined,
+                    iconWidth: undefined, iconHeight: undefined,
+    
+                    space: {
+                        left: 0, right: 0, top: 0, bottom:0, 
+                        icon: 0, text: 0
+                    }
+                },
+
+                inputTextIndex: 0, // 0,1,2
+            },
+
+
+            inputText: {
+                background: {
+                    color: null,
+                    color2: null,
+                    horizontalGradient: true,
+
+                    stroke: null,
+                    strokeThickness: 2,
+
+                    cornerRadius: 0,
+                    cornerIteration: null
+                },
+                focusStyle: {
+                    // color:
+                    // color2:
+                    // horizontalGradient:
+
+                    // stroke:
+                    // strokeThickness:
+
+                    // cornerRadius:
+                    // cornerIteration:
+                },
+
+                style: {
+                    bold: false,
+                    italic: false,
+                    fontSize: '16px',
+                    fontFamily: 'Courier',
+                    color: '#fff',
+                    stroke: '#fff',
+                    strokeThickness: 0,
+                    shadowColor: null,
+                    shadowOffsetX: 0,
+                    shadowOffsetY: 0,
+                    shadowBlur: 0,
+                    backgroundColor: null,
+                    backgroundHeight: undefined,
+                    backgroundBottomY: undefined,
+                    offsetX: 0,
+                    offsetY: 0
+                },
+                cursorStyle: {
+                    // bold:
+                    // italic:
+                    // fontSize:
+                    // fontFamily:
+                    // color:
+                    // stroke:
+                    // strokeThickness:
+                    // shadowColor:
+                    // shadowOffsetX:
+                    // shadowOffsetY:
+                    // shadowBlur:
+                    // backgroundColor:
+                    // backgroundHeight:
+                    // backgroundBottomY:
+                    // offsetX:
+                    // offsetY:
+                }
+            },
+
+            space: {
+                left: 0, right: 0, top: 0, bottom: 0,
+                title: 0
+            },
+            
+            proportion: {
+                title: 0, inputField: 0,
+                range: {
+                    slider: 0,
+                    inputText: 0,
+                }
+            }
+
+        }
+    }
+}
+```
+
+#### Style of color input
 
 Style of color input is defined in 
 
-- `styles.inputRow.title`, 
+- `styles.inputRow.title`
 - `styles.inputRow.inputText` 
 - `styles.inputRow.colorInput`
 - `styles.inputRow.background`
@@ -2454,12 +2756,12 @@ Style of color input is defined in
 ```
 
 
-#### Styles of boolean input
+#### Style of boolean input
 
 
 Style of boolean input is defined in 
 
-- `styles.inputRow.title`, 
+- `styles.inputRow.title`
 - `styles.inputRow.checkbox`, or `styles.inputRow.toggleSwitch`
 - `styles.inputRow.background`
 
@@ -2593,11 +2895,11 @@ Style of boolean input is defined in
 }
 ```
 
-#### Styles of botton
+#### Style of botton
 
 Style of button is defined in 
 
-- `styles.inputRow.title`, 
+- `styles.inputRow.title`
 - `styles.inputRow.button`
 - `styles.inputRow.background`
 
@@ -2724,7 +3026,7 @@ Style of button is defined in
 ```
 
 
-#### Styles of separator
+#### Style of separator
 
 Style of separator is defined in 
 
@@ -2751,7 +3053,7 @@ Style of separator is defined in
 ```
 
 
-#### Styles of folder
+#### Style of folder
 
 Style of folder is defined in 
 
@@ -2840,7 +3142,7 @@ Style of folder is defined in
 ```
 
 
-#### Styles of tab
+#### Style of tab
 
 Style of tab is defined in 
 
