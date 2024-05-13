@@ -72,8 +72,8 @@ log
 Dialog.set
   alpha=0.8
 
-Title.set
-  alpha=0.7
+Title.set  
+  alpha=0
 
 // Title.display
 //   text0=Day0
@@ -127,6 +127,14 @@ camera.shake
 
 camera.flash
 
+Title.set
+  vpx=0
+  alpha=0
+
+Title.to
+  vpx=0.9
+  alpha=0.8
+  wait=false
 
 CharacterA.to
   vpx=0.8

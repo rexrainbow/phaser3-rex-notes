@@ -18,7 +18,10 @@
         "url": "https://github.com/rexrainbow/phaser3-rex-notes"
     },
     "keywords": [
-        "phaser3"
+        "phaser",
+        "phaser3",
+        "phaser-plugin",
+        "phaser3-plugin"
     ],
     "license": "MIT",
     "bugs": {

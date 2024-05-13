@@ -105,6 +105,6 @@ var TrimString = function (s, lineBreak) {
     if (lineBreak && (s.at(-1) === lineBreak)) {
         s = s.substring(0, s.length - 1);
     }
-    return s.trimLeft();
+    return s.trim();
 }
 export default CreateActionNode;
