@@ -66,6 +66,8 @@ declare class Managers extends Phaser.Events.EventEmitter {
 
     gameObjectManagers: { [name: string]: GOManager };
 
+    layerManager: LayerManager;
+
     soundManager: SoundManager;
 
     waitEventManager: WaitEventManager;

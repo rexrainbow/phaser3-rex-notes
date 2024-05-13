@@ -12,7 +12,7 @@ export default {
 
     icon: { width: 120, height: 120 },
 
-    action: { tint: COLOR_LIGHT, alpha: 0, },
+    action: null,
 
     text: { fontSize: 30, maxLines: 4 },
 

@@ -54,17 +54,36 @@ class Demo extends Phaser.Scene {
         })
             .addEventSheet(this.cache.text.get('eventSheet0'))
 
+        var waitInputGameObject = this.add.image(1480, 1000, 'nextPage');
+        waitInputGameObject.setAlpha(0).setScale(0);
+        var layer = eventSheetManager.commandExecutor.sys.layerManager.getLayer('uiLayerTop');
+        layer.add(waitInputGameObject);
+
         eventSheetManager
             .on('pause.input', function () {
                 print.text = 'Wait any click to continue';
-            })
+                waitInputGameObject.y -= 80;
+                this.tweens.add({
+                    targets: [waitInputGameObject],
+                    alpha: { value: 1, duration: 500 },
+                    scale: { value: 1.2, ease: 'back', duration: 800 },
+                    y: { value: '+=80', ease: 'back', duration: 800 },
+                })
+            }, this)
             .on('resume.input', function () {
                 print.text = '';
-            })
+                this.tweens.add({
+                    targets: [waitInputGameObject],
+                    alpha: 0,
+                    scale: 0,
+                    y: '-=80',
+                    duration: 500
+                })
+            }, this)
             .on('complete', function () {
                 print.text = 'Complete';
                 console.log(eventSheetManager.memory)
-            })
+            }, this)
 
         this.input.once('pointerdown', function () {
             print.text = '';
