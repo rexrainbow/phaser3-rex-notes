@@ -102,7 +102,7 @@ NAME.choice
 
 NAME.shake
   duration=
-  Magnitude=
+  magnitude=
   wait=true
 
 ```

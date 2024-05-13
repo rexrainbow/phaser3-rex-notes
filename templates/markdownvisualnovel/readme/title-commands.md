@@ -103,7 +103,7 @@ NAME.typing
 
 NAME.shake
   duration=
-  Magnitude=
+  magnitude=
   wait=true
 
 ```

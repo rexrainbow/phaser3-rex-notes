@@ -114,7 +114,7 @@ NAME.cross
 
 NAME.shake
   duration=
-  Magnitude=
+  magnitude=
   wait=true
 
 ```

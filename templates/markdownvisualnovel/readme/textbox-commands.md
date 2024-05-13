@@ -159,7 +159,7 @@ Wait an extra clicking after typing complete internally.
 
 NAME.shake
   duration=
-  Magnitude=
+  magnitude=
   wait=true
 
 ```
