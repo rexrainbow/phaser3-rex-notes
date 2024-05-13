@@ -26,6 +26,12 @@ TITLE
   text0=Day0
   text1=Classroom
 
+Title.set
+  a=100
+
+log
+  text=I add a new property to Title : Title.a = {{@Title.a}}
+
 SPRITE
   id=CharacterA
   key=characters
