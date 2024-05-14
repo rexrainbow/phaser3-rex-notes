@@ -7,6 +7,7 @@ Get pan events of a game object.
 
 ## Live demos
 
+- [Camera scroll](https://codepen.io/rexrainbow/pen/xxNGERo)
 - [Pan & rotate](https://codepen.io/rexrainbow/pen/PvNEPy)
 
 ## Usage
