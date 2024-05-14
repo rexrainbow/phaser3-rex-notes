@@ -34,7 +34,7 @@ var LayoutChildren = function () {
             targetSize.width = childWidth;
             targetSize.height = childHeight;
 
-            childSize = FitToSize(sourceSize, targetSize, true, true);
+            childSize = FitToSize(sourceSize, targetSize, 'FIT', true);
 
             childWidth = childSize.width;
             childHeight = childSize.height;

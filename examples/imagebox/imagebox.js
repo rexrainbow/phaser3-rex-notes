@@ -11,24 +11,36 @@ class Demo extends Phaser.Scene {
     preload() {
         this.load.image('classroom', 'assets/images/backgrounds/classroom.png');
         this.load.image('card', 'assets/images/card2.png');
+        this.load.image('bolt', 'assets/images/bolt.png');
     }
 
     create() {
         var graphics = this.add.graphics();
 
-        this.add.rexImageBox(200, 300, 'classroom', undefined, {
+        this.add.rexImageBox(200, 200, 'classroom', undefined, {
             background: this.add.rectangle(0, 0, 10, 10, 0x888888)
         })
             .resize(200, 200)
             .drawBounds(graphics, 0xff0000)
 
-        this.add.rexImageBox(600, 300, 'card', undefined, {
+        this.add.rexImageBox(600, 200, 'card', undefined, {
             background: this.add.rectangle(0, 0, 10, 10, 0x888888)
         })
             .resize(200, 200)
             .drawBounds(graphics, 0xff0000)
 
+        this.add.rexImageBox(200, 450, 'bolt', undefined, {
+            scaleUp: true,
+            background: this.add.rectangle(0, 0, 10, 10, 0x888888)
+        })
+            .resize(200, 200)
+            .drawBounds(graphics, 0xff0000)
 
+        this.add.rexImageBox(600, 450, 'bolt', undefined, {
+            background: this.add.rectangle(0, 0, 10, 10, 0x888888)
+        })
+            .resize(200, 200)
+            .drawBounds(graphics, 0xff0000)
 
     }
 
