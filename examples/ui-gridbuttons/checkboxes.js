@@ -57,9 +57,10 @@ class Demo extends Phaser.Scene {
         var dumpButtonStates = function () {
             if (CheckboxesMode) { // checkboxes
                 var s = '';
-                buttons.data.each(function (buttons, key, value) {
-                    s += `${key}:${value}\n`
-                })
+                var states = buttons.getAllButtonsState();
+                for (var key in states) {
+                    s += `${key}:${states[key]}\n`
+                }
                 print.setText(s);
             } else { // radio
                 print.setText(buttons.value);
