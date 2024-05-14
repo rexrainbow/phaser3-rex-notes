@@ -6,6 +6,7 @@ import {
     OnComplete as DefaultOnComplete
 } from './methods/CrossFadeTransition.js';
 import OnTextureChange from './methods/OnTextureChange.js';
+import FitImages from './methods/FitImages.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -35,7 +36,7 @@ class TransitionImage extends Container {
 
         var width = GetValue(config, 'width', undefined);
         var height = GetValue(config, 'height', undefined);
-        var fixedSizeMode = (width !== undefined) && (height !== undefined);
+        var scaleMode = ((width !== undefined) && (height !== undefined)) ? 1 : 0;
 
         if (width === undefined) {
             width = frontImage.width;
@@ -48,7 +49,12 @@ class TransitionImage extends Container {
         this.type = 'rexTransitionImage';
         this._flipX = false;
         this._flipY = false;
-        this.fixedSizeMode = GetValue(config, 'fixedSize', fixedSizeMode);
+
+        scaleMode = GetValue(config, 'scaleMode', scaleMode);
+        if (typeof (scaleMode) === 'string') {
+            scaleMode = ScaleModeMap[scaleMode];
+        }
+        this.scaleMode = scaleMode;
 
         backImage.setVisible(false);
         this.addMultiple([backImage, frontImage])
@@ -311,7 +317,7 @@ class TransitionImage extends Container {
     setSize(width, height) {
         super.setSize(width, height);
 
-        if (this.fixedSizeMode) {
+        if (this.scaleMode) {
             FitImages.call(this);
         }
 
@@ -324,7 +330,7 @@ var RunCallback = function (callback, scope, parent, currentImage, nextImage, t)
         return;
     }
 
-    if (this.fixedSizeMode) {
+    if (this.scaleMode) {
         var localScale;
         if (currentImage.biasScale > 0) {
             localScale = this.getChildLocalScaleX(currentImage);
@@ -344,7 +350,7 @@ var RunCallback = function (callback, scope, parent, currentImage, nextImage, t)
         callback(parent, currentImage, nextImage, t);
     }
 
-    if (this.fixedSizeMode) {
+    if (this.scaleMode) {
         var localScale;
         if (currentImage.biasScale > 0) {
             localScale = this.getChildLocalScaleX(currentImage);
@@ -364,5 +370,12 @@ Object.assign(
     TransitionImage.prototype,
     Methods
 );
+
+const ScaleModeMap = {
+    fit: 1,
+    FIT: 1,
+    envelop: 2,
+    ENVELOP: 2
+}
 
 export default TransitionImage;

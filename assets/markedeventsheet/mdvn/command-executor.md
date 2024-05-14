@@ -8,10 +8,10 @@ groupName=Story
 
 BG
   id=Background
-  key=classroom
+  //key=classroom
   vpw=1
   vph=1
-  scaleMode=FIT
+  scaleMode=ENVELOP
 
 TEXTBOX
   id=Dialog
@@ -100,9 +100,7 @@ CharacterB.set
 CharacterC.set
   vpx=-0.3
 
-```Dialog.typing, displayName=null, icon=null
-
-```
+Dialog.typing, displayName=null, icon=null
 
 bgm.play
   key=theme0
@@ -148,6 +146,11 @@ Title.to
   alpha=0.8
   wait=false
 
+Background.cross
+  key=classroom
+  mode=curtain
+  duration=2000
+  
 CharacterA.to
   vpx=0.8
   ease=Back

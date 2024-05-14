@@ -40,7 +40,7 @@ declare namespace TransitionImage {
     interface IConfig extends ITransitConfigBase {
         x?: number, y?: number,
         width?: number, height?: number,
-        fixedSize?: boolean,
+        scaleMode?: 0 | 1 | 'fit' | 'FIT' | 2 | 'envelop' | 'ENVELOP',
     }
 }
 

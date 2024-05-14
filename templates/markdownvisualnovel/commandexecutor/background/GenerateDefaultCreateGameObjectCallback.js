@@ -11,6 +11,10 @@ var GenerateDefaultCreateGameObjectCallback = function (
 ) {
 
     return function (scene, config) {
+        if (!config.hasOwnProperty('scaleMode')) {
+            config.scaleMode = 0;
+        }
+
         var gameObject = new TransitionImagePack(scene, config);
         scene.add.existing(gameObject);
 
@@ -19,38 +23,22 @@ var GenerateDefaultCreateGameObjectCallback = function (
         var {
             vpx = 0.5, vpy = 0.5,
             vpw, vph,
-            scaleMode,
-
+            scaleMode
         } = config;
 
         gameObject.vpx = vpx;
         gameObject.vpy = vpy;
 
-        if ((vpw !== undefined) || (vph !== undefined)) {
-            var width = (vpw !== undefined) ? viewport.width * vpw : gameObject.width;
-            var height = (vph !== undefined) ? viewport.height * vph : gameObject.height;
-
-            if (scaleMode) {
-                var scaleX = width / gameObject.width;
-                var scaleY = height / gameObject.height;
-                var scale;
-
-                scaleMode = scaleMode.toUpperCase();
-                switch (scaleMode) {
-                    case 'FIT':
-                        scale = Math.min(scaleX, scaleY);
-                        break;
-
-                    case 'ENVELOP':
-                        scale = Math.max(scaleX, scaleY);
-                        break;
-                }
-                gameObject.setScale(scale);
-
-            } else {
-                gameObject.setDisplaySize(width, height);
-
+        if (scaleMode || (vpw !== undefined) || (vph !== undefined)) {
+            if (vpw === undefined) {
+                vpw = 1;
             }
+            if (vph === undefined) {
+                vph = 1;
+            }
+            var width = viewport.width * vpw;
+            var height = viewport.height * vph;
+            gameObject.resize(width, height);
         }
 
         AddShakeBehavior(gameObject);

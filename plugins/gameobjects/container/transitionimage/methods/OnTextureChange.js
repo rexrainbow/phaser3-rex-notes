@@ -1,7 +1,7 @@
 import FitImages from './FitImages.js';
 
 var OnTextureChange = function (newImage) {
-    if (!this.fixedSizeMode) {
+    if (this.scaleMode === 0) {
         this.resize(newImage.width, newImage.height);
 
     } else {
