@@ -21,6 +21,8 @@ class LayerManager extends GOManager {
 
         super(scene, config);
 
+        this.useContainer = GetValue(config, 'useContainer', false);
+
         var rootLayer = GetValue(config, 'rootLayer')
         this.setRootLayer(rootLayer);
 
@@ -34,7 +36,13 @@ class LayerManager extends GOManager {
 
     setCreateGameObjectCallback(callback, scope) {
         if (!callback) {
-            callback = CreateLayer;
+            callback = (function (scene, depth) {
+                var layer = (!this.useContainer) ? scene.add.layer() : scene.add.container();
+                if (depth !== undefined) {
+                    layer.setDepth(depth);
+                }
+                return layer;
+            }).bind(this);
         }
         super.setCreateGameObjectCallback(callback, scope);
         return this;
@@ -69,14 +77,6 @@ class LayerManager extends GOManager {
         return this;
     }
 
-}
-
-var CreateLayer = function (scene, depth) {
-    var layer = scene.add.layer();
-    if (depth !== undefined) {
-        layer.setDepth(depth);
-    }
-    return layer;
 }
 
 Object.assign(

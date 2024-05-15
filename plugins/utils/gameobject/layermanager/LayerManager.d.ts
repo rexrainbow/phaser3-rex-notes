@@ -3,9 +3,11 @@ import GOManager from '../gomanager/GOManager';
 export default LayerManager;
 
 declare namespace LayerManager {
+    type LayerGameObjectType = Phaser.GameObjects.Layer | Phaser.GameObjects.Container;
+
     interface IConfig {
         layers?: string[];
-        rootLayer?: Phaser.GameObjects.Layer;
+        rootLayer?: LayerGameObjectType;
 
         createGameObject?: GOManager.CreateGameObjectCallbackType,
     }
@@ -21,11 +23,13 @@ declare class LayerManager extends GOManager {
         config?: string[]
     )
 
-    setRootLayer(rootLayer?: Phaser.GameObjects.Layer): this;
+    readonly useContainer: boolean;
 
-    getLayer(name: string): Phaser.GameObjects.Layer;
+    setRootLayer(rootLayer?: LayerManager.LayerGameObjectType): this;
 
-    getLayers(out?: Phaser.GameObjects.GameObject[]): Phaser.GameObjects.Layer[];
+    getLayer(name: string): LayerManager.LayerGameObjectType;
+
+    getLayers(out?: Phaser.GameObjects.GameObject[]): Phaser.GameObjects.GameObject[];
 
     addToLayer(
         name: string,
