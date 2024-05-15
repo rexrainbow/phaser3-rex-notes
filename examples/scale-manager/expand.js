@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser3-rex/src/phaser';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -13,6 +13,8 @@ class Demo extends Phaser.Scene {
 
     create() {
         this.add.image(0, 0, 'classroom').setOrigin(0);
+        this.add.image(800, 0, 'classroom').setOrigin(0).setAlpha(0.5);
+        this.add.image(0, 600, 'classroom').setOrigin(0).setAlpha(0.5);
 
         var rect = this.add.rectangle(0, 0, 0, 0).setOrigin(0).setStrokeStyle(5, 0xff0000);
 
