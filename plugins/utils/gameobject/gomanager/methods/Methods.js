@@ -6,6 +6,7 @@ import CallMethods from './CallMethods.js';
 import DataMethods from './DataMethods.js';
 import FadeMethods from './FadeMethods.js';
 import DrawGameObjectsBounds from './DrawGameObjectsBounds.js';
+import CameraMethods from './CameraMethods.js';
 
 var Methods = {
     drawGameObjectsBounds: DrawGameObjectsBounds,
@@ -20,6 +21,7 @@ Object.assign(
     CallMethods,
     DataMethods,
     FadeMethods,
+    CameraMethods,
 )
 
 export default Methods;

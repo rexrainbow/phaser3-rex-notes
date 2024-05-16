@@ -142,4 +142,10 @@ declare class GOManager extends Phaser.Events.EventEmitter {
             lineWidth?: number
         }
     ): this;
+
+    setDedicatedCamera(
+        name: string,
+        cameraName?: string | number | Phaser.Cameras.Scene2D.Camera
+    ): this;
+
 }
