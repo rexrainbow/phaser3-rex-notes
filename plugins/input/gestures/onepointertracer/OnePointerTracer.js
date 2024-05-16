@@ -253,7 +253,7 @@ class OnePointerTracer extends TickTask {
     }
 
     isPointerInGameObject(gameObject, preTest, postTest) {
-        var pointer = this.pointer;
+        var pointer = this.lastPointer;
         if (!pointer) {
             return false;
         }

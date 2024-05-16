@@ -19,6 +19,7 @@ class Tap extends OnePointerTracer {
                         self.y = 0;
                         self.worldX = 0;
                         self.worldY = 0;
+                        self.lastPointer = undefined;
                     },
                     exit: function () {
                         var pointer = self.lastPointer;
