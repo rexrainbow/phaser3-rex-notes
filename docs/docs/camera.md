@@ -14,10 +14,19 @@ Each scene has one or more cameras.
     ```javascript
     var camera = scene.cameras.main;
     ```
+- Get camera by name
+    ```javascript
+    var camera = scene.cameras.getCamera(name);
+    ```
 - Add new camera
     ```javascript
     var camera = scene.cameras.add();
     // var camera = scene.cameras.add(x, y, width, height);
+    ```
+- Add new camera with name
+    ```javascript
+    var camera = scene.cameras.add(undefined, undefined, undefined, undefined, false, name);
+    // var camera = scene.cameras.add(x, y, width, height, makeMain, name);
     ```
 - Add existed camera
     ```javascript

@@ -51,4 +51,10 @@ declare class LayerManager extends GOManager {
     moveLayerBelow(layer: string, baseLayerName: string): this;
 
     moveLayerAbove(layer: string, baseLayerName: string): this;
+
+    setDedicatedCamera(
+        layer: string,
+        cameraName?: string | number | Phaser.Cameras.Scene2D.Camera
+    ): this;
+
 }
