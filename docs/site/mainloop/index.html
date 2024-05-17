@@ -371,6 +371,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#rendering-order" class="md-nav__link">
+    Rendering order
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -9574,6 +9581,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#rendering-order" class="md-nav__link">
+    Rendering order
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -9749,6 +9763,28 @@ SceneUpdate --&gt; SceneEventPostUpdate
 SceneEventPostUpdate -.-&gt; SceneEventPreRender
 SceneEventPreRender --&gt; SceneCameraRender
 SceneCameraRender --&gt; SceneEventRender</code></pre>
+<h2 id="rendering-order">Rendering order<a class="headerlink" href="#rendering-order" title="Permanent link">&para;</a></h2>
+<ul>
+<li>For each scene from bottom to top, in game<ul>
+<li>For each camera from bottom to top, in scene<ul>
+<li>For each game object from bottom to top in scene's displayList<ul>
+<li>Render this game object<ul>
+<li>Render children game objects, if game object is a <a href="../container/">container</a> or a <a href="../layer/">layer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A game object can be seen by all cameras of this scene, 
+therefore game object could be rendering more than one times.</p>
+<p>See also <a href="../camera/#ignore-game-object">Ignore game object</a></p>
+</div>
 
 
   

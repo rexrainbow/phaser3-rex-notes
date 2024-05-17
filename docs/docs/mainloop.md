@@ -142,3 +142,18 @@ SceneEventPostUpdate -.-> SceneEventPreRender
 SceneEventPreRender --> SceneCameraRender
 SceneCameraRender --> SceneEventRender
 ```
+
+## Rendering order
+
+- For each scene from bottom to top, in game
+    - For each camera from bottom to top, in scene
+        - For each game object from bottom to top in scene's displayList
+            - Render this game object
+                - Render children game objects, if game object is a [container](container.md) or a [layer](layer.md)
+
+
+!!! note
+    A game object can be seen by all cameras of this scene, 
+    therefore game object could be rendering more than one times.
+
+    See also [Ignore game object](camera.md#ignore-game-object)
