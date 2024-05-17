@@ -16,17 +16,24 @@ export default {
         return out;
     },
 
-    addToLayer(name, gameObject) {
+    addToLayer(name, gameObjects) {
         var layer = this.getGO(name);
         if (!layer) {
             console.warn(`[LayerManager] Can't get layer "${name}"`);
             return;
         }
 
-        if (gameObject.isRexContainerLite) {
-            gameObject.addToLayer(layer);
-        } else {
-            layer.add(gameObject);
+        if (!Array.isArray(gameObjects)) {
+            gameObjects = [gameObjects];
+        }
+
+        for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+            var gameObject = gameObjects[i];
+            if (gameObject.isRexContainerLite) {
+                gameObject.addToLayer(layer);
+            } else {
+                layer.add(gameObject);
+            }
         }
 
         return this;

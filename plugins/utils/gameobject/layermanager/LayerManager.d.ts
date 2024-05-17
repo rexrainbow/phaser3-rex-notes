@@ -36,7 +36,7 @@ declare class LayerManager extends GOManager {
 
     addToLayer(
         name: string,
-        gameObject: Phaser.GameObjects.GameObject
+        gameObjects: Phaser.GameObjects.GameObject | Phaser.GameObjects.GameObject[]
     ): this;
 
     removeFromLayer(
