@@ -3,8 +3,15 @@ import GOManager from '../gomanager/GOManager';
 export default LayerManager;
 
 declare namespace LayerManager {
+    interface ILayerConfig {
+        name?: string,
+        cameraName?: string
+    }
+
+    type LayerConfigType = string | ILayerConfig;
+
     interface IConfig {
-        layers?: string[];
+        layers?: LayerConfigType[];
         rootLayer?: Phaser.GameObjects.Layer;
 
         createGameObject?: GOManager.CreateGameObjectCallbackType,
@@ -14,11 +21,11 @@ declare namespace LayerManager {
 declare class LayerManager extends GOManager {
     constructor(
         scene: Phaser.Scene,
-        config?: LayerManager.IConfig
+        config?: LayerManager.IConfig,
     )
     constructor(
         scene: Phaser.Scene,
-        config?: string[]
+        config?: LayerManager.LayerConfigType,
     )
 
     setRootLayer(rootLayer?: Phaser.GameObjects.Layer): this;

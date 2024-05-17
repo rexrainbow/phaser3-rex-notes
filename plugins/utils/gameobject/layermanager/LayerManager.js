@@ -27,7 +27,13 @@ class LayerManager extends GOManager {
         var initLayers = GetValue(config, 'layers');
         if (initLayers) {
             for (var i = 0, cnt = initLayers.length; i < cnt; i++) {
-                this.add(initLayers[i]);
+                var layerConfig = initLayers[i];
+                if (typeof (layerConfig) === 'string') {
+                    this.add(layerConfig);
+                } else {
+                    this.add(layerConfig.name);
+                    this.setDedicatedCamera(layerConfig.name, layerConfig.cameraName);
+                }
             }
         }
     }

@@ -12,22 +12,19 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        this.cameras.add(undefined, undefined, undefined, undefined, false, 'ui');
-
+        // Will add new camera if target camera is not existing
         this.layers = this.plugins.get('rexLayerManager').add(this, [
-            'layer0', 'layer1'
+            { name: 'main' },
+            { name: 'ui', cameraName: 'ui' },
         ]);
-        this.layers.setDedicatedCamera('layer0');
-        this.layers.setDedicatedCamera('layer1', 'ui');
 
         var gameObject1 = this.add.circle(400, 300, 20, 0xff0000);
-        this.layers.addToLayer('layer1', gameObject1);
+        this.layers.addToLayer('main', gameObject1);
 
-        var gameObject0 = this.add.circle(440, 300, 30, 0x00ff00);
-        this.layers.addToLayer('layer0', gameObject0);
+        var gameObject0 = this.add.rectangle(440, 300, 30, 30, 0x00ff00);
+        this.layers.addToLayer('ui', gameObject0);
 
-
-        this.cameras.getCamera('ui').setScroll(100, 100);
+        this.cameras.main.setScroll(100, 100);
     }
 
     update() { }
