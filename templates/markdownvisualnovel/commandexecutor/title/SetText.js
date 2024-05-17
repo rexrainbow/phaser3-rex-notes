@@ -1,4 +1,4 @@
-var Display = function (
+var SetText = function (
     gameObject,
     {
         text0, text1
@@ -16,4 +16,4 @@ var Display = function (
     gameObject.layout();
 }
 
-export default Display;
+export default SetText;

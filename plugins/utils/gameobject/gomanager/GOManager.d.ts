@@ -106,6 +106,7 @@ declare class GOManager extends Phaser.Events.EventEmitter {
         property: string,
         value: number,
         duration?: number,
+        delay?: number,
         ease?: string,
         repeat?: number,
         isYoyo?: boolean,

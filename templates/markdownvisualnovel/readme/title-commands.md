@@ -87,15 +87,38 @@ NAME.yoyo
 
 ## Call methods
 
-### Display
+### Set text
 
 ```
 
-NAME.typing
+NAME.setText
   text0=
-  text1
+  text1=
 
 ```
+
+### Pop up
+
+```
+
+NAME.popUp
+  text0=
+  text1=
+  separatorDir=right
+  text0Dir=up
+  text1Dir=down
+  separatorThenText=true
+  duration
+  wait=true
+
+```
+
+- `separatorDir` : Ease direction, `right` or `left`
+- `text0Dir`, `text1Dir` : Ease direction, `up`, `down`, `right`, or `left`
+- `separatorThenText` :
+    - `true` : Ease separator then ease text0, text1
+    - `false` : Ease separator, text0, text1 at the same time
+
 
 ### Shake
 

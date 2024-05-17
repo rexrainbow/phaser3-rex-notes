@@ -1048,6 +1048,7 @@ can see it by `log.memory`, or get property of game object via `#(@NAME.x + 3)`.
       vpy=
       alpha=
       duration=1000
+      delay=0
       ease=Linear
       repeat=0
       wait=
@@ -1062,12 +1063,13 @@ can see it by `log.memory`, or get property of game object via `#(@NAME.x + 3)`.
       vpy=
       alpha=
       duration=1000
+      delay=0
       ease=Linear
       repeat=0
       wait=
     
     ```
-    - These properties are reserved : `id`, `duration`, `ease`, `repeat`, `yoyo`, `wait`
+    - These properties are reserved : `id`, `duration`, `delay`, `ease`, `repeat`, `yoyo`, `wait`
     - `wait` :
         - `false` : Run next command immediately. Default behavior.
         - `true` : Run next command after playing sound complete.
@@ -1082,6 +1084,7 @@ can see it by `log.memory`, or get property of game object via `#(@NAME.x + 3)`.
       vpy=
       alpha=
       duration=1000
+      delay=0
       ease=Linear
       repeat=0
       wait=
@@ -1096,6 +1099,7 @@ can see it by `log.memory`, or get property of game object via `#(@NAME.x + 3)`.
       vpy=
       alpha=
       duration=1000
+      delay=0
       ease=Linear
       repeat=0
       wait=
@@ -1111,6 +1115,7 @@ can see it by `log.memory`, or get property of game object via `#(@NAME.x + 3)`.
       vpy=
       alpha=
       duration=1000
+      delay=0
       ease=Linear
       repeat=0
       wait=
@@ -1125,6 +1130,7 @@ can see it by `log.memory`, or get property of game object via `#(@NAME.x + 3)`.
       vpy=
       alpha=
       duration=1000
+      delay=0
       ease=Linear
       repeat=0
       wait=

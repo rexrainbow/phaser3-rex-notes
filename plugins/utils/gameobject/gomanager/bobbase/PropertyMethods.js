@@ -18,36 +18,52 @@ export default {
         return this;
     },
 
-    easeProperty(property, value, duration, ease, repeat, isYoyo, onComplete, target) {
+    easeProperty(
+        property, value, duration, delay,
+        ease,
+        repeat, isYoyo,
+        onComplete, target
+    ) {
+
         if (target === undefined) {
             target = this.gameObject;
-        }
-
-        var tweenTasks = this.tweens;
-        var tweenTask = tweenTasks[property];
-        if (tweenTask) {
-            tweenTask.remove();
         }
 
         var config = {
             targets: target,
             duration: duration,
+            delay: delay,
             ease: ease,
             repeat: repeat,
             yoyo: isYoyo,
-            onComplete: function () {
-                tweenTasks[property].remove();
-                tweenTasks[property] = null;
-                if (onComplete) {
-                    onComplete(target, property);
-                }
-            },
+            onComplete: onComplete,
         }
         config[property] = value;
 
+        this.addTweenTask(property, config);
+
+        return this;
+    },
+
+    addTweenTask(name, config) {
+        var tweenTasks = this.tweens;
+        var tweenTask = tweenTasks[name];
+        if (tweenTask) {
+            tweenTask.remove();
+        }
+
+        var onComplete = config.onComplete;
+        config.onComplete = function () {
+            tweenTasks[name].remove();
+            tweenTasks[name] = null;
+            if (onComplete) {
+                onComplete(config.targets, name);
+            }
+        }
+
         tweenTask = this.scene.tweens.add(config);
         tweenTask.timeScale = this.timeScale;
-        tweenTasks[property] = tweenTask;
+        tweenTasks[name] = tweenTask;
         return this;
     },
 

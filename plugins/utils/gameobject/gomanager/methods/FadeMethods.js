@@ -56,6 +56,7 @@ export default {
                 'tintGray',                 // property
                 Math.floor(255 * toValue),  // to value
                 this.fadeTime,              // duration
+                0,                          // delay,
                 'Linear',                   // ease
                 0,                          // repeat
                 false,                      // yoyo
@@ -70,6 +71,7 @@ export default {
                 'alpha',                    // property
                 toValue,                    // to value
                 this.fadeTime,              // duration
+                0,                          // delay
                 'Linear',                   // ease
                 0,                          // repeat
                 false,                      // yoyo
@@ -94,6 +96,7 @@ export default {
                 propertyName,         // property
                 toValue,              // to value
                 this.fadeTime,        // duration
+                0,                    // delay
                 'Linear',             // ease
                 0,                    // repeat
                 false,                // yoyo

@@ -28,10 +28,12 @@ export default {
         return this;
     },
 
-    easeGameObjectProperty(goType, name, prop, value, duration, ease, repeat, isYoyo) {
+    easeGameObjectProperty(goType, name, prop, value, duration, delay, ease, repeat, isYoyo) {
         this.getGameObjectManager(goType, name).easeProperty(
-            name, prop, value,
-            duration, ease, repeat, isYoyo
+            name,
+            prop, value, duration, delay,
+            ease,
+            repeat, isYoyo
         );
         return this;
     },

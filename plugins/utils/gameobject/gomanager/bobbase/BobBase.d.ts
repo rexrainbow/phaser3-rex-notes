@@ -23,10 +23,16 @@ declare class BobBase {
         property: string,
         value: number,
         duration?: number,
+        delay?: number,
         ease?: string,
         repeat?: null,
         isYoyo?: boolean,
         onComplete?: Function
+    ): this;
+
+    addTweenTask(
+        name: string,
+        config: Phaser.Types.Tweens.TweenBuilderConfig | object
     ): this;
 
     setTimeScale(timeScale: number): this;

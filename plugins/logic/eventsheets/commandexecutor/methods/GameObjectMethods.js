@@ -27,10 +27,11 @@ export default {
         eventSheetManager, eventSheet
     ) {
 
-        var { id, goType, duration, ease, repeat, yoyo, wait = true } = config;
+        var { id, goType, duration, delay, ease, repeat, yoyo, wait = true } = config;
         delete config.id;
         delete config.goType;
         delete config.duration;
+        delete config.delay;
         delete config.ease;
         delete config.repeat;
         delete config.yoyo;
@@ -46,7 +47,7 @@ export default {
         var waitProperty;
         for (var prop in config) {
             var value = eventSheetManager.evalExpression(config[prop]);
-            this.sys.easeGameObjectProperty(goType, id, prop, value, duration, ease, repeat, yoyo);
+            this.sys.easeGameObjectProperty(goType, id, prop, value, duration, delay, ease, repeat, yoyo);
 
             if (!waitProperty) {
                 waitProperty = prop;

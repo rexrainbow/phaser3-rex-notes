@@ -25,6 +25,7 @@ class BobBase {
 
     freeGO() {
         this.freeTweens();
+        this.gameObject.bob = undefined;
         this.gameObject.destroy();
         this.gameObject = undefined;
         return this;
@@ -33,6 +34,7 @@ class BobBase {
     setGO(gameObject, name) {
         gameObject.goName = name;
         gameObject.goType = this.GOManager.name;
+        gameObject.bob = this;
         this.gameObject = gameObject;
         this.name = name;
         this.freeTweens();

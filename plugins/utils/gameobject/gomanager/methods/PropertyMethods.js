@@ -50,7 +50,12 @@ export default {
         return this;
     },
 
-    easeProperty(name, property, value, duration, ease, repeat, isYoyo, onComplete) {
+    easeProperty(
+        name, property, value, duration, delay,
+        ease,
+        repeat, isYoyo,
+        onComplete) {
+
         var bobs = this.get(name);
         if (!bobs) {
             return this;
@@ -60,6 +65,9 @@ export default {
 
         if (duration === undefined) {
             duration = 1000;
+        }
+        if (delay === undefined) {
+            delay = 0;
         }
         if (ease === undefined) {
             ease = 'Linear';
@@ -83,7 +91,7 @@ export default {
         }
 
         bobs.forEach(function (bob) {
-            bob.easeProperty(property, value, duration, ease, repeat, isYoyo, onComplete);
+            bob.easeProperty(property, value, duration, delay, ease, repeat, isYoyo, onComplete);
         });
 
         return this;

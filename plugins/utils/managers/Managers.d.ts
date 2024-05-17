@@ -115,8 +115,9 @@ declare class Managers extends Phaser.Events.EventEmitter {
 
     easeGameObjectProperty(
         goType: string | undefined, name: string,
-        prop: string, value: any,
-        duration?: number, ease?: string, repeat?: number, isYoyo?: boolean
+        prop: string, value: any, duration?: number, delay?: number,
+        ease?: string,
+        repeat?: number, isYoyo?: boolean
     ): this;
 
     getGameObjectTweenTask(

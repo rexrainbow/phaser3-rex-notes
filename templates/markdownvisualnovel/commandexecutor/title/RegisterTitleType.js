@@ -1,7 +1,8 @@
 import { TITLE } from '../../const/GameObjects.js';
 import { UILayer } from '../../const/Layers.js';
 import GenerateDefaultCreateGameObjectCallback from './GenerateDefaultCreateGameObjectCallback.js';
-import Display from './Display.js';
+import SetText from './SetText.js';
+import PopUp from './Popup.js';
 import Shake from '../utils/Shake.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -39,7 +40,8 @@ var RegisterTitleType = function (commandExecutor, config) {
         defaultLayer: UILayer,
 
         commands: {
-            display: Display,
+            setText: SetText,
+            popUp: PopUp,
             shake: Shake,
         }
     })

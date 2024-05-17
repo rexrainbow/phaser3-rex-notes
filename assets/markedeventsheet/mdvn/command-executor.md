@@ -20,40 +20,31 @@ TEXTBOX
 
 TITLE
   id=Title
-  vpx=0.9
+  vpx=0.99
   vpy=0.1
   text0=Day0
   text1=Classroom
-
-Title.set
-  a=100
-
-Title.set
-  b=#( @Title.a + 100 )
-
-log
-  text=I add a new property to Title : Title.a = {{@Title.a}}
-
-log
-  text=Another property of Title : Title.b = {{@Title.b}}
 
 SPRITE
   id=CharacterA
   key=characters
   name=A
   expression=smile
+  vpx=-1
 
 SPRITE
   id=CharacterB
   key=characters
   name=B
   expression=smile
+  vpx=-1
 
 SPRITE
   id=CharacterC
   key=characters
   name=C
   expression=smile
+  vpx=-1
 
 CHOICE
   id=Choice
@@ -83,12 +74,9 @@ log
 Dialog.set
   alpha=0.8
 
-Title.set  
-  alpha=0
-
-// Title.display
-//   text0=Day0
-//   text1=Classroom
+Title.popUp
+  separatorDir=left
+  duration=1000
 
 CharacterA.set
   vpx=-0.2
@@ -103,53 +91,6 @@ Dialog.typing, displayName=null, icon=null
 
 bgm.play
   key=theme0
-
-camera.set
-  name=ui
-  x=0
-  y=200
-  rotate=-90
-  zoom=2
-
-camera.rotateTo
-  name=ui
-  rotate=0
-  duration=2000
-  ease=Cubic
-
-camera.zoomTo
-  name=ui
-  zoom=1
-  duration=2000
-  ease=Cubic
-  wait
-
-wait
-  time=300
-
-camera.scrollTo
-  name=ui
-  x=0
-  y=0
-  duration=2000
-  ease=Cubic
-  wait
-
-camera.shake
-  name=ui
-  duration=500
-
-camera.flash
-  name=ui
-
-Title.set
-  vpx=0
-  alpha=0
-
-Title.to
-  vpx=0.9
-  alpha=0.8
-  wait=false
 
 Background.cross
   key=classroom
@@ -282,7 +223,7 @@ incData
 
 ## Section C
 
-Title.display
+Title.setText
   text0=Day1
 
 log.memory

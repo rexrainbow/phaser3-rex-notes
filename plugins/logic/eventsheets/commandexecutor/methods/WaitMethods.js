@@ -23,7 +23,7 @@ export default {
         }
 
         this.sys.waitEventManager.waitAny(config);
-        eventSheetManager.pauseEventSheetUnitlEvent(this.sys);
+        eventSheetManager.pauseEventSheetUnitlEvent(this.sys, 'complete');
         return this;
     },
 
@@ -42,7 +42,7 @@ export default {
     },
 
     _waitComplete() {
-        this.__eventSheetManager.pauseEventSheetUnitlEvent(this.sys);
+        this.__eventSheetManager.pauseEventSheetUnitlEvent(this.sys, 'complete');
     },
 
     waitEvent(eventEmitter, eventName) {
