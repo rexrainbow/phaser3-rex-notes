@@ -323,6 +323,7 @@ camera.set
   y=
   rotate=
   zoom=
+  name=
 
 ```
 
@@ -335,6 +336,7 @@ camera.fadeIn
   red
   green
   blue
+  name
   wait=false
 
 ```
@@ -348,6 +350,7 @@ camera.fadeOut
   red
   green
   blue
+  name
   wait=false
 
 ```
@@ -361,6 +364,7 @@ camera.flash
   red
   green
   blue
+  name
   wait=false
 
 ```
@@ -372,6 +376,7 @@ camera.flash
 camera.shake
   duration=1000
   intensity
+  name
   wait=false
 
 ```
@@ -383,6 +388,7 @@ camera.shake
 camera.zoomTo
   duration=1000
   zoom
+  name
   wait=false
 
 ```
@@ -395,6 +401,7 @@ camera.rotateTo
   duration=1000
   rotate
   ease
+  name
   wait=false
 
 ```
@@ -408,6 +415,7 @@ camera.scrollTo
   x
   y
   ease
+  name
   wait=false
 
 ```

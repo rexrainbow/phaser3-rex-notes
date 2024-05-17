@@ -5828,8 +5828,13 @@
       this.setCameraTarget();
       return this;
     },
-    waitCameraEffectComplete: function waitCameraEffectComplete(effectName) {
-      var camera = this.cameraTarget;
+    waitCameraEffectComplete: function waitCameraEffectComplete(effectName, cameraName) {
+      var camera;
+      if (cameraName) {
+        camera = this.scene.cameras.getCamera(cameraName);
+      } else {
+        camera = this.cameraTarget;
+      }
       if (!camera) {
         return this.waitTime(0);
       }
@@ -5951,7 +5956,7 @@
           break;
         case 'camera':
           hasAnyWaitEvent = true;
-          this.waitCameraEffectComplete("camera.".concat(config.camera.toLowerCase()));
+          this.waitCameraEffectComplete("camera.".concat(config.camera.toLowerCase()), config.cameraName);
           break;
         default:
           var names = name.split('.');

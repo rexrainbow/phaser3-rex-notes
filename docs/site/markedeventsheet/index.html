@@ -11322,7 +11322,9 @@ line2
 <p>A command executor for phaser3 engine.</p>
 <h4 id="create-command-executor-instance">Create command executor instance<a class="headerlink" href="#create-command-executor-instance" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">commandExecutor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexMarkedEventSheets&#39;</span><span class="p">).</span><span class="nx">addCommandExecutor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">layers</span><span class="o">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">    </span><span class="c1">// layers: [&#39;layer0&#39;, &#39;layer1&#39;, ...]</span>
+<span class="w">    </span><span class="c1">// layers: [{name, cameraName}, ...]</span>
+
 <span class="w">    </span><span class="c1">// layerDepth: undefined,</span>
 <span class="w">    </span><span class="c1">// rootLayer: undefined,</span>
 
@@ -11348,7 +11350,16 @@ line2
 <span class="c1">// });</span>
 </code></pre></div>
 <ul>
-<li><code>layers</code> : Pre-create <a href="../layer/">layer</a> game object indexed by array of string names.</li>
+<li><code>layers</code> : Add some initial <a href="../layer/">layers</a><ul>
+<li>A string array : Add layers by string name</li>
+<li>A array of plain object <code>{ name, cameraName }</code><ol>
+<li>Add layer by string name</li>
+<li>Bind this layer to dedicate camera (indexed by <code>cameraName</code>), ignore other cameras
+   Add a new camera if this target camera is not existing</li>
+</ol>
+</li>
+</ul>
+</li>
 <li><code>layerDepth</code> : Set <code>depth</code> to each <a href="../layer/">layer</a> game object.<ul>
 <li><code>undefined</code> : Keep default <code>depth</code> value (<code>0</code>)</li>
 </ul>
@@ -11940,11 +11951,13 @@ can see it by <code>log.memory</code>, or get property of game object via <code>
   y=
   rotate=
   zoom=
+  name
 </code></pre></div>
 <ul>
 <li><code>x</code>, <code>y</code> : Scroll</li>
 <li><code>rotate</code> : Rotate in degree</li>
 <li><code>zoom</code> : Zoom</li>
+<li><code>name</code> : Target camera indexed by name. Default is main camera.</li>
 </ul>
 <p>Run next command immediately.</p>
 <h5 id="fade-in">Fade in<a class="headerlink" href="#fade-in" title="Permanent link">&para;</a></h5>
@@ -11953,10 +11966,12 @@ can see it by <code>log.memory</code>, or get property of game object via <code>
   red
   green
   blue
+  name
   wait=false
 </code></pre></div>
 <ul>
 <li><code>duration</code>, <code>red</code>, <code>green</code>, <code>blue</code> : See <a href="camera-effects.md/#fade">fade effect</a></li>
+<li><code>name</code> : Target camera indexed by name. Default is main camera.</li>
 <li><code>wait</code> :<ul>
 <li><code>false</code> : Run next command immediately. Default behavior.</li>
 <li><code>true</code> : Run next command after effect complete.</li>
@@ -11969,10 +11984,12 @@ can see it by <code>log.memory</code>, or get property of game object via <code>
   red
   green
   blue
+  name
   wait=false
 </code></pre></div>
 <ul>
 <li><code>duration</code>, <code>red</code>, <code>green</code>, <code>blue</code> : See <a href="camera-effects.md/#fade">fade effect</a></li>
+<li><code>name</code> : Target camera indexed by name. Default is main camera.</li>
 <li><code>wait</code> :<ul>
 <li><code>false</code> : Run next command immediately. Default behavior.</li>
 <li><code>true</code> : Run next command after effect complete.</li>
@@ -11985,10 +12002,12 @@ can see it by <code>log.memory</code>, or get property of game object via <code>
   red
   green
   blue
+  name
   wait=false
 </code></pre></div>
 <ul>
 <li><code>duration</code>, <code>red</code>, <code>green</code>, <code>blue</code> : See <a href="camera-effects.md/#flash">flash effect</a></li>
+<li><code>name</code> : Target camera indexed by name. Default is main camera.</li>
 <li><code>wait</code> :<ul>
 <li><code>false</code> : Run next command immediately. Default behavior.</li>
 <li><code>true</code> : Run next command after effect complete.</li>
@@ -11999,10 +12018,12 @@ can see it by <code>log.memory</code>, or get property of game object via <code>
 <div class="highlight"><pre><span></span><code>camera.shake
   duration=1000
   intensity
+  name
   wait=false
 </code></pre></div>
 <ul>
 <li><code>duration</code>, <code>intensity</code> : See <a href="camera-effects.md/#shake">shake effect</a></li>
+<li><code>name</code> : Target camera indexed by name. Default is main camera.</li>
 <li><code>wait</code> :<ul>
 <li><code>false</code> : Run next command immediately. Default behavior.</li>
 <li><code>true</code> : Run next command after effect complete.</li>
@@ -12013,10 +12034,12 @@ can see it by <code>log.memory</code>, or get property of game object via <code>
 <div class="highlight"><pre><span></span><code>camera.zoomTo
   duration=1000
   zoom
+  name
   wait=false
 </code></pre></div>
 <ul>
 <li><code>duration</code>, <code>zoom</code> : See <a href="camera-effects.md/#zoom">zoom effect</a></li>
+<li><code>name</code> : Target camera indexed by name. Default is main camera.</li>
 <li><code>wait</code> :<ul>
 <li><code>false</code> : Run next command immediately. Default behavior.</li>
 <li><code>true</code> : Run next command after effect complete.</li>
@@ -12028,10 +12051,12 @@ can see it by <code>log.memory</code>, or get property of game object via <code>
   duration=1000
   rotate
   ease
+  name
   wait=false
 </code></pre></div>
 <ul>
 <li><code>duration</code>, <code>rotate</code>, <code>ease</code> : See <a href="camera-effects.md/#rotate-to">rotateTo effect</a></li>
+<li><code>name</code> : Target camera indexed by name. Default is main camera.</li>
 <li><code>wait</code> :<ul>
 <li><code>false</code> : Run next command immediately. Default behavior.</li>
 <li><code>true</code> : Run next command after effect complete.</li>
@@ -12044,10 +12069,12 @@ can see it by <code>log.memory</code>, or get property of game object via <code>
   x
   y
   ease
+  name
   wait=false
 </code></pre></div>
 <ul>
 <li><code>duration</code>, <code>x</code>, <code>y</code>, <code>ease</code> : Scroll to position.</li>
+<li><code>name</code> : Target camera indexed by name. Default is main camera.</li>
 <li><code>wait</code> :<ul>
 <li><code>false</code> : Run next command immediately. Default behavior.</li>
 <li><code>true</code> : Run next command after effect complete.</li>

@@ -732,7 +732,9 @@ A command executor for phaser3 engine.
 
 ```javascript
 var commandExecutor = scene.plugins.get('rexMarkedEventSheets').addCommandExecutor(scene, {
-    layers: [],
+    // layers: ['layer0', 'layer1', ...]
+    // layers: [{name, cameraName}, ...]
+
     // layerDepth: undefined,
     // rootLayer: undefined,
 
@@ -762,7 +764,12 @@ var commandExecutor = new CommandExecutor(scene, config);
 ```
 
 
-- `layers` : Pre-create [layer](layer.md) game object indexed by array of string names.
+- `layers` : Add some initial [layers](layer.md)
+    - A string array : Add layers by string name
+    - A array of plain object `{ name, cameraName }`
+        1. Add layer by string name
+        1. Bind this layer to dedicate camera (indexed by `cameraName`), ignore other cameras
+           Add a new camera if this target camera is not existing
 - `layerDepth` : Set `depth` to each [layer](layer.md) game object.
     - `undefined` : Keep default `depth` value (`0`)
 - `rootLayer` : Add all layer game objects created by layer-manager into this root layer.
@@ -1432,12 +1439,14 @@ camera.set
   y=
   rotate=
   zoom=
+  name
 
 ```
 
 - `x`, `y` : Scroll
 - `rotate` : Rotate in degree
 - `zoom` : Zoom
+- `name` : Target camera indexed by name. Default is main camera.
 
 Run next command immediately.
 
@@ -1450,11 +1459,13 @@ camera.fadeIn
   red
   green
   blue
+  name
   wait=false
 
 ```
 
 - `duration`, `red`, `green`, `blue` : See [fade effect](camera-effects.md/#fade)
+- `name` : Target camera indexed by name. Default is main camera.
 - `wait` :
     - `false` : Run next command immediately. Default behavior.
     - `true` : Run next command after effect complete.
@@ -1468,11 +1479,13 @@ camera.fadeOut
   red
   green
   blue
+  name
   wait=false
 
 ```
 
 - `duration`, `red`, `green`, `blue` : See [fade effect](camera-effects.md/#fade)
+- `name` : Target camera indexed by name. Default is main camera.
 - `wait` :
     - `false` : Run next command immediately. Default behavior.
     - `true` : Run next command after effect complete.
@@ -1486,11 +1499,13 @@ camera.flash
   red
   green
   blue
+  name
   wait=false
 
 ```
 
 - `duration`, `red`, `green`, `blue` : See [flash effect](camera-effects.md/#flash)
+- `name` : Target camera indexed by name. Default is main camera.
 - `wait` :
     - `false` : Run next command immediately. Default behavior.
     - `true` : Run next command after effect complete.
@@ -1502,11 +1517,13 @@ camera.flash
 camera.shake
   duration=1000
   intensity
+  name
   wait=false
 
 ```
 
 - `duration`, `intensity` : See [shake effect](camera-effects.md/#shake)
+- `name` : Target camera indexed by name. Default is main camera.
 - `wait` :
     - `false` : Run next command immediately. Default behavior.
     - `true` : Run next command after effect complete.
@@ -1517,10 +1534,12 @@ camera.shake
 camera.zoomTo
   duration=1000
   zoom
+  name
   wait=false
 ```
 
 - `duration`, `zoom` : See [zoom effect](camera-effects.md/#zoom)
+- `name` : Target camera indexed by name. Default is main camera.
 - `wait` :
     - `false` : Run next command immediately. Default behavior.
     - `true` : Run next command after effect complete.
@@ -1533,11 +1552,13 @@ camera.rotateTo
   duration=1000
   rotate
   ease
+  name
   wait=false
 
 ```
 
 - `duration`, `rotate`, `ease` : See [rotateTo effect](camera-effects.md/#rotate-to)
+- `name` : Target camera indexed by name. Default is main camera.
 - `wait` :
     - `false` : Run next command immediately. Default behavior.
     - `true` : Run next command after effect complete.
@@ -1551,11 +1572,13 @@ camera.scrollTo
   x
   y
   ease
+  name
   wait=false
 
 ```
 
 - `duration`, `x`, `y`, `ease` : Scroll to position.
+- `name` : Target camera indexed by name. Default is main camera.
 - `wait` :
     - `false` : Run next command immediately. Default behavior.
     - `true` : Run next command after effect complete.

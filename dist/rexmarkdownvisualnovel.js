@@ -23236,8 +23236,13 @@
       this.setCameraTarget();
       return this;
     },
-    waitCameraEffectComplete: function waitCameraEffectComplete(effectName) {
-      var camera = this.cameraTarget;
+    waitCameraEffectComplete: function waitCameraEffectComplete(effectName, cameraName) {
+      var camera;
+      if (cameraName) {
+        camera = this.scene.cameras.getCamera(cameraName);
+      } else {
+        camera = this.cameraTarget;
+      }
       if (!camera) {
         return this.waitTime(0);
       }
@@ -23359,7 +23364,7 @@
           break;
         case 'camera':
           hasAnyWaitEvent = true;
-          this.waitCameraEffectComplete("camera.".concat(config.camera.toLowerCase()));
+          this.waitCameraEffectComplete("camera.".concat(config.camera.toLowerCase()), config.cameraName);
           break;
         default:
           var names = name.split('.');
@@ -25254,8 +25259,14 @@
         x = _ref.x,
         y = _ref.y,
         rotate = _ref.rotate,
-        zoom = _ref.zoom;
-      var camera = this.sys.cameraTarget;
+        zoom = _ref.zoom,
+        name = _ref.name;
+      var camera;
+      if (name) {
+        camera = this.sys.scene.cameras.getCamera(name);
+      } else {
+        camera = this.sys.cameraTarget;
+      }
       if (!camera) {
         return this;
       }
@@ -25277,17 +25288,24 @@
         red = _ref2.red,
         green = _ref2.green,
         blue = _ref2.blue,
+        name = _ref2.name,
         _ref2$wait = _ref2.wait,
         wait = _ref2$wait === void 0 ? false : _ref2$wait;
       var eventSheetManager = arguments.length > 1 ? arguments[1] : undefined;
-      var camera = this.sys.cameraTarget;
+      var camera;
+      if (name) {
+        camera = this.sys.scene.cameras.getCamera(name);
+      } else {
+        camera = this.sys.cameraTarget;
+      }
       if (!camera) {
         return this;
       }
       camera.fadeIn(duration, red, green, blue);
       if (wait) {
         this.wait({
-          camera: 'fadeIn'
+          camera: 'fadeIn',
+          cameraName: name
         }, eventSheetManager);
       }
       return this;
@@ -25299,17 +25317,24 @@
         red = _ref3.red,
         green = _ref3.green,
         blue = _ref3.blue,
+        name = _ref3.name,
         _ref3$wait = _ref3.wait,
         wait = _ref3$wait === void 0 ? false : _ref3$wait;
       var eventSheetManager = arguments.length > 1 ? arguments[1] : undefined;
-      var camera = this.sys.cameraTarget;
+      var camera;
+      if (name) {
+        camera = this.sys.scene.cameras.getCamera(name);
+      } else {
+        camera = this.sys.cameraTarget;
+      }
       if (!camera) {
         return this;
       }
       camera.fadeOut(duration, red, green, blue);
       if (wait) {
         this.wait({
-          camera: 'fadeOut'
+          camera: 'fadeOut',
+          cameraName: name
         }, eventSheetManager);
       }
       return this;
@@ -25321,17 +25346,24 @@
         red = _ref4.red,
         green = _ref4.green,
         blue = _ref4.blue,
+        name = _ref4.name,
         _ref4$wait = _ref4.wait,
         wait = _ref4$wait === void 0 ? false : _ref4$wait;
       var eventSheetManager = arguments.length > 1 ? arguments[1] : undefined;
-      var camera = this.sys.cameraTarget;
+      var camera;
+      if (name) {
+        camera = this.sys.scene.cameras.getCamera(name);
+      } else {
+        camera = this.sys.cameraTarget;
+      }
       if (!camera) {
         return this;
       }
       camera.flash(duration, red, green, blue);
       if (wait) {
         this.wait({
-          camera: 'flash'
+          camera: 'flash',
+          cameraName: name
         }, eventSheetManager);
       }
       return this;
@@ -25341,17 +25373,24 @@
         _ref5$duration = _ref5.duration,
         duration = _ref5$duration === void 0 ? 1000 : _ref5$duration,
         intensity = _ref5.intensity,
+        name = _ref5.name,
         _ref5$wait = _ref5.wait,
         wait = _ref5$wait === void 0 ? false : _ref5$wait;
       var eventSheetManager = arguments.length > 1 ? arguments[1] : undefined;
-      var camera = this.sys.cameraTarget;
+      var camera;
+      if (name) {
+        camera = this.sys.scene.cameras.getCamera(name);
+      } else {
+        camera = this.sys.cameraTarget;
+      }
       if (!camera) {
         return this;
       }
       camera.shake(duration, intensity);
       if (wait) {
         this.wait({
-          camera: 'shake'
+          camera: 'shake',
+          cameraName: name
         }, eventSheetManager);
       }
       return this;
@@ -25361,17 +25400,24 @@
         _ref6$duration = _ref6.duration,
         duration = _ref6$duration === void 0 ? 1000 : _ref6$duration,
         zoom = _ref6.zoom,
+        name = _ref6.name,
         _ref6$wait = _ref6.wait,
         wait = _ref6$wait === void 0 ? false : _ref6$wait;
       var eventSheetManager = arguments.length > 1 ? arguments[1] : undefined;
-      var camera = this.sys.cameraTarget;
+      var camera;
+      if (name) {
+        camera = this.sys.scene.cameras.getCamera(name);
+      } else {
+        camera = this.sys.cameraTarget;
+      }
       if (!camera) {
         return this;
       }
       camera.zoomTo(zoom, duration);
       if (wait) {
         this.wait({
-          camera: 'zoom'
+          camera: 'zoom',
+          cameraName: name
         }, eventSheetManager);
       }
       return this;
@@ -25382,17 +25428,24 @@
         duration = _ref7$duration === void 0 ? 1000 : _ref7$duration,
         rotate = _ref7.rotate,
         ease = _ref7.ease,
+        name = _ref7.name,
         _ref7$wait = _ref7.wait,
         wait = _ref7$wait === void 0 ? false : _ref7$wait;
       var eventSheetManager = arguments.length > 1 ? arguments[1] : undefined;
-      var camera = this.sys.cameraTarget;
+      var camera;
+      if (name) {
+        camera = this.sys.scene.cameras.getCamera(name);
+      } else {
+        camera = this.sys.cameraTarget;
+      }
       if (!camera) {
         return this;
       }
       camera.rotateTo(rotate, false, duration, ease);
       if (wait) {
         this.wait({
-          camera: 'rotate'
+          camera: 'rotate',
+          cameraName: name
         }, eventSheetManager);
       }
       return this;
@@ -25404,10 +25457,16 @@
         x = _ref8.x,
         y = _ref8.y,
         ease = _ref8.ease,
+        name = _ref8.name,
         _ref8$wait = _ref8.wait,
         wait = _ref8$wait === void 0 ? false : _ref8$wait;
       var eventSheetManager = arguments.length > 1 ? arguments[1] : undefined;
-      var camera = this.sys.cameraTarget;
+      var camera;
+      if (name) {
+        camera = this.sys.scene.cameras.getCamera(name);
+      } else {
+        camera = this.sys.cameraTarget;
+      }
       if (!camera) {
         return this;
       }
@@ -25422,7 +25481,8 @@
       camera.pan(x, y, duration, ease);
       if (wait) {
         this.wait({
-          camera: 'scroll'
+          camera: 'scroll',
+          cameraName: name
         }, eventSheetManager);
       }
       return this;
@@ -25604,7 +25664,38 @@
   var GOTopLayer = "".concat(GOLayer, "Top");
   var UIBottomLayer = "".concat(UILayer, "Bottom");
   var UITopLayer = "".concat(UILayer, "Top");
-  var LayerNames = [BGBottomLayer, BGLayer, BGTopLayer, GOBottomLayer, GOLayer, GOTopLayer, UIBottomLayer, UILayer, UITopLayer];
+  var BGCamera = 'bg';
+  var GOCamera = 'go';
+  var UICamera = 'ui';
+  var LayerConfigMultipleCamras = [{
+    name: BGBottomLayer,
+    cameraName: BGCamera
+  }, {
+    name: BGLayer,
+    cameraName: BGCamera
+  }, {
+    name: BGTopLayer,
+    cameraName: BGCamera
+  }, {
+    name: GOBottomLayer,
+    cameraName: GOCamera
+  }, {
+    name: GOLayer,
+    cameraName: GOCamera
+  }, {
+    name: GOTopLayer,
+    cameraName: GOCamera
+  }, {
+    name: UIBottomLayer,
+    cameraName: UICamera
+  }, {
+    name: UILayer,
+    cameraName: UICamera
+  }, {
+    name: UITopLayer,
+    cameraName: UICamera
+  }];
+  var LayerConfigSingleCamera = [BGBottomLayer, BGLayer, BGTopLayer, GOBottomLayer, GOLayer, GOTopLayer, UIBottomLayer, UILayer, UITopLayer];
 
   // Game object type name
   var BG = 'BG'; // layer: BGLayer
@@ -81302,12 +81393,14 @@
   var CreateCommandExecutor = function CreateCommandExecutor(scene, config) {
     var layerDepth = config.layerDepth,
       rootLayer = config.rootLayer,
+      _config$multipleCamer = config.multipleCamerasEnable,
+      multipleCamerasEnable = _config$multipleCamer === void 0 ? false : _config$multipleCamer,
       viewport = config.viewport;
     if (viewport === undefined) {
       config.viewport = GetViewport(scene, scene.cameras.main);
     }
     var commandExecutor = new CommandExecutor(scene, {
-      layers: LayerNames,
+      layers: multipleCamerasEnable ? LayerConfigMultipleCamras : LayerConfigSingleCamera,
       layerDepth: layerDepth,
       rootLayer: rootLayer
     });

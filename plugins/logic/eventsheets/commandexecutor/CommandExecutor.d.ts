@@ -20,6 +20,11 @@ declare namespace CommandExecutor {
         commands?: { [name: string]: GameObjectCommandType; }
     }
 
+    type CommandCallbackType = (
+        config: GeneralConfigType,
+        eventsheetManager: EventSheetManager,
+    ) => CommandExecutor;
+
     interface IConfig extends Managers.IConfig {
         log?: BBCodeLog.IConfig
     }
@@ -79,54 +84,54 @@ declare class CommandExecutor {
 
     setWaitEventFlag(): this;
 
-    set: this;
+    set: CommandExecutor.CommandCallbackType;
 
-    wait: this;
-    click: this;
+    wait: CommandExecutor.CommandCallbackType;
+    click: CommandExecutor.CommandCallbackType;
 
-    'bgm.set': this;
-    'bgm.play': this;
-    'bgm.cross': this;
-    'bgm.stop': this;
-    'bgm.fadeOut': this;
-    'bgm.fadeIn': this;
-    'bgm.pause': this;
-    'bgm.resume': this;
-    'bgm.mute': this;
-    'bgm.unmute': this;
+    'bgm.set': CommandExecutor.CommandCallbackType;
+    'bgm.play': CommandExecutor.CommandCallbackType;
+    'bgm.cross': CommandExecutor.CommandCallbackType;
+    'bgm.stop': CommandExecutor.CommandCallbackType;
+    'bgm.fadeOut': CommandExecutor.CommandCallbackType;
+    'bgm.fadeIn': CommandExecutor.CommandCallbackType;
+    'bgm.pause': CommandExecutor.CommandCallbackType;
+    'bgm.resume': CommandExecutor.CommandCallbackType;
+    'bgm.mute': CommandExecutor.CommandCallbackType;
+    'bgm.unmute': CommandExecutor.CommandCallbackType;
 
-    'bgm2.set': this;
-    'bgm2.play': this;
-    'bgm2.cross': this;
-    'bgm2.stop': this;
-    'bgm2.fadeOut': this;
-    'bgm2.fadeIn': this;
-    'bgm2.pause': this;
-    'bgm2.resume': this;
-    'bgm2.mute': this;
-    'bgm2.unmute': this;
+    'bgm2.set': CommandExecutor.CommandCallbackType;
+    'bgm2.play': CommandExecutor.CommandCallbackType;
+    'bgm2.cross': CommandExecutor.CommandCallbackType;
+    'bgm2.stop': CommandExecutor.CommandCallbackType;
+    'bgm2.fadeOut': CommandExecutor.CommandCallbackType;
+    'bgm2.fadeIn': CommandExecutor.CommandCallbackType;
+    'bgm2.pause': CommandExecutor.CommandCallbackType;
+    'bgm2.resume': CommandExecutor.CommandCallbackType;
+    'bgm2.mute': CommandExecutor.CommandCallbackType;
+    'bgm2.unmute': CommandExecutor.CommandCallbackType;
 
-    'se.set': this;
-    'se.play': this;
-    'se.stop': this;
-    'se.fadeOut': this;
-    'se.mute': this;
-    'se.unmute': this;
+    'se.set': CommandExecutor.CommandCallbackType;
+    'se.play': CommandExecutor.CommandCallbackType;
+    'se.stop': CommandExecutor.CommandCallbackType;
+    'se.fadeOut': CommandExecutor.CommandCallbackType;
+    'se.mute': CommandExecutor.CommandCallbackType;
+    'se.unmute': CommandExecutor.CommandCallbackType;
 
-    'se2.set': this;
-    'se2.play': this;
-    'se2.stop': this;
-    'se2.fadeOut': this;
-    'se2.mute': this;
-    'se2.unmute': this;
+    'se2.set': CommandExecutor.CommandCallbackType;
+    'se2.play': CommandExecutor.CommandCallbackType;
+    'se2.stop': CommandExecutor.CommandCallbackType;
+    'se2.fadeOut': CommandExecutor.CommandCallbackType;
+    'se2.mute': CommandExecutor.CommandCallbackType;
+    'se2.unmute': CommandExecutor.CommandCallbackType;
 
-    'camera.set': this;
-    'camera.fadeIn': this;
-    'camera.fadeOut': this;
-    'camera.flash': this;
-    'camera.shake': this;
-    'camera.zoomTo': this;
-    'camera.rotateTo': this;
-    'camera.scrollTo': this;
+    'camera.set': CommandExecutor.CommandCallbackType;
+    'camera.fadeIn': CommandExecutor.CommandCallbackType;
+    'camera.fadeOut': CommandExecutor.CommandCallbackType;
+    'camera.flash': CommandExecutor.CommandCallbackType;
+    'camera.shake': CommandExecutor.CommandCallbackType;
+    'camera.zoomTo': CommandExecutor.CommandCallbackType;
+    'camera.rotateTo': CommandExecutor.CommandCallbackType;
+    'camera.scrollTo': CommandExecutor.CommandCallbackType;
 
 }
