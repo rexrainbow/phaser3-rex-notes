@@ -44,7 +44,7 @@ var WaitAny = function (config) {
 
             case 'camera':
                 hasAnyWaitEvent = true;
-                this.waitCameraEffectComplete(`camera.${config.camera.toLowerCase()}`);
+                this.waitCameraEffectComplete(`camera.${config.camera.toLowerCase()}`, config.cameraName);
                 break;
 
             default:

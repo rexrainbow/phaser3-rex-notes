@@ -1,12 +1,18 @@
 export default {
     'camera.set'(
         {
-            x, y, rotate, zoom
+            x, y, rotate, zoom,
+            name
         } = {},
         eventSheetManager, eventsheet
     ) {
+        var camera;
+        if (name) {
+            camera = this.sys.scene.cameras.getCamera(name);
+        } else {
+            camera = this.sys.cameraTarget;
+        }
 
-        var camera = this.sys.cameraTarget;
         if (!camera) {
             return this;
         }
@@ -28,19 +34,26 @@ export default {
             {
                 duration = 1000,
                 red, green, blue,
+                name,
                 wait = false
             } = {},
             eventSheetManager, eventsheet
         ) {
 
-        var camera = this.sys.cameraTarget;
+        var camera;
+        if (name) {
+            camera = this.sys.scene.cameras.getCamera(name);
+        } else {
+            camera = this.sys.cameraTarget;
+        }
+
         if (!camera) {
             return this;
         }
 
         camera.fadeIn(duration, red, green, blue);
         if (wait) {
-            this.wait({ camera: 'fadeIn' }, eventSheetManager);
+            this.wait({ camera: 'fadeIn', cameraName: name }, eventSheetManager);
         }
         return this;
     },
@@ -49,19 +62,26 @@ export default {
         {
             duration = 1000,
             red, green, blue,
+            name,
             wait = false
         } = {},
         eventSheetManager, eventsheet
     ) {
 
-        var camera = this.sys.cameraTarget;
+        var camera;
+        if (name) {
+            camera = this.sys.scene.cameras.getCamera(name);
+        } else {
+            camera = this.sys.cameraTarget;
+        }
+
         if (!camera) {
             return this;
         }
 
         camera.fadeOut(duration, red, green, blue);
         if (wait) {
-            this.wait({ camera: 'fadeOut' }, eventSheetManager);
+            this.wait({ camera: 'fadeOut', cameraName: name }, eventSheetManager);
         }
         return this;
     },
@@ -70,19 +90,26 @@ export default {
         {
             duration = 1000,
             red, green, blue,
+            name,
             wait = false
         } = {},
         eventSheetManager, eventsheet
     ) {
 
-        var camera = this.sys.cameraTarget;
+        var camera;
+        if (name) {
+            camera = this.sys.scene.cameras.getCamera(name);
+        } else {
+            camera = this.sys.cameraTarget;
+        }
+
         if (!camera) {
             return this;
         }
 
         camera.flash(duration, red, green, blue);
         if (wait) {
-            this.wait({ camera: 'flash' }, eventSheetManager);
+            this.wait({ camera: 'flash', cameraName: name }, eventSheetManager);
         }
         return this;
     },
@@ -91,19 +118,26 @@ export default {
         {
             duration = 1000,
             intensity,
+            name,
             wait = false
         } = {},
         eventSheetManager, eventsheet
     ) {
 
-        var camera = this.sys.cameraTarget;
+        var camera;
+        if (name) {
+            camera = this.sys.scene.cameras.getCamera(name);
+        } else {
+            camera = this.sys.cameraTarget;
+        }
+
         if (!camera) {
             return this;
         }
 
         camera.shake(duration, intensity);
         if (wait) {
-            this.wait({ camera: 'shake' }, eventSheetManager);
+            this.wait({ camera: 'shake', cameraName: name }, eventSheetManager);
         }
         return this;
     },
@@ -112,39 +146,54 @@ export default {
         {
             duration = 1000,
             zoom,
+            name,
             wait = false
         } = {},
         eventSheetManager, eventsheet
     ) {
 
-        var camera = this.sys.cameraTarget;
+        var camera;
+        if (name) {
+            camera = this.sys.scene.cameras.getCamera(name);
+        } else {
+            camera = this.sys.cameraTarget;
+        }
+
         if (!camera) {
             return this;
         }
 
         camera.zoomTo(zoom, duration);
         if (wait) {
-            this.wait({ camera: 'zoom' }, eventSheetManager);
+            this.wait({ camera: 'zoom', cameraName: name }, eventSheetManager);
         }
         return this;
     },
 
     'camera.rotateTo'(
-        { duration = 1000,
+        {
+            duration = 1000,
             rotate, ease,
+            name,
             wait = false
         } = {},
         eventSheetManager, eventsheet
     ) {
 
-        var camera = this.sys.cameraTarget;
+        var camera;
+        if (name) {
+            camera = this.sys.scene.cameras.getCamera(name);
+        } else {
+            camera = this.sys.cameraTarget;
+        }
+
         if (!camera) {
             return this;
         }
 
         camera.rotateTo(rotate, false, duration, ease);
         if (wait) {
-            this.wait({ camera: 'rotate' }, eventSheetManager);
+            this.wait({ camera: 'rotate', cameraName: name }, eventSheetManager);
         }
         return this;
     },
@@ -153,12 +202,19 @@ export default {
         {
             duration = 1000,
             x, y, ease,
+            name,
             wait = false
         } = {},
         eventSheetManager, eventsheet
     ) {
 
-        var camera = this.sys.cameraTarget;
+        var camera;
+        if (name) {
+            camera = this.sys.scene.cameras.getCamera(name);
+        } else {
+            camera = this.sys.cameraTarget;
+        }
+
         if (!camera) {
             return this;
         }
@@ -174,7 +230,7 @@ export default {
         camera.pan(x, y, duration, ease);
 
         if (wait) {
-            this.wait({ camera: 'scroll' }, eventSheetManager);
+            this.wait({ camera: 'scroll', cameraName: name }, eventSheetManager);
         }
         return this;
     },

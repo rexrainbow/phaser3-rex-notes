@@ -9,8 +9,14 @@ export default {
         return this;
     },
 
-    waitCameraEffectComplete(effectName) {
-        var camera = this.cameraTarget;
+    waitCameraEffectComplete(effectName, cameraName) {
+        var camera;
+        if (cameraName) {
+            camera = this.scene.cameras.getCamera(cameraName);
+        } else {
+            camera = this.cameraTarget;
+        }
+
         if (!camera) {
             return this.waitTime(0);
         }

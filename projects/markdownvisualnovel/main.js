@@ -50,6 +50,7 @@ class Demo extends Phaser.Scene {
                 TITLE: TitleStyle,
             },
             rootLayer,
+            multipleCamerasEnable: true,
             viewport
         })
             .addEventSheet(this.cache.text.get('eventSheet0'))

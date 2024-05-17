@@ -105,17 +105,20 @@ bgm.play
   key=theme0
 
 camera.set
+  name=ui
   x=0
   y=200
   rotate=-90
   zoom=2
 
 camera.rotateTo
+  name=ui
   rotate=0
   duration=2000
   ease=Cubic
 
 camera.zoomTo
+  name=ui
   zoom=1
   duration=2000
   ease=Cubic
@@ -125,6 +128,7 @@ wait
   time=300
 
 camera.scrollTo
+  name=ui
   x=0
   y=0
   duration=2000
@@ -132,9 +136,11 @@ camera.scrollTo
   wait
 
 camera.shake
+  name=ui
   duration=500
 
 camera.flash
+  name=ui
 
 Title.set
   vpx=0

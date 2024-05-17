@@ -61,6 +61,6 @@ declare class WaitEventManager extends WaitEvent {
     waitSoundEffect2Complete(): Managers;
     waitBackgroundMusicComplete(): Managers;
     waitBackgroundMusic2Complete(): Managers;
-    waitCameraEffectComplete(effectName: string): Managers;
+    waitCameraEffectComplete(effectName: string, cameraName?: string): Managers;
     waitAny(config?: { [name: string]: any }): Managers;
 }

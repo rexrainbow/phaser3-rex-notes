@@ -1,6 +1,6 @@
 import CommandExecutor from '../../../plugins/commandexecutor.js';
 import GetViewport from '../../../plugins/utils/system/GetViewport.js';
-import { LayerNames } from '../const/Layers.js';
+import { LayerConfigMultipleCamras, LayerConfigSingleCamera } from '../const/Layers.js';
 import RegisterBackgroundType from './background/RegisterBackgroundType.js';
 import RegisterSpriteType from './sprite/RegisterSpriteType.js';
 import RegisterTextboxType from './textbox/RegisterTextboxType.js';
@@ -20,6 +20,7 @@ var CreateCommandExecutor = function (scene, config) {
     var {
         layerDepth,
         rootLayer,
+        multipleCamerasEnable = false,
         viewport
     } = config;
 
@@ -28,7 +29,7 @@ var CreateCommandExecutor = function (scene, config) {
     }
 
     var commandExecutor = new CommandExecutor(scene, {
-        layers: LayerNames,
+        layers: (multipleCamerasEnable) ? LayerConfigMultipleCamras : LayerConfigSingleCamera,
         layerDepth,
         rootLayer,
     });
