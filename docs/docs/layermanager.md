@@ -87,7 +87,7 @@ var layerManager = scene.plugins.get('rexLayerManager').add(scene,
 );
 ```
 
-- `layers` : Add some initial layers
+- `layers` : Add some initial [layers](layer.md)
     - A string array : Add layers by string name
     - A array of plain object `{ name, cameraName }`
         1. Add layer by string name
