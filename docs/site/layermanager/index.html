@@ -2743,6 +2743,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#bind-camera" class="md-nav__link">
+    Bind camera
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9735,6 +9742,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#bind-camera" class="md-nav__link">
+    Bind camera
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9819,6 +9833,8 @@
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">layerManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexLayerManager&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// layers: [&#39;layer0&#39;, &#39;layer1&#39;, ...]</span>
+<span class="w">    </span><span class="c1">// layers: [{name, cameraName}, ...]</span>
+
 <span class="w">    </span><span class="c1">// depth: undefined,</span>
 <span class="w">    </span><span class="c1">// rootLayer: undefined,</span>
 <span class="p">});</span>
@@ -9826,10 +9842,20 @@
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">layerManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexLayerManager&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span>
 <span class="w">    </span><span class="p">[</span><span class="s1">&#39;layer0&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;layer1&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">...]</span>
+<span class="w">    </span><span class="c1">// [{name, cameraName}, ...]</span>
 <span class="p">);</span>
 </code></pre></div>
 <ul>
-<li><code>layers</code> : Add layers by name string array.</li>
+<li><code>layers</code> : Add some initial layers<ul>
+<li>A string array : Add layers by string name</li>
+<li>A array of plain object <code>{ name, cameraName }</code><ol>
+<li>Add layer by string name</li>
+<li>Bind this layer to dedicate camera (indexed by <code>cameraName</code>), ignore other cameras
+   Add a new camera if this target camera is not existing</li>
+</ol>
+</li>
+</ul>
+</li>
 <li><code>depth</code> : Set <code>depth</code> to each <a href="../layer/">layer</a> game object.<ul>
 <li><code>undefined</code> : Keep default <code>depth</code> value (<code>0</code>)</li>
 </ul>
@@ -9893,6 +9919,11 @@
     <div class="highlight"><pre><span></span><code><span class="nx">layerManager</span><span class="p">.</span><span class="nx">moveLayerBelow</span><span class="p">(</span><span class="nx">layerName</span><span class="p">,</span><span class="w"> </span><span class="nx">baseLayerName</span><span class="p">)</span>
 </code></pre></div></li>
 </ul>
+<h3 id="bind-camera">Bind camera<a class="headerlink" href="#bind-camera" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">layerManager</span><span class="p">.</span><span class="nx">setDedicatedCamera</span><span class="p">(</span><span class="nx">layerName</span><span class="p">,</span><span class="w"> </span><span class="nx">cameraName</span><span class="p">);</span>
+</code></pre></div>
+<p>Bind this layer to dedicate camera (indexed by <code>cameraName</code>), ignore other cameras
+Add a new camera if this target camera is not existing</p>
 
 
   

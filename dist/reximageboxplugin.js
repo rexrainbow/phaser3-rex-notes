@@ -2527,55 +2527,44 @@
   }(Base);
   Object.assign(ContainerLite.prototype, methods$1);
 
-  var FitTo = function FitTo(source, target, scaleUp, out) {
-    if (scaleUp === undefined) {
-      scaleUp = true;
+  var FitTo = function FitTo(source, target, fitMode, out) {
+    if (fitMode === undefined) {
+      fitMode = 0;
+    } else {
+      var fitModeType = _typeof(fitMode);
+      if (fitModeType === 'boolean') {
+        out = fitMode;
+        fitMode = 0;
+      } else if (fitModeType === 'string') {
+        fitMode = FitModeMap[fitMode];
+      }
     }
     if (out === undefined) {
       out = {};
     } else if (out === true) {
       out = globalSize;
     }
-    var sourceWidth = source.width,
-      sourceHeight = source.height,
-      targetWidth = target.width,
-      targetHeight = target.height;
-    if (sourceWidth <= targetWidth && sourceHeight <= targetHeight) {
-      if (scaleUp) {
-        var sourceRatio = sourceWidth / sourceHeight;
-        var targetRatio = targetWidth / targetHeight;
-        if (targetRatio < sourceRatio) {
-          out.width = targetWidth;
-          out.height = targetWidth / sourceRatio;
-        } else if (targetRatio > sourceRatio) {
-          out.width = targetHeight * sourceRatio;
-          out.height = targetHeight;
-        } else {
-          out.width = targetWidth;
-          out.height = targetHeight;
-        }
-      } else {
-        out.width = sourceWidth;
-        out.height = sourceHeight;
-      }
-    } else {
-      var sourceRatio = sourceWidth / sourceHeight;
-      out.width = Math.min(sourceWidth, targetWidth);
-      out.height = Math.min(sourceHeight, targetHeight);
-      var ratio = out.width / out.height;
-      if (ratio < sourceRatio) {
-        out.height = out.width / sourceRatio;
-      } else if (ratio > sourceRatio) {
-        out.width = out.height * sourceRatio;
-      }
-    }
+    var scaleX = target.width / source.width;
+    var scaleY = target.height / source.height;
+    var scale = !fitMode ? Math.min(scaleX, scaleY) : Math.max(scaleX, scaleY);
+    out.width = source.width * scale;
+    out.height = source.height * scale;
     return out;
+  };
+  var FitModeMap = {
+    'fit': 0,
+    'FIT': 0,
+    'envelop': 1,
+    'ENVELOP': 1
   };
   var globalSize = {};
 
   var ScaleImage = function ScaleImage() {
     var image = this.image;
-    var result = FitTo(image, this, this.scaleUp, true);
+    if (!this.scaleUp && image.width <= this.width && image.height <= this.height) {
+      return this;
+    }
+    var result = FitTo(image, this, 'FIT', true);
     image.setDisplaySize(result.width, result.height);
     this.resetChildScaleState(image);
     return this;

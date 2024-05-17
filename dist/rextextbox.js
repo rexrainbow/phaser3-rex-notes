@@ -10777,7 +10777,7 @@
     }, {
       key: "isPointerInGameObject",
       value: function isPointerInGameObject(gameObject, preTest, postTest) {
-        var pointer = this.pointer;
+        var pointer = this.lastPointer;
         if (!pointer) {
           return false;
         }
@@ -10809,6 +10809,7 @@
               self.y = 0;
               self.worldX = 0;
               self.worldY = 0;
+              self.lastPointer = undefined;
             },
             exit: function exit() {
               var pointer = self.lastPointer;
@@ -11012,6 +11013,7 @@
               self.y = 0;
               self.worldX = 0;
               self.worldY = 0;
+              self.lastPointer = undefined;
             },
             exit: function exit() {
               var pointer = self.lastPointer;

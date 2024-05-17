@@ -9986,9 +9986,16 @@
 <li>Main camera
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">camera</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">cameras</span><span class="p">.</span><span class="nx">main</span><span class="p">;</span>
 </code></pre></div></li>
+<li>Get camera by name
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">camera</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">cameras</span><span class="p">.</span><span class="nx">getCamera</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+</code></pre></div></li>
 <li>Add new camera
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">camera</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">cameras</span><span class="p">.</span><span class="nx">add</span><span class="p">();</span>
 <span class="c1">// var camera = scene.cameras.add(x, y, width, height);</span>
+</code></pre></div></li>
+<li>Add new camera with name
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">camera</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">cameras</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="p">);</span>
+<span class="c1">// var camera = scene.cameras.add(x, y, width, height, makeMain, name);</span>
 </code></pre></div></li>
 <li>Add existed camera
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">cameras</span><span class="p">.</span><span class="nx">addExisting</span><span class="p">(</span><span class="nx">camera</span><span class="p">);</span>

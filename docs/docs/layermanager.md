@@ -71,6 +71,8 @@ A dictionary to store [Layer game objects](layer.md).
 ```javascript
 var layerManager = scene.plugins.get('rexLayerManager').add(scene, {
     // layers: ['layer0', 'layer1', ...]
+    // layers: [{name, cameraName}, ...]
+
     // depth: undefined,
     // rootLayer: undefined,
 });
@@ -81,10 +83,16 @@ or
 ```javascript
 var layerManager = scene.plugins.get('rexLayerManager').add(scene, 
     ['layer0', 'layer1', ...]
+    // [{name, cameraName}, ...]
 );
 ```
 
-- `layers` : Add layers by name string array.
+- `layers` : Add some initial layers
+    - A string array : Add layers by string name
+    - A array of plain object `{ name, cameraName }`
+        1. Add layer by string name
+        1. Bind this layer to dedicate camera (indexed by `cameraName`), ignore other cameras
+           Add a new camera if this target camera is not existing
 - `depth` : Set `depth` to each [layer](layer.md) game object.
     - `undefined` : Keep default `depth` value (`0`)
 - `rootLayer` : Add all layer game objects created by this layer-manager into this root layer.
@@ -164,3 +172,12 @@ var hasLayer = layerManager.has(name);
     ```javascript
     layerManager.moveLayerBelow(layerName, baseLayerName)
     ```
+
+### Bind camera
+
+```javascript
+layerManager.setDedicatedCamera(layerName, cameraName);
+```
+
+Bind this layer to dedicate camera (indexed by `cameraName`), ignore other cameras
+Add a new camera if this target camera is not existing

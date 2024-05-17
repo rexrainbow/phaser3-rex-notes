@@ -2977,10 +2977,47 @@
     return this;
   };
 
+  var GetCamera = function GetCamera(scene, name) {
+    var cameraManager = scene.cameras;
+    var camera;
+    if (name === undefined) {
+      camera = cameraManager.main;
+    } else {
+      var cameraNameType = _typeof(name);
+      switch (cameraNameType) {
+        case 'string':
+          camera = cameraManager.getCamera(name);
+          break;
+        case 'number':
+          camera = cameraManager.cameras[name];
+          break;
+        default:
+          camera = name;
+          break;
+      }
+    }
+    return camera;
+  };
+
+  var CameraMethods$1 = {
+    setDedicatedCamera: function setDedicatedCamera(goName, cameraName) {
+      var gameObject = this.getGO(goName);
+      if (!gameObject) {
+        return this;
+      }
+      var camera = GetCamera(this.scene, cameraName);
+      if (!camera) {
+        return this;
+      }
+      gameObject.cameraFilter = 0xffffffff ^ camera.id;
+      return this;
+    }
+  };
+
   var Methods$4 = {
     drawGameObjectsBounds: DrawGameObjectsBounds
   };
-  Object.assign(Methods$4, GetMethods, AddMethods, RemoveMethods, PropertyMethods, CallMethods, DataMethods, FadeMethods);
+  Object.assign(Methods$4, GetMethods, AddMethods, RemoveMethods, PropertyMethods, CallMethods, DataMethods, FadeMethods, CameraMethods$1);
 
   var CameraClass = Phaser.Cameras.Scene2D.BaseCamera;
   var IsCameraObject = function IsCameraObject(object) {
@@ -3334,8 +3371,21 @@
     }
   };
 
+  var SetDedicatedCamera = GOManager.prototype.setDedicatedCamera;
+  var CameraMethods = {
+    setDedicatedCamera: function setDedicatedCamera(goName, cameraName) {
+      // Add a new camera if target camera is not existing
+      var camera = GetCamera(this.scene, cameraName);
+      if (!camera) {
+        camera = this.scene.cameras.add(undefined, undefined, undefined, undefined, false, cameraName);
+      }
+      SetDedicatedCamera.call(this, goName, camera);
+      return this;
+    }
+  };
+
   var methods$2 = {};
-  Object.assign(methods$2, LayerMethods, DepthMethods);
+  Object.assign(methods$2, LayerMethods, DepthMethods, CameraMethods);
 
   var GetValue$i = Phaser.Utils.Objects.GetValue;
   var LayerManager = /*#__PURE__*/function (_GOManager) {
@@ -3360,7 +3410,13 @@
       var initLayers = GetValue$i(config, 'layers');
       if (initLayers) {
         for (var i = 0, cnt = initLayers.length; i < cnt; i++) {
-          _this.add(initLayers[i]);
+          var layerConfig = initLayers[i];
+          if (typeof layerConfig === 'string') {
+            _this.add(layerConfig);
+          } else {
+            _this.add(layerConfig.name);
+            _this.setDedicatedCamera(layerConfig.name, layerConfig.cameraName);
+          }
         }
       }
       return _this;

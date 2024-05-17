@@ -17282,7 +17282,7 @@
     if (lineBreak && s.at(-1) === lineBreak) {
       s = s.substring(0, s.length - 1);
     }
-    return s.trimLeft();
+    return s.trim();
   };
 
   var CreateActionSequence = function CreateActionSequence(node, config) {
@@ -20531,10 +20531,47 @@
     return this;
   };
 
+  var GetCamera = function GetCamera(scene, name) {
+    var cameraManager = scene.cameras;
+    var camera;
+    if (name === undefined) {
+      camera = cameraManager.main;
+    } else {
+      var cameraNameType = _typeof(name);
+      switch (cameraNameType) {
+        case 'string':
+          camera = cameraManager.getCamera(name);
+          break;
+        case 'number':
+          camera = cameraManager.cameras[name];
+          break;
+        default:
+          camera = name;
+          break;
+      }
+    }
+    return camera;
+  };
+
+  var CameraMethods$2 = {
+    setDedicatedCamera: function setDedicatedCamera(goName, cameraName) {
+      var gameObject = this.getGO(goName);
+      if (!gameObject) {
+        return this;
+      }
+      var camera = GetCamera(this.scene, cameraName);
+      if (!camera) {
+        return this;
+      }
+      gameObject.cameraFilter = 0xffffffff ^ camera.id;
+      return this;
+    }
+  };
+
   var Methods$m = {
     drawGameObjectsBounds: DrawGameObjectsBounds
   };
-  Object.assign(Methods$m, GetMethods, AddMethods$1, RemoveMethods$1, PropertyMethods, CallMethods, DataMethods$2, FadeMethods$1);
+  Object.assign(Methods$m, GetMethods, AddMethods$1, RemoveMethods$1, PropertyMethods, CallMethods, DataMethods$2, FadeMethods$1, CameraMethods$2);
 
   var CameraClass = Phaser.Cameras.Scene2D.BaseCamera;
   var IsCameraObject = function IsCameraObject(object) {
@@ -20888,8 +20925,21 @@
     }
   };
 
+  var SetDedicatedCamera = GOManager.prototype.setDedicatedCamera;
+  var CameraMethods$1 = {
+    setDedicatedCamera: function setDedicatedCamera(goName, cameraName) {
+      // Add a new camera if target camera is not existing
+      var camera = GetCamera(this.scene, cameraName);
+      if (!camera) {
+        camera = this.scene.cameras.add(undefined, undefined, undefined, undefined, false, cameraName);
+      }
+      SetDedicatedCamera.call(this, goName, camera);
+      return this;
+    }
+  };
+
   var methods$G = {};
-  Object.assign(methods$G, LayerMethods, DepthMethods);
+  Object.assign(methods$G, LayerMethods, DepthMethods, CameraMethods$1);
 
   var GetValue$3n = Phaser.Utils.Objects.GetValue;
   var LayerManager = /*#__PURE__*/function (_GOManager) {
@@ -20914,7 +20964,13 @@
       var initLayers = GetValue$3n(config, 'layers');
       if (initLayers) {
         for (var i = 0, cnt = initLayers.length; i < cnt; i++) {
-          _this.add(initLayers[i]);
+          var layerConfig = initLayers[i];
+          if (typeof layerConfig === 'string') {
+            _this.add(layerConfig);
+          } else {
+            _this.add(layerConfig.name);
+            _this.setDedicatedCamera(layerConfig.name, layerConfig.cameraName);
+          }
         }
       }
       return _this;
@@ -52166,7 +52222,7 @@
     }, {
       key: "isPointerInGameObject",
       value: function isPointerInGameObject(gameObject, preTest, postTest) {
-        var pointer = this.pointer;
+        var pointer = this.lastPointer;
         if (!pointer) {
           return false;
         }
@@ -52198,6 +52254,7 @@
               self.y = 0;
               self.worldX = 0;
               self.worldY = 0;
+              self.lastPointer = undefined;
             },
             exit: function exit() {
               var pointer = self.lastPointer;
@@ -52401,6 +52458,7 @@
               self.y = 0;
               self.worldX = 0;
               self.worldY = 0;
+              self.lastPointer = undefined;
             },
             exit: function exit() {
               var pointer = self.lastPointer;
@@ -53801,49 +53859,35 @@
     return out;
   };
 
-  var FitTo = function FitTo(source, target, scaleUp, out) {
-    if (scaleUp === undefined) {
-      scaleUp = true;
+  var FitTo = function FitTo(source, target, fitMode, out) {
+    if (fitMode === undefined) {
+      fitMode = 0;
+    } else {
+      var fitModeType = _typeof(fitMode);
+      if (fitModeType === 'boolean') {
+        out = fitMode;
+        fitMode = 0;
+      } else if (fitModeType === 'string') {
+        fitMode = FitModeMap[fitMode];
+      }
     }
     if (out === undefined) {
       out = {};
     } else if (out === true) {
       out = globalSize;
     }
-    var sourceWidth = source.width,
-      sourceHeight = source.height,
-      targetWidth = target.width,
-      targetHeight = target.height;
-    if (sourceWidth <= targetWidth && sourceHeight <= targetHeight) {
-      if (scaleUp) {
-        var sourceRatio = sourceWidth / sourceHeight;
-        var targetRatio = targetWidth / targetHeight;
-        if (targetRatio < sourceRatio) {
-          out.width = targetWidth;
-          out.height = targetWidth / sourceRatio;
-        } else if (targetRatio > sourceRatio) {
-          out.width = targetHeight * sourceRatio;
-          out.height = targetHeight;
-        } else {
-          out.width = targetWidth;
-          out.height = targetHeight;
-        }
-      } else {
-        out.width = sourceWidth;
-        out.height = sourceHeight;
-      }
-    } else {
-      var sourceRatio = sourceWidth / sourceHeight;
-      out.width = Math.min(sourceWidth, targetWidth);
-      out.height = Math.min(sourceHeight, targetHeight);
-      var ratio = out.width / out.height;
-      if (ratio < sourceRatio) {
-        out.height = out.width / sourceRatio;
-      } else if (ratio > sourceRatio) {
-        out.width = out.height * sourceRatio;
-      }
-    }
+    var scaleX = target.width / source.width;
+    var scaleY = target.height / source.height;
+    var scale = !fitMode ? Math.min(scaleX, scaleY) : Math.max(scaleX, scaleY);
+    out.width = source.width * scale;
+    out.height = source.height * scale;
     return out;
+  };
+  var FitModeMap = {
+    'fit': 0,
+    'FIT': 0,
+    'envelop': 1,
+    'ENVELOP': 1
   };
   var globalSize = {};
 
@@ -53885,7 +53929,7 @@
         sourceSize.height = 1;
         targetSize.width = childWidth;
         targetSize.height = childHeight;
-        childSize = FitTo(sourceSize, targetSize, true, true);
+        childSize = FitTo(sourceSize, targetSize, 'FIT', true);
         childWidth = childSize.width;
         childHeight = childSize.height;
       }
@@ -54602,10 +54646,11 @@
     }
   };
 
-  var FitImages$1 = function FitImages() {
+  var FitImages = function FitImages() {
+    var scaleMode = this.scaleMode - 1; // 1->0(FIT), 2->1(ENVELOP)
     for (var i = 0, cnt = this.images.length; i < cnt; i++) {
       var image = this.images[i];
-      var result = FitTo(image, this, true, true);
+      var result = FitTo(image, this, scaleMode, true);
       var biasScale = result.width / image.width;
       this.setChildLocalScale(image, biasScale);
       image.biasScale = biasScale;
@@ -54613,11 +54658,11 @@
   };
 
   var OnTextureChange = function OnTextureChange(newImage) {
-    if (!this.fixedSizeMode) {
+    if (this.scaleMode === 0) {
       this.resize(newImage.width, newImage.height);
     } else {
       // Fit all images to parent's size
-      FitImages$1.call(this);
+      FitImages.call(this);
     }
   };
 
@@ -55209,7 +55254,7 @@
       }
       var width = GetValue$1U(config, 'width', undefined);
       var height = GetValue$1U(config, 'height', undefined);
-      var fixedSizeMode = width !== undefined && height !== undefined;
+      var scaleMode = width !== undefined && height !== undefined ? 1 : 0;
       if (width === undefined) {
         width = frontImage.width;
       }
@@ -55220,7 +55265,11 @@
       _this.type = 'rexTransitionImage';
       _this._flipX = false;
       _this._flipY = false;
-      _this.fixedSizeMode = GetValue$1U(config, 'fixedSize', fixedSizeMode);
+      scaleMode = GetValue$1U(config, 'scaleMode', scaleMode);
+      if (typeof scaleMode === 'string') {
+        scaleMode = ScaleModeMap[scaleMode];
+      }
+      _this.scaleMode = scaleMode;
       backImage.setVisible(false);
       _this.addMultiple([backImage, frontImage]);
       _this.backImage = backImage;
@@ -55448,7 +55497,7 @@
       key: "setSize",
       value: function setSize(width, height) {
         _get(_getPrototypeOf(TransitionImage.prototype), "setSize", this).call(this, width, height);
-        if (this.fixedSizeMode) {
+        if (this.scaleMode) {
           FitImages.call(this);
         }
         return this;
@@ -55460,7 +55509,7 @@
     if (!callback) {
       return;
     }
-    if (this.fixedSizeMode) {
+    if (this.scaleMode) {
       var localScale;
       if (currentImage.biasScale > 0) {
         localScale = this.getChildLocalScaleX(currentImage);
@@ -55478,7 +55527,7 @@
     } else {
       callback(parent, currentImage, nextImage, t);
     }
-    if (this.fixedSizeMode) {
+    if (this.scaleMode) {
       var localScale;
       if (currentImage.biasScale > 0) {
         localScale = this.getChildLocalScaleX(currentImage);
@@ -55495,6 +55544,12 @@
 
   // mixin
   Object.assign(TransitionImage.prototype, methods$r);
+  var ScaleModeMap = {
+    fit: 1,
+    FIT: 1,
+    envelop: 2,
+    ENVELOP: 2
+  };
 
   // Slide modes
   var SlideLeft = 'slideLeft';
@@ -56648,7 +56703,10 @@
 
   var ScaleImage = function ScaleImage() {
     var image = this.image;
-    var result = FitTo(image, this, this.scaleUp, true);
+    if (!this.scaleUp && image.width <= this.width && image.height <= this.height) {
+      return this;
+    }
+    var result = FitTo(image, this, 'FIT', true);
     image.setDisplaySize(result.width, result.height);
     this.resetChildScaleState(image);
     return this;
@@ -80503,6 +80561,9 @@
     var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
       viewport = _ref.viewport;
     return function (scene, config) {
+      if (!config.hasOwnProperty('scaleMode')) {
+        config.scaleMode = 0;
+      }
       var gameObject = new TransitionImagePack(scene, config);
       scene.add.existing(gameObject);
       AddViewportCoordinateProperties(gameObject, viewport);
@@ -80515,26 +80576,16 @@
         scaleMode = config.scaleMode;
       gameObject.vpx = vpx;
       gameObject.vpy = vpy;
-      if (vpw !== undefined || vph !== undefined) {
-        var width = vpw !== undefined ? viewport.width * vpw : gameObject.width;
-        var height = vph !== undefined ? viewport.height * vph : gameObject.height;
-        if (scaleMode) {
-          var scaleX = width / gameObject.width;
-          var scaleY = height / gameObject.height;
-          var scale;
-          scaleMode = scaleMode.toUpperCase();
-          switch (scaleMode) {
-            case 'FIT':
-              scale = Math.min(scaleX, scaleY);
-              break;
-            case 'ENVELOP':
-              scale = Math.max(scaleX, scaleY);
-              break;
-          }
-          gameObject.setScale(scale);
-        } else {
-          gameObject.setDisplaySize(width, height);
+      if (scaleMode || vpw !== undefined || vph !== undefined) {
+        if (vpw === undefined) {
+          vpw = 1;
         }
+        if (vph === undefined) {
+          vph = 1;
+        }
+        var width = viewport.width * vpw;
+        var height = viewport.height * vph;
+        gameObject.resize(width, height);
       }
       AddShakeBehavior(gameObject);
       return gameObject;

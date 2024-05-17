@@ -3360,56 +3360,43 @@
     return EaseValueTask;
   }(EaseValueTaskBase);
 
-  var FitTo = function FitTo(source, target, scaleUp, out) {
-    if (scaleUp === undefined) {
-      scaleUp = true;
+  var FitTo = function FitTo(source, target, fitMode, out) {
+    if (fitMode === undefined) {
+      fitMode = 0;
+    } else {
+      var fitModeType = _typeof(fitMode);
+      if (fitModeType === 'boolean') {
+        out = fitMode;
+        fitMode = 0;
+      } else if (fitModeType === 'string') {
+        fitMode = FitModeMap[fitMode];
+      }
     }
     if (out === undefined) {
       out = {};
     } else if (out === true) {
       out = globalSize;
     }
-    var sourceWidth = source.width,
-      sourceHeight = source.height,
-      targetWidth = target.width,
-      targetHeight = target.height;
-    if (sourceWidth <= targetWidth && sourceHeight <= targetHeight) {
-      if (scaleUp) {
-        var sourceRatio = sourceWidth / sourceHeight;
-        var targetRatio = targetWidth / targetHeight;
-        if (targetRatio < sourceRatio) {
-          out.width = targetWidth;
-          out.height = targetWidth / sourceRatio;
-        } else if (targetRatio > sourceRatio) {
-          out.width = targetHeight * sourceRatio;
-          out.height = targetHeight;
-        } else {
-          out.width = targetWidth;
-          out.height = targetHeight;
-        }
-      } else {
-        out.width = sourceWidth;
-        out.height = sourceHeight;
-      }
-    } else {
-      var sourceRatio = sourceWidth / sourceHeight;
-      out.width = Math.min(sourceWidth, targetWidth);
-      out.height = Math.min(sourceHeight, targetHeight);
-      var ratio = out.width / out.height;
-      if (ratio < sourceRatio) {
-        out.height = out.width / sourceRatio;
-      } else if (ratio > sourceRatio) {
-        out.width = out.height * sourceRatio;
-      }
-    }
+    var scaleX = target.width / source.width;
+    var scaleY = target.height / source.height;
+    var scale = !fitMode ? Math.min(scaleX, scaleY) : Math.max(scaleX, scaleY);
+    out.width = source.width * scale;
+    out.height = source.height * scale;
     return out;
+  };
+  var FitModeMap = {
+    'fit': 0,
+    'FIT': 0,
+    'envelop': 1,
+    'ENVELOP': 1
   };
   var globalSize = {};
 
-  var FitImages$1 = function FitImages() {
+  var FitImages = function FitImages() {
+    var scaleMode = this.scaleMode - 1; // 1->0(FIT), 2->1(ENVELOP)
     for (var i = 0, cnt = this.images.length; i < cnt; i++) {
       var image = this.images[i];
-      var result = FitTo(image, this, true, true);
+      var result = FitTo(image, this, scaleMode, true);
       var biasScale = result.width / image.width;
       this.setChildLocalScale(image, biasScale);
       image.biasScale = biasScale;
@@ -3417,11 +3404,11 @@
   };
 
   var OnTextureChange = function OnTextureChange(newImage) {
-    if (!this.fixedSizeMode) {
+    if (this.scaleMode === 0) {
       this.resize(newImage.width, newImage.height);
     } else {
       // Fit all images to parent's size
-      FitImages$1.call(this);
+      FitImages.call(this);
     }
   };
 
@@ -4052,7 +4039,7 @@
       }
       var width = GetValue(config, 'width', undefined);
       var height = GetValue(config, 'height', undefined);
-      var fixedSizeMode = width !== undefined && height !== undefined;
+      var scaleMode = width !== undefined && height !== undefined ? 1 : 0;
       if (width === undefined) {
         width = frontImage.width;
       }
@@ -4063,7 +4050,11 @@
       _this.type = 'rexTransitionImage';
       _this._flipX = false;
       _this._flipY = false;
-      _this.fixedSizeMode = GetValue(config, 'fixedSize', fixedSizeMode);
+      scaleMode = GetValue(config, 'scaleMode', scaleMode);
+      if (typeof scaleMode === 'string') {
+        scaleMode = ScaleModeMap[scaleMode];
+      }
+      _this.scaleMode = scaleMode;
       backImage.setVisible(false);
       _this.addMultiple([backImage, frontImage]);
       _this.backImage = backImage;
@@ -4291,7 +4282,7 @@
       key: "setSize",
       value: function setSize(width, height) {
         _get(_getPrototypeOf(TransitionImage.prototype), "setSize", this).call(this, width, height);
-        if (this.fixedSizeMode) {
+        if (this.scaleMode) {
           FitImages.call(this);
         }
         return this;
@@ -4303,7 +4294,7 @@
     if (!callback) {
       return;
     }
-    if (this.fixedSizeMode) {
+    if (this.scaleMode) {
       var localScale;
       if (currentImage.biasScale > 0) {
         localScale = this.getChildLocalScaleX(currentImage);
@@ -4321,7 +4312,7 @@
     } else {
       callback(parent, currentImage, nextImage, t);
     }
-    if (this.fixedSizeMode) {
+    if (this.scaleMode) {
       var localScale;
       if (currentImage.biasScale > 0) {
         localScale = this.getChildLocalScaleX(currentImage);
@@ -4338,6 +4329,12 @@
 
   // mixin
   Object.assign(TransitionImage.prototype, methods);
+  var ScaleModeMap = {
+    fit: 1,
+    FIT: 1,
+    envelop: 2,
+    ENVELOP: 2
+  };
 
   function Factory (x, y, texture, frame, config) {
     var gameObject = new TransitionImage(this.scene, x, y, texture, frame, config);
