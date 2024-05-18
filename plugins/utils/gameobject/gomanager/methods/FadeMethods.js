@@ -60,6 +60,7 @@ export default {
                 'Linear',                   // ease
                 0,                          // repeat
                 false,                      // yoyo
+                false,                      // from
                 onComplete                  // onComplete
             )
 
@@ -75,6 +76,7 @@ export default {
                 'Linear',                   // ease
                 0,                          // repeat
                 false,                      // yoyo
+                false,                      // from
                 onComplete                  // onComplete
             )
 
@@ -100,6 +102,7 @@ export default {
                 'Linear',             // ease
                 0,                    // repeat
                 false,                // yoyo
+                false,                // from
                 onComplete,           // onComplete
             )
 

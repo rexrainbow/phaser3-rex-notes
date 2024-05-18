@@ -21,12 +21,20 @@ export default {
     easeProperty(
         property, value, duration, delay,
         ease,
-        repeat, isYoyo,
+        repeat, isYoyo, isFrom,
         onComplete, target
     ) {
 
         if (target === undefined) {
             target = this.gameObject;
+        }
+
+        debugger
+
+        if (isFrom) {
+            var startValue = value;
+            value = target[property];
+            target[property] = startValue;
         }
 
         var config = {

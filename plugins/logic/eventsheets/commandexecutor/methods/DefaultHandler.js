@@ -19,7 +19,7 @@ var DefaultHandler = function (name, config, eventSheetManager, eventSheet) {
     this.bindEventSheetManager(eventSheetManager); // For _waitComplete() / waitEvent()
 
     var commandName = tokens[1];
-    switch (tokens[1]) {
+    switch (commandName) {
         case 'set':
             this.setGOProperty(config, eventSheetManager, eventSheet);
             break;
@@ -30,6 +30,11 @@ var DefaultHandler = function (name, config, eventSheetManager, eventSheet) {
 
         case 'yoyo':
             config.yoyo = true;
+            this.easeGOProperty(config, eventSheetManager, eventSheet);
+            break;
+
+        case 'from':
+            config.from = true;
             this.easeGOProperty(config, eventSheetManager, eventSheet);
             break;
 

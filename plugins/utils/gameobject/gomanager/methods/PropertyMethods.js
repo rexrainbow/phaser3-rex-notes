@@ -53,7 +53,7 @@ export default {
     easeProperty(
         name, property, value, duration, delay,
         ease,
-        repeat, isYoyo,
+        repeat, isYoyo, isFrom,
         onComplete) {
 
         var bobs = this.get(name);
@@ -91,7 +91,12 @@ export default {
         }
 
         bobs.forEach(function (bob) {
-            bob.easeProperty(property, value, duration, delay, ease, repeat, isYoyo, onComplete);
+            bob.easeProperty(
+                property, value, duration, delay,
+                ease,
+                repeat, isYoyo, isFrom,
+                onComplete
+            );
         });
 
         return this;

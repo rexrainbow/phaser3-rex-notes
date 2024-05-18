@@ -1056,6 +1056,21 @@ can see it by `log.memory`, or get property of game object via `#(@NAME.x + 3)`.
     ```
     ```
     
+    NAME.from
+      x=
+      vpx=
+      y=
+      vpy=
+      alpha=
+      duration=1000
+      delay=0
+      ease=Linear
+      repeat=0
+      wait=
+    
+    ```
+    ```
+    
     NAME.yoyo
       x=
       vpx=
@@ -1092,6 +1107,21 @@ can see it by `log.memory`, or get property of game object via `#(@NAME.x + 3)`.
     ```
     ```
     
+    GOTYPE.from
+      x=
+      vpx=
+      y=
+      vpy=
+      alpha=
+      duration=1000
+      delay=0
+      ease=Linear
+      repeat=0
+      wait=
+    
+    ```
+    ```
+    
     GOTYPE.yoyo
       x=
       vpx=
@@ -1109,6 +1139,21 @@ can see it by `log.memory`, or get property of game object via `#(@NAME.x + 3)`.
     ```
     
     !NAME.to
+      x=
+      vpx=
+      y=
+      vpy=
+      alpha=
+      duration=1000
+      delay=0
+      ease=Linear
+      repeat=0
+      wait=
+    
+    ```
+    ```
+    
+    !NAME.from
       x=
       vpx=
       y=

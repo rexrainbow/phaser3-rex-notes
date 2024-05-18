@@ -27,6 +27,7 @@ declare class BobBase {
         ease?: string,
         repeat?: null,
         isYoyo?: boolean,
+        isFrom?: boolean,
         onComplete?: Function
     ): this;
 

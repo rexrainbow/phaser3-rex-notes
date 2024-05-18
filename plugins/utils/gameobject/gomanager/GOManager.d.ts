@@ -110,6 +110,7 @@ declare class GOManager extends Phaser.Events.EventEmitter {
         ease?: string,
         repeat?: number,
         isYoyo?: boolean,
+        isFrom?: boolean,
         onComplete?: (
             gameObject: Phaser.GameObjects.GameObject,
             property: string
