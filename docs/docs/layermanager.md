@@ -1,6 +1,6 @@
 ## Introduction
 
-A dictionary to store [Layer game objects](layer.md).
+A dictionary to store [Layer game objects](layer.md). Each layer can have a dedicate camera.
 
 - Author: Rex
 - Container of game objects
