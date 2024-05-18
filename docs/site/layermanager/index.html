@@ -9775,11 +9775,64 @@
   <h1>Layer manager</h1>
 
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>A dictionary to store <a href="../layer/">Layer game objects</a>.</p>
+<p>A dictionary to store <a href="../layer/">Layer game objects</a>. Each layer can have a dedicate camera.</p>
 <ul>
 <li>Author: Rex</li>
 <li>Container of game objects</li>
 </ul>
+<pre class="mermaid"><code>graph RL
+
+    subgraph Cameras
+      cameraBG[BG]
+      cameraGO[GO]
+      cameraUI[UI]
+    end
+
+    subgraph Layers
+      subgraph BG
+        layerBGBottom[BG-bottom]
+        layerBG[BG]
+        layerBGTop[BG-top]
+      end
+
+      subgraph GO
+        layerGOBottom[GO-bottom]
+        layerGO[GO]
+        layerGOTop[GO-top]
+      end
+
+      subgraph UI
+        layerUIBottom[UI-bottom]
+        layerUI[UI]
+        layerUITop[UI-top]
+      end
+    end
+
+    layerBGBottom --&gt; cameraBG
+    layerBG --&gt; cameraBG
+    layerBGTop --&gt; cameraBG
+
+    layerGOBottom --&gt; cameraGO
+    layerGO --&gt; cameraGO
+    layerGOTop --&gt; cameraGO
+
+    layerUIBottom --&gt; cameraUI
+    layerUI --&gt; cameraUI
+    layerUITop --&gt; cameraUI
+
+    subgraph GameObjects
+      goBG0["Background"] --&gt; layerBG
+      goBG1["Background"] --&gt; layerBG
+
+      go0[GameObject] --&gt; layerGO
+      go1[GameObject] --&gt; layerGO
+      go2[GameObject] --&gt; layerGO
+      go3[GameObject] --&gt; layerGO
+
+      goUI0[Panel] --&gt; layerUI
+      goUI1[Panel] --&gt; layerUI
+      goSYSUI[System dialog] --&gt; layerUITop
+    end</code></pre>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/layermanager">Sample code</a></p>
 <h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>

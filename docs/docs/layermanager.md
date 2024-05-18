@@ -46,17 +46,19 @@ graph RL
     layerUI --> cameraUI
     layerUITop --> cameraUI
 
-    goBG0["Background"] --> layerBG
-    goBG1["Background"] --> layerBG
+    subgraph GameObjects
+      goBG0["Background"] --> layerBG
+      goBG1["Background"] --> layerBG
 
-    go0[GameObject] --> layerGO
-    go1[GameObject] --> layerGO
-    go2[GameObject] --> layerGO
-    go3[GameObject] --> layerGO
+      go0[GameObject] --> layerGO
+      go1[GameObject] --> layerGO
+      go2[GameObject] --> layerGO
+      go3[GameObject] --> layerGO
 
-    goUI0[Panel] --> layerUI
-    goUI1[Panel] --> layerUI
-    goSYSUI[System dialog] --> layerUITop
+      goUI0[Panel] --> layerUI
+      goUI1[Panel] --> layerUI
+      goSYSUI[System dialog] --> layerUITop
+    end
 ```
 
 ## Usage
