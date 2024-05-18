@@ -3693,33 +3693,45 @@
       this.gameObject[property] = value;
       return this;
     },
-    easeProperty: function easeProperty(property, value, duration, ease, repeat, isYoyo, _onComplete, target) {
+    easeProperty: function easeProperty(property, value, duration, delay, ease, repeat, isYoyo, isFrom, onComplete, target) {
       if (target === undefined) {
         target = this.gameObject;
       }
-      var tweenTasks = this.tweens;
-      var tweenTask = tweenTasks[property];
-      if (tweenTask) {
-        tweenTask.remove();
+      if (isFrom) {
+        var startValue = value;
+        value = target[property];
+        target[property] = startValue;
       }
       var config = {
         targets: target,
         duration: duration,
+        delay: delay,
         ease: ease,
         repeat: repeat,
         yoyo: isYoyo,
-        onComplete: function onComplete() {
-          tweenTasks[property].remove();
-          tweenTasks[property] = null;
-          if (_onComplete) {
-            _onComplete(target, property);
-          }
-        }
+        onComplete: onComplete
       };
       config[property] = value;
+      this.addTweenTask(property, config);
+      return this;
+    },
+    addTweenTask: function addTweenTask(name, config) {
+      var tweenTasks = this.tweens;
+      var tweenTask = tweenTasks[name];
+      if (tweenTask) {
+        tweenTask.remove();
+      }
+      var onComplete = config.onComplete;
+      config.onComplete = function () {
+        tweenTasks[name].remove();
+        tweenTasks[name] = null;
+        if (onComplete) {
+          onComplete(config.targets, name);
+        }
+      };
       tweenTask = this.scene.tweens.add(config);
       tweenTask.timeScale = this.timeScale;
-      tweenTasks[property] = tweenTask;
+      tweenTasks[name] = tweenTask;
       return this;
     },
     getTweenTask: function getTweenTask(property) {
@@ -3799,6 +3811,7 @@
       key: "freeGO",
       value: function freeGO() {
         this.freeTweens();
+        this.gameObject.bob = undefined;
         this.gameObject.destroy();
         this.gameObject = undefined;
         return this;
@@ -3808,6 +3821,7 @@
       value: function setGO(gameObject, name) {
         gameObject.goName = name;
         gameObject.goType = this.GOManager.name;
+        gameObject.bob = this;
         this.gameObject = gameObject;
         this.name = name;
         this.freeTweens();
@@ -6020,7 +6034,7 @@
       });
       return this;
     },
-    easeProperty: function easeProperty(name, property, value, duration, ease, repeat, isYoyo, onComplete) {
+    easeProperty: function easeProperty(name, property, value, duration, delay, ease, repeat, isYoyo, isFrom, onComplete) {
       var bobs = this.get(name);
       if (!bobs) {
         return this;
@@ -6029,6 +6043,9 @@
       }
       if (duration === undefined) {
         duration = 1000;
+      }
+      if (delay === undefined) {
+        delay = 0;
       }
       if (ease === undefined) {
         ease = 'Linear';
@@ -6047,7 +6064,7 @@
         }
       }
       bobs.forEach(function (bob) {
-        bob.easeProperty(property, value, duration, ease, repeat, isYoyo, onComplete);
+        bob.easeProperty(property, value, duration, delay, ease, repeat, isYoyo, isFrom, onComplete);
       });
       return this;
     },
@@ -6167,12 +6184,16 @@
         // to value
         this.fadeTime,
         // duration
+        0,
+        // delay,
         'Linear',
         // ease
         0,
         // repeat
         false,
         // yoyo
+        false,
+        // from
         onComplete // onComplete
         );
       } else if (this.useAlphaFadeEffect(gameObject)) {
@@ -6185,12 +6206,16 @@
         // to value
         this.fadeTime,
         // duration
+        0,
+        // delay
         'Linear',
         // ease
         0,
         // repeat
         false,
         // yoyo
+        false,
+        // from
         onComplete // onComplete
         );
       } else if (this.useRevealEffect(gameObject)) {
@@ -6220,12 +6245,16 @@
         // to value
         this.fadeTime,
         // duration
+        0,
+        // delay
         'Linear',
         // ease
         0,
         // repeat
         false,
         // yoyo
+        false,
+        // from
         onComplete // onComplete
         );
         bob.getTweenTask(propertyName).once('complete', function () {
@@ -6424,16 +6453,22 @@
       SortGameObjectsByDepth(out, false);
       return out;
     },
-    addToLayer: function addToLayer(name, gameObject) {
+    addToLayer: function addToLayer(name, gameObjects) {
       var layer = this.getGO(name);
       if (!layer) {
         console.warn("[LayerManager] Can't get layer \"".concat(name, "\""));
         return;
       }
-      if (gameObject.isRexContainerLite) {
-        gameObject.addToLayer(layer);
-      } else {
-        layer.add(gameObject);
+      if (!Array.isArray(gameObjects)) {
+        gameObjects = [gameObjects];
+      }
+      for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+        var gameObject = gameObjects[i];
+        if (gameObject.isRexContainerLite) {
+          gameObject.addToLayer(layer);
+        } else {
+          layer.add(gameObject);
+        }
       }
       return this;
     },

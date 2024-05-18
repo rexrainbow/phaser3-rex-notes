@@ -17302,33 +17302,45 @@
       this.gameObject[property] = value;
       return this;
     },
-    easeProperty: function easeProperty(property, value, duration, ease, repeat, isYoyo, _onComplete, target) {
+    easeProperty: function easeProperty(property, value, duration, delay, ease, repeat, isYoyo, isFrom, onComplete, target) {
       if (target === undefined) {
         target = this.gameObject;
       }
-      var tweenTasks = this.tweens;
-      var tweenTask = tweenTasks[property];
-      if (tweenTask) {
-        tweenTask.remove();
+      if (isFrom) {
+        var startValue = value;
+        value = target[property];
+        target[property] = startValue;
       }
       var config = {
         targets: target,
         duration: duration,
+        delay: delay,
         ease: ease,
         repeat: repeat,
         yoyo: isYoyo,
-        onComplete: function onComplete() {
-          tweenTasks[property].remove();
-          tweenTasks[property] = null;
-          if (_onComplete) {
-            _onComplete(target, property);
-          }
-        }
+        onComplete: onComplete
       };
       config[property] = value;
+      this.addTweenTask(property, config);
+      return this;
+    },
+    addTweenTask: function addTweenTask(name, config) {
+      var tweenTasks = this.tweens;
+      var tweenTask = tweenTasks[name];
+      if (tweenTask) {
+        tweenTask.remove();
+      }
+      var onComplete = config.onComplete;
+      config.onComplete = function () {
+        tweenTasks[name].remove();
+        tweenTasks[name] = null;
+        if (onComplete) {
+          onComplete(config.targets, name);
+        }
+      };
       tweenTask = this.scene.tweens.add(config);
       tweenTask.timeScale = this.timeScale;
-      tweenTasks[property] = tweenTask;
+      tweenTasks[name] = tweenTask;
       return this;
     },
     getTweenTask: function getTweenTask(property) {
@@ -17408,6 +17420,7 @@
       key: "freeGO",
       value: function freeGO() {
         this.freeTweens();
+        this.gameObject.bob = undefined;
         this.gameObject.destroy();
         this.gameObject = undefined;
         return this;
@@ -17417,6 +17430,7 @@
       value: function setGO(gameObject, name) {
         gameObject.goName = name;
         gameObject.goType = this.GOManager.name;
+        gameObject.bob = this;
         this.gameObject = gameObject;
         this.name = name;
         this.freeTweens();
@@ -19629,7 +19643,7 @@
       });
       return this;
     },
-    easeProperty: function easeProperty(name, property, value, duration, ease, repeat, isYoyo, onComplete) {
+    easeProperty: function easeProperty(name, property, value, duration, delay, ease, repeat, isYoyo, isFrom, onComplete) {
       var bobs = this.get(name);
       if (!bobs) {
         return this;
@@ -19638,6 +19652,9 @@
       }
       if (duration === undefined) {
         duration = 1000;
+      }
+      if (delay === undefined) {
+        delay = 0;
       }
       if (ease === undefined) {
         ease = 'Linear';
@@ -19656,7 +19673,7 @@
         }
       }
       bobs.forEach(function (bob) {
-        bob.easeProperty(property, value, duration, ease, repeat, isYoyo, onComplete);
+        bob.easeProperty(property, value, duration, delay, ease, repeat, isYoyo, isFrom, onComplete);
       });
       return this;
     },
@@ -19776,12 +19793,16 @@
         // to value
         this.fadeTime,
         // duration
+        0,
+        // delay,
         'Linear',
         // ease
         0,
         // repeat
         false,
         // yoyo
+        false,
+        // from
         onComplete // onComplete
         );
       } else if (this.useAlphaFadeEffect(gameObject)) {
@@ -19794,12 +19815,16 @@
         // to value
         this.fadeTime,
         // duration
+        0,
+        // delay
         'Linear',
         // ease
         0,
         // repeat
         false,
         // yoyo
+        false,
+        // from
         onComplete // onComplete
         );
       } else if (this.useRevealEffect(gameObject)) {
@@ -19829,12 +19854,16 @@
         // to value
         this.fadeTime,
         // duration
+        0,
+        // delay
         'Linear',
         // ease
         0,
         // repeat
         false,
         // yoyo
+        false,
+        // from
         onComplete // onComplete
         );
         bob.getTweenTask(propertyName).once('complete', function () {
@@ -20272,16 +20301,22 @@
       SortGameObjectsByDepth(out, false);
       return out;
     },
-    addToLayer: function addToLayer(name, gameObject) {
+    addToLayer: function addToLayer(name, gameObjects) {
       var layer = this.getGO(name);
       if (!layer) {
         console.warn("[LayerManager] Can't get layer \"".concat(name, "\""));
         return;
       }
-      if (gameObject.isRexContainerLite) {
-        gameObject.addToLayer(layer);
-      } else {
-        layer.add(gameObject);
+      if (!Array.isArray(gameObjects)) {
+        gameObjects = [gameObjects];
+      }
+      for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+        var gameObject = gameObjects[i];
+        if (gameObject.isRexContainerLite) {
+          gameObject.addToLayer(layer);
+        } else {
+          layer.add(gameObject);
+        }
       }
       return this;
     },
@@ -23187,8 +23222,8 @@
       this.getGameObjectManager(goType, name).setProperty(name, prop, value);
       return this;
     },
-    easeGameObjectProperty: function easeGameObjectProperty(goType, name, prop, value, duration, ease, repeat, isYoyo) {
-      this.getGameObjectManager(goType, name).easeProperty(name, prop, value, duration, ease, repeat, isYoyo);
+    easeGameObjectProperty: function easeGameObjectProperty(goType, name, prop, value, duration, delay, ease, repeat, isYoyo, isFrom) {
+      this.getGameObjectManager(goType, name).easeProperty(name, prop, value, duration, delay, ease, repeat, isYoyo, isFrom);
       return this;
     },
     getGameObjectTweenTask: function getGameObjectTweenTask(goType, name, property) {
@@ -24096,7 +24131,7 @@
         this.sys.waitEventManager.waitEvent(eventSheetManager, event);
       }
       this.sys.waitEventManager.waitAny(config);
-      eventSheetManager.pauseEventSheetUnitlEvent(this.sys);
+      eventSheetManager.pauseEventSheetUnitlEvent(this.sys, 'complete');
       return this;
     },
     click: function click(config, eventSheetManager, eventsheet) {
@@ -24113,7 +24148,7 @@
       this.__eventSheetManager = undefined;
     },
     _waitComplete: function _waitComplete() {
-      this.__eventSheetManager.pauseEventSheetUnitlEvent(this.sys);
+      this.__eventSheetManager.pauseEventSheetUnitlEvent(this.sys, 'complete');
     },
     waitEvent: function waitEvent(eventEmitter, eventName) {
       this.sys.waitEventManager.waitEvent(eventEmitter, eventName);
@@ -24227,17 +24262,22 @@
       var id = config.id,
         goType = config.goType,
         duration = config.duration,
+        delay = config.delay,
         ease = config.ease,
         repeat = config.repeat,
         yoyo = config.yoyo,
+        _config$from = config.from,
+        from = _config$from === void 0 ? false : _config$from,
         _config$wait = config.wait,
         wait = _config$wait === void 0 ? true : _config$wait;
       delete config.id;
       delete config.goType;
       delete config.duration;
+      delete config.delay;
       delete config.ease;
       delete config.repeat;
       delete config.yoyo;
+      delete config.from;
       delete config.wait;
       if (!goType) {
         goType = this.sys.getGameObjectManagerName(id);
@@ -24248,7 +24288,7 @@
       var waitProperty;
       for (var prop in config) {
         var value = eventSheetManager.evalExpression(config[prop]);
-        this.sys.easeGameObjectProperty(goType, id, prop, value, duration, ease, repeat, yoyo);
+        this.sys.easeGameObjectProperty(goType, id, prop, value, duration, delay, ease, repeat, yoyo, from);
         if (!waitProperty) {
           waitProperty = prop;
         }
@@ -25138,36 +25178,45 @@
     this.bindEventSheetManager(eventSheetManager); // For _waitComplete() / waitEvent()
 
     var commandName = tokens[1];
-    switch (tokens[1]) {
-      case 'set':
-        this.setGOProperty(config, eventSheetManager, eventSheet);
-        break;
-      case 'to':
-        this.easeGOProperty(config, eventSheetManager, eventSheet);
-        break;
-      case 'yoyo':
-        config.yoyo = true;
-        this.easeGOProperty(config, eventSheetManager, eventSheet);
-        break;
-      case 'destroy':
-        this.destroyGO(config, eventSheetManager, eventSheet);
-        break;
-      default:
-        var gameObjectManager = this.sys.getGameObjectManager(config.goType, config.id);
-        if (gameObjectManager) {
-          // Command registered in gameObjectManager
-          var command = gameObjectManager.commands[commandName];
-          if (command) {
-            var gameObjects = gameObjectManager.getGO(config.id);
-            if (!Array.isArray(gameObjects)) {
-              gameObjects = [gameObjects];
-            }
-            var self = this;
-            gameObjects.forEach(function (gameObject) {
-              command(gameObject, config, self, eventSheetManager, eventSheet);
-            });
-          }
-        } else {
+    var isDone = false;
+    // Try to run custom command first
+    var gameObjectManager = this.sys.getGameObjectManager(config.goType, config.id);
+    if (gameObjectManager) {
+      // Command registered in gameObjectManager
+      var command = gameObjectManager.commands[commandName];
+      if (command) {
+        var gameObjects = gameObjectManager.getGO(config.id);
+        if (!Array.isArray(gameObjects)) {
+          gameObjects = [gameObjects];
+        }
+        for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+          command(gameObjects[i], config, this, eventSheetManager, eventSheet);
+        }
+        isDone = true;
+      }
+    }
+    if (!isDone) {
+      // Try run default command
+      switch (commandName) {
+        case 'set':
+          this.setGOProperty(config, eventSheetManager, eventSheet);
+          break;
+        case 'to':
+          this.easeGOProperty(config, eventSheetManager, eventSheet);
+          break;
+        case 'yoyo':
+          config.yoyo = true;
+          this.easeGOProperty(config, eventSheetManager, eventSheet);
+          break;
+        case 'from':
+          config.from = true;
+          this.easeGOProperty(config, eventSheetManager, eventSheet);
+          break;
+        case 'destroy':
+          this.destroyGO(config, eventSheetManager, eventSheet);
+          break;
+        default:
+          // TODO
           var parameters;
           for (var key in config) {
             parameters = config[key];
@@ -25176,8 +25225,8 @@
           config.methodName = commandName;
           config.parameters = parameters ? StringToValues(parameters) : [];
           this.runGOMethod(config, eventSheetManager, eventSheet);
-        }
-        break;
+          break;
+      }
     }
     this.unBindEventSheetManager();
     return this;
