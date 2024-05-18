@@ -5,6 +5,60 @@ A dictionary to store [Layer game objects](layer.md). Each layer can have a dedi
 - Author: Rex
 - Container of game objects
 
+```mermaid
+graph RL
+
+    subgraph Cameras
+      cameraBG[BG]
+      cameraGO[GO]
+      cameraUI[UI]
+    end
+
+    subgraph Layers
+      subgraph BG
+        layerBGBottom[BG-bottom]
+        layerBG[BG]
+        layerBGTop[BG-top]
+      end
+
+      subgraph GO
+        layerGOBottom[GO-bottom]
+        layerGO[GO]
+        layerGOTop[GO-top]
+      end
+
+      subgraph UI
+        layerUIBottom[UI-bottom]
+        layerUI[UI]
+        layerUITop[UI-top]
+      end
+    end
+
+    layerBGBottom --> cameraBG
+    layerBG --> cameraBG
+    layerBGTop --> cameraBG
+
+    layerGOBottom --> cameraGO
+    layerGO --> cameraGO
+    layerGOTop --> cameraGO
+
+    layerUIBottom --> cameraUI
+    layerUI --> cameraUI
+    layerUITop --> cameraUI
+
+    goBG0["Background"] --> layerBG
+    goBG1["Background"] --> layerBG
+
+    go0[GameObject] --> layerGO
+    go1[GameObject] --> layerGO
+    go2[GameObject] --> layerGO
+    go3[GameObject] --> layerGO
+
+    goUI0[Panel] --> layerUI
+    goUI1[Panel] --> layerUI
+    goSYSUI[System dialog] --> layerUITop
+```
+
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/layermanager)
