@@ -29,8 +29,6 @@ export default {
             target = this.gameObject;
         }
 
-        debugger
-
         if (isFrom) {
             var startValue = value;
             value = target[property];

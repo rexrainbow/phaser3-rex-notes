@@ -19,45 +19,52 @@ var DefaultHandler = function (name, config, eventSheetManager, eventSheet) {
     this.bindEventSheetManager(eventSheetManager); // For _waitComplete() / waitEvent()
 
     var commandName = tokens[1];
-    switch (commandName) {
-        case 'set':
-            this.setGOProperty(config, eventSheetManager, eventSheet);
-            break;
 
-        case 'to':
-            this.easeGOProperty(config, eventSheetManager, eventSheet);
-            break;
+    var isDone = false;
+    // Try to run custom command first
+    var gameObjectManager = this.sys.getGameObjectManager(config.goType, config.id);
+    if (gameObjectManager) {
+        // Command registered in gameObjectManager
+        var command = gameObjectManager.commands[commandName];
+        if (command) {
+            var gameObjects = gameObjectManager.getGO(config.id);
+            if (!Array.isArray(gameObjects)) {
+                gameObjects = [gameObjects];
+            }
+            for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+                command(gameObjects[i], config, this, eventSheetManager, eventSheet);
+            }
+            isDone = true;
+        }
+    }
 
-        case 'yoyo':
-            config.yoyo = true;
-            this.easeGOProperty(config, eventSheetManager, eventSheet);
-            break;
+    if (!isDone) {
+        // Try run default command
+        switch (commandName) {
+            case 'set':
+                this.setGOProperty(config, eventSheetManager, eventSheet);
+                break;
 
-        case 'from':
-            config.from = true;
-            this.easeGOProperty(config, eventSheetManager, eventSheet);
-            break;
+            case 'to':
+                this.easeGOProperty(config, eventSheetManager, eventSheet);
+                break;
 
-        case 'destroy':
-            this.destroyGO(config, eventSheetManager, eventSheet);
-            break;
+            case 'yoyo':
+                config.yoyo = true;
+                this.easeGOProperty(config, eventSheetManager, eventSheet);
+                break;
 
-        default:
-            var gameObjectManager = this.sys.getGameObjectManager(config.goType, config.id);
-            if (gameObjectManager) {
-                // Command registered in gameObjectManager
-                var command = gameObjectManager.commands[commandName];
-                if (command) {
-                    var gameObjects = gameObjectManager.getGO(config.id);
-                    if (!Array.isArray(gameObjects)) {
-                        gameObjects = [gameObjects];
-                    }
-                    var self = this;
-                    gameObjects.forEach(function (gameObject) {
-                        command(gameObject, config, self, eventSheetManager, eventSheet);
-                    })
-                }
-            } else {
+            case 'from':
+                config.from = true;
+                this.easeGOProperty(config, eventSheetManager, eventSheet);
+                break;
+
+            case 'destroy':
+                this.destroyGO(config, eventSheetManager, eventSheet);
+                break;
+
+            default:
+                // TODO
                 var parameters;
                 for (var key in config) {
                     parameters = config[key];
@@ -66,9 +73,9 @@ var DefaultHandler = function (name, config, eventSheetManager, eventSheet) {
                 config.methodName = commandName;
                 config.parameters = (parameters) ? StringToValues(parameters) : [];
                 this.runGOMethod(config, eventSheetManager, eventSheet);
+                break;
+        }
 
-            }
-            break;
     }
 
     this.unBindEventSheetManager();
