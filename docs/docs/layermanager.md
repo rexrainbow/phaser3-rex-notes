@@ -5,6 +5,10 @@ A dictionary to store [Layer game objects](layer.md). Each layer can have a dedi
 - Author: Rex
 - Container of game objects
 
+## Relationship diagram
+
+Camera - layer - game object
+
 ```mermaid
 graph RL
 
