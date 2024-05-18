@@ -17745,33 +17745,45 @@
       this.gameObject[property] = value;
       return this;
     },
-    easeProperty: function easeProperty(property, value, duration, ease, repeat, isYoyo, _onComplete, target) {
+    easeProperty: function easeProperty(property, value, duration, delay, ease, repeat, isYoyo, isFrom, onComplete, target) {
       if (target === undefined) {
         target = this.gameObject;
       }
-      var tweenTasks = this.tweens;
-      var tweenTask = tweenTasks[property];
-      if (tweenTask) {
-        tweenTask.remove();
+      if (isFrom) {
+        var startValue = value;
+        value = target[property];
+        target[property] = startValue;
       }
       var config = {
         targets: target,
         duration: duration,
+        delay: delay,
         ease: ease,
         repeat: repeat,
         yoyo: isYoyo,
-        onComplete: function onComplete() {
-          tweenTasks[property].remove();
-          tweenTasks[property] = null;
-          if (_onComplete) {
-            _onComplete(target, property);
-          }
-        }
+        onComplete: onComplete
       };
       config[property] = value;
+      this.addTweenTask(property, config);
+      return this;
+    },
+    addTweenTask: function addTweenTask(name, config) {
+      var tweenTasks = this.tweens;
+      var tweenTask = tweenTasks[name];
+      if (tweenTask) {
+        tweenTask.remove();
+      }
+      var onComplete = config.onComplete;
+      config.onComplete = function () {
+        tweenTasks[name].remove();
+        tweenTasks[name] = null;
+        if (onComplete) {
+          onComplete(config.targets, name);
+        }
+      };
       tweenTask = this.scene.tweens.add(config);
       tweenTask.timeScale = this.timeScale;
-      tweenTasks[property] = tweenTask;
+      tweenTasks[name] = tweenTask;
       return this;
     },
     getTweenTask: function getTweenTask(property) {
@@ -17851,6 +17863,7 @@
       key: "freeGO",
       value: function freeGO() {
         this.freeTweens();
+        this.gameObject.bob = undefined;
         this.gameObject.destroy();
         this.gameObject = undefined;
         return this;
@@ -17860,6 +17873,7 @@
       value: function setGO(gameObject, name) {
         gameObject.goName = name;
         gameObject.goType = this.GOManager.name;
+        gameObject.bob = this;
         this.gameObject = gameObject;
         this.name = name;
         this.freeTweens();
@@ -20072,7 +20086,7 @@
       });
       return this;
     },
-    easeProperty: function easeProperty(name, property, value, duration, ease, repeat, isYoyo, onComplete) {
+    easeProperty: function easeProperty(name, property, value, duration, delay, ease, repeat, isYoyo, isFrom, onComplete) {
       var bobs = this.get(name);
       if (!bobs) {
         return this;
@@ -20081,6 +20095,9 @@
       }
       if (duration === undefined) {
         duration = 1000;
+      }
+      if (delay === undefined) {
+        delay = 0;
       }
       if (ease === undefined) {
         ease = 'Linear';
@@ -20099,7 +20116,7 @@
         }
       }
       bobs.forEach(function (bob) {
-        bob.easeProperty(property, value, duration, ease, repeat, isYoyo, onComplete);
+        bob.easeProperty(property, value, duration, delay, ease, repeat, isYoyo, isFrom, onComplete);
       });
       return this;
     },
@@ -20219,12 +20236,16 @@
         // to value
         this.fadeTime,
         // duration
+        0,
+        // delay,
         'Linear',
         // ease
         0,
         // repeat
         false,
         // yoyo
+        false,
+        // from
         onComplete // onComplete
         );
       } else if (this.useAlphaFadeEffect(gameObject)) {
@@ -20237,12 +20258,16 @@
         // to value
         this.fadeTime,
         // duration
+        0,
+        // delay
         'Linear',
         // ease
         0,
         // repeat
         false,
         // yoyo
+        false,
+        // from
         onComplete // onComplete
         );
       } else if (this.useRevealEffect(gameObject)) {
@@ -20272,12 +20297,16 @@
         // to value
         this.fadeTime,
         // duration
+        0,
+        // delay
         'Linear',
         // ease
         0,
         // repeat
         false,
         // yoyo
+        false,
+        // from
         onComplete // onComplete
         );
         bob.getTweenTask(propertyName).once('complete', function () {
@@ -20773,16 +20802,22 @@
       SortGameObjectsByDepth(out, false);
       return out;
     },
-    addToLayer: function addToLayer(name, gameObject) {
+    addToLayer: function addToLayer(name, gameObjects) {
       var layer = this.getGO(name);
       if (!layer) {
         console.warn("[LayerManager] Can't get layer \"".concat(name, "\""));
         return;
       }
-      if (gameObject.isRexContainerLite) {
-        gameObject.addToLayer(layer);
-      } else {
-        layer.add(gameObject);
+      if (!Array.isArray(gameObjects)) {
+        gameObjects = [gameObjects];
+      }
+      for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+        var gameObject = gameObjects[i];
+        if (gameObject.isRexContainerLite) {
+          gameObject.addToLayer(layer);
+        } else {
+          layer.add(gameObject);
+        }
       }
       return this;
     },
@@ -23688,8 +23723,8 @@
       this.getGameObjectManager(goType, name).setProperty(name, prop, value);
       return this;
     },
-    easeGameObjectProperty: function easeGameObjectProperty(goType, name, prop, value, duration, ease, repeat, isYoyo) {
-      this.getGameObjectManager(goType, name).easeProperty(name, prop, value, duration, ease, repeat, isYoyo);
+    easeGameObjectProperty: function easeGameObjectProperty(goType, name, prop, value, duration, delay, ease, repeat, isYoyo, isFrom) {
+      this.getGameObjectManager(goType, name).easeProperty(name, prop, value, duration, delay, ease, repeat, isYoyo, isFrom);
       return this;
     },
     getGameObjectTweenTask: function getGameObjectTweenTask(goType, name, property) {
@@ -24597,7 +24632,7 @@
         this.sys.waitEventManager.waitEvent(eventSheetManager, event);
       }
       this.sys.waitEventManager.waitAny(config);
-      eventSheetManager.pauseEventSheetUnitlEvent(this.sys);
+      eventSheetManager.pauseEventSheetUnitlEvent(this.sys, 'complete');
       return this;
     },
     click: function click(config, eventSheetManager, eventsheet) {
@@ -24614,7 +24649,7 @@
       this.__eventSheetManager = undefined;
     },
     _waitComplete: function _waitComplete() {
-      this.__eventSheetManager.pauseEventSheetUnitlEvent(this.sys);
+      this.__eventSheetManager.pauseEventSheetUnitlEvent(this.sys, 'complete');
     },
     waitEvent: function waitEvent(eventEmitter, eventName) {
       this.sys.waitEventManager.waitEvent(eventEmitter, eventName);
@@ -24728,17 +24763,22 @@
       var id = config.id,
         goType = config.goType,
         duration = config.duration,
+        delay = config.delay,
         ease = config.ease,
         repeat = config.repeat,
         yoyo = config.yoyo,
+        _config$from = config.from,
+        from = _config$from === void 0 ? false : _config$from,
         _config$wait = config.wait,
         wait = _config$wait === void 0 ? true : _config$wait;
       delete config.id;
       delete config.goType;
       delete config.duration;
+      delete config.delay;
       delete config.ease;
       delete config.repeat;
       delete config.yoyo;
+      delete config.from;
       delete config.wait;
       if (!goType) {
         goType = this.sys.getGameObjectManagerName(id);
@@ -24749,7 +24789,7 @@
       var waitProperty;
       for (var prop in config) {
         var value = eventSheetManager.evalExpression(config[prop]);
-        this.sys.easeGameObjectProperty(goType, id, prop, value, duration, ease, repeat, yoyo);
+        this.sys.easeGameObjectProperty(goType, id, prop, value, duration, delay, ease, repeat, yoyo, from);
         if (!waitProperty) {
           waitProperty = prop;
         }
@@ -25639,36 +25679,45 @@
     this.bindEventSheetManager(eventSheetManager); // For _waitComplete() / waitEvent()
 
     var commandName = tokens[1];
-    switch (tokens[1]) {
-      case 'set':
-        this.setGOProperty(config, eventSheetManager, eventSheet);
-        break;
-      case 'to':
-        this.easeGOProperty(config, eventSheetManager, eventSheet);
-        break;
-      case 'yoyo':
-        config.yoyo = true;
-        this.easeGOProperty(config, eventSheetManager, eventSheet);
-        break;
-      case 'destroy':
-        this.destroyGO(config, eventSheetManager, eventSheet);
-        break;
-      default:
-        var gameObjectManager = this.sys.getGameObjectManager(config.goType, config.id);
-        if (gameObjectManager) {
-          // Command registered in gameObjectManager
-          var command = gameObjectManager.commands[commandName];
-          if (command) {
-            var gameObjects = gameObjectManager.getGO(config.id);
-            if (!Array.isArray(gameObjects)) {
-              gameObjects = [gameObjects];
-            }
-            var self = this;
-            gameObjects.forEach(function (gameObject) {
-              command(gameObject, config, self, eventSheetManager, eventSheet);
-            });
-          }
-        } else {
+    var isDone = false;
+    // Try to run custom command first
+    var gameObjectManager = this.sys.getGameObjectManager(config.goType, config.id);
+    if (gameObjectManager) {
+      // Command registered in gameObjectManager
+      var command = gameObjectManager.commands[commandName];
+      if (command) {
+        var gameObjects = gameObjectManager.getGO(config.id);
+        if (!Array.isArray(gameObjects)) {
+          gameObjects = [gameObjects];
+        }
+        for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+          command(gameObjects[i], config, this, eventSheetManager, eventSheet);
+        }
+        isDone = true;
+      }
+    }
+    if (!isDone) {
+      // Try run default command
+      switch (commandName) {
+        case 'set':
+          this.setGOProperty(config, eventSheetManager, eventSheet);
+          break;
+        case 'to':
+          this.easeGOProperty(config, eventSheetManager, eventSheet);
+          break;
+        case 'yoyo':
+          config.yoyo = true;
+          this.easeGOProperty(config, eventSheetManager, eventSheet);
+          break;
+        case 'from':
+          config.from = true;
+          this.easeGOProperty(config, eventSheetManager, eventSheet);
+          break;
+        case 'destroy':
+          this.destroyGO(config, eventSheetManager, eventSheet);
+          break;
+        default:
+          // TODO
           var parameters;
           for (var key in config) {
             parameters = config[key];
@@ -25677,8 +25726,8 @@
           config.methodName = commandName;
           config.parameters = parameters ? StringToValues(parameters) : [];
           this.runGOMethod(config, eventSheetManager, eventSheet);
-        }
-        break;
+          break;
+      }
     }
     this.unBindEventSheetManager();
     return this;
@@ -33965,7 +34014,7 @@
     return this;
   };
 
-  var SetText$2 = function SetText(text, style) {
+  var SetText$3 = function SetText(text, style) {
     if (text === undefined) {
       text = '';
     }
@@ -35497,7 +35546,7 @@
     addChild: AddChild$3,
     createCharChild: CreateCharChild,
     createCharChildren: CreateCharChildren,
-    setText: SetText$2,
+    setText: SetText$3,
     appendText: AppendText$1,
     insertText: InsertText,
     removeText: RemoveText,
@@ -39832,7 +39881,7 @@
   };
 
   var RemoveItem$8 = Phaser.Utils.Array.Remove;
-  var SetText$1 = function SetText(textObject, newText) {
+  var SetText$2 = function SetText(textObject, newText) {
     var text = textObject.text;
     if (newText === text) {
       return;
@@ -39993,7 +40042,7 @@
         if (this._text === value) {
           return;
         }
-        SetText$1(this, value);
+        SetText$2(this, value);
         this._text = value;
       }
     }, {
@@ -48549,7 +48598,7 @@
     yoyo: 2
   };
 
-  var PopUp$1 = function PopUp(gameObject, duration, orientation, ease, scale) {
+  var PopUp$2 = function PopUp(gameObject, duration, orientation, ease, scale) {
     if (ease === undefined) {
       ease = 'Cubic';
     }
@@ -48721,7 +48770,7 @@
         ease = config.ease;
       }
       var isInit = this._scaleBehavior === undefined;
-      this._scaleBehavior = PopUp$1(this, duration, orientation, ease, this._scaleBehavior);
+      this._scaleBehavior = PopUp$2(this, duration, orientation, ease, this._scaleBehavior);
       if (isInit) {
         OnInitScale(this, this._scaleBehavior);
       }
@@ -50770,7 +50819,7 @@
       } else {
         gameObject._modalScaleSave = gameObject.scaleX;
       }
-      PopUp$1(gameObject, duration);
+      PopUp$2(gameObject, duration);
     },
     scaleDown: function scaleDown(gameObject, duration) {
       // Don't destroy here
@@ -64424,7 +64473,7 @@
     return lines;
   };
 
-  var SetText = function SetText(text) {
+  var SetText$1 = function SetText(text) {
     if (text !== undefined) {
       this.text = text;
     }
@@ -64627,7 +64676,7 @@
   };
 
   var Methods$7 = {
-    setText: SetText,
+    setText: SetText$1,
     updateTextObject: UpdateTextObject,
     preLayout: PreLayout,
     layoutChildren: LayoutChildren$1
@@ -71611,7 +71660,7 @@
     return easeConfig;
   };
 
-  var PopUp = function PopUp(menu, duration) {
+  var PopUp$1 = function PopUp(menu, duration) {
     menu.popUp(GetEaseConfig(menu.root.easeIn, menu));
   };
   var ScaleDown$1 = function ScaleDown(menu, duration) {
@@ -71621,7 +71670,7 @@
   var SetTransitCallbackMethods = {
     setTransitInCallback: function setTransitInCallback(callback) {
       if (callback === undefined) {
-        callback = PopUp;
+        callback = PopUp$1;
       }
       this.transitInCallback = callback;
       // callback = function(gameObject, duration) {}
@@ -72280,7 +72329,7 @@
       }
       if (config.transitIn == null) {
         config.transitIn = function (gameObject, duration) {
-          PopUp$1(gameObject, duration, 'y', 'Cubic');
+          PopUp$2(gameObject, duration, 'y', 'Cubic');
         };
       }
       if (config.transitOut == null) {
@@ -81281,7 +81330,7 @@
     };
   };
 
-  var Display = function Display(gameObject) {
+  var SetText = function SetText(gameObject) {
     var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
       text0 = _ref.text0,
       text1 = _ref.text1;
@@ -81292,6 +81341,151 @@
       gameObject.setText(text1);
     }
     gameObject.layout();
+  };
+
+  var PopUp = function PopUp(gameObject) {
+    var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+      text0 = _ref.text0,
+      text1 = _ref.text1,
+      _ref$separatorDir = _ref.separatorDir,
+      separatorDir = _ref$separatorDir === void 0 ? 'right' : _ref$separatorDir,
+      _ref$text0Dir = _ref.text0Dir,
+      text0Dir = _ref$text0Dir === void 0 ? 'up' : _ref$text0Dir,
+      _ref$text1Dir = _ref.text1Dir,
+      text1Dir = _ref$text1Dir === void 0 ? 'down' : _ref$text1Dir,
+      _ref$separatorThenTex = _ref.separatorThenText,
+      separatorThenText = _ref$separatorThenTex === void 0 ? true : _ref$separatorThenTex,
+      duration = _ref.duration,
+      _ref$wait = _ref.wait,
+      wait = _ref$wait === void 0 ? true : _ref$wait;
+    var eventSheetManager = arguments.length > 3 ? arguments[3] : undefined;
+    var separatorGameObject = gameObject.childrenMap.separator;
+    if (separatorGameObject) {
+      var origin = DirToOriginMap[separatorDir];
+      if (!origin) {
+        origin = DefaultOrigin;
+      }
+      separatorGameObject.setOrigin(origin.x, origin.y);
+    } else {
+      separatorThenText = false;
+    }
+    var text0GameObject = gameObject.childrenMap.title;
+    if (text0GameObject) {
+      var origin = DirToOriginMap[text0Dir];
+      if (!origin) {
+        origin = DefaultOrigin;
+      }
+      text0GameObject.setOrigin(origin.x, origin.y);
+    }
+    var text1GameObject = gameObject.childrenMap.text;
+    if (text1GameObject) {
+      var origin = DirToOriginMap[text1Dir];
+      if (!origin) {
+        origin = DefaultOrigin;
+      }
+      text1GameObject.setOrigin(origin.x, origin.y);
+    }
+    if (text0) {
+      gameObject.setTitle(text0);
+    }
+    if (text1) {
+      gameObject.setText(text1);
+    }
+    gameObject.layout();
+    if (duration === undefined) {
+      duration = eventSheetManager.getData('$transitionDuration');
+    }
+    var onCompleteCallback;
+    if (wait) {
+      onCompleteCallback = eventSheetManager.pauseEventSheet();
+    }
+    var delay;
+    if (separatorThenText) {
+      duration /= 2;
+      delay = duration;
+    } else {
+      delay = 0;
+    }
+    var bob = gameObject.bob;
+    if (separatorGameObject) {
+      var config = {
+        targets: separatorGameObject,
+        duration: duration
+      };
+      SetScaleConfig(config, separatorDir);
+      bob.addTweenTask('separator.popup', config);
+    }
+    if (text0GameObject) {
+      var config = {
+        targets: text0GameObject,
+        delay: delay,
+        duration: duration,
+        onComplete: onCompleteCallback
+      };
+      SetScaleConfig(config, text0Dir);
+      bob.addTweenTask('title.popup', config);
+    }
+    if (text1GameObject) {
+      var config = {
+        targets: text1GameObject,
+        delay: delay,
+        duration: duration,
+        onComplete: onCompleteCallback
+      };
+      SetScaleConfig(config, text1Dir);
+      bob.addTweenTask('text.popup', config);
+    }
+  };
+  var DirToOriginMap = {
+    right: {
+      x: 0,
+      y: 0.5
+    },
+    left: {
+      x: 1,
+      y: 0.5
+    },
+    up: {
+      x: 0.5,
+      y: 1
+    },
+    down: {
+      x: 0.5,
+      y: 0
+    }
+  };
+  var DefaultOrigin = {
+    x: 0.5,
+    y: 0.5
+  };
+  var SetScaleConfig = function SetScaleConfig(config, dir) {
+    switch (dir) {
+      case 'up':
+      case 'down':
+        config.scaleY = {
+          start: 0,
+          to: 1
+        };
+        break;
+      case 'left':
+      case 'right':
+        config.scaleX = {
+          start: 0,
+          to: 1
+        };
+        break;
+      default:
+        config.scaleX = {
+          start: 0,
+          to: 1
+        };
+        config.scaleY = {
+          start: 0,
+          to: 1
+        };
+        break;
+    }
+    return config;
   };
 
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
@@ -81323,7 +81517,8 @@
       },
       defaultLayer: UILayer,
       commands: {
-        display: Display,
+        setText: SetText,
+        popUp: PopUp,
         shake: Shake
       }
     });
