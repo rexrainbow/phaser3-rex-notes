@@ -17321,39 +17321,6 @@
     return _createClass(Label);
   }(LabelBase);
 
-  var LineTo = function LineTo(x, y, pathData) {
-    var cnt = pathData.length;
-    if (cnt >= 2) {
-      var lastX = pathData[cnt - 2];
-      var lastY = pathData[cnt - 1];
-      if (x === lastX && y === lastY) {
-        return pathData;
-      }
-    }
-    pathData.push(x, y);
-    return pathData;
-  };
-
-  var DegToRad$3 = Phaser.Math.DegToRad;
-  var ArcTo = function ArcTo(centerX, centerY, radiusX, radiusY, startAngle, endAngle, antiClockWise, iteration, pathData) {
-    // startAngle, endAngle: 0 ~ 360
-    if (antiClockWise && endAngle > startAngle) {
-      endAngle -= 360;
-    } else if (!antiClockWise && endAngle < startAngle) {
-      endAngle += 360;
-    }
-    var deltaAngle = endAngle - startAngle;
-    var step = DegToRad$3(deltaAngle) / iteration;
-    startAngle = DegToRad$3(startAngle);
-    for (var i = 0; i <= iteration; i++) {
-      var angle = startAngle + step * i;
-      var x = centerX + radiusX * Math.cos(angle);
-      var y = centerY + radiusY * Math.sin(angle);
-      LineTo(x, y, pathData);
-    }
-    return pathData;
-  };
-
   /*
   src: {
       fillColor, 
@@ -17511,73 +17478,13 @@
   };
 
   var Shape$1 = Phaser.GameObjects.Shape;
-  var IsPlainObject$i = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$1e = Phaser.Utils.Objects.GetValue;
-  var Earcut$1 = Phaser.Geom.Polygon.Earcut;
-  var RoundRectangle$1 = /*#__PURE__*/function (_Shape) {
-    _inherits(RoundRectangle, _Shape);
-    function RoundRectangle(scene, x, y, width, height, radiusConfig, fillColor, fillAlpha) {
-      var _this;
-      _classCallCheck(this, RoundRectangle);
-      var strokeColor, strokeAlpha, strokeWidth, shapeType;
-      if (IsPlainObject$i(x)) {
-        var config = x;
-        x = config.x;
-        y = config.y;
-        width = config.width;
-        height = config.height;
-        radiusConfig = config.radius;
-        fillColor = config.color;
-        fillAlpha = config.alpha;
-        strokeColor = config.strokeColor;
-        strokeAlpha = config.strokeAlpha;
-        strokeWidth = config.strokeWidth;
-        shapeType = config.shape;
-      }
-      if (x === undefined) {
-        x = 0;
-      }
-      if (y === undefined) {
-        y = 0;
-      }
-      if (width === undefined) {
-        width = 1;
-      }
-      if (height === undefined) {
-        height = width;
-      }
-      if (radiusConfig === undefined) {
-        radiusConfig = 0;
-      }
-      if (shapeType === undefined) {
-        shapeType = 0;
-      }
-      var geom = new RoundRectangle$2(); // Configurate it later
-      _this = _callSuper(this, RoundRectangle, [scene, 'rexRoundRectangleShape', geom]);
-      _this.setShapeType(shapeType);
-      if (_this.shapeType === 0) {
-        var radius = GetValue$1e(radiusConfig, 'radius', radiusConfig);
-        geom.setTo(0, 0, width, height, radius);
-      } else {
-        var radius = {
-          x: width / 2,
-          y: height / 2
-        };
-        geom.setTo(0, 0, width, height, radius);
-      }
-      var iteration = GetValue$1e(radiusConfig, 'iteration', undefined);
-      _this.setIteration(iteration);
-      _this.setPosition(x, y);
-      _this.setFillStyle(fillColor, fillAlpha);
-      if (strokeColor !== undefined && strokeWidth === undefined) {
-        strokeWidth = 2;
-      }
-      _this.setStrokeStyle(strokeWidth, strokeColor, strokeAlpha);
-      _this.updateDisplayOrigin();
-      _this.dirty = true;
-      return _this;
+  var PolygnBase = /*#__PURE__*/function (_Shape) {
+    _inherits(PolygnBase, _Shape);
+    function PolygnBase() {
+      _classCallCheck(this, PolygnBase);
+      return _callSuper(this, PolygnBase, arguments);
     }
-    _createClass(RoundRectangle, [{
+    _createClass(PolygnBase, [{
       key: "fillColor",
       get: function get() {
         return this._fillColor;
@@ -17648,6 +17555,147 @@
         return this;
       }
     }, {
+      key: "updateData",
+      value: function updateData() {
+        return this;
+      }
+    }, {
+      key: "width",
+      get: function get() {
+        return this.geom.width;
+      },
+      set: function set(value) {
+        this.resize(value, this.height);
+      }
+    }, {
+      key: "height",
+      get: function get() {
+        return this.geom.height;
+      },
+      set: function set(value) {
+        this.resize(this.width, value);
+      }
+    }, {
+      key: "setSize",
+      value: function setSize(width, height) {
+        var input = this.input;
+        if (input && !input.customHitArea) {
+          input.hitArea.width = width;
+          input.hitArea.height = height;
+        }
+        return this;
+      }
+    }, {
+      key: "resize",
+      value: function resize(width, height) {
+        this.setSize(width, height);
+        return this;
+      }
+    }]);
+    return PolygnBase;
+  }(Shape$1);
+  Object.assign(PolygnBase.prototype, Render$2);
+
+  var LineTo = function LineTo(x, y, pathData) {
+    var cnt = pathData.length;
+    if (cnt >= 2) {
+      var lastX = pathData[cnt - 2];
+      var lastY = pathData[cnt - 1];
+      if (x === lastX && y === lastY) {
+        return pathData;
+      }
+    }
+    pathData.push(x, y);
+    return pathData;
+  };
+
+  var DegToRad$3 = Phaser.Math.DegToRad;
+  var ArcTo = function ArcTo(centerX, centerY, radiusX, radiusY, startAngle, endAngle, antiClockWise, iteration, pathData) {
+    // startAngle, endAngle: 0 ~ 360
+    if (antiClockWise && endAngle > startAngle) {
+      endAngle -= 360;
+    } else if (!antiClockWise && endAngle < startAngle) {
+      endAngle += 360;
+    }
+    var deltaAngle = endAngle - startAngle;
+    var step = DegToRad$3(deltaAngle) / iteration;
+    startAngle = DegToRad$3(startAngle);
+    for (var i = 0; i <= iteration; i++) {
+      var angle = startAngle + step * i;
+      var x = centerX + radiusX * Math.cos(angle);
+      var y = centerY + radiusY * Math.sin(angle);
+      LineTo(x, y, pathData);
+    }
+    return pathData;
+  };
+
+  var IsPlainObject$i = Phaser.Utils.Objects.IsPlainObject;
+  var GetValue$1e = Phaser.Utils.Objects.GetValue;
+  var Earcut$1 = Phaser.Geom.Polygon.Earcut;
+  var RoundRectangle$1 = /*#__PURE__*/function (_PolygnBase) {
+    _inherits(RoundRectangle, _PolygnBase);
+    function RoundRectangle(scene, x, y, width, height, radiusConfig, fillColor, fillAlpha) {
+      var _this;
+      _classCallCheck(this, RoundRectangle);
+      var strokeColor, strokeAlpha, strokeWidth, shapeType;
+      if (IsPlainObject$i(x)) {
+        var config = x;
+        x = config.x;
+        y = config.y;
+        width = config.width;
+        height = config.height;
+        radiusConfig = config.radius;
+        fillColor = config.color;
+        fillAlpha = config.alpha;
+        strokeColor = config.strokeColor;
+        strokeAlpha = config.strokeAlpha;
+        strokeWidth = config.strokeWidth;
+        shapeType = config.shape;
+      }
+      if (x === undefined) {
+        x = 0;
+      }
+      if (y === undefined) {
+        y = 0;
+      }
+      if (width === undefined) {
+        width = 1;
+      }
+      if (height === undefined) {
+        height = width;
+      }
+      if (radiusConfig === undefined) {
+        radiusConfig = 0;
+      }
+      if (shapeType === undefined) {
+        shapeType = 0;
+      }
+      var geom = new RoundRectangle$2(); // Configurate it later
+      _this = _callSuper(this, RoundRectangle, [scene, 'rexRoundRectangleShape', geom]);
+      _this.setShapeType(shapeType);
+      if (_this.shapeType === 0) {
+        var radius = GetValue$1e(radiusConfig, 'radius', radiusConfig);
+        geom.setTo(0, 0, width, height, radius);
+      } else {
+        var radius = {
+          x: width / 2,
+          y: height / 2
+        };
+        geom.setTo(0, 0, width, height, radius);
+      }
+      var iteration = GetValue$1e(radiusConfig, 'iteration', undefined);
+      _this.setIteration(iteration);
+      _this.setPosition(x, y);
+      _this.setFillStyle(fillColor, fillAlpha);
+      if (strokeColor !== undefined && strokeWidth === undefined) {
+        strokeWidth = 2;
+      }
+      _this.setStrokeStyle(strokeWidth, strokeColor, strokeAlpha);
+      _this.updateDisplayOrigin();
+      _this.dirty = true;
+      return _this;
+    }
+    _createClass(RoundRectangle, [{
       key: "updateData",
       value: function updateData() {
         var geom = this.geom;
@@ -17736,22 +17784,6 @@
         return this;
       }
     }, {
-      key: "width",
-      get: function get() {
-        return this.geom.width;
-      },
-      set: function set(value) {
-        this.resize(value, this.height);
-      }
-    }, {
-      key: "height",
-      get: function get() {
-        return this.geom.height;
-      },
-      set: function set(value) {
-        this.resize(this.width, value);
-      }
-    }, {
       key: "setSize",
       value: function setSize(width, height) {
         // Override Shape's setSize method
@@ -17770,17 +17802,7 @@
         }
         this.updateDisplayOrigin();
         this.dirty = true;
-        var input = this.input;
-        if (input && !input.customHitArea) {
-          input.hitArea.width = width;
-          input.hitArea.height = height;
-        }
-        return this;
-      }
-    }, {
-      key: "resize",
-      value: function resize(width, height) {
-        this.setSize(width, height);
+        _get(_getPrototypeOf(RoundRectangle.prototype), "setSize", this).call(this, width, height);
         return this;
       }
     }, {
@@ -17917,7 +17939,7 @@
       }
     }]);
     return RoundRectangle;
-  }(Shape$1);
+  }(PolygnBase);
   var IsArcCorner = function IsArcCorner(radius) {
     return radius.x > 0 && radius.y > 0;
   };
@@ -17925,7 +17947,6 @@
     rectangle: 0,
     circle: 1
   };
-  Object.assign(RoundRectangle$1.prototype, Render$2);
 
   var ExtractByPrefix = function ExtractByPrefix(obj, prefix, delimiter, out) {
     if (delimiter === undefined) {

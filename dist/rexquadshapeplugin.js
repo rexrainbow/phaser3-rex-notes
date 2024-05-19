@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexroundrectangleplugin = factory());
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexquadshapeplugin = factory());
 })(this, (function () { 'use strict';
 
   function _callSuper(t, o, e) {
@@ -102,29 +102,6 @@
       throw new TypeError("Derived constructors may only return object or undefined");
     }
     return _assertThisInitialized(self);
-  }
-  function _superPropBase(object, property) {
-    while (!Object.prototype.hasOwnProperty.call(object, property)) {
-      object = _getPrototypeOf(object);
-      if (object === null) break;
-    }
-    return object;
-  }
-  function _get() {
-    if (typeof Reflect !== "undefined" && Reflect.get) {
-      _get = Reflect.get.bind();
-    } else {
-      _get = function _get(target, property, receiver) {
-        var base = _superPropBase(target, property);
-        if (!base) return;
-        var desc = Object.getOwnPropertyDescriptor(base, property);
-        if (desc.get) {
-          return desc.get.call(arguments.length < 3 ? target : receiver);
-        }
-        return desc.value;
-      };
-    }
-    return _get.apply(this, arguments);
   }
 
   /*
@@ -402,10 +379,9 @@
   }(Shape);
   Object.assign(PolygnBase.prototype, Render);
 
-  var GetValue$2 = Phaser.Utils.Objects.GetValue;
-  var RoundRectangle$1 = /*#__PURE__*/function () {
-    function RoundRectangle(x, y, width, height, radiusConfig) {
-      _classCallCheck(this, RoundRectangle);
+  var QuadGeom = /*#__PURE__*/function () {
+    function QuadGeom(x, y, width, height) {
+      _classCallCheck(this, QuadGeom);
       if (x === undefined) {
         x = 0;
       }
@@ -418,19 +394,20 @@
       if (height === undefined) {
         height = 0;
       }
-      if (radiusConfig === undefined) {
-        radiusConfig = 0;
-      }
-      this.cornerRadius = {};
-      this._width = 0;
-      this._height = 0;
-      this.setTo(x, y, width, height, radiusConfig);
+      this.setTo(x, y, width, height);
+      this.tlx = 0;
+      this.tly = 0;
+      this.trx = 0;
+      this["try"] = 0;
+      this.blx = 0;
+      this.bly = 0;
+      this.brx = 0;
+      this.bry = 0;
     }
-    _createClass(RoundRectangle, [{
+    _createClass(QuadGeom, [{
       key: "setTo",
-      value: function setTo(x, y, width, height, radiusConfig) {
+      value: function setTo(x, y, width, height) {
         this.setPosition(x, y);
-        this.setRadius(radiusConfig);
         this.setSize(width, height);
         return this;
       }
@@ -442,15 +419,6 @@
         return this;
       }
     }, {
-      key: "setRadius",
-      value: function setRadius(value) {
-        if (value === undefined) {
-          value = 0;
-        }
-        this.radius = value;
-        return this;
-      }
-    }, {
       key: "setSize",
       value: function setSize(width, height) {
         this.width = width;
@@ -458,129 +426,42 @@
         return this;
       }
     }, {
-      key: "minWidth",
-      get: function get() {
-        var radius = this.cornerRadius;
-        return Math.max(radius.tl.x + radius.tr.x, radius.bl.x + radius.br.x);
+      key: "setTLPosition",
+      value: function setTLPosition(x, y) {
+        this.tlx = x;
+        this.tly = y;
+        return this;
       }
     }, {
-      key: "minHeight",
-      get: function get() {
-        var radius = this.cornerRadius;
-        return Math.max(radius.tl.y + radius.bl.y, radius.tr.y + radius.br.y);
+      key: "setTRPosition",
+      value: function setTRPosition(x, y) {
+        this.trx = x;
+        this["try"] = y;
+        return this;
       }
     }, {
-      key: "width",
-      get: function get() {
-        return this._width;
-      },
-      set: function set(value) {
-        if (value == null) {
-          value = 0;
-        }
-        this._width = Math.max(value, this.minWidth);
+      key: "setBLPosition",
+      value: function setBLPosition(x, y) {
+        this.blx = x;
+        this.bly = y;
+        return this;
       }
     }, {
-      key: "height",
-      get: function get() {
-        return this._height;
-      },
-      set: function set(value) {
-        if (value == null) {
-          value = 0;
-        }
-        this._height = Math.max(value, this.minHeight);
+      key: "setBRPosition",
+      value: function setBRPosition(x, y) {
+        this.brx = x;
+        this.bry = y;
+        return this;
       }
     }, {
-      key: "radius",
-      get: function get() {
-        var radius = this.cornerRadius;
-        return Math.max(radius.tl.x, radius.tl.y, radius.tr.x, radius.tr.y, radius.bl.x, radius.bl.y, radius.br.x, radius.br.y);
-      },
-      set: function set(value) {
-        var defaultRadiusX, defaultRadiusY;
-        if (typeof value === 'number') {
-          defaultRadiusX = value;
-          defaultRadiusY = value;
-        } else {
-          defaultRadiusX = GetValue$2(value, 'x', 0);
-          defaultRadiusY = GetValue$2(value, 'y', 0);
-        }
-        var radius = this.cornerRadius;
-        radius.tl = GetRadius(GetValue$2(value, 'tl', undefined), defaultRadiusX, defaultRadiusY);
-        radius.tr = GetRadius(GetValue$2(value, 'tr', undefined), defaultRadiusX, defaultRadiusY);
-        radius.bl = GetRadius(GetValue$2(value, 'bl', undefined), defaultRadiusX, defaultRadiusY);
-        radius.br = GetRadius(GetValue$2(value, 'br', undefined), defaultRadiusX, defaultRadiusY);
-      }
-    }, {
-      key: "radiusTL",
-      get: function get() {
-        var radius = this.cornerRadius.tl;
-        return Math.max(radius.x, radius.y);
-      },
-      set: function set(value) {
-        SetRadius(this.cornerRadius.tl, value);
-      }
-    }, {
-      key: "radiusTR",
-      get: function get() {
-        var radius = this.cornerRadius.tr;
-        return Math.max(radius.x, radius.y);
-      },
-      set: function set(value) {
-        SetRadius(this.cornerRadius.tr, value);
-      }
-    }, {
-      key: "radiusBL",
-      get: function get() {
-        var radius = this.cornerRadius.bl;
-        return Math.max(radius.x, radius.y);
-      },
-      set: function set(value) {
-        SetRadius(this.cornerRadius.bl, value);
-      }
-    }, {
-      key: "radiusBR",
-      get: function get() {
-        var radius = this.cornerRadius.br;
-        return Math.max(radius.x, radius.y);
-      },
-      set: function set(value) {
-        SetRadius(this.cornerRadius.br, value);
+      key: "resetCornerPosition",
+      value: function resetCornerPosition() {
+        this.setTLPosition(0, 0).setTRPosition(0, 0).setBLPosition(0, 0).setBRPosition(0, 0);
+        return this;
       }
     }]);
-    return RoundRectangle;
+    return QuadGeom;
   }();
-  var GetRadius = function GetRadius(radius, defaultRadiusX, defaultRadiusY) {
-    if (radius === undefined) {
-      radius = {
-        x: defaultRadiusX,
-        y: defaultRadiusY
-      };
-    } else if (typeof radius === 'number') {
-      radius = {
-        x: radius,
-        y: radius
-      };
-    }
-    SetConvex(radius);
-    return radius;
-  };
-  var SetRadius = function SetRadius(radius, value) {
-    if (typeof value === 'number') {
-      radius.x = value;
-      radius.y = value;
-    } else {
-      radius.x = GetValue$2(value, 'x', 0);
-      radius.y = GetValue$2(value, 'y', 0);
-    }
-    SetConvex(radius);
-  };
-  var SetConvex = function SetConvex(radius) {
-    radius.convex = radius.x >= 0 || radius.y >= 0;
-    radius.x = Math.abs(radius.x);
-    radius.y = Math.abs(radius.y);
-  };
 
   var LineTo = function LineTo(x, y, pathData) {
     var cnt = pathData.length;
@@ -595,48 +476,25 @@
     return pathData;
   };
 
-  var DegToRad = Phaser.Math.DegToRad;
-  var ArcTo = function ArcTo(centerX, centerY, radiusX, radiusY, startAngle, endAngle, antiClockWise, iteration, pathData) {
-    // startAngle, endAngle: 0 ~ 360
-    if (antiClockWise && endAngle > startAngle) {
-      endAngle -= 360;
-    } else if (!antiClockWise && endAngle < startAngle) {
-      endAngle += 360;
-    }
-    var deltaAngle = endAngle - startAngle;
-    var step = DegToRad(deltaAngle) / iteration;
-    startAngle = DegToRad(startAngle);
-    for (var i = 0; i <= iteration; i++) {
-      var angle = startAngle + step * i;
-      var x = centerX + radiusX * Math.cos(angle);
-      var y = centerY + radiusY * Math.sin(angle);
-      LineTo(x, y, pathData);
-    }
-    return pathData;
-  };
-
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$1 = Phaser.Utils.Objects.GetValue;
   var Earcut = Phaser.Geom.Polygon.Earcut;
-  var RoundRectangle = /*#__PURE__*/function (_PolygnBase) {
-    _inherits(RoundRectangle, _PolygnBase);
-    function RoundRectangle(scene, x, y, width, height, radiusConfig, fillColor, fillAlpha) {
+  var Quad = /*#__PURE__*/function (_PolygnBase) {
+    _inherits(Quad, _PolygnBase);
+    function Quad(scene, x, y, width, height, fillColor, fillAlpha) {
       var _this;
-      _classCallCheck(this, RoundRectangle);
-      var strokeColor, strokeAlpha, strokeWidth, shapeType;
+      _classCallCheck(this, Quad);
+      var strokeColor, strokeAlpha, strokeWidth;
       if (IsPlainObject(x)) {
         var config = x;
         x = config.x;
         y = config.y;
         width = config.width;
         height = config.height;
-        radiusConfig = config.radius;
         fillColor = config.color;
         fillAlpha = config.alpha;
         strokeColor = config.strokeColor;
         strokeAlpha = config.strokeAlpha;
         strokeWidth = config.strokeWidth;
-        shapeType = config.shape;
       }
       if (x === undefined) {
         x = 0;
@@ -650,27 +508,9 @@
       if (height === undefined) {
         height = width;
       }
-      if (radiusConfig === undefined) {
-        radiusConfig = 0;
-      }
-      if (shapeType === undefined) {
-        shapeType = 0;
-      }
-      var geom = new RoundRectangle$1(); // Configurate it later
-      _this = _callSuper(this, RoundRectangle, [scene, 'rexRoundRectangleShape', geom]);
-      _this.setShapeType(shapeType);
-      if (_this.shapeType === 0) {
-        var radius = GetValue$1(radiusConfig, 'radius', radiusConfig);
-        geom.setTo(0, 0, width, height, radius);
-      } else {
-        var radius = {
-          x: width / 2,
-          y: height / 2
-        };
-        geom.setTo(0, 0, width, height, radius);
-      }
-      var iteration = GetValue$1(radiusConfig, 'iteration', undefined);
-      _this.setIteration(iteration);
+      var geom = new QuadGeom(); // Configurate it later
+      _this = _callSuper(this, Quad, [scene, 'rexQuadShape', geom]);
+      geom.setTo(0, 0, width, height);
       _this.setPosition(x, y);
       _this.setFillStyle(fillColor, fillAlpha);
       if (strokeColor !== undefined && strokeWidth === undefined) {
@@ -681,267 +521,143 @@
       _this.dirty = true;
       return _this;
     }
-    _createClass(RoundRectangle, [{
+    _createClass(Quad, [{
       key: "updateData",
       value: function updateData() {
         var geom = this.geom;
         var pathData = this.pathData;
         pathData.length = 0;
         var width = geom.width,
-          height = geom.height,
-          cornerRadius = geom.cornerRadius,
-          radius,
-          iteration = this.iteration + 1;
-
-        // Top-left
-        radius = cornerRadius.tl;
-        if (IsArcCorner(radius)) {
-          if (radius.convex) {
-            var centerX = radius.x;
-            var centerY = radius.y;
-            ArcTo(centerX, centerY, radius.x, radius.y, 180, 270, false, iteration, pathData);
-          } else {
-            var centerX = 0;
-            var centerY = 0;
-            ArcTo(centerX, centerY, radius.x, radius.y, 90, 0, true, iteration, pathData);
-          }
-        } else {
-          LineTo(0, 0, pathData);
-        }
-
-        // Top-right
-        radius = cornerRadius.tr;
-        if (IsArcCorner(radius)) {
-          if (radius.convex) {
-            var centerX = width - radius.x;
-            var centerY = radius.y;
-            ArcTo(centerX, centerY, radius.x, radius.y, 270, 360, false, iteration, pathData);
-          } else {
-            var centerX = width;
-            var centerY = 0;
-            ArcTo(centerX, centerY, radius.x, radius.y, 180, 90, true, iteration, pathData);
-          }
-        } else {
-          LineTo(width, 0, pathData);
-        }
-
-        // Bottom-right
-        radius = cornerRadius.br;
-        if (IsArcCorner(radius)) {
-          if (radius.convex) {
-            var centerX = width - radius.x;
-            var centerY = height - radius.y;
-            ArcTo(centerX, centerY, radius.x, radius.y, 0, 90, false, iteration, pathData);
-          } else {
-            var centerX = width;
-            var centerY = height;
-            ArcTo(centerX, centerY, radius.x, radius.y, 270, 180, true, iteration, pathData);
-          }
-        } else {
-          LineTo(width, height, pathData);
-        }
-
-        // Bottom-left
-        radius = cornerRadius.bl;
-        if (IsArcCorner(radius)) {
-          if (radius.convex) {
-            var centerX = radius.x;
-            var centerY = height - radius.y;
-            ArcTo(centerX, centerY, radius.x, radius.y, 90, 180, false, iteration, pathData);
-          } else {
-            var centerX = 0;
-            var centerY = height;
-            ArcTo(centerX, centerY, radius.x, radius.y, 360, 270, true, iteration, pathData);
-          }
-        } else {
-          LineTo(0, height, pathData);
-        }
+          height = geom.height;
+        var tlx = 0 + geom.tlx;
+        var tly = 0 + geom.tly;
+        var trx = width + geom.trx;
+        var try_ = 0 + geom["try"];
+        var brx = width + geom.brx;
+        var bry = height + geom.bry;
+        var blx = 0 + geom.blx;
+        var bly = height + geom.bly;
+        LineTo(tlx, tly, pathData);
+        LineTo(trx, try_, pathData);
+        LineTo(brx, bry, pathData);
+        LineTo(blx, bly, pathData);
         pathData.push(pathData[0], pathData[1]); // Repeat first point to close curve
         this.pathIndexes = Earcut(pathData);
         return this;
       }
     }, {
-      key: "setShapeType",
-      value: function setShapeType(shapeType) {
-        if (typeof shapeType === 'string') {
-          shapeType = ShapeTypeMap[shapeType];
-        }
-        this.shapeType = shapeType;
-        return this;
-      }
-    }, {
-      key: "setSize",
-      value: function setSize(width, height) {
-        // Override Shape's setSize method
-        if (height === undefined) {
-          height = width;
-        }
-        if (this.geom.width === width && this.geom.height === height) {
-          return this;
-        }
-        this.geom.setSize(width, height);
-        if (this.shapeType === 1) {
-          this.setRadius({
-            x: width / 2,
-            y: height / 2
-          });
-        }
-        this.updateDisplayOrigin();
-        this.dirty = true;
-        _get(_getPrototypeOf(RoundRectangle.prototype), "setSize", this).call(this, width, height);
-        return this;
-      }
-    }, {
-      key: "radius",
+      key: "tlx",
       get: function get() {
-        return this.geom.radius;
+        return this.geom.tlx;
       },
       set: function set(value) {
-        this.geom.setRadius(value);
-        this.updateDisplayOrigin();
+        this.geom.tlx = value;
         this.dirty = true;
       }
     }, {
-      key: "radiusTL",
+      key: "tly",
       get: function get() {
-        return this.geom.radiusTL;
+        return this.geom.tly;
       },
       set: function set(value) {
-        this.geom.radiusTL = value;
+        this.geom.tly = value;
         this.dirty = true;
       }
     }, {
-      key: "radiusTR",
+      key: "trx",
       get: function get() {
-        return this.geom.radiusTR;
+        return this.geom.trx;
       },
       set: function set(value) {
-        this.geom.radiusTR = value;
+        this.geom.trx = value;
         this.dirty = true;
       }
     }, {
-      key: "radiusBL",
+      key: "try",
       get: function get() {
-        return this.geom.radiusBL;
+        return this.geom["try"];
       },
       set: function set(value) {
-        this.geom.radiusBL = value;
+        this.geom["try"] = value;
         this.dirty = true;
       }
     }, {
-      key: "radiusBR",
+      key: "blx",
       get: function get() {
-        return this.geom.radiusBR;
+        return this.geom.blx;
       },
       set: function set(value) {
-        this.geom.radiusBR = value;
+        this.geom.blx = value;
         this.dirty = true;
       }
     }, {
-      key: "setRadius",
-      value: function setRadius(value) {
-        if (value === undefined) {
-          value = 0;
-        }
-        this.radius = value;
-        return this;
-      }
-    }, {
-      key: "setRadiusTL",
-      value: function setRadiusTL(value) {
-        if (value === undefined) {
-          value = 0;
-        }
-        this.radiusTL = value;
-        return this;
-      }
-    }, {
-      key: "setRadiusTR",
-      value: function setRadiusTR(value) {
-        if (value === undefined) {
-          value = 0;
-        }
-        this.radiusTR = value;
-        return this;
-      }
-    }, {
-      key: "setRadiusBL",
-      value: function setRadiusBL(value) {
-        if (value === undefined) {
-          value = 0;
-        }
-        this.radiusBL = value;
-        return this;
-      }
-    }, {
-      key: "setRadiusBR",
-      value: function setRadiusBR(value) {
-        if (value === undefined) {
-          value = 0;
-        }
-        this.radiusBR = value;
-        return this;
-      }
-    }, {
-      key: "cornerRadius",
+      key: "bly",
       get: function get() {
-        return this.geom.cornerRadius;
+        return this.geom.bly;
       },
       set: function set(value) {
-        this.radius = value;
-      }
-    }, {
-      key: "setCornerRadius",
-      value: function setCornerRadius(value) {
-        return this.setRadius(value);
-      }
-    }, {
-      key: "iteration",
-      get: function get() {
-        return this._iteration;
-      },
-      set: function set(value) {
-        // Set iteration first time
-        if (this._iteration === undefined) {
-          this._iteration = value;
-          return;
-        }
-
-        // Change iteration value
-        if (this._iteration === value) {
-          return;
-        }
-        this._iteration = value;
+        this.geom.bly = value;
         this.dirty = true;
       }
     }, {
-      key: "setIteration",
-      value: function setIteration(iteration) {
-        if (iteration === undefined) {
-          iteration = 6;
-        }
-        this.iteration = iteration;
+      key: "brx",
+      get: function get() {
+        return this.geom.brx;
+      },
+      set: function set(value) {
+        this.geom.brx = value;
+        this.dirty = true;
+      }
+    }, {
+      key: "bry",
+      get: function get() {
+        return this.geom.bry;
+      },
+      set: function set(value) {
+        this.geom.bry = value;
+        this.dirty = true;
+      }
+    }, {
+      key: "setTLPosition",
+      value: function setTLPosition(x, y) {
+        this.geom.setTLPosition(x, y);
+        return this;
+      }
+    }, {
+      key: "setTRPosition",
+      value: function setTRPosition(x, y) {
+        this.geom.setTRPosition(x, y);
+        return this;
+      }
+    }, {
+      key: "setBLPosition",
+      value: function setBLPosition(x, y) {
+        this.geom.setBLPosition(x, y);
+        return this;
+      }
+    }, {
+      key: "setBRPosition",
+      value: function setBRPosition(x, y) {
+        this.geom.setBRPosition(x, y);
+        return this;
+      }
+    }, {
+      key: "resetCornerPosition",
+      value: function resetCornerPosition() {
+        this.geom.resetCornerPosition();
         return this;
       }
     }]);
-    return RoundRectangle;
+    return Quad;
   }(PolygnBase);
-  var IsArcCorner = function IsArcCorner(radius) {
-    return radius.x > 0 && radius.y > 0;
-  };
-  var ShapeTypeMap = {
-    rectangle: 0,
-    circle: 1
-  };
 
-  function Factory (x, y, width, height, radiusConfig, fillColor, fillAlpha) {
-    var gameObject = new RoundRectangle(this.scene, x, y, width, height, radiusConfig, fillColor, fillAlpha);
+  function Factory (x, y, width, height, fillColor, fillAlpha) {
+    var gameObject = new Quad(this.scene, x, y, width, height, fillColor, fillAlpha);
     this.scene.add.existing(gameObject);
     return gameObject;
   }
 
   var GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
-  var GetValue = Phaser.Utils.Objects.GetValue;
   var BuildGameObject = Phaser.GameObjects.BuildGameObject;
   function Creator (config, addToScene) {
     if (config === undefined) {
@@ -952,10 +668,9 @@
     }
     var width = GetAdvancedValue(config, 'width', undefined);
     var height = GetAdvancedValue(config, 'height', width);
-    var radiusConfig = GetValue(config, 'radius', undefined);
     var fillColor = GetAdvancedValue(config, 'fillColor', undefined);
     var fillAlpha = GetAdvancedValue(config, 'fillAlpha', undefined);
-    var gameObject = new RoundRectangle(this.scene, 0, 0, width, height, radiusConfig, fillColor, fillAlpha);
+    var gameObject = new Quad(this.scene, 0, 0, width, height, fillColor, fillAlpha);
     BuildGameObject(this.scene, gameObject, config);
     return gameObject;
   }
@@ -1021,28 +736,28 @@
     return target;
   };
 
-  var RoundRectanglePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
-    _inherits(RoundRectanglePlugin, _Phaser$Plugins$BaseP);
-    function RoundRectanglePlugin(pluginManager) {
+  var QuadPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
+    _inherits(QuadPlugin, _Phaser$Plugins$BaseP);
+    function QuadPlugin(pluginManager) {
       var _this;
-      _classCallCheck(this, RoundRectanglePlugin);
-      _this = _callSuper(this, RoundRectanglePlugin, [pluginManager]);
+      _classCallCheck(this, QuadPlugin);
+      _this = _callSuper(this, QuadPlugin, [pluginManager]);
 
       //  Register our new Game Object type
-      pluginManager.registerGameObject('rexRoundRectangle', Factory, Creator);
+      pluginManager.registerGameObject('rexQuadShape', Factory, Creator);
       return _this;
     }
-    _createClass(RoundRectanglePlugin, [{
+    _createClass(QuadPlugin, [{
       key: "start",
       value: function start() {
         var eventEmitter = this.game.events;
         eventEmitter.on('destroy', this.destroy, this);
       }
     }]);
-    return RoundRectanglePlugin;
+    return QuadPlugin;
   }(Phaser.Plugins.BasePlugin);
-  SetValue(window, 'RexPlugins.GameObjects.RoundRectangle', RoundRectangle);
+  SetValue(window, 'RexPlugins.GameObjects.QuadShape', Quad);
 
-  return RoundRectanglePlugin;
+  return QuadPlugin;
 
 }));

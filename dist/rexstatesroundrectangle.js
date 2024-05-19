@@ -103,6 +103,304 @@
     }
     return _assertThisInitialized(self);
   }
+  function _superPropBase(object, property) {
+    while (!Object.prototype.hasOwnProperty.call(object, property)) {
+      object = _getPrototypeOf(object);
+      if (object === null) break;
+    }
+    return object;
+  }
+  function _get() {
+    if (typeof Reflect !== "undefined" && Reflect.get) {
+      _get = Reflect.get.bind();
+    } else {
+      _get = function _get(target, property, receiver) {
+        var base = _superPropBase(target, property);
+        if (!base) return;
+        var desc = Object.getOwnPropertyDescriptor(base, property);
+        if (desc.get) {
+          return desc.get.call(arguments.length < 3 ? target : receiver);
+        }
+        return desc.value;
+      };
+    }
+    return _get.apply(this, arguments);
+  }
+
+  /*
+  src: {
+      fillColor, 
+      fillAlpha, 
+      pathData, 
+      pathIndexes  // Earcut(pathData)
+  }
+  */
+
+  var Utils$1 = Phaser.Renderer.WebGL.Utils;
+  var FillPathWebGL = function FillPathWebGL(pipeline, calcMatrix, src, alpha, dx, dy) {
+    var fillTintColor = Utils$1.getTintAppendFloatAlpha(src.fillColor, src.fillAlpha * alpha);
+    var path = src.pathData;
+    var pathIndexes = src.pathIndexes;
+    for (var i = 0; i < pathIndexes.length; i += 3) {
+      var p0 = pathIndexes[i] * 2;
+      var p1 = pathIndexes[i + 1] * 2;
+      var p2 = pathIndexes[i + 2] * 2;
+      var x0 = path[p0 + 0] - dx;
+      var y0 = path[p0 + 1] - dy;
+      var x1 = path[p1 + 0] - dx;
+      var y1 = path[p1 + 1] - dy;
+      var x2 = path[p2 + 0] - dx;
+      var y2 = path[p2 + 1] - dy;
+      var tx0 = calcMatrix.getX(x0, y0);
+      var ty0 = calcMatrix.getY(x0, y0);
+      var tx1 = calcMatrix.getX(x1, y1);
+      var ty1 = calcMatrix.getY(x1, y1);
+      var tx2 = calcMatrix.getX(x2, y2);
+      var ty2 = calcMatrix.getY(x2, y2);
+      pipeline.batchTri(src, tx0, ty0, tx1, ty1, tx2, ty2, 0, 0, 1, 1, fillTintColor, fillTintColor, fillTintColor, 2);
+    }
+  };
+
+  /*
+  src: {
+      strokeColor,
+      strokeAlpha,
+      pathData,
+      lineWidth,
+      closePath
+  }
+  */
+  var Utils = Phaser.Renderer.WebGL.Utils;
+  var StrokePathWebGL = function StrokePathWebGL(pipeline, src, alpha, dx, dy) {
+    var strokeTint = pipeline.strokeTint;
+    var strokeTintColor = Utils.getTintAppendFloatAlpha(src.strokeColor, src.strokeAlpha * alpha);
+    strokeTint.TL = strokeTintColor;
+    strokeTint.TR = strokeTintColor;
+    strokeTint.BL = strokeTintColor;
+    strokeTint.BR = strokeTintColor;
+    var path = src.pathData;
+    var pathLength = path.length - 1;
+    var lineWidth = src.lineWidth;
+    var halfLineWidth = lineWidth / 2;
+    var px1 = path[0] - dx;
+    var py1 = path[1] - dy;
+    if (!src.closePath) {
+      pathLength -= 2;
+    }
+    for (var i = 2; i < pathLength; i += 2) {
+      var px2 = path[i] - dx;
+      var py2 = path[i + 1] - dy;
+      pipeline.batchLine(px1, py1, px2, py2, halfLineWidth, halfLineWidth, lineWidth, i - 2, src.closePath ? i === pathLength - 1 : false);
+      px1 = px2;
+      py1 = py2;
+    }
+  };
+
+  var GetCalcMatrix = Phaser.GameObjects.GetCalcMatrix;
+  var PolygonWebGLRenderer = function PolygonWebGLRenderer(renderer, src, camera, parentMatrix) {
+    if (src.dirty) {
+      src.updateData();
+      src.dirty = false;
+    }
+    camera.addToRenderList(src);
+    var pipeline = renderer.pipelines.set(src.pipeline);
+    var result = GetCalcMatrix(src, camera, parentMatrix);
+    var calcMatrix = pipeline.calcMatrix.copyFrom(result.calc);
+    var dx = src._displayOriginX;
+    var dy = src._displayOriginY;
+    var alpha = camera.alpha * src.alpha;
+    renderer.pipelines.preBatch(src);
+    if (src.isFilled) {
+      FillPathWebGL(pipeline, calcMatrix, src, alpha, dx, dy);
+    }
+    if (src.isStroked) {
+      StrokePathWebGL(pipeline, src, alpha, dx, dy);
+    }
+    renderer.pipelines.postBatch(src);
+  };
+
+  var FillStyleCanvas = function FillStyleCanvas(ctx, src, altColor, altAlpha) {
+    var fillColor = altColor ? altColor : src.fillColor;
+    var fillAlpha = altAlpha ? altAlpha : src.fillAlpha;
+    var red = (fillColor & 0xFF0000) >>> 16;
+    var green = (fillColor & 0xFF00) >>> 8;
+    var blue = fillColor & 0xFF;
+    ctx.fillStyle = 'rgba(' + red + ',' + green + ',' + blue + ',' + fillAlpha + ')';
+  };
+
+  var LineStyleCanvas = function LineStyleCanvas(ctx, src, altColor, altAlpha) {
+    var strokeColor = altColor ? altColor : src.strokeColor;
+    var strokeAlpha = altAlpha ? altAlpha : src.strokeAlpha;
+    var red = (strokeColor & 0xFF0000) >>> 16;
+    var green = (strokeColor & 0xFF00) >>> 8;
+    var blue = strokeColor & 0xFF;
+    ctx.strokeStyle = 'rgba(' + red + ',' + green + ',' + blue + ',' + strokeAlpha + ')';
+    ctx.lineWidth = src.lineWidth;
+  };
+
+  var SetTransform = Phaser.Renderer.Canvas.SetTransform;
+  var PolygonCanvasRenderer = function PolygonCanvasRenderer(renderer, src, camera, parentMatrix) {
+    if (src.dirty) {
+      src.updateData();
+      src.dirty = false;
+    }
+    camera.addToRenderList(src);
+    var ctx = renderer.currentContext;
+    if (SetTransform(renderer, ctx, src, camera, parentMatrix)) {
+      var dx = src._displayOriginX;
+      var dy = src._displayOriginY;
+      var path = src.pathData;
+      var pathLength = path.length - 1;
+      var px1 = path[0] - dx;
+      var py1 = path[1] - dy;
+      ctx.beginPath();
+      ctx.moveTo(px1, py1);
+      if (!src.closePath) {
+        pathLength -= 2;
+      }
+      for (var i = 2; i < pathLength; i += 2) {
+        var px2 = path[i] - dx;
+        var py2 = path[i + 1] - dy;
+        ctx.lineTo(px2, py2);
+      }
+      ctx.closePath();
+      if (src.isFilled) {
+        FillStyleCanvas(ctx, src);
+        ctx.fill();
+      }
+      if (src.isStroked) {
+        LineStyleCanvas(ctx, src);
+        ctx.stroke();
+      }
+
+      //  Restore the context saved in SetTransform
+      ctx.restore();
+    }
+  };
+
+  var Render = {
+    renderWebGL: PolygonWebGLRenderer,
+    renderCanvas: PolygonCanvasRenderer
+  };
+
+  var Shape = Phaser.GameObjects.Shape;
+  var PolygnBase = /*#__PURE__*/function (_Shape) {
+    _inherits(PolygnBase, _Shape);
+    function PolygnBase() {
+      _classCallCheck(this, PolygnBase);
+      return _callSuper(this, PolygnBase, arguments);
+    }
+    _createClass(PolygnBase, [{
+      key: "fillColor",
+      get: function get() {
+        return this._fillColor;
+      },
+      set: function set(value) {
+        this._fillColor = value;
+        this.isFilled = value != null && this._fillAlpha > 0;
+      }
+    }, {
+      key: "fillAlpha",
+      get: function get() {
+        return this._fillAlpha;
+      },
+      set: function set(value) {
+        this._fillAlpha = value;
+        this.isFilled = value > 0 && this._fillColor != null;
+      }
+
+      // Fully override setFillStyle method
+    }, {
+      key: "setFillStyle",
+      value: function setFillStyle(color, alpha) {
+        if (alpha === undefined) {
+          alpha = 1;
+        }
+        this.fillColor = color;
+        this.fillAlpha = alpha;
+        return this;
+      }
+    }, {
+      key: "strokeColor",
+      get: function get() {
+        return this._strokeColor;
+      },
+      set: function set(value) {
+        this._strokeColor = value;
+        this.isStroked = value != null && this._strokeAlpha > 0 && this._lineWidth > 0;
+      }
+    }, {
+      key: "strokeAlpha",
+      get: function get() {
+        return this._strokeAlpha;
+      },
+      set: function set(value) {
+        this._strokeAlpha = value;
+        this.isStroked = value > 0 && this._strokeColor != null && this._lineWidth > 0;
+      }
+    }, {
+      key: "lineWidth",
+      get: function get() {
+        return this._lineWidth;
+      },
+      set: function set(value) {
+        this._lineWidth = value;
+        this.isStroked = value > 0 && this._strokeColor != null;
+      }
+
+      // Fully override setStrokeStyle method
+    }, {
+      key: "setStrokeStyle",
+      value: function setStrokeStyle(lineWidth, color, alpha) {
+        if (alpha === undefined) {
+          alpha = 1;
+        }
+        this.lineWidth = lineWidth;
+        this.strokeColor = color;
+        this.strokeAlpha = alpha;
+        return this;
+      }
+    }, {
+      key: "updateData",
+      value: function updateData() {
+        return this;
+      }
+    }, {
+      key: "width",
+      get: function get() {
+        return this.geom.width;
+      },
+      set: function set(value) {
+        this.resize(value, this.height);
+      }
+    }, {
+      key: "height",
+      get: function get() {
+        return this.geom.height;
+      },
+      set: function set(value) {
+        this.resize(this.width, value);
+      }
+    }, {
+      key: "setSize",
+      value: function setSize(width, height) {
+        var input = this.input;
+        if (input && !input.customHitArea) {
+          input.hitArea.width = width;
+          input.hitArea.height = height;
+        }
+        return this;
+      }
+    }, {
+      key: "resize",
+      value: function resize(width, height) {
+        this.setSize(width, height);
+        return this;
+      }
+    }]);
+    return PolygnBase;
+  }(Shape);
+  Object.assign(PolygnBase.prototype, Render);
 
   var GetValue$3 = Phaser.Utils.Objects.GetValue;
   var RoundRectangle$1 = /*#__PURE__*/function () {
@@ -317,168 +615,11 @@
     return pathData;
   };
 
-  /*
-  src: {
-      fillColor, 
-      fillAlpha, 
-      pathData, 
-      pathIndexes  // Earcut(pathData)
-  }
-  */
-
-  var Utils$1 = Phaser.Renderer.WebGL.Utils;
-  var FillPathWebGL = function FillPathWebGL(pipeline, calcMatrix, src, alpha, dx, dy) {
-    var fillTintColor = Utils$1.getTintAppendFloatAlpha(src.fillColor, src.fillAlpha * alpha);
-    var path = src.pathData;
-    var pathIndexes = src.pathIndexes;
-    for (var i = 0; i < pathIndexes.length; i += 3) {
-      var p0 = pathIndexes[i] * 2;
-      var p1 = pathIndexes[i + 1] * 2;
-      var p2 = pathIndexes[i + 2] * 2;
-      var x0 = path[p0 + 0] - dx;
-      var y0 = path[p0 + 1] - dy;
-      var x1 = path[p1 + 0] - dx;
-      var y1 = path[p1 + 1] - dy;
-      var x2 = path[p2 + 0] - dx;
-      var y2 = path[p2 + 1] - dy;
-      var tx0 = calcMatrix.getX(x0, y0);
-      var ty0 = calcMatrix.getY(x0, y0);
-      var tx1 = calcMatrix.getX(x1, y1);
-      var ty1 = calcMatrix.getY(x1, y1);
-      var tx2 = calcMatrix.getX(x2, y2);
-      var ty2 = calcMatrix.getY(x2, y2);
-      pipeline.batchTri(src, tx0, ty0, tx1, ty1, tx2, ty2, 0, 0, 1, 1, fillTintColor, fillTintColor, fillTintColor, 2);
-    }
-  };
-
-  /*
-  src: {
-      strokeColor,
-      strokeAlpha,
-      pathData,
-      lineWidth,
-      closePath
-  }
-  */
-  var Utils = Phaser.Renderer.WebGL.Utils;
-  var StrokePathWebGL = function StrokePathWebGL(pipeline, src, alpha, dx, dy) {
-    var strokeTint = pipeline.strokeTint;
-    var strokeTintColor = Utils.getTintAppendFloatAlpha(src.strokeColor, src.strokeAlpha * alpha);
-    strokeTint.TL = strokeTintColor;
-    strokeTint.TR = strokeTintColor;
-    strokeTint.BL = strokeTintColor;
-    strokeTint.BR = strokeTintColor;
-    var path = src.pathData;
-    var pathLength = path.length - 1;
-    var lineWidth = src.lineWidth;
-    var halfLineWidth = lineWidth / 2;
-    var px1 = path[0] - dx;
-    var py1 = path[1] - dy;
-    if (!src.closePath) {
-      pathLength -= 2;
-    }
-    for (var i = 2; i < pathLength; i += 2) {
-      var px2 = path[i] - dx;
-      var py2 = path[i + 1] - dy;
-      pipeline.batchLine(px1, py1, px2, py2, halfLineWidth, halfLineWidth, lineWidth, i - 2, src.closePath ? i === pathLength - 1 : false);
-      px1 = px2;
-      py1 = py2;
-    }
-  };
-
-  var GetCalcMatrix = Phaser.GameObjects.GetCalcMatrix;
-  var PolygonWebGLRenderer = function PolygonWebGLRenderer(renderer, src, camera, parentMatrix) {
-    if (src.dirty) {
-      src.updateData();
-      src.dirty = false;
-    }
-    camera.addToRenderList(src);
-    var pipeline = renderer.pipelines.set(src.pipeline);
-    var result = GetCalcMatrix(src, camera, parentMatrix);
-    var calcMatrix = pipeline.calcMatrix.copyFrom(result.calc);
-    var dx = src._displayOriginX;
-    var dy = src._displayOriginY;
-    var alpha = camera.alpha * src.alpha;
-    renderer.pipelines.preBatch(src);
-    if (src.isFilled) {
-      FillPathWebGL(pipeline, calcMatrix, src, alpha, dx, dy);
-    }
-    if (src.isStroked) {
-      StrokePathWebGL(pipeline, src, alpha, dx, dy);
-    }
-    renderer.pipelines.postBatch(src);
-  };
-
-  var FillStyleCanvas = function FillStyleCanvas(ctx, src, altColor, altAlpha) {
-    var fillColor = altColor ? altColor : src.fillColor;
-    var fillAlpha = altAlpha ? altAlpha : src.fillAlpha;
-    var red = (fillColor & 0xFF0000) >>> 16;
-    var green = (fillColor & 0xFF00) >>> 8;
-    var blue = fillColor & 0xFF;
-    ctx.fillStyle = 'rgba(' + red + ',' + green + ',' + blue + ',' + fillAlpha + ')';
-  };
-
-  var LineStyleCanvas = function LineStyleCanvas(ctx, src, altColor, altAlpha) {
-    var strokeColor = altColor ? altColor : src.strokeColor;
-    var strokeAlpha = altAlpha ? altAlpha : src.strokeAlpha;
-    var red = (strokeColor & 0xFF0000) >>> 16;
-    var green = (strokeColor & 0xFF00) >>> 8;
-    var blue = strokeColor & 0xFF;
-    ctx.strokeStyle = 'rgba(' + red + ',' + green + ',' + blue + ',' + strokeAlpha + ')';
-    ctx.lineWidth = src.lineWidth;
-  };
-
-  var SetTransform = Phaser.Renderer.Canvas.SetTransform;
-  var PolygonCanvasRenderer = function PolygonCanvasRenderer(renderer, src, camera, parentMatrix) {
-    if (src.dirty) {
-      src.updateData();
-      src.dirty = false;
-    }
-    camera.addToRenderList(src);
-    var ctx = renderer.currentContext;
-    if (SetTransform(renderer, ctx, src, camera, parentMatrix)) {
-      var dx = src._displayOriginX;
-      var dy = src._displayOriginY;
-      var path = src.pathData;
-      var pathLength = path.length - 1;
-      var px1 = path[0] - dx;
-      var py1 = path[1] - dy;
-      ctx.beginPath();
-      ctx.moveTo(px1, py1);
-      if (!src.closePath) {
-        pathLength -= 2;
-      }
-      for (var i = 2; i < pathLength; i += 2) {
-        var px2 = path[i] - dx;
-        var py2 = path[i + 1] - dy;
-        ctx.lineTo(px2, py2);
-      }
-      ctx.closePath();
-      if (src.isFilled) {
-        FillStyleCanvas(ctx, src);
-        ctx.fill();
-      }
-      if (src.isStroked) {
-        LineStyleCanvas(ctx, src);
-        ctx.stroke();
-      }
-
-      //  Restore the context saved in SetTransform
-      ctx.restore();
-    }
-  };
-
-  var Render = {
-    renderWebGL: PolygonWebGLRenderer,
-    renderCanvas: PolygonCanvasRenderer
-  };
-
-  var Shape = Phaser.GameObjects.Shape;
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
   var Earcut = Phaser.Geom.Polygon.Earcut;
-  var RoundRectangle = /*#__PURE__*/function (_Shape) {
-    _inherits(RoundRectangle, _Shape);
+  var RoundRectangle = /*#__PURE__*/function (_PolygnBase) {
+    _inherits(RoundRectangle, _PolygnBase);
     function RoundRectangle(scene, x, y, width, height, radiusConfig, fillColor, fillAlpha) {
       var _this;
       _classCallCheck(this, RoundRectangle);
@@ -541,76 +682,6 @@
       return _this;
     }
     _createClass(RoundRectangle, [{
-      key: "fillColor",
-      get: function get() {
-        return this._fillColor;
-      },
-      set: function set(value) {
-        this._fillColor = value;
-        this.isFilled = value != null && this._fillAlpha > 0;
-      }
-    }, {
-      key: "fillAlpha",
-      get: function get() {
-        return this._fillAlpha;
-      },
-      set: function set(value) {
-        this._fillAlpha = value;
-        this.isFilled = value > 0 && this._fillColor != null;
-      }
-
-      // Fully override setFillStyle method
-    }, {
-      key: "setFillStyle",
-      value: function setFillStyle(color, alpha) {
-        if (alpha === undefined) {
-          alpha = 1;
-        }
-        this.fillColor = color;
-        this.fillAlpha = alpha;
-        return this;
-      }
-    }, {
-      key: "strokeColor",
-      get: function get() {
-        return this._strokeColor;
-      },
-      set: function set(value) {
-        this._strokeColor = value;
-        this.isStroked = value != null && this._strokeAlpha > 0 && this._lineWidth > 0;
-      }
-    }, {
-      key: "strokeAlpha",
-      get: function get() {
-        return this._strokeAlpha;
-      },
-      set: function set(value) {
-        this._strokeAlpha = value;
-        this.isStroked = value > 0 && this._strokeColor != null && this._lineWidth > 0;
-      }
-    }, {
-      key: "lineWidth",
-      get: function get() {
-        return this._lineWidth;
-      },
-      set: function set(value) {
-        this._lineWidth = value;
-        this.isStroked = value > 0 && this._strokeColor != null;
-      }
-
-      // Fully override setStrokeStyle method
-    }, {
-      key: "setStrokeStyle",
-      value: function setStrokeStyle(lineWidth, color, alpha) {
-        if (alpha === undefined) {
-          alpha = 1;
-        }
-        this.lineWidth = lineWidth;
-        this.strokeColor = color;
-        this.strokeAlpha = alpha;
-        return this;
-      }
-    }, {
       key: "updateData",
       value: function updateData() {
         var geom = this.geom;
@@ -699,22 +770,6 @@
         return this;
       }
     }, {
-      key: "width",
-      get: function get() {
-        return this.geom.width;
-      },
-      set: function set(value) {
-        this.resize(value, this.height);
-      }
-    }, {
-      key: "height",
-      get: function get() {
-        return this.geom.height;
-      },
-      set: function set(value) {
-        this.resize(this.width, value);
-      }
-    }, {
       key: "setSize",
       value: function setSize(width, height) {
         // Override Shape's setSize method
@@ -733,17 +788,7 @@
         }
         this.updateDisplayOrigin();
         this.dirty = true;
-        var input = this.input;
-        if (input && !input.customHitArea) {
-          input.hitArea.width = width;
-          input.hitArea.height = height;
-        }
-        return this;
-      }
-    }, {
-      key: "resize",
-      value: function resize(width, height) {
-        this.setSize(width, height);
+        _get(_getPrototypeOf(RoundRectangle.prototype), "setSize", this).call(this, width, height);
         return this;
       }
     }, {
@@ -880,7 +925,7 @@
       }
     }]);
     return RoundRectangle;
-  }(Shape);
+  }(PolygnBase);
   var IsArcCorner = function IsArcCorner(radius) {
     return radius.x > 0 && radius.y > 0;
   };
@@ -888,7 +933,6 @@
     rectangle: 0,
     circle: 1
   };
-  Object.assign(RoundRectangle.prototype, Render);
 
   var EventEmitterMethods = {
     setEventEmitter: function setEventEmitter(eventEmitter, EventEmitterClass) {
