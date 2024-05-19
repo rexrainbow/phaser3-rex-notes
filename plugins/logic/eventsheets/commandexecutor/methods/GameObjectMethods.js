@@ -46,12 +46,17 @@ export default {
         }
 
         var waitProperty;
-        for (var prop in config) {
-            var value = eventSheetManager.evalExpression(config[prop]);
-            this.sys.easeGameObjectProperty(goType, id, prop, value, duration, delay, ease, repeat, yoyo, from);
+        for (var property in config) {
+            var value = eventSheetManager.evalExpression(config[property]);
+            this.sys.easeGameObjectProperty(goType, id, {
+                property, value,
+                duration, delay,
+                ease,
+                repeat, yoyo, from
+            });
 
             if (!waitProperty) {
-                waitProperty = prop;
+                waitProperty = property;
             }
         }
         if (wait && waitProperty) {

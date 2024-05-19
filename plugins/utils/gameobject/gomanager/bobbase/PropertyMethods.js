@@ -18,17 +18,36 @@ export default {
         return this;
     },
 
-    easeProperty(
-        property, value, duration, delay,
-        ease,
-        repeat, isYoyo, isFrom,
-        onComplete, target
-    ) {
+    easeProperty(config) {
+        var property = config.property;
+        var value = config.value;
+        var duration = config.duration;
+        var delay = config.delay;
+        var ease = config.ease;
+        var repeat = config.repeat;
+        var isYoyo = config.yoyo;
+        var isFrom = config.from;
+        var onComplete = config.complete;
+        var target = config.target;
 
+        if (duration === undefined) {
+            duration = 1000;
+        }
+        if (delay === undefined) {
+            delay = 0;
+        }
+        if (ease === undefined) {
+            ease = 'Linear';
+        }
+        if (repeat === undefined) {
+            repeat = 0;
+        }
+        if (isYoyo === undefined) {
+            isYoyo = false;
+        }
         if (target === undefined) {
             target = this.gameObject;
         }
-
         if (isFrom) {
             var startValue = value;
             value = target[property];

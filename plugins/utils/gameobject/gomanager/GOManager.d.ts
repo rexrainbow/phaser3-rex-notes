@@ -103,18 +103,20 @@ declare class GOManager extends Phaser.Events.EventEmitter {
 
     easeProperty(
         name: string,
-        property: string,
-        value: number,
-        duration?: number,
-        delay?: number,
-        ease?: string,
-        repeat?: number,
-        isYoyo?: boolean,
-        isFrom?: boolean,
-        onComplete?: (
-            gameObject: Phaser.GameObjects.GameObject,
-            property: string
-        ) => void
+        config: {
+            property: string,
+            value: number | string,
+            duration?: number,
+            delay?: number,
+            ease?: string,
+            repeat?: null,
+            yoyo?: boolean,
+            from?: boolean,
+            complete?: (
+                gameObject: Phaser.GameObjects.GameObject,
+                property: string
+            ) => void,
+        },
     ): this;
 
     call(

@@ -52,33 +52,33 @@ export default {
             if (fromValue !== undefined) {
                 bob.setProperty('tintGray', 255 * fromValue)
             }
-            bob.easeProperty(
-                'tintGray',                 // property
-                Math.floor(255 * toValue),  // to value
-                this.fadeTime,              // duration
-                0,                          // delay,
-                'Linear',                   // ease
-                0,                          // repeat
-                false,                      // yoyo
-                false,                      // from
-                onComplete                  // onComplete
-            )
+            bob.easeProperty({
+                property: 'tintGray',
+                value: Math.floor(255 * toValue),
+                duration: this.fadeTime,
+                delay: 0,
+                ease: 'Linear',
+                repeat: 0,
+                yoyo: false,
+                from: false,
+                complete: onComplete
+            });
 
         } else if (this.useAlphaFadeEffect(gameObject)) {
             if (fromValue !== undefined) {
                 bob.setProperty('alpha', fromValue);
             }
-            bob.easeProperty(
-                'alpha',                    // property
-                toValue,                    // to value
-                this.fadeTime,              // duration
-                0,                          // delay
-                'Linear',                   // ease
-                0,                          // repeat
-                false,                      // yoyo
-                false,                      // from
-                onComplete                  // onComplete
-            )
+            bob.easeProperty({
+                property: 'alpha',
+                value: toValue,
+                duration: this.fadeTime,
+                delay: 0,
+                ease: 'Linear',
+                repeat: 0,
+                yoyo: false,
+                from: false,
+                complete: onComplete
+            });
 
         } else if (this.useRevealEffect(gameObject)) {
             AddEffectProperties(gameObject, 'reveal');
@@ -94,17 +94,17 @@ export default {
                 fromValue = 0;
             }
             gameObject[propertyName] = fromValue;
-            bob.easeProperty(
-                propertyName,         // property
-                toValue,              // to value
-                this.fadeTime,        // duration
-                0,                    // delay
-                'Linear',             // ease
-                0,                    // repeat
-                false,                // yoyo
-                false,                // from
-                onComplete,           // onComplete
-            )
+            bob.easeProperty({
+                property: propertyName,
+                value: toValue,
+                duration: this.fadeTime,
+                delay: 0,
+                ease: 'Linear',
+                repeat: 0,
+                yoyo: false,
+                from: false,
+                complete: onComplete
+            });
 
             bob.getTweenTask(propertyName).once('complete', function () {
                 gameObject[propertyName] = null;

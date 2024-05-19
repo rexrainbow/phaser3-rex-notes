@@ -20,15 +20,21 @@ declare class BobBase {
     setProperty(property: string, value: any): this;
 
     easeProperty(
-        property: string,
-        value: number,
-        duration?: number,
-        delay?: number,
-        ease?: string,
-        repeat?: null,
-        isYoyo?: boolean,
-        isFrom?: boolean,
-        onComplete?: Function
+        config: {
+            property: string,
+            value: number,
+            duration?: number,
+            delay?: number,
+            ease?: string,
+            repeat?: null,
+            yoyo?: boolean,
+            from?: boolean,
+            complete?: (
+                gameObject: Phaser.GameObjects.GameObject,
+                property: string
+            ) => void,
+            target?: Object,
+        }
     ): this;
 
     addTweenTask(

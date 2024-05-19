@@ -50,12 +50,7 @@ export default {
         return this;
     },
 
-    easeProperty(
-        name, property, value, duration, delay,
-        ease,
-        repeat, isYoyo, isFrom,
-        onComplete) {
-
+    easeProperty(name, config) {
         var bobs = this.get(name);
         if (!bobs) {
             return this;
@@ -63,40 +58,19 @@ export default {
             bobs = [bobs];
         }
 
-        if (duration === undefined) {
-            duration = 1000;
-        }
-        if (delay === undefined) {
-            delay = 0;
-        }
-        if (ease === undefined) {
-            ease = 'Linear';
-        }
-        if (repeat === undefined) {
-            repeat = 0;
-        }
-        if (isYoyo === undefined) {
-            isYoyo = false;
-        }
+        var value = config.value;
+        var property = config.property;
 
         if (this.symbols &&
             (typeof (value) === 'string') &&
-            this.isNumberProperty(name, property)
+            this.isNumberProperty(name, property) &&
+            (value in this.symbols)
         ) {
-            if (value in this.symbols) {
-                value = this.symbols[value];
-            } else {
-                console.warn(`Can't find symbol ${value}`)
-            }
+            config.value = this.symbols[value];
         }
 
         bobs.forEach(function (bob) {
-            bob.easeProperty(
-                property, value, duration, delay,
-                ease,
-                repeat, isYoyo, isFrom,
-                onComplete
-            );
+            bob.easeProperty(config);
         });
 
         return this;
