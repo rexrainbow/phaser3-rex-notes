@@ -392,6 +392,25 @@ gridSizer.layout();
 
 See also - [dirty](ui-basesizer.md#dirty)
 
+### Hide
+
+- Set invisible, won't layout it
+    ```javascript
+    sizer.hide();
+    ```
+    or
+    ```javascript
+    sizer.hide(gameObject);
+    ```
+- Set visible, will layout it
+    ```javascript
+    sizer.show();
+    ```
+    or
+    ```javascript
+    sizer.show(gameObject);
+    ```
+
 ### Grid index <-> child
 
 - Grid index -> child

@@ -12,11 +12,19 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var rect = this.add.rexQuadShape(400, 400, 500, 200, 0x333333);
-        this.add.existing(rect);
+        var rect = this.add.rexQuadShape(400, 450, 500, 200, 0x888888);
 
         rect.tlx = 50;
         rect.setTRPosition(40, -30);
+
+        var rect = this.add.rexQuadShape(400, 200, 500, 200, 0x888888);
+
+        this.tweens.add({
+            targets: rect,
+            tlx: 50,
+            trx: 40,
+            try: -30
+        })
     }
 
     update() {
