@@ -3693,7 +3693,32 @@
       this.gameObject[property] = value;
       return this;
     },
-    easeProperty: function easeProperty(property, value, duration, delay, ease, repeat, isYoyo, isFrom, onComplete, target) {
+    easeProperty: function easeProperty(config) {
+      var property = config.property;
+      var value = config.value;
+      var duration = config.duration;
+      var delay = config.delay;
+      var ease = config.ease;
+      var repeat = config.repeat;
+      var isYoyo = config.yoyo;
+      var isFrom = config.from;
+      var onComplete = config.complete;
+      var target = config.target;
+      if (duration === undefined) {
+        duration = 1000;
+      }
+      if (delay === undefined) {
+        delay = 0;
+      }
+      if (ease === undefined) {
+        ease = 'Linear';
+      }
+      if (repeat === undefined) {
+        repeat = 0;
+      }
+      if (isYoyo === undefined) {
+        isYoyo = false;
+      }
       if (target === undefined) {
         target = this.gameObject;
       }
@@ -6034,37 +6059,20 @@
       });
       return this;
     },
-    easeProperty: function easeProperty(name, property, value, duration, delay, ease, repeat, isYoyo, isFrom, onComplete) {
+    easeProperty: function easeProperty(name, config) {
       var bobs = this.get(name);
       if (!bobs) {
         return this;
       } else if (!Array.isArray(bobs)) {
         bobs = [bobs];
       }
-      if (duration === undefined) {
-        duration = 1000;
-      }
-      if (delay === undefined) {
-        delay = 0;
-      }
-      if (ease === undefined) {
-        ease = 'Linear';
-      }
-      if (repeat === undefined) {
-        repeat = 0;
-      }
-      if (isYoyo === undefined) {
-        isYoyo = false;
-      }
-      if (this.symbols && typeof value === 'string' && this.isNumberProperty(name, property)) {
-        if (value in this.symbols) {
-          value = this.symbols[value];
-        } else {
-          console.warn("Can't find symbol ".concat(value));
-        }
+      var value = config.value;
+      var property = config.property;
+      if (this.symbols && typeof value === 'string' && this.isNumberProperty(name, property) && value in this.symbols) {
+        config.value = this.symbols[value];
       }
       bobs.forEach(function (bob) {
-        bob.easeProperty(property, value, duration, delay, ease, repeat, isYoyo, isFrom, onComplete);
+        bob.easeProperty(config);
       });
       return this;
     },
@@ -6178,46 +6186,32 @@
         if (fromValue !== undefined) {
           bob.setProperty('tintGray', 255 * fromValue);
         }
-        bob.easeProperty('tintGray',
-        // property
-        Math.floor(255 * toValue),
-        // to value
-        this.fadeTime,
-        // duration
-        0,
-        // delay,
-        'Linear',
-        // ease
-        0,
-        // repeat
-        false,
-        // yoyo
-        false,
-        // from
-        onComplete // onComplete
-        );
+        bob.easeProperty({
+          property: 'tintGray',
+          value: Math.floor(255 * toValue),
+          duration: this.fadeTime,
+          delay: 0,
+          ease: 'Linear',
+          repeat: 0,
+          yoyo: false,
+          from: false,
+          complete: onComplete
+        });
       } else if (this.useAlphaFadeEffect(gameObject)) {
         if (fromValue !== undefined) {
           bob.setProperty('alpha', fromValue);
         }
-        bob.easeProperty('alpha',
-        // property
-        toValue,
-        // to value
-        this.fadeTime,
-        // duration
-        0,
-        // delay
-        'Linear',
-        // ease
-        0,
-        // repeat
-        false,
-        // yoyo
-        false,
-        // from
-        onComplete // onComplete
-        );
+        bob.easeProperty({
+          property: 'alpha',
+          value: toValue,
+          duration: this.fadeTime,
+          delay: 0,
+          ease: 'Linear',
+          repeat: 0,
+          yoyo: false,
+          from: false,
+          complete: onComplete
+        });
       } else if (this.useRevealEffect(gameObject)) {
         AddEffectProperties(gameObject, 'reveal');
         var propertyName;
@@ -6239,24 +6233,17 @@
           fromValue = 0;
         }
         gameObject[propertyName] = fromValue;
-        bob.easeProperty(propertyName,
-        // property
-        toValue,
-        // to value
-        this.fadeTime,
-        // duration
-        0,
-        // delay
-        'Linear',
-        // ease
-        0,
-        // repeat
-        false,
-        // yoyo
-        false,
-        // from
-        onComplete // onComplete
-        );
+        bob.easeProperty({
+          property: propertyName,
+          value: toValue,
+          duration: this.fadeTime,
+          delay: 0,
+          ease: 'Linear',
+          repeat: 0,
+          yoyo: false,
+          from: false,
+          complete: onComplete
+        });
         bob.getTweenTask(propertyName).once('complete', function () {
           gameObject[propertyName] = null;
         });
