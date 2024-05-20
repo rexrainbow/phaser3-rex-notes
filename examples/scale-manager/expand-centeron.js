@@ -18,10 +18,8 @@ class Demo extends Phaser.Scene {
 
         var camera = this.cameras.main;
         this.scale.on('resize', function (gameSize, baseSize, displaySize, previousWidth, previousHeight) {
-            var prevCenterX = camera.scrollX + (previousWidth / 2)
-            var prevCenterY = camera.scrollY + (previousHeight / 2)
-            camera.centerOn(prevCenterX, prevCenterY)
-            console.log(prevCenterX, prevCenterY)
+            camera.scrollX -= (baseSize.width - previousWidth) / 2
+            camera.scrollY -= (baseSize.height - previousHeight) / 2
 
             // Get viewport after setting camera
             var viewport = this.scale.getViewPort(camera);
@@ -32,7 +30,6 @@ class Demo extends Phaser.Scene {
 
         camera.centerOn(400, 300);
         camera.setZoom(0.7)
-        console.log(camera.scrollX, camera.scrollY)
 
     }
 
