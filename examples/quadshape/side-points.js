@@ -16,17 +16,13 @@ class Demo extends Phaser.Scene {
             x: 400, y: 450,
             width: 500, height: 200,
             color: 0x888888,
-            tlx: 50,
-            trx: 40, try: -30
-        });
 
-        var rect = this.add.rexQuadShape(400, 200, 500, 200, 0x888888);
-        this.tweens.add({
-            targets: rect,
             tlx: 50,
-            trx: 40,
-            try: -30
+            trx: 40, try: -30,
         })
+            .setBottomSidePoint(0.25, 0, -30)
+            .setBottomSidePoint(0.75, 0, -30)
+            .setLeftSidePoint(0.75, -40, 0)
     }
 
     update() {

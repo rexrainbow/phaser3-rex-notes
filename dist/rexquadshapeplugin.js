@@ -379,6 +379,115 @@
   }(Shape);
   Object.assign(PolygnBase.prototype, Render);
 
+  var PointMethods = {
+    setTLPosition: function setTLPosition(x, y) {
+      this.geom.setTLPosition(x, y);
+      this.dirty = true;
+      return this;
+    },
+    setTRPosition: function setTRPosition(x, y) {
+      this.geom.setTRPosition(x, y);
+      this.dirty = true;
+      return this;
+    },
+    setBLPosition: function setBLPosition(x, y) {
+      this.geom.setBLPosition(x, y);
+      this.dirty = true;
+      return this;
+    },
+    setBRPosition: function setBRPosition(x, y) {
+      this.geom.setBRPosition(x, y);
+      this.dirty = true;
+      return this;
+    },
+    resetCornerPosition: function resetCornerPosition() {
+      this.geom.resetCornerPosition();
+      this.dirty = true;
+      return this;
+    },
+    setTopSidePoint: function setTopSidePoint(t, x, y) {
+      if (Array.isArray(t)) {
+        var points = t,
+          point;
+        for (var i = 0, cnt = points.length; i < cnt; i++) {
+          point = points[i];
+          this.geom.setTopSidePoint(point.t, point.x, point.y);
+        }
+      } else {
+        this.geom.setTopSidePoint(t, x, y);
+      }
+      this.dirty = true;
+      return this;
+    },
+    setRightSidePoint: function setRightSidePoint(t, x, y) {
+      if (Array.isArray(t)) {
+        var points = t,
+          point;
+        for (var i = 0, cnt = points.length; i < cnt; i++) {
+          point = points[i];
+          this.geom.setRightSidePoint(point.t, point.x, point.y);
+        }
+      } else {
+        this.geom.setRightSidePoint(t, x, y);
+      }
+      this.dirty = true;
+      return this;
+    },
+    setBottomSidePoint: function setBottomSidePoint(t, x, y) {
+      if (Array.isArray(t)) {
+        var points = t,
+          point;
+        for (var i = 0, cnt = points.length; i < cnt; i++) {
+          point = points[i];
+          this.geom.setBottomSidePoint(point.t, point.x, point.y);
+        }
+      } else {
+        this.geom.setBottomSidePoint(t, x, y);
+      }
+      this.dirty = true;
+      return this;
+    },
+    setLeftSidePoint: function setLeftSidePoint(t, x, y) {
+      if (Array.isArray(t)) {
+        var points = t,
+          point;
+        for (var i = 0, cnt = points.length; i < cnt; i++) {
+          point = points[i];
+          this.geom.setLeftSidePoint(point.t, point.x, point.y);
+        }
+      } else {
+        this.geom.setLeftSidePoint(t, x, y);
+      }
+      this.dirty = true;
+      return this;
+    },
+    clearTopSidePoints: function clearTopSidePoints() {
+      this.geom.clearTopSidePoints();
+      this.dirty = true;
+      return this;
+    },
+    clearRightSidePoints: function clearRightSidePoints() {
+      this.geom.clearRightSidePoints();
+      this.dirty = true;
+      return this;
+    },
+    clearBottomSidePoints: function clearBottomSidePoints() {
+      this.geom.clearBottomSidePoints();
+      this.dirty = true;
+      return this;
+    },
+    clearLeftSidePoints: function clearLeftSidePoints() {
+      this.geom.clearLeftSidePoints();
+      this.dirty = true;
+      return this;
+    },
+    clearAllSidesPoints: function clearAllSidesPoints() {
+      this.geom.clearAllSidesPoints();
+      this.dirty = true;
+      return this;
+    }
+  };
+
   var QuadGeom = /*#__PURE__*/function () {
     function QuadGeom(x, y, width, height) {
       _classCallCheck(this, QuadGeom);
@@ -403,6 +512,10 @@
       this.bly = 0;
       this.brx = 0;
       this.bry = 0;
+      this.topSidePoints = [];
+      this.rightSidePoints = [];
+      this.bottomSidePoints = [];
+      this.leftSidePoints = [];
     }
     _createClass(QuadGeom, [{
       key: "setTo",
@@ -459,9 +572,92 @@
         this.setTLPosition(0, 0).setTRPosition(0, 0).setBLPosition(0, 0).setBRPosition(0, 0);
         return this;
       }
+    }, {
+      key: "setTopSidePoint",
+      value: function setTopSidePoint(t, x, y) {
+        AddPoint(this.topSidePoints, t, x, y);
+        return this;
+      }
+    }, {
+      key: "setRightSidePoint",
+      value: function setRightSidePoint(t, x, y) {
+        AddPoint(this.rightSidePoints, t, x, y);
+        return this;
+      }
+    }, {
+      key: "setBottomSidePoint",
+      value: function setBottomSidePoint(t, x, y) {
+        AddPoint(this.bottomSidePoints, t, x, y);
+        return this;
+      }
+    }, {
+      key: "setLeftSidePoint",
+      value: function setLeftSidePoint(t, x, y) {
+        AddPoint(this.leftSidePoints, t, x, y);
+        return this;
+      }
+    }, {
+      key: "clearTopSidePoints",
+      value: function clearTopSidePoints() {
+        this.topSidePoints.length = 0;
+        return this;
+      }
+    }, {
+      key: "clearRightSidePoints",
+      value: function clearRightSidePoints() {
+        this.rightSidePoints.length = 0;
+        return this;
+      }
+    }, {
+      key: "clearBottomSidePoints",
+      value: function clearBottomSidePoints() {
+        this.bottomSidePoints.length = 0;
+        return this;
+      }
+    }, {
+      key: "clearLeftSidePoints",
+      value: function clearLeftSidePoints() {
+        this.leftSidePoints.length = 0;
+        return this;
+      }
+    }, {
+      key: "clearAllSidesPoints",
+      value: function clearAllSidesPoints() {
+        this.clearTopSidePoints().clearRightSidePoints().clearBottomSidePoints().clearLeftSidePoints();
+        return this;
+      }
     }]);
     return QuadGeom;
   }();
+  var GetPoint = function GetPoint(points, t) {
+    for (var i = 0, cnt = points.length; i < cnt; i++) {
+      if (points[i].t === t) {
+        return points[i];
+      }
+    }
+    return null;
+  };
+  var SortPoints = function SortPoints(points) {
+    points.sort(function (pointA, pointB) {
+      return pointA.t - pointB.t;
+    });
+  };
+  var AddPoint = function AddPoint(points, t, x, y) {
+    var point = GetPoint(points);
+    if (point) {
+      point.x = x;
+      point.y = y;
+    } else {
+      points.push({
+        t: t,
+        x: x,
+        y: y
+      });
+      if (points.length > 1) {
+        SortPoints(points);
+      }
+    }
+  };
 
   var LineTo = function LineTo(x, y, pathData) {
     var cnt = pathData.length;
@@ -477,6 +673,8 @@
   };
 
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+  var GetValue = Phaser.Utils.Objects.GetValue;
+  var Linear = Phaser.Math.Linear;
   var Earcut = Phaser.Geom.Polygon.Earcut;
   var Quad = /*#__PURE__*/function (_PolygnBase) {
     _inherits(Quad, _PolygnBase);
@@ -517,6 +715,23 @@
         strokeWidth = 2;
       }
       _this.setStrokeStyle(strokeWidth, strokeColor, strokeAlpha);
+      _this.setTLPosition(GetValue(config, 'tlx', 0), GetValue(config, 'tly', 0)).setTRPosition(GetValue(config, 'trx', 0), GetValue(config, 'try', 0)).setBLPosition(GetValue(config, 'blx', 0), GetValue(config, 'bly', 0)).setBRPosition(GetValue(config, 'brx', 0), GetValue(config, 'bry', 0));
+      var leftSidePoints = GetValue(config, 'leftSidePoints');
+      if (leftSidePoints) {
+        _this.setLeftSidePoint(leftSidePoints);
+      }
+      var topSidePoints = GetValue(config, 'topSidePoints');
+      if (topSidePoints) {
+        _this.setTopSidePoint(topSidePoints);
+      }
+      var rightSidePoints = GetValue(config, 'rightSidePoints');
+      if (rightSidePoints) {
+        _this.setRightSidePoint(rightSidePoints);
+      }
+      var bottomSidePoints = GetValue(config, 'bottomSidePoints');
+      if (bottomSidePoints) {
+        _this.setBottomSidePoint(bottomSidePoints);
+      }
       _this.updateDisplayOrigin();
       _this.dirty = true;
       return _this;
@@ -527,8 +742,8 @@
         var geom = this.geom;
         var pathData = this.pathData;
         pathData.length = 0;
-        var width = geom.width,
-          height = geom.height;
+        var width = geom.width;
+        var height = geom.height;
         var tlx = 0 + geom.tlx;
         var tly = 0 + geom.tly;
         var trx = width + geom.trx;
@@ -537,10 +752,46 @@
         var bry = height + geom.bry;
         var blx = 0 + geom.blx;
         var bly = height + geom.bly;
+        var topSidePoints = geom.topSidePoints;
+        var rightSidePoints = geom.rightSidePoints;
+        var bottomSidePoints = geom.bottomSidePoints;
+        var leftSidePoints = geom.leftSidePoints;
+
+        // Top side
         LineTo(tlx, tly, pathData);
+        for (var i = 0, cnt = topSidePoints.length; i < cnt; i++) {
+          var point = topSidePoints[i];
+          var px = Linear(tlx, trx, point.t) + point.x;
+          var py = Linear(tly, try_, point.t) + point.y;
+          LineTo(px, py, pathData);
+        }
+
+        // Right side
         LineTo(trx, try_, pathData);
+        for (var i = 0, cnt = rightSidePoints.length; i < cnt; i++) {
+          var point = rightSidePoints[i];
+          var px = Linear(trx, brx, point.t) + point.x;
+          var py = Linear(try_, bry, point.t) + point.y;
+          LineTo(px, py, pathData);
+        }
+
+        // Bottom side
         LineTo(brx, bry, pathData);
+        for (var i = bottomSidePoints.length - 1; i >= 0; i--) {
+          var point = bottomSidePoints[i];
+          var px = Linear(blx, brx, point.t) + point.x;
+          var py = Linear(bly, bry, point.t) + point.y;
+          LineTo(px, py, pathData);
+        }
+
+        // Left side
         LineTo(blx, bly, pathData);
+        for (var i = leftSidePoints.length - 1; i >= 0; i--) {
+          var point = leftSidePoints[i];
+          var px = Linear(tlx, blx, point.t) + point.x;
+          var py = Linear(tly, bly, point.t) + point.y;
+          LineTo(px, py, pathData);
+        }
         pathData.push(pathData[0], pathData[1]); // Repeat first point to close curve
         this.pathIndexes = Earcut(pathData);
         return this;
@@ -618,38 +869,29 @@
         this.dirty = true;
       }
     }, {
-      key: "setTLPosition",
-      value: function setTLPosition(x, y) {
-        this.geom.setTLPosition(x, y);
-        return this;
+      key: "leftSidePoints",
+      get: function get() {
+        return this.geom.leftSidePoints;
       }
     }, {
-      key: "setTRPosition",
-      value: function setTRPosition(x, y) {
-        this.geom.setTRPosition(x, y);
-        return this;
+      key: "topSidePoints",
+      get: function get() {
+        return this.geom.topSidePoints;
       }
     }, {
-      key: "setBLPosition",
-      value: function setBLPosition(x, y) {
-        this.geom.setBLPosition(x, y);
-        return this;
+      key: "bottomSidePoints",
+      get: function get() {
+        return this.geom.bottomSidePoints;
       }
     }, {
-      key: "setBRPosition",
-      value: function setBRPosition(x, y) {
-        this.geom.setBRPosition(x, y);
-        return this;
-      }
-    }, {
-      key: "resetCornerPosition",
-      value: function resetCornerPosition() {
-        this.geom.resetCornerPosition();
-        return this;
+      key: "rightSidePoints",
+      get: function get() {
+        return this.geom.rightSidePoints;
       }
     }]);
     return Quad;
   }(PolygnBase);
+  Object.assign(Quad.prototype, PointMethods);
 
   function Factory (x, y, width, height, fillColor, fillAlpha) {
     var gameObject = new Quad(this.scene, x, y, width, height, fillColor, fillAlpha);
