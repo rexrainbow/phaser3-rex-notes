@@ -6290,17 +6290,25 @@
   };
 
   var CameraMethods$1 = {
-    setDedicatedCamera: function setDedicatedCamera(goName, cameraName) {
-      var gameObject = this.getGO(goName);
-      if (!gameObject) {
+    setCamera: function setCamera(goName, cameraName) {
+      var bob = this.get(goName);
+      if (!bob) {
         return this;
       }
       var camera = GetCamera(this.scene, cameraName);
       if (!camera) {
         return this;
       }
-      gameObject.cameraFilter = 0xffffffff ^ camera.id;
+      bob.gameObject.cameraFilter = 0xffffffff ^ camera.id;
+      bob.camera = camera;
       return this;
+    },
+    getCamera: function getCamera(goName) {
+      var bob = this.get(goName);
+      if (!bob) {
+        return null;
+      }
+      return bob.camera;
     }
   };
 
@@ -6620,15 +6628,15 @@
     }
   };
 
-  var SetDedicatedCamera = GOManager.prototype.setDedicatedCamera;
+  var SetCamera = GOManager.prototype.setCamera;
   var CameraMethods = {
-    setDedicatedCamera: function setDedicatedCamera(goName, cameraName) {
+    setCamera: function setCamera(layerName, cameraName) {
       // Add a new camera if target camera is not existing
       var camera = GetCamera(this.scene, cameraName);
       if (!camera) {
         camera = this.scene.cameras.add(undefined, undefined, undefined, undefined, false, cameraName);
       }
-      SetDedicatedCamera.call(this, goName, camera);
+      SetCamera.call(this, layerName, camera);
       return this;
     }
   };
@@ -6671,7 +6679,7 @@
             if (scrollFactorX !== undefined) {
               _this.setScrollFactor(layerName, scrollFactorX, scrollFactorY);
             }
-            _this.setDedicatedCamera(layerName, layerConfig.cameraName);
+            _this.setCamera(layerName, layerConfig.cameraName);
           }
         }
       }

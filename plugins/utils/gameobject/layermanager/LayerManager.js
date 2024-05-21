@@ -42,7 +42,7 @@ class LayerManager extends GOManager {
                         this.setScrollFactor(layerName, scrollFactorX, scrollFactorY);
                     }
 
-                    this.setDedicatedCamera(layerName, layerConfig.cameraName);
+                    this.setCamera(layerName, layerConfig.cameraName);
 
                 }
             }

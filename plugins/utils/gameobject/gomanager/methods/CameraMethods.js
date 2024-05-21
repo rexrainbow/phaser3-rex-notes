@@ -1,9 +1,9 @@
 import GetCamera from '../../../camera/GetCamera.js';
 
 export default {
-    setDedicatedCamera(goName, cameraName) {
-        var gameObject = this.getGO(goName);
-        if (!gameObject) {
+    setCamera(goName, cameraName) {
+        var bob = this.get(goName);
+        if (!bob) {
             return this;
         }
 
@@ -12,8 +12,18 @@ export default {
             return this;
         }
 
-        gameObject.cameraFilter = 0xffffffff ^ camera.id;
+        bob.gameObject.cameraFilter = 0xffffffff ^ camera.id;
+        bob.camera = camera;
 
         return this;
+    },
+
+    getCamera(goName) {
+        var bob = this.get(goName);
+        if (!bob) {
+            return null;
+        }
+
+        return bob.camera;
     }
 }

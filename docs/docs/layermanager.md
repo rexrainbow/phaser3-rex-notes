@@ -245,9 +245,13 @@ Apply scroll factor to all children of this layer.
 
 ### Bind camera
 
-```javascript
-layerManager.setDedicatedCamera(layerName, cameraName);
-```
-
-Bind this layer to dedicate camera (indexed by `cameraName`), ignore other cameras
-Add a new camera if this target camera is not existing
+- Set camera
+    ```javascript
+    layerManager.setCamera(layerName, cameraName);
+    ```
+    Bind this layer to dedicate camera (indexed by `cameraName`), ignore other cameras
+    Add a new camera if this target camera is not existing
+- Get camera
+    ```javascript
+    var camera = layerManager.getCamera(layerName);
+    ```

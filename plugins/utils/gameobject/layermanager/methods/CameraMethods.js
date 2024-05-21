@@ -1,15 +1,15 @@
 import GOManager from '../../gomanager/GOManager.js';
 import GetCamera from '../../../camera/GetCamera';
 
-const SetDedicatedCamera = GOManager.prototype.setDedicatedCamera;
+const SetCamera = GOManager.prototype.setCamera;
 export default {
-    setDedicatedCamera(goName, cameraName) {
+    setCamera(layerName, cameraName) {
         // Add a new camera if target camera is not existing
         var camera = GetCamera(this.scene, cameraName);
         if (!camera) {
             camera = this.scene.cameras.add(undefined, undefined, undefined, undefined, false, cameraName);
         }
-        SetDedicatedCamera.call(this, goName, camera);
+        SetCamera.call(this, layerName, camera);
         return this;
-    }
+    },
 }

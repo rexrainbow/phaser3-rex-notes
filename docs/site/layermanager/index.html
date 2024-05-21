@@ -10009,10 +10009,16 @@
 </code></pre></div>
 <p>Apply scroll factor to all children of this layer.</p>
 <h3 id="bind-camera">Bind camera<a class="headerlink" href="#bind-camera" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">layerManager</span><span class="p">.</span><span class="nx">setDedicatedCamera</span><span class="p">(</span><span class="nx">layerName</span><span class="p">,</span><span class="w"> </span><span class="nx">cameraName</span><span class="p">);</span>
+<ul>
+<li>Set camera
+    <div class="highlight"><pre><span></span><code><span class="nx">layerManager</span><span class="p">.</span><span class="nx">setCamera</span><span class="p">(</span><span class="nx">layerName</span><span class="p">,</span><span class="w"> </span><span class="nx">cameraName</span><span class="p">);</span>
 </code></pre></div>
-<p>Bind this layer to dedicate camera (indexed by <code>cameraName</code>), ignore other cameras
-Add a new camera if this target camera is not existing</p>
+    Bind this layer to dedicate camera (indexed by <code>cameraName</code>), ignore other cameras
+    Add a new camera if this target camera is not existing</li>
+<li>Get camera
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">camera</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">layerManager</span><span class="p">.</span><span class="nx">getCamera</span><span class="p">(</span><span class="nx">layerName</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
 
 
   
