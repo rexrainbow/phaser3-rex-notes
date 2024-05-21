@@ -31,9 +31,14 @@ class BoardPlugin extends Phaser.Plugins.ScenePlugin {
         this.createBoardFromTilemap = CreateBoardFromTilemap;
     }
 
-    start() {
+    boot() {
         var eventEmitter = this.scene.sys.events;
         eventEmitter.on('destroy', this.destroy, this);
+    }
+
+    destroy() {
+        this.add.destroy();
+        super.destroy();
     }
 }
 

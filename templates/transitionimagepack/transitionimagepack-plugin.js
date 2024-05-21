@@ -12,7 +12,7 @@ class TransitionImagePackPlugin extends Phaser.Plugins.BasePlugin {
         pluginManager.registerGameObject('rexTransitionImagePack', Factory, Creator);
     }
 
-    start() {
+    boot() {
         var eventEmitter = this.game.events;
         eventEmitter.on('destroy', this.destroy, this);
     }

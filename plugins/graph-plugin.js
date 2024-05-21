@@ -7,7 +7,17 @@ class GraphPlugin extends Phaser.Plugins.ScenePlugin {
         super(scene, pluginManager);
 
         this.add = new ObjectFactory(scene);
-    }        
+    }
+
+    boot() {
+        var eventEmitter = this.scene.sys.events;
+        eventEmitter.on('destroy', this.destroy, this);
+    }
+
+    destroy() {
+        this.add.destroy();
+        super.destroy();
+    }
 }
 
 export default GraphPlugin;

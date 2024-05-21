@@ -138,9 +138,14 @@ class UIPlugin extends Phaser.Plugins.ScenePlugin {
         this.add = new ObjectFactory(scene);
     }
 
-    start() {
+    boot() {
         var eventEmitter = this.scene.events;
         eventEmitter.on('destroy', this.destroy, this);
+    }
+
+    destroy() {
+        this.add.destroy();
+        super.destroy();
     }
 
     isInTouching(gameObject, pointer, preTest, postTest) {
