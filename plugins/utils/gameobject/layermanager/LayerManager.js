@@ -31,8 +31,19 @@ class LayerManager extends GOManager {
                 if (typeof (layerConfig) === 'string') {
                     this.add(layerConfig);
                 } else {
-                    this.add(layerConfig.name);
-                    this.setDedicatedCamera(layerConfig.name, layerConfig.cameraName);
+                    var layerName = layerConfig.name;
+
+                    this.add(layerName);
+
+                    var scrollFactor = layerConfig.scrollFactor;
+                    var scrollFactorX = GetValue(layerConfig, 'scrollFactorX', scrollFactor);
+                    var scrollFactorY = GetValue(layerConfig, 'scrollFactorY', scrollFactor);
+                    if (scrollFactorX !== undefined) {
+                        this.setScrollFactor(layerName, scrollFactorX, scrollFactorY);
+                    }
+
+                    this.setDedicatedCamera(layerName, layerConfig.cameraName);
+
                 }
             }
         }

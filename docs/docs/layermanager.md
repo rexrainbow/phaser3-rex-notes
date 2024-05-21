@@ -131,7 +131,7 @@ graph RL
 ```javascript
 var layerManager = scene.plugins.get('rexLayerManager').add(scene, {
     // layers: ['layer0', 'layer1', ...]
-    // layers: [{name, cameraName}, ...]
+    // layers: [{name, cameraName, scrollFactor}, ...]
 
     // depth: undefined,
     // rootLayer: undefined,
@@ -143,14 +143,15 @@ or
 ```javascript
 var layerManager = scene.plugins.get('rexLayerManager').add(scene, 
     ['layer0', 'layer1', ...]
-    // [{name, cameraName}, ...]
+    // [{name, cameraName, scrollFactor}, ...]
 );
 ```
 
 - `layers` : Add some initial [layers](layer.md)
     - A string array : Add layers by string name
-    - A array of plain object `{ name, cameraName }`
+    - A array of plain object `{ name, cameraName, scrollFactor }`
         1. Add layer by string name
+        1. Apply scroll factor to all children of this layer.
         1. Bind this layer to dedicate camera (indexed by `cameraName`), ignore other cameras
            Add a new camera if this target camera is not existing
 - `depth` : Set `depth` to each [layer](layer.md) game object.
@@ -232,6 +233,15 @@ var hasLayer = layerManager.has(name);
     ```javascript
     layerManager.moveLayerBelow(layerName, baseLayerName)
     ```
+
+### Set scroll factor
+
+```javascript
+layerManager.setScrollFactor(scrollFactor);
+// layerManager.setScrollFactor(scrollFactorX, scrollFactorY);
+```
+
+Apply scroll factor to all children of this layer.
 
 ### Bind camera
 

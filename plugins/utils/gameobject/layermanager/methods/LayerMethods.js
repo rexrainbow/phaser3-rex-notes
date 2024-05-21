@@ -36,6 +36,10 @@ export default {
             }
         }
 
+        if (layer.scrollFactorX !== undefined) {
+            gameObject.setScrollFactor(layer.scrollFactorX, layer.scrollFactorY);
+        }
+
         return this;
     },
 
@@ -76,7 +80,7 @@ export default {
         if (destroyChildren) {
             var children = layer.getAll();
             for (var i = 0, cnt = children.length; i < cnt; i++) {
-                children.destroy();
+                children[i].destroy();
             }
         } else {
             layer.removeAll();

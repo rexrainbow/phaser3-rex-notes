@@ -5,6 +5,7 @@ export default LayerManager;
 declare namespace LayerManager {
     interface ILayerConfig {
         name?: string,
+        scrollFactor?: number, scrollFactorX?: number, scrollFactorY?: number,
         cameraName?: string
     }
 
@@ -58,5 +59,10 @@ declare class LayerManager extends GOManager {
     moveLayerBelow(layer: string, baseLayerName: string): this;
 
     moveLayerAbove(layer: string, baseLayerName: string): this;
+
+    setScrollFactor(
+        layer: string,
+        scrollFactorX: number, scrollFactorY?: number
+    ): this;
 
 }

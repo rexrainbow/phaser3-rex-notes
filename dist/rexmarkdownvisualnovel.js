@@ -20751,6 +20751,9 @@
           layer.add(gameObject);
         }
       }
+      if (layer.scrollFactorX !== undefined) {
+        gameObject.setScrollFactor(layer.scrollFactorX, layer.scrollFactorY);
+      }
       return this;
     },
     removeFromLayer: function removeFromLayer(name, gameObject, addToScene) {
@@ -20784,10 +20787,29 @@
       if (destroyChildren) {
         var children = layer.getAll();
         for (var i = 0, cnt = children.length; i < cnt; i++) {
-          children.destroy();
+          children[i].destroy();
         }
       } else {
         layer.removeAll();
+      }
+      return this;
+    }
+  };
+
+  var ScrollFactorMethods = {
+    setScrollFactor: function setScrollFactor(name, scrollFactorX, scrollFactorY) {
+      if (scrollFactorY === undefined) {
+        scrollFactorY = scrollFactorX;
+      }
+      var layer = this.getLayer(name);
+      if (!layer) {
+        return this;
+      }
+      layer.scrollFactorX = scrollFactorX;
+      layer.scrollFactorY = scrollFactorY;
+      var children = layer.getAll();
+      for (var i = 0, cnt = children.length; i < cnt; i++) {
+        children[i].setScrollFactor(scrollFactorX, scrollFactorY);
       }
       return this;
     }
@@ -20906,7 +20928,7 @@
   };
 
   var methods$F = {};
-  Object.assign(methods$F, LayerMethods, DepthMethods, CameraMethods$1);
+  Object.assign(methods$F, LayerMethods, ScrollFactorMethods, DepthMethods, CameraMethods$1);
 
   var GetValue$3n = Phaser.Utils.Objects.GetValue;
   var LayerManager = /*#__PURE__*/function (_GOManager) {
@@ -20935,8 +20957,15 @@
           if (typeof layerConfig === 'string') {
             _this.add(layerConfig);
           } else {
-            _this.add(layerConfig.name);
-            _this.setDedicatedCamera(layerConfig.name, layerConfig.cameraName);
+            var layerName = layerConfig.name;
+            _this.add(layerName);
+            var scrollFactor = layerConfig.scrollFactor;
+            var scrollFactorX = GetValue$3n(layerConfig, 'scrollFactorX', scrollFactor);
+            var scrollFactorY = GetValue$3n(layerConfig, 'scrollFactorY', scrollFactor);
+            if (scrollFactorX !== undefined) {
+              _this.setScrollFactor(layerName, scrollFactorX, scrollFactorY);
+            }
+            _this.setDedicatedCamera(layerName, layerConfig.cameraName);
           }
         }
       }
