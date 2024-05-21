@@ -17,6 +17,13 @@ declare namespace LayerManager {
 
         createGameObject?: GOManager.CreateGameObjectCallbackType,
     }
+
+    interface IBobBase extends GOManager.IBobBase {
+        camera?: Phaser.Cameras.Scene2D.Camera
+    }
+
+    type LayerNameType = string | Phaser.GameObjects.GameObject
+
 }
 
 declare class LayerManager extends GOManager {
@@ -31,37 +38,63 @@ declare class LayerManager extends GOManager {
 
     setRootLayer(rootLayer?: Phaser.GameObjects.Layer): this;
 
-    getLayer(name: string): Phaser.GameObjects.Layer;
+    get(
+        layer: string | Phaser.GameObjects.GameObject,
+        out?: LayerManager.IBobBase[]
+    ): LayerManager.IBobBase | LayerManager.IBobBase[];
+
+    getLayer(
+        layer: string | Phaser.GameObjects.GameObject
+    ): Phaser.GameObjects.Layer;
 
     getLayers(out?: Phaser.GameObjects.GameObject[]): Phaser.GameObjects.Layer[];
 
     addToLayer(
-        name: string,
+        layer: string | Phaser.GameObjects.GameObject,
         gameObjects: Phaser.GameObjects.GameObject | Phaser.GameObjects.GameObject[]
     ): this;
 
     removeFromLayer(
-        name: string,
+        layer: string | Phaser.GameObjects.GameObject,
         gameObject: Phaser.GameObjects.GameObject,
         addToScene?: boolean
     ): this;
 
     clearLayer(
-        name: string,
+        layer: string | Phaser.GameObjects.GameObject,
         destroyChildren?: boolean
     ): this;
 
 
-    bringLayerToTop(layer: string): this;
+    bringLayerToTop(
+        layer: string | Phaser.GameObjects.GameObject
+    ): this;
 
-    sendLayerToBack(layer: string): this;
+    sendLayerToBack(
+        layer: string | Phaser.GameObjects.GameObject
+    ): this;
 
-    moveLayerBelow(layer: string, baseLayerName: string): this;
+    moveLayerBelow(
+        layer: string | Phaser.GameObjects.GameObject,
+        baseLayerName: string | Phaser.GameObjects.GameObject
+    ): this;
 
-    moveLayerAbove(layer: string, baseLayerName: string): this;
+    moveLayerAbove(
+        layer: string | Phaser.GameObjects.GameObject,
+        baseLayerName: string | Phaser.GameObjects.GameObject
+    ): this;
+
+    setCamera(
+        layer: string | Phaser.GameObjects.GameObject,
+        cameraName?: string | number | Phaser.Cameras.Scene2D.Camera
+    ): this;
+
+    getCamera(
+        layer: string | Phaser.GameObjects.GameObject
+    ): Phaser.Cameras.Scene2D.Camera | null;
 
     setScrollFactor(
-        layer: string,
+        layer: string | Phaser.GameObjects.GameObject,
         scrollFactorX: number, scrollFactorY?: number
     ): this;
 

@@ -18,13 +18,14 @@ class Demo extends Phaser.Scene {
             { name: 'ui', cameraName: 'ui' },
         ]);
 
-        var gameObject1 = this.add.circle(400, 300, 20, 0xff0000);
-        layers.addToLayer('main', gameObject1);
+        var gameObject0 = this.add.circle(400, 300, 20, 0xff0000);
+        layers.addToLayer('main', gameObject0);
 
-        var gameObject0 = this.add.rectangle(440, 300, 30, 30, 0x00ff00);
-        layers.addToLayer('ui', gameObject0);
+        var gameObject1 = this.add.rectangle(440, 300, 30, 30, 0x00ff00);
+        layers.addToLayer('ui', gameObject1);
 
         layers.getCamera('main').setScroll(100, 100);
+        // layers.getCamera(gameObject0).setScroll(100, 100);
     }
 
     update() { }

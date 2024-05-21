@@ -1,4 +1,6 @@
 import GOManager from '../gomanager/GOManager.js';
+import IsGameObject from '../../system/IsGameObject.js';
+import GetLayer from '../../system/GetLayer.js';
 import Methods from './methods/Methods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -84,6 +86,22 @@ class LayerManager extends GOManager {
         }
 
         return this;
+    }
+
+    // Override
+    get(name, out) {
+        if (IsGameObject(name)) {
+            var layer = GetLayer(name);
+            if (!layer) {
+                return undefined;
+            }
+            name = layer.name;
+            if (!name) {
+                return undefined;
+            }
+        }
+
+        return super.get(name, out);
     }
 
 }

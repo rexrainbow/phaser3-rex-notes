@@ -37,6 +37,10 @@ declare namespace GOManager {
 
         name?: string,
     }
+
+    interface IBobBase extends BobBase {
+
+    }
 }
 
 declare class GOManager extends Phaser.Events.EventEmitter {
@@ -63,7 +67,7 @@ declare class GOManager extends Phaser.Events.EventEmitter {
 
     has(name: string): boolean;
 
-    get(name: string): BobBase | BobBase[];
+    get(name: string, out?: BobBase[]): BobBase | BobBase[];
     getFirst(): BobBase | null;
     getGO(name: string): Phaser.GameObjects.GameObject;
     getAllGO(out?: Phaser.GameObjects.GameObject[]): Phaser.GameObjects.GameObject[];
