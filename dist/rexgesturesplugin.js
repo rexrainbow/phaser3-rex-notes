@@ -3313,7 +3313,20 @@
       _this.add = new ObjectFactory(scene);
       return _this;
     }
-    return _createClass(GesturesPlugin);
+    _createClass(GesturesPlugin, [{
+      key: "boot",
+      value: function boot() {
+        var eventEmitter = this.scene.sys.events;
+        eventEmitter.on('destroy', this.destroy, this);
+      }
+    }, {
+      key: "destroy",
+      value: function destroy() {
+        this.add.destroy();
+        _get(_getPrototypeOf(GesturesPlugin.prototype), "destroy", this).call(this);
+      }
+    }]);
+    return GesturesPlugin;
   }(Phaser.Plugins.ScenePlugin);
 
   return GesturesPlugin;

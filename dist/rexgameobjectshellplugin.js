@@ -6434,6 +6434,14 @@
   }();
   Object.assign(GOManager.prototype, EventEmitterMethods$1, Methods$9);
 
+  var GetLayer = function GetLayer(gameObject) {
+    var layer = gameObject.displayList;
+    if (!IsLayerGameObject(layer)) {
+      return null;
+    }
+    return layer;
+  };
+
   var LayerMethods = {
     getLayer: function getLayer(name) {
       return this.getGO(name);
@@ -6720,6 +6728,23 @@
           this.rootLayer.add(gameObject);
         }
         return this;
+      }
+
+      // Override
+    }, {
+      key: "get",
+      value: function get(name, out) {
+        if (IsGameObject(name)) {
+          var layer = GetLayer(name);
+          if (!layer) {
+            return undefined;
+          }
+          name = layer.name;
+          if (!name) {
+            return undefined;
+          }
+        }
+        return _get(_getPrototypeOf(LayerManager.prototype), "get", this).call(this, name, out);
       }
     }]);
     return LayerManager;
@@ -42295,10 +42320,16 @@
       return _this;
     }
     _createClass(GameObjectShellPlugin, [{
-      key: "start",
-      value: function start() {
+      key: "boot",
+      value: function boot() {
         var eventEmitter = this.scene.events;
         eventEmitter.on('destroy', this.destroy, this);
+      }
+    }, {
+      key: "destroy",
+      value: function destroy() {
+        this.add.destroy();
+        _get(_getPrototypeOf(GameObjectShellPlugin.prototype), "destroy", this).call(this);
       }
     }]);
     return GameObjectShellPlugin;

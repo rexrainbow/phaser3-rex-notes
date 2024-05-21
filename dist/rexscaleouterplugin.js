@@ -332,8 +332,8 @@
       return _this;
     }
     _createClass(ScaleOuterPlugin, [{
-      key: "start",
-      value: function start() {
+      key: "boot",
+      value: function boot() {
         var eventEmitter = this.scene.sys.events;
         eventEmitter.on('destroy', this.destroy, this);
       }

@@ -20683,6 +20683,24 @@
   }();
   Object.assign(GOManager.prototype, EventEmitterMethods$1, Methods$m);
 
+  var GameObjectClass = Phaser.GameObjects.GameObject;
+  var IsGameObject = function IsGameObject(object) {
+    return object instanceof GameObjectClass;
+  };
+
+  var LayerClass = Phaser.GameObjects.Layer;
+  var IsLayerGameObject = function IsLayerGameObject(gameObject) {
+    return gameObject instanceof LayerClass;
+  };
+
+  var GetLayer = function GetLayer(gameObject) {
+    var layer = gameObject.displayList;
+    if (!IsLayerGameObject(layer)) {
+      return null;
+    }
+    return layer;
+  };
+
   var SortGameObjectsByDepth = function SortGameObjectsByDepth(gameObjects, descending) {
     if (gameObjects.length <= 1) {
       return gameObjects;
@@ -21014,6 +21032,23 @@
           this.rootLayer.add(gameObject);
         }
         return this;
+      }
+
+      // Override
+    }, {
+      key: "get",
+      value: function get(name, out) {
+        if (IsGameObject(name)) {
+          var layer = GetLayer(name);
+          if (!layer) {
+            return undefined;
+          }
+          name = layer.name;
+          if (!name) {
+            return undefined;
+          }
+        }
+        return _get(_getPrototypeOf(LayerManager.prototype), "get", this).call(this, name, out);
       }
     }]);
     return LayerManager;
@@ -46208,11 +46243,6 @@
     return gameObject instanceof ContainerClass;
   };
 
-  var LayerClass = Phaser.GameObjects.Layer;
-  var IsLayerGameObject = function IsLayerGameObject(gameObject) {
-    return gameObject instanceof LayerClass;
-  };
-
   var GetValidChildren = function GetValidChildren(parent) {
     var children = parent.getAllChildren([parent]);
     children = children.filter(function (gameObject) {
@@ -46454,11 +46484,6 @@
     return out;
   };
   var GlobRect$1;
-
-  var GameObjectClass = Phaser.GameObjects.GameObject;
-  var IsGameObject = function IsGameObject(object) {
-    return object instanceof GameObjectClass;
-  };
 
   var GetValue$2u = Phaser.Utils.Objects.GetValue;
   var Snapshot = function Snapshot(config) {

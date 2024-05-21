@@ -1524,7 +1524,20 @@
       _this.add = new ObjectFactory(scene);
       return _this;
     }
-    return _createClass(GraphPlugin);
+    _createClass(GraphPlugin, [{
+      key: "boot",
+      value: function boot() {
+        var eventEmitter = this.scene.sys.events;
+        eventEmitter.on('destroy', this.destroy, this);
+      }
+    }, {
+      key: "destroy",
+      value: function destroy() {
+        this.add.destroy();
+        _get(_getPrototypeOf(GraphPlugin.prototype), "destroy", this).call(this);
+      }
+    }]);
+    return GraphPlugin;
   }(Phaser.Plugins.ScenePlugin);
 
   return GraphPlugin;

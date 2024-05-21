@@ -4419,10 +4419,16 @@
       return _this;
     }
     _createClass(SpinnerPlugin, [{
-      key: "start",
-      value: function start() {
+      key: "boot",
+      value: function boot() {
         var eventEmitter = this.scene.events;
         eventEmitter.on('destroy', this.destroy, this);
+      }
+    }, {
+      key: "destroy",
+      value: function destroy() {
+        this.add.destroy();
+        _get(_getPrototypeOf(SpinnerPlugin.prototype), "destroy", this).call(this);
       }
     }]);
     return SpinnerPlugin;
