@@ -7,7 +7,7 @@ var GetFirstRenderCamera = function (scene, gameObject) {
     for (var i = 0, cnt = cameras.length; i < cnt; i++) {
         camera = cameras[i];
 
-        isCameraIgnore = (cameraFilter & camera.id);
+        isCameraIgnore = (cameraFilter & camera.id) > 0;
         if (!isCameraIgnore) {
             return camera;
         }
