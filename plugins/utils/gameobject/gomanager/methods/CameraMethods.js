@@ -1,4 +1,4 @@
-import GetCamera from '../../../camera/GetCamera.js';
+import GetCameraByName from '../../../camera/GetCameraByName.js';
 
 export default {
     setCamera(goName, cameraName) {
@@ -7,7 +7,7 @@ export default {
             return this;
         }
 
-        var camera = GetCamera(this.scene, cameraName);
+        var camera = GetCameraByName(this.scene, cameraName);
         if (!camera) {
             return this;
         }

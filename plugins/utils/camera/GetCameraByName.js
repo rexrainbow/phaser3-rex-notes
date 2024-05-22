@@ -1,4 +1,4 @@
-var GetCamera = function (scene, name) {
+var GetCameraByName = function (scene, name) {
     var cameraManager = scene.cameras;
     var camera;
     if (name === undefined) {
@@ -23,4 +23,4 @@ var GetCamera = function (scene, name) {
     return camera;
 }
 
-export default GetCamera;
+export default GetCameraByName;
