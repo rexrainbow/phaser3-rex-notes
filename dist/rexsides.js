@@ -7560,26 +7560,26 @@
     return layer;
   };
 
-  var GetRootRenderGameObject = function GetRootRenderGameObject(gameObject) {
+  var GetRootLayerGameObject = function GetRootLayerGameObject(gameObject) {
     if (gameObject.parentContainer) {
       // At a container
-      return GetRootRenderGameObject(gameObject.parentContainer);
+      return GetRootLayerGameObject(gameObject.parentContainer);
     }
     var layer = GetLayer(gameObject);
     if (layer) {
       // At a layer
-      return GetRootRenderGameObject(layer);
+      return GetRootLayerGameObject(layer);
     }
     return gameObject;
   };
 
   var GetFirstRenderCamera = function GetFirstRenderCamera(scene, gameObject) {
-    var cameraFilter = GetRootRenderGameObject(gameObject).cameraFilter;
+    var cameraFilter = GetRootLayerGameObject(gameObject).cameraFilter;
     var cameras = scene.sys.cameras.cameras;
     var camera, isCameraIgnore;
     for (var i = 0, cnt = cameras.length; i < cnt; i++) {
       camera = cameras[i];
-      isCameraIgnore = cameraFilter & camera.id;
+      isCameraIgnore = (cameraFilter & camera.id) > 0;
       if (!isCameraIgnore) {
         return camera;
       }

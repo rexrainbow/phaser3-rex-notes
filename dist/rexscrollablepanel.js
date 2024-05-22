@@ -1918,6 +1918,21 @@
     output.y = gameObject.y - GetDisplayHeight(gameObject) * gameObject.originY + GetDisplayHeight(gameObject);
     return PrepareBoundsOutput(gameObject, output, includeParent);
   };
+  var GetCenter = function GetCenter(gameObject, output, includeParent) {
+    if (output === undefined) {
+      output = new Vector2();
+    } else if (output === true) {
+      if (GlobVector === undefined) {
+        GlobVector = new Vector2();
+      }
+      output = GlobVector;
+    }
+    var displayWidth = GetDisplayWidth(gameObject);
+    var displayHeight = GetDisplayHeight(gameObject);
+    output.x = gameObject.x + displayWidth * (0.5 - gameObject.originX);
+    output.y = gameObject.y + displayHeight * (0.5 - gameObject.originY);
+    return PrepareBoundsOutput(gameObject, output, includeParent);
+  };
   var GlobVector = undefined;
   var PrepareBoundsOutput = function PrepareBoundsOutput(gameObject, output, includeParent) {
     if (includeParent === undefined) {
@@ -7551,26 +7566,26 @@
     return layer;
   };
 
-  var GetRootRenderGameObject = function GetRootRenderGameObject(gameObject) {
+  var GetRootLayerGameObject = function GetRootLayerGameObject(gameObject) {
     if (gameObject.parentContainer) {
       // At a container
-      return GetRootRenderGameObject(gameObject.parentContainer);
+      return GetRootLayerGameObject(gameObject.parentContainer);
     }
     var layer = GetLayer(gameObject);
     if (layer) {
       // At a layer
-      return GetRootRenderGameObject(layer);
+      return GetRootLayerGameObject(layer);
     }
     return gameObject;
   };
 
   var GetFirstRenderCamera = function GetFirstRenderCamera(scene, gameObject) {
-    var cameraFilter = GetRootRenderGameObject(gameObject).cameraFilter;
+    var cameraFilter = GetRootLayerGameObject(gameObject).cameraFilter;
     var cameras = scene.sys.cameras.cameras;
     var camera, isCameraIgnore;
     for (var i = 0, cnt = cameras.length; i < cnt; i++) {
       camera = cameras[i];
-      isCameraIgnore = cameraFilter & camera.id;
+      isCameraIgnore = (cameraFilter & camera.id) > 0;
       if (!isCameraIgnore) {
         return camera;
       }
@@ -20196,18 +20211,18 @@
       }
       switch (align) {
         case 'top':
-          delta = scrollableBlock.top - child.getTopLeft().y;
+          delta = scrollableBlock.top - GetTopLeft(child).y;
           break;
         case 'bottom':
-          delta = scrollableBlock.bottom - child.getBottomLeft().y;
+          delta = scrollableBlock.bottom - GetBottomLeft(child).y;
           break;
         case 'centerY':
         case 'center':
-          delta = scrollableBlock.centerY - child.getCenter().y;
+          delta = scrollableBlock.centerY - GetCenter(child).y;
           break;
         default:
-          var dTop = scrollableBlock.top - child.getTopLeft().y;
-          var dBottom = scrollableBlock.bottom - child.getBottomLeft().y;
+          var dTop = scrollableBlock.top - GetTopLeft(child).y;
+          var dBottom = scrollableBlock.bottom - GetBottomLeft(child).y;
           if (dTop <= 0 && dBottom >= 0) {
             delta = 0;
           } else {
@@ -20227,18 +20242,18 @@
       }
       switch (align) {
         case 'left':
-          delta = scrollableBlock.left - child.getTopLeft().x;
+          delta = scrollableBlock.left - GetTopLeft(child).x;
           break;
         case 'right':
-          delta = scrollableBlock.right - child.getTopRight().x;
+          delta = scrollableBlock.right - GetTopRight(child).x;
           break;
         case 'centerX':
         case 'center':
-          delta = scrollableBlock.centerX - child.getCenter().x;
+          delta = scrollableBlock.centerX - GetCenter(child).x;
           break;
         default:
-          var dLeft = scrollableBlock.left - child.getTopLeft().x;
-          var dRight = scrollableBlock.right - child.getTopRight().x;
+          var dLeft = scrollableBlock.left - GetTopLeft(child).x;
+          var dRight = scrollableBlock.right - GetTopRight(child).x;
           if (dLeft <= 0 && dRight >= 0) {
             delta = 0;
           } else {

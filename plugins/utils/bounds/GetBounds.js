@@ -246,6 +246,24 @@ var GetMiddleRight = function (gameObject, output, includeParent) {
     return output;
 };
 
+var GetCenter = function (gameObject, output, includeParent) {
+    if (output === undefined) {
+        output = new Vector2();
+    } else if (output === true) {
+        if (GlobVector === undefined) {
+            GlobVector = new Vector2();
+        }
+        output = GlobVector;
+    }
+
+    var displayWidth = GetDisplayWidth(gameObject);
+    var displayHeight = GetDisplayHeight(gameObject);
+    output.x = gameObject.x + (displayWidth * (0.5 - gameObject.originX));
+    output.y = gameObject.y + (displayHeight * (0.5 - gameObject.originY));
+
+    return PrepareBoundsOutput(gameObject, output, includeParent);
+}
+
 var GlobVector = undefined;
 
 var PrepareBoundsOutput = function (gameObject, output, includeParent) {
@@ -274,4 +292,5 @@ export {
     GetBottomMiddle,
     GetMiddleLeft,
     GetMiddleRight,
+    GetCenter,
 }

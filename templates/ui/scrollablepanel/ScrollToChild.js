@@ -1,3 +1,5 @@
+import { GetTopLeft, GetBottomLeft, GetTopRight, GetCenter } from '../../../plugins/utils/bounds/GetBounds.js';
+
 var ScrollToChild = function (child, align) {
     if (!this.hasChild(child)) {
         return this;
@@ -43,21 +45,21 @@ var AlignChild = function (child, axis, align) {
 
         switch (align) {
             case 'top':
-                delta = scrollableBlock.top - child.getTopLeft().y;
+                delta = scrollableBlock.top - GetTopLeft(child).y;
                 break;
 
             case 'bottom':
-                delta = scrollableBlock.bottom - child.getBottomLeft().y;
+                delta = scrollableBlock.bottom - GetBottomLeft(child).y;
                 break;
 
             case 'centerY':
             case 'center':
-                delta = scrollableBlock.centerY - child.getCenter().y;
+                delta = scrollableBlock.centerY - GetCenter(child).y;
                 break;
 
             default:
-                var dTop = scrollableBlock.top - child.getTopLeft().y;
-                var dBottom = scrollableBlock.bottom - child.getBottomLeft().y;
+                var dTop = scrollableBlock.top - GetTopLeft(child).y;
+                var dBottom = scrollableBlock.bottom - GetBottomLeft(child).y;
                 if ((dTop <= 0) && (dBottom >= 0)) {
                     delta = 0;
                 } else {
@@ -78,21 +80,21 @@ var AlignChild = function (child, axis, align) {
 
         switch (align) {
             case 'left':
-                delta = scrollableBlock.left - child.getTopLeft().x;
+                delta = scrollableBlock.left - GetTopLeft(child).x;
                 break;
 
             case 'right':
-                delta = scrollableBlock.right - child.getTopRight().x;
+                delta = scrollableBlock.right - GetTopRight(child).x;
                 break;
 
             case 'centerX':
             case 'center':
-                delta = scrollableBlock.centerX - child.getCenter().x;
+                delta = scrollableBlock.centerX - GetCenter(child).x;
                 break;
 
             default:
-                var dLeft = scrollableBlock.left - child.getTopLeft().x;
-                var dRight = scrollableBlock.right - child.getTopRight().x;
+                var dLeft = scrollableBlock.left - GetTopLeft(child).x;
+                var dRight = scrollableBlock.right - GetTopRight(child).x;
                 if ((dLeft <= 0) && (dRight >= 0)) {
                     delta = 0;
                 } else {
