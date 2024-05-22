@@ -2968,7 +2968,7 @@
     return this;
   };
 
-  var GetCamera = function GetCamera(scene, name) {
+  var GetCameraByName = function GetCameraByName(scene, name) {
     var cameraManager = scene.cameras;
     var camera;
     if (name === undefined) {
@@ -2996,7 +2996,7 @@
       if (!bob) {
         return this;
       }
-      var camera = GetCamera(this.scene, cameraName);
+      var camera = GetCameraByName(this.scene, cameraName);
       if (!camera) {
         return this;
       }
@@ -3420,7 +3420,7 @@
   var CameraMethods = {
     setCamera: function setCamera(layerName, cameraName) {
       // Add a new camera if target camera is not existing
-      var camera = GetCamera(this.scene, cameraName);
+      var camera = GetCameraByName(this.scene, cameraName);
       if (!camera) {
         camera = this.scene.cameras.add(undefined, undefined, undefined, undefined, false, cameraName);
       }

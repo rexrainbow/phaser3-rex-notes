@@ -20492,7 +20492,7 @@
     return this;
   };
 
-  var GetCamera = function GetCamera(scene, name) {
+  var GetCameraByName = function GetCameraByName(scene, name) {
     var cameraManager = scene.cameras;
     var camera;
     if (name === undefined) {
@@ -20520,7 +20520,7 @@
       if (!bob) {
         return this;
       }
-      var camera = GetCamera(this.scene, cameraName);
+      var camera = GetCameraByName(this.scene, cameraName);
       if (!camera) {
         return this;
       }
@@ -20944,7 +20944,7 @@
   var CameraMethods$1 = {
     setCamera: function setCamera(layerName, cameraName) {
       // Add a new camera if target camera is not existing
-      var camera = GetCamera(this.scene, cameraName);
+      var camera = GetCameraByName(this.scene, cameraName);
       if (!camera) {
         camera = this.scene.cameras.add(undefined, undefined, undefined, undefined, false, cameraName);
       }
@@ -50580,13 +50580,26 @@
   }(ComponentBase);
   Object.assign(OpenCloseTransition.prototype, methods$u);
 
+  var GetRootRenderGameObject = function GetRootRenderGameObject(gameObject) {
+    if (gameObject.parentContainer) {
+      // At a container
+      return GetRootRenderGameObject(gameObject.parentContainer);
+    }
+    var layer = GetLayer(gameObject);
+    if (layer) {
+      // At a layer
+      return GetRootRenderGameObject(layer);
+    }
+    return gameObject;
+  };
+
   var GetFirstRenderCamera = function GetFirstRenderCamera(scene, gameObject) {
+    var cameraFilter = GetRootRenderGameObject(gameObject).cameraFilter;
     var cameras = scene.sys.cameras.cameras;
-    var camera, cameraFilter, isCameraIgnore;
+    var camera, isCameraIgnore;
     for (var i = 0, cnt = cameras.length; i < cnt; i++) {
       camera = cameras[i];
-      cameraFilter = gameObject.cameraFilter;
-      isCameraIgnore = cameraFilter !== 0 && cameraFilter & camera.id;
+      isCameraIgnore = cameraFilter & camera.id;
       if (!isCameraIgnore) {
         return camera;
       }
@@ -50622,29 +50635,14 @@
         _get(_getPrototypeOf(FullWindow.prototype), "destroy", this).call(this);
       }
     }, {
-      key: "getTargetCamera",
-      value: function getTargetCamera() {
-        var gameObject = this.parent;
-        if (this.targetCamera) {
-          var isCameraIgnore = gameObject.cameraFilter !== 0 && gameObject.cameraFilter & this.targetCamera.id;
-          if (isCameraIgnore) {
-            this.targetCamera = undefined;
-          }
-        }
-        if (!this.targetCamera) {
-          this.targetCamera = GetFirstRenderCamera(this.scene, gameObject);
-        }
-        return this.targetCamera;
-      }
-    }, {
       key: "resize",
       value: function resize() {
-        var camera = this.getTargetCamera();
+        var scene = this.scene;
+        var gameObject = this.parent;
+        var camera = GetFirstRenderCamera(scene, gameObject);
         if (!camera) {
           return;
         }
-        var scene = this.scene;
-        var gameObject = this.parent;
         var gameSize = scene.sys.scale.gameSize;
         var gameWidth = gameSize.width,
           gameHeight = gameSize.height,
