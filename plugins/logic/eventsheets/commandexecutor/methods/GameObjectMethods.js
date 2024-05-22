@@ -105,4 +105,8 @@ export default {
         this.sys.callGameObjectMethod(goType, config.id, methodName, ...parameters);
         return this;
     },
+
+    getGameObject(goType, name, out) {
+        return this.sys.getGameObject(goType, name, out);
+    },
 }

@@ -58,6 +58,7 @@ class Demo extends Phaser.Scene {
         eventSheetManager
             .on('pause.input', function () {
                 print.text = 'Wait any click to continue';
+                // var dialog = eventSheetManager.commandExecutor.getGameObject(undefined, 'Dialog');
             })
             .on('resume.input', function () {
                 print.text = '';

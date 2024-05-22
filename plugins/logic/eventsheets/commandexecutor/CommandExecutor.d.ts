@@ -134,4 +134,25 @@ declare class CommandExecutor {
     'camera.rotateTo': CommandExecutor.CommandCallbackType;
     'camera.scrollTo': CommandExecutor.CommandCallbackType;
 
+    getGameObject(
+        goType: string | undefined,
+        name: string,
+    ): Phaser.GameObjects.GameObject;
+
+    getGameObject(
+        goType: string | undefined,
+    ): Phaser.GameObjects.GameObject[];
+
+    getGameObject(
+        goType: string,
+        name: string[],
+        out?: Phaser.GameObjects.GameObject[]
+    ): Phaser.GameObjects.GameObject[];
+
+    getGameObject(
+        goType: string,
+        name: string[],
+        out: { [name: string]: Phaser.GameObjects.GameObject },
+    ): { [name: string]: Phaser.GameObjects.GameObject };
+
 }
