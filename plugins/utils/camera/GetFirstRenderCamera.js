@@ -1,7 +1,7 @@
-import GetRootLayerGameObject from '../system/GetRootLayerGameObject.js';
+import GetRootGameObject from '../system/GetRootGameObject.js';
 
 var GetFirstRenderCamera = function (scene, gameObject) {
-    var cameraFilter = GetRootLayerGameObject(gameObject).cameraFilter;
+    var cameraFilter = GetRootGameObject(gameObject).cameraFilter;
     var cameras = scene.sys.cameras.cameras;
     var camera, isCameraIgnore;
     for (var i = 0, cnt = cameras.length; i < cnt; i++) {

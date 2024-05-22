@@ -1,16 +1,16 @@
 import GetLayer from './GetLayer.js';
 
-var GetRootLayerGameObject = function (gameObject) {
+var GetRootGameObject = function (gameObject) {
     if (gameObject.parentContainer) {  // At a container
-        return GetRootLayerGameObject(gameObject.parentContainer);
+        return GetRootGameObject(gameObject.parentContainer);
     }
 
     var layer = GetLayer(gameObject);
     if (layer) {  // At a layer
-        return GetRootLayerGameObject(layer);
+        return GetRootGameObject(layer);
     }
 
     return gameObject;
 }
 
-export default GetRootLayerGameObject;
+export default GetRootGameObject;
