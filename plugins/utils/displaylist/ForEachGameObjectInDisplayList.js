@@ -1,7 +1,7 @@
-import IsFunction from '../../object/IsFunction.js';
-import IsSceneObject from '../../system/IsSceneObject';
-import IsLayerGameObject from '../../system/IsLayerGameObject';
-import IsContainerGameObject from '../../system/IsContainerGameObject';
+import IsFunction from '../object/IsFunction.js';
+import IsSceneObject from '../system/IsSceneObject.js';
+import IsLayerGameObject from '../system/IsLayerGameObject.js';
+import IsContainerGameObject from '../system/IsContainerGameObject.js';
 
 var ForEachGameObjectInDisplayList = function (parent, typeNameFilter, callback, scope) {
     if (IsFunction(typeNameFilter)) {
