@@ -23751,6 +23751,9 @@
     },
     getGameObject: function getGameObject(goType, name, out) {
       var gameobjectManager = this.getGameObjectManager(goType, name);
+      if (!gameobjectManager) {
+        return out;
+      }
       if (typeof name === 'string') {
         return gameobjectManager.getGO(name);
       } else {
@@ -24860,6 +24863,9 @@
       }
       (_this$sys = this.sys).callGameObjectMethod.apply(_this$sys, [goType, config.id, methodName].concat(_toConsumableArray(parameters)));
       return this;
+    },
+    getGameObject: function getGameObject(goType, name, out) {
+      return this.sys.getGameObject(goType, name, out);
     }
   };
 
@@ -50595,21 +50601,21 @@
   }(ComponentBase);
   Object.assign(OpenCloseTransition.prototype, methods$u);
 
-  var GetRootLayerGameObject = function GetRootLayerGameObject(gameObject) {
+  var GetRootGameObject = function GetRootGameObject(gameObject) {
     if (gameObject.parentContainer) {
       // At a container
-      return GetRootLayerGameObject(gameObject.parentContainer);
+      return GetRootGameObject(gameObject.parentContainer);
     }
     var layer = GetLayer(gameObject);
     if (layer) {
       // At a layer
-      return GetRootLayerGameObject(layer);
+      return GetRootGameObject(layer);
     }
     return gameObject;
   };
 
   var GetFirstRenderCamera = function GetFirstRenderCamera(scene, gameObject) {
-    var cameraFilter = GetRootLayerGameObject(gameObject).cameraFilter;
+    var cameraFilter = GetRootGameObject(gameObject).cameraFilter;
     var cameras = scene.sys.cameras.cameras;
     var camera, isCameraIgnore;
     for (var i = 0, cnt = cameras.length; i < cnt; i++) {
@@ -73385,7 +73391,10 @@
         this.emit('type');
         if (this.isLastChar) {
           this.freeTimer();
-          this.emit('complete', this, this.parent);
+          // Fire 'complete' next tick, to render last character on screen
+          this.scene.sys.events.once('preupdate', function () {
+            this.emit('complete', this, this.parent);
+          }, this);
         } else {
           this.timer.delay = this.speed; // delay of next typing            
           this.typingIndex++;

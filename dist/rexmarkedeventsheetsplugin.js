@@ -23290,6 +23290,9 @@
     },
     getGameObject: function getGameObject(goType, name, out) {
       var gameobjectManager = this.getGameObjectManager(goType, name);
+      if (!gameobjectManager) {
+        return out;
+      }
       if (typeof name === 'string') {
         return gameobjectManager.getGO(name);
       } else {
@@ -24399,6 +24402,9 @@
       }
       (_this$sys = this.sys).callGameObjectMethod.apply(_this$sys, [goType, config.id, methodName].concat(_toConsumableArray(parameters)));
       return this;
+    },
+    getGameObject: function getGameObject(goType, name, out) {
+      return this.sys.getGameObject(goType, name, out);
     }
   };
 

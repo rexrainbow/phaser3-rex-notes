@@ -6362,6 +6362,9 @@
     },
     getGameObject: function getGameObject(goType, name, out) {
       var gameobjectManager = this.getGameObjectManager(goType, name);
+      if (!gameobjectManager) {
+        return out;
+      }
       if (typeof name === 'string') {
         return gameobjectManager.getGO(name);
       } else {

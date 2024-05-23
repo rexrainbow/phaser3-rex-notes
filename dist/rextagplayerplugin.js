@@ -6271,6 +6271,9 @@
     },
     getGameObject: function getGameObject(goType, name, out) {
       var gameobjectManager = this.getGameObjectManager(goType, name);
+      if (!gameobjectManager) {
+        return out;
+      }
       if (typeof name === 'string') {
         return gameobjectManager.getGO(name);
       } else {
@@ -8264,7 +8267,10 @@
         this.emit('type');
         if (this.isLastChar) {
           this.freeTimer();
-          this.emit('complete', this, this.parent);
+          // Fire 'complete' next tick, to render last character on screen
+          this.scene.sys.events.once('preupdate', function () {
+            this.emit('complete', this, this.parent);
+          }, this);
         } else {
           this.timer.delay = this.speed; // delay of next typing            
           this.typingIndex++;

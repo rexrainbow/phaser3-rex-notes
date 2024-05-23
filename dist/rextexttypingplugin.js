@@ -692,7 +692,10 @@
         this.emit('type');
         if (this.isLastChar) {
           this.freeTimer();
-          this.emit('complete', this, this.parent);
+          // Fire 'complete' next tick, to render last character on screen
+          this.scene.sys.events.once('preupdate', function () {
+            this.emit('complete', this, this.parent);
+          }, this);
         } else {
           this.timer.delay = this.speed; // delay of next typing            
           this.typingIndex++;
