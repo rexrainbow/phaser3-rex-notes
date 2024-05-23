@@ -58,10 +58,48 @@ class Demo extends Phaser.Scene {
         eventSheetManager
             .on('pause.input', function () {
                 print.text = 'Wait any click to continue';
-                // var dialog = eventSheetManager.commandExecutor.getGameObject('Dialog');
+                var dialog = eventSheetManager.commandExecutor.getGameObject('Dialog');
+                if (dialog) {
+                    var gameObject = dialog.getElement('action');
+                    if (gameObject) {
+                        dialog.setChildAlpha(gameObject, 1);
+
+                        if (dialog.tweenAction) {
+                            dialog.tweenAction.remove();
+                            dialog.tweenAction = undefined;
+                        }
+
+                        var endY = gameObject.getData('endY');
+                        if (endY === undefined) {
+                            endY = gameObject.y;
+                            gameObject.setData('endY', endY);
+                        }
+
+                        dialog.tweenAction = gameObject.scene.tweens.add({
+                            targets: gameObject,
+                            y: { start: endY - 50, to: endY },
+                            ease: 'Bounce', // 'Cubic', 'Elastic', 'Bounce', 'Back'
+                            duration: 500,
+                            repeat: 0, // -1: infinity
+                            yoyo: false
+                        });
+                    }
+                }
             })
             .on('resume.input', function () {
                 print.text = '';
+                var dialog = eventSheetManager.commandExecutor.getGameObject('Dialog');
+                if (dialog) {
+                    var gameObject = dialog.getElement('action');
+                    if (gameObject) {
+                        dialog.setChildAlpha(gameObject, 0);
+
+                        if (dialog.tweenAction) {
+                            dialog.tweenAction.remove();
+                            dialog.tweenAction = undefined;
+                        }
+                    }
+                }
             })
             .on('complete', function () {
                 print.text = 'Complete';
