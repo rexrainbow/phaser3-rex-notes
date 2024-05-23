@@ -4,7 +4,7 @@ import AddClearEffectCallback from './AddClearEffectCallback.js';
 
 var AddVignetteProperties = function (gameObject) {
     // Don't attach properties again
-    if (HasProperty(gameObject, 'vignetteColor')) {
+    if (HasProperty(gameObject, 'vignetteRadius')) {
         return gameObject;
     }
 
