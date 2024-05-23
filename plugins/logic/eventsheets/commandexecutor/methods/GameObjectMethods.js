@@ -106,7 +106,11 @@ export default {
         return this;
     },
 
-    getGameObject(goType, name, out) {
-        return this.sys.getGameObject(goType, name, out);
+    getGameObject(name, out) {
+        if (this.sys.hasGameObjectMananger(name)) {
+            return this.sys.getGameObject(name, undefined, out);
+        } else {
+            return this.sys.getGameObject(undefined, name, out);
+        }
     },
 }
