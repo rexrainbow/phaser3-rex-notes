@@ -20,9 +20,23 @@ class Demo extends Phaser.Scene {
             tlx: 50,
             trx: 40, try: -30,
         })
-            .setBottomSidePoint(0.25, 0, -30)
-            .setBottomSidePoint(0.75, 0, -30)
-            .setLeftSidePoint(0.75, -40, 0)
+            .insertBottomSidePoint(0.5, 0, 0, 'buttonPoint0')
+            .insertBottomSidePoint(0.5, 0, 0, 'buttonPoint1')
+            .insertLeftSidePoint(0.75, 0, 0, 'leftPoint')
+
+        this.tweens.add({
+            targets: rect,
+
+            leftPointX: -40,
+
+            buttonPoint0Y: -30,
+            buttonPoint0T: 0.25,
+
+            buttonPoint1Y: -30,
+            buttonPoint1T: 0.75,
+
+            duration: 2000
+        })
     }
 
     update() {

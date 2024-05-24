@@ -53,19 +53,19 @@ class Quad extends PolygnBase {
 
         var leftSidePoints = GetValue(config, 'leftSidePoints');
         if (leftSidePoints) {
-            this.setLeftSidePoint(leftSidePoints);
+            this.insertLeftSidePoint(leftSidePoints);
         }
         var topSidePoints = GetValue(config, 'topSidePoints');
         if (topSidePoints) {
-            this.setTopSidePoint(topSidePoints);
+            this.insertTopSidePoint(topSidePoints);
         }
         var rightSidePoints = GetValue(config, 'rightSidePoints');
         if (rightSidePoints) {
-            this.setRightSidePoint(rightSidePoints);
+            this.insertRightSidePoint(rightSidePoints);
         }
         var bottomSidePoints = GetValue(config, 'bottomSidePoints');
         if (bottomSidePoints) {
-            this.setBottomSidePoint(bottomSidePoints);
+            this.insertBottomSidePoint(bottomSidePoints);
         }
 
 
@@ -95,37 +95,61 @@ class Quad extends PolygnBase {
 
         // Top side
         LineTo(tlx, tly, pathData);
+        SortPoints(topSidePoints);
         for (var i = 0, cnt = topSidePoints.length; i < cnt; i++) {
             var point = topSidePoints[i];
-            var px = Linear(tlx, trx, point.t) + point.x;
-            var py = Linear(tly, try_, point.t) + point.y;
+            var px = point.x;
+            var py = point.y;
+            if ((px === 0) && (py === 0)) {
+                continue;
+            }
+            px += Linear(tlx, trx, point.t);
+            py += Linear(tly, try_, point.t);
             LineTo(px, py, pathData);
         }
 
         // Right side
         LineTo(trx, try_, pathData);
+        SortPoints(rightSidePoints);
         for (var i = 0, cnt = rightSidePoints.length; i < cnt; i++) {
             var point = rightSidePoints[i];
-            var px = Linear(trx, brx, point.t) + point.x;
-            var py = Linear(try_, bry, point.t) + point.y;
+            var px = point.x;
+            var py = point.y;
+            if ((px === 0) && (py === 0)) {
+                continue;
+            }
+            px += Linear(trx, brx, point.t);
+            py += Linear(try_, bry, point.t);
             LineTo(px, py, pathData);
         }
 
         // Bottom side
         LineTo(brx, bry, pathData);
+        SortPoints(bottomSidePoints);
         for (var i = bottomSidePoints.length - 1; i >= 0; i--) {
             var point = bottomSidePoints[i];
-            var px = Linear(blx, brx, point.t) + point.x;
-            var py = Linear(bly, bry, point.t) + point.y;
+            var px = point.x;
+            var py = point.y;
+            if ((px === 0) && (py === 0)) {
+                continue;
+            }
+            px += Linear(blx, brx, point.t);
+            py += Linear(bly, bry, point.t);
             LineTo(px, py, pathData);
         }
 
         // Left side
         LineTo(blx, bly, pathData);
+        SortPoints(leftSidePoints);
         for (var i = leftSidePoints.length - 1; i >= 0; i--) {
             var point = leftSidePoints[i];
-            var px = Linear(tlx, blx, point.t) + point.x;
-            var py = Linear(tly, bly, point.t) + point.y;
+            var px = point.x;
+            var py = point.y;
+            if ((px === 0) && (py === 0)) {
+                continue;
+            }
+            px += Linear(tlx, blx, point.t);
+            py += Linear(tly, bly, point.t);
             LineTo(px, py, pathData);
         }
 
@@ -222,6 +246,15 @@ class Quad extends PolygnBase {
     get rightSidePoints() {
         return this.geom.rightSidePoints;
     }
+}
+
+var SortPoints = function (points) {
+    if (points.length <= 1) {
+        return;
+    }
+    points.sort(function (pointA, pointB) {
+        return pointA.t - pointB.t;
+    })
 }
 
 Object.assign(

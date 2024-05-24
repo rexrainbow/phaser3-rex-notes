@@ -10,6 +10,10 @@ declare namespace Quad {
         y: number
     }
 
+    interface ISidePointParameter extends ISidePoint {
+        key?: string
+    }
+
     interface IConfig {
         x?: number,
         y?: number,
@@ -32,6 +36,10 @@ declare namespace Quad {
         brx?: number;
         bry?: number;
 
+        leftSidePoints?: ISidePointParameter[],
+        topSidePoints?: ISidePointParameter[],
+        rightSidePoints?: ISidePointParameter[],
+        bottomSidePoints?: ISidePointParameter[],
     }
 
 }
@@ -66,17 +74,17 @@ declare class Quad extends Phaser.GameObjects.Shape {
     brx: number;
     bry: number;
 
-    setTopSidePoint(t: number, x: number, y: number): this;
-    setTopSidePoint(points: Quad.ISidePoint[]): this;
+    setTopSidePoint(t: number, x: number, y: number, key?: string): this;
+    setTopSidePoint(points: Quad.ISidePointParameter[]): this;
 
-    setRightSidePoint(t: number, x: number, y: number): this;
-    setRightSidePoint(points: Quad.ISidePoint[]): this;
+    setRightSidePoint(t: number, x: number, y: number, key?: string): this;
+    setRightSidePoint(points: Quad.ISidePointParameter[]): this;
 
-    setBottomSidePoint(t: number, x: number, y: number): this;
-    setBottomSidePoint(points: Quad.ISidePoint[]): this;
+    setBottomSidePoint(t: number, x: number, y: number, key?: string): this;
+    setBottomSidePoint(points: Quad.ISidePointParameter[]): this;
 
-    setLeftSidePoint(t: number, x: number, y: number): this;
-    setLeftSidePoint(points: Quad.ISidePoint[]): this;
+    setLeftSidePoint(t: number, x: number, y: number, key?: string): this;
+    setLeftSidePoint(points: Quad.ISidePointParameter[]): this;
 
     clearTopSidePoints(): this;
     clearRightSidePoints(): this;

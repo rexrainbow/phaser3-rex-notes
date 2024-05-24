@@ -1,3 +1,38 @@
+import HasProperty from '../../../../utils/object/HasProperty.js';
+
+var InjectPointAccessProperties = function (gameObject, key, point) {
+    if (!key || HasProperty(gameObject, `${key}X`)) {
+        return;
+    }
+    Object.defineProperty(gameObject, `${key}X`, {
+        get: function () {
+            return point.x;
+        },
+        set: function (value) {
+            point.x = value;
+            gameObject.dirty = true;
+        },
+    });
+    Object.defineProperty(gameObject, `${key}Y`, {
+        get: function () {
+            return point.y;
+        },
+        set: function (value) {
+            point.y = value;
+            gameObject.dirty = true;
+        },
+    });
+    Object.defineProperty(gameObject, `${key}T`, {
+        get: function () {
+            return point.t;
+        },
+        set: function (value) {
+            point.t = value;
+            gameObject.dirty = true;
+        },
+    });
+}
+
 export default {
     setTLPosition(x, y) {
         this.geom.setTLPosition(x, y);
@@ -29,57 +64,69 @@ export default {
         return this;
     },
 
-    setTopSidePoint(t, x, y) {
+    insertTopSidePoint(t, x, y, key) {
+        var points = this.geom.topSidePoints;
         if (Array.isArray(t)) {
             var points = t, point;
             for (var i = 0, cnt = points.length; i < cnt; i++) {
                 point = points[i];
-                this.geom.setTopSidePoint(point.t, point.x, point.y);
+                this.geom.insertTopSidePoint(point.t, point.x, point.y);
+                InjectPointAccessProperties(this, point.key, points[points.length - 1]);
             }
         } else {
-            this.geom.setTopSidePoint(t, x, y);
+            this.geom.insertTopSidePoint(t, x, y);
+            InjectPointAccessProperties(this, key, points[points.length - 1]);
         }
         this.dirty = true;
         return this;
     },
 
-    setRightSidePoint(t, x, y) {
+    insertRightSidePoint(t, x, y, key) {
+        var points = this.geom.rightSidePoints;
         if (Array.isArray(t)) {
             var points = t, point;
             for (var i = 0, cnt = points.length; i < cnt; i++) {
                 point = points[i];
-                this.geom.setRightSidePoint(point.t, point.x, point.y);
+                this.geom.insertRightSidePoint(point.t, point.x, point.y);
+                InjectPointAccessProperties(this, point.key, points[points.length - 1]);
             }
         } else {
-            this.geom.setRightSidePoint(t, x, y);
+            this.geom.insertRightSidePoint(t, x, y);
+            InjectPointAccessProperties(this, key, points[points.length - 1]);
         }
         this.dirty = true;
         return this;
     },
 
-    setBottomSidePoint(t, x, y) {
+    insertBottomSidePoint(t, x, y, key) {
+        var points = this.geom.bottomSidePoints;
         if (Array.isArray(t)) {
             var points = t, point;
             for (var i = 0, cnt = points.length; i < cnt; i++) {
                 point = points[i];
-                this.geom.setBottomSidePoint(point.t, point.x, point.y);
+                this.geom.insertBottomSidePoint(point.t, point.x, point.y);
+                InjectPointAccessProperties(this, point.key, points[points.length - 1]);
             }
         } else {
-            this.geom.setBottomSidePoint(t, x, y);
+            this.geom.insertBottomSidePoint(t, x, y);
+            InjectPointAccessProperties(this, key, points[points.length - 1]);
         }
         this.dirty = true;
         return this;
     },
 
-    setLeftSidePoint(t, x, y) {
+    insertLeftSidePoint(t, x, y, key) {
+        var points = this.geom.leftSidePoints;
         if (Array.isArray(t)) {
             var points = t, point;
             for (var i = 0, cnt = points.length; i < cnt; i++) {
                 point = points[i];
-                this.geom.setLeftSidePoint(point.t, point.x, point.y);
+                this.geom.insertLeftSidePoint(point.t, point.x, point.y);
+                InjectPointAccessProperties(this, point.key, points[points.length - 1]);
             }
         } else {
-            this.geom.setLeftSidePoint(t, x, y);
+            this.geom.insertLeftSidePoint(t, x, y);
+            InjectPointAccessProperties(this, key, points[points.length - 1]);
         }
         this.dirty = true;
         return this;

@@ -73,22 +73,22 @@ class QuadGeom {
         return this;
     }
 
-    setTopSidePoint(t, x, y) {
+    insertTopSidePoint(t, x, y) {
         AddPoint(this.topSidePoints, t, x, y);
         return this;
     }
 
-    setRightSidePoint(t, x, y) {
+    insertRightSidePoint(t, x, y) {
         AddPoint(this.rightSidePoints, t, x, y);
         return this;
     }
 
-    setBottomSidePoint(t, x, y) {
+    insertBottomSidePoint(t, x, y) {
         AddPoint(this.bottomSidePoints, t, x, y);
         return this;
     }
 
-    setLeftSidePoint(t, x, y) {
+    insertLeftSidePoint(t, x, y) {
         AddPoint(this.leftSidePoints, t, x, y);
         return this;
     }
@@ -125,33 +125,14 @@ class QuadGeom {
     }
 }
 
-var GetPoint = function (points, t) {
-    for (var i = 0, cnt = points.length; i < cnt; i++) {
-        if (points[i].t === t) {
-            return points[i];
-        }
-    }
-
-    return null;
-}
-
-var SortPoints = function (points) {
-    points.sort(function (pointA, pointB) {
-        return pointA.t - pointB.t;
-    })
-}
-
 var AddPoint = function (points, t, x, y) {
-    var point = GetPoint(points);
-    if (point) {
-        point.x = x;
-        point.y = y;
-    } else {
-        points.push({ t: t, x: x, y: y });
-        if (points.length > 1) {
-            SortPoints(points);
-        }
+    if (typeof (t) !== 'number') {
+        var config = t;
+        t = config.t;
+        x = config.x;
+        y = config.y;
     }
+    points.push({ t: t, x: x, y: y });
 }
 
 export default QuadGeom;
