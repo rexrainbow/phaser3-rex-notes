@@ -723,6 +723,44 @@ declare class BaseSizer extends ContainerLite {
 
     disableTouching(gameObject: Phaser.GameObjects.GameObject): this;
 
+    onOver(
+        callback: (
+            pointer: Phaser.Input.Pointer,
+            localX: number,
+            localY: number,
+            event: Phaser.Types.Input.EventData
+        ) => void,
+        scope?: object,
+    ): this;
+
+    onOver(
+        gameObject: Phaser.GameObjects.GameObject,
+        callback: (
+            pointer: Phaser.Input.Pointer,
+            localX: number,
+            localY: number,
+            event: Phaser.Types.Input.EventData
+        ) => void,
+        scope?: object,
+    ): this;
+
+    onOut(
+        callback: (
+            pointer: Phaser.Input.Pointer,
+            event: Phaser.Types.Input.EventData
+        ) => void,
+        scope?: object,
+    ): this;
+
+    onOut(
+        gameObject: Phaser.GameObjects.GameObject,
+        callback: (
+            pointer: Phaser.Input.Pointer,
+            event: Phaser.Types.Input.EventData
+        ) => void,
+        scope?: object,
+    ): this;
+
     setChildrenInteractive(
         config: SetChildrenInteractive.IConfig
     ): this;

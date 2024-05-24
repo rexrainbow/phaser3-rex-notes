@@ -52,6 +52,7 @@ import SetDraggable from './SetDraggable.js';
 import ClickMethods from './ClickMethods.js';
 import ClickOutsideMethods from './ClickOutsideMethods.js';
 import TouchingMethods from './TouchingMethods.js';
+import HoverMethods from './HoverMethods.js';
 import SetChildrenInteractive from './SetChildrenInteractive.js';
 import BroadcastEvent from './BroadcastEvent.js';
 
@@ -115,6 +116,7 @@ Object.assign(
     ClickMethods,
     ClickOutsideMethods,
     TouchingMethods,
+    HoverMethods,
     HideMethods,
     ModalMethods,
     GetShownChildrenMethods,
