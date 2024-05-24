@@ -19693,7 +19693,7 @@
 
   var AddVignetteProperties = function AddVignetteProperties(gameObject) {
     // Don't attach properties again
-    if (HasProperty(gameObject, 'vignetteColor')) {
+    if (HasProperty(gameObject, 'vignetteRadius')) {
       return gameObject;
     }
     var fxFactory = GetFXFactory(gameObject);
@@ -24919,8 +24919,12 @@
       (_this$sys = this.sys).callGameObjectMethod.apply(_this$sys, [goType, config.id, methodName].concat(_toConsumableArray(parameters)));
       return this;
     },
-    getGameObject: function getGameObject(goType, name, out) {
-      return this.sys.getGameObject(goType, name, out);
+    getGameObject: function getGameObject(name, out) {
+      if (this.sys.hasGameObjectMananger(name)) {
+        return this.sys.getGameObject(name, undefined, out);
+      } else {
+        return this.sys.getGameObject(undefined, name, out);
+      }
     }
   };
 

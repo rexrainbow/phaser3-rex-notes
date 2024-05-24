@@ -1500,7 +1500,7 @@
 
   var AddVignetteProperties = function AddVignetteProperties(gameObject) {
     // Don't attach properties again
-    if (HasProperty(gameObject, 'vignetteColor')) {
+    if (HasProperty(gameObject, 'vignetteRadius')) {
       return gameObject;
     }
     var fxFactory = GetFXFactory(gameObject);

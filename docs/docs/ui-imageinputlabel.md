@@ -18,6 +18,27 @@ A container with a [canvas](canvas.md) icon, text, and background. Click icon to
 
 #### Load minify file
 
+- Enable dom element in [configuration of game](game.md#configuration)
+    ```javascript
+    var config = {
+        parent: divId,
+        dom: {
+            createContainer: true
+        },
+        input: {
+            mouse: {
+                target: divId
+            },
+            touch: {
+                target: divId
+            },
+        },
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+    - Set `parent` to divId
+    - Set `dom.createContainer` to `true`.
 - Load plugin (minify file) in preload stage
     ```javascript
     scene.load.scenePlugin('rexuiplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js', 'rexUI', 'rexUI');
@@ -33,10 +54,22 @@ A container with a [canvas](canvas.md) icon, text, and background. Click icon to
     ```
     npm i phaser3-rex-plugins
     ```
-- Install plugin in [configuration of game](game.md#configuration)
+- Install plugin, enable dom element in [configuration of game](game.md#configuration)
     ```javascript
     import UIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
     var config = {
+        parent: divId,
+        dom: {
+            createContainer: true
+        },
+        input: {
+            mouse: {
+                target: divId
+            },
+            touch: {
+                target: divId
+            },
+        },
         // ...
         plugins: {
             scene: [{
@@ -51,6 +84,8 @@ A container with a [canvas](canvas.md) icon, text, and background. Click icon to
     };
     var game = new Phaser.Game(config);
     ```
+    - Set `parent` to divId
+    - Set `dom.createContainer` to `true`.
 - Add image-input label object
     ```javascript
     var imageInputLabel = scene.rexUI.add.imageInputLabel(config);
@@ -62,6 +97,27 @@ A container with a [canvas](canvas.md) icon, text, and background. Click icon to
     ```
     npm i phaser3-rex-plugins
     ```
+- Enable dom element in [configuration of game](game.md#configuration)
+    ```javascript
+    var config = {
+        parent: divId,
+        dom: {
+            createContainer: true
+        },
+        input: {
+            mouse: {
+                target: divId
+            },
+            touch: {
+                target: divId
+            },
+        },
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+    - Set `parent` to divId
+    - Set `dom.createContainer` to `true`.
 - Import class
     ```javascript
     import { ImageInputLabel } from 'phaser3-rex-plugins/templates/ui/ui-components.js';

@@ -9830,6 +9830,28 @@
 <h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
 <h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
 <ul>
+<li>Enable dom element in <a href="../game/#configuration">configuration of game</a>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">parent</span><span class="o">:</span><span class="w"> </span><span class="nx">divId</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">dom</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">createContainer</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nx">input</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">mouse</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">target</span><span class="o">:</span><span class="w"> </span><span class="nx">divId</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nx">touch</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">target</span><span class="o">:</span><span class="w"> </span><span class="nx">divId</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">};</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">game</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</code></pre></div><ul>
+<li>Set <code>parent</code> to divId</li>
+<li>Set <code>dom.createContainer</code> to <code>true</code>.</li>
+</ul>
+</li>
 <li>Load plugin (minify file) in preload stage
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">scenePlugin</span><span class="p">(</span><span class="s1">&#39;rexuiplugin&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;rexUI&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;rexUI&#39;</span><span class="p">);</span>
 </code></pre></div></li>
@@ -9842,9 +9864,21 @@
 <li>Install rex plugins from npm
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
-<li>Install plugin in <a href="../game/#configuration">configuration of game</a>
+<li>Install plugin, enable dom element in <a href="../game/#configuration">configuration of game</a>
     <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">UIPlugin</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-plugin.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">parent</span><span class="o">:</span><span class="w"> </span><span class="nx">divId</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">dom</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">createContainer</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nx">input</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">mouse</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">target</span><span class="o">:</span><span class="w"> </span><span class="nx">divId</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nx">touch</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">target</span><span class="o">:</span><span class="w"> </span><span class="nx">divId</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">    </span><span class="p">},</span>
 <span class="w">    </span><span class="c1">// ...</span>
 <span class="w">    </span><span class="nx">plugins</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">scene</span><span class="o">:</span><span class="w"> </span><span class="p">[{</span>
@@ -9858,7 +9892,11 @@
 <span class="w">    </span><span class="c1">// ...</span>
 <span class="p">};</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">game</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li>Set <code>parent</code> to divId</li>
+<li>Set <code>dom.createContainer</code> to <code>true</code>.</li>
+</ul>
+</li>
 <li>Add image-input label object
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">imageInputLabel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">imageInputLabel</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
@@ -9868,6 +9906,28 @@
 <li>Install rex plugins from npm
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
+<li>Enable dom element in <a href="../game/#configuration">configuration of game</a>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">parent</span><span class="o">:</span><span class="w"> </span><span class="nx">divId</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">dom</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">createContainer</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nx">input</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">mouse</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">target</span><span class="o">:</span><span class="w"> </span><span class="nx">divId</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nx">touch</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">target</span><span class="o">:</span><span class="w"> </span><span class="nx">divId</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">};</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">game</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</code></pre></div><ul>
+<li>Set <code>parent</code> to divId</li>
+<li>Set <code>dom.createContainer</code> to <code>true</code>.</li>
+</ul>
+</li>
 <li>Import class
     <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">ImageInputLabel</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-components.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
