@@ -379,6 +379,54 @@
   }(Shape);
   Object.assign(PolygnBase.prototype, Render);
 
+  var HasProperty = function HasProperty(obj, prop) {
+    if (!obj) {
+      return false;
+    }
+    if (obj.hasOwnProperty(prop)) {
+      return true;
+    }
+    while (obj) {
+      if (Object.getOwnPropertyDescriptor(obj, prop)) {
+        return true;
+      }
+      obj = obj.__proto__;
+    }
+    return false;
+  };
+
+  var InjectPointAccessProperties = function InjectPointAccessProperties(gameObject, key, point) {
+    if (!key || HasProperty(gameObject, "".concat(key, "X"))) {
+      return;
+    }
+    Object.defineProperty(gameObject, "".concat(key, "X"), {
+      get: function get() {
+        return point.x;
+      },
+      set: function set(value) {
+        point.x = value;
+        gameObject.dirty = true;
+      }
+    });
+    Object.defineProperty(gameObject, "".concat(key, "Y"), {
+      get: function get() {
+        return point.y;
+      },
+      set: function set(value) {
+        point.y = value;
+        gameObject.dirty = true;
+      }
+    });
+    Object.defineProperty(gameObject, "".concat(key, "T"), {
+      get: function get() {
+        return point.t;
+      },
+      set: function set(value) {
+        point.t = value;
+        gameObject.dirty = true;
+      }
+    });
+  };
   var PointMethods = {
     setTLPosition: function setTLPosition(x, y) {
       this.geom.setTLPosition(x, y);
@@ -405,58 +453,70 @@
       this.dirty = true;
       return this;
     },
-    setTopSidePoint: function setTopSidePoint(t, x, y) {
+    insertTopSidePoint: function insertTopSidePoint(t, x, y, key) {
+      var points = this.geom.topSidePoints;
       if (Array.isArray(t)) {
         var points = t,
           point;
         for (var i = 0, cnt = points.length; i < cnt; i++) {
           point = points[i];
-          this.geom.setTopSidePoint(point.t, point.x, point.y);
+          this.geom.insertTopSidePoint(point.t, point.x, point.y);
+          InjectPointAccessProperties(this, point.key, points[points.length - 1]);
         }
       } else {
-        this.geom.setTopSidePoint(t, x, y);
+        this.geom.insertTopSidePoint(t, x, y);
+        InjectPointAccessProperties(this, key, points[points.length - 1]);
       }
       this.dirty = true;
       return this;
     },
-    setRightSidePoint: function setRightSidePoint(t, x, y) {
+    insertRightSidePoint: function insertRightSidePoint(t, x, y, key) {
+      var points = this.geom.rightSidePoints;
       if (Array.isArray(t)) {
         var points = t,
           point;
         for (var i = 0, cnt = points.length; i < cnt; i++) {
           point = points[i];
-          this.geom.setRightSidePoint(point.t, point.x, point.y);
+          this.geom.insertRightSidePoint(point.t, point.x, point.y);
+          InjectPointAccessProperties(this, point.key, points[points.length - 1]);
         }
       } else {
-        this.geom.setRightSidePoint(t, x, y);
+        this.geom.insertRightSidePoint(t, x, y);
+        InjectPointAccessProperties(this, key, points[points.length - 1]);
       }
       this.dirty = true;
       return this;
     },
-    setBottomSidePoint: function setBottomSidePoint(t, x, y) {
+    insertBottomSidePoint: function insertBottomSidePoint(t, x, y, key) {
+      var points = this.geom.bottomSidePoints;
       if (Array.isArray(t)) {
         var points = t,
           point;
         for (var i = 0, cnt = points.length; i < cnt; i++) {
           point = points[i];
-          this.geom.setBottomSidePoint(point.t, point.x, point.y);
+          this.geom.insertBottomSidePoint(point.t, point.x, point.y);
+          InjectPointAccessProperties(this, point.key, points[points.length - 1]);
         }
       } else {
-        this.geom.setBottomSidePoint(t, x, y);
+        this.geom.insertBottomSidePoint(t, x, y);
+        InjectPointAccessProperties(this, key, points[points.length - 1]);
       }
       this.dirty = true;
       return this;
     },
-    setLeftSidePoint: function setLeftSidePoint(t, x, y) {
+    insertLeftSidePoint: function insertLeftSidePoint(t, x, y, key) {
+      var points = this.geom.leftSidePoints;
       if (Array.isArray(t)) {
         var points = t,
           point;
         for (var i = 0, cnt = points.length; i < cnt; i++) {
           point = points[i];
-          this.geom.setLeftSidePoint(point.t, point.x, point.y);
+          this.geom.insertLeftSidePoint(point.t, point.x, point.y);
+          InjectPointAccessProperties(this, point.key, points[points.length - 1]);
         }
       } else {
-        this.geom.setLeftSidePoint(t, x, y);
+        this.geom.insertLeftSidePoint(t, x, y);
+        InjectPointAccessProperties(this, key, points[points.length - 1]);
       }
       this.dirty = true;
       return this;
@@ -573,26 +633,26 @@
         return this;
       }
     }, {
-      key: "setTopSidePoint",
-      value: function setTopSidePoint(t, x, y) {
+      key: "insertTopSidePoint",
+      value: function insertTopSidePoint(t, x, y) {
         AddPoint(this.topSidePoints, t, x, y);
         return this;
       }
     }, {
-      key: "setRightSidePoint",
-      value: function setRightSidePoint(t, x, y) {
+      key: "insertRightSidePoint",
+      value: function insertRightSidePoint(t, x, y) {
         AddPoint(this.rightSidePoints, t, x, y);
         return this;
       }
     }, {
-      key: "setBottomSidePoint",
-      value: function setBottomSidePoint(t, x, y) {
+      key: "insertBottomSidePoint",
+      value: function insertBottomSidePoint(t, x, y) {
         AddPoint(this.bottomSidePoints, t, x, y);
         return this;
       }
     }, {
-      key: "setLeftSidePoint",
-      value: function setLeftSidePoint(t, x, y) {
+      key: "insertLeftSidePoint",
+      value: function insertLeftSidePoint(t, x, y) {
         AddPoint(this.leftSidePoints, t, x, y);
         return this;
       }
@@ -629,34 +689,18 @@
     }]);
     return QuadGeom;
   }();
-  var GetPoint = function GetPoint(points, t) {
-    for (var i = 0, cnt = points.length; i < cnt; i++) {
-      if (points[i].t === t) {
-        return points[i];
-      }
-    }
-    return null;
-  };
-  var SortPoints = function SortPoints(points) {
-    points.sort(function (pointA, pointB) {
-      return pointA.t - pointB.t;
-    });
-  };
   var AddPoint = function AddPoint(points, t, x, y) {
-    var point = GetPoint(points);
-    if (point) {
-      point.x = x;
-      point.y = y;
-    } else {
-      points.push({
-        t: t,
-        x: x,
-        y: y
-      });
-      if (points.length > 1) {
-        SortPoints(points);
-      }
+    if (typeof t !== 'number') {
+      var config = t;
+      t = config.t;
+      x = config.x;
+      y = config.y;
     }
+    points.push({
+      t: t,
+      x: x,
+      y: y
+    });
   };
 
   var LineTo = function LineTo(x, y, pathData) {
@@ -718,19 +762,19 @@
       _this.setTLPosition(GetValue(config, 'tlx', 0), GetValue(config, 'tly', 0)).setTRPosition(GetValue(config, 'trx', 0), GetValue(config, 'try', 0)).setBLPosition(GetValue(config, 'blx', 0), GetValue(config, 'bly', 0)).setBRPosition(GetValue(config, 'brx', 0), GetValue(config, 'bry', 0));
       var leftSidePoints = GetValue(config, 'leftSidePoints');
       if (leftSidePoints) {
-        _this.setLeftSidePoint(leftSidePoints);
+        _this.insertLeftSidePoint(leftSidePoints);
       }
       var topSidePoints = GetValue(config, 'topSidePoints');
       if (topSidePoints) {
-        _this.setTopSidePoint(topSidePoints);
+        _this.insertTopSidePoint(topSidePoints);
       }
       var rightSidePoints = GetValue(config, 'rightSidePoints');
       if (rightSidePoints) {
-        _this.setRightSidePoint(rightSidePoints);
+        _this.insertRightSidePoint(rightSidePoints);
       }
       var bottomSidePoints = GetValue(config, 'bottomSidePoints');
       if (bottomSidePoints) {
-        _this.setBottomSidePoint(bottomSidePoints);
+        _this.insertBottomSidePoint(bottomSidePoints);
       }
       _this.updateDisplayOrigin();
       _this.dirty = true;
@@ -759,37 +803,61 @@
 
         // Top side
         LineTo(tlx, tly, pathData);
+        SortPoints(topSidePoints);
         for (var i = 0, cnt = topSidePoints.length; i < cnt; i++) {
           var point = topSidePoints[i];
-          var px = Linear(tlx, trx, point.t) + point.x;
-          var py = Linear(tly, try_, point.t) + point.y;
+          var px = point.x;
+          var py = point.y;
+          if (px === 0 && py === 0) {
+            continue;
+          }
+          px += Linear(tlx, trx, point.t);
+          py += Linear(tly, try_, point.t);
           LineTo(px, py, pathData);
         }
 
         // Right side
         LineTo(trx, try_, pathData);
+        SortPoints(rightSidePoints);
         for (var i = 0, cnt = rightSidePoints.length; i < cnt; i++) {
           var point = rightSidePoints[i];
-          var px = Linear(trx, brx, point.t) + point.x;
-          var py = Linear(try_, bry, point.t) + point.y;
+          var px = point.x;
+          var py = point.y;
+          if (px === 0 && py === 0) {
+            continue;
+          }
+          px += Linear(trx, brx, point.t);
+          py += Linear(try_, bry, point.t);
           LineTo(px, py, pathData);
         }
 
         // Bottom side
         LineTo(brx, bry, pathData);
+        SortPoints(bottomSidePoints);
         for (var i = bottomSidePoints.length - 1; i >= 0; i--) {
           var point = bottomSidePoints[i];
-          var px = Linear(blx, brx, point.t) + point.x;
-          var py = Linear(bly, bry, point.t) + point.y;
+          var px = point.x;
+          var py = point.y;
+          if (px === 0 && py === 0) {
+            continue;
+          }
+          px += Linear(blx, brx, point.t);
+          py += Linear(bly, bry, point.t);
           LineTo(px, py, pathData);
         }
 
         // Left side
         LineTo(blx, bly, pathData);
+        SortPoints(leftSidePoints);
         for (var i = leftSidePoints.length - 1; i >= 0; i--) {
           var point = leftSidePoints[i];
-          var px = Linear(tlx, blx, point.t) + point.x;
-          var py = Linear(tly, bly, point.t) + point.y;
+          var px = point.x;
+          var py = point.y;
+          if (px === 0 && py === 0) {
+            continue;
+          }
+          px += Linear(tlx, blx, point.t);
+          py += Linear(tly, bly, point.t);
           LineTo(px, py, pathData);
         }
         pathData.push(pathData[0], pathData[1]); // Repeat first point to close curve
@@ -891,6 +959,14 @@
     }]);
     return Quad;
   }(PolygnBase);
+  var SortPoints = function SortPoints(points) {
+    if (points.length <= 1) {
+      return;
+    }
+    points.sort(function (pointA, pointB) {
+      return pointA.t - pointB.t;
+    });
+  };
   Object.assign(Quad.prototype, PointMethods);
 
   function Factory (x, y, width, height, fillColor, fillAlpha) {
