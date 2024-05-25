@@ -1,2 +1,2 @@
-import RoundRectangle from "../../../plugins/roundrectangle";
+import RoundRectangle from '../../../plugins/roundrectangle';
 export default RoundRectangle;

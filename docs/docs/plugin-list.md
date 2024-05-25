@@ -167,6 +167,7 @@
 163. [Shape/Custom shapes](shape-custom-shapes.md): Custom shapes on shape.
 164. [Shape/Full window rectangle](shape-fullwindowrectangle.md): Rectangle shape covered full window.
 165. [Shape/Line progress](shape-lineprogress.md): Horizontal line progress bar shape.
+165. [Shape/Quad](shape-quad.md): Quad shape, offsets can be given on four vertices, and additional points can be added on the four sides.
 166. [Shape/Round-Rectangle](shape-roundrectangle.md): Round rectangle shape.
 167. [Shape/Spinner](shape-spinner.md): Loading animations on shape.
 168. [Shape/Toggle-switch](shape-toggleswitch.md): Toggle-switch input.

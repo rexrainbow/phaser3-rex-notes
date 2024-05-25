@@ -98,13 +98,8 @@ class Quad extends PolygnBase {
         SortPoints(topSidePoints);
         for (var i = 0, cnt = topSidePoints.length; i < cnt; i++) {
             var point = topSidePoints[i];
-            var px = point.x;
-            var py = point.y;
-            if ((px === 0) && (py === 0)) {
-                continue;
-            }
-            px += Linear(tlx, trx, point.t);
-            py += Linear(tly, try_, point.t);
+            var px = Linear(tlx, trx, point.t) + point.x;
+            var py = Linear(tly, try_, point.t) + point.y;
             LineTo(px, py, pathData);
         }
 
@@ -113,13 +108,8 @@ class Quad extends PolygnBase {
         SortPoints(rightSidePoints);
         for (var i = 0, cnt = rightSidePoints.length; i < cnt; i++) {
             var point = rightSidePoints[i];
-            var px = point.x;
-            var py = point.y;
-            if ((px === 0) && (py === 0)) {
-                continue;
-            }
-            px += Linear(trx, brx, point.t);
-            py += Linear(try_, bry, point.t);
+            var px = Linear(trx, brx, point.t) + point.x;
+            var py = Linear(try_, bry, point.t) + point.y;
             LineTo(px, py, pathData);
         }
 
@@ -128,13 +118,8 @@ class Quad extends PolygnBase {
         SortPoints(bottomSidePoints);
         for (var i = bottomSidePoints.length - 1; i >= 0; i--) {
             var point = bottomSidePoints[i];
-            var px = point.x;
-            var py = point.y;
-            if ((px === 0) && (py === 0)) {
-                continue;
-            }
-            px += Linear(blx, brx, point.t);
-            py += Linear(bly, bry, point.t);
+            var px = Linear(blx, brx, point.t) + point.x;
+            var py = Linear(bly, bry, point.t) + point.y;
             LineTo(px, py, pathData);
         }
 
@@ -143,13 +128,8 @@ class Quad extends PolygnBase {
         SortPoints(leftSidePoints);
         for (var i = leftSidePoints.length - 1; i >= 0; i--) {
             var point = leftSidePoints[i];
-            var px = point.x;
-            var py = point.y;
-            if ((px === 0) && (py === 0)) {
-                continue;
-            }
-            px += Linear(tlx, blx, point.t);
-            py += Linear(tly, bly, point.t);
+            var px = Linear(tlx, blx, point.t) + point.x;
+            var py = Linear(tly, bly, point.t) + point.y;
             LineTo(px, py, pathData);
         }
 

@@ -19,7 +19,7 @@ Round rectangle shape.
 
 - Load plugin (minify file) in preload stage
     ```javascript
-    scene.load.plugin('rexroundrectangleplugin', 'https://raw.githubusercontent.com/rexrainbow/    phaser3-rex-notes/master/dist/rexroundrectangleplugin.min.js', true);
+    scene.load.plugin('rexroundrectangleplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexroundrectangleplugin.min.js', true);
     ```
 - Add shape object
     ```javascript

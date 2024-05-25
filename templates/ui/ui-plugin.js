@@ -4,6 +4,7 @@ import NinePatchFactory from './ninepatch/Factory.js';
 import NinePatch2Factory from './ninepatch2/Factory.js';
 import RoundRectangleFactory from './roundrectangle/Factory.js';
 import RoundRectangleCanvasFactory from './roundrectanglecanvas/Factory.js';
+import QuadShapeFactory from './quadshape/Factory.js';
 import BBCodeTextFactory from './bbcodetext/Factory.js';
 import TagTextFactory from './tagtext/Factory.js';
 import DynamicTextFactory from './dynamictext/Factory.js';

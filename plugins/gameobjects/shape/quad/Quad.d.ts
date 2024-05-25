@@ -28,7 +28,7 @@ declare namespace Quad {
         strokeWidth?: number,
 
         tlx?: number;
-        tlr?: number;
+        tly?: number;
         trx?: number;
         try?: number;
         blx?: number;
@@ -74,17 +74,17 @@ declare class Quad extends Phaser.GameObjects.Shape {
     brx: number;
     bry: number;
 
-    setTopSidePoint(t: number, x: number, y: number, key?: string): this;
-    setTopSidePoint(points: Quad.ISidePointParameter[]): this;
+    insertTopSidePoint(t: number, x: number, y: number, key?: string): this;
+    insertTopSidePoint(points: Quad.ISidePointParameter[]): this;
 
-    setRightSidePoint(t: number, x: number, y: number, key?: string): this;
-    setRightSidePoint(points: Quad.ISidePointParameter[]): this;
+    insertRightSidePoint(t: number, x: number, y: number, key?: string): this;
+    insertRightSidePoint(points: Quad.ISidePointParameter[]): this;
 
-    setBottomSidePoint(t: number, x: number, y: number, key?: string): this;
-    setBottomSidePoint(points: Quad.ISidePointParameter[]): this;
+    insertBottomSidePoint(t: number, x: number, y: number, key?: string): this;
+    insertBottomSidePoint(points: Quad.ISidePointParameter[]): this;
 
-    setLeftSidePoint(t: number, x: number, y: number, key?: string): this;
-    setLeftSidePoint(points: Quad.ISidePointParameter[]): this;
+    insertLeftSidePoint(t: number, x: number, y: number, key?: string): this;
+    insertLeftSidePoint(points: Quad.ISidePointParameter[]): this;
 
     clearTopSidePoints(): this;
     clearRightSidePoints(): this;

@@ -105,6 +105,7 @@ nav:
             - Iso box: shape-isobox.md
             - Iso triangle: shape-isotriangle.md
             - Round Rectangle: shape-roundrectangle.md
+            - Quad: shape-quad.md
             - Circular progres: shape-circularprogress.md
             - Line progress: shape-lineprogress.md
             - Spinner: shape-spinner.md

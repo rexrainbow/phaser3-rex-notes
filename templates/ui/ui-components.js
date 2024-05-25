@@ -2,6 +2,7 @@ import NinePatch from './ninepatch/NinePatch.js';
 import NinePatch2 from './ninepatch2/NinePatch.js';
 import RoundRectangle from './roundrectangle/RoundRectangle.js';
 import RoundRectangleCanvas from './roundrectanglecanvas/RoundRectangleCanvas.js';
+import QuadShape from './quadshape/QuadShape.js';
 import BBCodeText from './bbcodetext/BBCodeText.js';
 import TagText from './tagtext/TagText.js';
 import DynamicText from './dynamictext/DynamicText.js';
@@ -139,6 +140,7 @@ export {
     NinePatch2,
     RoundRectangle,
     RoundRectangleCanvas,
+    QuadShape,
     BBCodeText,
     TagText,
     DynamicText,

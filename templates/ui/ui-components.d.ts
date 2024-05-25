@@ -1,5 +1,6 @@
 import RoundRectangle from './roundrectangle/RoundRectangle';
 import RoundRectangleCanvas from './roundrectanglecanvas/RoundRectangleCanvas';
+import QuadShape from './quadshape/QuadShape';
 import BBCodeText from './bbcodetext/BBCodeText';
 import TagText from './tagtext/TagText';
 import DynamicText from './dynamictext/DynamicText';
@@ -136,6 +137,7 @@ type FontSizeResize = typeof SetFontSizeToFitWidth;
 export {
     RoundRectangle,
     RoundRectangleCanvas,
+    QuadShape,
     BBCodeText,
     TagText,
     DynamicText,
