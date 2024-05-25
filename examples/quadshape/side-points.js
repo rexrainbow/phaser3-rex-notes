@@ -16,6 +16,7 @@ class Demo extends Phaser.Scene {
             x: 400, y: 450,
             width: 500, height: 200,
             color: 0x888888,
+            strokeColor: 0xff0000,
 
             tlx: 50,
             trx: 40, try: -30,

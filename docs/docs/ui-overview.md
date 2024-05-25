@@ -209,6 +209,21 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
         // ...
     }
     ```
+1. [Quad shape](shape-quadshapes.md): Quad shape, offsets can be given on four vertices, and additional points can be added on the four sides.
+    ```javascript
+    var quad = scene.rexUI.add.quadShapes(x, y, width, height, fillColor, fillAlpha);
+    ```
+    or
+    ```javascript
+    class MyQuadShape extends RexPlugins.UI.QuadShape {
+        constructor(scene, x, y, width, height, fillColor, fillAlpha) {
+            super(scene, x, y, width, height, fillColor, fillAlpha);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
 1. [Custom shapes](shape-custom-shapes.md): Custom shapes on shape.
     ```javascript
     var customShapes = scene.rexUI.add.customShapes(x, y, width, height, config);

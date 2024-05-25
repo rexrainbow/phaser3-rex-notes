@@ -877,12 +877,12 @@
     this._endDraw();
   };
 
-  var IsPlainObject$T = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$3J = Phaser.Utils.Objects.GetValue;
+  var IsPlainObject$U = Phaser.Utils.Objects.IsPlainObject;
+  var GetValue$3K = Phaser.Utils.Objects.GetValue;
   var SetStretchMode = function SetStretchMode(mode) {
-    if (IsPlainObject$T(mode)) {
-      this.stretchMode.edge = parseMode(GetValue$3J(mode, 'edge', 0));
-      this.stretchMode.internal = parseMode(GetValue$3J(mode, 'internal', 0));
+    if (IsPlainObject$U(mode)) {
+      this.stretchMode.edge = parseMode(GetValue$3K(mode, 'edge', 0));
+      this.stretchMode.internal = parseMode(GetValue$3K(mode, 'internal', 0));
     } else {
       mode = parseMode(mode);
       this.stretchMode.edge = mode;
@@ -944,66 +944,66 @@
     setMaxFixedPartScale: SetMaxFixedPartScale
   };
 
-  var IsPlainObject$S = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$3I = Phaser.Utils.Objects.GetValue;
+  var IsPlainObject$T = Phaser.Utils.Objects.IsPlainObject;
+  var GetValue$3J = Phaser.Utils.Objects.GetValue;
   var NinePatchBase = function NinePatchBase(GOClass, type) {
     var NinePatch = /*#__PURE__*/function (_GOClass) {
       _inherits(NinePatch, _GOClass);
       function NinePatch(scene, x, y, width, height, key, baseFrame, columns, rows, config) {
         var _this;
         _classCallCheck(this, NinePatch);
-        if (IsPlainObject$S(x)) {
+        if (IsPlainObject$T(x)) {
           config = x;
-          x = GetValue$3I(config, 'x', 0);
-          y = GetValue$3I(config, 'y', 0);
-          width = GetValue$3I(config, 'width', 1);
-          height = GetValue$3I(config, 'height', 1);
-          key = GetValue$3I(config, 'key', undefined);
-          baseFrame = GetValue$3I(config, 'baseFrame', undefined);
-          columns = GetValue$3I(config, 'columns', undefined);
-          rows = GetValue$3I(config, 'rows', undefined);
-        } else if (IsPlainObject$S(width)) {
+          x = GetValue$3J(config, 'x', 0);
+          y = GetValue$3J(config, 'y', 0);
+          width = GetValue$3J(config, 'width', 1);
+          height = GetValue$3J(config, 'height', 1);
+          key = GetValue$3J(config, 'key', undefined);
+          baseFrame = GetValue$3J(config, 'baseFrame', undefined);
+          columns = GetValue$3J(config, 'columns', undefined);
+          rows = GetValue$3J(config, 'rows', undefined);
+        } else if (IsPlainObject$T(width)) {
           config = width;
-          width = GetValue$3I(config, 'width', 1);
-          height = GetValue$3I(config, 'height', 1);
-          key = GetValue$3I(config, 'key', undefined);
-          baseFrame = GetValue$3I(config, 'baseFrame', undefined);
-          columns = GetValue$3I(config, 'columns', undefined);
-          rows = GetValue$3I(config, 'rows', undefined);
-        } else if (IsPlainObject$S(key)) {
+          width = GetValue$3J(config, 'width', 1);
+          height = GetValue$3J(config, 'height', 1);
+          key = GetValue$3J(config, 'key', undefined);
+          baseFrame = GetValue$3J(config, 'baseFrame', undefined);
+          columns = GetValue$3J(config, 'columns', undefined);
+          rows = GetValue$3J(config, 'rows', undefined);
+        } else if (IsPlainObject$T(key)) {
           config = key;
-          key = GetValue$3I(config, 'key', undefined);
-          baseFrame = GetValue$3I(config, 'baseFrame', undefined);
-          columns = GetValue$3I(config, 'columns', undefined);
-          rows = GetValue$3I(config, 'rows', undefined);
-        } else if (IsPlainObject$S(baseFrame)) {
+          key = GetValue$3J(config, 'key', undefined);
+          baseFrame = GetValue$3J(config, 'baseFrame', undefined);
+          columns = GetValue$3J(config, 'columns', undefined);
+          rows = GetValue$3J(config, 'rows', undefined);
+        } else if (IsPlainObject$T(baseFrame)) {
           config = baseFrame;
-          baseFrame = GetValue$3I(config, 'baseFrame', undefined);
-          columns = GetValue$3I(config, 'columns', undefined);
-          rows = GetValue$3I(config, 'rows', undefined);
+          baseFrame = GetValue$3J(config, 'baseFrame', undefined);
+          columns = GetValue$3J(config, 'columns', undefined);
+          rows = GetValue$3J(config, 'rows', undefined);
         } else if (Array.isArray(baseFrame)) {
           config = rows;
           rows = columns;
           columns = baseFrame;
-          baseFrame = GetValue$3I(config, 'baseFrame', undefined);
-        } else if (IsPlainObject$S(columns)) {
+          baseFrame = GetValue$3J(config, 'baseFrame', undefined);
+        } else if (IsPlainObject$T(columns)) {
           config = columns;
-          columns = GetValue$3I(config, 'columns', undefined);
-          rows = GetValue$3I(config, 'rows', undefined);
+          columns = GetValue$3J(config, 'columns', undefined);
+          rows = GetValue$3J(config, 'rows', undefined);
         }
         if (baseFrame === undefined) {
-          baseFrame = GetValue$3I(config, 'frame', undefined);
+          baseFrame = GetValue$3J(config, 'frame', undefined);
         }
         if (columns === undefined) {
-          var leftWidth = GetValue$3I(config, 'leftWidth', undefined);
-          var rightWidth = GetValue$3I(config, 'rightWidth', undefined);
+          var leftWidth = GetValue$3J(config, 'leftWidth', undefined);
+          var rightWidth = GetValue$3J(config, 'rightWidth', undefined);
           if (leftWidth !== undefined && rightWidth !== undefined) {
             columns = [leftWidth, undefined, rightWidth];
           }
         }
         if (rows === undefined) {
-          var topHeight = GetValue$3I(config, 'topHeight', undefined);
-          var bottomHeight = GetValue$3I(config, 'bottomHeight', undefined);
+          var topHeight = GetValue$3J(config, 'topHeight', undefined);
+          var bottomHeight = GetValue$3J(config, 'bottomHeight', undefined);
           if (topHeight !== undefined && bottomHeight !== undefined) {
             rows = [topHeight, undefined, bottomHeight];
           }
@@ -1017,12 +1017,12 @@
         _this._tileSprite = undefined; // Reserved for drawing image
         _this._image = undefined; // Reserved for drawing image
 
-        _this.setGetFrameNameCallback(GetValue$3I(config, 'getFrameNameCallback', undefined));
-        _this.setStretchMode(GetValue$3I(config, 'stretchMode', 0));
-        _this.setPreserveRatio(GetValue$3I(config, 'preserveRatio', true));
-        var maxFixedPartScale = GetValue$3I(config, 'maxFixedPartScale', 1);
-        var maxFixedPartScaleX = GetValue$3I(config, 'maxFixedPartScaleX', maxFixedPartScale);
-        var maxFixedPartScaleY = GetValue$3I(config, 'maxFixedPartScaleY', undefined);
+        _this.setGetFrameNameCallback(GetValue$3J(config, 'getFrameNameCallback', undefined));
+        _this.setStretchMode(GetValue$3J(config, 'stretchMode', 0));
+        _this.setPreserveRatio(GetValue$3J(config, 'preserveRatio', true));
+        var maxFixedPartScale = GetValue$3J(config, 'maxFixedPartScale', 1);
+        var maxFixedPartScaleX = GetValue$3J(config, 'maxFixedPartScaleX', maxFixedPartScale);
+        var maxFixedPartScaleY = GetValue$3J(config, 'maxFixedPartScaleY', undefined);
         _this.setMaxFixedPartScale(maxFixedPartScaleX, maxFixedPartScaleY);
         _this.setBaseTexture(key, baseFrame, columns, rows);
         return _this;
@@ -1417,12 +1417,12 @@
     return Stack;
   }();
 
-  var GetValue$3H = Phaser.Utils.Objects.GetValue;
+  var GetValue$3I = Phaser.Utils.Objects.GetValue;
   var Pools$1 = {};
   var PoolManager$1 = /*#__PURE__*/function () {
     function PoolManager(config) {
       _classCallCheck(this, PoolManager);
-      this.pools = GetValue$3H(config, 'pools', Pools$1);
+      this.pools = GetValue$3I(config, 'pools', Pools$1);
     }
     _createClass(PoolManager, [{
       key: "destroy",
@@ -1484,8 +1484,8 @@
 
   CheckP3Version();
   var GameObject$4 = Phaser.GameObjects.GameObject;
-  var IsPlainObject$R = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$3G = Phaser.Utils.Objects.GetValue;
+  var IsPlainObject$S = Phaser.Utils.Objects.IsPlainObject;
+  var GetValue$3H = Phaser.Utils.Objects.GetValue;
   var List = Phaser.Structs.List;
   var StableSort = Phaser.Utils.Array.StableSort;
   var Blitter = /*#__PURE__*/function (_GameObject) {
@@ -1493,12 +1493,12 @@
     function Blitter(scene, x, y, texture, frame, config) {
       var _this;
       _classCallCheck(this, Blitter);
-      if (IsPlainObject$R(x)) {
+      if (IsPlainObject$S(x)) {
         config = x;
-        x = GetValue$3G(config, 'x', 0);
-        y = GetValue$3G(config, 'y', 0);
-        texture = GetValue$3G(config, 'texture');
-        frame = GetValue$3G(config, 'frame');
+        x = GetValue$3H(config, 'x', 0);
+        y = GetValue$3H(config, 'y', 0);
+        texture = GetValue$3H(config, 'texture');
+        frame = GetValue$3H(config, 'frame');
       }
       if (x === undefined) {
         x = 0;
@@ -1511,7 +1511,7 @@
       _this.renderList = [];
       _this.displayListDirty = false;
       _this.lastAppendedChildren = [];
-      var reuseBob = GetValue$3G(config, 'reuseBob', true);
+      var reuseBob = GetValue$3H(config, 'reuseBob', true);
       _this.poolManager = reuseBob ? new PoolManager$1(config) : undefined;
       _this.setTexture(texture, frame);
       _this.setPosition(x, y);
@@ -1568,7 +1568,7 @@
 
   var ImageTypeName$1 = 'image';
 
-  var GetValue$3F = function GetValue(source, key, defaultValue) {
+  var GetValue$3G = function GetValue(source, key, defaultValue) {
     if (!source || typeof source === 'number') {
       return defaultValue;
     }
@@ -1637,7 +1637,7 @@
     },
     getData: function getData(key, defaultValue) {
       this.enableData();
-      return key === undefined ? this.data : GetValue$3F(this.data, key, defaultValue);
+      return key === undefined ? this.data : GetValue$3G(this.data, key, defaultValue);
     },
     incData: function incData(key, inc, defaultValue) {
       if (defaultValue === undefined) {
@@ -1745,7 +1745,7 @@
 
   var DegToRad$g = Phaser.Math.DegToRad;
   var RadToDeg$9 = Phaser.Math.RadToDeg;
-  var GetValue$3E = Phaser.Utils.Objects.GetValue;
+  var GetValue$3F = Phaser.Utils.Objects.GetValue;
   var RenderBase$1 = /*#__PURE__*/function (_Base) {
     _inherits(RenderBase, _Base);
     function RenderBase() {
@@ -1989,11 +1989,11 @@
         }
 
         // ScaleX, ScaleY
-        var width = GetValue$3E(o, 'width', undefined);
-        var height = GetValue$3E(o, 'height', undefined);
-        var scale = GetValue$3E(o, 'scale', undefined);
-        var scaleX = GetValue$3E(o, 'scaleX', scale);
-        var scaleY = GetValue$3E(o, 'scaleY', scale);
+        var width = GetValue$3F(o, 'width', undefined);
+        var height = GetValue$3F(o, 'height', undefined);
+        var scale = GetValue$3F(o, 'scale', undefined);
+        var scaleX = GetValue$3F(o, 'scaleX', scale);
+        var scaleY = GetValue$3F(o, 'scaleY', scale);
         if (width !== undefined) {
           if (height === undefined && scaleY === undefined) {
             this.setWidth(width, true);
@@ -2016,7 +2016,7 @@
         } else if (o.hasOwnProperty('displayHeight')) {
           this.setDisplayHeight(o.displayHeight);
         }
-        var origin = GetValue$3E(o, 'origin', undefined);
+        var origin = GetValue$3F(o, 'origin', undefined);
         if (origin !== undefined) {
           this.setOrigin(origin);
         } else {
@@ -2117,7 +2117,7 @@
     ctx.restore();
   };
 
-  var IsPlainObject$Q = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$R = Phaser.Utils.Objects.IsPlainObject;
   var ImageData$1 = /*#__PURE__*/function (_RenderBase) {
     _inherits(ImageData, _RenderBase);
     function ImageData(parent, frame) {
@@ -2142,7 +2142,7 @@
     }, {
       key: "setFrame",
       value: function setFrame(frame) {
-        if (arguments.length > 0 && !IsPlainObject$Q(frame)) {
+        if (arguments.length > 0 && !IsPlainObject$R(frame)) {
           frame = this.parent.texture.get(frame);
         }
         this.frame = frame;
@@ -2629,7 +2629,7 @@
   }(Shape$1);
   Object.assign(PolygnBase.prototype, Render$3);
 
-  var GetValue$3D = Phaser.Utils.Objects.GetValue;
+  var GetValue$3E = Phaser.Utils.Objects.GetValue;
   var RoundRectangle$3 = /*#__PURE__*/function () {
     function RoundRectangle(x, y, width, height, radiusConfig) {
       _classCallCheck(this, RoundRectangle);
@@ -2730,14 +2730,14 @@
           defaultRadiusX = value;
           defaultRadiusY = value;
         } else {
-          defaultRadiusX = GetValue$3D(value, 'x', 0);
-          defaultRadiusY = GetValue$3D(value, 'y', 0);
+          defaultRadiusX = GetValue$3E(value, 'x', 0);
+          defaultRadiusY = GetValue$3E(value, 'y', 0);
         }
         var radius = this.cornerRadius;
-        radius.tl = GetRadius(GetValue$3D(value, 'tl', undefined), defaultRadiusX, defaultRadiusY);
-        radius.tr = GetRadius(GetValue$3D(value, 'tr', undefined), defaultRadiusX, defaultRadiusY);
-        radius.bl = GetRadius(GetValue$3D(value, 'bl', undefined), defaultRadiusX, defaultRadiusY);
-        radius.br = GetRadius(GetValue$3D(value, 'br', undefined), defaultRadiusX, defaultRadiusY);
+        radius.tl = GetRadius(GetValue$3E(value, 'tl', undefined), defaultRadiusX, defaultRadiusY);
+        radius.tr = GetRadius(GetValue$3E(value, 'tr', undefined), defaultRadiusX, defaultRadiusY);
+        radius.bl = GetRadius(GetValue$3E(value, 'bl', undefined), defaultRadiusX, defaultRadiusY);
+        radius.br = GetRadius(GetValue$3E(value, 'br', undefined), defaultRadiusX, defaultRadiusY);
       }
     }, {
       key: "radiusTL",
@@ -2798,8 +2798,8 @@
       radius.x = value;
       radius.y = value;
     } else {
-      radius.x = GetValue$3D(value, 'x', 0);
-      radius.y = GetValue$3D(value, 'y', 0);
+      radius.x = GetValue$3E(value, 'x', 0);
+      radius.y = GetValue$3E(value, 'y', 0);
     }
     SetConvex(radius);
   };
@@ -2842,16 +2842,16 @@
     return pathData;
   };
 
-  var IsPlainObject$P = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$3C = Phaser.Utils.Objects.GetValue;
-  var Earcut$1 = Phaser.Geom.Polygon.Earcut;
+  var IsPlainObject$Q = Phaser.Utils.Objects.IsPlainObject;
+  var GetValue$3D = Phaser.Utils.Objects.GetValue;
+  var Earcut$2 = Phaser.Geom.Polygon.Earcut;
   var RoundRectangle$2 = /*#__PURE__*/function (_PolygnBase) {
     _inherits(RoundRectangle, _PolygnBase);
     function RoundRectangle(scene, x, y, width, height, radiusConfig, fillColor, fillAlpha) {
       var _this;
       _classCallCheck(this, RoundRectangle);
       var strokeColor, strokeAlpha, strokeWidth, shapeType;
-      if (IsPlainObject$P(x)) {
+      if (IsPlainObject$Q(x)) {
         var config = x;
         x = config.x;
         y = config.y;
@@ -2887,7 +2887,7 @@
       _this = _callSuper(this, RoundRectangle, [scene, 'rexRoundRectangleShape', geom]);
       _this.setShapeType(shapeType);
       if (_this.shapeType === 0) {
-        var radius = GetValue$3C(radiusConfig, 'radius', radiusConfig);
+        var radius = GetValue$3D(radiusConfig, 'radius', radiusConfig);
         geom.setTo(0, 0, width, height, radius);
       } else {
         var radius = {
@@ -2896,7 +2896,7 @@
         };
         geom.setTo(0, 0, width, height, radius);
       }
-      var iteration = GetValue$3C(radiusConfig, 'iteration', undefined);
+      var iteration = GetValue$3D(radiusConfig, 'iteration', undefined);
       _this.setIteration(iteration);
       _this.setPosition(x, y);
       _this.setFillStyle(fillColor, fillAlpha);
@@ -2984,7 +2984,7 @@
           LineTo(0, height, pathData);
         }
         pathData.push(pathData[0], pathData[1]); // Repeat first point to close curve
-        this.pathIndexes = Earcut$1(pathData);
+        this.pathIndexes = Earcut$2(pathData);
         return this;
       }
     }, {
@@ -3763,7 +3763,7 @@
     DrawRoundRectangleBackground(this, this.fillStyle, this.strokeStyle, this.lineWidth, this.radius, this.fillColor2, this.isHorizontalGradient, this.iteration);
   };
 
-  var GetValue$3B = Phaser.Utils.Objects.GetValue;
+  var GetValue$3C = Phaser.Utils.Objects.GetValue;
   var RoundRectangle$1 = /*#__PURE__*/function (_Canvas) {
     _inherits(RoundRectangle, _Canvas);
     function RoundRectangle(scene, x, y, width, height, radiusConfig, fillStyle, strokeStyle, lineWidth, fillColor2, isHorizontalGradient) {
@@ -3786,8 +3786,8 @@
       }
       _this = _callSuper(this, RoundRectangle, [scene, x, y, width, height]);
       _this.type = 'rexRoundRectangleCanvas';
-      var radius = GetValue$3B(radiusConfig, 'radius', radiusConfig);
-      var iteration = GetValue$3B(radiusConfig, 'iteration', undefined);
+      var radius = GetValue$3C(radiusConfig, 'radius', radiusConfig);
+      var iteration = GetValue$3C(radiusConfig, 'iteration', undefined);
       _this.setRadius(radius);
       _this.setIteration(iteration);
       _this.setFillStyle(fillStyle, fillColor2, isHorizontalGradient);
@@ -3908,6 +3908,570 @@
     return gameObject;
   });
   SetValue(window, 'RexPlugins.UI.RoundRectangleCanvas', RoundRectangle$1);
+
+  var HasProperty = function HasProperty(obj, prop) {
+    if (!obj) {
+      return false;
+    }
+    if (obj.hasOwnProperty(prop)) {
+      return true;
+    }
+    while (obj) {
+      if (Object.getOwnPropertyDescriptor(obj, prop)) {
+        return true;
+      }
+      obj = obj.__proto__;
+    }
+    return false;
+  };
+
+  var InjectPointAccessProperties = function InjectPointAccessProperties(gameObject, key, point) {
+    if (!key || HasProperty(gameObject, "".concat(key, "X"))) {
+      return;
+    }
+    Object.defineProperty(gameObject, "".concat(key, "X"), {
+      get: function get() {
+        return point.x;
+      },
+      set: function set(value) {
+        point.x = value;
+        gameObject.dirty = true;
+      }
+    });
+    Object.defineProperty(gameObject, "".concat(key, "Y"), {
+      get: function get() {
+        return point.y;
+      },
+      set: function set(value) {
+        point.y = value;
+        gameObject.dirty = true;
+      }
+    });
+    Object.defineProperty(gameObject, "".concat(key, "T"), {
+      get: function get() {
+        return point.t;
+      },
+      set: function set(value) {
+        point.t = value;
+        gameObject.dirty = true;
+      }
+    });
+  };
+  var PointMethods = {
+    setTLPosition: function setTLPosition(x, y) {
+      this.geom.setTLPosition(x, y);
+      this.dirty = true;
+      return this;
+    },
+    setTRPosition: function setTRPosition(x, y) {
+      this.geom.setTRPosition(x, y);
+      this.dirty = true;
+      return this;
+    },
+    setBLPosition: function setBLPosition(x, y) {
+      this.geom.setBLPosition(x, y);
+      this.dirty = true;
+      return this;
+    },
+    setBRPosition: function setBRPosition(x, y) {
+      this.geom.setBRPosition(x, y);
+      this.dirty = true;
+      return this;
+    },
+    resetCornerPosition: function resetCornerPosition() {
+      this.geom.resetCornerPosition();
+      this.dirty = true;
+      return this;
+    },
+    insertTopSidePoint: function insertTopSidePoint(t, x, y, key) {
+      var points = this.geom.topSidePoints;
+      if (Array.isArray(t)) {
+        var points = t,
+          point;
+        for (var i = 0, cnt = points.length; i < cnt; i++) {
+          point = points[i];
+          this.geom.insertTopSidePoint(point.t, point.x, point.y);
+          InjectPointAccessProperties(this, point.key, points[points.length - 1]);
+        }
+      } else {
+        this.geom.insertTopSidePoint(t, x, y);
+        InjectPointAccessProperties(this, key, points[points.length - 1]);
+      }
+      this.dirty = true;
+      return this;
+    },
+    insertRightSidePoint: function insertRightSidePoint(t, x, y, key) {
+      var points = this.geom.rightSidePoints;
+      if (Array.isArray(t)) {
+        var points = t,
+          point;
+        for (var i = 0, cnt = points.length; i < cnt; i++) {
+          point = points[i];
+          this.geom.insertRightSidePoint(point.t, point.x, point.y);
+          InjectPointAccessProperties(this, point.key, points[points.length - 1]);
+        }
+      } else {
+        this.geom.insertRightSidePoint(t, x, y);
+        InjectPointAccessProperties(this, key, points[points.length - 1]);
+      }
+      this.dirty = true;
+      return this;
+    },
+    insertBottomSidePoint: function insertBottomSidePoint(t, x, y, key) {
+      var points = this.geom.bottomSidePoints;
+      if (Array.isArray(t)) {
+        var points = t,
+          point;
+        for (var i = 0, cnt = points.length; i < cnt; i++) {
+          point = points[i];
+          this.geom.insertBottomSidePoint(point.t, point.x, point.y);
+          InjectPointAccessProperties(this, point.key, points[points.length - 1]);
+        }
+      } else {
+        this.geom.insertBottomSidePoint(t, x, y);
+        InjectPointAccessProperties(this, key, points[points.length - 1]);
+      }
+      this.dirty = true;
+      return this;
+    },
+    insertLeftSidePoint: function insertLeftSidePoint(t, x, y, key) {
+      var points = this.geom.leftSidePoints;
+      if (Array.isArray(t)) {
+        var points = t,
+          point;
+        for (var i = 0, cnt = points.length; i < cnt; i++) {
+          point = points[i];
+          this.geom.insertLeftSidePoint(point.t, point.x, point.y);
+          InjectPointAccessProperties(this, point.key, points[points.length - 1]);
+        }
+      } else {
+        this.geom.insertLeftSidePoint(t, x, y);
+        InjectPointAccessProperties(this, key, points[points.length - 1]);
+      }
+      this.dirty = true;
+      return this;
+    },
+    clearTopSidePoints: function clearTopSidePoints() {
+      this.geom.clearTopSidePoints();
+      this.dirty = true;
+      return this;
+    },
+    clearRightSidePoints: function clearRightSidePoints() {
+      this.geom.clearRightSidePoints();
+      this.dirty = true;
+      return this;
+    },
+    clearBottomSidePoints: function clearBottomSidePoints() {
+      this.geom.clearBottomSidePoints();
+      this.dirty = true;
+      return this;
+    },
+    clearLeftSidePoints: function clearLeftSidePoints() {
+      this.geom.clearLeftSidePoints();
+      this.dirty = true;
+      return this;
+    },
+    clearAllSidesPoints: function clearAllSidesPoints() {
+      this.geom.clearAllSidesPoints();
+      this.dirty = true;
+      return this;
+    }
+  };
+
+  var QuadGeom = /*#__PURE__*/function () {
+    function QuadGeom(x, y, width, height) {
+      _classCallCheck(this, QuadGeom);
+      if (x === undefined) {
+        x = 0;
+      }
+      if (y === undefined) {
+        y = x;
+      }
+      if (width === undefined) {
+        width = 0;
+      }
+      if (height === undefined) {
+        height = 0;
+      }
+      this.setTo(x, y, width, height);
+      this.tlx = 0;
+      this.tly = 0;
+      this.trx = 0;
+      this["try"] = 0;
+      this.blx = 0;
+      this.bly = 0;
+      this.brx = 0;
+      this.bry = 0;
+      this.topSidePoints = [];
+      this.rightSidePoints = [];
+      this.bottomSidePoints = [];
+      this.leftSidePoints = [];
+    }
+    _createClass(QuadGeom, [{
+      key: "setTo",
+      value: function setTo(x, y, width, height) {
+        this.setPosition(x, y);
+        this.setSize(width, height);
+        return this;
+      }
+    }, {
+      key: "setPosition",
+      value: function setPosition(x, y) {
+        this.x = x;
+        this.y = y;
+        return this;
+      }
+    }, {
+      key: "setSize",
+      value: function setSize(width, height) {
+        this.width = width;
+        this.height = height;
+        return this;
+      }
+    }, {
+      key: "setTLPosition",
+      value: function setTLPosition(x, y) {
+        this.tlx = x;
+        this.tly = y;
+        return this;
+      }
+    }, {
+      key: "setTRPosition",
+      value: function setTRPosition(x, y) {
+        this.trx = x;
+        this["try"] = y;
+        return this;
+      }
+    }, {
+      key: "setBLPosition",
+      value: function setBLPosition(x, y) {
+        this.blx = x;
+        this.bly = y;
+        return this;
+      }
+    }, {
+      key: "setBRPosition",
+      value: function setBRPosition(x, y) {
+        this.brx = x;
+        this.bry = y;
+        return this;
+      }
+    }, {
+      key: "resetCornerPosition",
+      value: function resetCornerPosition() {
+        this.setTLPosition(0, 0).setTRPosition(0, 0).setBLPosition(0, 0).setBRPosition(0, 0);
+        return this;
+      }
+    }, {
+      key: "insertTopSidePoint",
+      value: function insertTopSidePoint(t, x, y) {
+        AddPoint(this.topSidePoints, t, x, y);
+        return this;
+      }
+    }, {
+      key: "insertRightSidePoint",
+      value: function insertRightSidePoint(t, x, y) {
+        AddPoint(this.rightSidePoints, t, x, y);
+        return this;
+      }
+    }, {
+      key: "insertBottomSidePoint",
+      value: function insertBottomSidePoint(t, x, y) {
+        AddPoint(this.bottomSidePoints, t, x, y);
+        return this;
+      }
+    }, {
+      key: "insertLeftSidePoint",
+      value: function insertLeftSidePoint(t, x, y) {
+        AddPoint(this.leftSidePoints, t, x, y);
+        return this;
+      }
+    }, {
+      key: "clearTopSidePoints",
+      value: function clearTopSidePoints() {
+        this.topSidePoints.length = 0;
+        return this;
+      }
+    }, {
+      key: "clearRightSidePoints",
+      value: function clearRightSidePoints() {
+        this.rightSidePoints.length = 0;
+        return this;
+      }
+    }, {
+      key: "clearBottomSidePoints",
+      value: function clearBottomSidePoints() {
+        this.bottomSidePoints.length = 0;
+        return this;
+      }
+    }, {
+      key: "clearLeftSidePoints",
+      value: function clearLeftSidePoints() {
+        this.leftSidePoints.length = 0;
+        return this;
+      }
+    }, {
+      key: "clearAllSidesPoints",
+      value: function clearAllSidesPoints() {
+        this.clearTopSidePoints().clearRightSidePoints().clearBottomSidePoints().clearLeftSidePoints();
+        return this;
+      }
+    }]);
+    return QuadGeom;
+  }();
+  var AddPoint = function AddPoint(points, t, x, y) {
+    if (typeof t !== 'number') {
+      var config = t;
+      t = config.t;
+      x = config.x;
+      y = config.y;
+    }
+    points.push({
+      t: t,
+      x: x,
+      y: y
+    });
+  };
+
+  var IsPlainObject$P = Phaser.Utils.Objects.IsPlainObject;
+  var GetValue$3B = Phaser.Utils.Objects.GetValue;
+  var Linear$e = Phaser.Math.Linear;
+  var Earcut$1 = Phaser.Geom.Polygon.Earcut;
+  var Quad = /*#__PURE__*/function (_PolygnBase) {
+    _inherits(Quad, _PolygnBase);
+    function Quad(scene, x, y, width, height, fillColor, fillAlpha) {
+      var _this;
+      _classCallCheck(this, Quad);
+      var strokeColor, strokeAlpha, strokeWidth;
+      if (IsPlainObject$P(x)) {
+        var config = x;
+        x = config.x;
+        y = config.y;
+        width = config.width;
+        height = config.height;
+        fillColor = config.color;
+        fillAlpha = config.alpha;
+        strokeColor = config.strokeColor;
+        strokeAlpha = config.strokeAlpha;
+        strokeWidth = config.strokeWidth;
+      }
+      if (x === undefined) {
+        x = 0;
+      }
+      if (y === undefined) {
+        y = 0;
+      }
+      if (width === undefined) {
+        width = 1;
+      }
+      if (height === undefined) {
+        height = width;
+      }
+      var geom = new QuadGeom(); // Configurate it later
+      _this = _callSuper(this, Quad, [scene, 'rexQuadShape', geom]);
+      geom.setTo(0, 0, width, height);
+      _this.setPosition(x, y);
+      _this.setFillStyle(fillColor, fillAlpha);
+      if (strokeColor !== undefined && strokeWidth === undefined) {
+        strokeWidth = 2;
+      }
+      _this.setStrokeStyle(strokeWidth, strokeColor, strokeAlpha);
+      _this.setTLPosition(GetValue$3B(config, 'tlx', 0), GetValue$3B(config, 'tly', 0)).setTRPosition(GetValue$3B(config, 'trx', 0), GetValue$3B(config, 'try', 0)).setBLPosition(GetValue$3B(config, 'blx', 0), GetValue$3B(config, 'bly', 0)).setBRPosition(GetValue$3B(config, 'brx', 0), GetValue$3B(config, 'bry', 0));
+      var leftSidePoints = GetValue$3B(config, 'leftSidePoints');
+      if (leftSidePoints) {
+        _this.insertLeftSidePoint(leftSidePoints);
+      }
+      var topSidePoints = GetValue$3B(config, 'topSidePoints');
+      if (topSidePoints) {
+        _this.insertTopSidePoint(topSidePoints);
+      }
+      var rightSidePoints = GetValue$3B(config, 'rightSidePoints');
+      if (rightSidePoints) {
+        _this.insertRightSidePoint(rightSidePoints);
+      }
+      var bottomSidePoints = GetValue$3B(config, 'bottomSidePoints');
+      if (bottomSidePoints) {
+        _this.insertBottomSidePoint(bottomSidePoints);
+      }
+      _this.updateDisplayOrigin();
+      _this.dirty = true;
+      return _this;
+    }
+    _createClass(Quad, [{
+      key: "updateData",
+      value: function updateData() {
+        var geom = this.geom;
+        var pathData = this.pathData;
+        pathData.length = 0;
+        var width = geom.width;
+        var height = geom.height;
+        var tlx = 0 + geom.tlx;
+        var tly = 0 + geom.tly;
+        var trx = width + geom.trx;
+        var try_ = 0 + geom["try"];
+        var brx = width + geom.brx;
+        var bry = height + geom.bry;
+        var blx = 0 + geom.blx;
+        var bly = height + geom.bly;
+        var topSidePoints = geom.topSidePoints;
+        var rightSidePoints = geom.rightSidePoints;
+        var bottomSidePoints = geom.bottomSidePoints;
+        var leftSidePoints = geom.leftSidePoints;
+
+        // Top side
+        LineTo(tlx, tly, pathData);
+        SortPoints(topSidePoints);
+        for (var i = 0, cnt = topSidePoints.length; i < cnt; i++) {
+          var point = topSidePoints[i];
+          var px = Linear$e(tlx, trx, point.t) + point.x;
+          var py = Linear$e(tly, try_, point.t) + point.y;
+          LineTo(px, py, pathData);
+        }
+
+        // Right side
+        LineTo(trx, try_, pathData);
+        SortPoints(rightSidePoints);
+        for (var i = 0, cnt = rightSidePoints.length; i < cnt; i++) {
+          var point = rightSidePoints[i];
+          var px = Linear$e(trx, brx, point.t) + point.x;
+          var py = Linear$e(try_, bry, point.t) + point.y;
+          LineTo(px, py, pathData);
+        }
+
+        // Bottom side
+        LineTo(brx, bry, pathData);
+        SortPoints(bottomSidePoints);
+        for (var i = bottomSidePoints.length - 1; i >= 0; i--) {
+          var point = bottomSidePoints[i];
+          var px = Linear$e(blx, brx, point.t) + point.x;
+          var py = Linear$e(bly, bry, point.t) + point.y;
+          LineTo(px, py, pathData);
+        }
+
+        // Left side
+        LineTo(blx, bly, pathData);
+        SortPoints(leftSidePoints);
+        for (var i = leftSidePoints.length - 1; i >= 0; i--) {
+          var point = leftSidePoints[i];
+          var px = Linear$e(tlx, blx, point.t) + point.x;
+          var py = Linear$e(tly, bly, point.t) + point.y;
+          LineTo(px, py, pathData);
+        }
+        pathData.push(pathData[0], pathData[1]); // Repeat first point to close curve
+        this.pathIndexes = Earcut$1(pathData);
+        return this;
+      }
+    }, {
+      key: "tlx",
+      get: function get() {
+        return this.geom.tlx;
+      },
+      set: function set(value) {
+        this.geom.tlx = value;
+        this.dirty = true;
+      }
+    }, {
+      key: "tly",
+      get: function get() {
+        return this.geom.tly;
+      },
+      set: function set(value) {
+        this.geom.tly = value;
+        this.dirty = true;
+      }
+    }, {
+      key: "trx",
+      get: function get() {
+        return this.geom.trx;
+      },
+      set: function set(value) {
+        this.geom.trx = value;
+        this.dirty = true;
+      }
+    }, {
+      key: "try",
+      get: function get() {
+        return this.geom["try"];
+      },
+      set: function set(value) {
+        this.geom["try"] = value;
+        this.dirty = true;
+      }
+    }, {
+      key: "blx",
+      get: function get() {
+        return this.geom.blx;
+      },
+      set: function set(value) {
+        this.geom.blx = value;
+        this.dirty = true;
+      }
+    }, {
+      key: "bly",
+      get: function get() {
+        return this.geom.bly;
+      },
+      set: function set(value) {
+        this.geom.bly = value;
+        this.dirty = true;
+      }
+    }, {
+      key: "brx",
+      get: function get() {
+        return this.geom.brx;
+      },
+      set: function set(value) {
+        this.geom.brx = value;
+        this.dirty = true;
+      }
+    }, {
+      key: "bry",
+      get: function get() {
+        return this.geom.bry;
+      },
+      set: function set(value) {
+        this.geom.bry = value;
+        this.dirty = true;
+      }
+    }, {
+      key: "leftSidePoints",
+      get: function get() {
+        return this.geom.leftSidePoints;
+      }
+    }, {
+      key: "topSidePoints",
+      get: function get() {
+        return this.geom.topSidePoints;
+      }
+    }, {
+      key: "bottomSidePoints",
+      get: function get() {
+        return this.geom.bottomSidePoints;
+      }
+    }, {
+      key: "rightSidePoints",
+      get: function get() {
+        return this.geom.rightSidePoints;
+      }
+    }]);
+    return Quad;
+  }(PolygnBase);
+  var SortPoints = function SortPoints(points) {
+    if (points.length <= 1) {
+      return;
+    }
+    points.sort(function (pointA, pointB) {
+      return pointA.t - pointB.t;
+    });
+  };
+  Object.assign(Quad.prototype, PointMethods);
+
+  ObjectFactory.register('QuadShape', function (x, y, width, height, fillColor, fillAlpha) {
+    var gameObject = new Quad(this.scene, x, y, width, height, fillColor, fillAlpha);
+    this.scene.add.existing(gameObject);
+    return gameObject;
+  });
+  SetValue(window, 'RexPlugins.UI.QuadShape', Quad);
 
   var Utils = Phaser.Renderer.WebGL.Utils;
   var WebGLRenderer$1 = function WebGLRenderer(renderer, src, camera, parentMatrix) {
@@ -11964,22 +12528,6 @@
     Transform();
   };
 
-  var HasProperty = function HasProperty(obj, prop) {
-    if (!obj) {
-      return false;
-    }
-    if (obj.hasOwnProperty(prop)) {
-      return true;
-    }
-    while (obj) {
-      if (Object.getOwnPropertyDescriptor(obj, prop)) {
-        return true;
-      }
-      obj = obj.__proto__;
-    }
-    return false;
-  };
-
   var GetFXFactory = function GetFXFactory(gameObject) {
     if (gameObject.preFX) {
       return gameObject.preFX;
@@ -17202,10 +17750,10 @@
       var _this;
       _classCallCheck(this, WaitEventManager);
       _this = _callSuper(this, WaitEventManager, [parent]);
-      _this.waitCompleteEventName = GetValue$3F(config, 'completeEventName', _this.waitCompleteEventName);
-      _this.setClickTarget(GetValue$3F(config, 'clickTarget', _this.scene));
-      _this.setClickShortcutKeys(GetValue$3F(config, 'clickShortcutKeys', undefined));
-      _this.setCameraTarget(GetValue$3F(config, 'camera', _this.scene.cameras.main));
+      _this.waitCompleteEventName = GetValue$3G(config, 'completeEventName', _this.waitCompleteEventName);
+      _this.setClickTarget(GetValue$3G(config, 'clickTarget', _this.scene));
+      _this.setClickShortcutKeys(GetValue$3G(config, 'clickShortcutKeys', undefined));
+      _this.setCameraTarget(GetValue$3G(config, 'camera', _this.scene.cameras.main));
       return _this;
     }
     _createClass(WaitEventManager, [{
@@ -17978,20 +18526,20 @@
     function BracketParser(config) {
       _classCallCheck(this, BracketParser);
       // Event emitter
-      this.setEventEmitter(GetValue$3F(config, 'eventEmitter', undefined));
+      this.setEventEmitter(GetValue$3G(config, 'eventEmitter', undefined));
 
       // Value convert
-      this.setValueConverter(GetValue$3F(config, 'valueConvert', true));
+      this.setValueConverter(GetValue$3G(config, 'valueConvert', true));
       // Loop
-      this.setLoopEnable(GetValue$3F(config, 'loop', false));
+      this.setLoopEnable(GetValue$3G(config, 'loop', false));
 
       // Brackets and generate regex
-      this.setMultipleLinesTagEnable(GetValue$3F(config, 'multipleLinesTag', false));
-      var delimiters = GetValue$3F(config, 'delimiters', '<>');
+      this.setMultipleLinesTagEnable(GetValue$3G(config, 'multipleLinesTag', false));
+      var delimiters = GetValue$3G(config, 'delimiters', '<>');
       this.setDelimiters(delimiters[0], delimiters[1]);
 
       // Translate tagName callback
-      this.setTranslateTagNameCallback(GetValue$3F(config, 'translateTagNameCallback'));
+      this.setTranslateTagNameCallback(GetValue$3G(config, 'translateTagNameCallback'));
       this.isRunning = false;
       this.isPaused = false;
       this.skipEventFlag = false;
@@ -18263,10 +18811,10 @@
       _this = _callSuper(this, BracketParser, [config]);
 
       // Parameters for regex
-      _this.setTagExpression(GetValue$3F(config, 'regex.tag', undefined));
-      _this.setValueExpression(GetValue$3F(config, 'regex.value', undefined));
+      _this.setTagExpression(GetValue$3G(config, 'regex.tag', undefined));
+      _this.setValueExpression(GetValue$3G(config, 'regex.value', undefined));
       // Brackets and generate regex
-      var delimiters = GetValue$3F(config, 'delimiters', '<>');
+      var delimiters = GetValue$3G(config, 'delimiters', '<>');
       _this.setDelimiters(delimiters[0], delimiters[1]);
       return _this;
     }
@@ -32981,13 +33529,13 @@
     function FSM(config) {
       _classCallCheck(this, FSM);
       // Attach get-next-state function
-      var states = GetValue$3F(config, 'states', undefined);
+      var states = GetValue$3G(config, 'states', undefined);
       if (states) {
         this.addStates(states);
       }
 
       // Attach extend members
-      var extend = GetValue$3F(config, 'extend', undefined);
+      var extend = GetValue$3G(config, 'extend', undefined);
       if (extend) {
         for (var name in extend) {
           if (!this.hasOwnProperty(name) || this[name] === undefined) {
@@ -32997,8 +33545,8 @@
       }
 
       // Event emitter
-      var eventEmitter = GetValue$3F(config, 'eventEmitter', undefined);
-      var EventEmitterClass = GetValue$3F(config, 'EventEmitterClass', undefined);
+      var eventEmitter = GetValue$3G(config, 'eventEmitter', undefined);
+      var EventEmitterClass = GetValue$3G(config, 'EventEmitterClass', undefined);
       this.setEventEmitter(eventEmitter, EventEmitterClass);
       this._stateLock = false;
       this.resetFromJSON(config);
@@ -33016,9 +33564,9 @@
     }, {
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.setEnable(GetValue$3F(o, 'enable', true));
-        this.start(GetValue$3F(o, 'start', undefined));
-        var init = GetValue$3F(o, 'init', undefined);
+        this.setEnable(GetValue$3G(o, 'enable', true));
+        this.start(GetValue$3G(o, 'start', undefined));
+        var init = GetValue$3G(o, 'init', undefined);
         if (init) {
           init.call(this);
         }
@@ -33254,7 +33802,7 @@
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         _get(_getPrototypeOf(FSM.prototype), "resetFromJSON", this).call(this, o);
-        this._scene = GetValue$3F(o, 'scene', undefined);
+        this._scene = GetValue$3G(o, 'scene', undefined);
         return this;
       }
     }, {
@@ -49761,10 +50309,10 @@
       var _this;
       _classCallCheck(this, LevelCounter);
       _this = _callSuper(this, LevelCounter);
-      _this.setTable(GetValue$3F(config, 'table'));
-      _this.setMaxLevel(GetValue$3F(config, 'maxLevel'));
-      var exp = GetValue$3F(config, 'exp', 0);
-      var level = GetValue$3F(config, 'level', undefined);
+      _this.setTable(GetValue$3G(config, 'table'));
+      _this.setMaxLevel(GetValue$3G(config, 'maxLevel'));
+      var exp = GetValue$3G(config, 'exp', 0);
+      var level = GetValue$3G(config, 'level', undefined);
       if (level !== undefined && !_this.checkLevel(level, exp)) {
         console.error("Level ".concat(level, " and Exp ").concat(exp, " are mismatch"));
         level = undefined;
@@ -49962,7 +50510,7 @@
   }(EventEmitter);
 
   var RunCommands = function RunCommands(queue, scope, config) {
-    var reverse = GetValue$3F(config, 'reverse', false);
+    var reverse = GetValue$3G(config, 'reverse', false);
     var retVal;
     if (IsArray(queue[0])) {
       if (!reverse) {
@@ -49980,8 +50528,8 @@
     return retVal;
   };
   var RunCommand = function RunCommand(cmd, scope, config) {
-    var argsConvert = GetValue$3F(config, 'argsConvert', undefined);
-    var argsConvertScope = GetValue$3F(config, 'argsConvertScope', undefined);
+    var argsConvert = GetValue$3G(config, 'argsConvert', undefined);
+    var argsConvertScope = GetValue$3G(config, 'argsConvertScope', undefined);
     var fnName = cmd[0];
     ARGS = Copy(ARGS, cmd, 1);
     if (argsConvert) {
@@ -50002,7 +50550,7 @@
     if (typeof fnName === 'string') {
       fn = scope[fnName];
       if (fn == null) {
-        fn = GetValue$3F(scope, fnName, null);
+        fn = GetValue$3G(scope, fnName, null);
       }
     } else {
       fn = fnName;
@@ -56014,11 +56562,11 @@
 
   var GetValueFromAliasKeys = function GetValueFromAliasKeys(source, key0, key1, key2, defaultValue) {
     if (HasValue(source, key0)) {
-      return GetValue$3F(source, key0);
+      return GetValue$3G(source, key0);
     } else if (key1 && HasValue(source, key1)) {
-      return GetValue$3F(source, key1);
+      return GetValue$3G(source, key1);
     } else if (key2 && HasValue(source, key2)) {
-      return GetValue$3F(source, key2);
+      return GetValue$3G(source, key2);
     } else {
       return defaultValue;
     }
