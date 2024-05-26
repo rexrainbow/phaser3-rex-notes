@@ -6,10 +6,6 @@ class FullWindow extends ComponentBase {
         super(gameObject);
         // this.parent = gameObject;
 
-        gameObject
-            .setOrigin(0.5)
-            .setScrollFactor(0);
-
         this.targetCamera = undefined;
         this.boot();
     }
@@ -49,6 +45,10 @@ class FullWindow extends ComponentBase {
 
         var width = gameWidth * scale,
             height = gameHeight * scale;
+
+        gameObject
+            .setScrollFactor(0)
+            .setOrigin(0.5);
 
         if ((gameObject.x !== x) || (gameObject.y !== y)) {
             gameObject.setPosition(x, y);
