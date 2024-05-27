@@ -1,6 +1,7 @@
 import EaseMove from './behaviors/easemove/EaseMove';
 import EaseMoveTo from './behaviors/easemove/EaseMoveTo';
 import EaseMoveFrom from './behaviors/easemove/EaseMoveFrom';
+import EaseMoveMethods from './behaviors/easemove/EaseMoveMethods';
 
 declare function EaseMoveToDestroy(
     gameObject: Phaser.GameObjects.GameObject,
@@ -23,5 +24,6 @@ declare function EaseMoveFromDestroy(
 export {
     EaseMove,
     EaseMoveTo, EaseMoveToDestroy,
-    EaseMoveFrom, EaseMoveFromDestroy
+    EaseMoveFrom, EaseMoveFromDestroy,
+    EaseMoveMethods
 }

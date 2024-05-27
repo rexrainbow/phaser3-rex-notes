@@ -1,4 +1,4 @@
-import EaseMoveMethods from '../../../plugins/behaviors/easemove/EaseMoveMethods.js';
+import { EaseMoveMethods } from '../easemove/EaseMove.js';
 import GetParentSizerMethods from './GetParentSizerMethods.js';
 
 var method = {}

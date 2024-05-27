@@ -1,2 +1,2 @@
-import { EaseMove, EaseMoveTo, EaseMoveFrom } from '../../../plugins/easemove.js';
-export { EaseMove, EaseMoveTo, EaseMoveFrom };
+import { EaseMove, EaseMoveTo, EaseMoveFrom, EaseMoveMethods } from '../../../plugins/easemove.js';
+export { EaseMove, EaseMoveTo, EaseMoveFrom, EaseMoveMethods };
