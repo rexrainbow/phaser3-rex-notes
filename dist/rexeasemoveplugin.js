@@ -1085,6 +1085,114 @@
     return easeMove;
   };
 
+  var WaitEvent = function WaitEvent(eventEmitter, eventName) {
+    return new Promise(function (resolve, reject) {
+      eventEmitter.once(eventName, function () {
+        resolve();
+      });
+    });
+  };
+  var WaitComplete = function WaitComplete(eventEmitter) {
+    return WaitEvent(eventEmitter, 'complete');
+  };
+
+  var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+  var DistanceBetween = Phaser.Math.Distance.Between;
+  var EaseMoveMethods = {
+    onInitEaseMove: function onInitEaseMove() {
+      var gameObject = this;
+      var easeMove = this._easeMove;
+      // Route 'complete' of easeMove to gameObject
+      easeMove.completeEventName = undefined;
+      easeMove.on('complete', function () {
+        if (easeMove.completeEventName) {
+          gameObject.emit(easeMove.completeEventName, gameObject);
+          easeMove.completeEventName = undefined;
+        }
+      });
+    },
+    moveFrom: function moveFrom(duration, x, y, ease, destroyMode) {
+      if (IsPlainObject(duration)) {
+        var config = duration;
+        x = config.x;
+        y = config.y;
+        if (config.hasOwnProperty('speed')) {
+          duration = DistanceBetween(x, y, this.x, this.y) * 1000 / config.speed;
+        } else {
+          duration = config.duration;
+        }
+        ease = config.ease;
+      }
+      var isInit = this._easeMove === undefined;
+      this._easeMove = EaseMoveFrom(this, duration, x, y, ease, destroyMode, this._easeMove);
+      if (isInit) {
+        this.onInitEaseMove();
+      }
+      this._easeMove.completeEventName = 'movefrom.complete';
+      return this;
+    },
+    moveFromPromise: function moveFromPromise(duration, x, y, ease, destroyMode) {
+      this.moveFrom(duration, x, y, ease, destroyMode);
+      return WaitComplete(this._easeMove);
+    },
+    moveFromDestroy: function moveFromDestroy(duration, x, y, ease) {
+      this.moveFrom(duration, x, y, ease, true);
+      return this;
+    },
+    moveFromDestroyPromise: function moveFromDestroyPromise(duration, x, y, ease) {
+      this.moveFromDestroy(duration, x, y, ease);
+      return WaitComplete(this._easeMove);
+    },
+    isRunningMoveFrom: function isRunningMoveFrom() {
+      return this._easeMove && (this._easeMove.completeEventName = 'movefrom.complete');
+    },
+    moveTo: function moveTo(duration, x, y, ease, destroyMode) {
+      if (IsPlainObject(duration)) {
+        var config = duration;
+        x = config.x;
+        y = config.y;
+        if (config.hasOwnProperty('speed')) {
+          duration = DistanceBetween(x, y, this.x, this.y) * 1000 / config.speed;
+        } else {
+          duration = config.duration;
+        }
+        ease = config.ease;
+      }
+      var isInit = this._easeMove === undefined;
+      this._easeMove = EaseMoveTo(this, duration, x, y, ease, destroyMode, this._easeMove);
+      if (isInit) {
+        this.onInitEaseMove();
+      }
+      this._easeMove.completeEventName === 'moveto.complete';
+      return this;
+    },
+    moveToPromise: function moveToPromise(duration, x, y, ease, destroyMode) {
+      this.moveTo(duration, x, y, ease, destroyMode);
+      return WaitComplete(this._easeMove);
+    },
+    moveToDestroy: function moveToDestroy(duration, x, y, ease) {
+      this.moveTo(duration, x, y, ease, true);
+      return this;
+    },
+    moveToDestroyPromise: function moveToDestroyPromise(duration, x, y, ease) {
+      this.moveToDestroy(duration, x, y, ease, true);
+      return WaitComplete(this._easeMove);
+    },
+    isRunningMoveTo: function isRunningMoveTo() {
+      return this._easeMove && this._easeMove.completeEventName === 'moveto.complete';
+    },
+    isRunningEaseMove: function isRunningEaseMove() {
+      return this.isRunningMoveFrom() || this.isRunningMoveTo();
+    },
+    moveStop: function moveStop(toEnd) {
+      if (!this._easeMove) {
+        return this;
+      }
+      this._easeMove.stop(toEnd);
+      return this;
+    }
+  };
+
   var EaseMoveToDestroy = function EaseMoveToDestroy(gameObject, duration, endX, endY, ease, easeMove) {
     return EaseMoveTo(gameObject, duration, endX, endY, ease, true, easeMove);
   };
@@ -1108,6 +1216,12 @@
       key: "add",
       value: function add(gameObject, config) {
         return new EaseMove(gameObject, config);
+      }
+    }, {
+      key: "inject",
+      value: function inject(gameObject) {
+        Object.assign(gameObject, EaseMoveMethods);
+        return gameObject;
       }
     }]);
     return EaseMovePlugin;

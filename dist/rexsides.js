@@ -5712,25 +5712,19 @@
 
   var IsPlainObject$5 = Phaser.Utils.Objects.IsPlainObject;
   var DistanceBetween$3 = Phaser.Math.Distance.Between;
-  var OnInitEaseMove = function OnInitEaseMove(gameObject, easeMove) {
-    // Route 'complete' of easeMove to gameObject
-    easeMove.completeEventName = undefined;
-    easeMove.on('complete', function () {
-      if (easeMove.completeEventName) {
-        gameObject.emit(easeMove.completeEventName, gameObject);
-        easeMove.completeEventName = undefined;
-      }
-    });
-
-    // Update local state
-    easeMove.on('update', function () {
-      var parent = GetParentSizerMethods.getParentSizer(gameObject);
-      if (parent) {
-        parent.resetChildPositionState(gameObject);
-      }
-    });
-  };
   var EaseMoveMethods = {
+    onInitEaseMove: function onInitEaseMove() {
+      var gameObject = this;
+      var easeMove = this._easeMove;
+      // Route 'complete' of easeMove to gameObject
+      easeMove.completeEventName = undefined;
+      easeMove.on('complete', function () {
+        if (easeMove.completeEventName) {
+          gameObject.emit(easeMove.completeEventName, gameObject);
+          easeMove.completeEventName = undefined;
+        }
+      });
+    },
     moveFrom: function moveFrom(duration, x, y, ease, destroyMode) {
       if (IsPlainObject$5(duration)) {
         var config = duration;
@@ -5746,7 +5740,7 @@
       var isInit = this._easeMove === undefined;
       this._easeMove = EaseMoveFrom(this, duration, x, y, ease, destroyMode, this._easeMove);
       if (isInit) {
-        OnInitEaseMove(this, this._easeMove);
+        this.onInitEaseMove();
       }
       this._easeMove.completeEventName = 'movefrom.complete';
       return this;
@@ -5781,7 +5775,7 @@
       var isInit = this._easeMove === undefined;
       this._easeMove = EaseMoveTo(this, duration, x, y, ease, destroyMode, this._easeMove);
       if (isInit) {
-        OnInitEaseMove(this, this._easeMove);
+        this.onInitEaseMove();
       }
       this._easeMove.completeEventName === 'moveto.complete';
       return this;
@@ -5811,6 +5805,20 @@
       this._easeMove.stop(toEnd);
       return this;
     }
+  };
+
+  var method = {};
+  Object.assign(method, EaseMoveMethods);
+  method.onInitEaseMove = function () {
+    EaseMoveMethods.onInitEaseMove.call(this);
+    var gameObject = this;
+    var easeMove = this._easeMove;
+    easeMove.on('update', function () {
+      var parent = GetParentSizerMethods.getParentSizer(gameObject);
+      if (parent) {
+        parent.resetChildPositionState(gameObject);
+      }
+    });
   };
 
   var GetValue$r = Phaser.Utils.Objects.GetValue;
@@ -10932,7 +10940,7 @@
     setChildrenInteractive: SetChildrenInteractiveWrap,
     broadcastEvent: BroadcastEvent
   };
-  Object.assign(methods$2, PaddingMethods, AddChildMethods$1, RemoveChildMethods$1, GetParentSizerMethods, ScaleMethods, FadeMethods, EaseMoveMethods, ShakeMethods, EaseDataMethods, DelayCallMethods$1, ClickMethods, ClickOutsideMethods, TouchingMethods, HoverMethods, HideMethods, ModalMethods, GetShownChildrenMethods);
+  Object.assign(methods$2, PaddingMethods, AddChildMethods$1, RemoveChildMethods$1, GetParentSizerMethods, ScaleMethods, FadeMethods, method, ShakeMethods, EaseDataMethods, DelayCallMethods$1, ClickMethods, ClickOutsideMethods, TouchingMethods, HoverMethods, HideMethods, ModalMethods, GetShownChildrenMethods);
 
   var GetValue$3 = Phaser.Utils.Objects.GetValue;
   var Base = /*#__PURE__*/function (_Container) {
