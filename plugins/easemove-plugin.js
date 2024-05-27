@@ -1,4 +1,9 @@
-import { EaseMove, EaseMoveTo, EaseMoveToDestroy, EaseMoveFrom, EaseMoveFromDestroy } from './easemove.js';
+import {
+    EaseMove,
+    EaseMoveTo, EaseMoveToDestroy,
+    EaseMoveFrom, EaseMoveFromDestroy,
+    EaseMoveMethods
+} from './easemove.js';
 
 class EaseMovePlugin extends Phaser.Plugins.BasePlugin {
 
@@ -13,6 +18,11 @@ class EaseMovePlugin extends Phaser.Plugins.BasePlugin {
 
     add(gameObject, config) {
         return new EaseMove(gameObject, config);
+    }
+
+    inject(gameObject) {
+        Object.assign(gameObject, EaseMoveMethods);
+        return gameObject;
     }
 }
 
