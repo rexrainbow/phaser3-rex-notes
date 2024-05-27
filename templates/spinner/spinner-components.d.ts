@@ -8,7 +8,7 @@ import Custom from './custom/Custom';
 import Dots from './dots/Dots';
 import Facebook from './facebook/Facebook';
 import Grid from './grid/Grid';
-import Los from './los/Los';
+import Ios from './ios/Ios';
 import Orbit from './orbit/Orbit';
 import Oval from './oval/Oval';
 import Pie from './pie/Pie';
@@ -28,7 +28,7 @@ export {
     Dots,
     Facebook,
     Grid,
-    Los,
+    Ios,
     Orbit,
     Oval,
     Pie,

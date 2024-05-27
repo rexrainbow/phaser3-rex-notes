@@ -4036,16 +4036,16 @@
   SetValue(window, 'RexPlugins.Spinner.Grid', Grid);
 
   var Linear$2 = Phaser.Math.Linear;
-  var Los = /*#__PURE__*/function (_Base) {
-    _inherits(Los, _Base);
-    function Los(scene, config) {
+  var Ios = /*#__PURE__*/function (_Base) {
+    _inherits(Ios, _Base);
+    function Ios(scene, config) {
       var _this;
-      _classCallCheck(this, Los);
-      _this = _callSuper(this, Los, [scene, config]);
-      _this.type = 'rexSpinnerLos';
+      _classCallCheck(this, Ios);
+      _this = _callSuper(this, Ios, [scene, config]);
+      _this.type = 'rexSpinnerIos';
       return _this;
     }
-    _createClass(Los, [{
+    _createClass(Ios, [{
       key: "buildShapes",
       value: function buildShapes() {
         for (var i = 0; i < 12; i++) {
@@ -4074,15 +4074,15 @@
         }
       }
     }]);
-    return Los;
+    return Ios;
   }(Base);
 
-  ObjectFactory.register('los', function (config) {
-    var gameObject = new Los(this.scene, config);
+  ObjectFactory.register('ios', function (config) {
+    var gameObject = new Ios(this.scene, config);
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.Spinner.Los', Los);
+  SetValue(window, 'RexPlugins.Spinner.Ios', Ios);
 
   var Orbit = /*#__PURE__*/function (_Base) {
     _inherits(Orbit, _Base);

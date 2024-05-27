@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexlosspinner = factory());
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexiosspinner = factory());
 })(this, (function () { 'use strict';
 
   function _callSuper(t, o, e) {
@@ -2310,16 +2310,16 @@
   Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 
   var Linear = Phaser.Math.Linear;
-  var Los = /*#__PURE__*/function (_Base) {
-    _inherits(Los, _Base);
-    function Los(scene, config) {
+  var Ios = /*#__PURE__*/function (_Base) {
+    _inherits(Ios, _Base);
+    function Ios(scene, config) {
       var _this;
-      _classCallCheck(this, Los);
-      _this = _callSuper(this, Los, [scene, config]);
-      _this.type = 'rexSpinnerLos';
+      _classCallCheck(this, Ios);
+      _this = _callSuper(this, Ios, [scene, config]);
+      _this.type = 'rexSpinnerIos';
       return _this;
     }
-    _createClass(Los, [{
+    _createClass(Ios, [{
       key: "buildShapes",
       value: function buildShapes() {
         for (var i = 0; i < 12; i++) {
@@ -2348,9 +2348,9 @@
         }
       }
     }]);
-    return Los;
+    return Ios;
   }(Base);
 
-  return Los;
+  return Ios;
 
 }));

@@ -39,7 +39,7 @@ Loading animations on shape.
   var dots = scene.rexSpinner.add.dots(config);
   var facebook = scene.rexSpinner.add.facebook(config);
   var grid = scene.rexSpinner.add.grid(config);
-  var los = scene.rexSpinner.add.los(config);
+  var ios = scene.rexSpinner.add.ios(config);
   var orbit = scene.rexSpinner.add.orbit(config);
   var oval = scene.rexSpinner.add.oval(config);
   var pie = scene.rexSpinner.add.pie(config);
@@ -85,7 +85,7 @@ Loading animations on shape.
   var dots = scene.rexSpinner.add.dots(config);
   var facebook = scene.rexSpinner.add.facebook(config);
   var grid = scene.rexSpinner.add.grid(config);
-  var los = scene.rexSpinner.add.los(config);
+  var ios = scene.rexSpinner.add.ios(config);
   var orbit = scene.rexSpinner.add.orbit(config);
   var oval = scene.rexSpinner.add.oval(config);
   var pie = scene.rexSpinner.add.pie(config);
@@ -105,7 +105,7 @@ Loading animations on shape.
   ```javascript
   import { 
     Audio, Ball, Bars, Box, Clock, Cube, Custom, Dots, Facebook, Grid, 
-    Los, Orbit, Oval, Puff, Radio, Rings, Spinner
+    Ios, Orbit, Oval, Puff, Radio, Rings, Spinner
   } from "phaser3-rex-plugins/templates/spinner/spinner-components.js";
   ```
 - Add spinner object

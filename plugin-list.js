@@ -322,7 +322,7 @@ module.exports = {
     'dotsspinner': './templates/spinner/dots/Dots.js',
     'facebookspinner': './templates/spinner/facebook/Facebook.js',
     'gridspinner': './templates/spinner/grid/Grid.js',
-    'losspinner': './templates/spinner/los/Los.js',
+    'iosspinner': './templates/spinner/ios/Ios.js',
     'orbitspinner': './templates/spinner/orbit/Orbit.js',
     'ovalspinner': './templates/spinner/oval/Oval.js',
     'puffspinner': './templates/spinner/puff/Puff.js',

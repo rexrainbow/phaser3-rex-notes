@@ -10,7 +10,7 @@ import CustomFactory from './custom/Factory.js';
 import DotsFactory from './dots/Factory.js';
 import FacebookFactory from './facebook/Factory.js';
 import GridFactory from './grid/Factory.js';
-import LosFactory from './los/Factory.js';
+import IosFactory from './ios/Factory.js';
 import OrbitFactory from './orbit/Factory.js';
 import OvalFactory from './oval/Factory.js';
 import PieFactory from './pie/Factory.js';

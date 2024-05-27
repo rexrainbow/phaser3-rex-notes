@@ -1553,7 +1553,6 @@
       _this = _callSuper(this, FullWindow, [gameObject]);
       // this.parent = gameObject;
 
-      gameObject.setOrigin(0.5).setScrollFactor(0);
       _this.targetCamera = undefined;
       _this.boot();
       return _this;
@@ -1591,6 +1590,7 @@
           y = gameHeight / 2;
         var width = gameWidth * scale,
           height = gameHeight * scale;
+        gameObject.setScrollFactor(0).setOrigin(0.5);
         if (gameObject.x !== x || gameObject.y !== y) {
           gameObject.setPosition(x, y);
         }

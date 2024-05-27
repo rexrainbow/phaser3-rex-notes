@@ -3,10 +3,10 @@ import { Line } from '../utils/Geoms.js'
 
 const Linear = Phaser.Math.Linear;
 
-class Los extends Base {
+class Ios extends Base {
     constructor(scene, config) {
         super(scene, config);
-        this.type = 'rexSpinnerLos';
+        this.type = 'rexSpinnerIos';
     }
 
     buildShapes() {
@@ -46,4 +46,4 @@ class Los extends Base {
     }
 }
 
-export default Los;
+export default Ios;
