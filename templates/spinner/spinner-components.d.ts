@@ -8,6 +8,7 @@ import Custom from './custom/Custom';
 import Dots from './dots/Dots';
 import Facebook from './facebook/Facebook';
 import Grid from './grid/Grid';
+import Hearts from './hearts/Hearts';
 import Ios from './ios/Ios';
 import Orbit from './orbit/Orbit';
 import Oval from './oval/Oval';
@@ -28,6 +29,7 @@ export {
     Dots,
     Facebook,
     Grid,
+    Hearts,
     Ios,
     Orbit,
     Oval,

@@ -11,7 +11,7 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var spinner = this.rexSpinner.add.box({
+        var spinner = this.rexSpinner.add.hearts({
             x: 400, y: 300,
             width: 10, height: 10
         });
@@ -19,6 +19,13 @@ class Demo extends Phaser.Scene {
         spinner
             .setSize(100, 100)
             .setColor(0x00FFFF)
+
+        var graphics = this.add.graphics({
+            lineStyle: {
+                width: 2, color: 0xff0000, alpha: 1
+            }
+        })
+            .strokeRectShape(spinner.getBounds())
     }
 
     update() { }

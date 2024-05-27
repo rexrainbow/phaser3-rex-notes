@@ -47,6 +47,7 @@ Loading animations on shape.
   var radio = scene.rexSpinner.add.radio(config);
   var rings = scene.rexSpinner.add.rings(config);
   var spinner = scene.rexSpinner.add.spinner(config);
+  var hearts = scene.rexSpinner.add.hearts(config);
   ```
 
 #### Import plugin
@@ -93,6 +94,7 @@ Loading animations on shape.
   var radio = scene.rexSpinner.add.radio(config);
   var rings = scene.rexSpinner.add.rings(config);
   var spinner = scene.rexSpinner.add.spinner(config);
+  var hearts = scene.rexSpinner.add.hearts(config);
   ```
 
 #### Import class
@@ -105,7 +107,7 @@ Loading animations on shape.
   ```javascript
   import { 
     Audio, Ball, Bars, Box, Clock, Cube, Custom, Dots, Facebook, Grid, 
-    Ios, Orbit, Oval, Puff, Radio, Rings, Spinner
+    Ios, Orbit, Oval, Puff, Radio, Rings, Spinner, Hearts
   } from "phaser3-rex-plugins/templates/spinner/spinner-components.js";
   ```
 - Add spinner object
