@@ -1188,6 +1188,114 @@
     return scale;
   };
 
+  var WaitEvent = function WaitEvent(eventEmitter, eventName) {
+    return new Promise(function (resolve, reject) {
+      eventEmitter.once(eventName, function () {
+        resolve();
+      });
+    });
+  };
+  var WaitComplete = function WaitComplete(eventEmitter) {
+    return WaitEvent(eventEmitter, 'complete');
+  };
+
+  var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+  var ScaleMethods = {
+    onInitScale: function onInitScale() {
+      var gameObject = this;
+      var scale = this._scaleBehavior;
+
+      // Route 'complete' of scale to gameObject
+      scale.completeEventName = undefined;
+      scale.on('complete', function () {
+        if (scale.completeEventName) {
+          gameObject.emit(scale.completeEventName, gameObject);
+          scale.completeEventName = undefined;
+        }
+      });
+    },
+    popUp: function popUp(duration, orientation, ease) {
+      if (IsPlainObject(duration)) {
+        var config = duration;
+        duration = config.duration;
+        orientation = config.orientation;
+        ease = config.ease;
+      }
+      var isInit = this._scaleBehavior === undefined;
+      this._scaleBehavior = PopUp(this, duration, orientation, ease, this._scaleBehavior);
+      if (isInit) {
+        this.onInitScale();
+      }
+      this._scaleBehavior.completeEventName = 'popup.complete';
+      return this;
+    },
+    popUpPromise: function popUpPromise(duration, orientation, ease) {
+      this.popUp(duration, orientation, ease);
+      return WaitComplete(this._scaleBehavior);
+    },
+    isRunningPopUp: function isRunningPopUp() {
+      return this._scaleBehavior && this._scaleBehavior.completeEventName === 'popup.complete';
+    },
+    scaleDownDestroy: function scaleDownDestroy(duration, orientation, ease, destroyMode) {
+      if (IsPlainObject(duration)) {
+        var config = duration;
+        duration = config.duration;
+        orientation = config.orientation;
+        ease = config.ease;
+        destroyMode = config.destroy;
+      }
+      var isInit = this._scaleBehavior === undefined;
+      this._scaleBehavior = ScaleDownDestroy(this, duration, orientation, ease, destroyMode, this._scaleBehavior);
+      if (isInit) {
+        this.onInitScale();
+      }
+      this._scaleBehavior.completeEventName = 'scaledown.complete';
+      return this;
+    },
+    scaleDownDestroyPromise: function scaleDownDestroyPromise(duration, orientation, ease, destroyMode) {
+      this.scaleDownDestroy(duration, orientation, ease, destroyMode);
+      return WaitComplete(this._scaleBehavior);
+    },
+    scaleDown: function scaleDown(duration, orientation, ease) {
+      this.scaleDownDestroy(duration, orientation, ease, false);
+      return this;
+    },
+    scaleDownPromise: function scaleDownPromise(duration, orientation, ease) {
+      this.scaleDown(duration, orientation, ease);
+      return WaitComplete(this._scaleBehavior);
+    },
+    isRunningScaleDown: function isRunningScaleDown() {
+      return this._scaleBehavior && this._scaleBehavior.completeEventName === 'scaledown.complete';
+    },
+    scaleYoyo: function scaleYoyo(duration, peakValue, repeat, orientation, ease) {
+      if (IsPlainObject(duration)) {
+        var config = duration;
+        duration = config.duration;
+        peakValue = config.peakValue;
+        repeat = config.repeat;
+        orientation = config.orientation;
+        ease = config.ease;
+      }
+      var isInit = this._scaleBehavior === undefined;
+      this._scaleBehavior = Yoyo(this, duration, peakValue, repeat, orientation, ease, this._scaleBehavior);
+      if (isInit) {
+        this.onInitScale();
+      }
+      this._scaleBehavior.completeEventName = 'scaleyoyo.complete';
+      return this;
+    },
+    scaleYoyoPromise: function scaleYoyoPromise(duration, peakValue, repeat, orientation, ease) {
+      this.scaleYoyo(duration, peakValue, repeat, orientation, ease);
+      return WaitComplete(this._scaleBehavior);
+    },
+    isRunningScaleYoyo: function isRunningScaleYoyo() {
+      return this._scaleBehavior && (this._scaleBehavior.completeEventName = 'scaleyoyo.complete');
+    },
+    isRunningEaseScale: function isRunningEaseScale() {
+      return this.isRunningPopUp() || this.isRunningScaleDown() || this.isRunningScaleYoyo();
+    }
+  };
+
   var ScalePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(ScalePlugin, _Phaser$Plugins$BaseP);
     function ScalePlugin(pluginManager) {
@@ -1204,6 +1312,12 @@
       key: "add",
       value: function add(gameObject, config) {
         return new Scale(gameObject, config);
+      }
+    }, {
+      key: "inject",
+      value: function inject(gameObject) {
+        Object.assign(gameObject, ScaleMethods);
+        return gameObject;
       }
     }]);
     return ScalePlugin;

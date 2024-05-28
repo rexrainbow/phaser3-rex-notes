@@ -998,6 +998,117 @@
     return fade;
   };
 
+  var IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
+  var FadeIn = function FadeIn(gameObject, duration, alpha, fade) {
+    var startAlpha, endAlpha;
+    if (IsPlainObject$1(alpha)) {
+      startAlpha = alpha.start;
+      endAlpha = alpha.end;
+    } else {
+      endAlpha = alpha;
+    }
+    if (startAlpha === undefined) {
+      startAlpha = 0;
+    }
+    if (endAlpha === undefined) {
+      endAlpha = 1;
+    }
+    var config = {
+      mode: 0,
+      start: startAlpha,
+      end: endAlpha,
+      duration: duration
+    };
+    if (fade === undefined) {
+      fade = new Fade(gameObject, config);
+    } else {
+      fade.resetFromJSON(config);
+    }
+    fade.restart();
+    return fade;
+  };
+
+  var WaitEvent = function WaitEvent(eventEmitter, eventName) {
+    return new Promise(function (resolve, reject) {
+      eventEmitter.once(eventName, function () {
+        resolve();
+      });
+    });
+  };
+  var WaitComplete = function WaitComplete(eventEmitter) {
+    return WaitEvent(eventEmitter, 'complete');
+  };
+
+  var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+  var FadeMethods = {
+    onInitFade: function onInitFade() {
+      var gameObject = this;
+      var fade = this._fade;
+
+      // Route 'complete' of fade to gameObject
+      fade.completeEventName = undefined;
+      fade.on('complete', function () {
+        if (fade.completeEventName) {
+          gameObject.emit(fade.completeEventName, gameObject);
+          fade.completeEventName = undefined;
+        }
+      });
+    },
+    fadeIn: function fadeIn(duration, alpha) {
+      if (IsPlainObject(duration)) {
+        var config = duration;
+        duration = config.duration;
+        alpha = config.alpha;
+      }
+      var isInit = this._fade === undefined;
+      this._fade = FadeIn(this, duration, alpha, this._fade);
+      if (isInit) {
+        this.onInitFade();
+      }
+      this._fade.completeEventName = 'fadein.complete';
+      return this;
+    },
+    fadeInPromise: function fadeInPromise(duration, alpha) {
+      this.fadeIn(duration, alpha);
+      return WaitComplete(this._fade);
+    },
+    isRunningFadeIn: function isRunningFadeIn() {
+      return this._fade && this._fade.completeEventName === 'fadein.complete';
+    },
+    fadeOutDestroy: function fadeOutDestroy(duration, destroyMode) {
+      if (IsPlainObject(duration)) {
+        var config = duration;
+        duration = config.duration;
+        destroyMode = config.destroy;
+      }
+      var isInit = this._fade === undefined;
+      this._fade = FadeOutDestroy(this, duration, destroyMode, this._fade);
+      if (isInit) {
+        this.onInitFade();
+      }
+      this._fade.completeEventName = 'fadeout.complete';
+      return this;
+    },
+    fadeOutDestroyPromise: function fadeOutDestroyPromise(duration, destroyMode) {
+      this.fadeOutDestroy(duration, destroyMode);
+      return WaitComplete(this._fade);
+    },
+    fadeOut: function fadeOut(duration) {
+      this.fadeOutDestroy(duration, false);
+      return this;
+    },
+    fadeOutPromise: function fadeOutPromise(duration) {
+      this.fadeOut(duration);
+      return WaitComplete(this._fade);
+    },
+    isRunningFadeOut: function isRunningFadeOut() {
+      return this._fade && this._fade.completeEventName === 'fadeout.complete';
+    },
+    isRunningEaseFade: function isRunningEaseFade() {
+      return this.isRunningFadeIn() || this.isRunningFadeOut();
+    }
+  };
+
   var FadePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(FadePlugin, _Phaser$Plugins$BaseP);
     function FadePlugin(pluginManager) {
@@ -1014,6 +1125,12 @@
       key: "add",
       value: function add(gameObject, config) {
         return new Fade(gameObject, config);
+      }
+    }, {
+      key: "inject",
+      value: function inject(gameObject) {
+        Object.assign(gameObject, FadeMethods);
+        return gameObject;
       }
     }]);
     return FadePlugin;

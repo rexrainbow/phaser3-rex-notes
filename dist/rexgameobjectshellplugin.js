@@ -2285,11 +2285,11 @@
     return this;
   };
 
-  var methods$n = {
+  var methods$q = {
     changeOrigin: ChangeOrigin,
     drawBounds: DrawBounds$1
   };
-  Object.assign(methods$n, Parent, AddChild$3, RemoveChild$2, ChildState, Transform, Position, Rotation$1, Scale$2, Visible, Alpha, Active, ScrollFactor, CameraFilter, Mask, Depth, Children, Tween, P3Container, RenderLayer, RenderTexture$1);
+  Object.assign(methods$q, Parent, AddChild$3, RemoveChild$2, ChildState, Transform, Position, Rotation$1, Scale$2, Visible, Alpha, Active, ScrollFactor, CameraFilter, Mask, Depth, Children, Tween, P3Container, RenderLayer, RenderTexture$1);
 
   var ContainerLite = /*#__PURE__*/function (_Base) {
     _inherits(ContainerLite, _Base);
@@ -2570,7 +2570,7 @@
     }]);
     return ContainerLite;
   }(Base$2);
-  Object.assign(ContainerLite.prototype, methods$n);
+  Object.assign(ContainerLite.prototype, methods$q);
 
   var AddChildrenMap = function AddChildrenMap(key, gameObject) {
     if (typeof key === 'string') {
@@ -6647,8 +6647,8 @@
     }
   };
 
-  var methods$m = {};
-  Object.assign(methods$m, LayerMethods, ScrollFactorMethods, DepthMethods, CameraMethods);
+  var methods$p = {};
+  Object.assign(methods$p, LayerMethods, ScrollFactorMethods, DepthMethods, CameraMethods);
 
   var GetValue$25 = Phaser.Utils.Objects.GetValue;
   var LayerManager = /*#__PURE__*/function (_GOManager) {
@@ -6754,7 +6754,7 @@
     }
     return layer;
   };
-  Object.assign(LayerManager.prototype, methods$m);
+  Object.assign(LayerManager.prototype, methods$p);
 
   ObjectFactory.register('layerManager', function (config) {
     var layermanager = new LayerManager(this.scene, config);
@@ -9386,10 +9386,10 @@
     }]);
     return Rotate;
   }(TwoPointersTracer);
-  var methods$l = {
+  var methods$o = {
     spinObject: SpinObject
   };
-  Object.assign(Rotate.prototype, methods$l);
+  Object.assign(Rotate.prototype, methods$o);
   var IDLE$1 = 'IDLE';
   var BEGIN = 'BEGIN';
   var RECOGNIZED = 'RECOGNIZED';
@@ -11637,25 +11637,20 @@
   };
 
   var IsPlainObject$s = Phaser.Utils.Objects.IsPlainObject;
-  var OnInitScale = function OnInitScale(gameObject, scale) {
-    // Route 'complete' of scale to gameObject
-    scale.completeEventName = undefined;
-    scale.on('complete', function () {
-      if (scale.completeEventName) {
-        gameObject.emit(scale.completeEventName, gameObject);
-        scale.completeEventName = undefined;
-      }
-    });
-
-    // Update local state
-    scale.on('update', function () {
-      var parent = GetParentSizerMethods.getParentSizer(gameObject);
-      if (parent) {
-        parent.resetChildPositionState(gameObject);
-      }
-    });
-  };
   var ScaleMethods = {
+    onInitScale: function onInitScale() {
+      var gameObject = this;
+      var scale = this._scaleBehavior;
+
+      // Route 'complete' of scale to gameObject
+      scale.completeEventName = undefined;
+      scale.on('complete', function () {
+        if (scale.completeEventName) {
+          gameObject.emit(scale.completeEventName, gameObject);
+          scale.completeEventName = undefined;
+        }
+      });
+    },
     popUp: function popUp(duration, orientation, ease) {
       if (IsPlainObject$s(duration)) {
         var config = duration;
@@ -11666,7 +11661,7 @@
       var isInit = this._scaleBehavior === undefined;
       this._scaleBehavior = PopUp(this, duration, orientation, ease, this._scaleBehavior);
       if (isInit) {
-        OnInitScale(this, this._scaleBehavior);
+        this.onInitScale();
       }
       this._scaleBehavior.completeEventName = 'popup.complete';
       return this;
@@ -11689,7 +11684,7 @@
       var isInit = this._scaleBehavior === undefined;
       this._scaleBehavior = ScaleDownDestroy(this, duration, orientation, ease, destroyMode, this._scaleBehavior);
       if (isInit) {
-        OnInitScale(this, this._scaleBehavior);
+        this.onInitScale();
       }
       this._scaleBehavior.completeEventName = 'scaledown.complete';
       return this;
@@ -11721,7 +11716,7 @@
       var isInit = this._scaleBehavior === undefined;
       this._scaleBehavior = Yoyo(this, duration, peakValue, repeat, orientation, ease, this._scaleBehavior);
       if (isInit) {
-        OnInitScale(this, this._scaleBehavior);
+        this.onInitScale();
       }
       this._scaleBehavior.completeEventName = 'scaleyoyo.complete';
       return this;
@@ -11736,6 +11731,21 @@
     isRunningEaseScale: function isRunningEaseScale() {
       return this.isRunningPopUp() || this.isRunningScaleDown() || this.isRunningScaleYoyo();
     }
+  };
+
+  var methods$n = {};
+  Object.assign(methods$n, ScaleMethods);
+  methods$n.onInitScale = function () {
+    ScaleMethods.onInitScale.call(this);
+    var gameObject = this;
+    var scale = this._scaleBehavior;
+    // Update local state
+    scale.on('update', function () {
+      var parent = GetParentSizerMethods.getParentSizer(gameObject);
+      if (parent) {
+        parent.resetChildPositionState(gameObject);
+      }
+    });
   };
 
   var GetValue$1P = Phaser.Utils.Objects.GetValue;
@@ -11872,25 +11882,20 @@
   };
 
   var IsPlainObject$q = Phaser.Utils.Objects.IsPlainObject;
-  var OnInitFade = function OnInitFade(gameObject, fade) {
-    // Route 'complete' of fade to gameObject
-    fade.completeEventName = undefined;
-    fade.on('complete', function () {
-      if (fade.completeEventName) {
-        gameObject.emit(fade.completeEventName, gameObject);
-        fade.completeEventName = undefined;
-      }
-    });
-
-    // Update local state
-    fade.on('update', function () {
-      var parent = GetParentSizerMethods.getParentSizer(gameObject);
-      if (parent) {
-        parent.resetChildAlphaState(gameObject);
-      }
-    });
-  };
   var FadeMethods = {
+    onInitFade: function onInitFade() {
+      var gameObject = this;
+      var fade = this._fade;
+
+      // Route 'complete' of fade to gameObject
+      fade.completeEventName = undefined;
+      fade.on('complete', function () {
+        if (fade.completeEventName) {
+          gameObject.emit(fade.completeEventName, gameObject);
+          fade.completeEventName = undefined;
+        }
+      });
+    },
     fadeIn: function fadeIn(duration, alpha) {
       if (IsPlainObject$q(duration)) {
         var config = duration;
@@ -11900,7 +11905,7 @@
       var isInit = this._fade === undefined;
       this._fade = FadeIn(this, duration, alpha, this._fade);
       if (isInit) {
-        OnInitFade(this, this._fade);
+        this.onInitFade();
       }
       this._fade.completeEventName = 'fadein.complete';
       return this;
@@ -11921,7 +11926,7 @@
       var isInit = this._fade === undefined;
       this._fade = FadeOutDestroy(this, duration, destroyMode, this._fade);
       if (isInit) {
-        OnInitFade(this, this._fade);
+        this.onInitFade();
       }
       this._fade.completeEventName = 'fadeout.complete';
       return this;
@@ -11944,6 +11949,21 @@
     isRunningEaseFade: function isRunningEaseFade() {
       return this.isRunningFadeIn() || this.isRunningFadeOut();
     }
+  };
+
+  var methods$m = {};
+  Object.assign(methods$m, FadeMethods);
+  methods$m.onInitFade = function () {
+    FadeMethods.onInitFade.call(this);
+    var gameObject = this;
+    var fade = this._fade;
+    // Update local state
+    fade.on('update', function () {
+      var parent = GetParentSizerMethods.getParentSizer(gameObject);
+      if (parent) {
+        parent.resetChildAlphaState(gameObject);
+      }
+    });
   };
 
   var GetValue$1O = Phaser.Utils.Objects.GetValue;
@@ -12233,9 +12253,9 @@
     }
   };
 
-  var method = {};
-  Object.assign(method, EaseMoveMethods);
-  method.onInitEaseMove = function () {
+  var methods$l = {};
+  Object.assign(methods$l, EaseMoveMethods);
+  methods$l.onInitEaseMove = function () {
     EaseMoveMethods.onInitEaseMove.call(this);
     var gameObject = this;
     var easeMove = this._easeMove;
@@ -14901,7 +14921,7 @@
     setChildrenInteractive: SetChildrenInteractiveWrap,
     broadcastEvent: BroadcastEvent
   };
-  Object.assign(methods$j, PaddingMethods, AddChildMethods$7, RemoveChildMethods$6, GetParentSizerMethods, ScaleMethods, FadeMethods, method, ShakeMethods, EaseDataMethods, DelayCallMethods$1, ClickMethods, ClickOutsideMethods, TouchingMethods, HoverMethods, HideMethods, ModalMethods, GetShownChildrenMethods);
+  Object.assign(methods$j, PaddingMethods, AddChildMethods$7, RemoveChildMethods$6, GetParentSizerMethods, methods$n, methods$m, methods$l, ShakeMethods, EaseDataMethods, DelayCallMethods$1, ClickMethods, ClickOutsideMethods, TouchingMethods, HoverMethods, HideMethods, ModalMethods, GetShownChildrenMethods);
 
   var GetValue$1w = Phaser.Utils.Objects.GetValue;
   var Base$1 = /*#__PURE__*/function (_Container) {
@@ -32894,10 +32914,10 @@
   };
 
   var DefaultExpandCallback = function DefaultExpandCallback(gameObject, duration) {
-    ScaleMethods.popUp.call(gameObject, duration, this.expandDirection);
+    methods$n.popUp.call(gameObject, duration, this.expandDirection);
   };
   var DefaultCollapseCallback = function DefaultCollapseCallback(gameObject, duration) {
-    ScaleMethods.scaleDown.call(gameObject, duration, this.expandDirection);
+    methods$n.scaleDown.call(gameObject, duration, this.expandDirection);
   };
   var ConfigurationMethods = {
     setTransitionDuration: function setTransitionDuration(duration) {
