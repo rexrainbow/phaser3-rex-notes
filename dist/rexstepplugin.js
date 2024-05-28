@@ -642,10 +642,10 @@
       var step = this._step;
       // Route 'step' of step to gameObject       
       step.on('step', function (gameObject, step, stepX, stepY) {
-        gameObject.emit('step', stepX, stepY);
+        gameObject.emit('step.step', stepX, stepY);
       });
     },
-    startStep: function startStep(stepLength) {
+    stepStart: function stepStart(stepLength) {
       if (IsPlainObject(stepLength)) {
         var config = stepLength;
         stepLength = config.stepLength;
@@ -663,7 +663,7 @@
       }
       return this;
     },
-    stopStep: function stopStep() {
+    stepStop: function stepStop() {
       if (!this._step) {
         return this;
       }
@@ -690,10 +690,16 @@
         return new Step(gameObject, config);
       }
     }, {
-      key: "inject",
-      value: function inject(gameObject) {
+      key: "injectMethods",
+      value: function injectMethods(gameObject) {
         Object.assign(gameObject, StepMethods);
         return gameObject;
+      }
+    }, {
+      key: "injectMethodsToRootClass",
+      value: function injectMethodsToRootClass() {
+        this.injectMethods(Phaser.GameObjects.GameObject.prototype);
+        return this;
       }
     }]);
     return StepPlugin;

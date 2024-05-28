@@ -1127,10 +1127,16 @@
         return new Fade(gameObject, config);
       }
     }, {
-      key: "inject",
-      value: function inject(gameObject) {
+      key: "injectMethods",
+      value: function injectMethods(gameObject) {
         Object.assign(gameObject, FadeMethods);
         return gameObject;
+      }
+    }, {
+      key: "injectMethodsToRootClass",
+      value: function injectMethodsToRootClass() {
+        this.injectMethods(Phaser.GameObjects.GameObject.prototype);
+        return this;
       }
     }]);
     return FadePlugin;
