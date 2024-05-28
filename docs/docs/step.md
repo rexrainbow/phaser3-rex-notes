@@ -124,3 +124,44 @@ step.setStepLength(stepLength);
     }, scope);
     ```
     - `points` : Array of point `{x, y}`
+
+### Inject methods
+
+- Inject methods into game object
+    ```javascript
+    scene.plugins.get('rexStep').injectMethods(gameObject);
+    ```
+- Inject methods into class of game object
+    ```javascript
+    scene.plugins.get('rexStep').injectMethods(GameObjectClass.prototype);
+    // scene.plugins.get('rexStep').injectMethods(Phaser.GameObjects.Sprite.prototype);
+    ```
+- Inject methods into class of game object
+    ```javascript
+    scene.plugins.get('rexStep').injectMethods(GameObjectClass.prototype);
+    // scene.plugins.get('rexStep').injectMethods(Phaser.GameObjects.Sprite.prototype);
+    ```
+- Inject methods into root class of game object
+    ```javascript
+    scene.plugins.get('rexStep').injectMethodsToRootClass(e);
+    // scene.plugins.get('rexStep').injectMethods(Phaser.GameObjects.GameObject.prototype);
+    ```
+
+#### Injected methods
+
+- Step start
+    ```javascript
+    gameObject.stepStart(stepLength);
+    // gameObject.stepStart({stepLength});
+    ```
+- Step stop
+    ```javascript
+    gameObject.stepStop();
+    ```
+- Events
+    - Step
+        ```javascript
+        gameObject.on('step.step', function(gameObject, x, y) { 
+            
+        });
+        ```

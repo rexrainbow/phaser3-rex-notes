@@ -82,3 +82,85 @@ See [Events of tween task](tween.md#events)
 
     }, scope);
     ```
+
+### Inject methods
+
+- Inject methods into game object
+    ```javascript
+    scene.plugins.get('rexFade').injectMethods(gameObject);
+    ```
+- Inject methods into class of game object
+    ```javascript
+    scene.plugins.get('rexFade').injectMethods(GameObjectClass.prototype);
+    // scene.plugins.get('rexFade').injectMethods(Phaser.GameObjects.Sprite.prototype);
+    ```
+- Inject methods into class of game object
+    ```javascript
+    scene.plugins.get('rexFade').injectMethods(GameObjectClass.prototype);
+    // scene.plugins.get('rexFade').injectMethods(Phaser.GameObjects.Sprite.prototype);
+    ```
+- Inject methods into root class of game object
+    ```javascript
+    scene.plugins.get('rexFade').injectMethodsToRootClass(e);
+    // scene.plugins.get('rexFade').injectMethods(Phaser.GameObjects.GameObject.prototype);
+    ```
+
+#### Injected methods
+
+- Fade-in
+    ```javascript
+    gameObject.fadeIn(duration);
+    ```
+    or
+    ```javascript
+    gameObject.fadeIn(duration, endAlpha);
+    ```
+    or
+    ```javascript
+    gameObject.fadeIn(duration, {start:0, end:1});
+    ```
+    or
+    ```javascript
+    gameObject.fadeInPromise(duration, endAlpha)
+        .then(function(){
+            // ...
+        })
+    ```
+    or
+    ```javascript
+    gameObject.fadeInPromise(duration, {start:0, end:1})
+        .then(function(){
+            // ...
+        })
+    ```
+- Fade-out destroy
+    ```javascript
+    gameObject.fadeOutDestroy(duration);
+    ```
+    or
+    ```javascript
+    gameObject.fadeOutDestroyPromise(duration)
+        .then(function(){
+            // ...
+        })
+    ```
+- Fade-out without destroy
+    ```javascript
+    gameObject.fadeOut(duration);
+    ```
+    or
+    ```javascript
+    gameObject.fadeOutPromise(duration)
+        .then(function(){
+            // ...
+        })
+    ```
+- Events
+    - Fade-in complete
+        ```javascript
+        gameObject.on('fadein.complete', function(gameObject) { });
+        ```
+    - Fade-out, fade-out destroy complete
+        ```javascript
+        gameObject.on('fadeout.complete', function(gameObject) { });
+        ```

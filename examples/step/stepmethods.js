@@ -23,7 +23,7 @@ class Demo extends Phaser.Scene {
                 this.setPosition(dragX, dragY);
             })
             .stepStart(10)
-            .on('step.step', function (stepX, stepY) {
+            .on('step.step', function (gameObject, stepX, stepY) {
                 this.add.circle(stepX, stepY, 10, 0xff0000)
                     .fadeOutDestroy(2000)
             }, this)

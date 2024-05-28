@@ -109,3 +109,123 @@ See [Events of tween task](tween.md#events)
 
     }, scope);
     ```
+
+### Inject methods
+
+- Inject methods into game object
+    ```javascript
+    scene.plugins.get('rexEaseMove').injectMethods(gameObject);
+    ```
+- Inject methods into class of game object
+    ```javascript
+    scene.plugins.get('rexEaseMove').injectMethods(GameObjectClass.prototype);
+    // scene.plugins.get('rexEaseMove').injectMethods(Phaser.GameObjects.Sprite.prototype);
+    ```
+- Inject methods into class of game object
+    ```javascript
+    scene.plugins.get('rexEaseMove').injectMethods(GameObjectClass.prototype);
+    // scene.plugins.get('rexEaseMove').injectMethods(Phaser.GameObjects.Sprite.prototype);
+    ```
+- Inject methods into root class of game object
+    ```javascript
+    scene.plugins.get('rexEaseMove').injectMethodsToRootClass(e);
+    // scene.plugins.get('rexEaseMove').injectMethods(Phaser.GameObjects.GameObject.prototype);
+    ```
+
+#### Injected methods
+
+- Move from
+    ```javascript
+    gameObject.moveFrom(duration, x, y);
+    // gameObject.moveFrom(duration, x, y, ease);
+    // gameObject.moveFrom({x, y, duration, ease});
+    // gameObject.moveFrom({x, y, speed, ease});
+    ```
+    or
+    ```javascript
+    gameObject
+        .moveFromPromise(duration, x, y, ease)
+        // .moveFromPromise({x, y, duration, ease})
+        // .moveFromPromise({x, y, speed, ease})
+        .then(function(){
+            // ...
+        })    
+    ```    
+    - `x`, `y` : Start position.
+        - Number : Start position x/y.
+        - String(`+=300`) : Related position of current position x/y.
+        - `undefined` : Current position x/y.
+    - `speed` : Get `duration` according to `speed` and distance between current gameObject position to `{x, y}`
+    - `ease` : `'Linear'`, `'Cubic'`, `'Elastic'`, `'Bounce'`, `'Back'` ...
+- Move-from destroy
+    ```javascript
+    gameObject.moveFromDestroy(duration, x, y);
+    // gameObject.moveFrom(duration, x, y, ease);
+    // gameObject.moveFrom({x, y, duration, ease});
+    // gameObject.moveFrom({x, y, speed, ease});
+    ```
+    or
+    ```javascript
+    gameObject
+        .moveFromDestroyPromise(duration, x, y, ease)
+        // .moveFromDestroyPromise({x, y, duration, ease})
+        // .moveFromDestroyPromise({x, y, speed, ease})
+        .then(function(){
+            // ...
+        })    
+    ```
+- Move to
+    ```javascript
+    gameObject.moveTo(duration, x, y);
+    // gameObject.moveTo(duration, x, y, ease);
+    // gameObject.moveTo({x, y, duration, ease});
+    // gameObject.moveTo({x, y, speed, ease});
+    ```
+    or
+    ```javascript
+    gameObject
+        .moveToPromise(duration, x, y, ease)
+        // .moveToPromise({x, y, duration, ease})
+        // .moveToPromise({x, y, speed, ease})
+        .then(function(){
+            // ...
+        })    
+    ```
+    - `x`, `y` : End position.
+        - Number : End position x/y.
+        - String(`+=300`) : Related position of current position x/y.
+        - `undefined` : Current position x/y.
+    - `speed` : Get `duration` according to `speed` and distance between current gameObject position to `{x, y}`
+    - `ease` : `'Linear'`, `'Cubic'`, `'Elastic'`, `'Bounce'`, `'Back'` ...
+- Move-to destroy
+    ```javascript
+    gameObject.moveToDestroy(duration, x, y);
+    // gameObject.moveTo(duration, x, y, ease);
+    // gameObject.moveTo({x, y, duration, ease});
+    // gameObject.moveTo({x, y, speed, ease});
+    ```
+    or
+    ```javascript
+    gameObject
+        .moveToDestroyPromise(duration, x, y, ease)
+        // .moveToDestroyPromise({x, y, duration, ease})
+        // .moveToDestroyPromise({x, y, speed, ease})
+        .then(function(){
+            // ...
+        })    
+    ```
+- Move-stop
+    ```javascript
+    gameObject.moveStop();
+    // gameObject.moveStop(true);  // Set to end position
+    ```
+- Events
+    - Move-from complete
+        ```javascript
+        gameObject.on('movefrom.complete', function(gameObject) { });
+        ```
+    - Move-to complete
+        ```javascript
+        gameObject.on('moveto.complete', function(gameObject) { });
+        ```
+
