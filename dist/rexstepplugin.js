@@ -642,7 +642,7 @@
       var step = this._step;
       // Route 'step' of step to gameObject       
       step.on('step', function (gameObject, step, stepX, stepY) {
-        gameObject.emit('step.step', stepX, stepY);
+        gameObject.emit('step.step', gameObject, stepX, stepY);
       });
     },
     stepStart: function stepStart(stepLength) {

@@ -3201,6 +3201,26 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#inject-methods" class="md-nav__link">
+    Inject methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Inject methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#injected-methods" class="md-nav__link">
+    Injected methods
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9709,6 +9729,26 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#inject-methods" class="md-nav__link">
+    Inject methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Inject methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#injected-methods" class="md-nav__link">
+    Injected methods
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9839,6 +9879,42 @@
 <span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>points</code> : Array of point <code>{x, y}</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="inject-methods">Inject methods<a class="headerlink" href="#inject-methods" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Inject methods into game object
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexStep&#39;</span><span class="p">).</span><span class="nx">injectMethods</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Inject methods into class of game object
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexStep&#39;</span><span class="p">).</span><span class="nx">injectMethods</span><span class="p">(</span><span class="nx">GameObjectClass</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span>
+<span class="c1">// scene.plugins.get(&#39;rexStep&#39;).injectMethods(Phaser.GameObjects.Sprite.prototype);</span>
+</code></pre></div></li>
+<li>Inject methods into class of game object
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexStep&#39;</span><span class="p">).</span><span class="nx">injectMethods</span><span class="p">(</span><span class="nx">GameObjectClass</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span>
+<span class="c1">// scene.plugins.get(&#39;rexStep&#39;).injectMethods(Phaser.GameObjects.Sprite.prototype);</span>
+</code></pre></div></li>
+<li>Inject methods into root class of game object
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexStep&#39;</span><span class="p">).</span><span class="nx">injectMethodsToRootClass</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
+<span class="c1">// scene.plugins.get(&#39;rexStep&#39;).injectMethods(Phaser.GameObjects.GameObject.prototype);</span>
+</code></pre></div></li>
+</ul>
+<h4 id="injected-methods">Injected methods<a class="headerlink" href="#injected-methods" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Step start
+    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">stepStart</span><span class="p">(</span><span class="nx">stepLength</span><span class="p">);</span>
+<span class="c1">// gameObject.stepStart({stepLength});</span>
+</code></pre></div></li>
+<li>Step stop
+    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">stepStop</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Events<ul>
+<li>Step
+    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;step.step&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+
+<span class="p">});</span>
+</code></pre></div></li>
 </ul>
 </li>
 </ul>

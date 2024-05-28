@@ -3422,6 +3422,26 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#inject-methods" class="md-nav__link">
+    Inject methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Inject methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#injected-methods" class="md-nav__link">
+    Injected methods
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9667,6 +9687,26 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#inject-methods" class="md-nav__link">
+    Inject methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Inject methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#injected-methods" class="md-nav__link">
+    Injected methods
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9774,6 +9814,254 @@
 
 <span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
 </code></pre></div></li>
+</ul>
+<h3 id="inject-methods">Inject methods<a class="headerlink" href="#inject-methods" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Inject methods into game object
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexScale&#39;</span><span class="p">).</span><span class="nx">injectMethods</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Inject methods into class of game object
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexScale&#39;</span><span class="p">).</span><span class="nx">injectMethods</span><span class="p">(</span><span class="nx">GameObjectClass</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span>
+<span class="c1">// scene.plugins.get(&#39;rexScale&#39;).injectMethods(Phaser.GameObjects.Sprite.prototype);</span>
+</code></pre></div></li>
+<li>Inject methods into class of game object
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexScale&#39;</span><span class="p">).</span><span class="nx">injectMethods</span><span class="p">(</span><span class="nx">GameObjectClass</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span>
+<span class="c1">// scene.plugins.get(&#39;rexScale&#39;).injectMethods(Phaser.GameObjects.Sprite.prototype);</span>
+</code></pre></div></li>
+<li>Inject methods into root class of game object
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexScale&#39;</span><span class="p">).</span><span class="nx">injectMethodsToRootClass</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
+<span class="c1">// scene.plugins.get(&#39;rexScale&#39;).injectMethods(Phaser.GameObjects.GameObject.prototype);</span>
+</code></pre></div></li>
+</ul>
+<h4 id="injected-methods">Injected methods<a class="headerlink" href="#injected-methods" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Scale up from <code>0</code> to <strong>current scale</strong> of game object.<ul>
+<li>Pop-up width and height
+    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span>
+<span class="w">    </span><span class="c1">//.setScale(scaleX, scaleY)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">popUp</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>
+
+<span class="c1">// gameObject.popUp(duration, undefined, ease);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span>
+<span class="w">    </span><span class="c1">//.setScale(scaleX, scaleY)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">popUpPromise</span><span class="p">(</span><span class="nx">duration</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// ....</span>
+<span class="w">    </span><span class="p">})</span>
+</code></pre></div><ul>
+<li><code>ease</code> : <a href="tween.md/#ease-equations">Ease function</a>, default is <code>'Cubic'</code>.</li>
+</ul>
+</li>
+<li>Pop-up width only
+    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span>
+<span class="w">    </span><span class="c1">//.setScaleX(scaleX)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">popUp</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;x&#39;</span><span class="p">);</span>
+
+<span class="c1">// gameObject.popUp(duration, &#39;x&#39;, ease);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span>
+<span class="w">    </span><span class="c1">//.setScaleX(scaleX)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">popUpPromise</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// ....</span>
+<span class="w">    </span><span class="p">})</span>
+</code></pre></div></li>
+<li>Pop-up height only
+    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span>
+<span class="w">    </span><span class="c1">//.setScaleY(scaleY)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">popUp</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;y&#39;</span><span class="p">);</span>
+
+<span class="c1">// gameObject.popUp(duration, &#39;y&#39;, ease);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span>
+<span class="w">    </span><span class="c1">//.setScaleY(scaleY)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">popUpPromise</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// ....</span>
+<span class="w">    </span><span class="p">})</span>
+</code></pre></div></li>
+<li>Pop-up via config
+    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span>
+<span class="w">    </span><span class="c1">//.setScale(scaleX, scaleY)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">popUp</span><span class="p">({</span>
+<span class="w">        </span><span class="nx">duration</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">orientation</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">ease</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="p">})</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span>
+<span class="w">    </span><span class="c1">//.setScale(scaleX, scaleY)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">popUpPromise</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// ....</span>
+<span class="w">    </span><span class="p">})</span>
+</code></pre></div><ul>
+<li><code>orientation</code> : <code>undefined</code>, <code>x</code>, or <code>y</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Scale-down destroy<ul>
+<li>Scale-down width and height
+    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">scaleDownDestroy</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>
+<span class="c1">// gameObject.scaleDownDestroy(duration, undefined, ease);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">scaleDownDestroyPromise</span><span class="p">(</span><span class="nx">duration</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// ....</span>
+<span class="w">    </span><span class="p">})</span>
+</code></pre></div><ul>
+<li><code>ease</code> : <a href="tween.md/#ease-equations">Ease function</a>, default is <code>'Linear'</code>.</li>
+</ul>
+</li>
+<li>Scale-down width only
+    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">scaleDownDestroy</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;x&#39;</span><span class="p">);</span>
+<span class="c1">// gameObject.scaleDownDestroy(duration, &#39;x&#39;, ease);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">scaleDownDestroyPromise</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;x&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// ....</span>
+<span class="w">    </span><span class="p">})</span>
+</code></pre></div></li>
+<li>Scale-down height only
+    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">scaleDownDestroy</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;y&#39;</span><span class="p">);</span>
+<span class="c1">// gameObject.scaleDownDestroy(duration, &#39;y&#39;, ease);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">scaleDownDestroyPromise</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// ....</span>
+<span class="w">    </span><span class="p">})</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Scale-down without destroy<ul>
+<li>Scale-down width and height
+    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">scaleDown</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>
+<span class="c1">// gameObject.scaleDown(duration, undefined, ease);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">scaleDownPromise</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span><span class="nx">ease</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// ....</span>
+<span class="w">    </span><span class="p">})</span>
+</code></pre></div></li>
+<li>Scale-down width only
+    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">scaleDowny</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;x&#39;</span><span class="p">);</span>
+<span class="c1">// gameObject.scaleDowny(duration, &#39;x&#39;, ease);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">scaleDownPromise</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">ease</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// ....</span>
+<span class="w">    </span><span class="p">})</span>
+</code></pre></div></li>
+<li>Scale-down height only
+    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">scaleDown</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;y&#39;</span><span class="p">);</span>
+<span class="c1">// gameObject.scaleDown(duration, &#39;y&#39;, ease);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">scaleDownPromise</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">ease</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// ....</span>
+<span class="w">    </span><span class="p">})</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Scale up/down, then scale back (yoyo)<ul>
+<li>Scale up/down, then scale back width and height
+    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span>
+<span class="w">    </span><span class="c1">//.setScale(scaleX, scaleY)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">scaleYoyo</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span><span class="w"> </span><span class="nx">peakValue</span><span class="p">);</span>
+
+<span class="c1">// gameObject.scaleYoyo(duration, peakValue, repeat, undefined, ease);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span>
+<span class="w">    </span><span class="c1">//.setScale(scaleX, scaleY)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">scaleYoyoPromise</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span><span class="w"> </span><span class="nx">peakValue</span><span class="p">,</span><span class="w"> </span><span class="nx">repeat</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// ....</span>
+<span class="w">    </span><span class="p">})</span>
+</code></pre></div><ul>
+<li><code>peakValue</code> : Scale to this peak value, then scale back</li>
+<li><code>repeat</code> : Yoyo repeat, default value is <code>0</code>.</li>
+<li><code>ease</code> : <a href="tween.md/#ease-equations">Ease function</a>, default is <code>'Cubic'</code>.</li>
+</ul>
+</li>
+<li>Scale up/down, then scale back width only
+    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span>
+<span class="w">    </span><span class="c1">//.setScaleX(scaleX)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">scaleYoyo</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span><span class="w"> </span><span class="nx">peakValue</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;x&#39;</span><span class="p">);</span>
+
+<span class="c1">// gameObject.popUp(duration, peakValue, repeat, &#39;x&#39;, ease);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span>
+<span class="w">    </span><span class="c1">//.setScaleX(scaleX)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">scaleYoyoPromise</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span><span class="w"> </span><span class="nx">peakValue</span><span class="p">,</span><span class="w"> </span><span class="nx">repeat</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// ....</span>
+<span class="w">    </span><span class="p">})</span>
+</code></pre></div></li>
+<li>Scale up/down, then scale back height only
+    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span>
+<span class="w">    </span><span class="c1">//.setScaleY(scaleY)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">scaleYoyo</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span><span class="w"> </span><span class="nx">peakValue</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;y&#39;</span><span class="p">);</span>
+
+<span class="c1">// gameObject.popUp(duration, peakValue, repeat, &#39;y&#39;, ease);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span>
+<span class="w">    </span><span class="c1">//.setScaleY(scaleY)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">scaleYoyoPromise</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span><span class="w"> </span><span class="nx">peakValue</span><span class="p">,</span><span class="w"> </span><span class="nx">repeat</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// ....</span>
+<span class="w">    </span><span class="p">})</span>
+</code></pre></div></li>
+<li>Scale up/down via config
+    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span>
+<span class="w">    </span><span class="c1">//.setScale(scaleX, scaleY)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">scaleYoyo</span><span class="p">({</span>
+<span class="w">        </span><span class="nx">duration</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">peakValue</span><span class="o">:</span><span class="w"> </span><span class="mf">1.2</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">repeat</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">orientation</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">ease</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="p">})</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span>
+<span class="w">    </span><span class="c1">//.setScale(scaleX, scaleY)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">scaleYoyoPromise</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// ....</span>
+<span class="w">    </span><span class="p">})</span>
+</code></pre></div><ul>
+<li><code>orientation</code> : <code>undefined</code>, <code>x</code>, or <code>y</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Events<ul>
+<li>Pop-up complete
+    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;popup.complete&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">});</span>
+</code></pre></div></li>
+<li>Scale-down, scale-down destroy complete
+    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;scaledown.complete&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">});</span>
+</code></pre></div></li>
+<li>Scale up/down, then scale back (yoyo)
+    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;scaleyoyo.complete&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">});</span>
+</code></pre></div></li>
+</ul>
+</li>
 </ul>
 
 
