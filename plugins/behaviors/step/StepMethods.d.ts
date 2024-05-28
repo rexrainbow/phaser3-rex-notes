@@ -1,18 +1,22 @@
-declare function StartStep(
+declare function StepStart(
     stepLength?: number
 ): Phaser.GameObjects.GameObject;
 
-declare function StartStep(
+declare function StepStart(
     config?: {
         stepLength?: number
     }
 ): Phaser.GameObjects.GameObject;
 
-declare function StopStep(): Phaser.GameObjects.GameObject;
+declare function StepStop(): Phaser.GameObjects.GameObject;
 
 declare const StepMethods: {
-    startStep: typeof StartStep,
-    stopStep: typeof StopStep,
+    startStep: typeof StepStart,
+    stopStep: typeof StepStop,
 }
 
 export default StepMethods;
+export {
+    StepStart,
+    StepStop
+}

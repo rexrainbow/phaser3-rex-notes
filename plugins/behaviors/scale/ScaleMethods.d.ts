@@ -77,3 +77,11 @@ declare const ScaleMethods: {
 }
 
 export default ScaleMethods;
+export {
+    PopUp, PopUpPromise,
+    ScaleDown, ScaleDownPromise,
+    ScaleDownDestroy, ScaleDownDestroyPromise,
+    ScaleYoyo, ScaleYoyoPromise,
+
+    IsRunningPopUp, IsRunningScaleDown, IsRunningScaleYoyo, IsRunningEaseScale,
+}

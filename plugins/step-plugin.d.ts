@@ -1,4 +1,12 @@
 import Step from './step';
+import { StepStart, StepStop } from './behaviors/step/StepMethods';
+
+declare namespace StepPlugin {
+    interface StepMethodsGameObject extends Phaser.GameObjects.GameObject {
+        stepStart: typeof StepStart,
+        stepStop: typeof StepStop,
+    }
+}
 
 export default class StepPlugin extends Phaser.Plugins.BasePlugin {
     add(
@@ -6,4 +14,7 @@ export default class StepPlugin extends Phaser.Plugins.BasePlugin {
         config?: Step.IConfig
     ): Step;
 
+    inject(
+        gameObject: Phaser.GameObjects.GameObject
+    ): StepPlugin.StepMethodsGameObject;
 }

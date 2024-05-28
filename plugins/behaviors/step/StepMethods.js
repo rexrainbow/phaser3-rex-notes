@@ -7,11 +7,11 @@ export default {
         var step = this._step;
         // Route 'step' of step to gameObject       
         step.on('step', function (gameObject, step, stepX, stepY) {
-            gameObject.emit('step', stepX, stepY);
+            gameObject.emit('step.step', stepX, stepY);
         })
     },
 
-    startStep(stepLength) {
+    stepStart(stepLength) {
         if (IsPlainObject(stepLength)) {
             var config = stepLength;
             stepLength = config.stepLength;
@@ -34,7 +34,7 @@ export default {
         return this;
     },
 
-    stopStep() {
+    stepStop() {
         if (!this._step) {
             return this;
         }

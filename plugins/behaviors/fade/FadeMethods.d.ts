@@ -45,3 +45,10 @@ declare const FadeMethods: {
 }
 
 export default FadeMethods;
+export {
+    FadeIn, FadeInPromise,
+    FadeOutDestroy, FadeOutDestroyPromise,
+    FadeOut, FadeOutPromise,
+
+    IsRunningFadeIn, IsRunningFadeOut, IsRunningEaseFade
+}

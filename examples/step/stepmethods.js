@@ -9,7 +9,7 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    init() {}
+    init() { }
 
     preload() { }
 
@@ -22,8 +22,8 @@ class Demo extends Phaser.Scene {
             .on('drag', function (pointer, dragX, dragY) {
                 this.setPosition(dragX, dragY);
             })
-            .startStep(10)
-            .on('step', function (stepX, stepY) {
+            .stepStart(10)
+            .on('step.step', function (stepX, stepY) {
                 this.add.circle(stepX, stepY, 10, 0xff0000)
                     .fadeOutDestroy(2000)
             }, this)

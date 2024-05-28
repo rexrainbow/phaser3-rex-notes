@@ -148,7 +148,6 @@ declare const EaseMoveMethods: {
     moveFromDestroy: typeof MoveFromDestroy,
     moveFromDestroyPromise: typeof MoveFromDestroyPromise,
 
-
     moveTo: typeof MoveTo,
     moveToPromise: typeof MoveToPromise,
     moveToDestroy: typeof MoveToDestroy,
@@ -162,3 +161,9 @@ declare const EaseMoveMethods: {
 }
 
 export default EaseMoveMethods;
+export {
+    MoveFrom, MoveFromPromise, MoveFromDestroy, MoveFromDestroyPromise,
+    MoveTo, MoveToPromise, MoveToDestroy, MoveToDestroyPromise,
+
+    IsRunningMoveFrom, IsRunningMoveTo, IsRunningEaseMove, MoveStop,
+}
