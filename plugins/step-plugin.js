@@ -1,4 +1,5 @@
 import Step from './step.js';
+import StepMethods from './behaviors/step/StepMethods.js';
 
 class StepPlugin extends Phaser.Plugins.BasePlugin {
 
@@ -13,6 +14,11 @@ class StepPlugin extends Phaser.Plugins.BasePlugin {
 
     add(gameObject, config) {
         return new Step(gameObject, config);
+    }
+
+    inject(gameObject) {
+        Object.assign(gameObject, StepMethods);
+        return gameObject;
     }
 }
 
