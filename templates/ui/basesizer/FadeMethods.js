@@ -2,10 +2,7 @@ import { FadeMethods } from '../fade/Fade.js';
 import GetParentSizerMethods from './GetParentSizerMethods.js';
 
 var methods = {};
-Object.assign(
-    methods,
-    FadeMethods
-)
+Object.assign(methods, FadeMethods);
 
 methods.onInitFade = function () {
     FadeMethods.onInitFade.call(this);

@@ -1,14 +1,10 @@
 import { EaseMoveMethods } from '../easemove/EaseMove.js';
 import GetParentSizerMethods from './GetParentSizerMethods.js';
 
-var method = {}
+var methods = {};
+Object.assign(methods, EaseMoveMethods);
 
-Object.assign(
-    method,
-    EaseMoveMethods
-)
-
-method.onInitEaseMove = function () {
+methods.onInitEaseMove = function () {
     EaseMoveMethods.onInitEaseMove.call(this);
 
     var gameObject = this;
@@ -21,4 +17,4 @@ method.onInitEaseMove = function () {
     })
 }
 
-export default method;
+export default methods;
