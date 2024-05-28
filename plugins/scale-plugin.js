@@ -20,9 +20,14 @@ class ScalePlugin extends Phaser.Plugins.BasePlugin {
         return new Scale(gameObject, config);
     }
 
-    inject(gameObject) {
+    injectMethods(gameObject) {
         Object.assign(gameObject, ScaleMethods);
         return gameObject;
+    }
+
+    injectMethodsToRootClass() {
+        this.injectMethods(Phaser.GameObjects.GameObject.prototype);
+        return this;
     }
 }
 

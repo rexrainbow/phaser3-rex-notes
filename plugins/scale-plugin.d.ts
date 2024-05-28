@@ -41,7 +41,9 @@ export default class ScalePlugin extends Phaser.Plugins.BasePlugin {
     popUp: typeof PopUp;
     yoyo: typeof Yoyo;
 
-    inject(
+    injectMethods(
         gameObject: Phaser.GameObjects.GameObject
     ): ScalePlugin.ScaleMethodsGameObject;
+
+    injectMethodsToRootClass(): this;
 }

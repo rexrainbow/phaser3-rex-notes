@@ -20,13 +20,13 @@ class Demo extends Phaser.Scene {
 
 var InjectMethodToGameObject = async function (scene) {
     var dot = scene.add.circle(400, 300, 20, 0xffffff);
-    scene.plugins.get('rexEaseMove').inject(dot);
+    scene.plugins.get('rexEaseMove').injectMethods(dot);
     await dot.moveFromPromise(1500, '-=400', undefined, 'Bounce')
     await dot.moveToDestroyPromise(1500, '+=400')
 }
 
 var InjectMethodToGameObjectClass = async function (scene) {
-    scene.plugins.get('rexEaseMove').inject(Phaser.GameObjects.Rectangle.prototype);
+    scene.plugins.get('rexEaseMove').injectMethods(Phaser.GameObjects.Rectangle.prototype);
 
     var rect = scene.add.rectangle(400, 300, 40, 40, 0x00ff00);
     await rect.moveFromPromise(1500, '-=400', undefined, 'Bounce')

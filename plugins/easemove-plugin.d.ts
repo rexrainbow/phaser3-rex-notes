@@ -36,7 +36,9 @@ export default class EaseMovePlugin extends Phaser.Plugins.BasePlugin {
     moveToDestroy: typeof EaseMoveToDestroy;
     moveFromDestroy: typeof EaseMoveFromDestroy;
 
-    inject(
+    injectMethods(
         gameObject: Phaser.GameObjects.GameObject
     ): EaseMovePlugin.EaseMoveMethodsGameObject;
+
+    injectMethodsToRootClass(): this;
 }

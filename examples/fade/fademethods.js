@@ -13,7 +13,7 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     async create() {
-        this.plugins.get('rexFade').inject(Phaser.GameObjects.GameObject.prototype)
+        this.plugins.get('rexFade').injectMethodsToRootClass()
         var dot = this.add.circle(400, 300, 20, 0xff0000);
 
         await dot.fadeInPromise(2000)

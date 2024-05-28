@@ -17,9 +17,14 @@ class FadePlugin extends Phaser.Plugins.BasePlugin {
         return new Fade(gameObject, config);
     }
 
-    inject(gameObject) {
+    injectMethods(gameObject) {
         Object.assign(gameObject, FadeMethods);
         return gameObject;
+    }
+
+    injectMethodsToRootClass() {
+        this.injectMethods(Phaser.GameObjects.GameObject.prototype);
+        return this;
     }
 }
 

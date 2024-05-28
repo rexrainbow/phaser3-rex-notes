@@ -16,9 +16,14 @@ class StepPlugin extends Phaser.Plugins.BasePlugin {
         return new Step(gameObject, config);
     }
 
-    inject(gameObject) {
+    injectMethods(gameObject) {
         Object.assign(gameObject, StepMethods);
         return gameObject;
+    }
+
+    injectMethodsToRootClass() {
+        this.injectMethods(Phaser.GameObjects.GameObject.prototype);
+        return this;
     }
 }
 

@@ -31,7 +31,9 @@ export default class FadePlugin extends Phaser.Plugins.BasePlugin {
 
     fadeOutDestroy: typeof FadeOutDestroy;
 
-    inject(
+    injectMethods(
         gameObject: Phaser.GameObjects.GameObject
     ): FadePlugin.FadeMethodsGameObject;
+
+    injectMethodsToRootClass(): this;
 }

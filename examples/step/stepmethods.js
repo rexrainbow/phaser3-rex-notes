@@ -14,8 +14,8 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        this.plugins.get('rexStep').inject(Phaser.GameObjects.GameObject.prototype);
-        this.plugins.get('rexFade').inject(Phaser.GameObjects.GameObject.prototype);
+        this.plugins.get('rexStep').injectMethodsToRootClass();
+        this.plugins.get('rexFade').injectMethodsToRootClass();
 
         this.add.circle(100, 100, 20, 0xffffff)
             .setInteractive({ draggable: true })

@@ -20,9 +20,14 @@ class EaseMovePlugin extends Phaser.Plugins.BasePlugin {
         return new EaseMove(gameObject, config);
     }
 
-    inject(gameObject) {
+    injectMethods(gameObject) {
         Object.assign(gameObject, EaseMoveMethods);
         return gameObject;
+    }
+
+    injectMethodsToRootClass() {
+        this.injectMethods(Phaser.GameObjects.GameObject.prototype);
+        return this;
     }
 }
 

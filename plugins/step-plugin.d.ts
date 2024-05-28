@@ -14,7 +14,9 @@ export default class StepPlugin extends Phaser.Plugins.BasePlugin {
         config?: Step.IConfig
     ): Step;
 
-    inject(
+    injectMethods(
         gameObject: Phaser.GameObjects.GameObject
     ): StepPlugin.StepMethodsGameObject;
+
+    injectMethodsToRootClass(): this;
 }
