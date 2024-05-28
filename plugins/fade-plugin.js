@@ -1,5 +1,6 @@
 import Fade from './fade.js';
 import FadeOutDestroy from './fade-out-destroy.js';
+import FadeMethods from './behaviors/fade/FadeMethods.js';
 
 class FadePlugin extends Phaser.Plugins.BasePlugin {
 
@@ -14,6 +15,11 @@ class FadePlugin extends Phaser.Plugins.BasePlugin {
 
     add(gameObject, config) {
         return new Fade(gameObject, config);
+    }
+
+    inject(gameObject) {
+        Object.assign(gameObject, FadeMethods);
+        return gameObject;
     }
 }
 
