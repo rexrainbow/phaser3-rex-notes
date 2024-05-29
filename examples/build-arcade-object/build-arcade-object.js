@@ -16,7 +16,7 @@ class Demo extends Phaser.Scene {
             .build(this.add.circle(400, 300, 30).setStrokeStyle(1, 0xffffff))
             .setVelocity(100, 100);
 
-        this.time.delayedCall(500, function () {
+        this.time.delayedCall(1000, function () {
             gameObject.disableBody(true, true);
         });
     }

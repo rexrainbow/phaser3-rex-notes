@@ -1,5 +1,22 @@
 const Components = Phaser.Physics.Arcade.Components;
 
+var ArcadeMethods = {};
+Object.assign(
+    ArcadeMethods,
+    Components.Acceleration,
+    Components.Angular,
+    Components.Bounce,
+    Components.Debug,
+    Components.Drag,
+    Components.Enable,
+    Components.Friction,
+    Components.Gravity,
+    Components.Immovable,
+    Components.Mass,
+    Components.Size,
+    Components.Velocity
+)
+
 var BuildArcadeObject = function (gameObject, isStatic) {
     if (!Array.isArray(gameObject)) {
         Build(gameObject, isStatic);
@@ -21,21 +38,7 @@ var Build = function (gameObject, isStatic) {
         gameObject.scene.physics.add.existing(gameObject, isStatic);
     }
 
-    Object.assign(
-        gameObject,
-        Components.Acceleration,
-        Components.Angular,
-        Components.Bounce,
-        Components.Debug,
-        Components.Drag,
-        Components.Enable,
-        Components.Friction,
-        Components.Gravity,
-        Components.Immovable,
-        Components.Mass,
-        Components.Size,
-        Components.Velocity
-    );
+    Object.assign(gameObject, ArcadeMethods);
 
     return gameObject;
 };
