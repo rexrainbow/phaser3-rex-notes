@@ -1,5 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import VectorToCursorKeys from '../../plugins/utils/input/VectorToCursorKeys';
+import VirtualJoyStickPlugin from '../../plugins/virtualjoystick-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -12,7 +12,7 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var vector2CursorKeys = new VectorToCursorKeys(this, {
+        var vector2CursorKeys = this.plugins.get('rexVirtualJoyStick').addVectorToCursorKeys({
             dir: '8dir',
             forceMin: 16
         });
@@ -62,7 +62,14 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexVirtualJoyStick',
+            plugin: VirtualJoyStickPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

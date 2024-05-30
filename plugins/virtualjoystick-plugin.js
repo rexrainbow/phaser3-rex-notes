@@ -1,4 +1,5 @@
 import VirtualJoyStick from './virtualjoystick.js';
+import VectorToCursorKeys from './vectortocursorkeys.js';
 
 class VirtualJoyStickPlugin extends Phaser.Plugins.BasePlugin {
 
@@ -13,6 +14,10 @@ class VirtualJoyStickPlugin extends Phaser.Plugins.BasePlugin {
 
     add(scene, config) {
         return new VirtualJoyStick(scene, config);
+    }
+
+    addVectorToCursorKeys(config) {
+        return new VectorToCursorKeys(undefined, config);
     }
 
 }

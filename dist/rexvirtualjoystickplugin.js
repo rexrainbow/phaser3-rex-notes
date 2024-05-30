@@ -1126,6 +1126,11 @@
       value: function add(scene, config) {
         return new VirtualJoyStick(scene, config);
       }
+    }, {
+      key: "addVectorToCursorKeys",
+      value: function addVectorToCursorKeys(config) {
+        return new VectorToCursorKeys(undefined, config);
+      }
     }]);
     return VirtualJoyStickPlugin;
   }(Phaser.Plugins.BasePlugin);
