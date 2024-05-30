@@ -12,8 +12,9 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var vector2CursorKeys = new VectorToCursorKeys({
-            forceMin: 0
+        var vector2CursorKeys = new VectorToCursorKeys(this, {
+            dir: '8dir',
+            forceMin: 16
         });
 
         var graphics = this.add.graphics();
