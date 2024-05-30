@@ -9,7 +9,6 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.video('test', './assets/video/test.mp4');
     }
 
     create() {
