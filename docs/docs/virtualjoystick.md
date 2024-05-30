@@ -11,6 +11,7 @@ Simulate cursor keys according to touch events.
 - [Two joySticks](https://codepen.io/rexrainbow/pen/eYdxxOJ)
 - [Joystick and button](https://codepen.io/rexrainbow/pen/GRLwMGa)
 - [Toggle visible](https://codepen.io/rexrainbow/pen/vYPQYZQ)
+- [Drag vector to cursor keys](https://codepen.io/rexrainbow/pen/dyENKqQ)
 
 ## Usage
 
@@ -239,3 +240,67 @@ joystick.destroy();
     ```javascript
     var thumb = joystick.thumb;
     ```
+
+### Vector to cursor keys
+
+A controller to represent cursor keys by (drag) vector
+
+#### Create controller
+
+```javascript
+var controller = scene.plugins.get('rexVirtualJoyStick').addVectorToCursorKeys({
+    // dir: '8dir',
+    // forceMin: 16,
+    // enable: true
+})
+```
+
+or
+
+
+```javascript
+// import VirtualJoystick from 'phaser3-rex-plugins/plugins/vectortocursorkeys.js';
+var controller = new VirtualJoystick(undefined, config);
+```
+
+- `dir` : 
+    - `'up&down'`, or `0` : Simulate up or down cursor keys only.
+    - `'left&right'`, or `1` : Simulate left or right cursor keys only.
+    - `'4dir'`, or `2` : Simulate up, down, left or right cursor keys.
+    - `'8dir'`, or `3` : Simulate up, up-left, up-right, down, down-left, down-right, left, or right cursor keys.
+- `forceMin` : Cursor keys will be pressed when *force* is larger then this value.
+    - `force` : Distance between position of base game object to touch pointer
+- `enable` : Set `false` to disable cursor keys simulation.
+
+#### Set vector
+
+- Set vector
+    ```javascript
+    controller.setVector(x0, y0, x1, y1);
+    ```
+- Clear vector
+    ```javascript
+    controller.clearVector();
+    ```
+
+#### State of cursor keys
+
+```javascript
+var cursorKeys = controller.createCursorKeys();
+
+var leftKeyDown = cursorKeys.left.isDown;
+var rightKeyDown = cursorKeys.right.isDown;
+var upKeyDown = cursorKeys.up.isDown;
+var downKeyDown = cursorKeys.down.isDown;
+```
+
+#### Force & Angle
+
+```javascript
+var force = controller.force;
+var forceX = controller.forceX;
+var forceY = controller.forceY;
+
+var angle = controller.angle;  // degree between -180 to 180
+var rotation = controller.rotation; // radians
+```

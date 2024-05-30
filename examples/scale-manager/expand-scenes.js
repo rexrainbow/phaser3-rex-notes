@@ -1,4 +1,4 @@
-import phaser from '../../../phaser/src/phaser.js';
+import phaser from '../../../phaser3-rex/src/phaser';
 
 class GreenScene extends Phaser.Scene {
     constructor() {

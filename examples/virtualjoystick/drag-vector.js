@@ -12,7 +12,7 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var vector2CursorKeys = this.plugins.get('rexVirtualJoyStick').addVectorToCursorKeys({
+        var controller = this.plugins.get('rexVirtualJoyStick').addVectorToCursorKeys({
             dir: '8dir',
             forceMin: 16
         });
@@ -22,22 +22,22 @@ class Demo extends Phaser.Scene {
         this.input
             .on('pointerup', function () {
                 graphics.clear();
-                vector2CursorKeys.clearVector();
+                controller.clearVector();
             })
             .on('pointermove', function (pointer) {
                 graphics.clear();
                 if (!pointer.isDown) {
-                    vector2CursorKeys.clearVector();
+                    controller.clearVector();
                     return;
                 }
 
-                vector2CursorKeys.setVector(pointer.downX, pointer.downY, pointer.x, pointer.y);
+                controller.setVector(pointer.downX, pointer.downY, pointer.x, pointer.y);
 
                 graphics.lineStyle(3, 0xff0000).lineBetween(pointer.downX, pointer.downY, pointer.x, pointer.y);
             });
 
 
-        this.cursorKeys = vector2CursorKeys.createCursorKeys();
+        this.cursorKeys = controller.createCursorKeys();
         this.print = this.add.text(0, 0, '')
     }
 
