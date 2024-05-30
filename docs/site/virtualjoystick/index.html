@@ -4542,6 +4542,47 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#vector-to-cursor-keys" class="md-nav__link">
+    Vector to cursor keys
+  </a>
+  
+    <nav class="md-nav" aria-label="Vector to cursor keys">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-controller" class="md-nav__link">
+    Create controller
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-vector" class="md-nav__link">
+    Set vector
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#state-of-cursor-keys_1" class="md-nav__link">
+    State of cursor keys
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#force-angle_1" class="md-nav__link">
+    Force &amp; Angle
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9805,6 +9846,47 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#vector-to-cursor-keys" class="md-nav__link">
+    Vector to cursor keys
+  </a>
+  
+    <nav class="md-nav" aria-label="Vector to cursor keys">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-controller" class="md-nav__link">
+    Create controller
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-vector" class="md-nav__link">
+    Set vector
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#state-of-cursor-keys_1" class="md-nav__link">
+    State of cursor keys
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#force-angle_1" class="md-nav__link">
+    Force &amp; Angle
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9842,6 +9924,7 @@
 <li><a href="https://codepen.io/rexrainbow/pen/eYdxxOJ">Two joySticks</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/GRLwMGa">Joystick and button</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/vYPQYZQ">Toggle visible</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/dyENKqQ">Drag vector to cursor keys</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/virtualjoystick">Sample code</a></p>
@@ -10035,6 +10118,58 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">thumb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">joystick</span><span class="p">.</span><span class="nx">thumb</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
+<h3 id="vector-to-cursor-keys">Vector to cursor keys<a class="headerlink" href="#vector-to-cursor-keys" title="Permanent link">&para;</a></h3>
+<p>A controller to represent cursor keys by (drag) vector</p>
+<h4 id="create-controller">Create controller<a class="headerlink" href="#create-controller" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexVirtualJoyStick&#39;</span><span class="p">).</span><span class="nx">addVectorToCursorKeys</span><span class="p">({</span>
+<span class="w">    </span><span class="c1">// dir: &#39;8dir&#39;,</span>
+<span class="w">    </span><span class="c1">// forceMin: 16,</span>
+<span class="w">    </span><span class="c1">// enable: true</span>
+<span class="p">})</span>
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// import VirtualJoystick from &#39;phaser3-rex-plugins/plugins/vectortocursorkeys.js&#39;;</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">VirtualJoystick</span><span class="p">(</span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
+</code></pre></div>
+<ul>
+<li><code>dir</code> : <ul>
+<li><code>'up&amp;down'</code>, or <code>0</code> : Simulate up or down cursor keys only.</li>
+<li><code>'left&amp;right'</code>, or <code>1</code> : Simulate left or right cursor keys only.</li>
+<li><code>'4dir'</code>, or <code>2</code> : Simulate up, down, left or right cursor keys.</li>
+<li><code>'8dir'</code>, or <code>3</code> : Simulate up, up-left, up-right, down, down-left, down-right, left, or right cursor keys.</li>
+</ul>
+</li>
+<li><code>forceMin</code> : Cursor keys will be pressed when <em>force</em> is larger then this value.<ul>
+<li><code>force</code> : Distance between position of base game object to touch pointer</li>
+</ul>
+</li>
+<li><code>enable</code> : Set <code>false</code> to disable cursor keys simulation.</li>
+</ul>
+<h4 id="set-vector">Set vector<a class="headerlink" href="#set-vector" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Set vector
+    <div class="highlight"><pre><span></span><code><span class="nx">controller</span><span class="p">.</span><span class="nx">setVector</span><span class="p">(</span><span class="nx">x0</span><span class="p">,</span><span class="w"> </span><span class="nx">y0</span><span class="p">,</span><span class="w"> </span><span class="nx">x1</span><span class="p">,</span><span class="w"> </span><span class="nx">y1</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Clear vector
+    <div class="highlight"><pre><span></span><code><span class="nx">controller</span><span class="p">.</span><span class="nx">clearVector</span><span class="p">();</span>
+</code></pre></div></li>
+</ul>
+<h4 id="state-of-cursor-keys_1">State of cursor keys<a class="headerlink" href="#state-of-cursor-keys_1" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">cursorKeys</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">controller</span><span class="p">.</span><span class="nx">createCursorKeys</span><span class="p">();</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nx">leftKeyDown</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">left</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">rightKeyDown</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">right</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">upKeyDown</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">up</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">downKeyDown</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">down</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
+</code></pre></div>
+<h4 id="force-angle_1">Force &amp; Angle<a class="headerlink" href="#force-angle_1" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">force</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">controller</span><span class="p">.</span><span class="nx">force</span><span class="p">;</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">forceX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">controller</span><span class="p">.</span><span class="nx">forceX</span><span class="p">;</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">forceY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">controller</span><span class="p">.</span><span class="nx">forceY</span><span class="p">;</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nx">angle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">controller</span><span class="p">.</span><span class="nx">angle</span><span class="p">;</span><span class="w">  </span><span class="c1">// degree between -180 to 180</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">rotation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">controller</span><span class="p">.</span><span class="nx">rotation</span><span class="p">;</span><span class="w"> </span><span class="c1">// radians</span>
+</code></pre></div>
 
 
   
