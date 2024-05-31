@@ -4500,6 +4500,27 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#enable" class="md-nav__link">
+    Enable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bounds" class="md-nav__link">
+    Bounds
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sensitive-distance" class="md-nav__link">
+    Sensitive distance
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9693,6 +9714,27 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#enable" class="md-nav__link">
+    Enable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bounds" class="md-nav__link">
+    Bounds
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sensitive-distance" class="md-nav__link">
+    Sensitive distance
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9726,6 +9768,7 @@
 </ul>
 <h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
 <ul>
+<li><a href="https://codepen.io/rexrainbow/pen/bGyqeNp">Custom bounds</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/mQQrMv">Camera scrolling</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
@@ -9780,20 +9823,49 @@
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">cursorAtBound</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexCursorAtBounds&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// enable: true,</span>
 <span class="w">    </span><span class="c1">// bounds: undefined,</span>
 <span class="w">    </span><span class="c1">// sensitiveDistance: 20,</span>
+<span class="w">    </span><span class="c1">// pointerOutGameRelease: true,</span>
+<span class="w">    </span><span class="c1">// pointerOutBoundsRelease: false,</span>
 <span class="p">});</span>
 </code></pre></div>
 <ul>
-<li><code>bounds</code> : A <a href="../geom-rectangle/">rectangle object</a>ㄝ or <code>undefined</code> (to use game window as rectangle object), for detecting the position of cursor.</li>
+<li><code>bounds</code> : A <a href="../geom-rectangle/">rectangle object</a>, or <code>undefined</code> (to use game window as rectangle object), for detecting the position of cursor.</li>
 <li><code>sensitiveDistance</code> : A sensitive distance in pixels.</li>
+<li><code>pointerOutGameRelease</code> : <ul>
+<li><code>true</code> : All cursor keys are released when pointer is out of game window. Default behavior.</li>
+<li><code>false</code> : Don't change status of cursor keys when pointer is out of game window.</li>
+</ul>
+</li>
+<li><code>pointerOutBoundsRelease</code><ul>
+<li><code>true</code> : All cursor keys are released when pointer is out of bounds.</li>
+<li><code>false</code> : Continue cursor key detection when pointer is out of bounds. Default behavior.</li>
+</ul>
+</li>
 </ul>
 <p>Map position of cursor to state of cursor key</p>
 <ul>
-<li>Position x is between <em>left bound</em> and <em>left bound + sensitive distance</em> : <em>left</em> cursor key is pressed.</li>
-<li>Position x is between <em>right bound</em> and <em>right bound - sensitive distance</em> : <em>Right</em> cursor key is pressed.</li>
-<li>Position y is between <em>top bound</em> and <em>top bound + sensitive distance</em> : <em>Up</em> cursor key is pressed.</li>
-<li>Position y is between <em>bottom bound</em> and <em>bottom bound - sensitive distance</em> : <em>Down</em> cursor key is pressed.</li>
+<li><em>left</em> cursor key is pressed :<ul>
+<li>Position x is between <em>left bound</em> and <em>left bound + sensitive distance</em></li>
+<li>Position x at left side of <em>left bound</em>, if <code>pointerOutBoundsRelease</code> is <code>false</code></li>
+</ul>
+</li>
+<li><em>Right</em> cursor key is pressed :<ul>
+<li>Position x is between <em>right bound</em> and <em>right bound - sensitive distance</em> </li>
+<li>Position x at right side of <em>right bound</em>, if <code>pointerOutBoundsRelease</code> is <code>false</code></li>
+</ul>
+</li>
+<li><em>Up</em> cursor key is pressed :<ul>
+<li>Position y is between <em>top bound</em> and <em>top bound + sensitive distance</em></li>
+<li>Position y at up side of <em>top bound</em>, if <code>pointerOutBoundsRelease</code> is <code>false</code></li>
+</ul>
+</li>
+<li><em>Down</em> cursor key is pressed :<ul>
+<li>Position y is between <em>bottom bound</em> and <em>bottom bound - sensitive distance</em></li>
+<li>Position y at down side of <em>bottom bound</em>, if <code>pointerOutBoundsRelease</code> is <code>false</code></li>
+</ul>
+</li>
 </ul>
 <h3 id="state-of-cursor-keys">State of cursor keys<a class="headerlink" href="#state-of-cursor-keys" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">cursorKeys</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cursorAtBound</span><span class="p">.</span><span class="nx">createCursorKeys</span><span class="p">();</span>
@@ -9813,6 +9885,49 @@
 <h3 id="destroy">Destroy<a class="headerlink" href="#destroy" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">cursorAtBound</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
 </code></pre></div>
+<h3 id="enable">Enable<a class="headerlink" href="#enable" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">enable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">joystick</span><span class="p">.</span><span class="nx">enable</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="highlight"><pre><span></span><code><span class="nx">joystick</span><span class="p">.</span><span class="nx">setEnable</span><span class="p">(</span><span class="nx">enable</span><span class="p">);</span><span class="w">  </span><span class="c1">// enable: true, or false</span>
+<span class="c1">//joystick.enable = enable;</span>
+</code></pre></div></li>
+<li>Toggle
+    <div class="highlight"><pre><span></span><code><span class="nx">joystick</span><span class="p">.</span><span class="nx">toggleEnable</span><span class="p">();</span>
+</code></pre></div></li>
+</ul>
+<h3 id="bounds">Bounds<a class="headerlink" href="#bounds" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">bounds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cursorAtBound</span><span class="p">.</span><span class="nx">bounds</span><span class="p">;</span>
+</code></pre></div><ul>
+<li><code>bounds</code> : A <a href="../geom-rectangle/">rectangle object</a></li>
+</ul>
+</li>
+<li>Set
+    <div class="highlight"><pre><span></span><code><span class="nx">cursorAtBound</span><span class="p">.</span><span class="nx">setBounds</span><span class="p">(</span><span class="nx">bounds</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">cursorAtBound</span><span class="p">.</span><span class="nx">bounds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">bounds</span><span class="p">;;</span>
+</code></pre></div><ul>
+<li><code>bounds</code> : A <a href="../geom-rectangle/">rectangle object</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="sensitive-distance">Sensitive distance<a class="headerlink" href="#sensitive-distance" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cursorAtBound</span><span class="p">.</span><span class="nx">sensitiveDistance</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="highlight"><pre><span></span><code><span class="nx">cursorAtBound</span><span class="p">.</span><span class="nx">setSensitiveDistance</span><span class="p">(</span><span class="nx">distance</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">cursorAtBound</span><span class="p">.</span><span class="nx">sensitiveDistance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">distance</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
 
 
   

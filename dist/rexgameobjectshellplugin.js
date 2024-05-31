@@ -3263,12 +3263,16 @@
       _classCallCheck(this, CursorAtBounds);
       _this = _callSuper(this, CursorAtBounds, [scene]);
       _this.scene = scene;
-      _this.sensitiveDistance = GetValue$28(config, 'sensitiveDistance', 20);
+      _this._enable = undefined;
+      _this.setEnable(GetValue$28(config, 'enable', true));
+      _this.setSensitiveDistance(GetValue$28(config, 'sensitiveDistance', 20));
       var bounds = GetValue$28(config, 'bounds', undefined);
       if (bounds === undefined) {
         bounds = GetViewport(scene);
       }
-      _this.bounds = bounds;
+      _this.setBounds(bounds);
+      _this.pointerOutGameReleaseEnable = GetValue$28(config, 'pointerOutGameRelease', true);
+      _this.pointerOutBoundsReleaseEnable = GetValue$28(config, 'pointerOutBoundsRelease', false);
       _this.boot();
       return _this;
     }
@@ -3276,7 +3280,9 @@
       key: "boot",
       value: function boot() {
         this.scene.input.on('pointermove', this.onPointerMove, this);
-        this.scene.input.on('gameout', this.clearAllKeysState, this);
+        if (this.pointerOutGameReleaseEnable) {
+          this.scene.input.on('gameout', this.clearAllKeysState, this);
+        }
         this.scene.sys.events.once('shutdown', this.destroy, this);
       }
     }, {
@@ -3286,7 +3292,9 @@
           return;
         }
         this.scene.input.off('pointermove', this.onPointerMove, this);
-        this.scene.input.off('gameout', this.clearAllKeysState, this);
+        if (this.pointerOutGameReleaseEnable) {
+          this.scene.input.off('gameout', this.clearAllKeysState, this);
+        }
         this.scene.sys.events.off('shutdown', this.destroy, this);
         this.scene = undefined;
         _get(_getPrototypeOf(CursorAtBounds.prototype), "shutdown", this).call(this);
@@ -3295,6 +3303,53 @@
       key: "destroy",
       value: function destroy() {
         this.shutdown();
+      }
+    }, {
+      key: "enable",
+      get: function get() {
+        return this._enable;
+      },
+      set: function set(e) {
+        if (this._enable === e) {
+          return;
+        }
+        if (!e) {
+          this.clearAllKeysState();
+        }
+        this._enable = e;
+        return this;
+      }
+    }, {
+      key: "setEnable",
+      value: function setEnable(e) {
+        if (e === undefined) {
+          e = true;
+        }
+        this.enable = e;
+        return this;
+      }
+    }, {
+      key: "toggleEnable",
+      value: function toggleEnable() {
+        this.setEnable(!this.enable);
+        return this;
+      }
+    }, {
+      key: "setBounds",
+      value: function setBounds(bounds) {
+        this.bounds = bounds;
+        return this;
+      }
+    }, {
+      key: "getBounds",
+      value: function getBounds() {
+        return this.bounds;
+      }
+    }, {
+      key: "setSensitiveDistance",
+      value: function setSensitiveDistance(distance) {
+        this.sensitiveDistance = distance;
+        return this;
       }
     }, {
       key: "onPointerMove",
@@ -3306,15 +3361,20 @@
           top = this.bounds.top,
           bottom = this.bounds.bottom,
           sensitiveDistance = this.sensitiveDistance;
-        var atLeftBound = cursorX >= left && cursorX <= left + sensitiveDistance,
-          atRightBound = cursorX <= right && cursorX >= right - sensitiveDistance,
-          atTopBound = cursorY >= top && cursorY <= top + sensitiveDistance,
-          atBottomBound = cursorY <= bottom && cursorY >= bottom - sensitiveDistance;
-        this.clearAllKeysState();
-        this.setKeyState('left', atLeftBound);
-        this.setKeyState('right', atRightBound);
-        this.setKeyState('up', atTopBound);
-        this.setKeyState('down', atBottomBound);
+        var pressLeftKey = cursorX >= left && cursorX <= left + sensitiveDistance,
+          pressRightKey = cursorX <= right && cursorX >= right - sensitiveDistance,
+          pressUpKey = cursorY >= top && cursorY <= top + sensitiveDistance,
+          pressDownKey = cursorY <= bottom && cursorY >= bottom - sensitiveDistance;
+        if (!this.pointerOutBoundsReleaseEnable) {
+          pressLeftKey |= cursorX < left;
+          pressRightKey |= cursorX > right;
+          pressUpKey |= cursorY < top;
+          pressDownKey |= cursorY > bottom;
+        }
+        this.setKeyState('left', pressLeftKey);
+        this.setKeyState('right', pressRightKey);
+        this.setKeyState('up', pressUpKey);
+        this.setKeyState('down', pressDownKey);
       }
     }, {
       key: "up",
