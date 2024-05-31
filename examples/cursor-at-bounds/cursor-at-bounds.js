@@ -10,13 +10,19 @@ class Demo extends Phaser.Scene {
         this.text;
     }
 
-    preload() {}
+    preload() { }
 
     create() {
         this.cursorAtBounds = this.plugins.get('rexCursorAtBounds').add(this, {
             sensitiveDistance: 20,
-            // bounds: new Phaser.Geom.Rectangle(x, y, width, height)
+            pointerOutGameRelease: false,
+            //bounds: new Phaser.Geom.Rectangle(100, 100, 600, 400)
         });
+
+        this.add.graphics()
+            .lineStyle(3, 0x00ff00)
+            .strokeRectShape(this.cursorAtBounds.bounds)
+
         this.print = this.add.text(0, 0, '');
     }
 

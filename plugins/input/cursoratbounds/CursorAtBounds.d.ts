@@ -2,8 +2,11 @@ export default CursorAtBounds;
 
 declare namespace CursorAtBounds {
     interface IConfig {
+        enable?: boolean,
         bounds?: Phaser.Geom.Rectangle,
         sensitiveDistance?: number,
+        pointerOutGameRelease?: boolean,
+        pointerOutBoundsRelease?: boolean,
     }
 }
 
@@ -12,6 +15,13 @@ declare class CursorAtBounds {
         scene: Phaser.Scene,
         config?: CursorAtBounds.IConfig
     )
+
+    setBounds(bounds: Phaser.Geom.Rectangle): this;
+    getBounds(): Phaser.Geom.Rectangle;
+    bounds: Phaser.Geom.Rectangle;
+
+    setSensitiveDistance(distance: number): this;
+    sensitiveDistance: number;
 
     createCursorKeys(): {
         up: Phaser.Input.Keyboard.Key,

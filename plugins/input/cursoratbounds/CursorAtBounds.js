@@ -8,20 +8,30 @@ class CursorAtBounds extends CursorKeys {
         super(scene);
 
         this.scene = scene;
-        this.sensitiveDistance = GetValue(config, 'sensitiveDistance', 20);
+
+        this._enable = undefined;
+        this.setEnable(GetValue(config, 'enable', true));
+
+        this.setSensitiveDistance(GetValue(config, 'sensitiveDistance', 20));
 
         var bounds = GetValue(config, 'bounds', undefined);
         if (bounds === undefined) {
             bounds = GetViewport(scene);
         }
-        this.bounds = bounds;
+        this.setBounds(bounds);
+
+        this.pointerOutGameReleaseEnable = GetValue(config, 'pointerOutGameRelease', true);
+        this.pointerOutBoundsReleaseEnable = GetValue(config, 'pointerOutBoundsRelease', false);
 
         this.boot();
     }
 
     boot() {
         this.scene.input.on('pointermove', this.onPointerMove, this);
-        this.scene.input.on('gameout', this.clearAllKeysState, this);
+
+        if (this.pointerOutGameReleaseEnable) {
+            this.scene.input.on('gameout', this.clearAllKeysState, this);
+        }
         this.scene.sys.events.once('shutdown', this.destroy, this);
     }
 
@@ -31,7 +41,11 @@ class CursorAtBounds extends CursorKeys {
         }
 
         this.scene.input.off('pointermove', this.onPointerMove, this);
-        this.scene.input.off('gameout', this.clearAllKeysState, this);
+
+        if (this.pointerOutGameReleaseEnable) {
+            this.scene.input.off('gameout', this.clearAllKeysState, this);
+        }
+
         this.scene.sys.events.off('shutdown', this.destroy, this);
         this.scene = undefined;
 
@@ -42,6 +56,49 @@ class CursorAtBounds extends CursorKeys {
         this.shutdown();
     }
 
+    get enable() {
+        return this._enable;
+    }
+
+    set enable(e) {
+        if (this._enable === e) {
+            return;
+        }
+        if (!e) {
+            this.clearAllKeysState();
+        }
+        this._enable = e;
+        return this;
+    }
+
+    setEnable(e) {
+        if (e === undefined) {
+            e = true;
+        }
+
+        this.enable = e;
+        return this;
+    }
+
+    toggleEnable() {
+        this.setEnable(!this.enable);
+        return this;
+    }
+
+    setBounds(bounds) {
+        this.bounds = bounds;
+        return this;
+    }
+
+    getBounds() {
+        return this.bounds;
+    }
+
+    setSensitiveDistance(distance) {
+        this.sensitiveDistance = distance;
+        return this;
+    }
+
     onPointerMove(pointer) {
         var cursorX = pointer.x,
             cursorY = pointer.y;
@@ -50,16 +107,22 @@ class CursorAtBounds extends CursorKeys {
             top = this.bounds.top,
             bottom = this.bounds.bottom,
             sensitiveDistance = this.sensitiveDistance;
-        var atLeftBound = (cursorX >= left) && (cursorX <= (left + sensitiveDistance)),
-            atRightBound = (cursorX <= right) && (cursorX >= (right - sensitiveDistance)),
-            atTopBound = (cursorY >= top) && (cursorY <= (top + sensitiveDistance)),
-            atBottomBound = (cursorY <= bottom) && (cursorY >= (bottom - sensitiveDistance))
+        var pressLeftKey = (cursorX >= left) && (cursorX <= (left + sensitiveDistance)),
+            pressRightKey = (cursorX <= right) && (cursorX >= (right - sensitiveDistance)),
+            pressUpKey = (cursorY >= top) && (cursorY <= (top + sensitiveDistance)),
+            pressDownKey = (cursorY <= bottom) && (cursorY >= (bottom - sensitiveDistance))
 
-        this.clearAllKeysState();
-        this.setKeyState('left', atLeftBound);
-        this.setKeyState('right', atRightBound);
-        this.setKeyState('up', atTopBound);
-        this.setKeyState('down', atBottomBound);
+        if (!this.pointerOutBoundsReleaseEnable) {
+            pressLeftKey |= (cursorX < left);
+            pressRightKey |= (cursorX > right);
+            pressUpKey |= (cursorY < top);
+            pressDownKey |= (cursorY > bottom);
+        }
+
+        this.setKeyState('left', pressLeftKey);
+        this.setKeyState('right', pressRightKey);
+        this.setKeyState('up', pressUpKey);
+        this.setKeyState('down', pressDownKey);
     }
 
     get up() {

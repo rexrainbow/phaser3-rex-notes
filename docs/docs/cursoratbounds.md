@@ -7,6 +7,7 @@ Map cursor-at-(left/right/top/botttom-)bound to (left/right/up/down) cursor key 
 
 ## Live demos
 
+- [Custom bounds](https://codepen.io/rexrainbow/pen/bGyqeNp)
 - [Camera scrolling](https://codepen.io/rexrainbow/pen/mQQrMv)
 
 ## Usage
@@ -74,20 +75,37 @@ Map cursor-at-(left/right/top/botttom-)bound to (left/right/up/down) cursor key 
 
 ```javascript
 var cursorAtBound = scene.plugins.get('rexCursorAtBounds').add(scene, {
+    // enable: true,
     // bounds: undefined,
     // sensitiveDistance: 20,
+    // pointerOutGameRelease: true,
+    // pointerOutBoundsRelease: false,
 });
 ```
 
-- `bounds` : A [rectangle object](geom-rectangle.md)ㄝ or `undefined` (to use game window as rectangle object), for detecting the position of cursor.
+- `bounds` : A [rectangle object](geom-rectangle.md), or `undefined` (to use game window as rectangle object), for detecting the position of cursor.
 - `sensitiveDistance` : A sensitive distance in pixels.
+- `pointerOutGameRelease` : 
+    - `true` : All cursor keys are released when pointer is out of game window. Default behavior.
+    - `false` : Don't change status of cursor keys when pointer is out of game window.
+- `pointerOutBoundsRelease`
+    - `true` : All cursor keys are released when pointer is out of bounds.
+    - `false` : Continue cursor key detection when pointer is out of bounds. Default behavior.
 
 Map position of cursor to state of cursor key
 
-- Position x is between *left bound* and *left bound + sensitive distance* : *left* cursor key is pressed.
-- Position x is between *right bound* and *right bound - sensitive distance* : *Right* cursor key is pressed.
-- Position y is between *top bound* and *top bound + sensitive distance* : *Up* cursor key is pressed.
-- Position y is between *bottom bound* and *bottom bound - sensitive distance* : *Down* cursor key is pressed.
+- *left* cursor key is pressed :
+    - Position x is between *left bound* and *left bound + sensitive distance*
+    - Position x at left side of *left bound*, if `pointerOutBoundsRelease` is `false`
+- *Right* cursor key is pressed :
+    - Position x is between *right bound* and *right bound - sensitive distance* 
+    - Position x at right side of *right bound*, if `pointerOutBoundsRelease` is `false`
+- *Up* cursor key is pressed :
+    - Position y is between *top bound* and *top bound + sensitive distance*
+    - Position y at up side of *top bound*, if `pointerOutBoundsRelease` is `false`
+- *Down* cursor key is pressed :
+    - Position y is between *bottom bound* and *bottom bound - sensitive distance*
+    - Position y at down side of *bottom bound*, if `pointerOutBoundsRelease` is `false`
 
 ### State of cursor keys
 
@@ -115,3 +133,51 @@ var noKeyDown = cursorAtBound.noKey;
 ```javascript
 cursorAtBound.destroy();
 ```
+
+### Enable
+
+- Get
+    ```javascript
+    var enable = joystick.enable;
+    ```
+- Set
+    ```javascript
+    joystick.setEnable(enable);  // enable: true, or false
+    //joystick.enable = enable;
+    ```
+- Toggle
+    ```javascript
+    joystick.toggleEnable();
+    ```
+
+### Bounds
+
+- Get
+    ```javascript
+    var bounds = cursorAtBound.bounds;
+    ```
+    - `bounds` : A [rectangle object](geom-rectangle.md)
+- Set
+    ```javascript
+    cursorAtBound.setBounds(bounds);
+    ```
+    or
+    ```javascript
+    cursorAtBound.bounds = bounds;;
+    ```
+    - `bounds` : A [rectangle object](geom-rectangle.md)
+
+### Sensitive distance
+
+- Get
+    ```javascript
+    var distance = cursorAtBound.sensitiveDistance;
+    ```
+- Set
+    ```javascript
+    cursorAtBound.setSensitiveDistance(distance);
+    ```
+    or
+    ```javascript
+    cursorAtBound.sensitiveDistance = distance;
+    ```
