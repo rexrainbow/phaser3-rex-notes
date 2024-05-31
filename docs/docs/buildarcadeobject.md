@@ -100,6 +100,20 @@ Create arcade body, and inject arcade object methods.
 
 ### Inject arcade object methods
 
+- Inject arcade method to game object
+    ```javascript
+    scene.plugins.get('rexBuildArcadeObject').injectMethods(gameObject);
+    // scene.physics.add.existing(gameObject);        // Dynamic arcade body
+    // scene.physics.add.existing(gameObject, true);  // Static arcade body
+    ```
+- Inject arcade method to game object class
+    ```javascript
+    scene.plugins.get('rexBuildArcadeObject').injectMethods(GameObjectClass.prototype);
+    ```
+- Inject arcade method to root of all game object class
+    ```javascript
+    scene.plugins.get('rexBuildArcadeObject').injectMethodsToRootClass();
+    ```
 - Create dynamic arcade body
     ```javascript
     var gameObject = scene.plugins.get('rexBuildArcadeObject').build(gameObject);

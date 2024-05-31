@@ -9766,6 +9766,17 @@
 </ul>
 <h3 id="inject-arcade-object-methods">Inject arcade object methods<a class="headerlink" href="#inject-arcade-object-methods" title="Permanent link">&para;</a></h3>
 <ul>
+<li>Inject arcade method to game object
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexBuildArcadeObject&#39;</span><span class="p">).</span><span class="nx">injectMethods</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+<span class="c1">// scene.physics.add.existing(gameObject);        // Dynamic arcade body</span>
+<span class="c1">// scene.physics.add.existing(gameObject, true);  // Static arcade body</span>
+</code></pre></div></li>
+<li>Inject arcade method to game object class
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexBuildArcadeObject&#39;</span><span class="p">).</span><span class="nx">injectMethods</span><span class="p">(</span><span class="nx">GameObjectClass</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Inject arcade method to root of all game object class
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexBuildArcadeObject&#39;</span><span class="p">).</span><span class="nx">injectMethodsToRootClass</span><span class="p">();</span>
+</code></pre></div></li>
 <li>Create dynamic arcade body
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">gameObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexBuildArcadeObject&#39;</span><span class="p">).</span><span class="nx">build</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
 <span class="c1">// var gameObjects = scene.plugins.get(&#39;rexBuildArcadeObject&#39;).build(gameObjects);</span>

@@ -138,6 +138,18 @@
       value: function build(gameObject, isStatic) {
         return BuildArcadeObject(gameObject, isStatic);
       }
+    }, {
+      key: "injectMethods",
+      value: function injectMethods(gameObject) {
+        Object.assign(gameObject, ArcadeMethods);
+        return gameObject;
+      }
+    }, {
+      key: "injectMethodsToRootClass",
+      value: function injectMethodsToRootClass() {
+        this.injectMethods(Phaser.GameObjects.GameObject.prototype);
+        return this;
+      }
     }]);
     return BuildArcadeObjectPlugin;
   }(Phaser.Plugins.BasePlugin);
