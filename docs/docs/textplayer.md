@@ -139,9 +139,10 @@ var txt = scene.add.rexTextPlayer({
         // maxLines: 
         padding: { top: 0, left: 0, right: 0, bottom: 0 },
         letterSpacing: 0,
-        hAlign: 0, // 0|'left'|1|'center'|2|'right'
+        wrapMode: 'word',  // 1|'word'|2|'char'|'character'|3|'mix'
+        hAlign: 0, // 0|'left'|1|'center'|2|'right'|3|'justify'|'justify-left'|4|'justify-center'|5| justify-right'
         vAlign: 0, // 0|'top'|1|'center'|2|'bottom'
-        charWrap: false
+        
     },
 
     typing: {

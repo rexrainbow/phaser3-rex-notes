@@ -152,9 +152,9 @@ var txt = scene.add.rexCanvasInput({
         maxLines: 1,
         wrapWidth: undefined,
         letterSpacing: 0,
-        hAlign: 0,
-        vAlign: 'center',  // For single line text input
-        charWrap: true,    // For single line text input
+        wrapMode: 'char',  // 1|'word'|2|'char'|'character'|3|'mix', for single line text input
+        hAlign: 0, // 0|'left'|1|'center'|2|'right'|3|'justify'|'justify-left'|4|'justify-center'|5| justify-right'
+        vAlign: 'center',  // For single line text input        
     },
 
     textArea: false,

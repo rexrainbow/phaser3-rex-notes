@@ -9,8 +9,8 @@ var InjectDefaultConfig = function (config) {
         SetValue(config, 'wrap.vAlign', defaultValue);
     }
 
-    if (!HasValue(config, 'wrap.charWrap')) {
-        SetValue(config, 'wrap.charWrap', true);
+    if (!HasValue(config, 'wrap.wrapMode')) {
+        SetValue(config, 'wrap.wrapMode', 'char');
     }
 
     if (!HasValue(config, 'wrap.maxLines')) {
