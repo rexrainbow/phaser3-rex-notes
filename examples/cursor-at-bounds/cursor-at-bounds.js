@@ -16,7 +16,7 @@ class Demo extends Phaser.Scene {
         this.cursorAtBounds = this.plugins.get('rexCursorAtBounds').add(this, {
             sensitiveDistance: 20,
             pointerOutGameRelease: false,
-            //bounds: new Phaser.Geom.Rectangle(100, 100, 600, 400)
+            bounds: new Phaser.Geom.Rectangle(100, 100, 600, 400)
         });
 
         this.add.graphics()

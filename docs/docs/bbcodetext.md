@@ -96,7 +96,7 @@ Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 - Stroke : `[stroke]text[/stroke]`
     - Stroke with color setting : `[stroke=red]text[/stroke]`
 - Shadow : `[shadow]text[/shadow]`
-    - Shadow with color setting : `[shadow=red]text[/u]`
+    - Shadow with color setting : `[shadow=red]text[/shadow]`
 - Underline : `[u]text[/u]`
     - Underline with color setting : `[u=red]text[/u]`
 - Strikethrough : `[s]text[/s]`
