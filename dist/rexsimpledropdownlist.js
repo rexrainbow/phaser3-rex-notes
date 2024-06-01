@@ -25183,6 +25183,10 @@
 
   var DrawImage = function DrawImage(key, context, x, y, color, autoRound) {
     var imgData = this.get(key);
+    if (!imgData) {
+      // Invalid key
+      return;
+    }
     var frame = this.textureManager.getFrame(imgData.key, imgData.frame);
     var width = imgData.width,
       height = imgData.height;

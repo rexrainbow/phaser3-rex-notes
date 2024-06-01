@@ -12020,13 +12020,15 @@
     var tagName = 'img';
     parser.on("+".concat(tagName), function (name) {
       var imgData = textPlayer.imageManager.get(name);
-      AppendImage.call(textPlayer, imgData.key, imgData.frame, {
-        width: imgData.width,
-        hieght: imgData.height,
-        leftSpace: imgData.left,
-        rightSpace: imgData.right,
-        color: imgData.tintFill ? textPlayer.textStyle.color : undefined
-      });
+      if (imgData) {
+        AppendImage.call(textPlayer, imgData.key, imgData.frame, {
+          width: imgData.width,
+          hieght: imgData.height,
+          leftSpace: imgData.left,
+          rightSpace: imgData.right,
+          color: imgData.tintFill ? textPlayer.textStyle.color : undefined
+        });
+      }
       parser.skipEvent();
     }).on("-".concat(tagName), function () {
       parser.skipEvent();
@@ -13651,6 +13653,10 @@
 
   var DrawImage = function DrawImage(key, context, x, y, color, autoRound) {
     var imgData = this.get(key);
+    if (!imgData) {
+      // Invalid key
+      return;
+    }
     var frame = this.textureManager.getFrame(imgData.key, imgData.frame);
     var width = imgData.width,
       height = imgData.height;
