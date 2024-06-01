@@ -1,5 +1,6 @@
 import CreateWrapResultData from '../CreateWrapResultData.js';
 import { SetPadding } from '../../../../../../utils/padding/PaddingMethods.js';
+import { WRAPMODE } from '../Const.js';
 import GetWord from './GetWord.js';
 import AlignLines from './AlignLines.js';
 import { IsNewLineChar, IsPageBreakChar } from '../../../bob/Types.js';
@@ -63,6 +64,15 @@ var RunWordWrap = function (config) {
 
     var showAllLines = (maxLines === 0);
 
+    var wrapMode = GetValue(config, 'wrapMode');
+    if (wrapMode === undefined) {
+        var charWrap = GetValue(config, 'charWrap', false);
+        wrapMode = (charWrap) ? 'char' : 'word';
+    }
+    if (typeof (wrapMode) === 'string') {
+        wrapMode = WRAPMODE[wrapMode];
+    }
+
     // Get wrapWidth
     var wrapWidth = GetValue(config, 'wrapWidth', undefined);
     if (wrapWidth === undefined) {
@@ -70,6 +80,7 @@ var RunWordWrap = function (config) {
             wrapWidth = this.fixedWidth - paddingHorizontal;
         } else {
             wrapWidth = Infinity; // No word-wrap
+            wrapMode = 0;
         }
     }
 
@@ -77,8 +88,6 @@ var RunWordWrap = function (config) {
 
     var hAlign = GetValue(config, 'hAlign', 0);
     var vAlign = GetValue(config, 'vAlign', 0);
-
-    var charWrap = GetValue(config, 'charWrap', false);
 
     var result = CreateWrapResultData({
         // Override properties
@@ -94,7 +103,7 @@ var RunWordWrap = function (config) {
         ascent: ascent,
         lineHeight: lineHeight,
         wrapWidth: wrapWidth,
-        charWrap: charWrap,
+        wrapMode: wrapMode,
     });
 
     // Set all children to inactive
@@ -118,7 +127,7 @@ var RunWordWrap = function (config) {
     var wordResult;
     var isPageBreakChar = false;
     while (childIndex < lastChildIndex) {
-        wordResult = GetWord(children, childIndex, charWrap, wordResult);
+        wordResult = GetWord(children, childIndex, wrapMode, wordResult);
         var word = wordResult.word;
         var charCnt = word.length;
         var wordWidth = wordResult.width + (charCnt * letterSpacing);

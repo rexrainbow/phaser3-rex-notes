@@ -209,7 +209,7 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
         // ...
     }
     ```
-1. [Quad shape](shape-quadshapes.md): Quad shape, offsets can be given on four vertices, and additional points can be added on the four sides.
+1. [Quad shape](shape-quad.md): Quad shape, offsets can be given on four vertices, and additional points can be added on the four sides.
     ```javascript
     var quad = scene.rexUI.add.quadShapes(x, y, width, height, fillColor, fillAlpha);
     ```

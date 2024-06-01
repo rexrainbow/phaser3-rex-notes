@@ -77,6 +77,7 @@ declare namespace DynamicText {
         maxLines?: number,
         wrapWidth?: number,
         letterSpacing?: number,
+        wrapMode?: 1 | 2 | 3 | 'word' | 'char' | 'character' | 'mix',
         charWrap?: boolean
     }
 

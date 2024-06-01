@@ -450,10 +450,12 @@ var result = txt.runWordWrap({
     useDefaultTextHeight: false,
     maxLines: undefined,
     wrapWidth: undefined,
+    wrapMode: 'word',  // 1|'word'|2|'char'|'character'|3|'mix'
     letterSpacing: 0,
     hAlign: 0,
     vAlign: 0,
-    charWrap: false
+
+
 });
 ```
 
@@ -468,7 +470,12 @@ var result = txt.runWordWrap({
 - `maxLines` : Lines number of this page. 
     - `0` : Wrapping whole content.
     - `undefined` : It will be set if `lineHeight` and `height` is given
-- `wrapWidth` : Width of wrapping
+- `wrapWidth` : Width of wrapping. Use inner width if this parameter is `undefined`.
+- `wrapMode` : 
+    - No wrapping if `wrapWidth`, or inner width is not given.
+    - `1`, or `'word'` : Word wrapping. Default behavior.
+    - `2`, or `'char'`, or `'character'` : Character wrapping.
+    - `3`, or `'mix'` : Word wrapping for ASCII word, Character wrapping for other (unicode) word.
 - `letterSpacing` : Space between each character.
 - `hAlign` : Horizontal alignment.
     - `0`, or `'left'` : Align to left bound.
@@ -478,10 +485,6 @@ var result = txt.runWordWrap({
     - `0`, or `'top'` : Align to top bound.
     - `1`, or `'center'` : Align to center.
     - `2`, or `'bottom'` : Align to bottom bound.
-- `charWrap`
-    - `false` : Word wrap. Default behavior.
-    - `true` : Character wrap.
-
 
 ##### Align
 
