@@ -12754,7 +12754,7 @@
     SPLITREGEXP: /(?:\r\n|\r|\n)/
   };
 
-  var WRAPMODE = {
+  var WRAPMODE$1 = {
     none: CONST.NO_WRAP,
     word: CONST.WORD_WRAP,
     "char": CONST.CHAR_WRAP,
@@ -12767,7 +12767,7 @@
     switch (textObjectType) {
       case TextType:
         if (typeof mode === 'string') {
-          mode = WRAPMODE[mode] || 0;
+          mode = WRAPMODE$1[mode] || 0;
         }
         textObject.style.wrapMode = mode;
         switch (mode) {
@@ -12785,7 +12785,7 @@
         break;
       case TagTextType:
         if (typeof mode === 'string') {
-          mode = WRAPMODE[mode] || 0;
+          mode = WRAPMODE$1[mode] || 0;
         }
         textObject.style.wrapMode = mode;
         break;
@@ -15939,7 +15939,15 @@
     return Object.assign(data, config);
   };
 
-  var GetWord = function GetWord(children, startIndex, charMode, result) {
+  var WRAPMODE = {
+    none: 0,
+    word: 1,
+    "char": 2,
+    character: 2,
+    mix: 3
+  };
+
+  var GetWord = function GetWord(children, startIndex, wrapMode, result) {
     if (result === undefined) {
       result = {
         word: [],
@@ -15947,10 +15955,14 @@
       };
     }
     result.word.length = 0;
+    var isCharWrap = wrapMode === 2;
+    var isMixWrap = wrapMode === 3;
+    var isWordWrap = !isCharWrap && !isMixWrap;
     var endIndex = children.length;
     var currentIndex = startIndex;
-    var word = result.word,
-      wordWidth = 0;
+    var word = result.word;
+    var wordWidth = 0;
+    var hasAnyASCIICharacter = false;
     while (currentIndex < endIndex) {
       var child = children[currentIndex];
       // Can't render (command child), put into output directly
@@ -15960,13 +15972,8 @@
         continue;
       }
       var text = child.type === CharTypeName ? child.text : null;
-      if (text !== null && text !== ' ' && text !== '\n' && text !== '\f') {
-        word.push(child);
-        wordWidth += child.outerWidth;
-        currentIndex++;
-        // Continue
-      } else {
-        // Get image child, a space, a new-line, or page-break
+      // Get image child, a new-line, or page-break
+      if (text === null || text === '\n' || text === '\f') {
         if (currentIndex === startIndex) {
           // Single child
           word.push(child);
@@ -15974,9 +15981,50 @@
         }
         break;
       }
-      if (charMode) {
+      if (isWordWrap) {
+        word.push(child);
+        wordWidth += child.outerWidth;
+        if (text === ' ') {
+          // Word is end with a space character
+          break;
+        }
+        currentIndex++;
+      } else if (isCharWrap) {
         // Word only contains 1 character
+        word.push(child);
+        wordWidth += child.outerWidth;
+        // Flush this 1 character
         break;
+      } else if (isMixWrap) {
+        if (!IsASCIIString(text)) {
+          if (!hasAnyASCIICharacter) {
+            word.push(child);
+            wordWidth += child.outerWidth;
+
+            // Is next child a space character?
+            var nextChild = children[currentIndex + 1];
+            if (nextChild && nextChild.type === CharTypeName && nextChild.text === ' ') {
+              word.push(nextChild);
+              wordWidth += nextChild.outerWidth;
+              // Include this space character
+            }
+            // Flush this 1 non-ascii character
+            break;
+          } else {
+            // Flush remainder children (all ascii character), except current child
+            break;
+          }
+        } else {
+          word.push(child);
+          wordWidth += child.outerWidth;
+          if (text === ' ') {
+            // Word is end with a space character
+            break;
+          }
+          currentIndex++;
+          hasAnyASCIICharacter = true;
+          // Test next child until ...
+        }
       }
     }
     result.width = wordWidth;
@@ -16009,23 +16057,10 @@
 
   var AlignLines$1 = function AlignLines(result, width, height) {
     var hAlign = result.hAlign,
-      vAlign = result.vAlign;
-    var offsetX, offsetY;
-    var linesHeight = result.linesHeight;
-    switch (vAlign) {
-      case 1: // center
-      case 'center':
-        offsetY = (height - linesHeight) / 2;
-        break;
-      case 2: // bottom
-      case 'bottom':
-        offsetY = height - linesHeight;
-        break;
-      default:
-        offsetY = 0;
-        break;
-    }
+      vAlign = result.vAlign,
+      justifyPercentage = result.justifyPercentage;
     var lines = result.lines;
+    var offsetX, offsetY;
     for (var li = 0, lcnt = lines.length; li < lcnt; li++) {
       var line = lines[li];
       var lineWidth = line.width,
@@ -16035,19 +16070,83 @@
         lineHAlign = hAlign;
       }
       switch (lineHAlign) {
+        case 0:
+        case 'left':
+          offsetX = 0;
+          break;
         case 1: // center
         case 'center':
-          offsetX = (width - lineWidth) / 2;
+          var remainderWidth = width - lineWidth;
+          offsetX = remainderWidth / 2;
           break;
         case 2: // right
         case 'right':
-          offsetX = width - lineWidth;
+          var remainderWidth = width - lineWidth;
+          offsetX = remainderWidth;
+          break;
+        case 3:
+        case 'justify':
+        case 'justify-left':
+          var remainderWidth = width - lineWidth;
+          var remainderPercentage = remainderWidth / width;
+          if (remainderPercentage < justifyPercentage) {
+            JustifyChildren(children, remainderWidth);
+            offsetX = 0;
+          } else {
+            offsetX = 0;
+          }
+          break;
+        case 4:
+        case 'justify-center':
+          var remainderWidth = width - lineWidth;
+          var remainderPercentage = remainderWidth / width;
+          if (remainderPercentage < justifyPercentage) {
+            JustifyChildren(children, remainderWidth);
+            offsetX = 0;
+          } else {
+            offsetX = remainderWidth / 2;
+          }
+          break;
+        case 5:
+        case 'justify-right':
+          var remainderWidth = width - lineWidth;
+          var remainderPercentage = remainderWidth / width;
+          if (remainderPercentage < justifyPercentage) {
+            JustifyChildren(children, remainderWidth);
+            offsetX = 0;
+          } else {
+            offsetX = remainderWidth;
+          }
           break;
         default:
           offsetX = 0;
           break;
       }
+      var linesHeight = result.linesHeight;
+      switch (vAlign) {
+        case 1: // center
+        case 'center':
+          offsetY = (height - linesHeight) / 2;
+          break;
+        case 2: // bottom
+        case 'bottom':
+          offsetY = height - linesHeight;
+          break;
+        default:
+          offsetY = 0;
+          break;
+      }
       OffsetChildren(children, offsetX, offsetY);
+    }
+  };
+  var JustifyChildren = function JustifyChildren(children, remainderWidth) {
+    var offset = remainderWidth / children.length;
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+      var child = children[i];
+      if (!child.renderable) {
+        continue;
+      }
+      child.x += offset * i;
     }
   };
 
@@ -16120,6 +16219,14 @@
       ascent = lineHeight;
     }
     var showAllLines = maxLines === 0;
+    var wrapMode = GetValue$1j(config, 'wrapMode');
+    if (wrapMode === undefined) {
+      var charWrap = GetValue$1j(config, 'charWrap', false);
+      wrapMode = charWrap ? 'char' : 'word';
+    }
+    if (typeof wrapMode === 'string') {
+      wrapMode = WRAPMODE[wrapMode];
+    }
 
     // Get wrapWidth
     var wrapWidth = GetValue$1j(config, 'wrapWidth', undefined);
@@ -16128,12 +16235,13 @@
         wrapWidth = this.fixedWidth - paddingHorizontal;
       } else {
         wrapWidth = Infinity; // No word-wrap
+        wrapMode = 0;
       }
     }
     var letterSpacing = GetValue$1j(config, 'letterSpacing', 0);
     var hAlign = GetValue$1j(config, 'hAlign', 0);
     var vAlign = GetValue$1j(config, 'vAlign', 0);
-    var charWrap = GetValue$1j(config, 'charWrap', false);
+    var justifyPercentage = GetValue$1j(config, 'justifyPercentage', 0.25);
     var result = CreateWrapResultData({
       // Override properties
       callback: 'runWordWrap',
@@ -16144,11 +16252,12 @@
       maxLines: maxLines,
       hAlign: hAlign,
       vAlign: vAlign,
+      justifyPercentage: justifyPercentage,
       // Specific properties
       ascent: ascent,
       lineHeight: lineHeight,
       wrapWidth: wrapWidth,
-      charWrap: charWrap
+      wrapMode: wrapMode
     });
 
     // Set all children to inactive
@@ -16175,7 +16284,7 @@
     var wordResult;
     var isPageBreakChar = false;
     while (childIndex < lastChildIndex) {
-      wordResult = GetWord(children, childIndex, charWrap, wordResult);
+      wordResult = GetWord(children, childIndex, wrapMode, wordResult);
       var word = wordResult.word;
       var charCnt = word.length;
       var wordWidth = wordResult.width + charCnt * letterSpacing;
@@ -21223,7 +21332,7 @@
           if (wrap.hasOwnProperty('mode')) {
             var mode = wrap.mode;
             if (typeof mode === 'string') {
-              wrap.mode = WRAPMODE[mode];
+              wrap.mode = WRAPMODE$1[mode];
             }
           } else {
             if (wrap.hasOwnProperty('width')) {
@@ -21622,7 +21731,7 @@
       key: "setWrapMode",
       value: function setWrapMode(mode) {
         if (typeof mode === 'string') {
-          mode = WRAPMODE[mode.toLowerCase()] || 0;
+          mode = WRAPMODE$1[mode.toLowerCase()] || 0;
         }
         this.wrapMode = mode;
         return this.update(true);
@@ -35152,8 +35261,8 @@
       var defaultValue = isSingleLineMode ? 'center' : 'top';
       SetValue(config, 'wrap.vAlign', defaultValue);
     }
-    if (!HasValue(config, 'wrap.charWrap')) {
-      SetValue(config, 'wrap.charWrap', true);
+    if (!HasValue(config, 'wrap.wrapMode')) {
+      SetValue(config, 'wrap.wrapMode', 'char');
     }
     if (!HasValue(config, 'wrap.maxLines')) {
       var defaultValue = isSingleLineMode ? 1 : undefined;

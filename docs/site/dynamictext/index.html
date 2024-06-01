@@ -10711,10 +10711,12 @@ or</p>
 <span class="w">    </span><span class="nx">useDefaultTextHeight</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">maxLines</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">wrapWidth</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">wrapMode</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;word&#39;</span><span class="p">,</span><span class="w">  </span><span class="c1">// 1|&#39;word&#39;|2|&#39;char&#39;|&#39;character&#39;|3|&#39;mix&#39;</span>
 <span class="w">    </span><span class="nx">letterSpacing</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">hAlign</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">vAlign</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">charWrap</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span>
+
+
 <span class="p">});</span>
 </code></pre></div>
 <ul>
@@ -10737,23 +10739,28 @@ or</p>
 <li><code>undefined</code> : It will be set if <code>lineHeight</code> and <code>height</code> is given</li>
 </ul>
 </li>
-<li><code>wrapWidth</code> : Width of wrapping</li>
+<li><code>wrapWidth</code> : Width of wrapping. Use inner width if this parameter is <code>undefined</code>.</li>
+<li><code>wrapMode</code> : <ul>
+<li>No wrapping if <code>wrapWidth</code>, or inner width is not given.</li>
+<li><code>1</code>, or <code>'word'</code> : Word wrapping. Default behavior.</li>
+<li><code>2</code>, or <code>'char'</code>, or <code>'character'</code> : Character wrapping.</li>
+<li><code>3</code>, or <code>'mix'</code> : Word wrapping for ASCII word, Character wrapping for other (unicode) word.</li>
+</ul>
+</li>
 <li><code>letterSpacing</code> : Space between each character.</li>
 <li><code>hAlign</code> : Horizontal alignment.<ul>
 <li><code>0</code>, or <code>'left'</code> : Align to left bound.</li>
 <li><code>1</code>, or <code>'center'</code> : Align to center.</li>
 <li><code>2</code>, or <code>'right'</code> : Align to right bound.</li>
+<li><code>3</code>, <code>'justify'</code>, <code>'justify-left'</code> : If remainder space is less or equal than 25%, then justify children. Else align children to left/top side.</li>
+<li><code>4</code>, <code>'justify-right'</code> : If remainder space is less or equal than 25%, then justify children. Else align children to right/bottom side.</li>
+<li><code>5</code>, <code>'justify-cneter'</code> : If remainder space is less or equal than 25%, then justify children. Else align children to center.</li>
 </ul>
 </li>
 <li><code>vAlign</code> : Vertical alignment.<ul>
 <li><code>0</code>, or <code>'top'</code> : Align to top bound.</li>
 <li><code>1</code>, or <code>'center'</code> : Align to center.</li>
 <li><code>2</code>, or <code>'bottom'</code> : Align to bottom bound.</li>
-</ul>
-</li>
-<li><code>charWrap</code><ul>
-<li><code>false</code> : Word wrap. Default behavior.</li>
-<li><code>true</code> : Character wrap.</li>
 </ul>
 </li>
 </ul>
