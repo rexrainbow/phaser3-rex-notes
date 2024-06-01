@@ -88,6 +88,7 @@ var RunWordWrap = function (config) {
 
     var hAlign = GetValue(config, 'hAlign', 0);
     var vAlign = GetValue(config, 'vAlign', 0);
+    var justifyPercentage = GetValue(config, 'justifyPercentage', 0.25);
 
     var result = CreateWrapResultData({
         // Override properties
@@ -98,6 +99,7 @@ var RunWordWrap = function (config) {
         maxLines: maxLines,
         hAlign: hAlign,
         vAlign: vAlign,
+        justifyPercentage: justifyPercentage,
 
         // Specific properties
         ascent: ascent,

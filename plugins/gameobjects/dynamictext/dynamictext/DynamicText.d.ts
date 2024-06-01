@@ -58,13 +58,14 @@ declare namespace DynamicText {
         scaleY?: number,
     }
 
-    type HAlignTypes = 0 | 1 | 2 | 'left' | 'center' | 'right';
-    type VAlignTypes = 0 | 1 | 2 | 'top' | 'center' | 'bottom';
+    type HAlignTypes = 0 | 'left' | 1 | 'center' | 2 | 'right' | 3 | 'justify' | 'justify-left' | 4 | 'justify-center' | 5 | 'justify-right';
+    type VAlignTypes = 0 | 'top' | 1 | 'center' | 2 | 'bottom';
 
     interface IConfigWrapBase {
         callback?: string | Function,
         hAlign?: HAlignTypes,
         vAlign?: VAlignTypes,
+        justifyPercentage?: number,
     }
 
     interface IConfigWordWrap extends IConfigWrapBase {

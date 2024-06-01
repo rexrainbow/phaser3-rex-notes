@@ -481,6 +481,9 @@ var result = txt.runWordWrap({
     - `0`, or `'left'` : Align to left bound.
     - `1`, or `'center'` : Align to center.
     - `2`, or `'right'` : Align to right bound.
+    - `3`, `'justify'`, `'justify-left'` : If remainder space is less or equal than 25%, then justify children. Else align children to left/top side.
+    - `4`, `'justify-right'` : If remainder space is less or equal than 25%, then justify children. Else align children to right/bottom side.
+    - `5`, `'justify-cneter'` : If remainder space is less or equal than 25%, then justify children. Else align children to center.
 - `vAlign` : Vertical alignment.
     - `0`, or `'top'` : Align to top bound.
     - `1`, or `'center'` : Align to center.
