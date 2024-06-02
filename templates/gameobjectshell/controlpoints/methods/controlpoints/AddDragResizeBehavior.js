@@ -4,6 +4,14 @@ var AddDragResizeBehavior = function (parent, dragPoint, fixedPoint, dragAxis) {
 
     dragPoint
         .setInteractive({ draggable: true })
+        .on('dragstart', function () {
+            parent.emit('resize.start');
+            parent.emit('control.start');
+        })
+        .on('dragend', function () {
+            parent.emit('resize.stop');
+            parent.emit('control.stop');
+        })
         .on('drag', function (pointer, dragX, dragY) {
             var fixedX = fixedPoint.x,
                 fixedY = fixedPoint.y;
