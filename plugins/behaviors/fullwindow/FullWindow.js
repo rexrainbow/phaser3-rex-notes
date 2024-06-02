@@ -29,7 +29,7 @@ class FullWindow extends ComponentBase {
         var scene = this.scene;
         var gameObject = this.parent;
 
-        var camera = GetFirstRenderCamera(scene, gameObject);
+        var camera = GetFirstRenderCamera(gameObject);
         if (!camera) {
             return;
         }
