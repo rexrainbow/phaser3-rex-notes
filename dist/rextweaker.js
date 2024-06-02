@@ -648,14 +648,20 @@
     }
   };
 
-  var RotateAround$7 = Phaser.Math.RotateAround;
   var Transform = {
     worldToLocal: function worldToLocal(point) {
       // Transform
       point.x -= this.x;
       point.y -= this.y;
+
       // Rotate
-      RotateAround$7(point, 0, 0, -this.rotation);
+      var c = Math.cos(-this.rotation);
+      var s = Math.sin(-this.rotation);
+      var tx = point.x;
+      var ty = point.y;
+      point.x = tx * c - ty * s;
+      point.y = tx * s + ty * c;
+
       // Scale
       point.x /= this.scaleX;
       point.y /= this.scaleY;
@@ -665,8 +671,15 @@
       // Scale
       point.x *= this.scaleX;
       point.y *= this.scaleY;
+
       // Rotate
-      RotateAround$7(point, 0, 0, this.rotation);
+      var c = Math.cos(this.rotation);
+      var s = Math.sin(this.rotation);
+      var tx = point.x;
+      var ty = point.y;
+      point.x = tx * c - ty * s;
+      point.y = tx * s + ty * c;
+
       // Transform
       point.x += this.x;
       point.y += this.y;

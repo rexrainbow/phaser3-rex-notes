@@ -2403,7 +2403,7 @@
       var _this;
       _classCallCheck(this, Box);
       _this = _callSuper(this, Box, [scene, config]);
-      _this.type = 'rexSpinnerCube';
+      _this.type = 'rexSpinnerBox';
       return _this;
     }
     _createClass(Box, [{

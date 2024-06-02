@@ -565,7 +565,7 @@
     }
   };
 
-  var GetValue$a = Phaser.Utils.Objects.GetValue;
+  var GetValue$b = Phaser.Utils.Objects.GetValue;
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
       _classCallCheck(this, ComponentBase);
@@ -574,7 +574,7 @@
       this.isShutdown = false;
 
       // Event emitter, default is private event emitter
-      this.setEventEmitter(GetValue$a(config, 'eventEmitter', true));
+      this.setEventEmitter(GetValue$b(config, 'eventEmitter', true));
 
       // Register callback of parent destroy event, also see `shutdown` method
       if (this.parent) {
@@ -650,7 +650,7 @@
   }();
   Object.assign(ComponentBase.prototype, EventEmitterMethods);
 
-  var GetValue$9 = Phaser.Utils.Objects.GetValue;
+  var GetValue$a = Phaser.Utils.Objects.GetValue;
   var TickTask = /*#__PURE__*/function (_ComponentBase) {
     _inherits(TickTask, _ComponentBase);
     function TickTask(parent, config) {
@@ -660,7 +660,7 @@
       _this._isRunning = false;
       _this.isPaused = false;
       _this.tickingState = false;
-      _this.setTickingMode(GetValue$9(config, 'tickingMode', 1));
+      _this.setTickingMode(GetValue$a(config, 'tickingMode', 1));
       // boot() later
       return _this;
     }
@@ -777,7 +777,7 @@
     'always': 2
   };
 
-  var GetValue$8 = Phaser.Utils.Objects.GetValue;
+  var GetValue$9 = Phaser.Utils.Objects.GetValue;
   var SceneUpdateTickTask = /*#__PURE__*/function (_TickTask) {
     _inherits(SceneUpdateTickTask, _TickTask);
     function SceneUpdateTickTask(parent, config) {
@@ -790,7 +790,7 @@
 
       // If this.scene is not available, use game's 'step' event
       var defaultEventName = _this.scene ? 'update' : 'step';
-      _this.tickEventName = GetValue$8(config, 'tickEventName', defaultEventName);
+      _this.tickEventName = GetValue$9(config, 'tickEventName', defaultEventName);
       _this.isSceneTicker = !IsGameUpdateEvent(_this.tickEventName);
       return _this;
     }
@@ -826,7 +826,7 @@
     return eventName === 'step' || eventName === 'poststep';
   };
 
-  var GetValue$7 = Phaser.Utils.Objects.GetValue;
+  var GetValue$8 = Phaser.Utils.Objects.GetValue;
   var Clamp = Phaser.Math.Clamp;
   var Timer = /*#__PURE__*/function () {
     function Timer(config) {
@@ -836,15 +836,15 @@
     _createClass(Timer, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.state = GetValue$7(o, 'state', IDLE);
-        this.timeScale = GetValue$7(o, 'timeScale', 1);
-        this.delay = GetValue$7(o, 'delay', 0);
-        this.repeat = GetValue$7(o, 'repeat', 0);
-        this.repeatCounter = GetValue$7(o, 'repeatCounter', 0);
-        this.repeatDelay = GetValue$7(o, 'repeatDelay', 0);
-        this.duration = GetValue$7(o, 'duration', 0);
-        this.nowTime = GetValue$7(o, 'nowTime', 0);
-        this.justRestart = GetValue$7(o, 'justRestart', false);
+        this.state = GetValue$8(o, 'state', IDLE);
+        this.timeScale = GetValue$8(o, 'timeScale', 1);
+        this.delay = GetValue$8(o, 'delay', 0);
+        this.repeat = GetValue$8(o, 'repeat', 0);
+        this.repeatCounter = GetValue$8(o, 'repeatCounter', 0);
+        this.repeatDelay = GetValue$8(o, 'repeatDelay', 0);
+        this.duration = GetValue$8(o, 'duration', 0);
+        this.nowTime = GetValue$8(o, 'nowTime', 0);
+        this.justRestart = GetValue$8(o, 'justRestart', false);
       }
     }, {
       key: "toJSON",
@@ -1072,7 +1072,7 @@
     return TimerTickTask;
   }(SceneUpdateTickTask);
 
-  var GetValue$6 = Phaser.Utils.Objects.GetValue;
+  var GetValue$7 = Phaser.Utils.Objects.GetValue;
   var GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
   var GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
   var EaseValueTaskBase = /*#__PURE__*/function (_TimerTask) {
@@ -1084,13 +1084,13 @@
     _createClass(EaseValueTaskBase, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.timer.resetFromJSON(GetValue$6(o, 'timer'));
-        this.setEnable(GetValue$6(o, 'enable', true));
-        this.setTarget(GetValue$6(o, 'target', this.parent));
+        this.timer.resetFromJSON(GetValue$7(o, 'timer'));
+        this.setEnable(GetValue$7(o, 'enable', true));
+        this.setTarget(GetValue$7(o, 'target', this.parent));
         this.setDelay(GetAdvancedValue(o, 'delay', 0));
         this.setDuration(GetAdvancedValue(o, 'duration', 1000));
-        this.setEase(GetValue$6(o, 'ease', 'Linear'));
-        this.setRepeat(GetValue$6(o, 'repeat', 0));
+        this.setEase(GetValue$7(o, 'ease', 'Linear'));
+        this.setRepeat(GetValue$7(o, 'repeat', 0));
         return this;
       }
     }, {
@@ -1210,7 +1210,7 @@
     return EaseValueTaskBase;
   }(TimerTickTask);
 
-  var GetValue$5 = Phaser.Utils.Objects.GetValue;
+  var GetValue$6 = Phaser.Utils.Objects.GetValue;
   var Linear$b = Phaser.Math.Linear;
   var EaseValueTask = /*#__PURE__*/function (_EaseValueTaskBase) {
     _inherits(EaseValueTask, _EaseValueTaskBase);
@@ -1232,15 +1232,15 @@
           return this;
         }
         var target = this.target;
-        this.propertyKey = GetValue$5(config, 'key', 'value');
+        this.propertyKey = GetValue$6(config, 'key', 'value');
         var currentValue = target[this.propertyKey];
-        this.fromValue = GetValue$5(config, 'from', currentValue);
-        this.toValue = GetValue$5(config, 'to', currentValue);
-        this.setEase(GetValue$5(config, 'ease', this.ease));
-        this.setDuration(GetValue$5(config, 'duration', this.duration));
-        this.setRepeat(GetValue$5(config, 'repeat', 0));
-        this.setDelay(GetValue$5(config, 'delay', 0));
-        this.setRepeatDelay(GetValue$5(config, 'repeatDelay', 0));
+        this.fromValue = GetValue$6(config, 'from', currentValue);
+        this.toValue = GetValue$6(config, 'to', currentValue);
+        this.setEase(GetValue$6(config, 'ease', this.ease));
+        this.setDuration(GetValue$6(config, 'duration', this.duration));
+        this.setRepeat(GetValue$6(config, 'repeat', 0));
+        this.setDelay(GetValue$6(config, 'delay', 0));
+        this.setRepeatDelay(GetValue$6(config, 'repeatDelay', 0));
         this.timer.setDuration(this.duration).setRepeat(this.repeat).setDelay(this.delay).setRepeatDelay(this.repeatDelay);
         target[this.propertyKey] = this.fromValue;
         _get(_getPrototypeOf(EaseValueTask.prototype), "start", this).call(this);
@@ -1320,23 +1320,23 @@
     resume: Resume
   };
 
-  var GetValue$4 = Phaser.Utils.Objects.GetValue;
+  var GetValue$5 = Phaser.Utils.Objects.GetValue;
   var Base = /*#__PURE__*/function (_BaseShapes) {
     _inherits(Base, _BaseShapes);
     function Base(scene, config) {
       var _this;
       _classCallCheck(this, Base);
-      var x = GetValue$4(config, 'x', 0);
-      var y = GetValue$4(config, 'y', 0);
-      var width = GetValue$4(config, 'width', 64);
-      var height = GetValue$4(config, 'height', 64);
+      var x = GetValue$5(config, 'x', 0);
+      var y = GetValue$5(config, 'y', 0);
+      var width = GetValue$5(config, 'width', 64);
+      var height = GetValue$5(config, 'height', 64);
       _this = _callSuper(this, Base, [scene, x, y, width, height]);
-      _this.setDuration(GetValue$4(config, 'duration', 1000));
-      _this.setEase(GetValue$4(config, 'ease', 'Linear'));
-      _this.setDelay(GetValue$4(config, 'delay', 0));
-      _this.setRepeatDelay(GetValue$4(config, 'repeatDelay', 0));
-      var color = GetValue$4(config, 'color', 0xffffff);
-      var start = GetValue$4(config, 'start', true);
+      _this.setDuration(GetValue$5(config, 'duration', 1000));
+      _this.setEase(GetValue$5(config, 'ease', 'Linear'));
+      _this.setDelay(GetValue$5(config, 'delay', 0));
+      _this.setRepeatDelay(GetValue$5(config, 'repeatDelay', 0));
+      var color = GetValue$5(config, 'color', 0xffffff);
+      var start = GetValue$5(config, 'start', true);
       _this.buildShapes(config);
       _this.setColor(color);
       _this.setValue(0);
@@ -1465,7 +1465,7 @@
     lineStyle: LineStyle
   };
 
-  var GetValue$3 = function GetValue(source, key, defaultValue) {
+  var GetValue$4 = function GetValue(source, key, defaultValue) {
     if (!source || typeof source === 'number') {
       return defaultValue;
     }
@@ -1520,7 +1520,7 @@
     },
     getData: function getData(key, defaultValue) {
       this.enableData();
-      return key === undefined ? this.data : GetValue$3(this.data, key, defaultValue);
+      return key === undefined ? this.data : GetValue$4(this.data, key, defaultValue);
     },
     incData: function incData(key, inc, defaultValue) {
       if (defaultValue === undefined) {
@@ -1761,7 +1761,7 @@
     return pathData;
   };
 
-  var DegToRad$3 = Phaser.Math.DegToRad;
+  var DegToRad$4 = Phaser.Math.DegToRad;
   var ArcTo = function ArcTo(centerX, centerY, radiusX, radiusY, startAngle, endAngle, antiClockWise, iteration, pathData) {
     // startAngle, endAngle: 0 ~ 360
     if (antiClockWise && endAngle > startAngle) {
@@ -1770,8 +1770,8 @@
       endAngle += 360;
     }
     var deltaAngle = endAngle - startAngle;
-    var step = DegToRad$3(deltaAngle) / iteration;
-    startAngle = DegToRad$3(startAngle);
+    var step = DegToRad$4(deltaAngle) / iteration;
+    startAngle = DegToRad$4(startAngle);
     for (var i = 0; i <= iteration; i++) {
       var angle = startAngle + step * i;
       var x = centerX + radiusX * Math.cos(angle);
@@ -1781,7 +1781,7 @@
     return pathData;
   };
 
-  var DegToRad$2 = Phaser.Math.DegToRad;
+  var DegToRad$3 = Phaser.Math.DegToRad;
   var Arc = /*#__PURE__*/function (_PathBase) {
     _inherits(Arc, _PathBase);
     function Arc(x, y, radiusX, radiusY, startAngle, endAngle, anticlockwise, pie) {
@@ -1969,8 +1969,8 @@
         ctx.beginPath();
         var x = this.x - dx,
           y = this.y - dy,
-          startAngle = DegToRad$2(this.startAngle),
-          endAngle = DegToRad$2(this.endAngle);
+          startAngle = DegToRad$3(this.startAngle),
+          endAngle = DegToRad$3(this.endAngle);
         if (this.pie) {
           ctx.moveTo(x, y);
           ctx.lineTo(x + Math.cos(startAngle) * this.radiusX, y + Math.sin(startAngle) * this.radiusY);
@@ -2335,14 +2335,14 @@
     return pathData;
   };
 
-  var DegToRad$1 = Phaser.Math.DegToRad;
+  var DegToRad$2 = Phaser.Math.DegToRad;
   var PointRotateAround = Phaser.Math.RotateAround;
   var TransformPointsMethods = {
     rotateAround: function rotateAround(centerX, centerY, angle) {
       if (this.pathData.length === 0) {
         return this;
       }
-      angle = DegToRad$1(angle);
+      angle = DegToRad$2(angle);
       RotateAround(centerX, centerY, angle, this.pathData);
       var pathDataCnt = this.pathData.length;
       this.lastPointX = this.pathData[pathDataCnt - 2];
@@ -2932,7 +2932,7 @@
     return Rectangle;
   }(BaseGeom);
 
-  var GetValue$2 = Phaser.Utils.Objects.GetValue;
+  var GetValue$3 = Phaser.Utils.Objects.GetValue;
   var RoundRectangle = /*#__PURE__*/function (_PathBase) {
     _inherits(RoundRectangle, _PathBase);
     function RoundRectangle(x, y, width, height, radius, iterations) {
@@ -3093,10 +3093,10 @@
           this.radiusBL = value;
           this.radiusBR = value;
         } else {
-          this.radiusTL = GetValue$2(value, 'tl', 0);
-          this.radiusTR = GetValue$2(value, 'tr', 0);
-          this.radiusBL = GetValue$2(value, 'bl', 0);
-          this.radiusBR = GetValue$2(value, 'br', 0);
+          this.radiusTL = GetValue$3(value, 'tl', 0);
+          this.radiusTR = GetValue$3(value, 'tr', 0);
+          this.radiusBL = GetValue$3(value, 'bl', 0);
+          this.radiusBR = GetValue$3(value, 'br', 0);
         }
       }
     }, {
@@ -3497,6 +3497,146 @@
   });
   SetValue(window, 'RexPlugins.Spinner.Audio', Audio);
 
+  var GetValue$2 = Phaser.Utils.Objects.GetValue;
+  var DegToRad$1 = Phaser.Math.DegToRad;
+  var Arrow = /*#__PURE__*/function (_Base) {
+    _inherits(Arrow, _Base);
+    function Arrow(scene, config) {
+      var _this;
+      _classCallCheck(this, Arrow);
+      _this = _callSuper(this, Arrow, [scene, config]);
+      _this.type = 'rexSpinnerArrow';
+      _this.direction = GetValue$2(config, 'direction', 'down');
+      return _this;
+    }
+    _createClass(Arrow, [{
+      key: "buildShapes",
+      value: function buildShapes() {
+        for (var i = 0; i < 3; i++) {
+          this.addShape(new Lines());
+        }
+      }
+    }, {
+      key: "updateShapes",
+      value: function updateShapes() {
+        var x0, y0, a, b, c, d;
+        switch (this.direction) {
+          case 'down':
+            x0 = this.centerX;
+            y0 = this.centerY - this.radius;
+            // xt = a*x + b*y
+            var radX = DegToRad$1(315);
+            a = Math.cos(radX);
+            b = Math.sin(radX);
+            // yt = c*x + d*y
+            var radY = DegToRad$1(45);
+            c = Math.cos(radY);
+            d = Math.sin(radY);
+            break;
+          case 'up':
+            x0 = this.centerX;
+            y0 = this.centerY + this.radius;
+            // xt = a*x + b*y
+            var radX = DegToRad$1(135);
+            a = Math.cos(radX);
+            b = Math.sin(radX);
+            // yt = c*x + d*y
+            var radY = DegToRad$1(225);
+            c = Math.cos(radY);
+            d = Math.sin(radY);
+            break;
+          case 'left':
+            x0 = this.centerX + this.radius;
+            y0 = this.centerY;
+            // xt = a*x + b*y
+            var radX = DegToRad$1(225);
+            a = Math.cos(radX);
+            b = Math.sin(radX);
+            // yt = c*x + d*y
+            var radY = DegToRad$1(315);
+            c = Math.cos(radY);
+            d = Math.sin(radY);
+            break;
+          case 'right':
+            x0 = this.centerX - this.radius;
+            y0 = this.centerY;
+            // xt = a*x + b*y
+            var radX = DegToRad$1(45);
+            a = Math.cos(radX);
+            b = Math.sin(radX);
+            // yt = c*x + d*y
+            var radY = DegToRad$1(135);
+            c = Math.cos(radY);
+            d = Math.sin(radY);
+            break;
+        }
+        var gridSize = this.radius / 7.5;
+        var t = this.value;
+        var alphaThreshold = 1 / 3;
+        var shapes = this.getShapes();
+
+        // Arrow0
+        var arrow0 = shapes[0];
+        var alpha = t > alphaThreshold ? 1 : t / alphaThreshold;
+        arrow0.fillStyle(this.color, alpha);
+        ArrowPolygon(arrow0, 1, 3, gridSize, gridSize, x0, y0, a, b, c, d);
+
+        // Arrow1
+        t -= alphaThreshold;
+        var arrow1 = shapes[1];
+        if (t > 0) {
+          var alpha = t > alphaThreshold ? 1 : t / alphaThreshold;
+          arrow1.fillStyle(this.color, alpha);
+          ArrowPolygon(arrow1, 4, 6, gridSize, gridSize, x0, y0, a, b, c, d);
+        } else {
+          arrow1.fillStyle();
+        }
+
+        // Arrow2
+        t -= alphaThreshold;
+        var arrow2 = shapes[2];
+        if (t > 0) {
+          var alpha = t > alphaThreshold ? 1 : t / alphaThreshold;
+          arrow2.fillStyle(this.color, alpha);
+          ArrowPolygon(arrow2, 7, 9, gridSize, gridSize, x0, y0, a, b, c, d);
+        } else {
+          arrow2.fillStyle();
+        }
+      }
+    }]);
+    return Arrow;
+  }(Base);
+  var ArrowPolygon = function ArrowPolygon(polygon, innerX, outerX, gridWidth, gridHeight, x0, y0, a, b, c, d) {
+    var p0 = Transform(innerX, 0, gridWidth, gridHeight, x0, y0, a, b, c, d);
+    polygon.startAt(p0.x, p0.y);
+    var p1 = Transform(outerX, 0, gridWidth, gridHeight, x0, y0, a, b, c, d);
+    polygon.lineTo(p1.x, p1.y);
+    var p2 = Transform(outerX, outerX, gridWidth, gridHeight, x0, y0, a, b, c, d);
+    polygon.lineTo(p2.x, p2.y);
+    var p3 = Transform(0, outerX, gridWidth, gridHeight, x0, y0, a, b, c, d);
+    polygon.lineTo(p3.x, p3.y);
+    var p4 = Transform(0, innerX, gridWidth, gridHeight, x0, y0, a, b, c, d);
+    polygon.lineTo(p4.x, p4.y);
+    var p5 = Transform(innerX, innerX, gridWidth, gridHeight, x0, y0, a, b, c, d);
+    polygon.lineTo(p5.x, p5.y);
+    polygon.close();
+  };
+  var GlobPoint = {};
+  var Transform = function Transform(gridX, gridY, gridWidth, gridHeight, x0, y0, a, b, c, d) {
+    var x = gridX * gridWidth;
+    var y = gridY * gridHeight;
+    GlobPoint.x = a * x + b * y + x0;
+    GlobPoint.y = c * x + d * y + y0;
+    return GlobPoint;
+  };
+
+  ObjectFactory.register('arrow', function (config) {
+    var gameObject = new Arrow(this.scene, config);
+    this.scene.add.existing(gameObject);
+    return gameObject;
+  });
+  SetValue(window, 'RexPlugins.Spinner.Arrow', Arrow);
+
   var Yoyo = function Yoyo(t, threshold) {
     if (threshold === undefined) {
       threshold = 0.5;
@@ -3615,7 +3755,7 @@
       var _this;
       _classCallCheck(this, Box);
       _this = _callSuper(this, Box, [scene, config]);
-      _this.type = 'rexSpinnerCube';
+      _this.type = 'rexSpinnerBox';
       return _this;
     }
     _createClass(Box, [{

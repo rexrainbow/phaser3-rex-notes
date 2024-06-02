@@ -6877,7 +6877,7 @@
 
   var Rectangle$1 = Phaser.Geom.Rectangle;
   var Vector2 = Phaser.Math.Vector2;
-  var RotateAround$2 = Phaser.Math.RotateAround;
+  var RotateAround$1 = Phaser.Math.RotateAround;
   var GetBounds$1 = function GetBounds(gameObject, output) {
     if (output === undefined) {
       output = new Rectangle$1();
@@ -7006,7 +7006,7 @@
       includeParent = false;
     }
     if (gameObject.rotation !== 0) {
-      RotateAround$2(output, gameObject.x, gameObject.y, gameObject.rotation);
+      RotateAround$1(output, gameObject.x, gameObject.y, gameObject.rotation);
     }
     if (includeParent && gameObject.parentContainer) {
       var parentMatrix = gameObject.parentContainer.getBoundsTransformMatrix();
@@ -12408,14 +12408,20 @@
     }
   };
 
-  var RotateAround$1 = Phaser.Math.RotateAround;
   var Transform = {
     worldToLocal: function worldToLocal(point) {
       // Transform
       point.x -= this.x;
       point.y -= this.y;
+
       // Rotate
-      RotateAround$1(point, 0, 0, -this.rotation);
+      var c = Math.cos(-this.rotation);
+      var s = Math.sin(-this.rotation);
+      var tx = point.x;
+      var ty = point.y;
+      point.x = tx * c - ty * s;
+      point.y = tx * s + ty * c;
+
       // Scale
       point.x /= this.scaleX;
       point.y /= this.scaleY;
@@ -12425,8 +12431,15 @@
       // Scale
       point.x *= this.scaleX;
       point.y *= this.scaleY;
+
       // Rotate
-      RotateAround$1(point, 0, 0, this.rotation);
+      var c = Math.cos(this.rotation);
+      var s = Math.sin(this.rotation);
+      var tx = point.x;
+      var ty = point.y;
+      point.x = tx * c - ty * s;
+      point.y = tx * s + ty * c;
+
       // Transform
       point.x += this.x;
       point.y += this.y;

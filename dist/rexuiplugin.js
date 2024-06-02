@@ -8556,7 +8556,7 @@
     }
   };
 
-  var RotateAround$9 = Phaser.Math.RotateAround;
+  var RotateAround$8 = Phaser.Math.RotateAround;
   var CanvasPositionToBobPosition = function CanvasPositionToBobPosition(canvasX, canvasY, bob, out) {
     if (out === undefined) {
       out = {};
@@ -8569,7 +8569,7 @@
     out.x = (canvasX - bob.drawX) / bob.scaleX;
     out.y = (canvasY - bob.drawY) / bob.scaleY;
     if (bob.rotation !== 0) {
-      RotateAround$9(out, 0, 0, -bob.rotation);
+      RotateAround$8(out, 0, 0, -bob.rotation);
     }
     return out;
   };
@@ -8594,7 +8594,7 @@
   };
   var bobBounds;
 
-  var RotateAround$8 = Phaser.Math.RotateAround;
+  var RotateAround$7 = Phaser.Math.RotateAround;
   var BobPositionToCanvasPosition = function BobPositionToCanvasPosition(bob, bobX, bobY, out) {
     if (out === undefined) {
       out = {};
@@ -8607,7 +8607,7 @@
     out.x = bobX;
     out.y = bobY;
     if (bob.rotation !== 0) {
-      RotateAround$8(out, 0, 0, bob.rotation);
+      RotateAround$7(out, 0, 0, bob.rotation);
     }
     out.x = out.x * bob.scaleX + bob.drawX;
     out.y = out.y * bob.scaleY + bob.drawY;
@@ -14662,7 +14662,7 @@
 
   var Rectangle$4 = Phaser.Geom.Rectangle;
   var Vector2 = Phaser.Math.Vector2;
-  var RotateAround$7 = Phaser.Math.RotateAround;
+  var RotateAround$6 = Phaser.Math.RotateAround;
   var GetBounds = function GetBounds(gameObject, output) {
     if (output === undefined) {
       output = new Rectangle$4();
@@ -14806,7 +14806,7 @@
       includeParent = false;
     }
     if (gameObject.rotation !== 0) {
-      RotateAround$7(output, gameObject.x, gameObject.y, gameObject.rotation);
+      RotateAround$6(output, gameObject.x, gameObject.y, gameObject.rotation);
     }
     if (includeParent && gameObject.parentContainer) {
       var parentMatrix = gameObject.parentContainer.getBoundsTransformMatrix();
@@ -24696,7 +24696,7 @@
   //import PointRotateAround from '../../utils/math/RotateAround.js';
 
   var PointRotateAround$1 = Phaser.Math.RotateAround;
-  var RotateAround$6 = function RotateAround(centerX, centerY, angle, pathData) {
+  var RotateAround$5 = function RotateAround(centerX, centerY, angle, pathData) {
     var point = {
       x: 0,
       y: 0
@@ -24739,7 +24739,7 @@
         return this;
       }
       angle = DegToRad$a(angle);
-      RotateAround$6(centerX, centerY, angle, this.pathData);
+      RotateAround$5(centerX, centerY, angle, this.pathData);
       var pathDataCnt = this.pathData.length;
       this.lastPointX = this.pathData[pathDataCnt - 2];
       this.lastPointY = this.pathData[pathDataCnt - 1];
@@ -29076,14 +29076,20 @@
     }
   };
 
-  var RotateAround$5 = Phaser.Math.RotateAround;
   var Transform = {
     worldToLocal: function worldToLocal(point) {
       // Transform
       point.x -= this.x;
       point.y -= this.y;
+
       // Rotate
-      RotateAround$5(point, 0, 0, -this.rotation);
+      var c = Math.cos(-this.rotation);
+      var s = Math.sin(-this.rotation);
+      var tx = point.x;
+      var ty = point.y;
+      point.x = tx * c - ty * s;
+      point.y = tx * s + ty * c;
+
       // Scale
       point.x /= this.scaleX;
       point.y /= this.scaleY;
@@ -29093,8 +29099,15 @@
       // Scale
       point.x *= this.scaleX;
       point.y *= this.scaleY;
+
       // Rotate
-      RotateAround$5(point, 0, 0, this.rotation);
+      var c = Math.cos(this.rotation);
+      var s = Math.sin(this.rotation);
+      var tx = point.x;
+      var ty = point.y;
+      point.x = tx * c - ty * s;
+      point.y = tx * s + ty * c;
+
       // Transform
       point.x += this.x;
       point.y += this.y;
