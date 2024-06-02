@@ -9,7 +9,15 @@ class Arrow extends Base {
         super(scene, config);
         this.type = 'rexSpinnerArrow';
 
-        this.direction = GetValue(config, 'direction', 'down');
+        this.setDirection(GetValue(config, 'direction', 'down'));
+    }
+
+    setDirection(direction) {
+        if (typeof (direction) === 'string') {
+            direction = DIRMAP[direction];
+        }
+        this.direction = direction;
+        return this;
     }
 
     buildShapes() {
@@ -21,7 +29,7 @@ class Arrow extends Base {
     updateShapes() {
         var x0, y0, a, b, c, d;
         switch (this.direction) {
-            case 'down':
+            case 1:
                 x0 = this.centerX;
                 y0 = this.centerY - this.radius;
                 // xt = a*x + b*y
@@ -34,7 +42,7 @@ class Arrow extends Base {
                 d = Math.sin(radY);
                 break;
 
-            case 'up':
+            case 3:
                 x0 = this.centerX;
                 y0 = this.centerY + this.radius;
                 // xt = a*x + b*y
@@ -47,7 +55,7 @@ class Arrow extends Base {
                 d = Math.sin(radY);
                 break;
 
-            case 'left':
+            case 2:
                 x0 = this.centerX + this.radius;
                 y0 = this.centerY;
                 // xt = a*x + b*y
@@ -60,7 +68,7 @@ class Arrow extends Base {
                 d = Math.sin(radY);
                 break;
 
-            case 'right':
+            default:
                 x0 = this.centerX - this.radius;
                 y0 = this.centerY;
                 // xt = a*x + b*y
@@ -71,9 +79,6 @@ class Arrow extends Base {
                 var radY = DegToRad(135)
                 c = Math.cos(radY);
                 d = Math.sin(radY);
-                break;
-
-            default:
                 break;
         }
 
@@ -137,6 +142,13 @@ var Transform = function (gridX, gridY, gridWidth, gridHeight, x0, y0, a, b, c, 
     GlobPoint.x = a * x + b * y + x0;
     GlobPoint.y = c * x + d * y + y0;
     return GlobPoint;
+}
+
+const DIRMAP = {
+    right: 0,
+    down: 1,
+    left: 2,
+    up: 3
 }
 
 export default Arrow;

@@ -29,13 +29,14 @@ class Demo extends Phaser.Scene {
         var rings = this.rexSpinner.add.rings({ width: 80, height: 80 });
         var spinner = this.rexSpinner.add.spinner({ width: 80, height: 80, duration: 1500 });
         var hearts = this.rexSpinner.add.hearts({ width: 80, height: 80, duration: 1500 });
+        var arrow = this.rexSpinner.add.arrow({ width: 80, height: 80 });
 
         Phaser.Actions.GridAlign(
             [
                 audio, ball, bars, box, clock,
                 cube, dots, facebook, grid, ios,
                 orbit, oval, pie, puff, radio,
-                rings, spinner, hearts
+                rings, spinner, hearts, arrow
             ],
             {
                 width: 7,
