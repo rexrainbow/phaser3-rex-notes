@@ -1,4 +1,5 @@
 import Audio from './audio/Audio.js';
+import Arrow from './arrow/Arrow.js';
 import Ball from './ball/Ball.js';
 import Bars from './bars/Bars.js';
 import Box from './box/Box.js';
@@ -20,6 +21,7 @@ import Spinner from './spinner/Spinner.js';
 
 export {
     Audio,
+    Arrow,
     Ball,
     Bars,
     Box,

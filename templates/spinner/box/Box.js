@@ -4,7 +4,7 @@ import { Lines } from '../utils/Geoms.js';
 class Box extends Base {
     constructor(scene, config) {
         super(scene, config);
-        this.type = 'rexSpinnerCube';
+        this.type = 'rexSpinnerBox';
     }
 
     buildShapes() {

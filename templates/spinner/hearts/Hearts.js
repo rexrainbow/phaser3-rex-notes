@@ -1,5 +1,5 @@
 import Base from '../base/Base.js';
-import { Lines } from '../utils/Geoms.js'
+import { Lines } from '../utils/Geoms.js';
 import Yoyo from '../utils/Yoyo.js';
 
 

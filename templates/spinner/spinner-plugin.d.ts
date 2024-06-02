@@ -1,4 +1,5 @@
 import AudioFactory from './audio/Factory';
+import ArrowFactory from './arrow/Factory';
 import BallFactory from './ball/Factory';
 import BarsFactory from './bars/Factory';
 import BoxFactory from './box/Factory';
@@ -22,6 +23,7 @@ export default SpinnerPlugins;
 
 declare class Factories {
     audio: typeof AudioFactory;
+    arrow: typeof ArrowFactory;
     ball: typeof BallFactory;
     bars: typeof BarsFactory;
     box: typeof BoxFactory;
@@ -49,6 +51,7 @@ declare class SpinnerPlugins {
 }
 
 import AudioClass from './audio/Audio';
+import ArrowClass from './arrow/Arrow';
 import BallClass from './ball/Ball';
 import BarsClass from './bars/Bars';
 import BoxClass from './box/Box';
@@ -70,6 +73,7 @@ import SpinnerClass from './spinner/Spinner';
 
 declare namespace SpinnerPlugins {
     type Audio = AudioClass;
+    type Arrow = ArrowClass;
     type Ball = BallClass;
     type Bars = BarsClass
     type Box = BoxClass;

@@ -1,6 +1,7 @@
 import ObjectFactory from './ObjectFactory.js';
 
 import AudioFactory from './audio/Factory.js';
+import ArrowFactory from './arrow/Factory.js';
 import BallFactory from './ball/Factory.js';
 import BarsFactory from './bars/Factory.js';
 import BoxFactory from './box/Factory.js';
