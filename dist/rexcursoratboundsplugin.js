@@ -261,6 +261,9 @@
       var bounds = GetValue(config, 'bounds', undefined);
       if (bounds === undefined) {
         bounds = GetViewport(scene);
+        _this.autoUpdateViewportBounds = true;
+      } else {
+        _this.autoUpdateViewportBounds = false;
       }
       _this.setBounds(bounds);
       _this.pointerOutGameReleaseEnable = GetValue(config, 'pointerOutGameRelease', true);
@@ -275,6 +278,9 @@
         if (this.pointerOutGameReleaseEnable) {
           this.scene.input.on('gameout', this.clearAllKeysState, this);
         }
+        if (this.autoUpdateViewportBounds) {
+          this.scene.scale.on('resize', this.updateBoundsByViewport, this);
+        }
         this.scene.sys.events.once('shutdown', this.destroy, this);
       }
     }, {
@@ -287,6 +293,9 @@
         if (this.pointerOutGameReleaseEnable) {
           this.scene.input.off('gameout', this.clearAllKeysState, this);
         }
+        if (this.autoUpdateViewportBounds) {
+          this.scene.scale.off('resize', this.updateBoundsByViewport, this);
+        }
         this.scene.sys.events.off('shutdown', this.destroy, this);
         this.scene = undefined;
         _get(_getPrototypeOf(CursorAtBounds.prototype), "shutdown", this).call(this);
@@ -295,6 +304,11 @@
       key: "destroy",
       value: function destroy() {
         this.shutdown();
+      }
+    }, {
+      key: "updateBoundsByViewport",
+      value: function updateBoundsByViewport() {
+        GetViewport(this.scene, this.bounds);
       }
     }, {
       key: "enable",

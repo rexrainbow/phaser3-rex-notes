@@ -9831,7 +9831,10 @@
 <span class="p">});</span>
 </code></pre></div>
 <ul>
-<li><code>bounds</code> : A <a href="../geom-rectangle/">rectangle object</a>, or <code>undefined</code> (to use game window as rectangle object), for detecting the position of cursor.</li>
+<li><code>bounds</code> : A <a href="../geom-rectangle/">rectangle object</a> for detecting the position of cursor.<ul>
+<li><code>undefined</code> : Current viewport. Will update bounds when window resizing.</li>
+</ul>
+</li>
 <li><code>sensitiveDistance</code> : A sensitive distance in pixels.</li>
 <li><code>pointerOutGameRelease</code> : <ul>
 <li><code>true</code> : All cursor keys are released when pointer is out of game window. Default behavior.</li>
