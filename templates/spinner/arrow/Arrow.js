@@ -1,8 +1,11 @@
 import Base from '../base/Base.js';
 import { Lines } from '../utils/Geoms.js';
+import Yoyo from '../utils/Yoyo.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const DegToRad = Phaser.Math.DegToRad;
+const Linear = Phaser.Math.Linear;
+const ExpoIn = Phaser.Math.Easing.Expo.In;
 
 class Arrow extends Base {
     constructor(scene, config) {
@@ -82,39 +85,21 @@ class Arrow extends Base {
                 break;
         }
 
-        var gridSize = this.radius / 7.5;
-
-        var t = this.value;
-        var alphaThreshold = 1 / 3;
+        var gridSize = this.radius / 7;
 
         var shapes = this.getShapes();
+        for (var i = 0, cnt = shapes.length; i < cnt; i++) {
+            var shape = shapes[i];
 
-        // Arrow0
-        var arrow0 = shapes[0];
-        var alpha = (t > alphaThreshold) ? 1 : t / alphaThreshold;
-        arrow0.fillStyle(this.color, alpha);
-        ArrowPolygon(arrow0, 1, 3, gridSize, gridSize, x0, y0, a, b, c, d);
+            var t = (this.value + ((cnt - i) * 0.1)) % 1;
+            t = ExpoIn(Yoyo(t));
+            var alpha = Linear(0.25, 1, t);
 
-        // Arrow1
-        t -= alphaThreshold;
-        var arrow1 = shapes[1];
-        if (t > 0) {
-            var alpha = (t > alphaThreshold) ? 1 : t / alphaThreshold;
-            arrow1.fillStyle(this.color, alpha);
-            ArrowPolygon(arrow1, 4, 6, gridSize, gridSize, x0, y0, a, b, c, d);
-        } else {
-            arrow1.fillStyle()
-        }
+            shape.fillStyle(this.color, alpha);
 
-        // Arrow2
-        t -= alphaThreshold;
-        var arrow2 = shapes[2];
-        if (t > 0) {
-            var alpha = (t > alphaThreshold) ? 1 : t / alphaThreshold;
-            arrow2.fillStyle(this.color, alpha);
-            ArrowPolygon(arrow2, 7, 9, gridSize, gridSize, x0, y0, a, b, c, d);
-        } else {
-            arrow2.fillStyle()
+            var innerX = (i * 3) + 1;
+            var outerX = innerX + 2;
+            ArrowPolygon(shape, innerX, outerX, gridSize, gridSize, x0, y0, a, b, c, d);
         }
     }
 }

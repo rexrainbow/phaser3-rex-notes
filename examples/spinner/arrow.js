@@ -15,25 +15,25 @@ class Demo extends Phaser.Scene {
         var arrowDown = this.rexSpinner.add.arrow({
             width: 100, height: 100,
             color: 0x00FFFF,
-            duration: 2000,
+            duration: 1000,
             direction: 'down'
         })
         var arrowUp = this.rexSpinner.add.arrow({
             width: 100, height: 100,
             color: 0x00FFFF,
-            duration: 2000,
+            duration: 1000,
             direction: 'up'
         })
         var arrowLeft = this.rexSpinner.add.arrow({
             width: 100, height: 100,
             color: 0x00FFFF,
-            duration: 2000,
+            duration: 1000,
             direction: 'left'
         })
         var arrowRight = this.rexSpinner.add.arrow({
             width: 100, height: 100,
             color: 0x00FFFF,
-            duration: 2000,
+            duration: 1000,
             direction: 'right'
         })
 

@@ -33,10 +33,11 @@ class Radio extends Base {
 
             var t = (this.value + ((cnt - i) * 0.1)) % 1;
             t = ExpoIn(Yoyo(t));
+            var alpha = Linear(0.25, 1, t);
 
             switch (shape.name) {
                 case 'center':
-                    shape.fillStyle(this.color, Linear(0.25, 1, t))
+                    shape.fillStyle(this.color, alpha)
 
                     if (isSizeChanged) {
                         shape
@@ -45,7 +46,7 @@ class Radio extends Base {
                     }
                     break;
                 case 'arc0':
-                    shape.fillStyle(this.color, Linear(0.25, 1, t));
+                    shape.fillStyle(this.color, alpha);
 
                     if (isSizeChanged) {
                         var radius0 = centerRadius * 2,
@@ -60,7 +61,7 @@ class Radio extends Base {
                     }
                     break;
                 case 'arc1':
-                    shape.fillStyle(this.color, Linear(0.25, 1, t));
+                    shape.fillStyle(this.color, alpha);
 
                     if (isSizeChanged) {
                         var radius0 = centerRadius * 4,

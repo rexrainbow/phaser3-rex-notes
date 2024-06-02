@@ -8,6 +8,7 @@ Loading animations on shape.
 ## Live demos
 
 - [Spinners](https://codepen.io/rexrainbow/pen/vYgNRMp)
+    - [Arrow](https://codepen.io/rexrainbow/pen/gOJmKZy)
 - [Custom spinner](https://codepen.io/rexrainbow/pen/YzNqJEd)
 - [Loading animation](https://codepen.io/rexrainbow/pen/OJdMzbL)
 
@@ -48,6 +49,7 @@ Loading animations on shape.
   var rings = scene.rexSpinner.add.rings(config);
   var spinner = scene.rexSpinner.add.spinner(config);
   var hearts = scene.rexSpinner.add.hearts(config);
+  var arrow = scene.rexSpinner.add.arrow(config);
   ```
 
 #### Import plugin
@@ -95,6 +97,7 @@ Loading animations on shape.
   var rings = scene.rexSpinner.add.rings(config);
   var spinner = scene.rexSpinner.add.spinner(config);
   var hearts = scene.rexSpinner.add.hearts(config);
+  var arrow = scene.rexSpinner.add.arrow(config);
   ```
 
 #### Import class
@@ -107,7 +110,7 @@ Loading animations on shape.
   ```javascript
   import { 
     Audio, Ball, Bars, Box, Clock, Cube, Custom, Dots, Facebook, Grid, 
-    Ios, Orbit, Oval, Puff, Radio, Rings, Spinner, Hearts
+    Ios, Orbit, Oval, Puff, Radio, Rings, Spinner, Hearts, Arrow
   } from "phaser3-rex-plugins/templates/spinner/spinner-components.js";
   ```
 - Add spinner object
@@ -118,29 +121,42 @@ Loading animations on shape.
 
 ### Add spinner object
 
-```javascript
-var spinner = scene.rexSpinner.add.audio({
-  // x: 0,
-  // y: 0,
-  // width: 64,
-  // height: 64,
-  // color: 0xffffff,
+- General
+    ```javascript
+    var spinner = scene.rexSpinner.add.audio({
+      // x: 0,
+      // y: 0,
+      // width: 64,
+      // height: 64,
+      // color: 0xffffff,
+    
+      // duration: 1000,
+      // start: true,
+      // delay: 0,
+      // repeatDelay: 0,
+    });
+    ```
+    - `x`, `y` : Position of this object.
+    - `width`, `height` : Size of this object.
+    - `color` : Fill color, or stroke color. Default value is `0xffffff`
+    - `duration` : Duration of animation.
+    - `start` : Start animation when object created.
+       - `false` : Don't play animation at beginning.
+    - `delay` : Delay time in ms before running.
+    - `repeatDelay` : Delay time between 2 periods.
+- Arrow
+    ```javascript
+    var spinner = scene.rexSpinner.add.audio({
+      // ...
 
-  // duration: 1000,
-  // start: true,
-  // delay: 0,
-  // repeatDelay: 0,
-});
-```
-
-- `x`, `y` : Position of this object.
-- `width`, `height` : Size of this object.
-- `color` : Fill color, or stroke color. Default value is `0xffffff`
-- `duration` : Duration of animation.
-- `start` : Start animation when object created.
-   - `false` : Don't play animation at beginning.
-- `delay` : Delay time in ms before running.
-- `repeatDelay` : Delay time between 2 periods.
+      // direction:'down'
+    });
+    ```
+    - `direction` :
+        - `0`, `'right'` : Arrow from left to right.
+        - `1`, `'down'` : Arrow from up to down. Default behavior.
+        - `2`, `'left'` : Arrow from right to left.
+        - `3`, `'up'` : Arrow from down to up.
 
 ### Play animation
 
