@@ -7605,9 +7605,9 @@
     return gameObject;
   };
 
-  var GetFirstRenderCamera = function GetFirstRenderCamera(scene, gameObject) {
+  var GetFirstRenderCamera = function GetFirstRenderCamera(gameObject) {
     var cameraFilter = GetRootGameObject(gameObject).cameraFilter;
-    var cameras = scene.sys.cameras.cameras;
+    var cameras = gameObject.scene.sys.cameras.cameras;
     var camera, isCameraIgnore;
     for (var i = 0, cnt = cameras.length; i < cnt; i++) {
       camera = cameras[i];
@@ -7650,7 +7650,7 @@
       value: function resize() {
         var scene = this.scene;
         var gameObject = this.parent;
-        var camera = GetFirstRenderCamera(scene, gameObject);
+        var camera = GetFirstRenderCamera(gameObject);
         if (!camera) {
           return;
         }

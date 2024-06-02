@@ -2738,7 +2738,9 @@
     childrenMap.target = target;
     if (target) {
       this.setOrigin(target.originX, target.originY).setPosition(target.x, target.y).setAngle(target.angle).setSize(target.displayWidth, target.displayHeight);
-      this.pin(target);
+      this.pin(target, {
+        syncDisplayList: false
+      });
       this.layout().startMonitorTarget();
     }
     return this;
@@ -2909,6 +2911,12 @@
   var AddDragMoveBehavior = function AddDragMoveBehavior(parent, dragPoint) {
     dragPoint.setInteractive({
       draggable: true
+    }).on('dragstart', function () {
+      parent.emit('move.start');
+      parent.emit('control.start');
+    }).on('dragend', function () {
+      parent.emit('move.stop');
+      parent.emit('control.stop');
     }).on('drag', function (pointer, dragX, dragY) {
       parent.x += dragX - dragPoint.x;
       parent.y += dragY - dragPoint.y;
@@ -2920,6 +2928,12 @@
     var canDragHeight = dragAxis.indexOf('y') !== -1;
     dragPoint.setInteractive({
       draggable: true
+    }).on('dragstart', function () {
+      parent.emit('resize.start');
+      parent.emit('control.start');
+    }).on('dragend', function () {
+      parent.emit('resize.stop');
+      parent.emit('control.stop');
     }).on('drag', function (pointer, dragX, dragY) {
       var fixedX = fixedPoint.x,
         fixedY = fixedPoint.y;
@@ -2945,6 +2959,12 @@
   var AddDragRotationBehavior = function AddDragRotationBehavior(parent, dragPoint, originPoint) {
     dragPoint.setInteractive({
       draggable: true
+    }).on('dragstart', function () {
+      parent.emit('rotate.start');
+      parent.emit('control.start');
+    }).on('dragend', function () {
+      parent.emit('rotate.stop');
+      parent.emit('control.stop');
     }).on('drag', function (pointer, dragX, dragY) {
       parent.rotation = AngleBetween$2(originPoint.x, originPoint.y, dragX, dragY);
     });
@@ -3668,9 +3688,9 @@
     return gameObject;
   };
 
-  var GetFirstRenderCamera = function GetFirstRenderCamera(scene, gameObject) {
+  var GetFirstRenderCamera = function GetFirstRenderCamera(gameObject) {
     var cameraFilter = GetRootGameObject(gameObject).cameraFilter;
-    var cameras = scene.sys.cameras.cameras;
+    var cameras = gameObject.scene.sys.cameras.cameras;
     var camera, isCameraIgnore;
     for (var i = 0, cnt = cameras.length; i < cnt; i++) {
       camera = cameras[i];
@@ -3713,7 +3733,7 @@
       value: function resize() {
         var scene = this.scene;
         var gameObject = this.parent;
-        var camera = GetFirstRenderCamera(scene, gameObject);
+        var camera = GetFirstRenderCamera(gameObject);
         if (!camera) {
           return;
         }
@@ -42233,40 +42253,64 @@
   });
   SetValue(window, 'RexPlugins.GameObjectShell.PropertiesPanel', PropertiesPanel);
 
+  // Layer name
+  var BGLayer = 'bgLayer';
+  var GOLayer = 'gameObjectLayer';
+  var UILayer = 'uiLayer';
+  var BGBottomLayer = "".concat(BGLayer, "Bottom");
+  var BGTopLayer = "".concat(BGLayer, "Top");
+  var GOBottomLayer = "".concat(GOLayer, "Bottom");
+  var GOTopLayer = "".concat(GOLayer, "Top");
+  var UIBottomLayer = "".concat(UILayer, "Bottom");
+  var UITopLayer = "".concat(UILayer, "Top");
+  var BGCamera = 'bg';
+  var GOCamera = 'go';
+  var UICamera = 'ui';
+  var LayerConfigMultipleCamras = [{
+    name: BGBottomLayer,
+    cameraName: BGCamera
+  }, {
+    name: BGLayer,
+    cameraName: BGCamera
+  }, {
+    name: BGTopLayer,
+    cameraName: BGCamera
+  }, {
+    name: GOBottomLayer,
+    cameraName: GOCamera
+  }, {
+    name: GOLayer,
+    cameraName: GOCamera
+  }, {
+    name: GOTopLayer,
+    cameraName: GOCamera
+  }, {
+    name: UIBottomLayer,
+    cameraName: UICamera
+  }, {
+    name: UILayer,
+    cameraName: UICamera
+  }, {
+    name: UITopLayer,
+    cameraName: UICamera
+  }];
+
   var CreateLayerManager = function CreateLayerManager(config) {
-    var layers = config.layers;
-    if (!Array.isArray(layers)) {
-      layers = [];
-    }
-    this.backgroundLayerName = layers[0] || 'background';
-    this.monitorLayerName = layers[1] || 'monitor';
-    this.uiLayerName = layers[2] || 'ui';
-    var layerManager = config.layerManager;
-    this.isPrivateLayerManager = !layerManager;
-    if (this.isPrivateLayerManager) {
-      layerManager = new LayerManager(this.scene, {
-        layers: [this.backgroundLayerName, this.monitorLayerName, this.uiLayerName]
-      });
-    }
-    this.layerManager = layerManager;
+    this.layerManager = new LayerManager(this.scene, {
+      layers: LayerConfigMultipleCamras,
+      rootLayer: config.rootLayer
+    });
     this.once('destroy', function () {
-      if (this.isPrivateLayerManager) {
-        this.layerManager.destroy(fromScene);
-      } else {
-        var layNames = [this.backgroundLayerName, this.monitorLayerName, this.uiLayerName];
-        for (var i = 0, cnt = layNames.length; i < cnt; i++) {
-          this.layerManager.clearLayer(layNames[i], !fromScene);
-        }
-      }
+      this.layerManager.destroy(fromScene);
       this.layerManager = undefined;
     }, this);
-    return layerManager;
+    return this.layerManager;
   };
 
   var CreateBackground = function CreateBackground(config) {
     var background = new FullWindowRectangle(this.scene);
     this.scene.add.existing(background);
-    this.addToBackgroundLayer(background);
+    this.addToBackgroundLayer(background, -1);
     var shell = this;
     var onUnSelectGameObject = function onUnSelectGameObject() {
       shell.onUnSelectGameObjectCallback(shell);
@@ -42294,7 +42338,6 @@
     propertiesPanel.setDirty(false);
     mainPanel.left = 0;
     mainPanel.top = 0;
-    mainPanel.setScrollFactor(0);
     this.addToUILayer(mainPanel);
     this.once('destroy', function () {
       mainPanel.destroy();
@@ -42318,7 +42361,7 @@
   var CreateControlPoints = function CreateControlPoints(config) {
     var controlPoints = new ControlPoints(this.scene, GetValue$2(config, 'controlPoints'));
     this.scene.add.existing(controlPoints);
-    this.addToUILayer(controlPoints);
+    this.addToMonitorLayer(controlPoints, 'top');
     this.controlPoints = controlPoints;
     this.once('destroy', function () {
       this.controlPoints.destroy();
@@ -42327,14 +42370,13 @@
     return controlPoints;
   };
 
-  var PanScrollPinchZoom = function PanScrollPinchZoom(panScrollEnable, pinchZoomEnable) {
+  var PanScrollPinchZoom = function PanScrollPinchZoom(camera, panScrollEnable, pinchZoomEnable) {
     if (!panScrollEnable && !pinchZoomEnable) {
       return;
     }
     var scene = this.scene;
     var gameObject = this.background ? this.background : scene;
     var pinch = new Pinch(gameObject);
-    var camera = scene.cameras.main;
     if (panScrollEnable) {
       pinch.on('drag1', function (pinch) {
         var drag1Vector = pinch.drag1Vector;
@@ -42355,9 +42397,8 @@
     });
   };
 
-  var BoundsScroll = function BoundsScroll() {
+  var BoundsScroll = function BoundsScroll(camera) {
     var scene = this.scene;
-    var camera = scene.cameras.main;
     var cursorAtBounds = new CursorAtBounds(scene);
     var cursorKeys = cursorAtBounds.createCursorKeys();
     var cameraController = new Phaser.Cameras.Controls.SmoothedKeyControl({
@@ -42387,9 +42428,8 @@
     }, this);
   };
 
-  var MouseWheelZoom = function MouseWheelZoom() {
+  var MouseWheelZoom = function MouseWheelZoom(camera) {
     var scene = this.scene;
-    var camera = scene.cameras.main;
     var onWheeling = function onWheeling(pointer, currentlyOver, dx, dy, dz, event) {
       camera.zoom += (dy < 0 ? 1 : -1) * 0.05;
     };
@@ -42406,33 +42446,59 @@
     var pinchZoomEnable = GetValue$1(cameraControllerConfig, 'pinch-zoom', true);
     var boundsScrollEnable = GetValue$1(cameraControllerConfig, 'bounds-scroll', true);
     var mouseWheelZoomEnable = GetValue$1(cameraControllerConfig, 'mouse-wheel-zoom', true);
+    var camera = this.scene.cameras.getCamera(GOCamera);
     if (panScrollEnable || pinchZoomEnable) {
-      PanScrollPinchZoom.call(this, panScrollEnable, pinchZoomEnable);
+      PanScrollPinchZoom.call(this, camera, panScrollEnable, pinchZoomEnable);
     }
     if (boundsScrollEnable) {
-      BoundsScroll.call(this);
+      BoundsScroll.call(this, camera);
     }
     if (mouseWheelZoomEnable) {
-      MouseWheelZoom.call(this);
+      MouseWheelZoom.call(this, camera);
     }
   };
 
+  var GetLayerName = function GetLayerName(depth, defaultLayerName, topLayerName, bottomLayerName) {
+    switch (depth) {
+      case 1:
+      case 'top':
+        return topLayerName;
+      case -1:
+      case 'bottom':
+        return bottomLayerName;
+      default:
+        return defaultLayerName;
+    }
+  };
   var LayerManagerMethods = {
-    addToBackgroundLayer: function addToBackgroundLayer(gameObject) {
-      this.layerManager.addToLayer(this.backgroundLayerName, gameObject);
+    addToUILayer: function addToUILayer(gameObject, depth) {
+      var layerName = GetLayerName(depth, UILayer, UITopLayer, UIBottomLayer);
+      this.layerManager.addToLayer(layerName, gameObject);
       return this;
     },
-    addToMonitorLayer: function addToMonitorLayer(gameObjects) {
+    addToMonitorLayer: function addToMonitorLayer(gameObjects, depth) {
       var _this = this;
       if (!Array.isArray(gameObjects)) {
         gameObjects = [gameObjects];
       }
+      var layerName = GetLayerName(depth, GOLayer, GOTopLayer, GOBottomLayer);
+
+      // Not a monitor-able game object
+      if (layerName !== GOLayer) {
+        for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+          var gameObject = gameObjects[i];
+          this.layerManager.addToLayer(layerName, gameObject);
+        }
+        return this;
+      }
+
+      // Monitor-able game object
+      var shell = this;
       var _loop = function _loop() {
           var gameObject = gameObjects[i];
-          _this.layerManager.addToLayer(_this.monitorLayerName, gameObject);
+          _this.layerManager.addToLayer(layerName, gameObject);
           gameObject.setInteractive();
           if (!gameObject.removeFromMonitorLayerCallback) {
-            shell = _this;
             onSelectGameObject = function onSelectGameObject() {
               shell.onSelectGameObjectCallback(shell, gameObject);
             };
@@ -42443,39 +42509,45 @@
             };
           }
         },
-        shell,
         onSelectGameObject;
       for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
         _loop();
       }
       return this;
     },
-    removeFromMonitorLayer: function removeFromMonitorLayer(gameObject, addToScene) {
-      this.layerManager.removeFromLayer(this.monitorLayerName, gameObject, addToScene);
+    addToBackgroundLayer: function addToBackgroundLayer(gameObject, depth) {
+      var layerName = GetLayerName(depth, BGLayer, BGTopLayer, BGBottomLayer);
+      this.layerManager.addToLayer(layerName, gameObject);
+      return this;
+    },
+    removeFromMonitorLayer: function removeFromMonitorLayer(gameObject, addToScene, depth) {
+      var layerName = GetLayerName(depth, GOLayer, GOTopLayer, GOBottomLayer);
+      this.layerManager.removeFromLayer(layerName, gameObject, addToScene);
       if (gameObject.removeFromMonitorLayerCallback) {
         gameObject.removeFromMonitorLayerCallback();
       }
       return this;
     },
-    clearMonitorLayer: function clearMonitorLayer() {
-      this.layerManager.clearLayer(this.monitorLayerName);
+    clearMonitorLayer: function clearMonitorLayer(depth) {
+      var layerName = GetLayerName(depth, GOLayer, GOTopLayer, GOBottomLayer);
+      this.layerManager.clearLayer(layerName);
       return this;
     },
-    addToUILayer: function addToUILayer(gameObject) {
-      this.layerManager.addToLayer(this.uiLayerName, gameObject);
-      return this;
+    getBackgroundLayer: function getBackgroundLayer(depth) {
+      var layerName = GetLayerName(depth, BGLayer, BGTopLayer, BGBottomLayer);
+      return this.layerManager.getLayer(layerName);
     },
-    getBackgroundLayer: function getBackgroundLayer() {
-      return this.layerManager.getLayer(this.backgroundLayerName);
+    getMonitorLayer: function getMonitorLayer(depth) {
+      var layerName = GetLayerName(depth, GOLayer, GOTopLayer, GOBottomLayer);
+      return this.layerManager.getLayer(layerName);
     },
-    getMonitorLayer: function getMonitorLayer() {
-      return this.layerManager.getLayer(this.monitorLayerName);
+    getUILayer: function getUILayer(depth) {
+      var layerName = GetLayerName(depth, UILayer, UITopLayer, UIBottomLayer);
+      return this.layerManager.getLayer(layerName);
     },
-    getUILayer: function getUILayer() {
-      return this.layerManager.getLayer(this.uiLayerName);
-    },
-    getMonitorGameObjects: function getMonitorGameObjects() {
-      return this.layerManager.getLayer(this.monitorLayerName).getAll();
+    getMonitorGameObjects: function getMonitorGameObjects(depth) {
+      var layerName = GetLayerName(depth, GOLayer, GOTopLayer, GOBottomLayer);
+      return this.layerManager.getLayer(layerName).getAll();
     }
   };
 
