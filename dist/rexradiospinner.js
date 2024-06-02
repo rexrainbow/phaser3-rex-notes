@@ -2660,15 +2660,16 @@
           var shape = shapes[i];
           var t = (this.value + (cnt - i) * 0.1) % 1;
           t = ExpoIn(Yoyo(t));
+          var alpha = Linear(0.25, 1, t);
           switch (shape.name) {
             case 'center':
-              shape.fillStyle(this.color, Linear(0.25, 1, t));
+              shape.fillStyle(this.color, alpha);
               if (isSizeChanged) {
                 shape.setRadius(centerRadius).setCenterPosition(x, y);
               }
               break;
             case 'arc0':
-              shape.fillStyle(this.color, Linear(0.25, 1, t));
+              shape.fillStyle(this.color, alpha);
               if (isSizeChanged) {
                 var radius0 = centerRadius * 2,
                   radius1 = centerRadius * 3;
@@ -2676,7 +2677,7 @@
               }
               break;
             case 'arc1':
-              shape.fillStyle(this.color, Linear(0.25, 1, t));
+              shape.fillStyle(this.color, alpha);
               if (isSizeChanged) {
                 var radius0 = centerRadius * 4,
                   radius1 = centerRadius * 5;

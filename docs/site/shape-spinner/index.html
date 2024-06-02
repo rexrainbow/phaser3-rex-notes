@@ -9948,7 +9948,10 @@
 </ul>
 <h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="https://codepen.io/rexrainbow/pen/vYgNRMp">Spinners</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/vYgNRMp">Spinners</a><ul>
+<li><a href="https://codepen.io/rexrainbow/pen/gOJmKZy">Arrow</a></li>
+</ul>
+</li>
 <li><a href="https://codepen.io/rexrainbow/pen/YzNqJEd">Custom spinner</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/OJdMzbL">Loading animation</a></li>
 </ul>
@@ -9984,6 +9987,7 @@
 <span class="kd">var</span><span class="w"> </span><span class="nx">rings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rings</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">spinner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">spinner</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">hearts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">hearts</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">arrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">arrow</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
@@ -10028,6 +10032,7 @@
 <span class="kd">var</span><span class="w"> </span><span class="nx">rings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rings</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">spinner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">spinner</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">hearts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">hearts</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">arrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">arrow</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
@@ -10038,7 +10043,7 @@
 <li>Import class
   <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
 <span class="w">  </span><span class="nx">Audio</span><span class="p">,</span><span class="w"> </span><span class="nx">Ball</span><span class="p">,</span><span class="w"> </span><span class="nx">Bars</span><span class="p">,</span><span class="w"> </span><span class="nx">Box</span><span class="p">,</span><span class="w"> </span><span class="nx">Clock</span><span class="p">,</span><span class="w"> </span><span class="nx">Cube</span><span class="p">,</span><span class="w"> </span><span class="nx">Custom</span><span class="p">,</span><span class="w"> </span><span class="nx">Dots</span><span class="p">,</span><span class="w"> </span><span class="nx">Facebook</span><span class="p">,</span><span class="w"> </span><span class="nx">Grid</span><span class="p">,</span><span class="w"> </span>
-<span class="w">  </span><span class="nx">Ios</span><span class="p">,</span><span class="w"> </span><span class="nx">Orbit</span><span class="p">,</span><span class="w"> </span><span class="nx">Oval</span><span class="p">,</span><span class="w"> </span><span class="nx">Puff</span><span class="p">,</span><span class="w"> </span><span class="nx">Radio</span><span class="p">,</span><span class="w"> </span><span class="nx">Rings</span><span class="p">,</span><span class="w"> </span><span class="nx">Spinner</span><span class="p">,</span><span class="w"> </span><span class="nx">Hearts</span>
+<span class="w">  </span><span class="nx">Ios</span><span class="p">,</span><span class="w"> </span><span class="nx">Orbit</span><span class="p">,</span><span class="w"> </span><span class="nx">Oval</span><span class="p">,</span><span class="w"> </span><span class="nx">Puff</span><span class="p">,</span><span class="w"> </span><span class="nx">Radio</span><span class="p">,</span><span class="w"> </span><span class="nx">Rings</span><span class="p">,</span><span class="w"> </span><span class="nx">Spinner</span><span class="p">,</span><span class="w"> </span><span class="nx">Hearts</span><span class="p">,</span><span class="w"> </span><span class="nx">Arrow</span>
 <span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;phaser3-rex-plugins/templates/spinner/spinner-components.js&quot;</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Add spinner object
@@ -10047,7 +10052,9 @@
 </code></pre></div></li>
 </ul>
 <h3 id="add-spinner-object">Add spinner object<a class="headerlink" href="#add-spinner-object" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">spinner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">audio</span><span class="p">({</span>
+<ul>
+<li>General
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">spinner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">audio</span><span class="p">({</span>
 <span class="w">  </span><span class="c1">// x: 0,</span>
 <span class="w">  </span><span class="c1">// y: 0,</span>
 <span class="w">  </span><span class="c1">// width: 64,</span>
@@ -10059,8 +10066,7 @@
 <span class="w">  </span><span class="c1">// delay: 0,</span>
 <span class="w">  </span><span class="c1">// repeatDelay: 0,</span>
 <span class="p">});</span>
-</code></pre></div>
-<ul>
+</code></pre></div><ul>
 <li><code>x</code>, <code>y</code> : Position of this object.</li>
 <li><code>width</code>, <code>height</code> : Size of this object.</li>
 <li><code>color</code> : Fill color, or stroke color. Default value is <code>0xffffff</code></li>
@@ -10069,6 +10075,24 @@
 <li><code>false</code> : Don't play animation at beginning.</li>
 <li><code>delay</code> : Delay time in ms before running.</li>
 <li><code>repeatDelay</code> : Delay time between 2 periods.</li>
+</ul>
+</li>
+<li>Arrow
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">spinner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">audio</span><span class="p">({</span>
+<span class="w">  </span><span class="c1">// ...</span>
+
+<span class="w">  </span><span class="c1">// direction:&#39;down&#39;</span>
+<span class="p">});</span>
+</code></pre></div><ul>
+<li><code>direction</code> :<ul>
+<li><code>0</code>, <code>'right'</code> : Arrow from left to right.</li>
+<li><code>1</code>, <code>'down'</code> : Arrow from up to down. Default behavior.</li>
+<li><code>2</code>, <code>'left'</code> : Arrow from right to left.</li>
+<li><code>3</code>, <code>'up'</code> : Arrow from down to up.</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <h3 id="play-animation">Play animation<a class="headerlink" href="#play-animation" title="Permanent link">&para;</a></h3>
 <h4 id="start">Start<a class="headerlink" href="#start" title="Permanent link">&para;</a></h4>

@@ -1211,7 +1211,7 @@
   }(TimerTickTask);
 
   var GetValue$6 = Phaser.Utils.Objects.GetValue;
-  var Linear$b = Phaser.Math.Linear;
+  var Linear$c = Phaser.Math.Linear;
   var EaseValueTask = /*#__PURE__*/function (_EaseValueTaskBase) {
     _inherits(EaseValueTask, _EaseValueTaskBase);
     function EaseValueTask(gameObject, config) {
@@ -1251,7 +1251,7 @@
       value: function updateGameObject(target, timer) {
         var t = timer.t;
         t = this.easeFn(t);
-        target[this.propertyKey] = Linear$b(this.fromValue, this.toValue, t);
+        target[this.propertyKey] = Linear$c(this.fromValue, this.toValue, t);
       }
     }]);
     return EaseValueTask;
@@ -2418,7 +2418,7 @@
 
   var DistanceBetween = Phaser.Math.Distance.Between;
   var Wrap = Phaser.Math.Wrap;
-  var Linear$a = Phaser.Math.Linear;
+  var Linear$b = Phaser.Math.Linear;
   var AppendFromPathSegment = function AppendFromPathSegment(srcPathData, accumulationLengths, startT, endT, destPathData) {
     if (endT === undefined) {
       endT = startT;
@@ -2478,7 +2478,7 @@
   var GetInterpolation = function GetInterpolation(pathData, i0, i1, t) {
     var p0 = pathData[i0],
       p1 = pathData[i1];
-    return Linear$a(p0, p1, t);
+    return Linear$b(p0, p1, t);
   };
   var WrapT = function WrapT(t) {
     if (t === 0) {
@@ -3374,7 +3374,7 @@
     return Triangle;
   }(BaseGeom);
 
-  var Linear$9 = Phaser.Math.Linear;
+  var Linear$a = Phaser.Math.Linear;
   var Audio = /*#__PURE__*/function (_Base) {
     _inherits(Audio, _Base);
     function Audio(scene, config) {
@@ -3419,7 +3419,7 @@
           var line = shapes[i];
           var from = line.getData('from'),
             to = line.getData('to'),
-            current = Linear$9(from, to, this.value);
+            current = Linear$a(from, to, this.value);
           var lineHeight = current * maxLineHeight;
           var x = leftBound + cellWidth * (i + 0.5);
           line.lineStyle(lineWidth, this.color, 1).setP0(x, bottomBound).setP1(x, bottomBound - lineHeight);
@@ -3497,8 +3497,22 @@
   });
   SetValue(window, 'RexPlugins.Spinner.Audio', Audio);
 
+  var Yoyo = function Yoyo(t, threshold) {
+    if (threshold === undefined) {
+      threshold = 0.5;
+    }
+    if (t <= threshold) {
+      t = t / threshold;
+    } else {
+      t = 1 - (t - threshold) / (1 - threshold);
+    }
+    return t;
+  };
+
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
   var DegToRad$1 = Phaser.Math.DegToRad;
+  var Linear$9 = Phaser.Math.Linear;
+  var ExpoIn$4 = Phaser.Math.Easing.Expo.In;
   var Arrow = /*#__PURE__*/function (_Base) {
     _inherits(Arrow, _Base);
     function Arrow(scene, config) {
@@ -3506,10 +3520,19 @@
       _classCallCheck(this, Arrow);
       _this = _callSuper(this, Arrow, [scene, config]);
       _this.type = 'rexSpinnerArrow';
-      _this.direction = GetValue$2(config, 'direction', 'down');
+      _this.setDirection(GetValue$2(config, 'direction', 'down'));
       return _this;
     }
     _createClass(Arrow, [{
+      key: "setDirection",
+      value: function setDirection(direction) {
+        if (typeof direction === 'string') {
+          direction = DIRMAP[direction];
+        }
+        this.direction = direction;
+        return this;
+      }
+    }, {
       key: "buildShapes",
       value: function buildShapes() {
         for (var i = 0; i < 3; i++) {
@@ -3521,7 +3544,7 @@
       value: function updateShapes() {
         var x0, y0, a, b, c, d;
         switch (this.direction) {
-          case 'down':
+          case 1:
             x0 = this.centerX;
             y0 = this.centerY - this.radius;
             // xt = a*x + b*y
@@ -3533,7 +3556,7 @@
             c = Math.cos(radY);
             d = Math.sin(radY);
             break;
-          case 'up':
+          case 3:
             x0 = this.centerX;
             y0 = this.centerY + this.radius;
             // xt = a*x + b*y
@@ -3545,7 +3568,7 @@
             c = Math.cos(radY);
             d = Math.sin(radY);
             break;
-          case 'left':
+          case 2:
             x0 = this.centerX + this.radius;
             y0 = this.centerY;
             // xt = a*x + b*y
@@ -3557,7 +3580,7 @@
             c = Math.cos(radY);
             d = Math.sin(radY);
             break;
-          case 'right':
+          default:
             x0 = this.centerX - this.radius;
             y0 = this.centerY;
             // xt = a*x + b*y
@@ -3570,37 +3593,17 @@
             d = Math.sin(radY);
             break;
         }
-        var gridSize = this.radius / 7.5;
-        var t = this.value;
-        var alphaThreshold = 1 / 3;
+        var gridSize = this.radius / 7;
         var shapes = this.getShapes();
-
-        // Arrow0
-        var arrow0 = shapes[0];
-        var alpha = t > alphaThreshold ? 1 : t / alphaThreshold;
-        arrow0.fillStyle(this.color, alpha);
-        ArrowPolygon(arrow0, 1, 3, gridSize, gridSize, x0, y0, a, b, c, d);
-
-        // Arrow1
-        t -= alphaThreshold;
-        var arrow1 = shapes[1];
-        if (t > 0) {
-          var alpha = t > alphaThreshold ? 1 : t / alphaThreshold;
-          arrow1.fillStyle(this.color, alpha);
-          ArrowPolygon(arrow1, 4, 6, gridSize, gridSize, x0, y0, a, b, c, d);
-        } else {
-          arrow1.fillStyle();
-        }
-
-        // Arrow2
-        t -= alphaThreshold;
-        var arrow2 = shapes[2];
-        if (t > 0) {
-          var alpha = t > alphaThreshold ? 1 : t / alphaThreshold;
-          arrow2.fillStyle(this.color, alpha);
-          ArrowPolygon(arrow2, 7, 9, gridSize, gridSize, x0, y0, a, b, c, d);
-        } else {
-          arrow2.fillStyle();
+        for (var i = 0, cnt = shapes.length; i < cnt; i++) {
+          var shape = shapes[i];
+          var t = (this.value + (cnt - i) * 0.1) % 1;
+          t = ExpoIn$4(Yoyo(t));
+          var alpha = Linear$9(0.25, 1, t);
+          shape.fillStyle(this.color, alpha);
+          var innerX = i * 3 + 1;
+          var outerX = innerX + 2;
+          ArrowPolygon(shape, innerX, outerX, gridSize, gridSize, x0, y0, a, b, c, d);
         }
       }
     }]);
@@ -3629,6 +3632,12 @@
     GlobPoint.y = c * x + d * y + y0;
     return GlobPoint;
   };
+  var DIRMAP = {
+    right: 0,
+    down: 1,
+    left: 2,
+    up: 3
+  };
 
   ObjectFactory.register('arrow', function (config) {
     var gameObject = new Arrow(this.scene, config);
@@ -3636,18 +3645,6 @@
     return gameObject;
   });
   SetValue(window, 'RexPlugins.Spinner.Arrow', Arrow);
-
-  var Yoyo = function Yoyo(t, threshold) {
-    if (threshold === undefined) {
-      threshold = 0.5;
-    }
-    if (t <= threshold) {
-      t = t / threshold;
-    } else {
-      t = 1 - (t - threshold) / (1 - threshold);
-    }
-    return t;
-  };
 
   var Linear$8 = Phaser.Math.Linear;
   var Ball = /*#__PURE__*/function (_Base) {
@@ -4483,15 +4480,16 @@
           var shape = shapes[i];
           var t = (this.value + (cnt - i) * 0.1) % 1;
           t = ExpoIn(Yoyo(t));
+          var alpha = Linear(0.25, 1, t);
           switch (shape.name) {
             case 'center':
-              shape.fillStyle(this.color, Linear(0.25, 1, t));
+              shape.fillStyle(this.color, alpha);
               if (isSizeChanged) {
                 shape.setRadius(centerRadius).setCenterPosition(x, y);
               }
               break;
             case 'arc0':
-              shape.fillStyle(this.color, Linear(0.25, 1, t));
+              shape.fillStyle(this.color, alpha);
               if (isSizeChanged) {
                 var radius0 = centerRadius * 2,
                   radius1 = centerRadius * 3;
@@ -4499,7 +4497,7 @@
               }
               break;
             case 'arc1':
-              shape.fillStyle(this.color, Linear(0.25, 1, t));
+              shape.fillStyle(this.color, alpha);
               if (isSizeChanged) {
                 var radius0 = centerRadius * 4,
                   radius1 = centerRadius * 5;
