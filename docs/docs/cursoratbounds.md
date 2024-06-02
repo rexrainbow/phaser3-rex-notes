@@ -83,7 +83,8 @@ var cursorAtBound = scene.plugins.get('rexCursorAtBounds').add(scene, {
 });
 ```
 
-- `bounds` : A [rectangle object](geom-rectangle.md), or `undefined` (to use game window as rectangle object), for detecting the position of cursor.
+- `bounds` : A [rectangle object](geom-rectangle.md) for detecting the position of cursor.
+    - `undefined` : Current viewport. Will update bounds when window resizing.
 - `sensitiveDistance` : A sensitive distance in pixels.
 - `pointerOutGameRelease` : 
     - `true` : All cursor keys are released when pointer is out of game window. Default behavior.

@@ -17,6 +17,9 @@ class CursorAtBounds extends CursorKeys {
         var bounds = GetValue(config, 'bounds', undefined);
         if (bounds === undefined) {
             bounds = GetViewport(scene);
+            this.autoUpdateViewportBounds = true;
+        } else {
+            this.autoUpdateViewportBounds = false;
         }
         this.setBounds(bounds);
 
@@ -32,6 +35,11 @@ class CursorAtBounds extends CursorKeys {
         if (this.pointerOutGameReleaseEnable) {
             this.scene.input.on('gameout', this.clearAllKeysState, this);
         }
+
+        if (this.autoUpdateViewportBounds) {
+            this.scene.scale.on('resize', this.updateBoundsByViewport, this);
+        }
+
         this.scene.sys.events.once('shutdown', this.destroy, this);
     }
 
@@ -46,7 +54,12 @@ class CursorAtBounds extends CursorKeys {
             this.scene.input.off('gameout', this.clearAllKeysState, this);
         }
 
+        if (this.autoUpdateViewportBounds) {
+            this.scene.scale.off('resize', this.updateBoundsByViewport, this);
+        }
+
         this.scene.sys.events.off('shutdown', this.destroy, this);
+
         this.scene = undefined;
 
         super.shutdown();
@@ -54,6 +67,10 @@ class CursorAtBounds extends CursorKeys {
 
     destroy() {
         this.shutdown();
+    }
+
+    updateBoundsByViewport() {
+        GetViewport(this.scene, this.bounds);
     }
 
     get enable() {

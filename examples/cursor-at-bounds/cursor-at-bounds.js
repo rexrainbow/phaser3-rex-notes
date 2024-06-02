@@ -19,10 +19,7 @@ class Demo extends Phaser.Scene {
             bounds: new Phaser.Geom.Rectangle(100, 100, 600, 400)
         });
 
-        this.add.graphics()
-            .lineStyle(3, 0x00ff00)
-            .strokeRectShape(this.cursorAtBounds.bounds)
-
+        this.debugGraphics = this.add.graphics();
         this.print = this.add.text(0, 0, '');
     }
 
@@ -35,6 +32,11 @@ class Demo extends Phaser.Scene {
             }
         }
         this.print.text = s;
+
+        this.debugGraphics
+            .clear()
+            .lineStyle(3, 0x00ff00)
+            .strokeRectShape(this.cursorAtBounds.bounds)
     }
 }
 
@@ -44,7 +46,7 @@ var config = {
     width: 800,
     height: 600,
     scale: {
-        mode: Phaser.Scale.FIT,
+        mode: Phaser.Scale.FIT,  // RESIZE
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
     scene: Demo,
