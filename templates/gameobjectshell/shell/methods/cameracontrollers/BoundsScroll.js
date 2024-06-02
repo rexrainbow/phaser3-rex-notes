@@ -1,9 +1,7 @@
 import CursorAtBounds from '../../../cursoratbounds/CursorAtBounds.js';
 
-var BoundsScroll = function () {
+var BoundsScroll = function (camera) {
     var scene = this.scene;
-
-    var camera = scene.cameras.main;
 
     var cursorAtBounds = new CursorAtBounds(scene);
     var cursorKeys = cursorAtBounds.createCursorKeys();

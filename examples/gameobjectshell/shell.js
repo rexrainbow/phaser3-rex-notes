@@ -20,65 +20,7 @@ class Demo extends Phaser.Scene {
     create() {
         var frameNames = this.sys.textures.get('icons').getFrameNames();
 
-        var shell = this.rexGameObjectShell.add.shell({
-            panel: {
-                width: 300,
-                styles: {
-                    inputRow: {
-                        list: {
-                            label: {
-                                space: { left: 5, right: 5, icon: 5 },
-                                background: {
-                                    color: COLOR_DARK,
-                                },
-                                iconSize: 24,
-                                action: null
-                            },
-                            button: {
-                                space: { left: 5, right: 5, top: 8, bottom: 8 },
-                                background: {
-                                    color: COLOR_DARK,
-                                    strokeColor: COLOR_LIGHT,
-
-                                    'hover.color': COLOR_LIGHT,
-                                },
-                                iconSize: 24,
-                                action: null
-                            },
-
-                            list: {
-                                alignParent: 'icon'
-                            }
-                        },
-                    }
-                }
-            },
-            extraProperties: [
-                {
-                    bindingKey: 'tint',
-                    view: 'color'
-                },
-                {
-                    title: 'frame',
-                    view: 'list',
-                    options: frameNames.map(function (value) {
-                        return {
-                            text: value,
-                            icon: 'icons',
-                            iconFrame: value,
-                            value: value
-                        }
-                    }),
-
-                    onGetValue(gameObject) {
-                        return gameObject.frame.name;
-                    },
-                    onSetValue(gameObject, value) {
-                        gameObject.setFrame(value);
-                    }
-                }
-            ],
-        });
+        var shell = CreateGameObjectShell(this);
 
 
         var gameObjects = [];
@@ -114,6 +56,69 @@ class Demo extends Phaser.Scene {
 
     update() {
     }
+}
+
+var CreateGameObjectShell = function (scene) {
+    var frameNames = scene.sys.textures.get('icons').getFrameNames();
+    return scene.rexGameObjectShell.add.shell({
+        panel: {
+            width: 300,
+            styles: {
+                inputRow: {
+                    list: {
+                        label: {
+                            space: { left: 5, right: 5, icon: 5 },
+                            background: {
+                                color: COLOR_DARK,
+                            },
+                            iconSize: 24,
+                            action: null
+                        },
+                        button: {
+                            space: { left: 5, right: 5, top: 8, bottom: 8 },
+                            background: {
+                                color: COLOR_DARK,
+                                strokeColor: COLOR_LIGHT,
+
+                                'hover.color': COLOR_LIGHT,
+                            },
+                            iconSize: 24,
+                            action: null
+                        },
+
+                        list: {
+                            alignParent: 'icon'
+                        }
+                    },
+                }
+            }
+        },
+        extraProperties: [
+            {
+                bindingKey: 'tint',
+                view: 'color'
+            },
+            {
+                title: 'frame',
+                view: 'list',
+                options: frameNames.map(function (value) {
+                    return {
+                        text: value,
+                        icon: 'icons',
+                        iconFrame: value,
+                        value: value
+                    }
+                }),
+
+                onGetValue(gameObject) {
+                    return gameObject.frame.name;
+                },
+                onSetValue(gameObject, value) {
+                    gameObject.setFrame(value);
+                }
+            }
+        ],
+    });
 }
 
 var config = {

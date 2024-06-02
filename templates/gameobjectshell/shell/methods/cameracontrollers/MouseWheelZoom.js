@@ -1,7 +1,5 @@
-var MouseWheelZoom = function () {
+var MouseWheelZoom = function (camera) {
     var scene = this.scene;
-
-    var camera = scene.cameras.main;
 
     var onWheeling = function (pointer, currentlyOver, dx, dy, dz, event) {
         camera.zoom += ((dy < 0) ? 1 : -1) * 0.05;

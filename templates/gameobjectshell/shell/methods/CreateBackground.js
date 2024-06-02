@@ -3,7 +3,7 @@ import FullWindowRectangle from '../../fullwindowrectangle/FullWindowRectangle.j
 var CreateBackground = function (config) {
     var background = new FullWindowRectangle(this.scene);
     this.scene.add.existing(background);
-    this.addToBackgroundLayer(background);
+    this.addToBackgroundLayer(background, -1);
 
     var shell = this;
     var onUnSelectGameObject = function () {

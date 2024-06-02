@@ -6,6 +6,8 @@ import ControlPoints from '../controlpoints/ControlPoints';
 export default Shell;
 
 declare namespace Shell {
+    type LayerDepthType = 0 | 1 | 'top' | -1 | 'bottom';
+
     interface IConfig {
         onSelectGameObject?: (
             shell: Shell,
@@ -51,8 +53,19 @@ declare class Shell extends Phaser.Events.EventEmitter {
 
     clearBindingTarget(): this;
 
+    addToUILayer(
+        gameObjects: Phaser.GameObjects.GameObject,
+        depth?: Shell.LayerDepthType,
+    ): this;
+
     addToMonitorLayer(
-        gameObjects: Phaser.GameObjects.GameObject | Phaser.GameObjects.GameObject[]
+        gameObjects: Phaser.GameObjects.GameObject | Phaser.GameObjects.GameObject[],
+        depth?: Shell.LayerDepthType,
+    ): this;
+
+    addToBackgroundLayer(
+        gameObjects: Phaser.GameObjects.GameObject,
+        depth?: Shell.LayerDepthType,
     ): this;
 
     removeFromMonitorLayer(
@@ -60,11 +73,11 @@ declare class Shell extends Phaser.Events.EventEmitter {
         addToScene?: boolean,
     ): this;
 
-    clearMonitorLayer(): this;
+    clearMonitorLayer(depth?: Shell.LayerDepthType): this;
 
-    getMonitorLayer(): Phaser.GameObjects.Layer;
+    getMonitorLayer(depth?: Shell.LayerDepthType): Phaser.GameObjects.Layer;
 
-    getMonitorGameObjects(): Phaser.GameObjects.GameObject[];
+    getMonitorGameObjects(depth?: Shell.LayerDepthType): Phaser.GameObjects.GameObject[];
 
 }
 

@@ -24,8 +24,6 @@ var CreateMainPanel = function (config) {
     mainPanel.left = 0;
     mainPanel.top = 0;
 
-    mainPanel.setScrollFactor(0);
-
     this.addToUILayer(mainPanel);
 
     this.once('destroy', function () {

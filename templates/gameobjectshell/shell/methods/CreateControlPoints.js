@@ -5,7 +5,7 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 var CreateControlPoints = function (config) {
     var controlPoints = new ControlPoints(this.scene, GetValue(config, 'controlPoints'));
     this.scene.add.existing(controlPoints);
-    this.addToUILayer(controlPoints);
+    this.addToMonitorLayer(controlPoints, 'top');
 
     this.controlPoints = controlPoints;
 

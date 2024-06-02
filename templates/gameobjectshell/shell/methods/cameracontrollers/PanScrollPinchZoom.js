@@ -1,6 +1,6 @@
 import Pinch from '../../../pinch/Pinch.js';
 
-var PanScrollPinchZoom = function (panScrollEnable, pinchZoomEnable) {
+var PanScrollPinchZoom = function (camera, panScrollEnable, pinchZoomEnable) {
     if (!panScrollEnable && !pinchZoomEnable) {
         return;
     }
@@ -9,8 +9,6 @@ var PanScrollPinchZoom = function (panScrollEnable, pinchZoomEnable) {
 
     var gameObject = (this.background) ? this.background : scene;
     var pinch = new Pinch(gameObject);
-
-    var camera = scene.cameras.main;
 
     if (panScrollEnable) {
         pinch.on('drag1', function (pinch) {

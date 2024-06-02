@@ -17,7 +17,7 @@ var SetBindingTarget = function (target) {
             .setAngle(target.angle)
             .setSize(target.displayWidth, target.displayHeight)
 
-        this.pin(target);
+        this.pin(target, { syncDisplayList: false });
 
         this
             .layout()
