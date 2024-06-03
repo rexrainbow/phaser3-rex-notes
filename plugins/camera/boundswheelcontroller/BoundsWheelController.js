@@ -1,16 +1,22 @@
-import CursorAtBounds from '../../plugins/cursoratbounds.js';
-import MouseWheelToUpDown from '../../plugins/mousewheeltoupdown.js';
+import ComponentBase from '../../utils/componentbase/ComponentBase.js';
+import CursorAtBounds from '../../cursoratbounds.js';
+import MouseWheelToUpDown from '../../mousewheeltoupdown.js';
 
-class BoundsWheelController {
+class BoundsWheelController extends ComponentBase {
     constructor(scene, config) {
-        this.scene = scene;
+        if (config === undefined) {
+            config = {};
+        }
+
+        super(scene, config);
+        // this.scene
+
         this.cursorAtBounds = new CursorAtBounds(scene);
         this.mouseWheel = new MouseWheelToUpDown(scene);
 
         var boundsCursorKeys = this.cursorAtBounds.createCursorKeys();
         var mouseWheelCursorKeys = this.mouseWheel.createCursorKeys();
 
-        // TODO: KeysHub
         this.cameraController = new Phaser.Cameras.Controls.SmoothedKeyControl({
             left: boundsCursorKeys.left,
             right: boundsCursorKeys.right,
@@ -29,18 +35,27 @@ class BoundsWheelController {
             .setCamera(GetValue(config, 'camera', scene.cameras.main))
             .setBoundsScrollEnable(GetValue(config, 'bounds-scroll', true))
             .setMouseWheelZoomEnable(GetValue(config, 'mouse-wheel-zoom', true))
+
+        this.boot();
     }
 
     boot() {
         this.scene.events.on('preupdate', this.updateCameraController, this);
     }
 
-    destroy() {
+    shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+            return;
+        }
+
         this.scene.events.off('preupdate', this.updateCameraController, this);
 
         this.cursorAtBounds.destroy();
         this.mouseWheel.destroy();
         this.cameraController.destroy();
+
+        super.shutdown(fromScene);
     }
 
     get camera() {

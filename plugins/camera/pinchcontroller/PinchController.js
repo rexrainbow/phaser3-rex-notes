@@ -1,17 +1,26 @@
-import { Pinch } from '../../plugins/gestures.js';
+import ComponentBase from '../../utils/componentbase/ComponentBase.js';
+import { Pinch } from '../../gestures.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class PinchController {
+class PinchController extends ComponentBase {
     constructor(scene, config) {
-        this.scene = scene;
-        this.pinch = new Pinch(GetValue(config, 'inputTarget', scene));
+        if (config === undefined) {
+            config = {};
+        }
+
+        super(scene, config);
+        // this.scene
+
+        this.inputTarget = GetValue(config, 'inputTarget', scene);
+        this.pinch = new Pinch(this.inputTarget);
 
         this
             .setCamera(GetValue(config, 'camera', this.scene.cameras.main))
             .setPanScrollEnable(GetValue(config, 'pan-scroll', true))
             .setPinchZoomEnable(GetValue(config, 'pinch-zoom', true))
 
+        this.boot();
     }
 
     boot() {
@@ -38,8 +47,17 @@ class PinchController {
             }, this)
     }
 
-    destroy() {
+    shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+            return;
+        }
+
+        this.inputTarget = undefined;
         this.pinch.destroy();
+        this.pinch = undefined;
+
+        super.shutdown(fromScene);
     }
 
     setCamera(camera) {
