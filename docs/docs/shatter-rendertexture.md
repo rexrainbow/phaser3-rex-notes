@@ -14,7 +14,7 @@ Shatter render texture to triangle faces.
 
 ## Usage
 
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/shatter-render-texture)
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/shatter-rendertexture)
 
 ### Install plugin
 

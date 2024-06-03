@@ -11,7 +11,7 @@ Load a texture, then apply an alpha mask from another texture. Extended from [ca
 
 ## Usage
 
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/alpha-mask-image)
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/alphamaskimage)
 
 ### Install plugin
 

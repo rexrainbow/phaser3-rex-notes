@@ -11,7 +11,7 @@ Fires 'clickoutside' event when pointer-down or pointer-up outside of game objec
 
 ## Usage
 
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/click-outside)
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/clickoutside)
 
 ### Install plugin
 

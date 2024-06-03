@@ -21,7 +21,7 @@ It is inspired from [Ziao/phaser3-interim-containers](https://github.com/Ziao/ph
 
 ## Usage
 
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/container-lite)
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/containerlite)
 
 ### Install plugin
 

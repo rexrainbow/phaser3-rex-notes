@@ -12,7 +12,7 @@ Map cursor-at-(left/right/top/botttom-)bound to (left/right/up/down) cursor key 
 
 ## Usage
 
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/cursor-at-bound)
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/cursoratbound)
 
 ### Install plugin
 

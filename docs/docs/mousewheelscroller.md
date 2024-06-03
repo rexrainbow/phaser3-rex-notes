@@ -11,7 +11,7 @@ Emit scroll event when mouse-wheeling.
 
 ## Usage
 
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/mouse-wheel-scroller)
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/mousewheelscroller)
 
 ### Install plugin
 
