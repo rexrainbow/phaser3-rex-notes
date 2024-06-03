@@ -2,6 +2,8 @@ import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 import CursorAtBounds from '../../cursoratbounds.js';
 import MouseWheelToUpDown from '../../mousewheeltoupdown.js';
 
+const GetValue = Phaser.Utils.Objects.GetValue;
+
 class BoundsWheelController extends ComponentBase {
     constructor(scene, config) {
         if (config === undefined) {
@@ -64,6 +66,12 @@ class BoundsWheelController extends ComponentBase {
 
     set camera(value) {
         this.cameraController.setCamera(value);
+
+        if (value) {
+            this.cameraController.start();
+        } else {
+            this.cameraController.stop();
+        }
     }
 
     setCamera(camera) {
