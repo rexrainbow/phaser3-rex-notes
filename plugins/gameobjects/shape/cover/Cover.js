@@ -1,5 +1,5 @@
-import FullWindowRectangle from '../fullwindowrectangle/FullWindowRectangle.js';
-import TouchEventStop from '../../../input/toucheventstop/TouchEventStop.js';
+import FullWindowRectangle from '../../../fullwindowrectangle.js';
+import TouchEventStop from '../../../toucheventstop.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 

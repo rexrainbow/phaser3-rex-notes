@@ -1,5 +1,5 @@
-import Factory from './gameobjects/shape/fullwindowrectangle/Factory';
-import Creator from './gameobjects/shape/fullwindowrectangle/Creator';
+import Factory from './gameobjects/fullwindow/fullwindowrectangle/Factory';
+import Creator from './gameobjects/fullwindow/fullwindowrectangle/Creator';
 
 export default class extends Phaser.Plugins.BasePlugin { }
 

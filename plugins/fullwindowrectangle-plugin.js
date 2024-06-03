@@ -1,6 +1,6 @@
-import Factory from './gameobjects/shape/fullwindowrectangle/Factory.js';
-import Creator from './gameobjects/shape/fullwindowrectangle/Creator.js';
-import FullWindowRectangle from './gameobjects/shape/fullwindowrectangle/FullWindowRectangle.js';
+import Factory from './gameobjects/fullwindow/fullwindowrectangle/Factory.js';
+import Creator from './gameobjects/fullwindow/fullwindowrectangle/Creator.js';
+import FullWindowRectangle from './gameobjects/fullwindow/fullwindowrectangle/FullWindowRectangle.js';
 import SetValue from './utils/object/SetValue.js';
 
 class FullWindowRectanglePlugin extends Phaser.Plugins.BasePlugin {

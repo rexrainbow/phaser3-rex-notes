@@ -1,4 +1,4 @@
-import FullWindowRectangle from '../fullwindowrectangle/FullWindowRectangle';
+import FullWindowRectangle from '../../../fullwindowrectangle';
 
 export default Cover;
 
