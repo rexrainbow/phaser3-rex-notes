@@ -31,11 +31,43 @@ class MouseWheelToUpDown extends CursorKeys {
         this.shutdown();
     }
 
+    get enable() {
+        return this._enable;
+    }
+
+    set enable(e) {
+        if (this._enable === e) {
+            return;
+        }
+        if (!e) {
+            this.clearAllKeysState();
+        }
+        this._enable = e;
+        return this;
+    }
+
+    setEnable(e) {
+        if (e === undefined) {
+            e = true;
+        }
+
+        this.enable = e;
+        return this;
+    }
+
+    toggleEnable() {
+        this.setEnable(!this.enable);
+        return this;
+    }
+
     onWheeling(pointer, currentlyOver, dx, dy, dz, event) {
+        if (!this.enable) {
+            return;
+        }
         this.setKeyState('up', dy < 0);
         this.setKeyState('down', dy > 0);
     }
-    
+
     get up() {
         return this.upKeyDown;
     }
@@ -43,7 +75,7 @@ class MouseWheelToUpDown extends CursorKeys {
     get down() {
         return this.downKeyDown;
     }
-        
+
     get noKey() {
         return this.noKeyDown;
     }

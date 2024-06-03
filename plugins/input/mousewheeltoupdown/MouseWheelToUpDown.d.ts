@@ -13,6 +13,10 @@ declare class MouseWheelToUpDown {
         config?: MouseWheelToUpDown.IConfig
     )
 
+    setEnable(enable?: boolean): this;
+    toggleEnable(): this;
+    enable: boolean;
+
     createCursorKeys(): {
         up: Phaser.Input.Keyboard.Key,
         down: Phaser.Input.Keyboard.Key,

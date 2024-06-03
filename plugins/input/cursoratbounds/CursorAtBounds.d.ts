@@ -16,6 +16,10 @@ declare class CursorAtBounds {
         config?: CursorAtBounds.IConfig
     )
 
+    setEnable(enable?: boolean): this;
+    toggleEnable(): this;
+    enable: boolean;
+
     setBounds(bounds: Phaser.Geom.Rectangle): this;
     getBounds(): Phaser.Geom.Rectangle;
     bounds: Phaser.Geom.Rectangle;
