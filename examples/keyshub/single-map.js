@@ -1,6 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
 import KeysHubPlugin from '../../plugins/keyshub-plugin.js';
-import VirtualJoyStickPlugin from '../../plugins/virtualjoystick-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -83,11 +82,6 @@ var config = {
             {
                 key: 'rexKeysHub',
                 plugin: KeysHubPlugin,
-                start: true
-            },
-            {
-                key: 'rexVirtualJoyStick',
-                plugin: VirtualJoyStickPlugin,
                 start: true
             }
         ]

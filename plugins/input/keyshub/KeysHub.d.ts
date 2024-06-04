@@ -2,7 +2,7 @@ import ComponentBase from '../../utils/componentbase/ComponentBase';
 
 declare namespace KeysHub {
     interface IConfig {
-        exclude?: boolean
+        singleMode?: boolean
     }
 }
 
