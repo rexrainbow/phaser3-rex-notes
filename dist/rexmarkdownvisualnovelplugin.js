@@ -20912,59 +20912,83 @@
   };
 
   var ArrayUtils$1 = Phaser.Utils.Array;
-  var DisplayListMethods = {
-    bringMeToTop: function bringMeToTop() {
-      var list;
-      if (this.parentContainer) {
-        list = this.parentContainer.list;
-      } else if (this.displayList) {
-        list = this.displayList.list;
-      }
-      if (!list) {
-        return this;
-      }
-      ArrayUtils$1.BringToTop(list, this);
-      return this;
-    },
-    sendMeToBack: function sendMeToBack() {
-      var list;
-      if (this.parentContainer) {
-        list = this.parentContainer.list;
-      } else if (this.displayList) {
-        list = this.displayList.list;
-      }
-      if (!list) {
-        return this;
-      }
-      ArrayUtils$1.SendToBack(list, this);
-      return this;
-    },
-    moveMyDepthBelow: function moveMyDepthBelow(gameObject) {
-      var list;
-      if (this.parentContainer) {
-        list = this.parentContainer.list;
-      } else if (this.displayList) {
-        list = this.displayList.list;
-      }
-      if (!list) {
-        return this;
-      }
-      ArrayUtils$1.MoveBelow(list, this, gameObject);
-      return this;
-    },
-    moveMyDepthAbove: function moveMyDepthAbove(gameObject) {
-      var list;
-      if (this.parentContainer) {
-        list = this.parentContainer.list;
-      } else if (this.displayList) {
-        list = this.displayList.list;
-      }
-      if (!list) {
-        return this;
-      }
-      ArrayUtils$1.MoveAbove(list, this, gameObject);
+  var BringMeToTop = function BringMeToTop() {
+    var list;
+    if (this.parentContainer) {
+      list = this.parentContainer.list;
+    } else if (this.displayList) {
+      list = this.displayList.list;
+    }
+    if (!list) {
       return this;
     }
+    ArrayUtils$1.BringToTop(list, this);
+    return this;
+  };
+  var SendMeToBack = function SendMeToBack() {
+    var list;
+    if (this.parentContainer) {
+      list = this.parentContainer.list;
+    } else if (this.displayList) {
+      list = this.displayList.list;
+    }
+    if (!list) {
+      return this;
+    }
+    ArrayUtils$1.SendToBack(list, this);
+    return this;
+  };
+  var MoveMyDepthBelow = function MoveMyDepthBelow(gameObject) {
+    var list;
+    if (gameObject.parentContainer) {
+      list = gameObject.parentContainer.list;
+      if (list.indexOf(this) === -1) {
+        gameObject.parentContainer.add(this);
+      }
+    } else if (gameObject.displayList) {
+      list = gameObject.displayList.list;
+      if (list.indexOf(this) === -1) {
+        gameObject.displayList.add(this);
+      }
+    }
+    if (!list) {
+      return this;
+    }
+    ArrayUtils$1.MoveBelow(list, this, gameObject);
+    return this;
+  };
+  var MoveMyDepthAbove = function MoveMyDepthAbove(gameObject) {
+    var list;
+    if (gameObject.parentContainer) {
+      list = gameObject.parentContainer.list;
+      if (list.indexOf(this) === -1) {
+        if (gameObject.isRexContainerLite) {
+          gameObject.addToContainer(gameObject.parentContainer);
+        } else {
+          gameObject.parentContainer.add(gameObject);
+        }
+      }
+    } else if (gameObject.displayList) {
+      list = gameObject.displayList.list;
+      if (list.indexOf(this) === -1) {
+        if (gameObject.isRexContainerLite) {
+          gameObject.addToLayer(gameObject.displayList);
+        } else {
+          gameObject.displayList.add(gameObject);
+        }
+      }
+    }
+    if (!list) {
+      return this;
+    }
+    ArrayUtils$1.MoveAbove(list, this, gameObject);
+    return this;
+  };
+  var DisplayListMethods = {
+    bringMeToTop: BringMeToTop,
+    sendMeToBack: SendMeToBack,
+    moveMyDepthBelow: MoveMyDepthBelow,
+    moveMyDepthAbove: MoveMyDepthAbove
   };
 
   var DepthMethods = {
@@ -39345,7 +39369,13 @@
     // There is no cursor-position-change event, 
     // so updating cursor position every tick
     this.scene.sys.events.on('postupdate', this.updateText, this);
-    this.scene.input.on('pointerdown', this.onClickOutside, this);
+    if (this.clickOutSideTarget) {
+      MoveMyDepthAbove.call(this.clickOutSideTarget, this.parent);
+      MoveMyDepthBelow.call(this.clickOutSideTarget, this.parent);
+      this.clickOutSideTarget.setInteractive().on('pointerdown', this.onClickOutside, this);
+    } else {
+      this.scene.input.on('pointerdown', this.onClickOutside, this);
+    }
     if (this.onOpenCallback) {
       this.onOpenCallback(this.parent, this);
     }
@@ -39366,7 +39396,11 @@
     this.isOpened = false;
     this.updateText();
     this.scene.sys.events.off('postupdate', this.updateText, this);
-    this.scene.input.off('pointerdown', this.onClickOutside, this);
+    if (this.clickOutSideTarget) {
+      this.clickOutSideTarget.disableInteractive().off('pointerdown', this.onClickOutside, this);
+    } else {
+      this.scene.input.off('pointerdown', this.onClickOutside, this);
+    }
     if (this.onCloseCallback) {
       this.onCloseCallback(this.parent, this);
     }
@@ -39483,6 +39517,7 @@
         onOpen = GetValue$2J(config, 'onFocus', undefined);
       }
       _this.onOpenCallback = onOpen;
+      _this.clickOutSideTarget = GetValue$2J(config, 'clickOutSideTarget', undefined);
       var onClose = GetValue$2J(config, 'onClose', undefined);
       if (!onClose) {
         onClose = GetValue$2J(config, 'onBlur', undefined);
@@ -39504,6 +39539,9 @@
         // this.parent.off('pointerdown', this.open, this);
 
         this.close();
+        if (this.clickOutSideTarget) {
+          this.clickOutSideTarget.destroy();
+        }
         _get(_getPrototypeOf(HiddenTextEditBase.prototype), "destroy", this).call(this);
       }
     }, {
@@ -40102,7 +40140,7 @@
   }(HiddenTextEditBase);
 
   var GetValue$2H = Phaser.Utils.Objects.GetValue;
-  var PropertiesList = ['inputType', 'onOpen', 'onFocus', 'onClose', 'onBlur', 'onUpdate', 'enterClose', 'readOnly', 'maxLength', 'minLength', 'selectAll'];
+  var PropertiesList = ['inputType', 'onOpen', 'clickOutSideTarget', 'onFocus', 'onClose', 'onBlur', 'onUpdate', 'enterClose', 'readOnly', 'maxLength', 'minLength', 'selectAll'];
   var CreateHiddenTextEdit = function CreateHiddenTextEdit(parent, parentConfig) {
     var config = GetValue$2H(parentConfig, 'edit');
     if (config === undefined) {
@@ -40112,7 +40150,104 @@
     return new HiddenTextEdit(parent, config);
   };
 
-  var InjectDefaultConfig = function InjectDefaultConfig(config) {
+  var GetRootGameObject = function GetRootGameObject(gameObject) {
+    if (gameObject.parentContainer) {
+      // At a container
+      return GetRootGameObject(gameObject.parentContainer);
+    }
+    var layer = GetLayer(gameObject);
+    if (layer) {
+      // At a layer
+      return GetRootGameObject(layer);
+    }
+    return gameObject;
+  };
+
+  var GetFirstRenderCamera = function GetFirstRenderCamera(gameObject) {
+    var cameraFilter = GetRootGameObject(gameObject).cameraFilter;
+    var cameras = gameObject.scene.sys.cameras.cameras;
+    var camera, isCameraIgnore;
+    for (var i = 0, cnt = cameras.length; i < cnt; i++) {
+      camera = cameras[i];
+      isCameraIgnore = (cameraFilter & camera.id) > 0;
+      if (!isCameraIgnore) {
+        return camera;
+      }
+    }
+    return null;
+  };
+
+  var FullWindow = /*#__PURE__*/function (_ComponentBase) {
+    _inherits(FullWindow, _ComponentBase);
+    function FullWindow(gameObject, config) {
+      var _this;
+      _classCallCheck(this, FullWindow);
+      _this = _callSuper(this, FullWindow, [gameObject]);
+      // this.parent = gameObject;
+
+      _this.targetCamera = undefined;
+      _this.boot();
+      return _this;
+    }
+    _createClass(FullWindow, [{
+      key: "boot",
+      value: function boot() {
+        this.scene.sys.events.on('prerender', this.resize, this);
+      }
+    }, {
+      key: "destroy",
+      value: function destroy() {
+        if (!this.scene) {
+          return;
+        }
+        this.scene.sys.events.off('prerender', this.resize, this);
+        _get(_getPrototypeOf(FullWindow.prototype), "destroy", this).call(this);
+      }
+    }, {
+      key: "resize",
+      value: function resize() {
+        var scene = this.scene;
+        var gameObject = this.parent;
+        var camera = GetFirstRenderCamera(gameObject);
+        if (!camera) {
+          return;
+        }
+        var gameSize = scene.sys.scale.gameSize;
+        var gameWidth = gameSize.width,
+          gameHeight = gameSize.height,
+          scale = 1 / camera.zoom;
+
+        // Origin is fixed to (0.5,0.5)
+        var x = gameWidth / 2,
+          y = gameHeight / 2;
+        var width = gameWidth * scale,
+          height = gameHeight * scale;
+        gameObject.setScrollFactor(0).setOrigin(0.5);
+        if (gameObject.x !== x || gameObject.y !== y) {
+          gameObject.setPosition(x, y);
+        }
+        if (gameObject.width !== width || gameObject.height !== height) {
+          gameObject.setSize(width, height);
+        }
+      }
+    }]);
+    return FullWindow;
+  }(ComponentBase);
+
+  var Zone$2 = Phaser.GameObjects.Zone;
+  var FullWindowRectangle$1 = /*#__PURE__*/function (_Zone) {
+    _inherits(FullWindowRectangle, _Zone);
+    function FullWindowRectangle(scene) {
+      var _this;
+      _classCallCheck(this, FullWindowRectangle);
+      _this = _callSuper(this, FullWindowRectangle, [scene, 0, 0, 2, 2]);
+      _this.fullWindow = new FullWindow(_assertThisInitialized(_this));
+      return _this;
+    }
+    return _createClass(FullWindowRectangle);
+  }(Zone$2);
+
+  var InjectDefaultConfig = function InjectDefaultConfig(scene, config) {
     var isSingleLineMode = !config.textArea;
     if (!HasValue(config, 'wrap.vAlign')) {
       var defaultValue = isSingleLineMode ? 'center' : 'top';
@@ -40137,6 +40272,11 @@
     if (!HasValue(config.edit, 'inputType')) {
       var defaultValue = isSingleLineMode ? 'text' : 'textarea';
       SetValue(config.edit, 'inputType', defaultValue);
+    }
+    if (config.clickOutSideTarget === true) {
+      var clickOutSideTarget = new FullWindowRectangle$1(scene);
+      scene.add.existing(clickOutSideTarget);
+      config.clickOutSideTarget = clickOutSideTarget;
     }
     return config;
   };
@@ -40728,7 +40868,7 @@
       if (config === undefined) {
         config = {};
       }
-      InjectDefaultConfig(config);
+      InjectDefaultConfig(scene, config);
 
       // Set text later
       var text = config.text;
@@ -51356,90 +51496,6 @@
     return OpenCloseTransition;
   }(ComponentBase);
   Object.assign(OpenCloseTransition.prototype, methods$v);
-
-  var GetRootGameObject = function GetRootGameObject(gameObject) {
-    if (gameObject.parentContainer) {
-      // At a container
-      return GetRootGameObject(gameObject.parentContainer);
-    }
-    var layer = GetLayer(gameObject);
-    if (layer) {
-      // At a layer
-      return GetRootGameObject(layer);
-    }
-    return gameObject;
-  };
-
-  var GetFirstRenderCamera = function GetFirstRenderCamera(gameObject) {
-    var cameraFilter = GetRootGameObject(gameObject).cameraFilter;
-    var cameras = gameObject.scene.sys.cameras.cameras;
-    var camera, isCameraIgnore;
-    for (var i = 0, cnt = cameras.length; i < cnt; i++) {
-      camera = cameras[i];
-      isCameraIgnore = (cameraFilter & camera.id) > 0;
-      if (!isCameraIgnore) {
-        return camera;
-      }
-    }
-    return null;
-  };
-
-  var FullWindow = /*#__PURE__*/function (_ComponentBase) {
-    _inherits(FullWindow, _ComponentBase);
-    function FullWindow(gameObject, config) {
-      var _this;
-      _classCallCheck(this, FullWindow);
-      _this = _callSuper(this, FullWindow, [gameObject]);
-      // this.parent = gameObject;
-
-      _this.targetCamera = undefined;
-      _this.boot();
-      return _this;
-    }
-    _createClass(FullWindow, [{
-      key: "boot",
-      value: function boot() {
-        this.scene.sys.events.on('prerender', this.resize, this);
-      }
-    }, {
-      key: "destroy",
-      value: function destroy() {
-        if (!this.scene) {
-          return;
-        }
-        this.scene.sys.events.off('prerender', this.resize, this);
-        _get(_getPrototypeOf(FullWindow.prototype), "destroy", this).call(this);
-      }
-    }, {
-      key: "resize",
-      value: function resize() {
-        var scene = this.scene;
-        var gameObject = this.parent;
-        var camera = GetFirstRenderCamera(gameObject);
-        if (!camera) {
-          return;
-        }
-        var gameSize = scene.sys.scale.gameSize;
-        var gameWidth = gameSize.width,
-          gameHeight = gameSize.height,
-          scale = 1 / camera.zoom;
-
-        // Origin is fixed to (0.5,0.5)
-        var x = gameWidth / 2,
-          y = gameHeight / 2;
-        var width = gameWidth * scale,
-          height = gameHeight * scale;
-        gameObject.setScrollFactor(0).setOrigin(0.5);
-        if (gameObject.x !== x || gameObject.y !== y) {
-          gameObject.setPosition(x, y);
-        }
-        if (gameObject.width !== width || gameObject.height !== height) {
-          gameObject.setSize(width, height);
-        }
-      }
-    }]);
-    return FullWindow;
-  }(ComponentBase);
 
   var Rectangle = Phaser.GameObjects.Rectangle;
   var FullWindowRectangle = /*#__PURE__*/function (_Rectangle) {

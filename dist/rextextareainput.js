@@ -221,7 +221,7 @@
   };
 
   CheckP3Version();
-  var Zone$1 = Phaser.GameObjects.Zone;
+  var Zone$2 = Phaser.GameObjects.Zone;
   var AddItem = Phaser.Utils.Array.Add;
   var RemoveItem$7 = Phaser.Utils.Array.Remove;
   var Base$2 = /*#__PURE__*/function (_Zone) {
@@ -324,7 +324,7 @@
       }
     }]);
     return Base;
-  }(Zone$1);
+  }(Zone$2);
   var Components$1 = Phaser.GameObjects.Components;
   Phaser.Class.mixin(Base$2, [Components$1.Alpha, Components$1.Flip]);
 
@@ -1352,7 +1352,7 @@
     }
   };
 
-  var ArrayUtils = Phaser.Utils.Array;
+  var ArrayUtils$1 = Phaser.Utils.Array;
   var Children = {
     getChildren: function getChildren(out) {
       if (!out) {
@@ -1424,7 +1424,7 @@
     },
     getByName: function getByName(name, recursive) {
       if (!recursive) {
-        return ArrayUtils.GetFirst(this.children, 'name', name); // object, or null if not found
+        return ArrayUtils$1.GetFirst(this.children, 'name', name); // object, or null if not found
       } else {
         // recursive
         // Breadth-first search
@@ -1445,23 +1445,23 @@
       }
     },
     getRandom: function getRandom(startIndex, length) {
-      return ArrayUtils.GetRandom(this.children, startIndex, length);
+      return ArrayUtils$1.GetRandom(this.children, startIndex, length);
     },
     getFirst: function getFirst(property, value, startIndex, endIndex) {
-      return ArrayUtils.GetFirstElement(this.children, property, value, startIndex, endIndex);
+      return ArrayUtils$1.GetFirstElement(this.children, property, value, startIndex, endIndex);
     },
     getAll: function getAll(property, value, startIndex, endIndex) {
-      return ArrayUtils.GetAll(this.children, property, value, startIndex, endIndex);
+      return ArrayUtils$1.GetAll(this.children, property, value, startIndex, endIndex);
     },
     count: function count(property, value, startIndex, endIndex) {
-      return ArrayUtils.CountAllMatching(this.children, property, value, startIndex, endIndex);
+      return ArrayUtils$1.CountAllMatching(this.children, property, value, startIndex, endIndex);
     },
     swap: function swap(child1, child2) {
-      ArrayUtils.Swap(this.children, child1, child2);
+      ArrayUtils$1.Swap(this.children, child1, child2);
       return this;
     },
     setAll: function setAll(property, value, startIndex, endIndex) {
-      ArrayUtils.SetAll(this.children, property, value, startIndex, endIndex);
+      ArrayUtils$1.SetAll(this.children, property, value, startIndex, endIndex);
       return this;
     }
   };
@@ -7677,7 +7677,7 @@
   }(ComponentBase);
 
   var Rectangle$1 = Phaser.GameObjects.Rectangle;
-  var FullWindowRectangle = /*#__PURE__*/function (_Rectangle) {
+  var FullWindowRectangle$1 = /*#__PURE__*/function (_Rectangle) {
     _inherits(FullWindowRectangle, _Rectangle);
     function FullWindowRectangle(scene, color, alpha) {
       var _this;
@@ -7822,7 +7822,7 @@
       return _this;
     }
     return _createClass(Cover);
-  }(FullWindowRectangle);
+  }(FullWindowRectangle$1);
 
   var CreateCover = function CreateCover(gameObject, config) {
     var scene = gameObject.scene;
@@ -11688,7 +11688,7 @@
     RunHeightWrap$2.call(this, height);
   };
 
-  var Zone = Phaser.GameObjects.Zone;
+  var Zone$1 = Phaser.GameObjects.Zone;
   var Space$1 = /*#__PURE__*/function (_Zone) {
     _inherits(Space, _Zone);
     function Space(scene) {
@@ -11700,7 +11700,7 @@
       return _this;
     }
     return _createClass(Space);
-  }(Zone);
+  }(Zone$1);
 
   var GetNearestChildIndex = function GetNearestChildIndex(x, y) {
     var children = this.sizerChildren;
@@ -23781,6 +23781,54 @@
     return this;
   };
 
+  var ArrayUtils = Phaser.Utils.Array;
+  var MoveMyDepthBelow = function MoveMyDepthBelow(gameObject) {
+    var list;
+    if (gameObject.parentContainer) {
+      list = gameObject.parentContainer.list;
+      if (list.indexOf(this) === -1) {
+        gameObject.parentContainer.add(this);
+      }
+    } else if (gameObject.displayList) {
+      list = gameObject.displayList.list;
+      if (list.indexOf(this) === -1) {
+        gameObject.displayList.add(this);
+      }
+    }
+    if (!list) {
+      return this;
+    }
+    ArrayUtils.MoveBelow(list, this, gameObject);
+    return this;
+  };
+  var MoveMyDepthAbove = function MoveMyDepthAbove(gameObject) {
+    var list;
+    if (gameObject.parentContainer) {
+      list = gameObject.parentContainer.list;
+      if (list.indexOf(this) === -1) {
+        if (gameObject.isRexContainerLite) {
+          gameObject.addToContainer(gameObject.parentContainer);
+        } else {
+          gameObject.parentContainer.add(gameObject);
+        }
+      }
+    } else if (gameObject.displayList) {
+      list = gameObject.displayList.list;
+      if (list.indexOf(this) === -1) {
+        if (gameObject.isRexContainerLite) {
+          gameObject.addToLayer(gameObject.displayList);
+        } else {
+          gameObject.displayList.add(gameObject);
+        }
+      }
+    }
+    if (!list) {
+      return this;
+    }
+    ArrayUtils.MoveAbove(list, this, gameObject);
+    return this;
+  };
+
   var OnOpen = function OnOpen() {
     this.isOpened = true;
     this.initText();
@@ -23791,7 +23839,13 @@
     // There is no cursor-position-change event, 
     // so updating cursor position every tick
     this.scene.sys.events.on('postupdate', this.updateText, this);
-    this.scene.input.on('pointerdown', this.onClickOutside, this);
+    if (this.clickOutSideTarget) {
+      MoveMyDepthAbove.call(this.clickOutSideTarget, this.parent);
+      MoveMyDepthBelow.call(this.clickOutSideTarget, this.parent);
+      this.clickOutSideTarget.setInteractive().on('pointerdown', this.onClickOutside, this);
+    } else {
+      this.scene.input.on('pointerdown', this.onClickOutside, this);
+    }
     if (this.onOpenCallback) {
       this.onOpenCallback(this.parent, this);
     }
@@ -23812,7 +23866,11 @@
     this.isOpened = false;
     this.updateText();
     this.scene.sys.events.off('postupdate', this.updateText, this);
-    this.scene.input.off('pointerdown', this.onClickOutside, this);
+    if (this.clickOutSideTarget) {
+      this.clickOutSideTarget.disableInteractive().off('pointerdown', this.onClickOutside, this);
+    } else {
+      this.scene.input.off('pointerdown', this.onClickOutside, this);
+    }
     if (this.onCloseCallback) {
       this.onCloseCallback(this.parent, this);
     }
@@ -23929,6 +23987,7 @@
         onOpen = GetValue$3(config, 'onFocus', undefined);
       }
       _this.onOpenCallback = onOpen;
+      _this.clickOutSideTarget = GetValue$3(config, 'clickOutSideTarget', undefined);
       var onClose = GetValue$3(config, 'onClose', undefined);
       if (!onClose) {
         onClose = GetValue$3(config, 'onBlur', undefined);
@@ -23950,6 +24009,9 @@
         // this.parent.off('pointerdown', this.open, this);
 
         this.close();
+        if (this.clickOutSideTarget) {
+          this.clickOutSideTarget.destroy();
+        }
         _get(_getPrototypeOf(HiddenTextEditBase.prototype), "destroy", this).call(this);
       }
     }, {
@@ -24548,7 +24610,7 @@
   }(HiddenTextEditBase);
 
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
-  var PropertiesList = ['inputType', 'onOpen', 'onFocus', 'onClose', 'onBlur', 'onUpdate', 'enterClose', 'readOnly', 'maxLength', 'minLength', 'selectAll'];
+  var PropertiesList = ['inputType', 'onOpen', 'clickOutSideTarget', 'onFocus', 'onClose', 'onBlur', 'onUpdate', 'enterClose', 'readOnly', 'maxLength', 'minLength', 'selectAll'];
   var CreateHiddenTextEdit = function CreateHiddenTextEdit(parent, parentConfig) {
     var config = GetValue$1(parentConfig, 'edit');
     if (config === undefined) {
@@ -24643,7 +24705,20 @@
     return target;
   };
 
-  var InjectDefaultConfig = function InjectDefaultConfig(config) {
+  var Zone = Phaser.GameObjects.Zone;
+  var FullWindowRectangle = /*#__PURE__*/function (_Zone) {
+    _inherits(FullWindowRectangle, _Zone);
+    function FullWindowRectangle(scene) {
+      var _this;
+      _classCallCheck(this, FullWindowRectangle);
+      _this = _callSuper(this, FullWindowRectangle, [scene, 0, 0, 2, 2]);
+      _this.fullWindow = new FullWindow(_assertThisInitialized(_this));
+      return _this;
+    }
+    return _createClass(FullWindowRectangle);
+  }(Zone);
+
+  var InjectDefaultConfig = function InjectDefaultConfig(scene, config) {
     var isSingleLineMode = !config.textArea;
     if (!HasValue(config, 'wrap.vAlign')) {
       var defaultValue = isSingleLineMode ? 'center' : 'top';
@@ -24668,6 +24743,11 @@
     if (!HasValue(config.edit, 'inputType')) {
       var defaultValue = isSingleLineMode ? 'text' : 'textarea';
       SetValue(config.edit, 'inputType', defaultValue);
+    }
+    if (config.clickOutSideTarget === true) {
+      var clickOutSideTarget = new FullWindowRectangle(scene);
+      scene.add.existing(clickOutSideTarget);
+      config.clickOutSideTarget = clickOutSideTarget;
     }
     return config;
   };
@@ -25208,7 +25288,7 @@
       if (config === undefined) {
         config = {};
       }
-      InjectDefaultConfig(config);
+      InjectDefaultConfig(scene, config);
 
       // Set text later
       var text = config.text;

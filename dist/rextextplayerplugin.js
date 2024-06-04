@@ -3434,59 +3434,83 @@
   };
 
   var ArrayUtils = Phaser.Utils.Array;
-  var DisplayListMethods = {
-    bringMeToTop: function bringMeToTop() {
-      var list;
-      if (this.parentContainer) {
-        list = this.parentContainer.list;
-      } else if (this.displayList) {
-        list = this.displayList.list;
-      }
-      if (!list) {
-        return this;
-      }
-      ArrayUtils.BringToTop(list, this);
-      return this;
-    },
-    sendMeToBack: function sendMeToBack() {
-      var list;
-      if (this.parentContainer) {
-        list = this.parentContainer.list;
-      } else if (this.displayList) {
-        list = this.displayList.list;
-      }
-      if (!list) {
-        return this;
-      }
-      ArrayUtils.SendToBack(list, this);
-      return this;
-    },
-    moveMyDepthBelow: function moveMyDepthBelow(gameObject) {
-      var list;
-      if (this.parentContainer) {
-        list = this.parentContainer.list;
-      } else if (this.displayList) {
-        list = this.displayList.list;
-      }
-      if (!list) {
-        return this;
-      }
-      ArrayUtils.MoveBelow(list, this, gameObject);
-      return this;
-    },
-    moveMyDepthAbove: function moveMyDepthAbove(gameObject) {
-      var list;
-      if (this.parentContainer) {
-        list = this.parentContainer.list;
-      } else if (this.displayList) {
-        list = this.displayList.list;
-      }
-      if (!list) {
-        return this;
-      }
-      ArrayUtils.MoveAbove(list, this, gameObject);
+  var BringMeToTop = function BringMeToTop() {
+    var list;
+    if (this.parentContainer) {
+      list = this.parentContainer.list;
+    } else if (this.displayList) {
+      list = this.displayList.list;
+    }
+    if (!list) {
       return this;
     }
+    ArrayUtils.BringToTop(list, this);
+    return this;
+  };
+  var SendMeToBack = function SendMeToBack() {
+    var list;
+    if (this.parentContainer) {
+      list = this.parentContainer.list;
+    } else if (this.displayList) {
+      list = this.displayList.list;
+    }
+    if (!list) {
+      return this;
+    }
+    ArrayUtils.SendToBack(list, this);
+    return this;
+  };
+  var MoveMyDepthBelow = function MoveMyDepthBelow(gameObject) {
+    var list;
+    if (gameObject.parentContainer) {
+      list = gameObject.parentContainer.list;
+      if (list.indexOf(this) === -1) {
+        gameObject.parentContainer.add(this);
+      }
+    } else if (gameObject.displayList) {
+      list = gameObject.displayList.list;
+      if (list.indexOf(this) === -1) {
+        gameObject.displayList.add(this);
+      }
+    }
+    if (!list) {
+      return this;
+    }
+    ArrayUtils.MoveBelow(list, this, gameObject);
+    return this;
+  };
+  var MoveMyDepthAbove = function MoveMyDepthAbove(gameObject) {
+    var list;
+    if (gameObject.parentContainer) {
+      list = gameObject.parentContainer.list;
+      if (list.indexOf(this) === -1) {
+        if (gameObject.isRexContainerLite) {
+          gameObject.addToContainer(gameObject.parentContainer);
+        } else {
+          gameObject.parentContainer.add(gameObject);
+        }
+      }
+    } else if (gameObject.displayList) {
+      list = gameObject.displayList.list;
+      if (list.indexOf(this) === -1) {
+        if (gameObject.isRexContainerLite) {
+          gameObject.addToLayer(gameObject.displayList);
+        } else {
+          gameObject.displayList.add(gameObject);
+        }
+      }
+    }
+    if (!list) {
+      return this;
+    }
+    ArrayUtils.MoveAbove(list, this, gameObject);
+    return this;
+  };
+  var DisplayListMethods = {
+    bringMeToTop: BringMeToTop,
+    sendMeToBack: SendMeToBack,
+    moveMyDepthBelow: MoveMyDepthBelow,
+    moveMyDepthAbove: MoveMyDepthAbove
   };
 
   var DepthMethods = {

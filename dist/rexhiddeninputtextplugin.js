@@ -480,6 +480,54 @@
     return this;
   };
 
+  var ArrayUtils = Phaser.Utils.Array;
+  var MoveMyDepthBelow = function MoveMyDepthBelow(gameObject) {
+    var list;
+    if (gameObject.parentContainer) {
+      list = gameObject.parentContainer.list;
+      if (list.indexOf(this) === -1) {
+        gameObject.parentContainer.add(this);
+      }
+    } else if (gameObject.displayList) {
+      list = gameObject.displayList.list;
+      if (list.indexOf(this) === -1) {
+        gameObject.displayList.add(this);
+      }
+    }
+    if (!list) {
+      return this;
+    }
+    ArrayUtils.MoveBelow(list, this, gameObject);
+    return this;
+  };
+  var MoveMyDepthAbove = function MoveMyDepthAbove(gameObject) {
+    var list;
+    if (gameObject.parentContainer) {
+      list = gameObject.parentContainer.list;
+      if (list.indexOf(this) === -1) {
+        if (gameObject.isRexContainerLite) {
+          gameObject.addToContainer(gameObject.parentContainer);
+        } else {
+          gameObject.parentContainer.add(gameObject);
+        }
+      }
+    } else if (gameObject.displayList) {
+      list = gameObject.displayList.list;
+      if (list.indexOf(this) === -1) {
+        if (gameObject.isRexContainerLite) {
+          gameObject.addToLayer(gameObject.displayList);
+        } else {
+          gameObject.displayList.add(gameObject);
+        }
+      }
+    }
+    if (!list) {
+      return this;
+    }
+    ArrayUtils.MoveAbove(list, this, gameObject);
+    return this;
+  };
+
   var OnOpen = function OnOpen() {
     this.isOpened = true;
     this.initText();
@@ -490,7 +538,13 @@
     // There is no cursor-position-change event, 
     // so updating cursor position every tick
     this.scene.sys.events.on('postupdate', this.updateText, this);
-    this.scene.input.on('pointerdown', this.onClickOutside, this);
+    if (this.clickOutSideTarget) {
+      MoveMyDepthAbove.call(this.clickOutSideTarget, this.parent);
+      MoveMyDepthBelow.call(this.clickOutSideTarget, this.parent);
+      this.clickOutSideTarget.setInteractive().on('pointerdown', this.onClickOutside, this);
+    } else {
+      this.scene.input.on('pointerdown', this.onClickOutside, this);
+    }
     if (this.onOpenCallback) {
       this.onOpenCallback(this.parent, this);
     }
@@ -511,7 +565,11 @@
     this.isOpened = false;
     this.updateText();
     this.scene.sys.events.off('postupdate', this.updateText, this);
-    this.scene.input.off('pointerdown', this.onClickOutside, this);
+    if (this.clickOutSideTarget) {
+      this.clickOutSideTarget.disableInteractive().off('pointerdown', this.onClickOutside, this);
+    } else {
+      this.scene.input.off('pointerdown', this.onClickOutside, this);
+    }
     if (this.onCloseCallback) {
       this.onCloseCallback(this.parent, this);
     }
@@ -628,6 +686,7 @@
         onOpen = GetValue$1(config, 'onFocus', undefined);
       }
       _this.onOpenCallback = onOpen;
+      _this.clickOutSideTarget = GetValue$1(config, 'clickOutSideTarget', undefined);
       var onClose = GetValue$1(config, 'onClose', undefined);
       if (!onClose) {
         onClose = GetValue$1(config, 'onBlur', undefined);
@@ -649,6 +708,9 @@
         // this.parent.off('pointerdown', this.open, this);
 
         this.close();
+        if (this.clickOutSideTarget) {
+          this.clickOutSideTarget.destroy();
+        }
         _get(_getPrototypeOf(HiddenTextEditBase.prototype), "destroy", this).call(this);
       }
     }, {
