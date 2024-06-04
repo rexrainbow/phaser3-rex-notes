@@ -12,15 +12,37 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var joystick = this.plugins.get('rexVirtualJoyStick').add(this, {
-            x: 400,
-            y: 300,
-            radius: 100,
-        })
+        var cursorKeysInput0 = this.input.keyboard.createCursorKeys();
+        var cursorKeysInput1 = this.input.keyboard.addKeys({
+            up: 'W',
+            down: 'S',
+            left: 'A',
+            right: 'D'
+        });
 
-        var keysHub = this.plugins.get('rexKeysHub').add(this)
-            .plugKeys(this.input.keyboard.createCursorKeys())
-            .plugKeys(joystick.createCursorKeys())
+        var keysHub = this.plugins.get('rexKeysHub').add(this, { singleMode: true })
+
+        var btn0, btn1;
+        var PlugKeyInput0 = function () {
+            keysHub.plugKeyObjectss(cursorKeysInput0);
+            btn0.setColor('red')
+            btn1.setColor('white')
+        }
+        var PlugKeyInput1 = function () {
+            keysHub.plugKeyObjectss(cursorKeysInput1)
+            btn1.setColor('red')
+            btn0.setColor('white')
+        }
+
+        btn0 = this.add.text(300, 300, 'Cursor keys', { fontSize: 20 })
+            .setInteractive()
+            .on('pointerup', PlugKeyInput0)
+
+        btn1 = this.add.text(500, 300, 'WSAD keys', { fontSize: 20 })
+            .setInteractive()
+            .on('pointerup', PlugKeyInput1)
+
+        PlugKeyInput0()
 
         this.cursorkeys = keysHub.createCursorKeys();
 

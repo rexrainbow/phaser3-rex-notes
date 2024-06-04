@@ -14,7 +14,7 @@ class KeysHub extends ComponentBase {
         // this.scene
 
         this.keys = {};  // Dictionary of keyHubs
-        this.excludeMode = GetValue(config, 'exclude', false);
+        this.singleMode = GetValue(config, 'singleMode', false);
     }
 
     shutdown(fromScene) {
@@ -37,7 +37,7 @@ class KeysHub extends ComponentBase {
         }
 
         var keyHub = this.addKey(keyCode);
-        if (this.excludeMode) {
+        if (this.singleMode) {
             keyHub.unplugAllKeyObject();
         }
 
@@ -128,7 +128,7 @@ class KeysHub extends ComponentBase {
             var output = {};
             for (keyCode in this.keys) {
                 var keyHubs = this.keys[keyCode].getKeyObjects();
-                if (this.excludeMode) {
+                if (this.singleMode) {
                     output[keyCode] = keyHubs[0];
                 } else {
                     output[keyCode] = keyHubs;
