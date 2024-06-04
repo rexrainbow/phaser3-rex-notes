@@ -360,6 +360,9 @@
     }, {
       key: "onPointerMove",
       value: function onPointerMove(pointer) {
+        if (!this.enable) {
+          return;
+        }
         var cursorX = pointer.x,
           cursorY = pointer.y;
         var left = this.bounds.left,

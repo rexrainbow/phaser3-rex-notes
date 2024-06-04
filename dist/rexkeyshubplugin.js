@@ -29,6 +29,15 @@
     var i = _toPrimitive(t, "string");
     return "symbol" == typeof i ? i : String(i);
   }
+  function _typeof(o) {
+    "@babel/helpers - typeof";
+
+    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
+      return typeof o;
+    } : function (o) {
+      return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
+    }, _typeof(o);
+  }
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
@@ -198,6 +207,134 @@
     }
   };
 
+  var SceneClass = Phaser.Scene;
+  var IsSceneObject = function IsSceneObject(object) {
+    return object instanceof SceneClass;
+  };
+
+  var GetSceneObject = function GetSceneObject(object) {
+    if (object == null || _typeof(object) !== 'object') {
+      return null;
+    } else if (IsSceneObject(object)) {
+      // object = scene
+      return object;
+    } else if (object.scene && IsSceneObject(object.scene)) {
+      // object = game object
+      return object.scene;
+    } else if (object.parent && object.parent.scene && IsSceneObject(object.parent.scene)) {
+      // parent = bob object
+      return object.parent.scene;
+    } else {
+      return null;
+    }
+  };
+
+  var GameClass = Phaser.Game;
+  var IsGame = function IsGame(object) {
+    return object instanceof GameClass;
+  };
+
+  var GetGame = function GetGame(object) {
+    if (object == null || _typeof(object) !== 'object') {
+      return null;
+    } else if (IsGame(object)) {
+      return object;
+    } else if (IsGame(object.game)) {
+      return object.game;
+    } else if (IsSceneObject(object)) {
+      // object = scene object
+      return object.sys.game;
+    } else if (IsSceneObject(object.scene)) {
+      // object = game object
+      return object.scene.sys.game;
+    }
+  };
+
+  var GetValue$1 = Phaser.Utils.Objects.GetValue;
+  var ComponentBase = /*#__PURE__*/function () {
+    function ComponentBase(parent, config) {
+      _classCallCheck(this, ComponentBase);
+      this.setParent(parent); // gameObject, scene, or game
+
+      this.isShutdown = false;
+
+      // Event emitter, default is private event emitter
+      this.setEventEmitter(GetValue$1(config, 'eventEmitter', true));
+
+      // Register callback of parent destroy event, also see `shutdown` method
+      if (this.parent) {
+        if (this.parent === this.scene) {
+          // parent is a scene
+          this.scene.sys.events.once('shutdown', this.onEnvDestroy, this);
+        } else if (this.parent === this.game) {
+          // parent is game
+          this.game.events.once('shutdown', this.onEnvDestroy, this);
+        } else if (this.parent.once) {
+          // parent is game object or something else
+          this.parent.once('destroy', this.onParentDestroy, this);
+        }
+
+        // bob object does not have event emitter
+      }
+    }
+    _createClass(ComponentBase, [{
+      key: "shutdown",
+      value: function shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+          return;
+        }
+
+        // parent might not be shutdown yet
+        if (this.parent) {
+          if (this.parent === this.scene) {
+            // parent is a scene
+            this.scene.sys.events.off('shutdown', this.onEnvDestroy, this);
+          } else if (this.parent === this.game) {
+            // parent is game
+            this.game.events.off('shutdown', this.onEnvDestroy, this);
+          } else if (this.parent.once) {
+            // parent is game object or something else
+            this.parent.off('destroy', this.onParentDestroy, this);
+          }
+
+          // bob object does not have event emitter
+        }
+        this.destroyEventEmitter();
+        this.parent = undefined;
+        this.scene = undefined;
+        this.game = undefined;
+        this.isShutdown = true;
+      }
+    }, {
+      key: "destroy",
+      value: function destroy(fromScene) {
+        this.shutdown(fromScene);
+      }
+    }, {
+      key: "onEnvDestroy",
+      value: function onEnvDestroy() {
+        this.destroy(true);
+      }
+    }, {
+      key: "onParentDestroy",
+      value: function onParentDestroy(parent, fromScene) {
+        this.destroy(fromScene);
+      }
+    }, {
+      key: "setParent",
+      value: function setParent(parent) {
+        this.parent = parent; // gameObject, scene, or game
+
+        this.scene = GetSceneObject(parent);
+        this.game = GetGame(parent);
+        return this;
+      }
+    }]);
+    return ComponentBase;
+  }();
+  Object.assign(ComponentBase.prototype, EventEmitterMethods);
+
   var KeyCodes$1 = Phaser.Input.Keyboard.KeyCodes;
   var KeyMap = {};
   for (var key in KeyCodes$1) {
@@ -219,29 +356,50 @@
     _createClass(KeyHub, [{
       key: "destroy",
       value: function destroy() {
-        for (var i = 0, cnt = this.ports.length; i < cnt; i++) {
-          this.ports[i].off('down', this.update, this).off('up', this.update, this);
-        }
+        this.unplugAllKeyObject();
         this.ports = undefined;
         _get(_getPrototypeOf(KeyHub.prototype), "destroy", this).call(this);
       }
     }, {
-      key: "plug",
-      value: function plug(key) {
-        AddItem(this.ports, key, 0, function (key) {
-          key.on('down', this.update, this).on('up', this.update, this);
+      key: "plugKeyObject",
+      value: function plugKeyObject(keyObject) {
+        this.unplugKeyObject(keyObject);
+        AddItem(this.ports, keyObject, 0, function (keyObject) {
+          keyObject.on('down', this.update, this).on('up', this.update, this);
+          keyObject.refKeyHub = this;
           this.update(FakeEvent);
         }, this);
         return this;
       }
     }, {
-      key: "unplug",
-      value: function unplug(key) {
-        RemoveItem(this.ports, key, function (key) {
-          key.off('down', this.update, this).off('up', this.update, this);
+      key: "unplugKeyObject",
+      value: function unplugKeyObject(keyObject) {
+        if (keyObject.refKeyHub !== this) {
+          return this;
+        }
+        RemoveItem(this.ports, keyObject, function (keyObject) {
+          keyObject.off('down', this.update, this).off('up', this.update, this);
+          keyObject.refKeyHub = undefined;
           this.update(FakeEvent);
         }, this);
         return this;
+      }
+    }, {
+      key: "unplugAllKeyObject",
+      value: function unplugAllKeyObject() {
+        for (var i = 0, cnt = this.ports; i < cnt; i++) {
+          var keyObject = this.ports[i];
+          keyObject.off('down', this.update, this).off('up', this.update, this);
+          keyObject.refKeyHub = undefined;
+        }
+        this.ports.length = 0;
+        this.update(FakeEvent);
+        return this;
+      }
+    }, {
+      key: "getKeyObjects",
+      value: function getKeyObjects() {
+        return this.ports;
       }
     }, {
       key: "update",
@@ -308,63 +466,80 @@
 
   var GetValue = Phaser.Utils.Objects.GetValue;
   var KeyCodes = Phaser.Input.Keyboard.KeyCodes;
-  var KeysHub = /*#__PURE__*/function () {
+  var KeysHub = /*#__PURE__*/function (_ComponentBase) {
+    _inherits(KeysHub, _ComponentBase);
     function KeysHub(scene, config) {
+      var _this;
       _classCallCheck(this, KeysHub);
       if (config === undefined) {
         config = {};
       }
+      _this = _callSuper(this, KeysHub, [scene, config]);
+      // this.scene
 
-      // Event emitter
-      var eventEmitter = GetValue(config, 'eventEmitter', undefined);
-      var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
-      this.setEventEmitter(eventEmitter, EventEmitterClass);
-      config.eventEmitter = this.getEventEmitter();
-      this.scene = scene;
-      this.keys = {};
+      _this.keys = {}; // Dictionary of keyHubs
+      _this.singleMode = GetValue(config, 'singleMode', false);
+      return _this;
     }
     _createClass(KeysHub, [{
-      key: "destroy",
-      value: function destroy() {
-        this.destroyEventEmitter();
+      key: "shutdown",
+      value: function shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+          return;
+        }
         for (var keyCode in this.keys) {
           this.keys[keyCode].destroy();
         }
         this.keys = undefined;
+        _get(_getPrototypeOf(KeysHub.prototype), "shutdown", this).call(this, fromScene);
       }
     }, {
-      key: "plugKey",
-      value: function plugKey(key, keyCode) {
+      key: "plugKeyObject",
+      value: function plugKeyObject(keyObject, keyCode) {
         if (keyCode === undefined) {
-          keyCode = key.keyCode;
+          keyCode = keyObject.keyCode;
         }
-        this.addKey(keyCode).plug(key);
+        var keyHub = this.addKey(keyCode);
+        if (this.singleMode) {
+          keyHub.unplugAllKeyObject();
+        }
+        keyHub.plugKeyObject(keyObject);
         return this;
       }
     }, {
-      key: "plugKeys",
-      value: function plugKeys(keys) {
+      key: "plugKeyObjectss",
+      value: function plugKeyObjectss(keys) {
         if (Array.isArray(keys)) {
           for (var i = 0, cnt = keys.length; i < cnt; i++) {
-            this.plugKey(keys[i]);
+            this.plugKeyObject(keys[i]);
           }
         } else {
           for (var keyCode in keys) {
-            this.plugKey(keys[keyCode], keyCode);
+            this.plugKeyObject(keys[keyCode], keyCode);
           }
         }
         return this;
       }
     }, {
-      key: "unplug",
-      value: function unplug(keys) {
+      key: "unplugKeyObject",
+      value: function unplugKeyObject(keyObject) {
+        var refKeyHub = keyObject.refKeyHub;
+        if (refKeyHub) {
+          refKeyHub.unplugKeyObject(keyObject);
+        }
+        return this;
+      }
+    }, {
+      key: "unplugKeyObjects",
+      value: function unplugKeyObjects(keys) {
         if (Array.isArray(keys)) {
           for (var i = 0, cnt = keys.length; i < cnt; i++) {
-            this.unplugKey(keys[i]);
+            this.unplugKeyObjects(keys[i]);
           }
         } else {
           for (var keyCode in keys) {
-            this.unplugKey(keys[keyCode]);
+            this.unplugKeyObjects(keys[keyCode]);
           }
         }
         return this;
@@ -411,10 +586,27 @@
           shift: KeyCodes.SHIFT
         });
       }
+    }, {
+      key: "getKeyObjects",
+      value: function getKeyObjects(keyCode) {
+        if (keyCode === undefined) {
+          var output = {};
+          for (keyCode in this.keys) {
+            var keyHubs = this.keys[keyCode].getKeyObjects();
+            if (this.singleMode) {
+              output[keyCode] = keyHubs[0];
+            } else {
+              output[keyCode] = keyHubs;
+            }
+          }
+          return output;
+        } else {
+          return this.addKey(keyCode).getKeyObjects();
+        }
+      }
     }]);
     return KeysHub;
-  }();
-  Object.assign(KeysHub.prototype, EventEmitterMethods);
+  }(ComponentBase);
 
   var KeysHubPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(KeysHubPlugin, _Phaser$Plugins$BaseP);
