@@ -4,7 +4,7 @@ import CopyProperty from '../../../../utils/object/CopyProperty.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 const PropertiesList = [
     'inputType',
-    'onOpen', 'onFocus', 'onClose', 'onBlur', 'onUpdate',
+    'onOpen', 'clickOutSideTarget', 'onFocus', 'onClose', 'onBlur', 'onUpdate',
     'enterClose',
     'readOnly', 'maxLength', 'minLength', 'selectAll'
 ];

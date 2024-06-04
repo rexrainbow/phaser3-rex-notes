@@ -23,6 +23,8 @@ class HiddenTextEditBase extends ComponentBase {
         }
         this.onOpenCallback = onOpen;
 
+        this.clickOutSideTarget = GetValue(config, 'clickOutSideTarget', undefined);
+
         var onClose = GetValue(config, 'onClose', undefined);
         if (!onClose) {
             onClose = GetValue(config, 'onBlur', undefined);
@@ -48,6 +50,10 @@ class HiddenTextEditBase extends ComponentBase {
         // this.parent.off('pointerdown', this.open, this);
 
         this.close();
+
+        if (this.clickOutSideTarget) {
+            this.clickOutSideTarget.destroy();
+        }
 
         super.destroy();
     }

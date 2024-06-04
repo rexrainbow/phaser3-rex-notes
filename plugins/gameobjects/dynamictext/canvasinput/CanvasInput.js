@@ -23,7 +23,7 @@ class CanvasInput extends DynamicText {
             config = {};
         }
 
-        InjectDefaultConfig(config);
+        InjectDefaultConfig(scene, config);
 
         // Set text later
         var text = config.text;

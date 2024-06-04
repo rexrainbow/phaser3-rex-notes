@@ -1,7 +1,8 @@
 import HasValue from '../../../../utils/object/HasValue.js';
 import SetValue from '../../../../utils/object/SetValue.js';
+import FullWindowZone from '../../../fullwindow/fullwindowzone/FullWindowZone.js';
 
-var InjectDefaultConfig = function (config) {
+var InjectDefaultConfig = function (scene, config) {
     var isSingleLineMode = !config.textArea;
 
     if (!HasValue(config, 'wrap.vAlign')) {
@@ -32,6 +33,13 @@ var InjectDefaultConfig = function (config) {
     if (!HasValue(config.edit, 'inputType')) {
         var defaultValue = (isSingleLineMode) ? 'text' : 'textarea';
         SetValue(config.edit, 'inputType', defaultValue);
+    }
+
+    if (config.clickOutSideTarget === true) {
+        var clickOutSideTarget = new FullWindowZone(scene);
+        scene.add.existing(clickOutSideTarget);
+
+        config.clickOutSideTarget = clickOutSideTarget;
     }
 
     return config;

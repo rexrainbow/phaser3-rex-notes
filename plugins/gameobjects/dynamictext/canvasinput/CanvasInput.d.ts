@@ -84,6 +84,8 @@ declare namespace CanvasInput {
         maxLength?: number,
         minLength?: number,
         selectAll?: boolean,
+
+        clickOutSideTarget?: boolean | Phaser.GameObjects.GameObject,
     }
 }
 
@@ -140,7 +142,7 @@ declare class CanvasInput extends DynamicText {
 
     setMinLength(value: number): this;
     minLength: number;
-    
+
     readonly contentWidth: number;
     readonly contentHeight: number;
     readonly linesCount: number;
