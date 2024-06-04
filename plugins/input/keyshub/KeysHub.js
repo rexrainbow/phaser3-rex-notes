@@ -1,71 +1,81 @@
-import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
+import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 import KeyHub from './KeyHub.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const KeyCodes = Phaser.Input.Keyboard.KeyCodes;
 
-class KeysHub {
+class KeysHub extends ComponentBase {
     constructor(scene, config) {
         if (config === undefined) {
             config = {};
         }
 
-        // Event emitter
-        var eventEmitter = GetValue(config, 'eventEmitter', undefined);
-        var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
-        this.setEventEmitter(eventEmitter, EventEmitterClass);
-        config.eventEmitter = this.getEventEmitter();
+        super(scene, config);
+        // this.scene
 
-        this.scene = scene;
-        this.keys = {};
+        this.keys = {};  // Dictionary of keyHubs
+        this.excludeMode = GetValue(config, 'exclude', false);
     }
 
-    destroy() {
-        this.destroyEventEmitter();
+    shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+            return;
+        }
 
         for (var keyCode in this.keys) {
             this.keys[keyCode].destroy();
         }
         this.keys = undefined;
+
+        super.shutdown(fromScene);
     }
 
-    plugKey(key, keyCode) {
+    plugKeyObject(keyObject, keyCode) {
         if (keyCode === undefined) {
-            keyCode = key.keyCode;
+            keyCode = keyObject.keyCode;
         }
 
-        this.addKey(keyCode).plug(key);
+        var keyHub = this.addKey(keyCode);
+        if (this.excludeMode) {
+            keyHub.unplugAllKeyObject();
+        }
+
+        keyHub.plugKeyObject(keyObject);
+
         return this;
     }
 
-    plugKeys(keys) {
+    plugKeyObjectss(keys) {
         if (Array.isArray(keys)) {
             for (var i = 0, cnt = keys.length; i < cnt; i++) {
-                this.plugKey(keys[i]);
+                this.plugKeyObject(keys[i]);
             }
         } else {
             for (var keyCode in keys) {
-                this.plugKey(keys[keyCode], keyCode);
+                this.plugKeyObject(keys[keyCode], keyCode);
             }
         }
         return this;
     }
 
-    unplug(key) {
-        for (var keyCode in this.keys) {
-            this.keys[keyCode].unplug(key);
+    unplugKeyObject(keyObject) {
+        var refKeyHub = keyObject.refKeyHub;
+        if (refKeyHub) {
+            refKeyHub.unplugKeyObject(keyObject);
         }
+
         return this;
     }
 
-    unplug(keys) {
+    unplugKeyObjects(keys) {
         if (Array.isArray(keys)) {
             for (var i = 0, cnt = keys.length; i < cnt; i++) {
-                this.unplugKey(keys[i]);
+                this.unplugKeyObjects(keys[i]);
             }
         } else {
             for (var keyCode in keys) {
-                this.unplugKey(keys[keyCode]);
+                this.unplugKeyObjects(keys[keyCode]);
             }
         }
         return this;
@@ -112,11 +122,25 @@ class KeysHub {
             shift: KeyCodes.SHIFT
         });
     }
-}
 
-Object.assign(
-    KeysHub.prototype,
-    EventEmitterMethods
-);
+    getKeyObjects(keyCode) {
+        if (keyCode === undefined) {
+            var output = {};
+            for (keyCode in this.keys) {
+                var keyHubs = this.keys[keyCode].getKeyObjects();
+                if (this.excludeMode) {
+                    output[keyCode] = keyHubs[0];
+                } else {
+                    output[keyCode] = keyHubs;
+                }
+            }
+            return output;
+
+        } else {
+            return this.addKey(keyCode).getKeyObjects();
+
+        }
+    }
+}
 
 export default KeysHub;

@@ -12,35 +12,64 @@ class KeyHub extends Key {
     }
 
     destroy() {
-        for (var i = 0, cnt = this.ports.length; i < cnt; i++) {
-            this.ports[i]
-                .off('down', this.update, this)
-                .off('up', this.update, this)
-        }
+        this.unplugAllKeyObject();
         this.ports = undefined;
         super.destroy();
     }
 
-    plug(key) {
-        AddItem(this.ports, key, 0, function (key) {
-            key
+    plugKeyObject(keyObject) {
+        this.unplugKeyObject(keyObject);
+
+        AddItem(this.ports, keyObject, 0, function (keyObject) {
+            keyObject
                 .on('down', this.update, this)
                 .on('up', this.update, this)
 
+            keyObject.refKeyHub = this;
+
             this.update(FakeEvent);
         }, this);
+
         return this;
     }
 
-    unplug(key) {
-        RemoveItem(this.ports, key, function (key) {
-            key
+    unplugKeyObject(keyObject) {
+        if (keyObject.refKeyHub !== this) {
+            return this;
+        }
+
+        RemoveItem(this.ports, keyObject, function (keyObject) {
+            keyObject
                 .off('down', this.update, this)
                 .off('up', this.update, this)
 
+            keyObject.refKeyHub = undefined;
+
             this.update(FakeEvent);
         }, this);
+
         return this;
+    }
+
+    unplugAllKeyObject() {
+        for (var i = 0, cnt = this.ports; i < cnt; i++) {
+            var keyObject = this.ports[i];
+            keyObject
+                .off('down', this.update, this)
+                .off('up', this.update, this)
+
+            keyObject.refKeyHub = undefined;
+        }
+
+        this.ports.length = 0;
+
+        this.update(FakeEvent);
+
+        return this;
+    }
+
+    getKeyObjects() {
+        return this.ports;
     }
 
     update(event) {
