@@ -1,6 +1,7 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 import CursorAtBounds from '../../cursoratbounds.js';
 import MouseWheelToUpDown from '../../mousewheeltoupdown.js';
+import GetCameraByName from '../../utils/camera/GetCameraByName.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -33,8 +34,10 @@ class BoundsWheelController extends ComponentBase {
             zoomSpeed: 0.05
         });
 
+        var camera = GetCameraByName(scene, GetValue(config, 'camera'));
+
         this
-            .setCamera(GetValue(config, 'camera', scene.cameras.main))
+            .setCamera(camera)
             .setBoundsScrollEnable(GetValue(config, 'bounds-scroll', true))
             .setMouseWheelZoomEnable(GetValue(config, 'mouse-wheel-zoom', true))
 

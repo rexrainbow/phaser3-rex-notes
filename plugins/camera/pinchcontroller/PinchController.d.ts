@@ -2,7 +2,7 @@ import ComponentBase from '../../utils/componentbase/ComponentBase';
 
 declare namespace PinchController {
     interface IConfig {
-        camera?: Phaser.Cameras.Scene2D.Camera,
+        camera?: string | number | Phaser.Cameras.Scene2D.Camera,
 
         'pan-scroll'?: boolean,
         'pinch-zoom'?: boolean,

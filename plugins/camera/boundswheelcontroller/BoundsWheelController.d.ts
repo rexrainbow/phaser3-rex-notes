@@ -2,7 +2,7 @@ import ComponentBase from '../../utils/componentbase/ComponentBase';
 
 declare namespace BoundsWheelController {
     interface IConfig {
-        camera?: Phaser.Cameras.Scene2D.Camera,
+        camera?: string | number | Phaser.Cameras.Scene2D.Camera,
 
         'bounds-scroll'?: boolean,
         'mouse-wheel-zoom'?: boolean,

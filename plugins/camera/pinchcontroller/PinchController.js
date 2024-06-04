@@ -1,5 +1,6 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 import { Pinch } from '../../gestures.js';
+import GetCameraByName from '../../utils/camera/GetCameraByName.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -15,8 +16,10 @@ class PinchController extends ComponentBase {
         this.inputTarget = GetValue(config, 'inputTarget', scene);
         this.pinch = new Pinch(this.inputTarget);
 
+        var camera = GetCameraByName(scene, GetValue(config, 'camera'));
+
         this
-            .setCamera(GetValue(config, 'camera', this.scene.cameras.main))
+            .setCamera(camera)
             .setPanScrollEnable(GetValue(config, 'pan-scroll', true))
             .setPinchZoomEnable(GetValue(config, 'pinch-zoom', true))
 
