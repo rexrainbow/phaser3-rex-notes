@@ -236,6 +236,7 @@ nav:
     - Keyboard:
         - Keyboard events: keyboardevents.md
         - Combo events: keyboardcombo.md
+        - Keys hub: keyshub.md
     - Gamepad:
         - Gamepad: gamepad.md
     - Mouse wheel:

@@ -93,6 +93,7 @@
 89. [Input text](inputtext.md): Input DOM element.
 90. [Interception](interception.md): Predict the intersection position of two game objects with constant moving speed.
 91. [In touching](intouching.md): Fires 'intouch' event every tick when pressing on a game object.
+91. [Keys hub](keyshub.md): Key object interface mapping from multiple source of key objects.
 92. [Layer manager](layermanager.md): A container of Layer game objects.
 93. [Level counter](levelcounter.md): Map level value from experience value, by callback or a number array.
 94. [Life time](lifetime.md): Destroy game object when time-out.
