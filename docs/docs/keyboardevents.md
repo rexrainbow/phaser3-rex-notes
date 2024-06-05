@@ -59,10 +59,10 @@ Built-in keyboard events of phaser.
     or
     ```javascript
     var keys = scene.input.keyboard.addKeys({
-        up: 'up',
-        down: 'down',
-        left: 'left',
-        right: 'right'
+        up: 'W',
+        down: 'S',
+        left: 'A',
+        right: 'D'
     });  // keys.up, keys.down, keys.left, keys.right
     ```
 - Remove key object

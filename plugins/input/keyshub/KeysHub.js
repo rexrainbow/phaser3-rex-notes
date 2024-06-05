@@ -46,7 +46,7 @@ class KeysHub extends ComponentBase {
         return this;
     }
 
-    plugKeyObjectss(keys) {
+    plugKeyObjects(keys) {
         if (Array.isArray(keys)) {
             for (var i = 0, cnt = keys.length; i < cnt; i++) {
                 this.plugKeyObject(keys[i]);

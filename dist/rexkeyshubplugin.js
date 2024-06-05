@@ -508,8 +508,8 @@
         return this;
       }
     }, {
-      key: "plugKeyObjectss",
-      value: function plugKeyObjectss(keys) {
+      key: "plugKeyObjects",
+      value: function plugKeyObjects(keys) {
         if (Array.isArray(keys)) {
           for (var i = 0, cnt = keys.length; i < cnt; i++) {
             this.plugKeyObject(keys[i]);

@@ -19,8 +19,8 @@ class Demo extends Phaser.Scene {
         })
 
         var keysHub = this.plugins.get('rexKeysHub').add(this)
-            .plugKeyObjectss(this.input.keyboard.createCursorKeys())
-            .plugKeyObjectss(joystick.createCursorKeys())
+            .plugKeyObjects(this.input.keyboard.createCursorKeys())
+            .plugKeyObjects(joystick.createCursorKeys())
 
         this.cursorkeys = keysHub.createCursorKeys();
 

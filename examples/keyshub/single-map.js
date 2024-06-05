@@ -23,12 +23,12 @@ class Demo extends Phaser.Scene {
 
         var btn0, btn1;
         var PlugKeyInput0 = function () {
-            keysHub.plugKeyObjectss(cursorKeysInput0);
+            keysHub.plugKeyObjects(cursorKeysInput0);
             btn0.setColor('red')
             btn1.setColor('white')
         }
         var PlugKeyInput1 = function () {
-            keysHub.plugKeyObjectss(cursorKeysInput1)
+            keysHub.plugKeyObjects(cursorKeysInput1)
             btn1.setColor('red')
             btn0.setColor('white')
         }

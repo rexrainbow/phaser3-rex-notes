@@ -19,7 +19,7 @@ declare class KeysHub extends ComponentBase {
         keyCode?: string
     ): this;
 
-    plugKeyObjectss(
+    plugKeyObjects(
         keys: Phaser.Input.Keyboard.Key[] | { keyCode: [keyObject: Phaser.Input.Keyboard.Key] }
     ): this;
 
