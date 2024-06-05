@@ -31440,14 +31440,12 @@
     }, {
       key: "startXOffset",
       get: function get() {
-        var defaultStyle = this.defaultStyle;
-        return defaultStyle.strokeThickness / 2 + defaultStyle.xOffset;
+        return this.defaultStyle.xOffset;
       }
     }, {
       key: "startYOffset",
       get: function get() {
-        var defaultStyle = this.defaultStyle;
-        return defaultStyle.strokeThickness / 2 + defaultStyle.metrics.ascent;
+        return this.defaultStyle.metrics.ascent;
       }
     }, {
       key: "lines",

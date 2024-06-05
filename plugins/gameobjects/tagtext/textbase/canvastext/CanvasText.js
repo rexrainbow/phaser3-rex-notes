@@ -194,13 +194,11 @@ class CanvasText {
     }
 
     get startXOffset() {
-        var defaultStyle = this.defaultStyle;
-        return (defaultStyle.strokeThickness / 2) + defaultStyle.xOffset;
+        return this.defaultStyle.xOffset;
     }
 
     get startYOffset() {
-        var defaultStyle = this.defaultStyle;
-        return (defaultStyle.strokeThickness / 2) + defaultStyle.metrics.ascent;
+        return this.defaultStyle.metrics.ascent;
     }
 
     get lines() {
