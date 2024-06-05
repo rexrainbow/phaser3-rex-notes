@@ -105,6 +105,12 @@ var TagTextToProp = function (text, prevProp) {
         } else if (TagRegex.RE_STROKE_CLOSE.test(text)) {
             UpdateProp(prevProp, PROP_REMOVE, 'stroke');
 
+        } else if (TagRegex.RE_BGCOLOR_OPEN.test(text)) {
+            var innerMatch = text.match(TagRegex.RE_BGCOLOR_OPEN);
+            UpdateProp(prevProp, PROP_ADD, 'bgcolor', innerMatch[1]);
+        } else if (TagRegex.RE_BGCOLOR_CLOSE.test(text)) {
+            UpdateProp(prevProp, PROP_REMOVE, 'bgcolor');
+
         } else if (TagRegex.RE_OFFSETY_OPEN.test(text)) {
             var innerMatch = text.match(TagRegex.RE_OFFSETY_OPEN);
             UpdateProp(prevProp, PROP_ADD, 'y', parseFloat(innerMatch[1]));

@@ -101,6 +101,12 @@ var PropToContextStyle = function (defaultStyle, prop) {
         result.strikethroughOffset = 0;
     }
 
+    if (prop.hasOwnProperty('bgcolor')) {
+        result.bgcolor = prop.bgcolor;
+    } else {
+        result.bgcolor = null;
+    }
+
     return result;
 }
 

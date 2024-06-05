@@ -30503,9 +30503,14 @@
       var context = this.context;
       context.save();
       var curStyle = this.parser.propToContextStyle(this.defaultStyle, pen.prop);
-      curStyle.buildFont();
-      curStyle.syncFont(canvas, context);
-      curStyle.syncStyle(canvas, context);
+
+      // Background
+      if (curStyle.bgcolor !== null && pen.width > 0) {
+        var metrics = this.defaultStyle.metrics;
+        var bgTLY = offsetY - metrics.ascent;
+        var bgHeight = metrics.fontSize;
+        this.drawRectangle(offsetX, bgTLY, pen.width, bgHeight, curStyle.bgcolor, curStyle);
+      }
 
       // Underline
       if (curStyle.underlineThickness > 0 && pen.width > 0) {
@@ -30515,6 +30520,9 @@
 
       // Text
       if (pen.isTextPen) {
+        curStyle.buildFont();
+        curStyle.syncFont(canvas, context);
+        curStyle.syncStyle(canvas, context);
         this.drawText(offsetX, offsetY, pen.text, curStyle);
       }
 
@@ -30558,6 +30566,15 @@
       var canvas = this.canvas;
       this.context.clearRect(0, 0, canvas.width, canvas.height);
     },
+    drawRectangle: function drawRectangle(x, y, width, height, color, style) {
+      if (this.autoRound) {
+        x = Math.round(x);
+        y = Math.round(y);
+      }
+      var context = this.context;
+      context.fillStyle = color;
+      context.fillRect(x, y, width, height);
+    },
     drawLine: function drawLine(x, y, width, height, color, style) {
       if (this.autoRound) {
         x = Math.round(x);
@@ -30583,10 +30600,12 @@
       var context = this.context;
       if (style.stroke && style.stroke !== 'none' && style.strokeThickness > 0) {
         style.syncShadow(context, style.shadowStroke);
+        context.strokeStyle = style.stroke;
         context.strokeText(text, x, y);
       }
       if (style.color && style.color !== 'none') {
         style.syncShadow(context, style.shadowFill);
+        context.fillStyle = style.color;
         context.fillText(text, x, y);
       }
     },
@@ -32481,6 +32500,11 @@
         UpdateProp(prevProp, PROP_ADD, 'stroke', innerMatch[1]);
       } else if (TagRegex.RE_STROKE_CLOSE.test(text)) {
         UpdateProp(prevProp, PROP_REMOVE, 'stroke');
+      } else if (TagRegex.RE_BGCOLOR_OPEN.test(text)) {
+        var innerMatch = text.match(TagRegex.RE_BGCOLOR_OPEN);
+        UpdateProp(prevProp, PROP_ADD, 'bgcolor', innerMatch[1]);
+      } else if (TagRegex.RE_BGCOLOR_CLOSE.test(text)) {
+        UpdateProp(prevProp, PROP_REMOVE, 'bgcolor');
       } else if (TagRegex.RE_OFFSETY_OPEN.test(text)) {
         var innerMatch = text.match(TagRegex.RE_OFFSETY_OPEN);
         UpdateProp(prevProp, PROP_ADD, 'y', parseFloat(innerMatch[1]));
@@ -32626,6 +32650,11 @@
       result.strikethroughThickness = 0;
       result.strikethroughOffset = 0;
     }
+    if (prop.hasOwnProperty('bgcolor')) {
+      result.bgcolor = prop.bgcolor;
+    } else {
+      result.bgcolor = null;
+    }
     return result;
   };
   var GetFontStyle = function GetFontStyle(prop) {
@@ -32681,6 +32710,7 @@
         case 'color':
         case 'weight':
         case 'stroke':
+        case 'bgcolor':
         case 'y':
         case 'img':
         case 'area':
@@ -32783,6 +32813,9 @@
     var STROKE_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, STROKE);
     var STROKE_OPENC = GetOpenTagRegString(delimiterLeft, delimiterRight, STROKE, COLOR_PARAM);
     var STROKE_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, STROKE);
+    var BGCOLOR = 'bgcolor';
+    var BGCOLOR_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, BGCOLOR, COLOR_PARAM);
+    var BGCOLOR_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, BGCOLOR);
     var OFFSETY = 'y';
     var OFFSETY_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, OFFSETY, NUMBER_PARAM);
     var OFFSETY_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, OFFSETY);
@@ -32827,6 +32860,8 @@
     TagRegexSave.RE_STROKE_OPEN = new RegExp(STROKE_OPEN, 'i');
     TagRegexSave.RE_STROKE_OPENC = new RegExp(STROKE_OPENC, 'i');
     TagRegexSave.RE_STROKE_CLOSE = new RegExp(STROKE_CLOSE, 'i');
+    TagRegexSave.RE_BGCOLOR_OPEN = new RegExp(BGCOLOR_OPEN, 'i');
+    TagRegexSave.RE_BGCOLOR_CLOSE = new RegExp(BGCOLOR_CLOSE, 'i');
     TagRegexSave.RE_OFFSETY_OPEN = new RegExp(OFFSETY_OPEN, 'i');
     TagRegexSave.RE_OFFSETY_CLOSE = new RegExp(OFFSETY_CLOSE, 'i');
     TagRegexSave.RE_IMAGE_OPEN = new RegExp(IMAGE_OPEN, 'i');
@@ -32839,7 +32874,7 @@
     TagRegexSave.RE_ALIGN_CLOSE = new RegExp(ALIGN_CLOSE, 'i');
     TagRegexSave.RE_ID_OPEN = new RegExp(ID_OPEN, 'i');
     TagRegexSave.RE_ID_CLOSE = new RegExp(ID_CLOSE, 'i');
-    TagRegexSave.RE_SPLITTEXT = new RegExp([RAW_OPEN, RAW_CLOSE, ESC_OPEN, ESC_CLOSE, BLOD_OPEN, BLOD_CLOSE, ITALICS_OPEN, ITALICS_CLOSE, WEIGHT_OPEN, WEIGHT_CLOSE, SIZE_OPEN, SIZE_CLOSE, COLOR_OPEN, COLOR_CLOSE, UNDERLINE_OPEN, UNDERLINE_OPENC, UNDERLINE_CLOSE, STRIKETHROUGH_OPEN, STRIKETHROUGH_OPENC, STRIKETHROUGH_CLOSE, SHADOW_OPEN, SHADOW_OPENC, SHADOW_CLOSE, STROKE_OPEN, STROKE_OPENC, STROKE_CLOSE, OFFSETY_OPEN, OFFSETY_CLOSE, IMAGE_OPEN, IMAGE_CLOSE, AREA_OPEN, AREA_CLOSE, URL_OPEN, URL_CLOSE, ALIGN_OPEN, ALIGN_CLOSE, ID_OPEN, ID_CLOSE].join('|'), 'ig');
+    TagRegexSave.RE_SPLITTEXT = new RegExp([RAW_OPEN, RAW_CLOSE, ESC_OPEN, ESC_CLOSE, BLOD_OPEN, BLOD_CLOSE, ITALICS_OPEN, ITALICS_CLOSE, WEIGHT_OPEN, WEIGHT_CLOSE, SIZE_OPEN, SIZE_CLOSE, COLOR_OPEN, COLOR_CLOSE, UNDERLINE_OPEN, UNDERLINE_OPENC, UNDERLINE_CLOSE, STRIKETHROUGH_OPEN, STRIKETHROUGH_OPENC, STRIKETHROUGH_CLOSE, SHADOW_OPEN, SHADOW_OPENC, SHADOW_CLOSE, STROKE_OPEN, STROKE_OPENC, STROKE_CLOSE, BGCOLOR_OPEN, BGCOLOR_CLOSE, OFFSETY_OPEN, OFFSETY_CLOSE, IMAGE_OPEN, IMAGE_CLOSE, AREA_OPEN, AREA_CLOSE, URL_OPEN, URL_CLOSE, ALIGN_OPEN, ALIGN_CLOSE, ID_OPEN, ID_CLOSE].join('|'), 'ig');
     return true;
   };
   var GetTagRegex = function GetTagRegex(delimiterLeft, delimiterRight) {

@@ -94,6 +94,10 @@ var SetDelimiters = function (delimiterLeft, delimiterRight) {
     var STROKE_OPENC = GetOpenTagRegString(delimiterLeft, delimiterRight, STROKE, COLOR_PARAM);
     var STROKE_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, STROKE);
 
+    var BGCOLOR = 'bgcolor';
+    var BGCOLOR_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, BGCOLOR, COLOR_PARAM);
+    var BGCOLOR_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, BGCOLOR);
+
     var OFFSETY = 'y';
     var OFFSETY_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, OFFSETY, NUMBER_PARAM);
     var OFFSETY_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, OFFSETY);
@@ -155,6 +159,9 @@ var SetDelimiters = function (delimiterLeft, delimiterRight) {
     TagRegexSave.RE_STROKE_OPENC = new RegExp(STROKE_OPENC, 'i');
     TagRegexSave.RE_STROKE_CLOSE = new RegExp(STROKE_CLOSE, 'i');
 
+    TagRegexSave.RE_BGCOLOR_OPEN = new RegExp(BGCOLOR_OPEN, 'i');
+    TagRegexSave.RE_BGCOLOR_CLOSE = new RegExp(BGCOLOR_CLOSE, 'i');
+
     TagRegexSave.RE_OFFSETY_OPEN = new RegExp(OFFSETY_OPEN, 'i');
     TagRegexSave.RE_OFFSETY_CLOSE = new RegExp(OFFSETY_CLOSE, 'i');
 
@@ -187,6 +194,7 @@ var SetDelimiters = function (delimiterLeft, delimiterRight) {
         STRIKETHROUGH_OPEN, STRIKETHROUGH_OPENC, STRIKETHROUGH_CLOSE,
         SHADOW_OPEN, SHADOW_OPENC, SHADOW_CLOSE,
         STROKE_OPEN, STROKE_OPENC, STROKE_CLOSE,
+        BGCOLOR_OPEN, BGCOLOR_CLOSE,
         OFFSETY_OPEN, OFFSETY_CLOSE,
         IMAGE_OPEN, IMAGE_CLOSE,
         AREA_OPEN, AREA_CLOSE,

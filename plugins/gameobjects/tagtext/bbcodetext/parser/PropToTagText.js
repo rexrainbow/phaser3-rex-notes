@@ -34,6 +34,7 @@ var PropToTagText = function (text, prop, prevProp) {
             case 'color':
             case 'weight':
             case 'stroke':
+            case 'bgcolor':
             case 'y':
             case 'img':
             case 'area':

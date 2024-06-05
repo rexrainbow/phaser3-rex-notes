@@ -101,6 +101,11 @@ Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
     - Underline with color setting : `[u=red]text[/u]`
 - Strikethrough : `[s]text[/s]`
     - Strikethrough with color setting : `[s=red]text[/s]`
+- Background color : 
+    - `[bgcolor=red]text[/bgcolor]`
+    - `[bgcolor=#FF0000]text[/bgcolor]`
+    - `[bgcolor=rgb(255,0,0)]text[/bgcolor]`
+    - `[bgcolor=rgba(255,0,0,1)]text[/bgcolor]`
 - Superscript, subscript : `[y=-12]text[y]`
 - Image : `[img=imgKey]`
 - Hit area of words : `[area=key]text[/area]`

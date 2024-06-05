@@ -107,9 +107,14 @@ export default {
         context.save();
 
         var curStyle = this.parser.propToContextStyle(this.defaultStyle, pen.prop);
-        curStyle.buildFont();
-        curStyle.syncFont(canvas, context);
-        curStyle.syncStyle(canvas, context);
+
+        // Background
+        if ((curStyle.bgcolor !== null) && (pen.width > 0)) {
+            var metrics = this.defaultStyle.metrics;
+            var bgTLY = offsetY - metrics.ascent;
+            var bgHeight = metrics.fontSize;
+            this.drawRectangle(offsetX, bgTLY, pen.width, bgHeight, curStyle.bgcolor, curStyle);
+        }
 
         // Underline
         if ((curStyle.underlineThickness > 0) && (pen.width > 0)) {
@@ -119,6 +124,9 @@ export default {
 
         // Text
         if (pen.isTextPen) {
+            curStyle.buildFont();
+            curStyle.syncFont(canvas, context);
+            curStyle.syncStyle(canvas, context);
             this.drawText(offsetX, offsetY, pen.text, curStyle);
         }
 
@@ -165,6 +173,17 @@ export default {
         this.context.clearRect(0, 0, canvas.width, canvas.height);
     },
 
+    drawRectangle(x, y, width, height, color, style) {
+        if (this.autoRound) {
+            x = Math.round(x);
+            y = Math.round(y);
+        }
+
+        var context = this.context;
+        context.fillStyle = color;
+        context.fillRect(x, y, width, height);
+    },
+
     drawLine(x, y, width, height, color, style) {
         if (this.autoRound) {
             x = Math.round(x);
@@ -194,11 +213,13 @@ export default {
         var context = this.context;
         if (style.stroke && (style.stroke !== 'none') && (style.strokeThickness > 0)) {
             style.syncShadow(context, style.shadowStroke);
+            context.strokeStyle = style.stroke;
             context.strokeText(text, x, y);
         }
 
         if (style.color && (style.color !== 'none')) {
             style.syncShadow(context, style.shadowFill);
+            context.fillStyle = style.color;
             context.fillText(text, x, y);
         }
     },
