@@ -34,6 +34,10 @@ class FullWindow extends ComponentBase {
             return;
         }
 
+        gameObject
+            .setScrollFactor(0)
+            .setOrigin(0.5);
+
         var gameSize = scene.sys.scale.gameSize;
         var gameWidth = gameSize.width,
             gameHeight = gameSize.height,
@@ -45,10 +49,6 @@ class FullWindow extends ComponentBase {
 
         var width = gameWidth * scale,
             height = gameHeight * scale;
-
-        gameObject
-            .setScrollFactor(0)
-            .setOrigin(0.5);
 
         if ((gameObject.x !== x) || (gameObject.y !== y)) {
             gameObject.setPosition(x, y);

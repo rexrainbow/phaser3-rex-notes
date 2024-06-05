@@ -24,6 +24,7 @@ import TransitionImage from './transitionimage/TransitionImage';
 import TransitionImagePack from './transitionimagepack/TransitionImagePack';
 import ImageBox from './imagebox/ImageBox';
 import FullWindowRectangle from './fullwindowrectangle/FullWindowRectangle';
+import FullWindowZone from './fullwindowzone/FullWindowZone';
 import Cover from './cover/Cover';
 import InputText from './inputtext/InputText';
 import { FileChooser } from './filechooser/FileChooser';
@@ -151,6 +152,7 @@ export {
     CircleMaskImage,
     AlphaMaskImage,
     FullWindowRectangle,
+    FullWindowZone,
     Cover,
     InputText,
     FileChooser,

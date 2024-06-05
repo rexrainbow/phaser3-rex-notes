@@ -28,6 +28,7 @@ import TransitionImagePack from './transitionimagepack/TransitionImagePack.js';
 import ImageBox from './imagebox/ImageBox.js';
 import ImageInputLabel from './imageinputlabel/ImageInputLabel.js';
 import FullWindowRectangle from './fullwindowrectangle/FullWindowRectangle.js';
+import FullWindowZone from './fullwindowzone/FullWindowZone.js';
 import Cover from './cover/Cover.js';
 import InputText from './inputtext/InputText.js';
 import { FileChooser } from './filechooser/FileChooser.js';
@@ -153,6 +154,7 @@ export {
     CircleMaskImage,
     AlphaMaskImage,
     FullWindowRectangle,
+    FullWindowZone,
     Cover,
     InputText,
     FileChooser,

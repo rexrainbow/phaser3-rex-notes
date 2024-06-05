@@ -1580,6 +1580,7 @@
         if (!camera) {
           return;
         }
+        gameObject.setScrollFactor(0).setOrigin(0.5);
         var gameSize = scene.sys.scale.gameSize;
         var gameWidth = gameSize.width,
           gameHeight = gameSize.height,
@@ -1590,7 +1591,6 @@
           y = gameHeight / 2;
         var width = gameWidth * scale,
           height = gameHeight * scale;
-        gameObject.setScrollFactor(0).setOrigin(0.5);
         if (gameObject.x !== x || gameObject.y !== y) {
           gameObject.setPosition(x, y);
         }
