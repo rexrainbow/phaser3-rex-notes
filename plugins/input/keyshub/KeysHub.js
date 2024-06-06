@@ -43,8 +43,10 @@ class KeysHub extends ComponentBase {
             return this;
         }
 
+        keyObject.key = KeyMap[keyObject.keyCode];
+
         if (!key) {
-            key = KeyMap[keyObject.key];
+            key = keyObject.key;
         }
 
         var keyHub = this.addKey(key);
@@ -148,7 +150,12 @@ class KeysHub extends ComponentBase {
             return output;
 
         } else {
-            return this.addKey(key).getKeyObjects();
+            var keyObjects = this.addKey(key).getKeyObjects();
+            if (this.singleMode) {
+                return keyObjects[0];
+            } else {
+                return keyObjects;
+            }
 
         }
     }

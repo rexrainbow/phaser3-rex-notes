@@ -24,7 +24,14 @@ export default {
     },
 
     defineKeyCancel() {
+        if (!this.defineTargetKey) {
+            return this;
+        }
+
         this.defineTargetKey = null;
+
+        this.emit('definekey.stop');
+
         return this;
     },
 

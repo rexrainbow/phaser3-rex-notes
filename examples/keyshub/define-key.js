@@ -29,11 +29,14 @@ class Demo extends Phaser.Scene {
                     .setBackgroundColor('grey');
             })
             .on('definekey.stop', function (key, keyObject) {
-                var displayKeyName = (keyObject) ? `: Keyboard ${keyObject.keyCode}` : '';
-                buttons[key]
-                    .setText(`${key.toUpperCase()} ${displayKeyName}`)
-                    .setBackgroundColor(null);
-                // TODO : Update text of all buttons
+                // Update display text of all buttons
+                for (var key in buttons) {
+                    var keyObject = keysHub.getKeyObjects(key);
+                    var displayKeyName = (keyObject) ? `: Keyboard ${keyObject.key.toUpperCase()}` : '';
+                    buttons[key]
+                        .setText(`${key.toUpperCase()} ${displayKeyName}`)
+                        .setBackgroundColor(null);
+                }
             })
 
         this.events
