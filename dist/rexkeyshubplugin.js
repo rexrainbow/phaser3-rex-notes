@@ -335,6 +335,7 @@
   }();
   Object.assign(ComponentBase.prototype, EventEmitterMethods);
 
+  // KeyCodes : Key (string) to KeyCode (number)
   var KeyCodes$1 = Phaser.Input.Keyboard.KeyCodes;
   var KeyMap = {};
   for (var key in KeyCodes$1) {
@@ -544,7 +545,11 @@
       return this;
     },
     defineKeyCancel: function defineKeyCancel() {
+      if (!this.defineTargetKey) {
+        return this;
+      }
       this.defineTargetKey = null;
+      this.emit('definekey.stop');
       return this;
     },
     listenFromKeyboard: function listenFromKeyboard() {
@@ -607,8 +612,9 @@
           }
           return this;
         }
+        keyObject.key = KeyMap[keyObject.keyCode];
         if (!key) {
-          key = KeyMap[keyObject.key];
+          key = keyObject.key;
         }
         var keyHub = this.addKey(key);
         if (this.singleMode) {
@@ -711,7 +717,12 @@
           }
           return output;
         } else {
-          return this.addKey(key).getKeyObjects();
+          var keyObjects = this.addKey(key).getKeyObjects();
+          if (this.singleMode) {
+            return keyObjects[0];
+          } else {
+            return keyObjects;
+          }
         }
       }
     }]);

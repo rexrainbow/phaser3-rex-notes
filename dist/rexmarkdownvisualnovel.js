@@ -81945,6 +81945,7 @@
     });
   };
 
+  // KeyCodes : Key (string) to KeyCode (number)
   var KeyCodes = Phaser.Input.Keyboard.KeyCodes;
   var KeyMap = {};
   for (var key$1 in KeyCodes) {
