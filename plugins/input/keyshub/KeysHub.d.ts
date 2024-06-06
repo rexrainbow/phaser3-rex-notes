@@ -1,6 +1,10 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase';
 
 declare namespace KeysHub {
+    interface IKey extends Phaser.Input.Keyboard.Key {
+        key?: string,
+    }
+
     interface IConfig {
         singleMode?: boolean
     }
@@ -51,13 +55,13 @@ declare class KeysHub extends ComponentBase {
     getKeyObjects(
     ): {
         key: [
-            keyObject: Phaser.Input.Keyboard.Key[] | Phaser.Input.Keyboard.Key
+            keyObject: KeysHub.IKey[] | KeysHub.IKey
         ]
     };
 
     getKeyObjects(
         key: string
-    ): Phaser.Input.Keyboard.Key[];
+    ): KeysHub.IKey[];
 
     defineKeyStart(
         key: string
