@@ -18,7 +18,9 @@ class KeyHub extends Key {
     }
 
     plugKeyObject(keyObject) {
-        this.unplugKeyObject(keyObject);
+        if (keyObject.refKeyHub) {
+            keyObject.refKeyHub.unplugKeyObject(keyObject);
+        }
 
         AddItem(this.ports, keyObject, 0, function (keyObject) {
             keyObject

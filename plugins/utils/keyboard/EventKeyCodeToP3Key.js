@@ -1,4 +1,4 @@
-var EventKeyCodeToP3KeyCode = function (event) {
+var EventKeyCodeToP3Key = function (event) {
     var code = event.code.toUpperCase();
 
     if (code in KeyCodeMap) {
@@ -54,4 +54,4 @@ const KeyCodeMap = {
 
 }
 
-export default EventKeyCodeToP3KeyCode;
+export default EventKeyCodeToP3Key;

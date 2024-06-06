@@ -1,5 +1,7 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 import KeyHub from './KeyHub.js';
+import Methods from './methods/Methods.js';
+import KeyMap from '../../utils/input/KeyMap.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const KeyCodes = Phaser.Input.Keyboard.KeyCodes;
@@ -23,20 +25,29 @@ class KeysHub extends ComponentBase {
             return;
         }
 
-        for (var keyCode in this.keys) {
-            this.keys[keyCode].destroy();
+        for (var key in this.keys) {
+            this.keys[key].destroy();
         }
         this.keys = undefined;
 
         super.shutdown(fromScene);
     }
 
-    plugKeyObject(keyObject, keyCode) {
-        if (keyCode === undefined) {
-            keyCode = keyObject.keyCode;
+    plugKeyObject(keyObject, key) {
+        if (!keyObject) {
+            // Unplug/clear that keyHub
+            if (key) {
+                var keyHub = this.addKey(key);
+                keyHub.unplugAllKeyObject();
+            }
+            return this;
         }
 
-        var keyHub = this.addKey(keyCode);
+        if (!key) {
+            key = KeyMap[keyObject.key];
+        }
+
+        var keyHub = this.addKey(key);
         if (this.singleMode) {
             keyHub.unplugAllKeyObject();
         }
@@ -52,8 +63,8 @@ class KeysHub extends ComponentBase {
                 this.plugKeyObject(keys[i]);
             }
         } else {
-            for (var keyCode in keys) {
-                this.plugKeyObject(keys[keyCode], keyCode);
+            for (var key in keys) {
+                this.plugKeyObject(keys[key], key);
             }
         }
         return this;
@@ -74,21 +85,21 @@ class KeysHub extends ComponentBase {
                 this.unplugKeyObjects(keys[i]);
             }
         } else {
-            for (var keyCode in keys) {
-                this.unplugKeyObjects(keys[keyCode]);
+            for (var key in keys) {
+                this.unplugKeyObjects(keys[key]);
             }
         }
         return this;
     }
 
-    addKey(keyCode) {
-        if (typeof (keyCode) === 'string') {
-            keyCode = KeyCodes[keyCode.toUpperCase()];
+    addKey(key) {
+        if (typeof (key) === 'string') {
+            key = KeyCodes[key.toUpperCase()];
         }
-        if (!this.keys.hasOwnProperty(keyCode)) {
-            this.keys[keyCode] = new KeyHub(this, keyCode);
+        if (!this.keys.hasOwnProperty(key)) {
+            this.keys[key] = new KeyHub(this, key);
         }
-        return this.keys[keyCode];
+        return this.keys[key];
     }
 
     addKeys(keys) {
@@ -123,24 +134,29 @@ class KeysHub extends ComponentBase {
         });
     }
 
-    getKeyObjects(keyCode) {
-        if (keyCode === undefined) {
+    getKeyObjects(key) {
+        if (key === undefined) {
             var output = {};
-            for (keyCode in this.keys) {
-                var keyHubs = this.keys[keyCode].getKeyObjects();
+            for (key in this.keys) {
+                var keyHubs = this.keys[key].getKeyObjects();
                 if (this.singleMode) {
-                    output[keyCode] = keyHubs[0];
+                    output[key] = keyHubs[0];
                 } else {
-                    output[keyCode] = keyHubs;
+                    output[key] = keyHubs;
                 }
             }
             return output;
 
         } else {
-            return this.addKey(keyCode).getKeyObjects();
+            return this.addKey(key).getKeyObjects();
 
         }
     }
 }
+
+Object.assign(
+    KeysHub.prototype,
+    Methods,
+)
 
 export default KeysHub;

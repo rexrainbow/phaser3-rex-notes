@@ -363,7 +363,9 @@
     }, {
       key: "plugKeyObject",
       value: function plugKeyObject(keyObject) {
-        this.unplugKeyObject(keyObject);
+        if (keyObject.refKeyHub) {
+          keyObject.refKeyHub.unplugKeyObject(keyObject);
+        }
         AddItem(this.ports, keyObject, 0, function (keyObject) {
           keyObject.on('down', this.update, this).on('up', this.update, this);
           keyObject.refKeyHub = this;
@@ -464,6 +466,106 @@
     location: 0
   };
 
+  var EventKeyCodeToP3Key = function EventKeyCodeToP3Key(event) {
+    var code = event.code.toUpperCase();
+    if (code in KeyCodeMap) {
+      return KeyCodeMap[code];
+    }
+    if (code.startsWith('KEY')) {
+      code = code.substring('KEY'.length);
+      return code;
+    }
+    if (code.startsWith('ARROW')) {
+      code = code.substring('ARROW'.length);
+      return code;
+    }
+    if (code.startsWith('DIGIT')) {
+      code = code.substring('DIGIT'.length);
+      code = KeyCodeMap[code];
+      return code;
+    }
+    if (code.startsWith('NUMPAD')) {
+      code = code.substring('NUMPAD'.length);
+      if (code in KeyCodeMap) {
+        code = KeyCodeMap[code];
+      }
+      return "NUMPAD_".concat(code);
+    }
+    if (code.startsWith('SHIFT')) {
+      return 'SHIFT';
+    }
+    if (code.startsWith('CONTROL')) {
+      return 'CTRL';
+    }
+    if (code.startsWith('ALT')) {
+      return 'ALT';
+    }
+    return code;
+  };
+  var KeyCodeMap = {
+    '0': 'ZERO',
+    '1': 'ONE',
+    '2': 'TWO',
+    '3': 'THREE',
+    '4': 'FOUR',
+    '5': 'FIVE',
+    '6': 'SIX',
+    '7': 'SEVEN',
+    '8': 'EIGHT',
+    '9': 'NINE',
+    'CAPSLOCK': 'CAPS_LOCK',
+    'ESCAPE': 'ESC',
+    'PAGEUP': 'PAGE_UP',
+    'PAGEDOWN': 'PAGE_DOWN',
+    'QUOTE': 'QUOTES',
+    'BACKQUOTE': 'BACKTICK',
+    'BRACKETLEFT': 'OPEN_BRACKET',
+    'BRACKETRIGHT': 'CLOSED_BRACKET',
+    'SEMICOLON': 'COLON',
+    'SLASH': 'FORWARD_SLASH',
+    'BACKSLASH': 'BACK_SLASH'
+  };
+
+  var DefineKeyMethods = {
+    defineKeyStart: function defineKeyStart(key) {
+      this.defineKeyStop();
+      this.defineTargetKey = key;
+      this.emit('definekey.start', key);
+      return this;
+    },
+    defineKeyStop: function defineKeyStop(keyObject) {
+      if (!this.defineTargetKey) {
+        return this;
+      }
+      this.plugKeyObject(keyObject, this.defineTargetKey);
+      var defineTargetKey = this.defineTargetKey;
+      this.defineTargetKey = null;
+      this.emit('definekey.stop', defineTargetKey, keyObject);
+      return this;
+    },
+    defineKeyCancel: function defineKeyCancel() {
+      this.defineTargetKey = null;
+      return this;
+    },
+    listenFromKeyboard: function listenFromKeyboard() {
+      var self = this;
+      var keyboardManager = this.scene.input.keyboard;
+      var onKeyPress = function onKeyPress(event) {
+        var key = EventKeyCodeToP3Key(event);
+        var keyObject = keyboardManager.addKey(key);
+        self.defineKeyStop(keyObject);
+      };
+      keyboardManager.once('keydown', onKeyPress);
+      self.once('definekey.stop', function () {
+        keyboardManager.off('keydown', onKeyPress);
+      });
+      return this;
+    }
+  };
+
+  var methods = {};
+  Object.assign(methods, DefineKeyMethods);
+
   var GetValue = Phaser.Utils.Objects.GetValue;
   var KeyCodes = Phaser.Input.Keyboard.KeyCodes;
   var KeysHub = /*#__PURE__*/function (_ComponentBase) {
@@ -488,19 +590,27 @@
         if (this.isShutdown) {
           return;
         }
-        for (var keyCode in this.keys) {
-          this.keys[keyCode].destroy();
+        for (var key in this.keys) {
+          this.keys[key].destroy();
         }
         this.keys = undefined;
         _get(_getPrototypeOf(KeysHub.prototype), "shutdown", this).call(this, fromScene);
       }
     }, {
       key: "plugKeyObject",
-      value: function plugKeyObject(keyObject, keyCode) {
-        if (keyCode === undefined) {
-          keyCode = keyObject.keyCode;
+      value: function plugKeyObject(keyObject, key) {
+        if (!keyObject) {
+          // Unplug/clear that keyHub
+          if (key) {
+            var keyHub = this.addKey(key);
+            keyHub.unplugAllKeyObject();
+          }
+          return this;
         }
-        var keyHub = this.addKey(keyCode);
+        if (!key) {
+          key = KeyMap[keyObject.key];
+        }
+        var keyHub = this.addKey(key);
         if (this.singleMode) {
           keyHub.unplugAllKeyObject();
         }
@@ -515,8 +625,8 @@
             this.plugKeyObject(keys[i]);
           }
         } else {
-          for (var keyCode in keys) {
-            this.plugKeyObject(keys[keyCode], keyCode);
+          for (var key in keys) {
+            this.plugKeyObject(keys[key], key);
           }
         }
         return this;
@@ -538,22 +648,22 @@
             this.unplugKeyObjects(keys[i]);
           }
         } else {
-          for (var keyCode in keys) {
-            this.unplugKeyObjects(keys[keyCode]);
+          for (var key in keys) {
+            this.unplugKeyObjects(keys[key]);
           }
         }
         return this;
       }
     }, {
       key: "addKey",
-      value: function addKey(keyCode) {
-        if (typeof keyCode === 'string') {
-          keyCode = KeyCodes[keyCode.toUpperCase()];
+      value: function addKey(key) {
+        if (typeof key === 'string') {
+          key = KeyCodes[key.toUpperCase()];
         }
-        if (!this.keys.hasOwnProperty(keyCode)) {
-          this.keys[keyCode] = new KeyHub(this, keyCode);
+        if (!this.keys.hasOwnProperty(key)) {
+          this.keys[key] = new KeyHub(this, key);
         }
-        return this.keys[keyCode];
+        return this.keys[key];
       }
     }, {
       key: "addKeys",
@@ -588,25 +698,26 @@
       }
     }, {
       key: "getKeyObjects",
-      value: function getKeyObjects(keyCode) {
-        if (keyCode === undefined) {
+      value: function getKeyObjects(key) {
+        if (key === undefined) {
           var output = {};
-          for (keyCode in this.keys) {
-            var keyHubs = this.keys[keyCode].getKeyObjects();
+          for (key in this.keys) {
+            var keyHubs = this.keys[key].getKeyObjects();
             if (this.singleMode) {
-              output[keyCode] = keyHubs[0];
+              output[key] = keyHubs[0];
             } else {
-              output[keyCode] = keyHubs;
+              output[key] = keyHubs;
             }
           }
           return output;
         } else {
-          return this.addKey(keyCode).getKeyObjects();
+          return this.addKey(key).getKeyObjects();
         }
       }
     }]);
     return KeysHub;
   }(ComponentBase);
+  Object.assign(KeysHub.prototype, methods);
 
   var KeysHubPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(KeysHubPlugin, _Phaser$Plugins$BaseP);

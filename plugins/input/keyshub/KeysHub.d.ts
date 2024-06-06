@@ -8,7 +8,7 @@ declare namespace KeysHub {
 
 declare class KeysHub extends ComponentBase {
     constructor(
-        parent: Phaser.Scene | Phaser.Game,
+        parent: Phaser.Scene,
         config?: KeysHub.IConfig
     );
 
@@ -16,11 +16,11 @@ declare class KeysHub extends ComponentBase {
 
     plugKeyObject(
         keyObject: Phaser.Input.Keyboard.Key,
-        keyCode?: string
+        key?: string
     ): this;
 
     plugKeyObjects(
-        keys: Phaser.Input.Keyboard.Key[] | { keyCode: [keyObject: Phaser.Input.Keyboard.Key] }
+        keys: Phaser.Input.Keyboard.Key[] | { key: [keyObject: Phaser.Input.Keyboard.Key] }
     ): this;
 
     unplugKeyObject(
@@ -28,15 +28,15 @@ declare class KeysHub extends ComponentBase {
     ): this;
 
     unplugKeyObjects(
-        keys: Phaser.Input.Keyboard.Key[] | { keyCode: [keyObject: Phaser.Input.Keyboard.Key] }
+        keys: Phaser.Input.Keyboard.Key[] | { key: [keyObject: Phaser.Input.Keyboard.Key] }
     ): this;
 
-    addKey(keyCode: string): Phaser.Input.Keyboard.Key;
+    addKey(key: string): Phaser.Input.Keyboard.Key;
 
     addKeys(
         keys: string
     ): {
-        keyCode: [
+        key: [
             keyObject: Phaser.Input.Keyboard.Key
         ]
     };
@@ -50,14 +50,26 @@ declare class KeysHub extends ComponentBase {
 
     getKeyObjects(
     ): {
-        keyCode: [
+        key: [
             keyObject: Phaser.Input.Keyboard.Key[] | Phaser.Input.Keyboard.Key
         ]
     };
 
     getKeyObjects(
-        keyCode: string
+        key: string
     ): Phaser.Input.Keyboard.Key[];
+
+    defineKeyStart(
+        key: string
+    ): this;
+
+    defineKeyStop(
+        keyObject?: Phaser.Input.Keyboard.Key
+    ): this;
+
+    defineKeyCancel(): this;
+
+    listenFromKeyboard(): this;
 
 }
 
