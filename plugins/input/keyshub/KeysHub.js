@@ -43,7 +43,9 @@ class KeysHub extends ComponentBase {
             return this;
         }
 
-        keyObject.key = KeyMap[keyObject.keyCode];
+        if (!keyObject.hasOwnProperty('key')) {
+            keyObject.key = KeyMap[keyObject.keyCode];
+        }
 
         if (!key) {
             key = keyObject.key;

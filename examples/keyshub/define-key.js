@@ -22,27 +22,31 @@ class Demo extends Phaser.Scene {
             right: CreateResetKeyButton(this, 'right').setPosition(0, 350)
         };
 
+        var UpdateButtonsText = function () {
+            for (var key in buttons) {
+                var keyObject = keysHub.getKeyObjects(key);
+                var displayKeyName = (keyObject) ? `: Keyboard ${keyObject.key.toUpperCase()}` : '';
+                buttons[key]
+                    .setText(`${key.toUpperCase()} ${displayKeyName}`)
+                    .setBackgroundColor(null);
+            }
+        }
+
         keysHub
             .on('definekey.start', function (key) {
                 buttons[key]
                     .setText(key.toUpperCase())
                     .setBackgroundColor('grey');
             })
-            .on('definekey.stop', function (key, keyObject) {
-                // Update display text of all buttons
-                for (var key in buttons) {
-                    var keyObject = keysHub.getKeyObjects(key);
-                    var displayKeyName = (keyObject) ? `: Keyboard ${keyObject.key.toUpperCase()}` : '';
-                    buttons[key]
-                        .setText(`${key.toUpperCase()} ${displayKeyName}`)
-                        .setBackgroundColor(null);
-                }
-            })
+            .on('definekey.stop', UpdateButtonsText)
 
         this.events
             .on('definekey.start', function (key) {
                 keysHub.defineKeyStart(key).listenFromKeyboard();
             })
+
+
+        UpdateButtonsText();
 
         this.text = this.add.text(0, 0);
     }
