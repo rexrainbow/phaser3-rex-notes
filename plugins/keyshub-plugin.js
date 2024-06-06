@@ -1,4 +1,5 @@
 import KeysHub from './keyshub.js';
+import EventKeyCodeToP3KeyCode from './utils/keyboard/EventKeyCodeToP3KeyCode.js';
 
 class KeysHubPlugin extends Phaser.Plugins.BasePlugin {
 
@@ -13,6 +14,10 @@ class KeysHubPlugin extends Phaser.Plugins.BasePlugin {
 
     add(scene, config) {
         return new KeysHub(scene, config);
+    }
+
+    getKeyCodeFromEvent(event) {
+        return EventKeyCodeToP3KeyCode(event);
     }
 
 }
