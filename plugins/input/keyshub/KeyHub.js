@@ -30,6 +30,8 @@ class KeyHub extends Key {
             keyObject.refKeyHub = this;
 
             this.update(FakeEvent);
+
+            this.plugin.emit('plug', this.key, keyObject);
         }, this);
 
         return this;
@@ -48,6 +50,8 @@ class KeyHub extends Key {
             keyObject.refKeyHub = undefined;
 
             this.update(FakeEvent);
+
+            this.plugin.emit('unplug', this.key, keyObject);
         }, this);
 
         return this;

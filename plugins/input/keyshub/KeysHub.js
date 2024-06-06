@@ -97,13 +97,18 @@ class KeysHub extends ComponentBase {
     }
 
     addKey(key) {
+        var keyCode;
         if (typeof (key) === 'string') {
-            key = KeyCodes[key.toUpperCase()];
+            keyCode = KeyCodes[key.toUpperCase()];
+        } else {
+            keyCode = key;
         }
-        if (!this.keys.hasOwnProperty(key)) {
-            this.keys[key] = new KeyHub(this, key);
+        if (!this.keys.hasOwnProperty(keyCode)) {
+            var keysHub = new KeyHub(this, keyCode);
+            this.keys[keyCode] = keysHub;
+            keysHub.key = key;
         }
-        return this.keys[key];
+        return this.keys[keyCode];
     }
 
     addKeys(keys) {
@@ -112,10 +117,10 @@ class KeysHub extends ComponentBase {
             keys = keys.split(',');
 
             for (var i = 0, cnt = keys.length; i < cnt; i++) {
-                var currentKey = keys[i].trim();
+                var key = keys[i].trim();
 
-                if (currentKey) {
-                    output[currentKey] = this.addKey(currentKey);
+                if (key) {
+                    output[key] = this.addKey(key);
                 }
             }
         } else {
@@ -141,12 +146,13 @@ class KeysHub extends ComponentBase {
     getKeyObjects(key) {
         if (key === undefined) {
             var output = {};
-            for (key in this.keys) {
-                var keyHubs = this.keys[key].getKeyObjects();
+            for (var keyCode in this.keys) {
+                var keysHub = this.keys[keyCode];
+                var keyObjects = keysHub.getKeyObjects();
                 if (this.singleMode) {
-                    output[key] = keyHubs[0];
+                    output[keysHub.key] = keyObjects[0];
                 } else {
-                    output[key] = keyHubs;
+                    output[keysHub.key] = keyObjects;
                 }
             }
             return output;
