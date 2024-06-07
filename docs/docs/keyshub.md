@@ -9,6 +9,7 @@ Key object interface mapping from multiple source of key objects.
 
 - [Multiple mode](https://codepen.io/rexrainbow/pen/bGyWKoz)
 - [Single mode](https://codepen.io/rexrainbow/pen/LYoyrOL)
+- [Define key](https://codepen.io/rexrainbow/pen/YzbQxGz)
 
 ## Usage
 
@@ -169,9 +170,76 @@ keysHub.destroy();
 ### Get plugged key objects
 
 ```javascript
-var keyObject = keysHub.getKeyObjects(keyCode);
+var keyObject = keysHub.getKeyObjects(key);
 ```
 
+- `key` : Key string, or keyCode number.
 - `keyObject` : 
     - A key object if `singleMode` is set to `true`
     - A list of key objects if if `singleMode` is set to `false`
+
+### Re-define key map
+
+Set `singleMode` to `ture` when creating keysHub instance.
+
+#### Start definition task
+
+```javascript
+keysHub.defineKeyStart(key);  // key: key string
+```
+
+- Fire `'definekey.start'` event
+
+#### Listen key input
+
+- From keyboard
+    ```javascript
+    keysHub.listenFromKeyboard();
+    ```
+
+#### Cancel definition task
+
+```javascript
+keysHub.defineKeyCancel();
+```
+
+- Fire `'definekey.complete'` event.
+
+#### Complete definition task
+
+Complete when any key input
+
+- Fire `'definekey.complete'` event.
+
+### Events
+
+- On key object plug
+    ```javascript
+    keysHub.on('plug', function(key, keyObject) {
+
+    })
+    ```
+- On key object unplug
+    ```javascript
+    keysHub.on('unplug', function(key, keyObject) {
+        
+    })
+    ```
+- On define-key start
+    ```javascript
+    keysHub.on('definekey.start', function(key) {
+
+    })
+    ```
+- On define-key complete
+    ```javascript
+    keysHub.on('definekey.complete', function(key, keyObject) {
+
+    })
+    ```
+    - `key` :
+        - A string : Plug new key object to that Key object interface.
+        - `undefined` : Cancel define-key task.
+    - `keyObject` : 
+        - A key object : New plugged key object.
+        - `undefined` : Remove current plugged key.

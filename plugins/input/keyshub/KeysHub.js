@@ -1,5 +1,5 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
-import KeyHub from './KeyHub.js';
+import KeyHub from './methods/KeyHub.js';
 import Methods from './methods/Methods.js';
 import KeyMap from '../../utils/input/KeyMap.js';
 
@@ -102,6 +102,7 @@ class KeysHub extends ComponentBase {
             keyCode = KeyCodes[key.toUpperCase()];
         } else {
             keyCode = key;
+            key = KeyMap[keyCode];
         }
         if (!this.keys.hasOwnProperty(keyCode)) {
             var keysHub = new KeyHub(this, keyCode);

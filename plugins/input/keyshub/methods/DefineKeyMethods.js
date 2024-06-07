@@ -18,7 +18,7 @@ export default {
         var defineTargetKey = this.defineTargetKey;
         this.defineTargetKey = null;
 
-        this.emit('definekey.stop', defineTargetKey, keyObject);
+        this.emit('definekey.complete', defineTargetKey, keyObject);
 
         return this;
     },
@@ -30,7 +30,7 @@ export default {
 
         this.defineTargetKey = null;
 
-        this.emit('definekey.stop');
+        this.emit('definekey.complete');
 
         return this;
     },
@@ -45,7 +45,7 @@ export default {
             self.defineKeyStop(keyObject);
         }
         keyboardManager.once('keydown', onKeyPress);
-        self.once('definekey.stop', function () {
+        self.once('definekey.complete', function () {
             keyboardManager.off('keydown', onKeyPress);
         })
 

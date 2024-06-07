@@ -4653,6 +4653,54 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#re-define-key-map" class="md-nav__link">
+    Re-define key map
+  </a>
+  
+    <nav class="md-nav" aria-label="Re-define key map">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#start-definition-task" class="md-nav__link">
+    Start definition task
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#listen-key-input" class="md-nav__link">
+    Listen key input
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cancel-definition-task" class="md-nav__link">
+    Cancel definition task
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complete-definition-task" class="md-nav__link">
+    Complete definition task
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9749,6 +9797,54 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#re-define-key-map" class="md-nav__link">
+    Re-define key map
+  </a>
+  
+    <nav class="md-nav" aria-label="Re-define key map">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#start-definition-task" class="md-nav__link">
+    Start definition task
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#listen-key-input" class="md-nav__link">
+    Listen key input
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cancel-definition-task" class="md-nav__link">
+    Cancel definition task
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complete-definition-task" class="md-nav__link">
+    Complete definition task
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9784,6 +9880,7 @@
 <ul>
 <li><a href="https://codepen.io/rexrainbow/pen/bGyWKoz">Multiple mode</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/LYoyrOL">Single mode</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/YzbQxGz">Define key</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/keyshub">Sample code</a></p>
@@ -9920,12 +10017,73 @@
 </code></pre></div></li>
 </ul>
 <h3 id="get-plugged-key-objects">Get plugged key objects<a class="headerlink" href="#get-plugged-key-objects" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">keyObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">keysHub</span><span class="p">.</span><span class="nx">getKeyObjects</span><span class="p">(</span><span class="nx">keyCode</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">keyObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">keysHub</span><span class="p">.</span><span class="nx">getKeyObjects</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div>
 <ul>
+<li><code>key</code> : Key string, or keyCode number.</li>
 <li><code>keyObject</code> : <ul>
 <li>A key object if <code>singleMode</code> is set to <code>true</code></li>
 <li>A list of key objects if if <code>singleMode</code> is set to <code>false</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="re-define-key-map">Re-define key map<a class="headerlink" href="#re-define-key-map" title="Permanent link">&para;</a></h3>
+<p>Set <code>singleMode</code> to <code>ture</code> when creating keysHub instance.</p>
+<h4 id="start-definition-task">Start definition task<a class="headerlink" href="#start-definition-task" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nx">keysHub</span><span class="p">.</span><span class="nx">defineKeyStart</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span><span class="w">  </span><span class="c1">// key: key string</span>
+</code></pre></div>
+<ul>
+<li>Fire <code>'definekey.start'</code> event</li>
+</ul>
+<h4 id="listen-key-input">Listen key input<a class="headerlink" href="#listen-key-input" title="Permanent link">&para;</a></h4>
+<ul>
+<li>From keyboard
+    <div class="highlight"><pre><span></span><code><span class="nx">keysHub</span><span class="p">.</span><span class="nx">listenFromKeyboard</span><span class="p">();</span>
+</code></pre></div></li>
+</ul>
+<h4 id="cancel-definition-task">Cancel definition task<a class="headerlink" href="#cancel-definition-task" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nx">keysHub</span><span class="p">.</span><span class="nx">defineKeyCancel</span><span class="p">();</span>
+</code></pre></div>
+<ul>
+<li>Fire <code>'definekey.complete'</code> event.</li>
+</ul>
+<h4 id="complete-definition-task">Complete definition task<a class="headerlink" href="#complete-definition-task" title="Permanent link">&para;</a></h4>
+<p>Complete when any key input</p>
+<ul>
+<li>Fire <code>'definekey.complete'</code> event.</li>
+</ul>
+<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<ul>
+<li>On key object plug
+    <div class="highlight"><pre><span></span><code><span class="nx">keysHub</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;plug&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">keyObject</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">})</span>
+</code></pre></div></li>
+<li>On key object unplug
+    <div class="highlight"><pre><span></span><code><span class="nx">keysHub</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;unplug&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">keyObject</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">})</span>
+</code></pre></div></li>
+<li>On define-key start
+    <div class="highlight"><pre><span></span><code><span class="nx">keysHub</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;definekey.start&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">})</span>
+</code></pre></div></li>
+<li>On define-key complete
+    <div class="highlight"><pre><span></span><code><span class="nx">keysHub</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;definekey.complete&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">keyObject</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">})</span>
+</code></pre></div><ul>
+<li><code>key</code> :<ul>
+<li>A string : Plug new key object to that Key object interface.</li>
+<li><code>undefined</code> : Cancel define-key task.</li>
+</ul>
+</li>
+<li><code>keyObject</code> : <ul>
+<li>A key object : New plugged key object.</li>
+<li><code>undefined</code> : Remove current plugged key.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

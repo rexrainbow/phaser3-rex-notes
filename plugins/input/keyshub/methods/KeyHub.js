@@ -1,4 +1,4 @@
-import KeyMap from '../../utils/input/KeyMap.js';
+import KeyMap from '../../../utils/input/KeyMap.js';
 
 const Key = Phaser.Input.Keyboard.Key;
 const AddItem = Phaser.Utils.Array.Add;

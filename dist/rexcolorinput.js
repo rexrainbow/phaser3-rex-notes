@@ -25253,12 +25253,10 @@
       var context = this.context;
       if (style.stroke && style.stroke !== 'none' && style.strokeThickness > 0) {
         style.syncShadow(context, style.shadowStroke);
-        context.strokeStyle = style.stroke;
         context.strokeText(text, x, y);
       }
       if (style.color && style.color !== 'none') {
         style.syncShadow(context, style.shadowFill);
-        context.fillStyle = style.color;
         context.fillText(text, x, y);
       }
     },

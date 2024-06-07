@@ -16,20 +16,18 @@ class Demo extends Phaser.Scene {
         this.cursorkeys = keysHub.createCursorKeys();
 
         var buttons = {
-            up: CreateResetKeyButton(this, 'up').setPosition(0, 200),
-            down: CreateResetKeyButton(this, 'down').setPosition(0, 250),
-            left: CreateResetKeyButton(this, 'left').setPosition(0, 300),
-            right: CreateResetKeyButton(this, 'right').setPosition(0, 350)
+            UP: CreateResetKeyButton(this, 'UP').setPosition(0, 200),
+            DOWN: CreateResetKeyButton(this, 'DOWN').setPosition(0, 250),
+            LEFT: CreateResetKeyButton(this, 'LEFT').setPosition(0, 300),
+            RIGHT: CreateResetKeyButton(this, 'RIGHT').setPosition(0, 350)
         };
 
-        var UpdateButtonsText = function () {
-            for (var key in buttons) {
-                var keyObject = keysHub.getKeyObjects(key);
-                var displayKeyName = (keyObject) ? `: Keyboard ${keyObject.key.toUpperCase()}` : '';
-                buttons[key]
-                    .setText(`${key.toUpperCase()} ${displayKeyName}`)
-                    .setBackgroundColor(null);
-            }
+        var UpdateButtonText = function (key) {
+            var keyObject = keysHub.getKeyObjects(key);
+            var displayKeyName = (keyObject) ? `: Keyboard ${keyObject.key}` : '';
+            buttons[key]
+                .setText(`${key} ${displayKeyName}`)
+                .setBackgroundColor(null);
         }
 
         keysHub
@@ -38,15 +36,17 @@ class Demo extends Phaser.Scene {
                     .setText(key.toUpperCase())
                     .setBackgroundColor('grey');
             })
-            .on('definekey.stop', UpdateButtonsText)
+            .on('plug', function (key, keyObject) {
+                UpdateButtonText(key);
+            })
+            .on('unplug', function (key, keyObject) {
+                UpdateButtonText(key);
+            })
 
         this.events
             .on('definekey.start', function (key) {
                 keysHub.defineKeyStart(key).listenFromKeyboard();
             })
-
-
-        UpdateButtonsText();
 
         this.text = this.add.text(0, 0);
     }
@@ -65,7 +65,7 @@ class Demo extends Phaser.Scene {
 }
 
 var CreateResetKeyButton = function (scene, key) {
-    return scene.add.text(0, 0, key.toUpperCase(), { padding: { top: 10, bottom: 10 }, fixedWidth: 200 })
+    return scene.add.text(0, 0, key, { padding: { top: 10, bottom: 10 }, fixedWidth: 200 })
         .setInteractive()
         .on('pointerup', function () {
             scene.events.emit('definekey.start', key)
