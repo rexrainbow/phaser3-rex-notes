@@ -35,7 +35,7 @@ class ContainerLite extends Base {
         this.syncChildrenEnable = false; // Don't sync properties changing anymore
         super.destroy(fromScene);
 
-        if (this.privateRenderLayer) {
+        if (this.privateRenderLayer && this.privateRenderLayer.scene) {
             this.privateRenderLayer.list.length = 0;  // Remove all children without trigger callback
             this.privateRenderLayer.destroy();
         }
