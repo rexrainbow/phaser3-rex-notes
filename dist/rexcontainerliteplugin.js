@@ -2293,7 +2293,7 @@
         }
         this.syncChildrenEnable = false; // Don't sync properties changing anymore
         _get(_getPrototypeOf(ContainerLite.prototype), "destroy", this).call(this, fromScene);
-        if (this.privateRenderLayer) {
+        if (this.privateRenderLayer && this.privateRenderLayer.scene) {
           this.privateRenderLayer.list.length = 0; // Remove all children without trigger callback
           this.privateRenderLayer.destroy();
         }
