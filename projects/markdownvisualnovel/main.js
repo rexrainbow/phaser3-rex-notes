@@ -63,26 +63,9 @@ class Demo extends Phaser.Scene {
                     var gameObject = dialog.getElement('action');
                     if (gameObject) {
                         dialog.setChildAlpha(gameObject, 1);
-
-                        if (dialog.tweenAction) {
-                            dialog.tweenAction.remove();
-                            dialog.tweenAction = undefined;
+                        if (gameObject.start) {
+                            gameObject.start();
                         }
-
-                        var endY = gameObject.getData('endY');
-                        if (endY === undefined) {
-                            endY = gameObject.y;
-                            gameObject.setData('endY', endY);
-                        }
-
-                        dialog.tweenAction = gameObject.scene.tweens.add({
-                            targets: gameObject,
-                            y: { start: endY - 50, to: endY },
-                            ease: 'Bounce', // 'Cubic', 'Elastic', 'Bounce', 'Back'
-                            duration: 500,
-                            repeat: 0, // -1: infinity
-                            yoyo: false
-                        });
                     }
                 }
             })
@@ -93,10 +76,8 @@ class Demo extends Phaser.Scene {
                     var gameObject = dialog.getElement('action');
                     if (gameObject) {
                         dialog.setChildAlpha(gameObject, 0);
-
-                        if (dialog.tweenAction) {
-                            dialog.tweenAction.remove();
-                            dialog.tweenAction = undefined;
+                        if (gameObject.stop) {
+                            gameObject.stop();
                         }
                     }
                 }

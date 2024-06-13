@@ -12,7 +12,7 @@ export default {
 
     icon: { width: 120, height: 120 },
 
-    action: { key: 'nextPage', alpha: 0, },
+    action: { width: 40, height: 40, key: 'arrow', alpha: 0, },
 
     text: { fontSize: 30, maxLines: 4 },
 
