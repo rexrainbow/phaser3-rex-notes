@@ -438,6 +438,21 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
         // ...
     }
     ```
+1. [AIO-spinner](shape-spinner.md#aio)
+    ```javascript
+    var spinner = scene.rexUI.add.aioSpinner(config);
+    ```
+    or
+    ```javascript
+    class MySpinner extends RexPlugins.UI.AIOSpinner {
+        constructor(scene, configa) {
+            super(scene, configa);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
 1. [Chart](ui-chart.md): Draw [chart](https://www.chartjs.org/) on [canvas](canvas.md).
 
 ### Colored text objects

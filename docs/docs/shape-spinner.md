@@ -9,6 +9,7 @@ Loading animations on shape.
 
 - [Spinners](https://codepen.io/rexrainbow/pen/vYgNRMp)
     - [Arrow](https://codepen.io/rexrainbow/pen/gOJmKZy)
+    - [AIO](https://codepen.io/rexrainbow/pen/abrVgEd)
 - [Custom spinner](https://codepen.io/rexrainbow/pen/YzNqJEd)
 - [Loading animation](https://codepen.io/rexrainbow/pen/OJdMzbL)
 
@@ -31,6 +32,12 @@ Loading animations on shape.
   ```
 - Add spinner object
   ```javascript
+  var aio = scene.rexSpinner.add.aio(config);
+  var arrow = scene.rexSpinner.add.arrow(config);
+  var downArrow = scene.rexSpinner.add.downArrow(config);
+  var leftArrow = scene.rexSpinner.add.leftArrow(config);
+  var rightArrow = scene.rexSpinner.add.rightArrow(config);
+  var upArrow = scene.rexSpinner.add.upArrow(config);
   var audio = scene.rexSpinner.add.audio(config);
   var ball = scene.rexSpinner.add.ball(config);
   var bars = scene.rexSpinner.add.bars(config);
@@ -40,6 +47,7 @@ Loading animations on shape.
   var dots = scene.rexSpinner.add.dots(config);
   var facebook = scene.rexSpinner.add.facebook(config);
   var grid = scene.rexSpinner.add.grid(config);
+  var hearts = scene.rexSpinner.add.hearts(config);
   var ios = scene.rexSpinner.add.ios(config);
   var orbit = scene.rexSpinner.add.orbit(config);
   var oval = scene.rexSpinner.add.oval(config);
@@ -48,8 +56,7 @@ Loading animations on shape.
   var radio = scene.rexSpinner.add.radio(config);
   var rings = scene.rexSpinner.add.rings(config);
   var spinner = scene.rexSpinner.add.spinner(config);
-  var hearts = scene.rexSpinner.add.hearts(config);
-  var arrow = scene.rexSpinner.add.arrow(config);
+
   ```
 
 #### Import plugin
@@ -79,6 +86,12 @@ Loading animations on shape.
   ```
 - Add spinner object
   ```javascript
+  var aio = scene.rexSpinner.add.aio(config);
+  var arrow = scene.rexSpinner.add.arrow(config);
+  var downArrow = scene.rexSpinner.add.downArrow(config);
+  var leftArrow = scene.rexSpinner.add.leftArrow(config);
+  var rightArrow = scene.rexSpinner.add.rightArrow(config);
+  var upArrow = scene.rexSpinner.add.upArrow(config);  
   var audio = scene.rexSpinner.add.audio(config);
   var ball = scene.rexSpinner.add.ball(config);
   var bars = scene.rexSpinner.add.bars(config);
@@ -88,6 +101,7 @@ Loading animations on shape.
   var dots = scene.rexSpinner.add.dots(config);
   var facebook = scene.rexSpinner.add.facebook(config);
   var grid = scene.rexSpinner.add.grid(config);
+  var hearts = scene.rexSpinner.add.hearts(config);
   var ios = scene.rexSpinner.add.ios(config);
   var orbit = scene.rexSpinner.add.orbit(config);
   var oval = scene.rexSpinner.add.oval(config);
@@ -95,9 +109,7 @@ Loading animations on shape.
   var puff = scene.rexSpinner.add.puff(config);
   var radio = scene.rexSpinner.add.radio(config);
   var rings = scene.rexSpinner.add.rings(config);
-  var spinner = scene.rexSpinner.add.spinner(config);
-  var hearts = scene.rexSpinner.add.hearts(config);
-  var arrow = scene.rexSpinner.add.arrow(config);
+  var spinner = scene.rexSpinner.add.spinner(config);    
   ```
 
 #### Import class
@@ -109,8 +121,8 @@ Loading animations on shape.
 - Import class
   ```javascript
   import { 
-    Audio, Ball, Bars, Box, Clock, Cube, Custom, Dots, Facebook, Grid, 
-    Ios, Orbit, Oval, Puff, Radio, Rings, Spinner, Hearts, Arrow
+    AIO, Arrow, Audio, Ball, Bars, Box, Clock, Cube, Custom, Dots, 
+    Facebook, Grid, Hearts, Ios, Orbit, Oval, Puff, Radio, Rings, Spinner
   } from "phaser3-rex-plugins/templates/spinner/spinner-components.js";
   ```
 - Add spinner object
@@ -121,42 +133,82 @@ Loading animations on shape.
 
 ### Add spinner object
 
-- General
-    ```javascript
-    var spinner = scene.rexSpinner.add.audio({
-      // x: 0,
-      // y: 0,
-      // width: 64,
-      // height: 64,
-      // color: 0xffffff,
-    
-      // duration: 1000,
-      // start: true,
-      // delay: 0,
-      // repeatDelay: 0,
-    });
-    ```
-    - `x`, `y` : Position of this object.
-    - `width`, `height` : Size of this object.
-    - `color` : Fill color, or stroke color. Default value is `0xffffff`
-    - `duration` : Duration of animation.
-    - `start` : Start animation when object created.
-       - `false` : Don't play animation at beginning.
-    - `delay` : Delay time in ms before running.
-    - `repeatDelay` : Delay time between 2 periods.
-- Arrow
-    ```javascript
-    var spinner = scene.rexSpinner.add.audio({
-      // ...
+#### General
 
-      // direction:'down'
-    });
-    ```
-    - `direction` :
-        - `0`, `'right'` : Arrow from left to right.
-        - `1`, `'down'` : Arrow from up to down. Default behavior.
-        - `2`, `'left'` : Arrow from right to left.
-        - `3`, `'up'` : Arrow from down to up.
+```javascript
+var spinner = scene.rexSpinner.add.audio({
+  // x: 0,
+  // y: 0,
+  // width: 64,
+  // height: 64,
+  // color: 0xffffff,
+
+  // duration: 1000,
+  // start: true,
+  // delay: 0,
+  // repeatDelay: 0,
+});
+```
+
+- `x`, `y` : Position of this object.
+- `width`, `height` : Size of this object.
+- `color` : Fill color, or stroke color. Default value is `0xffffff`
+- `duration` : Duration of animation.
+- `start` : Start animation when object created.
+   - `false` : Don't play animation at beginning.
+- `delay` : Delay time in ms before running.
+- `repeatDelay` : Delay time between 2 periods.
+
+#### Arrow
+
+```javascript
+var spinner = scene.rexSpinner.add.audio({
+  // ...
+  // direction: 'down'
+});
+```
+
+- `direction` :
+    - `0`, `'right'` : Arrow from left to right.
+    - `1`, `'down'` : Arrow from up to down. Default behavior.
+    - `2`, `'left'` : Arrow from right to left.
+    - `3`, `'up'` : Arrow from down to up.
+
+#### AIO
+
+All-in-one
+
+```javascript
+var spinner = scene.rexSpinner.add.aio({
+  // ...
+  // animationMode: undefined
+});
+``` 
+
+- `animationMode` :
+    - `undefined` : Play random spinner animation.
+    - `'leftArrow' ` : Play *leftArrow* spinner animation.
+    - `'rightArrow'` : Play *rightArrow* spinner animation.
+    - `'upArrow'` : Play *upArrow* spinner animation.
+    - `'downArrow'` : Play *dowbArrow* spinner animation.
+    - `'audio'` : Play *audio* spinner animation.
+    - `'ball'` : Play *ball* spinner animation. 
+    - `'bars'` : Play *bars* spinner animation. 
+    - `'box'` : Play *box* spinner animation.
+    - `'clock'` : Play *clock* spinner animation.
+    - `'cube'` : Play *cube* spinner animation.
+    - `'dots'` : Play *dots* spinner animation.
+    - `'facebook'` : Play *facebook* spinner animation.
+    - `'grid'` : Play *grid* spinner animation.
+    - `'hearts'` : Play *hearts* spinner animation.
+    - `'ios'` : Play *ios* spinner animation.
+    - `'oribit'` : Play *oribit* spinner animation. 
+    - `'oval'` : Play *oval* spinner animation.
+    - `'pie'` : Play *pie* spinner animation.
+    - `'puff'` : Play *puff* spinner animation.
+    - `'radio'` : Play *radio* spinner animation.
+    - `'rings'` : Play *rings* spinner animation.
+    - `'spinner'` : Play *spinner* spinner animation.
 
 ### Play animation
 
@@ -265,6 +317,43 @@ var isRunning = spinner.isRunning;
     ```javascript
     spinner.ease = ease;
     ```
+
+### Set animation mode
+
+[AIO-spinner](#aio) only
+
+```javascript
+aioSpinner.setAnimationMode(mode);
+```
+
+- `mode` : 
+    - `undefined` : Play random spinner animation.
+    - `'leftArrow' ` : Play *leftArrow* spinner animation.
+    - `'rightArrow'` : Play *rightArrow* spinner animation.
+    - `'upArrow'` : Play *upArrow* spinner animation.
+    - `'downArrow'` : Play *dowbArrow* spinner animation.
+    - `'audio'` : Play *audio* spinner animation.
+    - `'ball'` : Play *ball* spinner animation. 
+    - `'bars'` : Play *bars* spinner animation. 
+    - `'box'` : Play *box* spinner animation.
+    - `'clock'` : Play *clock* spinner animation.
+    - `'cube'` : Play *cube* spinner animation.
+    - `'dots'` : Play *dots* spinner animation.
+    - `'facebook'` : Play *facebook* spinner animation.
+    - `'grid'` : Play *grid* spinner animation.
+    - `'hearts'` : Play *hearts* spinner animation.
+    - `'ios'` : Play *ios* spinner animation.
+    - `'oribit'` : Play *oribit* spinner animation. 
+    - `'oval'` : Play *oval* spinner animation.
+    - `'pie'` : Play *pie* spinner animation.
+    - `'puff'` : Play *puff* spinner animation.
+    - `'radio'` : Play *radio* spinner animation.
+    - `'rings'` : Play *rings* spinner animation.
+    - `'spinner'` : Play *spinner* spinner animation.
+
+```javascript
+aioSpinner.setRandomAnimationMode();
+```
 
 ### Custom spinner
 

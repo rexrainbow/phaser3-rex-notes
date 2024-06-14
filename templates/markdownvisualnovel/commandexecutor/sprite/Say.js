@@ -16,6 +16,7 @@ var Say = function (
         typingSpeed,
         icon, iconFrame,
         iconCrossDuration, iconCrossMode = 'crossFade',
+        waitIconAnimationMode,
         clickAfterComplete = true,
         wait = true
     } = {},
@@ -53,6 +54,7 @@ var Say = function (
                 typingSpeed,
                 iconCrossDuration, iconCrossMode,
                 more,
+                waitIconAnimationMode,
                 clickAfterComplete,
                 wait
             },

@@ -1,5 +1,38 @@
 # Text-box commands
 
+## Style of wait-icon
+
+```javascript
+{
+  action: { width: 40, height: 40, animationMode: 'downArrow' },
+}
+```
+
+- `animationMode` :
+    - `undefined` : Play random spinner animation.
+    - `'leftArrow' ` : Play *leftArrow* spinner animation.
+    - `'rightArrow'` : Play *rightArrow* spinner animation.
+    - `'upArrow'` : Play *upArrow* spinner animation.
+    - `'downArrow'` : Play *dowbArrow* spinner animation.
+    - `'audio'` : Play *audio* spinner animation.
+    - `'ball'` : Play *ball* spinner animation. 
+    - `'bars'` : Play *bars* spinner animation. 
+    - `'box'` : Play *box* spinner animation.
+    - `'clock'` : Play *clock* spinner animation.
+    - `'cube'` : Play *cube* spinner animation.
+    - `'dots'` : Play *dots* spinner animation.
+    - `'facebook'` : Play *facebook* spinner animation.
+    - `'grid'` : Play *grid* spinner animation.
+    - `'hearts'` : Play *hearts* spinner animation.
+    - `'ios'` : Play *ios* spinner animation.
+    - `'oribit'` : Play *oribit* spinner animation. 
+    - `'oval'` : Play *oval* spinner animation.
+    - `'pie'` : Play *pie* spinner animation.
+    - `'puff'` : Play *puff* spinner animation.
+    - `'radio'` : Play *radio* spinner animation.
+    - `'rings'` : Play *rings* spinner animation.
+    - `'spinner'` : Play *spinner* spinner animation.
+
 ## Create Game Object Instance
 
 ```
@@ -104,6 +137,7 @@ NAME.typing
   typingSpeed=
   iconCrossDuration=
   iconCrossMode='crossFade'
+  waitIconAnimationMode
   clickAfterComplete=true
   wait=true
 

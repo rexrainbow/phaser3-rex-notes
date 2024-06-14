@@ -291,6 +291,7 @@ NAME.say
   typingSpeed=
   iconCrossDuration=
   iconCrossMode='crossFade'
+  waitIconAnimationMode
   clickAfterComplete=true
   wait=true
 
