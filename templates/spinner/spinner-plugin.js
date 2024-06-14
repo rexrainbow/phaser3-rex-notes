@@ -1,5 +1,6 @@
 import ObjectFactory from './ObjectFactory.js';
 
+import AIOFactory from './aio/Factory.js';
 import AudioFactory from './audio/Factory.js';
 import ArrowFactory from './arrow/Factory.js';
 import BallFactory from './ball/Factory.js';

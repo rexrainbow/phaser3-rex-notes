@@ -9,13 +9,14 @@ export default {
         this.addShape((new Circle()).setName('center'));
         this.addShape((new Lines()).setName('arc0'));
         this.addShape((new Lines()).setName('arc1'));
+        this.isInitialize = true;
     },
 
     updateShapes() {
         var centerX = this.centerX;
         var centerY = this.centerY;
         var radius = this.radius;
-        var isSizeChanged = this.isSizeChanged;
+        var needLayout = this.isInitialize || this.isSizeChanged;
 
         var centerRadius = (radius * 2) / 6;
         var x = centerX - radius + centerRadius;
@@ -33,7 +34,7 @@ export default {
                 case 'center':
                     shape.fillStyle(this.color, alpha)
 
-                    if (isSizeChanged) {
+                    if (needLayout) {
                         shape
                             .setRadius(centerRadius)
                             .setCenterPosition(x, y);
@@ -42,7 +43,7 @@ export default {
                 case 'arc0':
                     shape.fillStyle(this.color, alpha);
 
-                    if (isSizeChanged) {
+                    if (needLayout) {
                         var radius0 = centerRadius * 2,
                             radius1 = centerRadius * 3;
                         shape
@@ -57,7 +58,7 @@ export default {
                 case 'arc1':
                     shape.fillStyle(this.color, alpha);
 
-                    if (isSizeChanged) {
+                    if (needLayout) {
                         var radius0 = centerRadius * 4,
                             radius1 = centerRadius * 5;
                         shape
@@ -71,5 +72,7 @@ export default {
                     break;
             }
         }
+
+        this.isInitialize = false;
     }
 }

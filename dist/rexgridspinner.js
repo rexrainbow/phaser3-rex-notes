@@ -380,6 +380,7 @@
       value: function clear() {
         this.geom.length = 0;
         Clear(this.shapes);
+        this.dirty = true;
         return this;
       }
     }, {
@@ -1307,21 +1308,35 @@
       var width = GetValue$1(config, 'width', 64);
       var height = GetValue$1(config, 'height', 64);
       _this = _callSuper(this, Base, [scene, x, y, width, height]);
-      _this.setDuration(GetValue$1(config, 'duration', 1000));
-      _this.setEase(GetValue$1(config, 'ease', 'Linear'));
-      _this.setDelay(GetValue$1(config, 'delay', 0));
-      _this.setRepeatDelay(GetValue$1(config, 'repeatDelay', 0));
-      var color = GetValue$1(config, 'color', 0xffffff);
-      var start = GetValue$1(config, 'start', true);
+      _this.resetFromConfig(config, true);
       _this.buildShapes(config);
-      _this.setColor(color);
-      _this.setValue(0);
-      if (start) {
+      if (GetValue$1(config, 'start', true)) {
         _this.start();
       }
       return _this;
     }
     _createClass(Base, [{
+      key: "resetFromConfig",
+      value: function resetFromConfig(config, setDefaults) {
+        if (setDefaults === undefined) {
+          setDefaults = false;
+        }
+        var defaultValue;
+        defaultValue = setDefaults ? 1000 : this.duration;
+        this.setDuration(GetValue$1(config, 'duration', defaultValue));
+        defaultValue = setDefaults ? 'Linear' : this.ease;
+        this.setEase(GetValue$1(config, 'ease', defaultValue));
+        defaultValue = setDefaults ? 0 : this.delay;
+        this.setDelay(GetValue$1(config, 'delay', defaultValue));
+        defaultValue = setDefaults ? 0 : this.repeatDelay;
+        this.setRepeatDelay(GetValue$1(config, 'repeatDelay', defaultValue));
+        defaultValue = setDefaults ? 0xffffff : this.color;
+        this.setColor(GetValue$1(config, 'color', defaultValue));
+        defaultValue = setDefaults ? 0 : this.value;
+        this.setValue(GetValue$1(config, 'value', defaultValue));
+        return this;
+      }
+    }, {
       key: "buildShapes",
       value: function buildShapes() {}
     }, {
@@ -2456,6 +2471,44 @@
   var Linear = Phaser.Math.Linear;
   var RowNum = 3;
   var ColNum = 3;
+  var UpdateShapeMethods = {
+    buildShapes: function buildShapes() {
+      var cnt = RowNum * ColNum;
+      for (var i = 0; i < cnt; i++) {
+        var dot = new Circle();
+        this.addShape(dot);
+        dot.setData('offset', Math.random());
+      }
+      this.isInitialize = true;
+    },
+    updateShapes: function updateShapes() {
+      var centerX = this.centerX;
+      var centerY = this.centerY;
+      var radius = this.radius;
+      var needLayout = this.isInitialize || this.isSizeChanged;
+      var leftBound = centerX - radius;
+      var topBound = centerY - radius;
+      var cellWidth = radius * 2 / ColNum;
+      var cellHeight = radius * 2 / RowNum;
+      var maxDotRadius = Math.min(cellWidth, cellHeight) / 2 * 0.8;
+      var shapes = this.getShapes();
+      for (var i = 0, cnt = shapes.length; i < cnt; i++) {
+        var colIdx = i % ColNum;
+        var rowIdx = Math.floor(i / RowNum);
+        var x = leftBound + cellWidth * (colIdx + 0.5);
+        var y = topBound + cellHeight * (rowIdx + 0.5);
+        var dot = shapes[i];
+        var t = (this.value + dot.getData('offset')) % 1;
+        t = Yoyo(t);
+        dot.fillStyle(this.color, Linear(0.25, 1, t));
+        if (needLayout) {
+          dot.setRadius(maxDotRadius).setCenterPosition(x, y);
+        }
+      }
+      this.isInitialize = false;
+    }
+  };
+
   var Grid = /*#__PURE__*/function (_Base) {
     _inherits(Grid, _Base);
     function Grid(scene, config) {
@@ -2465,46 +2518,9 @@
       _this.type = 'rexSpinnerGrid';
       return _this;
     }
-    _createClass(Grid, [{
-      key: "buildShapes",
-      value: function buildShapes() {
-        var cnt = RowNum * ColNum;
-        for (var i = 0; i < cnt; i++) {
-          var dot = new Circle();
-          this.addShape(dot);
-          dot.setData('offset', Math.random());
-        }
-      }
-    }, {
-      key: "updateShapes",
-      value: function updateShapes() {
-        var centerX = this.centerX;
-        var centerY = this.centerY;
-        var radius = this.radius;
-        var isSizeChanged = this.isSizeChanged;
-        var leftBound = centerX - radius;
-        var topBound = centerY - radius;
-        var cellWidth = radius * 2 / ColNum;
-        var cellHeight = radius * 2 / RowNum;
-        var maxDotRadius = Math.min(cellWidth, cellHeight) / 2 * 0.8;
-        var shapes = this.getShapes();
-        for (var i = 0, cnt = shapes.length; i < cnt; i++) {
-          var colIdx = i % ColNum;
-          var rowIdx = Math.floor(i / RowNum);
-          var x = leftBound + cellWidth * (colIdx + 0.5);
-          var y = topBound + cellHeight * (rowIdx + 0.5);
-          var dot = shapes[i];
-          var t = (this.value + dot.getData('offset')) % 1;
-          t = Yoyo(t);
-          dot.fillStyle(this.color, Linear(0.25, 1, t));
-          if (isSizeChanged) {
-            dot.setRadius(maxDotRadius).setCenterPosition(x, y);
-          }
-        }
-      }
-    }]);
-    return Grid;
+    return _createClass(Grid);
   }(Base);
+  Object.assign(Grid.prototype, UpdateShapeMethods);
 
   return Grid;
 

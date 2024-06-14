@@ -7,8 +7,21 @@ class Arrow extends Base {
     constructor(scene, config) {
         super(scene, config);
         this.type = 'rexSpinnerArrow';
+    }
 
-        this.setDirection(GetValue(config, 'direction', 'down'));
+    resetFromConfig(config, setDefaults) {
+        if (setDefaults === undefined) {
+            setDefaults = false;
+        }
+
+        super.resetFromConfig(config, setDefaults);
+
+        var defaultValue;
+
+        defaultValue = (setDefaults) ? 'down' : this.direction;
+        this.setDirection(GetValue(config, 'direction', defaultValue));
+
+        return this;
     }
 }
 

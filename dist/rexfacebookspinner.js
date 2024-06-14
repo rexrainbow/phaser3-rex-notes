@@ -380,6 +380,7 @@
       value: function clear() {
         this.geom.length = 0;
         Clear(this.shapes);
+        this.dirty = true;
         return this;
       }
     }, {
@@ -1307,21 +1308,35 @@
       var width = GetValue$1(config, 'width', 64);
       var height = GetValue$1(config, 'height', 64);
       _this = _callSuper(this, Base, [scene, x, y, width, height]);
-      _this.setDuration(GetValue$1(config, 'duration', 1000));
-      _this.setEase(GetValue$1(config, 'ease', 'Linear'));
-      _this.setDelay(GetValue$1(config, 'delay', 0));
-      _this.setRepeatDelay(GetValue$1(config, 'repeatDelay', 0));
-      var color = GetValue$1(config, 'color', 0xffffff);
-      var start = GetValue$1(config, 'start', true);
+      _this.resetFromConfig(config, true);
       _this.buildShapes(config);
-      _this.setColor(color);
-      _this.setValue(0);
-      if (start) {
+      if (GetValue$1(config, 'start', true)) {
         _this.start();
       }
       return _this;
     }
     _createClass(Base, [{
+      key: "resetFromConfig",
+      value: function resetFromConfig(config, setDefaults) {
+        if (setDefaults === undefined) {
+          setDefaults = false;
+        }
+        var defaultValue;
+        defaultValue = setDefaults ? 1000 : this.duration;
+        this.setDuration(GetValue$1(config, 'duration', defaultValue));
+        defaultValue = setDefaults ? 'Linear' : this.ease;
+        this.setEase(GetValue$1(config, 'ease', defaultValue));
+        defaultValue = setDefaults ? 0 : this.delay;
+        this.setDelay(GetValue$1(config, 'delay', defaultValue));
+        defaultValue = setDefaults ? 0 : this.repeatDelay;
+        this.setRepeatDelay(GetValue$1(config, 'repeatDelay', defaultValue));
+        defaultValue = setDefaults ? 0xffffff : this.color;
+        this.setColor(GetValue$1(config, 'color', defaultValue));
+        defaultValue = setDefaults ? 0 : this.value;
+        this.setValue(GetValue$1(config, 'value', defaultValue));
+        return this;
+      }
+    }, {
       key: "buildShapes",
       value: function buildShapes() {}
     }, {
@@ -2323,6 +2338,35 @@
 
   var Linear = Phaser.Math.Linear;
   var ExpoIn = Phaser.Math.Easing.Expo.In;
+  var UpdateShapeMethods = {
+    buildShapes: function buildShapes() {
+      for (var i = 0; i < 3; i++) {
+        var shape = new Line();
+        this.addShape(shape);
+      }
+    },
+    updateShapes: function updateShapes() {
+      var centerX = this.centerX;
+      var centerY = this.centerY;
+      var radius = this.radius;
+      var leftBound = centerX - radius;
+      var shapes = this.getShapes(),
+        cnt = shapes.length;
+      var cellWidth = radius * 2 / cnt;
+      var cellHeight = radius * 2;
+      for (var i = 0; i < cnt; i++) {
+        var line = shapes[i];
+        var t = (this.value + (cnt - i) * 0.1) % 1;
+        t = ExpoIn(Yoyo(t));
+        var lineAlpha = (i + 1) / cnt;
+        var lineHeight = Linear(0.7, 1, t) * cellHeight;
+        var lineWidth = Linear(0.7, 1, t) * cellWidth;
+        var x = leftBound + cellWidth * (i + 0.5);
+        line.lineStyle(lineWidth, this.color, lineAlpha).setP0(x, centerY - lineHeight / 2).setP1(x, centerY + lineHeight / 2);
+      }
+    }
+  };
+
   var Facebook = /*#__PURE__*/function (_Base) {
     _inherits(Facebook, _Base);
     function Facebook(scene, config) {
@@ -2332,39 +2376,9 @@
       _this.type = 'rexSpinnerFacebook';
       return _this;
     }
-    _createClass(Facebook, [{
-      key: "buildShapes",
-      value: function buildShapes() {
-        for (var i = 0; i < 3; i++) {
-          var shape = new Line();
-          this.addShape(shape);
-        }
-      }
-    }, {
-      key: "updateShapes",
-      value: function updateShapes() {
-        var centerX = this.centerX;
-        var centerY = this.centerY;
-        var radius = this.radius;
-        var leftBound = centerX - radius;
-        var shapes = this.getShapes(),
-          cnt = shapes.length;
-        var cellWidth = radius * 2 / cnt;
-        var cellHeight = radius * 2;
-        for (var i = 0; i < cnt; i++) {
-          var line = shapes[i];
-          var t = (this.value + (cnt - i) * 0.1) % 1;
-          t = ExpoIn(Yoyo(t));
-          var lineAlpha = (i + 1) / cnt;
-          var lineHeight = Linear(0.7, 1, t) * cellHeight;
-          var lineWidth = Linear(0.7, 1, t) * cellWidth;
-          var x = leftBound + cellWidth * (i + 0.5);
-          line.lineStyle(lineWidth, this.color, lineAlpha).setP0(x, centerY - lineHeight / 2).setP1(x, centerY + lineHeight / 2);
-        }
-      }
-    }]);
-    return Facebook;
+    return _createClass(Facebook);
   }(Base);
+  Object.assign(Facebook.prototype, UpdateShapeMethods);
 
   return Facebook;
 

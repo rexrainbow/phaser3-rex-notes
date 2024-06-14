@@ -29678,6 +29678,7 @@
       value: function clear() {
         this.geom.length = 0;
         Clear$1(this.shapes);
+        this.dirty = true;
         return this;
       }
     }, {

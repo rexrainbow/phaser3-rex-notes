@@ -380,6 +380,7 @@
       value: function clear() {
         this.geom.length = 0;
         Clear(this.shapes);
+        this.dirty = true;
         return this;
       }
     }, {
@@ -1307,21 +1308,35 @@
       var width = GetValue$1(config, 'width', 64);
       var height = GetValue$1(config, 'height', 64);
       _this = _callSuper(this, Base, [scene, x, y, width, height]);
-      _this.setDuration(GetValue$1(config, 'duration', 1000));
-      _this.setEase(GetValue$1(config, 'ease', 'Linear'));
-      _this.setDelay(GetValue$1(config, 'delay', 0));
-      _this.setRepeatDelay(GetValue$1(config, 'repeatDelay', 0));
-      var color = GetValue$1(config, 'color', 0xffffff);
-      var start = GetValue$1(config, 'start', true);
+      _this.resetFromConfig(config, true);
       _this.buildShapes(config);
-      _this.setColor(color);
-      _this.setValue(0);
-      if (start) {
+      if (GetValue$1(config, 'start', true)) {
         _this.start();
       }
       return _this;
     }
     _createClass(Base, [{
+      key: "resetFromConfig",
+      value: function resetFromConfig(config, setDefaults) {
+        if (setDefaults === undefined) {
+          setDefaults = false;
+        }
+        var defaultValue;
+        defaultValue = setDefaults ? 1000 : this.duration;
+        this.setDuration(GetValue$1(config, 'duration', defaultValue));
+        defaultValue = setDefaults ? 'Linear' : this.ease;
+        this.setEase(GetValue$1(config, 'ease', defaultValue));
+        defaultValue = setDefaults ? 0 : this.delay;
+        this.setDelay(GetValue$1(config, 'delay', defaultValue));
+        defaultValue = setDefaults ? 0 : this.repeatDelay;
+        this.setRepeatDelay(GetValue$1(config, 'repeatDelay', defaultValue));
+        defaultValue = setDefaults ? 0xffffff : this.color;
+        this.setColor(GetValue$1(config, 'color', defaultValue));
+        defaultValue = setDefaults ? 0 : this.value;
+        this.setValue(GetValue$1(config, 'value', defaultValue));
+        return this;
+      }
+    }, {
       key: "buildShapes",
       value: function buildShapes() {}
     }, {
@@ -2454,6 +2469,36 @@
   };
 
   var Linear = Phaser.Math.Linear;
+  var UpdateShapeMethods = {
+    buildShapes: function buildShapes() {
+      var cnt = 3;
+      for (var i = 0; i < cnt; i++) {
+        var dot = new Circle();
+        this.addShape(dot);
+        var offset = Yoyo(i / (cnt - 1)) / 2;
+        dot.setData('offset', offset);
+      }
+    },
+    updateShapes: function updateShapes() {
+      var centerX = this.centerX;
+      var centerY = this.centerY;
+      var radius = this.radius;
+      var leftBound = centerX - radius;
+      var shapes = this.getShapes(),
+        cnt = shapes.length;
+      var cellWidth = radius * 2 / cnt;
+      var maxDotRadius = cellWidth / 2;
+      for (var i = 0; i < cnt; i++) {
+        var dot = shapes[i];
+        var t = (this.value + dot.getData('offset')) % 1;
+        t = Yoyo(t);
+        var dotAlpha = Linear(0.25, 1, t);
+        var dotRadius = Linear(0.5, 1, t) * maxDotRadius;
+        dot.fillStyle(this.color, dotAlpha).setRadius(dotRadius).setCenterPosition(leftBound + cellWidth * (i + 0.5), centerY);
+      }
+    }
+  };
+
   var Dots = /*#__PURE__*/function (_Base) {
     _inherits(Dots, _Base);
     function Dots(scene, config) {
@@ -2463,40 +2508,9 @@
       _this.type = 'rexSpinnerDots';
       return _this;
     }
-    _createClass(Dots, [{
-      key: "buildShapes",
-      value: function buildShapes() {
-        var cnt = 3;
-        for (var i = 0; i < cnt; i++) {
-          var dot = new Circle();
-          this.addShape(dot);
-          var offset = Yoyo(i / (cnt - 1)) / 2;
-          dot.setData('offset', offset);
-        }
-      }
-    }, {
-      key: "updateShapes",
-      value: function updateShapes() {
-        var centerX = this.centerX;
-        var centerY = this.centerY;
-        var radius = this.radius;
-        var leftBound = centerX - radius;
-        var shapes = this.getShapes(),
-          cnt = shapes.length;
-        var cellWidth = radius * 2 / cnt;
-        var maxDotRadius = cellWidth / 2;
-        for (var i = 0; i < cnt; i++) {
-          var dot = shapes[i];
-          var t = (this.value + dot.getData('offset')) % 1;
-          t = Yoyo(t);
-          var dotAlpha = Linear(0.25, 1, t);
-          var dotRadius = Linear(0.5, 1, t) * maxDotRadius;
-          dot.fillStyle(this.color, dotAlpha).setRadius(dotRadius).setCenterPosition(leftBound + cellWidth * (i + 0.5), centerY);
-        }
-      }
-    }]);
-    return Dots;
+    return _createClass(Dots);
   }(Base);
+  Object.assign(Dots.prototype, UpdateShapeMethods);
 
   return Dots;
 

@@ -380,6 +380,7 @@
       value: function clear() {
         this.geom.length = 0;
         Clear(this.shapes);
+        this.dirty = true;
         return this;
       }
     }, {
@@ -1307,21 +1308,35 @@
       var width = GetValue$1(config, 'width', 64);
       var height = GetValue$1(config, 'height', 64);
       _this = _callSuper(this, Base, [scene, x, y, width, height]);
-      _this.setDuration(GetValue$1(config, 'duration', 1000));
-      _this.setEase(GetValue$1(config, 'ease', 'Linear'));
-      _this.setDelay(GetValue$1(config, 'delay', 0));
-      _this.setRepeatDelay(GetValue$1(config, 'repeatDelay', 0));
-      var color = GetValue$1(config, 'color', 0xffffff);
-      var start = GetValue$1(config, 'start', true);
+      _this.resetFromConfig(config, true);
       _this.buildShapes(config);
-      _this.setColor(color);
-      _this.setValue(0);
-      if (start) {
+      if (GetValue$1(config, 'start', true)) {
         _this.start();
       }
       return _this;
     }
     _createClass(Base, [{
+      key: "resetFromConfig",
+      value: function resetFromConfig(config, setDefaults) {
+        if (setDefaults === undefined) {
+          setDefaults = false;
+        }
+        var defaultValue;
+        defaultValue = setDefaults ? 1000 : this.duration;
+        this.setDuration(GetValue$1(config, 'duration', defaultValue));
+        defaultValue = setDefaults ? 'Linear' : this.ease;
+        this.setEase(GetValue$1(config, 'ease', defaultValue));
+        defaultValue = setDefaults ? 0 : this.delay;
+        this.setDelay(GetValue$1(config, 'delay', defaultValue));
+        defaultValue = setDefaults ? 0 : this.repeatDelay;
+        this.setRepeatDelay(GetValue$1(config, 'repeatDelay', defaultValue));
+        defaultValue = setDefaults ? 0xffffff : this.color;
+        this.setColor(GetValue$1(config, 'color', defaultValue));
+        defaultValue = setDefaults ? 0 : this.value;
+        this.setValue(GetValue$1(config, 'value', defaultValue));
+        return this;
+      }
+    }, {
       key: "buildShapes",
       value: function buildShapes() {}
     }, {
@@ -2629,6 +2644,56 @@
 
   var Linear = Phaser.Math.Linear;
   var ExpoIn = Phaser.Math.Easing.Expo.In;
+  var UpdateShapeMethods = {
+    buildShapes: function buildShapes() {
+      this.addShape(new Circle().setName('center'));
+      this.addShape(new Lines().setName('arc0'));
+      this.addShape(new Lines().setName('arc1'));
+      this.isInitialize = true;
+    },
+    updateShapes: function updateShapes() {
+      var centerX = this.centerX;
+      var centerY = this.centerY;
+      var radius = this.radius;
+      var needLayout = this.isInitialize || this.isSizeChanged;
+      var centerRadius = radius * 2 / 6;
+      var x = centerX - radius + centerRadius;
+      var y = centerY + radius - centerRadius;
+      var shapes = this.getShapes();
+      for (var i = 0, cnt = shapes.length; i < cnt; i++) {
+        var shape = shapes[i];
+        var t = (this.value + (cnt - i) * 0.1) % 1;
+        t = ExpoIn(Yoyo(t));
+        var alpha = Linear(0.25, 1, t);
+        switch (shape.name) {
+          case 'center':
+            shape.fillStyle(this.color, alpha);
+            if (needLayout) {
+              shape.setRadius(centerRadius).setCenterPosition(x, y);
+            }
+            break;
+          case 'arc0':
+            shape.fillStyle(this.color, alpha);
+            if (needLayout) {
+              var radius0 = centerRadius * 2,
+                radius1 = centerRadius * 3;
+              shape.startAt(x, y - radius0).lineTo(x, y - radius1).setIterations(8).arc(x, y, radius1, 270, 360).lineTo(x + radius0, y).setIterations(6).arc(x, y, radius0, 360, 270, true).close();
+            }
+            break;
+          case 'arc1':
+            shape.fillStyle(this.color, alpha);
+            if (needLayout) {
+              var radius0 = centerRadius * 4,
+                radius1 = centerRadius * 5;
+              shape.startAt(x, y - radius0).lineTo(x, y - radius1).setIterations(8).arc(x, y, radius1, 270, 360).lineTo(x + radius0, y).setIterations(6).arc(x, y, radius0, 360, 270, true).close();
+            }
+            break;
+        }
+      }
+      this.isInitialize = false;
+    }
+  };
+
   var Radio = /*#__PURE__*/function (_Base) {
     _inherits(Radio, _Base);
     function Radio(scene, config) {
@@ -2638,58 +2703,9 @@
       _this.type = 'rexSpinnerRadio';
       return _this;
     }
-    _createClass(Radio, [{
-      key: "buildShapes",
-      value: function buildShapes() {
-        this.addShape(new Circle().setName('center'));
-        this.addShape(new Lines().setName('arc0'));
-        this.addShape(new Lines().setName('arc1'));
-      }
-    }, {
-      key: "updateShapes",
-      value: function updateShapes() {
-        var centerX = this.centerX;
-        var centerY = this.centerY;
-        var radius = this.radius;
-        var isSizeChanged = this.isSizeChanged;
-        var centerRadius = radius * 2 / 6;
-        var x = centerX - radius + centerRadius;
-        var y = centerY + radius - centerRadius;
-        var shapes = this.getShapes();
-        for (var i = 0, cnt = shapes.length; i < cnt; i++) {
-          var shape = shapes[i];
-          var t = (this.value + (cnt - i) * 0.1) % 1;
-          t = ExpoIn(Yoyo(t));
-          var alpha = Linear(0.25, 1, t);
-          switch (shape.name) {
-            case 'center':
-              shape.fillStyle(this.color, alpha);
-              if (isSizeChanged) {
-                shape.setRadius(centerRadius).setCenterPosition(x, y);
-              }
-              break;
-            case 'arc0':
-              shape.fillStyle(this.color, alpha);
-              if (isSizeChanged) {
-                var radius0 = centerRadius * 2,
-                  radius1 = centerRadius * 3;
-                shape.startAt(x, y - radius0).lineTo(x, y - radius1).setIterations(8).arc(x, y, radius1, 270, 360).lineTo(x + radius0, y).setIterations(6).arc(x, y, radius0, 360, 270, true).close();
-              }
-              break;
-            case 'arc1':
-              shape.fillStyle(this.color, alpha);
-              if (isSizeChanged) {
-                var radius0 = centerRadius * 4,
-                  radius1 = centerRadius * 5;
-                shape.startAt(x, y - radius0).lineTo(x, y - radius1).setIterations(8).arc(x, y, radius1, 270, 360).lineTo(x + radius0, y).setIterations(6).arc(x, y, radius0, 360, 270, true).close();
-              }
-              break;
-          }
-        }
-      }
-    }]);
-    return Radio;
+    return _createClass(Radio);
   }(Base);
+  Object.assign(Radio.prototype, UpdateShapeMethods);
 
   return Radio;
 

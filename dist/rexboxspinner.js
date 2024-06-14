@@ -380,6 +380,7 @@
       value: function clear() {
         this.geom.length = 0;
         Clear(this.shapes);
+        this.dirty = true;
         return this;
       }
     }, {
@@ -1307,21 +1308,35 @@
       var width = GetValue$1(config, 'width', 64);
       var height = GetValue$1(config, 'height', 64);
       _this = _callSuper(this, Base, [scene, x, y, width, height]);
-      _this.setDuration(GetValue$1(config, 'duration', 1000));
-      _this.setEase(GetValue$1(config, 'ease', 'Linear'));
-      _this.setDelay(GetValue$1(config, 'delay', 0));
-      _this.setRepeatDelay(GetValue$1(config, 'repeatDelay', 0));
-      var color = GetValue$1(config, 'color', 0xffffff);
-      var start = GetValue$1(config, 'start', true);
+      _this.resetFromConfig(config, true);
       _this.buildShapes(config);
-      _this.setColor(color);
-      _this.setValue(0);
-      if (start) {
+      if (GetValue$1(config, 'start', true)) {
         _this.start();
       }
       return _this;
     }
     _createClass(Base, [{
+      key: "resetFromConfig",
+      value: function resetFromConfig(config, setDefaults) {
+        if (setDefaults === undefined) {
+          setDefaults = false;
+        }
+        var defaultValue;
+        defaultValue = setDefaults ? 1000 : this.duration;
+        this.setDuration(GetValue$1(config, 'duration', defaultValue));
+        defaultValue = setDefaults ? 'Linear' : this.ease;
+        this.setEase(GetValue$1(config, 'ease', defaultValue));
+        defaultValue = setDefaults ? 0 : this.delay;
+        this.setDelay(GetValue$1(config, 'delay', defaultValue));
+        defaultValue = setDefaults ? 0 : this.repeatDelay;
+        this.setRepeatDelay(GetValue$1(config, 'repeatDelay', defaultValue));
+        defaultValue = setDefaults ? 0xffffff : this.color;
+        this.setColor(GetValue$1(config, 'color', defaultValue));
+        defaultValue = setDefaults ? 0 : this.value;
+        this.setValue(GetValue$1(config, 'value', defaultValue));
+        return this;
+      }
+    }, {
       key: "buildShapes",
       value: function buildShapes() {}
     }, {
@@ -2397,6 +2412,34 @@
 
   Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 
+  var UpdateShapeMethods = {
+    buildShapes: function buildShapes() {
+      this.addShape(new Lines().setName('border'));
+      this.addShape(new Lines().setName('fill'));
+    },
+    updateShapes: function updateShapes() {
+      var centerX = this.centerX;
+      var centerY = this.centerY;
+      var radius = this.radius;
+      var halfWidth = radius * 0.7;
+      var left = centerX - halfWidth,
+        top = centerY - halfWidth,
+        width = halfWidth * 2;
+      this.getShape('border').lineStyle(2, this.color, 1).startAt(left, top).lineTo(width, 0, true).lineTo(0, width, true).lineTo(-width, 0, true).lineTo(0, -width, true).close();
+      if (this.value < 0.5) {
+        var t = (0.5 - this.value) * 2;
+        var height = width * t;
+        this.getShape('fill').fillStyle(this.color, 1).startAt(left, top).lineTo(width, 0, true).lineTo(0, height, true).lineTo(-width, 0, true).lineTo(0, -height, true).close();
+      } else {
+        // Rotate
+        var t = (this.value - 0.5) * 2;
+        var angle = 180 * t;
+        this.getShape('border').rotateAround(centerX, centerY, angle);
+        this.getShape('fill').fillStyle().lineStyle();
+      }
+    }
+  };
+
   var Box = /*#__PURE__*/function (_Base) {
     _inherits(Box, _Base);
     function Box(scene, config) {
@@ -2406,38 +2449,9 @@
       _this.type = 'rexSpinnerBox';
       return _this;
     }
-    _createClass(Box, [{
-      key: "buildShapes",
-      value: function buildShapes() {
-        this.addShape(new Lines().setName('border'));
-        this.addShape(new Lines().setName('fill'));
-      }
-    }, {
-      key: "updateShapes",
-      value: function updateShapes() {
-        var centerX = this.centerX;
-        var centerY = this.centerY;
-        var radius = this.radius;
-        var halfWidth = radius * 0.7;
-        var left = centerX - halfWidth,
-          top = centerY - halfWidth,
-          width = halfWidth * 2;
-        this.getShape('border').lineStyle(2, this.color, 1).startAt(left, top).lineTo(width, 0, true).lineTo(0, width, true).lineTo(-width, 0, true).lineTo(0, -width, true).close();
-        if (this.value < 0.5) {
-          var t = (0.5 - this.value) * 2;
-          var height = width * t;
-          this.getShape('fill').fillStyle(this.color, 1).startAt(left, top).lineTo(width, 0, true).lineTo(0, height, true).lineTo(-width, 0, true).lineTo(0, -height, true).close();
-        } else {
-          // Rotate
-          var t = (this.value - 0.5) * 2;
-          var angle = 180 * t;
-          this.getShape('border').rotateAround(centerX, centerY, angle);
-          this.getShape('fill').fillStyle().lineStyle();
-        }
-      }
-    }]);
-    return Box;
+    return _createClass(Box);
   }(Base);
+  Object.assign(Box.prototype, UpdateShapeMethods);
 
   return Box;
 

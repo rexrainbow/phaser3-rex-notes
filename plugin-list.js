@@ -312,6 +312,8 @@ module.exports = {
     'sides': './templates/ui/sides/Sides.js',
 
     // spinner
+    'aiospinner': './templates/spinner/aio/AIO.js',
+    'arrowspinner': './templates/spinner/arrow/Arrow.js',
     'audiospinner': './templates/spinner/audio/Audio.js',
     'ballspinner': './templates/spinner/ball/Ball.js',
     'barsspinner': './templates/spinner/bars/Bars.js',
@@ -322,6 +324,7 @@ module.exports = {
     'dotsspinner': './templates/spinner/dots/Dots.js',
     'facebookspinner': './templates/spinner/facebook/Facebook.js',
     'gridspinner': './templates/spinner/grid/Grid.js',
+    'heartsspinner':'./templates/spinner/hearts/Hearts.js',
     'iosspinner': './templates/spinner/ios/Ios.js',
     'orbitspinner': './templates/spinner/orbit/Orbit.js',
     'ovalspinner': './templates/spinner/oval/Oval.js',

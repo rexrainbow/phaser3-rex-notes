@@ -14,13 +14,14 @@ export default {
 
             dot.setData('offset', Math.random());
         }
+        this.isInitialize = true;
     },
 
     updateShapes() {
         var centerX = this.centerX;
         var centerY = this.centerY;
         var radius = this.radius;
-        var isSizeChanged = this.isSizeChanged;
+        var needLayout = this.isInitialize || this.isSizeChanged;
 
         var leftBound = centerX - radius;
         var topBound = centerY - radius;
@@ -41,11 +42,13 @@ export default {
             t = Yoyo(t);
             dot.fillStyle(this.color, Linear(0.25, 1, t));
 
-            if (isSizeChanged) {
+            if (needLayout) {
                 dot
                     .setRadius(maxDotRadius)
                     .setCenterPosition(x, y)
             }
         }
+
+        this.isInitialize = false;
     }
 }

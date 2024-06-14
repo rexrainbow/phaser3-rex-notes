@@ -7,12 +7,13 @@ export default {
         for (var i = 0; i < 12; i++) {
             this.addShape(new Line());
         }
+        this.isInitialize = true;
     },
 
     updateShapes() {
         var centerX = this.centerX;
         var centerY = this.centerY;
-        var isSizeChanged = this.isSizeChanged;
+        var needLayout = this.isInitialize || this.isSizeChanged;
 
         var radius = this.radius;
         var startRadius = radius / 2;
@@ -25,7 +26,7 @@ export default {
             var alpha = Linear(0.25, 1, (1 - this.value + t) % 1);
             line.lineStyle(lineWidth, this.color, alpha);
 
-            if (isSizeChanged) {
+            if (needLayout) {
                 line
                     .setP0(
                         centerX + Math.cos(angle) * startRadius,
@@ -37,5 +38,7 @@ export default {
                     )
             }
         }
+
+        this.isInitialize = false;
     }
 }

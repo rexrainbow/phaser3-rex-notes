@@ -380,6 +380,7 @@
       value: function clear() {
         this.geom.length = 0;
         Clear(this.shapes);
+        this.dirty = true;
         return this;
       }
     }, {
@@ -1307,21 +1308,35 @@
       var width = GetValue$1(config, 'width', 64);
       var height = GetValue$1(config, 'height', 64);
       _this = _callSuper(this, Base, [scene, x, y, width, height]);
-      _this.setDuration(GetValue$1(config, 'duration', 1000));
-      _this.setEase(GetValue$1(config, 'ease', 'Linear'));
-      _this.setDelay(GetValue$1(config, 'delay', 0));
-      _this.setRepeatDelay(GetValue$1(config, 'repeatDelay', 0));
-      var color = GetValue$1(config, 'color', 0xffffff);
-      var start = GetValue$1(config, 'start', true);
+      _this.resetFromConfig(config, true);
       _this.buildShapes(config);
-      _this.setColor(color);
-      _this.setValue(0);
-      if (start) {
+      if (GetValue$1(config, 'start', true)) {
         _this.start();
       }
       return _this;
     }
     _createClass(Base, [{
+      key: "resetFromConfig",
+      value: function resetFromConfig(config, setDefaults) {
+        if (setDefaults === undefined) {
+          setDefaults = false;
+        }
+        var defaultValue;
+        defaultValue = setDefaults ? 1000 : this.duration;
+        this.setDuration(GetValue$1(config, 'duration', defaultValue));
+        defaultValue = setDefaults ? 'Linear' : this.ease;
+        this.setEase(GetValue$1(config, 'ease', defaultValue));
+        defaultValue = setDefaults ? 0 : this.delay;
+        this.setDelay(GetValue$1(config, 'delay', defaultValue));
+        defaultValue = setDefaults ? 0 : this.repeatDelay;
+        this.setRepeatDelay(GetValue$1(config, 'repeatDelay', defaultValue));
+        defaultValue = setDefaults ? 0xffffff : this.color;
+        this.setColor(GetValue$1(config, 'color', defaultValue));
+        defaultValue = setDefaults ? 0 : this.value;
+        this.setValue(GetValue$1(config, 'value', defaultValue));
+        return this;
+      }
+    }, {
       key: "buildShapes",
       value: function buildShapes() {}
     }, {
@@ -2310,6 +2325,46 @@
   Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 
   var Linear = Phaser.Math.Linear;
+  var UpdateShapeMethods = {
+    buildShapes: function buildShapes() {
+      for (var i = 0; i < 4; i++) {
+        this.addShape(new Line());
+      }
+      this.prevValue = undefined;
+    },
+    updateShapes: function updateShapes() {
+      var centerX = this.centerX;
+      var centerY = this.centerY;
+      var radius = this.radius;
+      var leftBound = centerX - radius;
+      var bottomBound = centerY + radius;
+      var maxLineHeight = radius * 2;
+      var shapes = this.getShapes(),
+        cnt = shapes.length;
+      var cellWidth = radius * 2 / cnt;
+      var lineWidth = cellWidth * 0.7;
+
+      // Reset range of value
+      if (this.prevValue === undefined || this.prevValue > this.value) {
+        for (var i = 0; i < cnt; i++) {
+          var line = shapes[i];
+          var from = this.prevValue === undefined ? Math.random() : line.getData('to');
+          line.setData('from', from).setData('to', Math.random());
+        }
+      }
+      this.prevValue = this.value;
+      for (var i = 0; i < cnt; i++) {
+        var line = shapes[i];
+        var from = line.getData('from'),
+          to = line.getData('to'),
+          current = Linear(from, to, this.value);
+        var lineHeight = current * maxLineHeight;
+        var x = leftBound + cellWidth * (i + 0.5);
+        line.lineStyle(lineWidth, this.color, 1).setP0(x, bottomBound).setP1(x, bottomBound - lineHeight);
+      }
+    }
+  };
+
   var Audio = /*#__PURE__*/function (_Base) {
     _inherits(Audio, _Base);
     function Audio(scene, config) {
@@ -2319,50 +2374,9 @@
       _this.type = 'rexSpinnerAudio';
       return _this;
     }
-    _createClass(Audio, [{
-      key: "buildShapes",
-      value: function buildShapes() {
-        for (var i = 0; i < 4; i++) {
-          this.addShape(new Line());
-        }
-        this.prevValue = undefined;
-      }
-    }, {
-      key: "updateShapes",
-      value: function updateShapes() {
-        var centerX = this.centerX;
-        var centerY = this.centerY;
-        var radius = this.radius;
-        var leftBound = centerX - radius;
-        var bottomBound = centerY + radius;
-        var maxLineHeight = radius * 2;
-        var shapes = this.getShapes(),
-          cnt = shapes.length;
-        var cellWidth = radius * 2 / cnt;
-        var lineWidth = cellWidth * 0.7;
-
-        // Reset range of value
-        if (this.prevValue === undefined || this.prevValue > this.value) {
-          for (var i = 0; i < cnt; i++) {
-            var line = shapes[i];
-            var from = this.prevValue === undefined ? Math.random() : line.getData('to');
-            line.setData('from', from).setData('to', Math.random());
-          }
-        }
-        this.prevValue = this.value;
-        for (var i = 0; i < cnt; i++) {
-          var line = shapes[i];
-          var from = line.getData('from'),
-            to = line.getData('to'),
-            current = Linear(from, to, this.value);
-          var lineHeight = current * maxLineHeight;
-          var x = leftBound + cellWidth * (i + 0.5);
-          line.lineStyle(lineWidth, this.color, 1).setP0(x, bottomBound).setP1(x, bottomBound - lineHeight);
-        }
-      }
-    }]);
-    return Audio;
+    return _createClass(Audio);
   }(Base);
+  Object.assign(Audio.prototype, UpdateShapeMethods);
 
   return Audio;
 

@@ -176,6 +176,7 @@ class BaseShapes extends Shape {
     clear() {
         this.geom.length = 0;
         Clear(this.shapes);
+        this.dirty = true;
         return this;
     }
 

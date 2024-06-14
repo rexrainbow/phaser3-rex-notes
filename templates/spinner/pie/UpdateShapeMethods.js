@@ -10,6 +10,7 @@ export default {
 
             pie.setData('speed', Linear(180, 360, Math.random()));
         }
+        this.prevValue = undefined;
     },
 
     updateShapes() {

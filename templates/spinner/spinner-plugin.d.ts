@@ -1,3 +1,4 @@
+import AIOFactory from './aio/Factory';
 import AudioFactory from './audio/Factory';
 import ArrowFactory from './arrow/Factory';
 import BallFactory from './ball/Factory';
@@ -22,6 +23,7 @@ import SpinnerFactory from './spinner/Factory';
 export default SpinnerPlugins;
 
 declare class Factories {
+    aio: typeof AIOFactory;
     audio: typeof AudioFactory;
     arrow: typeof ArrowFactory;
     ball: typeof BallFactory;
@@ -50,6 +52,7 @@ declare class SpinnerPlugins {
     add: Factories;
 }
 
+import AIOClass from './aio/AIO';
 import AudioClass from './audio/Audio';
 import ArrowClass from './arrow/Arrow';
 import BallClass from './ball/Ball';
@@ -72,6 +75,7 @@ import RingsClass from './rings/Rings';
 import SpinnerClass from './spinner/Spinner';
 
 declare namespace SpinnerPlugins {
+    type AIO = AIOClass;
     type Audio = AudioClass;
     type Arrow = ArrowClass;
     type Ball = BallClass;

@@ -1,3 +1,4 @@
+import AIO from './aio/AIO.js';
 import Audio from './audio/Audio.js';
 import Arrow from './arrow/Arrow.js';
 import Ball from './ball/Ball.js';
@@ -20,6 +21,7 @@ import Rings from './rings/Rings.js';
 import Spinner from './spinner/Spinner.js';
 
 export {
+    AIO,
     Audio,
     Arrow,
     Ball,

@@ -380,6 +380,7 @@
       value: function clear() {
         this.geom.length = 0;
         Clear(this.shapes);
+        this.dirty = true;
         return this;
       }
     }, {
@@ -1307,21 +1308,35 @@
       var width = GetValue$1(config, 'width', 64);
       var height = GetValue$1(config, 'height', 64);
       _this = _callSuper(this, Base, [scene, x, y, width, height]);
-      _this.setDuration(GetValue$1(config, 'duration', 1000));
-      _this.setEase(GetValue$1(config, 'ease', 'Linear'));
-      _this.setDelay(GetValue$1(config, 'delay', 0));
-      _this.setRepeatDelay(GetValue$1(config, 'repeatDelay', 0));
-      var color = GetValue$1(config, 'color', 0xffffff);
-      var start = GetValue$1(config, 'start', true);
+      _this.resetFromConfig(config, true);
       _this.buildShapes(config);
-      _this.setColor(color);
-      _this.setValue(0);
-      if (start) {
+      if (GetValue$1(config, 'start', true)) {
         _this.start();
       }
       return _this;
     }
     _createClass(Base, [{
+      key: "resetFromConfig",
+      value: function resetFromConfig(config, setDefaults) {
+        if (setDefaults === undefined) {
+          setDefaults = false;
+        }
+        var defaultValue;
+        defaultValue = setDefaults ? 1000 : this.duration;
+        this.setDuration(GetValue$1(config, 'duration', defaultValue));
+        defaultValue = setDefaults ? 'Linear' : this.ease;
+        this.setEase(GetValue$1(config, 'ease', defaultValue));
+        defaultValue = setDefaults ? 0 : this.delay;
+        this.setDelay(GetValue$1(config, 'delay', defaultValue));
+        defaultValue = setDefaults ? 0 : this.repeatDelay;
+        this.setRepeatDelay(GetValue$1(config, 'repeatDelay', defaultValue));
+        defaultValue = setDefaults ? 0xffffff : this.color;
+        this.setColor(GetValue$1(config, 'color', defaultValue));
+        defaultValue = setDefaults ? 0 : this.value;
+        this.setValue(GetValue$1(config, 'value', defaultValue));
+        return this;
+      }
+    }, {
       key: "buildShapes",
       value: function buildShapes() {}
     }, {
@@ -2444,6 +2459,23 @@
     return t;
   };
 
+  var UpdateShapeMethods = {
+    buildShapes: function buildShapes() {
+      this.addShape(new Arc().setName('arc'));
+    },
+    updateShapes: function updateShapes() {
+      var centerX = this.centerX;
+      var centerY = this.centerY;
+      var radius = this.radius;
+      var lineWidth = Math.ceil(radius / 10);
+      var maxRadius = radius - lineWidth;
+      var endAngle = this.value * 720;
+      var arcAngle = Yoyo(this.value) * 180;
+      var startAngle = endAngle - arcAngle;
+      this.getShape('arc').lineStyle(lineWidth, this.color, 1).setRadius(maxRadius).setCenterPosition(centerX, centerY).setAngle(startAngle + 315, endAngle + 315);
+    }
+  };
+
   var Spinner = /*#__PURE__*/function (_Base) {
     _inherits(Spinner, _Base);
     function Spinner(scene, config) {
@@ -2453,27 +2485,9 @@
       _this.type = 'rexSpinnerSpinner';
       return _this;
     }
-    _createClass(Spinner, [{
-      key: "buildShapes",
-      value: function buildShapes() {
-        this.addShape(new Arc().setName('arc'));
-      }
-    }, {
-      key: "updateShapes",
-      value: function updateShapes() {
-        var centerX = this.centerX;
-        var centerY = this.centerY;
-        var radius = this.radius;
-        var lineWidth = Math.ceil(radius / 10);
-        var maxRadius = radius - lineWidth;
-        var endAngle = this.value * 720;
-        var arcAngle = Yoyo(this.value) * 180;
-        var startAngle = endAngle - arcAngle;
-        this.getShape('arc').lineStyle(lineWidth, this.color, 1).setRadius(maxRadius).setCenterPosition(centerX, centerY).setAngle(startAngle + 315, endAngle + 315);
-      }
-    }]);
-    return Spinner;
+    return _createClass(Spinner);
   }(Base);
+  Object.assign(Spinner.prototype, UpdateShapeMethods);
 
   return Spinner;
 

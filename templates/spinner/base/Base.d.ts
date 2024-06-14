@@ -4,17 +4,18 @@ import BaseShape from '../../../plugins/gameobjects/shape/shapes/BaseShapes';
 export default Base;
 
 declare namespace Base {
-
-    interface IConfig {
-        x?: number, y?: number,
-        width?: number, height?: number,
-
+    interface IResetFromConfig {
         duration?: number,
         ease?: string,
         delay?: number,
         repeatDelay?: number,
         color?: number,
         value?: number,
+    }
+
+    interface IConfig extends IResetFromConfig {
+        x?: number, y?: number,
+        width?: number, height?: number,
 
         start?: boolean,
     }
@@ -26,6 +27,11 @@ declare class Base extends BaseShape {
         scene: Phaser.Scene,
         config?: Base.IConfig
     )
+
+    resetFromConfig(
+        config?: Base.IResetFromConfig,
+        setDefaults?: boolean,
+    ): this;
 
     start(duration?: number): this;
     pause(): this;

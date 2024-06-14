@@ -1,3 +1,4 @@
+import AIO from './aio/AIO';
 import Audio from './audio/Audio';
 import Arrow from './arrow/Arrow';
 import Ball from './ball/Ball';
@@ -20,6 +21,7 @@ import Rings from './rings/Rings';
 import Spinner from './spinner/Spinner';
 
 export {
+    AIO,
     Audio,
     Arrow,
     Ball,
