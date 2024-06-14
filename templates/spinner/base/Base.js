@@ -12,24 +12,44 @@ class Base extends BaseShapes {
 
         super(scene, x, y, width, height);
 
-        this.setDuration(GetValue(config, 'duration', 1000));
-        this.setEase(GetValue(config, 'ease', 'Linear'));
-        this.setDelay(GetValue(config, 'delay', 0));
-        this.setRepeatDelay(GetValue(config, 'repeatDelay', 0));
-        var color = GetValue(config, 'color', 0xffffff);
-        var start = GetValue(config, 'start', true);
+        this.resetFromConfig(config, true);
 
         this.buildShapes(config);
-        this.setColor(color);
-        this.setValue(0);
 
-        if (start) {
+        if (GetValue(config, 'start', true)) {
             this.start();
         }
     }
 
-    buildShapes() {
+    resetFromConfig(config, setDefaults) {
+        if (setDefaults === undefined) {
+            setDefaults = false;
+        }
 
+        var defaultValue;
+
+        defaultValue = (setDefaults) ? 1000 : this.duration;
+        this.setDuration(GetValue(config, 'duration', defaultValue));
+
+        defaultValue = (setDefaults) ? 'Linear' : this.ease;
+        this.setEase(GetValue(config, 'ease', defaultValue));
+
+        defaultValue = (setDefaults) ? 0 : this.delay;
+        this.setDelay(GetValue(config, 'delay', defaultValue));
+
+        defaultValue = (setDefaults) ? 0 : this.repeatDelay;
+        this.setRepeatDelay(GetValue(config, 'repeatDelay', defaultValue));
+
+        defaultValue = (setDefaults) ? 0xffffff : this.color;
+        this.setColor(GetValue(config, 'color', defaultValue));
+
+        defaultValue = (setDefaults) ? 0 : this.value;
+        this.setValue(GetValue(config, 'value', defaultValue));
+
+        return this;
+    }
+
+    buildShapes() {
     }
 
     get centerX() {

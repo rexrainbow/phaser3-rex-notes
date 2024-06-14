@@ -8,12 +8,15 @@ declare namespace Base {
     interface IConfig {
         x?: number, y?: number,
         width?: number, height?: number,
-        color?: number,
 
         duration?: number,
-        start?: boolean,
-
         ease?: string,
+        delay?: number,
+        repeatDelay?: number,
+        color?: number,
+        value?: number,
+
+        start?: boolean,
     }
 
 }
