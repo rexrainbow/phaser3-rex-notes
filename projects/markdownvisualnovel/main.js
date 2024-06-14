@@ -58,29 +58,9 @@ class Demo extends Phaser.Scene {
         eventSheetManager
             .on('pause.input', function () {
                 print.text = 'Wait any click to continue';
-                var dialog = eventSheetManager.commandExecutor.getGameObject('Dialog');
-                if (dialog) {
-                    var gameObject = dialog.getElement('action');
-                    if (gameObject) {
-                        dialog.setChildAlpha(gameObject, 1);
-                        if (gameObject.start) {
-                            gameObject.start();
-                        }
-                    }
-                }
             })
             .on('resume.input', function () {
                 print.text = '';
-                var dialog = eventSheetManager.commandExecutor.getGameObject('Dialog');
-                if (dialog) {
-                    var gameObject = dialog.getElement('action');
-                    if (gameObject) {
-                        dialog.setChildAlpha(gameObject, 0);
-                        if (gameObject.stop) {
-                            gameObject.stop();
-                        }
-                    }
-                }
             })
             .on('complete', function () {
                 print.text = 'Complete';

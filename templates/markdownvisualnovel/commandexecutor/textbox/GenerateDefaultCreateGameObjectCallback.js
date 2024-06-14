@@ -1,8 +1,6 @@
 import { SimpleTextBox } from '../../../ui/ui-components.js';
 import { TransitionImagePack } from '../../../ui/ui-components.js';
-import {
-    Arrow, Ball, Bars, Box, Clock, Cube, Dots, Facebook, Hearts, Ios, Orbit, Oval, Puff, Rings,
-} from '../../../spinner/spinner-components.js';
+import { AIO as AIOSpinner } from '../../../spinner/spinner-components.js';
 import DecorateGameObject from '../../../ui/utils/build/DecorateGameObject.js';
 import SetValue from '../../../../plugins/utils/object/SetValue.js';
 import AddViewportCoordinateProperties from '../../../../plugins/behaviors/viewportcoordinate/AddViewportCoordinateProperties.js';
@@ -66,18 +64,20 @@ var GenerateDefaultCreateGameObjectCallback = function (
             }
         }
 
+        var useDefaultWaitIcon = false;
         if (!creators.hasOwnProperty('action')) {
             creators.action = function (scene, config) {
                 if (config === undefined) {
                     config = {};
                 }
-                var cls = GetSpinnerClass(config.key)
-                var gameObject = new cls(scene, config);
+                var gameObject = new AIOSpinner(scene, config);
                 DecorateGameObject(gameObject, config);
 
                 scene.add.existing(gameObject);
                 return gameObject;
             }
+
+            useDefaultWaitIcon = true;
         }
 
         var gameObject = new SimpleTextBox(scene, style, creators);
@@ -168,10 +168,27 @@ var GenerateDefaultCreateGameObjectCallback = function (
             }
         }
 
+        var waitIcon;
+        if (useDefaultWaitIcon) {
+            waitIcon = gameObject.getElement('action');
+            gameObject.setChildVisible(waitIcon, false);
+        }
+
         gameObject
             .on('pageend', function () {
+                if (useDefaultWaitIcon) {
+                    waitIcon.start();
+                    gameObject.setChildVisible(waitIcon, true);
+                }
+
                 eventSheetManager.emit('pause.input');
+
                 gameObject.once('click', function () {
+                    if (useDefaultWaitIcon) {
+                        waitIcon.stop();
+                        gameObject.setChildVisible(waitIcon, false);
+                    }
+
                     eventSheetManager.emit('resume.input');
                 })
             })
@@ -186,27 +203,6 @@ var GenerateDefaultCreateGameObjectCallback = function (
 
         return gameObject;
     }
-}
-
-const SpinnerClassMap = {
-    arrow: Arrow,
-    ball: Ball,
-    bars: Bars,
-    box: Box,
-    clock: Clock,
-    cube: Cube,
-    dots: Dots,
-    facebook: Facebook,
-    hearts: Hearts,
-    ios: Ios,
-    orbit: Orbit,
-    oval: Oval,
-    puff: Puff,
-    rings: Rings,
-}
-
-var GetSpinnerClass = function (name) {
-    return SpinnerClassMap[name] || Arrow;
 }
 
 export default GenerateDefaultCreateGameObjectCallback;

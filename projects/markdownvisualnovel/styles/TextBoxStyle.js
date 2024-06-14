@@ -12,7 +12,7 @@ export default {
 
     icon: { width: 120, height: 120 },
 
-    action: { width: 40, height: 40, key: 'arrow', alpha: 0, },
+    action: { width: 40, height: 40, animationMode: 'downArrow' },
 
     text: { fontSize: 30, maxLines: 4 },
 

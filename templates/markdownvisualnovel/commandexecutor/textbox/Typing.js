@@ -7,6 +7,7 @@ var Typing = function (
         name, expression,
         typingSpeed,
         iconCrossDuration, iconCrossMode = 'crossFade',
+        waitIconAnimationMode,
         more = false,
         clickAfterComplete = true,
         wait = true,
@@ -62,7 +63,7 @@ var Typing = function (
             typingSpeed = eventSheetManager.getData('$typingSpeed');
         }
 
-        
+
         if (clickAfterComplete) {
             // Wait until typing complete, then one more clicking.
             commandExecutor.waitEvent(gameObject, 'complete2');
@@ -77,6 +78,13 @@ var Typing = function (
             gameObject.more(text, typingSpeed);
         }
         // Fire 'start' event, see GenerateDefaultCreateGameObjectCallback
+    }
+
+    if (waitIconAnimationMode) {
+        var icon = gameObject.getElement('action');
+        if (icon && icon.setAnimationMode) {
+            icon.setAnimationMode(waitIconAnimationMode);
+        }
     }
 };
 
