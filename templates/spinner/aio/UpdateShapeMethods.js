@@ -21,7 +21,10 @@ import SpinnerUpdateShapeMethods from '../spinner/UpdateShapeMethods.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 const AnimationModeMap = {
-    arrow: ArrowUpdateShapesMethods,
+    leftArrow: ArrowUpdateShapesMethods,
+    rightArrow: ArrowUpdateShapesMethods,
+    upArrow: ArrowUpdateShapesMethods,
+    downArrow: ArrowUpdateShapesMethods,
     audio: AudioUpdateShapeMethods,
     ball: BallUpdateShapeMethods,
     bars: BarsUpdateShapeMethods,
@@ -47,8 +50,6 @@ for (var name in AnimationModeMap) {
     AnimationModeList.push(name);
 }
 
-const ArrowDirectionModeList = ['up', 'down', 'left', 'right'];
-
 const GetRandomItem = Phaser.Utils.Array.GetRandom;
 
 export default {
@@ -60,18 +61,29 @@ export default {
         var updateMethods = AnimationModeMap[mode];
 
         if (config) {
-            if (!config.hasOwnProperty('value')) {
-                config.value = 0;
-            }
-
             this.resetFromConfig(config);
+        }
 
-            switch (mode) {
-                case 'arrow':
-                    // ArrowUpdateShapesMethods
-                    updateMethods.setDirection.call(this, GetValue(config, 'direction', 'down'));
-                    break;
-            }
+        switch (mode) {
+            case 'leftArrow':
+                // ArrowUpdateShapesMethods
+                updateMethods.setDirection.call(this, 'left');
+                break;
+
+            case 'rightArrow':
+                // ArrowUpdateShapesMethods
+                updateMethods.setDirection.call(this, 'right');
+                break;
+
+            case 'upArrow':
+                // ArrowUpdateShapesMethods
+                updateMethods.setDirection.call(this, 'up');
+                break;
+
+            case 'downArrow':
+                // ArrowUpdateShapesMethods
+                updateMethods.setDirection.call(this, 'down');
+                break;
         }
 
         this.clear();
@@ -84,18 +96,7 @@ export default {
     },
 
     setRandomAnimationMode(config) {
-        if (config === undefined) {
-            config = {};
-        }
-
         var mode = GetRandomItem(AnimationModeList);
-
-        switch (mode) {
-            case 'arrow':
-                config.direction = GetRandomItem(ArrowDirectionModeList);
-                break;
-        }
-
         this.setAnimationMode(mode, config);
         return this;
     }

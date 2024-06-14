@@ -1,5 +1,6 @@
 // import * as Phaser from 'phaser';
 
+import AIOSpinnerFactory from './aiospinner/Factory';
 import AlphaMaskImageFactory from './alphamaskimage/Factory';
 import AnchorFactory from './anchor/Factory';
 import BadgeLabelFactory from './badgelabel/Factory';
@@ -129,6 +130,7 @@ import { OpenFileChooser } from './filechooser/FileChooser';
 export default UIPlugin;
 
 declare class Factories {
+    aioSpinner: typeof AIOSpinnerFactory;
     alphaMaskImage: typeof AlphaMaskImageFactory;
     anchor: typeof AnchorFactory;
     badgeLabel: typeof BadgeLabelFactory;
@@ -280,6 +282,7 @@ declare class UIPlugin extends Phaser.Plugins.ScenePlugin {
 }
 
 
+import AIOSpinnerClass from './aiospinner/AIOSpinner';
 import AlphaMaskImageClass from './alphamaskimage/AlphaMaskImage';
 import BadgeLabelClass from './badgelabel/BadgeLabel';
 import BBCodeTextClass from './bbcodetext/BBCodeText';
@@ -388,6 +391,7 @@ import TransitionImagePackClass from './transitionimagepack/TransitionImagePack'
 import TweakerClass from './tweaker/Tweaker';
 
 declare namespace UIPlugin {
+    type AIOSpinner = AIOSpinnerClass;
     type AlphaMaskImage = AlphaMaskImageClass;
     type BadgeLabel = BadgeLabelClass;
     type BBCodeText = BBCodeTextClass;

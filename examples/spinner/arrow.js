@@ -12,29 +12,25 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var arrowDown = this.rexSpinner.add.arrow({
+        var arrowDown = this.rexSpinner.add.downArrow({
             width: 100, height: 100,
             color: 0x00FFFF,
-            duration: 1000,
-            direction: 'down'
+            duration: 1000
         })
-        var arrowUp = this.rexSpinner.add.arrow({
+        var arrowUp = this.rexSpinner.add.upArrow({
             width: 100, height: 100,
             color: 0x00FFFF,
-            duration: 1000,
-            direction: 'up'
+            duration: 1000
         })
-        var arrowLeft = this.rexSpinner.add.arrow({
+        var arrowLeft = this.rexSpinner.add.leftArrow({
             width: 100, height: 100,
             color: 0x00FFFF,
             duration: 1000,
-            direction: 'left'
         })
-        var arrowRight = this.rexSpinner.add.arrow({
+        var arrowRight = this.rexSpinner.add.rightArrow({
             width: 100, height: 100,
             color: 0x00FFFF,
             duration: 1000,
-            direction: 'right'
         })
 
         Phaser.Actions.GridAlign(

@@ -26,6 +26,10 @@ declare class Factories {
     aio: typeof AIOFactory;
     audio: typeof AudioFactory;
     arrow: typeof ArrowFactory;
+    leftArrow: typeof ArrowFactory;
+    rightArrow: typeof ArrowFactory;
+    upArrow: typeof ArrowFactory;
+    downArrow: typeof ArrowFactory;
     ball: typeof BallFactory;
     bars: typeof BarsFactory;
     box: typeof BoxFactory;

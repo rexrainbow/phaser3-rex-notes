@@ -20,6 +20,7 @@ import Triangle from './triangle/Triangle';
 import Knob from './knob/Knob';
 import CustomShapes from './customshapes/CustomShapes';
 import CustomProgress from './customprogress/CustomProgress';
+import AIOSpinner from './aiospinner/AIOSpinner';
 import TransitionImage from './transitionimage/TransitionImage';
 import TransitionImagePack from './transitionimagepack/TransitionImagePack';
 import ImageBox from './imagebox/ImageBox';
@@ -172,6 +173,7 @@ export {
     Knob,
     CustomShapes,
     CustomProgress,
+    AIOSpinner,
     TransitionImage,
     TransitionImagePack,
     ImageBox,
