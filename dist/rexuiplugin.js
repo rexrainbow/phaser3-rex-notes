@@ -39331,6 +39331,8 @@
       this.addShape(new Circle().setName('border'));
       this.addShape(new Line().setName('minuteHand'));
       this.addShape(new Line().setName('hourHand'));
+      this.minuteHandAngle = 0;
+      this.hourHandAngle = 0;
     },
     updateShapes: function updateShapes() {
       var centerX = this.centerX;
@@ -39771,7 +39773,7 @@
   var UpdateShapeMethods = {
     setAnimationMode: function setAnimationMode(mode, config) {
       if (!AnimationModeMap.hasOwnProperty(mode)) {
-        mode = 'spinner';
+        mode = GetRandomItem$1(AnimationModeList);
       }
       this.animationMode = mode;
       var updateMethods = AnimationModeMap[mode];
