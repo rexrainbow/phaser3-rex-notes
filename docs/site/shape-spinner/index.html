@@ -2258,6 +2258,33 @@
     Add spinner object
   </a>
   
+    <nav class="md-nav" aria-label="Add spinner object">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#general" class="md-nav__link">
+    General
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arrow" class="md-nav__link">
+    Arrow
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aio" class="md-nav__link">
+    AIO
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -2339,6 +2366,13 @@
           <li class="md-nav__item">
   <a href="#ease" class="md-nav__link">
     Ease
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-animation-mode" class="md-nav__link">
+    Set animation mode
   </a>
   
 </li>
@@ -9803,6 +9837,33 @@
     Add spinner object
   </a>
   
+    <nav class="md-nav" aria-label="Add spinner object">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#general" class="md-nav__link">
+    General
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arrow" class="md-nav__link">
+    Arrow
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aio" class="md-nav__link">
+    AIO
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -9889,6 +9950,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#set-animation-mode" class="md-nav__link">
+    Set animation mode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#custom-spinner" class="md-nav__link">
     Custom spinner
   </a>
@@ -9964,6 +10032,7 @@
 <ul>
 <li><a href="https://codepen.io/rexrainbow/pen/vYgNRMp">Spinners</a><ul>
 <li><a href="https://codepen.io/rexrainbow/pen/gOJmKZy">Arrow</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/abrVgEd">AIO</a></li>
 </ul>
 </li>
 <li><a href="https://codepen.io/rexrainbow/pen/YzNqJEd">Custom spinner</a></li>
@@ -9983,7 +10052,13 @@
 <span class="p">);</span>
 </code></pre></div></li>
 <li>Add spinner object
-  <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">audio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">audio</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+  <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">aio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">aio</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">arrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">arrow</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">downArrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">downArrow</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">leftArrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">leftArrow</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">rightArrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rightArrow</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">upArrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">upArrow</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">audio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">audio</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">ball</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">ball</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">bars</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">bars</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">box</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">box</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
@@ -9992,6 +10067,7 @@
 <span class="kd">var</span><span class="w"> </span><span class="nx">dots</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">dots</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">facebook</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">facebook</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">grid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">grid</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">hearts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">hearts</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">ios</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">ios</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">orbit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">orbit</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">oval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">oval</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
@@ -10000,8 +10076,6 @@
 <span class="kd">var</span><span class="w"> </span><span class="nx">radio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">radio</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">rings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rings</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">spinner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">spinner</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-<span class="kd">var</span><span class="w"> </span><span class="nx">hearts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">hearts</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-<span class="kd">var</span><span class="w"> </span><span class="nx">arrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">arrow</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
@@ -10028,7 +10102,13 @@
 <span class="kd">var</span><span class="w"> </span><span class="nx">game</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Add spinner object
-  <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">audio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">audio</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+  <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">aio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">aio</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">arrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">arrow</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">downArrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">downArrow</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">leftArrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">leftArrow</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">rightArrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rightArrow</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">upArrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">upArrow</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span><span class="w">  </span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">audio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">audio</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">ball</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">ball</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">bars</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">bars</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">box</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">box</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
@@ -10037,6 +10117,7 @@
 <span class="kd">var</span><span class="w"> </span><span class="nx">dots</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">dots</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">facebook</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">facebook</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">grid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">grid</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">hearts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">hearts</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">ios</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">ios</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">orbit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">orbit</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">oval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">oval</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
@@ -10044,9 +10125,7 @@
 <span class="kd">var</span><span class="w"> </span><span class="nx">puff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">puff</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">radio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">radio</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">rings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rings</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-<span class="kd">var</span><span class="w"> </span><span class="nx">spinner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">spinner</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-<span class="kd">var</span><span class="w"> </span><span class="nx">hearts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">hearts</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-<span class="kd">var</span><span class="w"> </span><span class="nx">arrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">arrow</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">spinner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">spinner</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span><span class="w">    </span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
@@ -10056,8 +10135,8 @@
 </code></pre></div></li>
 <li>Import class
   <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
-<span class="w">  </span><span class="nx">Audio</span><span class="p">,</span><span class="w"> </span><span class="nx">Ball</span><span class="p">,</span><span class="w"> </span><span class="nx">Bars</span><span class="p">,</span><span class="w"> </span><span class="nx">Box</span><span class="p">,</span><span class="w"> </span><span class="nx">Clock</span><span class="p">,</span><span class="w"> </span><span class="nx">Cube</span><span class="p">,</span><span class="w"> </span><span class="nx">Custom</span><span class="p">,</span><span class="w"> </span><span class="nx">Dots</span><span class="p">,</span><span class="w"> </span><span class="nx">Facebook</span><span class="p">,</span><span class="w"> </span><span class="nx">Grid</span><span class="p">,</span><span class="w"> </span>
-<span class="w">  </span><span class="nx">Ios</span><span class="p">,</span><span class="w"> </span><span class="nx">Orbit</span><span class="p">,</span><span class="w"> </span><span class="nx">Oval</span><span class="p">,</span><span class="w"> </span><span class="nx">Puff</span><span class="p">,</span><span class="w"> </span><span class="nx">Radio</span><span class="p">,</span><span class="w"> </span><span class="nx">Rings</span><span class="p">,</span><span class="w"> </span><span class="nx">Spinner</span><span class="p">,</span><span class="w"> </span><span class="nx">Hearts</span><span class="p">,</span><span class="w"> </span><span class="nx">Arrow</span>
+<span class="w">  </span><span class="nx">AIO</span><span class="p">,</span><span class="w"> </span><span class="nx">Arrow</span><span class="p">,</span><span class="w"> </span><span class="nx">Audio</span><span class="p">,</span><span class="w"> </span><span class="nx">Ball</span><span class="p">,</span><span class="w"> </span><span class="nx">Bars</span><span class="p">,</span><span class="w"> </span><span class="nx">Box</span><span class="p">,</span><span class="w"> </span><span class="nx">Clock</span><span class="p">,</span><span class="w"> </span><span class="nx">Cube</span><span class="p">,</span><span class="w"> </span><span class="nx">Custom</span><span class="p">,</span><span class="w"> </span><span class="nx">Dots</span><span class="p">,</span><span class="w"> </span>
+<span class="w">  </span><span class="nx">Facebook</span><span class="p">,</span><span class="w"> </span><span class="nx">Grid</span><span class="p">,</span><span class="w"> </span><span class="nx">Hearts</span><span class="p">,</span><span class="w"> </span><span class="nx">Ios</span><span class="p">,</span><span class="w"> </span><span class="nx">Orbit</span><span class="p">,</span><span class="w"> </span><span class="nx">Oval</span><span class="p">,</span><span class="w"> </span><span class="nx">Puff</span><span class="p">,</span><span class="w"> </span><span class="nx">Radio</span><span class="p">,</span><span class="w"> </span><span class="nx">Rings</span><span class="p">,</span><span class="w"> </span><span class="nx">Spinner</span>
 <span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;phaser3-rex-plugins/templates/spinner/spinner-components.js&quot;</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Add spinner object
@@ -10066,9 +10145,8 @@
 </code></pre></div></li>
 </ul>
 <h3 id="add-spinner-object">Add spinner object<a class="headerlink" href="#add-spinner-object" title="Permanent link">&para;</a></h3>
-<ul>
-<li>General
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">spinner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">audio</span><span class="p">({</span>
+<h4 id="general">General<a class="headerlink" href="#general" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">spinner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">audio</span><span class="p">({</span>
 <span class="w">  </span><span class="c1">// x: 0,</span>
 <span class="w">  </span><span class="c1">// y: 0,</span>
 <span class="w">  </span><span class="c1">// width: 64,</span>
@@ -10080,7 +10158,8 @@
 <span class="w">  </span><span class="c1">// delay: 0,</span>
 <span class="w">  </span><span class="c1">// repeatDelay: 0,</span>
 <span class="p">});</span>
-</code></pre></div><ul>
+</code></pre></div>
+<ul>
 <li><code>x</code>, <code>y</code> : Position of this object.</li>
 <li><code>width</code>, <code>height</code> : Size of this object.</li>
 <li><code>color</code> : Fill color, or stroke color. Default value is <code>0xffffff</code></li>
@@ -10090,14 +10169,13 @@
 <li><code>delay</code> : Delay time in ms before running.</li>
 <li><code>repeatDelay</code> : Delay time between 2 periods.</li>
 </ul>
-</li>
-<li>Arrow
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">spinner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">audio</span><span class="p">({</span>
+<h4 id="arrow">Arrow<a class="headerlink" href="#arrow" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">spinner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">audio</span><span class="p">({</span>
 <span class="w">  </span><span class="c1">// ...</span>
-
-<span class="w">  </span><span class="c1">// direction:&#39;down&#39;</span>
+<span class="w">  </span><span class="c1">// direction: &#39;down&#39;</span>
 <span class="p">});</span>
-</code></pre></div><ul>
+</code></pre></div>
+<ul>
 <li><code>direction</code> :<ul>
 <li><code>0</code>, <code>'right'</code> : Arrow from left to right.</li>
 <li><code>1</code>, <code>'down'</code> : Arrow from up to down. Default behavior.</li>
@@ -10105,6 +10183,39 @@
 <li><code>3</code>, <code>'up'</code> : Arrow from down to up.</li>
 </ul>
 </li>
+</ul>
+<h4 id="aio">AIO<a class="headerlink" href="#aio" title="Permanent link">&para;</a></h4>
+<p>All-in-one</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">spinner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">aio</span><span class="p">({</span>
+<span class="w">  </span><span class="c1">// ...</span>
+<span class="w">  </span><span class="c1">// animationMode: undefined</span>
+<span class="p">});</span>
+</code></pre></div>
+<ul>
+<li><code>animationMode</code> :<ul>
+<li><code>undefined</code> : Play random spinner animation.</li>
+<li><code>'leftArrow'</code> : Play <em>leftArrow</em> spinner animation.</li>
+<li><code>'rightArrow'</code> : Play <em>rightArrow</em> spinner animation.</li>
+<li><code>'upArrow'</code> : Play <em>upArrow</em> spinner animation.</li>
+<li><code>'downArrow'</code> : Play <em>dowbArrow</em> spinner animation.</li>
+<li><code>'audio'</code> : Play <em>audio</em> spinner animation.</li>
+<li><code>'ball'</code> : Play <em>ball</em> spinner animation. </li>
+<li><code>'bars'</code> : Play <em>bars</em> spinner animation. </li>
+<li><code>'box'</code> : Play <em>box</em> spinner animation.</li>
+<li><code>'clock'</code> : Play <em>clock</em> spinner animation.</li>
+<li><code>'cube'</code> : Play <em>cube</em> spinner animation.</li>
+<li><code>'dots'</code> : Play <em>dots</em> spinner animation.</li>
+<li><code>'facebook'</code> : Play <em>facebook</em> spinner animation.</li>
+<li><code>'grid'</code> : Play <em>grid</em> spinner animation.</li>
+<li><code>'hearts'</code> : Play <em>hearts</em> spinner animation.</li>
+<li><code>'ios'</code> : Play <em>ios</em> spinner animation.</li>
+<li><code>'oribit'</code> : Play <em>oribit</em> spinner animation. </li>
+<li><code>'oval'</code> : Play <em>oval</em> spinner animation.</li>
+<li><code>'pie'</code> : Play <em>pie</em> spinner animation.</li>
+<li><code>'puff'</code> : Play <em>puff</em> spinner animation.</li>
+<li><code>'radio'</code> : Play <em>radio</em> spinner animation.</li>
+<li><code>'rings'</code> : Play <em>rings</em> spinner animation.</li>
+<li><code>'spinner'</code> : Play <em>spinner</em> spinner animation.</li>
 </ul>
 </li>
 </ul>
@@ -10192,6 +10303,40 @@
     <div class="highlight"><pre><span></span><code><span class="nx">spinner</span><span class="p">.</span><span class="nx">ease</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ease</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
+<h3 id="set-animation-mode">Set animation mode<a class="headerlink" href="#set-animation-mode" title="Permanent link">&para;</a></h3>
+<p><a href="#aio">AIO-spinner</a> only</p>
+<div class="highlight"><pre><span></span><code><span class="nx">aioSpinner</span><span class="p">.</span><span class="nx">setAnimationMode</span><span class="p">(</span><span class="nx">mode</span><span class="p">);</span>
+</code></pre></div>
+<ul>
+<li><code>mode</code> : <ul>
+<li><code>undefined</code> : Play random spinner animation.</li>
+<li><code>'leftArrow'</code> : Play <em>leftArrow</em> spinner animation.</li>
+<li><code>'rightArrow'</code> : Play <em>rightArrow</em> spinner animation.</li>
+<li><code>'upArrow'</code> : Play <em>upArrow</em> spinner animation.</li>
+<li><code>'downArrow'</code> : Play <em>dowbArrow</em> spinner animation.</li>
+<li><code>'audio'</code> : Play <em>audio</em> spinner animation.</li>
+<li><code>'ball'</code> : Play <em>ball</em> spinner animation. </li>
+<li><code>'bars'</code> : Play <em>bars</em> spinner animation. </li>
+<li><code>'box'</code> : Play <em>box</em> spinner animation.</li>
+<li><code>'clock'</code> : Play <em>clock</em> spinner animation.</li>
+<li><code>'cube'</code> : Play <em>cube</em> spinner animation.</li>
+<li><code>'dots'</code> : Play <em>dots</em> spinner animation.</li>
+<li><code>'facebook'</code> : Play <em>facebook</em> spinner animation.</li>
+<li><code>'grid'</code> : Play <em>grid</em> spinner animation.</li>
+<li><code>'hearts'</code> : Play <em>hearts</em> spinner animation.</li>
+<li><code>'ios'</code> : Play <em>ios</em> spinner animation.</li>
+<li><code>'oribit'</code> : Play <em>oribit</em> spinner animation. </li>
+<li><code>'oval'</code> : Play <em>oval</em> spinner animation.</li>
+<li><code>'pie'</code> : Play <em>pie</em> spinner animation.</li>
+<li><code>'puff'</code> : Play <em>puff</em> spinner animation.</li>
+<li><code>'radio'</code> : Play <em>radio</em> spinner animation.</li>
+<li><code>'rings'</code> : Play <em>rings</em> spinner animation.</li>
+<li><code>'spinner'</code> : Play <em>spinner</em> spinner animation.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nx">aioSpinner</span><span class="p">.</span><span class="nx">setRandomAnimationMode</span><span class="p">();</span>
+</code></pre></div>
 <h3 id="custom-spinner">Custom spinner<a class="headerlink" href="#custom-spinner" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">customSpinner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">custom</span><span class="p">({</span>
 <span class="w">    </span><span class="c1">// x: 0,</span>
