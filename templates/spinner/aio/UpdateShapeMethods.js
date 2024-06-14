@@ -55,7 +55,7 @@ const GetRandomItem = Phaser.Utils.Array.GetRandom;
 export default {
     setAnimationMode(mode, config) {
         if (!AnimationModeMap.hasOwnProperty(mode)) {
-            mode = 'spinner';
+            mode = GetRandomItem(AnimationModeList);
         }
         this.animationMode = mode;
         var updateMethods = AnimationModeMap[mode];

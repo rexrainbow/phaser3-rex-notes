@@ -12,6 +12,9 @@ export default {
         this.addShape((new Circle()).setName('border'));
         this.addShape((new Line()).setName('minuteHand'));
         this.addShape((new Line()).setName('hourHand'));
+
+        this.minuteHandAngle = 0;
+        this.hourHandAngle = 0;
     },
 
     updateShapes() {

@@ -12,23 +12,23 @@ class Demo extends Phaser.Scene {
 
     create() {
         var spinners = [];
-        for (var i = 0; i < 4; i++) {
+        for (var i = 0; i < 16; i++) {
             spinners.push(
                 this.rexSpinner.add.aio({
                     width: 100, height: 100,
                 })
-                    .setRandomAnimationMode()
             )
         }
 
         Phaser.Actions.GridAlign(
             spinners,
             {
+                width: 4,
                 cellWidth: 100,
                 cellHeight: 100,
                 position: Phaser.Display.Align.TOP_LEFT,
                 x: 200,
-                y: 200
+                y: 100
             }
         );
 
