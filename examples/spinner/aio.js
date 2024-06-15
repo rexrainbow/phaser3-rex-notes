@@ -11,12 +11,15 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var spinners = [];
-        for (var i = 0; i < 16; i++) {
+        var spinners = [
+            this.rexSpinner.add.aio({ width: 100, height: 100, animationMode: 'leftArrow' }),
+            this.rexSpinner.add.aio({ width: 100, height: 100, animationMode: 'rightArrow' }),
+            this.rexSpinner.add.aio({ width: 100, height: 100, animationMode: 'upArrow' }),
+            this.rexSpinner.add.aio({ width: 100, height: 100, animationMode: 'downArrow' }),
+        ];
+        for (var i = 0; i < 12; i++) {
             spinners.push(
-                this.rexSpinner.add.aio({
-                    width: 100, height: 100,
-                })
+                this.rexSpinner.add.aio({ width: 100, height: 100, })
             )
         }
 

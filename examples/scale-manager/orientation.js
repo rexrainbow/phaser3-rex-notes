@@ -13,11 +13,16 @@ class Demo extends Phaser.Scene {
         var print = this.add.text(0, 0, '');
 
         this.scale.on('orientationchange', function (orientation) {
+            var s = [orientation];
             if (orientation === Phaser.Scale.PORTRAIT) {
-                print.text = 'PORTRAIT'
+                s.push('PORTRAIT')
             } else if (orientation === Phaser.Scale.LANDSCAPE) {
-                print.text = 'LANDSCAPE'
+                s.push('LANDSCAPE')
+            } else {
+                s.push('??')
             }
+
+            print.text = s.join('\n')
         });
 
         print.text = this.scale.orientation;
