@@ -13,7 +13,6 @@ class TiltCursor extends CursorKeys {
         var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
         this.setEventEmitter(eventEmitter, EventEmitterClass);
 
-        this.scaleManager = scene.scale;
         this.tiltAngle = new TiltAngle();
         this.resetFromJSON(config);
         this.boot();

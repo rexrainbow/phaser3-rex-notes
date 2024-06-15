@@ -1,21 +1,22 @@
 import DeviceOrientation from './DeviceOrientation.js';
+import GetValue from '../../../../phaser/src/utils/object/GetValue.js';
 
 class TiltAngle extends DeviceOrientation {
     constructor(scene, config) {
         super(scene, config);
-        this.scaleManager = scene.scale;
-        this.setCalibrationMode(GetValue(o, 'calibrationMode', 0));
+        this.setCalibrationMode(GetValue(config, 'calibrationMode', 0));
 
-        this.boot();
-    }
+        this.isLandscape = screen.orientation.type.startsWith('landscape');
 
-    boot() {
-        this.scaleManager.on('orientationchange', this.calibration, this);
+        this.onOrientationChange = (function () {
+            this.isLandscape = screen.orientation.type.startsWith('landscape');
+            this.calibration();
+        }).bind(this);
+        screen.orientation.addEventListener('change', this.onOrientationChange, false);
     }
 
     shutdown(fromScene) {
-        this.scaleManager.off('orientationchange', this.calibration, this);
-        this.scaleManager = undefined;
+        screen.orientation.removeEventListener('change', this.onOrientationChange, false);
 
         super.shutdown(fromScene);
     }
@@ -29,11 +30,11 @@ class TiltAngle extends DeviceOrientation {
     }
 
     get verticalAngle() {
-        return (this.scaleManager.isLandscape) ? this.gamma : this.bete;
+        return (this.isLandscape) ? this.gamma : this.beta;
     }
 
     get horizontalAngle() {
-        return (this.scaleManager.isLandscape) ? this.bete : this.gamma;
+        return (this.isLandscape) ? this.beta : this.gamma;
     }
 
     calibration() {

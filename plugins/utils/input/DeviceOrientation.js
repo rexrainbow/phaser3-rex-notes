@@ -1,4 +1,5 @@
 import EventEmitterMethods from '../eventemitter/EventEmitterMethods.js';
+import GetValue from '../../../../phaser/src/utils/object/GetValue.js';
 
 class DeviceOrientation {
     constructor(scene, config) {
@@ -11,35 +12,40 @@ class DeviceOrientation {
         this._beta = 0;
         this._gamma = 0;
 
+        this.debug = scene.add.text(0, 100, '??')
+
         var self = this;
-        window.addEventListener('deviceorientation', function (event) {
+        this.onUpdateAngles = (function (event) {
+            self.debug.text = 'deviceorientation';
             var alpha = event.alpha || 0;
-            if (self._alpha !== alpha) {
-                var prevAlpha = self._alpha;
-                self._alpha = alpha;
-                self.emit('alpha', alpha, prevAlpha);
+            if (this._alpha !== alpha) {
+                var prevAlpha = this._alpha;
+                this._alpha = alpha;
+                this.emit('alpha', alpha, prevAlpha);
             }
 
             var beta = event.beta || 0;
-            if (self._beta !== beta) {
-                var prevBeta = self._beta;
-                self._beta = beta;
-                self.emit('beta', beta, prevBeta);
+            if (this._beta !== beta) {
+                var prevBeta = this._beta;
+                this._beta = beta;
+                this.emit('beta', beta, prevBeta);
             }
 
             var gamma = event.gamma || 0;
-            if (self._gamma !== gamma) {
-                var prevGamma = self._gamma;
-                self._gamma = gamma;
-                self.emit('gamma', gamma, prevGamma);
+            if (this._gamma !== gamma) {
+                var prevGamma = this._gamma;
+                this._gamma = gamma;
+                this.emit('gamma', gamma, prevGamma);
             }
 
-            self.emit('change', alpha, beta, gamma);
+            this.emit('change', alpha, beta, gamma);
 
-        }, false);
+        }).bind(this)
+        //window.addEventListener('deviceorientation', this.onUpdateAngles, false);
     }
 
     shutdown(fromScene) {
+        window.removeEventListener('deviceorientation', this.onUpdateAngles, false);
         this.destroyEventEmitter();
     }
 
@@ -51,12 +57,26 @@ class DeviceOrientation {
         return this._alpha;
     }
 
-    get _beta() {
+    get beta() {
         return this._beta;
     }
 
     get gamma() {
         return this._gamma;
+    }
+
+    requestPermission() {
+        var self = this;
+        self.debug.text = 'requestPermission';
+        if (window.DeviceOrientationEvent && window.DeviceOrientationEvent.requestPermission) {
+            return window.DeviceOrientationEvent.requestPermission()
+                .then(function (result) {
+                    self.debug.text = `requestPermission -- ${result}`;
+                    return Promise.resolve(result === 'granted');
+                })
+        } else {
+            return Promise.resolve(true);
+        }
     }
 }
 
