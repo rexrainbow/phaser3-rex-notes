@@ -16,17 +16,5 @@ export default function (
 ): RoundRectangle;
 
 export default function (
-    config?: {
-        x?: number,
-        y?: number,
-        width?: number,
-        height?: number,
-        radiusConfig?: number | ({ x?: number, y?: number }) | RoundRectangle.IRadiusConfig |
-        ({
-            radius?: (number | ({ x?: number, y?: number }) | RoundRectangle.IRadiusConfig),
-            iteration?: number
-        }),
-        fillColor?: number,
-        fillAlpha?: number
-    }
+    config?: RoundRectangle.IConfig
 ): RoundRectangle;
