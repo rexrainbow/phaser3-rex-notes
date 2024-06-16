@@ -15,14 +15,14 @@ declare class BoundsWheelController extends ComponentBase {
         config?: BoundsWheelController.IConfig
     );
 
+    setCamera(camera?: Phaser.Cameras.Scene2D.Camera): this;
+    camera?: Phaser.Cameras.Scene2D.Camera
+
     setBoundsScrollEnable(enable?: boolean): this;
     boundsScrollEnable: boolean;
 
     setMouseWheelZoomEnable(enable?: boolean): this;
     mouseWheelZoomEnable: boolean;
-
-    setCamera(camera?: Phaser.Cameras.Scene2D.Camera): this;
-    camera?: Phaser.Cameras.Scene2D.Camera
 
 }
 

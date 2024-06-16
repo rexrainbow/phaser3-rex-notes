@@ -90,7 +90,7 @@ class BoundsWheelController extends ComponentBase {
         this.cursorAtBounds.enable = value;
     }
 
-    setBoundsScrollEnable = function (enable) {
+    setBoundsScrollEnable(enable) {
         if (enable === undefined) {
             enable = true;
         }
@@ -106,7 +106,7 @@ class BoundsWheelController extends ComponentBase {
         this.mouseWheel.enable = value;
     }
 
-    setMouseWheelZoomEnable = function (enable) {
+    setMouseWheelZoomEnable(enable) {
         if (enable === undefined) {
             enable = true;
         }

@@ -19,5 +19,5 @@ declare class ComponentBase extends Phaser.Events.EventEmitter {
     scene: Phaser.Scene;
     game: Phaser.Game;
 
-    destroy(): void;
+    destroy(fromScene?: boolean): void;
 }

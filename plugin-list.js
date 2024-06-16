@@ -124,6 +124,7 @@ module.exports = {
 
     // camera
     'scaleouterplugin': './plugins/scaleouter-plugin.js',
+    'cameracontrollerplugin': './plugins/cameracontroller-plugin.js',
 
     // file input
     'filechooserplugin': './plugins/filechooser-plugin.js',

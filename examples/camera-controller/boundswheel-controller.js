@@ -1,5 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import BoundsWheelController from '../../plugins/camera/boundswheelcontroller/BoundsWheelController.js';
+import CameraControllerPlugin from '../../plugins/cameracontroller-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -13,7 +13,8 @@ class Demo extends Phaser.Scene {
     create() {
         DrawSomethings(this);
 
-        var controller = new BoundsWheelController(this, {
+        var controller = this.plugins.get('rexCameraController').addBoundsWheelController(this, {
+            // camera: this.cameras.main,
         });
 
     }
@@ -41,6 +42,15 @@ var config = {
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
     scene: Demo,
+    plugins: {
+        global: [
+            {
+                key: 'rexCameraController',
+                plugin: CameraControllerPlugin,
+                start: true
+            },
+        ]
+    }
 };
 
 var game = new Phaser.Game(config);

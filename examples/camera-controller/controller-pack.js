@@ -1,6 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
 import CameraControllerPlugin from '../../plugins/cameracontroller-plugin.js';
-import FullWindowRectangle from '../../plugins/fullwindowrectangle.js'
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -23,11 +22,12 @@ class Demo extends Phaser.Scene {
 
         DrawSomethings(this, TEST_INPUTTARGET);
 
-        var controller = this.plugins.get('rexCameraController').addPinchController(this, {
+        var controller = this.plugins.get('rexCameraController').add(this, {
             // camera: this.cameras.main,
             inputTarget: (bg) ? bg : this,
         });
 
+        // controller.toggleEnable().toggleEnable()
     }
 }
 
