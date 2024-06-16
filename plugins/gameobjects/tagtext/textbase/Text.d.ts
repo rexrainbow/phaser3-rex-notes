@@ -1,6 +1,6 @@
 // import * as Phaser from 'phaser';
 import CanvasGameObjectBase from '../../../utils/types/CanvasGameObjectBase';
-import TextStyleBase from '../../textbase/textstyle/TextStyleInterface';
+import TextStyleBase from '../../textbase/textstyle/TextStyle';
 
 export default Text;
 
@@ -283,7 +283,9 @@ declare class Text extends CanvasGameObjectBase {
         valign: string,
 
         wrapWidth: number | null,
-        wrapMode: number
+        wrapMode: number,
+
+        lineHeight: number,
     };
 
     padding: {
