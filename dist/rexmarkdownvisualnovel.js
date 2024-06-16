@@ -82812,6 +82812,7 @@
       iconCrossDuration = _ref.iconCrossDuration,
       _ref$iconCrossMode = _ref.iconCrossMode,
       iconCrossMode = _ref$iconCrossMode === void 0 ? 'crossFade' : _ref$iconCrossMode,
+      waitIconAnimationMode = _ref.waitIconAnimationMode,
       _ref$clickAfterComple = _ref.clickAfterComplete,
       clickAfterComplete = _ref$clickAfterComple === void 0 ? true : _ref$clickAfterComple,
       _ref$wait = _ref.wait,
@@ -82844,6 +82845,7 @@
         iconCrossDuration: iconCrossDuration,
         iconCrossMode: iconCrossMode,
         more: more,
+        waitIconAnimationMode: waitIconAnimationMode,
         clickAfterComplete: clickAfterComplete,
         wait: wait
       }, commandExecutor, eventSheetManager, eventSheet);
