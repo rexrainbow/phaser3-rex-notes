@@ -3,7 +3,7 @@ import CreateLayerManager from './methods/CreateLayerManager.js';
 import CreateBackground from './methods/CreateBackground.js';
 import CreateMainPanel from './methods/CreateMainPanel.js';
 import CreateControlPoints from './methods/CreateControlPoints.js';
-import CreateCameraController from './methods/cameracontrollers/CreateCameraController.js';
+import CreateCameraController from './methods/CreateCameraController.js';
 import Methods from './methods/Methods.js';
 import { OnSelectGameObject, OnUnSelectGameObject } from './methods/SelectGameObjectMethods.js';
 
