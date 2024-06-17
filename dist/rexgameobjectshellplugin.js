@@ -3241,7 +3241,7 @@
       _this.inputTarget = GetValue$27(config, 'inputTarget', scene);
       _this.pinch = new Pinch(_this.inputTarget);
       var camera = GetCameraByName(scene, GetValue$27(config, 'camera'));
-      _this.setCamera(camera).setPanScrollEnable(GetValue$27(config, 'pan-scroll', true)).setPinchZoomEnable(GetValue$27(config, 'pinch-zoom', true));
+      _this.setCamera(camera).setPanScrollEnable(GetValue$27(config, 'panScrollEnable', true)).setPinchZoomEnable(GetValue$27(config, 'pinchZoomEnable', true));
       _this.boot();
       return _this;
     }
@@ -3705,7 +3705,7 @@
         zoomSpeed: 0.05
       });
       var camera = GetCameraByName(scene, GetValue$25(config, 'camera'));
-      _this.setCamera(camera).setBoundsScrollEnable(GetValue$25(config, 'bounds-scroll', true)).setMouseWheelZoomEnable(GetValue$25(config, 'mouse-wheel-zoom', true));
+      _this.setCamera(camera).setBoundsScrollEnable(GetValue$25(config, 'boundsScrollEnable', true)).setMouseWheelZoomEnable(GetValue$25(config, 'mouseWheelZoomEnable', true));
       _this.boot();
       return _this;
     }
