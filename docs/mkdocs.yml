@@ -250,7 +250,9 @@ nav:
     - Camera: camera.md
     - Effects: camera-effects.md
     - Shader effect: camera-shader-effect.md
-    - Controllor: camera-controllor.md
+    - Controller:
+        - Controller: camera-controller.md
+        - Control by input: input-to-camera.md
 - Tween: tween.md
 - Shader effects:
     - Built-in shader effects:
