@@ -38,8 +38,8 @@ class BoundsWheelController extends ComponentBase {
 
         this
             .setCamera(camera)
-            .setBoundsScrollEnable(GetValue(config, 'bounds-scroll', true))
-            .setMouseWheelZoomEnable(GetValue(config, 'mouse-wheel-zoom', true))
+            .setBoundsScrollEnable(GetValue(config, 'boundsScrollEnable', true))
+            .setMouseWheelZoomEnable(GetValue(config, 'mouseWheelZoomEnable', true))
 
         this.boot();
     }

@@ -4,8 +4,8 @@ declare namespace BoundsWheelController {
     interface IConfig {
         camera?: string | number | Phaser.Cameras.Scene2D.Camera,
 
-        'bounds-scroll'?: boolean,
-        'mouse-wheel-zoom'?: boolean,
+        boundsScrollEnable?: boolean,
+        mouseWheelZoomEnable?: boolean,
     }
 }
 

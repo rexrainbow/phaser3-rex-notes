@@ -4,8 +4,8 @@ declare namespace PinchController {
     interface IConfig {
         camera?: string | number | Phaser.Cameras.Scene2D.Camera,
 
-        'pan-scroll'?: boolean,
-        'pinch-zoom'?: boolean,
+        panScrollEnable?: boolean,
+        pinchZoomEnable?: boolean,
 
         inputTarget?: Phaser.Scene | Phaser.GameObjects.GameObject,
     }

@@ -20,8 +20,8 @@ class PinchController extends ComponentBase {
 
         this
             .setCamera(camera)
-            .setPanScrollEnable(GetValue(config, 'pan-scroll', true))
-            .setPinchZoomEnable(GetValue(config, 'pinch-zoom', true))
+            .setPanScrollEnable(GetValue(config, 'panScrollEnable', true))
+            .setPinchZoomEnable(GetValue(config, 'pinchZoomEnable', true))
 
         this.boot();
     }
