@@ -50545,6 +50545,7 @@
     var action = GetValue$1p(config, 'action', undefined);
     var actionMask = GetValue$1p(config, 'actionMask', undefined);
     if (icon) {
+      var align = GetValue$1p(config, 'align.icon', 'center');
       var padding;
       if (this.orientation === 0) {
         padding = {
@@ -50564,6 +50565,7 @@
       var fitRatio = GetValue$1p(config, 'squareFitIcon', false) ? 1 : 0;
       this.add(icon, {
         proportion: 0,
+        align: align,
         padding: padding,
         fitRatio: fitRatio
       });
@@ -50648,6 +50650,7 @@
     // InnerSizer : title, separator, text
 
     if (action) {
+      var align = GetValue$1p(config, 'align.action', 'center');
       var padding;
       if (this.orientation === 0) {
         padding = {
@@ -50665,6 +50668,7 @@
       var fitRatio = GetValue$1p(config, 'squareFitAction', false) ? 1 : 0;
       this.add(action, {
         proportion: 0,
+        align: align,
         padding: padding,
         fitRatio: fitRatio
       });
@@ -50765,7 +50769,8 @@
       expand: true
     });
     if (icon) {
-      var padding = undefined;
+      var align = GetValue$1o(config, 'align.icon', 'center');
+      var padding;
       if (innerSizer.orientation === 0) {
         padding = {
           right: GetValue$1o(config, 'space.icon', 0),
@@ -50784,6 +50789,7 @@
       var fitRatio = GetValue$1o(config, 'squareFitIcon', false) ? 1 : 0;
       innerSizer.add(icon, {
         proportion: 0,
+        align: align,
         padding: padding,
         fitRatio: fitRatio
       });
@@ -50826,6 +50832,7 @@
       });
     }
     if (action) {
+      var align = GetValue$1o(config, 'align.action', 'center');
       var padding;
       if (innerSizer.orientation === 0) {
         padding = {
@@ -50843,6 +50850,7 @@
       var fitRatio = GetValue$1o(config, 'squareFitAction', false) ? 1 : 0;
       innerSizer.add(action, {
         proportion: 0,
+        align: align,
         padding: padding,
         fitRatio: fitRatio
       });
