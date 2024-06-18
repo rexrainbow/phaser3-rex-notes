@@ -114,6 +114,8 @@ var label = scene.rexUI.add.titleLabel({
     align: {
         title: 'left',
         text: 'left',
+        icon: 'center',
+        action: 'center'
     },
 
     space: {
@@ -186,9 +188,9 @@ var label = scene.rexUI.add.titleLabel({
 - `action` : Game object of action icon, optional.
 - `actionMask` : Set true to add a *circle* mask on action icon game object.
     - *Phaser 3 engine does not support nested mask*, uses [circle mask image](circlemaskimage.md) instead.
-- `align` : Alignment of title, text game objects.
-    - `align.title` : `'left'`, or `'right'`. Default vale is `'left'`.
-    - `align.text` : `'left'`, or `'right'`. Default vale is `'left'`.
+- `align` : Alignment of title, text, icon, action game objects.
+    - `align.title`, `align.text` : `'left'`, `'center'`, or `'right'`. Default vale is `'left'`.
+    - `align.icon`, `align.action` : `'top'`, `'center'`, or `'bottom'`. Default vale is `'center'`.
 - `space` : Pads spaces.
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
     - `space.innerLeft`, `space.innerRight`, `space.innerTop`, `space.innerBottom` : Space parameter of inner sizer.
