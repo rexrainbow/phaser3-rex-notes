@@ -132,3 +132,18 @@ cameraController.setCamera(camera);
     cameraController.setMouseWheelZoomEnable(enable);
     // cameraController.mouseWheelZoomEnable = enable;
     ```
+- Disable all behaviors
+    ```javascript
+    cameraController.setEnable(false);
+    // cameraController.enable = false;
+    ```
+- Restore enable state of all behaviors
+    ```javascript
+    cameraController.setEnable();
+    // cameraController.enable = true;
+    ```
+- Toggle enable state
+    ```javascript
+    cameraController.toggleEnable();
+    // cameraController.enable = !cameraController.enable;
+    ```
