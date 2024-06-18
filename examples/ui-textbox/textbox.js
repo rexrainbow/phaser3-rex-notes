@@ -15,6 +15,7 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
+        this.load.atlas('portraits', 'assets/images/characters/portraits.png', 'assets/images/characters/portraits.json');
         this.load.image('nextPage', 'assets/images/arrow-down-left.png');
     }
 
@@ -66,14 +67,21 @@ var createTextBox = function (scene, x, y, config) {
 
         background: scene.rexUI.add.roundRectangle({ radius: 20, color: COLOR_MAIN, strokeColor: COLOR_LIGHT, strokeWidth: 2 }),
 
-        icon: scene.rexUI.add.roundRectangle({ radius: 20, color: COLOR_DARK }),
+        icon: scene.rexUI.add.transitionImagePack({
+            width: 40, height: 40,
+            key: 'portraits', frame: 'A-smile'
+        }),
 
         // text: getBuiltInText(scene, wrapWidth, fixedWidth, fixedHeight),
         text: getBBcodeText(scene, wrapWidth, fixedWidth, fixedHeight, maxLines),
         expandTextWidth: (width > 0),
         expandTextHeight: (height > 0),
 
-        action: scene.add.image(0, 0, 'nextPage').setTint(COLOR_LIGHT).setVisible(false),
+        action: scene.rexUI.add.aioSpinner({
+            width: 30, height: 30,
+            duration: 1000,
+            animationMode: 'ball'
+        }).setVisible(false),
 
         title: (titleText) ? scene.add.text(0, 0, titleText, { fontSize: '24px', }) : undefined,
 
@@ -88,7 +96,8 @@ var createTextBox = function (scene, x, y, config) {
         },
 
         align: {
-            title: 'center'
+            title: 'center',
+            action: 'bottom'
         }
     })
         .setOrigin(0)
@@ -98,8 +107,11 @@ var createTextBox = function (scene, x, y, config) {
         .setInteractive()
         .on('pointerdown', function () {
             if (typingMode === 'page') {
-                var icon = this.getElement('action').setVisible(false);
+
+                var icon = this.getElement('action');
+                icon.stop().setVisible(false);
                 this.resetChildVisibleState(icon);
+
                 if (this.isTyping) {
                     this.stop(true);
                 } else {
@@ -112,17 +124,10 @@ var createTextBox = function (scene, x, y, config) {
                 return;
             }
 
-            var icon = this.getElement('action').setVisible(true);
+            var icon = this.getElement('action');
+            icon.setVisible(true).start();
             this.resetChildVisibleState(icon);
-            icon.y -= 30;
-            var tween = scene.tweens.add({
-                targets: icon,
-                y: '+=30', // '+=100'
-                ease: 'Bounce', // 'Cubic', 'Elastic', 'Bounce', 'Back'
-                duration: 500,
-                repeat: 0, // -1: infinity
-                yoyo: false
-            });
+
         }, textBox)
         .on('complete', function () {
             console.log('all pages typing complete')

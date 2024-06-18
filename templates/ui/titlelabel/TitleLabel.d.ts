@@ -51,6 +51,8 @@ declare namespace TitleLabel {
         align?: {
             text?: 'left' | 'right' | 'center' | number,
             title?: 'left' | 'right' | 'center' | number,
+            icon?: 'top' | 'bottom' | 'center' | number,
+            action?: 'top' | 'bottom' | 'center' | number,
         },
 
         proportion?: {

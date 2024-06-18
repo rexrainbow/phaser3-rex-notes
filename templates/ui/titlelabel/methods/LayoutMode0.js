@@ -30,6 +30,7 @@ var LayoutMode0 = function (config) {
 
 
     if (icon) {
+        var align = GetValue(config, 'align.icon', 'center');
         var padding;
         if (this.orientation === 0) {
             padding = {
@@ -50,7 +51,7 @@ var LayoutMode0 = function (config) {
 
         this.add(
             icon,
-            { proportion: 0, padding: padding, fitRatio: fitRatio }
+            { proportion: 0, align: align, padding: padding, fitRatio: fitRatio }
         );
 
         if (iconMask) {
@@ -139,6 +140,7 @@ var LayoutMode0 = function (config) {
     // InnerSizer : title, separator, text
 
     if (action) {
+        var align = GetValue(config, 'align.action', 'center');
         var padding;
         if (this.orientation === 0) {
             padding = {
@@ -157,7 +159,7 @@ var LayoutMode0 = function (config) {
 
         this.add(
             action,
-            { proportion: 0, padding: padding, fitRatio: fitRatio }
+            { proportion: 0, align: align, padding: padding, fitRatio: fitRatio }
         );
 
         if (actionMask) {

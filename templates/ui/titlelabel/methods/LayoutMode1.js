@@ -84,7 +84,8 @@ var LayoutMode1 = function (config) {
     );
 
     if (icon) {
-        var padding = undefined;
+        var align = GetValue(config, 'align.icon', 'center');
+        var padding;
         if (innerSizer.orientation === 0) {
             padding = {
                 right: GetValue(config, 'space.icon', 0),
@@ -104,7 +105,7 @@ var LayoutMode1 = function (config) {
 
         innerSizer.add(
             icon,
-            { proportion: 0, padding: padding, fitRatio: fitRatio }
+            { proportion: 0, align: align, padding: padding, fitRatio: fitRatio }
         );
 
         if (iconMask) {
@@ -149,6 +150,7 @@ var LayoutMode1 = function (config) {
     }
 
     if (action) {
+        var align = GetValue(config, 'align.action', 'center');
         var padding;
         if (innerSizer.orientation === 0) {
             padding = {
@@ -167,7 +169,7 @@ var LayoutMode1 = function (config) {
 
         innerSizer.add(
             action,
-            { proportion: 0, padding: padding, fitRatio: fitRatio }
+            { proportion: 0, align: align, padding: padding, fitRatio: fitRatio }
         );
 
         if (actionMask) {
