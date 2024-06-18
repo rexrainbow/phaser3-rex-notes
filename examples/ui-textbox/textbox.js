@@ -16,7 +16,6 @@ class Demo extends Phaser.Scene {
 
     preload() {
         this.load.atlas('portraits', 'assets/images/characters/portraits.png', 'assets/images/characters/portraits.json');
-        this.load.image('nextPage', 'assets/images/arrow-down-left.png');
     }
 
     create() {

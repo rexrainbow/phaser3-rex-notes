@@ -16,8 +16,14 @@ class Demo extends Phaser.Scene {
         var postFxPlugin = this.plugins.get('rexOutlinePipeline');
         // postFxPlugin.setQuality(0.08); // Will sample 8 points, default is 10 points with quality = 0.1
         for (var i = 0; i < 20; i++) {
-            let gameObject = this.add.image(0, 0, 'mushroom')
+            let gameObject = this.add.container(0, 0, [
+                this.add.image(0, 0, 'mushroom')
+            ])
+                .setSize(64, 64)
                 .setRandomPosition(100, 100, 600, 400)
+
+            // let gameObject = this.add.image(0, 0, 'mushroom')
+            //     .setRandomPosition(100, 100, 600, 400)
 
             gameObject
                 .setInteractive()

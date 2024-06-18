@@ -12,7 +12,7 @@ export default {
 
     icon: { width: 120, height: 120 },
 
-    action: { width: 40, height: 40, animationMode: 'downArrow' },
+    action: { width: 40, height: 40, animationMode: 'ball' },
 
     text: { fontSize: 30, maxLines: 4 },
 
@@ -38,5 +38,9 @@ export default {
 
         align: 'center',
         alpha: 0,
+    },
+
+    align: {
+        action: 'bottom'
     }
 };
