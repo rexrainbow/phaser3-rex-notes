@@ -2,6 +2,8 @@ import GetGame from '../system/GetGame.js';
 
 var CreateTexture = function (game, key, width, height, useDynamicTexture) {
     game = GetGame(game);
+    width = Math.ceil(width);
+    height = Math.ceil(height);
 
     if (useDynamicTexture === undefined) {
         useDynamicTexture = false;
