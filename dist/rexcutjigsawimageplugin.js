@@ -472,12 +472,12 @@
         columns = Math.floor(width / this.outerCellWidth);
       }
       if (rows) {
-        height = this.outerCellWidth * rows;
+        height = this.outerCellHeight * rows;
       } else {
         if (height === undefined) {
           height = 4096;
         }
-        rows = Math.floor(height / this.outerCellWidth);
+        rows = Math.floor(height / this.outerCellHeight);
       }
       if (useDynamicTexture === undefined) {
         useDynamicTexture = false;
@@ -818,7 +818,7 @@
     return JigsawPieceRenderTexurue;
   }(JigsawPieceBase(RenderTexture));
 
-  var DrawCanvasPieceCallback = function DrawCanvasPieceCallback(image, context, sx, sy, width, height, edgeWidth, edgeHeight, edgeMode, drawShapeCallback) {
+  var DrawCanvasPieceCallback = function DrawCanvasPieceCallback(image, context, sx, sy, width, height, totalWidth, totalHeight, edgeWidth, edgeHeight, edgeMode, drawShapeCallback) {
     edgeMode = ConvertEdgeMode(edgeMode);
 
     // Already translate to dx, dy
@@ -841,6 +841,12 @@
       dy -= sy;
       dHeight += sy;
       sy = 0;
+    }
+    if (sx + dWidth > totalWidth) {
+      dWidth = totalWidth - sx;
+    }
+    if (sy + dHeight > totalHeight) {
+      dHeight = totalHeight - sy;
     }
     context.drawImage(image,
     // image
@@ -941,7 +947,7 @@
         } else {
           // Use canvas-texture
           frameManager.draw(frameName, function (canvas, context, frameSize) {
-            DrawCanvasPieceCallback(sourceImage, context, scrollX, scrollY, frameWidth, frameHeight, edgeWidth, edgeHeight, edgeMode, drawShapeCallback);
+            DrawCanvasPieceCallback(sourceImage, context, scrollX, scrollY, frameWidth, frameHeight, sourceFrameWidth, sourceFrameHeight, edgeWidth, edgeHeight, edgeMode, drawShapeCallback);
           });
         }
         scrollX += frameWidth - edgeWidth * 2;

@@ -449,12 +449,12 @@
         columns = Math.floor(width / this.outerCellWidth);
       }
       if (rows) {
-        height = this.outerCellWidth * rows;
+        height = this.outerCellHeight * rows;
       } else {
         if (height === undefined) {
           height = 4096;
         }
-        rows = Math.floor(height / this.outerCellWidth);
+        rows = Math.floor(height / this.outerCellHeight);
       }
       if (useDynamicTexture === undefined) {
         useDynamicTexture = false;
