@@ -100,14 +100,17 @@ var GenerateFrames = function (scene, {
                     DrawCanvasPieceCallback(
                         sourceImage,
                         context,
+
                         scrollX, scrollY,
                         frameWidth, frameHeight,
+                        sourceFrameWidth, sourceFrameHeight,
+
                         edgeWidth, edgeHeight,
                         edgeMode,
+
                         drawShapeCallback
                     );
                 });
-
             }
 
             scrollX += frameWidth - (edgeWidth * 2);

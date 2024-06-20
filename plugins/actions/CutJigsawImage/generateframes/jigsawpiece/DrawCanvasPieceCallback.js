@@ -3,10 +3,14 @@ import ConvertEdgeMode from './ConvertEdgeMode.js';
 var DrawCanvasPieceCallback = function (
     image,
     context,
+
     sx, sy,
     width, height,
+    totalWidth, totalHeight,
+
     edgeWidth, edgeHeight,
     edgeMode,
+
     drawShapeCallback
 ) {
 
@@ -40,6 +44,13 @@ var DrawCanvasPieceCallback = function (
         dy -= sy;
         dHeight += sy;
         sy = 0;
+    }
+
+    if ((sx + dWidth) > totalWidth) {
+        dWidth = totalWidth - sx;
+    }
+    if ((sy + dHeight) > totalHeight) {
+        dHeight = totalHeight - sy;
     }
 
     context.drawImage(
