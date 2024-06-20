@@ -1,7 +1,5 @@
 import {
     ControllerPack,
-    PinchController,
-    BoundsWheelController
 } from './cameracontroller';
 
 class LifeTimePlugin extends Phaser.Plugins.BasePlugin {
@@ -18,15 +16,6 @@ class LifeTimePlugin extends Phaser.Plugins.BasePlugin {
     add(scene, config) {
         return new ControllerPack(scene, config);
     }
-
-    addPinchController(scene, config) {
-        return new PinchController(scene, config);
-    }
-
-    addBoundsWheelController(scene, config) {
-        return new BoundsWheelController(scene, config);
-    }
-
 
 }
 

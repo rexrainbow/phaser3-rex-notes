@@ -192,7 +192,7 @@ var drag1Vector = pinch.drag1Vector; // {x, y}
         ```
 - [Pointer](touchevents.md#properties-of-point) 1, available when state is `2`
     ```javascript
-    var pointer0 = pinch.pointers[1];
+    var pointer1 = pinch.pointers[1];
     ```
 
 ### Is pinched
