@@ -1,5 +1,6 @@
 import phaser from 'phaser/src/phaser.js';
-import CameraControllerPlugin from '../../plugins/cameracontroller-plugin.js';
+import PinchZoom from '../../plugins/camera/pinchzoom/PinchZoom.js';
+import PanScroll from '../../plugins/camera/panscroll/PanScroll.js';
 import FullWindowRectangle from '../../plugins/fullwindowrectangle.js'
 
 class Demo extends Phaser.Scene {
@@ -23,10 +24,15 @@ class Demo extends Phaser.Scene {
 
         DrawSomethings(this, TEST_INPUTTARGET);
 
-        var controller = this.plugins.get('rexCameraController').addPinchController(this, {
+        var pinchZoomController = new PinchZoom(this, {
             // camera: this.cameras.main,
             inputTarget: (bg) ? bg : this,
         });
+
+        var panScrollController = new PanScroll(this, {
+            // camera: this.cameras.main,
+            inputTarget: (bg) ? bg : this,
+        })
 
     }
 }
@@ -56,16 +62,7 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo,
-    plugins: {
-        global: [
-            {
-                key: 'rexCameraController',
-                plugin: CameraControllerPlugin,
-                start: true
-            },
-        ]
-    }
+    scene: Demo
 };
 
 var game = new Phaser.Game(config);

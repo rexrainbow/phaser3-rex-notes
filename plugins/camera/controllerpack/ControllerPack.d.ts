@@ -1,10 +1,15 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase';
-import PinchController from '../pinchcontroller/PinchController';
+import PinchZoom from '../pinchzoom/PinchZoom';
+import PanScroll from '../panscroll/PanScroll';
 import BoundsWheelController from '../boundswheelcontroller/BoundsWheelController';
 
 declare namespace ControllerPack {
-    interface IConfig extends PinchController.IConfig, BoundsWheelController.IConfig {
+    interface IConfig extends PinchZoom.IConfig, PanScroll.IConfig, BoundsWheelController.IConfig {
+        panScrolEnable?: boolean,
+        pinchZoomEnable?: boolean,
+
         enable?: boolean,
+
     }
 }
 

@@ -1,6 +1,8 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
-import PinchController from '../pinchcontroller/PinchController.js';
+import PanScroll from '../panscroll/PanScroll.js';
+import PinchZoom from '../pinchzoom/PinchZoom.js';
 import BoundsWheelController from '../boundswheelcontroller/BoundsWheelController.js';
+import DeepClone from '../../utils/object/DeepClone.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -8,61 +10,82 @@ class ControllerPack extends ComponentBase {
     constructor(scene, config) {
         if (config === undefined) {
             config = {};
+        } else {
+            config = DeepClone(config);
         }
 
         super(scene, config);
         // this.scene
 
         this._enable = true;
-        this.pinchController = new PinchController(scene, config);
+        this._camera = undefined;
+
+        var enableMask = GetValue(config, 'enable', true);
+        delete config.enable;
+
+        config.enable = GetValue(config, 'panScrolEnable', true);
+        this.panScroll = new PanScroll(scene, config);
+
+        config.enable = GetValue(config, 'pinchZoomEnable', true);
+        this.pinchZoom = new PinchZoom(scene, config);
+
         this.boundsWheelController = new BoundsWheelController(scene, config);
-        this.setEnable(GetValue(config, 'enable', true));
+
+        this.setEnable(enableMask);
     }
 
     destroy(fromScene) {
-        this.pinchController.destroy(fromScene);
+        this.panScroll.destroy(fromScene);
+        this.pinchZoom.destroy(fromScene);
         this.boundsWheelController.destroy(fromScene);
+
         super.destroy(fromScene);
     }
 
     set camera(value) {
-        this.pinchController.setCamera(value);
+        this.panScroll.setCamera(value);
+        this.pinchZoom.setCamera(value);
         this.boundsWheelController.setCamera(value);
     }
 
     get camera() {
-        return this.pinchController.camera;
+        return this.panScroll.camera;
     }
 
     setCamera(camera) {
-        this.pinchController.setCamera(camera);
-        this.boundsWheelController.setCamera(camera);
+        this.camera = camera;
         return this;
     }
 
     set panScrollEnable(value) {
-        this.pinchController.panScrollEnable = value;
+        this.panScroll.enable = value;
     }
 
     get panScrollEnable() {
-        return this.pinchController.panScrollEnable;
+        return this.panScroll.enable;
     }
 
     setPanScrollEnable = function (enable) {
-        this.pinchController.setPanScrollEnable(enable);
+        if (enable === undefined) {
+            enable = true;
+        }
+        this.panScrollEnable = enable;
         return this;
     }
 
     set pinchZoomEnable(value) {
-        this.pinchController.pinchZoomEnable = value;
+        this.pinchZoom.enable = value;
     }
 
     get pinchZoomEnable() {
-        return this.pinchController.pinchZoomEnable;
+        return this.pinchZoom.enable;
     }
 
     setPinchZoomEnable = function (enable) {
-        this.pinchController.setPinchZoomEnable(enable);
+        if (enable === undefined) {
+            enable = true;
+        }
+        this.pinchZoomEnable = enable;
         return this;
     }
 
