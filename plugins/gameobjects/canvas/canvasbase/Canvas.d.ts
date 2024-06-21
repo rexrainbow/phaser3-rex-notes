@@ -8,14 +8,14 @@ export default class Canvas extends CanvasGameObjectBase {
         width?: number, height?: number
     );
 
+    canvas: HTMLCanvasElement;
+    context: CanvasRenderingContext2D;
+    getCanvas(readOnly?: boolean): HTMLCanvasElement;
+    getContext(readOnly?: boolean): CanvasRenderingContext2D;
+
     setSize(width: number, height: number): this;
     resize(width: number, height: number): this;
     setCanvasSize(width: number, height: number): this;
-
-    getCanvas(readOnly?: boolean): HTMLCanvasElement;
-    canvas: HTMLCanvasElement;
-    getContext(readOnly?: boolean): CanvasRenderingContext2D;
-    context: CanvasRenderingContext2D;
 
     needRedraw(): this;
     dirty: boolean;

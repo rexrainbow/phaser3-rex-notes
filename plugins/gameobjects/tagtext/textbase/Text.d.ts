@@ -62,6 +62,9 @@ declare class Text extends CanvasGameObjectBase {
         style?: Text.TextStyle
     );
 
+    canvas: HTMLCanvasElement;
+    context: CanvasRenderingContext2D;
+
     text: string;
     setText(text: string | number | string[]): this;
     appendText(
