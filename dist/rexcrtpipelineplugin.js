@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexbarrelpipelineplugin = factory());
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexcrtpipelineplugin = factory());
 })(this, (function () { 'use strict';
 
   function _callSuper(t, o, e) {
@@ -104,101 +104,68 @@
     return _assertThisInitialized(self);
   }
 
-  var frag = "#ifdef GL_FRAGMENT_PRECISION_HIGH\n#define highmedp highp\n#else\n#define highmedp mediump\n#endif\nprecision highmedp float;\n\n// Scene buffer\nuniform sampler2D uMainSampler; \nvarying vec2 outTexCoord;\n\n// Effect parameters\nuniform float shrinkMode;\nuniform vec2 texSize;\nuniform vec2 center;\nuniform float radius;\nuniform float power;\nuniform float intensity;\n\nvoid main (void) {\n  vec2 tc = outTexCoord * texSize;  \n  tc -= center;\n  float dist = length(tc) / radius;\n  float factor = pow(dist, power);\n  if (shrinkMode > 0.0) {\n    factor = 1.0 / factor;\n  }\n\n  tc *= mix(1.0, factor, intensity);\n  tc += center;\n  gl_FragColor = texture2D(uMainSampler, tc / texSize);\n\n}\n";
+  var frag = "#ifdef GL_FRAGMENT_PRECISION_HIGH\n#define highmedp highp\n#else\n#define highmedp mediump\n#endif\nprecision highmedp float;\n\n// Scene buffer\nuniform sampler2D uMainSampler; \nvarying vec2 outTexCoord;\n\n// Effect parameters\nuniform vec2 warp;\nuniform float scanStrength;\nuniform float scanLineWidth;\n\nvoid main (void) {\n  // squared distance from center\n  vec2 uv = outTexCoord;\n  vec2 dc = abs(0.5-uv);\n  dc *= dc;\n  \n  // warp the fragment coordinates\n  uv.x -= 0.5; \n  uv.x *= 1.0+(dc.y*warp.x);\n  uv.x += 0.5;\n\n  uv.y -= 0.5; \n  uv.y *= 1.0+(dc.x*warp.y); \n  uv.y += 0.5;\n\n  // sample inside boundaries, otherwise set to black\n  if (uv.y > 1.0 || uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0) {\n    gl_FragColor = vec4(0.0,0.0,0.0,1.0);\n  } else {\n    vec4 color = texture2D(uMainSampler,uv);\n    color.rgb *= (1.-scanStrength)+(sin(outTexCoord.y*scanLineWidth)*scanStrength);\n    gl_FragColor = color;\n  }\n}\n";
 
   var PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
   var GetValue = Phaser.Utils.Objects.GetValue;
-  var BarrelPostFxPipeline = /*#__PURE__*/function (_PostFXPipeline) {
-    _inherits(BarrelPostFxPipeline, _PostFXPipeline);
-    function BarrelPostFxPipeline(game) {
+  var CrtPostFxPipeline = /*#__PURE__*/function (_PostFXPipeline) {
+    _inherits(CrtPostFxPipeline, _PostFXPipeline);
+    function CrtPostFxPipeline(game) {
       var _this;
-      _classCallCheck(this, BarrelPostFxPipeline);
-      _this = _callSuper(this, BarrelPostFxPipeline, [{
-        name: 'rexBarrelPostFx',
+      _classCallCheck(this, CrtPostFxPipeline);
+      _this = _callSuper(this, CrtPostFxPipeline, [{
+        name: 'rexCrtPostFx',
         game: game,
         renderTarget: true,
         fragShader: frag
       }]);
-      _this.shrinkMode = false;
-      _this.centerX = 0; // position wo resolution
-      _this.centerY = 0; // position wo resolution
-      _this.radius = 0;
-      _this.power = 1;
-      _this.intensity = 1;
+      _this.warp = 0;
+      _this.scanStrength = 0.2;
+      _this.scanLineWidth = 1024;
       return _this;
     }
-    _createClass(BarrelPostFxPipeline, [{
+    _createClass(CrtPostFxPipeline, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.setShrinkMode(GetValue(o, 'shrink', false));
-        this.setRadius(GetValue(o, 'radius', 0));
-        this.setCenter(GetValue(o, 'center.x', undefined), GetValue(o, 'center.y', undefined));
-        this.setPower(GetValue(o, 'power', 0.5));
-        this.setIntensity(GetValue(o, 'intensity', 1));
+        this.setWarp(GetValue(o, 'warpX', 0.75), GetValue(o, 'warpY', 0.75));
+        this.setScanStrength(GetValue(o, 'scanStrength', 0.75));
+        this.setScanLineWidth(GetValue(o, 'scanLineWidth', 1024));
         return this;
       }
     }, {
       key: "onPreRender",
       value: function onPreRender() {
-        this.set1f('shrinkMode', this.shrinkMode ? 1 : 0);
-        this.set1f('radius', this.radius);
-        var texWidth = this.renderer.width,
-          textHeight = this.renderer.height;
-        this.set2f('center', this.centerX, textHeight - this.centerY);
-        this.set2f('texSize', texWidth, textHeight);
-        this.set1f('power', this.power);
-        this.set1f('intensity', this.intensity);
+        this.set2f('warp', this.warpX, this.warpY);
+        this.set1f('scanStrength', this.scanStrength);
+        this.set1f('scanLineWidth', this.scanLineWidth);
       }
 
-      // radius
+      // warp
     }, {
-      key: "setRadius",
-      value: function setRadius(value) {
-        this.radius = value;
+      key: "setWarp",
+      value: function setWarp(warpX, warpY) {
+        this.warpX = warpX;
+        this.warpY = warpY;
         return this;
       }
 
-      // center
+      // scanStrength
     }, {
-      key: "setCenter",
-      value: function setCenter(x, y) {
-        if (x === undefined) {
-          x = this.renderer.width / 2;
-          y = this.renderer.height / 2;
-        }
-        this.centerX = x;
-        this.centerY = y;
+      key: "setScanStrength",
+      value: function setScanStrength(value) {
+        this.scanStrength = value;
         return this;
       }
 
-      // power
+      // scanLineWidth
     }, {
-      key: "setPower",
-      value: function setPower(power) {
-        this.power = power;
-        return this;
-      }
-
-      // intensity
-    }, {
-      key: "setIntensity",
-      value: function setIntensity(value) {
-        this.intensity = value;
-        return this;
-      }
-
-      // shrinkMode
-    }, {
-      key: "setShrinkMode",
-      value: function setShrinkMode(mode) {
-        if (mode === undefined) {
-          mode = true;
-        }
-        this.shrinkMode = mode;
+      key: "setScanLineWidth",
+      value: function setScanLineWidth(value) {
+        this.scanLineWidth = value;
         return this;
       }
     }]);
-    return BarrelPostFxPipeline;
+    return CrtPostFxPipeline;
   }(PostFXPipeline);
 
   var GameClass = Phaser.Game;
@@ -390,19 +357,19 @@
     return target;
   };
 
-  var BarrelPipelinePlugin = /*#__PURE__*/function (_BasePostFxPipelinePl) {
-    _inherits(BarrelPipelinePlugin, _BasePostFxPipelinePl);
-    function BarrelPipelinePlugin(pluginManager) {
+  var CrtPipelinePlugin = /*#__PURE__*/function (_BasePostFxPipelinePl) {
+    _inherits(CrtPipelinePlugin, _BasePostFxPipelinePl);
+    function CrtPipelinePlugin(pluginManager) {
       var _this;
-      _classCallCheck(this, BarrelPipelinePlugin);
-      _this = _callSuper(this, BarrelPipelinePlugin, [pluginManager]);
-      _this.setPostPipelineClass(BarrelPostFxPipeline, 'rexBarrelPostFx');
+      _classCallCheck(this, CrtPipelinePlugin);
+      _this = _callSuper(this, CrtPipelinePlugin, [pluginManager]);
+      _this.setPostPipelineClass(CrtPostFxPipeline, 'rexCrtPostFx');
       return _this;
     }
-    return _createClass(BarrelPipelinePlugin);
+    return _createClass(CrtPipelinePlugin);
   }(BasePostFxPipelinePlugin);
-  SetValue(window, 'RexPlugins.Pipelines.BarrelPostFx', BarrelPostFxPipeline);
+  SetValue(window, 'RexPlugins.Pipelines.CrtPostFx', CrtPostFxPipeline);
 
-  return BarrelPipelinePlugin;
+  return CrtPipelinePlugin;
 
 }));

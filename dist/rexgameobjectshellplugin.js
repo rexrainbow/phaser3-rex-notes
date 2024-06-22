@@ -3406,7 +3406,11 @@
     matrix.translate(-originX, -originY);
   };
 
-  var ZoomFocusAt = function ZoomFocusAt(camera, zoom, focusLocalX, focusLocalY) {
+  var ZoomAt = function ZoomAt(camera, zoom, focusLocalX, focusLocalY) {
+    if (focusLocalX === undefined) {
+      camera.zoom = zoom;
+      return;
+    }
     var worldXY = camera.getWorldPoint(focusLocalX, focusLocalY);
     camera.zoom = zoom;
     UpdateCameraMetrix(camera);
@@ -3455,7 +3459,7 @@
           var pointer1 = pinch.pointers[1];
           var focusLocalX = (pointer0.x + pointer1.x) / 2;
           var focusLocalY = (pointer0.y + pointer1.y) / 2;
-          ZoomFocusAt(camera, zoom, focusLocalX, focusLocalY);
+          ZoomAt(camera, zoom, focusLocalX, focusLocalY);
         }, this);
       }
     }, {
@@ -3986,7 +3990,7 @@
         }
         var zoom = camera.zoom + zoomStep;
         zoom = Clamp$7(zoom, this.minZoom, this.maxZoom);
-        ZoomFocusAt(camera, zoom, this.focusLocalX, this.focusLocalY);
+        ZoomAt(camera, zoom, this.focusLocalX, this.focusLocalY);
         if (lastZoomInc) {
           this.stopZoom();
         }
