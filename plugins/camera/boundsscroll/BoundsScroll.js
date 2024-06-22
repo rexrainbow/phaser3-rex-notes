@@ -1,11 +1,10 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 import CursorAtBounds from '../../cursoratbounds.js';
-import MouseWheelToUpDown from '../../mousewheeltoupdown.js';
 import GetCameraByName from '../../utils/camera/GetCameraByName.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class BoundsWheelController extends ComponentBase {
+class BoundsScroll extends ComponentBase {
     constructor(scene, config) {
         if (config === undefined) {
             config = {};
@@ -15,31 +14,25 @@ class BoundsWheelController extends ComponentBase {
         // this.scene
 
         this.cursorAtBounds = new CursorAtBounds(scene);
-        this.mouseWheel = new MouseWheelToUpDown(scene);
 
         var boundsCursorKeys = this.cursorAtBounds.createCursorKeys();
-        var mouseWheelCursorKeys = this.mouseWheel.createCursorKeys();
 
         this.cameraController = new Phaser.Cameras.Controls.SmoothedKeyControl({
             left: boundsCursorKeys.left,
             right: boundsCursorKeys.right,
             up: boundsCursorKeys.up,
             down: boundsCursorKeys.down,
-            zoomIn: mouseWheelCursorKeys.down,
-            zoomOut: mouseWheelCursorKeys.up,
 
             acceleration: 0.06,
             drag: 0.003,
             maxSpeed: 0.3,
-            zoomSpeed: 0.05
         });
 
         var camera = GetCameraByName(scene, GetValue(config, 'camera'));
 
         this
             .setCamera(camera)
-            .setBoundsScrollEnable(GetValue(config, 'boundsScrollEnable', true))
-            .setMouseWheelZoomEnable(GetValue(config, 'mouseWheelZoomEnable', true))
+            .setEnable(GetValue(config, 'enable', true))
 
         this.boot();
     }
@@ -57,7 +50,6 @@ class BoundsWheelController extends ComponentBase {
         this.scene.events.off('preupdate', this.updateCameraController, this);
 
         this.cursorAtBounds.destroy();
-        this.mouseWheel.destroy();
         this.cameraController.destroy();
 
         super.shutdown(fromScene);
@@ -82,35 +74,19 @@ class BoundsWheelController extends ComponentBase {
         return this;
     }
 
-    get boundsScrollEnable() {
+    get enable() {
         return this.cursorAtBounds.enable;
     }
 
-    set boundsScrollEnable(value) {
+    set enable(value) {
         this.cursorAtBounds.enable = value;
     }
 
-    setBoundsScrollEnable(enable) {
+    setEnable(enable) {
         if (enable === undefined) {
             enable = true;
         }
-        this.boundsScrollEnable = enable;
-        return this;
-    }
-
-    get mouseWheelZoomEnable() {
-        return this.mouseWheel.enable;
-    }
-
-    set mouseWheelZoomEnable(value) {
-        this.mouseWheel.enable = value;
-    }
-
-    setMouseWheelZoomEnable(enable) {
-        if (enable === undefined) {
-            enable = true;
-        }
-        this.mouseWheelZoomEnable = enable;
+        this.enable = enable;
         return this;
     }
 
@@ -119,4 +95,4 @@ class BoundsWheelController extends ComponentBase {
     }
 }
 
-export default BoundsWheelController;
+export default BoundsScroll;

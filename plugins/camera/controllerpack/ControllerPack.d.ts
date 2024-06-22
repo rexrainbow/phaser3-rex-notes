@@ -1,12 +1,22 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase';
 import PinchZoom from '../pinchzoom/PinchZoom';
 import PanScroll from '../panscroll/PanScroll';
-import BoundsWheelController from '../boundswheelcontroller/BoundsWheelController';
+import BoundsScroll from '../boundsscroll/BoundsScroll';
+import MouseWheelZoom from '../mousewheelzoom/MouseWheelZoom';
 
 declare namespace ControllerPack {
-    interface IConfig extends PinchZoom.IConfig, PanScroll.IConfig, BoundsWheelController.IConfig {
-        panScrolEnable?: boolean,
+    interface IConfig extends PinchZoom.IConfig, PanScroll.IConfig, BoundsScroll.IConfig, MouseWheelZoom.IConfig {
+        panScroll?: boolean,
+        panScrollEnable?: boolean,
+
+        pinchZoom?: boolean,
         pinchZoomEnable?: boolean,
+
+        boundsScroll?: boolean,
+        boundsScrollEnable?: boolean,
+
+        mouseWheelZoom?: boolean,
+        mouseWheelZoomEnable?: boolean,
 
         enable?: boolean,
 

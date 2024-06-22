@@ -1,7 +1,8 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 import PanScroll from '../panscroll/PanScroll.js';
 import PinchZoom from '../pinchzoom/PinchZoom.js';
-import BoundsWheelController from '../boundswheelcontroller/BoundsWheelController.js';
+import BoundsScroll from '../boundsscroll/BoundsScroll.js';
+import MouseWheelZoom from '../mousewheelzoom/MouseWheelZoom.js';
 import DeepClone from '../../utils/object/DeepClone.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -23,33 +24,83 @@ class ControllerPack extends ComponentBase {
         var enableMask = GetValue(config, 'enable', true);
         delete config.enable;
 
-        config.enable = GetValue(config, 'panScrolEnable', true);
-        this.panScroll = new PanScroll(scene, config);
+        if (GetValue(config, 'panScroll', true)) {
+            config.enable = GetValue(config, 'panScrollEnable', true);
+            this.panScroll = new PanScroll(scene, config);
+        }
 
-        config.enable = GetValue(config, 'pinchZoomEnable', true);
-        this.pinchZoom = new PinchZoom(scene, config);
+        if (GetValue(config, 'pinchZoom', true)) {
+            config.enable = GetValue(config, 'pinchZoomEnable', true);
+            this.pinchZoom = new PinchZoom(scene, config);
+        }
 
-        this.boundsWheelController = new BoundsWheelController(scene, config);
+        if (GetValue(config, 'boundsScroll', true)) {
+            config.enable = GetValue(config, 'boundsScrollEnable', true);
+            this.boundsScroll = new BoundsScroll(scene, config);
+        }
+
+        if (GetValue(config, 'mouseWheelZoom', true)) {
+            config.enable = GetValue(config, 'mouseWheelZoomEnable', true);
+            this.mouseWheelZoom = new MouseWheelZoom(scene, config);
+        }
 
         this.setEnable(enableMask);
     }
 
     destroy(fromScene) {
-        this.panScroll.destroy(fromScene);
-        this.pinchZoom.destroy(fromScene);
-        this.boundsWheelController.destroy(fromScene);
+        if (this.panScroll) {
+            this.panScroll.destroy(fromScene);
+        }
+
+        if (this.pinchZoom) {
+            this.pinchZoom.destro(fromScene);
+        }
+
+        if (this.boundsScroll) {
+            this.boundsScroll.destroy(fromScene);
+        }
+
+        if (this.mouseWheelZoom) {
+            this.mouseWheelZoom.destroy(fromScene);
+        }
 
         super.destroy(fromScene);
     }
 
     set camera(value) {
-        this.panScroll.setCamera(value);
-        this.pinchZoom.setCamera(value);
-        this.boundsWheelController.setCamera(value);
+        if (this.panScroll) {
+            this.panScroll.setCamera(value);
+        }
+
+        if (this.pinchZoom) {
+            this.pinchZoom.setCamera(value);
+        }
+
+        if (this.boundsScroll) {
+            this.boundsScroll.setCamera(value);
+        }
+
+        if (this.mouseWheelZoom) {
+            this.mouseWheelZoom.setCamera(value);
+        }
     }
 
     get camera() {
-        return this.panScroll.camera;
+        if (this.panScroll) {
+            return this.panScroll.camera;
+        }
+
+        if (this.pinchZoom) {
+            return this.pinchZoom.camera;
+        }
+
+        if (this.boundsScroll) {
+            return this.boundsScroll.camera;
+        }
+
+        if (this.mouseWheelZoom) {
+            return this.mouseWheelZoom.camera;
+        }
     }
 
     setCamera(camera) {
@@ -58,11 +109,16 @@ class ControllerPack extends ComponentBase {
     }
 
     set panScrollEnable(value) {
-        this.panScroll.enable = value;
+        if (this.panScroll) {
+            this.panScroll.enable = value;
+        }
     }
 
     get panScrollEnable() {
-        return this.panScroll.enable;
+        if (this.panScroll) {
+            return this.panScroll.enable;
+        }
+        return false;
     }
 
     setPanScrollEnable = function (enable) {
@@ -74,11 +130,16 @@ class ControllerPack extends ComponentBase {
     }
 
     set pinchZoomEnable(value) {
-        this.pinchZoom.enable = value;
+        if (this.pinchZoom) {
+            this.pinchZoom.enable = value;
+        }
     }
 
     get pinchZoomEnable() {
-        return this.pinchZoom.enable;
+        if (this.pinchZoom) {
+            return this.pinchZoom.enable;
+        }
+        return false;
     }
 
     setPinchZoomEnable = function (enable) {
@@ -90,28 +151,43 @@ class ControllerPack extends ComponentBase {
     }
 
     set boundsScrollEnable(value) {
-        this.boundsWheelController.boundsScrollEnable = value;
+        if (this.boundsScroll) {
+            this.boundsScroll.enable = value;
+        }
     }
 
     get boundsScrollEnable() {
-        return this.boundsWheelController.boundsScrollEnable;
+        if (this.boundsScroll) {
+            return this.boundsScroll.enable;
+        }
+        return false;
     }
 
     setBoundsScrollEnable = function (enable) {
-        this.boundsWheelController.setBoundsScrollEnable(enable);
+        if (enable === undefined) {
+            enable = true;
+        }
+        this.boundsScrollEnable = enable;
         return this;
     }
 
     set mouseWheelZoomEnable(value) {
-        this.boundsWheelController.mouseWheelZoomEnable = value;
+        if (this.mouseWheelZoom) {
+            this.mouseWheelZoom.enable = value;
+        }
     }
 
     get mouseWheelZoomEnable() {
-        return this.boundsWheelController.mouseWheelZoomEnable;
+        if (this.mouseWheelZoom) {
+            return this.mouseWheelZoom.enable;
+        }
     }
 
     setMouseWheelZoomEnable(enable) {
-        this.boundsWheelController.setMouseWheelZoomEnable(enable);
+        if (enable === undefined) {
+            enable = true;
+        }
+        this.mouseWheelZoom = enable;
         return this;
     }
 
