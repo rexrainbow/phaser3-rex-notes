@@ -1,6 +1,11 @@
 import UpdateCameraMetrix from './UpdateCameraMetrix.js';
 
-var ZoomFocusAt = function (camera, zoom, focusLocalX, focusLocalY) {
+var ZoomAt = function (camera, zoom, focusLocalX, focusLocalY) {
+    if (focusLocalX === undefined) {
+        camera.zoom = zoom;
+        return;
+    }
+
     var worldXY = camera.getWorldPoint(focusLocalX, focusLocalY);
     camera.zoom = zoom;
 
@@ -11,4 +16,4 @@ var ZoomFocusAt = function (camera, zoom, focusLocalX, focusLocalY) {
     camera.scrollY -= (newWorldXY.y - worldXY.y);
 }
 
-export default ZoomFocusAt;
+export default ZoomAt;

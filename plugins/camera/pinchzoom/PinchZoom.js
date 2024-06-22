@@ -1,7 +1,7 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 import { Pinch } from '../../gestures.js';
 import GetCameraByName from '../../utils/camera/GetCameraByName.js';
-import ZoomFocusAt from '../../utils/camera/ZoomFocus.js';
+import ZoomAt from '../../utils/camera/ZoomAt.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Clamp = Phaser.Math.Clamp;
@@ -45,7 +45,7 @@ class PinchZoom extends ComponentBase {
                 var focusLocalX = (pointer0.x + pointer1.x) / 2;
                 var focusLocalY = (pointer0.y + pointer1.y) / 2;
 
-                ZoomFocusAt(camera, zoom, focusLocalX, focusLocalY);
+                ZoomAt(camera, zoom, focusLocalX, focusLocalY);
             }, this)
     }
 

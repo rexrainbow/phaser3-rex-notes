@@ -1,6 +1,6 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 import GetCameraByName from '../../utils/camera/GetCameraByName.js';
-import ZoomFocusAt from '../../utils/camera/ZoomFocus.js';
+import ZoomAt from '../../utils/camera/ZoomAt.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Clamp = Phaser.Math.Clamp;
@@ -117,7 +117,7 @@ class MouseWheelZoom extends ComponentBase {
 
         var zoom = camera.zoom + zoomStep;
         zoom = Clamp(zoom, this.minZoom, this.maxZoom);
-        ZoomFocusAt(camera, zoom, this.focusLocalX, this.focusLocalY);
+        ZoomAt(camera, zoom, this.focusLocalX, this.focusLocalY);
 
         if (lastZoomInc) {
             this.stopZoom();
