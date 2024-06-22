@@ -215,6 +215,7 @@ module.exports = {
     'dropshadowpipelineplugin': './plugins/dropshadowpipeline-plugin.js',
     'warppipelineplugin': './plugins/warppipeline-plugin.js',
     'horrifipipelineplugin': './plugins/horrifipipeline-plugin.js',
+    'crtpipelineplugin': './plugins/crtpipeline-plugin.js',
 
     'localmaskplugin': './plugins/localmask-plugin.js',
 

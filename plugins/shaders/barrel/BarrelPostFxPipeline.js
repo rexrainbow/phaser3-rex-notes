@@ -14,7 +14,6 @@ class BarrelPostFxPipeline extends PostFXPipeline {
         });
 
         this.shrinkMode = false;
-        this.fishEyeMode = 0;
         this.centerX = 0; // position wo resolution
         this.centerY = 0; // position wo resolution
         this.radius = 0;
