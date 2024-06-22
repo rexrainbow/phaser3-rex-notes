@@ -11,15 +11,15 @@ class CrtPostFxPipeline extends PostFXPipeline {
             renderTarget: true,
             fragShader: FragSrc
         });
-        
+
         this.warp = 0;
         this.scanStrength = 0.2;
-        this.scanLineWidth=1024;
+        this.scanLineWidth = 1024;
     }
 
     resetFromJSON(o) {
         this.setWarp(GetValue(o, 'warpX', 0.75), GetValue(o, 'warpY', 0.75));
-        this.setScanStrength(GetValue(o, 'scanStrength', 0.75));
+        this.setScanStrength(GetValue(o, 'scanStrength', 0.2));
         this.setScanLineWidth(GetValue(o, 'scanLineWidth', 1024));
         return this;
     }
@@ -42,7 +42,7 @@ class CrtPostFxPipeline extends PostFXPipeline {
         this.scanStrength = value;
         return this;
     }
-    
+
     // scanLineWidth
     setScanLineWidth(value) {
         this.scanLineWidth = value;

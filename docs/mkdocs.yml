@@ -276,8 +276,9 @@ nav:
         - Pixelation: shader-pixelation.md        
         - Barrel: shader-barrel.md
         - Fisheye: shader-fisheye.md
+        - CRT: shader-crt.md
         - Shockwave: shader-shockwave.md
-        - Split: shader-split.md
+        - Split: shader-split.md        
         - Warp: shader-warp.md
     - Blur:
         - Kawase blur: shader-kawaseblur.md

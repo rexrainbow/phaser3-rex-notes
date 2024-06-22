@@ -24,6 +24,7 @@ Some post-fx pipelines:
 - [Barrel](shader-barrel.md): Barrel post processing filter.
 - [Color replace](shader-colorreplace.md): Replace color post processing filter.
 - [Cross-stitching](shader-crossstitching.md): Cross-stitching post processing filter.
+- [CRT](shader-crt.md): CRT post processing filter.
 - [Dissolve](shader-dissolve.md): Dissolve transition post processing filter.
 - [Fish eye](shader-fisheye.md): Fish-eye post processing filter.
 - [Glow-filter](shader-glowfilter.md): Glow post processing filter.

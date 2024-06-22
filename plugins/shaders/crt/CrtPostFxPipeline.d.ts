@@ -15,6 +15,9 @@ declare class CrtPostFxPipeline extends Phaser.Renderer.WebGL.Pipelines.PostFXPi
     warpY: number;
 
     setScanStrength(value: number): this;
-    scanStrength: boolean;
+    scanStrength: number;
+
+    setScanLineWidth(value: number): this;
+    scanLineWidth: number;
 
 }
