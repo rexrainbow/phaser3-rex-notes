@@ -1271,6 +1271,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/shader-crt/</loc>
+         <lastmod>2024-06-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/shader-dissolve/</loc>
          <lastmod>2024-06-22</lastmod>
          <changefreq>daily</changefreq>
