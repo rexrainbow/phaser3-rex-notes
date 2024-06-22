@@ -1,6 +1,6 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase';
 
-declare namespace PinchZoom {
+declare namespace MouseWheelZoom {
     interface IConfig {
         camera?: string | number | Phaser.Cameras.Scene2D.Camera,
 
@@ -12,10 +12,10 @@ declare namespace PinchZoom {
     }
 }
 
-declare class PinchZoom extends ComponentBase {
+declare class MouseWheelZoom extends ComponentBase {
     constructor(
         scene: Phaser.Scene,
-        config?: PinchZoom.IConfig
+        config?: MouseWheelZoom.IConfig
     );
 
     setEnable(enable?: boolean): this;
@@ -26,4 +26,4 @@ declare class PinchZoom extends ComponentBase {
 
 }
 
-export default PinchZoom;
+export default MouseWheelZoom;

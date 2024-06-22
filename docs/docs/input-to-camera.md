@@ -1,6 +1,6 @@
 ## Introduction
 
-Control camera's scroll and zoom by [pan(scroll)/pinch(zoom)](gesture-pinch.md), or [cursor-at-bounds(scroll)](cursoratbounds.md)/[mouse-wheel(zoom)](mousewheel.md).
+Control camera's scroll by [pan](gesture-pan.md)/[cursor-at-bounds(scroll)](cursoratbounds.md), and zoom by [pinch](gesture-pinch.md)/mouse-wheel.
 
 - Author: Rex
 - Member of scene
@@ -76,11 +76,18 @@ Control camera's scroll and zoom by [pan(scroll)/pinch(zoom)](gesture-pinch.md),
 var cameraController = scene.plugins.get('rexCameraController').add(scene, {
     // camera: scene.cameras.main,
 
+    // panScroll: true,
     // panScrollEnable: true,
+
+    // pinchZoom: true,
     // pinchZoomEnable: true,
+    
     // inputTarget: undefined,
 
+    // boundsScroll: true,
     // boundsScrollEnable: true,
+
+    // mouseWheelZoom: truem
     // mouseWheelZoomEnable: true,
 
     // enable: true
@@ -91,18 +98,27 @@ var cameraController = scene.plugins.get('rexCameraController').add(scene, {
 - `camera` :
     - `undefined` : Default camera of this `scene`.
     - A camera object : Control this camera object.
-- [pan(scroll)/pinch(zoom)](gesture-pinch.md): 
+- Pan scroll: 
+    - `panScroll` : Set to `false` will discard pan-scroll controller. Default is `true`.
     - `panScrollEnable` : Set to `true` to enable pan-scroll behavior. Default value is `true`.
-    - `pinchZoomEnable` : Set to `true` to enable pinch-zoom behavior. Default value is `true`.
     - `inputTarget` : 
         - `undefined` : Receive pan/pinch input by scene's input event. Default behavior.
         - A game object : Receive pan/pinch input only on this game object.        
-- [cursor-at-bounds(scroll)](cursoratbounds.md)/[mouse-wheel(zoom)](mousewheel.md) :
+- Pinch zoom: 
+    - `pinchZoom` : Set to `false` will discard pinch-zoom controller. Default is `true`.
+    - `pinchZoomEnable` : Set to `true` to enable pinch-zoom behavior. Default value is `true`.
+    - `inputTarget` : 
+        - `undefined` : Receive pan/pinch input by scene's input event. Default behavior.
+        - A game object : Receive pan/pinch input only on this game object.    
+- cursor-at-bounds scroll :
+    - `boundsScroll` : Set to `false` will discard cursor-at-bounds-scroller controller. Default is `true`.
     - `boundsScrollEnable` : Set to `true` to enable bounds-scroll behavior. Default value is `true`.
-    - `mouseWheelZoomEnable` : Set to `true` to enable wheel-zoom behavior. Default value is `true`.
+- mouse-wheel zoom :
+    - `mouseWheelZoom` : Set to `false` will discard mouse-wheel-zoom controller. Default is `true`.
+    - `mouseWheelZoomEnable` : Set to `true` to enable mouse-wheel-zoom behavior. Default value is `true`.
 - `enable` : 
-    - `false` : Disable all camera-control behavior temporary.
-    - `true` : Restore all camera-control enable state to previous value. Default behavior.
+    - `false` : Disable all camera-controller temporary.
+    - `true` : Restore all camera-controller's enable state to previous value. Default behavior.
 
 ### Set target camera
 

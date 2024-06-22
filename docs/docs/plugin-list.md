@@ -29,7 +29,7 @@
 24. [Build arcade object](buildarcadeobject.md): Create arcade body, and inject arcade object methods.
 25. [Bullet](bullet.md): Move game object toward current angle of game object, with a constant speed.
 26. [Button](button.md): Fires 'click' event when touch releasd after pressed.
-26. [Camera controller](input-to-camera.md): Control camera's scroll and zoom by [pan(scroll)/pinch(zoom)](gesture-pinch.md), or [cursor-at-bounds(scroll)](cursoratbounds.md)/[mouse-wheel(zoom)](mousewheel.md).
+26. [Camera controller](input-to-camera.md): Control camera's scroll by [pan](gesture-pan.md)/[cursor-at-bounds(scroll)](cursoratbounds.md), and zoom by [pinch](gesture-pinch.md)/mouse-wheel.
 27. [Canvas](canvas.md): Drawing on [canvas](https://www.w3schools.com/html/html5_canvas.asp).
 28. [CanvasInput](canvasinput.md): An invisible Input DOM element to receive character input and display on DynamicText.
 29. [Canvas/Circular progress](canvas-circularprogress.md): Circular progress bar on canvas.

@@ -1,8 +1,12 @@
 import {
     ControllerPack,
+    PanScroll,
+    PinchZoom,
+    BoundsScroll,
+    MouseWheelZoom
 } from './cameracontroller';
 
-class LifeTimePlugin extends Phaser.Plugins.BasePlugin {
+class CameraControllerPlugin extends Phaser.Plugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);
@@ -17,6 +21,21 @@ class LifeTimePlugin extends Phaser.Plugins.BasePlugin {
         return new ControllerPack(scene, config);
     }
 
+    addPanScroll(scene, config) {
+        return new PanScroll(scene, config);
+    }
+
+    addPinchZoom(scene, config) {
+        return new PinchZoom(scene, config);
+    }
+
+    addBoundsScroll(scene, config) {
+        return new BoundsScroll(scene, config);
+    }
+
+    addMouseWheelZoom(scene, config) {
+        return new MouseWheelZoom(scene, config);
+    }
 }
 
-export default LifeTimePlugin;
+export default CameraControllerPlugin;
