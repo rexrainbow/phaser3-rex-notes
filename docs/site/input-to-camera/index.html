@@ -9781,7 +9781,7 @@
   <h1>Control by input</h1>
 
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Control camera's scroll and zoom by <a href="../gesture-pinch/">pan(scroll)/pinch(zoom)</a>, or <a href="../cursoratbounds/">cursor-at-bounds(scroll)</a>/<a href="../mousewheel/">mouse-wheel(zoom)</a>.</p>
+<p>Control camera's scroll by <a href="../gesture-pan/">pan</a>/<a href="../cursoratbounds/">cursor-at-bounds(scroll)</a>, and zoom by <a href="../gesture-pinch/">pinch</a>/mouse-wheel.</p>
 <ul>
 <li>Author: Rex</li>
 <li>Member of scene</li>
@@ -9844,11 +9844,18 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">cameraController</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexCameraController&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// camera: scene.cameras.main,</span>
 
+<span class="w">    </span><span class="c1">// panScroll: true,</span>
 <span class="w">    </span><span class="c1">// panScrollEnable: true,</span>
+
+<span class="w">    </span><span class="c1">// pinchZoom: true,</span>
 <span class="w">    </span><span class="c1">// pinchZoomEnable: true,</span>
+
 <span class="w">    </span><span class="c1">// inputTarget: undefined,</span>
 
+<span class="w">    </span><span class="c1">// boundsScroll: true,</span>
 <span class="w">    </span><span class="c1">// boundsScrollEnable: true,</span>
+
+<span class="w">    </span><span class="c1">// mouseWheelZoom: truem</span>
 <span class="w">    </span><span class="c1">// mouseWheelZoomEnable: true,</span>
 
 <span class="w">    </span><span class="c1">// enable: true</span>
@@ -9861,9 +9868,9 @@
 <li>A camera object : Control this camera object.</li>
 </ul>
 </li>
-<li><a href="../gesture-pinch/">pan(scroll)/pinch(zoom)</a>: <ul>
+<li>Pan scroll: <ul>
+<li><code>panScroll</code> : Set to <code>false</code> will discard pan-scroll controller. Default is <code>true</code>.</li>
 <li><code>panScrollEnable</code> : Set to <code>true</code> to enable pan-scroll behavior. Default value is <code>true</code>.</li>
-<li><code>pinchZoomEnable</code> : Set to <code>true</code> to enable pinch-zoom behavior. Default value is <code>true</code>.</li>
 <li><code>inputTarget</code> : <ul>
 <li><code>undefined</code> : Receive pan/pinch input by scene's input event. Default behavior.</li>
 <li>A game object : Receive pan/pinch input only on this game object.        </li>
@@ -9871,14 +9878,29 @@
 </li>
 </ul>
 </li>
-<li><a href="../cursoratbounds/">cursor-at-bounds(scroll)</a>/<a href="../mousewheel/">mouse-wheel(zoom)</a> :<ul>
+<li>Pinch zoom: <ul>
+<li><code>pinchZoom</code> : Set to <code>false</code> will discard pinch-zoom controller. Default is <code>true</code>.</li>
+<li><code>pinchZoomEnable</code> : Set to <code>true</code> to enable pinch-zoom behavior. Default value is <code>true</code>.</li>
+<li><code>inputTarget</code> : <ul>
+<li><code>undefined</code> : Receive pan/pinch input by scene's input event. Default behavior.</li>
+<li>A game object : Receive pan/pinch input only on this game object.    </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>cursor-at-bounds scroll :<ul>
+<li><code>boundsScroll</code> : Set to <code>false</code> will discard cursor-at-bounds-scroller controller. Default is <code>true</code>.</li>
 <li><code>boundsScrollEnable</code> : Set to <code>true</code> to enable bounds-scroll behavior. Default value is <code>true</code>.</li>
-<li><code>mouseWheelZoomEnable</code> : Set to <code>true</code> to enable wheel-zoom behavior. Default value is <code>true</code>.</li>
+</ul>
+</li>
+<li>mouse-wheel zoom :<ul>
+<li><code>mouseWheelZoom</code> : Set to <code>false</code> will discard mouse-wheel-zoom controller. Default is <code>true</code>.</li>
+<li><code>mouseWheelZoomEnable</code> : Set to <code>true</code> to enable mouse-wheel-zoom behavior. Default value is <code>true</code>.</li>
 </ul>
 </li>
 <li><code>enable</code> : <ul>
-<li><code>false</code> : Disable all camera-control behavior temporary.</li>
-<li><code>true</code> : Restore all camera-control enable state to previous value. Default behavior.</li>
+<li><code>false</code> : Disable all camera-controller temporary.</li>
+<li><code>true</code> : Restore all camera-controller's enable state to previous value. Default behavior.</li>
 </ul>
 </li>
 </ul>

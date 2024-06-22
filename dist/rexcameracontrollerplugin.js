@@ -264,7 +264,7 @@
     }
   };
 
-  var GetValue$b = Phaser.Utils.Objects.GetValue;
+  var GetValue$e = Phaser.Utils.Objects.GetValue;
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
       _classCallCheck(this, ComponentBase);
@@ -273,7 +273,7 @@
       this.isShutdown = false;
 
       // Event emitter, default is private event emitter
-      this.setEventEmitter(GetValue$b(config, 'eventEmitter', true));
+      this.setEventEmitter(GetValue$e(config, 'eventEmitter', true));
 
       // Register callback of parent destroy event, also see `shutdown` method
       if (this.parent) {
@@ -349,7 +349,7 @@
   }();
   Object.assign(ComponentBase.prototype, EventEmitterMethods$1);
 
-  var GetValue$a = Phaser.Utils.Objects.GetValue;
+  var GetValue$d = Phaser.Utils.Objects.GetValue;
   var TickTask = /*#__PURE__*/function (_ComponentBase) {
     _inherits(TickTask, _ComponentBase);
     function TickTask(parent, config) {
@@ -359,7 +359,7 @@
       _this._isRunning = false;
       _this.isPaused = false;
       _this.tickingState = false;
-      _this.setTickingMode(GetValue$a(config, 'tickingMode', 1));
+      _this.setTickingMode(GetValue$d(config, 'tickingMode', 1));
       // boot() later
       return _this;
     }
@@ -707,7 +707,7 @@
     }
   };
 
-  var GetValue$9 = Phaser.Utils.Objects.GetValue;
+  var GetValue$c = Phaser.Utils.Objects.GetValue;
   var OnePointerTracer = /*#__PURE__*/function (_TickTask) {
     _inherits(OnePointerTracer, _TickTask);
     function OnePointerTracer(gameObject, config) {
@@ -720,7 +720,7 @@
       _this = _callSuper(this, OnePointerTracer, [scene, config]);
       _this.gameObject = gameObject;
       if (gameObject) {
-        gameObject.setInteractive(GetValue$9(config, 'inputConfig', undefined));
+        gameObject.setInteractive(GetValue$c(config, 'inputConfig', undefined));
       }
       _this._enable = undefined;
       _this.resetFromJSON(config);
@@ -730,10 +730,10 @@
     _createClass(OnePointerTracer, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.setEnable(GetValue$9(o, 'enable', true));
+        this.setEnable(GetValue$c(o, 'enable', true));
         this.setDetectBounds();
         if (this.gameObject === undefined) {
-          this.setDetectBounds(GetValue$9(o, 'bounds', undefined));
+          this.setDetectBounds(GetValue$c(o, 'bounds', undefined));
         } else {
           this.setDetectBounds();
         }
@@ -948,7 +948,7 @@
     }, {
       key: "cancel",
       value: function cancel() {
-        this.state = IDLE$4;
+        this.state = IDLE$5;
         return this;
       }
     }, {
@@ -965,7 +965,7 @@
   }(TickTask);
   var TOUCH0$1 = 0;
   var TOUCH1$1 = 1;
-  var IDLE$4 = 'IDLE';
+  var IDLE$5 = 'IDLE';
 
   function getDefaultExportFromCjs (x) {
   	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
@@ -1414,7 +1414,7 @@
     }
   };
 
-  var GetValue$8 = function GetValue(source, key, defaultValue) {
+  var GetValue$b = function GetValue(source, key, defaultValue) {
     if (!source || typeof source === 'number') {
       return defaultValue;
     }
@@ -1474,13 +1474,13 @@
     function FSM(config) {
       _classCallCheck(this, FSM);
       // Attach get-next-state function
-      var states = GetValue$8(config, 'states', undefined);
+      var states = GetValue$b(config, 'states', undefined);
       if (states) {
         this.addStates(states);
       }
 
       // Attach extend members
-      var extend = GetValue$8(config, 'extend', undefined);
+      var extend = GetValue$b(config, 'extend', undefined);
       if (extend) {
         for (var name in extend) {
           if (!this.hasOwnProperty(name) || this[name] === undefined) {
@@ -1490,8 +1490,8 @@
       }
 
       // Event emitter
-      var eventEmitter = GetValue$8(config, 'eventEmitter', undefined);
-      var EventEmitterClass = GetValue$8(config, 'EventEmitterClass', undefined);
+      var eventEmitter = GetValue$b(config, 'eventEmitter', undefined);
+      var EventEmitterClass = GetValue$b(config, 'EventEmitterClass', undefined);
       this.setEventEmitter(eventEmitter, EventEmitterClass);
       this._stateLock = false;
       this.resetFromJSON(config);
@@ -1509,9 +1509,9 @@
     }, {
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.setEnable(GetValue$8(o, 'enable', true));
-        this.start(GetValue$8(o, 'start', undefined));
-        var init = GetValue$8(o, 'init', undefined);
+        this.setEnable(GetValue$b(o, 'enable', true));
+        this.start(GetValue$b(o, 'start', undefined));
+        var init = GetValue$b(o, 'init', undefined);
         if (init) {
           init.call(this);
         }
@@ -1747,7 +1747,7 @@
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         _get(_getPrototypeOf(FSM.prototype), "resetFromJSON", this).call(this, o);
-        this._scene = GetValue$8(o, 'scene', undefined);
+        this._scene = GetValue$b(o, 'scene', undefined);
         return this;
       }
     }, {
@@ -1848,7 +1848,108 @@
 
   Phaser.Utils.Objects.GetValue;
 
-  Phaser.Utils.Objects.GetValue;
+  var GetValue$a = Phaser.Utils.Objects.GetValue;
+  var Pan = /*#__PURE__*/function (_OnePointerTracer) {
+    _inherits(Pan, _OnePointerTracer);
+    function Pan(gameObject, config) {
+      var _this;
+      _classCallCheck(this, Pan);
+      _this = _callSuper(this, Pan, [gameObject, config]);
+      var self = _assertThisInitialized(_this);
+      var stateConfig = {
+        states: {
+          IDLE: {},
+          BEGIN: {
+            enter: function enter() {
+              var pointer = self.pointer;
+              self.startX = pointer.x;
+              self.startY = pointer.y;
+              self.startWorldX = pointer.worldX;
+              self.startWorldY = pointer.worldY;
+            }
+          },
+          RECOGNIZED: {
+            enter: function enter() {
+              self.emit('panstart', self, self.gameObject, self.lastPointer);
+            },
+            exit: function exit() {
+              var pointer = self.lastPointer;
+              self.endX = pointer.x;
+              self.endY = pointer.y;
+              self.endWorldX = pointer.worldX;
+              self.endWorldY = pointer.worldY;
+              self.emit('panend', self, self.gameObject, self.lastPointer);
+            }
+          }
+        },
+        init: function init() {
+          this.state = IDLE$4;
+        },
+        eventEmitter: false
+      };
+      _this.setRecongizedStateObject(new FSM(stateConfig));
+      return _this;
+    }
+    _createClass(Pan, [{
+      key: "resetFromJSON",
+      value: function resetFromJSON(o) {
+        _get(_getPrototypeOf(Pan.prototype), "resetFromJSON", this).call(this, o);
+        this.setDragThreshold(GetValue$a(o, 'threshold', 10));
+        return this;
+      }
+    }, {
+      key: "onDragStart",
+      value: function onDragStart() {
+        this.state = BEGIN$3;
+        if (this.dragThreshold === 0) {
+          this.state = RECOGNIZED$3;
+        }
+      }
+    }, {
+      key: "onDragEnd",
+      value: function onDragEnd() {
+        this.state = IDLE$4;
+      }
+    }, {
+      key: "onDrag",
+      value: function onDrag() {
+        switch (this.state) {
+          case BEGIN$3:
+            if (this.pointer.getDistance() >= this.dragThreshold) {
+              this.state = RECOGNIZED$3;
+            }
+            break;
+          case RECOGNIZED$3:
+            var p1 = this.pointer.position;
+            var p0 = this.pointer.prevPosition;
+            this.dx = p1.x - p0.x;
+            this.dy = p1.y - p0.y;
+            var pointer = this.pointer;
+            this.x = pointer.x;
+            this.y = pointer.y;
+            this.worldX = pointer.worldX;
+            this.worldY = pointer.worldY;
+            this.emit('pan', this, this.gameObject, this.lastPointer);
+            break;
+        }
+      }
+    }, {
+      key: "isPanned",
+      get: function get() {
+        return this.state === RECOGNIZED$3;
+      }
+    }, {
+      key: "setDragThreshold",
+      value: function setDragThreshold(distance) {
+        this.dragThreshold = distance;
+        return this;
+      }
+    }]);
+    return Pan;
+  }(OnePointerTracer);
+  var IDLE$4 = 'IDLE';
+  var BEGIN$3 = 'BEGIN';
+  var RECOGNIZED$3 = 'RECOGNIZED';
 
   var GetTickDelta = function GetTickDelta(game) {
     return GetGame(game).loop.delta;
@@ -1966,7 +2067,7 @@
   };
   var globOut = {};
 
-  var GetValue$7 = Phaser.Utils.Objects.GetValue;
+  var GetValue$9 = Phaser.Utils.Objects.GetValue;
   var RadToDeg$1 = Phaser.Math.RadToDeg;
   var Swipe = /*#__PURE__*/function (_OnePointerTracer) {
     _inherits(Swipe, _OnePointerTracer);
@@ -2022,9 +2123,9 @@
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         _get(_getPrototypeOf(Swipe.prototype), "resetFromJSON", this).call(this, o);
-        this.setDragThreshold(GetValue$7(o, 'threshold', 10));
-        this.setVelocityThreshold(GetValue$7(o, 'velocityThreshold', 1000));
-        this.setDirectionMode(GetValue$7(o, 'dir', '8dir'));
+        this.setDragThreshold(GetValue$9(o, 'threshold', 10));
+        this.setVelocityThreshold(GetValue$9(o, 'velocityThreshold', 1000));
+        this.setDirectionMode(GetValue$9(o, 'dir', '8dir'));
         return this;
       }
     }, {
@@ -2144,7 +2245,7 @@
     return obj;
   };
 
-  var GetValue$6 = Phaser.Utils.Objects.GetValue;
+  var GetValue$8 = Phaser.Utils.Objects.GetValue;
   var SpliceOne = Phaser.Utils.Array.SpliceOne;
   var DistanceBetween = Phaser.Math.Distance.Between;
   var AngleBetween = Phaser.Math.Angle.Between;
@@ -2162,11 +2263,11 @@
       this.scene = scene;
       this.gameObject = gameObject;
       if (gameObject) {
-        gameObject.setInteractive(GetValue$6(config, 'inputConfig', undefined));
+        gameObject.setInteractive(GetValue$8(config, 'inputConfig', undefined));
       }
 
       // Event emitter
-      this.setEventEmitter(GetValue$6(config, 'eventEmitter', undefined));
+      this.setEventEmitter(GetValue$8(config, 'eventEmitter', undefined));
       this._enable = undefined;
       this.pointers = [];
       this.movedState = {};
@@ -2176,8 +2277,8 @@
     _createClass(TwoPointersTracer, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.setEnable(GetValue$6(o, "enable", true));
-        this.bounds = GetValue$6(o, 'bounds', undefined);
+        this.setEnable(GetValue$8(o, "enable", true));
+        this.bounds = GetValue$8(o, 'bounds', undefined);
         this.tracerState = TOUCH0;
         this.pointers.length = 0;
         Clear(this.movedState);
@@ -2515,7 +2616,7 @@
   var TOUCH2 = 2;
   var IDLE$2 = 'IDLE';
 
-  var GetValue$5 = Phaser.Utils.Objects.GetValue;
+  var GetValue$7 = Phaser.Utils.Objects.GetValue;
   var Pinch = /*#__PURE__*/function (_TwoPointersTracer) {
     _inherits(Pinch, _TwoPointersTracer);
     function Pinch(gameObject, config) {
@@ -2553,7 +2654,7 @@
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         _get(_getPrototypeOf(Pinch.prototype), "resetFromJSON", this).call(this, o);
-        this.setDragThreshold(GetValue$5(o, 'threshold', 0));
+        this.setDragThreshold(GetValue$7(o, 'threshold', 0));
         return this;
       }
     }, {
@@ -2656,7 +2757,7 @@
     return this;
   };
 
-  var GetValue$4 = Phaser.Utils.Objects.GetValue;
+  var GetValue$6 = Phaser.Utils.Objects.GetValue;
   var WrapDegrees = Phaser.Math.Angle.WrapDegrees; // Wrap degrees: -180 to 180 
   var ShortestBetween = Phaser.Math.Angle.ShortestBetween;
   var RadToDeg = Phaser.Math.RadToDeg;
@@ -2698,7 +2799,7 @@
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         _get(_getPrototypeOf(Rotate.prototype), "resetFromJSON", this).call(this, o);
-        this.setDragThreshold(GetValue$4(o, 'threshold', 0));
+        this.setDragThreshold(GetValue$6(o, 'threshold', 0));
         return this;
       }
     }, {
@@ -2784,57 +2885,148 @@
     return camera;
   };
 
-  var GetValue$3 = Phaser.Utils.Objects.GetValue;
-  var PinchController = /*#__PURE__*/function (_ComponentBase) {
-    _inherits(PinchController, _ComponentBase);
-    function PinchController(scene, config) {
+  var GetValue$5 = Phaser.Utils.Objects.GetValue;
+  var PanScroll = /*#__PURE__*/function (_ComponentBase) {
+    _inherits(PanScroll, _ComponentBase);
+    function PanScroll(scene, config) {
       var _this;
-      _classCallCheck(this, PinchController);
+      _classCallCheck(this, PanScroll);
       if (config === undefined) {
         config = {};
       }
-      _this = _callSuper(this, PinchController, [scene, config]);
+      _this = _callSuper(this, PanScroll, [scene, config]);
       // this.scene
-      _defineProperty(_assertThisInitialized(_this), "setPanScrollEnable", function (enable) {
+      _defineProperty(_assertThisInitialized(_this), "setEnable", function (enable) {
         if (enable === undefined) {
           enable = true;
         }
-        this.panScrollEnable = enable;
+        this.enable = enable;
         return this;
       });
-      _defineProperty(_assertThisInitialized(_this), "setPinchZoomEnable", function (enable) {
-        if (enable === undefined) {
-          enable = true;
-        }
-        this.pinchZoomEnable = enable;
-        return this;
-      });
-      _this.inputTarget = GetValue$3(config, 'inputTarget', scene);
-      _this.pinch = new Pinch(_this.inputTarget);
-      var camera = GetCameraByName(scene, GetValue$3(config, 'camera'));
-      _this.setCamera(camera).setPanScrollEnable(GetValue$3(config, 'panScrollEnable', true)).setPinchZoomEnable(GetValue$3(config, 'pinchZoomEnable', true));
+      _this.inputTarget = GetValue$5(config, 'inputTarget', scene);
+      _this.pan = new Pan(_this.inputTarget);
+      var camera = GetCameraByName(scene, GetValue$5(config, 'camera'));
+      _this.setCamera(camera).setEnable(GetValue$5(config, 'enable', true));
       _this.boot();
       return _this;
     }
-    _createClass(PinchController, [{
+    _createClass(PanScroll, [{
       key: "boot",
       value: function boot() {
-        this.pinch.on('drag1', function (pinch) {
+        this.pan.on('pan', function (pan) {
           var camera = this.camera;
-          if (!this.panScrollEnable || !camera) {
+          if (!this.enable || !camera) {
             return;
           }
-          var drag1Vector = pinch.drag1Vector;
           var zoom = camera.zoom;
-          camera.scrollX -= drag1Vector.x / zoom;
-          camera.scrollY -= drag1Vector.y / zoom;
-        }, this).on('pinch', function (pinch) {
+          camera.scrollX -= pan.dx / zoom;
+          camera.scrollY -= pan.dy / zoom;
+        }, this);
+      }
+    }, {
+      key: "shutdown",
+      value: function shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+          return;
+        }
+        this.inputTarget = undefined;
+        this.pan.destroy();
+        this.pan = undefined;
+        _get(_getPrototypeOf(PanScroll.prototype), "shutdown", this).call(this, fromScene);
+      }
+    }, {
+      key: "setCamera",
+      value: function setCamera(camera) {
+        this.camera = camera;
+        return this;
+      }
+    }]);
+    return PanScroll;
+  }(ComponentBase);
+
+  // BaseCamera.preRender()
+  var UpdateCameraMetrix = function UpdateCameraMetrix(camera) {
+    var width = camera.width;
+    var height = camera.height;
+    var zoomX = camera.zoomX;
+    var zoomY = camera.zoomY;
+    var matrix = camera.matrix;
+    var sx = camera.scrollX;
+    var sy = camera.scrollY;
+    if (camera.useBounds) {
+      sx = camera.clampX(sx);
+      sy = camera.clampY(sy);
+    }
+
+    //  Values are in pixels and not impacted by zooming the Camera
+    camera.scrollX = sx;
+    camera.scrollY = sy;
+    var midX = sx + width * 0.5;
+    var midY = sy + height * 0.5;
+
+    //  The center of the camera, in world space, so taking zoom into account
+    //  Basically the pixel value of what it's looking at in the middle of the cam
+    camera.midPoint.set(midX, midY);
+    var displayWidth = width / zoomX;
+    var displayHeight = height / zoomY;
+    camera.worldView.setTo(midX - displayWidth / 2, midY - displayHeight / 2, displayWidth, displayHeight);
+    var originX = width * camera.originX;
+    var originY = height * camera.originY;
+    matrix.applyITRS(camera.x + originX, camera.y + originY, camera.rotation, zoomX, zoomY);
+    matrix.translate(-originX, -originY);
+  };
+
+  var ZoomFocusAt = function ZoomFocusAt(camera, zoom, focusLocalX, focusLocalY) {
+    var worldXY = camera.getWorldPoint(focusLocalX, focusLocalY);
+    camera.zoom = zoom;
+    UpdateCameraMetrix(camera);
+    var newWorldXY = camera.getWorldPoint(focusLocalX, focusLocalY);
+    camera.scrollX -= newWorldXY.x - worldXY.x;
+    camera.scrollY -= newWorldXY.y - worldXY.y;
+  };
+
+  var GetValue$4 = Phaser.Utils.Objects.GetValue;
+  var Clamp$1 = Phaser.Math.Clamp;
+  var PinchZoom = /*#__PURE__*/function (_ComponentBase) {
+    _inherits(PinchZoom, _ComponentBase);
+    function PinchZoom(scene, config) {
+      var _this;
+      _classCallCheck(this, PinchZoom);
+      if (config === undefined) {
+        config = {};
+      }
+      _this = _callSuper(this, PinchZoom, [scene, config]);
+      // this.scene
+      _defineProperty(_assertThisInitialized(_this), "setEnable", function (enable) {
+        if (enable === undefined) {
+          enable = true;
+        }
+        this.enable = enable;
+        return this;
+      });
+      _this.inputTarget = GetValue$4(config, 'inputTarget', scene);
+      _this.pinch = new Pinch(_this.inputTarget);
+      var camera = GetCameraByName(scene, GetValue$4(config, 'camera'));
+      _this.setCamera(camera).setEnable(GetValue$4(config, 'enable', true)).setMinZoom(GetValue$4(config, 'minZoom', 0.001)).setMaxZoom(GetValue$4(config, 'maxZoom', 1000));
+      _this.boot();
+      return _this;
+    }
+    _createClass(PinchZoom, [{
+      key: "boot",
+      value: function boot() {
+        this.pinch.on('pinch', function (pinch) {
           var camera = this.camera;
-          if (!this.pinchZoomEnable || !camera) {
+          if (!this.enable || !camera) {
             return;
           }
-          var scaleFactor = pinch.scaleFactor;
-          camera.zoom *= scaleFactor;
+          var zoom = camera.zoom * pinch.scaleFactor;
+          zoom = Clamp$1(zoom, this.minZoom, this.maxZoom);
+          var pointer0 = pinch.pointers[0];
+          var pointer1 = pinch.pointers[1];
+          var focusLocalX = (pointer0.x + pointer1.x) / 2;
+          var focusLocalY = (pointer0.y + pointer1.y) / 2;
+          ZoomFocusAt(camera, zoom, focusLocalX, focusLocalY);
         }, this);
       }
     }, {
@@ -2847,7 +3039,7 @@
         this.inputTarget = undefined;
         this.pinch.destroy();
         this.pinch = undefined;
-        _get(_getPrototypeOf(PinchController.prototype), "shutdown", this).call(this, fromScene);
+        _get(_getPrototypeOf(PinchZoom.prototype), "shutdown", this).call(this, fromScene);
       }
     }, {
       key: "setCamera",
@@ -2855,8 +3047,20 @@
         this.camera = camera;
         return this;
       }
+    }, {
+      key: "setMinZoom",
+      value: function setMinZoom(value) {
+        this.minZoom = value;
+        return this;
+      }
+    }, {
+      key: "setMaxZoom",
+      value: function setMaxZoom(value) {
+        this.maxZoom = value;
+        return this;
+      }
     }]);
-    return PinchController;
+    return PinchZoom;
   }(ComponentBase);
 
   var Key = Phaser.Input.Keyboard.Key;
@@ -2988,7 +3192,7 @@
   };
   var globRect = new Rectangle();
 
-  var GetValue$2 = Phaser.Utils.Objects.GetValue;
+  var GetValue$3 = Phaser.Utils.Objects.GetValue;
   var CursorAtBounds = /*#__PURE__*/function (_CursorKeys) {
     _inherits(CursorAtBounds, _CursorKeys);
     function CursorAtBounds(scene, config) {
@@ -2997,9 +3201,9 @@
       _this = _callSuper(this, CursorAtBounds, [scene]);
       _this.scene = scene;
       _this._enable = undefined;
-      _this.setEnable(GetValue$2(config, 'enable', true));
-      _this.setSensitiveDistance(GetValue$2(config, 'sensitiveDistance', 20));
-      var bounds = GetValue$2(config, 'bounds', undefined);
+      _this.setEnable(GetValue$3(config, 'enable', true));
+      _this.setSensitiveDistance(GetValue$3(config, 'sensitiveDistance', 20));
+      var bounds = GetValue$3(config, 'bounds', undefined);
       if (bounds === undefined) {
         bounds = GetViewport(scene);
         _this.autoUpdateViewportBounds = true;
@@ -3007,8 +3211,8 @@
         _this.autoUpdateViewportBounds = false;
       }
       _this.setBounds(bounds);
-      _this.pointerOutGameReleaseEnable = GetValue$2(config, 'pointerOutGameRelease', true);
-      _this.pointerOutBoundsReleaseEnable = GetValue$2(config, 'pointerOutBoundsRelease', false);
+      _this.pointerOutGameReleaseEnable = GetValue$3(config, 'pointerOutGameRelease', true);
+      _this.pointerOutBoundsReleaseEnable = GetValue$3(config, 'pointerOutBoundsRelease', false);
       _this.boot();
       return _this;
     }
@@ -3155,132 +3359,35 @@
     return CursorAtBounds;
   }(CursorKeys);
 
-  var MouseWheelToUpDown = /*#__PURE__*/function (_CursorKeys) {
-    _inherits(MouseWheelToUpDown, _CursorKeys);
-    function MouseWheelToUpDown(scene, config) {
+  var GetValue$2 = Phaser.Utils.Objects.GetValue;
+  var BoundsScroll = /*#__PURE__*/function (_ComponentBase) {
+    _inherits(BoundsScroll, _ComponentBase);
+    function BoundsScroll(scene, config) {
       var _this;
-      _classCallCheck(this, MouseWheelToUpDown);
-      _this = _callSuper(this, MouseWheelToUpDown, [scene]);
-      _this.scene = scene;
-      _this.boot();
-      return _this;
-    }
-    _createClass(MouseWheelToUpDown, [{
-      key: "boot",
-      value: function boot() {
-        this.scene.input.on('wheel', this.onWheeling, this);
-        this.scene.sys.events.on('postupdate', this.clearAllKeysState, this);
-        this.scene.sys.events.once('shutdown', this.destroy, this);
-      }
-    }, {
-      key: "shutdown",
-      value: function shutdown() {
-        if (!this.scene) {
-          return;
-        }
-        this.scene.input.off('wheel', this.onWheeling, this);
-        this.scene.sys.events.off('postupdate', this.clearAllKeysState, this);
-        this.scene.sys.events.off('shutdown', this.destroy, this);
-        this.scene = undefined;
-        _get(_getPrototypeOf(MouseWheelToUpDown.prototype), "shutdown", this).call(this);
-      }
-    }, {
-      key: "destroy",
-      value: function destroy() {
-        this.shutdown();
-      }
-    }, {
-      key: "enable",
-      get: function get() {
-        return this._enable;
-      },
-      set: function set(e) {
-        if (this._enable === e) {
-          return;
-        }
-        if (!e) {
-          this.clearAllKeysState();
-        }
-        this._enable = e;
-        return this;
-      }
-    }, {
-      key: "setEnable",
-      value: function setEnable(e) {
-        if (e === undefined) {
-          e = true;
-        }
-        this.enable = e;
-        return this;
-      }
-    }, {
-      key: "toggleEnable",
-      value: function toggleEnable() {
-        this.setEnable(!this.enable);
-        return this;
-      }
-    }, {
-      key: "onWheeling",
-      value: function onWheeling(pointer, currentlyOver, dx, dy, dz, event) {
-        if (!this.enable) {
-          return;
-        }
-        this.setKeyState('up', dy < 0);
-        this.setKeyState('down', dy > 0);
-      }
-    }, {
-      key: "up",
-      get: function get() {
-        return this.upKeyDown;
-      }
-    }, {
-      key: "down",
-      get: function get() {
-        return this.downKeyDown;
-      }
-    }, {
-      key: "noKey",
-      get: function get() {
-        return this.noKeyDown;
-      }
-    }]);
-    return MouseWheelToUpDown;
-  }(CursorKeys);
-
-  var GetValue$1 = Phaser.Utils.Objects.GetValue;
-  var BoundsWheelController = /*#__PURE__*/function (_ComponentBase) {
-    _inherits(BoundsWheelController, _ComponentBase);
-    function BoundsWheelController(scene, config) {
-      var _this;
-      _classCallCheck(this, BoundsWheelController);
+      _classCallCheck(this, BoundsScroll);
       if (config === undefined) {
         config = {};
       }
-      _this = _callSuper(this, BoundsWheelController, [scene, config]);
+      _this = _callSuper(this, BoundsScroll, [scene, config]);
       // this.scene
 
       _this.cursorAtBounds = new CursorAtBounds(scene);
-      _this.mouseWheel = new MouseWheelToUpDown(scene);
       var boundsCursorKeys = _this.cursorAtBounds.createCursorKeys();
-      var mouseWheelCursorKeys = _this.mouseWheel.createCursorKeys();
       _this.cameraController = new Phaser.Cameras.Controls.SmoothedKeyControl({
         left: boundsCursorKeys.left,
         right: boundsCursorKeys.right,
         up: boundsCursorKeys.up,
         down: boundsCursorKeys.down,
-        zoomIn: mouseWheelCursorKeys.down,
-        zoomOut: mouseWheelCursorKeys.up,
         acceleration: 0.06,
         drag: 0.003,
-        maxSpeed: 0.3,
-        zoomSpeed: 0.05
+        maxSpeed: 0.3
       });
-      var camera = GetCameraByName(scene, GetValue$1(config, 'camera'));
-      _this.setCamera(camera).setBoundsScrollEnable(GetValue$1(config, 'boundsScrollEnable', true)).setMouseWheelZoomEnable(GetValue$1(config, 'mouseWheelZoomEnable', true));
+      var camera = GetCameraByName(scene, GetValue$2(config, 'camera'));
+      _this.setCamera(camera).setEnable(GetValue$2(config, 'enable', true));
       _this.boot();
       return _this;
     }
-    _createClass(BoundsWheelController, [{
+    _createClass(BoundsScroll, [{
       key: "boot",
       value: function boot() {
         this.scene.events.on('preupdate', this.updateCameraController, this);
@@ -3294,9 +3401,8 @@
         }
         this.scene.events.off('preupdate', this.updateCameraController, this);
         this.cursorAtBounds.destroy();
-        this.mouseWheel.destroy();
         this.cameraController.destroy();
-        _get(_getPrototypeOf(BoundsWheelController.prototype), "shutdown", this).call(this, fromScene);
+        _get(_getPrototypeOf(BoundsScroll.prototype), "shutdown", this).call(this, fromScene);
       }
     }, {
       key: "camera",
@@ -3318,7 +3424,7 @@
         return this;
       }
     }, {
-      key: "boundsScrollEnable",
+      key: "enable",
       get: function get() {
         return this.cursorAtBounds.enable;
       },
@@ -3326,29 +3432,12 @@
         this.cursorAtBounds.enable = value;
       }
     }, {
-      key: "setBoundsScrollEnable",
-      value: function setBoundsScrollEnable(enable) {
+      key: "setEnable",
+      value: function setEnable(enable) {
         if (enable === undefined) {
           enable = true;
         }
-        this.boundsScrollEnable = enable;
-        return this;
-      }
-    }, {
-      key: "mouseWheelZoomEnable",
-      get: function get() {
-        return this.mouseWheel.enable;
-      },
-      set: function set(value) {
-        this.mouseWheel.enable = value;
-      }
-    }, {
-      key: "setMouseWheelZoomEnable",
-      value: function setMouseWheelZoomEnable(enable) {
-        if (enable === undefined) {
-          enable = true;
-        }
-        this.mouseWheelZoomEnable = enable;
+        this.enable = enable;
         return this;
       }
     }, {
@@ -3357,8 +3446,164 @@
         this.cameraController.update(delta);
       }
     }]);
-    return BoundsWheelController;
+    return BoundsScroll;
   }(ComponentBase);
+
+  var GetValue$1 = Phaser.Utils.Objects.GetValue;
+  var Clamp = Phaser.Math.Clamp;
+  var MouseWheelZoom = /*#__PURE__*/function (_ComponentBase) {
+    _inherits(MouseWheelZoom, _ComponentBase);
+    function MouseWheelZoom(scene, config) {
+      var _this;
+      _classCallCheck(this, MouseWheelZoom);
+      if (config === undefined) {
+        config = {};
+      }
+      _this = _callSuper(this, MouseWheelZoom, [scene, config]);
+      // this.scene
+      _defineProperty(_assertThisInitialized(_this), "setEnable", function (enable) {
+        if (enable === undefined) {
+          enable = true;
+        }
+        this.enable = enable;
+        return this;
+      });
+      _this.zoomInc = 0;
+      var camera = GetCameraByName(scene, GetValue$1(config, 'camera'));
+      _this.setCamera(camera).setEnable(GetValue$1(config, 'enable', true)).setMinZoom(GetValue$1(config, 'minZoom', 0.001)).setMaxZoom(GetValue$1(config, 'maxZoom', 1000)).setZoomStep(GetValue$1(config, 'zoomStep', 0.01)).setEaseDuration(GetValue$1(config, 'easeDuration', 200));
+      _this.boot();
+      return _this;
+    }
+    _createClass(MouseWheelZoom, [{
+      key: "boot",
+      value: function boot() {
+        this.scene.input.on('wheel', this.onWheel, this);
+      }
+    }, {
+      key: "shutdown",
+      value: function shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+          return;
+        }
+        this.scene.input.off('wheel', this.onWheel, this);
+        this.inputTarget = undefined;
+        _get(_getPrototypeOf(MouseWheelZoom.prototype), "shutdown", this).call(this, fromScene);
+      }
+    }, {
+      key: "setCamera",
+      value: function setCamera(camera) {
+        this.camera = camera;
+        return this;
+      }
+    }, {
+      key: "setMinZoom",
+      value: function setMinZoom(value) {
+        this.minZoom = value;
+        return this;
+      }
+    }, {
+      key: "setMaxZoom",
+      value: function setMaxZoom(value) {
+        this.maxZoom = value;
+        return this;
+      }
+    }, {
+      key: "setZoomStep",
+      value: function setZoomStep(step) {
+        this.zoomStep = step;
+        return this;
+      }
+    }, {
+      key: "setEaseDuration",
+      value: function setEaseDuration(duration) {
+        this.easeDuration = duration;
+        return this;
+      }
+    }, {
+      key: "onWheel",
+      value: function onWheel(pointer, currentlyOver, dx, dy, dz, event) {
+        var camera = this.camera;
+        if (!this.enable || !camera) {
+          return;
+        }
+        this.zoomInc += dy > 0 ? -this.zoomStep : this.zoomStep;
+        this.focusLocalX = pointer.x;
+        this.focusLocalY = pointer.y;
+        this.startZoom();
+      }
+    }, {
+      key: "startZoom",
+      value: function startZoom() {
+        this.scene.sys.events.on('preupdate', this.onZoomTick, this);
+      }
+    }, {
+      key: "onZoomTick",
+      value: function onZoomTick(time, delta) {
+        var camera = this.camera;
+        if (!this.enable || !camera) {
+          return;
+        }
+        var zoomStep = this.zoomStep * delta / this.easeDuration;
+        var lastZoomInc = zoomStep >= Math.abs(this.zoomInc);
+        if (lastZoomInc) {
+          zoomStep = this.zoomInc;
+          this.zoomInc = 0;
+        } else {
+          if (this.zoomInc < 0) {
+            zoomStep = -zoomStep;
+          }
+          this.zoomInc -= zoomStep;
+        }
+        var zoom = camera.zoom + zoomStep;
+        zoom = Clamp(zoom, this.minZoom, this.maxZoom);
+        ZoomFocusAt(camera, zoom, this.focusLocalX, this.focusLocalY);
+        if (lastZoomInc) {
+          this.stopZoom();
+        }
+      }
+    }, {
+      key: "stopZoom",
+      value: function stopZoom() {
+        this.scene.sys.events.off('preupdate', this.onZoomTick, this);
+      }
+    }]);
+    return MouseWheelZoom;
+  }(ComponentBase);
+
+  function DeepClone(obj) {
+    if (obj === null || _typeof(obj) !== 'object') {
+      // If obj is a primitive value or null, return it directly
+      return obj;
+    }
+    if (Array.isArray(obj)) {
+      // If obj is an array, create a new array and clone each element
+      return obj.map(function (item) {
+        return DeepClone(item);
+      });
+    }
+    if (obj instanceof Date) {
+      // If obj is a Date object, create a new Date object with the same value
+      return new Date(obj);
+    }
+    if (obj instanceof RegExp) {
+      // If obj is a RegExp object, create a new RegExp object with the same pattern and flags
+      return new RegExp(obj);
+    }
+    if (Object.getPrototypeOf(obj) !== Object.prototype) {
+      // If obj is a custom object, return a reference to it
+      return obj;
+    }
+
+    // If obj is a plain object, create a new object and clone each property
+    var clonedObj = {};
+    for (var key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        clonedObj[key] = DeepClone(obj[key]);
+      }
+    }
+    return clonedObj;
+  }
 
   var GetValue = Phaser.Utils.Objects.GetValue;
   var ControllerPack = /*#__PURE__*/function (_ComponentBase) {
@@ -3368,86 +3613,166 @@
       _classCallCheck(this, ControllerPack);
       if (config === undefined) {
         config = {};
+      } else {
+        config = DeepClone(config);
       }
       _this = _callSuper(this, ControllerPack, [scene, config]);
       // this.scene
       _defineProperty(_assertThisInitialized(_this), "setPanScrollEnable", function (enable) {
-        this.pinchController.setPanScrollEnable(enable);
+        if (enable === undefined) {
+          enable = true;
+        }
+        this.panScrollEnable = enable;
         return this;
       });
       _defineProperty(_assertThisInitialized(_this), "setPinchZoomEnable", function (enable) {
-        this.pinchController.setPinchZoomEnable(enable);
+        if (enable === undefined) {
+          enable = true;
+        }
+        this.pinchZoomEnable = enable;
         return this;
       });
       _defineProperty(_assertThisInitialized(_this), "setBoundsScrollEnable", function (enable) {
-        this.boundsWheelController.setBoundsScrollEnable(enable);
+        if (enable === undefined) {
+          enable = true;
+        }
+        this.boundsScrollEnable = enable;
         return this;
       });
       _this._enable = true;
-      _this.pinchController = new PinchController(scene, config);
-      _this.boundsWheelController = new BoundsWheelController(scene, config);
-      _this.setEnable(GetValue(config, 'enable', true));
+      _this._camera = undefined;
+      var enableMask = GetValue(config, 'enable', true);
+      delete config.enable;
+      if (GetValue(config, 'panScroll', true)) {
+        config.enable = GetValue(config, 'panScrollEnable', true);
+        _this.panScroll = new PanScroll(scene, config);
+      }
+      if (GetValue(config, 'pinchZoom', true)) {
+        config.enable = GetValue(config, 'pinchZoomEnable', true);
+        _this.pinchZoom = new PinchZoom(scene, config);
+      }
+      if (GetValue(config, 'boundsScroll', true)) {
+        config.enable = GetValue(config, 'boundsScrollEnable', true);
+        _this.boundsScroll = new BoundsScroll(scene, config);
+      }
+      if (GetValue(config, 'mouseWheelZoom', true)) {
+        config.enable = GetValue(config, 'mouseWheelZoomEnable', true);
+        _this.mouseWheelZoom = new MouseWheelZoom(scene, config);
+      }
+      _this.setEnable(enableMask);
       return _this;
     }
     _createClass(ControllerPack, [{
       key: "destroy",
       value: function destroy(fromScene) {
-        this.pinchController.destroy(fromScene);
-        this.boundsWheelController.destroy(fromScene);
+        if (this.panScroll) {
+          this.panScroll.destroy(fromScene);
+        }
+        if (this.pinchZoom) {
+          this.pinchZoom.destro(fromScene);
+        }
+        if (this.boundsScroll) {
+          this.boundsScroll.destroy(fromScene);
+        }
+        if (this.mouseWheelZoom) {
+          this.mouseWheelZoom.destroy(fromScene);
+        }
         _get(_getPrototypeOf(ControllerPack.prototype), "destroy", this).call(this, fromScene);
       }
     }, {
       key: "camera",
       get: function get() {
-        return this.pinchController.camera;
+        if (this.panScroll) {
+          return this.panScroll.camera;
+        }
+        if (this.pinchZoom) {
+          return this.pinchZoom.camera;
+        }
+        if (this.boundsScroll) {
+          return this.boundsScroll.camera;
+        }
+        if (this.mouseWheelZoom) {
+          return this.mouseWheelZoom.camera;
+        }
       },
       set: function set(value) {
-        this.pinchController.setCamera(value);
-        this.boundsWheelController.setCamera(value);
+        if (this.panScroll) {
+          this.panScroll.setCamera(value);
+        }
+        if (this.pinchZoom) {
+          this.pinchZoom.setCamera(value);
+        }
+        if (this.boundsScroll) {
+          this.boundsScroll.setCamera(value);
+        }
+        if (this.mouseWheelZoom) {
+          this.mouseWheelZoom.setCamera(value);
+        }
       }
     }, {
       key: "setCamera",
       value: function setCamera(camera) {
-        this.pinchController.setCamera(camera);
-        this.boundsWheelController.setCamera(camera);
+        this.camera = camera;
         return this;
       }
     }, {
       key: "panScrollEnable",
       get: function get() {
-        return this.pinchController.panScrollEnable;
+        if (this.panScroll) {
+          return this.panScroll.enable;
+        }
+        return false;
       },
       set: function set(value) {
-        this.pinchController.panScrollEnable = value;
+        if (this.panScroll) {
+          this.panScroll.enable = value;
+        }
       }
     }, {
       key: "pinchZoomEnable",
       get: function get() {
-        return this.pinchController.pinchZoomEnable;
+        if (this.pinchZoom) {
+          return this.pinchZoom.enable;
+        }
+        return false;
       },
       set: function set(value) {
-        this.pinchController.pinchZoomEnable = value;
+        if (this.pinchZoom) {
+          this.pinchZoom.enable = value;
+        }
       }
     }, {
       key: "boundsScrollEnable",
       get: function get() {
-        return this.boundsWheelController.boundsScrollEnable;
+        if (this.boundsScroll) {
+          return this.boundsScroll.enable;
+        }
+        return false;
       },
       set: function set(value) {
-        this.boundsWheelController.boundsScrollEnable = value;
+        if (this.boundsScroll) {
+          this.boundsScroll.enable = value;
+        }
       }
     }, {
       key: "mouseWheelZoomEnable",
       get: function get() {
-        return this.boundsWheelController.mouseWheelZoomEnable;
+        if (this.mouseWheelZoom) {
+          return this.mouseWheelZoom.enable;
+        }
       },
       set: function set(value) {
-        this.boundsWheelController.mouseWheelZoomEnable = value;
+        if (this.mouseWheelZoom) {
+          this.mouseWheelZoom.enable = value;
+        }
       }
     }, {
       key: "setMouseWheelZoomEnable",
       value: function setMouseWheelZoomEnable(enable) {
-        this.boundsWheelController.setMouseWheelZoomEnable(enable);
+        if (enable === undefined) {
+          enable = true;
+        }
+        this.mouseWheelZoom = enable;
         return this;
       }
     }, {
@@ -3498,13 +3823,13 @@
     return ControllerPack;
   }(ComponentBase);
 
-  var LifeTimePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
-    _inherits(LifeTimePlugin, _Phaser$Plugins$BaseP);
-    function LifeTimePlugin(pluginManager) {
-      _classCallCheck(this, LifeTimePlugin);
-      return _callSuper(this, LifeTimePlugin, [pluginManager]);
+  var CameraControllerPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
+    _inherits(CameraControllerPlugin, _Phaser$Plugins$BaseP);
+    function CameraControllerPlugin(pluginManager) {
+      _classCallCheck(this, CameraControllerPlugin);
+      return _callSuper(this, CameraControllerPlugin, [pluginManager]);
     }
-    _createClass(LifeTimePlugin, [{
+    _createClass(CameraControllerPlugin, [{
       key: "start",
       value: function start() {
         var eventEmitter = this.game.events;
@@ -3516,19 +3841,29 @@
         return new ControllerPack(scene, config);
       }
     }, {
-      key: "addPinchController",
-      value: function addPinchController(scene, config) {
-        return new PinchController(scene, config);
+      key: "addPanScroll",
+      value: function addPanScroll(scene, config) {
+        return new PanScroll(scene, config);
       }
     }, {
-      key: "addBoundsWheelController",
-      value: function addBoundsWheelController(scene, config) {
-        return new BoundsWheelController(scene, config);
+      key: "addPinchZoom",
+      value: function addPinchZoom(scene, config) {
+        return new PinchZoom(scene, config);
+      }
+    }, {
+      key: "addBoundsScroll",
+      value: function addBoundsScroll(scene, config) {
+        return new BoundsScroll(scene, config);
+      }
+    }, {
+      key: "addMouseWheelZoom",
+      value: function addMouseWheelZoom(scene, config) {
+        return new MouseWheelZoom(scene, config);
       }
     }]);
-    return LifeTimePlugin;
+    return CameraControllerPlugin;
   }(Phaser.Plugins.BasePlugin);
 
-  return LifeTimePlugin;
+  return CameraControllerPlugin;
 
 }));
