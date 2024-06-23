@@ -4090,6 +4090,7 @@
       }
       if (GetValue$24(config, 'mouseWheelZoom', true)) {
         config.enable = GetValue$24(config, 'mouseWheelZoomEnable', true);
+        config.zoomStep = GetValue$24(config, 'mouseWheelZoomStep', 0.01);
         _this.mouseWheelZoom = new MouseWheelZoom(scene, config);
       }
       _this.setEnable(enableMask);
@@ -43249,9 +43250,11 @@
   Object.assign(Methods, LayerManagerMethods, BindingTargetMethods);
 
   var OnSelectGameObject = function OnSelectGameObject(shell, gameObject) {
+    shell.cameraController.setEnable(false);
     shell.setBindingTarget(gameObject);
   };
   var OnUnSelectGameObject = function OnUnSelectGameObject(shell) {
+    shell.cameraController.setEnable(true);
     shell.clearBindingTarget();
   };
 

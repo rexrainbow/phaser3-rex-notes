@@ -3661,6 +3661,7 @@
       }
       if (GetValue(config, 'mouseWheelZoom', true)) {
         config.enable = GetValue(config, 'mouseWheelZoomEnable', true);
+        config.zoomStep = GetValue(config, 'mouseWheelZoomStep', 0.01);
         _this.mouseWheelZoom = new MouseWheelZoom(scene, config);
       }
       _this.setEnable(enableMask);
