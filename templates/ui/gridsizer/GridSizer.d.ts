@@ -166,11 +166,17 @@ declare class GridSizer extends BaseSizer {
     ): this;
 
     getChildAt(
-        columnIndex : number,
-        rowIndex : number
+        columnIndex: number,
+        rowIndex: number
     ): Phaser.GameObjects.GameObject;
 
-    childToGridIndex(child : Phaser.GameObjects.GameObject, out : {x : number, y : number}) : {x : number, y : number};
+    childToGridIndex(
+        child: Phaser.GameObjects.GameObject,
+        out: { x: number, y: number }
+    ): { x: number, y: number };
 
-    childToGridIndex(child : Phaser.GameObjects.GameObject) : {x : number, y : number};
+    childToGridIndex(
+        child: Phaser.GameObjects.GameObject
+    ): { x: number, y: number };
+
 }
