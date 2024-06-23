@@ -91,6 +91,9 @@ var cameraController = scene.plugins.get('rexCameraController').add(scene, {
     // mouseWheelZoomEnable: true,
     // mouseWheelZoomStep: 0.01,
 
+    // minZoom: 0.001,
+    // maxZoom: 1000,
+
     // enable: true
 });
 ```
@@ -118,6 +121,7 @@ var cameraController = scene.plugins.get('rexCameraController').add(scene, {
     - `mouseWheelZoom` : Set to `false` will discard mouse-wheel-zoom controller. Default is `true`.
     - `mouseWheelZoomEnable` : Set to `true` to enable mouse-wheel-zoom behavior. Default value is `true`.
     - `mouseWheelZoomStep` :Camera zoom incremental. Default value is `0.01`.
+- `minZoom`, `maxZoom` : Minimun and maximun zoom value.
 - `enable` : 
     - `false` : Disable all camera-controller temporary.
     - `true` : Restore all camera-controller's enable state to previous value. Default behavior.

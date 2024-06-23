@@ -116,7 +116,9 @@ class MouseWheelZoom extends ComponentBase {
         }
 
         var zoom = camera.zoom + zoomStep;
-        zoom = Clamp(zoom, this.minZoom, this.maxZoom);
+        if ((this.minZoom !== undefined) && (this.maxZoom !== undefined)) {
+            zoom = Clamp(zoom, this.minZoom, this.maxZoom);
+        }
         ZoomAt(camera, zoom, this.focusLocalX, this.focusLocalY);
 
         if (lastZoomInc) {
