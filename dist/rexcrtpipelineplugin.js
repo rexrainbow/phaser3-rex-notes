@@ -104,7 +104,7 @@
     return _assertThisInitialized(self);
   }
 
-  var frag = "#ifdef GL_FRAGMENT_PRECISION_HIGH\n#define highmedp highp\n#else\n#define highmedp mediump\n#endif\nprecision highmedp float;\n\n// Scene buffer\nuniform sampler2D uMainSampler; \nvarying vec2 outTexCoord;\n\n// Effect parameters\nuniform vec2 warp;\nuniform float scanStrength;\nuniform float scanLineWidth;\n\nvoid main (void) {\n  // squared distance from center\n  vec2 uv = outTexCoord;\n  vec2 dc = abs(0.5-uv);\n  dc *= dc;\n  \n  // warp the fragment coordinates\n  uv.x -= 0.5; \n  uv.x *= 1.0+(dc.y*warp.x);\n  uv.x += 0.5;\n\n  uv.y -= 0.5; \n  uv.y *= 1.0+(dc.x*warp.y); \n  uv.y += 0.5;\n\n  // sample inside boundaries, otherwise set to black\n  if (uv.y > 1.0 || uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0) {\n    gl_FragColor = vec4(0.0,0.0,0.0,1.0);\n  } else {\n    vec4 color = texture2D(uMainSampler,uv);\n    color.rgb *= (1.-scanStrength)+(sin(outTexCoord.y*scanLineWidth)*scanStrength);\n    gl_FragColor = color;\n  }\n}\n";
+  var frag = "#ifdef GL_FRAGMENT_PRECISION_HIGH\n#define highmedp highp\n#else\n#define highmedp mediump\n#endif\nprecision highmedp float;\n\n// Scene buffer\nuniform sampler2D uMainSampler; \nvarying vec2 outTexCoord;\n\n// Effect parameters\nuniform vec2 warp;\nuniform float scanLineStrength;\nuniform float scanLineWidth;\n\nvoid main (void) {\n  // squared distance from center\n  vec2 uv = outTexCoord;\n  vec2 dc = abs(0.5-uv);\n  dc *= dc;\n  \n  // warp the fragment coordinates\n  uv.x -= 0.5; \n  uv.x *= 1.0+(dc.y*warp.x);\n  uv.x += 0.5;\n\n  uv.y -= 0.5; \n  uv.y *= 1.0+(dc.x*warp.y); \n  uv.y += 0.5;\n\n  // sample inside boundaries, otherwise set to black\n  if (uv.y > 1.0 || uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0) {\n    gl_FragColor = vec4(0.0,0.0,0.0,1.0);\n  } else {\n    // float apply = abs(sin(outTexCoord.y*scanLineWidth)*scanLineStrength);\n    // gl_FragColor = vec4(mix(texture2D(uMainSampler,uv).rgb,vec3(0.0),apply),1.0);\n    vec4 color = texture2D(uMainSampler,uv);\n    color.rgb *= (1.-scanLineStrength)+(sin(outTexCoord.y*scanLineWidth)*scanLineStrength);\n    gl_FragColor = color;\n  }\n}\n";
 
   var PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
   var GetValue = Phaser.Utils.Objects.GetValue;
@@ -120,7 +120,7 @@
         fragShader: frag
       }]);
       _this.warp = 0;
-      _this.scanStrength = 0.2;
+      _this.scanLineStrength = 0.2;
       _this.scanLineWidth = 1024;
       return _this;
     }
@@ -128,7 +128,7 @@
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         this.setWarp(GetValue(o, 'warpX', 0.75), GetValue(o, 'warpY', 0.75));
-        this.setScanStrength(GetValue(o, 'scanStrength', 0.75));
+        this.setScanStrength(GetValue(o, 'scanLineStrength', 0.2));
         this.setScanLineWidth(GetValue(o, 'scanLineWidth', 1024));
         return this;
       }
@@ -136,7 +136,7 @@
       key: "onPreRender",
       value: function onPreRender() {
         this.set2f('warp', this.warpX, this.warpY);
-        this.set1f('scanStrength', this.scanStrength);
+        this.set1f('scanLineStrength', this.scanLineStrength);
         this.set1f('scanLineWidth', this.scanLineWidth);
       }
 
@@ -149,11 +149,11 @@
         return this;
       }
 
-      // scanStrength
+      // scanLineStrength
     }, {
       key: "setScanStrength",
       value: function setScanStrength(value) {
-        this.scanStrength = value;
+        this.scanLineStrength = value;
         return this;
       }
 

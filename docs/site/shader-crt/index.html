@@ -9916,14 +9916,14 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">pipelineInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexCrtPipeline&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// warpX: 0.75,</span>
 <span class="w">    </span><span class="c1">// warpY: 0.75,</span>
-<span class="w">    </span><span class="c1">// scanStrength: 0.2,</span>
+<span class="w">    </span><span class="c1">// scanLineStrength: 0.2,</span>
 <span class="w">    </span><span class="c1">// scanLineWidth: 1024,</span>
 
 <span class="w">    </span><span class="c1">// name: &#39;rexCrtPostFx&#39;</span>
 <span class="p">});</span>
 </code></pre></div><ul>
 <li><code>warpX</code>, <code>warpY</code> : Horizontal and Vertical warp.</li>
-<li><code>scanStrength</code>, <code>scanLineWidth</code> : Scan line parameters.</li>
+<li><code>scanLineStrength</code>, <code>scanLineWidth</code> : Scan line parameters.</li>
 </ul>
 </li>
 <li>Apply effect to camera. A camera only can add 1 crt effect.
@@ -9967,15 +9967,15 @@
 <h3 id="scan-lines">Scan lines<a class="headerlink" href="#scan-lines" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">scanStrength</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">scanStrength</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">scanLineStrength</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">scanLineStrength</span><span class="p">;</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">scanLineWidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">scanLineWidth</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Set
-    <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setScanStrength</span><span class="p">(</span><span class="nx">scanStrength</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setScanStrength</span><span class="p">(</span><span class="nx">scanLineStrength</span><span class="p">);</span>
 <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setScanLineWidth</span><span class="p">(</span><span class="nx">scanLineWidth</span><span class="p">);</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">scanStrength</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scanStrength</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">scanLineStrength</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scanLineStrength</span><span class="p">;</span>
 <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">scanLineWidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scanLineWidth</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
