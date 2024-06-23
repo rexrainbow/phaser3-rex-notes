@@ -41,6 +41,7 @@ class ControllerPack extends ComponentBase {
 
         if (GetValue(config, 'mouseWheelZoom', true)) {
             config.enable = GetValue(config, 'mouseWheelZoomEnable', true);
+            config.zoomStep = GetValue(config, 'mouseWheelZoomStep', 0.01);
             this.mouseWheelZoom = new MouseWheelZoom(scene, config);
         }
 
