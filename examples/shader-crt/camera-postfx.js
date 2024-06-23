@@ -20,14 +20,14 @@ class Demo extends Phaser.Scene {
         var postFxPipeline = postFxPlugin.add(this.cameras.main, {
             warpX: 0.75,
             warpY: 0.75,
-            scanStrength: 0.2,
+            scanLineStrength: 0.2,
             scanLineWidth: 1024
         });
 
         var gui = new Dat.GUI();
         gui.add(postFxPipeline, 'warpX', 0, 1);
         gui.add(postFxPipeline, 'warpY', 0, 1);
-        gui.add(postFxPipeline, 'scanStrength', 0, 1);
+        gui.add(postFxPipeline, 'scanLineStrength', 0, 1);
         gui.add(postFxPipeline, 'scanLineWidth', 0, 4096);
     }
 

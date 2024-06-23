@@ -12,7 +12,7 @@ varying vec2 outTexCoord;
 
 // Effect parameters
 uniform vec2 warp;
-uniform float scanStrength;
+uniform float scanLineStrength;
 uniform float scanLineWidth;
 
 void main (void) {
@@ -34,8 +34,10 @@ void main (void) {
   if (uv.y > 1.0 || uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0) {
     gl_FragColor = vec4(0.0,0.0,0.0,1.0);
   } else {
+    // float apply = abs(sin(outTexCoord.y*scanLineWidth)*scanLineStrength);
+    // gl_FragColor = vec4(mix(texture2D(uMainSampler,uv).rgb,vec3(0.0),apply),1.0);
     vec4 color = texture2D(uMainSampler,uv);
-    color.rgb *= (1.-scanStrength)+(sin(outTexCoord.y*scanLineWidth)*scanStrength);
+    color.rgb *= (1.-scanLineStrength)+(sin(outTexCoord.y*scanLineWidth)*scanLineStrength);
     gl_FragColor = color;
   }
 }

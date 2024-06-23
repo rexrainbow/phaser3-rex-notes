@@ -3,7 +3,7 @@ export default CrtPostFxPipeline;
 declare namespace CrtPostFxPipeline {
     interface IConfig {
         warpX?: number, warpY?: number,
-        scanStrength?: number,
+        scanLineStrength?: number,
     }
 }
 
@@ -14,8 +14,8 @@ declare class CrtPostFxPipeline extends Phaser.Renderer.WebGL.Pipelines.PostFXPi
     warpX: number;
     warpY: number;
 
-    setScanStrength(value: number): this;
-    scanStrength: number;
+    setScanLineStrength(value: number): this;
+    scanLineStrength: number;
 
     setScanLineWidth(value: number): this;
     scanLineWidth: number;

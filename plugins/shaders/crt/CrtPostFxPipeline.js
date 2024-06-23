@@ -13,20 +13,20 @@ class CrtPostFxPipeline extends PostFXPipeline {
         });
 
         this.warp = 0;
-        this.scanStrength = 0.2;
+        this.scanLineStrength = 0.2;
         this.scanLineWidth = 1024;
     }
 
     resetFromJSON(o) {
         this.setWarp(GetValue(o, 'warpX', 0.75), GetValue(o, 'warpY', 0.75));
-        this.setScanStrength(GetValue(o, 'scanStrength', 0.2));
+        this.setScanStrength(GetValue(o, 'scanLineStrength', 0.2));
         this.setScanLineWidth(GetValue(o, 'scanLineWidth', 1024));
         return this;
     }
 
     onPreRender() {
         this.set2f('warp', this.warpX, this.warpY);
-        this.set1f('scanStrength', this.scanStrength);
+        this.set1f('scanLineStrength', this.scanLineStrength);
         this.set1f('scanLineWidth', this.scanLineWidth);
     }
 
@@ -37,9 +37,9 @@ class CrtPostFxPipeline extends PostFXPipeline {
         return this;
     }
 
-    // scanStrength
+    // scanLineStrength
     setScanStrength(value) {
-        this.scanStrength = value;
+        this.scanLineStrength = value;
         return this;
     }
 

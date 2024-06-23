@@ -101,14 +101,14 @@ CRT post processing filter. [Reference](https://www.shadertoy.com/view/WsVSzV)
     var pipelineInstance = scene.plugins.get('rexCrtPipeline').add(gameObject, {
         // warpX: 0.75,
         // warpY: 0.75,
-        // scanStrength: 0.2,
+        // scanLineStrength: 0.2,
         // scanLineWidth: 1024,
         
         // name: 'rexCrtPostFx'
     });
     ```
     - `warpX`, `warpY` : Horizontal and Vertical warp.
-    - `scanStrength`, `scanLineWidth` : Scan line parameters.
+    - `scanLineStrength`, `scanLineWidth` : Scan line parameters.
 - Apply effect to camera. A camera only can add 1 crt effect.
     ```javascript
     var pipelineInstance = scene.plugins.get('rexCrtPipeline').add(camera, config);
@@ -159,16 +159,16 @@ CRT post processing filter. [Reference](https://www.shadertoy.com/view/WsVSzV)
 
 - Get
     ```javascript
-    var scanStrength = pipelineInstance.scanStrength;
+    var scanLineStrength = pipelineInstance.scanLineStrength;
     var scanLineWidth = pipelineInstance.scanLineWidth;
     ```
 - Set
     ```javascript
-    pipelineInstance.setScanStrength(scanStrength);
+    pipelineInstance.setScanStrength(scanLineStrength);
     pipelineInstance.setScanLineWidth(scanLineWidth);
     ```
     or
     ```javascript
-    pipelineInstance.scanStrength = scanStrength;
+    pipelineInstance.scanLineStrength = scanLineStrength;
     pipelineInstance.scanLineWidth = scanLineWidth;
     ```
