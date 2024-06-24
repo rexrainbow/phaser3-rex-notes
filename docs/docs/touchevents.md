@@ -407,6 +407,10 @@ scene.input.addPointer(num);  // total points = num + 1
                 var worldX = worldXY.x;
                 var worldY = worldXY.y;
                 ```
+            - Camera
+                ```javascript
+                var camera = pointer.camera;
+                ```
         - Position of previous moving : `pointer.prevPosition.x` , `pointer.prevPosition.y`
             - Updating when pointer-down, potiner-move, or pointer-up.
         - Interpolated position :
