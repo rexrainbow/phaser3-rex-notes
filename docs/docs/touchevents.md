@@ -237,6 +237,7 @@ Trigger these events from top scene to bottom scene.
     scene.input.on('gameout', function(timeStamp, domEvent){ /* ... */ }, scope);
     scene.input.on('gameover', function(timeStamp, domEvent){ /* ... */ }, scope);
     ```
+    - Check `pointer.camera` in multiple-cameras scene.
 
 #### Game canvas
 
