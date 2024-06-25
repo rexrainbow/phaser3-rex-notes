@@ -1,9 +1,8 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 import GetCameraByName from '../../utils/camera/GetCameraByName.js';
-import ZoomAt from '../../utils/camera/ZoomAt.js';
+import EaseZoom from './EaseZoom.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
-const Clamp = Phaser.Math.Clamp;
 
 class MouseWheelZoom extends ComponentBase {
     constructor(scene, config) {
@@ -14,17 +13,15 @@ class MouseWheelZoom extends ComponentBase {
         super(scene, config);
         // this.scene
 
-        this.zoomInc = 0;
+        this.easeZoom = new EaseZoom(this);
 
         var camera = GetCameraByName(scene, GetValue(config, 'camera'));
 
         this
-            .setCamera(camera)
             .setEnable(GetValue(config, 'enable', true))
-            .setMinZoom(GetValue(config, 'minZoom', 0.001))
-            .setMaxZoom(GetValue(config, 'maxZoom', 1000))
-            .setZoomStep(GetValue(config, 'zoomStep', 0.01))
+            .setZoomStep(GetValue(config, 'zoomStep', 0.1))
             .setEaseDuration(GetValue(config, 'easeDuration', 200))
+            .setCamera(camera)
 
         this.boot();
     }
@@ -48,6 +45,13 @@ class MouseWheelZoom extends ComponentBase {
 
     setCamera(camera) {
         this.camera = camera;
+
+        this.resetZoomLevel();
+
+        this.easeZoom
+            .stop()
+            .setTarget((camera) ? camera : null)
+
         return this;
     }
 
@@ -76,6 +80,18 @@ class MouseWheelZoom extends ComponentBase {
 
     setEaseDuration(duration) {
         this.easeDuration = duration;
+        this.easeZoom.setDuration(duration);
+        return this;
+    }
+
+    resetZoomLevel() {
+        var camera = this.camera;
+        if (!camera) {
+            this.zoomLevel = undefined;
+            return this;
+        }
+
+        this.zoomLevel = Math.round(GetZoomLevel(camera.zoom, this.zoomStep));
         return this;
     }
 
@@ -85,51 +101,32 @@ class MouseWheelZoom extends ComponentBase {
             return;
         }
 
-        this.zoomInc += (dy > 0) ? -this.zoomStep : this.zoomStep;
+        this.zoomLevel += (dy < 0) ? 1 : -1;
+        var nextZoom = GetZoomValue(this.zoomLevel, this.zoomStep);
+
         this.focusLocalX = pointer.x;
         this.focusLocalY = pointer.y;
-        this.startZoom()
+
+        this.easeZoom.start(nextZoom);
     }
+}
 
-    startZoom() {
-        this.scene.sys.events.on('preupdate', this.onZoomTick, this);
+var GetZoomLevel = function (zoom, r) {
+    if (zoom >= 1) {
+        var level = Math.log(zoom) / Math.log(1 + r);
+        return level;
+    } else {
+        var level = Math.log(zoom) / Math.log(1 - r);
+        return -level;
     }
+}
 
-    onZoomTick(time, delta) {
-        var camera = this.camera;
-        if (!this.enable || !camera) {
-            return;
-        }
-
-        var zoomStep = this.zoomStep * delta / this.easeDuration;
-
-        var lastZoomInc = zoomStep >= Math.abs(this.zoomInc);
-        if (lastZoomInc) {
-            zoomStep = this.zoomInc;
-            this.zoomInc = 0;
-
-        } else {
-            if (this.zoomInc < 0) {
-                zoomStep = -zoomStep;
-            }
-            this.zoomInc -= zoomStep;
-        }
-
-        var zoom = camera.zoom + zoomStep;
-        if ((this.minZoom !== undefined) && (this.maxZoom !== undefined)) {
-            zoom = Clamp(zoom, this.minZoom, this.maxZoom);
-        }
-        ZoomAt(camera, zoom, this.focusLocalX, this.focusLocalY);
-
-        if (lastZoomInc) {
-            this.stopZoom();
-        }
+var GetZoomValue = function (level, r) {
+    if (level >= 0) {
+        return Math.pow((1 + r), level);
+    } else {
+        return Math.pow((1 - r), -level);
     }
-
-    stopZoom() {
-        this.scene.sys.events.off('preupdate', this.onZoomTick, this);
-    }
-
 }
 
 export default MouseWheelZoom;

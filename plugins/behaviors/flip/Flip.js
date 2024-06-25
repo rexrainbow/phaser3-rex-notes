@@ -104,7 +104,7 @@ class Flip extends EaseValueTaskBase {
         return this;
     }
 
-    updateGameObject(gameObject, timer) {
+    updateTarget(gameObject, timer) {
         if (timer.justRestart) {
             this.toggleFace();
         }

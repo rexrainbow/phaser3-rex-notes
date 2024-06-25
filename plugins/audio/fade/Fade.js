@@ -65,7 +65,7 @@ class Fade extends EaseValueTaskBase {
         return this;
     }
 
-    updateGameObject(parent, timer) {
+    updateTarget(parent, timer) {
         parent.volume = Linear(this.volume.start, this.volume.end, timer.t);
     }
 
