@@ -111,21 +111,21 @@ class MouseWheelZoom extends ComponentBase {
     }
 }
 
-var GetZoomLevel = function (zoom, r) {
+var GetZoomLevel = function (zoom, step) {
     if (zoom >= 1) {
-        var level = Math.log(zoom) / Math.log(1 + r);
+        var level = Math.log(zoom) / Math.log(1 + step);
         return level;
     } else {
-        var level = Math.log(zoom) / Math.log(1 - r);
+        var level = Math.log(zoom) / Math.log(1 - step);
         return -level;
     }
 }
 
-var GetZoomValue = function (level, r) {
+var GetZoomValue = function (level, step) {
     if (level >= 0) {
-        return Math.pow((1 + r), level);
+        return Math.pow((1 + step), level);
     } else {
-        return Math.pow((1 - r), -level);
+        return Math.pow((1 - step), -level);
     }
 }
 

@@ -4450,20 +4450,20 @@
     }]);
     return MouseWheelZoom;
   }(ComponentBase);
-  var GetZoomLevel = function GetZoomLevel(zoom, r) {
+  var GetZoomLevel = function GetZoomLevel(zoom, step) {
     if (zoom >= 1) {
-      var level = Math.log(zoom) / Math.log(1 + r);
+      var level = Math.log(zoom) / Math.log(1 + step);
       return level;
     } else {
-      var level = Math.log(zoom) / Math.log(1 - r);
+      var level = Math.log(zoom) / Math.log(1 - step);
       return -level;
     }
   };
-  var GetZoomValue = function GetZoomValue(level, r) {
+  var GetZoomValue = function GetZoomValue(level, step) {
     if (level >= 0) {
-      return Math.pow(1 + r, level);
+      return Math.pow(1 + step, level);
     } else {
-      return Math.pow(1 - r, -level);
+      return Math.pow(1 - step, -level);
     }
   };
 
@@ -4553,7 +4553,7 @@
       }
       if (GetValue$21(config, 'mouseWheelZoom', true)) {
         config.enable = GetValue$21(config, 'mouseWheelZoomEnable', true);
-        config.zoomStep = GetValue$21(config, 'mouseWheelZoomStep', 0.01);
+        config.zoomStep = GetValue$21(config, 'mouseWheelZoomStep', 0.1);
         _this.mouseWheelZoom = new MouseWheelZoom(scene, config);
       }
       _this.setEnable(enableMask);
