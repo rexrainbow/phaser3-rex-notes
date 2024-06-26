@@ -38,6 +38,9 @@ class MouseWheelZoom extends ComponentBase {
 
         this.scene.input.off('wheel', this.onWheel, this);
 
+        this.easeZoom.destroy();
+        this.easeZoom = undefined;
+
         this.inputTarget = undefined;
 
         super.shutdown(fromScene);
@@ -60,16 +63,6 @@ class MouseWheelZoom extends ComponentBase {
             enable = true;
         }
         this.enable = enable;
-        return this;
-    }
-
-    setMinZoom(value) {
-        this.minZoom = value;
-        return this;
-    }
-
-    setMaxZoom(value) {
-        this.maxZoom = value;
         return this;
     }
 

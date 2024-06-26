@@ -23,6 +23,7 @@ declare class MouseWheelZoom extends ComponentBase {
     setCamera(camera?: Phaser.Cameras.Scene2D.Camera): this;
     camera?: Phaser.Cameras.Scene2D.Camera
 
+    resetZoomLevel(): this;
 }
 
 export default MouseWheelZoom;
