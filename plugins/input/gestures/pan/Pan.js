@@ -69,6 +69,14 @@ class Pan extends OnePointerTracer {
             case BEGIN:
                 if (this.pointer.getDistance() >= this.dragThreshold) {
                     this.state = RECOGNIZED;
+
+                    this.dx = 0;
+                    this.dy = 0;
+                    var pointer = this.pointer;
+                    this.x = pointer.x;
+                    this.y = pointer.y;
+                    this.worldX = pointer.worldX;
+                    this.worldY = pointer.worldY;
                 }
                 break;
 

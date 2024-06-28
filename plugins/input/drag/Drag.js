@@ -27,8 +27,7 @@ class Drag extends Pan {
     }
 
     drag() {
-        var gameObject = this.parent;
-        var pointer = IsPointerInHitArea(gameObject, undefined, undefined, undefined, true);
+        var pointer = IsPointerInHitArea(this.gameObject, undefined, undefined, undefined, true);
         if (!pointer) {
             return this;
         }
@@ -49,7 +48,11 @@ class Drag extends Pan {
             return;
         }
 
-        var gameObject = this.parent;
+        if ((this.dx === 0) && (this.dy === 0)) {
+            return;
+        }
+
+        var gameObject = this.gameObject;
         var dragX = gameObject.x + this.dx;
         var dragY = gameObject.y + this.dy;
 
