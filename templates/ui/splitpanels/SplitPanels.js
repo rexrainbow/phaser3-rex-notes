@@ -96,6 +96,7 @@ class SplitPanels extends Sizer {
             axis: (this.orientation === 0) ? 1 : 2,
         });
 
+        // TODO: Drag behavior is rewrote
         splitter
             .on('dragstart', function () {
                 this.emit('splitter.dragstart', splitter, this.splitRatio);
@@ -107,6 +108,8 @@ class SplitPanels extends Sizer {
                 OnDragSplitter.call(this);
                 this.emit('splitter.drag', splitter, this.splitRatio);
             }, this)
+
+        splitter
             .on('pointerover', function () {
                 this.emit('splitter.over', splitter, this.splitRatio);
             }, this)
