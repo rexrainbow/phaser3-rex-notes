@@ -1,5 +1,6 @@
 import OnePointerTracer from "../onepointertracer/OnePointerTracer.js";
 import FSM from '../../../fsm.js';
+import GetPointerWorldXY from "../../../utils/input/GetPointerWorldXY.js";
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -29,8 +30,11 @@ class Pan extends OnePointerTracer {
                         var pointer = self.lastPointer;
                         self.endX = pointer.x;
                         self.endY = pointer.y;
-                        self.endWorldX = pointer.worldX;
-                        self.endWorldY = pointer.worldY;
+
+                        var worldXY = GetPointerWorldXY(pointer, self.pointerCamera, true);
+                        self.endWorldX = worldXY.x;
+                        self.endWorldY = worldXY.y;
+
                         self.emit('panend', self, self.gameObject, self.lastPointer);
                     }
                 }
@@ -76,8 +80,11 @@ class Pan extends OnePointerTracer {
                 var pointer = this.pointer;
                 this.x = pointer.x;
                 this.y = pointer.y;
-                this.worldX = pointer.worldX;
-                this.worldY = pointer.worldY;
+
+                var worldXY = GetPointerWorldXY(pointer, this.pointerCamera, true);
+                this.worldX = worldXY.x;
+                this.worldY = worldXY.y;
+
                 this.emit('pan', this, this.gameObject, this.lastPointer);
                 break;
         }

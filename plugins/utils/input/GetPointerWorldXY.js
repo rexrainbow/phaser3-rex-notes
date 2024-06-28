@@ -1,4 +1,4 @@
-var GetPointerWorldXY = function (pointer, mainCamera, out) {
+var GetPointerWorldXY = function (pointer, targetCamera, out) {
     var camera = pointer.camera;
     if (!camera) {
         return null;
@@ -10,7 +10,7 @@ var GetPointerWorldXY = function (pointer, mainCamera, out) {
         out = globalOut;
     }
 
-    if (camera === mainCamera) {
+    if (camera === targetCamera) {
         out.x = pointer.worldX;
         out.y = pointer.worldY;
     } else {

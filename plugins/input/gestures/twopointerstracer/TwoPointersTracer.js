@@ -140,6 +140,7 @@ class TwoPointersTracer {
 
         this.movedState[pointer.id] = false;
         this.pointers.push(pointer);
+        this.pointerCamera = pointer.camera;
 
         switch (this.tracerState) {
             case TOUCH0:
