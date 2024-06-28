@@ -1,88 +1,15 @@
-import ComponentBase from '../../utils/componentbase/ComponentBase.js';
-import RequestDrag from '../../utils/input/RequestDrag.js'
+import Pan from '../gestures/pan/Pan.js';
+import IsPointerInHitArea from '../../utils/input/IsPointerInHitArea.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const DistanceBetween = Phaser.Math.Distance.Between;
 const RotateAroundDistance = Phaser.Math.RotateAroundDistance;
 
-class Drag extends ComponentBase {
-    constructor(gameObject, config) {
-        super(gameObject, { eventEmitter: false });
-        // No event emitter
-        // this.parent = gameObject;
-
-        this._enable = undefined;
-        gameObject.setInteractive(GetValue(config, "inputConfig", undefined));
-        this.resetFromJSON(config);
-        this.boot();
-    }
-
+class Drag extends Pan {
     resetFromJSON(o) {
-        this.pointer = undefined;
-        this.setEnable(GetValue(o, "enable", true));
+        super.resetFromJSON(o);
         this.setAxisMode(GetValue(o, "axis", 0));
         this.setAxisRotation(GetValue(o, "rotation", 0));
-        return this;
-    }
-
-    toJSON() {
-        return {
-            enable: this.enable,
-            axis: this.axisMode,
-            rotation: this.axisRotation
-        };
-    }
-
-    boot() {
-        var gameObject = this.parent;
-        gameObject.on('dragstart', this.onDragStart, this);
-        gameObject.on('drag', this.onDrag, this);
-        gameObject.on('dragend', this.onDragEnd, this);
-    }
-
-    shutdown(fromScene) {
-        // Already shutdown
-        if (this.isShutdown) {
-            return;
-        }
-
-        // GameObject events will be removed when this gameObject destroyed 
-        // this.parent.on('dragstart', this.onDragStart, this);
-        // this.parent.on('drag', this.onDrag, this);
-        // this.parent.on('dragend', this.onDragEnd, this);
-        this.pointer = undefined;
-
-        super.shutdown(fromScene);
-    }
-
-    get enable() {
-        return this._enable;
-    }
-
-    set enable(e) {
-        if (this._enable === e) {
-            return;
-        }
-
-        if (!e) {
-            this.dragend();
-        }
-        this._enable = e;
-        this.scene.input.setDraggable(this.parent, e);
-        return this;
-    }
-
-    setEnable(e) {
-        if (e === undefined) {
-            e = true;
-        }
-
-        this.enable = e;
-        return this;
-    }
-
-    toggleEnable() {
-        this.setEnable(!this.enable);
         return this;
     }
 
@@ -100,30 +27,32 @@ class Drag extends ComponentBase {
     }
 
     drag() {
-        RequestDrag(this.parent);
+        var gameObject = this.parent;
+        var pointer = IsPointerInHitArea(gameObject, undefined, undefined, undefined, true);
+        if (!pointer) {
+            return this;
+        }
+
+        this.onPointerDown(pointer);
         return this;
     }
 
     dragend() {
-        if (!this.isDragging) {
-            return;
-        }
-        this.scene.input.setDragState(this.pointer, 5);
+        this.dragCancel();
         return this;
     }
 
-    onDragStart(pointer, dragX, dragY) {
-        if (this.isDragging) {
-            return;
-        }
-        this.pointer = pointer;
-    }
+    onDrag() {
+        super.onDrag();
 
-    onDrag(pointer, dragX, dragY) {
-        if (this.pointer !== pointer) {
+        if (!this.isDragging) {
             return;
         }
+
         var gameObject = this.parent;
+        var dragX = gameObject.x + this.dx;
+        var dragY = gameObject.y + this.dy;
+
         if (this.axisMode === 0) {
             gameObject.x = dragX;
             gameObject.y = dragY;
@@ -153,15 +82,8 @@ class Drag extends ComponentBase {
 
     }
 
-    onDragEnd(pointer, dragX, dragY, dropped) {
-        if (this.pointer !== pointer) {
-            return;
-        }
-        this.pointer = undefined;
-    }
-
     get isDragging() {
-        return (this.pointer !== undefined);
+        return this.isPanned;
     }
 }
 
