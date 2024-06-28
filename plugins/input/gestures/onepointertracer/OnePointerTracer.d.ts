@@ -30,4 +30,7 @@ declare class OnePointerTracer extends Phaser.Events.EventEmitter {
         preTest?: (gameObject: Phaser.GameObjects.GameObject, x: number, y: number) => boolean,
         postTest?: (gameObject: Phaser.GameObjects.GameObject, x: number, y: number) => boolean,
     ): boolean;
+
+    dragCancel(): this;
+
 }
