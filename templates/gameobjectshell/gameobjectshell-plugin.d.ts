@@ -2,7 +2,7 @@ import CameraControllerFactory from './cameracontroller/Factory';
 import ControlPointsFactory from './controlpoints/Factory';
 import FullWindowRectangleFactory from './fullwindowrectangle/Factory';
 import LayerManagerFactory from './layermanager/Factory';
-import PropertiesPanelFactory from './propertiespanel/Factory';
+import PropertiesPanelFactory from './gameobjectpanel/Factory';
 import ShellFactory from './shell/Factory';
 
 export default GameObjectShellPlugins;
@@ -26,7 +26,7 @@ import CameraControllerClass from './cameracontroller/CameraController';
 import ControlPointsClass from './controlpoints/ControlPoints';
 import FullWindowRectangleClass from './fullwindowrectangle/FullWindowRectangle';
 import LayerManagerClass from './layermanager/LayerManager';
-import PropertiesPanelClass from './propertiespanel/PropertiesPanel';
+import PropertiesPanelClass from './gameobjectpanel/GameObjectPanel';
 import ShellClass from './shell/Shell';
 
 declare namespace GameObjectShellPlugins {

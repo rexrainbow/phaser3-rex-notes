@@ -1,6 +1,6 @@
 import LayerManager from '../layermanager/LayerManager';
 import FullWindowRectangle from '../fullwindowrectangle/FullWindowRectangle';
-import PropertiesPanel from '../propertiespanel/PropertiesPanel';
+import PropertiesPanel from '../gameobjectpanel/GameObjectPanel';
 import ControlPoints from '../controlpoints/ControlPoints';
 
 export default Shell;
