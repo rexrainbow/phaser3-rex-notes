@@ -1,5 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
-import HitTest from '../../plugins/utils/input/HitTest.js';
+import phaser from '../../../phaser3-rex/src/phaser.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -27,6 +26,7 @@ class Demo extends Phaser.Scene {
         var camera = this.cameras.add();
         camera.scrollX = scrollX;
         camera.scrollY = scrollY;
+        camera.zoom = 1.5
         camera.name = 'GO';
 
         var x = 400 + scrollX,
