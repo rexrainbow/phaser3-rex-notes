@@ -635,7 +635,7 @@
     return true;
   };
 
-  var GetPointerWorldXY = function GetPointerWorldXY(pointer, mainCamera, out) {
+  var GetPointerWorldXY = function GetPointerWorldXY(pointer, targetCamera, out) {
     var camera = pointer.camera;
     if (!camera) {
       return null;
@@ -645,7 +645,7 @@
     } else if (out === true) {
       out = globalOut$1;
     }
-    if (camera === mainCamera) {
+    if (camera === targetCamera) {
       out.x = pointer.worldX;
       out.y = pointer.worldY;
     } else {
@@ -818,6 +818,7 @@
           return;
         }
         this.pointer = pointer;
+        this.pointerCamera = pointer.camera;
         this.lastPointer = pointer;
         this.movedState = false;
         this.tracerState = TOUCH1$1;
@@ -840,6 +841,7 @@
           return;
         }
         this.pointer = undefined;
+        this.pointerCamera = undefined;
         this.movedState = false;
         this.tracerState = TOUCH0$1;
         this.onDragEnd();
@@ -1862,8 +1864,9 @@
               var pointer = self.lastPointer;
               self.endX = pointer.x;
               self.endY = pointer.y;
-              self.endWorldX = pointer.worldX;
-              self.endWorldY = pointer.worldY;
+              var worldXY = GetPointerWorldXY(pointer, self.pointerCamera, true);
+              self.endWorldX = worldXY.x;
+              self.endWorldY = worldXY.y;
               self.emit('panend', self, self.gameObject, self.lastPointer);
             }
           }
@@ -1903,18 +1906,31 @@
           case BEGIN$2:
             if (this.pointer.getDistance() >= this.dragThreshold) {
               this.state = RECOGNIZED$2;
+              this.dx = 0;
+              this.dy = 0;
+              this.dWorldX = 0;
+              this.dWorldY = 0;
+              var pointer = this.pointer;
+              this.x = pointer.x;
+              this.y = pointer.y;
+              this.worldX = pointer.worldX;
+              this.worldY = pointer.worldY;
             }
             break;
           case RECOGNIZED$2:
+            var pointerCamera = this.pointerCamera;
             var p1 = this.pointer.position;
             var p0 = this.pointer.prevPosition;
             this.dx = p1.x - p0.x;
             this.dy = p1.y - p0.y;
+            this.dWorldX = this.dx / pointerCamera.zoom;
+            this.dWorldY = this.dy / pointerCamera.zoom;
             var pointer = this.pointer;
             this.x = pointer.x;
             this.y = pointer.y;
-            this.worldX = pointer.worldX;
-            this.worldY = pointer.worldY;
+            var worldXY = GetPointerWorldXY(pointer, pointerCamera, true);
+            this.worldX = worldXY.x;
+            this.worldY = worldXY.y;
             this.emit('pan', this, this.gameObject, this.lastPointer);
             break;
         }
@@ -2357,6 +2373,7 @@
         }
         this.movedState[pointer.id] = false;
         this.pointers.push(pointer);
+        this.pointerCamera = pointer.camera;
         switch (this.tracerState) {
           case TOUCH0:
             this.tracerState = TOUCH1;

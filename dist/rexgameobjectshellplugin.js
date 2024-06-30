@@ -757,7 +757,7 @@
     return true;
   };
 
-  var GetPointerWorldXY = function GetPointerWorldXY(pointer, mainCamera, out) {
+  var GetPointerWorldXY = function GetPointerWorldXY(pointer, targetCamera, out) {
     var camera = pointer.camera;
     if (!camera) {
       return null;
@@ -767,7 +767,7 @@
     } else if (out === true) {
       out = globalOut$1;
     }
-    if (camera === mainCamera) {
+    if (camera === targetCamera) {
       out.x = pointer.worldX;
       out.y = pointer.worldY;
     } else {
@@ -940,6 +940,7 @@
           return;
         }
         this.pointer = pointer;
+        this.pointerCamera = pointer.camera;
         this.lastPointer = pointer;
         this.movedState = false;
         this.tracerState = TOUCH1$1;
@@ -962,6 +963,7 @@
           return;
         }
         this.pointer = undefined;
+        this.pointerCamera = undefined;
         this.movedState = false;
         this.tracerState = TOUCH0$1;
         this.onDragEnd();
@@ -2305,8 +2307,9 @@
               var pointer = self.lastPointer;
               self.endX = pointer.x;
               self.endY = pointer.y;
-              self.endWorldX = pointer.worldX;
-              self.endWorldY = pointer.worldY;
+              var worldXY = GetPointerWorldXY(pointer, self.pointerCamera, true);
+              self.endWorldX = worldXY.x;
+              self.endWorldY = worldXY.y;
               self.emit('panend', self, self.gameObject, self.lastPointer);
             }
           }
@@ -2346,18 +2349,31 @@
           case BEGIN$3:
             if (this.pointer.getDistance() >= this.dragThreshold) {
               this.state = RECOGNIZED$3;
+              this.dx = 0;
+              this.dy = 0;
+              this.dWorldX = 0;
+              this.dWorldY = 0;
+              var pointer = this.pointer;
+              this.x = pointer.x;
+              this.y = pointer.y;
+              this.worldX = pointer.worldX;
+              this.worldY = pointer.worldY;
             }
             break;
           case RECOGNIZED$3:
+            var pointerCamera = this.pointerCamera;
             var p1 = this.pointer.position;
             var p0 = this.pointer.prevPosition;
             this.dx = p1.x - p0.x;
             this.dy = p1.y - p0.y;
+            this.dWorldX = this.dx / pointerCamera.zoom;
+            this.dWorldY = this.dy / pointerCamera.zoom;
             var pointer = this.pointer;
             this.x = pointer.x;
             this.y = pointer.y;
-            this.worldX = pointer.worldX;
-            this.worldY = pointer.worldY;
+            var worldXY = GetPointerWorldXY(pointer, pointerCamera, true);
+            this.worldX = worldXY.x;
+            this.worldY = worldXY.y;
             this.emit('pan', this, this.gameObject, this.lastPointer);
             break;
         }
@@ -2800,6 +2816,7 @@
         }
         this.movedState[pointer.id] = false;
         this.pointers.push(pointer);
+        this.pointerCamera = pointer.camera;
         switch (this.tracerState) {
           case TOUCH0:
             this.tracerState = TOUCH1;
@@ -4387,6 +4404,8 @@
           return;
         }
         this.scene.input.off('wheel', this.onWheel, this);
+        this.easeZoom.destroy();
+        this.easeZoom = undefined;
         this.inputTarget = undefined;
         _get(_getPrototypeOf(MouseWheelZoom.prototype), "shutdown", this).call(this, fromScene);
       }
@@ -4396,18 +4415,6 @@
         this.camera = camera;
         this.resetZoomLevel();
         this.easeZoom.stop().setTarget(camera ? camera : null);
-        return this;
-      }
-    }, {
-      key: "setMinZoom",
-      value: function setMinZoom(value) {
-        this.minZoom = value;
-        return this;
-      }
-    }, {
-      key: "setMaxZoom",
-      value: function setMaxZoom(value) {
-        this.maxZoom = value;
         return this;
       }
     }, {
@@ -10146,7 +10153,7 @@
     return this;
   };
 
-  var CameraMethods$1 = {
+  var CameraMethods$2 = {
     setCamera: function setCamera(goName, cameraName) {
       var bob = this.get(goName);
       if (!bob) {
@@ -10172,7 +10179,7 @@
   var Methods$9 = {
     drawGameObjectsBounds: DrawGameObjectsBounds
   };
-  Object.assign(Methods$9, GetMethods, AddMethods$1, RemoveMethods$1, PropertyMethods, CallMethods, DataMethods$1, FadeMethods$1, CameraMethods$1);
+  Object.assign(Methods$9, GetMethods, AddMethods$1, RemoveMethods$1, PropertyMethods, CallMethods, DataMethods$1, FadeMethods$1, CameraMethods$2);
 
   var GetValue$1W = Phaser.Utils.Objects.GetValue;
   var GOManager = /*#__PURE__*/function () {
@@ -10510,7 +10517,7 @@
   };
 
   var SetCamera = GOManager.prototype.setCamera;
-  var CameraMethods = {
+  var CameraMethods$1 = {
     setCamera: function setCamera(layerName, cameraName) {
       // Add a new camera if target camera is not existing
       var camera = GetCameraByName(this.scene, cameraName);
@@ -10523,7 +10530,7 @@
   };
 
   var methods$o = {};
-  Object.assign(methods$o, LayerMethods, ScrollFactorMethods, DepthMethods, CameraMethods);
+  Object.assign(methods$o, LayerMethods, ScrollFactorMethods, DepthMethods, CameraMethods$1);
 
   var GetValue$1V = Phaser.Utils.Objects.GetValue;
   var LayerManager = /*#__PURE__*/function (_GOManager) {
@@ -14854,7 +14861,7 @@
     }
   };
 
-  var IsPointerInHitArea = function IsPointerInHitArea(gameObject, pointer, preTest, postTest) {
+  var IsPointerInHitArea = function IsPointerInHitArea(gameObject, pointer, preTest, postTest, returnFirstPointer) {
     if (pointer) {
       if (preTest && !preTest(gameObject, pointer)) {
         return false;
@@ -14867,6 +14874,9 @@
       }
       return true;
     } else {
+      if (returnFirstPointer === undefined) {
+        returnFirstPointer = false;
+      }
       var inputManager = gameObject.scene.input.manager;
       var pointersTotal = inputManager.pointersTotal;
       var pointers = inputManager.pointers,
@@ -14881,6 +14891,9 @@
         }
         if (postTest && !postTest(gameObject, pointer)) {
           continue;
+        }
+        if (returnFirstPointer) {
+          return pointer;
         }
         return true;
       }
@@ -43009,12 +43022,12 @@
     return _createClass(PropertiesPanel);
   }(Tweaker);
 
-  ObjectFactory.register('propertiesPanel', function (config) {
+  ObjectFactory.register('gameObjectPanel', function (config) {
     var gameObject = new PropertiesPanel(this.scene, config);
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.GameObjectShell.PropertiesPanel', PropertiesPanel);
+  SetValue(window, 'RexPlugins.GameObjectShell.GameObjectPanel', PropertiesPanel);
 
   // Layer name
   var BGLayer = 'bgLayer';
@@ -43093,12 +43106,12 @@
       orientation: 'y'
     });
     this.scene.add.existing(mainPanel);
-    var propertiesPanel = CreatePropertiesPanel.call(this, config);
-    mainPanel.add(propertiesPanel, {
+    var gameObjectPanel = CreateGameObjectPanel.call(this, config);
+    mainPanel.add(gameObjectPanel, {
       expand: true
     }).layout().setMinSize(mainPanel.width, mainPanel.height); // Keep current size
 
-    propertiesPanel.setDirty(false);
+    gameObjectPanel.setDirty(false);
     mainPanel.left = 0;
     mainPanel.top = 0;
     this.addToUILayer(mainPanel);
@@ -43107,7 +43120,7 @@
     }, this);
     return mainPanel;
   };
-  var CreatePropertiesPanel = function CreatePropertiesPanel(config) {
+  var CreateGameObjectPanel = function CreateGameObjectPanel(config) {
     var panelConfig = GetValue$3(config, 'panel', {});
     var extraProperties = GetValue$3(config, 'extraProperties', {});
     var panel = new PropertiesPanel(this.scene, panelConfig, extraProperties);
@@ -43276,8 +43289,20 @@
     }
   };
 
+  var CameraMethods = {
+    getBackgroundCamera: function getBackgroundCamera() {
+      return this.layerManager.getCamera(BGLayer);
+    },
+    getMonitorCamera: function getMonitorCamera() {
+      return this.layerManager.getCamera(GOLayer);
+    },
+    getUICamera: function getUICamera() {
+      return this.layerManager.getCamera(UILayer);
+    }
+  };
+
   var Methods = {};
-  Object.assign(Methods, LayerManagerMethods, BindingTargetMethods);
+  Object.assign(Methods, LayerManagerMethods, BindingTargetMethods, CameraMethods);
 
   var OnSelectGameObject = function OnSelectGameObject(shell, gameObject) {
     shell.cameraController.setEnable(false);

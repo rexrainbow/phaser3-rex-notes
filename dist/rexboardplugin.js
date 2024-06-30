@@ -7033,7 +7033,7 @@
     return true;
   };
 
-  var GetPointerWorldXY = function GetPointerWorldXY(pointer, mainCamera, out) {
+  var GetPointerWorldXY = function GetPointerWorldXY(pointer, targetCamera, out) {
     var camera = pointer.camera;
     if (!camera) {
       return null;
@@ -7043,7 +7043,7 @@
     } else if (out === true) {
       out = globalOut;
     }
-    if (camera === mainCamera) {
+    if (camera === targetCamera) {
       out.x = pointer.worldX;
       out.y = pointer.worldY;
     } else {
@@ -7216,6 +7216,7 @@
           return;
         }
         this.pointer = pointer;
+        this.pointerCamera = pointer.camera;
         this.lastPointer = pointer;
         this.movedState = false;
         this.tracerState = TOUCH1;
@@ -7238,6 +7239,7 @@
           return;
         }
         this.pointer = undefined;
+        this.pointerCamera = undefined;
         this.movedState = false;
         this.tracerState = TOUCH0;
         this.onDragEnd();

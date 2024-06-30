@@ -416,7 +416,7 @@
     return true;
   };
 
-  var GetPointerWorldXY = function GetPointerWorldXY(pointer, mainCamera, out) {
+  var GetPointerWorldXY = function GetPointerWorldXY(pointer, targetCamera, out) {
     var camera = pointer.camera;
     if (!camera) {
       return null;
@@ -426,7 +426,7 @@
     } else if (out === true) {
       out = globalOut;
     }
-    if (camera === mainCamera) {
+    if (camera === targetCamera) {
       out.x = pointer.worldX;
       out.y = pointer.worldY;
     } else {
@@ -600,6 +600,7 @@
         }
         this.movedState[pointer.id] = false;
         this.pointers.push(pointer);
+        this.pointerCamera = pointer.camera;
         switch (this.tracerState) {
           case TOUCH0:
             this.tracerState = TOUCH1;

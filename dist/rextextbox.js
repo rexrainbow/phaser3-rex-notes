@@ -9342,7 +9342,7 @@
     }
   };
 
-  var GetPointerWorldXY = function GetPointerWorldXY(pointer, mainCamera, out) {
+  var GetPointerWorldXY = function GetPointerWorldXY(pointer, targetCamera, out) {
     var camera = pointer.camera;
     if (!camera) {
       return null;
@@ -9352,7 +9352,7 @@
     } else if (out === true) {
       out = globalOut$1;
     }
-    if (camera === mainCamera) {
+    if (camera === targetCamera) {
       out.x = pointer.worldX;
       out.y = pointer.worldY;
     } else {
@@ -9864,7 +9864,7 @@
     }
   };
 
-  var IsPointerInHitArea = function IsPointerInHitArea(gameObject, pointer, preTest, postTest) {
+  var IsPointerInHitArea = function IsPointerInHitArea(gameObject, pointer, preTest, postTest, returnFirstPointer) {
     if (pointer) {
       if (preTest && !preTest(gameObject, pointer)) {
         return false;
@@ -9877,6 +9877,9 @@
       }
       return true;
     } else {
+      if (returnFirstPointer === undefined) {
+        returnFirstPointer = false;
+      }
       var inputManager = gameObject.scene.input.manager;
       var pointersTotal = inputManager.pointersTotal;
       var pointers = inputManager.pointers,
@@ -9891,6 +9894,9 @@
         }
         if (postTest && !postTest(gameObject, pointer)) {
           continue;
+        }
+        if (returnFirstPointer) {
+          return pointer;
         }
         return true;
       }
@@ -10732,6 +10738,7 @@
           return;
         }
         this.pointer = pointer;
+        this.pointerCamera = pointer.camera;
         this.lastPointer = pointer;
         this.movedState = false;
         this.tracerState = TOUCH1$1;
@@ -10754,6 +10761,7 @@
           return;
         }
         this.pointer = undefined;
+        this.pointerCamera = undefined;
         this.movedState = false;
         this.tracerState = TOUCH0$1;
         this.onDragEnd();
@@ -11601,6 +11609,7 @@
         }
         this.movedState[pointer.id] = false;
         this.pointers.push(pointer);
+        this.pointerCamera = pointer.camera;
         switch (this.tracerState) {
           case TOUCH0:
             this.tracerState = TOUCH1;
