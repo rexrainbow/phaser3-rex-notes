@@ -72,6 +72,9 @@ class Pan extends OnePointerTracer {
 
                     this.dx = 0;
                     this.dy = 0;
+                    this.dWorldX = 0;
+                    this.dWorldY = 0;
+
                     var pointer = this.pointer;
                     this.x = pointer.x;
                     this.y = pointer.y;
@@ -81,15 +84,21 @@ class Pan extends OnePointerTracer {
                 break;
 
             case RECOGNIZED:
+                var pointerCamera = this.pointerCamera;
+
                 var p1 = this.pointer.position;
                 var p0 = this.pointer.prevPosition;
                 this.dx = p1.x - p0.x;
                 this.dy = p1.y - p0.y;
+                this.dWorldX = this.dx / pointerCamera.zoom;
+                this.dWorldY = this.dy / pointerCamera.zoom;
+
+
                 var pointer = this.pointer;
                 this.x = pointer.x;
                 this.y = pointer.y;
 
-                var worldXY = GetPointerWorldXY(pointer, this.pointerCamera, true);
+                var worldXY = GetPointerWorldXY(pointer, pointerCamera, true);
                 this.worldX = worldXY.x;
                 this.worldY = worldXY.y;
 
