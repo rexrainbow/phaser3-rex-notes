@@ -61228,81 +61228,6 @@
   }(DOMElement);
   Object.assign(FileDropZone.prototype, Methods$9);
 
-  var Style$3 = /*#__PURE__*/function (_ComponentBase) {
-    _inherits(Style, _ComponentBase);
-    function Style(gameObject, style) {
-      var _this;
-      _classCallCheck(this, Style);
-      _this = _callSuper(this, Style, [gameObject]);
-      // this.parent = gameObject;
-
-      return _possibleConstructorReturn(_this, new Proxy(_assertThisInitialized(_this), _assertThisInitialized(_this)));
-    }
-    _createClass(Style, [{
-      key: "get",
-      value: function get(target, prop) {
-        if (HasProperty(target, prop)) {
-          return target[prop];
-        }
-        var gameObject = target.parent;
-        if (HasProperty(gameObject, prop)) {
-          return gameObject[prop];
-        }
-      }
-    }, {
-      key: "set",
-      value: function set(target, prop, value) {
-        if (HasProperty(target, prop)) {
-          target[prop] = value;
-        } else if (HasProperty(target.parent, prop)) {
-          target.parent[prop] = value;
-        }
-        return true;
-      }
-    }, {
-      key: "key",
-      get: function get() {
-        return this.parent.texture.key;
-      },
-      set: function set(value) {
-        this.parent.setTexture(value, this.frame);
-      }
-    }, {
-      key: "fontSize",
-      get: function get() {
-        return this.parent.fontSize;
-      },
-      set: function set(value) {
-        this.parent.setFontSize(value);
-      }
-    }, {
-      key: "tint",
-      get: function get() {
-        return this.parent.tintTopLeft;
-      },
-      set: function set(value) {
-        this.parent.setTint(value);
-      }
-    }, {
-      key: "letterSpacing",
-      get: function get() {
-        return this.parent.letterSpacing;
-      },
-      set: function set(value) {
-        this.parent.setLetterSpacing(value);
-      }
-    }, {
-      key: "lineSpacing",
-      get: function get() {
-        return this.parent.lineSpacing;
-      },
-      set: function set(value) {
-        this.parent.setLineSpacing(value);
-      }
-    }]);
-    return Style;
-  }(ComponentBase);
-
   var GetValue$1G = Phaser.Utils.Objects.GetValue;
   var StyleManager = /*#__PURE__*/function (_ComponentBase) {
     _inherits(StyleManager, _ComponentBase);
@@ -61420,6 +61345,138 @@
       return this;
     }
   };
+
+  var StatesBarRectangle = /*#__PURE__*/function (_LineProgress) {
+    _inherits(StatesBarRectangle, _LineProgress);
+    function StatesBarRectangle(scene, config) {
+      var _this;
+      _classCallCheck(this, StatesBarRectangle);
+      if (config === undefined) {
+        config = {};
+      }
+      if (!config.hasOwnProperty('value')) {
+        config.value = 0;
+      }
+      if (!config.hasOwnProperty('hover.bar')) {
+        config['hover.bar'] = true;
+      }
+      if (!config.hasOwnProperty('easeDuration')) {
+        config.easeDuration = 200;
+      }
+      if (!config.hasOwnProperty('ease')) {
+        config.ease = 'Quad';
+      }
+      SetValue(config, 'easeValue.duration', config.easeDuration);
+      SetValue(config, 'easeValue.ease', config.ease);
+      _this = _callSuper(this, StatesBarRectangle, [scene, config]);
+      _this.type = 'rexStatesBarRectangleShape';
+      _this.barState = false;
+      config.style = _assertThisInitialized(_this);
+      config.propertiesMap = PropertiesMap$1;
+      _this.addStyleManager(config);
+      delete config.style;
+      delete config.propertiesMap;
+      return _this;
+    }
+    _createClass(StatesBarRectangle, [{
+      key: "bar",
+      get: function get() {
+        return this.barState;
+      },
+      set: function set(value) {
+        value = !!value;
+        if (this.barState === value) {
+          return;
+        }
+        this.barState = value;
+        this.easeValueTo(this.barState ? 1 : 0);
+      }
+    }]);
+    return StatesBarRectangle;
+  }(LineProgress$1);
+  var PropertiesMap$1 = {
+    color: 'trackColor',
+    strokeColor: 'trackStrokeColor',
+    strokeWidth: 'trackStrokeThickness'
+
+    // barColor: 'barColor'
+  };
+  Object.assign(StatesBarRectangle.prototype, HelperMethods);
+
+  var Style$3 = /*#__PURE__*/function (_ComponentBase) {
+    _inherits(Style, _ComponentBase);
+    function Style(gameObject, style) {
+      var _this;
+      _classCallCheck(this, Style);
+      _this = _callSuper(this, Style, [gameObject]);
+      // this.parent = gameObject;
+
+      return _possibleConstructorReturn(_this, new Proxy(_assertThisInitialized(_this), _assertThisInitialized(_this)));
+    }
+    _createClass(Style, [{
+      key: "get",
+      value: function get(target, prop) {
+        if (HasProperty(target, prop)) {
+          return target[prop];
+        }
+        var gameObject = target.parent;
+        if (HasProperty(gameObject, prop)) {
+          return gameObject[prop];
+        }
+      }
+    }, {
+      key: "set",
+      value: function set(target, prop, value) {
+        if (HasProperty(target, prop)) {
+          target[prop] = value;
+        } else if (HasProperty(target.parent, prop)) {
+          target.parent[prop] = value;
+        }
+        return true;
+      }
+    }, {
+      key: "key",
+      get: function get() {
+        return this.parent.texture.key;
+      },
+      set: function set(value) {
+        this.parent.setTexture(value, this.frame);
+      }
+    }, {
+      key: "fontSize",
+      get: function get() {
+        return this.parent.fontSize;
+      },
+      set: function set(value) {
+        this.parent.setFontSize(value);
+      }
+    }, {
+      key: "tint",
+      get: function get() {
+        return this.parent.tintTopLeft;
+      },
+      set: function set(value) {
+        this.parent.setTint(value);
+      }
+    }, {
+      key: "letterSpacing",
+      get: function get() {
+        return this.parent.letterSpacing;
+      },
+      set: function set(value) {
+        this.parent.setLetterSpacing(value);
+      }
+    }, {
+      key: "lineSpacing",
+      get: function get() {
+        return this.parent.lineSpacing;
+      },
+      set: function set(value) {
+        this.parent.setLineSpacing(value);
+      }
+    }]);
+    return Style;
+  }(ComponentBase);
 
   var PhaserBitmapText = Phaser.GameObjects.BitmapText;
   var GetValue$1F = Phaser.Utils.Objects.GetValue;
@@ -63515,7 +63572,9 @@
       if (config.hasOwnProperty('$type')) {
         gameObjectType = config.$type;
       } else {
-        if (config.hasOwnProperty('leftWidth')) {
+        if (config.hasOwnProperty('barColor')) {
+          gameObjectType = 'bar';
+        } else if (config.hasOwnProperty('leftWidth')) {
           gameObjectType = 'nineSlice';
         } else if (config.hasOwnProperty('key')) {
           gameObjectType = 'image';
@@ -63524,6 +63583,9 @@
     }
     var gameObject;
     switch (gameObjectType) {
+      case 'bar':
+        gameObject = new StatesBarRectangle(scene, config);
+        break;
       case 'image':
         gameObject = new StatesImage(scene, config);
         break;
@@ -66950,6 +67012,7 @@
       } else {
         if (config.hasOwnProperty('key')) {
           gameObjectType = 'bitmaptext';
+          config.font = config.key;
         }
       }
     }

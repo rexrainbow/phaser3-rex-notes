@@ -13,6 +13,7 @@ var CreateText = function (scene, config) {
         } else {
             if (config.hasOwnProperty('key')) {
                 gameObjectType = 'bitmaptext';
+                config.font = config.key;
             }
         }
     }

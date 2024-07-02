@@ -9,6 +9,7 @@ Style in plain object for creating image, or text.
 Create [Round-rectangle](shape-roundrectangle.md), [Nine-slice](nineslice.md), [Nine-patch](ninepatch.md), or [Image](image.md) for background.
 
 - Create [Round-rectangle](shape-roundrectangle.md), if [style](ui-style.md#style-of-round-rectangle) has `color`, or `strokeColor` key. Default type of Background.
+- Create [Line-progress](shape-lineprogress.md), if [style](ui-style.md#style-of-nine-slice) has `bar` key.
 - Create [Nine-slice](nineslice.md), if [style](ui-style.md#style-of-nine-slice) has `leftWidth` key.
 - Create [Nine-patch](ninepatch.md), if [style](ui-style.md#style-of-nine-patch) has `leftWidth` and `stretchMode` key.
 - Create [Image](image.md), if [style](ui-style.md#style-of-image-game-object) has `key` key.
@@ -196,8 +197,6 @@ Create [Text](text.md), [BBCodetext](bbcodetext.md), [BitmapText](bitmaptext.md)
 
     color: 0xffffff,
     // alpha: 1,
-    // flipX: false,
-    // flipY: false,
     // origin:
     // originX: 
     // originY:
@@ -228,6 +227,62 @@ Create [Text](text.md), [BBCodetext](bbcodetext.md), [BitmapText](bitmaptext.md)
     // 'hover.xxx': ...
 
     // Style override in disable state
+    // 'disable.color': undefined,
+    // 'disable.alpha': undefined,
+    // 'disable.strokeColor': undefined,
+    // 'disable.strokeAlpha': undefined,
+    // 'disable.strokeWidth': undefined,
+    // 'disable.radius': undefined,
+    // 'disable.xxx': ...
+}
+```
+
+## Style of bar-rectangle
+
+Bar-rectangle = Line-progress
+
+```javascript
+{
+    // $type: 'bar',
+
+    barColor: 0xffffff,
+    // easeDuration: 200,
+    // ease: 'Quad',
+
+    // alpha: 1,
+    // origin:
+    // originX: 
+    // originY:
+    // color: 0xffffff,
+    // strokeColor: 0xffffff,
+    // strokeAlpha: 1,
+    // strokeWidth: 2,    
+    // width: 0,
+    // height: 0,
+
+    // Style override in active state
+    // 'active.barColor': undefined,
+    // 'active.color': undefined,
+    // 'active.alpha': undefined,
+    // 'active.strokeColor': undefined,
+    // 'active.strokeAlpha': undefined,
+    // 'active.strokeWidth': undefined,
+    // 'active.radius': undefined,
+    // 'active.xxx': ...
+
+    // Style override in hover state
+    // 'hover.barColor': undefined,
+    // 'hover.color': undefined,
+    // 'hover.alpha': undefined,
+    // 'hover.strokeColor': undefined,
+    // 'hover.strokeAlpha': undefined,
+    // 'hover.strokeWidth': undefined,
+    // 'hover.radius': undefined,
+    // 'hover.xxx': ...,
+    // 'hover.bar: true,
+
+    // Style override in disable state
+    // 'disable.barColor': undefined,
     // 'disable.color': undefined,
     // 'disable.alpha': undefined,
     // 'disable.strokeColor': undefined,
