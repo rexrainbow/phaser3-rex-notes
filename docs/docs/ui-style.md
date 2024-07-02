@@ -9,7 +9,7 @@ Style in plain object for creating image, or text.
 Create [Round-rectangle](shape-roundrectangle.md), [Nine-slice](nineslice.md), [Nine-patch](ninepatch.md), or [Image](image.md) for background.
 
 - Create [Round-rectangle](shape-roundrectangle.md), if [style](ui-style.md#style-of-round-rectangle) has `color`, or `strokeColor` key. Default type of Background.
-- Create [Line-progress](shape-lineprogress.md), if [style](ui-style.md#style-of-nine-slice) has `bar` key.
+- Create [Line-progress](shape-lineprogress.md), if [style](ui-style.md#style-of-bar-rectangle) has `bar` key.
 - Create [Nine-slice](nineslice.md), if [style](ui-style.md#style-of-nine-slice) has `leftWidth` key.
 - Create [Nine-patch](ninepatch.md), if [style](ui-style.md#style-of-nine-patch) has `leftWidth` and `stretchMode` key.
 - Create [Image](image.md), if [style](ui-style.md#style-of-image-game-object) has `key` key.
@@ -248,6 +248,7 @@ Bar-rectangle = Line-progress
     barColor: 0xffffff,
     // easeDuration: 200,
     // ease: 'Quad',
+    // rtl: false,
 
     // alpha: 1,
     // origin:
