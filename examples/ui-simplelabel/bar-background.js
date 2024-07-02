@@ -23,7 +23,7 @@ class Demo extends Phaser.Scene {
     create() {
         var style = {
             background: {
-                key: 'bar',
+                $type: 'bar',
                 barColor: COLOR_MAIN,
             },
             icon: {

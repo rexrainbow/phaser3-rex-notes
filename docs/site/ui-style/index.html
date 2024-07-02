@@ -9631,6 +9631,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#style-of-bar-rectangle" class="md-nav__link">
+    Style of bar-rectangle
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#style-of-text-game-object" class="md-nav__link">
     Style of Text game object
   </a>
@@ -9690,6 +9697,7 @@
 <p>Create <a href="../shape-roundrectangle/">Round-rectangle</a>, <a href="../nineslice/">Nine-slice</a>, <a href="../ninepatch/">Nine-patch</a>, or <a href="../image/">Image</a> for background.</p>
 <ul>
 <li>Create <a href="../shape-roundrectangle/">Round-rectangle</a>, if <a href="./#style-of-round-rectangle">style</a> has <code>color</code>, or <code>strokeColor</code> key. Default type of Background.</li>
+<li>Create <a href="../shape-lineprogress/">Line-progress</a>, if <a href="./#style-of-nine-slice">style</a> has <code>bar</code> key.</li>
 <li>Create <a href="../nineslice/">Nine-slice</a>, if <a href="./#style-of-nine-slice">style</a> has <code>leftWidth</code> key.</li>
 <li>Create <a href="../ninepatch/">Nine-patch</a>, if <a href="./#style-of-nine-patch">style</a> has <code>leftWidth</code> and <code>stretchMode</code> key.</li>
 <li>Create <a href="../image/">Image</a>, if <a href="./#style-of-image-game-object">style</a> has <code>key</code> key.</li>
@@ -9864,8 +9872,6 @@
 
 <span class="w">    </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="mh">0xffffff</span><span class="p">,</span>
 <span class="w">    </span><span class="c1">// alpha: 1,</span>
-<span class="w">    </span><span class="c1">// flipX: false,</span>
-<span class="w">    </span><span class="c1">// flipY: false,</span>
 <span class="w">    </span><span class="c1">// origin:</span>
 <span class="w">    </span><span class="c1">// originX: </span>
 <span class="w">    </span><span class="c1">// originY:</span>
@@ -9896,6 +9902,58 @@
 <span class="w">    </span><span class="c1">// &#39;hover.xxx&#39;: ...</span>
 
 <span class="w">    </span><span class="c1">// Style override in disable state</span>
+<span class="w">    </span><span class="c1">// &#39;disable.color&#39;: undefined,</span>
+<span class="w">    </span><span class="c1">// &#39;disable.alpha&#39;: undefined,</span>
+<span class="w">    </span><span class="c1">// &#39;disable.strokeColor&#39;: undefined,</span>
+<span class="w">    </span><span class="c1">// &#39;disable.strokeAlpha&#39;: undefined,</span>
+<span class="w">    </span><span class="c1">// &#39;disable.strokeWidth&#39;: undefined,</span>
+<span class="w">    </span><span class="c1">// &#39;disable.radius&#39;: undefined,</span>
+<span class="w">    </span><span class="c1">// &#39;disable.xxx&#39;: ...</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="style-of-bar-rectangle">Style of bar-rectangle<a class="headerlink" href="#style-of-bar-rectangle" title="Permanent link">&para;</a></h2>
+<p>Bar-rectangle = Line-progress</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="c1">// $type: &#39;bar&#39;,</span>
+
+<span class="w">    </span><span class="nx">barColor</span><span class="o">:</span><span class="w"> </span><span class="mh">0xffffff</span><span class="p">,</span>
+<span class="w">    </span><span class="c1">// easeDuration: 200,</span>
+<span class="w">    </span><span class="c1">// ease: &#39;Quad&#39;,</span>
+
+<span class="w">    </span><span class="c1">// alpha: 1,</span>
+<span class="w">    </span><span class="c1">// origin:</span>
+<span class="w">    </span><span class="c1">// originX: </span>
+<span class="w">    </span><span class="c1">// originY:</span>
+<span class="w">    </span><span class="c1">// color: 0xffffff,</span>
+<span class="w">    </span><span class="c1">// strokeColor: 0xffffff,</span>
+<span class="w">    </span><span class="c1">// strokeAlpha: 1,</span>
+<span class="w">    </span><span class="c1">// strokeWidth: 2,    </span>
+<span class="w">    </span><span class="c1">// width: 0,</span>
+<span class="w">    </span><span class="c1">// height: 0,</span>
+
+<span class="w">    </span><span class="c1">// Style override in active state</span>
+<span class="w">    </span><span class="c1">// &#39;active.barColor&#39;: undefined,</span>
+<span class="w">    </span><span class="c1">// &#39;active.color&#39;: undefined,</span>
+<span class="w">    </span><span class="c1">// &#39;active.alpha&#39;: undefined,</span>
+<span class="w">    </span><span class="c1">// &#39;active.strokeColor&#39;: undefined,</span>
+<span class="w">    </span><span class="c1">// &#39;active.strokeAlpha&#39;: undefined,</span>
+<span class="w">    </span><span class="c1">// &#39;active.strokeWidth&#39;: undefined,</span>
+<span class="w">    </span><span class="c1">// &#39;active.radius&#39;: undefined,</span>
+<span class="w">    </span><span class="c1">// &#39;active.xxx&#39;: ...</span>
+
+<span class="w">    </span><span class="c1">// Style override in hover state</span>
+<span class="w">    </span><span class="c1">// &#39;hover.barColor&#39;: undefined,</span>
+<span class="w">    </span><span class="c1">// &#39;hover.color&#39;: undefined,</span>
+<span class="w">    </span><span class="c1">// &#39;hover.alpha&#39;: undefined,</span>
+<span class="w">    </span><span class="c1">// &#39;hover.strokeColor&#39;: undefined,</span>
+<span class="w">    </span><span class="c1">// &#39;hover.strokeAlpha&#39;: undefined,</span>
+<span class="w">    </span><span class="c1">// &#39;hover.strokeWidth&#39;: undefined,</span>
+<span class="w">    </span><span class="c1">// &#39;hover.radius&#39;: undefined,</span>
+<span class="w">    </span><span class="c1">// &#39;hover.xxx&#39;: ...,</span>
+<span class="w">    </span><span class="c1">// &#39;hover.bar: true,</span>
+
+<span class="w">    </span><span class="c1">// Style override in disable state</span>
+<span class="w">    </span><span class="c1">// &#39;disable.barColor&#39;: undefined,</span>
 <span class="w">    </span><span class="c1">// &#39;disable.color&#39;: undefined,</span>
 <span class="w">    </span><span class="c1">// &#39;disable.alpha&#39;: undefined,</span>
 <span class="w">    </span><span class="c1">// &#39;disable.strokeColor&#39;: undefined,</span>
