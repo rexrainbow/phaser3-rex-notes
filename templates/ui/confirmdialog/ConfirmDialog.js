@@ -1,6 +1,6 @@
 import Dialog from '../dialog/Dialog.js';
 import Methods from './methods/Methods.js';
-import RegisterEvents from './methods/RegisterEvents.js';
+import RegisterEvents from '../dialog/utils/RegisterSimpleLabelButtonEvents.js';
 import DeepClone from '../../../plugins/utils/object/DeepClone.js';
 import CreateBackground from '../utils/build/CreateBackground.js';
 import CreateLabel from '../utils/build/CreateLabel.js';

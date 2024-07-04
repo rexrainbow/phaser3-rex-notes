@@ -3,6 +3,7 @@ import Methods from './methods/Methods.js';
 import CreateContent from './methods/CreateContent.js';
 import CreateBackground from '../utils/build/CreateBackground.js';
 import CreateLabel from '../utils/build/CreateLabel.js';
+import RegisterEvents from '../dialog/utils/RegisterSimpleLabelButtonEvents.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -41,7 +42,29 @@ class NameInputDialog extends Dialog {
         this.addChildrenMap('firstNameInput', namesSizerChildrenMap.firstNameInput);
         this.addChildrenMap('lastNameTitle', namesSizerChildrenMap.lastNameTitle);
         this.addChildrenMap('lastNameInput', namesSizerChildrenMap.lastNameInput);
+
+        // Interactive
+        RegisterEvents.call(this);
+
+        this.modalStyle = config.modal || {};
     }
+
+    get firstName() {
+        return this.childrenMap.firstNameInput.text;
+    }
+
+    set firstName(value) {
+        this.childrenMap.firstNameInput.setText(value);
+    }
+
+    get lastName() {
+        return this.childrenMap.lastNameInput.text;
+    }
+
+    set lastName(value) {
+        this.childrenMap.lastNameInput.setText(value);
+    }
+
 }
 
 

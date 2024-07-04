@@ -11,10 +11,6 @@ var CreateContent = function (scene, config, creators) {
     var nameSizer = new Sizer(scene, {
         orientation: layoutMode,
         space: {
-            left: GetValue(config, 'space.namesLeft', 0),
-            right: GetValue(config, 'space.namesRight', 0),
-            top: GetValue(config, 'space.namesTop', 0),
-            bottom: GetValue(config, 'space.namesBottom', 0),
             item: GetValue(config, 'space.names', 0)
         }
     });

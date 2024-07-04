@@ -1,5 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import NameInputDialog from '../../templates/ui/nameinputdialog/NameInputDialog.js';
+import UIPlugin from '../../templates/ui/ui-plugin.js';
 
 const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
@@ -15,7 +15,9 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var dialog = new NameInputDialog(this, {
+        var print = this.add.text(0, 0, '').setDepth(1);
+
+        var style = {
             x: 400, y: 300,
             width: 400,
             space: {
@@ -56,18 +58,22 @@ class Demo extends Phaser.Scene {
                 background: { color: COLOR_DARK, radius: 5 },
                 text: { fontSize: 20 },
             }
-        })
-
-        this.add.existing(dialog);
-
-        dialog
+        }
+        var dialog = this.rexUI.add.nameInputDialog(style)
             .resetDisplayContent({
                 title: 'My name is',
                 firstName: 'BBB',
                 lastName: 'AAA',
                 action: 'OK'
             })
-            .layout();
+            .layout()
+            .modalPromise()
+            .then(function (data) {
+                print.text = `\
+First name: ${data.firstName}
+Last name : ${data.lastName}
+`
+            })
     }
 
     update() { }
@@ -82,7 +88,14 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        scene: [{
+            key: 'rexUI',
+            plugin: UIPlugin,
+            mapping: 'rexUI'
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);
