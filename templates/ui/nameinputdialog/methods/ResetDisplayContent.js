@@ -69,11 +69,11 @@ var ResetContent = function (config) {
 
 var ResetActions = function (config) {
     var action = this.childrenMap.actions[0];
-    if (config.action === null) {
+    if (config.button === null) {
         this.hide(action);
     } else {
         this.show(action);
-        action.resetDisplayContent(config.action);
+        action.resetDisplayContent(config.button);
     }
 }
 

@@ -19,9 +19,9 @@ class Demo extends Phaser.Scene {
 
         var style = {
             x: 400, y: 300,
-            width: 400,
+            // width: 400,
             space: {
-                left: 10, right: 10, top: 10, bottom: 10,
+                left: 20, right: 20, top: 20, bottom: 20,
                 item: 20,
                 names: 20,
             },
@@ -32,11 +32,8 @@ class Demo extends Phaser.Scene {
                 text: { fontSize: 24 }
             },
 
-            nameTitle: {
-                text: { fontSize: 20 }
-            },
-
             nameInput: {
+                width: 150,
                 background: {
                     color: COLOR_DARK
                 },
@@ -53,18 +50,25 @@ class Demo extends Phaser.Scene {
                 }
             },
 
-            action: {
+            button: {
                 space: { left: 5, right: 5, top: 5, bottom: 5 },
-                background: { color: COLOR_DARK, radius: 5 },
+
+                background: {
+                    color: COLOR_DARK,
+                    radius: 5,
+                    'hover.strokeColor': 0xffffff,
+                },
+
                 text: { fontSize: 20 },
             }
         }
         var dialog = this.rexUI.add.nameInputDialog(style)
             .resetDisplayContent({
-                title: 'My name is',
+                title: 'My name is...',
+                button: 'OK',
+
                 firstName: 'BBB',
                 lastName: 'AAA',
-                action: 'OK'
             })
             .layout()
             .modalPromise()

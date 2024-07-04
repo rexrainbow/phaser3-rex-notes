@@ -54,7 +54,7 @@ class RoundRectangle extends PolygnBase {
 
         this.setFillStyle(fillColor, fillAlpha);
 
-        if ((strokeColor !== undefined) && (strokeWidth === undefined)) {
+        if (strokeWidth === undefined) {
             strokeWidth = 2;
         }
         this.setStrokeStyle(strokeWidth, strokeColor, strokeAlpha);

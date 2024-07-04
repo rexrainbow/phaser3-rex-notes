@@ -19,12 +19,6 @@ var CreateContent = function (scene, config, creators) {
     // First name
     var firstNameSizer = new Sizer(scene, { orientation: 'x' });
     scene.add.existing(firstNameSizer);
-    nameSizer.add(firstNameSizer,
-        {
-            expand: (isHorizontalLayout) ? false : true,
-            proportion: (isHorizontalLayout) ? 1 : 0,
-        }
-    )
 
     var firstNameTitleConfig = GetValue(config, 'firstNameTitle', config.nameTitle);
     var firstNameTitle = CreateLabel(scene, firstNameTitleConfig, creators.firstNameTitle || creators.nameTitle);
@@ -38,22 +32,17 @@ var CreateContent = function (scene, config, creators) {
 
     var firstNameInputConfig = GetValue(config, 'firstNameInput', config.nameInput);
     var firstNameInput = CreateInputText(scene, firstNameInputConfig, creators.firstNameInput || creators.nameInput);
+    var expandFirstNameSizer = !firstNameInputConfig.hasOwnProperty('width');
     firstNameSizer.add(firstNameInput,
         {
             expand: true,
-            proportion: 1,
+            proportion: (expandFirstNameSizer) ? 1 : 0,
         }
     );
 
     // Last name
     var lastNameSizer = new Sizer(scene, { orientation: 'x' });
     scene.add.existing(lastNameSizer);
-    nameSizer.add(lastNameSizer,
-        {
-            expand: (isHorizontalLayout) ? false : true,
-            proportion: (isHorizontalLayout) ? 1 : 0,
-        }
-    )
 
     var lastNameTitleConfig = GetValue(config, 'lastNameTitle', config.nameTitle);
     var lastNameTitle = CreateLabel(scene, lastNameTitleConfig, creators.lastNameTitle || creators.nameTitle);
@@ -68,12 +57,44 @@ var CreateContent = function (scene, config, creators) {
 
     var lastNameInputConfig = GetValue(config, 'firstNameInput', config.nameInput);
     var lastNameInput = CreateInputText(scene, lastNameInputConfig, creators.lastNameInput || creators.nameInput);
+    var expandLastNameSizer = !lastNameInputConfig.hasOwnProperty('width');
     lastNameSizer.add(lastNameInput,
         {
             expand: true,
-            proportion: 1,
+            proportion: (expandLastNameSizer) ? 1 : 0,
         }
     );
+
+
+    if (isHorizontalLayout) {
+        nameSizer
+            .add(firstNameSizer,
+                {
+                    expand: true,
+                    proportion: (expandFirstNameSizer) ? 1 : 0,
+                }
+            )
+            .add(lastNameSizer,
+                {
+                    expand: true,
+                    proportion: (expandLastNameSizer) ? 1 : 0,
+                }
+            )
+    } else {
+        nameSizer
+            .add(firstNameSizer,
+                {
+                    expand: expandFirstNameSizer,
+                    proportion: 0,
+                }
+            )
+            .add(lastNameSizer,
+                {
+                    expand: expandLastNameSizer,
+                    proportion: 0,
+                }
+            )
+    }
 
     nameSizer.addChildrenMap('firstNameTitle', firstNameTitle);
     nameSizer.addChildrenMap('firstNameInput', firstNameInput);

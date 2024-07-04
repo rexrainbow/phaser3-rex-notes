@@ -31,7 +31,7 @@ class NameInputDialog extends Dialog {
 
         // Actions
         config.actions = [
-            CreateLabel(scene, config.action, creators.action)
+            CreateLabel(scene, config.button, creators.button)
         ]
 
         super(scene, config);
