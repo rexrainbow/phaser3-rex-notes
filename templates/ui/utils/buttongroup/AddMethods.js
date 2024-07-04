@@ -34,6 +34,11 @@ export default {
                 .on('up', function (buttonBehavior, gameObject, pointer, event) {
                     this.fireEvent('button.up', gameObject, pointer, event);
                 }, this)
+
+            if (gameObject.isRexContainerLite) {
+                // Send touch detection sensor to back
+                gameObject.sendChildToBack(gameObject);
+            }
         }
 
         if (this.buttonsType) {

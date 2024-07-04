@@ -145,6 +145,11 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
         }
         scrollerConfig.orientation = (isAxisY) ? 0 : 1;
         scroller = new Scroller(child, scrollerConfig);
+
+        if (child.isRexContainerLite) {
+            // Send touch detection sensor to back
+            child.sendChildToBack(child);
+        }
     }
 
     var mouseWheelScrollerConfig = GetValue(config, ((isScrollXYMode) ? `mouseWheelScroller${axis}` : 'mouseWheelScroller'), false),

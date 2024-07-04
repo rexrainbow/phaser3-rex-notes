@@ -20,11 +20,7 @@ class ConfirmDialog extends Dialog {
         }
 
         var createBackground = GetValue(creators, 'background', CreateBackground);
-        if (createBackground) {
-            config.background = createBackground(scene, config.background);
-        } else {
-            delete config.background;
-        }
+        config.background = createBackground(scene, config.background);
 
         config.title = CreateLabel(scene, config.title, creators.title);
 

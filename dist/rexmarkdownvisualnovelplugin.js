@@ -46881,7 +46881,7 @@
     },
     bringChildToTop: function bringChildToTop(child) {
       var gameObjects;
-      if (child.isRexContainerLite) {
+      if (child !== this && child.isRexContainerLite) {
         gameObjects = child.getAllChildren([child]);
         gameObjects = FilterDisplayGameObjects(gameObjects);
         gameObjects = SortGameObjectsByDepth(gameObjects, false);
@@ -46894,7 +46894,10 @@
       var topChild = children[children.length - 1];
       for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
         var gameObject = gameObjects[i];
-        if (topChild === gameObject || topChild.displayList !== gameObject.displayList) {
+        if (topChild === gameObject) {
+          continue;
+        }
+        if (gameObject !== this && topChild.displayList !== gameObject.displayList) {
           continue;
         }
         topChild.displayList.moveAbove(gameObject, topChild);
@@ -46904,7 +46907,7 @@
     },
     sendChildToBack: function sendChildToBack(child) {
       var gameObjects;
-      if (child.isRexContainerLite) {
+      if (child !== this && child.isRexContainerLite) {
         gameObjects = child.getAllChildren([child]);
         gameObjects = FilterDisplayGameObjects(gameObjects);
         gameObjects = SortGameObjectsByDepth(gameObjects, false);
@@ -46917,7 +46920,10 @@
       var bottomChild = children[0];
       for (var i = gameObjects.length - 1; i >= 0; i--) {
         var gameObject = gameObjects[i];
-        if (bottomChild === gameObject || bottomChild.displayList !== gameObject.displayList) {
+        if (bottomChild === gameObject) {
+          continue;
+        }
+        if (gameObject !== this && bottomChild.displayList !== gameObject.displayList) {
           continue;
         }
         bottomChild.displayList.moveBelow(gameObject, bottomChild);
@@ -65497,6 +65503,10 @@
       }
       scrollerConfig.orientation = isAxisY ? 0 : 1;
       scroller = new Scroller(child, scrollerConfig);
+      if (child.isRexContainerLite) {
+        // Send touch detection sensor to back
+        child.sendChildToBack(child);
+      }
     }
     var mouseWheelScrollerConfig = GetValue$1o(config, isScrollXYMode ? "mouseWheelScroller".concat(axis) : 'mouseWheelScroller', false),
       mouseWheelScroller;
@@ -68988,6 +68998,10 @@
         }, this).on('up', function (buttonBehavior, gameObject, pointer, event) {
           this.fireEvent('button.up', gameObject, pointer, event);
         }, this);
+        if (gameObject.isRexContainerLite) {
+          // Send touch detection sensor to back
+          gameObject.sendChildToBack(gameObject);
+        }
       }
       if (this.buttonsType) {
         if (gameObject.name === undefined) {
@@ -70782,11 +70796,7 @@
         creators = {};
       }
       var createBackground = GetValue$13(creators, 'background', CreateBackground$2);
-      if (createBackground) {
-        config.background = createBackground(scene, config.background);
-      } else {
-        delete config.background;
-      }
+      config.background = createBackground(scene, config.background);
       config.title = CreateLabel(scene, config.title, creators.title);
       config.content = CreateContent(scene, config.content, creators.content);
       if (config.content instanceof TextArea) {
