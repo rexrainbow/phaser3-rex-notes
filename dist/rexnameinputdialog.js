@@ -15853,11 +15853,9 @@
     config.anyTouchClose = false;
     config.manualClose = false;
     var self = this;
-    var onCloseWrap = function onCloseWrap() {
-      var data = {
-        firstName: self.firstName,
-        lastName: self.lastName
-      };
+    var onCloseWrap = function onCloseWrap(data) {
+      data.firstName = self.firstName;
+      data.lastName = self.lastName;
       self.emit('confirm', data);
       if (onClose) {
         onClose(data);
@@ -35013,7 +35011,7 @@
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
   var CreateContent = function CreateContent(scene, config, creators) {
     // Names-sizer as content
-    var layoutMode = GetValue$1(config, 'layoutMode', 0);
+    var layoutMode = GetOrientationMode(GetValue$1(config, 'layoutMode', 0));
     var isHorizontalLayout = layoutMode === 0;
     var nameSizer = new Sizer(scene, {
       orientation: layoutMode,
@@ -35031,6 +35029,8 @@
     var firstNameTitleConfig = GetValue$1(config, 'firstNameTitle', config.nameTitle);
     var firstNameTitle = CreateLabel(scene, firstNameTitleConfig, creators.firstNameTitle || creators.nameTitle);
     firstNameSizer.add(firstNameTitle, {
+      expand: true,
+      proportion: GetValue$1(config, 'proportion.firstNameTitle', 0),
       padding: {
         right: GetValue$1(config, 'space.firstNameTitle', 0)
       }
@@ -35051,6 +35051,8 @@
     var lastNameTitleConfig = GetValue$1(config, 'lastNameTitle', config.nameTitle);
     var lastNameTitle = CreateLabel(scene, lastNameTitleConfig, creators.lastNameTitle || creators.nameTitle);
     lastNameSizer.add(lastNameTitle, {
+      expand: true,
+      proportion: GetValue$1(config, 'proportion.lastNameTitle', 0),
       padding: {
         right: GetValue$1(config, 'space.lastNameTitle', 0)
       }
@@ -35063,18 +35065,28 @@
       proportion: expandLastNameSizer ? 1 : 0
     });
     if (isHorizontalLayout) {
+      // First | Last
+
+      var defaultFirstNameProportion = expandFirstNameSizer ? 1 : 0;
+      var firstNameProportion = GetValue$1(config, 'proportion.firstName', defaultFirstNameProportion);
       nameSizer.add(firstNameSizer, {
         expand: true,
-        proportion: expandFirstNameSizer ? 1 : 0
-      }).add(lastNameSizer, {
+        proportion: firstNameProportion
+      });
+      var defaultLastNameProportion = expandLastNameSizer ? 1 : 0;
+      var lastNameProportion = GetValue$1(config, 'proportion.lastName', defaultLastNameProportion);
+      nameSizer.add(lastNameSizer, {
         expand: true,
-        proportion: expandLastNameSizer ? 1 : 0
+        proportion: lastNameProportion
       });
     } else {
+      // First        
+      // Last
       nameSizer.add(firstNameSizer, {
         expand: expandFirstNameSizer,
         proportion: 0
-      }).add(lastNameSizer, {
+      });
+      nameSizer.add(lastNameSizer, {
         expand: expandLastNameSizer,
         proportion: 0
       });
@@ -35163,12 +35175,24 @@
         this.childrenMap.firstNameInput.setText(value);
       }
     }, {
+      key: "setFirstName",
+      value: function setFirstName(value) {
+        this.firstName = value;
+        return this;
+      }
+    }, {
       key: "lastName",
       get: function get() {
         return this.childrenMap.lastNameInput.text;
       },
       set: function set(value) {
         this.childrenMap.lastNameInput.setText(value);
+      }
+    }, {
+      key: "setLastName",
+      value: function setLastName(value) {
+        this.lastName = value;
+        return this;
       }
     }]);
     return NameInputDialog;

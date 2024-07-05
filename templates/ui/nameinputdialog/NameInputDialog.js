@@ -57,12 +57,22 @@ class NameInputDialog extends Dialog {
         this.childrenMap.firstNameInput.setText(value);
     }
 
+    setFirstName(value) {
+        this.firstName = value;
+        return this;
+    }
+
     get lastName() {
         return this.childrenMap.lastNameInput.text;
     }
 
     set lastName(value) {
         this.childrenMap.lastNameInput.setText(value);
+    }
+
+    setLastName(value) {
+        this.lastName = value;
+        return this;
     }
 
 }

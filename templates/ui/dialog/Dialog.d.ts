@@ -108,7 +108,7 @@ declare namespace Dialog {
         defaultBehavior?: boolean,
     }
 
-    type CloseEventDataType = {
+    interface ICloseEventData {
         index: number,
         text: string,
         button: Phaser.GameObjects.GameObject,
@@ -116,7 +116,7 @@ declare namespace Dialog {
         value: any
     }
 
-    type OnModalCloseCallbackType = (data: CloseEventDataType | Dialog) => void;
+    type OnModalCloseCallbackType = (data: ICloseEventData | Dialog) => void;
 }
 
 declare class Dialog extends Sizer {
@@ -310,7 +310,7 @@ declare class Dialog extends Sizer {
 
     modalPromise(
         config?: Dialog.IModalConfig,
-    ): Promise<Dialog.CloseEventDataType | Dialog>;
+    ): Promise<Dialog.ICloseEventData | Dialog>;
 
-    modalClose(closeEventData?: Dialog.CloseEventDataType): this;
+    modalClose(closeEventData?: Dialog.ICloseEventData): this;
 }

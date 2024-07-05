@@ -1,4 +1,5 @@
 import Dialog from '../dialog/Dialog';
+import Sizer from '../sizer/Sizer';
 import BaseSizer from '../basesizer/BaseSizer';
 import { GeneralCreateGameObjectCallbackType } from '../utils/build/GeneralCreateGameObjectCallbackType';
 import CreateBackground from '../utils/build/CreateBackground';
@@ -45,8 +46,10 @@ declare namespace NameInputDialog {
 
         title?: SimpleLabel.IConfig,
 
+        layoutMode?: Sizer.OrientationTypes,
+
         firstNameTitle?: SimpleLabel.IConfig,
-    
+
         firstNameInput?: InputText.IConfig,
 
         lastNameTitle?: SimpleLabel.IConfig,
@@ -56,8 +59,11 @@ declare namespace NameInputDialog {
         button?: SimpleLabel.IConfig,
 
         proportion?: {
-            title?: number,
-            actions?: number,
+            firstName?: number,
+            firstNameTitle?: number,
+
+            lastName?: number,
+            lastNameTitle?: number,
         },
 
         expand?: {
@@ -97,6 +103,16 @@ declare namespace NameInputDialog {
         lastNameTitle?: SimpleLabel.ICreatorsConfig,
         button?: SimpleLabel.ICreatorsConfig,
     }
+
+    interface IModalConfig extends Dialog.IModalConfig {
+    }
+
+    interface ICloseEventData extends Dialog.ICloseEventData {
+        firstName: string,
+        lastName: string,
+    }
+
+    type OnModalCloseCallbackType = (data: ICloseEventData | NameInputDialog) => void;
 }
 
 declare class NameInputDialog extends Dialog {
@@ -106,7 +122,28 @@ declare class NameInputDialog extends Dialog {
         creators?: NameInputDialog.ICreatorsConfig
     );
 
+    setFirstName(value: string): this;
+    firstName: string;
+
+    setlastName(value: string): this;
+    lastName: string;
+
     resetDisplayContent(
         config?: NameInputDialog.IResetDisplayContentConfig
     ): this;
+
+    modal(
+        config?: NameInputDialog.IModalConfig,
+        onClose?: NameInputDialog.OnModalCloseCallbackType
+    ): this;
+
+    modal(
+        onClose?: NameInputDialog.OnModalCloseCallbackType
+    ): this;
+
+    modalPromise(
+        config?: NameInputDialog.IModalConfig,
+    ): Promise<NameInputDialog.ICloseEventData | NameInputDialog>;
+
+    modalClose(closeEventData?: NameInputDialog.ICloseEventData): this;
 }

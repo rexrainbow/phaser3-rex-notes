@@ -18,11 +18,9 @@ var Modal = function (config, onClose) {
     config.manualClose = false;
 
     var self = this;
-    var onCloseWrap = function () {
-        var data = {
-            firstName: self.firstName,
-            lastName: self.lastName,
-        };
+    var onCloseWrap = function (data) {
+        data.firstName = self.firstName;
+        data.lastName = self.lastName;
 
         self.emit('confirm', data);
         if (onClose) {
