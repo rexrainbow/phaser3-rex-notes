@@ -580,7 +580,7 @@ See [dialog](ui-dialog.md), [sizer object](ui-sizer.md), [base sizer object](ui-
       }, scope);
     ```
     - `data` : See [modal](ui-confirmdialog.md#modal)
-- Click confirm button
+- Click cancel button
     ```javascript
     dialog.on('cancel', function (data) {
           // var index = data.index;

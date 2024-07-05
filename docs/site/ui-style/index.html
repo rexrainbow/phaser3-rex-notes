@@ -8422,6 +8422,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ui-nameinputdialog/" class="md-nav__link">
+        Name input dialog
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -9672,6 +9686,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#style-of-canvasinput" class="md-nav__link">
+    Style of CanvasInput
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -10267,6 +10288,65 @@
         - <a href="./#style-of-background">Style of Background</a> : Create round-rectangle, nine-slice, or image as thumb element.
         - <code>null</code> : Don't create any game object.  <br />
     - <code>null</code>, or <code>false</code> : Don't create any game object for slider.</p>
+<h2 id="style-of-canvasinput">Style of CanvasInput<a class="headerlink" href="#style-of-canvasinput" title="Permanent link">&para;</a></h2>
+<p><a href="../canvasinput/#create-instance">CanvasInput</a></p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nx">width</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="nx">height</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+
+<span class="w">    </span><span class="nx">background</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">color2</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">horizontalGradient</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+
+<span class="w">        </span><span class="nx">stroke</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">strokeThickness</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span>
+
+<span class="w">        </span><span class="nx">cornerRadius</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">cornerIteration</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+
+<span class="w">        </span><span class="c1">// Style when focus</span>
+<span class="w">        </span><span class="c1">// &#39;focus.color&#39;: ...</span>
+<span class="w">        </span><span class="c1">// &#39;focus.color2&#39;: ...</span>
+<span class="w">        </span><span class="c1">// &#39;focus.stroke&#39;: ...</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nx">focusStyle</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+
+<span class="w">    </span><span class="nx">innerBounds</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">color2</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">horizontalGradient</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+
+<span class="w">        </span><span class="nx">stroke</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">strokeThickness</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span>
+<span class="w">    </span><span class="p">},</span>
+
+<span class="w">    </span><span class="nx">style</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">bold</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">italic</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">fontSize</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;16px&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">fontFamily</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Courier&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">stroke</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">strokeThickness</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">shadowColor</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">shadowOffsetX</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">shadowOffsetY</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">shadowBlur</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">backgroundColor</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">backgroundHeight</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">backgroundBY</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">offsetX</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">offsetY</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+
+<span class="w">        </span><span class="c1">// Style when cursor move on</span>
+<span class="w">        </span><span class="c1">// &#39;cursor.color&#39;: ...</span>
+<span class="w">        </span><span class="c1">// &#39;cursor.backgroundColor&#39;: ...</span>
+<span class="w">        </span><span class="c1">// &#39;cursor.xxx&#39;: ...</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nx">cursorStyle</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div>
 
 
   

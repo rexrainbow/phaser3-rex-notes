@@ -31,11 +31,11 @@ declare namespace NameInputDialog {
             titleRight?: number,
 
             names?: number,
+            namesLeft?: number,
+            namesRight?: number,
+            firstName?: number,
             firstNameTitle?: number,
             lastNameTitle?: number,
-            content?: number,
-            contentLeft?: number,
-            contentRight?: number,
 
             actionsLeft?: number,
             actionsRight?: number,

@@ -62,6 +62,7 @@ import FileSelectorButton from './fileselectorbutton/FileSelectorButton';
 import Dialog from './dialog/Dialog';
 import ConfirmDialog from './confirmdialog/ConfirmDialog';
 import ConfirmActionButton from './confirmactionbutton/ConfirmActionButton';
+import NameInputDialog from './nameinputdialog/NameInputDialog';
 import HolyGrail from './holygrail/HolyGrail';
 import Tabs from './tabs/Tabs';
 import Slider from './slider/Slider';
@@ -202,6 +203,7 @@ export {
     Dialog,
     ConfirmDialog,
     ConfirmActionButton,
+    NameInputDialog,
     HolyGrail,
     Tabs,
     Slider,

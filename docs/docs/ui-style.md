@@ -604,3 +604,66 @@ Bar-rectangle = Line-progress
         - [Style of Background](ui-style.md#style-of-background) : Create round-rectangle, nine-slice, or image as thumb element.
         - `null` : Don't create any game object.    
     - `null`, or `false` : Don't create any game object for slider.
+
+## Style of CanvasInput
+
+[CanvasInput](canvasinput.md#create-instance)
+
+```javascript
+{
+    width: undefined, 
+    height: undefined,
+
+    background: {
+        color: null,
+        color2: null,
+        horizontalGradient: true,
+
+        stroke: null,
+        strokeThickness: 2,
+
+        cornerRadius: 0,
+        cornerIteration: null,
+        
+        // Style when focus
+        // 'focus.color': ...
+        // 'focus.color2': ...
+        // 'focus.stroke': ...
+    },
+    focusStyle: undefined,
+
+    innerBounds: {
+        color: null,
+        color2: null,
+        horizontalGradient: true,
+
+        stroke: null,
+        strokeThickness: 2
+    },
+    
+    style: {
+        bold: false,
+        italic: false,
+        fontSize: '16px',
+        fontFamily: 'Courier',
+        color: '#fff',
+        stroke: '#fff',
+        strokeThickness: 0,
+        shadowColor: null,
+        shadowOffsetX: 0,
+        shadowOffsetY: 0,
+        shadowBlur: 0,
+        backgroundColor: null,
+        backgroundHeight: undefined,
+        backgroundBY: undefined,
+        offsetX: 0,
+        offsetY: 0,
+
+        // Style when cursor move on
+        // 'cursor.color': ...
+        // 'cursor.backgroundColor': ...
+        // 'cursor.xxx': ...
+    },
+    cursorStyle: undefined,
+}
+```

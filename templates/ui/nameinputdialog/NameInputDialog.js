@@ -19,6 +19,20 @@ class NameInputDialog extends Dialog {
 
         config.orientation = 'y';
 
+        var spaceConfig = config.space;
+        if (spaceConfig) {
+            if (spaceConfig.hasOwnProperty('names')) {
+                spaceConfig.content = spaceConfig.names;
+            }
+            if (spaceConfig.hasOwnProperty('namesLeft')) {
+                spaceConfig.contentLeft = spaceConfig.namesLeft;
+            }
+            if (spaceConfig.hasOwnProperty('namesRight')) {
+                spaceConfig.contentRight = spaceConfig.namesRight;
+            }
+        }
+
+
         // Background
         var createBackground = GetValue(creators, 'background', CreateBackground);
         config.background = createBackground(scene, config.background);
@@ -42,6 +56,8 @@ class NameInputDialog extends Dialog {
         this.addChildrenMap('firstNameInput', namesSizerChildrenMap.firstNameInput);
         this.addChildrenMap('lastNameTitle', namesSizerChildrenMap.lastNameTitle);
         this.addChildrenMap('lastNameInput', namesSizerChildrenMap.lastNameInput);
+
+        this.addChildrenMap('button', config.actions[0]);
 
         // Interactive
         RegisterEvents.call(this);

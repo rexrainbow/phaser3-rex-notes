@@ -12,7 +12,7 @@ var CreateContent = function (scene, config, creators) {
     var nameSizer = new Sizer(scene, {
         orientation: layoutMode,
         space: {
-            item: GetValue(config, 'space.names', 0)
+            item: GetValue(config, 'space.firstName', 0)
         }
     });
     scene.add.existing(nameSizer);

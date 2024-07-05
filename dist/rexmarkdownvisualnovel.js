@@ -70923,7 +70923,7 @@
     var nameSizer = new Sizer(scene, {
       orientation: layoutMode,
       space: {
-        item: GetValue$14(config, 'space.names', 0)
+        item: GetValue$14(config, 'space.firstName', 0)
       }
     });
     scene.add.existing(nameSizer);
@@ -71018,6 +71018,18 @@
         creators = {};
       }
       config.orientation = 'y';
+      var spaceConfig = config.space;
+      if (spaceConfig) {
+        if (spaceConfig.hasOwnProperty('names')) {
+          spaceConfig.content = spaceConfig.names;
+        }
+        if (spaceConfig.hasOwnProperty('namesLeft')) {
+          spaceConfig.contentLeft = spaceConfig.namesLeft;
+        }
+        if (spaceConfig.hasOwnProperty('namesRight')) {
+          spaceConfig.contentRight = spaceConfig.namesRight;
+        }
+      }
 
       // Background
       var createBackground = GetValue$13(creators, 'background', CreateBackground$2);
@@ -71038,6 +71050,7 @@
       _this.addChildrenMap('firstNameInput', namesSizerChildrenMap.firstNameInput);
       _this.addChildrenMap('lastNameTitle', namesSizerChildrenMap.lastNameTitle);
       _this.addChildrenMap('lastNameInput', namesSizerChildrenMap.lastNameInput);
+      _this.addChildrenMap('button', config.actions[0]);
 
       // Interactive
       RegisterEvents.call(_assertThisInitialized(_this));

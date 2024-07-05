@@ -23,7 +23,7 @@ class Demo extends Phaser.Scene {
             space: {
                 left: 20, right: 20, top: 20, bottom: 20,
                 item: 20,
-                names: 20,
+                firstName: 20,
             },
 
             background: { strokeColor: COLOR_LIGHT, strokeWidth: 4, radius: 10, },
