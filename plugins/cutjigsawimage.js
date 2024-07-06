@@ -1,2 +1,2 @@
-import CutJigsawImage from './actions/CutJigsawImage/CreatePieces.js';
+import CutJigsawImage from './actions/cutjigsawimage/CreatePieces.js';
 export default CutJigsawImage;
