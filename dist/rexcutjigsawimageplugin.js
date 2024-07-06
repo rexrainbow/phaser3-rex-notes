@@ -660,39 +660,39 @@
     graphics.moveTo(leftX, topY);
     switch (edgeMode.top) {
       case 1:
-        graphics.lineTo(centerX - edgeHeight, topY);
-        graphics.arc(centerX, topY, edgeHeight, RAD180, RAD360, false);
+        graphics.lineTo(centerX - edgeHeight - 1, topY);
+        graphics.arc(centerX, topY, edgeHeight + 1, RAD180, RAD360, false);
         break;
       case 2:
-        graphics.lineTo(centerX - edgeHeight, topY);
-        graphics.arc(centerX, topY, edgeHeight, RAD180, RAD360, true);
+        graphics.lineTo(centerX - edgeHeight + 1, topY);
+        graphics.arc(centerX, topY, edgeHeight - 1, RAD180, RAD360, true);
         break;
     }
     graphics.lineTo(rightX, topY);
     switch (edgeMode.right) {
       case 1:
-        graphics.arc(rightX, centerY, edgeWidth, RAD270, RAD90, false);
+        graphics.arc(rightX, centerY, edgeWidth + 1, RAD270, RAD90, false);
         break;
       case 2:
-        graphics.arc(rightX, centerY, edgeWidth, RAD270, RAD90, true);
+        graphics.arc(rightX, centerY, edgeWidth - 1, RAD270, RAD90, true);
         break;
     }
     graphics.lineTo(rightX, bottomY);
     switch (edgeMode.bottom) {
       case 1:
-        graphics.arc(centerX, bottomY, edgeHeight, RAD0, RAD180, false);
+        graphics.arc(centerX, bottomY, edgeHeight + 1, RAD0, RAD180, false);
         break;
       case 2:
-        graphics.arc(centerX, bottomY, edgeHeight, RAD0, RAD180, true);
+        graphics.arc(centerX, bottomY, edgeHeight - 1, RAD0, RAD180, true);
         break;
     }
     graphics.lineTo(leftX, bottomY);
     switch (edgeMode.left) {
       case 1:
-        graphics.arc(leftX, centerY, edgeWidth, RAD90, RAD270, false);
+        graphics.arc(leftX, centerY, edgeWidth + 1, RAD90, RAD270, false);
         break;
       case 2:
-        graphics.arc(leftX, centerY, edgeWidth, RAD90, RAD270, true);
+        graphics.arc(leftX, centerY, edgeWidth - 1, RAD90, RAD270, true);
         break;
     }
     graphics.lineTo(leftX, topY);
@@ -894,11 +894,13 @@
     if (destinationKey === undefined) {
       destinationKey = "".concat(sourceKey, "_pieces");
     }
-    var frameWidth = sourceFrameWidth / columns + 2 * edgeWidth;
-    var frameHeight = sourceFrameHeight / rows + 2 * edgeHeight;
     if (textureManager.exists(destinationKey)) {
       textureManager.remove(destinationKey);
     }
+    var frameWidth = sourceFrameWidth / columns + 2 * edgeWidth;
+    var frameHeight = sourceFrameHeight / rows + 2 * edgeHeight;
+    frameWidth = Math.ceil(frameWidth);
+    frameHeight = Math.ceil(frameHeight);
     var frameManager = new FrameManager(scene, {
       key: destinationKey,
       cellWidth: frameWidth,
