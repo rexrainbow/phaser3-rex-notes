@@ -1,7 +1,6 @@
 import IsFunction from '../../../../plugins/utils/object/IsFunction.js';
 import ModalMethods from '../../basesizer/ModalMethods.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
 const Merge = Phaser.Utils.Objects.Merge;
 
 var Modal = function (config, onClose) {
@@ -9,7 +8,7 @@ var Modal = function (config, onClose) {
         onClose = config;
         config = undefined;
     }
-       
+
     if (config === undefined) {
         config = {};
     }

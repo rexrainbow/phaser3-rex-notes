@@ -100,7 +100,7 @@ class Roll extends EaseValueTaskBase {
         return this;
     }
 
-    updateGameObject(gameObject, timer) {
+    updateTarget(gameObject, timer) {
         var t = this.easeFn(timer.t);
         gameObject.rotationY = Linear(this.startRotationY, this.endRotationY, t);
     }

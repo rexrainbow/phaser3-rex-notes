@@ -25,6 +25,16 @@ declare class Pan extends OnePointerTracer {
         config?: Pan.IConfig
     )
 
+    dx: number;
+    dy: number;
+    x: number;
+    y: number;
+
+    dWorldX: number;
+    dWorldY: number;
+    worldX: number;
+    worldY: number;
+
     setDragThreshold(distance: number): this;
     dragThreshold: number;
 

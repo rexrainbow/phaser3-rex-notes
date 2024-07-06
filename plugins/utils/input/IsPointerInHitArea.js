@@ -1,4 +1,4 @@
-var IsPointerInHitArea = function (gameObject, pointer, preTest, postTest) {
+var IsPointerInHitArea = function (gameObject, pointer, preTest, postTest, returnFirstPointer) {
     if (pointer) {
         if (preTest && !preTest(gameObject, pointer)) {
             return false;
@@ -12,6 +12,10 @@ var IsPointerInHitArea = function (gameObject, pointer, preTest, postTest) {
         return true;
 
     } else {
+        if (returnFirstPointer === undefined) {
+            returnFirstPointer = false;
+        }
+
         var inputManager = gameObject.scene.input.manager;
         var pointersTotal = inputManager.pointersTotal;
         var pointers = inputManager.pointers,
@@ -27,6 +31,11 @@ var IsPointerInHitArea = function (gameObject, pointer, preTest, postTest) {
             if (postTest && !postTest(gameObject, pointer)) {
                 continue;
             }
+
+            if (returnFirstPointer) {
+                return pointer;
+            }
+
             return true;
         }
 

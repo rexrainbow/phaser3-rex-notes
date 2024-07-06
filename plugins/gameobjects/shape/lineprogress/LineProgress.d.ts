@@ -65,32 +65,32 @@ declare class LineProgress extends BaseShapes {
         config?: LineProgress.IConfig
     );
 
-    value: number;
     getValue(min?: number, max?: number): number;
     setValue(value?: number, min?: number, max?: number): this;
     addValue(inc?: number, min?: number, max?: number): this;
+    value: number;
 
     easeValueTo(value?: number, min?: number, max?: number): this;
     stopEaseValue(): this;
     setEaseValueDuration(duration: number): this;
     setEaseValueFunction(ease: string): this;
 
-    trackColor: string;
-    setTrackColor(radius?: string | number): this;
+    setTrackColor(color?: number): this;
+    trackColor: number;
 
-    trackStrokeThickness: number;
-    trackStrokeColor: string;
     setTrackStroke(
         lineWidth?: number,
-        color?: string | number
+        color?: number
     ): this;
+    trackStrokeThickness: number;
+    trackStrokeColor: number;
 
-    barColor: string;
-    setBarColor(barColor?: string | number): this;
+    setBarColor(color?: number): this;
+    barColor: number;
 
-    skewX: number;
     setSkewX(skewX: number): this;
+    skewX: number;
 
-    rtl: boolean;
     setRTL(enable?: boolean): this;
+    rtl: boolean;
 }

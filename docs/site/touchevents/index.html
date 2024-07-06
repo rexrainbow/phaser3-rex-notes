@@ -8692,6 +8692,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ui-nameinputdialog/" class="md-nav__link">
+        Name input dialog
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -10341,7 +10355,10 @@ If set to <code>false</code> it will emit events from all Game Objects below a P
 <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerout&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span><span class="w"> </span><span class="nx">justOut</span><span class="p">){</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
 <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;gameout&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">timeStamp</span><span class="p">,</span><span class="w"> </span><span class="nx">domEvent</span><span class="p">){</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
 <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;gameover&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">timeStamp</span><span class="p">,</span><span class="w"> </span><span class="nx">domEvent</span><span class="p">){</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li>Check <code>pointer.camera</code> in multiple-cameras scene.</li>
+</ul>
+</li>
 </ol>
 <h4 id="game-canvas">Game canvas<a class="headerlink" href="#game-canvas" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;gameout&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">timeStamp</span><span class="p">,</span><span class="w"> </span><span class="nx">event</span><span class="p">){</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
@@ -10466,6 +10483,9 @@ If set to <code>false</code> it will emit events from all Game Objects below a P
 <span class="c1">// var worldXY = pointer.positionToCamera(camera, worldXY);</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">worldX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">worldXY</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">worldY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">worldXY</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Camera
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">camera</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">pointer</span><span class="p">.</span><span class="nx">camera</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
 </li>

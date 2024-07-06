@@ -100,7 +100,7 @@ class Flip extends EaseValueTaskBase {
         return this;
     }
 
-    updateGameObject(gameObject, timer) {
+    updateTarget(gameObject, timer) {
         var t = this.easeFn(timer.t);
 
         var value = Linear(this.startAngle, this.endAngle, t);

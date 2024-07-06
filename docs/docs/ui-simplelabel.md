@@ -10,6 +10,7 @@ Using plain object to create [label](ui-label.md).
 - [Style](https://codepen.io/rexrainbow/pen/vYaPwwq)
 - [Bitmaptext](https://codepen.io/rexrainbow/pen/jOpoqzP)
 - [Nine-slice background](https://codepen.io/rexrainbow/pen/BaqwOqX)
+- [Bar-rectangle background](https://codepen.io/rexrainbow/pen/xxNvEba)
 - [Wrap text](https://codepen.io/rexrainbow/pen/xxJoJLW)
 - [TextArea](https://codepen.io/rexrainbow/pen/OJGxroa)
 - [Buttons](https://codepen.io/rexrainbow/pen/YzOxKRM)
@@ -135,7 +136,7 @@ var label = scene.rexUI.add.simpleLabel({
 ```
 
 - `background` : 
-    - [Style of Background](ui-style.md#style-of-background) : Create Round-rectangle, Nine-slice, or Image as background element.
+    - [Style of Background](ui-style.md#style-of-background) : Create Round-rectangle, Bar-rectangle, Nine-slice, or Image as background element.
     - `null` : Don't create any game object.
 - `text` : 
     - [Style of Text](ui-style.md#style-of-text) : Create Text, BBCodeText, BitmapText, SimpleLabel, or TextArea as text element.

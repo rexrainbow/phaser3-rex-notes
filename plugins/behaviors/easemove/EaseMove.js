@@ -81,7 +81,7 @@ class EaseMove extends EaseValueTaskBase {
         return this;
     }
 
-    updateGameObject(gameObject, timer) {
+    updateTarget(gameObject, timer) {
         var t = timer.t;
         if (timer.isOddIteration) {   // Yoyo
             t = 1 - t;

@@ -2062,7 +2062,7 @@
     },
     bringChildToTop: function bringChildToTop(child) {
       var gameObjects;
-      if (child.isRexContainerLite) {
+      if (child !== this && child.isRexContainerLite) {
         gameObjects = child.getAllChildren([child]);
         gameObjects = FilterDisplayGameObjects(gameObjects);
         gameObjects = SortGameObjectsByDepth(gameObjects, false);
@@ -2075,7 +2075,10 @@
       var topChild = children[children.length - 1];
       for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
         var gameObject = gameObjects[i];
-        if (topChild === gameObject || topChild.displayList !== gameObject.displayList) {
+        if (topChild === gameObject) {
+          continue;
+        }
+        if (gameObject !== this && topChild.displayList !== gameObject.displayList) {
           continue;
         }
         topChild.displayList.moveAbove(gameObject, topChild);
@@ -2085,7 +2088,7 @@
     },
     sendChildToBack: function sendChildToBack(child) {
       var gameObjects;
-      if (child.isRexContainerLite) {
+      if (child !== this && child.isRexContainerLite) {
         gameObjects = child.getAllChildren([child]);
         gameObjects = FilterDisplayGameObjects(gameObjects);
         gameObjects = SortGameObjectsByDepth(gameObjects, false);
@@ -2098,7 +2101,10 @@
       var bottomChild = children[0];
       for (var i = gameObjects.length - 1; i >= 0; i--) {
         var gameObject = gameObjects[i];
-        if (bottomChild === gameObject || bottomChild.displayList !== gameObject.displayList) {
+        if (bottomChild === gameObject) {
+          continue;
+        }
+        if (gameObject !== this && bottomChild.displayList !== gameObject.displayList) {
           continue;
         }
         bottomChild.displayList.moveBelow(gameObject, bottomChild);
@@ -4003,7 +4009,7 @@
         _get(_getPrototypeOf(EaseValueTaskBase.prototype), "stop", this).call(this);
         if (toEnd) {
           this.timer.setT(1);
-          this.updateGameObject(this.target, this.timer);
+          this.updateTarget(this.target, this.timer);
           this.complete();
         }
         return this;
@@ -4011,7 +4017,7 @@
     }, {
       key: "update",
       value: function update(time, delta) {
-        if (!this.isRunning || !this.enable || !this.parent.active) {
+        if (!this.isRunning || !this.enable || this.parent.hasOwnProperty('active') && !this.parent.active) {
           return this;
         }
         var target = this.target,
@@ -4020,7 +4026,7 @@
 
         // isDelay, isCountDown, isDone
         if (!timer.isDelay) {
-          this.updateGameObject(target, timer);
+          this.updateTarget(target, timer);
         }
         this.emit('update', target, this);
         if (timer.isDone) {
@@ -4031,8 +4037,8 @@
 
       // Override
     }, {
-      key: "updateGameObject",
-      value: function updateGameObject(target, timer) {}
+      key: "updateTarget",
+      value: function updateTarget(target, timer) {}
     }]);
     return EaseValueTaskBase;
   }(TimerTickTask);
@@ -4145,8 +4151,8 @@
         return this;
       }
     }, {
-      key: "updateGameObject",
-      value: function updateGameObject(gameObject, timer) {
+      key: "updateTarget",
+      value: function updateTarget(gameObject, timer) {
         var t = this.easeFn(timer.t);
         var value = Linear$2(this.startAngle, this.endAngle, t);
         if (gameObject.orientation === 0) {
@@ -4439,8 +4445,8 @@
         return this;
       }
     }, {
-      key: "updateGameObject",
-      value: function updateGameObject(gameObject, timer) {
+      key: "updateTarget",
+      value: function updateTarget(gameObject, timer) {
         var t = this.easeFn(timer.t);
         gameObject.rotationY = Linear$1(this.startRotationY, this.endRotationY, t);
       }

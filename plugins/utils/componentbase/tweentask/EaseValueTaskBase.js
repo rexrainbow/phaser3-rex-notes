@@ -91,7 +91,7 @@ class EaseValueTaskBase extends TimerTask {
 
         if (toEnd) {
             this.timer.setT(1);
-            this.updateGameObject(this.target, this.timer);
+            this.updateTarget(this.target, this.timer);
             this.complete();
         }
 
@@ -102,7 +102,7 @@ class EaseValueTaskBase extends TimerTask {
         if (
             (!this.isRunning) ||
             (!this.enable) ||
-            (!this.parent.active)
+            (this.parent.hasOwnProperty('active') && !this.parent.active)
         ) {
             return this;
         }
@@ -114,7 +114,7 @@ class EaseValueTaskBase extends TimerTask {
 
         // isDelay, isCountDown, isDone
         if (!timer.isDelay) {
-            this.updateGameObject(target, timer);
+            this.updateTarget(target, timer);
         }
 
         this.emit('update', target, this);
@@ -127,7 +127,7 @@ class EaseValueTaskBase extends TimerTask {
     }
 
     // Override
-    updateGameObject(target, timer) {
+    updateTarget(target, timer) {
 
     }
 }

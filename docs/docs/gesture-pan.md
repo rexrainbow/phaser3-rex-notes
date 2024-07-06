@@ -124,6 +124,7 @@ pan.on('pan', function(pan, gameObject, lastPointer){
 ```
 
 - `pan.dx`, `pan.dy` : Vector from previous pointer to current pointer.
+- `pan.dWorldX`, `pan.dWorld` : Vector from previous pointer to current pointer, in world position. i.e,  including camera-zoom.
 - `pan.worldX`, `pan.worldY` : World position of current pointer.
 - `pan.x`, `pan.y` : Scene position of current pointer.
 - `gameObject`, `pan.gameObject` : Parent gameobject of this pan behavior.

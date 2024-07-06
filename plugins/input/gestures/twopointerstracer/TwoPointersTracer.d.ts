@@ -21,7 +21,7 @@ declare class TwoPointersTracer extends Phaser.Events.EventEmitter {
     bounds: Phaser.Geom.Rectangle | undefined;
     setDetectBounds(bounds?: Phaser.Geom.Rectangle): this;
 
-    cancel(): this;
+    dragCancel(): this;
 
     pointers: Phaser.Input.Pointer[];
     readonly distanceBetween: number;

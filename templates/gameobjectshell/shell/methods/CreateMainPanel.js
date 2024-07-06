@@ -1,5 +1,5 @@
 import Sizer from '../../../ui/sizer/Sizer.js';
-import PropertiesPanel from '../../propertiespanel/PropertiesPanel.js';
+import GameObjectPanel from '../../gameobjectpanel/GameObjectPanel.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -9,17 +9,17 @@ var CreateMainPanel = function (config) {
     })
     this.scene.add.existing(mainPanel);
 
-    var propertiesPanel = CreatePropertiesPanel.call(this, config);
+    var gameObjectPanel = CreateGameObjectPanel.call(this, config);
 
     mainPanel
         .add(
-            propertiesPanel,
+            gameObjectPanel,
             { expand: true }
         )
         .layout()
         .setMinSize(mainPanel.width, mainPanel.height)  // Keep current size
 
-    propertiesPanel.setDirty(false);
+    gameObjectPanel.setDirty(false);
 
     mainPanel.left = 0;
     mainPanel.top = 0;
@@ -33,11 +33,11 @@ var CreateMainPanel = function (config) {
     return mainPanel;
 }
 
-var CreatePropertiesPanel = function (config) {
+var CreateGameObjectPanel = function (config) {
     var panelConfig = GetValue(config, 'panel', {});
     var extraProperties = GetValue(config, 'extraProperties', {});
 
-    var panel = new PropertiesPanel(this.scene, panelConfig, extraProperties);
+    var panel = new GameObjectPanel(this.scene, panelConfig, extraProperties);
     this.scene.add.existing(panel);
 
     this.panel = panel;

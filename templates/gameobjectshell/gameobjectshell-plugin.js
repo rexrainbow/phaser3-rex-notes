@@ -4,7 +4,7 @@ import CameraControllerFactory from './cameracontroller/Factory.js';
 import ControlPointsFactory from './controlpoints/Factory.js';
 import FullWindowRectangleFactory from './fullwindowrectangle/Factory.js';
 import LayerManagerFactory from './layermanager/Factory.js';
-import PropertiesPanelFactory from './propertiespanel/Factory.js';
+import GameObjectPanelFactory from './gameobjectpanel/Factory.js';
 import ShellFactory from './shell/Factory.js';
 
 

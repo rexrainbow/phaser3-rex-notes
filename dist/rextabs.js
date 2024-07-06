@@ -1286,7 +1286,7 @@
     },
     bringChildToTop: function bringChildToTop(child) {
       var gameObjects;
-      if (child.isRexContainerLite) {
+      if (child !== this && child.isRexContainerLite) {
         gameObjects = child.getAllChildren([child]);
         gameObjects = FilterDisplayGameObjects(gameObjects);
         gameObjects = SortGameObjectsByDepth(gameObjects, false);
@@ -1299,7 +1299,10 @@
       var topChild = children[children.length - 1];
       for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
         var gameObject = gameObjects[i];
-        if (topChild === gameObject || topChild.displayList !== gameObject.displayList) {
+        if (topChild === gameObject) {
+          continue;
+        }
+        if (gameObject !== this && topChild.displayList !== gameObject.displayList) {
           continue;
         }
         topChild.displayList.moveAbove(gameObject, topChild);
@@ -1309,7 +1312,7 @@
     },
     sendChildToBack: function sendChildToBack(child) {
       var gameObjects;
-      if (child.isRexContainerLite) {
+      if (child !== this && child.isRexContainerLite) {
         gameObjects = child.getAllChildren([child]);
         gameObjects = FilterDisplayGameObjects(gameObjects);
         gameObjects = SortGameObjectsByDepth(gameObjects, false);
@@ -1322,7 +1325,10 @@
       var bottomChild = children[0];
       for (var i = gameObjects.length - 1; i >= 0; i--) {
         var gameObject = gameObjects[i];
-        if (bottomChild === gameObject || bottomChild.displayList !== gameObject.displayList) {
+        if (bottomChild === gameObject) {
+          continue;
+        }
+        if (gameObject !== this && bottomChild.displayList !== gameObject.displayList) {
           continue;
         }
         bottomChild.displayList.moveBelow(gameObject, bottomChild);
@@ -4910,7 +4916,7 @@
         _get(_getPrototypeOf(EaseValueTaskBase.prototype), "stop", this).call(this);
         if (toEnd) {
           this.timer.setT(1);
-          this.updateGameObject(this.target, this.timer);
+          this.updateTarget(this.target, this.timer);
           this.complete();
         }
         return this;
@@ -4918,7 +4924,7 @@
     }, {
       key: "update",
       value: function update(time, delta) {
-        if (!this.isRunning || !this.enable || !this.parent.active) {
+        if (!this.isRunning || !this.enable || this.parent.hasOwnProperty('active') && !this.parent.active) {
           return this;
         }
         var target = this.target,
@@ -4927,7 +4933,7 @@
 
         // isDelay, isCountDown, isDone
         if (!timer.isDelay) {
-          this.updateGameObject(target, timer);
+          this.updateTarget(target, timer);
         }
         this.emit('update', target, this);
         if (timer.isDone) {
@@ -4938,8 +4944,8 @@
 
       // Override
     }, {
-      key: "updateGameObject",
-      value: function updateGameObject(target, timer) {}
+      key: "updateTarget",
+      value: function updateTarget(target, timer) {}
     }]);
     return EaseValueTaskBase;
   }(TimerTickTask);
@@ -5025,8 +5031,8 @@
         return this;
       }
     }, {
-      key: "updateGameObject",
-      value: function updateGameObject(gameObject, timer) {
+      key: "updateTarget",
+      value: function updateTarget(gameObject, timer) {
         var t = timer.t;
         if (timer.isOddIteration) {
           // Yoyo
@@ -5379,8 +5385,8 @@
         return this;
       }
     }, {
-      key: "updateGameObject",
-      value: function updateGameObject(gameObject, timer) {
+      key: "updateTarget",
+      value: function updateTarget(gameObject, timer) {
         var t = timer.t;
         if (timer.isOddIteration) {
           // Yoyo
@@ -5622,8 +5628,8 @@
         return this;
       }
     }, {
-      key: "updateGameObject",
-      value: function updateGameObject(gameObject, timer) {
+      key: "updateTarget",
+      value: function updateTarget(gameObject, timer) {
         var t = timer.t;
         if (timer.isOddIteration) {
           // Yoyo
@@ -6174,8 +6180,8 @@
         return this;
       }
     }, {
-      key: "updateGameObject",
-      value: function updateGameObject(target, timer) {
+      key: "updateTarget",
+      value: function updateTarget(target, timer) {
         var t = timer.t;
         t = this.easeFn(t);
         target[this.propertyKey] = Linear(this.fromValue, this.toValue, t);
@@ -8175,7 +8181,7 @@
     }
   };
 
-  var GetPointerWorldXY = function GetPointerWorldXY(pointer, mainCamera, out) {
+  var GetPointerWorldXY = function GetPointerWorldXY(pointer, targetCamera, out) {
     var camera = pointer.camera;
     if (!camera) {
       return null;
@@ -8185,7 +8191,7 @@
     } else if (out === true) {
       out = globalOut$1;
     }
-    if (camera === mainCamera) {
+    if (camera === targetCamera) {
       out.x = pointer.worldX;
       out.y = pointer.worldY;
     } else {
@@ -8697,7 +8703,7 @@
     }
   };
 
-  var IsPointerInHitArea = function IsPointerInHitArea(gameObject, pointer, preTest, postTest) {
+  var IsPointerInHitArea = function IsPointerInHitArea(gameObject, pointer, preTest, postTest, returnFirstPointer) {
     if (pointer) {
       if (preTest && !preTest(gameObject, pointer)) {
         return false;
@@ -8710,6 +8716,9 @@
       }
       return true;
     } else {
+      if (returnFirstPointer === undefined) {
+        returnFirstPointer = false;
+      }
       var inputManager = gameObject.scene.input.manager;
       var pointersTotal = inputManager.pointersTotal;
       var pointers = inputManager.pointers,
@@ -8724,6 +8733,9 @@
         }
         if (postTest && !postTest(gameObject, pointer)) {
           continue;
+        }
+        if (returnFirstPointer) {
+          return pointer;
         }
         return true;
       }
@@ -9565,6 +9577,7 @@
           return;
         }
         this.pointer = pointer;
+        this.pointerCamera = pointer.camera;
         this.lastPointer = pointer;
         this.movedState = false;
         this.tracerState = TOUCH1$1;
@@ -9587,6 +9600,7 @@
           return;
         }
         this.pointer = undefined;
+        this.pointerCamera = undefined;
         this.movedState = false;
         this.tracerState = TOUCH0$1;
         this.onDragEnd();
@@ -10434,6 +10448,7 @@
         }
         this.movedState[pointer.id] = false;
         this.pointers.push(pointer);
+        this.pointerCamera = pointer.camera;
         switch (this.tracerState) {
           case TOUCH0:
             this.tracerState = TOUCH1;
@@ -13179,6 +13194,10 @@
         }, this).on('up', function (buttonBehavior, gameObject, pointer, event) {
           this.fireEvent('button.up', gameObject, pointer, event);
         }, this);
+        if (gameObject.isRexContainerLite) {
+          // Send touch detection sensor to back
+          gameObject.sendChildToBack(gameObject);
+        }
       }
       if (this.buttonsType) {
         if (gameObject.name === undefined) {

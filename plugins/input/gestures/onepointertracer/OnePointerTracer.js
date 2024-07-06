@@ -134,6 +134,7 @@ class OnePointerTracer extends TickTask {
         }
 
         this.pointer = pointer;
+        this.pointerCamera = pointer.camera;
         this.lastPointer = pointer;
         this.movedState = false;
         this.tracerState = TOUCH1;
@@ -159,6 +160,7 @@ class OnePointerTracer extends TickTask {
         }
 
         this.pointer = undefined;
+        this.pointerCamera = undefined;
         this.movedState = false;
         this.tracerState = TOUCH0;
         this.onDragEnd();

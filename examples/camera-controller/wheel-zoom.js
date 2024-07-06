@@ -33,7 +33,14 @@ class Demo extends Phaser.Scene {
             // camera: this.cameras.main,
             inputTarget: (bg) ? bg : this,
         })
+    }
 
+    update() {
+        var camera = this.cameras.main;
+        if (this.prevCameraZoom !== camera.zoom) {
+            this.prevCameraZoom = camera.zoom;
+            console.log(this.prevCameraZoom);
+        }
     }
 }
 

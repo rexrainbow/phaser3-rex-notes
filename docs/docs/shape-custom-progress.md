@@ -213,7 +213,7 @@ var customProgress = scene.add.rexCustomProgress({
 - `value` : `0` ~ `1`, progress value. Default is `0`.
 - `easeValue` : Parameters of easing value.
     - `easeValue.duration` : Duration of value easing, default is `0` (no easing).
-    - `easeValue.ease` : [Ease function](tween.md/#ease-equations), default is `'Linear'`.
+    - `easeValue.ease` : [Ease function](tween.md#ease-equations), default is `'Linear'`.
 - `valuechangeCallback` : callback function when value changed.
     ```javascript
     function(newValue, oldValue, customProgress) {

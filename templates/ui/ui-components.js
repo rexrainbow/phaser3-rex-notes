@@ -34,6 +34,7 @@ import Cover from './cover/Cover.js';
 import InputText from './inputtext/InputText.js';
 import { FileChooser } from './filechooser/FileChooser.js';
 import FileDropZone from './filedropzone/FileDropZone.js';
+import StatesBarRectangle from './statesbarrectangle/StatesBarRectangle.js';
 import StatesBitmapText from './statesbitmaptext/StatesBitmapText.js';
 import StatesImage from './statesimage/StatesImage.js';
 import StatesNinePatch from './statesninepatch/StatesNinePatch.js';
@@ -62,6 +63,7 @@ import FileSelectorButton from './fileselectorbutton/FileSelectorButton.js';
 import Dialog from './dialog/Dialog.js';
 import ConfirmDialog from './confirmdialog/ConfirmDialog.js';
 import ConfirmActionButton from './confirmactionbutton/ConfirmActionButton.js';
+import NameInputDialog from './nameinputdialog/NameInputDialog.js';
 import HolyGrail from './holygrail/HolyGrail.js';
 import Tabs from './tabs/Tabs.js';
 import Slider from './slider/Slider.js';
@@ -160,6 +162,7 @@ export {
     InputText,
     FileChooser,
     FileDropZone,
+    StatesBarRectangle,
     StatesBitmapText,
     StatesImage,
     StatesNinePatch,
@@ -201,6 +204,7 @@ export {
     Dialog,
     ConfirmDialog,
     ConfirmActionButton,
+    NameInputDialog,
     HolyGrail,
     Tabs,
     Slider,

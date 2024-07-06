@@ -42,7 +42,7 @@ class EaseValueTask extends EaseValueTaskBase {
         return this;
     }
 
-    updateGameObject(target, timer) {
+    updateTarget(target, timer) {
         var t = timer.t;
         t = this.easeFn(t);
 

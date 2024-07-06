@@ -600,7 +600,7 @@ class TextStyle {
     }
 
     get lineHeight() {
-        return this.metrics.fontSize + this.strokeThickness + this.parent.lineSpacing;
+        return this.metrics.fontSize + this.parent.lineSpacing;
     }
 
     toJSON() {

@@ -1,4 +1,5 @@
 import StatesRoundRectangle from '../../statesroundrectangle/StatesRoundRectangle.js';
+import StatesBarRectangle from '../../statesbarrectangle/StatesBarRectangle.js';
 import StatesNineSlice from '../../statesnineslice/StatesNineSlice.js';
 import StatesImage from '../../statesimage/StatesImage.js';
 import StatesNinePatch from '../../statesninepatch/StatesNinePatch.js';
@@ -10,7 +11,9 @@ var CreateBackground = function (scene, config) {
         if (config.hasOwnProperty('$type')) {
             gameObjectType = config.$type;
         } else {
-            if (config.hasOwnProperty('leftWidth')) {
+            if (config.hasOwnProperty('barColor')) {
+                gameObjectType = 'bar';
+            } else if (config.hasOwnProperty('leftWidth')) {
                 gameObjectType = 'nineSlice';
             } else if (config.hasOwnProperty('key')) {
                 gameObjectType = 'image';
@@ -20,6 +23,10 @@ var CreateBackground = function (scene, config) {
 
     var gameObject;
     switch (gameObjectType) {
+        case 'bar':
+            gameObject = new StatesBarRectangle(scene, config);
+            break;
+
         case 'image':
             gameObject = new StatesImage(scene, config);
             break;

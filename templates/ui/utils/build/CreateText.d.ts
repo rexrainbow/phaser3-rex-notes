@@ -1,4 +1,6 @@
 import BBCodeText from '../../bbcodetext/BBCodeText';
+import Label from '../../label/Label';
+import CreateTextArea from './CreateTextArea';
 
 export default CreateText;
 
@@ -33,7 +35,15 @@ declare namespace CreateText {
         origin?: number, originX?: number, originY?: number,
     }
 
-    type IConfig = IBitmapTextConfig | ITextConfig | IBBCodeTextConfig;
+    interface ILabelConfig extends Label.IConfig {
+        $type?: 'label',
+    }
+
+    interface ITextAreaConfig extends CreateTextArea.IConfig {
+        $type?: 'textarea',
+    }
+
+    type IConfig = IBitmapTextConfig | ITextConfig | IBBCodeTextConfig | ILabelConfig | ITextAreaConfig;
 
 }
 

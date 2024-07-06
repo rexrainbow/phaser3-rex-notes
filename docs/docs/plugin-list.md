@@ -220,6 +220,7 @@
 212. [UI/Knob](ui-knob.md): A knob button based on circular progress.
 213. [UI/Label](ui-label.md): A game object container with an icon, text, and background.
 214. [UI/Menu](ui-menu.md): A container with buttons and sub-menu.
+214. [UI/Name-input dialog](ui-nameinputdialog.md): Enter first name and last name via a [dialog](ui-dialog.md).
 215. [UI/Name-value label](ui-namevaluelabel.md): A container with name text, value text in a row, with a horizontal line progress bar, 1d an icon, background.
 216. [UI/Number bar](ui-numberbar.md): A container with an icon, slider, text, and background.
 217. [UI/Overlap sizer](ui-overlapsizer.md): Layout children game objects overlapped.

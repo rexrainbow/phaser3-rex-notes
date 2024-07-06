@@ -237,6 +237,7 @@ Trigger these events from top scene to bottom scene.
     scene.input.on('gameout', function(timeStamp, domEvent){ /* ... */ }, scope);
     scene.input.on('gameover', function(timeStamp, domEvent){ /* ... */ }, scope);
     ```
+    - Check `pointer.camera` in multiple-cameras scene.
 
 #### Game canvas
 
@@ -406,6 +407,10 @@ scene.input.addPointer(num);  // total points = num + 1
                 // var worldXY = pointer.positionToCamera(camera, worldXY);
                 var worldX = worldXY.x;
                 var worldY = worldXY.y;
+                ```
+            - Camera
+                ```javascript
+                var camera = pointer.camera;
                 ```
         - Position of previous moving : `pointer.prevPosition.x` , `pointer.prevPosition.y`
             - Updating when pointer-down, potiner-move, or pointer-up.

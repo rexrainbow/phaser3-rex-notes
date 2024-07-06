@@ -41,6 +41,7 @@ import StatesNineSliceFactory from './statesnineslice/Factory.js';
 import StatesNinePatchFactory from './statesninepatch/Factory.js';
 import StatesTextFactory from './statestext/Factory.js';
 import StatesBitmapTextFactory from './statesbitmaptext/Factory.js';
+import StatesBarRectangleFactory from './statesbarrectangle/Factory.js';
 import ChartFactory from './chart/Factory.js';
 
 import ContainerFactory from './container/Factory.js';
@@ -63,6 +64,7 @@ import FileSelectorButtonFactory from './fileselectorbutton/Factory.js';
 import DialogFactory from './dialog/Factory.js';
 import ConfirmDialogFactory from './confirmdialog/Factory.js';
 import ConfirmActionButtonFactory from './confirmactionbutton/Factory.js';
+import NameInputDialogFactory from './nameinputdialog/Factory.js';
 import HolyGrailFactory from './holygrail/Factory.js';
 import TabsFactory from './tabs/Factory.js';
 import SliderFactory from './slider/Factory.js';

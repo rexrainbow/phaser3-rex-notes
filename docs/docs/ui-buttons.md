@@ -11,6 +11,7 @@ A container with a group of buttons.
 - [Expand](https://codepen.io/rexrainbow/pen/XWbRZLR)
 - [Space](https://codepen.io/rexrainbow/pen/abywwrQ)
 - [Checkboxes/radio](https://codepen.io/rexrainbow/pen/PowMEjX)
+- [CustomProgress background](https://codepen.io/rexrainbow/pen/dyExbMp)
 - [Popup each button](https://codepen.io/rexrainbow/pen/dypEePL)
 
 ## Usage

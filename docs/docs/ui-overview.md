@@ -115,6 +115,7 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
 1. [Knob](ui-knob.md): A knob button based on circular progress.
 1. [Label](ui-label.md): A container with an icon, text, and background.
 1. [Menu](ui-menu.md): A container with buttons and sub-menu.
+1. [Name-input dialog](ui-nameinputdialog.md): Enter first name and last name via a [dialog](ui-dialog.md).
 1. [Name-value label](ui-namevaluelabel.md): A container with name text, value text in a row, with a [horizontal line progress bar](shape-lineprogress.md), and an icon, background.
 1. [Image input label](ui-imageinputlabel.md): A container with a canvas icon, text, and background. Click icon to popup a (image) file chooser dialog, display selected image on canvas.
 1. [Number-bar](ui-numberbar.md): A container with an icon, slider, text, and background.

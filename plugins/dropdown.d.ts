@@ -1,2 +1,2 @@
-import DropDown from './behaviors/dropdown/Dropdown';
+import DropDown from './behaviors/dropdown/DropDown';
 export default DropDown;
