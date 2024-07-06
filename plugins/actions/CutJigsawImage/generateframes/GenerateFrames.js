@@ -43,12 +43,15 @@ var GenerateFrames = function (scene, {
         destinationKey = `${sourceKey}_pieces`;
     }
 
-    var frameWidth = (sourceFrameWidth / columns) + (2 * edgeWidth);
-    var frameHeight = (sourceFrameHeight / rows) + (2 * edgeHeight);
-
     if (textureManager.exists(destinationKey)) {
         textureManager.remove(destinationKey);
     }
+
+    var frameWidth = (sourceFrameWidth / columns) + (2 * edgeWidth);
+    var frameHeight = (sourceFrameHeight / rows) + (2 * edgeHeight);
+
+    frameWidth = Math.ceil(frameWidth);
+    frameHeight = Math.ceil(frameHeight);
 
     var frameManager = new FrameManager(scene, {
         key: destinationKey,
