@@ -40,7 +40,7 @@ class Demo extends Phaser.Scene {
                     tileXY.x, tileXY.y, 0,
                     Random(0, 0xffffff), 0.7
                 );
-                this.add.text(chess.x, chess.y, tileXY.x + ',' + tileXY.y)
+                scene.add.text(chess.x, chess.y, tileXY.x + ',' + tileXY.y)
                     .setOrigin(0.5)
                     .setTint(0x0);
             });
