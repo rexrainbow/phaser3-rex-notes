@@ -35035,7 +35035,8 @@
         right: GetValue$1(config, 'space.firstNameTitle', 0)
       }
     });
-    var firstNameInputConfig = GetValue$1(config, 'firstNameInput', config.nameInput);
+    var defaultNameInputConfig = config.nameInput || {};
+    var firstNameInputConfig = GetValue$1(config, 'firstNameInput', defaultNameInputConfig);
     var firstNameInput = CreateInputText(scene, firstNameInputConfig, creators.firstNameInput || creators.nameInput);
     var expandFirstNameSizer = !firstNameInputConfig.hasOwnProperty('width');
     firstNameSizer.add(firstNameInput, {
@@ -35057,7 +35058,7 @@
         right: GetValue$1(config, 'space.lastNameTitle', 0)
       }
     });
-    var lastNameInputConfig = GetValue$1(config, 'firstNameInput', config.nameInput);
+    var lastNameInputConfig = GetValue$1(config, 'firstNameInput', defaultNameInputConfig);
     var lastNameInput = CreateInputText(scene, lastNameInputConfig, creators.lastNameInput || creators.nameInput);
     var expandLastNameSizer = !lastNameInputConfig.hasOwnProperty('width');
     lastNameSizer.add(lastNameInput, {
