@@ -34,7 +34,8 @@ var CreateContent = function (scene, config, creators) {
         }
     );
 
-    var firstNameInputConfig = GetValue(config, 'firstNameInput', config.nameInput);
+    var defaultNameInputConfig = config.nameInput || {};
+    var firstNameInputConfig = GetValue(config, 'firstNameInput', defaultNameInputConfig);
     var firstNameInput = CreateInputText(scene, firstNameInputConfig, creators.firstNameInput || creators.nameInput);
     var expandFirstNameSizer = !firstNameInputConfig.hasOwnProperty('width');
     firstNameSizer.add(
@@ -62,7 +63,7 @@ var CreateContent = function (scene, config, creators) {
         }
     );
 
-    var lastNameInputConfig = GetValue(config, 'firstNameInput', config.nameInput);
+    var lastNameInputConfig = GetValue(config, 'firstNameInput', defaultNameInputConfig);
     var lastNameInput = CreateInputText(scene, lastNameInputConfig, creators.lastNameInput || creators.nameInput);
     var expandLastNameSizer = !lastNameInputConfig.hasOwnProperty('width');
     lastNameSizer.add(

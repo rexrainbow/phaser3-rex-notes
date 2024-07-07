@@ -3,6 +3,7 @@ import MarkdownVisualNovel from '../../templates/markdownvisualnovel/MarkdownVis
 import TextBoxStyle from './styles/TextBoxStyle.js';
 import ChoiceStyle from './styles/ChoiceStyle.js';
 import TitleStyle from './styles/TitleStyle.js';
+import NameInputStyle from './styles/NameInputStyle.js';
 
 class Demo extends Phaser.Scene {
 
@@ -48,6 +49,7 @@ class Demo extends Phaser.Scene {
                 TEXTBOX: TextBoxStyle,
                 CHOICE: ChoiceStyle,
                 TITLE: TitleStyle,
+                NAMEINPUT: NameInputStyle,
             },
             rootLayer,
             multipleCamerasEnable: true,

@@ -14,14 +14,14 @@ var Choice = function (
     if (option1) { choices.push({ text: option1, value: 1 }); }
     if (option2) { choices.push({ text: option2, value: 2 }); }
     if (option3) { choices.push({ text: option3, value: 3 }); }
-    var displayContent = {
-        title: title,
-        content: content,
-        choices: choices,
-    }
+
     gameObject
         .setVisible(true)
-        .resetDisplayContent(displayContent)
+        .resetDisplayContent({
+            title,
+            content,
+            choices,
+        })
         .layout();
 
     commandExecutor.waitEvent(gameObject, 'complete');

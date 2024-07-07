@@ -50,6 +50,9 @@ CHOICE
   id=Choice
   vpw=0.6
 
+NAMEINPUT
+  id=NameInput
+  vpw=0.4
 
 ## Section A
 
@@ -96,7 +99,12 @@ Background.cross
   key=classroom
   mode=curtain
   duration=2000
-  
+
+NameInput.input
+  title=My name is ...
+  firstName=BBB
+  lastName=AAA
+
 CharacterA.to
   vpx=0.8
   ease=Back
@@ -127,7 +135,7 @@ CharacterA.say
   expression=smile
   displayName=???
   icon=portraits
-  text=Hi
+  text=Hi, {{firstName}} {{lastName}}
 
 CharacterA.say
   expression=happy

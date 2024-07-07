@@ -41,19 +41,15 @@ class Demo extends Phaser.Scene {
             nameInput: {
                 width: 150,
                 background: {
-                    color: COLOR_DARK
-                },
-                focusStyle: {
-                    color: COLOR_MAIN,
+                    color: COLOR_DARK,
+                    'focus.color': COLOR_MAIN,
                 },
                 style: {
                     backgroundBottomY: 4,
                     backgroundHeight: 18,
+                    'cursor.color': 'black',
+                    'cursor.backgroundColor': 'white',
                 },
-                cursorStyle: {
-                    color: 'black',
-                    backgroundColor: 'white',
-                }
             },
 
             button: {

@@ -6,12 +6,14 @@ import RegisterSpriteType from './sprite/RegisterSpriteType.js';
 import RegisterTextboxType from './textbox/RegisterTextboxType.js';
 import RegisterTitleType from './title/RegisterTitleType.js';
 import RegisterChoiceDialogType from './choicedialog/RegisterChoiceDialogType.js';
+import RegisterNameInputDialogType from './nameinputdialog/RegisterChoiceDialogType.js';
 
 const RegisterHandlers = [
     RegisterSpriteType,
     RegisterTextboxType,
     RegisterBackgroundType,
     RegisterChoiceDialogType,
+    RegisterNameInputDialogType,
     RegisterTitleType,
 ];
 
