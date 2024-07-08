@@ -3,6 +3,10 @@ import CreateScrollable from '../builders/CreateScrollable';
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 var AddScrollable = function (config) {
+    if (config === undefined) {
+        config = {};
+    }
+
     var scene = this.scene;
 
     // Create scrollable
@@ -17,13 +21,16 @@ var AddScrollable = function (config) {
     // Add scrollable
     this.add(
         scrollable,
-        { expand: true }
+        {
+            proportion: (scrollable.minWidth === 0) ? 1 : 0,
+            expand: true
+        }
     );
 
     // Set content
     scrollable.setTitle(config);
 
-    var childTweaker = scrollable.childrenMap.child;
+    var childTweaker = scrollable.childrenMap.panel;
 
     if (config.key) {
         this.root.addChildrenMap(config.key, childTweaker);

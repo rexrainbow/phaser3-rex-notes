@@ -38,6 +38,8 @@ var CreateScrollable = function (scene, config, style) {
         slider: sliderStyle,
 
         background: background,
+
+        ...config
     })
     scene.add.existing(scrollable);
 

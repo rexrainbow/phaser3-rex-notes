@@ -3,6 +3,10 @@ import CreateFolder from '../builders/CreateFolder.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 var AddFolder = function (config) {
+    if (config === undefined) {
+        config = {};
+    }
+
     var scene = this.scene;
 
     // Create folder

@@ -43,6 +43,11 @@ var AddProperties = function (tweaker, properties, target, monitor) {
                 }
                 break;
 
+            case 'scrollable':
+                var scrollable = tweaker.addScrollable(property);
+                AddProperties(scrollable, property.$properties, target, monitor);
+                break;
+
             case 'separator':
                 tweaker.addSeparator();
                 break;

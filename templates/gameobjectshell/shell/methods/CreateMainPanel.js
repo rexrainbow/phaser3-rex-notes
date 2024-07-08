@@ -21,8 +21,8 @@ var CreateMainPanel = function (config) {
 
     gameObjectPanel.setDirty(false);
 
-    mainPanel.left = 0;
-    mainPanel.top = 0;
+    mainPanel.left = 10;
+    mainPanel.top = 10;
 
     this.addToUILayer(mainPanel);
 

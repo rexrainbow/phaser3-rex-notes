@@ -3,6 +3,10 @@ import CreateBackground from '../builders/CreateBackground';
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 var AddSeparator = function (config) {
+    if (config === undefined) {
+        config = {};
+    }
+
     var scene = this.scene;
 
     // Create separator

@@ -3,11 +3,11 @@ import CreateButtons from '../builders/CreateButtons.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 var AddButtons = function (config) {
-    var scene = this.scene;
-
     if (config === undefined) {
         config = {};
     }
+
+    var scene = this.scene;
 
     var target = config.bindingTarget;
     delete config.bindingTarget;

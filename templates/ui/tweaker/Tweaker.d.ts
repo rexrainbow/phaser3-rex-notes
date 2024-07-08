@@ -245,12 +245,25 @@ declare namespace Tweaker {
         key?: string,
     }
 
+    interface IAddScrollableConfig {
+        title?: string,
+        height?: string
+
+        key?: string,
+    }
+
     interface IAddInputRowProperty extends IAddInputConfig {
         $key: string
     }
 
     interface IAddFolderRowProperty extends IAddFolderConfig {
         $type: 'folder',
+        $target?: Object,
+        $properties: RowsPropertyType[]
+    }
+
+    interface IAddScrollableRowProperty extends IAddScrollableConfig {
+        $type: 'scrollable',
         $target?: Object,
         $properties: RowsPropertyType[]
     }
@@ -281,7 +294,7 @@ declare namespace Tweaker {
     }
 
     type RowsPropertyType = IAddInputRowProperty |
-        IAddFolderRowProperty | IAddTabRowProperty |
+        IAddFolderRowProperty | IAddTabRowProperty | IAddScrollableRowProperty |
         IAddSeparatorRowProperty | IAddButtonRowProperty | IAddButtonsRowProperty;
 
     interface IAcceptConfig extends IAddInputConfig {
@@ -358,6 +371,10 @@ declare class Tweaker extends Sizer {
     addTab(
         config: Tweaker.IAddTabConfig
     ): Tweaker[];
+
+    addScrollable(
+        config: Tweaker.IAddScrollableConfig
+    ): Tweaker;
 
     addRows(
         properties: Tweaker.RowsPropertyType[],

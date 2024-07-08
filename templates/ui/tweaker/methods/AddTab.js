@@ -3,6 +3,10 @@ import CreateTab from '../builders/CreateTab.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 var AddTab = function (config) {
+    if (config === undefined) {
+        config = {};
+    }
+
     var scene = this.scene;
 
     // Create tab

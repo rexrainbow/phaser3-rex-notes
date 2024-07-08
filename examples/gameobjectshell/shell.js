@@ -62,7 +62,7 @@ var CreateGameObjectShell = function (scene) {
     var frameNames = scene.sys.textures.get('icons').getFrameNames();
     return scene.rexGameObjectShell.add.shell({
         panel: {
-            width: 300,
+            width: 300, height: 300,
             styles: {
                 inputRow: {
                     list: {
@@ -90,6 +90,13 @@ var CreateGameObjectShell = function (scene) {
                             alignParent: 'icon'
                         }
                     },
+                },
+
+                scrollable: {
+                    slider: {
+                        track: { color: COLOR_DARK, width: 20, },
+                        thumb: { color: COLOR_LIGHT, width: 20, height: 20 }
+                    }
                 }
             }
         },

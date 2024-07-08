@@ -9,7 +9,14 @@ class PropertiesPanel extends Tweaker {
         }
         super(scene, MergeConfig(config));
 
-        AddProperties.call(this, extraProperties);
+        var propertiesPanel;
+        if (config.hasOwnProperty('height')) {
+            propertiesPanel = this.addScrollable();
+        } else {
+            propertiesPanel = this;
+        }
+
+        AddProperties.call(propertiesPanel, extraProperties);
 
         this.setVisible(false);
     }
