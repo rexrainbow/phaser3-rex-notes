@@ -117,8 +117,8 @@ class CanvasText {
 
                 if (!customTextWrapCallback) {
                     wrapLines = WrapText(
-                        context,
                         plainText,
+                        context,
                         wrapMode, wrapWidth,
                         cursorX,
                         wrapTextLinesPool
@@ -126,8 +126,8 @@ class CanvasText {
 
                 } else { // customTextWrapCallback
                     wrapLines = customTextWrapCallback.call(customTextWrapCallbackScope,
-                        context,
                         plainText,
+                        context,
                         wrapWidth,
                         cursorX
                     );

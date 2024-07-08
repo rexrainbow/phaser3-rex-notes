@@ -10,7 +10,7 @@ const CHAR_WRAP = CONST.CHAR_WRAP;
 const MIX_WRAP = CONST.MIX_WRAP;
 const splitRegExp = CONST.SPLITREGEXP;
 
-var WrapText = function (context, text, wrapMode, wrapWidth, offset, wrapTextLinesPool) {
+var WrapText = function (text, context, wrapMode, wrapWidth, offset, wrapTextLinesPool) {
     if (wrapWidth <= 0) {
         wrapMode = NO_WRAP;
     }
@@ -46,8 +46,6 @@ var WrapText = function (context, text, wrapMode, wrapWidth, offset, wrapTextLin
         }
 
         var tokenArray = ParseLine(line, wrapMode);
-
-
         var token, tokenWidth, isLastToken;
         var lineText = '', lineWidth = 0;
         var currLineWidth;
@@ -68,7 +66,7 @@ var WrapText = function (context, text, wrapMode, wrapWidth, offset, wrapTextLin
                 }
 
                 // Word break
-                retLines.push(...WrapText(context, token, CHAR_WRAP, wrapWidth, 0, wrapTextLinesPool));
+                retLines.push(...WrapText(token, context, CHAR_WRAP, wrapWidth, 0, wrapTextLinesPool));
                 // Continue at last-wordBreak-line
                 var lastwordBreakLine = retLines.pop();
                 lineText = lastwordBreakLine.text;
