@@ -81,10 +81,6 @@ class CanvasText {
         var canvas = this.canvas;
         var context = this.context;
 
-        var MeasureText = function (text) {
-            return context.measureText(text).width;
-        }
-
         var cursorX = 0,
             cursorY = 0;
 
@@ -124,29 +120,32 @@ class CanvasText {
 
                 if (!customTextWrapCallback) {
                     wrapLines = WrapText(
+                        context,
                         plainText,
-                        MeasureText,
                         wrapMode, wrapWidth,
                         cursorX,
                         wrapTextLinesPool
                     );
+
                 } else { // customTextWrapCallback
                     wrapLines = customTextWrapCallback.call(customTextWrapCallbackScope,
+                        context,
                         plainText,
-                        MeasureText,
                         wrapWidth,
                         cursorX
                     );
+
                     if (typeof (wrapLines) === 'string') {
                         wrapLines = wrapLines.split('\n');
                     }
-                    var n;
+
+                    var segment;
                     for (var j = 0, jLen = wrapLines.length; j < jLen; j++) {
-                        n = wrapLines[j];
-                        if (typeof (n) === 'string') {
+                        segment = wrapLines[j];
+                        if (typeof (segment) === 'string') {
                             wrapLines[j] = wrapTextLinesPool.getLine(
-                                n,
-                                MeasureText(n),
+                                segment,
+                                context.measureText(segment).width,
                                 (j < (jLen - 1)) ? 2 : 0
                             );
                         } else {
@@ -156,16 +155,22 @@ class CanvasText {
                 }  // customTextWrapCallback
 
                 // add pens
-                var n;
+                var segment;
                 for (var j = 0, jLen = wrapLines.length; j < jLen; j++) {
-                    n = wrapLines[j];
-                    penManager.addTextPen(n.text, cursorX, cursorY, n.width, Clone(curProp), n.newLineMode);
+                    segment = wrapLines[j];
+                    penManager.addTextPen(
+                        segment.text,
+                        cursorX, cursorY,
+                        segment.width,
+                        Clone(curProp),
+                        segment.newLineMode
+                    );
 
-                    if (n.newLineMode !== NO_NEWLINE) {
+                    if (segment.newLineMode !== NO_NEWLINE) {
                         cursorX = 0;
                         cursorY += lineHeight;
                     } else {
-                        cursorX += n.width;
+                        cursorX += segment.width;
                     }
 
                 }

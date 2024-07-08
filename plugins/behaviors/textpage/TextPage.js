@@ -118,6 +118,9 @@ class TextPage extends ComponentBase {
     }
 
     get pageLinesCount() {
+        // Since the line height of each line is the same, 
+        // each page will have the same number of lines
+
         if (this.maxLines !== undefined) {
             return this.maxLines;
 

@@ -10,7 +10,7 @@ const CHAR_WRAP = CONST.CHAR_WRAP;
 const MIX_WRAP = CONST.MIX_WRAP;
 const splitRegExp = CONST.SPLITREGEXP;
 
-var WrapText = function (text, getTextWidth, wrapMode, wrapWidth, offset, wrapTextLinesPool) {
+var WrapText = function (context, text, wrapMode, wrapWidth, offset, wrapTextLinesPool) {
     if (wrapWidth <= 0) {
         wrapMode = NO_WRAP;
     }
@@ -29,7 +29,7 @@ var WrapText = function (text, getTextWidth, wrapMode, wrapWidth, offset, wrapTe
         newLineMode = (i === (linesLen - 1)) ? NO_NEWLINE : RAW_NEWLINE;
 
         if (isNoWrap) {
-            var textWidth = getTextWidth(line);
+            var textWidth = context.measureText(line).width;
             retLines.push(wrapTextLinesPool.getLine(line, textWidth, newLineMode));
             continue;
         }
@@ -38,7 +38,7 @@ var WrapText = function (text, getTextWidth, wrapMode, wrapWidth, offset, wrapTe
 
         // Short string testing
         if (line.length <= 100) {
-            var textWidth = getTextWidth(line);
+            var textWidth = context.measureText(line).width;
             if (textWidth <= remainWidth) {
                 retLines.push(wrapTextLinesPool.getLine(line, textWidth, newLineMode));
                 continue;
@@ -53,7 +53,7 @@ var WrapText = function (text, getTextWidth, wrapMode, wrapWidth, offset, wrapTe
         var currLineWidth;
         for (var j = 0, tokenLen = tokenArray.length; j < tokenLen; j++) {
             token = tokenArray[j];
-            tokenWidth = getTextWidth(token);
+            tokenWidth = context.measureText(token).width;
 
             // Text width of single token is larger than a line width
             if ((tokenWidth > wrapWidth) && IsWord(token)) {
@@ -68,7 +68,7 @@ var WrapText = function (text, getTextWidth, wrapMode, wrapWidth, offset, wrapTe
                 }
 
                 // Word break
-                retLines.push(...WrapText(token, getTextWidth, CHAR_WRAP, wrapWidth, 0, wrapTextLinesPool));
+                retLines.push(...WrapText(context, token, CHAR_WRAP, wrapWidth, 0, wrapTextLinesPool));
                 // Continue at last-wordBreak-line
                 var lastwordBreakLine = retLines.pop();
                 lineText = lastwordBreakLine.text;
