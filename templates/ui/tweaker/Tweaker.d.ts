@@ -123,6 +123,22 @@ declare namespace Tweaker {
             pages?: Pages.IConfig,
         },
 
+        scrollable?: {
+            title?: SimpleLabel.IConfig,
+
+            background?: CreateBackground.IConfig,
+
+            slider?: {
+                track: RoundRectangle.IConfig,
+                thumb: RoundRectangle.IConfig,
+            },
+
+            space?: {
+                left?: number, right?: number, top?: number, bottom?: number,
+                item?: number
+            },
+        },
+
         separator?: RoundRectangle.IConfig,
 
         space?: {
