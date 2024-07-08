@@ -617,6 +617,14 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md), [containe
         ```javascript
         var layer = panel.getElement('panelLayer');
         ```
+    - Header game object
+        ```javascript
+        var childPanel = panel.getElement('header');
+        ```
+    - Footer game object
+        ```javascript
+        var childPanel = panel.getElement('footer');
+        ```
     - Slider
         - Track
             ```javascript
