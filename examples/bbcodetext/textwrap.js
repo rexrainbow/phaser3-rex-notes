@@ -57,7 +57,7 @@ class Demo extends Phaser.Scene {
             wrap: {
                 mode: 'word',
                 width: 180,
-                callback: function (text, getTextWidth, wrapWidth, offset) {
+                callback: function (context, text, wrapWidth, offset) {
                     return text.split(' ');
                 }
             },

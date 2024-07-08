@@ -9,6 +9,8 @@ import Clone from '../../../../utils/object/Clone.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 const NO_WRAP = CONST.NO_WRAP;
 const NO_NEWLINE = CONST.NO_NEWLINE;
+const RAW_NEWLINE = CONST.RAW_NEWLINE;
+const WRAPPED_NEWLINE = CONST.WRAPPED_NEWLINE;
 
 class CanvasText {
     constructor(config) {
@@ -30,11 +32,6 @@ class CanvasText {
         this.hitAreaManager = new HitAreaManager();
         this.lastHitAreaKey = null;
         this.urlTagCursorStyle = null;
-
-        var context = this.context;
-        this.getTextWidth = function (text) {
-            return context.measureText(text).width;
-        }
     }
 
     destroy() {
@@ -146,7 +143,7 @@ class CanvasText {
                             wrapLines[j] = wrapTextLinesPool.getLine(
                                 segment,
                                 context.measureText(segment).width,
-                                (j < (jLen - 1)) ? 2 : 0
+                                (j < (jLen - 1)) ? WRAPPED_NEWLINE : NO_NEWLINE
                             );
                         } else {
                             reuseLines = false;
