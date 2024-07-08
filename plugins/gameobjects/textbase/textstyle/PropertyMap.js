@@ -56,8 +56,6 @@ var PropertyMap = {
     // wrap
     wrapMode: ['wrap.mode', 0, null],
     wrapWidth: ['wrap.width', 0, null],
-    wrapCallback: ['wrap.callback', null],
-    wrapCallbackScope: ['wrap.callbackScope', null],
 };
 
 export default PropertyMap;
