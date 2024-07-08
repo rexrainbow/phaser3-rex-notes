@@ -83,6 +83,9 @@ class CanvasText {
 
         var cursorX = 0,
             cursorY = 0;
+
+        var customTextWrapCallback = textStyle.wrapCallback,
+            customTextWrapCallbackScope = textStyle.wrapCallbackScope;
         var reuseLines = true;
 
         var plainText, curProp, curStyle;
@@ -115,13 +118,41 @@ class CanvasText {
                 curStyle.syncFont(canvas, context);
                 curStyle.syncStyle(canvas, context);
 
-                wrapLines = WrapText(
-                    context,
-                    plainText,
-                    wrapMode, wrapWidth,
-                    cursorX,
-                    wrapTextLinesPool
-                );
+                if (!customTextWrapCallback) {
+                    wrapLines = WrapText(
+                        context,
+                        plainText,
+                        wrapMode, wrapWidth,
+                        cursorX,
+                        wrapTextLinesPool
+                    );
+
+                } else { // customTextWrapCallback
+                    wrapLines = customTextWrapCallback.call(customTextWrapCallbackScope,
+                        context,
+                        plainText,
+                        wrapWidth,
+                        cursorX
+                    );
+
+                    if (typeof (wrapLines) === 'string') {
+                        wrapLines = wrapLines.split('\n');
+                    }
+
+                    var segment;
+                    for (var j = 0, jLen = wrapLines.length; j < jLen; j++) {
+                        segment = wrapLines[j];
+                        if (typeof (segment) === 'string') {
+                            wrapLines[j] = wrapTextLinesPool.getLine(
+                                segment,
+                                context.measureText(segment).width,
+                                (j < (jLen - 1)) ? 2 : 0
+                            );
+                        } else {
+                            reuseLines = false;
+                        }
+                    }
+                }  // customTextWrapCallback
 
                 // add pens
                 var segment;

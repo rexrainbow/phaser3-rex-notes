@@ -64,6 +64,8 @@ class TextStyle {
 
         this.wrapMode;
         this.wrapWidth;
+        this.wrapCallback;
+        this.wrapCallbackScope;
 
         this._font;
 
@@ -125,12 +127,17 @@ class TextStyle {
             var defaultValue = (setDefaults) ? prop[1] : this[key];
             var postCallback = prop[2];
 
-            var value = GetAdvancedValue(style, objKey, defaultValue);
-            if (postCallback) {
-                value = postCallback(value);
-            }
-            this[key] = value;
 
+            if (key === 'wrapCallback' || key === 'wrapCallbackScope') {
+                // Callback & scope should be set without processing the values
+                this[key] = GetValue(style, objKey, defaultValue);
+            } else {
+                var value = GetAdvancedValue(style, objKey, defaultValue);
+                if (postCallback) {
+                    value = postCallback(value);
+                }
+                this[key] = value;
+            }
 
         }
 
