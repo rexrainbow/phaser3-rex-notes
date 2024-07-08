@@ -205,7 +205,7 @@ class CanvasText {
         return this.penManager.lines;
     }
 
-    get desplayLinesCount() {
+    get displayLinesCount() {
         var linesCount = this.penManager.linesCount,
             maxLines = this.defaultStyle.maxLines;
         if ((maxLines > 0) && (linesCount > maxLines)) {
@@ -219,7 +219,7 @@ class CanvasText {
     }
 
     get linesHeight() {
-        var linesCount = this.desplayLinesCount;
+        var linesCount = this.displayLinesCount;
         var linesHeight = (this.defaultStyle.lineHeight * linesCount);
         if (linesCount > 0) {
             linesHeight -= this.defaultStyle.lineSpacing;
