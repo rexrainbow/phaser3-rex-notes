@@ -1910,7 +1910,7 @@
 
   var GetFastValue = Phaser.Utils.Objects.GetFastValue;
   var NO_NEWLINE$2 = CONST.NO_NEWLINE;
-  var WRAPPED_NEWLINE$1 = CONST.WRAPPED_NEWLINE;
+  var WRAPPED_NEWLINE$2 = CONST.WRAPPED_NEWLINE;
   var PenManager = /*#__PURE__*/function () {
     function PenManager(config) {
       _classCallCheck(this, PenManager);
@@ -1969,7 +1969,7 @@
         var x = previousPen ? previousPen.lastX : 0;
         var y = previousPen ? previousPen.y : 0;
         var prop = previousPen ? Clone(previousPen.prop) : null;
-        this.addTextPen('', x, y, 0, prop, WRAPPED_NEWLINE$1);
+        this.addTextPen('', x, y, 0, prop, WRAPPED_NEWLINE$2);
         return this;
       }
     }, {
@@ -2377,12 +2377,12 @@
 
   var NO_NEWLINE$1 = CONST.NO_NEWLINE;
   var RAW_NEWLINE = CONST.RAW_NEWLINE;
-  var WRAPPED_NEWLINE = CONST.WRAPPED_NEWLINE;
+  var WRAPPED_NEWLINE$1 = CONST.WRAPPED_NEWLINE;
   var NO_WRAP$1 = CONST.NO_WRAP;
   var WORD_WRAP = CONST.WORD_WRAP;
   var CHAR_WRAP = CONST.CHAR_WRAP;
   var splitRegExp = CONST.SPLITREGEXP;
-  var WrapText = function WrapText(text, getTextWidth, wrapMode, wrapWidth, offset, wrapTextLinesPool) {
+  var WrapText = function WrapText(text, context, wrapMode, wrapWidth, offset, wrapTextLinesPool) {
     if (wrapWidth <= 0) {
       wrapMode = NO_WRAP$1;
     }
@@ -2399,7 +2399,7 @@
       line = lines[i];
       newLineMode = i === linesLen - 1 ? NO_NEWLINE$1 : RAW_NEWLINE;
       if (isNoWrap) {
-        var textWidth = getTextWidth(line);
+        var textWidth = context.measureText(line).width;
         retLines.push(wrapTextLinesPool.getLine(line, textWidth, newLineMode));
         continue;
       }
@@ -2407,7 +2407,7 @@
 
       // Short string testing
       if (line.length <= 100) {
-        var textWidth = getTextWidth(line);
+        var textWidth = context.measureText(line).width;
         if (textWidth <= remainWidth) {
           retLines.push(wrapTextLinesPool.getLine(line, textWidth, newLineMode));
           continue;
@@ -2420,20 +2420,20 @@
       var currLineWidth;
       for (var j = 0, tokenLen = tokenArray.length; j < tokenLen; j++) {
         token = tokenArray[j];
-        tokenWidth = getTextWidth(token);
+        tokenWidth = context.measureText(token).width;
 
         // Text width of single token is larger than a line width
         if (tokenWidth > wrapWidth && IsWord(token)) {
           if (lineText !== '') {
             // Has pending lineText, flush it out
-            retLines.push(wrapTextLinesPool.getLine(lineText, lineWidth, WRAPPED_NEWLINE));
+            retLines.push(wrapTextLinesPool.getLine(lineText, lineWidth, WRAPPED_NEWLINE$1));
           } else if (j === 0 && offset > 0) {
             // No pending lineText, but has previous text. Append a newline
-            retLines.push(wrapTextLinesPool.getLine('', 0, WRAPPED_NEWLINE));
+            retLines.push(wrapTextLinesPool.getLine('', 0, WRAPPED_NEWLINE$1));
           }
 
           // Word break
-          retLines.push.apply(retLines, _toConsumableArray(WrapText(token, getTextWidth, CHAR_WRAP, wrapWidth, 0, wrapTextLinesPool)));
+          retLines.push.apply(retLines, _toConsumableArray(WrapText(token, context, CHAR_WRAP, wrapWidth, 0, wrapTextLinesPool)));
           // Continue at last-wordBreak-line
           var lastwordBreakLine = retLines.pop();
           lineText = lastwordBreakLine.text;
@@ -2451,7 +2451,7 @@
         currLineWidth = lineWidth + tokenWidth;
         if (currLineWidth > remainWidth) {
           // New line
-          retLines.push(wrapTextLinesPool.getLine(lineText, lineWidth, WRAPPED_NEWLINE));
+          retLines.push(wrapTextLinesPool.getLine(lineText, lineWidth, WRAPPED_NEWLINE$1));
           lineText = token;
           lineWidth = tokenWidth;
           remainWidth = wrapWidth;
@@ -2535,6 +2535,7 @@
   var GetValue$3 = Phaser.Utils.Objects.GetValue;
   var NO_WRAP = CONST.NO_WRAP;
   var NO_NEWLINE = CONST.NO_NEWLINE;
+  var WRAPPED_NEWLINE = CONST.WRAPPED_NEWLINE;
   var CanvasText = /*#__PURE__*/function () {
     function CanvasText(config) {
       _classCallCheck(this, CanvasText);
@@ -2554,10 +2555,6 @@
       this.hitAreaManager = new HitAreaManager();
       this.lastHitAreaKey = null;
       this.urlTagCursorStyle = null;
-      var context = this.context;
-      this.getTextWidth = function (text) {
-        return context.measureText(text).width;
-      };
     }
     _createClass(CanvasText, [{
       key: "destroy",
@@ -2601,9 +2598,6 @@
         }
         var canvas = this.canvas;
         var context = this.context;
-        var MeasureText = function MeasureText(text) {
-          return context.measureText(text).width;
-        };
         var cursorX = 0,
           cursorY = 0;
         var customTextWrapCallback = textStyle.wrapCallback,
@@ -2640,18 +2634,18 @@
             curStyle.syncFont(canvas, context);
             curStyle.syncStyle(canvas, context);
             if (!customTextWrapCallback) {
-              wrapLines = WrapText(plainText, MeasureText, wrapMode, wrapWidth, cursorX, wrapTextLinesPool);
+              wrapLines = WrapText(plainText, context, wrapMode, wrapWidth, cursorX, wrapTextLinesPool);
             } else {
               // customTextWrapCallback
-              wrapLines = customTextWrapCallback.call(customTextWrapCallbackScope, plainText, MeasureText, wrapWidth, cursorX);
+              wrapLines = customTextWrapCallback.call(customTextWrapCallbackScope, plainText, context, wrapWidth, cursorX);
               if (typeof wrapLines === 'string') {
                 wrapLines = wrapLines.split('\n');
               }
-              var n;
+              var segment;
               for (var j = 0, jLen = wrapLines.length; j < jLen; j++) {
-                n = wrapLines[j];
-                if (typeof n === 'string') {
-                  wrapLines[j] = wrapTextLinesPool.getLine(n, MeasureText(n), j < jLen - 1 ? 2 : 0);
+                segment = wrapLines[j];
+                if (typeof segment === 'string') {
+                  wrapLines[j] = wrapTextLinesPool.getLine(segment, context.measureText(segment).width, j < jLen - 1 ? WRAPPED_NEWLINE : NO_NEWLINE);
                 } else {
                   reuseLines = false;
                 }
@@ -2659,15 +2653,15 @@
             } // customTextWrapCallback
 
             // add pens
-            var n;
+            var segment;
             for (var j = 0, jLen = wrapLines.length; j < jLen; j++) {
-              n = wrapLines[j];
-              penManager.addTextPen(n.text, cursorX, cursorY, n.width, Clone(curProp), n.newLineMode);
-              if (n.newLineMode !== NO_NEWLINE) {
+              segment = wrapLines[j];
+              penManager.addTextPen(segment.text, cursorX, cursorY, segment.width, Clone(curProp), segment.newLineMode);
+              if (segment.newLineMode !== NO_NEWLINE) {
                 cursorX = 0;
                 cursorY += lineHeight;
               } else {
-                cursorX += n.width;
+                cursorX += segment.width;
               }
             }
             if (reuseLines) {
@@ -2704,7 +2698,7 @@
         return this.penManager.lines;
       }
     }, {
-      key: "desplayLinesCount",
+      key: "displayLinesCount",
       get: function get() {
         var linesCount = this.penManager.linesCount,
           maxLines = this.defaultStyle.maxLines;
@@ -2721,7 +2715,7 @@
     }, {
       key: "linesHeight",
       get: function get() {
-        var linesCount = this.desplayLinesCount;
+        var linesCount = this.displayLinesCount;
         var linesHeight = this.defaultStyle.lineHeight * linesCount;
         if (linesCount > 0) {
           linesHeight -= this.defaultStyle.lineSpacing;
