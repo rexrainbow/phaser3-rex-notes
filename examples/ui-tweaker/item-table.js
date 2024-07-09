@@ -44,16 +44,23 @@ class Demo extends Phaser.Scene {
             editor.setBindingTarget(item);
         }, this)
 
-        editor.addRows([
-            {
-                $key: 'name', title: 'Name', view: 'string',
-                onValueChange() { gridTable.setItems(items) }
-            },
-            { $key: 'description', title: 'Descr-\niption', view: 'textarea', height: 100 },
-            { $key: 'a', view: 'number' },
-            { $key: 'b', view: 'number' },
-            { $key: 'c', view: 'boolean' },
-        ], false)
+        editor
+            .addScrollable()
+            .addRows([
+                {
+                    $key: 'name', title: 'Name', view: 'string',
+                    onValueChange() { gridTable.setItems(items) }
+                },
+                { $key: 'description', title: 'Descr-\niption', view: 'textarea', height: 100 },
+                { $key: 'a', view: 'number' },
+                { $key: 'b', view: 'number' },
+                { $key: 'c', view: 'boolean' },
+                { $key: 'd', view: 'number' },
+                { $key: 'e', view: 'number' },
+                { $key: 'f', view: 'number' },
+                { $key: 'g', view: 'number' },
+                { $key: 'h', view: 'number' },
+            ], false)
 
         panel.layout();
     }
@@ -68,9 +75,14 @@ var CreateItems = function (amount) {
         items.push({
             name: `Item ${i}`,
             description: `Item ${i}`,
-            a: 10,
-            b: 20,
+            a: 10 + i,
+            b: 20 + i,
             c: false,
+            d: 30 + i,
+            e: 40 + i,
+            f: 50 + i,
+            g: 60 + i,
+            h: 70 + i,
         })
     }
     return items;
@@ -301,6 +313,14 @@ var CreateEditor = function (scene) {
                 pages: {
                     fadeIn: 300
                 },
+            },
+
+            scrollable: {
+                space: { panel: 5 },
+                slider: {
+                    track: { color: COLOR_DARK, width: 16, radius: 8 },
+                    thumb: { color: COLOR_LIGHT, width: 16, height: 16, radius: 8 }
+                }
             },
 
             separator: {

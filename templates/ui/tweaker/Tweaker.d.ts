@@ -134,8 +134,7 @@ declare namespace Tweaker {
             },
 
             space?: {
-                left?: number, right?: number, top?: number, bottom?: number,
-                item?: number
+                panel?: number
             },
         },
 

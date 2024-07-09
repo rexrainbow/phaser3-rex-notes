@@ -66664,7 +66664,8 @@
       },
       slider: sliderStyle,
       background: background,
-      height: GetValue$l(config, 'height', 0)
+      height: GetValue$l(config, 'height', 0),
+      space: GetValue$l(style, 'space', undefined)
     });
     scene.add.existing(scrollable);
     return scrollable;
