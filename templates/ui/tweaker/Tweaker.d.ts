@@ -129,8 +129,12 @@ declare namespace Tweaker {
             background?: CreateBackground.IConfig,
 
             slider?: {
-                track: RoundRectangle.IConfig,
-                thumb: RoundRectangle.IConfig,
+                track: CreateBackground.IConfig,
+                thumb: CreateBackground.IConfig,
+
+                hideUnscrollableSlider?: boolean,
+                adaptThumbSize?: boolean,
+                minThumbSize?: number,
             },
 
             space?: {

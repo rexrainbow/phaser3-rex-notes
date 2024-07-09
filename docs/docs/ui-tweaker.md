@@ -3358,7 +3358,11 @@ Style of scrollable is defined in
                     color: undefined, alpha: 1,
                     strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,
                     shape: undefined
-                }                
+                },
+                
+                // hideUnscrollableSlider: false,
+                // adaptThumbSize: false,
+                // minThumbSize: undefined,
             },
 
             space: {

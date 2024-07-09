@@ -111,6 +111,7 @@ var CreateGridTable = function (scene) {
         slider: {
             track: scene.rexUI.add.roundRectangle(0, 0, 20, 10, 8, COLOR_DARK),
             thumb: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_LIGHT),
+            adaptThumbSize: true,
         },
 
         space: {
@@ -319,7 +320,8 @@ var CreateEditor = function (scene) {
                 space: { panel: 5 },
                 slider: {
                     track: { color: COLOR_DARK, width: 16, radius: 8 },
-                    thumb: { color: COLOR_LIGHT, width: 16, height: 16, radius: 8 }
+                    thumb: { color: COLOR_LIGHT, width: 16, height: 16, radius: 8 },
+                    adaptThumbSize: true,
                 }
             },
 

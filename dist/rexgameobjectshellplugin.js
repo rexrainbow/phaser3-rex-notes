@@ -37802,6 +37802,17 @@
     };
     var child = CreateTweaker(scene, tweakerConfig);
     var sliderStyle = GetValue$z(style, 'slider');
+    if (sliderStyle) {
+      sliderStyle = DeepClone(sliderStyle);
+      var trackStyle = sliderStyle.track;
+      if (trackStyle) {
+        sliderStyle.track = CreateBackground$1(scene, config, trackStyle);
+      }
+      var thumbStyle = sliderStyle.thumb;
+      if (thumbStyle) {
+        sliderStyle.thumb = CreateBackground$1(scene, config, thumbStyle);
+      }
+    }
     var backgroundStyle = GetValue$z(style, 'background');
     var background = CreateBackground$1(scene, config, backgroundStyle);
     var scrollable = new Scrollable(scene, {

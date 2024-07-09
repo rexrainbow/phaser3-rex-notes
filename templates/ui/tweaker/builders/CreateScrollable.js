@@ -2,6 +2,7 @@ import Title from '../gameobjects/label/Title.js';
 import CreateTweaker from '../gameobjects/utils/CreateTweaker.js';
 import CreateBackground from './CreateBackground.js';
 import Scrollable from '../gameobjects/scrollable/Scrollable.js';
+import DeepClone from '../../../../plugins/utils/object/DeepClone.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -19,6 +20,17 @@ var CreateScrollable = function (scene, config, style) {
     var child = CreateTweaker(scene, tweakerConfig);
 
     var sliderStyle = GetValue(style, 'slider');
+    if (sliderStyle) {
+        sliderStyle = DeepClone(sliderStyle);
+        var trackStyle = sliderStyle.track;
+        if (trackStyle) {
+            sliderStyle.track = CreateBackground(scene, config, trackStyle);
+        }
+        var thumbStyle = sliderStyle.thumb;
+        if (thumbStyle) {
+            sliderStyle.thumb = CreateBackground(scene, config, thumbStyle);
+        }
+    }
 
     var backgroundStyle = GetValue(style, 'background');
     var background = CreateBackground(scene, config, backgroundStyle);
