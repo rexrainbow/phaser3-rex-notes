@@ -175,6 +175,9 @@ var tweaker = scene.rexUI.add.tweaker({
         tab: {
         },
 
+        scrollable: {
+        },
+
         space: {
             left: 0, right: 0, top: 0, bottom: 0, item: 0
         },
@@ -204,7 +207,7 @@ var tweaker = scene.rexUI.add.tweaker({
 - `orientation` : Main orientation of the tweaker.
     - `'left-to-right'`, `'horizontal'`,`'h'`, `'x'`, or `0` : Arrange game objects from left ot right.
     - `'top-to-bottom'`, `'vertical'`,`'v'`, `'y'`, or `1` : Arrange game objects from top to bottom. Default value is `1`.
-- `styles`, or `style` : Styles settings of input rows, separator, folder, and tab. See [Styles chapter](ui-tweaker.md#styles) for more detail.
+- `styles`, or `style` : Styles settings of input rows, separator, folder, tab, and scrollable. See [Styles chapter](ui-tweaker.md#styles) for more detail.
     - `style.itemWidth` : Width of input row, used if `orientation` is set to `'y'`(`1`).
     - `styles.space` : Pads spaces.
         - `styles.space.left`, `styles.space.right`, `styles.space.top`, `styles.space.bottom` : Space of bounds.
@@ -1333,6 +1336,32 @@ var childrenTweakers = tweaker.addTab({
 
 See [Style of tab](#style-of-tab)
 
+### Add scrollable
+
+[Scrollable(Panel)](ui-scrollablepanel.md) contains child tweaker game object and slider.
+
+```javascript
+var childTweaker = tweaker.addScrollable({
+    title: titleA,
+
+    // height: 
+});
+
+// childTweaker.addInput(...)
+```
+
+- `childTweaker` : Child tweaker game object. Add input rows by `addInput` method.
+- `title` Title of scrolable.
+    - A string : Title string.
+    - `undefined` : Hide this title game object.
+- `height` :
+    - A number : Height of this [Scrollable(Panel)](ui-scrollablepanel.md).
+    - `undefined` : Expand this scrollable(Panel).
+
+
+See [Style of scrollable](#style-of-scrollable)
+
+
 
 ### Add rows
 
@@ -1411,6 +1440,18 @@ tweaker.addRows(properties, target);
                     ]
                 },
                 // ... More pages
+            ]
+        }
+        ```
+        - `$target` : Override `target` value pass to remainder `$properties`.
+            - `undefined` : Use previous `target` value. Default behavior.
+    - Scrollable
+        ```javascript
+        {
+            $type: 'scrollable', title: undefined,
+            // $target: 
+            $properties: [
+                // ...
             ]
         }
         ```
@@ -3222,6 +3263,111 @@ Style of tab is defined in
 }
 ```
 
+#### Style of scrollable
+
+Style of scrollable is defined in 
+
+- `styles.scrollable`
+
+```javascript
+{
+    // style: {...}
+    styles: {
+        scrollable: {
+            title: {
+                background: {
+                    radius: 0,
+                    // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
+
+                    color: undefined,
+                    alpha: undefined,
+                    strokeColor: undefined,
+                    strokeAlpha: undefined,
+                    strokeWidth: undefined,
+                },
+
+                text: {
+                    fontFamily: 'Courier',
+                    fontSize: '16px',
+                    fontStyle: '',
+                    backgroundColor: null,
+                    color: '#fff',
+                    stroke: '#fff',
+                    strokeThickness: 0,
+                    shadow: {
+                        offsetX: 0,
+                        offsetY: 0,
+                        color: '#000',
+                        blur: 0,
+                        stroke: false,
+                        fill: false
+                    },                  
+                    padding: {
+                        left: 0,
+                        right: 0,
+                        top: 0,
+                        bottom: 0,
+                    },
+                    // more text styles
+                },
+
+                iconSize: undefined,
+                iconWidth: undefined, iconHeight: undefined,
+
+                space: {
+                    left: 0, right: 0, top: 0, bottom:0, 
+                    icon: 0, text: 0
+                },
+
+                expandedIcon: {
+                    color: undefined,
+                    alpha: 1,
+
+                    strokeColor: undefined,
+                    strokeAlpha: 1,
+                    strokeWidth: 1,
+                    arrowOnly: false,
+
+                    easeDuration: 0,
+                }
+            },
+
+            background: {
+                radius: 0,
+                // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
+
+                color: undefined,
+                alpha: undefined,
+                strokeColor: undefined,
+                strokeAlpha: undefined,
+                strokeWidth: undefined,
+            },
+
+            slider: {
+                track: { 
+                    width: 1, height: 1,
+                    radius: 0, 
+                    color: undefined, alpha: 1,
+                    strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,
+                    shape: undefined
+                },
+
+                thumb: { 
+                    width: 1, height: 1,
+                    radius: 0, 
+                    color: undefined, alpha: 1,
+                    strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,
+                    shape: undefined
+                }                
+            },
+
+            space: {
+                left: 0, right: 0, top: 0, bottom:0, 
+            }
+        }
+    }
+}
+```
 
 ### Bind target
 
