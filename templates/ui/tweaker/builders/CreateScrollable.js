@@ -39,7 +39,7 @@ var CreateScrollable = function (scene, config, style) {
 
         background: background,
 
-        ...config
+        height: GetValue(config, 'height', 0)
     })
     scene.add.existing(scrollable);
 

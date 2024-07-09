@@ -11685,9 +11685,9 @@ actionSize: undefined,
 <h3 id="add-scrollable">Add scrollable<a class="headerlink" href="#add-scrollable" title="Permanent link">&para;</a></h3>
 <p><a href="../ui-scrollablepanel/">Scrollable(Panel)</a> contains child tweaker game object and slider.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">childTweaker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">tweaker</span><span class="p">.</span><span class="nx">addScrollable</span><span class="p">({</span>
-<span class="w">    </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="nx">titleA</span><span class="p">,</span>
+<span class="w">    </span><span class="c1">// title: title,</span>
 
-<span class="w">    </span><span class="c1">// height: </span>
+<span class="w">    </span><span class="c1">// height: 0</span>
 <span class="p">});</span>
 
 <span class="c1">// childTweaker.addInput(...)</span>
@@ -11701,7 +11701,7 @@ actionSize: undefined,
 </li>
 <li><code>height</code> :<ul>
 <li>A number : Height of this <a href="../ui-scrollablepanel/">Scrollable(Panel)</a>.</li>
-<li><code>undefined</code> : Expand this scrollable(Panel).</li>
+<li><code>undefined</code>, or <code>0</code> : Expand this scrollable(Panel).</li>
 </ul>
 </li>
 </ul>

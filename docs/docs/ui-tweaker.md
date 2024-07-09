@@ -1342,9 +1342,9 @@ See [Style of tab](#style-of-tab)
 
 ```javascript
 var childTweaker = tweaker.addScrollable({
-    title: titleA,
+    // title: title,
 
-    // height: 
+    // height: 0
 });
 
 // childTweaker.addInput(...)
@@ -1356,7 +1356,7 @@ var childTweaker = tweaker.addScrollable({
     - `undefined` : Hide this title game object.
 - `height` :
     - A number : Height of this [Scrollable(Panel)](ui-scrollablepanel.md).
-    - `undefined` : Expand this scrollable(Panel).
+    - `undefined`, or `0` : Expand this scrollable(Panel).
 
 
 See [Style of scrollable](#style-of-scrollable)

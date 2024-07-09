@@ -531,4 +531,4 @@ See [dialog](ui-dialog.md), [sizer object](ui-sizer.md), [base sizer object](ui-
         var lastName = data.lastName;
       }, scope);
     ```
-    - `data` : See [modal](ui-nameInputdialog.md#modal)
+    - `data` : See [modal](ui-dialog.md#modal)

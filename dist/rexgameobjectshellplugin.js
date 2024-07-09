@@ -37804,7 +37804,7 @@
     var sliderStyle = GetValue$z(style, 'slider');
     var backgroundStyle = GetValue$z(style, 'background');
     var background = CreateBackground$1(scene, config, backgroundStyle);
-    var scrollable = new Scrollable(scene, _objectSpread2({
+    var scrollable = new Scrollable(scene, {
       scrollMode: 0,
       header: title,
       panel: {
@@ -37814,8 +37814,9 @@
         }
       },
       slider: sliderStyle,
-      background: background
-    }, config));
+      background: background,
+      height: GetValue$z(config, 'height', 0)
+    });
     scene.add.existing(scrollable);
     return scrollable;
   };
