@@ -1,21 +1,22 @@
 const Key = Phaser.Input.Keyboard.Key;
 const KeyCodes = Phaser.Input.Keyboard.KeyCodes;
+const KeyNames = ['up', 'down', 'left', 'right'];
 
 class CursorKeys {
     constructor(scene) {
+        // scene: scene instance, or undefined
         this.scene = scene;
 
-        // scene: scene instance, or undefined
-        this.cursorKeys = {
-            up: new Key(scene, KeyCodes.UP),
-            down: new Key(scene, KeyCodes.DOWN),
-            left: new Key(scene, KeyCodes.LEFT),
-            right: new Key(scene, KeyCodes.RIGHT)
-        }
+        this.keys = {};
+        this.cursorKeys = {};
         this.noKeyDown = true;
 
-        // Add more keys in this dictionary
-        this.keys = Object.assign({}, this.cursorKeys);
+        for (var i = 0, cnt = KeyNames.length; i < cnt; i++) {
+            var keyName = KeyNames[i];
+            this.addKey(keyName);
+            this.cursorKeys[keyName] = this.keys[keyName];
+        }
+
     }
 
     shutdown(fromScene) {
