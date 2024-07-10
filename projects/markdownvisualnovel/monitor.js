@@ -16,7 +16,7 @@ class Demo extends Phaser.Scene {
 
     create() {
         var style = {
-            width: 340,
+            width: 340, height: 300,
             colors: {
                 main: 0x424242,
                 light: 0x6d6d6d,
@@ -44,7 +44,13 @@ class Demo extends Phaser.Scene {
                 str: 5,
                 agi: 3,
                 int: 2
-            }
+            },
+            a: 10,
+            b: 20,
+            c: 30,
+            d: 40,
+            e: 50,
+            f: 60
         }
 
         // Formatter of text
@@ -91,6 +97,25 @@ class Demo extends Phaser.Scene {
                         ]
                     },
                 ]
+            },
+            { $type: 'separator' },
+            {
+                $key: 'a',
+            },
+            {
+                $key: 'b',
+            },
+            {
+                $key: 'c',
+            },
+            {
+                $key: 'd',
+            },
+            {
+                $key: 'e',
+            },
+            {
+                $key: 'f',
             },
             { $type: 'separator' },
             {

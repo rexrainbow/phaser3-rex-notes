@@ -1,5 +1,5 @@
 export const GetTweakStyle = function ({
-    width = 340,
+    width = 340, height = 300,
     fontSize = 24,
     colors = {},
     background = {
@@ -8,6 +8,7 @@ export const GetTweakStyle = function ({
         strokeColor: 0xffffff,
     }
 } = {}) {
+
     var {
         main = 0x424242,
         light = 0x6d6d6d,
@@ -19,7 +20,7 @@ export const GetTweakStyle = function ({
     const COLOR_DARK = dark;
 
     return {
-        width: width,
+        width: width, height: height,
 
         styles: {
             space: { left: 10, right: 10, top: 10, bottom: 10, item: 3 },
@@ -173,6 +174,18 @@ export const GetTweakStyle = function ({
                 },
                 pages: {
                     fadeIn: 300
+                },
+            },
+
+            scrollable: {
+                space: { panel: 10 },
+                slider: {
+                    track: { color: COLOR_DARK, width: 20, },
+                    thumb: { color: COLOR_LIGHT, width: 20, height: 20 },
+
+                    hideUnscrollableSlider: true,
+                    adaptThumbSize: true,
+                    minThumbSize: 20
                 },
             },
 

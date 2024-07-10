@@ -2,12 +2,19 @@ import { Tweaker } from '../../ui/ui-components.js';
 import { GetTweakStyle } from './TweakerStyle.js';
 
 var CreateMonitorPanel = function (scene, style, target, properties) {
-    var panel = new Tweaker(scene, GetTweakStyle(style));
-    scene.add.existing(panel);
+    var topPanel = new Tweaker(scene, GetTweakStyle(style));
+    scene.add.existing(topPanel);
 
-    panel.addRows(properties, target, true);
+    var monitorPanel;
+    if (topPanel.minHeight > 0) {
+        monitorPanel = topPanel.addScrollable();
+    } else {
+        monitorPanel = topPanel;
+    }
 
-    return panel;
+    monitorPanel.addRows(properties, target, true);
+
+    return topPanel;
 }
 
 export default CreateMonitorPanel;
