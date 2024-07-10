@@ -10,6 +10,7 @@ declare namespace CursorKeys {
 declare class CursorKeys {
     readonly cursorKeys: CursorKeys.ICursorKeys;
     readonly noKeyDown: boolean;
+    keys: { [name: string]: Phaser.Input.Keyboard.Key };
 
     destroy(): void;
 
@@ -26,6 +27,11 @@ declare class CursorKeys {
     readonly leftKeyDown: boolean;
     readonly rightKeyDown: boolean;
     readonly anyKeyDown: boolean;
+
+    addKey(
+        keyName: string,
+        keyCode?: number | string,
+    ): this;
 
 }
 

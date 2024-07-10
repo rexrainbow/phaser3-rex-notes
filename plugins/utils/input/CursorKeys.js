@@ -3,6 +3,8 @@ const KeyCodes = Phaser.Input.Keyboard.KeyCodes;
 
 class CursorKeys {
     constructor(scene) {
+        this.scene = scene;
+
         // scene: scene instance, or undefined
         this.cursorKeys = {
             up: new Key(scene, KeyCodes.UP),
@@ -11,12 +13,17 @@ class CursorKeys {
             right: new Key(scene, KeyCodes.RIGHT)
         }
         this.noKeyDown = true;
+
+        // Add more keys in this dictionary
+        this.keys = Object.assign({}, this.cursorKeys);
     }
 
     shutdown(fromScene) {
-        for (var key in this.cursorKeys) {
-            this.cursorKeys[key].destroy();
+        this.scene = undefined;
+        for (var key in this.keys) {
+            this.keys[key].destroy();
         }
+        this.keys = undefined;
         this.cursorKeys = undefined;
     }
 
@@ -29,7 +36,7 @@ class CursorKeys {
     }
 
     setKeyState(keyName, isDown) {
-        var key = this.cursorKeys[keyName];
+        var key = this.keys[keyName];
 
         if (!key.enabled) {
             return this;
@@ -53,34 +60,47 @@ class CursorKeys {
 
     clearAllKeysState() {
         this.noKeyDown = true;
-        for (var keyName in this.cursorKeys) {
+        for (var keyName in this.keys) {
             this.setKeyState(keyName, false);
         }
         return this;
     }
 
     getKeyState(keyName) {
-        return this.cursorKeys[keyName];
+        return this.keys[keyName];
     }
 
     get upKeyDown() {
-        return this.cursorKeys.up.isDown;
+        return this.keys.up.isDown;
     }
 
     get downKeyDown() {
-        return this.cursorKeys.down.isDown;
+        return this.keys.down.isDown;
     }
 
     get leftKeyDown() {
-        return this.cursorKeys.left.isDown;
+        return this.keys.left.isDown;
     }
 
     get rightKeyDown() {
-        return this.cursorKeys.right.isDown;
+        return this.keys.right.isDown;
     }
 
     get anyKeyDown() {
         return !this.noKeyDown;
+    }
+
+    addKey(keyName, keyCode) {
+        if (keyCode === undefined) {
+            keyCode = keyName;
+        }
+
+        if (typeof (keyCode) === 'string') {
+            keyCode = KeyCodes[keyCode.toUpperCase()];
+        }
+
+        this.keys[keyName] = new Key(this.scene, keyCode);
+        return this;
     }
 }
 

@@ -42,14 +42,6 @@ class TiltCursor extends CursorKeys {
             .calibration()
     }
 
-    toJSON() {
-        return {
-            enable: this.enable,
-            dir: this.dirMode,
-            forceMin: this.forceMin,
-        };
-    }
-
     setMode(m) {
         if (typeof (m) === 'string') {
             m = DIRMODE[m];
