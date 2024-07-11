@@ -12,6 +12,8 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
+        this.print = this.add.text(0, 0, '')
+
         var gamepadManager = this.input.gamepad;
         gamepadManager
             .on('connected', function () {
@@ -23,6 +25,9 @@ class Demo extends Phaser.Scene {
     }
 
     update() {
+        if (this.input.gamepad.pad1) {
+            this.print.text = 'Has pad1'
+        }
     }
 }
 
@@ -34,14 +39,10 @@ var config = {
     scale: {
         mode: Phaser.Scale.RESIZE,
     },
+    input: {
+        gamepad: true
+    },
     scene: Demo,
-    plugins: {
-        scene: [{
-            key: 'rexGameObjectShell',
-            plugin: GameObjectShellPlugin,
-            mapping: 'rexGameObjectShell'
-        }]
-    }
 };
 
 var game = new Phaser.Game(config);

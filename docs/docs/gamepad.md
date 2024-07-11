@@ -6,6 +6,19 @@ Gamepad's state of buttons, or axis.
 
 ## Usage
 
+### Enable gamepad manager
+
+```javascript
+var config = {
+    // ...
+    input: {
+        gamepad: true
+    },
+    // ...
+}
+var game = new Phaser.Game(config);
+```
+
 ### Get gamepad
 
 - Get all currently connected Gamepads.
