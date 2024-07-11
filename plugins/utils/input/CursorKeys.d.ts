@@ -33,6 +33,8 @@ declare class CursorKeys {
         keyCode?: number | string,
     ): this;
 
+    addKeys(keyNames: string[]): this;
+
 }
 
 export default CursorKeys;

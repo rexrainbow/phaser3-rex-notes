@@ -97,10 +97,20 @@ class CursorKeys {
         }
 
         if (typeof (keyCode) === 'string') {
-            keyCode = KeyCodes[keyCode.toUpperCase()];
+            keyCode = keyCode.toUpperCase();
+            if (KeyCodes.hasOwnProperty(keyCode)) {
+                keyCode = KeyCodes[keyCode];
+            }
         }
 
         this.keys[keyName] = new Key(this.scene, keyCode);
+        return this;
+    }
+
+    addKeys(keyNames) {
+        for (var i = 0, cnt = keyNames.length; i < cnt; i++) {
+            this.addKey(keyNames[i]);
+        }
         return this;
     }
 }
