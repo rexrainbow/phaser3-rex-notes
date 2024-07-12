@@ -44,7 +44,7 @@ var game = new Phaser.Game(config);
 - Button down
     ```javascript
     scene.input.gamepad.on('down', function (gamepad, button, value) {
-    }
+    })
     ```
     or
     ```javascript

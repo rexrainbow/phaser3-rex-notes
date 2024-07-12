@@ -4619,6 +4619,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#enable-gamepad-manager" class="md-nav__link">
+    Enable gamepad manager
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#get-gamepad" class="md-nav__link">
     Get gamepad
   </a>
@@ -9708,6 +9715,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#enable-gamepad-manager" class="md-nav__link">
+    Enable gamepad manager
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#get-gamepad" class="md-nav__link">
     Get gamepad
   </a>
@@ -9786,6 +9800,16 @@
 <li>Author: Richard Davey</li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<h3 id="enable-gamepad-manager">Enable gamepad manager<a class="headerlink" href="#enable-gamepad-manager" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="w">    </span><span class="nx">input</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">gamepad</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">}</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">game</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</code></pre></div>
 <h3 id="get-gamepad">Get gamepad<a class="headerlink" href="#get-gamepad" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get all currently connected Gamepads.
@@ -9809,7 +9833,7 @@
 <ul>
 <li>Button down
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">gamepad</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;down&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">gamepad</span><span class="p">,</span><span class="w"> </span><span class="nx">button</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="p">}</span>
+<span class="p">})</span>
 </code></pre></div>
     or
     <div class="highlight"><pre><span></span><code><span class="nx">gamepad</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;down&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">buttonIndex</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">button</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
