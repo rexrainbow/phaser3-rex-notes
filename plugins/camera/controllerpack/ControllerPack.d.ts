@@ -18,6 +18,8 @@ declare namespace ControllerPack {
         mouseWheelZoom?: boolean,
         mouseWheelZoomEnable?: boolean,
         mouseWheelZoomStep?: number,
+        mouseWheelZoomMin?: number,
+        mouseWheelZoomMax?: number,
 
         enable?: boolean,
 

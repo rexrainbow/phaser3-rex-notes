@@ -7,6 +7,9 @@ declare namespace MouseWheelZoom {
         zoomStep?: number,
         easeDuration?: number,
 
+        minZoom?: number,
+        maxZoom?: number,
+
         enable?: boolean,
     }
 }
@@ -24,6 +27,13 @@ declare class MouseWheelZoom extends ComponentBase {
     camera?: Phaser.Cameras.Scene2D.Camera
 
     resetZoomLevel(): this;
+
+    setMinZoom(value?: number): this;
+    minZoom: number;
+
+    setMaxZoom(value?: number): this;
+    maxZoom: number;
+
 }
 
 export default MouseWheelZoom;

@@ -25,6 +25,8 @@ class Demo extends Phaser.Scene {
         var controller = this.plugins.get('rexCameraController').add(this, {
             // camera: this.cameras.main,
             inputTarget: (bg) ? bg : this,
+
+            mouseWheelZoomMin: 0.01
         });
 
         // controller.toggleEnable().toggleEnable()

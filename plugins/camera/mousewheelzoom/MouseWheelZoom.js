@@ -3,6 +3,7 @@ import GetCameraByName from '../../utils/camera/GetCameraByName.js';
 import EaseZoom from './EaseZoom.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
+const Clamp = Phaser.Math.Clamp;
 
 class MouseWheelZoom extends ComponentBase {
     constructor(scene, config) {
@@ -19,6 +20,8 @@ class MouseWheelZoom extends ComponentBase {
 
         this
             .setEnable(GetValue(config, 'enable', true))
+            .setMinZoom(GetValue(config, 'minZoom'))
+            .setMaxZoom(GetValue(config, 'maxZoom'))
             .setZoomStep(GetValue(config, 'zoomStep', 0.1))
             .setEaseDuration(GetValue(config, 'easeDuration', 200))
             .setCamera(camera)
@@ -66,6 +69,16 @@ class MouseWheelZoom extends ComponentBase {
         return this;
     }
 
+    setMinZoom(value) {
+        this.minZoom = value;
+        return this;
+    }
+
+    setMaxZoom(value) {
+        this.maxZoom = value;
+        return this;
+    }
+
     setZoomStep(step) {
         this.zoomStep = step;
         return this;
@@ -85,6 +98,8 @@ class MouseWheelZoom extends ComponentBase {
         }
 
         this.zoomLevel = Math.round(GetZoomLevel(camera.zoom, this.zoomStep));
+        this.zoom = camera.zoom;
+
         return this;
     }
 
@@ -94,13 +109,31 @@ class MouseWheelZoom extends ComponentBase {
             return;
         }
 
+        var hasMinZoom = (this.minZoom !== undefined);
+        var hasMaxZoom = (this.maxZoom !== undefined);
+
+        if (
+            (hasMinZoom && (this.zoom <= this.minZoom) && (dy > 0)) ||
+            (hasMaxZoom && (this.zoom >= this.maxZoom) && (dy < 0))
+        ) {
+            return;
+        }
+
         this.zoomLevel += (dy < 0) ? 1 : -1;
-        var nextZoom = GetZoomValue(this.zoomLevel, this.zoomStep);
+        this.zoom = GetZoomValue(this.zoomLevel, this.zoomStep);
+
+        if (hasMinZoom && (this.zoom < this.minZoom)) {
+            this.zoom = this.minZoom;
+        }
+
+        if (hasMaxZoom && (this.zoom > this.maxZoom)) {
+            this.zoom = this.maxZoom;
+        }
 
         this.focusLocalX = pointer.x;
         this.focusLocalY = pointer.y;
 
-        this.easeZoom.start(nextZoom);
+        this.easeZoom.start(this.zoom);
     }
 }
 
