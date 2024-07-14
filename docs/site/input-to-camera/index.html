@@ -9871,12 +9871,16 @@
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">cameraController</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexCameraController&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// camera: scene.cameras.main,</span>
+<span class="w">    </span><span class="c1">// minZoom: undefined,</span>
+<span class="w">    </span><span class="c1">// maxZoom: undefined,</span>
 
 <span class="w">    </span><span class="c1">// panScroll: true,</span>
 <span class="w">    </span><span class="c1">// panScrollEnable: true,</span>
 
 <span class="w">    </span><span class="c1">// pinchZoom: true,</span>
 <span class="w">    </span><span class="c1">// pinchZoomEnable: true,</span>
+<span class="w">    </span><span class="c1">// pinchZoomMin: undefined,</span>
+<span class="w">    </span><span class="c1">// pinchZoomMax: undefined,</span>
 
 <span class="w">    </span><span class="c1">// inputTarget: undefined,</span>
 
@@ -9899,6 +9903,10 @@
 <li>A camera object : Control this camera object.</li>
 </ul>
 </li>
+<li><code>minZoom</code>, <code>maxZoom</code>  : Minumun/maximum camera zoom value for pinchZoom and mouseWheelZoom behaviors. <ul>
+<li><code>undefined</code> : No max/min constraint. Default behavior.</li>
+</ul>
+</li>
 <li>Pan scroll: <ul>
 <li><code>panScroll</code> : Set to <code>false</code> will discard pan-scroll controller. Default is <code>true</code>.</li>
 <li><code>panScrollEnable</code> : Set to <code>true</code> to enable pan-scroll behavior. Default value is <code>true</code>.</li>
@@ -9912,6 +9920,7 @@
 <li>Pinch zoom: <ul>
 <li><code>pinchZoom</code> : Set to <code>false</code> will discard pinch-zoom controller. Default is <code>true</code>.</li>
 <li><code>pinchZoomEnable</code> : Set to <code>true</code> to enable pinch-zoom behavior. Default value is <code>true</code>.</li>
+<li><code>pinchZoomMin</code>, <code>pinchZoomMax</code>  : Minumun/maximum camera zoom value. Default value is <code>minZoom</code>, <code>maxZoom</code>.</li>
 <li><code>inputTarget</code> : <ul>
 <li><code>undefined</code> : Receive pan/pinch input by scene's input event. Default behavior.</li>
 <li>A game object : Receive pan/pinch input only on this game object.    </li>
@@ -9928,7 +9937,7 @@
 <li><code>mouseWheelZoom</code> : Set to <code>false</code> will discard mouse-wheel-zoom controller. Default is <code>true</code>.</li>
 <li><code>mouseWheelZoomEnable</code> : Set to <code>true</code> to enable mouse-wheel-zoom behavior. Default value is <code>true</code>.</li>
 <li><code>mouseWheelZoomStep</code> : Camera zoom incremental. Default value is <code>0.1</code>.</li>
-<li><code>mouseWheelZoomMin</code>, <code>mouseWheelZoomMax</code>  : Minumun/maximum camera zoom value. Default value is <code>undefined</code>, no max/min constraint.</li>
+<li><code>mouseWheelZoomMin</code>, <code>mouseWheelZoomMax</code>  : Minumun/maximum camera zoom value. Default value is <code>minZoom</code>, <code>maxZoom</code>.</li>
 </ul>
 </li>
 <li><code>enable</code> : <ul>

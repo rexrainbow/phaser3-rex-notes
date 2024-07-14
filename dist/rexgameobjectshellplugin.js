@@ -3452,7 +3452,7 @@
   };
 
   var GetValue$2e = Phaser.Utils.Objects.GetValue;
-  var Clamp$7 = Phaser.Math.Clamp;
+  Phaser.Math.Clamp;
   var PinchZoom = /*#__PURE__*/function (_ComponentBase) {
     _inherits(PinchZoom, _ComponentBase);
     function PinchZoom(scene, config) {
@@ -3473,7 +3473,7 @@
       _this.inputTarget = GetValue$2e(config, 'inputTarget', scene);
       _this.pinch = new Pinch(_this.inputTarget);
       var camera = GetCameraByName(scene, GetValue$2e(config, 'camera'));
-      _this.setCamera(camera).setEnable(GetValue$2e(config, 'enable', true)).setMinZoom(GetValue$2e(config, 'minZoom', 0.001)).setMaxZoom(GetValue$2e(config, 'maxZoom', 1000));
+      _this.setCamera(camera).setEnable(GetValue$2e(config, 'enable', true)).setMinZoom(GetValue$2e(config, 'minZoom', undefined)).setMaxZoom(GetValue$2e(config, 'maxZoom', undefined));
       _this.boot();
       return _this;
     }
@@ -3486,7 +3486,12 @@
             return;
           }
           var zoom = camera.zoom * pinch.scaleFactor;
-          zoom = Clamp$7(zoom, this.minZoom, this.maxZoom);
+          if (this.minZoom !== undefined && zoom < this.minZoom) {
+            zoom = this.minZoom;
+          }
+          if (this.maxZoom !== undefined && zoom > this.maxZoom) {
+            zoom = this.maxZoom;
+          }
           var pointer0 = pinch.pointers[0];
           var pointer1 = pinch.pointers[1];
           var focusLocalX = (pointer0.x + pointer1.x) / 2;
@@ -4613,25 +4618,38 @@
       _this._enable = true;
       _this._camera = undefined;
       var enableMask = GetValue$27(config, 'enable', true);
-      delete config.enable;
+      var minZoom = GetValue$27(config, 'minZoom');
+      var maxZoom = GetValue$27(config, 'maxZoom');
       if (GetValue$27(config, 'panScroll', true)) {
-        config.enable = GetValue$27(config, 'panScrollEnable', true);
-        _this.panScroll = new PanScroll(scene, config);
+        _this.panScroll = new PanScroll(scene, {
+          camera: GetValue$27(config, 'camera'),
+          inputTarget: GetValue$27(config, 'inputTarget', scene),
+          enable: GetValue$27(config, 'panScrollEnable', true)
+        });
       }
       if (GetValue$27(config, 'pinchZoom', true)) {
-        config.enable = GetValue$27(config, 'pinchZoomEnable', true);
-        _this.pinchZoom = new PinchZoom(scene, config);
+        _this.pinchZoom = new PinchZoom(scene, {
+          camera: GetValue$27(config, 'camera'),
+          inputTarget: GetValue$27(config, 'inputTarget', scene),
+          enable: GetValue$27(config, 'pinchZoomEnable', true),
+          minZoom: GetValue$27(config, 'pinchZoomMin', minZoom),
+          maxZoom: GetValue$27(config, 'pinchZoomMax', maxZoom)
+        });
       }
       if (GetValue$27(config, 'boundsScroll', true)) {
-        config.enable = GetValue$27(config, 'boundsScrollEnable', true);
-        _this.boundsScroll = new BoundsScroll(scene, config);
+        _this.boundsScroll = new BoundsScroll(scene, {
+          camera: GetValue$27(config, 'camera'),
+          enable: GetValue$27(config, 'boundsScrollEnable', true)
+        });
       }
       if (GetValue$27(config, 'mouseWheelZoom', true)) {
-        config.enable = GetValue$27(config, 'mouseWheelZoomEnable', true);
-        config.zoomStep = GetValue$27(config, 'mouseWheelZoomStep', 0.1);
-        config.minZoom = GetValue$27(config, 'mouseWheelZoomMin');
-        config.maxZoom = GetValue$27(config, 'mouseWheelZoomMax');
-        _this.mouseWheelZoom = new MouseWheelZoom(scene, config);
+        _this.mouseWheelZoom = new MouseWheelZoom(scene, {
+          camera: GetValue$27(config, 'camera'),
+          enable: GetValue$27(config, 'mouseWheelZoomEnable', true),
+          zoomStep: GetValue$27(config, 'mouseWheelZoomStep', 0.1),
+          minZoom: GetValue$27(config, 'mouseWheelZoomMin', minZoom),
+          maxZoom: GetValue$27(config, 'mouseWheelZoomMax', maxZoom)
+        });
       }
       _this.setEnable(enableMask);
       return _this;
