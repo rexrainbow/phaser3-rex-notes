@@ -6,11 +6,16 @@ import MouseWheelZoom from '../mousewheelzoom/MouseWheelZoom';
 
 declare namespace ControllerPack {
     interface IConfig extends PinchZoom.IConfig, PanScroll.IConfig, BoundsScroll.IConfig, MouseWheelZoom.IConfig {
+        minZoom?: number,
+        maxZoom?: number,
+
         panScroll?: boolean,
         panScrollEnable?: boolean,
 
         pinchZoom?: boolean,
         pinchZoomEnable?: boolean,
+        pinchZoomMin?: number,
+        pinchZoomMax?: number,
 
         boundsScroll?: boolean,
         boundsScrollEnable?: boolean,

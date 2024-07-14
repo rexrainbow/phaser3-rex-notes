@@ -75,12 +75,16 @@ Control camera's scroll by [pan](gesture-pan.md)/[cursor-at-bounds(scroll)](curs
 ```javascript
 var cameraController = scene.plugins.get('rexCameraController').add(scene, {
     // camera: scene.cameras.main,
+    // minZoom: undefined,
+    // maxZoom: undefined,
 
     // panScroll: true,
     // panScrollEnable: true,
 
     // pinchZoom: true,
     // pinchZoomEnable: true,
+    // pinchZoomMin: undefined,
+    // pinchZoomMax: undefined,
     
     // inputTarget: undefined,
 
@@ -101,6 +105,8 @@ var cameraController = scene.plugins.get('rexCameraController').add(scene, {
 - `camera` :
     - `undefined` : Default camera of this `scene`.
     - A camera object : Control this camera object.
+- `minZoom`, `maxZoom`  : Minumun/maximum camera zoom value for pinchZoom and mouseWheelZoom behaviors. 
+    - `undefined` : No max/min constraint. Default behavior.
 - Pan scroll: 
     - `panScroll` : Set to `false` will discard pan-scroll controller. Default is `true`.
     - `panScrollEnable` : Set to `true` to enable pan-scroll behavior. Default value is `true`.
@@ -110,6 +116,7 @@ var cameraController = scene.plugins.get('rexCameraController').add(scene, {
 - Pinch zoom: 
     - `pinchZoom` : Set to `false` will discard pinch-zoom controller. Default is `true`.
     - `pinchZoomEnable` : Set to `true` to enable pinch-zoom behavior. Default value is `true`.
+    - `pinchZoomMin`, `pinchZoomMax`  : Minumun/maximum camera zoom value. Default value is `minZoom`, `maxZoom`.
     - `inputTarget` : 
         - `undefined` : Receive pan/pinch input by scene's input event. Default behavior.
         - A game object : Receive pan/pinch input only on this game object.    
@@ -120,7 +127,7 @@ var cameraController = scene.plugins.get('rexCameraController').add(scene, {
     - `mouseWheelZoom` : Set to `false` will discard mouse-wheel-zoom controller. Default is `true`.
     - `mouseWheelZoomEnable` : Set to `true` to enable mouse-wheel-zoom behavior. Default value is `true`.
     - `mouseWheelZoomStep` : Camera zoom incremental. Default value is `0.1`.
-    - `mouseWheelZoomMin`, `mouseWheelZoomMax`  : Minumun/maximum camera zoom value. Default value is `undefined`, no max/min constraint.
+    - `mouseWheelZoomMin`, `mouseWheelZoomMax`  : Minumun/maximum camera zoom value. Default value is `minZoom`, `maxZoom`.
 - `enable` : 
     - `false` : Disable all camera-controller temporary.
     - `true` : Restore all camera-controller's enable state to previous value. Default behavior.

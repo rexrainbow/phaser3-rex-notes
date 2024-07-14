@@ -22,29 +22,43 @@ class ControllerPack extends ComponentBase {
         this._camera = undefined;
 
         var enableMask = GetValue(config, 'enable', true);
-        delete config.enable;
+
+        var minZoom = GetValue(config, 'minZoom');
+        var maxZoom = GetValue(config, 'maxZoom');
 
         if (GetValue(config, 'panScroll', true)) {
-            config.enable = GetValue(config, 'panScrollEnable', true);
-            this.panScroll = new PanScroll(scene, config);
+            this.panScroll = new PanScroll(scene, {
+                camera: GetValue(config, 'camera'),
+                inputTarget: GetValue(config, 'inputTarget', scene),
+                enable: GetValue(config, 'panScrollEnable', true),
+            });
         }
 
         if (GetValue(config, 'pinchZoom', true)) {
-            config.enable = GetValue(config, 'pinchZoomEnable', true);
-            this.pinchZoom = new PinchZoom(scene, config);
+            this.pinchZoom = new PinchZoom(scene, {
+                camera: GetValue(config, 'camera'),
+                inputTarget: GetValue(config, 'inputTarget', scene),
+                enable: GetValue(config, 'pinchZoomEnable', true),
+                minZoom: GetValue(config, 'pinchZoomMin', minZoom),
+                maxZoom: GetValue(config, 'pinchZoomMax', maxZoom),
+            });
         }
 
         if (GetValue(config, 'boundsScroll', true)) {
-            config.enable = GetValue(config, 'boundsScrollEnable', true);
-            this.boundsScroll = new BoundsScroll(scene, config);
+            this.boundsScroll = new BoundsScroll(scene, {
+                camera: GetValue(config, 'camera'),
+                enable: GetValue(config, 'boundsScrollEnable', true)
+            });
         }
 
         if (GetValue(config, 'mouseWheelZoom', true)) {
-            config.enable = GetValue(config, 'mouseWheelZoomEnable', true);
-            config.zoomStep = GetValue(config, 'mouseWheelZoomStep', 0.1);
-            config.minZoom = GetValue(config, 'mouseWheelZoomMin');
-            config.maxZoom = GetValue(config, 'mouseWheelZoomMax');
-            this.mouseWheelZoom = new MouseWheelZoom(scene, config);
+            this.mouseWheelZoom = new MouseWheelZoom(scene, {
+                camera: GetValue(config, 'camera'),
+                enable: GetValue(config, 'mouseWheelZoomEnable', true),
+                zoomStep: GetValue(config, 'mouseWheelZoomStep', 0.1),
+                minZoom: GetValue(config, 'mouseWheelZoomMin', minZoom),
+                maxZoom: GetValue(config, 'mouseWheelZoomMax', maxZoom),
+            });
         }
 
         this.setEnable(enableMask);

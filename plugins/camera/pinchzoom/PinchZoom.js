@@ -23,8 +23,8 @@ class PinchZoom extends ComponentBase {
         this
             .setCamera(camera)
             .setEnable(GetValue(config, 'enable', true))
-            .setMinZoom(GetValue(config, 'minZoom', 0.001))
-            .setMaxZoom(GetValue(config, 'maxZoom', 1000))
+            .setMinZoom(GetValue(config, 'minZoom', undefined))
+            .setMaxZoom(GetValue(config, 'maxZoom', undefined))
 
         this.boot();
     }
@@ -38,7 +38,13 @@ class PinchZoom extends ComponentBase {
                 }
 
                 var zoom = camera.zoom * pinch.scaleFactor;
-                zoom = Clamp(zoom, this.minZoom, this.maxZoom);
+
+                if ((this.minZoom !== undefined) && (zoom < this.minZoom)) {
+                    zoom = this.minZoom;
+                }
+                if ((this.maxZoom !== undefined) && (zoom > this.maxZoom)) {
+                    zoom = this.maxZoom;
+                }
 
                 var pointer0 = pinch.pointers[0];
                 var pointer1 = pinch.pointers[1];
