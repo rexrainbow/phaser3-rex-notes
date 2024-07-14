@@ -19,15 +19,21 @@ class Demo extends Phaser.Scene {
     }
 
     update() {
-        var keys = this.gamepadKeys.keys;
-        var s = 'Key down: ';
-        for (var name in keys) {
-            if (keys[name].isDown) {
-                s += `${name} `;
+        if (this.gamepadKeys.isConnected) {
+            var keys = this.gamepadKeys.keys;
+            var s = 'Key down: ';
+            for (var name in keys) {
+                if (keys[name].isDown) {
+                    s += `${name} `;
+                }
             }
-        }
 
-        this.print.text = s;
+            this.print.text = s;
+
+        } else {
+            this.print.text = 'Press any key'
+
+        }
     }
 }
 

@@ -4,7 +4,7 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 const KeyNames = ['A', 'Y', 'X', 'B', 'L1', 'L2', 'R1', 'R2'];
 
 class GamepadKeys extends CursorKeys {
-    constructor(scene) {
+    constructor(scene, config) {
         super(scene);
         // this.scene = scene;
 
@@ -14,7 +14,7 @@ class GamepadKeys extends CursorKeys {
 
         this.addKeys(KeyNames);
         this.pad = null;
-        this.autoCapture = GetValue(config, 'autoCapture', true);
+        this.setAutoCapture(GetValue(config, 'autoCapture', true));
 
         this.boot();
     }
@@ -22,6 +22,7 @@ class GamepadKeys extends CursorKeys {
     boot() {
         if (this.gamepadManager) {
             this.gamepadManager.on('down', this.onUpdateKeysState, this);
+            this.gamepadManager.on('up', this.onUpdateKeysState, this);
             this.gamepadManager.on('disconnected', this.onDisconnect, this);
 
             if (this.autoCapture) {
@@ -33,6 +34,7 @@ class GamepadKeys extends CursorKeys {
     shutdown(fromScene) {
         if (this.gamepadManager) {
             this.gamepadManager.off('down', this.onUpdateKeysState, this);
+            this.gamepadManager.off('up', this.onUpdateKeysState, this);
             this.gamepadManager.off('disconnected', this.onDisconnect, this);
         }
 
@@ -73,8 +75,16 @@ class GamepadKeys extends CursorKeys {
         return this;
     }
 
+    setAutoCapture(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+        this.autoCapture = enable;
+        return this;
+    }
+
     isMyPad(pad) {
-        return (!!this.pad) && (this.pad === pad);
+        return this.isConnected && (this.pad === pad);
     }
 
     captureGamepad(callback) {
@@ -103,7 +113,11 @@ class GamepadKeys extends CursorKeys {
     }
 
     get gamepadManager() {
-        this.scene.input.gamepad;
+        return this.scene.input.gamepad;
+    }
+
+    get isConnected() {
+        return !!this.pad;
     }
 
     get AKeyDown() {
