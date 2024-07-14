@@ -3086,24 +3086,29 @@
 
   var Key = Phaser.Input.Keyboard.Key;
   var KeyCodes = Phaser.Input.Keyboard.KeyCodes;
+  var KeyNames = ['up', 'down', 'left', 'right'];
   var CursorKeys = /*#__PURE__*/function () {
     function CursorKeys(scene) {
       _classCallCheck(this, CursorKeys);
       // scene: scene instance, or undefined
-      this.cursorKeys = {
-        up: new Key(scene, KeyCodes.UP),
-        down: new Key(scene, KeyCodes.DOWN),
-        left: new Key(scene, KeyCodes.LEFT),
-        right: new Key(scene, KeyCodes.RIGHT)
-      };
+      this.scene = scene;
+      this.keys = {};
+      this.cursorKeys = {};
       this.noKeyDown = true;
+      for (var i = 0, cnt = KeyNames.length; i < cnt; i++) {
+        var keyName = KeyNames[i];
+        this.addKey(keyName);
+        this.cursorKeys[keyName] = this.keys[keyName];
+      }
     }
     _createClass(CursorKeys, [{
       key: "shutdown",
       value: function shutdown(fromScene) {
-        for (var key in this.cursorKeys) {
-          this.cursorKeys[key].destroy();
+        this.scene = undefined;
+        for (var key in this.keys) {
+          this.keys[key].destroy();
         }
+        this.keys = undefined;
         this.cursorKeys = undefined;
       }
     }, {
@@ -3119,7 +3124,7 @@
     }, {
       key: "setKeyState",
       value: function setKeyState(keyName, isDown) {
-        var key = this.cursorKeys[keyName];
+        var key = this.keys[keyName];
         if (!key.enabled) {
           return this;
         }
@@ -3141,7 +3146,7 @@
       key: "clearAllKeysState",
       value: function clearAllKeysState() {
         this.noKeyDown = true;
-        for (var keyName in this.cursorKeys) {
+        for (var keyName in this.keys) {
           this.setKeyState(keyName, false);
         }
         return this;
@@ -3149,32 +3154,55 @@
     }, {
       key: "getKeyState",
       value: function getKeyState(keyName) {
-        return this.cursorKeys[keyName];
+        return this.keys[keyName];
       }
     }, {
       key: "upKeyDown",
       get: function get() {
-        return this.cursorKeys.up.isDown;
+        return this.keys.up.isDown;
       }
     }, {
       key: "downKeyDown",
       get: function get() {
-        return this.cursorKeys.down.isDown;
+        return this.keys.down.isDown;
       }
     }, {
       key: "leftKeyDown",
       get: function get() {
-        return this.cursorKeys.left.isDown;
+        return this.keys.left.isDown;
       }
     }, {
       key: "rightKeyDown",
       get: function get() {
-        return this.cursorKeys.right.isDown;
+        return this.keys.right.isDown;
       }
     }, {
       key: "anyKeyDown",
       get: function get() {
         return !this.noKeyDown;
+      }
+    }, {
+      key: "addKey",
+      value: function addKey(keyName, keyCode) {
+        if (keyCode === undefined) {
+          keyCode = keyName;
+        }
+        if (typeof keyCode === 'string') {
+          keyCode = keyCode.toUpperCase();
+          if (KeyCodes.hasOwnProperty(keyCode)) {
+            keyCode = KeyCodes[keyCode];
+          }
+        }
+        this.keys[keyName] = new Key(this.scene, keyCode);
+        return this;
+      }
+    }, {
+      key: "addKeys",
+      value: function addKeys(keyNames) {
+        for (var i = 0, cnt = keyNames.length; i < cnt; i++) {
+          this.addKey(keyNames[i]);
+        }
+        return this;
       }
     }]);
     return CursorKeys;
@@ -3939,6 +3967,7 @@
   }(EaseValueTaskBase);
 
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
+  Phaser.Math.Clamp;
   var MouseWheelZoom = /*#__PURE__*/function (_ComponentBase) {
     _inherits(MouseWheelZoom, _ComponentBase);
     function MouseWheelZoom(scene, config) {
@@ -3958,7 +3987,7 @@
       });
       _this.easeZoom = new EaseZoom(_assertThisInitialized(_this));
       var camera = GetCameraByName(scene, GetValue$1(config, 'camera'));
-      _this.setEnable(GetValue$1(config, 'enable', true)).setZoomStep(GetValue$1(config, 'zoomStep', 0.1)).setEaseDuration(GetValue$1(config, 'easeDuration', 200)).setCamera(camera);
+      _this.setEnable(GetValue$1(config, 'enable', true)).setMinZoom(GetValue$1(config, 'minZoom')).setMaxZoom(GetValue$1(config, 'maxZoom')).setZoomStep(GetValue$1(config, 'zoomStep', 0.1)).setEaseDuration(GetValue$1(config, 'easeDuration', 200)).setCamera(camera);
       _this.boot();
       return _this;
     }
@@ -3989,6 +4018,18 @@
         return this;
       }
     }, {
+      key: "setMinZoom",
+      value: function setMinZoom(value) {
+        this.minZoom = value;
+        return this;
+      }
+    }, {
+      key: "setMaxZoom",
+      value: function setMaxZoom(value) {
+        this.maxZoom = value;
+        return this;
+      }
+    }, {
       key: "setZoomStep",
       value: function setZoomStep(step) {
         this.zoomStep = step;
@@ -4010,6 +4051,7 @@
           return this;
         }
         this.zoomLevel = Math.round(GetZoomLevel(camera.zoom, this.zoomStep));
+        this.zoom = camera.zoom;
         return this;
       }
     }, {
@@ -4019,11 +4061,22 @@
         if (!this.enable || !camera) {
           return;
         }
+        var hasMinZoom = this.minZoom !== undefined;
+        var hasMaxZoom = this.maxZoom !== undefined;
+        if (hasMinZoom && this.zoom <= this.minZoom && dy > 0 || hasMaxZoom && this.zoom >= this.maxZoom && dy < 0) {
+          return;
+        }
         this.zoomLevel += dy < 0 ? 1 : -1;
-        var nextZoom = GetZoomValue(this.zoomLevel, this.zoomStep);
+        this.zoom = GetZoomValue(this.zoomLevel, this.zoomStep);
+        if (hasMinZoom && this.zoom < this.minZoom) {
+          this.zoom = this.minZoom;
+        }
+        if (hasMaxZoom && this.zoom > this.maxZoom) {
+          this.zoom = this.maxZoom;
+        }
         this.focusLocalX = pointer.x;
         this.focusLocalY = pointer.y;
-        this.easeZoom.start(nextZoom);
+        this.easeZoom.start(this.zoom);
       }
     }]);
     return MouseWheelZoom;
@@ -4132,6 +4185,8 @@
       if (GetValue(config, 'mouseWheelZoom', true)) {
         config.enable = GetValue(config, 'mouseWheelZoomEnable', true);
         config.zoomStep = GetValue(config, 'mouseWheelZoomStep', 0.1);
+        config.minZoom = GetValue(config, 'mouseWheelZoomMin');
+        config.maxZoom = GetValue(config, 'mouseWheelZoomMax');
         _this.mouseWheelZoom = new MouseWheelZoom(scene, config);
       }
       _this.setEnable(enableMask);
