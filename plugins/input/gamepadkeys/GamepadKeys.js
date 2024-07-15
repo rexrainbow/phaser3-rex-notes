@@ -14,7 +14,7 @@ class GamepadKeys extends CursorKeys {
 
         this.addKeys(KeyNames);
         this.gamepad = null;
-        this.setAutoCapture(GetValue(config, 'autoCapture', true));
+        this.setAutoBinding(GetValue(config, 'autoBinding', true));
 
         this.boot();
     }
@@ -25,8 +25,8 @@ class GamepadKeys extends CursorKeys {
             this.gamepadManager.on('up', this.onUpdateKeysState, this);
             this.gamepadManager.on('disconnected', this.onDisconnect, this);
 
-            if (this.autoCapture) {
-                this.captureGamepad();
+            if (this.autoBinding) {
+                this.bindGamepad();
             }
         }
     }
@@ -58,8 +58,8 @@ class GamepadKeys extends CursorKeys {
 
         this.setGamepad(null);
 
-        if (this.autoCapture) {
-            this.captureGamepad();
+        if (this.autoBinding) {
+            this.bindGamepad();
         }
     }
 
@@ -75,11 +75,11 @@ class GamepadKeys extends CursorKeys {
         return this;
     }
 
-    setAutoCapture(enable) {
+    setAutoBinding(enable) {
         if (enable === undefined) {
             enable = true;
         }
-        this.autoCapture = enable;
+        this.autoBinding = enable;
         return this;
     }
 
@@ -87,7 +87,7 @@ class GamepadKeys extends CursorKeys {
         return this.isConnected && (this.gamepad === gamepad);
     }
 
-    captureGamepad(callback) {
+    bindGamepad(callback) {
         if (this.gamepadManager) {
             this.gamepadManager.once('down', function (gamepad, button, value) {
                 this.setGamepad(gamepad);
@@ -105,10 +105,10 @@ class GamepadKeys extends CursorKeys {
         return this;
     }
 
-    captureGamepadPromise() {
+    bindGamepadPromise() {
         var self = this;
         return new Promise(function (resolve, reject) {
-            self.captureGamepad(resolve);
+            self.bindGamepad(resolve);
         });
     }
 
