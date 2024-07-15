@@ -13,7 +13,7 @@ class GamepadKeys extends CursorKeys {
         }
 
         this.addKeys(KeyNames);
-        this.pad = null;
+        this.gamepad = null;
         this.setAutoCapture(GetValue(config, 'autoCapture', true));
 
         this.boot();
@@ -63,11 +63,11 @@ class GamepadKeys extends CursorKeys {
         }
     }
 
-    setGamepad(pad) {
-        this.pad = pad;
+    setGamepad(gamepad) {
+        this.gamepad = gamepad;
 
-        if (pad) {
-            this.onUpdateKeysState(pad);
+        if (gamepad) {
+            this.onUpdateKeysState(gamepad);
         } else {
             this.clearAllKeysState();
         }
@@ -83,8 +83,8 @@ class GamepadKeys extends CursorKeys {
         return this;
     }
 
-    isMyPad(pad) {
-        return this.isConnected && (this.pad === pad);
+    isMyPad(gamepad) {
+        return this.isConnected && (this.gamepad === gamepad);
     }
 
     captureGamepad(callback) {
@@ -117,7 +117,7 @@ class GamepadKeys extends CursorKeys {
     }
 
     get isConnected() {
-        return !!this.pad;
+        return !!this.gamepad;
     }
 
     get AKeyDown() {
