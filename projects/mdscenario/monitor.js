@@ -1,5 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import CreateMonitorPanel from '../../templates/markdownvisualnovel/monitor/CreateMonitorPanel.js';
+import CreateMonitorPanel from '../../templates/mdscenario/monitor/CreateMonitorPanel.js';
 
 class Demo extends Phaser.Scene {
 

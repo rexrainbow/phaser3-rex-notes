@@ -3,7 +3,7 @@ import CreateCommandExecutor from './commandexecutor/CreateCommandExecutor.js';
 import RegisterExpressions from './expressions/RegisterExpressions.js';
 import RegisterDefaultVariables from './defaultvariables/RegisterDefaultVariables.js';
 
-class MarkdownVisualNovel extends MarkedEventSheets {
+class MDScenario extends MarkedEventSheets {
     constructor(scene, config = {}) {
         config.commandExecutor = CreateCommandExecutor(scene, config);
         super(config);
@@ -16,4 +16,4 @@ class MarkdownVisualNovel extends MarkedEventSheets {
     }
 }
 
-export default MarkdownVisualNovel;
+export default MDScenario;

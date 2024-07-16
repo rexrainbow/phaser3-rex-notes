@@ -336,9 +336,9 @@ module.exports = {
     'ringsspinner': './templates/spinner/rings/Rings.js',
     'spinner': './templates/spinner/spinner/Spinner.js',
 
-    // markdown-visual-novel
-    'markdownvisualnovel': './templates/markdownvisualnovel/MarkdownVisualNovel.js',
-    'markdownvisualnovelplugin': './templates/markdownvisualnovel/markdownvisualnovel-plugin.js',
+    // mdscenario
+    'mdscenario': './templates/mdscenario/MDScenario.js',
+    'mdscenarioplugin': './templates/mdscenario/mdscenario-plugin.js',
 
     // network
     'firebase': './plugins/firebase.js',

@@ -1,7 +1,7 @@
-import MarkdownVisualNovel from './MarkdownVisualNovel.js';
+import MDScenario from './MDScenario.js';
 import CSV2MD from '../../plugins/logic/eventsheets/markedeventsheets/CSV2MD.js';
 
-class MarkdownVisualNovelPlugin extends Phaser.Plugins.BasePlugin {
+class MDScenarioPlugin extends Phaser.Plugins.BasePlugin {
     constructor(pluginManager) {
         super(pluginManager);
     }
@@ -12,7 +12,7 @@ class MarkdownVisualNovelPlugin extends Phaser.Plugins.BasePlugin {
     }
 
     add(scene, config) {
-        return new MarkdownVisualNovel(scene, config);
+        return new MDScenario(scene, config);
     }
 }
 
@@ -21,8 +21,8 @@ var methods = {
 }
 
 Object.assign(
-    MarkdownVisualNovelPlugin.prototype,
+    MDScenarioPlugin.prototype,
     methods,
 )
 
-export default MarkdownVisualNovelPlugin;
+export default MDScenarioPlugin;

@@ -1,5 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import MarkdownVisualNovel from '../../templates/markdownvisualnovel/MarkdownVisualNovel.js';
+import MDScenario from '../../templates/mdscenario/MDScenario.js';
 import TextBoxStyle from './styles/TextBoxStyle.js';
 import ChoiceStyle from './styles/ChoiceStyle.js';
 import TitleStyle from './styles/TitleStyle.js';
@@ -44,7 +44,7 @@ class Demo extends Phaser.Scene {
         var rootLayer = this.add.layer().setName('root');
         var viewport = this.scale.getViewPort();
 
-        var eventSheetManager = new MarkdownVisualNovel(this, {
+        var eventSheetManager = new MDScenario(this, {
             styles: {
                 TEXTBOX: TextBoxStyle,
                 CHOICE: ChoiceStyle,
