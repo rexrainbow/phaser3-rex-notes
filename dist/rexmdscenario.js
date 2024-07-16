@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexmarkdownvisualnovel = factory());
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexmdscenario = factory());
 })(this, (function () { 'use strict';
 
   function _callSuper(t, o, e) {
@@ -84455,14 +84455,14 @@
     }
   };
 
-  var MarkdownVisualNovel = /*#__PURE__*/function (_MarkedEventSheets) {
-    _inherits(MarkdownVisualNovel, _MarkedEventSheets);
-    function MarkdownVisualNovel(scene) {
+  var MDScenario = /*#__PURE__*/function (_MarkedEventSheets) {
+    _inherits(MDScenario, _MarkedEventSheets);
+    function MDScenario(scene) {
       var _this;
       var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-      _classCallCheck(this, MarkdownVisualNovel);
+      _classCallCheck(this, MDScenario);
       config.commandExecutor = CreateCommandExecutor(scene, config);
-      _this = _callSuper(this, MarkdownVisualNovel, [config]);
+      _this = _callSuper(this, MDScenario, [config]);
 
       // this.commandExecutor;
 
@@ -84470,9 +84470,9 @@
       RegisterDefaultVariables(_assertThisInitialized(_this), config);
       return _this;
     }
-    return _createClass(MarkdownVisualNovel);
+    return _createClass(MDScenario);
   }(MarkedEventSheets);
 
-  return MarkdownVisualNovel;
+  return MDScenario;
 
 }));

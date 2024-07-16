@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexmarkdownvisualnovelplugin = factory());
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexmdscenarioplugin = factory());
 })(this, (function () { 'use strict';
 
   function _callSuper(t, o, e) {
@@ -84510,14 +84510,14 @@
     }
   };
 
-  var MarkdownVisualNovel = /*#__PURE__*/function (_MarkedEventSheets) {
-    _inherits(MarkdownVisualNovel, _MarkedEventSheets);
-    function MarkdownVisualNovel(scene) {
+  var MDScenario = /*#__PURE__*/function (_MarkedEventSheets) {
+    _inherits(MDScenario, _MarkedEventSheets);
+    function MDScenario(scene) {
       var _this;
       var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-      _classCallCheck(this, MarkdownVisualNovel);
+      _classCallCheck(this, MDScenario);
       config.commandExecutor = CreateCommandExecutor(scene, config);
-      _this = _callSuper(this, MarkdownVisualNovel, [config]);
+      _this = _callSuper(this, MDScenario, [config]);
 
       // this.commandExecutor;
 
@@ -84525,16 +84525,16 @@
       RegisterDefaultVariables(_assertThisInitialized(_this), config);
       return _this;
     }
-    return _createClass(MarkdownVisualNovel);
+    return _createClass(MDScenario);
   }(MarkedEventSheets);
 
-  var MarkdownVisualNovelPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
-    _inherits(MarkdownVisualNovelPlugin, _Phaser$Plugins$BaseP);
-    function MarkdownVisualNovelPlugin(pluginManager) {
-      _classCallCheck(this, MarkdownVisualNovelPlugin);
-      return _callSuper(this, MarkdownVisualNovelPlugin, [pluginManager]);
+  var MDScenarioPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
+    _inherits(MDScenarioPlugin, _Phaser$Plugins$BaseP);
+    function MDScenarioPlugin(pluginManager) {
+      _classCallCheck(this, MDScenarioPlugin);
+      return _callSuper(this, MDScenarioPlugin, [pluginManager]);
     }
-    _createClass(MarkdownVisualNovelPlugin, [{
+    _createClass(MDScenarioPlugin, [{
       key: "start",
       value: function start() {
         var eventEmitter = this.game.events;
@@ -84543,16 +84543,16 @@
     }, {
       key: "add",
       value: function add(scene, config) {
-        return new MarkdownVisualNovel(scene, config);
+        return new MDScenario(scene, config);
       }
     }]);
-    return MarkdownVisualNovelPlugin;
+    return MDScenarioPlugin;
   }(Phaser.Plugins.BasePlugin);
   var methods = {
     csv2md: CSV2MD
   };
-  Object.assign(MarkdownVisualNovelPlugin.prototype, methods);
+  Object.assign(MDScenarioPlugin.prototype, methods);
 
-  return MarkdownVisualNovelPlugin;
+  return MDScenarioPlugin;
 
 }));
