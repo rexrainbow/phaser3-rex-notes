@@ -14,7 +14,7 @@ class GamepadKeys extends CursorKeys {
         }
 
         this.addKeys(KeyNames);
-        this.gamepad = null;
+        this._gamepad = null;
         this.waitBinding = false;
         this.setAutoBinding(GetValue(config, 'autoBinding', true));
 
@@ -22,10 +22,11 @@ class GamepadKeys extends CursorKeys {
     }
 
     boot() {
-        if (this.gamepadManager) {
-            this.gamepadManager.on('down', this.onUpdateKeysState, this);
-            this.gamepadManager.on('up', this.onUpdateKeysState, this);
-            this.gamepadManager.on('disconnected', this.onDisconnect, this);
+        var gamepadManager = this.gamepadManager;
+        if (gamepadManager) {
+            gamepadManager.on('down', this.onUpdateKeysState, this);
+            gamepadManager.on('up', this.onUpdateKeysState, this);
+            gamepadManager.on('disconnected', this.onDisconnect, this);
 
             if (this.autoBinding) {
                 this.bindGamepad();
@@ -34,10 +35,11 @@ class GamepadKeys extends CursorKeys {
     }
 
     shutdown(fromScene) {
-        if (this.gamepadManager) {
-            this.gamepadManager.off('down', this.onUpdateKeysState, this);
-            this.gamepadManager.off('up', this.onUpdateKeysState, this);
-            this.gamepadManager.off('disconnected', this.onDisconnect, this);
+        var gamepadManager = this.gamepadManager;
+        if (gamepadManager) {
+            gamepadManager.off('down', this.onUpdateKeysState, this);
+            gamepadManager.off('up', this.onUpdateKeysState, this);
+            gamepadManager.off('disconnected', this.onDisconnect, this);
         }
 
         super.shutdown(fromScene);
@@ -73,11 +75,23 @@ class GamepadKeys extends CursorKeys {
         return this;
     }
 
-    setGamepad(gamepad) {
-        this.gamepad = gamepad;
+    isMyPad(gamepad) {
+        return this.isConnected && (this.gamepad === gamepad);
+    }
 
-        if (gamepad) {
-            this.onUpdateKeysState(gamepad);
+    get gamepadManager() {
+        return this.scene.input.gamepad;
+    }
+
+    get gamepad() {
+        return this._gamepad;
+    }
+
+    set gamepad(value) {
+        this._gamepad = value;
+
+        if (value) {
+            this.onUpdateKeysState(value);
 
         } else {
             this.clearAllKeysState();
@@ -86,17 +100,6 @@ class GamepadKeys extends CursorKeys {
                 this.bindGamepad();
             }
         }
-
-        return this;
-    }
-
-    isMyPad(gamepad) {
-        return this.isConnected && (this.gamepad === gamepad);
-    }
-
-
-    get gamepadManager() {
-        return this.scene.input.gamepad;
     }
 
     get isConnected() {
