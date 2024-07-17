@@ -7,7 +7,7 @@ const KeyNameToButtonIndex = {
     left: 14, right: 15, up: 12, down: 13,
     A: 0, Y: 3, X: 2, B: 1,
     L1: 4, L2: 6, R1: 5, R2: 7,
-    START: 8, SELECT: 9,
+    START: 9, SELECT: 8,
 }
 
 class GamepadKeys extends CursorKeys {

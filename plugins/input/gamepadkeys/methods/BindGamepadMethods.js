@@ -6,7 +6,7 @@ export default {
 
     bindGamepad(callback) {
         var gamepadManager = this.gamepadManager;
-        if (gamepadManager) {
+        if (!gamepadManager) {
             return this;
         }
 
