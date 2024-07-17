@@ -18,20 +18,20 @@ class CSVScenarioLogic {
         // Event emitter
         this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
 
-        this.timer = this.createTimer();
+        this.timer = this.createTimer(parent, config);
         this._timeScale = 1;
         this.instMem = new InstMem(this);
         this.cmdHandlers = new CmdHandlers(this);
         this.resetFromJSON(config);
-        this.boot();
+        this.boot(parent, config);
     }
 
     // Override
-    boot() { }
+    boot(parent, config) { }
 
     // Override
-    createTimer() {
-        return new Timer(this.parent);
+    createTimer(parent, config) {
+        return new Timer(parent);
     }
 
     resetFromJSON(o) {

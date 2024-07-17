@@ -7,12 +7,12 @@ class CSVScenario extends CSVScenarioLogic {
         // this.parent = scene
     }
 
-    boot() {
-        this.parent.sys.events.once('shutdown', this.destroy, this);
+    boot(scene, config) {
+        scene.sys.events.once('shutdown', this.destroy, this);
     }
 
-    createTimer() {
-        return new Timer(this.parent);
+    createTimer(scene, config) {
+        return new Timer(scene);
     }
 }
 
