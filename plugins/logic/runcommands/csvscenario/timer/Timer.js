@@ -2,13 +2,11 @@ class Timer {
     constructor(scene) {
         this.scene = scene;
         this.timeScale = 1;
+        this.timer = null;
     }
 
     destroy() {
-        if (this.timer) {
-            this.timer.remove();
-            this.timer = undefined;
-        }
+        this.stop();
     }
 
     start(delay, timeoutCallback) {
@@ -20,6 +18,13 @@ class Timer {
         this.timer = this.scene.time.delayedCall(delay, timeoutCallback);
         this.timer.timeScale = this.timeScale;
         return this;
+    }
+
+    stop() {
+        if (this.timer) {
+            this.timer.remove();
+            this.timer = undefined;
+        }
     }
 
     pause() {

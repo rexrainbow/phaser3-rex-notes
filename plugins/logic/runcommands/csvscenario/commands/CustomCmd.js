@@ -2,8 +2,7 @@ import BaseCmd from './BaseCmd.js';
 import GetValue from '../../../../utils/object/GetValue.js';
 import RunCommands from '../../../../runcommands.js';
 import TypeConvert from '../../../../utils/string/TypeConvert.js';
-
-const SpliceOne = Phaser.Utils.Array.SpliceOne;
+import SpliceOne from '../../../../utils/array/SpliceOne.js';
 
 class CustomCmd extends BaseCmd {
     constructor(scenario) {

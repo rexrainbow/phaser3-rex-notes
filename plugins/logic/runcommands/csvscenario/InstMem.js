@@ -1,7 +1,6 @@
 import Clone from '../../../utils/object/Clone.js';
 import Clear from '../../../utils/object/Clear.js';
-
-const GetValue = Phaser.Utils.Objects.GetValue;
+import GetValue from '../../../utils/object/GetValue.js';
 
 class InstMem {
     constructor(scenario) {

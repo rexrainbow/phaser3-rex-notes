@@ -4,8 +4,7 @@ import LabelCmd from './LabelCmd.js';
 import ExitCmd from './ExitCmd.js';
 import GotoCmd from './GotoCmd.js';
 import IfCmd from './IfCmd.js';
-
-const GetValue = Phaser.Utils.Objects.GetValue;
+import GetValue from '../../../../utils/object/GetValue.js';
 
 class CmdHandlers {
     constructor(scenario) {
@@ -32,7 +31,7 @@ class CmdHandlers {
             ret[name] = this.cmds[name].toJSON();
         }
         return ret;
-    }    
+    }
 
     get(name) {
         return this.cmds[name];
