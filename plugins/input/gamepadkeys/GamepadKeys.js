@@ -1,4 +1,5 @@
 import CursorKeys from '../../utils/input/CursorKeys.js';
+import BindGamepadMethods from './methods/BindGamepadMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const KeyNames = ['A', 'Y', 'X', 'B', 'L1', 'L2', 'R1', 'R2'];
@@ -14,6 +15,7 @@ class GamepadKeys extends CursorKeys {
 
         this.addKeys(KeyNames);
         this.gamepad = null;
+        this.waitBinding = false;
         this.setAutoBinding(GetValue(config, 'autoBinding', true));
 
         this.boot();
@@ -63,18 +65,6 @@ class GamepadKeys extends CursorKeys {
         }
     }
 
-    setGamepad(gamepad) {
-        this.gamepad = gamepad;
-
-        if (gamepad) {
-            this.onUpdateKeysState(gamepad);
-        } else {
-            this.clearAllKeysState();
-        }
-
-        return this;
-    }
-
     setAutoBinding(enable) {
         if (enable === undefined) {
             enable = true;
@@ -83,34 +73,27 @@ class GamepadKeys extends CursorKeys {
         return this;
     }
 
+    setGamepad(gamepad) {
+        this.gamepad = gamepad;
+
+        if (gamepad) {
+            this.onUpdateKeysState(gamepad);
+
+        } else {
+            this.clearAllKeysState();
+
+            if (this.autoBinding) {
+                this.bindGamepad();
+            }
+        }
+
+        return this;
+    }
+
     isMyPad(gamepad) {
         return this.isConnected && (this.gamepad === gamepad);
     }
 
-    bindGamepad(callback) {
-        if (this.gamepadManager) {
-            this.gamepadManager.once('down', function (gamepad, button, value) {
-                this.setGamepad(gamepad);
-                if (callback) {
-                    callback(gamepad);
-                }
-            }, this)
-
-        } else {
-            if (callback) {
-                callback();
-            }
-
-        }
-        return this;
-    }
-
-    bindGamepadPromise() {
-        var self = this;
-        return new Promise(function (resolve, reject) {
-            self.bindGamepad(resolve);
-        });
-    }
 
     get gamepadManager() {
         return this.scene.input.gamepad;
@@ -153,5 +136,10 @@ class GamepadKeys extends CursorKeys {
     }
 
 }
+
+Object.assign(
+    GamepadKeys.prototype,
+    BindGamepadMethods
+)
 
 export default GamepadKeys;

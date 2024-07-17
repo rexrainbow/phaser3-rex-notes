@@ -15,12 +15,18 @@ class Demo extends Phaser.Scene {
     create() {
         this.print = this.add.text(0, 0, '')
 
-        this.gamepadKeys = new GamepadKeys(this);
+        this.gamepad0 = new GamepadKeys(this);
+
+        this.add.text(0, 300, 'Unbind')
+            .setInteractive()
+            .on('pointerup', function () {
+                this.gamepad0.unBindGamepad();
+            }, this)
     }
 
     update() {
-        if (this.gamepadKeys.isConnected) {
-            var keys = this.gamepadKeys.keys;
+        if (this.gamepad0.isConnected) {
+            var keys = this.gamepad0.keys;
             var s = 'Key down: ';
             for (var name in keys) {
                 if (keys[name].isDown) {
@@ -43,7 +49,8 @@ var config = {
     width: 800,
     height: 600,
     scale: {
-        mode: Phaser.Scale.RESIZE,
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
     },
     input: {
         gamepad: true
