@@ -4,11 +4,15 @@ import CSVParser from 'papaparse/papaparse.min.js';
 import InstMem from './InstMem.js';
 import CmdHandlers from './commands/CmdHandlers.js';
 import { WaitComplete } from '../../../utils/promise/WaitEvent.js';
-import DefaultTimer from './timer/DefaultTimer.js';
+import Timer from './timer/DefaultTimer.js';
 
 
 class CSVScenarioLogic {
     constructor(parent, config) {
+        if (parent === undefined) {
+            parent = {};
+        }
+
         this.parent = parent;
 
         // Event emitter
@@ -27,7 +31,7 @@ class CSVScenarioLogic {
 
     // Override
     createTimer() {
-        return new DefaultTimer(this.parent);
+        return new Timer(this.parent);
     }
 
     resetFromJSON(o) {
@@ -64,6 +68,10 @@ class CSVScenarioLogic {
     }
 
     shutdown() {
+        if (!this.parent) {
+            return
+        }
+
         this.destroyEventEmitter();
         this.clear();
         this.timer.destroy();
