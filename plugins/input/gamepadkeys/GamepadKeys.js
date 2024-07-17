@@ -2,12 +2,20 @@ import CursorKeys from '../../utils/input/CursorKeys.js';
 import BindGamepadMethods from './methods/BindGamepadMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
-const KeyNames = ['A', 'Y', 'X', 'B', 'L1', 'L2', 'R1', 'R2'];
+const KeyNames = ['A', 'Y', 'X', 'B', 'L1', 'L2', 'R1', 'R2', 'START', 'SELECT'];
+const KeyNameToButtonIndex = {
+    left: 14, right: 15, up: 12, down: 13,
+    A: 0, Y: 3, X: 2, B: 1,
+    L1: 4, L2: 6, R1: 5, R2: 7,
+    START: 8, SELECT: 9,
+}
 
 class GamepadKeys extends CursorKeys {
     constructor(scene, config) {
         super(scene);
         // this.scene = scene;
+
+        this.gamepadManager = scene.input.gamepad;
 
         if (!this.gamepadManager) {
             console.warn(`Gamepad feature is not activated`);
@@ -50,8 +58,13 @@ class GamepadKeys extends CursorKeys {
             return;
         }
 
+        var buttons = gamepad.buttons;
+        var buttonIndex, button, isPressed;
         for (var keyName in this.keys) {
-            this.setKeyState(keyName, gamepad[keyName]);
+            buttonIndex = KeyNameToButtonIndex[keyName];
+            button = buttons[buttonIndex];
+            isPressed = (button) ? button.pressed : false;
+            this.setKeyState(keyName, isPressed);
         }
     }
 
@@ -77,10 +90,6 @@ class GamepadKeys extends CursorKeys {
 
     isMyPad(gamepad) {
         return this.isConnected && (this.gamepad === gamepad);
-    }
-
-    get gamepadManager() {
-        return this.scene.input.gamepad;
     }
 
     get gamepad() {
@@ -138,6 +147,13 @@ class GamepadKeys extends CursorKeys {
         return this.keys.R2.isDown;
     }
 
+    get STARTKeyDown() {
+        return this.keys.START.isDown;
+    }
+
+    get SELECTKeyDown() {
+        return this.keys.SELECT.isDown;
+    }
 }
 
 Object.assign(
