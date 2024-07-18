@@ -12,6 +12,8 @@ class Timer {
     }
 
     destroy() {
+        this.stop();
+        return this;
     }
 
     start(time, timeoutCallback) {

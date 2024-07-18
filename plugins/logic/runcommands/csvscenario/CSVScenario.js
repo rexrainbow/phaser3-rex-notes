@@ -9,6 +9,8 @@ class CSVScenario extends CSVScenarioLogic {
 
     boot(scene, config) {
         scene.sys.events.once('shutdown', this.destroy, this);
+        super.boot(scene, config);
+        return this;
     }
 
     createTimer(scene, config) {

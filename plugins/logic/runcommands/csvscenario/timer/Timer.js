@@ -7,6 +7,7 @@ class Timer {
 
     destroy() {
         this.stop();
+        return this;
     }
 
     start(delay, timeoutCallback) {
@@ -25,6 +26,7 @@ class Timer {
             this.timer.remove();
             this.timer = undefined;
         }
+        return this;
     }
 
     pause() {

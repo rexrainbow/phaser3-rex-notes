@@ -27,7 +27,9 @@ class CSVScenarioLogic {
     }
 
     // Override
-    boot(parent, config) { }
+    boot(parent, config) {
+        return this;
+    }
 
     // Override
     createTimer(parent, config) {

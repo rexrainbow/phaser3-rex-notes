@@ -142,6 +142,7 @@ module.exports = {
     'tcrpplugin': './plugins/tcrp-plugin.js',
     'arcadetcrpplugin': './plugins/arcadetcrp-plugin.js',
     'csvscenarioplugin': './plugins/csvscenario-plugin.js',
+    'csvscenariologic': './plugins/csvscenariologic.js',
     'waiteventsplugin': './plugins/waitevents-plugin.js',
     'eventpromiseplugin': './plugins/eventpromise-plugin.js',
     'achievementsplugin': './plugins/achievements-plugin.js',

@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexcsvscenarioplugin = factory());
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexcsvscenariologic = factory());
 })(this, (function () { 'use strict';
 
   function _callSuper(t, o, e) {
@@ -102,29 +102,6 @@
       throw new TypeError("Derived constructors may only return object or undefined");
     }
     return _assertThisInitialized(self);
-  }
-  function _superPropBase(object, property) {
-    while (!Object.prototype.hasOwnProperty.call(object, property)) {
-      object = _getPrototypeOf(object);
-      if (object === null) break;
-    }
-    return object;
-  }
-  function _get() {
-    if (typeof Reflect !== "undefined" && Reflect.get) {
-      _get = Reflect.get.bind();
-    } else {
-      _get = function _get(target, property, receiver) {
-        var base = _superPropBase(target, property);
-        if (!base) return;
-        var desc = Object.getOwnPropertyDescriptor(base, property);
-        if (desc.get) {
-          return desc.get.call(arguments.length < 3 ? target : receiver);
-        }
-        return desc.value;
-      };
-    }
-    return _get.apply(this, arguments);
   }
 
   var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
@@ -1305,7 +1282,7 @@
     return WaitEvent(eventEmitter, 'complete');
   };
 
-  var Timer$1 = /*#__PURE__*/function () {
+  var Timer = /*#__PURE__*/function () {
     function Timer(parent) {
       _classCallCheck(this, Timer);
       this.parent = parent;
@@ -1403,7 +1380,7 @@
     }, {
       key: "createTimer",
       value: function createTimer(parent, config) {
-        return new Timer$1(parent);
+        return new Timer(parent);
       }
     }, {
       key: "resetFromJSON",
@@ -1768,111 +1745,6 @@
   };
   var DEFAULT_PREFIX = /^#([a-zA-Z]+)/;
 
-  var Timer = /*#__PURE__*/function () {
-    function Timer(scene) {
-      _classCallCheck(this, Timer);
-      this.scene = scene;
-      this.timeScale = 1;
-      this.timer = null;
-    }
-    _createClass(Timer, [{
-      key: "destroy",
-      value: function destroy() {
-        this.stop();
-        return this;
-      }
-    }, {
-      key: "start",
-      value: function start(delay, timeoutCallback) {
-        if (this.timer) {
-          this.timer.remove();
-          this.timer = undefined;
-        }
-        this.timer = this.scene.time.delayedCall(delay, timeoutCallback);
-        this.timer.timeScale = this.timeScale;
-        return this;
-      }
-    }, {
-      key: "stop",
-      value: function stop() {
-        if (this.timer) {
-          this.timer.remove();
-          this.timer = undefined;
-        }
-        return this;
-      }
-    }, {
-      key: "pause",
-      value: function pause() {
-        if (this.timer) {
-          this.timer.paused = true;
-        }
-        return this;
-      }
-    }, {
-      key: "resume",
-      value: function resume() {
-        if (this.timer) {
-          this.timer.paused = false;
-        }
-        return this;
-      }
-    }, {
-      key: "setTimeScale",
-      value: function setTimeScale(value) {
-        this.timeScale = value;
-        if (this.timer) {
-          this.timer.timeScale = value;
-        }
-        return this;
-      }
-    }]);
-    return Timer;
-  }();
-
-  var CSVScenario = /*#__PURE__*/function (_CSVScenarioLogic) {
-    _inherits(CSVScenario, _CSVScenarioLogic);
-    function CSVScenario(scene, config) {
-      _classCallCheck(this, CSVScenario);
-      return _callSuper(this, CSVScenario, [scene, config]); // this.parent = scene
-    }
-    _createClass(CSVScenario, [{
-      key: "boot",
-      value: function boot(scene, config) {
-        scene.sys.events.once('shutdown', this.destroy, this);
-        _get(_getPrototypeOf(CSVScenario.prototype), "boot", this).call(this, scene, config);
-        return this;
-      }
-    }, {
-      key: "createTimer",
-      value: function createTimer(scene, config) {
-        return new Timer(scene);
-      }
-    }]);
-    return CSVScenario;
-  }(CSVScenarioLogic);
-
-  var CSVScenarioPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
-    _inherits(CSVScenarioPlugin, _Phaser$Plugins$BaseP);
-    function CSVScenarioPlugin(pluginManager) {
-      _classCallCheck(this, CSVScenarioPlugin);
-      return _callSuper(this, CSVScenarioPlugin, [pluginManager]);
-    }
-    _createClass(CSVScenarioPlugin, [{
-      key: "start",
-      value: function start() {
-        var eventEmitter = this.game.events;
-        eventEmitter.on('destroy', this.destroy, this);
-      }
-    }, {
-      key: "add",
-      value: function add(scene, config) {
-        return new CSVScenario(scene, config);
-      }
-    }]);
-    return CSVScenarioPlugin;
-  }(Phaser.Plugins.BasePlugin);
-
-  return CSVScenarioPlugin;
+  return CSVScenarioLogic;
 
 }));
