@@ -1,552 +1,419 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-  typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rextouchstateplugin = factory());
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+    typeof define === 'function' && define.amd ? define(factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rextouchstateplugin = factory());
 })(this, (function () { 'use strict';
 
-  function _callSuper(t, o, e) {
-    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
-  }
-  function _isNativeReflectConstruct() {
-    try {
-      var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
-    } catch (t) {}
-    return (_isNativeReflectConstruct = function () {
-      return !!t;
-    })();
-  }
-  function _toPrimitive(t, r) {
-    if ("object" != typeof t || !t) return t;
-    var e = t[Symbol.toPrimitive];
-    if (void 0 !== e) {
-      var i = e.call(t, r || "default");
-      if ("object" != typeof i) return i;
-      throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return ("string" === r ? String : Number)(t);
-  }
-  function _toPropertyKey(t) {
-    var i = _toPrimitive(t, "string");
-    return "symbol" == typeof i ? i : String(i);
-  }
-  function _typeof(o) {
-    "@babel/helpers - typeof";
+    var EventEmitterMethods = {
+        setEventEmitter(eventEmitter, EventEmitterClass) {
+            if (EventEmitterClass === undefined) {
+                EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
+            }
+            this._privateEE = (eventEmitter === true) || (eventEmitter === undefined);
+            this._eventEmitter = (this._privateEE) ? (new EventEmitterClass()) : eventEmitter;
+            return this;
+        },
 
-    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
-      return typeof o;
-    } : function (o) {
-      return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-    }, _typeof(o);
-  }
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  }
-  function _defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor);
-    }
-  }
-  function _createClass(Constructor, protoProps, staticProps) {
-    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) _defineProperties(Constructor, staticProps);
-    Object.defineProperty(Constructor, "prototype", {
-      writable: false
-    });
-    return Constructor;
-  }
-  function _inherits(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) {
-      throw new TypeError("Super expression must either be null or a function");
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        writable: true,
-        configurable: true
-      }
-    });
-    Object.defineProperty(subClass, "prototype", {
-      writable: false
-    });
-    if (superClass) _setPrototypeOf(subClass, superClass);
-  }
-  function _getPrototypeOf(o) {
-    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
-      return o.__proto__ || Object.getPrototypeOf(o);
+        destroyEventEmitter() {
+            if (this._eventEmitter && this._privateEE) {
+                this._eventEmitter.shutdown();
+            }
+            return this;
+        },
+
+        getEventEmitter() {
+            return this._eventEmitter;
+        },
+
+        on() {
+            if (this._eventEmitter) {
+                this._eventEmitter.on.apply(this._eventEmitter, arguments);
+            }
+            return this;
+        },
+
+        once() {
+            if (this._eventEmitter) {
+                this._eventEmitter.once.apply(this._eventEmitter, arguments);
+            }
+            return this;
+        },
+
+        off() {
+            if (this._eventEmitter) {
+                this._eventEmitter.off.apply(this._eventEmitter, arguments);
+            }
+            return this;
+        },
+
+        emit(event) {
+            if (this._eventEmitter && event) {
+                this._eventEmitter.emit.apply(this._eventEmitter, arguments);
+            }
+            return this;
+        },
+
+        addListener() {
+            if (this._eventEmitter) {
+                this._eventEmitter.addListener.apply(this._eventEmitter, arguments);
+            }
+            return this;
+        },
+
+        removeListener() {
+            if (this._eventEmitter) {
+                this._eventEmitter.removeListener.apply(this._eventEmitter, arguments);
+            }
+            return this;
+        },
+
+        removeAllListeners() {
+            if (this._eventEmitter) {
+                this._eventEmitter.removeAllListeners.apply(this._eventEmitter, arguments);
+            }
+            return this;
+        },
+
+        listenerCount() {
+            if (this._eventEmitter) {
+                return this._eventEmitter.listenerCount.apply(this._eventEmitter, arguments);
+            }
+            return 0;
+        },
+
+        listeners() {
+            if (this._eventEmitter) {
+                return this._eventEmitter.listeners.apply(this._eventEmitter, arguments);
+            }
+            return [];
+        },
+
+        eventNames() {
+            if (this._eventEmitter) {
+                return this._eventEmitter.eventNames.apply(this._eventEmitter, arguments);
+            }
+            return [];
+        },
     };
-    return _getPrototypeOf(o);
-  }
-  function _setPrototypeOf(o, p) {
-    _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
-      o.__proto__ = p;
-      return o;
+
+    const SceneClass = Phaser.Scene;
+    var IsSceneObject = function (object) {
+        return (object instanceof SceneClass);
     };
-    return _setPrototypeOf(o, p);
-  }
-  function _assertThisInitialized(self) {
-    if (self === void 0) {
-      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+
+    var GetSceneObject = function (object) {
+        if ((object == null) || (typeof (object) !== 'object')) {
+            return null;
+        } else if (IsSceneObject(object)) { // object = scene
+            return object;
+        } else if (object.scene && IsSceneObject(object.scene)) { // object = game object
+            return object.scene;
+        } else if (object.parent && object.parent.scene && IsSceneObject(object.parent.scene)) { // parent = bob object
+            return object.parent.scene;
+        } else {
+            return null;
+        }
+    };
+
+    const GameClass = Phaser.Game;
+    var IsGame = function (object) {
+        return (object instanceof GameClass);
+    };
+
+    var GetGame = function (object) {
+        if ((object == null) || (typeof (object) !== 'object')) {
+            return null;
+        } else if (IsGame(object)) {
+            return object;
+        } else if (IsGame(object.game)) {
+            return object.game;
+        } else if (IsSceneObject(object)) { // object = scene object
+            return object.sys.game;
+        } else if (IsSceneObject(object.scene)) { // object = game object
+            return object.scene.sys.game;
+        }
+    };
+
+    const GetValue$1 = Phaser.Utils.Objects.GetValue;
+
+    class ComponentBase {
+        constructor(parent, config) {
+            this.setParent(parent);  // gameObject, scene, or game
+
+            this.isShutdown = false;
+
+            // Event emitter, default is private event emitter
+            this.setEventEmitter(GetValue$1(config, 'eventEmitter', true));
+
+            // Register callback of parent destroy event, also see `shutdown` method
+            if (this.parent) {
+                if (this.parent === this.scene) { // parent is a scene
+                    this.scene.sys.events.once('shutdown', this.onEnvDestroy, this);
+
+                } else if (this.parent === this.game) { // parent is game
+                    this.game.events.once('shutdown', this.onEnvDestroy, this);
+
+                } else if (this.parent.once) { // parent is game object or something else
+                    this.parent.once('destroy', this.onParentDestroy, this);
+                }
+
+                // bob object does not have event emitter
+            }
+
+        }
+
+        shutdown(fromScene) {
+            // Already shutdown
+            if (this.isShutdown) {
+                return;
+            }
+
+            // parent might not be shutdown yet
+            if (this.parent) {
+                if (this.parent === this.scene) { // parent is a scene
+                    this.scene.sys.events.off('shutdown', this.onEnvDestroy, this);
+
+                } else if (this.parent === this.game) { // parent is game
+                    this.game.events.off('shutdown', this.onEnvDestroy, this);
+
+                } else if (this.parent.once) { // parent is game object or something else
+                    this.parent.off('destroy', this.onParentDestroy, this);
+                }
+
+                // bob object does not have event emitter
+            }
+
+
+            this.destroyEventEmitter();
+
+            this.parent = undefined;
+            this.scene = undefined;
+            this.game = undefined;
+
+            this.isShutdown = true;
+        }
+
+        destroy(fromScene) {
+            this.shutdown(fromScene);
+        }
+
+        onEnvDestroy() {
+            this.destroy(true);
+        }
+
+        onParentDestroy(parent, fromScene) {
+            this.destroy(fromScene);
+        }
+
+        setParent(parent) {
+            this.parent = parent;  // gameObject, scene, or game
+
+            this.scene = GetSceneObject(parent);
+            this.game = GetGame(parent);
+
+            return this;
+        }
+
     }
-    return self;
-  }
-  function _possibleConstructorReturn(self, call) {
-    if (call && (typeof call === "object" || typeof call === "function")) {
-      return call;
-    } else if (call !== void 0) {
-      throw new TypeError("Derived constructors may only return object or undefined");
+    Object.assign(
+        ComponentBase.prototype,
+        EventEmitterMethods
+    );
+
+    var GetTickDelta = function (game) {
+        return GetGame(game).loop.delta;
+    };
+
+    const GetValue = Phaser.Utils.Objects.GetValue;
+    const DistanceBetween = Phaser.Math.Distance.Between;
+
+    class TouchState extends ComponentBase {
+        constructor(gameObject, config) {
+            super(gameObject, config);
+            // this.parent = gameObject;
+
+            this._enable = undefined;
+            this.parent.setInteractive(GetValue(config, "inputConfig", undefined));
+            this.resetFromJSON(config);
+            this.boot();
+        }
+
+        resetFromJSON(o) {
+            this.pointer = undefined;
+            this.isInTouching = false;
+            this.x = undefined;
+            this.y = undefined;
+            this.preX = undefined;
+            this.preY = undefined;
+            this.justMoved = false;
+            this.setEnable(GetValue(o, "enable", true));
+            return this;
+        }
+
+        boot() {
+            var gameObject = this.parent;
+            gameObject.on('pointerdown', this.onPointIn, this);
+            gameObject.on('pointerover', this.onPointIn, this);
+            gameObject.on('pointerup', this.onPointOut, this);
+            gameObject.on('pointerout', this.onPointOut, this);
+            gameObject.on('pointermove', this.onPointerMove, this);
+            this.scene.sys.events.on('postupdate', this.postupdate, this);
+        }
+
+        shutdown(fromScene) {
+            // Already shutdown
+            if (this.isShutdown) {
+                return;
+            }
+
+            // GameObject events will be removed when this gameObject destroyed 
+            // this.parent.off('pointerdown', this.onPointIn, this);
+            // this.parent.off('pointerover', this.onPointIn, this);
+            // this.parent.off('pointerup', this.onPointOut, this);
+            // this.parent.off('pointerout', this.onPointOut, this);
+            // this.parent.off('pointermove', this.onPointerMove, this);
+            this.scene.sys.events.off('postupdate', this.postupdate, this);
+
+            this.pointer = undefined;
+            super.shutdown(fromScene);
+        }
+
+        get enable() {
+            return this._enable;
+        }
+
+        set enable(e) {
+            if (this._enable === e) {
+                return;
+            }
+
+            if (!e) {
+                this.isInTouching = false;
+                this.pointer = undefined;
+            }
+            this._enable = e;
+            return this;
+        }
+
+        setEnable(e) {
+            if (e === undefined) {
+                e = true;
+            }
+
+            this.enable = e;
+            return this;
+        }
+
+        toggleEnable() {
+            this.setEnable(!this.enable);
+            return this;
+        }
+
+        get isDown() {
+            return this.pointer && this.pointer.isDown;
+        }
+
+        get isUp() {
+            return this.pointer === undefined;
+        }
+
+        get dx() {
+            return this.x - this.preX;
+        }
+
+        get dy() {
+            return this.y - this.preY;
+        }
+
+        get dt() {
+            var delta = GetTickDelta(this.scene);
+            return delta;
+        }
+
+        get speed() {
+            if ((this.x === this.preX) && (this.y === this.preY)) {
+                return 0;
+            }
+            var d = DistanceBetween(this.x, this.preX, this.y, this.preY);
+            var speed = d / (this.dt * 0.001);
+            return speed;
+        }
+
+        get speedX() {
+            return this.dx / (this.dt * 0.001);
+        }
+
+        get speedY() {
+            return this.dy / (this.dt * 0.001);
+        }
+
+        // internal
+        onPointIn(pointer, localX, localY, event) {
+            if ((!this.enable) ||
+                (!pointer.isDown) ||
+                (this.pointer !== undefined)) {
+                return;
+            }
+            this.pointer = pointer;
+            this.isInTouching = true;
+            this.preX = pointer.x;
+            this.preY = pointer.y;
+            this.x = pointer.x;
+            this.y = pointer.y;
+            this.localX = localX;
+            this.localY = localY;
+            this.emit('touchstart', this, this.parent, pointer, localX, localY, event);
+        }
+
+        onPointOut(pointer) {
+            if ((!this.enable) ||
+                (this.pointer !== pointer)) {
+                return;
+            }
+            this.pointer = undefined;
+            this.isInTouching = false;
+            this.emit('touchend', this, this.parent, pointer);
+        }
+
+        onPointerMove(pointer, localX, localY, event) {
+            if ((!this.enable) ||
+                (!pointer.isDown) ||
+                (this.pointer !== pointer)) {
+                return;
+            }
+            this.preX = this.x;
+            this.preY = this.y;
+            this.x = pointer.x;
+            this.y = pointer.y;
+            this.localX = localX;
+            this.localY = localY;
+            this.justMoved = true;
+            this.emit('touchmove', this, this.parent, pointer, localX, localY, event);
+        }
+
+        postupdate(time, delta) {
+            this.justMoved = false;
+        }
+
     }
-    return _assertThisInitialized(self);
-  }
-  function _superPropBase(object, property) {
-    while (!Object.prototype.hasOwnProperty.call(object, property)) {
-      object = _getPrototypeOf(object);
-      if (object === null) break;
+
+    class TouchStatePlugin extends Phaser.Plugins.BasePlugin {
+
+        constructor(pluginManager) {
+            super(pluginManager);
+        }
+
+        start() {
+            var eventEmitter = this.game.events;
+            eventEmitter.on('destroy', this.destroy, this);
+        }
+
+        add(gameObject, config) {
+            return new TouchState(gameObject, config);
+        }
+
     }
-    return object;
-  }
-  function _get() {
-    if (typeof Reflect !== "undefined" && Reflect.get) {
-      _get = Reflect.get.bind();
-    } else {
-      _get = function _get(target, property, receiver) {
-        var base = _superPropBase(target, property);
-        if (!base) return;
-        var desc = Object.getOwnPropertyDescriptor(base, property);
-        if (desc.get) {
-          return desc.get.call(arguments.length < 3 ? target : receiver);
-        }
-        return desc.value;
-      };
-    }
-    return _get.apply(this, arguments);
-  }
 
-  var EventEmitterMethods = {
-    setEventEmitter: function setEventEmitter(eventEmitter, EventEmitterClass) {
-      if (EventEmitterClass === undefined) {
-        EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
-      }
-      this._privateEE = eventEmitter === true || eventEmitter === undefined;
-      this._eventEmitter = this._privateEE ? new EventEmitterClass() : eventEmitter;
-      return this;
-    },
-    destroyEventEmitter: function destroyEventEmitter() {
-      if (this._eventEmitter && this._privateEE) {
-        this._eventEmitter.shutdown();
-      }
-      return this;
-    },
-    getEventEmitter: function getEventEmitter() {
-      return this._eventEmitter;
-    },
-    on: function on() {
-      if (this._eventEmitter) {
-        this._eventEmitter.on.apply(this._eventEmitter, arguments);
-      }
-      return this;
-    },
-    once: function once() {
-      if (this._eventEmitter) {
-        this._eventEmitter.once.apply(this._eventEmitter, arguments);
-      }
-      return this;
-    },
-    off: function off() {
-      if (this._eventEmitter) {
-        this._eventEmitter.off.apply(this._eventEmitter, arguments);
-      }
-      return this;
-    },
-    emit: function emit(event) {
-      if (this._eventEmitter && event) {
-        this._eventEmitter.emit.apply(this._eventEmitter, arguments);
-      }
-      return this;
-    },
-    addListener: function addListener() {
-      if (this._eventEmitter) {
-        this._eventEmitter.addListener.apply(this._eventEmitter, arguments);
-      }
-      return this;
-    },
-    removeListener: function removeListener() {
-      if (this._eventEmitter) {
-        this._eventEmitter.removeListener.apply(this._eventEmitter, arguments);
-      }
-      return this;
-    },
-    removeAllListeners: function removeAllListeners() {
-      if (this._eventEmitter) {
-        this._eventEmitter.removeAllListeners.apply(this._eventEmitter, arguments);
-      }
-      return this;
-    },
-    listenerCount: function listenerCount() {
-      if (this._eventEmitter) {
-        return this._eventEmitter.listenerCount.apply(this._eventEmitter, arguments);
-      }
-      return 0;
-    },
-    listeners: function listeners() {
-      if (this._eventEmitter) {
-        return this._eventEmitter.listeners.apply(this._eventEmitter, arguments);
-      }
-      return [];
-    },
-    eventNames: function eventNames() {
-      if (this._eventEmitter) {
-        return this._eventEmitter.eventNames.apply(this._eventEmitter, arguments);
-      }
-      return [];
-    }
-  };
-
-  var SceneClass = Phaser.Scene;
-  var IsSceneObject = function IsSceneObject(object) {
-    return object instanceof SceneClass;
-  };
-
-  var GetSceneObject = function GetSceneObject(object) {
-    if (object == null || _typeof(object) !== 'object') {
-      return null;
-    } else if (IsSceneObject(object)) {
-      // object = scene
-      return object;
-    } else if (object.scene && IsSceneObject(object.scene)) {
-      // object = game object
-      return object.scene;
-    } else if (object.parent && object.parent.scene && IsSceneObject(object.parent.scene)) {
-      // parent = bob object
-      return object.parent.scene;
-    } else {
-      return null;
-    }
-  };
-
-  var GameClass = Phaser.Game;
-  var IsGame = function IsGame(object) {
-    return object instanceof GameClass;
-  };
-
-  var GetGame = function GetGame(object) {
-    if (object == null || _typeof(object) !== 'object') {
-      return null;
-    } else if (IsGame(object)) {
-      return object;
-    } else if (IsGame(object.game)) {
-      return object.game;
-    } else if (IsSceneObject(object)) {
-      // object = scene object
-      return object.sys.game;
-    } else if (IsSceneObject(object.scene)) {
-      // object = game object
-      return object.scene.sys.game;
-    }
-  };
-
-  var GetValue$1 = Phaser.Utils.Objects.GetValue;
-  var ComponentBase = /*#__PURE__*/function () {
-    function ComponentBase(parent, config) {
-      _classCallCheck(this, ComponentBase);
-      this.setParent(parent); // gameObject, scene, or game
-
-      this.isShutdown = false;
-
-      // Event emitter, default is private event emitter
-      this.setEventEmitter(GetValue$1(config, 'eventEmitter', true));
-
-      // Register callback of parent destroy event, also see `shutdown` method
-      if (this.parent) {
-        if (this.parent === this.scene) {
-          // parent is a scene
-          this.scene.sys.events.once('shutdown', this.onEnvDestroy, this);
-        } else if (this.parent === this.game) {
-          // parent is game
-          this.game.events.once('shutdown', this.onEnvDestroy, this);
-        } else if (this.parent.once) {
-          // parent is game object or something else
-          this.parent.once('destroy', this.onParentDestroy, this);
-        }
-
-        // bob object does not have event emitter
-      }
-    }
-    _createClass(ComponentBase, [{
-      key: "shutdown",
-      value: function shutdown(fromScene) {
-        // Already shutdown
-        if (this.isShutdown) {
-          return;
-        }
-
-        // parent might not be shutdown yet
-        if (this.parent) {
-          if (this.parent === this.scene) {
-            // parent is a scene
-            this.scene.sys.events.off('shutdown', this.onEnvDestroy, this);
-          } else if (this.parent === this.game) {
-            // parent is game
-            this.game.events.off('shutdown', this.onEnvDestroy, this);
-          } else if (this.parent.once) {
-            // parent is game object or something else
-            this.parent.off('destroy', this.onParentDestroy, this);
-          }
-
-          // bob object does not have event emitter
-        }
-        this.destroyEventEmitter();
-        this.parent = undefined;
-        this.scene = undefined;
-        this.game = undefined;
-        this.isShutdown = true;
-      }
-    }, {
-      key: "destroy",
-      value: function destroy(fromScene) {
-        this.shutdown(fromScene);
-      }
-    }, {
-      key: "onEnvDestroy",
-      value: function onEnvDestroy() {
-        this.destroy(true);
-      }
-    }, {
-      key: "onParentDestroy",
-      value: function onParentDestroy(parent, fromScene) {
-        this.destroy(fromScene);
-      }
-    }, {
-      key: "setParent",
-      value: function setParent(parent) {
-        this.parent = parent; // gameObject, scene, or game
-
-        this.scene = GetSceneObject(parent);
-        this.game = GetGame(parent);
-        return this;
-      }
-    }]);
-    return ComponentBase;
-  }();
-  Object.assign(ComponentBase.prototype, EventEmitterMethods);
-
-  var GetTickDelta = function GetTickDelta(game) {
-    return GetGame(game).loop.delta;
-  };
-
-  var GetValue = Phaser.Utils.Objects.GetValue;
-  var DistanceBetween = Phaser.Math.Distance.Between;
-  var TouchState = /*#__PURE__*/function (_ComponentBase) {
-    _inherits(TouchState, _ComponentBase);
-    function TouchState(gameObject, config) {
-      var _this;
-      _classCallCheck(this, TouchState);
-      _this = _callSuper(this, TouchState, [gameObject, config]);
-      // this.parent = gameObject;
-
-      _this._enable = undefined;
-      _this.parent.setInteractive(GetValue(config, "inputConfig", undefined));
-      _this.resetFromJSON(config);
-      _this.boot();
-      return _this;
-    }
-    _createClass(TouchState, [{
-      key: "resetFromJSON",
-      value: function resetFromJSON(o) {
-        this.pointer = undefined;
-        this.isInTouching = false;
-        this.x = undefined;
-        this.y = undefined;
-        this.preX = undefined;
-        this.preY = undefined;
-        this.justMoved = false;
-        this.setEnable(GetValue(o, "enable", true));
-        return this;
-      }
-    }, {
-      key: "boot",
-      value: function boot() {
-        var gameObject = this.parent;
-        gameObject.on('pointerdown', this.onPointIn, this);
-        gameObject.on('pointerover', this.onPointIn, this);
-        gameObject.on('pointerup', this.onPointOut, this);
-        gameObject.on('pointerout', this.onPointOut, this);
-        gameObject.on('pointermove', this.onPointerMove, this);
-        this.scene.sys.events.on('postupdate', this.postupdate, this);
-      }
-    }, {
-      key: "shutdown",
-      value: function shutdown(fromScene) {
-        // Already shutdown
-        if (this.isShutdown) {
-          return;
-        }
-
-        // GameObject events will be removed when this gameObject destroyed 
-        // this.parent.off('pointerdown', this.onPointIn, this);
-        // this.parent.off('pointerover', this.onPointIn, this);
-        // this.parent.off('pointerup', this.onPointOut, this);
-        // this.parent.off('pointerout', this.onPointOut, this);
-        // this.parent.off('pointermove', this.onPointerMove, this);
-        this.scene.sys.events.off('postupdate', this.postupdate, this);
-        this.pointer = undefined;
-        _get(_getPrototypeOf(TouchState.prototype), "shutdown", this).call(this, fromScene);
-      }
-    }, {
-      key: "enable",
-      get: function get() {
-        return this._enable;
-      },
-      set: function set(e) {
-        if (this._enable === e) {
-          return;
-        }
-        if (!e) {
-          this.isInTouching = false;
-          this.pointer = undefined;
-        }
-        this._enable = e;
-        return this;
-      }
-    }, {
-      key: "setEnable",
-      value: function setEnable(e) {
-        if (e === undefined) {
-          e = true;
-        }
-        this.enable = e;
-        return this;
-      }
-    }, {
-      key: "toggleEnable",
-      value: function toggleEnable() {
-        this.setEnable(!this.enable);
-        return this;
-      }
-    }, {
-      key: "isDown",
-      get: function get() {
-        return this.pointer && this.pointer.isDown;
-      }
-    }, {
-      key: "isUp",
-      get: function get() {
-        return this.pointer === undefined;
-      }
-    }, {
-      key: "dx",
-      get: function get() {
-        return this.x - this.preX;
-      }
-    }, {
-      key: "dy",
-      get: function get() {
-        return this.y - this.preY;
-      }
-    }, {
-      key: "dt",
-      get: function get() {
-        var delta = GetTickDelta(this.scene);
-        return delta;
-      }
-    }, {
-      key: "speed",
-      get: function get() {
-        if (this.x === this.preX && this.y === this.preY) {
-          return 0;
-        }
-        var d = DistanceBetween(this.x, this.preX, this.y, this.preY);
-        var speed = d / (this.dt * 0.001);
-        return speed;
-      }
-    }, {
-      key: "speedX",
-      get: function get() {
-        return this.dx / (this.dt * 0.001);
-      }
-    }, {
-      key: "speedY",
-      get: function get() {
-        return this.dy / (this.dt * 0.001);
-      }
-
-      // internal
-    }, {
-      key: "onPointIn",
-      value: function onPointIn(pointer, localX, localY, event) {
-        if (!this.enable || !pointer.isDown || this.pointer !== undefined) {
-          return;
-        }
-        this.pointer = pointer;
-        this.isInTouching = true;
-        this.preX = pointer.x;
-        this.preY = pointer.y;
-        this.x = pointer.x;
-        this.y = pointer.y;
-        this.localX = localX;
-        this.localY = localY;
-        this.emit('touchstart', this, this.parent, pointer, localX, localY, event);
-      }
-    }, {
-      key: "onPointOut",
-      value: function onPointOut(pointer) {
-        if (!this.enable || this.pointer !== pointer) {
-          return;
-        }
-        this.pointer = undefined;
-        this.isInTouching = false;
-        this.emit('touchend', this, this.parent, pointer);
-      }
-    }, {
-      key: "onPointerMove",
-      value: function onPointerMove(pointer, localX, localY, event) {
-        if (!this.enable || !pointer.isDown || this.pointer !== pointer) {
-          return;
-        }
-        this.preX = this.x;
-        this.preY = this.y;
-        this.x = pointer.x;
-        this.y = pointer.y;
-        this.localX = localX;
-        this.localY = localY;
-        this.justMoved = true;
-        this.emit('touchmove', this, this.parent, pointer, localX, localY, event);
-      }
-    }, {
-      key: "postupdate",
-      value: function postupdate(time, delta) {
-        this.justMoved = false;
-      }
-    }]);
-    return TouchState;
-  }(ComponentBase);
-
-  var TouchStatePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
-    _inherits(TouchStatePlugin, _Phaser$Plugins$BaseP);
-    function TouchStatePlugin(pluginManager) {
-      _classCallCheck(this, TouchStatePlugin);
-      return _callSuper(this, TouchStatePlugin, [pluginManager]);
-    }
-    _createClass(TouchStatePlugin, [{
-      key: "start",
-      value: function start() {
-        var eventEmitter = this.game.events;
-        eventEmitter.on('destroy', this.destroy, this);
-      }
-    }, {
-      key: "add",
-      value: function add(gameObject, config) {
-        return new TouchState(gameObject, config);
-      }
-    }]);
     return TouchStatePlugin;
-  }(Phaser.Plugins.BasePlugin);
-
-  return TouchStatePlugin;
 
 }));

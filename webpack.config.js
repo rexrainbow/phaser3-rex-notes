@@ -6,12 +6,9 @@ const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const projectMain = process.env.main;
 const assetsFolder = process.env.assets || './assets';
 const htmlTemplate = process.env.htmltemplate || './examples/index.tmpl';
-const usePluginTransformRuntime = process.env.usePluginTransformRuntime || false;
 
 var plugins = [];
-if (usePluginTransformRuntime) {
-    plugins.push('@babel/plugin-transform-runtime');
-}
+
 
 module.exports = {
     mode: 'development',
@@ -72,19 +69,7 @@ module.exports = {
                 loader: 'babel-loader',
                 options: {
                     presets: [
-                        '@babel/preset-env',
                         '@babel/preset-typescript'
-                    ],
-                    plugins: plugins
-                }
-            },
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                loader: 'babel-loader',
-                options: {
-                    presets: [
-                        '@babel/preset-env',
                     ],
                     plugins: plugins
                 }

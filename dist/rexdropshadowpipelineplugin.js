@@ -4,715 +4,615 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexdropshadowpipelineplugin = factory());
 })(this, (function () { 'use strict';
 
-  function _callSuper(t, o, e) {
-    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
-  }
-  function _isNativeReflectConstruct() {
-    try {
-      var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
-    } catch (t) {}
-    return (_isNativeReflectConstruct = function () {
-      return !!t;
-    })();
-  }
-  function _toPrimitive(t, r) {
-    if ("object" != typeof t || !t) return t;
-    var e = t[Symbol.toPrimitive];
-    if (void 0 !== e) {
-      var i = e.call(t, r || "default");
-      if ("object" != typeof i) return i;
-      throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return ("string" === r ? String : Number)(t);
-  }
-  function _toPropertyKey(t) {
-    var i = _toPrimitive(t, "string");
-    return "symbol" == typeof i ? i : String(i);
-  }
-  function _typeof(o) {
-    "@babel/helpers - typeof";
+  const frag$1 = `\
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+#define highmedp highp
+#else
+#define highmedp mediump
+#endif
+precision highmedp float;
 
-    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
-      return typeof o;
-    } : function (o) {
-      return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-    }, _typeof(o);
-  }
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  }
-  function _defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor);
-    }
-  }
-  function _createClass(Constructor, protoProps, staticProps) {
-    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) _defineProperties(Constructor, staticProps);
-    Object.defineProperty(Constructor, "prototype", {
-      writable: false
-    });
-    return Constructor;
-  }
-  function _inherits(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) {
-      throw new TypeError("Super expression must either be null or a function");
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        writable: true,
-        configurable: true
+// Scene buffer
+uniform sampler2D uMainSampler; 
+varying vec2 outTexCoord;
+
+// Effect parameters
+uniform float alpha;
+uniform vec3 color;
+uniform vec2 uOffset;
+
+void main (void) {
+  vec4 sample = texture2D(uMainSampler, outTexCoord - uOffset);
+
+  // Premultiply alpha
+  sample.rgb = color.rgb * sample.a;
+
+  // alpha user alpha
+  sample *= alpha;
+
+  gl_FragColor = sample;
+}
+`;
+
+  const frag = `\
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+#define highmedp highp
+#else
+#define highmedp mediump
+#endif
+precision highmedp float;
+
+// Scene buffer
+uniform sampler2D uMainSampler; 
+varying vec2 outTexCoord;
+
+// Effect parameters
+uniform vec2 uOffset;
+
+void main (void) {
+  vec4 color = vec4(0.0);
+
+  // Sample top left pixel
+  color += texture2D(uMainSampler, vec2(outTexCoord.x - uOffset.x, outTexCoord.y + uOffset.y));
+
+  // Sample top right pixel
+  color += texture2D(uMainSampler, vec2(outTexCoord.x + uOffset.x, outTexCoord.y + uOffset.y));
+
+  // Sample bottom right pixel
+  color += texture2D(uMainSampler, vec2(outTexCoord.x + uOffset.x, outTexCoord.y - uOffset.y));
+
+  // Sample bottom left pixel
+  color += texture2D(uMainSampler, vec2(outTexCoord.x - uOffset.x, outTexCoord.y - uOffset.y));
+
+  // Average
+  color *= 0.25;
+
+  gl_FragColor = color;
+}
+`;
+
+  var GenerateKernels = function (blur, quality, out) {
+      if (out === undefined) {
+          out = [];
       }
-    });
-    Object.defineProperty(subClass, "prototype", {
-      writable: false
-    });
-    if (superClass) _setPrototypeOf(subClass, superClass);
-  }
-  function _getPrototypeOf(o) {
-    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
-      return o.__proto__ || Object.getPrototypeOf(o);
-    };
-    return _getPrototypeOf(o);
-  }
-  function _setPrototypeOf(o, p) {
-    _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
-      o.__proto__ = p;
-      return o;
-    };
-    return _setPrototypeOf(o, p);
-  }
-  function _assertThisInitialized(self) {
-    if (self === void 0) {
-      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    }
-    return self;
-  }
-  function _possibleConstructorReturn(self, call) {
-    if (call && (typeof call === "object" || typeof call === "function")) {
-      return call;
-    } else if (call !== void 0) {
-      throw new TypeError("Derived constructors may only return object or undefined");
-    }
-    return _assertThisInitialized(self);
-  }
-  function _toConsumableArray(arr) {
-    return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
-  }
-  function _arrayWithoutHoles(arr) {
-    if (Array.isArray(arr)) return _arrayLikeToArray(arr);
-  }
-  function _iterableToArray(iter) {
-    if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
-  }
-  function _unsupportedIterableToArray(o, minLen) {
-    if (!o) return;
-    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
-    var n = Object.prototype.toString.call(o).slice(8, -1);
-    if (n === "Object" && o.constructor) n = o.constructor.name;
-    if (n === "Map" || n === "Set") return Array.from(o);
-    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
-  }
-  function _arrayLikeToArray(arr, len) {
-    if (len == null || len > arr.length) len = arr.length;
-    for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-    return arr2;
-  }
-  function _nonIterableSpread() {
-    throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-  }
 
-  var frag$1 = "#ifdef GL_FRAGMENT_PRECISION_HIGH\n#define highmedp highp\n#else\n#define highmedp mediump\n#endif\nprecision highmedp float;\n\n// Scene buffer\nuniform sampler2D uMainSampler; \nvarying vec2 outTexCoord;\n\n// Effect parameters\nuniform float alpha;\nuniform vec3 color;\nuniform vec2 uOffset;\n\nvoid main (void) {\n  vec4 sample = texture2D(uMainSampler, outTexCoord - uOffset);\n\n  // Premultiply alpha\n  sample.rgb = color.rgb * sample.a;\n\n  // alpha user alpha\n  sample *= alpha;\n\n  gl_FragColor = sample;\n}\n";
-
-  var frag = "#ifdef GL_FRAGMENT_PRECISION_HIGH\n#define highmedp highp\n#else\n#define highmedp mediump\n#endif\nprecision highmedp float;\n\n// Scene buffer\nuniform sampler2D uMainSampler; \nvarying vec2 outTexCoord;\n\n// Effect parameters\nuniform vec2 uOffset;\n\nvoid main (void) {\n  vec4 color = vec4(0.0);\n\n  // Sample top left pixel\n  color += texture2D(uMainSampler, vec2(outTexCoord.x - uOffset.x, outTexCoord.y + uOffset.y));\n\n  // Sample top right pixel\n  color += texture2D(uMainSampler, vec2(outTexCoord.x + uOffset.x, outTexCoord.y + uOffset.y));\n\n  // Sample bottom right pixel\n  color += texture2D(uMainSampler, vec2(outTexCoord.x + uOffset.x, outTexCoord.y - uOffset.y));\n\n  // Sample bottom left pixel\n  color += texture2D(uMainSampler, vec2(outTexCoord.x - uOffset.x, outTexCoord.y - uOffset.y));\n\n  // Average\n  color *= 0.25;\n\n  gl_FragColor = color;\n}\n";
-
-  var GenerateKernels = function GenerateKernels(blur, quality, out) {
-    if (out === undefined) {
-      out = [];
-    }
-    out.length = quality;
-    for (var i = quality; i > 0; i--) {
-      out[i] = blur * (i / quality);
-    }
-    return out;
+      out.length = quality;
+      for (var i = quality; i > 0; i--) {
+          out[i] = blur * (i / quality);
+      }
+      return out;
   };
 
-  var Drawer = /*#__PURE__*/function () {
-    function Drawer(postFXPipeline) {
-      _classCallCheck(this, Drawer);
-      this.postFXPipeline = postFXPipeline;
-      this.shader = undefined;
-    }
-    _createClass(Drawer, [{
-      key: "setShader",
-      value: function setShader(shader) {
-        this.shader = shader;
-        return this;
+  class Drawer {
+      constructor(postFXPipeline) {
+          this.postFXPipeline = postFXPipeline;
+          this.shader = undefined;
       }
-    }, {
-      key: "getAnotherFrame",
-      value: function getAnotherFrame(frame) {
-        var self = this.postFXPipeline;
-        var frame1 = self.fullFrame1,
-          frame2 = self.fullFrame2;
-        return frame === frame1 ? frame2 : frame1;
+
+      setShader(shader) {
+          this.shader = shader;
+          return this;
       }
-    }, {
-      key: "init",
-      value: function init(renderTarget, startFrame) {
-        var self = this.postFXPipeline;
-        if (startFrame === undefined) {
-          startFrame = self.fullFrame1;
-        }
-        self.copyFrame(renderTarget, startFrame);
-        return startFrame;
+
+      getAnotherFrame(frame) {
+          var self = this.postFXPipeline;
+          var frame1 = self.fullFrame1,
+              frame2 = self.fullFrame2;
+          return (frame === frame1) ? frame2 : frame1;
+      }
+
+      init(renderTarget, startFrame) {
+          var self = this.postFXPipeline;
+          if (startFrame === undefined) {
+              startFrame = self.fullFrame1;
+          }
+
+          self.copyFrame(renderTarget, startFrame);
+          return startFrame;
       }
 
       // Override
-    }, {
-      key: "draw",
-      value: function draw(startFrame, returnLastFrame) {
-        // var self = this.postFXPipeline;
-        // var shader = this.shader;
+      draw(startFrame, returnLastFrame) {
+          // var self = this.postFXPipeline;
+          // var shader = this.shader;
 
-        // var sourceFrame = startFrame;
-        // var targetFrame = this.getAnotherFrame(sourceFrame);
-        // var returnFrame;
+          // var sourceFrame = startFrame;
+          // var targetFrame = this.getAnotherFrame(sourceFrame);
+          // var returnFrame;
 
-        // ...
+          // ...
 
-        // return returnFrame;
+          // return returnFrame;
       }
-    }]);
-    return Drawer;
-  }();
 
-  var ShadowDrawer = /*#__PURE__*/function (_Drawer) {
-    _inherits(ShadowDrawer, _Drawer);
-    function ShadowDrawer() {
-      _classCallCheck(this, ShadowDrawer);
-      return _callSuper(this, ShadowDrawer, arguments);
-    }
-    _createClass(ShadowDrawer, [{
-      key: "draw",
-      value: function draw(startFrame, returnLastFrame) {
-        var self = this.postFXPipeline;
-        var shader = this.shader;
-        var sourceFrame = startFrame;
-        var targetFrame = this.getAnotherFrame(sourceFrame);
-        var returnFrame;
 
-        // Set uniforms
-        var uOffsetX = self.distance / self.renderer.width * Math.cos(self.rotation);
-        var uOffsetY = self.distance / self.renderer.height * Math.sin(self.rotation);
-        self.set2f('uOffset', uOffsetX, uOffsetY, shader);
-        self.set3f('color', self._shadowColor.redGL, self._shadowColor.greenGL, self._shadowColor.blueGL, shader);
-        self.set1f('alpha', self.alpha, shader);
-        // Bind and draw
-        if (returnLastFrame) {
-          self.bindAndDraw(sourceFrame, targetFrame, true, true, shader);
-          returnFrame = targetFrame;
-        } else {
-          self.bindAndDraw(sourceFrame, null, true, true, shader);
-        }
-        return returnFrame;
-      }
-    }]);
-    return ShadowDrawer;
-  }(Drawer);
+  }
 
-  var KawaseBlurDrawer = /*#__PURE__*/function (_Drawer) {
-    _inherits(KawaseBlurDrawer, _Drawer);
-    function KawaseBlurDrawer() {
-      _classCallCheck(this, KawaseBlurDrawer);
-      return _callSuper(this, KawaseBlurDrawer, arguments);
-    }
-    _createClass(KawaseBlurDrawer, [{
-      key: "draw",
-      value: function draw(startFrame, returnLastFrame) {
-        var self = this.postFXPipeline;
-        var shader = this.shader;
-        var sourceFrame = startFrame;
-        var targetFrame = this.getAnotherFrame(sourceFrame);
-        var returnFrame;
-        var uvX = self.pixelWidth / self.renderer.width;
-        var uvY = self.pixelHeight / self.renderer.height;
-        var offset, uOffsetX, uOffsetY;
-        for (var i = 0, last = self._quality - 1; i <= last; i++) {
+  class ShadowDrawer extends Drawer {
+      draw(startFrame, returnLastFrame) {
+          var self = this.postFXPipeline;
+          var shader = this.shader;
+
+          var sourceFrame = startFrame;
+          var targetFrame = this.getAnotherFrame(sourceFrame);
+          var returnFrame;
+
           // Set uniforms
-          offset = self._kernels[i] + 0.5;
-          uOffsetX = offset * uvX;
-          uOffsetY = offset * uvY;
+          var uOffsetX = (self.distance / self.renderer.width) * Math.cos(self.rotation);
+          var uOffsetY = (self.distance / self.renderer.height) * Math.sin(self.rotation);
           self.set2f('uOffset', uOffsetX, uOffsetY, shader);
+          self.set3f('color', self._shadowColor.redGL, self._shadowColor.greenGL, self._shadowColor.blueGL, shader);
+          self.set1f('alpha', self.alpha, shader);
           // Bind and draw
-          if (i < last) {
-            self.bindAndDraw(sourceFrame, targetFrame, true, true, shader);
-            sourceFrame = targetFrame;
-            targetFrame = this.getAnotherFrame(sourceFrame);
-          } else {
-            // Last step
-            if (returnLastFrame) {
+          if (returnLastFrame) {
               self.bindAndDraw(sourceFrame, targetFrame, true, true, shader);
               returnFrame = targetFrame;
-            } else {
+          } else {
               self.bindAndDraw(sourceFrame, null, true, true, shader);
-            }
           }
-        }
-        return returnFrame;
+
+          return returnFrame;
       }
-    }]);
-    return KawaseBlurDrawer;
-  }(Drawer);
+  }
 
-  var PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
-  var GetValue = Phaser.Utils.Objects.GetValue;
-  var DegToRad = Phaser.Math.DegToRad;
-  var RadToDeg = Phaser.Math.RadToDeg;
-  var IntegerToRGB = Phaser.Display.Color.IntegerToRGB;
-  var Color = Phaser.Display.Color;
-  var DropShadowPostFxPipeline = /*#__PURE__*/function (_PostFXPipeline) {
-    _inherits(DropShadowPostFxPipeline, _PostFXPipeline);
-    function DropShadowPostFxPipeline(game) {
-      var _this;
-      _classCallCheck(this, DropShadowPostFxPipeline);
-      _this = _callSuper(this, DropShadowPostFxPipeline, [{
-        name: 'rexDropShadowPostFx',
-        game: game,
-        shaders: [{
-          fragShader: frag$1
-        }, {
-          fragShader: frag
-        }]
-      }]);
-      _this.shadowDrawer = new ShadowDrawer(_assertThisInitialized(_this));
-      _this.kawaseBlurDrawer = new KawaseBlurDrawer(_assertThisInitialized(_this));
-      _this.rotation = 0;
-      _this.distance = 0;
-      _this._shadowColor = new Color();
-      _this.alpha = 0.5;
-      _this.shadowOnly = false;
+  class KawaseBlurDrawer extends Drawer {
+      draw(startFrame, returnLastFrame) {
+          var self = this.postFXPipeline;
+          var shader = this.shader;
 
-      // KawaseBlur
-      _this._kernels = [0];
-      _this._blur = 0;
-      _this._quality = 1;
-      _this.pixelWidth = 1; // width of pixel wo resolution
-      _this.pixelHeight = 1; // height of pixel wo resolution
-      return _this;
-    }
-    _createClass(DropShadowPostFxPipeline, [{
-      key: "resetFromJSON",
-      value: function resetFromJSON(o) {
-        var rotation = GetValue(o, 'rotation', undefined);
-        if (rotation === undefined) {
-          this.setAngle(GetValue(o, 'angle', 45));
-        } else {
-          this.setRotation(rotation);
-        }
-        this.setDistance(GetValue(o, 'distance', 5));
-        this.setShadowColor(GetValue(o, 'shadowColor', 0xffffff));
-        this.setAlpha(GetValue(o, 'alpha', 0.5));
-        this.setShadowOnly(GetValue(o, 'shadowOnly', false));
+          var sourceFrame = startFrame;
+          var targetFrame = this.getAnotherFrame(sourceFrame);
+          var returnFrame;
 
-        // KawaseBlur
-        var blur = GetValue(o, 'blur', 4);
-        if (typeof blur === 'number') {
-          this.setBlur(blur);
-          this.setQuality(GetValue(o, 'quality', 3));
-        } else {
-          this.setKernela(blur);
-        }
-        this.setPixelSize(GetValue(o, 'pixelWidth', 1), GetValue(o, 'pixelHeight', 1));
-        return this;
+          var uvX = self.pixelWidth / self.renderer.width;
+          var uvY = self.pixelHeight / self.renderer.height;
+          var offset, uOffsetX, uOffsetY;
+          for (var i = 0, last = self._quality - 1; i <= last; i++) {
+              // Set uniforms
+              offset = self._kernels[i] + 0.5;
+              uOffsetX = offset * uvX;
+              uOffsetY = offset * uvY;
+              self.set2f('uOffset', uOffsetX, uOffsetY, shader);
+              // Bind and draw
+              if (i < last) {
+                  self.bindAndDraw(sourceFrame, targetFrame, true, true, shader);
+                  sourceFrame = targetFrame;
+                  targetFrame = this.getAnotherFrame(sourceFrame);
+              } else { // Last step
+                  if (returnLastFrame) {
+                      self.bindAndDraw(sourceFrame, targetFrame, true, true, shader);
+                      returnFrame = targetFrame;
+                  } else {
+                      self.bindAndDraw(sourceFrame, null, true, true, shader);
+                  }
+              }
+          }
+
+          return returnFrame;
       }
-    }, {
-      key: "onPreRender",
-      value: function onPreRender() {}
-    }, {
-      key: "onDraw",
-      value: function onDraw(renderTarget) {
-        var targetFrame;
+  }
 
-        // shadow
-        targetFrame = this.shadowDrawer.setShader(this.shaders[0]).draw(this.shadowDrawer.init(renderTarget), true);
+  const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
+  const GetValue = Phaser.Utils.Objects.GetValue;
+  const DegToRad = Phaser.Math.DegToRad;
+  const RadToDeg = Phaser.Math.RadToDeg;
+  const IntegerToRGB = Phaser.Display.Color.IntegerToRGB;
+  const Color = Phaser.Display.Color;
 
-        // kawase-blur
-        targetFrame = this.kawaseBlurDrawer.setShader(this.shaders[1]).draw(targetFrame, true);
+  class DropShadowPostFxPipeline extends PostFXPipeline {
+      constructor(game) {
+          super({
+              name: 'rexDropShadowPostFx',
+              game: game,
+              shaders: [
+                  { fragShader: frag$1, },
+                  { fragShader: frag, },
+              ],
+          });
 
-        // Add renderTarget to result
-        if (!this.shadowOnly) {
-          this.copyFrame(renderTarget, targetFrame, 1, false);
-        }
-        this.copyToGame(targetFrame);
+          this.shadowDrawer = new ShadowDrawer(this);
+          this.kawaseBlurDrawer = new KawaseBlurDrawer(this);
+
+          this.rotation = 0;
+          this.distance = 0;
+          this._shadowColor = new Color();
+          this.alpha = 0.5;
+          this.shadowOnly = false;
+
+          // KawaseBlur
+          this._kernels = [0];
+          this._blur = 0;
+          this._quality = 1;
+          this.pixelWidth = 1; // width of pixel wo resolution
+          this.pixelHeight = 1; // height of pixel wo resolution
+      }
+
+      resetFromJSON(o) {
+          var rotation = GetValue(o, 'rotation', undefined);
+          if (rotation === undefined) {
+              this.setAngle(GetValue(o, 'angle', 45));
+          } else {
+              this.setRotation(rotation);
+          }
+
+          this.setDistance(GetValue(o, 'distance', 5));
+
+          this.setShadowColor(GetValue(o, 'shadowColor', 0xffffff));
+          this.setAlpha(GetValue(o, 'alpha', 0.5));
+
+          this.setShadowOnly(GetValue(o, 'shadowOnly', false));
+
+          // KawaseBlur
+          var blur = GetValue(o, 'blur', 4);
+          if (typeof (blur) === 'number') {
+              this.setBlur(blur);
+              this.setQuality(GetValue(o, 'quality', 3));
+          } else {
+              this.setKernela(blur);
+          }
+
+          this.setPixelSize(GetValue(o, 'pixelWidth', 1), GetValue(o, 'pixelHeight', 1));
+
+          return this;
+      }
+
+      onPreRender() {
+      }
+
+      onDraw(renderTarget) {
+          var targetFrame;
+
+          // shadow
+          targetFrame = this.shadowDrawer
+              .setShader(this.shaders[0])
+              .draw(this.shadowDrawer.init(renderTarget), true);
+
+          // kawase-blur
+          targetFrame = this.kawaseBlurDrawer
+              .setShader(this.shaders[1])
+              .draw(targetFrame, true);
+
+          // Add renderTarget to result
+          if (!this.shadowOnly) {
+              this.copyFrame(renderTarget, targetFrame, 1, false);
+          }
+
+          this.copyToGame(targetFrame);
       }
 
       // rotation
-    }, {
-      key: "setRotation",
-      value: function setRotation(value) {
-        this.rotation = value;
-        return this;
+      setRotation(value) {
+          this.rotation = value;
+          return this;
       }
-    }, {
-      key: "angle",
-      get: function get() {
-        return RadToDeg(this.rotation);
-      },
-      set: function set(value) {
-        this.rotation = DegToRad(value);
+
+      get angle() {
+          return RadToDeg(this.rotation);
       }
-    }, {
-      key: "setAngle",
-      value: function setAngle(value) {
-        this.angle = value;
-        return this;
+
+      set angle(value) {
+          this.rotation = DegToRad(value);
+      }
+
+      setAngle(value) {
+          this.angle = value;
+          return this;
       }
 
       // distance
-    }, {
-      key: "setDistance",
-      value: function setDistance(value) {
-        this.distance = value;
-        return this;
+      setDistance(value) {
+          this.distance = value;
+          return this;
       }
 
       // shadow color
-    }, {
-      key: "shadowColor",
-      get: function get() {
-        return this._shadowColor;
-      },
-      set: function set(value) {
-        if (typeof value === 'number') {
-          value = IntegerToRGB(value);
-        }
-        this._shadowColor.setFromRGB(value);
+      get shadowColor() {
+          return this._shadowColor;
       }
-    }, {
-      key: "setShadowColor",
-      value: function setShadowColor(value) {
-        this.shadowColor = value;
-        return this;
+
+      set shadowColor(value) {
+          if (typeof (value) === 'number') {
+              value = IntegerToRGB(value);
+          }
+          this._shadowColor.setFromRGB(value);
+      }
+
+      setShadowColor(value) {
+          this.shadowColor = value;
+          return this;
       }
 
       // alpha
-    }, {
-      key: "setAlpha",
-      value: function setAlpha(value) {
-        this.alpha = value;
-        return this;
+      setAlpha(value) {
+          this.alpha = value;
+          return this;
       }
 
       // shadowOnly
-    }, {
-      key: "setShadowOnly",
-      value: function setShadowOnly(enable) {
-        if (enable === undefined) {
-          enable = true;
-        }
-        this.shadowOnly = enable;
-        return this;
+      setShadowOnly(enable) {
+          if (enable === undefined) {
+              enable = true;
+          }
+
+          this.shadowOnly = enable;
+          return this;
       }
 
       // KawaseBlur
       // blur
-    }, {
-      key: "blur",
-      get: function get() {
-        return this._blur;
-      },
-      set: function set(value) {
-        if (this._blur === value) {
-          return;
-        }
-        this._blur = value;
-        GenerateKernels(this._blur, this._quality, this._kernels);
+      get blur() {
+          return this._blur;
       }
-    }, {
-      key: "setBlur",
-      value: function setBlur(value) {
-        this.blur = value;
-        return this;
+
+      set blur(value) {
+          if (this._blur === value) {
+              return;
+          }
+
+          this._blur = value;
+          GenerateKernels(this._blur, this._quality, this._kernels);
+      }
+
+      setBlur(value) {
+          this.blur = value;
+          return this;
       }
 
       // quality
-    }, {
-      key: "quality",
-      get: function get() {
-        return this._quality;
-      },
-      set: function set(value) {
-        if (this._quality === value) {
-          return;
-        }
-        this._quality = value;
-        GenerateKernels(this._blur, this._quality, this._kernels);
+      get quality() {
+          return this._quality;
       }
-    }, {
-      key: "setQuality",
-      value: function setQuality(value) {
-        this.quality = value;
-        return this;
+
+      set quality(value) {
+          if (this._quality === value) {
+              return;
+          }
+
+          this._quality = value;
+          GenerateKernels(this._blur, this._quality, this._kernels);
+      }
+
+      setQuality(value) {
+          this.quality = value;
+          return this;
       }
 
       // kernels
-    }, {
-      key: "kernels",
-      get: function get() {
-        return this._kernels;
-      },
-      set: function set(value) {
-        if (value === undefined) {
-          value = [0];
-        }
-        this._kernels = value;
-        this._quality = value.length;
-        this._blur = Math.max.apply(Math, _toConsumableArray(value));
+      get kernels() {
+          return this._kernels;
       }
-    }, {
-      key: "setKernela",
-      value: function setKernela(value) {
-        this.kernels = value;
-        return this;
+
+      set kernels(value) {
+          if (value === undefined) {
+              value = [0];
+          }
+
+          this._kernels = value;
+          this._quality = value.length;
+          this._blur = Math.max(...value);
+      }
+
+      setKernela(value) {
+          this.kernels = value;
+          return this;
       }
 
       // pixelWidth
-    }, {
-      key: "setPixelWidth",
-      value: function setPixelWidth(value) {
-        this.pixelWidth = value;
-        return this;
+      setPixelWidth(value) {
+          this.pixelWidth = value;
+          return this;
       }
 
       // pixelHeight
-    }, {
-      key: "setPixelHeight",
-      value: function setPixelHeight(value) {
-        this.pixelHeight = value;
-        return this;
+      setPixelHeight(value) {
+          this.pixelHeight = value;
+          return this;
       }
-    }, {
-      key: "setPixelSize",
-      value: function setPixelSize(width, height) {
-        if (height === undefined) {
-          height = width;
-        }
-        this.pixelWidth = width;
-        this.pixelHeight = height;
-        return this;
-      }
-    }]);
-    return DropShadowPostFxPipeline;
-  }(PostFXPipeline);
 
-  var GameClass = Phaser.Game;
-  var IsGame = function IsGame(object) {
-    return object instanceof GameClass;
-  };
-
-  var SceneClass = Phaser.Scene;
-  var IsSceneObject = function IsSceneObject(object) {
-    return object instanceof SceneClass;
-  };
-
-  var GetGame = function GetGame(object) {
-    if (object == null || _typeof(object) !== 'object') {
-      return null;
-    } else if (IsGame(object)) {
-      return object;
-    } else if (IsGame(object.game)) {
-      return object.game;
-    } else if (IsSceneObject(object)) {
-      // object = scene object
-      return object.sys.game;
-    } else if (IsSceneObject(object.scene)) {
-      // object = game object
-      return object.scene.sys.game;
-    }
-  };
-
-  var RegisterPostPipeline = function RegisterPostPipeline(game, postFxPipelineName, PostFxPipelineClass) {
-    GetGame(game).renderer.pipelines.addPostPipeline(postFxPipelineName, PostFxPipelineClass);
-  };
-
-  var AddPostFxPipelineInstance = function AddPostFxPipelineInstance(gameObject, PostFxPipelineClass, config) {
-    if (config === undefined) {
-      config = {};
-    }
-    gameObject.setPostPipeline(PostFxPipelineClass);
-    var pipeline = gameObject.postPipelines[gameObject.postPipelines.length - 1];
-    pipeline.resetFromJSON(config);
-    if (config.name) {
-      pipeline.name = config.name;
-    }
-    return pipeline;
-  };
-
-  var SpliceOne = Phaser.Utils.Array.SpliceOne;
-  var RemovePostFxPipelineInstance = function RemovePostFxPipelineInstance(gameObject, PostFxPipelineClass, name) {
-    if (name === undefined) {
-      var pipelines = gameObject.postPipelines;
-      for (var i = pipelines.length - 1; i >= 0; i--) {
-        var instance = pipelines[i];
-        if (instance instanceof PostFxPipelineClass) {
-          instance.destroy();
-          SpliceOne(pipelines, i);
-        }
-      }
-    } else {
-      var pipelines = gameObject.postPipelines;
-      for (var i = 0, cnt = pipelines.length; i < cnt; i++) {
-        var instance = pipelines[i];
-        if (instance instanceof PostFxPipelineClass && instance.name === name) {
-          instance.destroy();
-          SpliceOne(pipelines, i);
-        }
-      }
-    }
-  };
-
-  var GetPostFxPipelineInstance = function GetPostFxPipelineInstance(gameObject, PostFxPipelineClass, name) {
-    if (name === undefined) {
-      var result = [];
-      var pipelines = gameObject.postPipelines;
-      for (var i = 0, cnt = pipelines.length; i < cnt; i++) {
-        var instance = pipelines[i];
-        if (instance instanceof PostFxPipelineClass) {
-          result.push(instance);
-        }
-      }
-      return result;
-    } else {
-      var pipelines = gameObject.postPipelines;
-      for (var i = 0, cnt = pipelines.length; i < cnt; i++) {
-        var instance = pipelines[i];
-        if (instance instanceof PostFxPipelineClass && instance.name === name) {
-          return instance;
-        }
-      }
-    }
-  };
-
-  var BasePostFxPipelinePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
-    _inherits(BasePostFxPipelinePlugin, _Phaser$Plugins$BaseP);
-    function BasePostFxPipelinePlugin() {
-      _classCallCheck(this, BasePostFxPipelinePlugin);
-      return _callSuper(this, BasePostFxPipelinePlugin, arguments);
-    }
-    _createClass(BasePostFxPipelinePlugin, [{
-      key: "setPostPipelineClass",
-      value: function setPostPipelineClass(PostFxPipelineClass, postFxPipelineName) {
-        this.PostFxPipelineClass = PostFxPipelineClass;
-        this.postFxPipelineName = postFxPipelineName;
-        return this;
-      }
-    }, {
-      key: "start",
-      value: function start() {
-        var eventEmitter = this.game.events;
-        eventEmitter.once('destroy', this.destroy, this);
-        RegisterPostPipeline(this.game, this.postFxPipelineName, this.PostFxPipelineClass);
-      }
-    }, {
-      key: "add",
-      value: function add(gameObject, config) {
-        return AddPostFxPipelineInstance(gameObject, this.PostFxPipelineClass, config);
-      }
-    }, {
-      key: "remove",
-      value: function remove(gameObject, name) {
-        RemovePostFxPipelineInstance(gameObject, this.PostFxPipelineClass, name);
-        return this;
-      }
-    }, {
-      key: "get",
-      value: function get(gameObject, name) {
-        return GetPostFxPipelineInstance(gameObject, this.PostFxPipelineClass, name);
-      }
-    }]);
-    return BasePostFxPipelinePlugin;
-  }(Phaser.Plugins.BasePlugin);
-
-  var IsInValidKey = function IsInValidKey(keys) {
-    return keys == null || keys === '' || keys.length === 0;
-  };
-  var GetEntry = function GetEntry(target, keys, defaultEntry) {
-    var entry = target;
-    if (IsInValidKey(keys)) ; else {
-      if (typeof keys === 'string') {
-        keys = keys.split('.');
-      }
-      var key;
-      for (var i = 0, cnt = keys.length; i < cnt; i++) {
-        key = keys[i];
-        if (entry[key] == null || _typeof(entry[key]) !== 'object') {
-          var newEntry;
-          if (i === cnt - 1) {
-            if (defaultEntry === undefined) {
-              newEntry = {};
-            } else {
-              newEntry = defaultEntry;
-            }
-          } else {
-            newEntry = {};
+      setPixelSize(width, height) {
+          if (height === undefined) {
+              height = width;
           }
-          entry[key] = newEntry;
-        }
-        entry = entry[key];
+          this.pixelWidth = width;
+          this.pixelHeight = height;
+          return this;
       }
-    }
-    return entry;
-  };
-  var SetValue = function SetValue(target, keys, value, delimiter) {
-    if (delimiter === undefined) {
-      delimiter = '.';
-    }
+  }
 
-    // no object
-    if (_typeof(target) !== 'object') {
-      return;
-    }
-
-    // invalid key
-    else if (IsInValidKey(keys)) {
-      // don't erase target
-      if (value == null) {
-        return;
-      }
-      // set target to another object
-      else if (_typeof(value) === 'object') {
-        target = value;
-      }
-    } else {
-      if (typeof keys === 'string') {
-        keys = keys.split(delimiter);
-      }
-      var lastKey = keys.pop();
-      var entry = GetEntry(target, keys);
-      entry[lastKey] = value;
-    }
-    return target;
+  const GameClass = Phaser.Game;
+  var IsGame = function (object) {
+      return (object instanceof GameClass);
   };
 
-  var DropShadowPipelinePlugin = /*#__PURE__*/function (_BasePostFxPipelinePl) {
-    _inherits(DropShadowPipelinePlugin, _BasePostFxPipelinePl);
-    function DropShadowPipelinePlugin(pluginManager) {
-      var _this;
-      _classCallCheck(this, DropShadowPipelinePlugin);
-      _this = _callSuper(this, DropShadowPipelinePlugin, [pluginManager]);
-      _this.setPostPipelineClass(DropShadowPostFxPipeline, 'rexDropShadowPostFx');
-      return _this;
-    }
-    return _createClass(DropShadowPipelinePlugin);
-  }(BasePostFxPipelinePlugin);
+  const SceneClass = Phaser.Scene;
+  var IsSceneObject = function (object) {
+      return (object instanceof SceneClass);
+  };
+
+  var GetGame = function (object) {
+      if ((object == null) || (typeof (object) !== 'object')) {
+          return null;
+      } else if (IsGame(object)) {
+          return object;
+      } else if (IsGame(object.game)) {
+          return object.game;
+      } else if (IsSceneObject(object)) { // object = scene object
+          return object.sys.game;
+      } else if (IsSceneObject(object.scene)) { // object = game object
+          return object.scene.sys.game;
+      }
+  };
+
+  var RegisterPostPipeline = function (game, postFxPipelineName, PostFxPipelineClass) {
+      GetGame(game).renderer.pipelines.addPostPipeline(postFxPipelineName, PostFxPipelineClass);
+  };
+
+  var AddPostFxPipelineInstance = function (gameObject, PostFxPipelineClass, config) {
+      if (config === undefined) {
+          config = {};
+      }
+
+      gameObject.setPostPipeline(PostFxPipelineClass);
+      var pipeline = gameObject.postPipelines[gameObject.postPipelines.length - 1];
+      pipeline.resetFromJSON(config);
+
+      if (config.name) {
+          pipeline.name = config.name;
+      }
+
+      return pipeline;
+  };
+
+  const SpliceOne = Phaser.Utils.Array.SpliceOne;
+
+  var RemovePostFxPipelineInstance = function(gameObject, PostFxPipelineClass, name) {    
+      if (name === undefined) {
+          var pipelines = gameObject.postPipelines;
+          for (var i = (pipelines.length - 1); i >= 0; i--) {
+              var instance = pipelines[i];
+              if (instance instanceof PostFxPipelineClass) {
+                  instance.destroy();
+                  SpliceOne(pipelines, i);
+              }
+          }
+      } else {
+          var pipelines = gameObject.postPipelines;
+          for (var i = 0, cnt = pipelines.length; i < cnt; i++) {
+              var instance = pipelines[i];
+              if ((instance instanceof PostFxPipelineClass) && (instance.name === name)) {
+                  instance.destroy();
+                  SpliceOne(pipelines, i);
+              }
+          }
+      }
+  };
+
+  var GetPostFxPipelineInstance = function (gameObject, PostFxPipelineClass, name) {    
+      if (name === undefined) {
+          var result = [];
+          var pipelines = gameObject.postPipelines;
+          for (var i = 0, cnt = pipelines.length; i < cnt; i++) {
+              var instance = pipelines[i];
+              if (instance instanceof PostFxPipelineClass) {
+                  result.push(instance);
+              }
+          }
+          return result;
+      } else {
+          var pipelines = gameObject.postPipelines;
+          for (var i = 0, cnt = pipelines.length; i < cnt; i++) {
+              var instance = pipelines[i];
+              if ((instance instanceof PostFxPipelineClass) && (instance.name === name)) {
+                  return instance;
+              }
+          }
+      }
+  };
+
+  class BasePostFxPipelinePlugin extends Phaser.Plugins.BasePlugin {
+      setPostPipelineClass(PostFxPipelineClass, postFxPipelineName) {
+          this.PostFxPipelineClass = PostFxPipelineClass;
+          this.postFxPipelineName = postFxPipelineName;
+          return this;
+      }
+
+      start() {
+          var eventEmitter = this.game.events;
+          eventEmitter.once('destroy', this.destroy, this);
+
+          RegisterPostPipeline(this.game, this.postFxPipelineName, this.PostFxPipelineClass);
+      }
+
+      add(gameObject, config) {
+          return AddPostFxPipelineInstance(gameObject, this.PostFxPipelineClass, config);
+      }
+
+      remove(gameObject, name) {
+          RemovePostFxPipelineInstance(gameObject, this.PostFxPipelineClass, name);
+          return this;
+      }
+
+      get(gameObject, name) {
+          return GetPostFxPipelineInstance(gameObject, this.PostFxPipelineClass, name);
+      }
+  }
+
+  var IsInValidKey = function (keys) {
+      return (keys == null) || (keys === '') || (keys.length === 0);
+  };
+
+  var GetEntry = function (target, keys, defaultEntry) {
+      var entry = target;
+      if (IsInValidKey(keys)) ; else {
+          if (typeof (keys) === 'string') {
+              keys = keys.split('.');
+          }
+
+          var key;
+          for (var i = 0, cnt = keys.length; i < cnt; i++) {
+              key = keys[i];
+              if ((entry[key] == null) || (typeof (entry[key]) !== 'object')) {
+                  var newEntry;
+                  if (i === cnt - 1) {
+                      if (defaultEntry === undefined) {
+                          newEntry = {};
+                      } else {
+                          newEntry = defaultEntry;
+                      }
+                  } else {
+                      newEntry = {};
+                  }
+
+                  entry[key] = newEntry;
+              }
+
+              entry = entry[key];
+          }
+      }
+
+      return entry;
+  };
+
+  var SetValue = function (target, keys, value, delimiter) {
+      if (delimiter === undefined) {
+          delimiter = '.';
+      }
+
+      // no object
+      if (typeof (target) !== 'object') {
+          return;
+      }
+
+      // invalid key
+      else if (IsInValidKey(keys)) {
+          // don't erase target
+          if (value == null) {
+              return;
+          }
+          // set target to another object
+          else if (typeof (value) === 'object') {
+              target = value;
+          }
+      } else {
+          if (typeof (keys) === 'string') {
+              keys = keys.split(delimiter);
+          }
+
+          var lastKey = keys.pop();
+          var entry = GetEntry(target, keys);
+          entry[lastKey] = value;
+      }
+
+      return target;
+  };
+
+  class DropShadowPipelinePlugin extends BasePostFxPipelinePlugin {
+      constructor(pluginManager) {
+          super(pluginManager);
+          this.setPostPipelineClass(DropShadowPostFxPipeline, 'rexDropShadowPostFx');
+      }
+  }
+
   SetValue(window, 'RexPlugins.Pipelines.DropShadowPostFx', DropShadowPostFxPipeline);
 
   return DropShadowPipelinePlugin;

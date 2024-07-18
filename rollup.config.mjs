@@ -2,10 +2,9 @@ import commonjs from '@rollup/plugin-commonjs';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import globals from 'rollup-plugin-node-globals';
 import builtins from 'rollup-plugin-node-builtins';
-import { babel } from '@rollup/plugin-babel';
 import typescript from '@rollup/plugin-typescript';
-import uglify from "@lopatnov/rollup-plugin-uglify";
-// import { terser } from '@rollup/plugin-terser'; // Uglify for ES6
+// import uglify from "@lopatnov/rollup-plugin-uglify";  // Uglify for ES5
+import terser from '@rollup/plugin-terser'; // Uglify for ES6
 
 import pluginList from './plugin-list.js';
 // const pluginList = {};
@@ -54,13 +53,8 @@ for (var key in pluginList) {
             builtins(),
 
             (useTypescript) ? typescript({
-                target: 'es5',
+                target: 'es6',
             }) : undefined,
-
-            babel({
-                // babelHelpers: 'runtime',
-                exclude: 'node_modules/**'
-            }),
         ]
     })
 
@@ -76,7 +70,8 @@ for (var key in pluginList) {
         },
         external: ['phaser'],
         plugins: [
-            uglify()
+            // uglify()
+            terser()
         ]
     })
 }

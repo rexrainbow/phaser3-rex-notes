@@ -1,800 +1,696 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-  typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rextexttypingplugin = factory());
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+    typeof define === 'function' && define.amd ? define(factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rextexttypingplugin = factory());
 })(this, (function () { 'use strict';
 
-  function _callSuper(t, o, e) {
-    return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e));
-  }
-  function _isNativeReflectConstruct() {
-    try {
-      var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
-    } catch (t) {}
-    return (_isNativeReflectConstruct = function () {
-      return !!t;
-    })();
-  }
-  function _toPrimitive(t, r) {
-    if ("object" != typeof t || !t) return t;
-    var e = t[Symbol.toPrimitive];
-    if (void 0 !== e) {
-      var i = e.call(t, r || "default");
-      if ("object" != typeof i) return i;
-      throw new TypeError("@@toPrimitive must return a primitive value.");
-    }
-    return ("string" === r ? String : Number)(t);
-  }
-  function _toPropertyKey(t) {
-    var i = _toPrimitive(t, "string");
-    return "symbol" == typeof i ? i : String(i);
-  }
-  function _typeof(o) {
-    "@babel/helpers - typeof";
+    var EventEmitterMethods = {
+        setEventEmitter(eventEmitter, EventEmitterClass) {
+            if (EventEmitterClass === undefined) {
+                EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
+            }
+            this._privateEE = (eventEmitter === true) || (eventEmitter === undefined);
+            this._eventEmitter = (this._privateEE) ? (new EventEmitterClass()) : eventEmitter;
+            return this;
+        },
 
-    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
-      return typeof o;
-    } : function (o) {
-      return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-    }, _typeof(o);
-  }
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  }
-  function _defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor);
-    }
-  }
-  function _createClass(Constructor, protoProps, staticProps) {
-    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) _defineProperties(Constructor, staticProps);
-    Object.defineProperty(Constructor, "prototype", {
-      writable: false
-    });
-    return Constructor;
-  }
-  function _inherits(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) {
-      throw new TypeError("Super expression must either be null or a function");
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        writable: true,
-        configurable: true
-      }
-    });
-    Object.defineProperty(subClass, "prototype", {
-      writable: false
-    });
-    if (superClass) _setPrototypeOf(subClass, superClass);
-  }
-  function _getPrototypeOf(o) {
-    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
-      return o.__proto__ || Object.getPrototypeOf(o);
+        destroyEventEmitter() {
+            if (this._eventEmitter && this._privateEE) {
+                this._eventEmitter.shutdown();
+            }
+            return this;
+        },
+
+        getEventEmitter() {
+            return this._eventEmitter;
+        },
+
+        on() {
+            if (this._eventEmitter) {
+                this._eventEmitter.on.apply(this._eventEmitter, arguments);
+            }
+            return this;
+        },
+
+        once() {
+            if (this._eventEmitter) {
+                this._eventEmitter.once.apply(this._eventEmitter, arguments);
+            }
+            return this;
+        },
+
+        off() {
+            if (this._eventEmitter) {
+                this._eventEmitter.off.apply(this._eventEmitter, arguments);
+            }
+            return this;
+        },
+
+        emit(event) {
+            if (this._eventEmitter && event) {
+                this._eventEmitter.emit.apply(this._eventEmitter, arguments);
+            }
+            return this;
+        },
+
+        addListener() {
+            if (this._eventEmitter) {
+                this._eventEmitter.addListener.apply(this._eventEmitter, arguments);
+            }
+            return this;
+        },
+
+        removeListener() {
+            if (this._eventEmitter) {
+                this._eventEmitter.removeListener.apply(this._eventEmitter, arguments);
+            }
+            return this;
+        },
+
+        removeAllListeners() {
+            if (this._eventEmitter) {
+                this._eventEmitter.removeAllListeners.apply(this._eventEmitter, arguments);
+            }
+            return this;
+        },
+
+        listenerCount() {
+            if (this._eventEmitter) {
+                return this._eventEmitter.listenerCount.apply(this._eventEmitter, arguments);
+            }
+            return 0;
+        },
+
+        listeners() {
+            if (this._eventEmitter) {
+                return this._eventEmitter.listeners.apply(this._eventEmitter, arguments);
+            }
+            return [];
+        },
+
+        eventNames() {
+            if (this._eventEmitter) {
+                return this._eventEmitter.eventNames.apply(this._eventEmitter, arguments);
+            }
+            return [];
+        },
     };
-    return _getPrototypeOf(o);
-  }
-  function _setPrototypeOf(o, p) {
-    _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
-      o.__proto__ = p;
-      return o;
+
+    const SceneClass = Phaser.Scene;
+    var IsSceneObject = function (object) {
+        return (object instanceof SceneClass);
     };
-    return _setPrototypeOf(o, p);
-  }
-  function _assertThisInitialized(self) {
-    if (self === void 0) {
-      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    }
-    return self;
-  }
-  function _possibleConstructorReturn(self, call) {
-    if (call && (typeof call === "object" || typeof call === "function")) {
-      return call;
-    } else if (call !== void 0) {
-      throw new TypeError("Derived constructors may only return object or undefined");
-    }
-    return _assertThisInitialized(self);
-  }
-  function _superPropBase(object, property) {
-    while (!Object.prototype.hasOwnProperty.call(object, property)) {
-      object = _getPrototypeOf(object);
-      if (object === null) break;
-    }
-    return object;
-  }
-  function _get() {
-    if (typeof Reflect !== "undefined" && Reflect.get) {
-      _get = Reflect.get.bind();
-    } else {
-      _get = function _get(target, property, receiver) {
-        var base = _superPropBase(target, property);
-        if (!base) return;
-        var desc = Object.getOwnPropertyDescriptor(base, property);
-        if (desc.get) {
-          return desc.get.call(arguments.length < 3 ? target : receiver);
+
+    var GetSceneObject = function (object) {
+        if ((object == null) || (typeof (object) !== 'object')) {
+            return null;
+        } else if (IsSceneObject(object)) { // object = scene
+            return object;
+        } else if (object.scene && IsSceneObject(object.scene)) { // object = game object
+            return object.scene;
+        } else if (object.parent && object.parent.scene && IsSceneObject(object.parent.scene)) { // parent = bob object
+            return object.parent.scene;
+        } else {
+            return null;
         }
-        return desc.value;
-      };
-    }
-    return _get.apply(this, arguments);
-  }
+    };
 
-  var EventEmitterMethods = {
-    setEventEmitter: function setEventEmitter(eventEmitter, EventEmitterClass) {
-      if (EventEmitterClass === undefined) {
-        EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
-      }
-      this._privateEE = eventEmitter === true || eventEmitter === undefined;
-      this._eventEmitter = this._privateEE ? new EventEmitterClass() : eventEmitter;
-      return this;
-    },
-    destroyEventEmitter: function destroyEventEmitter() {
-      if (this._eventEmitter && this._privateEE) {
-        this._eventEmitter.shutdown();
-      }
-      return this;
-    },
-    getEventEmitter: function getEventEmitter() {
-      return this._eventEmitter;
-    },
-    on: function on() {
-      if (this._eventEmitter) {
-        this._eventEmitter.on.apply(this._eventEmitter, arguments);
-      }
-      return this;
-    },
-    once: function once() {
-      if (this._eventEmitter) {
-        this._eventEmitter.once.apply(this._eventEmitter, arguments);
-      }
-      return this;
-    },
-    off: function off() {
-      if (this._eventEmitter) {
-        this._eventEmitter.off.apply(this._eventEmitter, arguments);
-      }
-      return this;
-    },
-    emit: function emit(event) {
-      if (this._eventEmitter && event) {
-        this._eventEmitter.emit.apply(this._eventEmitter, arguments);
-      }
-      return this;
-    },
-    addListener: function addListener() {
-      if (this._eventEmitter) {
-        this._eventEmitter.addListener.apply(this._eventEmitter, arguments);
-      }
-      return this;
-    },
-    removeListener: function removeListener() {
-      if (this._eventEmitter) {
-        this._eventEmitter.removeListener.apply(this._eventEmitter, arguments);
-      }
-      return this;
-    },
-    removeAllListeners: function removeAllListeners() {
-      if (this._eventEmitter) {
-        this._eventEmitter.removeAllListeners.apply(this._eventEmitter, arguments);
-      }
-      return this;
-    },
-    listenerCount: function listenerCount() {
-      if (this._eventEmitter) {
-        return this._eventEmitter.listenerCount.apply(this._eventEmitter, arguments);
-      }
-      return 0;
-    },
-    listeners: function listeners() {
-      if (this._eventEmitter) {
-        return this._eventEmitter.listeners.apply(this._eventEmitter, arguments);
-      }
-      return [];
-    },
-    eventNames: function eventNames() {
-      if (this._eventEmitter) {
-        return this._eventEmitter.eventNames.apply(this._eventEmitter, arguments);
-      }
-      return [];
-    }
-  };
+    const GameClass = Phaser.Game;
+    var IsGame = function (object) {
+        return (object instanceof GameClass);
+    };
 
-  var SceneClass = Phaser.Scene;
-  var IsSceneObject = function IsSceneObject(object) {
-    return object instanceof SceneClass;
-  };
+    var GetGame = function (object) {
+        if ((object == null) || (typeof (object) !== 'object')) {
+            return null;
+        } else if (IsGame(object)) {
+            return object;
+        } else if (IsGame(object.game)) {
+            return object.game;
+        } else if (IsSceneObject(object)) { // object = scene object
+            return object.sys.game;
+        } else if (IsSceneObject(object.scene)) { // object = game object
+            return object.scene.sys.game;
+        }
+    };
 
-  var GetSceneObject = function GetSceneObject(object) {
-    if (object == null || _typeof(object) !== 'object') {
-      return null;
-    } else if (IsSceneObject(object)) {
-      // object = scene
-      return object;
-    } else if (object.scene && IsSceneObject(object.scene)) {
-      // object = game object
-      return object.scene;
-    } else if (object.parent && object.parent.scene && IsSceneObject(object.parent.scene)) {
-      // parent = bob object
-      return object.parent.scene;
-    } else {
-      return null;
-    }
-  };
+    const GetValue$1 = Phaser.Utils.Objects.GetValue;
 
-  var GameClass = Phaser.Game;
-  var IsGame = function IsGame(object) {
-    return object instanceof GameClass;
-  };
+    class ComponentBase {
+        constructor(parent, config) {
+            this.setParent(parent);  // gameObject, scene, or game
 
-  var GetGame = function GetGame(object) {
-    if (object == null || _typeof(object) !== 'object') {
-      return null;
-    } else if (IsGame(object)) {
-      return object;
-    } else if (IsGame(object.game)) {
-      return object.game;
-    } else if (IsSceneObject(object)) {
-      // object = scene object
-      return object.sys.game;
-    } else if (IsSceneObject(object.scene)) {
-      // object = game object
-      return object.scene.sys.game;
-    }
-  };
+            this.isShutdown = false;
 
-  var GetValue$1 = Phaser.Utils.Objects.GetValue;
-  var ComponentBase = /*#__PURE__*/function () {
-    function ComponentBase(parent, config) {
-      _classCallCheck(this, ComponentBase);
-      this.setParent(parent); // gameObject, scene, or game
+            // Event emitter, default is private event emitter
+            this.setEventEmitter(GetValue$1(config, 'eventEmitter', true));
 
-      this.isShutdown = false;
+            // Register callback of parent destroy event, also see `shutdown` method
+            if (this.parent) {
+                if (this.parent === this.scene) { // parent is a scene
+                    this.scene.sys.events.once('shutdown', this.onEnvDestroy, this);
 
-      // Event emitter, default is private event emitter
-      this.setEventEmitter(GetValue$1(config, 'eventEmitter', true));
+                } else if (this.parent === this.game) { // parent is game
+                    this.game.events.once('shutdown', this.onEnvDestroy, this);
 
-      // Register callback of parent destroy event, also see `shutdown` method
-      if (this.parent) {
-        if (this.parent === this.scene) {
-          // parent is a scene
-          this.scene.sys.events.once('shutdown', this.onEnvDestroy, this);
-        } else if (this.parent === this.game) {
-          // parent is game
-          this.game.events.once('shutdown', this.onEnvDestroy, this);
-        } else if (this.parent.once) {
-          // parent is game object or something else
-          this.parent.once('destroy', this.onParentDestroy, this);
+                } else if (this.parent.once) { // parent is game object or something else
+                    this.parent.once('destroy', this.onParentDestroy, this);
+                }
+
+                // bob object does not have event emitter
+            }
+
         }
 
-        // bob object does not have event emitter
-      }
+        shutdown(fromScene) {
+            // Already shutdown
+            if (this.isShutdown) {
+                return;
+            }
+
+            // parent might not be shutdown yet
+            if (this.parent) {
+                if (this.parent === this.scene) { // parent is a scene
+                    this.scene.sys.events.off('shutdown', this.onEnvDestroy, this);
+
+                } else if (this.parent === this.game) { // parent is game
+                    this.game.events.off('shutdown', this.onEnvDestroy, this);
+
+                } else if (this.parent.once) { // parent is game object or something else
+                    this.parent.off('destroy', this.onParentDestroy, this);
+                }
+
+                // bob object does not have event emitter
+            }
+
+
+            this.destroyEventEmitter();
+
+            this.parent = undefined;
+            this.scene = undefined;
+            this.game = undefined;
+
+            this.isShutdown = true;
+        }
+
+        destroy(fromScene) {
+            this.shutdown(fromScene);
+        }
+
+        onEnvDestroy() {
+            this.destroy(true);
+        }
+
+        onParentDestroy(parent, fromScene) {
+            this.destroy(fromScene);
+        }
+
+        setParent(parent) {
+            this.parent = parent;  // gameObject, scene, or game
+
+            this.scene = GetSceneObject(parent);
+            this.game = GetGame(parent);
+
+            return this;
+        }
+
     }
-    _createClass(ComponentBase, [{
-      key: "shutdown",
-      value: function shutdown(fromScene) {
-        // Already shutdown
-        if (this.isShutdown) {
-          return;
+    Object.assign(
+        ComponentBase.prototype,
+        EventEmitterMethods
+    );
+
+    var StartTyping = function (text, speed, startIndex, timerStartAt) {
+        if (text !== undefined) {
+            this.setTypingContent(text);
+        }
+        if (speed !== undefined) {
+            this.speed = speed;
+        }
+        if (startIndex === undefined) {
+            startIndex = 0;
         }
 
-        // parent might not be shutdown yet
-        if (this.parent) {
-          if (this.parent === this.scene) {
-            // parent is a scene
-            this.scene.sys.events.off('shutdown', this.onEnvDestroy, this);
-          } else if (this.parent === this.game) {
-            // parent is game
-            this.game.events.off('shutdown', this.onEnvDestroy, this);
-          } else if (this.parent.once) {
-            // parent is game object or something else
-            this.parent.off('destroy', this.onParentDestroy, this);
-          }
-
-          // bob object does not have event emitter
+        this.typingIndex = startIndex + 1;
+        if (this.speed === 0) {
+            this.stop(true);
+        } else {
+            this.setText('');
+            this.startTimer(timerStartAt);
         }
-        this.destroyEventEmitter();
-        this.parent = undefined;
-        this.scene = undefined;
-        this.game = undefined;
-        this.isShutdown = true;
-      }
-    }, {
-      key: "destroy",
-      value: function destroy(fromScene) {
-        this.shutdown(fromScene);
-      }
-    }, {
-      key: "onEnvDestroy",
-      value: function onEnvDestroy() {
-        this.destroy(true);
-      }
-    }, {
-      key: "onParentDestroy",
-      value: function onParentDestroy(parent, fromScene) {
-        this.destroy(fromScene);
-      }
-    }, {
-      key: "setParent",
-      value: function setParent(parent) {
-        this.parent = parent; // gameObject, scene, or game
 
-        this.scene = GetSceneObject(parent);
-        this.game = GetGame(parent);
         return this;
-      }
-    }]);
-    return ComponentBase;
-  }();
-  Object.assign(ComponentBase.prototype, EventEmitterMethods);
+    };
 
-  var StartTyping = function StartTyping(text, speed, startIndex, timerStartAt) {
-    if (text !== undefined) {
-      this.setTypingContent(text);
-    }
-    if (speed !== undefined) {
-      this.speed = speed;
-    }
-    if (startIndex === undefined) {
-      startIndex = 0;
-    }
-    this.typingIndex = startIndex + 1;
-    if (this.speed === 0) {
-      this.stop(true);
-    } else {
-      this.setText('');
-      this.startTimer(timerStartAt);
-    }
-    return this;
-  };
-
-  var GetPlainText = function GetPlainText(textObject, text) {
-    if (textObject.getPlainText) {
-      text = textObject.getPlainText(text);
-    }
-    return text;
-  };
-
-  var StartTypingFromLine = function StartTypingFromLine(text, lineIndex, speed, offsetIndex, timerStartAt) {
-    var startIdx;
-    if (lineIndex > 0) {
-      if (offsetIndex === undefined) {
-        offsetIndex = 0;
-      }
-      var plainText = GetPlainText(this.parent, text);
-      startIdx = GetNewLineIndex(plainText, lineIndex) + offsetIndex;
-    }
-    return this.start(text, speed, startIdx, timerStartAt);
-  };
-  var GetNewLineIndex = function GetNewLineIndex(s, n) {
-    var index = undefined;
-    for (var i = 0; i < n; i++) {
-      index = s.indexOf('\n', index + 1);
-      if (index === -1) {
-        break;
-      }
-    }
-    return index;
-  };
-
-  var GetSubString = function GetSubString(textObject, text, startIdx, endIdx) {
-    var result;
-    if (textObject.getSubString) {
-      result = textObject.getSubString(text, startIdx, endIdx);
-    } else {
-      result = text.slice(startIdx, endIdx);
-    }
-    return result;
-  };
-
-  var GetTypingString = function GetTypingString(text, typeIdx, textLength, typeMode) {
-    var textObject = this.parent;
-    var result;
-    if (typeMode === 0) {
-      //left-to-right
-      var startIdx = 0;
-      var endIdx = typeIdx;
-      this.insertIndex = endIdx;
-      result = GetSubString(textObject, text, startIdx, endIdx);
-    } else if (typeMode === 1) {
-      //right-to-left
-      var endIdx = textLength;
-      var startIdx = endIdx - typeIdx;
-      this.insertIndex = 0;
-      result = GetSubString(textObject, text, startIdx, endIdx);
-    } else if (typeMode === 2) {
-      //middle-to-sides
-      var midIdx = textLength / 2;
-      var startIdx = Math.floor(midIdx - typeIdx / 2);
-      var endIdx = startIdx + typeIdx;
-      this.insertIndex = typeIdx % 2 ? typeIdx : 0;
-      result = GetSubString(textObject, text, startIdx, endIdx);
-    } else if (typeMode === 3) {
-      //sides-to-middle
-      var lowerLen = Math.floor(typeIdx / 2);
-      var lowerResult;
-      if (lowerLen > 0) {
-        var endIdx = textLength;
-        var startIdx = endIdx - lowerLen;
-        lowerResult = GetSubString(textObject, text, startIdx, endIdx);
-      } else {
-        lowerResult = "";
-      }
-      var upperLen = typeIdx - lowerLen;
-      var upperResult;
-      if (upperLen > 0) {
-        var startIdx = 0;
-        var endIdx = startIdx + upperLen;
-        this.insertIndex = endIdx;
-        upperResult = GetSubString(textObject, text, startIdx, endIdx);
-      } else {
-        upperResult = "";
-        this.insertIndex = 0;
-      }
-      result = upperResult + lowerResult;
-    }
-    this.insertChar = result.charAt(this.insertIndex - 1);
-    return result;
-  };
-
-  var StopTyping = function StopTyping(showAllText) {
-    var timer = this.getTimer();
-    if (timer) {
-      this.freeTimer();
-    }
-    if (showAllText) {
-      // Fire 'type' event for remainder characters until lastChar
-      while (!this.isLastChar) {
-        GetTypingString.call(this, this.text, this.typingIndex, this.textLength, this.typeMode);
-        this.emit('typechar', this.insertChar);
-        this.typingIndex++;
-      }
-      // Display all characters on text game object
-      this.setText(this.text);
-      this.emit('type');
-      this.emit('complete', this, this.parent);
-    }
-    return this;
-  };
-
-  var PauseTyping = function PauseTyping() {
-    var timer = this.getTimer();
-    if (timer) {
-      timer.paused = true;
-    }
-    return this;
-  };
-
-  var ResumeTyping = function ResumeTyping() {
-    var timer = this.getTimer();
-    if (timer) {
-      timer.paused = false;
-    }
-    return this;
-  };
-
-  var AppendText = function AppendText(text) {
-    var newText = this.text.concat(TransferText(text));
-    if (this.isTyping) {
-      this.setTypingContent(newText);
-    } else {
-      this.start(newText, undefined, this.textLength);
-    }
-    return this;
-  };
-
-  var methods = {
-    start: StartTyping,
-    startFromLine: StartTypingFromLine,
-    stop: StopTyping,
-    pause: PauseTyping,
-    resumeTyping: ResumeTyping,
-    appendText: AppendText
-  };
-
-  var TextClass = Phaser.GameObjects.Text;
-  var IsTextGameObject = function IsTextGameObject(gameObject) {
-    return gameObject instanceof TextClass;
-  };
-
-  var BitmapTextClass = Phaser.GameObjects.BitmapText;
-  var IsBitmapTextGameObject = function IsBitmapTextGameObject(gameObject) {
-    return gameObject instanceof BitmapTextClass;
-  };
-
-  var TextType = 0;
-  var TagTextType = 1;
-  var BitmapTextType = 2;
-  var GetTextObjectType = function GetTextObjectType(textObject) {
-    var textObjectType;
-    if (IsBitmapTextGameObject(textObject)) {
-      textObjectType = BitmapTextType;
-    } else if (IsTextGameObject(textObject)) {
-      textObjectType = TextType;
-    } else {
-      textObjectType = TagTextType;
-    }
-    return textObjectType;
-  };
-
-  var GetWrapText = function GetWrapText(textObject, text) {
-    var textObjectType = GetTextObjectType(textObject);
-    switch (textObjectType) {
-      case TextType:
-        textObject.style.syncFont(textObject.canvas, textObject.context);
-        text = textObject.runWordWrap(text);
-        break;
-      case TagTextType:
-        text = textObject.getText(text, undefined, undefined, true);
-        break;
-      case BitmapTextType:
-        text = textObject.setText(text).getTextBounds().wrappedText;
-        break;
-    }
-    return text;
-  };
-
-  var SetNoWrapText = function SetNoWrapText(textObject, text) {
-    var textObjectType = GetTextObjectType(textObject);
-    switch (textObjectType) {
-      case TextType:
-        // Store wrap properties
-        var style = textObject.style;
-        var wordWrapWidth = style.wordWrapWidth;
-        var wordWrapCallback = style.wordWrapCallback;
-        // Disable wrap
-        style.wordWrapWidth = 0;
-        style.wordWrapCallback = undefined;
-        // Set text
-        textObject.setText(text);
-        // Restore wrap
-        style.wordWrapWidth = wordWrapWidth;
-        style.wordWrapCallback = wordWrapCallback;
-        break;
-      case TagTextType:
-        // Store wrap properties
-        var style = textObject.style;
-        var wrapMode = style.wrapMode;
-        // Disable wrap
-        style.wrapMode = 0;
-        // Set text
-        textObject.setText(text);
-        // Restore wrap
-        style.wrapMode = wrapMode;
-        break;
-      case BitmapTextType:
-        // Store wrap properties
-        var maxWidth = textObject._maxWidth;
-        // Disable wrap
-        textObject._maxWidth = 0;
-        // Set text
-        textObject.setText(text);
-        // Restore wrap
-        textObject._maxWidth = maxWidth;
-        break;
-    }
-  };
-
-  var GetFastValue = Phaser.Utils.Objects.GetFastValue;
-  var GetValue = Phaser.Utils.Objects.GetValue;
-  var TextTyping = /*#__PURE__*/function (_ComponentBase) {
-    _inherits(TextTyping, _ComponentBase);
-    function TextTyping(gameObject, config) {
-      var _this;
-      _classCallCheck(this, TextTyping);
-      _this = _callSuper(this, TextTyping, [gameObject, config]);
-      // this.parent = gameObject;
-
-      _this.timer = null;
-      _this.resetFromJSON(config);
-      return _this;
-    }
-    _createClass(TextTyping, [{
-      key: "resetFromJSON",
-      value: function resetFromJSON(o) {
-        this.setTextWrapEnable(GetValue(o, 'wrap', false));
-        this.setTypeMode(GetValue(o, 'typeMode', 0));
-        this.setTypingSpeed(GetValue(o, 'speed', 333));
-        this.setTextCallback = GetFastValue(o, 'setTextCallback', null);
-        this.setTextCallbackScope = GetFastValue(o, 'setTextCallbackScope', null);
-        this.setTypingContent(GetFastValue(o, 'text', ''));
-        this.typingIndex = GetFastValue(o, 'typingIndex', 0);
-        this.insertIndex = null;
-        this.insertChar = null;
-        var elapsed = GetFastValue(o, 'elapsed', null);
-        if (elapsed !== null) {
-          this.start(undefined, undefined, this.typingIndex, elapsed);
+    var GetPlainText = function (textObject, text) {
+        if (textObject.getPlainText) {
+            text = textObject.getPlainText(text);
         }
-        return this;
-      }
-    }, {
-      key: "shutdown",
-      value: function shutdown(fromScene) {
-        // Already shutdown
-        if (this.isShutdown) {
-          return;
+
+        return text;
+    };
+
+    var StartTypingFromLine = function (text, lineIndex, speed, offsetIndex, timerStartAt) {
+        var startIdx;
+        if (lineIndex > 0) {
+            if (offsetIndex === undefined) {
+                offsetIndex = 0;
+            }
+
+            var plainText = GetPlainText(this.parent, text);
+            startIdx = GetNewLineIndex(plainText, lineIndex) + offsetIndex;
         }
-        this.freeTimer();
-        _get(_getPrototypeOf(TextTyping.prototype), "shutdown", this).call(this, fromScene);
-      }
-    }, {
-      key: "setTypeMode",
-      value: function setTypeMode(m) {
-        if (typeof m === 'string') {
-          m = TYPEMODE[m];
+        return this.start(text, speed, startIdx, timerStartAt);
+    };
+
+    var GetNewLineIndex = function (s, n) {
+        var index = undefined;
+        for (var i = 0; i < n; i++) {
+            index = s.indexOf('\n', index + 1);
+            if (index === -1) {
+                break;
+            }
         }
-        this.typeMode = m;
-        return this;
-      }
-    }, {
-      key: "setTypeSpeed",
-      value: function setTypeSpeed(speed) {
-        this.speed = speed;
-        return this;
-      }
-    }, {
-      key: "setTypingSpeed",
-      value: function setTypingSpeed(speed) {
-        this.speed = speed;
-        return this;
-      }
-    }, {
-      key: "setTextWrapEnable",
-      value: function setTextWrapEnable(enable) {
-        if (enable === undefined) {
-          enable = true;
+        return index;
+    };
+
+    var GetSubString = function (textObject, text, startIdx, endIdx) {
+        var result;
+        if (textObject.getSubString) {
+            result = textObject.getSubString(text, startIdx, endIdx);
+        } else {
+            result = text.slice(startIdx, endIdx);
         }
-        this.textWrapEnable = enable;
-        return this;
-      }
-    }, {
-      key: "text",
-      get: function get() {
-        return this._text;
-      },
-      set: function set(value) {
-        var text = TransferText$1(value);
-        if (this.textWrapEnable) {
-          text = GetWrapText(this.parent, text);
+
+        return result;
+    };
+
+    var GetTypingString = function (text, typeIdx, textLength, typeMode) {
+        var textObject = this.parent;
+        var result;
+        if (typeMode === 0) { //left-to-right
+            var startIdx = 0;
+            var endIdx = typeIdx;
+            this.insertIndex = endIdx;
+            result = GetSubString(textObject, text, startIdx, endIdx);
+
+        } else if (typeMode === 1) { //right-to-left
+            var endIdx = textLength;
+            var startIdx = endIdx - typeIdx;
+            this.insertIndex = 0;
+            result = GetSubString(textObject, text, startIdx, endIdx);
+
+        } else if (typeMode === 2) { //middle-to-sides
+            var midIdx = textLength / 2;
+            var startIdx = Math.floor(midIdx - (typeIdx / 2));
+            var endIdx = startIdx + typeIdx;
+            this.insertIndex = (typeIdx % 2) ? typeIdx : 0;
+            result = GetSubString(textObject, text, startIdx, endIdx);
+
+        } else if (typeMode === 3) { //sides-to-middle
+            var lowerLen = Math.floor(typeIdx / 2);
+            var lowerResult;
+            if (lowerLen > 0) {
+                var endIdx = textLength;
+                var startIdx = endIdx - lowerLen;
+                lowerResult = GetSubString(textObject, text, startIdx, endIdx);
+            } else {
+                lowerResult = "";
+            }
+
+            var upperLen = typeIdx - lowerLen;
+            var upperResult;
+            if (upperLen > 0) {
+                var startIdx = 0;
+                var endIdx = startIdx + upperLen;
+                this.insertIndex = endIdx;
+                upperResult = GetSubString(textObject, text, startIdx, endIdx);
+            } else {
+                upperResult = "";
+                this.insertIndex = 0;
+            }
+            result = upperResult + lowerResult;
         }
-        this._text = text;
-      }
-    }, {
-      key: "isTyping",
-      get: function get() {
-        return this.getTimer() !== null;
-      }
-    }, {
-      key: "isLastChar",
-      get: function get() {
-        return this.typingIndex === this.textLength;
-      }
-    }, {
-      key: "setTypingContent",
-      value: function setTypingContent(text) {
-        this.text = text;
-        this.textLength = GetPlainText(this.parent, this.text).length;
-        return this;
-      }
-    }, {
-      key: "onTyping",
-      value: function onTyping() {
-        var newText = GetTypingString.call(this, this.text, this.typingIndex, this.textLength, this.typeMode);
-        this.setText(newText);
-        this.emit('typechar', this.insertChar);
-        this.emit('type');
-        if (this.isLastChar) {
-          this.freeTimer();
-          // Fire 'complete' next tick, to render last character on screen
-          this.scene.sys.events.once('preupdate', function () {
+
+        this.insertChar = result.charAt(this.insertIndex - 1);
+
+        return result;
+    };
+
+    var StopTyping = function (showAllText) {
+        var timer = this.getTimer();
+        if (timer) {
+            this.freeTimer();
+        }
+        if (showAllText) {
+            // Fire 'type' event for remainder characters until lastChar
+            while (!this.isLastChar) {
+                GetTypingString.call(this, this.text, this.typingIndex, this.textLength, this.typeMode);
+                this.emit('typechar', this.insertChar);
+                this.typingIndex++;
+            }
+            // Display all characters on text game object
+            this.setText(this.text);
+            this.emit('type');
             this.emit('complete', this, this.parent);
-          }, this);
-        } else {
-          this.timer.delay = this.speed; // delay of next typing            
-          this.typingIndex++;
         }
-      }
-    }, {
-      key: "startTimer",
-      value: function startTimer(timerStartAt) {
-        if (this.timer) {
-          this.freeTimer();
-        }
-        var startAt;
-        if (timerStartAt === undefined) {
-          startAt = 0;
-        } else {
-          this.speed;
-          startAt = timerStartAt;
-        }
-        this.timer = this.scene.time.addEvent({
-          delay: 0.0001,
-          startAt: startAt,
-          loop: true,
-          callback: this.onTyping,
-          callbackScope: this
-        });
-        // Note: Throw error message if delay is 0 with repeat/loop
 
         return this;
-      }
-    }, {
-      key: "getTimer",
-      value: function getTimer() {
-        return this.timer;
-      }
-    }, {
-      key: "freeTimer",
-      value: function freeTimer() {
-        if (this.timer) {
-          this.timer.remove();
-          this.timer = null;
+    };
+
+    var PauseTyping = function () {
+        var timer = this.getTimer();
+        if (timer) {
+            timer.paused = true;
         }
         return this;
-      }
-    }, {
-      key: "setText",
-      value: function setText(text) {
-        if (this.setTextCallback) {
-          if (this.setTextCallbackScope) {
-            text = this.setTextCallback.call(this.setTextCallbackScope, text, this.isLastChar, this.insertIndex);
-          } else {
-            text = this.setTextCallback(text, this.isLastChar, this.insertIndex);
-          }
-        }
-        if (this.textWrapEnable) {
-          SetNoWrapText(this.parent, text);
-        } else {
-          this.parent.setText(text);
-        }
-      }
-    }]);
-    return TextTyping;
-  }(ComponentBase);
-  var TransferText$1 = function TransferText(text) {
-    if (Array.isArray(text)) {
-      text = text.join('\n');
-    } else if (typeof text === 'number') {
-      text = text.toString();
-    }
-    return text;
-  };
-  var TYPEMODE = {
-    'left-to-right': 0,
-    'right-to-left': 1,
-    'middle-to-sides': 2,
-    'sides-to-middle': 3
-  };
-  Object.assign(TextTyping.prototype, methods);
+    };
 
-  var TextTypingPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
-    _inherits(TextTypingPlugin, _Phaser$Plugins$BaseP);
-    function TextTypingPlugin(pluginManager) {
-      _classCallCheck(this, TextTypingPlugin);
-      return _callSuper(this, TextTypingPlugin, [pluginManager]);
+    var ResumeTyping = function () {
+        var timer = this.getTimer();
+        if (timer) {
+            timer.paused = false;
+        }
+        return this;
+    };
+
+    var AppendText = function (text) {
+        var newText = this.text.concat(TransferText(text));
+        if (this.isTyping) {
+            this.setTypingContent(newText);
+        } else {
+            this.start(newText, undefined, this.textLength);
+        }
+
+        return this;
+    };
+
+    var methods = {
+        start: StartTyping,
+        startFromLine: StartTypingFromLine,
+        stop: StopTyping,
+        pause: PauseTyping,
+        resumeTyping: ResumeTyping,
+        appendText: AppendText,
+    };
+
+    const TextClass = Phaser.GameObjects.Text;
+
+    var IsTextGameObject = function (gameObject) {
+        return (gameObject instanceof TextClass);
+    };
+
+    const BitmapTextClass = Phaser.GameObjects.BitmapText;
+
+    var IsBitmapTextGameObject = function (gameObject) {
+        return (gameObject instanceof BitmapTextClass);
+    };
+
+    const TextType = 0;
+    const TagTextType = 1;
+    const BitmapTextType = 2;
+
+    var GetTextObjectType = function (textObject) {
+        var textObjectType;
+        if (IsBitmapTextGameObject(textObject)) {
+            textObjectType = BitmapTextType;
+        } else if (IsTextGameObject(textObject)) {
+            textObjectType = TextType;
+        } else {
+            textObjectType = TagTextType;
+        }
+
+        return textObjectType;
+    };
+
+    var GetWrapText = function (textObject, text) {
+        var textObjectType = GetTextObjectType(textObject);
+        switch (textObjectType) {
+            case TextType:
+                textObject.style.syncFont(textObject.canvas, textObject.context);
+                text = textObject.runWordWrap(text);
+                break;
+            case TagTextType:
+                text = textObject.getText(text, undefined, undefined, true);
+                break;
+            case BitmapTextType:
+                text = textObject.setText(text).getTextBounds().wrappedText;
+                break;
+        }
+        return text;
+    };
+
+    var SetNoWrapText = function (textObject, text) {
+        var textObjectType = GetTextObjectType(textObject);
+        switch (textObjectType) {
+            case TextType:
+                // Store wrap properties
+                var style = textObject.style;
+                var wordWrapWidth = style.wordWrapWidth;
+                var wordWrapCallback = style.wordWrapCallback;
+                // Disable wrap
+                style.wordWrapWidth = 0;
+                style.wordWrapCallback = undefined;
+                // Set text
+                textObject.setText(text);
+                // Restore wrap
+                style.wordWrapWidth = wordWrapWidth;
+                style.wordWrapCallback = wordWrapCallback;
+                break;
+
+            case TagTextType:
+                // Store wrap properties
+                var style = textObject.style;
+                var wrapMode = style.wrapMode;
+                // Disable wrap
+                style.wrapMode = 0;
+                // Set text
+                textObject.setText(text);
+                // Restore wrap
+                style.wrapMode = wrapMode;
+                break;
+
+            case BitmapTextType:
+                // Store wrap properties
+                var maxWidth = textObject._maxWidth;
+                // Disable wrap
+                textObject._maxWidth = 0;
+                // Set text
+                textObject.setText(text);
+                // Restore wrap
+                textObject._maxWidth = maxWidth;
+                break;
+        }
+    };
+
+    const GetFastValue = Phaser.Utils.Objects.GetFastValue;
+    const GetValue = Phaser.Utils.Objects.GetValue;
+
+    class TextTyping extends ComponentBase {
+        constructor(gameObject, config) {
+            super(gameObject, config);
+            // this.parent = gameObject;
+
+            this.timer = null;
+            this.resetFromJSON(config);
+        }
+
+        resetFromJSON(o) {
+            this.setTextWrapEnable(GetValue(o, 'wrap', false));
+            this.setTypeMode(GetValue(o, 'typeMode', 0));
+            this.setTypingSpeed(GetValue(o, 'speed', 333));
+            this.setTextCallback = GetFastValue(o, 'setTextCallback', null);
+            this.setTextCallbackScope = GetFastValue(o, 'setTextCallbackScope', null);
+
+            this.setTypingContent(GetFastValue(o, 'text', ''));
+            this.typingIndex = GetFastValue(o, 'typingIndex', 0);
+            this.insertIndex = null;
+            this.insertChar = null;
+
+            var elapsed = GetFastValue(o, 'elapsed', null);
+            if (elapsed !== null) {
+                this.start(undefined, undefined, this.typingIndex, elapsed);
+            }
+
+            return this;
+        }
+
+        shutdown(fromScene) {
+            // Already shutdown
+            if (this.isShutdown) {
+                return;
+            }
+
+            this.freeTimer();
+
+            super.shutdown(fromScene);
+        }
+
+        setTypeMode(m) {
+            if (typeof (m) === 'string') {
+                m = TYPEMODE[m];
+            }
+            this.typeMode = m;
+            return this;
+        }
+
+        setTypeSpeed(speed) {
+            this.speed = speed;
+            return this;
+        }
+
+        setTypingSpeed(speed) {
+            this.speed = speed;
+            return this;
+        }
+
+        setTextWrapEnable(enable) {
+            if (enable === undefined) {
+                enable = true;
+            }
+            this.textWrapEnable = enable;
+            return this;
+        }
+
+        set text(value) {
+            var text = TransferText$1(value);
+            if (this.textWrapEnable) {
+                text = GetWrapText(this.parent, text);
+            }
+
+            this._text = text;
+        }
+
+        get text() {
+            return this._text;
+        }
+
+        get isTyping() {
+            return (this.getTimer() !== null);
+        }
+
+        get isLastChar() {
+            return (this.typingIndex === this.textLength);
+        }
+
+        setTypingContent(text) {
+            this.text = text;
+            this.textLength = GetPlainText(this.parent, this.text).length;
+            return this;
+        }
+
+        onTyping() {
+            var newText = GetTypingString.call(this, this.text, this.typingIndex, this.textLength, this.typeMode);
+
+            this.setText(newText);
+
+            this.emit('typechar', this.insertChar);
+            this.emit('type');
+
+            if (this.isLastChar) {
+                this.freeTimer();
+                // Fire 'complete' next tick, to render last character on screen
+                this.scene.sys.events.once('preupdate', function () {
+                    this.emit('complete', this, this.parent);
+                }, this);
+            } else {
+                this.timer.delay = this.speed; // delay of next typing            
+                this.typingIndex++;
+            }
+        }
+
+        startTimer(timerStartAt) {
+            if (this.timer) {
+                this.freeTimer();
+            }
+            var startAt;
+            if (timerStartAt === undefined) {
+                startAt = 0;
+            } else {
+                this.speed;
+                startAt = timerStartAt;
+            }
+
+            this.timer = this.scene.time.addEvent({
+                delay: 0.0001,
+                startAt: startAt,
+                loop: true,
+                callback: this.onTyping,
+                callbackScope: this
+            });
+            // Note: Throw error message if delay is 0 with repeat/loop
+
+            return this;
+        }
+
+        getTimer() {
+            return this.timer;
+        }
+
+        freeTimer() {
+            if (this.timer) {
+                this.timer.remove();
+                this.timer = null;
+            }
+
+            return this;
+        }
+
+        setText(text) {
+            if (this.setTextCallback) {
+                if (this.setTextCallbackScope) {
+                    text = this.setTextCallback.call(this.setTextCallbackScope, text, this.isLastChar, this.insertIndex);
+                } else {
+                    text = this.setTextCallback(text, this.isLastChar, this.insertIndex);
+                }
+            }
+
+            if (this.textWrapEnable) {
+                SetNoWrapText(this.parent, text);
+            } else {
+                this.parent.setText(text);
+            }
+        }
     }
-    _createClass(TextTypingPlugin, [{
-      key: "start",
-      value: function start() {
-        var eventEmitter = this.game.events;
-        eventEmitter.on('destroy', this.destroy, this);
-      }
-    }, {
-      key: "add",
-      value: function add(gameObject, config) {
-        return new TextTyping(gameObject, config);
-      }
-    }]);
+
+    var TransferText$1 = function (text) {
+        if (Array.isArray(text)) {
+            text = text.join('\n');
+        } else if (typeof (text) === 'number') {
+            text = text.toString();
+        }
+        return text;
+    };
+
+    const TYPEMODE = {
+        'left-to-right': 0,
+        'right-to-left': 1,
+        'middle-to-sides': 2,
+        'sides-to-middle': 3
+    };
+
+    Object.assign(
+        TextTyping.prototype,
+        methods
+    );
+
+    class TextTypingPlugin extends Phaser.Plugins.BasePlugin {
+
+        constructor(pluginManager) {
+            super(pluginManager);
+        }
+
+        start() {
+            var eventEmitter = this.game.events;
+            eventEmitter.on('destroy', this.destroy, this);
+        }
+
+        add(gameObject, config) {
+            return new TextTyping(gameObject, config);
+        }
+
+    }
+
     return TextTypingPlugin;
-  }(Phaser.Plugins.BasePlugin);
-
-  return TextTypingPlugin;
 
 }));
