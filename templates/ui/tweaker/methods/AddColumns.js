@@ -18,7 +18,7 @@ var AddColumns = function (config) {
     var columnsStyle = GetValue(this.styles, 'columns') || {};
     columnsStyle.tweaker = this.styles;
     columnsStyle.root = this.root;
-    var columns = CreateColumns(scene, config, columnsStyle);
+    var columns = CreateColumns(this, config, columnsStyle);
     delete columnsStyle.tweaker;
     delete columnsStyle.root;
 

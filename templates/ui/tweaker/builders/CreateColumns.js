@@ -1,10 +1,11 @@
 import Columns from '../gameobjects/columns/Columns.js';
 import Title from '../gameobjects/label/Title.js';
-import CreateTweaker from '../gameobjects/utils/CreateTweaker.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var CreateColumns = function (scene, config, style) {
+var CreateColumns = function (parent, config, style) {
+    var scene = parent.scene;
+
     // Create title
     var titleStyle = GetValue(style, 'title') || {};
     var title = new Title(scene, titleStyle);
@@ -38,7 +39,7 @@ var CreateColumns = function (scene, config, style) {
 
         tweakerConfig.width = GetValue(columnConfig, 'width', 0)
 
-        var tweakerChild = CreateTweaker(scene, tweakerConfig);
+        var tweakerChild = parent.createTweaker(tweakerConfig);
 
         columnConfig.child = tweakerChild;
     }

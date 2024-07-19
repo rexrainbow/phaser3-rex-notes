@@ -1,12 +1,13 @@
 import Title from '../gameobjects/label/Title.js';
-import CreateTweaker from '../gameobjects/utils/CreateTweaker.js';
 import CreateBackground from './CreateBackground.js';
 import Scrollable from '../gameobjects/scrollable/Scrollable.js';
 import DeepClone from '../../../../plugins/utils/object/DeepClone.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var CreateScrollable = function (scene, config, style) {
+var CreateScrollable = function (parent, config, style) {
+    var scene = parent.scene;
+
     // Create Folder-title
     var titleStyle = GetValue(style, 'title') || {};
     var title = new Title(scene, titleStyle);
@@ -17,7 +18,7 @@ var CreateScrollable = function (scene, config, style) {
         styles: GetValue(style, 'tweaker'),
         space: GetValue(style, 'space') || {}
     }
-    var child = CreateTweaker(scene, tweakerConfig);
+    var child = parent.createTweaker(tweakerConfig);
 
     var sliderStyle = GetValue(style, 'slider');
     if (sliderStyle) {

@@ -13,7 +13,7 @@ var AddScrollable = function (config) {
     var scrollableStyle = GetValue(this.styles, 'scrollable') || {};
     scrollableStyle.tweaker = this.styles;
     scrollableStyle.root = this.root;
-    var scrollable = CreateScrollable(scene, config, scrollableStyle);
+    var scrollable = CreateScrollable(this, config, scrollableStyle);
     delete scrollableStyle.tweaker;
     delete scrollableStyle.root;
 

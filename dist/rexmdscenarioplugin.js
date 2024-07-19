@@ -84610,12 +84610,6 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
 	}
 
-	var CreateTweaker = function (scene, config) {
-	    var tweaker = new TweakerShell(scene, config);
-	    scene.add.existing(tweaker);
-	    return tweaker;
-	};
-
 	var CreateBackground = function (scene, config, style) {
 	    // TODO: Might create nine-slice as background
 	    return CreateBackground$2(scene, style);
@@ -84672,7 +84666,9 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
 	const GetValue$s = Phaser.Utils.Objects.GetValue;
 
-	var CreateFolder = function (scene, config, style) {
+	var CreateFolder = function (parent, config, style) {
+	    var scene = parent.scene;
+
 	    // Create Folder-title
 	    var titleStyle = GetValue$s(style, 'title') || {};
 	    var title = new FolderTitle(scene, titleStyle);
@@ -84691,7 +84687,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	        styles: GetValue$s(style, 'tweaker'),
 	        space: GetValue$s(style, 'space') || {}
 	    };
-	    var child = CreateTweaker(scene, tweakerConfig);
+	    var child = parent.createTweaker(tweakerConfig);
 
 	    var backgroundStyle = GetValue$s(style, 'background');
 	    var background = CreateBackground(scene, config, backgroundStyle);
@@ -84716,13 +84712,13 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	        config = {};
 	    }
 
-	    var scene = this.scene;
+	    this.scene;
 
 	    // Create folder
 	    var folderStyle = GetValue$r(this.styles, 'folder') || {};
 	    folderStyle.tweaker = this.styles;
 	    folderStyle.root = this.root;
-	    var folder = CreateFolder(scene, config, folderStyle);
+	    var folder = CreateFolder(this, config, folderStyle);
 	    delete folderStyle.tweaker;
 	    delete folderStyle.root;
 
@@ -84797,7 +84793,9 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
 	const GetValue$q = Phaser.Utils.Objects.GetValue;
 
-	var CreateTab = function (scene, config, style) {
+	var CreateTab = function (parent, config, style) {
+	    var scene = parent.scene;
+
 	    var tabPages = new TabPages(scene, style);
 	    scene.add.existing(tabPages);
 
@@ -84814,7 +84812,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	            tab: CreateLabel(scene, tabConfig)
 	                .setActiveState(false)
 	                .resetDisplayContent({ text: page.title }),
-	            page: CreateTweaker(scene, tweakerConfig)
+	            page: parent.createTweaker(tweakerConfig)
 	        });
 	    }
 
@@ -84836,13 +84834,13 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	        config = {};
 	    }
 
-	    var scene = this.scene;
+	    this.scene;
 
 	    // Create tab
 	    var tabStyle = GetValue$p(this.styles, 'tab') || {};
 	    tabStyle.tweaker = this.styles;
 	    tabStyle.root = this.root;
-	    var tab = CreateTab(scene, config, tabStyle);
+	    var tab = CreateTab(this, config, tabStyle);
 	    delete tabStyle.tweaker;
 	    delete tabStyle.root;
 
@@ -85006,7 +85004,9 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
 	const GetValue$n = Phaser.Utils.Objects.GetValue;
 
-	var CreateColumns = function (scene, config, style) {
+	var CreateColumns = function (parent, config, style) {
+	    var scene = parent.scene;
+
 	    // Create title
 	    var titleStyle = GetValue$n(style, 'title') || {};
 	    var title = new Title(scene, titleStyle);
@@ -85040,7 +85040,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
 	        tweakerConfig.width = GetValue$n(columnConfig, 'width', 0);
 
-	        var tweakerChild = CreateTweaker(scene, tweakerConfig);
+	        var tweakerChild = parent.createTweaker(tweakerConfig);
 
 	        columnConfig.child = tweakerChild;
 	    }
@@ -85067,13 +85067,13 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	        };
 	    }
 
-	    var scene = this.scene;
+	    this.scene;
 
 	    // Create columns
 	    var columnsStyle = GetValue$m(this.styles, 'columns') || {};
 	    columnsStyle.tweaker = this.styles;
 	    columnsStyle.root = this.root;
-	    var columns = CreateColumns(scene, config, columnsStyle);
+	    var columns = CreateColumns(this, config, columnsStyle);
 	    delete columnsStyle.tweaker;
 	    delete columnsStyle.root;
 
@@ -85150,7 +85150,9 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
 	const GetValue$l = Phaser.Utils.Objects.GetValue;
 
-	var CreateScrollable = function (scene, config, style) {
+	var CreateScrollable = function (parent, config, style) {
+	    var scene = parent.scene;
+
 	    // Create Folder-title
 	    var titleStyle = GetValue$l(style, 'title') || {};
 	    var title = new Title(scene, titleStyle);
@@ -85161,7 +85163,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	        styles: GetValue$l(style, 'tweaker'),
 	        space: GetValue$l(style, 'space') || {}
 	    };
-	    var child = CreateTweaker(scene, tweakerConfig);
+	    var child = parent.createTweaker(tweakerConfig);
 
 	    var sliderStyle = GetValue$l(style, 'slider');
 	    if (sliderStyle) {
@@ -85211,13 +85213,13 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	        config = {};
 	    }
 
-	    var scene = this.scene;
+	    this.scene;
 
 	    // Create scrollable
 	    var scrollableStyle = GetValue$k(this.styles, 'scrollable') || {};
 	    scrollableStyle.tweaker = this.styles;
 	    scrollableStyle.root = this.root;
-	    var scrollable = CreateScrollable(scene, config, scrollableStyle);
+	    var scrollable = CreateScrollable(this, config, scrollableStyle);
 	    delete scrollableStyle.tweaker;
 	    delete scrollableStyle.root;
 
@@ -86145,6 +86147,19 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	        if (this.alignInputRowTitle) {
 	            this.setInputRowTitleWidth(this.getMaxInputRowTitleWidth());
 	        }
+	    }
+
+	    createTweaker(config, addToScene) {
+	        if (addToScene === undefined) {
+	            addToScene = true;
+	        }
+
+	        var gameObject = new TweakerShell(this.scene, config);
+	        if (addToScene) {
+	            this.scene.add.existing(gameObject);
+	        }
+
+	        return gameObject;
 	    }
 
 	}

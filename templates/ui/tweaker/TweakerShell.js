@@ -61,6 +61,19 @@ class TweakerShell extends Sizer {
         }
     }
 
+    createTweaker(config, addToScene) {
+        if (addToScene === undefined) {
+            addToScene = true;
+        }
+
+        var gameObject = new TweakerShell(this.scene, config);
+        if (addToScene) {
+            this.scene.add.existing(gameObject);
+        }
+
+        return gameObject;
+    }
+
 }
 
 Object.assign(

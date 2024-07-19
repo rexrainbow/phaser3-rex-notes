@@ -13,7 +13,7 @@ var AddTab = function (config) {
     var tabStyle = GetValue(this.styles, 'tab') || {};
     tabStyle.tweaker = this.styles;
     tabStyle.root = this.root;
-    var tab = CreateTab(scene, config, tabStyle);
+    var tab = CreateTab(this, config, tabStyle);
     delete tabStyle.tweaker;
     delete tabStyle.root;
 

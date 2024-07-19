@@ -1,11 +1,12 @@
 import FolderTitle from '../gameobjects/label/FolderTitle.js';
-import CreateTweaker from '../gameobjects/utils/CreateTweaker.js';
 import CreateBackground from './CreateBackground.js';
 import Folder from '../gameobjects/folder/Folder.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var CreateFolder = function (scene, config, style) {
+var CreateFolder = function (parent, config, style) {
+    var scene = parent.scene;
+
     // Create Folder-title
     var titleStyle = GetValue(style, 'title') || {};
     var title = new FolderTitle(scene, titleStyle);
@@ -24,7 +25,7 @@ var CreateFolder = function (scene, config, style) {
         styles: GetValue(style, 'tweaker'),
         space: GetValue(style, 'space') || {}
     }
-    var child = CreateTweaker(scene, tweakerConfig);
+    var child = parent.createTweaker(tweakerConfig);
 
     var backgroundStyle = GetValue(style, 'background');
     var background = CreateBackground(scene, config, backgroundStyle);
