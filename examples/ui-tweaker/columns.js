@@ -19,6 +19,8 @@ class Demo extends Phaser.Scene {
     create() {
         var gameObject = this.add.circle(400, 300, 20, 0xff0000).setStrokeStyle(4, 0xffffff)
 
+        gameObject.description = 'A Circle Game object';
+
         var panel = CreatePanel(this)
             .setOrigin(0.5, 0)
             .setPosition(400, 0)
@@ -88,6 +90,15 @@ class Demo extends Phaser.Scene {
             )
 
         panel
+            .addInput(
+                gameObject, 'description',
+                {
+                    view: 'textarea',
+                    orientation: 'y',
+                }
+            )
+
+        panel
             .layout()
         //.drawBounds(this.add.graphics(), 0xff0000);
 
@@ -102,6 +113,10 @@ var CreatePanel = function (scene) {
         width: 500,
 
         styles: {
+            space: {
+                left: 10, right: 10, top: 10, bottom: 10, item: 5
+            },
+
             background: {
                 radius: 10,
                 color: 0x0,
@@ -109,15 +124,13 @@ var CreatePanel = function (scene) {
             },
 
             inputRow: {
-                height: 30,
-
                 background: {
                     strokeColor: COLOR_MAIN
                 },
 
                 title: {
                     space: { icon: 2 },
-                    iconSize: 30,
+                    height: 30,
                 },
 
                 inputText: {
@@ -138,7 +151,7 @@ var CreatePanel = function (scene) {
                 },
 
                 inputTextArea: {
-                    height: 100,
+                    height: 60,
                 },
 
                 slider: {
@@ -284,17 +297,13 @@ var CreatePanel = function (scene) {
             },
 
             columns: {
-                space: { column: 10 },
+                space: { column: 5 },
             },
 
             separator: {
                 height: 5,
                 color: COLOR_DARK
             },
-
-            space: {
-                left: 10, right: 10, top: 10, bottom: 10, item: 3
-            }
         },
     })
 }
