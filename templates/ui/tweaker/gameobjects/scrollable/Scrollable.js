@@ -1,7 +1,6 @@
 import ScrollableBase from '../../../scrollablepanel/ScrollablePanel.js';
 import BindingTargetMethods from './BindingTargetMethods.js';
 import InputRowTitleWidthMethods from './InputRowTitleWidthMethods.js';
-import IsEmpty from '../../../../../plugins/utils/object/IsEmpty.js';
 
 class Scrollable extends ScrollableBase {
     constructor(scene, config) {
@@ -12,7 +11,7 @@ class Scrollable extends ScrollableBase {
     setTitle(config) {
         var title = this.childrenMap.header;
 
-        if (!IsEmpty(config)) {
+        if (config.title || config.icon) {
             title.show().setTitle(config);
         } else {
             title.hide();

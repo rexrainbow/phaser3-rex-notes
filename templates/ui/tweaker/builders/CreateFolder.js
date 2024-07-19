@@ -30,7 +30,6 @@ var CreateFolder = function (scene, config, style) {
     var background = CreateBackground(scene, config, backgroundStyle);
 
     var folder = new Folder(scene, {
-        orientation: 1,
         title: title,
         child: child,
         background: background,

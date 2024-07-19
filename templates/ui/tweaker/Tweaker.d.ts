@@ -123,6 +123,10 @@ declare namespace Tweaker {
             pages?: Pages.IConfig,
         },
 
+        columns?: {
+            space?: { column?: number }
+        },
+
         scrollable?: {
             title?: SimpleLabel.IConfig,
 
@@ -247,6 +251,16 @@ declare namespace Tweaker {
 
         key?: string,
     }
+
+    interface IAddColumnsConfig {
+        title?: string,
+
+        columns?: {
+            width?: number,
+            expand?: boolean,
+        }[]
+    }
+
 
     interface IAddScrollableConfig {
         title?: string,
@@ -373,6 +387,10 @@ declare class Tweaker extends Sizer {
 
     addTab(
         config: Tweaker.IAddTabConfig
+    ): Tweaker[];
+
+    addColumns(
+        config: number | Tweaker.IAddColumnsConfig
     ): Tweaker[];
 
     addScrollable(

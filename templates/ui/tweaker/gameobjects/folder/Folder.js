@@ -4,6 +4,11 @@ import InputRowTitleWidthMethods from './InputRowTitleWidthMethods.js';
 
 class Folder extends FolderBase {
     constructor(scene, config) {
+        if (config === undefined) {
+            config = {};
+        }
+        config.orientation = 1;
+
         super(scene, config);
         this.type = 'rexTweaker.Folder';
     }
