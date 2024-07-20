@@ -10,6 +10,7 @@ Fine-tuning properties of target object. [Reference](https://cocopon.github.io/t
 - [Tweaker](https://codepen.io/rexrainbow/pen/YzvPOGM)
 - [Bind target](https://codepen.io/rexrainbow/pen/vYraBBY)
 - [Horizontal tweaker](https://codepen.io/rexrainbow/pen/MWBGqzN)
+- [Columns](https://codepen.io/rexrainbow/pen/MWMKNLM)
 - [Buttons](https://codepen.io/rexrainbow/pen/vYvbpXY)
 - [Add rows](https://codepen.io/rexrainbow/pen/NWVKyKW)
 - [Edit item](https://codepen.io/rexrainbow/pen/vYwEXQe)
@@ -1336,6 +1337,49 @@ var childrenTweakers = tweaker.addTab({
 
 See [Style of tab](#style-of-tab)
 
+
+### Add columns
+
+Multiple columns in a row. Each column is a tweaker game object.
+
+```javascript
+var childrenTweakers = tweaker.addColumns(amount);
+
+// childrenTweakers[0].addInput(...)
+// childrenTweakers[1].addInput(...)
+```
+
+or
+
+```javascript
+var childrenTweakers = tweaker.addColumns({
+    // title: title,
+
+    columns: [
+        {
+            // width: 0,
+            // expand: true
+        },
+        {
+            // width: 0,
+            // expand: true
+        },
+    ]
+});
+
+// childrenTweakers[0].addInput(...)
+// childrenTweakers[1].addInput(...)
+```
+
+- `childrenTweakers` : Array of children tweaker game object. Add input rows by `addInput` method.
+- `amount` : A number, amount of columns. Will use default column config.
+- `columns` : Array of column config, each column config contains
+    - `width` : Minimum width of this column, default value is `0`, will set `proportion` to `1`.
+    - `expand` : Expand height of this column, default value is `true`.
+
+
+See [Style of columns](#style-of-columns)
+
 ### Add scrollable
 
 [Scrollable(Panel)](ui-scrollablepanel.md) contains child tweaker game object and slider.
@@ -1440,6 +1484,32 @@ tweaker.addRows(properties, target);
                     ]
                 },
                 // ... More pages
+            ]
+        }
+        ```
+        - `$target` : Override `target` value pass to remainder `$properties`.
+            - `undefined` : Use previous `target` value. Default behavior.
+    - Columns
+        ```javascript
+        {
+            $type: 'columns',
+            // $target:
+            columns: [
+                {
+                    // width: 0,
+                    // expand: true,
+                    $properties: [
+                        // ...
+                    ]
+                },
+                {
+                    // width: 0,
+                    // expand: true,
+                    $properties: [
+                        // ...
+                    ]
+                },
+                // ... More columns
             ]
         }
         ```
@@ -3262,6 +3332,111 @@ Style of tab is defined in
     }
 }
 ```
+
+
+
+#### Style of columns
+
+Style of columns is defined in 
+
+- `styles.columns`
+
+```javascript
+{
+    // style: {...}
+    styles: {
+        columns: {
+            title: {
+                background: {
+                    radius: 0,
+                    // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
+
+                    color: undefined,
+                    alpha: undefined,
+                    strokeColor: undefined,
+                    strokeAlpha: undefined,
+                    strokeWidth: undefined,
+                },
+
+                text: {
+                    fontFamily: 'Courier',
+                    fontSize: '16px',
+                    fontStyle: '',
+                    backgroundColor: null,
+                    color: '#fff',
+                    stroke: '#fff',
+                    strokeThickness: 0,
+                    shadow: {
+                        offsetX: 0,
+                        offsetY: 0,
+                        color: '#000',
+                        blur: 0,
+                        stroke: false,
+                        fill: false
+                    },                  
+                    padding: {
+                        left: 0,
+                        right: 0,
+                        top: 0,
+                        bottom: 0,
+                    },
+                    // more text styles
+                },
+
+                iconSize: undefined,
+                iconWidth: undefined, iconHeight: undefined,
+
+                space: {
+                    left: 0, right: 0, top: 0, bottom:0, 
+                    icon: 0, text: 0
+                },
+
+                expandedIcon: {
+                    color: undefined,
+                    alpha: 1,
+
+                    strokeColor: undefined,
+                    strokeAlpha: 1,
+                    strokeWidth: 1,
+                    arrowOnly: false,
+
+                    easeDuration: 0,
+                }
+            },
+
+            background: {
+                radius: 0,
+                // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
+
+                color: undefined,
+                alpha: undefined,
+                strokeColor: undefined,
+                strokeAlpha: undefined,
+                strokeWidth: undefined,
+            },
+
+            //background: [
+            //    {
+            //        radius: 0,
+            //        // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
+            //
+            //        color: undefined,
+            //        alpha: undefined,
+            //        strokeColor: undefined,
+            //        strokeAlpha: undefined,
+            //        strokeWidth: undefined,
+            //    }
+            //],
+
+            space: {
+                left: 0, right: 0, top: 0, bottom:0, 
+                column: 0,
+            }
+        }
+    }
+}
+```
+
 
 #### Style of scrollable
 

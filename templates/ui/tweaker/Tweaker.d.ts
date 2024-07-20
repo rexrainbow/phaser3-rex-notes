@@ -124,7 +124,14 @@ declare namespace Tweaker {
         },
 
         columns?: {
-            space?: { column?: number }
+            title?: SimpleLabel.IConfig,
+
+            background?: CreateBackground.IConfig | CreateBackground.IConfig[],
+
+            space?: {
+                left?: number, right?: number, top?: number, bottom?: number,
+                column?: number
+            }
         },
 
         scrollable?: {
@@ -258,6 +265,8 @@ declare namespace Tweaker {
         columns?: {
             width?: number,
             expand?: boolean,
+
+            key?: string,
         }[]
     }
 
@@ -298,6 +307,20 @@ declare namespace Tweaker {
         }[]
     }
 
+    interface IAddColumnsRowProperty extends IAddColumnsConfig {
+        $type: 'columns',
+        $target?: Object,
+        columns: {
+            width?: number,
+
+            expand?: boolean,
+
+            key?: string,
+
+            $properties: RowsPropertyType[]
+        }[]
+    }
+
     interface IAddSeparatorRowProperty {
         $type: 'separator',
     }
@@ -311,7 +334,7 @@ declare namespace Tweaker {
     }
 
     type RowsPropertyType = IAddInputRowProperty |
-        IAddFolderRowProperty | IAddTabRowProperty | IAddScrollableRowProperty |
+        IAddFolderRowProperty | IAddTabRowProperty | IAddColumnsRowProperty | IAddScrollableRowProperty |
         IAddSeparatorRowProperty | IAddButtonRowProperty | IAddButtonsRowProperty;
 
     interface IAcceptConfig extends IAddInputConfig {
