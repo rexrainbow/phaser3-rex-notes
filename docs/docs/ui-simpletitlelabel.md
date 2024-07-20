@@ -7,7 +7,7 @@ Using plain object to create [title-label](ui-titlelabel.md).
 
 ## Live demos
 
-- [Style](https://codepen.io/rexrainbow/pen/KKYXJaz)
+- [Style](https://codepen.io/rexrainbow/pen/OJeNOJK)
 
 ## Usage
 
