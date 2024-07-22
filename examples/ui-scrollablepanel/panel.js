@@ -122,7 +122,7 @@ class Demo extends Phaser.Scene {
         //     })
 
         // Solution C:
-        
+
         this.input.topOnly = false;
         var labels = [];
         labels.push(...scrollablePanel.getElement('#skills.items', true));
@@ -142,7 +142,7 @@ class Demo extends Phaser.Scene {
                     print.text += `${category}:${label.text}\n`;
                 });
         })
-        
+
 
         scrollablePanel.getElement('scroller')
             .on('dragstart', function () {
@@ -150,6 +150,14 @@ class Demo extends Phaser.Scene {
             })
             .on('dragend', function () {
                 console.log('scroller.dragend')
+            })
+
+        scrollablePanel.getElement('slider')
+            .on('inputstart', function () {
+                console.log('slider.inputstart')
+            })
+            .on('inputend', function () {
+                console.log('slider.inputend')
             })
     }
 

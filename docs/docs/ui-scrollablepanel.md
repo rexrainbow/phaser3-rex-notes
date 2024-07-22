@@ -581,18 +581,32 @@ panel.scrollToChild(child, align);
         // ...
     })
     ```
-- Scroller drag start
-    ```javascript
-    panel.getElement('scroller').on('dragstart', function(panel) {
-        // ...
-    })
-    ```
-- Scroller drag end
-    ```javascript
-    panel.getElement('scroller').on('dragend', function(panel) {
-        // ...
-    })
-    ```
+- Slider 
+    - Slider drag start
+        ```javascript
+        panel.getElement('slider').on('inputstart', function(panel) {
+            // ...
+        })
+        ```
+    - Slider drag end
+        ```javascript
+        panel.getElement('slider').on('inputend', function(panel) {
+            // ...
+        })
+        ```
+- Scroller
+    - Scroller drag start
+        ```javascript
+        panel.getElement('scroller').on('dragstart', function(panel) {
+            // ...
+        })
+        ```
+    - Scroller drag end
+        ```javascript
+        panel.getElement('scroller').on('dragend', function(panel) {
+            // ...
+        })
+        ```
 
 ### Other properties
 
@@ -626,6 +640,10 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md), [containe
         var childPanel = panel.getElement('footer');
         ```
     - Slider
+        - Slider top
+            ```javascript
+            var slider = panel.getElement('slider');
+            ```    
         - Track
             ```javascript
             var track = panel.getElement('slider.track');

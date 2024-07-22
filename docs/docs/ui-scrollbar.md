@@ -427,3 +427,15 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md), [containe
     scope
   );
   ```
+- On input start
+    ```javascript
+    scrollBar.on('inputstart', function(pointer) {
+
+    }, scope);
+    ```
+- On input end
+    ```javascript
+    scrollBar.on('inputend', function(pointer) {
+
+    }, scope);
+    ```
