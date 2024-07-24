@@ -19,7 +19,7 @@ class SceneA extends Phaser.Scene {
         this.input.on('pointerdown', function () {
             this.scene.transition({
                 target: 'SceneB',
-                duration: 1000,
+                duration: 2000,
                 moveBelow: true,
 
                 onStart(fromScene, toScene, duration) {
@@ -46,6 +46,7 @@ class SceneA extends Phaser.Scene {
                         // Delay : 0 ~ 0.5
                         // Tint fade in : 0.5 ~ 1
                         toScene.time.delayedCall(duration * 0.5, function () {
+                            fromScene.cameras.main.setVisible(false);    // fromScene is above toScene
                             toScene.cameras.main.fadeIn(duration * 0.5);
                         })
                     }
