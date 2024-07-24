@@ -46,7 +46,7 @@ class SceneA extends Phaser.Scene {
                         // Delay : 0 ~ 0.5
                         // Tint fade in : 0.5 ~ 1
                         toScene.time.delayedCall(duration * 0.5, function () {
-                            fromScene.cameras.main.setVisible(false);    // fromScene is above toScene
+                            fromScene.scene.setVisible(false);    // fromScene is above toScene
                             toScene.cameras.main.fadeIn(duration * 0.5);
                         })
                     }
