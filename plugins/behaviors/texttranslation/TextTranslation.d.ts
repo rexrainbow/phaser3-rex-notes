@@ -1,4 +1,5 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase';
+import i18next from 'i18next';
 
 export default TextTranslation;
 
@@ -19,6 +20,8 @@ declare namespace TextTranslation {
 }
 
 declare class TextTranslation extends ComponentBase {
+    static setI18Next(obj: typeof i18next): void;
+
     constructor(
         gameObject: Phaser.GameObjects.GameObject,
         config?: TextTranslation.IConfig
