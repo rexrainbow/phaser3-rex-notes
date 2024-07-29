@@ -22,6 +22,8 @@ declare namespace CircularProgress {
         startAngle?: number,
         anticlockwise?: boolean,
 
+        iterations?: number,
+
         value?: number,
 
         easeValue?: {

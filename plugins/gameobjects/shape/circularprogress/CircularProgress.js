@@ -36,6 +36,8 @@ class CircularProgress extends ProgressBase(BaseShapes) {
         this.setStartAngle(GetValue(config, 'startAngle', DefaultStartAngle));
         this.setAnticlockwise(GetValue(config, 'anticlockwise', false));
 
+        this.iterations = GetValue(config, 'iterations', 128);
+
         this.buildShapes();
 
         this.setValue(value);

@@ -102,6 +102,7 @@ var circularProgress = scene.add.rexCircularProgress(x, y, radius, barColor, val
     thickness: 0.2,
     startAngle: Phaser.Math.DegToRad(270),
     anticlockwise: false,
+    // iterations: 128,
 
     easeValue: {
         duration: 0,
@@ -126,6 +127,7 @@ var circularProgress = scene.add.rexCircularProgress({
     thickness: 0.2,
     startAngle: Phaser.Math.DegToRad(270),
     anticlockwise: false,
+    // iterations: 128,
 
     value: 0,
     easeValue: {
@@ -145,6 +147,7 @@ var circularProgress = scene.add.rexCircularProgress({
 - `thickness` : `0` ~ `1`, thickness of circular bar. Default value is `0.2` (`0.2*radius`)
 - `startAngle` : Start angle of circular bar, in radians. Default value is 270 degrees.
 - `anticlockwise` : Set `true` to put anticlockwise circular bar. Default value is `false`.
+- `iterations` : Iterations of curve, set larger value to get more smooth rendering result. Default value is `128`.
 - `value` : `0` ~ `1`, progress value. Default is `0`.
 - `easeValue` : Parameters of easing value.
     - `easeValue.duration` : Duration of value easing, default is `0` (no easing).

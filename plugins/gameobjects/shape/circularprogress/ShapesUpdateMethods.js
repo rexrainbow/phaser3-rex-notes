@@ -31,10 +31,12 @@ var FillArc = function (shape, x, y, outerRadius, innerRadius, startAngle, endAn
 
 export default {
     buildShapes() {
+        var iterations = this.iterations;
+
         this
-            .addShape((new Lines()).setName('track'))
-            .addShape((new Lines()).setName('bar'))
-            .addShape((new Circle()).setName('center'))
+            .addShape((new Lines()).setIterations(iterations).setName('track'))
+            .addShape((new Lines()).setIterations(iterations).setName('bar'))
+            .addShape((new Circle()).setIterations(iterations).setName('center'))
     },
 
     updateShapes() {
@@ -68,7 +70,7 @@ export default {
             }
 
             barShape.fillStyle(this.barColor);
-            FillArc(barShape, x, x, barOuterRadius, barInnerRadius, startAngle, endAngle, false);
+            FillArc(barShape, x, x, barOuterRadius + 1, barInnerRadius - 1, startAngle, endAngle, false);
 
         } else {
             barShape.reset();
