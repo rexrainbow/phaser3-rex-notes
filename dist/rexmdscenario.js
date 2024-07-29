@@ -44541,10 +44541,12 @@
 
 	var ShapesUpdateMethods$2 = {
 	    buildShapes() {
+	        var iterations = this.iterations;
+
 	        this
-	            .addShape((new Lines()).setName('track'))
-	            .addShape((new Lines()).setName('bar'))
-	            .addShape((new Circle()).setName('center'));
+	            .addShape((new Lines()).setIterations(iterations).setName('track'))
+	            .addShape((new Lines()).setIterations(iterations).setName('bar'))
+	            .addShape((new Circle()).setIterations(iterations).setName('center'));
 	    },
 
 	    updateShapes() {
@@ -44578,7 +44580,7 @@
 	            }
 
 	            barShape.fillStyle(this.barColor);
-	            FillArc(barShape, x, x, barOuterRadius, barInnerRadius, startAngle, endAngle, false);
+	            FillArc(barShape, x, x, barOuterRadius + 1, barInnerRadius - 1, startAngle, endAngle, false);
 
 	        } else {
 	            barShape.reset();
@@ -44630,6 +44632,8 @@
 	        this.setThickness(GetValue$2M(config, 'thickness', 0.2));
 	        this.setStartAngle(GetValue$2M(config, 'startAngle', DefaultStartAngle$1));
 	        this.setAnticlockwise(GetValue$2M(config, 'anticlockwise', false));
+
+	        this.iterations = GetValue$2M(config, 'iterations', 128);
 
 	        this.buildShapes();
 
