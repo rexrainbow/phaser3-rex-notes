@@ -11,7 +11,7 @@ declare namespace Knob {
     interface IConfig extends OverlapSizer.IConfig {
         background?: Phaser.GameObjects.GameObject,
 
-        color?: number | string,
+        barColor?: number | string,
         trackColor?: number | string,
         centerColor?: number | string,
         thickness?: number,

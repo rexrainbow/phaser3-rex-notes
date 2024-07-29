@@ -21,6 +21,7 @@ class Demo extends Phaser.Scene {
 
             trackColor: COLOR_DARK,
             barColor: COLOR_LIGHT,
+            barColor2: COLOR_DARK,
             centerColor: COLOR_MAIN,
 
             // startAngle: Phaser.Math.DegToRad(270-45),

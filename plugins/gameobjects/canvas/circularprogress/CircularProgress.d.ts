@@ -16,6 +16,7 @@ declare namespace CircularProgressCanvas {
         radius?: number,
 
         barColor?: string | number,
+        barColor2?: string | number,
         trackColor?: string | number,
         centerColor?: string | number,
         thickness?: number,
