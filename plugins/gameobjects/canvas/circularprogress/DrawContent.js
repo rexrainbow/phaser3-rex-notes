@@ -36,10 +36,15 @@ var DrawContent = function () {
     // Draw bar
     if ((this.barColor) && (barRadius > 0)) {
         var barEndAngle;
-        if (anticlockwise) {
-            barEndAngle = (startAngle - (deltaAngle * this.value) + PI2) % PI2;
+
+        if (this.value >= 1) {
+            barEndAngle = endAngle;
         } else {
-            barEndAngle = (startAngle + deltaAngle * this.value) % PI2;
+            if (anticlockwise) {
+                barEndAngle = (startAngle - (deltaAngle * this.value) + PI2) % PI2;
+            } else {
+                barEndAngle = (startAngle + deltaAngle * this.value) % PI2;
+            }
         }
 
         context.save();

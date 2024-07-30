@@ -1,6 +1,6 @@
 import OverlapSizer from '../overlapsizer/OverlapSizer.js';
 import ProgressBase from '../../../plugins/utils/progressbase/ProgressBase.js';
-import CircularProgress from '../circularprogress/CircularProgress.js';
+import CircularProgress from '../circularprogresscanvas/CircularProgressCanvas.js';
 import InstallTouchPadEvents from './input/OnTouchPad.js';
 import InstallPanPadEvents from './input/OnPanPad.js';
 import TextObjectMethods from './TextObjectMethods.js';
@@ -36,6 +36,8 @@ class Knob extends ProgressBase(OverlapSizer) {
                 GetValue(config, 'textFormatCallback', undefined),
                 GetValue(config, 'textFormatCallbackScope', undefined)
             );
+            config.textFormatCallback = undefined;
+            config.textFormatCallbackScope = undefined;
         }
         // Create circular progress object
         var knob = new CircularProgress(scene, config);

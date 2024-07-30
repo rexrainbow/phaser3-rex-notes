@@ -5,7 +5,6 @@ import DrawContent from './DrawContent.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const NormalizeAngle = Phaser.Math.Angle.Normalize;
 const Clamp = Phaser.Math.Clamp;
 
 const DefaultStartAngle = Phaser.Math.DegToRad(270);
@@ -139,7 +138,6 @@ class CircularProgress extends ProgressBase(Canvas) {
     }
 
     set startAngle(value) {
-        value = NormalizeAngle(value);
         this.dirty = this.dirty || (this._startAngle != value);
         this._startAngle = value;
         this._deltaAngle = GetDeltaAngle(this._startAngle, this._endAngle, this._anticlockwise);
@@ -155,7 +153,6 @@ class CircularProgress extends ProgressBase(Canvas) {
     }
 
     set endAngle(value) {
-        value = NormalizeAngle(value);
         this.dirty = this.dirty || (this._endAngle != value);
         this._endAngle = value;
         this._deltaAngle = GetDeltaAngle(this._startAngle, this._endAngle, this._anticlockwise);
