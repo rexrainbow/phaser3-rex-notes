@@ -21,7 +21,7 @@ class Demo extends Phaser.Scene {
 
             trackColor: COLOR_DARK,
             barColor: COLOR_LIGHT,
-            barColor2: COLOR_DARK,
+            // barColor2: COLOR_DARK,
             centerColor: COLOR_MAIN,
 
             // startAngle: Phaser.Math.DegToRad(270-45),
@@ -42,8 +42,8 @@ class Demo extends Phaser.Scene {
 
         progressBar
             .setEaseValueFunction('Cubic')
-            .setEaseValueDuration(2000)
-            .easeValueTo(0.75);
+            .setEaseValueDuration(3000)
+            .easeValueTo(1);
     }
 
     update() { }
