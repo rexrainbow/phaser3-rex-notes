@@ -44933,10 +44933,15 @@
 	    // Draw bar
 	    if ((this.barColor) && (barRadius > 0)) {
 	        var barEndAngle;
-	        if (anticlockwise) {
-	            barEndAngle = (startAngle - (deltaAngle * this.value) + PI2$1) % PI2$1;
+
+	        if (this.value >= 1) {
+	            barEndAngle = endAngle;
 	        } else {
-	            barEndAngle = (startAngle + deltaAngle * this.value) % PI2$1;
+	            if (anticlockwise) {
+	                barEndAngle = (startAngle - (deltaAngle * this.value) + PI2$1) % PI2$1;
+	            } else {
+	                barEndAngle = (startAngle + deltaAngle * this.value) % PI2$1;
+	            }
 	        }
 
 	        context.save();
@@ -45011,7 +45016,6 @@
 
 	const GetValue$2L = Phaser.Utils.Objects.GetValue;
 	const IsPlainObject$I = Phaser.Utils.Objects.IsPlainObject;
-	const NormalizeAngle$1 = Phaser.Math.Angle.Normalize;
 	const Clamp$a = Phaser.Math.Clamp;
 
 	const DefaultStartAngle = Phaser.Math.DegToRad(270);
@@ -45145,7 +45149,6 @@
 	    }
 
 	    set startAngle(value) {
-	        value = NormalizeAngle$1(value);
 	        this.dirty = this.dirty || (this._startAngle != value);
 	        this._startAngle = value;
 	        this._deltaAngle = GetDeltaAngle(this._startAngle, this._endAngle, this._anticlockwise);
@@ -45161,7 +45164,6 @@
 	    }
 
 	    set endAngle(value) {
-	        value = NormalizeAngle$1(value);
 	        this.dirty = this.dirty || (this._endAngle != value);
 	        this._endAngle = value;
 	        this._deltaAngle = GetDeltaAngle(this._startAngle, this._endAngle, this._anticlockwise);
@@ -56667,9 +56669,11 @@
 	                GetValue$2a(config, 'textFormatCallback', undefined),
 	                GetValue$2a(config, 'textFormatCallbackScope', undefined)
 	            );
+	            config.textFormatCallback = undefined;
+	            config.textFormatCallbackScope = undefined;
 	        }
 	        // Create circular progress object
-	        var knob = new CircularProgress$1(scene, config);
+	        var knob = new CircularProgress(scene, config);
 	        knob.setDepth(GetValue$2a(config, 'knobDepth', 0));
 	        knob._value = -1; // To trigger text updating
 	        scene.add.existing(knob);

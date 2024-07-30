@@ -13927,10 +13927,15 @@
         // Draw bar
         if ((this.barColor) && (barRadius > 0)) {
             var barEndAngle;
-            if (anticlockwise) {
-                barEndAngle = (startAngle - (deltaAngle * this.value) + PI2$1) % PI2$1;
+
+            if (this.value >= 1) {
+                barEndAngle = endAngle;
             } else {
-                barEndAngle = (startAngle + deltaAngle * this.value) % PI2$1;
+                if (anticlockwise) {
+                    barEndAngle = (startAngle - (deltaAngle * this.value) + PI2$1) % PI2$1;
+                } else {
+                    barEndAngle = (startAngle + deltaAngle * this.value) % PI2$1;
+                }
             }
 
             context.save();
@@ -14005,7 +14010,6 @@
 
     const GetValue$4 = Phaser.Utils.Objects.GetValue;
     const IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
-    const NormalizeAngle = Phaser.Math.Angle.Normalize;
     const Clamp$1 = Phaser.Math.Clamp;
 
     const DefaultStartAngle = Phaser.Math.DegToRad(270);
@@ -14139,7 +14143,6 @@
         }
 
         set startAngle(value) {
-            value = NormalizeAngle(value);
             this.dirty = this.dirty || (this._startAngle != value);
             this._startAngle = value;
             this._deltaAngle = GetDeltaAngle(this._startAngle, this._endAngle, this._anticlockwise);
@@ -14155,7 +14158,6 @@
         }
 
         set endAngle(value) {
-            value = NormalizeAngle(value);
             this.dirty = this.dirty || (this._endAngle != value);
             this._endAngle = value;
             this._deltaAngle = GetDeltaAngle(this._startAngle, this._endAngle, this._anticlockwise);

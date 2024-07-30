@@ -28,7 +28,7 @@
 
     const Zone = Phaser.GameObjects.Zone;
     const AddItem = Phaser.Utils.Array.Add;
-    const RemoveItem$4 = Phaser.Utils.Array.Remove;
+    const RemoveItem$3 = Phaser.Utils.Array.Remove;
 
     let Base$1 = class Base extends Zone {
         constructor(scene, x, y, width, height) {
@@ -89,7 +89,7 @@
 
         remove(gameObjects, destroyChild) {
             var parent = this;
-            RemoveItem$4(this.children, gameObjects,
+            RemoveItem$3(this.children, gameObjects,
                 // Callback of item removed
                 function (gameObject) {
                     gameObject.off('destroy', parent.onChildDestroy, parent);
@@ -121,11 +121,11 @@
         }
     };
 
-    const Components = Phaser.GameObjects.Components;
+    const Components$1 = Phaser.GameObjects.Components;
     Phaser.Class.mixin(Base$1,
         [
-            Components.Alpha,
-            Components.Flip
+            Components$1.Alpha,
+            Components$1.Flip
         ]
     );
 
@@ -156,8 +156,8 @@
         return gameObject;
     };
 
-    const DegToRad$6 = Phaser.Math.DegToRad;
-    const RadToDeg$3 = Phaser.Math.RadToDeg;
+    const DegToRad$2 = Phaser.Math.DegToRad;
+    const RadToDeg$2 = Phaser.Math.RadToDeg;
 
     var GetLocalState = function (gameObject) {
         if (!gameObject.hasOwnProperty('rexContainer')) {
@@ -176,10 +176,10 @@
 
             Object.defineProperty(rexContainer, 'angle', {
                 get: function () {
-                    return RadToDeg$3(this.rotation);
+                    return RadToDeg$2(this.rotation);
                 },
                 set: function (value) {
-                    this.rotation = DegToRad$6(value);
+                    this.rotation = DegToRad$2(value);
                 }
             });
             Object.defineProperty(rexContainer, 'displayWidth', {
@@ -603,7 +603,7 @@
 
     };
 
-    const DegToRad$5 = Phaser.Math.DegToRad;
+    const DegToRad$1 = Phaser.Math.DegToRad;
 
     var Rotation = {
         updateChildRotation(child) {
@@ -650,7 +650,7 @@
 
         setChildLocalAngle(child, angle) {
             var localState = GetLocalState(child);
-            localState.rotation = DegToRad$5(angle);
+            localState.rotation = DegToRad$1(angle);
             this.updateChildRotation(child);
             return this;
         },
@@ -670,7 +670,7 @@
 
     };
 
-    var Scale$2 = {
+    var Scale$1 = {
         updateChildScale(child) {
             var state = GetLocalState(child);
             var parent = state.parent;
@@ -1843,7 +1843,7 @@
 
     const Rectangle$3 = Phaser.Geom.Rectangle;
     const Vector2 = Phaser.Math.Vector2;
-    const RotateAround$3 = Phaser.Math.RotateAround;
+    const RotateAround$2 = Phaser.Math.RotateAround;
 
     var GetBounds = function (gameObject, output) {
         if (output === undefined) {
@@ -2007,7 +2007,7 @@
         if (includeParent === undefined) { includeParent = false; }
 
         if (gameObject.rotation !== 0) {
-            RotateAround$3(output, gameObject.x, gameObject.y, gameObject.rotation);
+            RotateAround$2(output, gameObject.x, gameObject.y, gameObject.rotation);
         }
 
         if (includeParent && gameObject.parentContainer) {
@@ -2319,7 +2319,7 @@
         return this;
     };
 
-    const RotateAround$2 = Phaser.Math.RotateAround;
+    const RotateAround$1 = Phaser.Math.RotateAround;
 
     var ChangeOrigin$1 = function (gameObject, originX, originY) {
         if (originY === undefined) {
@@ -2330,7 +2330,7 @@
             x: (originX - gameObject.originX) * gameObject.displayWidth,
             y: (originY - gameObject.originY) * gameObject.displayHeight
         };
-        RotateAround$2(deltaXY, 0, 0, gameObject.rotation);
+        RotateAround$1(deltaXY, 0, 0, gameObject.rotation);
 
         gameObject.originX = originX;
         gameObject.originY = originY;
@@ -2366,7 +2366,7 @@
         Transform,
         Position,
         Rotation,
-        Scale$2,
+        Scale$1,
         Visible,
         Alpha,
         Active,
@@ -3317,7 +3317,7 @@
         }
     };
 
-    const RemoveItem$3 = Phaser.Utils.Array.Remove;
+    const RemoveItem$2 = Phaser.Utils.Array.Remove;
     const ContainerRemove = ContainerLite.prototype.remove;
     const GetParentSizer$1 = GetParentSizerMethods.getParentSizer;
 
@@ -3332,7 +3332,7 @@
         }
 
         if (this.isBackground(gameObject)) {
-            RemoveItem$3(this.backgroundChildren, gameObject);
+            RemoveItem$2(this.backgroundChildren, gameObject);
         }
         ContainerRemove.call(this, gameObject, destroyChild);
 
@@ -3344,7 +3344,7 @@
         return this;
     };
 
-    const RemoveItem$2 = Phaser.Utils.Array.Remove;
+    const RemoveItem$1 = Phaser.Utils.Array.Remove;
     const GetParentSizer = GetParentSizerMethods.getParentSizer;
 
     var RemoveChildMethods$1 = {
@@ -3365,7 +3365,7 @@
                 return this;
             }
 
-            RemoveItem$2(this.backgroundChildren, gameObject);
+            RemoveItem$1(this.backgroundChildren, gameObject);
             RemoveChild.call(this, gameObject, destroyChild);
             return this;
         },
@@ -5167,9 +5167,9 @@
 
     const GetValue$w = Phaser.Utils.Objects.GetValue;
     const GetAdvancedValue$2 = Phaser.Utils.Objects.GetAdvancedValue;
-    const Linear$5 = Phaser.Math.Linear;
+    const Linear$4 = Phaser.Math.Linear;
 
-    let Scale$1 = class Scale extends EaseValueTaskBase {
+    class Scale extends EaseValueTaskBase {
         constructor(gameObject, config) {
             super(gameObject, config);
             // this.parent = gameObject;
@@ -5260,10 +5260,10 @@
             t = this.easeFn(t);
 
             if (this.hasScaleX) {
-                gameObject.scaleX = Linear$5(this.startX, this.endX, t);
+                gameObject.scaleX = Linear$4(this.startX, this.endX, t);
             }
             if (this.hasScaleY) {
-                gameObject.scaleY = Linear$5(this.startY, this.endY, t);
+                gameObject.scaleY = Linear$4(this.startY, this.endY, t);
             }
         }
 
@@ -5276,7 +5276,7 @@
             }
             return this;
         }
-    };
+    }
 
     const MODE$3 = {
         stop: 0,
@@ -5317,7 +5317,7 @@
         };
 
         if (scale === undefined) {
-            scale = new Scale$1(gameObject, config);
+            scale = new Scale(gameObject, config);
         } else {
             scale.resetFromJSON(config);
         }
@@ -5332,7 +5332,7 @@
         }
 
         // Ease from current scale to 0
-        if (destroyMode instanceof Scale$1) {
+        if (destroyMode instanceof Scale) {
             scale = destroyMode;
             destroyMode = undefined;
         }
@@ -5364,7 +5364,7 @@
         config.ease = ease;
 
         if (scale === undefined) {
-            scale = new Scale$1(gameObject, config);
+            scale = new Scale(gameObject, config);
         } else {
             scale.resetFromJSON(config);
         }
@@ -5413,7 +5413,7 @@
         };
 
         if (scale === undefined) {
-            scale = new Scale$1(gameObject, config);
+            scale = new Scale(gameObject, config);
         } else {
             scale.resetFromJSON(config);
         }
@@ -5578,7 +5578,7 @@
 
     const GetValue$v = Phaser.Utils.Objects.GetValue;
     const GetAdvancedValue$1 = Phaser.Utils.Objects.GetAdvancedValue;
-    const Linear$4 = Phaser.Math.Linear;
+    const Linear$3 = Phaser.Math.Linear;
 
     class Fade extends EaseValueTaskBase {
         constructor(gameObject, config) {
@@ -5638,7 +5638,7 @@
                 t = 1 - t;
             }
 
-            gameObject.alpha = Linear$4(this.alphaStart, this.alphaEnd, t);
+            gameObject.alpha = Linear$3(this.alphaStart, this.alphaEnd, t);
         }
 
         complete() {
@@ -5827,7 +5827,7 @@
 
     const GetValue$u = Phaser.Utils.Objects.GetValue;
     const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
-    const Linear$3 = Phaser.Math.Linear;
+    const Linear$2 = Phaser.Math.Linear;
 
     class EaseMove extends EaseValueTaskBase {
         constructor(gameObject, config) {
@@ -5914,10 +5914,10 @@
             t = this.easeFn(t);
 
             if (this.hasMoveX) {
-                gameObject.x = Linear$3(this.startX, this.endX, t);
+                gameObject.x = Linear$2(this.startX, this.endX, t);
             }
             if (this.hasMoveY) {
-                gameObject.y = Linear$3(this.startY, this.endY, t);
+                gameObject.y = Linear$2(this.startY, this.endY, t);
             }
         }
 
@@ -6021,7 +6021,7 @@
     };
 
     const IsPlainObject$6 = Phaser.Utils.Objects.IsPlainObject;
-    const DistanceBetween$4 = Phaser.Math.Distance.Between;
+    const DistanceBetween$3 = Phaser.Math.Distance.Between;
 
     var EaseMoveMethods = {
         onInitEaseMove() {
@@ -6043,7 +6043,7 @@
                 x = config.x;
                 y = config.y;
                 if (config.hasOwnProperty('speed')) {
-                    duration = (DistanceBetween$4(x, y, this.x, this.y) * 1000) / config.speed;
+                    duration = (DistanceBetween$3(x, y, this.x, this.y) * 1000) / config.speed;
                 } else {
                     duration = config.duration;
                 }
@@ -6089,7 +6089,7 @@
                 x = config.x;
                 y = config.y;
                 if (config.hasOwnProperty('speed')) {
-                    duration = (DistanceBetween$4(x, y, this.x, this.y) * 1000) / config.speed;
+                    duration = (DistanceBetween$3(x, y, this.x, this.y) * 1000) / config.speed;
                 } else {
                     duration = config.duration;
                 }
@@ -6459,7 +6459,7 @@
     };
 
     const GetValue$s = Phaser.Utils.Objects.GetValue;
-    const Linear$2 = Phaser.Math.Linear;
+    const Linear$1 = Phaser.Math.Linear;
 
     class EaseValueTask extends EaseValueTaskBase {
         constructor(gameObject, config) {
@@ -6504,7 +6504,7 @@
             var t = timer.t;
             t = this.easeFn(t);
 
-            target[this.propertyKey] = Linear$2(this.fromValue, this.toValue, t);
+            target[this.propertyKey] = Linear$1(this.fromValue, this.toValue, t);
         }
     }
 
@@ -6669,7 +6669,7 @@
         }
     };
 
-    var RemoveItem$1 = Phaser.Utils.Array.Remove;
+    var RemoveItem = Phaser.Utils.Array.Remove;
 
     var OnInitDelayCallTimers = function (gameObject) {
         gameObject._delayCallTimers = [];
@@ -6694,7 +6694,7 @@
             var timer;
             var self = this;
             var OnTimeOut = function () {
-                RemoveItem$1(self._delayCallTimers, timer);
+                RemoveItem(self._delayCallTimers, timer);
                 if (scope) {
                     callback.call(scope);
                 } else {
@@ -10234,7 +10234,7 @@
     const IDLE$5 = 'IDLE';
 
     const GetValue$e = Phaser.Utils.Objects.GetValue;
-    const DistanceBetween$3 = Phaser.Math.Distance.Between;
+    const DistanceBetween$2 = Phaser.Math.Distance.Between;
 
     class Tap extends OnePointerTracer {
         constructor(gameObject, config) {
@@ -10309,7 +10309,7 @@
 
                 case BEGIN$3:
                     var pointer = this.lastPointer;
-                    var tapsOffset = DistanceBetween$3(
+                    var tapsOffset = DistanceBetween$2(
                         pointer.upX,
                         pointer.upY,
                         pointer.x,
@@ -10543,7 +10543,7 @@
         return GetGame(game).loop.delta;
     };
 
-    const DistanceBetween$2 = Phaser.Math.Distance.Between;
+    const DistanceBetween$1 = Phaser.Math.Distance.Between;
     const AngleBetween$1 = Phaser.Math.Angle.Between;
 
     var VelocityMethods = {
@@ -10555,7 +10555,7 @@
         getVelocity: function () {
             var p1 = this.pointer.position;
             var p0 = this.pointer.prevPosition;
-            var d = DistanceBetween$2(p0.x, p0.y, p1.x, p1.y);
+            var d = DistanceBetween$1(p0.x, p0.y, p1.x, p1.y);
             var velocity = d / (this.getDt() * 0.001);
             return velocity;
         },
@@ -10664,7 +10664,7 @@
     var globOut = {};
 
     const GetValue$c = Phaser.Utils.Objects.GetValue;
-    const RadToDeg$2 = Phaser.Math.RadToDeg;
+    const RadToDeg$1 = Phaser.Math.RadToDeg;
 
     class Swipe extends OnePointerTracer {
         constructor(gameObject, config) {
@@ -10785,7 +10785,7 @@
         }
 
         updateDirectionStates() {
-            var angle = RadToDeg$2(this.getVelocityAngle());
+            var angle = RadToDeg$1(this.getVelocityAngle());
             AngleToDirections(angle, this.dirMode, this);
             return this;
         }
@@ -10810,7 +10810,7 @@
 
     const GetValue$b = Phaser.Utils.Objects.GetValue;
     const SpliceOne = Phaser.Utils.Array.SpliceOne;
-    const DistanceBetween$1 = Phaser.Math.Distance.Between;
+    const DistanceBetween = Phaser.Math.Distance.Between;
     const AngleBetween = Phaser.Math.Angle.Between;
 
     class TwoPointersTracer {
@@ -11055,7 +11055,7 @@
             }
             var p0 = this.pointers[0],
                 p1 = this.pointers[1];
-            return DistanceBetween$1(p0.x, p0.y, p1.x, p1.y);
+            return DistanceBetween(p0.x, p0.y, p1.x, p1.y);
         }
 
         get angleBetween() {
@@ -11177,10 +11177,10 @@
 
     Phaser.Utils.Objects.GetValue;
 
-    const RotateAround$1 = Phaser.Math.RotateAround;
+    const RotateAround = Phaser.Math.RotateAround;
 
     var RotateObjectAround = function (gameObject, x, y, angle) {
-        RotateAround$1(gameObject, x, y, angle);
+        RotateAround(gameObject, x, y, angle);
         gameObject.rotation += angle;
         return gameObject;
     };
@@ -11234,8 +11234,8 @@
     const GetValue$a = Phaser.Utils.Objects.GetValue;
     const WrapDegrees = Phaser.Math.Angle.WrapDegrees; // Wrap degrees: -180 to 180 
     const ShortestBetween = Phaser.Math.Angle.ShortestBetween;
-    const RadToDeg$1 = Phaser.Math.RadToDeg;
-    const DegToRad$4 = Phaser.Math.DegToRad;
+    const RadToDeg = Phaser.Math.RadToDeg;
+    const DegToRad = Phaser.Math.DegToRad;
 
     class Rotate extends TwoPointersTracer {
         constructor(gameObject, config) {
@@ -11276,7 +11276,7 @@
         }
 
         onDrag2Start() {
-            this.prevAngle = WrapDegrees(RadToDeg$1(this.angleBetween)); // Degrees
+            this.prevAngle = WrapDegrees(RadToDeg(this.angleBetween)); // Degrees
             this.state = BEGIN;
             if (this.dragThreshold === 0) {
                 this.state = RECOGNIZED;
@@ -11292,14 +11292,14 @@
                 case BEGIN:
                     if ((this.pointers[0].getDistance() >= this.dragThreshold) &&
                         (this.pointers[1].getDistance() >= this.dragThreshold)) {
-                        var curAngle = WrapDegrees(RadToDeg$1(this.angleBetween));
+                        var curAngle = WrapDegrees(RadToDeg(this.angleBetween));
                         this.angle = ShortestBetween(this.prevAngle, curAngle);
                         this.prevAngle = curAngle;
                         this.state = RECOGNIZED;
                     }
                     break;
                 case RECOGNIZED:
-                    var curAngle = WrapDegrees(RadToDeg$1(this.angleBetween));
+                    var curAngle = WrapDegrees(RadToDeg(this.angleBetween));
                     this.angle = ShortestBetween(this.prevAngle, curAngle);
                     this.prevAngle = curAngle;
                     this.emit('rotate', this);
@@ -11312,7 +11312,7 @@
         }
 
         get rotation() {
-            return DegToRad$4(this.angle);
+            return DegToRad(this.angle);
         }
 
         setDragThreshold(distance) {
@@ -12017,7 +12017,7 @@
     const IsPlainObject$2 = Phaser.Utils.Objects.IsPlainObject;
     const GetValue$4 = Phaser.Utils.Objects.GetValue;
     const ALIGN_CENTER = Phaser.Display.Align.CENTER;
-    const UUID = Phaser.Utils.String.UUID;
+    const UUID$1 = Phaser.Utils.String.UUID;
 
     var Add = function (gameObject, childKey, align, padding, expand, minWidth, minHeight, offsetX, offsetY, aspectRatio) {
         AddChild.call(this, gameObject);
@@ -12043,7 +12043,7 @@
 
         var hasValidKey = (childKey !== undefined);
         if (!hasValidKey) {
-            childKey = UUID();
+            childKey = UUID$1();
         }
 
         if (typeof (align) === 'string') {
@@ -12277,7 +12277,7 @@
         methods
     );
 
-    const Linear$1 = Phaser.Math.Linear;
+    const Linear = Phaser.Math.Linear;
     const Percent$1 = Phaser.Math.Percent;
 
     var ProgressValueMethods = {
@@ -12304,7 +12304,7 @@
         getValue(min, max) {
             var value = this.value;
             if (min !== undefined) {
-                value = Linear$1(min, max, value);
+                value = Linear(min, max, value);
             }
             return value;
         }
@@ -12438,61 +12438,73 @@
         return ProgressBase;
     }
 
-    const GetCalcMatrix = Phaser.GameObjects.GetCalcMatrix;
+    // copy from Phaser.GameObjects.Text
+
+    const Utils = Phaser.Renderer.WebGL.Utils;
 
     var WebGLRenderer = function (renderer, src, camera, parentMatrix) {
-        src.updateData();
+        if (src.dirty) {
+            src.updateTexture();
+            src.dirty = false;
+        }
+
+        if ((src.width === 0) || (src.height === 0)) {
+            return;
+        }
+
         camera.addToRenderList(src);
 
-        var pipeline = renderer.pipelines.set(src.pipeline);
-
-        var result = GetCalcMatrix(src, camera, parentMatrix);
-
-        var calcMatrix = pipeline.calcMatrix.copyFrom(result.calc);
-
-        var dx = src._displayOriginX;
-        var dy = src._displayOriginY;
-
-        var alpha = camera.alpha * src.alpha;
+        var frame = src.frame;
+        var width = frame.width;
+        var height = frame.height;
+        var getTint = Utils.getTintAppendFloatAlpha;
+        var pipeline = renderer.pipelines.set(src.pipeline, src);
+        var textureUnit = pipeline.setTexture2D(frame.glTexture, src);
 
         renderer.pipelines.preBatch(src);
 
-        var shapes = src.geom,
-            shape;
-        for (var i = 0, cnt = shapes.length; i < cnt; i++) {
-            shape = shapes[i];
-            if (shape.visible) {
-                shape.webglRender(pipeline, calcMatrix, alpha, dx, dy);
-            }
-        }
+        pipeline.batchTexture(
+            src,
+            frame.glTexture,
+            width, height,
+            src.x, src.y,
+            width / src.resolution, height / src.resolution,
+            src.scaleX, src.scaleY,
+            src.rotation,
+            src.flipX, src.flipY,
+            src.scrollFactorX, src.scrollFactorY,
+            src.displayOriginX, src.displayOriginY,
+            0, 0, width, height,
+            getTint(src.tintTopLeft, camera.alpha * src._alphaTL),
+            getTint(src.tintTopRight, camera.alpha * src._alphaTR),
+            getTint(src.tintBottomLeft, camera.alpha * src._alphaBL),
+            getTint(src.tintBottomRight, camera.alpha * src._alphaBR),
+            src.tintFill,
+            0, 0,
+            camera,
+            parentMatrix,
+            false,
+            textureUnit
+        );
 
         renderer.pipelines.postBatch(src);
     };
 
-    const SetTransform = Phaser.Renderer.Canvas.SetTransform;
+    // copy from Phaser.GameObjects.Text
 
     var CanvasRenderer = function (renderer, src, camera, parentMatrix) {
-        src.updateData();
+        if (src.dirty) {
+            src.updateTexture();
+            src.dirty = false;
+        }
+
+        if ((src.width === 0) || (src.height === 0)) {
+            return;
+        }
+
         camera.addToRenderList(src);
 
-        var ctx = renderer.currentContext;
-
-        if (SetTransform(renderer, ctx, src, camera, parentMatrix)) {
-            var dx = src._displayOriginX;
-            var dy = src._displayOriginY;
-
-            var shapes = src.geom,
-                shape;
-            for (var i = 0, cnt = shapes.length; i < cnt; i++) {
-                shape = shapes[i];
-                if (shape.visible) {
-                    shape.canvasRender(ctx, dx, dy);
-                }
-            }
-
-            //  Restore the context saved in SetTransform
-            ctx.restore();
-        }
+        renderer.batchSprite(src, src.frame, camera, parentMatrix);
     };
 
     var Render = {
@@ -12501,10 +12513,205 @@
 
     };
 
-    const Shape = Phaser.GameObjects.Shape;
-    const RemoveItem = Phaser.Utils.Array.Remove;
+    const Color = Phaser.Display.Color;
 
-    class BaseShapes extends Shape {
+    var CanvasMethods = {
+        clear() {
+            this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            this.dirty = true;
+            return this;
+        },
+
+        fill(color) {
+            this.context.fillStyle = color;
+            this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+            this.dirty = true;
+            return this;
+        },
+
+        drawFrame(key, frame, dx, dy, dWidth, dHeight, sxOffset, syOffset, sWidth, sHeight) {
+
+            var textureFrame = this.scene.sys.textures.getFrame(key, frame);
+            if (!textureFrame) {
+                return this;
+            }
+
+            var frameWidth = textureFrame.cutWidth,
+                frameHeight = textureFrame.cutHeight;
+
+            if (dx === undefined) { dx = 0; }
+            if (dy === undefined) { dy = 0; }
+            if (dWidth === undefined) { dWidth = frameWidth; }
+            if (dHeight === undefined) { dHeight = frameHeight; }
+            if (sxOffset === undefined) { sxOffset = 0; }
+            if (syOffset === undefined) { syOffset = 0; }
+            if (sWidth === undefined) { sWidth = frameWidth; }
+            if (sHeight === undefined) { sHeight = frameHeight; }
+
+            var sx = textureFrame.cutX + sxOffset;
+            var sy = textureFrame.cutY + syOffset;
+
+            this.context.drawImage(
+                textureFrame.source.image,  // image
+                sx, sy, sWidth, sHeight,
+                dx, dy, dWidth, dHeight
+            );
+
+            this.dirty = true;
+
+            return this;
+        },
+
+        getDataURL(type, encoderOptions) {
+            return this.canvas.toDataURL(type, encoderOptions);
+        },
+
+        getPixel(x, y, out) {
+            if (out === undefined) {
+                out = new Color();
+            }
+            var rgb = this.context.getImageData(x, y, 1, 1);
+            out.setTo(rgb.data[0], rgb.data[1], rgb.data[2], rgb.data[3]);
+            return out;
+        },
+
+        setPixel(x, y, r, g, b, a) {
+            if (typeof (r) !== 'number') {
+                var color = r;
+                r = color.red;
+                g = color.green;
+                b = color.blue;
+                a = color.alpha;
+            }
+
+            if (a === undefined) {
+                a = ((r !== 0) || (g !== 0) || (b !== 0)) ? 255 : 0;
+            }
+
+            var imgData = this.context.createImageData(1, 1);
+            imgData.data[0] = r;
+            imgData.data[1] = g;
+            imgData.data[2] = b;
+            imgData.data[3] = a;
+            this.context.putImageData(imgData, x, y);
+            this.dirty = true;
+            return this;
+        }
+    };
+
+    var CopyCanvasToTexture = function (scene, srcCanvas, key, x, y, width, height) {
+        var textures = scene.sys.textures;
+        var renderer = scene.renderer;
+
+        if (x === undefined) {
+            x = 0;
+        }
+        if (y === undefined) {
+            y = 0;
+        }
+        if (width === undefined) {
+            width = srcCanvas.width;
+        }
+        if (height === undefined) {
+            height = srcCanvas.height;
+        }
+
+        var texture;
+        if (textures.exists(key)) {
+            texture = textures.get(key);
+        } else {
+            texture = textures.createCanvas(key, width, height);
+        }
+
+        var destCanvas = texture.getSourceImage();
+        if (destCanvas.width !== width) {
+            destCanvas.width = width;
+        }
+        if (destCanvas.height !== height) {
+            destCanvas.height = height;
+        }
+
+        var destCtx = destCanvas.getContext('2d', { willReadFrequently: true });
+        destCtx.clearRect(0, 0, width, height);
+        destCtx.drawImage(srcCanvas, x, y, width, height);
+        if (renderer.gl && texture) {
+            renderer.canvasToTexture(destCanvas, texture.source[0].glTexture, true, 0);
+        }
+    };
+
+    var TextureMethods = {
+        updateTexture(callback, scope) {
+            if (callback) {
+                if (scope) {
+                    callback.call(scope, this.canvas, this.context);
+                } else {
+                    callback(this.canvas, this.context);
+                }
+            }
+
+            if ((this.canvas.width !== this.frame.width) || (this.canvas.height !== this.frame.height)) {
+                this.frame.setSize(this.canvas.width, this.canvas.height);
+            }
+            if (this.renderer && this.renderer.gl) {
+                this.frame.source.glTexture = this.renderer.canvasToTexture(this.canvas, this.frame.source.glTexture, true);
+                if (typeof WEBGL_DEBUG) {
+                    this.frame.glTexture.spectorMetadata = { textureKey: 'Canvas Game Object' };
+                }
+            }
+            this.dirty = false;
+
+            var input = this.input;
+            if (input && !input.customHitArea) {
+                input.hitArea.width = this.width;
+                input.hitArea.height = this.height;
+            }
+            return this;
+        },
+
+        generateTexture(key, x, y, width, height) {
+            var srcCanvas = this.canvas;
+            if (width === undefined) {
+                width = srcCanvas.width;
+            } else {
+                width *= this.resolution;
+            }
+            if (height === undefined) {
+                height = srcCanvas.height;
+            } else {
+                height *= this.resolution;
+            }
+
+            CopyCanvasToTexture(this.scene, srcCanvas, key, x, y, width, height);
+
+            return this;
+        },
+
+        loadTexture(key, frame) {
+            var textureFrame = this.scene.sys.textures.getFrame(key, frame);
+            if (!textureFrame) {
+                return this;
+            }
+
+            if ((this.width !== textureFrame.cutWidth) || (this.height !== textureFrame.cutHeight)) {
+                this.setSize(textureFrame.cutWidth, textureFrame.cutHeight);
+            } else {
+                this.clear();
+            }
+
+            this.drawFrame(key, frame);
+            this.dirty = true;
+            return this;
+        }
+
+    };
+
+    CheckP3Version();
+
+    const CanvasPool = Phaser.Display.Canvas.CanvasPool;
+    const GameObject = Phaser.GameObjects.GameObject;
+    const UUID = Phaser.Utils.String.UUID;
+
+    class Canvas extends GameObject {
         constructor(scene, x, y, width, height) {
             if (x === undefined) {
                 x = 0;
@@ -12513,24 +12720,63 @@
                 y = 0;
             }
             if (width === undefined) {
-                width = 2;
+                width = 1;
             }
             if (height === undefined) {
-                height = width;
+                height = 1;
             }
 
-            super(scene, 'rexShapes', []);
+            super(scene, 'rexCanvas');
 
-            this._width = -1;
-            this._height = -1;
-            this.dirty = true;
-            this.isSizeChanged = true;
-            this.shapes = {};
+            this.renderer = scene.sys.game.renderer;
+
+            this.resolution = 1;
+            this._width = width;
+            this._height = height;
+            width = Math.max(Math.ceil(width * this.resolution), 1);
+            height = Math.max(Math.ceil(height * this.resolution), 1);
+            this.canvas = CanvasPool.create(this, width, height);
+            this.context = this.canvas.getContext('2d', { willReadFrequently: true });
+            this.dirty = false;
 
             this.setPosition(x, y);
-            this.setSize(width, height);
+            this.setOrigin(0.5, 0.5);
+            this.initPipeline();
+            this.initPostPipeline(true);
 
-            this.updateDisplayOrigin();
+            this._crop = this.resetCropObject();
+
+            //  Create a Texture for this Text object
+            this._textureKey = UUID();
+
+            this.texture = scene.sys.textures.addCanvas(this._textureKey, this.canvas);
+
+            //  Get the frame
+            this.frame = this.texture.get();
+
+            //  Set the resolution
+            this.frame.source.resolution = this.resolution;
+
+            if (this.renderer && this.renderer.gl) {
+                //  Clear the default 1x1 glTexture, as we override it later
+                this.renderer.deleteTexture(this.frame.source.glTexture);
+                this.frame.source.glTexture = null;
+            }
+
+            this.dirty = true;
+        }
+
+        preDestroy() {
+            CanvasPool.remove(this.canvas);
+
+            this.canvas = null;
+            this.context = null;
+
+            var texture = this.texture;
+
+            if (texture) {
+                texture.destroy();
+            }
         }
 
         get width() {
@@ -12549,25 +12795,71 @@
             this.setSize(this._width, value);
         }
 
-        setDirty(value) {
-            if (value === undefined) {
-                value = true;
+        setCanvasSize(width, height) {
+            if ((this._width === width) && (this._height === height)) {
+                return this;
             }
-            this.dirty = value;
+
+            this._width = width;
+            this._height = height;
+
+            this.updateDisplayOrigin();
+
+            width = Math.max(Math.ceil(width * this.resolution), 1);
+            height = Math.max(Math.ceil(height * this.resolution), 1);
+            this.canvas.width = width;
+            this.canvas.height = height;
+
+            this.frame.setSize(width, height);
+
+            this.dirty = true;
             return this;
         }
 
+        // setSize might be override
         setSize(width, height) {
-            this.isSizeChanged = this.isSizeChanged || (this._width !== width) || (this._height !== height);
-            this.dirty = this.dirty || this.isSizeChanged;
-            this._width = width;
-            this._height = height;
-            this.updateDisplayOrigin();
-            var input = this.input;
-            if (input && !input.customHitArea) {
-                input.hitArea.width = width;
-                input.hitArea.height = height;
+            this.setCanvasSize(width, height);
+            return this;
+        }
+
+        get displayWidth() {
+            return this.scaleX * this._width;
+        }
+
+        set displayWidth(value) {
+            this.scaleX = value / this._width;
+        }
+
+        get displayHeight() {
+            return this.scaleY * this._height;
+        }
+
+        set displayHeight(value) {
+            this.scaleY = value / this._height;
+        }
+
+        setDisplaySize(width, height) {
+            this.displayWidth = width;
+            this.displayHeight = height;
+            return this;
+        }
+
+        getCanvas(readOnly) {
+            if (!readOnly) {
+                this.dirty = true;
             }
+            return this.canvas;
+        }
+
+        getContext(readOnly) {
+            if (!readOnly) {
+                this.dirty = true;
+            }
+            return this.context;
+        }
+
+        needRedraw() {
+            this.dirty = true;
             return this;
         }
 
@@ -12575,1508 +12867,249 @@
             this.setSize(width, height);
             return this;
         }
-
-        get fillColor() {
-            return this._fillColor;
-        }
-
-        set fillColor(value) {
-            this.setFillStyle(value, this._fillAlpha);
-        }
-
-        get fillAlpha() {
-            return this._fillAlpha;
-        }
-
-        set fillAlpha(value) {
-            this.setFillStyle(this._fillColor, value);
-        }
-
-        setFillStyle(color, alpha) {
-            if (alpha === undefined) {
-                alpha = 1;
-            }
-
-            this.dirty = this.dirty ||
-                (this.fillColor !== color) ||
-                (this.fillAlpha !== alpha);
-
-            this._fillColor = color;
-            this._fillAlpha = alpha;
-
-            return this;
-        }
-
-        get lineWidth() {
-            return this._lineWidth;
-        }
-
-        set lineWidth(value) {
-            this.setStrokeStyle(value, this._strokeColor, this._strokeAlpha);
-        }
-
-        get strokeColor() {
-            return this._strokeColor;
-        }
-
-        set strokeColor(value) {
-            this.setStrokeStyle(this._lineWidth, value, this._strokeAlpha);
-        }
-
-        get strokeAlpha() {
-            return this._strokeAlpha;
-        }
-
-        set strokeAlpha(value) {
-            this.setStrokeStyle(this._lineWidth, this._strokeColor, value);
-        }
-
-        setStrokeStyle(lineWidth, color, alpha) {
-            if (alpha === undefined) {
-                alpha = 1;
-            }
-
-            this.dirty = this.dirty ||
-                (this.lineWidth !== lineWidth) ||
-                (this.strokeColor !== color) ||
-                (this.strokeAlpha !== alpha);
-
-            this._lineWidth = lineWidth;
-            this._strokeColor = color;
-            this._strokeAlpha = alpha;
-
-            return this;
-        }
-
-        updateShapes() {
-
-        }
-
-        updateData() {
-            if (!this.dirty) {
-                return this;
-            }
-
-            this.updateShapes();
-            var shapes = this.geom;
-            for (var i = 0, cnt = shapes.length; i < cnt; i++) {
-                var shape = shapes[i];
-                if (shape.dirty) {
-                    shape.updateData();
-                }
-            }
-
-            this.isSizeChanged = false;
-            this.dirty = false;
-
-
-            return this;
-        }
-
-        clear() {
-            this.geom.length = 0;
-            Clear(this.shapes);
-            this.dirty = true;
-            return this;
-        }
-
-        getShape(name) {
-            return this.shapes[name];
-        }
-
-        getShapes() {
-            return this.geom;
-        }
-
-        addShape(shape) {
-            this.geom.push(shape);
-            var name = shape.name;
-            if (name) {
-                this.shapes[name] = shape;
-            }
-            this.dirty = true;
-            return this;
-        }
-
-        deleteShape(name) {
-            var shape = this.getShape(name);
-            if (shape) {
-                delete this.shapes[name];
-                RemoveItem(this.geom, shape);
-            }
-            return this;
-        }
     }
 
-    Object.assign(
-        BaseShapes.prototype,
-        Render
+    const Components = Phaser.GameObjects.Components;
+    Phaser.Class.mixin(Canvas,
+        [
+            Components.Alpha,
+            Components.BlendMode,
+            Components.Crop,
+            Components.Depth,
+            Components.Flip,
+            Components.GetBounds,
+            Components.Mask,
+            Components.Origin,
+            Components.Pipeline,
+            Components.PostPipeline,
+            Components.ScrollFactor,
+            Components.Tint,
+            Components.Transform,
+            Components.Visible,
+            Render,
+            CanvasMethods,
+            TextureMethods,
+        ]
     );
 
-    var FillStyle = function (color, alpha) {
-        if (color == null) {
-            this.isFilled = false;
-        } else {
-            if (alpha === undefined) {
-                alpha = 1;
-            }
-            this.isFilled = true;
-            this.fillColor = color;
-            this.fillAlpha = alpha;
-        }
-        return this;
-    };
-
-    var LineStyle = function (lineWidth, color, alpha) {
-        if ((lineWidth == null) || (color == null)) {
-            this.isStroked = false;
-        } else {
-            if (alpha === undefined) {
-                alpha = 1;
-            }
-            this.isStroked = true;
-            this.lineWidth = lineWidth;
-            this.strokeColor = color;
-            this.strokeAlpha = alpha;
-        }
-        return this;
-    };
-
-    var StyleMethods = {
-        fillStyle: FillStyle,
-        lineStyle: LineStyle
-    };
-
-    var DataMethods = {
-        enableData() {
-            if (this.data === undefined) {
-                this.data = {};
-            }
-            return this;
-        },
-
-        setData(key, value) {
-            this.enableData();
-            if (arguments.length === 1) {
-                var data = key;
-                for (key in data) {
-                    this.data[key] = data[key];
-                }
-            } else {
-                this.data[key] = value;
-            }
-            return this;
-        },
-
-        getData(key, defaultValue) {
-            this.enableData();
-            return (key === undefined) ? this.data : GetValue$r(this.data, key, defaultValue);
-        },
-
-        incData(key, inc, defaultValue) {
-            if (defaultValue === undefined) {
-                defaultValue = 0;
-            }
-            this.enableData();
-            this.setData(key, this.getData(key, defaultValue) + inc);
-            return this;
-        },
-
-        mulData(key, mul, defaultValue) {
-            if (defaultValue === undefined) {
-                defaultValue = 0;
-            }
-            this.enableData();
-            this.setData(key, this.getData(key, defaultValue) * mul);
-            return this;
-        },
-
-        clearData() {
-            if (this.data) {
-                Clear(this.data);
-            }
-            return this;
-        },
-    };
-
-    class BaseGeom {
-        constructor() {
-            this.name = undefined;
-            this.dirty = true;
-            this.visible = true;
-            this.data = undefined;
-
-            this.isFilled = false;
-            this.fillColor = undefined;
-            this.fillAlpha = 1;
-
-            this.isStroked = false;
-            this.lineWidth = 1;
-            this.strokeColor = undefined;
-            this.strokeAlpha = 1;
-        }
-
-        setName(name) {
-            this.name = name;
-            return this;
-        }
-
-        setVisible(visible) {
-            if (visible === undefined) {
-                visible = true;
-            }
-            this.visible = visible;
-            return this;
-        }
-
-        reset() {
-            this
-                .setVisible()
-                .fillStyle()
-                .lineStyle();
-
-            return this;
-        }
-
-        webglRender(pipeline, calcMatrix, alpha, dx, dy) {
-
-        }
-
-        canvasRender(ctx, dx, dy) {
-
-        }
-
-        updateData() {
-            this.dirty = false;
-        }
-    }
-
-    Object.assign(
-        BaseGeom.prototype,
-        StyleMethods,
-        DataMethods
-    );
-
-    /*
-    src: {
-        fillColor, 
-        fillAlpha, 
-        pathData, 
-        pathIndexes  // Earcut(pathData)
-    }
-    */
-
-    var Utils$1 = Phaser.Renderer.WebGL.Utils;
-
-    var FillPathWebGL = function (pipeline, calcMatrix, src, alpha, dx, dy)
-    {
-        var fillTintColor = Utils$1.getTintAppendFloatAlpha(src.fillColor, src.fillAlpha * alpha);
-
-        var path = src.pathData;
-        var pathIndexes = src.pathIndexes;
-
-        for (var i = 0; i < pathIndexes.length; i += 3)
-        {
-            var p0 = pathIndexes[i] * 2;
-            var p1 = pathIndexes[i + 1] * 2;
-            var p2 = pathIndexes[i + 2] * 2;
-
-            var x0 = path[p0 + 0] - dx;
-            var y0 = path[p0 + 1] - dy;
-            var x1 = path[p1 + 0] - dx;
-            var y1 = path[p1 + 1] - dy;
-            var x2 = path[p2 + 0] - dx;
-            var y2 = path[p2 + 1] - dy;
-
-            var tx0 = calcMatrix.getX(x0, y0);
-            var ty0 = calcMatrix.getY(x0, y0);
-            var tx1 = calcMatrix.getX(x1, y1);
-            var ty1 = calcMatrix.getY(x1, y1);
-            var tx2 = calcMatrix.getX(x2, y2);
-            var ty2 = calcMatrix.getY(x2, y2);
-
-            pipeline.batchTri(src, tx0, ty0, tx1, ty1, tx2, ty2, 0, 0, 1, 1, fillTintColor, fillTintColor, fillTintColor, 2);
-        }
-    };
-
-    /*
-    src: {
-        strokeColor,
-        strokeAlpha,
-        pathData,
-        lineWidth,
-        closePath
-    }
-    */
-    var Utils = Phaser.Renderer.WebGL.Utils;
-
-    var StrokePathWebGL = function (pipeline, src, alpha, dx, dy)
-    {
-        var strokeTint = pipeline.strokeTint;
-        var strokeTintColor = Utils.getTintAppendFloatAlpha(src.strokeColor, src.strokeAlpha * alpha);
-
-        strokeTint.TL = strokeTintColor;
-        strokeTint.TR = strokeTintColor;
-        strokeTint.BL = strokeTintColor;
-        strokeTint.BR = strokeTintColor;
-
-        var path = src.pathData;
-        var pathLength = path.length - 1;
-        var lineWidth = src.lineWidth;
-        var halfLineWidth = lineWidth / 2;
-
-        var px1 = path[0] - dx;
-        var py1 = path[1] - dy;
-
-        if (!src.closePath)
-        {
-            pathLength -= 2;
-        }
-
-        for (var i = 2; i < pathLength; i += 2)
-        {
-            var px2 = path[i] - dx;
-            var py2 = path[i + 1] - dy;
-
-            pipeline.batchLine(
-                px1,
-                py1,
-                px2,
-                py2,
-                halfLineWidth,
-                halfLineWidth,
-                lineWidth,
-                i - 2,
-                (src.closePath) ? (i === pathLength - 1) : false
-            );
-
-            px1 = px2;
-            py1 = py2;
-        }
-    };
-
-    var FillStyleCanvas = function (ctx, src, altColor, altAlpha)
-    {
-        var fillColor = (altColor) ? altColor : src.fillColor;
-        var fillAlpha = (altAlpha) ? altAlpha : src.fillAlpha;
-
-        var red = ((fillColor & 0xFF0000) >>> 16);
-        var green = ((fillColor & 0xFF00) >>> 8);
-        var blue = (fillColor & 0xFF);
-
-        ctx.fillStyle = 'rgba(' + red + ',' + green + ',' + blue + ',' + fillAlpha + ')';
-    };
-
-    var LineStyleCanvas = function (ctx, src, altColor, altAlpha)
-    {
-        var strokeColor = (altColor) ? altColor : src.strokeColor;
-        var strokeAlpha = (altAlpha) ? altAlpha : src.strokeAlpha;
-
-        var red = ((strokeColor & 0xFF0000) >>> 16);
-        var green = ((strokeColor & 0xFF00) >>> 8);
-        var blue = (strokeColor & 0xFF);
-
-        ctx.strokeStyle = 'rgba(' + red + ',' + green + ',' + blue + ',' + strokeAlpha + ')';
-        ctx.lineWidth = src.lineWidth;
-    };
-
-    const Earcut = Phaser.Geom.Polygon.Earcut;
-
-    class PathBase extends BaseGeom {
-        constructor() {
-            super();
-
-            this.pathData = [];
-            this.pathIndexes = [];
-            this.closePath = false;
-        }
-
-        updateData() {
-            this.pathIndexes = Earcut(this.pathData);
-
-            super.updateData();
-            return this;
-        }
-
-        webglRender(pipeline, calcMatrix, alpha, dx, dy) {
-            if (this.isFilled) {
-                FillPathWebGL(pipeline, calcMatrix, this, alpha, dx, dy);
-            }
-
-            if (this.isStroked) {
-                StrokePathWebGL(pipeline, this, alpha, dx, dy);
-            }
-        }
-
-        canvasRender(ctx, dx, dy) {
-            var path = this.pathData;
-            var pathLength = path.length - 1;
-
-            var px1 = path[0] - dx;
-            var py1 = path[1] - dy;
-
-            ctx.beginPath();
-
-            ctx.moveTo(px1, py1);
-
-            if (!this.closePath) {
-                pathLength -= 2;
-            }
-
-            for (var i = 2; i < pathLength; i += 2) {
-                var px2 = path[i] - dx;
-                var py2 = path[i + 1] - dy;
-                ctx.lineTo(px2, py2);
-            }
-
-            if (this.closePath) {
-                ctx.closePath();
-            }
-
-
-            if (this.isFilled) {
-                FillStyleCanvas(ctx, this);
-                ctx.fill();
-            }
-
-            if (this.isStroked) {
-                LineStyleCanvas(ctx, this);
-                ctx.stroke();
-            }
-        }
-    }
-
-    var LineTo = function (x, y, pathData) {
-        var cnt = pathData.length;
-        if (cnt >= 2) {
-            var lastX = pathData[cnt - 2];
-            var lastY = pathData[cnt - 1];
-            if ((x === lastX) && (y === lastY)) {
-                return pathData;
-            }
-        }
-
-        pathData.push(x, y);
-        return pathData;
-    };
-
-    const DegToRad$3 = Phaser.Math.DegToRad;
-
-    var ArcTo = function (centerX, centerY, radiusX, radiusY, startAngle, endAngle, antiClockWise, iteration, pathData) {
-        // startAngle, endAngle: 0 ~ 360
-        if (antiClockWise && (endAngle > startAngle)) {
-            endAngle -= 360;
-        } else if (!antiClockWise && (endAngle < startAngle)) {
-            endAngle += 360;
-        }
-
-        var deltaAngle = endAngle - startAngle;
-        var step = DegToRad$3(deltaAngle) / iteration;
-        startAngle = DegToRad$3(startAngle);
-        for (var i = 0; i <= iteration; i++) {
-            var angle = startAngle + (step * i);
-            var x = centerX + (radiusX * Math.cos(angle));
-            var y = centerY + (radiusY * Math.sin(angle));
-            LineTo(x, y, pathData);
-        }
-        return pathData;
-    };
-
-    const DegToRad$2 = Phaser.Math.DegToRad;
-
-    class Arc extends PathBase {
-        constructor(x, y, radiusX, radiusY, startAngle, endAngle, anticlockwise, pie) {
-            if (x === undefined) { x = 0; }
-            if (y === undefined) { y = 0; }
-            if (radiusX === undefined) { radiusX = 0; }
-            if (radiusY === undefined) { radiusY = 0; }
-            if (startAngle === undefined) { startAngle = 0; }
-            if (endAngle === undefined) { endAngle = 360; }
-            if (anticlockwise === undefined) { anticlockwise = false; }
-            if (pie === undefined) { pie = false; }
-
-            super();
-
-            this.setCenterPosition(x, y);
-            this.setRadius(radiusX, radiusY);
-            this.setAngle(startAngle, endAngle, anticlockwise);
-            this.setPie(pie);
-            this.setIterations(32);
-        }
-
-        get x() {
-            return this._x;
-        }
-
-        set x(value) {
-            this.dirty = this.dirty || (this._x !== value);
-            this._x = value;
-        }
-
-        get y() {
-            return this._y;
-        }
-
-        set y(value) {
-            this.dirty = this.dirty || (this._y !== value);
-            this._y = value;
-        }
-
-        setCenterPosition(x, y) {
-            if (y === undefined) {
-                y = x;
-            }
-            this.x = x;
-            this.y = y;
-            return this;
-        }
-
-        get radiusX() {
-            return this._radiusX;
-        }
-
-        set radiusX(value) {
-            this.dirty = this.dirty || (this._radiusX !== value);
-            this._radiusX = value;
-        }
-
-        get radiusY() {
-            return this._radiusY;
-        }
-
-        set radiusY(value) {
-            this.dirty = this.dirty || (this._radiusY !== value);
-            this._radiusY = value;
-        }
-
-        setRadius(radiusX, radiusY) {
-            if (radiusY === undefined) {
-                radiusY = radiusX;
-            }
-            this.radiusX = radiusX;
-            this.radiusY = radiusY;
-            return this;
-        }
-
-        get startAngle() {
-            return this._startAngle;
-        }
-
-        set startAngle(value) {
-            this.dirty = this.dirty || (this._startAngle !== value);
-            this._startAngle = value;
-        }
-
-        get endAngle() {
-            return this._endAngle;
-        }
-
-        set endAngle(value) {
-            this.dirty = this.dirty || (this._endAngle !== value);
-            this._endAngle = value;
-        }
-
-        get anticlockwise() {
-            return this._anticlockwise;
-        }
-
-        set anticlockwise(value) {
-            this.dirty = this.dirty || (this._anticlockwise !== value);
-            this._anticlockwise = value;
-        }
-
-        setAngle(startAngle, endAngle, anticlockwise) {
-            // startAngle, endAngle in degrees
-            if (anticlockwise === undefined) {
-                anticlockwise = false;
-            }
-
-            this.startAngle = startAngle;
-            this.endAngle = endAngle;
-            this.anticlockwise = anticlockwise;
-            return this;
-        }
-
-        get pie() {
-            return this._pie;
-        }
-
-        set pie(value) {
-            this.dirty = this.dirty || (this._pie !== value);
-            this._pie = value;
-        }
-
-        setPie(pie) {
-            if (pie === undefined) {
-                pie = true;
-            }
-            this.pie = pie;
-            return this;
-        }
-
-        get iterations() {
-            return this._iterations;
-        }
-
-        set iterations(value) {
-            this.dirty = this.dirty || (this._iterations !== value);
-            this._iterations = value;
-        }
-
-        setIterations(iterations) {
-            this.iterations = iterations;
-            return this;
-        }
-
-        updateData() {
-            this.pathData.length = 0;
-            if (this.pie) {
-                this.pathData.push(this.x, this.y);
-            }
-            ArcTo(
-                this.x, this.y,
-                this.radiusX, this.radiusY,
-                this.startAngle, this.endAngle, this.anticlockwise,
-                this.iterations,
-                this.pathData
-            );
-            if (this.pie) {
-                this.pathData.push(this.x, this.y);
-            }
-            // Close
-            this.pathData.push(this.pathData[0], this.pathData[1]);
-
-            super.updateData();
-            return this;
-        }
-
-        canvasRender(ctx, dx, dy) {
-            ctx.beginPath();
-            var x = this.x - dx,
-                y = this.y - dy,
-                startAngle = DegToRad$2(this.startAngle),
-                endAngle = DegToRad$2(this.endAngle);
-            if (this.pie) {
-                ctx.moveTo(x, y);
-                ctx.lineTo(
-                    x + Math.cos(startAngle) * this.radiusX,
-                    y + Math.sin(startAngle) * this.radiusY
-                );
-            }
-            ctx.ellipse(
-                x, y,
-                this.radiusX, this.radiusY,
-                0,
-                startAngle, endAngle, this.anticlockwise
-            );
-            if (this.pie) {
-                ctx.lineTo(x, y);
-            }
-            if (this.isFilled) {
-                FillStyleCanvas(ctx, this);
-                ctx.fill();
-            }
-            if (this.isStroked) {
-                LineStyleCanvas(ctx, this);
-                ctx.stroke();
-            }
-        }
-    }
-
-    class Circle extends Arc {
-        constructor(x, y, radius) {
-            super(x, y, radius, radius, 0, 360);
-        }
-    }
-
-    var StartAt = function (x, y, pathData) {
-        pathData.length = 0;
-
-        if (x != null) {
-            pathData.push(x, y);
-        }
-
-        return pathData;
-    };
-
-    //import QuadraticBezierInterpolation from '../../utils/math/interpolation/QuadraticBezierInterpolation.js';
-
-    const QuadraticBezierInterpolation = Phaser.Math.Interpolation.QuadraticBezier;
-
-    var QuadraticBezierTo = function (cx, cy, x, y, iterations, pathData) {
-        var pathDataCnt = pathData.length;
-        var p0x = pathData[pathDataCnt - 2];
-        var p0y = pathData[pathDataCnt - 1];
-        for (var i = 1, last = iterations - 1; i <= last; i++) {
-            var t = i / last;
-            pathData.push(
-                QuadraticBezierInterpolation(t, p0x, cx, x),
-                QuadraticBezierInterpolation(t, p0y, cy, y)
-            );
-        }
-        return pathData;
-    };
-
-    // import CubicBezierInterpolation from '../../utils/math/interpolation/CubicBezierInterpolation.js';
-
-    const CubicBezierInterpolation = Phaser.Math.Interpolation.CubicBezier;
-
-    var CubicBezierCurveTo = function (cx0, cy0, cx1, cy1, x, y, iterations, pathData) {
-        var pathDataCnt = pathData.length;
-        var p0x = pathData[pathDataCnt - 2];
-        var p0y = pathData[pathDataCnt - 1];
-        for (var i = 1, last = iterations - 1; i <= last; i++) {
-            var t = i / last;
-            pathData.push(
-                CubicBezierInterpolation(t, p0x, cx0, cx1, x),
-                CubicBezierInterpolation(t, p0y, cy0, cy1, y)
-            );
-        }
-        return pathData;
-    };
-
-    var DuplicateLast = function (pathData) {
-        var len = pathData.length;
-        if (len < 2) {
-            return pathData;
-        }
-
-        var lastX = pathData[len - 2];
-        var lastY = pathData[len - 1];
-        pathData.push(lastX);
-        pathData.push(lastY);
-
-        return pathData;
-    };
-
-    var AddPathMethods = {
-        clear() {
-            this.start();
-            return this;
-        },
-
-        start() {
-            this.startAt();
-            return this;
-        },
-
-        startAt(x, y) {
-            this.restorePathData();
-            this.accumulationLengths = undefined;
-
-            StartAt(x, y, this.pathData);
-            this.firstPointX = x;
-            this.firstPointY = y;
-            this.lastPointX = x;
-            this.lastPointY = y;
-
-            return this;
-        },
-
-        lineTo(x, y, relative) {
-            if (relative === undefined) {
-                relative = false;
-            }
-            if (relative) {
-                x += this.lastPointX;
-                y += this.lastPointY;
-            }
-
-            LineTo(x, y, this.pathData);
-
-            this.lastPointX = x;
-            this.lastPointY = y;
-            return this;
-        },
-
-        verticalLineTo(x, relative) {
-            this.lineTo(x, this.lastPointY, relative);
-            return this;
-        },
-
-        horizontalLineTo(y, relative) {
-            this.lineTo(this.lastPointX, y, relative);
-            return this;
-        },
-
-        ellipticalArc(centerX, centerY, radiusX, radiusY, startAngle, endAngle, anticlockwise) {
-            if (anticlockwise === undefined) {
-                anticlockwise = false;
-            }
-
-            ArcTo(
-                centerX, centerY,
-                radiusX, radiusY,
-                startAngle, endAngle, anticlockwise,
-                this.iterations,
-                this.pathData
-            );
-
-            this.lastPointX = this.pathData[this.pathData.length - 2];
-            this.lastPointY = this.pathData[this.pathData.length - 1];
-            return this;
-        },
-
-        arc(centerX, centerY, radius, startAngle, endAngle, anticlockwise) {
-            this.ellipticalArc(centerX, centerY, radius, radius, startAngle, endAngle, anticlockwise);
-            return this;
-        },
-
-        quadraticBezierTo(cx, cy, x, y) {
-            QuadraticBezierTo(
-                cx, cy, x, y,
-                this.iterations,
-                this.pathData
-            );
-
-            this.lastPointX = x;
-            this.lastPointY = y;
-            this.lastCX = cx;
-            this.lastCY = cy;
-            return this;
-        },
-
-        smoothQuadraticBezierTo(x, y) {
-            var cx = this.lastPointX * 2 - this.lastCX;
-            var cy = this.lastPointY * 2 - this.lastCY;
-            this.quadraticBezierTo(cx, cy, x, y);
-            return this;
-        },
-
-        cubicBezierCurveTo(cx0, cy0, cx1, cy1, x, y) {
-            CubicBezierCurveTo(
-                cx0, cy0, cx1, cy1, x, y,
-                this.iterations,
-                this.pathData
-            );
-
-            this.lastPointX = x;
-            this.lastPointY = y;
-            this.lastCX = cx1;
-            this.lastCY = cy1;
-            return this;
-        },
-
-        smoothCubicBezierCurveTo(cx1, cy1, x, y) {
-            var cx0 = this.lastPointX * 2 - this.lastCX;
-            var cy0 = this.lastPointY * 2 - this.lastCY;
-            this.cubicBezierCurveTo(cx0, cy0, cx1, cy1, x, y);
-            return this;
-        },
-
-        close() {
-            // Line to first point        
-            var startX = this.pathData[0],
-                startY = this.pathData[1];
-            if ((startX !== this.lastPointX) || (startY !== this.lastPointY)) {
-                this.lineTo(startX, startY);
-            }
-
-            this.closePath = true;
-            return this;
-        },
-
-        end() {
-            DuplicateLast(this.pathData);
-            return this;
-        },
-
-    };
-
-    //import PointRotateAround from '../../utils/math/RotateAround.js';
-
-    const PointRotateAround$1 = Phaser.Math.RotateAround;
-
-    var RotateAround = function (centerX, centerY, angle, pathData) {
-        var point = { x: 0, y: 0 };
-        for (var i = 0, cnt = pathData.length - 1; i < cnt; i += 2) {
-            point.x = pathData[i];
-            point.y = pathData[i + 1];
-            PointRotateAround$1(point, centerX, centerY, angle);
-            pathData[i] = point.x;
-            pathData[i + 1] = point.y;
-        }
-        return pathData;
-    };
-
-    var Scale = function (centerX, centerY, scaleX, scaleY, pathData) {
-        for (var i = 0, cnt = pathData.length - 1; i < cnt; i += 2) {
-            var x = pathData[i] - centerX;
-            var y = pathData[i + 1] - centerY;
-            x *= scaleX;
-            y *= scaleY;
-            pathData[i] = x + centerX;
-            pathData[i + 1] = y + centerY;
-        }
-        return pathData;
-    };
-
-    var Offset = function (x, y, pathData) {
-        for (var i = 0, cnt = pathData.length - 1; i < cnt; i += 2) {
-            pathData[i] += x;
-            pathData[i + 1] += y;
-        }
-        return pathData;
-    };
-
-    const DegToRad$1 = Phaser.Math.DegToRad;
-    const PointRotateAround = Phaser.Math.RotateAround;
-
-    var TransformPointsMethods = {
-        rotateAround(centerX, centerY, angle) {
-            if (this.pathData.length === 0) {
-                return this;
-            }
-
-            angle = DegToRad$1(angle);
-
-            RotateAround(centerX, centerY, angle, this.pathData);
-
-            var pathDataCnt = this.pathData.length;
-            this.lastPointX = this.pathData[pathDataCnt - 2];
-            this.lastPointY = this.pathData[pathDataCnt - 1];
-            if (this.lastCX !== undefined) {
-                var point = {
-                    x: this.lastCX,
-                    y: this.lastCY
-                };
-                PointRotateAround(point, centerX, centerY, angle);
-                this.lastCX = point.x;
-                this.lastCY = point.y;
-            }
-            return this;
-        },
-
-        scale(centerX, centerY, scaleX, scaleY) {
-            if (this.pathData.length === 0) {
-                return this;
-            }
-
-            Scale(centerX, centerY, scaleX, scaleY, this.pathData);
-            this.lastPointX = this.pathData[pathDataCnt - 2];
-            this.lastPointY = this.pathData[pathDataCnt - 1];
-            if (this.lastCX !== undefined) {
-                var x = this.lastCX - centerX;
-                var y = this.lastCY - centerY;
-                x *= scaleX;
-                y *= scaleY;
-                this.lastCX = x + centerX;
-                this.lastCY = y + centerY;
-            }
-            return this;
-        },
-
-        offset(x, y) {
-            Offset(x, y, this.pathData);
-            return this;
-        }
-
-    };
-
-    var Copy = function (dest, src, startIdx, endIdx) {
-        if (startIdx === undefined) {
-            startIdx = 0;
-        }    if (endIdx === undefined) {
-            endIdx = src.length;
-        }
-        dest.length = endIdx - startIdx;
-        for (var i = 0, len = dest.length; i < len; i++) {
-            dest[i] = src[i + startIdx];
-        }
-        return dest;
-    };
-
-    var SavePathDataMethods = {
-        savePathData() {
-            if (this.pathDataSaved) {
-                return this;
-            }
-
-            this.pathDataSave = [...this.pathData];
-            this.pathData.length = 0;
-            this.pathDataSaved = true;
-            return this;
-        },
-
-        restorePathData() {
-            if (!this.pathDataSaved) {
-                return this;
-            }
-
-            Copy(this.pathData, this.pathDataSave);
-            this.pathDataSave = undefined;
-            this.pathDataSaved = false;
-            return this;
-        },
-    };
-
-    const DistanceBetween = Phaser.Math.Distance.Between;
-    const Wrap = Phaser.Math.Wrap;
-    const Linear = Phaser.Math.Linear;
-
-    var AppendFromPathSegment = function (srcPathData, accumulationLengths, startT, endT, destPathData) {
-        if (endT === undefined) {
-            endT = startT;
-            startT = 0;
-        }
-
-        startT = WrapT(startT);
-        endT = WrapT(endT);
-
-        if (startT === endT) {
-            return;
-        }
-
-        var totalPathLength = accumulationLengths[accumulationLengths.length - 1];
-        var startL = totalPathLength * startT;
-        var endL = totalPathLength * endT;
-        if (startT < endT) {
-            AddPathSegment(srcPathData, accumulationLengths, startL, endL, destPathData);
-        } else {
-            AddPathSegment(srcPathData, accumulationLengths, startL, totalPathLength, destPathData);
-            AddPathSegment(srcPathData, accumulationLengths, 0, endL, destPathData);
-        }
-
-        DuplicateLast(destPathData);
-    };
-
-    var AddPathSegment = function (srcPathData, accumulationLengths, startL, endL, destPathData) {
-        var skipState = (startL > 0);
-        for (var i = 0, cnt = accumulationLengths.length; i < cnt; i++) {
-            var pIdx = i * 2;
-            var d = accumulationLengths[i];
-
-            if (skipState) {
-                if (d < startL) {
-                    continue;
-                } else if (d == startL) {
-                    skipState = false;
-                } else { // d > startL
-                    var deltaD = d - accumulationLengths[i - 1];
-                    var t = 1 - ((d - startL) / deltaD);
-                    destPathData.push(GetInterpolation(srcPathData, pIdx - 2, pIdx, t));
-                    destPathData.push(GetInterpolation(srcPathData, pIdx - 1, pIdx + 1, t));
-                    skipState = false;
-                }
-            }
-
-            if (d <= endL) {
-                destPathData.push(srcPathData[pIdx]);
-                destPathData.push(srcPathData[pIdx + 1]);
-                if (d === endL) {
-                    break;
-                }
-            } else { // d > endL
-                var deltaD = d - accumulationLengths[i - 1];
-                var t = 1 - ((d - endL) / deltaD);
-                destPathData.push(GetInterpolation(srcPathData, pIdx - 2, pIdx, t));
-                destPathData.push(GetInterpolation(srcPathData, pIdx - 1, pIdx + 1, t));
-                break;
-            }
-        }
-    };
-
-    var GetInterpolation = function (pathData, i0, i1, t) {
-        var p0 = pathData[i0], p1 = pathData[i1];
-        return Linear(p0, p1, t);
-    };
-
-    var WrapT = function (t) {
-        if (t === 0) {
-            return 0;
-        } else if ((t % 1) === 0) {
-            return 1;
-        }
-        return Wrap(t, 0, 1);
-    };
-
-    var PathSegmentMethods = {
-        updateAccumulationLengths() {
-            if (this.accumulationLengths == null) {
-                this.accumulationLengths = [];
-            } else if (this.accumulationLengths.length === (this.pathData.length / 2)) {
-                return this;
-            }
-
-            var accumulationLengths = this.accumulationLengths;
-            var pathData = this.pathData;
-            var prevX, prevY, x, y;
-            var d, accumulationLength = 0;
-            for (var i = 0, cnt = pathData.length; i < cnt; i += 2) {
-                x = pathData[i];
-                y = pathData[i + 1];
-
-                d = (prevX === undefined) ? 0 : DistanceBetween(prevX, prevY, x, y);
-                accumulationLength += d;
-                accumulationLengths.push(accumulationLength);
-
-                prevX = x;
-                prevY = y;
-            }
-
-            this.totalPathLength = accumulationLength;
-
-            return this;
-        },
-
-        setDisplayPathSegment(startT, endT) {
-            if (!this.pathDataSaved) {
-                this.updateAccumulationLengths();
-                this.savePathData();
-            }
-
-            this.pathData.length = 0;
-            AppendFromPathSegment(this.pathDataSave, this.accumulationLengths, startT, endT, this.pathData);
-
-            return this;
-        },
-
-        appendFromPathSegment(src, startT, endT) {
-            if (startT === undefined) {
-                this.pathData.push(...src.pathData);
-            } else {
-                src.updateAccumulationLengths();
-                AppendFromPathSegment(src.pathData, src.accumulationLengths, startT, endT, this.pathData);
-            }
-
-            this.firstPointX = this.pathData[0];
-            this.firstPointY = this.pathData[1];
-            this.lastPointX = this.pathData[this.pathData.length - 2];
-            this.lastPointY = this.pathData[this.pathData.length - 1];
-            return this;
-        },
-    };
-
-    var GraphicsMethods = {
-        draw(graphics, isFill, isStroke) {
-            var points = this.toPoints();
-            if (isFill) {
-                graphics.fillPoints(points, this.closePath, this.closePath);
-            }
-            if (isStroke) {
-                graphics.strokePoints(points, this.closePath, this.closePath);
-            }
-
-            return this;
-        }
-    };
-
-    var ToPoints = function (pathData, points) {
-        if (points === undefined) {
-            points = [];
-        }
-        for (var i = 0, cnt = pathData.length - 1; i < cnt; i += 2) {
-            points.push({
-                x: pathData[i],
-                y: pathData[i + 1]
-            });
-        }
-        return points;
-    };
-
-    //import Polygon from '../../utils/geom/polygon/Polygon.js';
-
-    const Polygon = Phaser.Geom.Polygon;
-
-    var ToPolygon = function (pathData, polygon) {
-        if (polygon === undefined) {
-            polygon = new Polygon();
-        }
-        polygon.setTo(pathData);
-        return polygon;
-    };
-
-    class PathDataBuilder {
-        constructor(pathData) {
-            if (pathData === undefined) {
-                pathData = [];
-            }
-
-            this.pathData = pathData;
-            this.closePath = false;
-            this.setIterations(32);
-
-            this.firstPointX = undefined;
-            this.firstPointY = undefined;
-            this.lastPointX = undefined;
-            this.lastPointY = undefined;
-            this.accumulationLengths = undefined;
-        }
-
-        setIterations(iterations) {
-            this.iterations = iterations;
-            return this;
-        }
-
-        toPoints() {
-            return ToPoints(this.pathData);
-        }
-
-        toPolygon(polygon) {
-            return ToPolygon(this.pathData, polygon);
-        }
-
-    }
-
-    Object.assign(
-        PathDataBuilder.prototype,
-        AddPathMethods,
-        TransformPointsMethods,
-        SavePathDataMethods,
-        PathSegmentMethods,
-        GraphicsMethods,
-    );
-
-    class Lines extends PathBase {
-        constructor() {
-            super();
-            this.builder = new PathDataBuilder(this.pathData);
-        }
-
-        get iterations() {
-            return this.builder.iterations;
-        }
-
-        set iterations(value) {
-            this.dirty = this.dirty || (this.builder.iterations !== value);
-            this.builder.setIterations(value);
-        }
-
-        setIterations(iterations) {
-            this.iterations = iterations;
-            return this;
-        }
-
-        get lastPointX() {
-            return this.builder.lastPointX;
-        }
-
-        get lastPointY() {
-            return this.builder.lastPointY;
-        }
-
-        start() {
-            this.builder.start();
-
-            this.dirty = true;
-            return this;
-        }
-
-        startAt(x, y) {
-            this.builder.startAt(x, y);
-
-            this.dirty = true;
-            return this;
-        }
-
-        lineTo(x, y, relative) {
-            this.builder.lineTo(x, y, relative);
-
-            this.dirty = true;
-            return this;
-        }
-
-        verticalLineTo(x, relative) {
-            this.builder.verticalLineTo(x, relative);
-
-            this.dirty = true;
-            return this;
-        }
-
-        horizontalLineTo(y, relative) {
-            this.builder.horizontalLineTo(y, relative);
-
-            this.dirty = true;
-            return this;
-        }
-
-        ellipticalArc(centerX, centerY, radiusX, radiusY, startAngle, endAngle, anticlockwise) {
-            this.builder.ellipticalArc(centerX, centerY, radiusX, radiusY, startAngle, endAngle, anticlockwise);
-
-            this.dirty = true;
-            return this;
-        }
-
-        arc(centerX, centerY, radius, startAngle, endAngle, anticlockwise) {
-            this.builder.arc(centerX, centerY, radius, startAngle, endAngle, anticlockwise);
-
-            this.dirty = true;
-            return this;
-        }
-
-        quadraticBezierTo(cx, cy, x, y) {
-            this.builder.quadraticBezierTo(cx, cy, x, y);
-
-            this.dirty = true;
-            return this;
-        }
-
-        smoothQuadraticBezierTo(x, y) {
-            this.builder.smoothQuadraticBezierTo(x, y);
-
-            this.dirty = true;
-            return this;
-        }
-
-        cubicBezierCurveTo(cx0, cy0, cx1, cy1, x, y) {
-            this.builder.cubicBezierCurveTo(cx0, cy0, cx1, cy1, x, y);
-
-            this.dirty = true;
-            return this;
-        }
-
-        smoothCubicBezierCurveTo(cx1, cy1, x, y) {
-            this.builder.smoothCubicBezierCurveTo(cx1, cy1, x, y);
-
-            this.dirty = true;
-            return this;
-        }
-
-        close() {
-            this.builder.close();
-
-            this.closePath = this.builder.closePath;
-            this.dirty = true;
-            return this;
-        }
-
-        end() {
-            this.builder.end();
-            this.dirty = true;
-            return this;
-        }
-
-        rotateAround(centerX, centerY, angle) {
-            this.builder.rotateAround(centerX, centerY, angle);
-
-            this.dirty = true;
-            return this;
-        }
-
-        scale(centerX, centerY, scaleX, scaleY) {
-            this.builder.scale(centerX, centerY, scaleX, scaleY);
-
-            this.dirty = true;
-            return this;
-        }
-
-        offset(x, y) {
-            this.builder.offset(x, y);
-
-            this.dirty = true;
-            return this;
-        }
-
-        toPolygon(polygon) {
-            return this.builder.toPolygon(polygon);
-        }
-
-        appendPathFrom(src, startT, endT) {
-            this.builder.appendFromPathSegment(src.builder, startT, endT);
-            return this;
-        }
-
-        copyPathFrom(src, startT, endT) {
-            this.builder.clear().appendFromPathSegment(src.builder, startT, endT);
-            return this;
-        }
-
-        setDisplayPathSegment(startT, endT) {
-            this.builder.setDisplayPathSegment(startT, endT);
-            return this;
-        }
-    }
-
-    Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
-
-    Phaser.Utils.Objects.GetValue;
-
-    Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
-
-    const RadToDeg = Phaser.Math.RadToDeg;
-    const DegToRad = Phaser.Math.DegToRad;
-
-    var FillArc = function (shape, x, y, outerRadius, innerRadius, startAngle, endAngle, anticlockwise) {
-        var isCircle = Math.abs(endAngle - startAngle) === 360;
-        var radStartAngle = DegToRad(startAngle),
-            radEndAngle = DegToRad(endAngle);
-        var cosStartAngle = Math.cos(radStartAngle),
-            sinStartAngle = Math.sin(radStartAngle),
-            cosEndAngle = Math.cos(radEndAngle),
-            sinEndAngle = Math.sin(radEndAngle);
-
-        shape.startAt(x + (cosStartAngle * outerRadius), y + (sinStartAngle * outerRadius));
-        shape.arc(x, y, outerRadius, startAngle, endAngle, anticlockwise);
-
-        if (isCircle && (innerRadius === 0)) ; else {
-            shape.lineTo(x + (cosEndAngle * innerRadius), y + (sinEndAngle * innerRadius));
-
-            if (innerRadius > 0) {
-                shape.arc(x, y, innerRadius, endAngle, startAngle, !anticlockwise);
-            }
-        }
-
-        shape.close();
-        return shape;
-    };
-
-    var ShapesUpdateMethods = {
-        buildShapes() {
-            var iterations = this.iterations;
-
-            this
-                .addShape((new Lines()).setIterations(iterations).setName('track'))
-                .addShape((new Lines()).setIterations(iterations).setName('bar'))
-                .addShape((new Circle()).setIterations(iterations).setName('center'));
-        },
-
-        updateShapes() {
-            var x = this.radius;
-            var barWidth = this.thickness * this.radius;
-            var barOuterRadius = this.radius;
-            var barInnerRadius = barOuterRadius - barWidth;
-
-            // Track shape
-            var trackShape = this.getShape('track');
-            if ((this.trackColor != null) && (this.thickness > 0)) {
-                trackShape.fillStyle(this.trackColor);
-                FillArc(trackShape, x, x, barOuterRadius, barInnerRadius, 0, 360, false);
-            } else {
-                trackShape.reset();
-            }
-
-            // Bar shape
-            var barShape = this.getShape('bar');
-            if ((this.barColor != null) && (this.thickness > 0)) {
-                var anticlockwise, startAngle, endAngle;
-                if (this.value === 1) {
-                    anticlockwise = false;
-                    startAngle = 0;
-                    endAngle = 360;
+    const Pad = Phaser.Utils.String.Pad;
+    var GetStyle = function (style, canvas, context) {
+        if (style == null) {
+            return style;
+        }
+
+        switch (typeof (style)) {
+            case 'string': return style;
+            case 'number': return `#${Pad(Math.floor(style).toString(16), 6, '0', 1)}`;
+            case 'function': return style(canvas, context);
+            case 'object':
+                if (style.hasOwnProperty('r')) {
+                    if (style.hasOwnProperty('a')) {  // rgba
+                        return `rgba(${style.r},${style.g},${style.b},${style.a})`;
+                    } else {  // rgb
+                        return `rgb(${style.r},${style.g},${style.b})`;
+                    }
+                } else if (style.hasOwnProperty('h')) {
+                    if (style.hasOwnProperty('a')) {  // hsla
+                        return `hsla(${style.h},${style.s},${style.l},${style.a})`;
+                    } else {  // hsl
+                        return `hsl(${style.h},${style.s},${style.l})`;
+                    }
                 } else {
-                    anticlockwise = this.anticlockwise;
-                    startAngle = RadToDeg(this.startAngle);
-                    var deltaAngle = 360 * ((anticlockwise) ? (1 - this.value) : this.value);
-                    endAngle = deltaAngle + startAngle;
+                    return style; // Not a valid input
                 }
+            default: return style;
+        }
+    };
 
-                barShape.fillStyle(this.barColor);
-                FillArc(barShape, x, x, barOuterRadius + 1, barInnerRadius - 1, startAngle, endAngle, false);
+    var DrawCircle = function (
+        canvas, context,
+        x, y,
+        rx, ry,
+        fillStyle, strokeStyle, lineWidth,
+        startAngle, endAngle, anticlockwise
+    ) {
 
+        if (startAngle === undefined) {
+            startAngle = 0;
+        }
+        if (endAngle === undefined) {
+            endAngle = 2 * Math.PI;
+        }
+        if (anticlockwise === undefined) {
+            anticlockwise = false;
+        }
+
+        context.beginPath();
+
+        context.ellipse(x, y, rx, ry, 0, startAngle, endAngle, anticlockwise);
+
+        if (fillStyle != null) {
+            context.fillStyle = fillStyle;
+            context.fill();
+        }
+
+        if (strokeStyle != null) {
+            context.strokeStyle = strokeStyle;
+            context.lineWidth = lineWidth;
+            context.stroke();
+        }
+    };
+
+    var DrawText = function (
+        canvas, context,
+        x, y,
+        text, font,
+        fillStyle, strokeStyle, lineWidth,
+        textAlign, textBaseline
+    ) {
+
+        if ((lineWidth === undefined) && (strokeStyle != null)) {
+            lineWidth = 2;
+        }
+
+        if (textAlign === undefined) {
+            textAlign = 'start';
+        }
+
+        if (textBaseline === undefined) {
+            textBaseline = 'alphabetic';
+        }
+
+        context.font = font;
+        context.textAlign = textAlign;
+        context.textBaseline = textBaseline;
+
+        context.fillStyle = fillStyle;
+        context.strokeStyle = strokeStyle;
+
+        context.lineWidth = lineWidth;
+        context.lineCap = 'round';
+        context.lineJoin = 'round';
+
+        if ((strokeStyle != null) && (strokeStyle !== 'none') && (lineWidth > 0)) {
+            context.strokeText(text, x, y);
+        }
+
+        if ((fillStyle != null) && (fillStyle !== 'none')) {
+            context.fillText(text, x, y);
+        }
+
+    };
+
+    const PI2$1 = Phaser.Math.PI2;
+
+    var DrawContent = function () {
+        var x = this.radius;
+        var lineWidth = this.thickness * this.radius;
+        var barRadius = this.radius - (lineWidth / 2);
+        var centerRadius = this.radius - lineWidth;
+        var canvas = this.canvas,
+            context = this.context;
+
+        var anticlockwise = this.anticlockwise,
+            startAngle = this.startAngle,
+            endAngle = this.endAngle,
+            deltaAngle = this._deltaAngle;
+
+        // Draw track
+        if (this.trackColor && (lineWidth > 0)) {
+            context.save();
+
+            DrawCircle(
+                canvas, context,
+                x, x,
+                barRadius, barRadius,
+                undefined,
+                this.trackColor,
+                lineWidth,
+                startAngle, endAngle, anticlockwise
+            );
+
+            context.restore();
+        }
+
+        // Draw bar
+        if ((this.barColor) && (barRadius > 0)) {
+            var barEndAngle;
+
+            if (this.value >= 1) {
+                barEndAngle = endAngle;
             } else {
-                barShape.reset();
+                if (anticlockwise) {
+                    barEndAngle = (startAngle - (deltaAngle * this.value) + PI2$1) % PI2$1;
+                } else {
+                    barEndAngle = (startAngle + deltaAngle * this.value) % PI2$1;
+                }
             }
 
-            // Center shape
-            var centerShape = this.getShape('center');
-            if (this.centerColor && (barInnerRadius > 0)) {
-                centerShape
-                    .setCenterPosition(x, x)
-                    .setRadius(barInnerRadius)
-                    .fillStyle(this.centerColor);
+            context.save();
+
+            var style;
+            if (this.barColor2) {
+                var x0 = x + (barRadius * Math.cos(startAngle)),
+                    y0 = x + (barRadius * Math.sin(startAngle)),
+                    x1 = x + (barRadius * Math.cos(barEndAngle)),
+                    y1 = x + (barRadius * Math.sin(barEndAngle));
+                var grd = context.createLinearGradient(x0, y0, x1, y1);
+                grd.addColorStop(0, this.barColor2);
+                grd.addColorStop(1, this.barColor);
+                style = grd;
             } else {
-                centerShape.reset();
+                style = this.barColor;
             }
+
+            DrawCircle(
+                canvas, context,
+                x, x,
+                barRadius, barRadius,
+                undefined,
+                style,
+                lineWidth,
+                startAngle, barEndAngle, anticlockwise
+            );
+
+            context.restore();
+        }
+
+        // Draw center
+        if (this.centerColor && (centerRadius > 0)) {
+            var fillStyle;
+            if (this.centerColor2) {
+                fillStyle = this.context.createRadialGradient(x, x, 0, x, x, centerRadius);
+                fillStyle.addColorStop(0, this.centerColor);
+                fillStyle.addColorStop(1, this.centerColor2);
+            } else {
+                fillStyle = this.centerColor;
+            }
+
+            context.save();
+
+            DrawCircle(
+                canvas, context,
+                x, x,
+                centerRadius, centerRadius,
+                fillStyle
+            );
+
+            context.restore();
+        }
+
+        // Draw text
+        if (this.textFormatCallback && (this.textColor || this.textStrokeColor)) {
+
+            context.save();
+
+            DrawText(
+                canvas, context,
+                x, x,
+                this.getFormatText(), this.textFont,
+                this.textColor, this.textStrokeColor, this.textStrokeThickness,
+                'center',  // textAlign
+                'middle'   // textBaseline
+            );
+
+            context.restore();
         }
     };
 
@@ -14085,8 +13118,9 @@
     const Clamp = Phaser.Math.Clamp;
 
     const DefaultStartAngle = Phaser.Math.DegToRad(270);
+    const PI2 = Phaser.Math.PI2;
 
-    class CircularProgress extends ProgressBase(BaseShapes) {
+    class CircularProgress extends ProgressBase(Canvas) {
         constructor(scene, x, y, radius, barColor, value, config) {
             if (IsPlainObject(x)) {
                 config = x;
@@ -14096,27 +13130,43 @@
                 barColor = GetValue$1(config, 'barColor', undefined);
                 value = GetValue$1(config, 'value', 0);
             }
-
-            if (radius === undefined) { radius = 1; }
-
             var width = radius * 2;
             super(scene, x, y, width, width);
-            this.type = 'rexCircularProgress';
+            this.type = 'rexCircularProgressCanvas';
 
             this.bootProgressBase(config);
 
             this.setRadius(radius);
             this.setTrackColor(GetValue$1(config, 'trackColor', undefined));
             this.setBarColor(barColor);
+            this.setBarColor2(GetValue$1(config, 'barColor2', undefined));
             this.setCenterColor(GetValue$1(config, 'centerColor', undefined));
 
             this.setThickness(GetValue$1(config, 'thickness', 0.2));
             this.setStartAngle(GetValue$1(config, 'startAngle', DefaultStartAngle));
+            this.setEndAngle(GetValue$1(config, 'endAngle', this.startAngle + PI2));
             this.setAnticlockwise(GetValue$1(config, 'anticlockwise', false));
 
-            this.iterations = GetValue$1(config, 'iterations', 128);
+            this.setTextColor(GetValue$1(config, 'textColor', undefined));
+            this.setTextStrokeColor(
+                GetValue$1(config, 'textStrokeColor', undefined),
+                GetValue$1(config, 'textStrokeThickness', undefined)
+            );
 
-            this.buildShapes();
+            var textFont = GetValue$1(config, 'textFont', undefined);
+            if (textFont) {
+                this.setTextFont(textFont);
+            } else {
+                this.setTextFont(
+                    GetValue$1(config, 'textSize', '16px'),
+                    GetValue$1(config, 'textFamily', 'Courier'),
+                    GetValue$1(config, 'textStyle', '')
+                );
+            }
+            this.setTextFormatCallback(
+                GetValue$1(config, 'textFormatCallback', undefined),
+                GetValue$1(config, 'textFormatCallbackScope', undefined)
+            );
 
             this.setValue(value);
         }
@@ -14153,6 +13203,7 @@
         }
 
         set trackColor(value) {
+            value = GetStyle(value, this.canvas, this.context);
             this.dirty = this.dirty || (this._trackColor != value);
             this._trackColor = value;
         }
@@ -14167,12 +13218,28 @@
         }
 
         set barColor(value) {
+            value = GetStyle(value, this.canvas, this.context);
             this.dirty = this.dirty || (this._barColor != value);
             this._barColor = value;
         }
 
         setBarColor(color) {
             this.barColor = color;
+            return this;
+        }
+
+        get barColor2() {
+            return this._barColor2;
+        }
+
+        set barColor2(value) {
+            value = GetStyle(value, this.canvas, this.context);
+            this.dirty = this.dirty || (this._barColor2 != value);
+            this._barColor2 = value;
+        }
+
+        setBarColor2(color) {
+            this.barColor2 = color;
             return this;
         }
 
@@ -14183,10 +13250,26 @@
         set startAngle(value) {
             this.dirty = this.dirty || (this._startAngle != value);
             this._startAngle = value;
+            this._deltaAngle = GetDeltaAngle(this._startAngle, this._endAngle, this._anticlockwise);
         }
 
         setStartAngle(angle) {
             this.startAngle = angle;
+            return this;
+        }
+
+        get endAngle() {
+            return this._endAngle;
+        }
+
+        set endAngle(value) {
+            this.dirty = this.dirty || (this._endAngle != value);
+            this._endAngle = value;
+            this._deltaAngle = GetDeltaAngle(this._startAngle, this._endAngle, this._anticlockwise);
+        }
+
+        setEndAngle(angle) {
+            this.endAngle = angle;
             return this;
         }
 
@@ -14197,6 +13280,7 @@
         set anticlockwise(value) {
             this.dirty = this.dirty || (this._anticlockwise != value);
             this._anticlockwise = value;
+            this._deltaAngle = GetDeltaAngle(this._startAngle, this._endAngle, this._anticlockwise);
         }
 
         setAnticlockwise(anticlockwise) {
@@ -14227,21 +13311,133 @@
         }
 
         set centerColor(value) {
+            value = GetStyle(value, this.canvas, this.context);
             this.dirty = this.dirty || (this._centerColor != value);
             this._centerColor = value;
         }
 
-        setCenterColor(color) {
+        get centerColor2() {
+            return this._centerColor2;
+        }
+
+        set centerColor2(value) {
+            value = GetStyle(value, this.canvas, this.context);
+            this.dirty = this.dirty || (this._centerColor2 != value);
+            this._centerColor2 = value;
+        }
+
+        setCenterColor(color, color2) {
             this.centerColor = color;
+            this.centerColor2 = color2;
             return this;
         }
 
+        get textColor() {
+            return this._textColor;
+        }
+
+        set textColor(value) {
+            value = GetStyle(value, this.canvas, this.context);
+            this.dirty = this.dirty || (this._textColor != value);
+            this._textColor = value;
+        }
+
+        setTextColor(color) {
+            this.textColor = color;
+            return this;
+        }
+
+        get textStrokeColor() {
+            return this._textStrokeColor;
+        }
+
+        set textStrokeColor(value) {
+            value = GetStyle(value, this.canvas, this.context);
+            this.dirty = this.dirty || (this._textStrokeColor != value);
+            this._textStrokeColor = value;
+        }
+
+        get textStrokeThickness() {
+            return this._textStrokeThickness;
+        }
+
+        set textStrokeThickness(value) {
+            this.dirty = this.dirty || (this._textStrokeThickness != value);
+            this._textStrokeThickness = value;
+        }
+
+        setTextStrokeColor(color, thickness) {
+            if (thickness === undefined) {
+                thickness = 2;
+            }
+            this.textStrokeColor = color;
+            this.textStrokeThickness = thickness;
+            return this;
+        }
+
+        get textFont() {
+            return this._textFont;
+        }
+
+        set textFont(value) {
+            this.dirty = this.dirty || (this._textFont != value);
+            this._textFont = value;
+        }
+
+        setTextFont(fontSize, fontFamily, fontStyle) {
+            var font;
+            if (fontFamily === undefined) {
+                font = fontSize;
+            } else {
+                font = fontStyle + ' ' + fontSize + ' ' + fontFamily;
+            }
+            this.textFont = font;
+            return this;
+        }
+
+        setTextFormatCallback(callback, scope) {
+            this.textFormatCallback = callback;
+            this.textFormatCallbackScope = scope;
+            return this;
+        }
+
+        updateTexture() {
+            this.clear();
+            DrawContent.call(this);
+            super.updateTexture();
+            return this;
+        }
+
+        getFormatText(value) {
+            if (value === undefined) {
+                value = this.value;
+            }
+
+            var text;
+            if (this.textFormatCallbackScope) {
+                text = this.textFormatCallback(value);
+            } else {
+                text = this.textFormatCallback.call(this.textFormatCallbackScope, value);
+            }
+            return text;
+        }
     }
 
-    Object.assign(
-        CircularProgress.prototype,
-        ShapesUpdateMethods,
-    );
+    var GetDeltaAngle = function (startAngle, endAngle, anticlockwise) {
+        if (anticlockwise) {
+            if (startAngle <= endAngle) {
+                return (PI2 + startAngle) - endAngle;
+            } else {
+                return startAngle - endAngle;
+            }
+        } else {
+            if (startAngle >= endAngle) {
+                return (PI2 + endAngle) - startAngle;
+            } else {
+                return endAngle - startAngle;
+            }
+        }
+    };
 
     var GetDistance = Phaser.Math.Distance.Between;
 
@@ -14442,6 +13638,8 @@
                     GetValue(config, 'textFormatCallback', undefined),
                     GetValue(config, 'textFormatCallbackScope', undefined)
                 );
+                config.textFormatCallback = undefined;
+                config.textFormatCallbackScope = undefined;
             }
             // Create circular progress object
             var knob = new CircularProgress(scene, config);
