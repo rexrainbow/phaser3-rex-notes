@@ -1,4 +1,4 @@
-import CreateBackground from '../builders/CreateBackground';
+import CreateSeparator from '../builders/CreateSeparator.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -11,7 +11,7 @@ var AddSeparator = function (config) {
 
     // Create separator
     var separatorStyle = GetValue(this.styles, 'separator');
-    var separator = CreateBackground(scene, config, separatorStyle);
+    var separator = CreateSeparator(scene, config, separatorStyle);
 
     // Add separator
     this.add(
