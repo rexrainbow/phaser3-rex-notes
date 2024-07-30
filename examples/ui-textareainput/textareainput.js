@@ -40,6 +40,10 @@ class Demo extends Phaser.Scene {
                     'cursor.color': 'black',
                     'cursor.backgroundColor': 'white',
                 },
+
+                wrap: {
+                    // wrapMode: 'word'
+                }
             },
 
             slider: {

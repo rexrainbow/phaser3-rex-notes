@@ -152,7 +152,7 @@ var textAreaInput = scene.rexUI.add.textAreaInput({
             letterSpacing: 0,
             hAlign: 0,
             vAlign: 'center',  // For single line text input
-            charWrap: true,    // For single line text input
+            wrapMode: 'char',  // For single line text input
         },
 
         textArea: true,

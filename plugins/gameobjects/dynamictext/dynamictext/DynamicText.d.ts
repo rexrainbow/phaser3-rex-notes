@@ -142,7 +142,7 @@ declare namespace DynamicText {
 
         text?: string,
 
-        wrap?: IConfigWordWrap | IConfigVerticalWrap | IConfigWordWrap,
+        wrap?: IConfigWordWrap | IConfigVerticalWrap,
 
         testString?: string,
 
