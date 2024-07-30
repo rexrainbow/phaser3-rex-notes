@@ -33096,7 +33096,6 @@
     }
 
     var CreateBackground = function (scene, config, style) {
-        // TODO: Might create nine-slice as background
         return CreateBackground$1(scene, style);
     };
 
@@ -38240,6 +38239,10 @@
         return this;
     };
 
+    var CreateSeparator = function (scene, config, style) {
+        return CreateBackground$1(scene, style);
+    };
+
     const GetValue$m = Phaser.Utils.Objects.GetValue;
 
     var AddSeparator = function (config) {
@@ -38251,7 +38254,7 @@
 
         // Create separator
         var separatorStyle = GetValue$m(this.styles, 'separator');
-        var separator = CreateBackground(scene, config, separatorStyle);
+        var separator = CreateSeparator(scene, config, separatorStyle);
 
         // Add separator
         this.add(

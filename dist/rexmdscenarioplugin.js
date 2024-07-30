@@ -84619,7 +84619,6 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	}
 
 	var CreateBackground = function (scene, config, style) {
-	    // TODO: Might create nine-slice as background
 	    return CreateBackground$2(scene, style);
 	};
 
@@ -85902,6 +85901,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	    return this;
 	};
 
+	var CreateSeparator = function (scene, config, style) {
+	    return CreateBackground$2(scene, style);
+	};
+
 	const GetValue$d = Phaser.Utils.Objects.GetValue;
 
 	var AddSeparator = function (config) {
@@ -85913,7 +85916,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
 	    // Create separator
 	    var separatorStyle = GetValue$d(this.styles, 'separator');
-	    var separator = CreateBackground(scene, config, separatorStyle);
+	    var separator = CreateSeparator(scene, config, separatorStyle);
 
 	    // Add separator
 	    this.add(
