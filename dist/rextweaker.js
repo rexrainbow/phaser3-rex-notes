@@ -4827,7 +4827,7 @@
     };
 
     const GetValue$21 = Phaser.Utils.Objects.GetValue;
-    const Clamp$6 = Phaser.Math.Clamp;
+    const Clamp$7 = Phaser.Math.Clamp;
 
     class Timer {
         constructor(config) {
@@ -4953,11 +4953,11 @@
                     t = 1;
                     break;
             }
-            return Clamp$6(t, 0, 1);
+            return Clamp$7(t, 0, 1);
         }
 
         set t(value) {
-            value = Clamp$6(value, -1, 1);
+            value = Clamp$7(value, -1, 1);
             if (value < 0) {
                 this.state = DELAY;
                 this.nowTime = -this.delay * value;
@@ -19712,7 +19712,7 @@
     };
 
     const GetValue$1l = Phaser.Utils.Objects.GetValue;
-    const Clamp$5 = Phaser.Math.Clamp;
+    const Clamp$6 = Phaser.Math.Clamp;
 
     function ProgressBase (BaseClass) {
         class ProgressBase extends BaseClass {
@@ -19738,7 +19738,7 @@
             }
 
             set value(value) {
-                value = Clamp$5(value, 0, 1);
+                value = Clamp$6(value, 0, 1);
 
                 var oldValue = this._value;
                 var valueChanged = (oldValue != value);
@@ -29411,7 +29411,7 @@
 
     const GetValue$11 = Phaser.Utils.Objects.GetValue;
     const IsPlainObject$c = Phaser.Utils.Objects.IsPlainObject;
-    const Clamp$4 = Phaser.Math.Clamp;
+    const Clamp$5 = Phaser.Math.Clamp;
     const SnapTo = Phaser.Math.Snap.To;
 
     class Slider extends ProgressBase(Sizer) {
@@ -29560,7 +29560,7 @@
                 value = SnapTo(value, this.gap);
             }
             var oldValue = this._value;
-            this._value = Clamp$4(value, 0, 1);
+            this._value = Clamp$5(value, 0, 1);
 
             if (oldValue !== this._value) {
                 this.updateThumb(this._value);
@@ -30290,7 +30290,7 @@
     }
 
     const GetValue$Z = Phaser.Utils.Objects.GetValue;
-    const Clamp$3 = Phaser.Math.Clamp;
+    const Clamp$4 = Phaser.Math.Clamp;
 
     class Scroller extends ComponentBase {
         constructor(gameObject, config) {
@@ -30486,7 +30486,7 @@
             }
 
             if (clamp) {
-                value = Clamp$3(value, this.minValue, this.maxValue);
+                value = Clamp$4(value, this.minValue, this.maxValue);
             }
 
             this.value = value;
@@ -31198,7 +31198,7 @@
     };
 
     const GetValue$V = Phaser.Utils.Objects.GetValue;
-    const Clamp$2 = Phaser.Math.Clamp;
+    const Clamp$3 = Phaser.Math.Clamp;
 
     let Scrollable$1 = class Scrollable extends Sizer {
         constructor(scene, config) {
@@ -31449,7 +31449,7 @@
                 clamp = false;
             }
             if (clamp) {
-                value = Clamp$2(value, this.bottomChildOY, this.topChildOY);
+                value = Clamp$3(value, this.bottomChildOY, this.topChildOY);
             }
             this.childOY = value;
             return this;
@@ -31465,7 +31465,7 @@
                 clamp = false;
             }
             if (clamp) {
-                value = Clamp$2(value, 0, 1);
+                value = Clamp$3(value, 0, 1);
             }
             this.t = value;
             return this;
@@ -31501,7 +31501,7 @@
                 clamp = false;
             }
             if (clamp) {
-                value = Clamp$2(value, this.leftChildOX, this.rightChildOX);
+                value = Clamp$3(value, this.leftChildOX, this.rightChildOX);
             }
             this.childOX = value;
             return this;
@@ -31517,7 +31517,7 @@
                 clamp = false;
             }
             if (clamp) {
-                value = Clamp$2(value, 0, 1);
+                value = Clamp$3(value, 0, 1);
             }
             this.s = value;
             return this;
@@ -38618,7 +38618,7 @@
         e.stopPropagation();
     };
 
-    var EnterClose = function () {
+    var EnterClose$1 = function () {
         this.close();
         this.emit('keydown-ENTER', this.parent, this);
         return this;
@@ -38684,7 +38684,7 @@
         this.initText();
 
         if (this.enterCloseEnable) {
-            this.scene.input.keyboard.once('keydown-ENTER', EnterClose, this);
+            this.scene.input.keyboard.once('keydown-ENTER', EnterClose$1, this);
         }
 
         // There is no cursor-position-change event, 
@@ -38726,6 +38726,10 @@
         this.isOpened = false;
 
         this.updateText();
+
+        if (this.enterCloseEnable) {
+            this.scene.input.keyboard.off('keydown-ENTER', EnterClose, this);
+        }
 
         this.scene.sys.events.off('postupdate', this.updateText, this);
 
@@ -39318,6 +39322,11 @@
         var textObject = hiddenTextEdit.parent;
         var text = textObject.text;
 
+        if (hiddenTextEdit.requestCursorPosition !== null) {
+            hiddenTextEdit.setCursorPosition(hiddenTextEdit.requestCursorPosition);
+            hiddenTextEdit.requestCursorPosition = null;
+        }
+
         var cursorPosition = hiddenTextEdit.cursorPosition;
         if (hiddenTextEdit.prevCursorPosition === cursorPosition) {
             return;
@@ -39407,6 +39416,7 @@
             this.prevSelectionStart = null;
             this.prevSelectionEnd = null;
             this.firstClickAfterOpen = false;
+            this.requestCursorPosition = null;
 
 
             gameObject
@@ -39505,6 +39515,15 @@
             }
 
             this.selectAllWhenFocus = enable;
+            return this;
+        }
+
+        setRequestCursorPosition(value) {
+            if (!this.isOpened) {
+                return this;
+            }
+
+            this.requestCursorPosition = value;
             return this;
         }
     }
@@ -39608,6 +39627,22 @@
         }
 
         return config;
+    };
+
+    var RegisterArrowKeysEvent = function () {
+        var keyEventManager = this.scene.input.keyboard;
+        this.textEdit
+            .on('open', function () {
+                keyEventManager
+                    .on('keydown-UP', this.cursorMoveUp, this)
+                    .on('keydown-DOWN', this.cursorMoveDown, this);
+            }, this)
+            .on('close', function () {
+                keyEventManager
+                    .off('keydown-UP', this.cursorMoveUp, this)
+                    .off('keydown-DOWN', this.cursorMoveDown, this);
+            }, this);
+
     };
 
     var IsEmpty = function (source) {
@@ -40167,6 +40202,103 @@
 
     };
 
+    const Clamp$2 = Phaser.Math.Clamp;
+
+    var GetIndex = function (characterCountOfLines, position) {
+        var result = { lineIndex: 0, position: 0 };
+
+        if (position < 0) {
+            return result;
+        }
+
+        for (var li = 0, lcnt = characterCountOfLines.length; li < lcnt; li++) {
+            var characterCount = characterCountOfLines[li];
+            if (position <= characterCount) {
+                result.lineIndex = li;
+                break;
+            }
+            position -= characterCount;
+        }
+        result.position = position;
+
+        return result;
+    };
+
+    var GetPosition = function (characterCountOfLines, index) {
+        var position = 0;
+        var lineIndex = index.lineIndex;
+        if (lineIndex < 0) {
+            return position;
+        }
+
+        for (var li = 0, lcnt = characterCountOfLines.length; li < lcnt; li++) {
+            var characterCount = characterCountOfLines[li];
+            if (lineIndex > li) {
+                position += characterCount;
+            } else if (lineIndex === li) {
+                position += Math.min(index.position, characterCount);
+            } else {
+                break;
+            }
+        }
+
+        return position;
+    };
+
+    var MoveCursorMethods = {
+        cursorMoveLeft() {
+            if (!this.isOpened) {
+                return this;
+            }
+
+            // Move cursor to previous character
+            var position = Clamp$2(this.cursorPosition - 1, 0, this.inputText.length);
+            this.setCursorPosition(position);
+
+            return this;
+        },
+
+        cursorMoveRight() {
+            if (!this.isOpened) {
+                return this;
+            }
+
+            // Move cursor to next character
+            var position = Clamp$2(this.cursorPosition + 1, 0, this.inputText.length);
+            this.setCursorPosition(position);
+
+            return this;
+        },
+
+        cursorMoveUp() {
+            if (!this.isOpened) {
+                return this;
+            }
+
+            var result = GetIndex(this.characterCountOfLines, this.cursorPosition);
+            result.lineIndex -= 1;
+
+            var position = Clamp$2(GetPosition(this.characterCountOfLines, result), 0, this.inputText.length);
+            this.setCursorPosition(position);
+
+            return this;
+        },
+
+        cursorMoveDown() {
+            if (!this.isOpened) {
+                return this;
+            }
+
+            var result = GetIndex(this.characterCountOfLines, this.cursorPosition);
+            result.lineIndex += 1;
+
+            var position = Clamp$2(GetPosition(this.characterCountOfLines, result), 0, this.inputText.length);
+            this.setCursorPosition(position);
+
+            return this;
+        },
+    };
+
     const IsPlainObject$3 = Phaser.Utils.Objects.IsPlainObject;
 
     class CanvasInput extends DynamicText {
@@ -40200,10 +40332,13 @@
             this.contentHeight = undefined;
             this.lineHeight = undefined;
             this.linesCount = undefined;
+            this.characterCountOfLines = [];
 
             this._text;
 
             this.textEdit = CreateHiddenTextEdit(this, config);
+
+            RegisterArrowKeysEvent.call(this);
 
             if (config.focusStyle) {
                 Object.assign(focusStyle, config.focusStyle);
@@ -40299,6 +40434,22 @@
             this.contentHeight = result.linesHeight;
             this.lineHeight = result.lineHeight;
             this.linesCount = result.lines.length;
+
+            this.characterCountOfLines.length = 0;
+            var wrapLines = result.lines;
+            for (var li = 0, lcnt = wrapLines.length; li < lcnt; li++) {
+                var line = wrapLines[li].children;
+                var characterCount = 0;
+                for (var ci = 0, ccnt = line.length; ci < ccnt; ci++) {
+                    var child = line[ci];
+                    if (child.active && !child.removed && IsChar(child)) {
+                        characterCount++;
+                    }
+                }
+
+                this.characterCountOfLines.push(characterCount);
+            }
+
             return result;
         }
 
@@ -40441,6 +40592,24 @@
             return this;
         }
 
+        get cursorPosition() {
+            return this.textEdit.cursorPosition;
+        }
+
+        set cursorPosition(value) {
+            if (!this.isOpened) {
+                return;
+            }
+
+            this.textEdit.cursorPosition = value;
+            this.textEdit.requestCursorPosition = value;
+        }
+
+        setCursorPosition(value) {
+            this.cursorPosition = value;
+            return this;
+        }
+
         get topTextOY() {
             return 0;
         }
@@ -40498,6 +40667,7 @@
     Object.assign(
         CanvasInput.prototype,
         SetTextOXYMethods,
+        MoveCursorMethods,
     );
 
     var CreateInputText = function (scene, config, deepCloneConfig) {

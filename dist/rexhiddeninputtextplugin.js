@@ -385,7 +385,7 @@
         e.stopPropagation();
     };
 
-    var EnterClose = function () {
+    var EnterClose$1 = function () {
         this.close();
         this.emit('keydown-ENTER', this.parent, this);
         return this;
@@ -451,7 +451,7 @@
         this.initText();
 
         if (this.enterCloseEnable) {
-            this.scene.input.keyboard.once('keydown-ENTER', EnterClose, this);
+            this.scene.input.keyboard.once('keydown-ENTER', EnterClose$1, this);
         }
 
         // There is no cursor-position-change event, 
@@ -493,6 +493,10 @@
         this.isOpened = false;
 
         this.updateText();
+
+        if (this.enterCloseEnable) {
+            this.scene.input.keyboard.off('keydown-ENTER', EnterClose, this);
+        }
 
         this.scene.sys.events.off('postupdate', this.updateText, this);
 
