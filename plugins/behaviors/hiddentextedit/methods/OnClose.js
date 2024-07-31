@@ -6,6 +6,10 @@ var OnClose = function () {
 
     this.updateText();
 
+    if (this.enterCloseEnable) {
+        this.scene.input.keyboard.off('keydown-ENTER', EnterClose, this);
+    }
+
     this.scene.sys.events.off('postupdate', this.updateText, this);
 
     if (this.clickOutSideTarget) {
