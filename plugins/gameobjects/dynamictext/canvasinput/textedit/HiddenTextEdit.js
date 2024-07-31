@@ -19,6 +19,7 @@ class HiddenTextEdit extends HiddenTextEditBase {
         this.prevSelectionStart = null;
         this.prevSelectionEnd = null;
         this.firstClickAfterOpen = false;
+        this.requestCursorPosition = null;
 
 
         gameObject
@@ -117,6 +118,15 @@ class HiddenTextEdit extends HiddenTextEditBase {
         }
 
         this.selectAllWhenFocus = enable;
+        return this;
+    }
+
+    setRequestCursorPosition(value) {
+        if (!this.isOpened) {
+            return this;
+        }
+
+        this.requestCursorPosition = value;
         return this;
     }
 }

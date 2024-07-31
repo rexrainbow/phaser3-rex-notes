@@ -4,6 +4,11 @@ var MoveCursor = function (hiddenTextEdit) {
     var textObject = hiddenTextEdit.parent;
     var text = textObject.text;
 
+    if (hiddenTextEdit.requestCursorPosition !== null) {
+        hiddenTextEdit.setCursorPosition(hiddenTextEdit.requestCursorPosition);
+        hiddenTextEdit.requestCursorPosition = null;
+    }
+
     var cursorPosition = hiddenTextEdit.cursorPosition;
     if (hiddenTextEdit.prevCursorPosition === cursorPosition) {
         return;

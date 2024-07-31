@@ -143,6 +143,9 @@ declare class CanvasInput extends DynamicText {
     setMinLength(value: number): this;
     minLength: number;
 
+    setCursorPosition(value: number): this;
+    cursorPosition: number;
+
     readonly contentWidth: number;
     readonly contentHeight: number;
     readonly linesCount: number;
@@ -159,5 +162,10 @@ declare class CanvasInput extends DynamicText {
     setTextOXByPercentage(s: number): this;
     getTextOXPercentage(): number;
     s: number;
+
+    cursorMoveLeft(): this;
+    cursorMoveRight(): this;
+    cursorMoveUp(): this;
+    cursorMoveDown(): this;
 
 }

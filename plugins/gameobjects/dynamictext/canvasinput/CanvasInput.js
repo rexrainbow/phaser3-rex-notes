@@ -2,12 +2,14 @@ import DynamicText from '../dynamictext/DynamicText.js';
 import CreateHiddenTextEdit from './textedit/CreateHiddenTextEdit.js';
 import InjectDefaultConfig from './methods/InjectDefaultConfig.js';
 import ExtractByPrefix from '../../../utils/object/ExtractByPrefix.js';
+import RegisterArrowKeysEvent from './methods/RegisterArrowKeysEvent.js';
 import RegisterCursorStyle from './methods/RegisterCursorStyle.js';
 import RegisterFocusStyle from './methods/RegisterFocusStyle.js';
 import CreateInsertCursorChild from './methods/CreateInsertCursorChild.js';
 import SetText from './methods/SetText.js';
 import { IsChar } from '../dynamictext/bob/Types.js';
 import SetTextOXYMethods from './methods/SetTextOXYMethods.js';
+import MoveCursorMethods from './methods/MoveCursorMethods.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
@@ -42,10 +44,13 @@ class CanvasInput extends DynamicText {
         this.contentHeight = undefined;
         this.lineHeight = undefined;
         this.linesCount = undefined;
+        this.characterCountOfLines = [];
 
         this._text;
 
         this.textEdit = CreateHiddenTextEdit(this, config);
+
+        RegisterArrowKeysEvent.call(this);
 
         if (config.focusStyle) {
             Object.assign(focusStyle, config.focusStyle);
@@ -141,6 +146,22 @@ class CanvasInput extends DynamicText {
         this.contentHeight = result.linesHeight;
         this.lineHeight = result.lineHeight;
         this.linesCount = result.lines.length;
+
+        this.characterCountOfLines.length = 0;
+        var wrapLines = result.lines;
+        for (var li = 0, lcnt = wrapLines.length; li < lcnt; li++) {
+            var line = wrapLines[li].children;
+            var characterCount = 0;
+            for (var ci = 0, ccnt = line.length; ci < ccnt; ci++) {
+                var child = line[ci];
+                if (child.active && !child.removed && IsChar(child)) {
+                    characterCount++;
+                }
+            }
+
+            this.characterCountOfLines.push(characterCount);
+        }
+
         return result;
     }
 
@@ -283,6 +304,24 @@ class CanvasInput extends DynamicText {
         return this;
     }
 
+    get cursorPosition() {
+        return this.textEdit.cursorPosition;
+    }
+
+    set cursorPosition(value) {
+        if (!this.isOpened) {
+            return;
+        }
+
+        this.textEdit.cursorPosition = value;
+        this.textEdit.requestCursorPosition = value;
+    }
+
+    setCursorPosition(value) {
+        this.cursorPosition = value;
+        return this;
+    }
+
     get topTextOY() {
         return 0;
     }
@@ -340,6 +379,7 @@ var DefaultParseTextCallback = function (text) {
 Object.assign(
     CanvasInput.prototype,
     SetTextOXYMethods,
+    MoveCursorMethods,
 )
 
 export default CanvasInput;
