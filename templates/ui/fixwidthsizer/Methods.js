@@ -7,6 +7,8 @@ import HasWidthWrap from './HasWidthWrap.js';
 import RunWidthWrap from './RunWidthWrap.js';
 import HasHeightWrap from './HasHeightWrap.js';
 import RunHeightWrap from './RunHeightWrap.js';
+import GetExpandedChildWidth from './GetExpandedChildWidth.js';
+import GetExpandedChildHeight from './GetExpandedChildHeight.js';
 import AddChildMethods from './AddChildMethods.js';
 import RemoveChildMethods from './RemoveChildMethods.js';
 import SortChildrenMethods from '../basesizer/utils/SortChildrenMethods.js';
@@ -21,6 +23,9 @@ var methods = {
     runWidthWrap: RunWidthWrap,
     hasHeightWrap: HasHeightWrap,
     runHeightWrap: RunHeightWrap,
+    getExpandedChildWidth: GetExpandedChildWidth,
+    getExpandedChildHeight: GetExpandedChildHeight,
+
 };
 
 Object.assign(

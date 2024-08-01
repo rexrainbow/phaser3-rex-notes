@@ -31,7 +31,7 @@ var RunChildrenWrap = function (lineWidth) {
                 }
 
                 if (child.isRexSizer) {
-                    child.layout(); // Use original size
+                    child.runLayout(this, undefined, undefined, true);
                 }
 
                 childWidth = this.getChildWidth(child);

@@ -52,7 +52,7 @@ class ColorInput extends Sizer {
             var fitRatio = (squareExpandSwatch) ? 1 : 0;
             this.add(
                 swatch,
-                { proportion: 0, expand: false, fitRatio: fitRatio }
+                { proportion: 0, expand: true, fitRatio: fitRatio }
             );
         }
 
