@@ -7,8 +7,6 @@ var AddScrollable = function (config) {
         config = {};
     }
 
-    var scene = this.scene;
-
     // Create scrollable
     var scrollableStyle = GetValue(this.styles, 'scrollable') || {};
     scrollableStyle.tweaker = this.styles;

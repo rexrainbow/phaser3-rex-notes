@@ -7,8 +7,6 @@ var AddTab = function (config) {
         config = {};
     }
 
-    var scene = this.scene;
-
     // Create tab
     var tabStyle = GetValue(this.styles, 'tab') || {};
     tabStyle.tweaker = this.styles;

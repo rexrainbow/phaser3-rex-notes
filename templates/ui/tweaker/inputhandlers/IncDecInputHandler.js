@@ -45,7 +45,7 @@ export default {
         var buttons = CreateButtons(scene, {
             expand: false
         });
-        var proportion = (style.parentOrientation === 1) ? 1 : 0;
+        var proportion = (style.defaultExpandWidth) ? 1 : 0;
         gameObject.add(
             buttons,
             { proportion: proportion, expand: true }

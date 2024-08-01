@@ -25,7 +25,13 @@ var AddInput = function (object, key, config) {
 
     // Create InputRow
     var inputRowStyle = this.styles.inputRow || {};
-    inputRowStyle.parentOrientation = this.styles.orientation;
+
+    if (!this.isWrapLines) {
+        inputRowStyle.defaultExpandWidth = (this.styles.orientation === 1);
+    } else {
+        inputRowStyle.defaultExpandWidth = true;
+    }
+
     var inputSizer = CreateInputRow.call(this, this.scene, config, inputRowStyle);
     if (!inputSizer) {
         // Can't create inputField

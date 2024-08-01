@@ -48,7 +48,7 @@ export default {
         var trackSize = GetValue(sliderConfig, trackSizeKey);
         var slider = CreateSlider(scene, sliderConfig);
 
-        var defaultProportion = (style.parentOrientation === 1) ? 2 : 0;
+        var defaultProportion = (style.defaultExpandWidth) ? 2 : 0;
         var proportion = GetValue(style, 'proportion.range.slider', defaultProportion);
         var expand = (trackSize === undefined);
         gameObject.add(
@@ -60,7 +60,7 @@ export default {
         var inputText = CreateInputText(scene, inputTextConfig)
             .setNumberInput();
 
-        var defaultProportion = (style.parentOrientation === 1) ? 1 : 0;
+        var defaultProportion = (style.defaultExpandWidth) ? 1 : 0;
         var proportion = GetValue(style, 'proportion.range.inputText', defaultProportion);
         gameObject.add(
             inputText,

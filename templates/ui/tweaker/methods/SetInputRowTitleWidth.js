@@ -1,5 +1,7 @@
 var SetInputRowTitleWidth = function (width) {
-    width -= this.getInnerPadding('left');
+    if (!this.isWrapLines) {
+        width -= this.getInnerPadding('left');
+    }
 
     var children = this.sizerChildren;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
@@ -10,7 +12,7 @@ var SetInputRowTitleWidth = function (width) {
 
         if (child.setMinTitleWidth) {  // InputRow
             child.setMinTitleWidth(width);
-        } else if (child.setInputRowTitleWidth) {  // Folder, TabPages
+        } else if (child.setInputRowTitleWidth) {
             child.setInputRowTitleWidth(width);
         }
     }

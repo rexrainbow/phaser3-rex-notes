@@ -12,8 +12,6 @@ var AddColumns = function (config) {
         }
     }
 
-    var scene = this.scene;
-
     // Create columns
     var columnsStyle = GetValue(this.styles, 'columns') || {};
     columnsStyle.tweaker = this.styles;

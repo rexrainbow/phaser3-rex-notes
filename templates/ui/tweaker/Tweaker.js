@@ -1,7 +1,7 @@
-import TweakerShell from './TweakerShell.js';
+import TweakerShellClassGenerator from './TweakerShellClassGenerator.js';
 import RegisterDefaultInputHandlers from './methods/RegisterDefaultInputHandlers.js';
 
-class Tweaker extends TweakerShell {
+class Tweaker extends TweakerShellClassGenerator() {
     constructor(scene, config) {
         if (config === undefined) {
             config = {};
