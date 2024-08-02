@@ -1,13 +1,11 @@
 export default {
     getMaxInputRowTitleWidth() {
-        var child = this.childrenMap.child;  // tweaker
-        var titleWidth = child.getMaxInputRowTitleWidth();
-        return titleWidth;
+        // Ignore Title of InputRows
+        return 0;
     },
 
     setInputRowTitleWidth(width) {
-        var child = this.childrenMap.child;  // tweaker
-        child.setInputRowTitleWidth(width);
+        // Ignore Title of InputRows
         return this;
     }
 }

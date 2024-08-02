@@ -22,8 +22,6 @@ class Tweaker extends GenerateTweakerShellClass() {
         super(scene, config);
         this.type = 'rexTweaker';
 
-        this.inputHandlers = [];
-
         RegisterDefaultInputHandlers.call(this);
     }
 

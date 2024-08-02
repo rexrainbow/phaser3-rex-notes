@@ -15,6 +15,8 @@ var CreateWrapLines = function (parent, config, style) {
     var tweakerConfig = {
         root: GetValue(style, 'root'),
         styles: GetValue(style, 'tweaker'),
+        space: GetValue(style, 'space'),
+        align: GetValue(style, 'align', 5),
 
         wrap: true,
         itemWidth: GetValue(config, 'itemWidth', itemWidth)
@@ -30,7 +32,6 @@ var CreateWrapLines = function (parent, config, style) {
     var wrapLines = new WrapLines(scene, {
         header: title,
         child: tweakerChild,
-        space: GetValue(style, 'space'),
     });
     scene.add.existing(wrapLines);
 

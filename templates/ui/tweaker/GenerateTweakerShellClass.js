@@ -25,7 +25,13 @@ var GenerateTweakerShellClass = function (config) {
             this.type = 'rexTweakerShell';
             this.isWrapLines = isWrapLines;
 
-            this.root = config.root || this;
+            if (!config.root) {
+                this.root = this;
+                this.inputHandlers = [];
+            } else {
+                this.root = config.root;
+                this.inputHandlers = this.root.inputHandlers;
+            }
 
             this.styles = GetValue(config, 'styles') || {};
             this.styles.orientation = this.orientation;
@@ -36,7 +42,11 @@ var GenerateTweakerShellClass = function (config) {
             }
             this.itemWidth = itemWidth;
 
-            if ((this.root === this) && (this.orientation === 1)) {
+            if (
+                isWrapLines ||
+                ((this.root === this) && (this.orientation === 1))
+            ) {
+
                 var alignTitle = GetValue(config, 'inputRow.alignTitle');
                 if (alignTitle === undefined) {
                     var titleProportion = GetValue(this.styles, 'inputRow.proportion.title');
@@ -48,11 +58,10 @@ var GenerateTweakerShellClass = function (config) {
                     }
 
                 }
-                this.alignInputRowTitle = alignTitle;
+                this.alignInputRowTitleStartFlag = alignTitle;
 
             } else {
-                this.alignInputRowTitle = false;
-                this.inputHandlers = this.root.inputHandlers;
+                this.alignInputRowTitleStartFlag = false;
 
             }
 
@@ -66,7 +75,7 @@ var GenerateTweakerShellClass = function (config) {
         preLayout() {
             super.preLayout();
 
-            if (this.alignInputRowTitle) {
+            if (this.alignInputRowTitleStartFlag) {
                 this.setInputRowTitleWidth(this.getMaxInputRowTitleWidth());
             }
         }

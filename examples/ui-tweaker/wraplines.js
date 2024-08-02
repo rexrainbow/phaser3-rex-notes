@@ -26,7 +26,7 @@ class Demo extends Phaser.Scene {
             .setPosition(400, 0)
 
         var wrapLines = panel
-            .addWrapLines({ itemWidth: 240 })
+            .addWrapLines({ itemWidth: 235 })
 
         wrapLines
             .addInput(
@@ -298,9 +298,9 @@ var CreatePanel = function (scene) {
                 space: { column: 5 },
             },
 
-            // wrapLines: {
-            //     itemWidth: 240,
-            // },
+            wrapLines: {
+                space: { line: 10 }
+            },
 
             separator: {
                 height: 5,
