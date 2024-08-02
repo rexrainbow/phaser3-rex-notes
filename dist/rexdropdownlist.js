@@ -3796,12 +3796,12 @@
     };
 
     // Override
-    var GetExpandedChildWidth$1 = function (child, parentWidth) {
+    var GetExpandedChildWidth$2 = function (child, parentWidth) {
         return parentWidth;
     };
 
     // Override
-    var GetExpandedChildHeight$1 = function (child, parentHeight) {
+    var GetExpandedChildHeight$2 = function (child, parentHeight) {
         return parentHeight;
     };
 
@@ -3935,8 +3935,14 @@
 
         var size, width, height;
 
-        var runWidthWrap = isTopmostParent && this.hasWidthWrap();
-        var runHeightWrap = isTopmostParent && this.hasHeightWrap();
+        var runWidthWrap, runHeightWrap;
+        if (isTopmostParent || parent.runChildrenWrapFlag) {
+            runWidthWrap = this.hasWidthWrap();
+            runHeightWrap = this.hasHeightWrap();
+        } else {
+            runWidthWrap = false;
+            runHeightWrap = false;
+        }
 
         size = ResolveSize(this, newWidth, newHeight, runWidthWrap, runHeightWrap);
         if (!size) {
@@ -11488,8 +11494,8 @@
         runHeightWrap: RunHeightWrap$2,
         getChildWidth: GetChildWidth,
         getChildHeight: GetChildHeight,
-        getExpandedChildWidth: GetExpandedChildWidth$1,
-        getExpandedChildHeight: GetExpandedChildHeight$1,
+        getExpandedChildWidth: GetExpandedChildWidth$2,
+        getExpandedChildHeight: GetExpandedChildHeight$2,
 
         getChildrenWidth: GetChildrenWidth$2,
         getChildrenHeight: GetChildrenHeight$2,
@@ -11559,6 +11565,7 @@
             this.sizerChildren = undefined; // [] or {}
             this.childrenMap = {};
             this.layoutedChildren = undefined;
+            this.runChildrenWrapFlag = false;
 
             this.enableLayoutWarn(false);
 
@@ -11986,7 +11993,7 @@
         return result + this.space.top + this.space.bottom;
     };
 
-    var GetExpandedChildWidth = function (child, parentWidth) {
+    var GetExpandedChildWidth$1 = function (child, parentWidth) {
         if (parentWidth === undefined) {
             parentWidth = this.width;
         }
@@ -12008,7 +12015,7 @@
         return childWidth;
     };
 
-    var GetExpandedChildHeight = function (child, parentHeight) {
+    var GetExpandedChildHeight$1 = function (child, parentHeight) {
         if (parentHeight === undefined) {
             parentHeight = this.height;
         }
@@ -12684,8 +12691,8 @@
     var methods$4 = {
         getChildrenWidth: GetChildrenWidth$1,
         getChildrenHeight: GetChildrenHeight$1,
-        getExpandedChildWidth: GetExpandedChildWidth,
-        getExpandedChildHeight: GetExpandedChildHeight,
+        getExpandedChildWidth: GetExpandedChildWidth$1,
+        getExpandedChildHeight: GetExpandedChildHeight$1,
         getChildrenSizers: GetChildrenSizers$1,
         preLayout: PreLayout$1,
         layoutChildren: LayoutChildren$1,
@@ -19564,7 +19571,7 @@
                     }
 
                     if (child.isRexSizer) {
-                        child.layout(); // Use original size
+                        child.runLayout(this);
                     }
 
                     childWidth = this.getChildWidth(child);
@@ -19714,6 +19721,16 @@
         }
     };
 
+    // Override
+    var GetExpandedChildWidth = function (child, parentWidth) {
+        return undefined;
+    };
+
+    // Override
+    var GetExpandedChildHeight = function (child, parentHeight) {
+        return undefined;
+    };
+
     const DistanceBetween = Phaser.Math.Distance.Between;
 
     var GetNearestChildIndex = function (x, y) {
@@ -19860,6 +19877,9 @@
         runWidthWrap: RunWidthWrap,
         hasHeightWrap: HasHeightWrap,
         runHeightWrap: RunHeightWrap,
+        getExpandedChildWidth: GetExpandedChildWidth,
+        getExpandedChildHeight: GetExpandedChildHeight,
+
     };
 
     Object.assign(
@@ -19953,9 +19973,10 @@
             }
 
             super(scene, x, y, minWidth, minHeight, config);
-
             this.type = 'rexFixWidthSizer';
             this.sizerChildren = [];
+            this.runChildrenWrapFlag = true;
+
             this.setOrientation(GetValue$4(config, 'orientation', 0));
             this.setItemSpacing(GetValue$4(config, 'space.item', 0));
             this.setLineSpacing(GetValue$4(config, 'space.line', 0));

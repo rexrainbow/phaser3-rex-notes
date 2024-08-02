@@ -3796,12 +3796,12 @@
     };
 
     // Override
-    var GetExpandedChildWidth$3 = function (child, parentWidth) {
+    var GetExpandedChildWidth$4 = function (child, parentWidth) {
         return parentWidth;
     };
 
     // Override
-    var GetExpandedChildHeight$3 = function (child, parentHeight) {
+    var GetExpandedChildHeight$4 = function (child, parentHeight) {
         return parentHeight;
     };
 
@@ -3935,8 +3935,14 @@
 
         var size, width, height;
 
-        var runWidthWrap = isTopmostParent && this.hasWidthWrap();
-        var runHeightWrap = isTopmostParent && this.hasHeightWrap();
+        var runWidthWrap, runHeightWrap;
+        if (isTopmostParent || parent.runChildrenWrapFlag) {
+            runWidthWrap = this.hasWidthWrap();
+            runHeightWrap = this.hasHeightWrap();
+        } else {
+            runWidthWrap = false;
+            runHeightWrap = false;
+        }
 
         size = ResolveSize(this, newWidth, newHeight, runWidthWrap, runHeightWrap);
         if (!size) {
@@ -11488,8 +11494,8 @@
         runHeightWrap: RunHeightWrap$3,
         getChildWidth: GetChildWidth,
         getChildHeight: GetChildHeight,
-        getExpandedChildWidth: GetExpandedChildWidth$3,
-        getExpandedChildHeight: GetExpandedChildHeight$3,
+        getExpandedChildWidth: GetExpandedChildWidth$4,
+        getExpandedChildHeight: GetExpandedChildHeight$4,
 
         getChildrenWidth: GetChildrenWidth$4,
         getChildrenHeight: GetChildrenHeight$4,
@@ -11559,6 +11565,7 @@
             this.sizerChildren = undefined; // [] or {}
             this.childrenMap = {};
             this.layoutedChildren = undefined;
+            this.runChildrenWrapFlag = false;
 
             this.enableLayoutWarn(false);
 
@@ -11986,7 +11993,7 @@
         return result + this.space.top + this.space.bottom;
     };
 
-    var GetExpandedChildWidth$2 = function (child, parentWidth) {
+    var GetExpandedChildWidth$3 = function (child, parentWidth) {
         if (parentWidth === undefined) {
             parentWidth = this.width;
         }
@@ -12008,7 +12015,7 @@
         return childWidth;
     };
 
-    var GetExpandedChildHeight$2 = function (child, parentHeight) {
+    var GetExpandedChildHeight$3 = function (child, parentHeight) {
         if (parentHeight === undefined) {
             parentHeight = this.height;
         }
@@ -12684,8 +12691,8 @@
     var methods$4 = {
         getChildrenWidth: GetChildrenWidth$3,
         getChildrenHeight: GetChildrenHeight$3,
-        getExpandedChildWidth: GetExpandedChildWidth$2,
-        getExpandedChildHeight: GetExpandedChildHeight$2,
+        getExpandedChildWidth: GetExpandedChildWidth$3,
+        getExpandedChildHeight: GetExpandedChildHeight$3,
         getChildrenSizers: GetChildrenSizers$3,
         preLayout: PreLayout$2,
         layoutChildren: LayoutChildren$3,
@@ -12888,7 +12895,7 @@
         return result + this.space.top + this.space.bottom;
     };
 
-    var GetExpandedChildWidth$1 = function (child, parentWidth) {
+    var GetExpandedChildWidth$2 = function (child, parentWidth) {
         if (parentWidth === undefined) {
             parentWidth = this.width;
         }
@@ -12904,7 +12911,7 @@
         return childWidth;
     };
 
-    var GetExpandedChildHeight$1 = function (child, parentHeight) {
+    var GetExpandedChildHeight$2 = function (child, parentHeight) {
         if (parentHeight === undefined) {
             parentHeight = this.height;
         }
@@ -13201,8 +13208,8 @@
     var methods$3 = {
         getChildrenWidth: GetChildrenWidth$2,
         getChildrenHeight: GetChildrenHeight$2,
-        getExpandedChildWidth: GetExpandedChildWidth$1,
-        getExpandedChildHeight: GetExpandedChildHeight$1,
+        getExpandedChildWidth: GetExpandedChildWidth$2,
+        getExpandedChildHeight: GetExpandedChildHeight$2,
         getChildrenSizers: GetChildrenSizers$2,
         layoutChildren: LayoutChildren$2,
     };
@@ -14309,7 +14316,7 @@
                     }
 
                     if (child.isRexSizer) {
-                        child.layout(); // Use original size
+                        child.runLayout(this);
                     }
 
                     childWidth = this.getChildWidth(child);
@@ -14459,6 +14466,16 @@
         }
     };
 
+    // Override
+    var GetExpandedChildWidth$1 = function (child, parentWidth) {
+        return undefined;
+    };
+
+    // Override
+    var GetExpandedChildHeight$1 = function (child, parentHeight) {
+        return undefined;
+    };
+
     const DistanceBetween = Phaser.Math.Distance.Between;
 
     var GetNearestChildIndex = function (x, y) {
@@ -14605,6 +14622,9 @@
         runWidthWrap: RunWidthWrap$1,
         hasHeightWrap: HasHeightWrap,
         runHeightWrap: RunHeightWrap$1,
+        getExpandedChildWidth: GetExpandedChildWidth$1,
+        getExpandedChildHeight: GetExpandedChildHeight$1,
+
     };
 
     Object.assign(
@@ -14698,9 +14718,10 @@
             }
 
             super(scene, x, y, minWidth, minHeight, config);
-
             this.type = 'rexFixWidthSizer';
             this.sizerChildren = [];
+            this.runChildrenWrapFlag = true;
+
             this.setOrientation(GetValue$6(config, 'orientation', 0));
             this.setItemSpacing(GetValue$6(config, 'space.item', 0));
             this.setLineSpacing(GetValue$6(config, 'space.line', 0));

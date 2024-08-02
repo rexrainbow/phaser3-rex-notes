@@ -3796,12 +3796,12 @@
     };
 
     // Override
-    var GetExpandedChildWidth = function (child, parentWidth) {
+    var GetExpandedChildWidth$1 = function (child, parentWidth) {
         return parentWidth;
     };
 
     // Override
-    var GetExpandedChildHeight = function (child, parentHeight) {
+    var GetExpandedChildHeight$1 = function (child, parentHeight) {
         return parentHeight;
     };
 
@@ -3935,8 +3935,14 @@
 
         var size, width, height;
 
-        var runWidthWrap = isTopmostParent && this.hasWidthWrap();
-        var runHeightWrap = isTopmostParent && this.hasHeightWrap();
+        var runWidthWrap, runHeightWrap;
+        if (isTopmostParent || parent.runChildrenWrapFlag) {
+            runWidthWrap = this.hasWidthWrap();
+            runHeightWrap = this.hasHeightWrap();
+        } else {
+            runWidthWrap = false;
+            runHeightWrap = false;
+        }
 
         size = ResolveSize(this, newWidth, newHeight, runWidthWrap, runHeightWrap);
         if (!size) {
@@ -11488,8 +11494,8 @@
         runHeightWrap: RunHeightWrap$1,
         getChildWidth: GetChildWidth,
         getChildHeight: GetChildHeight,
-        getExpandedChildWidth: GetExpandedChildWidth,
-        getExpandedChildHeight: GetExpandedChildHeight,
+        getExpandedChildWidth: GetExpandedChildWidth$1,
+        getExpandedChildHeight: GetExpandedChildHeight$1,
 
         getChildrenWidth: GetChildrenWidth$1,
         getChildrenHeight: GetChildrenHeight$1,
@@ -11559,6 +11565,7 @@
             this.sizerChildren = undefined; // [] or {}
             this.childrenMap = {};
             this.layoutedChildren = undefined;
+            this.runChildrenWrapFlag = false;
 
             this.enableLayoutWarn(false);
 
@@ -12053,7 +12060,7 @@
                     }
 
                     if (child.isRexSizer) {
-                        child.layout(); // Use original size
+                        child.runLayout(this);
                     }
 
                     childWidth = this.getChildWidth(child);
@@ -12201,6 +12208,16 @@
             this.rexSizer.resolved = true;
             RunHeightWrap$1.call(this, height);
         }
+    };
+
+    // Override
+    var GetExpandedChildWidth = function (child, parentWidth) {
+        return undefined;
+    };
+
+    // Override
+    var GetExpandedChildHeight = function (child, parentHeight) {
+        return undefined;
     };
 
     const DistanceBetween = Phaser.Math.Distance.Between;
@@ -12408,6 +12425,9 @@
         runWidthWrap: RunWidthWrap,
         hasHeightWrap: HasHeightWrap,
         runHeightWrap: RunHeightWrap,
+        getExpandedChildWidth: GetExpandedChildWidth,
+        getExpandedChildHeight: GetExpandedChildHeight,
+
     };
 
     Object.assign(
@@ -12520,9 +12540,10 @@
             }
 
             super(scene, x, y, minWidth, minHeight, config);
-
             this.type = 'rexFixWidthSizer';
             this.sizerChildren = [];
+            this.runChildrenWrapFlag = true;
+
             this.setOrientation(GetValue(config, 'orientation', 0));
             this.setItemSpacing(GetValue(config, 'space.item', 0));
             this.setLineSpacing(GetValue(config, 'space.line', 0));

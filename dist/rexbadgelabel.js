@@ -3935,8 +3935,14 @@
 
         var size, width, height;
 
-        var runWidthWrap = isTopmostParent && this.hasWidthWrap();
-        var runHeightWrap = isTopmostParent && this.hasHeightWrap();
+        var runWidthWrap, runHeightWrap;
+        if (isTopmostParent || parent.runChildrenWrapFlag) {
+            runWidthWrap = this.hasWidthWrap();
+            runHeightWrap = this.hasHeightWrap();
+        } else {
+            runWidthWrap = false;
+            runHeightWrap = false;
+        }
 
         size = ResolveSize(this, newWidth, newHeight, runWidthWrap, runHeightWrap);
         if (!size) {
@@ -11559,6 +11565,7 @@
             this.sizerChildren = undefined; // [] or {}
             this.childrenMap = {};
             this.layoutedChildren = undefined;
+            this.runChildrenWrapFlag = false;
 
             this.enableLayoutWarn(false);
 
