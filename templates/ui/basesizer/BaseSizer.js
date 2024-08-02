@@ -23,6 +23,7 @@ class Base extends Container {
         this.sizerChildren = undefined; // [] or {}
         this.childrenMap = {};
         this.layoutedChildren = undefined;
+        this.runChildrenWrapFlag = false;
 
         this.enableLayoutWarn(false);
 

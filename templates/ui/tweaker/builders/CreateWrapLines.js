@@ -11,13 +11,13 @@ var CreateWrapLines = function (parent, config, style) {
     var title = new Title(scene, titleStyle);
     scene.add.existing(title);
 
-    var defaultItemWidth = GetValue(style, 'itemWidth', 0);
+    var itemWidth = GetValue(style, 'itemWidth', 0);
     var tweakerConfig = {
         root: GetValue(style, 'root'),
         styles: GetValue(style, 'tweaker'),
 
         wrap: true,
-        itemWidth: GetValue(config, 'itemWidth', defaultItemWidth)
+        itemWidth: GetValue(config, 'itemWidth', itemWidth)
     }
 
     var backgroundStyle = GetValue(style, 'background');

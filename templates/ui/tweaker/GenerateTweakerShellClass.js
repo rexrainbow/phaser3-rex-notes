@@ -6,7 +6,7 @@ import SetValue from '../../../plugins/utils/object/SetValue.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var TweakerShellClassGenerator = function (config) {
+var GenerateTweakerShellClass = function (config) {
     var isWrapLines = GetValue(config, 'wrap', false);
     var BaseClass = (!isWrapLines) ? Sizer : FixWidthSizer;
 
@@ -30,7 +30,11 @@ var TweakerShellClassGenerator = function (config) {
             this.styles = GetValue(config, 'styles') || {};
             this.styles.orientation = this.orientation;
 
-            this.itemWidth = GetValue(config, 'itemWidth', 0);
+            var itemWidth = GetValue(config, 'itemWidth');
+            if (itemWidth === undefined) {
+                itemWidth = GetValue(this.styles, 'itemWidth', 0);
+            }
+            this.itemWidth = itemWidth;
 
             if ((this.root === this) && (this.orientation === 1)) {
                 var alignTitle = GetValue(config, 'inputRow.alignTitle');
@@ -72,22 +76,13 @@ var TweakerShellClassGenerator = function (config) {
                 addToScene = true;
             }
 
-            var TweakerShellClass = TweakerShellClassGenerator(config);
+            var TweakerShellClass = GenerateTweakerShellClass(config);
             var gameObject = new TweakerShellClass(this.scene, config);
             if (addToScene) {
                 this.scene.add.existing(gameObject);
             }
 
             return gameObject;
-        }
-
-        add(gameObject, config) {
-            if (gameObject.setMinWidth) {
-                gameObject.setMinWidth(this.itemWidth);
-            }
-
-            super.add(gameObject, config);
-            return this;
         }
 
     }
@@ -102,4 +97,4 @@ var TweakerShellClassGenerator = function (config) {
 
 
 
-export default TweakerShellClassGenerator;
+export default GenerateTweakerShellClass;

@@ -43,23 +43,30 @@ var AddInput = function (object, key, config) {
         return this;
     }
 
-    var inputField = inputSizer.childrenMap.inputField;
+    // Add InputRow to Tweaker
+    if (!this.isWrapLines) {
+        var proportion;
+        if (this.orientation === 1) { // y
+            proportion = 0;
+        } else { // x
+            proportion = (this.itemWidth > 0) ? 0 : 1;
+            inputSizer.setMinWidth(this.itemWidth);
+        }
 
-    var proportion;
-    if (this.orientation === 1) { // y
-        proportion = 0;
-    } else { // x
-        proportion = (this.itemWidth > 0) ? 0 : 1;
+        this.add(
+            inputSizer,
+            { proportion: proportion, expand: true }
+        );
+
+    } else {
         inputSizer.setMinWidth(this.itemWidth);
+        this.add(inputSizer);
+
     }
 
-    // Add InputRow to Tweaker
-    this.add(
-        inputSizer,
-        { proportion: proportion, expand: true }
-    );
 
     if (config.onValueChange) {
+        var inputField = inputSizer.childrenMap.inputField;
         inputField.on('valuechange', config.onValueChange);
     }
 

@@ -22,9 +22,10 @@ class FixWidthSizer extends BaseSizer {
         }
 
         super(scene, x, y, minWidth, minHeight, config);
-
         this.type = 'rexFixWidthSizer';
         this.sizerChildren = [];
+        this.runChildrenWrapFlag = true;
+
         this.setOrientation(GetValue(config, 'orientation', 0));
         this.setItemSpacing(GetValue(config, 'space.item', 0));
         this.setLineSpacing(GetValue(config, 'space.line', 0));

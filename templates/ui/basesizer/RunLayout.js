@@ -1,5 +1,5 @@
 // Override
-var RunLayout = function (parent, newWidth, newHeight, forceWrapping) {
+var RunLayout = function (parent, newWidth, newHeight) {
     // Skip hidden or !dirty sizer
     if (this.ignoreLayout) {
         return this;
@@ -13,8 +13,14 @@ var RunLayout = function (parent, newWidth, newHeight, forceWrapping) {
 
     var size, width, height;
 
-    var runWidthWrap = (isTopmostParent || forceWrapping) && this.hasWidthWrap();
-    var runHeightWrap = (isTopmostParent || forceWrapping) && this.hasHeightWrap();
+    var runWidthWrap, runHeightWrap;
+    if (isTopmostParent || parent.runChildrenWrapFlag) {
+        runWidthWrap = this.hasWidthWrap();
+        runHeightWrap = this.hasHeightWrap();
+    } else {
+        runWidthWrap = false;
+        runHeightWrap = false;
+    }
 
     size = ResolveSize(this, newWidth, newHeight, runWidthWrap, runHeightWrap);
     if (!size) {
