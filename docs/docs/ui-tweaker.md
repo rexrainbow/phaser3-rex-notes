@@ -1538,6 +1538,18 @@ tweaker.addRows(properties, target);
         ```
         - `$target` : Override `target` value pass to remainder `$properties`.
             - `undefined` : Use previous `target` value. Default behavior.
+    - Wrap
+        ```javascript
+        {
+            $type: 'wrap', title: '',
+            // $target: 
+            $properties: [
+                // ...
+            ]
+        }
+        ```
+        - `$target` : Override `target` value pass to remainder `$properties`.
+            - `undefined` : Use previous `target` value. Default behavior.
     - Scrollable
         ```javascript
         {
