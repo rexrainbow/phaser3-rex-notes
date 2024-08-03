@@ -1,4 +1,5 @@
 import RemoveElement from './RemoveElement.js';
+import EnterClose from './EnterClose.js';
 
 var OnClose = function () {
 
