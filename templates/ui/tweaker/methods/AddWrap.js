@@ -8,12 +8,12 @@ var AddWrap = function (config) {
     }
 
     // Create wrap
-    var wrapLinesStyle = GetValue(this.styles, 'wrap') || {};
-    wrapLinesStyle.tweaker = this.styles;
-    wrapLinesStyle.root = this.root;
-    var wrap = CreateWrap(this, config, wrapLinesStyle);
-    delete wrapLinesStyle.tweaker;
-    delete wrapLinesStyle.root;
+    var wrapStyle = GetValue(this.styles, 'wrap') || {};
+    wrapStyle.tweaker = this.styles;
+    wrapStyle.root = this.root;
+    var wrap = CreateWrap(this, config, wrapStyle);
+    delete wrapStyle.tweaker;
+    delete wrapStyle.root;
 
     // Add wrap
     this.add(

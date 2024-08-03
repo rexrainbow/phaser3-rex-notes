@@ -26,7 +26,7 @@ var AddInput = function (object, key, config) {
     // Create InputRow
     var inputRowStyle = this.styles.inputRow || {};
 
-    if (!this.isWrapLines) {
+    if (!this.isWrapMode) {
         inputRowStyle.defaultExpandWidth = (this.styles.orientation === 1);
     } else {
         inputRowStyle.defaultExpandWidth = true;
@@ -44,7 +44,7 @@ var AddInput = function (object, key, config) {
     }
 
     // Add InputRow to Tweaker
-    if (!this.isWrapLines) {
+    if (!this.isWrapMode) {
         var proportion;
         if (this.orientation === 1) { // y
             proportion = 0;

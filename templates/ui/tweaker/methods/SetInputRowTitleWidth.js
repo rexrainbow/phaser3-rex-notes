@@ -1,5 +1,5 @@
 var SetInputRowTitleWidth = function (width) {
-    if (!this.isWrapLines) {
+    if (!this.isWrapMode) {
         width -= this.getInnerPadding('left');
     }
 

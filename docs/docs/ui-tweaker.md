@@ -1380,6 +1380,29 @@ var childrenTweakers = tweaker.addColumns({
 
 See [Style of columns](#style-of-columns)
 
+
+### Add wrap
+
+A tweaker panel which Wrap input rows into multiple lines.
+
+```javascript
+var childTweaker = tweaker.addWrap({
+    // title: titleA,
+
+    itemWidth: 0,
+});
+
+// childTweaker.addInput(...)
+```
+
+- `childTweaker` : Child tweaker game object. Add input rows by `addInput` method.
+- `title` Title of folder. Click title can collapse or expand child tweaker game object.
+- `itemWidth` : Width of input row.
+
+
+See [Style of wrap](#style-of-wrap)
+
+
 ### Add scrollable
 
 [Scrollable(Panel)](ui-scrollablepanel.md) contains child tweaker game object and slider.
@@ -3436,6 +3459,105 @@ Style of columns is defined in
     }
 }
 ```
+
+
+#### Style of wrap
+
+Style of wrap is defined in 
+
+- `styles.wrap`
+
+```javascript
+{
+    // style: {...}
+    styles: {
+        wrap: {
+            title: {
+                background: {
+                    radius: 0,
+                    // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
+
+                    color: undefined,
+                    alpha: undefined,
+                    strokeColor: undefined,
+                    strokeAlpha: undefined,
+                    strokeWidth: undefined,
+                },
+
+                text: {
+                    fontFamily: 'Courier',
+                    fontSize: '16px',
+                    fontStyle: '',
+                    backgroundColor: null,
+                    color: '#fff',
+                    stroke: '#fff',
+                    strokeThickness: 0,
+                    shadow: {
+                        offsetX: 0,
+                        offsetY: 0,
+                        color: '#000',
+                        blur: 0,
+                        stroke: false,
+                        fill: false
+                    },                  
+                    padding: {
+                        left: 0,
+                        right: 0,
+                        top: 0,
+                        bottom: 0,
+                    },
+                    // more text styles
+                },
+
+                iconSize: undefined,
+                iconWidth: undefined, iconHeight: undefined,
+
+                space: {
+                    left: 0, right: 0, top: 0, bottom:0, 
+                    icon: 0, text: 0
+                },
+
+                expandedIcon: {
+                    color: undefined,
+                    alpha: 1,
+
+                    strokeColor: undefined,
+                    strokeAlpha: 1,
+                    strokeWidth: 1,
+                    arrowOnly: false,
+
+                    easeDuration: 0,
+                }
+            },
+
+            background: {
+                radius: 0,
+                // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
+
+                color: undefined,
+                alpha: undefined,
+                strokeColor: undefined,
+                strokeAlpha: undefined,
+                strokeWidth: undefined,
+            },
+
+            space: {
+                item: 0, line: 0
+            },
+
+            align: 'justify-cneter'
+        }
+    }
+}
+```
+
+- `align` : Align children of a line.
+    - `0`, `'left'` : Align children of a line to left/top side.
+    - `1`, `'right'` : Align children of a line to right/bottom side.
+    - `2`, `'center'` : Align children of a line to ceter.
+    - `3`, `'justify'`, `'justify-left'` : If remainder space is less or equal than 25%, then justify children. Else align children to left/top side.
+    - `4`, `'justify-right'` : If remainder space is less or equal than 25%, then justify children. Else align children to right/bottom side.
+    - `5`, `'justify-cneter'` : If remainder space is less or equal than 25%, then justify children. Else align children to center.
 
 
 #### Style of scrollable

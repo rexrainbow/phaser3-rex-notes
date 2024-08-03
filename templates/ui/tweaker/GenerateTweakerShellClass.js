@@ -7,8 +7,8 @@ import SetValue from '../../../plugins/utils/object/SetValue.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 var GenerateTweakerShellClass = function (config) {
-    var isWrapLines = GetValue(config, 'wrap', false);
-    var BaseClass = (!isWrapLines) ? Sizer : FixWidthSizer;
+    var isWrapMode = GetValue(config, 'wrap', false);
+    var BaseClass = (!isWrapMode) ? Sizer : FixWidthSizer;
 
     class TweakerShell extends BaseClass {
         constructor(scene, config) {
@@ -17,13 +17,13 @@ var GenerateTweakerShellClass = function (config) {
             }
 
             if (config.orientation === undefined) {
-                config.orientation = (!isWrapLines) ? 1 : 0;
+                config.orientation = (!isWrapMode) ? 1 : 0;
             }
 
             // Create sizer
             super(scene, config);
             this.type = 'rexTweakerShell';
-            this.isWrapLines = isWrapLines;
+            this.isWrapMode = isWrapMode;
 
             if (!config.root) {
                 this.root = this;
@@ -43,7 +43,7 @@ var GenerateTweakerShellClass = function (config) {
             this.itemWidth = itemWidth;
 
             if (
-                isWrapLines ||
+                isWrapMode ||
                 ((this.root === this) && (this.orientation === 1))
             ) {
 
