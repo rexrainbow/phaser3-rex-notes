@@ -25,10 +25,10 @@ class Demo extends Phaser.Scene {
             .setOrigin(0.5, 0)
             .setPosition(400, 0)
 
-        var wrapLines = panel
-            .addWrapLines({ itemWidth: 235 })
+        var wrap = panel
+            .addWrap({ itemWidth: 235 })
 
-        wrapLines
+        wrap
             .addInput(
                 gameObject, 'x',
                 {

@@ -1,9 +1,9 @@
-import WrapLines from '../gameobjects/wraplines/WrapLines.js';
+import Wrap from '../gameobjects/wrap/Wrap.js';
 import Title from '../gameobjects/label/Title.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var CreateWrapLines = function (parent, config, style) {
+var CreateWrap = function (parent, config, style) {
     var scene = parent.scene;
 
     // Create title
@@ -29,13 +29,13 @@ var CreateWrapLines = function (parent, config, style) {
 
     var tweakerChild = parent.createTweaker(tweakerConfig);
 
-    var wrapLines = new WrapLines(scene, {
+    var wrap = new Wrap(scene, {
         header: title,
         child: tweakerChild,
     });
-    scene.add.existing(wrapLines);
+    scene.add.existing(wrap);
 
-    return wrapLines;
+    return wrap;
 }
 
-export default CreateWrapLines;
+export default CreateWrap;

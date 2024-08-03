@@ -4,7 +4,7 @@ import InputRowTitleWidthMethods from './InputRowTitleWidthMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class WrapLines extends Sizer {
+class Wrap extends Sizer {
     constructor(scene, config) {
         if (config === undefined) {
             config = {};
@@ -12,7 +12,7 @@ class WrapLines extends Sizer {
         config.orientation = 'y';
 
         super(scene, config);
-        this.type = 'rexTweaker.WrapLines';
+        this.type = 'rexTweaker.Wrap';
 
         // Add elements
         var background = GetValue(config, 'background', undefined);
@@ -62,9 +62,9 @@ class WrapLines extends Sizer {
 }
 
 Object.assign(
-    WrapLines.prototype,
+    Wrap.prototype,
     BindingTargetMethods,
     InputRowTitleWidthMethods,
 )
 
-export default WrapLines;
+export default Wrap;

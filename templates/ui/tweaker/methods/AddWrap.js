@@ -1,30 +1,30 @@
-import CreateWrapLines from '../builders/CreateWrapLines.js';
+import CreateWrap from '../builders/CreateWrap.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var AddWrapLines = function (config) {
+var AddWrap = function (config) {
     if (config === undefined) {
         config = {};
     }
 
-    // Create wrapLines
-    var wrapLinesStyle = GetValue(this.styles, 'wrapLines') || {};
+    // Create wrap
+    var wrapLinesStyle = GetValue(this.styles, 'wrap') || {};
     wrapLinesStyle.tweaker = this.styles;
     wrapLinesStyle.root = this.root;
-    var wrapLines = CreateWrapLines(this, config, wrapLinesStyle);
+    var wrap = CreateWrap(this, config, wrapLinesStyle);
     delete wrapLinesStyle.tweaker;
     delete wrapLinesStyle.root;
 
-    // Add wrapLines
+    // Add wrap
     this.add(
-        wrapLines,
+        wrap,
         { expand: true }
     );
 
     // Set content
-    wrapLines.setTitle(config);
+    wrap.setTitle(config);
 
-    var childTweaker = wrapLines.childrenMap.child;
+    var childTweaker = wrap.childrenMap.child;
 
     if (config.key) {
         this.root.addChildrenMap(config.key, childTweaker);
@@ -33,4 +33,4 @@ var AddWrapLines = function (config) {
     return childTweaker;
 }
 
-export default AddWrapLines;
+export default AddWrap;
