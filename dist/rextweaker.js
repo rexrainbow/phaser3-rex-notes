@@ -12110,7 +12110,7 @@
         }
     };
 
-    const Wrap$1 = Phaser.Math.Wrap;
+    const Wrap$2 = Phaser.Math.Wrap;
 
     var LayoutChildren$5 = function () {
         var children = this.sizerChildren;
@@ -12128,7 +12128,7 @@
             if (startChildIndex === 0) {
                 childIndex = i;
             } else {
-                childIndex = Wrap$1((i + startChildIndex), 0, cnt);
+                childIndex = Wrap$2((i + startChildIndex), 0, cnt);
             }
 
             if (this.rtl) {
@@ -21017,7 +21017,7 @@
     };
 
     const DistanceBetween$1 = Phaser.Math.Distance.Between;
-    const Wrap = Phaser.Math.Wrap;
+    const Wrap$1 = Phaser.Math.Wrap;
     const Linear$5 = Phaser.Math.Linear;
 
     var AppendFromPathSegment = function (srcPathData, accumulationLengths, startT, endT, destPathData) {
@@ -21093,7 +21093,7 @@
         } else if ((t % 1) === 0) {
             return 1;
         }
-        return Wrap(t, 0, 1);
+        return Wrap$1(t, 0, 1);
     };
 
     var PathSegmentMethods = {
@@ -36548,7 +36548,7 @@
 
     const GetValue$A = Phaser.Utils.Objects.GetValue;
 
-    class WrapLines extends Sizer {
+    class Wrap extends Sizer {
         constructor(scene, config) {
             if (config === undefined) {
                 config = {};
@@ -36556,7 +36556,7 @@
             config.orientation = 'y';
 
             super(scene, config);
-            this.type = 'rexTweaker.WrapLines';
+            this.type = 'rexTweaker.Wrap';
 
             // Add elements
             var background = GetValue$A(config, 'background', undefined);
@@ -36606,14 +36606,14 @@
     }
 
     Object.assign(
-        WrapLines.prototype,
+        Wrap.prototype,
         BindingTargetMethods$2,
         InputRowTitleWidthMethods$1,
     );
 
     const GetValue$z = Phaser.Utils.Objects.GetValue;
 
-    var CreateWrapLines = function (parent, config, style) {
+    var CreateWrap = function (parent, config, style) {
         var scene = parent.scene;
 
         // Create title
@@ -36636,40 +36636,40 @@
 
         var tweakerChild = parent.createTweaker(tweakerConfig);
 
-        var wrapLines = new WrapLines(scene, {
+        var wrap = new Wrap(scene, {
             header: title,
             child: tweakerChild,
         });
-        scene.add.existing(wrapLines);
+        scene.add.existing(wrap);
 
-        return wrapLines;
+        return wrap;
     };
 
     const GetValue$y = Phaser.Utils.Objects.GetValue;
 
-    var AddWrapLines = function (config) {
+    var AddWrap = function (config) {
         if (config === undefined) {
             config = {};
         }
 
-        // Create wrapLines
-        var wrapLinesStyle = GetValue$y(this.styles, 'wrapLines') || {};
-        wrapLinesStyle.tweaker = this.styles;
-        wrapLinesStyle.root = this.root;
-        var wrapLines = CreateWrapLines(this, config, wrapLinesStyle);
-        delete wrapLinesStyle.tweaker;
-        delete wrapLinesStyle.root;
+        // Create wrap
+        var wrapStyle = GetValue$y(this.styles, 'wrap') || {};
+        wrapStyle.tweaker = this.styles;
+        wrapStyle.root = this.root;
+        var wrap = CreateWrap(this, config, wrapStyle);
+        delete wrapStyle.tweaker;
+        delete wrapStyle.root;
 
-        // Add wrapLines
+        // Add wrap
         this.add(
-            wrapLines,
+            wrap,
             { expand: true }
         );
 
         // Set content
-        wrapLines.setTitle(config);
+        wrap.setTitle(config);
 
-        var childTweaker = wrapLines.childrenMap.child;
+        var childTweaker = wrap.childrenMap.child;
 
         if (config.key) {
             this.root.addChildrenMap(config.key, childTweaker);
@@ -38242,7 +38242,7 @@
         // Create InputRow
         var inputRowStyle = this.styles.inputRow || {};
 
-        if (!this.isWrapLines) {
+        if (!this.isWrapMode) {
             inputRowStyle.defaultExpandWidth = (this.styles.orientation === 1);
         } else {
             inputRowStyle.defaultExpandWidth = true;
@@ -38260,7 +38260,7 @@
         }
 
         // Add InputRow to Tweaker
-        if (!this.isWrapLines) {
+        if (!this.isWrapMode) {
             var proportion;
             if (this.orientation === 1) { // y
                 proportion = 0;
@@ -38582,7 +38582,7 @@
     };
 
     var SetInputRowTitleWidth = function (width) {
-        if (!this.isWrapLines) {
+        if (!this.isWrapMode) {
             width -= this.getInnerPadding('left');
         }
 
@@ -38609,7 +38609,7 @@
         addFolder: AddFolder,
         addTab: AddTab,
         addColumns: AddColumns,
-        addWrapLines: AddWrapLines,
+        addWrap: AddWrap,
         addScrollable: AddScrollable,
         addInput: AddInput,
         addButtons: AddButtons,
@@ -38626,8 +38626,8 @@
     const GetValue$l = Phaser.Utils.Objects.GetValue;
 
     var GenerateTweakerShellClass = function (config) {
-        var isWrapLines = GetValue$l(config, 'wrap', false);
-        var BaseClass = (!isWrapLines) ? Sizer : FixWidthSizer;
+        var isWrapMode = GetValue$l(config, 'wrap', false);
+        var BaseClass = (!isWrapMode) ? Sizer : FixWidthSizer;
 
         class TweakerShell extends BaseClass {
             constructor(scene, config) {
@@ -38636,13 +38636,13 @@
                 }
 
                 if (config.orientation === undefined) {
-                    config.orientation = (!isWrapLines) ? 1 : 0;
+                    config.orientation = (!isWrapMode) ? 1 : 0;
                 }
 
                 // Create sizer
                 super(scene, config);
                 this.type = 'rexTweakerShell';
-                this.isWrapLines = isWrapLines;
+                this.isWrapMode = isWrapMode;
 
                 if (!config.root) {
                     this.root = this;
@@ -38662,7 +38662,7 @@
                 this.itemWidth = itemWidth;
 
                 if (
-                    isWrapLines ||
+                    isWrapMode ||
                     ((this.root === this) && (this.orientation === 1))
                 ) {
 
@@ -38823,7 +38823,7 @@
         e.stopPropagation();
     };
 
-    var EnterClose$1 = function () {
+    var EnterClose = function () {
         this.close();
         this.emit('keydown-ENTER', this.parent, this);
         return this;
@@ -38889,7 +38889,7 @@
         this.initText();
 
         if (this.enterCloseEnable) {
-            this.scene.input.keyboard.once('keydown-ENTER', EnterClose$1, this);
+            this.scene.input.keyboard.once('keydown-ENTER', EnterClose, this);
         }
 
         // There is no cursor-position-change event, 

@@ -9026,6 +9026,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#add-wrap" class="md-nav__link">
+    Add wrap
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#add-scrollable" class="md-nav__link">
     Add scrollable
   </a>
@@ -9141,6 +9148,13 @@
           <li class="md-nav__item">
   <a href="#style-of-columns" class="md-nav__link">
     Style of columns
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#style-of-wrap" class="md-nav__link">
+    Style of wrap
   </a>
   
 </li>
@@ -10206,6 +10220,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#add-wrap" class="md-nav__link">
+    Add wrap
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#add-scrollable" class="md-nav__link">
     Add scrollable
   </a>
@@ -10321,6 +10342,13 @@
           <li class="md-nav__item">
   <a href="#style-of-columns" class="md-nav__link">
     Style of columns
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#style-of-wrap" class="md-nav__link">
+    Style of wrap
   </a>
   
 </li>
@@ -11747,6 +11775,22 @@ actionSize: undefined,
 </li>
 </ul>
 <p>See <a href="#style-of-columns">Style of columns</a></p>
+<h3 id="add-wrap">Add wrap<a class="headerlink" href="#add-wrap" title="Permanent link">&para;</a></h3>
+<p>A tweaker panel which Wrap input rows into multiple lines.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">childTweaker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">tweaker</span><span class="p">.</span><span class="nx">addWrap</span><span class="p">({</span>
+<span class="w">    </span><span class="c1">// title: titleA,</span>
+
+<span class="w">    </span><span class="nx">itemWidth</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="p">});</span>
+
+<span class="c1">// childTweaker.addInput(...)</span>
+</code></pre></div>
+<ul>
+<li><code>childTweaker</code> : Child tweaker game object. Add input rows by <code>addInput</code> method.</li>
+<li><code>title</code> Title of folder. Click title can collapse or expand child tweaker game object.</li>
+<li><code>itemWidth</code> : Width of input row.</li>
+</ul>
+<p>See <a href="#style-of-wrap">Style of wrap</a></p>
 <h3 id="add-scrollable">Add scrollable<a class="headerlink" href="#add-scrollable" title="Permanent link">&para;</a></h3>
 <p><a href="../ui-scrollablepanel/">Scrollable(Panel)</a> contains child tweaker game object and slider.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">childTweaker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">tweaker</span><span class="p">.</span><span class="nx">addScrollable</span><span class="p">({</span>
@@ -11879,6 +11923,21 @@ actionSize: undefined,
 <span class="w">            </span><span class="p">]</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="c1">// ... More columns</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li><code>$target</code> : Override <code>target</code> value pass to remainder <code>$properties</code>.<ul>
+<li><code>undefined</code> : Use previous <code>target</code> value. Default behavior.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Wrap
+    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nx">$type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;wrap&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="c1">// $target: </span>
+<span class="w">    </span><span class="nx">$properties</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="c1">// ...</span>
 <span class="w">    </span><span class="p">]</span>
 <span class="p">}</span>
 </code></pre></div><ul>
@@ -13761,6 +13820,104 @@ actionSize: undefined,
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
+<h4 id="style-of-wrap">Style of wrap<a class="headerlink" href="#style-of-wrap" title="Permanent link">&para;</a></h4>
+<p>Style of wrap is defined in </p>
+<ul>
+<li><code>styles.wrap</code></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="c1">// style: {...}</span>
+<span class="w">    </span><span class="nx">styles</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">wrap</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">background</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nx">radius</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">                    </span><span class="c1">// radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}</span>
+
+<span class="w">                    </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">alpha</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">strokeColor</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">strokeAlpha</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">strokeWidth</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">                </span><span class="p">},</span>
+
+<span class="w">                </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nx">fontFamily</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Courier&#39;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">fontSize</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;16px&#39;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">fontStyle</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">backgroundColor</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">stroke</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">strokeThickness</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">shadow</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="nx">offsetX</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">                        </span><span class="nx">offsetY</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">                        </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;#000&#39;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nx">blur</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">                        </span><span class="nx">stroke</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">                        </span><span class="nx">fill</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">                    </span><span class="p">},</span><span class="w">                  </span>
+<span class="w">                    </span><span class="nx">padding</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="nx">left</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">                        </span><span class="nx">right</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">                        </span><span class="nx">top</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">                        </span><span class="nx">bottom</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">                    </span><span class="p">},</span>
+<span class="w">                    </span><span class="c1">// more text styles</span>
+<span class="w">                </span><span class="p">},</span>
+
+<span class="w">                </span><span class="nx">iconSize</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">iconWidth</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span><span class="nx">iconHeight</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+
+<span class="w">                </span><span class="nx">space</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nx">left</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">right</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">top</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">bottom</span><span class="o">:</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                    </span><span class="nx">icon</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span>
+<span class="w">                </span><span class="p">},</span>
+
+<span class="w">                </span><span class="nx">expandedIcon</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">alpha</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
+
+<span class="w">                    </span><span class="nx">strokeColor</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">strokeAlpha</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">strokeWidth</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">arrowOnly</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+
+<span class="w">                    </span><span class="nx">easeDuration</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">},</span>
+
+<span class="w">            </span><span class="nx">background</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">radius</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">                </span><span class="c1">// radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}</span>
+
+<span class="w">                </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">alpha</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">strokeColor</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">strokeAlpha</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">strokeWidth</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">            </span><span class="p">},</span>
+
+<span class="w">            </span><span class="nx">space</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">item</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">line</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span>
+<span class="w">            </span><span class="p">},</span>
+
+<span class="w">            </span><span class="nx">align</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;justify-cneter&#39;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li><code>align</code> : Align children of a line.<ul>
+<li><code>0</code>, <code>'left'</code> : Align children of a line to left/top side.</li>
+<li><code>1</code>, <code>'right'</code> : Align children of a line to right/bottom side.</li>
+<li><code>2</code>, <code>'center'</code> : Align children of a line to ceter.</li>
+<li><code>3</code>, <code>'justify'</code>, <code>'justify-left'</code> : If remainder space is less or equal than 25%, then justify children. Else align children to left/top side.</li>
+<li><code>4</code>, <code>'justify-right'</code> : If remainder space is less or equal than 25%, then justify children. Else align children to right/bottom side.</li>
+<li><code>5</code>, <code>'justify-cneter'</code> : If remainder space is less or equal than 25%, then justify children. Else align children to center.</li>
+</ul>
+</li>
+</ul>
 <h4 id="style-of-scrollable">Style of scrollable<a class="headerlink" href="#style-of-scrollable" title="Permanent link">&para;</a></h4>
 <p>Style of scrollable is defined in </p>
 <ul>

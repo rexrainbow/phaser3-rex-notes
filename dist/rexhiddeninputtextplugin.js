@@ -385,7 +385,7 @@
         e.stopPropagation();
     };
 
-    var EnterClose$1 = function () {
+    var EnterClose = function () {
         this.close();
         this.emit('keydown-ENTER', this.parent, this);
         return this;
@@ -451,7 +451,7 @@
         this.initText();
 
         if (this.enterCloseEnable) {
-            this.scene.input.keyboard.once('keydown-ENTER', EnterClose$1, this);
+            this.scene.input.keyboard.once('keydown-ENTER', EnterClose, this);
         }
 
         // There is no cursor-position-change event, 
