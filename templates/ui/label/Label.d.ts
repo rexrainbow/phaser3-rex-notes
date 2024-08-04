@@ -29,6 +29,7 @@ declare namespace Label {
 
         text?: Phaser.GameObjects.GameObject,
         wrapText?: boolean | 0 | 1 | 2 | 'none' | 'word' | 'char' | 'character',
+        adjustTextFontSize?: boolean,
         expandTextWidth?: boolean,
         expandTextHeight?: boolean,
 

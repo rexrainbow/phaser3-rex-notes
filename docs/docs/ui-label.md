@@ -101,6 +101,7 @@ var label = scene.rexUI.add.label({
     
     text: textGameObject,
     // wrapText: false,
+    // adjustTextFontSize: false,
     // expandTextWidth: false,
     // expandTextHeight: false,
 
@@ -161,10 +162,17 @@ var label = scene.rexUI.add.label({
 - `iconHeight` : Set display height of icon game object to `iconHeight`. 
     - If `iconWidth` is `undefined`, set `scaleX` of icon game object to `scaleY` of icon game object, to keep size ratio.
 - `text` : Game object of text, optional.
-- `wrapText` : Enable WrapExpandText feature.
+- `wrapText` : Enable [WrapExpandText](ui-text-helper.md#wrap-expand-text) feature.
     - `false`, `0` : No WrapExpandText feature. Default behavior.
     - `true`, `1`, `'word'` : Word WrapExpandText.
+        - Text-width will be expanding.
     - `2`, `'char'` : Character WrapExpandText.
+        - Text-width will be expanding.
+- `adjustTextFontSize` : Enable [FontSizeExpandText](ui-text-helper.md#fontsize-expand-text) feature.
+    - `false` : No FontSizeExpandText feature. Default behavior.
+    - `true` : Enable FontSizeExpandText feature. Can't work with `wrapText: true`.
+        - Text-width and text-height will be expanding.
+        - Use BBCodeText (`scene.rexUI.add.BBCodeText`) with `{valign: 'center'}` style.
 - `expandTextWidth` : 
     - `false` : Keep width of text to original size. Default behavior.
     - `true` : Expand width of text object. Will set display width by default.

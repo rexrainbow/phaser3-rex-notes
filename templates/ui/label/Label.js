@@ -3,6 +3,7 @@ import AddChildMask from '../../../plugins/gameobjects/container/containerlite/m
 
 import SetWrapMode from '../../../plugins/utils/text/SetWrapMode.js';
 import WrapExpandText from '../utils/wrapexpandtext/WrapExpandText.js';
+import FontSizeExpandText from '../utils/fontsizeexpandtext/FontSizeExpandText.js';
 
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -76,6 +77,7 @@ class Label extends LabelBase {
 
         if (text) {
             var wrapText = GetValue(config, 'wrapText', false);
+            var adjustTextFontSize = GetValue(config, 'adjustTextFontSize', false);
             if (wrapText) {
                 if (wrapText === true) {
                     wrapText = 'word';
@@ -83,6 +85,12 @@ class Label extends LabelBase {
                 SetWrapMode(text, wrapText);
                 config.expandTextWidth = true;
                 WrapExpandText(text);
+
+            } else if (adjustTextFontSize) {
+                config.expandTextWidth = true;
+                config.expandTextHeight = true;
+                FontSizeExpandText(text, { fitHeight: true });
+
             }
 
             var textSpace = GetValue(config, 'space.text', 0);
