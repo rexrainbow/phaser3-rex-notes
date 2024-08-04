@@ -9930,6 +9930,7 @@
 <li><a href="https://codepen.io/rexrainbow/pen/oNZKmKZ">Add to layer</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/rNdyveo">Text wrap in horizontal label</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/vYRymQq">Text wrap in vertical label</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/KKjmQPz">Adjust text font size</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/xxJWGza">Square fit icon</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/jOKPKWa">Icon size</a></li>
 </ul>
@@ -10007,6 +10008,7 @@
 
 <span class="w">    </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="nx">textGameObject</span><span class="p">,</span>
 <span class="w">    </span><span class="c1">// wrapText: false,</span>
+<span class="w">    </span><span class="c1">// adjustTextFontSize: false,</span>
 <span class="w">    </span><span class="c1">// expandTextWidth: false,</span>
 <span class="w">    </span><span class="c1">// expandTextHeight: false,</span>
 
@@ -10089,10 +10091,25 @@
 </ul>
 </li>
 <li><code>text</code> : Game object of text, optional.</li>
-<li><code>wrapText</code> : Enable WrapExpandText feature.<ul>
+<li><code>wrapText</code> : Enable <a href="../ui-text-helper/#wrap-expand-text">WrapExpandText</a> feature.<ul>
 <li><code>false</code>, <code>0</code> : No WrapExpandText feature. Default behavior.</li>
-<li><code>true</code>, <code>1</code>, <code>'word'</code> : Word WrapExpandText.</li>
-<li><code>2</code>, <code>'char'</code> : Character WrapExpandText.</li>
+<li><code>true</code>, <code>1</code>, <code>'word'</code> : Word WrapExpandText.<ul>
+<li>Text-width will be expanding.</li>
+</ul>
+</li>
+<li><code>2</code>, <code>'char'</code> : Character WrapExpandText.<ul>
+<li>Text-width will be expanding.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>adjustTextFontSize</code> : Enable <a href="../ui-text-helper/#fontsize-expand-text">FontSizeExpandText</a> feature.<ul>
+<li><code>false</code> : No FontSizeExpandText feature. Default behavior.</li>
+<li><code>true</code> : Enable FontSizeExpandText feature. Can't work with <code>wrapText: true</code>.<ul>
+<li>Text-width and text-height will be expanding.</li>
+<li>Use BBCodeText (<code>scene.rexUI.add.BBCodeText</code>) with <code>{valign: 'center'}</code> style.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><code>expandTextWidth</code> : <ul>
