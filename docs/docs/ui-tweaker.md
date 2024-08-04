@@ -11,6 +11,7 @@ Fine-tuning properties of target object. [Reference](https://cocopon.github.io/t
 - [Bind target](https://codepen.io/rexrainbow/pen/vYraBBY)
 - [Horizontal tweaker](https://codepen.io/rexrainbow/pen/MWBGqzN)
 - [Columns](https://codepen.io/rexrainbow/pen/MWMKNLM)
+- [Wrap](https://codepen.io/rexrainbow/pen/jOjmaOY)
 - [Buttons](https://codepen.io/rexrainbow/pen/vYvbpXY)
 - [Add rows](https://codepen.io/rexrainbow/pen/NWVKyKW)
 - [Edit item](https://codepen.io/rexrainbow/pen/vYwEXQe)
