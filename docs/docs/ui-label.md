@@ -11,6 +11,7 @@ A container with an icon, text, and background.
 - [Add to layer](https://codepen.io/rexrainbow/pen/oNZKmKZ)
 - [Text wrap in horizontal label](https://codepen.io/rexrainbow/pen/rNdyveo)
 - [Text wrap in vertical label](https://codepen.io/rexrainbow/pen/vYRymQq)
+- [Adjust text font size](https://codepen.io/rexrainbow/pen/KKjmQPz)
 - [Square fit icon](https://codepen.io/rexrainbow/pen/xxJWGza)
 - [Icon size](https://codepen.io/rexrainbow/pen/jOKPKWa)
 
