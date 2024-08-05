@@ -99,6 +99,7 @@ declare namespace Tweaker {
 
     interface IStyle {
         itemWidth?: number,
+        itemHeight?: number,
 
         background?: CreateBackground.IConfig,
 
@@ -273,6 +274,7 @@ declare namespace Tweaker {
     interface IAddWrapConfig {
         title: string,
         itemWidth?: number,
+        itemHeight?: number,
 
         key?: string,
     }

@@ -42,6 +42,12 @@ var GenerateTweakerShellClass = function (config) {
             }
             this.itemWidth = itemWidth;
 
+            var itemHeight = GetValue(config, 'itemHeight');
+            if (itemHeight === undefined) {
+                itemHeight = GetValue(this.styles, 'itemHeight', 0);
+            }
+            this.itemHeight = itemHeight;
+
             if (
                 isWrapMode ||
                 ((this.root === this) && (this.orientation === 1))

@@ -12,6 +12,7 @@ var CreateWrap = function (parent, config, style) {
     scene.add.existing(title);
 
     var itemWidth = GetValue(style, 'itemWidth', 0);
+    var itemHeight = GetValue(style, 'itemHeight', 0);
     var tweakerConfig = {
         root: GetValue(style, 'root'),
         styles: GetValue(style, 'tweaker'),
@@ -19,7 +20,8 @@ var CreateWrap = function (parent, config, style) {
         align: GetValue(style, 'align', 5),
 
         wrap: true,
-        itemWidth: GetValue(config, 'itemWidth', itemWidth)
+        itemWidth: GetValue(config, 'itemWidth', itemWidth),
+        itemHeight: GetValue(config, 'itemHeight', itemHeight),
     }
 
     var backgroundStyle = GetValue(style, 'background');

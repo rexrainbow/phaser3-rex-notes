@@ -95,6 +95,7 @@ var tweaker = scene.rexUI.add.tweaker({
     // style: { ... }
     styles : {
         itemWidth : 0,
+        itemHeight: 0,
 
         inputRow: {
             background: {
@@ -1391,6 +1392,7 @@ var childTweaker = tweaker.addWrap({
     // title: titleA,
 
     itemWidth: 0,
+    itemHeight: 0,
 });
 
 // childTweaker.addInput(...)
@@ -1398,7 +1400,7 @@ var childTweaker = tweaker.addWrap({
 
 - `childTweaker` : Child tweaker game object. Add input rows by `addInput` method.
 - `title` Title of folder. Click title can collapse or expand child tweaker game object.
-- `itemWidth` : Width of input row.
+- `itemWidth`, `itemHeight` : Size of input row.
 
 
 See [Style of wrap](#style-of-wrap)

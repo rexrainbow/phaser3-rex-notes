@@ -52,6 +52,7 @@ var AddInput = function (object, key, config) {
             proportion = (this.itemWidth > 0) ? 0 : 1;
             inputSizer.setMinWidth(this.itemWidth);
         }
+        inputSizer.setMinHeight(this.itemHeight);
 
         this.add(
             inputSizer,
@@ -60,6 +61,7 @@ var AddInput = function (object, key, config) {
 
     } else {
         inputSizer.setMinWidth(this.itemWidth);
+        inputSizer.setMinHeight(this.itemHeight);
         this.add(inputSizer);
 
     }
