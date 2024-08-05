@@ -32,7 +32,7 @@ var CreateWrap = function (parent, config, style) {
     var tweakerChild = parent.createTweaker(tweakerConfig);
 
     var wrap = new Wrap(scene, {
-        header: title,
+        title: title,
         child: tweakerChild,
     });
     scene.add.existing(wrap);

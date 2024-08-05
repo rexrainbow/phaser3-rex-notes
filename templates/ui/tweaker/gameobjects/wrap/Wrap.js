@@ -16,17 +16,21 @@ class Wrap extends Sizer {
 
         // Add elements
         var background = GetValue(config, 'background', undefined);
-        var header = GetValue(config, 'header', undefined);
-        var footer = GetValue(config, 'footer', undefined);
+        var title = GetValue(config, 'title', undefined);
 
         if (background) {
             this.addBackground(background);
         }
 
-        if (header) {
+        if (title) {
             this.add(
-                header,
-                { expand: true }
+                title,
+                {
+                    expand: true,
+                    space: {
+                        bottom: GetValue(config, 'space.title', 0)
+                    }
+                }
             );
         }
 
@@ -36,20 +40,12 @@ class Wrap extends Sizer {
             { expand: true }
         );
 
-        if (footer) {
-            this.add(
-                footer,
-                { expand: true }
-            );
-        }
-
-        this.addChildrenMap('header', header);
+        this.addChildrenMap('title', title);
         this.addChildrenMap('child', child);
-        this.addChildrenMap('footer', footer);
     }
 
     setTitle(config) {
-        var title = this.childrenMap.header;
+        var title = this.childrenMap.title;
 
         if (config.title || config.icon) {
             title.show().setTitle(config);

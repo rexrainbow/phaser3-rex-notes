@@ -45,7 +45,7 @@ var CreateColumns = function (parent, config, style) {
     }
 
     var columns = new Columns(scene, {
-        header: title,
+        title: title,
         columns: columnConfigArray,
         space: GetValue(style, 'space'),
     });

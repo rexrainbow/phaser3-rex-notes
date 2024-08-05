@@ -131,9 +131,24 @@ declare namespace Tweaker {
 
             space?: {
                 left?: number, right?: number, top?: number, bottom?: number,
-                column?: number
+                column?: number,
+                title?: number,
             }
         },
+
+        wrap?: {
+            itemWidth?: number,
+
+            title?: SimpleLabel.IConfig,
+
+            background?: CreateBackground.IConfig | CreateBackground.IConfig[],
+
+            space?: {
+                left?: number, right?: number, top?: number, bottom?: number,
+                item?: number, line?: number,
+                title?: number,
+            }
+        }
 
         scrollable?: {
             title?: SimpleLabel.IConfig,
