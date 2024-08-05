@@ -14,6 +14,7 @@ declare namespace BuildTitleLabelConfig {
 
         title?: CreateText.IConfig,
         wrapTitle?: boolean | 0 | 1 | 2 | 'none' | 'word' | 'char' | 'character',
+        adjustTitleFontSize?: boolean,
         expandTitleWidth?: boolean,
         expandTitleHeight?: boolean,
 

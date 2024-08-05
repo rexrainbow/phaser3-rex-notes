@@ -111,6 +111,7 @@ var label = scene.rexUI.add.simpleLabel({
     // text: null,
 
     // wrapText: false,
+    // adjustTextFontSize: false,
     // expandTextWidth: false,
     // expandTextHeight: false,
 

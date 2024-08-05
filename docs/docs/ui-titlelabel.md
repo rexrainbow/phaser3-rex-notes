@@ -95,6 +95,7 @@ var label = scene.rexUI.add.titleLabel({
 
     title: titleGameObject,
     // wrapTitle: false,
+    // adjustTitleFontSize: false,
     // expandTitleWidth: false,
     // expandTitleHeight: false,
     
@@ -105,6 +106,7 @@ var label = scene.rexUI.add.titleLabel({
 
     text: textGameObject,
     // wrapText: false,
+    // adjustTextFontSize: false,
     // expandTextWidth: false,
     // expandTextHeight: false,
 
@@ -160,10 +162,15 @@ var label = scene.rexUI.add.titleLabel({
     - In [mode 0](ui-titlelabel.md#mode-0), innerSizer contains `title`, `separator`, and `text`.
     - In [mode 1](ui-titlelabel.md#mode-1), innerSizer contains `icon`, `text`, and `action`.
 - `title` : Game object of title, optional.
-- `wrapTitle` : Enable WrapExpandText feature.
+- `wrapTitle` : Enable [WrapExpandText](ui-text-helper.md#wrap-expand-text) feature.
     - `false`, `0` : No WrapExpandText feature. Default behavior.
     - `true`, `1`, `'word'` : Word WrapExpandText.
     - `2`, `'char'` : Character WrapExpandText.
+- `adjustTitleFontSize` : Enable [FontSizeExpandText](ui-text-helper.md#fontsize-expand-text) feature.
+    - `false` : No FontSizeExpandText feature. Default behavior.
+    - `true` : Enable FontSizeExpandText feature. Can't work with `wrapTitle: true`.
+        - Text-width and text-height will be expanding.
+        - Use BBCodeText (`scene.rexUI.add.BBCodeText`) with `{valign: 'center'}` style.
 - `expandTitleWidth` : 
     - `false` : Keep width of title to original size. Default behavior.
     - `true` : Expand width of title object. Will set display width by default.
@@ -175,11 +182,15 @@ var label = scene.rexUI.add.titleLabel({
 - `iconMask` : Set true to add a *circle* mask on icon game object.
     - *Phaser 3 engine does not support nested mask*, uses [circle mask image](circlemaskimage.md) instead.   
 - `text` : Game object of text.
-- `wrapText` : Enable WrapExpandText feature.
+- `wrapText` : Enable [WrapExpandText](ui-text-helper.md#wrap-expand-text) feature.
     - `false`, `0` : No WrapExpandText feature. Default behavior.
     - `true`, `1`, `'word'` : Word WrapExpandText.
     - `2`, `'char'` : Character WrapExpandText.
-- `expandTextWidth` : 
+- `adjustTextFontSize` : Enable [FontSizeExpandText](ui-text-helper.md#fontsize-expand-text) feature.
+    - `false` : No FontSizeExpandText feature. Default behavior.
+    - `true` : Enable FontSizeExpandText feature. Can't work with `wrapText: true`.
+        - Text-width and text-height will be expanding.
+        - Use BBCodeText (`scene.rexUI.add.BBCodeText`) with `{valign: 'center'}` style.- `expandTextWidth` : 
     - `false` : Keep width of text to original size. Default behavior.
     - `true` : Expand width of text object. Will set display width by default.
         - Must set to `true` if using [`scene.rexUI.wrapExpandText` method](ui-overview.md#behaviors-of-text) with any text game object.

@@ -30,6 +30,7 @@ class TitleLabel extends LabelBase {
 
         if (title) {
             var wrapTitle = GetValue(config, 'wrapTitle', false);
+            var adjustTitleFontSize = GetValue(config, 'adjustTitleFontSize', false);
             if (wrapTitle) {
                 if (wrapTitle === true) {
                     wrapTitle = 'word';
@@ -38,11 +39,18 @@ class TitleLabel extends LabelBase {
                 SetWrapMode(title, wrapTitle);
                 config.expandTitleWidth = true;
                 WrapExpandText(title);
+
+            } else if (adjustTitleFontSize) {
+                config.expandTextWidth = true;
+                config.expandTextHeight = true;
+                FontSizeExpandText(title, { fitHeight: true });
+
             }
         }
 
         if (text) {
             var wrapText = GetValue(config, 'wrapText', false);
+            var adjustTextFontSize = GetValue(config, 'adjustTextFontSize', false);
             if (wrapText) {
                 if (wrapText === true) {
                     wrapText = 'word';
@@ -51,6 +59,12 @@ class TitleLabel extends LabelBase {
                 SetWrapMode(text, wrapText);
                 config.expandTextWidth = true;
                 WrapExpandText(text);
+
+            } else if (adjustTextFontSize) {
+                config.expandTextWidth = true;
+                config.expandTextHeight = true;
+                FontSizeExpandText(text, { fitHeight: true });
+
             }
         }
 

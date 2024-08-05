@@ -108,12 +108,14 @@ var textBox = scene.rexUI.add.simpleTextBox({
     title: textStyle,
     // title: null,
     // wrapTitle: false,
+    // adjustTitleFontSize: false,
     // expandTitleWidth: false,
     // expandTitleHeight: false,
 
     text: testStyle,
     // text: null,
     // wrapText: false,
+    // adjustTextFontSize: false,
     // expandTextWidth: false,
     // expandTextHeight: false,
 
@@ -184,10 +186,20 @@ var textBox = scene.rexUI.add.simpleTextBox({
     - `false`, `0` : No WrapExpandText feature. Default behavior.
     - `true`, `1`, `'word'` : Word WrapExpandText.
     - `2`, `'char'` : Character WrapExpandText.
-- `wrapText` : Enable WrapExpandText feature.
+- `adjustTitleFontSize` : Enable [FontSizeExpandText](ui-text-helper.md#fontsize-expand-text) feature.
+    - `false` : No FontSizeExpandText feature. Default behavior.
+    - `true` : Enable FontSizeExpandText feature. Can't work with `wrapText: true`.
+        - Text-width and text-height will be expanding.
+        - Use BBCodeText (`scene.rexUI.add.BBCodeText`) with `{valign: 'center'}` style.
+- `wrapText` : Enable [WrapExpandText](ui-text-helper.md#wrap-expand-text) feature.
     - `false`, `0` : No WrapExpandText feature. Default behavior.
     - `true`, `1`, `'word'` : Word WrapExpandText.
     - `2`, `'char'` : Character WrapExpandText.
+- `adjustTextFontSize` : Enable [FontSizeExpandText](ui-text-helper.md#fontsize-expand-text) feature.
+    - `false` : No FontSizeExpandText feature. Default behavior.
+    - `true` : Enable FontSizeExpandText feature. Can't work with `wrapText: true`.
+        - Text-width and text-height will be expanding.
+        - Use BBCodeText (`scene.rexUI.add.BBCodeText`) with `{valign: 'center'}` style.
 
 
 ### Custom class

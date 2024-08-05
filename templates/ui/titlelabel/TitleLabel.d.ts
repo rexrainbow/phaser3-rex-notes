@@ -28,6 +28,7 @@ declare namespace TitleLabel {
 
         title?: Phaser.GameObjects.GameObject,
         wrapTitle?: boolean | 0 | 1 | 2 | 'none' | 'word' | 'char' | 'character',
+        adjustTitleFontSize?: boolean,
         expandTitleWidth?: boolean,
         expandTitleHeight?: boolean,
 
@@ -35,6 +36,7 @@ declare namespace TitleLabel {
 
         text?: Phaser.GameObjects.GameObject,
         wrapText?: boolean | 0 | 1 | 2 | 'none' | 'word' | 'char' | 'character',
+        adjustTextFontSize?: boolean,
         expandTextWidth?: boolean,
         expandTextHeight?: boolean,
 

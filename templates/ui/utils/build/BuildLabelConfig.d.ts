@@ -23,6 +23,7 @@ declare namespace BuildLabelConfig {
 
         text?: CreateText.IConfig,
         wrapText?: boolean | 0 | 1 | 2 | 'none' | 'word' | 'char' | 'character',
+        adjustTextFontSize?: boolean,
         expandTextWidth?: boolean,
         expandTextHeight?: boolean,
 
