@@ -62600,7 +62600,7 @@ void main () {
 
 	const GetValue$24 = Phaser.Utils.Objects.GetValue;
 
-	var FontSizeExpandText = function (textObject, config) {
+	var FontSizeExpandText$1 = function (textObject, config) {
 	    if (typeof (config) === 'number') {
 	        config = {
 	            minWidth: config
@@ -62736,7 +62736,7 @@ void main () {
 	            } else if (adjustTextFontSize) {
 	                config.expandTextWidth = true;
 	                config.expandTextHeight = true;
-	                FontSizeExpandText(text, { fitHeight: true });
+	                FontSizeExpandText$1(text, { fitHeight: true });
 
 	            }
 
@@ -70411,6 +70411,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
 	        if (title) {
 	            var wrapTitle = GetValue$1t(config, 'wrapTitle', false);
+	            var adjustTitleFontSize = GetValue$1t(config, 'adjustTitleFontSize', false);
 	            if (wrapTitle) {
 	                if (wrapTitle === true) {
 	                    wrapTitle = 'word';
@@ -70419,11 +70420,18 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	                SetWrapMode(title, wrapTitle);
 	                config.expandTitleWidth = true;
 	                WrapExpandText(title);
+
+	            } else if (adjustTitleFontSize) {
+	                config.expandTextWidth = true;
+	                config.expandTextHeight = true;
+	                FontSizeExpandText(title, { fitHeight: true });
+
 	            }
 	        }
 
 	        if (text) {
 	            var wrapText = GetValue$1t(config, 'wrapText', false);
+	            var adjustTextFontSize = GetValue$1t(config, 'adjustTextFontSize', false);
 	            if (wrapText) {
 	                if (wrapText === true) {
 	                    wrapText = 'word';
@@ -70432,6 +70440,12 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	                SetWrapMode(text, wrapText);
 	                config.expandTextWidth = true;
 	                WrapExpandText(text);
+
+	            } else if (adjustTextFontSize) {
+	                config.expandTextWidth = true;
+	                config.expandTextHeight = true;
+	                FontSizeExpandText(text, { fitHeight: true });
+
 	            }
 	        }
 
@@ -85669,6 +85683,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	    scene.add.existing(title);
 
 	    var itemWidth = GetValue$q(style, 'itemWidth', 0);
+	    var itemHeight = GetValue$q(style, 'itemHeight', 0);
 	    var tweakerConfig = {
 	        root: GetValue$q(style, 'root'),
 	        styles: GetValue$q(style, 'tweaker'),
@@ -85676,7 +85691,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	        align: GetValue$q(style, 'align', 5),
 
 	        wrap: true,
-	        itemWidth: GetValue$q(config, 'itemWidth', itemWidth)
+	        itemWidth: GetValue$q(config, 'itemWidth', itemWidth),
+	        itemHeight: GetValue$q(config, 'itemHeight', itemHeight),
 	    };
 
 	    GetValue$q(style, 'background');
@@ -86380,6 +86396,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	            proportion = (this.itemWidth > 0) ? 0 : 1;
 	            inputSizer.setMinWidth(this.itemWidth);
 	        }
+	        inputSizer.setMinHeight(this.itemHeight);
 
 	        this.add(
 	            inputSizer,
@@ -86388,6 +86405,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
 	    } else {
 	        inputSizer.setMinWidth(this.itemWidth);
+	        inputSizer.setMinHeight(this.itemHeight);
 	        this.add(inputSizer);
 
 	    }
@@ -86772,6 +86790,12 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	                itemWidth = GetValue$f(this.styles, 'itemWidth', 0);
 	            }
 	            this.itemWidth = itemWidth;
+
+	            var itemHeight = GetValue$f(config, 'itemHeight');
+	            if (itemHeight === undefined) {
+	                itemHeight = GetValue$f(this.styles, 'itemHeight', 0);
+	            }
+	            this.itemHeight = itemHeight;
 
 	            if (
 	                isWrapMode ||

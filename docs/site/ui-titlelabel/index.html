@@ -10029,6 +10029,7 @@
 
 <span class="w">    </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="nx">titleGameObject</span><span class="p">,</span>
 <span class="w">    </span><span class="c1">// wrapTitle: false,</span>
+<span class="w">    </span><span class="c1">// adjustTitleFontSize: false,</span>
 <span class="w">    </span><span class="c1">// expandTitleWidth: false,</span>
 <span class="w">    </span><span class="c1">// expandTitleHeight: false,</span>
 
@@ -10039,6 +10040,7 @@
 
 <span class="w">    </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="nx">textGameObject</span><span class="p">,</span>
 <span class="w">    </span><span class="c1">// wrapText: false,</span>
+<span class="w">    </span><span class="c1">// adjustTextFontSize: false,</span>
 <span class="w">    </span><span class="c1">// expandTextWidth: false,</span>
 <span class="w">    </span><span class="c1">// expandTextHeight: false,</span>
 
@@ -10108,10 +10110,19 @@
 </ul>
 </li>
 <li><code>title</code> : Game object of title, optional.</li>
-<li><code>wrapTitle</code> : Enable WrapExpandText feature.<ul>
+<li><code>wrapTitle</code> : Enable <a href="../ui-text-helper/#wrap-expand-text">WrapExpandText</a> feature.<ul>
 <li><code>false</code>, <code>0</code> : No WrapExpandText feature. Default behavior.</li>
 <li><code>true</code>, <code>1</code>, <code>'word'</code> : Word WrapExpandText.</li>
 <li><code>2</code>, <code>'char'</code> : Character WrapExpandText.</li>
+</ul>
+</li>
+<li><code>adjustTitleFontSize</code> : Enable <a href="../ui-text-helper/#fontsize-expand-text">FontSizeExpandText</a> feature.<ul>
+<li><code>false</code> : No FontSizeExpandText feature. Default behavior.</li>
+<li><code>true</code> : Enable FontSizeExpandText feature. Can't work with <code>wrapTitle: true</code>.<ul>
+<li>Text-width and text-height will be expanding.</li>
+<li>Use BBCodeText (<code>scene.rexUI.add.BBCodeText</code>) with <code>{valign: 'center'}</code> style.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><code>expandTitleWidth</code> : <ul>
@@ -10131,13 +10142,19 @@
 </ul>
 </li>
 <li><code>text</code> : Game object of text.</li>
-<li><code>wrapText</code> : Enable WrapExpandText feature.<ul>
+<li><code>wrapText</code> : Enable <a href="../ui-text-helper/#wrap-expand-text">WrapExpandText</a> feature.<ul>
 <li><code>false</code>, <code>0</code> : No WrapExpandText feature. Default behavior.</li>
 <li><code>true</code>, <code>1</code>, <code>'word'</code> : Word WrapExpandText.</li>
 <li><code>2</code>, <code>'char'</code> : Character WrapExpandText.</li>
 </ul>
 </li>
-<li><code>expandTextWidth</code> : <ul>
+<li><code>adjustTextFontSize</code> : Enable <a href="../ui-text-helper/#fontsize-expand-text">FontSizeExpandText</a> feature.<ul>
+<li><code>false</code> : No FontSizeExpandText feature. Default behavior.</li>
+<li><code>true</code> : Enable FontSizeExpandText feature. Can't work with <code>wrapText: true</code>.<ul>
+<li>Text-width and text-height will be expanding.</li>
+<li>Use BBCodeText (<code>scene.rexUI.add.BBCodeText</code>) with <code>{valign: 'center'}</code> style.- <code>expandTextWidth</code> : </li>
+</ul>
+</li>
 <li><code>false</code> : Keep width of text to original size. Default behavior.</li>
 <li><code>true</code> : Expand width of text object. Will set display width by default.<ul>
 <li>Must set to <code>true</code> if using <a href="../ui-overview/#behaviors-of-text"><code>scene.rexUI.wrapExpandText</code> method</a> with any text game object.</li>

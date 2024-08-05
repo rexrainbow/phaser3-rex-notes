@@ -36804,6 +36804,7 @@
         scene.add.existing(title);
 
         var itemWidth = GetValue$z(style, 'itemWidth', 0);
+        var itemHeight = GetValue$z(style, 'itemHeight', 0);
         var tweakerConfig = {
             root: GetValue$z(style, 'root'),
             styles: GetValue$z(style, 'tweaker'),
@@ -36811,7 +36812,8 @@
             align: GetValue$z(style, 'align', 5),
 
             wrap: true,
-            itemWidth: GetValue$z(config, 'itemWidth', itemWidth)
+            itemWidth: GetValue$z(config, 'itemWidth', itemWidth),
+            itemHeight: GetValue$z(config, 'itemHeight', itemHeight),
         };
 
         GetValue$z(style, 'background');
@@ -38450,6 +38452,7 @@
                 proportion = (this.itemWidth > 0) ? 0 : 1;
                 inputSizer.setMinWidth(this.itemWidth);
             }
+            inputSizer.setMinHeight(this.itemHeight);
 
             this.add(
                 inputSizer,
@@ -38458,6 +38461,7 @@
 
         } else {
             inputSizer.setMinWidth(this.itemWidth);
+            inputSizer.setMinHeight(this.itemHeight);
             this.add(inputSizer);
 
         }
@@ -38842,6 +38846,12 @@
                     itemWidth = GetValue$l(this.styles, 'itemWidth', 0);
                 }
                 this.itemWidth = itemWidth;
+
+                var itemHeight = GetValue$l(config, 'itemHeight');
+                if (itemHeight === undefined) {
+                    itemHeight = GetValue$l(this.styles, 'itemHeight', 0);
+                }
+                this.itemHeight = itemHeight;
 
                 if (
                     isWrapMode ||

@@ -47983,7 +47983,7 @@ void main () {
 
     const GetValue$21 = Phaser.Utils.Objects.GetValue;
 
-    var FontSizeExpandText = function (textObject, config) {
+    var FontSizeExpandText$1 = function (textObject, config) {
         if (typeof (config) === 'number') {
             config = {
                 minWidth: config
@@ -48119,7 +48119,7 @@ void main () {
                 } else if (adjustTextFontSize) {
                     config.expandTextWidth = true;
                     config.expandTextHeight = true;
-                    FontSizeExpandText(text, { fitHeight: true });
+                    FontSizeExpandText$1(text, { fitHeight: true });
 
                 }
 
@@ -55140,6 +55140,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
             if (title) {
                 var wrapTitle = GetValue$1w(config, 'wrapTitle', false);
+                var adjustTitleFontSize = GetValue$1w(config, 'adjustTitleFontSize', false);
                 if (wrapTitle) {
                     if (wrapTitle === true) {
                         wrapTitle = 'word';
@@ -55148,11 +55149,18 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                     SetWrapMode(title, wrapTitle);
                     config.expandTitleWidth = true;
                     WrapExpandText(title);
+
+                } else if (adjustTitleFontSize) {
+                    config.expandTextWidth = true;
+                    config.expandTextHeight = true;
+                    FontSizeExpandText(title, { fitHeight: true });
+
                 }
             }
 
             if (text) {
                 var wrapText = GetValue$1w(config, 'wrapText', false);
+                var adjustTextFontSize = GetValue$1w(config, 'adjustTextFontSize', false);
                 if (wrapText) {
                     if (wrapText === true) {
                         wrapText = 'word';
@@ -55161,6 +55169,12 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                     SetWrapMode(text, wrapText);
                     config.expandTextWidth = true;
                     WrapExpandText(text);
+
+                } else if (adjustTextFontSize) {
+                    config.expandTextWidth = true;
+                    config.expandTextHeight = true;
+                    FontSizeExpandText(text, { fitHeight: true });
+
                 }
             }
 
@@ -72250,6 +72264,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         scene.add.existing(title);
 
         var itemWidth = GetValue$m(style, 'itemWidth', 0);
+        var itemHeight = GetValue$m(style, 'itemHeight', 0);
         var tweakerConfig = {
             root: GetValue$m(style, 'root'),
             styles: GetValue$m(style, 'tweaker'),
@@ -72257,7 +72272,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             align: GetValue$m(style, 'align', 5),
 
             wrap: true,
-            itemWidth: GetValue$m(config, 'itemWidth', itemWidth)
+            itemWidth: GetValue$m(config, 'itemWidth', itemWidth),
+            itemHeight: GetValue$m(config, 'itemHeight', itemHeight),
         };
 
         GetValue$m(style, 'background');
@@ -72961,6 +72977,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 proportion = (this.itemWidth > 0) ? 0 : 1;
                 inputSizer.setMinWidth(this.itemWidth);
             }
+            inputSizer.setMinHeight(this.itemHeight);
 
             this.add(
                 inputSizer,
@@ -72969,6 +72986,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
         } else {
             inputSizer.setMinWidth(this.itemWidth);
+            inputSizer.setMinHeight(this.itemHeight);
             this.add(inputSizer);
 
         }
@@ -73353,6 +73371,12 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                     itemWidth = GetValue$b(this.styles, 'itemWidth', 0);
                 }
                 this.itemWidth = itemWidth;
+
+                var itemHeight = GetValue$b(config, 'itemHeight');
+                if (itemHeight === undefined) {
+                    itemHeight = GetValue$b(this.styles, 'itemHeight', 0);
+                }
+                this.itemHeight = itemHeight;
 
                 if (
                     isWrapMode ||
@@ -75369,7 +75393,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         confirmAction: ConfirmAction,
         edit: Edit,
         wrapExpandText: WrapExpandText,
-        fontSizeExpandText: FontSizeExpandText,
+        fontSizeExpandText: FontSizeExpandText$1,
         fontSizeResize: FontSizeFit,  // Backward compatibility
         setFontSizeToFitWidth: FontSizeFit,
         waitEvent: WaitEvent,
