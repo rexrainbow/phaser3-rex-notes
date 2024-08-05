@@ -71989,17 +71989,21 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
             // Add elements
             var background = GetValue$q(config, 'background', undefined);
-            var header = GetValue$q(config, 'header', undefined);
-            var footer = GetValue$q(config, 'footer', undefined);
+            var title = GetValue$q(config, 'title', undefined);
 
             if (background) {
                 this.addBackground(background);
             }
 
-            if (header) {
+            if (title) {
                 this.add(
-                    header,
-                    { expand: true }
+                    title,
+                    {
+                        expand: true,
+                        space: {
+                            bottom: GetValue$q(config, 'space.title', 0)
+                        }
+                    }
                 );
             }
 
@@ -72031,21 +72035,13 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 { expand: true }
             );
 
-            if (footer) {
-                this.add(
-                    footer,
-                    { expand: true }
-                );
-            }
-
-            this.addChildrenMap('header', header);
+            this.addChildrenMap('title', title);
             this.addChildrenMap('columnsSizer', columnsSizer);
             this.addChildrenMap('columns', columnsSizer.childrenMap.items);
-            this.addChildrenMap('footer', footer);
         }
 
         setTitle(config) {
-            var title = this.childrenMap.header;
+            var title = this.childrenMap.title;
 
             if (config.title || config.icon) {
                 title.show().setTitle(config);
@@ -72115,7 +72111,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
 
         var columns = new Columns(scene, {
-            header: title,
+            title: title,
             columns: columnConfigArray,
             space: GetValue$p(style, 'space'),
         });
@@ -72202,17 +72198,21 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
             // Add elements
             var background = GetValue$n(config, 'background', undefined);
-            var header = GetValue$n(config, 'header', undefined);
-            var footer = GetValue$n(config, 'footer', undefined);
+            var title = GetValue$n(config, 'title', undefined);
 
             if (background) {
                 this.addBackground(background);
             }
 
-            if (header) {
+            if (title) {
                 this.add(
-                    header,
-                    { expand: true }
+                    title,
+                    {
+                        expand: true,
+                        space: {
+                            bottom: GetValue$n(config, 'space.title', 0)
+                        }
+                    }
                 );
             }
 
@@ -72222,20 +72222,12 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 { expand: true }
             );
 
-            if (footer) {
-                this.add(
-                    footer,
-                    { expand: true }
-                );
-            }
-
-            this.addChildrenMap('header', header);
+            this.addChildrenMap('title', title);
             this.addChildrenMap('child', child);
-            this.addChildrenMap('footer', footer);
         }
 
         setTitle(config) {
-            var title = this.childrenMap.header;
+            var title = this.childrenMap.title;
 
             if (config.title || config.icon) {
                 title.show().setTitle(config);
@@ -72281,7 +72273,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         var tweakerChild = parent.createTweaker(tweakerConfig);
 
         var wrap = new Wrap(scene, {
-            header: title,
+            title: title,
             child: tweakerChild,
         });
         scene.add.existing(wrap);

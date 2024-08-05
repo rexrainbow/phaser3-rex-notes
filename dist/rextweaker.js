@@ -36529,17 +36529,21 @@
 
             // Add elements
             var background = GetValue$D(config, 'background', undefined);
-            var header = GetValue$D(config, 'header', undefined);
-            var footer = GetValue$D(config, 'footer', undefined);
+            var title = GetValue$D(config, 'title', undefined);
 
             if (background) {
                 this.addBackground(background);
             }
 
-            if (header) {
+            if (title) {
                 this.add(
-                    header,
-                    { expand: true }
+                    title,
+                    {
+                        expand: true,
+                        space: {
+                            bottom: GetValue$D(config, 'space.title', 0)
+                        }
+                    }
                 );
             }
 
@@ -36571,21 +36575,13 @@
                 { expand: true }
             );
 
-            if (footer) {
-                this.add(
-                    footer,
-                    { expand: true }
-                );
-            }
-
-            this.addChildrenMap('header', header);
+            this.addChildrenMap('title', title);
             this.addChildrenMap('columnsSizer', columnsSizer);
             this.addChildrenMap('columns', columnsSizer.childrenMap.items);
-            this.addChildrenMap('footer', footer);
         }
 
         setTitle(config) {
-            var title = this.childrenMap.header;
+            var title = this.childrenMap.title;
 
             if (config.title || config.icon) {
                 title.show().setTitle(config);
@@ -36655,7 +36651,7 @@
         }
 
         var columns = new Columns(scene, {
-            header: title,
+            title: title,
             columns: columnConfigArray,
             space: GetValue$C(style, 'space'),
         });
@@ -36742,17 +36738,21 @@
 
             // Add elements
             var background = GetValue$A(config, 'background', undefined);
-            var header = GetValue$A(config, 'header', undefined);
-            var footer = GetValue$A(config, 'footer', undefined);
+            var title = GetValue$A(config, 'title', undefined);
 
             if (background) {
                 this.addBackground(background);
             }
 
-            if (header) {
+            if (title) {
                 this.add(
-                    header,
-                    { expand: true }
+                    title,
+                    {
+                        expand: true,
+                        space: {
+                            bottom: GetValue$A(config, 'space.title', 0)
+                        }
+                    }
                 );
             }
 
@@ -36762,20 +36762,12 @@
                 { expand: true }
             );
 
-            if (footer) {
-                this.add(
-                    footer,
-                    { expand: true }
-                );
-            }
-
-            this.addChildrenMap('header', header);
+            this.addChildrenMap('title', title);
             this.addChildrenMap('child', child);
-            this.addChildrenMap('footer', footer);
         }
 
         setTitle(config) {
-            var title = this.childrenMap.header;
+            var title = this.childrenMap.title;
 
             if (config.title || config.icon) {
                 title.show().setTitle(config);
@@ -36821,7 +36813,7 @@
         var tweakerChild = parent.createTweaker(tweakerConfig);
 
         var wrap = new Wrap(scene, {
-            header: title,
+            title: title,
             child: tweakerChild,
         });
         scene.add.existing(wrap);

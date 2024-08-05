@@ -85408,17 +85408,21 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
 	        // Add elements
 	        var background = GetValue$u(config, 'background', undefined);
-	        var header = GetValue$u(config, 'header', undefined);
-	        var footer = GetValue$u(config, 'footer', undefined);
+	        var title = GetValue$u(config, 'title', undefined);
 
 	        if (background) {
 	            this.addBackground(background);
 	        }
 
-	        if (header) {
+	        if (title) {
 	            this.add(
-	                header,
-	                { expand: true }
+	                title,
+	                {
+	                    expand: true,
+	                    space: {
+	                        bottom: GetValue$u(config, 'space.title', 0)
+	                    }
+	                }
 	            );
 	        }
 
@@ -85450,21 +85454,13 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	            { expand: true }
 	        );
 
-	        if (footer) {
-	            this.add(
-	                footer,
-	                { expand: true }
-	            );
-	        }
-
-	        this.addChildrenMap('header', header);
+	        this.addChildrenMap('title', title);
 	        this.addChildrenMap('columnsSizer', columnsSizer);
 	        this.addChildrenMap('columns', columnsSizer.childrenMap.items);
-	        this.addChildrenMap('footer', footer);
 	    }
 
 	    setTitle(config) {
-	        var title = this.childrenMap.header;
+	        var title = this.childrenMap.title;
 
 	        if (config.title || config.icon) {
 	            title.show().setTitle(config);
@@ -85534,7 +85530,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	    }
 
 	    var columns = new Columns(scene, {
-	        header: title,
+	        title: title,
 	        columns: columnConfigArray,
 	        space: GetValue$t(style, 'space'),
 	    });
@@ -85621,17 +85617,21 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
 	        // Add elements
 	        var background = GetValue$r(config, 'background', undefined);
-	        var header = GetValue$r(config, 'header', undefined);
-	        var footer = GetValue$r(config, 'footer', undefined);
+	        var title = GetValue$r(config, 'title', undefined);
 
 	        if (background) {
 	            this.addBackground(background);
 	        }
 
-	        if (header) {
+	        if (title) {
 	            this.add(
-	                header,
-	                { expand: true }
+	                title,
+	                {
+	                    expand: true,
+	                    space: {
+	                        bottom: GetValue$r(config, 'space.title', 0)
+	                    }
+	                }
 	            );
 	        }
 
@@ -85641,20 +85641,12 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	            { expand: true }
 	        );
 
-	        if (footer) {
-	            this.add(
-	                footer,
-	                { expand: true }
-	            );
-	        }
-
-	        this.addChildrenMap('header', header);
+	        this.addChildrenMap('title', title);
 	        this.addChildrenMap('child', child);
-	        this.addChildrenMap('footer', footer);
 	    }
 
 	    setTitle(config) {
-	        var title = this.childrenMap.header;
+	        var title = this.childrenMap.title;
 
 	        if (config.title || config.icon) {
 	            title.show().setTitle(config);
@@ -85700,7 +85692,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	    var tweakerChild = parent.createTweaker(tweakerConfig);
 
 	    var wrap = new Wrap(scene, {
-	        header: title,
+	        title: title,
 	        child: tweakerChild,
 	    });
 	    scene.add.existing(wrap);
