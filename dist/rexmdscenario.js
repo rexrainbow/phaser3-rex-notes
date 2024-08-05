@@ -62539,7 +62539,7 @@ void main () {
 
 	const GetValue$24 = Phaser.Utils.Objects.GetValue;
 
-	var FontSizeExpandText$1 = function (textObject, config) {
+	var FontSizeExpandText = function (textObject, config) {
 	    if (typeof (config) === 'number') {
 	        config = {
 	            minWidth: config
@@ -62675,7 +62675,7 @@ void main () {
 	            } else if (adjustTextFontSize) {
 	                config.expandTextWidth = true;
 	                config.expandTextHeight = true;
-	                FontSizeExpandText$1(text, { fitHeight: true });
+	                FontSizeExpandText(text, { fitHeight: true });
 
 	            }
 
