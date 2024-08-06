@@ -1,10 +1,9 @@
 import BaseShapes from '../shapes/BaseShapes.js';
 import Methods from './methods/Methods.js';
+import { DefaultBoxFillColor, DefaultCheckerColor } from './Const.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const DefaultBoxFillColor = 0x005cb2;
-const DefaultCheckerColor = 0xffffff;
 
 class CheckboxShape extends BaseShapes {
     constructor(scene, x, y, width, height, color, config) {
