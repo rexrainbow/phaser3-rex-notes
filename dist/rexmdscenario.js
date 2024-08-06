@@ -362,7 +362,7 @@
 	    }
 	};
 
-	var IsPlainObject$X = function (obj)
+	var IsPlainObject$Y = function (obj)
 	{
 	    // Not plain objects:
 	    // - Any object or value whose internal [[Class]] property is not "[object Object]"
@@ -14419,7 +14419,7 @@
 
 	var BindEventMethods = {
 	    startGroupByEvent(eventName, groupName, once) {
-	        if (IsPlainObject$X(eventName)) {
+	        if (IsPlainObject$Y(eventName)) {
 	            var config = eventName;
 	            eventName = config.eventName;
 	            groupName = config.groupName;
@@ -14489,7 +14489,7 @@
 
 	class EventSheetManager extends EventEmitter$2 {
 	    constructor(scene, config) {
-	        if (IsPlainObject$X(scene) && (config === undefined)) {
+	        if (IsPlainObject$Y(scene) && (config === undefined)) {
 	            config = scene;
 	            scene = undefined;
 	        }
@@ -25012,11 +25012,11 @@
 	    this._endDraw();
 	};
 
-	const IsPlainObject$W = Phaser.Utils.Objects.IsPlainObject;
+	const IsPlainObject$X = Phaser.Utils.Objects.IsPlainObject;
 	const GetValue$3u = Phaser.Utils.Objects.GetValue;
 
 	var SetStretchMode = function(mode) {
-	    if (IsPlainObject$W(mode)) {
+	    if (IsPlainObject$X(mode)) {
 	        this.stretchMode.edge = parseMode(GetValue$3u(mode, 'edge', 0));
 	        this.stretchMode.internal = parseMode(GetValue$3u(mode, 'internal', 0));
 	    } else {
@@ -25086,13 +25086,13 @@
 	    setMaxFixedPartScale: SetMaxFixedPartScale,
 	};
 
-	const IsPlainObject$V = Phaser.Utils.Objects.IsPlainObject;
+	const IsPlainObject$W = Phaser.Utils.Objects.IsPlainObject;
 	const GetValue$3t = Phaser.Utils.Objects.GetValue;
 
 	var NinePatchBase = function (GOClass, type) {
 	    class NinePatch extends GOClass {
 	        constructor(scene, x, y, width, height, key, baseFrame, columns, rows, config) {
-	            if (IsPlainObject$V(x)) {
+	            if (IsPlainObject$W(x)) {
 	                config = x;
 	                x = GetValue$3t(config, 'x', 0);
 	                y = GetValue$3t(config, 'y', 0);
@@ -25102,7 +25102,7 @@
 	                baseFrame = GetValue$3t(config, 'baseFrame', undefined);
 	                columns = GetValue$3t(config, 'columns', undefined);
 	                rows = GetValue$3t(config, 'rows', undefined);
-	            } else if (IsPlainObject$V(width)) {
+	            } else if (IsPlainObject$W(width)) {
 	                config = width;
 	                width = GetValue$3t(config, 'width', 1);
 	                height = GetValue$3t(config, 'height', 1);
@@ -25110,13 +25110,13 @@
 	                baseFrame = GetValue$3t(config, 'baseFrame', undefined);
 	                columns = GetValue$3t(config, 'columns', undefined);
 	                rows = GetValue$3t(config, 'rows', undefined);
-	            } else if (IsPlainObject$V(key)) {
+	            } else if (IsPlainObject$W(key)) {
 	                config = key;
 	                key = GetValue$3t(config, 'key', undefined);
 	                baseFrame = GetValue$3t(config, 'baseFrame', undefined);
 	                columns = GetValue$3t(config, 'columns', undefined);
 	                rows = GetValue$3t(config, 'rows', undefined);
-	            } else if (IsPlainObject$V(baseFrame)) {
+	            } else if (IsPlainObject$W(baseFrame)) {
 	                config = baseFrame;
 	                baseFrame = GetValue$3t(config, 'baseFrame', undefined);
 	                columns = GetValue$3t(config, 'columns', undefined);
@@ -25126,7 +25126,7 @@
 	                rows = columns;
 	                columns = baseFrame;
 	                baseFrame = GetValue$3t(config, 'baseFrame', undefined);
-	            } else if (IsPlainObject$V(columns)) {
+	            } else if (IsPlainObject$W(columns)) {
 	                config = columns;
 	                columns = GetValue$3t(config, 'columns', undefined);
 	                rows = GetValue$3t(config, 'rows', undefined);
@@ -25543,14 +25543,14 @@
 	CheckP3Version();
 
 	const GameObject$4 = Phaser.GameObjects.GameObject;
-	const IsPlainObject$U = Phaser.Utils.Objects.IsPlainObject;
+	const IsPlainObject$V = Phaser.Utils.Objects.IsPlainObject;
 	const GetValue$3r = Phaser.Utils.Objects.GetValue;
 	const List = Phaser.Structs.List;
 	const StableSort = Phaser.Utils.Array.StableSort;
 
 	class Blitter extends GameObject$4 {
 	    constructor(scene, x, y, texture, frame, config) {
-	        if (IsPlainObject$U(x)) {
+	        if (IsPlainObject$V(x)) {
 	            config = x;
 	            x = GetValue$3r(config, 'x', 0);
 	            y = GetValue$3r(config, 'y', 0);
@@ -26198,7 +26198,7 @@
 
 	};
 
-	const IsPlainObject$T = Phaser.Utils.Objects.IsPlainObject;
+	const IsPlainObject$U = Phaser.Utils.Objects.IsPlainObject;
 
 	let ImageData$1 = class ImageData extends RenderBase$1 {
 	    constructor(parent, frame) {
@@ -26222,7 +26222,7 @@
 	    }
 
 	    setFrame(frame) {
-	        if (arguments.length > 0 && !IsPlainObject$T(frame)) {
+	        if (arguments.length > 0 && !IsPlainObject$U(frame)) {
 	            frame = this.parent.texture.get(frame);
 	        }
 	        this.frame = frame;
@@ -26976,14 +26976,14 @@
 	    return pathData;
 	};
 
-	const IsPlainObject$S = Phaser.Utils.Objects.IsPlainObject;
+	const IsPlainObject$T = Phaser.Utils.Objects.IsPlainObject;
 	const GetValue$3o = Phaser.Utils.Objects.GetValue;
 	const Earcut$2 = Phaser.Geom.Polygon.Earcut;
 
 	let RoundRectangle$1 = class RoundRectangle extends PolygnBase {
 	    constructor(scene, x, y, width, height, radiusConfig, fillColor, fillAlpha) {
 	        var strokeColor, strokeAlpha, strokeWidth, shapeType;
-	        if (IsPlainObject$S(x)) {
+	        if (IsPlainObject$T(x)) {
 	            var config = x;
 
 	            x = config.x;
@@ -28282,7 +28282,7 @@
 	    points.push({ t: t, x: x, y: y });
 	};
 
-	const IsPlainObject$R = Phaser.Utils.Objects.IsPlainObject;
+	const IsPlainObject$S = Phaser.Utils.Objects.IsPlainObject;
 	const GetValue$3n = Phaser.Utils.Objects.GetValue;
 	const Linear$n = Phaser.Math.Linear;
 	const Earcut$1 = Phaser.Geom.Polygon.Earcut;
@@ -28290,7 +28290,7 @@
 	class Quad extends PolygnBase {
 	    constructor(scene, x, y, width, height, fillColor, fillAlpha) {
 	        var strokeColor, strokeAlpha, strokeWidth;
-	        if (IsPlainObject$R(x)) {
+	        if (IsPlainObject$S(x)) {
 	            var config = x;
 
 	            x = config.x;
@@ -30929,11 +30929,11 @@
 
 	}
 
-	const IsPlainObject$Q = Phaser.Utils.Objects.IsPlainObject;
+	const IsPlainObject$R = Phaser.Utils.Objects.IsPlainObject;
 	const GetValue$3j = Phaser.Utils.Objects.GetValue;
 
 	var AddImage$1 = function (key, config) {
-	    if (IsPlainObject$Q(key)) {
+	    if (IsPlainObject$R(key)) {
 	        config = key;
 	        key = config.key;
 	    } else if (config === undefined) {
@@ -31153,7 +31153,7 @@
 	    return this;
 	};
 
-	const IsPlainObject$P = Phaser.Utils.Objects.IsPlainObject;
+	const IsPlainObject$Q = Phaser.Utils.Objects.IsPlainObject;
 	const AddToDOM = Phaser.DOM.AddToDOM;
 	const CanvasPool = Phaser.Display.Canvas.CanvasPool;
 	const GameObject$1 = Phaser.GameObjects.GameObject;
@@ -31169,7 +31169,7 @@
 
 	class Text extends TextBase {
 	    constructor(scene, x, y, text, style, type, parser) {
-	        if (IsPlainObject$P(x)) {
+	        if (IsPlainObject$Q(x)) {
 	            var config = x;
 	            x = GetValue$3i(config, 'x', 0);
 	            y = GetValue$3i(config, 'y', 0);
@@ -36065,18 +36065,18 @@
 	    }
 	}
 
-	const IsPlainObject$O = Phaser.Utils.Objects.IsPlainObject;
+	const IsPlainObject$P = Phaser.Utils.Objects.IsPlainObject;
 	const GetValue$38 = Phaser.Utils.Objects.GetValue;
 
 	class DynamicText extends Canvas$1 {
 	    constructor(scene, x, y, fixedWidth, fixedHeight, config) {
-	        if (IsPlainObject$O(x)) {
+	        if (IsPlainObject$P(x)) {
 	            config = x;
 	            x = GetValue$38(config, 'x', 0);
 	            y = GetValue$38(config, 'y', 0);
 	            fixedWidth = GetValue$38(config, 'width', 0);
 	            fixedHeight = GetValue$38(config, 'height', 0);
-	        } else if (IsPlainObject$O(fixedWidth)) {
+	        } else if (IsPlainObject$P(fixedWidth)) {
 	            config = fixedWidth;
 	            fixedWidth = GetValue$38(config, 'width', 0);
 	            fixedHeight = GetValue$38(config, 'height', 0);
@@ -39000,14 +39000,14 @@
 	    }
 	};
 
-	const IsPlainObject$N = Phaser.Utils.Objects.IsPlainObject;
+	const IsPlainObject$O = Phaser.Utils.Objects.IsPlainObject;
 	const GetValue$35 = Phaser.Utils.Objects.GetValue;
 
 	class TextPlayer extends Extend(DynamicText) {
 	    constructor(scene, x, y, fixedWidth, fixedHeight, config) {
-	        if (IsPlainObject$N(x)) {
+	        if (IsPlainObject$O(x)) {
 	            config = x;
-	        } else if (IsPlainObject$N(fixedWidth)) {
+	        } else if (IsPlainObject$O(fixedWidth)) {
 	            config = fixedWidth;
 	        }
 	        if (config === undefined) {
@@ -41034,13 +41034,13 @@
 	    },
 	};
 
-	const IsPlainObject$M = Phaser.Utils.Objects.IsPlainObject;
+	const IsPlainObject$N = Phaser.Utils.Objects.IsPlainObject;
 
 	class CanvasInput extends DynamicText {
 	    constructor(scene, x, y, fixedWidth, fixedHeight, config) {
-	        if (IsPlainObject$M(x)) {
+	        if (IsPlainObject$N(x)) {
 	            config = x;
-	        } else if (IsPlainObject$M(fixedWidth)) {
+	        } else if (IsPlainObject$N(fixedWidth)) {
 	            config = fixedWidth;
 	        }
 
@@ -43700,21 +43700,22 @@
 	    CheckerAnimationMethods,
 	);
 
-	const GetValue$2Z = Phaser.Utils.Objects.GetValue;
-	const IsPlainObject$L = Phaser.Utils.Objects.IsPlainObject;
 	const DefaultBoxFillColor = 0x005cb2;
 	const DefaultCheckerColor = 0xffffff;
 
+	const GetValue$2Z = Phaser.Utils.Objects.GetValue;
+	const IsPlainObject$M = Phaser.Utils.Objects.IsPlainObject;
+
 	class CheckboxShape extends BaseShapes {
 	    constructor(scene, x, y, width, height, color, config) {
-	        if (IsPlainObject$L(x)) {
+	        if (IsPlainObject$M(x)) {
 	            config = x;
 	            x = GetValue$2Z(config, 'x', 0);
 	            y = GetValue$2Z(config, 'y', 0);
 	            width = GetValue$2Z(config, 'width', 2);
 	            height = GetValue$2Z(config, 'height', 2);
 	            color = GetValue$2Z(config, 'color', DefaultBoxFillColor);
-	        } else if (IsPlainObject$L(color)) {
+	        } else if (IsPlainObject$M(color)) {
 	            config = color;
 	            color = GetValue$2Z(config, 'color', DefaultBoxFillColor);
 	        }
@@ -44069,9 +44070,22 @@
 	};
 
 	const GetValue$2X = Phaser.Utils.Objects.GetValue;
+	const IsPlainObject$L = Phaser.Utils.Objects.IsPlainObject;
 
 	class Checkbox extends CheckboxShape {
 	    constructor(scene, x, y, width, height, color, config) {
+	        if (IsPlainObject$L(x)) {
+	            config = x;
+	            x = GetValue$2X(config, 'x', 0);
+	            y = GetValue$2X(config, 'y', 0);
+	            width = GetValue$2X(config, 'width', 2);
+	            height = GetValue$2X(config, 'height', 2);
+	            color = GetValue$2X(config, 'color', DefaultBoxFillColor);
+	        } else if (IsPlainObject$L(color)) {
+	            config = color;
+	            color = GetValue$2X(config, 'color', DefaultBoxFillColor);
+	        }
+
 	        super(scene, x, y, width, height, color, config);
 
 	        this._click = new Button(this, GetValue$2X(config, 'click'));

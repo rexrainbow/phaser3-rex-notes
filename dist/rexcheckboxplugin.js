@@ -2666,21 +2666,22 @@
         CheckerAnimationMethods,
     );
 
-    const GetValue$2 = Phaser.Utils.Objects.GetValue;
-    const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
     const DefaultBoxFillColor = 0x005cb2;
     const DefaultCheckerColor = 0xffffff;
 
+    const GetValue$2 = Phaser.Utils.Objects.GetValue;
+    const IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
+
     class CheckboxShape extends BaseShapes {
         constructor(scene, x, y, width, height, color, config) {
-            if (IsPlainObject(x)) {
+            if (IsPlainObject$1(x)) {
                 config = x;
                 x = GetValue$2(config, 'x', 0);
                 y = GetValue$2(config, 'y', 0);
                 width = GetValue$2(config, 'width', 2);
                 height = GetValue$2(config, 'height', 2);
                 color = GetValue$2(config, 'color', DefaultBoxFillColor);
-            } else if (IsPlainObject(color)) {
+            } else if (IsPlainObject$1(color)) {
                 config = color;
                 color = GetValue$2(config, 'color', DefaultBoxFillColor);
             }
@@ -3035,9 +3036,22 @@
     };
 
     const GetValue = Phaser.Utils.Objects.GetValue;
+    const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
     class Checkbox extends CheckboxShape {
         constructor(scene, x, y, width, height, color, config) {
+            if (IsPlainObject(x)) {
+                config = x;
+                x = GetValue(config, 'x', 0);
+                y = GetValue(config, 'y', 0);
+                width = GetValue(config, 'width', 2);
+                height = GetValue(config, 'height', 2);
+                color = GetValue(config, 'color', DefaultBoxFillColor);
+            } else if (IsPlainObject(color)) {
+                config = color;
+                color = GetValue(config, 'color', DefaultBoxFillColor);
+            }
+
             super(scene, x, y, width, height, color, config);
 
             this._click = new Button(this, GetValue(config, 'click'));
