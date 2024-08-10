@@ -281,10 +281,22 @@
             return this.style.setVAlign(align);
         }
 
+        get lineSpacing() {
+            return this.style.lineSpacing;
+        }
+
+        set lineSpacing(value) {
+            this.style.lineSpacing = value;
+        }
+
         setLineSpacing(value) {
-            this.lineSpacing = value;
-            this.updateText(false);
+            this.style.lineSpacing = value;
+            this.updateText(true);
             return this;
+        }
+
+        get fontSize() {
+            return this.style.metrics.fontSize;
         }
 
         setXOffset(value) {
@@ -3304,8 +3316,6 @@
 
             this.height = 1;
 
-            this.lineSpacing = 0;
-
             this.dirty = false;
 
             //  If resolution wasn't set, force it to 1
@@ -3377,10 +3387,6 @@
 
             if (style && style.padding) {
                 this.setPadding(style.padding);
-            }
-
-            if (style && style.lineSpacing) {
-                this.setLineSpacing(style.lineSpacing);
             }
 
             this.setText(text);
