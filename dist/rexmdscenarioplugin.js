@@ -28784,6 +28784,38 @@
 	        return this.style.setShadowFill(enabled);
 	    }
 
+	    setUnderline(color, thickness, offset) {
+	        return this.style.setUnderline(color, thickness, offset);
+	    }
+
+	    setUnderlineColor(color) {
+	        return this.style.setUnderlineColor(color);
+	    }
+
+	    setUnderlineThickness(thickness) {
+	        return this.style.setUnderlineThickness(thickness);
+	    }
+
+	    setUnderlineOffset(offset) {
+	        return this.style.setUnderlineOffset(offset);
+	    }
+
+	    setStrikethrough(color, thickness, offset) {
+	        return this.style.setStrikethrough(color, thickness, offset);
+	    }
+
+	    setStrikethroughColor(color) {
+	        return this.style.setStrikethroughColor(color);
+	    }
+
+	    setStrikethroughThickness(thickness) {
+	        return this.style.setStrikethroughThickness(thickness);
+	    }
+
+	    setStrikethroughOffset(offset) {
+	        return this.style.setStrikethroughOffset(offset);
+	    }
+
 	    setWrapMode(mode) {
 	        return this.style.setWrapMode(mode);
 	    }
