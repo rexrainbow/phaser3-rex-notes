@@ -204,7 +204,6 @@ declare class Text extends CanvasGameObjectBase {
 
     setLineSpacing(value: number): this;
     lineSpacing: number;
-    readonly fontSize: number;
 
     setXOffset(value: number): this;
 
