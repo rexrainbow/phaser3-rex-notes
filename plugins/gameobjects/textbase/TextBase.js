@@ -139,10 +139,26 @@ class TextBase extends GameObject {
         return this.style.setVAlign(align);
     }
 
+    get lineSpacing() {
+        return this.style.lineSpacing;
+    }
+
+    set lineSpacing(value) {
+        this.style.lineSpacing = value;
+    }
+
     setLineSpacing(value) {
-        this.lineSpacing = value;
-        this.updateText(false);
+        this.style.lineSpacing = value;
+        this.updateText(true);
         return this;
+    }
+    setLineHeight(value) {
+        this.setLineSpacing(value - this.style.metrics.fontSize);
+        return this;
+    }
+
+    get lineHeight() {
+        return this.style.lineHeight;
     }
 
     setXOffset(value) {

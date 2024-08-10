@@ -203,6 +203,9 @@ declare class Text extends CanvasGameObjectBase {
     ): this;
 
     setLineSpacing(value: number): this;
+    setLineHeight(value: number): this;
+    lineSpacing: number;
+    readonly lineHeight: number;
 
     setXOffset(value: number): this;
 
@@ -297,6 +300,4 @@ declare class Text extends CanvasGameObjectBase {
         top: number,
         bottom: number
     };
-
-    lineSpacing: number;
 }

@@ -70,8 +70,6 @@ interface TextStyle {
         descent: number,
         fontSize: number
     },
-
-    readonly lineHeight: number,
 }
 
 export default TextStyle;
