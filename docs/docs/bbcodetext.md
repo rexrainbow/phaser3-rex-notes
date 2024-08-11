@@ -372,6 +372,13 @@ var txt = scene.make.rexBBCodeText({
     ```javascript
     var text = txt.getText(start, end);
     ```
+- Get wrapped lines
+    ```javascript
+    var linesArray = txt.getWrappedText();
+    ```
+    ```javascript
+    var linesArray = txt.getWrappedText(content);
+    ```
 - Set
     ```javascript
     txt.setText('[b]h[/b]ello');
