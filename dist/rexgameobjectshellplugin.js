@@ -4452,7 +4452,7 @@
             }
 
             if (this.pinchZoom) {
-                this.pinchZoom.destro(fromScene);
+                this.pinchZoom.destroy(fromScene);
             }
 
             if (this.boundsScroll) {
@@ -28711,10 +28711,6 @@
             this.style.lineSpacing = value;
             this.updateText(true);
             return this;
-        }
-
-        get fontSize() {
-            return this.style.metrics.fontSize;
         }
 
         setXOffset(value) {

@@ -9145,8 +9145,8 @@
         return (object.type === 'rexMiniBoard');
     };
 
-    const Base$1 = Phaser.GameObjects.Polygon;
-    class Shape extends Base$1 {
+    const Base$3 = Phaser.GameObjects.Polygon;
+    class Shape extends Base$3 {
         constructor(board, tileX, tileY, tileZ, fillColor, fillAlpha, addToBoard) {
             if (addToBoard === undefined) {
                 addToBoard = true;
@@ -9172,6 +9172,7 @@
             var points = board.getGridPoints(undefined, undefined, true);
             ShiftToO(points);
             super(scene, worldX, worldY, points, fillColor, fillAlpha);
+            this.type = 'rexShapeChess';
 
             if (addToBoard) {
                 if (isMiniBoard) { // Chess-Container
@@ -9212,6 +9213,100 @@
     });
 
     SetValue(window, 'RexPlugins.Board.Shape', Shape);
+
+    const Base$2 = Phaser.GameObjects.Image;
+    class Image extends Base$2 {
+        constructor(board, tileX, tileY, tileZ, key, frame, addToBoard) {
+            if (addToBoard === undefined) {
+                addToBoard = true;
+            }
+
+            // Chess-Container
+            var isMiniBoard = IsMiniBoardObject(board),
+                miniBoard;
+            if (isMiniBoard) {
+                miniBoard = board;
+                board = miniBoard.board;
+            }
+
+            var scene = board.scene;
+            var worldX, worldY;
+            if (addToBoard) {
+                worldX = 0;
+                worldY = 0;
+            } else {
+                worldX = tileX;
+                worldY = tileY;
+            }
+            super(scene, worldX, worldY, key, frame);
+            this.type = 'rexImageChess';
+
+            if (addToBoard) {
+                if (isMiniBoard) { // Chess-Container
+                    miniBoard.addChess(this, tileX, tileY, tileZ);
+                } else {
+                    board.addChess(this, tileX, tileY, tileZ, true);
+                }
+            } else {
+                GetChessData(this);
+            }
+        }
+    }
+
+    ObjectFactory.register('image', function (board, tileX, tileY, tileZ, key, frame, addToBoard) {
+        var gameObject = new Image(board, tileX, tileY, tileZ, key, frame, addToBoard);
+        board.scene.add.existing(gameObject);
+        return gameObject;
+    });
+
+    SetValue(window, 'RexPlugins.Board.Image', Image);
+
+    const Base$1 = Phaser.GameObjects.Sprite;
+    class Sprite extends Base$1 {
+        constructor(board, tileX, tileY, tileZ, key, frame, addToBoard) {
+            if (addToBoard === undefined) {
+                addToBoard = true;
+            }
+
+            // Chess-Container
+            var isMiniBoard = IsMiniBoardObject(board),
+                miniBoard;
+            if (isMiniBoard) {
+                miniBoard = board;
+                board = miniBoard.board;
+            }
+
+            var scene = board.scene;
+            var worldX, worldY;
+            if (addToBoard) {
+                worldX = 0;
+                worldY = 0;
+            } else {
+                worldX = tileX;
+                worldY = tileY;
+            }
+            super(scene, worldX, worldY, key, frame);
+            this.type = 'rexSpriteChess';
+
+            if (addToBoard) {
+                if (isMiniBoard) { // Chess-Container
+                    miniBoard.addChess(this, tileX, tileY, tileZ);
+                } else {
+                    board.addChess(this, tileX, tileY, tileZ, true);
+                }
+            } else {
+                GetChessData(this);
+            }
+        }
+    }
+
+    ObjectFactory.register('sprite', function (board, tileX, tileY, tileZ, key, frame, addToBoard) {
+        var gameObject = new Sprite(board, tileX, tileY, tileZ, key, frame, addToBoard);
+        board.scene.add.existing(gameObject);
+        return gameObject;
+    });
+
+    SetValue(window, 'RexPlugins.Board.Sprite', Sprite);
 
     const GetValue$5 = Phaser.Utils.Objects.GetValue;
 

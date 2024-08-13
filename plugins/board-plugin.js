@@ -3,7 +3,10 @@ import ObjectFactory from './board/ObjectFactory.js';
 import BoardFactory from './board/board/Factory.js';
 import HexagonFactory from './board/grid/hexagon/Factory.js';
 import QuadFactory from './board/grid/quad/Factory.js';
+
 import ShapeFactory from './board/shape/Factory.js';
+import ImageFactory from './board/image/Factory.js';
+import SpriteFactory from './board/sprite/Factory.js';
 
 import MoveToFactory from './board/moveto/Factory.js';
 import MatchFactory from './board/match/Factory.js';

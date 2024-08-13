@@ -473,8 +473,11 @@ nav:
     - Grid:    
         - Quad: board-quadgrid.md
         - Hexagon: board-hexagongrid.md
-    - Chess data: board-chessdata.md
-    - Shape: board-shape.md
+    - Chess:
+        - Shape: board-shape.md
+        - Image: board-image.md
+        - Sprite: board-sprite.md
+        - Chess data: board-chessdata.md    
     - Move to: board-moveto.md
     - Path finder: board-pathfinder.md
     - Monopoly: board-monopoly.md

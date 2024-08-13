@@ -1,7 +1,11 @@
 import Board from './board/board/Board';
 import HexagonGrid from './board/grid/hexagon/Hexagon';
 import QuadGrid from './board/grid/quad/Quad';
-import Shape from './board/shape/Shape';
+
+import Shape from './board/shape/Shape.js';
+import Image from './board/image/Image.js';
+import Sprite from './board/sprite/Sprite.js';
+
 import Match from './board/match/Match';
 import MoveTo from './board/moveto/MoveTo';
 import PathFinder from './board/pathfinder/PathFinder';
@@ -16,7 +20,11 @@ export {
     Board,
     HexagonGrid,
     QuadGrid,
+
     Shape,
+    Image,
+    Sprite,
+
     Match,
     MoveTo,
     PathFinder,

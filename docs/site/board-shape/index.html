@@ -13,10 +13,10 @@
         <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/board-shape/">
       
       
-        <link rel="prev" href="../board-chessdata/">
+        <link rel="prev" href="../board-hexagongrid/">
       
       
-        <link rel="next" href="../board-moveto/">
+        <link rel="next" href="../board-image/">
       
       <link rel="icon" href="../images/logo.svg">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.1">
@@ -8938,15 +8938,30 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../board-chessdata/" class="md-nav__link">
-        Chess data
-      </a>
-    </li>
   
-
-            
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16_4" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_16_4" id="__nav_16_4_label" tabindex="0">
+          Chess
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_16_4_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_16_4">
+          <span class="md-nav__icon md-icon"></span>
+          Chess
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
           
             
               
@@ -9033,8 +9048,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-shape-object" class="md-nav__link">
-    Add shape object
+  <a href="#add-chess-object" class="md-nav__link">
+    Add chess object
   </a>
   
 </li>
@@ -9062,6 +9077,55 @@
   
 </nav>
       
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../board-image/" class="md-nav__link">
+        Image
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../board-sprite/" class="md-nav__link">
+        Sprite
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../board-chessdata/" class="md-nav__link">
+        Chess data
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -9190,17 +9254,17 @@
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16_14" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16_13" >
       
       
       
-        <label class="md-nav__link" for="__nav_16_14" id="__nav_16_14_label" tabindex="0">
+        <label class="md-nav__link" for="__nav_16_13" id="__nav_16_13_label" tabindex="0">
           Mini board
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_16_14_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_16_14">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_16_13_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_16_13">
           <span class="md-nav__icon md-icon"></span>
           Mini board
         </label>
@@ -9747,8 +9811,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-shape-object" class="md-nav__link">
-    Add shape object
+  <a href="#add-chess-object" class="md-nav__link">
+    Add chess object
   </a>
   
 </li>
@@ -9793,21 +9857,21 @@
   <h1>Shape</h1>
 
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Grid (polygon) shape object.</p>
+<p><a href="../shape-polygon/">Grid (polygon) shape</a> chess object.</p>
 <ul>
 <li>Author: Rex</li>
-<li>Polygon Shape Game object of Board system</li>
+<li>Chess Game object of Board system</li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/board">Sample code</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/board-chess">Sample code</a></p>
 <h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
 <h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Load plugin (minify file) in preload stage
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">scenePlugin</span><span class="p">(</span><span class="s1">&#39;rexboardplugin&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexboardplugin.min.js&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;rexBoard&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;rexBoard&#39;</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Add shape object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">shape</span><span class="p">(</span><span class="nx">board</span><span class="p">,</span><span class="w"> </span><span class="nx">tileX</span><span class="p">,</span><span class="w"> </span><span class="nx">tileY</span><span class="p">,</span><span class="w"> </span><span class="nx">tileZ</span><span class="p">,</span><span class="w"> </span><span class="nx">fillColor</span><span class="p">);</span>
+<li>Add chess object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">chess</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">shape</span><span class="p">(</span><span class="nx">board</span><span class="p">,</span><span class="w"> </span><span class="nx">tileX</span><span class="p">,</span><span class="w"> </span><span class="nx">tileY</span><span class="p">,</span><span class="w"> </span><span class="nx">tileZ</span><span class="p">,</span><span class="w"> </span><span class="nx">fillColor</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
@@ -9832,8 +9896,8 @@
 <span class="p">};</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">game</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Add shape object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">shape</span><span class="p">(</span><span class="nx">board</span><span class="p">,</span><span class="w"> </span><span class="nx">tileX</span><span class="p">,</span><span class="w"> </span><span class="nx">tileY</span><span class="p">,</span><span class="w"> </span><span class="nx">tileZ</span><span class="p">,</span><span class="w"> </span><span class="nx">fillColor</span><span class="p">);</span>
+<li>Add chess object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">chess</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">shape</span><span class="p">(</span><span class="nx">board</span><span class="p">,</span><span class="w"> </span><span class="nx">tileX</span><span class="p">,</span><span class="w"> </span><span class="nx">tileY</span><span class="p">,</span><span class="w"> </span><span class="nx">tileZ</span><span class="p">,</span><span class="w"> </span><span class="nx">fillColor</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
@@ -9844,38 +9908,37 @@
 <li>Import class
     <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Shape</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/plugins/board-components.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
-<li>Add shape object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Shape</span><span class="p">(</span><span class="nx">board</span><span class="p">,</span><span class="w"> </span><span class="nx">tileX</span><span class="p">,</span><span class="w"> </span><span class="nx">tileY</span><span class="p">,</span><span class="w"> </span><span class="nx">tileZ</span><span class="p">,</span><span class="w"> </span><span class="nx">fillColor</span><span class="p">);</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="nx">shape</span><span class="p">);</span>
+<li>Add chess object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">chess</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Shape</span><span class="p">(</span><span class="nx">board</span><span class="p">,</span><span class="w"> </span><span class="nx">tileX</span><span class="p">,</span><span class="w"> </span><span class="nx">tileY</span><span class="p">,</span><span class="w"> </span><span class="nx">tileZ</span><span class="p">,</span><span class="w"> </span><span class="nx">fillColor</span><span class="p">);</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="nx">chess</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-<h3 id="add-shape-object">Add shape object<a class="headerlink" href="#add-shape-object" title="Permanent link">&para;</a></h3>
+<h3 id="add-chess-object">Add chess object<a class="headerlink" href="#add-chess-object" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Create shape object and add to board
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">shape</span><span class="p">(</span><span class="nx">board</span><span class="p">,</span><span class="w"> </span><span class="nx">tileX</span><span class="p">,</span><span class="w"> </span><span class="nx">tileY</span><span class="p">,</span><span class="w"> </span><span class="nx">tileZ</span><span class="p">,</span><span class="w"> </span><span class="nx">fillColor</span><span class="p">);</span>
-<span class="c1">// var shape = scene.rexBoard.add.shape(board, tileX, tileY, tileZ, fillColor, fillAlpha);</span>
+<li>Create chess object and add to board
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">chess</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">shape</span><span class="p">(</span><span class="nx">board</span><span class="p">,</span><span class="w"> </span><span class="nx">tileX</span><span class="p">,</span><span class="w"> </span><span class="nx">tileY</span><span class="p">,</span><span class="w"> </span><span class="nx">tileZ</span><span class="p">,</span><span class="w"> </span><span class="nx">fillColor</span><span class="p">,</span><span class="w"> </span><span class="nx">fillAlpha</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>board</code> : <a href="../board/">Board object</a></li>
 <li><code>tileX</code>, <code>tileY</code>, <code>tileZ</code> : Tile position</li>
-<li><code>fillColor</code>, <code>fillAlpha</code> : Color of this shape object</li>
+<li><code>fillColor</code>, <code>fillAlpha</code> : Color of this shape chess object</li>
 </ul>
 </li>
-<li>Create shape object but <em>not</em> add to board
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">shape</span><span class="p">(</span><span class="nx">board</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span><span class="nx">fillColor</span><span class="p">,</span><span class="w"> </span><span class="nx">fillAlpha</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
+<li>Create chess object but <em>not</em> add to board
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">chess</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">shape</span><span class="p">(</span><span class="nx">board</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span><span class="nx">fillColor</span><span class="p">,</span><span class="w"> </span><span class="nx">fillAlpha</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>board</code> : <a href="../board/">Board object</a></li>
 <li><code>x</code>, <code>y</code> : World position</li>
-<li><code>fillColor</code>, <code>fillAlpha</code> : Color of this shape object</li>
+<li><code>fillColor</code>, <code>fillAlpha</code> : Color of this shape chess object</li>
 </ul>
 </li>
 </ul>
 <h3 id="set-color">Set color<a class="headerlink" href="#set-color" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Fill color
-    <div class="highlight"><pre><span></span><code><span class="nx">polygon</span><span class="p">.</span><span class="nx">setFillStyle</span><span class="p">(</span><span class="nx">color</span><span class="p">,</span><span class="w"> </span><span class="nx">alpha</span><span class="p">)</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">chess</span><span class="p">.</span><span class="nx">setFillStyle</span><span class="p">(</span><span class="nx">color</span><span class="p">,</span><span class="w"> </span><span class="nx">alpha</span><span class="p">)</span>
 </code></pre></div></li>
 <li>Stroke color
-    <div class="highlight"><pre><span></span><code><span class="nx">polygon</span><span class="p">.</span><span class="nx">setStrokeStyle</span><span class="p">(</span><span class="nx">lineWidth</span><span class="p">,</span><span class="w"> </span><span class="nx">color</span><span class="p">,</span><span class="w"> </span><span class="nx">alpha</span><span class="p">)</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">chess</span><span class="p">.</span><span class="nx">setStrokeStyle</span><span class="p">(</span><span class="nx">lineWidth</span><span class="p">,</span><span class="w"> </span><span class="nx">color</span><span class="p">,</span><span class="w"> </span><span class="nx">alpha</span><span class="p">)</span>
 </code></pre></div></li>
 </ul>
 <div class="admonition warning">

@@ -4115,7 +4115,7 @@
             }
 
             if (this.pinchZoom) {
-                this.pinchZoom.destro(fromScene);
+                this.pinchZoom.destroy(fromScene);
             }
 
             if (this.boundsScroll) {

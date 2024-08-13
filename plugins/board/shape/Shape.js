@@ -28,6 +28,7 @@ class Shape extends Base {
         var points = board.getGridPoints(undefined, undefined, true);
         ShiftToO(points);
         super(scene, worldX, worldY, points, fillColor, fillAlpha);
+        this.type = 'rexShapeChess';
 
         if (addToBoard) {
             if (isMiniBoard) { // Chess-Container

@@ -25391,10 +25391,6 @@
             return this;
         }
 
-        get fontSize() {
-            return this.style.metrics.fontSize;
-        }
-
         setXOffset(value) {
             return this.style.setXOffset(value);
         }
