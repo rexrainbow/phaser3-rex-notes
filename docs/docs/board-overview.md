@@ -90,9 +90,12 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
     - [Hexagon grid](board-hexagongrid.md)
 - [Chess](board-chessdata.md)
 
-### Shapes
 
-- [Shape](board-shape.md)
+### Chess game object
+
+- [Shape game object](board-shape.md)
+- [Image game object](board-image.md)
+- [Sprite game object](board-sprite.md)
 - [Tile texture](board-texture.md)
 
 ### Behaviors

@@ -12,6 +12,7 @@
 7. [Away time](awaytime.md): Get time from previous closing application to now.
 8. [BBCode-text](bbcodetext.md): Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 9.  [Board](board.md): Core object of Board system.
+9.  [Board/Image](board-image.md): [Image](image.md) chess object.
 10. [Board/Field of view](board-fieldofview.md): Visible testing, to find field of view.
 11. [Board/Hexagon map](board-hexagonmap.md): Create tile positions in hexagon/triangle/parallelogram geometry in hexagon grid.
 12. [Board/Match](board-match.md): Get matched chess.
@@ -19,7 +20,8 @@
 14. [Board/Monopoly](board-monopoly.md): Move through path tiles.
 15. [Board/Move To](board-moveto.md): Move chess towards target position with a steady speed.
 16. [Board/Path finder](board-pathfinder.md): Find moveable area or moving path.
-17. [Board/Shape](board-shape.md): Grid (polygon) shape object.
+17. [Board/Shape](board-shape.md): [Grid (polygon) shape](shape-polygon.md) chess object.
+17. [Board/Sprite](board-sprite.md): [Sprite](sprite.md) chess object.
 18. [Board/Tilemap](board-tilemap.md): Create board from [tilemap](tilemap.md).
 19. [Board/Tile texture](board-texture.md): Create [canvas-texture](canvas-texture) of tile.
 20. [Bounds](bounds.md): Clamp or wrap position of game object inside target bounds.
