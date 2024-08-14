@@ -9962,8 +9962,10 @@
 <h3 id="add-drop-down-list-object">Add drop-down list object<a class="headerlink" href="#add-drop-down-list-object" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">dropDownList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">simpleDropDownList</span><span class="p">({</span>
 <span class="w">    </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="nx">labelStyle</span><span class="p">,</span>
-
 <span class="w">    </span><span class="nx">button</span><span class="o">:</span><span class="w"> </span><span class="nx">buttonStyle</span><span class="p">,</span>
+
+<span class="w">    </span><span class="nx">track</span><span class="o">:</span><span class="w"> </span><span class="nx">backgroundStyle</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">thumb</span><span class="o">:</span><span class="w"> </span><span class="nx">backgroundStyle</span><span class="p">,</span>
 
 <span class="w">    </span><span class="nx">list</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="c1">// easeIn: 500,</span>
@@ -10001,6 +10003,10 @@
 <li><a href="../ui-style/#style-of-simplelabel">Styles of simple-label</a></li>
 </ul>
 </li>
+<li><code>track</code>, <code>thumb</code> : <ul>
+<li><a href="../ui-style/#style-of-background">Styles of background</a></li>
+</ul>
+</li>
 <li><code>list</code> : Configuration of list panel.<ul>
 <li><code>list.easeIn</code> : Pop-up duration in ms. Default value is <code>500</code>.</li>
 <li><code>list.transitIn</code> : Tween behavior of opening list panel.<ul>
@@ -10033,7 +10039,8 @@
 </ul>
 </li>
 <li><code>list.height</code> : Minimum height.<ul>
-<li><code>undefined</code> : Default value.</li>
+<li><code>undefined</code> : Create button list or wrap button list. Default value.</li>
+<li><code>&gt; 0</code> and <code>thumb</code> parameter is given : Create scrollable button list or wrap button list.</li>
 </ul>
 </li>
 <li><code>list.alignParent</code> : Align x position to label.<ul>
