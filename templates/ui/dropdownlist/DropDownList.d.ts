@@ -52,21 +52,31 @@ declare namespace DropDownList {
         previousValue?: any,
     ) => void;
 
-    type ListSpaceType = {
+    interface IListSpace {
         left?: number, right?: number, top?: number, bottom?: number, item?: number
-    };
+    }
 
-    type WrapListSpaceType = {
+    interface IWrapListSpace {
         left?: number, right?: number, top?: number, bottom?: number, item?: number, line?: number
     }
+
+    interface IScrollableListSpace extends IListSpace {
+        panel?: number
+    }
+
+    interface IScrollableWrapListSpace extends IWrapListSpace {
+        panel?: number
+    }
+
+    type SpaceType = IListSpace | IWrapListSpace | IScrollableListSpace | IScrollableWrapListSpace;
 
     interface IConfig extends Label.IConfig {
         options?: any[],
         list?: {
             createBackgroundCallback?: CreateGeneralGameObjectCallbackType;
             createButtonCallback?: CreateButtonCallbackType;
-            createSliderTrackCallback?: CreateGeneralGameObjectCallbackType;
-            createSliderThumbCallback?: CreateGeneralGameObjectCallbackType;
+            createTrackCallback?: CreateGeneralGameObjectCallbackType;
+            createThumbCallback?: CreateGeneralGameObjectCallbackType;
 
             onButtonClick?: OnButtonClickCallbackType;
             onButtonOver?: OnButtonOverCallbackType;
@@ -84,9 +94,8 @@ declare namespace DropDownList {
             bounds?: Phaser.Geom.Rectangle;
 
             listSliderAdaptThumbSizeEnable?: boolean;
-            listHideUnscrollableSliderEnable?: boolean;
 
-            space?: ListSpaceType | WrapListSpaceType;
+            space?: SpaceType;
 
             draggable?: boolean;
         },
@@ -138,7 +147,7 @@ declare class DropDownList extends Label {
     setListAlignmentSide(side?: string): this;
     setListBounds(bounds: Phaser.Geom.Rectangle): this;
 
-    setListSpace(space?: DropDownList.ListSpaceType | DropDownList.WrapListSpaceType): this;
+    setListSpace(space?: DropDownList.SpaceType): this;
 
     setListDraggable(enable?: boolean): this;
 

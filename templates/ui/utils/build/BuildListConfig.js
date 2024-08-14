@@ -1,6 +1,7 @@
 import DeepClone from '../../../../plugins/utils/object/DeepClone.js';
 import BuildLabelConfig from './BuildLabelConfig.js';
 import CreateLabel from './CreateLabel.js';
+import CreateBackground from './CreateBackground.js';
 
 var BuildListConfig = function (scene, config, creators) {
     config = (config) ? DeepClone(config) : {};
@@ -26,6 +27,22 @@ var BuildListConfig = function (scene, config, creators) {
             gameObject.value = option.value;
         }
         return gameObject;
+    }
+
+    var trackConfig = config.track;
+    if (trackConfig) {
+        listConfig.list.createTrackCallback = function (scene) {
+            return CreateBackground(scene, trackConfig);
+        }
+        delete config.track;
+    }
+
+    var thumbConfig = config.thumb;
+    if (thumbConfig) {
+        listConfig.list.createThumbCallback = function (scene) {
+            return CreateBackground(scene, thumbConfig);
+        }
+        delete config.thumb;
     }
 
     listConfig.list.onButtonOver = function (button, index, pointer, event) {

@@ -49,11 +49,7 @@ class Demo extends Phaser.Scene {
                         text: CreateTextObject(scene, option.text),
 
                         space: {
-                            left: 10,
-                            right: 10,
-                            top: 10,
-                            bottom: 10,
-                            icon: 10
+                            left: 10, right: 10, top: 10, bottom: 10, icon: 10
                         }
                     });
                     button.value = option.value;
@@ -62,12 +58,13 @@ class Demo extends Phaser.Scene {
                 },
 
                 height: 200,
-                createSliderTrackCallback: function (scene) {
+                createTrackCallback: function (scene) {
                     return scene.rexUI.add.roundRectangle({ width: 10, color: COLOR_MAIN });
                 },
-                createSliderThumbCallback: function (scene) {
+                createThumbCallback: function (scene) {
                     return scene.rexUI.add.roundRectangle({ width: 14, height: 14, color: COLOR_LIGHT });
                 },
+                space: { panel: 8 },
 
                 // scope: dropDownList
                 onButtonClick: function (button, index, pointer, event) {

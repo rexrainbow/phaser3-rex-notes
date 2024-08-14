@@ -2,6 +2,8 @@ import Buttons from '../../../buttons/Buttons.js';
 import FixWidthButtons from '../../../fixwidthbuttons/FixWidthButtons.js';
 import ScrollablePanel from '../../../scrollablepanel/ScrollablePanel.js';
 
+const GetValue = Phaser.Utils.Objects.GetValue;
+
 var CreateListPanel = function () {
     var scene = this.scene;
 
@@ -90,16 +92,16 @@ var CreateListPanel = function () {
         scene.add.existing(buttons);
 
         var track;
-        var createSliderTrackCallback = this.listCreateSliderTrackCallback;
-        if (createSliderTrackCallback) {
-            track = createSliderTrackCallback.call(this, scene);
+        var createTrackCallback = this.listCreateSliderTrackCallback;
+        if (createTrackCallback) {
+            track = createTrackCallback.call(this, scene);
             scene.add.existing(track);
         }
 
         var thumb;
-        var createSliderThumbCallback = this.listCreateSliderThumbCallback;
-        if (createSliderThumbCallback) {
-            thumb = createSliderThumbCallback.call(this, scene);
+        var createThumbCallback = this.listCreateSliderThumbCallback;
+        if (createThumbCallback) {
+            thumb = createThumbCallback.call(this, scene);
             scene.add.existing(thumb);
         }
 
@@ -122,6 +124,11 @@ var CreateListPanel = function () {
             },
 
             background: background,
+
+            space: {
+                panel: GetValue(this.listSpace, 'panel', 0),
+            },
+
             draggable: this.listDraggable,
         })
         scene.add.existing(listPanel);

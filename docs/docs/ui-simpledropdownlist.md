@@ -76,8 +76,10 @@ Using plain object to create [drop down list](ui-simpledropdownlist.md).
 ```javascript
 var dropDownList = scene.rexUI.add.simpleDropDownList({
     label: labelStyle,
-
     button: buttonStyle,
+
+    track: backgroundStyle,
+    thumb: backgroundStyle,
 
     list: {
         // easeIn: 500,
@@ -111,6 +113,8 @@ var dropDownList = scene.rexUI.add.simpleDropDownList({
     - [Styles of simple-label](ui-style.md#style-of-simplelabel)
 - `button` : Use `label` parameter if `button` parameter is not given.
     - [Styles of simple-label](ui-style.md#style-of-simplelabel)
+- `track`, `thumb` : 
+    - [Styles of background](ui-style.md#style-of-background)
 - `list` : Configuration of list panel.
     - `list.easeIn` : Pop-up duration in ms. Default value is `500`.
     - `list.transitIn` : Tween behavior of opening list panel.
@@ -137,7 +141,8 @@ var dropDownList = scene.rexUI.add.simpleDropDownList({
         - `undefined` : Minimum width of panel will equal to width of parent label. Default value.
         - A number : Width of panel. Required fields when `list.wrap` is `true`.
     - `list.height` : Minimum height.
-        - `undefined` : Default value.
+        - `undefined` : Create button list or wrap button list. Default value.
+        - `> 0` and `thumb` parameter is given : Create scrollable button list or wrap button list.
     - `list.alignParent` : Align x position to label.
         - `'icon'` : Align x position to *icon* game object of parent label.
         - `'text'` : Align x position to *text* game object of parent label. Default behavior

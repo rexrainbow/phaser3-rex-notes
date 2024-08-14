@@ -96,6 +96,16 @@ var dropDownList = scene.rexUI.add.dropDownList({
             return gameObject;
         },
 
+        // createTrackCallback: function(scene) {
+        //     // this : dropDownList
+        //     return gameObject;
+        // },
+
+        // createThumbCallback: function(scene) {
+        //     // this : dropDownList
+        //     return gameObject;
+        // },
+
         onButtonClick: function(button, index, pointer, event) {
             // this : dropDownList
         },
@@ -193,6 +203,20 @@ var dropDownList = scene.rexUI.add.dropDownList({
             return gameObject;
         }
         ```
+    - `list.createTrackCallback` : Create slider's track of list panel, optional.
+        ```javascript
+        function(scene) {
+            // this : dropDownList
+            return gameObject;
+        }
+        ```
+    - `list.createThumbCallback` : Create slider's thumb of list panel, optional.
+        ```javascript
+        function(scene) {
+            // this : dropDownList
+            return gameObject;
+        }
+        ```
     - `list.onButtonClick` : Callback when clicking a button
         ```javascript
         function(button, index, pointer, event) {
@@ -236,7 +260,8 @@ var dropDownList = scene.rexUI.add.dropDownList({
         - `undefined` : Minimum width of panel will equal to width of parent label. Default value.
         - A number : Width of panel. Required fields when `list.wrap` is `true`.
     - `list.height` : Minimum height.
-        - `undefined` : Default value.
+        - `undefined` : Create button list or wrap button list. Default value.
+        - `> 0` and `list.createThumbCallback` parameter is given : Create scrollable button list or wrap button list.
     - `list.alignParent` : Align x position to label.
         - `'icon'` : Align x position to *icon* game object of parent label.
         - `'text'` : Align x position to *text* game object of parent label. Default behavior
