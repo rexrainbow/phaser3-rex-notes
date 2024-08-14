@@ -119,6 +119,10 @@ class ClickOutside extends ComponentBase {
             return;
         }
 
+        if (this.isPointerInside(pointer)) {
+            return;
+        }
+
         this.pointer = pointer;
 
         if (this.mode === 0) {
