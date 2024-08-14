@@ -18,6 +18,9 @@ class DropDownList extends Label {
         this.setWrapEnable(GetValue(listConfig, 'wrap', false));
         this.setCreateButtonCallback(GetValue(listConfig, 'createButtonCallback'));
         this.setCreateListBackgroundCallback(GetValue(listConfig, 'createBackgroundCallback'));
+        this.setCreateListSliderTrackCallback(GetValue(listConfig, 'createSliderTrackCallback'));
+        this.setCreateListSliderThumbCallback(GetValue(listConfig, 'createSliderThumbCallback'));
+        this.setListSliderAdaptThumbSizeEnable(GetValue(listConfig, 'listSliderAdaptThumbSizeEnable', true));
         this.setButtonClickCallback(GetValue(listConfig, 'onButtonClick'));
         this.setButtonOverCallback(GetValue(listConfig, 'onButtonOver'));
         this.setButtonOutCallback(GetValue(listConfig, 'onButtonOut'));
@@ -26,7 +29,7 @@ class DropDownList extends Label {
         this.setListEaseOutDuration(GetValue(listConfig, 'easeOut', 100));
         this.setListTransitInCallback(GetValue(listConfig, 'transitIn'));
         this.settListTransitOutCallback(GetValue(listConfig, 'transitOut'));
-        this.setListSize(GetValue(listConfig, 'width'), GetValue(listConfig, 'height'));
+        this.setListSize(GetValue(listConfig, 'width'), GetValue(listConfig, 'height', 0));
         this.setListAlignmentMode(GetValue(listConfig, 'alignParent', 'text'));
         this.setListAlignmentSide(GetValue(listConfig, 'alignSide', ''));
         this.setListBounds(GetValue(listConfig, 'bounds'));

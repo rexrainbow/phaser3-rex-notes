@@ -18,6 +18,24 @@ var methods = {
         return this;
     },
 
+    setCreateListSliderTrackCallback(callback) {
+        this.listCreateSliderTrackCallback = callback;
+        return this;
+    },
+
+    setCreateListSliderThumbCallback(callback) {
+        this.listCreateSliderThumbCallback = callback;
+        return this;
+    },
+
+    setListSliderAdaptThumbSizeEnable(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+        this.listSliderAdaptThumbSizeEnable = enable;
+        return this;
+    },
+
     setButtonClickCallback(callback) {
         this.listOnButtonClick = callback;
         return this;

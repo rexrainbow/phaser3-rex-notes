@@ -57,18 +57,19 @@ var OpenListPanel = function () {
 
         bounds: this.listBounds,
 
-        // Close condition
-        anyTouchClose: true,
+        // Close condition        
     })
         .on('open', function () {
             // After popping up
             // Can click
-            listPanel.on('button.click', function (button, index, pointer, event) {
-                if (this.listOnButtonClick) {
-                    this.listOnButtonClick.call(this, button, index, pointer, event);
-                }
-                this.emit('button.click', this, listPanel, button, index, pointer, event);
-            }, this);
+            listPanel
+                .on('button.click', function (button, index, pointer, event) {
+                    if (this.listOnButtonClick) {
+                        this.listOnButtonClick.call(this, button, index, pointer, event);
+                    }
+                    this.emit('button.click', this, listPanel, button, index, pointer, event);
+                    this.dropDownBehavior.requestClose();
+                }, this);
 
             this.emit('list.open', this, listPanel);
         }, this)
@@ -79,6 +80,11 @@ var OpenListPanel = function () {
 
             this.emit('list.close', this);
         }, this)
+
+    listPanel
+        .onClickOutside(function () {
+            dropDownBehavior.requestClose();
+        })
 
     this.listPanel = listPanel;
     this.dropDownBehavior = dropDownBehavior;

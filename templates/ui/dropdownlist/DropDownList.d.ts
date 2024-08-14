@@ -13,7 +13,7 @@ declare namespace DropDownList {
         options: any[]
     ) => Phaser.GameObjects.GameObject;
 
-    type CreateBackgroundCallbackType = (
+    type CreateGeneralGameObjectCallbackType = (
         this: DropDownList,
         scene: Phaser.Scene,
     ) => Phaser.GameObjects.GameObject;
@@ -63,8 +63,10 @@ declare namespace DropDownList {
     interface IConfig extends Label.IConfig {
         options?: any[],
         list?: {
-            createBackgroundCallback?: CreateBackgroundCallbackType;
+            createBackgroundCallback?: CreateGeneralGameObjectCallbackType;
             createButtonCallback?: CreateButtonCallbackType;
+            createSliderTrackCallback?: CreateGeneralGameObjectCallbackType;
+            createSliderThumbCallback?: CreateGeneralGameObjectCallbackType;
 
             onButtonClick?: OnButtonClickCallbackType;
             onButtonOver?: OnButtonOverCallbackType;
@@ -80,6 +82,9 @@ declare namespace DropDownList {
             alignSide?: string;
             expandDirection?: ExpandDirectionType;
             bounds?: Phaser.Geom.Rectangle;
+
+            listSliderAdaptThumbSizeEnable?: boolean;
+            listHideUnscrollableSliderEnable?: boolean;
 
             space?: ListSpaceType | WrapListSpaceType;
 
@@ -112,8 +117,10 @@ declare class DropDownList extends Label {
     setValue(value?: any): this;
     value: any;
 
-    setCreateButtonCallback(callback?: DropDownList.CreateBackgroundCallbackType): this;
-    setCreateBackgroundCallback(callback?: DropDownList.CreateBackgroundCallbackType): this;
+    setCreateButtonCallback(callback?: DropDownList.CreateButtonCallbackType): this;
+    setCreateBackgroundCallback(callback?: DropDownList.CreateGeneralGameObjectCallbackType): this;
+    setCreateListSliderTrackCallback(callback?: DropDownList.CreateGeneralGameObjectCallbackType): this;
+    setCreateListSliderThumbCallback(callback?: DropDownList.CreateGeneralGameObjectCallbackType): this;
 
     setButtonClickCallback(callback?: DropDownList.OnButtonClickCallbackType): this;
     setButtonOverCallback(callback?: DropDownList.OnButtonOverCallbackType): this;
