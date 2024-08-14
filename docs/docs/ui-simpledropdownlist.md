@@ -8,6 +8,7 @@ Using plain object to create [drop down list](ui-simpledropdownlist.md).
 ## Live demos
 
 - [Drop-down list](https://codepen.io/rexrainbow/pen/NWLwZRW)
+- [Drop-down scrollable-list](https://codepen.io/rexrainbow/pen/vYqWQEa)
 
 ## Usage
 
