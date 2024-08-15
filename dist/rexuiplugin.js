@@ -52787,36 +52787,51 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 this.focusMode = false;
             }
 
+            if (typeof (this.focusMode) === 'boolean') {
+                this.focusMode = (this.focusMode) ? 1 : 0;
+            }
+
             this.setSpeed(GetValue$1H(config, 'speed', 0.1));
             this.setEnable(GetValue$1H(config, 'enable', true));
 
-            if (!this.focusMode) { // Register on scene
-                this.scene.input.on('wheel', this.onSceneScroll, this);
-            } else {
-                var gameObject = this.parent;
-                gameObject
-                    .setInteractive(GetValue$1H(config, "inputConfig", undefined))
-                    .on('wheel', function (pointer, dx, dy, dz, event) {
-                        if (!this.enable) {
-                            return;
-                        }
-                        this.scroll(dy);
-                    }, this);
+            this.boot();
+        }
 
+        boot() {
+            switch (this.focusMode) {
+                case 0:
+                case 1:
+                    this.scene.input.on('wheel', this.onSceneScroll, this);
+                    break;
+
+                default:  // case 2
+                    var gameObject = this.parent;
+                    gameObject
+                        .setInteractive(GetValue$1H(config, "inputConfig", undefined))
+                        .on('wheel', function (pointer, dx, dy, dz, event) {
+                            this.tryScroll(dy);
+                        }, this);
+                    break;
             }
         }
 
         destroy() {
-            if (!this.focusMode) {
-                this.scene.input.off('wheel', this.onSceneScroll, this);
+            switch (this.focusMode) {
+                case 0:
+                case 1:
+                    this.scene.input.off('wheel', this.onSceneScroll, this);
+                    break;
             }
         }
 
         onSceneScroll(pointer, currentlyOver, dx, dy, dz, event) {
-            if (!this.enable) {
-                return;
+            if (this.focusMode === 1) {
+                if (!IsPointerInBounds(this.parent, pointer)) {
+                    return;
+                }
             }
-            this.scroll(dy);
+
+            this.tryScroll(dy);
         }
 
         setEnable(e) {
@@ -52833,9 +52848,18 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             return this;
         }
 
+        tryScroll(dy) {
+            if (!this.enable) {
+                return;
+            }
+            this.scroll(dy);
+            return this;
+        }
+
         scroll(dy) {
             dy *= this.speed;
             this.emit('scroll', dy, this.parent, this);
+            return this;
         }
     }
 
@@ -62777,6 +62801,16 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             return this;
         },
 
+        setListScrollerConfig(config) {
+            this.listScrollerConfig = config;
+            return this;
+        },
+
+        setListMouseWheelScrollerConfig(config) {
+            this.listMouseWheelScrollerConfig = config;
+            return this;
+        },
+
         setButtonClickCallback(callback) {
             this.listOnButtonClick = callback;
             return this;
@@ -63666,6 +63700,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                         adaptThumbSize: this.listSliderAdaptThumbSizeEnable,
                     },
 
+                    scroller: this.listScrollerConfig,
+
+                    mouseWheelScroller: this.listMouseWheelScrollerConfig,
+
                     space: {
                         panel: GetValue$13(this.listSpace, 'panel', 0),
                     },
@@ -63930,6 +63968,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             return this;
         }
 
+        if (this.options.length === 0) {
+            return this;
+        }
+
         var listPanel = CreateListPanel.call(this);
 
         // Button over/out
@@ -64146,6 +64188,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this.setCreateListSliderTrackCallback(GetValue$10(listConfig, 'createTrackCallback'));
             this.setCreateListSliderThumbCallback(GetValue$10(listConfig, 'createThumbCallback'));
             this.setListSliderAdaptThumbSizeEnable(GetValue$10(listConfig, 'sliderAdaptThumbSize', false));
+            this.setListScrollerConfig(GetValue$10(listConfig, 'scroller'));
+            this.setListMouseWheelScrollerConfig(GetValue$10(listConfig, 'mouseWheelScroller'));
             this.setButtonClickCallback(GetValue$10(listConfig, 'onButtonClick'));
             this.setButtonOverCallback(GetValue$10(listConfig, 'onButtonOver'));
             this.setButtonOutCallback(GetValue$10(listConfig, 'onButtonOut'));

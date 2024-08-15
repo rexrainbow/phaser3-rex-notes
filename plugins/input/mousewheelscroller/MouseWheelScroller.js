@@ -1,4 +1,5 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
+import IsPointerInBounds from '../../utils/input/IsPointerInBounds.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -13,38 +14,55 @@ class MouseWheelScroller extends ComponentBase {
             this.focusMode = false;
         }
 
+        if (typeof (this.focusMode) === 'boolean') {
+            this.focusMode = (this.focusMode) ? 1 : 0;
+        }
+
         this.setSpeed(GetValue(config, 'speed', 0.1));
         this.setEnable(GetValue(config, 'enable', true));
 
-        if (!this.focusMode) { // Register on scene
-            this.scene.input.on('wheel', this.onSceneScroll, this);
-        } else {
-            var gameObject = this.parent;
-            gameObject
-                .setInteractive(GetValue(config, "inputConfig", undefined))
-                .on('wheel', function (pointer, dx, dy, dz, event) {
-                    if (!this.enable) {
-                        return;
-                    }
-                    this.scroll(dy);
-                }, this);
+        this.boot();
+    }
 
+    boot() {
+        switch (this.focusMode) {
+            case 0:
+            case 1:
+                this.scene.input.on('wheel', this.onSceneScroll, this);
+                break;
+
+            default:  // case 2
+                var gameObject = this.parent;
+                gameObject
+                    .setInteractive(GetValue(config, "inputConfig", undefined))
+                    .on('wheel', function (pointer, dx, dy, dz, event) {
+                        this.tryScroll(dy);
+                    }, this);
+                break;
         }
     }
 
     destroy() {
-        if (!this.focusMode) {
-            this.scene.input.off('wheel', this.onSceneScroll, this);
-        } else {
-            // GameObject events will be removed when this gameObject destroyed 
+        switch (this.focusMode) {
+            case 0:
+            case 1:
+                this.scene.input.off('wheel', this.onSceneScroll, this);
+                break;
+
+            default:  // case 2
+                // GameObject events will be removed when this gameObject destroyed 
+                break;
         }
     }
 
     onSceneScroll(pointer, currentlyOver, dx, dy, dz, event) {
-        if (!this.enable) {
-            return;
+        if (this.focusMode === 1) {
+            if (!IsPointerInBounds(this.parent, pointer)) {
+                return;
+            }
         }
-        this.scroll(dy);
+
+        this.tryScroll(dy);
     }
 
     setEnable(e) {
@@ -61,9 +79,18 @@ class MouseWheelScroller extends ComponentBase {
         return this;
     }
 
+    tryScroll(dy) {
+        if (!this.enable) {
+            return;
+        }
+        this.scroll(dy);
+        return this;
+    }
+
     scroll(dy) {
         dy *= this.speed;
         this.emit('scroll', dy, this.parent, this);
+        return this;
     }
 }
 

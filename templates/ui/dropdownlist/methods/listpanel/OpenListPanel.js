@@ -6,6 +6,10 @@ var OpenListPanel = function () {
         return this;
     }
 
+    if (this.options.length === 0) {
+        return this;
+    }
+
     var listPanel = CreateListPanel.call(this);
 
     // Button over/out

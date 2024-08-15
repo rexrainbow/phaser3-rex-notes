@@ -68005,36 +68005,51 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	            this.focusMode = false;
 	        }
 
+	        if (typeof (this.focusMode) === 'boolean') {
+	            this.focusMode = (this.focusMode) ? 1 : 0;
+	        }
+
 	        this.setSpeed(GetValue$1E(config, 'speed', 0.1));
 	        this.setEnable(GetValue$1E(config, 'enable', true));
 
-	        if (!this.focusMode) { // Register on scene
-	            this.scene.input.on('wheel', this.onSceneScroll, this);
-	        } else {
-	            var gameObject = this.parent;
-	            gameObject
-	                .setInteractive(GetValue$1E(config, "inputConfig", undefined))
-	                .on('wheel', function (pointer, dx, dy, dz, event) {
-	                    if (!this.enable) {
-	                        return;
-	                    }
-	                    this.scroll(dy);
-	                }, this);
+	        this.boot();
+	    }
 
+	    boot() {
+	        switch (this.focusMode) {
+	            case 0:
+	            case 1:
+	                this.scene.input.on('wheel', this.onSceneScroll, this);
+	                break;
+
+	            default:  // case 2
+	                var gameObject = this.parent;
+	                gameObject
+	                    .setInteractive(GetValue$1E(config, "inputConfig", undefined))
+	                    .on('wheel', function (pointer, dx, dy, dz, event) {
+	                        this.tryScroll(dy);
+	                    }, this);
+	                break;
 	        }
 	    }
 
 	    destroy() {
-	        if (!this.focusMode) {
-	            this.scene.input.off('wheel', this.onSceneScroll, this);
+	        switch (this.focusMode) {
+	            case 0:
+	            case 1:
+	                this.scene.input.off('wheel', this.onSceneScroll, this);
+	                break;
 	        }
 	    }
 
 	    onSceneScroll(pointer, currentlyOver, dx, dy, dz, event) {
-	        if (!this.enable) {
-	            return;
+	        if (this.focusMode === 1) {
+	            if (!IsPointerInBounds(this.parent, pointer)) {
+	                return;
+	            }
 	        }
-	        this.scroll(dy);
+
+	        this.tryScroll(dy);
 	    }
 
 	    setEnable(e) {
@@ -68051,9 +68066,18 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	        return this;
 	    }
 
+	    tryScroll(dy) {
+	        if (!this.enable) {
+	            return;
+	        }
+	        this.scroll(dy);
+	        return this;
+	    }
+
 	    scroll(dy) {
 	        dy *= this.speed;
 	        this.emit('scroll', dy, this.parent, this);
+	        return this;
 	    }
 	}
 
@@ -77701,6 +77725,16 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	        return this;
 	    },
 
+	    setListScrollerConfig(config) {
+	        this.listScrollerConfig = config;
+	        return this;
+	    },
+
+	    setListMouseWheelScrollerConfig(config) {
+	        this.listMouseWheelScrollerConfig = config;
+	        return this;
+	    },
+
 	    setButtonClickCallback(callback) {
 	        this.listOnButtonClick = callback;
 	        return this;
@@ -78590,6 +78624,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	                    adaptThumbSize: this.listSliderAdaptThumbSizeEnable,
 	                },
 
+	                scroller: this.listScrollerConfig,
+
+	                mouseWheelScroller: this.listMouseWheelScrollerConfig,
+
 	                space: {
 	                    panel: GetValue$11(this.listSpace, 'panel', 0),
 	                },
@@ -78854,6 +78892,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	        return this;
 	    }
 
+	    if (this.options.length === 0) {
+	        return this;
+	    }
+
 	    var listPanel = CreateListPanel.call(this);
 
 	    // Button over/out
@@ -79070,6 +79112,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	        this.setCreateListSliderTrackCallback(GetValue$_(listConfig, 'createTrackCallback'));
 	        this.setCreateListSliderThumbCallback(GetValue$_(listConfig, 'createThumbCallback'));
 	        this.setListSliderAdaptThumbSizeEnable(GetValue$_(listConfig, 'sliderAdaptThumbSize', false));
+	        this.setListScrollerConfig(GetValue$_(listConfig, 'scroller'));
+	        this.setListMouseWheelScrollerConfig(GetValue$_(listConfig, 'mouseWheelScroller'));
 	        this.setButtonClickCallback(GetValue$_(listConfig, 'onButtonClick'));
 	        this.setButtonOverCallback(GetValue$_(listConfig, 'onButtonOver'));
 	        this.setButtonOutCallback(GetValue$_(listConfig, 'onButtonOut'));

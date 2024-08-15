@@ -95,6 +95,10 @@ var CreateListPanel = function () {
                     adaptThumbSize: this.listSliderAdaptThumbSizeEnable,
                 },
 
+                scroller: this.listScrollerConfig,
+
+                mouseWheelScroller: this.listMouseWheelScrollerConfig,
+
                 space: {
                     panel: GetValue(this.listSpace, 'panel', 0),
                 },

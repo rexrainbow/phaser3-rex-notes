@@ -36,6 +36,16 @@ var methods = {
         return this;
     },
 
+    setListScrollerConfig(config) {
+        this.listScrollerConfig = config;
+        return this;
+    },
+
+    setListMouseWheelScrollerConfig(config) {
+        this.listMouseWheelScrollerConfig = config;
+        return this;
+    },
+
     setButtonClickCallback(callback) {
         this.listOnButtonClick = callback;
         return this;

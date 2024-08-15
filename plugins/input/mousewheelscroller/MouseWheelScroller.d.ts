@@ -4,7 +4,7 @@ export default MouseWheelScroller;
 
 declare namespace MouseWheelScroller {
     interface IConfig {
-        focus?: boolean,
+        focus?: boolean | number,
         speed?: number,
         enable?: boolean
     }
@@ -29,4 +29,7 @@ declare class MouseWheelScroller extends ComponentBase {
 
     setEnable(enable?: boolean): this;
     enable: boolean;
+
+    scroll(dy: number): this;
+
 }

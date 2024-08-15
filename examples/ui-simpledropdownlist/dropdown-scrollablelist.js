@@ -44,6 +44,11 @@ class Demo extends Phaser.Scene {
 
             list: {
                 maxHeight: 200,
+                sliderAdaptThumbSize: true,
+                mouseWheelScroller: {
+                    focus: true,
+                    speed: 0.1
+                }
             }
         }
 

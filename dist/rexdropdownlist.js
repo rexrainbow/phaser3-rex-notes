@@ -18645,6 +18645,16 @@
             return this;
         },
 
+        setListScrollerConfig(config) {
+            this.listScrollerConfig = config;
+            return this;
+        },
+
+        setListMouseWheelScrollerConfig(config) {
+            this.listMouseWheelScrollerConfig = config;
+            return this;
+        },
+
         setButtonClickCallback(callback) {
             this.listOnButtonClick = callback;
             return this;
@@ -28449,36 +28459,51 @@
                 this.focusMode = false;
             }
 
+            if (typeof (this.focusMode) === 'boolean') {
+                this.focusMode = (this.focusMode) ? 1 : 0;
+            }
+
             this.setSpeed(GetValue$a(config, 'speed', 0.1));
             this.setEnable(GetValue$a(config, 'enable', true));
 
-            if (!this.focusMode) { // Register on scene
-                this.scene.input.on('wheel', this.onSceneScroll, this);
-            } else {
-                var gameObject = this.parent;
-                gameObject
-                    .setInteractive(GetValue$a(config, "inputConfig", undefined))
-                    .on('wheel', function (pointer, dx, dy, dz, event) {
-                        if (!this.enable) {
-                            return;
-                        }
-                        this.scroll(dy);
-                    }, this);
+            this.boot();
+        }
 
+        boot() {
+            switch (this.focusMode) {
+                case 0:
+                case 1:
+                    this.scene.input.on('wheel', this.onSceneScroll, this);
+                    break;
+
+                default:  // case 2
+                    var gameObject = this.parent;
+                    gameObject
+                        .setInteractive(GetValue$a(config, "inputConfig", undefined))
+                        .on('wheel', function (pointer, dx, dy, dz, event) {
+                            this.tryScroll(dy);
+                        }, this);
+                    break;
             }
         }
 
         destroy() {
-            if (!this.focusMode) {
-                this.scene.input.off('wheel', this.onSceneScroll, this);
+            switch (this.focusMode) {
+                case 0:
+                case 1:
+                    this.scene.input.off('wheel', this.onSceneScroll, this);
+                    break;
             }
         }
 
         onSceneScroll(pointer, currentlyOver, dx, dy, dz, event) {
-            if (!this.enable) {
-                return;
+            if (this.focusMode === 1) {
+                if (!IsPointerInBounds(this.parent, pointer)) {
+                    return;
+                }
             }
-            this.scroll(dy);
+
+            this.tryScroll(dy);
         }
 
         setEnable(e) {
@@ -28495,9 +28520,18 @@
             return this;
         }
 
+        tryScroll(dy) {
+            if (!this.enable) {
+                return;
+            }
+            this.scroll(dy);
+            return this;
+        }
+
         scroll(dy) {
             dy *= this.speed;
             this.emit('scroll', dy, this.parent, this);
+            return this;
         }
     }
 
@@ -30602,6 +30636,10 @@
                         adaptThumbSize: this.listSliderAdaptThumbSizeEnable,
                     },
 
+                    scroller: this.listScrollerConfig,
+
+                    mouseWheelScroller: this.listMouseWheelScrollerConfig,
+
                     space: {
                         panel: GetValue$3(this.listSpace, 'panel', 0),
                     },
@@ -30895,6 +30933,10 @@
             return this;
         }
 
+        if (this.options.length === 0) {
+            return this;
+        }
+
         var listPanel = CreateListPanel.call(this);
 
         // Button over/out
@@ -31111,6 +31153,8 @@
             this.setCreateListSliderTrackCallback(GetValue(listConfig, 'createTrackCallback'));
             this.setCreateListSliderThumbCallback(GetValue(listConfig, 'createThumbCallback'));
             this.setListSliderAdaptThumbSizeEnable(GetValue(listConfig, 'sliderAdaptThumbSize', false));
+            this.setListScrollerConfig(GetValue(listConfig, 'scroller'));
+            this.setListMouseWheelScrollerConfig(GetValue(listConfig, 'mouseWheelScroller'));
             this.setButtonClickCallback(GetValue(listConfig, 'onButtonClick'));
             this.setButtonOverCallback(GetValue(listConfig, 'onButtonOver'));
             this.setButtonOutCallback(GetValue(listConfig, 'onButtonOut'));

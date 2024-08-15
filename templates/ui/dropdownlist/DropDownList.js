@@ -21,6 +21,8 @@ class DropDownList extends Label {
         this.setCreateListSliderTrackCallback(GetValue(listConfig, 'createTrackCallback'));
         this.setCreateListSliderThumbCallback(GetValue(listConfig, 'createThumbCallback'));
         this.setListSliderAdaptThumbSizeEnable(GetValue(listConfig, 'sliderAdaptThumbSize', false));
+        this.setListScrollerConfig(GetValue(listConfig, 'scroller'));
+        this.setListMouseWheelScrollerConfig(GetValue(listConfig, 'mouseWheelScroller'));
         this.setButtonClickCallback(GetValue(listConfig, 'onButtonClick'));
         this.setButtonOverCallback(GetValue(listConfig, 'onButtonOver'));
         this.setButtonOutCallback(GetValue(listConfig, 'onButtonOut'));
