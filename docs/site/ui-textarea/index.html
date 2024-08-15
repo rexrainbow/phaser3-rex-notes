@@ -10154,6 +10154,7 @@
 <span class="w">    </span><span class="c1">//     slidingDeceleration: 5000,</span>
 <span class="w">    </span><span class="c1">//     backDeceleration: 2000,</span>
 <span class="w">    </span><span class="c1">//     pointerOutRelease: true,</span>
+<span class="w">    </span><span class="c1">//     rectBoundsInteractive: true,</span>
 <span class="w">    </span><span class="c1">//     dragRate: 1,</span>
 <span class="w">    </span><span class="c1">// },</span>
 
@@ -10293,6 +10294,11 @@
 </ul>
 </li>
 <li><code>scroller.pointerOutRelease</code> : Set to <code>true</code> to release input control when pointer out of gameObject.</li>
+<li><code>scroller.rectBoundsInteractive</code> : <ul>
+<li><code>false</code> : Detect scrolling by game object's touch input.</li>
+<li><code>true</code> : Detect scrolling by rectangle bounds of game object. Default behavior.</li>
+</ul>
+</li>
 <li><code>scroller.dragRate</code> : Rate of dragging distance/dragging speed. Default value is <code>1</code>.</li>
 <li>Set to <code>false</code> to skip creating scroller.</li>
 </ul>

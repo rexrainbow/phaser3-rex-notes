@@ -30266,7 +30266,13 @@
             // this.parent = gameObject;
 
             this._enable = undefined;
-            gameObject.setInteractive(GetValue$g(config, "inputConfig", undefined));
+
+            this.rectBoundsInteractive = GetValue$g(config, 'rectBoundsInteractive', false);
+
+            if (!this.rectBoundsInteractive) {
+                gameObject.setInteractive(GetValue$g(config, "inputConfig", undefined));
+            }
+
             this.resetFromJSON(config);
             this.boot();
         }
@@ -30289,18 +30295,30 @@
         }
 
         boot() {
-            // Drag start only when pointer down
-            this.parent.on('pointerdown', this.onPointIn, this);
-            // this.parent.on('pointerover', this.onPointIn, this);
+            var scene = this.scene;
+            var gameObject = this.parent;
 
-            this.parent.on('pointerup', this.onPointOut, this);
+            if (!this.rectBoundsInteractive) {
+                // Drag start only when pointer down
+                gameObject.on('pointerdown', this.onPointIn, this);
 
-            if (this.pointerOutReleaseEnable) {
-                this.parent.on('pointerout', this.onPointOut, this);
+                gameObject.on('pointerup', this.onPointOut, this);
+
+                if (this.pointerOutReleaseEnable) {
+                    gameObject.on('pointerout', this.onPointOut, this);
+                }
+
+                gameObject.on('pointermove', this.onPointerMove, this);
+
+            } else {
+                scene.input.on('pointerdown', this.onPointIn, this);
+
+                scene.input.on('pointerup', this.onPointOut, this);
+
+                scene.input.on('pointermove', this.onPointerMove, this);
             }
 
-            this.parent.on('pointermove', this.onPointerMove, this);
-            this.scene.sys.events.on('preupdate', this.preupdate, this);
+            scene.sys.events.on('preupdate', this.preupdate, this);
         }
 
         shutdown(fromScene) {
@@ -30309,13 +30327,18 @@
                 return;
             }
 
-            // GameObject events will be removed when this gameObject destroyed 
-            // this.parent.off('pointerdown', this.onPointIn, this);
-            // this.parent.off('pointerup', this.onPointOut, this);
-            // this.parent.off('pointerout', this.onPointOut, this);
-            // this.parent.off('pointermove', this.onPointerMove, this);
+            var scene = this.scene;
+            this.parent;
 
-            this.scene.sys.events.off('preupdate', this.preupdate, this);
+            if (!this.rectBoundsInteractive) ; else {
+                scene.input.off('pointerdown', this.onPointIn, this);
+
+                scene.input.off('pointerup', this.onPointOut, this);
+
+                scene.input.off('pointermove', this.onPointerMove, this);
+            }
+
+            scene.sys.events.off('preupdate', this.preupdate, this);
 
             this.pointer = undefined;
 
@@ -30405,6 +30428,14 @@
                 (this.pointer !== undefined)) {
                 return;
             }
+
+            if (
+                this.rectBoundsInteractive &&
+                !IsPointerInBounds(this.parent, pointer)
+            ) {
+                return;
+            }
+
             this.pointer = pointer;
             this.localX = localX;
             this.localY = localY;
@@ -30424,6 +30455,16 @@
                 (this.pointer !== pointer)) {
                 return;
             }
+
+            if (
+                this.rectBoundsInteractive &&
+                this.pointerOutReleaseEnable &&
+                !IsPointerInBounds(this.parent, pointer)
+            ) {
+                this.onPointOut(pointer);
+                return;
+            }
+
             this.localX = localX;
             this.localY = localY;
         }
@@ -30624,6 +30665,7 @@
             });
 
             var drapSpeedConfig = {
+                rectBoundsInteractive: GetValue$e(config, 'rectBoundsInteractive', false),
                 inputConfig: GetValue$e(config, 'inputConfig', undefined),
                 enable: enable,
                 pointerOutRelease: GetValue$e(config, 'pointerOutRelease', true),
@@ -31198,7 +31240,13 @@
             if (scrollerConfig === true) {
                 scrollerConfig = {};
             }
+
             scrollerConfig.orientation = (isAxisY) ? 0 : 1;
+
+            if (!scrollerConfig.hasOwnProperty('rectBoundsInteractive')) {
+                scrollerConfig.rectBoundsInteractive = true;
+            }
+
             scroller = new Scroller(child, scrollerConfig);
 
             if (child.isRexContainerLite) {
