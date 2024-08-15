@@ -681,6 +681,10 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md), [containe
 
 Two possible solution to register input events to children of scrollable panel.
 
+#### Individual input events
+
+- Test if pointer is inside the mask of panel via [`panel.isInTouching('mask')`](ui-basesizer.md#is-in-touching), during input events' callback.
+
 #### Set children interactive
 
 Applies [click](button.md), [tap](gesture-tap.md), [press](gesture-press.md), [swipe](gesture-swipe.md) behaviors on this scrollable panel, to detect input events of children.
@@ -722,14 +726,6 @@ See [Base-sizer/Set children interactive](ui-basesizer.md#set-children-interacti
 
 See [Base-sizer/Set children interactive/Events](ui-basesizer.md#events)
 
-#### Individual input events
-
-When [`scene.input.topOnly`](touchevents.md#top-only) is `true` (default value), input events of children elements will block the drag-scrolling of scrollable panel. (Assmue that the children elememts are above scrollable panel)
-
-- Set `scene.input.topOnly` to `false` to enable drag-scrolling and input events of children elememts both.
-- Test if pointer is inside the mask of panel via [`panel.isInTouching('mask')`](ui-basesizer.md#is-in-touching), during input events' callback.
-- To recognize pointer-down and dragging-start, use press's [`pressstart`](gesture-press.md#pressing-start) event.
-  
 ## Steps of building a scrollable panel
 
 1. Build child panel from bottom to top
