@@ -72,9 +72,7 @@ class Demo extends Phaser.Scene {
             }
         })
             .layout()
-        //.drawBounds(this.add.graphics(), 0xff0000);        
-
-        this.input.topOnly = false;
+        //.drawBounds(this.add.graphics(), 0xff0000);
     }
 
     update() { }

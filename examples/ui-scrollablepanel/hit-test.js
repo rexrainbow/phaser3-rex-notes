@@ -55,7 +55,6 @@ class Demo extends Phaser.Scene {
 
 
         var print = this.add.text(0, 0, '');
-        this.input.topOnly = false;
         var items = scrollablePanel.getElement('panel.items');
         for (var i = 0, cnt = items.length; i < cnt; i++) {
             let item = items[i];

@@ -95,35 +95,7 @@ class Demo extends Phaser.Scene {
 
         var print = this.add.text(0, 0, '');
 
-        // Add children-interactive
-        // Solution A: targests is an array of parentSizer of hit-targets
-        // scrollablePanel.setChildrenInteractive({
-        //     targets: [
-        //         scrollablePanel.getByName('skills', true),
-        //         scrollablePanel.getByName('items', true)
-        //     ]
-        // })
-        //     .on('child.click', function (child) {
-        //         var category = child.getParentSizer().name;
-        //         print.text += `${category}:${child.text}\n`;
-        //     })
-
-        // Solution B: targets is an array of hit-targets
-        // scrollablePanel.setChildrenInteractive({
-        //     targets: [
-        //         ...scrollablePanel.getByName('skills', true).getElement('items'),
-        //         ...scrollablePanel.getByName('items', true).getElement('items')
-        //     ],
-        //     targetMode: 'direct',
-        // })
-        //     .on('child.click', function (child) {
-        //         var category = child.getParentSizer().name;
-        //         print.text += `${category}:${child.text}\n`;
-        //     })
-
-        // Solution C:
-
-        this.input.topOnly = false;
+        // Solution A: Add touch event on children of panel                
         var labels = [];
         labels.push(...scrollablePanel.getElement('#skills.items', true));
         labels.push(...scrollablePanel.getElement('#items.items', true));
@@ -142,6 +114,32 @@ class Demo extends Phaser.Scene {
                     print.text += `${category}:${label.text}\n`;
                 });
         })
+
+        // Add children-interactive
+        // Solution B: targests is an array of parentSizer of hit-targets
+        // scrollablePanel.setChildrenInteractive({
+        //     targets: [
+        //         scrollablePanel.getByName('skills', true),
+        //         scrollablePanel.getByName('items', true)
+        //     ]
+        // })
+        //     .on('child.click', function (child) {
+        //         var category = child.getParentSizer().name;
+        //         print.text += `${category}:${child.text}\n`;
+        //     })
+
+        // Solution C: targets is an array of hit-targets
+        // scrollablePanel.setChildrenInteractive({
+        //     targets: [
+        //         ...scrollablePanel.getByName('skills', true).getElement('items'),
+        //         ...scrollablePanel.getByName('items', true).getElement('items')
+        //     ],
+        //     targetMode: 'direct',
+        // })
+        //     .on('child.click', function (child) {
+        //         var category = child.getParentSizer().name;
+        //         print.text += `${category}:${child.text}\n`;
+        //     })
 
 
         scrollablePanel.getElement('scroller')

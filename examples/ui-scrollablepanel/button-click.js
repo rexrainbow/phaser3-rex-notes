@@ -21,7 +21,6 @@ class Demo extends Phaser.Scene {
             print.text += `Click ${item.text}\n`;
         }
 
-        this.input.topOnly = false;
         var panel = this.rexUI.add.scrollablePanel({
             x: 400, y: 300,
             width: 200, height: 300,
