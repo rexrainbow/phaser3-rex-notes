@@ -81,8 +81,9 @@ var scroller = scene.plugins.get('rexMouseWheelScroller').add(gameObject, {
 ```
 
 - `focus` : Fire `'scroll'` event when mouse-wheeling --
-    - `true` : Cursor is over game object. Default behavior.
-    - `false` : Without checking if cursor is over game object or not.
+    - `false`, or `0` : Without checking if cursor is over game object or not.
+    - `true`, or `1` : Cursor is inside the rectangle bounds of game object. Default behavior.
+    - `2` : Cursor is over game object. 
 - `speed` : Scrolling speed. Default value is `0.1`.
 - `enable` : Set `true` to enable 'scroll' event.
 

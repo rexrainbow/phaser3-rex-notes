@@ -65,6 +65,10 @@ class Demo extends Phaser.Scene {
                     return scene.rexUI.add.roundRectangle({ width: 14, height: 14, color: COLOR_LIGHT });
                 },
                 sliderAdaptThumbSize: true,
+                mouseWheelScroller: {
+                    focus: true,
+                    speed: 0.1
+                },
                 space: { panel: 8 },
 
                 // scope: dropDownList

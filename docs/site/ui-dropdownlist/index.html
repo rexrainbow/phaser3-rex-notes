@@ -10131,6 +10131,12 @@
 <span class="w">        </span><span class="c1">//     return gameObject;</span>
 <span class="w">        </span><span class="c1">// },</span>
 
+<span class="w">        </span><span class="nx">mouseWheelScroller</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">        </span><span class="c1">// mouseWheelScroller: {</span>
+<span class="w">        </span><span class="c1">//     focus: true,</span>
+<span class="w">        </span><span class="c1">//     speed: 0.1</span>
+<span class="w">        </span><span class="c1">// },</span>
+
 <span class="w">        </span><span class="nx">onButtonClick</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span><span class="w"> </span><span class="nx">index</span><span class="p">,</span><span class="w"> </span><span class="nx">pointer</span><span class="p">,</span><span class="w"> </span><span class="nx">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="c1">// this : dropDownList</span>
 <span class="w">        </span><span class="p">},</span>
@@ -10239,6 +10245,17 @@
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">gameObject</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></li>
+<li><code>list.mouseWheelScroller</code> : Configuration of mouse-wheel-scroller behavior.<ul>
+<li><code>list.mouseWheelScroller.focus</code> : <ul>
+<li><code>false</code>, or <code>0</code> : Without checking if cursor is over game object or not.</li>
+<li><code>true</code>, or <code>1</code> : Cursor is inside the rectangle bounds of game object. Default behavior.</li>
+<li><code>2</code> : Cursor is over game object. </li>
+</ul>
+</li>
+<li><code>list.mouseWheelScroller.speed</code> : Scrolling speed, default value is <code>0.1</code>.</li>
+<li>Set to <code>false</code> to skip creating mouse-wheel-scroller. Default behavior.</li>
+</ul>
+</li>
 <li><code>list.onButtonClick</code> : Callback when clicking a button
     <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span><span class="w"> </span><span class="nx">index</span><span class="p">,</span><span class="w"> </span><span class="nx">pointer</span><span class="p">,</span><span class="w"> </span><span class="nx">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// this : dropDownList</span>

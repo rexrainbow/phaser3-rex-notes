@@ -4,7 +4,7 @@ export default MouseWheelScroller;
 
 declare namespace MouseWheelScroller {
     interface IConfig {
-        focus?: boolean | number,
+        focus?: boolean | 0 | 1 | 2,
         speed?: number,
         enable?: boolean
     }

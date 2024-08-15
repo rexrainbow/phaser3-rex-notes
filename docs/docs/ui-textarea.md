@@ -259,8 +259,9 @@ var textArea = scene.rexUI.add.textArea({
     - Set to `false` to skip creating scroller.
 - `mouseWheelScroller` : Configuration of mouse-wheel-scroller behavior.
     - `mouseWheelScroller.focus` : 
-        - `true` : Only scrolling when cursor is over textArea. Default behavior.
-        - `false` : Scrolling without checking cursor.
+        - `false`, or `0` : Without checking if cursor is over game object or not.
+        - `true`, or `1` : Cursor is inside the rectangle bounds of game object. Default behavior.
+        - `2` : Cursor is over game object. 
     - `mouseWheelScroller.speed` : Scrolling speed, default value is `0.1`.
     - Set to `false` to skip creating mouse-wheel-scroller. Default behavior.
 - `clamplChildOY` : Set `true` to clamp scrolling.

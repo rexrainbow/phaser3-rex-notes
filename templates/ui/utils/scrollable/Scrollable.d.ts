@@ -40,7 +40,7 @@ declare namespace Scrollable {
     }
 
     interface IMouseWheelScroller {
-        focus?: boolean,
+        focus?: boolean | 0 | 1 | 2,
         speed?: number,
     }
 

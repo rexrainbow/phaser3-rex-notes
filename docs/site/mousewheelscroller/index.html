@@ -9953,8 +9953,9 @@
 </code></pre></div>
 <ul>
 <li><code>focus</code> : Fire <code>'scroll'</code> event when mouse-wheeling --<ul>
-<li><code>true</code> : Cursor is over game object. Default behavior.</li>
-<li><code>false</code> : Without checking if cursor is over game object or not.</li>
+<li><code>false</code>, or <code>0</code> : Without checking if cursor is over game object or not.</li>
+<li><code>true</code>, or <code>1</code> : Cursor is inside the rectangle bounds of game object. Default behavior.</li>
+<li><code>2</code> : Cursor is over game object. </li>
 </ul>
 </li>
 <li><code>speed</code> : Scrolling speed. Default value is <code>0.1</code>.</li>

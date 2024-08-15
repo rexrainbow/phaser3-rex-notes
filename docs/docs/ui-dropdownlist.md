@@ -107,6 +107,12 @@ var dropDownList = scene.rexUI.add.dropDownList({
         //     return gameObject;
         // },
 
+        mouseWheelScroller: undefined,
+        // mouseWheelScroller: {
+        //     focus: true,
+        //     speed: 0.1
+        // },
+
         onButtonClick: function(button, index, pointer, event) {
             // this : dropDownList
         },
@@ -219,6 +225,13 @@ var dropDownList = scene.rexUI.add.dropDownList({
             return gameObject;
         }
         ```
+    - `list.mouseWheelScroller` : Configuration of mouse-wheel-scroller behavior.
+        - `list.mouseWheelScroller.focus` : 
+            - `false`, or `0` : Without checking if cursor is over game object or not.
+            - `true`, or `1` : Cursor is inside the rectangle bounds of game object. Default behavior.
+            - `2` : Cursor is over game object. 
+        - `list.mouseWheelScroller.speed` : Scrolling speed, default value is `0.1`.
+        - Set to `false` to skip creating mouse-wheel-scroller. Default behavior.
     - `list.onButtonClick` : Callback when clicking a button
         ```javascript
         function(button, index, pointer, event) {

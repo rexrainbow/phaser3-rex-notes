@@ -10299,8 +10299,9 @@
 </li>
 <li><code>mouseWheelScroller</code> : Configuration of mouse-wheel-scroller behavior.<ul>
 <li><code>mouseWheelScroller.focus</code> : <ul>
-<li><code>true</code> : Only scrolling when cursor is over textArea. Default behavior.</li>
-<li><code>false</code> : Scrolling without checking cursor.</li>
+<li><code>false</code>, or <code>0</code> : Without checking if cursor is over game object or not.</li>
+<li><code>true</code>, or <code>1</code> : Cursor is inside the rectangle bounds of game object. Default behavior.</li>
+<li><code>2</code> : Cursor is over game object. </li>
 </ul>
 </li>
 <li><code>mouseWheelScroller.speed</code> : Scrolling speed, default value is <code>0.1</code>.</li>
