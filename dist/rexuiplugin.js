@@ -62439,7 +62439,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return background;
     };
 
-    var CreateButtons$3 = function (scene, items, callback, scope) {
+    var CreateButtons$4 = function (scene, items, callback, scope) {
         var item;
         var buttons = [],
             button;
@@ -62561,7 +62561,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             // Buttons
             var createButtonCallback = GetValue$16(config, 'createButtonCallback', undefined);
             var createButtonCallbackScope = GetValue$16(config, 'createButtonCallbackScope', undefined);
-            config.buttons = CreateButtons$3(scene, items, createButtonCallback, createButtonCallbackScope);
+            config.buttons = CreateButtons$4(scene, items, createButtonCallback, createButtonCallbackScope);
 
             super(scene, config);
             this.type = 'rexMenu';
@@ -62847,6 +62847,12 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this.setListWidth(width).setListHeight(height);
             return this;
         },
+
+        setListMaxHeight(height) {
+            this.listMaxHeight = height;
+            return this;
+        },
+
 
         setListAlignmentMode(mode) {
             this.listAlignMode = mode;
@@ -63604,100 +63610,79 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
         var height = this.listHeight;
 
-        var listPanel;
-        var isScrollable = (height > 0) && (this.listCreateSliderThumbCallback);
+        var buttonConfig = {
+            width: width,
+            buttons: buttons,
+            space: this.listSpace,
+        };
+
+        var buttons, listPanel;
+
+        var isScrollable;
+        if (this.listCreateSliderThumbCallback) {
+            isScrollable = (height > 0) || (this.listMaxHeight > 0);
+        } else {
+            isScrollable = false;
+        }
+
         if (!isScrollable) {
-            if (!this.listWrapEnable) {
-                listPanel = new Buttons$1(scene, {
-                    width: width, height: height,
-                    orientation: 'y',
-
-                    background: background,
-                    buttons: buttons,
-
-                    space: this.listSpace,
-                    draggable: this.listDraggable,
-                });
-            } else {
-                listPanel = new Buttons(scene, {
-                    width: width, height: height,
-                    orientation: 'x',
-
-                    background: background,
-                    buttons: buttons,
-
-                    space: this.listSpace,
-                    draggable: this.listDraggable,
-                });
-            }
-            scene.add.existing(listPanel);
+            buttonConfig.height = height;
+            buttons = CreateButtons$3(scene, buttonConfig);
+            listPanel = buttons;
 
         } else {
-            var buttons;
-            if (!this.listWrapEnable) {
-                buttons = new Buttons$1(scene, {
-                    width: width,
-                    orientation: 'y',
+            var buttons = CreateButtons$3(scene, buttonConfig);
 
-                    buttons: buttons,
-
-                    space: this.listSpace,
-                    draggable: this.listDraggable,
-                });
-            } else {
-                buttons = new Buttons(scene, {
-                    width: width,
-                    orientation: 'x',
-
-                    buttons: buttons,
-
-                    space: this.listSpace,
-                });
-            }
-            scene.add.existing(buttons);
-
-            var track;
-            var createTrackCallback = this.listCreateSliderTrackCallback;
-            if (createTrackCallback) {
-                track = createTrackCallback.call(this, scene);
-                scene.add.existing(track);
+            if (this.listMaxHeight > 0) {
+                buttons.layout();
+                if (buttons.height <= this.listMaxHeight) {
+                    listPanel = buttons;
+                }
             }
 
-            var thumb;
-            var createThumbCallback = this.listCreateSliderThumbCallback;
-            if (createThumbCallback) {
-                thumb = createThumbCallback.call(this, scene);
-                scene.add.existing(thumb);
-            }
+            if (!listPanel) {
+                if (height === 0) {
+                    height = this.listMaxHeight;
+                }
 
-            listPanel = new ScrollablePanel(scene, {
-                height: height,
-                scrollMode: 0,
+                var track = CreateGameObject(scene, this.listCreateSliderTrackCallback);
+                var thumb = CreateGameObject(scene, this.listCreateSliderThumbCallback);
 
-                panel: {
-                    child: buttons,
-                    mask: {
-                        padding: 1,
+                listPanel = new ScrollablePanel(scene, {
+                    height: height,
+                    scrollMode: 0,
+
+                    panel: {
+                        child: buttons,
+                        mask: {
+                            padding: 1,
+                        },
                     },
-                },
 
-                slider: {
-                    track: track,
-                    thumb: thumb,
+                    slider: {
+                        track: track,
+                        thumb: thumb,
 
-                    adaptThumbSize: this.listSliderAdaptThumbSizeEnable,
-                },
+                        adaptThumbSize: this.listSliderAdaptThumbSizeEnable,
+                    },
 
-                background: background,
+                    space: {
+                        panel: GetValue$13(this.listSpace, 'panel', 0),
+                    },
+                });
+                scene.add.existing(listPanel);
+            }
+        }
 
-                space: {
-                    panel: GetValue$13(this.listSpace, 'panel', 0),
-                },
+        if (background) {
+            listPanel.addBackground(background, 'background');
+        }
 
-                draggable: this.listDraggable,
-            });
-            scene.add.existing(listPanel);
+        if (this.listDraggable) {
+            listPanel.setDraggable(true);
+        }
 
+        if (listPanel !== buttons) {
             // Route buttons' events to listPanel
             buttons
                 .on('button.over', function (button, index, pointer, event) {
@@ -63712,6 +63697,29 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
 
         return listPanel;
+    };
+
+    var CreateButtons$3 = function (scene, config, isWrapEnable) {
+        var gameObject;
+        if (!isWrapEnable) {
+            config.orientation = 'y';
+            gameObject = new Buttons$1(scene, config);
+        } else {
+            config.orientation = 'x';
+            gameObject = new Buttons(scene, config);
+        }
+        scene.add.existing(gameObject);
+        return gameObject;
+    };
+
+    var CreateGameObject = function (scene, callback, scope) {
+        var gameObject;
+        if (callback) {
+            gameObject = callback.call(scope, scene);
+            scene.add.existing(gameObject);
+        }
+
+        return gameObject;
     };
 
     var ScaleDown = function (gameObject, duration, orientation, ease, scale) {
@@ -64137,7 +64145,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this.setCreateListBackgroundCallback(GetValue$10(listConfig, 'createBackgroundCallback'));
             this.setCreateListSliderTrackCallback(GetValue$10(listConfig, 'createTrackCallback'));
             this.setCreateListSliderThumbCallback(GetValue$10(listConfig, 'createThumbCallback'));
-            this.setListSliderAdaptThumbSizeEnable(GetValue$10(listConfig, 'listSliderAdaptThumbSizeEnable', true));
+            this.setListSliderAdaptThumbSizeEnable(GetValue$10(listConfig, 'sliderAdaptThumbSize', false));
             this.setButtonClickCallback(GetValue$10(listConfig, 'onButtonClick'));
             this.setButtonOverCallback(GetValue$10(listConfig, 'onButtonOver'));
             this.setButtonOutCallback(GetValue$10(listConfig, 'onButtonOut'));
@@ -64146,6 +64154,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this.setListEaseOutDuration(GetValue$10(listConfig, 'easeOut', 100));
             this.setListTransitInCallback(GetValue$10(listConfig, 'transitIn'));
             this.settListTransitOutCallback(GetValue$10(listConfig, 'transitOut'));
+            this.setListMaxHeight(GetValue$10(listConfig, 'maxHeight', 0));
             this.setListSize(GetValue$10(listConfig, 'width'), GetValue$10(listConfig, 'height', 0));
             this.setListAlignmentMode(GetValue$10(listConfig, 'alignParent', 'text'));
             this.setListAlignmentSide(GetValue$10(listConfig, 'alignSide', ''));

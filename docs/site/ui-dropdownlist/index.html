@@ -10152,6 +10152,7 @@
 <span class="w">        </span><span class="c1">// transitOut: function(listPanel, duration) {  },</span>
 
 <span class="w">        </span><span class="c1">// wrap: false,</span>
+<span class="w">        </span><span class="c1">// maxHeight: undefined,</span>
 <span class="w">        </span><span class="c1">// width: undefined, </span>
 <span class="w">        </span><span class="c1">// height: undefined,</span>
 <span class="w">        </span><span class="c1">// alignParent: &#39;text&#39;,</span>
@@ -10276,6 +10277,11 @@
 <li><code>list.wrap</code> : Layout mode of buttons<ul>
 <li><code>true</code> : <a href="../ui-fixwidthsizer/">fixwidth-sizer</a> layout.</li>
 <li><code>false</code> : <a href="../ui-sizer/">sizer</a> layout. Default behavior.</li>
+</ul>
+</li>
+<li><code>list.maxHeight</code> : If height of button list is larger than this <code>maxHeight</code>, put this button list into scrollable panel.<ul>
+<li><code>undefined</code>, or <code>0</code> : Ignore this behavior.</li>
+<li><code>&gt; 0</code> and <code>list.createThumbCallback</code> parameter is given : If height of button list is larger than this <code>maxHeight</code>, put this button list into scrollable panel.</li>
 </ul>
 </li>
 <li><code>list.width</code> : Minimum width.<ul>
