@@ -1,6 +1,7 @@
 import DropDownList from '../../dropdownlist/DropDownList';
 import BuildLabelConfig from './BuildLabelConfig';
 import CreateBackground from './CreateBackground';
+import Scrollable from '../scrollable/Scrollable';
 
 export default BuildListConfig;
 
@@ -12,19 +13,22 @@ declare namespace BuildListConfig {
         thumb?: CreateBackground.IConfig,
 
         list?: {
+            scroller?: Scrollable.IScrollerConfig;
+            mouseWheelScroller?: Scrollable.IMouseWheelScroller;
+            sliderAdaptThumbSize?: boolean;
+
             easeIn?: number;
             easeOut?: number;
 
             wrap?: boolean;
+            maxHeight?: number;
             width?: number;
             height?: number;
             alignParent?: DropDownList.AlignParentType;
             expandDirection?: DropDownList.ExpandDirectionType;
             bounds?: Phaser.Geom.Rectangle;
 
-            listSliderAdaptThumbSizeEnable?: boolean;
-
-            space?: DropDownList.ListSpaceType | DropDownList.WrapListSpaceType;
+            space?: DropDownList.SpaceType;
 
             draggable?: boolean;
         },

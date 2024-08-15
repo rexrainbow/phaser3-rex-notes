@@ -1,6 +1,7 @@
 import Label from '../label/Label';
 import Buttons from '../buttons/Buttons';
 import FixWidthButtons from '../fixwidthbuttons/FixWidthButtons';
+import Scrollable from '../utils/scrollable/Scrollable';
 
 export default DropDownList;
 
@@ -75,8 +76,12 @@ declare namespace DropDownList {
         list?: {
             createBackgroundCallback?: CreateGeneralGameObjectCallbackType;
             createButtonCallback?: CreateButtonCallbackType;
+
             createTrackCallback?: CreateGeneralGameObjectCallbackType;
             createThumbCallback?: CreateGeneralGameObjectCallbackType;
+            scroller?: Scrollable.IScrollerConfig;
+            mouseWheelScroller?: Scrollable.IMouseWheelScroller;
+            sliderAdaptThumbSize?: boolean;
 
             onButtonClick?: OnButtonClickCallbackType;
             onButtonOver?: OnButtonOverCallbackType;
@@ -93,8 +98,6 @@ declare namespace DropDownList {
             alignSide?: string;
             expandDirection?: ExpandDirectionType;
             bounds?: Phaser.Geom.Rectangle;
-
-            sliderAdaptThumbSize?: boolean;
 
             space?: SpaceType;
 
