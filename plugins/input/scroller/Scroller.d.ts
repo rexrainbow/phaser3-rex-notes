@@ -20,6 +20,7 @@ declare namespace Scroller {
         dragReverse?: boolean,
         dragRate?: number,
         pointerOutRelease?: boolean,
+        rectBoundsInteractive?: boolean,
 
         enable?: boolean,
         orientation?: OrientationType,

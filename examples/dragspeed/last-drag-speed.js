@@ -12,11 +12,11 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var bg = this.add.rectangle(400, 300, 800, 600, 0x333333)
+        var bg = this.add.rectangle(400, 300, 500, 400, 0x333333)
             .setInteractive();
 
         var txtSpeed = this.add.text(0, 0, '-');
-        var touchState = this.plugins.get('rexDragSpeed').add(bg)
+        var touchState = this.plugins.get('rexDragSpeed').add(bg, { rectBoundsInteractive: true })
             .on('touchstart', function (pointer) {
                 txtSpeed.text = '-';
                 txtSpeed.setText('-');

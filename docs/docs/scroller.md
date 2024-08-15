@@ -89,6 +89,7 @@ var scroller = scene.plugins.get('rexScroller').add(gameObject, {
     // enable: true,
     // orientation: 'vertical',
     // pointerOutRelease: true,
+    // rectBoundsInteractive: false,
 
     // valuechangeCallback: null,
     // valuechangeCallbackScope: null,
@@ -120,6 +121,9 @@ var scroller = scene.plugins.get('rexScroller').add(gameObject, {
     - `'vertical'`,`'v'`, `'y'`, or `0` : dragging on vertical/y axis.
     - `'horizontal'`,`'h'`, `'x'`, or `1` : dragging on horizontal/x axis.
 - `pointerOutRelease` : Set to `true` to release input control when pointer out of gameObject. Default value is `true`.
+- `rectBoundsInteractive` : 
+    - `false` : Detect scrolling by game object's touch input. Default behavior.
+    - `true` : Detect scrolling by rectangle bounds of game object.
 - `valuechangeCallback` , `valuechangeCallbackScope` : Bind this callback to [`valuechange` event](scroller.md#events)
 - `overminCallback` , `overmaxCallbackScope` : Bind this callback to [`overmax` event](scroller.md#events)
 - `overminCallback` , `overminCallbackScope` : Bind this callback to [`overmin` event](scroller.md#events)

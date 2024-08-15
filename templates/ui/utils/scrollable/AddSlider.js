@@ -143,7 +143,13 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
         if (scrollerConfig === true) {
             scrollerConfig = {};
         }
+
         scrollerConfig.orientation = (isAxisY) ? 0 : 1;
+
+        if (!scrollerConfig.hasOwnProperty('rectBoundsInteractive')) {
+            scrollerConfig.rectBoundsInteractive = true;
+        }
+
         scroller = new Scroller(child, scrollerConfig);
 
         if (child.isRexContainerLite) {

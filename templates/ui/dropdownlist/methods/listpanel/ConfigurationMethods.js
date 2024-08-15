@@ -37,6 +37,9 @@ var methods = {
     },
 
     setListScrollerConfig(config) {
+        if (config === undefined) {
+            config = {};
+        }
         this.listScrollerConfig = config;
         return this;
     },

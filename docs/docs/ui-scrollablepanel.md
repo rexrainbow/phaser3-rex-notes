@@ -167,6 +167,7 @@ var panel = scene.rexUI.add.scrollablePanel({
     //     slidingDeceleration: 5000,
     //     backDeceleration: 2000,
     //     pointerOutRelease: true,
+    //     rectBoundsInteractive: true,
     //     dragRate: 1,
     // },
 
@@ -339,6 +340,9 @@ var panel = scene.rexUI.add.scrollablePanel({
     - `scroller.backDeceleration` : Deceleration of pull back when out of bounds.
         - Set `false` to disable it.
     - `scroller.pointerOutRelease` : Set to `true` to release input control when pointer out of gameObject.
+    - `scroller.rectBoundsInteractive` : 
+        - `false` : Detect scrolling by game object's touch input.
+        - `true` : Detect scrolling by rectangle bounds of game object. Default behavior.
     - `scroller.dragRate` : Rate of dragging distance/dragging speed. Default value is `1`.
     - Set to `false` to skip creating scroller.
 - `scrollerX`, `scrollerY` : Configuration of scrollerX, scrollerY behavior, for two-sliders mode.

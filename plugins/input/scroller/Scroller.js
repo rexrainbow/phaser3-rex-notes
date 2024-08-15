@@ -18,6 +18,7 @@ class Scroller extends ComponentBase {
         });
 
         var drapSpeedConfig = {
+            rectBoundsInteractive: GetValue(config, 'rectBoundsInteractive', false),
             inputConfig: GetValue(config, 'inputConfig', undefined),
             enable: enable,
             pointerOutRelease: GetValue(config, 'pointerOutRelease', true),
