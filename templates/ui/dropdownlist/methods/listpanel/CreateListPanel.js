@@ -39,100 +39,79 @@ var CreateListPanel = function () {
 
     var height = this.listHeight;
 
-    var listPanel;
-    var isScrollable = (height > 0) && (this.listCreateSliderThumbCallback);
+    var buttonConfig = {
+        width: width,
+        buttons: buttons,
+        space: this.listSpace,
+    }
+
+    var buttons, listPanel;
+
+    var isScrollable;
+    if (this.listCreateSliderThumbCallback) {
+        isScrollable = (height > 0) || (this.listMaxHeight > 0);
+    } else {
+        isScrollable = false;
+    }
+
     if (!isScrollable) {
-        if (!this.listWrapEnable) {
-            listPanel = new Buttons(scene, {
-                width: width, height: height,
-                orientation: 'y',
-
-                background: background,
-                buttons: buttons,
-
-                space: this.listSpace,
-                draggable: this.listDraggable,
-            });
-        } else {
-            listPanel = new FixWidthButtons(scene, {
-                width: width, height: height,
-                orientation: 'x',
-
-                background: background,
-                buttons: buttons,
-
-                space: this.listSpace,
-                draggable: this.listDraggable,
-            });
-        }
-        scene.add.existing(listPanel);
+        buttonConfig.height = height;
+        buttons = CreateButtons(scene, buttonConfig);
+        listPanel = buttons;
 
     } else {
-        var buttons;
-        if (!this.listWrapEnable) {
-            buttons = new Buttons(scene, {
-                width: width,
-                orientation: 'y',
+        var buttons = CreateButtons(scene, buttonConfig);
 
-                buttons: buttons,
-
-                space: this.listSpace,
-                draggable: this.listDraggable,
-            });
-        } else {
-            buttons = new FixWidthButtons(scene, {
-                width: width,
-                orientation: 'x',
-
-                buttons: buttons,
-
-                space: this.listSpace,
-            });
-        }
-        scene.add.existing(buttons);
-
-        var track;
-        var createTrackCallback = this.listCreateSliderTrackCallback;
-        if (createTrackCallback) {
-            track = createTrackCallback.call(this, scene);
-            scene.add.existing(track);
+        if (this.listMaxHeight > 0) {
+            buttons.layout();
+            if (buttons.height <= this.listMaxHeight) {
+                listPanel = buttons;
+            }
         }
 
-        var thumb;
-        var createThumbCallback = this.listCreateSliderThumbCallback;
-        if (createThumbCallback) {
-            thumb = createThumbCallback.call(this, scene);
-            scene.add.existing(thumb);
-        }
+        if (!listPanel) {
+            if (height === 0) {
+                height = this.listMaxHeight;
+            }
 
-        listPanel = new ScrollablePanel(scene, {
-            height: height,
-            scrollMode: 0,
+            var track = CreateGameObject(scene, this.listCreateSliderTrackCallback);
+            var thumb = CreateGameObject(scene, this.listCreateSliderThumbCallback);
 
-            panel: {
-                child: buttons,
-                mask: {
-                    padding: 1,
+            listPanel = new ScrollablePanel(scene, {
+                height: height,
+                scrollMode: 0,
+
+                panel: {
+                    child: buttons,
+                    mask: {
+                        padding: 1,
+                    },
                 },
-            },
 
-            slider: {
-                track: track,
-                thumb: thumb,
+                slider: {
+                    track: track,
+                    thumb: thumb,
 
-                adaptThumbSize: this.listSliderAdaptThumbSizeEnable,
-            },
+                    adaptThumbSize: this.listSliderAdaptThumbSizeEnable,
+                },
 
-            background: background,
+                space: {
+                    panel: GetValue(this.listSpace, 'panel', 0),
+                },
+            })
+            scene.add.existing(listPanel);
+        }
+    }
 
-            space: {
-                panel: GetValue(this.listSpace, 'panel', 0),
-            },
+    if (background) {
+        listPanel.addBackground(background, 'background');
+    }
 
-            draggable: this.listDraggable,
-        })
-        scene.add.existing(listPanel);
+    if (this.listDraggable) {
+        listPanel.setDraggable(true);
+    }
 
+    if (listPanel !== buttons) {
         // Route buttons' events to listPanel
         buttons
             .on('button.over', function (button, index, pointer, event) {
@@ -147,6 +126,29 @@ var CreateListPanel = function () {
     }
 
     return listPanel;
+}
+
+var CreateButtons = function (scene, config, isWrapEnable) {
+    var gameObject;
+    if (!isWrapEnable) {
+        config.orientation = 'y';
+        gameObject = new Buttons(scene, config);
+    } else {
+        config.orientation = 'x';
+        gameObject = new FixWidthButtons(scene, config);
+    }
+    scene.add.existing(gameObject);
+    return gameObject;
+}
+
+var CreateGameObject = function (scene, callback, scope) {
+    var gameObject;
+    if (callback) {
+        gameObject = callback.call(scope, scene);
+        scene.add.existing(gameObject);
+    }
+
+    return gameObject;
 }
 
 export default CreateListPanel;

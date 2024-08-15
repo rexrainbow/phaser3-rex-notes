@@ -57,13 +57,14 @@ class Demo extends Phaser.Scene {
                     return button;
                 },
 
-                height: 200,
+                maxHeight: 200,
                 createTrackCallback: function (scene) {
                     return scene.rexUI.add.roundRectangle({ width: 10, color: COLOR_MAIN });
                 },
                 createThumbCallback: function (scene) {
                     return scene.rexUI.add.roundRectangle({ width: 14, height: 14, color: COLOR_LIGHT });
                 },
+                sliderAdaptThumbSize: true,
                 space: { panel: 8 },
 
                 // scope: dropDownList

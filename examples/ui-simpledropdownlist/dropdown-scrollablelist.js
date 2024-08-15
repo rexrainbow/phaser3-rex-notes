@@ -43,7 +43,7 @@ class Demo extends Phaser.Scene {
             },
 
             list: {
-                height: 200,
+                maxHeight: 200,
             }
         }
 

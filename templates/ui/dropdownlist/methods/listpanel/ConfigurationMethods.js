@@ -107,6 +107,12 @@ var methods = {
         return this;
     },
 
+    setListMaxHeight(height) {
+        this.listMaxHeight = height;
+        return this;
+    },
+
+
     setListAlignmentMode(mode) {
         this.listAlignMode = mode;
         return this;

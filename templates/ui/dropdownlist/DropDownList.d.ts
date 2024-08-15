@@ -86,6 +86,7 @@ declare namespace DropDownList {
             easeOut?: number;
 
             wrap?: boolean;
+            maxHeight?: number;
             width?: number;
             height?: number;
             alignParent?: AlignParentType;
@@ -93,7 +94,7 @@ declare namespace DropDownList {
             expandDirection?: ExpandDirectionType;
             bounds?: Phaser.Geom.Rectangle;
 
-            listSliderAdaptThumbSizeEnable?: boolean;
+            sliderAdaptThumbSize?: boolean;
 
             space?: SpaceType;
 
