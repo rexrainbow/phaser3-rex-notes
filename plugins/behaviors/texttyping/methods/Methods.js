@@ -1,9 +1,9 @@
+import SetTextMethods from './SetTextMethods.js';
 import StartTyping from './StartTyping.js';
 import StartTypingFromLine from './StartTypingFromLine.js';
 import StopTyping from './StopTyping.js';
 import PauseTyping from './PauseTyping.js';
 import ResumeTyping from './ResumeTyping.js';
-import AppendText from './AppendText.js';
 
 var methods = {
     start: StartTyping,
@@ -11,7 +11,11 @@ var methods = {
     stop: StopTyping,
     pause: PauseTyping,
     resumeTyping: ResumeTyping,
-    appendText: AppendText,
 }
+
+Object.assign(
+    methods,
+    SetTextMethods
+)
 
 export default methods;

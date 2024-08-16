@@ -4,6 +4,7 @@ import GetWrapText from '../../utils/text/GetWrapText.js';
 import SetNoWrapText from '../../utils/text/SetNoWrapText.js';
 import GetTypingString from './utils/GetTypingString.js';
 import GetPlainText from './utils/GetPlainText.js';
+import TransferText from './methods/TransferText.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -174,15 +175,6 @@ class TextTyping extends ComponentBase {
             this.parent.setText(text);
         }
     }
-}
-
-var TransferText = function (text) {
-    if (Array.isArray(text)) {
-        text = text.join('\n');
-    } else if (typeof (text) === 'number') {
-        text = text.toString();
-    }
-    return text;
 }
 
 const TYPEMODE = {
