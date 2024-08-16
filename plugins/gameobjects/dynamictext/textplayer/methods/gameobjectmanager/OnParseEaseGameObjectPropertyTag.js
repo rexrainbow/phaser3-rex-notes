@@ -91,8 +91,15 @@ var EaseProperty = function (params) {
     var isYoyo = easeMode.startsWith('yoyo');
 
     gameObjectManager.easeProperty(
-        name, property, value,
-        duration, ease, repeat, isYoyo
+        name,
+        {
+            property: property,
+            value: value,
+            duration: duration,
+            ease: ease,
+            repeat: repeat,
+            yoyo: isYoyo
+        }
     );
 }
 
