@@ -220,6 +220,45 @@
         EventEmitterMethods
     );
 
+    var TransferText = function (text) {
+        if (Array.isArray(text)) {
+            text = text.join('\n');
+        } else if (typeof (text) === 'number') {
+            text = text.toString();
+        }
+        return text;
+    };
+
+    var SetTextMethods = {
+        setText(text) {
+            if (this.setTextCallback) {
+                if (this.setTextCallbackScope) {
+                    text = this.setTextCallback.call(this.setTextCallbackScope, text, this.isLastChar, this.insertIndex);
+                } else {
+                    text = this.setTextCallback(text, this.isLastChar, this.insertIndex);
+                }
+            }
+
+            if (this.textWrapEnable) {
+                SetNoWrapText(this.parent, text);
+            } else {
+                this.parent.setText(text);
+            }
+        },
+
+        appendText(text) {
+            var newText = this.text.concat(TransferText(text));
+            if (this.isTyping) {
+                this.setTypingContent(newText);
+            } else {
+                this.start(newText, undefined, this.textLength);
+            }
+
+            return this;
+        }
+
+    };
+
     var StartTyping = function (text, speed, startIndex, timerStartAt) {
         if (text !== undefined) {
             this.setTypingContent(text);
@@ -374,25 +413,18 @@
         return this;
     };
 
-    var AppendText = function (text) {
-        var newText = this.text.concat(TransferText(text));
-        if (this.isTyping) {
-            this.setTypingContent(newText);
-        } else {
-            this.start(newText, undefined, this.textLength);
-        }
-
-        return this;
-    };
-
     var methods = {
         start: StartTyping,
         startFromLine: StartTypingFromLine,
         stop: StopTyping,
         pause: PauseTyping,
         resumeTyping: ResumeTyping,
-        appendText: AppendText,
     };
+
+    Object.assign(
+        methods,
+        SetTextMethods
+    );
 
     const TextClass = Phaser.GameObjects.Text;
 
@@ -440,7 +472,7 @@
         return text;
     };
 
-    var SetNoWrapText = function (textObject, text) {
+    var SetNoWrapText$1 = function (textObject, text) {
         var textObjectType = GetTextObjectType(textObject);
         switch (textObjectType) {
             case TextType:
@@ -553,7 +585,7 @@
         }
 
         set text(value) {
-            var text = TransferText$1(value);
+            var text = TransferText(value);
             if (this.textWrapEnable) {
                 text = GetWrapText(this.parent, text);
             }
@@ -646,21 +678,12 @@
             }
 
             if (this.textWrapEnable) {
-                SetNoWrapText(this.parent, text);
+                SetNoWrapText$1(this.parent, text);
             } else {
                 this.parent.setText(text);
             }
         }
     }
-
-    var TransferText$1 = function (text) {
-        if (Array.isArray(text)) {
-            text = text.join('\n');
-        } else if (typeof (text) === 'number') {
-            text = text.toString();
-        }
-        return text;
-    };
 
     const TYPEMODE = {
         'left-to-right': 0,

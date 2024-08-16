@@ -6264,7 +6264,7 @@
         },
 
         clearClickShortcutKeys() {
-            this.setShortcutKeys();
+            this.setClickShortcutKeys();
             return this;
         },
 
@@ -14784,28 +14784,14 @@
         AnimationMethods
     );
 
-    class SpriteManager extends GOManager {
-        constructor(scene, config) {
-            if (config === undefined) {
-                config = {};
-            }
-
-            config.BobClass = SpriteBob;
-
-            super(scene, config);
+    var GetCreateGameObjectCallback = function (callback) {
+        if (!callback || (callback === 'sprite')) {
+            callback = CreateSprite;
+        } else if (callback === 'image') {
+            callback = CreateImage;
         }
-
-        setCreateGameObjectCallback(callback, scope) {
-            if (!callback || (callback === 'sprite')) {
-                callback = CreateSprite;
-            } else if (callback === 'image') {
-                callback = CreateImage;
-            }
-            super.setCreateGameObjectCallback(callback, scope);
-            return this;
-        }
-
-    }
+        return callback;
+    };
 
     var CreateSprite = function (scene, textureKey, frameName) {
         if ((typeof (frameName) !== 'string') && (typeof (frameName) !== 'number')) {
@@ -14820,6 +14806,25 @@
         }
         return scene.add.image(0, 0, textureKey, frameName);
     };
+
+    class SpriteManager extends GOManager {
+        constructor(scene, config) {
+            if (config === undefined) {
+                config = {};
+            }
+
+            config.BobClass = SpriteBob;
+
+            super(scene, config);
+        }
+
+        setCreateGameObjectCallback(callback, scope) {
+            callback = GetCreateGameObjectCallback(callback);
+            super.setCreateGameObjectCallback(callback, scope);
+            return this;
+        }
+
+    }
 
     Object.assign(
         SpriteManager.prototype,
@@ -15024,8 +15029,11 @@
         if (config === undefined) {
             config = {};
         }
+
         config.name = 'sprite';
         config.parseCallbacks = ParseCallbacks$1;
+        config.createGameObject = GetCreateGameObjectCallback(config.createGameObject);
+
         this.addGameObjectManager(config, SpriteManager);
     };
 
@@ -15310,8 +15318,15 @@
         var isYoyo = easeMode.startsWith('yoyo');
 
         gameObjectManager.easeProperty(
-            name, property, value,
-            duration, ease, repeat, isYoyo
+            name,
+            {
+                property: property,
+                value: value,
+                duration: duration,
+                ease: ease,
+                repeat: repeat,
+                yoyo: isYoyo
+            }
         );
     };
 

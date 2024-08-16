@@ -6264,7 +6264,7 @@
         },
 
         clearClickShortcutKeys() {
-            this.setShortcutKeys();
+            this.setClickShortcutKeys();
             return this;
         },
 
@@ -8533,28 +8533,14 @@
         AnimationMethods
     );
 
-    class SpriteManager extends GOManager {
-        constructor(scene, config) {
-            if (config === undefined) {
-                config = {};
-            }
-
-            config.BobClass = SpriteBob;
-
-            super(scene, config);
+    var GetCreateGameObjectCallback = function (callback) {
+        if (!callback || (callback === 'sprite')) {
+            callback = CreateSprite;
+        } else if (callback === 'image') {
+            callback = CreateImage;
         }
-
-        setCreateGameObjectCallback(callback, scope) {
-            if (!callback || (callback === 'sprite')) {
-                callback = CreateSprite;
-            } else if (callback === 'image') {
-                callback = CreateImage;
-            }
-            super.setCreateGameObjectCallback(callback, scope);
-            return this;
-        }
-
-    }
+        return callback;
+    };
 
     var CreateSprite = function (scene, textureKey, frameName) {
         if ((typeof (frameName) !== 'string') && (typeof (frameName) !== 'number')) {
@@ -8569,6 +8555,25 @@
         }
         return scene.add.image(0, 0, textureKey, frameName);
     };
+
+    class SpriteManager extends GOManager {
+        constructor(scene, config) {
+            if (config === undefined) {
+                config = {};
+            }
+
+            config.BobClass = SpriteBob;
+
+            super(scene, config);
+        }
+
+        setCreateGameObjectCallback(callback, scope) {
+            callback = GetCreateGameObjectCallback(callback);
+            super.setCreateGameObjectCallback(callback, scope);
+            return this;
+        }
+
+    }
 
     Object.assign(
         SpriteManager.prototype,
@@ -8714,9 +8719,51 @@
         if (config === undefined) {
             config = {};
         }
+
         config.name = 'sprite';
         config.parseCallbacks = ParseCallbacks$2;
+        config.createGameObject = GetCreateGameObjectCallback(config.createGameObject);
+
         this.addGameObjectManager(config, SpriteManager);
+    };
+
+    var TransferText = function (text) {
+        if (Array.isArray(text)) {
+            text = text.join('\n');
+        } else if (typeof (text) === 'number') {
+            text = text.toString();
+        }
+        return text;
+    };
+
+    var SetTextMethods$1 = {
+        setText(text) {
+            if (this.setTextCallback) {
+                if (this.setTextCallbackScope) {
+                    text = this.setTextCallback.call(this.setTextCallbackScope, text, this.isLastChar, this.insertIndex);
+                } else {
+                    text = this.setTextCallback(text, this.isLastChar, this.insertIndex);
+                }
+            }
+
+            if (this.textWrapEnable) {
+                SetNoWrapText(this.parent, text);
+            } else {
+                this.parent.setText(text);
+            }
+        },
+
+        appendText(text) {
+            var newText = this.text.concat(TransferText(text));
+            if (this.isTyping) {
+                this.setTypingContent(newText);
+            } else {
+                this.start(newText, undefined, this.textLength);
+            }
+
+            return this;
+        }
+
     };
 
     var StartTyping = function (text, speed, startIndex, timerStartAt) {
@@ -8873,25 +8920,18 @@
         return this;
     };
 
-    var AppendText = function (text) {
-        var newText = this.text.concat(TransferText(text));
-        if (this.isTyping) {
-            this.setTypingContent(newText);
-        } else {
-            this.start(newText, undefined, this.textLength);
-        }
-
-        return this;
-    };
-
     var methods = {
         start: StartTyping,
         startFromLine: StartTypingFromLine,
         stop: StopTyping,
         pause: PauseTyping,
         resumeTyping: ResumeTyping,
-        appendText: AppendText,
     };
+
+    Object.assign(
+        methods,
+        SetTextMethods$1
+    );
 
     const TextClass = Phaser.GameObjects.Text;
 
@@ -8939,7 +8979,7 @@
         return text;
     };
 
-    var SetNoWrapText = function (textObject, text) {
+    var SetNoWrapText$1 = function (textObject, text) {
         var textObjectType = GetTextObjectType(textObject);
         switch (textObjectType) {
             case TextType:
@@ -9052,7 +9092,7 @@
         }
 
         set text(value) {
-            var text = TransferText$1(value);
+            var text = TransferText(value);
             if (this.textWrapEnable) {
                 text = GetWrapText(this.parent, text);
             }
@@ -9145,21 +9185,12 @@
             }
 
             if (this.textWrapEnable) {
-                SetNoWrapText(this.parent, text);
+                SetNoWrapText$1(this.parent, text);
             } else {
                 this.parent.setText(text);
             }
         }
     }
-
-    var TransferText$1 = function (text) {
-        if (Array.isArray(text)) {
-            text = text.join('\n');
-        } else if (typeof (text) === 'number') {
-            text = text.toString();
-        }
-        return text;
-    };
 
     const TYPEMODE = {
         'left-to-right': 0,
@@ -9549,8 +9580,15 @@
                 var isYoyo = easeMode.startsWith('yoyo');
 
                 gameObjectManager.easeProperty(
-                    name, property, value,
-                    duration, ease, repeat, isYoyo
+                    name,
+                    {
+                        property: property,
+                        value: value,
+                        duration: duration,
+                        ease: ease,
+                        repeat: repeat,
+                        yoyo: isYoyo
+                    }
                 );
 
                 parser.skipEvent();

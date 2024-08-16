@@ -21903,7 +21903,7 @@
 	    },
 
 	    clearClickShortcutKeys() {
-	        this.setShortcutKeys();
+	        this.setClickShortcutKeys();
 	        return this;
 	    },
 
@@ -31227,7 +31227,7 @@
 	    methods$F
 	);
 
-	var AppendText$2 = function (value, addCR) {
+	var AppendText$1 = function (value, addCR) {
 	    if (!value && value !== 0) {
 	        value = '';
 	    }
@@ -31812,7 +31812,7 @@
 	}
 
 	var methods$E = {
-	    appendText: AppendText$2,
+	    appendText: AppendText$1,
 	};
 
 	Object.assign(
@@ -34317,7 +34317,7 @@
 	    return children;
 	};
 
-	var AppendText$1 = function (text, style) {
+	var AppendText = function (text, style) {
 	    var children = this.createCharChildren(text, style);
 	    this.addChild(children);
 	    return this;
@@ -34329,7 +34329,7 @@
 	    }
 
 	    this.removeChildren();
-	    AppendText$1.call(this, text, style);  // this.appendText might be override
+	    AppendText.call(this, text, style);  // this.appendText might be override
 
 	    this.dirty = true;
 	    return this;
@@ -36068,7 +36068,7 @@
 	    createCharChild: CreateCharChild,
 	    createCharChildren: CreateCharChildren,
 	    setText: SetText$3,
-	    appendText: AppendText$1,
+	    appendText: AppendText,
 	    insertText: InsertText,
 	    removeText: RemoveText,
 	    getText: GetText,
@@ -37457,7 +37457,7 @@
 	    var tagName = 'r';
 	    parser
 	        .on(`+${tagName}`, function () {
-	            AppendText$1.call(textPlayer, '\n');
+	            AppendText.call(textPlayer, '\n');
 	            parser.skipEvent();
 	        })
 	        .on(`-${tagName}`, function () {
@@ -37471,7 +37471,7 @@
 	        var tagName = tagNames[i];
 	        parser
 	            .on(`+${tagName}`, function () {
-	                AppendText$1.call(textPlayer, '\f');
+	                AppendText.call(textPlayer, '\f');
 	                parser.skipEvent();
 	            })
 	            .on(`-${tagName}`, function () {
@@ -37503,7 +37503,7 @@
 	    parser
 	        .on('content', function (content) {
 	            if (parser.contentOutputEnable) {
-	                AppendText$1.call(textPlayer, content);
+	                AppendText.call(textPlayer, content);
 	            } else {
 	                var startTag = `+${parser.lastTagStart}`;
 	                textPlayer.emit(`parser.${startTag}#content`, parser, content);
@@ -38287,28 +38287,14 @@
 	    AnimationMethods
 	);
 
-	class SpriteManager extends GOManager {
-	    constructor(scene, config) {
-	        if (config === undefined) {
-	            config = {};
-	        }
-
-	        config.BobClass = SpriteBob;
-
-	        super(scene, config);
+	var GetCreateGameObjectCallback = function (callback) {
+	    if (!callback || (callback === 'sprite')) {
+	        callback = CreateSprite;
+	    } else if (callback === 'image') {
+	        callback = CreateImage$1;
 	    }
-
-	    setCreateGameObjectCallback(callback, scope) {
-	        if (!callback || (callback === 'sprite')) {
-	            callback = CreateSprite;
-	        } else if (callback === 'image') {
-	            callback = CreateImage$1;
-	        }
-	        super.setCreateGameObjectCallback(callback, scope);
-	        return this;
-	    }
-
-	}
+	    return callback;
+	};
 
 	var CreateSprite = function (scene, textureKey, frameName) {
 	    if ((typeof (frameName) !== 'string') && (typeof (frameName) !== 'number')) {
@@ -38323,6 +38309,25 @@
 	    }
 	    return scene.add.image(0, 0, textureKey, frameName);
 	};
+
+	class SpriteManager extends GOManager {
+	    constructor(scene, config) {
+	        if (config === undefined) {
+	            config = {};
+	        }
+
+	        config.BobClass = SpriteBob;
+
+	        super(scene, config);
+	    }
+
+	    setCreateGameObjectCallback(callback, scope) {
+	        callback = GetCreateGameObjectCallback(callback);
+	        super.setCreateGameObjectCallback(callback, scope);
+	        return this;
+	    }
+
+	}
 
 	Object.assign(
 	    SpriteManager.prototype,
@@ -38527,8 +38532,11 @@
 	    if (config === undefined) {
 	        config = {};
 	    }
+
 	    config.name = 'sprite';
 	    config.parseCallbacks = ParseCallbacks$1;
+	    config.createGameObject = GetCreateGameObjectCallback(config.createGameObject);
+
 	    this.addGameObjectManager(config, SpriteManager);
 	};
 
@@ -38784,8 +38792,15 @@
 	    var isYoyo = easeMode.startsWith('yoyo');
 
 	    gameObjectManager.easeProperty(
-	        name, property, value,
-	        duration, ease, repeat, isYoyo
+	        name,
+	        {
+	            property: property,
+	            value: value,
+	            duration: duration,
+	            ease: ease,
+	            repeat: repeat,
+	            yoyo: isYoyo
+	        }
 	    );
 	};
 
@@ -62124,7 +62139,7 @@ void main () {
 	};
 
 	var methods$p = {
-	    appendText: AppendText$2,
+	    appendText: AppendText$1,
 	    resetDisplayContent: ResetDisplayContent$2,
 	};
 
@@ -69332,7 +69347,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	    return text;
 	};
 
-	var SetNoWrapText = function (textObject, text) {
+	var SetNoWrapText$1 = function (textObject, text) {
 	    var textObjectType = GetTextObjectType(textObject);
 	    switch (textObjectType) {
 	        case TextType:
@@ -69417,7 +69432,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	    var text = GetLines$1.call(this, startLineIndex);
 
 	    // Display visible content
-	    SetNoWrapText(this.textObject, text);
+	    SetNoWrapText$1(this.textObject, text);
 
 	    this.textObject.rexSizer.offsetY = textOffset;
 	    ResetTextObjectPosition.call(this);
@@ -69818,7 +69833,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	    });
 	};
 
-	var SetTextMethods$1 = {
+	var SetTextMethods$2 = {
 	    setText(text) {
 	        var textBlock = this.childrenMap.child;
 	        textBlock.setText(text);
@@ -69922,7 +69937,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
 	Object.assign(
 	    TextArea.prototype,
-	    SetTextMethods$1,
+	    SetTextMethods$2,
 	    ScrollMethods$2,
 	);
 
@@ -79669,7 +79684,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	    },
 
 	    displayText(text) {
-	        SetNoWrapText(this.parent, text);
+	        SetNoWrapText$1(this.parent, text);
 	    }
 	};
 
@@ -79840,6 +79855,45 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	    Methods$2,
 	);
 
+	var TransferText = function (text) {
+	    if (Array.isArray(text)) {
+	        text = text.join('\n');
+	    } else if (typeof (text) === 'number') {
+	        text = text.toString();
+	    }
+	    return text;
+	};
+
+	var SetTextMethods$1 = {
+	    setText(text) {
+	        if (this.setTextCallback) {
+	            if (this.setTextCallbackScope) {
+	                text = this.setTextCallback.call(this.setTextCallbackScope, text, this.isLastChar, this.insertIndex);
+	            } else {
+	                text = this.setTextCallback(text, this.isLastChar, this.insertIndex);
+	            }
+	        }
+
+	        if (this.textWrapEnable) {
+	            SetNoWrapText(this.parent, text);
+	        } else {
+	            this.parent.setText(text);
+	        }
+	    },
+
+	    appendText(text) {
+	        var newText = this.text.concat(TransferText(text));
+	        if (this.isTyping) {
+	            this.setTypingContent(newText);
+	        } else {
+	            this.start(newText, undefined, this.textLength);
+	        }
+
+	        return this;
+	    }
+
+	};
+
 	var StartTyping = function (text, speed, startIndex, timerStartAt) {
 	    if (text !== undefined) {
 	        this.setTypingContent(text);
@@ -79994,25 +80048,18 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	    return this;
 	};
 
-	var AppendText = function (text) {
-	    var newText = this.text.concat(TransferText(text));
-	    if (this.isTyping) {
-	        this.setTypingContent(newText);
-	    } else {
-	        this.start(newText, undefined, this.textLength);
-	    }
-
-	    return this;
-	};
-
 	var methods$9 = {
 	    start: StartTyping,
 	    startFromLine: StartTypingFromLine,
 	    stop: StopTyping,
 	    pause: PauseTyping,
 	    resumeTyping: ResumeTyping,
-	    appendText: AppendText,
 	};
+
+	Object.assign(
+	    methods$9,
+	    SetTextMethods$1
+	);
 
 	var GetWrapText = function (textObject, text) {
 	    var textObjectType = GetTextObjectType(textObject);
@@ -80101,7 +80148,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	    }
 
 	    set text(value) {
-	        var text = TransferText$1(value);
+	        var text = TransferText(value);
 	        if (this.textWrapEnable) {
 	            text = GetWrapText(this.parent, text);
 	        }
@@ -80194,21 +80241,12 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	        }
 
 	        if (this.textWrapEnable) {
-	            SetNoWrapText(this.parent, text);
+	            SetNoWrapText$1(this.parent, text);
 	        } else {
 	            this.parent.setText(text);
 	        }
 	    }
 	}
-
-	var TransferText$1 = function (text) {
-	    if (Array.isArray(text)) {
-	        text = text.join('\n');
-	    } else if (typeof (text) === 'number') {
-	        text = text.toString();
-	    }
-	    return text;
-	};
 
 	const TYPEMODE = {
 	    'left-to-right': 0,

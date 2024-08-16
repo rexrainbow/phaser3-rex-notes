@@ -21809,7 +21809,7 @@
 	    },
 
 	    clearClickShortcutKeys() {
-	        this.setShortcutKeys();
+	        this.setClickShortcutKeys();
 	        return this;
 	    },
 
