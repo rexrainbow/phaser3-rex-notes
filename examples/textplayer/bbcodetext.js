@@ -9,7 +9,6 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('dude', 'assets/images/phaser-dude.png');
     }
 
     create() {
@@ -42,11 +41,6 @@ Canvas rendering across desktop and mobile web browsers.`
 
                 typing: {
                     speed: 0,  // 0: no-typing
-                },
-
-                images: {
-                    'dude': { height: 24 },
-                    'dude-tint': { key: 'dude', height: 24, tintFill: true },
                 },
 
                 text: content

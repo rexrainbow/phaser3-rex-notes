@@ -7,6 +7,7 @@ Typing characters on [dynamic text](textplayer.md), waiting click or key enter, 
 
 ## Live demos
 
+- [BBCode](https://codepen.io/rexrainbow/pen/VwJyOzm)
 - [Play](https://codepen.io/rexrainbow/pen/oNZbbJv)
 - [Sprite control](https://codepen.io/rexrainbow/pen/jOBroeY)
 - [Show page](https://codepen.io/rexrainbow/pen/XWMMpjE)
@@ -16,6 +17,7 @@ Typing characters on [dynamic text](textplayer.md), waiting click or key enter, 
 - Choices
     - [Custonm tag](https://codepen.io/rexrainbow/pen/dydQjow)
     - [Choice dailog](https://codepen.io/rexrainbow/pen/ZEdvPme)
+- [Resolution](https://codepen.io/rexrainbow/pen/eYwyaRa)
 
 ## Usage
 
