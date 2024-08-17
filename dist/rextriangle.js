@@ -1839,6 +1839,7 @@
         resume() {
             // Only can ba resumed in paused state (paused from running state)
             if (this.isPaused) {
+                this.isPaused = false;
                 this.isRunning = true;
             }
             return this;

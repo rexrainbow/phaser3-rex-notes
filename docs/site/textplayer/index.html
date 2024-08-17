@@ -11074,15 +11074,18 @@
 </ul>
 <h4 id="pause">Pause<a class="headerlink" href="#pause" title="Permanent link">&para;</a></h4>
 <ul>
+<li>Pause typing
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">pauseTyping</span><span class="p">();</span>
+</code></pre></div></li>
 <li>Pause typing and typing animation
     <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
-</code></pre></div></li>
-<li>Pause typing only
-    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">pauseTyping</span><span class="p">();</span>
 </code></pre></div></li>
 </ul>
 <h4 id="resume">Resume<a class="headerlink" href="#resume" title="Permanent link">&para;</a></h4>
 <ul>
+<li>Resume typing
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">resumeTyping</span><span class="p">();</span>
+</code></pre></div></li>
 <li>Resume typing and typing animation
     <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
 </code></pre></div></li>
@@ -11432,13 +11435,15 @@
 </li>
 </ul>
 <h4 id="custom-tag">Custom tag<a class="headerlink" href="#custom-tag" title="Permanent link">&para;</a></h4>
-<p>Assume that adding a custom tag : <code>[custom=10,20][/custom]</code></p>
+<p>Assume that adding a custom tag : <code>[custom=10,20][/custom]</code>. </p>
+<p><code>+custom</code> parses the open tag <code>[custom=10,20]</code> and <code>-custom</code> parses the closing tag <code>[/custom]</code></p>
 <ul>
 <li>On parse a <code>+custom</code> tag, will add a custom command child 
     <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;parser.+custom&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">parser</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="nx">params</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// console.log(&#39;Parse +custom tag:&#39;, a, b)</span>
 <span class="p">})</span>
 </code></pre></div><ul>
+<li>parses opening tag</li>
 <li><code>a</code>, <code>b</code>, ... : Parameters after <code>=</code></li>
 <li><code>params</code> : Arguments array used when executing <code>+custom</code>. Equal to <code>[a, b]</code> in this case.</li>
 <li>Disable content after this start tag
@@ -11459,6 +11464,7 @@
 <span class="w">    </span><span class="c1">// console.log(&#39;Parse -custom tag&#39;)</span>
 <span class="p">})</span>
 </code></pre></div><ul>
+<li>parses closing tag</li>
 <li><code>params</code> : Arguments array used when executing <code>-custom</code>. Equal to <code>[]</code> in this case.</li>
 <li>Enable content after this start tag
     <div class="highlight"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">setContentOutputEnable</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>

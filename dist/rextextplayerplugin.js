@@ -4253,6 +4253,7 @@
         resume() {
             // Only can ba resumed in paused state (paused from running state)
             if (this.isPaused) {
+                this.isPaused = false;
                 this.isRunning = true;
             }
             return this;
@@ -15489,35 +15490,41 @@
     };
 
     var PauseMethods = {
-        pause() {
-            // Pause typing, typing timer and animation progresses
-            this.timeline.pause(); 
-
-            return this;
-        },
-
         pauseTyping() {
             // Pause typing
             this.typeWriter.pauseTyping();
 
             return this;
-        }
+        },
+
+        pause() {
+            this.pauseTyping();
+            
+            // Pause typing, typing timer and animation progresses
+            this.timeline.pause();
+
+            return this;
+        },
+
     };
 
     var ResumeMethods = {
+        resumeTyping(offsetTime) {
+            // Resume typing
+            this.typeWriter.resumeTyping(offsetTime);
+
+            return this;
+        },
+
         resume() {
+            this.resumeTyping();
+
             // Resume typing timer, animation progresses and typing
             this.timeline.resume();
 
             return this;
         },
 
-        resumeTyping(offsetTime) {
-            // Resume typing
-            this.typeWriter.resumeTyping(offsetTime);
-
-            return this;
-        }
     };
 
     var Wait = function (name) {
