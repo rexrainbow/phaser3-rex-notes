@@ -9,6 +9,7 @@ Drawing on [canvas](https://www.w3schools.com/html/html5_canvas.asp).
 
 - [Kaleidoscope](https://codepen.io/rexrainbow/pen/RdzvVj)
 - [chartjs](https://codepen.io/rexrainbow/pen/LmYpjE)
+- [Resolution](https://codepen.io/rexrainbow/pen/LYKeozN)
 
 ## Usage
 
