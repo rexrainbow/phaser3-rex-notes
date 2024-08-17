@@ -958,7 +958,9 @@ New line symbol `'\n'` will be removed, use `[r]` to insert a new line character
 
 #### Custom tag
 
-Assume that adding a custom tag : `[custom=10,20][/custom]`
+Assume that adding a custom tag : `[custom=10,20][/custom]`. 
+
+`+custom` parses the open tag `[custom=10,20]` and `-custom` parses the closing tag `[/custom]`
 
 - On parse a `+custom` tag, will add a custom command child 
     ```javascript
@@ -966,6 +968,7 @@ Assume that adding a custom tag : `[custom=10,20][/custom]`
         // console.log('Parse +custom tag:', a, b)
     })
     ```
+    - parses opening tag
     - `a`, `b`, ... : Parameters after `=`
     - `params` : Arguments array used when executing `+custom`. Equal to `[a, b]` in this case.
     - Disable content after this start tag
@@ -985,6 +988,7 @@ Assume that adding a custom tag : `[custom=10,20][/custom]`
         // console.log('Parse -custom tag')
     })
     ```
+    - parses closing tag
     - `params` : Arguments array used when executing `-custom`. Equal to `[]` in this case.
     - Enable content after this start tag
         ```javascript
