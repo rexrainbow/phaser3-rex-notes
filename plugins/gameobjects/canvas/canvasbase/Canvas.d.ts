@@ -5,8 +5,11 @@ export default class Canvas extends CanvasGameObjectBase {
     constructor(
         scene: Phaser.Scene,
         x?: number, y?: number,
-        width?: number, height?: number
+        width?: number, height?: number,
+        resolution?: number,
     );
+
+    readonly resolution: number;
 
     canvas: HTMLCanvasElement;
     context: CanvasRenderingContext2D;

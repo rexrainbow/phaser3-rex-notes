@@ -10,7 +10,7 @@ const GameObject = Phaser.GameObjects.GameObject;
 const UUID = Phaser.Utils.String.UUID;
 
 class Canvas extends GameObject {
-    constructor(scene, x, y, width, height) {
+    constructor(scene, x, y, width, height, resolution) {
         if (x === undefined) {
             x = 0;
         }
@@ -23,12 +23,15 @@ class Canvas extends GameObject {
         if (height === undefined) {
             height = 1;
         }
+        if (resolution === undefined) {
+            resolution = 1;
+        }
 
         super(scene, 'rexCanvas');
 
         this.renderer = scene.sys.game.renderer;
 
-        this.resolution = 1;
+        this.resolution = resolution;
         this._width = width;
         this._height = height;
         width = Math.max(Math.ceil(width * this.resolution), 1);

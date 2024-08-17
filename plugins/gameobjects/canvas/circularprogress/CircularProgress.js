@@ -20,8 +20,11 @@ class CircularProgress extends ProgressBase(Canvas) {
             barColor = GetValue(config, 'barColor', undefined);
             value = GetValue(config, 'value', 0);
         }
+
         var width = radius * 2;
-        super(scene, x, y, width, width);
+        var resolution = GetValue(config, 'resolution', 1);
+
+        super(scene, x, y, width, width, resolution);
         this.type = 'rexCircularProgressCanvas';
 
         this.bootProgressBase(config);
@@ -292,9 +295,10 @@ class CircularProgress extends ProgressBase(Canvas) {
     }
 
     updateTexture() {
-        this.clear();
-        DrawContent.call(this);
-        super.updateTexture();
+        super.updateTexture(function () {
+            this.clear();
+            DrawContent.call(this);
+        }, this);
         return this;
     }
 

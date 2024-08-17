@@ -87,6 +87,7 @@ var txt = scene.add.rexTextPlayer({
     y: 0,
     width: undefined, 
     height: undefined,
+    resolution: 1,
 
     padding: 0,  // {left: 0, right: 0, top: 0, bottom: 0}
 
@@ -229,6 +230,7 @@ var txt = scene.add.rexTextPlayer({
 - `height` : Fixed height.
     - A number : Height of this text-player game object. 
     - `undefined` : Height of this text-player game object will be set after invoked `runWordWrap` method.
+- `resolution` : The resolution the content is rendered to its internal canvas at. Default value is `1`.
 - `padding` : Padding of bounds.
     - A number 
     - `padding.left`, `padding.right`, `padding.top`, `padding.bottom`

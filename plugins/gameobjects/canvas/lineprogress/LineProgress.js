@@ -27,7 +27,10 @@ class LineProgress extends ProgressBase(Canvas) {
             barColor = GetValue(config, 'barColor', undefined);
             value = GetValue(config, 'value', 0);
         }
-        super(scene, x, y, width, height);
+
+        var resolution = GetValue(config, 'resolution', 1);
+
+        super(scene, x, y, width, height, resolution);
         this.type = 'rexLineProgressCanvas';
         this.trackPoints = [];
         this.barPoints = [];
@@ -162,9 +165,10 @@ class LineProgress extends ProgressBase(Canvas) {
     }
 
     updateTexture() {
-        this.clear();
-        DrawContent.call(this);
-        super.updateTexture();
+        super.updateTexture(function () {
+            this.clear();
+            DrawContent.call(this);
+        }, this);
         return this;
     }
 }

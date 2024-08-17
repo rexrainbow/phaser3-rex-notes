@@ -10,7 +10,8 @@ export default function (config, addToScene) {
     }
     var width = GetAdvancedValue(config, 'width', 256);
     var height = GetAdvancedValue(config, 'height', width);
-    var gameObject = new Canvas(this.scene, 0, 0, width, height);
+    var resolution = GetAdvancedValue(config, 'resolution', 1);
+    var gameObject = new Canvas(this.scene, 0, 0, width, height, resolution);
     BuildGameObject(this.scene, gameObject, config);
     var fillColor = GetAdvancedValue(config, 'fill', null);
     gameObject.fill(fillColor);

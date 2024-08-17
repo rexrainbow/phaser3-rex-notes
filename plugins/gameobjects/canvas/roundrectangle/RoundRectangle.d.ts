@@ -33,7 +33,9 @@ declare class RoundRectangle extends Canvas {
         lineWidth?: number,
 
         fillColor2?: number | string | null,
-        isHorizontalGradient?: boolean
+        isHorizontalGradient?: boolean,
+
+        resolution?: number,
     );
 
     fillStyle: string;

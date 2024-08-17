@@ -87,6 +87,7 @@ var txt = scene.add.rexCanvasInput({
     y: 0,
     width: undefined, 
     height: undefined,
+    resolution: 1,
 
     // padding: 0,  // {left: 0, right: 0, top: 0, bottom: 0}
 

@@ -3,10 +3,20 @@ import CopyCanvasToTexture from '../../../utils/texture/CopyCanvasToTexture.js';
 export default {
     updateTexture(callback, scope) {
         if (callback) {
+            var scale = this.resolution;
+            if (scale !== 1) {
+                this.context.save();
+                this.context.scale(scale, scale);
+            }
+
             if (scope) {
                 callback.call(scope, this.canvas, this.context);
             } else {
                 callback(this.canvas, this.context);
+            }
+
+            if (scale !== 1) {
+                this.context.restore();
             }
         }
 

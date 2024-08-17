@@ -15,5 +15,7 @@ export default function (
     lineWidth?: number,
 
     fillColor2?: number | string | null,
-    isHorizontalGradient?: boolean
+    isHorizontalGradient?: boolean,
+
+    resolution?: number,
 ): RoundRectangle;

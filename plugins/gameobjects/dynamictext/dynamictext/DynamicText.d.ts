@@ -131,6 +131,7 @@ declare namespace DynamicText {
     interface IConfig {
         x?: number, y?: number,
         width?: number, height?: number,
+        resolution?: number,
 
         padding: PaddingTypes,
 

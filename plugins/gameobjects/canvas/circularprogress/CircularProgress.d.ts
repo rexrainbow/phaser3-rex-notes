@@ -14,6 +14,7 @@ declare namespace CircularProgressCanvas {
     interface IConfig {
         x?: number, y?: number,
         radius?: number,
+        resolution?: number,
 
         barColor?: string | number,
         barColor2?: string | number,

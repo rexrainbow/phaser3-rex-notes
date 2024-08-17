@@ -16,7 +16,8 @@ export default function (config, addToScene) {
     var lineWidth = GetAdvancedValue(config, 'lineWidth', undefined);
     var fillColor2 = GetAdvancedValue(config, 'fillColor2', undefined);
     var isHorizontalGradient = GetAdvancedValue(config, 'isHorizontalGradient', true);
-    var gameObject = new RoundRectangle(this.scene, 0, 0, width, height, radius, fillStyle, strokeStyle, lineWidth, fillColor2, isHorizontalGradient);
+    var resolution = GetAdvancedValue(config, 'resolution', 1);
+    var gameObject = new RoundRectangle(this.scene, 0, 0, width, height, radius, fillStyle, strokeStyle, lineWidth, fillColor2, isHorizontalGradient, resolution);
     BuildGameObject(this.scene, gameObject, config);
     return gameObject;
 };

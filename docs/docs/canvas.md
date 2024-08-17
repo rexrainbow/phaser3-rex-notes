@@ -76,6 +76,7 @@ Drawing on [canvas](https://www.w3schools.com/html/html5_canvas.asp).
 
 ```javascript
 var canvas = scene.add.rexCanvas(x, y, width, height);
+// var canvas = scene.add.rexCanvas(x, y, width, height, resolution);
 ```
 
 Add canvas from JSON
@@ -86,6 +87,7 @@ var canvas = scene.make.rexCanvas({
     y: 0,
     width: 256,
     height: 256,
+    // resolution: 1,
 
     // origin: {x: 0.5, y: 0.5},
     // fill: null,
@@ -94,13 +96,15 @@ var canvas = scene.make.rexCanvas({
 });
 ```
 
+- `resolution` : The resolution the content is rendered to its internal canvas at. Default value is `1`.
+
 ### Custom class
 
 - Define class
     ```javascript
     class MyCanvas extends Canvas {
-        constructor(scene, x, y, width, height) {
-            super(scene, x, y, width, height);
+        constructor(scene, x, y, width, height, resolution) {
+            super(scene, x, y, width, height, resolution);
             // ...
             scene.add.existing(this);
         }
@@ -114,7 +118,7 @@ var canvas = scene.make.rexCanvas({
         - If it has a `preUpdate` method, it will be added to the Update List.
 - Create instance
     ```javascript
-    var canvas = new MyCanvas(scene, x, y, width, height);
+    var canvas = new MyCanvas(scene, x, y, width, height, resolution);
     ```
 
 ### Clear or fill canvas

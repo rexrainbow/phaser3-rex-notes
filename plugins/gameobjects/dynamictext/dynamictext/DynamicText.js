@@ -10,22 +10,27 @@ const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class DynamicText extends Canvas {
-    constructor(scene, x, y, fixedWidth, fixedHeight, config) {
+    constructor(scene, x, y, fixedWidth, fixedHeight, resolution, config) {
         if (IsPlainObject(x)) {
             config = x;
             x = GetValue(config, 'x', 0);
             y = GetValue(config, 'y', 0);
             fixedWidth = GetValue(config, 'width', 0);
             fixedHeight = GetValue(config, 'height', 0);
+            resolution = GetValue(config, 'resolution', 1);
         } else if (IsPlainObject(fixedWidth)) {
             config = fixedWidth;
             fixedWidth = GetValue(config, 'width', 0);
             fixedHeight = GetValue(config, 'height', 0);
+            resolution = GetValue(config, 'resolution', 1);
+        } else if (IsPlainObject(resolution)) {
+            config = resolution;
+            resolution = GetValue(config, 'resolution', 1);
         }
 
         var width = (fixedWidth === 0) ? 1 : fixedWidth;
         var height = (fixedHeight === 0) ? 1 : fixedHeight;
-        super(scene, x, y, width, height);
+        super(scene, x, y, width, height, resolution);
         this.type = 'rexDynamicText';
         this.autoRound = true;
         this.padding = SetPadding();
@@ -57,8 +62,9 @@ class DynamicText extends Canvas {
     }
 
     updateTexture() {
-        this.renderContent();
-        super.updateTexture();
+        super.updateTexture(function () {
+            this.renderContent();
+        }, this);
         return this;
     }
 

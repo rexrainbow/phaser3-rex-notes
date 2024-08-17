@@ -14,6 +14,7 @@ declare namespace LineProgress {
     interface IConfig {
         x?: number, y?: number,
         width?: number, height?: number,
+        resolution?: number,
 
         trackColor?: string | number,
         trackThickness?: number,

@@ -7,6 +7,7 @@ declare namespace Creator {
         width?: number,
         height?: number,
         fill?: string,
+        resolution?: number,
     }
 }
 
