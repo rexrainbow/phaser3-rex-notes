@@ -208,10 +208,20 @@
     var TextureMethods = {
         updateTexture(callback, scope) {
             if (callback) {
+                var scale = this.resolution;
+                if (scale !== 1) {
+                    this.context.save();
+                    this.context.scale(scale, scale);
+                }
+
                 if (scope) {
                     callback.call(scope, this.canvas, this.context);
                 } else {
                     callback(this.canvas, this.context);
+                }
+
+                if (scale !== 1) {
+                    this.context.restore();
                 }
             }
 
@@ -298,7 +308,7 @@
     const UUID = Phaser.Utils.String.UUID;
 
     class Canvas extends GameObject {
-        constructor(scene, x, y, width, height) {
+        constructor(scene, x, y, width, height, resolution) {
             if (x === undefined) {
                 x = 0;
             }
@@ -311,12 +321,15 @@
             if (height === undefined) {
                 height = 1;
             }
+            if (resolution === undefined) {
+                resolution = 1;
+            }
 
             super(scene, 'rexCanvas');
 
             this.renderer = scene.sys.game.renderer;
 
-            this.resolution = 1;
+            this.resolution = resolution;
             this._width = width;
             this._height = height;
             width = Math.max(Math.ceil(width * this.resolution), 1);
@@ -1660,8 +1673,11 @@
                 barColor = GetValue(config, 'barColor', undefined);
                 value = GetValue(config, 'value', 0);
             }
+
             var width = radius * 2;
-            super(scene, x, y, width, width);
+            var resolution = GetValue(config, 'resolution', 1);
+
+            super(scene, x, y, width, width, resolution);
             this.type = 'rexCircularProgressCanvas';
 
             this.bootProgressBase(config);
@@ -1932,9 +1948,10 @@
         }
 
         updateTexture() {
-            this.clear();
-            DrawContent.call(this);
-            super.updateTexture();
+            super.updateTexture(function () {
+                this.clear();
+                DrawContent.call(this);
+            }, this);
             return this;
         }
 

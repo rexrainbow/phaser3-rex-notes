@@ -208,10 +208,20 @@
     var TextureMethods = {
         updateTexture(callback, scope) {
             if (callback) {
+                var scale = this.resolution;
+                if (scale !== 1) {
+                    this.context.save();
+                    this.context.scale(scale, scale);
+                }
+
                 if (scope) {
                     callback.call(scope, this.canvas, this.context);
                 } else {
                     callback(this.canvas, this.context);
+                }
+
+                if (scale !== 1) {
+                    this.context.restore();
                 }
             }
 
@@ -298,7 +308,7 @@
     const UUID = Phaser.Utils.String.UUID;
 
     class Canvas extends GameObject {
-        constructor(scene, x, y, width, height) {
+        constructor(scene, x, y, width, height, resolution) {
             if (x === undefined) {
                 x = 0;
             }
@@ -311,12 +321,15 @@
             if (height === undefined) {
                 height = 1;
             }
+            if (resolution === undefined) {
+                resolution = 1;
+            }
 
             super(scene, 'rexCanvas');
 
             this.renderer = scene.sys.game.renderer;
 
-            this.resolution = 1;
+            this.resolution = resolution;
             this._width = width;
             this._height = height;
             width = Math.max(Math.ceil(width * this.resolution), 1);
@@ -911,14 +924,23 @@
     const GetValue = Phaser.Utils.Objects.GetValue;
 
     class RoundRectangle extends Canvas {
-        constructor(scene, x, y, width, height, radiusConfig, fillStyle, strokeStyle, lineWidth, fillColor2, isHorizontalGradient) {
+        constructor(
+            scene,
+            x, y, width, height,
+            radiusConfig,
+            fillStyle, strokeStyle, lineWidth,
+            fillColor2, isHorizontalGradient,
+            resolution
+        ) {
+
             if (x === undefined) { x = 0; }
             if (y === undefined) { y = 0; }
             if (width === undefined) { width = 1; }
             if (height === undefined) { height = width; }
             if (radiusConfig === undefined) { radiusConfig = 0; }
+            if (resolution === undefined) { resolution = 1; }
 
-            super(scene, x, y, width, height);
+            super(scene, x, y, width, height, resolution);
             this.type = 'rexRoundRectangleCanvas';
 
             var radius = GetValue(radiusConfig, 'radius', radiusConfig);
@@ -1022,9 +1044,10 @@
         }
 
         updateTexture() {
-            this.clear();
-            DrawContent.call(this);
-            super.updateTexture();
+            super.updateTexture(function () {
+                this.clear();
+                DrawContent.call(this);
+            }, this);
             return this;
         }
     }
@@ -1051,7 +1074,8 @@
         var lineWidth = GetAdvancedValue(config, 'lineWidth', undefined);
         var fillColor2 = GetAdvancedValue(config, 'fillColor2', undefined);
         var isHorizontalGradient = GetAdvancedValue(config, 'isHorizontalGradient', true);
-        var gameObject = new RoundRectangle(this.scene, 0, 0, width, height, radius, fillStyle, strokeStyle, lineWidth, fillColor2, isHorizontalGradient);
+        var resolution = GetAdvancedValue(config, 'resolution', 1);
+        var gameObject = new RoundRectangle(this.scene, 0, 0, width, height, radius, fillStyle, strokeStyle, lineWidth, fillColor2, isHorizontalGradient, resolution);
         BuildGameObject(this.scene, gameObject, config);
         return gameObject;
     }

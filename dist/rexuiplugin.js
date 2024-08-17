@@ -3002,10 +3002,20 @@
     var TextureMethods = {
         updateTexture(callback, scope) {
             if (callback) {
+                var scale = this.resolution;
+                if (scale !== 1) {
+                    this.context.save();
+                    this.context.scale(scale, scale);
+                }
+
                 if (scope) {
                     callback.call(scope, this.canvas, this.context);
                 } else {
                     callback(this.canvas, this.context);
+                }
+
+                if (scale !== 1) {
+                    this.context.restore();
                 }
             }
 
@@ -3072,7 +3082,7 @@
     const UUID$5 = Phaser.Utils.String.UUID;
 
     let Canvas$1 = class Canvas extends GameObject$3 {
-        constructor(scene, x, y, width, height) {
+        constructor(scene, x, y, width, height, resolution) {
             if (x === undefined) {
                 x = 0;
             }
@@ -3085,12 +3095,15 @@
             if (height === undefined) {
                 height = 1;
             }
+            if (resolution === undefined) {
+                resolution = 1;
+            }
 
             super(scene, 'rexCanvas');
 
             this.renderer = scene.sys.game.renderer;
 
-            this.resolution = 1;
+            this.resolution = resolution;
             this._width = width;
             this._height = height;
             width = Math.max(Math.ceil(width * this.resolution), 1);
@@ -3509,14 +3522,23 @@
     const GetValue$3P = Phaser.Utils.Objects.GetValue;
 
     let RoundRectangle$1 = class RoundRectangle extends Canvas$1 {
-        constructor(scene, x, y, width, height, radiusConfig, fillStyle, strokeStyle, lineWidth, fillColor2, isHorizontalGradient) {
+        constructor(
+            scene,
+            x, y, width, height,
+            radiusConfig,
+            fillStyle, strokeStyle, lineWidth,
+            fillColor2, isHorizontalGradient,
+            resolution
+        ) {
+
             if (x === undefined) { x = 0; }
             if (y === undefined) { y = 0; }
             if (width === undefined) { width = 1; }
             if (height === undefined) { height = width; }
             if (radiusConfig === undefined) { radiusConfig = 0; }
+            if (resolution === undefined) { resolution = 1; }
 
-            super(scene, x, y, width, height);
+            super(scene, x, y, width, height, resolution);
             this.type = 'rexRoundRectangleCanvas';
 
             var radius = GetValue$3P(radiusConfig, 'radius', radiusConfig);
@@ -3620,9 +3642,10 @@
         }
 
         updateTexture() {
-            this.clear();
-            DrawContent$2.call(this);
-            super.updateTexture();
+            super.updateTexture(function () {
+                this.clear();
+                DrawContent$2.call(this);
+            }, this);
             return this;
         }
     };
@@ -12192,22 +12215,27 @@
     const GetValue$3y = Phaser.Utils.Objects.GetValue;
 
     class DynamicText extends Canvas$1 {
-        constructor(scene, x, y, fixedWidth, fixedHeight, config) {
+        constructor(scene, x, y, fixedWidth, fixedHeight, resolution, config) {
             if (IsPlainObject$N(x)) {
                 config = x;
                 x = GetValue$3y(config, 'x', 0);
                 y = GetValue$3y(config, 'y', 0);
                 fixedWidth = GetValue$3y(config, 'width', 0);
                 fixedHeight = GetValue$3y(config, 'height', 0);
+                resolution = GetValue$3y(config, 'resolution', 1);
             } else if (IsPlainObject$N(fixedWidth)) {
                 config = fixedWidth;
                 fixedWidth = GetValue$3y(config, 'width', 0);
                 fixedHeight = GetValue$3y(config, 'height', 0);
+                resolution = GetValue$3y(config, 'resolution', 1);
+            } else if (IsPlainObject$N(resolution)) {
+                config = resolution;
+                resolution = GetValue$3y(config, 'resolution', 1);
             }
 
             var width = (fixedWidth === 0) ? 1 : fixedWidth;
             var height = (fixedHeight === 0) ? 1 : fixedHeight;
-            super(scene, x, y, width, height);
+            super(scene, x, y, width, height, resolution);
             this.type = 'rexDynamicText';
             this.autoRound = true;
             this.padding = SetPadding$1();
@@ -12239,8 +12267,9 @@
         }
 
         updateTexture() {
-            this.renderContent();
-            super.updateTexture();
+            super.updateTexture(function () {
+                this.renderContent();
+            }, this);
             return this;
         }
 
@@ -29574,8 +29603,11 @@
                 barColor = GetValue$2Y(config, 'barColor', undefined);
                 value = GetValue$2Y(config, 'value', 0);
             }
+
             var width = radius * 2;
-            super(scene, x, y, width, width);
+            var resolution = GetValue$2Y(config, 'resolution', 1);
+
+            super(scene, x, y, width, width, resolution);
             this.type = 'rexCircularProgressCanvas';
 
             this.bootProgressBase(config);
@@ -29846,9 +29878,10 @@
         }
 
         updateTexture() {
-            this.clear();
-            DrawContent$1.call(this);
-            super.updateTexture();
+            super.updateTexture(function () {
+                this.clear();
+                DrawContent$1.call(this);
+            }, this);
             return this;
         }
 
@@ -30319,7 +30352,10 @@
                 barColor = GetValue$2W(config, 'barColor', undefined);
                 value = GetValue$2W(config, 'value', 0);
             }
-            super(scene, x, y, width, height);
+
+            var resolution = GetValue$2W(config, 'resolution', 1);
+
+            super(scene, x, y, width, height, resolution);
             this.type = 'rexLineProgressCanvas';
             this.trackPoints = [];
             this.barPoints = [];
@@ -30454,9 +30490,10 @@
         }
 
         updateTexture() {
-            this.clear();
-            DrawContent.call(this);
-            super.updateTexture();
+            super.updateTexture(function () {
+                this.clear();
+                DrawContent.call(this);
+            }, this);
             return this;
         }
     }

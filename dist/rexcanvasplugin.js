@@ -208,10 +208,20 @@
     var TextureMethods = {
         updateTexture(callback, scope) {
             if (callback) {
+                var scale = this.resolution;
+                if (scale !== 1) {
+                    this.context.save();
+                    this.context.scale(scale, scale);
+                }
+
                 if (scope) {
                     callback.call(scope, this.canvas, this.context);
                 } else {
                     callback(this.canvas, this.context);
+                }
+
+                if (scale !== 1) {
+                    this.context.restore();
                 }
             }
 
@@ -298,7 +308,7 @@
     const UUID = Phaser.Utils.String.UUID;
 
     let Canvas$1 = class Canvas extends GameObject {
-        constructor(scene, x, y, width, height) {
+        constructor(scene, x, y, width, height, resolution) {
             if (x === undefined) {
                 x = 0;
             }
@@ -311,12 +321,15 @@
             if (height === undefined) {
                 height = 1;
             }
+            if (resolution === undefined) {
+                resolution = 1;
+            }
 
             super(scene, 'rexCanvas');
 
             this.renderer = scene.sys.game.renderer;
 
-            this.resolution = 1;
+            this.resolution = resolution;
             this._width = width;
             this._height = height;
             width = Math.max(Math.ceil(width * this.resolution), 1);
@@ -539,8 +552,8 @@
         LoadImageMethods,
     );
 
-    function Factory (x, y, width, height) {
-        var gameObject = new Canvas(this.scene, x, y, width, height);
+    function Factory (x, y, width, height, resolution) {
+        var gameObject = new Canvas(this.scene, x, y, width, height, resolution);
         this.scene.add.existing(gameObject);
         return gameObject;
     }
@@ -555,7 +568,8 @@
         }
         var width = GetAdvancedValue(config, 'width', 256);
         var height = GetAdvancedValue(config, 'height', width);
-        var gameObject = new Canvas(this.scene, 0, 0, width, height);
+        var resolution = GetAdvancedValue(config, 'resolution', 1);
+        var gameObject = new Canvas(this.scene, 0, 0, width, height, resolution);
         BuildGameObject(this.scene, gameObject, config);
         var fillColor = GetAdvancedValue(config, 'fill', null);
         gameObject.fill(fillColor);

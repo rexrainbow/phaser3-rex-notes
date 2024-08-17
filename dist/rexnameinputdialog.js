@@ -17808,10 +17808,20 @@
     var TextureMethods = {
         updateTexture(callback, scope) {
             if (callback) {
+                var scale = this.resolution;
+                if (scale !== 1) {
+                    this.context.save();
+                    this.context.scale(scale, scale);
+                }
+
                 if (scope) {
                     callback.call(scope, this.canvas, this.context);
                 } else {
                     callback(this.canvas, this.context);
+                }
+
+                if (scale !== 1) {
+                    this.context.restore();
                 }
             }
 
@@ -17878,7 +17888,7 @@
     const UUID$1 = Phaser.Utils.String.UUID;
 
     class Canvas extends GameObject$3 {
-        constructor(scene, x, y, width, height) {
+        constructor(scene, x, y, width, height, resolution) {
             if (x === undefined) {
                 x = 0;
             }
@@ -17891,12 +17901,15 @@
             if (height === undefined) {
                 height = 1;
             }
+            if (resolution === undefined) {
+                resolution = 1;
+            }
 
             super(scene, 'rexCanvas');
 
             this.renderer = scene.sys.game.renderer;
 
-            this.resolution = 1;
+            this.resolution = resolution;
             this._width = width;
             this._height = height;
             width = Math.max(Math.ceil(width * this.resolution), 1);
@@ -22240,22 +22253,27 @@
     const GetValue$E = Phaser.Utils.Objects.GetValue;
 
     class DynamicText extends Canvas {
-        constructor(scene, x, y, fixedWidth, fixedHeight, config) {
+        constructor(scene, x, y, fixedWidth, fixedHeight, resolution, config) {
             if (IsPlainObject$9(x)) {
                 config = x;
                 x = GetValue$E(config, 'x', 0);
                 y = GetValue$E(config, 'y', 0);
                 fixedWidth = GetValue$E(config, 'width', 0);
                 fixedHeight = GetValue$E(config, 'height', 0);
+                resolution = GetValue$E(config, 'resolution', 1);
             } else if (IsPlainObject$9(fixedWidth)) {
                 config = fixedWidth;
                 fixedWidth = GetValue$E(config, 'width', 0);
                 fixedHeight = GetValue$E(config, 'height', 0);
+                resolution = GetValue$E(config, 'resolution', 1);
+            } else if (IsPlainObject$9(resolution)) {
+                config = resolution;
+                resolution = GetValue$E(config, 'resolution', 1);
             }
 
             var width = (fixedWidth === 0) ? 1 : fixedWidth;
             var height = (fixedHeight === 0) ? 1 : fixedHeight;
-            super(scene, x, y, width, height);
+            super(scene, x, y, width, height, resolution);
             this.type = 'rexDynamicText';
             this.autoRound = true;
             this.padding = SetPadding$1();
@@ -22287,8 +22305,9 @@
         }
 
         updateTexture() {
-            this.renderContent();
-            super.updateTexture();
+            super.updateTexture(function () {
+                this.renderContent();
+            }, this);
             return this;
         }
 
