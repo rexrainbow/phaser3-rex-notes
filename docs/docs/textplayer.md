@@ -608,17 +608,21 @@ txt.typingNextPage();
 
 #### Pause
 
+- Pause typing
+    ```javascript
+    txt.pauseTyping();
+    ```
 - Pause typing and typing animation
     ```javascript
     txt.pause();
     ```
-- Pause typing only
-    ```javascript
-    txt.pauseTyping();
-    ```
 
 #### Resume
 
+- Resume typing
+    ```javascript
+    txt.resumeTyping();
+    ```
 - Resume typing and typing animation
     ```javascript
     txt.resume();

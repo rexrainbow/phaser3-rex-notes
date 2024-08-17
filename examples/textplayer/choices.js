@@ -9,11 +9,15 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-
+        this.load.image('dude', 'assets/images/phaser-dude.png');
     }
 
     create() {
         var content = `
+[sprite.dude=dude]
+[sprite.dude.x=600]
+[sprite.dude.y=300][sprite.dude.y.yoyo=100,300,-1]
+
 Prelogue... Prelogue... Prelogue...[r]
 
 [content.off]
@@ -79,10 +83,10 @@ Postlogue... Postlogue... Postlogue...
 
             // Wait for input
             text.pauseTyping();
-            print.text += 'Pause, wait pointerdown\n';
+            print.text += 'Pause typing, wait pointerdown\n';
             scene.input.once('pointerdown', function () {
-                text.resume();
-                print.text += 'Resume\n';
+                text.resumeTyping();
+                print.text += 'Resume typing\n';
             });
         })
 
