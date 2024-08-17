@@ -10,6 +10,7 @@ export default class Canvas extends CanvasGameObjectBase {
     );
 
     readonly resolution: number;
+    setResolution(resolution: number): this;
 
     canvas: HTMLCanvasElement;
     context: CanvasRenderingContext2D;
