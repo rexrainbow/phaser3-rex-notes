@@ -13,7 +13,9 @@ Typing characters on [dynamic text](textplayer.md), waiting click or key enter, 
 - [Fast typing](https://codepen.io/rexrainbow/pen/eYVbKBN)
 - [Custom game object](https://codepen.io/rexrainbow/pen/poKQezq)
 - [Fade out page](https://codepen.io/rexrainbow/pen/yLEwWzW)
-- [Choices](https://codepen.io/rexrainbow/pen/dydQjow)
+- Choices
+    - [Custonm tag](https://codepen.io/rexrainbow/pen/dydQjow)
+    - [Choice dailog](https://codepen.io/rexrainbow/pen/ZEdvPme)
 
 ## Usage
 
