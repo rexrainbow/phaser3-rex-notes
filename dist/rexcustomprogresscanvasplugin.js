@@ -329,13 +329,15 @@
 
             this.renderer = scene.sys.game.renderer;
 
-            this.resolution = resolution;
             this._width = width;
             this._height = height;
+            this.resolution = resolution;
+
             width = Math.max(Math.ceil(width * this.resolution), 1);
             height = Math.max(Math.ceil(height * this.resolution), 1);
             this.canvas = CanvasPool.create(this, width, height);
             this.context = this.canvas.getContext('2d', { willReadFrequently: true });
+
             this.dirty = false;
 
             this.setPosition(x, y);
@@ -376,6 +378,24 @@
             if (texture) {
                 texture.destroy();
             }
+        }
+
+        setResolution(resolution) {
+            if (this.resolution === resolution) {
+                return this;
+            }
+
+            this.resolution = resolution;
+
+            var width = Math.max(Math.ceil(this.width * resolution), 1);
+            var height = Math.max(Math.ceil(this.height * resolution), 1);
+            this.canvas.width = width;
+            this.canvas.height = height;
+
+            this.frame.source.resolution = resolution;
+            this.dirty = true;
+
+            return this;
         }
 
         get width() {

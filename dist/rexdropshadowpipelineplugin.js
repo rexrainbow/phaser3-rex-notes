@@ -465,7 +465,7 @@ void main (void) {
 
   const SpliceOne = Phaser.Utils.Array.SpliceOne;
 
-  var RemovePostFxPipelineInstance = function(gameObject, PostFxPipelineClass, name) {    
+  var RemovePostFxPipelineInstance = function (gameObject, PostFxPipelineClass, name) {
       if (name === undefined) {
           var pipelines = gameObject.postPipelines;
           for (var i = (pipelines.length - 1); i >= 0; i--) {
@@ -485,6 +485,9 @@ void main (void) {
               }
           }
       }
+
+      gameObject.hasPostPipeline = (gameObject.postPipelines.length > 0);
+
   };
 
   var GetPostFxPipelineInstance = function (gameObject, PostFxPipelineClass, name) {    
