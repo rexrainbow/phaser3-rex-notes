@@ -41,6 +41,10 @@ var SetText = function (textObject, newText) {
 
     textObject.runWrap();
 
+    if (textObject.isOpened) {
+        textObject.textEdit.setText(newText);
+    }
+
     textObject.emit('textchange', newText, textObject);
 
 }
