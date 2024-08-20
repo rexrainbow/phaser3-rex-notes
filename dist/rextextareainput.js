@@ -28442,6 +28442,10 @@
 
         textObject.runWrap();
 
+        if (textObject.isOpened) {
+            textObject.textEdit.setText(newText);
+        }
+
         textObject.emit('textchange', newText, textObject);
 
     };
