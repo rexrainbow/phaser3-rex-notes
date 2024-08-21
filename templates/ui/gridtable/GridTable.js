@@ -53,6 +53,11 @@ class GridTable extends Scrollable {
         if (spaceConfig) {
             spaceConfig.child = GetValue(spaceConfig, 'table', 0);
         }
+
+        if (!config.hasOwnProperty('scrollDetectionMode')) {
+            config.scrollDetectionMode = 1;
+        }
+
         super(scene, config);
 
         this.addChildrenMap('table', table);

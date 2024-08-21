@@ -21,10 +21,6 @@ class MouseWheelScroller extends ComponentBase {
         this.setSpeed(GetValue(config, 'speed', 0.1));
         this.setEnable(GetValue(config, 'enable', true));
 
-        this.boot();
-    }
-
-    boot() {
         switch (this.focusMode) {
             case 0:
             case 1:
@@ -32,7 +28,6 @@ class MouseWheelScroller extends ComponentBase {
                 break;
 
             default:  // case 2
-                var gameObject = this.parent;
                 gameObject
                     .setInteractive(GetValue(config, "inputConfig", undefined))
                     .on('wheel', function (pointer, dx, dy, dz, event) {

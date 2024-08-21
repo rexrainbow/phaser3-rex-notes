@@ -127,6 +127,11 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
         topPatent[`minThumb${axis}Size`] = undefined;
     }
 
+    var scrollDetectionMode = GetValue(config, 'scrollDetectionMode', 0);
+    if (typeof (scrollDetectionMode) === 'string') {
+        scrollDetectionMode = SCROLLDECTIONMODE_MAP[scrollDetectionMode];
+    }
+
     var scrollerConfig, scroller;
     var scrollerConfigKey = `scroller${axis}`;
     if (isScrollXYMode) {
@@ -147,7 +152,7 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
         scrollerConfig.orientation = (isAxisY) ? 0 : 1;
 
         if (!scrollerConfig.hasOwnProperty('rectBoundsInteractive')) {
-            scrollerConfig.rectBoundsInteractive = true;
+            scrollerConfig.rectBoundsInteractive = (scrollDetectionMode === 0);
         }
 
         scroller = new Scroller(child, scrollerConfig);
@@ -161,6 +166,9 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
     var mouseWheelScrollerConfig = GetValue(config, ((isScrollXYMode) ? `mouseWheelScroller${axis}` : 'mouseWheelScroller'), false),
         mouseWheelScroller;
     if (mouseWheelScrollerConfig && child) {
+        if (!mouseWheelScrollerConfig.hasOwnProperty('focus')) {
+            mouseWheelScrollerConfig.focus = (scrollDetectionMode === 1) ? 2 : 1;
+        }
         mouseWheelScroller = new MouseWheelScroller(child, mouseWheelScrollerConfig);
     }
 
@@ -231,6 +239,11 @@ const SLIDER_POSITION_MAP = {
     left: 1,
     bottom: 0,
     top: 1,
+}
+
+const SCROLLDECTIONMODE_MAP = {
+    rectBounds: 0,
+    gameObject: 1
 }
 
 export default AddSlider;

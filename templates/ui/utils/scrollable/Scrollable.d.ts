@@ -63,6 +63,9 @@ declare namespace Scrollable {
         sliderX?: ISliderConfig | boolean,
         sliderY?: ISliderConfig | boolean,
 
+
+        scrollDetectionMode?: 0 | 1 | 'rectBounds' | 'gameObject',
+
         scroller?: IScrollerConfig | boolean,
         scrollerX?: IScrollerConfig | boolean,
         scrollerY?: IScrollerConfig | boolean,
