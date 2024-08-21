@@ -29064,6 +29064,11 @@
                 spaceConfig.child = GetValue(spaceConfig, 'text', 0);
             }
             config.scroller = false; // No scroller supported
+
+            if (!config.hasOwnProperty('scrollDetectionMode')) {
+                config.scrollDetectionMode = 1;
+            }
+
             super(scene, config);
 
             this.addChildrenMap('text', inputText);

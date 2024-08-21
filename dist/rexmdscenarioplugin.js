@@ -83389,6 +83389,11 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	            spaceConfig.child = GetValue$G(spaceConfig, 'text', 0);
 	        }
 	        config.scroller = false; // No scroller supported
+
+	        if (!config.hasOwnProperty('scrollDetectionMode')) {
+	            config.scrollDetectionMode = 1;
+	        }
+
 	        super(scene, config);
 
 	        this.addChildrenMap('text', inputText);
