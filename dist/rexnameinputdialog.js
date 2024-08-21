@@ -33835,10 +33835,6 @@
             this.setSpeed(GetValue$e(config, 'speed', 0.1));
             this.setEnable(GetValue$e(config, 'enable', true));
 
-            this.boot();
-        }
-
-        boot() {
             switch (this.focusMode) {
                 case 0:
                 case 1:
@@ -33846,7 +33842,6 @@
                     break;
 
                 default:  // case 2
-                    var gameObject = this.parent;
                     gameObject
                         .setInteractive(GetValue$e(config, "inputConfig", undefined))
                         .on('wheel', function (pointer, dx, dy, dz, event) {
@@ -34029,6 +34024,11 @@
             topPatent[`minThumb${axis}Size`] = undefined;
         }
 
+        var scrollDetectionMode = GetValue$d(config, 'scrollDetectionMode', 0);
+        if (typeof (scrollDetectionMode) === 'string') {
+            scrollDetectionMode = SCROLLDECTIONMODE_MAP[scrollDetectionMode];
+        }
+
         var scrollerConfig, scroller;
         var scrollerConfigKey = `scroller${axis}`;
         if (isScrollXYMode) {
@@ -34049,7 +34049,7 @@
             scrollerConfig.orientation = (isAxisY) ? 0 : 1;
 
             if (!scrollerConfig.hasOwnProperty('rectBoundsInteractive')) {
-                scrollerConfig.rectBoundsInteractive = true;
+                scrollerConfig.rectBoundsInteractive = (scrollDetectionMode === 0);
             }
 
             scroller = new Scroller(child, scrollerConfig);
@@ -34063,6 +34063,9 @@
         var mouseWheelScrollerConfig = GetValue$d(config, ((isScrollXYMode) ? `mouseWheelScroller${axis}` : 'mouseWheelScroller'), false),
             mouseWheelScroller;
         if (mouseWheelScrollerConfig && child) {
+            if (!mouseWheelScrollerConfig.hasOwnProperty('focus')) {
+                mouseWheelScrollerConfig.focus = (scrollDetectionMode === 1) ? 2 : 1;
+            }
             mouseWheelScroller = new MouseWheelScroller(child, mouseWheelScrollerConfig);
         }
 
@@ -34133,6 +34136,11 @@
         left: 1,
         bottom: 0,
         top: 1,
+    };
+
+    const SCROLLDECTIONMODE_MAP = {
+        rectBounds: 0,
+        gameObject: 1
     };
 
     const GetValue$c = Phaser.Utils.Objects.GetValue;
@@ -35611,6 +35619,11 @@
             if (spaceConfig) {
                 spaceConfig.child = GetValue$9(spaceConfig, 'text', 0);
             }
+
+            if (!config.hasOwnProperty('scrollDetectionMode')) {
+                config.scrollDetectionMode = 1;
+            }
+
             super(scene, config);
 
             this.addChildrenMap('text', textObject);
