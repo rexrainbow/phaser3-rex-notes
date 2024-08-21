@@ -162,6 +162,8 @@ var panel = scene.rexUI.add.scrollablePanel({
     // sliderX: {...},
     // sliderY: {...},
 
+    // scrollDetectionMode: 0,
+
     // scroller: {
     //     threshold: 10,
     //     slidingDeceleration: 5000,
@@ -333,6 +335,9 @@ var panel = scene.rexUI.add.scrollablePanel({
         - `slider.buttons.step` : Scrolling step in each tick. Default value is `0.01`.
     - Set to `false` to skip creating slider.
 - `sliderX`, `sliderY` : Componments of sliderX and sliderY, for two-sliders mode.
+- `scrollDetectionMode` : 
+    - `0` : Dectct drag-scrolling, mouse-wheel-scrolling by rectangle bounds. Default behavior.
+    - `1` : Dectct drag-scrolling, mouse-wheel-scrolling by game object's touch event.
 - `scroller` : Configuration of scroller behavior.
     - `scroller.threshold` : Minimal movement to scroll. Set `0` to scroll immediately.
     - `scroller.slidingDeceleration` : Deceleration of slow down when dragging released.

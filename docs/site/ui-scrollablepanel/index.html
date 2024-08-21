@@ -10283,6 +10283,8 @@
 <span class="w">    </span><span class="c1">// sliderX: {...},</span>
 <span class="w">    </span><span class="c1">// sliderY: {...},</span>
 
+<span class="w">    </span><span class="c1">// scrollDetectionMode: 0,</span>
+
 <span class="w">    </span><span class="c1">// scroller: {</span>
 <span class="w">    </span><span class="c1">//     threshold: 10,</span>
 <span class="w">    </span><span class="c1">//     slidingDeceleration: 5000,</span>
@@ -10490,6 +10492,11 @@
 </ul>
 </li>
 <li><code>sliderX</code>, <code>sliderY</code> : Componments of sliderX and sliderY, for two-sliders mode.</li>
+<li><code>scrollDetectionMode</code> : <ul>
+<li><code>0</code> : Dectct drag-scrolling, mouse-wheel-scrolling by rectangle bounds. Default behavior.</li>
+<li><code>1</code> : Dectct drag-scrolling, mouse-wheel-scrolling by game object's touch event.</li>
+</ul>
+</li>
 <li><code>scroller</code> : Configuration of scroller behavior.<ul>
 <li><code>scroller.threshold</code> : Minimal movement to scroll. Set <code>0</code> to scroll immediately.</li>
 <li><code>scroller.slidingDeceleration</code> : Deceleration of slow down when dragging released.<ul>
