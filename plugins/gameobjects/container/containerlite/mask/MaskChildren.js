@@ -3,7 +3,11 @@ import MaskToGameObject from '../../../../utils/mask/MaskToGameObject.js';
 const Intersects = Phaser.Geom.Intersects.RectangleToRectangle;
 const Overlaps = Phaser.Geom.Rectangle.Overlaps;
 
-var MaskChildren = function (parent, mask, children) {
+var MaskChildren = function ({
+    parent, mask, children,    
+    onVisible, onInvisible, scope,
+}) {
+
     if (!mask) {
         return;
     }
@@ -12,10 +16,13 @@ var MaskChildren = function (parent, mask, children) {
         children = parent.getAllChildren();
     }
 
+    var hasAnyVisibleCallback = !!onVisible || !!onInvisible;
+
     var parentBounds = parent.getBounds();
     var maskGameObject = MaskToGameObject(mask);
 
     var child, childBounds, visiblePointsNumber;
+    var isChildVisible;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
         child = children[i];
 
@@ -26,11 +33,12 @@ var MaskChildren = function (parent, mask, children) {
             continue;
         }
 
+        isChildVisible = child.visible;
         if (child.getBounds) {
             childBounds = child.getBounds(childBounds);
             visiblePointsNumber = ContainsPoints(parentBounds, childBounds);
             switch (visiblePointsNumber) {
-                case 4: // 4 points are all inside visible window, set visible
+                case 4: // 4 points are all inside visible window, set visible                     
                     ShowAll(parent, child, mask);
                     break;
                 case 0: // No point is inside visible window
@@ -47,6 +55,17 @@ var MaskChildren = function (parent, mask, children) {
             }
         } else {
             ShowSome(parent, child, mask);
+        }
+
+        if (hasAnyVisibleCallback && (child.visible !== isChildVisible)) {
+            var callback = (child.visible) ? onVisible : onInvisible;
+            if (callback) {
+                if (scope) {
+                    callback.call(scope, child, parent);
+                } else {
+                    callback(child, parent);
+                }
+            }
         }
     }
 }

@@ -57,7 +57,8 @@ class ScrollableBlock extends BaseSizer {
         this.child = child;
 
         // Create mask of child object
-        this.setupChildrenMask(GetValue(config, 'mask', undefined));
+        var maskConfig = GetValue(config, 'mask');
+        this.setupChildrenMask(maskConfig);
 
         if (this.childrenMask) {
             this.maskGameObject = MaskToGameObject(this.childrenMask);

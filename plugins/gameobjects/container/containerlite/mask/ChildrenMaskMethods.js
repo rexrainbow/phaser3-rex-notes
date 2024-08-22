@@ -19,6 +19,11 @@ export default {
         this.setMaskUpdateMode(GetValue(config, 'updateMode', 0));
         this.enableChildrenMask(GetValue(config, 'padding', 0));
         this.setMaskLayer(GetValue(config, 'layer', undefined));
+
+        this.onMaskGameObjectVisible = GetValue(config, 'onVisivle');
+        this.onMaskGameObjectInvisible = GetValue(config, 'onInvisible');
+        this.maskGameObjectCallbackScope = GetValue(config, 'scope');
+
         this.startMaskUpdate();
 
         return this;
@@ -32,6 +37,10 @@ export default {
         this.stopMaskUpdate();
         this.childrenMask.destroy();
         this.childrenMask = undefined;
+
+        this.onMaskGameObjectVisible = null;
+        this.onMaskGameObjectInvisible = null;
+        this.maskGameObjectCallbackScope = null;
 
         return this;
     },
@@ -84,13 +93,23 @@ export default {
 
         if (this.privateRenderLayer) {
             this.privateRenderLayer.setMask(this.childrenMask);
+
         } else if (this.maskLayer) {
             // 1. Add parent and children into layer
             this.addToLayer(this.maskLayer);
             // 2. Mask this layer
             this.maskLayer.setMask(this.childrenMask);
+
         } else {
-            MaskChildren(this, this.childrenMask);
+            MaskChildren({
+                parent: this,
+                mask: this.childrenMask,
+
+                onVisivle: this.onMaskGameObjectVisible,
+                onInvisible: this.onMaskGameObjectInvisible,
+                scope: this.maskGameObjectCallbackScope
+            });
+
         }
 
         if (this.maskUpdateMode === 0) {
