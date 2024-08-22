@@ -5,31 +5,27 @@ var ContainsPoint = function (gameObject, x, y, preTest, postTest) {
         gameObject,
         x, y,
         GetPreTestCallback(preTest),
-        GetPostTestCallback(postTest)
+        postTest
     );
 }
 
-var IsNotHiddenSizer = function (gameObject) {
+var IsShownSizer = function (gameObject) {
     var isHiddenSizer = gameObject.rexSizer && gameObject.rexSizer.hidden;
     return !isHiddenSizer;
 }
 
 var GetPreTestCallback = function (preTest) {
     if (!preTest) {
-        return IsNotHiddenSizer;
+        return IsShownSizer;
     }
 
     return function (gameObject, x, y) {
-        if (!IsNotHiddenSizer(gameObject)) {
+        if (!IsShownSizer(gameObject)) {
             return false;
         }
         preTest(gameObject, x, y);
         return true;
     }
-}
-
-var GetPostTestCallback = function (postTest) {
-    return postTest;
 }
 
 export default ContainsPoint;
