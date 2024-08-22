@@ -6,6 +6,7 @@ import RemovePageMethods from './RemovePageMethods.js';
 import GetPage from './GetPage.js';
 import GetTab from './GetTab.js';
 import SetTabPosition from './SetTabPosition.js';
+import TabPaddingMethods from './TabPaddingMethods.js';
 
 var methods = {
     getPageKey: GetPageKey,
@@ -19,8 +20,8 @@ var methods = {
 Object.assign(
     methods,
     SwapPageMethods,
-    RemovePageMethods
-
+    RemovePageMethods,
+    TabPaddingMethods,
 );
 
 export default methods;

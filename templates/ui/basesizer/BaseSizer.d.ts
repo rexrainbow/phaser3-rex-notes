@@ -812,8 +812,12 @@ declare class BaseSizer extends ContainerLite {
     ): number | { left: number, right: number, top: number, bottom: number };
 
     setInnerPadding(
-        key: string | number | { left?: number, right?: number, top?: number, bottom?: number },
+        key: string,
         value?: number
+    ): this;
+
+    setInnerPadding(
+        padding: number | { left?: number, right?: number, top?: number, bottom?: number },
     ): this;
 
     getOutterPadding(
@@ -821,8 +825,12 @@ declare class BaseSizer extends ContainerLite {
     ): number | { left: number, right: number, top: number, bottom: number };
 
     setOuterPadding(
-        key: string | number | { left?: number, right?: number, top?: number, bottom?: number },
+        key: string,
         value?: number
+    ): this;
+
+    setOuterPadding(
+        padding: number | { left?: number, right?: number, top?: number, bottom?: number },
     ): this;
 
     getChildOutterPadding(
@@ -832,8 +840,13 @@ declare class BaseSizer extends ContainerLite {
 
     setChildOuterPadding(
         child: string | Phaser.GameObjects.GameObject,
-        key: string | number | { left?: number, right?: number, top?: number, bottom?: number },
+        key: string,
         value?: number
+    ): this;
+
+    setChildOuterPadding(
+        child: string | Phaser.GameObjects.GameObject,
+        padding: number | { left?: number, right?: number, top?: number, bottom?: number },
     ): this;
 
     pointToChild(

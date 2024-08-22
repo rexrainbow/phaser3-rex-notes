@@ -295,6 +295,29 @@ tabPages.setTabPosition(position);
 
 - `position` : `'top'`, `'bottom'`, `'left'`, `'right'`
 
+### Padding of tabs
+
+- Change padding
+    ```javascript
+    tabPages.setTabsPadding(key, value).layout();
+    ```
+    or
+    ```javascript
+    tabPages.setTabsPadding({
+        left: leftPadding, 
+        right: rightPadding,
+        top: topPadding,
+        bottom: bottomPadding
+    }).layout();
+    ```
+    - `key` : `'left'`, `'right'`, `'top'`, `'bottom'`, `'item'`
+- Get padding
+    ```javascript
+    var value = tabPages.getTabsPadding(key);
+    ```
+    - `key` : `'left'`, `'right'`, `'top'`, `'bottom'`, `'item'`
+
+
 ### Get element
 
 - Get element

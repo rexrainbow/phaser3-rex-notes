@@ -80,4 +80,17 @@ declare class TabPages extends Sizer {
     setTabPosition(position: TabPages.TabsPositionType): this;
     readonly tabsPosition: TabPages.TabsPositionType;
 
+    setTabsPadding(
+        key: string,
+        value?: number
+    ): this;
+
+    setTabsPadding(
+        padding: number | { left?: number, right?: number, top?: number, bottom?: number },
+    ): this;
+
+    getTabsPadding(
+        key?: string
+    ): number | { left: number, right: number, top: number, bottom: number };
+
 }
