@@ -78857,6 +78857,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	                    adaptThumbSize: this.listSliderAdaptThumbSizeEnable,
 	                },
 
+	                scrollDetectionMode: 1,
+
 	                scroller: this.listScrollerConfig,
 
 	                mouseWheelScroller: this.listMouseWheelScrollerConfig,

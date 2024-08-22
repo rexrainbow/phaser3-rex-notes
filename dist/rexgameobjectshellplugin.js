@@ -48199,6 +48199,8 @@
                         adaptThumbSize: this.listSliderAdaptThumbSizeEnable,
                     },
 
+                    scrollDetectionMode: 1,
+
                     scroller: this.listScrollerConfig,
 
                     mouseWheelScroller: this.listMouseWheelScrollerConfig,
