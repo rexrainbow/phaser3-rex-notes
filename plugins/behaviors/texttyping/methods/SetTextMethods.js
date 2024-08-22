@@ -1,4 +1,5 @@
 import TransferText from './TransferText.js';
+import SetNoWrapText from '../../../utils/text/SetNoWrapText.js';
 
 export default {
     setText(text) {
