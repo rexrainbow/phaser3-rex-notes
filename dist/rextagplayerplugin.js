@@ -8737,6 +8737,78 @@
         return text;
     };
 
+    const TextClass = Phaser.GameObjects.Text;
+
+    var IsTextGameObject = function (gameObject) {
+        return (gameObject instanceof TextClass);
+    };
+
+    const BitmapTextClass = Phaser.GameObjects.BitmapText;
+
+    var IsBitmapTextGameObject = function (gameObject) {
+        return (gameObject instanceof BitmapTextClass);
+    };
+
+    const TextType = 0;
+    const TagTextType = 1;
+    const BitmapTextType = 2;
+
+    var GetTextObjectType = function (textObject) {
+        var textObjectType;
+        if (IsBitmapTextGameObject(textObject)) {
+            textObjectType = BitmapTextType;
+        } else if (IsTextGameObject(textObject)) {
+            textObjectType = TextType;
+        } else {
+            textObjectType = TagTextType;
+        }
+
+        return textObjectType;
+    };
+
+    var SetNoWrapText = function (textObject, text) {
+        var textObjectType = GetTextObjectType(textObject);
+        switch (textObjectType) {
+            case TextType:
+                // Store wrap properties
+                var style = textObject.style;
+                var wordWrapWidth = style.wordWrapWidth;
+                var wordWrapCallback = style.wordWrapCallback;
+                // Disable wrap
+                style.wordWrapWidth = 0;
+                style.wordWrapCallback = undefined;
+                // Set text
+                textObject.setText(text);
+                // Restore wrap
+                style.wordWrapWidth = wordWrapWidth;
+                style.wordWrapCallback = wordWrapCallback;
+                break;
+
+            case TagTextType:
+                // Store wrap properties
+                var style = textObject.style;
+                var wrapMode = style.wrapMode;
+                // Disable wrap
+                style.wrapMode = 0;
+                // Set text
+                textObject.setText(text);
+                // Restore wrap
+                style.wrapMode = wrapMode;
+                break;
+
+            case BitmapTextType:
+                // Store wrap properties
+                var maxWidth = textObject._maxWidth;
+                // Disable wrap
+                textObject._maxWidth = 0;
+                // Set text
+                textObject.setText(text);
+                // Restore wrap
+                textObject._maxWidth = maxWidth;
+                break;
+        }
+    };
+
     var SetTextMethods$1 = {
         setText(text) {
             if (this.setTextCallback) {
@@ -8934,35 +9006,6 @@
         SetTextMethods$1
     );
 
-    const TextClass = Phaser.GameObjects.Text;
-
-    var IsTextGameObject = function (gameObject) {
-        return (gameObject instanceof TextClass);
-    };
-
-    const BitmapTextClass = Phaser.GameObjects.BitmapText;
-
-    var IsBitmapTextGameObject = function (gameObject) {
-        return (gameObject instanceof BitmapTextClass);
-    };
-
-    const TextType = 0;
-    const TagTextType = 1;
-    const BitmapTextType = 2;
-
-    var GetTextObjectType = function (textObject) {
-        var textObjectType;
-        if (IsBitmapTextGameObject(textObject)) {
-            textObjectType = BitmapTextType;
-        } else if (IsTextGameObject(textObject)) {
-            textObjectType = TextType;
-        } else {
-            textObjectType = TagTextType;
-        }
-
-        return textObjectType;
-    };
-
     var GetWrapText = function (textObject, text) {
         var textObjectType = GetTextObjectType(textObject);
         switch (textObjectType) {
@@ -8978,49 +9021,6 @@
                 break;
         }
         return text;
-    };
-
-    var SetNoWrapText$1 = function (textObject, text) {
-        var textObjectType = GetTextObjectType(textObject);
-        switch (textObjectType) {
-            case TextType:
-                // Store wrap properties
-                var style = textObject.style;
-                var wordWrapWidth = style.wordWrapWidth;
-                var wordWrapCallback = style.wordWrapCallback;
-                // Disable wrap
-                style.wordWrapWidth = 0;
-                style.wordWrapCallback = undefined;
-                // Set text
-                textObject.setText(text);
-                // Restore wrap
-                style.wordWrapWidth = wordWrapWidth;
-                style.wordWrapCallback = wordWrapCallback;
-                break;
-
-            case TagTextType:
-                // Store wrap properties
-                var style = textObject.style;
-                var wrapMode = style.wrapMode;
-                // Disable wrap
-                style.wrapMode = 0;
-                // Set text
-                textObject.setText(text);
-                // Restore wrap
-                style.wrapMode = wrapMode;
-                break;
-
-            case BitmapTextType:
-                // Store wrap properties
-                var maxWidth = textObject._maxWidth;
-                // Disable wrap
-                textObject._maxWidth = 0;
-                // Set text
-                textObject.setText(text);
-                // Restore wrap
-                textObject._maxWidth = maxWidth;
-                break;
-        }
     };
 
     const GetFastValue = Phaser.Utils.Objects.GetFastValue;
@@ -9186,7 +9186,7 @@
             }
 
             if (this.textWrapEnable) {
-                SetNoWrapText$1(this.parent, text);
+                SetNoWrapText(this.parent, text);
             } else {
                 this.parent.setText(text);
             }

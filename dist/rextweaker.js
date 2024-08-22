@@ -18007,14 +18007,14 @@
         return result;
     };
 
-    const Merge$1 = Phaser.Utils.Objects.Merge;
+    const Merge$2 = Phaser.Utils.Objects.Merge;
 
     var RunWordWrap = function (config) {
         if (config === undefined) {
             config = {};
         }
 
-        return RunWordWrap$1.call(this, Merge$1(config, this.wrapConfig));
+        return RunWordWrap$1.call(this, Merge$2(config, this.wrapConfig));
     };
 
     var AlignLines = function (result, width, height) {
@@ -18261,14 +18261,14 @@
         return result;
     };
 
-    const Merge = Phaser.Utils.Objects.Merge;
+    const Merge$1 = Phaser.Utils.Objects.Merge;
 
     var RunVerticalWrap = function (config) {
         if (config === undefined) {
             config = {};
         }
 
-        return RunVerticalWrap$1.call(this, Merge(config, this.wrapConfig));
+        return RunVerticalWrap$1.call(this, Merge$1(config, this.wrapConfig));
     };
 
     const GetValue$1t = Phaser.Utils.Objects.GetValue;
@@ -31955,7 +31955,7 @@
             scrollerConfig.orientation = (isAxisY) ? 0 : 1;
 
             if (!scrollerConfig.hasOwnProperty('rectBoundsInteractive')) {
-                scrollerConfig.rectBoundsInteractive = (scrollDetectionMode === 0);
+                scrollerConfig.rectBoundsInteractive = (scrollDetectionMode === 1);
             }
 
             scroller = new Scroller(child, scrollerConfig);
@@ -31970,7 +31970,7 @@
             mouseWheelScroller;
         if (mouseWheelScrollerConfig && child) {
             if (!mouseWheelScrollerConfig.hasOwnProperty('focus')) {
-                mouseWheelScrollerConfig.focus = (scrollDetectionMode === 1) ? 2 : 1;
+                mouseWheelScrollerConfig.focus = (scrollDetectionMode === 0) ? 2 : 1;
             }
             mouseWheelScroller = new MouseWheelScroller(child, mouseWheelScrollerConfig);
         }
@@ -32045,8 +32045,8 @@
     };
 
     const SCROLLDECTIONMODE_MAP = {
-        rectBounds: 0,
-        gameObject: 1
+        gameObject: 0,
+        rectBounds: 1,
     };
 
     const GetValue$Y = Phaser.Utils.Objects.GetValue;
@@ -33526,10 +33526,6 @@
                 spaceConfig.child = GetValue$V(spaceConfig, 'text', 0);
             }
 
-            if (!config.hasOwnProperty('scrollDetectionMode')) {
-                config.scrollDetectionMode = 1;
-            }
-
             super(scene, config);
 
             this.addChildrenMap('text', textObject);
@@ -34211,8 +34207,45 @@
 
     }
 
+    /**
+     * @author       Richard Davey <rich@photonstorm.com>
+     * @copyright    2019 Photon Storm Ltd.
+     * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+     */
+
+
+    /**
+     * Creates a new Object using all values from obj1 and obj2.
+     * If a value exists in both obj1 and obj2, the value in obj1 is used.
+     * 
+     * This is only a shallow copy. Deeply nested objects are not cloned, so be sure to only use this
+     * function on shallow objects.
+     *
+     * @function Phaser.Utils.Objects.Merge
+     * @since 3.0.0
+     *
+     * @param {object} obj1 - The first object.
+     * @param {object} obj2 - The second object.
+     *
+     * @return {object} A new object containing the union of obj1's and obj2's properties.
+     */
+    var Merge = function (obj1, obj2)
+    {
+        var clone = Clone(obj1);
+
+        for (var key in obj2)
+        {
+            if (!clone.hasOwnProperty(key))
+            {
+                clone[key] = obj2[key];
+            }
+        }
+
+        return clone;
+    };
+
     var CreateBackground = function (scene, config, style) {
-        return CreateBackground$1(scene, style);
+        return CreateBackground$1(scene, Merge(config, style));
     };
 
     class Transition extends OpenCloseTransition {
@@ -37183,7 +37216,11 @@
     const Intersects = Phaser.Geom.Intersects.RectangleToRectangle;
     const Overlaps = Phaser.Geom.Rectangle.Overlaps;
 
-    var MaskChildren = function (parent, mask, children) {
+    var MaskChildren = function ({
+        parent, mask, children,    
+        onVisible, onInvisible, scope,
+    }) {
+
         if (!mask) {
             return;
         }
@@ -37192,10 +37229,13 @@
             children = parent.getAllChildren();
         }
 
+        var hasAnyVisibleCallback = !!onVisible || !!onInvisible;
+
         var parentBounds = parent.getBounds();
         var maskGameObject = MaskToGameObject(mask);
 
         var child, childBounds, visiblePointsNumber;
+        var isChildVisible;
         for (var i = 0, cnt = children.length; i < cnt; i++) {
             child = children[i];
 
@@ -37206,11 +37246,12 @@
                 continue;
             }
 
+            isChildVisible = child.visible;
             if (child.getBounds) {
                 childBounds = child.getBounds(childBounds);
                 visiblePointsNumber = ContainsPoints(parentBounds, childBounds);
                 switch (visiblePointsNumber) {
-                    case 4: // 4 points are all inside visible window, set visible
+                    case 4: // 4 points are all inside visible window, set visible                     
                         ShowAll(parent, child);
                         break;
                     case 0: // No point is inside visible window
@@ -37227,6 +37268,17 @@
                 }
             } else {
                 ShowSome(parent, child, mask);
+            }
+
+            if (hasAnyVisibleCallback && (child.visible !== isChildVisible)) {
+                var callback = (child.visible) ? onVisible : onInvisible;
+                if (callback) {
+                    if (scope) {
+                        callback.call(scope, child, parent);
+                    } else {
+                        callback(child, parent);
+                    }
+                }
             }
         }
     };
@@ -37337,6 +37389,11 @@
             this.setMaskUpdateMode(GetValue$y(config, 'updateMode', 0));
             this.enableChildrenMask(GetValue$y(config, 'padding', 0));
             this.setMaskLayer(GetValue$y(config, 'layer', undefined));
+
+            this.onMaskGameObjectVisible = GetValue$y(config, 'onVisivle');
+            this.onMaskGameObjectInvisible = GetValue$y(config, 'onInvisible');
+            this.maskGameObjectCallbackScope = GetValue$y(config, 'scope');
+
             this.startMaskUpdate();
 
             return this;
@@ -37350,6 +37407,10 @@
             this.stopMaskUpdate();
             this.childrenMask.destroy();
             this.childrenMask = undefined;
+
+            this.onMaskGameObjectVisible = null;
+            this.onMaskGameObjectInvisible = null;
+            this.maskGameObjectCallbackScope = null;
 
             return this;
         },
@@ -37402,13 +37463,23 @@
 
             if (this.privateRenderLayer) {
                 this.privateRenderLayer.setMask(this.childrenMask);
+
             } else if (this.maskLayer) {
                 // 1. Add parent and children into layer
                 this.addToLayer(this.maskLayer);
                 // 2. Mask this layer
                 this.maskLayer.setMask(this.childrenMask);
+
             } else {
-                MaskChildren(this, this.childrenMask);
+                MaskChildren({
+                    parent: this,
+                    mask: this.childrenMask,
+
+                    onVisivle: this.onMaskGameObjectVisible,
+                    onInvisible: this.onMaskGameObjectInvisible,
+                    scope: this.maskGameObjectCallbackScope
+                });
+
             }
 
             if (this.maskUpdateMode === 0) {
@@ -37496,7 +37567,8 @@
             this.child = child;
 
             // Create mask of child object
-            this.setupChildrenMask(GetValue$x(config, 'mask', undefined));
+            var maskConfig = GetValue$x(config, 'mask');
+            this.setupChildrenMask(maskConfig);
 
             if (this.childrenMask) {
                 this.maskGameObject = MaskToGameObject(this.childrenMask);
@@ -38770,7 +38842,7 @@
     };
 
     var CreateSeparator = function (scene, config, style) {
-        return CreateBackground$1(scene, style);
+        return CreateBackground$1(scene, Merge(config, style));
     };
 
     const GetValue$n = Phaser.Utils.Objects.GetValue;
@@ -41415,10 +41487,6 @@
                 spaceConfig.child = GetValue$g(spaceConfig, 'text', 0);
             }
             config.scroller = false; // No scroller supported
-
-            if (!config.hasOwnProperty('scrollDetectionMode')) {
-                config.scrollDetectionMode = 1;
-            }
 
             super(scene, config);
 

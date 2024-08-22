@@ -10493,8 +10493,8 @@
 </li>
 <li><code>sliderX</code>, <code>sliderY</code> : Componments of sliderX and sliderY, for two-sliders mode.</li>
 <li><code>scrollDetectionMode</code> : <ul>
-<li><code>0</code> : Dectct drag-scrolling, mouse-wheel-scrolling by rectangle bounds. Default behavior.</li>
-<li><code>1</code> : Dectct drag-scrolling, mouse-wheel-scrolling by game object's touch event.</li>
+<li><code>0</code> : Dectct drag-scrolling, mouse-wheel-scrolling by game object's touch event. Default behavior.</li>
+<li><code>1</code> : Dectct drag-scrolling, mouse-wheel-scrolling by rectangle bounds.</li>
 </ul>
 </li>
 <li><code>scroller</code> : Configuration of scroller behavior.<ul>
@@ -10846,8 +10846,14 @@ User can inject it by</p>
 <h3 id="input-events">Input events<a class="headerlink" href="#input-events" title="Permanent link">&para;</a></h3>
 <p>Two possible solution to register input events to children of scrollable panel.</p>
 <h4 id="individual-input-events">Individual input events<a class="headerlink" href="#individual-input-events" title="Permanent link">&para;</a></h4>
+<p>When <a href="../touchevents/#top-only"><code>scene.input.topOnly</code></a> is <code>true</code> (default value), input events of children elements will block the drag-scrolling of scrollable panel. (Assmue that the children elememts are above scrollable panel)</p>
 <ul>
+<li>Set <code>scene.input.topOnly</code> to <code>false</code> to enable drag-scrolling and input events of children elememts both.<ul>
+<li>Or Set <code>scrollDetectionMode: 1</code> in config of constructor, to using rectangle-bounds input detection.</li>
+</ul>
+</li>
 <li>Test if pointer is inside the mask of panel via <a href="../ui-basesizer/#is-in-touching"><code>panel.isInTouching('mask')</code></a>, during input events' callback.</li>
+<li>To recognize pointer-down and dragging-start, use press's <a href="../gesture-press/#pressing-start"><code>pressstart</code></a> event.</li>
 </ul>
 <h4 id="set-children-interactive">Set children interactive<a class="headerlink" href="#set-children-interactive" title="Permanent link">&para;</a></h4>
 <p>Applies <a href="../button/">click</a>, <a href="../gesture-tap/">tap</a>, <a href="../gesture-press/">press</a>, <a href="../gesture-swipe/">swipe</a> behaviors on this scrollable panel, to detect input events of children.</p>

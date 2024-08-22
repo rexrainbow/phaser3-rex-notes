@@ -68340,7 +68340,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	        scrollerConfig.orientation = (isAxisY) ? 0 : 1;
 
 	        if (!scrollerConfig.hasOwnProperty('rectBoundsInteractive')) {
-	            scrollerConfig.rectBoundsInteractive = (scrollDetectionMode === 0);
+	            scrollerConfig.rectBoundsInteractive = (scrollDetectionMode === 1);
 	        }
 
 	        scroller = new Scroller(child, scrollerConfig);
@@ -68355,7 +68355,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	        mouseWheelScroller;
 	    if (mouseWheelScrollerConfig && child) {
 	        if (!mouseWheelScrollerConfig.hasOwnProperty('focus')) {
-	            mouseWheelScrollerConfig.focus = (scrollDetectionMode === 1) ? 2 : 1;
+	            mouseWheelScrollerConfig.focus = (scrollDetectionMode === 0) ? 2 : 1;
 	        }
 	        mouseWheelScroller = new MouseWheelScroller(child, mouseWheelScrollerConfig);
 	    }
@@ -68430,8 +68430,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	};
 
 	const SCROLLDECTIONMODE_MAP = {
-	    rectBounds: 0,
-	    gameObject: 1
+	    gameObject: 0,
+	    rectBounds: 1,
 	};
 
 	const GetValue$1C = Phaser.Utils.Objects.GetValue;
@@ -69351,7 +69351,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	    return text;
 	};
 
-	var SetNoWrapText$1 = function (textObject, text) {
+	var SetNoWrapText = function (textObject, text) {
 	    var textObjectType = GetTextObjectType(textObject);
 	    switch (textObjectType) {
 	        case TextType:
@@ -69436,7 +69436,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	    var text = GetLines$1.call(this, startLineIndex);
 
 	    // Display visible content
-	    SetNoWrapText$1(this.textObject, text);
+	    SetNoWrapText(this.textObject, text);
 
 	    this.textObject.rexSizer.offsetY = textOffset;
 	    ResetTextObjectPosition.call(this);
@@ -69909,10 +69909,6 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	        var spaceConfig = GetValue$1z(config, 'space', undefined);
 	        if (spaceConfig) {
 	            spaceConfig.child = GetValue$1z(spaceConfig, 'text', 0);
-	        }
-
-	        if (!config.hasOwnProperty('scrollDetectionMode')) {
-	            config.scrollDetectionMode = 1;
 	        }
 
 	        super(scene, config);
@@ -76009,7 +76005,11 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	const Intersects = Phaser.Geom.Intersects.RectangleToRectangle;
 	const Overlaps = Phaser.Geom.Rectangle.Overlaps;
 
-	var MaskChildren = function (parent, mask, children) {
+	var MaskChildren = function ({
+	    parent, mask, children,    
+	    onVisible, onInvisible, scope,
+	}) {
+
 	    if (!mask) {
 	        return;
 	    }
@@ -76018,10 +76018,13 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	        children = parent.getAllChildren();
 	    }
 
+	    var hasAnyVisibleCallback = !!onVisible || !!onInvisible;
+
 	    var parentBounds = parent.getBounds();
 	    var maskGameObject = MaskToGameObject(mask);
 
 	    var child, childBounds, visiblePointsNumber;
+	    var isChildVisible;
 	    for (var i = 0, cnt = children.length; i < cnt; i++) {
 	        child = children[i];
 
@@ -76032,11 +76035,12 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	            continue;
 	        }
 
+	        isChildVisible = child.visible;
 	        if (child.getBounds) {
 	            childBounds = child.getBounds(childBounds);
 	            visiblePointsNumber = ContainsPoints(parentBounds, childBounds);
 	            switch (visiblePointsNumber) {
-	                case 4: // 4 points are all inside visible window, set visible
+	                case 4: // 4 points are all inside visible window, set visible                     
 	                    ShowAll(parent, child);
 	                    break;
 	                case 0: // No point is inside visible window
@@ -76053,6 +76057,17 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	            }
 	        } else {
 	            ShowSome(parent, child, mask);
+	        }
+
+	        if (hasAnyVisibleCallback && (child.visible !== isChildVisible)) {
+	            var callback = (child.visible) ? onVisible : onInvisible;
+	            if (callback) {
+	                if (scope) {
+	                    callback.call(scope, child, parent);
+	                } else {
+	                    callback(child, parent);
+	                }
+	            }
 	        }
 	    }
 	};
@@ -76163,6 +76178,11 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	        this.setMaskUpdateMode(GetValue$1b(config, 'updateMode', 0));
 	        this.enableChildrenMask(GetValue$1b(config, 'padding', 0));
 	        this.setMaskLayer(GetValue$1b(config, 'layer', undefined));
+
+	        this.onMaskGameObjectVisible = GetValue$1b(config, 'onVisivle');
+	        this.onMaskGameObjectInvisible = GetValue$1b(config, 'onInvisible');
+	        this.maskGameObjectCallbackScope = GetValue$1b(config, 'scope');
+
 	        this.startMaskUpdate();
 
 	        return this;
@@ -76176,6 +76196,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	        this.stopMaskUpdate();
 	        this.childrenMask.destroy();
 	        this.childrenMask = undefined;
+
+	        this.onMaskGameObjectVisible = null;
+	        this.onMaskGameObjectInvisible = null;
+	        this.maskGameObjectCallbackScope = null;
 
 	        return this;
 	    },
@@ -76228,13 +76252,23 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
 	        if (this.privateRenderLayer) {
 	            this.privateRenderLayer.setMask(this.childrenMask);
+
 	        } else if (this.maskLayer) {
 	            // 1. Add parent and children into layer
 	            this.addToLayer(this.maskLayer);
 	            // 2. Mask this layer
 	            this.maskLayer.setMask(this.childrenMask);
+
 	        } else {
-	            MaskChildren(this, this.childrenMask);
+	            MaskChildren({
+	                parent: this,
+	                mask: this.childrenMask,
+
+	                onVisivle: this.onMaskGameObjectVisible,
+	                onInvisible: this.onMaskGameObjectInvisible,
+	                scope: this.maskGameObjectCallbackScope
+	            });
+
 	        }
 
 	        if (this.maskUpdateMode === 0) {
@@ -77284,10 +77318,6 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	            spaceConfig.child = GetValue$15(spaceConfig, 'table', 0);
 	        }
 
-	        if (!config.hasOwnProperty('scrollDetectionMode')) {
-	            config.scrollDetectionMode = 1;
-	        }
-
 	        super(scene, config);
 
 	        this.addChildrenMap('table', table);
@@ -78207,7 +78237,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	        this.child = child;
 
 	        // Create mask of child object
-	        this.setupChildrenMask(GetValue$13(config, 'mask', undefined));
+	        var maskConfig = GetValue$13(config, 'mask');
+	        this.setupChildrenMask(maskConfig);
 
 	        if (this.childrenMask) {
 	            this.maskGameObject = MaskToGameObject(this.childrenMask);
@@ -79698,7 +79729,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	    },
 
 	    displayText(text) {
-	        SetNoWrapText$1(this.parent, text);
+	        SetNoWrapText(this.parent, text);
 	    }
 	};
 
@@ -80255,7 +80286,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	        }
 
 	        if (this.textWrapEnable) {
-	            SetNoWrapText$1(this.parent, text);
+	            SetNoWrapText(this.parent, text);
 	        } else {
 	            this.parent.setText(text);
 	        }
@@ -83338,10 +83369,6 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	        }
 	        config.scroller = false; // No scroller supported
 
-	        if (!config.hasOwnProperty('scrollDetectionMode')) {
-	            config.scrollDetectionMode = 1;
-	        }
-
 	        super(scene, config);
 
 	        this.addChildrenMap('text', inputText);
@@ -85456,8 +85483,45 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
 	}
 
+	/**
+	 * @author       Richard Davey <rich@photonstorm.com>
+	 * @copyright    2019 Photon Storm Ltd.
+	 * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+	 */
+
+
+	/**
+	 * Creates a new Object using all values from obj1 and obj2.
+	 * If a value exists in both obj1 and obj2, the value in obj1 is used.
+	 * 
+	 * This is only a shallow copy. Deeply nested objects are not cloned, so be sure to only use this
+	 * function on shallow objects.
+	 *
+	 * @function Phaser.Utils.Objects.Merge
+	 * @since 3.0.0
+	 *
+	 * @param {object} obj1 - The first object.
+	 * @param {object} obj2 - The second object.
+	 *
+	 * @return {object} A new object containing the union of obj1's and obj2's properties.
+	 */
+	var Merge$1 = function (obj1, obj2)
+	{
+	    var clone = Clone$2(obj1);
+
+	    for (var key in obj2)
+	    {
+	        if (!clone.hasOwnProperty(key))
+	        {
+	            clone[key] = obj2[key];
+	        }
+	    }
+
+	    return clone;
+	};
+
 	var CreateBackground = function (scene, config, style) {
-	    return CreateBackground$2(scene, style);
+	    return CreateBackground$2(scene, Merge$1(config, style));
 	};
 
 	var BindingTargetMethods$5 = {
@@ -86895,7 +86959,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	};
 
 	var CreateSeparator = function (scene, config, style) {
-	    return CreateBackground$2(scene, style);
+	    return CreateBackground$2(scene, Merge$1(config, style));
 	};
 
 	const GetValue$g = Phaser.Utils.Objects.GetValue;
@@ -88674,13 +88738,13 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	};
 
 	const GetValue$9 = Phaser.Utils.Objects.GetValue;
-	const Merge$1 = Phaser.Utils.Objects.Merge;
+	const Merge = Phaser.Utils.Objects.Merge;
 
 	var Open = function (config, onCloseCallback) {
 	    if (config === undefined) {
 	        config = {};
 	    }
-	    config = Merge$1(config, this.openConfig);
+	    config = Merge(config, this.openConfig);
 
 	    SetLastOpenedEditor(this);
 
@@ -90405,46 +90469,9 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	    $clickShortcutKeys: 'SPACE|ENTER',  // TEXTBOX
 	};
 
-	/**
-	 * @author       Richard Davey <rich@photonstorm.com>
-	 * @copyright    2019 Photon Storm Ltd.
-	 * @license      {@link https://opensource.org/licenses/MIT|MIT License}
-	 */
-
-
-	/**
-	 * Creates a new Object using all values from obj1 and obj2.
-	 * If a value exists in both obj1 and obj2, the value in obj1 is used.
-	 * 
-	 * This is only a shallow copy. Deeply nested objects are not cloned, so be sure to only use this
-	 * function on shallow objects.
-	 *
-	 * @function Phaser.Utils.Objects.Merge
-	 * @since 3.0.0
-	 *
-	 * @param {object} obj1 - The first object.
-	 * @param {object} obj2 - The second object.
-	 *
-	 * @return {object} A new object containing the union of obj1's and obj2's properties.
-	 */
-	var Merge = function (obj1, obj2)
-	{
-	    var clone = Clone$2(obj1);
-
-	    for (var key in obj2)
-	    {
-	        if (!clone.hasOwnProperty(key))
-	        {
-	            clone[key] = obj2[key];
-	        }
-	    }
-
-	    return clone;
-	};
-
 	var RegisterDefaultVariables = function (eventSheetManager, config) {
 	    var { defaultVariables } = config;
-	    defaultVariables = Merge(defaultVariables, DefaultVariables);
+	    defaultVariables = Merge$1(defaultVariables, DefaultVariables);
 
 	    for (var key in defaultVariables) {
 	        eventSheetManager.setData(key, defaultVariables[key]);

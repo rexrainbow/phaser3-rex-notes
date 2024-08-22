@@ -28761,7 +28761,7 @@
             scrollerConfig.orientation = (isAxisY) ? 0 : 1;
 
             if (!scrollerConfig.hasOwnProperty('rectBoundsInteractive')) {
-                scrollerConfig.rectBoundsInteractive = (scrollDetectionMode === 0);
+                scrollerConfig.rectBoundsInteractive = (scrollDetectionMode === 1);
             }
 
             scroller = new Scroller(child, scrollerConfig);
@@ -28776,7 +28776,7 @@
             mouseWheelScroller;
         if (mouseWheelScrollerConfig && child) {
             if (!mouseWheelScrollerConfig.hasOwnProperty('focus')) {
-                mouseWheelScrollerConfig.focus = (scrollDetectionMode === 1) ? 2 : 1;
+                mouseWheelScrollerConfig.focus = (scrollDetectionMode === 0) ? 2 : 1;
             }
             mouseWheelScroller = new MouseWheelScroller(child, mouseWheelScrollerConfig);
         }
@@ -28851,8 +28851,8 @@
     };
 
     const SCROLLDECTIONMODE_MAP = {
-        rectBounds: 0,
-        gameObject: 1
+        gameObject: 0,
+        rectBounds: 1,
     };
 
     const GetValue$k = Phaser.Utils.Objects.GetValue;
@@ -29860,7 +29860,11 @@
     const Intersects = Phaser.Geom.Intersects.RectangleToRectangle;
     const Overlaps = Phaser.Geom.Rectangle.Overlaps;
 
-    var MaskChildren = function (parent, mask, children) {
+    var MaskChildren = function ({
+        parent, mask, children,    
+        onVisible, onInvisible, scope,
+    }) {
+
         if (!mask) {
             return;
         }
@@ -29869,10 +29873,13 @@
             children = parent.getAllChildren();
         }
 
+        var hasAnyVisibleCallback = !!onVisible || !!onInvisible;
+
         var parentBounds = parent.getBounds();
         var maskGameObject = MaskToGameObject(mask);
 
         var child, childBounds, visiblePointsNumber;
+        var isChildVisible;
         for (var i = 0, cnt = children.length; i < cnt; i++) {
             child = children[i];
 
@@ -29883,11 +29890,12 @@
                 continue;
             }
 
+            isChildVisible = child.visible;
             if (child.getBounds) {
                 childBounds = child.getBounds(childBounds);
                 visiblePointsNumber = ContainsPoints(parentBounds, childBounds);
                 switch (visiblePointsNumber) {
-                    case 4: // 4 points are all inside visible window, set visible
+                    case 4: // 4 points are all inside visible window, set visible                     
                         ShowAll(parent, child);
                         break;
                     case 0: // No point is inside visible window
@@ -29904,6 +29912,17 @@
                 }
             } else {
                 ShowSome(parent, child, mask);
+            }
+
+            if (hasAnyVisibleCallback && (child.visible !== isChildVisible)) {
+                var callback = (child.visible) ? onVisible : onInvisible;
+                if (callback) {
+                    if (scope) {
+                        callback.call(scope, child, parent);
+                    } else {
+                        callback(child, parent);
+                    }
+                }
             }
         }
     };
@@ -30014,6 +30033,11 @@
             this.setMaskUpdateMode(GetValue$i(config, 'updateMode', 0));
             this.enableChildrenMask(GetValue$i(config, 'padding', 0));
             this.setMaskLayer(GetValue$i(config, 'layer', undefined));
+
+            this.onMaskGameObjectVisible = GetValue$i(config, 'onVisivle');
+            this.onMaskGameObjectInvisible = GetValue$i(config, 'onInvisible');
+            this.maskGameObjectCallbackScope = GetValue$i(config, 'scope');
+
             this.startMaskUpdate();
 
             return this;
@@ -30027,6 +30051,10 @@
             this.stopMaskUpdate();
             this.childrenMask.destroy();
             this.childrenMask = undefined;
+
+            this.onMaskGameObjectVisible = null;
+            this.onMaskGameObjectInvisible = null;
+            this.maskGameObjectCallbackScope = null;
 
             return this;
         },
@@ -30079,13 +30107,23 @@
 
             if (this.privateRenderLayer) {
                 this.privateRenderLayer.setMask(this.childrenMask);
+
             } else if (this.maskLayer) {
                 // 1. Add parent and children into layer
                 this.addToLayer(this.maskLayer);
                 // 2. Mask this layer
                 this.maskLayer.setMask(this.childrenMask);
+
             } else {
-                MaskChildren(this, this.childrenMask);
+                MaskChildren({
+                    parent: this,
+                    mask: this.childrenMask,
+
+                    onVisivle: this.onMaskGameObjectVisible,
+                    onInvisible: this.onMaskGameObjectInvisible,
+                    scope: this.maskGameObjectCallbackScope
+                });
+
             }
 
             if (this.maskUpdateMode === 0) {
@@ -30173,7 +30211,8 @@
             this.child = child;
 
             // Create mask of child object
-            this.setupChildrenMask(GetValue$h(config, 'mask', undefined));
+            var maskConfig = GetValue$h(config, 'mask');
+            this.setupChildrenMask(maskConfig);
 
             if (this.childrenMask) {
                 this.maskGameObject = MaskToGameObject(this.childrenMask);
@@ -35994,10 +36033,6 @@
             var spaceConfig = GetValue$2(config, 'space', undefined);
             if (spaceConfig) {
                 spaceConfig.child = GetValue$2(spaceConfig, 'text', 0);
-            }
-
-            if (!config.hasOwnProperty('scrollDetectionMode')) {
-                config.scrollDetectionMode = 1;
             }
 
             super(scene, config);

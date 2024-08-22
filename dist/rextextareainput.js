@@ -21350,7 +21350,7 @@
             scrollerConfig.orientation = (isAxisY) ? 0 : 1;
 
             if (!scrollerConfig.hasOwnProperty('rectBoundsInteractive')) {
-                scrollerConfig.rectBoundsInteractive = (scrollDetectionMode === 0);
+                scrollerConfig.rectBoundsInteractive = (scrollDetectionMode === 1);
             }
 
             scroller = new Scroller(child, scrollerConfig);
@@ -21365,7 +21365,7 @@
             mouseWheelScroller;
         if (mouseWheelScrollerConfig && child) {
             if (!mouseWheelScrollerConfig.hasOwnProperty('focus')) {
-                mouseWheelScrollerConfig.focus = (scrollDetectionMode === 1) ? 2 : 1;
+                mouseWheelScrollerConfig.focus = (scrollDetectionMode === 0) ? 2 : 1;
             }
             mouseWheelScroller = new MouseWheelScroller(child, mouseWheelScrollerConfig);
         }
@@ -21440,8 +21440,8 @@
     };
 
     const SCROLLDECTIONMODE_MAP = {
-        rectBounds: 0,
-        gameObject: 1
+        gameObject: 0,
+        rectBounds: 1,
     };
 
     const GetValue$f = Phaser.Utils.Objects.GetValue;
@@ -29060,10 +29060,6 @@
                 spaceConfig.child = GetValue(spaceConfig, 'text', 0);
             }
             config.scroller = false; // No scroller supported
-
-            if (!config.hasOwnProperty('scrollDetectionMode')) {
-                config.scrollDetectionMode = 1;
-            }
 
             super(scene, config);
 

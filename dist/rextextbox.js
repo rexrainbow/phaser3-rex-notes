@@ -483,7 +483,7 @@
 
     };
 
-    var SetNoWrapText$1 = function (textObject, text) {
+    var SetNoWrapText = function (textObject, text) {
         var textObjectType = GetTextObjectType(textObject);
         switch (textObjectType) {
             case TextType:
@@ -605,7 +605,7 @@
         },
 
         displayText(text) {
-            SetNoWrapText$1(this.parent, text);
+            SetNoWrapText(this.parent, text);
         }
     };
 
@@ -1162,7 +1162,7 @@
             }
 
             if (this.textWrapEnable) {
-                SetNoWrapText$1(this.parent, text);
+                SetNoWrapText(this.parent, text);
             } else {
                 this.parent.setText(text);
             }
