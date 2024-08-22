@@ -8412,6 +8412,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#padding-of-tabs" class="md-nav__link">
+    Padding of tabs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#get-element" class="md-nav__link">
     Get element
   </a>
@@ -9909,6 +9916,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#padding-of-tabs" class="md-nav__link">
+    Padding of tabs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#get-element" class="md-nav__link">
     Get element
   </a>
@@ -10259,6 +10273,29 @@
 </code></pre></div>
 <ul>
 <li><code>position</code> : <code>'top'</code>, <code>'bottom'</code>, <code>'left'</code>, <code>'right'</code></li>
+</ul>
+<h3 id="padding-of-tabs">Padding of tabs<a class="headerlink" href="#padding-of-tabs" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Change padding
+    <div class="highlight"><pre><span></span><code><span class="nx">tabPages</span><span class="p">.</span><span class="nx">setTabsPadding</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">).</span><span class="nx">layout</span><span class="p">();</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">tabPages</span><span class="p">.</span><span class="nx">setTabsPadding</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">left</span><span class="o">:</span><span class="w"> </span><span class="nx">leftPadding</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="nx">right</span><span class="o">:</span><span class="w"> </span><span class="nx">rightPadding</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">top</span><span class="o">:</span><span class="w"> </span><span class="nx">topPadding</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">bottom</span><span class="o">:</span><span class="w"> </span><span class="nx">bottomPadding</span>
+<span class="p">}).</span><span class="nx">layout</span><span class="p">();</span>
+</code></pre></div><ul>
+<li><code>key</code> : <code>'left'</code>, <code>'right'</code>, <code>'top'</code>, <code>'bottom'</code>, <code>'item'</code></li>
+</ul>
+</li>
+<li>Get padding
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">tabPages</span><span class="p">.</span><span class="nx">getTabsPadding</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>key</code> : <code>'left'</code>, <code>'right'</code>, <code>'top'</code>, <code>'bottom'</code>, <code>'item'</code></li>
+</ul>
+</li>
 </ul>
 <h3 id="get-element">Get element<a class="headerlink" href="#get-element" title="Permanent link">&para;</a></h3>
 <ul>

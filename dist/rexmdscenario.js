@@ -53408,31 +53408,27 @@
 	        gameObject,
 	        x, y,
 	        GetPreTestCallback(preTest),
-	        GetPostTestCallback(postTest)
+	        postTest
 	    );
 	};
 
-	var IsNotHiddenSizer = function (gameObject) {
+	var IsShownSizer = function (gameObject) {
 	    var isHiddenSizer = gameObject.rexSizer && gameObject.rexSizer.hidden;
 	    return !isHiddenSizer;
 	};
 
 	var GetPreTestCallback = function (preTest) {
 	    if (!preTest) {
-	        return IsNotHiddenSizer;
+	        return IsShownSizer;
 	    }
 
 	    return function (gameObject, x, y) {
-	        if (!IsNotHiddenSizer(gameObject)) {
+	        if (!IsShownSizer(gameObject)) {
 	            return false;
 	        }
 	        preTest(gameObject, x, y);
 	        return true;
 	    }
-	};
-
-	var GetPostTestCallback = function (postTest) {
-	    return postTest;
 	};
 
 	var PointToChild$1 = function (x, y, preTest, postTest, children) {
@@ -82040,6 +82036,19 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	    return this;
 	};
 
+	var TabPaddingMethods = {
+	    setTabsPadding(key, value) {
+	        var tabs = this.childrenMap.tabs;
+	        tabs.setOuterPadding(key, value);
+	        return this;
+	    },
+
+	    getTabsPadding(key) {
+	        var tabs = this.childrenMap.tabs;
+	        return tabs.getOuterPadding(key);
+	    }
+	};
+
 	var methods$6 = {
 	    getPageKey: GetPageKeyByIndex,
 	    getPageIndex: GetPageIndexByKey,
@@ -82052,8 +82061,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	Object.assign(
 	    methods$6,
 	    SwapPageMethods,
-	    RemovePageMethods
-
+	    RemovePageMethods,
+	    TabPaddingMethods,
 	);
 
 	const GetValue$O = Phaser.Utils.Objects.GetValue;
