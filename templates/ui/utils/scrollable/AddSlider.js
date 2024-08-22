@@ -152,7 +152,7 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
         scrollerConfig.orientation = (isAxisY) ? 0 : 1;
 
         if (!scrollerConfig.hasOwnProperty('rectBoundsInteractive')) {
-            scrollerConfig.rectBoundsInteractive = (scrollDetectionMode === 0);
+            scrollerConfig.rectBoundsInteractive = (scrollDetectionMode === 1);
         }
 
         scroller = new Scroller(child, scrollerConfig);
@@ -167,7 +167,7 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
         mouseWheelScroller;
     if (mouseWheelScrollerConfig && child) {
         if (!mouseWheelScrollerConfig.hasOwnProperty('focus')) {
-            mouseWheelScrollerConfig.focus = (scrollDetectionMode === 1) ? 2 : 1;
+            mouseWheelScrollerConfig.focus = (scrollDetectionMode === 0) ? 2 : 1;
         }
         mouseWheelScroller = new MouseWheelScroller(child, mouseWheelScrollerConfig);
     }
@@ -242,8 +242,8 @@ const SLIDER_POSITION_MAP = {
 }
 
 const SCROLLDECTIONMODE_MAP = {
-    rectBounds: 0,
-    gameObject: 1
+    gameObject: 0,
+    rectBounds: 1,
 }
 
 export default AddSlider;

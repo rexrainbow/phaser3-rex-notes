@@ -86,6 +86,7 @@ class Demo extends Phaser.Scene {
         // .popUp(300)
 
         // Set icon interactive
+        this.input.topOnly = false;
         var print = this.add.text(0, 0, '');
         var labels = [];
         labels.push(...scrollablePanel.getElement('#skills.items', true) as Phaser.GameObjects.GameObject[]);

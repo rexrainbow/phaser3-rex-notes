@@ -17,6 +17,8 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
+        this.input.topOnly = false;
+
         this.print = this.add.text(0, 0, '');
 
         var scrollablePanel = this.rexUI.add.scrollablePanel({

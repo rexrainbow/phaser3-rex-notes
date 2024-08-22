@@ -16,6 +16,8 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
+        this.input.topOnly = false;
+
         var print = this.add.text(0, 0, '');
         var clickButtonCallback = function (item) {
             print.text += `Click ${item.text}\n`;

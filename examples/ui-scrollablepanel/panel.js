@@ -70,6 +70,8 @@ class Demo extends Phaser.Scene {
             //     thumb: { radius: 13, color: COLOR_LIGHT }
             // },
 
+            // scrollDetectionMode: 1,
+
             scroller: {
                 // pointerOutRelease: false,
             },
@@ -95,7 +97,8 @@ class Demo extends Phaser.Scene {
 
         var print = this.add.text(0, 0, '');
 
-        // Solution A: Add touch event on children of panel                
+        // Solution A: Add touch event on children of panel
+        this.input.topOnly = false;  // or 'scrollDetectionMode: 1'
         var labels = [];
         labels.push(...scrollablePanel.getElement('#skills.items', true));
         labels.push(...scrollablePanel.getElement('#items.items', true));

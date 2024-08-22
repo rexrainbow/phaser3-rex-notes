@@ -336,8 +336,8 @@ var panel = scene.rexUI.add.scrollablePanel({
     - Set to `false` to skip creating slider.
 - `sliderX`, `sliderY` : Componments of sliderX and sliderY, for two-sliders mode.
 - `scrollDetectionMode` : 
-    - `0` : Dectct drag-scrolling, mouse-wheel-scrolling by rectangle bounds. Default behavior.
-    - `1` : Dectct drag-scrolling, mouse-wheel-scrolling by game object's touch event.
+    - `0` : Dectct drag-scrolling, mouse-wheel-scrolling by game object's touch event. Default behavior.
+    - `1` : Dectct drag-scrolling, mouse-wheel-scrolling by rectangle bounds.
 - `scroller` : Configuration of scroller behavior.
     - `scroller.threshold` : Minimal movement to scroll. Set `0` to scroll immediately.
     - `scroller.slidingDeceleration` : Deceleration of slow down when dragging released.
@@ -688,7 +688,12 @@ Two possible solution to register input events to children of scrollable panel.
 
 #### Individual input events
 
+When [`scene.input.topOnly`](touchevents.md#top-only) is `true` (default value), input events of children elements will block the drag-scrolling of scrollable panel. (Assmue that the children elememts are above scrollable panel)
+
+- Set `scene.input.topOnly` to `false` to enable drag-scrolling and input events of children elememts both.
+    - Or Set `scrollDetectionMode: 1` in config of constructor, to using rectangle-bounds input detection.
 - Test if pointer is inside the mask of panel via [`panel.isInTouching('mask')`](ui-basesizer.md#is-in-touching), during input events' callback.
+- To recognize pointer-down and dragging-start, use press's [`pressstart`](gesture-press.md#pressing-start) event.
 
 #### Set children interactive
 
