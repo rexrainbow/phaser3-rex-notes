@@ -127,7 +127,8 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
         topPatent[`minThumb${axis}Size`] = undefined;
     }
 
-    var scrollDetectionMode = GetValue(config, 'scrollDetectionMode', 0);
+    // 0=gameObject, 1=rectBounds
+    var scrollDetectionMode = GetValue(config, 'scrollDetectionMode');
     if (typeof (scrollDetectionMode) === 'string') {
         scrollDetectionMode = SCROLLDECTIONMODE_MAP[scrollDetectionMode];
     }
@@ -151,7 +152,7 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
 
         scrollerConfig.orientation = (isAxisY) ? 0 : 1;
 
-        if (!scrollerConfig.hasOwnProperty('rectBoundsInteractive')) {
+        if (scrollDetectionMode !== undefined) {
             scrollerConfig.rectBoundsInteractive = (scrollDetectionMode === 1);
         }
 
@@ -166,9 +167,10 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
     var mouseWheelScrollerConfig = GetValue(config, ((isScrollXYMode) ? `mouseWheelScroller${axis}` : 'mouseWheelScroller'), false),
         mouseWheelScroller;
     if (mouseWheelScrollerConfig && child) {
-        if (!mouseWheelScrollerConfig.hasOwnProperty('focus')) {
-            mouseWheelScrollerConfig.focus = (scrollDetectionMode === 0) ? 2 : 1;
+        if (scrollDetectionMode !== undefined) {
+            mouseWheelScrollerConfig.focus = (scrollDetectionMode === 1) ? 2 : 0;
         }
+
         mouseWheelScroller = new MouseWheelScroller(child, mouseWheelScrollerConfig);
     }
 

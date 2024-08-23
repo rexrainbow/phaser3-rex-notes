@@ -23,11 +23,11 @@ class MouseWheelScroller extends ComponentBase {
 
         switch (this.focusMode) {
             case 0:
-            case 1:
+            case 2:
                 this.scene.input.on('wheel', this.onSceneScroll, this);
                 break;
 
-            default:  // case 2
+            default:  // case 1
                 gameObject
                     .setInteractive(GetValue(config, "inputConfig", undefined))
                     .on('wheel', function (pointer, dx, dy, dz, event) {
@@ -40,18 +40,18 @@ class MouseWheelScroller extends ComponentBase {
     destroy() {
         switch (this.focusMode) {
             case 0:
-            case 1:
+            case 2:
                 this.scene.input.off('wheel', this.onSceneScroll, this);
                 break;
 
-            default:  // case 2
+            default:  // case 1
                 // GameObject events will be removed when this gameObject destroyed 
                 break;
         }
     }
 
     onSceneScroll(pointer, currentlyOver, dx, dy, dz, event) {
-        if (this.focusMode === 1) {
+        if (this.focusMode === 2) {
             if (!IsPointerInBounds(this.parent, pointer)) {
                 return;
             }

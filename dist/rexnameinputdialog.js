@@ -33833,11 +33833,11 @@
 
             switch (this.focusMode) {
                 case 0:
-                case 1:
+                case 2:
                     this.scene.input.on('wheel', this.onSceneScroll, this);
                     break;
 
-                default:  // case 2
+                default:  // case 1
                     gameObject
                         .setInteractive(GetValue$e(config, "inputConfig", undefined))
                         .on('wheel', function (pointer, dx, dy, dz, event) {
@@ -33850,14 +33850,14 @@
         destroy() {
             switch (this.focusMode) {
                 case 0:
-                case 1:
+                case 2:
                     this.scene.input.off('wheel', this.onSceneScroll, this);
                     break;
             }
         }
 
         onSceneScroll(pointer, currentlyOver, dx, dy, dz, event) {
-            if (this.focusMode === 1) {
+            if (this.focusMode === 2) {
                 if (!IsPointerInBounds(this.parent, pointer)) {
                     return;
                 }
@@ -34020,7 +34020,8 @@
             topPatent[`minThumb${axis}Size`] = undefined;
         }
 
-        var scrollDetectionMode = GetValue$d(config, 'scrollDetectionMode', 0);
+        // 0=gameObject, 1=rectBounds
+        var scrollDetectionMode = GetValue$d(config, 'scrollDetectionMode');
         if (typeof (scrollDetectionMode) === 'string') {
             scrollDetectionMode = SCROLLDECTIONMODE_MAP[scrollDetectionMode];
         }
@@ -34044,7 +34045,7 @@
 
             scrollerConfig.orientation = (isAxisY) ? 0 : 1;
 
-            if (!scrollerConfig.hasOwnProperty('rectBoundsInteractive')) {
+            if (scrollDetectionMode !== undefined) {
                 scrollerConfig.rectBoundsInteractive = (scrollDetectionMode === 1);
             }
 
@@ -34059,9 +34060,10 @@
         var mouseWheelScrollerConfig = GetValue$d(config, ((isScrollXYMode) ? `mouseWheelScroller${axis}` : 'mouseWheelScroller'), false),
             mouseWheelScroller;
         if (mouseWheelScrollerConfig && child) {
-            if (!mouseWheelScrollerConfig.hasOwnProperty('focus')) {
-                mouseWheelScrollerConfig.focus = (scrollDetectionMode === 0) ? 2 : 1;
+            if (scrollDetectionMode !== undefined) {
+                mouseWheelScrollerConfig.focus = (scrollDetectionMode === 1) ? 2 : 0;
             }
+
             mouseWheelScroller = new MouseWheelScroller(child, mouseWheelScrollerConfig);
         }
 
