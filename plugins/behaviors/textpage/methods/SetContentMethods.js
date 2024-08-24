@@ -1,13 +1,5 @@
-import TextToLines from "../../../utils/text/TextToLines.js";
-
-var GetString = function (text) {
-    if (Array.isArray(text)) {
-        text = text.join('\n');
-    } else if (typeof (text) === 'number') {
-        text = text.toString();
-    }
-    return text;
-}
+import TextToLines from '../../../utils/text/TextToLines.js';
+import GetString from '../../../utils/text/GetString.js';
 
 export default {
     clearText() {

@@ -4,7 +4,7 @@ import GetWrapText from '../../utils/text/GetWrapText.js';
 import SetNoWrapText from '../../utils/text/SetNoWrapText.js';
 import GetTypingString from './utils/GetTypingString.js';
 import GetPlainText from './utils/GetPlainText.js';
-import TransferText from './methods/TransferText.js';
+import GetString from '../../utils/text/GetString.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -76,7 +76,7 @@ class TextTyping extends ComponentBase {
     }
 
     set text(value) {
-        var text = TransferText(value);
+        var text = GetString(value);
         if (this.textWrapEnable) {
             text = GetWrapText(this.parent, text);
         }

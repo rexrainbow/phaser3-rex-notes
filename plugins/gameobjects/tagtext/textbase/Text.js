@@ -1,5 +1,6 @@
 import TextBase from '../../textbase/TextBase.js';
 import TextStyle from '../../textbase/textstyle/TextStyle.js';
+import GetString from '../../../utils/text/GetString.js';
 import CanvasText from './canvastext/CanvasText.js';
 import Pool from '../../../pool.js';
 import WrapTextLinesPoolClass from './wraptext/WrapTextLinesPool.js';
@@ -260,13 +261,7 @@ class Text extends TextBase {
     }
 
     setText(value) {
-        if (value == null) {
-            value = '';
-        } else if (Array.isArray(value)) {
-            value = value.join('\n');
-        } else {
-            value = value.toString();
-        }
+        value = GetString(value);
 
         if (value === this._text) {
             return this;

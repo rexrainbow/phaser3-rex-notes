@@ -1,4 +1,4 @@
-import TransferText from './TransferText.js';
+import GetString from '../../../utils/text/GetString.js';
 import SetNoWrapText from '../../../utils/text/SetNoWrapText.js';
 
 export default {
@@ -19,7 +19,7 @@ export default {
     },
 
     appendText(text) {
-        var newText = this.text.concat(TransferText(text));
+        var newText = this.text.concat(GetString(text));
         if (this.isTyping) {
             this.setTypingContent(newText);
         } else {
