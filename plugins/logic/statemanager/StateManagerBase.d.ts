@@ -51,6 +51,10 @@ declare class StateManagerBase extends EventEmitter {
         states: { [name: string]: StateManagerBase.IState },
     ): this;
 
+    removeState(name: string): this;
+
+    removeAllStates(): this;
+
     runMethod(
         methodName: string,
         ...args: unknown[]
