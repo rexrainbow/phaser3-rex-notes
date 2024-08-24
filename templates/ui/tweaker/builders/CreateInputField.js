@@ -13,7 +13,8 @@ var CreateInputField = function (scene, config, style) {
             inputField
                 .setSetupCallback(handler.setup)
                 .setFilterValueCallback(handler.filterValue)
-                .setDisplayValueCallback(handler.displayValue);
+                .setDisplayValueCallback(handler.displayValue)
+                .setOnBindTargetCallback(handler.onBindTarget)
 
             handler.build(inputField, style);
 

@@ -26,6 +26,12 @@ var GenerateInputFieldClass = function (BaseClass) {
             return tweaker.root;
         }
 
+        onBindTarget(target, key) {
+            if (this.onBindTargetCallback) {
+                this.onBindTargetCallback(this, target, key);
+            }
+        }
+
         validate(newValue) {
             if (this.syncValueFlag || !this.validateCallback) {
                 return true;
@@ -127,6 +133,11 @@ var GenerateInputFieldClass = function (BaseClass) {
 
         setDisplayValueCallback(callback) {
             this.displayValueCallback = callback;
+            return this;
+        }
+
+        setOnBindTargetCallback(callback) {
+            this.onBindTargetCallback = callback;
             return this;
         }
 

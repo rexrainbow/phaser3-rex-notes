@@ -32,6 +32,10 @@ export default {
         }
 
         this.syncTargetValue();
+
+        var inputField = this.childrenMap.inputField;
+        inputField.onBindTarget(target, key);
+
         return this;
     },
 

@@ -62,4 +62,10 @@ export default {
         inputText.setText(gameObject.getFotmatText(value));
     },
 
+    // Callback inside `setBindingTarget()`
+    onBindTarget(gameObject) {
+        var inputText = gameObject.childrenMap.inputText;
+        inputText.scrollToTop();
+    },
+
 }
