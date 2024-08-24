@@ -334,13 +334,15 @@
         return text;
     };
 
-    var GetString = function (text) {
-        if (Array.isArray(text)) {
-            text = text.join('\n');
-        } else if (typeof (text) === 'number') {
-            text = text.toString();
+    var GetString = function (value) {
+        if (value == null) {
+            value = '';
+        } else if (Array.isArray(value)) {
+            value = value.join('\n');
+        } else if (typeof (value) === 'number') {
+            value = value.toString();
         }
-        return text;
+        return value;
     };
 
     var SetContentMethods = {

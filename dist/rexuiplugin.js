@@ -5399,6 +5399,17 @@
 
     };
 
+    var GetString = function (value) {
+        if (value == null) {
+            value = '';
+        } else if (Array.isArray(value)) {
+            value = value.join('\n');
+        } else if (typeof (value) === 'number') {
+            value = value.toString();
+        }
+        return value;
+    };
+
     var DrawMethods = {
         draw(startX, startY, textWidth, textHeight) {
             var penManager = this.penManager;
@@ -7198,13 +7209,7 @@
         }
 
         setText(value) {
-            if (value == null) {
-                value = '';
-            } else if (Array.isArray(value)) {
-                value = value.join('\n');
-            } else {
-                value = value.toString();
-            }
+            value = GetString(value);
 
             if (value === this._text) {
                 return this;
@@ -64630,15 +64635,6 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return text;
     };
 
-    var GetString = function (text) {
-        if (Array.isArray(text)) {
-            text = text.join('\n');
-        } else if (typeof (text) === 'number') {
-            text = text.toString();
-        }
-        return text;
-    };
-
     var SetContentMethods = {
         clearText() {
             this.sections.length = 0;
@@ -65029,15 +65025,6 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         Methods$2,
     );
 
-    var TransferText = function (text) {
-        if (Array.isArray(text)) {
-            text = text.join('\n');
-        } else if (typeof (text) === 'number') {
-            text = text.toString();
-        }
-        return text;
-    };
-
     var SetTextMethods$1 = {
         setText(text) {
             if (this.setTextCallback) {
@@ -65056,7 +65043,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         },
 
         appendText(text) {
-            var newText = this.text.concat(TransferText(text));
+            var newText = this.text.concat(GetString(text));
             if (this.isTyping) {
                 this.setTypingContent(newText);
             } else {
@@ -65322,7 +65309,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
 
         set text(value) {
-            var text = TransferText(value);
+            var text = GetString(value);
             if (this.textWrapEnable) {
                 text = GetWrapText(this.parent, text);
             }

@@ -28813,6 +28813,17 @@
 
     }
 
+    var GetString = function (value) {
+        if (value == null) {
+            value = '';
+        } else if (Array.isArray(value)) {
+            value = value.join('\n');
+        } else if (typeof (value) === 'number') {
+            value = value.toString();
+        }
+        return value;
+    };
+
     var DrawMethods = {
         draw(startX, startY, textWidth, textHeight) {
             var penManager = this.penManager;
@@ -30499,13 +30510,7 @@
         }
 
         setText(value) {
-            if (value == null) {
-                value = '';
-            } else if (Array.isArray(value)) {
-                value = value.join('\n');
-            } else {
-                value = value.toString();
-            }
+            value = GetString(value);
 
             if (value === this._text) {
                 return this;

@@ -1208,6 +1208,17 @@
 
     }
 
+    var GetString = function (value) {
+        if (value == null) {
+            value = '';
+        } else if (Array.isArray(value)) {
+            value = value.join('\n');
+        } else if (typeof (value) === 'number') {
+            value = value.toString();
+        }
+        return value;
+    };
+
     const GetValue$5 = Phaser.Utils.Objects.GetValue;
 
     class RoundRectangle {
@@ -3485,13 +3496,7 @@
         }
 
         setText(value) {
-            if (value == null) {
-                value = '';
-            } else if (Array.isArray(value)) {
-                value = value.join('\n');
-            } else {
-                value = value.toString();
-            }
+            value = GetString(value);
 
             if (value === this._text) {
                 return this;

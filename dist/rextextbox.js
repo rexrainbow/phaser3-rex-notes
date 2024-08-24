@@ -334,13 +334,15 @@
         return text;
     };
 
-    var GetString = function (text) {
-        if (Array.isArray(text)) {
-            text = text.join('\n');
-        } else if (typeof (text) === 'number') {
-            text = text.toString();
+    var GetString = function (value) {
+        if (value == null) {
+            value = '';
+        } else if (Array.isArray(value)) {
+            value = value.join('\n');
+        } else if (typeof (value) === 'number') {
+            value = value.toString();
         }
-        return text;
+        return value;
     };
 
     var SetContentMethods = {
@@ -776,15 +778,6 @@
         Methods$2,
     );
 
-    var TransferText = function (text) {
-        if (Array.isArray(text)) {
-            text = text.join('\n');
-        } else if (typeof (text) === 'number') {
-            text = text.toString();
-        }
-        return text;
-    };
-
     var SetTextMethods = {
         setText(text) {
             if (this.setTextCallback) {
@@ -803,7 +796,7 @@
         },
 
         appendText(text) {
-            var newText = this.text.concat(TransferText(text));
+            var newText = this.text.concat(GetString(text));
             if (this.isTyping) {
                 this.setTypingContent(newText);
             } else {
@@ -1069,7 +1062,7 @@
         }
 
         set text(value) {
-            var text = TransferText(value);
+            var text = GetString(value);
             if (this.textWrapEnable) {
                 text = GetWrapText(this.parent, text);
             }
