@@ -72984,6 +72984,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             }
 
             this.syncTargetValue();
+
+            var inputField = this.childrenMap.inputField;
+            inputField.onBindTarget(target, key);
+
             return this;
         },
 
@@ -73226,6 +73230,12 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 return tweaker.root;
             }
 
+            onBindTarget(target, key) {
+                if (this.onBindTargetCallback) {
+                    this.onBindTargetCallback(this, target, key);
+                }
+            }
+
             validate(newValue) {
                 if (this.syncValueFlag || !this.validateCallback) {
                     return true;
@@ -73330,6 +73340,11 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 return this;
             }
 
+            setOnBindTargetCallback(callback) {
+                this.onBindTargetCallback = callback;
+                return this;
+            }
+
             setTextFormatCallback(callback) {
                 this.textFormatCallback = callback;
                 return this;
@@ -73357,7 +73372,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 inputField
                     .setSetupCallback(handler.setup)
                     .setFilterValueCallback(handler.filterValue)
-                    .setDisplayValueCallback(handler.displayValue);
+                    .setDisplayValueCallback(handler.displayValue)
+                    .setOnBindTargetCallback(handler.onBindTarget);
 
                 handler.build(inputField, style);
 
@@ -73459,9 +73475,15 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 proportion = 0;
             } else { // x
                 proportion = (this.itemWidth > 0) ? 0 : 1;
-                inputSizer.setMinWidth(this.itemWidth);
+
+                if (inputSizer.minWidth === 0) {
+                    inputSizer.setMinWidth(this.itemWidth);
+                }
             }
-            inputSizer.setMinHeight(this.itemHeight);
+
+            if (inputSizer.minHeight === 0) {
+                inputSizer.setMinHeight(this.itemHeight);
+            }
 
             this.add(
                 inputSizer,
@@ -74054,6 +74076,12 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         displayValue(gameObject, value) {
             var inputText = gameObject.childrenMap.inputText;
             inputText.setText(gameObject.getFotmatText(value));
+        },
+
+        // Callback inside `setBindingTarget()`
+        onBindTarget(gameObject) {
+            var inputText = gameObject.childrenMap.inputText;
+            inputText.scrollToTop();
         },
 
     };
