@@ -1892,6 +1892,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#set-enable" class="md-nav__link">
+    Set enable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#set-paddding-symbol" class="md-nav__link">
     Set paddding symbol
   </a>
@@ -9890,6 +9897,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#set-enable" class="md-nav__link">
+    Set enable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#set-paddding-symbol" class="md-nav__link">
     Set paddding symbol
   </a>
@@ -10053,17 +10067,32 @@
 <h3 id="update-display-content">Update display content<a class="headerlink" href="#update-display-content" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">truncator</span><span class="p">.</span><span class="nx">updateText</span><span class="p">();</span>
 </code></pre></div>
+<h3 id="set-enable">Set enable<a class="headerlink" href="#set-enable" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">truncator</span><span class="p">.</span><span class="nx">setEnable</span><span class="p">(</span><span class="nx">enable</span><span class="p">).</span><span class="nx">updateText</span><span class="p">();</span>
+</code></pre></div>
 <h3 id="set-paddding-symbol">Set paddding symbol<a class="headerlink" href="#set-paddding-symbol" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">truncator</span><span class="p">.</span><span class="nx">setSymbol</span><span class="p">(</span><span class="nx">symbol</span><span class="p">).</span><span class="nx">updateText</span><span class="p">();</span>
 </code></pre></div>
 <h3 id="set-max-size">Set max size<a class="headerlink" href="#set-max-size" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Max width
+<li>Max width<ul>
+<li>Set
     <div class="highlight"><pre><span></span><code><span class="nx">truncator</span><span class="p">.</span><span class="nx">setMaxWidth</span><span class="p">(</span><span class="nx">width</span><span class="p">).</span><span class="nx">updateText</span><span class="p">();</span>
 </code></pre></div></li>
-<li>Max height
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">truncator</span><span class="p">.</span><span class="nx">maxWidth</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Max height<ul>
+<li>Set
     <div class="highlight"><pre><span></span><code><span class="nx">truncator</span><span class="p">.</span><span class="nx">setMaxHeight</span><span class="p">(</span><span class="nx">height</span><span class="p">).</span><span class="nx">updateText</span><span class="p">();</span>
 </code></pre></div></li>
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">truncator</span><span class="p">.</span><span class="nx">maxHeight</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+</li>
 </ul>
 
 
