@@ -1,4 +1,4 @@
-import GetSubString from './GetSubString.js';
+import GetSubString from '../../../utils/text/GetSubString.js';
 
 var GetTypingString = function (text, typeIdx, textLength, typeMode) {
     var textObject = this.parent;

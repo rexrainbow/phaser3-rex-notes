@@ -3,7 +3,7 @@ import Methods from './methods/Methods.js';
 import GetWrapText from '../../utils/text/GetWrapText.js';
 import SetNoWrapText from '../../utils/text/SetNoWrapText.js';
 import GetTypingString from './utils/GetTypingString.js';
-import GetPlainText from './utils/GetPlainText.js';
+import GetPlainText from '../../utils/text/GetPlainText.js';
 import GetString from '../../utils/text/GetString.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;

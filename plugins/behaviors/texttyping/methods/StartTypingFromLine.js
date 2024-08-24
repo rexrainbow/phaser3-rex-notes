@@ -1,4 +1,4 @@
-import GetPlainText from '../utils/GetPlainText.js';
+import GetPlainText from '../../../utils/text/GetPlainText.js';
 
 var StartTypingFromLine = function (text, lineIndex, speed, offsetIndex, timerStartAt) {
     var startIdx;
