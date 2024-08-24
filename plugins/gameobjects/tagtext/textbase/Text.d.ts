@@ -65,6 +65,8 @@ declare class Text extends CanvasGameObjectBase {
     canvas: HTMLCanvasElement;
     context: CanvasRenderingContext2D;
 
+    setRTL(rtl?: boolean): this;
+
     text: string;
     setText(text: string | number | string[]): this;
     appendText(
