@@ -10,20 +10,20 @@
         <meta name="author" content="rexrainbow">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/canvas-texture/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/texttruncator/">
       
       
-        <link rel="prev" href="../textures/">
+        <link rel="prev" href="../textpage/">
       
       
-        <link rel="next" href="../dynamic-texture/">
+        <link rel="next" href="../textedit/">
       
       <link rel="icon" href="../images/logo.svg">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.1">
     
     
       
-        <title>Canvas texture - Notes of Phaser 3</title>
+        <title>Truncator - Notes of Phaser 3</title>
       
     
     
@@ -117,7 +117,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Canvas texture
+              Truncator
             
           </span>
         </div>
@@ -1510,14 +1510,16 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" checked>
       
       
       
@@ -1526,7 +1528,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_4_4">
           <span class="md-nav__icon md-icon"></span>
           Text
@@ -1717,14 +1719,16 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4_3" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4_3" checked>
       
       
       
@@ -1733,7 +1737,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_4_3_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_4_3_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_4_4_3">
           <span class="md-nav__icon md-icon"></span>
           Behaviors
@@ -1772,11 +1776,144 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../texttruncator/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Truncator
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Truncator
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-plugin" class="md-nav__link">
+    Install plugin
+  </a>
+  
+    <nav class="md-nav" aria-label="Install plugin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-minify-file" class="md-nav__link">
+    Load minify file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-plugin" class="md-nav__link">
+    Import plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-instance" class="md-nav__link">
+    Create instance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#truncation-modes" class="md-nav__link">
+    Truncation modes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-content" class="md-nav__link">
+    Set content
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-display-content" class="md-nav__link">
+    Update display content
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-paddding-symbol" class="md-nav__link">
+    Set paddding symbol
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-max-size" class="md-nav__link">
+    Set max size
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -3816,16 +3953,14 @@
               
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_15" checked>
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_15" >
       
       
       
@@ -3834,7 +3969,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_15_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_15_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_4_15">
           <span class="md-nav__icon md-icon"></span>
           Textures
@@ -3859,124 +3994,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Canvas texture
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../canvas-texture/" class="md-nav__link">
         Canvas texture
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav" aria-label="Usage">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#create-canvas-texture" class="md-nav__link">
-    Create canvas texture
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-canvas-element" class="md-nav__link">
-    Get canvas element
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#draw-frame" class="md-nav__link">
-    Draw frame
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#draw-image" class="md-nav__link">
-    Draw image
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#clear" class="md-nav__link">
-    Clear
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#refresh-texture" class="md-nav__link">
-    Refresh texture
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#color" class="md-nav__link">
-    Color
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#image-data" class="md-nav__link">
-    Image data
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#add-frame" class="md-nav__link">
-    Add frame
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -9791,6 +9813,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#usage" class="md-nav__link">
     Usage
   </a>
@@ -9799,64 +9828,77 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#create-canvas-texture" class="md-nav__link">
-    Create canvas texture
+  <a href="#install-plugin" class="md-nav__link">
+    Install plugin
+  </a>
+  
+    <nav class="md-nav" aria-label="Install plugin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-minify-file" class="md-nav__link">
+    Load minify file
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-canvas-element" class="md-nav__link">
-    Get canvas element
+  <a href="#import-plugin" class="md-nav__link">
+    Import plugin
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#draw-frame" class="md-nav__link">
-    Draw frame
+  <a href="#import-class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-instance" class="md-nav__link">
+    Create instance
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#draw-image" class="md-nav__link">
-    Draw image
+  <a href="#truncation-modes" class="md-nav__link">
+    Truncation modes
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#clear" class="md-nav__link">
-    Clear
+  <a href="#set-content" class="md-nav__link">
+    Set content
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#refresh-texture" class="md-nav__link">
-    Refresh texture
+  <a href="#update-display-content" class="md-nav__link">
+    Update display content
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#color" class="md-nav__link">
-    Color
+  <a href="#set-paddding-symbol" class="md-nav__link">
+    Set paddding symbol
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#image-data" class="md-nav__link">
-    Image data
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#add-frame" class="md-nav__link">
-    Add frame
+  <a href="#set-max-size" class="md-nav__link">
+    Set max size
   </a>
   
 </li>
@@ -9884,84 +9926,144 @@
   
 
 
-  <h1>Canvas texture</h1>
+  <h1>Truncator</h1>
 
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Canvas Canvas Texture stored in <a href="../textures/">texture cache</a>, built-in object of phaser.</p>
+<p>Constraints text game object size by truncating text with padding symbol on <a href="../text/">text object</a>, <a href="../bbcodetext/">bbcode text object</a>, or <a href="../tagtext/">tag text object</a>.</p>
 <ul>
-<li>Author: Richard Davey</li>
+<li>Author: Rex</li>
+<li>Behavior of text object</li>
+</ul>
+<h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://codepen.io/rexrainbow/pen/bGPMjKx">Truncate text</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/eYwrjKO">Truncate BBCodeText</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="create-canvas-texture">Create canvas texture<a class="headerlink" href="#create-canvas-texture" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">texture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">createCanvas</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">);</span>
-</code></pre></div>
-<h3 id="get-canvas-element">Get canvas element<a class="headerlink" href="#get-canvas-element" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">canvas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">texture</span><span class="p">.</span><span class="nx">getCanvas</span><span class="p">();</span>
-<span class="kd">var</span><span class="w"> </span><span class="nx">context</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">texture</span><span class="p">.</span><span class="nx">getContext</span><span class="p">();</span>
-</code></pre></div>
-<p><a href="https://www.w3schools.com/html/html5_canvas.asp">Canvas api</a></p>
-<h3 id="draw-frame">Draw frame<a class="headerlink" href="#draw-frame" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">drawFrame</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">);</span>
-<span class="c1">// texture.drawFrame(key, frame, x, y, update);</span>
-</code></pre></div>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/texttruncator">Sample code</a></p>
+<h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
+<h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
 <ul>
-<li><code>update</code> : Update the internal ImageData buffer and arrays. Default value is <code>true</code>.</li>
-</ul>
-<h3 id="draw-image">Draw image<a class="headerlink" href="#draw-image" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">source</span><span class="p">);</span>
-<span class="c1">// texture.draw(x, y, source, update);</span>
-</code></pre></div>
-<ul>
-<li><code>source</code> : The HTML Image element, or HTML Canvas element to draw to this canvas.</li>
-<li><code>update</code> : Update the internal ImageData buffer and arrays. Default value is <code>true</code>.</li>
-</ul>
-<h3 id="clear">Clear<a class="headerlink" href="#clear" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">clear</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">);</span>
-<span class="c1">// // texture.clear(x, y, width, height, update);</span>
-</code></pre></div>
-<ul>
-<li><code>update</code> : Update the internal ImageData buffer and arrays. Default value is <code>true</code>.</li>
-</ul>
-<h3 id="refresh-texture">Refresh texture<a class="headerlink" href="#refresh-texture" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">refresh</span><span class="p">();</span>
-</code></pre></div>
-<h3 id="color">Color<a class="headerlink" href="#color" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Set
-    <div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">setPixel</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">red</span><span class="p">,</span><span class="w"> </span><span class="nx">green</span><span class="p">,</span><span class="w"> </span><span class="nx">blue</span><span class="p">);</span>
-<span class="c1">// texture.setPixel(x, y, red, green, blue, alpha);</span>
+<li>Load plugin (minify file) in preload stage
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rextexttruncatorplugin&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rextexttruncatorplugin.min.js&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Get
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">texture</span><span class="p">.</span><span class="nx">getPixel</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">);</span>
-<span class="c1">// var color = texture.getPixel(x, y, color);</span>
+<li>Add text-truncator behavior
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">truncator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rextexttruncatorplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">textGameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Install rex plugins from npm
+    <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
+</code></pre></div></li>
+<li>Install plugin in <a href="../game/#configuration">configuration of game</a>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">TextTruncatorPlugin</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/plugins/texttruncator-plugin.js&#39;</span><span class="p">;</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="w">    </span><span class="nx">plugins</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">global</span><span class="o">:</span><span class="w"> </span><span class="p">[{</span>
+<span class="w">            </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;rexTextTruncator&#39;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">plugin</span><span class="o">:</span><span class="w"> </span><span class="nx">TextTruncatorPlugin</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">start</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="c1">// ...</span>
+<span class="w">        </span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">};</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">game</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Add text-truncator behavior
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">truncator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexTextTruncator&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">textGameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Install rex plugins from npm
+    <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
+</code></pre></div></li>
+<li>Import class
+    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">TextTruncator</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/plugins/texttruncator.js&#39;</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Add text-truncator behavior
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">truncator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">TextTruncator</span><span class="p">(</span><span class="nx">textGameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">truncator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexTextTruncator&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">textGameObject</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// enable: true,</span>
+<span class="w">    </span><span class="c1">// symbol: &#39;...&#39;,</span>
+<span class="w">    </span><span class="c1">// maxWidth: undefined,</span>
+<span class="w">    </span><span class="c1">// maxHeight: undefined,</span>
+<span class="w">    </span><span class="c1">// text: &#39;&#39;,              // content in string or array</span>
+<span class="p">});</span>
 </code></pre></div>
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">colors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">texture</span><span class="p">.</span><span class="nx">getPixels</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>colors</code> : <code>[{x, y, color, alpha}, ...]</code></li>
+<ul>
+<li><code>textObject</code> : <a href="../text/">Text object</a>, <a href="../bbcodetext/">bbcode text object</a>, <a href="../tagtext/">tag text object</a>, or <a href="../bitmaptext/">bitmap text object</a></li>
+<li><code>enable</code> :<ul>
+<li><code>true</code> : Truncate string with padding symbol. Default value.</li>
+<li><code>false</code> : Display all text.</li>
+</ul>
+</li>
+<li><code>symbol</code> : Padding symbol. Default value is <code>'...'</code></li>
+<li><code>maxWidth</code> : Maximum width of game object, for single-line mode.<ul>
+<li><code>undefined</code> : Use <code>fixedWidth</code> as maximum width.</li>
+</ul>
+</li>
+<li><code>maxHeight</code> : Maximum height of game object, for multiple-line mode.<ul>
+<li><code>undefined</code> : Use <code>fixedHeight</code> as maximum height.</li>
+</ul>
+</li>
+<li><code>text</code> : content in string or array, optional</li>
+</ul>
+<h3 id="truncation-modes">Truncation modes<a class="headerlink" href="#truncation-modes" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Single-line mode :<ul>
+<li><code>maxHeight</code> or <code>fixedHeight</code> are not given, or <code>0</code></li>
+<li>Have <code>maxWidth</code> or <code>fixedWidth</code></li>
+</ul>
+</li>
+<li>Multiple-line mode<ul>
+<li>Have <code>fixedWidth</code> or <code>wordWrap.width</code> (wrap-width)</li>
+<li>Have <code>maxHeight</code> or <code>fixedHeight</code></li>
 </ul>
 </li>
 </ul>
-<h3 id="image-data">Image data<a class="headerlink" href="#image-data" title="Permanent link">&para;</a></h3>
+<h3 id="set-content">Set content<a class="headerlink" href="#set-content" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Set
-    <div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">putData</span><span class="p">(</span><span class="nx">imageData</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Get
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">imageData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">texture</span><span class="p">.</span><span class="nx">getData</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">);</span>
+<li>Set content
+    <div class="highlight"><pre><span></span><code><span class="nx">truncator</span><span class="p">.</span><span class="nx">setText</span><span class="p">(</span><span class="nx">content</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>content</code> : String, number, or string array.</li>
+</ul>
+</li>
+<li>Append content
+    <div class="highlight"><pre><span></span><code><span class="nx">truncator</span><span class="p">.</span><span class="nx">appendText</span><span class="p">(</span><span class="nx">content</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>content</code> : String, number, or string array.</li>
+</ul>
+</li>
+</ul>
+<p>Will update displaying content.</p>
+<ul>
+<li>Get content back
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">truncator</span><span class="p">.</span><span class="nx">text</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
-<h3 id="add-frame">Add frame<a class="headerlink" href="#add-frame" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">sourceIndex</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">);</span>
+<h3 id="update-display-content">Update display content<a class="headerlink" href="#update-display-content" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">truncator</span><span class="p">.</span><span class="nx">updateText</span><span class="p">();</span>
 </code></pre></div>
+<h3 id="set-paddding-symbol">Set paddding symbol<a class="headerlink" href="#set-paddding-symbol" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">truncator</span><span class="p">.</span><span class="nx">setSymbol</span><span class="p">(</span><span class="nx">symbol</span><span class="p">).</span><span class="nx">updateText</span><span class="p">();</span>
+</code></pre></div>
+<h3 id="set-max-size">Set max size<a class="headerlink" href="#set-max-size" title="Permanent link">&para;</a></h3>
 <ul>
-<li><code>name</code> : The name of this Frame. The name is unique within the Texture.</li>
-<li><code>sourceIndex</code> : The index of the TextureSource that this Frame is a part of.</li>
-<li><code>x</code> : The x coordinate of the top-left of this Frame.</li>
-<li><code>y</code> : The y coordinate of the top-left of this Frame.</li>
-<li><code>width</code> : The width of this Frame.</li>
-<li><code>height</code> : The height of this Frame.</li>
+<li>Max width
+    <div class="highlight"><pre><span></span><code><span class="nx">truncator</span><span class="p">.</span><span class="nx">setMaxWidth</span><span class="p">(</span><span class="nx">width</span><span class="p">).</span><span class="nx">updateText</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Max height
+    <div class="highlight"><pre><span></span><code><span class="nx">truncator</span><span class="p">.</span><span class="nx">setMaxHeight</span><span class="p">(</span><span class="nx">height</span><span class="p">).</span><span class="nx">updateText</span><span class="p">();</span>
+</code></pre></div></li>
 </ul>
 
 

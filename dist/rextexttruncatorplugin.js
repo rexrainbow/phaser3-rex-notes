@@ -231,6 +231,23 @@
         return value;
     };
 
+    var SetTextMethods = {
+        setText(value) {
+            this._text = GetString(value);
+
+            this.updateText();
+
+            return this;
+        },
+
+        appendText(value) {
+            this.setText(this.text + GetString(value));
+
+            return this;
+        }
+
+    };
+
     var GetPlainText = function (textObject, text) {
         if (textObject.getPlainText) {
             text = textObject.getPlainText(text);
@@ -319,6 +336,11 @@
         updateText: UpdateText,
     };
 
+    Object.assign(
+        Methods,
+        SetTextMethods,
+    );
+
     const GetValue = Phaser.Utils.Objects.GetValue;
 
     class TextTruncator extends ComponentBase {
@@ -368,14 +390,6 @@
 
         get text() {
             return this._text;
-        }
-
-        setText(value) {
-            value = GetString(value);
-
-            this._text = value;
-
-            this.updateText();
         }
 
     }
