@@ -193,6 +193,7 @@
 183. [Text/Typing](texttyping.md): Typing text on text object.
 184. [Text/Page](textpage.md): Display text page by page on text object.
 185. [Text/Translation](texttranslation.md): Apply translated string ([i18next](https://www.i18next.com/)) to text object.
+185. [Text/Truncator](texttruncator.md): Constraints text game object size by truncating text with padding symbol on text object.
 186. [Text player](textplayer.md): Typing characters on dynamic text, waiting click or key enter, play sound effect or backgroun music.
 187. [Touch event stop](toucheventstop.md): Stop touch events propagation.
 188. [Touch state](touchstate.md): Store current touch input properties.

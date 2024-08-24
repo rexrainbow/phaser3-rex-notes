@@ -15,12 +15,12 @@ class Demo extends Phaser.Scene {
             backgroundColor: 'grey',
             padding: { left: 5, right: 5, top: 5, bootom: 5 }
         });
-        var textTruncator = this.plugins.get('rexTextTruncator').add(txt, {
+        var truncator = this.plugins.get('rexTextTruncator').add(txt, {
             maxWidth: 200,
             symbol: ' ...'
         })
 
-        textTruncator.setText('AAAABBBB, CCCCDDDD, EEEEFFFFF')
+        truncator.setText('AAAABBBB, CCCCDDDD, EEEEFFFFF')
     }
 
     update() { }

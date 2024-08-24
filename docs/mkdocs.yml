@@ -83,6 +83,7 @@ nav:
         - Behaviors:
             - Typing: texttyping.md    
             - Page: textpage.md
+            - Truncator: texttruncator.md
             - Edit: textedit.md
             - Hidden edit: hiddeninputtext.md
             - Translation: texttranslation.md

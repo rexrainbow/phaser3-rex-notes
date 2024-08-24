@@ -1,5 +1,4 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
-import GetString from '../../utils/text/GetString.js';
 import Methods from './method/Methods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -51,14 +50,6 @@ class TextTruncator extends ComponentBase {
 
     get text() {
         return this._text;
-    }
-
-    setText(value) {
-        value = GetString(value);
-
-        this._text = value;
-
-        this.updateText();
     }
 
 }

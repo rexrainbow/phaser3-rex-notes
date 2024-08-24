@@ -27,7 +27,8 @@ declare class TextTruncator {
     setMaxHeight(height?: number): this;
     maxHeight: number;
 
-    setText(text?: string): this;
+    setText(text?: string | string[] | number): this;
+    appendText(text?: string | string[] | number): this;
     text: string;
 
     updateText(): this;
