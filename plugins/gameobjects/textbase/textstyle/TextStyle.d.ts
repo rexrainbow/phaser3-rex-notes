@@ -64,6 +64,10 @@ interface TextStyle {
         width?: null | number,
     },
 
+    wordWrap?: {
+        width?: number,
+    },
+
     metrics?: boolean |
     {
         ascent: number,
