@@ -118,6 +118,12 @@ var truncator = scene.plugins.get('rexTextTruncator').add(textGameObject, {
 
 Will update displaying content.
 
+
+- Get content back
+    ```javascript
+    var text = truncator.text;
+    ```
+
 ### Update display content
 
 ```javascript
