@@ -130,6 +130,12 @@ Will update displaying content.
 truncator.updateText();
 ```
 
+### Set enable
+
+```javascript
+truncator.setEnable(enable).updateText();
+```
+
 ### Set paddding symbol
 
 ```javascript
@@ -139,10 +145,20 @@ truncator.setSymbol(symbol).updateText();
 ### Set max size
 
 - Max width
-    ```javascript
-    truncator.setMaxWidth(width).updateText();
-    ```
+    - Set
+        ```javascript
+        truncator.setMaxWidth(width).updateText();
+        ```
+    - Get
+        ```javascript
+        var width = truncator.maxWidth;
+        ```
 - Max height
-    ```javascript
-    truncator.setMaxHeight(height).updateText();
-    ```
+    - Set
+        ```javascript
+        truncator.setMaxHeight(height).updateText();
+        ```
+    - Get
+        ```javascript
+        var height = truncator.maxHeight;
+        ```
