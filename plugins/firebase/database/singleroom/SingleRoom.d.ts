@@ -24,7 +24,7 @@ declare namespace SingleRoom {
         eventEmitter?: EventEmitter | false,
     }
 
-    interface IUser {
+    interface IUserInfo {
         userID: string,
         userName: string
     }
@@ -43,7 +43,7 @@ declare class SingleRoom extends EventEmitter {
 
     userID: string;
     userName: string;
-    readonly userInfo: SingleRoom.IUser;
+    readonly userInfo: SingleRoom.IUserInfo;
 
     joinRoom(
     ): Promise<void>;

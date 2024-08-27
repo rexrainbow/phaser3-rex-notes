@@ -56,7 +56,7 @@ class Demo extends Phaser.Scene {
             })
 
         room
-            .on('userlist.update', function (users: SingleRoom.IUser[]) {
+            .on('userlist.update', function (users: SingleRoom.IUserInfo[]) {
                 mainPanel.setUserList(users);
             })
             .on('broadcast.receive', function (message: Broadcast.IReceiveData) {
@@ -132,7 +132,7 @@ class MainPanel extends Sizer {
 
     }
 
-    setUserList(users: SingleRoom.IUser[]) {
+    setUserList(users: SingleRoom.IUserInfo[]) {
         const s = []
         users.forEach(function (user) {
             s.push(user.userName)
