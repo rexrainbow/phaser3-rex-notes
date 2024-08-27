@@ -26,7 +26,7 @@ declare class Factories {
     messages: typeof MessagesFactory;
 }
 
-declare class FirebasePlugin extends Phaser.Plugins.BasePlugin {
+declare class FirebasePlugin {
     add: Factories;
 
     initializeApp(config: Preload.IFirebaseConfig): this;
