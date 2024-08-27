@@ -1,6 +1,6 @@
-import EventEmitter from "../../../utils/eventemitter/EventEmitter";
-import Broadcast from "../broadcast/Broadcast";
-import ItemTable from "../itemtable/ItemTable";
+import EventEmitter from '../../../utils/eventemitter/EventEmitter';
+import Broadcast from '../broadcast/Broadcast';
+import ItemTable from '../itemtable/ItemTable';
 
 export default SingleRoom;
 
@@ -23,6 +23,11 @@ declare namespace SingleRoom {
 
         eventEmitter?: EventEmitter | false,
     }
+
+    interface IUser {
+        userID: string,
+        userName: string
+    }
 }
 
 declare class SingleRoom extends EventEmitter {
@@ -38,7 +43,7 @@ declare class SingleRoom extends EventEmitter {
 
     userID: string;
     userName: string;
-    readonly userInfo: { userID?: string, userName?: string };
+    readonly userInfo: SingleRoom.IUser;
 
     joinRoom(
     ): Promise<void>;
