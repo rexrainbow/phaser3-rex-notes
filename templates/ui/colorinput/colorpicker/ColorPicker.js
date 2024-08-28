@@ -155,6 +155,7 @@ class ColorPicker extends Sizer {
     postLayout(parent, newWidth, newHeight) {
         this.childrenMap.hPalette.setMarkerPosition(this.value);
         this.childrenMap.svPalette.setMarkerPosition(this.value);
+        super.postLayout(parent, newWidth, newHeight);
         return this;
     }
 

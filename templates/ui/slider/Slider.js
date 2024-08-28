@@ -171,6 +171,7 @@ class Slider extends ProgressBase(Sizer) {
     postLayout(parent, newWidth, newHeight) {
         this.updateThumb();
         this.updateIndicator();
+        super.postLayout(parent, newWidth, newHeight);
         return this;
     }
 }

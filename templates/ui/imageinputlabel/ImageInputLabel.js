@@ -44,11 +44,12 @@ class ImageInputLabel extends Label {
 
     }
 
-    postLayout() {
+    postLayout(parent, newWidth, newHeight) {
         if (this.fileChooser) {
             this.fileChooser.syncTo(this.clickTarget);
             this.resetChildState(this.fileChooser);
         }
+        super.postLayout(parent, newWidth, newHeight);
     }
 
 }

@@ -151,6 +151,7 @@ class LabelBase extends Sizer {
             actionMask.setPosition();
             this.resetChildPositionState(actionMask);
         }
+        super.postLayout(parent, newWidth, newHeight);
         return this;
     }
 

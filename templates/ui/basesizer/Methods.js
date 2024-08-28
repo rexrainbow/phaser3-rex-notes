@@ -26,14 +26,12 @@ import GetChildrenHeight from './GetChildrenHeight.js';
 import GetAllChildrenSizers from './GetAllChildrenSizers.js';
 import GetChildrenSizers from './GetChildrenSizers.js';
 import GetShownChildrenMethods from './GetShownChildrenMethods.js';
+import RestoreScaleMethods from './RestoreScaleMethods.js';
 import PreLayout from './PreLayout.js';
 import Layout from './Layout.js';
 import RunLayout from './RunLayout.js';
 import LayoutChildren from './LayoutChildren.js';
-import _PostLayout from './_PostLayout.js';
 import PostLayout from './PostLayout.js';
-
-
 
 import SetAnchor from './SetAnchor.js';
 import ScaleMethods from './ScaleMethods.js';
@@ -90,7 +88,6 @@ var methods = {
 
     layoutBackgrounds: LayoutBackgrounds,
     postLayout: PostLayout,
-    _postLayout: _PostLayout,
 
     setAnchor: SetAnchor,
     isInTouching: IsInTouching,
@@ -120,6 +117,7 @@ Object.assign(
     HideMethods,
     ModalMethods,
     GetShownChildrenMethods,
+    RestoreScaleMethods,
 );
 
 export default methods;

@@ -125,6 +125,8 @@ class Scrollable extends Sizer {
             this.setS(s);
         }
 
+        super.postLayout(parent, newWidth, newHeight);
+
         return this;
     }
 

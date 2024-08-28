@@ -8,6 +8,7 @@ var RunLayout = function (parent, newWidth, newHeight) {
     var isTopmostParent = !parent;
     // Pre-processor, top parent only
     if (isTopmostParent) {
+        this.saveScale();
         this.preLayout();
     }
 
@@ -51,11 +52,15 @@ var RunLayout = function (parent, newWidth, newHeight) {
     }
 
     // Custom postLayout callback
-    this.postLayout();
+    this.postLayout(parent, width, height);
 
     // Post-processor, top parent only
     if (isTopmostParent) {
-        this._postLayout();
+        this.restoreScale();
+
+        if (this._anchor) {
+            this._anchor.updatePosition();
+        }
     }
 
     return this;
