@@ -5374,6 +5374,15 @@
         }
     };
 
+    var GetScaleRoot = function (gameObject) {
+        var parent = gameObject;
+        while (parent && (parent !== parent._saveScaleRoot)) {
+            parent = parent.getParentSizer();
+        }
+
+        return parent;
+    };
+
     var RestoreScaleMethods = {
         saveScale(newScale) {
             if (newScale === undefined) {
@@ -5406,11 +5415,7 @@
         },
 
         getSaveScaleX() {
-            var parent = this;
-            while (parent !== parent._saveScaleRoot) {
-                parent = parent.getParentSizer();
-            }
-
+            var parent = GetScaleRoot(this);
             if (parent) {
                 return parent._scaleXSave;
             } else {
@@ -5419,11 +5424,7 @@
         },
 
         getSaveScaleY() {
-            var parent = this;
-            while (parent !== parent._saveScaleRoot) {
-                parent = parent.getParentSizer();
-            }
-
+            var parent = GetScaleRoot(this);
             if (parent) {
                 return parent._scaleYSave;
             } else {
