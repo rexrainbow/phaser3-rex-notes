@@ -17,9 +17,9 @@ Broadcast real-time messages, using [firebase-database](https://firebase.google.
     <body>
         <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
         <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
-        <script src="/__/firebase/7.7.0/firebase-app.js"></script>
+        <script src="/__/firebase/10.13/firebase-app-compat.js"></script>
         <!-- Add Firebase products that you want to use -->
-        <script src="/__/firebase/7.7.0/firebase-database.js"></script>
+        <script src="/__/firebase/10.13/firebase-database-compat.js"></script>
     </body>    
     ```
 - Load plugin (minify file) in preload stage
@@ -53,9 +53,9 @@ Broadcast real-time messages, using [firebase-database](https://firebase.google.
     <body>
         <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
         <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
-        <script src="/__/firebase/7.7.0/firebase-app.js"></script>
+        <script src="/__/firebase/10.13/firebase-app-compat.js"></script>
         <!-- Add Firebase products that you want to use -->
-        <script src="/__/firebase/7.7.0/firebase-database.js"></script>
+        <script src="/__/firebase/10.13/firebase-database-compat.js"></script>
     </body>    
     ```
 - Install plugin in [configuration of game](game.md#configuration)
@@ -101,9 +101,9 @@ Broadcast real-time messages, using [firebase-database](https://firebase.google.
     <body>
         <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
         <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
-        <script src="/__/firebase/7.7.0/firebase-app.js"></script>
+        <script src="/__/firebase/10.13/firebase-app-compat.js"></script>
         <!-- Add Firebase products that you want to use -->
-        <script src="/__/firebase/7.7.0/firebase-database.js"></script>
+        <script src="/__/firebase/10.13/firebase-database-compat.js"></script>
     </body>    
     ```
 - Initialize firebase application.

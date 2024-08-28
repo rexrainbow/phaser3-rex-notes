@@ -4,25 +4,25 @@
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexfirebase = factory());
 })(this, (function () { 'use strict';
 
-    const VERSION = '7.19.0';
+    const VERSION = '10.13';
 
     var GetDefaultUrl = function (version) {
         if (version === undefined) {
             version = VERSION;
         }
         return {
-            app: `https://www.gstatic.com/firebasejs/${version}/firebase-app.js`,
+            app: `https://www.gstatic.com/firebasejs/${version}/firebase-app-compat.js`,
 
-            // auth: `https://www.gstatic.com/firebasejs/${version}/firebase-auth.js`,
-            database: `https://www.gstatic.com/firebasejs/${version}/firebase-database.js`,
-            firestore: `https://www.gstatic.com/firebasejs/${version}/firebase-firestore.js`,
-            // storage: `https://www.gstatic.com/firebasejs/${version}/firebase-storage.js`,
+            // auth: `https://www.gstatic.com/firebasejs/${version}/firebase-auth-compat.js`,
+            database: `https://www.gstatic.com/firebasejs/${version}/firebase-database-compat.js`,
+            firestore: `https://www.gstatic.com/firebasejs/${version}/firebase-firestore-compat.js`,
+            // storage: `https://www.gstatic.com/firebasejs/${version}/firebase-storage-compat.js`,
 
-            // analytics: `https://www.gstatic.com/firebasejs/${version}/firebase-analytics.js`,
-            // functions: `https://www.gstatic.com/firebasejs${version}/firebase-functions.js`,
-            // messaging: `https://www.gstatic.com/firebasejs/${version}/firebase-messaging.js`,
-            // performance: `https://www.gstatic.com/firebasejs/${version}/firebase-performance.js`,
-            // 'remote-config': `https://www.gstatic.com/firebasejs/${version}/firebase-remote-config.js`
+            // analytics: `https://www.gstatic.com/firebasejs/${version}/firebase-analytics-compat.js`,
+            // functions: `https://www.gstatic.com/firebasejs${version}/firebase-functions-compat.js`,
+            // messaging: `https://www.gstatic.com/firebasejs/${version}/firebase-messaging-compat.js`,
+            // performance: `https://www.gstatic.com/firebasejs/${version}/firebase-performance-compat.js`,
+            // 'remote-config': `https://www.gstatic.com/firebasejs/${version}/firebase-remote-config-compat.js`
         }
     };
 
