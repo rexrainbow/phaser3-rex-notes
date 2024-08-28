@@ -5374,6 +5374,64 @@
         }
     };
 
+    var RestoreScaleMethods = {
+        saveScale(newScale) {
+            if (newScale === undefined) {
+                newScale = 1;
+            }
+
+            this._scaleXSave = this.scaleX;
+            this._scaleYSave = this.scaleY;
+            this._saveScaleRoot = this;
+
+            var scale1 = (this._scaleXSave === 1) && (this._scaleYSave === 1);
+            if (!scale1) {
+                this.setScale(newScale);
+            }
+
+            return this;
+        },
+
+        restoreScale() {
+            var scale1 = (this._scaleXSave === 1) && (this._scaleYSave === 1);
+            if (!scale1) {
+                this.setScale(this._scaleXSave, this._scaleYSave);
+            }
+
+            this._scaleXSave = 1;
+            this._scaleYSave = 1;
+            this._saveScaleRoot = undefined;
+
+            return this;
+        },
+
+        getSaveScaleX() {
+            var parent = this;
+            while (parent !== parent._saveScaleRoot) {
+                parent = parent.getParentSizer();
+            }
+
+            if (parent) {
+                return parent._scaleXSave;
+            } else {
+                return 1;
+            }
+        },
+
+        getSaveScaleY() {
+            var parent = this;
+            while (parent !== parent._saveScaleRoot) {
+                parent = parent.getParentSizer();
+            }
+
+            if (parent) {
+                return parent._scaleYSave;
+            } else {
+                return 1;
+            }
+        },
+    };
+
     var PreLayout$1 = function () {
         this._childrenWidth = undefined;
         this._childrenHeight = undefined;
@@ -5390,26 +5448,7 @@
     };
 
     var Layout = function () {
-        // Skip hidden or !dirty sizer
-        if (this.ignoreLayout) {
-            return this;
-        }
-
-        // Save scale
-        var scaleXSave = this.scaleX;
-        var scaleYSave = this.scaleY;
-        var scale1 = (scaleXSave === 1) && (scaleYSave === 1);
-        if (!scale1) {
-            this.setScale(1);
-        }
-
-        // Run layout with scale = 1
         this.runLayout();
-
-        // Restore scale
-        if (!scale1) {
-            this.setScale(scaleXSave, scaleYSave);
-        }
         return this;
     };
 
@@ -5423,6 +5462,7 @@
         var isTopmostParent = !parent;
         // Pre-processor, top parent only
         if (isTopmostParent) {
+            this.saveScale();
             this.preLayout();
         }
 
@@ -5466,11 +5506,15 @@
         }
 
         // Custom postLayout callback
-        this.postLayout();
+        this.postLayout(parent, width, height);
 
         // Post-processor, top parent only
         if (isTopmostParent) {
-            this._postLayout();
+            this.restoreScale();
+
+            if (this._anchor) {
+                this._anchor.updatePosition();
+            }
         }
 
         return this;
@@ -5528,13 +5572,6 @@
     // Override
     var LayoutChildren$1 = function () {
 
-    };
-
-    var _PostLayout = function (parent, newWidth, newHeight) {
-        if (this._anchor) {
-            this._anchor.updatePosition();
-        }
-        return this;
     };
 
     // Override
@@ -12791,7 +12828,6 @@
 
         layoutBackgrounds: LayoutBackgrounds,
         postLayout: PostLayout,
-        _postLayout: _PostLayout,
 
         setAnchor: SetAnchor,
         isInTouching: IsInTouching,
@@ -12821,6 +12857,7 @@
         HideMethods,
         ModalMethods,
         GetShownChildrenMethods,
+        RestoreScaleMethods,
     );
 
     const GetValue$f = Phaser.Utils.Objects.GetValue;
@@ -14373,6 +14410,7 @@
                 actionMask.setPosition();
                 this.resetChildPositionState(actionMask);
             }
+            super.postLayout(parent, newWidth, newHeight);
             return this;
         }
 

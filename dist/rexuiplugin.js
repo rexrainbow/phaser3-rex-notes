@@ -34382,6 +34382,64 @@
         }
     };
 
+    var RestoreScaleMethods = {
+        saveScale(newScale) {
+            if (newScale === undefined) {
+                newScale = 1;
+            }
+
+            this._scaleXSave = this.scaleX;
+            this._scaleYSave = this.scaleY;
+            this._saveScaleRoot = this;
+
+            var scale1 = (this._scaleXSave === 1) && (this._scaleYSave === 1);
+            if (!scale1) {
+                this.setScale(newScale);
+            }
+
+            return this;
+        },
+
+        restoreScale() {
+            var scale1 = (this._scaleXSave === 1) && (this._scaleYSave === 1);
+            if (!scale1) {
+                this.setScale(this._scaleXSave, this._scaleYSave);
+            }
+
+            this._scaleXSave = 1;
+            this._scaleYSave = 1;
+            this._saveScaleRoot = undefined;
+
+            return this;
+        },
+
+        getSaveScaleX() {
+            var parent = this;
+            while (parent !== parent._saveScaleRoot) {
+                parent = parent.getParentSizer();
+            }
+
+            if (parent) {
+                return parent._scaleXSave;
+            } else {
+                return 1;
+            }
+        },
+
+        getSaveScaleY() {
+            var parent = this;
+            while (parent !== parent._saveScaleRoot) {
+                parent = parent.getParentSizer();
+            }
+
+            if (parent) {
+                return parent._scaleYSave;
+            } else {
+                return 1;
+            }
+        },
+    };
+
     var PreLayout$4 = function () {
         this._childrenWidth = undefined;
         this._childrenHeight = undefined;
@@ -34398,26 +34456,7 @@
     };
 
     var Layout = function () {
-        // Skip hidden or !dirty sizer
-        if (this.ignoreLayout) {
-            return this;
-        }
-
-        // Save scale
-        var scaleXSave = this.scaleX;
-        var scaleYSave = this.scaleY;
-        var scale1 = (scaleXSave === 1) && (scaleYSave === 1);
-        if (!scale1) {
-            this.setScale(1);
-        }
-
-        // Run layout with scale = 1
         this.runLayout();
-
-        // Restore scale
-        if (!scale1) {
-            this.setScale(scaleXSave, scaleYSave);
-        }
         return this;
     };
 
@@ -34431,6 +34470,7 @@
         var isTopmostParent = !parent;
         // Pre-processor, top parent only
         if (isTopmostParent) {
+            this.saveScale();
             this.preLayout();
         }
 
@@ -34474,11 +34514,15 @@
         }
 
         // Custom postLayout callback
-        this.postLayout();
+        this.postLayout(parent, width, height);
 
         // Post-processor, top parent only
         if (isTopmostParent) {
-            this._postLayout();
+            this.restoreScale();
+
+            if (this._anchor) {
+                this._anchor.updatePosition();
+            }
         }
 
         return this;
@@ -34536,13 +34580,6 @@
     // Override
     var LayoutChildren$6 = function () {
 
-    };
-
-    var _PostLayout = function (parent, newWidth, newHeight) {
-        if (this._anchor) {
-            this._anchor.updatePosition();
-        }
-        return this;
     };
 
     // Override
@@ -40558,7 +40595,6 @@
 
         layoutBackgrounds: LayoutBackgrounds,
         postLayout: PostLayout,
-        _postLayout: _PostLayout,
 
         setAnchor: SetAnchor,
         isInTouching: IsInTouching,
@@ -40588,6 +40624,7 @@
         HideMethods,
         ModalMethods$1,
         GetShownChildrenMethods,
+        RestoreScaleMethods,
     );
 
     const GetValue$2o = Phaser.Utils.Objects.GetValue;
@@ -47747,6 +47784,7 @@ void main () {
                 actionMask.setPosition();
                 this.resetChildPositionState(actionMask);
             }
+            super.postLayout(parent, newWidth, newHeight);
             return this;
         }
 
@@ -48529,11 +48567,12 @@ void main () {
 
         }
 
-        postLayout() {
+        postLayout(parent, newWidth, newHeight) {
             if (this.fileChooser) {
                 this.fileChooser.syncTo(this.clickTarget);
                 this.resetChildState(this.fileChooser);
             }
+            super.postLayout(parent, newWidth, newHeight);
         }
 
     }
@@ -51785,6 +51824,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         postLayout(parent, newWidth, newHeight) {
             this.updateThumb();
             this.updateIndicator();
+            super.postLayout(parent, newWidth, newHeight);
             return this;
         }
     }
@@ -53313,6 +53353,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
 
     var SetControllerBounds = function (axis) {
+        // Scale will force to 1
         var bound0, bound1;
         var scroller, slider;
         switch (this.scrollMode) {
@@ -53322,6 +53363,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 bound1 = this.bottomChildOY;
                 scroller = this.childrenMap.scroller;
                 slider = this.childrenMap.slider;
+                axis = (this.scrollMode === 0) ? 'Y' : 'X';
                 break;
 
             default:  // 2
@@ -53338,7 +53380,9 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
 
         if (scroller) {
-            scroller.setBounds(bound0, bound1);
+            // Scale will force to 1 during layout, get saved scale value back
+            var scale = (axis === 'Y') ? this.getSaveScaleY() : this.getSaveScaleX();
+            scroller.setBounds(bound0, bound1 * scale);
         }
         if (slider) {
             slider.setEnable(bound0 !== bound1);
@@ -53611,6 +53655,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             if (this.scrollMode === 2) {
                 this.setS(s);
             }
+
+            super.postLayout(parent, newWidth, newHeight);
 
             return this;
         }
@@ -55978,6 +56024,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 actionMask.setPosition();
                 this.resetChildPositionState(actionMask);
             }
+            super.postLayout(parent, newWidth, newHeight);
             return this;
         }
 
@@ -63367,17 +63414,17 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
         get instHeight() {
             if ((this.scrollMode === 0) || (this.scrollMode === 2)) {
-                return this.height;
+                return this.displayHeight;
             } else { // scrollMode === 1
-                return this.width;
+                return this.displayWidth;
             }
         }
 
         get instWidth() {
             if ((this.scrollMode === 0) || (this.scrollMode === 2)) {
-                return this.width;
+                return this.displayWidth;
             } else { // scrollMode === 1
-                return this.height;
+                return this.displayHeight;
             }
         }
 
@@ -70518,6 +70565,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         postLayout(parent, newWidth, newHeight) {
             this.childrenMap.hPalette.setMarkerPosition(this.value);
             this.childrenMap.svPalette.setMarkerPosition(this.value);
+            super.postLayout(parent, newWidth, newHeight);
             return this;
         }
 
