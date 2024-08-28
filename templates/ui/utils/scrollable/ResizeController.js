@@ -33,6 +33,7 @@ var ResizeController = function () {
 
 
 var SetControllerBounds = function (axis) {
+    // Scale will force to 1
     var bound0, bound1;
     var scroller, slider;
     switch (this.scrollMode) {
@@ -42,6 +43,7 @@ var SetControllerBounds = function (axis) {
             bound1 = this.bottomChildOY;
             scroller = this.childrenMap.scroller;
             slider = this.childrenMap.slider;
+            axis = (this.scrollMode === 0) ? 'Y' : 'X';
             break;
 
         default:  // 2
@@ -58,7 +60,9 @@ var SetControllerBounds = function (axis) {
     }
 
     if (scroller) {
-        scroller.setBounds(bound0, bound1);
+        // Scale will force to 1 during layout, get saved scale value back
+        var scale = (axis === 'Y') ? this.getSaveScaleY() : this.getSaveScaleX();
+        scroller.setBounds(bound0, bound1 * scale);
     }
     if (slider) {
         slider.setEnable(bound0 !== bound1);

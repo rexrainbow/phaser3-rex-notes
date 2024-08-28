@@ -94,17 +94,17 @@ class ScrollableBlock extends BaseSizer {
 
     get instHeight() {
         if ((this.scrollMode === 0) || (this.scrollMode === 2)) {
-            return this.height;
+            return this.displayHeight;
         } else { // scrollMode === 1
-            return this.width;
+            return this.displayWidth;
         }
     }
 
     get instWidth() {
         if ((this.scrollMode === 0) || (this.scrollMode === 2)) {
-            return this.width;
+            return this.displayWidth;
         } else { // scrollMode === 1
-            return this.height;
+            return this.displayHeight;
         }
     }
 

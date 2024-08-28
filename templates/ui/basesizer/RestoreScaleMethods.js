@@ -6,6 +6,8 @@ export default {
 
         this._scaleXSave = this.scaleX;
         this._scaleYSave = this.scaleY;
+        this._saveScaleRoot = this;
+
         var scale1 = (this._scaleXSave === 1) && (this._scaleYSave === 1);
         if (!scale1) {
             this.setScale(newScale);
@@ -20,6 +22,36 @@ export default {
             this.setScale(this._scaleXSave, this._scaleYSave);
         }
 
+        this._scaleXSave = 1;
+        this._scaleYSave = 1;
+        this._saveScaleRoot = undefined;
+
         return this;
-    }
+    },
+
+    getSaveScaleX() {
+        var parent = this;
+        while (parent !== parent._saveScaleRoot) {
+            parent = parent.getParentSizer();
+        }
+
+        if (parent) {
+            return parent._scaleXSave;
+        } else {
+            return 1;
+        }
+    },
+
+    getSaveScaleY() {
+        var parent = this;
+        while (parent !== parent._saveScaleRoot) {
+            parent = parent.getParentSizer();
+        }
+
+        if (parent) {
+            return parent._scaleYSave;
+        } else {
+            return 1;
+        }
+    },
 }

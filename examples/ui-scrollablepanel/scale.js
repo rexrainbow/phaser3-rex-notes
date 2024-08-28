@@ -50,11 +50,13 @@ class Demo extends Phaser.Scene {
             .layout()
 
 
-        this.input.once('pointerup', function () {
-            scrollablePanel
-                .setScale(0.75)
-                .layout();
-        })
+        this.add.text(0, 580, 'scale')
+            .setInteractive()
+            .once('pointerdown', function () {
+                scrollablePanel
+                    .setScale(0.75)
+                    .layout();
+            })
 
     }
 
