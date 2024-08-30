@@ -24278,7 +24278,11 @@
         if (y === undefined) {
             cellIndex = x;
         } else {
-            cellIndex = table.pointToCellIndex(x, y);
+            var camera = pointer.camera;
+            var px = pointer.worldX + camera.scrollX * (table.scrollFactorX - 1);
+            var py = pointer.worldY + camera.scrollY * (table.scrollFactorY - 1);
+            cellIndex = table.pointToCellIndex(px, py);
+
         }
         if ((cellIndex === null) || (cellIndex === undefined)) {
             return;
@@ -24308,7 +24312,11 @@
 
     var OnMove = function (pointer, localX, localY, event) {
         var table = this.childrenMap.child;
-        var cellIndex = table.pointToCellIndex(pointer.worldX, pointer.worldY);
+        var camera = pointer.camera;
+        var px = pointer.worldX + camera.scrollX * (table.scrollFactorX - 1);
+        var py = pointer.worldY + camera.scrollY * (table.scrollFactorY - 1);
+
+        var cellIndex = table.pointToCellIndex(px, py);
         if (cellIndex === table.input.lastOverCellIndex) {
             return;
         }

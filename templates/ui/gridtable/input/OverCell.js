@@ -8,11 +8,11 @@ var OverCell = function (table, tableConfig) {
 }
 
 var OnMove = function (pointer, localX, localY, event) {
-    var camera = pointer.camera;
-    var px = pointer.worldX + camera.scrollX * (this.scrollFactorX - 1);
-    var py = pointer.worldY + camera.scrollY * (this.scrollFactorY - 1);
-
     var table = this.childrenMap.child;
+    var camera = pointer.camera;
+    var px = pointer.worldX + camera.scrollX * (table.scrollFactorX - 1);
+    var py = pointer.worldY + camera.scrollY * (table.scrollFactorY - 1);
+
     var cellIndex = table.pointToCellIndex(px, py);
     if (cellIndex === table.input.lastOverCellIndex) {
         return;

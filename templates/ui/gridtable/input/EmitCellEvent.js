@@ -4,8 +4,8 @@ var EmitCellEvent = function (eventEmitter, eventName, table, x, y, pointer, eve
         cellIndex = x;
     } else {
         var camera = pointer.camera;
-        var px = x + camera.scrollX * (table.scrollFactorX - 1);
-        var py = y + camera.scrollY * (table.scrollFactorY - 1);
+        var px = pointer.worldX + camera.scrollX * (table.scrollFactorX - 1);
+        var py = pointer.worldY + camera.scrollY * (table.scrollFactorY - 1);
         cellIndex = table.pointToCellIndex(px, py);
 
     }

@@ -646,14 +646,8 @@
             // Vector of world position
             var camera = pointer.camera;
             var gameObject = this.gameObject;
-            var startX = gameObject.x;
-            var startY = gameObject.y;
-            if (gameObject.scrollFactorX === 0) {
-                startX += camera.scrollX;
-            }
-            if (gameObject.scrollFactorY === 0) {
-                startY += camera.scrollY;
-            }
+            var startX = gameObject.x - (camera.scrollX * (gameObject.scrollFactorX - 1));
+            var startY = gameObject.y - (camera.scrollY * (gameObject.scrollFactorY - 1));
 
             this.setVector(startX, startY, worldXY.x, worldXY.y);
 
