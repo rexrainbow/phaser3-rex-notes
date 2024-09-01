@@ -1,11 +1,11 @@
-var EmitCellEvent = function (eventEmitter, eventName, table, x, y, pointer, event) {
+var EmitCellEvent = function (eventEmitter, eventName, table, worldX, worldY, pointer, event) {
     var cellIndex;
-    if (y === undefined) {
-        cellIndex = x;
+    if (worldY === undefined) {
+        cellIndex = worldX;
     } else {
         var camera = pointer.camera;
-        var px = pointer.worldX + camera.scrollX * (table.scrollFactorX - 1);
-        var py = pointer.worldY + camera.scrollY * (table.scrollFactorY - 1);
+        var px = worldX + camera.scrollX * (table.scrollFactorX - 1);
+        var py = worldY + camera.scrollY * (table.scrollFactorY - 1);
         cellIndex = table.pointToCellIndex(px, py);
 
     }

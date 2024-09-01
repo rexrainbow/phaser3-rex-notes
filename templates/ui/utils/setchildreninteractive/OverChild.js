@@ -19,7 +19,15 @@ var OverChild = function (config) {
 
 var OnMove = function (pointer, localX, localY, event) {
     var childrenInteractive = this._childrenInteractive;
-    var child = PointToChild(childrenInteractive.targetSizers, pointer.worldX, pointer.worldY);
+    var firstChild = childrenInteractive.targetSizers[0];
+    if (!firstChild) {
+        return;
+    }
+    var camera = pointer.camera;
+    var px = pointer.worldX + camera.scrollX * (firstChild.scrollFactorX - 1);
+    var py = pointer.worldY + camera.scrollY * (firstChild.scrollFactorY - 1);
+
+    var child = PointToChild(childrenInteractive.targetSizers, px, py);
     var preChild = childrenInteractive.lastOverChild;
     if (child && preChild &&
         (child === preChild)) {
