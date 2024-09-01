@@ -11131,17 +11131,25 @@
         return null;
     };
 
-    var EmitChildEvent = function (eventEmitter, eventName, targets, targetMode, x, y, pointer, event) {
+    var EmitChildEvent = function (eventEmitter, eventName, targets, targetMode, worldX, worldY, pointer, event) {
         var child;
-        if (y === undefined) {
-            child = x;
+        if (worldY === undefined) {
+            child = worldX;
         } else {
+            var firstChild = targets[0];
+            if (!firstChild) {
+                return;
+            }
+            var camera = pointer.camera;
+            var px = worldX + camera.scrollX * (firstChild.scrollFactorX - 1);
+            var py = worldY + camera.scrollY * (firstChild.scrollFactorY - 1);
+
             if (targetMode === 'parent') {
-                child = PointToChild(targets, x, y);
+                child = PointToChild(targets, px, py);
             } else {
                 for (var i = 0, cnt = targets.length; i < cnt; i++) {
                     var target = targets[i];
-                    if (ContainsPoint(target, x, y)) {
+                    if (ContainsPoint(target, px, py)) {
                         child = target;
                         break;
                     }
@@ -11228,7 +11236,15 @@
 
     var OnMove = function (pointer, localX, localY, event) {
         var childrenInteractive = this._childrenInteractive;
-        var child = PointToChild(childrenInteractive.targetSizers, pointer.worldX, pointer.worldY);
+        var firstChild = childrenInteractive.targetSizers[0];
+        if (!firstChild) {
+            return;
+        }
+        var camera = pointer.camera;
+        var px = pointer.worldX + camera.scrollX * (firstChild.scrollFactorX - 1);
+        var py = pointer.worldY + camera.scrollY * (firstChild.scrollFactorY - 1);
+
+        var child = PointToChild(childrenInteractive.targetSizers, px, py);
         var preChild = childrenInteractive.lastOverChild;
         if (child && preChild &&
             (child === preChild)) {
