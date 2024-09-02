@@ -16,6 +16,7 @@ A container with a [grid table](gridtable.md), slider, and scroller.
 - Sizer cell: 
     - [Demo 1](https://codepen.io/rexrainbow/pen/pooZWme)
     - [Demo 2](https://codepen.io/rexrainbow/pen/abOgyPo)
+- [Click child of cell](https://codepen.io/rexrainbow/pen/abgROwW)
 - [Two sliders](https://codepen.io/rexrainbow/pen/KKrrYRm)
 - [Separator](https://codepen.io/rexrainbow/pen/YzRrOOP)
 - [Modal](https://codepen.io/rexrainbow/pen/zYarzzO)
@@ -728,18 +729,46 @@ See [base sizer object](ui-basesizer.md), [container-lite](containerlite.md).
         // ...
     })
     ```
-- Scroller drag start
-    ```javascript
-    table.getElement('scroller').on('dragstart', function(panel) {
-        // ...
-    })
-    ```
-- Scroller drag end
-    ```javascript
-    table.getElement('scroller').on('dragend', function(panel) {
-        // ...
-    })
-    ```
+- Slider 
+    - Slider drag start
+        ```javascript
+        table.getElement('slider').on('inputstart', function(panel) {
+            // ...
+        })
+        ```
+    - Slider drag end
+        ```javascript
+        table.getElement('slider').on('inputend', function(panel) {
+            // ...
+        })
+        ```
+- Scroller
+    - Scroller drag start
+        ```javascript
+        table.getElement('scroller').on('dragstart', function(panel) {
+            // ...
+        })
+        ```
+    - Scroller drag end
+        ```javascript
+        table.getElement('scroller').on('dragend', function(panel) {
+            // ...
+        })
+        ```
+
+#### Interactive with child of cell
+
+```javascript
+table.on('cell.click', function(cellContainer, cellIndex, pointer, event) {
+    var child;
+    // child = cellContainer.getElement(...);
+    if (cellContainer.isPointerInBounds(child)) {
+        // Pointer on this child
+    }
+}, scope);
+```
+
+[Reference of `isPointerInBounds` method](ui-basesizer.md#is-pointer-in-bounds)
 
 ### Get element
 

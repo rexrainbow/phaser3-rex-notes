@@ -484,18 +484,32 @@ See also - [dirty](ui-basesizer.md#dirty)
         // ...
     })
     ```
-- Scroller drag start
-    ```javascript
-    textArea.getElement('scroller').on('dragstart', function(panel) {
-        // ...
-    })
-    ```
-- Scroller drag end
-    ```javascript
-    textArea.getElement('scroller').on('dragend', function(panel) {
-        // ...
-    })
-    ```
+- Slider 
+    - Slider drag start
+        ```javascript
+        textArea.getElement('slider').on('inputstart', function(panel) {
+            // ...
+        })
+        ```
+    - Slider drag end
+        ```javascript
+        textArea.getElement('slider').on('inputend', function(panel) {
+            // ...
+        })
+        ```
+- Scroller
+    - Scroller drag start
+        ```javascript
+        textArea.getElement('scroller').on('dragstart', function(panel) {
+            // ...
+        })
+        ```
+    - Scroller drag end
+        ```javascript
+        textArea.getElement('scroller').on('dragend', function(panel) {
+            // ...
+        })
+        ```
 
 ### Lines count
 

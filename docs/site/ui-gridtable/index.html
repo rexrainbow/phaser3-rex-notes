@@ -8318,6 +8318,19 @@
     Events
   </a>
   
+    <nav class="md-nav" aria-label="Events">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#interactive-with-child-of-cell" class="md-nav__link">
+    Interactive with child of cell
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -10056,6 +10069,19 @@
     Events
   </a>
   
+    <nav class="md-nav" aria-label="Events">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#interactive-with-child-of-cell" class="md-nav__link">
+    Interactive with child of cell
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -10111,6 +10137,7 @@
 <li><a href="https://codepen.io/rexrainbow/pen/abOgyPo">Demo 2</a></li>
 </ul>
 </li>
+<li><a href="https://codepen.io/rexrainbow/pen/abgROwW">Click child of cell</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/KKrrYRm">Two sliders</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/YzRrOOP">Separator</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/zYarzzO">Modal</a></li>
@@ -10871,6 +10898,20 @@
 <span class="w">    </span><span class="c1">// ...</span>
 <span class="p">})</span>
 </code></pre></div></li>
+<li>Slider <ul>
+<li>Slider drag start
+    <div class="highlight"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;slider&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;inputstart&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">panel</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">})</span>
+</code></pre></div></li>
+<li>Slider drag end
+    <div class="highlight"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;slider&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;inputend&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">panel</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">})</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Scroller<ul>
 <li>Scroller drag start
     <div class="highlight"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;scroller&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;dragstart&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">panel</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// ...</span>
@@ -10882,6 +10923,18 @@
 <span class="p">})</span>
 </code></pre></div></li>
 </ul>
+</li>
+</ul>
+<h4 id="interactive-with-child-of-cell">Interactive with child of cell<a class="headerlink" href="#interactive-with-child-of-cell" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cell.click&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">,</span><span class="w"> </span><span class="nx">cellIndex</span><span class="p">,</span><span class="w"> </span><span class="nx">pointer</span><span class="p">,</span><span class="w"> </span><span class="nx">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">child</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// child = cellContainer.getElement(...);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">.</span><span class="nx">isPointerInBounds</span><span class="p">(</span><span class="nx">child</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Pointer on this child</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
+</code></pre></div>
+<p><a href="../ui-basesizer/#is-pointer-in-bounds">Reference of <code>isPointerInBounds</code> method</a></p>
 <h3 id="get-element">Get element<a class="headerlink" href="#get-element" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get element<ul>
