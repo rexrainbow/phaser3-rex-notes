@@ -21,7 +21,7 @@ class Demo extends Phaser.Scene {
         var tableWidth = (scrollMode === 0) ? 350 : 450;
         var tableHeight = (scrollMode === 0) ? 450 : 350;
         var cellSize = 140;
-        var columns = (scrollMode === 0) ? (tableWidth / cellSize) : (tableHeight / cellSize);
+        var columns = (scrollMode === 0) ? Math.floor(tableWidth / cellSize) : Math.floor(tableHeight / cellSize);
 
         var gridTable = this.rexUI.add.gridTable({
             x: 400,
@@ -37,7 +37,7 @@ class Demo extends Phaser.Scene {
                 cellWidth: cellSize,
                 cellHeight: cellSize,
 
-                columns: Math.floor(columns),
+                columns: columns,
 
                 mask: {
                     padding: 2,
@@ -115,7 +115,7 @@ class Demo extends Phaser.Scene {
             .layout()
 
 
-        var print = this.add.text(0,0,'');
+        var print = this.add.text(0, 0, '');
         gridTable
             .on('cell.click', function (cellContainer, cellIndex, pointer, event) {
                 // console.log(`click cell ${cellIndex}`);
