@@ -36,7 +36,8 @@ class Demo extends Phaser.Scene {
                 track: 0x3A6BA5,
                 thumb: 0xBFCDBB,
                 inputBackground: 0x685784,
-                inputBox: 0x182456
+                inputBox: 0x182456,
+                messageBackground: 0x696969,
             },
             userName: userName
         })
@@ -78,7 +79,7 @@ var CreateMainPanel = function (scene, config) {
     var upperPanel = scene.rexUI.add.sizer({
         orientation: 'x'
     });
-    var background = scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, config.color.background);
+    var background = scene.rexUI.add.roundRectangle({ radius: 20, color: config.color.background })
     var userListBox = CreateUserListBox(mainPanel, config);
     var messageBox = CreateMessageBox(mainPanel, config);
     var inputPanel = CreateInputPanel(mainPanel, config);
@@ -120,39 +121,85 @@ var CreateMainPanel = function (scene, config) {
 
 var CreateUserListBox = function (parent, config) {
     var scene = parent.scene;
-    var userListBox = scene.rexUI.add.textArea({
+    var userListBox = scene.rexUI.add.gridTable({
         width: 150,
-        background: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 0, config.color.inputBox, 0.5),
-        text: scene.rexUI.add.BBCodeText(0, 0, '', {
+        background: scene.rexUI.add.roundRectangle({ color: config.color.inputBox, alpha: 0.5 }),
 
-        }),
+        table: {
+            cellHeight: 20,
+            mask: {
+                padding: 1,
+            },
+            reuseCellContainer: true,
+        },
 
         slider: false,
 
+        createCellContainerCallback(cell, cellContainer) {
+            var scene = cell.scene,
+                width = cell.width,
+                height = cell.height,
+                item = cell.item;
+            if (cellContainer === null) {
+                cellContainer = scene.rexUI.add.label({
+                    text: scene.rexUI.add.BBCodeText(0, 0, ''),
+                });
+            }
+
+            cellContainer.setMinSize(width, height);
+            cellContainer.setText(item.text)
+            return cellContainer;
+        },
+
         name: 'userListBox'
-    });
+    })
 
     // Control
     parent.setUserList = function (users) {
-        var s = []
+        var nameList = []
         users.forEach(function (user) {
-            s.push(user.userName)
+            nameList.push({
+                text: user.userName
+            })
         })
-        userListBox.setText(s.join('\n'));
+
+        userListBox.setItems(nameList);
     }
     return userListBox;
 }
 
 var CreateMessageBox = function (parent, config) {
     var scene = parent.scene;
-    var messageBox = scene.rexUI.add.textArea({
-        text: scene.rexUI.add.BBCodeText(0, 0, '', {
-
-        }),
+    var messageBox = scene.rexUI.add.gridTable({
+        table: {
+            cellHeight: 20,
+            mask: {
+                padding: 1,
+            },
+            reuseCellContainer: true,
+        },
 
         slider: {
-            track: scene.rexUI.add.roundRectangle(0, 0, 20, 10, 10, config.color.track),
-            thumb: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 10, config.color.thumb),
+            track: scene.rexUI.add.roundRectangle({ width: 20, height: 10, radius: 10, color: config.color.track }),
+            thumb: scene.rexUI.add.roundRectangle({ radius: 10, color: config.color.thumb }),
+        },
+
+        createCellContainerCallback(cell, cellContainer) {
+            var scene = cell.scene,
+                width = cell.width,
+                height = cell.height,
+                item = cell.item;
+            if (cellContainer === null) {
+                cellContainer = scene.rexUI.add.label({
+                    space: { left: 2, right: 2, top: 2, bottom: 2 },
+                    background: scene.rexUI.add.roundRectangle({ radius: 4, strokeColor: config.color.messageBackground }),
+                    text: scene.rexUI.add.BBCodeText(0, 0, ''),
+                });
+            }
+
+            cellContainer.setText(item.text)
+
+            return cellContainer;
         },
 
         name: 'messageBox'
@@ -160,21 +207,27 @@ var CreateMessageBox = function (parent, config) {
 
     // Control
     var messageToString = function (message) {
-        return `[${message.senderName}] ${message.message}\n`;
+        return `[${message.senderName}] ${message.message}`;
     }
     parent.appendMessage = function (message) {
-        var s = messageToString(message);
+        var messages = messageBox.items;
+        messages.push({
+            text: messageToString(message)
+        })
+
         messageBox
-            .appendText(s)
+            .setItems(messages)
             .scrollToBottom()
     }
     parent.setMessages = function (messages) {
-        var s = [];
-        messages.forEach(function (message) {
-            s.push(messageToString(message))
+        messages = messages.map(function (message) {
+            return {
+                text: messageToString(message)
+            }
         })
+
         messageBox
-            .setText(s.join(''))
+            .setItems(messages)
             .scrollToBottom()
     }
     return messageBox;
@@ -182,21 +235,47 @@ var CreateMessageBox = function (parent, config) {
 
 var CreateInputPanel = function (parent, config) {
     var scene = parent.scene;
-    var background = scene.rexUI.add.roundRectangle(0, 0, 2, 2, { bl: 20, br: 20 }, config.color.inputBackground); // Height is 40
-    var userNameBox = scene.rexUI.add.BBCodeText(0, 0, config.userName, {
-        halign: 'right',
-        valign: 'center',
-        fixedWidth: 120,
-        fixedHeight: 20
-    });
+    var background = scene.rexUI.add.roundRectangle({ radius: { bl: 20, br: 20 }, color: config.color.inputBackground }); // Height is 40
 
-    var inputBox = scene.rexUI.add.BBCodeText(0, 0, 'Hello world', {
-        halign: 'left',
-        valign: 'center',
-        fixedWidth: 100,
-        fixedHeight: 20,
-        backgroundColor: `#${config.color.inputBox.toString(16)}`
-    });
+    var userNameBox = scene.rexUI.add.canvasInput({
+        width: 120, height: 20,
+
+        style: {
+            fontSize: 16,
+            backgroundBottomY: 4,
+            backgroundHeight: 20,
+
+            // Solution A
+            'cursor.color': 'black',
+            'cursor.backgroundColor': 'white',
+        },
+
+        text: config.userName,
+
+        selectAll: true
+    })
+
+    var inputBox = scene.rexUI.add.canvasInput({
+        width: 100, height: 20,
+
+        background: {
+            color: `#${config.color.inputBox.toString(16)}`,
+        },
+
+        style: {
+            fontSize: 16,
+            backgroundBottomY: 4,
+            backgroundHeight: 20,
+
+            // Solution A
+            'cursor.color': 'black',
+            'cursor.backgroundColor': 'white',
+        },
+
+        text: 'Hello world',
+
+        selectAll: true
+    })
 
     var SendBtn = scene.rexUI.add.BBCodeText(0, 0, 'Send', {
 
@@ -230,29 +309,28 @@ var CreateInputPanel = function (parent, config) {
                 parent.emit('send-message', inputBox.text, userNameBox.text);
                 inputBox.text = '';
             }
+            inputBox.close();
         });
 
+    var prevUserName;
     userNameBox
-        .setInteractive()
-        .on('pointerdown', function () {
-            var prevUserName = userNameBox.text;
-            scene.rexUI.edit(
-                userNameBox,  // text game object
-                undefined,  // Config
-                function (textObject) { // onClose
-                    var currUserName = textObject.text
-                    if (currUserName !== prevUserName) {
-                        parent.emit('change-name', currUserName, prevUserName);
-                    }
-                }
-            );
-        });
+        .on('open', function () {
+            prevUserName = userNameBox.text;
+        })
+        .on('close', function () {
+            var currUserName = userNameBox.text;
+            if (currUserName !== prevUserName) {
+                parent.emit('change-name', currUserName, prevUserName);
+            }
+        })
 
     inputBox
-        .setInteractive()
-        .on('pointerdown', function () {
-            scene.rexUI.edit(inputBox);
-        });
+        .on('close', function () {
+            if (inputBox.text !== '') {
+                parent.emit('send-message', inputBox.text, userNameBox.text);
+                inputBox.text = '';
+            }
+        })
 
     return inputPanel;
 }
