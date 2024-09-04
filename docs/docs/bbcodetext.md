@@ -192,7 +192,7 @@ Default style
     testString: '|MÉqgy',
     
     wrap: {
-        mode: 'none'     // 0|'none'|1|'word'|2|'char'|'character'|3|'mix'
+        mode: 'none',     // 0|'none'|1|'word'|2|'char'|'character'|3|'mix'
         width: null
     },
     // wordWrap: { width: 0 },   // Compatible with Text game object
@@ -316,7 +316,7 @@ var txt = scene.make.rexBBCodeText({
             font: 'bold 25px Arial',
             fill: 'white',
             wrap: {
-                mode: 0     // 0|'none'|1|'word'|2|'char'|'character'
+                mode: 'none',    // 0|'none'|1|'word'|2|'char'|'character'|3|'mix'
                 width: 0
             }
         }

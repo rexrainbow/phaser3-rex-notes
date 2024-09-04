@@ -26,7 +26,7 @@ class Demo extends Phaser.Scene {
 
             scrollMode: 0,
 
-            background: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_DARK),
+            background: this.rexUI.add.roundRectangle({ color: COLOR_DARK, radius: 10 }),
 
             table: {
                 columns: 1,
@@ -75,7 +75,7 @@ class Demo extends Phaser.Scene {
                 }
 
                 // Set name
-                var nameGameObject = cellContainer.getElement('name');
+                var nameGameObject = cellContainer.getElement('title');
                 if (isTheSameName) {
                     scene.rexUI.hide(nameGameObject);
                 } else {
@@ -85,8 +85,8 @@ class Demo extends Phaser.Scene {
                 }
 
                 // Set content
-                cellContainer.getElement('content.text')
-                    .setWordWrapWidth(width - 200)
+                cellContainer.getElement('text.text')
+                    .setWrapWidth(width - 200)
                     .setText(item.content);
 
                 // Set rtl
@@ -116,32 +116,27 @@ class Demo extends Phaser.Scene {
 }
 
 var CreateCellContainer = function (scene) {
-    var icon = scene.rexUI.add.roundRectangle(0, 0, 0, 0, 20, COLOR_LIGHT);
-    var name = scene.add.text(0, 0, '');
-    var content = scene.rexUI.add.label({
-        orientation: 'x',
-        background: scene.rexUI.add.roundRectangle(0, 0, 20, 10, 10).setStrokeStyle(2, 0x888888),
-        text: scene.add.text(0, 0, ''),
-        space: { left: 10, right: 10, top: 10, bottom: 10 },
-    })
+    return scene.rexUI.add.titleLabel({
+        space: {
+            icon: 10,
+        },
 
-    var messageSizer = scene.rexUI.add.sizer({
-        width: 0,
-        orientation: 'y',
-        space: { item: 5 }
-    })
-        .add(name)
-        .add(content, { expand: true })
+        icon: scene.rexUI.add.roundRectangle({ color: COLOR_LIGHT, radius: 20 }),
 
-    return scene.rexUI.add.sizer({
-        orientation: 'x',
-        space: { item: 10 },
+        title: scene.rexUI.add.BBCodeText(0, 0, ''),
+
+        text: scene.rexUI.add.label({
+            orientation: 'x',
+
+            background: scene.rexUI.add.roundRectangle({ strokeColor: 0x888888, strokeWidth: 2, radius: 10 }),
+
+            text: scene.rexUI.add.BBCodeText(0, 0, '', {
+                wrap: { mode: 'word' }
+            }),
+
+            space: { left: 10, right: 10, top: 10, bottom: 10 },
+        }),
     })
-        .add(icon, { align: 'top' })
-        .add(messageSizer, { proportion: 1 })
-        .addChildrenMap('icon', icon)
-        .addChildrenMap('name', name)
-        .addChildrenMap('content', content)
 }
 
 var CreateContent = function () {
