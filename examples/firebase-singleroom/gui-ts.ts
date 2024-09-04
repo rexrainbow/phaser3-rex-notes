@@ -2,7 +2,10 @@ import 'phaser';
 import AwaitLoader from '../../plugins/awaitloader';
 import firebaseConfig from './firebaseConfig';
 import { Preload as SetupFirebase, SingleRoom, Broadcast } from '../../plugins/firebase-components';
-import { Sizer, TextArea, Label, BBCodeText, RoundRectangle, Edit } from '../../templates/ui/ui-components';
+import {
+    Sizer, GridTable, Label, TitleLabel, BBCodeText, RoundRectangle, CanvasInput,
+    Hide, Show,
+} from '../../templates/ui/ui-components';
 import GetRandomWord from '../../plugins/utils/string/GetRandomWord';
 
 class Demo extends Phaser.Scene {
@@ -37,6 +40,7 @@ class Demo extends Phaser.Scene {
             width: 640, height: 560,
             color: {
                 background: 0x0E376F,
+                messageBackground: 0x696969,
                 track: 0x3A6BA5,
                 thumb: 0xBFCDBB,
                 inputBackground: 0x685784,
@@ -60,10 +64,10 @@ class Demo extends Phaser.Scene {
                 mainPanel.setUserList(users);
             })
             .on('broadcast.receive', function (message: Broadcast.IReceiveData) {
-                mainPanel.appendMessage(message);
+                mainPanel.appendMessage(message, room.userInfo);
             })
             .on('userlist.changename', function () {
-                mainPanel.setMessages(room.broadcast.getHistory())
+                mainPanel.setMessages(room.broadcast.getHistory(), room.userInfo)
             })
             .setUser(userID, userName)
             .joinRoom()
@@ -78,12 +82,23 @@ interface IMainPanelConfig {
     width?: number, height?: number,
     color?: {
         background?: number,
+        messageBackground?: number,
         track?: number,
         thumb?: number,
         inputBackground?: number,
         inputBox?: number
     },
     userName?: string
+}
+
+interface IUserName {
+    text: string,
+}
+
+interface IMessage {
+    name: string,
+    content: string,
+    isLeft: boolean
 }
 
 class MainPanel extends Sizer {
@@ -133,46 +148,53 @@ class MainPanel extends Sizer {
     }
 
     setUserList(users: SingleRoom.IUserInfo[]) {
-        const s = []
+        var nameList: IUserName[] = [];
         users.forEach(function (user) {
-            s.push(user.userName)
+            nameList.push({
+                text: user.userName
+            })
         })
-
-        const usetListBox = this.getElement('UserListBox') as TextArea;
-        usetListBox.setText(s.join('\n'));
+        const usetListBox = this.getElement('UserListBox') as GridTable;
+        usetListBox.setItems(nameList);
 
         return this;
     }
 
-    appendMessage(message: Broadcast.IReceiveData) {
-        var s = MessageToString(message);
+    appendMessage(message: Broadcast.IReceiveData, userInfo: SingleRoom.IUserInfo) {
+        var myUserID = userInfo.userID;
 
-        const MessageBox = this.getElement('MessageBox') as TextArea;
-        MessageBox
-            .appendText(s)
+        const messageBox = this.getElement('MessageBox') as GridTable;
+        const messages = messageBox.items as IMessage[];
+        messages.push({
+            name: message.senderName,
+            content: message.message as string,
+            isLeft: (myUserID !== message.senderID)
+        })
+
+        messageBox
+            .setItems(messages)
             .scrollToBottom()
 
         return this;
     }
 
-    setMessages(messages: Broadcast.IReceiveData[]) {
-        const s = [];
-        messages.forEach(function (message) {
-            s.push(MessageToString(message))
+    setMessages(receiveData: Broadcast.IReceiveData[], userInfo: SingleRoom.IUserInfo) {
+        const myUserID = userInfo.userID;
+        const messages = receiveData.map(function (message) {
+            return {
+                name: message.senderName,
+                content: message.message,
+                isLeft: (myUserID !== message.senderID)
+            }
         })
 
-        const MessageBox = this.getElement('MessageBox') as TextArea;
-
-        MessageBox
-            .setText(s.join(''))
+        const messageBox = this.getElement('MessageBox') as GridTable;
+        messageBox
+            .setItems(messages)
             .scrollToBottom()
 
         return this;
     }
-}
-
-const MessageToString = function (message: Broadcast.IReceiveData) {
-    return `[${message.senderName}] ${message.message}\n`;
 }
 
 var CreateUserListBox = function (parent: MainPanel, config: IMainPanelConfig) {
@@ -185,12 +207,38 @@ var CreateUserListBox = function (parent: MainPanel, config: IMainPanelConfig) {
     const text = new BBCodeText(scene);
     scene.add.existing(text);
 
-    const userListBox = new TextArea(scene, {
+    const userListBox = new GridTable(scene, {
         width: 150,
         background: background,
-        text: text,
+        table: {
+            cellHeight: 18,
+            mask: {
+                padding: 1,
+            },
+            reuseCellContainer: true,
+        },
 
         slider: false,
+
+        createCellContainerCallback(cell, cellContainer: Label) {
+            var scene = cell.scene,
+                width = cell.width,
+                height = cell.height,
+                item = cell.item as IUserName;
+            if (cellContainer === null) {
+                const text = new BBCodeText(scene, 0, 0, '');
+                scene.add.existing(text);
+
+                cellContainer = new Label(scene, {
+                    text: text
+                });
+                scene.add.existing(cellContainer);
+            }
+
+            cellContainer.setMinSize(width, height);
+            cellContainer.setText(item.text)
+            return cellContainer;
+        },
 
         name: 'userListBox'
     });
@@ -211,12 +259,119 @@ var CreateMessageBox = function (parent: MainPanel, config: IMainPanelConfig) {
     const thumb = new RoundRectangle(scene, { radius: 10, color: config.color.thumb });
     scene.add.existing(thumb);
 
-    const messageBox = new TextArea(scene, {
-        text: text,
+    const messageBox = new GridTable(scene, {
+        table: {
+            cellHeight: 20,
+            mask: {
+                padding: 1,
+            },
+            reuseCellContainer: true,
+        },
 
         slider: {
             track: track,
             thumb: thumb,
+        },
+
+        createCellContainerCallback(cell, cellContainer: TitleLabel) {
+            var scene = cell.scene,
+                width = cell.width,
+                item = cell.item as IMessage,
+                items = cell.items as IMessage[],
+                index = cell.index;
+
+            if (cellContainer === null) {
+                const icon = new RoundRectangle(scene, { color: 0xffebcd, radius: 20 });
+                scene.add.existing(icon);
+
+                const title = new BBCodeText(scene, 0, 0, '');
+                scene.add.existing(title);
+
+                const textLabelBackground = new RoundRectangle(scene, {
+                    strokeColor: config.color.messageBackground, strokeWidth: 2,
+                    radius: 10
+                })
+                scene.add.existing(textLabelBackground);
+
+                const textLabelText = new BBCodeText(scene, 0, 0, '', {
+                    wrap: { mode: 'word' }
+                });
+                scene.add.existing(textLabelText);
+
+                const textLabel = new Label(scene, {
+                    orientation: 'x',
+
+                    background: textLabelBackground,
+
+                    text: textLabelText,
+
+                    space: { left: 10, right: 10, top: 10, bottom: 10 },
+                })
+                scene.add.existing(textLabel);
+
+                cellContainer = new TitleLabel(scene, {
+                    space: {
+                        item: 10,
+                        title: 5
+                    },
+
+                    icon: icon,
+
+                    title: title,
+
+                    text: textLabel,
+
+                    align: {
+                        icon: 'top'
+                    }
+                })
+                    .setOrigin(0);
+
+                scene.add.existing(cellContainer);
+            }
+
+            // Set properties from item value
+            var previousItem = items[index - 1];
+            var isTheSameName = (previousItem) ? (previousItem.name === item.name) : false;
+
+            // Set icon
+            var iconGameObject = cellContainer.getElement('icon') as RoundRectangle;
+            if (isTheSameName) {
+                cellContainer.setChildVisible(iconGameObject, false);
+            } else {
+                cellContainer.setChildVisible(iconGameObject, true);
+            }
+
+            // Set name
+            var nameGameObject = cellContainer.getElement('title') as BBCodeText;
+            if (isTheSameName) {
+                Hide(nameGameObject);
+            } else {
+                Show(nameGameObject);
+                nameGameObject.setText(item.name);
+                cellContainer.setChildAlign(nameGameObject, (item.isLeft) ? 'left' : 'right');
+            }
+
+            // Set content
+            (cellContainer.getElement('text.text') as BBCodeText)
+                .setWrapWidth(width - 200)
+                .setText(item.content);
+
+            // Set rtl
+            cellContainer.setRTL(!item.isLeft);
+            cell.setCellContainerAlign((item.isLeft) ? 'left' : 'right');
+
+            // Set padding
+            cellContainer.setInnerPadding('top', (isTheSameName) ? 5 : 20);
+
+            // Layout manually, to get cell height
+            cellContainer
+                .setDirty(true).layout()  // Run layout manually
+                .setDirty(false)          // Don't run layout again
+
+            cell.height = cellContainer.height;
+
+            return cellContainer;
         },
 
         name: 'messageBox'
@@ -233,20 +388,45 @@ var CreateInputPanel = function (parent: MainPanel, config: IMainPanelConfig) {
     const background = new RoundRectangle(scene, { radius: { bl: 20, br: 20 }, color: config.color.inputBackground });
     scene.add.existing(background);
 
-    const userNameBox = new BBCodeText(scene, 0, 0, config.userName, {
-        halign: 'right',
-        valign: 'center',
-        fixedWidth: 120,
-        fixedHeight: 20
-    });
+    const userNameBox = new CanvasInput(scene, {
+        width: 120, height: 20,
+
+        style: {
+            fontSize: 16,
+            backgroundBottomY: 4,
+            backgroundHeight: 20,
+
+            // Solution A
+            'cursor.color': 'black',
+            'cursor.backgroundColor': 'white',
+        },
+
+        text: config.userName,
+
+        selectAll: true
+    })
     scene.add.existing(userNameBox);
 
-    const inputBox = new BBCodeText(scene, 0, 0, 'Hello world', {
-        halign: 'left',
-        valign: 'center',
-        fixedWidth: 100,
-        fixedHeight: 20,
-        backgroundColor: `#${config.color.inputBox.toString(16)}`
+    const inputBox = new CanvasInput(scene, {
+        width: 100, height: 20,
+
+        background: {
+            color: `#${config.color.inputBox.toString(16)}`,
+        },
+
+        style: {
+            fontSize: 16,
+            backgroundBottomY: 4,
+            backgroundHeight: 20,
+
+            // Solution A
+            'cursor.color': 'black',
+            'cursor.backgroundColor': 'white',
+        },
+
+        text: 'Hello world',
+
+        selectAll: true
     });
     scene.add.existing(inputBox);
 
@@ -278,29 +458,28 @@ var CreateInputPanel = function (parent: MainPanel, config: IMainPanelConfig) {
                 parent.emit('send-message', inputBox.text, userNameBox.text);
                 inputBox.text = '';
             }
+            inputBox.close();
         });
 
+    let prevUserName: string;
     userNameBox
-        .setInteractive()
-        .on('pointerdown', function () {
-            const prevUserName = userNameBox.text;
-            Edit(
-                userNameBox,  // text game object
-                undefined,    // Config
-                function (textObject: BBCodeText) { // onClose
-                    const currUserName = textObject.text
-                    if (currUserName !== prevUserName) {
-                        parent.emit('change-name', currUserName, prevUserName);
-                    }
-                }
-            );
-        });
+        .on('open', function () {
+            prevUserName = userNameBox.text;
+        })
+        .on('close', function () {
+            var currUserName = userNameBox.text;
+            if (currUserName !== prevUserName) {
+                parent.emit('change-name', currUserName, prevUserName);
+            }
+        })
 
     inputBox
-        .setInteractive()
-        .on('pointerdown', function () {
-            Edit(inputBox);
-        });
+        .on('close', function () {
+            if (inputBox.text !== '') {
+                parent.emit('send-message', inputBox.text, userNameBox.text);
+                inputBox.text = '';
+            }
+        })
 
     return inputPanel;
 }

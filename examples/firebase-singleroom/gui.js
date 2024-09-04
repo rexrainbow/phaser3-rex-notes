@@ -33,11 +33,11 @@ class Demo extends Phaser.Scene {
             width: 640, height: 560,
             color: {
                 background: 0x0E376F,
+                messageBackground: 0x696969,
                 track: 0x3A6BA5,
                 thumb: 0xBFCDBB,
                 inputBackground: 0x685784,
                 inputBox: 0x182456,
-                messageBackground: 0x696969,
             },
             userName: userName
         })

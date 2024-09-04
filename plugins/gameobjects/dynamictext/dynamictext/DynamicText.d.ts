@@ -48,7 +48,8 @@ declare namespace DynamicText {
     }
 
     interface IConfigTextStyle extends IConfigTextStyleBase {
-
+        backgroundHeight?: number,
+        backgroundBottomY?: number,
     }
 
     interface IConfigImage {
@@ -83,7 +84,7 @@ declare namespace DynamicText {
     }
 
     interface IConfigVerticalWrap extends IConfigWrapBase {
-        padding: {
+        padding?: {
             top?: number, left?: number, right?: number, bottom?: number,
         },
         lineWidth?: number,
@@ -133,7 +134,7 @@ declare namespace DynamicText {
         width?: number, height?: number,
         resolution?: number,
 
-        padding: PaddingTypes,
+        padding?: PaddingTypes,
 
         background?: IConfigBackground,
 

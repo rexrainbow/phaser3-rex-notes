@@ -1,4 +1,5 @@
 import ContainerLite from '../../container/containerlite/ContainerLite';
+import { AlignType } from '../../../utils/actions/AlignType';
 
 export default GridTable;
 
@@ -13,12 +14,14 @@ declare namespace GridTable {
         deltaWidth: number,
         deltaHeight: number,
         item: unknown,
+        items: unknown[],
         index: number,
 
-        setHeight(value: number): void,
-        setDeltaHeight(value: number): void,
-        setWidth(value: number): void,
-        setDeltaWidth(value: number): void,
+        setHeight(value: number): CellData,
+        setDeltaHeight(value: number): CellData,
+        setWidth(value: number): CellData,
+        setDeltaWidth(value: number): CellData,
+        setCellContainerAlign(align: AlignType): CellData
 
         setContainer(cellContainer?: Phaser.GameObjects.GameObject | null): void,
         getContainer(): Phaser.GameObjects.GameObject | null,

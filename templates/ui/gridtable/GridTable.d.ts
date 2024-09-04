@@ -27,7 +27,7 @@ declare namespace GridTable {
 
         scrollMode?: GridTableCore.ScrollModeType,
 
-        table: {
+        table?: {
             width?: number | undefined,
             height?: number | undefined,
 
@@ -42,7 +42,7 @@ declare namespace GridTable {
 
         createCellContainerCallback: CreateCellContainerCallbackType,
 
-        items: unknown[]
+        items?: unknown[]
     }
 
 }

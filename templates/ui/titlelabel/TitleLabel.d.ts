@@ -10,7 +10,7 @@ declare namespace TitleLabel {
         layoutMode?: 0 | 1,
 
         space?: {
-            left?: number, right?: number, top?: number, bottom?: number,
+            left?: number, right?: number, top?: number, bottom?: number, item?: number,
 
             innerLeft?: number, innerRight?: number, innerTop?: number, innerBottom?: number,
 
