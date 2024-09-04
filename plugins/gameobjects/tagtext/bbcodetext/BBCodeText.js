@@ -1,4 +1,4 @@
-import Text from '../textbase/Text.js'
+import Text from '../textbase/Text.js';
 import ParserClass from './parser/Parser.js';
 
 class BBCodeText extends Text {

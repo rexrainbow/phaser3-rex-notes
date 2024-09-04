@@ -118,7 +118,8 @@ class Demo extends Phaser.Scene {
 var CreateCellContainer = function (scene) {
     return scene.rexUI.add.titleLabel({
         space: {
-            icon: 10,
+            item: 10,
+            title: 5
         },
 
         icon: scene.rexUI.add.roundRectangle({ color: COLOR_LIGHT, radius: 20 }),
@@ -136,6 +137,10 @@ var CreateCellContainer = function (scene) {
 
             space: { left: 10, right: 10, top: 10, bottom: 10 },
         }),
+
+        align: {
+            icon: 'top'
+        }
     })
 }
 

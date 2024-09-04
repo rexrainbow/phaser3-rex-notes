@@ -57,10 +57,10 @@ class Demo extends Phaser.Scene {
                 mainPanel.setUserList(users);
             })
             .on('broadcast.receive', function (message) {
-                mainPanel.appendMessage(message);
+                mainPanel.appendMessage(message, room.userInfo);
             })
             .on('userlist.changename', function () {
-                mainPanel.setMessages(room.broadcast.getHistory())
+                mainPanel.setMessages(room.broadcast.getHistory(), room.userInfo)
             })
             .setUser(userID, userName)
             .joinRoom()
@@ -126,7 +126,7 @@ var CreateUserListBox = function (parent, config) {
         background: scene.rexUI.add.roundRectangle({ color: config.color.inputBox, alpha: 0.5 }),
 
         table: {
-            cellHeight: 20,
+            cellHeight: 18,
             mask: {
                 padding: 1,
             },
@@ -187,17 +187,83 @@ var CreateMessageBox = function (parent, config) {
         createCellContainerCallback(cell, cellContainer) {
             var scene = cell.scene,
                 width = cell.width,
-                height = cell.height,
-                item = cell.item;
+                item = cell.item,
+                items = cell.items,
+                index = cell.index;
+
             if (cellContainer === null) {
-                cellContainer = scene.rexUI.add.label({
-                    space: { left: 2, right: 2, top: 2, bottom: 2 },
-                    background: scene.rexUI.add.roundRectangle({ radius: 4, strokeColor: config.color.messageBackground }),
-                    text: scene.rexUI.add.BBCodeText(0, 0, ''),
-                });
+                cellContainer = scene.rexUI.add.titleLabel({
+                    space: {
+                        item: 10,
+                        title: 5
+                    },
+
+                    icon: scene.rexUI.add.roundRectangle({ color: 0xffebcd, radius: 20 }),
+
+                    title: scene.rexUI.add.BBCodeText(0, 0, ''),
+
+                    text: scene.rexUI.add.label({
+                        orientation: 'x',
+
+                        background: scene.rexUI.add.roundRectangle({
+                            strokeColor: config.color.messageBackground, strokeWidth: 2,
+                            radius: 10
+                        }),
+
+                        text: scene.rexUI.add.BBCodeText(0, 0, '', {
+                            wrap: { mode: 'word' }
+                        }),
+
+                        space: { left: 10, right: 10, top: 10, bottom: 10 },
+                    }),
+
+                    align: {
+                        icon: 'top'
+                    }
+                })
+                    .setOrigin(0);
             }
 
-            cellContainer.setText(item.text)
+            // Set properties from item value
+            var previousItem = items[index - 1];
+            var isTheSameName = (previousItem) ? (previousItem.name === item.name) : false;
+
+            // Set icon
+            var iconGameObject = cellContainer.getElement('icon');
+            if (isTheSameName) {
+                cellContainer.setChildVisible(iconGameObject, false);
+            } else {
+                cellContainer.setChildVisible(iconGameObject, true);
+            }
+
+            // Set name
+            var nameGameObject = cellContainer.getElement('title');
+            if (isTheSameName) {
+                scene.rexUI.hide(nameGameObject);
+            } else {
+                scene.rexUI.show(nameGameObject);
+                nameGameObject.setText(item.name);
+                cellContainer.setChildAlign(nameGameObject, (item.isLeft) ? 'left' : 'right');
+            }
+
+            // Set content
+            cellContainer.getElement('text.text')
+                .setWrapWidth(width - 200)
+                .setText(item.content);
+
+            // Set rtl
+            cellContainer.setRTL(!item.isLeft);
+            cell.setCellContainerAlign((item.isLeft) ? 'left' : 'right');
+
+            // Set padding
+            cellContainer.setInnerPadding('top', (isTheSameName) ? 5 : 20);
+
+            // Layout manually, to get cell height
+            cellContainer
+                .setDirty(true).layout()  // Run layout manually
+                .setDirty(false)          // Don't run layout again
+
+            cell.height = cellContainer.height;
 
             return cellContainer;
         },
@@ -206,23 +272,26 @@ var CreateMessageBox = function (parent, config) {
     });
 
     // Control
-    var messageToString = function (message) {
-        return `[${message.senderName}] ${message.message}`;
-    }
-    parent.appendMessage = function (message) {
+    parent.appendMessage = function (message, userInfo) {
+        var myUserID = userInfo.userID;
         var messages = messageBox.items;
         messages.push({
-            text: messageToString(message)
+            name: message.senderName,
+            content: message.message,
+            isLeft: (myUserID !== message.senderID)
         })
 
         messageBox
             .setItems(messages)
             .scrollToBottom()
     }
-    parent.setMessages = function (messages) {
+    parent.setMessages = function (messages, userInfo) {
+        var myUserID = userInfo.userID;
         messages = messages.map(function (message) {
             return {
-                text: messageToString(message)
+                name: message.senderName,
+                content: message.message,
+                isLeft: (myUserID !== message.senderID)
             }
         })
 

@@ -177,6 +177,25 @@ var room = scene.plugins.get('rexFirebase').add.singleRoom({
             - `2`, or `'2d'` : 2d table, indexing by (key0, key1)
             - `3`, or `'3d'` : 3d table, indexing by (key0, key1, key2)
 
+
+### Current user infomation
+
+- User name
+    - Get
+        ```javascript
+        var userName = room.userInfo.userName;
+        ```
+    - Set
+        ```javascript
+        room.changeUserName(newUserName);
+        ```
+- User ID
+    - Get
+        ```javascript
+        var userID = room.userInfo.userID;
+        ```
+
+
 ### Join room
 
 1. Set userID and user name.
@@ -260,12 +279,6 @@ Received messages will be saved in client side.
     ```javascript
     room.broadcast.clearHistory();
     ```
-
-### Change user name
-
-```javascript
-room.changeUserName(newUserName);
-```
 
 ### Tables
 
