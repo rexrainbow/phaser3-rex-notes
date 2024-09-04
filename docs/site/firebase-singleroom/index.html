@@ -9452,6 +9452,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#current-user-infomation" class="md-nav__link">
+    Current user infomation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#join-room" class="md-nav__link">
     Join room
   </a>
@@ -9503,13 +9510,6 @@
         
       </ul>
     </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#change-user-name" class="md-nav__link">
-    Change user name
-  </a>
   
 </li>
         
@@ -9941,6 +9941,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#current-user-infomation" class="md-nav__link">
+    Current user infomation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#join-room" class="md-nav__link">
     Join room
   </a>
@@ -9992,13 +9999,6 @@
         
       </ul>
     </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#change-user-name" class="md-nav__link">
-    Change user name
-  </a>
   
 </li>
         
@@ -10257,6 +10257,24 @@
 </ul>
 </li>
 </ul>
+<h3 id="current-user-infomation">Current user infomation<a class="headerlink" href="#current-user-infomation" title="Permanent link">&para;</a></h3>
+<ul>
+<li>User name<ul>
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">userName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">room</span><span class="p">.</span><span class="nx">userInfo</span><span class="p">.</span><span class="nx">userName</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="highlight"><pre><span></span><code><span class="nx">room</span><span class="p">.</span><span class="nx">changeUserName</span><span class="p">(</span><span class="nx">newUserName</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>User ID<ul>
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">userID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">room</span><span class="p">.</span><span class="nx">userInfo</span><span class="p">.</span><span class="nx">userID</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
 <h3 id="join-room">Join room<a class="headerlink" href="#join-room" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Set userID and user name.
@@ -10325,9 +10343,6 @@
     <div class="highlight"><pre><span></span><code><span class="nx">room</span><span class="p">.</span><span class="nx">broadcast</span><span class="p">.</span><span class="nx">clearHistory</span><span class="p">();</span>
 </code></pre></div></li>
 </ul>
-<h3 id="change-user-name">Change user name<a class="headerlink" href="#change-user-name" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">room</span><span class="p">.</span><span class="nx">changeUserName</span><span class="p">(</span><span class="nx">newUserName</span><span class="p">);</span>
-</code></pre></div>
 <h3 id="tables">Tables<a class="headerlink" href="#tables" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get table

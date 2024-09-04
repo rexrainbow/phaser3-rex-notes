@@ -85,18 +85,8 @@ var LayoutMode0 = function (config) {
         var proportion, padding, expand;
         proportion = (expandTitleHeight) ? 1 : 0;
         expand = expandTitleWidth;
-
-        var bottomPadding;
-        if (text) {
-            bottomPadding = GetValue(config, 'space.title');
-            if ((bottomPadding === undefined) && (!separator)) {
-                bottomPadding = separatorSpace;
-            }
-        } else {
-            bottomPadding = 0;
-        }
         padding = {
-            bottom: bottomPadding,
+            bottom: (!separator && text) ? GetValue(config, 'space.title', separatorSpace) : 0,
             left: GetValue(config, 'space.titleLeft', 0),
             right: GetValue(config, 'space.titleRight', 0),
         }

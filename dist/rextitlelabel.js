@@ -13429,7 +13429,7 @@
             proportion = (expandTitleHeight) ? 1 : 0;
             expand = expandTitleWidth;
             padding = {
-                bottom: (!separator && text) ? separatorSpace : 0,
+                bottom: (!separator && text) ? GetValue$c(config, 'space.title', separatorSpace) : 0,
                 left: GetValue$c(config, 'space.titleLeft', 0),
                 right: GetValue$c(config, 'space.titleRight', 0),
             };

@@ -70304,7 +70304,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	        proportion = (expandTitleHeight) ? 1 : 0;
 	        expand = expandTitleWidth;
 	        padding = {
-	            bottom: (!separator && text) ? separatorSpace : 0,
+	            bottom: (!separator && text) ? GetValue$1w(config, 'space.title', separatorSpace) : 0,
 	            left: GetValue$1w(config, 'space.titleLeft', 0),
 	            right: GetValue$1w(config, 'space.titleRight', 0),
 	        };
