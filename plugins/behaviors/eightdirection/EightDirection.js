@@ -86,19 +86,23 @@ class EightDirection extends TickTask {
     }
 
     get isLeft() {
-        return (this.enable) ? this.cursorKeys.left.isDown : false;
+        var leftKey = this.cursorKeys.left;
+        return (this.enable && leftKey) ? leftKey.isDown : false;
     }
 
     get isRight() {
-        return (this.enable) ? this.cursorKeys.right.isDown : false;
+        var rightKey = this.cursorKeys.right;
+        return (this.enable && rightKey) ? rightKey.isDown : false;
     }
 
     get isUp() {
-        return (this.enable) ? this.cursorKeys.up.isDown : false;
+        var upKey = this.cursorKeys.up;
+        return (this.enable && upKey) ? upKey.isDown : false;
     }
 
     get isDown() {
-        return (this.enable) ? this.cursorKeys.down.isDown : false;
+        var downKey = this.cursorKeys.down;
+        return (this.enable && downKey) ? downKey.isDown : false;
     }
 
     update(time, delta) {
