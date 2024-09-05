@@ -154,6 +154,7 @@ module.exports = {
     'levelcounter': './plugins/levelcounter.js',
     'questplugin': './plugins/quest-plugin.js',
     'loopinticksplugin': './plugins/loopinticks-plugin.js',
+    'groupnavigatorplugin': './plugins/groupnavigator-plugin.js',
     'bracketparserplugin': './plugins/bracketparser-plugin.js',
     'bracketparser2plugin': './plugins/bracketparser2-plugin.js',
     'tagplayerplugin': './plugins/tagplayer-plugin.js',

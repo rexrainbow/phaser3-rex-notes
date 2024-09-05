@@ -1,17 +1,17 @@
 
 import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
-import Methods from './Methods.js';
+import Methods from './methods/Methods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class GroupNavigation {
-    constructor(scene, config) {
+class GroupNavigator {
+    constructor(parent, config) {
         // Event emitter
         var eventEmitter = GetValue(config, 'eventEmitter', undefined);
         var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
         this.setEventEmitter(eventEmitter, EventEmitterClass);
 
-        this.scene = scene;
+        this.parent = parent;
         this.focusedGameObject = undefined;
         this.focusIndex = { x: undefined, y: undefined };
 
@@ -30,7 +30,11 @@ class GroupNavigation {
 
     setTargets(targets) {
         this.targets = targets;
-        this.is1DTargetsArray = (Array.isArray(targets)) && (!Array.isArray(targets[0]));
+
+        this.blur();
+        this.focusIndex.x = undefined;
+        this.focusIndex.y = undefined;
+
         return this;
     }
 
@@ -41,9 +45,9 @@ class GroupNavigation {
 }
 
 Object.assign(
-    GroupNavigation.prototype,
+    GroupNavigator.prototype,
     EventEmitterMethods,
     Methods,
 );
 
-export default GroupNavigation;
+export default GroupNavigator;

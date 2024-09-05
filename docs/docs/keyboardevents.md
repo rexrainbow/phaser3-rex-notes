@@ -126,7 +126,8 @@ Built-in keyboard events of phaser.
     scene.input.keyboard.on('keyup-' + 'W', function (event) { /* ... */ });
     ```
     - `event.stopImmediatePropagation()` : Stop any further listeners from being invoked in the current Scene.
-    - `event.stopPropagation()` : Stop it reaching any other Scene.    
+    - `event.stopPropagation()` : Stop it reaching any other Scene.
+    - Invoke `event.preventDefault()` to stop event propagation to native DOM.
 1. Any key-down/on key-up
     ```javascript
     scene.input.keyboard.on('keydown', function (event) { /* ... */ });
