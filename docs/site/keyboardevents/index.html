@@ -9964,7 +9964,8 @@
 <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;keyup-&#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">});</span>
 </code></pre></div><ul>
 <li><code>event.stopImmediatePropagation()</code> : Stop any further listeners from being invoked in the current Scene.</li>
-<li><code>event.stopPropagation()</code> : Stop it reaching any other Scene.    </li>
+<li><code>event.stopPropagation()</code> : Stop it reaching any other Scene.</li>
+<li>Invoke <code>event.preventDefault()</code> to stop event propagation to native DOM.</li>
 </ul>
 </li>
 <li>Any key-down/on key-up
