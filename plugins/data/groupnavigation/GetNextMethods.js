@@ -8,37 +8,21 @@ var GetNextameObject = function (config) {
     } = config;
 
     // Correct startX, startY
-    if (startY === -1) {
-        if (this.is1DTargetsArray) {
-            startY = 0;
-        } else {
-            startY = this.targets.length - 1;
-        }
+    if (this.is1DTargetsArray) {
+        startY = 0;
     } else {
-        if (this.is1DTargetsArray) {
-            startY = 0;
-        } else {
-            // Wrap 
-            startY = Wrap(startY, 0, this.targets.length - 1);
-        }
+        // Wrap 
+        startY = Wrap(startY, 0, this.targets.length - 1);
     }
 
-    if (startX === -1) {
-        if (this.is1DTargetsArray) {
-            startX = this.targets.length - 1;
-        } else {
-            startX = this.targets[startY].length - 1;
-        }
+    var row;
+    if (this.is1DTargetsArray) {
+        row = this.targets;
     } else {
-        var row;
-        if (this.is1DTargetsArray) {
-            row = this.targets;
-        } else {
-            row = this.targets[startY];
-        }
-        // Wrap 
-        startX = Wrap(startX, 0, row.length - 1);
+        row = this.targets[startY];
     }
+    // Wrap 
+    startX = Wrap(startX, 0, row.length - 1);
 
     // Correct x, y
     if (x === undefined) {
