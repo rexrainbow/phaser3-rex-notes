@@ -38,7 +38,7 @@ export default {
         return this;
     },
 
-    previuos() {
+    previous() {
         Focus.call(this, this.getPrevious());
         return this;
     },
@@ -70,7 +70,7 @@ export default {
                 Focus.call(this, gameObject);
             }
         } else {
-            for (var y = 0, rowCount = targets.length; i < rowCount; i++) {
+            for (var y = 0, rowCount = targets.length; y < rowCount; y++) {
                 var row = targets[y];
                 var x = row.indexOf(gameObject);
                 if (x !== -1) {

@@ -1,17 +1,24 @@
 
 import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
 import Methods from './methods/Methods.js';
+import ReshapeArray1DTo2D from '../../utils/array/ReshapeArray1DTo2D.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
+const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
 class GroupNavigator {
-    constructor(parent, config) {
+    constructor(scene, config) {
+        if (IsPlainObject(scene) && (config === undefined)) {
+            config = scene;
+            scene = undefined;
+        }
+
         // Event emitter
         var eventEmitter = GetValue(config, 'eventEmitter', undefined);
         var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
         this.setEventEmitter(eventEmitter, EventEmitterClass);
 
-        this.parent = parent;
+        this.scene = scene;
         this.focusedTarget = undefined;
         this.focusIndex = { x: undefined, y: undefined };
 
@@ -19,7 +26,7 @@ class GroupNavigator {
     }
 
     resetFromJSON(o) {
-        this.setTargets(GetValue(o, 'targets'));
+        this.setTargets(GetValue(o, 'targets'), GetValue(o, 'columns'));
 
         var focusEnableCallback = GetValue(o, 'getFocusEnableCallback');
         if (focusEnableCallback) {
@@ -42,7 +49,11 @@ class GroupNavigator {
         this.targets = undefined;
     }
 
-    setTargets(targets) {
+    setTargets(targets, columns) {
+        if (targets && (columns !== undefined)) {
+            targets = ReshapeArray1DTo2D(targets, columns);
+        }
+
         this.targets = targets;
 
         this.blur();

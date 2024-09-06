@@ -11,7 +11,7 @@ class GroupNavigatorPlugin extends Phaser.Plugins.BasePlugin {
     }
 
     add(config) {
-        return new GroupNavigator(undefined, config);
+        return new GroupNavigator(config);
     }
 }
 

@@ -12,10 +12,10 @@ class Demo extends Phaser.Scene {
 
     create() {
         var gameObjects = [];
-        for (var i = 0; i < 10; i++) {
+        for (var i = 0; i < 25; i++) {
             var gameObject = this.add.circle(0, 0, 40, 0x333300);
 
-            var focusEnable = Math.random() > 0.3;
+            var focusEnable = true // Math.random() > 0.3;
             var color = (focusEnable) ? 0x333300 : 0x330000;
 
             gameObject
@@ -25,11 +25,18 @@ class Demo extends Phaser.Scene {
             gameObjects.push(gameObject)
         }
 
-        var circle = new Phaser.Geom.Circle(400, 300, 250);
-        Phaser.Actions.PlaceOnCircle(gameObjects, circle);
+        Phaser.Actions.GridAlign(gameObjects, {
+            width: 5,
+            cellWidth: 100,
+            cellHeight: 100,
+            position: Phaser.Display.Align.TOP_LEFT,
+            x: 180,
+            y: 50
+        });
 
         var navigator = this.plugins.get('rexGroupNavigator').add({
             targets: gameObjects,
+            columns: 5,
 
             focusEnableDataKey: 'focusEnable',
             // getFocusEnableCallback(gameObject) {
@@ -51,17 +58,31 @@ class Demo extends Phaser.Scene {
         }
 
         this.input.keyboard
-            .on('keydown-TAB', function (event) {
+            .on('keydown-RIGHT', function (event) {
                 navigator.next();
-
                 event.preventDefault();
             })
-            .on('keydown-ENTER', function (event) {
+            .on('keydown-LEFT', function (event) {
+                navigator.previous();
+                event.preventDefault();
+            })
+            .on('keydown-DOWN', function (event) {
+                navigator.nextRow();
+                event.preventDefault();
+            })
+            .on('keydown-UP', function (event) {
+                navigator.previousRow();
+                event.preventDefault();
+            })
+
+        var selectKeys = ['SPACE', 'ENTER'];
+        for (var i = 0, cnt = selectKeys.length; i < cnt; i++) {
+            this.input.keyboard.on(`keydown-${selectKeys[i]}`, function (event) {
                 var gameObject = navigator.getFocusedTarget();
                 OnSelect(gameObject);
-
                 event.preventDefault();
             })
+        }
 
         for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
             let gameObject = gameObjects[i];
@@ -79,6 +100,18 @@ class Demo extends Phaser.Scene {
     }
 
     update() { }
+}
+
+function reshapeArrayTo2D(array, itemsPerRow) {
+    return array.reduce((acc, curr, index) => {
+        // 每行的開頭要創建一個新的子陣列
+        if (index % itemsPerRow === 0) {
+            acc.push([]);
+        }
+        // 將當前物件推入最後一個子陣列
+        acc[acc.length - 1].push(curr);
+        return acc;
+    }, []);
 }
 
 var config = {
