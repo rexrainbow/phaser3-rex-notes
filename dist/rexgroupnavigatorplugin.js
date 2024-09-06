@@ -289,7 +289,7 @@
             return this;
         },
 
-        previuos() {
+        previous() {
             Focus.call(this, this.getPrevious());
             return this;
         },
@@ -321,7 +321,7 @@
                     Focus.call(this, gameObject);
                 }
             } else {
-                for (var y = 0, rowCount = targets.length; i < rowCount; i++) {
+                for (var y = 0, rowCount = targets.length; y < rowCount; y++) {
                     var row = targets[y];
                     var x = row.indexOf(gameObject);
                     if (x !== -1) {
@@ -348,16 +348,32 @@
         FocusMethods
     );
 
+    var ReshapeArray1DTo2D = function (array, columns) {
+        return array.reduce(function (acc, curr, index) {
+            if (index % columns === 0) {
+                acc.push([]);
+            }
+            acc[acc.length - 1].push(curr);
+            return acc;
+        }, []);
+    };
+
     const GetValue = Phaser.Utils.Objects.GetValue;
+    const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
     class GroupNavigator {
-        constructor(parent, config) {
+        constructor(scene, config) {
+            if (IsPlainObject(scene) && (config === undefined)) {
+                config = scene;
+                scene = undefined;
+            }
+
             // Event emitter
             var eventEmitter = GetValue(config, 'eventEmitter', undefined);
             var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
             this.setEventEmitter(eventEmitter, EventEmitterClass);
 
-            this.parent = parent;
+            this.scene = scene;
             this.focusedTarget = undefined;
             this.focusIndex = { x: undefined, y: undefined };
 
@@ -365,7 +381,7 @@
         }
 
         resetFromJSON(o) {
-            this.setTargets(GetValue(o, 'targets'));
+            this.setTargets(GetValue(o, 'targets'), GetValue(o, 'columns'));
 
             var focusEnableCallback = GetValue(o, 'getFocusEnableCallback');
             if (focusEnableCallback) {
@@ -388,7 +404,11 @@
             this.targets = undefined;
         }
 
-        setTargets(targets) {
+        setTargets(targets, columns) {
+            if (targets && (columns !== undefined)) {
+                targets = ReshapeArray1DTo2D(targets, columns);
+            }
+
             this.targets = targets;
 
             this.blur();
@@ -447,7 +467,7 @@
         }
 
         add(config) {
-            return new GroupNavigator(undefined, config);
+            return new GroupNavigator(config);
         }
     }
 
