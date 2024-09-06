@@ -13,6 +13,7 @@ Built-in keyboard events of phaser.
     var keyObject = scene.input.keyboard.addKey('W');  // Get key object
     var isDown = keyObject.isDown;
     var isUp = keyObject.isUp;
+    var shiftKey = keyObject.shiftKey;
     ```
 - Key is down after a duration
     ```javascript

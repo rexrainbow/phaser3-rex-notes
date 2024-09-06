@@ -91,6 +91,7 @@
 84. [Grid align](gridalign.md): Align objects on quadrilateral or hexagon grid.
 85. [Grid cut image](gridcutimage.md): Grid cut image texture to frames, then create image game objects from these frames.
 86. [Grid table](gridtable.md): Viewer of grid table, to manipulate game object of each visible cell.
+86. [Group navigator](groupnavigator.md): Navigate between existing game objects, focus on next/previous/next-row/previous row game object.
 87. [Hidden input text](hiddeninputtext.md): An invisible Input DOM element to receive character input and display on text game object.
 88. [Image box](imagebox.md): Keep aspect ratio of image game object after scale-down resizing.
 89. [Input text](inputtext.md): Input DOM element.

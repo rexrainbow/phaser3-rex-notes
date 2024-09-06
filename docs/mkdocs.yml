@@ -323,6 +323,7 @@ nav:
         - Bracket parser: bracketparser.md
         - Bracket parser 2: bracketparser2.md
         - Tag player: tagplayer.md
+    - Group navigator: groupnavigator.md
 - Data:
     - Data manager: 
         - Built-in data: datamanager.md
