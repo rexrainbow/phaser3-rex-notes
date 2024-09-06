@@ -142,9 +142,6 @@ Phaser.Actions.RandomLine(gameObjects, line);
 
 ```javascript
 var circle = new Phaser.Geom.Circle(x, y, radius);
-```
-
-```javascript
 Phaser.Actions.PlaceOnCircle(gameObjects, circle, startAngle, endAngle);
 ```
 
@@ -158,9 +155,6 @@ Phaser.Actions.RandomCircle(gameObjects, circle);
 
 ```javascript
 var ellipse = new Phaser.Geom.Ellipse(x, y, width, height);
-```
-
-```javascript
 Phaser.Actions.PlaceOnEllipse(gameObjects, ellipse, startAngle, endAngle);
 ```
 
@@ -170,9 +164,6 @@ Phaser.Actions.PlaceOnEllipse(gameObjects, ellipse, startAngle, endAngle);
 
 ```javascript
 var triangle = new Phaser.Geom.Triangle(x1, y1, x2, y2, x3, y3);
-```
-
-```javascript
 Phaser.Actions.PlaceOnTriangle(gameObjects, triangle, stepRate);
 ```
 
@@ -186,9 +177,6 @@ Phaser.Actions.RandomTriangle(gameObjects, triangle);
 
 ```javascript
 var rect = new Phaser.Geom.Rectangle(x, y, width, height);
-```
-
-```javascript
 Phaser.Actions.PlaceOnRectangle(gameObjects, rect, shift;
 ```
 

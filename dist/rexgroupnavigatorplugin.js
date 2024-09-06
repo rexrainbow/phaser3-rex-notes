@@ -251,25 +251,25 @@
 
     var Focus = function (gameObject) {
         // Already focus
-        if (gameObject === this.focusedGameObject) {
+        if (gameObject === this.focusedTarget) {
             return this;
         }
 
         Blur.call(this);
 
-        this.focusedGameObject = gameObject;
+        this.focusedTarget = gameObject;
         if (gameObject) {
             this.emit('focus', gameObject);
         }
     };
 
     var Blur = function () {
-        if (!this.focusedGameObject) {
+        if (!this.focusedTarget) {
             return this;
         }
 
-        var gameObject = this.focusedGameObject;
-        this.focusedGameObject = null;
+        var gameObject = this.focusedTarget;
+        this.focusedTarget = null;
         this.emit('blur', gameObject);
     };
 
@@ -306,7 +306,7 @@
 
         focus(gameObject) {
             // Already focus
-            if (gameObject === this.focusedGameObject) {
+            if (gameObject === this.focusedTarget) {
                 return this;
             }
 
@@ -358,7 +358,7 @@
             this.setEventEmitter(eventEmitter, EventEmitterClass);
 
             this.parent = parent;
-            this.focusedGameObject = undefined;
+            this.focusedTarget = undefined;
             this.focusIndex = { x: undefined, y: undefined };
 
             this.resetFromJSON(config);
@@ -366,7 +366,21 @@
 
         resetFromJSON(o) {
             this.setTargets(GetValue(o, 'targets'));
-            this.setGetFocusEnableCallback(GetValue(o, 'getFocusEnableCallback'));
+
+            var focusEnableCallback = GetValue(o, 'getFocusEnableCallback');
+            if (focusEnableCallback) {
+                this.setGetFocusEnableCallback(focusEnableCallback);
+            } else {
+                var focusEnableDataKey = GetValue(o, 'focusEnableDataKey');
+                if (focusEnableDataKey) {
+                    this.setFocusEnableDataKey(focusEnableDataKey);
+                } else {
+                    var focusEnableKey = GetValue(o, 'focusEnableKey');
+                    if (focusEnableKey) {
+                        this.setFocusEnableKey(focusEnableKey);
+                    }
+                }
+            }
         }
 
 
@@ -384,9 +398,35 @@
             return this;
         }
 
-        setGetFocusEnableCallback(callbakc) {
-            this.getFocusEnableCallback = callbakc;
+        setFocusEnableDataKey(dataKey) {
+            var callback;
+            if (dataKey) {
+                callback = function (gameObject) {
+                    return gameObject.getData(dataKey);
+                };
+            }
+            this.setGetFocusEnableCallback(callback);
             return this;
+        }
+
+        setFocusEnableKey(key) {
+            var callback;
+            if (key) {
+                callback = function (gameObject) {
+                    return gameObject[key];
+                };
+            }
+            this.setGetFocusEnableCallback(callback);
+            return this;
+        }
+
+        setGetFocusEnableCallback(callback) {
+            this.getFocusEnableCallback = callback;
+            return this;
+        }
+
+        getFocusedTarget() {
+            return this.focusedTarget;
         }
     }
 
