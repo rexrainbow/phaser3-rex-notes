@@ -6,7 +6,7 @@ export default Scrollable;
 
 declare namespace Scrollable {
 
-    type scrollModeTypes = 0 | 1 | 'v' | 'h' | 'vertical' | 'horizontal' | 'x' | 'y';
+    type ScrollModeTypes = 0 | 1 | 'v' | 'h' | 'vertical' | 'horizontal' | 'x' | 'y';
     type AlignTypes = 'left' | 'top' | 'right' | 'bottom' | 'center';
     type SliderInputTypes = 0 | 1 | -1 | 'drag' | 'pan' | 'click' | 'none';
     type SliderPositionTypes = 0 | 1 | 'right' | 'bottom' | 'left' | 'top';
@@ -55,7 +55,7 @@ declare namespace Scrollable {
             footer?: number,
         },
 
-        scrollMode?: scrollModeTypes,
+        scrollMode?: ScrollModeTypes,
 
         background?: Phaser.GameObjects.GameObject,
 
@@ -74,8 +74,8 @@ declare namespace Scrollable {
         mouseWheelScrollerX?: IMouseWheelScroller | boolean,
         mouseWheelScrollerY?: IMouseWheelScroller | boolean,
 
-        clamplChildOY?: boolean,
-        clamplChildOX?: boolean,
+        clampChildOY?: boolean,
+        clampChildOX?: boolean,
 
         header?: Phaser.GameObjects.GameObject,
         footer?: Phaser.GameObjects.GameObject,

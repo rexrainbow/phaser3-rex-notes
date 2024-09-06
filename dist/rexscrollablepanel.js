@@ -23017,8 +23017,8 @@
 
             this.setScrollMode(GetValue$1(config, 'scrollMode', 0));
 
-            var clampChildOY = GetValue$1(config, 'clamplChildOY', true);
-            var clampChildOX = GetValue$1(config, 'clamplChildOX', clampChildOY);
+            var clampChildOY = GetValue$1(config, 'clampChildOY', true);
+            var clampChildOX = GetValue$1(config, 'clampChildOX', clampChildOY);
             this.setClampMode(clampChildOY, clampChildOX);
 
             // Add elements
@@ -23435,8 +23435,8 @@
                 panelConfig = {};
             }
             panelConfig.scrollMode = scrollMode;
-            panelConfig.clamplChildOY = GetValue(config, 'clamplChildOY', false);
-            panelConfig.clamplChildOX = GetValue(config, 'clamplChildOX', false);
+            panelConfig.clampChildOY = GetValue(config, 'clampChildOY', false);
+            panelConfig.clampChildOX = GetValue(config, 'clampChildOX', false);
             var scrollableBlock = new ScrollableBlock(scene, panelConfig);
             scene.add.existing(scrollableBlock); // Important: Add to display list for touch detecting
 

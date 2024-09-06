@@ -66,7 +66,7 @@ declare namespace CreateTextArea {
             boolean
         ),
 
-        clamplChildOY?: boolean,
+        clampChildOY?: boolean,
 
     }
 

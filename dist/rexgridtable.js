@@ -24494,7 +24494,7 @@
                 tableConfig = {};
             }
             tableConfig.scrollMode = (scrollMode === 2) ? 0 : scrollMode;
-            tableConfig.clamplTableOXY = GetValue(config, 'clamplChildOY', false);
+            tableConfig.clamplTableOXY = GetValue(config, 'clampChildOY', false);
             var tableWidth = GetValue(tableConfig, 'width', undefined);
             var tableHeight = GetValue(tableConfig, 'height', undefined);
             var table = new GridTable$1(scene, 0, 0, tableWidth, tableHeight, tableConfig);

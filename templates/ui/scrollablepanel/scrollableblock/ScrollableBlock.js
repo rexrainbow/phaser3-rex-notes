@@ -35,8 +35,8 @@ class ScrollableBlock extends BaseSizer {
 
         this.setScrollMode(GetValue(config, 'scrollMode', 0));
 
-        var clampChildOY = GetValue(config, 'clamplChildOY', true);
-        var clampChildOX = GetValue(config, 'clamplChildOX', clampChildOY);
+        var clampChildOY = GetValue(config, 'clampChildOY', true);
+        var clampChildOX = GetValue(config, 'clampChildOX', clampChildOY);
         this.setClampMode(clampChildOY, clampChildOX);
 
         // Add elements

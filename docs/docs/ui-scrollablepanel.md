@@ -18,7 +18,7 @@ A container with a panel, slider, and scroller.
 - [Add child](https://codepen.io/rexrainbow/pen/PopLRVm)
 - [Scroll to child](https://codepen.io/rexrainbow/pen/ZEmWwaN)
 - [Drag item](https://codepen.io/rexrainbow/pen/yLRYqWe)
-- [Destory](https://codepen.io/rexrainbow/pen/rNvKdqg)
+- [Destroy](https://codepen.io/rexrainbow/pen/rNvKdqg)
 - [XY sliders](https://codepen.io/rexrainbow/pen/VwVVyYV)
 - [Min-width panel](https://codepen.io/rexrainbow/pen/JjeqGLb)
 - Drag, resize panel
@@ -185,8 +185,8 @@ var panel = scene.rexUI.add.scrollablePanel({
     // mouseWheelScrollerX: {...},
     // mouseWheelScrollerY: {...},
 
-    clamplChildOY: false,
-    // clamplChildOX: false,
+    clampChildOY: false,
+    // clampChildOX: false,
 
     header: headerGameObject,
     footer: footerGameObject,
@@ -359,8 +359,8 @@ var panel = scene.rexUI.add.scrollablePanel({
     - `mouseWheelScroller.speed` : Scrolling speed, default value is `0.1`.
     - Set to `false` to skip creating mouse-wheel-scroller. Default behavior.
 - `mouseWheelScrollerX`, `mouseWheelScrollerY` : Configuration of mouse-wheel-scrollerX, or mouse-wheel-scrollerY behavior, for two-sliders mode.
-- `clamplChildOY` : Set `true` to clamp scrolling.
-- `clamplChildOX` : Set `true` to clamp scrolling, for two-sliders mode.
+- `clampChildOY` : Set `true` to clamp scrolling.
+- `clampChildOX` : Set `true` to clamp scrolling, for two-sliders mode.
 - `header` : Game object of header, optional.
 - `footer` : Game object of footer, optional.
 - `space` : Pads spaces

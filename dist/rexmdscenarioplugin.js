@@ -70034,7 +70034,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	            textMask: textMask,
 	            textCrop: textCrop && !textMask,
 	            content: content,
-	            clamplTextOY: GetValue$1z(config, 'clamplChildOY', false),
+	            clamplTextOY: GetValue$1z(config, 'clampChildOY', false),
 	            alwaysScrollable: GetValue$1z(config, 'alwaysScrollable', false),
 	        });
 	        scene.add.existing(textBlock); // Important: Add to display list for touch detecting
@@ -77439,7 +77439,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	            tableConfig = {};
 	        }
 	        tableConfig.scrollMode = (scrollMode === 2) ? 0 : scrollMode;
-	        tableConfig.clamplTableOXY = GetValue$15(config, 'clamplChildOY', false);
+	        tableConfig.clamplTableOXY = GetValue$15(config, 'clampChildOY', false);
 	        var tableWidth = GetValue$15(tableConfig, 'width', undefined);
 	        var tableHeight = GetValue$15(tableConfig, 'height', undefined);
 	        var table = new GridTable$1(scene, 0, 0, tableWidth, tableHeight, tableConfig);
@@ -78367,8 +78367,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
 	        this.setScrollMode(GetValue$13(config, 'scrollMode', 0));
 
-	        var clampChildOY = GetValue$13(config, 'clamplChildOY', true);
-	        var clampChildOX = GetValue$13(config, 'clamplChildOX', clampChildOY);
+	        var clampChildOY = GetValue$13(config, 'clampChildOY', true);
+	        var clampChildOX = GetValue$13(config, 'clampChildOX', clampChildOY);
 	        this.setClampMode(clampChildOY, clampChildOX);
 
 	        // Add elements
@@ -78785,8 +78785,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	            panelConfig = {};
 	        }
 	        panelConfig.scrollMode = scrollMode;
-	        panelConfig.clamplChildOY = GetValue$12(config, 'clamplChildOY', false);
-	        panelConfig.clamplChildOX = GetValue$12(config, 'clamplChildOX', false);
+	        panelConfig.clampChildOY = GetValue$12(config, 'clampChildOY', false);
+	        panelConfig.clampChildOX = GetValue$12(config, 'clampChildOX', false);
 	        var scrollableBlock = new ScrollableBlock(scene, panelConfig);
 	        scene.add.existing(scrollableBlock); // Important: Add to display list for touch detecting
 

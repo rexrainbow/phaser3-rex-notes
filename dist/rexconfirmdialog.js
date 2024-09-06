@@ -35561,7 +35561,7 @@
                 textMask: textMask,
                 textCrop: textCrop && !textMask,
                 content: content,
-                clamplTextOY: GetValue$4(config, 'clamplChildOY', false),
+                clamplTextOY: GetValue$4(config, 'clampChildOY', false),
                 alwaysScrollable: GetValue$4(config, 'alwaysScrollable', false),
             });
             scene.add.existing(textBlock); // Important: Add to display list for touch detecting

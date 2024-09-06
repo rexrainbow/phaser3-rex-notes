@@ -30265,8 +30265,8 @@
 
             this.setScrollMode(GetValue$h(config, 'scrollMode', 0));
 
-            var clampChildOY = GetValue$h(config, 'clamplChildOY', true);
-            var clampChildOX = GetValue$h(config, 'clamplChildOX', clampChildOY);
+            var clampChildOY = GetValue$h(config, 'clampChildOY', true);
+            var clampChildOX = GetValue$h(config, 'clampChildOX', clampChildOY);
             this.setClampMode(clampChildOY, clampChildOX);
 
             // Add elements
@@ -30683,8 +30683,8 @@
                 panelConfig = {};
             }
             panelConfig.scrollMode = scrollMode;
-            panelConfig.clamplChildOY = GetValue$g(config, 'clamplChildOY', false);
-            panelConfig.clamplChildOX = GetValue$g(config, 'clamplChildOX', false);
+            panelConfig.clampChildOY = GetValue$g(config, 'clampChildOY', false);
+            panelConfig.clampChildOX = GetValue$g(config, 'clampChildOX', false);
             var scrollableBlock = new ScrollableBlock(scene, panelConfig);
             scene.add.existing(scrollableBlock); // Important: Add to display list for touch detecting
 
@@ -36098,7 +36098,7 @@
                 textMask: textMask,
                 textCrop: textCrop && !textMask,
                 content: content,
-                clamplTextOY: GetValue$2(config, 'clamplChildOY', false),
+                clamplTextOY: GetValue$2(config, 'clampChildOY', false),
                 alwaysScrollable: GetValue$2(config, 'alwaysScrollable', false),
             });
             scene.add.existing(textBlock); // Important: Add to display list for touch detecting
