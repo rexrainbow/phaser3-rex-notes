@@ -5461,9 +5461,13 @@
         }
 
         var isTopmostParent = !parent;
+        // Set scale to 1
+        if (isTopmostParent || parent.runChildrenScaleSave) {
+            this.saveScale();
+        }
+
         // Pre-processor, top parent only
         if (isTopmostParent) {
-            this.saveScale();
             this.preLayout();
         }
 
@@ -5509,10 +5513,13 @@
         // Custom postLayout callback
         this.postLayout(parent, width, height);
 
+        // Restore scale
+        if (isTopmostParent || parent.runChildrenScaleSave) {
+            this.restoreScale();
+        }
+
         // Post-processor, top parent only
         if (isTopmostParent) {
-            this.restoreScale();
-
             if (this._anchor) {
                 this._anchor.updatePosition();
             }
@@ -12897,6 +12904,9 @@
             this.sizerChildren = undefined; // [] or {}
             this.childrenMap = {};
             this.layoutedChildren = undefined;
+
+            // FixWidthSizer uses these flag
+            this.runChildrenScaleSave = false;
             this.runChildrenWrapFlag = false;
 
             this.enableLayoutWarn(false);
