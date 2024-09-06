@@ -10,20 +10,20 @@
         <meta name="author" content="rexrainbow">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/postfx-pipeline/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/groupnavigator/">
       
       
-        <link rel="prev" href="../prefx-pipeline/">
+        <link rel="prev" href="../tagplayer/">
       
       
-        <link rel="next" href="../shader-glowfilter/">
+        <link rel="next" href="../datamanager/">
       
       <link rel="icon" href="../images/logo.svg">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.1">
     
     
       
-        <title>Post fx pipeline - Notes of Phaser 3</title>
+        <title>Group navigator - Notes of Phaser 3</title>
       
     
     
@@ -117,7 +117,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Post fx pipeline
+              Group navigator
             
           </span>
         </div>
@@ -4904,16 +4904,14 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
       
       
       
@@ -4922,7 +4920,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_9">
           <span class="md-nav__icon md-icon"></span>
           Shader effects
@@ -5009,157 +5007,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Post fx pipeline
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../postfx-pipeline/" class="md-nav__link">
         Post fx pipeline
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav" aria-label="Usage">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#post-fx-pipeline-class" class="md-nav__link">
-    Post fx pipeline class
-  </a>
-  
-    <nav class="md-nav" aria-label="Post fx pipeline class">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#set-uniform-values" class="md-nav__link">
-    Set uniform values
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#onprerender" class="md-nav__link">
-    onPreRender
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ondraw" class="md-nav__link">
-    onDraw
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#register-post-fx-pipeline" class="md-nav__link">
-    Register post-fx pipeline
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#apply-effect" class="md-nav__link">
-    Apply effect
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-post-fx-pipeline" class="md-nav__link">
-    Get post-fx pipeline
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#remove-post-fx-pipeline" class="md-nav__link">
-    Remove post-fx pipeline
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#unregister-post-fx-pipeline" class="md-nav__link">
-    Unregister post-fx pipeline
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#color-matrix" class="md-nav__link">
-    Color matrix
-  </a>
-  
-    <nav class="md-nav" aria-label="Color matrix">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#color-adjusting" class="md-nav__link">
-    Color adjusting
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#draw" class="md-nav__link">
-    Draw
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -5689,14 +5541,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" checked>
       
       
       
@@ -5705,7 +5559,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_10">
           <span class="md-nav__icon md-icon"></span>
           Logic
@@ -6358,11 +6212,137 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../groupnavigator/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Group navigator
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Group navigator
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-plugin" class="md-nav__link">
+    Install plugin
+  </a>
+  
+    <nav class="md-nav" aria-label="Install plugin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-minify-file" class="md-nav__link">
+    Load minify file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-plugin" class="md-nav__link">
+    Import plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-navigator" class="md-nav__link">
+    Create navigator
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#navigate" class="md-nav__link">
+    Navigate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#force-focus" class="md-nav__link">
+    Force focus
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#force-blur" class="md-nav__link">
+    Force blur
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -9836,6 +9816,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#usage" class="md-nav__link">
     Usage
   </a>
@@ -9844,30 +9831,30 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#post-fx-pipeline-class" class="md-nav__link">
-    Post fx pipeline class
+  <a href="#install-plugin" class="md-nav__link">
+    Install plugin
   </a>
   
-    <nav class="md-nav" aria-label="Post fx pipeline class">
+    <nav class="md-nav" aria-label="Install plugin">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#set-uniform-values" class="md-nav__link">
-    Set uniform values
+  <a href="#load-minify-file" class="md-nav__link">
+    Load minify file
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#onprerender" class="md-nav__link">
-    onPreRender
+  <a href="#import-plugin" class="md-nav__link">
+    Import plugin
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#ondraw" class="md-nav__link">
-    onDraw
+  <a href="#import-class" class="md-nav__link">
+    Import class
   </a>
   
 </li>
@@ -9878,64 +9865,37 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#register-post-fx-pipeline" class="md-nav__link">
-    Register post-fx pipeline
+  <a href="#create-navigator" class="md-nav__link">
+    Create navigator
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#apply-effect" class="md-nav__link">
-    Apply effect
+  <a href="#navigate" class="md-nav__link">
+    Navigate
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-post-fx-pipeline" class="md-nav__link">
-    Get post-fx pipeline
+  <a href="#force-focus" class="md-nav__link">
+    Force focus
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#remove-post-fx-pipeline" class="md-nav__link">
-    Remove post-fx pipeline
+  <a href="#force-blur" class="md-nav__link">
+    Force blur
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#unregister-post-fx-pipeline" class="md-nav__link">
-    Unregister post-fx pipeline
+  <a href="#events" class="md-nav__link">
+    Events
   </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#color-matrix" class="md-nav__link">
-    Color matrix
-  </a>
-  
-    <nav class="md-nav" aria-label="Color matrix">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#color-adjusting" class="md-nav__link">
-    Color adjusting
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#draw" class="md-nav__link">
-    Draw
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -9962,287 +9922,145 @@
   
 
 
-  <h1>Post fx pipeline</h1>
+  <h1>Group navigator</h1>
 
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Post fx pipelines for game objects or camera. 
-A game object or a camera can stack many post-fx effect.</p>
+<p>Navigate between existing game objects, focus on next/previous/next-row/previous row game object.</p>
 <ul>
-<li>Author: Richard Davey</li>
+<li>Author: Rex</li>
+<li>Member of scene</li>
 </ul>
-<div class="admonition warning">
-<p class="admonition-title">WebGL only</p>
-<p>All kinds of post fx pipelines only work in WebGL render mode.</p>
-</div>
+<h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://codepen.io/rexrainbow/pen/OJerJxK">1D targets</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/jOjXZMv">2D targets</a></li>
+</ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="post-fx-pipeline-class">Post fx pipeline class<a class="headerlink" href="#post-fx-pipeline-class" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyPostFxClass</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Renderer</span><span class="p">.</span><span class="nx">WebGL</span><span class="p">.</span><span class="nx">Pipelines</span><span class="p">.</span><span class="nx">PostFXPipeline</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">game</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">super</span><span class="p">({</span>
-<span class="w">            </span><span class="nx">game</span><span class="o">:</span><span class="w"> </span><span class="nx">game</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">renderTarget</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">fragShader</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;...&#39;</span><span class="p">,</span><span class="w">  </span><span class="c1">// GLSL shader</span>
-<span class="w">            </span><span class="nx">uniforms</span><span class="o">:</span><span class="w"> </span><span class="p">[]</span>
-<span class="w">        </span><span class="p">});</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="nx">onPreRender</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">set1f</span><span class="p">(</span><span class="s1">&#39;intensity&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">_intensity</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="nx">onDraw</span><span class="p">(</span><span class="nx">renderTarget</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-<h4 id="set-uniform-values">Set uniform values<a class="headerlink" href="#set-uniform-values" title="Permanent link">&para;</a></h4>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/groupnavigator">Sample code</a></p>
+<h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
+<h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Property with 1 value<ul>
-<li>Float
-    <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set1f</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">value0</span><span class="p">);</span>
-<span class="c1">// pipelineInstance.set1f(name, value0, shader);</span>
+<li>Load plugin (minify file) in preload stage
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexgroupnavigatorplugin&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexgroupnavigatorplugin.min.js&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
 </code></pre></div></li>
-<li>uniform1fv
-    <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set1fv</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">value0</span><span class="p">);</span>
-<span class="c1">// pipelineInstance.set1fv(name, value0, shader);</span>
-</code></pre></div></li>
-<li>Int
-    <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set1i</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">value0</span><span class="p">);</span>
-<span class="c1">// pipelineInstance.set1i(name, value0, shader);</span>
+<li>Create navigator
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">navigator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexgroupnavigatorplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-</li>
-<li>Property with 2 values<ul>
-<li>Float
-    <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set2f</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">value0</span><span class="p">,</span><span class="w"> </span><span class="nx">value1</span><span class="p">);</span>
-<span class="c1">// pipelineInstance.set2f(name, value0, value1, shader);</span>
-</code></pre></div></li>
-<li>uniform2fv
-    <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set2fv</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">value0</span><span class="p">,</span><span class="w"> </span><span class="nx">value1</span><span class="p">);</span>
-<span class="c1">// pipelineInstance.set2fv(name, value0, value1, shader);</span>
-</code></pre></div></li>
-<li>Int
-    <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set2i</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">value0</span><span class="p">,</span><span class="w"> </span><span class="nx">value1</span><span class="p">);</span>
-<span class="c1">// pipelineInstance.set2i(name, value0, value1, shader);</span>
-</code></pre></div></li>
-</ul>
-</li>
-<li>Property with 3 value<ul>
-<li>Float
-    <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set3f</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">value0</span><span class="p">,</span><span class="w"> </span><span class="nx">value1</span><span class="p">,</span><span class="w"> </span><span class="nx">value2</span><span class="p">);</span>
-<span class="c1">// pipelineInstance.set3f(name, value0, value1, value2, shader);</span>
-</code></pre></div></li>
-<li>uniform3fv
-    <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set3fv</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">value0</span><span class="p">,</span><span class="w"> </span><span class="nx">value1</span><span class="p">,</span><span class="w"> </span><span class="nx">value2</span><span class="p">);</span>
-<span class="c1">// pipelineInstance.set3fv(name, value0, value1, value2, shader);</span>
-</code></pre></div></li>
-<li>Int
-    <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set3i</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">value0</span><span class="p">,</span><span class="w"> </span><span class="nx">value1</span><span class="p">,</span><span class="w"> </span><span class="nx">value2</span><span class="p">);</span>
-<span class="c1">// pipelineInstance.set3i(name, value0, value1, value2, shader);</span>
-</code></pre></div></li>
-</ul>
-</li>
-<li>Property with 4 values<ul>
-<li>Float
-    <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set4f</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">value0</span><span class="p">,</span><span class="w"> </span><span class="nx">value1</span><span class="p">,</span><span class="w"> </span><span class="nx">value2</span><span class="p">,</span><span class="w"> </span><span class="nx">value3</span><span class="p">);</span>
-<span class="c1">// pipelineInstance.set4f(name, value0, value1, value2, value3, shader);</span>
-</code></pre></div></li>
-<li>uniform4fv
-    <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set4fv</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">value0</span><span class="p">,</span><span class="w"> </span><span class="nx">value1</span><span class="p">,</span><span class="w"> </span><span class="nx">value2</span><span class="p">,</span><span class="w"> </span><span class="nx">value3</span><span class="p">);</span>
-<span class="c1">// pipelineInstance.set4fv(name, value0, value1, value2, value3, shader);</span>
-</code></pre></div></li>
-<li>Int
-    <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set4i</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">value0</span><span class="p">,</span><span class="w"> </span><span class="nx">value1</span><span class="p">,</span><span class="w"> </span><span class="nx">value2</span><span class="p">,</span><span class="w"> </span><span class="nx">value3</span><span class="p">);</span>
-<span class="c1">// pipelineInstance.set4i(name, value0, value1, value2, value3, shader);</span>
-</code></pre></div></li>
-</ul>
-</li>
-</ul>
-<h4 id="onprerender">onPreRender<a class="headerlink" href="#onprerender" title="Permanent link">&para;</a></h4>
+<h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
 <ul>
-<li><a href="./#set-uniform-values">Set uniform values</a> in <code>onPreRender</code> method.</li>
-</ul>
-<h4 id="ondraw">onDraw<a class="headerlink" href="#ondraw" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Ping-pong drawing<ul>
-<li>Variables : <ul>
-<li><code>renderTarget</code> : Render target, parameter of <code>onDraw</code> method.</li>
-<li><code>pipelineInstance.fullFrame1</code>, <code>pipelineInstance.fullFrame2</code> : Ping-pong render texture.</li>
-</ul>
-</li>
-<li>Steps<ol>
-<li>Copy frame to <code>pipelineInstance.fullFrame1</code>
-    <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">copyFrame</span><span class="p">(</span><span class="nx">source</span><span class="p">,</span><span class="w"> </span><span class="nx">target</span><span class="p">);</span>
-<span class="c1">// pipelineInstance.copyFrame(source, target, brightness, clear, clearAlpha);</span>
+<li>Install rex plugins from npm
+    <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
-<li><a href="./#set-uniform-values">Set uniform values</a></li>
-<li>Bind and draw on <code>pipelineInstance.fullFrame1</code>, <code>pipelineInstance.fullFrame2</code>.
-    <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">bindAndDraw</span><span class="p">(</span><span class="nx">source</span><span class="p">,</span><span class="w"> </span><span class="nx">target</span><span class="p">);</span>
-<span class="c1">// pipelineInstance.bindAndDraw(source, target, clear, clearAlpha, shader);</span>
-</code></pre></div></li>
-<li>Draw result back
-    <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">bindAndDraw</span><span class="p">(</span><span class="nx">source</span><span class="p">);</span>
-</code></pre></div></li>
-</ol>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="register-post-fx-pipeline">Register post-fx pipeline<a class="headerlink" href="#register-post-fx-pipeline" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Register post-fx pipeline in game config
-    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">MyPostFxClass</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;path&#39;</span><span class="p">;</span>
+<li>Install plugin in <a href="../game/#configuration">configuration of game</a>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">GroupNavigatorPlugin</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/plugins/groupnavigator-plugin.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// ...</span>
-<span class="w">    </span><span class="nx">pipeline</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nx">MyPostFxClass</span><span class="p">]</span>
+<span class="w">    </span><span class="nx">plugins</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">global</span><span class="o">:</span><span class="w"> </span><span class="p">[{</span>
+<span class="w">            </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;rexGroupNavigator&#39;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">plugin</span><span class="o">:</span><span class="w"> </span><span class="nx">GroupNavigatorPlugin</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">start</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="c1">// ...</span>
+<span class="w">        </span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="w">    </span><span class="c1">// ...</span>
 <span class="p">};</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">game</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Or register post-fx pipeline at runtime
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">pipelineManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">sys</span><span class="p">.</span><span class="nx">renderer</span><span class="p">.</span><span class="nx">pipelines</span><span class="p">;</span>
-<span class="nx">pipelineManager</span><span class="p">.</span><span class="nx">addPostPipeline</span><span class="p">(</span><span class="nx">PostFxName</span><span class="p">,</span><span class="w"> </span><span class="nx">MyPostFxClass</span><span class="p">);</span>
+<li>Create navigator
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">navigator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexGroupNavigator&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-<h3 id="apply-effect">Apply effect<a class="headerlink" href="#apply-effect" title="Permanent link">&para;</a></h3>
-<p><div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setPostPipeline</span><span class="p">(</span><span class="nx">MyPostFxClass</span><span class="p">);</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">setPostPipeline</span><span class="p">(</span><span class="nx">MyPostFxClass</span><span class="p">);</span>
-</code></pre></div></p>
-<p>Will create an effect instance then push it into postPipelines list.</p>
-<h3 id="get-post-fx-pipeline">Get post-fx pipeline<a class="headerlink" href="#get-post-fx-pipeline" title="Permanent link">&para;</a></h3>
-<p><div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">pipelineInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">getPostPipeline</span><span class="p">(</span><span class="nx">MyPostFxClass</span><span class="p">);</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">pipelineInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">camera</span><span class="p">.</span><span class="nx">getPostPipeline</span><span class="p">(</span><span class="nx">MyPostFxClass</span><span class="p">);</span>
-</code></pre></div></p>
-<h3 id="remove-post-fx-pipeline">Remove post-fx pipeline<a class="headerlink" href="#remove-post-fx-pipeline" title="Permanent link">&para;</a></h3>
-<p><div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">removePostPipeline</span><span class="p">(</span><span class="nx">MyPostFxClass</span><span class="p">);</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">removePostPipeline</span><span class="p">(</span><span class="nx">MyPostFxClass</span><span class="p">);</span>
-</code></pre></div></p>
-<h3 id="unregister-post-fx-pipeline">Unregister post-fx pipeline<a class="headerlink" href="#unregister-post-fx-pipeline" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">pipelineManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">sys</span><span class="p">.</span><span class="nx">renderer</span><span class="p">.</span><span class="nx">pipelines</span><span class="p">;</span>
-<span class="nx">pipelineManager</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">PostFxName</span><span class="p">);</span>
-</code></pre></div>
-<h3 id="color-matrix">Color matrix<a class="headerlink" href="#color-matrix" title="Permanent link">&para;</a></h3>
-<p>Use color martix to change RGB render result, and more...</p>
-<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyPostFxClass</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Renderer</span><span class="p">.</span><span class="nx">WebGL</span><span class="p">.</span><span class="nx">Pipelines</span><span class="p">.</span><span class="nx">PostFXPipeline</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">game</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">super</span><span class="p">({</span>
-<span class="w">            </span><span class="nx">game</span><span class="o">:</span><span class="w"> </span><span class="nx">game</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">renderTarget</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">fragShader</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;...&#39;</span><span class="p">,</span><span class="w">  </span><span class="c1">// GLSL shader</span>
-<span class="w">            </span><span class="nx">uniforms</span><span class="o">:</span><span class="w"> </span><span class="p">[]</span>
-<span class="w">        </span><span class="p">});</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="nx">onPreRender</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// this.set1f(&#39;intensity&#39;, this._intensity);</span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">grayscale</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_intensity</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="nx">onDraw</span><span class="p">(</span><span class="nx">renderTarget</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">grayscale</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_intensity</span><span class="p">);</span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">drawFrame</span><span class="p">(</span><span class="nx">renderTarget</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">fullFrame1</span><span class="p">);</span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">bindAndDraw</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">fullFrame1</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-<h4 id="color-adjusting">Color adjusting<a class="headerlink" href="#color-adjusting" title="Permanent link">&para;</a></h4>
-<p>Invoke before <code>drawFrame()</code>.</p>
+<h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Grayscale
-    <div class="highlight"><pre><span></span><code><span class="k">this</span><span class="p">.</span><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">grayscale</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
-<span class="c1">// this.colorMatrix.grayscale(value, true); // Cascade</span>
-</code></pre></div><ul>
-<li><code>value</code> : <code>0</code> ~ <code>1</code></li>
-</ul>
-</li>
-<li>Night vision tone
-    <div class="highlight"><pre><span></span><code><span class="k">this</span><span class="p">.</span><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">night</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
-<span class="c1">// this.colorMatrix.night(value, true); // Cascade</span>
-</code></pre></div><ul>
-<li><code>value</code> : <code>0</code> ~ <code>1</code></li>
-</ul>
-</li>
-<li>Sepia tone
-    <div class="highlight"><pre><span></span><code><span class="k">this</span><span class="p">.</span><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">sepia</span><span class="p">();</span>
-<span class="c1">// this.colorMatrix.sepia(true); // Cascade</span>
+<li>Install rex plugins from npm
+    <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
-<li>Trippy color tone
-    <div class="highlight"><pre><span></span><code><span class="k">this</span><span class="p">.</span><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">lsd</span><span class="p">();</span>
-<span class="c1">// this.colorMatrix.lsd(true); // Cascade</span>
+<li>Import class
+    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">GroupNavigator</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/plugins/groupnavigator.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
-<li>Brown tone
-    <div class="highlight"><pre><span></span><code><span class="k">this</span><span class="p">.</span><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">brown</span><span class="p">();</span>
-<span class="c1">// this.colorMatrix.brown(true); // Cascade</span>
-</code></pre></div></li>
-<li>Vintage pinhole color effect
-    <div class="highlight"><pre><span></span><code><span class="k">this</span><span class="p">.</span><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">vintagePinhole</span><span class="p">();</span>
-<span class="c1">// this.colorMatrix.vintagePinhole(true); // Cascade</span>
-</code></pre></div></li>
-<li>Kodachrome color effect
-    <div class="highlight"><pre><span></span><code><span class="k">this</span><span class="p">.</span><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">kodachrome</span><span class="p">();</span>
-<span class="c1">// this.colorMatrix.kodachrome(true); // Cascade</span>
-</code></pre></div></li>
-<li>Technicolor color effect
-    <div class="highlight"><pre><span></span><code><span class="k">this</span><span class="p">.</span><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">technicolor</span><span class="p">();</span>
-<span class="c1">// this.colorMatrix.technicolor(true); // Cascade</span>
-</code></pre></div></li>
-<li>Polaroid color effect
-    <div class="highlight"><pre><span></span><code><span class="k">this</span><span class="p">.</span><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">polaroid</span><span class="p">();</span>
-<span class="c1">// this.colorMatrix.polaroid(true); // Cascade</span>
-</code></pre></div></li>
-<li>Brightness
-    <div class="highlight"><pre><span></span><code><span class="k">this</span><span class="p">.</span><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">brightness</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
-<span class="c1">// this.colorMatrix.brightness(value, true); // Cascade</span>
-</code></pre></div><ul>
-<li><code>value</code> : <code>0</code>(black) ~ <code>1</code></li>
-</ul>
-</li>
-<li>Saturation
-    <div class="highlight"><pre><span></span><code><span class="k">this</span><span class="p">.</span><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">saturate</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
-<span class="c1">// this.colorMatrix.saturate(value, true); // Cascade</span>
-</code></pre></div><ul>
-<li><code>value</code> : <code>-1</code> ~ <code>1</code></li>
-</ul>
-</li>
-<li>Desaturate
-    <div class="highlight"><pre><span></span><code><span class="k">this</span><span class="p">.</span><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">desaturate</span><span class="p">();</span>
-<span class="c1">// this.colorMatrix.desaturate(true); // Cascade</span>
-</code></pre></div></li>
-<li>Hue
-    <div class="highlight"><pre><span></span><code><span class="k">this</span><span class="p">.</span><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">hue</span><span class="p">(</span><span class="nx">rotation</span><span class="p">);</span>
-<span class="c1">// this.colorMatrix.hue(rotation, true); // Cascade</span>
-</code></pre></div><ul>
-<li><code>rotation</code> : Hue rotation, in degree.</li>
-</ul>
-</li>
-<li>Black and white
-    <div class="highlight"><pre><span></span><code><span class="k">this</span><span class="p">.</span><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">blackWhite</span><span class="p">();</span>
-<span class="c1">// this.colorMatrix.blackWhite(true); // Cascade</span>
-</code></pre></div></li>
-<li>Negative
-    <div class="highlight"><pre><span></span><code><span class="k">this</span><span class="p">.</span><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">negative</span><span class="p">();</span>
-<span class="c1">// this.colorMatrix.negative(true); // Cascade</span>
-</code></pre></div></li>
-<li>Contrast
-    <div class="highlight"><pre><span></span><code><span class="k">this</span><span class="p">.</span><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">contrast</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
-<span class="c1">// this.colorMatrix.contrast(value, true); // Cascade</span>
-</code></pre></div></li>
-<li>Desaturate luminance
-    <div class="highlight"><pre><span></span><code><span class="k">this</span><span class="p">.</span><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">desaturateLuminance</span><span class="p">();</span>
-<span class="c1">// this.colorMatrix.desaturateLuminance(true); // Cascade</span>
-</code></pre></div></li>
-<li>Shifts RGB to BGR order
-    <div class="highlight"><pre><span></span><code><span class="k">this</span><span class="p">.</span><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">shiftToBGR</span><span class="p">();</span>
-<span class="c1">// this.colorMatrix.shiftToBGR(true); // Cascade</span>
+<li>Create navigator
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">navigator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">GroupNavigator</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-<h4 id="draw">Draw<a class="headerlink" href="#draw" title="Permanent link">&para;</a></h4>
-<p>Invoke under <code>onDraw(renderTarget)</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="k">this</span><span class="p">.</span><span class="nx">drawFrame</span><span class="p">(</span><span class="nx">renderTarget</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">fullFrame1</span><span class="p">);</span>
-<span class="k">this</span><span class="p">.</span><span class="nx">bindAndDraw</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">fullFrame1</span><span class="p">);</span>
+<h3 id="create-navigator">Create navigator<a class="headerlink" href="#create-navigator" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">navigator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexGroupNavigator&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">targets</span><span class="o">:</span><span class="w"> </span><span class="nx">gameObjects</span><span class="p">,</span>
+<span class="w">    </span><span class="c1">// columns: undefined,</span>
+
+<span class="w">    </span><span class="c1">// getFocusEnableCallback(gameObject) { </span>
+<span class="w">    </span><span class="c1">//     return focusEnable;</span>
+<span class="w">    </span><span class="c1">// }</span>
+<span class="w">    </span><span class="c1">// focusEnableDataKey: undefined,</span>
+<span class="w">    </span><span class="c1">// focusEnableKey: undefined</span>
+<span class="p">});</span>
 </code></pre></div>
+<ul>
+<li><code>targets</code> : <ul>
+<li>1D array of game objects for <code>navigator.next()</code>, or <code>navigator.previous()</code></li>
+<li>2D array of game objects for <code>navigator.next()</code>, <code>navigator.previous()</code>, <code>navigator.nextRow()</code>, <code>navigator.previousRow()</code></li>
+</ul>
+</li>
+<li><code>columns</code> : A number : Convert 1D <code>targets</code> array to 2D array, each row has <code>columns</code> game objects.<ul>
+<li><code>undefined</code> : Ignore this parameter. Default behavior.</li>
+</ul>
+</li>
+<li>Focus enable : Get focus enable of game object by one of these parameter.<ul>
+<li><code>getFocusEnableCallback</code> : A callback to return focus enable of this game object.
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">focusEnable</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li><code>focusEnableDataKey</code> : Get focus enable from private data of this game object.</li>
+<li><code>focusEnableKey</code> : Get focus enable from property of this game object.</li>
+<li>Focus enable is always <code>true</code> if none of these parameter is given. Default behavior.</li>
+</ul>
+</li>
+</ul>
+<h3 id="navigate">Navigate<a class="headerlink" href="#navigate" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Focus on next/previous game object, for 1D and 2D array of <code>targets</code>
+    <div class="highlight"><pre><span></span><code><span class="nx">navigator</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span>
+</code></pre></div>
+    <div class="highlight"><pre><span></span><code><span class="nx">navigator</span><span class="p">.</span><span class="nx">previous</span><span class="p">();</span>
+</code></pre></div>
+    Will fire <code>blur</code> and <code>focus</code> events</li>
+<li>Focus on next row/previous row game object, for 2D array of <code>targets</code>
+    <div class="highlight"><pre><span></span><code><span class="nx">navigator</span><span class="p">.</span><span class="nx">nextRow</span><span class="p">();</span>
+</code></pre></div>
+    <div class="highlight"><pre><span></span><code><span class="nx">navigator</span><span class="p">.</span><span class="nx">previousRow</span><span class="p">();</span>
+</code></pre></div>
+    Will fire <code>blur</code> and <code>focus</code> events</li>
+<li>Focus on first/last game object
+    <div class="highlight"><pre><span></span><code><span class="nx">navigator</span><span class="p">.</span><span class="nx">first</span><span class="p">();</span>
+</code></pre></div>
+    <div class="highlight"><pre><span></span><code><span class="nx">navigator</span><span class="p">.</span><span class="nx">last</span><span class="p">();</span>
+</code></pre></div>
+    Will fire <code>blur</code> and <code>focus</code> events</li>
+</ul>
+<h3 id="force-focus">Force focus<a class="headerlink" href="#force-focus" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">navigator</span><span class="p">.</span><span class="nx">focus</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+</code></pre></div>
+<p>Will fire <code>blur</code> and <code>focus</code> events.</p>
+<h3 id="force-blur">Force blur<a class="headerlink" href="#force-blur" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">navigator</span><span class="p">.</span><span class="nx">blur</span><span class="p">();</span>
+</code></pre></div>
+<p>Will fire <code>blur</code> event.</p>
+<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<ul>
+<li>On focus
+    <div class="highlight"><pre><span></span><code><span class="nx">navigator</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;focus&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">){</span>
+
+<span class="p">})</span>
+</code></pre></div></li>
+<li>On blur
+    <div class="highlight"><pre><span></span><code><span class="nx">navigator</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;blur&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">){</span>
+
+<span class="p">})</span>
+</code></pre></div></li>
+</ul>
 
 
   
