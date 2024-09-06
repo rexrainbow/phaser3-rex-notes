@@ -12,7 +12,7 @@ class GroupNavigator {
         this.setEventEmitter(eventEmitter, EventEmitterClass);
 
         this.parent = parent;
-        this.focusedGameObject = undefined;
+        this.focusedTarget = undefined;
         this.focusIndex = { x: undefined, y: undefined };
 
         this.resetFromJSON(config);
@@ -20,7 +20,21 @@ class GroupNavigator {
 
     resetFromJSON(o) {
         this.setTargets(GetValue(o, 'targets'));
-        this.setGetFocusEnableCallback(GetValue(o, 'getFocusEnableCallback'));
+
+        var focusEnableCallback = GetValue(o, 'getFocusEnableCallback');
+        if (focusEnableCallback) {
+            this.setGetFocusEnableCallback(focusEnableCallback);
+        } else {
+            var focusEnableDataKey = GetValue(o, 'focusEnableDataKey');
+            if (focusEnableDataKey) {
+                this.setFocusEnableDataKey(focusEnableDataKey);
+            } else {
+                var focusEnableKey = GetValue(o, 'focusEnableKey');
+                if (focusEnableKey) {
+                    this.setFocusEnableKey(focusEnableKey);
+                }
+            }
+        }
     }
 
 
@@ -38,9 +52,35 @@ class GroupNavigator {
         return this;
     }
 
-    setGetFocusEnableCallback(callbakc) {
-        this.getFocusEnableCallback = callbakc;
+    setFocusEnableDataKey(dataKey) {
+        var callback;
+        if (dataKey) {
+            callback = function (gameObject) {
+                return gameObject.getData(dataKey);
+            }
+        }
+        this.setGetFocusEnableCallback(callback);
         return this;
+    }
+
+    setFocusEnableKey(key) {
+        var callback;
+        if (key) {
+            callback = function (gameObject) {
+                return gameObject[key];
+            }
+        }
+        this.setGetFocusEnableCallback(callback);
+        return this;
+    }
+
+    setGetFocusEnableCallback(callback) {
+        this.getFocusEnableCallback = callback;
+        return this;
+    }
+
+    getFocusedTarget() {
+        return this.focusedTarget;
     }
 }
 

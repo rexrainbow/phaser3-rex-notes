@@ -1,24 +1,24 @@
 var Focus = function (gameObject) {
     // Already focus
-    if (gameObject === this.focusedGameObject) {
+    if (gameObject === this.focusedTarget) {
         return this;
     }
 
     Blur.call(this);
 
-    this.focusedGameObject = gameObject;
+    this.focusedTarget = gameObject;
     if (gameObject) {
         this.emit('focus', gameObject);
     }
 }
 
 var Blur = function () {
-    if (!this.focusedGameObject) {
+    if (!this.focusedTarget) {
         return this;
     }
 
-    var gameObject = this.focusedGameObject;
-    this.focusedGameObject = null;
+    var gameObject = this.focusedTarget;
+    this.focusedTarget = null;
     this.emit('blur', gameObject);
 }
 
@@ -55,7 +55,7 @@ export default {
 
     focus(gameObject) {
         // Already focus
-        if (gameObject === this.focusedGameObject) {
+        if (gameObject === this.focusedTarget) {
             return this;
         }
 
