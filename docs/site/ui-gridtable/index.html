@@ -8266,6 +8266,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#reset-size-of-all-cells" class="md-nav__link">
+    Reset size of all cells
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#scroll-content" class="md-nav__link">
     Scroll content
   </a>
@@ -10017,6 +10024,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#reset-size-of-all-cells" class="md-nav__link">
+    Reset size of all cells
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#scroll-content" class="md-nav__link">
     Scroll content
   </a>
@@ -10155,6 +10169,7 @@
 <li><a href="https://codepen.io/rexrainbow/pen/KKrrYRm">Two sliders</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/YzRrOOP">Separator</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/zYarzzO">Modal</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/poXqqXK">Fixed cell size</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/WNaQrgp">Drag item</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/BaGXNwG">Layer + mask padding</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/YzXYemw">Fade-out-destroy cell</a></li>
@@ -10235,6 +10250,8 @@
 <span class="w">        </span><span class="nx">cellHeight</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">columns</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
 <span class="w">        </span><span class="c1">// rows: 1,</span>
+<span class="w">        </span><span class="c1">// fixedCellSize: false,</span>
+
 <span class="w">        </span><span class="nx">mask</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="nx">padding</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
 <span class="w">            </span><span class="c1">// updateMode: 0,</span>
@@ -10432,6 +10449,11 @@
 </li>
 <li><code>table.columns</code> : Columns count of each row. Can be used in <em>vertical</em> or <em>horizontal</em> scroll mode.</li>
 <li><code>table.rows</code> : Rows count of each column. Can be used in <em>horizontal</em> scroll mode.</li>
+<li><code>table.fixedCellSize</code> : Assign  <code>columns</code> according to <code>cellWidth</code> (if <code>scrollMode</code> is <code>0</code>) or <code>cellHeight</code> (if <code>scrollMode</code> is <code>1</code>) , when initialize and resizing.
+　　    - <code>false</code> : Ignore this parameter. Default behavior.<ul>
+<li><code>true</code> : Set <code>columns</code> according to <code>cellWidth</code>/<code>cellHeight</code>.</li>
+</ul>
+</li>
 <li><code>table.mask</code> : A rectangle mask of cells<ul>
 <li><code>table.mask.padding</code> : Extra left/right/top/bottom padding spacing of this rectangle mask. Default value is <code>0</code>.</li>
 <li><code>table.mask.updateMode</code> : When to update cells mask<ul>
@@ -10705,6 +10727,9 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">table</span><span class="p">.</span><span class="nx">getCellContainer</span><span class="p">(</span><span class="nx">cellIndex</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
+<h3 id="reset-size-of-all-cells">Reset size of all cells<a class="headerlink" href="#reset-size-of-all-cells" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">resetAllCellsSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">);</span>
+</code></pre></div>
 <h3 id="scroll-content">Scroll content<a class="headerlink" href="#scroll-content" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Set

@@ -10076,7 +10076,7 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">gameObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">navigator</span><span class="p">.</span><span class="nx">getFocusedTarget</span><span class="p">();</span>
 <span class="c1">// var gameObject = navigator.focusedTarget;</span>
 </code></pre></div></li>
-<li>Focus on game object
+<li>Focus on game object. Do nothing if that game object is not focus-enable.
     <div class="highlight"><pre><span></span><code><span class="nx">navigator</span><span class="p">.</span><span class="nx">focus</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
 </code></pre></div>
     Will fire <code>blur</code> and <code>focus</code> events.</li>

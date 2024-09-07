@@ -2800,6 +2800,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#reset-size-of-all-cells" class="md-nav__link">
+    Reset size of all cells
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#fore-each-visible-cell" class="md-nav__link">
     Fore each visible cell
   </a>
@@ -10171,6 +10178,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#reset-size-of-all-cells" class="md-nav__link">
+    Reset size of all cells
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#fore-each-visible-cell" class="md-nav__link">
     Fore each visible cell
   </a>
@@ -10302,6 +10316,7 @@
 <span class="w">    </span><span class="c1">// rows: 1,</span>
 <span class="w">    </span><span class="nx">cellHeight</span><span class="o">:</span><span class="w"> </span><span class="mf">30</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">cellWidth</span><span class="o">:</span><span class="w"> </span><span class="mf">30</span><span class="p">,</span>
+<span class="w">    </span><span class="c1">// fixedCellSize: false,</span>
 
 <span class="w">    </span><span class="nx">cellVisibleCallback</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
 <span class="w">    </span><span class="c1">// cellVisibleCallback: function (cell, cellContainer, table) {},</span>
@@ -10336,6 +10351,11 @@
 </li>
 <li><code>cellWidth</code> : Width of each cell.<ul>
 <li>Expand cell width to fit table width : set <code>cellWidth</code> to <code>undefined</code>, and <code>scrollMode</code> is <code>'vertical'</code>.</li>
+</ul>
+</li>
+<li><code>fixedCellSize</code> : Assign <code>columns</code> according to <code>cellWidth</code> (if <code>scrollMode</code> is <code>0</code>) or <code>cellHeight</code> (if <code>scrollMode</code> is <code>1</code>) , when initialize and resizing.
+　　- <code>false</code> : Ignore this parameter. Default behavior.<ul>
+<li><code>true</code> : Set <code>columns</code> according to <code>cellWidth</code>/<code>cellHeight</code>.</li>
 </ul>
 </li>
 <li><code>cellVisibleCallback</code> , <code>cellVisibleCallbackScope</code> : <a href="./#cell-begins-visible">Callback when cell begins visible</a>.
@@ -10707,6 +10727,9 @@
 </ul>
 </li>
 </ul>
+<h4 id="reset-size-of-all-cells">Reset size of all cells<a class="headerlink" href="#reset-size-of-all-cells" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">resetAllCellsSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">);</span>
+</code></pre></div>
 <h4 id="fore-each-visible-cell">Fore each visible cell<a class="headerlink" href="#fore-each-visible-cell" title="Permanent link">&para;</a></h4>
 <ul>
 <li>For when you absolutely know this Set won't be modified during the iteration
