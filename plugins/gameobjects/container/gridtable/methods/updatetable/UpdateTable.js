@@ -1,7 +1,11 @@
-var UpdateTable = function (refresh) {
+var UpdateTable = function (refresh, maskChildren) {
     if (refresh === undefined) {
         refresh = false;
     }
+    if (maskChildren === undefined) {
+        maskChildren = false;
+    }
+
     if (refresh) {
         ClearVisibleCellIndexes.call(this);
         this.hideCells();
@@ -11,6 +15,14 @@ var UpdateTable = function (refresh) {
     this.hideCells();
 
     this.setMaskChildrenFlag();
+
+    if (maskChildren) {
+        // Layout children-mask
+        this.layoutChildrenMask();
+        // Re-mask children
+        this.maskChildren();
+    }
+
     return this;
 }
 

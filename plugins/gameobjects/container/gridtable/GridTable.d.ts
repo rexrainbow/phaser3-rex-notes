@@ -54,6 +54,7 @@ declare namespace GridTable {
         columns?: number,
         cellHeight?: number,
         cellWidth?: number,
+        fixedCellSize?: boolean,
 
         cellVisibleCallback: CellVisibleCallbackType,
         cellVisibleCallbackScope?: Object,

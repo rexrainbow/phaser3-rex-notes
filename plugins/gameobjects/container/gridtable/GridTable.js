@@ -59,11 +59,16 @@ class GridTable extends ContainerLite {
             cellHeight = config.cellWidth;
             columns = GetValue(config, 'rows', config.columns);
         }
+
+        this.fixedCellSize = GetValue(config, 'fixedCellSize', false);
+        this.expandCellSize = (!this.fixedCellSize) && (cellWidth === undefined);
+
         if (!columns) {
             columns = 1;  // Default columns
         }
-        this.expandCellSize = (cellWidth === undefined);
-        if (this.expandCellSize) {
+        if (this.fixedCellSize) {
+            columns = Math.max(Math.floor(this.instWidth / cellWidth), 1);
+        } else if (this.expandCellSize) {
             var width = (scrollY) ? this.width : this.height;
             cellWidth = width / columns;
         }
@@ -351,15 +356,14 @@ class GridTable extends ContainerLite {
 
         super.resize(width, height);
 
-        if (this.expandCellSize) {
+        if (this.fixedCellSize) {
+            var colCount = Math.floor(this.instWidth / this.table.defaultCellWidth);
+            this.table.setColumnCount(colCount);
+        } else if (this.expandCellSize) {
             this.table.setDefaultCellWidth(this.instWidth / this.table.colCount);
         }
-        this.updateTable(true);
 
-        // Layout children-mask
-        this.layoutChildrenMask();
-        // Re-mask children
-        this.maskChildren();
+        this.updateTable(true, true);
 
         return this;
     }
