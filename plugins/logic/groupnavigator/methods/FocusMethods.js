@@ -24,65 +24,97 @@ var Blur = function () {
 
 export default {
     first() {
+        if (!this.enable) {
+            return this;
+        }
+
         Focus.call(this, this.getFirst());
         return this;
     },
 
     last() {
+        if (!this.enable) {
+            return this;
+        }
+
         Focus.call(this, this.getLast());
         return this;
     },
 
     next() {
+        if (!this.enable) {
+            return this;
+        }
+
         Focus.call(this, this.getNext());
         return this;
     },
 
     previous() {
+        if (!this.enable) {
+            return this;
+        }
+
         Focus.call(this, this.getPrevious());
         return this;
     },
 
     nextRow() {
+        if (!this.enable) {
+            return this;
+        }
+
         Focus.call(this, this.getNextRow());
         return this;
     },
 
     previousRow() {
+        if (!this.enable) {
+            return this;
+        }
+
         Focus.call(this, this.getPreviousRow());
         return this;
     },
 
     focus(gameObject) {
-        // Already focus
-        if (gameObject === this.focusedTarget) {
+        if (!this.enable) {
             return this;
         }
 
-        var targets = this.targets;
-        var is1DTargetsArray = (Array.isArray(targets)) && (!Array.isArray(targets[0]));
-
-        if (is1DTargetsArray) {
-            var x = targets.indexOf(gameObject);
-            if (x !== -1) {
-                this.focusIndex.x = x;
-                this.focusIndex.y = 0;
-                Focus.call(this, gameObject);
-            }
-        } else {
-            for (var y = 0, rowCount = targets.length; y < rowCount; y++) {
-                var row = targets[y];
-                var x = row.indexOf(gameObject);
-                if (x !== -1) {
-                    this.focusIndex.x = x;
-                    this.focusIndex.y = y;
-                    Focus.call(this, gameObject);
-                }
-            }
+        if (!gameObject) {
+            this.blur();
+            return this;
         }
+
+        if (!this.isTargetFocusEnable(gameObject)) {
+            return this;
+        }
+
+        var index = this.getTargetIndex(gameObject);
+        if (index.x === undefined) {
+            this.blur();
+            return this;
+        }
+
+        this.focusIndex.x = index.x;
+        this.focusIndex.y = index.y;
+
+        // Already focus
+        if (gameObject !== this.focusedTarget) {
+            Focus.call(this, gameObject);
+        }
+
         return this;
     },
 
-    blur: Blur,
+    blur() {
+        if (!this.enable) {
+            return this;
+        }
+
+        Blur.call(this);
+        return this;
+    },
 
 }

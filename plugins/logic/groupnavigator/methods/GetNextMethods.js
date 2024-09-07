@@ -39,10 +39,7 @@ var GetNextameObject = function ({
         gameObject = row[x];
 
         // Test if this game object is focus-able
-        var focusEnable = true;
-        if (this.getFocusEnableCallback) {
-            focusEnable = this.getFocusEnableCallback(gameObject);
-        }
+        var focusEnable = this.isTargetFocusEnable(gameObject);
 
         // Not focus-enable
         if (!focusEnable) {
@@ -86,6 +83,14 @@ var GetNextameObject = function ({
 }
 
 export default {
+    isTargetFocusEnable(gameObject) {
+        var focusEnable = true;
+        if (this.getFocusEnableCallback) {
+            focusEnable = this.getFocusEnableCallback(gameObject);
+        }
+        return focusEnable;
+    },
+
     getFirst() {
         return GetNextameObject.call(this, {
             startX: 0,

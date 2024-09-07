@@ -75,6 +75,8 @@ Navigate between existing game objects, focus on next/previous/next-row/previous
 
 ```javascript
 var navigator = scene.plugins.get('rexGroupNavigator').add({
+    // enable: true,
+
     targets: gameObjects,
     // columns: undefined,
 
@@ -86,7 +88,10 @@ var navigator = scene.plugins.get('rexGroupNavigator').add({
 });
 ```
 
-- `targets` : 
+- `enable` :
+    - `true` : Can navigate between game objects. Default behavior.
+    - `false` : Ignore navigation actions (`navigator.next()`, `navigator.previous()`, `navigator.nextRow()`, `navigator.previousRow()`) 
+- `targe1ts` : 
     - 1D array of game objects for `navigator.next()`, or `navigator.previous()`
     - 2D array of game objects for `navigator.next()`, `navigator.previous()`, `navigator.nextRow()`, `navigator.previousRow()`
 - `columns` : A number : Convert 1D `targets` array to 2D array, each row has `columns` game objects.
@@ -101,6 +106,17 @@ var navigator = scene.plugins.get('rexGroupNavigator').add({
     - `focusEnableDataKey` : Get focus enable from private data of this game object.
     - `focusEnableKey` : Get focus enable from property of this game object.
     - Focus enable is always `true` if none of these parameter is given. Default behavior.
+
+### Enable
+
+- Get
+    ```javascript
+    var enable = navigator.enable;
+    ```
+- Set
+    ```javascript
+    navigator.setEnable(enable);
+    ```
 
 ### Navigate
 
@@ -129,22 +145,46 @@ var navigator = scene.plugins.get('rexGroupNavigator').add({
     ```
     Will fire `blur` and `focus` events
 
+### Current focused game object
 
-### Force focus
+- Get current focused game object
+    ```javascript
+    var gameObject = navigator.getFocusedTarget();
+    // var gameObject = navigator.focusedTarget;
+    ```
+- Focus on game object
+    ```javascript
+    navigator.focus(gameObject);
+    ```
+    Will fire `blur` and `focus` events.
+- Blur
+    ```javascript
+    navigator.blur();
+    ```
+    Will fire `blur` event.
 
-```javascript
-navigator.focus(gameObject);
-```
+### Target game objects
 
-Will fire `blur` and `focus` events.
-
-### Force blur
-
-```javascript
-navigator.blur();
-```
-
-Will fire `blur` event.
+- Get
+    ```javascript
+    var gameObjects = navigator.targets;
+    ```
+    - `gameObjects` : 1D/2D array of game objects
+- Set
+    ```javascript
+    navigator.setTargets(targets);
+    // navigator.setTargets(targets, columns);
+    ```
+- Modify
+    ```javascript
+    navigator.targets.push(newGameObject);    
+    ```
+    ```javascript
+    Phaser.Utils.Array.AddAt(navigator.targets, newGameObject, index);
+    ```
+    ```javascript
+    Phaser.Utils.Array.Remove(navigator.targets, gameObject);
+    ```
 
 ### Events
 
