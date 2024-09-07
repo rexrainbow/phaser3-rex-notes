@@ -6307,6 +6307,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#enable" class="md-nav__link">
+    Enable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#navigate" class="md-nav__link">
     Navigate
   </a>
@@ -6314,15 +6321,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#force-focus" class="md-nav__link">
-    Force focus
+  <a href="#current-focused-game-object" class="md-nav__link">
+    Current focused game object
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#force-blur" class="md-nav__link">
-    Force blur
+  <a href="#target-game-objects" class="md-nav__link">
+    Target game objects
   </a>
   
 </li>
@@ -9872,6 +9879,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#enable" class="md-nav__link">
+    Enable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#navigate" class="md-nav__link">
     Navigate
   </a>
@@ -9879,15 +9893,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#force-focus" class="md-nav__link">
-    Force focus
+  <a href="#current-focused-game-object" class="md-nav__link">
+    Current focused game object
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#force-blur" class="md-nav__link">
-    Force blur
+  <a href="#target-game-objects" class="md-nav__link">
+    Target game objects
   </a>
   
 </li>
@@ -9987,6 +10001,8 @@
 </ul>
 <h3 id="create-navigator">Create navigator<a class="headerlink" href="#create-navigator" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">navigator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexGroupNavigator&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">({</span>
+<span class="w">    </span><span class="c1">// enable: true,</span>
+
 <span class="w">    </span><span class="nx">targets</span><span class="o">:</span><span class="w"> </span><span class="nx">gameObjects</span><span class="p">,</span>
 <span class="w">    </span><span class="c1">// columns: undefined,</span>
 
@@ -9998,7 +10014,12 @@
 <span class="p">});</span>
 </code></pre></div>
 <ul>
-<li><code>targets</code> : <ul>
+<li><code>enable</code> :<ul>
+<li><code>true</code> : Can navigate between game objects. Default behavior.</li>
+<li><code>false</code> : Ignore navigation actions (<code>navigator.next()</code>, <code>navigator.previous()</code>, <code>navigator.nextRow()</code>, <code>navigator.previousRow()</code>) </li>
+</ul>
+</li>
+<li><code>targe1ts</code> : <ul>
 <li>1D array of game objects for <code>navigator.next()</code>, or <code>navigator.previous()</code></li>
 <li>2D array of game objects for <code>navigator.next()</code>, <code>navigator.previous()</code>, <code>navigator.nextRow()</code>, <code>navigator.previousRow()</code></li>
 </ul>
@@ -10018,6 +10039,15 @@
 <li>Focus enable is always <code>true</code> if none of these parameter is given. Default behavior.</li>
 </ul>
 </li>
+</ul>
+<h3 id="enable">Enable<a class="headerlink" href="#enable" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">enable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">navigator</span><span class="p">.</span><span class="nx">enable</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="highlight"><pre><span></span><code><span class="nx">navigator</span><span class="p">.</span><span class="nx">setEnable</span><span class="p">(</span><span class="nx">enable</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
 <h3 id="navigate">Navigate<a class="headerlink" href="#navigate" title="Permanent link">&para;</a></h3>
 <ul>
@@ -10040,14 +10070,41 @@
 </code></pre></div>
     Will fire <code>blur</code> and <code>focus</code> events</li>
 </ul>
-<h3 id="force-focus">Force focus<a class="headerlink" href="#force-focus" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">navigator</span><span class="p">.</span><span class="nx">focus</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+<h3 id="current-focused-game-object">Current focused game object<a class="headerlink" href="#current-focused-game-object" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get current focused game object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">gameObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">navigator</span><span class="p">.</span><span class="nx">getFocusedTarget</span><span class="p">();</span>
+<span class="c1">// var gameObject = navigator.focusedTarget;</span>
+</code></pre></div></li>
+<li>Focus on game object
+    <div class="highlight"><pre><span></span><code><span class="nx">navigator</span><span class="p">.</span><span class="nx">focus</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
 </code></pre></div>
-<p>Will fire <code>blur</code> and <code>focus</code> events.</p>
-<h3 id="force-blur">Force blur<a class="headerlink" href="#force-blur" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">navigator</span><span class="p">.</span><span class="nx">blur</span><span class="p">();</span>
+    Will fire <code>blur</code> and <code>focus</code> events.</li>
+<li>Blur
+    <div class="highlight"><pre><span></span><code><span class="nx">navigator</span><span class="p">.</span><span class="nx">blur</span><span class="p">();</span>
 </code></pre></div>
-<p>Will fire <code>blur</code> event.</p>
+    Will fire <code>blur</code> event.</li>
+</ul>
+<h3 id="target-game-objects">Target game objects<a class="headerlink" href="#target-game-objects" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">gameObjects</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">navigator</span><span class="p">.</span><span class="nx">targets</span><span class="p">;</span>
+</code></pre></div><ul>
+<li><code>gameObjects</code> : 1D/2D array of game objects</li>
+</ul>
+</li>
+<li>Set
+    <div class="highlight"><pre><span></span><code><span class="nx">navigator</span><span class="p">.</span><span class="nx">setTargets</span><span class="p">(</span><span class="nx">targets</span><span class="p">);</span>
+<span class="c1">// navigator.setTargets(targets, columns);</span>
+</code></pre></div></li>
+<li>Modify
+    <div class="highlight"><pre><span></span><code><span class="nx">navigator</span><span class="p">.</span><span class="nx">targets</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">newGameObject</span><span class="p">);</span><span class="w">    </span>
+</code></pre></div>
+    <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Utils</span><span class="p">.</span><span class="nb">Array</span><span class="p">.</span><span class="nx">AddAt</span><span class="p">(</span><span class="nx">navigator</span><span class="p">.</span><span class="nx">targets</span><span class="p">,</span><span class="w"> </span><span class="nx">newGameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">index</span><span class="p">);</span>
+</code></pre></div>
+    <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Utils</span><span class="p">.</span><span class="nb">Array</span><span class="p">.</span><span class="nx">Remove</span><span class="p">(</span><span class="nx">navigator</span><span class="p">.</span><span class="nx">targets</span><span class="p">,</span><span class="w"> </span><span class="nx">gameObject</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
 <li>On focus

@@ -96,6 +96,113 @@
         },
     };
 
+    var ReshapeArray1DTo2D = function (array, columns) {
+        return array.reduce(function (acc, curr, index) {
+            if (index % columns === 0) {
+                acc.push([]);
+            }
+            acc[acc.length - 1].push(curr);
+            return acc;
+        }, []);
+    };
+
+    const ArrayAdd = Phaser.Utils.Array.Add;
+    const ArrayAddAt = Phaser.Utils.Array.AddAt;
+    const ArrayRemove = Phaser.Utils.Array.Remove;
+    const Clamp = Phaser.Math.Clamp;
+
+    var TargetsMethods = {
+        setTargets(gameObjects, columns) {
+            if (gameObjects && (columns !== undefined)) {
+                gameObjects = ReshapeArray1DTo2D(gameObjects, columns);
+            }
+
+            this.targets = gameObjects;
+            this.focus(this.focusedTarget);
+            return this;
+        },
+
+        getTargetIndex(gameObject, out) {
+            if (out == undefined) {
+                out = { x: undefined, y: undefined };
+            }
+
+            var targets = this.targets;
+            var is1DTargetsArray = (Array.isArray(targets)) && (!Array.isArray(targets[0]));
+
+            if (is1DTargetsArray) {
+                var x = targets.indexOf(gameObject);
+                if (x !== -1) {
+                    out.x = x;
+                    out.y = 0;
+                }
+            } else {
+                for (var y = 0, rowCount = targets.length; y < rowCount; y++) {
+                    var row = targets[y];
+                    var x = row.indexOf(gameObject);
+                    if (x !== -1) {
+                        out.x = x;
+                        out.y = y;
+                        break;
+                    }
+                }
+            }
+            return out;
+        },
+
+        addTarget(gameObject) {
+            var targets = this.targets || [];
+            var is1DTargetsArray = (Array.isArray(targets)) && (!Array.isArray(targets[0]));
+            var row = (is1DTargetsArray) ? targets : targets[targets.length - 1];
+
+            ArrayAdd(row, gameObject);
+            this.setTargets(targets);
+
+            return this;
+        },
+
+        insertTarget(gameObject, x, y) {
+            var targets = this.targets || [];
+            var is1DTargetsArray = (Array.isArray(targets)) && (!Array.isArray(targets[0]));
+
+            if (is1DTargetsArray) {
+                ArrayAddAt(targets, gameObject, x);
+            } else {
+                if (y === undefined) {
+                    if (!Array.isArray(gameObject)) {
+                        gameObject = [gameObject];
+                    }
+                    x = Clamp(x, 0, targets.length - 1);
+                    targets.splice(x, 0, gameObject);
+                } else {
+                    y = Clamp(y, 0, targets.length - 1);
+                    ArrayAddAt(targets[y], gameObject, x);
+                }
+            }
+
+            this.setTargets(targets);
+            return this;
+        },
+
+        removeTarget(gameObject) {
+            var targets = this.targets || [];
+            var is1DTargetsArray = (Array.isArray(targets)) && (!Array.isArray(targets[0]));
+
+            if (is1DTargetsArray) {
+                ArrayRemove(targets, gameObject);
+            } else {
+                for (var y = 0, cnt = targets.length; y < cnt; y++) {
+                    ArrayRemove(targets[y], gameObject);
+                }
+            }
+
+            this.setTargets(this.targets);
+            return this;
+        },
+
+
+    };
+
     const Wrap = Phaser.Math.Wrap;
 
     var GetNextameObject = function ({
@@ -137,10 +244,7 @@
             gameObject = row[x];
 
             // Test if this game object is focus-able
-            var focusEnable = true;
-            if (this.getFocusEnableCallback) {
-                focusEnable = this.getFocusEnableCallback(gameObject);
-            }
+            var focusEnable = this.isTargetFocusEnable(gameObject);
 
             // Not focus-enable
             if (!focusEnable) {
@@ -184,6 +288,14 @@
     };
 
     var GetNextMethods = {
+        isTargetFocusEnable(gameObject) {
+            var focusEnable = true;
+            if (this.getFocusEnableCallback) {
+                focusEnable = this.getFocusEnableCallback(gameObject);
+            }
+            return focusEnable;
+        },
+
         getFirst() {
             return GetNextameObject.call(this, {
                 startX: 0,
@@ -275,66 +387,98 @@
 
     var FocusMethods = {
         first() {
+            if (!this.enable) {
+                return this;
+            }
+
             Focus.call(this, this.getFirst());
             return this;
         },
 
         last() {
+            if (!this.enable) {
+                return this;
+            }
+
             Focus.call(this, this.getLast());
             return this;
         },
 
         next() {
+            if (!this.enable) {
+                return this;
+            }
+
             Focus.call(this, this.getNext());
             return this;
         },
 
         previous() {
+            if (!this.enable) {
+                return this;
+            }
+
             Focus.call(this, this.getPrevious());
             return this;
         },
 
         nextRow() {
+            if (!this.enable) {
+                return this;
+            }
+
             Focus.call(this, this.getNextRow());
             return this;
         },
 
         previousRow() {
+            if (!this.enable) {
+                return this;
+            }
+
             Focus.call(this, this.getPreviousRow());
             return this;
         },
 
         focus(gameObject) {
-            // Already focus
-            if (gameObject === this.focusedTarget) {
+            if (!this.enable) {
                 return this;
             }
 
-            var targets = this.targets;
-            var is1DTargetsArray = (Array.isArray(targets)) && (!Array.isArray(targets[0]));
-
-            if (is1DTargetsArray) {
-                var x = targets.indexOf(gameObject);
-                if (x !== -1) {
-                    this.focusIndex.x = x;
-                    this.focusIndex.y = 0;
-                    Focus.call(this, gameObject);
-                }
-            } else {
-                for (var y = 0, rowCount = targets.length; y < rowCount; y++) {
-                    var row = targets[y];
-                    var x = row.indexOf(gameObject);
-                    if (x !== -1) {
-                        this.focusIndex.x = x;
-                        this.focusIndex.y = y;
-                        Focus.call(this, gameObject);
-                    }
-                }
+            if (!gameObject) {
+                this.blur();
+                return this;
             }
+
+            if (!this.isTargetFocusEnable(gameObject)) {
+                return this;
+            }
+
+            var index = this.getTargetIndex(gameObject);
+            if (index.x === undefined) {
+                this.blur();
+                return this;
+            }
+
+            this.focusIndex.x = index.x;
+            this.focusIndex.y = index.y;
+
+            // Already focus
+            if (gameObject !== this.focusedTarget) {
+                Focus.call(this, gameObject);
+            }
+
             return this;
         },
 
-        blur: Blur,
+        blur() {
+            if (!this.enable) {
+                return this;
+            }
+
+            Blur.call(this);
+            return this;
+        },
 
     };
 
@@ -344,19 +488,10 @@
 
     Object.assign(
         Methods,
+        TargetsMethods,
         GetNextMethods,
         FocusMethods
     );
-
-    var ReshapeArray1DTo2D = function (array, columns) {
-        return array.reduce(function (acc, curr, index) {
-            if (index % columns === 0) {
-                acc.push([]);
-            }
-            acc[acc.length - 1].push(curr);
-            return acc;
-        }, []);
-    };
 
     const GetValue = Phaser.Utils.Objects.GetValue;
     const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
@@ -381,6 +516,8 @@
         }
 
         resetFromJSON(o) {
+            this.setEnable(GetValue(o, 'enable', true));
+
             this.setTargets(GetValue(o, 'targets'), GetValue(o, 'columns'));
 
             var focusEnableCallback = GetValue(o, 'getFocusEnableCallback');
@@ -404,17 +541,11 @@
             this.targets = undefined;
         }
 
-        setTargets(targets, columns) {
-            if (targets && (columns !== undefined)) {
-                targets = ReshapeArray1DTo2D(targets, columns);
+        setEnable(enable) {
+            if (enable === undefined) {
+                enable = true;
             }
-
-            this.targets = targets;
-
-            this.blur();
-            this.focusIndex.x = undefined;
-            this.focusIndex.y = undefined;
-
+            this.enable = enable;
             return this;
         }
 
