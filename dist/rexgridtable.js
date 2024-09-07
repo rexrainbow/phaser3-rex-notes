@@ -22613,14 +22613,8 @@
             this.nonZeroDeltaHeightCount = 0;
             this.resetTotalRowsHeight();
 
-            var cellHeight = o.cellHeight;
-            if (cellHeight === undefined) {
-                cellHeight = 30;
-            }
-            var cellWidth = o.cellWidth;
-            if (cellWidth === undefined) {
-                cellWidth = 30;
-            }
+            var cellHeight = GetValue$7(o, 'cellHeight', 60);
+            var cellWidth = GetValue$7(o, 'cellWidth', 60);
 
             this.setDefaultCellHeight(cellHeight);
             this.setDefaultCellWidth(cellWidth);
@@ -23634,10 +23628,14 @@
         cell.destroyContainer(); // Destroy container of cell
     };
 
-    var UpdateTable = function (refresh) {
+    var UpdateTable = function (refresh, maskChildren) {
         if (refresh === undefined) {
             refresh = false;
         }
+        if (maskChildren === undefined) {
+            maskChildren = false;
+        }
+
         if (refresh) {
             ClearVisibleCellIndexes.call(this);
             this.hideCells();
@@ -23647,6 +23645,14 @@
         this.hideCells();
 
         this.setMaskChildrenFlag();
+
+        if (maskChildren) {
+            // Layout children-mask
+            this.layoutChildrenMask();
+            // Re-mask children
+            this.maskChildren();
+        }
+
         return this;
     };
 
@@ -23892,11 +23898,16 @@
                 cellHeight = config.cellWidth;
                 columns = GetValue$5(config, 'rows', config.columns);
             }
+
+            this.fixedCellSize = GetValue$5(config, 'fixedCellSize', false);
+            this.expandCellSize = (!this.fixedCellSize) && (cellWidth === undefined);
+
             if (!columns) {
                 columns = 1;  // Default columns
             }
-            this.expandCellSize = (cellWidth === undefined);
-            if (this.expandCellSize) {
+            if (this.fixedCellSize) {
+                columns = Math.max(Math.floor(this.instWidth / cellWidth), 1);
+            } else if (this.expandCellSize) {
                 var width = (scrollY) ? this.width : this.height;
                 cellWidth = width / columns;
             }
@@ -24184,15 +24195,14 @@
 
             super.resize(width, height);
 
-            if (this.expandCellSize) {
+            if (this.fixedCellSize) {
+                var colCount = Math.floor(this.instWidth / this.table.defaultCellWidth);
+                this.table.setColumnCount(colCount);
+            } else if (this.expandCellSize) {
                 this.table.setDefaultCellWidth(this.instWidth / this.table.colCount);
             }
-            this.updateTable(true);
 
-            // Layout children-mask
-            this.layoutChildrenMask();
-            // Re-mask children
-            this.maskChildren();
+            this.updateTable(true, true);
 
             return this;
         }
