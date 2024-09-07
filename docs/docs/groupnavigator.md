@@ -152,7 +152,7 @@ var navigator = scene.plugins.get('rexGroupNavigator').add({
     var gameObject = navigator.getFocusedTarget();
     // var gameObject = navigator.focusedTarget;
     ```
-- Focus on game object
+- Focus on game object. Do nothing if that game object is not focus-enable.
     ```javascript
     navigator.focus(gameObject);
     ```
