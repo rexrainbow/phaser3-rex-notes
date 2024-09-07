@@ -269,6 +269,37 @@ class GridTable extends ContainerLite {
         return this;
     }
 
+    resetAllCellsSize(width, height) {
+        // Swap width and height if scrollMode is 1
+        if (this.scrollMode === 1) {
+            var temp = width;
+            width = height;
+            height = temp;
+        }
+
+        this.table
+            .setDefaultCellHeight(height)
+            .setDefaultCellWidth(width)
+
+        var cells = this.table.cells;
+        for (var i = 0, cnt = cells.length; i < cnt; i++) {
+            var cell = cells[i];
+            if (!cell) {
+                continue;
+            }
+            cell.deltaHeight = 0;
+        }
+
+        if (this.fixedCellSize) {
+            var colCount = Math.floor(this.instWidth / width);
+            this.table.setColumnCount(colCount);
+        }
+
+        this.updateTable(true, true);
+
+        return this;
+    }
+
     get instHeight() {
         return (this.scrollMode === 0) ? this.height : this.width;
     }

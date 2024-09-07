@@ -117,6 +117,12 @@ class GridTable extends Scrollable {
         return table.updateVisibleCell(cellIdx);
     }
 
+    resetAllCellsSize(width, height) {
+        var table = this.childrenMap.child;
+        table.resetAllCellsSize(width, height);
+        return this;
+    }
+
     onPostStep() {
         if (this.resizeControllerFlag) {
             this.resizeController();

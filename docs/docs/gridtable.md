@@ -86,6 +86,7 @@ var table = scene.add.rexGridTable(x, y, width, height, {
     // rows: 1,
     cellHeight: 30,
     cellWidth: 30,
+    // fixedCellSize: false,
 
     cellVisibleCallback: null,
     // cellVisibleCallback: function (cell, cellContainer, table) {},
@@ -116,6 +117,9 @@ var table = scene.add.rexGridTable(x, y, width, height, {
     - Expand cell height to fit table height : set `cellHeight` to `undefined`, and `scrollMode` is `'horizontal'`.
 - `cellWidth` : Width of each cell.
     - Expand cell width to fit table width : set `cellWidth` to `undefined`, and `scrollMode` is `'vertical'`.
+- `fixedCellSize` : Assign `columns` according to `cellWidth` (if `scrollMode` is `0`) or `cellHeight` (if `scrollMode` is `1`) , when initialize and resizing.
+　　- `false` : Ignore this parameter. Default behavior.
+    - `true` : Set `columns` according to `cellWidth`/`cellHeight`.
 - `cellVisibleCallback` , `cellVisibleCallbackScope` : [Callback when cell begins visible](gridtable.md#cell-begins-visible).
     ```javascript
     function (cell, cellContainer, table) {
@@ -527,6 +531,12 @@ var cell = table.getCell(cellIndex);
         table.on('cellwidthchange', function (cell, cellContainer, table) {
         });
         ```
+
+#### Reset size of all cells
+
+```javascript
+table.resetAllCellsSize(width, height);
+```
 
 #### Fore each visible cell
 

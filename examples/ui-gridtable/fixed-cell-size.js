@@ -70,6 +70,7 @@ class Demo extends Phaser.Scene {
                 }
 
                 // Set properties from item value
+                cellContainer.setMinSize(width - 3, height - 3);
                 cellContainer.getElement('background').setFillStyle(item.color);
                 return cellContainer;
             },
@@ -78,6 +79,12 @@ class Demo extends Phaser.Scene {
             .layout()
 
         AddDragCornerController(gridTable)
+
+        this.add.text(0, 580, 'Reset all cells size')
+            .setInteractive()
+            .once('pointerdown', function () {
+                gridTable.resetAllCellsSize(30, 30)
+            })
     }
 
     update() { }

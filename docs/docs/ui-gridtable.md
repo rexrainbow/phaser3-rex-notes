@@ -20,6 +20,7 @@ A container with a [grid table](gridtable.md), slider, and scroller.
 - [Two sliders](https://codepen.io/rexrainbow/pen/KKrrYRm)
 - [Separator](https://codepen.io/rexrainbow/pen/YzRrOOP)
 - [Modal](https://codepen.io/rexrainbow/pen/zYarzzO)
+- [Fixed cell size](https://codepen.io/rexrainbow/pen/poXqqXK)
 - [Drag item](https://codepen.io/rexrainbow/pen/WNaQrgp)
 - [Layer + mask padding](https://codepen.io/rexrainbow/pen/BaGXNwG)
 - [Fade-out-destroy cell](https://codepen.io/rexrainbow/pen/YzXYemw)
@@ -113,6 +114,8 @@ var table = scene.rexUI.add.gridTable({
         cellHeight: undefined,
         columns: 1,
         // rows: 1,
+        // fixedCellSize: false,
+
         mask: {
             padding: 0,
             // updateMode: 0,
@@ -290,6 +293,9 @@ var table = scene.rexUI.add.gridTable({
         - `undefined` : Expand cell width to fit table width, in *vertical* scrollMode.
     - `table.columns` : Columns count of each row. Can be used in *vertical* or *horizontal* scroll mode.
     - `table.rows` : Rows count of each column. Can be used in *horizontal* scroll mode.
+    - `table.fixedCellSize` : Assign  `columns` according to `cellWidth` (if `scrollMode` is `0`) or `cellHeight` (if `scrollMode` is `1`) , when initialize and resizing.
+　　    - `false` : Ignore this parameter. Default behavior.
+        - `true` : Set `columns` according to `cellWidth`/`cellHeight`.
     - `table.mask` : A rectangle mask of cells
         - `table.mask.padding` : Extra left/right/top/bottom padding spacing of this rectangle mask. Default value is `0`.
         - `table.mask.updateMode` : When to update cells mask
@@ -505,6 +511,12 @@ See also - [dirty](ui-basesizer.md#dirty)
     ```javascript
     var container = table.getCellContainer(cellIndex);
     ```
+
+### Reset size of all cells
+
+```javascript
+table.resetAllCellsSize(width, height);
+```
 
 ### Scroll content
 
