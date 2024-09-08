@@ -7,7 +7,7 @@ declare namespace GridTable {
 
     type ScrollModeType = 0 | 1 | 'v' | 'vertical' | 'h' | 'horizontal';
 
-    interface CellData {
+    interface Cell {
         scene: Phaser.Scene,
         width: number,
         height: number,
@@ -17,11 +17,11 @@ declare namespace GridTable {
         items: unknown[],
         index: number,
 
-        setHeight(value: number): CellData,
-        setDeltaHeight(value: number): CellData,
-        setWidth(value: number): CellData,
-        setDeltaWidth(value: number): CellData,
-        setCellContainerAlign(align: AlignType): CellData
+        setHeight(value: number): Cell,
+        setDeltaHeight(value: number): Cell,
+        setWidth(value: number): Cell,
+        setDeltaWidth(value: number): Cell,
+        setCellContainerAlign(align: AlignType): Cell
 
         setContainer(cellContainer?: Phaser.GameObjects.GameObject | null): void,
         getContainer(): Phaser.GameObjects.GameObject | null,
@@ -30,13 +30,13 @@ declare namespace GridTable {
     }
 
     type CellVisibleCallbackType = (
-        cell: CellData,
+        cell: Cell,
         cellContainer: Phaser.GameObjects.GameObject | null,
         table: GridTable
     ) => void;
 
     type CellInvisibleCallbackType = (
-        cell: CellData
+        cell: Cell
     ) => void;
 
     type MaskUpdateModeType = 0 | 1 | 'update' | 'everyTick';
@@ -71,21 +71,21 @@ declare namespace GridTable {
 
     namespace Events {
         type CellvisibleCallbackType = (
-            cell: CellData,
+            cell: Cell,
             cellContainer: Phaser.GameObjects.GameObject | null,
             table: GridTable
         ) => void;
 
-        type CellInvisibleCallbackType = (cell: CellData) => void;
+        type CellInvisibleCallbackType = (cell: Cell) => void;
 
         type CellHeightchange = (
-            cell: CellData,
+            cell: Cell,
             cellContainer: Phaser.GameObjects.GameObject | null,
             table: GridTable
         ) => void;
 
         type CellWidthchange = (
-            cell: CellData,
+            cell: Cell,
             cellContainer: Phaser.GameObjects.GameObject | null,
             table: GridTable
         ) => void;
@@ -137,7 +137,7 @@ declare class GridTable extends ContainerLite {
     readonly leftTableOX: number;
     readonly rightTableOX: number;
 
-    getCell(cellIndex: number): GridTable.CellData;
+    getCell(cellIndex: number): GridTable.Cell;
 
     pointToCellIndex(x: number, y: number): number;
 
@@ -145,10 +145,10 @@ declare class GridTable extends ContainerLite {
     setCellWidth(cellIndex: number, cellWidth: number): this;
 
     iterateVisibleCell(
-        callback: (cell: GridTable.CellData) => void
+        callback: (cell: GridTable.Cell) => void
     ): this;
 
     eachVisibleCell(
-        callback: (cell: GridTable.CellData) => void
+        callback: (cell: GridTable.Cell) => void
     ): this;
 }

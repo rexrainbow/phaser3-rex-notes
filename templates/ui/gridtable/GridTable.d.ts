@@ -6,10 +6,10 @@ export default GridTable;
 
 declare namespace GridTable {
 
-    type CellDataType = GridTableCore.CellData;
+    type CellType = GridTableCore.Cell;
 
     type CreateCellContainerCallbackType = (
-        cell: CellDataType,
+        cell: CellType,
         cellContainer: Phaser.GameObjects.GameObject | null
     ) => Phaser.GameObjects.GameObject | null;
 
@@ -61,7 +61,7 @@ declare class GridTable extends Scrollable {
     refresh(): this;
     updateVisibleCell(cellIndex: number): this;
 
-    getCell(cellIndex: number): GridTableCore.CellData;
+    getCell(cellIndex: number): GridTableCore.Cell;
     getCellContainer(cellIndex: number): Phaser.GameObjects.GameObject | null;
     startRowIndex: number;
 

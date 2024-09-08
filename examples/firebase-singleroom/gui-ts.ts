@@ -273,7 +273,7 @@ var CreateMessageBox = function (parent: MainPanel, config: IMainPanelConfig) {
             thumb: thumb,
         },
 
-        createCellContainerCallback(cell: GridTable.CellDataType, cellContainer: TitleLabel) {
+        createCellContainerCallback(cell: GridTable.CellType, cellContainer: TitleLabel) {
             var scene = cell.scene,
                 width = cell.width,
                 item = cell.item as IMessage,
