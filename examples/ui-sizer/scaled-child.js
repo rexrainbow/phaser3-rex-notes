@@ -11,6 +11,8 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
+        var scaleBeforeAddingChild = true;
+
         var sizer = this.rexUI.add.sizer({
             x: 400, y: 300,
             space: {
@@ -18,19 +20,49 @@ class Demo extends Phaser.Scene {
                 item: 10
             }
         })
-            .addBackground(this.rexUI.add.roundRectangle({ color: 0x888888 }))
 
-        for (var i = 0; i < 2; i++) {
-            var child = this.rexUI.add.overlapSizer({
-                width: 80, height: 80,
-            })
-                .addBackground(this.rexUI.add.roundRectangle({ color: 0x880000 }))
-                .setScale(0.75)
-
-            sizer.add(child);
+        // Scale before adding child
+        if (scaleBeforeAddingChild) {
+            sizer.setScale(0.5);
         }
 
-        sizer.layout();
+        sizer
+            .addBackground(this.rexUI.add.roundRectangle({ color: 0x888888 }))
+
+            // Add child
+            .add(
+                this.rexUI.add.overlapSizer({
+                    width: 200, height: 200,
+                })
+                    .addBackground(this.rexUI.add.roundRectangle({ color: 0x880000 }))
+                    .setScale(0.5)
+                // displaySize = 100x100, since scale=0.5
+            )
+
+            // Add child
+            .add(
+                this.rexUI.add.overlapSizer({
+                    width: 200, height: 200,
+                })
+                    .addBackground(this.rexUI.add.roundRectangle({ color: 0x880000 }))
+                    .setScale(0.5)
+                // displaySize = 100x100, since scale=0.5
+            )
+
+        // Scale after adding child
+        if (!scaleBeforeAddingChild) {
+            sizer.setScale(0.5);
+            // Will affect size of all children
+        }
+
+        sizer
+            .layout();
+
+
+        console.log(sizer.displayWidth, sizer.displayHeight)
+        // DisplayWidth = 215, 100+100(child height*2) + 5(space.left) + 5(space.right) + 5(space.item)
+        // DisplayHeight = 110, 100(child height) + 5(space.top) + 5(space.bottom)
+
     }
 
     update() { }

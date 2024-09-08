@@ -54,7 +54,7 @@ class Demo extends Phaser.Scene {
             .setInteractive()
             .once('pointerdown', function () {
                 scrollablePanel
-                    .setScale(0.75)
+                    .setScale(0.5)
                     .layout();
             })
 
@@ -80,6 +80,7 @@ var CreatePanel = function (scene) {
             .add(
                 scene.rexUI.add.label({
                     width: 100, height: 45,
+                    space: { left: 10, right: 10, top: 10, bottom: 10 },
                     background: scene.rexUI.add.roundRectangle({ color: COLOR_DARK }),
                     text: scene.add.text(0, 0, i.toString(), { fontSize: 36 })
                 })

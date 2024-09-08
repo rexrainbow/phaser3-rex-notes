@@ -23,7 +23,7 @@ var PreLayout = function () {
 
     this._childrenProportion = undefined;
     this.hasProportion0Child = false;
-    this.proportionLength = undefined;
+    this.proportionLength = undefined; // Display proportion-length, contains scale
     PreLayoutBase.call(this);
     return this;
 }

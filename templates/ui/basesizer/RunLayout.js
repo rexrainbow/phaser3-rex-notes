@@ -1,3 +1,5 @@
+import ResizeGameObject from '../../../plugins/utils/size/ResizeGameObject.js';
+
 // Override
 var RunLayout = function (parent, newWidth, newHeight) {
     // Skip hidden or !dirty sizer
@@ -10,8 +12,6 @@ var RunLayout = function (parent, newWidth, newHeight) {
     if (isTopmostParent) {
         this.preLayout();
     }
-
-    var width, height;
 
     var runWidthWrap, runHeightWrap;
     if (isTopmostParent || parent.runChildrenWrapFlag) {
@@ -27,11 +27,11 @@ var RunLayout = function (parent, newWidth, newHeight) {
         console.error('Can\'t resolve size of ', this);
     }
 
-    var displayWidth = size.width;
-    var displayHeight = size.height;
+    var width = size.width;
+    var height = size.height;
 
     // Resize parent
-    this.resize(displayWidth / this.scale, displayHeight / this.scale);
+    ResizeGameObject(this, width, height);
 
     if (this.sizerEventsEnable) {
         if (this.layoutedChildren === undefined) {
@@ -51,7 +51,7 @@ var RunLayout = function (parent, newWidth, newHeight) {
     }
 
     // Custom postLayout callback
-    this.postLayout(parent, displayWidth, displayHeight);
+    this.postLayout(parent, width, height);
 
     // Post-processor, top parent only
     if (isTopmostParent) {
