@@ -36,12 +36,11 @@ var GetChildrenHeight = function (minimumMode) {
             }
 
             padding = sizerConfig.padding;
-            childHeight += padding.top + padding.bottom;
+            childHeight += (padding.top + padding.bottom) * child.scaleY;
             result = Math.max(childHeight, result);
         }
     } else {
         // Get summation of minimum height
-        var itemSpace = this.space.item;
         var isFirstChild = true;
         for (var i = 0, cnt = children.length; i < cnt; i++) {
             child = children[i];
@@ -77,12 +76,12 @@ var GetChildrenHeight = function (minimumMode) {
             }
 
             padding = sizerConfig.padding;
-            childHeight += (padding.top + padding.bottom);
+            childHeight += (padding.top + padding.bottom) * child.scaleY;
 
             if (isFirstChild) {
                 isFirstChild = false;
             } else {
-                childHeight += itemSpace;
+                childHeight += (this.space.item * this.scaleY);
             }
 
             result += childHeight;
@@ -93,7 +92,7 @@ var GetChildrenHeight = function (minimumMode) {
         return undefined;
     }
 
-    return result + this.space.top + this.space.bottom;
+    return result + (this.space.top + this.space.bottom) * this.scaleY;
 }
 
 export default GetChildrenHeight;

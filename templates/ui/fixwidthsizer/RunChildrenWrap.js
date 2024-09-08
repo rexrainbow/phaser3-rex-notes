@@ -7,12 +7,6 @@ var RunChildrenWrap = function (lineWidth) {
     };
 
     var children = this.sizerChildren;
-    var itemSpace = this.space.item,
-        lineSpace = this.space.line,
-        indentLeftOdd = this.space.indentLeftOdd,
-        indentLeftEven = this.space.indentLeftEven,
-        indentTopOdd = this.space.indentTopOdd,
-        indentTopEven = this.space.indentTopEven;
     var child, padding, childWidth, childHeight, remainder = 0, indentLeft, indentTop;
     var lines = out.lines,
         lastLine = undefined,
@@ -36,16 +30,16 @@ var RunChildrenWrap = function (lineWidth) {
 
                 childWidth = this.getChildWidth(child);
                 padding = child.rexSizer.padding;
-                childWidth += (padding.left + padding.right);
+                childWidth += ((padding.left + padding.right) * child.scaleX);
 
                 newLine = (remainder < childWidth) || (lastLine === undefined);
             }
             // New line
             if (newLine) {
                 if (lastLine) {
-                    lastLine.width = lineWidth - (remainder + itemSpace);
+                    lastLine.width = lineWidth - (remainder + (this.space.item * this.scaleX));
                     out.width = Math.max(out.width, lastLine.width);
-                    out.height += lastLine.height + lineSpace;
+                    out.height += lastLine.height + (this.space.line * this.scaleY);
                 }
 
                 lastLine = {
@@ -55,29 +49,29 @@ var RunChildrenWrap = function (lineWidth) {
                 };
                 lines.push(lastLine);
 
-                indentLeft = (lines.length % 2) ? indentLeftOdd : indentLeftEven;
-                remainder = lineWidth - indentLeft;
+                indentLeft = (lines.length % 2) ? this.space.indentLeftOdd : this.space.indentLeftEven;
+                remainder = lineWidth - (indentLeft * this.scaleX);
             }
 
-            remainder -= (childWidth + itemSpace);
+            remainder -= childWidth + (this.space.item * this.scaleX);
             if (child) {
                 lastLine.children.push(child);
 
                 childHeight = this.getChildHeight(child);
                 padding = child.rexSizer.padding;
-                childHeight += (padding.top + padding.bottom);
+                childHeight += (padding.top + padding.bottom) * child.scaleY;
 
                 lastLine.height = Math.max(lastLine.height, childHeight);
             }
         }
 
         if (lastLine) {
-            lastLine.width = lineWidth - (remainder + itemSpace);
+            lastLine.width = lineWidth - (remainder + (this.space.item * this.scaleX));
             out.width = Math.max(out.width, lastLine.width);
             out.height += lastLine.height;
         }
 
-        out.height += Math.max(indentTopOdd, indentTopEven);
+        out.height += Math.max(this.space.indentTopOdd, this.space.indentTopEven) * this.scaleY;
     } else {
 
         var lineHeight = lineWidth;
@@ -98,16 +92,16 @@ var RunChildrenWrap = function (lineWidth) {
 
                 childHeight = this.getChildHeight(child);
                 padding = child.rexSizer.padding;
-                childHeight += (padding.top + padding.bottom);
+                childHeight += (padding.top + padding.bottom) * child.scaleY;
 
                 newLine = (remainder < childHeight) || (lastLine === undefined);
             }
             // New line
             if (newLine) {
                 if (lastLine) {
-                    lastLine.height = lineHeight - (remainder + itemSpace);
+                    lastLine.height = lineHeight - (remainder + (this.space.item * this.scaleY));
                     out.height = Math.max(out.height, lastLine.height);
-                    out.width += lastLine.width + lineSpace;
+                    out.width += lastLine.width + (this.space.line * this.scaleX);
                 }
 
                 lastLine = {
@@ -117,29 +111,29 @@ var RunChildrenWrap = function (lineWidth) {
                 };
                 lines.push(lastLine);
 
-                indentTop = (lines.length % 2) ? indentTopOdd : indentTopEven;
-                remainder = lineHeight - indentTop;
+                indentTop = (lines.length % 2) ? this.space.indentTopOdd : this.space.indentTopEven;
+                remainder = lineHeight - (indentTop * this.scaleY);
             }
 
-            remainder -= (childHeight + itemSpace);
+            remainder -= childHeight + (this.space.item * this.scaleY);
             if (child) {
                 lastLine.children.push(child);
 
                 childWidth = this.getChildWidth(child);
                 padding = child.rexSizer.padding;
-                childWidth += (padding.left + padding.right);
+                childWidth += (padding.left + padding.right) * child.scaleX;
 
                 lastLine.width = Math.max(lastLine.width, childWidth);
             }
         }
 
         if (lastLine) {
-            lastLine.height = lineHeight - (remainder + itemSpace);
+            lastLine.height = lineHeight - (remainder + (this.space.item * this.scaleY));
             out.height = Math.max(out.height, lastLine.height);
             out.width += lastLine.width;
         }
 
-        out.width += Math.max(indentLeftOdd, indentLeftEven);
+        out.width += Math.max(this.space.indentLeftOdd, this.space.indentLeftEven) * this.scaleX;
     }
 
     return out;

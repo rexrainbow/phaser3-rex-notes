@@ -4,7 +4,7 @@ var ResolveHeight = function (height) {
         return undefined;
     }
 
-    var minHeight = (this.minHeight !== undefined) ? this.minHeight : 0;
+    var minHeight = (this.minHeight !== undefined) ? (this.minHeight * this.scaleY) : 0;
     if (height === undefined) {
         height = Math.max(minHeight, childrenHeight);
 

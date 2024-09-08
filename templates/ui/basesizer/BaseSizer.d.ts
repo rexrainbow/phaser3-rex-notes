@@ -73,6 +73,9 @@ declare class BaseSizer extends ContainerLite {
 
     setMinHeight(minHeight: number): this;
 
+    minWidth: number;
+    minHeight: number;
+
     setDirty(dirty?: boolean): this;
 
     setSizerEventsEnable(enable?: boolean): this;

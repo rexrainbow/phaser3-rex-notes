@@ -7,14 +7,6 @@ var LayoutChildren = function () {
     var horizontalWrap = (this.orientation === 0);
 
     var innerLineWidth = (horizontalWrap) ? this.innerWidth : this.innerHeight;
-    var justifyPercentage = this.justifyPercentage;
-    var itemSpace = this.space.item,
-        lineSpace = this.space.line,
-        indentLeftOdd = this.space.indentLeftOdd,
-        indentLeftEven = this.space.indentLeftEven,
-        indentTopOdd = this.space.indentTopOdd,
-        indentTopEven = this.space.indentTopEven;
-
     var child, childConfig, padding, justifySpace = 0, indentLeft, indentTop;
     var startX = this.innerLeft,
         startY = this.innerTop;
@@ -33,11 +25,11 @@ var LayoutChildren = function () {
         }
 
         if (horizontalWrap) {
-            indentLeft = (i % 2) ? indentLeftEven : indentLeftOdd;
-            itemX = startX + indentLeft;
+            indentLeft = (i % 2) ? this.space.indentLeftEven : this.space.indentLeftOdd;
+            itemX = startX + (indentLeft * this.scaleX);
         } else {
-            indentTop = (i % 2) ? indentTopEven : indentTopOdd;
-            itemY = startY + indentTop;
+            indentTop = (i % 2) ? this.space.indentTopEven : this.space.indentTopOdd;
+            itemY = startY + (indentTop * this.scaleY);
         }
 
         remainderLineWidth = innerLineWidth - ((horizontalWrap) ? line.width : line.height);
@@ -63,11 +55,11 @@ var LayoutChildren = function () {
                 break;
 
             case 3: // justify-left            
-                justifySpace = GetJustifySpace(innerLineWidth, remainderLineWidth, justifyPercentage, lineChlidren.length);
+                justifySpace = GetJustifySpace(innerLineWidth, remainderLineWidth, this.justifyPercentage, lineChlidren.length);
                 break;
 
             case 4: // justify-right
-                justifySpace = GetJustifySpace(innerLineWidth, remainderLineWidth, justifyPercentage, lineChlidren.length);
+                justifySpace = GetJustifySpace(innerLineWidth, remainderLineWidth, this.justifyPercentage, lineChlidren.length);
                 if (justifySpace === 0) {
                     // Align right
                     if (horizontalWrap) {
@@ -79,7 +71,7 @@ var LayoutChildren = function () {
                 break;
 
             case 5: // justify-center
-                justifySpace = GetJustifySpace(innerLineWidth, remainderLineWidth, justifyPercentage, lineChlidren.length);
+                justifySpace = GetJustifySpace(innerLineWidth, remainderLineWidth, this.justifyPercentage, lineChlidren.length);
                 if (justifySpace === 0) {
                     // Align center
                     if (horizontalWrap) {
@@ -104,18 +96,18 @@ var LayoutChildren = function () {
             PreLayoutChild.call(this, child);
 
             if (horizontalWrap) {
-                x = (itemX + padding.left);
+                x = itemX + (padding.left * child.scaleX);
             } else {
-                y = (itemY + padding.top);
+                y = itemY + (padding.top * child.scaleY);
             }
 
             if (isFirstChild) {
                 isFirstChild = false;
             } else {
                 if (horizontalWrap) {
-                    x += itemSpace;
+                    x += (this.space.item * this.scaleX);
                 } else {
-                    y += itemSpace;
+                    y += (this.space.item * this.scaleY);
                 }
             }
 
@@ -123,22 +115,22 @@ var LayoutChildren = function () {
             height = GetDisplayHeight(child);
 
             if (horizontalWrap) {
-                indentTop = (j % 2) ? indentTopEven : indentTopOdd;
-                y = (itemY + indentTop + padding.top);
-                itemX = x + width + padding.right + justifySpace;
+                indentTop = (j % 2) ? this.space.indentTopEven : this.space.indentTopOdd;
+                y = itemY + (indentTop * this.scaleY) + (padding.top * child.scaleY);
+                itemX = x + width + (padding.right * child.scaleX) + justifySpace;
             } else {
-                indentLeft = (j % 2) ? indentLeftEven : indentLeftOdd;
-                x = (itemX + indentLeft + padding.left);
-                itemY = y + height + padding.top + justifySpace;
+                indentLeft = (j % 2) ? this.space.indentLeftEven : this.space.indentLeftOdd;
+                x = itemX + (indentLeft * this.scaleX) + (padding.left * child.scaleX);
+                itemY = y + height + (padding.top * child.scaleY) + justifySpace;
             }
 
             LayoutChild.call(this, child, x, y, width, height, childConfig.align);
         }
 
         if (horizontalWrap) {
-            itemY += line.height + lineSpace;
+            itemY += line.height + (this.space.line * this.scaleY);
         } else {
-            itemX += line.width + lineSpace;
+            itemX += line.width + (this.space.line * this.scaleX);
         }
     }
 }

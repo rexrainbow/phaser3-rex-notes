@@ -8,7 +8,8 @@ var GetChildWidth = function (child) {
             return undefined;
         }
 
-        childWidth = Math.max(child.minWidth, childrenWidth);
+        var childMinWidth = child.minWidth * child.scaleX;
+        childWidth = Math.max(childMinWidth, childrenWidth);
     } else {  // Normal game object
         if (child.minWidth !== undefined) {  // Force minWidth
             childWidth = child.minWidth;

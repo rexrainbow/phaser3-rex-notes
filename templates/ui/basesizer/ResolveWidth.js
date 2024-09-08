@@ -4,7 +4,7 @@ var ResolveWidth = function (width) {
         return undefined;
     }
 
-    var minWidth = (this.minWidth !== undefined) ? this.minWidth : 0;
+    var minWidth = (this.minWidth !== undefined) ? (this.minWidth * this.scaleX) : 0;
     if (width === undefined) {
         width = Math.max(minWidth, childrenWidth);
 

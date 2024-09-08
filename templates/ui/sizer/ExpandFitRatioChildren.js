@@ -7,9 +7,9 @@ var ExpandFitRatioChildren = function (width, height) {
 
     var innerHeight, innerWidth;
     if (this.orientation === 0) {
-        innerHeight = height - this.getInnerPadding('top') - this.getInnerPadding('bottom');
+        innerHeight = height - ((this.getInnerPadding('top') + this.getInnerPadding('bottom')) * this.scaleY);
     } else {
-        innerWidth = width - this.getInnerPadding('left') - this.getInnerPadding('right');
+        innerWidth = width - ((this.getInnerPadding('left') + this.getInnerPadding('right')) * this.scaleX);
     }
 
     var child, sizerConfig;
@@ -29,11 +29,11 @@ var ExpandFitRatioChildren = function (width, height) {
 
         if (this.orientation === 0) {
             // Set child width by child height 
-            childHeight = innerHeight - this.getChildOuterPadding(child, 'top') - this.getChildOuterPadding(child, 'bottom');
+            childHeight = innerHeight - ((this.getChildOuterPadding(child, 'top') + this.getChildOuterPadding(child, 'bottom')) * child.scaleY);
             childWidth = childHeight * fitRatio;
         } else {
             // Set child height by child width
-            childWidth = innerHeight - this.getChildOuterPadding(child, 'top') - this.getChildOuterPadding(child, 'bottom');
+            childWidth = innerHeight - ((this.getChildOuterPadding(child, 'top') + this.getChildOuterPadding(child, 'bottom')) * child.scaleX);
             childHeight = childWidth / fitRatio;
         }
 

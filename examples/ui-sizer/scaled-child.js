@@ -22,7 +22,7 @@ class Demo extends Phaser.Scene {
 
         for (var i = 0; i < 2; i++) {
             var child = this.rexUI.add.overlapSizer({
-                width: 60, height: 60,
+                width: 80, height: 80,
             })
                 .addBackground(this.rexUI.add.roundRectangle({ color: 0x880000 }))
                 .setScale(0.75)

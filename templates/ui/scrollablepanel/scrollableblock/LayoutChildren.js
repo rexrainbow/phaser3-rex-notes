@@ -8,10 +8,10 @@ var LayoutChildren = function () {
         // Set size
         switch (this.scrollMode) {
             case 0:
-                childWidth = this.width;
+                childWidth = this.width * this.scaleX;
                 break;
             case 1:
-                childHeight = this.height;
+                childHeight = this.height * this.scaleY;
                 break;
 
             default:

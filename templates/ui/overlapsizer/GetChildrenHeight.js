@@ -21,7 +21,7 @@ var GetChildrenHeight = function () {
         }
 
         padding = child.rexSizer.padding;
-        childHeight += (padding.top + padding.bottom);
+        childHeight += (padding.top + padding.bottom) * child.scaleY;
         result = Math.max(childHeight, result);
     }
 
@@ -29,7 +29,7 @@ var GetChildrenHeight = function () {
         return undefined;
     }
 
-    return result + this.space.top + this.space.bottom;
+    return result + ((this.space.top + this.space.bottom) * this.scaleY);
 }
 
 export default GetChildrenHeight;

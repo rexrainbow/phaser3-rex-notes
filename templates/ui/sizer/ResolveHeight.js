@@ -7,7 +7,7 @@ var ResolveHeight = function (height) {
     if ((height !== undefined) && (this.orientation === 1) && (this.proportionLength === undefined)) {
         var remainder = height - this.childrenHeight;
         if (remainder > 0) {
-            remainder = height - this.getChildrenHeight(false);
+            remainder = height - this.getChildrenHeight(false);            
             this.proportionLength = remainder / this.childrenProportion;
         } else {
             this.proportionLength = 0;

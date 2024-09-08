@@ -25,7 +25,6 @@ class FixWidthSizer extends BaseSizer {
         this.type = 'rexFixWidthSizer';
         this.sizerChildren = [];
 
-        this.runChildrenScaleSave = true;
         this.runChildrenWrapFlag = true;
 
         this.setOrientation(GetValue(config, 'orientation', 0));

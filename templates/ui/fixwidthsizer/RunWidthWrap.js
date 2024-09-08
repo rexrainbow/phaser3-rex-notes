@@ -8,7 +8,7 @@ var RunWidthWrap = function (width) {
     }
 
     if (this.orientation === 0) {
-        var innerWidth = width - this.space.left - this.space.right;
+        var innerWidth = width - ((this.space.left + this.space.right) * this.scaleX);
         this.wrapResult = RunChildrenWrap.call(this, innerWidth);
         this.rexSizer.resolved = true;
         RunChildrenWrapBase.call(this, width);

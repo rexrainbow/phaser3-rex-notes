@@ -26,7 +26,6 @@ import GetChildrenHeight from './GetChildrenHeight.js';
 import GetAllChildrenSizers from './GetAllChildrenSizers.js';
 import GetChildrenSizers from './GetChildrenSizers.js';
 import GetShownChildrenMethods from './GetShownChildrenMethods.js';
-import RestoreScaleMethods from './RestoreScaleMethods.js';
 import PreLayout from './PreLayout.js';
 import Layout from './Layout.js';
 import RunLayout from './RunLayout.js';
@@ -117,7 +116,6 @@ Object.assign(
     HideMethods,
     ModalMethods,
     GetShownChildrenMethods,
-    RestoreScaleMethods,
 );
 
 export default methods;

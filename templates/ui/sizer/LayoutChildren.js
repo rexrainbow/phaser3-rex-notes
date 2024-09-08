@@ -8,7 +8,7 @@ const Wrap = Phaser.Math.Wrap;
 
 var LayoutChildren = function () {
     var children = this.sizerChildren;
-    var child, childConfig, padding;
+    var child, sizerConfig, padding;
     var startX = this.innerLeft,
         startY = this.innerTop;
     var innerWidth = this.innerWidth;
@@ -34,8 +34,8 @@ var LayoutChildren = function () {
             continue;
         }
 
-        childConfig = child.rexSizer;
-        padding = childConfig.padding;
+        sizerConfig = child.rexSizer;
+        padding = sizerConfig.padding;
 
         PreLayoutChild.call(this, child);
 
@@ -63,33 +63,33 @@ var LayoutChildren = function () {
 
         // Set position
         if (this.orientation === 0) { // x
-            x = (itemX + padding.left);
-            if ((childConfig.proportion === 0) || (this.proportionLength === 0)) {
+            x = itemX + (padding.left * child.scaleX);
+            if ((sizerConfig.proportion === 0) || (this.proportionLength === 0)) {
                 width = childWidth;
             } else {
-                width = (childConfig.proportion * this.proportionLength);
+                width = (sizerConfig.proportion * this.proportionLength);
             }
 
-            y = (itemY + padding.top);
-            height = (innerHeight - padding.top - padding.bottom);
+            y = itemY + (padding.top * child.scaleY);
+            height = innerHeight - ((padding.top + padding.bottom) * child.scaleY);
         } else { // y
-            x = (itemX + padding.left);
-            width = (innerWidth - padding.left - padding.right);
+            x = itemX + (padding.left * child.scaleX);
+            width = innerWidth - ((padding.left + padding.right) * child.scaleX);
 
-            y = (itemY + padding.top);
-            if ((childConfig.proportion === 0) || (this.proportionLength === 0)) {
+            y = itemY + (padding.top * child.scaleY);
+            if ((sizerConfig.proportion === 0) || (this.proportionLength === 0)) {
                 height = childHeight;
             } else {
-                height = (childConfig.proportion * this.proportionLength);
+                height = (sizerConfig.proportion * this.proportionLength);
             }
         }
 
-        LayoutChild.call(this, child, x, y, width, height, childConfig.align);
+        LayoutChild.call(this, child, x, y, width, height, sizerConfig.align);
 
         if (this.orientation === 0) { // x
-            itemX += (width + padding.left + padding.right + this.space.item);
+            itemX += (width + ((padding.left + padding.right) * child.scaleX) + (this.space.item * this.scaleX));
         } else { // y
-            itemY += (height + padding.top + padding.bottom + this.space.item);
+            itemY += (height + ((padding.top + padding.bottom) * child.scaleY) + (this.space.item * this.scaleY));
         }
     }
 

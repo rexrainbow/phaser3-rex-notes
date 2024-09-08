@@ -7,7 +7,7 @@ export default {
         }
 
         var padding = title.rexSizer.padding;
-        var titleWidth = this.getChildWidth(this.childrenMap.title) + padding.left + padding.right;
+        var titleWidth = this.getChildWidth(this.childrenMap.title) + ((padding.left + padding.right) * title.scaleX);
         return titleWidth + this.getInnerPadding('left');
     },
 
@@ -19,7 +19,7 @@ export default {
         }
 
         var padding = title.rexSizer.padding;
-        width -= padding.left + padding.right;
+        width -= (padding.left + padding.right) * title.scaleX;
 
         title.minWidth = width;
         return this;

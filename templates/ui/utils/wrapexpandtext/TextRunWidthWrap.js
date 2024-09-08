@@ -3,7 +3,7 @@ import IsTextGameObject from '../../../../plugins/utils/text/IsTextGameObject.js
 var TextRunWidthWrap = function (textObject) {
     var RunWidthWrap = function (width) {
         var padding = textObject.padding;
-        var wrapWidth = width - padding.left - padding.right;
+        var wrapWidth = width - ((padding.left + padding.right) * textObject.scaleX);
         var style = textObject.style;
         if (IsTextGameObject(textObject)) {
             style.wordWrapWidth = wrapWidth;

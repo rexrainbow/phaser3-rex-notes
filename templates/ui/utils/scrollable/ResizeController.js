@@ -61,7 +61,7 @@ var SetControllerBounds = function (axis) {
 
     if (scroller) {
         // Scale will force to 1 during layout, get saved scale value back
-        var scale = (axis === 'Y') ? this.getSaveScaleY() : this.getSaveScaleX();
+        var scale = (axis === 'Y') ? this.scaleY : this.scaleX;
         scroller.setBounds(bound0, bound1 * scale);
     }
     if (slider) {

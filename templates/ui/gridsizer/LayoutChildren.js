@@ -12,26 +12,19 @@ var LayoutChildren = function () {
     var x, y, width, height; // Align zone
     var childWidth, childHeight;
     // Layout grid children
-    var columnSpace = this.space.column,
-        rowSpace = this.space.row,
-        indentLeftOdd = this.space.indentLeftOdd,
-        indentLeftEven = this.space.indentLeftEven,
-        indentTopOdd = this.space.indentTopOdd,
-        indentTopEven = this.space.indentTopEven;
-
     var colWidth, rowHeight;
     var indentLeft, indentTop;
     for (var rowIndex = 0; rowIndex < this.rowCount; rowIndex++) {
         rowHeight = this.getRowHeight(rowIndex);
 
-        indentLeft = (rowIndex % 2) ? indentLeftEven : indentLeftOdd;
-        itemX = startX + indentLeft;
+        indentLeft = (rowIndex % 2) ? this.space.indentLeftEven : this.space.indentLeftOdd;
+        itemX = startX + (indentLeft * this.scaleX);
         for (var columnIndex = 0; columnIndex < this.columnCount; columnIndex++) {
             colWidth = this.getColumnWidth(columnIndex);
 
             child = this.getChildAt(columnIndex, rowIndex);
             if ((!child) || (child.rexSizer.hidden)) {
-                itemX += (colWidth + columnSpace[columnIndex]);
+                itemX += colWidth + (this.space.column[columnIndex] * this.scaleX);
                 continue;
             }
 
@@ -49,19 +42,19 @@ var LayoutChildren = function () {
             childConfig = child.rexSizer;
             padding = childConfig.padding;
 
-            x = (itemX + padding.left);
-            width = colWidth - padding.left - padding.right;
+            x = itemX + (padding.left * child.scaleX);
+            width = colWidth - ((padding.left + padding.right) * child.scaleX);
 
-            indentTop = (columnIndex % 2) ? indentTopEven : indentTopOdd;
-            y = (itemY + indentTop + padding.top);
-            height = rowHeight - padding.top - padding.bottom;
+            indentTop = (columnIndex % 2) ? this.space.indentTopEven : this.space.indentTopOdd;
+            y = itemY + (indentTop * this.scaleY) + (padding.top * child.scaleY);
+            height = rowHeight - ((padding.top + padding.bottom) * child.scaleY);
 
             LayoutChild.call(this, child, x, y, width, height, childConfig.align);
 
-            itemX += (colWidth + columnSpace[columnIndex]);
+            itemX += colWidth + (this.space.column[columnIndex] * this.scaleX);
         }
 
-        itemY += (rowHeight + rowSpace[rowIndex]);
+        itemY += rowHeight + (this.space.row[rowIndex] * this.scaleY);
     }
 }
 

@@ -12,8 +12,8 @@ var LayoutBackgrounds = function () {
 
     var startX = this.left,
         startY = this.top;
-    var parentWidth = this.width,
-        parentHeight = this.height;
+    var parentWidth = this.width * this.scaleX,
+        parentHeight = this.height * this.scaleY;
     var child, childConfig, padding,
         x, y, width, height;
     for (var i = 0, cnt = backgrounds.length; i < cnt; i++) {
@@ -27,10 +27,10 @@ var LayoutBackgrounds = function () {
 
         PreLayoutChild.call(this, child);
 
-        x = startX + padding.left;
-        y = startY + padding.top;
-        width = parentWidth - padding.left - padding.right;
-        height = parentHeight - padding.top - padding.bottom;
+        x = startX + (padding.left * child.scaleX);
+        y = startY + (padding.top * child.scaleY);
+        width = parentWidth - ((padding.left + padding.right) * child.scaleX);
+        height = parentHeight - ((padding.top + padding.bottom) * child.scaleY);
 
         ResizeGameObject(child, width, height);
 

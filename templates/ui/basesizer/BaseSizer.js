@@ -25,7 +25,6 @@ class Base extends Container {
         this.layoutedChildren = undefined;
 
         // FixWidthSizer uses these flag
-        this.runChildrenScaleSave = false;
         this.runChildrenWrapFlag = false;
 
         this.enableLayoutWarn(false);

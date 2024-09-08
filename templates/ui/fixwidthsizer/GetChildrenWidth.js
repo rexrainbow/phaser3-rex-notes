@@ -22,7 +22,7 @@ var GetChildrenWidth = function (minimumMode) {
         return undefined;
     }
 
-    return childrenWidth + this.space.left + this.space.right;
+    return childrenWidth + ((this.space.left + this.space.right) * this.scaleX);
 }
 
 export default GetChildrenWidth;

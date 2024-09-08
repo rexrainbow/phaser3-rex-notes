@@ -4,17 +4,17 @@ var GetExpandedChildHeight = function (child, parentHeight) {
     }
 
     var childHeight;
-    var childConfig = child.rexSizer;
+    var sizerConfig = child.rexSizer;
     if (this.orientation === 0) { // x
-        if (childConfig.expand) {
+        if (sizerConfig.expand) {
             var space = this.space;
-            var innerHeight = parentHeight - space.top - space.bottom;
-            var padding = childConfig.padding;
-            childHeight = innerHeight - padding.top - padding.bottom;
+            var innerHeight = parentHeight - ((space.top + space.bottom) * this.scaleY);
+            var padding = sizerConfig.padding;
+            childHeight = innerHeight - ((padding.top + padding.bottom) * child.scaleY);
         }
     } else { // y
-        if ((childConfig.proportion > 0) && (this.proportionLength > 0)) {
-            childHeight = (childConfig.proportion * this.proportionLength);
+        if ((sizerConfig.proportion > 0) && (this.proportionLength > 0)) {
+            childHeight = (sizerConfig.proportion * this.proportionLength);
         }
     }
     return childHeight;

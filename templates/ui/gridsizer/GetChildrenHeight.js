@@ -43,7 +43,7 @@ var GetChildrenHeight = function (minimumMode) {
                 }
 
                 padding = child.rexSizer.padding;
-                childHeight += (padding.top + padding.bottom);
+                childHeight += (padding.top + padding.bottom) * child.scaleY;
                 rowHeight = Math.max(rowHeight, childHeight);
             }
 
@@ -66,9 +66,9 @@ var GetChildrenHeight = function (minimumMode) {
         return undefined;
     }
 
-    var space = this.space;
-    var indentTop = Math.max(space.indentTopOdd, space.indentTopEven);
-    return result + Sum(space.top, indentTop, ...space.row, space.bottom);
+    var indentTop = Math.max(this.space.indentTopOdd, this.space.indentTopEven);
+    var totalSpace = Sum(this.space.top, indentTop, ...this.space.row, this.space.bottom);
+    return result + (totalSpace * this.scaleY);
 }
 
 export default GetChildrenHeight;

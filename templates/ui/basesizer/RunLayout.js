@@ -6,17 +6,12 @@ var RunLayout = function (parent, newWidth, newHeight) {
     }
 
     var isTopmostParent = !parent;
-    // Set scale to 1
-    if (isTopmostParent || parent.runChildrenScaleSave) {
-        this.saveScale();
-    }
-
     // Pre-processor, top parent only
     if (isTopmostParent) {
         this.preLayout();
     }
 
-    var size, width, height;
+    var width, height;
 
     var runWidthWrap, runHeightWrap;
     if (isTopmostParent || parent.runChildrenWrapFlag) {
@@ -27,16 +22,16 @@ var RunLayout = function (parent, newWidth, newHeight) {
         runHeightWrap = false;
     }
 
-    size = ResolveSize(this, newWidth, newHeight, runWidthWrap, runHeightWrap);
+    var size = ResolveSize(this, newWidth, newHeight, runWidthWrap, runHeightWrap);
     if (!size) {
         console.error('Can\'t resolve size of ', this);
     }
 
-    width = size.width;
-    height = size.height;
+    var displayWidth = size.width;
+    var displayHeight = size.height;
 
     // Resize parent
-    this.resize(width, height);
+    this.resize(displayWidth / this.scale, displayHeight / this.scale);
 
     if (this.sizerEventsEnable) {
         if (this.layoutedChildren === undefined) {
@@ -56,12 +51,7 @@ var RunLayout = function (parent, newWidth, newHeight) {
     }
 
     // Custom postLayout callback
-    this.postLayout(parent, width, height);
-
-    // Restore scale
-    if (isTopmostParent || parent.runChildrenScaleSave) {
-        this.restoreScale();
-    }
+    this.postLayout(parent, displayWidth, displayHeight);
 
     // Post-processor, top parent only
     if (isTopmostParent) {

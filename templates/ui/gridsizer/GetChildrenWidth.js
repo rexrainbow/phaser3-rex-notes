@@ -43,7 +43,7 @@ var GetChildrenWidth = function (minimumMode) {
                 }
 
                 padding = child.rexSizer.padding;
-                childWidth += (padding.left + padding.right);
+                childWidth += (padding.left + padding.right) * child.scaleX;
                 columnWidth = Math.max(columnWidth, childWidth);
             }
 
@@ -65,9 +65,9 @@ var GetChildrenWidth = function (minimumMode) {
         return undefined;
     }
 
-    var space = this.space;
-    var indentLeft = Math.max(space.indentLeftOdd, space.indentLeftEven);
-    return result + Sum(space.left, indentLeft, ...space.column, space.right);
+    var indentLeft = Math.max(this.space.indentLeftOdd, this.space.indentLeftEven);
+    var totalSpace = Sum(this.space.left, indentLeft, ...this.space.column, this.space.right)
+    return result + (totalSpace * this.scaleX);
 }
 
 export default GetChildrenWidth;

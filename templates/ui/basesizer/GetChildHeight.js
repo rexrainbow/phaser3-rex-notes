@@ -8,7 +8,8 @@ var GetChildHeight = function (child) {
             return undefined;
         }
 
-        childHeight = Math.max(child.minHeight, childrenHeight);
+        var childMinHeight = child.minHeight * child.scaleY;
+        childHeight = Math.max(childMinHeight, childrenHeight);
     } else {  // Normal game object
         if (child.minHeight !== undefined) {  // Force minHeight
             childHeight = child.minHeight;
