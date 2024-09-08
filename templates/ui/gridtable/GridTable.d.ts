@@ -6,8 +6,10 @@ export default GridTable;
 
 declare namespace GridTable {
 
+    type CellDataType = GridTableCore.CellData;
+
     type CreateCellContainerCallbackType = (
-        cell: GridTableCore.CellData,
+        cell: CellDataType,
         cellContainer: Phaser.GameObjects.GameObject | null
     ) => Phaser.GameObjects.GameObject | null;
 
