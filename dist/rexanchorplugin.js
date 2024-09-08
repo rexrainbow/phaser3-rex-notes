@@ -256,10 +256,12 @@
         }
 
         // 2nd pass : Has `setSize` method?
+        // Does not have `setSize` method
         if (!gameObject.setSize) {
             return false;
         }
 
+        // Has `setSize` method but only for internal usage.
         for (var i = 0, cnt = ExcludeClassList$1.length; i < cnt; i++) {
             var excludeClass = ExcludeClassList$1[i];
             if (excludeClass && gameObject instanceof excludeClass) {
@@ -297,17 +299,24 @@
         Phaser.GameObjects.BitmapText,
     ];
 
-    var ResizeGameObject = function (gameObject, newWidth, newHeight) {
-        if (!gameObject || ((newWidth === undefined) && (newHeight === undefined))) {
+    var ResizeGameObject = function (gameObject, newDisplayWidth, newDisplayHeight) {
+        // Set display size
+
+        if (!gameObject || ((newDisplayWidth === undefined) && (newDisplayHeight === undefined))) {
             return;
         }
 
         if (HasResizeMethod(gameObject)) { // Has `resize`, or `setSize` method
-            if (newWidth === undefined) {
+            var newWidth, newHeight;
+            if (newDisplayWidth === undefined) {
                 newWidth = gameObject.width;
+            } else {
+                newWidth = newDisplayWidth / gameObject.scaleX;
             }
-            if (newHeight === undefined) {
+            if (newDisplayHeight === undefined) {
                 newHeight = gameObject.height;
+            } else {
+                newHeight = newDisplayHeight / gameObject.scaleY;
             }
 
             if (gameObject.resize) {
@@ -315,22 +324,24 @@
             } else {
                 gameObject.setSize(newWidth, newHeight);
             }
-        } else { // Set display width/height
+
+        } else {
             var canSetDisplaySize = CanSetDisplaySize(gameObject);
-            if (newWidth !== undefined) {
+            if (newDisplayWidth !== undefined) {
                 if (canSetDisplaySize) {
-                    gameObject.displayWidth = newWidth;
+                    gameObject.displayWidth = newDisplayWidth;
                 } else {
-                    gameObject.scaleX = newWidth / gameObject.width;
+                    gameObject.scaleX = newDisplayWidth / gameObject.width;
                 }
             }
-            if (newHeight !== undefined) {
+            if (newDisplayHeight !== undefined) {
                 if (canSetDisplaySize) {
-                    gameObject.displayHeight = newHeight;
+                    gameObject.displayHeight = newDisplayHeight;
                 } else {
-                    gameObject.scaleY = newHeight / gameObject.height;
+                    gameObject.scaleY = newDisplayHeight / gameObject.height;
                 }
             }
+
         }
     };
 

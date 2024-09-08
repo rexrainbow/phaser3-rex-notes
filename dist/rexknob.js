@@ -3574,7 +3574,7 @@
             return undefined;
         }
 
-        var minWidth = (this.minWidth !== undefined) ? this.minWidth : 0;
+        var minWidth = (this.minWidth !== undefined) ? (this.minWidth * this.scaleX) : 0;
         if (width === undefined) {
             width = Math.max(minWidth, childrenWidth);
 
@@ -3666,7 +3666,7 @@
             return undefined;
         }
 
-        var minHeight = (this.minHeight !== undefined) ? this.minHeight : 0;
+        var minHeight = (this.minHeight !== undefined) ? (this.minHeight * this.scaleY) : 0;
         if (height === undefined) {
             height = Math.max(minHeight, childrenHeight);
 
@@ -3760,7 +3760,8 @@
                 return undefined;
             }
 
-            childWidth = Math.max(child.minWidth, childrenWidth);
+            var childMinWidth = child.minWidth * child.scaleX;
+            childWidth = Math.max(childMinWidth, childrenWidth);
         } else {  // Normal game object
             if (child.minWidth !== undefined) {  // Force minWidth
                 childWidth = child.minWidth;
@@ -3782,7 +3783,8 @@
                 return undefined;
             }
 
-            childHeight = Math.max(child.minHeight, childrenHeight);
+            var childMinHeight = child.minHeight * child.scaleY;
+            childHeight = Math.max(childMinHeight, childrenHeight);
         } else {  // Normal game object
             if (child.minHeight !== undefined) {  // Force minHeight
                 childHeight = child.minHeight;
@@ -3881,65 +3883,6 @@
         }
     };
 
-    var GetScaleRoot = function (gameObject) {
-        var parent = gameObject;
-        while (parent && (parent !== parent._saveScaleRoot)) {
-            parent = parent.getParentSizer();
-        }
-
-        return parent;
-    };
-
-    var RestoreScaleMethods = {
-        saveScale(newScale) {
-            if (newScale === undefined) {
-                newScale = 1;
-            }
-
-            this._scaleXSave = this.scaleX;
-            this._scaleYSave = this.scaleY;
-            this._saveScaleRoot = this;
-
-            var scale1 = (this._scaleXSave === 1) && (this._scaleYSave === 1);
-            if (!scale1) {
-                this.setScale(newScale);
-            }
-
-            return this;
-        },
-
-        restoreScale() {
-            var scale1 = (this._scaleXSave === 1) && (this._scaleYSave === 1);
-            if (!scale1) {
-                this.setScale(this._scaleXSave, this._scaleYSave);
-            }
-
-            this._scaleXSave = 1;
-            this._scaleYSave = 1;
-            this._saveScaleRoot = undefined;
-
-            return this;
-        },
-
-        getSaveScaleX() {
-            var parent = GetScaleRoot(this);
-            if (parent) {
-                return parent._scaleXSave;
-            } else {
-                return 1;
-            }
-        },
-
-        getSaveScaleY() {
-            var parent = GetScaleRoot(this);
-            if (parent) {
-                return parent._scaleYSave;
-            } else {
-                return 1;
-            }
-        },
-    };
-
     var PreLayout = function () {
         this._childrenWidth = undefined;
         this._childrenHeight = undefined;
@@ -3960,6 +3903,102 @@
         return this;
     };
 
+    var HasResizeMethod = function (gameObject) {
+        // 1st pass : Has `resize` method?
+        if (gameObject.resize) {
+            return true;
+        }
+
+        // 2nd pass : Has `setSize` method?
+        // Does not have `setSize` method
+        if (!gameObject.setSize) {
+            return false;
+        }
+
+        // Has `setSize` method but only for internal usage.
+        for (var i = 0, cnt = ExcludeClassList$1.length; i < cnt; i++) {
+            var excludeClass = ExcludeClassList$1[i];
+            if (excludeClass && gameObject instanceof excludeClass) {
+                return false;
+            }
+        }
+
+        return true;
+    };
+
+    var ExcludeClassList$1 = [
+        Phaser.GameObjects.Image,
+        Phaser.GameObjects.Sprite,
+        Phaser.GameObjects.Mesh,
+        Phaser.GameObjects.Shader,
+        Phaser.GameObjects.Video
+    ];
+
+    var CanSetDisplaySize = function (gameObject) {
+        if (gameObject.displayWidth === undefined) {
+            return false;
+        }
+
+        for (var i = 0, cnt = ExcludeClassList.length; i < cnt; i++) {
+            var excludeClass = ExcludeClassList[i];
+            if (excludeClass && gameObject instanceof excludeClass) {
+                return false;
+            }
+        }
+
+        return true;
+    };
+
+    var ExcludeClassList = [
+        Phaser.GameObjects.BitmapText,
+    ];
+
+    var ResizeGameObject = function (gameObject, newDisplayWidth, newDisplayHeight) {
+        // Set display size
+
+        if (!gameObject || ((newDisplayWidth === undefined) && (newDisplayHeight === undefined))) {
+            return;
+        }
+
+        if (HasResizeMethod(gameObject)) { // Has `resize`, or `setSize` method
+            var newWidth, newHeight;
+            if (newDisplayWidth === undefined) {
+                newWidth = gameObject.width;
+            } else {
+                newWidth = newDisplayWidth / gameObject.scaleX;
+            }
+            if (newDisplayHeight === undefined) {
+                newHeight = gameObject.height;
+            } else {
+                newHeight = newDisplayHeight / gameObject.scaleY;
+            }
+
+            if (gameObject.resize) {
+                gameObject.resize(newWidth, newHeight);
+            } else {
+                gameObject.setSize(newWidth, newHeight);
+            }
+
+        } else {
+            var canSetDisplaySize = CanSetDisplaySize(gameObject);
+            if (newDisplayWidth !== undefined) {
+                if (canSetDisplaySize) {
+                    gameObject.displayWidth = newDisplayWidth;
+                } else {
+                    gameObject.scaleX = newDisplayWidth / gameObject.width;
+                }
+            }
+            if (newDisplayHeight !== undefined) {
+                if (canSetDisplaySize) {
+                    gameObject.displayHeight = newDisplayHeight;
+                } else {
+                    gameObject.scaleY = newDisplayHeight / gameObject.height;
+                }
+            }
+
+        }
+    };
+
     // Override
     var RunLayout = function (parent, newWidth, newHeight) {
         // Skip hidden or !dirty sizer
@@ -3968,17 +4007,10 @@
         }
 
         var isTopmostParent = !parent;
-        // Set scale to 1
-        if (isTopmostParent || parent.runChildrenScaleSave) {
-            this.saveScale();
-        }
-
         // Pre-processor, top parent only
         if (isTopmostParent) {
             this.preLayout();
         }
-
-        var size, width, height;
 
         var runWidthWrap, runHeightWrap;
         if (isTopmostParent || parent.runChildrenWrapFlag) {
@@ -3989,16 +4021,16 @@
             runHeightWrap = false;
         }
 
-        size = ResolveSize(this, newWidth, newHeight, runWidthWrap, runHeightWrap);
+        var size = ResolveSize(this, newWidth, newHeight, runWidthWrap, runHeightWrap);
         if (!size) {
             console.error('Can\'t resolve size of ', this);
         }
 
-        width = size.width;
-        height = size.height;
+        var width = size.width;
+        var height = size.height;
 
         // Resize parent
-        this.resize(width, height);
+        ResizeGameObject(this, width, height);
 
         if (this.sizerEventsEnable) {
             if (this.layoutedChildren === undefined) {
@@ -4019,11 +4051,6 @@
 
         // Custom postLayout callback
         this.postLayout(parent, width, height);
-
-        // Restore scale
-        if (isTopmostParent || parent.runChildrenScaleSave) {
-            this.restoreScale();
-        }
 
         // Post-processor, top parent only
         if (isTopmostParent) {
@@ -4309,91 +4336,6 @@
         ComponentBase.prototype,
         EventEmitterMethods$1
     );
-
-    var HasResizeMethod = function (gameObject) {
-        // 1st pass : Has `resize` method?
-        if (gameObject.resize) {
-            return true;
-        }
-
-        // 2nd pass : Has `setSize` method?
-        if (!gameObject.setSize) {
-            return false;
-        }
-
-        for (var i = 0, cnt = ExcludeClassList$1.length; i < cnt; i++) {
-            var excludeClass = ExcludeClassList$1[i];
-            if (excludeClass && gameObject instanceof excludeClass) {
-                return false;
-            }
-        }
-
-        return true;
-    };
-
-    var ExcludeClassList$1 = [
-        Phaser.GameObjects.Image,
-        Phaser.GameObjects.Sprite,
-        Phaser.GameObjects.Mesh,
-        Phaser.GameObjects.Shader,
-        Phaser.GameObjects.Video
-    ];
-
-    var CanSetDisplaySize = function (gameObject) {
-        if (gameObject.displayWidth === undefined) {
-            return false;
-        }
-
-        for (var i = 0, cnt = ExcludeClassList.length; i < cnt; i++) {
-            var excludeClass = ExcludeClassList[i];
-            if (excludeClass && gameObject instanceof excludeClass) {
-                return false;
-            }
-        }
-
-        return true;
-    };
-
-    var ExcludeClassList = [
-        Phaser.GameObjects.BitmapText,
-    ];
-
-    var ResizeGameObject = function (gameObject, newWidth, newHeight) {
-        if (!gameObject || ((newWidth === undefined) && (newHeight === undefined))) {
-            return;
-        }
-
-        if (HasResizeMethod(gameObject)) { // Has `resize`, or `setSize` method
-            if (newWidth === undefined) {
-                newWidth = gameObject.width;
-            }
-            if (newHeight === undefined) {
-                newHeight = gameObject.height;
-            }
-
-            if (gameObject.resize) {
-                gameObject.resize(newWidth, newHeight);
-            } else {
-                gameObject.setSize(newWidth, newHeight);
-            }
-        } else { // Set display width/height
-            var canSetDisplaySize = CanSetDisplaySize(gameObject);
-            if (newWidth !== undefined) {
-                if (canSetDisplaySize) {
-                    gameObject.displayWidth = newWidth;
-                } else {
-                    gameObject.scaleX = newWidth / gameObject.width;
-                }
-            }
-            if (newHeight !== undefined) {
-                if (canSetDisplaySize) {
-                    gameObject.displayHeight = newHeight;
-                } else {
-                    gameObject.scaleY = newHeight / gameObject.height;
-                }
-            }
-        }
-    };
 
     var DefaultResizeCallback = function (width, height, gameObject, anchor) {
         ResizeGameObject(gameObject, width, height);
@@ -8802,8 +8744,8 @@
 
         var startX = this.left,
             startY = this.top;
-        var parentWidth = this.width,
-            parentHeight = this.height;
+        var parentWidth = this.width * this.scaleX,
+            parentHeight = this.height * this.scaleY;
         var child, childConfig, padding,
             x, y, width, height;
         for (var i = 0, cnt = backgrounds.length; i < cnt; i++) {
@@ -8817,10 +8759,10 @@
 
             PreLayoutChild.call(this, child);
 
-            x = startX + padding.left;
-            y = startY + padding.top;
-            width = parentWidth - padding.left - padding.right;
-            height = parentHeight - padding.top - padding.bottom;
+            x = startX + (padding.left * child.scaleX);
+            y = startY + (padding.top * child.scaleY);
+            width = parentWidth - ((padding.left + padding.right) * child.scaleX);
+            height = parentHeight - ((padding.top + padding.bottom) * child.scaleY);
 
             ResizeGameObject(child, width, height);
 
@@ -11604,7 +11546,6 @@
         HideMethods,
         ModalMethods,
         GetShownChildrenMethods,
-        RestoreScaleMethods,
     );
 
     const GetValue$5 = Phaser.Utils.Objects.GetValue;
@@ -11629,7 +11570,6 @@
             this.layoutedChildren = undefined;
 
             // FixWidthSizer uses these flag
-            this.runChildrenScaleSave = false;
             this.runChildrenWrapFlag = false;
 
             this.enableLayoutWarn(false);
@@ -11884,7 +11824,7 @@
             }
 
             padding = child.rexSizer.padding;
-            childWidth += (padding.left + padding.right);
+            childWidth += (padding.left + padding.right) * child.scaleX;
             result = Math.max(childWidth, result);
         }
 
@@ -11892,7 +11832,7 @@
             return undefined;
         }
 
-        return result + this.space.left + this.space.right;
+        return result + ((this.space.left + this.space.right) * this.scaleX);
     };
 
     var GetChildrenHeight = function () {
@@ -11918,7 +11858,7 @@
             }
 
             padding = child.rexSizer.padding;
-            childHeight += (padding.top + padding.bottom);
+            childHeight += (padding.top + padding.bottom) * child.scaleY;
             result = Math.max(childHeight, result);
         }
 
@@ -11926,21 +11866,20 @@
             return undefined;
         }
 
-        return result + this.space.top + this.space.bottom;
+        return result + ((this.space.top + this.space.bottom) * this.scaleY);
     };
 
     var GetExpandedChildWidth = function (child, parentWidth) {
         if (parentWidth === undefined) {
-            parentWidth = this.width;
+            parentWidth = this.width * this.scaleX;
         }
 
         var childWidth;
         var childConfig = child.rexSizer;
         if (childConfig.expandWidth) {
-            var space = this.space;
-            var innerWidth = parentWidth - space.left - space.right;
+            var innerWidth = parentWidth - ((this.space.left + this.space.right) * this.scaleX);
             var padding = childConfig.padding;
-            childWidth = innerWidth - padding.left - padding.right;
+            childWidth = innerWidth - ((padding.left + padding.right) * child.scaleX);
         }
         return childWidth;
     };
@@ -11953,10 +11892,9 @@
         var childHeight;
         var childConfig = child.rexSizer;
         if (childConfig.expandHeight) {
-            var space = this.space;
-            var innerHeight = parentHeight - space.top - space.bottom;
+            var innerHeight = parentHeight - ((this.space.top + this.space.bottom) * this.scaleY);
             var padding = childConfig.padding;
-            childHeight = innerHeight - padding.top - padding.bottom;
+            childHeight = innerHeight - ((padding.top + padding.bottom) * child.scaleY);
         }
         return childHeight;
     };
@@ -12071,10 +12009,10 @@
             }
 
             // Set position
-            x = (startX + padding.left);
-            width = innerWidth - padding.left - padding.right;
-            y = (startY + padding.top);
-            height = innerHeight - padding.top - padding.bottom;
+            x = startX + (padding.left * child.scaleX);
+            width = innerWidth - ((padding.left + padding.right) * child.scaleX);
+            y = startY + (padding.top * child.scaleY);
+            height = innerHeight - ((padding.top + padding.bottom) * child.scaleY);
 
             LayoutChild.call(this,
                 child, x, y, width, height, childConfig.align,
