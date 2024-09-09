@@ -144,6 +144,8 @@ declare class GridTable extends ContainerLite {
     setCellHeight(cellIndex: number, cellHeight: number): this;
     setCellWidth(cellIndex: number, cellWidth: number): this;
 
+    resetAllCellsSize(width: number, height: number): this;
+
     iterateVisibleCell(
         callback: (cell: GridTable.Cell) => void
     ): this;
