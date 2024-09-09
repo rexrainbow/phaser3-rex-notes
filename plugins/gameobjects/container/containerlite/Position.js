@@ -3,11 +3,16 @@ import GetScale from './utils/GetScale.js';
 
 export default {
     updateChildPosition(child) {
+        var localState = GetLocalState(child);
+        var parent = localState.parent;
+
+        if (!parent) {
+            return this;
+        }
+
         if (child.isRexContainerLite) {
             child.syncChildrenEnable = false;
         }
-        var localState = GetLocalState(child);
-        var parent = localState.parent;
 
         if (localState.syncPosition) {
             child.x = localState.x;
