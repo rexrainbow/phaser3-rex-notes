@@ -8,7 +8,7 @@ var GetExpandedChildHeight = function (child, parentHeight) {
     if (childConfig.expandHeight) {
         var innerHeight = parentHeight - ((this.space.top + this.space.bottom) * this.scaleY);
         var padding = childConfig.padding;
-        childHeight = innerHeight - ((padding.top + padding.bottom) * child.scaleY);
+        childHeight = innerHeight - ((padding.top + padding.bottom) * this.scaleY);
     }
     return childHeight;
 }

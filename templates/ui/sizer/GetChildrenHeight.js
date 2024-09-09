@@ -36,7 +36,7 @@ var GetChildrenHeight = function (minimumMode) {
             }
 
             padding = sizerConfig.padding;
-            childHeight += (padding.top + padding.bottom) * child.scaleY;
+            childHeight += (padding.top + padding.bottom) * this.scaleY;
             result = Math.max(childHeight, result);
         }
     } else {
@@ -76,7 +76,7 @@ var GetChildrenHeight = function (minimumMode) {
             }
 
             padding = sizerConfig.padding;
-            childHeight += (padding.top + padding.bottom) * child.scaleY;
+            childHeight += (padding.top + padding.bottom) * this.scaleY;
 
             if (isFirstChild) {
                 isFirstChild = false;

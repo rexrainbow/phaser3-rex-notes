@@ -43,7 +43,7 @@ var GetChildrenHeight = function (minimumMode) {
                 }
 
                 padding = child.rexSizer.padding;
-                childHeight += (padding.top + padding.bottom) * child.scaleY;
+                childHeight += (padding.top + padding.bottom) * this.scaleY;
                 rowHeight = Math.max(rowHeight, childHeight);
             }
 

@@ -29,11 +29,11 @@ var ExpandFitRatioChildren = function (width, height) {
 
         if (this.orientation === 0) {
             // Set child width by child height 
-            childHeight = innerHeight - ((this.getChildOuterPadding(child, 'top') + this.getChildOuterPadding(child, 'bottom')) * child.scaleY);
+            childHeight = innerHeight - ((this.getChildOuterPadding(child, 'top') + this.getChildOuterPadding(child, 'bottom')) * this.scaleY);
             childWidth = childHeight * fitRatio;
         } else {
             // Set child height by child width
-            childWidth = innerHeight - ((this.getChildOuterPadding(child, 'top') + this.getChildOuterPadding(child, 'bottom')) * child.scaleX);
+            childWidth = innerHeight - ((this.getChildOuterPadding(child, 'top') + this.getChildOuterPadding(child, 'bottom')) * this.scaleX);
             childHeight = childWidth / fitRatio;
         }
 

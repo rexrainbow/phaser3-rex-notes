@@ -10,7 +10,7 @@ var GetExpandedChildHeight = function (child, parentHeight) {
             var space = this.space;
             var innerHeight = parentHeight - ((space.top + space.bottom) * this.scaleY);
             var padding = sizerConfig.padding;
-            childHeight = innerHeight - ((padding.top + padding.bottom) * child.scaleY);
+            childHeight = innerHeight - ((padding.top + padding.bottom) * this.scaleY);
         }
     } else { // y
         if ((sizerConfig.proportion > 0) && (this.proportionLength > 0)) {

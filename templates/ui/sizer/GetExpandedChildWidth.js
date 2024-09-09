@@ -14,7 +14,7 @@ var GetExpandedChildWidth = function (child, parentWidth) {
             var space = this.space;
             var innerWidth = parentWidth - (space.left + space.right) * this.scaleX;
             var padding = sizerConfig.padding;
-            childWidth = innerWidth - (padding.left + padding.right) * child.scaleX;
+            childWidth = innerWidth - (padding.left + padding.right) * this.scaleX;
         }
     }
     return childWidth;

@@ -30,7 +30,7 @@ var RunChildrenWrap = function (lineWidth) {
 
                 childWidth = this.getChildWidth(child);
                 padding = child.rexSizer.padding;
-                childWidth += ((padding.left + padding.right) * child.scaleX);
+                childWidth += ((padding.left + padding.right) * this.scaleX);
 
                 newLine = (remainder < childWidth) || (lastLine === undefined);
             }
@@ -59,7 +59,7 @@ var RunChildrenWrap = function (lineWidth) {
 
                 childHeight = this.getChildHeight(child);
                 padding = child.rexSizer.padding;
-                childHeight += (padding.top + padding.bottom) * child.scaleY;
+                childHeight += (padding.top + padding.bottom) * this.scaleY;
 
                 lastLine.height = Math.max(lastLine.height, childHeight);
             }
@@ -92,7 +92,7 @@ var RunChildrenWrap = function (lineWidth) {
 
                 childHeight = this.getChildHeight(child);
                 padding = child.rexSizer.padding;
-                childHeight += (padding.top + padding.bottom) * child.scaleY;
+                childHeight += (padding.top + padding.bottom) * this.scaleY;
 
                 newLine = (remainder < childHeight) || (lastLine === undefined);
             }
@@ -121,7 +121,7 @@ var RunChildrenWrap = function (lineWidth) {
 
                 childWidth = this.getChildWidth(child);
                 padding = child.rexSizer.padding;
-                childWidth += (padding.left + padding.right) * child.scaleX;
+                childWidth += (padding.left + padding.right) * this.scaleX;
 
                 lastLine.width = Math.max(lastLine.width, childWidth);
             }

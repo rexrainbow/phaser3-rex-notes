@@ -63,20 +63,20 @@ var LayoutChildren = function () {
 
         // Set position
         if (this.orientation === 0) { // x
-            x = itemX + (padding.left * child.scaleX);
+            x = itemX + (padding.left * this.scaleX);
             if ((sizerConfig.proportion === 0) || (this.proportionLength === 0)) {
                 width = childWidth;
             } else {
                 width = (sizerConfig.proportion * this.proportionLength);
             }
 
-            y = itemY + (padding.top * child.scaleY);
-            height = innerHeight - ((padding.top + padding.bottom) * child.scaleY);
+            y = itemY + (padding.top * this.scaleY);
+            height = innerHeight - ((padding.top + padding.bottom) * this.scaleY);
         } else { // y
-            x = itemX + (padding.left * child.scaleX);
-            width = innerWidth - ((padding.left + padding.right) * child.scaleX);
+            x = itemX + (padding.left * this.scaleX);
+            width = innerWidth - ((padding.left + padding.right) * this.scaleX);
 
-            y = itemY + (padding.top * child.scaleY);
+            y = itemY + (padding.top * this.scaleY);
             if ((sizerConfig.proportion === 0) || (this.proportionLength === 0)) {
                 height = childHeight;
             } else {
@@ -87,9 +87,9 @@ var LayoutChildren = function () {
         LayoutChild.call(this, child, x, y, width, height, sizerConfig.align);
 
         if (this.orientation === 0) { // x
-            itemX += (width + ((padding.left + padding.right) * child.scaleX) + (this.space.item * this.scaleX));
+            itemX += (width + ((padding.left + padding.right) * this.scaleX) + (this.space.item * this.scaleX));
         } else { // y
-            itemY += (height + ((padding.top + padding.bottom) * child.scaleY) + (this.space.item * this.scaleY));
+            itemY += (height + ((padding.top + padding.bottom) * this.scaleY) + (this.space.item * this.scaleY));
         }
     }
 

@@ -96,9 +96,9 @@ var LayoutChildren = function () {
             PreLayoutChild.call(this, child);
 
             if (horizontalWrap) {
-                x = itemX + (padding.left * child.scaleX);
+                x = itemX + (padding.left * this.scaleX);
             } else {
-                y = itemY + (padding.top * child.scaleY);
+                y = itemY + (padding.top * this.scaleY);
             }
 
             if (isFirstChild) {
@@ -116,12 +116,12 @@ var LayoutChildren = function () {
 
             if (horizontalWrap) {
                 indentTop = (j % 2) ? this.space.indentTopEven : this.space.indentTopOdd;
-                y = itemY + (indentTop * this.scaleY) + (padding.top * child.scaleY);
-                itemX = x + width + (padding.right * child.scaleX) + justifySpace;
+                y = itemY + (indentTop * this.scaleY) + (padding.top * this.scaleY);
+                itemX = x + width + (padding.right * this.scaleX) + justifySpace;
             } else {
                 indentLeft = (j % 2) ? this.space.indentLeftEven : this.space.indentLeftOdd;
-                x = itemX + (indentLeft * this.scaleX) + (padding.left * child.scaleX);
-                itemY = y + height + (padding.top * child.scaleY) + justifySpace;
+                x = itemX + (indentLeft * this.scaleX) + (padding.left * this.scaleX);
+                itemY = y + height + (padding.top * this.scaleY) + justifySpace;
             }
 
             LayoutChild.call(this, child, x, y, width, height, childConfig.align);

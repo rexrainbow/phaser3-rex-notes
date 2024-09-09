@@ -14,10 +14,10 @@ var LayoutChildren = function () {
     if (!child.rexSizer.hidden) {
         childConfig = child.rexSizer;
         padding = childConfig.padding;
-        x = startX + (padding.left * child.scaleX);
-        y = startY + (padding.top * child.scaleY);
-        width = (this.width * this.scaleX) - ((padding.left + padding.right) * child.scaleX);
-        height = (this.height * this.scaleY) - ((padding.top + padding.bottom) * child.scaleY);
+        x = startX + (padding.left * this.scaleX);
+        y = startY + (padding.top * this.scaleY);
+        width = (this.width * this.scaleX) - ((padding.left + padding.right) * this.scaleX);
+        height = (this.height * this.scaleY) - ((padding.top + padding.bottom) * this.scaleY);
         ResizeText.call(this, child, width, height);
 
         AlignIn(child, x, y, width, height, childConfig.align);

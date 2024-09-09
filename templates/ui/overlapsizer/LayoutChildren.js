@@ -49,10 +49,10 @@ var LayoutChildren = function () {
         }
 
         // Set position
-        x = startX + (padding.left * child.scaleX);
-        width = innerWidth - ((padding.left + padding.right) * child.scaleX);
-        y = startY + (padding.top * child.scaleY);
-        height = innerHeight - ((padding.top + padding.bottom) * child.scaleY);
+        x = startX + (padding.left * this.scaleX);
+        width = innerWidth - ((padding.left + padding.right) * this.scaleX);
+        y = startY + (padding.top * this.scaleY);
+        height = innerHeight - ((padding.top + padding.bottom) * this.scaleY);
 
         LayoutChild.call(this,
             child, x, y, width, height, childConfig.align,

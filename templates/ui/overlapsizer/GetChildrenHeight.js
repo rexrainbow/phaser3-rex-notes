@@ -21,7 +21,7 @@ var GetChildrenHeight = function () {
         }
 
         padding = child.rexSizer.padding;
-        childHeight += (padding.top + padding.bottom) * child.scaleY;
+        childHeight += (padding.top + padding.bottom) * this.scaleY;
         result = Math.max(childHeight, result);
     }
 

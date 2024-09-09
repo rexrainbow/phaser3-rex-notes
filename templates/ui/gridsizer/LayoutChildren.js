@@ -42,12 +42,12 @@ var LayoutChildren = function () {
             childConfig = child.rexSizer;
             padding = childConfig.padding;
 
-            x = itemX + (padding.left * child.scaleX);
-            width = colWidth - ((padding.left + padding.right) * child.scaleX);
+            x = itemX + (padding.left * this.scaleX);
+            width = colWidth - ((padding.left + padding.right) * this.scaleX);
 
             indentTop = (columnIndex % 2) ? this.space.indentTopEven : this.space.indentTopOdd;
-            y = itemY + (indentTop * this.scaleY) + (padding.top * child.scaleY);
-            height = rowHeight - ((padding.top + padding.bottom) * child.scaleY);
+            y = itemY + (indentTop * this.scaleY) + (padding.top * this.scaleY);
+            height = rowHeight - ((padding.top + padding.bottom) * this.scaleY);
 
             LayoutChild.call(this, child, x, y, width, height, childConfig.align);
 

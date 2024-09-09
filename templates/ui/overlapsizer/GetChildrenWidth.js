@@ -21,7 +21,7 @@ var GetChildrenWidth = function () {
         }
 
         padding = child.rexSizer.padding;
-        childWidth += (padding.left + padding.right) * child.scaleX;
+        childWidth += (padding.left + padding.right) * this.scaleX;
         result = Math.max(childWidth, result);
     }
 

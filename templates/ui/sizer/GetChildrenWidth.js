@@ -50,7 +50,7 @@ var GetChildrenWidth = function (minimumMode) {
             }
 
             padding = child.rexSizer.padding;
-            childWidth += (padding.left + padding.right) * child.scaleX;
+            childWidth += (padding.left + padding.right) * this.scaleX;
 
             if (isFirstChild) {
                 isFirstChild = false;
@@ -83,7 +83,7 @@ var GetChildrenWidth = function (minimumMode) {
             }
 
             padding = sizerConfig.padding;
-            childWidth += (padding.left + padding.right) * child.scaleX;
+            childWidth += (padding.left + padding.right) * this.scaleX;
 
             result = Math.max(childWidth, result);
         }
