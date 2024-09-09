@@ -26,6 +26,13 @@ class Demo extends Phaser.Scene {
             createCellContainerCallback: function (scene, x, y, config) {
                 config.expand = true;
                 return scene.rexUI.add.roundRectangle(0, 0, 0, 0, 14, RandomInt(0, 0x1000000))
+                    .setInteractive()
+                    .on('pointerover', function () {
+                        this.setStrokeStyle(2, 0xffffff)
+                    })
+                    .on('pointerout', function () {
+                        this.setStrokeStyle()
+                    })
             }
         })
             .layout()
