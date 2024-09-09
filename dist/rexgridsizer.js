@@ -8759,10 +8759,10 @@
 
             PreLayoutChild.call(this, child);
 
-            x = startX + (padding.left * child.scaleX);
-            y = startY + (padding.top * child.scaleY);
-            width = parentWidth - ((padding.left + padding.right) * child.scaleX);
-            height = parentHeight - ((padding.top + padding.bottom) * child.scaleY);
+            x = startX + (padding.left * this.scaleX);
+            y = startY + (padding.top * this.scaleY);
+            width = parentWidth - ((padding.left + padding.right) * this.scaleX);
+            height = parentHeight - ((padding.top + padding.bottom) * this.scaleY);
 
             ResizeGameObject(child, width, height);
 
@@ -11852,7 +11852,7 @@
                     }
 
                     padding = child.rexSizer.padding;
-                    childWidth += (padding.left + padding.right) * child.scaleX;
+                    childWidth += (padding.left + padding.right) * this.scaleX;
                     columnWidth = Math.max(columnWidth, childWidth);
                 }
 
@@ -11922,7 +11922,7 @@
                     }
 
                     padding = child.rexSizer.padding;
-                    childHeight += (padding.top + padding.bottom) * child.scaleY;
+                    childHeight += (padding.top + padding.bottom) * this.scaleY;
                     rowHeight = Math.max(rowHeight, childHeight);
                 }
 
@@ -11955,7 +11955,7 @@
         var childConfig = child.rexSizer;
         if (childConfig.expandWidth) {
             var padding = childConfig.padding;
-            childWidth = colWidth - ((padding.left + padding.right) * child.scaleX);
+            childWidth = colWidth - ((padding.left + padding.right) * this.scaleX);
         }
         return childWidth;
     };
@@ -11965,7 +11965,7 @@
         var childConfig = child.rexSizer;
         if (childConfig.expandHeight) {
             var padding = childConfig.padding;
-            childHeight = rowHeight - ((padding.top + padding.bottom) * child.scaleY);
+            childHeight = rowHeight - ((padding.top + padding.bottom) * this.scaleY);
         }
         return childHeight;
     };
@@ -12048,12 +12048,12 @@
                 childConfig = child.rexSizer;
                 padding = childConfig.padding;
 
-                x = itemX + (padding.left * child.scaleX);
-                width = colWidth - ((padding.left + padding.right) * child.scaleX);
+                x = itemX + (padding.left * this.scaleX);
+                width = colWidth - ((padding.left + padding.right) * this.scaleX);
 
                 indentTop = (columnIndex % 2) ? this.space.indentTopEven : this.space.indentTopOdd;
-                y = itemY + (indentTop * this.scaleY) + (padding.top * child.scaleY);
-                height = rowHeight - ((padding.top + padding.bottom) * child.scaleY);
+                y = itemY + (indentTop * this.scaleY) + (padding.top * this.scaleY);
+                height = rowHeight - ((padding.top + padding.bottom) * this.scaleY);
 
                 LayoutChild.call(this, child, x, y, width, height, childConfig.align);
 

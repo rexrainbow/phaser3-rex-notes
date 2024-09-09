@@ -8759,10 +8759,10 @@
 
             PreLayoutChild.call(this, child);
 
-            x = startX + (padding.left * child.scaleX);
-            y = startY + (padding.top * child.scaleY);
-            width = parentWidth - ((padding.left + padding.right) * child.scaleX);
-            height = parentHeight - ((padding.top + padding.bottom) * child.scaleY);
+            x = startX + (padding.left * this.scaleX);
+            y = startY + (padding.top * this.scaleY);
+            width = parentWidth - ((padding.left + padding.right) * this.scaleX);
+            height = parentHeight - ((padding.top + padding.bottom) * this.scaleY);
 
             ResizeGameObject(child, width, height);
 
@@ -11824,7 +11824,7 @@
             }
 
             padding = child.rexSizer.padding;
-            childWidth += (padding.left + padding.right) * child.scaleX;
+            childWidth += (padding.left + padding.right) * this.scaleX;
             result = Math.max(childWidth, result);
         }
 
@@ -11858,7 +11858,7 @@
             }
 
             padding = child.rexSizer.padding;
-            childHeight += (padding.top + padding.bottom) * child.scaleY;
+            childHeight += (padding.top + padding.bottom) * this.scaleY;
             result = Math.max(childHeight, result);
         }
 
@@ -11879,7 +11879,7 @@
         if (childConfig.expandWidth) {
             var innerWidth = parentWidth - ((this.space.left + this.space.right) * this.scaleX);
             var padding = childConfig.padding;
-            childWidth = innerWidth - ((padding.left + padding.right) * child.scaleX);
+            childWidth = innerWidth - ((padding.left + padding.right) * this.scaleX);
         }
         return childWidth;
     };
@@ -11894,7 +11894,7 @@
         if (childConfig.expandHeight) {
             var innerHeight = parentHeight - ((this.space.top + this.space.bottom) * this.scaleY);
             var padding = childConfig.padding;
-            childHeight = innerHeight - ((padding.top + padding.bottom) * child.scaleY);
+            childHeight = innerHeight - ((padding.top + padding.bottom) * this.scaleY);
         }
         return childHeight;
     };
@@ -12009,10 +12009,10 @@
             }
 
             // Set position
-            x = startX + (padding.left * child.scaleX);
-            width = innerWidth - ((padding.left + padding.right) * child.scaleX);
-            y = startY + (padding.top * child.scaleY);
-            height = innerHeight - ((padding.top + padding.bottom) * child.scaleY);
+            x = startX + (padding.left * this.scaleX);
+            width = innerWidth - ((padding.left + padding.right) * this.scaleX);
+            y = startY + (padding.top * this.scaleY);
+            height = innerHeight - ((padding.top + padding.bottom) * this.scaleY);
 
             LayoutChild.call(this,
                 child, x, y, width, height, childConfig.align,

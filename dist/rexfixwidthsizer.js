@@ -8759,10 +8759,10 @@
 
             PreLayoutChild.call(this, child);
 
-            x = startX + (padding.left * child.scaleX);
-            y = startY + (padding.top * child.scaleY);
-            width = parentWidth - ((padding.left + padding.right) * child.scaleX);
-            height = parentHeight - ((padding.top + padding.bottom) * child.scaleY);
+            x = startX + (padding.left * this.scaleX);
+            y = startY + (padding.top * this.scaleY);
+            width = parentWidth - ((padding.left + padding.right) * this.scaleX);
+            height = parentHeight - ((padding.top + padding.bottom) * this.scaleY);
 
             ResizeGameObject(child, width, height);
 
@@ -11974,9 +11974,9 @@
                 PreLayoutChild.call(this, child);
 
                 if (horizontalWrap) {
-                    x = itemX + (padding.left * child.scaleX);
+                    x = itemX + (padding.left * this.scaleX);
                 } else {
-                    y = itemY + (padding.top * child.scaleY);
+                    y = itemY + (padding.top * this.scaleY);
                 }
 
                 if (isFirstChild) {
@@ -11994,12 +11994,12 @@
 
                 if (horizontalWrap) {
                     indentTop = (j % 2) ? this.space.indentTopEven : this.space.indentTopOdd;
-                    y = itemY + (indentTop * this.scaleY) + (padding.top * child.scaleY);
-                    itemX = x + width + (padding.right * child.scaleX) + justifySpace;
+                    y = itemY + (indentTop * this.scaleY) + (padding.top * this.scaleY);
+                    itemX = x + width + (padding.right * this.scaleX) + justifySpace;
                 } else {
                     indentLeft = (j % 2) ? this.space.indentLeftEven : this.space.indentLeftOdd;
-                    x = itemX + (indentLeft * this.scaleX) + (padding.left * child.scaleX);
-                    itemY = y + height + (padding.top * child.scaleY) + justifySpace;
+                    x = itemX + (indentLeft * this.scaleX) + (padding.left * this.scaleX);
+                    itemY = y + height + (padding.top * this.scaleY) + justifySpace;
                 }
 
                 LayoutChild.call(this, child, x, y, width, height, childConfig.align);
@@ -12056,7 +12056,7 @@
 
                     childWidth = this.getChildWidth(child);
                     padding = child.rexSizer.padding;
-                    childWidth += ((padding.left + padding.right) * child.scaleX);
+                    childWidth += ((padding.left + padding.right) * this.scaleX);
 
                     newLine = (remainder < childWidth) || (lastLine === undefined);
                 }
@@ -12085,7 +12085,7 @@
 
                     childHeight = this.getChildHeight(child);
                     padding = child.rexSizer.padding;
-                    childHeight += (padding.top + padding.bottom) * child.scaleY;
+                    childHeight += (padding.top + padding.bottom) * this.scaleY;
 
                     lastLine.height = Math.max(lastLine.height, childHeight);
                 }
@@ -12118,7 +12118,7 @@
 
                     childHeight = this.getChildHeight(child);
                     padding = child.rexSizer.padding;
-                    childHeight += (padding.top + padding.bottom) * child.scaleY;
+                    childHeight += (padding.top + padding.bottom) * this.scaleY;
 
                     newLine = (remainder < childHeight) || (lastLine === undefined);
                 }
@@ -12147,7 +12147,7 @@
 
                     childWidth = this.getChildWidth(child);
                     padding = child.rexSizer.padding;
-                    childWidth += (padding.left + padding.right) * child.scaleX;
+                    childWidth += (padding.left + padding.right) * this.scaleX;
 
                     lastLine.width = Math.max(lastLine.width, childWidth);
                 }
