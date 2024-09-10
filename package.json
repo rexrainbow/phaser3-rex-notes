@@ -61,7 +61,7 @@
         "localforage": "^1.10.0",
         "lokijs": "^1.5.12",
         "pako": "^2.1.0",
-        "phaser": "v3.80.1",
+        "phaser": "v3.85.1",
         "raw-loader": "^0.5.1",
         "rollup": "^3.29.4",
         "rollup-plugin-node-builtins": "^2.1.2",
