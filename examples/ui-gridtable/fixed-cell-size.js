@@ -63,8 +63,6 @@ class Demo extends Phaser.Scene {
                     index = cell.index;
                 if (cellContainer === null) {
                     cellContainer = scene.rexUI.add.label({
-                        width: width - 3,
-                        height: height - 3,
                         background: scene.rexUI.add.roundRectangle(),
                     });
                 }
