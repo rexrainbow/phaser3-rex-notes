@@ -143,16 +143,58 @@ The depth starts from zero (the default value) and increases from that point. A 
 
 #### Display list
 
-```javascript
-scene.children.bringToTop(child);
-scene.children.sendToBack(child);
-scene.children.moveUp(child);
-scene.children.moveDown(child);
-scene.children.moveAbove(child1, child2);  // Move child1 above child2
-scene.children.moveBelow(child1, child2);  // Move child1 below child2
-scene.children.moveTo(child, index);
-scene.children.swap(child1, child2);
-```
+- Get displayList
+    ```javascript
+    var displayList = gameObject.getDisplayList();
+    ```
+- Move the game Object to the top of the display list
+    ```javascript
+    gameObject.setToTop()
+    ```
+    ```javascript
+    var displayList = gameObject.getDisplayList();
+    displayList.bringToTop(child);
+    ```
+- Move the game Object to the bottom of the display list
+    ```javascript
+    gameObject.setToBack()
+    ```
+    ```javascript
+    var displayList = gameObject.getDisplayList();
+    displayList.sendToBack(child);
+    ```
+- Move the Game Object to appear above a given Game Object
+    ```javascript
+    gameObject.setAbove(givenGameObject)
+    ```
+    ```javascript
+    var displayList = gameObject.getDisplayList();
+    displayList.moveAbove(gameObject, givenGameObject);
+    ```
+- Move the Game Object to appear below a given Game Object
+    ```javascript
+    gameObject.setBelow(givenGameObject)
+    ```
+    ```javascript
+    var displayList = gameObject.getDisplayList();
+    displayList.moveBelow(gameObject, givenGameObject);
+    ```
+- Move the game object by index
+    ```javascript
+    var displayList = gameObject.getDisplayList();
+    displayList.moveTo(gameObject, index);
+    ```
+- Swap two game objects
+    ```javascript
+    var displayList = gameObject.getDisplayList();
+    displayList.swap(gameObject, givenGameObject);
+    ```
+- Move up or down
+    ```javascript
+    var displayList = gameObject.getDisplayList();
+    displayList.moveUp(gameObject);
+    displayList.moveDown(gameObject);
+    ```
 
 #### Layer game object
 

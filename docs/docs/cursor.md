@@ -47,7 +47,19 @@ gameObject.setInteractive({
 ### Change current cursor
 
 ```javascript
-scene.input.manager.canvas.style.cursor = cursor;
+scene.input.canvas.style.cursor = cursor;
 ```
 
 - `cursor` : CSSString
+
+or
+
+```javascript
+scene.input.setCursor(gameObject.input);
+```
+
+### Reset to default cursor
+
+```javascript
+scene.input.resetCursor(null, true);
+```

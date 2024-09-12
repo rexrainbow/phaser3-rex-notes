@@ -170,11 +170,15 @@ Call `gameObject.setInteractive(...)` to register touch input of Game Object bef
 - Disable temporary
     ```javascript
     gameObject.disableInteractive();
-    ```
+    // gameObject.disableInteractive(resetCursor);
+    ```    
+    - `resetCursor` : Should the currently active Input cursor, if any, be reset to the default cursor?
 - Remove interaction
     ```javascript
     gameObject.removeInteractive();
+    // gameObject.removeInteractive(resetCursor);
     ```
+    - `resetCursor` : Should the currently active Input cursor, if any, be reset to the default cursor?
 
 ### Top only
 
@@ -333,6 +337,33 @@ scene.input.on('dragenter', function(pointer, gameObject, target){ /* ... */ }, 
 scene.input.on('dragover', function(pointer, gameObject, target){ /* ... */ }, scope);
 scene.input.on('dragleave', function(pointer, gameObject, target){ /* ... */ }, scope);
 ```
+
+### Force state of pointer
+
+- Down state
+    ```javascript
+    scene.input.forceDownState(pointer, gameObject);
+    ```
+    - Emit `'pointerdown'` event from game object.
+    - Emit `'gameobjectdown'` event from `scene.input`.
+- Up state
+    ```javascript
+    scene.input.forceUpState(pointer, gameObject);
+    ```
+    - Emit `'pointerup'` event from game object.
+    - Emit `'gameobjectup'` event from `scene.input`.
+- Over state
+    ```javascript
+    scene.input.forceOverState(pointer, gameObject);
+    ```
+    - Emit `'pointerover'` event from game object.
+    - Emit `'gameobjectover'` event from `scene.input`.
+- Out state
+    ```javascript
+    scene.input.forceOutState(pointer, gameObject);
+    ```
+    - Emit `'pointeroutr'` event from game object.
+    - Emit `'gameobjectout'` event from `scene.input`.
 
 ### First event of all
 

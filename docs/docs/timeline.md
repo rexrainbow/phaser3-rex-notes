@@ -162,6 +162,8 @@ timeline.resume();
 // timeline.paused = false;
 ```
 
+Will also pause/resume currently active Tweens.
+
 ### Reset
 
 Resets this Timeline back to the start, include loop counter.
@@ -194,6 +196,8 @@ timeline.add([config0, config1, ...]);
 timeline.clear();
 ```
 
+Will also destroy currently active Tweens.
+
 ### Events
 
 - On all commands are completed
@@ -225,3 +229,5 @@ Also remove updating.
 ```javascript
 timeline.destroy();
 ```
+
+Will also destroy currently active Tweens.

@@ -17,10 +17,15 @@ var orientation = scene.scale.orientation;
 - On orientation change
     ```javascript
     scene.scale.on('orientationchange', function(orientation) {
-        if (orientation === Phaser.Scale.PORTRAIT) {
-            // ...
-        } else if (orientation === Phaser.Scale.LANDSCAPE) {
-            // ...
+        switch (orientation) {
+            case Phaser.Scale.PORTRAIT:
+            case Phaser.Scale.PORTRAIT_SECONDARY:
+                // ...
+                break;
+
+            default:  // Phaser.Scale.LANDSCAPE or Phaser.Scale.LANDSCAPE_SECONDARY
+                // ...
+                break;
         }
     });
     ```

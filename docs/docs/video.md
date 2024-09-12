@@ -76,6 +76,12 @@ navigator.mediaDevices.getUserMedia({ video: true, audio: false })
 
 - [navigator.mediaDevices.getUserMedia](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia)
 
+### Get first frame
+
+```javascript
+video.getFirstFrame();
+```
+
 #### Size
 
 - Initial size : 256x265 (`video.setSize(256, 256)`)

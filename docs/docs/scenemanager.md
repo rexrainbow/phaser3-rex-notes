@@ -92,7 +92,7 @@ scene.scene.remove(key);
     - Fires scene.events `wake`
 - Makes this Scene sleep then starts the Scene given
     ```javascript
-    scene.scene.switch(key);
+    scene.scene.switch(key, data);
     ```
 
 ## Run scene

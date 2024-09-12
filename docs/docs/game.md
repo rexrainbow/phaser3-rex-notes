@@ -107,7 +107,7 @@ or
         antialiasGL: true,
         desynchronized: false,
         pixelArt: false,
-        roundPixels: true,
+        roundPixels: false,
         transparent: false,
         clearBeforeRender: true,
         preserveDrawingBuffer: false,
@@ -141,6 +141,7 @@ or
         user: '',
         password: '',
         timeout: 0,
+        maxRetries: 2,
         withCredentials: false,
         imageLoadType: 'XHR',    // 'HTMLImageElement' 
         localScheme: [ 'file://', 'capacitor://' ]
@@ -295,6 +296,10 @@ var config = game.config;
 - Resume the entire game and emit a `RESUME` event.
     ```javascript
     game.resume();
+    ```
+- Get pause duration
+    ```javascript
+    var time = game.pauseDuration;
     ```
 - Is paused
     ```javascript

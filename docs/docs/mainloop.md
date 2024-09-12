@@ -45,10 +45,17 @@
         }, scope);
         ```
 1. game.renderer.preRender()
+1. game.events `prerenderclear` event
+    - Register event
+        ```javascript
+        scene.game.events.on('prerenderclear', function(){
+            //
+        }, scope);
+        ```
 1. game.events `prerender` event
     - Register event
         ```javascript
-        scene.game.events.on('prerender', function(renderer, time, delta){
+        scene.game.events.on('prerender', function(){
             //
         }, scope);
         ```
@@ -90,6 +97,7 @@ graph TB
 
 subgraph Render
 GameRenderPreRender["game.renderer.preRender()"]
+GameEventPreRenderClear>"game.events: prerenderclear"]
 GameEventPreRender>"game.events: prerender"]
 SceneManagerRender["SceneManager.render()<br>...See 'Scene steps'..."]
 GameRenderPostRender["game.renderer.postRender()"]
@@ -108,7 +116,8 @@ GameEventPreStep --> GameEventStep
 GameEventStep --> SceneManagerUpdate
 SceneManagerUpdate --> GameEventPostStep
 GameEventPostStep --> GameRenderPreRender
-GameRenderPreRender --> GameEventPreRender
+GameRenderPreRender --> GameEventPreRenderClear
+GameEventPreRenderClear --> GameEventPreRender
 GameEventPreRender --> SceneManagerRender
 SceneManagerRender --> GameRenderPostRender
 GameRenderPostRender --> GameEventPostRender

@@ -46,6 +46,7 @@ loader:{
     user: '',
     password: '',
     timeout: 0,
+    maxRetries: 2,
     withCredentials: false,
     imageLoadType: 'XHR',    // 'HTMLImageElement' 
     localScheme: [ 'file://', 'capacitor://' ]
@@ -565,6 +566,13 @@ var data = cache.get(key);
 ```
 
 Event name in `'filecomplete'` event : `'filecomplete-packfile-' + key`
+
+### Remove pack assets
+
+```javascript
+scene.load.removePack(key);
+// scene.load.removePack(key, dataKey);
+```
 
 ### Replace
 

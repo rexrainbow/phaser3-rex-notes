@@ -742,6 +742,14 @@ or
 emitter.deathZones.length = 0;
 ```
 
+### Update Configuration
+
+```javascript
+emitter.updateConfig(config)
+```
+
+- `config` : See [config parameter](#add-particle) in constructor.
+
 ### Events
 
 - Starts emission of particles.

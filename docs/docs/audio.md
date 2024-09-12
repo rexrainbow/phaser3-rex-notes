@@ -526,6 +526,17 @@ music.play(markerName, config);
     var musicArray = scene.sound.getAllPlaying();
     ```
 
+#### Is playing
+
+- Is any sound playing
+    ```javascript
+    var isPlaying = scene.sound.isPlaying();
+    ```
+- Is any sound playing by key
+    ```javascript
+    var isPlaying = scene.sound.isPlaying(key);
+    ```
+
 #### Remove music instance
 
 - Remove by key
