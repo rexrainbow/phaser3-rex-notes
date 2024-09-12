@@ -837,6 +837,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#remove-pack-assets" class="md-nav__link">
+    Remove pack assets
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#replace" class="md-nav__link">
     Replace
   </a>
@@ -10274,6 +10281,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#remove-pack-assets" class="md-nav__link">
+    Remove pack assets
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#replace" class="md-nav__link">
     Replace
   </a>
@@ -10399,6 +10413,7 @@
 <span class="w">    </span><span class="nx">user</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">password</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">timeout</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">maxRetries</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">withCredentials</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">imageLoadType</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;XHR&#39;</span><span class="p">,</span><span class="w">    </span><span class="c1">// &#39;HTMLImageElement&#39; </span>
 <span class="w">    </span><span class="nx">localScheme</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s1">&#39;file://&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;capacitor://&#39;</span><span class="w"> </span><span class="p">]</span>
@@ -10797,6 +10812,10 @@
 <span class="kd">var</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div>
 <p>Event name in <code>'filecomplete'</code> event : <code>'filecomplete-packfile-' + key</code></p>
+<h3 id="remove-pack-assets">Remove pack assets<a class="headerlink" href="#remove-pack-assets" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">removePack</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+<span class="c1">// scene.load.removePack(key, dataKey);</span>
+</code></pre></div>
 <h3 id="replace">Replace<a class="headerlink" href="#replace" title="Permanent link">&para;</a></h3>
 <ol>
 <li><a href="./#release-data">Remove key</a>.</li>

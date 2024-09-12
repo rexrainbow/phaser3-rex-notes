@@ -4264,6 +4264,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#force-state-of-pointer" class="md-nav__link">
+    Force state of pointer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#first-event-of-all" class="md-nav__link">
     First event of all
   </a>
@@ -10085,6 +10092,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#force-state-of-pointer" class="md-nav__link">
+    Force state of pointer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#first-event-of-all" class="md-nav__link">
     First event of all
   </a>
@@ -10386,10 +10400,18 @@
 <ul>
 <li>Disable temporary
     <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">disableInteractive</span><span class="p">();</span>
-</code></pre></div></li>
+<span class="c1">// gameObject.disableInteractive(resetCursor);</span>
+</code></pre></div><ul>
+<li><code>resetCursor</code> : Should the currently active Input cursor, if any, be reset to the default cursor?</li>
+</ul>
+</li>
 <li>Remove interaction
     <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">removeInteractive</span><span class="p">();</span>
-</code></pre></div></li>
+<span class="c1">// gameObject.removeInteractive(resetCursor);</span>
+</code></pre></div><ul>
+<li><code>resetCursor</code> : Should the currently active Input cursor, if any, be reset to the default cursor?</li>
+</ul>
+</li>
 </ul>
 <h3 id="top-only">Top only<a class="headerlink" href="#top-only" title="Permanent link">&para;</a></h3>
 <p>When set to <code>true</code> this Input Plugin will emulate DOM behavior by only emitting events from the top-most Game Objects in the Display List.
@@ -10518,6 +10540,37 @@ If set to <code>false</code> it will emit events from all Game Objects below a P
 <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;dragover&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span><span class="w"> </span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">target</span><span class="p">){</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
 <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;dragleave&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span><span class="w"> </span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">target</span><span class="p">){</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
+<h3 id="force-state-of-pointer">Force state of pointer<a class="headerlink" href="#force-state-of-pointer" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Down state
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">forceDownState</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span><span class="w"> </span><span class="nx">gameObject</span><span class="p">);</span>
+</code></pre></div><ul>
+<li>Emit <code>'pointerdown'</code> event from game object.</li>
+<li>Emit <code>'gameobjectdown'</code> event from <code>scene.input</code>.</li>
+</ul>
+</li>
+<li>Up state
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">forceUpState</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span><span class="w"> </span><span class="nx">gameObject</span><span class="p">);</span>
+</code></pre></div><ul>
+<li>Emit <code>'pointerup'</code> event from game object.</li>
+<li>Emit <code>'gameobjectup'</code> event from <code>scene.input</code>.</li>
+</ul>
+</li>
+<li>Over state
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">forceOverState</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span><span class="w"> </span><span class="nx">gameObject</span><span class="p">);</span>
+</code></pre></div><ul>
+<li>Emit <code>'pointerover'</code> event from game object.</li>
+<li>Emit <code>'gameobjectover'</code> event from <code>scene.input</code>.</li>
+</ul>
+</li>
+<li>Out state
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">forceOutState</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span><span class="w"> </span><span class="nx">gameObject</span><span class="p">);</span>
+</code></pre></div><ul>
+<li>Emit <code>'pointeroutr'</code> event from game object.</li>
+<li>Emit <code>'gameobjectout'</code> event from <code>scene.input</code>.</li>
+</ul>
+</li>
+</ul>
 <h3 id="first-event-of-all">First event of all<a class="headerlink" href="#first-event-of-all" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;preupdate&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>

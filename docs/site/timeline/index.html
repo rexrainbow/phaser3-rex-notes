@@ -10115,6 +10115,7 @@
 <div class="highlight"><pre><span></span><code><span class="nx">timeline</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
 <span class="c1">// timeline.paused = false;</span>
 </code></pre></div>
+<p>Will also pause/resume currently active Tweens.</p>
 <h3 id="reset">Reset<a class="headerlink" href="#reset" title="Permanent link">&para;</a></h3>
 <p>Resets this Timeline back to the start, include loop counter.</p>
 <p>If the Timeline had any events that were set to <code>once</code> that have already been removed, 
@@ -10132,6 +10133,7 @@ calling this method resets those states, the same as calling <code>Timeline.play
 <h3 id="clear-all-commands">Clear all commands<a class="headerlink" href="#clear-all-commands" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">timeline</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
 </code></pre></div>
+<p>Will also destroy currently active Tweens.</p>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
 <li>On all commands are completed
@@ -10156,6 +10158,7 @@ calling this method resets those states, the same as calling <code>Timeline.play
 <p>Also remove updating.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">timeline</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
 </code></pre></div>
+<p>Will also destroy currently active Tweens.</p>
 
 
   

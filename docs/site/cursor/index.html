@@ -4175,6 +4175,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#reset-to-default-cursor" class="md-nav__link">
+    Reset to default cursor
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9791,6 +9798,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#reset-to-default-cursor" class="md-nav__link">
+    Reset to default cursor
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9848,11 +9862,17 @@
 <span class="p">});</span>
 </code></pre></div>
 <h3 id="change-current-cursor">Change current cursor<a class="headerlink" href="#change-current-cursor" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">manager</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">cursor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cursor</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">cursor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cursor</span><span class="p">;</span>
 </code></pre></div>
 <ul>
 <li><code>cursor</code> : CSSString</li>
 </ul>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">setCursor</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">input</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="reset-to-default-cursor">Reset to default cursor<a class="headerlink" href="#reset-to-default-cursor" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">resetCursor</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
+</code></pre></div>
 
 
   

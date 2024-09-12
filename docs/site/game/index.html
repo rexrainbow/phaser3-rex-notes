@@ -10012,7 +10012,7 @@
 <span class="w">        </span><span class="nx">antialiasGL</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">desynchronized</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">pixelArt</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">roundPixels</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">roundPixels</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">transparent</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">clearBeforeRender</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">preserveDrawingBuffer</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
@@ -10046,6 +10046,7 @@
 <span class="w">        </span><span class="nx">user</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">password</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">timeout</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">maxRetries</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">withCredentials</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">imageLoadType</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;XHR&#39;</span><span class="p">,</span><span class="w">    </span><span class="c1">// &#39;HTMLImageElement&#39; </span>
 <span class="w">        </span><span class="nx">localScheme</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s1">&#39;file://&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;capacitor://&#39;</span><span class="w"> </span><span class="p">]</span>
@@ -10180,6 +10181,9 @@
 </code></pre></div></li>
 <li>Resume the entire game and emit a <code>RESUME</code> event.
     <div class="highlight"><pre><span></span><code><span class="nx">game</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Get pause duration
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">game</span><span class="p">.</span><span class="nx">pauseDuration</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Is paused
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">isPaused</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">game</span><span class="p">.</span><span class="nx">isPaused</span><span class="p">;</span>

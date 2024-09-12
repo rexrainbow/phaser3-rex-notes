@@ -9827,10 +9827,15 @@
 <ul>
 <li>On orientation change
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;orientationchange&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">orientation</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">orientation</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scale</span><span class="p">.</span><span class="nx">PORTRAIT</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">orientation</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scale</span><span class="p">.</span><span class="nx">LANDSCAPE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// ...</span>
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="nx">orientation</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scale</span><span class="p">.</span><span class="nx">PORTRAIT</span><span class="o">:</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scale</span><span class="p">.</span><span class="nx">PORTRAIT_SECONDARY</span><span class="o">:</span>
+<span class="w">            </span><span class="c1">// ...</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">default</span><span class="o">:</span><span class="w">  </span><span class="c1">// Phaser.Scale.LANDSCAPE or Phaser.Scale.LANDSCAPE_SECONDARY</span>
+<span class="w">            </span><span class="c1">// ...</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">});</span>
 </code></pre></div></li>

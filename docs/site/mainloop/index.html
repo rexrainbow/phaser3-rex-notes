@@ -9861,9 +9861,17 @@
 </ul>
 </li>
 <li>game.renderer.preRender()</li>
+<li>game.events <code>prerenderclear</code> event<ul>
+<li>Register event
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;prerenderclear&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(){</span>
+<span class="w">    </span><span class="c1">//</span>
+<span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+</li>
 <li>game.events <code>prerender</code> event<ul>
 <li>Register event
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;prerender&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">renderer</span><span class="p">,</span><span class="w"> </span><span class="nx">time</span><span class="p">,</span><span class="w"> </span><span class="nx">delta</span><span class="p">){</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;prerender&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(){</span>
 <span class="w">    </span><span class="c1">//</span>
 <span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
 </code></pre></div></li>
@@ -9910,6 +9918,7 @@
 
 subgraph Render
 GameRenderPreRender["game.renderer.preRender()"]
+GameEventPreRenderClear&gt;"game.events: prerenderclear"]
 GameEventPreRender&gt;"game.events: prerender"]
 SceneManagerRender["SceneManager.render()&lt;br&gt;...See 'Scene steps'..."]
 GameRenderPostRender["game.renderer.postRender()"]
@@ -9928,7 +9937,8 @@ GameEventPreStep --&gt; GameEventStep
 GameEventStep --&gt; SceneManagerUpdate
 SceneManagerUpdate --&gt; GameEventPostStep
 GameEventPostStep --&gt; GameRenderPreRender
-GameRenderPreRender --&gt; GameEventPreRender
+GameRenderPreRender --&gt; GameEventPreRenderClear
+GameEventPreRenderClear --&gt; GameEventPreRender
 GameEventPreRender --&gt; SceneManagerRender
 SceneManagerRender --&gt; GameRenderPostRender
 GameRenderPostRender --&gt; GameEventPostRender
