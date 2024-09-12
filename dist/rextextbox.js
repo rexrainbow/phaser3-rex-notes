@@ -17702,7 +17702,7 @@
                 context.fillStyle = textStyle.backgroundColor;
 
                 var x = this.drawTLX;
-                var width = this.drawTRX - x;
+                var width = this.drawTRX - x + 1; // Add extra 1 pixel width
 
                 var bottomY = textStyle.backgroundBottomY;
                 if (bottomY == null) {
