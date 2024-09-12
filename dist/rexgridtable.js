@@ -23815,7 +23815,7 @@
             this.setupChildrenMask(GetValue$5(config, 'mask', undefined));
 
             this.setScrollMode(GetValue$5(config, 'scrollMode', 0));
-            this.setClampMode(GetValue$5(config, 'clamplTableOXY', true));
+            this.setClampMode(GetValue$5(config, 'clampTableOXY', true));
 
             // Pre-process cell size
             var cellWidth, cellHeight, columns;
@@ -24466,7 +24466,7 @@
                 tableConfig = {};
             }
             tableConfig.scrollMode = (scrollMode === 2) ? 0 : scrollMode;
-            tableConfig.clamplTableOXY = GetValue(config, 'clampChildOY', false);
+            tableConfig.clampTableOXY = GetValue(config, 'clampChildOY', false);
             var tableWidth = GetValue(tableConfig, 'width', undefined);
             var tableHeight = GetValue(tableConfig, 'height', undefined);
             var table = new GridTable$1(scene, 0, 0, tableWidth, tableHeight, tableConfig);

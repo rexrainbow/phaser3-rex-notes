@@ -69627,7 +69627,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	        this.execeedTopState = false;
 	        this.execeedBottomState = false;
 
-	        this.setClampMode(GetValue$1A(config, 'clamplTextOY', true));
+	        this.setClampMode(GetValue$1A(config, 'clampTextOY', true));
 
 	        this.alwaysScrollable = GetValue$1A(config, 'alwaysScrollable', false);
 
@@ -69948,7 +69948,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	            textMask: textMask,
 	            textCrop: textCrop && !textMask,
 	            content: content,
-	            clamplTextOY: GetValue$1z(config, 'clampChildOY', false),
+	            clampTextOY: GetValue$1z(config, 'clampChildOY', false),
 	            alwaysScrollable: GetValue$1z(config, 'alwaysScrollable', false),
 	        });
 	        scene.add.existing(textBlock); // Important: Add to display list for touch detecting
@@ -76743,7 +76743,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	        this.setupChildrenMask(GetValue$1a(config, 'mask', undefined));
 
 	        this.setScrollMode(GetValue$1a(config, 'scrollMode', 0));
-	        this.setClampMode(GetValue$1a(config, 'clamplTableOXY', true));
+	        this.setClampMode(GetValue$1a(config, 'clampTableOXY', true));
 
 	        // Pre-process cell size
 	        var cellWidth, cellHeight, columns;
@@ -77394,7 +77394,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	            tableConfig = {};
 	        }
 	        tableConfig.scrollMode = (scrollMode === 2) ? 0 : scrollMode;
-	        tableConfig.clamplTableOXY = GetValue$15(config, 'clampChildOY', false);
+	        tableConfig.clampTableOXY = GetValue$15(config, 'clampChildOY', false);
 	        var tableWidth = GetValue$15(tableConfig, 'width', undefined);
 	        var tableHeight = GetValue$15(tableConfig, 'height', undefined);
 	        var table = new GridTable$1(scene, 0, 0, tableWidth, tableHeight, tableConfig);

@@ -36504,7 +36504,7 @@
             this.execeedTopState = false;
             this.execeedBottomState = false;
 
-            this.setClampMode(GetValue$$(config, 'clamplTextOY', true));
+            this.setClampMode(GetValue$$(config, 'clampTextOY', true));
 
             this.alwaysScrollable = GetValue$$(config, 'alwaysScrollable', false);
 
@@ -36825,7 +36825,7 @@
                 textMask: textMask,
                 textCrop: textCrop && !textMask,
                 content: content,
-                clamplTextOY: GetValue$_(config, 'clampChildOY', false),
+                clampTextOY: GetValue$_(config, 'clampChildOY', false),
                 alwaysScrollable: GetValue$_(config, 'alwaysScrollable', false),
             });
             scene.add.existing(textBlock); // Important: Add to display list for touch detecting

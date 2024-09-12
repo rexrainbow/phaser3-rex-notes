@@ -4670,7 +4670,7 @@
             this.setupChildrenMask(GetValue$1(config, 'mask', undefined));
 
             this.setScrollMode(GetValue$1(config, 'scrollMode', 0));
-            this.setClampMode(GetValue$1(config, 'clamplTableOXY', true));
+            this.setClampMode(GetValue$1(config, 'clampTableOXY', true));
 
             // Pre-process cell size
             var cellWidth, cellHeight, columns;
