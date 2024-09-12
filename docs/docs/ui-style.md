@@ -588,7 +588,7 @@ Bar-rectangle = Line-progress
     //     speed: 0.1
     // },
 
-    clamplChildOY: false,
+    clampChildOY: false,
 }
 ```
 - `background` : 

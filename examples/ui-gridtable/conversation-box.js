@@ -139,7 +139,7 @@ var CreateTable = function (scene, config) {
         mask: { padding: 2 },
         interactive: false,
         reuseCellContainer: true,
-        clamplChildOY: false,
+        clampChildOY: false,
     }
 
     config.createCellContainerCallback = function (cell, cellContainer) {

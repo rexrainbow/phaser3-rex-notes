@@ -192,7 +192,7 @@ var table = scene.rexUI.add.gridTable({
     // mouseWheelScrollerX: {...},
     // mouseWheelScrollerY: {...},
 
-    clamplChildOY: false,
+    clampChildOY: false,
 
     header: headerGameObject,
     footer: footerGameObject,
@@ -364,7 +364,7 @@ var table = scene.rexUI.add.gridTable({
     - `mouseWheelScroller.speed` : Scrolling speed, default value is `0.1`.
     - Set to `false` to skip creating mouse-wheel-scroller. Default behavior.
 - `mouseWheelScrollerX`, `mouseWheelScrollerY` : Configuration of mouse-wheel-scrollerX, or mouse-wheel-scrollerY behavior, for two-sliders mode.
-- `clamplChildOY` : Set `true` to clamp scrolling.
+- `clampChildOY` : Set `true` to clamp scrolling.
 - `createCellContainerCallback` : Callback to return a container object, or `null` of each visible cell.
     - Properties of `cell` parameter
         - `cell.scene` : Scene of this grid table object.

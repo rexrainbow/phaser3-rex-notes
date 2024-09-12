@@ -154,7 +154,7 @@ var textArea = scene.rexUI.add.textArea({
     //     speed: 0.1
     // },
 
-    clamplChildOY: false,
+    clampChildOY: false,
 
     header: headerGameObject,
     footer: footerGameObject,
@@ -268,7 +268,7 @@ var textArea = scene.rexUI.add.textArea({
         - `2` : Cursor is over game object. 
     - `mouseWheelScroller.speed` : Scrolling speed, default value is `0.1`.
     - Set to `false` to skip creating mouse-wheel-scroller. Default behavior.
-- `clamplChildOY` : Set `true` to clamp scrolling.
+- `clampChildOY` : Set `true` to clamp scrolling.
 - `alwaysScrollable` : 
     - `false` : Can't scroll if content is less then 1 page. Default behavior.
     - `true` : Can scroll in all cases

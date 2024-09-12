@@ -7,8 +7,8 @@ class Carousel extends GridTable {
             config = {};
         }
         config.columns = 1; // Force columns to 1
-        if (!config.hasOwnProperty('clamplTableOXY')) {
-            config.clamplTableOXY = false;
+        if (!config.hasOwnProperty('clampTableOXY')) {
+            config.clampTableOXY = false;
         }
 
         super(scene, x, y, width, height, config);

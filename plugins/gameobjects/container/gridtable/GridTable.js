@@ -45,7 +45,7 @@ class GridTable extends ContainerLite {
         this.setupChildrenMask(GetValue(config, 'mask', undefined));
 
         this.setScrollMode(GetValue(config, 'scrollMode', 0));
-        this.setClampMode(GetValue(config, 'clamplTableOXY', true));
+        this.setClampMode(GetValue(config, 'clampTableOXY', true));
 
         // Pre-process cell size
         var cellWidth, cellHeight, columns;

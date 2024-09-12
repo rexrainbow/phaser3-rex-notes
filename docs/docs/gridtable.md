@@ -96,7 +96,7 @@ var table = scene.add.rexGridTable(x, y, width, height, {
     cellInvisibleCallback: null,
     // cellInvisibleCallback: function(cell) {},
     cellInvisibleCallbackScope: undefined,
-    clamplTableOXY: true,
+    clampTableOXY: true,
     
     mask: {
         padding: 0, // or {left, right, top, bottom}
@@ -138,7 +138,7 @@ var table = scene.add.rexGridTable(x, y, width, height, {
         // var container = cell.popContainer();
     }
     ```
-- `clamplTableOXY` : Set `true` to clamp `tableOX`, `tableOY` when out-of-bound,
+- `clampTableOXY` : Set `true` to clamp `tableOX`, `tableOY` when out-of-bound,
     - Set `false` when dragging by [scroller](scroller.md)
 - `mask` : A rectangle mask of cells
     - `mask.padding` : 

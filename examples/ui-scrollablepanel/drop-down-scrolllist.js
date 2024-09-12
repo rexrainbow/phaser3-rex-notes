@@ -112,7 +112,7 @@ var CreatePopupList = function (scene, x, y, height, options, onClick) {
 
         slider: false,
 
-        clamplChildOY: true,
+        clampChildOY: true,
 
     })
         .setOrigin(0)

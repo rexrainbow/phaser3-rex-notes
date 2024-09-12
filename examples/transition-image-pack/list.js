@@ -137,7 +137,7 @@ var CreatePopupList = function (scene, x, y, height, options, onClick) {
 
         mouseWheelScroller: true,
 
-        clamplChildOY: true,
+        clampChildOY: true,
 
     })
         .setOrigin(0)

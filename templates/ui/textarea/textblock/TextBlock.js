@@ -49,7 +49,7 @@ class TextBlock extends BaseSizer {
         this.execeedTopState = false;
         this.execeedBottomState = false;
 
-        this.setClampMode(GetValue(config, 'clamplTextOY', true));
+        this.setClampMode(GetValue(config, 'clampTextOY', true));
 
         this.alwaysScrollable = GetValue(config, 'alwaysScrollable', false);
 

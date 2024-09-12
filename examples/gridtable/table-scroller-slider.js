@@ -33,7 +33,7 @@ class Demo extends Phaser.Scene {
             cellsCount: 100,
             columns: 1,
             cellVisibleCallback: onCellVisible.bind(this),
-            clamplTableOXY: false,
+            clampTableOXY: false,
             mask: {
                 padding: 2,
             }
