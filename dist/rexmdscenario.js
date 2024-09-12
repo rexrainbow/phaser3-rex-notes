@@ -86367,7 +86367,9 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	        this.syncTargetValue();
 
 	        var inputField = this.childrenMap.inputField;
-	        inputField.onBindTarget(target, key);
+	        if (inputField.onBindTarget) {
+	            inputField.onBindTarget(target, key);
+	        }
 
 	        return this;
 	    },

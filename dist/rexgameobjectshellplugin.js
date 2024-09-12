@@ -41530,7 +41530,9 @@
             this.syncTargetValue();
 
             var inputField = this.childrenMap.inputField;
-            inputField.onBindTarget(target, key);
+            if (inputField.onBindTarget) {
+                inputField.onBindTarget(target, key);
+            }
 
             return this;
         },
