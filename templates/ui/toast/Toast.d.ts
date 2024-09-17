@@ -33,6 +33,7 @@ declare class Toast extends Label {
     showMessage(
         message: (toast: Toast) => void
     ): this;
+    readonly isShowingMessage: boolean;
 
     removeAllMessages(): this;
 

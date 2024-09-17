@@ -226,6 +226,12 @@ New message will be pending until toast is back to idle.
 toast.removeAllMessages();
 ```
 
+### Is showing message
+
+```javascript
+var isShowing = toast.isShowingMessage;
+```
+
 ### Display time
 
 - Transit-in time (`duration.in`)
