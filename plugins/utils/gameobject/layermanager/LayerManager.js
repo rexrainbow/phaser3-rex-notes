@@ -2,8 +2,9 @@ import GOManager from '../gomanager/GOManager.js';
 import IsGameObject from '../../system/IsGameObject.js';
 import GetLayer from '../../system/GetLayer.js';
 import Methods from './methods/Methods.js';
+import { Utils } from "phaser";
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+const GetValue = Utils.Objects.GetValue;
 
 class LayerManager extends GOManager {
     constructor(scene, config) {

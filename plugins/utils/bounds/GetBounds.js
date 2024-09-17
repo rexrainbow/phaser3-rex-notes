@@ -2,10 +2,11 @@ import {
     GetDisplayWidth,
     GetDisplayHeight
 } from '../size/GetDisplaySize.js';
+import { Geom, Math } from "phaser";
 
-const Rectangle = Phaser.Geom.Rectangle;
-const Vector2 = Phaser.Math.Vector2;
-const RotateAround = Phaser.Math.RotateAround;
+const Rectangle = Geom.Rectangle;
+const Vector2 = Math.Vector2;
+const RotateAround = Math.RotateAround;
 
 var GetBounds = function (gameObject, output) {
     if (output === undefined) {

@@ -3,8 +3,9 @@ import BobBase from './bobbase/BobBase.js';
 import IsEmpty from '../../object/IsEmpty.js';
 import Methods from './methods/Methods.js';
 import GetViewport from '../../system/GetViewport.js';
+import { Utils } from "phaser";
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+const GetValue = Utils.Objects.GetValue;
 
 class GOManager {
     constructor(scene, config) {

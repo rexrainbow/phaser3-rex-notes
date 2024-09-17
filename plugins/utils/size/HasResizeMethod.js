@@ -1,3 +1,5 @@
+import { GameObjects } from "phaser";
+
 var HasResizeMethod = function (gameObject) {
     // 1st pass : Has `resize` method?
     if (gameObject.resize) {
@@ -22,11 +24,11 @@ var HasResizeMethod = function (gameObject) {
 }
 
 var ExcludeClassList = [
-    Phaser.GameObjects.Image,
-    Phaser.GameObjects.Sprite,
-    Phaser.GameObjects.Mesh,
-    Phaser.GameObjects.Shader,
-    Phaser.GameObjects.Video
+    GameObjects.Image,
+    GameObjects.Sprite,
+    GameObjects.Mesh,
+    GameObjects.Shader,
+    GameObjects.Video
 ];
 
 

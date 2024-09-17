@@ -1,7 +1,8 @@
 import Methods from './Methods.js';
+import { Utils } from "phaser";
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const GetValue = Phaser.Utils.Objects.GetValue;
+const IsPlainObject = Utils.Objects.IsPlainObject;
+const GetValue = Utils.Objects.GetValue;
 
 var NinePatchBase = function (GOClass, type) {
     class NinePatch extends GOClass {

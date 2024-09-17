@@ -1,3 +1,5 @@
+import { GameObjects } from "phaser";
+
 export default {
     createGameObject(goType, name, ...params) {
         this.getGameObjectManager(goType, name).add(name, ...params);
@@ -88,7 +90,7 @@ export default {
     },
 
     drawGameObjectsBounds(goTypes, graphics, config) {
-        if (goTypes instanceof Phaser.GameObjects.Graphics) {
+        if (goTypes instanceof GameObjects.Graphics) {
             config = graphics;
             graphics = goTypes;
             goTypes = undefined;

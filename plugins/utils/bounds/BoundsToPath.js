@@ -2,6 +2,7 @@ import {
     GetTopLeft, GetTopRight,
     GetBottomLeft, GetBottomRight
 } from './GetBounds.js';
+import { Curves } from "phaser";
 
 var BoundsToPath = function (gameObject, out) {
     if (out === undefined) {
@@ -30,9 +31,9 @@ var BoundsToPath = function (gameObject, out) {
 }
 
 var Create4Lines = function () {
-    var path = new Phaser.Curves.Path();
+    var path = new Curves.Path();
     for (var i = 0; i < 4; i++) {
-        path.add(new Phaser.Curves.Line({ x: 0, y: 0 }, { x: 0, y: 0 }));
+        path.add(new Curves.Line({ x: 0, y: 0 }, { x: 0, y: 0 }));
     }
     return path;
 }

@@ -1,4 +1,6 @@
-const ALIGN = Phaser.Display.Align;
+import { Display } from "phaser";
+
+const ALIGN = Display.Align;
 export default {
     center: ALIGN.CENTER,
     left: ALIGN.LEFT_CENTER,

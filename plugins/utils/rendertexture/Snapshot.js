@@ -2,8 +2,9 @@ import GetBoundsOfGameObjects from '../bounds/GetBoundsOfGameObjects.js';
 import Clone from '../object/Clone.js';
 import SortGameObjectsByDepth from '../system/SortGameObjectsByDepth.js';
 import IsGameObject from '../system/IsGameObject.js';
+import { Utils } from "phaser";
 
-var GetValue = Phaser.Utils.Objects.GetValue;
+var GetValue = Utils.Objects.GetValue;
 
 var Snapshot = function (config) {
     if (!config) {

@@ -1,5 +1,3 @@
-// import * as Phaser from 'phaser';
-
 export default function GetViewport(
     scene: Phaser.Scene,
     camera: Phaser.Cameras.Scene2D.BaseCamera,

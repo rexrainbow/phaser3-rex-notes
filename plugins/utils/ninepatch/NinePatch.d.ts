@@ -1,5 +1,3 @@
-// import * as Phaser from 'phaser';
-
 export default NinePatch;
 
 declare namespace NinePatch {

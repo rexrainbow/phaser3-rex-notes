@@ -1,4 +1,6 @@
-const BitmapTextClass = Phaser.GameObjects.BitmapText;
+import { GameObjects } from "phaser";
+
+const BitmapTextClass = GameObjects.BitmapText;
 
 var IsBitmapTextGameObject = function (gameObject) {
     return (gameObject instanceof BitmapTextClass);

@@ -1,4 +1,6 @@
-const RotateAround = Phaser.Math.RotateAround;
+import { Math } from "phaser";
+
+const RotateAround = Math.RotateAround;
 
 var RotateObjectAround = function (gameObject, x, y, angle) {
     RotateAround(gameObject, x, y, angle);

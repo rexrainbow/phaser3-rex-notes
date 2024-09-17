@@ -1,4 +1,6 @@
-const CanvasPool = Phaser.Display.Canvas.CanvasPool;
+import { Display } from "phaser";
+
+const CanvasPool = Display.Canvas.CanvasPool;
 
 var ToBase64 = function (gameObject, type, encoderOptions) {
     var frame = gameObject.frame;

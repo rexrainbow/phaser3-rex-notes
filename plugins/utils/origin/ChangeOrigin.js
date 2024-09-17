@@ -1,4 +1,6 @@
-const RotateAround = Phaser.Math.RotateAround;
+import { Math } from "phaser";
+
+const RotateAround = Math.RotateAround;
 
 var ChangeOrigin = function (gameObject, originX, originY) {
     if (originY === undefined) {

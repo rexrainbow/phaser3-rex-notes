@@ -1,4 +1,6 @@
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils } from "phaser";
+
+const GetValue = Utils.Objects.GetValue;
 
 var GetPadding = function (padding, key) {
     if (key === undefined) {

@@ -1,5 +1,7 @@
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils } from "phaser";
+
+const IsPlainObject = Utils.Objects.IsPlainObject;
+const GetValue = Utils.Objects.GetValue;
 
 var SetStretchMode = function(mode) {
     if (IsPlainObject(mode)) {

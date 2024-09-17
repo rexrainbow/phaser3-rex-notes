@@ -1,8 +1,9 @@
 import FadeIn from '../../../../audio/fade/FadeIn.js';
 import FadeOut from '../../../../audio/fade/FadeOut.js';
+import { Utils } from "phaser";
 
-const RemoveItem = Phaser.Utils.Array.Remove;
-const GetValue = Phaser.Utils.Objects.GetValue;
+const RemoveItem = Utils.Array.Remove;
+const GetValue = Utils.Objects.GetValue;
 
 export default {
 

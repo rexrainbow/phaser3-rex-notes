@@ -1,6 +1,7 @@
 import InterpolateColor32 from './InterpolateColor32.js';
+import { Display } from "phaser";
 
-const Color = Phaser.Display.Color;
+const Color = Display.Color;
 
 export default {
     rgbaToColor32(r, g, b, a) {

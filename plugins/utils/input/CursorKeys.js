@@ -1,5 +1,6 @@
-const Key = Phaser.Input.Keyboard.Key;
-const KeyCodes = Phaser.Input.Keyboard.KeyCodes;
+import { Input } from "phaser";
+const Key = Input.Keyboard.Key;
+const KeyCodes = Input.Keyboard.KeyCodes;
 const KeyNames = ['up', 'down', 'left', 'right'];
 
 class CursorKeys {

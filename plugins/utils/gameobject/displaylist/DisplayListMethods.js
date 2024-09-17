@@ -1,4 +1,6 @@
-const ArrayUtils = Phaser.Utils.Array;
+import { Utils } from "phaser";
+
+const ArrayUtils = Utils.Array;
 
 export const BringMeToTop = function () {
     var list;

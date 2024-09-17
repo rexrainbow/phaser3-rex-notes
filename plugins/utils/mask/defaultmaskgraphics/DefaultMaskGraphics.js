@@ -2,8 +2,9 @@ import DrawShape from './DrawShape.js';
 import GetBoundsConfig from '../../bounds/GetBoundsConfig.js';
 import IsKeyValueEqual from '../../object/IsKeyValueEqual.js';
 import Clone from '../../object/Clone.js';
+import { GameObjects } from "phaser";
 
-const Graphics = Phaser.GameObjects.Graphics;
+const Graphics = GameObjects.Graphics;
 
 class DefaultMaskGraphics extends Graphics {
     constructor(parent, shapeType, padding) {

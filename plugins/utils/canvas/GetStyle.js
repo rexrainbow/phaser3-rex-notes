@@ -1,4 +1,6 @@
-const Pad = Phaser.Utils.String.Pad;
+import { Utils } from "phaser";
+
+const Pad = Utils.String.Pad;
 var GetStyle = function (style, canvas, context) {
     if (style == null) {
         return style;

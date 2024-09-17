@@ -1,5 +1,7 @@
 import NOOP from '../object/NOOP.js';
-var globZone = new Phaser.GameObjects.Zone({
+import { GameObjects } from "phaser";
+
+var globZone = new GameObjects.Zone({
     sys: {
         queueDepthSort: NOOP,
         events: {

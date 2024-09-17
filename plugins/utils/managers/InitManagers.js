@@ -2,8 +2,9 @@ import LayerManager from '../gameobject/layermanager/LayerManager.js';
 import SoundManager from '../audio/soundmanager/SoundManager.js';
 import Timeline from '../../time/progresses/Timeline.js';
 import WaitEventManager from './waiteventmanager/WaitEventManager.js';
+import { Utils } from "phaser";
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+const GetValue = Utils.Objects.GetValue;
 
 var InitManagers = function (scene, config) {
     this.clickTarget = undefined;

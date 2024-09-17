@@ -1,4 +1,6 @@
-const SpliceOne = Phaser.Utils.Array.SpliceOne;
+import { Utils } from "phaser";
+
+const SpliceOne = Utils.Array.SpliceOne;
 
 var RemovePostFxPipelineInstance = function (gameObject, PostFxPipelineClass, name) {
     if (name === undefined) {

@@ -1,4 +1,6 @@
-const GetValue = Phaser.Utils.Objects.GetValue;
+import { Utils } from "phaser";
+
+const GetValue = Utils.Objects.GetValue;
 
 var GetBoundsConfig = function (config, out) {
     if (config === undefined) {

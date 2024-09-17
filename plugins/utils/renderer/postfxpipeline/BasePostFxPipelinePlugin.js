@@ -2,8 +2,9 @@ import RegisterPostPipeline from './RegisterPostPipeline.js';
 import AddPostFxPipelineInstance from './AddPostFxPipelineInstance.js';
 import RemovePostFxPipelineInstance from './RemovePostFxPipelineInstance.js';
 import GetPostFxPipelineInstance from './GetPostFxPipelineInstance.js'
+import { Plugins } from "phaser";
 
-class BasePostFxPipelinePlugin extends Phaser.Plugins.BasePlugin {
+class BasePostFxPipelinePlugin extends Plugins.BasePlugin {
     setPostPipelineClass(PostFxPipelineClass, postFxPipelineName) {
         this.PostFxPipelineClass = PostFxPipelineClass;
         this.postFxPipelineName = postFxPipelineName;

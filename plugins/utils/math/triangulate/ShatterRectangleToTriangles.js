@@ -1,8 +1,9 @@
 import Triangulate from './Triangulate.js';
 import IsFunction from '../../object/IsFunction.js';
+import { Utils, Math } from "phaser";
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const Clamp = Phaser.Math.Clamp;
+const GetValue = Utils.Objects.GetValue;
+const Clamp = Math.Clamp;
 const DefaultRingRadiusList = [1 / 27, 3 / 27, 9 / 27];
 
 var ShatterRectangleToTriangles = function (config) {

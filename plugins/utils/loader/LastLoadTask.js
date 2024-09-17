@@ -1,7 +1,8 @@
 import AwaitLoader from '../../loader/awaitloader/AwaitLoaderCallback.js';
 import GetProgress from './GetProgress.js';
+import { Events } from "phaser";
 
-class LastLoadTask extends Phaser.Events.EventEmitter {
+class LastLoadTask extends Events.EventEmitter {
     constructor(scene) {
         super();
         this.scene = scene;

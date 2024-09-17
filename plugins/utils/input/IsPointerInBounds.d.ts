@@ -1,5 +1,3 @@
-// import * as Phaser from 'phaser';
-
 export default function IsPointerInBounds(
     gameObject: Phaser.GameObjects.GameObject,
     pointer?: Phaser.Input.Pointer,

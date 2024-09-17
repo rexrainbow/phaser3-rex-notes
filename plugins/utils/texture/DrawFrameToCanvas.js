@@ -1,4 +1,6 @@
-const CanvasPool = Phaser.Display.Canvas.CanvasPool;
+import { Display, CANVAS } from "phaser";
+
+const CanvasPool = Display.Canvas.CanvasPool;
 
 var DrawFrameToCanvas = function (frame, canvas, x, y, width, height, color, autoRound) {
     if (x === undefined) { x = 0; }
@@ -18,7 +20,7 @@ var DrawFrameToCanvas = function (frame, canvas, x, y, width, height, color, aut
         // Draw image at tempCanvas
 
         // Get tempCanvas
-        var tempCanvas = CanvasPool.create(null, width, height, Phaser.CANVAS, true);
+        var tempCanvas = CanvasPool.create(null, width, height, CANVAS, true);
 
         var tempContext = tempCanvas.getContext('2d', { willReadFrequently: true });
 

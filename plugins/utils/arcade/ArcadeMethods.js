@@ -1,4 +1,6 @@
-const Components = Phaser.Physics.Arcade.Components;
+import { Physics } from "phaser";
+
+const Components = Physics.Arcade.Components;
 
 var ArcadeMethods = {};
 Object.assign(

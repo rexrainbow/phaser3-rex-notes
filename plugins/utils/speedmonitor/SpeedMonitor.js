@@ -1,4 +1,6 @@
-const Vector2 = Phaser.Math.Vector2;
+import { Math } from "phaser";
+
+const Vector2 = Math.Vector2;
 class SpeedMonitor {
     constructor() {
         this.position = new Vector2();

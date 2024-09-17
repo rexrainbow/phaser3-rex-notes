@@ -1,6 +1,7 @@
 import Extend from './Extend';
+import { Events } from "phaser";
 
-const EventEmitter = Phaser.Events.EventEmitter;
+const EventEmitter = Events.EventEmitter;
 
 class Managers extends Extend(EventEmitter) {
     constructor(scene, config) {

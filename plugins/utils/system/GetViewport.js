@@ -1,5 +1,6 @@
+import { Geom } from "phaser";
 import IsCameraObject from './IsCameraObject.js';
-const Rectangle = Phaser.Geom.Rectangle;
+const Rectangle = Geom.Rectangle;
 
 var GetViewport = function (scene, camera, out) {
     if (!IsCameraObject(camera)) {

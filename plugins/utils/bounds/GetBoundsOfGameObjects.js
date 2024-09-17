@@ -1,7 +1,8 @@
 import { GetBounds } from './GetBounds.js';
+import { Geom } from "phaser";
 
-const Rectangle = Phaser.Geom.Rectangle;
-const Union = Phaser.Geom.Rectangle.Union;
+const Rectangle = Geom.Rectangle;
+const Union = Geom.Rectangle.Union;
 
 var GetBoundsOfGameObjects = function (gameObjects, out) {
     if (out === undefined) {

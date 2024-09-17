@@ -1,4 +1,5 @@
-const LayerClass = Phaser.GameObjects.Layer;
+import { GameObjects } from "phaser";
+const LayerClass = GameObjects.Layer;
 
 var IsLayerGameObject = function (gameObject) {
     return (gameObject instanceof LayerClass);

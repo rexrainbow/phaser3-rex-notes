@@ -1,4 +1,6 @@
-const CanvasPool = Phaser.Display.Canvas.CanvasPool;
+import { Display } from "phaser";
+
+const CanvasPool = Display.Canvas.CanvasPool;
 
 var GetTextSize = function (text, font, out) {
     if (out === undefined) {

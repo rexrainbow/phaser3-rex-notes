@@ -1,3 +1,5 @@
+import { GameObjects } from "phaser";
+
 var CanSetDisplaySize = function (gameObject) {
     if (gameObject.displayWidth === undefined) {
         return false;
@@ -14,7 +16,7 @@ var CanSetDisplaySize = function (gameObject) {
 }
 
 var ExcludeClassList = [
-    Phaser.GameObjects.BitmapText,
+    GameObjects.BitmapText,
 ];
 
 export default CanSetDisplaySize;

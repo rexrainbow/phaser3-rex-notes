@@ -1,3 +1,5 @@
+import { VERSION } from "phaser";
+
 const MinVersion = 60;
 
 var IsChecked = false;
@@ -10,7 +12,7 @@ var CheckP3Version = function (minVersion) {
     if (minVersion === undefined) {
         minVersion = MinVersion;
     }
-    var currentVersion = parseInt(Phaser.VERSION.match(/\.(\d+)\./)[1]);
+    var currentVersion = parseInt(VERSION.match(/\.(\d+)\./)[1]);
     if (currentVersion < minVersion) {
         console.error(`Minimum supported version : 3.${minVersion}`)
     }
