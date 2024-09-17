@@ -3,6 +3,7 @@ import { SPRITE } from '../../const/GameObjects.js';
 var Focus = function (
     gameObject,
     config,
+
     commandExecutor, eventSheetManager, eventSheet
 ) {
 

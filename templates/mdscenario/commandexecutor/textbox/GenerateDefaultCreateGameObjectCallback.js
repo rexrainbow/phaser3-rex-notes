@@ -28,9 +28,9 @@ var GenerateDefaultCreateGameObjectCallback = function (
 
             frameDelimiter = defaultFrameDelimiter,
 
-            eventSheetManager, eventsheet,
-            clickTarget,
-            clickShortcutKeys
+            clickTarget, clickShortcutKeys,
+
+            commandExecutor, eventSheetManager, eventsheet,
         } = {},
     ) {
 
@@ -97,11 +97,12 @@ var GenerateDefaultCreateGameObjectCallback = function (
         gameObject.frameDelimiter = frameDelimiter;
 
         /*
-        Fire 'click' event when
-
+        Fire textbox's 'click' event when
         - Pointer-down on clickTarget (screen or this textbox) 
         - Press keyboard's key
-
+        
+        !!! note
+            Since 'click' event might fire during typing, don't use *wait pointerdown|keydown*
         */
 
         gameObject.emitClick = function () {
@@ -157,6 +158,7 @@ var GenerateDefaultCreateGameObjectCallback = function (
                     .stop(true);
 
             } else if (!gameObject.isLastPage) {
+                // !gameObject.isLastPage && !gameObject.isTyping
                 // Typing next page, interrupted by click event
                 gameObject
                     .once('click', onClick)
@@ -168,6 +170,37 @@ var GenerateDefaultCreateGameObjectCallback = function (
             }
         }
 
+        // on 'pageend', wait click
+        var onPause = function () {
+            if (useDefaultWaitIcon) {
+                waitIcon.start();
+                gameObject.setChildVisible(waitIcon, true);
+            }
+
+            eventSheetManager.emit('pause.input');
+
+            if (gameObject.autoTyping) {
+            }
+
+            gameObject.once('click', onResume);
+        }
+
+        // on 'pageend', on 'click'
+        var onResume = function () {
+            gameObject.off('click', onResume);
+
+            if (useDefaultWaitIcon) {
+                waitIcon.stop();
+                gameObject.setChildVisible(waitIcon, false);
+            }
+
+            if (gameObject.autoTyping) {
+
+            }
+
+            eventSheetManager.emit('resume.input');
+        }
+
         var waitIcon;
         if (useDefaultWaitIcon) {
             waitIcon = gameObject.getElement('action');
@@ -175,23 +208,7 @@ var GenerateDefaultCreateGameObjectCallback = function (
         }
 
         gameObject
-            .on('pageend', function () {
-                if (useDefaultWaitIcon) {
-                    waitIcon.start();
-                    gameObject.setChildVisible(waitIcon, true);
-                }
-
-                eventSheetManager.emit('pause.input');
-
-                gameObject.once('click', function () {
-                    if (useDefaultWaitIcon) {
-                        waitIcon.stop();
-                        gameObject.setChildVisible(waitIcon, false);
-                    }
-
-                    eventSheetManager.emit('resume.input');
-                })
-            })
+            .on('pageend', onPause)
             .on('start', function () {
                 // Remove pending callback, add new one
                 gameObject

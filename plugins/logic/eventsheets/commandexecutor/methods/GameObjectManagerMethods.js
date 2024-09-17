@@ -26,12 +26,14 @@ export default {
                 autoClear = defaultAutoClear
             } = config;
 
+            config.commandExecutor = this;
             config.eventSheetManager = eventSheetManager;
             config.eventsheet = eventsheet;
 
             sys.createGameObject(name, id, config);
             // Execute next command
 
+            delete config.commandExecutor;
             delete config.eventSheetManager;
             delete config.eventsheet;
 

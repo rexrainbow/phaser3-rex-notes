@@ -20,6 +20,7 @@ var Say = function (
         clickAfterComplete = true,
         wait = true
     } = {},
+
     commandExecutor, eventSheetManager, eventSheet
 ) {
 

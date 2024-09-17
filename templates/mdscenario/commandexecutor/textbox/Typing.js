@@ -12,8 +12,8 @@ var Typing = function (
         clickAfterComplete = true,
         wait = true,
     } = {},
-    commandExecutor,
-    eventSheetManager, eventSheet
+
+    commandExecutor, eventSheetManager, eventSheet
 ) {
 
     if (displayName === null) {

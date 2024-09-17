@@ -1,6 +1,6 @@
 export default {
     waitTime(duration) {
-        var timeline = this.parent.timeline
+        var timeline = this.parent.timeline;
         timeline.delayEvent(duration, 'delay');
 
         // Clear delay event on timeline manually

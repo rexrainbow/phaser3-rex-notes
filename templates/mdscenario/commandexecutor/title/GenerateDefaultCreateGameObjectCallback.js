@@ -24,7 +24,7 @@ var GenerateDefaultCreateGameObjectCallback = function (
             alignBottom = false,
             text0, text1,
 
-            eventSheetManager, eventsheet,
+            commandExecutor, eventSheetManager, eventsheet,
         } = {},
     ) {
 

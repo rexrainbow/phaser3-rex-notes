@@ -7,8 +7,8 @@ var NameInput = function (
         firstName = '', lastName = '',
         firstNameKey = 'firstName', lastNameKey = 'lastName'
     } = {},
-    commandExecutor,
-    eventSheetManager, eventSheet
+
+    commandExecutor, eventSheetManager, eventSheet
 ) {
 
     gameObject

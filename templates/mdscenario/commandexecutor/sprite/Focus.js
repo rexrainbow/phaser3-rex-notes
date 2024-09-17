@@ -5,6 +5,7 @@ var Focus = function (
     {
         tintOthers,
     } = {},
+
     commandExecutor, eventSheetManager, eventSheet
 ) {
 
