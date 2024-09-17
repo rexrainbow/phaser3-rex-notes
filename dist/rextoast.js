@@ -19299,6 +19299,9 @@
             return this;
         }
 
+        get isShowingMessage() {
+            return this.player.isPlaying;
+        }
     }
 
     Object.assign(

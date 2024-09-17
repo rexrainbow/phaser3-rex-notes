@@ -83740,6 +83740,9 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	        return this;
 	    }
 
+	    get isShowingMessage() {
+	        return this.player.isPlaying;
+	    }
 	}
 
 	Object.assign(
