@@ -197,3 +197,21 @@ NAME.shake
   wait=true
 
 ```
+
+### Auto-next-page
+
+```
+
+NAME.setAutoTypingEnable
+    enable=true
+
+```
+
+### Fast-typing
+
+```
+
+NAME.setFastTypingEnable
+    enable=true
+
+```

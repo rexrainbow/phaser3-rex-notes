@@ -3,6 +3,8 @@
 ## List of default variables
 
 - `$typingSpeed` : For `TEXTBOX.typing` command
+- `$autoNextPage`, `$autoNextPageDelay` : When typing page-end and `$autoNextPage` set to `true`, it will emit `click` event after a small delay (`$autoNextPageDelay`)
+- `$fastTyping`, `$fastTypingSpeed` : When `$fastTyping` set to `true`, it will typing with speed `$fastTypingSpeed`, and emit `click` event when typing page-end
 - `$transitionDuration` : For `SPRITE.cross`, `BG.cross` commands
 - `$tintOthers` : For `SPRITE.focus` command
 - `$clickTarget` : Click target to type next page, or finish typing
