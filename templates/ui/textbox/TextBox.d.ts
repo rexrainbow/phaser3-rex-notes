@@ -36,14 +36,15 @@ declare class TextBox extends TitleLabel {
     showLastPage(): this;
     pause(): this;
     resume(): this;
-    isTyping: boolean;
+    readonly isTyping: boolean;
 
     setTypeSpeed(speed: number): this;
     setTypingSpeed(speed: number): this;
 
     typeNextPage(): this;
-    isLastPage: boolean;
-    isFirstPage: boolean;
-    pageIndex: number;
-    pageCount: number;
+    readonly isPageEnd: boolean;
+    readonly isLastPage: boolean;
+    readonly isFirstPage: boolean;
+    readonly pageIndex: number;
+    readonly pageCount: number;
 }

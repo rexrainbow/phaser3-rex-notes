@@ -96,6 +96,14 @@ var GenerateDefaultCreateGameObjectCallback = function (
 
         gameObject.frameDelimiter = frameDelimiter;
 
+        var waitIcon;
+        if (useDefaultWaitIcon) {
+            waitIcon = gameObject.getElement('action');
+            gameObject.setChildVisible(waitIcon, false);
+        }
+
+        AddShakeBehavior(gameObject);
+
         /*
         Fire textbox's 'click' event when
         - Pointer-down on clickTarget (screen or this textbox) 
@@ -149,19 +157,19 @@ var GenerateDefaultCreateGameObjectCallback = function (
         );
 
         // On click
-        var onClick = function () {
+        var OnClick = function () {
             if (gameObject.isTyping) {
                 // Wait clicking for typing next page, 
                 // or emitting 'complete2' event
                 gameObject
-                    .once('click', onClick)
+                    .once('click', OnClick)
                     .stop(true);
 
             } else if (!gameObject.isLastPage) {
                 // !gameObject.isLastPage && !gameObject.isTyping
                 // Typing next page, interrupted by click event
                 gameObject
-                    .once('click', onClick)
+                    .once('click', OnClick)
                     .typeNextPage();
 
             } else {
@@ -170,53 +178,54 @@ var GenerateDefaultCreateGameObjectCallback = function (
             }
         }
 
+        /*
+        PageEnd -> click -> NextPage
+        PageEnd -> autoNextPage -> NextPage
+        */
         // on 'pageend', wait click
-        var onPause = function () {
+        var PageEnd = function () {
             if (useDefaultWaitIcon) {
                 waitIcon.start();
                 gameObject.setChildVisible(waitIcon, true);
             }
 
-            eventSheetManager.emit('pause.input');
+            gameObject.once('click', NextPage);
 
-            if (gameObject.autoTyping) {
+            var autoNextPage = eventSheetManager.getData('$autoNextPage');
+            var fastTyping = eventSheetManager.getData('$fastTyping');
+            if (autoNextPage || fastTyping) {
+                var autoNextPageDelay = (fastTyping) ? 0 : eventSheetManager.getData('$autoNextPageDelay');
+                commandExecutor.delayCall(autoNextPageDelay, NextPage);
             }
 
-            gameObject.once('click', onResume);
+            eventSheetManager.emit('pause.input');
         }
 
         // on 'pageend', on 'click'
-        var onResume = function () {
-            gameObject.off('click', onResume);
+        var NextPage = function () {
+            if (!gameObject.isPageEnd) {
+                return;
+            }
+
+            gameObject.off('click', NextPage);
 
             if (useDefaultWaitIcon) {
                 waitIcon.stop();
                 gameObject.setChildVisible(waitIcon, false);
             }
 
-            if (gameObject.autoTyping) {
-
-            }
-
             eventSheetManager.emit('resume.input');
         }
-
-        var waitIcon;
-        if (useDefaultWaitIcon) {
-            waitIcon = gameObject.getElement('action');
-            gameObject.setChildVisible(waitIcon, false);
-        }
+        gameObject._typeNextPage = NextPage;
 
         gameObject
-            .on('pageend', onPause)
+            .on('pageend', PageEnd)
             .on('start', function () {
                 // Remove pending callback, add new one
                 gameObject
-                    .off('click', onClick)
-                    .once('click', onClick)
+                    .off('click', OnClick)
+                    .once('click', OnClick)
             });
-
-        AddShakeBehavior(gameObject);
 
         return gameObject;
     }

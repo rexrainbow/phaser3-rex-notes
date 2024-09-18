@@ -312,6 +312,10 @@ See also - [dirty](ui-basesizer.md#dirty)
     ```javascript
     textBox.typeNextPage();
     ```
+- Is page end, after typing complete
+    ```javascript
+    var isPageEnd = textBox.isPageEnd;
+    ```
 - Is last page
     ```javascript
     var isLastPage = textBox.isLastPage;

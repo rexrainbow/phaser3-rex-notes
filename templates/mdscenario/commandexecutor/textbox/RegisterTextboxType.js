@@ -2,6 +2,8 @@ import { TEXTBOX } from '../../const/GameObjects.js';
 import { UILayer } from '../../const/Layers.js';
 import GenerateDefaultCreateGameObjectCallback from './GenerateDefaultCreateGameObjectCallback.js';
 import Typing from './Typing.js';
+import SetAutoNextPageEnable from './SetAutoNextPageEnable.js';
+import SetFastTypingEnable from './SetFastTypingEnable.js';
 import Shake from '../utils/Shake.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -41,6 +43,8 @@ var RegisterTextboxType = function (commandExecutor, config) {
         commands: {
             typing: Typing,
             shake: Shake,
+            setAutoNextPageEnable: SetAutoNextPageEnable,
+            setFastTypingEnable: SetFastTypingEnable,
         }
     })
 }
