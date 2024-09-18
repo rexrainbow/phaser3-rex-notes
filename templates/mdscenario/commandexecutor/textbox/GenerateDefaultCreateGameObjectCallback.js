@@ -179,35 +179,35 @@ var GenerateDefaultCreateGameObjectCallback = function (
         }
 
         /*
-        PageEnd -> click -> NextPage
-        PageEnd -> autoNextPage -> NextPage
+        PageEnd0 -> click -> PageEnd1
+        PageEnd0 -> autoNextPage -> PageEnd1
         */
         // on 'pageend', wait click
-        var PageEnd = function () {
+        var PageEnd0 = function () {
             if (useDefaultWaitIcon) {
                 waitIcon.start();
                 gameObject.setChildVisible(waitIcon, true);
             }
 
-            gameObject.once('click', NextPage);
+            gameObject.once('click', PageEnd1);
 
             var autoNextPage = eventSheetManager.getData('$autoNextPage');
             var fastTyping = eventSheetManager.getData('$fastTyping');
             if (autoNextPage || fastTyping) {
                 var autoNextPageDelay = (fastTyping) ? 0 : eventSheetManager.getData('$autoNextPageDelay');
-                commandExecutor.delayCall(autoNextPageDelay, NextPage);
+                commandExecutor.sys.timeline.delayCall(autoNextPageDelay, gameObject.emitClick);
             }
 
             eventSheetManager.emit('pause.input');
         }
 
         // on 'pageend', on 'click'
-        var NextPage = function () {
+        var PageEnd1 = function () {
             if (!gameObject.isPageEnd) {
                 return;
             }
 
-            gameObject.off('click', NextPage);
+            gameObject.off('click', PageEnd1);
 
             if (useDefaultWaitIcon) {
                 waitIcon.stop();
@@ -216,10 +216,10 @@ var GenerateDefaultCreateGameObjectCallback = function (
 
             eventSheetManager.emit('resume.input');
         }
-        gameObject._typeNextPage = NextPage;
+        gameObject._typeNextPage = PageEnd1;
 
         gameObject
-            .on('pageend', PageEnd)
+            .on('pageend', PageEnd0)
             .on('start', function () {
                 // Remove pending callback, add new one
                 gameObject

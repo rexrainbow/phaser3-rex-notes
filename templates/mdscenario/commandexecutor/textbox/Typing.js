@@ -59,7 +59,10 @@ var Typing = function (
     gameObject.layout();
 
     if (text) {
-        if (typingSpeed === undefined) {
+        var fastTyping = eventSheetManager.getData('$fastTyping');
+        if (fastTyping) {
+            typingSpeed = eventSheetManager.getData('$fastTypingSpeed');
+        } else if (typingSpeed === undefined) {
             typingSpeed = eventSheetManager.getData('$typingSpeed');
         }
 

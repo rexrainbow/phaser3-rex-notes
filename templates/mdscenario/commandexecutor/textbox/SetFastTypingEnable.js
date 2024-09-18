@@ -10,10 +10,11 @@ var SetFastTypingEnable = function (
 
     eventSheetManager.setData('$fastTyping', enable);
 
-    var defaultTypingSpeed = eventSheetManager.getData('$typingSpeed');
     if (enable) {
-        gameObject.setTypeSpeed(defaultTypingSpeed / 10);
+        var fastTypingSpeed = eventSheetManager.getData('$fastTypingSpeed');
+        gameObject.setTypeSpeed(fastTypingSpeed);
     } else {
+        var defaultTypingSpeed = eventSheetManager.getData('$typingSpeed');
         gameObject.setTypeSpeed(defaultTypingSpeed);
     }
 }

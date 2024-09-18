@@ -14,25 +14,7 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.text('eventSheet0', 'assets/markedeventsheet/mds/command-executor.md');
-
-        this.load.image('classroom', 'assets/images/backgrounds/classroom.png');
-        this.load.image('road', 'assets/images/backgrounds/road.png');
-
-        this.load.atlas('characters', 'assets/images/characters/characters.png', 'assets/images/characters/characters.json');
-        this.load.atlas('portraits', 'assets/images/characters/portraits.png', 'assets/images/characters/portraits.json');
-
-        this.load.audio('theme0', [
-            'assets/audio/oedipus_wizball_highscore.ogg',
-            'assets/audio/oedipus_wizball_highscore.mp3'
-        ]);
-        this.load.audio('theme1', [
-            'assets/audio/jungle.ogg',
-            'assets/audio/jungle.mp3'
-        ]);
-        this.load.audio('explosion', [
-            'assets/audio/soundeffect/explosion.mp3'
-        ]);
+        this.load.text('eventSheet0', 'assets/markedeventsheet/mds/fast-typing.md');
     }
 
     create() {
@@ -54,6 +36,7 @@ class Demo extends Phaser.Scene {
             viewport
         })
             .addEventSheet(this.cache.text.get('eventSheet0'))
+            .setData('$autoNextPage', true);
 
         eventSheetManager
             .on('pause.input', function () {
@@ -69,7 +52,7 @@ class Demo extends Phaser.Scene {
 
         this.input.once('pointerdown', function () {
             print.text = '';
-            eventSheetManager.start('Story');
+            eventSheetManager.startGroup();
         })
 
     }
