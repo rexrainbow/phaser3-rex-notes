@@ -65477,6 +65477,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 super(scene, config);
                 this.type = type;
                 this.isRunning = false;
+                this._isPageEnd = false;
 
                 // childrenMap must have 'text' element
                 var text = this.childrenMap.text;
@@ -65579,6 +65580,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                     this.emit('start');
 
                     if (this.typingMode === 0) {
+                        this._isPageEnd = false;
                         var txt = this.page.getPage();
                         var startIndex = this.typing.textLength;
                         this.typing.start(txt, undefined, startIndex);
@@ -65595,6 +65597,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 }
 
                 if (!this.isLastPage) {
+                    this._isPageEnd = false;
                     var txt = this.page.getNextPage();
                     this.typing.start(txt);
 
@@ -65701,6 +65704,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 return this.typing.isTyping;
             }
 
+            get isPageEnd() {
+                return this._isPageEnd;
+            }
+
             get isLastPage() {
                 return this.page.isLastPage;
             }
@@ -65757,6 +65764,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
             onTypingComplete() {
                 if (this.typingMode === 0) {
+                    this._isPageEnd = true;
                     var isLastPage = this.isLastPage;
 
                     // Stop typing tasl if typing complete at last page

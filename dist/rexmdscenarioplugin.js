@@ -23531,12 +23531,14 @@
 	                autoClear = defaultAutoClear
 	            } = config;
 
+	            config.commandExecutor = this;
 	            config.eventSheetManager = eventSheetManager;
 	            config.eventsheet = eventsheet;
 
 	            sys.createGameObject(name, id, config);
 	            // Execute next command
 
+	            delete config.commandExecutor;
 	            delete config.eventSheetManager;
 	            delete config.eventsheet;
 
@@ -80413,6 +80415,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	            super(scene, config);
 	            this.type = type;
 	            this.isRunning = false;
+	            this._isPageEnd = false;
 
 	            // childrenMap must have 'text' element
 	            var text = this.childrenMap.text;
@@ -80515,6 +80518,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	                this.emit('start');
 
 	                if (this.typingMode === 0) {
+	                    this._isPageEnd = false;
 	                    var txt = this.page.getPage();
 	                    var startIndex = this.typing.textLength;
 	                    this.typing.start(txt, undefined, startIndex);
@@ -80531,6 +80535,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	            }
 
 	            if (!this.isLastPage) {
+	                this._isPageEnd = false;
 	                var txt = this.page.getNextPage();
 	                this.typing.start(txt);
 
@@ -80637,6 +80642,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	            return this.typing.isTyping;
 	        }
 
+	        get isPageEnd() {
+	            return this._isPageEnd;
+	        }
+
 	        get isLastPage() {
 	            return this.page.isLastPage;
 	        }
@@ -80693,6 +80702,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
 	        onTypingComplete() {
 	            if (this.typingMode === 0) {
+	                this._isPageEnd = true;
 	                var isLastPage = this.isLastPage;
 
 	                // Stop typing tasl if typing complete at last page
@@ -89226,6 +89236,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	        duration, mode = 'crossFade',
 	        wait = true
 	    } = {},
+
 	    commandExecutor, eventSheetManager, eventSheet
 	) {
 
@@ -89261,6 +89272,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	    {
 	        tintOthers,
 	    } = {},
+
 	    commandExecutor, eventSheetManager, eventSheet
 	) {
 
@@ -89292,6 +89304,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	var Focus = function (
 	    gameObject,
 	    config,
+
 	    commandExecutor, eventSheetManager, eventSheet
 	) {
 
@@ -89318,8 +89331,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	        clickAfterComplete = true,
 	        wait = true,
 	    } = {},
-	    commandExecutor,
-	    eventSheetManager, eventSheet
+
+	    commandExecutor, eventSheetManager, eventSheet
 	) {
 
 	    if (displayName === null) {
@@ -89365,7 +89378,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	    gameObject.layout();
 
 	    if (text) {
-	        if (typingSpeed === undefined) {
+	        var fastTyping = eventSheetManager.getData('$fastTyping');
+	        if (fastTyping) {
+	            typingSpeed = eventSheetManager.getData('$fastTypingSpeed');
+	        } else if (typingSpeed === undefined) {
 	            typingSpeed = eventSheetManager.getData('$typingSpeed');
 	        }
 
@@ -89411,6 +89427,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	        clickAfterComplete = true,
 	        wait = true
 	    } = {},
+
 	    commandExecutor, eventSheetManager, eventSheet
 	) {
 
@@ -89781,9 +89798,9 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
 	            frameDelimiter = defaultFrameDelimiter,
 
-	            eventSheetManager, eventsheet,
-	            clickTarget,
-	            clickShortcutKeys
+	            clickTarget, clickShortcutKeys,
+
+	            commandExecutor, eventSheetManager, eventsheet,
 	        } = {},
 	    ) {
 
@@ -89849,12 +89866,21 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
 	        gameObject.frameDelimiter = frameDelimiter;
 
-	        /*
-	        Fire 'click' event when
+	        var waitIcon;
+	        if (useDefaultWaitIcon) {
+	            waitIcon = gameObject.getElement('action');
+	            gameObject.setChildVisible(waitIcon, false);
+	        }
 
+	        AddShakeBehavior(gameObject);
+
+	        /*
+	        Fire textbox's 'click' event when
 	        - Pointer-down on clickTarget (screen or this textbox) 
 	        - Press keyboard's key
-
+	        
+	        !!! note
+	            Since 'click' event might fire during typing, don't use *wait pointerdown|keydown*
 	        */
 
 	        gameObject.emitClick = function () {
@@ -89899,18 +89925,19 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	        );
 
 	        // On click
-	        var onClick = function () {
+	        var OnClick = function () {
 	            if (gameObject.isTyping) {
 	                // Wait clicking for typing next page, 
 	                // or emitting 'complete2' event
 	                gameObject
-	                    .once('click', onClick)
+	                    .once('click', OnClick)
 	                    .stop(true);
 
 	            } else if (!gameObject.isLastPage) {
+	                // !gameObject.isLastPage && !gameObject.isTyping
 	                // Typing next page, interrupted by click event
 	                gameObject
-	                    .once('click', onClick)
+	                    .once('click', OnClick)
 	                    .typeNextPage();
 
 	            } else {
@@ -89919,40 +89946,100 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	            }
 	        };
 
-	        var waitIcon;
-	        if (useDefaultWaitIcon) {
-	            waitIcon = gameObject.getElement('action');
-	            gameObject.setChildVisible(waitIcon, false);
-	        }
+	        /*
+	        PageEnd0 -> click -> PageEnd1
+	        PageEnd0 -> autoNextPage -> PageEnd1
+	        */
+	        // on 'pageend', wait click
+	        var PageEnd0 = function () {
+	            if (useDefaultWaitIcon) {
+	                waitIcon.start();
+	                gameObject.setChildVisible(waitIcon, true);
+	            }
+
+	            gameObject.once('click', PageEnd1);
+
+	            var autoNextPage = eventSheetManager.getData('$autoNextPage');
+	            var fastTyping = eventSheetManager.getData('$fastTyping');
+	            if (autoNextPage || fastTyping) {
+	                var autoNextPageDelay = (fastTyping) ? 0 : eventSheetManager.getData('$autoNextPageDelay');
+	                commandExecutor.sys.timeline.delayCall(autoNextPageDelay, gameObject.emitClick);
+	            }
+
+	            eventSheetManager.emit('pause.input');
+	        };
+
+	        // on 'pageend', on 'click'
+	        var PageEnd1 = function () {
+	            if (!gameObject.isPageEnd) {
+	                return;
+	            }
+
+	            gameObject.off('click', PageEnd1);
+
+	            if (useDefaultWaitIcon) {
+	                waitIcon.stop();
+	                gameObject.setChildVisible(waitIcon, false);
+	            }
+
+	            eventSheetManager.emit('resume.input');
+	        };
+	        gameObject._typeNextPage = PageEnd1;
 
 	        gameObject
-	            .on('pageend', function () {
-	                if (useDefaultWaitIcon) {
-	                    waitIcon.start();
-	                    gameObject.setChildVisible(waitIcon, true);
-	                }
-
-	                eventSheetManager.emit('pause.input');
-
-	                gameObject.once('click', function () {
-	                    if (useDefaultWaitIcon) {
-	                        waitIcon.stop();
-	                        gameObject.setChildVisible(waitIcon, false);
-	                    }
-
-	                    eventSheetManager.emit('resume.input');
-	                });
-	            })
+	            .on('pageend', PageEnd0)
 	            .on('start', function () {
 	                // Remove pending callback, add new one
 	                gameObject
-	                    .off('click', onClick)
-	                    .once('click', onClick);
+	                    .off('click', OnClick)
+	                    .once('click', OnClick);
 	            });
 
-	        AddShakeBehavior(gameObject);
-
 	        return gameObject;
+	    }
+	};
+
+	var SetAutoTypingEnable = function (
+	    gameObject,
+	    {
+	        enable = true,
+	    } = {},
+
+	    commandExecutor, eventSheetManager, eventSheet
+	) {
+	    enable = !!enable;
+
+	    eventSheetManager.setData('$autoNextPage', enable);
+
+	    if (enable && gameObject.isPageEnd) {
+	        // Typing next page automatically with 0 delay.
+	        var autoNextPageDelay = eventSheetManager.getData('$autoNextPageDelay');
+	        eventSheetManager.setData('$autoNextPageDelay', 0);
+
+	        gameObject._typeNextPage();
+
+	        eventSheetManager.setData('$autoNextPageDelay', autoNextPageDelay);
+	    }
+	};
+
+	var SetFastTypingEnable = function (
+	    gameObject,
+	    {
+	        enable = true,
+	    } = {},
+
+	    commandExecutor, eventSheetManager, eventSheet
+	) {
+	    enable = !!enable;
+
+	    eventSheetManager.setData('$fastTyping', enable);
+
+	    if (enable) {
+	        var fastTypingSpeed = eventSheetManager.getData('$fastTypingSpeed');
+	        gameObject.setTypeSpeed(fastTypingSpeed);
+	    } else {
+	        var defaultTypingSpeed = eventSheetManager.getData('$typingSpeed');
+	        gameObject.setTypeSpeed(defaultTypingSpeed);
 	    }
 	};
 
@@ -89993,6 +90080,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	        commands: {
 	            typing: Typing,
 	            shake: Shake,
+	            setAutoNextPageEnable: SetAutoTypingEnable,
+	            setFastTypingEnable: SetFastTypingEnable,
 	        }
 	    });
 	};
@@ -90017,7 +90106,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	            alignBottom = false,
 	            text0, text1,
 
-	            eventSheetManager, eventsheet,
+	            commandExecutor, eventSheetManager, eventsheet,
 	        } = {},
 	    ) {
 
@@ -90332,8 +90421,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	        option1, option2, option3,
 	        resultKey = 'choiceIndex'
 	    } = {},
-	    commandExecutor,
-	    eventSheetManager, eventSheet
+
+	    commandExecutor, eventSheetManager, eventSheet
 	) {
 
 	    var choices = [];
@@ -90454,8 +90543,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	        firstName = '', lastName = '',
 	        firstNameKey = 'firstName', lastNameKey = 'lastName'
 	    } = {},
-	    commandExecutor,
-	    eventSheetManager, eventSheet
+
+	    commandExecutor, eventSheetManager, eventSheet
 	) {
 
 	    gameObject
@@ -90591,6 +90680,11 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
 	var DefaultVariables = {
 	    $typingSpeed: 100,                  // TEXTBOX.typing
+	    $autoNextPage: false,               // TEXTBOX.typing
+	    $autoNextPageDelay: 500,            // TEXTBOX.typing
+	    $fastTyping: false,                 // TEXTBOX.typing
+	    $fastTypingSpeed: 20,               // TEXTBOX.typing
+
 	    $transitionDuration: 500,           // SPRITE.cross, BG.cross
 	    $tintOthers: 0x333333,              // SPRITE.focus
 	    $shakeDuration: 500,                // SPRITE.shake, BG.shake, TEXTBOX.shake, TITLE.shake, CHOICE.shake
