@@ -1,19 +1,19 @@
 import IsSceneObject from '../../system/IsSceneObject.js';
 
-var AddEvent = function (target, eventEmitter, eventName, callback, scope) {
+var AddEvent = function (bindingTarget, eventEmitter, eventName, callback, scope) {
     eventEmitter.on(eventName, callback, scope);
 
-    if (!IsSceneObject(target)) {
-        target.once('destroy', function () {
+    if (!IsSceneObject(bindingTarget)) {
+        bindingTarget.once('destroy', function () {
             eventEmitter.off(eventName, callback, scope);
         })
     } else {
-        // target is scene
-        target.sys.events.once('shutdown', function () {
+        // bindingTarget is scene
+        bindingTarget.sys.events.once('shutdown', function () {
             eventEmitter.off(eventName, callback, scope);
         });
     }
-    return target;
+    return bindingTarget;
 }
 
 export default AddEvent;

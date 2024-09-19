@@ -1,5 +1,5 @@
 export default function (
-    target: Phaser.GameObjects.GameObject | Phaser.Scene,
+    bindingTarget: Phaser.GameObjects.GameObject | Phaser.Scene,
     eventName: string,
     callback: Function,
     scope?: unknown
