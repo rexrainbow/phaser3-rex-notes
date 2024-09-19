@@ -59,13 +59,16 @@ var Typing = function (
     gameObject.layout();
 
     if (text) {
+        /* 
+        Using $fastTypingSpeed speed in $fastTyping mode,
+        Otherwise using custom typingSpeed, or default typing speed
+        */ 
         var fastTyping = eventSheetManager.getData('$fastTyping');
         if (fastTyping) {
             typingSpeed = eventSheetManager.getData('$fastTypingSpeed');
         } else if (typingSpeed === undefined) {
             typingSpeed = eventSheetManager.getData('$typingSpeed');
         }
-
 
         if (clickAfterComplete) {
             // Wait until typing complete, then one more clicking.
