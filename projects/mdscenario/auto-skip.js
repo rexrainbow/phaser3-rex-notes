@@ -1,9 +1,8 @@
 import phaser from 'phaser/src/phaser.js';
 import MDScenario from '../../templates/mdscenario/MDScenario.js';
+import CreateMonitorPanel from '../../templates/mdscenario/monitor/CreateMonitorPanel.js';
 import TextBoxStyle from './styles/TextBoxStyle.js';
-import ChoiceStyle from './styles/ChoiceStyle.js';
-import TitleStyle from './styles/TitleStyle.js';
-import NameInputStyle from './styles/NameInputStyle.js';
+
 
 class Demo extends Phaser.Scene {
 
@@ -27,33 +26,39 @@ class Demo extends Phaser.Scene {
         var eventSheetManager = new MDScenario(this, {
             styles: {
                 TEXTBOX: TextBoxStyle,
-                CHOICE: ChoiceStyle,
-                TITLE: TitleStyle,
-                NAMEINPUT: NameInputStyle,
             },
             rootLayer,
             multipleCamerasEnable: true,
             viewport
         })
             .addEventSheet(this.cache.text.get('eventSheet0'))
-            .setData('$autoNextPage', true);
 
-        eventSheetManager
-            .on('pause.input', function () {
-                print.text = 'Wait any click to continue';
-            })
-            .on('resume.input', function () {
-                print.text = '';
-            })
-            .on('complete', function () {
-                print.text = 'Complete';
-                console.log(eventSheetManager.memory)
-            })
-
-        this.input.once('pointerdown', function () {
-            print.text = '';
-            eventSheetManager.startGroup();
-        })
+        CreateMonitorPanel(
+            this,
+            {
+                width: 300, height: 0
+            },
+            eventSheetManager.memory,
+            [
+                {
+                    $key: '$fastTyping', title: 'Skip',
+                },
+                {
+                    $key: '$autoNextPage', title: 'Auto',
+                },
+                { $type: 'separator' },
+                {
+                    // Run event sheet
+                    $type: 'button', title: 'Action', label: 'Run',
+                    callback(target) {
+                        print.text = '';
+                        eventSheetManager.startGroup();
+                    }
+                }
+            ]
+        )
+            .setOrigin(0)
+            .layout()
 
     }
 

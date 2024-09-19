@@ -191,10 +191,17 @@ var GenerateDefaultCreateGameObjectCallback = function (
 
             gameObject.once('click', PageEnd1);
 
-            var autoNextPage = eventSheetManager.getData('$autoNextPage');
+            // $fastTyping has higher priority then $autoNextPage
             var fastTyping = eventSheetManager.getData('$fastTyping');
-            if (autoNextPage || fastTyping) {
-                var autoNextPageDelay = (fastTyping) ? 0 : eventSheetManager.getData('$autoNextPageDelay');
+            var autoNextPage = eventSheetManager.getData('$autoNextPage');
+            if (fastTyping || autoNextPage) {
+                var autoNextPageDelay;
+                if (fastTyping) {
+                    autoNextPageDelay = 0;
+                } else {
+                    autoNextPageDelay = eventSheetManager.getData('$autoNextPageDelay');
+                }
+
                 commandExecutor.sys.timeline.delayCall(autoNextPageDelay, gameObject.emitClick);
             }
 

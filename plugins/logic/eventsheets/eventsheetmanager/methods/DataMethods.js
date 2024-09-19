@@ -1,29 +1,44 @@
 export default {
     setData(key, value) {
+        var blackboard = this.blackboard;
+
         if (typeof (key) === 'string') {
-            this.blackboard.setData(key, value);
+            blackboard.setData(key, value);
         } else {
             var data = key;
             for (key in data) {
-                this.blackboard.setData(key, data[key]);
+                value = data[key];
+                blackboard.setData(key, value);
             }
         }
 
         return this;
     },
 
-    hasData(key) {
-        return this.blackboard.hasData(key);
-    },
-
     incData(key, inc) {
-        this.blackboard.incData(key, inc);
+        var value;
+        if (this.hasData(key)) {
+            value = this.getData(key);
+        } else {
+            value = 0;
+        }
+        this.setData(value + inc);
         return this;
     },
 
     toggleData(key) {
-        this.blackboard.toggleData(key);
+        var value;
+        if (this.hasData(key)) {
+            value = this.getData(key);
+        } else {
+            value = false;
+        }
+        this.setData(!value);
         return this;
+    },
+
+    hasData(key) {
+        return this.blackboard.hasData(key);
     },
 
     getData(key) {

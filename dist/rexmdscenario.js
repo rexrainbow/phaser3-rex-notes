@@ -6215,30 +6215,45 @@
 
 	var DataMethods$4 = {
 	    setData(key, value) {
+	        var blackboard = this.blackboard;
+
 	        if (typeof (key) === 'string') {
-	            this.blackboard.setData(key, value);
+	            blackboard.setData(key, value);
 	        } else {
 	            var data = key;
 	            for (key in data) {
-	                this.blackboard.setData(key, data[key]);
+	                value = data[key];
+	                blackboard.setData(key, value);
 	            }
 	        }
 
 	        return this;
 	    },
 
-	    hasData(key) {
-	        return this.blackboard.hasData(key);
-	    },
-
 	    incData(key, inc) {
-	        this.blackboard.incData(key, inc);
+	        var value;
+	        if (this.hasData(key)) {
+	            value = this.getData(key);
+	        } else {
+	            value = 0;
+	        }
+	        this.setData(value + inc);
 	        return this;
 	    },
 
 	    toggleData(key) {
-	        this.blackboard.toggleData(key);
+	        var value;
+	        if (this.hasData(key)) {
+	            value = this.getData(key);
+	        } else {
+	            value = false;
+	        }
+	        this.setData(!value);
 	        return this;
+	    },
+
+	    hasData(key) {
+	        return this.blackboard.hasData(key);
 	    },
 
 	    getData(key) {
@@ -89317,13 +89332,16 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	    gameObject.layout();
 
 	    if (text) {
+	        /* 
+	        Using $fastTypingSpeed speed in $fastTyping mode,
+	        Otherwise using custom typingSpeed, or default typing speed
+	        */ 
 	        var fastTyping = eventSheetManager.getData('$fastTyping');
 	        if (fastTyping) {
 	            typingSpeed = eventSheetManager.getData('$fastTypingSpeed');
 	        } else if (typingSpeed === undefined) {
 	            typingSpeed = eventSheetManager.getData('$typingSpeed');
 	        }
-
 
 	        if (clickAfterComplete) {
 	            // Wait until typing complete, then one more clicking.
@@ -89898,10 +89916,17 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
 	            gameObject.once('click', PageEnd1);
 
-	            var autoNextPage = eventSheetManager.getData('$autoNextPage');
+	            // $fastTyping has higher priority then $autoNextPage
 	            var fastTyping = eventSheetManager.getData('$fastTyping');
-	            if (autoNextPage || fastTyping) {
-	                var autoNextPageDelay = (fastTyping) ? 0 : eventSheetManager.getData('$autoNextPageDelay');
+	            var autoNextPage = eventSheetManager.getData('$autoNextPage');
+	            if (fastTyping || autoNextPage) {
+	                var autoNextPageDelay;
+	                if (fastTyping) {
+	                    autoNextPageDelay = 0;
+	                } else {
+	                    autoNextPageDelay = eventSheetManager.getData('$autoNextPageDelay');
+	                }
+
 	                commandExecutor.sys.timeline.delayCall(autoNextPageDelay, gameObject.emitClick);
 	            }
 
@@ -89935,50 +89960,6 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	            });
 
 	        return gameObject;
-	    }
-	};
-
-	var SetAutoTypingEnable = function (
-	    gameObject,
-	    {
-	        enable = true,
-	    } = {},
-
-	    commandExecutor, eventSheetManager, eventSheet
-	) {
-	    enable = !!enable;
-
-	    eventSheetManager.setData('$autoNextPage', enable);
-
-	    if (enable && gameObject.isPageEnd) {
-	        // Typing next page automatically with 0 delay.
-	        var autoNextPageDelay = eventSheetManager.getData('$autoNextPageDelay');
-	        eventSheetManager.setData('$autoNextPageDelay', 0);
-
-	        gameObject._typeNextPage();
-
-	        eventSheetManager.setData('$autoNextPageDelay', autoNextPageDelay);
-	    }
-	};
-
-	var SetFastTypingEnable = function (
-	    gameObject,
-	    {
-	        enable = true,
-	    } = {},
-
-	    commandExecutor, eventSheetManager, eventSheet
-	) {
-	    enable = !!enable;
-
-	    eventSheetManager.setData('$fastTyping', enable);
-
-	    if (enable) {
-	        var fastTypingSpeed = eventSheetManager.getData('$fastTypingSpeed');
-	        gameObject.setTypeSpeed(fastTypingSpeed);
-	    } else {
-	        var defaultTypingSpeed = eventSheetManager.getData('$typingSpeed');
-	        gameObject.setTypeSpeed(defaultTypingSpeed);
 	    }
 	};
 
@@ -90019,8 +90000,6 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	        commands: {
 	            typing: Typing,
 	            shake: Shake,
-	            setAutoNextPageEnable: SetAutoTypingEnable,
-	            setFastTypingEnable: SetFastTypingEnable,
 	        }
 	    });
 	};
