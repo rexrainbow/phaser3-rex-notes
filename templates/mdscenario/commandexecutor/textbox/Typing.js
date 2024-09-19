@@ -62,12 +62,20 @@ var Typing = function (
         /* 
         Using $fastTypingSpeed speed in $fastTyping mode,
         Otherwise using custom typingSpeed, or default typing speed
-        */ 
+        */
+
+        // Store gameObject.normalTypingSpeed
+        if (typingSpeed === undefined) {
+            gameObject.normalTypingSpeed = eventSheetManager.getData('$typingSpeed');
+        } else {
+            gameObject.normalTypingSpeed = typingSpeed;
+        }
+
         var fastTyping = eventSheetManager.getData('$fastTyping');
         if (fastTyping) {
             typingSpeed = eventSheetManager.getData('$fastTypingSpeed');
         } else if (typingSpeed === undefined) {
-            typingSpeed = eventSheetManager.getData('$typingSpeed');
+            typingSpeed = gameObject.normalTypingSpeed;
         }
 
         if (clickAfterComplete) {

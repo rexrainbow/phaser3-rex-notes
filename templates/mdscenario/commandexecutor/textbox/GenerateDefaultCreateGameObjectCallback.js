@@ -234,6 +234,8 @@ var GenerateDefaultCreateGameObjectCallback = function (
                     .once('click', OnClick)
             });
 
+        // TODO: Reset typing speed if $fastTyping is changed
+
         return gameObject;
     }
 }
