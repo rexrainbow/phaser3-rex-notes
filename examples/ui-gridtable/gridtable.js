@@ -181,7 +181,7 @@ class Demo extends Phaser.Scene {
             .setOrigin(1, 1)
             .setInteractive()
             .on('pointerdown', function () {
-                var itemCount = Random(10, 50);
+                var itemCount = Random(50, 200);
                 gridTable
                     .setItems(CreateItems(itemCount))
                     .scrollToBottom()
