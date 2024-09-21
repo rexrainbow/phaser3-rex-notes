@@ -1204,6 +1204,16 @@ sizer.setChildrenInteractive({
     ```
     - `swipeEventName` :  `'child.swipeleft'`, `'child.swiperight'`, `'child.swipeup'`, `'child.swipedown'`.
 
+
+### Bind event
+
+```javascript
+sizer.bindEvent(eventEmitter, eventName, callback, scope);
+```
+
+Will remove this event from eventEmitter when destroying sizer.
+
+
 ### Pin game object
 
 ```javascript
