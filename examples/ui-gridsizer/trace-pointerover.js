@@ -31,6 +31,8 @@ class Demo extends Phaser.Scene {
             .on('traceend', function (result) {
                 print.text = result.join(',')
             })
+
+        // panel.destroy()
     }
 
     update() { }
@@ -110,22 +112,34 @@ var TracePointOver = function (panel) {
             })
     })
 
-    panel.scene.input
-        .on('pointerdown', function () {
-            if (tracing) {
-                return;
+    panel
+        .bindEvent(
+            panel.scene.input, // eventEmitter
+            'pointerdown',     // eventName
+            function () {      // callback
+                if (tracing) {
+                    return;
+                }
+                onTraceStart();
             }
-            onTraceStart();
-        })
-        .on('pointerup', function () {
-            onTraceEnd();
-        })
-        .on('pointermove', function () {
-            if (panel.isPointerInBounds()) {
-                return;
+        )
+        .bindEvent(
+            panel.scene.input, // eventEmitter
+            'pointerup',     // eventName
+            function () {      // callback
+                onTraceEnd();
             }
-            onTraceEnd();
-        })
+        )
+        .bindEvent(
+            panel.scene.input, // eventEmitter
+            'pointermove',     // eventName
+            function () {      // callback
+                if (panel.isPointerInBounds()) {
+                    return;
+                }
+                onTraceEnd();
+            }
+        )
 
 }
 
