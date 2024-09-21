@@ -23410,20 +23410,42 @@
 
 	};
 
-	var AddEvent = function (target, eventEmitter, eventName, callback, scope) {
-	    eventEmitter.on(eventName, callback, scope);
-
-	    if (!IsSceneObject(target)) {
-	        target.once('destroy', function () {
-	            eventEmitter.off(eventName, callback, scope);
-	        });
-	    } else {
-	        // target is scene
-	        target.sys.events.once('shutdown', function () {
-	            eventEmitter.off(eventName, callback, scope);
-	        });
+	var BindEventWithGameObject = function (gameObject, eventEmitter, eventName, callback, scope, once) {
+	    if (once === undefined) {
+	        once = false;
 	    }
-	    return target;
+
+	    eventEmitter[(once) ? 'once' : 'on'](eventName, callback, scope);
+
+	    gameObject.once('destroy', function () {
+	        eventEmitter.off(eventName, callback, scope);
+	    });
+
+	    return gameObject;
+	};
+
+	var BindEventWidthScene = function (scene, eventEmitter, eventName, callback, scope, once) {
+	    if (once === undefined) {
+	        once = false;
+	    }
+
+	    eventEmitter[(once) ? 'once' : 'on'](eventName, callback, scope);
+
+	    scene.sys.events.once('shutdown', function () {
+	        eventEmitter.off(eventName, callback, scope);
+	    });
+
+	    return scene;
+	};
+
+	var AddEvent = function (bindingTarget, eventEmitter, eventName, callback, scope, once) {
+	    if (!IsSceneObject(bindingTarget)) {
+	        BindEventWithGameObject(bindingTarget, eventEmitter, eventName, callback, scope, once);
+	    } else {
+	        BindEventWidthScene(bindingTarget, eventEmitter, eventName, callback, scope, once);
+	    }
+
+	    return bindingTarget;
 	};
 
 	var GameObjectManagerMethods = {

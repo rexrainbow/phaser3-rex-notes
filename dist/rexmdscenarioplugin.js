@@ -14432,7 +14432,7 @@
 	    }
 	};
 
-	var BindEventMethods = {
+	var BindEventMethods$1 = {
 	    startGroupByEvent(eventName, groupName, once) {
 	        if (IsPlainObject$Y(eventName)) {
 	            var config = eventName;
@@ -14496,7 +14496,7 @@
 	    ValueConvertMethods,
 	    RunMethods,
 	    StopMethods,
-	    BindEventMethods,
+	    BindEventMethods$1,
 	    RoundCounterMethods,
 	);
 
@@ -23504,20 +23504,42 @@
 
 	};
 
-	var AddEvent = function (target, eventEmitter, eventName, callback, scope) {
-	    eventEmitter.on(eventName, callback, scope);
-
-	    if (!IsSceneObject(target)) {
-	        target.once('destroy', function () {
-	            eventEmitter.off(eventName, callback, scope);
-	        });
-	    } else {
-	        // target is scene
-	        target.sys.events.once('shutdown', function () {
-	            eventEmitter.off(eventName, callback, scope);
-	        });
+	var BindEventWithGameObject = function (gameObject, eventEmitter, eventName, callback, scope, once) {
+	    if (once === undefined) {
+	        once = false;
 	    }
-	    return target;
+
+	    eventEmitter[(once) ? 'once' : 'on'](eventName, callback, scope);
+
+	    gameObject.once('destroy', function () {
+	        eventEmitter.off(eventName, callback, scope);
+	    });
+
+	    return gameObject;
+	};
+
+	var BindEventWidthScene = function (scene, eventEmitter, eventName, callback, scope, once) {
+	    if (once === undefined) {
+	        once = false;
+	    }
+
+	    eventEmitter[(once) ? 'once' : 'on'](eventName, callback, scope);
+
+	    scene.sys.events.once('shutdown', function () {
+	        eventEmitter.off(eventName, callback, scope);
+	    });
+
+	    return scene;
+	};
+
+	var AddEvent = function (bindingTarget, eventEmitter, eventName, callback, scope, once) {
+	    if (!IsSceneObject(bindingTarget)) {
+	        BindEventWithGameObject(bindingTarget, eventEmitter, eventName, callback, scope, once);
+	    } else {
+	        BindEventWidthScene(bindingTarget, eventEmitter, eventName, callback, scope, once);
+	    }
+
+	    return bindingTarget;
 	};
 
 	var GameObjectManagerMethods$1 = {
@@ -53380,6 +53402,25 @@
 	    }
 	};
 
+	var BindEventMethods = {
+	    bindEvent(gameObject, eventEmitter, eventName, callback, scope, once) {
+	        if (typeof (eventEmitter) === 'string') {
+	            once = scope;
+	            scope = callback;
+	            callback = eventName;
+	            eventName = eventEmitter;
+	            eventEmitter = gameObject;
+	            gameObject = this;
+	        }
+
+	        BindEventWithGameObject(gameObject, eventEmitter, eventName, callback, scope, once);
+
+	        return this;
+	    },
+
+
+	};
+
 	var GetPointerWorldXY = function (pointer, targetCamera, out) {
 	    var camera = pointer.camera;
 	    if (!camera) {
@@ -56109,6 +56150,7 @@
 	    HideMethods,
 	    ModalMethods$1,
 	    GetShownChildrenMethods,
+	    BindEventMethods,
 	);
 
 	const GetValue$2l = Phaser.Utils.Objects.GetValue;
@@ -89396,12 +89438,20 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	        /* 
 	        Using $fastTypingSpeed speed in $fastTyping mode,
 	        Otherwise using custom typingSpeed, or default typing speed
-	        */ 
+	        */
+
+	        // Store gameObject.normalTypingSpeed
+	        if (typingSpeed === undefined) {
+	            gameObject.normalTypingSpeed = eventSheetManager.getData('$typingSpeed');
+	        } else {
+	            gameObject.normalTypingSpeed = typingSpeed;
+	        }
+
 	        var fastTyping = eventSheetManager.getData('$fastTyping');
 	        if (fastTyping) {
 	            typingSpeed = eventSheetManager.getData('$fastTypingSpeed');
 	        } else if (typingSpeed === undefined) {
-	            typingSpeed = eventSheetManager.getData('$typingSpeed');
+	            typingSpeed = gameObject.normalTypingSpeed;
 	        }
 
 	        if (clickAfterComplete) {
@@ -90019,6 +90069,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	                    .off('click', OnClick)
 	                    .once('click', OnClick);
 	            });
+
+	        // TODO: Reset typing speed if $fastTyping is changed
 
 	        return gameObject;
 	    }

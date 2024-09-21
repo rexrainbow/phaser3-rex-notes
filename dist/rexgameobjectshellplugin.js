@@ -15433,6 +15433,39 @@
         }
     };
 
+    var BindEventWithGameObject = function (gameObject, eventEmitter, eventName, callback, scope, once) {
+        if (once === undefined) {
+            once = false;
+        }
+
+        eventEmitter[(once) ? 'once' : 'on'](eventName, callback, scope);
+
+        gameObject.once('destroy', function () {
+            eventEmitter.off(eventName, callback, scope);
+        });
+
+        return gameObject;
+    };
+
+    var BindEventMethods = {
+        bindEvent(gameObject, eventEmitter, eventName, callback, scope, once) {
+            if (typeof (eventEmitter) === 'string') {
+                once = scope;
+                scope = callback;
+                callback = eventName;
+                eventName = eventEmitter;
+                eventEmitter = gameObject;
+                gameObject = this;
+            }
+
+            BindEventWithGameObject(gameObject, eventEmitter, eventName, callback, scope, once);
+
+            return this;
+        },
+
+
+    };
+
     var IsInTouching = function (pointer, gameObject) {
         if (IsGameObject(pointer) || (typeof (pointer) === 'string')) {
             gameObject = pointer;
@@ -17015,6 +17048,7 @@
         HideMethods,
         ModalMethods,
         GetShownChildrenMethods,
+        BindEventMethods,
     );
 
     const GetValue$1K = Phaser.Utils.Objects.GetValue;

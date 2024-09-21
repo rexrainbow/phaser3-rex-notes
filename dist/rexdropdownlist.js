@@ -8550,6 +8550,39 @@
         }
     };
 
+    var BindEventWithGameObject = function (gameObject, eventEmitter, eventName, callback, scope, once) {
+        if (once === undefined) {
+            once = false;
+        }
+
+        eventEmitter[(once) ? 'once' : 'on'](eventName, callback, scope);
+
+        gameObject.once('destroy', function () {
+            eventEmitter.off(eventName, callback, scope);
+        });
+
+        return gameObject;
+    };
+
+    var BindEventMethods = {
+        bindEvent(gameObject, eventEmitter, eventName, callback, scope, once) {
+            if (typeof (eventEmitter) === 'string') {
+                once = scope;
+                scope = callback;
+                callback = eventName;
+                eventName = eventEmitter;
+                eventEmitter = gameObject;
+                gameObject = this;
+            }
+
+            BindEventWithGameObject(gameObject, eventEmitter, eventName, callback, scope, once);
+
+            return this;
+        },
+
+
+    };
+
     var GetPointerWorldXY = function (pointer, targetCamera, out) {
         var camera = pointer.camera;
         if (!camera) {
@@ -11564,6 +11597,7 @@
         HideMethods,
         ModalMethods,
         GetShownChildrenMethods,
+        BindEventMethods,
     );
 
     const GetValue$L = Phaser.Utils.Objects.GetValue;
