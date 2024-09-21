@@ -802,6 +802,23 @@ declare class BaseSizer extends ContainerLite {
         ...args: any[]
     ): this;
 
+    bindEvent(
+        eventEmitter: Phaser.Events.EventEmitter,
+        eventName: string,
+        callback: Function,
+        scope?: unknown,
+        once?: boolean,
+    ): this;
+
+    bindEvent(
+        gameObject: Phaser.GameObjects.GameObject,
+        eventEmitter: Phaser.Events.EventEmitter,
+        eventName: string,
+        callback: Function,
+        scope?: unknown,
+        once?: boolean,
+    ): this;
+
     getShownChildren(
         out?: Phaser.GameObjects.GameObject[]
     ): Phaser.GameObjects.GameObject[];

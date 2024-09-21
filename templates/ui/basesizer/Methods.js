@@ -41,6 +41,8 @@ import EaseDataMethods from './EaseDataMethods.js';
 import DelayCallMethods from './DelayCallMethods.js';
 import HideMethods from './HideMethods.js';
 import ModalMethods from './ModalMethods.js';
+import BindEventMethods from './BindEventMethods.js';
+
 import IsInTouching from './IsInTouching.js';
 import PointToChild from './PointToChild.js';
 import GetParentSizerMethods from './GetParentSizerMethods.js';
@@ -116,6 +118,7 @@ Object.assign(
     HideMethods,
     ModalMethods,
     GetShownChildrenMethods,
+    BindEventMethods,
 );
 
 export default methods;
