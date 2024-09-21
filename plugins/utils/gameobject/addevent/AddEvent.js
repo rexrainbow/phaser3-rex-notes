@@ -1,18 +1,14 @@
 import IsSceneObject from '../../system/IsSceneObject.js';
+import BindEventWithGameObject from './BindEventWithGameObject.js';
+import BindEventWidthScene from './BindEventWidthScene.js';
 
-var AddEvent = function (bindingTarget, eventEmitter, eventName, callback, scope) {
-    eventEmitter.on(eventName, callback, scope);
-
+var AddEvent = function (bindingTarget, eventEmitter, eventName, callback, scope, once) {
     if (!IsSceneObject(bindingTarget)) {
-        bindingTarget.once('destroy', function () {
-            eventEmitter.off(eventName, callback, scope);
-        })
+        BindEventWithGameObject(bindingTarget, eventEmitter, eventName, callback, scope, once);
     } else {
-        // bindingTarget is scene
-        bindingTarget.sys.events.once('shutdown', function () {
-            eventEmitter.off(eventName, callback, scope);
-        });
+        BindEventWidthScene(bindingTarget, eventEmitter, eventName, callback, scope, once);
     }
+
     return bindingTarget;
 }
 

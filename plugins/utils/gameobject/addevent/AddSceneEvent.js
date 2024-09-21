@@ -1,9 +1,10 @@
 import AddEvent from './AddEvent.js';
-import IsSceneObject from '../../system/IsSceneObject.js';
+import GetSceneObject from '../../system/GetSceneObject.js';
 
-var AddSceneEvent = function (bindingTarget, eventName, callback, scope) {
-    var eventEmitter = (!IsSceneObject(bindingTarget)) ? bindingTarget.scene.sys.events : bindingTarget.sys.events;
-    return AddEvent(bindingTarget, eventEmitter, eventName, callback, scope);
+var AddSceneEvent = function (bindingTarget, eventName, callback, scope, once) {
+    var scene = GetSceneObject(bindingTarget);
+    var eventEmitter = scene.sys.events;
+    return AddEvent(bindingTarget, eventEmitter, eventName, callback, scope, once);
 }
 
 export default AddSceneEvent;
