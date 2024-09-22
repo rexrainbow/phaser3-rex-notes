@@ -47,10 +47,20 @@ declare class LayerManager extends GOManager {
         layer: string | Phaser.GameObjects.GameObject
     ): Phaser.GameObjects.Layer;
 
-    getLayers(out?: Phaser.GameObjects.GameObject[]): Phaser.GameObjects.Layer[];
+    getLayers(
+        out?: Phaser.GameObjects.GameObject[]
+    ): Phaser.GameObjects.Layer[];
 
     addToLayer(
         layer: string | Phaser.GameObjects.GameObject,
+        gameObjects: Phaser.GameObjects.GameObject | Phaser.GameObjects.GameObject[]
+    ): this;
+
+    addToBottomLayer(
+        gameObjects: Phaser.GameObjects.GameObject | Phaser.GameObjects.GameObject[]
+    ): this;
+
+    addToTopLayer(
         gameObjects: Phaser.GameObjects.GameObject | Phaser.GameObjects.GameObject[]
     ): this;
 
