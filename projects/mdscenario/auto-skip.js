@@ -17,9 +17,6 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var print = this.add.text(0, 1050, '', { fontSize: 20, backgroundColor: 'grey' }).setDepth(100);
-        print.text = 'Any click to start';
-
         var rootLayer = this.add.layer().setName('root');
         var viewport = this.scale.getViewPort();
 
@@ -51,7 +48,6 @@ class Demo extends Phaser.Scene {
                     // Run event sheet
                     $type: 'button', title: 'Action', label: 'Run',
                     callback(target) {
-                        print.text = '';
                         eventSheetManager.startGroup();
                     }
                 }

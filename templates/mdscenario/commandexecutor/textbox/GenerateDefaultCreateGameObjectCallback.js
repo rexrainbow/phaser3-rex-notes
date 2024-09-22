@@ -4,7 +4,6 @@ import { AIO as AIOSpinner } from '../../../spinner/spinner-components.js';
 import DecorateGameObject from '../../../ui/utils/build/DecorateGameObject.js';
 import SetValue from '../../../../plugins/utils/object/SetValue.js';
 import AddViewportCoordinateProperties from '../../../../plugins/behaviors/viewportcoordinate/AddViewportCoordinateProperties.js';
-import AddEvent from '../../../../plugins/utils/gameobject/addevent/AddEvent.js';
 import KeyMap from '../../../../plugins/utils/input/KeyMap.js';
 import { AddShakeBehavior } from '../utils/Shake.js';
 
@@ -130,17 +129,17 @@ var GenerateDefaultCreateGameObjectCallback = function (
         }
 
         if (touchEE) {
-            AddEvent(
-                gameObject,              // target
-                touchEE, 'pointerdown',  // eventEmitter, eventName
-                gameObject.emitClick     // callback
+            gameObject.bindEvent(
+                touchEE,               // eventEmitter, 
+                'pointerdown',         // eventName
+                gameObject.emitClick   // callback
             );
         }
 
-        AddEvent(
-            gameObject,                       // target
-            scene.input.keyboard, 'keydown',  // eventEmitter, eventName
-            function (event) {                // callback
+        gameObject.bindEvent(
+            scene.input.keyboard,      // eventEmitter
+            'keydown',                 // eventName
+            function (event) {         // callback
                 if (clickShortcutKeys === undefined) {
                     clickShortcutKeys = eventSheetManager.getData('$clickShortcutKeys');
                 }
