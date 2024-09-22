@@ -152,6 +152,8 @@ module.exports = {
     'ymlconditionstableplugin': './plugins/ymlconditionstable-plugin.js',
     'levelcounterplugin': './plugins/levelcounter-plugin.js',
     'levelcounter': './plugins/levelcounter.js',
+    'datamonitorplugin': './plugins/datamonitor-plugin.js',
+    'datamonitor': './plugins/datamonitor.js',
     'questplugin': './plugins/quest-plugin.js',
     'loopinticksplugin': './plugins/loopinticks-plugin.js',
     'groupnavigatorplugin': './plugins/groupnavigator-plugin.js',
