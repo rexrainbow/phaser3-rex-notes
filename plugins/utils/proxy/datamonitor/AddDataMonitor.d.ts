@@ -1,5 +1,13 @@
-export default function AddDataMonitor<T>(
-    eventEmitter: Phaser.Events.EventEmitter,
+import EventEmitter from 'eventemitter3';
+
+export default function AddDataMonitor<T>(config: {
     data?: T,
-): T;
+    eventEmitter: EventEmitter,
+    eventNames?: {
+        addKey?: string,
+        setKey?: string,
+        deleteKey?: string
+    },
+    parentPath?: string,
+}): T;
 

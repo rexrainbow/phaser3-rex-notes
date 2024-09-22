@@ -10,16 +10,16 @@ var EmitEvents = function (eventEmitter, op, parentPath, property, value, prevVa
     eventEmitter.emit(`${op}`, propertyPath, value, prevValue);
 }
 
-var EmitAddKeyEvents = function (eventEmitter, parentPath, property, value) {
-    EmitEvents(eventEmitter, 'add', parentPath, property, value, undefined);
+var EmitAddKeyEvents = function (eventEmitter, eventName, parentPath, property, value) {
+    EmitEvents(eventEmitter, eventName, parentPath, property, value, undefined);
 }
 
-var EmitSetValueEvents = function (eventEmitter, parentPath, property, value, prevValue) {
-    EmitEvents(eventEmitter, 'set', parentPath, property, value, prevValue);
+var EmitSetValueEvents = function (eventEmitter, eventName, parentPath, property, value, prevValue) {
+    EmitEvents(eventEmitter, eventName, parentPath, property, value, prevValue);
 }
 
-var EmitDeleteKeyEvents = function (eventEmitter, parentPath, property) {
-    EmitEvents(eventEmitter, 'del', parentPath, property, undefined, undefined);
+var EmitDeleteKeyEvents = function (eventEmitter, eventName, parentPath, property) {
+    EmitEvents(eventEmitter, eventName, parentPath, property, undefined, undefined);
 }
 
 export {

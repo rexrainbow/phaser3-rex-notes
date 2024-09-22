@@ -1,68 +1,113 @@
 import { EmitAddKeyEvents, EmitSetValueEvents, EmitDeleteKeyEvents } from './EmitEvents.js';
 import GetPropertyPath from './GetPropertyPath.js';
 
-var AddMonitor = function (eventEmitter, data, parentPath) {
+var AddMonitor = function (data, eventEmitter, eventNames, parentPath, subKey) {
+    if (subKey) {
+        parentPath = GetPropertyPath(parentPath, subKey);
+    }
+
     var monitor;
     if (Array.isArray(data)) {
-        monitor = AddArrayMonitor(eventEmitter, data, parentPath);
+        monitor = AddArrayMonitor(data, eventEmitter, eventNames, parentPath);
     } else {
-        monitor = AddDictionaryMonitor(eventEmitter, data, parentPath);
+        monitor = AddDictionaryMonitor(data, eventEmitter, eventNames, parentPath);
     }
 
     for (var property in data) {
-        var child = data[property];
-        if ((child !== null) && (typeof (child) === 'object')) {
-            var propertyPath = GetPropertyPath(parentPath, property);
-            monitor[property] = AddMonitor(eventEmitter, child, propertyPath);
+        var value = data[property];
+
+        if (!IsObject(value)) {
+            // Number or string
+            EmitAddKeyEvents(eventEmitter, eventNames.addKey, parentPath, property, value, undefined);
+
         } else {
-            EmitAddKeyEvents(eventEmitter, parentPath, property, child, undefined);
+            // Dictionary or array
+            EmitAddKeyEvents(eventEmitter, eventNames.addKey, parentPath, property, value, undefined);
+
+            // Replace value by monitor
+            value = AddMonitor(value, eventEmitter, eventNames, parentPath, property);
+            Reflect.set(data, property, value);
+
         }
     }
 
     return monitor;
 }
 
-var AddDictionaryMonitor = function (eventEmitter, data, parentPath) {
+var IsObject = function (data) {
+    return (data !== null) && (typeof (data) === 'object');
+}
+
+var ProcessSetTargetAction = function (
+    target, property, value,
+    eventEmitter, eventNames, parentPath
+) {
+    var prevValue, eventName, fireEventCallback;
+    if (!Reflect.has(target, property)) {
+        // Add new key
+        prevValue = Reflect.get(target, property);
+        eventName = eventNames.addKey;
+        fireEventCallback = EmitAddKeyEvents;
+    } else {
+        // Set key
+        // prevValue = undefined;
+        eventName = eventNames.setKey;
+        fireEventCallback = EmitSetValueEvents
+    }
+
+    if (!IsObject(value)) {
+        // Number or string
+        Reflect.set(target, property, value);
+        fireEventCallback(eventEmitter, eventName, parentPath, property, value, prevValue);
+
+    } else {
+        // Dictionary or array
+        fireEventCallback(eventEmitter, eventName, parentPath, property, value, prevValue);
+        value = AddMonitor(value, eventEmitter, eventNames, parentPath, property);
+        Reflect.set(target, property, value);
+    }
+}
+
+var AddDictionaryMonitor = function (data, eventEmitter, eventNames, parentPath) {
     return new Proxy(data, {
         set(target, property, value) {
-            if (Reflect.has(target, property)) {
-                var prevValue = Reflect.get(target, property);
-                Reflect.set(target, property, value);
-                EmitSetValueEvents(eventEmitter, parentPath, property, value, prevValue);
-            } else {
-                Reflect.set(target, property, value);
-                EmitAddKeyEvents(eventEmitter, parentPath, property, value);
-            }
+            ProcessSetTargetAction(
+                target, property, value,
+                eventEmitter, eventNames, parentPath
+            );
+
             return true;
         },
 
         deleteProperty(target, property) {
             if (Reflect.has(target, property)) {
                 Reflect.deleteProperty(target, property);
-                EmitDeleteKeyEvents(eventEmitter, parentPath, property);
+                EmitDeleteKeyEvents(eventEmitter, eventNames.deleteKey, parentPath, property);
             }
             return true;
         }
     });
 }
 
-var AddArrayMonitor = function (eventEmitter, data, parentPath) {
+var AddArrayMonitor = function (data, eventEmitter, eventNames, parentPath) {
     return new Proxy(data, {
         set(target, property, value) {
             if (property === 'length') { // Skip length property
                 return true;
             }
 
-            var prevValue = Reflect.get(target, property);
-            Reflect.set(target, property, value);
-            EmitSetValueEvents(eventEmitter, parentPath, property, value, prevValue);
+            ProcessSetTargetAction(
+                target, property, value,
+                eventEmitter, eventNames, parentPath
+            );
+
             return true;
         },
 
         deleteProperty(target, property) {
             Reflect.deleteProperty(target, property);
             target.splice(property, 1);
-            EmitDeleteKeyEvents(eventEmitter, parentPath, property);
+            EmitDeleteKeyEvents(eventEmitter, eventNames.deleteKey, parentPath, property);
             return true;
         }
     });
