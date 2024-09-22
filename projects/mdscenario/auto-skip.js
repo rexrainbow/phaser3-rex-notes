@@ -24,6 +24,7 @@ class Demo extends Phaser.Scene {
             styles: {
                 TEXTBOX: TextBoxStyle,
             },
+            backgroundColor: 0x333333,
             rootLayer,
             multipleCamerasEnable: true,
             viewport

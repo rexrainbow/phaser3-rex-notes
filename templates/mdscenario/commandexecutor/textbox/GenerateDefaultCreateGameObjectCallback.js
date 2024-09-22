@@ -123,7 +123,7 @@ var GenerateDefaultCreateGameObjectCallback = function (
         if (clickTarget === null) {
             // No click target
         } else if (clickTarget.toLowerCase() === 'screen') {
-            touchEE = scene.input;
+            touchEE = commandExecutor.anyTouchDetector;
         } else {
             touchEE = gameObject.setInteractive();
         }
@@ -132,7 +132,9 @@ var GenerateDefaultCreateGameObjectCallback = function (
             gameObject.bindEvent(
                 touchEE,               // eventEmitter, 
                 'pointerdown',         // eventName
-                gameObject.emitClick   // callback
+                function () {          // callback
+                    gameObject.emitClick()
+                }
             );
         }
 
@@ -191,8 +193,8 @@ var GenerateDefaultCreateGameObjectCallback = function (
             gameObject.once('click', PageEnd1);
 
             // $fastTyping has higher priority then $autoNextPage
-            var fastTyping = eventSheetManager.getData('$fastTyping');
-            var autoNextPage = eventSheetManager.getData('$autoNextPage');
+            let fastTyping = eventSheetManager.getData('$fastTyping');
+            let autoNextPage = eventSheetManager.getData('$autoNextPage');
             if (fastTyping || autoNextPage) {
                 var autoNextPageDelay;
                 if (fastTyping) {
@@ -233,7 +235,28 @@ var GenerateDefaultCreateGameObjectCallback = function (
                     .once('click', OnClick)
             });
 
-        // TODO: Reset typing speed if $fastTyping is changed
+        // Change typing speed if $fastTyping is changed
+        let fastTyping = eventSheetManager.getData('$fastTyping');
+        gameObject.bindEvent(
+            scene.events,          // eventEmitter, 
+            'preupdate',           // eventName
+            function () {          // callback
+                let newValue = eventSheetManager.getData('$fastTyping');
+                if (fastTyping === newValue) {
+                    return;
+                }
+                fastTyping = newValue;
+
+                var typingSpeed;
+                if (fastTyping) {
+                    typingSpeed = eventSheetManager.getData('$fastTypingSpeed');
+                } else if (typingSpeed === undefined) {
+                    typingSpeed = gameObject.normalTypingSpeed;
+                }
+                gameObject.setTypingSpeed(typingSpeed);
+            }
+        );
+
 
         return gameObject;
     }
