@@ -45,12 +45,12 @@ var ProcessSetTargetAction = function (
     var prevValue, eventName, fireEventCallback;
     if (!Reflect.has(target, property)) {
         // Add new key
-        prevValue = Reflect.get(target, property);
+        prevValue = undefined;
         eventName = eventNames.addKey;
         fireEventCallback = EmitAddKeyEvents;
     } else {
         // Set key
-        // prevValue = undefined;
+        prevValue = Reflect.get(target, property);
         eventName = eventNames.setKey;
         fireEventCallback = EmitSetValueEvents
     }
