@@ -19260,6 +19260,19 @@
 	        return this;
 	    },
 
+	    addToBottomLayer(gameObjects) {
+	        var bottomLayer = this.getLayers()[0];
+	        this.addToLayer(bottomLayer.goName, gameObjects);
+	        return this;
+	    },
+
+	    addToTopLayer(gameObjects) {
+	        var layers = this.getLayers();
+	        var topLayer = layers[layers.length - 1];
+	        this.addToLayer(topLayer.goName, gameObjects);
+	        return this;
+	    },
+
 	    removeFromLayer(name, gameObject, addToScene) {
 	        var layer = this.getGO(name);
 	        if (!layer) {
@@ -19305,6 +19318,7 @@
 
 	        return this;
 	    },
+
 	};
 
 	var ScrollFactorMethods = {
@@ -24779,6 +24793,117 @@
 	    UILayer,
 	    UITopLayer
 	];
+
+	var GetRootGameObject = function (gameObject) {
+	    if (gameObject.parentContainer) {  // At a container
+	        return GetRootGameObject(gameObject.parentContainer);
+	    }
+
+	    var layer = GetLayer(gameObject);
+	    if (layer) {  // At a layer
+	        return GetRootGameObject(layer);
+	    }
+
+	    return gameObject;
+	};
+
+	var GetFirstRenderCamera = function (gameObject) {
+	    var cameraFilter = GetRootGameObject(gameObject).cameraFilter;
+	    var cameras = gameObject.scene.sys.cameras.cameras;
+	    var camera, isCameraIgnore;
+	    for (var i = 0, cnt = cameras.length; i < cnt; i++) {
+	        camera = cameras[i];
+
+	        isCameraIgnore = (cameraFilter & camera.id) > 0;
+	        if (!isCameraIgnore) {
+	            return camera;
+	        }
+	    }
+
+	    return null;
+	};
+
+	class FullWindow extends ComponentBase {
+	    constructor(gameObject, config) {
+	        super(gameObject);
+	        // this.parent = gameObject;
+
+	        this.targetCamera = undefined;
+	        this.boot();
+	    }
+
+	    boot() {
+	        this.scene.sys.events.on('prerender', this.resize, this);
+	    }
+
+	    destroy() {
+	        if (!this.scene) {
+	            return;
+	        }
+
+	        this.scene.sys.events.off('prerender', this.resize, this);
+
+	        super.destroy();
+	    }
+
+
+	    resize() {
+	        var scene = this.scene;
+	        var gameObject = this.parent;
+
+	        var camera = GetFirstRenderCamera(gameObject);
+	        if (!camera) {
+	            return;
+	        }
+
+	        gameObject
+	            .setScrollFactor(0)
+	            .setOrigin(0.5);
+
+	        var gameSize = scene.sys.scale.gameSize;
+	        var gameWidth = gameSize.width,
+	            gameHeight = gameSize.height,
+	            scale = 1 / camera.zoom;
+
+	        // Origin is fixed to (0.5,0.5)
+	        var x = gameWidth / 2,
+	            y = gameHeight / 2;
+
+	        var width = gameWidth * scale,
+	            height = gameHeight * scale;
+
+	        if ((gameObject.x !== x) || (gameObject.y !== y)) {
+	            gameObject.setPosition(x, y);
+	        }
+
+	        if ((gameObject.width !== width) || (gameObject.height !== height)) {
+	            gameObject.setSize(width, height);
+	        }
+
+	    }
+
+
+	}
+
+	const Rectangle$4 = Phaser.GameObjects.Rectangle;
+
+	let FullWindowRectangle$1 = class FullWindowRectangle extends Rectangle$4 {
+	    constructor(scene, color, alpha) {
+	        super(scene, 0, 0, 2, 2, color, 1);
+
+	        this.fullWindow = new FullWindow(this);
+
+	        this.setAlpha(alpha);
+	    }
+
+	    get tint() {
+	        return this.fillColor;
+	    }
+
+	    set tint(value) {
+	        this.setFillStyle(value, this.fillAlpha);
+	    }
+	};
 
 	// Game object type name
 	const BG = 'BG';                 // layer: BGLayer
@@ -30336,7 +30461,7 @@
 	}
 	var PEN_CONFIG = {};
 
-	const Rectangle$4 = Phaser.Geom.Rectangle;
+	const Rectangle$3 = Phaser.Geom.Rectangle;
 
 	var RectanglePool = new Stack();
 	class HitAreaManager {
@@ -30360,7 +30485,7 @@
 	    add(x, y, width, height, data) {
 	        var rectangle = RectanglePool.pop();
 	        if (rectangle === null) {
-	            rectangle = new Rectangle$4(x, y, width, height);
+	            rectangle = new Rectangle$3(x, y, width, height);
 	        } else {
 	            rectangle.setTo(x, y, width, height);
 	        }
@@ -32728,7 +32853,7 @@
 
 	var globPoint$1;
 
-	const Rectangle$3 = Phaser.Geom.Rectangle;
+	const Rectangle$2 = Phaser.Geom.Rectangle;
 
 	var Contains$1 = function (canvasX, canvasY) {
 	    if ((this.width === 0) || (this.height === 0)) {
@@ -32741,7 +32866,7 @@
 
 	var GetBobBounds = function (bob) {
 	    if (bobBounds === undefined) {
-	        bobBounds = new Rectangle$3();
+	        bobBounds = new Rectangle$2();
 	    }
 
 	    var x = bob.drawTLX,
@@ -40296,106 +40421,15 @@
 	    return new HiddenTextEdit(parent, config);
 	};
 
-	var GetRootGameObject = function (gameObject) {
-	    if (gameObject.parentContainer) {  // At a container
-	        return GetRootGameObject(gameObject.parentContainer);
-	    }
-
-	    var layer = GetLayer(gameObject);
-	    if (layer) {  // At a layer
-	        return GetRootGameObject(layer);
-	    }
-
-	    return gameObject;
-	};
-
-	var GetFirstRenderCamera = function (gameObject) {
-	    var cameraFilter = GetRootGameObject(gameObject).cameraFilter;
-	    var cameras = gameObject.scene.sys.cameras.cameras;
-	    var camera, isCameraIgnore;
-	    for (var i = 0, cnt = cameras.length; i < cnt; i++) {
-	        camera = cameras[i];
-
-	        isCameraIgnore = (cameraFilter & camera.id) > 0;
-	        if (!isCameraIgnore) {
-	            return camera;
-	        }
-	    }
-
-	    return null;
-	};
-
-	class FullWindow extends ComponentBase {
-	    constructor(gameObject, config) {
-	        super(gameObject);
-	        // this.parent = gameObject;
-
-	        this.targetCamera = undefined;
-	        this.boot();
-	    }
-
-	    boot() {
-	        this.scene.sys.events.on('prerender', this.resize, this);
-	    }
-
-	    destroy() {
-	        if (!this.scene) {
-	            return;
-	        }
-
-	        this.scene.sys.events.off('prerender', this.resize, this);
-
-	        super.destroy();
-	    }
-
-
-	    resize() {
-	        var scene = this.scene;
-	        var gameObject = this.parent;
-
-	        var camera = GetFirstRenderCamera(gameObject);
-	        if (!camera) {
-	            return;
-	        }
-
-	        gameObject
-	            .setScrollFactor(0)
-	            .setOrigin(0.5);
-
-	        var gameSize = scene.sys.scale.gameSize;
-	        var gameWidth = gameSize.width,
-	            gameHeight = gameSize.height,
-	            scale = 1 / camera.zoom;
-
-	        // Origin is fixed to (0.5,0.5)
-	        var x = gameWidth / 2,
-	            y = gameHeight / 2;
-
-	        var width = gameWidth * scale,
-	            height = gameHeight * scale;
-
-	        if ((gameObject.x !== x) || (gameObject.y !== y)) {
-	            gameObject.setPosition(x, y);
-	        }
-
-	        if ((gameObject.width !== width) || (gameObject.height !== height)) {
-	            gameObject.setSize(width, height);
-	        }
-
-	    }
-
-
-	}
-
 	const Zone$2 = Phaser.GameObjects.Zone;
 
-	let FullWindowRectangle$1 = class FullWindowRectangle extends Zone$2 {
+	class FullWindowRectangle extends Zone$2 {
 	    constructor(scene) {
 	        super(scene, 0, 0, 2, 2);
 
 	        this.fullWindow = new FullWindow(this);
 	    }
-	};
+	}
 
 	var InjectDefaultConfig = function (scene, config) {
 	    var isSingleLineMode = !config.textArea;
@@ -40431,7 +40465,7 @@
 	    }
 
 	    if (config.clickOutSideTarget === true) {
-	        var clickOutSideTarget = new FullWindowRectangle$1(scene);
+	        var clickOutSideTarget = new FullWindowRectangle(scene);
 	        scene.add.existing(clickOutSideTarget);
 
 	        config.clickOutSideTarget = clickOutSideTarget;
@@ -43125,7 +43159,7 @@
 
 	const GetTint$1 = Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 
-	let Rectangle$2 = class Rectangle extends BaseGeom {
+	let Rectangle$1 = class Rectangle extends BaseGeom {
 	    constructor(x, y, width, height) {
 	        if (x === undefined) { x = 0; }
 	        if (y === undefined) { y = 0; }
@@ -48393,15 +48427,15 @@
 	    },
 	};
 
-	const Rectangle$1 = Phaser.Geom.Rectangle;
+	const Rectangle = Phaser.Geom.Rectangle;
 	const Union = Phaser.Geom.Rectangle.Union;
 
 	var GetBoundsOfGameObjects = function (gameObjects, out) {
 	    if (out === undefined) {
-	        out = new Rectangle$1();
+	        out = new Rectangle();
 	    } else if (out === true) {
 	        if (GlobRect$1 === undefined) {
-	            GlobRect$1 = new Rectangle$1();
+	            GlobRect$1 = new Rectangle();
 	        }
 	        out = GlobRect$1;
 	    }
@@ -52830,26 +52864,6 @@
 	    methods$v,
 	);
 
-	const Rectangle = Phaser.GameObjects.Rectangle;
-
-	class FullWindowRectangle extends Rectangle {
-	    constructor(scene, color, alpha) {
-	        super(scene, 0, 0, 2, 2, color, 1);
-
-	        this.fullWindow = new FullWindow(this);
-
-	        this.setAlpha(alpha);
-	    }
-
-	    get tint() {
-	        return this.fillColor;
-	    }
-
-	    set tint(value) {
-	        this.setFillStyle(value, this.fillAlpha);
-	    }
-	}
-
 	const GetValue$2E = Phaser.Utils.Objects.GetValue;
 
 	class TouchEventStop extends ComponentBase {
@@ -52956,7 +52970,7 @@
 
 	const GetValue$2D = Phaser.Utils.Objects.GetValue;
 
-	class Cover extends FullWindowRectangle {
+	class Cover extends FullWindowRectangle$1 {
 	    constructor(scene, config) {
 	        var fillColor = GetValue$2D(config, 'color', 0x0);
 	        var fillAlpha = GetValue$2D(config, 'alpha', 0.8);
@@ -57123,7 +57137,7 @@
 	    ellipse: Ellipse,
 	    line: Line,
 	    lines: Lines,
-	    rectangle: Rectangle$2,
+	    rectangle: Rectangle$1,
 	    roundRectangle: RoundRectangle,
 	    triangle: Triangle$1
 	};
@@ -89899,23 +89913,25 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	            clickTarget = eventSheetManager.getData('$clickTarget');
 	        }
 	        if (clickTarget === null) ; else if (clickTarget.toLowerCase() === 'screen') {
-	            touchEE = scene.input;
+	            touchEE = commandExecutor.anyTouchDetector;
 	        } else {
 	            touchEE = gameObject.setInteractive();
 	        }
 
 	        if (touchEE) {
-	            AddEvent(
-	                gameObject,              // target
-	                touchEE, 'pointerdown',  // eventEmitter, eventName
-	                gameObject.emitClick     // callback
+	            gameObject.bindEvent(
+	                touchEE,               // eventEmitter, 
+	                'pointerdown',         // eventName
+	                function () {          // callback
+	                    gameObject.emitClick();
+	                }
 	            );
 	        }
 
-	        AddEvent(
-	            gameObject,                       // target
-	            scene.input.keyboard, 'keydown',  // eventEmitter, eventName
-	            function (event) {                // callback
+	        gameObject.bindEvent(
+	            scene.input.keyboard,      // eventEmitter
+	            'keydown',                 // eventName
+	            function (event) {         // callback
 	                if (clickShortcutKeys === undefined) {
 	                    clickShortcutKeys = eventSheetManager.getData('$clickShortcutKeys');
 	                }
@@ -89967,8 +89983,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	            gameObject.once('click', PageEnd1);
 
 	            // $fastTyping has higher priority then $autoNextPage
-	            var fastTyping = eventSheetManager.getData('$fastTyping');
-	            var autoNextPage = eventSheetManager.getData('$autoNextPage');
+	            let fastTyping = eventSheetManager.getData('$fastTyping');
+	            let autoNextPage = eventSheetManager.getData('$autoNextPage');
 	            if (fastTyping || autoNextPage) {
 	                var autoNextPageDelay;
 	                if (fastTyping) {
@@ -90009,7 +90025,28 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	                    .once('click', OnClick);
 	            });
 
-	        // TODO: Reset typing speed if $fastTyping is changed
+	        // Change typing speed if $fastTyping is changed
+	        let fastTyping = eventSheetManager.getData('$fastTyping');
+	        gameObject.bindEvent(
+	            scene.events,          // eventEmitter, 
+	            'preupdate',           // eventName
+	            function () {          // callback
+	                let newValue = eventSheetManager.getData('$fastTyping');
+	                if (fastTyping === newValue) {
+	                    return;
+	                }
+	                fastTyping = newValue;
+
+	                var typingSpeed;
+	                if (fastTyping) {
+	                    typingSpeed = eventSheetManager.getData('$fastTypingSpeed');
+	                } else if (typingSpeed === undefined) {
+	                    typingSpeed = gameObject.normalTypingSpeed;
+	                }
+	                gameObject.setTypingSpeed(typingSpeed);
+	            }
+	        );
+
 
 	        return gameObject;
 	    }
@@ -90595,6 +90632,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
 	var CreateCommandExecutor = function (scene, config) {
 	    var {
+	        backgroundColor = 0,
 	        layerDepth,
 	        rootLayer,
 	        multipleCamerasEnable = false,
@@ -90614,6 +90652,12 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	    for (var i = 0, cnt = RegisterHandlers$1.length; i < cnt; i++) {
 	        RegisterHandlers$1[i](commandExecutor, config);
 	    }
+
+	    // Add anyTouchDetector to bottomLayer
+	    var anyTouchDetector = new FullWindowRectangle$1(scene, backgroundColor, 1).setInteractive();
+	    scene.add.existing(anyTouchDetector);
+	    commandExecutor.sys.layerManager.addToBottomLayer(anyTouchDetector);
+	    commandExecutor.anyTouchDetector = anyTouchDetector;
 
 	    return commandExecutor;
 	};

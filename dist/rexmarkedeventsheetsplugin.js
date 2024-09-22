@@ -19227,6 +19227,19 @@
 	        return this;
 	    },
 
+	    addToBottomLayer(gameObjects) {
+	        var bottomLayer = this.getLayers()[0];
+	        this.addToLayer(bottomLayer.goName, gameObjects);
+	        return this;
+	    },
+
+	    addToTopLayer(gameObjects) {
+	        var layers = this.getLayers();
+	        var topLayer = layers[layers.length - 1];
+	        this.addToLayer(topLayer.goName, gameObjects);
+	        return this;
+	    },
+
 	    removeFromLayer(name, gameObject, addToScene) {
 	        var layer = this.getGO(name);
 	        if (!layer) {
@@ -19272,6 +19285,7 @@
 
 	        return this;
 	    },
+
 	};
 
 	var ScrollFactorMethods = {
