@@ -91,6 +91,7 @@ var Typing = function (
         } else {
             gameObject.more(text, typingSpeed);
         }
+        gameObject.complete2Flag = false;
         // Fire 'start' event, see GenerateDefaultCreateGameObjectCallback
     }
 
