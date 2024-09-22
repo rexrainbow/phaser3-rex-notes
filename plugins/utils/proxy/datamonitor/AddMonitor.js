@@ -1,5 +1,6 @@
 import { EmitAddKeyEvents, EmitSetValueEvents, EmitDeleteKeyEvents } from './EmitEvents.js';
 import GetPropertyPath from './GetPropertyPath.js';
+import IsPlainObject from '../../object/IsPlainObject.js';
 
 var AddMonitor = function (data, eventEmitter, eventNames, parentPath, subKey) {
     if (subKey) {
@@ -16,7 +17,7 @@ var AddMonitor = function (data, eventEmitter, eventNames, parentPath, subKey) {
     for (var property in data) {
         var value = data[property];
 
-        if (!IsObject(value)) {
+        if (!IsPlainObject(value)) {
             // Number or string
             EmitAddKeyEvents(eventEmitter, eventNames.addKey, parentPath, property, value, undefined);
 
@@ -32,10 +33,6 @@ var AddMonitor = function (data, eventEmitter, eventNames, parentPath, subKey) {
     }
 
     return monitor;
-}
-
-var IsObject = function (data) {
-    return (data !== null) && (typeof (data) === 'object');
 }
 
 var ProcessSetTargetAction = function (
@@ -55,7 +52,7 @@ var ProcessSetTargetAction = function (
         fireEventCallback = EmitSetValueEvents
     }
 
-    if (!IsObject(value)) {
+    if (!IsPlainObject(value)) {
         // Number or string
         Reflect.set(target, property, value);
         fireEventCallback(eventEmitter, eventName, parentPath, property, value, prevValue);
