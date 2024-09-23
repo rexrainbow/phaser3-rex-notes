@@ -819,6 +819,129 @@ declare class BaseSizer extends ContainerLite {
         once?: boolean,
     ): this;
 
+    bindScenePreupdateEvent(
+        callback: Function,
+        scope?: unknown,
+        once?: boolean,
+    ): this;
+
+    bindScenePreupdateEvent(
+        gameObject: Phaser.GameObjects.GameObject,
+        callback: Function,
+        scope?: unknown,
+        once?: boolean,
+    ): this;
+
+    bindSceneUpdateEvent(
+        callback: Function,
+        scope?: unknown,
+        once?: boolean,
+    ): this;
+
+    bindSceneUpdateEvent(
+        gameObject: Phaser.GameObjects.GameObject,
+        callback: Function,
+        scope?: unknown,
+        once?: boolean,
+    ): this;
+
+    bindScenePostupdateEvent(
+        callback: Function,
+        scope?: unknown,
+        once?: boolean,
+    ): this;
+
+    bindScenePostupdateEvent(
+        gameObject: Phaser.GameObjects.GameObject,
+        callback: Function,
+        scope?: unknown,
+        once?: boolean,
+    ): this;
+
+    bindSceneRenderEvent(
+        callback: Function,
+        scope?: unknown,
+        once?: boolean,
+    ): this;
+
+    bindSceneRenderEvent(
+        gameObject: Phaser.GameObjects.GameObject,
+        callback: Function,
+        scope?: unknown,
+        once?: boolean,
+    ): this;
+
+    bindScenePauseEvent(
+        callback: Function,
+        scope?: unknown,
+        once?: boolean,
+    ): this;
+
+    bindScenePauseEvent(
+        gameObject: Phaser.GameObjects.GameObject,
+        callback: Function,
+        scope?: unknown,
+        once?: boolean,
+    ): this;
+
+    bindSceneResumeEvent(
+        callback: Function,
+        scope?: unknown,
+        once?: boolean,
+    ): this;
+
+    bindSceneResumeEvent(
+        gameObject: Phaser.GameObjects.GameObject,
+        callback: Function,
+        scope?: unknown,
+        once?: boolean,
+    ): this;
+
+    bindSceneSleepEvent(
+        callback: Function,
+        scope?: unknown,
+        once?: boolean,
+    ): this;
+
+    bindSceneSleepEvent(
+        gameObject: Phaser.GameObjects.GameObject,
+        callback: Function,
+        scope?: unknown,
+        once?: boolean,
+    ): this;
+
+    bindSceneWakeEvent(
+        callback: Function,
+        scope?: unknown,
+        once?: boolean,
+    ): this;
+
+    bindSceneWakeEvent(
+        gameObject: Phaser.GameObjects.GameObject,
+        callback: Function,
+        scope?: unknown,
+        once?: boolean,
+    ): this;
+
+    bindSceneShutdownEvent(
+        callback: Function,
+        scope?: unknown,
+        once?: boolean,
+    ): this;
+
+    bindSceneShutdownEvent(
+        gameObject: Phaser.GameObjects.GameObject,
+        callback: Function,
+        scope?: unknown,
+        once?: boolean,
+    ): this;
+
+    bindSceneResizeEvent(
+        callback: Function,
+        scope?: unknown,
+        once?: boolean,
+    ): this;
+
     getShownChildren(
         out?: Phaser.GameObjects.GameObject[]
     ): Phaser.GameObjects.GameObject[];

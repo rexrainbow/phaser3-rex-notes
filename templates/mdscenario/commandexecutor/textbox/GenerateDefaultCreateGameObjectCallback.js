@@ -239,44 +239,40 @@ var GenerateDefaultCreateGameObjectCallback = function (
         // Change typing speed if $fastTyping is changed
         var fastTypingSave = eventSheetManager.getData('$fastTyping');
         var autoNextPageSave = eventSheetManager.getData('$autoNextPage');
-        gameObject.bindEvent(
-            scene.events,          // eventEmitter, 
-            'preupdate',           // eventName
-            function () {          // callback
-                let fastTyping = eventSheetManager.getData('$fastTyping');
-                let autoNextPage = eventSheetManager.getData('$autoNextPage');
+        gameObject.bindScenePreupdateEvent(function () {
+            let fastTyping = eventSheetManager.getData('$fastTyping');
+            let autoNextPage = eventSheetManager.getData('$autoNextPage');
 
-                if (fastTyping !== fastTypingSave) {
-                    if (gameObject.isTyping) {
-                        // Change typing speed
-                        let typingSpeed;
-                        if (fastTyping) {
-                            typingSpeed = eventSheetManager.getData('$fastTypingSpeed');
-                        } else if (typingSpeed === undefined) {
-                            typingSpeed = gameObject.normalTypingSpeed;
-                        }
-                        gameObject.setTypingSpeed(typingSpeed);
-                    } else {
-                        if (fastTyping) {
-                            // Start typing next 
-                            gameObject.emitClick();
-                        }
+            if (fastTyping !== fastTypingSave) {
+                if (gameObject.isTyping) {
+                    // Change typing speed
+                    let typingSpeed;
+                    if (fastTyping) {
+                        typingSpeed = eventSheetManager.getData('$fastTypingSpeed');
+                    } else if (typingSpeed === undefined) {
+                        typingSpeed = gameObject.normalTypingSpeed;
                     }
-                } else if (autoNextPage !== autoNextPageSave) {
-                    if (gameObject.isTyping) {
-                        // Do nothing
-                    } else {
-                        if (autoNextPage) {
-                            // Start typing next page
-                            gameObject.emitClick();
-                        }
+                    gameObject.setTypingSpeed(typingSpeed);
+                } else {
+                    if (fastTyping) {
+                        // Start typing next 
+                        gameObject.emitClick();
                     }
                 }
-
-                fastTypingSave = fastTyping;
-                autoNextPageSave = autoNextPage;
+            } else if (autoNextPage !== autoNextPageSave) {
+                if (gameObject.isTyping) {
+                    // Do nothing
+                } else {
+                    if (autoNextPage) {
+                        // Start typing next page
+                        gameObject.emitClick();
+                    }
+                }
             }
-        );
+
+            fastTypingSave = fastTyping;
+            autoNextPageSave = autoNextPage;
+        });
 
 
         return gameObject;

@@ -340,10 +340,6 @@ Preserve word in a scene.
     ```javascript
     scene.events.on("destroy", function () {});
     ```
-- Resize
-    ```javascript
-    scene.events.on("resize", function () {});
-    ```
 - Boot
     ```javascript
     scene.events.on("boot", function () {});
