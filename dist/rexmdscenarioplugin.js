@@ -53416,6 +53416,21 @@
 	    }
 	};
 
+	var BindSceneEvent = function (eventName, gameObject, callback, scope, once) {
+	    if (IsFunction(gameObject)) {
+	        once = scope;
+	        scope = callback;
+	        callback = gameObject;
+	        gameObject = this;
+	    }
+
+	    var eventEmitter = this.scene.events;
+
+	    this.bindEvent(gameObject, eventEmitter, eventName, callback, scope, once);
+
+	    return this;
+	};
+
 	var BindEventMethods = {
 	    bindEvent(gameObject, eventEmitter, eventName, callback, scope, once) {
 	        if (typeof (eventEmitter) === 'string') {
@@ -53429,6 +53444,51 @@
 
 	        BindEventWithGameObject(gameObject, eventEmitter, eventName, callback, scope, once);
 
+	        return this;
+	    },
+
+	    bindScenePreupdateEvent(gameObject, callback, scope, once) {
+	        BindSceneEvent.call(this, 'preupdate', gameObject, callback, scope, once);
+	        return this;
+	    },
+
+	    bindSceneUpdateEvent(gameObject, callback, scope, once) {
+	        BindSceneEvent.call(this, 'update', gameObject, callback, scope, once);
+	        return this;
+	    },
+
+	    bindScenePostupdateEvent(gameObject, callback, scope, once) {
+	        BindSceneEvent.call(this, 'postupdate', gameObject, callback, scope, once);
+	        return this;
+	    },
+
+	    bindSceneRenderEvent(gameObject, callback, scope, once) {
+	        BindSceneEvent.call(this, 'render', gameObject, callback, scope, once);
+	        return this;
+	    },
+
+	    bindScenePauseEvent(gameObject, callback, scope, once) {
+	        BindSceneEvent.call(this, 'pause', gameObject, callback, scope, once);
+	        return this;
+	    },
+
+	    bindSceneResumeEvent(gameObject, callback, scope, once) {
+	        BindSceneEvent.call(this, 'resume', gameObject, callback, scope, once);
+	        return this;
+	    },
+
+	    bindSceneSleepEvent(gameObject, callback, scope, once) {
+	        BindSceneEvent.call(this, 'sleep', gameObject, callback, scope, once);
+	        return this;
+	    },
+
+	    bindSceneWakeEvent(gameObject, callback, scope, once) {
+	        BindSceneEvent.call(this, 'wake', gameObject, callback, scope, once);
+	        return this;
+	    },
+
+	    bindSceneShutdownEvent(gameObject, callback, scope, once) {
+	        BindSceneEvent.call(this, 'shutdown', gameObject, callback, scope, once);
 	        return this;
 	    },
 
@@ -90091,42 +90151,38 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	        // Change typing speed if $fastTyping is changed
 	        var fastTypingSave = eventSheetManager.getData('$fastTyping');
 	        var autoNextPageSave = eventSheetManager.getData('$autoNextPage');
-	        gameObject.bindEvent(
-	            scene.events,          // eventEmitter, 
-	            'preupdate',           // eventName
-	            function () {          // callback
-	                let fastTyping = eventSheetManager.getData('$fastTyping');
-	                let autoNextPage = eventSheetManager.getData('$autoNextPage');
+	        gameObject.bindScenePreupdateEvent(function () {
+	            let fastTyping = eventSheetManager.getData('$fastTyping');
+	            let autoNextPage = eventSheetManager.getData('$autoNextPage');
 
-	                if (fastTyping !== fastTypingSave) {
-	                    if (gameObject.isTyping) {
-	                        // Change typing speed
-	                        let typingSpeed;
-	                        if (fastTyping) {
-	                            typingSpeed = eventSheetManager.getData('$fastTypingSpeed');
-	                        } else if (typingSpeed === undefined) {
-	                            typingSpeed = gameObject.normalTypingSpeed;
-	                        }
-	                        gameObject.setTypingSpeed(typingSpeed);
-	                    } else {
-	                        if (fastTyping) {
-	                            // Start typing next 
-	                            gameObject.emitClick();
-	                        }
+	            if (fastTyping !== fastTypingSave) {
+	                if (gameObject.isTyping) {
+	                    // Change typing speed
+	                    let typingSpeed;
+	                    if (fastTyping) {
+	                        typingSpeed = eventSheetManager.getData('$fastTypingSpeed');
+	                    } else if (typingSpeed === undefined) {
+	                        typingSpeed = gameObject.normalTypingSpeed;
 	                    }
-	                } else if (autoNextPage !== autoNextPageSave) {
-	                    if (gameObject.isTyping) ; else {
-	                        if (autoNextPage) {
-	                            // Start typing next page
-	                            gameObject.emitClick();
-	                        }
+	                    gameObject.setTypingSpeed(typingSpeed);
+	                } else {
+	                    if (fastTyping) {
+	                        // Start typing next 
+	                        gameObject.emitClick();
 	                    }
 	                }
-
-	                fastTypingSave = fastTyping;
-	                autoNextPageSave = autoNextPage;
+	            } else if (autoNextPage !== autoNextPageSave) {
+	                if (gameObject.isTyping) ; else {
+	                    if (autoNextPage) {
+	                        // Start typing next page
+	                        gameObject.emitClick();
+	                    }
+	                }
 	            }
-	        );
+
+	            fastTypingSave = fastTyping;
+	            autoNextPageSave = autoNextPage;
+	        });
 
 
 	        return gameObject;

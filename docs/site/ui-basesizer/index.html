@@ -11645,8 +11645,38 @@ Use <a href="../ui-buttons/">Button</a> if user needs to enable/disable input be
 </li>
 </ul>
 <h3 id="bind-event">Bind event<a class="headerlink" href="#bind-event" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">bindEvent</span><span class="p">(</span><span class="nx">eventEmitter</span><span class="p">,</span><span class="w"> </span><span class="nx">eventName</span><span class="p">,</span><span class="w"> </span><span class="nx">callback</span><span class="p">,</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
-</code></pre></div>
+<ul>
+<li>Bind event
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">bindEvent</span><span class="p">(</span><span class="nx">eventEmitter</span><span class="p">,</span><span class="w"> </span><span class="nx">eventName</span><span class="p">,</span><span class="w"> </span><span class="nx">callback</span><span class="p">,</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Bind scene's <code>'preupdate'</code> event
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">bindScenePreupdateEvent</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Bind scene's <code>'update'</code> event
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">bindSceneUpdateEvent</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Bind scene's <code>'postupdate'</code> event
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">bindScenePostupdateEvent</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Bind scene's <code>'render'</code> event
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">bindSceneRenderEvent</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Bind scene's <code>'pause'</code> event
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">bindScenePauseEvent</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Bind scene's <code>'resume'</code> event
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">bindSceneResumeEvent</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Bind scene's <code>'sleep'</code> event
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">bindSceneSleepEvent</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Bind scene's <code>'wake'</code> event
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">bindSceneWakeEvent</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Bind scene's <code>'shutdown'</code> event
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">bindSceneShutdownEvent</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
 <p>Will remove this event from eventEmitter when destroying sizer.</p>
 <h3 id="pin-game-object">Pin game object<a class="headerlink" href="#pin-game-object" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">pin</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>

@@ -1207,9 +1207,46 @@ sizer.setChildrenInteractive({
 
 ### Bind event
 
-```javascript
-sizer.bindEvent(eventEmitter, eventName, callback, scope);
-```
+- Bind event
+    ```javascript
+    sizer.bindEvent(eventEmitter, eventName, callback, scope);
+    ```
+- Bind scene's `'preupdate'` event
+    ```javascript
+    sizer.bindScenePreupdateEvent(callback, scope);
+    ```
+- Bind scene's `'update'` event
+    ```javascript
+    sizer.bindSceneUpdateEvent(callback, scope);
+    ```
+- Bind scene's `'postupdate'` event
+    ```javascript
+    sizer.bindScenePostupdateEvent(callback, scope);
+    ```
+- Bind scene's `'render'` event
+    ```javascript
+    sizer.bindSceneRenderEvent(callback, scope);
+    ```
+- Bind scene's `'pause'` event
+    ```javascript
+    sizer.bindScenePauseEvent(callback, scope);
+    ```
+- Bind scene's `'resume'` event
+    ```javascript
+    sizer.bindSceneResumeEvent(callback, scope);
+    ```
+- Bind scene's `'sleep'` event
+    ```javascript
+    sizer.bindSceneSleepEvent(callback, scope);
+    ```
+- Bind scene's `'wake'` event
+    ```javascript
+    sizer.bindSceneWakeEvent(callback, scope);
+    ```
+- Bind scene's `'shutdown'` event
+    ```javascript
+    sizer.bindSceneShutdownEvent(callback, scope);
+    ```
 
 Will remove this event from eventEmitter when destroying sizer.
 
