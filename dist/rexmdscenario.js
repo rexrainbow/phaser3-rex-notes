@@ -90044,7 +90044,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
 	            gameObject.once('click', PageEnd1);
 
-	            // $fastTyping has higher priority then $autoNextPage
+	            // $fastTyping has higher priority than $autoNextPage
 	            let fastTyping = eventSheetManager.getData('$fastTyping');
 	            let autoNextPage = eventSheetManager.getData('$autoNextPage');
 	            if (fastTyping || autoNextPage) {
@@ -90110,7 +90110,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	                        gameObject.emitClick();
 	                    }
 	                }
-	            } else if (autoNextPage !== autoNextPageSave) {
+	            } else if ((autoNextPage !== autoNextPageSave) && !fastTyping) {  // $fastTyping has higher priority than $autoNextPage
 	                if (gameObject.isTyping) ; else {
 	                    if (autoNextPage) {
 	                        // Start typing next page

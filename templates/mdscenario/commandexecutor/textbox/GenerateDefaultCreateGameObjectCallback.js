@@ -193,7 +193,7 @@ var GenerateDefaultCreateGameObjectCallback = function (
 
             gameObject.once('click', PageEnd1);
 
-            // $fastTyping has higher priority then $autoNextPage
+            // $fastTyping has higher priority than $autoNextPage
             let fastTyping = eventSheetManager.getData('$fastTyping');
             let autoNextPage = eventSheetManager.getData('$autoNextPage');
             if (fastTyping || autoNextPage) {
@@ -259,7 +259,7 @@ var GenerateDefaultCreateGameObjectCallback = function (
                         gameObject.emitClick();
                     }
                 }
-            } else if (autoNextPage !== autoNextPageSave) {
+            } else if ((autoNextPage !== autoNextPageSave) && !fastTyping) {  // $fastTyping has higher priority than $autoNextPage
                 if (gameObject.isTyping) {
                     // Do nothing
                 } else {
