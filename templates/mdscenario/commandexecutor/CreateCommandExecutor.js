@@ -1,7 +1,7 @@
 import CommandExecutor from '../../../plugins/commandexecutor.js';
 import GetViewport from '../../../plugins/utils/system/GetViewport.js';
 import { LayerConfigMultipleCamras, LayerConfigSingleCamera } from '../const/Layers.js';
-import FullWindowZone from '../../../plugins/fullwindowzone.js';
+import CreateAnyTouchDector from './CreateAnyTouchDector.js';
 import RegisterBackgroundType from './background/RegisterBackgroundType.js';
 import RegisterSpriteType from './sprite/RegisterSpriteType.js';
 import RegisterTextboxType from './textbox/RegisterTextboxType.js';
@@ -21,6 +21,8 @@ const RegisterHandlers = [
 
 var CreateCommandExecutor = function (scene, config) {
     var {
+        backgroundColor = 0x0,
+        backgroundAlpha = 1,
         layerDepth,
         rootLayer,
         multipleCamerasEnable = false,
@@ -42,8 +44,7 @@ var CreateCommandExecutor = function (scene, config) {
     }
 
     // Add anyTouchDetector to bottomLayer
-    var anyTouchDetector = new FullWindowZone(scene).setInteractive();
-    scene.add.existing(anyTouchDetector);
+    var anyTouchDetector = new CreateAnyTouchDector(scene, backgroundColor, backgroundAlpha);
     commandExecutor.sys.layerManager.addToBottomLayer(anyTouchDetector);
     commandExecutor.anyTouchDetector = anyTouchDetector;
 
