@@ -89880,7 +89880,9 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
 	            frameDelimiter = defaultFrameDelimiter,
 
-	            clickTarget, clickShortcutKeys,
+	            clickTarget,
+	            clickShortcutKeys,
+	            fastTypingShortcutKeys,
 
 	            commandExecutor, eventSheetManager, eventsheet,
 	        } = {},
@@ -90123,6 +90125,37 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	            autoNextPageSave = autoNextPage;
 	        });
 
+
+	        // Set $fastTyping to true/false if any fastTypingShortcutKeys is down/up
+	        var SetFastTypingVariableByKeyboard = function (event, fastTypingValue) {
+	            if (fastTypingShortcutKeys === undefined) {
+	                fastTypingShortcutKeys = eventSheetManager.getData('$fastTypingShortcutKeys');
+	            }
+	            if (!fastTypingShortcutKeys) {
+	                return;
+	            }
+
+	            var keys = fastTypingShortcutKeys.split('|');
+	            var inputKey = KeyMap[event.keyCode];
+	            if (keys.indexOf(inputKey) !== -1) {
+	                eventSheetManager.setData('$fastTyping', fastTypingValue);
+	            }
+	        };
+
+	        gameObject.bindEvent(
+	            scene.input.keyboard,      // eventEmitter
+	            'keydown',                 // eventName
+	            function (event) {         // callback
+	                SetFastTypingVariableByKeyboard(event, true);
+	            }
+	        );
+	        gameObject.bindEvent(
+	            scene.input.keyboard,      // eventEmitter
+	            'keyup',                   // eventName
+	            function (event) {         // callback
+	                SetFastTypingVariableByKeyboard(event, false);
+	            }
+	        );
 
 	        return gameObject;
 	    }
@@ -90773,14 +90806,14 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	    $autoNextPageDelay: 500,            // TEXTBOX.typing
 	    $fastTyping: false,                 // TEXTBOX.typing
 	    $fastTypingSpeed: 20,               // TEXTBOX.typing
+	    $clickTarget: 'screen',             // TEXTBOX
+	    $clickShortcutKeys: 'SPACE|ENTER',  // TEXTBOX.typing
+	    $fastTypingShortcutKeys: 'CTRL',    // TEXTBOX.typing
 
 	    $transitionDuration: 500,           // SPRITE.cross, BG.cross
 	    $tintOthers: 0x333333,              // SPRITE.focus
 	    $shakeDuration: 500,                // SPRITE.shake, BG.shake, TEXTBOX.shake, TITLE.shake, CHOICE.shake
 	    $shakeMagnitude: 50,                // SPRITE.shake, BG.shake, TEXTBOX.shake, TITLE.shake, CHOICE.shake
-
-	    $clickTarget: 'screen',             // TEXTBOX
-	    $clickShortcutKeys: 'SPACE|ENTER',  // TEXTBOX
 	};
 
 	var RegisterDefaultVariables = function (eventSheetManager, config) {
