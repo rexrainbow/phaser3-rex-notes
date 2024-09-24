@@ -48,6 +48,7 @@ TEXTBOX
   frameDelimiter=-
   clickTarget=
   clickShortcutKeys=
+  fastTypingShortcutKeys=
 
 ```
 
@@ -59,7 +60,10 @@ Create TextBox as Text-box game object
     - `textbox` : Click on textbox to type next page, or finish typing
     - `null` : Disable this feature
 - `clickShortcutKeys` : Press keyboard's key to type next page, or finish typing
-    - Key string combined by `'|'`, e.x. `'SPACE|ENTER'`
+    - Key string combined by `'|'`, default value is `'SPACE|ENTER'`
+    - `null` : Disable this feature
+- `fastTypingShortcutKeys` : Press keyboard's key to enable fastTyping, release key to disable fastTyping.
+    - Key string combined by `'|'`, default value is `'CTRL'`
     - `null` : Disable this feature
 
 ## Destroy

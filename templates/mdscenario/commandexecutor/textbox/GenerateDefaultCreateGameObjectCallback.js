@@ -27,7 +27,9 @@ var GenerateDefaultCreateGameObjectCallback = function (
 
             frameDelimiter = defaultFrameDelimiter,
 
-            clickTarget, clickShortcutKeys,
+            clickTarget,
+            clickShortcutKeys,
+            fastTypingShortcutKeys,
 
             commandExecutor, eventSheetManager, eventsheet,
         } = {},
@@ -274,6 +276,37 @@ var GenerateDefaultCreateGameObjectCallback = function (
             autoNextPageSave = autoNextPage;
         });
 
+
+        // Set $fastTyping to true/false if any fastTypingShortcutKeys is down/up
+        var SetFastTypingVariableByKeyboard = function (event, fastTypingValue) {
+            if (fastTypingShortcutKeys === undefined) {
+                fastTypingShortcutKeys = eventSheetManager.getData('$fastTypingShortcutKeys');
+            }
+            if (!fastTypingShortcutKeys) {
+                return;
+            }
+
+            var keys = fastTypingShortcutKeys.split('|');
+            var inputKey = KeyMap[event.keyCode]
+            if (keys.indexOf(inputKey) !== -1) {
+                eventSheetManager.setData('$fastTyping', fastTypingValue);
+            }
+        }
+
+        gameObject.bindEvent(
+            scene.input.keyboard,      // eventEmitter
+            'keydown',                 // eventName
+            function (event) {         // callback
+                SetFastTypingVariableByKeyboard(event, true);
+            }
+        );
+        gameObject.bindEvent(
+            scene.input.keyboard,      // eventEmitter
+            'keyup',                   // eventName
+            function (event) {         // callback
+                SetFastTypingVariableByKeyboard(event, false);
+            }
+        );
 
         return gameObject;
     }
