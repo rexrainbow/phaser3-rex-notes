@@ -125,7 +125,7 @@ var GenerateDefaultCreateGameObjectCallback = function (
         if (clickTarget === null) {
             // No click target
         } else if (clickTarget.toLowerCase() === 'screen') {
-            touchEE = commandExecutor.anyTouchDetector;
+            touchEE = commandExecutor.sys.anyTouchDetector;
         } else {
             touchEE = gameObject.setInteractive();
         }

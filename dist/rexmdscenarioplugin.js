@@ -90037,7 +90037,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	            clickTarget = eventSheetManager.getData('$clickTarget');
 	        }
 	        if (clickTarget === null) ; else if (clickTarget.toLowerCase() === 'screen') {
-	            touchEE = commandExecutor.anyTouchDetector;
+	            touchEE = commandExecutor.sys.anyTouchDetector;
 	        } else {
 	            touchEE = gameObject.setInteractive();
 	        }
@@ -90826,7 +90826,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	    var anyTouchDetector = new FullWindowRectangle$1(scene).setInteractive();
 	    scene.add.existing(anyTouchDetector);
 	    commandExecutor.sys.layerManager.addToBottomLayer(anyTouchDetector);
-	    commandExecutor.anyTouchDetector = anyTouchDetector;
+	    commandExecutor.sys.anyTouchDetector = anyTouchDetector;
 
 	    return commandExecutor;
 	};
@@ -90867,9 +90867,9 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 	    $autoNextPageDelay: 500,            // TEXTBOX.typing
 	    $fastTyping: false,                 // TEXTBOX.typing
 	    $fastTypingSpeed: 20,               // TEXTBOX.typing
-	    $clickTarget: 'screen',             // TEXTBOX
 	    $clickShortcutKeys: 'SPACE|ENTER',  // TEXTBOX.typing
 	    $fastTypingShortcutKeys: 'CTRL',    // TEXTBOX.typing
+	    $clickTarget: 'screen',             // TEXTBOX
 
 	    $transitionDuration: 500,           // SPRITE.cross, BG.cross
 	    $tintOthers: 0x333333,              // SPRITE.focus

@@ -45,7 +45,7 @@ var CreateCommandExecutor = function (scene, config) {
     var anyTouchDetector = new FullWindowZone(scene).setInteractive();
     scene.add.existing(anyTouchDetector);
     commandExecutor.sys.layerManager.addToBottomLayer(anyTouchDetector);
-    commandExecutor.anyTouchDetector = anyTouchDetector;
+    commandExecutor.sys.anyTouchDetector = anyTouchDetector;
 
     return commandExecutor;
 }

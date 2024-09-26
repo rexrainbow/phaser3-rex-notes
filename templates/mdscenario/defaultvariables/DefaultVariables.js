@@ -4,9 +4,9 @@ export default {
     $autoNextPageDelay: 500,            // TEXTBOX.typing
     $fastTyping: false,                 // TEXTBOX.typing
     $fastTypingSpeed: 20,               // TEXTBOX.typing
-    $clickTarget: 'screen',             // TEXTBOX
     $clickShortcutKeys: 'SPACE|ENTER',  // TEXTBOX.typing
     $fastTypingShortcutKeys: 'CTRL',    // TEXTBOX.typing
+    $clickTarget: 'screen',             // TEXTBOX
 
     $transitionDuration: 500,           // SPRITE.cross, BG.cross
     $tintOthers: 0x333333,              // SPRITE.focus
