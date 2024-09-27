@@ -668,3 +668,19 @@ Bar-rectangle = Line-progress
     cursorStyle: undefined,
 }
 ```
+
+## Style of triangle
+
+```javascript
+{
+    color: undefined,
+    alpha: 1,
+
+    strokeColor: undefined,
+    strokeAlpha: 1,
+    strokeWidth: 1,
+    arrowOnly: false,
+
+    easeDuration: 0,
+}
+```

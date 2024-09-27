@@ -223,7 +223,7 @@ nav:
             - Two pointers gesture:
                 - Pinch: gesture-pinch.md
                 - Rotate: gesture-rotate.md
-        - Button: button.md
+        - Click/Button: button.md
         - Click outside: clickoutside.md
         - Drag: drag.md
         - Slider: slider.md
@@ -460,7 +460,9 @@ nav:
         - Toast: ui-toast.md
         - Toast queue: ui-toastqueue.md
     - Tabs: ui-tabs.md
-    - Folder: ui-folder.md     
+    - Fold:
+        - Folder: ui-folder.md
+        - Trees: ui-trees.md
     - Holy grail: ui-holygrail.md
     - Color input:
         - Color input: ui-colorinput.md

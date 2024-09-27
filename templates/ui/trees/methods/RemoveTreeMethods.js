@@ -1,5 +1,9 @@
 export default {
     removeTree(gameObject, destroyChild) {
+        if (typeof (gameObject) === 'string') {
+            gameObject = this.getTree(gameObject);
+        }
+
         if (!gameObject) {
             return this;
         }

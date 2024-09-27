@@ -1,7 +1,9 @@
-import Clear from '../../../../../plugins/utils/object/Clear.js';
-
 export default {
     removeNode(gameObject, destroyChild) {
+        if (typeof (gameObject) === 'string') {
+            gameObject = this.getTree(gameObject);
+        }
+
         if (!gameObject) {
             return this;
         }

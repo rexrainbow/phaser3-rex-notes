@@ -26,7 +26,7 @@ declare class Trees extends Sizer {
     ): Tree;
 
     removeTree(
-        tree: Tree,
+        tree: Tree | string,
         destroyChild?: boolean
     ): this;
 

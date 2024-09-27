@@ -106,7 +106,7 @@ declare class Tree extends Folder {
     ): Phaser.GameObjects.GameObject;
 
     removeNode(
-        gameObject: Phaser.GameObjects.GameObject,
+        gameObject: Phaser.GameObjects.GameObject | string,
         destroyChild?: boolean
     ): this;
 
