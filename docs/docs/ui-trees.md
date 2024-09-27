@@ -596,3 +596,9 @@ See also - [dirty](ui-basesizer.md#dirty)
     // var gameObject = trees.getByName(name, recursive);
     ```
     - `recursive` : Set `true` to search all children recursively.
+
+
+### Other properties
+
+Trees is extended from [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md), [container-lite](containerlite.md).
+Tree is extended from [folder](ui-folder.md).
