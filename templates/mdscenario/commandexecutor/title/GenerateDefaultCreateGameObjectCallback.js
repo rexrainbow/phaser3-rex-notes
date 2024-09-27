@@ -1,5 +1,5 @@
-import { SimpleTitleLabel } from '../../../ui/ui-components.js';
-import { TransitionImagePack } from '../../../ui/ui-components.js';
+import SimpleTitleLabel from '../../../ui/simpletitlelabel/SimpleTitleLabel.js';
+import TransitionImagePack from '../../../ui/transitionimagepack/TransitionImagePack.js';
 import DecorateGameObject from '../../../ui/utils/build/DecorateGameObject.js';
 import AddViewportCoordinateProperties from '../../../../plugins/behaviors/viewportcoordinate/AddViewportCoordinateProperties.js';
 import { AddShakeBehavior } from '../utils/Shake.js';

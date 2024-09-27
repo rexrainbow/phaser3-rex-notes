@@ -1,4 +1,4 @@
-import { TransitionImagePack } from '../../../ui/ui-components.js';
+import TransitionImagePack from '../../../ui/transitionimagepack/TransitionImagePack.js';
 import AddViewportCoordinateProperties from '../../../../plugins/behaviors/viewportcoordinate/AddViewportCoordinateProperties.js';
 import { AddShakeBehavior } from '../utils/Shake.js';
 

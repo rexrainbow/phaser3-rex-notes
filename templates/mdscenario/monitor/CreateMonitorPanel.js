@@ -1,4 +1,4 @@
-import { Tweaker } from '../../ui/ui-components.js';
+import Tweaker from '../../ui/tweaker/Tweaker.js';
 import { GetTweakStyle } from './TweakerStyle.js';
 
 var CreateMonitorPanel = function (scene, style, target, properties) {

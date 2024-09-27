@@ -1,6 +1,6 @@
-import { SimpleTextBox } from '../../../ui/ui-components.js';
-import { TransitionImagePack } from '../../../ui/ui-components.js';
-import { AIO as AIOSpinner } from '../../../spinner/spinner-components.js';
+import SimpleTextBox from '../../../ui/simpletextbox/SimpleTextBox.js';
+import TransitionImagePack from '../../../ui/transitionimagepack/TransitionImagePack.js';
+import AIOSpinner from '../../../ui/aiospinner/AIOSpinner.js';
 import DecorateGameObject from '../../../ui/utils/build/DecorateGameObject.js';
 import SetValue from '../../../../plugins/utils/object/SetValue.js';
 import AddViewportCoordinateProperties from '../../../../plugins/behaviors/viewportcoordinate/AddViewportCoordinateProperties.js';

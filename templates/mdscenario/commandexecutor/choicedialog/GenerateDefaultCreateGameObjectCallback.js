@@ -1,4 +1,4 @@
-import { ConfirmDialog } from '../../../ui/ui-components.js';
+import ConfirmDialog from '../../../ui/confirmdialog/ConfirmDialog.js';
 import AddViewportCoordinateProperties from '../../../../plugins/behaviors/viewportcoordinate/AddViewportCoordinateProperties.js';
 import { AddShakeBehavior } from '../utils/Shake.js';
 

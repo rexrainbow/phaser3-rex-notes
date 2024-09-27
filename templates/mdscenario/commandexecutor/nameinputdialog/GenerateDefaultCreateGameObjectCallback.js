@@ -1,4 +1,4 @@
-import { NameInputDialog } from '../../../ui/ui-components.js';
+import NameInputDialog from '../../../ui/nameinputdialog/NameInputDialog.js'
 import AddViewportCoordinateProperties from '../../../../plugins/behaviors/viewportcoordinate/AddViewportCoordinateProperties.js';
 import { AddShakeBehavior } from '../utils/Shake.js';
 

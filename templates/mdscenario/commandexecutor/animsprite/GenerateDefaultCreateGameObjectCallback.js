@@ -1,4 +1,3 @@
-import { TransitionImagePack } from '../../../ui/ui-components.js';
 import AddViewportCoordinateProperties from '../../../../plugins/behaviors/viewportcoordinate/AddViewportCoordinateProperties.js';
 
 const AnimSprite = Phaser.GameObjects.Sprite;
