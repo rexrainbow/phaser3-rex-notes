@@ -1,7 +1,8 @@
 import ExtendNodeClass from './NodeBase.js';
-import Sizer from '../../sizer/Sizer.js';
-import GetGameObjectFromConfig from './GetGameObjectFromConfig.js';
-import SimpleLabel from '../../simplelabel/SimpleLabel.js';
+import Sizer from '../../../sizer/Sizer.js';
+import CreateGameObjectFromConfig from '../../builders/CreateGameObjectFromConfig.js';
+import DefaultCreateBackgroundCallback from '../../builders/DefaultCreateBackgroundCallback.js';
+import DefaultCreateNodeBodyCallback from '../../builders/DefaultCreateNodeBodyCallback.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -20,19 +21,20 @@ class Node extends ExtendNodeClass(Sizer) {
         })
         this.type = 'rexTreeNode';
 
-        // Optional
-        var nodeBackground = GetGameObjectFromConfig(
+        var nodeBackground = CreateGameObjectFromConfig(
             scene,
-            config, 'nodeBackground',
-            createCallbackData
+            GetValue(config, 'nodeBackground'),  // config
+            createCallbackData,                  // callbackData
+            DefaultCreateBackgroundCallback,     // defaultCallback
+            false                                // isRequired
         );
 
-        // Required
-        var nodeBody = GetGameObjectFromConfig(
+        var nodeBody = CreateGameObjectFromConfig(
             scene,
-            config, 'nodeBody',
-            createCallbackData,
-            DefaultCreateNodeBodyCallback
+            GetValue(config, 'nodeBody'),  // config
+            createCallbackData,            // callbackData
+            DefaultCreateNodeBodyCallback, // defaultCallback
+            true                           // isRequired
         );
 
         if (nodeBackground) {
@@ -58,12 +60,6 @@ class Node extends ExtendNodeClass(Sizer) {
         return treeParent.getTreeRoot();
     }
 
-}
-
-var DefaultCreateNodeBodyCallback = function (scene, config, createCallbackData) {
-    var gameObject = new SimpleLabel(scene, config);
-    gameObject.resetDisplayContent('');
-    return gameObject;
 }
 
 export default Node;

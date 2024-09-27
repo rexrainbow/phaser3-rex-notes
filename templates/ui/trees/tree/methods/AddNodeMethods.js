@@ -1,5 +1,5 @@
 import IsGameObject from '../../../../../plugins/utils/system/IsGameObject.js';
-import Node from '../Node.js';
+import Node from '../node/Node.js';
 import SyncDisplayList from '../../methods/SyncDisplayList.js';
 
 const UUID = Phaser.Utils.String.UUID;

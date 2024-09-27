@@ -1,9 +1,10 @@
-import ExtendNodeClass from './NodeBase.js';
+import ExtendNodeClass from './node/NodeBase.js';
 import Folder from '../../folder/Folder.js';
 import Methods from './methods/Methods.js';
-import GetGameObjectFromConfig from './GetGameObjectFromConfig.js';
-import CreateTitleSizer from './CreateTitleSizer.js';
-import CreateChildrenSizer from './CreateChildrenSizer.js';
+import CreateGameObjectFromConfig from '../builders/CreateGameObjectFromConfig.js';
+import DefaultCreateBackgroundCallback from '../builders/DefaultCreateBackgroundCallback.js';
+import CreateTitleSizer from './node/CreateTitleSizer.js';
+import CreateChildrenSizer from './node/CreateChildrenSizer.js';
 import GetOrientationMode from '../../utils/GetOrientationMode.js';
 import Merge from '../methods/Merge.js';
 
@@ -15,10 +16,12 @@ class Tree extends ExtendNodeClass(Folder) {
             config = {};
         }
 
-        var background = GetGameObjectFromConfig(
+        var background = CreateGameObjectFromConfig(
             scene,
-            config, 'background',
-            { isLeaf: false }
+            GetValue(config, 'background'),   // config
+            { isLeaf: false },                // callbackData
+            DefaultCreateBackgroundCallback,  // defaultCallback
+            false                             // isRequired
         );
 
         var child = CreateChildrenSizer(scene, config);

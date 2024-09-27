@@ -1,5 +1,5 @@
-import Sizer from '../../sizer/Sizer';
-import Tree from './Tree';
+import Sizer from '../../../sizer/Sizer';
+import Tree from '../Tree';
 
 export default Node;
 
