@@ -98,7 +98,14 @@ var trees = scene.rexUI.add.trees({
         // background: function(scene {isLeaf}) { return gameObject; },
         // background: backgroundStyle,
 
-        // toggleButton: function(scene {isLeaf}) { return gameObject; },
+        // toggleButton: function(scene, {isLeaf}) {
+        //     gameObject
+        //         .on('expand.start', function (gameObject) {
+        //          })
+        //          .on('collapse.start', function (gameObject) {
+        //          })
+        //     return gameObject;
+        // }
         // toggleButton : triangleStyle,
 
         // nodeBackground: function(scene {isLeaf}) { return gameObject; },
@@ -180,12 +187,18 @@ var trees = scene.rexUI.add.trees({
         - Callback
             ```javascript
             function(scene, {isLeaf}) {
+                gameObject
+                    .on('expand.start', function (gameObject) {
+                     })
+                     .on('collapse.start', function (gameObject) {
+                     })
                 return gameObject;
             }
             ```
             - `isLeaf` : 
                 - `false` : This node is a tree-node.
                 - `true` : This node is a leaf-node.
+            - Events `'expand.start'` and `'collapse.start'` will be fired when expanding or collapsing child nodes of this tree.
         - [Style of triangle](shape-triangle2.md#create-instance), default behavior.
             ```javascript
             {
@@ -267,7 +280,14 @@ var tree = trees.addTree({
     // background: backgroundStyle,
 
     toggleButton: toggleButtonGameObject,
-    // toggleButton: function(scene {isLeaf}) { return gameObject; },
+    // toggleButton: function(scene {isLeaf}) { 
+    //      gameObject
+    //          .on('expand.start', function (gameObject) {
+    //           })
+    //           .on('collapse.start', function (gameObject) {
+    //           })
+    //     return gameObject; 
+    // },
     // toggleButton : triangleStyle,
 
     // nodeBackground: nodeBackgroundGameObject,
@@ -330,12 +350,18 @@ var subTree = tree.addTree(config);
     - Callback
         ```javascript
         function(scene, {isLeaf}) {
+            gameObject
+                .on('expand.start', function (gameObject) {
+                 })
+                 .on('collapse.start', function (gameObject) {
+                 })
             return gameObject;
         }
         ```
         - `isLeaf` : 
             - `false` : This node is a tree-node.
             - `true` : This node is a leaf-node.
+        - Events `'expand.start'` and `'collapse.start'` will be fired when expanding or collapsing child nodes of this tree.
     - [Style of triangle](shape-triangle2.md#create-instance), default behavior.
         ```javascript
         {

@@ -10222,7 +10222,14 @@
 <span class="w">        </span><span class="c1">// background: function(scene {isLeaf}) { return gameObject; },</span>
 <span class="w">        </span><span class="c1">// background: backgroundStyle,</span>
 
-<span class="w">        </span><span class="c1">// toggleButton: function(scene {isLeaf}) { return gameObject; },</span>
+<span class="w">        </span><span class="c1">// toggleButton: function(scene, {isLeaf}) {</span>
+<span class="w">        </span><span class="c1">//     gameObject</span>
+<span class="w">        </span><span class="c1">//         .on(&#39;expand.start&#39;, function (gameObject) {</span>
+<span class="w">        </span><span class="c1">//          })</span>
+<span class="w">        </span><span class="c1">//          .on(&#39;collapse.start&#39;, function (gameObject) {</span>
+<span class="w">        </span><span class="c1">//          })</span>
+<span class="w">        </span><span class="c1">//     return gameObject;</span>
+<span class="w">        </span><span class="c1">// }</span>
 <span class="w">        </span><span class="c1">// toggleButton : triangleStyle,</span>
 
 <span class="w">        </span><span class="c1">// nodeBackground: function(scene {isLeaf}) { return gameObject; },</span>
@@ -10322,6 +10329,11 @@
 <li><code>tree.toggleButton</code><ul>
 <li>Callback
     <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">isLeaf</span><span class="p">})</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">gameObject</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;expand.start&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">gameObject</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="p">})</span>
+<span class="w">         </span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;collapse.start&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">gameObject</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="p">})</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">gameObject</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div><ul>
@@ -10330,6 +10342,7 @@
 <li><code>true</code> : This node is a leaf-node.</li>
 </ul>
 </li>
+<li>Events <code>'expand.start'</code> and <code>'collapse.start'</code> will be fired when expanding or collapsing child nodes of this tree.</li>
 </ul>
 </li>
 <li><a href="../shape-triangle2/#create-instance">Style of triangle</a>, default behavior.
@@ -10430,7 +10443,14 @@
 <span class="w">    </span><span class="c1">// background: backgroundStyle,</span>
 
 <span class="w">    </span><span class="nx">toggleButton</span><span class="o">:</span><span class="w"> </span><span class="nx">toggleButtonGameObject</span><span class="p">,</span>
-<span class="w">    </span><span class="c1">// toggleButton: function(scene {isLeaf}) { return gameObject; },</span>
+<span class="w">    </span><span class="c1">// toggleButton: function(scene {isLeaf}) { </span>
+<span class="w">    </span><span class="c1">//      gameObject</span>
+<span class="w">    </span><span class="c1">//          .on(&#39;expand.start&#39;, function (gameObject) {</span>
+<span class="w">    </span><span class="c1">//           })</span>
+<span class="w">    </span><span class="c1">//           .on(&#39;collapse.start&#39;, function (gameObject) {</span>
+<span class="w">    </span><span class="c1">//           })</span>
+<span class="w">    </span><span class="c1">//     return gameObject; </span>
+<span class="w">    </span><span class="c1">// },</span>
 <span class="w">    </span><span class="c1">// toggleButton : triangleStyle,</span>
 
 <span class="w">    </span><span class="c1">// nodeBackground: nodeBackgroundGameObject,</span>
@@ -10498,6 +10518,11 @@
 <li>A game object</li>
 <li>Callback
     <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">isLeaf</span><span class="p">})</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">gameObject</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;expand.start&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">gameObject</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="p">})</span>
+<span class="w">         </span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;collapse.start&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">gameObject</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="p">})</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">gameObject</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div><ul>
@@ -10506,6 +10531,7 @@
 <li><code>true</code> : This node is a leaf-node.</li>
 </ul>
 </li>
+<li>Events <code>'expand.start'</code> and <code>'collapse.start'</code> will be fired when expanding or collapsing child nodes of this tree.</li>
 </ul>
 </li>
 <li><a href="../shape-triangle2/#create-instance">Style of triangle</a>, default behavior.
