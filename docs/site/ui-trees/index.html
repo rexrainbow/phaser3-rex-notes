@@ -10207,7 +10207,7 @@
   <h1>Trees</h1>
 
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>A container with trees, each tree is composed of nested folders.</p>
+<p>A container with trees and leaf-nodes</p>
 <ul>
 <li>Author: Rex</li>
 <li>Game object</li>
@@ -10362,7 +10362,7 @@
 </ul>
 </li>
 <li><code>width</code>, <code>height</code> : Minimum width, minimum height.</li>
-<li><code>origin</code>, <code>originX</code>, <code>originY</code> : Set origin of this sizer. Default value is (0.5, 0.5).</li>
+<li><code>origin</code>, <code>originX</code>, <code>originY</code> : Set origin of this trees. Default value is (0.5, 0.5).</li>
 <li><code>orientation</code> :<ul>
 <li><code>'left-to-right'</code>, <code>'horizontal'</code>,<code>'h'</code>, <code>'x'</code>, or <code>0</code> : Put icon at left side, and text at right side.</li>
 <li><code>'top-to-bottom'</code>, <code>'vertical'</code>,<code>'v'</code>, <code>'y'</code>, or <code>1</code> : Put icon at top side, and text at bottom side.</li>
@@ -10495,7 +10495,7 @@
 </li>
 <li><code>name</code> : Set name of this game object.</li>
 <li><code>draggable</code> : Set <code>true</code> to drag top-most object.</li>
-<li><code>sizerEvents</code> : Set <code>true</code> to fire <a href="../ui-basesizer/#events">sizer events</a>. Default value is <code>false</code>.</li>
+<li><code>sizerEvents</code> : Set <code>true</code> to fire <a href="../ui-basesizer/#events">trees events</a>. Default value is <code>false</code>.</li>
 <li><code>enableLayer</code> : <ul>
 <li><code>false</code> : Add child game objects into scene's display list. Default behavior.</li>
 <li><code>true</code> : Add child game objects into an internal <a href="../layer/">layer game object</a>. <a href="../containerlite/#layer">See also</a>.</li>
@@ -10723,23 +10723,23 @@
 <p>See also - <a href="../ui-basesizer/#dirty">dirty</a></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Layout topmost sizer when expanding/collapsing start.</p>
+<p>Layout topmost trees when expanding/collapsing start.</p>
 </div>
 <h3 id="expandcollapse-tree">Expand/collapse tree<a class="headerlink" href="#expandcollapse-tree" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Expand, will re-layout from topmost sizer
+<li>Expand, will re-layout from topmost trees
     <div class="highlight"><pre><span></span><code><span class="nx">tree</span><span class="p">.</span><span class="nx">expand</span><span class="p">();</span>
 <span class="c1">// tree.expand(duration);</span>
 </code></pre></div>
     <div class="highlight"><pre><span></span><code><span class="nx">tree</span><span class="p">.</span><span class="nx">expand</span><span class="p">(</span><span class="mf">0</span><span class="p">);</span><span class="w">  </span><span class="c1">// Immediately, won&#39;t invoke expandCallback</span>
 </code></pre></div></li>
-<li>Collapse, will re-layout from topmost sizer
+<li>Collapse, will re-layout from topmost trees
     <div class="highlight"><pre><span></span><code><span class="nx">tree</span><span class="p">.</span><span class="nx">collapse</span><span class="p">();</span>
 <span class="c1">// tree.collapse(duration);</span>
 </code></pre></div>
     <div class="highlight"><pre><span></span><code><span class="nx">tree</span><span class="p">.</span><span class="nx">collapse</span><span class="p">(</span><span class="mf">0</span><span class="p">);</span><span class="w">  </span><span class="c1">// Immediately, won&#39;t invoke collapseCallback</span>
 </code></pre></div></li>
-<li>Toggle, will re-layout from topmost sizer
+<li>Toggle, will re-layout from topmost trees
     <div class="highlight"><pre><span></span><code><span class="nx">tree</span><span class="p">.</span><span class="nx">toggle</span><span class="p">();</span>
 <span class="c1">// tree.toggle(duration);</span>
 </code></pre></div>
@@ -10873,7 +10873,7 @@
 </li>
 </ul>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
-<p>Trees is extended from <a href="../ui-sizer/">sizer object</a>, <a href="../ui-basesizer/">base sizer object</a>, <a href="../containerlite/">container-lite</a>.
+<p>Trees is extended from <a href="./">trees object</a>, <a href="../ui-basesizer/">base trees object</a>, <a href="../containerlite/">container-lite</a>.
 Tree is extended from <a href="../ui-folder/">folder</a>.</p>
 <h4 id="set-children-interactive">Set children interactive<a class="headerlink" href="#set-children-interactive" title="Permanent link">&para;</a></h4>
 <p>Applies <a href="../button/">click</a>, <a href="../gesture-tap/">tap</a>, <a href="../gesture-press/">press</a>, <a href="../gesture-swipe/">swipe</a> behaviors on this trees, to detect input events of children.</p>
@@ -10904,102 +10904,102 @@ Tree is extended from <a href="../ui-folder/">folder</a>.</p>
 <h4 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Pointer-down
-    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.down&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span><span class="w"> </span><span class="nx">pointer</span><span class="p">,</span><span class="w"> </span><span class="nx">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">        </span>
+    <div class="highlight"><pre><span></span><code><span class="nx">trees</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.down&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span><span class="w"> </span><span class="nx">pointer</span><span class="p">,</span><span class="w"> </span><span class="nx">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">        </span>
 <span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>child</code> : Tree or leaf-node.<ul>
-<li>Is tree : <code>child.isTree</code></li>
-<li>Is leaf-node : <code>child.isNode</code></li>
+<li>Pointer on tree's title : <code>child.isTree</code></li>
+<li>Pointer on leaf-node : <code>child.isNode</code></li>
 </ul>
 </li>
 </ul>
 </li>
 <li>Pointer-up
-    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.up&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span><span class="w"> </span><span class="nx">pointer</span><span class="p">,</span><span class="w"> </span><span class="nx">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">trees</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.up&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span><span class="w"> </span><span class="nx">pointer</span><span class="p">,</span><span class="w"> </span><span class="nx">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// ...</span>
 <span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>child</code> : Tree or leaf-node.<ul>
-<li>Is tree : <code>child.isTree</code></li>
-<li>Is leaf-node : <code>child.isNode</code></li>
+<li>Pointer on tree's title : <code>child.isTree</code></li>
+<li>Pointer on leaf-node : <code>child.isNode</code></li>
 </ul>
 </li>
 </ul>
 </li>
 <li>Pointer-over
-    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.over&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span><span class="w"> </span><span class="nx">pointer</span><span class="p">,</span><span class="w"> </span><span class="nx">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">trees</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.over&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span><span class="w"> </span><span class="nx">pointer</span><span class="p">,</span><span class="w"> </span><span class="nx">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// ...</span>
 <span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>child</code> : Tree or leaf-node.<ul>
-<li>Is tree : <code>child.isTree</code></li>
-<li>Is leaf-node : <code>child.isNode</code></li>
+<li>Pointer on tree's title : <code>child.isTree</code></li>
+<li>Pointer on leaf-node : <code>child.isNode</code></li>
 </ul>
 </li>
 </ul>
 </li>
 <li>Pointer-out
-    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.out&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span><span class="w"> </span><span class="nx">pointer</span><span class="p">,</span><span class="w"> </span><span class="nx">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">trees</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.out&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span><span class="w"> </span><span class="nx">pointer</span><span class="p">,</span><span class="w"> </span><span class="nx">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// ...</span>
 <span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>child</code> : Tree or leaf-node.<ul>
-<li>Is tree : <code>child.isTree</code></li>
-<li>Is leaf-node : <code>child.isNode</code></li>
+<li>Pointer on tree's title : <code>child.isTree</code></li>
+<li>Pointer on leaf-node : <code>child.isNode</code></li>
 </ul>
 </li>
 </ul>
 </li>
 <li>Click
-    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.click&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span><span class="w"> </span><span class="nx">pointer</span><span class="p">,</span><span class="w"> </span><span class="nx">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">trees</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.click&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span><span class="w"> </span><span class="nx">pointer</span><span class="p">,</span><span class="w"> </span><span class="nx">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// ...</span>
 <span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>child</code> : Tree or leaf-node.<ul>
-<li>Is tree : <code>child.isTree</code></li>
-<li>Is leaf-node : <code>child.isNode</code></li>
+<li>Pointer on tree's title : <code>child.isTree</code></li>
+<li>Pointer on leaf-node : <code>child.isNode</code></li>
 </ul>
 </li>
 <li><code>pointer</code> : <a href="../touchevents/#properties-of-point">Pointer</a> object.    </li>
 </ul>
 </li>
 <li>Press
-    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.pressstart&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span><span class="w"> </span><span class="nx">pointer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+    <div class="highlight"><pre><span></span><code><span class="nx">trees</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.pressstart&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span><span class="w"> </span><span class="nx">pointer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
 <span class="w">    </span><span class="c1">// ...</span>
 <span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
-    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.pressend&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span><span class="w"> </span><span class="nx">pointer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+    <div class="highlight"><pre><span></span><code><span class="nx">trees</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.pressend&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span><span class="w"> </span><span class="nx">pointer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
 <span class="w">    </span><span class="c1">// ...</span>
 <span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>child</code> : Tree or leaf-node.<ul>
-<li>Is tree : <code>child.isTree</code></li>
-<li>Is leaf-node : <code>child.isNode</code></li>
+<li>Pointer on tree's title : <code>child.isTree</code></li>
+<li>Pointer on leaf-node : <code>child.isNode</code></li>
 </ul>
 </li>
 </ul>
 </li>
 <li>Tap
-    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="nx">tapEventName</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span><span class="w"> </span><span class="nx">pointer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+    <div class="highlight"><pre><span></span><code><span class="nx">trees</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="nx">tapEventName</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span><span class="w"> </span><span class="nx">pointer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
 <span class="w">    </span><span class="c1">// ...</span>
 <span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>child</code> : Tree or leaf-node.<ul>
-<li>Is tree : <code>child.isTree</code></li>
-<li>Is leaf-node : <code>child.isNode</code></li>
+<li>Pointer on tree's title : <code>child.isTree</code></li>
+<li>Pointer on leaf-node : <code>child.isNode</code></li>
 </ul>
 </li>
 <li><code>tapEventName</code> :  <code>'child.1tap'</code>, <code>'child.2tap'</code>, <code>'child.3tap'</code>, etc ...</li>
 </ul>
 </li>
 <li>Swipe
-    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="nx">swipeEventName</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span><span class="w"> </span><span class="nx">pointer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+    <div class="highlight"><pre><span></span><code><span class="nx">trees</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="nx">swipeEventName</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span><span class="w"> </span><span class="nx">pointer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
 <span class="w">    </span><span class="c1">// ...</span>
 <span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>child</code> : Tree or leaf-node.<ul>
-<li>Is tree : <code>child.isTree</code></li>
-<li>Is leaf-node : <code>child.isNode</code></li>
+<li>Pointer on tree's title : <code>child.isTree</code></li>
+<li>Pointer on leaf-node : <code>child.isNode</code></li>
 </ul>
 </li>
 <li><code>swipeEventName</code> :  <code>'child.swipeleft'</code>, <code>'child.swiperight'</code>, <code>'child.swipeup'</code>, <code>'child.swipedown'</code>.</li>
