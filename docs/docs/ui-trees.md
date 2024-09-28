@@ -1,6 +1,6 @@
 ## Introduction
 
-A container with trees and leaf-nodes
+A container with trees and leaf-nodes.
 
 - Author: Rex
 - Game object
@@ -790,25 +790,25 @@ tree.setChildrenInteractive({
 
 - On tree expand-start
     ```javascript
-    trees.on('tree.expand.start', function(tree){
+    trees.on('expand.start', function(tree){
 
     })
     ```
 - On tree expand-complete
     ```javascript
-    trees.on('tree.expand.complete', function(tree){
+    trees.on('expand.complete', function(tree){
 
     })
     ```
 - On tree collapse-start
     ```javascript
-    trees.on('tree.collapse.start', function(tree){
+    trees.on('collapse.start', function(tree){
 
     })
     ```
 - On tree collapse-complete
     ```javascript
-    trees.on('tree.collapse.complete', function(tree){
+    trees.on('collapse.complete', function(tree){
 
     })
     ```
