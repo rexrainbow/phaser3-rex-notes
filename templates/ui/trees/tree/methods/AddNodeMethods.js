@@ -34,6 +34,10 @@ export default {
         SyncDisplayList(this, tree)
 
         this.insertNode(index, tree, { expand: true });
+
+        // See Tree class
+        tree._postAddCallback();
+
         return tree;
     },
 
