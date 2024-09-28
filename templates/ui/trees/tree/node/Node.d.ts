@@ -12,6 +12,8 @@ declare class Node extends Sizer {
     readonly isTree: false;
     readonly isNode: true;
 
+    readonly nodeBody: Node;
+
     getTreePatent(): Tree;
     getTreeRoot(): Tree;
     getTreesSizer(): Trees | null | undefined;

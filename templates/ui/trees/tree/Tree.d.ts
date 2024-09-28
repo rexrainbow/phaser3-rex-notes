@@ -1,6 +1,7 @@
 import Folder from '../../folder/Folder';
 import Sizer from '../../sizer/Sizer';
 import Trees from '../Trees';
+import Node from './node/Node';
 import Triangle from '../../triangle/Triangle';
 import SimpleLabel from '../../simplelabel/SimpleLabel';
 export default Tree;
@@ -66,6 +67,7 @@ declare class Tree extends Folder {
     readonly isNode: false;
 
     readonly nodesMap: { [nodeKey: string]: Phaser.GameObjects.GameObject };
+    readonly nodeBody: Node;
 
     addTree(): Tree;
 

@@ -68270,11 +68270,14 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
     var PointToChild$1 = function (x, y, preTest, postTest) {
         for (var nodeKey in this.treesMap) {
             var tree = this.treesMap[nodeKey];
+
+            if (ContainsPoint(tree.nodeBody, x, y, preTest, postTest)) {
+                return tree;
+            }
+
             var child = tree.pointToChild(x, y, preTest, postTest);
             if (child) {
                 return child;
-            } else if (ContainsPoint(tree, x, y, preTest, postTest)) {
-                return tree;
             }
         }
 
@@ -68308,12 +68311,12 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             }
 
             get text() {
-                var textObject = this.childrenMap.nodeBody;
+                var textObject = this.nodeBody;
                 return textObject.text;
             }
 
             set text(value) {
-                var textObject = this.childrenMap.nodeBody;
+                var textObject = this.nodeBody;
                 if (textObject.setText) {
                     textObject.setText(value);
                 }
@@ -68322,7 +68325,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
             // Wrap setTexture() from nodeBody
             setTexture(key, frame) {
-                var imageObject = this.childrenMap.nodeBody;
+                var imageObject = this.nodeBody;
                 if (imageObject.setTexture) {
                     imageObject.setTexture(key, frame);
                 }
@@ -68330,7 +68333,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             }
 
             get texture() {
-                var imageObject = this.childrenMap.nodeBody;
+                var imageObject = this.nodeBody;
                 if (!imageObject) {
                     return undefined;
                 }
@@ -68338,7 +68341,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             }
 
             get frame() {
-                var imageObject = this.childrenMap.nodeBody;
+                var imageObject = this.nodeBody;
                 if (!imageObject) {
                     return undefined;
                 }
@@ -68351,12 +68354,16 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         for (var nodeKey in this.nodesMap) {
             var node = this.nodesMap[nodeKey];
             if (this.isTreeObject(node)) {
-                // Is sub-tree            
-                var child = node.pointToChild(x, y, preTest, postTest);
+                // Is sub-tree
+                var tree = node;
+
+                if (ContainsPoint(tree.nodeBody, x, y, preTest, postTest)) {
+                    return tree;
+                }
+
+                var child = tree.pointToChild(x, y, preTest, postTest);
                 if (child) {
                     return child;
-                } else if (ContainsPoint(node, x, y, preTest, postTest)) {
-                    return node;
                 }
 
             } else {
@@ -68520,7 +68527,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 { proportion: 1 }
             );
 
-
+            this.nodeBody = nodeBody;
             this.addChildrenMap('background', background);
             this.addChildrenMap('nodeBody', nodeBody);
 
@@ -68894,6 +68901,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this.nodesMap = {};
             this.configSave = config;
 
+            this.nodeBody = nodeBody;
             this.addChildrenMap('toggleButton', toggleButton);
             this.addChildrenMap('nodeBody', nodeBody);
             this.addChildrenMap('childrenNodes', childrenNodes);

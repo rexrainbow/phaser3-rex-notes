@@ -12927,11 +12927,14 @@
     var PointToChild$1 = function (x, y, preTest, postTest) {
         for (var nodeKey in this.treesMap) {
             var tree = this.treesMap[nodeKey];
+
+            if (ContainsPoint(tree.nodeBody, x, y, preTest, postTest)) {
+                return tree;
+            }
+
             var child = tree.pointToChild(x, y, preTest, postTest);
             if (child) {
                 return child;
-            } else if (ContainsPoint(tree, x, y, preTest, postTest)) {
-                return tree;
             }
         }
 
@@ -12965,12 +12968,12 @@
             }
 
             get text() {
-                var textObject = this.childrenMap.nodeBody;
+                var textObject = this.nodeBody;
                 return textObject.text;
             }
 
             set text(value) {
-                var textObject = this.childrenMap.nodeBody;
+                var textObject = this.nodeBody;
                 if (textObject.setText) {
                     textObject.setText(value);
                 }
@@ -12979,7 +12982,7 @@
 
             // Wrap setTexture() from nodeBody
             setTexture(key, frame) {
-                var imageObject = this.childrenMap.nodeBody;
+                var imageObject = this.nodeBody;
                 if (imageObject.setTexture) {
                     imageObject.setTexture(key, frame);
                 }
@@ -12987,7 +12990,7 @@
             }
 
             get texture() {
-                var imageObject = this.childrenMap.nodeBody;
+                var imageObject = this.nodeBody;
                 if (!imageObject) {
                     return undefined;
                 }
@@ -12995,7 +12998,7 @@
             }
 
             get frame() {
-                var imageObject = this.childrenMap.nodeBody;
+                var imageObject = this.nodeBody;
                 if (!imageObject) {
                     return undefined;
                 }
@@ -13298,12 +13301,16 @@
         for (var nodeKey in this.nodesMap) {
             var node = this.nodesMap[nodeKey];
             if (this.isTreeObject(node)) {
-                // Is sub-tree            
-                var child = node.pointToChild(x, y, preTest, postTest);
+                // Is sub-tree
+                var tree = node;
+
+                if (ContainsPoint(tree.nodeBody, x, y, preTest, postTest)) {
+                    return tree;
+                }
+
+                var child = tree.pointToChild(x, y, preTest, postTest);
                 if (child) {
                     return child;
-                } else if (ContainsPoint(node, x, y, preTest, postTest)) {
-                    return node;
                 }
 
             } else {
@@ -33307,7 +33314,7 @@
                 { proportion: 1 }
             );
 
-
+            this.nodeBody = nodeBody;
             this.addChildrenMap('background', background);
             this.addChildrenMap('nodeBody', nodeBody);
 
@@ -34098,6 +34105,7 @@
             this.nodesMap = {};
             this.configSave = config;
 
+            this.nodeBody = nodeBody;
             this.addChildrenMap('toggleButton', toggleButton);
             this.addChildrenMap('nodeBody', nodeBody);
             this.addChildrenMap('childrenNodes', childrenNodes);
