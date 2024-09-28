@@ -67,7 +67,7 @@ declare class Tree extends Folder {
     readonly isNode: false;
 
     readonly nodesMap: { [nodeKey: string]: Phaser.GameObjects.GameObject };
-    readonly nodeBody: Node;
+    readonly nodeBody: Phaser.GameObjects.GameObject;
 
     addTree(): Tree;
 

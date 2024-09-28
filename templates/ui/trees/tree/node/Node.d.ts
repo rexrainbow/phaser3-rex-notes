@@ -12,7 +12,7 @@ declare class Node extends Sizer {
     readonly isTree: false;
     readonly isNode: true;
 
-    readonly nodeBody: Node;
+    readonly nodeBody: Phaser.GameObjects.GameObject;
 
     getTreePatent(): Tree;
     getTreeRoot(): Tree;
