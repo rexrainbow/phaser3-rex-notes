@@ -11975,7 +11975,7 @@
         return null;
     };
 
-    var SetChildrenInteractive$1 = function () {
+    var SetChildrenInteractive$2 = function () {
         this
             .on('pointerdown', OnPointerDown$1, this)
 
@@ -12053,7 +12053,7 @@
         GameObject.prototype.setInteractive.call(this, hitArea, hitAreaCallback, dropZone);
 
         if (!isInteractived) {
-            SetChildrenInteractive$1.call(this);
+            SetChildrenInteractive$2.call(this);
         }
 
         return this;
@@ -37887,7 +37887,7 @@
         }
     };
 
-    var PointToChild$1 = function (x, y, preTest, postTest, children) {
+    var PointToChild$3 = function (x, y, preTest, postTest, children) {
         if (!IsFunction(preTest)) {
             children = preTest;
             preTest = undefined;
@@ -38743,7 +38743,7 @@
         },
     };
 
-    var PointToChild = function (parents, x, y) {
+    var PointToChild$2 = function (parents, x, y) {
         var parent;
         for (var i = 0, cnt = parents.length; i < cnt; i++) {
             parent = parents[i];
@@ -38770,7 +38770,7 @@
             var py = worldY + camera.scrollY * (firstChild.scrollFactorY - 1);
 
             if (targetMode === 'parent') {
-                child = PointToChild(targets, px, py);
+                child = PointToChild$2(targets, px, py);
             } else {
                 for (var i = 0, cnt = targets.length; i < cnt; i++) {
                     var target = targets[i];
@@ -38869,7 +38869,7 @@
         var px = pointer.worldX + camera.scrollX * (firstChild.scrollFactorX - 1);
         var py = pointer.worldY + camera.scrollY * (firstChild.scrollFactorY - 1);
 
-        var child = PointToChild(childrenInteractive.targetSizers, px, py);
+        var child = PointToChild$2(childrenInteractive.targetSizers, px, py);
         var preChild = childrenInteractive.lastOverChild;
         if (child && preChild &&
             (child === preChild)) {
@@ -40595,7 +40595,7 @@
 
     const GetValue$2o = Phaser.Utils.Objects.GetValue;
 
-    var SetChildrenInteractive = function (gameObject, config) {
+    var SetChildrenInteractive$1 = function (gameObject, config) {
         gameObject.setInteractive();
 
         if (GetValue$2o(config, 'dropZone', false)) {
@@ -40621,7 +40621,7 @@
     };
 
     var SetChildrenInteractiveWrap = function (config) {    
-        SetChildrenInteractive(this, config);
+        SetChildrenInteractive$1(this, config);
         return this;
     };
 
@@ -40671,7 +40671,7 @@
 
         setAnchor: SetAnchor,
         isInTouching: IsInTouching,
-        pointToChild: PointToChild$1,
+        pointToChild: PointToChild$3,
         setDraggable: SetDraggable,
         setChildrenInteractive: SetChildrenInteractiveWrap,
         broadcastEvent: BroadcastEvent,
@@ -63935,7 +63935,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 config.targets = [this.childrenMap.panel];
             }
 
-            SetChildrenInteractive(this.childrenMap.child, config);
+            SetChildrenInteractive$1(this.childrenMap.child, config);
             return this;
         }
     }
@@ -68267,8 +68267,39 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     SetValue(window, 'RexPlugins.UI.Folder', Folder$1);
 
+    var PointToChild$1 = function (x, y, preTest, postTest) {
+        for (var nodeKey in this.treesMap) {
+            var tree = this.treesMap[nodeKey];
+            var child = tree.pointToChild(x, y, preTest, postTest);
+            if (child) {
+                return child;
+            } else if (ContainsPoint(tree, x, y, preTest, postTest)) {
+                return tree;
+            }
+        }
+
+        return null;
+    };
+
+    var SetChildrenInteractive = function (config) {
+        if (config === undefined) {
+            config = {};
+        }
+        config.targetMode = 'parent';
+        config.targetSizers = [this];
+        SetChildrenInteractive$1(this, config);
+        return this;
+    };
+
     var ExtendNodeClass = function (GOClass) {
         return class Base extends GOClass {
+            get isTree() {
+                return false;
+            }
+
+            get isNode() {
+                return false;
+            }
 
             // Wrap text/setText() from nodeBody
             setText(text) {
@@ -68313,8 +68344,31 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 }
                 return imageObject.frame;
             }
-
         }
+    };
+
+    var PointToChild = function (x, y, preTest, postTest) {
+        for (var nodeKey in this.nodesMap) {
+            var node = this.nodesMap[nodeKey];
+            if (this.isTreeObject(node)) {
+                // Is sub-tree            
+                var child = node.pointToChild(x, y, preTest, postTest);
+                if (child) {
+                    return child;
+                } else if (ContainsPoint(node, x, y, preTest, postTest)) {
+                    return node;
+                }
+
+            } else {
+                // Is leaf-node
+                if (ContainsPoint(node, x, y, preTest, postTest)) {
+                    return node;
+                }
+
+            }
+        }
+
+        return null;
     };
 
     var ParentMethods = {
@@ -68349,6 +68403,11 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             }
 
             return undefined;
+        },
+
+        getTreesSizer(gameObject) {
+            var root = this.getTreeRoot(gameObject);
+            return (root) ? root.getParentSizer() : null;
         },
 
         isGrandsonNode(gameObject) {
@@ -68436,7 +68495,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             });
             this.type = 'rexTreeNode';
 
-            var nodeBackground = CreateGameObjectFromConfig(
+            var background = CreateGameObjectFromConfig(
                 scene,
                 GetValue$K(config, 'nodeBackground'),  // config
                 createCallbackData,                  // callbackData
@@ -68452,15 +68511,23 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 true                           // isRequired
             );
 
-            if (nodeBackground) {
-                this.addBackground(nodeBackground);
+            if (background) {
+                this.addBackground(background);
             }
 
             this.add(
                 nodeBody,
-                { proportion: 1, key: 'nodeBody' }
+                { proportion: 1 }
             );
 
+
+            this.addChildrenMap('background', background);
+            this.addChildrenMap('nodeBody', nodeBody);
+
+        }
+
+        get isNode() {
+            return true;
         }
 
         getTreePatent() {
@@ -68473,6 +68540,11 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 return null;
             }
             return treeParent.getTreeRoot();
+        }
+
+        getTreesSizer() {
+            var root = this.getTreeRoot();
+            return (root) ? root.getParentSizer() : null;
         }
 
     }
@@ -68539,6 +68611,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             SyncDisplayList(this, tree);
 
             this.insertNode(index, tree, { expand: true });
+
+            // See Tree class
+            tree._postAddCallback();
+
             return tree;
         },
 
@@ -68641,7 +68717,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
             if (mapNameList.length === 0) {
                 return element;
-            } else if (element && this.isTree(element)) {
+            } else if (element && this.isTreeObject(element)) {
                 return element.getNode(mapNameList);
             } else {
                 return null;
@@ -68663,11 +68739,12 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         },
 
         getAllNodes(out) {
-
+            // TODO
         }
     };
 
     var methods$6 = {
+        pointToChild: PointToChild,
     };
 
     Object.assign(
@@ -68715,9 +68792,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                     right: GetValue$J(config, 'space.toggleButton', 0)
                 },
                 fitRatio: 1,
-                key: 'toggleButton'
             }
         );
+
+        nodeSizer.addChildrenMap('toggleButton', toggleButton);
 
         return nodeSizer;
     };
@@ -68820,24 +68898,34 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this.addChildrenMap('nodeBody', nodeBody);
             this.addChildrenMap('childrenNodes', childrenNodes);
 
+            // Route events
             this
                 .on('expand.start', function () {
                     toggleButton.emit('expand.start', toggleButton);
-                })
+                    FireTreesSizerEvent(this, 'tree.expand.start');
+                }, this)
                 .on('expand.complete', function () {
                     toggleButton.emit('expand.complete', toggleButton);
+                    FireTreesSizerEvent(this, 'tree.expand.complete');
                 })
                 .on('collapse.start', function () {
                     toggleButton.emit('collapse.start', toggleButton);
+                    FireTreesSizerEvent(this, 'tree.collapse.start');
                 })
                 .on('collapse.complete', function () {
                     toggleButton.emit('collapse.complete', toggleButton);
+                    FireTreesSizerEvent(this, 'tree.collapse.complete');
                 });
 
-            var expanded = GetValue$H(config, 'expanded', true);
-            if (expanded !== undefined) {
-                this.setExpandedState(expanded);
-            }
+            // Run this callback after adding to parent tree    
+            var tree = this;
+            tree._postAddCallback = function () {
+                var expanded = GetValue$H(config, 'expanded', true);
+                if (expanded !== undefined) {
+                    tree.setExpandedState(expanded);
+                }
+                delete tree._postAddCallback;
+            };
         }
 
         destroy(fromScene) {
@@ -68854,18 +68942,29 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             super.destroy(fromScene);
         }
 
+        get isTree() {
+            return true;
+        }
+
         createTree(config) {
             return Tree.CreateTree(this.scene, this.configSave, config)
         }
 
-        isTree(gameObject) {
-            return (!!gameObject) && gameObject instanceof (TreeNode);
+        isTreeObject(gameObject) {
+            return gameObject && gameObject instanceof (Tree);
         }
     }
 
     // Static method
     Tree.CreateTree = function (scene, defaultConfig, overrideConfig) {
         return new Tree(scene, Merge$2(defaultConfig, overrideConfig));
+    };
+
+    var FireTreesSizerEvent = function (tree, eventName) {
+        var treesSizer = tree.getTreesSizer();
+        if (treesSizer) {
+            treesSizer.emit(eventName, tree);
+        }
     };
 
     Object.assign(
@@ -68909,6 +69008,9 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
             this.insert(index, tree, { expand: true });
 
+            // See Tree class
+            tree._postAddCallback();
+
             return tree;
         }
     };
@@ -68944,6 +69046,16 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             return this.treesMap[nodeKey];
         },
 
+        getTrees(out) {
+            if (out === undefined) {
+                out = [];
+            }
+            for (var nodeKey in this.treesMap) {
+                out.push(this.treesMap[nodeKey]);
+            }
+            return out;
+        },
+
         getNode(nodeKey) {
             var dotIndex = nodeKey.indexOf('.');
             if (dotIndex === -1) {
@@ -68959,7 +69071,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
     };
 
-    var methods$5 = {};
+    var methods$5 = {
+        pointToChild: PointToChild$1,
+        setChildrenInteractive: SetChildrenInteractive,
+    };
 
     Object.assign(
         methods$5,
@@ -76086,7 +76201,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         waitEvent: WaitEvent,
         waitComplete: WaitComplete,
         delayPromise: Delay,
-        setChildrenInteractive: SetChildrenInteractive,
+        setChildrenInteractive: SetChildrenInteractive$1,
         fadeIn: FadeIn,
         fadeOutDestroy: FadeOutDestroy,
         easeMoveTo: EaseMoveTo,
