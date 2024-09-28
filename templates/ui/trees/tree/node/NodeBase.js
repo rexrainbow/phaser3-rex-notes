@@ -15,12 +15,12 @@ var ExtendNodeClass = function (GOClass) {
         }
 
         get text() {
-            var textObject = this.childrenMap.nodeBody;
+            var textObject = this.nodeBody;
             return textObject.text;
         }
 
         set text(value) {
-            var textObject = this.childrenMap.nodeBody;
+            var textObject = this.nodeBody;
             if (textObject.setText) {
                 textObject.setText(value);
             }
@@ -29,7 +29,7 @@ var ExtendNodeClass = function (GOClass) {
 
         // Wrap setTexture() from nodeBody
         setTexture(key, frame) {
-            var imageObject = this.childrenMap.nodeBody;
+            var imageObject = this.nodeBody;
             if (imageObject.setTexture) {
                 imageObject.setTexture(key, frame);
             }
@@ -37,7 +37,7 @@ var ExtendNodeClass = function (GOClass) {
         }
 
         get texture() {
-            var imageObject = this.childrenMap.nodeBody;
+            var imageObject = this.nodeBody;
             if (!imageObject) {
                 return undefined;
             }
@@ -45,7 +45,7 @@ var ExtendNodeClass = function (GOClass) {
         }
 
         get frame() {
-            var imageObject = this.childrenMap.nodeBody;
+            var imageObject = this.nodeBody;
             if (!imageObject) {
                 return undefined;
             }

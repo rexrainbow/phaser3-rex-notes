@@ -63,6 +63,7 @@ class Tree extends ExtendNodeClass(Folder) {
         this.nodesMap = {};
         this.configSave = config;
 
+        this.nodeBody = nodeBody;
         this.addChildrenMap('toggleButton', toggleButton);
         this.addChildrenMap('nodeBody', nodeBody);
         this.addChildrenMap('childrenNodes', childrenNodes);

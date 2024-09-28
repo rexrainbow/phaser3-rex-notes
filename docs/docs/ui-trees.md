@@ -679,7 +679,7 @@ Tree is extended from [folder](ui-folder.md).
 Applies [click](button.md), [tap](gesture-tap.md), [press](gesture-press.md), [swipe](gesture-swipe.md) behaviors on this trees, to detect input events of children.
 
 ```javascript
-panel.setChildrenInteractive({
+tree.setChildrenInteractive({
     // dropZone: false,
 
     // click: {mode: 'release', clickInterval: 100},

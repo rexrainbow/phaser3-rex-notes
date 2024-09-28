@@ -46,7 +46,7 @@ class Node extends ExtendNodeClass(Sizer) {
             { proportion: 1 }
         );
 
-
+        this.nodeBody = nodeBody;
         this.addChildrenMap('background', background);
         this.addChildrenMap('nodeBody', nodeBody);
 
