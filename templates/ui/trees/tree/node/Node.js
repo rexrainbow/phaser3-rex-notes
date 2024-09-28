@@ -21,7 +21,7 @@ class Node extends ExtendNodeClass(Sizer) {
         })
         this.type = 'rexTreeNode';
 
-        var nodeBackground = CreateGameObjectFromConfig(
+        var background = CreateGameObjectFromConfig(
             scene,
             GetValue(config, 'nodeBackground'),  // config
             createCallbackData,                  // callbackData
@@ -37,14 +37,18 @@ class Node extends ExtendNodeClass(Sizer) {
             true                           // isRequired
         );
 
-        if (nodeBackground) {
-            this.addBackground(nodeBackground);
+        if (background) {
+            this.addBackground(background);
         }
 
         this.add(
             nodeBody,
-            { proportion: 1, key: 'nodeBody' }
+            { proportion: 1 }
         );
+
+
+        this.addChildrenMap('background', background);
+        this.addChildrenMap('nodeBody', nodeBody);
 
     }
 

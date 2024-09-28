@@ -31,6 +31,8 @@ declare namespace Tree {
         space?: ISpaceConfig,
         align?: Folder.IAlignConfig,
         expand?: Folder.IExpandConfig,
+
+        expanded?: boolean,
     }
 
     interface IAddTreeConfig {
@@ -46,7 +48,9 @@ declare namespace Tree {
         align?: Folder.IAlignConfig,
         expand?: Folder.IExpandConfig,
 
-        nodeKey?: string
+        expanded?: boolean,
+
+        nodeKey?: string,
     }
 
 }

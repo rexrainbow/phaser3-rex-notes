@@ -23,9 +23,10 @@ var CreateTitleSizer = function (scene, config) {
                 right: GetValue(config, 'space.toggleButton', 0)
             },
             fitRatio: 1,
-            key: 'toggleButton'
         }
     );
+
+    nodeSizer.addChildrenMap('toggleButton', toggleButton);
 
     return nodeSizer;
 }

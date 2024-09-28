@@ -279,7 +279,7 @@ See also - [dirty](ui-basesizer.md#dirty)
 
 ### Expand/collapse
 
-- Expand, will re=layout from topmost sizer
+- Expand, will re-layout from topmost sizer
     ```javascript
     folder.expand();
     // folder.expand(duration);
@@ -287,7 +287,7 @@ See also - [dirty](ui-basesizer.md#dirty)
     ```javascript
     folder.expand(0);  // Immediately, won't invoke expandCallback
     ```
-- Collapse, will re=layout from topmost sizer
+- Collapse, will re-layout from topmost sizer
     ```javascript
     folder.collapse();
     // folder.collapse(duration);
@@ -295,7 +295,7 @@ See also - [dirty](ui-basesizer.md#dirty)
     ```javascript
     folder.collapse(0);  // Immediately, won't invoke collapseCallback
     ```
-- Toggle, will re=layout from topmost sizer
+- Toggle, will re-layout from topmost sizer
     ```javascript
     folder.toggle();
     // folder.toggle(duration);

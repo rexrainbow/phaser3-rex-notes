@@ -55,6 +55,8 @@ class Demo extends Phaser.Scene {
                     });
 
                 },
+
+                expanded: false, // true
             }
 
         })

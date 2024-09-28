@@ -139,6 +139,8 @@ var trees = scene.rexUI.add.trees({
         //     title: true,
         //     child: true,
         // },
+
+        // expanded: true,
     },
 
     // name: '',
@@ -251,6 +253,9 @@ var trees = scene.rexUI.add.trees({
     - `tree.expand.title`, `tree.expand.child` : Expand width/height of title, child game objects.    
         - `true` : Expand width/heigh. Default behavior.
         - `false` : Use origin width/height.
+    - `tree.expanded` : 
+        - `true` : Expand this tree node. Default behavior.
+        - `false` : Collapse this tree node.
 - `name` : Set name of this game object.
 - `draggable` : Set `true` to drag top-most object.
 - `sizerEvents` : Set `true` to fire [sizer events](ui-basesizer.md#events). Default value is `false`.
@@ -323,6 +328,8 @@ var tree = trees.addTree({
     //     title: true,
     //     child: true,
     // },
+
+    // expanded: true,
 })
 ```
 ```javascript
@@ -475,6 +482,43 @@ See also - [dirty](ui-basesizer.md#dirty)
 
 !!! note
     Layout topmost sizer when expanding/collapsing start.
+
+
+### Expand/collapse tree
+
+- Expand, will re-layout from topmost sizer
+    ```javascript
+    tree.expand();
+    // tree.expand(duration);
+    ```
+    ```javascript
+    tree.expand(0);  // Immediately, won't invoke expandCallback
+    ```
+- Collapse, will re-layout from topmost sizer
+    ```javascript
+    tree.collapse();
+    // tree.collapse(duration);
+    ```
+    ```javascript
+    tree.collapse(0);  // Immediately, won't invoke collapseCallback
+    ```
+- Toggle, will re-layout from topmost sizer
+    ```javascript
+    tree.toggle();
+    // tree.toggle(duration);
+    ```
+    ```javascript
+    tree.toggle(0);  // Immediately, won't invoke expandCallback/collapseCallback
+    ```
+- Set expanded state without re-layouting
+    ```javascript
+    tree.setExpandedState(expanded);  // true, or false
+    ```
+- Get expanded state
+    ```javascript
+    var expanded = tree.expanded;
+    ```
+    - `expanded` : Initial value is `undefined`
 
 ### Remove tree or node
 
