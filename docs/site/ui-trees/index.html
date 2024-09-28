@@ -8888,6 +8888,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#expandcollapse-tree" class="md-nav__link">
+    Expand/collapse tree
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#remove-tree-or-node" class="md-nav__link">
     Remove tree or node
   </a>
@@ -10059,6 +10066,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#expandcollapse-tree" class="md-nav__link">
+    Expand/collapse tree
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#remove-tree-or-node" class="md-nav__link">
     Remove tree or node
   </a>
@@ -10263,6 +10277,8 @@
 <span class="w">        </span><span class="c1">//     title: true,</span>
 <span class="w">        </span><span class="c1">//     child: true,</span>
 <span class="w">        </span><span class="c1">// },</span>
+
+<span class="w">        </span><span class="c1">// expanded: true,</span>
 <span class="w">    </span><span class="p">},</span>
 
 <span class="w">    </span><span class="c1">// name: &#39;&#39;,</span>
@@ -10416,6 +10432,11 @@
 <li><code>false</code> : Use origin width/height.</li>
 </ul>
 </li>
+<li><code>tree.expanded</code> : <ul>
+<li><code>true</code> : Expand this tree node. Default behavior.</li>
+<li><code>false</code> : Collapse this tree node.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><code>name</code> : Set name of this game object.</li>
@@ -10486,6 +10507,8 @@
 <span class="w">    </span><span class="c1">//     title: true,</span>
 <span class="w">    </span><span class="c1">//     child: true,</span>
 <span class="w">    </span><span class="c1">// },</span>
+
+<span class="w">    </span><span class="c1">// expanded: true,</span>
 <span class="p">})</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">subTree</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">tree</span><span class="p">.</span><span class="nx">addTree</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
@@ -10648,6 +10671,36 @@
 <p class="admonition-title">Note</p>
 <p>Layout topmost sizer when expanding/collapsing start.</p>
 </div>
+<h3 id="expandcollapse-tree">Expand/collapse tree<a class="headerlink" href="#expandcollapse-tree" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Expand, will re-layout from topmost sizer
+    <div class="highlight"><pre><span></span><code><span class="nx">tree</span><span class="p">.</span><span class="nx">expand</span><span class="p">();</span>
+<span class="c1">// tree.expand(duration);</span>
+</code></pre></div>
+    <div class="highlight"><pre><span></span><code><span class="nx">tree</span><span class="p">.</span><span class="nx">expand</span><span class="p">(</span><span class="mf">0</span><span class="p">);</span><span class="w">  </span><span class="c1">// Immediately, won&#39;t invoke expandCallback</span>
+</code></pre></div></li>
+<li>Collapse, will re-layout from topmost sizer
+    <div class="highlight"><pre><span></span><code><span class="nx">tree</span><span class="p">.</span><span class="nx">collapse</span><span class="p">();</span>
+<span class="c1">// tree.collapse(duration);</span>
+</code></pre></div>
+    <div class="highlight"><pre><span></span><code><span class="nx">tree</span><span class="p">.</span><span class="nx">collapse</span><span class="p">(</span><span class="mf">0</span><span class="p">);</span><span class="w">  </span><span class="c1">// Immediately, won&#39;t invoke collapseCallback</span>
+</code></pre></div></li>
+<li>Toggle, will re-layout from topmost sizer
+    <div class="highlight"><pre><span></span><code><span class="nx">tree</span><span class="p">.</span><span class="nx">toggle</span><span class="p">();</span>
+<span class="c1">// tree.toggle(duration);</span>
+</code></pre></div>
+    <div class="highlight"><pre><span></span><code><span class="nx">tree</span><span class="p">.</span><span class="nx">toggle</span><span class="p">(</span><span class="mf">0</span><span class="p">);</span><span class="w">  </span><span class="c1">// Immediately, won&#39;t invoke expandCallback/collapseCallback</span>
+</code></pre></div></li>
+<li>Set expanded state without re-layouting
+    <div class="highlight"><pre><span></span><code><span class="nx">tree</span><span class="p">.</span><span class="nx">setExpandedState</span><span class="p">(</span><span class="nx">expanded</span><span class="p">);</span><span class="w">  </span><span class="c1">// true, or false</span>
+</code></pre></div></li>
+<li>Get expanded state
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">expanded</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">tree</span><span class="p">.</span><span class="nx">expanded</span><span class="p">;</span>
+</code></pre></div><ul>
+<li><code>expanded</code> : Initial value is <code>undefined</code></li>
+</ul>
+</li>
+</ul>
 <h3 id="remove-tree-or-node">Remove tree or node<a class="headerlink" href="#remove-tree-or-node" title="Permanent link">&para;</a></h3>
 <h4 id="remove-tree">Remove tree<a class="headerlink" href="#remove-tree" title="Permanent link">&para;</a></h4>
 <ul>
