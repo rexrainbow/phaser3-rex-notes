@@ -34114,19 +34114,19 @@
             this
                 .on('expand.start', function () {
                     toggleButton.emit('expand.start', toggleButton);
-                    FireTreesSizerEvent(this, 'tree.expand.start');
+                    FireTreesSizerEvent(this, 'expand.start');
                 }, this)
                 .on('expand.complete', function () {
                     toggleButton.emit('expand.complete', toggleButton);
-                    FireTreesSizerEvent(this, 'tree.expand.complete');
+                    FireTreesSizerEvent(this, 'expand.complete');
                 })
                 .on('collapse.start', function () {
                     toggleButton.emit('collapse.start', toggleButton);
-                    FireTreesSizerEvent(this, 'tree.collapse.start');
+                    FireTreesSizerEvent(this, 'collapse.start');
                 })
                 .on('collapse.complete', function () {
                     toggleButton.emit('collapse.complete', toggleButton);
-                    FireTreesSizerEvent(this, 'tree.collapse.complete');
+                    FireTreesSizerEvent(this, 'collapse.complete');
                 });
 
             // Run this callback after adding to parent tree    
