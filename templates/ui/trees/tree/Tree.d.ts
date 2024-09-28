@@ -1,5 +1,6 @@
 import Folder from '../../folder/Folder';
 import Sizer from '../../sizer/Sizer';
+import Trees from '../Trees';
 import Triangle from '../../triangle/Triangle';
 import SimpleLabel from '../../simplelabel/SimpleLabel';
 export default Tree;
@@ -137,6 +138,10 @@ declare class Tree extends Folder {
     getTreeRoot(
         gameObject?: Phaser.GameObjects.GameObject
     ): Tree | null | undefined;
+
+    getTreesSizer(
+        gameObject?: Phaser.GameObjects.GameObject
+    ): Trees | null | undefined;
 
     isGrandsonNode(
         gameObject: Phaser.GameObjects.GameObject

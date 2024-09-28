@@ -67,23 +67,33 @@ class Tree extends ExtendNodeClass(Folder) {
         this.addChildrenMap('nodeBody', nodeBody);
         this.addChildrenMap('childrenNodes', childrenNodes);
 
+        // Route events
         this
             .on('expand.start', function () {
-                toggleButton.emit('expand.start', toggleButton)
-            })
+                toggleButton.emit('expand.start', toggleButton);
+                FireTreesSizerEvent(this, 'tree.expand.start');
+            }, this)
             .on('expand.complete', function () {
-                toggleButton.emit('expand.complete', toggleButton)
+                toggleButton.emit('expand.complete', toggleButton);
+                FireTreesSizerEvent(this, 'tree.expand.complete');
             })
             .on('collapse.start', function () {
-                toggleButton.emit('collapse.start', toggleButton)
+                toggleButton.emit('collapse.start', toggleButton);
+                FireTreesSizerEvent(this, 'tree.collapse.start');
             })
             .on('collapse.complete', function () {
-                toggleButton.emit('collapse.complete', toggleButton)
+                toggleButton.emit('collapse.complete', toggleButton);
+                FireTreesSizerEvent(this, 'tree.collapse.complete');
             })
 
-        var expanded = GetValue(config, 'expanded', true);
-        if (expanded !== undefined) {
-            this.setExpandedState(expanded);
+        // Run this callback after adding to parent tree    
+        var tree = this;
+        tree._postAddCallback = function () {
+            var expanded = GetValue(config, 'expanded', true);
+            if (expanded !== undefined) {
+                tree.setExpandedState(expanded);
+            }
+            delete tree._postAddCallback;
         }
     }
 
@@ -113,6 +123,13 @@ class Tree extends ExtendNodeClass(Folder) {
 // Static method
 Tree.CreateTree = function (scene, defaultConfig, overrideConfig) {
     return new Tree(scene, Merge(defaultConfig, overrideConfig));
+}
+
+var FireTreesSizerEvent = function (tree, eventName) {
+    var treesSizer = tree.getTreesSizer();
+    if (treesSizer) {
+        treesSizer.emit(eventName, tree);
+    }
 }
 
 Object.assign(

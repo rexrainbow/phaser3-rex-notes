@@ -672,3 +672,31 @@ See also - [dirty](ui-basesizer.md#dirty)
 
 Trees is extended from [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md), [container-lite](containerlite.md).
 Tree is extended from [folder](ui-folder.md).
+
+
+### Events
+
+- On tree expand-start
+    ```javascript
+    trees.on('tree.expand.start', function(tree){
+
+    })
+    ```
+- On tree expand-complete
+    ```javascript
+    trees.on('tree.expand.complete', function(tree){
+
+    })
+    ```
+- On tree collapse-start
+    ```javascript
+    trees.on('tree.collapse.start', function(tree){
+
+    })
+    ```
+- On tree collapse-complete
+    ```javascript
+    trees.on('tree.collapse.complete', function(tree){
+
+    })
+    ```

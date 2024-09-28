@@ -61,6 +61,12 @@ class Demo extends Phaser.Scene {
 
         })
             .setOrigin(0)
+            .on('tree.expand.start', function (tree) {
+                console.log(`Expand tree ${tree.getElement('nodeBody').text}`)
+            })
+            .on('tree.collapse.start', function (tree) {
+                console.log(`Collapse tree ${tree.getElement('nodeBody').text}`)
+            })
 
         var root = trees.addTree('t0');
         root.getElement('nodeBody').text = 'T0';

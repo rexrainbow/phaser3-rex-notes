@@ -33,6 +33,11 @@ export default {
         return undefined;
     },
 
+    getTreesSizer(gameObject) {
+        var root = this.getTreeRoot(gameObject);
+        return (root) ? root.getParentSizer() : null;
+    },
+
     isGrandsonNode(gameObject) {
         if ((gameObject === undefined) || (!gameObject.rexSizer)) {
             return false;

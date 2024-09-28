@@ -64,6 +64,11 @@ class Node extends ExtendNodeClass(Sizer) {
         return treeParent.getTreeRoot();
     }
 
+    getTreesSizer() {
+        var root = this.getTreeRoot();
+        return (root) ? root.getParentSizer() : null;
+    }
+
 }
 
 export default Node;
