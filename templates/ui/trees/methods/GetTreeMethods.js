@@ -3,6 +3,16 @@ export default {
         return this.treesMap[nodeKey];
     },
 
+    getTrees(out) {
+        if (out === undefined) {
+            out = [];
+        }
+        for (var nodeKey in this.treesMap) {
+            out.push(this.treesMap[nodeKey]);
+        }
+        return out;
+    },
+
     getNode(nodeKey) {
         var dotIndex = nodeKey.indexOf('.');
         if (dotIndex === -1) {

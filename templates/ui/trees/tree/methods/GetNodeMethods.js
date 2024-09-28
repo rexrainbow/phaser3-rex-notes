@@ -13,7 +13,7 @@ export default {
 
         if (mapNameList.length === 0) {
             return element;
-        } else if (element && this.isTree(element)) {
+        } else if (element && this.isTreeObject(element)) {
             return element.getNode(mapNameList);
         } else {
             return null;
@@ -35,6 +35,6 @@ export default {
     },
 
     getAllNodes(out) {
-
+        // TODO
     }
 }

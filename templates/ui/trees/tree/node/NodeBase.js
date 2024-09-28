@@ -1,5 +1,12 @@
 var ExtendNodeClass = function (GOClass) {
     return class Base extends GOClass {
+        get isTree() {
+            return false;
+        }
+
+        get isNode() {
+            return false;
+        }
 
         // Wrap text/setText() from nodeBody
         setText(text) {
@@ -44,7 +51,6 @@ var ExtendNodeClass = function (GOClass) {
             }
             return imageObject.frame;
         }
-
     }
 }
 

@@ -52,6 +52,10 @@ class Node extends ExtendNodeClass(Sizer) {
 
     }
 
+    get isNode() {
+        return true;
+    }
+
     getTreePatent() {
         return this.rexSizer.treeParent;
     }

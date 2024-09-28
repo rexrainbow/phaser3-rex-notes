@@ -674,6 +674,118 @@ Trees is extended from [sizer object](ui-sizer.md), [base sizer object](ui-bases
 Tree is extended from [folder](ui-folder.md).
 
 
+#### Set children interactive
+
+Applies [click](button.md), [tap](gesture-tap.md), [press](gesture-press.md), [swipe](gesture-swipe.md) behaviors on this trees, to detect input events of children.
+
+```javascript
+panel.setChildrenInteractive({
+    // dropZone: false,
+
+    // click: {mode: 'release', clickInterval: 100},
+
+    // over: undefined,
+    
+    // press: {time: 251, threshold: 9},
+
+    // tap: {time: 250, tapInterval: 200, threshold: 9, tapOffset: 10, 
+    //       taps: undefined, minTaps: undefined, maxTaps: undefined,},
+
+    // swipe: {threshold: 10, velocityThreshold: 1000, dir: '8dir'},
+
+    // inputEventPrefix: 'child.',
+})
+```
+
+- `dropZone` :
+    - `true` : Enable [drop Zone](touchevents.md#drop-zone) on scrollable area.
+    - `false` : Do nothing.
+
+
+#### Events
+
+- Pointer-down
+    ```javascript
+    sizer.on('child.down', function(child, pointer, event) {        
+    }, scope);
+    ```
+    - `child` : Tree or leaf-node.
+        - Is tree : `child.isTree`
+        - Is leaf-node : `child.isNode`
+- Pointer-up
+    ```javascript
+    sizer.on('child.up', function(child, pointer, event) {
+        // ...
+    }, scope);
+    ```
+    - `child` : Tree or leaf-node.
+        - Is tree : `child.isTree`
+        - Is leaf-node : `child.isNode`
+- Pointer-over
+    ```javascript
+    sizer.on('child.over', function(child, pointer, event) {
+        // ...
+    }, scope);
+    ```
+    - `child` : Tree or leaf-node.
+        - Is tree : `child.isTree`
+        - Is leaf-node : `child.isNode`
+- Pointer-out
+    ```javascript
+    sizer.on('child.out', function(child, pointer, event) {
+        // ...
+    }, scope);
+    ```
+    - `child` : Tree or leaf-node.
+        - Is tree : `child.isTree`
+        - Is leaf-node : `child.isNode`
+- Click
+    ```javascript
+    sizer.on('child.click', function(child, pointer, event) {
+        // ...
+    }, scope);
+    ```
+    - `child` : Tree or leaf-node.
+        - Is tree : `child.isTree`
+        - Is leaf-node : `child.isNode`
+    - `pointer` : [Pointer](touchevents.md#properties-of-point) object.    
+- Press
+    ```javascript
+    sizer.on('child.pressstart', function(child, pointer) { 
+        // ...
+    }, scope);
+    ```
+    ```javascript
+    sizer.on('child.pressend', function(child, pointer) { 
+        // ...
+    }, scope);
+    ```
+    - `child` : Tree or leaf-node.
+        - Is tree : `child.isTree`
+        - Is leaf-node : `child.isNode`
+- Tap
+    ```javascript
+    sizer.on(tapEventName, function(child, pointer) { 
+        // ...
+    }, scope);
+    ```
+    - `child` : Tree or leaf-node.
+        - Is tree : `child.isTree`
+        - Is leaf-node : `child.isNode`
+    - `tapEventName` :  `'child.1tap'`, `'child.2tap'`, `'child.3tap'`, etc ...
+- Swipe
+    ```javascript
+    sizer.on(swipeEventName, function(child, pointer) { 
+        // ...
+    }, scope);
+    ```
+    - `child` : Tree or leaf-node.
+        - Is tree : `child.isTree`
+        - Is leaf-node : `child.isNode`
+    - `swipeEventName` :  `'child.swipeleft'`, `'child.swiperight'`, `'child.swipeup'`, `'child.swipedown'`.
+
+
+
 ### Events
 
 - On tree expand-start

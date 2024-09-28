@@ -61,13 +61,25 @@ class Demo extends Phaser.Scene {
 
         })
             .setOrigin(0)
+
+        // Interactive
+        var print = this.add.text(0, 0, '');
+        trees
             .on('tree.expand.start', function (tree) {
-                console.log(`Expand tree ${tree.getElement('nodeBody').text}`)
+                print.text += `Expand tree ${tree.getElement('nodeBody').text}\n`;
             })
             .on('tree.collapse.start', function (tree) {
-                console.log(`Collapse tree ${tree.getElement('nodeBody').text}`)
+                print.text += `Collapse tree ${tree.getElement('nodeBody').text}\n`;
             })
 
+        trees
+            .setChildrenInteractive()
+            .on('child.click', function (child, pointer, event) {
+                var childType = (child.isTree) ? 'tree' : 'node';
+                print.text += `Click ${childType} ${child.getElement('nodeBody').text}\n`;
+            });
+
+        // Build tree and node
         var root = trees.addTree('t0');
         root.getElement('nodeBody').text = 'T0';
 

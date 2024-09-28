@@ -9,6 +9,9 @@ declare namespace Node {
 }
 
 declare class Node extends Sizer {
+    readonly isTree: false;
+    readonly isNode: true;
+
     getTreePatent(): Tree;
     getTreeRoot(): Tree;
     getTreesSizer(): Trees | null | undefined;

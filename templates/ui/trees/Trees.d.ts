@@ -38,6 +38,10 @@ declare class Trees extends Sizer {
         nodeKey: string
     ): Tree;
 
+    getTrees(
+        out?: Phaser.GameObjects.GameObject[]
+    ): Tree[];
+
     getNode(
         nodeKey: string
     ): Phaser.GameObjects.GameObject;

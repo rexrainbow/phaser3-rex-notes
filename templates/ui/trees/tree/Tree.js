@@ -111,12 +111,16 @@ class Tree extends ExtendNodeClass(Folder) {
         super.destroy(fromScene);
     }
 
+    get isTree() {
+        return true;
+    }
+
     createTree(config) {
         return Tree.CreateTree(this.scene, this.configSave, config)
     }
 
-    isTree(gameObject) {
-        return (!!gameObject) && gameObject instanceof (TreeNode);
+    isTreeObject(gameObject) {
+        return gameObject && gameObject instanceof (Tree);
     }
 }
 
