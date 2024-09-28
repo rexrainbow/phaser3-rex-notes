@@ -1,6 +1,6 @@
 ## Introduction
 
-A container with trees, each tree is composed of nested folders.
+A container with trees and leaf-nodes
 
 - Author: Rex
 - Game object
@@ -162,7 +162,7 @@ var trees = scene.rexUI.add.trees({
         - Padding : `'+n'`, or `'-n'`.
     - `onResizeCallback` : A default resize callback will be assigned interanlly. 
 - `width`, `height` : Minimum width, minimum height.
-- `origin`, `originX`, `originY` : Set origin of this sizer. Default value is (0.5, 0.5).
+- `origin`, `originX`, `originY` : Set origin of this trees. Default value is (0.5, 0.5).
 - `orientation` :
     - `'left-to-right'`, `'horizontal'`,`'h'`, `'x'`, or `0` : Put icon at left side, and text at right side.
     - `'top-to-bottom'`, `'vertical'`,`'v'`, `'y'`, or `1` : Put icon at top side, and text at bottom side.
@@ -258,7 +258,7 @@ var trees = scene.rexUI.add.trees({
         - `false` : Collapse this tree node.
 - `name` : Set name of this game object.
 - `draggable` : Set `true` to drag top-most object.
-- `sizerEvents` : Set `true` to fire [sizer events](ui-basesizer.md#events). Default value is `false`.
+- `sizerEvents` : Set `true` to fire [trees events](ui-basesizer.md#events). Default value is `false`.
 - `enableLayer` : 
     - `false` : Add child game objects into scene's display list. Default behavior.
     - `true` : Add child game objects into an internal [layer game object](layer.md). [See also](containerlite.md#layer).
@@ -481,12 +481,12 @@ trees.layout();
 See also - [dirty](ui-basesizer.md#dirty)
 
 !!! note
-    Layout topmost sizer when expanding/collapsing start.
+    Layout topmost trees when expanding/collapsing start.
 
 
 ### Expand/collapse tree
 
-- Expand, will re-layout from topmost sizer
+- Expand, will re-layout from topmost trees
     ```javascript
     tree.expand();
     // tree.expand(duration);
@@ -494,7 +494,7 @@ See also - [dirty](ui-basesizer.md#dirty)
     ```javascript
     tree.expand(0);  // Immediately, won't invoke expandCallback
     ```
-- Collapse, will re-layout from topmost sizer
+- Collapse, will re-layout from topmost trees
     ```javascript
     tree.collapse();
     // tree.collapse(duration);
@@ -502,7 +502,7 @@ See also - [dirty](ui-basesizer.md#dirty)
     ```javascript
     tree.collapse(0);  // Immediately, won't invoke collapseCallback
     ```
-- Toggle, will re-layout from topmost sizer
+- Toggle, will re-layout from topmost trees
     ```javascript
     tree.toggle();
     // tree.toggle(duration);
@@ -670,7 +670,7 @@ See also - [dirty](ui-basesizer.md#dirty)
 
 ### Other properties
 
-Trees is extended from [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md), [container-lite](containerlite.md).
+Trees is extended from [trees object](ui-trees.md), [base trees object](ui-basesizer.md), [container-lite](containerlite.md).
 Tree is extended from [folder](ui-folder.md).
 
 
@@ -706,82 +706,82 @@ tree.setChildrenInteractive({
 
 - Pointer-down
     ```javascript
-    sizer.on('child.down', function(child, pointer, event) {        
+    trees.on('child.down', function(child, pointer, event) {        
     }, scope);
     ```
     - `child` : Tree or leaf-node.
-        - Is tree : `child.isTree`
-        - Is leaf-node : `child.isNode`
+        - Pointer on tree's title : `child.isTree`
+        - Pointer on leaf-node : `child.isNode`
 - Pointer-up
     ```javascript
-    sizer.on('child.up', function(child, pointer, event) {
+    trees.on('child.up', function(child, pointer, event) {
         // ...
     }, scope);
     ```
     - `child` : Tree or leaf-node.
-        - Is tree : `child.isTree`
-        - Is leaf-node : `child.isNode`
+        - Pointer on tree's title : `child.isTree`
+        - Pointer on leaf-node : `child.isNode`
 - Pointer-over
     ```javascript
-    sizer.on('child.over', function(child, pointer, event) {
+    trees.on('child.over', function(child, pointer, event) {
         // ...
     }, scope);
     ```
     - `child` : Tree or leaf-node.
-        - Is tree : `child.isTree`
-        - Is leaf-node : `child.isNode`
+        - Pointer on tree's title : `child.isTree`
+        - Pointer on leaf-node : `child.isNode`
 - Pointer-out
     ```javascript
-    sizer.on('child.out', function(child, pointer, event) {
+    trees.on('child.out', function(child, pointer, event) {
         // ...
     }, scope);
     ```
     - `child` : Tree or leaf-node.
-        - Is tree : `child.isTree`
-        - Is leaf-node : `child.isNode`
+        - Pointer on tree's title : `child.isTree`
+        - Pointer on leaf-node : `child.isNode`
 - Click
     ```javascript
-    sizer.on('child.click', function(child, pointer, event) {
+    trees.on('child.click', function(child, pointer, event) {
         // ...
     }, scope);
     ```
     - `child` : Tree or leaf-node.
-        - Is tree : `child.isTree`
-        - Is leaf-node : `child.isNode`
+        - Pointer on tree's title : `child.isTree`
+        - Pointer on leaf-node : `child.isNode`
     - `pointer` : [Pointer](touchevents.md#properties-of-point) object.    
 - Press
     ```javascript
-    sizer.on('child.pressstart', function(child, pointer) { 
+    trees.on('child.pressstart', function(child, pointer) { 
         // ...
     }, scope);
     ```
     ```javascript
-    sizer.on('child.pressend', function(child, pointer) { 
+    trees.on('child.pressend', function(child, pointer) { 
         // ...
     }, scope);
     ```
     - `child` : Tree or leaf-node.
-        - Is tree : `child.isTree`
-        - Is leaf-node : `child.isNode`
+        - Pointer on tree's title : `child.isTree`
+        - Pointer on leaf-node : `child.isNode`
 - Tap
     ```javascript
-    sizer.on(tapEventName, function(child, pointer) { 
+    trees.on(tapEventName, function(child, pointer) { 
         // ...
     }, scope);
     ```
     - `child` : Tree or leaf-node.
-        - Is tree : `child.isTree`
-        - Is leaf-node : `child.isNode`
+        - Pointer on tree's title : `child.isTree`
+        - Pointer on leaf-node : `child.isNode`
     - `tapEventName` :  `'child.1tap'`, `'child.2tap'`, `'child.3tap'`, etc ...
 - Swipe
     ```javascript
-    sizer.on(swipeEventName, function(child, pointer) { 
+    trees.on(swipeEventName, function(child, pointer) { 
         // ...
     }, scope);
     ```
     - `child` : Tree or leaf-node.
-        - Is tree : `child.isTree`
-        - Is leaf-node : `child.isNode`
+        - Pointer on tree's title : `child.isTree`
+        - Pointer on leaf-node : `child.isNode`
     - `swipeEventName` :  `'child.swipeleft'`, `'child.swiperight'`, `'child.swipeup'`, `'child.swipedown'`.
 
 
