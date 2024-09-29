@@ -2,8 +2,8 @@ var SetTableOY = function (oy) {
     var table = this.table;
     var topTableOY = this.topTableOY;
     var bottomTableOY = this.bottomTableOY;
-    var tableOYExceedTop = (oy > this.topTableOY);
-    var tableOYExeceedBottom = (oy < this.bottomTableOY);
+    var tableOYExceedTop = (oy > topTableOY);
+    var tableOYExeceedBottom = (oy < bottomTableOY);
     if (this.clampTableOXY) {
         var rowCount = table.rowCount;
         var visibleRowCount = table.heightToRowIndex(this.instHeight, 1);

@@ -95,6 +95,15 @@ class Demo extends Phaser.Scene {
         node = subTree.addNode('t00n2');
         node.getElement('nodeBody').text = 'T00N2';
 
+        subTree = root.addTree('t01');
+        subTree.getElement('nodeBody').text = 'T01';
+
+        node = subTree.addNode('t01n0');
+        node.getElement('nodeBody').text = 'T01N0';
+
+        node = subTree.addNode('t01n1');
+        node.getElement('nodeBody').text = 'T01N1';
+
         trees.layout();
     }
 
