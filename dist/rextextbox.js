@@ -10003,7 +10003,7 @@
         return Object.prototype.toString.call(obj) === '[object Array]';
     };
 
-    var ContainsPoint = function (gameObject, x, y, preTest, postTest) {
+    var ContainsPoint$1 = function (gameObject, x, y, preTest, postTest) {
         return IsPointInBounds(
             gameObject,
             x, y,
@@ -10031,7 +10031,7 @@
         }
     };
 
-    var PointToChild$1 = function (x, y, preTest, postTest, children) {
+    var PointToChild = function (x, y, preTest, postTest, children) {
         if (!IsFunction(preTest)) {
             children = preTest;
             preTest = undefined;
@@ -10050,7 +10050,7 @@
             var child;
             for (var i = 0, cnt = children.length; i < cnt; i++) {
                 child = children[i];
-                if (ContainsPoint(child, x, y, preTest, postTest)) {
+                if (ContainsPoint$1(child, x, y, preTest, postTest)) {
                     return child;
                 }
             }
@@ -10058,7 +10058,7 @@
             var child;
             for (var key in children) {
                 child = children[key];
-                if (ContainsPoint(child, x, y, preTest, postTest)) {
+                if (ContainsPoint$1(child, x, y, preTest, postTest)) {
                     return child;
                 }
             }
@@ -11168,16 +11168,26 @@
         },
     };
 
-    var PointToChild = function (parents, x, y) {
-        var parent;
-        for (var i = 0, cnt = parents.length; i < cnt; i++) {
-            parent = parents[i];
-            if (!ContainsPoint(parent, x, y)) {
-                continue;
-            }
+    var ContainsPoint = function (gameObjects, x, y, targetMode) {
+        if (targetMode === 'parent') {
+            var parent;
+            for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+                parent = gameObjects[i];
+                if (!ContainsPoint$1(parent, x, y)) {
+                    continue;
+                }
 
-            return parent.pointToChild(x, y);
+                return parent.pointToChild(x, y);
+            }
+        } else {  // direct mode
+            for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+                var target = gameObjects[i];
+                if (ContainsPoint$1(target, x, y)) {
+                    return target;
+                }
+            }
         }
+
         return null;
     };
 
@@ -11193,18 +11203,7 @@
             var camera = pointer.camera;
             var px = worldX + camera.scrollX * (firstChild.scrollFactorX - 1);
             var py = worldY + camera.scrollY * (firstChild.scrollFactorY - 1);
-
-            if (targetMode === 'parent') {
-                child = PointToChild(targets, px, py);
-            } else {
-                for (var i = 0, cnt = targets.length; i < cnt; i++) {
-                    var target = targets[i];
-                    if (ContainsPoint(target, px, py)) {
-                        child = target;
-                        break;
-                    }
-                }
-            }
+            child = ContainsPoint(targets, px, py, targetMode);
         }
 
         if (!child) {
@@ -11294,7 +11293,7 @@
         var px = pointer.worldX + camera.scrollX * (firstChild.scrollFactorX - 1);
         var py = pointer.worldY + camera.scrollY * (firstChild.scrollFactorY - 1);
 
-        var child = PointToChild(childrenInteractive.targetSizers, px, py);
+        var child = ContainsPoint(childrenInteractive.targetSizers, px, py, childrenInteractive.targetMode);
         var preChild = childrenInteractive.lastOverChild;
         if (child && preChild &&
             (child === preChild)) {
@@ -12898,7 +12897,7 @@
 
         setAnchor: SetAnchor,
         isInTouching: IsInTouching,
-        pointToChild: PointToChild$1,
+        pointToChild: PointToChild,
         setDraggable: SetDraggable,
         setChildrenInteractive: SetChildrenInteractiveWrap,
         broadcastEvent: BroadcastEvent,
