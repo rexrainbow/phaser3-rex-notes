@@ -43,7 +43,10 @@ class Demo extends Phaser.Scene {
         sizer.layout();
 
         var print = this.add.text(0, 0, '');
-        sizer.setChildrenInteractive()
+        sizer.setChildrenInteractive({
+            targets: sizer.getElement('items'),
+            targetMode: 'direct',
+        })
             .on('child.click', function (child) {
                 var index = sizer.getElement('items').indexOf(child);
                 print.text += `click ${index}\n`;

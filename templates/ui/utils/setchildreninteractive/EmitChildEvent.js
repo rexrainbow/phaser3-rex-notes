@@ -1,5 +1,4 @@
-import PointToChild from './PointToChild.js';
-import ContainsPoint from '../ContainsPoint.js';
+import ContainsPoint from './ContainsPoint.js';
 
 var EmitChildEvent = function (eventEmitter, eventName, targets, targetMode, worldX, worldY, pointer, event) {
     var child;
@@ -13,18 +12,7 @@ var EmitChildEvent = function (eventEmitter, eventName, targets, targetMode, wor
         var camera = pointer.camera;
         var px = worldX + camera.scrollX * (firstChild.scrollFactorX - 1);
         var py = worldY + camera.scrollY * (firstChild.scrollFactorY - 1);
-
-        if (targetMode === 'parent') {
-            child = PointToChild(targets, px, py);
-        } else {
-            for (var i = 0, cnt = targets.length; i < cnt; i++) {
-                var target = targets[i];
-                if (ContainsPoint(target, px, py)) {
-                    child = target;
-                    break;
-                }
-            }
-        }
+        child = ContainsPoint(targets, px, py, targetMode);
     }
 
     if (!child) {

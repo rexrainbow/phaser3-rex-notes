@@ -1,4 +1,4 @@
-import PointToChild from './PointToChild.js';
+import ContainsPoint from './ContainsPoint.js';
 import EmitChildEvent from './EmitChildEvent.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -27,7 +27,7 @@ var OnMove = function (pointer, localX, localY, event) {
     var px = pointer.worldX + camera.scrollX * (firstChild.scrollFactorX - 1);
     var py = pointer.worldY + camera.scrollY * (firstChild.scrollFactorY - 1);
 
-    var child = PointToChild(childrenInteractive.targetSizers, px, py);
+    var child = ContainsPoint(childrenInteractive.targetSizers, px, py, childrenInteractive.targetMode);
     var preChild = childrenInteractive.lastOverChild;
     if (child && preChild &&
         (child === preChild)) {
