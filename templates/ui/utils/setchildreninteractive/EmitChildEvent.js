@@ -12,7 +12,7 @@ var EmitChildEvent = function (eventEmitter, eventName, targets, targetMode, wor
         var camera = pointer.camera;
         var px = worldX + camera.scrollX * (firstChild.scrollFactorX - 1);
         var py = worldY + camera.scrollY * (firstChild.scrollFactorY - 1);
-        child = ContainsPoint(targets, px, py, targetMode);
+        child = ContainsPoint(targetMode, targets, px, py);
     }
 
     if (!child) {

@@ -1,6 +1,6 @@
 import ContainsPointTest from '../ContainsPoint.js';
 
-var ContainsPoint = function (gameObjects, x, y, targetMode) {
+var ContainsPoint = function (targetMode, gameObjects, x, y) {
     if (targetMode === 'parent') {
         var parent;
         for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {

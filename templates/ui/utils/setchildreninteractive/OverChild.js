@@ -27,7 +27,7 @@ var OnMove = function (pointer, localX, localY, event) {
     var px = pointer.worldX + camera.scrollX * (firstChild.scrollFactorX - 1);
     var py = pointer.worldY + camera.scrollY * (firstChild.scrollFactorY - 1);
 
-    var child = ContainsPoint(childrenInteractive.targetSizers, px, py, childrenInteractive.targetMode);
+    var child = ContainsPoint(childrenInteractive.targetMode, childrenInteractive.targetSizers, px, py);
     var preChild = childrenInteractive.lastOverChild;
     if (child && preChild &&
         (child === preChild)) {
