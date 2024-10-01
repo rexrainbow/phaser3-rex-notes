@@ -9883,7 +9883,7 @@
         },
     };
 
-    var ContainsPoint = function (gameObjects, x, y, targetMode) {
+    var ContainsPoint = function (targetMode, gameObjects, x, y) {
         if (targetMode === 'parent') {
             var parent;
             for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
@@ -9918,7 +9918,7 @@
             var camera = pointer.camera;
             var px = worldX + camera.scrollX * (firstChild.scrollFactorX - 1);
             var py = worldY + camera.scrollY * (firstChild.scrollFactorY - 1);
-            child = ContainsPoint(targets, px, py, targetMode);
+            child = ContainsPoint(targetMode, targets, px, py);
         }
 
         if (!child) {
@@ -10008,7 +10008,7 @@
         var px = pointer.worldX + camera.scrollX * (firstChild.scrollFactorX - 1);
         var py = pointer.worldY + camera.scrollY * (firstChild.scrollFactorY - 1);
 
-        var child = ContainsPoint(childrenInteractive.targetSizers, px, py, childrenInteractive.targetMode);
+        var child = ContainsPoint(childrenInteractive.targetMode, childrenInteractive.targetSizers, px, py);
         var preChild = childrenInteractive.lastOverChild;
         if (child && preChild &&
             (child === preChild)) {
