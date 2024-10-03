@@ -734,7 +734,7 @@ See [Base-sizer/Set children interactive](ui-basesizer.md#set-children-interacti
 
 ##### Events
 
-See [Base-sizer/Set children interactive/Events](ui-basesizer.md#events)
+See [Base-sizer/Set children interactive/Events](ui-basesizer.md#events_1)
 
 ## Steps of building a scrollable panel
 

@@ -53,7 +53,7 @@ class Demo extends Phaser.Scene {
                 // child : Label from CreateItem()  
                 print.text += `Click ${child.name}`;
                 console.log(`Click ${child.name}`);
-                if (child.isInTouching('actions[0]')) {
+                if (child.isInTouching('action')) {
                     print.text += `'s action button`;
                 }
                 print.text += '\n';
@@ -66,7 +66,7 @@ class Demo extends Phaser.Scene {
 var CreatePanel = function (scene) {
     var panel = scene.rexUI.add.sizer({
         orientation: 'y',
-        space: { item: 5 }
+        space: { item: 5 },
     })
 
     for (var i = 0; i < 30; i++) {
@@ -81,25 +81,33 @@ var CreatePanel = function (scene) {
 }
 
 var CreateItem = function (scene, text) {
-    var item = scene.rexUI.add.dialog({
+    var item = scene.rexUI.add.sizer({
         height: 80,
-
+        orientation: 'y',
         space: { left: 10, right: 10, top: 10, bottom: 10 },
+        name: text
+    })
 
-        background: scene.rexUI.add.roundRectangle({
-            radius: 10,
-            color: COLOR_MAIN
-        }),
-
-        title: scene.rexUI.add.label({
-            text: scene.add.text(0, 0, text),
-        }),
-
-        content: scene.rexUI.add.label({
-            text: scene.add.text(0, 0, 'AAAAAAAA'),
-        }),
-
-        actions: [
+    item
+        .addBackground(
+            scene.rexUI.add.roundRectangle({
+                radius: 10,
+                color: COLOR_MAIN
+            })
+        )
+        .add(
+            scene.rexUI.add.label({
+                text: scene.add.text(0, 0, text),
+            }),
+            { align: 'left' }
+        )
+        .add(
+            scene.rexUI.add.label({
+                text: scene.add.text(0, 0, 'AAAAAAAA'),
+            }),
+            { align: 'left' }
+        )
+        .add(
             scene.rexUI.add.label({
                 space: { left: 5, right: 5, top: 5, bottom: 5 },
                 background: scene.rexUI.add.roundRectangle({
@@ -107,18 +115,8 @@ var CreateItem = function (scene, text) {
                 }),
                 text: scene.add.text(0, 0, 'OK'),
             }),
-        ],
-
-        proportion: {
-            content: 1,
-        },
-
-        align: {
-            actions: 'right'
-        },
-
-        name: text
-    })
+            { align: 'right', key: 'action' }
+        )
     return item;
 }
 
