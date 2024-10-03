@@ -1486,6 +1486,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/shape-roundrectangleprogress/</loc>
+         <lastmod>2024-10-03</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/shape-spinner/</loc>
          <lastmod>2024-10-03</lastmod>
          <changefreq>daily</changefreq>

@@ -259,6 +259,7 @@ module.exports = {
     'circularprogress': './templates/ui/circularprogress/CircularProgress.js',
     'circularprogresscanvas': './templates/ui/circularprogresscanvas/CircularProgressCanvas.js',
     'lineprogress': './templates/ui/lineprogress/LineProgress.js',
+    'roundrectangleprogress': './templates/ui/roundrectangleprogress/RoundRectangleProgress.js',
     'lineprogresscanvas': './templates/ui/lineprogresscanvas/LineProgressCanvas.js',    
     'knob': './templates/ui/knob/Knob.js',
     'customshapes': './templates/ui/customshapes/CustomShapes.js',
