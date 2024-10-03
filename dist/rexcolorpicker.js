@@ -14575,6 +14575,10 @@
         radius.y = Math.abs(radius.y);
     };
 
+    var IsArcCorner = function (radius) {
+        return ((radius.x > 0) && (radius.y > 0));
+    };
+
     var LineTo = function (x, y, pathData) {
         var cnt = pathData.length;
         if (cnt >= 2) {
@@ -14656,8 +14660,7 @@
                 geom.setTo(0, 0, width, height, radius);
             }
 
-            var iteration = GetValue$1(radiusConfig, 'iteration', undefined);
-            this.setIteration(iteration);
+            this.setIteration(GetValue$1(radiusConfig, 'iteration', undefined));
             this.setPosition(x, y);
 
             this.setFillStyle(fillColor, fillAlpha);
@@ -14909,10 +14912,6 @@
         }
 
     }
-
-    var IsArcCorner = function (radius) {
-        return ((radius.x > 0) && (radius.y > 0));
-    };
 
     const ShapeTypeMap = {
         rectangle: 0,

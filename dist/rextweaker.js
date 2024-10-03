@@ -19856,6 +19856,10 @@
         Render$2
     );
 
+    var IsArcCorner = function (radius) {
+        return ((radius.x > 0) && (radius.y > 0));
+    };
+
     var LineTo = function (x, y, pathData) {
         var cnt = pathData.length;
         if (cnt >= 2) {
@@ -19937,8 +19941,7 @@
                 geom.setTo(0, 0, width, height, radius);
             }
 
-            var iteration = GetValue$1p(radiusConfig, 'iteration', undefined);
-            this.setIteration(iteration);
+            this.setIteration(GetValue$1p(radiusConfig, 'iteration', undefined));
             this.setPosition(x, y);
 
             this.setFillStyle(fillColor, fillAlpha);
@@ -20189,10 +20192,6 @@
             return this;
         }
 
-    };
-
-    var IsArcCorner = function (radius) {
-        return ((radius.x > 0) && (radius.y > 0));
     };
 
     const ShapeTypeMap = {
@@ -21961,6 +21960,7 @@
         var skewX = this.skewX;
         var width = this.width - Math.abs(skewX);
         var height = this.height;
+
         var trackFill = this.getShape('trackFill');
         trackFill.fillStyle(this.trackColor);
         if (trackFill.isFilled) {
@@ -21969,8 +21969,7 @@
                 0, 0,           // x0, y0
                 width, height,  // x1, y1
                 skewX           // skewX
-            )
-                .close();
+            );
         }
 
         var bar = this.getShape('bar');
@@ -21990,8 +21989,7 @@
                 barX0, 0,       // x0, y0
                 barX1, height,  // x1, y1
                 skewX           // skew
-            )
-                .close();
+            );
         }
 
         var trackStroke = this.getShape('trackStroke');
@@ -22002,8 +22000,7 @@
                 0, 0,           // x0, y0
                 width, height,  // x1, y1
                 skewX           // skewX
-            )
-                .end();
+            );
         }
     };
 
@@ -22023,6 +22020,8 @@
                 .lineTo(x0, y0).lineTo(startX, y0);
         }
 
+        lines.close();
+
         return lines;
     };
 
@@ -22033,23 +22032,32 @@
         constructor(scene, x, y, width, height, barColor, value, config) {
             if (IsPlainObject$i(x)) {
                 config = x;
-                x = GetValue$1l(config, 'x', 0);
-                y = GetValue$1l(config, 'y', 0);
-                width = GetValue$1l(config, 'width', 2);
-                height = GetValue$1l(config, 'height', 2);
-                barColor = GetValue$1l(config, 'barColor', undefined);
-                value = GetValue$1l(config, 'value', 0);
+
+                x = config.x;
+                y = config.y;
+                width = config.width;
+                height = config.height;
+                barColor = config.barColor;
+                value = config.value;
             } else if (IsPlainObject$i(width)) {
                 config = width;
-                width = GetValue$1l(config, 'width', 2);
-                height = GetValue$1l(config, 'height', 2);
-                barColor = GetValue$1l(config, 'barColor', undefined);
-                value = GetValue$1l(config, 'value', 0);
+
+                width = config.width;
+                height = config.height;
+                barColor = config.barColor;
+                value = config.value;
             } else if (IsPlainObject$i(barColor)) {
                 config = barColor;
-                barColor = GetValue$1l(config, 'barColor', undefined);
-                value = GetValue$1l(config, 'value', 0);
+
+                barColor = config.barColor;
+                value = config.value;
             }
+
+            if (x === undefined) { x = 0; }
+            if (y === undefined) { y = 0; }
+            if (width === undefined) { width = 2; }
+            if (height === undefined) { height = width; }
+            if (value === undefined) { value = 0; }
 
             super(scene, x, y, width, height, config);
             this.type = 'rexLineProgress';

@@ -1,7 +1,7 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
     typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexlineprogress = factory());
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexroundrectangleprogressplugin = factory());
 })(this, (function () { 'use strict';
 
     const GetCalcMatrix = Phaser.GameObjects.GetCalcMatrix;
@@ -458,7 +458,7 @@
         }
     };
 
-    const GetValue$8 = Phaser.Utils.Objects.GetValue;
+    const GetValue$9 = Phaser.Utils.Objects.GetValue;
 
     class ComponentBase {
         constructor(parent, config) {
@@ -467,7 +467,7 @@
             this.isShutdown = false;
 
             // Event emitter, default is private event emitter
-            this.setEventEmitter(GetValue$8(config, 'eventEmitter', true));
+            this.setEventEmitter(GetValue$9(config, 'eventEmitter', true));
 
             // Register callback of parent destroy event, also see `shutdown` method
             if (this.parent) {
@@ -544,7 +544,7 @@
         EventEmitterMethods
     );
 
-    const GetValue$7 = Phaser.Utils.Objects.GetValue;
+    const GetValue$8 = Phaser.Utils.Objects.GetValue;
 
     class TickTask extends ComponentBase {
         constructor(parent, config) {
@@ -553,7 +553,7 @@
             this._isRunning = false;
             this.isPaused = false;
             this.tickingState = false;
-            this.setTickingMode(GetValue$7(config, 'tickingMode', 1));
+            this.setTickingMode(GetValue$8(config, 'tickingMode', 1));
             // boot() later
         }
 
@@ -657,7 +657,7 @@
         'always': 2
     };
 
-    const GetValue$6 = Phaser.Utils.Objects.GetValue;
+    const GetValue$7 = Phaser.Utils.Objects.GetValue;
 
     class SceneUpdateTickTask extends TickTask {
         constructor(parent, config) {
@@ -668,7 +668,7 @@
 
             // If this.scene is not available, use game's 'step' event
             var defaultEventName = (this.scene) ? 'update' : 'step';
-            this.tickEventName = GetValue$6(config, 'tickEventName', defaultEventName);
+            this.tickEventName = GetValue$7(config, 'tickEventName', defaultEventName);
             this.isSceneTicker = !IsGameUpdateEvent(this.tickEventName);
 
         }
@@ -704,7 +704,7 @@
         return (eventName === 'step') || (eventName === 'poststep');
     };
 
-    const GetValue$5 = Phaser.Utils.Objects.GetValue;
+    const GetValue$6 = Phaser.Utils.Objects.GetValue;
     const Clamp$1 = Phaser.Math.Clamp;
 
     class Timer {
@@ -713,15 +713,15 @@
         }
 
         resetFromJSON(o) {
-            this.state = GetValue$5(o, 'state', IDLE);
-            this.timeScale = GetValue$5(o, 'timeScale', 1);
-            this.delay = GetValue$5(o, 'delay', 0);
-            this.repeat = GetValue$5(o, 'repeat', 0);
-            this.repeatCounter = GetValue$5(o, 'repeatCounter', 0);
-            this.repeatDelay = GetValue$5(o, 'repeatDelay', 0);
-            this.duration = GetValue$5(o, 'duration', 0);
-            this.nowTime = GetValue$5(o, 'nowTime', 0);
-            this.justRestart = GetValue$5(o, 'justRestart', false);
+            this.state = GetValue$6(o, 'state', IDLE);
+            this.timeScale = GetValue$6(o, 'timeScale', 1);
+            this.delay = GetValue$6(o, 'delay', 0);
+            this.repeat = GetValue$6(o, 'repeat', 0);
+            this.repeatCounter = GetValue$6(o, 'repeatCounter', 0);
+            this.repeatDelay = GetValue$6(o, 'repeatDelay', 0);
+            this.duration = GetValue$6(o, 'duration', 0);
+            this.nowTime = GetValue$6(o, 'nowTime', 0);
+            this.justRestart = GetValue$6(o, 'justRestart', false);
         }
 
         toJSON() {
@@ -929,19 +929,19 @@
 
     }
 
-    const GetValue$4 = Phaser.Utils.Objects.GetValue;
+    const GetValue$5 = Phaser.Utils.Objects.GetValue;
     const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
     const GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
 
     class EaseValueTaskBase extends TimerTickTask {
         resetFromJSON(o) {
-            this.timer.resetFromJSON(GetValue$4(o, 'timer'));
-            this.setEnable(GetValue$4(o, 'enable', true));
-            this.setTarget(GetValue$4(o, 'target', this.parent));
+            this.timer.resetFromJSON(GetValue$5(o, 'timer'));
+            this.setEnable(GetValue$5(o, 'enable', true));
+            this.setTarget(GetValue$5(o, 'target', this.parent));
             this.setDelay(GetAdvancedValue(o, 'delay', 0));
             this.setDuration(GetAdvancedValue(o, 'duration', 1000));
-            this.setEase(GetValue$4(o, 'ease', 'Linear'));
-            this.setRepeat(GetValue$4(o, 'repeat', 0));
+            this.setEase(GetValue$5(o, 'ease', 'Linear'));
+            this.setRepeat(GetValue$5(o, 'repeat', 0));
 
             return this;
         }
@@ -1061,7 +1061,7 @@
         }
     }
 
-    const GetValue$3 = Phaser.Utils.Objects.GetValue;
+    const GetValue$4 = Phaser.Utils.Objects.GetValue;
     const Linear$1 = Phaser.Math.Linear;
 
     class EaseValueTask extends EaseValueTaskBase {
@@ -1080,16 +1080,16 @@
             }
 
             var target = this.target;
-            this.propertyKey = GetValue$3(config, 'key', 'value');
+            this.propertyKey = GetValue$4(config, 'key', 'value');
             var currentValue = target[this.propertyKey];
-            this.fromValue = GetValue$3(config, 'from', currentValue);
-            this.toValue = GetValue$3(config, 'to', currentValue);
+            this.fromValue = GetValue$4(config, 'from', currentValue);
+            this.toValue = GetValue$4(config, 'to', currentValue);
 
-            this.setEase(GetValue$3(config, 'ease', this.ease));
-            this.setDuration(GetValue$3(config, 'duration', this.duration));
-            this.setRepeat(GetValue$3(config, 'repeat', 0));
-            this.setDelay(GetValue$3(config, 'delay', 0));
-            this.setRepeatDelay(GetValue$3(config, 'repeatDelay', 0));
+            this.setEase(GetValue$4(config, 'ease', this.ease));
+            this.setDuration(GetValue$4(config, 'duration', this.duration));
+            this.setRepeat(GetValue$4(config, 'repeat', 0));
+            this.setDelay(GetValue$4(config, 'delay', 0));
+            this.setRepeatDelay(GetValue$4(config, 'repeatDelay', 0));
 
             this.timer
                 .setDuration(this.duration)
@@ -1190,24 +1190,24 @@
         easeValueRepeat: EaseValueRepeat
     };
 
-    const GetValue$2 = Phaser.Utils.Objects.GetValue;
+    const GetValue$3 = Phaser.Utils.Objects.GetValue;
     const Clamp = Phaser.Math.Clamp;
 
     function ProgressBase (BaseClass) {
         class ProgressBase extends BaseClass {
             bootProgressBase(config) {
-                this.eventEmitter = GetValue$2(config, 'eventEmitter', this);
+                this.eventEmitter = GetValue$3(config, 'eventEmitter', this);
 
-                var callback = GetValue$2(config, 'valuechangeCallback', null);
+                var callback = GetValue$3(config, 'valuechangeCallback', null);
                 if (callback !== null) {
-                    var scope = GetValue$2(config, 'valuechangeCallbackScope', undefined);
+                    var scope = GetValue$3(config, 'valuechangeCallbackScope', undefined);
                     this.eventEmitter.on('valuechange', callback, scope);
                 }
 
                 this
                     .setEaseValuePropName('value')
-                    .setEaseValueDuration(GetValue$2(config, 'easeValue.duration', 0))
-                    .setEaseValueFunction(GetValue$2(config, 'easeValue.ease', 'Linear'));
+                    .setEaseValueDuration(GetValue$3(config, 'easeValue.duration', 0))
+                    .setEaseValueFunction(GetValue$3(config, 'easeValue.ease', 'Linear'));
 
                 return this;
             }
@@ -1273,7 +1273,7 @@
         lineStyle: LineStyle
     };
 
-    var GetValue$1 = function (source, key, defaultValue) {
+    var GetValue$2 = function (source, key, defaultValue) {
         if (!source || typeof source === 'number') {
             return defaultValue;
         }
@@ -1335,7 +1335,7 @@
 
         getData(key, defaultValue) {
             this.enableData();
-            return (key === undefined) ? this.data : GetValue$1(this.data, key, defaultValue);
+            return (key === undefined) ? this.data : GetValue$2(this.data, key, defaultValue);
         },
 
         incData(key, inc, defaultValue) {
@@ -2353,68 +2353,82 @@
 
     Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 
-    var UpdateShapes = function () {
-        var skewX = this.skewX;
-        var width = this.width - Math.abs(skewX);
-        var height = this.height;
-
-        var trackFill = this.getShape('trackFill');
-        trackFill.fillStyle(this.trackColor);
-        if (trackFill.isFilled) {
-            BuildRectangle(
-                trackFill,      // lines
-                0, 0,           // x0, y0
-                width, height,  // x1, y1
-                skewX           // skewX
-            );
-        }
-
-        var bar = this.getShape('bar');
-        bar.fillStyle(this.barColor);
-        if (bar.isFilled) {
-            var barX0, barX1;
-            if (!this.rtl) {
-                barX0 = 0;
-                barX1 = width * this.value;
-            } else {
-                barX0 = width * (1 - this.value);
-                barX1 = width;
-            }
-
-            BuildRectangle(
-                bar,            // lines
-                barX0, 0,       // x0, y0
-                barX1, height,  // x1, y1
-                skewX           // skew
-            );
-        }
-
-        var trackStroke = this.getShape('trackStroke');
-        trackStroke.lineStyle(this.trackStrokeThickness, this.trackStrokeColor);
-        if (trackStroke.isStroked) {
-            BuildRectangle(
-                trackStroke,     // lines            
-                0, 0,           // x0, y0
-                width, height,  // x1, y1
-                skewX           // skewX
-            );
-        }
+    var IsArcCorner = function (radius) {
+        return ((radius.x > 0) && (radius.y > 0));
     };
 
-    var BuildRectangle = function (lines, x0, y0, x1, y1, skewX) {
-        var startX = (x0 + x1) / 2;  // Start x from middle
-        if (skewX >= 0) {
-            lines
-                .startAt(startX + skewX, y0).lineTo(x1 + skewX, y0)
-                .lineTo(x1, y1)
-                .lineTo(x0, y1)
-                .lineTo(x0 + skewX, y0).lineTo(startX + skewX, y0);
+    var BuildRoundRectangle = function (
+        lines,
+        width, height, cornerRadius,
+        iteration
+    ) {
+
+        lines
+            .setIterations(iteration)
+            .start();
+
+        // Top-left
+        var radius = cornerRadius.tl;
+        if (IsArcCorner(radius)) {
+            if (radius.convex) {
+                var centerX = radius.x;
+                var centerY = radius.y;
+                lines.ellipticalArc(centerX, centerY, radius.x, radius.y, 180, 270, false);
+            } else {
+                var centerX = 0;
+                var centerY = 0;
+                lines.ellipticalArc(centerX, centerY, radius.x, radius.y, 90, 0, true);
+            }
         } else {
-            lines
-                .startAt(startX, y0).lineTo(x1, y0)
-                .lineTo(x1 - skewX, y1)
-                .lineTo(x0 - skewX, y1)
-                .lineTo(x0, y0).lineTo(startX, y0);
+            lines.lineTo(0, 0);
+        }
+
+        // Top-right
+        var radius = cornerRadius.tr;
+        if (IsArcCorner(radius)) {
+            if (radius.convex) {
+                var centerX = width - radius.x;
+                var centerY = radius.y;
+                lines.ellipticalArc(centerX, centerY, radius.x, radius.y, 270, 360, false);
+            } else {
+                var centerX = width;
+                var centerY = 0;
+                lines.ellipticalArc(centerX, centerY, radius.x, radius.y, 180, 90, true);
+            }
+        } else {
+            lines.lineTo(width, 0);
+        }
+
+        // Bottom-right
+        var radius = cornerRadius.br;
+        if (IsArcCorner(radius)) {
+            if (radius.convex) {
+                var centerX = width - radius.x;
+                var centerY = height - radius.y;
+                lines.ellipticalArc(centerX, centerY, radius.x, radius.y, 0, 90, false);
+            } else {
+                var centerX = width;
+                var centerY = height;
+                lines.ellipticalArc(centerX, centerY, radius.x, radius.y, 270, 180, true);
+            }
+        } else {
+            lines.lineTo(width, height);
+        }
+
+        // Bottom-left
+        var radius = cornerRadius.bl;
+        if (IsArcCorner(radius)) {
+            if (radius.convex) {
+                var centerX = radius.x;
+                var centerY = height - radius.y;
+                lines.ellipticalArc(centerX, centerY, radius.x, radius.y, 90, 180, false);
+            } else {
+                var centerX = 0;
+                var centerY = height;
+                lines.ellipticalArc(centerX, centerY, radius.x, radius.y, 360, 270, true);
+            }
+        } else {
+            lines.lineTo(0, height);
         }
 
         lines.close();
@@ -2422,11 +2436,534 @@
         return lines;
     };
 
+    var RadToDeg$3 = Phaser.Math.RadToDeg;
+
+    var BuildRoundRectangleBarDirection0 = function (
+        lines,
+        width, height, cornerRadius,
+        value,
+    ) {
+        var barWidth = width * value;
+
+        // Top-left
+        var radius = cornerRadius.tl;
+        if (IsArcCorner(radius)) {
+            var theta;
+            if (barWidth > radius.x) {
+                theta = 90;
+            } else {
+                theta = RadToDeg$3(Math.acos((radius.x - barWidth) / radius.x));
+            }
+            var centerX = radius.x;
+            var centerY = radius.y;
+            lines.ellipticalArc(centerX, centerY, radius.x, radius.y, 180, 180 + theta, false);
+        } else {
+            lines.lineTo(0, 0);
+        }
+
+        // Top-right
+        var radius = cornerRadius.tr;
+        if (IsArcCorner(radius) && (barWidth > (width - radius.x))) {
+            var theta = 90 - RadToDeg$3(Math.acos((barWidth - (width - radius.x)) / radius.x));
+            var centerX = width - radius.x;
+            var centerY = radius.y;
+            lines.ellipticalArc(centerX, centerY, radius.x, radius.y, 270, 270 + theta, false);
+        } else {
+            lines.lineTo(barWidth, 0);
+        }
+
+        // Bottom-right
+        var radius = cornerRadius.br;
+        if (IsArcCorner(radius) && (barWidth > (width - radius.x))) {
+            var theta = 90 - RadToDeg$3(Math.acos((barWidth - (width - radius.x)) / radius.x));
+            var centerX = width - radius.x;
+            var centerY = height - radius.y;
+            lines.ellipticalArc(centerX, centerY, radius.x, radius.y, 90 - theta, 90, false);
+        } else {
+            lines.lineTo(barWidth, height);
+        }
+
+        // Bottom-left
+        var radius = cornerRadius.bl;
+        if (IsArcCorner(radius)) {
+            var theta;
+            if (barWidth > radius.x) {
+                theta = 90;
+            } else {
+                theta = RadToDeg$3(Math.acos((radius.x - barWidth) / radius.x));
+            }
+            var centerX = radius.x;
+            var centerY = height - radius.y;
+            lines.ellipticalArc(centerX, centerY, radius.x, radius.y, 180 - theta, 180, false);
+        } else {
+            lines.lineTo(0, height);
+        }
+    };
+
+    var RadToDeg$2 = Phaser.Math.RadToDeg;
+
+    var BuildRoundRectangleBarDirection1 = function (
+        lines,
+        width, height, cornerRadius,
+        value,
+    ) {
+        var barHeight = height * value;
+
+        // Top-left
+        var radius = cornerRadius.tl;
+        if (IsArcCorner(radius)) {
+            var theta;
+            if (barHeight > radius.y) {
+                theta = 90;
+            } else {
+                theta = RadToDeg$2(Math.acos((radius.y - barHeight) / radius.y));
+            }
+            var centerX = radius.x;
+            var centerY = radius.y;
+            lines.ellipticalArc(centerX, centerY, radius.x, radius.y, 270 - theta, 270, false);
+        } else {
+            lines.lineTo(0, 0);
+        }
+
+        // Top-right
+        var radius = cornerRadius.tr;
+        if (IsArcCorner(radius)) {
+            var theta;
+            if (barHeight > radius.y) {
+                theta = 90;
+            } else {
+                theta = RadToDeg$2(Math.acos((radius.y - barHeight) / radius.y));
+            }
+            var centerX = width - radius.x;
+            var centerY = radius.y;
+            lines.ellipticalArc(centerX, centerY, radius.x, radius.y, 270, 270 + theta, false);
+        } else {
+            lines.lineTo(width, 0);
+        }
+
+        // Bottom-right
+        var radius = cornerRadius.br;
+        if (IsArcCorner(radius) && (barHeight > (height - radius.y))) {
+            var theta = 90 - RadToDeg$2(Math.acos((barHeight - (height - radius.y)) / radius.y));
+            var centerX = width - radius.x;
+            var centerY = height - radius.y;
+            lines.ellipticalArc(centerX, centerY, radius.x, radius.y, 0, 0 + theta, false);
+        } else {
+            lines.lineTo(width, barHeight);
+        }
+
+        // Bottom-left
+        var radius = cornerRadius.bl;
+        if (IsArcCorner(radius) && (barHeight > (height - radius.y))) {
+            var theta = 90 - RadToDeg$2(Math.acos((barHeight - (height - radius.y)) / radius.y));
+            var centerX = radius.x;
+            var centerY = height - radius.y;
+            lines.ellipticalArc(centerX, centerY, radius.x, radius.y, 180 - theta, 180, false);
+        } else {
+            lines.lineTo(0, barHeight);
+        }
+    };
+
+    var RadToDeg$1 = Phaser.Math.RadToDeg;
+
+    var BuildRoundRectangleBarDirection2 = function (
+        lines,
+        width, height, cornerRadius,
+        value,
+    ) {
+        var barWidth = width * value;
+
+        // Top-right
+        var radius = cornerRadius.tr;
+        if (IsArcCorner(radius)) {
+            var theta;
+            if (barWidth > radius.x) {
+                theta = 90;
+            } else {
+                theta = RadToDeg$1(Math.acos((radius.x - barWidth) / radius.x));
+            }
+            var centerX = width - radius.x;
+            var centerY = radius.y;
+            lines.ellipticalArc(centerX, centerY, radius.x, radius.y, 360 - theta, 360, false);
+        } else {
+            lines.lineTo(width, 0);
+        }
+
+        // Bottom-right
+        var radius = cornerRadius.br;
+        if (IsArcCorner(radius)) {
+            var theta;
+            if (barWidth > radius.x) {
+                theta = 90;
+            } else {
+                theta = RadToDeg$1(Math.acos((radius.x - barWidth) / radius.x));
+            }
+            var centerX = width - radius.x;
+            var centerY = height - radius.y;
+            lines.ellipticalArc(centerX, centerY, radius.x, radius.y, 0, 0 + theta, false);
+        } else {
+            lines.lineTo(width, height);
+        }
+
+        // Bottom-left
+        var radius = cornerRadius.bl;
+        if (IsArcCorner(radius) && (barWidth > (width - radius.x))) {
+            var theta = 90 - RadToDeg$1(Math.acos((barWidth - (width - radius.x)) / radius.x));
+            var centerX = radius.x;
+            var centerY = height - radius.y;
+            lines.ellipticalArc(centerX, centerY, radius.x, radius.y, 90, 90 + theta, false);
+        } else {
+            lines.lineTo(width - barWidth, height);
+        }
+
+        // Top-left
+        var radius = cornerRadius.tl;
+        if (IsArcCorner(radius) && (barWidth > (width - radius.x))) {
+            var theta = 90 - RadToDeg$1(Math.acos((barWidth - (width - radius.x)) / radius.x));
+            var centerX = radius.x;
+            var centerY = radius.y;
+            lines.ellipticalArc(centerX, centerY, radius.x, radius.y, 270 - theta, 270, false);
+        } else {
+            lines.lineTo(width - barWidth, 0);
+        }
+
+    };
+
+    var RadToDeg = Phaser.Math.RadToDeg;
+
+    var BuildRoundRectangleBarDirection3 = function (
+        lines,
+        width, height, cornerRadius,
+        value,
+    ) {
+        var barHeight = height * value;
+
+        // Bottom-right
+        var radius = cornerRadius.br;
+        if (IsArcCorner(radius)) {
+            if (barHeight > radius.y) {
+                theta = 90;
+            } else {
+                theta = RadToDeg(Math.acos((radius.y - barHeight) / radius.y));
+            }
+            var centerX = width - radius.x;
+            var centerY = height - radius.y;
+            lines.ellipticalArc(centerX, centerY, radius.x, radius.y, 90 - theta, 90, false);
+        } else {
+            lines.lineTo(width, height);
+        }
+
+        // Bottom-left
+        var radius = cornerRadius.bl;
+        if (IsArcCorner(radius)) {
+            if (barHeight > radius.y) {
+                theta = 90;
+            } else {
+                theta = RadToDeg(Math.acos((radius.y - barHeight) / radius.y));
+            }
+            var centerX = radius.x;
+            var centerY = height - radius.y;
+            lines.ellipticalArc(centerX, centerY, radius.x, radius.y, 90, 90 + theta, false);
+        } else {
+            lines.lineTo(0, height);
+        }
+
+        // Top-left
+        var radius = cornerRadius.tl;
+        if (IsArcCorner(radius) && (barHeight > (height - radius.y))) {
+            var theta = 90 - RadToDeg(Math.acos((barHeight - (height - radius.y)) / radius.y));
+            var centerX = radius.x;
+            var centerY = radius.y;
+            lines.ellipticalArc(centerX, centerY, radius.x, radius.y, 180, 180 + theta, false);
+        } else {
+            lines.lineTo(0, height - barHeight);
+        }
+
+        // Top-right
+        var radius = cornerRadius.tr;
+        if (IsArcCorner(radius) && (barHeight > (height - radius.y))) {
+            var theta = 90 - RadToDeg(Math.acos((barHeight - (height - radius.y)) / radius.y));
+            var centerX = width - radius.x;
+            var centerY = radius.y;
+            lines.ellipticalArc(centerX, centerY, radius.x, radius.y, 360 - theta, 360, false);
+        } else {
+            lines.lineTo(width, height - barHeight);
+        }
+
+    };
+
+    var BuildRoundRectangleBar = function (
+        lines,
+        width, height, cornerRadius,
+        value, orientation, rtl,
+        iteration
+    ) {
+
+        lines
+            .setIterations(iteration)
+            .start();
+
+        if (value === 0) {
+            return lines;
+        } else if (value === 1) {
+            return BuildRoundRectangle(lines, width, height, cornerRadius, iteration);
+        }
+
+        var callback;
+        if (orientation === 0) {
+            callback = (rtl) ? BuildRoundRectangleBarDirection2 : BuildRoundRectangleBarDirection0;
+        } else {
+            callback = (rtl) ? BuildRoundRectangleBarDirection3 : BuildRoundRectangleBarDirection1;
+        }
+
+        callback(lines, width, height, cornerRadius, value);
+
+        lines.close();
+
+        return lines;
+    };
+
+    var UpdateShapes = function () {
+        var width = this.width;
+        var height = this.height;
+        var cornerRadius = this.rrGeom.cornerRadius;
+        var value = this.value;
+        var orientation = this.orientation;
+        var rtl = this.rtl;
+        var iteration = this.iteration + 1;
+
+        var trackFill = this.getShape('trackFill');
+        trackFill.fillStyle(this.trackColor);
+        if (trackFill.isFilled) {
+            BuildRoundRectangle(
+                trackFill,
+                width, height, cornerRadius,
+                iteration
+            );
+        }
+
+        var bar = this.getShape('bar');
+        bar.fillStyle(this.barColor);
+        if (bar.isFilled) {
+            BuildRoundRectangleBar(
+                bar,
+                width, height, cornerRadius,
+                value, orientation, rtl,
+                iteration
+            );
+        }
+
+        var trackStroke = this.getShape('trackStroke');
+        trackStroke.lineStyle(this.trackStrokeThickness, this.trackStrokeColor);
+        if (trackStroke.isStroked) {
+            BuildRoundRectangle(
+                trackStroke,     // lines  
+                width, height, cornerRadius,
+                iteration
+            );
+        }
+    };
+
+    const GetValue$1 = Phaser.Utils.Objects.GetValue;
+
+    class RoundRectangle {
+        constructor(x, y, width, height, radiusConfig) {
+            if (x === undefined) { x = 0; }
+            if (y === undefined) { y = x; }
+            if (width === undefined) { width = 0; }
+            if (height === undefined) { height = 0; }
+            if (radiusConfig === undefined) { radiusConfig = 0; }
+
+            this.cornerRadius = {};
+            this._width = 0;
+            this._height = 0;
+            this.setTo(x, y, width, height, radiusConfig);
+        }
+
+        setTo(x, y, width, height, radiusConfig) {
+            this.setPosition(x, y);
+            this.setRadius(radiusConfig);
+            this.setSize(width, height);
+            return this;
+        }
+
+        setPosition(x, y) {
+            this.x = x;
+            this.y = y;
+            return this;
+        }
+
+        setRadius(value) {
+            if (value === undefined) {
+                value = 0;
+            }
+            this.radius = value;
+            return this;
+        }
+
+        setSize(width, height) {
+            this.width = width;
+            this.height = height;
+            return this;
+        }
+
+        get minWidth() {
+            var radius = this.cornerRadius;
+            return Math.max(radius.tl.x + radius.tr.x, radius.bl.x + radius.br.x);
+        }
+
+        get minHeight() {
+            var radius = this.cornerRadius;
+            return Math.max(radius.tl.y + radius.bl.y, radius.tr.y + radius.br.y);
+        }
+
+        get width() {
+            return this._width;
+        }
+
+        set width(value) {
+            if (value == null) {
+                value = 0;
+            }
+            this._width = Math.max(value, this.minWidth);
+        }
+
+        get height() {
+            return this._height;
+        }
+
+        set height(value) {
+            if (value == null) {
+                value = 0;
+            }
+            this._height = Math.max(value, this.minHeight);
+        }
+
+        get radius() {
+            var radius = this.cornerRadius;
+            return Math.max(
+                radius.tl.x, radius.tl.y,
+                radius.tr.x, radius.tr.y,
+                radius.bl.x, radius.bl.y,
+                radius.br.x, radius.br.y
+            );
+        }
+
+        set radius(value) {
+            var defaultRadiusX, defaultRadiusY;
+            if (typeof (value) === 'number') {
+                defaultRadiusX = value;
+                defaultRadiusY = value;
+            } else {
+                defaultRadiusX = GetValue$1(value, 'x', 0);
+                defaultRadiusY = GetValue$1(value, 'y', 0);
+            }
+
+            var radius = this.cornerRadius;
+            radius.tl = GetRadius(GetValue$1(value, 'tl', undefined), defaultRadiusX, defaultRadiusY);
+            radius.tr = GetRadius(GetValue$1(value, 'tr', undefined), defaultRadiusX, defaultRadiusY);
+            radius.bl = GetRadius(GetValue$1(value, 'bl', undefined), defaultRadiusX, defaultRadiusY);
+            radius.br = GetRadius(GetValue$1(value, 'br', undefined), defaultRadiusX, defaultRadiusY);
+        }
+
+        get radiusTL() {
+            var radius = this.cornerRadius.tl;
+            return Math.max(radius.x, radius.y);
+        }
+
+        set radiusTL(value) {
+            SetRadius(this.cornerRadius.tl, value);
+        }
+
+        get radiusTR() {
+            var radius = this.cornerRadius.tr;
+            return Math.max(radius.x, radius.y);
+        }
+
+        set radiusTR(value) {
+            SetRadius(this.cornerRadius.tr, value);
+        }
+
+        get radiusBL() {
+            var radius = this.cornerRadius.bl;
+            return Math.max(radius.x, radius.y);
+        }
+
+        set radiusBL(value) {
+            SetRadius(this.cornerRadius.bl, value);
+        }
+
+        get radiusBR() {
+            var radius = this.cornerRadius.br;
+            return Math.max(radius.x, radius.y);
+        }
+
+        set radiusBR(value) {
+            SetRadius(this.cornerRadius.br, value);
+        }
+    }
+
+    var GetRadius = function (radius, defaultRadiusX, defaultRadiusY) {
+        if (radius === undefined) {
+            radius = {
+                x: defaultRadiusX,
+                y: defaultRadiusY
+            };
+        } else if (typeof (radius) === 'number') {
+            radius = {
+                x: radius,
+                y: radius
+            };
+        }
+
+        SetConvex(radius);
+        return radius;
+
+    };
+
+    var SetRadius = function (radius, value) {
+        if (typeof (value) === 'number') {
+            radius.x = value;
+            radius.y = value;
+        } else {
+            radius.x = GetValue$1(value, 'x', 0);
+            radius.y = GetValue$1(value, 'y', 0);
+        }
+
+        SetConvex(radius);
+    };
+
+    var SetConvex = function (radius) {
+        radius.convex = (radius.x >= 0) || (radius.y >= 0);
+
+        radius.x = Math.abs(radius.x);
+        radius.y = Math.abs(radius.y);
+    };
+
+    var OrientationMode = {
+        x: 0,
+        h: 0,
+        horizontal: 0,
+        'left-to-right': 0,
+
+        y: 1,
+        v: 1,
+        vertical: 1,
+        'top-to-bottom': 1
+    };
+
+    var GetOrientationMode = function (orientation) {
+        if (typeof (orientation) === 'string') {
+            orientation = OrientationMode[orientation];
+        }
+        return orientation;
+    };
+
     const GetValue = Phaser.Utils.Objects.GetValue;
     const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
-    class LineProgress extends ProgressBase(BaseShapes) {
-        constructor(scene, x, y, width, height, barColor, value, config) {
+    class RoundRectangleProgress extends ProgressBase(BaseShapes) {
+        constructor(scene, x, y, width, height, radiusConfig, barColor, value, config) {
             if (IsPlainObject(x)) {
                 config = x;
 
@@ -2434,6 +2971,7 @@
                 y = config.y;
                 width = config.width;
                 height = config.height;
+                radiusConfig = config.radius;
                 barColor = config.barColor;
                 value = config.value;
             } else if (IsPlainObject(width)) {
@@ -2441,23 +2979,26 @@
 
                 width = config.width;
                 height = config.height;
+                radiusConfig = config.radius;
                 barColor = config.barColor;
                 value = config.value;
-            } else if (IsPlainObject(barColor)) {
-                config = barColor;
+            } else if (IsPlainObject(radiusConfig)) {
+                config = radiusConfig;
 
+                radiusConfig = config.radius;
                 barColor = config.barColor;
                 value = config.value;
             }
 
             if (x === undefined) { x = 0; }
             if (y === undefined) { y = 0; }
-            if (width === undefined) { width = 2; }
+            if (width === undefined) { width = 1; }
             if (height === undefined) { height = width; }
+            if (radiusConfig === undefined) { radiusConfig = 0; }
             if (value === undefined) { value = 0; }
 
             super(scene, x, y, width, height, config);
-            this.type = 'rexLineProgress';
+            this.type = 'rexRoundRectangleProgress';
 
             this.bootProgressBase(config);
 
@@ -2470,9 +3011,13 @@
             this.setBarColor(barColor);
             this.setTrackStroke(GetValue(config, 'trackStrokeThickness', 2), GetValue(config, 'trackStrokeColor', undefined));
 
-            this.setSkewX(GetValue(config, 'skewX', 0));
-
+            this.setOrientation(GetValue(config, 'orientation', 0));
             this.setRTL(GetValue(config, 'rtl', false));
+
+            this.rrGeom = new RoundRectangle();  // For radiusConfig only
+            this.setRadius(radiusConfig);
+
+            this.setIteration(GetValue(radiusConfig, 'iteration', undefined));
 
             this.setValue(value);
         }
@@ -2529,17 +3074,18 @@
             return this;
         }
 
-        get skewX() {
-            return this._skewX;
+        get orientation() {
+            return this._orientation;
         }
 
-        set skewX(value) {
-            this.dirty = this.dirty || (this._skewX != value);
-            this._skewX = value;
+        set orientation(value) {
+            value = GetOrientationMode(value);
+            this.dirty = this.dirty || (this._orientation != value);
+            this._orientation = value;
         }
 
-        setSkewX(value) {
-            this.skewX = value;
+        setOrientation(value) {
+            this.orientation = value;
             return this;
         }
 
@@ -2561,6 +3107,130 @@
             return this;
         }
 
+        get radius() {
+            return this.rrGeom.radius;
+        }
+
+        set radius(value) {
+            this.rrGeom.setRadius(value);
+            this.dirty = true;
+        }
+
+        get radiusTL() {
+            return this.rrGeom.radiusTL;
+        }
+
+        set radiusTL(value) {
+            this.rrGeom.radiusTL = value;
+            this.dirty = true;
+        }
+
+        get radiusTR() {
+            return this.rrGeom.radiusTR;
+        }
+
+        set radiusTR(value) {
+            this.rrGeom.radiusTR = value;
+            this.dirty = true;
+        }
+
+        get radiusBL() {
+            return this.rrGeom.radiusBL;
+        }
+
+        set radiusBL(value) {
+            this.rrGeom.radiusBL = value;
+            this.dirty = true;
+        }
+
+        get radiusBR() {
+            return this.rrGeom.radiusBR;
+        }
+
+        set radiusBR(value) {
+            this.rrGeom.radiusBR = value;
+            this.dirty = true;
+        }
+
+        setRadius(value) {
+            if (value === undefined) {
+                value = 0;
+            }
+            this.radius = value;
+            return this;
+        }
+
+        setRadiusTL(value) {
+            if (value === undefined) {
+                value = 0;
+            }
+            this.radiusTL = value;
+            return this;
+        }
+
+        setRadiusTR(value) {
+            if (value === undefined) {
+                value = 0;
+            }
+            this.radiusTR = value;
+            return this;
+        }
+
+        setRadiusBL(value) {
+            if (value === undefined) {
+                value = 0;
+            }
+            this.radiusBL = value;
+            return this;
+        }
+
+        setRadiusBR(value) {
+            if (value === undefined) {
+                value = 0;
+            }
+            this.radiusBR = value;
+            return this;
+        }
+
+        get cornerRadius() {
+            return this.rrGeom.cornerRadius;
+        }
+
+        set cornerRadius(value) {
+            this.radius = value;
+        }
+
+        setCornerRadius(value) {
+            return this.setRadius(value);
+        }
+
+        get iteration() {
+            return this._iteration;
+        }
+
+        set iteration(value) {
+            // Set iteration first time
+            if (this._iteration === undefined) {
+                this._iteration = value;
+                return;
+            }
+
+            // Change iteration value
+            if (this._iteration === value) {
+                return;
+            }
+
+            this._iteration = value;
+            this.dirty = true;
+        }
+
+        setIteration(iteration) {
+            if (iteration === undefined) {
+                iteration = 6;
+            }
+            this.iteration = iteration;
+            return this;
+        }
     }
 
     var Methods = {
@@ -2568,10 +3238,114 @@
     };
 
     Object.assign(
-        LineProgress.prototype,
+        RoundRectangleProgress.prototype,
         Methods,
     );
 
-    return LineProgress;
+    function Factory (x, y, width, height, barColor, value, config) {
+        var gameObject = new RoundRectangleProgress(this.scene, x, y, width, height, barColor, value, config);
+        this.scene.add.existing(gameObject);
+        return gameObject;
+    }
+
+    const BuildGameObject = Phaser.GameObjects.BuildGameObject;
+
+    function Creator (config, addToScene) {
+        if (config === undefined) { config = {}; }
+        if (addToScene !== undefined) {
+            config.add = addToScene;
+        }
+        var gameObject = new RoundRectangleProgress(this.scene, config);
+        BuildGameObject(this.scene, gameObject, config);
+        return gameObject;
+    }
+
+    var IsInValidKey = function (keys) {
+        return (keys == null) || (keys === '') || (keys.length === 0);
+    };
+
+    var GetEntry = function (target, keys, defaultEntry) {
+        var entry = target;
+        if (IsInValidKey(keys)) ; else {
+            if (typeof (keys) === 'string') {
+                keys = keys.split('.');
+            }
+
+            var key;
+            for (var i = 0, cnt = keys.length; i < cnt; i++) {
+                key = keys[i];
+                if ((entry[key] == null) || (typeof (entry[key]) !== 'object')) {
+                    var newEntry;
+                    if (i === cnt - 1) {
+                        if (defaultEntry === undefined) {
+                            newEntry = {};
+                        } else {
+                            newEntry = defaultEntry;
+                        }
+                    } else {
+                        newEntry = {};
+                    }
+
+                    entry[key] = newEntry;
+                }
+
+                entry = entry[key];
+            }
+        }
+
+        return entry;
+    };
+
+    var SetValue = function (target, keys, value, delimiter) {
+        if (delimiter === undefined) {
+            delimiter = '.';
+        }
+
+        // no object
+        if (typeof (target) !== 'object') {
+            return;
+        }
+
+        // invalid key
+        else if (IsInValidKey(keys)) {
+            // don't erase target
+            if (value == null) {
+                return;
+            }
+            // set target to another object
+            else if (typeof (value) === 'object') {
+                target = value;
+            }
+        } else {
+            if (typeof (keys) === 'string') {
+                keys = keys.split(delimiter);
+            }
+
+            var lastKey = keys.pop();
+            var entry = GetEntry(target, keys);
+            entry[lastKey] = value;
+        }
+
+        return target;
+    };
+
+    class RoundRectangleProgressPlugin extends Phaser.Plugins.BasePlugin {
+
+        constructor(pluginManager) {
+            super(pluginManager);
+
+            //  Register our new Game Object type
+            pluginManager.registerGameObject('rexRoundRectangleProgress', Factory, Creator);
+        }
+
+        start() {
+            var eventEmitter = this.game.events;
+            eventEmitter.on('destroy', this.destroy, this);
+        }
+    }
+
+    SetValue(window, 'RexPlugins.GameObjects.RoundRectangleProgress', RoundRectangleProgress);
+
+    return RoundRectangleProgressPlugin;
 
 }));
