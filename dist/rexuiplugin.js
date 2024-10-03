@@ -30898,7 +30898,7 @@
         Methods$a,
     );
 
-    ObjectFactory.register('lineProgress', function (x, y, width, height, radiusConfig, barColor, value, config) {
+    ObjectFactory.register('roundRectanleProgress', function (x, y, width, height, radiusConfig, barColor, value, config) {
         var gameObject = new RoundRectangleProgress(this.scene, x, y, width, height, radiusConfig, barColor, value, config);
         this.scene.add.existing(gameObject);
         return gameObject;
