@@ -10,23 +10,32 @@ class LineProgress extends ProgressBase(BaseShapes) {
     constructor(scene, x, y, width, height, barColor, value, config) {
         if (IsPlainObject(x)) {
             config = x;
-            x = GetValue(config, 'x', 0);
-            y = GetValue(config, 'y', 0);
-            width = GetValue(config, 'width', 2);
-            height = GetValue(config, 'height', 2);
-            barColor = GetValue(config, 'barColor', undefined);
-            value = GetValue(config, 'value', 0);
+
+            x = config.x;
+            y = config.y;
+            width = config.width;
+            height = config.height;
+            barColor = config.barColor;
+            value = config.value;
         } else if (IsPlainObject(width)) {
             config = width;
-            width = GetValue(config, 'width', 2);
-            height = GetValue(config, 'height', 2);
-            barColor = GetValue(config, 'barColor', undefined);
-            value = GetValue(config, 'value', 0);
+
+            width = config.width;
+            height = config.height;
+            barColor = config.barColor;
+            value = config.value;
         } else if (IsPlainObject(barColor)) {
             config = barColor;
-            barColor = GetValue(config, 'barColor', undefined);
-            value = GetValue(config, 'value', 0);
+
+            barColor = config.barColor;
+            value = config.value;
         }
+
+        if (x === undefined) { x = 0; }
+        if (y === undefined) { y = 0; }
+        if (width === undefined) { width = 2; }
+        if (height === undefined) { height = width; }
+        if (value === undefined) { value = 0; }
 
         super(scene, x, y, width, height, config);
         this.type = 'rexLineProgress';

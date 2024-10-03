@@ -1,5 +1,6 @@
 import PolygnBase from './PolygnBase.js';
 import RoundRectangleGeom from '../../../geom/roundrectangle/RoundRectangle.js';
+import IsArcCorner from '../utils/IsArcCorner.js';
 import LineTo from '../../../geom/pathdata/LineTo.js';
 import ArcTo from '../../../geom/pathdata/ArcTo.js';
 
@@ -48,8 +49,7 @@ class RoundRectangle extends PolygnBase {
             geom.setTo(0, 0, width, height, radius);
         }
 
-        var iteration = GetValue(radiusConfig, 'iteration', undefined);
-        this.setIteration(iteration);
+        this.setIteration(GetValue(radiusConfig, 'iteration', undefined));
         this.setPosition(x, y);
 
         this.setFillStyle(fillColor, fillAlpha);
@@ -300,10 +300,6 @@ class RoundRectangle extends PolygnBase {
         return this;
     }
 
-}
-
-var IsArcCorner = function (radius) {
-    return ((radius.x > 0) && (radius.y > 0));
 }
 
 const ShapeTypeMap = {

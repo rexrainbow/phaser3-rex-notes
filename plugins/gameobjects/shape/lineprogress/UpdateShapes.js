@@ -2,6 +2,7 @@ var UpdateShapes = function () {
     var skewX = this.skewX;
     var width = this.width - Math.abs(skewX);
     var height = this.height;
+
     var trackFill = this.getShape('trackFill');
     trackFill.fillStyle(this.trackColor);
     if (trackFill.isFilled) {
@@ -11,7 +12,6 @@ var UpdateShapes = function () {
             width, height,  // x1, y1
             skewX           // skewX
         )
-            .close()
     }
 
     var bar = this.getShape('bar');
@@ -32,7 +32,6 @@ var UpdateShapes = function () {
             barX1, height,  // x1, y1
             skewX           // skew
         )
-            .close()
     }
 
     var trackStroke = this.getShape('trackStroke');
@@ -44,7 +43,6 @@ var UpdateShapes = function () {
             width, height,  // x1, y1
             skewX           // skewX
         )
-            .end()
     }
 }
 
@@ -63,6 +61,8 @@ var BuildRectangle = function (lines, x0, y0, x1, y1, skewX) {
             .lineTo(x0 - skewX, y1)
             .lineTo(x0, y0).lineTo(startX, y0)
     }
+
+    lines.close();
 
     return lines;
 }

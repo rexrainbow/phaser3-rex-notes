@@ -25,9 +25,9 @@ declare namespace RoundRectangle {
         y?: number,
         width?: number,
         height?: number,
-        radius?: number | RoundRectangle.IRadiusConfig |
+        radius?: number | IRadiusConfig |
         ({
-            radius?: (number | RoundRectangle.IRadiusConfig),
+            radius?: (number | IRadiusConfig),
             iteration?: number
         }),
 
