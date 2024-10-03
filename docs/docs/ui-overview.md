@@ -380,6 +380,21 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
         // ...
     }
     ```
+1. [Round rectangle progress shape](shape-roundrectangleprogress.md): Horizontal or vertical round rectangle progress bar shape.
+    ```javascript
+    var roundRectangleProgress = scene.rexUI.add.roundrectangleProgress(x, y, width, height, radius, barColor, value, config);
+    ```
+    or
+    ```javascript
+    class MyRoundRectangleProgress extends RexPlugins.UI.RoundRectangleProgress {
+        constructor(scene, x, y, width, height, radius, barColor, value, config) {
+            super(scene, x, y, width, height, radius, barColor, value, config);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
 1. [Line progress canvas](canvas-lineprogress.md): Horizontal line progress bar filled with gradient color on canvas.
     ```javascript
     var lineProgress = scene.rexUI.add.lineProgressCanvas(x, y, width, height, barColor, value, config);

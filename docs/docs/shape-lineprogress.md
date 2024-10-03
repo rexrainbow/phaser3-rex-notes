@@ -274,7 +274,7 @@ var lineProgress = scene.make.rexLineProgress({
     ```
     - `ease` : [Ease function](tween.md/#ease-equations).
 
-### Line track
+### Track
 
 - Color
     - Get
@@ -298,7 +298,7 @@ var lineProgress = scene.make.rexLineProgress({
         lineProgress.setTrackStroke(lineWidth, color);
         ``` 
 
-### Line bar
+### Bar
 
 - Color
     - Get

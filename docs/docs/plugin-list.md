@@ -175,6 +175,7 @@
 165. [Shape/Line progress](shape-lineprogress.md): Horizontal line progress bar shape.
 165. [Shape/Quad](shape-quad.md): Quad shape, offsets can be given on four vertices, and additional points can be added on the four sides.
 166. [Shape/Round-Rectangle](shape-roundrectangle.md): Round rectangle shape.
+166. [Shape/Round-Rectangle progress](shape-roundrectangleprogress.md): Horizontal or vertical round rectangle progress bar shape.
 167. [Shape/Spinner](shape-spinner.md): Loading animations on shape.
 168. [Shape/Toggle-switch](shape-toggleswitch.md): Toggle-switch input.
 169. [Shape/Triangle](shape-triangle2.md): Trangle shape inside a rectangle bounds.

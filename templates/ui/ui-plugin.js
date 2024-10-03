@@ -19,6 +19,7 @@ import AlphaMaskImageFactory from './alphamaskimage/Factory.js';
 import CircularProgressFactory from './circularprogress/Factory.js';
 import CircularProgressCanvasFactory from './circularprogresscanvas/Factory.js';
 import LineProgressFactory from './lineprogress/Factory.js';
+import RoundRectangleProgressFactory from './roundrectangleprogress/Factory.js';
 import LineProgressCanvasFactory from './lineprogresscanvas/Factory.js';
 import TriangleFactory from './triangle/Factory.js';
 import KnobFactory from './knob/Factory.js';

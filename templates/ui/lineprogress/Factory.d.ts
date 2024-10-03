@@ -6,7 +6,7 @@ export default function (
 
 export default function (
     x?: number, y?: number,
-    radius?: number,
+    width?: number, height?: number,
     barColor?: string | number,
     value?: number,
     config?: LineProgress.IConfig

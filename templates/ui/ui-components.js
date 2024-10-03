@@ -18,6 +18,7 @@ import AlphaMaskImage from './alphamaskimage/AlphaMaskImage.js';
 import CircularProgress from './circularprogress/CircularProgress.js';
 import CircularProgressCanvas from './circularprogresscanvas/CircularProgressCanvas.js';
 import LineProgress from './lineprogress/LineProgress.js';
+import RoundRectangleProgress from './roundrectangleprogress/RoundRectangleProgress.js';
 import LineProgressCanvas from './lineprogresscanvas/LineProgressCanvas.js';
 import Tirangle from './triangle/Triangle.js';
 import Knob from './knob/Knob.js';
@@ -173,6 +174,7 @@ export {
     CircularProgress,
     CircularProgressCanvas,
     LineProgress,
+    RoundRectangleProgress,
     LineProgressCanvas,
     Tirangle,
     Knob,
