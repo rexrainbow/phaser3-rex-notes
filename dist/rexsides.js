@@ -12171,6 +12171,7 @@
                 minHeight = gameObject._minHeight;
             }
         }
+
         if (offsetX === undefined) {
             offsetX = 0;
         }

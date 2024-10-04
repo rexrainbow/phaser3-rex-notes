@@ -19,6 +19,7 @@ var Add = function (
     childKey, index,
     minWidth, minHeight,
     fitRatio,
+    offsetX, offsetY,
 ) {
 
     AddChild.call(this, gameObject);
@@ -46,6 +47,9 @@ var Add = function (
         }
 
         fitRatio = GetValue(config, 'fitRatio', 0);  // width/height
+
+        offsetX = GetValue(config, 'offsetX', 0);
+        offsetY = GetValue(config, 'offsetY', 0);
     }
 
     if (typeof (align) === 'string') {
@@ -86,12 +90,21 @@ var Add = function (
         fitRatio = GetDisplayWidth(gameObject) / GetDisplayHeight(gameObject);
     }
 
+    if (offsetX === undefined) {
+        offsetX = 0;
+    }
+    if (offsetY === undefined) {
+        offsetY = 0;
+    }
+
     var config = this.getSizerConfig(gameObject);
     config.proportion = proportion;
     config.align = align;
     config.padding = GetBoundsConfig(paddingConfig);
     config.expand = expand;
     config.fitRatio = (proportion === 0) ? fitRatio : 0;
+    config.alignOffsetX = offsetX;
+    config.alignOffsetY = offsetY;
 
     if ((index === undefined) || (index >= this.sizerChildren.length)) {
         this.sizerChildren.push(gameObject);

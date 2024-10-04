@@ -57,6 +57,7 @@ var Add = function (gameObject, childKey, align, padding, expand, minWidth, minH
             minHeight = gameObject._minHeight;
         }
     }
+
     if (offsetX === undefined) {
         offsetX = 0;
     }

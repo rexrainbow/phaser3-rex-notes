@@ -17675,7 +17675,7 @@
 
     var LayoutChildren$5 = function () {
         var children = this.sizerChildren;
-        var child, sizerConfig, padding;
+        var child, childConfig, padding;
         var startX = this.innerLeft,
             startY = this.innerTop;
         var innerWidth = this.innerWidth;
@@ -17701,8 +17701,8 @@
                 continue;
             }
 
-            sizerConfig = child.rexSizer;
-            padding = sizerConfig.padding;
+            childConfig = child.rexSizer;
+            padding = childConfig.padding;
 
             PreLayoutChild.call(this, child);
 
@@ -17731,10 +17731,10 @@
             // Set position
             if (this.orientation === 0) { // x
                 x = itemX + (padding.left * this.scaleX);
-                if ((sizerConfig.proportion === 0) || (this.proportionLength === 0)) {
+                if ((childConfig.proportion === 0) || (this.proportionLength === 0)) {
                     width = childWidth;
                 } else {
-                    width = (sizerConfig.proportion * this.proportionLength);
+                    width = (childConfig.proportion * this.proportionLength);
                 }
 
                 y = itemY + (padding.top * this.scaleY);
@@ -17744,14 +17744,17 @@
                 width = innerWidth - ((padding.left + padding.right) * this.scaleX);
 
                 y = itemY + (padding.top * this.scaleY);
-                if ((sizerConfig.proportion === 0) || (this.proportionLength === 0)) {
+                if ((childConfig.proportion === 0) || (this.proportionLength === 0)) {
                     height = childHeight;
                 } else {
-                    height = (sizerConfig.proportion * this.proportionLength);
+                    height = (childConfig.proportion * this.proportionLength);
                 }
             }
 
-            LayoutChild.call(this, child, x, y, width, height, sizerConfig.align);
+            LayoutChild.call(this,
+                child, x, y, width, height, childConfig.align,
+                childConfig.alignOffsetX, childConfig.alignOffsetY
+            );
 
             if (this.orientation === 0) { // x
                 itemX += (width + ((padding.left + padding.right) * this.scaleX) + (this.space.item * this.scaleX));
@@ -17949,6 +17952,7 @@
         childKey, index,
         minWidth, minHeight,
         fitRatio,
+        offsetX, offsetY,
     ) {
 
         AddChild$2.call(this, gameObject);
@@ -17974,6 +17978,9 @@
             }
 
             fitRatio = GetValue$1J(config, 'fitRatio', 0);  // width/height
+
+            offsetX = GetValue$1J(config, 'offsetX', 0);
+            offsetY = GetValue$1J(config, 'offsetY', 0);
         }
 
         if (typeof (align) === 'string') {
@@ -18014,12 +18021,21 @@
             fitRatio = GetDisplayWidth(gameObject) / GetDisplayHeight(gameObject);
         }
 
+        if (offsetX === undefined) {
+            offsetX = 0;
+        }
+        if (offsetY === undefined) {
+            offsetY = 0;
+        }
+
         var config = this.getSizerConfig(gameObject);
         config.proportion = proportion;
         config.align = align;
         config.padding = GetBoundsConfig(paddingConfig);
         config.expand = expand;
         config.fitRatio = (proportion === 0) ? fitRatio : 0;
+        config.alignOffsetX = offsetX;
+        config.alignOffsetY = offsetY;
 
         if ((index === undefined) || (index >= this.sizerChildren.length)) {
             this.sizerChildren.push(gameObject);
@@ -39309,6 +39325,7 @@
                 minHeight = gameObject._minHeight;
             }
         }
+
         if (offsetX === undefined) {
             offsetX = 0;
         }
