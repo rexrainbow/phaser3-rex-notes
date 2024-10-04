@@ -12150,8 +12150,8 @@
                 y = itemY + (indentTop * this.scaleY) + (padding.top * this.scaleY);
                 height = rowHeight - ((padding.top + padding.bottom) * this.scaleY);
 
-                alignOffsetX = (childConfig.alignOffsetX + (childConfig.alignOffsetOriginX * width)) * this.scaleX;
-                alignOffsetY = (childConfig.alignOffsetY + (childConfig.alignOffsetOriginY * height)) * this.scaleY;
+                alignOffsetX = (childConfig.alignOffsetX + (childConfig.alignOffsetOriginX * childWidth)) * this.scaleX;
+                alignOffsetY = (childConfig.alignOffsetY + (childConfig.alignOffsetOriginY * childHeight)) * this.scaleY;
 
                 LayoutChild.call(this,
                     child, x, y, width, height, childConfig.align,
