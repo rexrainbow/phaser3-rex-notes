@@ -34,6 +34,16 @@ declare namespace FixWidthSizer {
 
         align?: AlignTypes;
     }
+
+    interface IAddConfig {
+        padding?: FixWidthSizer.PaddingTypes,
+        key?: string,
+        index?: number,
+        offsetX?: number,
+        offsetY?: number,
+        offsetOriginX?: number,
+        offsetOriginY?: number,
+    }
 }
 
 declare class FixWidthSizer extends BaseSizer {

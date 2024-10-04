@@ -10,7 +10,7 @@ var LayoutChildren = function () {
         startY = this.innerTop;
     var innerWidth = this.innerWidth,
         innerHeight = this.innerHeight;
-    var x, y, width, height; // Align zone
+    var x, y, width, height, alignOffsetX, alignOffsetY; // Align zone
     var childWidth, childHeight, childSize;
     // Layout current page
     var children = this.sizerChildren;
@@ -54,9 +54,12 @@ var LayoutChildren = function () {
         y = startY + (padding.top * this.scaleY);
         height = innerHeight - ((padding.top + padding.bottom) * this.scaleY);
 
+        alignOffsetX = (childConfig.alignOffsetX + (childConfig.alignOffsetOriginX * width)) * this.scaleX;
+        alignOffsetY = (childConfig.alignOffsetY + (childConfig.alignOffsetOriginY * height)) * this.scaleY;
+
         LayoutChild.call(this,
             child, x, y, width, height, childConfig.align,
-            childConfig.alignOffsetX, childConfig.alignOffsetY
+            alignOffsetX, alignOffsetY
         );
     }
 }

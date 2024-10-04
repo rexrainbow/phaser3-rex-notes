@@ -23,6 +23,30 @@ declare namespace OverlapSizer {
         width?: number,
         height?: number,
     }
+
+    interface IAddConfig {
+        key?: string,
+
+        align?: OverlapSizer.AlignTypes,
+
+        offsetX?: number,
+        offsetY?: number,
+        offsetOriginX?: number,
+        offsetOriginY?: number,
+
+        padding?: OverlapSizer.PaddingTypes,
+
+        expand?: boolean |
+        {
+            width?: boolean,
+            height?: boolean,
+        },
+
+        minWidth?: number,
+        minHeight?: number,
+
+        aspectRatio?: true | number
+    }
 }
 
 declare class OverlapSizer extends BaseSizer {
@@ -48,27 +72,7 @@ declare class OverlapSizer extends BaseSizer {
 
     add(
         gameObject: Phaser.GameObjects.GameObject,
-        config?: {
-            key?: string,
-
-            align?: OverlapSizer.AlignTypes,
-
-            offsetX?: number,
-            offsetY?: number,
-
-            padding?: OverlapSizer.PaddingTypes,
-
-            expand?: boolean |
-            {
-                width?: boolean,
-                height?: boolean,
-            },
-
-            minWidth?: number,
-            minHeight?: number,
-
-            aspectRatio?: true | number
-        }
+        config?: OverlapSizer.IAddConfig
     ): this;
 
     add(

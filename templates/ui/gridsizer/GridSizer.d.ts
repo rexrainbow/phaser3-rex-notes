@@ -54,6 +54,23 @@ declare namespace GridSizer {
         createCellContainerCallback?: CreateCellContainerCallbackType
     }
 
+    interface IAddConfig {
+        column?: number | undefined,
+        row?: number | undefined | true,
+        align?: GridSizer.AlignTypes,
+        padding?: GridSizer.PaddingTypes,
+        expand?: boolean |
+        {
+            width?: boolean,
+            height?: boolean,
+        },
+        key?: string,
+        offsetX?: number,
+        offsetY?: number,
+        offsetOriginX?: number,
+        offsetOriginY?: number,
+    }
+
 }
 
 
@@ -91,18 +108,7 @@ declare class GridSizer extends BaseSizer {
 
     add(
         gameObject: Phaser.GameObjects.GameObject,
-        config?: {
-            column?: number | undefined,
-            row?: number | undefined | true,
-            align?: GridSizer.AlignTypes,
-            padding?: GridSizer.PaddingTypes,
-            expand?: boolean |
-            {
-                width?: boolean,
-                height?: boolean,
-            },
-            key?: string
-        }
+        config?: GridSizer.IAddConfig
     ): this;
 
     add(

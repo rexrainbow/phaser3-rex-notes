@@ -53,6 +53,9 @@ var GetEmptyCellIndex = function (columnIndex, rowIndex, cells, columnCount, row
 }
 
 var Add = function (gameObject, columnIndex, rowIndex, align, paddingConfig, expand, childKey) {
+    var offsetX, offsetY;
+    var offsetOriginX, offsetOriginY;
+
     AddChild.call(this, gameObject);
     if (IsPlainObject(columnIndex)) {
         var config = columnIndex;
@@ -62,6 +65,11 @@ var Add = function (gameObject, columnIndex, rowIndex, align, paddingConfig, exp
         paddingConfig = GetValue(config, 'padding', 0);
         expand = GetValue(config, 'expand', false);
         childKey = GetValue(config, 'key', undefined);
+
+        offsetX = GetValue(config, 'offsetX', 0);
+        offsetY = GetValue(config, 'offsetY', 0);
+        offsetOriginX = GetValue(config, 'offsetOriginX', 0);
+        offsetOriginY = GetValue(config, 'offsetOriginY', 0);
     }
 
     // Get insert index
@@ -95,6 +103,19 @@ var Add = function (gameObject, columnIndex, rowIndex, align, paddingConfig, exp
         expand = true;
     }
 
+    if (offsetX === undefined) {
+        offsetX = 0;
+    }
+    if (offsetY === undefined) {
+        offsetY = 0;
+    }
+    if (offsetOriginX === undefined) {
+        offsetOriginX = 0;
+    }
+    if (offsetOriginY === undefined) {
+        offsetOriginY = 0;
+    }
+
     var config = this.getSizerConfig(gameObject);
     config.align = align;
     config.padding = GetBoundsConfig(paddingConfig);
@@ -106,6 +127,11 @@ var Add = function (gameObject, columnIndex, rowIndex, align, paddingConfig, exp
         config.expandWidth = expand;
         config.expandHeight = expand;
     }
+
+    config.alignOffsetX = offsetX;
+    config.alignOffsetY = offsetY;
+    config.alignOffsetOriginX = offsetOriginX;
+    config.alignOffsetOriginY = offsetOriginY;
 
     this.sizerChildren[itemIndex] = gameObject;
 

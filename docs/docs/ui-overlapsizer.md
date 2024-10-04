@@ -203,7 +203,9 @@ sizer.add(child,
         key: undefined,
         align: 'center',     
         offsetX: 0,
-        offsetY: 0,   
+        offsetY: 0,
+        offsetOriginX: 0,
+        offsetOriginY: 0,
         padding: {left: 0, right: 0, top: 0, bottom: 0},
         expand: true,        // expand: {width, height}
         minWidth: undefined,
@@ -238,7 +240,8 @@ sizer.add(child, key, align, padding, expand, minWidth, minHeight, offsetX, offs
     - `'right-top'` , or `Phaser.Display.Align.TOP_RIGHT` : Align game object at right-top.
     - `'right-center'` , or `Phaser.Display.Align.RIGHT_CENTER` : Align game object at right-center.
     - `'right-bottom'` , or `Phaser.Display.Align.BOTTOM_RIGHT` : Align game object at right-bottom.
-- `offsetX`, `offsetY` : Apply offset to x, y coordinate after alignment.
+- `offsetX`, `offsetOriginX` : Apply offset `offsetX + offsetOriginY * width` to x coordinate after alignment.
+- `offsetY`, `offsetOriginY` : Apply offset `offsetY + offsetOriginY * height` to y coordinate after alignment.
 - `padding` : Extra padded space. Default is 0.
     - A number for left/right/top/bottom bounds,
     - Or a plain object.

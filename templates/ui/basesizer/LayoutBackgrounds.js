@@ -34,7 +34,10 @@ var LayoutBackgrounds = function () {
 
         ResizeGameObject(child, width, height);
 
-        LayoutChild.call(this, child, x, y, width, height, ALIGN_CENTER);
+        LayoutChild.call(this,
+            child, x, y, width, height, ALIGN_CENTER,
+            0, 0
+        );
     }
 }
 

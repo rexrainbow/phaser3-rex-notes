@@ -9,6 +9,8 @@ const ALIGN_CENTER = Phaser.Display.Align.CENTER;
 const UUID = Phaser.Utils.String.UUID;
 
 var Add = function (gameObject, childKey, align, padding, expand, minWidth, minHeight, offsetX, offsetY, aspectRatio) {
+    var offsetOriginX, offsetOriginY;
+
     AddChild.call(this, gameObject);
 
     if (IsPlainObject(childKey)) {
@@ -26,6 +28,8 @@ var Add = function (gameObject, childKey, align, padding, expand, minWidth, minH
 
         offsetX = GetValue(config, 'offsetX', 0);
         offsetY = GetValue(config, 'offsetY', 0);
+        offsetOriginX = GetValue(config, 'offsetOriginX', 0);
+        offsetOriginY = GetValue(config, 'offsetOriginY', 0);
 
         aspectRatio = GetValue(config, 'aspectRatio', 0);
     }
@@ -63,6 +67,12 @@ var Add = function (gameObject, childKey, align, padding, expand, minWidth, minH
     }
     if (offsetY === undefined) {
         offsetY = 0;
+    }
+    if (offsetOriginX === undefined) {
+        offsetOriginX = 0;
+    }
+    if (offsetOriginY === undefined) {
+        offsetOriginY = 0;
     }
 
     if (aspectRatio === undefined) {
@@ -108,6 +118,8 @@ var Add = function (gameObject, childKey, align, padding, expand, minWidth, minH
 
     config.alignOffsetX = offsetX;
     config.alignOffsetY = offsetY;
+    config.alignOffsetOriginX = offsetOriginX;
+    config.alignOffsetOriginY = offsetOriginY;
 
     config.aspectRatio = aspectRatio;
 

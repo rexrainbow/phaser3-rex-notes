@@ -10,7 +10,7 @@ var LayoutChildren = function () {
     var child, childConfig, padding, justifySpace = 0, indentLeft, indentTop;
     var startX = this.innerLeft,
         startY = this.innerTop;
-    var x, y, width, height; // Align zone
+    var x, y, width, height, alignOffsetX, alignOffsetY; // Align zone
     var lines = this.wrapResult.lines;  // Get this.wrapResult from RunChildrenWrap()
     var line, lineChlidren, remainderLineWidth;
 
@@ -124,7 +124,13 @@ var LayoutChildren = function () {
                 itemY = y + height + (padding.top * this.scaleY) + justifySpace;
             }
 
-            LayoutChild.call(this, child, x, y, width, height, childConfig.align);
+            alignOffsetX = (childConfig.alignOffsetX + (childConfig.alignOffsetOriginX * width)) * this.scaleX;
+            alignOffsetY = (childConfig.alignOffsetY + (childConfig.alignOffsetOriginY * height)) * this.scaleY;
+
+            LayoutChild.call(this,
+                child, x, y, width, height, childConfig.align,
+                alignOffsetX, alignOffsetY
+            );
         }
 
         if (horizontalWrap) {

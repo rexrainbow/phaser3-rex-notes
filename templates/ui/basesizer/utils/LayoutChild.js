@@ -1,14 +1,13 @@
 import AlignIn from '../../../../plugins/utils/actions/AlignIn.js';
 
 var LayoutChild = function (child, x, y, width, height, align, offsetX, offsetY) {
+    if (offsetX === undefined) { offsetX = 0; }
+    if (offsetY === undefined) { offsetY = 0; }
+
     AlignIn(child, x, y, width, height, align);
 
-    if (offsetX !== undefined) {
-        child.x += offsetX;
-    }
-    if (offsetY !== undefined) {
-        child.y += offsetY;
-    }
+    child.x += offsetX;
+    child.y += offsetY;
 
     this.resetChildPositionState(child);
 

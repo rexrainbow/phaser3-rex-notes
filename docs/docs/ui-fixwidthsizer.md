@@ -235,7 +235,11 @@ sizer.add(child,
     {
         padding: {left: 0, right: 0, top: 0, bottom: 0},
         key: undefined,
-        index: undefined
+        index: undefined,
+        offsetX: 0,
+        offsetY: 0,
+        offsetOriginX: 0,
+        offsetOriginY: 0,
     }
 );
 ```
@@ -261,8 +265,11 @@ sizer.add(child, padding, key, index);
 - `key` : Add this child into childMap, which could be read back by `sizer.getElement(key)`.
     - `undefined` : Don't add this child. Default value.
     - `items` : Reserved key, for all children item.
+- `offsetX`, `offsetOriginX` : Apply offset `offsetX + offsetOriginY * width` to x coordinate after alignment.
+- `offsetY`, `offsetOriginY` : Apply offset `offsetY + offsetOriginY * height` to y coordinate after alignment.
 - `index` : Insert child to.
     - `undefined` : Insert child at last.
+
 
 ### Insert child
 

@@ -18,9 +18,10 @@ var Add = function (
     proportion, align, paddingConfig, expand,
     childKey, index,
     minWidth, minHeight,
-    fitRatio,
-    offsetX, offsetY,
+    fitRatio
 ) {
+    var offsetX, offsetY;
+    var offsetOriginX, offsetOriginY;
 
     AddChild.call(this, gameObject);
 
@@ -50,6 +51,8 @@ var Add = function (
 
         offsetX = GetValue(config, 'offsetX', 0);
         offsetY = GetValue(config, 'offsetY', 0);
+        offsetOriginX = GetValue(config, 'offsetOriginX', 0);
+        offsetOriginY = GetValue(config, 'offsetOriginY', 0);
     }
 
     if (typeof (align) === 'string') {
@@ -96,6 +99,12 @@ var Add = function (
     if (offsetY === undefined) {
         offsetY = 0;
     }
+    if (offsetOriginX === undefined) {
+        offsetOriginX = 0;
+    }
+    if (offsetOriginY === undefined) {
+        offsetOriginY = 0;
+    }
 
     var config = this.getSizerConfig(gameObject);
     config.proportion = proportion;
@@ -105,6 +114,8 @@ var Add = function (
     config.fitRatio = (proportion === 0) ? fitRatio : 0;
     config.alignOffsetX = offsetX;
     config.alignOffsetY = offsetY;
+    config.alignOffsetOriginX = offsetOriginX;
+    config.alignOffsetOriginY = offsetOriginY;
 
     if ((index === undefined) || (index >= this.sizerChildren.length)) {
         this.sizerChildren.push(gameObject);

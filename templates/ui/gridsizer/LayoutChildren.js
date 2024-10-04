@@ -9,7 +9,7 @@ var LayoutChildren = function () {
         startY = this.innerTop;
     var itemX,
         itemY = startY;
-    var x, y, width, height; // Align zone
+    var x, y, width, height, alignOffsetX, alignOffsetY; // Align zone
     var childWidth, childHeight;
     // Layout grid children
     var colWidth, rowHeight;
@@ -49,7 +49,13 @@ var LayoutChildren = function () {
             y = itemY + (indentTop * this.scaleY) + (padding.top * this.scaleY);
             height = rowHeight - ((padding.top + padding.bottom) * this.scaleY);
 
-            LayoutChild.call(this, child, x, y, width, height, childConfig.align);
+            alignOffsetX = (childConfig.alignOffsetX + (childConfig.alignOffsetOriginX * width)) * this.scaleX;
+            alignOffsetY = (childConfig.alignOffsetY + (childConfig.alignOffsetOriginY * height)) * this.scaleY;
+
+            LayoutChild.call(this,
+                child, x, y, width, height, childConfig.align,
+                alignOffsetX, alignOffsetY
+            );
 
             itemX += colWidth + (this.space.column[columnIndex] * this.scaleX);
         }

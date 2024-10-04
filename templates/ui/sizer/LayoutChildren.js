@@ -15,7 +15,7 @@ var LayoutChildren = function () {
     var innerHeight = this.innerHeight;
     var itemX = startX,
         itemY = startY;
-    var x, y, width, height; // Align zone
+    var x, y, width, height, alignOffsetX, alignOffsetY; // Align zone
     var childWidth, childHeight;
     var childIndex, startChildIndex = this.startChildIndex;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
@@ -84,9 +84,12 @@ var LayoutChildren = function () {
             }
         }
 
+        alignOffsetX = (childConfig.alignOffsetX + (childConfig.alignOffsetOriginX * width)) * this.scaleX;
+        alignOffsetY = (childConfig.alignOffsetY + (childConfig.alignOffsetOriginY * height)) * this.scaleY;
+
         LayoutChild.call(this,
             child, x, y, width, height, childConfig.align,
-            childConfig.alignOffsetX, childConfig.alignOffsetY
+            alignOffsetX, alignOffsetY
         );
 
         if (this.orientation === 0) { // x

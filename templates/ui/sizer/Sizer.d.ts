@@ -46,6 +46,8 @@ declare namespace Sizer {
         fitRatio?: number,
         offsetX?: number,
         offsetY?: number,
+        offsetOriginX?: number,
+        offsetOriginY?: number,
     }
 }
 
@@ -104,8 +106,6 @@ declare class Sizer extends BaseSizer {
         minWidth?: number,
         minHeight?: number,
         fitRatio?: number | boolean,
-        offsetX?: number,
-        offsetY?: number,
     ): this;
 
     insert(

@@ -13,6 +13,9 @@ var Add = function (gameObject, paddingConfig, childKey, index) {
         return this;
     }
 
+    var offsetX, offsetY;
+    var offsetOriginX, offsetOriginY;
+
     AddChild.call(this, gameObject);
 
     if (IsPlainObject(paddingConfig)) {
@@ -20,14 +23,37 @@ var Add = function (gameObject, paddingConfig, childKey, index) {
         paddingConfig = GetValue(config, 'padding', 0);
         childKey = GetValue(config, 'key', undefined);
         index = GetValue(config, 'index', undefined);
+
+        offsetX = GetValue(config, 'offsetX', 0);
+        offsetY = GetValue(config, 'offsetY', 0);
+        offsetOriginX = GetValue(config, 'offsetOriginX', 0);
+        offsetOriginY = GetValue(config, 'offsetOriginY', 0);
     }
     if (paddingConfig === undefined) {
         paddingConfig = 0;
     }
 
+    if (offsetX === undefined) {
+        offsetX = 0;
+    }
+    if (offsetY === undefined) {
+        offsetY = 0;
+    }
+    if (offsetOriginX === undefined) {
+        offsetOriginX = 0;
+    }
+    if (offsetOriginY === undefined) {
+        offsetOriginY = 0;
+    }
+
     var config = this.getSizerConfig(gameObject);
     config.align = ALIGN_CENTER;
     config.padding = GetBoundsConfig(paddingConfig);
+    config.alignOffsetX = offsetX;
+    config.alignOffsetY = offsetY;
+    config.alignOffsetOriginX = offsetOriginX;
+    config.alignOffsetOriginY = offsetOriginY;
+
     if ((index === undefined) || (index >= this.sizerChildren.length)) {
         this.sizerChildren.push(gameObject);
     } else {

@@ -253,6 +253,10 @@ sizer.add(child,
         minWidth: undefined,
         minHeight: undefined,
         fitRatio: 0,  // true
+        offsetX: 0,
+        offsetY: 0,
+        offsetOriginX: 0,
+        offsetOriginY: 0,
     }
 );
 ```
@@ -310,6 +314,8 @@ sizer.add(child, proportion, align, padding, expand, key, index);
     - `0`, or `false` : Ignore this feature. Default behavior.
     - `true` : Fit ratio (width/height) from game object's display size.
     - `> 0` : Fit ratio (width/height). `1` is square.
+- `offsetX`, `offsetOriginX` : Apply offset `offsetX + offsetOriginY * width` to x coordinate after alignment.
+- `offsetY`, `offsetOriginY` : Apply offset `offsetY + offsetOriginY * height` to y coordinate after alignment.
 
 
 ### Insert child
