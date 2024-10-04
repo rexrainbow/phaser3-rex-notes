@@ -7,13 +7,10 @@ var ResetGrid = function (
     columnProportions, rowProportions,
     space
 ) {
-
-    if (columnProportions === undefined) {
-        columnProportions = 0;
-    }
-    if (rowProportions === undefined) {
-        rowProportions = 0;
-    }
+    if (columnCount === undefined) { columnCount = 0; }
+    if (rowCount === undefined) { rowCount = 0; }
+    if (columnProportions === undefined) { columnProportions = 0; }
+    if (rowProportions === undefined) { rowProportions = 0; }
 
     this.columnCount = columnCount;
     this.rowCount = rowCount;
