@@ -10418,7 +10418,11 @@
 <span class="w">    </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">padding</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">left</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">right</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">top</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">bottom</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">},</span>
 <span class="w">        </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">index</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span>
+<span class="w">        </span><span class="nx">index</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">offsetX</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">offsetY</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">offsetOriginX</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">offsetOriginY</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">);</span>
 </code></pre></div>
@@ -10444,6 +10448,8 @@
 <li><code>items</code> : Reserved key, for all children item.</li>
 </ul>
 </li>
+<li><code>offsetX</code>, <code>offsetOriginX</code> : Apply offset <code>offsetX + offsetOriginY * width</code> to x coordinate after alignment.</li>
+<li><code>offsetY</code>, <code>offsetOriginY</code> : Apply offset <code>offsetY + offsetOriginY * height</code> to y coordinate after alignment.</li>
 <li><code>index</code> : Insert child to.<ul>
 <li><code>undefined</code> : Insert child at last.</li>
 </ul>

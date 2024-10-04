@@ -10504,6 +10504,10 @@
 <span class="w">        </span><span class="nx">minWidth</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">minHeight</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">fitRatio</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w">  </span><span class="c1">// true</span>
+<span class="w">        </span><span class="nx">offsetX</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">offsetY</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">offsetOriginX</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">offsetOriginY</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">);</span>
 </code></pre></div>
@@ -10579,6 +10583,8 @@
 <li><code>&gt; 0</code> : Fit ratio (width/height). <code>1</code> is square.</li>
 </ul>
 </li>
+<li><code>offsetX</code>, <code>offsetOriginX</code> : Apply offset <code>offsetX + offsetOriginY * width</code> to x coordinate after alignment.</li>
+<li><code>offsetY</code>, <code>offsetOriginY</code> : Apply offset <code>offsetY + offsetOriginY * height</code> to y coordinate after alignment.</li>
 </ul>
 <h3 id="insert-child">Insert child<a class="headerlink" href="#insert-child" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">insert</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span><span class="w"> </span><span class="nx">child</span><span class="p">,</span><span class="w"> </span>

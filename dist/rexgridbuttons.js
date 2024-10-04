@@ -8811,14 +8811,13 @@
     };
 
     var LayoutChild = function (child, x, y, width, height, align, offsetX, offsetY) {
+        if (offsetX === undefined) { offsetX = 0; }
+        if (offsetY === undefined) { offsetY = 0; }
+
         AlignIn(child, x, y, width, height, align);
 
-        if (offsetX !== undefined) {
-            child.x += offsetX;
-        }
-        if (offsetY !== undefined) {
-            child.y += offsetY;
-        }
+        child.x += offsetX;
+        child.y += offsetY;
 
         this.resetChildPositionState(child);
 
@@ -8859,7 +8858,10 @@
 
             ResizeGameObject(child, width, height);
 
-            LayoutChild.call(this, child, x, y, width, height, ALIGN_CENTER$1);
+            LayoutChild.call(this,
+                child, x, y, width, height, ALIGN_CENTER$1,
+                0, 0
+            );
         }
     };
 
@@ -12108,7 +12110,7 @@
             startY = this.innerTop;
         var itemX,
             itemY = startY;
-        var x, y, width, height; // Align zone
+        var x, y, width, height, alignOffsetX, alignOffsetY; // Align zone
         var childWidth, childHeight;
         // Layout grid children
         var colWidth, rowHeight;
@@ -12148,7 +12150,13 @@
                 y = itemY + (indentTop * this.scaleY) + (padding.top * this.scaleY);
                 height = rowHeight - ((padding.top + padding.bottom) * this.scaleY);
 
-                LayoutChild.call(this, child, x, y, width, height, childConfig.align);
+                alignOffsetX = (childConfig.alignOffsetX + (childConfig.alignOffsetOriginX * width)) * this.scaleX;
+                alignOffsetY = (childConfig.alignOffsetY + (childConfig.alignOffsetOriginY * height)) * this.scaleY;
+
+                LayoutChild.call(this,
+                    child, x, y, width, height, childConfig.align,
+                    alignOffsetX, alignOffsetY
+                );
 
                 itemX += colWidth + (this.space.column[columnIndex] * this.scaleX);
             }
@@ -12334,6 +12342,9 @@
     };
 
     var Add = function (gameObject, columnIndex, rowIndex, align, paddingConfig, expand, childKey) {
+        var offsetX, offsetY;
+        var offsetOriginX, offsetOriginY;
+
         AddChild.call(this, gameObject);
         if (IsPlainObject$1(columnIndex)) {
             var config = columnIndex;
@@ -12343,6 +12354,11 @@
             paddingConfig = GetValue$4(config, 'padding', 0);
             expand = GetValue$4(config, 'expand', false);
             childKey = GetValue$4(config, 'key', undefined);
+
+            offsetX = GetValue$4(config, 'offsetX', 0);
+            offsetY = GetValue$4(config, 'offsetY', 0);
+            offsetOriginX = GetValue$4(config, 'offsetOriginX', 0);
+            offsetOriginY = GetValue$4(config, 'offsetOriginY', 0);
         }
 
         // Get insert index
@@ -12376,6 +12392,19 @@
             expand = true;
         }
 
+        if (offsetX === undefined) {
+            offsetX = 0;
+        }
+        if (offsetY === undefined) {
+            offsetY = 0;
+        }
+        if (offsetOriginX === undefined) {
+            offsetOriginX = 0;
+        }
+        if (offsetOriginY === undefined) {
+            offsetOriginY = 0;
+        }
+
         var config = this.getSizerConfig(gameObject);
         config.align = align;
         config.padding = GetBoundsConfig(paddingConfig);
@@ -12387,6 +12416,11 @@
             config.expandWidth = expand;
             config.expandHeight = expand;
         }
+
+        config.alignOffsetX = offsetX;
+        config.alignOffsetY = offsetY;
+        config.alignOffsetOriginX = offsetOriginX;
+        config.alignOffsetOriginY = offsetOriginY;
 
         this.sizerChildren[itemIndex] = gameObject;
 

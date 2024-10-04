@@ -10487,7 +10487,11 @@
 <span class="w">        </span><span class="nx">align</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">padding</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">left</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">right</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">top</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">bottom</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">},</span>
 <span class="w">        </span><span class="nx">expand</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">        </span><span class="c1">// expand: {width, height}</span>
-<span class="w">        </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span>
+<span class="w">        </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">offsetX</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">offsetY</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">offsetOriginX</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">offsetOriginY</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">);</span>
 </code></pre></div>
@@ -10557,6 +10561,8 @@
 <li><code>undefined</code> : Don't add this child. Default value.</li>
 </ul>
 </li>
+<li><code>offsetX</code>, <code>offsetOriginX</code> : Apply offset <code>offsetX + offsetOriginY * width</code> to x coordinate after alignment.</li>
+<li><code>offsetY</code>, <code>offsetOriginY</code> : Apply offset <code>offsetY + offsetOriginY * height</code> to y coordinate after alignment.</li>
 </ul>
 <h3 id="insert-empty-rowcolumn">Insert empty row/column<a class="headerlink" href="#insert-empty-rowcolumn" title="Permanent link">&para;</a></h3>
 <ul>

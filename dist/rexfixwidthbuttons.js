@@ -8811,14 +8811,13 @@
     };
 
     var LayoutChild = function (child, x, y, width, height, align, offsetX, offsetY) {
+        if (offsetX === undefined) { offsetX = 0; }
+        if (offsetY === undefined) { offsetY = 0; }
+
         AlignIn(child, x, y, width, height, align);
 
-        if (offsetX !== undefined) {
-            child.x += offsetX;
-        }
-        if (offsetY !== undefined) {
-            child.y += offsetY;
-        }
+        child.x += offsetX;
+        child.y += offsetY;
 
         this.resetChildPositionState(child);
 
@@ -8859,7 +8858,10 @@
 
             ResizeGameObject(child, width, height);
 
-            LayoutChild.call(this, child, x, y, width, height, ALIGN_CENTER$1);
+            LayoutChild.call(this,
+                child, x, y, width, height, ALIGN_CENTER$1,
+                0, 0
+            );
         }
     };
 
@@ -11981,7 +11983,7 @@
         var child, childConfig, padding, justifySpace = 0, indentLeft, indentTop;
         var startX = this.innerLeft,
             startY = this.innerTop;
-        var x, y, width, height; // Align zone
+        var x, y, width, height, alignOffsetX, alignOffsetY; // Align zone
         var lines = this.wrapResult.lines;  // Get this.wrapResult from RunChildrenWrap()
         var line, lineChlidren, remainderLineWidth;
 
@@ -12095,7 +12097,13 @@
                     itemY = y + height + (padding.top * this.scaleY) + justifySpace;
                 }
 
-                LayoutChild.call(this, child, x, y, width, height, childConfig.align);
+                alignOffsetX = (childConfig.alignOffsetX + (childConfig.alignOffsetOriginX * width)) * this.scaleX;
+                alignOffsetY = (childConfig.alignOffsetY + (childConfig.alignOffsetOriginY * height)) * this.scaleY;
+
+                LayoutChild.call(this,
+                    child, x, y, width, height, childConfig.align,
+                    alignOffsetX, alignOffsetY
+                );
             }
 
             if (horizontalWrap) {
@@ -12354,6 +12362,9 @@
             return this;
         }
 
+        var offsetX, offsetY;
+        var offsetOriginX, offsetOriginY;
+
         AddChild.call(this, gameObject);
 
         if (IsPlainObject$1(paddingConfig)) {
@@ -12361,14 +12372,37 @@
             paddingConfig = GetValue$3(config, 'padding', 0);
             childKey = GetValue$3(config, 'key', undefined);
             index = GetValue$3(config, 'index', undefined);
+
+            offsetX = GetValue$3(config, 'offsetX', 0);
+            offsetY = GetValue$3(config, 'offsetY', 0);
+            offsetOriginX = GetValue$3(config, 'offsetOriginX', 0);
+            offsetOriginY = GetValue$3(config, 'offsetOriginY', 0);
         }
         if (paddingConfig === undefined) {
             paddingConfig = 0;
         }
 
+        if (offsetX === undefined) {
+            offsetX = 0;
+        }
+        if (offsetY === undefined) {
+            offsetY = 0;
+        }
+        if (offsetOriginX === undefined) {
+            offsetOriginX = 0;
+        }
+        if (offsetOriginY === undefined) {
+            offsetOriginY = 0;
+        }
+
         var config = this.getSizerConfig(gameObject);
         config.align = ALIGN_CENTER;
         config.padding = GetBoundsConfig(paddingConfig);
+        config.alignOffsetX = offsetX;
+        config.alignOffsetY = offsetY;
+        config.alignOffsetOriginX = offsetOriginX;
+        config.alignOffsetOriginY = offsetOriginY;
+
         if ((index === undefined) || (index >= this.sizerChildren.length)) {
             this.sizerChildren.push(gameObject);
         } else {
