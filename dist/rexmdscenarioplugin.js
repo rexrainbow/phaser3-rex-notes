@@ -42383,6 +42383,12 @@ void main () {
 	            }
 	        }
 
+	        if (childWidth === undefined) {
+	            childWidth = GetDisplayWidth(child);
+	        }
+	        if (childHeight === undefined) {
+	            childHeight = GetDisplayHeight(child);
+	        }
 	        alignOffsetX = (childConfig.alignOffsetX + (childConfig.alignOffsetOriginX * childWidth)) * this.scaleX;
 	        alignOffsetY = (childConfig.alignOffsetY + (childConfig.alignOffsetOriginY * childHeight)) * this.scaleY;
 
@@ -55262,6 +55268,12 @@ void main () {
 	            y = itemY + (indentTop * this.scaleY) + (padding.top * this.scaleY);
 	            height = rowHeight - ((padding.top + padding.bottom) * this.scaleY);
 
+	            if (childWidth === undefined) {
+	                childWidth = GetDisplayWidth(child);
+	            }
+	            if (childHeight === undefined) {
+	                childHeight = GetDisplayHeight(child);
+	            }
 	            alignOffsetX = (childConfig.alignOffsetX + (childConfig.alignOffsetOriginX * childWidth)) * this.scaleX;
 	            alignOffsetY = (childConfig.alignOffsetY + (childConfig.alignOffsetOriginY * childHeight)) * this.scaleY;
 
@@ -61612,6 +61624,12 @@ void main () {
 	        y = startY + (padding.top * this.scaleY);
 	        height = innerHeight - ((padding.top + padding.bottom) * this.scaleY);
 
+	        if (childWidth === undefined) {
+	            childWidth = GetDisplayWidth(child);
+	        }
+	        if (childHeight === undefined) {
+	            childHeight = GetDisplayHeight(child);
+	        }
 	        alignOffsetX = (childConfig.alignOffsetX + (childConfig.alignOffsetOriginX * childWidth)) * this.scaleX;
 	        alignOffsetY = (childConfig.alignOffsetY + (childConfig.alignOffsetOriginY * childHeight)) * this.scaleY;
 
@@ -62852,8 +62870,8 @@ void main () {
 	                itemY = y + height + (padding.top * this.scaleY) + justifySpace;
 	            }
 
-	            alignOffsetX = (childConfig.alignOffsetX + (childConfig.alignOffsetOriginX * childWidth)) * this.scaleX;
-	            alignOffsetY = (childConfig.alignOffsetY + (childConfig.alignOffsetOriginY * childHeight)) * this.scaleY;
+	            alignOffsetX = (childConfig.alignOffsetX + (childConfig.alignOffsetOriginX * width)) * this.scaleX;
+	            alignOffsetY = (childConfig.alignOffsetY + (childConfig.alignOffsetOriginY * height)) * this.scaleY;
 
 	            LayoutChild.call(this,
 	                child, x, y, width, height, childConfig.align,

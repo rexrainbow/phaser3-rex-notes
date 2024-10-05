@@ -12109,6 +12109,12 @@
             y = startY + (padding.top * this.scaleY);
             height = innerHeight - ((padding.top + padding.bottom) * this.scaleY);
 
+            if (childWidth === undefined) {
+                childWidth = GetDisplayWidth(child);
+            }
+            if (childHeight === undefined) {
+                childHeight = GetDisplayHeight(child);
+            }
             alignOffsetX = (childConfig.alignOffsetX + (childConfig.alignOffsetOriginX * childWidth)) * this.scaleX;
             alignOffsetY = (childConfig.alignOffsetY + (childConfig.alignOffsetOriginY * childHeight)) * this.scaleY;
 
