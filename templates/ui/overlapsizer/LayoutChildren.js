@@ -3,6 +3,7 @@ import PreLayoutChild from '../basesizer/utils/PreLayoutChild.js';
 import FitToSize from '../../../plugins/utils/size/FitTo.js';
 import LayoutChild from '../basesizer/utils/LayoutChild.js';
 import CheckSize from '../basesizer/utils/CheckSize.js';
+import { GetDisplayWidth, GetDisplayHeight } from '../../../plugins/utils/size/GetDisplaySize.js';
 
 var LayoutChildren = function () {
     var child, childConfig, padding;
@@ -54,6 +55,12 @@ var LayoutChildren = function () {
         y = startY + (padding.top * this.scaleY);
         height = innerHeight - ((padding.top + padding.bottom) * this.scaleY);
 
+        if (childWidth === undefined) {
+            childWidth = GetDisplayWidth(child);
+        }
+        if (childHeight === undefined) {
+            childHeight = GetDisplayHeight(child);
+        }
         alignOffsetX = (childConfig.alignOffsetX + (childConfig.alignOffsetOriginX * childWidth)) * this.scaleX;
         alignOffsetY = (childConfig.alignOffsetY + (childConfig.alignOffsetOriginY * childHeight)) * this.scaleY;
 

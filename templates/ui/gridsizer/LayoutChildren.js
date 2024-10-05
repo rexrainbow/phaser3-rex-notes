@@ -2,6 +2,7 @@ import ResizeGameObject from '../../../plugins/utils/size/ResizeGameObject.js';
 import PreLayoutChild from '../basesizer/utils/PreLayoutChild.js';
 import LayoutChild from '../basesizer/utils/LayoutChild.js';
 import CheckSize from '../basesizer/utils/CheckSize.js';
+import { GetDisplayWidth, GetDisplayHeight } from '../../../plugins/utils/size/GetDisplaySize.js';
 
 var LayoutChildren = function () {
     var child, childConfig, padding;
@@ -49,6 +50,12 @@ var LayoutChildren = function () {
             y = itemY + (indentTop * this.scaleY) + (padding.top * this.scaleY);
             height = rowHeight - ((padding.top + padding.bottom) * this.scaleY);
 
+            if (childWidth === undefined) {
+                childWidth = GetDisplayWidth(child);
+            }
+            if (childHeight === undefined) {
+                childHeight = GetDisplayHeight(child);
+            }
             alignOffsetX = (childConfig.alignOffsetX + (childConfig.alignOffsetOriginX * childWidth)) * this.scaleX;
             alignOffsetY = (childConfig.alignOffsetY + (childConfig.alignOffsetOriginY * childHeight)) * this.scaleY;
 
