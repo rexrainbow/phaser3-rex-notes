@@ -3149,6 +3149,7 @@
     Phaser.Geom.Rectangle;
     const Vector2 = Phaser.Math.Vector2;
     const RotateAround$2 = Phaser.Math.RotateAround;
+    Phaser.GameObjects.Container;
 
     var GetTopLeft = function (gameObject, output, includeParent) {
         if (output === undefined) {

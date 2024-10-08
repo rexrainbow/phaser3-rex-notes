@@ -372,6 +372,7 @@
     const Rectangle$5 = Phaser.Geom.Rectangle;
     const Vector2 = Phaser.Math.Vector2;
     const RotateAround$6 = Phaser.Math.RotateAround;
+    const P3Container$2 = Phaser.GameObjects.Container;
 
     var GetBounds = function (gameObject, output) {
         if (output === undefined) {
@@ -383,7 +384,7 @@
             output = GlobRect$2;
         }
 
-        if (gameObject.getBounds) {
+        if (gameObject.getBounds && !(gameObject instanceof P3Container$2)) {
             return gameObject.getBounds(output);
         }
 
@@ -6320,7 +6321,7 @@
         }
     };
 
-    var P3Container = {
+    var P3Container$1 = {
         addToContainer(p3Container) {
             if (!IsContainerGameObject(p3Container)) {
                 return this;
@@ -6877,7 +6878,7 @@
         Depth,
         Children,
         Tween,
-        P3Container,
+        P3Container$1,
         RenderLayer,
         RenderTexture$1,
     );
@@ -11830,6 +11831,7 @@
 
     const GetValue$26 = Phaser.Utils.Objects.GetValue;
     const Group = Phaser.GameObjects.Group;
+    const P3Container = Phaser.GameObjects.Container;
 
     var DrawBounds = function (graphics, config) {
         var scene = graphics.scene;
@@ -11872,7 +11874,10 @@
             };
         }
 
-        var children = this.getAllShownChildren([this]), child;
+        var children = this.getAllShownChildren([this]);
+        children.push(...GetP3ContainerChildren(children));
+
+        var child;
         var nameText;
         for (var i = 0, cnt = children.length; i < cnt; i++) {
             child = children[i];
@@ -11909,6 +11914,25 @@
 
     var DefaultCreateTextCallback = function (scene, child, childBoundsRect) {
         return scene.add.text(0, 0, '');
+    };
+
+    var GetP3ContainerChildren = function (gameObjects, output) {
+        if (!Array.isArray(gameObjects)) {
+            gameObjects = [gameObjects];
+        }
+        if (output === undefined) {
+            output = [];
+        }
+
+        for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+            var gameObject = gameObjects[i];
+            if (gameObject instanceof P3Container) {
+                output.push(...gameObject.list);
+                GetP3ContainerChildren(gameObject.list, output);
+            }
+        }
+
+        return output;
     };
 
     var GlobRect = undefined;

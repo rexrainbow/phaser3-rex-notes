@@ -1612,7 +1612,7 @@
         }
     };
 
-    var P3Container = {
+    var P3Container$1 = {
         addToContainer(p3Container) {
             if (!IsContainerGameObject(p3Container)) {
                 return this;
@@ -1847,6 +1847,7 @@
     const Rectangle$1 = Phaser.Geom.Rectangle;
     const Vector2 = Phaser.Math.Vector2;
     const RotateAround$2 = Phaser.Math.RotateAround;
+    const P3Container = Phaser.GameObjects.Container;
 
     var GetBounds = function (gameObject, output) {
         if (output === undefined) {
@@ -1858,7 +1859,7 @@
             output = GlobRect$1;
         }
 
-        if (gameObject.getBounds) {
+        if (gameObject.getBounds && !(gameObject instanceof P3Container)) {
             return gameObject.getBounds(output);
         }
 
@@ -2379,7 +2380,7 @@
         Depth,
         Children,
         Tween,
-        P3Container,
+        P3Container$1,
         RenderLayer,
         RenderTexture,
     );

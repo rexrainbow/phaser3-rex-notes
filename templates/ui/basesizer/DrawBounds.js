@@ -4,6 +4,7 @@ import { GetBounds } from '../../../plugins/utils/bounds/GetBounds.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Group = Phaser.GameObjects.Group;
+const P3Container = Phaser.GameObjects.Container;
 
 var DrawBounds = function (graphics, config) {
     var scene = graphics.scene;
@@ -46,7 +47,10 @@ var DrawBounds = function (graphics, config) {
         }
     }
 
-    var children = this.getAllShownChildren([this]), child;
+    var children = this.getAllShownChildren([this]);
+    children.push(...GetP3ContainerChildren(children));
+
+    var child;
     var nameText;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
         child = children[i];
@@ -83,6 +87,25 @@ var DrawBounds = function (graphics, config) {
 
 var DefaultCreateTextCallback = function (scene, child, childBoundsRect) {
     return scene.add.text(0, 0, '');
+}
+
+var GetP3ContainerChildren = function (gameObjects, output) {
+    if (!Array.isArray(gameObjects)) {
+        gameObjects = [gameObjects];
+    }
+    if (output === undefined) {
+        output = [];
+    }
+
+    for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+        var gameObject = gameObjects[i];
+        if (gameObject instanceof P3Container) {
+            output.push(...gameObject.list);
+            GetP3ContainerChildren(gameObject.list, output);
+        }
+    }
+
+    return output;
 }
 
 var GlobRect = undefined;

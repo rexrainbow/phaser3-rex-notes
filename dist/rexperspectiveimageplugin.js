@@ -289,6 +289,7 @@
     const Rectangle$1 = Phaser.Geom.Rectangle;
     const Vector2 = Phaser.Math.Vector2;
     const RotateAround$1 = Phaser.Math.RotateAround;
+    const P3Container$1 = Phaser.GameObjects.Container;
 
     var GetBounds = function (gameObject, output) {
         if (output === undefined) {
@@ -300,7 +301,7 @@
             output = GlobRect$1;
         }
 
-        if (gameObject.getBounds) {
+        if (gameObject.getBounds && !(gameObject instanceof P3Container$1)) {
             return gameObject.getBounds(output);
         }
 
