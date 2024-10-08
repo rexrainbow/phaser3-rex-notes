@@ -15,11 +15,11 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var background = this.add.rectangle(0, 0, 0, 0, 0x880000);
+        var background = this.add.rectangle(0, 0, 0, 0, COLOR_DARK);
 
         var gameObjects = [];
         for (var i = 0; i < 5; i++) {
-            gameObjects.push(this.add.rectangle(0, 0, 50, 50, 0x005555));
+            gameObjects.push(this.add.rectangle(0, 0, 50, 50, COLOR_LIGHT));
         }
 
         this.rexUI.add.sizer({

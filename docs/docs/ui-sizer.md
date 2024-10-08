@@ -22,6 +22,7 @@ It is inspired from [wxSizer](https://docs.wxwidgets.org/3.0/overview_sizer.html
 - [Bring child to top](https://codepen.io/rexrainbow/pen/gOqNbRr)
 - [Fit-ratio](https://codepen.io/rexrainbow/pen/ZEPwrom)
 - [Sort](https://codepen.io/rexrainbow/pen/poBmWMY)
+- [Add multiple](https://codepen.io/rexrainbow/pen/MWNjbJj)
 
 ## Usage
 
