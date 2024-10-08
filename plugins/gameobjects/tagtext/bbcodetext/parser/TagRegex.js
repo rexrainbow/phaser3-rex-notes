@@ -70,6 +70,10 @@ var SetDelimiters = function (delimiterLeft, delimiterRight) {
     var SIZE_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, SIZE, NUMBER_PARAM);
     var SIZE_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, SIZE);
 
+    var FAMILY = 'family';
+    var FAMILY_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, FAMILY, STR_PARAM);
+    var FAMILY_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, FAMILY);
+
     var COLOR = 'color';
     var COLOR_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, COLOR, COLOR_PARAM);
     var COLOR_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, COLOR);
@@ -140,6 +144,9 @@ var SetDelimiters = function (delimiterLeft, delimiterRight) {
     TagRegexSave.RE_SIZE_OPEN = new RegExp(SIZE_OPEN, 'i');
     TagRegexSave.RE_SIZE_CLOSE = new RegExp(SIZE_CLOSE, 'i');
 
+    TagRegexSave.RE_FAMILY_OPEN = new RegExp(FAMILY_OPEN, 'i');
+    TagRegexSave.RE_FAMILY_CLOSE = new RegExp(FAMILY_CLOSE, 'i');
+
     TagRegexSave.RE_COLOR_OPEN = new RegExp(COLOR_OPEN, 'i');
     TagRegexSave.RE_COLOR_CLOSE = new RegExp(COLOR_CLOSE, 'i');
 
@@ -189,6 +196,7 @@ var SetDelimiters = function (delimiterLeft, delimiterRight) {
         WEIGHT_OPEN, WEIGHT_CLOSE,
 
         SIZE_OPEN, SIZE_CLOSE,
+        FAMILY_OPEN, FAMILY_CLOSE,
         COLOR_OPEN, COLOR_CLOSE,
         UNDERLINE_OPEN, UNDERLINE_OPENC, UNDERLINE_CLOSE,
         STRIKETHROUGH_OPEN, STRIKETHROUGH_OPENC, STRIKETHROUGH_CLOSE,

@@ -67,6 +67,12 @@ var TagTextToProp = function (text, prevProp) {
         } else if (TagRegex.RE_SIZE_CLOSE.test(text)) {
             UpdateProp(prevProp, PROP_REMOVE, 'size');
 
+        } else if (TagRegex.RE_FAMILY_OPEN.test(text)) {
+            var innerMatch = text.match(TagRegex.RE_FAMILY_OPEN);
+            UpdateProp(prevProp, PROP_ADD, 'family', innerMatch[1]);
+        } else if (TagRegex.RE_FAMILY_CLOSE.test(text)) {
+            UpdateProp(prevProp, PROP_REMOVE, 'family');
+
         } else if (TagRegex.RE_COLOR_OPEN.test(text)) {
             var innerMatch = text.match(TagRegex.RE_COLOR_OPEN);
             UpdateProp(prevProp, PROP_ADD, 'color', innerMatch[1]);
