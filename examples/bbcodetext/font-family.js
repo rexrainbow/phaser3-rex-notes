@@ -14,7 +14,7 @@ class Demo extends Phaser.Scene {
     create() {
         var s = 'Hello [family=Roboto Condensed, fantasy]Hello[/family] Hello'
         this.add.rexBBCodeText(200, 300, s, {
-            fontFamily: 'Papyrus',
+            fontFamily: 'papyrus',
             fontSize: 40
         })
     }

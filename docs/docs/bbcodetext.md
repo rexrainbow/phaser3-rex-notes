@@ -14,6 +14,7 @@ Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 - [Page, typing](https://codepen.io/rexrainbow/pen/yjZveb)
 - [Wrap](https://codepen.io/rexrainbow/pen/BaZEGOB)
     - [Mix wrap](https://codepen.io/rexrainbow/pen/abMdPBr)
+- [Font family](https://codepen.io/rexrainbow/pen/wvVzydL)
 - [Measure margin of text](https://codepen.io/rexrainbow/pen/eYEOYzX)
 - [Generate texture](https://codepen.io/rexrainbow/pen/vYJQrrX)
 - [Image height](https://codepen.io/rexrainbow/pen/yLKNVaW)
@@ -93,6 +94,7 @@ Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
     - `[color=rgb(255,0,0)]text[/color]`
     - `[color=rgba(255,0,0,1)]text[/color]`
 - Size : `[size=18]text[/size]`
+- Family : `[family=papyrus]text[/family]`
 - Stroke : `[stroke]text[/stroke]`
     - Stroke with color setting : `[stroke=red]text[/stroke]`
 - Shadow : `[shadow]text[/shadow]`
