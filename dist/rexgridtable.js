@@ -3129,7 +3129,7 @@
         }
 
         var children = this.getAllShownChildren([this]);
-        children.push(...GetP3ContainerChildren(children));
+        GetP3ContainerChildren(children, children);
 
         var child;
         var nameText;
