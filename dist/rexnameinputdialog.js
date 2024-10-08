@@ -31723,6 +31723,12 @@
             } else if (TagRegex.RE_SIZE_CLOSE.test(text)) {
                 UpdateProp(prevProp, PROP_REMOVE, 'size');
 
+            } else if (TagRegex.RE_FAMILY_OPEN.test(text)) {
+                var innerMatch = text.match(TagRegex.RE_FAMILY_OPEN);
+                UpdateProp(prevProp, PROP_ADD, 'family', innerMatch[1]);
+            } else if (TagRegex.RE_FAMILY_CLOSE.test(text)) {
+                UpdateProp(prevProp, PROP_REMOVE, 'family');
+
             } else if (TagRegex.RE_COLOR_OPEN.test(text)) {
                 var innerMatch = text.match(TagRegex.RE_COLOR_OPEN);
                 UpdateProp(prevProp, PROP_ADD, 'color', innerMatch[1]);
@@ -32000,6 +32006,7 @@
 
                 case 'color':
                 case 'weight':
+                case 'family':
                 case 'stroke':
                 case 'bgcolor':
                 case 'y':
@@ -32114,6 +32121,10 @@
         var SIZE_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, SIZE, NUMBER_PARAM);
         var SIZE_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, SIZE);
 
+        var FAMILY = 'family';
+        var FAMILY_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, FAMILY, STR_PARAM);
+        var FAMILY_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, FAMILY);
+
         var COLOR = 'color';
         var COLOR_OPEN = GetOpenTagRegString(delimiterLeft, delimiterRight, COLOR, COLOR_PARAM);
         var COLOR_CLOSE = GetCloseTagRegString(delimiterLeft, delimiterRight, COLOR);
@@ -32184,6 +32195,9 @@
         TagRegexSave.RE_SIZE_OPEN = new RegExp(SIZE_OPEN, 'i');
         TagRegexSave.RE_SIZE_CLOSE = new RegExp(SIZE_CLOSE, 'i');
 
+        TagRegexSave.RE_FAMILY_OPEN = new RegExp(FAMILY_OPEN, 'i');
+        TagRegexSave.RE_FAMILY_CLOSE = new RegExp(FAMILY_CLOSE, 'i');
+
         TagRegexSave.RE_COLOR_OPEN = new RegExp(COLOR_OPEN, 'i');
         TagRegexSave.RE_COLOR_CLOSE = new RegExp(COLOR_CLOSE, 'i');
 
@@ -32233,6 +32247,7 @@
             WEIGHT_OPEN, WEIGHT_CLOSE,
 
             SIZE_OPEN, SIZE_CLOSE,
+            FAMILY_OPEN, FAMILY_CLOSE,
             COLOR_OPEN, COLOR_CLOSE,
             UNDERLINE_OPEN, UNDERLINE_OPENC, UNDERLINE_CLOSE,
             STRIKETHROUGH_OPEN, STRIKETHROUGH_OPENC, STRIKETHROUGH_CLOSE,
