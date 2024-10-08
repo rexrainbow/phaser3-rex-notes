@@ -353,9 +353,12 @@
             return this;
         },
 
+        // Can override this method
         addMultiple(gameObjects) {
+            var args = Array.from(arguments);
             for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-                Add$4.call(this, gameObjects[i]);
+                args[0] = gameObjects[i];
+                this.add.apply(this, args);
             }
             return this;
         },
