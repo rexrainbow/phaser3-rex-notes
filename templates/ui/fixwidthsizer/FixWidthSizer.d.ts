@@ -83,6 +83,11 @@ declare class FixWidthSizer extends BaseSizer {
         index?: number
     ): this;
 
+    addMultiple(
+        gameObject: Phaser.GameObjects.GameObject[],
+        config?: FixWidthSizer.IAddConfig
+    ): this;
+
     insert(
         index: number,
         gameObject: Phaser.GameObjects.GameObject,

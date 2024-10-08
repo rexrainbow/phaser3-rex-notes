@@ -349,6 +349,16 @@ gridSizer.add(child, column, row, align, padding, expand, key);
 - `offsetY`, `offsetOriginY` : Apply offset `offsetY + offsetOriginY * height` to y coordinate after alignment.
 
 
+### Add multiple
+
+```javascript
+sizer.add(gameObjects, config);
+```
+
+- `gameObjects` : Array of child game objects
+- `config` : See [config of add-child](#add-child)
+
+
 ### Insert empty row/column
 
 - Insert an empty row

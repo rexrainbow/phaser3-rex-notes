@@ -268,6 +268,17 @@ sizer.add(child, key, align, padding, expand, minWidth, minHeight, offsetX, offs
     - `true` : Keep aspect ratio via current size.
     - A number : Keep aspect ratio via given value.
 
+
+#### Add multiple
+
+```javascript
+sizer.add(gameObjects, config);
+```
+
+- `gameObjects` : Array of child game objects
+- `config` : See [config of add-child](#add-child)
+
+
 ### Layout children
 
 Arrange position of all children.

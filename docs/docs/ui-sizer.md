@@ -318,6 +318,15 @@ sizer.add(child, proportion, align, padding, expand, key, index);
 - `offsetY`, `offsetOriginY` : Apply offset `offsetY + offsetOriginY * height` to y coordinate after alignment.
 
 
+### Add multiple
+
+```javascript
+sizer.add(gameObjects, config);
+```
+
+- `gameObjects` : Array of child game objects
+- `config` : See [config of add-child](#add-child)
+
 ### Insert child
 
 ```javascript

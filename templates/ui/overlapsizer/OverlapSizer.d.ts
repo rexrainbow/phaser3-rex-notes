@@ -92,6 +92,11 @@ declare class OverlapSizer extends BaseSizer {
         aspectRatio?: true | number
     ): this;
 
+    addMultiple(
+        gameObject: Phaser.GameObjects.GameObject[],
+        config?: OverlapSizer.IAddConfig
+    ): this;
+
     remove(
         gameObject: Phaser.GameObjects.GameObject,
         destroyChild?: boolean

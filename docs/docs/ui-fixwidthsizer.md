@@ -271,6 +271,16 @@ sizer.add(child, padding, key, index);
     - `undefined` : Insert child at last.
 
 
+### Add multiple
+
+```javascript
+sizer.add(gameObjects, config);
+```
+
+- `gameObjects` : Array of child game objects
+- `config` : See [config of add-child](#add-child)
+
+
 ### Insert child
 
 ```javascript

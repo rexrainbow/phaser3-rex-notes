@@ -142,6 +142,11 @@ declare class Sizer extends BaseSizer {
         key?: string
     ): this;
 
+    addMultiple(
+        gameObject: Phaser.GameObjects.GameObject[],
+        config?: Sizer.IAddConfig
+    ): this;
+
     addSpace(
         proportion?: number
     ): this;

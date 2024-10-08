@@ -125,6 +125,11 @@ declare class GridSizer extends BaseSizer {
         key?: string
     ): this;
 
+    addMultiple(
+        gameObject: Phaser.GameObjects.GameObject[],
+        config?: GridSizer.IAddConfig
+    ): this;
+
     remove(
         gameObject: Phaser.GameObjects.GameObject,
         destroyChild?: boolean
