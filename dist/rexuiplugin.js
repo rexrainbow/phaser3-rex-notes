@@ -62218,7 +62218,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this.enableChildrenMask(GetValue$1c(config, 'padding', 0));
             this.setMaskLayer(GetValue$1c(config, 'layer', undefined));
 
-            this.onMaskGameObjectVisible = GetValue$1c(config, 'onVisivle');
+            this.onMaskGameObjectVisible = GetValue$1c(config, 'onVisible');
             this.onMaskGameObjectInvisible = GetValue$1c(config, 'onInvisible');
             this.maskGameObjectCallbackScope = GetValue$1c(config, 'scope');
 
@@ -62303,7 +62303,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                     parent: this,
                     mask: this.childrenMask,
 
-                    onVisivle: this.onMaskGameObjectVisible,
+                    onVisible: this.onMaskGameObjectVisible,
                     onInvisible: this.onMaskGameObjectInvisible,
                     scope: this.maskGameObjectCallbackScope
                 });

@@ -44,7 +44,18 @@ declare namespace GridTable {
         padding?: number | {
             left?: number, right?: number, top?: number, bottom?: number,
         },
-        updateMode?: MaskUpdateModeType
+        updateMode?: MaskUpdateModeType,
+
+        onVisible?: (
+            child: Phaser.GameObjects.GameObject,
+            parent: ContainerLite
+        ) => void;
+        onInvisible?: (
+            child: Phaser.GameObjects.GameObject,
+            parent: ContainerLite
+        ) => void;
+        scope?: Object
+
     } |
         boolean;
 

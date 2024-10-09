@@ -30259,7 +30259,7 @@
             this.enableChildrenMask(GetValue$6(config, 'padding', 0));
             this.setMaskLayer(GetValue$6(config, 'layer', undefined));
 
-            this.onMaskGameObjectVisible = GetValue$6(config, 'onVisivle');
+            this.onMaskGameObjectVisible = GetValue$6(config, 'onVisible');
             this.onMaskGameObjectInvisible = GetValue$6(config, 'onInvisible');
             this.maskGameObjectCallbackScope = GetValue$6(config, 'scope');
 
@@ -30344,7 +30344,7 @@
                     parent: this,
                     mask: this.childrenMask,
 
-                    onVisivle: this.onMaskGameObjectVisible,
+                    onVisible: this.onMaskGameObjectVisible,
                     onInvisible: this.onMaskGameObjectInvisible,
                     scope: this.maskGameObjectCallbackScope
                 });
