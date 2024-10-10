@@ -96,7 +96,7 @@ Dissolve transition post processing filter. ([Reference](https://github.com/ykob
 
 ### Apply effect
 
-- Apply effect to game object. A game object only can add 1 gray-scale effect.
+- Apply effect to game object. A game object only can add 1 dissolve effect.
     ```javascript
     var pipelineInstance = scene.plugins.get('rexDissolvePipeline').add(gameObject, {
         // toTexture: textureKey,
@@ -125,7 +125,7 @@ Dissolve transition post processing filter. ([Reference](https://github.com/ykob
         - `undefined` : A random value.
     - `fromEdgeStart`, `fromEdgeWidth` : Dissolve edge start, edge width of from-texture (texture of game object, or render result of camera).
     - `toEdgeStart`, `toEdgeWidth` : Reveal edge start, edge width of to-texture.
-- Apply effect to camera. A camera only can add 1 gray-scale effect.
+- Apply effect to camera. A camera only can add 1 dissolve effect.
     ```javascript
     var pipelineInstance = scene.plugins.get('rexDissolvePipeline').add(camera, config);
     ```
