@@ -2,4 +2,4 @@
 set main=./examples/camera-controller/bounds-scroll.js
 cd ..
 cd ..
-npm run watch
+npm run dev

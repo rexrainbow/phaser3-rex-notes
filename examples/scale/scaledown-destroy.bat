@@ -2,4 +2,4 @@
 set main=./examples/scale/scaledown-destroy.js
 cd ..
 cd ..
-npm run watch
+npm run dev

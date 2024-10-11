@@ -2,4 +2,4 @@
 set main=./examples/ui-gridbuttons/indent.js
 cd ..
 cd ..
-npm run watch
+npm run dev

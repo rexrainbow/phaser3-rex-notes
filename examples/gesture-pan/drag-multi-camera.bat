@@ -2,4 +2,4 @@
 set main=./examples/gesture-pan/drag-multi-camera.js
 cd ..
 cd ..
-npm run watch
+npm run dev

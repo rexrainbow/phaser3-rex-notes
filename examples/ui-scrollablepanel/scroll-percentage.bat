@@ -2,4 +2,4 @@
 set main=./examples/ui-scrollablepanel/scroll-percentage.js
 cd ..
 cd ..
-npm run watch
+npm run dev

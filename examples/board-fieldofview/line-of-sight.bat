@@ -2,4 +2,4 @@
 set main=./examples/board-fieldofview/line-of-sight.js
 cd ..
 cd ..
-npm run watch
+npm run dev

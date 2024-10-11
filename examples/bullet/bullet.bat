@@ -2,4 +2,4 @@
 set main=./examples/bullet/bullet.js
 cd ..
 cd ..
-npm run watch
+npm run dev

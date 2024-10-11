@@ -2,4 +2,4 @@
 set main=./examples/polar-coordinate/spiral.js
 cd ..
 cd ..
-npm run watch
+npm run dev

@@ -2,4 +2,4 @@
 set main=./examples/canvas/canvas.js
 cd ..
 cd ..
-npm run watch
+npm run dev

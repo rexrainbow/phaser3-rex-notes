@@ -2,4 +2,4 @@
 set main=./examples/ui-textarea/adapt-thumb-size.js
 cd ..
 cd ..
-npm run watch
+npm run dev

@@ -2,4 +2,4 @@
 set main=./examples/ui-label/text-color.js
 cd ..
 cd ..
-npm run watch
+npm run dev

@@ -2,4 +2,4 @@
 set main=./examples/bitmaptext/performance.js
 cd ..
 cd ..
-npm run watch
+npm run dev

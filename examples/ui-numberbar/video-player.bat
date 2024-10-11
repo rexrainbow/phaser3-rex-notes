@@ -2,4 +2,4 @@
 set main=./examples/ui-numberbar/video-player.js
 cd ..
 cd ..
-npm run watch
+npm run dev

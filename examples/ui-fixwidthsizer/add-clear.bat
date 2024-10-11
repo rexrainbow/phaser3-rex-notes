@@ -2,4 +2,4 @@
 set main=./examples/ui-fixwidthsizer/add-clear.js
 cd ..
 cd ..
-npm run watch
+npm run dev

@@ -2,4 +2,4 @@
 set main=./examples/localforage/set-remove-get.js
 cd ..
 cd ..
-npm run watch
+npm run dev

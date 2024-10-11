@@ -2,4 +2,4 @@
 set main=./examples/ui-gridtable/overlap-slider.js
 cd ..
 cd ..
-npm run watch
+npm run dev

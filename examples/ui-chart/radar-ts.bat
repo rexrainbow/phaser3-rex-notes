@@ -2,4 +2,4 @@
 set main=./examples/ui-chart/radar-ts.ts
 cd ..
 cd ..
-npm run watch
+npm run dev

@@ -2,4 +2,4 @@
 set main=./examples/ui-gridtable/messages.js
 cd ..
 cd ..
-npm run watch
+npm run dev

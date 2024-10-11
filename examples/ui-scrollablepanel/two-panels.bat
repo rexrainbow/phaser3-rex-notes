@@ -2,4 +2,4 @@
 set main=./examples/ui-scrollablepanel/two-panels.js
 cd ..
 cd ..
-npm run watch
+npm run dev

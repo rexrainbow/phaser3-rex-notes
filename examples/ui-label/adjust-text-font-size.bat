@@ -2,4 +2,4 @@
 set main=./examples/ui-label/adjust-text-font-size.js
 cd ..
 cd ..
-npm run watch
+npm run dev

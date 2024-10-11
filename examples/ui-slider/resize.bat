@@ -2,4 +2,4 @@
 set main=./examples/ui-slider/resize.js
 cd ..
 cd ..
-npm run watch
+npm run dev

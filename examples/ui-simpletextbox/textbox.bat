@@ -2,4 +2,4 @@
 set main=./examples/ui-simpletextbox/textbox.js
 cd ..
 cd ..
-npm run watch
+npm run dev

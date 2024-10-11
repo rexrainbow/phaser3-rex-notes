@@ -2,4 +2,4 @@
 set main=./examples/ui-scrollablepanel/min-width-panel.js
 cd ..
 cd ..
-npm run watch
+npm run dev

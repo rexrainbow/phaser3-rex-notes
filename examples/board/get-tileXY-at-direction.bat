@@ -2,4 +2,4 @@
 set main=./examples/board/get-tileXY-at-direction.js
 cd ..
 cd ..
-npm run watch
+npm run dev

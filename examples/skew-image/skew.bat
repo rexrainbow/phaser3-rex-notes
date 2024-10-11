@@ -2,4 +2,4 @@
 set main=./examples/skew-image/skew.js
 cd ..
 cd ..
-npm run watch
+npm run dev

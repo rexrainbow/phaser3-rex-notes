@@ -2,4 +2,4 @@
 set main=./examples/dynamictext/horizontal-wrap-align.js
 cd ..
 cd ..
-npm run watch
+npm run dev

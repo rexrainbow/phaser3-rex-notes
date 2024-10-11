@@ -2,4 +2,4 @@
 set main=./examples/bounds/target.js
 cd ..
 cd ..
-npm run watch
+npm run dev

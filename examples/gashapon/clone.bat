@@ -2,4 +2,4 @@
 set main=./examples/gashapon/clone.js
 cd ..
 cd ..
-npm run watch
+npm run dev

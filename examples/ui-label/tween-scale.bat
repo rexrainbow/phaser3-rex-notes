@@ -2,4 +2,4 @@
 set main=./examples/ui-label/tween-scale.js
 cd ..
 cd ..
-npm run watch
+npm run dev

@@ -2,4 +2,4 @@
 set main=./examples/quadshape/side-points.js
 cd ..
 cd ..
-npm run watch
+npm run dev

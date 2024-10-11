@@ -2,4 +2,4 @@
 set main=./examples/dialog-quest/branch.js
 cd ..
 cd ..
-npm run watch
+npm run dev

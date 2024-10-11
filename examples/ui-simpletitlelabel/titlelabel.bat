@@ -2,4 +2,4 @@
 set main=./examples/ui-simpletitlelabel/titlelabel.js
 cd ..
 cd ..
-npm run watch
+npm run dev

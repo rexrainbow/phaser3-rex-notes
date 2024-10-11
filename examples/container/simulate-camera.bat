@@ -2,4 +2,4 @@
 set main=./examples/container/simulate-camera.js
 cd ..
 cd ..
-npm run watch
+npm run dev

@@ -2,4 +2,4 @@
 set main=./examples/shader-localmask/localmask.js
 cd ..
 cd ..
-npm run watch
+npm run dev

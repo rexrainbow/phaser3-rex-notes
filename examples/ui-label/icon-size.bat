@@ -2,4 +2,4 @@
 set main=./examples/ui-label/icon-size.js
 cd ..
 cd ..
-npm run watch
+npm run dev

@@ -2,4 +2,4 @@
 set main=./examples/gashapon/shuffle.js
 cd ..
 cd ..
-npm run watch
+npm run dev

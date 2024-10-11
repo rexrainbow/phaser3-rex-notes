@@ -2,4 +2,4 @@
 set main=./examples/ui-confirmdialog/textarea-content.js
 cd ..
 cd ..
-npm run watch
+npm run dev

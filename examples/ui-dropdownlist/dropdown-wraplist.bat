@@ -2,4 +2,4 @@
 set main=./examples/ui-dropdownlist/dropdown-wraplist.js
 cd ..
 cd ..
-npm run watch
+npm run dev

@@ -2,4 +2,4 @@
 set main=./examples/ninepatch/scale-corner.js
 cd ..
 cd ..
-npm run watch
+npm run dev

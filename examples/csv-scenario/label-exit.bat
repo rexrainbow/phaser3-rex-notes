@@ -2,4 +2,4 @@
 set main=./examples/csv-scenario/label-exit.js
 cd ..
 cd ..
-npm run watch
+npm run dev

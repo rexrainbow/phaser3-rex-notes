@@ -2,4 +2,4 @@
 set main=./examples/ui-circularprogress/circularprogress.js
 cd ..
 cd ..
-npm run watch
+npm run dev

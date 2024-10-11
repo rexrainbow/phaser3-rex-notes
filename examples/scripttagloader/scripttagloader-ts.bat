@@ -2,4 +2,4 @@
 set main=./examples/scripttagloader/scripttagloader-ts.ts
 cd ..
 cd ..
-npm run watch
+npm run dev

@@ -2,4 +2,4 @@
 set main=./examples/board/filled-ring-chess-array.js
 cd ..
 cd ..
-npm run watch
+npm run dev

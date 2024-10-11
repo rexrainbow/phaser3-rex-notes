@@ -1,4 +1,4 @@
 set main=./examples/virtualjoystick/multi-cameras.js
 cd ..
 cd ..
-npm run watch
+npm run dev

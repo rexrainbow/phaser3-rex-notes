@@ -1,4 +1,4 @@
 set main=./examples/rendertexture/fit-to-viewport.js
 cd ..
 cd ..
-npm run watch
+npm run dev

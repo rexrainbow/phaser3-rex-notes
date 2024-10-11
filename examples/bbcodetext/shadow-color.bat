@@ -2,4 +2,4 @@
 set main=./examples/bbcodetext/shadow-color.js
 cd ..
 cd ..
-npm run watch
+npm run dev

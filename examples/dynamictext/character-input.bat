@@ -2,4 +2,4 @@
 set main=./examples/dynamictext/character-input.js
 cd ..
 cd ..
-npm run watch
+npm run dev

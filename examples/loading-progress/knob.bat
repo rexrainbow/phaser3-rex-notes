@@ -2,4 +2,4 @@
 set main=./examples/loading-progress/knob.js
 cd ..
 cd ..
-npm run watch
+npm run dev

@@ -2,4 +2,4 @@
 set main=./examples/ui-tabs/expand-buttons.js
 cd ..
 cd ..
-npm run watch
+npm run dev

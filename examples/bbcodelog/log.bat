@@ -2,4 +2,4 @@
 set main=./examples/bbcodelog/log.js
 cd ..
 cd ..
-npm run watch
+npm run dev

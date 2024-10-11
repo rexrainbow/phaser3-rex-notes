@@ -2,4 +2,4 @@
 set main=./examples/gesture-rotate/rotate-detect.js
 cd ..
 cd ..
-npm run watch
+npm run dev

@@ -2,4 +2,4 @@
 set main=./examples/textplayer/fast-typing.js
 cd ..
 cd ..
-npm run watch
+npm run dev

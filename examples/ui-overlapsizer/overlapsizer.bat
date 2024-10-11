@@ -2,4 +2,4 @@
 set main=./examples/ui-overlapsizer/overlapsizer.js
 cd ..
 cd ..
-npm run watch
+npm run dev

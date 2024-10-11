@@ -2,4 +2,4 @@
 set main=./examples/restorabledata/restorabledata.js
 cd ..
 cd ..
-npm run watch
+npm run dev

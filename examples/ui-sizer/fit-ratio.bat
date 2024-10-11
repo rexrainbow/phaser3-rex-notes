@@ -2,4 +2,4 @@
 set main=./examples/ui-sizer/fit-ratio.js
 cd ..
 cd ..
-npm run watch
+npm run dev

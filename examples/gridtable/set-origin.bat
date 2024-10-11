@@ -2,4 +2,4 @@
 set main=./examples/gridtable/set-origin.js
 cd ..
 cd ..
-npm run watch
+npm run dev

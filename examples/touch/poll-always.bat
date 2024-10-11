@@ -2,4 +2,4 @@
 set main=./examples/touch/poll-always.js
 cd ..
 cd ..
-npm run watch
+npm run dev

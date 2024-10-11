@@ -2,4 +2,4 @@
 set main=./examples/drag/dragend.js
 cd ..
 cd ..
-npm run watch
+npm run dev

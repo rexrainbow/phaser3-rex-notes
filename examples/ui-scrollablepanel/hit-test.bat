@@ -2,4 +2,4 @@
 set main=./examples/ui-scrollablepanel/hit-test.js
 cd ..
 cd ..
-npm run watch
+npm run dev

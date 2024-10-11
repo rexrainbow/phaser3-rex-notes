@@ -2,4 +2,4 @@
 set main=./examples/shader-crt/camera-postfx.js
 cd ..
 cd ..
-npm run watch
+npm run dev

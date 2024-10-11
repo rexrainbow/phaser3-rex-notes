@@ -2,4 +2,4 @@
 set main=./examples/tagtext/typing.js
 cd ..
 cd ..
-npm run watch
+npm run dev

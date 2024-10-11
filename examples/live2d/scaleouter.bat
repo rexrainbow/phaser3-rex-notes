@@ -2,4 +2,4 @@
 set main=./examples/live2d/scaleouter.js
 cd ..
 cd ..
-npm run watch
+npm run dev

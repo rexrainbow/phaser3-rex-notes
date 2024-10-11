@@ -2,4 +2,4 @@
 set main=./examples/ui-colorcomponents/color-components.js
 cd ..
 cd ..
-npm run watch
+npm run dev

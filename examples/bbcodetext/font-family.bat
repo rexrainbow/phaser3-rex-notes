@@ -2,4 +2,4 @@
 set main=./examples/bbcodetext/font-family.js
 cd ..
 cd ..
-npm run watch
+npm run dev

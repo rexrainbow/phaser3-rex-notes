@@ -2,4 +2,4 @@
 set main=./examples/cutjigsawimage/test-defaultdrawshapecallback.js
 cd ..
 cd ..
-npm run watch
+npm run dev

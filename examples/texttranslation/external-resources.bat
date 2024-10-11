@@ -1,4 +1,4 @@
 set main=./examples/texttranslation/external-resources.js
 cd ..
 cd ..
-npm run watch
+npm run dev

@@ -2,4 +2,4 @@
 set main=./examples/bbcodetext/prepare-canvas.js
 cd ..
 cd ..
-npm run watch
+npm run dev

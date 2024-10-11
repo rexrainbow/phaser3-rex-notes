@@ -2,4 +2,4 @@
 set main=./examples/triangle/radius.js
 cd ..
 cd ..
-npm run watch
+npm run dev

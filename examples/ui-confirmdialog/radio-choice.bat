@@ -2,4 +2,4 @@
 set main=./examples/ui-confirmdialog/radio-choice.js
 cd ..
 cd ..
-npm run watch
+npm run dev

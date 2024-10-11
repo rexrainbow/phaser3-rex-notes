@@ -1,4 +1,4 @@
 set main=./examples/custom-progress/copy-path-ts.ts
 cd ..
 cd ..
-npm run watch
+npm run dev

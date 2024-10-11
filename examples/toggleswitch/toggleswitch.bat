@@ -2,4 +2,4 @@
 set main=./examples/toggleswitch/toggleswitch.js
 cd ..
 cd ..
-npm run watch
+npm run dev

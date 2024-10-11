@@ -2,4 +2,4 @@
 set main=./examples/textplayer/show-page.js
 cd ..
 cd ..
-npm run watch
+npm run dev

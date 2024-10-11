@@ -2,4 +2,4 @@
 set main=./examples/textedit/number-type.js
 cd ..
 cd ..
-npm run watch
+npm run dev

@@ -2,4 +2,4 @@
 set main=./examples/textedit/textedit.js
 cd ..
 cd ..
-npm run watch
+npm run dev

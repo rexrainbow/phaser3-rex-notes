@@ -2,4 +2,4 @@
 set main=./examples/imageuriloader/load-spritesheet.js
 cd ..
 cd ..
-npm run watch
+npm run dev

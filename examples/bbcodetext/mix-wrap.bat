@@ -2,4 +2,4 @@
 set main=./examples/bbcodetext/mix-wrap.js
 cd ..
 cd ..
-npm run watch
+npm run dev

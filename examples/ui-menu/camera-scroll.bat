@@ -2,4 +2,4 @@
 set main=./examples/ui-menu/camera-scroll.js
 cd ..
 cd ..
-npm run watch
+npm run dev

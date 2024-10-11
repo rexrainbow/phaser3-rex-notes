@@ -2,4 +2,4 @@
 set main=./examples/markedeventheets/command-executor.js
 cd ..
 cd ..
-npm run watch
+npm run dev

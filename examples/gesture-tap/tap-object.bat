@@ -2,4 +2,4 @@
 set main=./examples/gesture-tap/tap-object.js
 cd ..
 cd ..
-npm run watch
+npm run dev

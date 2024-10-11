@@ -2,4 +2,4 @@
 set main=./examples/ui-dropdownlist/align-to-label-right.js
 cd ..
 cd ..
-npm run watch
+npm run dev

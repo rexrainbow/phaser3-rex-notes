@@ -2,4 +2,4 @@
 set main=./examples/ui-fixwidthsizer/table.js
 cd ..
 cd ..
-npm run watch
+npm run dev

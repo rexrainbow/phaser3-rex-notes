@@ -2,4 +2,4 @@
 set main=./examples/ui-d-ts/add-to-layer.ts
 cd ..
 cd ..
-npm run watch
+npm run dev

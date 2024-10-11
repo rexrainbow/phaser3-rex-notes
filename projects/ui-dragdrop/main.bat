@@ -2,4 +2,4 @@
 set main=./projects/ui-dragdrop/main.js
 cd ..
 cd ..
-npm run watch
+npm run dev

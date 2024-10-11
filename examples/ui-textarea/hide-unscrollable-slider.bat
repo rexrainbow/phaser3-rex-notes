@@ -2,4 +2,4 @@
 set main=./examples/ui-textarea/hide-unscrollable-slider.js
 cd ..
 cd ..
-npm run watch
+npm run dev

@@ -2,4 +2,4 @@
 set main=./examples/mustache/string-macro.js
 cd ..
 cd ..
-npm run watch
+npm run dev

@@ -2,4 +2,4 @@
 set main=./examples/dom/flatpickr.js
 cd ..
 cd ..
-npm run watch
+npm run dev

@@ -2,4 +2,4 @@
 set main=./examples/ui-label/click-outside.js
 cd ..
 cd ..
-npm run watch
+npm run dev

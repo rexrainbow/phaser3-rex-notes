@@ -2,4 +2,4 @@
 set main=./examples/curve-spiral/simple.js
 cd ..
 cd ..
-npm run watch
+npm run dev

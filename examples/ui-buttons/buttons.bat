@@ -2,4 +2,4 @@
 set main=./examples/ui-buttons/buttons.js
 cd ..
 cd ..
-npm run watch
+npm run dev

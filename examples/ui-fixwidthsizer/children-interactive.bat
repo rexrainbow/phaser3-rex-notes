@@ -2,4 +2,4 @@
 set main=./examples/ui-fixwidthsizer/children-interactive.js
 cd ..
 cd ..
-npm run watch
+npm run dev

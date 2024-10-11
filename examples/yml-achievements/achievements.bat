@@ -2,4 +2,4 @@
 set main=./examples/yml-achievements/achievements.js
 cd ..
 cd ..
-npm run watch
+npm run dev

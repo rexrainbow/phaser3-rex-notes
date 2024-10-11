@@ -2,4 +2,4 @@
 set main=./examples/ui-buttons/space.js
 cd ..
 cd ..
-npm run watch
+npm run dev

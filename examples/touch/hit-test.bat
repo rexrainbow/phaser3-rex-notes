@@ -2,4 +2,4 @@
 set main=./examples/touch/hit-test.js
 cd ..
 cd ..
-npm run watch
+npm run dev

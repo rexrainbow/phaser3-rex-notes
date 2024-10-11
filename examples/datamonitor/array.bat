@@ -1,4 +1,4 @@
 set main=./examples/datamonitor/array.js
 cd ..
 cd ..
-npm run watch
+npm run dev

@@ -2,4 +2,4 @@
 set main=./examples/lokijs/update.js
 cd ..
 cd ..
-npm run watch
+npm run dev

@@ -2,4 +2,4 @@
 set main=./examples/containerlite/add-to-container.js
 cd ..
 cd ..
-npm run watch
+npm run dev

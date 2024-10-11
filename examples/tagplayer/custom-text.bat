@@ -2,4 +2,4 @@
 set main=./examples/tagplayer/custom-text.js
 cd ..
 cd ..
-npm run watch
+npm run dev

@@ -2,4 +2,4 @@
 set main=./examples/transition-image/container-scale.js
 cd ..
 cd ..
-npm run watch
+npm run dev

@@ -2,4 +2,4 @@
 set main=./examples/board/gameobjectout-event.js
 cd ..
 cd ..
-npm run watch
+npm run dev

@@ -2,4 +2,4 @@
 set main=./examples/scale/yoyo.js
 cd ..
 cd ..
-npm run watch
+npm run dev

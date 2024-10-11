@@ -2,4 +2,4 @@
 set main=./examples/ui-expbar/exp-bar.js
 cd ..
 cd ..
-npm run watch
+npm run dev

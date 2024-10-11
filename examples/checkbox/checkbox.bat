@@ -2,4 +2,4 @@
 set main=./examples/checkbox/checkbox.js
 cd ..
 cd ..
-npm run watch
+npm run dev

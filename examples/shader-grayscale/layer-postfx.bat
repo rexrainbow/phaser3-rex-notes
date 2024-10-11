@@ -2,4 +2,4 @@
 set main=./examples/shader-grayscale/layer-postfx.js
 cd ..
 cd ..
-npm run watch
+npm run dev

@@ -2,4 +2,4 @@
 set main=./examples/build-arcade-object/arcademethods.js
 cd ..
 cd ..
-npm run watch
+npm run dev

@@ -2,4 +2,4 @@
 set main=./examples/lineprogresscanvas/lineprogress.js
 cd ..
 cd ..
-npm run watch
+npm run dev

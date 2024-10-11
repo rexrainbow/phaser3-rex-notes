@@ -2,4 +2,4 @@
 set main=./examples/cutjigsawimage/custom-piece-shape.js
 cd ..
 cd ..
-npm run watch
+npm run dev

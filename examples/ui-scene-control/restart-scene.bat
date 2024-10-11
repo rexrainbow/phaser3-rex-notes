@@ -2,4 +2,4 @@
 set main=./examples/ui-scene-control/restart-scene.js
 cd ..
 cd ..
-npm run watch
+npm run dev

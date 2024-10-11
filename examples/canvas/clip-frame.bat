@@ -2,4 +2,4 @@
 set main=./examples/canvas/clip-frame.js
 cd ..
 cd ..
-npm run watch
+npm run dev

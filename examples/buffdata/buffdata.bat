@@ -2,4 +2,4 @@
 set main=./examples/buffdata/buffdata.js
 cd ..
 cd ..
-npm run watch
+npm run dev

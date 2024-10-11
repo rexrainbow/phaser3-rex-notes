@@ -2,4 +2,4 @@
 set main=./examples/ui-chart/radar-v3.js
 cd ..
 cd ..
-npm run watch
+npm run dev

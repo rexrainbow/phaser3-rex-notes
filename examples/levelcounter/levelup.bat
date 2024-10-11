@@ -2,4 +2,4 @@
 set main=./examples/levelcounter/levelup.js
 cd ..
 cd ..
-npm run watch
+npm run dev

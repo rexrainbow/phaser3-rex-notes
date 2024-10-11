@@ -2,4 +2,4 @@
 set main=./examples/dynamictext/align.js
 cd ..
 cd ..
-npm run watch
+npm run dev

@@ -2,4 +2,4 @@
 set main=./examples/tcrp/seek-to-next.js
 cd ..
 cd ..
-npm run watch
+npm run dev

@@ -2,4 +2,4 @@
 set main=./examples/carousel/carousel.js
 cd ..
 cd ..
-npm run watch
+npm run dev

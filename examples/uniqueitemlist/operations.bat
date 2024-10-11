@@ -2,4 +2,4 @@
 set main=./examples/uniqueitemlist/operations.js
 cd ..
 cd ..
-npm run watch
+npm run dev

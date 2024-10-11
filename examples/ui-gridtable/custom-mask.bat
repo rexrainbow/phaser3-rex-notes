@@ -2,4 +2,4 @@
 set main=./examples/ui-gridtable/custom-mask.js
 cd ..
 cd ..
-npm run watch
+npm run dev

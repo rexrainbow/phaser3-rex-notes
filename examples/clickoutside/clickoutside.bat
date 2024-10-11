@@ -2,4 +2,4 @@
 set main=./examples/clickoutside/clickoutside.js
 cd ..
 cd ..
-npm run watch
+npm run dev

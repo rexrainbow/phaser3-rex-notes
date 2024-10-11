@@ -2,4 +2,4 @@
 set main=./examples/ui-d-ts/test.ts
 cd ..
 cd ..
-npm run watch
+npm run dev

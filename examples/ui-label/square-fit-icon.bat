@@ -2,4 +2,4 @@
 set main=./examples/ui-label/square-fit-icon.js
 cd ..
 cd ..
-npm run watch
+npm run dev

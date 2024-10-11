@@ -2,4 +2,4 @@
 set main=./examples/containerlite/camera-ignore.js
 cd ..
 cd ..
-npm run watch
+npm run dev

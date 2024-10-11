@@ -2,4 +2,4 @@
 set main=./examples/midi/loadmidi.js
 cd ..
 cd ..
-npm run watch
+npm run dev

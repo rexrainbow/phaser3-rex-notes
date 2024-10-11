@@ -2,4 +2,4 @@
 set main=./examples/filechooser/transparent.js
 cd ..
 cd ..
-npm run watch
+npm run dev

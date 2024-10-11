@@ -2,4 +2,4 @@
 set main=./examples/charactercache/settext.js
 cd ..
 cd ..
-npm run watch
+npm run dev

@@ -2,4 +2,4 @@
 set main=./examples/ui-scrollablepanel/button-click.js
 cd ..
 cd ..
-npm run watch
+npm run dev

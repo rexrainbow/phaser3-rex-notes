@@ -2,4 +2,4 @@
 set main=./examples/gesture-press/press-drag.js
 cd ..
 cd ..
-npm run watch
+npm run dev

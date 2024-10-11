@@ -2,4 +2,4 @@
 set main=./examples/ui-simplelabel/wraptext.js
 cd ..
 cd ..
-npm run watch
+npm run dev

@@ -2,4 +2,4 @@
 set main=./examples/live2d/scale-zoom.js
 cd ..
 cd ..
-npm run watch
+npm run dev

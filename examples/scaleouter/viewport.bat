@@ -2,4 +2,4 @@
 set main=./examples/scaleouter/viewport.js
 cd ..
 cd ..
-npm run watch
+npm run dev

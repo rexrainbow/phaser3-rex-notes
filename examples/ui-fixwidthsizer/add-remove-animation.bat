@@ -2,4 +2,4 @@
 set main=./examples/ui-fixwidthsizer/add-remove-animation.js
 cd ..
 cd ..
-npm run watch
+npm run dev

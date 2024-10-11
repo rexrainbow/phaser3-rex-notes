@@ -2,4 +2,4 @@
 set main=./examples/ui-confirmdialog/yes-no.js
 cd ..
 cd ..
-npm run watch
+npm run dev

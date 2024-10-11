@@ -2,4 +2,4 @@
 set main=./examples/inputtext/select.js
 cd ..
 cd ..
-npm run watch
+npm run dev

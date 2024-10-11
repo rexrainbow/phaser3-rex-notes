@@ -2,4 +2,4 @@
 set main=./examples/camera/camera-properties.js
 cd ..
 cd ..
-npm run watch
+npm run dev

@@ -2,4 +2,4 @@
 set main=./examples/statemanager/update.js
 cd ..
 cd ..
-npm run watch
+npm run dev

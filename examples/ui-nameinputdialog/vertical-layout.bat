@@ -2,4 +2,4 @@
 set main=./examples/ui-nameinputdialog/vertical-layout.js
 cd ..
 cd ..
-npm run watch
+npm run dev

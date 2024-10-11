@@ -2,4 +2,4 @@
 set main=./examples/ui-dialog/show-hide-button.js
 cd ..
 cd ..
-npm run watch
+npm run dev

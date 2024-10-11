@@ -2,4 +2,4 @@
 set main=./examples/ui-knob/knob.js
 cd ..
 cd ..
-npm run watch
+npm run dev

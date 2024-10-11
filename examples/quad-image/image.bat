@@ -2,4 +2,4 @@
 set main=./examples/quad-image/image.js
 cd ..
 cd ..
-npm run watch
+npm run dev

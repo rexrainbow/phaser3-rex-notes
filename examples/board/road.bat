@@ -2,4 +2,4 @@
 set main=./examples/board/road.js
 cd ..
 cd ..
-npm run watch
+npm run dev

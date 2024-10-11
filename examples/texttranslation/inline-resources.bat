@@ -1,4 +1,4 @@
 set main=./examples/texttranslation/inline-resources.js
 cd ..
 cd ..
-npm run watch
+npm run dev

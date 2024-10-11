@@ -2,4 +2,4 @@
 set main=./examples/board-pathfinder/big-board.js
 cd ..
 cd ..
-npm run watch
+npm run dev

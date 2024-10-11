@@ -2,4 +2,4 @@
 set main=./examples/youtubeplayer/loop.js
 cd ..
 cd ..
-npm run watch
+npm run dev

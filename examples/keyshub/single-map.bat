@@ -2,4 +2,4 @@
 set main=./examples/keyshub/single-map.js
 cd ..
 cd ..
-npm run watch
+npm run dev

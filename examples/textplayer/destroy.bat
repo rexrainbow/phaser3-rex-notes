@@ -2,4 +2,4 @@
 set main=./examples/textplayer/destroy.js
 cd ..
 cd ..
-npm run watch
+npm run dev

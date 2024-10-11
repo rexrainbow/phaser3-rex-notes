@@ -2,4 +2,4 @@
 set main=./examples/ui-dialog/yes-no-dialog.js
 cd ..
 cd ..
-npm run watch
+npm run dev

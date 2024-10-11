@@ -2,4 +2,4 @@
 set main=./examples/ui-confirmdialog/ok.js
 cd ..
 cd ..
-npm run watch
+npm run dev

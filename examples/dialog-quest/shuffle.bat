@@ -2,4 +2,4 @@
 set main=./examples/dialog-quest/shuffle.js
 cd ..
 cd ..
-npm run watch
+npm run dev

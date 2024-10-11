@@ -2,4 +2,4 @@
 set main=./examples/scaleouter/label-click.js
 cd ..
 cd ..
-npm run watch
+npm run dev

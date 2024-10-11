@@ -2,4 +2,4 @@
 set main=./examples/cutjigsawimage/get-edge-callbacks.js
 cd ..
 cd ..
-npm run watch
+npm run dev

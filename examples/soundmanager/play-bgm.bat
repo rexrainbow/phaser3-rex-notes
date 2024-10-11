@@ -2,4 +2,4 @@
 set main=./examples/soundmanager/play-bgm.js
 cd ..
 cd ..
-npm run watch
+npm run dev

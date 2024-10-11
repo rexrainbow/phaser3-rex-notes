@@ -2,4 +2,4 @@
 set main=./examples/filter/filter.js
 cd ..
 cd ..
-npm run watch
+npm run dev

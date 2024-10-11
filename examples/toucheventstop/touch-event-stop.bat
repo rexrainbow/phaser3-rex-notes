@@ -2,4 +2,4 @@
 set main=./examples/toucheventstop/touch-event-stop.js
 cd ..
 cd ..
-npm run watch
+npm run dev

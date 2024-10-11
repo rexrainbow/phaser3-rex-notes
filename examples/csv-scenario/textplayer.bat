@@ -2,4 +2,4 @@
 set main=./examples/csv-scenario/textplayer.js
 cd ..
 cd ..
-npm run watch
+npm run dev

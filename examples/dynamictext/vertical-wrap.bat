@@ -2,4 +2,4 @@
 set main=./examples/dynamictext/vertical-wrap.js
 cd ..
 cd ..
-npm run watch
+npm run dev

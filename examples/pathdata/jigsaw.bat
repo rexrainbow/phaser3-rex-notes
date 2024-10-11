@@ -2,4 +2,4 @@
 set main=./examples/pathdata/jigsaw.js
 cd ..
 cd ..
-npm run watch
+npm run dev

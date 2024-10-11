@@ -1,4 +1,4 @@
 set main=./examples/layermanager/move-depth.js
 cd ..
 cd ..
-npm run watch
+npm run dev

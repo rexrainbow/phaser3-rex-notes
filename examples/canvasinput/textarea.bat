@@ -2,4 +2,4 @@
 set main=./examples/canvasinput/textarea.js
 cd ..
 cd ..
-npm run watch
+npm run dev

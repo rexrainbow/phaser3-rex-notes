@@ -2,4 +2,4 @@
 set main=./examples/framemanager/paste-graphics.js
 cd ..
 cd ..
-npm run watch
+npm run dev

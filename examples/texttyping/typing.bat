@@ -2,4 +2,4 @@
 set main=./examples/texttyping/typing.js
 cd ..
 cd ..
-npm run watch
+npm run dev

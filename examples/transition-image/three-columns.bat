@@ -2,4 +2,4 @@
 set main=./examples/transition-image/three-columns.js
 cd ..
 cd ..
-npm run watch
+npm run dev

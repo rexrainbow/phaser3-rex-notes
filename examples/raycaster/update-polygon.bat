@@ -2,4 +2,4 @@
 set main=./examples/raycaster/update-polygon.js
 cd ..
 cd ..
-npm run watch
+npm run dev

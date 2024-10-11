@@ -2,4 +2,4 @@
 set main=./examples/blitter/stratch.js
 cd ..
 cd ..
-npm run watch
+npm run dev

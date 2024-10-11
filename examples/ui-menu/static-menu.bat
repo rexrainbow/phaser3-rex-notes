@@ -2,4 +2,4 @@
 set main=./examples/ui-menu/static-menu.js
 cd ..
 cd ..
-npm run watch
+npm run dev

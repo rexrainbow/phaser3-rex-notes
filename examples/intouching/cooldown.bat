@@ -2,4 +2,4 @@
 set main=./examples/intouching/cooldown.js
 cd ..
 cd ..
-npm run watch
+npm run dev

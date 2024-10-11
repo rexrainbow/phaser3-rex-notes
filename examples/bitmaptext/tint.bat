@@ -2,4 +2,4 @@
 set main=./examples/bitmaptext/tint.js
 cd ..
 cd ..
-npm run watch
+npm run dev

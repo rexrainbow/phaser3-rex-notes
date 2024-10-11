@@ -2,4 +2,4 @@
 set main=./examples/texture/circle.js
 cd ..
 cd ..
-npm run watch
+npm run dev

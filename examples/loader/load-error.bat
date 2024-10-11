@@ -2,4 +2,4 @@
 set main=./examples/loader/loading-animation.js
 cd ..
 cd ..
-npm run watch
+npm run dev

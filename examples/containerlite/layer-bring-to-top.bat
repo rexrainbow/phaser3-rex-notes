@@ -2,4 +2,4 @@
 set main=./examples/containerlite/layer-bring-to-top.js
 cd ..
 cd ..
-npm run watch
+npm run dev

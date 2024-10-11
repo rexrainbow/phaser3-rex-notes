@@ -2,4 +2,4 @@
 set main=./examples/cover/cover.js
 cd ..
 cd ..
-npm run watch
+npm run dev

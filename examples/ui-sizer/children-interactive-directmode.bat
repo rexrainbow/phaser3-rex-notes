@@ -2,4 +2,4 @@
 set main=./examples/ui-sizer/children-interactive-directmode.js
 cd ..
 cd ..
-npm run watch
+npm run dev

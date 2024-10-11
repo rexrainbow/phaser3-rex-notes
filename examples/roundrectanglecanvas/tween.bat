@@ -1,4 +1,4 @@
 set main=./examples/roundrectanglecanvas/tween.js
 cd ..
 cd ..
-npm run watch
+npm run dev

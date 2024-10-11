@@ -2,4 +2,4 @@
 set main=./examples/ui-gridbuttons/createcells.js
 cd ..
 cd ..
-npm run watch
+npm run dev

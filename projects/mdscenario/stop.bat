@@ -2,4 +2,4 @@
 set main=./projects/mdscenario/stop.js
 cd ..
 cd ..
-npm run watch
+npm run dev

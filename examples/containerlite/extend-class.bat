@@ -2,4 +2,4 @@
 set main=./examples/containerlite/extend-class.js
 cd ..
 cd ..
-npm run watch
+npm run dev

@@ -2,4 +2,4 @@
 set main=./examples/quad-render-texture/nine-points.js
 cd ..
 cd ..
-npm run watch
+npm run dev
