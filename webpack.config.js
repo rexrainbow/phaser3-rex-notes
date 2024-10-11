@@ -20,8 +20,8 @@ module.exports = {
     devtool: 'eval-source-map',
     output: {
         pathinfo: true,
-        path: path.resolve(__dirname, 'watch-dist'),
-        publicPath: './watch-dist/',
+        path: path.resolve(__dirname, 'dev-dist'),
+        publicPath: './dev-dist/',
         library: '[name]',
         libraryTarget: 'umd',
         filename: '[name].js'
