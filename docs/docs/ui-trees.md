@@ -751,12 +751,12 @@ tree.setChildrenInteractive({
     - `pointer` : [Pointer](touchevents.md#properties-of-point) object.    
 - Press
     ```javascript
-    trees.on('child.pressstart', function(child, pointer) { 
+    trees.on('child.pressstart', function(child, pointer, press) { 
         // ...
     }, scope);
     ```
     ```javascript
-    trees.on('child.pressend', function(child, pointer) { 
+    trees.on('child.pressend', function(child, pointer, press) { 
         // ...
     }, scope);
     ```
@@ -765,24 +765,28 @@ tree.setChildrenInteractive({
         - Pointer on leaf-node : `child.isNode`
 - Tap
     ```javascript
-    trees.on(tapEventName, function(child, pointer) { 
+    trees.on(tapEventName, function(child, pointer, tap) { 
         // ...
     }, scope);
     ```
     - `child` : Tree or leaf-node.
         - Pointer on tree's title : `child.isTree`
         - Pointer on leaf-node : `child.isNode`
-    - `tapEventName` :  `'child.1tap'`, `'child.2tap'`, `'child.3tap'`, etc ...
+    - `tapEventName` :  `'child.tap'`, `'child.1tap'`, `'child.2tap'`, `'child.3tap'`, etc ...
+    - `tap` : Tap object.
+        - `tap.tapsCount` : Taps count.
 - Swipe
     ```javascript
-    trees.on(swipeEventName, function(child, pointer) { 
+    trees.on(swipeEventName, function(child, pointer, swipe) { 
         // ...
     }, scope);
     ```
     - `child` : Tree or leaf-node.
         - Pointer on tree's title : `child.isTree`
         - Pointer on leaf-node : `child.isNode`
-    - `swipeEventName` :  `'child.swipeleft'`, `'child.swiperight'`, `'child.swipeup'`, `'child.swipedown'`.
+    - `swipeEventName` :  `'child.swipe'`, `'child.swipeleft'`, `'child.swiperight'`, `'child.swipeup'`, `'child.swipedown'`.
+    - `swipe` : Swipe object.
+        - `swipe.left`, `swipe.right`, `swipe.up`, `swipe.down` : Swipe direction states.
 
 
 

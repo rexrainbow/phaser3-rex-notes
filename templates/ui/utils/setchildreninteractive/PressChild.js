@@ -21,7 +21,7 @@ var PressChild = function (config) {
                 childrenInteractive.targetSizers,
                 childrenInteractive.targetMode,
                 press.worldX, press.worldY,
-                lastPointer
+                lastPointer, press
             );
         }, this)
         .on('pressend', function (press, gameObject, lastPointer) {
@@ -31,7 +31,7 @@ var PressChild = function (config) {
                 childrenInteractive.targetSizers,
                 childrenInteractive.targetMode,
                 press.worldX, press.worldY,
-                lastPointer
+                lastPointer, press
             );
         }, this)
 };

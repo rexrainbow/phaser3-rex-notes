@@ -1191,18 +1191,22 @@ sizer.setChildrenInteractive({
     ```
 - Tap
     ```javascript
-    sizer.on(tapEventName, function(child, pointer) { 
+    sizer.on(tapEventName, function(child, pointer, tap) { 
         // ...
     }, scope);
     ```
-    - `tapEventName` :  `'child.1tap'`, `'child.2tap'`, `'child.3tap'`, etc ...
+    - `tapEventName` :  `'child.tap'`, `'child.1tap'`, `'child.2tap'`, `'child.3tap'`, etc ...
+    - `tap` : Tap object.
+        - `tap.tapsCount` : Taps count.
 - Swipe
     ```javascript
-    sizer.on(swipeEventName, function(child, pointer) { 
+    sizer.on(swipeEventName, function(child, pointer, swipe) { 
         // ...
     }, scope);
     ```
-    - `swipeEventName` :  `'child.swipeleft'`, `'child.swiperight'`, `'child.swipeup'`, `'child.swipedown'`.
+    - `swipeEventName` :  `'child.swipe'`, `'child.swipeleft'`, `'child.swiperight'`, `'child.swipeup'`, `'child.swipedown'`.
+    - `swipe` : Swipe object.
+        - `swipe.left`, `swipe.right`, `swipe.up`, `swipe.down` : Swipe direction states.
 
 
 ### Bind event

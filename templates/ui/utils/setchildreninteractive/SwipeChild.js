@@ -33,7 +33,16 @@ var SwipeChild = function (config) {
                 childrenInteractive.targetSizers,
                 childrenInteractive.targetMode,
                 swipe.worldX, swipe.worldY,
-                lastPointer
+                lastPointer, swipe
+            );
+
+            EmitChildEvent(
+                childrenInteractive.eventEmitter,
+                `${childrenInteractive.eventNamePrefix}swipe`,
+                childrenInteractive.targetSizers,
+                childrenInteractive.targetMode,
+                swipe.worldX, swipe.worldY,
+                lastPointer, swipe
             );
         }, this)
 };

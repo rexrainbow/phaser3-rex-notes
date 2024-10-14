@@ -21,7 +21,16 @@ var TapChild = function (config) {
                 childrenInteractive.targetSizers,
                 childrenInteractive.targetMode,
                 tap.worldX, tap.worldY,
-                lastPointer
+                lastPointer, tap
+            );
+
+            EmitChildEvent(
+                childrenInteractive.eventEmitter,
+                `${childrenInteractive.eventNamePrefix}tap`,
+                childrenInteractive.targetSizers,
+                childrenInteractive.targetMode,
+                tap.worldX, tap.worldY,
+                lastPointer, tap
             );
         }, this)
 };

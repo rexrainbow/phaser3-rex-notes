@@ -92,6 +92,15 @@ class Demo extends Phaser.Scene {
                 var index = sizer.getElement('items').indexOf(child);
                 print.text += `swipe-down ${index}\n`;
             })
+            // .on('child.swipe', function (child, pointer, swipe) {
+            //     var index = sizer.getElement('items').indexOf(child);
+            //     var dirName =
+            //         (swipe.left) ? 'left' :
+            //             (swipe.right) ? 'right' :
+            //                 (swipe.up) ? 'up' :
+            //                     'down';
+            //     print.text += `swipe-${dirName} ${index}\n`;
+            // })
     }
 
     update() { }
