@@ -160,6 +160,7 @@ declare namespace Tweaker {
                 thumb: CreateBackground.IConfig,
 
                 hideUnscrollableSlider?: boolean,
+                disableUnscrollableDrag?: boolean,
                 adaptThumbSize?: boolean,
                 minThumbSize?: number,
             },

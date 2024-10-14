@@ -32,6 +32,7 @@ class Demo extends Phaser.Scene {
                 thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 13, COLOR_LIGHT),
 
                 hideUnscrollableSlider: true,
+                disableUnscrollableDrag: true,
                 // adaptThumbSize: true,
             },
 
@@ -60,10 +61,11 @@ class Demo extends Phaser.Scene {
         })
             .layout()
 
-        this.input.once('pointerdown', function () {
-            textArea.setText(CreateContent(50));
-
-        })
+        this.add.text(0, 300, 'Resize')
+            .setInteractive()
+            .once('pointerdown', function () {
+                textArea.setText(CreateContent(50));
+            })
 
     }
 

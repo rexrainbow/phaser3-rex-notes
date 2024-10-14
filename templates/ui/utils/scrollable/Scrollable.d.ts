@@ -19,6 +19,7 @@ declare namespace Scrollable {
         position?: SliderPositionTypes,
 
         hideUnscrollableSlider?: boolean,
+        disableUnscrollableDrag?: boolean,
         adaptThumbSize?: boolean,
         minThumbSize?: number,
 

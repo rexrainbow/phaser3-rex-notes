@@ -158,6 +158,7 @@ var table = scene.rexUI.add.gridTable({
         // position: 'right',
 
         // hideUnscrollableSlider: false,
+        // disableUnscrollableDrag: false,
         // adaptThumbSize: false,
         // minThumbSize: undefined,
         
@@ -331,6 +332,9 @@ var table = scene.rexUI.add.gridTable({
     - `slider.hideUnscrollableSlider` :
         - `false` : Slider is always visible no matter it is scrollable or not. Default behavior.
         - `true` : Set slider to invisible if it is unscrollable.
+    - `slider.disableUnscrollableDrag` :
+        - `false` : Scroller is always enale no matter it is scrollable or not. Default behavior.
+        - `true` : Set scroller to disable if it is unscrollable.
     - `slider.adaptThumbSize` :
         - `false` : Don't adjust height/width of thumb. Default behavior.
         - `true` : Adjust height/width of thumb according to ratio of visible child.

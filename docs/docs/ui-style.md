@@ -569,6 +569,7 @@ Bar-rectangle = Line-progress
         // position: 'right',
 
         // hideUnscrollableSlider: false,
+        // disableUnscrollableDrag: false,
         // adaptThumbSize: false,
         // minThumbSize: undefined,
     },

@@ -118,11 +118,13 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
         );
 
         topPatent[`hideUnscrollableSlider${axis}`] = GetValue(sliderConfig, 'hideUnscrollableSlider', false);
+        topPatent[`disableUnscrollableDrag${axis}`] = GetValue(sliderConfig, 'disableUnscrollableDrag', false);
         topPatent[`adaptThumb${axis}SizeMode`] = GetValue(sliderConfig, 'adaptThumbSize', false);
         topPatent[`minThumb${axis}Size`] = GetValue(sliderConfig, 'minThumbSize', undefined);
 
     } else {
         topPatent[`hideUnscrollableSlider${axis}`] = false;
+        topPatent[`disableUnscrollableDrag${axis}`] = false;
         topPatent[`adaptThumb${axis}SizeMode`] = false;
         topPatent[`minThumb${axis}Size`] = undefined;
     }
@@ -180,6 +182,7 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
 
     if ((!isScrollXYMode) || (isAxisY)) {
         topPatent['hideUnscrollableSlider'] = topPatent[`hideUnscrollableSlider${axis}`];
+        topPatent['disableUnscrollableDrag'] = topPatent[`disableUnscrollableDrag${axis}`];
         topPatent['adaptThumbSizeMode'] = topPatent[`adaptThumb${axis}SizeMode`];
         topPatent['minThumbSize'] = topPatent[`minThumb${axis}Size`];
 

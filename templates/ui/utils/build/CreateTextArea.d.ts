@@ -34,6 +34,7 @@ declare namespace CreateTextArea {
             position?: SliderPositionTypes,
 
             hideUnscrollableSlider?: boolean,
+            disableUnscrollableDrag?: boolean,
             adaptThumbSize?: boolean,
             minThumbSize?: number,
 

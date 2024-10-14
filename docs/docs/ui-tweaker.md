@@ -3673,6 +3673,7 @@ Style of scrollable is defined in
                 },
                 
                 // hideUnscrollableSlider: false,
+                // disableUnscrollableDrag: false,
                 // adaptThumbSize: false,
                 // minThumbSize: undefined,
             },

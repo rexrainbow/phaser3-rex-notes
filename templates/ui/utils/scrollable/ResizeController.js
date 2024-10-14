@@ -77,15 +77,28 @@ var HideUnscrollableSlider = function (axis) {
             if (slider && this.hideUnscrollableSlider) {
                 this.setChildVisible(slider, this.isOverflow);
             }
+
+            var scroller = this.childrenMap.scroller;
+            if (scroller && this.disableUnscrollableDrag) {
+                scroller.setEnable(this.isOverflow);
+            }
+
             break;
 
         default:
             axis = axis.toUpperCase();
+            var isOverflow = this[`isOverflow${axis}`];
+
             var slider = this.childrenMap[`slider${axis}`];
             var hideUnscrollableSlider = this[`hideUnscrollableSlider${axis}`];
-            var isOverflow = this[`isOverflow${axis}`];
             if (slider && hideUnscrollableSlider) {
                 this.setChildVisible(slider, isOverflow);
+            }
+
+            var scroller = this.childrenMap.scroller;
+            var disableUnscrollableDrag = this[`disableUnscrollableDrag${axis}`];
+            if (scroller && disableUnscrollableDrag) {
+                scroller.setEnable(isOverflow);
             }
             break;
     }
