@@ -11486,7 +11486,16 @@
                     childrenInteractive.targetSizers,
                     childrenInteractive.targetMode,
                     tap.worldX, tap.worldY,
-                    lastPointer
+                    lastPointer, tap
+                );
+
+                EmitChildEvent(
+                    childrenInteractive.eventEmitter,
+                    `${childrenInteractive.eventNamePrefix}tap`,
+                    childrenInteractive.targetSizers,
+                    childrenInteractive.targetMode,
+                    tap.worldX, tap.worldY,
+                    lastPointer, tap
                 );
             }, this);
     };
@@ -11511,7 +11520,7 @@
                     childrenInteractive.targetSizers,
                     childrenInteractive.targetMode,
                     press.worldX, press.worldY,
-                    lastPointer
+                    lastPointer, press
                 );
             }, this)
             .on('pressend', function (press, gameObject, lastPointer) {
@@ -11521,7 +11530,7 @@
                     childrenInteractive.targetSizers,
                     childrenInteractive.targetMode,
                     press.worldX, press.worldY,
-                    lastPointer
+                    lastPointer, press
                 );
             }, this);
     };
@@ -11558,7 +11567,16 @@
                     childrenInteractive.targetSizers,
                     childrenInteractive.targetMode,
                     swipe.worldX, swipe.worldY,
-                    lastPointer
+                    lastPointer, swipe
+                );
+
+                EmitChildEvent(
+                    childrenInteractive.eventEmitter,
+                    `${childrenInteractive.eventNamePrefix}swipe`,
+                    childrenInteractive.targetSizers,
+                    childrenInteractive.targetMode,
+                    swipe.worldX, swipe.worldY,
+                    lastPointer, swipe
                 );
             }, this);
     };

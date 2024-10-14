@@ -10200,7 +10200,7 @@
 </ul>
 <h3 id="apply-effect">Apply effect<a class="headerlink" href="#apply-effect" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Apply effect to game object. A game object only can add 1 gray-scale effect.
+<li>Apply effect to game object. A game object only can add 1 dissolve effect.
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">pipelineInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexDissolvePipeline&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// toTexture: textureKey,</span>
 <span class="w">    </span><span class="c1">// toFrame: frameName,</span>
@@ -10234,7 +10234,7 @@
 <li><code>toEdgeStart</code>, <code>toEdgeWidth</code> : Reveal edge start, edge width of to-texture.</li>
 </ul>
 </li>
-<li>Apply effect to camera. A camera only can add 1 gray-scale effect.
+<li>Apply effect to camera. A camera only can add 1 dissolve effect.
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">pipelineInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexDissolvePipeline&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">camera</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>

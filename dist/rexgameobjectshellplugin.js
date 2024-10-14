@@ -16969,7 +16969,16 @@
                     childrenInteractive.targetSizers,
                     childrenInteractive.targetMode,
                     tap.worldX, tap.worldY,
-                    lastPointer
+                    lastPointer, tap
+                );
+
+                EmitChildEvent(
+                    childrenInteractive.eventEmitter,
+                    `${childrenInteractive.eventNamePrefix}tap`,
+                    childrenInteractive.targetSizers,
+                    childrenInteractive.targetMode,
+                    tap.worldX, tap.worldY,
+                    lastPointer, tap
                 );
             }, this);
     };
@@ -16994,7 +17003,7 @@
                     childrenInteractive.targetSizers,
                     childrenInteractive.targetMode,
                     press.worldX, press.worldY,
-                    lastPointer
+                    lastPointer, press
                 );
             }, this)
             .on('pressend', function (press, gameObject, lastPointer) {
@@ -17004,7 +17013,7 @@
                     childrenInteractive.targetSizers,
                     childrenInteractive.targetMode,
                     press.worldX, press.worldY,
-                    lastPointer
+                    lastPointer, press
                 );
             }, this);
     };
@@ -17041,7 +17050,16 @@
                     childrenInteractive.targetSizers,
                     childrenInteractive.targetMode,
                     swipe.worldX, swipe.worldY,
-                    lastPointer
+                    lastPointer, swipe
+                );
+
+                EmitChildEvent(
+                    childrenInteractive.eventEmitter,
+                    `${childrenInteractive.eventNamePrefix}swipe`,
+                    childrenInteractive.targetSizers,
+                    childrenInteractive.targetMode,
+                    swipe.worldX, swipe.worldY,
+                    lastPointer, swipe
                 );
             }, this);
     };
@@ -35494,11 +35512,13 @@
             );
 
             topPatent[`hideUnscrollableSlider${axis}`] = GetValue$12(sliderConfig, 'hideUnscrollableSlider', false);
+            topPatent[`disableUnscrollableDrag${axis}`] = GetValue$12(sliderConfig, 'disableUnscrollableDrag', false);
             topPatent[`adaptThumb${axis}SizeMode`] = GetValue$12(sliderConfig, 'adaptThumbSize', false);
             topPatent[`minThumb${axis}Size`] = GetValue$12(sliderConfig, 'minThumbSize', undefined);
 
         } else {
             topPatent[`hideUnscrollableSlider${axis}`] = false;
+            topPatent[`disableUnscrollableDrag${axis}`] = false;
             topPatent[`adaptThumb${axis}SizeMode`] = false;
             topPatent[`minThumb${axis}Size`] = undefined;
         }
@@ -35556,6 +35576,7 @@
 
         if ((!isScrollXYMode) || (isAxisY)) {
             topPatent['hideUnscrollableSlider'] = topPatent[`hideUnscrollableSlider${axis}`];
+            topPatent['disableUnscrollableDrag'] = topPatent[`disableUnscrollableDrag${axis}`];
             topPatent['adaptThumbSizeMode'] = topPatent[`adaptThumb${axis}SizeMode`];
             topPatent['minThumbSize'] = topPatent[`minThumb${axis}Size`];
 
@@ -35748,15 +35769,28 @@
                 if (slider && this.hideUnscrollableSlider) {
                     this.setChildVisible(slider, this.isOverflow);
                 }
+
+                var scroller = this.childrenMap.scroller;
+                if (scroller && this.disableUnscrollableDrag) {
+                    scroller.setEnable(this.isOverflow);
+                }
+
                 break;
 
             default:
                 axis = axis.toUpperCase();
+                var isOverflow = this[`isOverflow${axis}`];
+
                 var slider = this.childrenMap[`slider${axis}`];
                 var hideUnscrollableSlider = this[`hideUnscrollableSlider${axis}`];
-                var isOverflow = this[`isOverflow${axis}`];
                 if (slider && hideUnscrollableSlider) {
                     this.setChildVisible(slider, isOverflow);
+                }
+
+                var scroller = this.childrenMap.scroller;
+                var disableUnscrollableDrag = this[`disableUnscrollableDrag${axis}`];
+                if (scroller && disableUnscrollableDrag) {
+                    scroller.setEnable(isOverflow);
                 }
                 break;
         }
