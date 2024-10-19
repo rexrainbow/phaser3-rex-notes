@@ -56,7 +56,7 @@ var CreateCanvasInput = function (scene, text, width) {
                 'cursor.backgroundColor': 'green',
                 'cursor.backgroundHeight': 20,
                 'cursor.backgroundBottomY': 2,
-                'cursor.backgroundLeftX': 10,
+                'cursor.backgroundRightX': -10,
             },
 
             text: text,
