@@ -9,10 +9,10 @@ var GetGraphItem = function (gameObject) {
         return ObjBank.get(gameObject);
     } else {
         // game object
-        if (!gameObject.hasOwnProperty('rexGraphItem')) {
-            gameObject.rexGraphItem = new GraphItemData(gameObject);
+        if (!gameObject.hasOwnProperty('rexGraph')) {
+            gameObject.rexGraph = new GraphItemData(gameObject);
         }
-        return gameObject.rexGraphItem;
+        return gameObject.rexGraph;
     }
 }
 export default GetGraphItem;

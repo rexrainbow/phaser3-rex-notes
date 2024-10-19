@@ -100,7 +100,7 @@ class Demo extends Phaser.Scene {
 }
 
 var GetUnconnectedNode = function (nodeA, candidates) {
-    var graph = nodeA.rexGraphItem.graph;
+    var graph = nodeA.rexGraph.graph;
     var resultNode, distA = Infinity;
     for (var i = 0, cnt = candidates.length; i < cnt; i++) {
         var nodeB = candidates[i];
