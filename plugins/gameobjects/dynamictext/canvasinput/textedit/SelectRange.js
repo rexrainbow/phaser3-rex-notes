@@ -43,7 +43,7 @@ var SelectRange = function (hiddenTextEdit) {
 
         var child = textObject.getCharChild(i);
         if (child) {
-            var eventName = (inPrevSelectionRange) ? 'cursorout' : 'cursorin';
+            var eventName = (inPrevSelectionRange) ? 'rangeout' : 'rangein';
             textObject.emit(eventName, child, i, textObject);
         }
     }

@@ -47,10 +47,35 @@ declare namespace CanvasInput {
         'cursor.shadowOffsetY'?: number,
         'cursor.shadowBlur'?: number,
         'cursor.backgroundColor'?: string | number | null,
+        'cursor.backgroundHeight'?: number,
+        'cursor.backgroundBottomY'?: number,
+        'cursor.backgroundLeftX'?: number,
+        'cursor.backgroundRightX'?: number,
         'cursor.offsetX'?: number,
         'cursor.offsetY'?: number,
         'cursor.leftSpace'?: number,
         'cursor.rightSpace'?: number,
+
+        'range.bold'?: boolean,
+        'range.italic'?: boolean,
+        'range.fontSize'?: string | number,
+        'range.fontFamily'?: string,
+        'range.color'?: string | number | null,
+        'range.stroke'?: string | number | null,
+        'range.strokeThickness'?: number,
+        'range.shadowColor'?: string | number | null,
+        'range.shadowOffsetX'?: number,
+        'range.shadowOffsetY'?: number,
+        'range.shadowBlur'?: number,
+        'range.backgroundColor'?: string | number | null,
+        'range.backgroundHeight'?: number,
+        'range.backgroundBottomY'?: number,
+        'range.backgroundLeftX'?: number,
+        'range.backgroundRightX'?: number,
+        'range.offsetX'?: number,
+        'range.offsetY'?: number,
+        'range.leftSpace'?: number,
+        'range.rightSpace'?: number,
     }
 
     interface IConfig extends DynamicText.IConfig {
@@ -65,6 +90,8 @@ declare namespace CanvasInput {
         style?: IConfigTextStyle
 
         cursorStyle?: DynamicText.IConfigTextStyle;
+
+        rangeStyle?: DynamicText.IConfigTextStyle;
 
         onOpen?: HiddenTextEdit.OnOpenCallbackType;
         onFocus?: HiddenTextEdit.OnOpenCallbackType;
@@ -132,6 +159,10 @@ declare class CanvasInput extends DynamicText {
     ): this;
 
     setCursorStyle(
+        style: DynamicText.IConfigTextStyle
+    ): this;
+
+    setRangeStyle(
         style: DynamicText.IConfigTextStyle
     ): this;
 

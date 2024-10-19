@@ -48,8 +48,6 @@ declare namespace DynamicText {
     }
 
     interface IConfigTextStyle extends IConfigTextStyleBase {
-        backgroundHeight?: number,
-        backgroundBottomY?: number,
     }
 
     interface IConfigImage {

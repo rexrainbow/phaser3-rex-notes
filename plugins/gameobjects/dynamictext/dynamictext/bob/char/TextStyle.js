@@ -60,6 +60,8 @@ class TextStyle {
         this.setBackgroundColor(GetValue(o, 'backgroundColor', null));
         this.setBackgroundHeight(GetValue(o, 'backgroundHeight', undefined));
         this.setBackgroundBottomY(GetValue(o, 'backgroundBottomY', undefined));
+        this.setBackgroundLeftX(GetValue(o, 'backgroundLeftX', 0));
+        this.setBackgroundRightX(GetValue(o, 'backgroundRightX', 0));
 
         return this;
     }
@@ -130,6 +132,12 @@ class TextStyle {
         if (o.hasOwnProperty('backgroundBottomY')) {
             this.setBackgroundBottomY(o.backgroundBottomY);
         }
+        if (o.hasOwnProperty('backgroundLeftX')) {
+            this.setBackgroundLeftX(o.backgroundLeftX);
+        }
+        if (o.hasOwnProperty('backgroundRightX')) {
+            this.setBackgroundRightX(o.backgroundRightX);
+        }        
 
         return this;
     }
@@ -281,6 +289,16 @@ class TextStyle {
 
     setBackgroundBottomY(y) {
         this.backgroundBottomY = y;
+        return this;
+    }
+
+    setBackgroundLeftX(x) {
+        this.backgroundLeftX = x;
+        return this;
+    }
+
+    setBackgroundRightX(x) {
+        this.backgroundRightX = x;
         return this;
     }
 

@@ -140,6 +140,12 @@ var txt = scene.add.rexCanvasInput({
         // 'cursor.color': ...
         // 'cursor.backgroundColor': ...
         // 'cursor.xxx': ...
+
+        // Style when range selecting
+        // 'range.color': ...
+        // 'range.backgroundColor': ...
+        // 'range.xxx': ...
+        // Using cursor style if no range style is given
     },
     cursorStyle: undefined,
 
@@ -196,6 +202,20 @@ var txt = scene.add.rexCanvasInput({
     //         
     //     });
     // },
+
+    // onRangeOut: function(child, cursorIndex, canvasInput) {
+    //     child.modifyStyle({
+    //         
+    //     });
+    // },
+
+    // onRangeIn: function(child, cursorIndex, canvasInput) {
+    //     child.modifyStyle({
+    //         
+    //     });
+    // },
+
+    // Use 'onCursorIn' and 'onCursorOut' if 'onRangeOut' and 'onRangeIn' are not given
 
     // parseTextCallback: function(text) {
     //     return text;
@@ -263,6 +283,22 @@ var txt = scene.add.rexCanvasInput({
         }
         ```
         - `child` : [character child](dynamictext.md#character)
+    - `onRangeOut` : Callback invoked when leaving range-selecting on a character child
+        ```javascript
+        function(child, index, canvasInput) {
+            child.modifyStyle({...})
+        }
+        ```
+        - `child` : [character child](dynamictext.md#character)
+        - Use `onCursorOut` callback if `onRangeOut` and `onRangeIn` callbacks are not given, for backward compatible.
+    - `onRangeIn` : Callback invoked when entering range-selecting on a character child
+        ```javascript
+        function(child, index, canvasInput) {
+            child.modifyStyle({...})
+        }
+        ```
+        - `child` : [character child](dynamictext.md#character)
+        - Use `onCursorIn` callback if `onRangeOut` and `onRangeIn` callbacks are not given, for backward compatible.
     - `parseTextCallback` : Callback of parsing text (`txt.text`) to value (`txt.value`)
         - `undefined` : Bypass text to value. Default behavior.
         - A function object
@@ -306,12 +342,43 @@ var txt = scene.add.rexCanvasInput({
             shadowBlur: 0,
             backgroundColor: null,
             backgroundHeight: undefined,
+            backgroundBottomY: 0,
+            backgroundLeftX: 0,
+            backgroundRightX: 0,
             backgroundBY: undefined,
             offsetX: 0,
             offsetY: 0
         }
         ```
     - Or add these style settings in `style` parameter, with prefix `'cursor.'`.
+- `rangeStyle` : Will apply this style when entering range-selecting on character children.
+    - `undefined` : Ignore this behavior.
+    - A plain object
+        ```javascript
+        {
+            bold: false,
+            italic: false,
+            fontSize: '16px',
+            fontFamily: 'Courier',
+            color: '#fff',
+            stroke: '#fff',
+            strokeThickness: 0,
+            shadowColor: null,
+            shadowOffsetX: 0,
+            shadowOffsetY: 0,
+            shadowBlur: 0,
+            backgroundColor: null,
+            backgroundHeight: undefined,
+            backgroundBottomY: 0,
+            backgroundLeftX: 0,
+            backgroundRightX: 0,
+            backgroundBY: undefined,
+            offsetX: 0,
+            offsetY: 0
+        }
+        ```
+    - Or add these style settings in `style` parameter, with prefix `'range.'`.
+    - Using `cursorStyle` if no `rangeStyle` found in config, for backward compatible.
 
 
 #### Number input

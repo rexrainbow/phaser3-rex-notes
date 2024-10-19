@@ -4,12 +4,14 @@ import InjectDefaultConfig from './methods/InjectDefaultConfig.js';
 import ExtractByPrefix from '../../../utils/object/ExtractByPrefix.js';
 import RegisterArrowKeysEvent from './methods/RegisterArrowKeysEvent.js';
 import RegisterCursorStyle from './methods/RegisterCursorStyle.js';
+import RegisterRangeStyle from './methods/RegisterRangeStyle.js';
 import RegisterFocusStyle from './methods/RegisterFocusStyle.js';
 import CreateInsertCursorChild from './methods/CreateInsertCursorChild.js';
 import SetText from './methods/SetText.js';
 import { IsChar } from '../dynamictext/bob/Types.js';
 import SetTextOXYMethods from './methods/SetTextOXYMethods.js';
 import MoveCursorMethods from './methods/MoveCursorMethods.js';
+import IsEmpty from '../../../utils/object/IsEmpty.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
@@ -35,6 +37,7 @@ class CanvasInput extends DynamicText {
 
         var focusStyle = ExtractByPrefix(config.background, 'focus');
         var cursorStyle = ExtractByPrefix(config.style, 'cursor');
+        var rangeStyle = ExtractByPrefix(config.style, 'range');
 
         super(scene, x, y, fixedWidth, fixedHeight, config);
         this.type = 'rexCanvasInput';
@@ -62,19 +65,41 @@ class CanvasInput extends DynamicText {
         }
         RegisterCursorStyle.call(this, cursorStyle);
 
+        if (config.rangeStyle) {
+            Object.assign(rangeStyle, config.rangeStyle)
+        }
+        if (IsEmpty(rangeStyle)) {
+            Object.assign(rangeStyle, cursorStyle);
+        }
+        RegisterRangeStyle.call(this, rangeStyle);
+
+
         var addCharCallback = config.onAddChar;
         if (addCharCallback) {
             this.on('addchar', addCharCallback);
+        }
+
+        var cursorInCallback = config.onCursorIn;
+        if (cursorInCallback) {
+            this.on('cursorin', cursorInCallback);
         }
 
         var cursorOutCallback = config.onCursorOut;
         if (cursorOutCallback) {
             this.on('cursorout', cursorOutCallback);
         }
-        var cursorInCallback = config.onCursorIn;
-        if (cursorInCallback) {
-            this.on('cursorin', cursorInCallback);
+
+        var useCursorCallback = !config.onRangeIn && !config.onRangeOut
+        var rangeInCallback = (!useCursorCallback) ? config.onRangeIn : config.onCursorIn;
+        if (rangeInCallback) {
+            this.on('rangein', rangeInCallback);
         }
+
+        var rangeOutCallback = (!useCursorCallback) ? config.onRangeOut : config.onCursorOut;
+        if (rangeOutCallback) {
+            this.on('rangeout', rangeOutCallback);
+        }
+
         var moveCursorCallback = config.onMoveCursor;
         if (moveCursorCallback) {
             this.on('movecursor', moveCursorCallback);
@@ -266,6 +291,11 @@ class CanvasInput extends DynamicText {
 
     setCursorStyle(style) {
         this.cursorStyle = style;
+        return this;
+    }
+
+    setRangeStyle(style) {
+        this.rangeStyle = style;
         return this;
     }
 
