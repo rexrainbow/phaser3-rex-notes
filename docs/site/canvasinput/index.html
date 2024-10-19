@@ -10363,6 +10363,12 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
 <span class="w">        </span><span class="c1">// &#39;cursor.color&#39;: ...</span>
 <span class="w">        </span><span class="c1">// &#39;cursor.backgroundColor&#39;: ...</span>
 <span class="w">        </span><span class="c1">// &#39;cursor.xxx&#39;: ...</span>
+
+<span class="w">        </span><span class="c1">// Style when range selecting</span>
+<span class="w">        </span><span class="c1">// &#39;range.color&#39;: ...</span>
+<span class="w">        </span><span class="c1">// &#39;range.backgroundColor&#39;: ...</span>
+<span class="w">        </span><span class="c1">// &#39;range.xxx&#39;: ...</span>
+<span class="w">        </span><span class="c1">// Using cursor style if no range style is given</span>
 <span class="w">    </span><span class="p">},</span>
 <span class="w">    </span><span class="nx">cursorStyle</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 
@@ -10419,6 +10425,20 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
 <span class="w">    </span><span class="c1">//         </span>
 <span class="w">    </span><span class="c1">//     });</span>
 <span class="w">    </span><span class="c1">// },</span>
+
+<span class="w">    </span><span class="c1">// onRangeOut: function(child, cursorIndex, canvasInput) {</span>
+<span class="w">    </span><span class="c1">//     child.modifyStyle({</span>
+<span class="w">    </span><span class="c1">//         </span>
+<span class="w">    </span><span class="c1">//     });</span>
+<span class="w">    </span><span class="c1">// },</span>
+
+<span class="w">    </span><span class="c1">// onRangeIn: function(child, cursorIndex, canvasInput) {</span>
+<span class="w">    </span><span class="c1">//     child.modifyStyle({</span>
+<span class="w">    </span><span class="c1">//         </span>
+<span class="w">    </span><span class="c1">//     });</span>
+<span class="w">    </span><span class="c1">// },</span>
+
+<span class="w">    </span><span class="c1">// Use &#39;onCursorIn&#39; and &#39;onCursorOut&#39; if &#39;onRangeOut&#39; and &#39;onRangeIn&#39; are not given</span>
 
 <span class="w">    </span><span class="c1">// parseTextCallback: function(text) {</span>
 <span class="w">    </span><span class="c1">//     return text;</span>
@@ -10502,6 +10522,24 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
 <li><code>child</code> : <a href="../dynamictext/#character">character child</a></li>
 </ul>
 </li>
+<li><code>onRangeOut</code> : Callback invoked when leaving range-selecting on a character child
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span><span class="w"> </span><span class="nx">index</span><span class="p">,</span><span class="w"> </span><span class="nx">canvasInput</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">child</span><span class="p">.</span><span class="nx">modifyStyle</span><span class="p">({...})</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li><code>child</code> : <a href="../dynamictext/#character">character child</a></li>
+<li>Use <code>onCursorOut</code> callback if <code>onRangeOut</code> and <code>onRangeIn</code> callbacks are not given, for backward compatible.</li>
+</ul>
+</li>
+<li><code>onRangeIn</code> : Callback invoked when entering range-selecting on a character child
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span><span class="w"> </span><span class="nx">index</span><span class="p">,</span><span class="w"> </span><span class="nx">canvasInput</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">child</span><span class="p">.</span><span class="nx">modifyStyle</span><span class="p">({...})</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li><code>child</code> : <a href="../dynamictext/#character">character child</a></li>
+<li>Use <code>onCursorIn</code> callback if <code>onRangeOut</code> and <code>onRangeIn</code> callbacks are not given, for backward compatible.</li>
+</ul>
+</li>
 <li><code>parseTextCallback</code> : Callback of parsing text (<code>txt.text</code>) to value (<code>txt.value</code>)<ul>
 <li><code>undefined</code> : Bypass text to value. Default behavior.</li>
 <li>A function object
@@ -10548,12 +10586,44 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
 <span class="w">    </span><span class="nx">shadowBlur</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">backgroundColor</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">backgroundHeight</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">backgroundBottomY</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">backgroundLeftX</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">backgroundRightX</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">backgroundBY</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">offsetX</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">offsetY</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span>
 <span class="p">}</span>
 </code></pre></div></li>
 <li>Or add these style settings in <code>style</code> parameter, with prefix <code>'cursor.'</code>.</li>
+</ul>
+</li>
+<li><code>rangeStyle</code> : Will apply this style when entering range-selecting on character children.<ul>
+<li><code>undefined</code> : Ignore this behavior.</li>
+<li>A plain object
+    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nx">bold</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">italic</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">fontSize</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;16px&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">fontFamily</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Courier&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">stroke</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">strokeThickness</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">shadowColor</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">shadowOffsetX</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">shadowOffsetY</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">shadowBlur</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">backgroundColor</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">backgroundHeight</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">backgroundBottomY</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">backgroundLeftX</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">backgroundRightX</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">backgroundBY</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">offsetX</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">offsetY</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li>Or add these style settings in <code>style</code> parameter, with prefix <code>'range.'</code>.</li>
+<li>Using <code>cursorStyle</code> if no <code>rangeStyle</code> found in config, for backward compatible.</li>
 </ul>
 </li>
 </ul>

@@ -15643,6 +15643,8 @@
             this.setBackgroundColor(GetValue$R(o, 'backgroundColor', null));
             this.setBackgroundHeight(GetValue$R(o, 'backgroundHeight', undefined));
             this.setBackgroundBottomY(GetValue$R(o, 'backgroundBottomY', undefined));
+            this.setBackgroundLeftX(GetValue$R(o, 'backgroundLeftX', 0));
+            this.setBackgroundRightX(GetValue$R(o, 'backgroundRightX', 0));
 
             return this;
         }
@@ -15713,6 +15715,12 @@
             if (o.hasOwnProperty('backgroundBottomY')) {
                 this.setBackgroundBottomY(o.backgroundBottomY);
             }
+            if (o.hasOwnProperty('backgroundLeftX')) {
+                this.setBackgroundLeftX(o.backgroundLeftX);
+            }
+            if (o.hasOwnProperty('backgroundRightX')) {
+                this.setBackgroundRightX(o.backgroundRightX);
+            }        
 
             return this;
         }
@@ -15864,6 +15872,16 @@
 
         setBackgroundBottomY(y) {
             this.backgroundBottomY = y;
+            return this;
+        }
+
+        setBackgroundLeftX(x) {
+            this.backgroundLeftX = x;
+            return this;
+        }
+
+        setBackgroundRightX(x) {
+            this.backgroundRightX = x;
             return this;
         }
 
@@ -16294,20 +16312,24 @@
             if (textStyle.hasBackgroundColor) {
                 context.fillStyle = textStyle.backgroundColor;
 
-                var x = this.drawTLX;
-                var width = this.drawTRX - x + 1; // Add extra 1 pixel width
+                var leftX = this.drawTLX + textStyle.backgroundLeftX;
+                var rightX = this.drawTRX + textStyle.backgroundRightX;
+                var x = leftX;
+                var width = rightX - leftX + 1; // Add extra 1 pixel width
 
-                var bottomY = textStyle.backgroundBottomY;
-                if (bottomY == null) {
-                    bottomY = this.drawBLY;
-                }
-                var height = textStyle.backgroundHeight;
-                if (height == null) {
-                    height = bottomY - this.drawTLY;
-                }
-                var y = bottomY - height;
+                if (width > 0) {
+                    var bottomY = textStyle.backgroundBottomY;
+                    if (bottomY == null) {
+                        bottomY = this.drawBLY;
+                    }
+                    var height = textStyle.backgroundHeight;
+                    if (height == null) {
+                        height = bottomY - this.drawTLY;
+                    }
+                    var y = bottomY - height;
 
-                context.fillRect(x, y, width, height);
+                    context.fillRect(x, y, width, height);
+                }
             }
 
             var hasFill = textStyle.hasFill,
@@ -19213,7 +19235,7 @@
 
             var child = textObject.getCharChild(i);
             if (child) {
-                var eventName = (inPrevSelectionRange) ? 'cursorout' : 'cursorin';
+                var eventName = (inPrevSelectionRange) ? 'rangeout' : 'rangein';
                 textObject.emit(eventName, child, i, textObject);
             }
         }
@@ -19750,6 +19772,33 @@
                 child.modifyStyle(cursorStyle);
             }, this)
             .on('cursorout', function (child) {
+                if (!child.styleSave) {
+                    return;
+                }
+
+                child.modifyStyle(child.styleSave);
+                child.styleSave = undefined;
+            }, this);
+    };
+
+    var RegisterRangeStyle = function (rangeStyle) {
+        if (IsEmpty(rangeStyle)) {
+            return;
+        }
+
+        this
+            .setRangeStyle(rangeStyle)
+            .on('rangein', function (child) {
+                var rangeStyle = this.rangeStyle;
+                var styleSave = GetPartialData(child.style, rangeStyle);
+                if (IsKeyValueEqual(rangeStyle, styleSave)) {
+                    return;
+                }
+
+                child.styleSave = styleSave;
+                child.modifyStyle(rangeStyle);
+            }, this)
+            .on('rangeout', function (child) {
                 if (!child.styleSave) {
                     return;
                 }
@@ -20407,6 +20456,7 @@
 
             var focusStyle = ExtractByPrefix(config.background, 'focus');
             var cursorStyle = ExtractByPrefix(config.style, 'cursor');
+            var rangeStyle = ExtractByPrefix(config.style, 'range');
 
             super(scene, x, y, fixedWidth, fixedHeight, config);
             this.type = 'rexCanvasInput';
@@ -20434,19 +20484,41 @@
             }
             RegisterCursorStyle.call(this, cursorStyle);
 
+            if (config.rangeStyle) {
+                Object.assign(rangeStyle, config.rangeStyle);
+            }
+            if (IsEmpty(rangeStyle)) {
+                Object.assign(rangeStyle, cursorStyle);
+            }
+            RegisterRangeStyle.call(this, rangeStyle);
+
+
             var addCharCallback = config.onAddChar;
             if (addCharCallback) {
                 this.on('addchar', addCharCallback);
+            }
+
+            var cursorInCallback = config.onCursorIn;
+            if (cursorInCallback) {
+                this.on('cursorin', cursorInCallback);
             }
 
             var cursorOutCallback = config.onCursorOut;
             if (cursorOutCallback) {
                 this.on('cursorout', cursorOutCallback);
             }
-            var cursorInCallback = config.onCursorIn;
-            if (cursorInCallback) {
-                this.on('cursorin', cursorInCallback);
+
+            var useCursorCallback = !config.onRangeIn && !config.onRangeOut;
+            var rangeInCallback = (!useCursorCallback) ? config.onRangeIn : config.onCursorIn;
+            if (rangeInCallback) {
+                this.on('rangein', rangeInCallback);
             }
+
+            var rangeOutCallback = (!useCursorCallback) ? config.onRangeOut : config.onCursorOut;
+            if (rangeOutCallback) {
+                this.on('rangeout', rangeOutCallback);
+            }
+
             var moveCursorCallback = config.onMoveCursor;
             if (moveCursorCallback) {
                 this.on('movecursor', moveCursorCallback);
@@ -20638,6 +20710,11 @@
 
         setCursorStyle(style) {
             this.cursorStyle = style;
+            return this;
+        }
+
+        setRangeStyle(style) {
+            this.rangeStyle = style;
             return this;
         }
 
