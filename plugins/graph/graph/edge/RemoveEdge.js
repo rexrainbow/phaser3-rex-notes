@@ -1,7 +1,7 @@
 import GetGraphItem from '../../graphitem/GetGraphItem.js';
 
-var RemoveEdge = function (gameObejct, destroy) {
-    if (this.isEdge(gameObejct)) {
+var RemoveEdge = function (edgeGameObject, destroy) {
+    if (!this.isEdge(edgeGameObject)) {
         return this;
     }
 
@@ -9,15 +9,18 @@ var RemoveEdge = function (gameObejct, destroy) {
         destroy = false;
     }
 
-    var uid = this.getObjUID(gameObejct);
-    // Remove edge
-    delete this.edges[uid];
-    this.edgeCount--;
+    // Remove node
+    var edgeUID = this.getObjUID(edgeGameObject);
+    this.graph.dropEdge(edgeUID);
+
     // Clear reference of graph
-    GetGraphItem(gameObejct).setGraph(null);
-    if (destroy && gameObejct.destroy) {
-        gameObject.destroy();
+    GetGraphItem(edgeGameObject).setGraph(null);
+
+    // Destroy game object
+    if (destroy && edgeGameObject.destroy) {
+        edgeGameObject.destroy();
     }
+
     return this;
 }
 

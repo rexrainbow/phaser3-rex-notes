@@ -39,18 +39,18 @@ class Demo extends Phaser.Scene {
         );
 
         // Create links
-        var linkCnt = Phaser.Math.Between(30, 120);
-        for (var i = 0; i < linkCnt; i++) {
+        var edgeCount = Phaser.Math.Between(30, 120);
+        for (var i = 0; i < edgeCount; i++) {
             var nodeA = GetRandomItem(nodes);
             var nodeB = GetUnconnectedNode(nodeA, nodes);
-            var link = this.add.line(
+            var edge = this.add.line(
                 nodeA.x, nodeA.y,  // x, y
                 0, 0, // Related start position
                 (nodeB.x - nodeA.x), (nodeB.y - nodeA.y), // Related end position
                 COLOR_LIGHT // color
             )
                 .setOrigin(0);
-            graph.addEdge(link, nodeA, nodeB);
+            graph.addEdge(edge, nodeA, nodeB);
         }
 
         // Add a chess at a random node

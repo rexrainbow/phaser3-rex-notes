@@ -1,26 +1,20 @@
-import UidToObj from '../../graphitem/UidToObj.js';
+import UIDListToObjList from '../../graphitem/UIDListToObjList.js';
 
 var GetNodesOfEdge = function (edgeGameObject, out) {
     if (out === undefined) {
         out = [];
     }
 
-    // uid or game object
-    var edge = this.getEdgeData(edgeGameObject);
-    if (!edge) {
+    var edgeUID = this.getObjUID(edgeGameObject);
+    if (!this.graph.hasEdge(edgeUID)) {
         return out;
     }
 
-    var vGO;
-    vGO = UidToObj(edge.vA);
-    if (vGO) {
-        out.push(vGO);
-    }
-    vGO = UidToObj(edge.vB);
-    if (vGO) {
-        out.push(vGO);
-    }
-    return out;
+    var uidList = [
+        this.graph.source(edgeUID),
+        this.graph.target(edgeUID)
+    ]
+    return UIDListToObjList(uidList, out);
 };
 
 export default GetNodesOfEdge;

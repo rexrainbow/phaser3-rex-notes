@@ -9,7 +9,6 @@ class GraphItemData extends ComponentBase {
 
         ObjBank.add(this, uid); // uid is stored in `this.$uid`
         this.graph = null;
-        this.type = undefined;
     }
 
     shutdown(fromScene) {
@@ -29,26 +28,21 @@ class GraphItemData extends ComponentBase {
 
     setGraph(graph) {
         this.graph = graph;
-        if (!graph) {
-            this.setType(undefined);
-        }
-        return this;
-    }
-
-    setType(type) {
-        if (typeof (type) === 'string') {
-            type = OBJTYPE[type];
-        }
-        this.type = type;
         return this;
     }
 
     get isNode() {
-        return ((!!this.graph) && (this.type === 0));
+        if (this.graph) {
+            return this.graph.hasNode(this[uidKey]);
+        }
+        return false;
     }
 
     get isEdge() {
-        return ((!!this.graph) && (this.type === 1));
+        if (this.graph) {
+            return this.graph.hasEdge(this[uidKey]);
+        }
+        return false;
     }
 }
 
@@ -60,7 +54,7 @@ Object.assign(
 );
 
 const OBJTYPE = {
-    node: 0,
+    vertex: 0,
     edge: 1,
 }
 export default GraphItemData;

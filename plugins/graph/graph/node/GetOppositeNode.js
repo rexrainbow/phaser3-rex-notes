@@ -1,18 +1,11 @@
-import UidToObj from '../../graphitem/UidToObj.js';
-
 var GetOppositeNode = function (nodeGameObject, edgeGameObject) {
-    // uid or game object
-    var node = this.getNodeData(nodeGameObject);
-    if (!node) {
-        return undefined;
+    var nodeGameObjects = this.getNodesOfEdge(edgeGameObject);
+
+    if (nodeGameObjects.length < 2) {
+        return;
     }
 
-    var edgeUid = this.getObjUID(edgeGameObject);
-    if (!edgeUid) {
-        return undefined;
-    }
-
-    return UidToObj(node[edgeUid]);
+    return (nodeGameObject === nodeGameObjects[0]) ? nodeGameObjects[1] : nodeGameObjects[0];
 };
 
 export default GetOppositeNode;

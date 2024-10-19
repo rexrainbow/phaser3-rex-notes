@@ -1,16 +1,11 @@
-var AreNeighborNodes = function (nodeGOA, nodeGOB) {
-    var vUidA = this.getObjUID(nodeGOA),
-        vUidB = this.getObjUID(nodeGOB);
-    if ((vUidA != null) && (vUidB != null)) {
-        var nodeA = this.getNodeData(nodeGOA);
-        vUidB = parseInt(vUidB);
-        for (var edgeUid in nodeA) {
-            if (nodeA[edgeUid] === vUidB) {
-                return true;
-            }
-        }
+var AreNeighborNodes = function (nodeGameObjectA, nodeGameObjectB) {
+    var nodeUIDA = this.getObjUID(nodeGameObjectA),
+        nodeUIDB = this.getObjUID(nodeGameObjectB);
+    if (!nodeUIDA || !nodeUIDB) {
+        return false;
     }
-    return false;
+
+    return this.graph.areNeighbors(nodeUIDA, nodeUIDB);
 }
 
 export default AreNeighborNodes;

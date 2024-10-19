@@ -1,17 +1,19 @@
-import UidToObj from '../../graphitem/UidToObj.js';
+import UIDToObj from '../../graphitem/UIDToObj.js';
 
 var GetAllNodes = function (out) {
     if (out === undefined) {
         out = [];
     }
 
-    var vGO;
-    for (var vUid in this.nodes) {
-        vGO = UidToObj(vUid);
-        if (vGO) {
-            out.push(vGO);
+    this.graph.forEachNode(function (uid) {
+        var nodeGameObject = UIDToObj(uid);
+        if (!nodeGameObject) {
+            return;
         }
-    }
+
+        out.puth(nodeGameObject);
+    })
+
     return out;
 };
 

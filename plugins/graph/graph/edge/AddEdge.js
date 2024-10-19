@@ -8,37 +8,48 @@ const DIRMODE = {
     '<->': (DIRAtoB | DIRBtoA),
 };
 
-var AddEdge = function (edgeGO, nodeAGO, nodeBGO, dir) {
-    if (this.isEdge(edgeGO)) {
+var AddEdge = function (edgeGameObject, nodeAGameObject, nodeBGameObject, dir) {
+    if (this.isEdge(edgeGameObject)) {
         return this;
+    }
+
+    if (typeof (dir) === 'string') {
+        dir = DIRMODE[dir];
     }
 
     if (dir === undefined) {
         dir = 3;
     }
 
-    // Configure edge
-    var edgeUid = this.getObjUID(edgeGO);
-    var edge = this.getEdgeData(edgeUid, true);
-    edge.dir = dir;
-    edge.vA = this.getObjUID(nodeAGO);
-    edge.vB = this.getObjUID(nodeBGO);
-    GetGraphItem(edgeGO).setGraph(this);
-    this.edgeCount++;
+    // Add node to graph
+    this.addNode(nodeAGameObject).addNode(nodeBGameObject);
 
-    // Configure vertice
-    this.addNode(nodeAGO).addNode(nodeBGO);
-    var vA = this.getNodeData(nodeAGO, true);
-    var vB = this.getNodeData(nodeBGO, true);
-    if (typeof (dir) === 'string') {
-        dir = DIRMODE(dir);
+    // Add edge
+    GetGraphItem(edgeGameObject).setGraph(this);
+
+    var edgeUID = this.getObjUID(edgeGameObject);
+    var nodeAUID = this.getObjUID(nodeAGameObject);
+    var nodeBUID = this.getObjUID(nodeBGameObject);
+
+    if (!edgeUID || !nodeAUID || !nodeBUID) {
+        return this;
     }
-    if (dir & DIRAtoB) {
-        vA[edgeUid] = edge.vB;
+
+    switch (dir) {
+        case DIRAtoB:
+            this.graph.addDirectedEdgeWithKey(edgeUID, nodeAUID, nodeBUID);
+            break;
+
+        case DIRBtoA:
+            this.graph.addDirectedEdgeWithKey(edgeUID, nodeBUID, nodeAUID);
+            break;
+
+        default:
+            this.graph.addUndirectedEdgeWithKey(edgeUID, nodeAUID, nodeBUID);
+            break;
     }
-    if (dir & DIRBtoA) {
-        vB[edgeUid] = edge.vA;
-    }
+
+
     return this;
 }
 

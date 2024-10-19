@@ -1,18 +1,13 @@
-import UidToObj from '../../graphitem/UidToObj.js';
-import DistanceBetween from '../../../utils/math/distance/DistanceBetween.js';
+import DistanceBetweenPoints from '../../../utils/math/distance/DistanceBetweenPoints.js';
 
-var GetEdgeLength = function (gameObejct) {
-    var edge = this.getEdgeData(gameObejct);
-    if (!edge) {
-        return 0;
-    }
-    var nodeAGO = UidToObj(edge.vA);
-    var nodeBGO = UidToObj(edge.vB);
-    if ((!nodeAGO) || (!nodeBGO)) {
+var GetEdgeLength = function (edgeGameObject) {
+    var nodeGameObjects = this.getNodesOfEdge(edgeGameObject);
+
+    if (nodeGameObjects.length < 2) {
         return 0;
     }
 
-    return DistanceBetween(nodeAGO.x, nodeAGO.y, nodeBGO.x, nodeBGO.y);
+    return DistanceBetweenPoints(nodeGameObjects[0], nodeGameObjects[1]);
 };
 
 export default GetEdgeLength;

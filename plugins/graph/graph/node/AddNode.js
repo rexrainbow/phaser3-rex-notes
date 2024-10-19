@@ -5,9 +5,11 @@ var AddNode = function (gameObejct) {
         return this;
     }
 
-    this.getNodeData(gameObejct, true);
     GetGraphItem(gameObejct).setGraph(this);
-    this.nodeCount++;
+
+    var nodeUID = this.getObjUID(gameObejct);
+    this.graph.addNode(nodeUID);
+
     return this;
 };
 

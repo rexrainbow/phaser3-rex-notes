@@ -1,6 +1,7 @@
 import EE from '../../utils/eventemitter/EventEmitter.js';
 import Methods from './Methods.js';
 import GetObjUID from '../graphitem/GetObjUID.js';
+import GraphData from 'graphology';
 
 class Graph extends EE {
     constructor(scene) {
@@ -9,11 +10,7 @@ class Graph extends EE {
 
         this.isShutdown = false;
         this.scene = scene;
-        this.nodes = {}; // {node: {edge:nodeUidB, ...} }
-        this.edges = {}; // {edge: {vA:node, vB:node, dir:1,2,3} }
-        this.nodeCount = 0;
-        this.edgeCount = 0;
-
+        this.graph = new GraphData();
         this.boot();
     }
 
@@ -35,11 +32,7 @@ class Graph extends EE {
         this.clear();
         super.shutdown();
 
-        this.scene = undefined;
-        this.nodes = undefined;
-        this.edges = undefined;
-        this.nodeCount = 0;
-        this.edgeCount = 0;
+        this.scene = null;
         this.isShutdown = true;
         return this;
     }
@@ -51,6 +44,14 @@ class Graph extends EE {
 
         this.emit('destroy');
         this.shutdown(fromScene);
+    }
+
+    get nodeCount() {
+        return this.graph.order;
+    }
+
+    get edgeCount() {
+        return this.graph.size;
     }
 
     exists(gameObject) {
