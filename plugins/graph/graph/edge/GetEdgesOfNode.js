@@ -1,11 +1,11 @@
 import UidToObj from '../../graphitem/UidToObj.js';
 
-var GetEdgesOfVertex = function (vertexGameObject, out) {
+var GetEdgesOfNode = function (vertexGameObject, out) {
     if (out === undefined) {
         out = [];
     }
 
-    var vertex = this.getVertexData(vertexGameObject);
+    var vertex = this.getNodeData(vertexGameObject);
     if (!vertex) {
         return out;
     }
@@ -20,4 +20,4 @@ var GetEdgesOfVertex = function (vertexGameObject, out) {
     return out;
 };
 
-export default GetEdgesOfVertex;
+export default GetEdgesOfNode;

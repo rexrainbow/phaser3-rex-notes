@@ -1,6 +1,6 @@
 import UidToObj from '../../graphitem/UidToObj.js';
 
-var GetVerticesOfEdge = function (edgeGameObject, out) {
+var GetNodesOfEdge = function (edgeGameObject, out) {
     if (out === undefined) {
         out = [];
     }
@@ -23,4 +23,4 @@ var GetVerticesOfEdge = function (edgeGameObject, out) {
     return out;
 };
 
-export default GetVerticesOfEdge;
+export default GetNodesOfEdge;

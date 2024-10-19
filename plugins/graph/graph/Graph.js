@@ -54,14 +54,14 @@ class Graph extends EE {
     }
 
     exists(gameObject) {
-        return this.isEdge(gameObject) || this.isVertex(gameObject);
+        return this.isEdge(gameObject) || this.isNode(gameObject);
     }
 
     remove(gameObject) {
         if (this.isEdge(gameObject)) {
             this.removeEdge(gameObject);
-        } else if (this.isVertex(gameObject)) {
-            this.removeVertex(gameObject);
+        } else if (this.isNode(gameObject)) {
+            this.removeNode(gameObject);
         }
         return this;
     }
@@ -70,7 +70,7 @@ class Graph extends EE {
         if (destroy === undefined) {
             destroy = true;
         }
-        this.removeAllVertices(destroy);
+        this.removeAllNodes(destroy);
         return this;
     }
 

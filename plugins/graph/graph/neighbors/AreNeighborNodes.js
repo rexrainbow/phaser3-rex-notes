@@ -1,8 +1,8 @@
-var AreNeighborVertices = function (vertexGOA, vertexGOB) {
+var AreNeighborNodes = function (vertexGOA, vertexGOB) {
     var vUidA = this.getObjUID(vertexGOA),
         vUidB = this.getObjUID(vertexGOB);
     if ((vUidA != null) && (vUidB != null)) {
-        var vertexA = this.getVertexData(vertexGOA);
+        var vertexA = this.getNodeData(vertexGOA);
         vUidB = parseInt(vUidB);
         for (var edgeUid in vertexA) {
             if (vertexA[edgeUid] === vUidB) {
@@ -13,4 +13,4 @@ var AreNeighborVertices = function (vertexGOA, vertexGOB) {
     return false;
 }
 
-export default AreNeighborVertices;
+export default AreNeighborNodes;

@@ -1,6 +1,6 @@
 import UidToObj from '../../graphitem/UidToObj.js';
 
-var GetAllConnectedVertices = function (vertexGO, out, travelMode) {
+var GetAllConnectedNodes = function (vertexGO, out, travelMode) {
     if (out === undefined) {
         out = [];
     }
@@ -11,7 +11,7 @@ var GetAllConnectedVertices = function (vertexGO, out, travelMode) {
         travelMode = 0;
     }
 
-    if (!this.isVertex(vertexGO)) {
+    if (!this.isNode(vertexGO)) {
         return out;
     }
 
@@ -19,24 +19,24 @@ var GetAllConnectedVertices = function (vertexGO, out, travelMode) {
     var isBFS = (travelMode === 0);
     var queue = [startVUid];
     var curVUid, edges, nextVUid;
-    var addedVerticesUid = {};
+    var addedNodesUid = {};
     while (queue.length > 0) {
         curVUid = (isBFS) ? queue.shift() : queue.pop();
         // Already added
-        if (addedVerticesUid.hasOwnProperty(curVUid)) {
+        if (addedNodesUid.hasOwnProperty(curVUid)) {
             continue;
         }
 
-        addedVerticesUid[curVUid] = true;
+        addedNodesUid[curVUid] = true;
         if (curVUid !== startVUid) {
             out.push(UidToObj(curVUid)); // Add vertex into out
         }
 
         // Add new neighbors into queue
-        edges = this.getVertexData(curVUid);
+        edges = this.getNodeData(curVUid);
         for (var edgeUid in edges) {
-            nextVUid = this.getOppositeVertex(curVUid, edgeUid);
-            if (!addedVerticesUid.hasOwnProperty(nextVUid)) {
+            nextVUid = this.getOppositeNode(curVUid, edgeUid);
+            if (!addedNodesUid.hasOwnProperty(nextVUid)) {
                 queue.push(nextVUid);
             }
         }
@@ -52,4 +52,4 @@ const TRAVELMODE = {
     'dfs': 1,
 }
 
-export default GetAllConnectedVertices;
+export default GetAllConnectedNodes;

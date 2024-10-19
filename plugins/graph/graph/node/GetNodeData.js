@@ -1,4 +1,4 @@
-var GetVertexData = function (gameObejct, createIfNotExisted) {
+var GetNodeData = function (gameObejct, createIfNotExisted) {
     if (createIfNotExisted === undefined) {
         createIfNotExisted = false;
     }
@@ -11,4 +11,4 @@ var GetVertexData = function (gameObejct, createIfNotExisted) {
     return this.vertices[uid];
 };
 
-export default GetVertexData;
+export default GetNodeData;

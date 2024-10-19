@@ -1,11 +1,11 @@
 import UidToObj from '../../graphitem/UidToObj.js';
 
-var GetNeighborVertices = function (vAGO, out) {
+var GetNeighborNodes = function (vAGO, out) {
     if (out === undefined) {
         out = [];
     }
 
-    var vertex = this.getVertexData(vAGO),
+    var vertex = this.getNodeData(vAGO),
         vBGO;
     if (vertex) {
         for (var edgeUid in vertex) {
@@ -18,4 +18,4 @@ var GetNeighborVertices = function (vAGO, out) {
     return out;
 };
 
-export default GetNeighborVertices;
+export default GetNeighborNodes;

@@ -3,23 +3,23 @@ import IsEdge from './edge/IsEdge.js';
 import AddEdge from './edge/AddEdge.js';
 import RemoveEdge from './edge/RemoveEdge.js';
 import GetAllEdges from './edge/GetAllEdges.js';
-import GetEdgesOfVertex from './edge/GetEdgesOfVertex.js';
+import GetEdgesOfNode from './edge/GetEdgesOfNode.js';
 import GetEdgeLength from './edge/GetEdgeLength.js';
 import IsInLoop from './edge/IsInLoop.js';
 
-import GetVertexData from './vertex/GetVertexData.js';
-import IsVertex from './vertex/IsVertex.js';
-import AddVertex from './vertex/AddVertex.js';
-import AddVertices from './vertex/AddVertices.js';
-import RemoveVertex from './vertex/RemoveVertex.js';
-import RemoveAllVertices from './vertex/RemoveAllVertices.js';
-import GetAllVertices from './vertex/GetAllVertices.js';
-import GetVerticesOfEdge from './vertex/GetVerticesOfEdge.js';
-import GetOppositeVertex from './vertex/GetOppositeVertex.js';
-import GetAllConnectedVertices from './vertex/GetAllConnectedVertices.js';
+import GetNodeData from './node/GetNodeData.js';
+import IsNode from './node/IsNode.js';
+import AddNode from './node/AddNode.js';
+import AddNodes from './node/AddNodes.js';
+import RemoveNode from './node/RemoveNode.js';
+import RemoveAllNodes from './node/RemoveAllNodes.js';
+import GetAllNodes from './node/GetAllNodes.js';
+import GetNodesOfEdge from './node/GetNodesOfEdge.js';
+import GetOppositeNode from './node/GetOppositeNode.js';
+import GetAllConnectedNodes from './node/GetAllConnectedNodes.js';
 
-import GetNeighborVertices from './neighbors/GetNeighborVertices.js';
-import AreNeighborVertices from './neighbors/AreNeighborVertices.js';
+import GetNeighborNodes from './neighbors/GetNeighborNodes.js';
+import AreNeighborNodes from './neighbors/AreNeighborNodes.js';
 
 export default {
     getEdgeData: GetEdgeData,
@@ -27,21 +27,21 @@ export default {
     addEdge: AddEdge,
     removeEdge: RemoveEdge,
     getAllEdges: GetAllEdges,
-    getEdgesOfVertex: GetEdgesOfVertex,
+    getEdgesOfNode: GetEdgesOfNode,
     getEdgeLength: GetEdgeLength,
     isInLoop: IsInLoop,
 
-    getVertexData: GetVertexData,
-    isVertex: IsVertex,
-    addVertex: AddVertex,
-    addVertices: AddVertices,
-    removeVertex: RemoveVertex,
-    removeAllVertices: RemoveAllVertices,
-    getAllVertices: GetAllVertices,
-    getVerticesOfEdge: GetVerticesOfEdge,
-    getOppositeVertex: GetOppositeVertex,
-    getAllConnectedVertices: GetAllConnectedVertices,
+    getNodeData: GetNodeData,
+    isNode: IsNode,
+    addNode: AddNode,
+    addNodes: AddNodes,
+    removeNode: RemoveNode,
+    removeAllNodes: RemoveAllNodes,
+    getAllNodes: GetAllNodes,
+    getNodesOfEdge: GetNodesOfEdge,
+    getOppositeNode: GetOppositeNode,
+    getAllConnectedNodes: GetAllConnectedNodes,
 
-    getNeighborVertices: GetNeighborVertices,
-    areNeighborVertices: AreNeighborVertices,
+    getNeighborNodes: GetNeighborNodes,
+    areNeighborNodes: AreNeighborNodes,
 }

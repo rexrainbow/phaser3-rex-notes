@@ -27,9 +27,9 @@ var AddEdge = function (edgeGO, vAGO, vBGO, dir) {
     this.edgeCount++;
 
     // Configure vertice
-    this.addVertex(vAGO).addVertex(vBGO);
-    var vA = this.getVertexData(vAGO, true);
-    var vB = this.getVertexData(vBGO, true);
+    this.addNode(vAGO).addNode(vBGO);
+    var vA = this.getNodeData(vAGO, true);
+    var vB = this.getNodeData(vBGO, true);
     if (typeof (dir) === 'string') {
         dir = DIRMODE(dir);
     }

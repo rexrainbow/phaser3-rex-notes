@@ -1,7 +1,7 @@
 import GetGraphItem from '../../graphitem/GetGraphItem.js';
 
-var RemoveVertex = function (gameObejct, destroy, removeEdge) {
-    if (!this.isVertex(gameObejct)) {
+var RemoveNode = function (gameObejct, destroy, removeEdge) {
+    if (!this.isNode(gameObejct)) {
         return this;
     }
     
@@ -15,7 +15,7 @@ var RemoveVertex = function (gameObejct, destroy, removeEdge) {
     var uid = this.getObjUID(gameObejct);
     // Remove connected edges
     if (removeEdge) {
-        var vertex = this.getVertexData(uid);
+        var vertex = this.getNodeData(uid);
         for (var edgeUid in vertex) {
             this.removeEdge(edgeUid, destroy);
         }
@@ -32,4 +32,4 @@ var RemoveVertex = function (gameObejct, destroy, removeEdge) {
     return this;
 }
 
-export default RemoveVertex;
+export default RemoveNode;

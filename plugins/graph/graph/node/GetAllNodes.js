@@ -1,6 +1,6 @@
 import UidToObj from '../../graphitem/UidToObj.js';
 
-var GetAllVertices = function (out) {
+var GetAllNodes = function (out) {
     if (out === undefined) {
         out = [];
     }
@@ -15,4 +15,4 @@ var GetAllVertices = function (out) {
     return out;
 };
 
-export default GetAllVertices;
+export default GetAllNodes;

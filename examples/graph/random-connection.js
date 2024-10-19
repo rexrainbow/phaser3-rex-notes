@@ -28,7 +28,7 @@ class Demo extends Phaser.Scene {
         for (var i = 0; i < 50; i++) {
             var node = this.add.circle(0, 0, r, COLOR_DARK);
             nodes.push(node);
-            graph.addVertex(node);
+            graph.addNode(node);
         }
         // Random place nodes
         this.plugins.get('rexRandomPlace').randomPlace(nodes,
@@ -65,7 +65,7 @@ class Demo extends Phaser.Scene {
         // Wander to a random neighbor node
         var wander = function () {
             var curNode = this.getData('node');
-            var neighborNodes = graph.getNeighborVertices(curNode);
+            var neighborNodes = graph.getNeighborNodes(curNode);
             switch (neighborNodes.length) {
                 case 0: return;
                 case 1: break;
@@ -106,7 +106,7 @@ var GetUnconnectedNode = function (nodeA, candidates) {
         var nodeB = candidates[i];
         if (
             (nodeA === nodeB) ||
-            (graph.areNeighborVertices(nodeA, nodeB))
+            (graph.areNeighborNodes(nodeA, nodeB))
         ) {
             continue;
         }

@@ -1,5 +1,5 @@
 var IsInLoop = function (vertexGO) {
-    if (!this.isVertex(vertexGO)) {
+    if (!this.isNode(vertexGO)) {
         return false;
     }
 
@@ -18,7 +18,7 @@ var IsInLoop = function (vertexGO) {
         if (edgeUID !== null) {
             addedEdgesUid[edgeUID] = true;
         }
-        edges = this.getVertexData(curVUid);
+        edges = this.getNodeData(curVUid);
         for (edgeUID in edges) {
             if (addedEdgesUid.hasOwnProperty(edgeUID)) {
                 continue;
