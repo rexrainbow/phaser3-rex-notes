@@ -7,7 +7,7 @@ var AddNode = function (gameObejct) {
 
     this.getNodeData(gameObejct, true);
     GetGraphItem(gameObejct).setGraph(this);
-    this.vertexCount++;
+    this.nodeCount++;
     return this;
 };
 

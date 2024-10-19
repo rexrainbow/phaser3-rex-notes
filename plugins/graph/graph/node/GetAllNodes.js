@@ -6,7 +6,7 @@ var GetAllNodes = function (out) {
     }
 
     var vGO;
-    for (var vUid in this.vertices) {
+    for (var vUid in this.nodes) {
         vGO = UidToObj(vUid);
         if (vGO) {
             out.push(vGO);

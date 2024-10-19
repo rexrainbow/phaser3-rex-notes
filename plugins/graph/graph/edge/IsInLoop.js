@@ -1,9 +1,9 @@
-var IsInLoop = function (vertexGO) {
-    if (!this.isNode(vertexGO)) {
+var IsInLoop = function (nodeGO) {
+    if (!this.isNode(nodeGO)) {
         return false;
     }
 
-    var startVUid = this.getObjUID(vertexGO);
+    var startVUid = this.getObjUID(nodeGO);
     var queue = [[startVUid, null]];
     var node, curVUid, edgeUID, edges, nextVUid;
     var addedEdgesUid = {};

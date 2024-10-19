@@ -1,9 +1,9 @@
 import UidToObj from '../../graphitem/UidToObj.js';
 
-var GetOppositeNode = function (vertexGameObject, edgeGameObject) {
+var GetOppositeNode = function (nodeGameObject, edgeGameObject) {
     // uid or game object
-    var vertex = this.getNodeData(vertexGameObject);
-    if (!vertex) {
+    var node = this.getNodeData(nodeGameObject);
+    if (!node) {
         return undefined;
     }
 
@@ -12,7 +12,7 @@ var GetOppositeNode = function (vertexGameObject, edgeGameObject) {
         return undefined;
     }
 
-    return UidToObj(vertex[edgeUid]);
+    return UidToObj(node[edgeUid]);
 };
 
 export default GetOppositeNode;

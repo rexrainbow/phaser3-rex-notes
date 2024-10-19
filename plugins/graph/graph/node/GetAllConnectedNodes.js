@@ -1,6 +1,6 @@
 import UidToObj from '../../graphitem/UidToObj.js';
 
-var GetAllConnectedNodes = function (vertexGO, out, travelMode) {
+var GetAllConnectedNodes = function (nodeGO, out, travelMode) {
     if (out === undefined) {
         out = [];
     }
@@ -11,11 +11,11 @@ var GetAllConnectedNodes = function (vertexGO, out, travelMode) {
         travelMode = 0;
     }
 
-    if (!this.isNode(vertexGO)) {
+    if (!this.isNode(nodeGO)) {
         return out;
     }
 
-    var startVUid = this.getObjUID(vertexGO);
+    var startVUid = this.getObjUID(nodeGO);
     var isBFS = (travelMode === 0);
     var queue = [startVUid];
     var curVUid, edges, nextVUid;
@@ -29,7 +29,7 @@ var GetAllConnectedNodes = function (vertexGO, out, travelMode) {
 
         addedNodesUid[curVUid] = true;
         if (curVUid !== startVUid) {
-            out.push(UidToObj(curVUid)); // Add vertex into out
+            out.push(UidToObj(curVUid)); // Add node into out
         }
 
         // Add new neighbors into queue

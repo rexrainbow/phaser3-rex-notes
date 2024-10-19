@@ -1,17 +1,17 @@
 import UidToObj from '../../graphitem/UidToObj.js';
 
-var GetEdgesOfNode = function (vertexGameObject, out) {
+var GetEdgesOfNode = function (nodeGameObject, out) {
     if (out === undefined) {
         out = [];
     }
 
-    var vertex = this.getNodeData(vertexGameObject);
-    if (!vertex) {
+    var node = this.getNodeData(nodeGameObject);
+    if (!node) {
         return out;
     }
 
     var edgeGO;
-    for (var edgeUid in vertex) {
+    for (var edgeUid in node) {
         edgeGO = UidToObj(edgeUid);
         if (edgeGO) {
             out.push(edgeGO);

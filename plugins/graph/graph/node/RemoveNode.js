@@ -15,14 +15,14 @@ var RemoveNode = function (gameObejct, destroy, removeEdge) {
     var uid = this.getObjUID(gameObejct);
     // Remove connected edges
     if (removeEdge) {
-        var vertex = this.getNodeData(uid);
-        for (var edgeUid in vertex) {
+        var node = this.getNodeData(uid);
+        for (var edgeUid in node) {
             this.removeEdge(edgeUid, destroy);
         }
     }
-    // Remove vertex
-    delete this.vertices[uid];
-    this.vertexCount--;
+    // Remove node
+    delete this.nodes[uid];
+    this.nodeCount--;
     // Clear reference of graph
     GetGraphItem(gameObejct).setGraph(null);
     if (destroy && gameObejct.destroy) {

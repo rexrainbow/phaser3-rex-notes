@@ -8,7 +8,7 @@ const DIRMODE = {
     '<->': (DIRAtoB | DIRBtoA),
 };
 
-var AddEdge = function (edgeGO, vAGO, vBGO, dir) {
+var AddEdge = function (edgeGO, nodeAGO, nodeBGO, dir) {
     if (this.isEdge(edgeGO)) {
         return this;
     }
@@ -21,15 +21,15 @@ var AddEdge = function (edgeGO, vAGO, vBGO, dir) {
     var edgeUid = this.getObjUID(edgeGO);
     var edge = this.getEdgeData(edgeUid, true);
     edge.dir = dir;
-    edge.vA = this.getObjUID(vAGO);
-    edge.vB = this.getObjUID(vBGO);
+    edge.vA = this.getObjUID(nodeAGO);
+    edge.vB = this.getObjUID(nodeBGO);
     GetGraphItem(edgeGO).setGraph(this);
     this.edgeCount++;
 
     // Configure vertice
-    this.addNode(vAGO).addNode(vBGO);
-    var vA = this.getNodeData(vAGO, true);
-    var vB = this.getNodeData(vBGO, true);
+    this.addNode(nodeAGO).addNode(nodeBGO);
+    var vA = this.getNodeData(nodeAGO, true);
+    var vB = this.getNodeData(nodeBGO, true);
     if (typeof (dir) === 'string') {
         dir = DIRMODE(dir);
     }

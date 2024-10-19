@@ -6,13 +6,13 @@ var GetEdgeLength = function (gameObejct) {
     if (!edge) {
         return 0;
     }
-    var vAGO = UidToObj(edge.vA);
-    var vBGO = UidToObj(edge.vB);
-    if ((!vAGO) || (!vBGO)) {
+    var nodeAGO = UidToObj(edge.vA);
+    var nodeBGO = UidToObj(edge.vB);
+    if ((!nodeAGO) || (!nodeBGO)) {
         return 0;
     }
 
-    return DistanceBetween(vAGO.x, vAGO.y, vBGO.x, vBGO.y);
+    return DistanceBetween(nodeAGO.x, nodeAGO.y, nodeBGO.x, nodeBGO.y);
 };
 
 export default GetEdgeLength;

@@ -43,7 +43,7 @@ class GraphItemData extends ComponentBase {
         return this;
     }
 
-    get isVertex() {
+    get isNode() {
         return ((!!this.graph) && (this.type === 0));
     }
 
@@ -60,7 +60,7 @@ Object.assign(
 );
 
 const OBJTYPE = {
-    vertex: 0,
+    node: 0,
     edge: 1,
 }
 export default GraphItemData;

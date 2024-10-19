@@ -1,11 +1,11 @@
-var AreNeighborNodes = function (vertexGOA, vertexGOB) {
-    var vUidA = this.getObjUID(vertexGOA),
-        vUidB = this.getObjUID(vertexGOB);
+var AreNeighborNodes = function (nodeGOA, nodeGOB) {
+    var vUidA = this.getObjUID(nodeGOA),
+        vUidB = this.getObjUID(nodeGOB);
     if ((vUidA != null) && (vUidB != null)) {
-        var vertexA = this.getNodeData(vertexGOA);
+        var nodeA = this.getNodeData(nodeGOA);
         vUidB = parseInt(vUidB);
-        for (var edgeUid in vertexA) {
-            if (vertexA[edgeUid] === vUidB) {
+        for (var edgeUid in nodeA) {
+            if (nodeA[edgeUid] === vUidB) {
                 return true;
             }
         }

@@ -9,9 +9,9 @@ class Graph extends EE {
 
         this.isShutdown = false;
         this.scene = scene;
-        this.vertices = {}; // {vertex: {edge:vertexUidB, ...} }
-        this.edges = {}; // {edge: {vA:vertex, vB:vertex, dir:1,2,3} }
-        this.vertexCount = 0;
+        this.nodes = {}; // {node: {edge:nodeUidB, ...} }
+        this.edges = {}; // {edge: {vA:node, vB:node, dir:1,2,3} }
+        this.nodeCount = 0;
         this.edgeCount = 0;
 
         this.boot();
@@ -36,9 +36,9 @@ class Graph extends EE {
         super.shutdown();
 
         this.scene = undefined;
-        this.vertices = undefined;
+        this.nodes = undefined;
         this.edges = undefined;
-        this.vertexCount = 0;
+        this.nodeCount = 0;
         this.edgeCount = 0;
         this.isShutdown = true;
         return this;

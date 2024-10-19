@@ -5,10 +5,10 @@ var GetNodeData = function (gameObejct, createIfNotExisted) {
 
     // uid or game object
     var uid = this.getObjUID(gameObejct);
-    if (createIfNotExisted && !this.vertices.hasOwnProperty(uid)) {
-        this.vertices[uid] = {};
+    if (createIfNotExisted && !this.nodes.hasOwnProperty(uid)) {
+        this.nodes[uid] = {};
     }
-    return this.vertices[uid];
+    return this.nodes[uid];
 };
 
 export default GetNodeData;
