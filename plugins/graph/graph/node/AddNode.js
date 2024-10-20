@@ -1,4 +1,4 @@
-import GetGraphItem from '../../graphitem/GetGraphItem.js';
+import GetGraphItem from '../graphitem/GetGraphItem.js';
 
 var AddNode = function (gameObejct) {
     if (this.isNode(gameObejct)) {

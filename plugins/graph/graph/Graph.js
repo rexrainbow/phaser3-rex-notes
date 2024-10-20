@@ -1,6 +1,6 @@
 import EE from '../../utils/eventemitter/EventEmitter.js';
 import Methods from './Methods.js';
-import GetObjUID from '../graphitem/GetObjUID.js';
+import GetObjUID from './graphitem/GetObjUID.js';
 import GraphData from 'graphology';
 
 class Graph extends EE {

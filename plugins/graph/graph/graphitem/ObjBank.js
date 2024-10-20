@@ -1,4 +1,4 @@
-import Bank from '../../bank.js';
+import Bank from '../../../bank.js';
 
 var ObjBank = new Bank({
     uidKey: '$uid',

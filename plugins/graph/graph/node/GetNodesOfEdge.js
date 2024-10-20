@@ -1,4 +1,4 @@
-import UIDListToObjList from '../../graphitem/UIDListToObjList.js';
+import UIDListToObjList from '../graphitem/UIDListToObjList.js';
 
 var GetNodesOfEdge = function (edgeGameObject, out) {
     if (out === undefined) {

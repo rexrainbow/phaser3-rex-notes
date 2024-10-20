@@ -1,4 +1,4 @@
-import GetGraphItem from '../../graphitem/GetGraphItem.js';
+import GetGraphItem from '../graphitem/GetGraphItem.js';
 
 var RemoveNode = function (nodeGameObject, destroy) {
     if (!this.isNode(nodeGameObject)) {

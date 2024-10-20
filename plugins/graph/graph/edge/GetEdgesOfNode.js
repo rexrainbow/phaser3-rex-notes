@@ -1,4 +1,4 @@
-import UIDToObj from '../../graphitem/UIDToObj.js';
+import UIDToObj from '../graphitem/UIDToObj.js';
 
 var GetEdgesOfNode = function (nodeGameObject, out) {
     if (out === undefined) {

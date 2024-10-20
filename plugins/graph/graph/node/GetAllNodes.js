@@ -1,4 +1,4 @@
-import UIDToObj from '../../graphitem/UIDToObj.js';
+import UIDToObj from '../graphitem/UIDToObj.js';
 
 var GetAllNodes = function (out) {
     if (out === undefined) {

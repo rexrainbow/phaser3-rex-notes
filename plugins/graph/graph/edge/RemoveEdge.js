@@ -1,4 +1,4 @@
-import GetGraphItem from '../../graphitem/GetGraphItem.js';
+import GetGraphItem from '../graphitem/GetGraphItem.js';
 
 var RemoveEdge = function (edgeGameObject, destroy) {
     if (!this.isEdge(edgeGameObject)) {

@@ -1,4 +1,4 @@
-import GetGraphItem from '../../graphitem/GetGraphItem.js';
+import GetGraphItem from '../graphitem/GetGraphItem.js';
 
 const DIRAtoB = 1;
 const DIRBtoA = 2;

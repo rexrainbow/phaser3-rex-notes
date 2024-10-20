@@ -1,4 +1,4 @@
-import ComponentBase from '../../utils/componentbase/ComponentBase.js';
+import ComponentBase from '../../../utils/componentbase/ComponentBase.js';
 import ObjBank from './ObjBank.js';
 
 const uidKey = ObjBank.uidKey;
