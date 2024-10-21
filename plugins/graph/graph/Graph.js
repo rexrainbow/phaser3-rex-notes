@@ -58,10 +58,28 @@ class Graph extends EE {
     }
 
     remove(gameObject) {
-        if (this.isEdge(gameObject)) {
-            this.removeEdge(gameObject);
-        } else if (this.isNode(gameObject)) {
+        if (this.isNode(gameObject)) {
             this.removeNode(gameObject);
+        } else if (this.isEdge(gameObject)) {
+            this.removeEdge(gameObject);
+        }
+        return this;
+    }
+
+    setAttribute(gameObject, key, value) {
+        if (this.isNode(gameObject)) {
+            this.setNodeAttribute(gameObject, key, value);
+        } else if (this.isEdge(gameObject)) {
+            this.setEdgeAttribute(gameObject, key, value);
+        }
+        return this;
+    }
+
+    getAttribute(gameObject, key) {
+        if (this.isNode(gameObject)) {
+            this.getNodeAttribute(gameObject, key);
+        } else if (this.isEdge(gameObject)) {
+            this.getEdgeAttribute(gameObject, key);
         }
         return this;
     }

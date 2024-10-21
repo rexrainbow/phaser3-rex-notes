@@ -1,5 +1,6 @@
 import GetGraphItem from '../../graphitem/GetGraphItem.js';
 import GetObjUID from '../../graphitem/GetObjUID.js';
+import IsPlainObject from '../../../utils/object/IsPlainObject.js'
 
 const DIRAtoB = 1;
 const DIRBtoA = 2;
@@ -9,17 +10,20 @@ const DIRMODE = {
     '<->': (DIRAtoB | DIRBtoA),
 };
 
-var AddEdge = function (edgeGameObject, nodeAGameObject, nodeBGameObject, dir) {
+var AddEdge = function (edgeGameObject, nodeAGameObject, nodeBGameObject, dir, attributes) {
     if (this.isEdge(edgeGameObject)) {
         return this;
     }
 
-    if (typeof (dir) === 'string') {
-        dir = DIRMODE[dir];
+    if (IsPlainObject(dir)) {
+        attributes = dir;
+        dir == undefined;
     }
 
     if (dir === undefined) {
         dir = 3;
+    } else if (typeof (dir) === 'string') {
+        dir = DIRMODE[dir];
     }
 
     // Add node to graph
@@ -38,15 +42,15 @@ var AddEdge = function (edgeGameObject, nodeAGameObject, nodeBGameObject, dir) {
 
     switch (dir) {
         case DIRAtoB:
-            this.graph.addDirectedEdgeWithKey(edgeUID, nodeAUID, nodeBUID);
+            this.graph.addDirectedEdgeWithKey(edgeUID, nodeAUID, nodeBUID, attributes);
             break;
 
         case DIRBtoA:
-            this.graph.addDirectedEdgeWithKey(edgeUID, nodeBUID, nodeAUID);
+            this.graph.addDirectedEdgeWithKey(edgeUID, nodeBUID, nodeAUID, attributes);
             break;
 
         default:
-            this.graph.addUndirectedEdgeWithKey(edgeUID, nodeAUID, nodeBUID);
+            this.graph.addUndirectedEdgeWithKey(edgeUID, nodeAUID, nodeBUID, attributes);
             break;
     }
 

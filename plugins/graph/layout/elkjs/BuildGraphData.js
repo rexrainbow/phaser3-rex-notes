@@ -1,19 +1,21 @@
 import UIDToObj from '../../graphitem/UIDToObj.js';
+import GetBoundsConfig from '../../../utils/bounds/GetBoundsConfig.js';
 
 var BuildGraphData = function (graph, config) {
     var nodes = [];
     var nodeGameObjectMap = {};
-    graph.graph.forEachNode(function (uid) {
+    graph.graph.forEachNode(function (uid, attributes) {
         var nodeGameObject = UIDToObj(uid);
         if (!nodeGameObject) {
             return;
         }
 
+        var padding = GetBoundsConfig(attributes.padding);
+        var width = nodeGameObject.displayWidth + padding.left + padding.right;
+        var height = nodeGameObject.displayHeight + padding.top + padding.bottom;
         var nodeData = {
-            gameObject: nodeGameObject,
-            id: uid,
-            width: nodeGameObject.displayWidth,
-            height: nodeGameObject.displayHeight
+            gameObject: nodeGameObject, padding: padding,
+            id: uid, width: width, height: height
         };
         nodes.push(nodeData);
 

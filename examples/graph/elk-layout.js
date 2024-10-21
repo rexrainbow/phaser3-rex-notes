@@ -11,7 +11,7 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var nodeA = CreateNode(this);
+        var nodeA = CreateNode(this, 0xFFFF00);
         var nodeB = CreateNode(this);
         var nodeC = CreateNode(this);
         var nodeD = CreateNode(this);
@@ -21,7 +21,7 @@ class Demo extends Phaser.Scene {
         var edgeCD = CreateEdge(this);
 
         var graph = this.rexGraph.add.graph()
-            .addNodes([nodeA, nodeB, nodeC, nodeD])
+            .addNodes([nodeA, nodeB, nodeC, nodeD], { padding: 3 })
             .addEdge(edgeAB, nodeA, nodeB)
             .addEdge(edgeAC, nodeA, nodeC)
             .addEdge(edgeBD, nodeB, nodeD)
@@ -35,7 +35,11 @@ class Demo extends Phaser.Scene {
                 .setTo(0, 0, endPoint.x - startPoint.x, endPoint.y - startPoint.y)
         });
 
-        this.rexGraph.ELKLayout(graph)
+        this.rexGraph.ELKLayout(graph, {
+            layoutOptions: {
+                // 'elk.direction': 'DOWN'
+            }
+        })
             .once('layout.complete', function () {
                 console.log('layout.complete')
             })
@@ -46,8 +50,11 @@ class Demo extends Phaser.Scene {
     }
 }
 
-var CreateNode = function (scene) {
-    return scene.add.rectangle(0, 0, 100, 100).setStrokeStyle(3, 0x00ffff)
+var CreateNode = function (scene, color) {
+    if (color === undefined) {
+        color = 0x888888;
+    }
+    return scene.add.rectangle(0, 0, 100, 100).setStrokeStyle(3, color)
 }
 
 var CreateEdge = function (scene) {

@@ -5,7 +5,13 @@ const ALIGN_CENTER = Phaser.Display.Align.CENTER;
 
 var PlaceGameObjects = function (graph, graphData, config) {
     graphData.children.forEach(function (nodeData) {
-        AlignIn(nodeData.gameObject, nodeData.x, nodeData.y, nodeData.width, nodeData.height, ALIGN_CENTER);
+        var gameObject = nodeData.gameObject;
+        var padding = nodeData.padding;
+        var x = nodeData.x + padding.left;
+        var y = nodeData.y + padding.top;
+        var width = nodeData.width - padding.left - padding.right;
+        var height = nodeData.height - padding.top - padding.bottom;
+        AlignIn(gameObject, x, y, width, height, ALIGN_CENTER);
         graph.emit('layout.node', nodeData.gameObject);
     })
 
