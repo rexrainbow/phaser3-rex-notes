@@ -145,6 +145,7 @@ var panel = scene.rexUI.add.scrollablePanel({
 
         // input: 'drag',
         // position: 'right',
+        // gap: undefined,
 
         // hideUnscrollableSlider: false,
         // disableUnscrollableDrag: false,

@@ -156,6 +156,7 @@ var table = scene.rexUI.add.gridTable({
 
         // input: 'drag',
         // position: 'right',
+        // gap: undefined,
 
         // hideUnscrollableSlider: false,
         // disableUnscrollableDrag: false,

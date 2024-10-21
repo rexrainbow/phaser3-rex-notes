@@ -127,6 +127,7 @@ var textArea = scene.rexUI.add.textArea({
 
         // input: 'drag',
         // position: 'right',
+         // gap: undefined,
 
         // hideUnscrollableSlider: false,
         // disableUnscrollableDrag: false,
