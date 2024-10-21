@@ -1,12 +1,12 @@
 import GetObjUID from '../../graphitem/GetObjUID.js';
 
 var GetEdgeAttribute = function (gameObject, key) {
-    var nodeUID = GetObjUID(gameObject);
+    var edgeUID = GetObjUID(gameObject);
 
     if (key === undefined) {
-        return this.graph.getEdgeAttributes(nodeUID);
+        return this.graph.getEdgeAttributes(edgeUID);
     } else {
-        return this.graph.getEdgeAttribute(nodeUID, key);
+        return this.graph.getEdgeAttribute(edgeUID, key);
     }
 }
 
