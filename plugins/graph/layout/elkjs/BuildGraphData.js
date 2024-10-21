@@ -1,24 +1,44 @@
 import UIDToObj from '../../graphitem/UIDToObj.js';
-import { GetTopLeft } from '../../../utils/bounds/GetBounds.js';
 
 var BuildGraphData = function (graph, config) {
     var nodes = [];
+    var nodeGameObjectMap = {};
     graph.graph.forEachNode(function (uid) {
         var nodeGameObject = UIDToObj(uid);
         if (!nodeGameObject) {
             return;
         }
 
-        var nodeData = { id: uid, gameObject: nodeGameObject };
-        GetTopLeft(nodeGameObject, nodeData);
-        nodeData.width = nodeGameObject.displayWidth;
-        nodeData.height = nodeGameObject.displayHeight;
+        var nodeData = {
+            gameObject: nodeGameObject,
+            id: uid,
+            width: nodeGameObject.displayWidth,
+            height: nodeGameObject.displayHeight
+        };
         nodes.push(nodeData);
+
+        nodeGameObjectMap[uid] = nodeGameObject;
     })
 
     var edges = [];
     graph.graph.forEachEdge(function (uid, attributes, sourceUID, targetUID) {
-        edges.puth({ id: uid, source: sourceUID, target: targetUID });
+        var sourceGameObject = nodeGameObjectMap[sourceUID];
+        var targetGameObject = nodeGameObjectMap[targetUID];
+
+        if (!sourceGameObject || !targetGameObject) {
+            return;
+        }
+        var edgeGameObject = UIDToObj(uid);
+        if (!edgeGameObject) {
+            return;
+        }
+        var edgeData = {
+            gameObject: edgeGameObject,
+            sourceGameObject: sourceGameObject,
+            targetGameObject: targetGameObject,
+            id: uid, source: sourceUID, target: targetUID,
+        };
+        edges.push(edgeData);
     })
 
     return {

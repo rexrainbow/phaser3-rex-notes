@@ -1,6 +1,7 @@
 import ObjectFactory from './graph/ObjectFactory.js';
 
 import GraphFactory from './graph/graph/Factory.js';
+import ELKLayout from './graph/layout/elkjs/Layout.js';
 
 class GraphPlugin extends Phaser.Plugins.ScenePlugin {
     constructor(scene, pluginManager) {
@@ -17,6 +18,11 @@ class GraphPlugin extends Phaser.Plugins.ScenePlugin {
     destroy() {
         this.add.destroy();
         super.destroy();
+    }
+
+    ELKLayout(graph, config) {
+        ELKLayout(graph, config);
+        return graph
     }
 }
 
