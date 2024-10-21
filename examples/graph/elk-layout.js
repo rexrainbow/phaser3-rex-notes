@@ -1,15 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
 import GraphPlugin from '../../plugins/graph-plugin.js';
-import RandomPlacePlugin from '../../plugins/randomplace-plugin.js';
-import MoveToPlugin from '../../plugins/moveto-plugin.js';
-
-const COLOR_MAIN = 0x7986cb;
-const COLOR_LIGHT = 0xaab6fe;
-const COLOR_DARK = 0x49599a;
-
-const GetRandomItem = Phaser.Utils.Array.GetRandom;
-const DistanceBetween = Phaser.Math.Distance.Between;
-const RemoveItem = Phaser.Utils.Array.Remove;
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -75,18 +65,6 @@ var config = {
     },
     scene: Demo,
     plugins: {
-        global: [
-            {
-                key: 'rexRandomPlace',
-                plugin: RandomPlacePlugin,
-                start: true
-            },
-            {
-                key: 'rexMoveTo',
-                plugin: MoveToPlugin,
-                start: true
-            }
-        ],
         scene: [
             {
                 key: 'rexGraph',

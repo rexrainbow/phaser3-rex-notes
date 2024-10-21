@@ -20,6 +20,10 @@ class GraphPlugin extends Phaser.Plugins.ScenePlugin {
         super.destroy();
     }
 
+    async ELKLayoutPromise(graph, config) {
+        return ELKLayout(graph, config);
+    }
+
     ELKLayout(graph, config) {
         ELKLayout(graph, config);
         return graph
