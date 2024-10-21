@@ -1,9 +1,10 @@
+import UIDToObj from '../../graphitem/UIDToObj.js';
 import { GetTopLeft } from '../../../utils/bounds/GetBounds.js';
 
 var BuildGraphData = function (graph, config) {
     var nodes = [];
     graph.graph.forEachNode(function (uid) {
-        var nodeGameObject = graph.getObj(uid);
+        var nodeGameObject = UIDToObj(uid);
         if (!nodeGameObject) {
             return;
         }

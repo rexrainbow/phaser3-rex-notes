@@ -1,4 +1,5 @@
-import GetGraphItem from '../graphitem/GetGraphItem.js';
+import GetGraphItem from '../../graphitem/GetGraphItem.js';
+import GetObjUID from '../../graphitem/GetObjUID.js';
 
 var RemoveEdge = function (edgeGameObject, destroy) {
     if (!this.isEdge(edgeGameObject)) {
@@ -10,7 +11,7 @@ var RemoveEdge = function (edgeGameObject, destroy) {
     }
 
     // Remove node
-    var edgeUID = this.getObjUID(edgeGameObject);
+    var edgeUID = GetObjUID(edgeGameObject);
     this.graph.dropEdge(edgeUID);
 
     // Clear reference of graph

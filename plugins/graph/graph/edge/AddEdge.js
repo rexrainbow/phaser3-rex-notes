@@ -1,4 +1,5 @@
-import GetGraphItem from '../graphitem/GetGraphItem.js';
+import GetGraphItem from '../../graphitem/GetGraphItem.js';
+import GetObjUID from '../../graphitem/GetObjUID.js';
 
 const DIRAtoB = 1;
 const DIRBtoA = 2;
@@ -27,9 +28,9 @@ var AddEdge = function (edgeGameObject, nodeAGameObject, nodeBGameObject, dir) {
     // Add edge
     GetGraphItem(edgeGameObject).setGraph(this);
 
-    var edgeUID = this.getObjUID(edgeGameObject);
-    var nodeAUID = this.getObjUID(nodeAGameObject);
-    var nodeBUID = this.getObjUID(nodeBGameObject);
+    var edgeUID = GetObjUID(edgeGameObject);
+    var nodeAUID = GetObjUID(nodeAGameObject);
+    var nodeBUID = GetObjUID(nodeBGameObject);
 
     if (!edgeUID || !nodeAUID || !nodeBUID) {
         return this;

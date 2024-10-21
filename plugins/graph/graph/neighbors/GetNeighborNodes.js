@@ -1,10 +1,11 @@
-import UIDToObj from '../graphitem/UIDToObj.js';
+import UIDToObj from '../../graphitem/UIDToObj.js';
+import GetObjUID from '../../graphitem/GetObjUID.js';
 
 var GetNeighborNodes = function (nodeGameObject, out) {
     if (out === undefined) {
         out = [];
     }
-    var nodeUID = this.getObjUID(nodeGameObject);
+    var nodeUID = GetObjUID(nodeGameObject);
     if (!nodeUID) {
         return out;
     }

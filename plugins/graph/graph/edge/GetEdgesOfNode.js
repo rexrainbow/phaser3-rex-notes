@@ -1,11 +1,12 @@
-import UIDToObj from '../graphitem/UIDToObj.js';
+import UIDToObj from '../../graphitem/UIDToObj.js';
+import GetObjUID from '../../graphitem/GetObjUID.js';
 
 var GetEdgesOfNode = function (nodeGameObject, out) {
     if (out === undefined) {
         out = [];
     }
 
-    var nodeUID = this.getObjUID(nodeGameObject);
+    var nodeUID = GetObjUID(nodeGameObject);
     this.graph.forEachEdge(nodeUID, function (edgeUID) {
         var edgeGameObject = UIDToObj(edgeUID);
         if (!edgeGameObject) {

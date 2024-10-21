@@ -1,4 +1,5 @@
-import GetGraphItem from '../graphitem/GetGraphItem.js';
+import GetGraphItem from '../../graphitem/GetGraphItem.js';
+import GetObjUID from '../../graphitem/GetObjUID.js';
 
 var AddNode = function (gameObejct) {
     if (this.isNode(gameObejct)) {
@@ -7,7 +8,7 @@ var AddNode = function (gameObejct) {
 
     GetGraphItem(gameObejct).setGraph(this);
 
-    var nodeUID = this.getObjUID(gameObejct);
+    var nodeUID = GetObjUID(gameObejct);
     this.graph.addNode(nodeUID);
 
     return this;

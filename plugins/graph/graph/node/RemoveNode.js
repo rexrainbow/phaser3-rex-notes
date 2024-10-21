@@ -1,4 +1,5 @@
-import GetGraphItem from '../graphitem/GetGraphItem.js';
+import GetGraphItem from '../../graphitem/GetGraphItem.js';
+import GetObjUID from '../../graphitem/GetObjUID.js';
 
 var RemoveNode = function (nodeGameObject, destroy) {
     if (!this.isNode(nodeGameObject)) {
@@ -10,7 +11,7 @@ var RemoveNode = function (nodeGameObject, destroy) {
     }
 
     // Remove node
-    var nodeUID = this.getObjUID(nodeGameObject);
+    var nodeUID = GetGraphItem(nodeGameObject);
     this.graph.dropNode(nodeUID);
 
     // Clear reference of graph

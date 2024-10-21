@@ -1,5 +1,5 @@
-import UIDToObj from '../graphitem/UIDToObj.js';
-import GetGraphItem from '../graphitem/GetGraphItem.js';
+import UIDToObj from '../../graphitem/UIDToObj.js';
+import GetGraphItem from '../../graphitem/GetGraphItem.js';
 
 var RemoveAllNodes = function (destroy) {
     for (var nodeUid in this.nodes) {

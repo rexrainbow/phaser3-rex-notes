@@ -1,6 +1,8 @@
+import GetObjUID from '../../graphitem/GetObjUID.js';
+
 var AreNeighborNodes = function (nodeGameObjectA, nodeGameObjectB) {
-    var nodeUIDA = this.getObjUID(nodeGameObjectA),
-        nodeUIDB = this.getObjUID(nodeGameObjectB);
+    var nodeUIDA = GetObjUID(nodeGameObjectA),
+        nodeUIDB = GetObjUID(nodeGameObjectB);
     if (!nodeUIDA || !nodeUIDB) {
         return false;
     }

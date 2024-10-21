@@ -1,8 +1,5 @@
 import EE from '../../utils/eventemitter/EventEmitter.js';
 import Methods from './Methods.js';
-import GetObjUID from './graphitem/GetObjUID.js';
-import UIDToObj from './graphitem/UIDToObj.js';
-import UIDListToObjList from './graphitem/UIDListToObjList.js';
 import GraphData from 'graphology';
 
 class Graph extends EE {
@@ -75,18 +72,6 @@ class Graph extends EE {
         }
         this.removeAllNodes(destroy);
         return this;
-    }
-
-    getObjUID(gameObject) {
-        return GetObjUID(gameObject);
-    }
-
-    getObj(uid, out) {
-        if (Array.isArray(uid)) {
-            return UIDListToObjList(uid, out);
-        } else {
-            return UIDToObj(uid);
-        }
     }
 }
 

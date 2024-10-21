@@ -1,6 +1,8 @@
+import GetObjUID from '../../graphitem/GetObjUID.js';
+
 var IsNode = function (gameObejct) {
     // uid or game object
-    var uid = this.getObjUID(gameObejct);
+    var uid = GetObjUID(gameObejct);
     return this.graph.hasNode(uid);
 }
 
