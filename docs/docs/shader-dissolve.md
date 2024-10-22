@@ -10,7 +10,8 @@ Dissolve transition post processing filter. ([Reference](https://github.com/ykob
 
 ## Live demos
 
-- [Dissolve](https://codepen.io/rexrainbow/pen/BaQWqyX)
+- [Game object effect](https://codepen.io/rexrainbow/pen/BaQWqyX)
+- [Camera effect](https://codepen.io/rexrainbow/pen/ExqwxYz)
 
 ## Usage
 
