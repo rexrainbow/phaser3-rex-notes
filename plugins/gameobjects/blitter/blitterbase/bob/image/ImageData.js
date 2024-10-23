@@ -9,6 +9,7 @@ class ImageData extends RenderBase {
     constructor(parent, frame) {
         super(parent, ImageTypeName);
 
+        this._crop = ResetCropObject();
         this.setFrame(frame);
     }
 
@@ -31,8 +32,15 @@ class ImageData extends RenderBase {
             frame = this.parent.texture.get(frame);
         }
         this.frame = frame;
-        this._width = (frame) ? frame.width : 0;
-        this._height = (frame) ? frame.height : 0;
+
+        if (frame) {
+            this._width = frame.realWidth;
+            this._height = frame.realHeight;
+        } else {
+            this._width = 0;
+            this._height = 0;
+        }
+
         return this;
     }
 
@@ -106,13 +114,35 @@ class ImageData extends RenderBase {
         this._tintFill = value;
     }
 
+    setCrop(x, y, width, height) {
+        if (x === undefined) {
+            this.isCropped = false;
+            return this;
+        }
+
+        if (!this.frame) {
+            return this;
+        }
+
+        if ((x === 0) && (y === 0) && (width === this._width) && (height === this._height)) {
+            this.isCropped = false;
+            return this;
+        }
+
+        this.frame.setCropUVs(this._crop, x, y, width, height, this.flipX, this.flipY);
+        this.isCropped = true;
+
+        return this;
+    }
+
     reset() {
         super.reset();
 
         this
             .resetFlip()
             .resetTint()
-            .setFrame();
+            .setFrame()
+            .setCrop();
 
         return this;
     }
@@ -157,6 +187,17 @@ class ImageData extends RenderBase {
         return this;
     }
 
+}
+
+var ResetCropObject = function (out) {
+    if (out === undefined) {
+        out = {};
+    }
+    out.u0 = 0; out.v0 = 0; out.u1 = 0; out.v1 = 0;
+    out.x = 0; out.y = 0; out.width = 0; out.height = 0;
+    out.flipX = false; out.flipY = false;
+    out.cx = 0; out.cy = 0; out.cw = 0, out.ch = 0;
+    return out;
 }
 
 var methods = {
