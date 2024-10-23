@@ -1425,12 +1425,51 @@
     var FrameMatrix = new TransformMatrix();
 
     var WebglRender = function (pipeline, calcMatrix, alpha, dx, dy, texture, textureUnit, roundPixels) {
+        var frame = this.frame;
+        if (!frame) {
+            return;
+        }
+
         var width = this._width,
             height = this._height;
         var displayOriginX = width * this.originX,
             displayOriginY = height * this.originY;
         var x = this.x - dx,
             y = this.y - dy;
+
+        var u0, v0, u1, v1;
+        var frameX, frameY;
+        var frameWidth, frameHeight;
+        if (this.isCropped) {
+            var crop = this._crop;
+
+            if (crop.flipX !== this.flipX || crop.flipY !== this.flipY) {
+                frame.updateCropUVs(crop, this.flipX, this.flipY);
+            }
+
+            u0 = crop.u0;
+            v0 = crop.v0;
+            u1 = crop.u1;
+            v1 = crop.v1;
+
+            frameWidth = crop.width;
+            frameHeight = crop.height;
+
+            frameX = crop.x;
+            frameY = crop.y;
+
+        } else {
+            u0 = this.frame.u0;
+            v0 = this.frame.v0;
+            u1 = this.frame.u1;
+            v1 = this.frame.v1;
+
+            frameWidth = width;
+            frameHeight = height;
+
+            frameX = 0;
+            frameY = 0;
+        }
 
         var flipX = 1;
         var flipY = 1;
@@ -1447,17 +1486,12 @@
         FrameMatrix.applyITRS(x, y, this.rotation, this.scaleX * flipX, this.scaleY * flipY);
         calcMatrix.multiply(FrameMatrix, FrameMatrix);
 
-        var tx = -displayOriginX;
-        var ty = -displayOriginY;
-        var tw = tx + width;
-        var th = ty + height;
+        var tx = -displayOriginX + frameX;
+        var ty = -displayOriginY + frameY;
+        var tw = tx + frameWidth;
+        var th = ty + frameHeight;
 
         var quad = FrameMatrix.setQuad(tx, ty, tw, th, roundPixels);
-
-        var u0 = this.frame.u0;
-        var v0 = this.frame.v0;
-        var u1 = this.frame.u1;
-        var v1 = this.frame.v1;
 
         var tint = GetTint(this.tint, this.alpha * alpha);
 
@@ -1524,6 +1558,7 @@
         constructor(parent, frame) {
             super(parent, ImageTypeName);
 
+            this._crop = ResetCropObject();
             this.setFrame(frame);
         }
 
@@ -1546,8 +1581,15 @@
                 frame = this.parent.texture.get(frame);
             }
             this.frame = frame;
-            this._width = (frame) ? frame.width : 0;
-            this._height = (frame) ? frame.height : 0;
+
+            if (frame) {
+                this._width = frame.realWidth;
+                this._height = frame.realHeight;
+            } else {
+                this._width = 0;
+                this._height = 0;
+            }
+
             return this;
         }
 
@@ -1621,13 +1663,35 @@
             this._tintFill = value;
         }
 
+        setCrop(x, y, width, height) {
+            if (x === undefined) {
+                this.isCropped = false;
+                return this;
+            }
+
+            if (!this.frame) {
+                return this;
+            }
+
+            if ((x === 0) && (y === 0) && (width === this._width) && (height === this._height)) {
+                this.isCropped = false;
+                return this;
+            }
+
+            this.frame.setCropUVs(this._crop, x, y, width, height, this.flipX, this.flipY);
+            this.isCropped = true;
+
+            return this;
+        }
+
         reset() {
             super.reset();
 
             this
                 .resetFlip()
                 .resetTint()
-                .setFrame();
+                .setFrame()
+                .setCrop();
 
             return this;
         }
@@ -1674,6 +1738,17 @@
 
     }
 
+    var ResetCropObject = function (out) {
+        if (out === undefined) {
+            out = {};
+        }
+        out.u0 = 0; out.v0 = 0; out.u1 = 0; out.v1 = 0;
+        out.x = 0; out.y = 0; out.width = 0; out.height = 0;
+        out.flipX = false; out.flipY = false;
+        out.cx = 0; out.cy = 0; out.cw = 0, out.ch = 0;
+        return out;
+    };
+
     var methods = {
         webglRender: WebglRender,
         canvasRender: CanvasRender,
@@ -1718,18 +1793,27 @@
         var frameObj = this.texture.get(frame);
         var frameWidth = frameObj.width,
             frameHeight = frameObj.height;
-        var colCount = Math.floor(width / frameWidth),
-            rowCount = Math.floor(height / frameHeight);
-        // Align images at center
-        x += (width - (colCount * frameWidth)) / 2;
-        y += (height - (rowCount * frameHeight)) / 2;
+        var cropLastWidth = width % frameWidth,
+            cropLastHeight = height % frameHeight;
+        var cropLastCol = (cropLastWidth !== 0),
+            cropLastRow = (cropLastHeight !== 0);
+        var colCount = Math.ceil(width / frameWidth),
+            rowCount = Math.ceil(height / frameHeight);
+        var lastColCount = colCount - 1,
+            lastRowCount = rowCount - 1;
         for (var colIndex = 0; colIndex < colCount; colIndex++) {
             for (var rowIndex = 0; rowIndex < rowCount; rowIndex++) {
-                AddImage(this, {
+                let bob = AddImage(this, {
                     frame: frame,
                     x: x + (colIndex * frameWidth),
                     y: y + (rowIndex * frameHeight),
                 });
+
+                var cropWidth = (cropLastCol && (colIndex === lastColCount)) ? cropLastWidth : frameWidth;
+                var cropHeight = (cropLastRow && (rowIndex === lastRowCount)) ? cropLastHeight : frameHeight;
+                if ((cropWidth !== frameWidth) || (cropHeight !== frameHeight)) {
+                    bob.setCrop(0, 0, cropWidth, cropHeight);
+                }
             }
         }
 
