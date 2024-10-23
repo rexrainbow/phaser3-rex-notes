@@ -1508,6 +1508,10 @@
     };
 
     var CanvasRender = function (ctx, dx, dy, roundPixels) {
+        var frame = this.frame;
+        if (!frame) {
+            return;
+        }
 
         ctx.save();
 
@@ -1517,6 +1521,28 @@
             displayOriginY = height * this.originY;
         var x = this.x - displayOriginX,
             y = this.y - displayOriginY;
+
+        var frameX, frameY;
+        var frameWidth, frameHeight;
+        if (this.isCropped) {
+            var crop = this._crop;
+
+            if (crop.flipX !== this.flipX || crop.flipY !== this.flipY) {
+                frame.updateCropUVs(crop, this.flipX, this.flipY);
+            }
+
+            frameWidth = crop.cw;
+            frameHeight = crop.ch;
+
+            frameX = crop.cx;
+            frameY = crop.cy;
+        } else {
+            frameWidth = frame.cutWidth;
+            frameHeight = frame.cutHeight;
+
+            frameX = frame.cutX;
+            frameY = frame.cutY;
+        }
 
         var flipX = 1;
         var flipY = 1;
@@ -1530,9 +1556,16 @@
             flipY = -1;
         }
 
+        var res = frame.source.resolution;
+        var fw = frameWidth / res;
+        var fh = frameHeight / res;
+
         if (roundPixels) {
-            x = Math.round(x);
-            y = Math.round(y);
+            x = Math.floor(x + 0.5);
+            y = Math.floor(y + 0.5);
+
+            fw += 0.5;
+            fh += 0.5;
         }
 
         ctx.translate(x, y);
@@ -1541,11 +1574,10 @@
 
         ctx.scale(this.scaleX * flipX, this.scaleY * flipY);
 
-        var frame = this.frame;
         ctx.drawImage(
             frame.source.image,
-            frame.cutX, frame.cutY, width, height,
-            0, 0, width, height,
+            frameX, frameY, frameWidth, frameHeight,
+            0, 0, fw, fh,
         );
 
         ctx.restore();
@@ -1791,16 +1823,25 @@
 
     var DrawTileSprite = function (key, frame, x, y, width, height) {
         var frameObj = this.texture.get(frame);
+
         var frameWidth = frameObj.width,
             frameHeight = frameObj.height;
-        var cropLastWidth = width % frameWidth,
-            cropLastHeight = height % frameHeight;
-        var cropLastCol = (cropLastWidth !== 0),
-            cropLastRow = (cropLastHeight !== 0);
+
+        var lastFrameWidth = width % frameWidth,
+            lastFrameHeight = height % frameHeight;
+
+        if (lastFrameWidth === 0) {
+            lastFrameWidth = frameWidth;
+        }
+        if (lastFrameHeight === 0) {
+            lastFrameHeight = frameHeight;
+        }
+
         var colCount = Math.ceil(width / frameWidth),
             rowCount = Math.ceil(height / frameHeight);
         var lastColCount = colCount - 1,
             lastRowCount = rowCount - 1;
+
         for (var colIndex = 0; colIndex < colCount; colIndex++) {
             for (var rowIndex = 0; rowIndex < rowCount; rowIndex++) {
                 let bob = AddImage(this, {
@@ -1809,8 +1850,8 @@
                     y: y + (rowIndex * frameHeight),
                 });
 
-                var cropWidth = (cropLastCol && (colIndex === lastColCount)) ? cropLastWidth : frameWidth;
-                var cropHeight = (cropLastRow && (rowIndex === lastRowCount)) ? cropLastHeight : frameHeight;
+                var cropWidth = (colIndex === lastColCount) ? lastFrameWidth : frameWidth;
+                var cropHeight = (rowIndex === lastRowCount) ? lastFrameHeight : frameHeight;
                 if ((cropWidth !== frameWidth) || (cropHeight !== frameHeight)) {
                     bob.setCrop(0, 0, cropWidth, cropHeight);
                 }

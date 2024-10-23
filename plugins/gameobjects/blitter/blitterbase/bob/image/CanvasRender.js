@@ -1,4 +1,8 @@
 var CanvasRender = function (ctx, dx, dy, roundPixels) {
+    var frame = this.frame;
+    if (!frame) {
+        return;
+    }
 
     ctx.save();
 
@@ -8,6 +12,28 @@ var CanvasRender = function (ctx, dx, dy, roundPixels) {
         displayOriginY = height * this.originY;
     var x = this.x - displayOriginX,
         y = this.y - displayOriginY;
+
+    var frameX, frameY;
+    var frameWidth, frameHeight;
+    if (this.isCropped) {
+        var crop = this._crop;
+
+        if (crop.flipX !== this.flipX || crop.flipY !== this.flipY) {
+            frame.updateCropUVs(crop, this.flipX, this.flipY);
+        }
+
+        frameWidth = crop.cw;
+        frameHeight = crop.ch;
+
+        frameX = crop.cx;
+        frameY = crop.cy;
+    } else {
+        frameWidth = frame.cutWidth;
+        frameHeight = frame.cutHeight;
+
+        frameX = frame.cutX;
+        frameY = frame.cutY;
+    }
 
     var flipX = 1;
     var flipY = 1;
@@ -21,9 +47,16 @@ var CanvasRender = function (ctx, dx, dy, roundPixels) {
         flipY = -1;
     }
 
+    var res = frame.source.resolution;
+    var fw = frameWidth / res;
+    var fh = frameHeight / res;
+
     if (roundPixels) {
-        x = Math.round(x);
-        y = Math.round(y);
+        x = Math.floor(x + 0.5);
+        y = Math.floor(y + 0.5);
+
+        fw += 0.5;
+        fh += 0.5;
     }
 
     ctx.translate(x, y);
@@ -32,11 +65,10 @@ var CanvasRender = function (ctx, dx, dy, roundPixels) {
 
     ctx.scale(this.scaleX * flipX, this.scaleY * flipY);
 
-    var frame = this.frame;
     ctx.drawImage(
         frame.source.image,
-        frame.cutX, frame.cutY, width, height,
-        0, 0, width, height,
+        frameX, frameY, frameWidth, frameHeight,
+        0, 0, fw, fh,
     );
 
     ctx.restore();
