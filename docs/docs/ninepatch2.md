@@ -8,6 +8,7 @@ Stretchable image. Has better performance than [nine-patch](ninepatch.md).
 ## Live demos
 
 - [3x3](https://codepen.io/rexrainbow/pen/RwxZbpM)
+- [Any size](https://codepen.io/rexrainbow/pen/dyxVeOZ)
 - [Performance test](https://codepen.io/rexrainbow/pen/eYyEOWp)
 
 ## Usage
