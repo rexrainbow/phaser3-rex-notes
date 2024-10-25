@@ -183,6 +183,13 @@ class ScrollBar extends Sizer {
         }
         return this;
     }
+
+    setGap(gap, min, max) {
+        if (this.childrenMap.slider) {
+            this.childrenMap.slider.setGap(gap, min, max);
+        }
+        return this;
+    }
 }
 
 export default ScrollBar;

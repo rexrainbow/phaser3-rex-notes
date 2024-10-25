@@ -18,6 +18,7 @@ declare namespace Scrollable {
         input?: SliderInputTypes,
         position?: SliderPositionTypes,
         gap?: number,
+        gapLength?: number,
 
         hideUnscrollableSlider?: boolean,
         disableUnscrollableDrag?: boolean,

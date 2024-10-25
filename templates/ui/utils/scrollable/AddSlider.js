@@ -30,6 +30,8 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
         sliderConfig.orientation = (isAxisY) ? 1 : 0;
         slider = CreateScrollbar(topPatent.scene, sliderConfig);
 
+        slider.gapLength = GetValue(sliderConfig, 'gapLength', undefined);
+
         var column, row, padding;
 
         var sliderPosition = GetValue(sliderConfig, 'position', 0);

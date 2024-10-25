@@ -59,13 +59,18 @@ var SetControllerBounds = function (axis) {
             slider = this.childrenMap[`slider${axis}`];
     }
 
+    var scale = (axis === 'Y') ? this.scaleY : this.scaleX;
+    bound1 *= scale;
+
     if (scroller) {
-        // Scale will force to 1 during layout, get saved scale value back
-        var scale = (axis === 'Y') ? this.scaleY : this.scaleX;
-        scroller.setBounds(bound0, bound1 * scale);
+        scroller.setBounds(bound0, bound1);
     }
     if (slider) {
         slider.setEnable(bound0 !== bound1);
+
+        if (slider.gapLength) {
+            slider.setGap(slider.gapLength, bound0, bound1);
+        }
     }
 }
 
