@@ -17,11 +17,12 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
+        var lineHeight = 75
         var textArea = this.rexUI.add.textArea({
             x: 400,
             y: 300,
             width: 220,
-            height: 260,
+            height: lineHeight*6,
 
             background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 0, COLOR_MAIN),
 
@@ -32,7 +33,7 @@ class Demo extends Phaser.Scene {
                 track: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_DARK),
                 thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 13, COLOR_LIGHT),
 
-                gapLength: 75
+                gapLength: lineHeight
             },
 
             content: CreateContent(1000),
