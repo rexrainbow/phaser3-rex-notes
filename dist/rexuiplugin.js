@@ -54254,7 +54254,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             sliderConfig.orientation = (isAxisY) ? 1 : 0;
             slider = CreateScrollbar(topPatent.scene, sliderConfig);
 
-            slider.gapLength = GetValue$1F(sliderConfig, 'gapLength', undefined);
+            slider.tickLength = GetValue$1F(sliderConfig, 'tickLength', undefined);
 
             var column, row, padding;
 
@@ -54592,8 +54592,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         if (slider) {
             slider.setEnable(bound0 !== bound1);
 
-            if (slider.gapLength) {
-                slider.setGap(slider.gapLength, bound0, bound1);
+            if (slider.tickLength) {
+                slider.setTick(slider.tickLength, bound0, bound1);
             }
         }
     };

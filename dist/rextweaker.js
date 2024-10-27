@@ -32168,7 +32168,7 @@
             sliderConfig.orientation = (isAxisY) ? 1 : 0;
             slider = CreateScrollbar(topPatent.scene, sliderConfig);
 
-            slider.gapLength = GetValue$Z(sliderConfig, 'gapLength', undefined);
+            slider.tickLength = GetValue$Z(sliderConfig, 'tickLength', undefined);
 
             var column, row, padding;
 
@@ -32506,8 +32506,8 @@
         if (slider) {
             slider.setEnable(bound0 !== bound1);
 
-            if (slider.gapLength) {
-                slider.setGap(slider.gapLength, bound0, bound1);
+            if (slider.tickLength) {
+                slider.setTick(slider.tickLength, bound0, bound1);
             }
         }
     };
