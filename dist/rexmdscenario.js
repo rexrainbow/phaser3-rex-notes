@@ -56414,7 +56414,13 @@ void main () {
 	        this.addChildrenMap('thumb', thumb);
 
 	        this.setEnable(GetValue$B(config, 'enable', undefined));
-	        this.setGap(GetValue$B(config, 'gap', undefined));
+
+	        var gap = GetValue$B(config, 'tick', undefined);
+	        if (gap === undefined) {
+	            gap = GetValue$B(config, 'gap', undefined);
+	        }
+	        this.setGap(gap);
+
 	        this.setValue(GetValue$B(config, 'value', 0), GetValue$B(config, 'min', undefined), GetValue$B(config, 'max', undefined));
 
 	    }
@@ -56434,6 +56440,19 @@ void main () {
 
 	        this.gap = gap;
 	        return this;
+	    }
+
+	    setTick(tick, min, max) {
+	        this.setGap(tick, min, max);
+	        return this;
+	    }
+
+	    get tick() {
+	        return this.gap;
+	    }
+
+	    set tick(value) {
+	        this.gap = value;
 	    }
 
 	    setThumbOffset(x, y) {
@@ -56670,6 +56689,45 @@ void main () {
 	        }
 	        return this;
 	    }
+
+	    setGap(gap, min, max) {
+	        if (this.childrenMap.slider) {
+	            this.childrenMap.slider.setGap(gap, min, max);
+	        }
+	        return this;
+	    }
+
+	    get gap() {
+	        if (this.childrenMap.slider) {
+	            return this.childrenMap.slider.gap;
+	        }
+	        return undefined;
+	    }
+
+	    set gap(value) {
+	        if (this.childrenMap.slider) {
+	            this.childrenMap.slider.gap = value;
+	        }
+	    }
+
+	    setTick(tick, min, max) {
+	        this.setGap(tick, min, max);
+	        return this;
+	    }
+
+	    get tick() {
+	        if (this.childrenMap.slider) {
+	            return this.childrenMap.slider.tick;
+	        }
+	        return undefined;
+	    }
+
+	    set tick(value) {
+	        if (this.childrenMap.slider) {
+	            this.childrenMap.slider.tick = value;
+	        }
+	    }
+
 	}
 
 	var CreateScrollbar = function (scene, config) {
@@ -57696,6 +57754,8 @@ void main () {
 	        sliderConfig.orientation = (isAxisY) ? 1 : 0;
 	        slider = CreateScrollbar(topPatent.scene, sliderConfig);
 
+	        slider.gapLength = GetValue$v(sliderConfig, 'gapLength', undefined);
+
 	        var column, row, padding;
 
 	        var sliderPosition = GetValue$v(sliderConfig, 'position', 0);
@@ -58023,13 +58083,18 @@ void main () {
 	            slider = this.childrenMap[`slider${axis}`];
 	    }
 
+	    var scale = (axis === 'Y') ? this.scaleY : this.scaleX;
+	    bound1 *= scale;
+
 	    if (scroller) {
-	        // Scale will force to 1 during layout, get saved scale value back
-	        var scale = (axis === 'Y') ? this.scaleY : this.scaleX;
-	        scroller.setBounds(bound0, bound1 * scale);
+	        scroller.setBounds(bound0, bound1);
 	    }
 	    if (slider) {
 	        slider.setEnable(bound0 !== bound1);
+
+	        if (slider.gapLength) {
+	            slider.setGap(slider.gapLength, bound0, bound1);
+	        }
 	    }
 	};
 

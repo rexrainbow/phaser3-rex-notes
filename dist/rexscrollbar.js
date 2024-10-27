@@ -19071,7 +19071,13 @@
             this.addChildrenMap('thumb', thumb);
 
             this.setEnable(GetValue$1(config, 'enable', undefined));
-            this.setGap(GetValue$1(config, 'gap', undefined));
+
+            var gap = GetValue$1(config, 'tick', undefined);
+            if (gap === undefined) {
+                gap = GetValue$1(config, 'gap', undefined);
+            }
+            this.setGap(gap);
+
             this.setValue(GetValue$1(config, 'value', 0), GetValue$1(config, 'min', undefined), GetValue$1(config, 'max', undefined));
 
         }
@@ -19091,6 +19097,19 @@
 
             this.gap = gap;
             return this;
+        }
+
+        setTick(tick, min, max) {
+            this.setGap(tick, min, max);
+            return this;
+        }
+
+        get tick() {
+            return this.gap;
+        }
+
+        set tick(value) {
+            this.gap = value;
         }
 
         setThumbOffset(x, y) {
@@ -19327,6 +19346,45 @@
             }
             return this;
         }
+
+        setGap(gap, min, max) {
+            if (this.childrenMap.slider) {
+                this.childrenMap.slider.setGap(gap, min, max);
+            }
+            return this;
+        }
+
+        get gap() {
+            if (this.childrenMap.slider) {
+                return this.childrenMap.slider.gap;
+            }
+            return undefined;
+        }
+
+        set gap(value) {
+            if (this.childrenMap.slider) {
+                this.childrenMap.slider.gap = value;
+            }
+        }
+
+        setTick(tick, min, max) {
+            this.setGap(tick, min, max);
+            return this;
+        }
+
+        get tick() {
+            if (this.childrenMap.slider) {
+                return this.childrenMap.slider.tick;
+            }
+            return undefined;
+        }
+
+        set tick(value) {
+            if (this.childrenMap.slider) {
+                this.childrenMap.slider.tick = value;
+            }
+        }
+
     }
 
     return ScrollBar;

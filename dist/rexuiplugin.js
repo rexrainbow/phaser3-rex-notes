@@ -52914,7 +52914,13 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this.addChildrenMap('thumb', thumb);
 
             this.setEnable(GetValue$1L(config, 'enable', undefined));
-            this.setGap(GetValue$1L(config, 'gap', undefined));
+
+            var gap = GetValue$1L(config, 'tick', undefined);
+            if (gap === undefined) {
+                gap = GetValue$1L(config, 'gap', undefined);
+            }
+            this.setGap(gap);
+
             this.setValue(GetValue$1L(config, 'value', 0), GetValue$1L(config, 'min', undefined), GetValue$1L(config, 'max', undefined));
 
         }
@@ -52934,6 +52940,19 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
             this.gap = gap;
             return this;
+        }
+
+        setTick(tick, min, max) {
+            this.setGap(tick, min, max);
+            return this;
+        }
+
+        get tick() {
+            return this.gap;
+        }
+
+        set tick(value) {
+            this.gap = value;
         }
 
         setThumbOffset(x, y) {
@@ -53170,6 +53189,45 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             }
             return this;
         }
+
+        setGap(gap, min, max) {
+            if (this.childrenMap.slider) {
+                this.childrenMap.slider.setGap(gap, min, max);
+            }
+            return this;
+        }
+
+        get gap() {
+            if (this.childrenMap.slider) {
+                return this.childrenMap.slider.gap;
+            }
+            return undefined;
+        }
+
+        set gap(value) {
+            if (this.childrenMap.slider) {
+                this.childrenMap.slider.gap = value;
+            }
+        }
+
+        setTick(tick, min, max) {
+            this.setGap(tick, min, max);
+            return this;
+        }
+
+        get tick() {
+            if (this.childrenMap.slider) {
+                return this.childrenMap.slider.tick;
+            }
+            return undefined;
+        }
+
+        set tick(value) {
+            if (this.childrenMap.slider) {
+                this.childrenMap.slider.tick = value;
+            }
+        }
+
     }
 
     var CreateScrollbar = function (scene, config) {
@@ -54196,6 +54254,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             sliderConfig.orientation = (isAxisY) ? 1 : 0;
             slider = CreateScrollbar(topPatent.scene, sliderConfig);
 
+            slider.gapLength = GetValue$1F(sliderConfig, 'gapLength', undefined);
+
             var column, row, padding;
 
             var sliderPosition = GetValue$1F(sliderConfig, 'position', 0);
@@ -54523,13 +54583,18 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 slider = this.childrenMap[`slider${axis}`];
         }
 
+        var scale = (axis === 'Y') ? this.scaleY : this.scaleX;
+        bound1 *= scale;
+
         if (scroller) {
-            // Scale will force to 1 during layout, get saved scale value back
-            var scale = (axis === 'Y') ? this.scaleY : this.scaleX;
-            scroller.setBounds(bound0, bound1 * scale);
+            scroller.setBounds(bound0, bound1);
         }
         if (slider) {
             slider.setEnable(bound0 !== bound1);
+
+            if (slider.gapLength) {
+                slider.setGap(slider.gapLength, bound0, bound1);
+            }
         }
     };
 

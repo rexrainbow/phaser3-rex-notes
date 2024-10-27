@@ -8439,6 +8439,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tick" class="md-nav__link">
+    Tick
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" class="md-nav__link">
     Other properties
   </a>
@@ -10074,6 +10081,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tick" class="md-nav__link">
+    Tick
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" class="md-nav__link">
     Other properties
   </a>
@@ -10237,7 +10251,7 @@
 <span class="cm">        */</span>
 
 <span class="w">        </span><span class="nx">input</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;drag&#39;</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">gap</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w">        </span>
+<span class="w">        </span><span class="nx">tick</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w">        </span>
 <span class="w">        </span><span class="nx">easeValue</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="nx">duration</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
 <span class="w">            </span><span class="nx">ease</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Linear&#39;</span>
@@ -10359,7 +10373,7 @@
 <li><code>'none'</code>, or <code>-1</code> : Disable sider controlling.</li>
 </ul>
 </li>
-<li><code>slider.gap</code> : Snap a value to nearest grid slice, using rounding.<ul>
+<li><code>slider.tick</code> : Snap a value to nearest grid slice, using rounding.<ul>
 <li><code>undefined</code> : Disable this feature.</li>
 </ul>
 </li>
@@ -10512,6 +10526,18 @@
 <li><code>ease</code> : <a href="tween.md/#ease-equations">Ease function</a>.</li>
 </ul>
 </li>
+</ul>
+<h3 id="tick">Tick<a class="headerlink" href="#tick" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Set
+    <div class="highlight"><pre><span></span><code><span class="nx">scrollBar</span><span class="p">.</span><span class="nx">setTick</span><span class="p">(</span><span class="nx">tick</span><span class="p">);</span><span class="w">  </span><span class="c1">// tick: 0~1</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">scrollBar</span><span class="p">.</span><span class="nx">setTick</span><span class="p">(</span><span class="nx">tick</span><span class="p">,</span><span class="w"> </span><span class="nx">min</span><span class="p">,</span><span class="w"> </span><span class="nx">max</span><span class="p">);</span><span class="w">  </span><span class="c1">// tick: min~max</span>
+</code></pre></div></li>
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">tick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scrollBar</span><span class="p">.</span><span class="nx">tick</span><span class="p">;</span><span class="w">  </span><span class="c1">// tick: 0~1</span>
+</code></pre></div></li>
 </ul>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
 <p>See <a href="../ui-sizer/">sizer object</a>, <a href="../ui-basesizer/">base sizer object</a>, <a href="../containerlite/">container-lite</a>.</p>

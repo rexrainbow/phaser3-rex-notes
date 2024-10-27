@@ -8425,8 +8425,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#gap" class="md-nav__link">
-    Gap
+  <a href="#tick" class="md-nav__link">
+    Tick
   </a>
   
 </li>
@@ -10081,8 +10081,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#gap" class="md-nav__link">
-    Gap
+  <a href="#tick" class="md-nav__link">
+    Tick
   </a>
   
 </li>
@@ -10137,7 +10137,7 @@
 <li><a href="https://codepen.io/rexrainbow/pen/dwYaaQ">Slider bar</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/XWmgMaX">Color picker</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/poaapbd">Crop resize</a></li>
-<li><a href="https://codepen.io/rexrainbow/pen/PoRMERZ">Gap</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/PoRMERZ">Tick</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-slider">Sample code</a></p>
@@ -10246,13 +10246,13 @@
 <span class="cm">        shape: undefined</span>
 <span class="cm">    }</span>
 <span class="cm">    */</span>
-<span class="w">   </span><span class="nx">thumbOffsetX</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
-<span class="w">   </span><span class="nx">thumbOffsetY</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">thumbOffsetX</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">thumbOffsetY</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
 
 <span class="w">    </span><span class="nx">input</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;drag&#39;</span><span class="p">,</span>
 
 <span class="w">    </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">gap</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">tick</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">easeValue</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">duration</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">ease</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Linear&#39;</span>
@@ -10366,7 +10366,7 @@
 </ul>
 </li>
 <li><code>value</code> : Initial value (0 ~ 1).</li>
-<li><code>gap</code> : Snap a value to nearest grid slice, using rounding.<ul>
+<li><code>tick</code> : Snap a value to nearest grid slice, using rounding.<ul>
 <li><code>undefined</code> : Disalbe this feature.</li>
 </ul>
 </li>
@@ -10507,16 +10507,16 @@
 </ul>
 </li>
 </ul>
-<h3 id="gap">Gap<a class="headerlink" href="#gap" title="Permanent link">&para;</a></h3>
+<h3 id="tick">Tick<a class="headerlink" href="#tick" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Set
-    <div class="highlight"><pre><span></span><code><span class="nx">slider</span><span class="p">.</span><span class="nx">setGap</span><span class="p">(</span><span class="nx">gap</span><span class="p">);</span><span class="w">  </span><span class="c1">// gap: 0~1</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">slider</span><span class="p">.</span><span class="nx">setTick</span><span class="p">(</span><span class="nx">tick</span><span class="p">);</span><span class="w">  </span><span class="c1">// tick: 0~1</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="nx">slider</span><span class="p">.</span><span class="nx">setGap</span><span class="p">(</span><span class="nx">gap</span><span class="p">,</span><span class="w"> </span><span class="nx">min</span><span class="p">,</span><span class="w"> </span><span class="nx">max</span><span class="p">);</span><span class="w">  </span><span class="c1">// gap: min~max</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">slider</span><span class="p">.</span><span class="nx">setTick</span><span class="p">(</span><span class="nx">tick</span><span class="p">,</span><span class="w"> </span><span class="nx">min</span><span class="p">,</span><span class="w"> </span><span class="nx">max</span><span class="p">);</span><span class="w">  </span><span class="c1">// tick: min~max</span>
 </code></pre></div></li>
 <li>Get
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">gap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">slider</span><span class="p">.</span><span class="nx">gap</span><span class="p">;</span><span class="w">  </span><span class="c1">// gap: 0~1</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">tick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">slider</span><span class="p">.</span><span class="nx">tick</span><span class="p">;</span><span class="w">  </span><span class="c1">// tick: 0~1</span>
 </code></pre></div></li>
 </ul>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
