@@ -137,7 +137,7 @@ var scrollBar = scene.rexUI.add.scrollBar({
         */
 
         input: 'drag',
-        gap: undefined,        
+        tick: undefined,        
         easeValue: {
             duration: 0,
             ease: 'Linear'
@@ -243,7 +243,7 @@ var scrollBar = scene.rexUI.add.scrollBar({
         - `'pan'`, `'drag'`, or `0` : Control knob by panning/dragging thumb game object. Default setting.
         - `'click'`, or `1` : Control slider by touching track game object.
         - `'none'`, or `-1` : Disable sider controlling.
-    - `slider.gap` : Snap a value to nearest grid slice, using rounding.
+    - `slider.tick` : Snap a value to nearest grid slice, using rounding.
         - `undefined` : Disable this feature.
     - `slider.easeValue` : Easing value when `input` is `'click'`.
           - `slider.easeValue.duration` : Duration of value easing, default is `0` (no easing).
@@ -411,6 +411,21 @@ Change value will also change the position of slider thumb and width of slider i
     scrollBar.setEaseValueFunction(ease);
     ```
     - `ease` : [Ease function](tween.md/#ease-equations).
+
+### Tick
+
+- Set
+    ```javascript
+    scrollBar.setTick(tick);  // tick: 0~1
+    ```
+    or
+    ```javascript
+    scrollBar.setTick(tick, min, max);  // tick: min~max
+    ```
+- Get
+    ```javascript
+    var tick = scrollBar.tick;  // tick: 0~1
+    ```
 
 ### Other properties
 

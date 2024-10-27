@@ -190,6 +190,38 @@ class ScrollBar extends Sizer {
         }
         return this;
     }
+
+    get gap() {
+        if (this.childrenMap.slider) {
+            return this.childrenMap.slider.gap;
+        }
+        return undefined;
+    }
+
+    set gap(value) {
+        if (this.childrenMap.slider) {
+            this.childrenMap.slider.gap = value;
+        }
+    }
+
+    setTick(tick, min, max) {
+        this.setGap(tick, min, max);
+        return this;
+    }
+
+    get tick() {
+        if (this.childrenMap.slider) {
+            return this.childrenMap.slider.tick;
+        }
+        return undefined;
+    }
+
+    set tick(value) {
+        if (this.childrenMap.slider) {
+            this.childrenMap.slider.tick = value;
+        }
+    }
+
 }
 
 export default ScrollBar;

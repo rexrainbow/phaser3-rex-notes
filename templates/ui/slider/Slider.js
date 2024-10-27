@@ -120,7 +120,13 @@ class Slider extends ProgressBase(Sizer) {
         this.addChildrenMap('thumb', thumb);
 
         this.setEnable(GetValue(config, 'enable', undefined));
-        this.setGap(GetValue(config, 'gap', undefined));
+
+        var gap = GetValue(config, 'tick', undefined);
+        if (gap === undefined) {
+            gap = GetValue(config, 'gap', undefined)
+        }
+        this.setGap(gap);
+
         this.setValue(GetValue(config, 'value', 0), GetValue(config, 'min', undefined), GetValue(config, 'max', undefined));
 
     }
@@ -140,6 +146,19 @@ class Slider extends ProgressBase(Sizer) {
 
         this.gap = gap;
         return this;
+    }
+
+    setTick(tick, min, max) {
+        this.setGap(tick, min, max);
+        return this;
+    }
+
+    get tick() {
+        return this.gap;
+    }
+
+    set tick(value) {
+        this.gap = value;
     }
 
     setThumbOffset(x, y) {

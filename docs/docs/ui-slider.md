@@ -10,7 +10,7 @@ A container with a track, indicator, thumb and background.
 - [Slider bar](https://codepen.io/rexrainbow/pen/dwYaaQ)
 - [Color picker](https://codepen.io/rexrainbow/pen/XWmgMaX)
 - [Crop resize](https://codepen.io/rexrainbow/pen/poaapbd)
-- [Gap](https://codepen.io/rexrainbow/pen/PoRMERZ)
+- [Tick](https://codepen.io/rexrainbow/pen/PoRMERZ)
 
 ## Usage
 
@@ -132,13 +132,13 @@ var slider = scene.rexUI.add.slider({
         shape: undefined
     }
     */
-   thumbOffsetX: 0,
-   thumbOffsetY: 0,
+    thumbOffsetX: 0,
+    thumbOffsetY: 0,
 
     input: 'drag',
 
     value: 0,
-    gap: undefined,
+    tick: undefined,
     easeValue: {
         duration: 0,
         ease: 'Linear'
@@ -234,7 +234,7 @@ var slider = scene.rexUI.add.slider({
     - `'click'`, or `1` : Control slider by touching track game object.
     - `'none'`, or `-1` : Disable sider controlling.
 - `value` : Initial value (0 ~ 1).
-- `gap` : Snap a value to nearest grid slice, using rounding.
+- `tick` : Snap a value to nearest grid slice, using rounding.
     - `undefined` : Disalbe this feature.
 - `easeValue` : Easing value when `input` is `'click'`.
     - `easeValue.duration` : Duration of value easing, default is `0` (no easing).
@@ -393,19 +393,19 @@ Change value will also change the position of slider thumb and width of slider i
     ```
     - `ease` : [Ease function](tween.md/#ease-equations).
 
-### Gap
+### Tick
 
 - Set
     ```javascript
-    slider.setGap(gap);  // gap: 0~1
+    slider.setTick(tick);  // tick: 0~1
     ```
     or
     ```javascript
-    slider.setGap(gap, min, max);  // gap: min~max
+    slider.setTick(tick, min, max);  // tick: min~max
     ```
 - Get
     ```javascript
-    var gap = slider.gap;  // gap: 0~1
+    var tick = slider.tick;  // tick: 0~1
     ```
 
 ### Events

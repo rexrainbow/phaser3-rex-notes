@@ -18,7 +18,7 @@ class Demo extends Phaser.Scene {
         var min = 2000,
             max = 20000,
             range = max - min,
-            gap = 500;
+            tick = 500;
 
         var print0 = this.add.text(0, 0, '');
         this.rexUI.add.slider({
@@ -35,7 +35,7 @@ class Demo extends Phaser.Scene {
                 value = (value * range) + min;
                 print0.text = Math.floor(value);
             },
-            gap: gap / range,
+            tick: tick / range,
 
             space: {
                 top: 4,

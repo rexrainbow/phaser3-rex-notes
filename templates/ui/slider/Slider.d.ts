@@ -21,6 +21,7 @@ declare namespace Slider {
         input?: InputTypes,
 
         gap?: number,
+        tick?: number,
 
         value?: number,
         min?: number, max?: number,
@@ -54,6 +55,8 @@ declare class Slider extends Sizer {
 
     setGap(gap?: number, min?: number, max?: number): this;
     gap: number;
+    setTick(tick?: number, min?: number, max?: number): this;
+    tick: number;
 
     setEnable(enable?: boolean): this;
     enable: boolean;

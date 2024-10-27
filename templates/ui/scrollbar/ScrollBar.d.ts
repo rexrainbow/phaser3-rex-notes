@@ -33,7 +33,10 @@ declare namespace ScrollBar {
             indicator?: Phaser.GameObjects.GameObject | RoundRecrangle.IConfig,
             thumb?: Phaser.GameObjects.GameObject | RoundRecrangle.IConfig,
             input?: SliderInputTypes,
+
             gap?: number,
+            tick?: number,
+
             easeValue?: {
                 duration?: number,
                 ease?: string
@@ -64,4 +67,9 @@ declare class ScrollBar extends Sizer {
 
     setEnable(enable?: boolean): this;
     enable: boolean;
+
+    setGap(gap?: number, min?: number, max?: number): this;
+    gap: number;
+    setTick(tick?: number, min?: number, max?: number): this;
+    tick: number;
 }
