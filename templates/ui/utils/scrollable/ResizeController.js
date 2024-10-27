@@ -68,8 +68,8 @@ var SetControllerBounds = function (axis) {
     if (slider) {
         slider.setEnable(bound0 !== bound1);
 
-        if (slider.gapLength) {
-            slider.setGap(slider.gapLength, bound0, bound1);
+        if (slider.tickLength) {
+            slider.setTick(slider.tickLength, bound0, bound1);
         }
     }
 }
