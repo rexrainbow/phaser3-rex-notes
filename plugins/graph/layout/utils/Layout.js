@@ -1,23 +1,23 @@
-var Layout = async function (callbacks, graph, config) {
-    if (config === undefined) {
-        config = {};
+var Layout = async function (layoutConfig, graph, userConfig) {
+    if (userConfig === undefined) {
+        userConfig = {};
     }
 
     graph.emit('layout.start', graph);
 
-    var graphData = callbacks.buildGraphData(graph, config);
+    var graphData = layoutConfig.buildGraphData(graph, userConfig);
 
     graph.emit('layout.prelayout', graph);
 
-    if (callbacks.isAsyncRunLayout) {
-        await callbacks.runLayout(graphData, config);
+    if (layoutConfig.isAsyncRunLayout) {
+        await layoutConfig.runLayout(graphData, userConfig);
     } else {
-        callbacks.runLayout(graphData, config);
+        layoutConfig.runLayout(graphData, userConfig);
     }
 
     graph.emit('layout.postlayout', graph);
 
-    callbacks.placeGameObjects(graph, graphData, config);
+    layoutConfig.placeGameObjects(graph, graphData, userConfig);
 
     graph.emit('layout.complete', graph);
 }

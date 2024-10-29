@@ -3,18 +3,18 @@ import BuildGraphData from './BuildGraphData.js';
 import RunLayout from './RunLayout.js';
 import PlaceGameObjects from './PlaceGameObjects.js';
 
-var callbacks = {
+var LayoutConfig = {
     buildGraphData: BuildGraphData,
     isAsyncRunLayout: false,
     runLayout: RunLayout,
     placeGameObjects: PlaceGameObjects,
 }
 
-var Layout = async function (graph, config) {
-    if (config === undefined) {
-        config = {};
+var Layout = async function (graph, userConfig) {
+    if (userConfig === undefined) {
+        userConfig = {};
     }
-    await LayoutBase(callbacks, graph, config);
+    await LayoutBase(LayoutConfig, graph, userConfig);
 }
 
 export default Layout;
