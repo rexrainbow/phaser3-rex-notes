@@ -5,7 +5,7 @@ import PlaceGameObjects from './PlaceGameObjects.js';
 
 var callbacks = {
     buildGraphData: BuildGraphData,
-    isAsyncRunLayout: true,
+    isAsyncRunLayout: false,
     runLayout: RunLayout,
     placeGameObjects: PlaceGameObjects,
 }

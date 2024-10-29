@@ -77,6 +77,7 @@
     "dependencies": {
         "eventemitter3": "^3.1.2",
         "graphology": "^0.25.4",
+        "dagre": "^0.8.5",
         "i18next": "^22.5.1",
         "i18next-http-backend": "^2.5.2",
         "js-yaml": "^4.1.0",

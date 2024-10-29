@@ -40,11 +40,7 @@ class Demo extends Phaser.Scene {
             console.log('layout.complete')
         })
 
-        this.rexGraph.ELKLayout(graph, {
-            layoutOptions: {
-                // 'elk.direction': 'DOWN'
-            }
-        })
+        this.rexGraph.DagreLayout(graph, { rankdir: 'LR' })
 
         console.log('done')
 
