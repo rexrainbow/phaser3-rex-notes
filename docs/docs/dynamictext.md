@@ -835,34 +835,34 @@ Scroll content by setting `textOX`, `textOY` members
 - Any child
     - For each active child
         ```javascript
-        txt.forEachChild(function(child, childIndex){
+        txt.forEachChild(function(child, childIndex, children){
         }, scope)
         ```
     - For each character child
         ```javascript
-        txt.forEachChild(function(child, childIndex){
+        txt.forEachChild(function(child, childIndex, children){
         }, scope, false);
         ```
 - Renderable child
     - For each active renderable child
         ```javascript
-        txt.forEachRenderableChild(function(child, charIndex){
+        txt.forEachRenderableChild(function(child, charIndex, children){
         }, scope)
         ```
     - For each renderable child
         ```javascript
-        txt.forEachRenderableChild(function(child, charIndex){
+        txt.forEachRenderableChild(function(child, charIndex, children){
         }, scope, false);
         ```
 - Character child
     - For each active character child
         ```javascript
-        txt.forEachCharChild(function(child, charIndex){
+        txt.forEachCharChild(function(child, charIndex, children){
         }, scope)
         ```
     - For each character child
         ```javascript
-        txt.forEachCharChild(function(child, charIndex){
+        txt.forEachCharChild(function(child, charIndex, children){
         }, scope, false);
         ```
 

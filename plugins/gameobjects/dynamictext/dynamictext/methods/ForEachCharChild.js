@@ -5,27 +5,29 @@ var ForEachCharChild = function (callback, scope, activeOnly) {
         activeOnly = true;
     }
 
-    var children = this.children;
-    var charIndex = 0;
+    var children = this.children.filter(function (child) {
+        if (activeOnly && !child.active) {
+            return false;
+        }
+        if (!IsChar(child) || child.removed) {
+            return false;
+        }
+
+        return true;
+    });
+
     for (var i = 0, cnt = children.length; i < cnt; i++) {
         var child = children[i];
 
-        if (activeOnly && !child.active) {
-            continue;
+        var isBreak;
+        if (scope) {
+            isBreak = callback.call(this, child, i, children);
+        } else {
+            isBreak = callback(child, i, children);
         }
 
-        if (IsChar(child) && !child.removed) {
-            var isBreak;
-            if (scope) {
-                isBreak = callback.call(this, child, charIndex, children);
-            } else {
-                isBreak = callback(child, charIndex, children);
-            }
-            charIndex++;
-
-            if (isBreak) {
-                break;
-            }
+        if (isBreak) {
+            break;
         }
     }
 
