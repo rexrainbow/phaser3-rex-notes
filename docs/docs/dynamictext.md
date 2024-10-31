@@ -12,6 +12,7 @@ Control position, angle of each character drawn on a [canvas](canvas.md).
     - [Horizontal alignment modes](https://codepen.io/rexrainbow/pen/QWRpqPN)
 - [Page typing](https://codepen.io/rexrainbow/pen/LYxoRWJ)
 - [Align, rotation, drawBelowCallback](https://codepen.io/rexrainbow/pen/JjEQXqj)
+- [Characters on path](https://codepen.io/rexrainbow/pen/wvVjrzj)
 - [Vertical wrap](https://codepen.io/rexrainbow/pen/oNBKpYG)
 - [Character's world position](https://codepen.io/rexrainbow/pen/oNyRYZj)
 - [Child input event](https://codepen.io/rexrainbow/pen/GRdrLrw)

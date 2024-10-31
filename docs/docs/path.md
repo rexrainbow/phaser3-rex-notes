@@ -79,8 +79,9 @@ Properties:
             ```
         - Arc
             ```javascript
-            var curve = new Phaser.Curves.Ellipse(x, y, xRadius, yRadius, startAngle, endAngle, clockwise,     rotation);
+            var curve = new Phaser.Curves.Ellipse(x, y, xRadius, yRadius, startAngle, endAngle, clockwise, rotation);
             ```
+            - `startAngle`, `endAngle` : Degrees.
     1. Add to path
         ```javascript
         path.add(curve);
