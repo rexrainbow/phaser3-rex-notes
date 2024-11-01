@@ -65178,11 +65178,11 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
         if (!isScrollable) {
             buttonConfig.height = height;
-            buttons = CreateButtons$3(scene, buttonConfig);
+            buttons = CreateButtons$3(scene, buttonConfig, this.listWrapEnable);
             listPanel = buttons;
 
         } else {
-            var buttons = CreateButtons$3(scene, buttonConfig);
+            var buttons = CreateButtons$3(scene, buttonConfig, this.listWrapEnable);
 
             if (this.listMaxHeight > 0) {
                 buttons.layout();
