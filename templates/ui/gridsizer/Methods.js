@@ -15,7 +15,7 @@ import AddChildMethods from './AddChildMethods.js';
 import RemoveChildMethods from './RemoveChildMethods.js';
 import SetSpaceMethods from './SetSpaceMethods.js';
 import ResetGrid from './ResetGrid.js';
-import { InseryEmptyRow, AddEmptyRow } from './InsertEmptyRow.js';
+import { InsertEmptyRow, AddEmptyRow } from './InsertEmptyRow.js';
 import { InsertEmptyColumn, AddEmptyColumn } from './InsertEmptyColumn.js';
 import SortChildrenMethods from '../basesizer/utils/SortChildrenMethods.js';
 
@@ -36,7 +36,7 @@ var methods = {
     runHeightWrap: RunHeightWrap,
 
     resetGrid: ResetGrid,
-    inseryEmptyRow: InseryEmptyRow,
+    insertEmptyRow: InsertEmptyRow,
     addEmptyRow: AddEmptyRow,
     insertEmptyColumn: InsertEmptyColumn,
     addEmptyColumn: AddEmptyColumn,

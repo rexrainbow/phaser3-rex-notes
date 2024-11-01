@@ -130,6 +130,18 @@ declare class GridSizer extends BaseSizer {
         config?: GridSizer.IAddConfig
     ): this;
 
+    addEmptyRow(proportion?: number, space?: number): this;
+    addEmptyColumn(proportion?: number, space?: number): this;
+
+    insertEmptyRow(
+        rowIndex: number,
+        proportion?: number, space?: number
+    ): this;
+    insertEmptyColumn(
+        colIndex: number,
+        proportion?: number, space?: number
+    ): this;
+
     remove(
         gameObject: Phaser.GameObjects.GameObject,
         destroyChild?: boolean
