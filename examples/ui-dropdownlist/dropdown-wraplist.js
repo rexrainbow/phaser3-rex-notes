@@ -20,9 +20,6 @@ class Demo extends Phaser.Scene {
             options.push({ text: String.fromCharCode(i + 65), value: i });
         }
 
-        var wrapEnable = false;
-        var listWidth = (wrapEnable) ? 200 : undefined;
-
         var print = this.add.text(0, 0, '');
         var dropDownList = this.rexUI.add.dropDownList({
             x: 400, y: 300,

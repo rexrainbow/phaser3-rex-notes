@@ -56,11 +56,11 @@ var CreateListPanel = function () {
 
     if (!isScrollable) {
         buttonConfig.height = height;
-        buttons = CreateButtons(scene, buttonConfig);
+        buttons = CreateButtons(scene, buttonConfig, this.listWrapEnable);
         listPanel = buttons;
 
     } else {
-        var buttons = CreateButtons(scene, buttonConfig);
+        var buttons = CreateButtons(scene, buttonConfig, this.listWrapEnable);
 
         if (this.listMaxHeight > 0) {
             buttons.layout();
