@@ -55735,7 +55735,7 @@ void main () {
 	    return this;
 	};
 
-	var InseryEmptyRow = function (rowIndex, proportion, space) {
+	var InsertEmptyRow = function (rowIndex, proportion, space) {
 	    if (proportion === undefined) {
 	        proportion = this.rowProportions[0] || 0;
 	    }
@@ -55762,7 +55762,7 @@ void main () {
 	};
 
 	var AddEmptyRow = function (proportion, space) {
-	    InseryEmptyRow.call(this, this.rowCount, proportion, space);
+	    InsertEmptyRow.call(this, this.rowCount, proportion, space);
 	    return this;
 	};
 
@@ -55812,7 +55812,7 @@ void main () {
 	    runHeightWrap: RunHeightWrap$1,
 
 	    resetGrid: ResetGrid,
-	    inseryEmptyRow: InseryEmptyRow,
+	    insertEmptyRow: InsertEmptyRow,
 	    addEmptyRow: AddEmptyRow,
 	    insertEmptyColumn: InsertEmptyColumn,
 	    addEmptyColumn: AddEmptyColumn,
