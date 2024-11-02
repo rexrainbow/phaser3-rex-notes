@@ -7,7 +7,8 @@ Particles' emitter zone from canvas bitmap of text/canvas game object.
 
 ## Live demo
 
-- [Particles](https://codepen.io/rexrainbow/pen/eYJmxwp)
+- [Particles from text](https://codepen.io/rexrainbow/pen/eYJmxwp)
+- [Particles from texture](https://codepen.io/rexrainbow/pen/qBeKXKw)
 
 ## Usage
 
