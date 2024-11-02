@@ -62,31 +62,6 @@ class Demo extends Phaser.Scene {
             }
         })
             .layout()
-
-        scrollablePanel.setChildrenInteractive({
-            targets: [
-                scrollablePanel.getByName('table', true),
-            ]
-        })
-            .on('child.pressstart', function (child) {
-                var item = child.getData('item');
-                if (!item || !item.textureKey) {
-                    return;
-                }
-
-                var icon = child.getElement('icon');
-                if (this.rexUI.isInTouching(icon)) {
-                    // Create a new game object for dragging
-                    var dragObject = this.add.image(icon.x, icon.y, '');
-                    dragObject.setTexture(item.textureKey).setTint(item.color);
-                    // Force dragging
-                    dragObject.drag = this.plugins.get('rexDrag').add(dragObject).drag()
-
-                    // icon has be removed, set it to invisible
-                    item.textureKey = undefined;
-                    child.setChildVisible(icon, false);
-                }
-            }, this)
     }
 
     update() { }
@@ -107,12 +82,7 @@ var CreateGrid = function (scene, items, col) {
             config.expand = true;
 
             var item = items[(y * col) + x];
-            var cellContainer = CreateCellContainer(scene).setData('item', item);
-            if (item) {
-                cellContainer.getElement('icon').setTexture(item.textureKey).setTint(item.color);
-                cellContainer.getElement('id').setText(item.id);
-            }
-            return cellContainer;
+            return CreateCellContainer(scene, item);
         },
 
         name: 'table'
@@ -120,18 +90,55 @@ var CreateGrid = function (scene, items, col) {
 }
 
 var CreateCellContainer = function (scene, item) {
-    return scene.rexUI.add.overlapSizer({
+    if (!item) {
+        return;
+    }
+
+    var background = scene.rexUI.add.roundRectangle(0, 0, 20, 20, 0).setStrokeStyle(2, COLOR_DARK);
+    var icon = scene.add.image(0, 0, item.textureKey).setTint(item.color);
+    var text = scene.add.text(0, 0, item.id).setText(item.id)
+    var container = scene.rexUI.add.overlapSizer({
         height: 80
     })
-        .addBackground(scene.rexUI.add.roundRectangle(0, 0, 20, 20, 0).setStrokeStyle(2, COLOR_DARK))
+        .addBackground(background)
         .add(
-            scene.add.image(0, 0, ''),
+            icon,
             { key: 'icon', align: 'center', expand: false }
         )
         .add(
-            scene.add.text(0, 0, ''),
+            text,
             { key: 'id', align: 'left-top', expand: false }
         )
+
+    icon
+        .setInteractive({ draggable: true })
+        .on('dragstart', function (pointer, dragX, dragY) {
+            var isDragging = CanDrag(icon, pointer.worldX, pointer.worldY);
+            icon.setData('isDragging', isDragging);
+            if (!isDragging) {
+                return;
+            }
+
+            var parentSizer = scene.rexUI.getParentSizer(icon);
+            if (parentSizer) {
+                parentSizer.remove(icon);
+                parentSizer.removeChildrenMap('icon');
+            }
+        })
+        .on('drag', function (pointer, dragX, dragY) {
+            if (icon.getData('isDragging')) {
+                icon.setPosition(dragX, dragY);
+            }
+        })
+        .on('dragend', function (pointer, dragX, dragY, dropped) {
+            icon.setData('isDragging', false);
+        });
+
+    return container
+}
+
+var CanDrag = function (gameObject, x, y) {
+    return !gameObject.mask
 }
 
 var CreateItems = function (count) {
