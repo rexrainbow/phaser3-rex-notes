@@ -92,15 +92,15 @@ class Lines extends PathBase {
         return this;
     }
 
-    cubicBezierCurveTo(cx0, cy0, cx1, cy1, x, y) {
-        this.builder.cubicBezierCurveTo(cx0, cy0, cx1, cy1, x, y);
+    cubicBezierTo(cx0, cy0, cx1, cy1, x, y) {
+        this.builder.cubicBezierTo(cx0, cy0, cx1, cy1, x, y);
 
         this.dirty = true;
         return this;
     }
 
-    smoothCubicBezierCurveTo(cx1, cy1, x, y) {
-        this.builder.smoothCubicBezierCurveTo(cx1, cy1, x, y);
+    smoothCubicBezierTo(cx1, cy1, x, y) {
+        this.builder.smoothCubicBezierTo(cx1, cy1, x, y);
 
         this.dirty = true;
         return this;

@@ -36,12 +36,12 @@ export default class Lines extends PathBase {
         x: number, y: number
     ): this;
 
-    cubicBezierCurveTo(
+    cubicBezierTo(
         cx0: number, cy0: number,
         cx1: number, cy1: number,
         x: number, y: number
     ): this;
-    smoothCubicBezierCurveTo(
+    smoothCubicBezierTo(
         cx1: number, cy1: number,
         x: number, y: number
     ): this;

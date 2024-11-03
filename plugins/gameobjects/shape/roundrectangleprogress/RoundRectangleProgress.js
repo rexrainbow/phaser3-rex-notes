@@ -45,6 +45,7 @@ class RoundRectangleProgress extends ProgressBase(BaseShapes) {
 
         super(scene, x, y, width, height, config);
         this.type = 'rexRoundRectangleProgress';
+        this.rrGeom = new RoundRectangleGeom();  // For radiusConfig only
 
         this.bootProgressBase(config);
 
@@ -60,7 +61,6 @@ class RoundRectangleProgress extends ProgressBase(BaseShapes) {
         this.setOrientation(GetValue(config, 'orientation', 0));
         this.setRTL(GetValue(config, 'rtl', false));
 
-        this.rrGeom = new RoundRectangleGeom();  // For radiusConfig only
         this.setRadius(radiusConfig);
 
         this.setIteration(GetValue(radiusConfig, 'iteration', undefined));
