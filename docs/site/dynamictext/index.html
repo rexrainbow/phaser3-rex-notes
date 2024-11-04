@@ -10605,6 +10605,7 @@
 </li>
 <li><a href="https://codepen.io/rexrainbow/pen/LYxoRWJ">Page typing</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/JjEQXqj">Align, rotation, drawBelowCallback</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/wvVjrzj">Characters on path</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/oNBKpYG">Vertical wrap</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/oNyRYZj">Character's world position</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/GRdrLrw">Child input event</a></li>
@@ -11411,33 +11412,33 @@ or</p>
 <ul>
 <li>Any child<ul>
 <li>For each active child
-    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">forEachChild</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span><span class="w"> </span><span class="nx">childIndex</span><span class="p">){</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">forEachChild</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span><span class="w"> </span><span class="nx">childIndex</span><span class="p">,</span><span class="w"> </span><span class="nx">children</span><span class="p">){</span>
 <span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">)</span>
 </code></pre></div></li>
 <li>For each character child
-    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">forEachChild</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span><span class="w"> </span><span class="nx">childIndex</span><span class="p">){</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">forEachChild</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span><span class="w"> </span><span class="nx">childIndex</span><span class="p">,</span><span class="w"> </span><span class="nx">children</span><span class="p">){</span>
 <span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 </li>
 <li>Renderable child<ul>
 <li>For each active renderable child
-    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">forEachRenderableChild</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span><span class="w"> </span><span class="nx">charIndex</span><span class="p">){</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">forEachRenderableChild</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span><span class="w"> </span><span class="nx">charIndex</span><span class="p">,</span><span class="w"> </span><span class="nx">children</span><span class="p">){</span>
 <span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">)</span>
 </code></pre></div></li>
 <li>For each renderable child
-    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">forEachRenderableChild</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span><span class="w"> </span><span class="nx">charIndex</span><span class="p">){</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">forEachRenderableChild</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span><span class="w"> </span><span class="nx">charIndex</span><span class="p">,</span><span class="w"> </span><span class="nx">children</span><span class="p">){</span>
 <span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 </li>
 <li>Character child<ul>
 <li>For each active character child
-    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">forEachCharChild</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span><span class="w"> </span><span class="nx">charIndex</span><span class="p">){</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">forEachCharChild</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span><span class="w"> </span><span class="nx">charIndex</span><span class="p">,</span><span class="w"> </span><span class="nx">children</span><span class="p">){</span>
 <span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">)</span>
 </code></pre></div></li>
 <li>For each character child
-    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">forEachCharChild</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span><span class="w"> </span><span class="nx">charIndex</span><span class="p">){</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">forEachCharChild</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span><span class="w"> </span><span class="nx">charIndex</span><span class="p">,</span><span class="w"> </span><span class="nx">children</span><span class="p">){</span>
 <span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>

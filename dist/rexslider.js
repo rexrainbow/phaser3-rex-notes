@@ -14882,7 +14882,7 @@
             return this;
         },
 
-        cubicBezierCurveTo(cx0, cy0, cx1, cy1, x, y) {
+        cubicBezierTo(cx0, cy0, cx1, cy1, x, y) {
             CubicBezierCurveTo(
                 cx0, cy0, cx1, cy1, x, y,
                 this.iterations,
@@ -14896,10 +14896,10 @@
             return this;
         },
 
-        smoothCubicBezierCurveTo(cx1, cy1, x, y) {
+        smoothCubicBezierTo(cx1, cy1, x, y) {
             var cx0 = this.lastPointX * 2 - this.lastCX;
             var cy0 = this.lastPointY * 2 - this.lastCY;
-            this.cubicBezierCurveTo(cx0, cy0, cx1, cy1, x, y);
+            this.cubicBezierTo(cx0, cy0, cx1, cy1, x, y);
             return this;
         },
 
@@ -15357,15 +15357,15 @@
             return this;
         }
 
-        cubicBezierCurveTo(cx0, cy0, cx1, cy1, x, y) {
-            this.builder.cubicBezierCurveTo(cx0, cy0, cx1, cy1, x, y);
+        cubicBezierTo(cx0, cy0, cx1, cy1, x, y) {
+            this.builder.cubicBezierTo(cx0, cy0, cx1, cy1, x, y);
 
             this.dirty = true;
             return this;
         }
 
-        smoothCubicBezierCurveTo(cx1, cy1, x, y) {
-            this.builder.smoothCubicBezierCurveTo(cx1, cy1, x, y);
+        smoothCubicBezierTo(cx1, cy1, x, y) {
+            this.builder.smoothCubicBezierTo(cx1, cy1, x, y);
 
             this.dirty = true;
             return this;

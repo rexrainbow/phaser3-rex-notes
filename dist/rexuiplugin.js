@@ -378,7 +378,7 @@
         //  NOOP
     };
 
-    var Methods$m = {
+    var Methods$n = {
         _beginDraw: NOOP,
         _drawImage: NOOP,
         _drawTileSprite: NOOP,
@@ -536,7 +536,7 @@
 
         Object.assign(
             NinePatch.prototype,
-            Methods$m
+            Methods$n
         );
 
         return NinePatch;
@@ -614,13 +614,13 @@
     let NinePatch$1 = class NinePatch extends NinePatchBase(RenderTexture$2, 'rexNinePatch') {
     };
 
-    var Methods$l = {
+    var Methods$m = {
         _drawImage: DrawImage$2,
         _drawTileSprite: DrawTileSprite$1,
     };
     Object.assign(
         NinePatch$1.prototype,
-        Methods$l
+        Methods$m
     );
 
     var IsInValidKey = function (keys) {
@@ -775,7 +775,7 @@
         return this;
     };
 
-    var Resize$1 = function (width, height) {
+    var Resize$2 = function (width, height) {
         if ((this.width === width) && (this.height === height)) {
             return this;
         }
@@ -868,8 +868,8 @@
 
     var methods$K = {
         setTexture: SetTexture,
-        resize: Resize$1,
-        setSize: Resize$1,
+        resize: Resize$2,
+        setSize: Resize$2,
         addChild: AddChild$4,
         removeChild: RemoveChild$3,
         removeChildren: RemoveChildren$1,
@@ -2034,7 +2034,7 @@
 
     };
 
-    var Methods$k = {
+    var Methods$l = {
         _drawImage: DrawImage$1,
         _drawTileSprite: DrawTileSprite,
     };
@@ -2049,7 +2049,7 @@
 
     Object.assign(
         NinePatch.prototype,
-        Methods$k
+        Methods$l
     );
 
     ObjectFactory.register('ninePatch2', function (x, y, width, height, key, columns, rows, config) {
@@ -8924,7 +8924,7 @@
 
     const Rectangle$5 = Phaser.Geom.Rectangle;
 
-    var Contains$1 = function (canvasX, canvasY) {
+    var Contains$2 = function (canvasX, canvasY) {
         if ((this.width === 0) || (this.height === 0)) {
             return false;
         }
@@ -9027,13 +9027,13 @@
         return GetBobWorldPosition(this.parent, this, offsetX, offsetY, out);
     };
 
-    var Methods$j = {
-        contains: Contains$1,
+    var Methods$k = {
+        contains: Contains$2,
         getWorldPosition: GetWorldPosition,
     };
 
     Object.assign(
-        Methods$j,
+        Methods$k,
         RenderMethods
     );
 
@@ -9390,7 +9390,7 @@
 
     Object.assign(
         RenderBase.prototype,
-        Methods$j,
+        Methods$k,
     );
 
     var GetProperty = function (name, config, defaultConfig) {
@@ -12288,7 +12288,7 @@
         },
     };
 
-    var Methods$i = {
+    var Methods$j = {
         setFixedSize: SetFixedSize,
         setPadding: SetPadding,
         getPadding: GetPadding,
@@ -12346,7 +12346,7 @@
     };
 
     Object.assign(
-        Methods$i,
+        Methods$j,
 
         MoveChildMethods,
         BackgroundMethods,
@@ -12491,7 +12491,7 @@
 
     Object.assign(
         DynamicText.prototype,
-        Methods$i
+        Methods$j
     );
 
     ObjectFactory.register('dynamicText', function (x, y, width, height, config) {
@@ -15951,12 +15951,12 @@
         }
     };
 
-    var Methods$h = {
+    var Methods$i = {
         drawGameObjectsBounds: DrawGameObjectsBounds,
     };
 
     Object.assign(
-        Methods$h,
+        Methods$i,
         GetMethods,
         AddMethods$1,
         RemoveMethods$1,
@@ -16121,7 +16121,7 @@
     Object.assign(
         GOManager.prototype,
         EventEmitterMethods$1,
-        Methods$h
+        Methods$i
     );
 
     const GameObjectClass = Phaser.GameObjects.GameObject;
@@ -18102,12 +18102,12 @@
         },
     };
 
-    var Methods$g = {
+    var Methods$h = {
         hasAudio: HasaAudio
     };
 
     Object.assign(
-        Methods$g,
+        Methods$h,
         BackgroundMusicMethods,
         BackgroundMusic2Methods,
         SoundEffectsMethods,
@@ -18292,7 +18292,7 @@
 
     Object.assign(
         SoundManager.prototype,
-        Methods$g
+        Methods$h
     );
 
     const GetValue$3j = Phaser.Utils.Objects.GetValue;
@@ -22134,7 +22134,7 @@
         return this;
     };
 
-    var Methods$f = {
+    var Methods$g = {
         fadeOutPage: FadeOutPage,
         start: Start$1,
         typing: Typing,
@@ -22151,7 +22151,7 @@
     };
 
     Object.assign(
-        Methods$f,
+        Methods$g,
         TypingSpeedMethods$1
     );
 
@@ -22268,7 +22268,7 @@
     Object.assign(
         TypeWriter.prototype,
         EventEmitterMethods$1,
-        Methods$f,
+        Methods$g,
     );
 
     class SpriteBob extends BobBase {
@@ -22342,9 +22342,9 @@
         },
     };
 
-    var Methods$e = {};
+    var Methods$f = {};
     Object.assign(
-        Methods$e,
+        Methods$f,
         AnimationMethods
     );
 
@@ -22392,7 +22392,7 @@
 
     Object.assign(
         SpriteManager.prototype,
-        Methods$e
+        Methods$f
     );
 
     var IsPlayAnimationTag = function (tags, goType) {
@@ -23148,7 +23148,7 @@
         },
     };
 
-    var Methods$d = {
+    var Methods$e = {
         setClickTarget: SetClickTarget,
         setCameraTarget: SetCameraTarget,
         setNextPageInput: SetNextPageInput,
@@ -23161,7 +23161,7 @@
     };
 
     Object.assign(
-        Methods$d,
+        Methods$e,
         GameObjectManagerMethods,
         PlayMethods,
         PauseMethods,
@@ -23291,7 +23291,7 @@
 
     Object.assign(
         TextPlayer.prototype,
-        Methods$d
+        Methods$e
     );
 
     ObjectFactory.register('textPlayer', function (x, y, width, height, config) {
@@ -23641,7 +23641,7 @@
         return this;
     };
 
-    var Methods$c = {
+    var Methods$d = {
         open: Open$2,
         close: Close$1,
     };
@@ -23996,7 +23996,7 @@
 
     Object.assign(
         HiddenTextEditBase.prototype,
-        Methods$c,
+        Methods$d,
     );
 
     var NumberInputUpdateCallback = function (text, textObject, hiddenInputText) {
@@ -26814,7 +26814,7 @@
             return this;
         },
 
-        cubicBezierCurveTo(cx0, cy0, cx1, cy1, x, y) {
+        cubicBezierTo(cx0, cy0, cx1, cy1, x, y) {
             CubicBezierCurveTo(
                 cx0, cy0, cx1, cy1, x, y,
                 this.iterations,
@@ -26828,10 +26828,10 @@
             return this;
         },
 
-        smoothCubicBezierCurveTo(cx1, cy1, x, y) {
+        smoothCubicBezierTo(cx1, cy1, x, y) {
             var cx0 = this.lastPointX * 2 - this.lastCX;
             var cy0 = this.lastPointY * 2 - this.lastCY;
-            this.cubicBezierCurveTo(cx0, cy0, cx1, cy1, x, y);
+            this.cubicBezierTo(cx0, cy0, cx1, cy1, x, y);
             return this;
         },
 
@@ -27289,15 +27289,15 @@
             return this;
         }
 
-        cubicBezierCurveTo(cx0, cy0, cx1, cy1, x, y) {
-            this.builder.cubicBezierCurveTo(cx0, cy0, cx1, cy1, x, y);
+        cubicBezierTo(cx0, cy0, cx1, cy1, x, y) {
+            this.builder.cubicBezierTo(cx0, cy0, cx1, cy1, x, y);
 
             this.dirty = true;
             return this;
         }
 
-        smoothCubicBezierCurveTo(cx1, cy1, x, y) {
-            this.builder.smoothCubicBezierCurveTo(cx1, cy1, x, y);
+        smoothCubicBezierTo(cx1, cy1, x, y) {
+            this.builder.smoothCubicBezierTo(cx1, cy1, x, y);
 
             this.dirty = true;
             return this;
@@ -30394,13 +30394,13 @@
 
     };
 
-    var Methods$b = {
+    var Methods$c = {
         updateShapes: UpdateShapes$1,
     };
 
     Object.assign(
         LineProgress$1.prototype,
-        Methods$b,
+        Methods$c,
     );
 
     ObjectFactory.register('lineProgress', function (x, y, width, height, barColor, value, config) {
@@ -30877,6 +30877,7 @@
 
             super(scene, x, y, width, height, config);
             this.type = 'rexRoundRectangleProgress';
+            this.rrGeom = new RoundRectangle$3();  // For radiusConfig only
 
             this.bootProgressBase(config);
 
@@ -30892,7 +30893,6 @@
             this.setOrientation(GetValue$2W(config, 'orientation', 0));
             this.setRTL(GetValue$2W(config, 'rtl', false));
 
-            this.rrGeom = new RoundRectangle$3();  // For radiusConfig only
             this.setRadius(radiusConfig);
 
             this.setIteration(GetValue$2W(radiusConfig, 'iteration', undefined));
@@ -31111,13 +31111,13 @@
         }
     }
 
-    var Methods$a = {
+    var Methods$b = {
         updateShapes: UpdateShapes,
     };
 
     Object.assign(
         RoundRectangleProgress.prototype,
-        Methods$a,
+        Methods$b,
     );
 
     ObjectFactory.register('roundRectanleProgress', function (x, y, width, height, radiusConfig, barColor, value, config) {
@@ -34684,7 +34684,7 @@
 
     const GetValue$2P = Phaser.Utils.Objects.GetValue;
 
-    var GetBoundsConfig = function (config, out) {
+    var GetBoundsConfig$1 = function (config, out) {
         if (config === undefined) {
             config = 0;
         }
@@ -34738,7 +34738,7 @@
             this.backgroundChildren.push(gameObject);
 
             var config = this.getSizerConfig(gameObject);
-            config.padding = GetBoundsConfig(paddingConfig);
+            config.padding = GetBoundsConfig$1(paddingConfig);
 
             if (childKey !== undefined) {
                 this.addChildrenMap(childKey, gameObject);
@@ -42265,7 +42265,7 @@
 
         config.align = align;
 
-        config.padding = GetBoundsConfig(padding);
+        config.padding = GetBoundsConfig$1(padding);
 
         if (IsPlainObject$v(expand)) {
             config.expandWidth = GetValue$2m(expand, 'width', false);
@@ -44378,29 +44378,148 @@
         },
     };
 
+    const SetPositionBase = Phaser.GameObjects.Graphics.prototype.setPosition;
+
+    var SetPosition$1 = function (x, y) {
+        var parent = this.parent;
+        if (x === undefined) {
+            x = parent.x;
+        }
+        if (y === undefined) {
+            y = parent.y;
+        }
+
+        SetPositionBase.call(this, x, y);
+        return this;
+    };
+
+    const RectangleGeom = Phaser.Geom.Rectangle;
+    const CircleGemo = Phaser.Geom.Circle;
+
+    var GetGeom = function (shapeType, width, height, padding, originX, originY, out) {
+        switch (shapeType) {
+            case 1: // circle
+                // Assume that all padding are the same value in this circle shape
+                padding = padding.left;
+                var centerX = -width * (originX - 0.5);
+                var centerY = -height * (originY - 0.5);
+                var radius = Math.min(width, height) / 2 + padding;
+
+                if ((out === undefined) || !(out instanceof (CircleGemo))) {
+                    out = new CircleGemo();
+                }
+                out.setTo(centerX, centerY, radius);
+                break;
+
+            default: // 0|'rectangle'
+                var topLeftX = -(width * originX) - padding.left;
+                var topLeftY = -(height * originY) - padding.top;
+                var rectWidth = width + padding.left + padding.right;
+                var rectHeight = height + padding.top + padding.bottom;
+
+                if ((out === undefined) || !(out instanceof (RectangleGeom))) {
+                    out = new RectangleGeom();
+                }
+                out.setTo(topLeftX, topLeftY, rectWidth, rectHeight);
+                break;
+        }
+
+        return out;
+    };
+
     var DrawShape = function (width, height, padding, originX, originY) {
+        this.geom = GetGeom(this.shapeType, width, height, padding, originX, originY, this.geom);
+
         this.clear().fillStyle(0xffffff);
         switch (this.shapeType) {
             case 1: // circle
                 // Assume that all padding are the same value in this circle shape
-                padding = padding.left;
-                var radius = Math.min(width, height) / 2;
-                this.fillCircle(
-                    -width * (originX - 0.5),     // centerX
-                    -height * (originY - 0.5),    // centerY
-                    radius + padding              // radius
-                );
+                this.fillCircleShape(this.geom);
                 break;
 
             default: // 0|'rectangle'
-                this.fillRect(
-                    -(width * originX) - padding.left,      // x
-                    -(height * originY) - padding.top,      // y
-                    width + padding.left + padding.right,   // width
-                    height + padding.top + padding.bottom   // height
-                );
+                this.fillRectShape(this.geom);
                 break;
         }
+    };
+
+    var Resize$1 = function (width, height, padding) {
+        var parent = this.parent;
+        if (width === undefined) {
+            width = parent.width;
+        }
+        if (height === undefined) {
+            height = parent.height;
+        }
+
+        if (padding === undefined) {
+            padding = this.padding;
+        } else if (typeof (padding) === 'number') {
+            padding = GetBoundsConfig(padding);
+        }
+
+        var isSizeChanged = (this.width !== width) || (this.height !== height);
+        var isPaddingChanged = (this.padding !== padding) && !IsKeyValueEqual(this.padding, padding);
+        if (!isSizeChanged && !isPaddingChanged) {
+            return this;
+        }
+
+        this.width = width;
+        this.height = height;
+
+        if (isPaddingChanged) {
+            Clone$2(padding, this.padding);
+        }
+
+        // Graphics does not have originX, originY properties
+        this.originX = parent.originX;
+        this.originY = parent.originY;
+
+        DrawShape.call(this,
+            width, height, padding,
+            parent.originX, parent.originY
+        );
+
+        return this;
+    };
+
+    var SetOrigin = function (originX, originY) {
+        if (originY === undefined) {
+            originY = originX;
+        }
+
+        var parent = this.parent;
+        if (originX === undefined) {
+            originX = parent.originX;
+        }
+        if (originY === undefined) {
+            originY = parent.originY;
+        }
+        if ((this.originX === originX) && (this.originY === originY)) {
+            return this;
+        }
+
+        this.originX = originX;
+        this.originY = originY;
+
+        DrawShape.call(this,
+            this.width, this.height, this.padding,
+            originX, originY,
+        );
+        return this;
+    };
+
+    var Contains$1 = function (x, y) {
+        x -= this.x;
+        y -= this.y;
+        return this.geom.contains(x, y);
+    };
+
+    var Methods$a = {
+        setPosition: SetPosition$1,
+        resize: Resize$1,
+        setOrigin: SetOrigin,
+        contains: Contains$1,
     };
 
     const Graphics = Phaser.GameObjects.Graphics;
@@ -44417,7 +44536,7 @@
             super(parent.scene);
             this.parent = parent;
             this.shapeType = shapeType;
-            this.padding = GetBoundsConfig(padding);
+            this.padding = GetBoundsConfig$1(padding);
             this.setPosition().resize().setVisible(false);
             // Don't add it to display list
         }
@@ -44427,90 +44546,17 @@
             super.destroy();
             return this;
         }
-
-        setPosition(x, y) {
-            var parent = this.parent;
-            if (x === undefined) {
-                x = parent.x;
-            }
-            if (y === undefined) {
-                y = parent.y;
-            }
-            super.setPosition(x, y);
-            return this;
-        }
-
-        resize(width, height, padding) {
-            var parent = this.parent;
-            if (width === undefined) {
-                width = parent.width;
-            }
-            if (height === undefined) {
-                height = parent.height;
-            }
-
-            if (padding === undefined) {
-                padding = this.padding;
-            } else if (typeof (padding) === 'number') {
-                padding = GetBoundsConfig(padding);
-            }
-
-            var isSizeChanged = (this.width !== width) || (this.height !== height);
-            var isPaddingChanged = (this.padding !== padding) && !IsKeyValueEqual(this.padding, padding);
-            if (!isSizeChanged && !isPaddingChanged) {
-                return this;
-            }
-
-            this.width = width;
-            this.height = height;
-
-            if (isPaddingChanged) {
-                Clone$2(padding, this.padding);
-            }
-
-            // Graphics does not have originX, originY properties
-            this.originX = parent.originX;
-            this.originY = parent.originY;
-
-            DrawShape.call(this,
-                width, height, padding,
-                parent.originX, parent.originY
-            );
-
-            return this;
-        }
-
-        setOrigin(originX, originY) {
-            if (originY === undefined) {
-                originY = originX;
-            }
-
-            var parent = this.parent;
-            if (originX === undefined) {
-                originX = parent.originX;
-            }
-            if (originY === undefined) {
-                originY = parent.originY;
-            }
-            if ((this.originX === originX) && (this.originY === originY)) {
-                return this;
-            }
-
-            this.originX = originX;
-            this.originY = originY;
-
-            DrawShape.call(this,
-                this.width, this.height, this.padding,
-                originX, originY,
-            );
-            return this;
-        }
     }
 
     const SHAPEMODE = {
         rectangle: 0,
         circle: 1,
     };
+
+    Object.assign(
+        DefaultMaskGraphics.prototype,
+        Methods$a
+    );
 
     var MaskMethods = {
         setMaskGameObject(gameObject) {
@@ -48293,7 +48339,7 @@ void main () {
         var config = this.getSizerConfig(gameObject);
         config.proportion = proportion;
         config.align = align;
-        config.padding = GetBoundsConfig(paddingConfig);
+        config.padding = GetBoundsConfig$1(paddingConfig);
         config.expand = expand;
         config.fitRatio = (proportion === 0) ? fitRatio : 0;
         config.alignOffsetX = offsetX;
@@ -51086,7 +51132,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
         var config = this.getSizerConfig(gameObject);
         config.align = align;
-        config.padding = GetBoundsConfig(paddingConfig);
+        config.padding = GetBoundsConfig$1(paddingConfig);
 
         if (IsPlainObject$h(expand)) {
             config.expandWidth = GetValue$1R(expand, 'width', false);
@@ -52060,7 +52106,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
         var config = this.getSizerConfig(gameObject);
         config.align = ALIGN_CENTER;
-        config.padding = GetBoundsConfig(paddingConfig);
+        config.padding = GetBoundsConfig$1(paddingConfig);
         config.alignOffsetX = offsetX;
         config.alignOffsetY = offsetY;
         config.alignOffsetOriginX = offsetOriginX;
@@ -55663,7 +55709,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
             var sizerConfig = this.getSizerConfig(textObject);
             sizerConfig.align = ALIGN_LEFTTOP$1;
-            sizerConfig.padding = GetBoundsConfig(0);
+            sizerConfig.padding = GetBoundsConfig$1(0);
             sizerConfig.expand = true;
             this.textObject = textObject;
 

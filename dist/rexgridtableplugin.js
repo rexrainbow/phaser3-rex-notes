@@ -3631,53 +3631,69 @@
 
     };
 
+    const SetPositionBase = Phaser.GameObjects.Graphics.prototype.setPosition;
+
+    var SetPosition = function (x, y) {
+        var parent = this.parent;
+        if (x === undefined) {
+            x = parent.x;
+        }
+        if (y === undefined) {
+            y = parent.y;
+        }
+
+        SetPositionBase.call(this, x, y);
+        return this;
+    };
+
+    const RectangleGeom = Phaser.Geom.Rectangle;
+    const CircleGemo = Phaser.Geom.Circle;
+
+    var GetGeom = function (shapeType, width, height, padding, originX, originY, out) {
+        switch (shapeType) {
+            case 1: // circle
+                // Assume that all padding are the same value in this circle shape
+                padding = padding.left;
+                var centerX = -width * (originX - 0.5);
+                var centerY = -height * (originY - 0.5);
+                var radius = Math.min(width, height) / 2 + padding;
+
+                if ((out === undefined) || !(out instanceof (CircleGemo))) {
+                    out = new CircleGemo();
+                }
+                out.setTo(centerX, centerY, radius);
+                break;
+
+            default: // 0|'rectangle'
+                var topLeftX = -(width * originX) - padding.left;
+                var topLeftY = -(height * originY) - padding.top;
+                var rectWidth = width + padding.left + padding.right;
+                var rectHeight = height + padding.top + padding.bottom;
+
+                if ((out === undefined) || !(out instanceof (RectangleGeom))) {
+                    out = new RectangleGeom();
+                }
+                out.setTo(topLeftX, topLeftY, rectWidth, rectHeight);
+                break;
+        }
+
+        return out;
+    };
+
     var DrawShape = function (width, height, padding, originX, originY) {
+        this.geom = GetGeom(this.shapeType, width, height, padding, originX, originY, this.geom);
+
         this.clear().fillStyle(0xffffff);
         switch (this.shapeType) {
             case 1: // circle
                 // Assume that all padding are the same value in this circle shape
-                padding = padding.left;
-                var radius = Math.min(width, height) / 2;
-                this.fillCircle(
-                    -width * (originX - 0.5),     // centerX
-                    -height * (originY - 0.5),    // centerY
-                    radius + padding              // radius
-                );
+                this.fillCircleShape(this.geom);
                 break;
 
             default: // 0|'rectangle'
-                this.fillRect(
-                    -(width * originX) - padding.left,      // x
-                    -(height * originY) - padding.top,      // y
-                    width + padding.left + padding.right,   // width
-                    height + padding.top + padding.bottom   // height
-                );
+                this.fillRectShape(this.geom);
                 break;
         }
-    };
-
-    const GetValue$3 = Phaser.Utils.Objects.GetValue;
-
-    var GetBoundsConfig = function (config, out) {
-        if (config === undefined) {
-            config = 0;
-        }
-        if (out === undefined) {
-            out = {};
-        }
-
-        if (typeof (config) === 'number') {
-            out.left = config;
-            out.right = config;
-            out.top = config;
-            out.bottom = config;
-        } else {
-            out.left = GetValue$3(config, 'left', 0);
-            out.right = GetValue$3(config, 'right', 0);
-            out.top = GetValue$3(config, 'top', 0);
-            out.bottom = GetValue$3(config, 'bottom', 0);
-        }
-        return out;
     };
 
     var IsKeyValueEqual = function (objA, objB) {
@@ -3700,6 +3716,109 @@
         return true;
     };
 
+    var Resize = function (width, height, padding) {
+        var parent = this.parent;
+        if (width === undefined) {
+            width = parent.width;
+        }
+        if (height === undefined) {
+            height = parent.height;
+        }
+
+        if (padding === undefined) {
+            padding = this.padding;
+        } else if (typeof (padding) === 'number') {
+            padding = GetBoundsConfig(padding);
+        }
+
+        var isSizeChanged = (this.width !== width) || (this.height !== height);
+        var isPaddingChanged = (this.padding !== padding) && !IsKeyValueEqual(this.padding, padding);
+        if (!isSizeChanged && !isPaddingChanged) {
+            return this;
+        }
+
+        this.width = width;
+        this.height = height;
+
+        if (isPaddingChanged) {
+            Clone(padding, this.padding);
+        }
+
+        // Graphics does not have originX, originY properties
+        this.originX = parent.originX;
+        this.originY = parent.originY;
+
+        DrawShape.call(this,
+            width, height, padding,
+            parent.originX, parent.originY
+        );
+
+        return this;
+    };
+
+    var SetOrigin = function (originX, originY) {
+        if (originY === undefined) {
+            originY = originX;
+        }
+
+        var parent = this.parent;
+        if (originX === undefined) {
+            originX = parent.originX;
+        }
+        if (originY === undefined) {
+            originY = parent.originY;
+        }
+        if ((this.originX === originX) && (this.originY === originY)) {
+            return this;
+        }
+
+        this.originX = originX;
+        this.originY = originY;
+
+        DrawShape.call(this,
+            this.width, this.height, this.padding,
+            originX, originY,
+        );
+        return this;
+    };
+
+    var Contains = function (x, y) {
+        x -= this.x;
+        y -= this.y;
+        return this.geom.contains(x, y);
+    };
+
+    var Methods = {
+        setPosition: SetPosition,
+        resize: Resize,
+        setOrigin: SetOrigin,
+        contains: Contains,
+    };
+
+    const GetValue$3 = Phaser.Utils.Objects.GetValue;
+
+    var GetBoundsConfig$1 = function (config, out) {
+        if (config === undefined) {
+            config = 0;
+        }
+        if (out === undefined) {
+            out = {};
+        }
+
+        if (typeof (config) === 'number') {
+            out.left = config;
+            out.right = config;
+            out.top = config;
+            out.bottom = config;
+        } else {
+            out.left = GetValue$3(config, 'left', 0);
+            out.right = GetValue$3(config, 'right', 0);
+            out.top = GetValue$3(config, 'top', 0);
+            out.bottom = GetValue$3(config, 'bottom', 0);
+        }
+        return out;
+    };
+
     const Graphics = Phaser.GameObjects.Graphics;
 
     class DefaultMaskGraphics extends Graphics {
@@ -3714,7 +3833,7 @@
             super(parent.scene);
             this.parent = parent;
             this.shapeType = shapeType;
-            this.padding = GetBoundsConfig(padding);
+            this.padding = GetBoundsConfig$1(padding);
             this.setPosition().resize().setVisible(false);
             // Don't add it to display list
         }
@@ -3724,90 +3843,17 @@
             super.destroy();
             return this;
         }
-
-        setPosition(x, y) {
-            var parent = this.parent;
-            if (x === undefined) {
-                x = parent.x;
-            }
-            if (y === undefined) {
-                y = parent.y;
-            }
-            super.setPosition(x, y);
-            return this;
-        }
-
-        resize(width, height, padding) {
-            var parent = this.parent;
-            if (width === undefined) {
-                width = parent.width;
-            }
-            if (height === undefined) {
-                height = parent.height;
-            }
-
-            if (padding === undefined) {
-                padding = this.padding;
-            } else if (typeof (padding) === 'number') {
-                padding = GetBoundsConfig(padding);
-            }
-
-            var isSizeChanged = (this.width !== width) || (this.height !== height);
-            var isPaddingChanged = (this.padding !== padding) && !IsKeyValueEqual(this.padding, padding);
-            if (!isSizeChanged && !isPaddingChanged) {
-                return this;
-            }
-
-            this.width = width;
-            this.height = height;
-
-            if (isPaddingChanged) {
-                Clone(padding, this.padding);
-            }
-
-            // Graphics does not have originX, originY properties
-            this.originX = parent.originX;
-            this.originY = parent.originY;
-
-            DrawShape.call(this,
-                width, height, padding,
-                parent.originX, parent.originY
-            );
-
-            return this;
-        }
-
-        setOrigin(originX, originY) {
-            if (originY === undefined) {
-                originY = originX;
-            }
-
-            var parent = this.parent;
-            if (originX === undefined) {
-                originX = parent.originX;
-            }
-            if (originY === undefined) {
-                originY = parent.originY;
-            }
-            if ((this.originX === originX) && (this.originY === originY)) {
-                return this;
-            }
-
-            this.originX = originX;
-            this.originY = originY;
-
-            DrawShape.call(this,
-                this.width, this.height, this.padding,
-                originX, originY,
-            );
-            return this;
-        }
     }
 
     const SHAPEMODE = {
         rectangle: 0,
         circle: 1,
     };
+
+    Object.assign(
+        DefaultMaskGraphics.prototype,
+        Methods
+    );
 
     var AddChildMask = function (maskTarget, sizeTarget, shape, padding) {
         var maskGameObject = new DefaultMaskGraphics(sizeTarget, shape, padding); // A Graphics game object
