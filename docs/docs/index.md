@@ -8,8 +8,8 @@
 
 - [FAQ](https://github.com/phaser-discord/community/blob/master/FAQ.md)
 - [Official discord channel](https://discord.gg/phaser)
-- [API document](https://newdocs.phaser.io/docs/3.60.0/)
-- [Examples](https://labs.phaser.io/)
+- [API document](https://docs.phaser.io/api-documentation/api-documentation)
+- [Examples](https://phaser.io/examples/)
 - [Bug report](https://github.com/photonstorm/phaser/issues)
 
 ### Rex plugins
