@@ -32,16 +32,9 @@ export default class Lines extends PathBase {
         cx: number, cy: number,
         x: number, y: number
     ): this;
-    smoothQuadraticBezierTo(
-        x: number, y: number
-    ): this;
 
     cubicBezierTo(
         cx0: number, cy0: number,
-        cx1: number, cy1: number,
-        x: number, y: number
-    ): this;
-    smoothCubicBezierTo(
         cx1: number, cy1: number,
         x: number, y: number
     ): this;

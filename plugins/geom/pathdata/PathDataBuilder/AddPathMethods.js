@@ -87,15 +87,6 @@ export default {
 
         this.lastPointX = x;
         this.lastPointY = y;
-        this.lastCX = cx;
-        this.lastCY = cy;
-        return this;
-    },
-
-    smoothQuadraticBezierTo(x, y) {
-        var cx = this.lastPointX * 2 - this.lastCX;
-        var cy = this.lastPointY * 2 - this.lastCY;
-        this.quadraticBezierTo(cx, cy, x, y);
         return this;
     },
 
@@ -108,15 +99,6 @@ export default {
 
         this.lastPointX = x;
         this.lastPointY = y;
-        this.lastCX = cx1;
-        this.lastCY = cy1;
-        return this;
-    },
-
-    smoothCubicBezierTo(cx1, cy1, x, y) {
-        var cx0 = this.lastPointX * 2 - this.lastCX;
-        var cy0 = this.lastPointY * 2 - this.lastCY;
-        this.cubicBezierTo(cx0, cy0, cx1, cy1, x, y);
         return this;
     },
 

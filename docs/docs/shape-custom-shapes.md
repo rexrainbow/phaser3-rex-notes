@@ -439,22 +439,11 @@ Shape data will be updated during rendering, or call `shape.updateData()` to upd
     ```
     - `cx`, `cy` : Control point
     - `x`, `y` : End point
-- Add smooth quadratic bezier of lines
-    ```javascript
-    lines.smoothQuadraticBezierTo(x, y);
-    ```
-    - `x`, `y` : End point
 - Add cubic bezier of lines
     ```javascript
     lines.cubicBezierTo(cx0, cy0, cx1, cy1, x, y);
     ```
     - `cx0`, `cy0` : Control point0
-    - `cx1`, `cy1` : Control point1
-    - `x`, `y` : End point
-- Add smooth cubic bezier of lines
-    ```javascript
-    lines.smoothCubicBezierTo(cx1, cy1, x, y);
-    ```
     - `cx1`, `cy1` : Control point1
     - `x`, `y` : End point
 - End commands
