@@ -1996,15 +1996,6 @@
 
             this.lastPointX = x;
             this.lastPointY = y;
-            this.lastCX = cx;
-            this.lastCY = cy;
-            return this;
-        },
-
-        smoothQuadraticBezierTo(x, y) {
-            var cx = this.lastPointX * 2 - this.lastCX;
-            var cy = this.lastPointY * 2 - this.lastCY;
-            this.quadraticBezierTo(cx, cy, x, y);
             return this;
         },
 
@@ -2017,15 +2008,6 @@
 
             this.lastPointX = x;
             this.lastPointY = y;
-            this.lastCX = cx1;
-            this.lastCY = cy1;
-            return this;
-        },
-
-        smoothCubicBezierTo(cx1, cy1, x, y) {
-            var cx0 = this.lastPointX * 2 - this.lastCX;
-            var cy0 = this.lastPointY * 2 - this.lastCY;
-            this.cubicBezierTo(cx0, cy0, cx1, cy1, x, y);
             return this;
         },
 
@@ -2050,14 +2032,14 @@
 
     //import PointRotateAround from '../../utils/math/RotateAround.js';
 
-    const PointRotateAround$1 = Phaser.Math.RotateAround;
+    const PointRotateAround = Phaser.Math.RotateAround;
 
     var RotateAround = function (centerX, centerY, angle, pathData) {
         var point = { x: 0, y: 0 };
         for (var i = 0, cnt = pathData.length - 1; i < cnt; i += 2) {
             point.x = pathData[i];
             point.y = pathData[i + 1];
-            PointRotateAround$1(point, centerX, centerY, angle);
+            PointRotateAround(point, centerX, centerY, angle);
             pathData[i] = point.x;
             pathData[i + 1] = point.y;
         }
@@ -2085,7 +2067,7 @@
     };
 
     const DegToRad$1 = Phaser.Math.DegToRad;
-    const PointRotateAround = Phaser.Math.RotateAround;
+    Phaser.Math.RotateAround;
 
     var TransformPointsMethods = {
         rotateAround(centerX, centerY, angle) {
@@ -2100,15 +2082,6 @@
             var pathDataCnt = this.pathData.length;
             this.lastPointX = this.pathData[pathDataCnt - 2];
             this.lastPointY = this.pathData[pathDataCnt - 1];
-            if (this.lastCX !== undefined) {
-                var point = {
-                    x: this.lastCX,
-                    y: this.lastCY
-                };
-                PointRotateAround(point, centerX, centerY, angle);
-                this.lastCX = point.x;
-                this.lastCY = point.y;
-            }
             return this;
         },
 
@@ -2120,14 +2093,6 @@
             Scale(centerX, centerY, scaleX, scaleY, this.pathData);
             this.lastPointX = this.pathData[pathDataCnt - 2];
             this.lastPointY = this.pathData[pathDataCnt - 1];
-            if (this.lastCX !== undefined) {
-                var x = this.lastCX - centerX;
-                var y = this.lastCY - centerY;
-                x *= scaleX;
-                y *= scaleY;
-                this.lastCX = x + centerX;
-                this.lastCY = y + centerY;
-            }
             return this;
         },
 
@@ -2476,22 +2441,8 @@
             return this;
         }
 
-        smoothQuadraticBezierTo(x, y) {
-            this.builder.smoothQuadraticBezierTo(x, y);
-
-            this.dirty = true;
-            return this;
-        }
-
         cubicBezierTo(cx0, cy0, cx1, cy1, x, y) {
             this.builder.cubicBezierTo(cx0, cy0, cx1, cy1, x, y);
-
-            this.dirty = true;
-            return this;
-        }
-
-        smoothCubicBezierTo(cx1, cy1, x, y) {
-            this.builder.smoothCubicBezierTo(cx1, cy1, x, y);
 
             this.dirty = true;
             return this;
