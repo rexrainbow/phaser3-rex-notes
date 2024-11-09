@@ -92,6 +92,13 @@ class Lines extends PathBase {
         return this;
     }
 
+    catmullRomTo(...points) {
+        this.builder.catmullRomTo(...points);
+
+        this.dirty = true;
+        return this;
+    }
+
     close() {
         this.builder.close();
 

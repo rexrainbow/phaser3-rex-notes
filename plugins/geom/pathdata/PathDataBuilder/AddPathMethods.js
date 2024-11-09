@@ -3,6 +3,7 @@ import LineTo from '../LineTo.js';
 import ArcTo from '../ArcTo.js';
 import QuadraticBezierTo from '../QuadraticBezierTo.js';
 import CubicBezierCurveTo from '../CubicBezierCurveTo.js';
+import CatmullRomTo from '../CatmullRomTo.js';
 import DuplicateLast from '../DuplicateLast.js';
 
 export default {
@@ -99,6 +100,18 @@ export default {
 
         this.lastPointX = x;
         this.lastPointY = y;
+        return this;
+    },
+
+    catmullRomTo(...points) {
+        CatmullRomTo(
+            points,
+            this.iterations,
+            this.pathData
+        )
+
+        this.lastPointX = points[points.length-2];
+        this.lastPointY = points[points.length-1];
         return this;
     },
 

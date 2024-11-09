@@ -39,6 +39,8 @@ export default class Lines extends PathBase {
         x: number, y: number
     ): this;
 
+    catmullRomTo(...points: number[]): this;
+
     close(): this;
 
     end(): this;
