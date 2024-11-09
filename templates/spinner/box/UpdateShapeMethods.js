@@ -1,4 +1,4 @@
-import { Lines } from '../utils/Geoms.js';
+import Lines from '../../../plugins/gameobjects/shape/shapes/geoms/lines/Lines.js';
 
 export default {
     buildShapes() {

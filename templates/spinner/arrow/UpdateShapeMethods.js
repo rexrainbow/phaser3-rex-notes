@@ -1,5 +1,4 @@
-
-import { Lines } from '../utils/Geoms.js';
+import Lines from '../../../plugins/gameobjects/shape/shapes/geoms/lines/Lines.js';
 import Yoyo from '../utils/Yoyo.js';
 
 const DegToRad = Phaser.Math.DegToRad;

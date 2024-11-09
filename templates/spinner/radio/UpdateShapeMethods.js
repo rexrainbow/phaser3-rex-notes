@@ -1,4 +1,5 @@
-import { Circle, Lines } from '../utils/Geoms.js';
+import Circle from '../../../plugins/gameobjects/shape/shapes/geoms/lines/arc/Circle.js';
+import Lines from '../../../plugins/gameobjects/shape/shapes/geoms/lines/Lines.js';
 import Yoyo from '../utils/Yoyo.js';
 
 const Linear = Phaser.Math.Linear;

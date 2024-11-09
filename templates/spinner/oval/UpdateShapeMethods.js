@@ -1,4 +1,5 @@
-import { Arc, Circle } from '../utils/Geoms.js'
+import Arc from '../../../plugins/gameobjects/shape/shapes/geoms/lines/arc/Arc.js';
+import Circle from '../../../plugins/gameobjects/shape/shapes/geoms/lines/arc/Circle.js';
 
 export default {
     buildShapes() {

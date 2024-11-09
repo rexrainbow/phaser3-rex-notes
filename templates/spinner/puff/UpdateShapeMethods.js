@@ -1,4 +1,4 @@
-import { Circle } from '../utils/Geoms.js';
+import Circle from '../../../plugins/gameobjects/shape/shapes/geoms/lines/arc/Circle.js';
 import Yoyo from '../utils/Yoyo.js';
 
 export default {

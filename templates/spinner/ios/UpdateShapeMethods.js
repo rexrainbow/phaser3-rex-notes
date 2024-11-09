@@ -1,4 +1,4 @@
-import { Line } from '../utils/Geoms.js'
+import Line from '../../../plugins/gameobjects/shape/shapes/geoms/lines/Line.js';
 
 const Linear = Phaser.Math.Linear;
 

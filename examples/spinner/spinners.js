@@ -44,8 +44,8 @@ class Demo extends Phaser.Scene {
                 cellWidth: 100,
                 cellHeight: 100,
                 position: Phaser.Display.Align.TOP_LEFT,
-                x: 100,
-                y: 100
+                x: 60,
+                y: 60
             }
         );
     }

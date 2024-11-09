@@ -1,4 +1,5 @@
-import { Circle, Line } from '../utils/Geoms.js'
+import Circle from '../../../plugins/gameobjects/shape/shapes/geoms/lines/arc/Circle.js';
+import Line from '../../../plugins/gameobjects/shape/shapes/geoms/lines/Line.js';
 
 const RadToDeg = Phaser.Math.RadToDeg;
 const WrapDegrees = Phaser.Math.Angle.WrapDegrees;

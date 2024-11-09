@@ -1,4 +1,4 @@
-import { Arc } from '../utils/Geoms.js';
+import Arc from '../../../plugins/gameobjects/shape/shapes/geoms/lines/arc/Arc.js';
 
 const Linear = Phaser.Math.Linear;
 
