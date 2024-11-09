@@ -1643,6 +1643,16 @@
         }
     }
 
+    var StartAt = function (x, y, pathData) {
+        pathData.length = 0;
+
+        if (x != null) {
+            pathData.push(x, y);
+        }
+
+        return pathData;
+    };
+
     var LineTo = function (x, y, pathData) {
         var cnt = pathData.length;
         if (cnt >= 2) {
@@ -1676,18 +1686,6 @@
             var y = centerY + (radiusY * Math.sin(angle));
             LineTo(x, y, pathData);
         }
-        return pathData;
-    };
-
-    Phaser.Math.DegToRad;
-
-    var StartAt = function (x, y, pathData) {
-        pathData.length = 0;
-
-        if (x != null) {
-            pathData.push(x, y);
-        }
-
         return pathData;
     };
 
@@ -2329,12 +2327,6 @@
             return this;
         }
     }
-
-    Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
-
-    Phaser.Utils.Objects.GetValue;
-
-    Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 
     var Yoyo = function (t, threshold) {
         if (threshold === undefined) {

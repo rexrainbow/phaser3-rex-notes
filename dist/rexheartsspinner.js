@@ -1643,6 +1643,16 @@
         }
     }
 
+    var StartAt = function (x, y, pathData) {
+        pathData.length = 0;
+
+        if (x != null) {
+            pathData.push(x, y);
+        }
+
+        return pathData;
+    };
+
     var LineTo = function (x, y, pathData) {
         var cnt = pathData.length;
         if (cnt >= 2) {
@@ -1676,18 +1686,6 @@
             var y = centerY + (radiusY * Math.sin(angle));
             LineTo(x, y, pathData);
         }
-        return pathData;
-    };
-
-    Phaser.Math.DegToRad;
-
-    var StartAt = function (x, y, pathData) {
-        pathData.length = 0;
-
-        if (x != null) {
-            pathData.push(x, y);
-        }
-
         return pathData;
     };
 
@@ -2330,12 +2328,6 @@
         }
     }
 
-    Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
-
-    Phaser.Utils.Objects.GetValue;
-
-    Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
-
     var Yoyo = function (t, threshold) {
         if (threshold === undefined) {
             threshold = 0.5;
@@ -2384,22 +2376,22 @@
                     .startAt(
                         x, y
                     )
-                    .cubicBezierCurveTo(
+                    .cubicBezierTo(
                         x, y - w30,
                         x - w50, y - w30,
                         x - w50, y
                     )
-                    .cubicBezierCurveTo(
+                    .cubicBezierTo(
                         x - w50, y + w30,
                         x, y + w35,
                         x, y + w60
                     )
-                    .cubicBezierCurveTo(
+                    .cubicBezierTo(
                         x, y + w35,
                         x + w50, y + w30,
                         x + w50, y
                     )
-                    .cubicBezierCurveTo(
+                    .cubicBezierTo(
                         x + w50, y - w30,
                         x, y - w30,
                         x, y

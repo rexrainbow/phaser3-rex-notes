@@ -43681,22 +43681,22 @@
                     .startAt(
                         x, y
                     )
-                    .cubicBezierCurveTo(
+                    .cubicBezierTo(
                         x, y - w30,
                         x - w50, y - w30,
                         x - w50, y
                     )
-                    .cubicBezierCurveTo(
+                    .cubicBezierTo(
                         x - w50, y + w30,
                         x, y + w35,
                         x, y + w60
                     )
-                    .cubicBezierCurveTo(
+                    .cubicBezierTo(
                         x, y + w35,
                         x + w50, y + w30,
                         x + w50, y
                     )
-                    .cubicBezierCurveTo(
+                    .cubicBezierTo(
                         x + w50, y - w30,
                         x, y - w30,
                         x, y

@@ -1643,6 +1643,16 @@
         }
     }
 
+    var StartAt = function (x, y, pathData) {
+        pathData.length = 0;
+
+        if (x != null) {
+            pathData.push(x, y);
+        }
+
+        return pathData;
+    };
+
     var LineTo = function (x, y, pathData) {
         var cnt = pathData.length;
         if (cnt >= 2) {
@@ -1676,295 +1686,6 @@
             var y = centerY + (radiusY * Math.sin(angle));
             LineTo(x, y, pathData);
         }
-        return pathData;
-    };
-
-    const DegToRad$3 = Phaser.Math.DegToRad;
-
-    class Arc extends PathBase {
-        constructor(x, y, radiusX, radiusY, startAngle, endAngle, anticlockwise, pie) {
-            if (x === undefined) { x = 0; }
-            if (y === undefined) { y = 0; }
-            if (radiusX === undefined) { radiusX = 0; }
-            if (radiusY === undefined) { radiusY = 0; }
-            if (startAngle === undefined) { startAngle = 0; }
-            if (endAngle === undefined) { endAngle = 360; }
-            if (anticlockwise === undefined) { anticlockwise = false; }
-            if (pie === undefined) { pie = false; }
-
-            super();
-
-            this.setCenterPosition(x, y);
-            this.setRadius(radiusX, radiusY);
-            this.setAngle(startAngle, endAngle, anticlockwise);
-            this.setPie(pie);
-            this.setIterations(32);
-        }
-
-        get x() {
-            return this._x;
-        }
-
-        set x(value) {
-            this.dirty = this.dirty || (this._x !== value);
-            this._x = value;
-        }
-
-        get y() {
-            return this._y;
-        }
-
-        set y(value) {
-            this.dirty = this.dirty || (this._y !== value);
-            this._y = value;
-        }
-
-        setCenterPosition(x, y) {
-            if (y === undefined) {
-                y = x;
-            }
-            this.x = x;
-            this.y = y;
-            return this;
-        }
-
-        get radiusX() {
-            return this._radiusX;
-        }
-
-        set radiusX(value) {
-            this.dirty = this.dirty || (this._radiusX !== value);
-            this._radiusX = value;
-        }
-
-        get radiusY() {
-            return this._radiusY;
-        }
-
-        set radiusY(value) {
-            this.dirty = this.dirty || (this._radiusY !== value);
-            this._radiusY = value;
-        }
-
-        setRadius(radiusX, radiusY) {
-            if (radiusY === undefined) {
-                radiusY = radiusX;
-            }
-            this.radiusX = radiusX;
-            this.radiusY = radiusY;
-            return this;
-        }
-
-        get startAngle() {
-            return this._startAngle;
-        }
-
-        set startAngle(value) {
-            this.dirty = this.dirty || (this._startAngle !== value);
-            this._startAngle = value;
-        }
-
-        get endAngle() {
-            return this._endAngle;
-        }
-
-        set endAngle(value) {
-            this.dirty = this.dirty || (this._endAngle !== value);
-            this._endAngle = value;
-        }
-
-        get anticlockwise() {
-            return this._anticlockwise;
-        }
-
-        set anticlockwise(value) {
-            this.dirty = this.dirty || (this._anticlockwise !== value);
-            this._anticlockwise = value;
-        }
-
-        setAngle(startAngle, endAngle, anticlockwise) {
-            // startAngle, endAngle in degrees
-            if (anticlockwise === undefined) {
-                anticlockwise = false;
-            }
-
-            this.startAngle = startAngle;
-            this.endAngle = endAngle;
-            this.anticlockwise = anticlockwise;
-            return this;
-        }
-
-        get pie() {
-            return this._pie;
-        }
-
-        set pie(value) {
-            this.dirty = this.dirty || (this._pie !== value);
-            this._pie = value;
-        }
-
-        setPie(pie) {
-            if (pie === undefined) {
-                pie = true;
-            }
-            this.pie = pie;
-            return this;
-        }
-
-        get iterations() {
-            return this._iterations;
-        }
-
-        set iterations(value) {
-            this.dirty = this.dirty || (this._iterations !== value);
-            this._iterations = value;
-        }
-
-        setIterations(iterations) {
-            this.iterations = iterations;
-            return this;
-        }
-
-        updateData() {
-            this.pathData.length = 0;
-            if (this.pie) {
-                this.pathData.push(this.x, this.y);
-            }
-            ArcTo(
-                this.x, this.y,
-                this.radiusX, this.radiusY,
-                this.startAngle, this.endAngle, this.anticlockwise,
-                this.iterations,
-                this.pathData
-            );
-            if (this.pie) {
-                this.pathData.push(this.x, this.y);
-            }
-            // Close
-            this.pathData.push(this.pathData[0], this.pathData[1]);
-
-            super.updateData();
-            return this;
-        }
-
-        canvasRender(ctx, dx, dy) {
-            ctx.beginPath();
-            var x = this.x - dx,
-                y = this.y - dy,
-                startAngle = DegToRad$3(this.startAngle),
-                endAngle = DegToRad$3(this.endAngle);
-            if (this.pie) {
-                ctx.moveTo(x, y);
-                ctx.lineTo(
-                    x + Math.cos(startAngle) * this.radiusX,
-                    y + Math.sin(startAngle) * this.radiusY
-                );
-            }
-            ctx.ellipse(
-                x, y,
-                this.radiusX, this.radiusY,
-                0,
-                startAngle, endAngle, this.anticlockwise
-            );
-            if (this.pie) {
-                ctx.lineTo(x, y);
-            }
-            if (this.isFilled) {
-                FillStyleCanvas(ctx, this);
-                ctx.fill();
-            }
-            if (this.isStroked) {
-                LineStyleCanvas(ctx, this);
-                ctx.stroke();
-            }
-        }
-    }
-
-    class Circle extends Arc {
-        constructor(x, y, radius) {
-            super(x, y, radius, radius, 0, 360);
-        }
-    }
-
-    class Line extends PathBase {
-        constructor(x0, y0, x1, y1) {
-            if (x0 === undefined) { x0 = 0; }
-            if (y0 === undefined) { y0 = 0; }
-            if (x1 === undefined) { x1 = 0; }
-            if (y1 === undefined) { y1 = 0; }
-
-            super();
-
-            this.setP0(x0, y0);
-            this.setP1(x1, y1);
-        }
-
-        get x0() {
-            return this._x0;
-        }
-
-        set x0(value) {
-            this.dirty = this.dirty || (this._x0 !== value);
-            this._x0 = value;
-        }
-
-        get y0() {
-            return this._y0;
-        }
-
-        set y0(value) {
-            this.dirty = this.dirty || (this._y0 !== value);
-            this._y0 = value;
-        }
-
-        setP0(x, y) {
-            this.x0 = x;
-            this.y0 = y;
-            return this;
-        }
-
-        get x1() {
-            return this._x1;
-        }
-
-        set x1(value) {
-            this.dirty = this.dirty || (this._x1 !== value);
-            this._x1 = value;
-        }
-
-        get y1() {
-            return this._y1;
-        }
-
-        set y1(value) {
-            this.dirty = this.dirty || (this._y1 !== value);
-            this._y1 = value;
-        }
-
-        setP1(x, y) {
-            this.x1 = x;
-            this.y1 = y;
-            return this;
-        }
-
-        updateData() {
-            this.pathData.length = 0;
-            this.pathData.push(this.x0, this.y0);
-            this.pathData.push(this.x1, this.y1);
-            this.pathData.push(this.x0, this.y0);
-
-            super.updateData();
-            return this;
-        }
-    }
-
-    var StartAt = function (x, y, pathData) {
-        pathData.length = 0;
-
-        if (x != null) {
-            pathData.push(x, y);
-        }
-
         return pathData;
     };
 
@@ -2170,7 +1891,7 @@
         return pathData;
     };
 
-    const DegToRad$2 = Phaser.Math.DegToRad;
+    const DegToRad$3 = Phaser.Math.DegToRad;
     Phaser.Math.RotateAround;
 
     var TransformPointsMethods = {
@@ -2179,7 +1900,7 @@
                 return this;
             }
 
-            angle = DegToRad$2(angle);
+            angle = DegToRad$3(angle);
 
             RotateAround(centerX, centerY, angle, this.pathData);
 
@@ -2607,12 +2328,6 @@
         }
     }
 
-    Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
-
-    Phaser.Utils.Objects.GetValue;
-
-    Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
-
     var Yoyo = function (t, threshold) {
         if (threshold === undefined) {
             threshold = 0.5;
@@ -2626,7 +2341,7 @@
         return t;
     };
 
-    const DegToRad$1 = Phaser.Math.DegToRad;
+    const DegToRad$2 = Phaser.Math.DegToRad;
     const Linear$a = Phaser.Math.Linear;
     const ExpoIn$4 = Phaser.Math.Easing.Expo.In;
 
@@ -2684,11 +2399,11 @@
                     x0 = this.centerX;
                     y0 = this.centerY - this.radius;
                     // xt = a*x + b*y
-                    var radX = DegToRad$1(315);
+                    var radX = DegToRad$2(315);
                     a = Math.cos(radX);
                     b = Math.sin(radX);
                     // yt = c*x + d*y
-                    var radY = DegToRad$1(45);
+                    var radY = DegToRad$2(45);
                     c = Math.cos(radY);
                     d = Math.sin(radY);
                     break;
@@ -2697,11 +2412,11 @@
                     x0 = this.centerX;
                     y0 = this.centerY + this.radius;
                     // xt = a*x + b*y
-                    var radX = DegToRad$1(135);
+                    var radX = DegToRad$2(135);
                     a = Math.cos(radX);
                     b = Math.sin(radX);
                     // yt = c*x + d*y
-                    var radY = DegToRad$1(225);
+                    var radY = DegToRad$2(225);
                     c = Math.cos(radY);
                     d = Math.sin(radY);
                     break;
@@ -2710,11 +2425,11 @@
                     x0 = this.centerX + this.radius;
                     y0 = this.centerY;
                     // xt = a*x + b*y
-                    var radX = DegToRad$1(225);
+                    var radX = DegToRad$2(225);
                     a = Math.cos(radX);
                     b = Math.sin(radX);
                     // yt = c*x + d*y
-                    var radY = DegToRad$1(315);
+                    var radY = DegToRad$2(315);
                     c = Math.cos(radY);
                     d = Math.sin(radY);
                     break;
@@ -2723,11 +2438,11 @@
                     x0 = this.centerX - this.radius;
                     y0 = this.centerY;
                     // xt = a*x + b*y
-                    var radX = DegToRad$1(45);
+                    var radX = DegToRad$2(45);
                     a = Math.cos(radX);
                     b = Math.sin(radX);
                     // yt = c*x + d*y
-                    var radY = DegToRad$1(135);
+                    var radY = DegToRad$2(135);
                     c = Math.cos(radY);
                     d = Math.sin(radY);
                     break;
@@ -2751,6 +2466,78 @@
             }
         }
     };
+
+    class Line extends PathBase {
+        constructor(x0, y0, x1, y1) {
+            if (x0 === undefined) { x0 = 0; }
+            if (y0 === undefined) { y0 = 0; }
+            if (x1 === undefined) { x1 = 0; }
+            if (y1 === undefined) { y1 = 0; }
+
+            super();
+
+            this.setP0(x0, y0);
+            this.setP1(x1, y1);
+        }
+
+        get x0() {
+            return this._x0;
+        }
+
+        set x0(value) {
+            this.dirty = this.dirty || (this._x0 !== value);
+            this._x0 = value;
+        }
+
+        get y0() {
+            return this._y0;
+        }
+
+        set y0(value) {
+            this.dirty = this.dirty || (this._y0 !== value);
+            this._y0 = value;
+        }
+
+        setP0(x, y) {
+            this.x0 = x;
+            this.y0 = y;
+            return this;
+        }
+
+        get x1() {
+            return this._x1;
+        }
+
+        set x1(value) {
+            this.dirty = this.dirty || (this._x1 !== value);
+            this._x1 = value;
+        }
+
+        get y1() {
+            return this._y1;
+        }
+
+        set y1(value) {
+            this.dirty = this.dirty || (this._y1 !== value);
+            this._y1 = value;
+        }
+
+        setP1(x, y) {
+            this.x1 = x;
+            this.y1 = y;
+            return this;
+        }
+
+        updateData() {
+            this.pathData.length = 0;
+            this.pathData.push(this.x0, this.y0);
+            this.pathData.push(this.x1, this.y1);
+            this.pathData.push(this.x0, this.y0);
+
+            super.updateData();
+            return this;
+        }
+    }
 
     const Linear$9 = Phaser.Math.Linear;
 
@@ -2803,6 +2590,213 @@
             }
         }
     };
+
+    const DegToRad$1 = Phaser.Math.DegToRad;
+
+    class Arc extends PathBase {
+        constructor(x, y, radiusX, radiusY, startAngle, endAngle, anticlockwise, pie) {
+            if (x === undefined) { x = 0; }
+            if (y === undefined) { y = 0; }
+            if (radiusX === undefined) { radiusX = 0; }
+            if (radiusY === undefined) { radiusY = 0; }
+            if (startAngle === undefined) { startAngle = 0; }
+            if (endAngle === undefined) { endAngle = 360; }
+            if (anticlockwise === undefined) { anticlockwise = false; }
+            if (pie === undefined) { pie = false; }
+
+            super();
+
+            this.setCenterPosition(x, y);
+            this.setRadius(radiusX, radiusY);
+            this.setAngle(startAngle, endAngle, anticlockwise);
+            this.setPie(pie);
+            this.setIterations(32);
+        }
+
+        get x() {
+            return this._x;
+        }
+
+        set x(value) {
+            this.dirty = this.dirty || (this._x !== value);
+            this._x = value;
+        }
+
+        get y() {
+            return this._y;
+        }
+
+        set y(value) {
+            this.dirty = this.dirty || (this._y !== value);
+            this._y = value;
+        }
+
+        setCenterPosition(x, y) {
+            if (y === undefined) {
+                y = x;
+            }
+            this.x = x;
+            this.y = y;
+            return this;
+        }
+
+        get radiusX() {
+            return this._radiusX;
+        }
+
+        set radiusX(value) {
+            this.dirty = this.dirty || (this._radiusX !== value);
+            this._radiusX = value;
+        }
+
+        get radiusY() {
+            return this._radiusY;
+        }
+
+        set radiusY(value) {
+            this.dirty = this.dirty || (this._radiusY !== value);
+            this._radiusY = value;
+        }
+
+        setRadius(radiusX, radiusY) {
+            if (radiusY === undefined) {
+                radiusY = radiusX;
+            }
+            this.radiusX = radiusX;
+            this.radiusY = radiusY;
+            return this;
+        }
+
+        get startAngle() {
+            return this._startAngle;
+        }
+
+        set startAngle(value) {
+            this.dirty = this.dirty || (this._startAngle !== value);
+            this._startAngle = value;
+        }
+
+        get endAngle() {
+            return this._endAngle;
+        }
+
+        set endAngle(value) {
+            this.dirty = this.dirty || (this._endAngle !== value);
+            this._endAngle = value;
+        }
+
+        get anticlockwise() {
+            return this._anticlockwise;
+        }
+
+        set anticlockwise(value) {
+            this.dirty = this.dirty || (this._anticlockwise !== value);
+            this._anticlockwise = value;
+        }
+
+        setAngle(startAngle, endAngle, anticlockwise) {
+            // startAngle, endAngle in degrees
+            if (anticlockwise === undefined) {
+                anticlockwise = false;
+            }
+
+            this.startAngle = startAngle;
+            this.endAngle = endAngle;
+            this.anticlockwise = anticlockwise;
+            return this;
+        }
+
+        get pie() {
+            return this._pie;
+        }
+
+        set pie(value) {
+            this.dirty = this.dirty || (this._pie !== value);
+            this._pie = value;
+        }
+
+        setPie(pie) {
+            if (pie === undefined) {
+                pie = true;
+            }
+            this.pie = pie;
+            return this;
+        }
+
+        get iterations() {
+            return this._iterations;
+        }
+
+        set iterations(value) {
+            this.dirty = this.dirty || (this._iterations !== value);
+            this._iterations = value;
+        }
+
+        setIterations(iterations) {
+            this.iterations = iterations;
+            return this;
+        }
+
+        updateData() {
+            this.pathData.length = 0;
+            if (this.pie) {
+                this.pathData.push(this.x, this.y);
+            }
+            ArcTo(
+                this.x, this.y,
+                this.radiusX, this.radiusY,
+                this.startAngle, this.endAngle, this.anticlockwise,
+                this.iterations,
+                this.pathData
+            );
+            if (this.pie) {
+                this.pathData.push(this.x, this.y);
+            }
+            // Close
+            this.pathData.push(this.pathData[0], this.pathData[1]);
+
+            super.updateData();
+            return this;
+        }
+
+        canvasRender(ctx, dx, dy) {
+            ctx.beginPath();
+            var x = this.x - dx,
+                y = this.y - dy,
+                startAngle = DegToRad$1(this.startAngle),
+                endAngle = DegToRad$1(this.endAngle);
+            if (this.pie) {
+                ctx.moveTo(x, y);
+                ctx.lineTo(
+                    x + Math.cos(startAngle) * this.radiusX,
+                    y + Math.sin(startAngle) * this.radiusY
+                );
+            }
+            ctx.ellipse(
+                x, y,
+                this.radiusX, this.radiusY,
+                0,
+                startAngle, endAngle, this.anticlockwise
+            );
+            if (this.pie) {
+                ctx.lineTo(x, y);
+            }
+            if (this.isFilled) {
+                FillStyleCanvas(ctx, this);
+                ctx.fill();
+            }
+            if (this.isStroked) {
+                LineStyleCanvas(ctx, this);
+                ctx.stroke();
+            }
+        }
+    }
+
+    class Circle extends Arc {
+        constructor(x, y, radius) {
+            super(x, y, radius, radius, 0, 360);
+        }
+    }
 
     const Linear$8 = Phaser.Math.Linear;
 
@@ -3199,22 +3193,22 @@
                     .startAt(
                         x, y
                     )
-                    .cubicBezierCurveTo(
+                    .cubicBezierTo(
                         x, y - w30,
                         x - w50, y - w30,
                         x - w50, y
                     )
-                    .cubicBezierCurveTo(
+                    .cubicBezierTo(
                         x - w50, y + w30,
                         x, y + w35,
                         x, y + w60
                     )
-                    .cubicBezierCurveTo(
+                    .cubicBezierTo(
                         x, y + w35,
                         x + w50, y + w30,
                         x + w50, y
                     )
-                    .cubicBezierCurveTo(
+                    .cubicBezierTo(
                         x + w50, y - w30,
                         x, y - w30,
                         x, y

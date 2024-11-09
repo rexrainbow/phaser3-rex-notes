@@ -2535,12 +2535,6 @@
         }
     }
 
-    Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
-
-    Phaser.Utils.Objects.GetValue;
-
-    Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
-
     var Yoyo = function (t, threshold) {
         if (threshold === undefined) {
             threshold = 0.5;
