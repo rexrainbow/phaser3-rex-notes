@@ -1,7 +1,7 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
     typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexboxspinner = factory());
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexlineshapeplugin = factory());
 })(this, (function () { 'use strict';
 
     const GetCalcMatrix = Phaser.GameObjects.GetCalcMatrix;
@@ -35,7 +35,7 @@
         renderer.pipelines.postBatch(src);
     };
 
-    const SetTransform = Phaser.Renderer.Canvas.SetTransform;
+    const SetTransform$1 = Phaser.Renderer.Canvas.SetTransform;
 
     var CanvasRenderer = function (renderer, src, camera, parentMatrix) {
         src.updateData();
@@ -43,7 +43,7 @@
 
         var ctx = renderer.currentContext;
 
-        if (SetTransform(renderer, ctx, src, camera, parentMatrix)) {
+        if (SetTransform$1(renderer, ctx, src, camera, parentMatrix)) {
             var dx = src._displayOriginX;
             var dy = src._displayOriginY;
 
@@ -295,982 +295,6 @@
         Render
     );
 
-    var EventEmitterMethods = {
-        setEventEmitter(eventEmitter, EventEmitterClass) {
-            if (EventEmitterClass === undefined) {
-                EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
-            }
-            this._privateEE = (eventEmitter === true) || (eventEmitter === undefined);
-            this._eventEmitter = (this._privateEE) ? (new EventEmitterClass()) : eventEmitter;
-            return this;
-        },
-
-        destroyEventEmitter() {
-            if (this._eventEmitter && this._privateEE) {
-                this._eventEmitter.shutdown();
-            }
-            return this;
-        },
-
-        getEventEmitter() {
-            return this._eventEmitter;
-        },
-
-        on() {
-            if (this._eventEmitter) {
-                this._eventEmitter.on.apply(this._eventEmitter, arguments);
-            }
-            return this;
-        },
-
-        once() {
-            if (this._eventEmitter) {
-                this._eventEmitter.once.apply(this._eventEmitter, arguments);
-            }
-            return this;
-        },
-
-        off() {
-            if (this._eventEmitter) {
-                this._eventEmitter.off.apply(this._eventEmitter, arguments);
-            }
-            return this;
-        },
-
-        emit(event) {
-            if (this._eventEmitter && event) {
-                this._eventEmitter.emit.apply(this._eventEmitter, arguments);
-            }
-            return this;
-        },
-
-        addListener() {
-            if (this._eventEmitter) {
-                this._eventEmitter.addListener.apply(this._eventEmitter, arguments);
-            }
-            return this;
-        },
-
-        removeListener() {
-            if (this._eventEmitter) {
-                this._eventEmitter.removeListener.apply(this._eventEmitter, arguments);
-            }
-            return this;
-        },
-
-        removeAllListeners() {
-            if (this._eventEmitter) {
-                this._eventEmitter.removeAllListeners.apply(this._eventEmitter, arguments);
-            }
-            return this;
-        },
-
-        listenerCount() {
-            if (this._eventEmitter) {
-                return this._eventEmitter.listenerCount.apply(this._eventEmitter, arguments);
-            }
-            return 0;
-        },
-
-        listeners() {
-            if (this._eventEmitter) {
-                return this._eventEmitter.listeners.apply(this._eventEmitter, arguments);
-            }
-            return [];
-        },
-
-        eventNames() {
-            if (this._eventEmitter) {
-                return this._eventEmitter.eventNames.apply(this._eventEmitter, arguments);
-            }
-            return [];
-        },
-    };
-
-    const SceneClass = Phaser.Scene;
-    var IsSceneObject = function (object) {
-        return (object instanceof SceneClass);
-    };
-
-    var GetSceneObject = function (object) {
-        if ((object == null) || (typeof (object) !== 'object')) {
-            return null;
-        } else if (IsSceneObject(object)) { // object = scene
-            return object;
-        } else if (object.scene && IsSceneObject(object.scene)) { // object = game object
-            return object.scene;
-        } else if (object.parent && object.parent.scene && IsSceneObject(object.parent.scene)) { // parent = bob object
-            return object.parent.scene;
-        } else {
-            return null;
-        }
-    };
-
-    const GameClass = Phaser.Game;
-    var IsGame = function (object) {
-        return (object instanceof GameClass);
-    };
-
-    var GetGame = function (object) {
-        if ((object == null) || (typeof (object) !== 'object')) {
-            return null;
-        } else if (IsGame(object)) {
-            return object;
-        } else if (IsGame(object.game)) {
-            return object.game;
-        } else if (IsSceneObject(object)) { // object = scene object
-            return object.sys.game;
-        } else if (IsSceneObject(object.scene)) { // object = game object
-            return object.scene.sys.game;
-        }
-    };
-
-    const GetValue$7 = Phaser.Utils.Objects.GetValue;
-
-    class ComponentBase {
-        constructor(parent, config) {
-            this.setParent(parent);  // gameObject, scene, or game
-
-            this.isShutdown = false;
-
-            // Event emitter, default is private event emitter
-            this.setEventEmitter(GetValue$7(config, 'eventEmitter', true));
-
-            // Register callback of parent destroy event, also see `shutdown` method
-            if (this.parent) {
-                if (this.parent === this.scene) { // parent is a scene
-                    this.scene.sys.events.once('shutdown', this.onEnvDestroy, this);
-
-                } else if (this.parent === this.game) { // parent is game
-                    this.game.events.once('shutdown', this.onEnvDestroy, this);
-
-                } else if (this.parent.once) { // parent is game object or something else
-                    this.parent.once('destroy', this.onParentDestroy, this);
-                }
-
-                // bob object does not have event emitter
-            }
-
-        }
-
-        shutdown(fromScene) {
-            // Already shutdown
-            if (this.isShutdown) {
-                return;
-            }
-
-            // parent might not be shutdown yet
-            if (this.parent) {
-                if (this.parent === this.scene) { // parent is a scene
-                    this.scene.sys.events.off('shutdown', this.onEnvDestroy, this);
-
-                } else if (this.parent === this.game) { // parent is game
-                    this.game.events.off('shutdown', this.onEnvDestroy, this);
-
-                } else if (this.parent.once) { // parent is game object or something else
-                    this.parent.off('destroy', this.onParentDestroy, this);
-                }
-
-                // bob object does not have event emitter
-            }
-
-
-            this.destroyEventEmitter();
-
-            this.parent = undefined;
-            this.scene = undefined;
-            this.game = undefined;
-
-            this.isShutdown = true;
-        }
-
-        destroy(fromScene) {
-            this.shutdown(fromScene);
-        }
-
-        onEnvDestroy() {
-            this.destroy(true);
-        }
-
-        onParentDestroy(parent, fromScene) {
-            this.destroy(fromScene);
-        }
-
-        setParent(parent) {
-            this.parent = parent;  // gameObject, scene, or game
-
-            this.scene = GetSceneObject(parent);
-            this.game = GetGame(parent);
-
-            return this;
-        }
-
-    }
-    Object.assign(
-        ComponentBase.prototype,
-        EventEmitterMethods
-    );
-
-    const GetValue$6 = Phaser.Utils.Objects.GetValue;
-
-    class TickTask extends ComponentBase {
-        constructor(parent, config) {
-            super(parent, config);
-
-            this._isRunning = false;
-            this.isPaused = false;
-            this.tickingState = false;
-            this.setTickingMode(GetValue$6(config, 'tickingMode', 1));
-            // boot() later
-        }
-
-        // override
-        boot() {
-            if ((this.tickingMode === 2) && (!this.tickingState)) {
-                this.startTicking();
-            }
-        }
-
-        // override
-        shutdown(fromScene) {
-            // Already shutdown
-            if (this.isShutdown) {
-                return;
-            }
-
-            this.stop();
-            if (this.tickingState) {
-                this.stopTicking();
-            }
-            super.shutdown(fromScene);
-        }
-
-        setTickingMode(mode) {
-            if (typeof (mode) === 'string') {
-                mode = TICKINGMODE[mode];
-            }
-            this.tickingMode = mode;
-        }
-
-        // override
-        startTicking() {
-            this.tickingState = true;
-        }
-
-        // override
-        stopTicking() {
-            this.tickingState = false;
-        }
-
-        get isRunning() {
-            return this._isRunning;
-        }
-
-        set isRunning(value) {
-            if (this._isRunning === value) {
-                return;
-            }
-
-            this._isRunning = value;
-            if ((this.tickingMode === 1) && (value != this.tickingState)) {
-                if (value) {
-                    this.startTicking();
-                } else {
-                    this.stopTicking();
-                }
-            }
-        }
-
-        start() {
-            this.isPaused = false;
-            this.isRunning = true;
-            return this;
-        }
-
-        pause() {
-            // Only can ba paused in running state
-            if (this.isRunning) {
-                this.isPaused = true;
-                this.isRunning = false;
-            }
-            return this;
-        }
-
-        resume() {
-            // Only can ba resumed in paused state (paused from running state)
-            if (this.isPaused) {
-                this.isPaused = false;
-                this.isRunning = true;
-            }
-            return this;
-        }
-
-        stop() {
-            this.isPaused = false;
-            this.isRunning = false;
-            return this;
-        }
-
-        complete() {
-            this.isPaused = false;
-            this.isRunning = false;
-            this.emit('complete', this.parent, this);
-        }
-    }
-
-    const TICKINGMODE = {
-        'no': 0,
-        'lazy': 1,
-        'always': 2
-    };
-
-    const GetValue$5 = Phaser.Utils.Objects.GetValue;
-
-    class SceneUpdateTickTask extends TickTask {
-        constructor(parent, config) {
-            super(parent, config);
-
-            // scene update : update, preupdate, postupdate, prerender, render
-            // game update : step, poststep, 
-
-            // If this.scene is not available, use game's 'step' event
-            var defaultEventName = (this.scene) ? 'update' : 'step';
-            this.tickEventName = GetValue$5(config, 'tickEventName', defaultEventName);
-            this.isSceneTicker = !IsGameUpdateEvent(this.tickEventName);
-
-        }
-
-        startTicking() {
-            super.startTicking();
-
-            if (this.isSceneTicker) {
-                this.scene.sys.events.on(this.tickEventName, this.update, this);
-            } else {
-                this.game.events.on(this.tickEventName, this.update, this);
-            }
-
-        }
-
-        stopTicking() {
-            super.stopTicking();
-
-            if (this.isSceneTicker && this.scene) { // Scene might be destoryed
-                this.scene.sys.events.off(this.tickEventName, this.update, this);
-            } else if (this.game) {
-                this.game.events.off(this.tickEventName, this.update, this);
-            }
-        }
-
-        // update(time, delta) {
-        //     
-        // }
-
-    }
-
-    var IsGameUpdateEvent = function (eventName) {
-        return (eventName === 'step') || (eventName === 'poststep');
-    };
-
-    const GetValue$4 = Phaser.Utils.Objects.GetValue;
-    const Clamp = Phaser.Math.Clamp;
-
-    class Timer {
-        constructor(config) {
-            this.resetFromJSON(config);
-        }
-
-        resetFromJSON(o) {
-            this.state = GetValue$4(o, 'state', IDLE);
-            this.timeScale = GetValue$4(o, 'timeScale', 1);
-            this.delay = GetValue$4(o, 'delay', 0);
-            this.repeat = GetValue$4(o, 'repeat', 0);
-            this.repeatCounter = GetValue$4(o, 'repeatCounter', 0);
-            this.repeatDelay = GetValue$4(o, 'repeatDelay', 0);
-            this.duration = GetValue$4(o, 'duration', 0);
-            this.nowTime = GetValue$4(o, 'nowTime', 0);
-            this.justRestart = GetValue$4(o, 'justRestart', false);
-        }
-
-        toJSON() {
-            return {
-                state: this.state,
-                timeScale: this.timeScale,
-                delay: this.delay,
-                repeat: this.repeat,
-                repeatCounter: this.repeatCounter,
-                repeatDelay: this.repeatDelay,
-                duration: this.duration,
-                nowTime: this.nowTime,
-                justRestart: this.justRestart,
-            }
-        }
-
-        destroy() {
-
-        }
-
-        setTimeScale(timeScale) {
-            this.timeScale = timeScale;
-            return this;
-        }
-
-        setDelay(delay) {
-            if (delay === undefined) {
-                delay = 0;
-            }
-            this.delay = delay;
-            return this;
-        }
-
-        setDuration(duration) {
-            this.duration = duration;
-            return this;
-        }
-
-        setRepeat(repeat) {
-            this.repeat = repeat;
-            return this;
-        }
-
-        setRepeatInfinity() {
-            this.repeat = -1;
-            return this;
-        }
-
-        setRepeatDelay(repeatDelay) {
-            this.repeatDelay = repeatDelay;
-            return this;
-        }
-
-        start() {
-            this.nowTime = (this.delay > 0) ? -this.delay : 0;
-            this.state = (this.nowTime >= 0) ? COUNTDOWN : DELAY;
-            this.repeatCounter = 0;
-            return this;
-        }
-
-        stop() {
-            this.state = IDLE;
-            return this;
-        }
-
-        update(time, delta) {
-            if (this.state === IDLE || this.state === DONE ||
-                delta === 0 || this.timeScale === 0
-            ) {
-                return;
-            }
-
-            this.nowTime += (delta * this.timeScale);
-            this.justRestart = false;
-            if (this.nowTime >= this.duration) {
-                if ((this.repeat === -1) || (this.repeatCounter < this.repeat)) {
-                    this.repeatCounter++;
-                    this.justRestart = true;
-                    this.nowTime -= this.duration;
-                    if (this.repeatDelay > 0) {
-                        this.nowTime -= this.repeatDelay;
-                        this.state = REPEATDELAY;
-                    }
-                } else {
-                    this.nowTime = this.duration;
-                    this.state = DONE;
-                }
-            } else if (this.nowTime >= 0) {
-                this.state = COUNTDOWN;
-            }
-        }
-
-        get t() {
-            var t;
-            switch (this.state) {
-                case IDLE:
-                case DELAY:
-                case REPEATDELAY:
-                    t = 0;
-                    break;
-
-                case COUNTDOWN:
-                    t = this.nowTime / this.duration;
-                    break;
-
-                case DONE:
-                    t = 1;
-                    break;
-            }
-            return Clamp(t, 0, 1);
-        }
-
-        set t(value) {
-            value = Clamp(value, -1, 1);
-            if (value < 0) {
-                this.state = DELAY;
-                this.nowTime = -this.delay * value;
-            } else {
-                this.state = COUNTDOWN;
-                this.nowTime = this.duration * value;
-
-                if ((value === 1) && (this.repeat !== 0)) {
-                    this.repeatCounter++;
-                }
-            }
-        }
-
-        setT(t) {
-            this.t = t;
-            return this;
-        }
-
-        get isIdle() {
-            return this.state === IDLE;
-        }
-
-        get isDelay() {
-            return this.state === DELAY;
-        }
-
-        get isCountDown() {
-            return this.state === COUNTDOWN;
-        }
-
-        get isRunning() {
-            return this.state === DELAY || this.state === COUNTDOWN;
-        }
-
-        get isDone() {
-            return this.state === DONE;
-        }
-
-        get isOddIteration() {
-            return (this.repeatCounter & 1) === 1;
-        }
-
-        get isEvenIteration() {
-            return (this.repeatCounter & 1) === 0;
-        }
-
-    }
-
-    const IDLE = 0;
-    const DELAY = 1;
-    const COUNTDOWN = 2;
-    const REPEATDELAY = 3;
-    const DONE = -1;
-
-    class TimerTickTask extends SceneUpdateTickTask {
-        constructor(parent, config) {
-            super(parent, config);
-            this.timer = new Timer();
-            // boot() later 
-        }
-
-        // override
-        shutdown(fromScene) {
-            // Already shutdown
-            if (this.isShutdown) {
-                return;
-            }
-
-            super.shutdown(fromScene);
-            this.timer.destroy();
-            this.timer = undefined;
-        }
-
-        start() {
-            this.timer.start();
-            super.start();
-            return this;
-        }
-
-        stop() {
-            this.timer.stop();
-            super.stop();
-            return this;
-        }
-
-        complete() {
-            this.timer.stop();
-            super.complete();
-            return this;
-        }
-
-    }
-
-    const GetValue$3 = Phaser.Utils.Objects.GetValue;
-    const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
-    const GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
-
-    class EaseValueTaskBase extends TimerTickTask {
-        resetFromJSON(o) {
-            this.timer.resetFromJSON(GetValue$3(o, 'timer'));
-            this.setEnable(GetValue$3(o, 'enable', true));
-            this.setTarget(GetValue$3(o, 'target', this.parent));
-            this.setDelay(GetAdvancedValue(o, 'delay', 0));
-            this.setDuration(GetAdvancedValue(o, 'duration', 1000));
-            this.setEase(GetValue$3(o, 'ease', 'Linear'));
-            this.setRepeat(GetValue$3(o, 'repeat', 0));
-
-            return this;
-        }
-
-        setEnable(e) {
-            if (e == undefined) {
-                e = true;
-            }
-            this.enable = e;
-            return this;
-        }
-
-        setTarget(target) {
-            if (target === undefined) {
-                target = this.parent;
-            }
-            this.target = target;
-            return this;
-        }
-
-        setDelay(time) {
-            this.delay = time;
-            // Assign `this.timer.setRepeat(repeat)` manually
-            return this;
-        }
-
-        setDuration(time) {
-            this.duration = time;
-            return this;
-        }
-
-        setRepeat(repeat) {
-            this.repeat = repeat;
-            // Assign `this.timer.setRepeat(repeat)` manually
-            return this;
-        }
-
-        setRepeatDelay(repeatDelay) {
-            this.repeatDelay = repeatDelay;
-            // Assign `this.timer.setRepeatDelay(repeatDelay)` manually
-            return this;
-        }
-
-        setEase(ease) {
-            if (ease === undefined) {
-                ease = 'Linear';
-            }
-            this.ease = ease;
-            this.easeFn = GetEaseFunction(ease);
-            return this;
-        }
-
-        // Override
-        start() {
-            // Ignore start if timer is running, i.e. in DELAY, o RUN state
-            if (this.timer.isRunning) {
-                return this;
-            }
-
-            super.start();
-            return this;
-        }
-
-        restart() {
-            this.timer.stop();
-            this.start.apply(this, arguments);
-            return this;
-        }
-
-        stop(toEnd) {
-            if (toEnd === undefined) {
-                toEnd = false;
-            }
-
-            super.stop();
-
-            if (toEnd) {
-                this.timer.setT(1);
-                this.updateTarget(this.target, this.timer);
-                this.complete();
-            }
-
-            return this;
-        }
-
-        update(time, delta) {
-            if (
-                (!this.isRunning) ||
-                (!this.enable) ||
-                (this.parent.hasOwnProperty('active') && !this.parent.active)
-            ) {
-                return this;
-            }
-
-            var target = this.target,
-                timer = this.timer;
-
-            timer.update(time, delta);
-
-            // isDelay, isCountDown, isDone
-            if (!timer.isDelay) {
-                this.updateTarget(target, timer);
-            }
-
-            this.emit('update', target, this);
-
-            if (timer.isDone) {
-                this.complete();
-            }
-
-            return this;
-        }
-
-        // Override
-        updateTarget(target, timer) {
-
-        }
-    }
-
-    const GetValue$2 = Phaser.Utils.Objects.GetValue;
-    const Linear$1 = Phaser.Math.Linear;
-
-    class EaseValueTask extends EaseValueTaskBase {
-        constructor(gameObject, config) {
-            super(gameObject, config);
-            // this.parent = gameObject;
-            // this.timer
-
-            this.resetFromJSON();
-            this.boot();
-        }
-
-        start(config) {
-            if (this.timer.isRunning) {
-                return this;
-            }
-
-            var target = this.target;
-            this.propertyKey = GetValue$2(config, 'key', 'value');
-            var currentValue = target[this.propertyKey];
-            this.fromValue = GetValue$2(config, 'from', currentValue);
-            this.toValue = GetValue$2(config, 'to', currentValue);
-
-            this.setEase(GetValue$2(config, 'ease', this.ease));
-            this.setDuration(GetValue$2(config, 'duration', this.duration));
-            this.setRepeat(GetValue$2(config, 'repeat', 0));
-            this.setDelay(GetValue$2(config, 'delay', 0));
-            this.setRepeatDelay(GetValue$2(config, 'repeatDelay', 0));
-
-            this.timer
-                .setDuration(this.duration)
-                .setRepeat(this.repeat)
-                .setDelay(this.delay)
-                .setRepeatDelay(this.repeatDelay);
-
-            target[this.propertyKey] = this.fromValue;
-
-            super.start();
-            return this;
-        }
-
-        updateTarget(target, timer) {
-            var t = timer.t;
-            t = this.easeFn(t);
-
-            target[this.propertyKey] = Linear$1(this.fromValue, this.toValue, t);
-        }
-    }
-
-    var Start = function (duration) {
-        if (!this.easeValueTask) {
-            this.easeValueTask = new EaseValueTask(this, { eventEmitter: null });
-        }
-
-        if (duration !== undefined) {
-            this.duration = duration;
-            this.easeValueTask.stop();  // Will restart with new duration
-        }
-
-        // Won't restart if easeValueTask is running
-        if (this.easeValueTask.isRunning) {
-            return this;
-        }
-
-        // Start easeValueTask
-        this.easeValueTask.restart({
-            key: 'value',
-            from: 0, to: 1,
-            duration: this.duration,
-            ease: this.ease,
-            repeat: -1,  // -1: infinity
-
-            delay: this.delay,
-            repeatDelay: this.repeatDelay
-        });
-
-        this.setDirty();
-
-        return this;
-    };
-
-    var Stop = function () {
-        if (!this.easeValueTask) {
-            return this;
-        }
-        this.easeValueTask.stop();
-        this.setDirty();
-        return this;
-    };
-
-    var Pause = function () {
-        if (!this.easeValueTask) {
-            return this;
-        }
-        this.easeValueTask.pause();
-        this.setDirty();
-        return this;
-    };
-
-    var Resume = function () {
-        if (!this.easeValueTask) {
-            return this;
-        }
-        this.easeValueTask.pause();
-        this.setDirty();
-        return this;
-    };
-
-    var EaseValueMethods = {
-        start: Start,
-        stop: Stop,
-        pause: Pause,
-        resume: Resume
-    };
-
-    const GetValue$1 = Phaser.Utils.Objects.GetValue;
-
-    class Base extends BaseShapes {
-        constructor(scene, config) {
-            var x = GetValue$1(config, 'x', 0);
-            var y = GetValue$1(config, 'y', 0);
-            var width = GetValue$1(config, 'width', 64);
-            var height = GetValue$1(config, 'height', 64);
-
-            super(scene, x, y, width, height);
-
-            this.resetFromConfig(config, true);
-
-            this.buildShapes(config);
-
-            if (GetValue$1(config, 'start', true)) {
-                this.start();
-            }
-        }
-
-        resetFromConfig(config, setDefaults) {
-            if (setDefaults === undefined) {
-                setDefaults = false;
-            }
-
-            var defaultValue;
-
-            defaultValue = (setDefaults) ? 1000 : this.duration;
-            this.setDuration(GetValue$1(config, 'duration', defaultValue));
-
-            defaultValue = (setDefaults) ? 'Linear' : this.ease;
-            this.setEase(GetValue$1(config, 'ease', defaultValue));
-
-            defaultValue = (setDefaults) ? 0 : this.delay;
-            this.setDelay(GetValue$1(config, 'delay', defaultValue));
-
-            defaultValue = (setDefaults) ? 0 : this.repeatDelay;
-            this.setRepeatDelay(GetValue$1(config, 'repeatDelay', defaultValue));
-
-            defaultValue = (setDefaults) ? 0xffffff : this.color;
-            this.setColor(GetValue$1(config, 'color', defaultValue));
-
-            defaultValue = (setDefaults) ? 0 : this.value;
-            this.setValue(GetValue$1(config, 'value', defaultValue));
-
-            return this;
-        }
-
-        buildShapes() {
-        }
-
-        get centerX() {
-            return this.width / 2;    }
-
-        get centerY() {
-            return this.height / 2;
-        }
-
-        get radius() {
-            return Math.min(this.centerX, this.centerY);
-        }
-
-        get color() {
-            return this._color;
-        }
-
-        set color(value) {
-            this.isColorChanged = this.isColorChanged || (this._color !== value);
-            this.dirty = this.dirty || this.isColorChanged;
-            this._color = value;
-            this.setShapesColor(value);
-        }
-
-        setColor(color) {
-            this.color = color;
-            return this;
-        }
-
-        setShapesColor(color) {
-
-        }
-
-        get value() {
-            return this._value;
-        }
-
-        set value(value) {
-            value = Phaser.Math.Clamp(value, 0, 1);
-            this.dirty = this.dirty || (this._value != value);
-            this._value = value;
-        }
-
-        setValue(value) {
-            this.value = value;
-            return this;
-        }
-
-        setDuration(duration) {
-            this.duration = duration;
-            return this;
-        }
-
-        setDelay(delay) {
-            this.delay = delay;
-            return this;
-        }
-
-        setRepeatDelay(repeatDelay) {
-            this.repeatDelay = repeatDelay;
-            return this;
-        }
-
-        setEase(ease) {
-            this.ease = ease;
-            return this;
-        }
-
-        get isRunning() {
-            return (this.tweenTask) ? this.tweenTask.isRunning : false;
-        }
-    }
-
-    Object.assign(
-        Base.prototype,
-        EaseValueMethods
-    );
-
     var FillStyle = function (color, alpha) {
         if (color == null) {
             this.isFilled = false;
@@ -1305,7 +329,7 @@
         lineStyle: LineStyle
     };
 
-    var GetValue = function (source, key, defaultValue) {
+    var GetValue$1 = function (source, key, defaultValue) {
         if (!source || typeof source === 'number') {
             return defaultValue;
         }
@@ -1367,7 +391,7 @@
 
         getData(key, defaultValue) {
             this.enableData();
-            return (key === undefined) ? this.data : GetValue(this.data, key, defaultValue);
+            return (key === undefined) ? this.data : GetValue$1(this.data, key, defaultValue);
         },
 
         incData(key, inc, defaultValue) {
@@ -1643,16 +667,6 @@
         }
     }
 
-    var StartAt = function (x, y, pathData) {
-        pathData.length = 0;
-
-        if (x != null) {
-            pathData.push(x, y);
-        }
-
-        return pathData;
-    };
-
     var LineTo = function (x, y, pathData) {
         var cnt = pathData.length;
         if (cnt >= 2) {
@@ -1686,6 +700,18 @@
             var y = centerY + (radiusY * Math.sin(angle));
             LineTo(x, y, pathData);
         }
+        return pathData;
+    };
+
+    Phaser.Math.DegToRad;
+
+    var StartAt = function (x, y, pathData) {
+        pathData.length = 0;
+
+        if (x != null) {
+            pathData.push(x, y);
+        }
+
         return pathData;
     };
 
@@ -2373,60 +1399,401 @@
         }
     }
 
-    var UpdateShapeMethods = {
+    Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
+
+    Phaser.Utils.Objects.GetValue;
+
+    Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
+
+    const BEZIER = 0;
+    const SPLINE = 1;
+    const POLYLINE = 2;
+    const STRAIGHTLINE = 3;
+
+    var DrawQuadraticBezierCurve = function (line) {
+        var points = this.points;
+
+        var startPoint = points[0];
+        var startX = startPoint.x;
+        var startY = startPoint.y;
+
+        var controlPoint = points[1];
+        var cx = controlPoint.x - startX;
+        var cy = controlPoint.y - startY;
+
+        var endPoint = points[2];
+        var endX = endPoint.x - startX;
+        var endY = endPoint.y - startY;
+
+        line
+            .startAt(0, 0)
+            .quadraticBezierTo(cx, cy, endX, endY)
+            .end();
+
+    };
+
+    var DrawBezierCurve = function (line) {
+        var points = this.points;
+        var startPoint = points[0];
+        var startX = startPoint.x;
+        var startY = startPoint.y;
+
+        var controlPoint0 = points[1];
+        var cx0 = controlPoint0.x - startX;
+        var cy0 = controlPoint0.y - startY;
+
+        var controlPoint1 = points[2];
+        var cx1 = controlPoint1.x - startX;
+        var cy1 = controlPoint1.y - startY;
+
+        var endPoint = points[3];
+        var endX = endPoint.x - startX;
+        var endY = endPoint.y - startY;
+
+        line
+            .startAt(0, 0)
+            .cubicBezierTo(cx0, cy0, cx1, cy1, endX, endY)
+            .end();
+
+    };
+
+    var DrawSpinleCurve = function (line) {
+        var points = this.points;
+        var startPoint = points[0];
+        var startX = startPoint.x;
+        var startY = startPoint.y;
+
+        var splinePoints = [];
+        for (var i = 1, cnt = points.length; i < cnt; i ++) {
+            var point = points[i];
+            splinePoints.push(point.x - startX);
+            splinePoints.push(point.y - startY);
+        }
+
+        line
+            .startAt(0, 0)
+            .catmullRomTo(...splinePoints)
+            .end();
+
+    };
+
+    var DrawStraightLine = function (line) {
+        var points = this.points;
+        var startPoint = points[0];
+        var startX = startPoint.x;
+        var startY = startPoint.y;
+
+
+        var pointsCount = points.length;
+        var endPoint = points[pointsCount - 1];
+        var endX = endPoint.x - startX;
+        var endY = endPoint.y - startY;
+
+        line
+            .startAt(0, 0)
+            .lineTo(endX, endY)
+            .end();
+
+    };
+
+    var DrawPolyLine = function (line) {
+        var points = this.points;
+        var startPoint = points[0];
+        var startX = startPoint.x;
+        var startY = startPoint.y;
+        line.startAt(0, 0);
+
+        for (var i = 1, cnt = points.length; i < cnt; i++) {
+            var point = points[i];
+            var x = point.x - startX;
+            var y = point.y - startY;
+            line.lineTo(x, y);
+        }
+
+        line.end();
+    };
+
+    const Rectangle = Phaser.Geom.Rectangle;
+
+    var GetBounds = function (points, out) {
+        if (out === undefined) {
+            out = new Rectangle();
+        } else if (out === true) {
+            out = GlobalBounds;
+        }
+
+        var minX = Infinity;
+        var minY = Infinity;
+        var maxX = -minX;
+        var maxY = -minY;
+
+        for (var i = 0, cnt = points.length; i < cnt; i += 2) {
+            var x = points[i];
+            var y = points[i + 1];
+
+            minX = Math.min(minX, x);
+            minY = Math.min(minY, y);
+            maxX = Math.max(maxX, x);
+            maxY = Math.max(maxY, y);
+        }
+
+        out.x = minX;
+        out.y = minY;
+        out.width = maxX - minX;
+        out.height = maxY - minY;
+
+        return out;
+    };
+
+    var GlobalBounds = new Rectangle();
+
+    var SetTransform = function (line) {
+        // Size
+        var bounds = GetBounds.call(this, line.pathData, true);
+        this.setSize(bounds.width, bounds.height);
+        // Origin
+        this.setOrigin(-bounds.x / bounds.width, -bounds.y / bounds.height);
+        // Position
+        var point = this.points[0];
+        this.setPosition(point.x, point.y);
+        line.offset(-bounds.x, -bounds.y);
+    };
+
+    var ShapesUpdateMethods = {
         buildShapes() {
-            this.addShape((new Lines()).setName('border'));
-            this.addShape((new Lines()).setName('fill'));
+            this
+                .addShape(new Lines());
         },
 
         updateShapes() {
-            var centerX = this.centerX;
-            var centerY = this.centerY;
-            var radius = this.radius;
+            // Set style
+            var line = this.getShapes()[0]
+                .lineStyle(this.lineWidth, this.strokeColor, this.strokeAlpha);
 
-            var halfWidth = radius * 0.7;
-            var left = centerX - halfWidth,
-                top = centerY - halfWidth,
-                width = halfWidth * 2;
+            var points = this.points;
 
-            this.getShape('border')
-                .lineStyle(2, this.color, 1)
-                .startAt(left, top).lineTo(width, 0, true)
-                .lineTo(0, width, true).lineTo(-width, 0, true)
-                .lineTo(0, -width, true).close();
-
-            if (this.value < 0.5) {
-                var t = (0.5 - this.value) * 2;
-                var height = width * t;
-                this.getShape('fill')
-                    .fillStyle(this.color, 1)
-                    .startAt(left, top).lineTo(width, 0, true)
-                    .lineTo(0, height, true).lineTo(-width, 0, true)
-                    .lineTo(0, -height, true).close();
-
-            } else { // Rotate
-                var t = (this.value - 0.5) * 2;
-                var angle = 180 * t;
-
-                this.getShape('border').rotateAround(centerX, centerY, angle);
-                this.getShape('fill').fillStyle().lineStyle();
+            if ((this.lineType === STRAIGHTLINE) || (points.length == 2)) {
+                DrawStraightLine.call(this, line);
+            } else if ((this.lineType === BEZIER) && (points.length === 3)) {
+                DrawQuadraticBezierCurve.call(this, line);
+            } else if ((this.lineType === BEZIER) && (points.length === 4)) {
+                DrawBezierCurve.call(this, line);
+            } else if (this.lineType === POLYLINE) {
+                DrawPolyLine.call(this, line);
+            } else {
+                DrawSpinleCurve.call(this, line);
             }
+
+            SetTransform.call(this, line);
+
         }
     };
 
-    class Box extends Base {
-        constructor(scene, config) {
-            super(scene, config);
-            this.type = 'rexSpinnerBox';
+    class Line extends BaseShapes {
+        constructor(scene, points, lineWidth, color, alpha, lineType) {
+            if (points !== undefined) {
+                if (typeof (points) === 'number') {
+                    lineType = alpha;
+                    alpha = color;
+                    color = lineWidth;
+                    lineWidth = points;
+                    points = [];
+                } else if (!Array.isArray(points)) {
+                    var config = points;
+                    points = config.points;
+                    lineWidth = config.lineWidth;
+                    color = config.color;
+                    alpha = config.alpha;
+                    lineType = config.lineType;
+                }
+            }
+
+            if (points === undefined) { points = []; }
+            if (lineWidth === undefined) { lineWidth = 2; }
+            if (color === undefined) { color = 0xffffff; }
+            if (alpha === undefined) { alpha = 1; }
+            if (lineType === undefined) { lineType = 0; }
+
+            super(scene);
+            this.type = 'rexPath';
+
+            this.setCurve(points, lineType);
+            this.setStrokeStyle(lineWidth, color, alpha);
+
+            this.buildShapes();
+
+            this.updateData();
         }
 
+        setCurve(points, lineType) {
+            if (points === undefined) {
+                points = [];
+            }
+            if (lineType !== undefined) {
+                if (typeof (lineType) === 'string') {
+                    lineType = CURVETYPE_MAP[lineType.toLocaleLowerCase()];
+                }
+                this.lineType = lineType;
+            }
+
+            this.points = points;
+            this.dirty = true;
+
+            if (this.geom.length > 0) {
+                this.updateData();
+            }
+
+            return this;
+        }
+
+        setLineType(lineType) {
+            if (typeof (lineType) === 'string') {
+                lineType = CURVETYPE_MAP[lineType.toLocaleLowerCase()];
+            }
+            if (this.lineType === lineType) {
+                return this;
+            }
+            this.lineType = lineType;
+            this.dirty = true;
+
+            if (this.geom.length > 0) {
+                this.updateData();
+            }
+
+            return this;
+        }
     }
 
+    const CURVETYPE_MAP = {
+        bezier: BEZIER,
+
+        spline: SPLINE,
+
+        polyline: POLYLINE,
+        poly: POLYLINE,
+
+        straightline: STRAIGHTLINE,
+        straight: STRAIGHTLINE,
+    };
+
     Object.assign(
-        Box.prototype,
-        UpdateShapeMethods,
+        Line.prototype,
+        ShapesUpdateMethods,
     );
 
-    return Box;
+    function Factory (points, lineWidth, color, alpha, lineType) {
+        var gameObject = new Line(this.scene, points, lineWidth, color, alpha, lineType);
+        this.scene.add.existing(gameObject);
+        return gameObject;
+    }
+
+    const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
+    const GetValue = Phaser.Utils.Objects.GetValue;
+    const BuildGameObject = Phaser.GameObjects.BuildGameObject;
+
+    function Creator (config, addToScene) {
+        if (config === undefined) { config = {}; }
+        if (addToScene !== undefined) {
+            config.add = addToScene;
+        }
+        var points = GetValue(config, 'points', undefined);
+        var lineWidth = GetAdvancedValue(config, 'lineWidth', 2);
+        var color = GetAdvancedValue(config, 'color', 0xffffff);
+        var alpha = GetAdvancedValue(config, 'alpha', 1);
+        var lineType = GetAdvancedValue(config, 'lineType', 0);
+        var gameObject = new Line(this.scene, points, lineWidth, color, alpha, lineType);
+
+        BuildGameObject(this.scene, gameObject, config);
+
+        return gameObject;
+    }
+
+    var IsInValidKey = function (keys) {
+        return (keys == null) || (keys === '') || (keys.length === 0);
+    };
+
+    var GetEntry = function (target, keys, defaultEntry) {
+        var entry = target;
+        if (IsInValidKey(keys)) ; else {
+            if (typeof (keys) === 'string') {
+                keys = keys.split('.');
+            }
+
+            var key;
+            for (var i = 0, cnt = keys.length; i < cnt; i++) {
+                key = keys[i];
+                if ((entry[key] == null) || (typeof (entry[key]) !== 'object')) {
+                    var newEntry;
+                    if (i === cnt - 1) {
+                        if (defaultEntry === undefined) {
+                            newEntry = {};
+                        } else {
+                            newEntry = defaultEntry;
+                        }
+                    } else {
+                        newEntry = {};
+                    }
+
+                    entry[key] = newEntry;
+                }
+
+                entry = entry[key];
+            }
+        }
+
+        return entry;
+    };
+
+    var SetValue = function (target, keys, value, delimiter) {
+        if (delimiter === undefined) {
+            delimiter = '.';
+        }
+
+        // no object
+        if (typeof (target) !== 'object') {
+            return;
+        }
+
+        // invalid key
+        else if (IsInValidKey(keys)) {
+            // don't erase target
+            if (value == null) {
+                return;
+            }
+            // set target to another object
+            else if (typeof (value) === 'object') {
+                target = value;
+            }
+        } else {
+            if (typeof (keys) === 'string') {
+                keys = keys.split(delimiter);
+            }
+
+            var lastKey = keys.pop();
+            var entry = GetEntry(target, keys);
+            entry[lastKey] = value;
+        }
+
+        return target;
+    };
+
+    class LinePlugin extends Phaser.Plugins.BasePlugin {
+
+        constructor(pluginManager) {
+            super(pluginManager);
+
+            //  Register our new Game Object type
+            pluginManager.registerGameObject('rexLineShape', Factory, Creator);
+        }
+
+        start() {
+            var eventEmitter = this.game.events;
+            eventEmitter.on('destroy', this.destroy, this);
+        }
+    }
+
+    SetValue(window, 'RexPlugins.GameObjects.LineShape', Line);
+
+    return LinePlugin;
 
 }));

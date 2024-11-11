@@ -16,6 +16,7 @@ module.exports = {
     'gridtableplugin': './plugins/gridtable-plugin.js',
     'roundrectangleplugin': './plugins/roundrectangle-plugin.js',
     'quadshapeplugin': './plugins/quadshape-plugin.js',
+    'lineshapeplugin': './plugins/lineshape-plugin.js',
     'customshapesplugin': './plugins/customshapes-plugin.js',
     'circularprogressplugin': './plugins/circularprogress-plugin.js',
     'lineprogressplugin': './plugins/lineprogress-plugin.js',

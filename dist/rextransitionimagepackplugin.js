@@ -6097,6 +6097,32 @@
         return pathData;
     };
 
+    //import CatmullRomInterpolation from '../../utils/math/interpolation/CatmullRomInterpolation.js';
+
+    const CatmullRomInterpolation = Phaser.Math.Interpolation.CatmullRom;
+
+    var CatmullRomTo = function (points, iterations, pathData) {
+        var pathDataCnt = pathData.length;
+        var p0x = pathData[pathDataCnt - 2];
+        var p0y = pathData[pathDataCnt - 1];
+
+        var xList = [p0x];
+        var yList = [p0y];
+        for (var i = 0, cnt = points.length; i < cnt; i += 2) {
+            xList.push(points[i]);
+            yList.push(points[i + 1]);
+        }
+
+        for (var i = 1, last = iterations - 1; i <= last; i++) {
+            var t = i / last;
+            pathData.push(
+                CatmullRomInterpolation(xList, t),
+                CatmullRomInterpolation(yList, t)
+            );
+        }
+        return pathData;
+    };
+
     var DuplicateLast = function (pathData) {
         var len = pathData.length;
         if (len < 2) {
@@ -6205,6 +6231,18 @@
 
             this.lastPointX = x;
             this.lastPointY = y;
+            return this;
+        },
+
+        catmullRomTo(...points) {
+            CatmullRomTo(
+                points,
+                this.iterations,
+                this.pathData
+            );
+
+            this.lastPointX = points[points.length-2];
+            this.lastPointY = points[points.length-1];
             return this;
         },
 
@@ -6640,6 +6678,13 @@
 
         cubicBezierTo(cx0, cy0, cx1, cy1, x, y) {
             this.builder.cubicBezierTo(cx0, cy0, cx1, cy1, x, y);
+
+            this.dirty = true;
+            return this;
+        }
+
+        catmullRomTo(...points) {
+            this.builder.catmullRomTo(...points);
 
             this.dirty = true;
             return this;
