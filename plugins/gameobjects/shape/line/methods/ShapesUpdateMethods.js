@@ -1,4 +1,4 @@
-import { Lines } from '../../shapes/geoms';
+import { Lines } from '../../shapes/geoms/index.js';
 import { BEZIER, SPLINE, POLYLINE, STRAIGHTLINE } from '../Const.js';
 import DrawQuadraticBezierCurve from './DrawQuadraticBezierCurve.js';
 import DrawCubicBezierCurve from './DrawCubicBezierCurve.js';
@@ -15,24 +15,24 @@ export default {
 
     updateShapes() {
         // Set style
-        var lines = this.getShapes()[0]
+        var line = this.getShapes()[0]
             .lineStyle(this.lineWidth, this.strokeColor, this.strokeAlpha)
 
         var points = this.points;
 
         if ((this.lineType === STRAIGHTLINE) || (points.length == 2)) {
-            DrawStraightLine.call(this, lines);
+            DrawStraightLine.call(this, line);
         } else if ((this.lineType === BEZIER) && (points.length === 3)) {
-            DrawQuadraticBezierCurve.call(this, lines);
+            DrawQuadraticBezierCurve.call(this, line);
         } else if ((this.lineType === BEZIER) && (points.length === 4)) {
-            DrawCubicBezierCurve.call(this, lines);
+            DrawCubicBezierCurve.call(this, line);
         } else if (this.lineType === POLYLINE) {
-            DrawPolyLine.call(this, lines);
+            DrawPolyLine.call(this, line);
         } else {
-            DrawSpinleCurve.call(this, lines);
+            DrawSpinleCurve.call(this, line);
         }
 
-        SetTransform.call(this, lines);
+        SetTransform.call(this, line);
 
     }
 }

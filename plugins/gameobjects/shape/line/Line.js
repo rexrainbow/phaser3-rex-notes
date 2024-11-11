@@ -2,7 +2,7 @@ import BaseShapes from '../shapes/BaseShapes.js';
 import ShapesUpdateMethods from './methods/ShapesUpdateMethods.js';
 import { BEZIER, SPLINE, POLYLINE, STRAIGHTLINE } from './Const.js';
 
-class Path extends BaseShapes {
+class Line extends BaseShapes {
     constructor(scene, points, lineWidth, color, alpha, lineType) {
         if (points !== undefined) {
             if (typeof (points) === 'number') {
@@ -90,8 +90,8 @@ const CURVETYPE_MAP = {
 }
 
 Object.assign(
-    Path.prototype,
+    Line.prototype,
     ShapesUpdateMethods,
 )
 
-export default Path;
+export default Line;

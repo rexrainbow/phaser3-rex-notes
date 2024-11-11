@@ -1,4 +1,4 @@
-var DrawBezierCurve = function (curve) {
+var DrawBezierCurve = function (line) {
     var points = this.points;
     var startPoint = points[0];
     var startX = startPoint.x;
@@ -16,7 +16,7 @@ var DrawBezierCurve = function (curve) {
     var endX = endPoint.x - startX;
     var endY = endPoint.y - startY;
 
-    curve
+    line
         .startAt(0, 0)
         .cubicBezierTo(cx0, cy0, cx1, cy1, endX, endY)
         .end();

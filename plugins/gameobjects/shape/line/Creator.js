@@ -1,4 +1,4 @@
-import Curve from './Curve.js';
+import Line from './Line.js';
 
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -14,7 +14,7 @@ export default function (config, addToScene) {
     var color = GetAdvancedValue(config, 'color', 0xffffff);
     var alpha = GetAdvancedValue(config, 'alpha', 1);
     var lineType = GetAdvancedValue(config, 'lineType', 0);
-    var gameObject = new Curve(this.scene, points, lineWidth, color, alpha, lineType);
+    var gameObject = new Line(this.scene, points, lineWidth, color, alpha, lineType);
 
     BuildGameObject(this.scene, gameObject, config);
 

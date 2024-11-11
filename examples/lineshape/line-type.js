@@ -1,5 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import CurveShapePlugin from '../../plugins/curveshape-plugin.js';
+import CurveShapePlugin from '../../plugins/lineshape-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -32,13 +32,18 @@ var GetPoints = function (offsetX, offsetY) {
 }
 
 var CreateCurve = function (scene, startX, startY, lineType, graphics) {
-    var curve = scene.add.rexCurveShape({
-        points: GetPoints(startX, startY),
+    var points = GetPoints(startX, startY);
+    var curve = scene.add.rexLineShape({
+        points: points,
         color: 0xffffff,
         lineType: lineType
     })
     graphics.lineStyle(2, 0xff0000, 0.5).strokeRectShape(curve.getBounds());
-    graphics.fillStyle(0xff0000).fillPoint(startX, startY, 10);
+
+    for (var i = 0, cnt = points.length; i < cnt; i++) {
+        graphics.fillStyle(0xff0000).fillPoint(points[i].x, points[i].y, 10);
+    }
+
 
     curve
         .setInteractive()

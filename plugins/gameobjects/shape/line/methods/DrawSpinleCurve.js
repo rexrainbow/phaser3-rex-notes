@@ -1,4 +1,4 @@
-var DrawSpinleCurve = function (curve) {
+var DrawSpinleCurve = function (line) {
     var points = this.points;
     var startPoint = points[0];
     var startX = startPoint.x;
@@ -11,7 +11,7 @@ var DrawSpinleCurve = function (curve) {
         splinePoints.push(point.y - startY);
     }
 
-    curve
+    line
         .startAt(0, 0)
         .catmullRomTo(...splinePoints)
         .end();
