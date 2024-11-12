@@ -3,7 +3,7 @@ var InsertEmptyRow = function (rowIndex, proportion, space) {
         proportion = this.rowProportions[0] || 0;
     }
     if (space === undefined) {
-        space = this.space.row[0] || 0;
+        space = this.space.row0 || 0;
     }
 
     this.rowCount += 1;

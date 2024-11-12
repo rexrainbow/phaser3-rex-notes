@@ -3,7 +3,7 @@ var InsertEmptyColumn = function (colIndex, proportion, space) {
         proportion = this.columnProportions[0] || 0;
     }
     if (space === undefined) {
-        space = this.space.column[0] || 0;
+        space = this.space.column0 || 0;
     }
 
     this.columnCount += 1;

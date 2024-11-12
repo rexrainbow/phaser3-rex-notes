@@ -55749,8 +55749,10 @@ void main () {
 
 	        this.space.column.length = this.columnCount - 1;
 	        if (typeof (columnSpace) === 'number') {
+	            this.space.column0 = columnSpace;
 	            Fill(this.space.column, columnSpace);
 	        } else {
+	            this.space.column0 = columnSpace[0];
 	            for (var i = 0, cnt = this.columnCount - 1; i < cnt; i++) {
 	                this.space.column[i] = columnSpace[i] || 0;
 	            }
@@ -55765,8 +55767,10 @@ void main () {
 
 	        this.space.row.length = this.rowCount - 1;
 	        if (typeof (rowSpace) === 'number') {
+	            this.space.row0 = rowSpace;
 	            Fill(this.space.row, rowSpace);
 	        } else {
+	            this.space.row0 = rowSpace[i];
 	            for (var i = 0, cnt = this.rowCount - 1; i < cnt; i++) {
 	                this.space.row[i] = rowSpace[i] || 0;
 	            }
@@ -55861,7 +55865,7 @@ void main () {
 	        proportion = this.rowProportions[0] || 0;
 	    }
 	    if (space === undefined) {
-	        space = this.space.row[0] || 0;
+	        space = this.space.row0 || 0;
 	    }
 
 	    this.rowCount += 1;
@@ -55892,7 +55896,7 @@ void main () {
 	        proportion = this.columnProportions[0] || 0;
 	    }
 	    if (space === undefined) {
-	        space = this.space.column[0] || 0;
+	        space = this.space.column0 || 0;
 	    }
 
 	    this.columnCount += 1;
