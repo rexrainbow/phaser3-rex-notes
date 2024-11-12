@@ -446,6 +446,13 @@ Shape data will be updated during rendering, or call `shape.updateData()` to upd
     - `cx0`, `cy0` : Control point0
     - `cx1`, `cy1` : Control point1
     - `x`, `y` : End point
+- Add spline(catmullRom) of lines
+    ```javascript
+    lines.catmullRomTo(x1, y1, x2, y2, x3, y3, ...);
+    ```
+    - `x1`, `y1` : Next point
+    - `x2`, `y2` : Next point
+    - ...
 - End commands
     - Close path, to fill color
         ```javascript

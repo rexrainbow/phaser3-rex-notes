@@ -9,8 +9,10 @@ Layout children game objects in grids.
 
 - [Create cell-containers](https://codepen.io/rexrainbow/pen/vYZQBPY)
 - [Scrollable grids](https://codepen.io/rexrainbow/pen/YMyBom)
-- [Add new row](https://codepen.io/rexrainbow/pen/JjpWwjM)
-- [Add new column](https://codepen.io/rexrainbow/pen/oNEZJjy)
+- Add new row/column
+    - [Add new row](https://codepen.io/rexrainbow/pen/JjpWwjM)    
+    - [Add new column](https://codepen.io/rexrainbow/pen/oNEZJjy)
+    - [Add new row/column](https://codepen.io/rexrainbow/pen/RwXEEYx)
 - [Full viewport](https://codepen.io/rexrainbow/pen/LYVKXJg)
 - [Set children interactive](https://codepen.io/rexrainbow/pen/GROQKme)
 - [Destroy cell](https://codepen.io/rexrainbow/pen/YzazvzY)
