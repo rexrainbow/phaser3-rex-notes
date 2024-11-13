@@ -19,12 +19,19 @@ export default {
             .lineStyle(this.lineWidth, this.strokeColor, this.strokeAlpha)
 
         var points = this.points;
+        var pointCount = points.length;
 
-        if ((this.lineType === STRAIGHTLINE) || (points.length == 2)) {
+        line.setVisible(pointCount >= 2);
+
+        if (pointCount <= 1) {
+            return;
+        }
+
+        if ((this.lineType === STRAIGHTLINE) || (pointCount == 2)) {
             DrawStraightLine.call(this, line);
-        } else if ((this.lineType === BEZIER) && (points.length === 3)) {
+        } else if ((this.lineType === BEZIER) && (pointCount === 3)) {
             DrawQuadraticBezierCurve.call(this, line);
-        } else if ((this.lineType === BEZIER) && (points.length === 4)) {
+        } else if ((this.lineType === BEZIER) && (pointCount === 4)) {
             DrawCubicBezierCurve.call(this, line);
         } else if (this.lineType === POLYLINE) {
             DrawPolyLine.call(this, line);
@@ -33,6 +40,5 @@ export default {
         }
 
         SetTransform.call(this, line);
-
     }
 }

@@ -30,7 +30,7 @@ class Line extends BaseShapes {
         super(scene);
         this.type = 'rexPath';
 
-        this.setCurve(points, lineType);
+        this.setLine(points, lineType);
         this.setStrokeStyle(lineWidth, color, alpha);
 
         this.buildShapes();
@@ -38,7 +38,7 @@ class Line extends BaseShapes {
         this.updateData();
     }
 
-    setCurve(points, lineType) {
+    setLine(points, lineType) {
         if (points === undefined) {
             points = [];
         }

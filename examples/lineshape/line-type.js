@@ -1,5 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import CurveShapePlugin from '../../plugins/lineshape-plugin.js';
+import LineShapePlugin from '../../plugins/lineshape-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -15,10 +15,10 @@ class Demo extends Phaser.Scene {
     create() {
         var graphics = this.add.graphics().setDepth(1);
 
-        CreateCurve(this, 0, 350, undefined, graphics);
-        CreateCurve(this, 200, 350, 'spline', graphics);
-        CreateCurve(this, 400, 350, 'poly', graphics);
-        CreateCurve(this, 600, 350, 'straight', graphics);
+        CreateLine(this, 0, 350, undefined, graphics);
+        CreateLine(this, 200, 350, 'spline', graphics);
+        CreateLine(this, 400, 350, 'poly', graphics);
+        CreateLine(this, 600, 350, 'straight', graphics);
     }
 }
 
@@ -31,7 +31,7 @@ var GetPoints = function (offsetX, offsetY) {
     ]
 }
 
-var CreateCurve = function (scene, startX, startY, lineType, graphics) {
+var CreateLine = function (scene, startX, startY, lineType, graphics) {
     var points = GetPoints(startX, startY);
     var curve = scene.add.rexLineShape({
         points: points,
@@ -69,8 +69,8 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-            key: 'rexCurveShape',
-            plugin: CurveShapePlugin,
+            key: 'rexLineShape',
+            plugin: LineShapePlugin,
             start: true
         }]
     }
