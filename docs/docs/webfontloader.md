@@ -1,3 +1,6 @@
+!!! note
+    v3.87 introduces built-in [font file loader](loader.md#font).
+
 ## Introduction
 
 Load web font by [google webfont loader](https://github.com/typekit/webfontloader) in payload or preload stage.

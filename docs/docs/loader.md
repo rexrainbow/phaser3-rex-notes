@@ -278,6 +278,18 @@ var cache = scene.video;
 var data = cache.get(key);
 ```
 
+
+#### Font
+
+```javascript
+scene.load.font(key, fontURL);
+// scene.load.font(key, fontURL, format, descriptors, xhrSettings);
+```
+
+- `fotmat` : `truetype` (default value) or `opentype`
+- `descriptors` : See [FontFace/descriptors](https://developer.mozilla.org/en-US/docs/Web/API/FontFace/FontFace#descriptors)
+
+
 #### Bitmap font
 
 ```javascript
