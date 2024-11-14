@@ -721,6 +721,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#font" class="md-nav__link">
+    Font
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#bitmap-font" class="md-nav__link">
     Bitmap font
   </a>
@@ -10295,6 +10302,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#font" class="md-nav__link">
+    Font
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#bitmap-font" class="md-nav__link">
     Bitmap font
   </a>
@@ -10727,6 +10741,14 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">cache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">video</span><span class="p">;</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div>
+<h4 id="font">Font<a class="headerlink" href="#font" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">font</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">fontURL</span><span class="p">);</span>
+<span class="c1">// scene.load.font(key, fontURL, format, descriptors, xhrSettings);</span>
+</code></pre></div>
+<ul>
+<li><code>fotmat</code> : <code>truetype</code> (default value) or <code>opentype</code></li>
+<li><code>descriptors</code> : See <a href="https://developer.mozilla.org/en-US/docs/Web/API/FontFace/FontFace#descriptors">FontFace/descriptors</a></li>
+</ul>
 <h4 id="bitmap-font">Bitmap font<a class="headerlink" href="#bitmap-font" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">bitmapFont</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">textureURL</span><span class="p">,</span><span class="w"> </span><span class="nx">fontDataURL</span><span class="p">);</span>
 <span class="c1">// scene.load.bitmapFont(key, textureURL, fontDataURL, textureXhrSettings, fontDataXhrSettings);</span>
