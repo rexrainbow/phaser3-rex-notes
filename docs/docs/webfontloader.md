@@ -1,5 +1,5 @@
 !!! note
-    v3.87 introduces built-in [font file loader](loader.md#font).
+    Built-in [font file loader](loader.md#font)
 
 ## Introduction
 
