@@ -17,6 +17,7 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 const RemoveFromDOM = Phaser.DOM.RemoveFromDOM;
 const SPLITREGEXP = CONST.SPLITREGEXP;
 const UUID = Phaser.Utils.String.UUID;
+const DefaultImageNodes = Phaser.Renderer.WebGL.RenderNodes.Defaults.DefaultImageNodes;
 
 // Reuse objects can increase performance
 var SharedPensPools = null;
@@ -45,12 +46,9 @@ class Text extends TextBase {
 
         this.setPosition(x, y);
         this.setOrigin(0, 0);
-        this.initPipeline();
-        this.initPostPipeline(true);
+        this.initRenderNodes(this._defaultRenderNodesMap);
 
         this.canvas = CanvasPool.create(this);
-
-        this.context = this.canvas.getContext('2d', { willReadFrequently: true });
 
         this._imageManager = undefined;
 
@@ -101,6 +99,9 @@ class Text extends TextBase {
         this._textureKey = UUID();
 
         this.texture = scene.sys.textures.addCanvas(this._textureKey, this.canvas);
+
+        //  Set the context to be the CanvasTexture context
+        this.context = this.texture.context;
 
         //  Get the frame
         this.frame = this.texture.get();
@@ -168,6 +169,10 @@ class Text extends TextBase {
         if (GetValue(style, 'interactive', false)) {
             this.setInteractive();
         }
+    }
+
+    get _defaultRenderNodesMap() {
+        return DefaultImageNodes;
     }
 
     preDestroy() {
@@ -382,6 +387,9 @@ class Text extends TextBase {
             canvas.width = w;
             canvas.height = h;
             this.frame.setSize(w, h);
+            this.frame.source.updateSize(w, h);
+            this.frame.updateUVs();
+
         } else {
             context.clearRect(0, 0, w, h);
         }

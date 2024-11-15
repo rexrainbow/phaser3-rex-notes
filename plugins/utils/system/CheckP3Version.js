@@ -1,4 +1,4 @@
-const MinVersion = 60;
+const MinVersion = 0;
 
 var IsChecked = false;
 
@@ -12,7 +12,7 @@ var CheckP3Version = function (minVersion) {
     }
     var currentVersion = parseInt(Phaser.VERSION.match(/\.(\d+)\./)[1]);
     if (currentVersion < minVersion) {
-        console.error(`Minimum supported version : 3.${minVersion}`)
+        console.error(`Minimum supported version : 4.${minVersion}`)
     }
 
     IsChecked = true;
