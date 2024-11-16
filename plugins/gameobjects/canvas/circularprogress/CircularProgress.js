@@ -8,7 +8,7 @@ const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const Clamp = Phaser.Math.Clamp;
 
 const DefaultStartAngle = Phaser.Math.DegToRad(270);
-const PI2 = Phaser.Math.PI2;
+const PI2 = Math.PI * 2;
 
 class CircularProgress extends ProgressBase(Canvas) {
     constructor(scene, x, y, radius, barColor, value, config) {

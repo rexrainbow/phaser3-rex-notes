@@ -35,7 +35,7 @@ class Demo extends Phaser.Scene {
             },
             setRotation: {
                 value: 0,
-                step: Phaser.Math.PI2 / imageNum
+                step: Math.PI * 2 / imageNum
             }
         });
 
@@ -90,7 +90,7 @@ class Demo extends Phaser.Scene {
 
 var drawCircle = function (ctx, x, y, r, color) {
     ctx.beginPath();
-    ctx.arc(x, y, r, 0, Phaser.Math.PI2, false);
+    ctx.arc(x, y, r, 0, Math.PI * 2, false);
     ctx.strokeStyle = color;
     ctx.stroke();
 }

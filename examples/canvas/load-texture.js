@@ -27,7 +27,7 @@ class Demo extends Phaser.Scene {
 var drawCircle = function (pointer, localX, localY) {
     var ctx = this.context;
     ctx.beginPath();
-    ctx.arc(localX, localY, 10, 0, Phaser.Math.PI2, false);
+    ctx.arc(localX, localY, 10, 0, Math.PI * 2, false);
     ctx.strokeStyle = 'red';
     ctx.lineWidth = 3;
     ctx.stroke();

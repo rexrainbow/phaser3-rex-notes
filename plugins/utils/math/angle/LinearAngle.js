@@ -1,5 +1,5 @@
 // const NormalizeAngle = Phaser.Math.Angle.Normalize;
-const PI2 = Phaser.Math.PI2;
+const PI2 = Math.PI * 2;
 
 var LinearAngle = function (angle0, angle1, anticlockwise, t) {
     // angle0 = NormalizeAngle(angle0);

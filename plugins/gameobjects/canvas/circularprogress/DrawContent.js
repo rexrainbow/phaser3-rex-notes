@@ -1,7 +1,7 @@
 import DrawCicle from '../../../utils/canvas/DrawCircle.js';
 import DrawText from '../../../utils/canvas/DrawText.js';
 
-const PI2 = Phaser.Math.PI2;
+const PI2 = Math.PI * 2;
 
 var DrawContent = function () {
     var x = this.radius;
