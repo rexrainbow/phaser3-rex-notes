@@ -1550,9 +1550,11 @@
     var SetTransform = function (line) {
         // Size
         var bounds = GetBounds.call(this, line.pathData, true);
-        this.setSize(bounds.width, bounds.height);
+        var width = Math.max(bounds.width, this.lineWidth);
+        var height = Math.max(bounds.height, this.lineWidth);
+        this.setSize(width, height);
         // Origin
-        this.setOrigin(-bounds.x / bounds.width, -bounds.y / bounds.height);
+        this.setOrigin(-bounds.x / width, -bounds.y / height);
         // Position
         var point = this.points[0];
         this.setPosition(point.x, point.y);
@@ -1571,12 +1573,19 @@
                 .lineStyle(this.lineWidth, this.strokeColor, this.strokeAlpha);
 
             var points = this.points;
+            var pointCount = points.length;
 
-            if ((this.lineType === STRAIGHTLINE) || (points.length == 2)) {
+            line.setVisible(pointCount >= 2);
+
+            if (pointCount <= 1) {
+                return;
+            }
+
+            if ((this.lineType === STRAIGHTLINE) || (pointCount == 2)) {
                 DrawStraightLine.call(this, line);
-            } else if ((this.lineType === BEZIER) && (points.length === 3)) {
+            } else if ((this.lineType === BEZIER) && (pointCount === 3)) {
                 DrawQuadraticBezierCurve.call(this, line);
-            } else if ((this.lineType === BEZIER) && (points.length === 4)) {
+            } else if ((this.lineType === BEZIER) && (pointCount === 4)) {
                 DrawBezierCurve.call(this, line);
             } else if (this.lineType === POLYLINE) {
                 DrawPolyLine.call(this, line);
@@ -1585,7 +1594,6 @@
             }
 
             SetTransform.call(this, line);
-
         }
     };
 
@@ -1617,7 +1625,7 @@
             super(scene);
             this.type = 'rexPath';
 
-            this.setCurve(points, lineType);
+            this.setLine(points, lineType);
             this.setStrokeStyle(lineWidth, color, alpha);
 
             this.buildShapes();
@@ -1625,7 +1633,7 @@
             this.updateData();
         }
 
-        setCurve(points, lineType) {
+        setLine(points, lineType) {
             if (points === undefined) {
                 points = [];
             }
