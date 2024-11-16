@@ -2,6 +2,9 @@ import CopyCanvasToTexture from '../../../utils/texture/CopyCanvasToTexture.js';
 
 export default {
     updateTexture(callback, scope) {
+        var canvas = this.canvas;
+        var context = this.context;
+
         if (callback) {
             var scale = this.resolution;
             if (scale !== 1) {
@@ -10,9 +13,9 @@ export default {
             }
 
             if (scope) {
-                callback.call(scope, this.canvas, this.context);
+                callback.call(scope, canvas, context);
             } else {
-                callback(this.canvas, this.context);
+                callback(canvas, context);
             }
 
             if (scale !== 1) {
@@ -20,15 +23,20 @@ export default {
             }
         }
 
-        if ((this.canvas.width !== this.frame.width) || (this.canvas.height !== this.frame.height)) {
-            this.frame.setSize(this.canvas.width, this.canvas.height);
+        var newWidth = canvas.width,
+            newHeight = canvas.height;
+        if ((newWidth !== this.frame.width) || (newHeight !== this.frame.height)) {
+            this.frame.setSize(newWidth, newHeight);
+            this.frame.source.updateSize(newWidth, newHeight);
+            this.frame.updateUVs();
         }
         if (this.renderer && this.renderer.gl) {
-            this.frame.source.glTexture = this.renderer.canvasToTexture(this.canvas, this.frame.source.glTexture, true);
+            this.frame.source.glTexture = this.renderer.canvasToTexture(canvas, this.frame.source.glTexture, true);
             if (typeof WEBGL_DEBUG) {
                 this.frame.glTexture.spectorMetadata = { textureKey: 'Canvas Game Object' };
             }
         }
+
         this.dirty = false;
 
         var input = this.input;

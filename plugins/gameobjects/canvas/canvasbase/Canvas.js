@@ -8,6 +8,7 @@ CheckP3Version();
 const CanvasPool = Phaser.Display.Canvas.CanvasPool;
 const GameObject = Phaser.GameObjects.GameObject;
 const UUID = Phaser.Utils.String.UUID;
+const DefaultImageNodes = Phaser.Renderer.WebGL.RenderNodes.Defaults.DefaultImageNodes;
 
 class Canvas extends GameObject {
     constructor(scene, x, y, width, height, resolution) {
@@ -38,14 +39,12 @@ class Canvas extends GameObject {
         width = Math.max(Math.ceil(width * this.resolution), 1);
         height = Math.max(Math.ceil(height * this.resolution), 1);
         this.canvas = CanvasPool.create(this, width, height);
-        this.context = this.canvas.getContext('2d', { willReadFrequently: true });
 
         this.dirty = false;
 
         this.setPosition(x, y);
         this.setOrigin(0.5, 0.5);
-        this.initPipeline();
-        this.initPostPipeline(true);
+        this.initRenderNodes(this._defaultRenderNodesMap);
 
         this._crop = this.resetCropObject();
 
@@ -53,6 +52,9 @@ class Canvas extends GameObject {
         this._textureKey = UUID();
 
         this.texture = scene.sys.textures.addCanvas(this._textureKey, this.canvas);
+
+        //  Set the context to be the CanvasTexture context
+        this.context = this.texture.context;
 
         //  Get the frame
         this.frame = this.texture.get();
@@ -80,6 +82,10 @@ class Canvas extends GameObject {
         if (texture) {
             texture.destroy();
         }
+    }
+
+    get _defaultRenderNodesMap() {
+        return DefaultImageNodes;
     }
 
     setResolution(resolution) {
@@ -132,6 +138,8 @@ class Canvas extends GameObject {
         this.canvas.height = height;
 
         this.frame.setSize(width, height);
+        this.frame.source.updateSize(width, height);
+        this.frame.updateUVs();
 
         this.dirty = true;
         return this;
@@ -199,10 +207,10 @@ Phaser.Class.mixin(Canvas,
         Components.Depth,
         Components.Flip,
         Components.GetBounds,
+        Components.Lighting,
         Components.Mask,
         Components.Origin,
-        Components.Pipeline,
-        Components.PostPipeline,
+        Components.RenderNodes,
         Components.ScrollFactor,
         Components.Tint,
         Components.Transform,
