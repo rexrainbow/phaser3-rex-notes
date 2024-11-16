@@ -95,8 +95,9 @@ var table = scene.add.rexGridTable(x, y, width, height, {
 
     cellInvisibleCallback: null,
     // cellInvisibleCallback: function(cell) {},
-    cellInvisibleCallbackScope: undefined,
-    clampTableOXY: true,
+    // cellInvisibleCallbackScope: undefined,
+    // clampTableOXY: true,
+    // startFromBottom: false,
     
     mask: {
         padding: 0, // or {left, right, top, bottom}
@@ -138,8 +139,12 @@ var table = scene.add.rexGridTable(x, y, width, height, {
         // var container = cell.popContainer();
     }
     ```
-- `clampTableOXY` : Set `true` to clamp `tableOX`, `tableOY` when out-of-bound,
-    - Set `false` when dragging by [scroller](scroller.md)
+- `clampTableOXY` : 
+    - `true` : Clamp `tableOX`, `tableOY` when out-of-bound,
+    - `false` : No clamping, default behavior.
+- `startFromBottom` :
+    - `false` : Start from top. Default behavior.
+    - `true` : If cells' height is less then a page, align cells to bottom.
 - `mask` : A rectangle mask of cells
     - `mask.padding` : 
         - A number : Extra left/right/top/bottom padding spacing of this rectangle mask. Default value is `0`.

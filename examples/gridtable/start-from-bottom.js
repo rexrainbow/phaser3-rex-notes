@@ -15,36 +15,26 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var testMode = 1;
-
-        var HorizontalAlignTest = function (cell) {
-            var scene = cell.scene;
-            var bg = scene.add.rectangle(0, 0, 200, cell.height, COLOR_MAIN)
-                .setStrokeStyle(2, COLOR_LIGHT);
-
-            cell.setContainer(bg);
-            cell.setCellContainerAlign((cell.index % 2) ? 'left' : 'right');
-            //console.log('Cell ' + cell.index + ' visible');
-        }
-        var VerticalAlignTest = function (cell) {
-            var scene = cell.scene;
-            var bg = scene.add.rectangle(0, 0, cell.width, cell.height - 20, COLOR_MAIN)
-                .setStrokeStyle(2, COLOR_LIGHT);
-
-            cell.setContainer(bg);
-            cell.setCellContainerAlign((cell.index % 2) ? 'top' : 'bottom');
-            //console.log('Cell ' + cell.index + ' visible');
-        }
-
         var table = this.add.rexGridTable(400, 300, 250, 400, {
-            cellHeight: 80,
-            cellsCount: 100,
-            columns: 1,
-            cellVisibleCallback: (testMode == 0) ? HorizontalAlignTest : VerticalAlignTest,
+            cellHeight: 60,
+            cellsCount: 3, // 7
+            cellVisibleCallback: function (cell) {
+                var scene = cell.scene;
+                var bg = scene.add.rectangle(0, 0, cell.width, cell.height, COLOR_MAIN)
+                    .setStrokeStyle(2, COLOR_LIGHT)
+                    .setOrigin(0);
+                var txt = scene.add.text(5, 5, cell.index);
+                var container = scene.add.container(0, 0, [bg, txt]);
+
+                cell.setContainer(container);
+                //console.log('Cell ' + cell.index + ' visible');
+            },
+            // reuseCellContainer: true,
             mask: {
                 padding: 2,
             },
             // enableLayer: true,
+            startFromBottom: true,
         });
 
         // draw bound
@@ -64,7 +54,6 @@ class Demo extends Phaser.Scene {
                 var dy = pointer.y - pointer.prevPosition.y;
                 table.addTableOXY(dx, dy).updateTable();
             });
-
     }
 
     update() {

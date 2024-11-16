@@ -46,6 +46,7 @@ class GridTable extends ContainerLite {
 
         this.setScrollMode(GetValue(config, 'scrollMode', 0));
         this.setClampMode(GetValue(config, 'clampTableOXY', true));
+        this.setStartFromBottomEnable(GetValue(config, 'startFromBottom', false));
 
         // Pre-process cell size
         var cellWidth, cellHeight, columns;
@@ -113,6 +114,14 @@ class GridTable extends ContainerLite {
             mode = true;
         }
         this.clampTableOXY = mode;
+        return this;
+    }
+
+    setStartFromBottomEnable(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+        this.startFromBottomEnable = enable;
         return this;
     }
 
@@ -314,6 +323,17 @@ class GridTable extends ContainerLite {
 
     get tableWidth() {
         return this.table.totalColumnWidth;
+    }
+
+    get tableOYOffset() {
+        if (this.startFromBottomEnable) {
+            var h = this.tableHeight - this.instHeight;
+            if (h < 0) {
+                return -h;
+            }
+        }
+
+        return 0; 
     }
 
     get topTableOY() {
