@@ -12,7 +12,7 @@ class Demo extends Phaser.Scene {
 
     create() {
         // Rectangle
-        this.add.rexRoundRectangle(100, 80, 100, 100, 0, 0x008888);
+        this.add.rexRoundRectangle(100, 80, 100, 100, 0, 0x008888).setStrokeStyle(3, 0xff0000);
         // Round-rectangle
         this.add.rexRoundRectangle(250, 80, 100, 100, 30, 0x008888);
         // Circle

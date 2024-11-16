@@ -40,7 +40,7 @@ class BaseGeom {
         return this;
     }
 
-    webglRender(pipeline, calcMatrix, alpha, dx, dy) {
+    webglRender(drawingContext, submitter, gameObject, calcMatrix, alpha, dx, dy) {
 
     }
 

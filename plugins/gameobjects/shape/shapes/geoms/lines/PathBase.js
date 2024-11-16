@@ -22,13 +22,13 @@ class PathBase extends BaseGeom {
         return this;
     }
 
-    webglRender(pipeline, calcMatrix, alpha, dx, dy) {
+    webglRender(drawingContext, submitter, calcMatrix, gameObject, alpha, dx, dy) {
         if (this.isFilled) {
-            FillPathWebGL(pipeline, calcMatrix, this, alpha, dx, dy);
+            FillPathWebGL(drawingContext, submitter, calcMatrix, gameObject, this, alpha, dx, dy);
         }
 
         if (this.isStroked) {
-            StrokePathWebGL(pipeline, this, alpha, dx, dy);
+            StrokePathWebGL(drawingContext, submitter, calcMatrix, gameObject, this, alpha, dx, dy);
         }
     }
 

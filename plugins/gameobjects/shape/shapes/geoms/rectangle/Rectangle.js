@@ -3,7 +3,7 @@ import StrokePathWebGL from '../../../utils/render/StrokePathWebGL.js';
 import FillStyleCanvas from '../../../utils/render/FillStyleCanvas.js';
 import LineStyleCanvas from '../../../utils/render/LineStyleCanvas.js';
 
-const GetTint = Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
+var Utils = Phaser.Renderer.WebGL.Utils;
 
 class Rectangle extends BaseGeom {
     constructor(x, y, width, height) {
@@ -107,21 +107,27 @@ class Rectangle extends BaseGeom {
         return this;
     }
 
-    webglRender(pipeline, calcMatrix, alpha, dx, dy) {
-        if (this.isFilled) {
-            var fillTint = pipeline.fillTint;
-            var fillTintColor = GetTint(this.fillColor, this.fillAlpha * alpha);
+    webglRender(gameObject, drawingContext, submitter, calcMatrix, alpha, dx, dy) {
+        if (src.isFilled) {
+            var fillTintColor = Utils.getTintAppendFloatAlpha(src.fillColor, src.fillAlpha * alpha);
 
-            fillTint.TL = fillTintColor;
-            fillTint.TR = fillTintColor;
-            fillTint.BL = fillTintColor;
-            fillTint.BR = fillTintColor;
+            var FillRect = gameObject.customRenderNodes.FillRect || gameObject.defaultRenderNodes.FillRect;
 
-            pipeline.batchFillRect(-dx + this.x, -dy + this.y, this.width, this.height);
+            FillRect.run(
+                drawingContext,
+                calcMatrix,
+                submitter,
+                -dx, -dy,
+                src.width, src.height,
+                fillTintColor,
+                fillTintColor,
+                fillTintColor,
+                fillTintColor
+            );
         }
 
         if (this.isStroked) {
-            StrokePathWebGL(pipeline, this, alpha, dx, dy);
+            StrokePathWebGL(drawingContext, submitter, calcMatrix, this, this, alpha, dx, dy);
         }
     }
 

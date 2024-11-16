@@ -1,32 +1,28 @@
 const GetCalcMatrix = Phaser.GameObjects.GetCalcMatrix;
 
-var WebGLRenderer = function (renderer, src, camera, parentMatrix) {
+var WebGLRenderer = function (renderer, src, drawingContext, parentMatrix) {
     src.updateData();
+
+    var camera = drawingContext.camera;
     camera.addToRenderList(src);
 
-    var pipeline = renderer.pipelines.set(src.pipeline);
-
-    var result = GetCalcMatrix(src, camera, parentMatrix);
-
-    var calcMatrix = pipeline.calcMatrix.copyFrom(result.calc);
+    var calcMatrix = GetCalcMatrix(src, camera, parentMatrix).calc;
 
     var dx = src._displayOriginX;
     var dy = src._displayOriginY;
 
-    var alpha = camera.alpha * src.alpha;
+    var alpha = src.alpha;
 
-    renderer.pipelines.preBatch(src);
+    var submitter = src.customRenderNodes.Submitter || src.defaultRenderNodes.Submitter;
 
     var shapes = src.geom,
         shape;
     for (var i = 0, cnt = shapes.length; i < cnt; i++) {
         shape = shapes[i];
         if (shape.visible) {
-            shape.webglRender(pipeline, calcMatrix, alpha, dx, dy);
+            shape.webglRender(drawingContext, submitter, calcMatrix, this, alpha, dx, dy);
         }
     }
-
-    renderer.pipelines.postBatch(src);
 };
 
 export default WebGLRenderer;

@@ -1,5 +1,5 @@
 /*
-src: {
+shapeData: {
     strokeColor,
     strokeAlpha,
     pathData,
@@ -9,49 +9,48 @@ src: {
 */
 var Utils = Phaser.Renderer.WebGL.Utils;
 
-var StrokePathWebGL = function (pipeline, src, alpha, dx, dy)
-{
-    var strokeTint = pipeline.strokeTint;
-    var strokeTintColor = Utils.getTintAppendFloatAlpha(src.strokeColor, src.strokeAlpha * alpha);
+var StrokePathWebGL = function (drawingContext, submitter, matrix, gameObject, shapeData, alpha, dx, dy) {
+    var strokeTintColor = Utils.getTintAppendFloatAlpha(shapeData.strokeColor, shapeData.strokeAlpha * alpha);
 
-    strokeTint.TL = strokeTintColor;
-    strokeTint.TR = strokeTintColor;
-    strokeTint.BL = strokeTintColor;
-    strokeTint.BR = strokeTintColor;
-
-    var path = src.pathData;
+    var path = shapeData.pathData;
     var pathLength = path.length - 1;
-    var lineWidth = src.lineWidth;
-    var halfLineWidth = lineWidth / 2;
+    var lineWidth = shapeData.lineWidth;
+    var openPath = !shapeData.closePath;
 
-    var px1 = path[0] - dx;
-    var py1 = path[1] - dy;
+    var strokePath = gameObject.customRenderNodes.StrokePath || gameObject.defaultRenderNodes.StrokePath;
 
-    if (!src.closePath)
-    {
+    var pointPath = [];
+
+    // Don't add the last point to open paths.
+    if (openPath) {
         pathLength -= 2;
     }
 
-    for (var i = 2; i < pathLength; i += 2)
-    {
-        var px2 = path[i] - dx;
-        var py2 = path[i + 1] - dy;
-
-        pipeline.batchLine(
-            px1,
-            py1,
-            px2,
-            py2,
-            halfLineWidth,
-            halfLineWidth,
-            lineWidth,
-            i - 2,
-            (src.closePath) ? (i === pathLength - 1) : false
-        );
-
-        px1 = px2;
-        py1 = py2;
+    for (var i = 0; i < pathLength; i += 2) {
+        var x = path[i] - dx;
+        var y = path[i + 1] - dy;
+        if (i > 0) {
+            if (x === path[i - 2] && y === path[i - 1]) {
+                // Duplicate point, skip it
+                continue;
+            }
+        }
+        pointPath.push({
+            x: x,
+            y: y,
+            width: lineWidth
+        });
     }
+
+    strokePath.run(
+        drawingContext,
+        submitter,
+        pointPath,
+        lineWidth,
+        openPath,
+        matrix,
+        strokeTintColor, strokeTintColor, strokeTintColor, strokeTintColor
+    );
 };
 
 export default StrokePathWebGL;
