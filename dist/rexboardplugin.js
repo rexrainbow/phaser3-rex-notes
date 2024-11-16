@@ -12421,9 +12421,15 @@
         if (minVersion === undefined) {
             minVersion = MinVersion;
         }
-        var currentVersion = parseInt(Phaser.VERSION.match(/\.(\d+)\./)[1]);
-        if (currentVersion < minVersion) {
-            console.error(`Minimum supported version : 3.${minVersion}`);
+        var version = Phaser.VERSION.split('.');
+        var mainVersion = parseInt(version[0]);
+        if (mainVersion === 3) {
+            var currentVersion = parseInt(version[1]);
+            if (currentVersion < minVersion) {
+                console.error(`Minimum supported version : ${mainVersion}.${currentVersion}`);
+            }
+        } else {
+            console.error(`Can't supported version : ${mainVersion}`);
         }
 
         IsChecked = true;

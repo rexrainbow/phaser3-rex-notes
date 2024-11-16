@@ -75,6 +75,7 @@ declare namespace GridTable {
         cellInvisibleCallbackScope: undefined,
 
         clampTableOXY?: boolean,
+        startFromBottom?: boolean,
         scrollMode?: ScrollModeType,
         mask?: MaskConfig,
         enableLayer?: boolean,

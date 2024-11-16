@@ -123,6 +123,7 @@ var table = scene.rexUI.add.gridTable({
         // enableLayer: false,
         interactive: true,
         reuseCellContainer: false,
+        // startFromBottom: false,
 
         // click: undefined,
         // tap: undefined,
@@ -310,6 +311,9 @@ var table = scene.rexUI.add.gridTable({
     - `table.reuseCellContainer` : 
         - `true` : Reuse cell container when creating new cell container. 
         - `false` : Destory cell container when cell is invisible, create new cell container when cell is visible. Default behavior.
+    - `table.startFromBottom` :
+        - `false` : Start from top. Default behavior.
+        - `true` : If cells' height is less then a page, align cells to bottom.
     - `table.interactive` : Set `true` to install touch events (tap/press/over/out/click). Default value is `true`.
     - `table.click` : [Configuration of cell-click behavior](button.md#create-instance), if `table.interactive` is `true`.
         - `undefined` : Use default click behavior.

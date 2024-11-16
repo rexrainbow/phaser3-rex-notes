@@ -10389,6 +10389,7 @@
 <span class="w">        </span><span class="c1">// enableLayer: false,</span>
 <span class="w">        </span><span class="nx">interactive</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">reuseCellContainer</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">        </span><span class="c1">// startFromBottom: false,</span>
 
 <span class="w">        </span><span class="c1">// click: undefined,</span>
 <span class="w">        </span><span class="c1">// tap: undefined,</span>
@@ -10604,6 +10605,11 @@
 <li><code>table.reuseCellContainer</code> : <ul>
 <li><code>true</code> : Reuse cell container when creating new cell container. </li>
 <li><code>false</code> : Destory cell container when cell is invisible, create new cell container when cell is visible. Default behavior.</li>
+</ul>
+</li>
+<li><code>table.startFromBottom</code> :<ul>
+<li><code>false</code> : Start from top. Default behavior.</li>
+<li><code>true</code> : If cells' height is less then a page, align cells to bottom.</li>
 </ul>
 </li>
 <li><code>table.interactive</code> : Set <code>true</code> to install touch events (tap/press/over/out/click). Default value is <code>true</code>.</li>
