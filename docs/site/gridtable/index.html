@@ -10455,8 +10455,9 @@
 
 <span class="w">    </span><span class="nx">cellInvisibleCallback</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
 <span class="w">    </span><span class="c1">// cellInvisibleCallback: function(cell) {},</span>
-<span class="w">    </span><span class="nx">cellInvisibleCallbackScope</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">clampTableOXY</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="c1">// cellInvisibleCallbackScope: undefined,</span>
+<span class="w">    </span><span class="c1">// clampTableOXY: true,</span>
+<span class="w">    </span><span class="c1">// startFromBottom: false,</span>
 
 <span class="w">    </span><span class="nx">mask</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">padding</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="c1">// or {left, right, top, bottom}</span>
@@ -10504,8 +10505,14 @@
 <span class="w">    </span><span class="c1">// var container = cell.popContainer();</span>
 <span class="p">}</span>
 </code></pre></div></li>
-<li><code>clampTableOXY</code> : Set <code>true</code> to clamp <code>tableOX</code>, <code>tableOY</code> when out-of-bound,<ul>
-<li>Set <code>false</code> when dragging by <a href="../scroller/">scroller</a></li>
+<li><code>clampTableOXY</code> : <ul>
+<li><code>true</code> : Clamp <code>tableOX</code>, <code>tableOY</code> when out-of-bound,</li>
+<li><code>false</code> : No clamping, default behavior.</li>
+</ul>
+</li>
+<li><code>startFromBottom</code> :<ul>
+<li><code>false</code> : Start from top. Default behavior.</li>
+<li><code>true</code> : If cells' height is less then a page, align cells to bottom.</li>
 </ul>
 </li>
 <li><code>mask</code> : A rectangle mask of cells<ul>

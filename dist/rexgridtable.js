@@ -23780,10 +23780,14 @@
 
         var table = this.table;
 
-        this.startRowIndex = Math.max(table.heightToRowIndex(-this.tableOY, 2), 0);
+        var tableOYOffset = this.tableOYOffset;
+        var tableOY = this.tableOY + tableOYOffset,
+            tableOX = this.tableOX;
+
+        this.startRowIndex = Math.max(table.heightToRowIndex(-tableOY, 2), 0);
         var rowIndex = this.startRowIndex;
 
-        var startColumnIndex = Math.max(table.widthToColIndex(-this.tableOX), 0);
+        var startColumnIndex = Math.max(table.widthToColIndex(-tableOX), 0);
         var columnIndex = startColumnIndex;
 
         var cellIdx = table.colRowToCellIndex(columnIndex, rowIndex);
@@ -23794,7 +23798,8 @@
 
         var startCellTLX = this.getCellTLX(columnIndex),
             cellTLX = startCellTLX;
-        var cellTLY = this.getCellTLY(rowIndex);
+        var startCellTLY = this.getCellTLY(rowIndex) + tableOYOffset,
+            cellTLY = startCellTLY;
         while ((cellTLY < bottomBound) && (cellIdx <= lastIdx)) {
             if (this.table.isValidCellIdx(cellIdx)) {
                 var cell = table.getCell(cellIdx, true);
@@ -24168,6 +24173,7 @@
 
             this.setScrollMode(GetValue$5(config, 'scrollMode', 0));
             this.setClampMode(GetValue$5(config, 'clampTableOXY', true));
+            this.setStartFromBottomEnable(GetValue$5(config, 'startFromBottom', false));
 
             // Pre-process cell size
             var cellWidth, cellHeight, columns;
@@ -24235,6 +24241,14 @@
                 mode = true;
             }
             this.clampTableOXY = mode;
+            return this;
+        }
+
+        setStartFromBottomEnable(enable) {
+            if (enable === undefined) {
+                enable = true;
+            }
+            this.startFromBottomEnable = enable;
             return this;
         }
 
@@ -24436,6 +24450,17 @@
 
         get tableWidth() {
             return this.table.totalColumnWidth;
+        }
+
+        get tableOYOffset() {
+            if (this.startFromBottomEnable) {
+                var h = this.tableHeight - this.instHeight;
+                if (h < 0) {
+                    return -h;
+                }
+            }
+
+            return 0; 
         }
 
         get topTableOY() {
