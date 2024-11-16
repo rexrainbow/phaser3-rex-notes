@@ -74,6 +74,10 @@ class GridTable extends ContainerLite {
             cellWidth = width / columns;
         }
 
+        if (cellHeight === undefined) {
+            console.error(`GridTable's cellHeight is undefined`)
+        }
+
         config.cellWidth = cellWidth;
         config.cellHeight = cellHeight;
         config.columns = columns;
@@ -333,7 +337,7 @@ class GridTable extends ContainerLite {
             }
         }
 
-        return 0; 
+        return 0;
     }
 
     get topTableOY() {
