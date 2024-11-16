@@ -1,4 +1,5 @@
-const MinVersion = 60;
+const MainVersionNumber = 4;
+const SubVersionNumber = 0;
 
 var IsChecked = false;
 
@@ -8,14 +9,14 @@ var CheckP3Version = function (minVersion) {
     }
 
     if (minVersion === undefined) {
-        minVersion = MinVersion;
+        minVersion = SubVersionNumber;
     }
     var version = Phaser.VERSION.split('.');
     var mainVersion = parseInt(version[0]);
-    if (mainVersion === 3) {
-        var currentVersion = parseInt(version[1])
-        if (currentVersion < minVersion) {
-            console.error(`Minimum supported version : ${mainVersion}.${currentVersion}`)
+    if (mainVersion === MainVersionNumber) {
+        var subVersion = parseInt(version[1])
+        if (subVersion < minVersion) {
+            console.error(`Minimum supported version : ${mainVersion}.${subVersion}`)
         }
     } else {
         console.error(`Can't supported version : ${mainVersion}`)
