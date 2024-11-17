@@ -1,9 +1,10 @@
 import BaseShapes from '../shapes/BaseShapes.js';
-import ShapesUpdateMethods from './methods/ShapesUpdateMethods.js';
+import Methods from './methods/Methods.js';
 import { BEZIER, SPLINE, POLYLINE, STRAIGHTLINE } from './Const.js';
 
 class Line extends BaseShapes {
     constructor(scene, points, lineWidth, color, alpha, lineType) {
+        var pointRadius;
         if (points !== undefined) {
             if (typeof (points) === 'number') {
                 lineType = alpha
@@ -18,6 +19,7 @@ class Line extends BaseShapes {
                 color = config.color;
                 alpha = config.alpha;
                 lineType = config.lineType;
+                pointRadius = config.pointRadius;
             }
         }
 
@@ -26,10 +28,14 @@ class Line extends BaseShapes {
         if (color === undefined) { color = 0xffffff; }
         if (alpha === undefined) { alpha = 1; }
         if (lineType === undefined) { lineType = 0; }
+        if (pointRadius === undefined) { pointRadius = 10; }
 
         super(scene);
         this.type = 'rexPath';
+        this.padding = {};
+        this.bounds = undefined;
 
+        this.setPointRadius(pointRadius);
         this.setLine(points, lineType);
         this.setStrokeStyle(lineWidth, color, alpha);
 
@@ -91,7 +97,7 @@ const CURVETYPE_MAP = {
 
 Object.assign(
     Line.prototype,
-    ShapesUpdateMethods,
+    Methods
 )
 
 export default Line;

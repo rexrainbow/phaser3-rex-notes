@@ -15,10 +15,10 @@ class Demo extends Phaser.Scene {
     create() {
         var graphics = this.add.graphics().setDepth(1);
 
-        CreateLine(this, 0, 350, undefined, graphics);
-        CreateLine(this, 200, 350, 'spline', graphics);
-        CreateLine(this, 400, 350, 'poly', graphics);
-        CreateLine(this, 600, 350, 'straight', graphics);
+        CreateLine(this, 100, 200, undefined, graphics);
+        CreateLine(this, 500, 200, 'spline', graphics);
+        CreateLine(this, 100, 500, 'poly', graphics);
+        CreateLine(this, 500, 500, 'straight', graphics);
     }
 }
 
