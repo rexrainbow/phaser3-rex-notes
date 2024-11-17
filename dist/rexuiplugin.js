@@ -63121,6 +63121,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 cellWidth = width / columns;
             }
 
+            if (cellHeight === undefined) {
+                console.error(`GridTable's cellHeight is undefined`);
+            }
+
             config.cellWidth = cellWidth;
             config.cellHeight = cellHeight;
             config.columns = columns;
@@ -63380,7 +63384,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 }
             }
 
-            return 0; 
+            return 0;
         }
 
         get topTableOY() {
