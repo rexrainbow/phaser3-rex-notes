@@ -5,7 +5,7 @@ var DrawImage = function (key, frame, x, y, width, height) {
         .setTexture(key, frame)
         .setDisplaySize(width, height);
 
-    this.draw(gameObject, x, y);
+    this.draw(gameObject, x, y).render();
 }
 
 export default DrawImage;

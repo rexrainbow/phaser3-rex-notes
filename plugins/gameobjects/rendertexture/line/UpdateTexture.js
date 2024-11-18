@@ -63,14 +63,14 @@ var UpdateTexture = function () {
     if (lineStartFrame) {
         offsetX = 0;
         offsetY = (this.height - lineStartFrame.cutHeight) / 2;
-        this.drawFrame(this.lineStartTexture, this.lineStartFrameName, offsetX, offsetY);
+        this.stamp(this.lineStartTexture, this.lineStartFrameName, offsetX, offsetY, { originX: 0, originY: 0 });
         remainderWidth -= lineStartFrame.cutWidth;
     }
     // Draw line end
     if (lineEndFrame) {
         offsetX = this.width - lineEndFrame.cutWidth;
         offsetY = (this.height - lineEndFrame.cutHeight) / 2;
-        this.drawFrame(this.lineEndTexture, this.lineEndFrameName, offsetX, offsetY);
+        this.stamp(this.lineEndTexture, this.lineEndFrameName, offsetX, offsetY, { originX: 0, originY: 0 });
         remainderWidth -= lineEndFrame.cutWidth;
     }
 
