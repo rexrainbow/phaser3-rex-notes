@@ -1,9 +1,14 @@
 const TransformMatrix = Phaser.GameObjects.Components.TransformMatrix;
 const GetTint = Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 
-var FrameMatrix = new TransformMatrix();
+var tempMatrix = new TransformMatrix();
+var tempTransformer = {
+    quad: new Float32Array(8)
+};
+var tempTexturer = {};
+var tempTinter = {};
 
-var WebglRender = function (pipeline, calcMatrix, alpha, dx, dy, texture, textureUnit, roundPixels) {
+var WebglRender = function (Submitter, drawingContext, parentMatrix, calcMatrix, alpha, dx, dy) {
     var frame = this.frame;
     if (!frame) {
         return;
@@ -62,27 +67,38 @@ var WebglRender = function (pipeline, calcMatrix, alpha, dx, dy, texture, textur
         flipY = -1;
     }
 
-    FrameMatrix.applyITRS(x, y, this.rotation, this.scaleX * flipX, this.scaleY * flipY);
-    calcMatrix.multiply(FrameMatrix, FrameMatrix);
+    tempMatrix.applyITRS(x, y, this.rotation, this.scaleX * flipX, this.scaleY * flipY);
+    calcMatrix.multiply(tempMatrix, tempMatrix);
 
     var tx = -displayOriginX + frameX;
     var ty = -displayOriginY + frameY;
     var tw = tx + frameWidth;
     var th = ty + frameHeight;
 
-    var quad = FrameMatrix.setQuad(tx, ty, tw, th, roundPixels);
+    tempMatrix.setQuad(tx, ty, tw, th, false, tempTransformer.quad);
+
+    tempTexturer.frame = frame;
+    tempTexturer.uvSource = frame;    
 
     var tint = GetTint(this.tint, this.alpha * alpha);
 
-    pipeline.batchQuad(
+    tempTinter.tintTopLeft = tint;
+    tempTinter.tintBottomLeft = tint;
+    tempTinter.tintTopRight = tint;
+    tempTinter.tintBottomRight = tint;
+
+    Submitter.run(
+        drawingContext,
         this.parent,
-        quad[0], quad[1], quad[2], quad[3], quad[4], quad[5], quad[6], quad[7],
-        u0, v0,
-        u1, v1,
-        tint, tint, tint, tint,
-        this.tintFill,
-        texture,
-        textureUnit
+        parentMatrix,
+        0,
+        tempTexturer,
+        tempTransformer,
+        tempTinter,
+
+        // Optional normal map parameters.
+        undefined,
+        0
     );
 }
 

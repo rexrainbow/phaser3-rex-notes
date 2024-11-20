@@ -10,6 +10,7 @@ const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const List = Phaser.Structs.List;
 const StableSort = Phaser.Utils.Array.StableSort;
+const DefaultBlitterNodes = Phaser.Renderer.WebGL.RenderNodes.Defaults.DefaultBlitterNodes;
 
 class Blitter extends GameObject {
     constructor(scene, x, y, texture, frame, config) {
@@ -39,13 +40,17 @@ class Blitter extends GameObject {
         this.poolManager = (reuseBob) ? (new PoolManager(config)) : undefined;
 
         this.setTexture(texture, frame);
-        this.setPosition(x, y);
+        this.setPosition(x, y);        
+        this.initRenderNodes(this._defaultRenderNodesMap);
         this.setOrigin(0, 0);
         this.clearTint();
-        this.initPipeline();
-        this.initPostPipeline();
 
     }
+
+    get _defaultRenderNodesMap() {
+        return DefaultBlitterNodes;
+    }
+
 
     preDestroy() {
         this.removeChildren();
@@ -102,9 +107,8 @@ Phaser.Class.mixin(Blitter,
         Components.Depth,
         Components.GetBounds,
         Components.Mask,
+        Components.RenderNodes,
         Components.Origin,
-        Components.Pipeline,
-        Components.PostPipeline,
         Components.ScrollFactor,
         Components.Transform,
         Components.Visible,

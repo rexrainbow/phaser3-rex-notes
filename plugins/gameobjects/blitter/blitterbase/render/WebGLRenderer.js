@@ -1,37 +1,30 @@
 const GetCalcMatrix = Phaser.GameObjects.GetCalcMatrix;
+const TransformMatrix = Phaser.GameObjects.Components.TransformMatrix;
+var tempMatrix = new TransformMatrix();
 
-var WebGLRenderer = function (renderer, src, camera, parentMatrix) {
+var WebGLRenderer = function (renderer, src, drawingContext, parentMatrix) {
     var bobs = src.getRenderList();
-    if (bobs.length === 0) {
+    var camera = drawingContext.camera;
+
+    if (bobs.length === 0 || alpha === 0) {
+        //  Nothing to see, so abort early
         return;
     }
 
-    camera.addToRenderList(src);
-
-    var pipeline = renderer.pipelines.set(src.pipeline);
-
-    var texture = src.frame.glTexture;
-
-    var textureUnit = pipeline.setGameObject(src);
-
-    var roundPixels = camera.roundPixels;
-
     var result = GetCalcMatrix(src, camera, parentMatrix);
+    var calcMatrix = tempMatrix.copyFrom(result.calc);
 
-    var calcMatrix = pipeline.calcMatrix.copyFrom(result.calc);
-
+    var alpha = camera.alpha * src.alpha;
     var dx = src._displayOriginX;
     var dy = src._displayOriginY;
 
-    var alpha = camera.alpha * src.alpha;
-
-    renderer.pipelines.preBatch(src);
+    var customRenderNodes = src.customRenderNodes;
+    var defaultRenderNodes = src.defaultRenderNodes;
+    var Submitter = customRenderNodes.Submitter || defaultRenderNodes.Submitter;
 
     for (var i = 0, cnt = bobs.length; i < cnt; i++) {
-        bobs[i].webglRender(pipeline, calcMatrix, alpha, dx, dy, texture, textureUnit, roundPixels);
+        bobs[i].webglRender(Submitter, drawingContext, parentMatrix, calcMatrix, alpha, dx, dy);
     }
-
-    renderer.pipelines.postBatch(src);
 };
 
 export default WebGLRenderer;
