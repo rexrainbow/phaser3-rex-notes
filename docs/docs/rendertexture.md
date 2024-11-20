@@ -97,9 +97,9 @@ rt.clear(x, y, width, height);
 ### Draw game object
 
 ```javascript
-rt.draw(entries);
-// rt.draw(entries,x, y);
-// rt.draw(entries, x, y, alpha, tint);
+rt.draw(entries).render();
+// rt.draw(entries,x, y).render();
+// rt.draw(entries, x, y, alpha, tint).render();
 ```
 
 - `entries` : 
@@ -121,8 +121,8 @@ rt.draw(entries);
 ### Erase
 
 ```javascript
-rt.erase(entries);
-// rt.erase(entries, x, y);
+rt.erase(entries).render();
+// rt.erase(entries, x, y).render();
 ```
 
 - `entries` : 
@@ -155,14 +155,7 @@ rt.stamp(key, frame, x, y, {
     blendMode: 0,
     erase: false,
     skipBatch: false
-})
-```
-
-or
-
-```javascript
-rt.drawFrame(key, frame, x, y);
-// rt.drawFrame(key, frame, x, y, alpha, tint);
+}).render();
 ```
 
 - `x`, `y` : Top-left position
@@ -172,53 +165,11 @@ rt.drawFrame(key, frame, x, y);
 
 - Repeat frames full of size
     ```javascript
-    rt.repeat(key, frame);
+    rt.repeat(key, frame).render();
     ```
 - Repeat in an area
     ```javascript
-    rt.repeat(key, frame, x, y, width, height);
-    // rt.repeat(key, frame, x, y, width, height, alpha, tint, skipBatch);
-    ```
-
-
-### Batch draw
-
-1. Begin
-    ```javascript
-    rt.beginDraw();
-    ```
-2. Draw
-    - Draw game object
-        ```javascript
-        rt.batchDraw(entries, x, y, alpha, tint);
-        ```
-        - `entries` : 
-            - Any renderable Game Object, such as a Sprite, Text, Graphics or TileSprite.
-            - Tilemap Layers.
-            - A Group. The contents of which will be iterated and drawn in turn.
-            - A Container. The contents of which will be iterated fully, and drawn in turn.
-            - A Scene Display List. Pass in `Scene.children` to draw the whole list.
-            - Another Dynamic Texture, or a Render Texture.
-            - A Texture Frame instance.
-            - A string. This is used to look-up the texture from the Texture Manager.
-    - Draw frame
-        ```javascript
-        rt.batchDrawFrame(key, frame, x, y, alpha, tint);
-        ```
-    - Draw image
-        ```javascript
-        rt.stamp(key, frame, x, y, {
-            // ...
-            skipBatch: true
-        })
-        ```
-    - Draw repeat images
-        ```javascript
-        rt.repeat(key, frame, x, y, width, height, alpha, tint, true);
-        ```
-3. End
-    ```javascript
-    rt.endDraw();
+    rt.repeat(key, frame, x, y, width, height).render();
     ```
 
 
@@ -279,22 +230,6 @@ texture.snapshotPixel(x, y, callback);
     }
     ```
     - `color` : [Color](color.md) object.
-
-
-### Global alpha
-
-```javascript
-rt.setGlobalAlpha(alpha);
-// rt.globalAlpha = alpha;
-```
-
-
-### Global tint
-
-```javascript
-rt.setGlobalTint(tint);
-// rt.globalTint = tint;
-```
 
 
 ### Save texture
