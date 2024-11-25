@@ -102,18 +102,6 @@ class Demo extends Phaser.Scene {
     update() { }
 }
 
-function reshapeArrayTo2D(array, itemsPerRow) {
-    return array.reduce((acc, curr, index) => {
-        // 每行的開頭要創建一個新的子陣列
-        if (index % itemsPerRow === 0) {
-            acc.push([]);
-        }
-        // 將當前物件推入最後一個子陣列
-        acc[acc.length - 1].push(curr);
-        return acc;
-    }, []);
-}
-
 var config = {
     type: Phaser.AUTO,
     parent: 'phaser-example',
