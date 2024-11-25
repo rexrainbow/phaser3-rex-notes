@@ -1513,11 +1513,11 @@
         line.end();
     };
 
-    const Rectangle = Phaser.Geom.Rectangle;
+    const Rectangle$1 = Phaser.Geom.Rectangle;
 
     var GetBounds = function (points, out) {
         if (out === undefined) {
-            out = new Rectangle();
+            out = new Rectangle$1();
         } else if (out === true) {
             out = GlobalBounds;
         }
@@ -1545,20 +1545,23 @@
         return out;
     };
 
-    var GlobalBounds = new Rectangle();
+    var GlobalBounds = new Rectangle$1();
 
-    var SetTransform = function (line) {
-        // Size
-        var bounds = GetBounds.call(this, line.pathData, true);
-        var width = Math.max(bounds.width, this.lineWidth);
-        var height = Math.max(bounds.height, this.lineWidth);
+    var SetTransform = function (line, bounds) {
+        // Size    
+        var bounds = this.bounds;
+        var radius = this.pointRadius;
+        var x = bounds.x - radius;
+        var y = bounds.y - radius;
+        var width = bounds.width + (radius * 2);
+        var height = bounds.height + (radius * 2);
         this.setSize(width, height);
         // Origin
-        this.setOrigin(-bounds.x / width, -bounds.y / height);
+        this.setOrigin(-x / width, -y / height);
         // Position
         var point = this.points[0];
         this.setPosition(point.x, point.y);
-        line.offset(-bounds.x, -bounds.y);
+        line.offset(-x, -y);
     };
 
     var ShapesUpdateMethods = {
@@ -1593,12 +1596,83 @@
                 DrawSpinleCurve.call(this, line);
             }
 
+            this.bounds = GetBounds.call(this, line.pathData, true);
             SetTransform.call(this, line);
         }
     };
 
+    const LineToCircle = Phaser.Geom.Intersects.LineToCircle;
+
+    const tmpLine = new Phaser.Geom.Line();
+
+    var LinesToCircle = function (points, circle) {
+        tmpLine.x1 = points[0];
+        tmpLine.y1 = points[1];
+        for (var i = 2, cnt = points.length; i < cnt; i += 2) {
+            tmpLine.x2 = points[i];
+            tmpLine.y2 = points[i + 1];
+
+            if (LineToCircle(tmpLine, circle)) {
+                return true;
+            }
+
+            tmpLine.x1 = tmpLine.x2;
+            tmpLine.y1 = tmpLine.y2;
+        }
+
+        return false;
+    };
+
+    const Rectangle = Phaser.Geom.Rectangle;
+    const RectangleContains = Phaser.Geom.Rectangle.Contains;
+    const SetInteractiveBase = Phaser.GameObjects.GameObject.prototype.setInteractive;
+
+    const GlobPoint = new Phaser.Geom.Circle();
+
+    var HitAreaCallback = function (shape, x, y, gameObject) {
+        if (!RectangleContains(shape, x, y)) {
+            return false;
+        }
+
+        GlobPoint.setTo(x, y, gameObject.pointRadius);
+
+        var line = gameObject.getShapes()[0];
+        var points = line.pathData;
+
+        return LinesToCircle(points, GlobPoint);
+    };
+
+    var SetInteractiveMethods = {
+        setPointRadius(radius) {
+            this.pointRadius = radius;
+            return this;
+        },
+
+        setInteractive(config) {
+            if (config === undefined) {
+                config = {};
+            }
+
+            config.hitArea = new Rectangle(0, 0, this.width, this.height);
+            config.hitAreaCallback = HitAreaCallback;
+
+            SetInteractiveBase.call(this, config);
+
+            return this;
+        }
+    };
+
+    var Methods = {};
+
+    Object.assign(
+        Methods,
+        ShapesUpdateMethods,
+        SetInteractiveMethods
+    );
+
     class Line extends BaseShapes {
         constructor(scene, points, lineWidth, color, alpha, lineType) {
+            var pointRadius;
             if (points !== undefined) {
                 if (typeof (points) === 'number') {
                     lineType = alpha;
@@ -1613,6 +1687,7 @@
                     color = config.color;
                     alpha = config.alpha;
                     lineType = config.lineType;
+                    pointRadius = config.pointRadius;
                 }
             }
 
@@ -1621,10 +1696,14 @@
             if (color === undefined) { color = 0xffffff; }
             if (alpha === undefined) { alpha = 1; }
             if (lineType === undefined) { lineType = 0; }
+            if (pointRadius === undefined) { pointRadius = 10; }
 
             super(scene);
             this.type = 'rexPath';
+            this.padding = {};
+            this.bounds = undefined;
 
+            this.setPointRadius(pointRadius);
             this.setLine(points, lineType);
             this.setStrokeStyle(lineWidth, color, alpha);
 
@@ -1686,7 +1765,7 @@
 
     Object.assign(
         Line.prototype,
-        ShapesUpdateMethods,
+        Methods
     );
 
     function Factory (points, lineWidth, color, alpha, lineType) {

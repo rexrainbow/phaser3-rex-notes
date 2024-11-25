@@ -1,17 +1,18 @@
-import GetBounds from './GetBounds.js';
-
-var SetTransform = function (line) {
-    // Size
-    var bounds = GetBounds.call(this, line.pathData, true);
-    var width = Math.max(bounds.width, this.lineWidth);
-    var height = Math.max(bounds.height, this.lineWidth);
+var SetTransform = function (line, bounds) {
+    // Size    
+    var bounds = this.bounds;
+    var radius = this.pointRadius;
+    var x = bounds.x - radius;
+    var y = bounds.y - radius;
+    var width = bounds.width + (radius * 2);
+    var height = bounds.height + (radius * 2);
     this.setSize(width, height);
     // Origin
-    this.setOrigin(-bounds.x / width, -bounds.y / height);
+    this.setOrigin(-x / width, -y / height);
     // Position
     var point = this.points[0];
     this.setPosition(point.x, point.y);
-    line.offset(-bounds.x, -bounds.y);
+    line.offset(-x, -y);
 }
 
 export default SetTransform;

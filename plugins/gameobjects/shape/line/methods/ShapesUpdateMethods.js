@@ -5,6 +5,7 @@ import DrawCubicBezierCurve from './DrawCubicBezierCurve.js';
 import DrawSpinleCurve from './DrawSpinleCurve.js';
 import DrawStraightLine from './DrawStraightLine.js';
 import DrawPolyLine from './DrawPolyLine.js';
+import GetBounds from './GetBounds.js';
 import SetTransform from './SetTransform.js';
 
 export default {
@@ -39,6 +40,7 @@ export default {
             DrawSpinleCurve.call(this, line);
         }
 
+        this.bounds = GetBounds.call(this, line.pathData, true);
         SetTransform.call(this, line);
     }
 }

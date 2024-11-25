@@ -22850,8 +22850,15 @@
             this.nonZeroDeltaHeightCount = 0;
             this.resetTotalRowsHeight();
 
-            var cellHeight = GetValue$7(o, 'cellHeight', 60);
-            var cellWidth = GetValue$7(o, 'cellWidth', 60);
+            var cellHeight = o.cellHeight;
+            if (cellHeight === undefined) {
+                cellHeight = 60;
+            }
+
+            var cellWidth = o.cellWidth;
+            if (cellWidth === undefined) {
+                cellWidth = 60;
+            }
 
             this.setDefaultCellHeight(cellHeight);
             this.setDefaultCellWidth(cellWidth);
@@ -24460,7 +24467,7 @@
                 }
             }
 
-            return 0; 
+            return 0;
         }
 
         get topTableOY() {
