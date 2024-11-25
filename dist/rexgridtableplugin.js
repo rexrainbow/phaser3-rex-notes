@@ -3044,8 +3044,15 @@
             this.nonZeroDeltaHeightCount = 0;
             this.resetTotalRowsHeight();
 
-            var cellHeight = GetValue$4(o, 'cellHeight', 60);
-            var cellWidth = GetValue$4(o, 'cellWidth', 60);
+            var cellHeight = o.cellHeight;
+            if (cellHeight === undefined) {
+                cellHeight = 60;
+            }
+
+            var cellWidth = o.cellWidth;
+            if (cellWidth === undefined) {
+                cellWidth = 60;
+            }
 
             this.setDefaultCellHeight(cellHeight);
             this.setDefaultCellWidth(cellWidth);
@@ -4758,10 +4765,6 @@
             } else if (this.expandCellSize) {
                 var width = (scrollY) ? this.width : this.height;
                 cellWidth = width / columns;
-            }
-
-            if (cellHeight === undefined) {
-                console.error(`GridTable's cellHeight is undefined`);
             }
 
             config.cellWidth = cellWidth;
