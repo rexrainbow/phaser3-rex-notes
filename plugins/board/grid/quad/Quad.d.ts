@@ -62,6 +62,6 @@ declare class Quad {
     getBounds(
         tileX: number,
         tileY: number,
-        out?: Rectangle
+        out?: Rectangle | true
     ): Rectangle;
 }
