@@ -47,6 +47,12 @@ class Demo extends Phaser.Scene {
         }
 
         graphics.strokeRectShape(miniBoard.getBounds());
+
+        var chessArray = miniBoard.getAllChess();
+        for (var i = 0, cnt = chessArray.length; i < cnt; i++) {
+            var chess = chessArray[i];
+            console.log(chess.x, chess.y);
+        }
     }
 
     update() { }
