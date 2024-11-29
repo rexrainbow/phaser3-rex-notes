@@ -229,16 +229,23 @@ declare class Line {
     setTo(x1?: number, y1?: number, x2?: number, y2?: number): this;
 
     /**
+     * Sets this Line to match the x/y coordinates of the two given Vector2Like objects.
+     * @param start Any object with public `x` and `y` properties, whose values will be assigned to the x1/y1 components of this Line.
+     * @param end Any object with public `x` and `y` properties, whose values will be assigned to the x2/y2 components of this Line.
+     */
+    setFromObjects(start: Vector2Like, end: Vector2Like): this;
+
+    /**
      * Returns a Vector2 object that corresponds to the start of this Line.
      * @param vec2 A Vector2 object to set the results in. If `undefined` a new Vector2 will be created.
      */
-    getPointA(vec2?: Vector2): Vector2;
+    getPointA<O extends Vector2>(vec2?: O): O;
 
     /**
      * Returns a Vector2 object that corresponds to the end of this Line.
      * @param vec2 A Vector2 object to set the results in. If `undefined` a new Vector2 will be created.
      */
-    getPointB(vec2?: Vector2): Vector2;
+    getPointB<O extends Vector2>(vec2?: O): O;
 
     /**
      * The left position of the Line.

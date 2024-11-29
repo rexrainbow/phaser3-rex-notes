@@ -152,6 +152,15 @@ These world properties of chess will be changed with container.
     miniBoard.setOrigin('top-left');
     ```
 
+### Get bounds
+
+A rectangle bounds contains all chess.
+
+```javascript
+var rect = miniBoard.getBounds();
+// var out = miniBoard.getBounds(out);
+```
+
 ### Main board
 
 Put chess to a main-board ([Board object](board.md)) with the same tile position in mini-board, or pull chess out from main-board.

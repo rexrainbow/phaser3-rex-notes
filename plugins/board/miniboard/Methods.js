@@ -1,6 +1,7 @@
 import AddChess from './chess/AddChess.js';
 import RemoveChess from './chess/RemoveChess.js';
 import RemoveAllChess from './chess/RemoveAllChess.js';
+import GetBounds from './chess/GetBounds.js';
 
 import SetMainBoard from './mainboard/SetMainboard.js';
 import CanPutOnMainBoard from './mainboard/CanPutOnMainBoard.js';
@@ -26,6 +27,7 @@ export default {
     addChess: AddChess,
     removeChess: RemoveChess,
     removeAllChess: RemoveAllChess,
+    getBounds: GetBounds,
 
     pullOutFromMainBoard: PullOutFromMainBoard,
     canPutOnMainBoard: CanPutOnMainBoard,

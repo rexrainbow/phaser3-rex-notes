@@ -3,6 +3,7 @@ import Quad from '../grid/quad/Quad';
 import Hexagon from '../grid/hexagon/Hexagon';
 import { TileXYZType } from '../types/Position';
 import Board from '../board/Board';
+import Rectangle from '../../utils/geom/rectangle/Rectangle';
 
 export default MiniBoard;
 
@@ -163,4 +164,5 @@ declare class MiniBoard extends Container {
 
     setDragEnable(enable?: boolean): this;
 
+    getBounds<O extends Rectangle>(output?: O): O;
 }
