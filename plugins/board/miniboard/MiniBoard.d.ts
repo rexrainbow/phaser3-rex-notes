@@ -103,6 +103,10 @@ declare class MiniBoard extends Container {
         destroy?: boolean
     ): this;
 
+    getAllChess(
+        out?: Phaser.GameObjects.GameObject[]
+    ): Phaser.GameObjects.GameObject[];
+
     setOrigin(
         originX: number,
         originY?: number

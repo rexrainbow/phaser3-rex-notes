@@ -9,6 +9,7 @@ Chess [Container](containerlite.md), to rotate/mirror/drag chess together.
 
 - [Group 4](https://codepen.io/rexrainbow/pen/bGdMVzo)
 - [Drag & drop, mirror, rotate](https://codepen.io/rexrainbow/pen/ZEVqGRJ)
+- [Drag overlapped miniboard](https://codepen.io/rexrainbow/pen/KwPwOjO)
 
 ## Usage
 

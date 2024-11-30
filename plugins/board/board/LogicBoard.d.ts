@@ -413,7 +413,9 @@ declare class Board<ChessType = unknown> extends EE {
         out?: TileXYType[]
     ): TileXYType[];
 
-    getAllChess(): ChessType[];
+    getAllChess(
+        out?: ChessType[]
+    ): ChessType[];
 
     fit(tileXYArray: TileXYType[]): this;
 
