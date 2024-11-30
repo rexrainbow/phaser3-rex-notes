@@ -2,7 +2,7 @@ import AddChess from './chess/AddChess.js';
 import RemoveChess from './chess/RemoveChess.js';
 import RemoveAllChess from './chess/RemoveAllChess.js';
 import GetAllChess from './chess/GetAllChess.js';
-import GetBounds from './chess/GetBounds.js';
+import WorldXYToChess from './chess/WorldXYToChess.js';
 
 import SetMainBoard from './mainboard/SetMainboard.js';
 import CanPutOnMainBoard from './mainboard/CanPutOnMainBoard.js';
@@ -22,6 +22,7 @@ import CanRotate from './transform/CanRotate.js';
 import Rotate from './transform/Rotate.js';
 import CanRotateTo from './transform/CanRotateTo.js';
 import RotateTo from './transform/RotateTo.js';
+import GetBounds from './transform/GetBounds.js';
 import SetOrigin from './transform/SetOrigin.js';
 
 export default {
@@ -29,7 +30,7 @@ export default {
     removeChess: RemoveChess,
     removeAllChess: RemoveAllChess,
     getAllChess: GetAllChess,
-    getBounds: GetBounds,
+    worldXYToChess: WorldXYToChess,
 
     pullOutFromMainBoard: PullOutFromMainBoard,
     canPutOnMainBoard: CanPutOnMainBoard,
@@ -49,5 +50,6 @@ export default {
     rotate: Rotate,
     canRotateTo: CanRotateTo,
     rotateTo: RotateTo,
+    getBounds: GetBounds,
     setOrigin: SetOrigin
 };
