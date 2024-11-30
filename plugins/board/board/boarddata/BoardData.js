@@ -35,6 +35,28 @@ class BoardData {
         return this;
     }
 
+    getBounds() {
+        var xMin = Infinity,
+            xMax = -Infinity,
+            yMin = Infinity,
+            yMax = -Infinity;
+
+        var UIDToXYZ = this.UIDToXYZ,
+            x, y;
+        for (var uid in UIDToXYZ) {
+            x = UIDToXYZ[uid].x;
+            if (xMin > x) { xMin = x; }
+            if (xMax < x) { xMax = x; }
+            if (yMin > x) { yMin = x; }
+            if (yMax < x) { yMax = x; }
+        }
+
+        return {
+            left: xMin, right: xMax,
+            top: yMin, bottom: yMax
+        }
+    }
+
     addUID(uid, x, y, z) {
         if (!this.XYZToUID.hasOwnProperty(x)) {
             this.XYZToUID[x] = {};

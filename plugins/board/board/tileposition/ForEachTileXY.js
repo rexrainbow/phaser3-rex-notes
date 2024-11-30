@@ -12,10 +12,11 @@ var ForEachTileXY = function (callback, scope, config) {
 
     var top, bottom, left, right;
     if (this.infinityMode && (this.width === undefined)) {
-        left = this.boardData.xMin;
-        right = this.boardData.xMax;
-        top = this.boardData.yMin;
-        bottom = this.boardData.yMax;
+        var bounds = this.boardData.getBounds();
+        left = bounds.left;
+        right = bounds.right;
+        top = bounds.top;
+        bottom = bounds.bottom;
     } else {
         var lastX = this.width - 1,
             lastY = this.height - 1;

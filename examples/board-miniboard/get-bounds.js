@@ -41,7 +41,7 @@ class Demo extends Phaser.Scene {
             line = map[i].split('');
             for (var j = 0, jcnt = line.length; j < jcnt; j++) {
                 if (line[j] !== ' ') {
-                    this.rexBoard.add.shape(miniBoard, j - 1, i - 1, 0, Random(0, 0xffffff));
+                    this.rexBoard.add.shape(miniBoard, j - 1, i - 1, 0, 0x669966).setStrokeStyle(2, 0xffffff);
                 }
             }
         }
