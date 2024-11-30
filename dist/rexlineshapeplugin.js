@@ -35,7 +35,7 @@
         renderer.pipelines.postBatch(src);
     };
 
-    const SetTransform$1 = Phaser.Renderer.Canvas.SetTransform;
+    const SetTransform = Phaser.Renderer.Canvas.SetTransform;
 
     var CanvasRenderer = function (renderer, src, camera, parentMatrix) {
         src.updateData();
@@ -43,7 +43,7 @@
 
         var ctx = renderer.currentContext;
 
-        if (SetTransform$1(renderer, ctx, src, camera, parentMatrix)) {
+        if (SetTransform(renderer, ctx, src, camera, parentMatrix)) {
             var dx = src._displayOriginX;
             var dy = src._displayOriginY;
 
@@ -1547,7 +1547,7 @@
 
     var GlobalBounds = new Rectangle$1();
 
-    var SetTransform = function (line, bounds) {
+    var SetSizeFromBounds = function (line, bounds) {
         // Size    
         var bounds = this.bounds;
         var radius = this.pointRadius;
@@ -1597,7 +1597,7 @@
             }
 
             this.bounds = GetBounds.call(this, line.pathData, true);
-            SetTransform.call(this, line);
+            SetSizeFromBounds.call(this, line);
         }
     };
 

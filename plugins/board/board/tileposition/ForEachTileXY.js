@@ -8,19 +8,22 @@ var ForEachTileXY = function (callback, scope, config) {
         }
     }
 
-    var lastX = this.width - 1,
-        lastY = this.height - 1;
     var order = GetValue(config, 'order', 0);
-    var left = GetValue(config, 'left', 0);
-    var right = GetValue(config, 'right', lastX);
-    var top = GetValue(config, 'top', 0);
-    var bottom = GetValue(config, 'bottom', lastY);
 
-    if (!this.infinityMode) {
-        left = Clamp(left, 0, lastX);
-        top = Clamp(top, 0, lastY);
-        right = Clamp(right, 0, lastX);
-        bottom = Clamp(bottom, 0, lastY);
+    var top, bottom, left, right;
+    if (this.infinityMode && (this.width === undefined)) {
+        var bounds = this.boardData.getBounds();
+        left = bounds.left;
+        right = bounds.right;
+        top = bounds.top;
+        bottom = bounds.bottom;
+    } else {
+        var lastX = this.width - 1,
+            lastY = this.height - 1;
+        left = Clamp(GetValue(config, 'left', 0), 0, lastX);
+        right = Clamp(GetValue(config, 'right', lastX), 0, lastX);
+        top = Clamp(GetValue(config, 'top', 0), 0, lastY);
+        bottom = Clamp(GetValue(config, 'bottom', lastY), 0, lastY);
     }
 
     switch (order) {

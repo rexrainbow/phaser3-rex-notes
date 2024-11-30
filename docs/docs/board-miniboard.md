@@ -9,6 +9,7 @@ Chess [Container](containerlite.md), to rotate/mirror/drag chess together.
 
 - [Group 4](https://codepen.io/rexrainbow/pen/bGdMVzo)
 - [Drag & drop, mirror, rotate](https://codepen.io/rexrainbow/pen/ZEVqGRJ)
+- [Drag overlapped miniboard](https://codepen.io/rexrainbow/pen/KwPwOjO)
 
 ## Usage
 
@@ -151,6 +152,22 @@ These world properties of chess will be changed with container.
     ```javascript
     miniBoard.setOrigin('top-left');
     ```
+
+### Get all chess
+
+```javascript
+var gameObjects = miniBoard.getAllChess();
+// var out = miniBoard.getAllChess(out);
+```
+
+### Get bounds
+
+A rectangle bounds contains all chess.
+
+```javascript
+var rect = miniBoard.getBounds();
+// var out = miniBoard.getBounds(out);
+```
 
 ### Main board
 

@@ -9449,6 +9449,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#get-all-chess" class="md-nav__link">
+    Get all chess
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-bounds" class="md-nav__link">
+    Get bounds
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#main-board" class="md-nav__link">
     Main board
   </a>
@@ -10207,6 +10221,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#get-all-chess" class="md-nav__link">
+    Get all chess
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-bounds" class="md-nav__link">
+    Get bounds
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#main-board" class="md-nav__link">
     Main board
   </a>
@@ -10418,6 +10446,7 @@
 <ul>
 <li><a href="https://codepen.io/rexrainbow/pen/bGdMVzo">Group 4</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/ZEVqGRJ">Drag &amp; drop, mirror, rotate</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/KwPwOjO">Drag overlapped miniboard</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/board-miniboard">Sample code</a></p>
@@ -10559,6 +10588,15 @@
     <div class="highlight"><pre><span></span><code><span class="nx">miniBoard</span><span class="p">.</span><span class="nx">setOrigin</span><span class="p">(</span><span class="s1">&#39;top-left&#39;</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
+<h3 id="get-all-chess">Get all chess<a class="headerlink" href="#get-all-chess" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">gameObjects</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">miniBoard</span><span class="p">.</span><span class="nx">getAllChess</span><span class="p">();</span>
+<span class="c1">// var out = miniBoard.getAllChess(out);</span>
+</code></pre></div>
+<h3 id="get-bounds">Get bounds<a class="headerlink" href="#get-bounds" title="Permanent link">&para;</a></h3>
+<p>A rectangle bounds contains all chess.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">rect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">miniBoard</span><span class="p">.</span><span class="nx">getBounds</span><span class="p">();</span>
+<span class="c1">// var out = miniBoard.getBounds(out);</span>
+</code></pre></div>
 <h3 id="main-board">Main board<a class="headerlink" href="#main-board" title="Permanent link">&para;</a></h3>
 <p>Put chess to a main-board (<a href="../board/">Board object</a>) with the same tile position in mini-board, or pull chess out from main-board.</p>
 <h4 id="put-on-main-board">Put on main-board<a class="headerlink" href="#put-on-main-board" title="Permanent link">&para;</a></h4>

@@ -1,8 +1,6 @@
 import phaser from 'phaser/src/phaser.js';
 import BoardPlugin from '../../plugins/board-plugin.js';
 
-const Random = Phaser.Math.Between;
-
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -10,7 +8,7 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {}
+    preload() { }
 
     create() {
         var graphics = this.add.graphics({
@@ -29,72 +27,88 @@ class Demo extends Phaser.Scene {
             type: 0
         });
         var mainBoard = this.rexBoard.add.board({
-                grid: grid,
-                width: 8,
-                height: 8
-            })
+            grid: grid,
+            width: 8,
+            height: 8
+        })
             .forEachTileXY(function (tileXY, board) {
                 var points = board.getGridPoints(tileXY.x, tileXY.y, true);
                 graphics.strokePoints(points, true);
             }, this);
 
 
-        var miniBoard = this.rexBoard.add.miniBoard(500, 150, {
-            grid: grid,
-            draggable: true
-        });
+        var map = [
+            '0  ',
+            '000',
+            '0 0'
+        ]
+        CreateMiniBoard(this, mainBoard, 500, 150, 0x6495B1, map)
 
         var map = [
-                '0  ',
-                '000',
-                '  0'
-            ],
-            line;
-        for (var i = 0, icnt = map.length; i < icnt; i++) {
-            line = map[i].split('');
-            for (var j = 0, jcnt = line.length; j < jcnt; j++) {
-                if (line[j] !== ' ') {
-                    this.rexBoard.add.shape(miniBoard, j - 1, i - 1, 0, Random(0, 0xffffff));
-                }
-            }
-        }
-
-        miniBoard
-            .on('dragstart', function (pointer, dragX, dragY) {
-                this.pullOutFromMainBoard();
-                this.setAlpha(0.3);
-            }, miniBoard)
-            .on('drag', function (pointer, dragX, dragY) {
-                this.setPosition(dragX, dragY);
-                if (this.isOverlapping(mainBoard)) {
-                    this.setAlpha(0.7);
-                    this.alignToMainBoard(mainBoard);
-                } else {
-                    this.setAlpha(0.3);
-                }
-            }, miniBoard)
-            .on('dragend', function (pointer, dragX, dragY) {
-                this.putOnMainBoard(mainBoard);
-                if (this.mainBoard) {
-                    this.setAlpha(1);
-                }
-                console.log(mainBoard.getAllChess())
-            }, miniBoard);
+            '0  ',
+            '000',
+            '  0'
+        ]
+        CreateMiniBoard(this, mainBoard, 500, 150, 0x669966, map)
 
 
-        this.miniBoard = miniBoard;
+
+        this.miniBoard = null;
         this.miniBoardState = this.add.text(20, 20, '');
     }
 
     update() {
         var s;
-        if (this.miniBoard.mainBoard) {
+        if (this.miniBoard) {
             s = '(' + this.miniBoard.tileX + ',' + this.miniBoard.tileY + ')';
         } else {
             s = '--';
         }
         this.miniBoardState.setText(s);
     }
+}
+
+var CreateMiniBoard = function (scene, mainBoard, x, y, color, map) {
+    var miniBoard = scene.rexBoard.add.miniBoard(x, y, {
+        grid: mainBoard.grid,
+        draggable: true
+    });
+
+    var line;
+    for (var i = 0, icnt = map.length; i < icnt; i++) {
+        line = map[i].split('');
+        for (var j = 0, jcnt = line.length; j < jcnt; j++) {
+            if (line[j] !== ' ') {
+                scene.rexBoard.add.shape(miniBoard, j - 1, i - 1, 0, color).setStrokeStyle(2, 0xffffff);
+            }
+        }
+    }
+
+    miniBoard
+        .on('dragstart', function (pointer, dragX, dragY) {
+            this.pullOutFromMainBoard();
+            this.setAlpha(0.5);
+            scene.miniBoard = null;
+        }, miniBoard)
+        .on('drag', function (pointer, dragX, dragY) {
+            this.setPosition(dragX, dragY);
+            if (this.isOverlapping(mainBoard)) {
+                this.setAlpha(0.7);
+                this.alignToMainBoard(mainBoard);
+            } else {
+                this.setAlpha(0.5);
+            }
+        }, miniBoard)
+        .on('dragend', function (pointer, dragX, dragY) {
+            this.putOnMainBoard(mainBoard);
+            this.setAlpha(1);
+            if (miniBoard.mainBoard) {
+                scene.miniBoard = miniBoard;
+            }
+            console.log(mainBoard.getAllChess())
+        }, miniBoard);
+
+    return miniBoard;
 }
 
 var config = {

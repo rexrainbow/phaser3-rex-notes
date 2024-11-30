@@ -1,7 +1,8 @@
-import GetMinMaxTileXY from '../utils/GetMinMaxTileXY.js';
 import Linear from '../../../utils/math/Linear.js';
 import OffsetTransfer from './transferfunctions/Offset.js';
 import ResetChessTileXYZ from './ResetChessTileXYZ.js';
+
+const SetOriginBase = Phaser.GameObjects.Components.Origin.setOrigin;
 
 var SetOrigin = function (originX, originY) {
     switch (originX) {
@@ -21,9 +22,12 @@ var SetOrigin = function (originX, originY) {
     if (originY === undefined) {
         originY = originX;
     }
-    var minMaxTileXY = GetMinMaxTileXY.call(this, undefined, true);
-    var offsetX = -Math.floor(Linear(minMaxTileXY.minX, minMaxTileXY.maxX, originX));
-    var offsetY = -Math.floor(Linear(minMaxTileXY.minY, minMaxTileXY.maxY, originY));
+
+    SetOriginBase.call(this, originX, originY);
+
+    var bounds = this.getBounds(true);
+    var offsetX = -Math.floor(Linear(bounds.left, bounds.right, originX));
+    var offsetY = -Math.floor(Linear(bounds.top, bounds.bottom, originY));
 
     if ((offsetX !== 0) || (offsetY !== 0)) {
         var newTileXYZMap = OffsetTransfer.call(this, offsetX, offsetY);
@@ -35,6 +39,7 @@ var SetOrigin = function (originX, originY) {
             (this.y + (world0.y - worldOffsetXY.y))
         );
     }
+
     return this;
 }
 

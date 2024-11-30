@@ -1,4 +1,4 @@
-var SetTransform = function (line, bounds) {
+var SetSizeFromBounds = function (line, bounds) {
     // Size    
     var bounds = this.bounds;
     var radius = this.pointRadius;
@@ -15,4 +15,4 @@ var SetTransform = function (line, bounds) {
     line.offset(-x, -y);
 }
 
-export default SetTransform;
+export default SetSizeFromBounds;

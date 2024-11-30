@@ -413,7 +413,9 @@ declare class Board<ChessType = unknown> extends EE {
         out?: TileXYType[]
     ): TileXYType[];
 
-    getAllChess(): ChessType[];
+    getAllChess(
+        out?: ChessType[]
+    ): ChessType[];
 
     fit(tileXYArray: TileXYType[]): this;
 
@@ -432,6 +434,16 @@ declare class Board<ChessType = unknown> extends EE {
         tileXY: ChessType | TileXYType,
         out?: WorldXYType[] | true
     ): WorldXYType[];
+
+    getGridBounds(
+        tileX: number,
+        tileY: number,
+        out?: Rectangle | true
+    ): Rectangle;
+
+    getBoardBounds(
+        out?: Rectangle | true
+    ): Rectangle;
 
     chessToBoard(chess: any): Board;
     static GetBoard(chess: any): Board;

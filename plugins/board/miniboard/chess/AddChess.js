@@ -1,4 +1,5 @@
 import IsUID from '../../chess/IsUID.js';
+import SetSizeFromBounds from '../transform/SetSizeFromBounds.js';
 
 var AddChess = function (gameObject, tileX, tileY, tileZ) {
     var grid = this.grid;
@@ -14,6 +15,9 @@ var AddChess = function (gameObject, tileX, tileY, tileZ) {
     this.add(gameObject);
 
     grid.restoreOrigin();
+
+    SetSizeFromBounds.call(this);
+
     return this;
 }
 

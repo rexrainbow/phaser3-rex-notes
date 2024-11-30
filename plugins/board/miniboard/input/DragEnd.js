@@ -1,18 +1,9 @@
-var DragEnd = function (pointer) {
-    var dragData = this.input.drag;
-    // Not dragging
-    if (dragData.state === 0) {
+var DragEnd = function () {
+    if (!this.dragPointer) {
         return;
     }
-
-    if (pointer === undefined) {
-        pointer = this.input.pointer;
-    }
-    var dragPosition = dragData.position;
-    var dragX = pointer.x - dragPosition.x;
-    var dragY = pointer.y - dragPosition.y;
-    dragData.state = 0;
-    this.emit('dragend', pointer, dragX, dragY);
+    this.scene.input.setDragState(this.dragPointer, 5);
     return this;
 }
+
 export default DragEnd;
