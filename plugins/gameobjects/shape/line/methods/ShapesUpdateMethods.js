@@ -6,7 +6,7 @@ import DrawSpinleCurve from './DrawSpinleCurve.js';
 import DrawStraightLine from './DrawStraightLine.js';
 import DrawPolyLine from './DrawPolyLine.js';
 import GetBounds from './GetBounds.js';
-import SetTransform from './SetTransform.js';
+import SetSizeFromBounds from './SetSizeFromBounds.js';
 
 export default {
     buildShapes() {
@@ -41,6 +41,6 @@ export default {
         }
 
         this.bounds = GetBounds.call(this, line.pathData, true);
-        SetTransform.call(this, line);
+        SetSizeFromBounds.call(this, line);
     }
 }
