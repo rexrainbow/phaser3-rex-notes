@@ -1,15 +1,15 @@
 import OnDragEnd from './DragEnd.js';
 
 var OnPointerUp = function (pointer) {
-    if (!this.input.enable) {
+    if (!this.miniboardInput.enable) {
         return;
     }
 
     OnTouchTileEnd.call(this, pointer);
     OnDragEnd.call(this, pointer);
 
-    if (this.input.pointer === pointer) { // Release touch pointer
-        this.input.pointer = null;
+    if (this.miniboardInput.pointer === pointer) { // Release touch pointer
+        this.miniboardInput.pointer = null;
     }
 }
 
@@ -22,8 +22,8 @@ var OnTouchTileEnd = function (pointer) {
     var tileX = out.x,
         tileY = out.y;
     grid.restoreOrigin();
-    this.input.tilePosition.x = tileX;
-    this.input.tilePosition.y = tileY;
+    this.miniboardInput.tilePosition.x = tileX;
+    this.miniboardInput.tilePosition.y = tileY;
 
     // Get touched chess
     var gameObjects = this.board.tileXYToChessArray(tileX, tileY, globChessArray);

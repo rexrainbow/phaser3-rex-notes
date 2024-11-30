@@ -3,9 +3,9 @@ var SetDraggable = function (enable) {
         enable = true;
     }
     this.setInteractive();
-    this.input.drag.enable = enable;
+    this.miniboardInput.drag.enable = enable;
     if (!enable) {
-        this.input.drag.state = 0;
+        this.miniboardInput.drag.state = 0;
     }
     return this;
 }

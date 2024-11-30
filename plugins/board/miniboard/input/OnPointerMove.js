@@ -1,5 +1,5 @@
 var OnPointerMove = function (pointer) {
-    if (!this.input.enable) {
+    if (!this.miniboardInput.enable) {
         return;
     }
 
@@ -17,12 +17,12 @@ var OnTouchTileMove = function (pointer) {
         tileY = out.y;
     grid.restoreOrigin();
 
-    if ((this.input.tilePosition.x === tileX) && (this.input.tilePosition.y === tileY)) {
+    if ((this.miniboardInput.tilePosition.x === tileX) && (this.miniboardInput.tilePosition.y === tileY)) {
         // Tile position dose not change
         return;
     }
-    this.input.tilePosition.x = tileX;
-    this.input.tilePosition.y = tileY;
+    this.miniboardInput.tilePosition.x = tileX;
+    this.miniboardInput.tilePosition.y = tileY;
 
     // Get touched chess
     var gameObjects = this.board.tileXYToChessArray(tileX, tileY, globChessArray);
@@ -40,26 +40,26 @@ var OnTouchTileMove = function (pointer) {
         this.emit('pointermove', pointer, this);
     } else {
         // Move outside
-        if (this.input.pointer === pointer) { // Release touch pointer
-            this.input.pointer = null;
+        if (this.miniboardInput.pointer === pointer) { // Release touch pointer
+            this.miniboardInput.pointer = null;
         }
     }
     globChessArray.length = 0;
 
     // Not dragging
-    if (this.input.drag.state === 0) {
-        if (this.input.pointer === pointer) {
+    if (this.miniboardInput.drag.state === 0) {
+        if (this.miniboardInput.pointer === pointer) {
             if (!hitChess) {
-                this.input.pointer = null; // Release touch pointer
+                this.miniboardInput.pointer = null; // Release touch pointer
             }
-        } else if (this.input.pointer === null) {
-            this.input.pointer = pointer; // Catch new touch pointer
+        } else if (this.miniboardInput.pointer === null) {
+            this.miniboardInput.pointer = pointer; // Catch new touch pointer
         }
     }
 }
 
 var OnDrag = function (pointer) {
-    var dragData = this.input.drag;
+    var dragData = this.miniboardInput.drag;
     // Not dragging
     if (dragData.state === 0) {
         return;

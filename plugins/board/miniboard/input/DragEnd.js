@@ -1,12 +1,12 @@
 var DragEnd = function (pointer) {
-    var dragData = this.input.drag;
+    var dragData = this.miniboardInput.drag;
     // Not dragging
     if (dragData.state === 0) {
         return;
     }
 
     if (pointer === undefined) {
-        pointer = this.input.pointer;
+        pointer = this.miniboardInput.pointer;
     }
     var dragPosition = dragData.position;
     var dragX = pointer.x - dragPosition.x;
