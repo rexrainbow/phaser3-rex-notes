@@ -38,9 +38,9 @@ class Demo extends Phaser.Scene {
 
 
         var map = [
+            '0  ',
             '000',
-            '000',
-            '000'
+            '0 0'
         ]
         CreateMiniBoard(this, mainBoard, 500, 150, 0x6495B1, map)
 

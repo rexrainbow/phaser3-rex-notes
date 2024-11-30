@@ -10,6 +10,14 @@ var SetSizeFromBounds = function () {
     var originY = (bounds.height === 0) ? 0.5 : (this.y - bounds.top) / bounds.height;
     SetOriginBase.call(this, originX, originY);
 
+    this.updateDisplayOrigin();
+
+    var input = this.input;
+    if (input) {
+        input.hitArea.width = this.width;
+        input.hitArea.height = this.height;
+    }
+
     return this;
 }
 

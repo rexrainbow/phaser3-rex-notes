@@ -15,6 +15,7 @@ import AlignToMainBoard from './mainboard/AlignToMainBoard.js';
 import SetInteractive from './input/SetInteractive.js';
 import SetDraggable from './input/SetDraggable.js';
 import DragEnd from './input/DragEnd.js';
+import IsInTouching from './input/IsInTouching.js';
 
 import CanMirror from './transform/CanMirror.js';
 import Mirror from './transform/Mirror.js';
@@ -42,6 +43,7 @@ export default {
     setInteractive: SetInteractive,
     setDraggable: SetDraggable,
     dragEnd: DragEnd,
+    isInTouching: IsInTouching,
 
     setMainBoard: SetMainBoard,
     canMirror: CanMirror,
