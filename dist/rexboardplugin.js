@@ -1034,7 +1034,7 @@
         return this.tileXYToChessArray(tileXY.x, tileXY.y, out)
     };
 
-    var WorldXYToChess = function (worldX, worldY, tileZ) {
+    var WorldXYToChess$1 = function (worldX, worldY, tileZ) {
         var tileXY = this.worldXYToTileXY(worldX, worldY, true);
         if (tileZ !== undefined) {
             return this.tileXYZToChess(tileXY.x, tileXY.y, tileZ)
@@ -2862,7 +2862,7 @@
      * @param {number} [width=0] - The width of the Rectangle.
      * @param {number} [height=0] - The height of the Rectangle.
      */
-    var Rectangle$2 = new Class({
+    var Rectangle$3 = new Class({
 
         initialize:
 
@@ -3315,7 +3315,7 @@
      * @return {Phaser.Geom.Rectangle} The modified `out` Rectangle, or a new Rectangle if none was provided.
      */
     var Union$1 = function (rectA, rectB, out) {
-        if (out === undefined) { out = new Rectangle$2(); }
+        if (out === undefined) { out = new Rectangle$3(); }
 
         //  Cache vars so we can use one of the input rects as the output rect
         var x = Math.min(rectA.x, rectB.x);
@@ -3328,7 +3328,7 @@
 
     var GetBoardBounds = function (out) {
         if (out === undefined) {
-            out = new Rectangle$2();
+            out = new Rectangle$3();
         } else if (out === true) {
             out = globalBounds$2;
         }
@@ -3347,7 +3347,7 @@
         return out;
     };
 
-    var globalBounds$2 = new Rectangle$2();
+    var globalBounds$2 = new Rectangle$3();
 
     /**
      * @author       Richard Davey <rich@photonstorm.com>
@@ -3470,7 +3470,7 @@
      * @return {(Phaser.Geom.Rectangle|object)} The resulting rectangle or object that is passed in with position and dimensions of the polygon's AABB.
      */
     var GetAABB = function (polygon, out) {
-        if (out === undefined) { out = new Rectangle$2(); }
+        if (out === undefined) { out = new Rectangle$3(); }
 
         var minX = Infinity;
         var minY = Infinity;
@@ -3761,7 +3761,7 @@
         return this;
     };
 
-    var GetAllChess = function (out) {
+    var GetAllChess$1 = function (out) {
         if (out === undefined) {
             out = [];
         }
@@ -3815,19 +3815,22 @@
             };
         }
 
-        var lastX = this.width - 1,
-            lastY = this.height - 1;
         var order = GetValue$c(config, 'order', 0);
-        var left = GetValue$c(config, 'left', 0);
-        var right = GetValue$c(config, 'right', lastX);
-        var top = GetValue$c(config, 'top', 0);
-        var bottom = GetValue$c(config, 'bottom', lastY);
 
-        if (!this.infinityMode) {
-            left = Clamp(left, 0, lastX);
-            top = Clamp(top, 0, lastY);
-            right = Clamp(right, 0, lastX);
-            bottom = Clamp(bottom, 0, lastY);
+        var top, bottom, left, right;
+        if (this.infinityMode && (this.width === undefined)) {
+            var bounds = this.boardData.getBounds();
+            left = bounds.left;
+            right = bounds.right;
+            top = bounds.top;
+            bottom = bounds.bottom;
+        } else {
+            var lastX = this.width - 1,
+                lastY = this.height - 1;
+            left = Clamp(GetValue$c(config, 'left', 0), 0, lastX);
+            right = Clamp(GetValue$c(config, 'right', lastX), 0, lastX);
+            top = Clamp(GetValue$c(config, 'top', 0), 0, lastY);
+            bottom = Clamp(GetValue$c(config, 'bottom', lastY), 0, lastY);
         }
 
         switch (order) {
@@ -4689,15 +4692,15 @@
         var chess, blocker;
         if (tileZ === undefined) {
             // any chess at (tileX, tileY) has blocker
-            chess = this.tileXYToChessArray(tileX, tileY, globChessArray$5);
+            chess = this.tileXYToChessArray(tileX, tileY, globChessArray$4);
             for (var i = 0, cnt = chess.length; i < cnt; i++) {
                 blocker = this.getChessData(chess[i]).blocker;
                 if (blocker === true) {
-                    globChessArray$5.length = 0;
+                    globChessArray$4.length = 0;
                     return true;
                 }
             }
-            globChessArray$5.length = 0;
+            globChessArray$4.length = 0;
             return false;
 
         } else {
@@ -4711,20 +4714,20 @@
 
         }
     };
-    var globChessArray$5 = [];
+    var globChessArray$4 = [];
 
     var HasEdgeBlocker = function (tileX, tileY, tileZ, direction) {
         var chess;
         if (tileZ === undefined) {
             // any chess at (tileX, tileY) has blocker
-            chess = this.tileXYToChessArray(tileX, tileY, globChessArray$4);
+            chess = this.tileXYToChessArray(tileX, tileY, globChessArray$3);
             for (var i = 0, cnt = chess.length; i < cnt; i++) {
                 if (isEdgeBlocker(this.getChessData(chess[i]).blocker)) {
-                    globChessArray$4.length = 0;
+                    globChessArray$3.length = 0;
                     return true;
                 }
             }
-            globChessArray$4.length = 0;
+            globChessArray$3.length = 0;
             return false;
 
         } else {
@@ -4745,7 +4748,7 @@
         }
     };
 
-    var globChessArray$4 = [];
+    var globChessArray$3 = [];
 
     var GetBoard = function (chess) {
         if (!chess) {
@@ -4778,7 +4781,7 @@
         worldXYToTileY: WorldXYToTileY,
         worldXYToTileXY: WorldXYToTileXY,
         worldXYToChessArray: WorldXYToChessArray,
-        worldXYToChess: WorldXYToChess,
+        worldXYToChess: WorldXYToChess$1,
         worldXYSnapToGrid: WorldXYSnapToGrid,
         angleBetween: AngleBetween$2,
         isAngleInCone: IsAngleInCone,
@@ -4806,7 +4809,7 @@
         swapChess: SwapChess,
         moveChess: AddChess$1,
         setChessTileZ: SetChessTileZ,
-        getAllChess: GetAllChess,
+        getAllChess: GetAllChess$1,
 
         contains: Contains,
         forEachTileXY: ForEachTileXY,
@@ -4908,6 +4911,28 @@
             this._yMax = undefined;
             this._yMin = undefined;
             return this;
+        }
+
+        getBounds() {
+            var xMin = Infinity,
+                xMax = -Infinity,
+                yMin = Infinity,
+                yMax = -Infinity;
+
+            var UIDToXYZ = this.UIDToXYZ,
+                x;
+            for (var uid in UIDToXYZ) {
+                x = UIDToXYZ[uid].x;
+                if (xMin > x) { xMin = x; }
+                if (xMax < x) { xMax = x; }
+                if (yMin > x) { yMin = x; }
+                if (yMax < x) { yMax = x; }
+            }
+
+            return {
+                left: xMin, right: xMax,
+                top: yMin, bottom: yMax
+            }
         }
 
         addUID(uid, x, y, z) {
@@ -5557,9 +5582,9 @@
     var globWorldXY$2 = {};
     var globPoints$1 = InitPoints(4);
 
-    var GetBounds$3 = function (tileX, tileY, out) {
+    var GetBounds$4 = function (tileX, tileY, out) {
         if (out === undefined) {
-            out = new Rectangle$2;
+            out = new Rectangle$3;
         } else if (out === true) {
             out = globalBounds$1;
         }
@@ -5573,7 +5598,7 @@
         return out;
     };
 
-    var globalBounds$1 = new Rectangle$2();
+    var globalBounds$1 = new Rectangle$3();
 
     var RingToTileXYArray$1 = function (centerTileXY, radius, out) {
         if (out === undefined) {
@@ -5652,7 +5677,7 @@
         directionBetween: DirectionBetween$1,
         directionNormalize: DirectionNormalize,
         getGridPoints: GetGridPoints$1,
-        getBounds: GetBounds$3,
+        getBounds: GetBounds$4,
         ringToTileXYArray: RingToTileXYArray$1,
     };
     Object.assign(
@@ -6562,9 +6587,9 @@
     var globWorldXY = {};
     var globSize = {};
 
-    var GetBounds$2 = function (tileX, tileY, out) {
+    var GetBounds$3 = function (tileX, tileY, out) {
         if (out === undefined) {
-            out = new Rectangle$2;
+            out = new Rectangle$3;
         } else if (out === true) {
             out = globalBounds;
         }
@@ -6578,7 +6603,7 @@
         return out;
     };
 
-    var globalBounds = new Rectangle$2();
+    var globalBounds = new Rectangle$3();
 
     var RingToTileXYArray = function (centerTileXY, radius, out) {
         if (out === undefined) {
@@ -6673,7 +6698,7 @@
         directionBetween: DirectionBetween,
         directionNormalize: DirectionNormalize,
         getGridPoints: GetGridPoints,
-        getBounds: GetBounds$2,
+        getBounds: GetBounds$3,
         ringToTileXYArray: RingToTileXYArray,
     };
     Object.assign(
@@ -6850,7 +6875,7 @@
         var boardEventCallback = (typeof (boardEventName) !== 'string') ? boardEventName : undefined;
         var chessEventCallback = (typeof (chessEventName) !== 'string') ? chessEventName : undefined;
 
-        var gameObjects = board.tileXYToChessArray(tileX, tileY, globChessArray$3);
+        var gameObjects = board.tileXYToChessArray(tileX, tileY, globChessArray$2);
         // Fire events
         var gameObject;
         for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
@@ -6873,12 +6898,12 @@
                 boardEventCallback(gameObject);
             }
         }
-        globChessArray$3.length = 0;
+        globChessArray$2.length = 0;
     };
 
-    var globChessArray$3 = [];
+    var globChessArray$2 = [];
 
-    var OnPointerDown$1 = function (pointer) {
+    var OnPointerDown = function (pointer) {
         if (!this.enable) {
             return;
         }
@@ -6921,7 +6946,7 @@
         );
     };
 
-    var OnPointerUp$1 = function (pointer) {
+    var OnPointerUp = function (pointer) {
         if (!this.enable) {
             return;
         }
@@ -6962,7 +6987,7 @@
         }
     };
 
-    var OnPointerMove$1 = function (pointer) {
+    var OnPointerMove = function (pointer) {
         if (!this.enable) {
             return;
         }
@@ -7161,17 +7186,17 @@
         }
     };
 
-    const Rectangle$1 = Phaser.Geom.Rectangle;
+    const Rectangle$2 = Phaser.Geom.Rectangle;
     const Vector2 = Phaser.Math.Vector2;
     const RotateAround$1 = Phaser.Math.RotateAround;
     const P3Container$1 = Phaser.GameObjects.Container;
 
-    var GetBounds$1 = function (gameObject, output) {
+    var GetBounds$2 = function (gameObject, output) {
         if (output === undefined) {
-            output = new Rectangle$1();
+            output = new Rectangle$2();
         } else if (output === true) {
             if (GlobRect$1 === undefined) {
-                GlobRect$1 = new Rectangle$1();
+                GlobRect$1 = new Rectangle$2();
             }
             output = GlobRect$1;
         }
@@ -7350,7 +7375,7 @@
             return false;
         }
 
-        var boundsRect = GetBounds$1(gameObject, true);
+        var boundsRect = GetBounds$2(gameObject, true);
         if (!boundsRect.contains(x, y)) {
             return false;
         }
@@ -7386,7 +7411,7 @@
 
     var globalOut = {};
 
-    var IsPointerInBounds = function (gameObject, pointer, preTest, postTest) {
+    var PointerTest = function (gameObject, pointer, mainTest, preTest, postTest) {
         var mainCamera = gameObject.scene.sys.cameras.main,
             worldXY;
 
@@ -7394,14 +7419,14 @@
 
         if (pointer) {
             if (useScreenXY) {
-                return IsPointInBounds(gameObject, pointer.x, pointer.y, preTest, postTest);
+                return mainTest(gameObject, pointer.x, pointer.y, preTest, postTest);
 
             } else {
                 worldXY = GetPointerWorldXY(pointer, mainCamera, true);
                 if (!worldXY) {
                     return false;
                 }
-                return IsPointInBounds(gameObject, worldXY.x, worldXY.y, preTest, postTest);
+                return mainTest(gameObject, worldXY.x, worldXY.y, preTest, postTest);
 
             }
 
@@ -7413,7 +7438,7 @@
                 pointer = pointers[i];
 
                 if (useScreenXY) {
-                    if (IsPointInBounds(gameObject, pointer.x, pointer.y, preTest, postTest)) {
+                    if (mainTest(gameObject, pointer.x, pointer.y, preTest, postTest)) {
                         return true;
                     }
 
@@ -7423,7 +7448,7 @@
                         continue;
                     }
 
-                    if (IsPointInBounds(gameObject, worldXY.x, worldXY.y, preTest, postTest)) {
+                    if (mainTest(gameObject, worldXY.x, worldXY.y, preTest, postTest)) {
                         return true;
                     }
 
@@ -7432,8 +7457,10 @@
             }
             return false;
 
-        }
+        }};
 
+    var IsPointerInBounds = function (gameObject, pointer, preTest, postTest) {
+        return PointerTest(gameObject, pointer, IsPointInBounds, preTest, postTest)
     };
 
     const GetValue$9 = Phaser.Utils.Objects.GetValue;
@@ -8874,15 +8901,15 @@
 
             if (useTouchZone) {
                 var touchZone = new TouchZone(scene);
-                touchZone.on('pointerdown', OnPointerDown$1, this);
-                touchZone.on('pointerup', OnPointerUp$1, this);
-                touchZone.on('pointermove', OnPointerMove$1, this);
+                touchZone.on('pointerdown', OnPointerDown, this);
+                touchZone.on('pointerup', OnPointerUp, this);
+                touchZone.on('pointermove', OnPointerMove, this);
                 this.touchZone = touchZone;
 
             } else {
-                scene.input.on('pointerdown', OnPointerDown$1, this);
-                scene.input.on('pointerup', OnPointerUp$1, this);
-                scene.input.on('pointermove', OnPointerMove$1, this);
+                scene.input.on('pointerdown', OnPointerDown, this);
+                scene.input.on('pointerup', OnPointerUp, this);
+                scene.input.on('pointermove', OnPointerMove, this);
 
             }
 
@@ -8907,9 +8934,9 @@
             } else {
                 var scene = this.board.scene;
                 if (scene) {
-                    scene.input.off('pointerdown', OnPointerDown$1, this);
-                    scene.input.off('pointerup', OnPointerUp$1, this);
-                    scene.input.off('pointermove', OnPointerMove$1, this);
+                    scene.input.off('pointerdown', OnPointerDown, this);
+                    scene.input.off('pointerup', OnPointerUp, this);
+                    scene.input.off('pointermove', OnPointerMove, this);
                 }
 
             }
@@ -8989,7 +9016,7 @@
         var paddingY = GetValue$c(config, 'paddingY', 1);
 
         if (ViewportBounds === undefined) {
-            ViewportBounds = new Rectangle$2();
+            ViewportBounds = new Rectangle$3();
         }
         ViewportBounds.width = (camera.width + paddingX * 2) / camera.zoomX;
         ViewportBounds.height = (camera.height + paddingY * 2) / camera.zoomY;
@@ -14239,15 +14266,15 @@
         },
     };
 
-    const Rectangle = Phaser.Geom.Rectangle;
+    const Rectangle$1 = Phaser.Geom.Rectangle;
     const Union = Phaser.Geom.Rectangle.Union;
 
     var GetBoundsOfGameObjects = function (gameObjects, out) {
         if (out === undefined) {
-            out = new Rectangle();
+            out = new Rectangle$1();
         } else if (out === true) {
             if (GlobRect === undefined) {
-                GlobRect = new Rectangle();
+                GlobRect = new Rectangle$1();
             }
             out = GlobRect;
         }
@@ -14262,7 +14289,7 @@
                 continue;
             }
 
-            var boundsRect = GetBounds$1(gameObject, true);
+            var boundsRect = GetBounds$2(gameObject, true);
 
             if (firstClone) {
                 out.setTo(boundsRect.x, boundsRect.y, boundsRect.width, boundsRect.height);
@@ -14835,6 +14862,29 @@
         methods
     );
 
+    const SetSizeBase = Phaser.GameObjects.Components.Size.setSize;
+    const SetOriginBase$1 = Phaser.GameObjects.Components.Origin.setOrigin;
+
+    var SetSizeFromBounds = function () {
+        var bounds = this.getBounds(true);
+
+        SetSizeBase.call(this, bounds.width, bounds.height);
+
+        var originX = (bounds.width === 0) ? 0.5 : (this.x - bounds.left) / bounds.width;
+        var originY = (bounds.height === 0) ? 0.5 : (this.y - bounds.top) / bounds.height;
+        SetOriginBase$1.call(this, originX, originY);
+
+        this.updateDisplayOrigin();
+
+        var input = this.input;
+        if (input) {
+            input.hitArea.width = this.width;
+            input.hitArea.height = this.height;
+        }
+
+        return this;
+    };
+
     var AddChess = function (gameObject, tileX, tileY, tileZ) {
         var grid = this.grid;
         grid.saveOrigin();
@@ -14849,17 +14899,39 @@
         this.add(gameObject);
 
         grid.restoreOrigin();
+
+        SetSizeFromBounds.call(this);
+
         return this;
     };
 
     var RemoveChess = function (gameObject, tileX, tileY, tileZ, destroy) {
         this.board.removeChess(gameObject, tileX, tileY, tileZ, destroy);
+        SetSizeFromBounds.call(this);
         return this;
     };
 
     var RemoveAllChess = function (destroy) {
         this.board.removeAllChess(destroy);
+        SetSizeFromBounds.call(this);
         return this;
+    };
+
+    var GetAllChess = function (out) {
+        return this.board.getAllChess(out);
+    };
+
+    var WorldXYToChess = function (x, y, out) {
+        var grid = this.grid;
+        grid.saveOrigin();
+        grid.setOriginPosition(this.x, this.y);
+        var tileXY = this.board.worldXYToTileXY(x, y, true);
+        var tileX = tileXY.x,
+            tileY = tileXY.y;
+        grid.restoreOrigin();
+
+        var gameObjects = this.board.tileXYToChessArray(tileX, tileY, out);
+        return gameObjects;
     };
 
     var SetMainBoard = function (mainBoard, tileX, tileY) {
@@ -14997,248 +15069,72 @@
         return this;
     };
 
-    var OnPointerDown = function (pointer) {
-        if (!this.input.enable) {
-            return;
-        }
-        if (!pointer.isDown) {
-            return;
+    const RectangleContains = Phaser.Geom.Rectangle.Contains;
+
+    var HitAreaCallback = function (shape, x, y, gameObject) {
+        if (!RectangleContains(shape, x, y)) {
+            return false;
         }
 
-        if (this.input.pointer === null) { // Catch new touch pointer
-            this.input.pointer = pointer;
-        }
-
-        var hitChess = OnTouchTileStart.call(this, pointer);
-        if (hitChess) {
-            OnDragStart.call(this, pointer);
-        }
+        return gameObject.isInTouching();
     };
 
-    var OnTouchTileStart = function (pointer) {
-        // Get touched tileX, tileY
-        var grid = this.grid;
-        grid.saveOrigin();
-        grid.setOriginPosition(this.x, this.y);
-        var out = this.board.worldXYToTileXY(pointer.x, pointer.y, true);
-        var tileX = out.x,
-            tileY = out.y;
-        grid.restoreOrigin();
-        this.input.tilePosition.x = tileX;
-        this.input.tilePosition.y = tileY;
+    var RegisterPointerEvents = function () {
+        this
+            .on('pointerdown', function (pointer, localX, localY, event) {
+                FireTileEvent.call(this, pointer, 'gameobjectdown', 'miniboard.pointerdown');
+            }, this)
+            .on('pointerup', function (pointer, localX, localY, event) {
+                FireTileEvent.call(this, pointer, 'gameobjectup', 'miniboard.pointerup');
+            }, this)
+            .on('pointermove', function (pointer, localX, localY, event) {
+                FireTileEvent.call(this, pointer, 'gameobjectmove', 'miniboard.pointermove');
+            }, this);
+    };
 
-        // Get touched chess
-        var gameObjects = this.board.tileXYToChessArray(tileX, tileY, globChessArray$2);
-        var hitChess = (gameObjects.length > 0);
-        if (hitChess) {
-            // Fire events
-            var gameObject;
-            for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-                gameObject = gameObjects[i];
-                if (gameObject.emit) {
-                    gameObject.emit('miniboard.pointerdown', pointer);
-                }
-                this.emit('gameobjectdown', pointer, gameObject);
+    var FireTileEvent = function (pointer, miniboardEvent, tileEvent) {
+        var gameObjects = this.worldXYToChess(pointer.worldX, pointer.worldY, globChessArray$1);
+        var gameObject;
+        for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+            gameObject = gameObjects[i];
+            if (gameObject.emit) {
+                gameObject.emit(tileEvent, pointer);
             }
-            this.emit('pointerdown', pointer, this);
-        }
-        globChessArray$2.length = 0;
-        return hitChess;
-    };
-
-    var OnDragStart = function (pointer) {
-        var dragData = this.input.drag;
-        // Drag by another pointer
-        if (dragData.state === 1) {
-            return;
-        }
-
-        var dragPosition = dragData.position;
-        dragPosition.x = pointer.x - this.x;
-        dragPosition.y = pointer.y - this.y;
-        dragData.state = 1;
-        this.emit('dragstart', pointer, dragPosition.x, dragPosition.y);
-    };
-
-    var globChessArray$2 = [];
-
-    var DragEnd = function (pointer) {
-        var dragData = this.input.drag;
-        // Not dragging
-        if (dragData.state === 0) {
-            return;
-        }
-
-        if (pointer === undefined) {
-            pointer = this.input.pointer;
-        }
-        var dragPosition = dragData.position;
-        var dragX = pointer.x - dragPosition.x;
-        var dragY = pointer.y - dragPosition.y;
-        dragData.state = 0;
-        this.emit('dragend', pointer, dragX, dragY);
-        return this;
-    };
-
-    var OnPointerUp = function (pointer) {
-        if (!this.input.enable) {
-            return;
-        }
-
-        OnTouchTileEnd.call(this, pointer);
-        DragEnd.call(this, pointer);
-
-        if (this.input.pointer === pointer) { // Release touch pointer
-            this.input.pointer = null;
-        }
-    };
-
-    var OnTouchTileEnd = function (pointer) {
-        // Get touched tileX, tileY
-        var grid = this.grid;
-        grid.saveOrigin();
-        grid.setOriginPosition(this.x, this.y);
-        var out = this.board.worldXYToTileXY(pointer.x, pointer.y, true);
-        var tileX = out.x,
-            tileY = out.y;
-        grid.restoreOrigin();
-        this.input.tilePosition.x = tileX;
-        this.input.tilePosition.y = tileY;
-
-        // Get touched chess
-        var gameObjects = this.board.tileXYToChessArray(tileX, tileY, globChessArray$1);
-        var hitChess = (gameObjects.length > 0);
-        if (hitChess) {
-            // Fire events
-            var gameObject;
-            for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-                gameObject = gameObjects[i];
-                if (gameObject.emit) {
-                    gameObject.emit('miniboard.pointerup', pointer);
-                }
-                this.emit('gameobjectup', pointer, gameObject);
-            }
-            this.emit('pointerup', pointer, this);
+            this.emit(miniboardEvent, pointer, gameObject);
         }
         globChessArray$1.length = 0;
-        return hitChess;
     };
 
     var globChessArray$1 = [];
 
-    var OnPointerMove = function (pointer) {
-        if (!this.input.enable) {
-            return;
-        }
+    var RegisterDragEvents = function () {
+        this.dragPointer = null;
 
-        OnTouchTileMove.call(this, pointer);
-        OnDrag.call(this, pointer);
-    };
-
-    var OnTouchTileMove = function (pointer) {
-        // Get touched tileX, tileY
-        var grid = this.grid;
-        grid.saveOrigin();
-        grid.setOriginPosition(this.x, this.y);
-        var out = this.board.worldXYToTileXY(pointer.x, pointer.y, true);
-        var tileX = out.x,
-            tileY = out.y;
-        grid.restoreOrigin();
-
-        if ((this.input.tilePosition.x === tileX) && (this.input.tilePosition.y === tileY)) {
-            // Tile position dose not change
-            return;
-        }
-        this.input.tilePosition.x = tileX;
-        this.input.tilePosition.y = tileY;
-
-        // Get touched chess
-        var gameObjects = this.board.tileXYToChessArray(tileX, tileY, globChessArray);
-        var hitChess = (gameObjects.length > 0);
-        if (hitChess) {
-            // Fire events
-            var gameObject;
-            for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-                gameObject = gameObjects[i];
-                if (gameObject.emit) {
-                    gameObject.emit('miniboard.pointermove', pointer);
-                }
-                this.emit('gameobjectmove', pointer, gameObject);
-            }
-            this.emit('pointermove', pointer, this);
-        } else {
-            // Move outside
-            if (this.input.pointer === pointer) { // Release touch pointer
-                this.input.pointer = null;
-            }
-        }
-        globChessArray.length = 0;
-
-        // Not dragging
-        if (this.input.drag.state === 0) {
-            if (this.input.pointer === pointer) {
-                if (!hitChess) {
-                    this.input.pointer = null; // Release touch pointer
-                }
-            } else if (this.input.pointer === null) {
-                this.input.pointer = pointer; // Catch new touch pointer
-            }
-        }
-    };
-
-    var OnDrag = function (pointer) {
-        var dragData = this.input.drag;
-        // Not dragging
-        if (dragData.state === 0) {
-            return;
-        }
-
-        var dragPosition = dragData.position;
-        var dragX = pointer.x - dragPosition.x;
-        var dragY = pointer.y - dragPosition.y;
-        this.emit('drag', pointer, dragX, dragY);
-    };
-
-    var globChessArray = [];
-
-    var SetInteractive = function (enable) {
-        if (enable === undefined) {
-            enable = true;
-        }
-        if (!this.input) {
-            this.input = {
-                enable: true,
-                tilePosition: {
-                    x: undefined,
-                    y: undefined
-                },
-                pointer: undefined,
-                drag: {
-                    enable: false,
-                    state: 0,
-                    position: {
-                        x: undefined,
-                        y: undefined
-                    }
-                }
-            };
-            this.scene.input.on('pointerdown', OnPointerDown, this);
-            this.scene.input.on('pointerup', OnPointerUp, this);
-            this.scene.input.on('pointermove', OnPointerMove, this);
-
-            this.once('destroy', function () {
-                if (this.scene) {
-                    this.scene.input.off('pointerdown', OnPointerDown, this);
-                    this.scene.input.off('pointerup', OnPointerUp, this);
-                    this.scene.input.off('pointermove', OnPointerMove, this);
-                }
+        this
+            .on('dragstart', function (pointer, dragX, dragY) {
+                this.dragPointer = pointer;
+            }, this)
+            .on('dragend', function (pointer, dragX, dragY, dropped) {
+                this.dragPointer = null;
             }, this);
-        }
+    };
 
-        this.input.enable = enable;
-        if (!enable) {
-            this.input.pointer = null;
+    const Rectangle = Phaser.Geom.Rectangle;
+    const SetInteractiveBase = Phaser.GameObjects.GameObject.prototype.setInteractive;
+
+    var SetInteractive = function (config) {
+
+        if (config === undefined) {
+            config = {};
         }
+        config.hitArea = new Rectangle(0, 0, this.width, this.height);
+        config.hitAreaCallback = HitAreaCallback;
+
+        SetInteractiveBase.call(this, config);
+
+        RegisterPointerEvents.call(this);
+        RegisterDragEvents.call(this);
+
         return this;
     };
 
@@ -15246,13 +15142,35 @@
         if (enable === undefined) {
             enable = true;
         }
-        this.setInteractive();
-        this.input.drag.enable = enable;
-        if (!enable) {
-            this.input.drag.state = 0;
-        }
+        this.setInteractive({ draggable: true });
+        this.input.draggable = enable;
         return this;
     };
+
+    var DragEnd = function () {
+        if (!this.dragPointer) {
+            return;
+        }
+        this.scene.input.setDragState(this.dragPointer, 5);
+        return this;
+    };
+
+    var IsInTouching = function (pointer) {
+        if (!this.visible) {
+            return false;
+        }
+
+        return PointerTest(this, pointer, MainTest);
+    };
+
+    var MainTest = function (miniboard, x, y) {
+        miniboard.worldXYToChess(x, y, globChessArray);
+        var isHit = (globChessArray.length > 0);
+        globChessArray.length = 0;
+        return isHit;
+    };
+
+    var globChessArray = [];
 
     var Mirror$1 = function (mode, chessTileXYZMap, out) {
         if (mode === undefined) {
@@ -15396,41 +15314,16 @@
         return this;
     };
 
-    var GetMinMaxTileXY = function (chessTileXYZMap, out) {
-        if (chessTileXYZMap === undefined) {
-            chessTileXYZMap = this.tileXYZMap; // {uid:{x,y,z}}
-        }
-        if (out === undefined) {
-            out = {};
-        } else if (out === true) {
-            out = globResult;
-        }
-        var minX = Infinity, maxX = -Infinity;
-        var minY = Infinity, maxY = -Infinity;
-        var chessTileXYZ;
-        for (var uid in this.tileXYZMap) {
-            chessTileXYZ = this.tileXYZMap[uid];
-            if (chessTileXYZ.x < minX) {
-                minX = chessTileXYZ.x;
-            }
-            if (chessTileXYZ.x > maxX) {
-                maxX = chessTileXYZ.x;
-            }
-            if (chessTileXYZ.y < minY) {
-                minY = chessTileXYZ.y;
-            }
-            if (chessTileXYZ.y > maxY) {
-                maxY = chessTileXYZ.y;
-            }
-        }
-        out.minX = minX;
-        out.minY = minY;
-        out.maxX = maxX;
-        out.maxY = maxY;
+    var GetBounds$1 = function (out) {
+        var grid = this.grid;
+        grid.saveOrigin();
+        grid.setOriginPosition(this.x, this.y);
+
+        out = this.board.getBoardBounds(out);
+
+        grid.restoreOrigin();
         return out;
     };
-
-    var globResult = {};
 
     var Offset = function (tileX, tileY, chessTileXYZMap, out) {
         if (chessTileXYZMap === undefined) {
@@ -15448,6 +15341,8 @@
         }
         return out; // {uid:{x,y,z}}
     };
+
+    const SetOriginBase = Phaser.GameObjects.Components.Origin.setOrigin;
 
     var SetOrigin = function (originX, originY) {
         switch (originX) {
@@ -15467,9 +15362,12 @@
         if (originY === undefined) {
             originY = originX;
         }
-        var minMaxTileXY = GetMinMaxTileXY.call(this, undefined, true);
-        var offsetX = -Math.floor(Linear(minMaxTileXY.minX, minMaxTileXY.maxX, originX));
-        var offsetY = -Math.floor(Linear(minMaxTileXY.minY, minMaxTileXY.maxY, originY));
+
+        SetOriginBase.call(this, originX, originY);
+
+        var bounds = this.getBounds(true);
+        var offsetX = -Math.floor(Linear(bounds.left, bounds.right, originX));
+        var offsetY = -Math.floor(Linear(bounds.top, bounds.bottom, originY));
 
         if ((offsetX !== 0) || (offsetY !== 0)) {
             var newTileXYZMap = Offset.call(this, offsetX, offsetY);
@@ -15481,6 +15379,7 @@
                 (this.y + (world0.y - worldOffsetXY.y))
             );
         }
+
         return this;
     };
 
@@ -15488,6 +15387,8 @@
         addChess: AddChess,
         removeChess: RemoveChess,
         removeAllChess: RemoveAllChess,
+        getAllChess: GetAllChess,
+        worldXYToChess: WorldXYToChess,
 
         pullOutFromMainBoard: PullOutFromMainBoard,
         canPutOnMainBoard: CanPutOnMainBoard,
@@ -15499,6 +15400,7 @@
         setInteractive: SetInteractive,
         setDraggable: SetDraggable,
         dragEnd: DragEnd,
+        isInTouching: IsInTouching,
 
         setMainBoard: SetMainBoard,
         canMirror: CanMirror,
@@ -15507,6 +15409,7 @@
         rotate: Rotate,
         canRotateTo: CanRotateTo,
         rotateTo: RotateTo,
+        getBounds: GetBounds$1,
         setOrigin: SetOrigin
     };
 

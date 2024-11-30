@@ -461,7 +461,7 @@
 
     var globalOut = {};
 
-    var IsPointerInBounds = function (gameObject, pointer, preTest, postTest) {
+    var PointerTest = function (gameObject, pointer, mainTest, preTest, postTest) {
         var mainCamera = gameObject.scene.sys.cameras.main,
             worldXY;
 
@@ -469,14 +469,14 @@
 
         if (pointer) {
             if (useScreenXY) {
-                return IsPointInBounds(gameObject, pointer.x, pointer.y, preTest, postTest);
+                return mainTest(gameObject, pointer.x, pointer.y, preTest, postTest);
 
             } else {
                 worldXY = GetPointerWorldXY(pointer, mainCamera, true);
                 if (!worldXY) {
                     return false;
                 }
-                return IsPointInBounds(gameObject, worldXY.x, worldXY.y, preTest, postTest);
+                return mainTest(gameObject, worldXY.x, worldXY.y, preTest, postTest);
 
             }
 
@@ -488,7 +488,7 @@
                 pointer = pointers[i];
 
                 if (useScreenXY) {
-                    if (IsPointInBounds(gameObject, pointer.x, pointer.y, preTest, postTest)) {
+                    if (mainTest(gameObject, pointer.x, pointer.y, preTest, postTest)) {
                         return true;
                     }
 
@@ -498,7 +498,7 @@
                         continue;
                     }
 
-                    if (IsPointInBounds(gameObject, worldXY.x, worldXY.y, preTest, postTest)) {
+                    if (mainTest(gameObject, worldXY.x, worldXY.y, preTest, postTest)) {
                         return true;
                     }
 
@@ -507,8 +507,10 @@
             }
             return false;
 
-        }
+        }};
 
+    var IsPointerInBounds = function (gameObject, pointer, preTest, postTest) {
+        return PointerTest(gameObject, pointer, IsPointInBounds, preTest, postTest)
     };
 
     const GetValue = Phaser.Utils.Objects.GetValue;
