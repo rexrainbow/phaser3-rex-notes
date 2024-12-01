@@ -1,24 +1,16 @@
-import FragSrc from './dissolve-frag.js';
+import { FilterName } from './const.js';
 
-const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Clamp = Phaser.Math.Clamp;
 
-class DissolvePostFxPipeline extends PostFXPipeline {
-    constructor(game) {
-        super({
-            name: 'rexDissolvePostFx',
-            game: game,
-            renderTarget: true,
-            fragShader: FragSrc
-        });
+class DissolveController extends Phaser.Filters.Controller {
+    static FilterName = FilterName;
+
+    constructor(camera, config) {
+        super(camera, FilterName);
 
         this._progress = 0;
-        this.toFrame = null;
-        this.targetTexture = null;
         this.resizeMode = 1;
-        this.toRatio = 1;
-
         this.noiseX = 0;
         this.noiseY = 0;
         this.noiseZ = 0;
@@ -26,6 +18,17 @@ class DissolvePostFxPipeline extends PostFXPipeline {
         this.fromEdgeWidth = 0.05;
         this.toEdgeStart = 0.01;
         this.toEdgeWidth = 0.05;
+
+        this.toFrame = null;
+        this.targetTexture = null;
+        this.toRatio = 1;
+
+        this.resetFromJSON(config);
+    }
+
+    destroy() {
+        this.targetTexture = null;
+        super.destroy();
     }
 
     resetFromJSON(o) {
@@ -35,35 +38,6 @@ class DissolvePostFxPipeline extends PostFXPipeline {
         this.setFromEdge(GetValue(o, 'fromEdgeStart', 0.01), GetValue(o, 'fromEdgeWidth', 0.05));
         this.setToEdge(GetValue(o, 'toEdgeStart', 0.01), GetValue(o, 'toEdgeWidth', 0.05));
         return this;
-    }
-
-    onBoot() {
-
-    }
-
-    onPreRender() {
-        this.set1f('progress', this.progress);
-        this.set1i('resizeMode', this.resizeMode);
-
-        this.set1f('noiseX', this.noiseX);
-        this.set1f('noiseY', this.noiseY);
-        this.set1f('noiseZ', this.noiseZ);
-        this.set1f('fromEdgeStart', this.fromEdgeStart);
-        this.set1f('fromEdgeWidth', this.fromEdgeWidth);
-        this.set1f('toEdgeStart', this.toEdgeStart);
-        this.set1f('toEdgeWidth', this.toEdgeWidth);
-    }
-
-    onDraw(renderTarget) {
-        this.set1f('fromRatio', renderTarget.width / renderTarget.height);
-
-        this.set1f('toRatio', this.toRatio);
-
-        this.set1i('uMainSampler2', 1);
-
-        this.bindTexture(this.targetTexture, 1);
-
-        this.bindAndDraw(renderTarget);
     }
 
     get progress() {
@@ -76,28 +50,6 @@ class DissolvePostFxPipeline extends PostFXPipeline {
 
     setProgress(value) {
         this.progress = value;
-        return this;
-    }
-
-    setTransitionTargetTexture(key, frame, resizeMode) {
-        if (key === undefined) {
-            key = '__DEFAULT';
-        }
-        var phaserTexture = this.game.textures.getFrame(key, frame);
-
-        if (!phaserTexture) {
-            phaserTexture = this.game.textures.getFrame('__DEFAULT');
-        }
-
-        this.toRatio = phaserTexture.width / phaserTexture.height;
-
-        this.toFrame = phaserTexture;
-        this.targetTexture = phaserTexture.glTexture;
-
-        if (resizeMode !== undefined) {
-            this.resizeMode = resizeMode;
-        }
-
         return this;
     }
 
@@ -134,6 +86,28 @@ class DissolvePostFxPipeline extends PostFXPipeline {
     setToEdge(edgeStart, edgeWidth) {
         this.toEdgeStart = edgeStart;
         this.toEdgeWidth = edgeWidth;
+    }
+
+    setTransitionTargetTexture(key, frame, resizeMode) {
+        if (key === undefined) {
+            key = '__DEFAULT';
+        }
+        var textures = this.camera.scene.sys.textures;
+        var phaserTexture = textures.getFrame(key, frame);
+
+        if (!phaserTexture) {
+            phaserTexture = textures.getFrame('__DEFAULT');
+        }
+
+        this.toRatio = phaserTexture.width / phaserTexture.height;
+
+        this.toFrame = phaserTexture;
+        this.targetTexture = phaserTexture.glTexture;
+
+        if (resizeMode !== undefined) {
+            this.resizeMode = resizeMode;
+        }
+
         return this;
     }
 }
@@ -151,10 +125,10 @@ class DissolvePostFxPipeline extends PostFXPipeline {
  * for speed.
  *
  */
-var ResizeMode = {
+const ResizeMode = {
     stretch: 0,
     contain: 1,
     cover: 2
 }
 
-export default DissolvePostFxPipeline;
+export default DissolveController;

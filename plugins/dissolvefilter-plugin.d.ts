@@ -1,5 +1,5 @@
 // import * as Phaser from 'phaser';
-import DissolvePostFxPipeline from './dissolvepipeline';
+import DissolvePostFxPipeline from './dissolvefilter';
 
 export default DissolvePipelinePlugin;
 

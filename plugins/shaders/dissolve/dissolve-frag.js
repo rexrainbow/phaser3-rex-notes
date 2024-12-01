@@ -3,6 +3,8 @@
 import Perlin from '../utils/noise/Perlin.js';
 
 const frag = `\
+#pragma phaserTemplate(shaderName)
+
 #ifdef GL_FRAGMENT_PRECISION_HIGH
 #define highmedp highp
 #else
@@ -57,6 +59,8 @@ vec4 transition (vec2 uv) {
     + colorTo * smoothstep((1.0 - progress) - (toEdgeStart + toEdgeWidth), (1.0 - progress) - toEdgeStart, (1.0 - noise));
   return colorResult;
 }
+
+#pragma phaserTemplate(fragmentHeader)
 
 void main () {
   vec2 uv = outFragCoord;

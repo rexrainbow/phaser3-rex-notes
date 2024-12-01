@@ -1,15 +1,19 @@
-import phaser from 'phaser/src/phaser.js';
-import DissolvePipelinePlugin from '../../plugins/dissolvepipeline-plugin.js';
+import phaser from '../../../phaser/src/phaser.js';
+import { DisolveFilter, DissolveController } from '../../plugins/dissolvefilter.js';
 
 var DissolveMainCamera = function (scene, duration) {
-    var postFxPlugin = scene.plugins.get('rexDissolvePipelinePlugin');
-    var mainCamera = scene.cameras.main;
+    if (!scene.renderer.renderNodes.hasNode(DisolveFilter.FilterName)) {
+        scene.renderer.renderNodes.addNodeConstructor(DisolveFilter.FilterName, DisolveFilter);
+    }
 
-    var postFxPipeline = postFxPlugin.add(mainCamera, {
-    });
+    var filterList = scene.cameras.main.filters.internal;
+    var controller = filterList.add(
+        new DissolveController(filterList.camera)
+    )
+
 
     scene.tweens.add({
-        targets: postFxPipeline,
+        targets: controller,
         progress: 1,
         ease: 'Quad',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
         duration: duration,
@@ -17,7 +21,7 @@ var DissolveMainCamera = function (scene, duration) {
         yoyo: false
     })
         .on('complete', function () {
-            postFxPlugin.remove(mainCamera);
+            filterList.remove(controller);
         })
 }
 
@@ -95,13 +99,6 @@ var config = {
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
     scene: [SceneA, SceneB],
-    plugins: {
-        global: [{
-            key: 'rexDissolvePipelinePlugin',
-            plugin: DissolvePipelinePlugin,
-            start: true
-        }]
-    }
 };
 
 var game = new Phaser.Game(config);

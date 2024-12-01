@@ -1,12 +1,12 @@
 // import * as Phaser from 'phaser';
 
-export default DissolvePostFxPipeline;
+export default DissolveController;
 
-declare namespace DissolvePostFxPipeline {
+declare namespace DissolveController {
     interface IConfig {
         toTexture?: string,
         toFrame?: string,
-        resizeMode?: DissolvePostFxPipeline.ResizeModeType
+        resizeMode?: ResizeModeType
 
         noiseX?: number,
         noiseY?: number,
@@ -23,8 +23,13 @@ declare namespace DissolvePostFxPipeline {
 
 }
 
-declare class DissolvePostFxPipeline extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
-    resetFromJSON(o?: DissolvePostFxPipeline.IConfig): this;
+declare class DissolveController extends Phaser.Filters.Controller {
+    constructor(
+        camera: Phaser.Cameras.Scene2D.BaseCamera,
+        config?: DissolveController.IConfig
+    );
+
+    resetFromJSON(o?: DissolveController.IConfig): this;
 
     setProgress(value: number): this;
     progress: number;
@@ -36,10 +41,10 @@ declare class DissolvePostFxPipeline extends Phaser.Renderer.WebGL.Pipelines.Pos
 
     setTransitionTargetTexture(
         key?: string, frame?: string,
-        resizeMode?: DissolvePostFxPipeline.ResizeModeType
+        resizeMode?: DissolveController.ResizeModeType
     ): this
 
-    setResizeMode(mode: DissolvePostFxPipeline.ResizeModeType): this;
+    setResizeMode(mode: DissolveController.ResizeModeType): this;
     resizeMode: number;
 
     setFromEdge(edgeStart: number, edgeWidth: number): this;

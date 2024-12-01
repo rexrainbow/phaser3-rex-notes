@@ -1,5 +1,5 @@
-import phaser from 'phaser/src/phaser.js';
-import DissolvePipelinePlugin from '../../plugins/dissolvepipeline-plugin.js';
+import phaser from '../../../phaser/src/phaser.js';
+import { DisolveFilter, DissolveController } from '../../plugins/dissolvefilter.js';
 import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 
 class Demo extends Phaser.Scene {
@@ -12,14 +12,20 @@ class Demo extends Phaser.Scene {
     preload() {
         this.load.image('classroom', 'assets/images/backgrounds/classroom.png');
         this.load.image('road', 'assets/images/backgrounds/road.png');
+
+        if (!this.renderer.renderNodes.hasNode(DisolveFilter.FilterName)) {
+            this.renderer.renderNodes.addNodeConstructor(DisolveFilter.FilterName, DisolveFilter);
+        }
     }
 
     create() {
-        var postFxPlugin = this.plugins.get('rexDissolvePipelinePlugin');
         var gameObject = this.add.image(400, 300, 'classroom');
-        var postFxPipeline = postFxPlugin.add(gameObject, {
 
-        });
+        var box = this.add.renderFilters(gameObject);
+        var filterList = box.filters.internal;
+        var controller = filterList.add(
+            new DissolveController(box.camera)
+        );
 
         var tweenTask;
         this.input.on('pointerdown', function () {
@@ -29,9 +35,9 @@ class Demo extends Phaser.Scene {
 
             var key = gameObject.texture.key;
             var nextKey = (key === 'classroom') ? 'road' : 'classroom';
-            postFxPipeline.setTransitionTargetTexture(nextKey).setProgress(0);
+            controller.setTransitionTargetTexture(nextKey).setProgress(0);
             tweenTask = this.tweens.add({
-                targets: postFxPipeline,
+                targets: controller,
                 progress: 1,
                 ease: 'Quad',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
                 duration: 3000,
@@ -39,18 +45,18 @@ class Demo extends Phaser.Scene {
                 yoyo: false
             })
                 .on('complete', function () {
-                    postFxPipeline.setProgress(0);
+                    controller.setProgress(0);
                     gameObject.setTexture(nextKey);
                     tweenTask = undefined;
                 })
         }, this)
 
         var gui = new Dat.GUI();
-        gui.add(postFxPipeline, 'noiseX', 0, 100);
-        gui.add(postFxPipeline, 'noiseY', 0, 100);
-        gui.add(postFxPipeline, 'noiseZ', 0, 100);
-        gui.add(postFxPipeline, 'fromEdgeStart', 0, 1);
-        gui.add(postFxPipeline, 'fromEdgeWidth', 0, 1);
+        gui.add(controller, 'noiseX', 0, 100);
+        gui.add(controller, 'noiseY', 0, 100);
+        gui.add(controller, 'noiseZ', 0, 100);
+        gui.add(controller, 'fromEdgeStart', 0, 1);
+        gui.add(controller, 'fromEdgeWidth', 0, 1);
     }
 
     update() {
@@ -67,13 +73,6 @@ var config = {
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
     scene: Demo,
-    plugins: {
-        global: [{
-            key: 'rexDissolvePipelinePlugin',
-            plugin: DissolvePipelinePlugin,
-            start: true
-        }]
-    }
 };
 
 var game = new Phaser.Game(config);
