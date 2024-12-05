@@ -1,24 +1,22 @@
-import FragSrc from './toonify-frag.js';
+import { FilterName } from './const.js';
 
-const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IntegerToRGB = Phaser.Display.Color.IntegerToRGB;
 const Color = Phaser.Display.Color;
 
-class ToonifyPostFxPipeline extends PostFXPipeline {
-    constructor(game) {
-        super({
-            name: 'rexToonifyPostFx',
-            game: game,
-            renderTarget: true,
-            fragShader: FragSrc
-        });
+class ToonifyController extends Phaser.Filters.Controller {
+    static FilterName = FilterName;
+
+    constructor(camera, config) {
+        super(camera, FilterName);
 
         this.edgeThreshold = 0;
         this.hueLevels = 0;
         this._satLevels = 0;
         this._valLevels = 0;
         this._edgeColor = new Color();
+
+        this.resetFromJSON(config);
     }
 
     resetFromJSON(o) {
@@ -28,15 +26,6 @@ class ToonifyPostFxPipeline extends PostFXPipeline {
         this.setValLevels(GetValue(o, 'valLevels', 0));
         this.setEdgeColor(GetValue(o, 'edgeColor', 0));
         return this;
-    }
-
-    onPreRender() {
-        this.set1f('edgeThreshold', this.edgeThreshold);
-        this.set1f('hStep', this.hueStep);
-        this.set1f('sStep', this.satStep);
-        this.set1f('vStep', this.valStep);
-        this.set3f('edgeColor', this._edgeColor.redGL, this._edgeColor.greenGL, this._edgeColor.blueGL);
-        this.set2f('texSize', this.renderer.width, this.renderer.height);
     }
 
     // edgeThreshold
@@ -121,4 +110,4 @@ class ToonifyPostFxPipeline extends PostFXPipeline {
     }
 }
 
-export default ToonifyPostFxPipeline;
+export default ToonifyController;

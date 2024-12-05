@@ -1,7 +1,7 @@
-import DisolveFilter from './shaders/dissolve/DissolveFilter.js';
+import DissolveFilter from './shaders/dissolve/DissolveFilter.js';
 import DissolveController from './shaders/dissolve/DissolveController.js';
 
 export {
-    DisolveFilter,
+    DissolveFilter,
     DissolveController
 }

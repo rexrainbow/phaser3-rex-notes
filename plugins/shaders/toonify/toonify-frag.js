@@ -3,6 +3,8 @@ import HSVToRGB from '../utils/HSVToRGB.js';
 import IsEdge from '../utils/IsEdge.js';
 
 const frag = `\
+#pragma phaserTemplate(shaderName)
+
 #ifdef GL_FRAGMENT_PRECISION_HIGH
 #define highmedp highp
 #else
@@ -24,6 +26,8 @@ uniform vec3 edgeColor; // (0, 0, 0);
 `
 + RGBToHSV + IsEdge + HSVToRGB +
 `
+#pragma phaserTemplate(fragmentHeader)
+
 void main() {
   vec4 front = texture2D(uMainSampler, outTexCoord);  
   vec3 colorLevel;
