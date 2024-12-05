@@ -112,6 +112,8 @@ These world properties of chess will be changed with container.
 - Scroll factor
 - Mask
 
+Bounds and origin will change after adding chess.
+
 #### Remove chess
 
 - Remove chess object from board
@@ -131,6 +133,8 @@ These world properties of chess will be changed with container.
     miniBoard.removeAllChess(destroy);
     ```
     - `destroy` : Set `true` to desrtoy chess object.
+
+Bounds and origin will change after removing chess.
 
 ### Set origin
 
@@ -152,6 +156,8 @@ These world properties of chess will be changed with container.
     ```javascript
     miniBoard.setOrigin('top-left');
     ```
+
+Position of this miniboard will change
 
 ### Get all chess
 
