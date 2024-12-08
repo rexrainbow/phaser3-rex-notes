@@ -1,18 +1,14 @@
-import FragSrc from './split-frag.js';
+import { FilterName } from './const.js';
 
-const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const DegToRad = Phaser.Math.DegToRad;
 const RadToDeg = Phaser.Math.RadToDeg;
 
-class SplitPostFxPipeline extends PostFXPipeline {
-    constructor(game) {
-        super({
-            name: 'rexSplitPostFx',
-            game: game,
-            renderTarget: true,
-            fragShader: FragSrc
-        });
+class SplitController extends Phaser.Filters.Controller {
+    static FilterName = FilterName;
+
+    constructor(camera, config) {
+        super(camera, FilterName);
 
         this.splitX = 0;
         this.splitY = 0;
@@ -22,6 +18,8 @@ class SplitPostFxPipeline extends PostFXPipeline {
         this.spaceBottom = 0;
         this.rotation = 0;
         this.shiftEnable = true;
+
+        this.resetFromJSON(config);
     }
 
     resetFromJSON(o) {
@@ -41,8 +39,8 @@ class SplitPostFxPipeline extends PostFXPipeline {
             this.splittedHeight = splittedHeight;
         }
 
-        this.splitX = GetValue(o, 'x', this.renderer.width / 2);
-        this.splitY = GetValue(o, 'Y', this.renderer.height / 2);
+        this.splitX = GetValue(o, 'x', this.camera.centerX);
+        this.splitY = GetValue(o, 'Y', this.camera.centerY);
 
         var rotation = GetValue(o, 'rotation', undefined);
         if (rotation === undefined) {
@@ -53,21 +51,6 @@ class SplitPostFxPipeline extends PostFXPipeline {
 
         this.shiftEnable = GetValue(o, 'shiftEnable', true);
         return this;
-    }
-
-    onPreRender() {
-        var texWidth = this.renderer.width,
-            textHeight = this.renderer.height;
-        this.set2f('split', this.splitX, (textHeight - this.splitY));
-        this.set1f('angle', this.rotation);
-        this.set2f('texSize', texWidth, textHeight);
-
-        this.set1f('spaceLeft', this.spaceLeft);
-        this.set1f('spaceRight', this.spaceRight);
-        this.set1f('spaceTop', this.spaceTop);
-        this.set1f('spaceBottom', this.spaceBottom);
-
-        this.set1f('shiftEnable', (this.shiftEnable) ? 1 : 0);
     }
 
     // split
@@ -85,7 +68,7 @@ class SplitPostFxPipeline extends PostFXPipeline {
     }
 
     splitAtCenter(width, height) {
-        this.setSplit(this.renderer.width / 2, this.renderer.height / 2)
+        this.setSplit(this.camera.centerX, this.camera.centerY);
         if (width !== undefined) {
             this.setSplittedWidth(width);
         }
@@ -179,4 +162,4 @@ class SplitPostFxPipeline extends PostFXPipeline {
     }
 }
 
-export default SplitPostFxPipeline;
+export default SplitController;

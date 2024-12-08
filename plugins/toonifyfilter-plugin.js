@@ -3,10 +3,10 @@ import {
     ToonifyController
 } from './toonifyfilter.js';
 
-import PipelinePluginBase from './utils/renderer/filterpluginbase/FilterPluginBase.js';
+import FilterPluginBase from './utils/renderer/filterpluginbase/FilterPluginBase.js';
 import SetValue from './utils/object/SetValue.js';
 
-class ToonifyFilterPlugin extends PipelinePluginBase {
+class ToonifyFilterPlugin extends FilterPluginBase {
     constructor(pluginManager) {
         super(pluginManager);
         this.setFilterClass(ToonifyFilter, ToonifyController);

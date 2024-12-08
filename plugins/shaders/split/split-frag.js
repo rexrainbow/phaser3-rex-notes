@@ -1,4 +1,6 @@
 const frag = `\
+#pragma phaserTemplate(shaderName)
+
 #ifdef GL_FRAGMENT_PRECISION_HIGH
 #define highmedp highp
 #else
@@ -28,6 +30,8 @@ vec2 rotate(vec2 uv, float angle) {
     uv.y * c - uv.x * s
   );
 }
+
+#pragma phaserTemplate(fragmentHeader)
 
 void main (void) {
   vec2 tc = outTexCoord * texSize;  

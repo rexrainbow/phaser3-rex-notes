@@ -1,6 +1,32 @@
 // import * as Phaser from 'phaser';
+export default SplitController;
 
-export default class SplitPostFxPipeline extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
+declare namespace SplitController {
+    interface IConfig {
+        width?: number,
+        height?: number,
+
+        left?: number,
+        right?: number,
+        top?: number,
+        bottom?: number,
+
+        x?: number,
+        y?: number,
+
+        rotation?: number,
+        angle?: number,
+
+        shiftEnable?: boolean,
+    }
+}
+
+declare class SplitController extends Phaser.Filters.Controller {
+    constructor(
+        camera: Phaser.Cameras.Scene2D.BaseCamera,
+        config?: SplitController.IConfig
+    );
+
     setSplit(x?: number, y?: number): this;
     splitX: number;
     splitY: number;

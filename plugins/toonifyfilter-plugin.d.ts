@@ -1,27 +1,19 @@
 // import * as Phaser from 'phaser';
-import ToonifyPostFxPipeline from './toonifypipeline';
+import {
+    ToonifyFilter,
+    ToonifyController
+} from './toonifyfilter';
 
-export default ToonifyPipelinePlugin;
+export default ToonifyFilterPlugin;
 
-declare namespace ToonifyPipelinePlugin {
-
-    interface IConfig {
-        edgeThreshold?: number,
-        hueLevels?: number,
-        sLevels?: number,
-        vLevels?: number,
-        edgeColor?: number,
-
-        name?: string,
-    }
-
+declare namespace ToonifyFilterPlugin {
 }
 
-declare class ToonifyPipelinePlugin extends Phaser.Plugins.BasePlugin {
+declare class ToonifyFilterPlugin extends Phaser.Plugins.BasePlugin {
     add(
         gameObject: Phaser.GameObjects.GameObject,
-        config?: ToonifyPipelinePlugin.IConfig
-    ): ToonifyPostFxPipeline;
+        config?: ToonifyController.IConfig
+    ): ToonifyController;
 
     remove(
         gameObject: Phaser.GameObjects.GameObject,
@@ -31,5 +23,5 @@ declare class ToonifyPipelinePlugin extends Phaser.Plugins.BasePlugin {
     get(
         gameObject: Phaser.GameObjects.GameObject,
         name?: string
-    ): ToonifyPostFxPipeline | ToonifyPostFxPipeline[];
+    ): ToonifyController | ToonifyController[];
 }
