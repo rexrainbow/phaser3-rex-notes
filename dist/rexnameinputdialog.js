@@ -30291,13 +30291,17 @@
         clear() {
             // Reuse hitArea(rectangle) later
             for (var i = 0, cnt = this.hitAreas.length; i < cnt; i++) {
-                Clear(this.hitAreas[i].data);
+                this.hitAreas[i].data = null;
             }
             RectanglePool.pushMultiple(this.hitAreas);
             return this;
         }
 
         add(x, y, width, height, data) {
+            if (data === undefined) {
+                data = {};
+            }
+
             var rectangle = RectanglePool.pop();
             if (rectangle === null) {
                 rectangle = new Rectangle(x, y, width, height);
@@ -30382,6 +30386,11 @@
         var key = area.data.key;
         FireEvent.call(this, 'areadown', key, pointer, localX, localY, event);
 
+        // Removed by callback of previous event
+        if (!area.data) {
+            return;
+        }
+
         area.data.isDown = true;
     };
 
@@ -30391,21 +30400,29 @@
             return;
         }
 
-        var areaData = area.data;
-
-        var key = areaData.key;
+        var key = area.data.key;
         FireEvent.call(this, 'areaup', key, pointer, localX, localY, event);
 
-        if (areaData.isDown) {
+        // Removed by callback of previous event
+        if (!area.data) {
+            return;
+        }
+
+        if (area.data.isDown) {
             FireEvent.call(this, 'areaclick', key, pointer, localX, localY, event);
 
-            var url = areaData.url;
+            // Removed by callback of previous event
+            if (!area.data) {
+                return;
+            }
+
+            var url = area.data.url;
             if (url) {
                 window.open(url, '_blank');
             }
         }
 
-        areaData.isDown = false;
+        area.data.isDown = false;
     };
 
     var OnAreaOverOut = function (pointer, localX, localY, event) {
@@ -30428,17 +30445,22 @@
             FireEvent.call(this, 'areaout', this.lastHitAreaKey, pointer, localX, localY, event);
 
             var prevHitArea = this.hitAreaManager.getByKey(this.lastHitAreaKey);
-            if (this.urlTagCursorStyle && !!prevHitArea.data.url) {
-                this.scene.input.manager.canvas.style.cursor = '';
-            }
 
-            prevHitArea.isDown = false;
+            if (prevHitArea) {
+                if (this.urlTagCursorStyle) {
+                    SetCursorStyle(this.scene, prevHitArea, '');
+                }
+
+                prevHitArea.isDown = false;
+            }
         }
         if (key !== null) {
             FireEvent.call(this, 'areaover', key, pointer, localX, localY, event);
 
-            if (this.urlTagCursorStyle && !!area.data.url) {
-                this.scene.input.manager.canvas.style.cursor = this.urlTagCursorStyle;
+            if (area.data) {
+                if (this.urlTagCursorStyle) {
+                    SetCursorStyle(this.scene, area, this.urlTagCursorStyle);
+                }
             }
         }
 
@@ -30448,6 +30470,14 @@
     var FireEvent = function (eventName, key, pointer, localX, localY, event) {
         this.parent.emit(`${eventName}-${key}`, pointer, localX, localY, event);
         this.parent.emit(eventName, key, pointer, localX, localY, event);
+    };
+
+    var SetCursorStyle = function (scene, area, cursorStyle) {
+        if (!area || !area.data || !area.data.url) {
+            return;
+        }
+
+        scene.input.manager.canvas.style.cursor = cursorStyle;
     };
 
     const NO_NEWLINE$1 = CONST.NO_NEWLINE;
