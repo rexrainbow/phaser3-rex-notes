@@ -1,5 +1,4 @@
 import Pool from '../../../../pool.js';
-import Clear from '../../../../utils/object/Clear.js';
 
 const Rectangle = Phaser.Geom.Rectangle;
 
@@ -16,13 +15,17 @@ class HitAreaManager {
     clear() {
         // Reuse hitArea(rectangle) later
         for (var i = 0, cnt = this.hitAreas.length; i < cnt; i++) {
-            Clear(this.hitAreas[i].data);
+            this.hitAreas[i].data = null;
         }
         RectanglePool.pushMultiple(this.hitAreas);
         return this;
     }
 
     add(x, y, width, height, data) {
+        if (data === undefined) {
+            data = {};
+        }
+
         var rectangle = RectanglePool.pop();
         if (rectangle === null) {
             rectangle = new Rectangle(x, y, width, height);
