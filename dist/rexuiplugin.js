@@ -6295,7 +6295,12 @@
         if (localX === null) {  // Case of pointerout
             if (this.lastHitAreaKey !== null) {
                 FireEvent$2.call(this, 'areaout', this.lastHitAreaKey, pointer, localX, localY, event);
-                this.hitAreaManager.getByKey(this.lastHitAreaKey).isDown = false;
+
+                var area = this.hitAreaManager.getByKey(this.lastHitAreaKey);
+                if (area && area.data) {
+                    area.data.isDown = false;
+                }
+
                 this.lastHitAreaKey = null;
             }
             return;
@@ -6317,7 +6322,7 @@
                     SetCursorStyle(this.scene, prevHitArea, '');
                 }
 
-                prevHitArea.isDown = false;
+                prevHitArea.data.isDown = false;
             }
         }
         if (key !== null) {

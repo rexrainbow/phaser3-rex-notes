@@ -56,14 +56,14 @@ class Demo extends Phaser.Scene {
                 //scene.input.manager.canvas.style.cursor = '';
             })
 
-        var txt2 = this.add.rexBBCodeText(400, 300, '[area=1][hit me][/area]', {
+        var txt2 = this.add.rexBBCodeText(400, 300, '123 [area=1][hit me][/area]', {
             backgroundColor: '#555',
             fontSize: '24px'
         })
             .setInteractive()
             .on('areaclick', function () {
                 // Clear hit-area
-                this.setText('123456')
+                this.setText('123')
             });
 
     }
