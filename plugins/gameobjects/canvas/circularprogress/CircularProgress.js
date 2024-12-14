@@ -36,9 +36,20 @@ class CircularProgress extends ProgressBase(Canvas) {
         this.setCenterColor(GetValue(config, 'centerColor', undefined));
 
         this.setThickness(GetValue(config, 'thickness', 0.2));
-        this.setStartAngle(GetValue(config, 'startAngle', DefaultStartAngle));
-        this.setEndAngle(GetValue(config, 'endAngle', this.startAngle + PI2))
+
         this.setAnticlockwise(GetValue(config, 'anticlockwise', false));
+
+        this.setStartAngle(GetValue(config, 'startAngle', DefaultStartAngle));
+
+        var endAngle = GetValue(config, 'endAngle');
+        if (endAngle === undefined) {
+            if (this.anticlockwise) {
+                endAngle = this.startAngle - PI2;
+            } else {
+                endAngle = this.startAngle + PI2;
+            }
+        }
+        this.setEndAngle(GetValue(config, 'endAngle', endAngle))
 
         this.setTextColor(GetValue(config, 'textColor', undefined));
         this.setTextStrokeColor(

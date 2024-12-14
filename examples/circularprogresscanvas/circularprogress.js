@@ -17,7 +17,7 @@ class Demo extends Phaser.Scene {
     create() {
         var progressBar = this.add.rexCircularProgressCanvas({
             x: 400, y: 300,
-            radius: 50,
+            radius: 100,
 
             trackColor: COLOR_DARK,
             barColor: COLOR_LIGHT,

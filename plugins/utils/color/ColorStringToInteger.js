@@ -1,4 +1,4 @@
-import { ColorNameToInteger } from './ColorNameToInteger';
+import CSSColorStringToInteger from './CssColorStringToInteger.js';
 
 var ColorStringToInteger = function (value) {
     if (typeof (value) !== 'string') {
@@ -10,7 +10,7 @@ var ColorStringToInteger = function (value) {
     } else if (value.startsWith('0x')) {
         value = parseInt(value.substring(2), 16);
     } else {
-        value = ColorNameToInteger(value);
+        value = CSSColorStringToInteger(value);
     }
     return value;
 }

@@ -162,7 +162,7 @@
         return gameObject;
     };
 
-    const DegToRad$2 = Phaser.Math.DegToRad;
+    const DegToRad$3 = Phaser.Math.DegToRad;
     const RadToDeg$2 = Phaser.Math.RadToDeg;
 
     var GetLocalState = function (gameObject) {
@@ -185,7 +185,7 @@
                     return RadToDeg$2(this.rotation);
                 },
                 set: function (value) {
-                    this.rotation = DegToRad$2(value);
+                    this.rotation = DegToRad$3(value);
                 }
             });
             Object.defineProperty(rexContainer, 'displayWidth', {
@@ -612,7 +612,7 @@
 
     };
 
-    const DegToRad$1 = Phaser.Math.DegToRad;
+    const DegToRad$2 = Phaser.Math.DegToRad;
 
     var Rotation = {
         updateChildRotation(child) {
@@ -659,7 +659,7 @@
 
         setChildLocalAngle(child, angle) {
             var localState = GetLocalState(child);
-            localState.rotation = DegToRad$1(angle);
+            localState.rotation = DegToRad$2(angle);
             this.updateChildRotation(child);
             return this;
         },
@@ -5194,7 +5194,7 @@
 
     const GetValue$A = Phaser.Utils.Objects.GetValue;
     const GetAdvancedValue$2 = Phaser.Utils.Objects.GetAdvancedValue;
-    const Linear$4 = Phaser.Math.Linear;
+    const Linear$5 = Phaser.Math.Linear;
 
     class Scale extends EaseValueTaskBase {
         constructor(gameObject, config) {
@@ -5287,10 +5287,10 @@
             t = this.easeFn(t);
 
             if (this.hasScaleX) {
-                gameObject.scaleX = Linear$4(this.startX, this.endX, t);
+                gameObject.scaleX = Linear$5(this.startX, this.endX, t);
             }
             if (this.hasScaleY) {
-                gameObject.scaleY = Linear$4(this.startY, this.endY, t);
+                gameObject.scaleY = Linear$5(this.startY, this.endY, t);
             }
         }
 
@@ -5605,7 +5605,7 @@
 
     const GetValue$z = Phaser.Utils.Objects.GetValue;
     const GetAdvancedValue$1 = Phaser.Utils.Objects.GetAdvancedValue;
-    const Linear$3 = Phaser.Math.Linear;
+    const Linear$4 = Phaser.Math.Linear;
 
     class Fade extends EaseValueTaskBase {
         constructor(gameObject, config) {
@@ -5665,7 +5665,7 @@
                 t = 1 - t;
             }
 
-            gameObject.alpha = Linear$3(this.alphaStart, this.alphaEnd, t);
+            gameObject.alpha = Linear$4(this.alphaStart, this.alphaEnd, t);
         }
 
         complete() {
@@ -5854,7 +5854,7 @@
 
     const GetValue$y = Phaser.Utils.Objects.GetValue;
     const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
-    const Linear$2 = Phaser.Math.Linear;
+    const Linear$3 = Phaser.Math.Linear;
 
     class EaseMove extends EaseValueTaskBase {
         constructor(gameObject, config) {
@@ -5941,10 +5941,10 @@
             t = this.easeFn(t);
 
             if (this.hasMoveX) {
-                gameObject.x = Linear$2(this.startX, this.endX, t);
+                gameObject.x = Linear$3(this.startX, this.endX, t);
             }
             if (this.hasMoveY) {
-                gameObject.y = Linear$2(this.startY, this.endY, t);
+                gameObject.y = Linear$3(this.startY, this.endY, t);
             }
         }
 
@@ -6486,7 +6486,7 @@
     };
 
     const GetValue$w = Phaser.Utils.Objects.GetValue;
-    const Linear$1 = Phaser.Math.Linear;
+    const Linear$2 = Phaser.Math.Linear;
 
     class EaseValueTask extends EaseValueTaskBase {
         constructor(gameObject, config) {
@@ -6531,7 +6531,7 @@
             var t = timer.t;
             t = this.easeFn(t);
 
-            target[this.propertyKey] = Linear$1(this.fromValue, this.toValue, t);
+            target[this.propertyKey] = Linear$2(this.fromValue, this.toValue, t);
         }
     }
 
@@ -11374,7 +11374,7 @@
     const WrapDegrees = Phaser.Math.Angle.WrapDegrees; // Wrap degrees: -180 to 180 
     const ShortestBetween = Phaser.Math.Angle.ShortestBetween;
     const RadToDeg = Phaser.Math.RadToDeg;
-    const DegToRad = Phaser.Math.DegToRad;
+    const DegToRad$1 = Phaser.Math.DegToRad;
 
     class Rotate extends TwoPointersTracer {
         constructor(gameObject, config) {
@@ -11451,7 +11451,7 @@
         }
 
         get rotation() {
-            return DegToRad(this.angle);
+            return DegToRad$1(this.angle);
         }
 
         setDragThreshold(distance) {
@@ -13501,7 +13501,7 @@
         ]
     );
 
-    const Linear = Phaser.Math.Linear;
+    const Linear$1 = Phaser.Math.Linear;
     const Percent$1 = Phaser.Math.Percent;
 
     var ProgressValueMethods = {
@@ -13528,7 +13528,7 @@
         getValue(min, max) {
             var value = this.value;
             if (min !== undefined) {
-                value = Linear(min, max, value);
+                value = Linear$1(min, max, value);
             }
             return value;
         }
@@ -14082,6 +14082,127 @@
         }
     };
 
+    var CSSColorStringToInteger = function (cssColor) {
+        // Create a temporary, invisible element
+        var div = document.createElement('div');
+        div.style.color = cssColor;
+        document.body.appendChild(div);
+
+        // Let the browser parse the CSS color
+        var computedColor = window.getComputedStyle(div).color;
+        document.body.removeChild(div);
+
+        // Usually in "rgb(r, g, b)" form
+        var rgbMatch = computedColor.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+        if (rgbMatch) {
+            var R = parseInt(rgbMatch[1], 10);
+            var G = parseInt(rgbMatch[2], 10);
+            var B = parseInt(rgbMatch[3], 10);
+            return (R << 16) | (G << 8) | B;
+        }
+
+        return null; // return null if can't parse
+    };
+
+    var ColorStringToInteger = function (value) {
+        if (typeof (value) !== 'string') {
+            return value;
+        }
+
+        if (value.startsWith('#')) {
+            value = parseInt(value.substring(1), 16);
+        } else if (value.startsWith('0x')) {
+            value = parseInt(value.substring(2), 16);
+        } else {
+            value = CSSColorStringToInteger(value);
+        }
+        return value;
+    };
+
+    var GetRGB = function (colorInt, out) {
+        if (out === undefined) {
+            out = {};
+        }
+
+        out.r = (colorInt >> 16) & 0xff;
+        out.g = (colorInt >> 8) & 0xff;
+        out.b = (colorInt) & 0xff;
+
+        return out;
+
+    };
+
+    const DegToRad = Phaser.Math.DegToRad;
+    const Linear = Phaser.Math.Linear;
+
+    var DrawGradientArc = function (
+        canvas, context,
+        x, y,
+        rx, ry,
+        startColor, endColor, lineWidth,
+        startAngle, endAngle, anticlockwise, AngleStepDeg
+    ) {
+
+        if (startAngle === undefined) {
+            startAngle = 0;
+        }
+        if (endAngle === undefined) {
+            endAngle = 2 * Math.PI;
+        }
+        if (anticlockwise === undefined) {
+            anticlockwise = false;
+        }
+        if (AngleStepDeg === undefined) {
+            AngleStepDeg = 2;
+        }
+
+        startColor = ColorStringToInteger(startColor);
+        endColor = ColorStringToInteger(endColor);
+
+        StartRGB = GetRGB(startColor, StartRGB);
+        EndRGB = GetRGB(endColor, EndRGB);
+
+        var angleStep = DegToRad(AngleStepDeg);
+
+        var totalAngle;
+        if (anticlockwise) {
+            totalAngle = startAngle - endAngle;
+        } else {
+            totalAngle = endAngle - startAngle;
+        }
+        if (totalAngle < 0) {
+            totalAngle += 2 * Math.PI;
+        }
+        var segments = Math.ceil(totalAngle / angleStep);
+        var deltaAngle = totalAngle / segments;
+        if (anticlockwise) {
+            deltaAngle = -deltaAngle;
+        }
+
+        for (var i = 0; i < segments; i++) {
+            var t = i / segments;
+            var r = Math.round(Linear(StartRGB.r, EndRGB.r, t));
+            var g = Math.round(Linear(StartRGB.g, EndRGB.g, t));
+            var b = Math.round(Linear(StartRGB.b, EndRGB.b, t));
+            var segmentStartAngle = startAngle + (i * deltaAngle);
+            var segmentEndAngle = segmentStartAngle + deltaAngle;
+
+            // Overlap segment except last segment
+            if (i < segments - 1) {
+                segmentEndAngle += (deltaAngle / 2);
+            }
+
+            context.beginPath();
+            context.ellipse(x, y, rx, ry, 0, segmentStartAngle, segmentEndAngle, anticlockwise);
+            context.strokeStyle = `rgb(${r},${g},${b})`;
+            context.lineWidth = lineWidth;
+            context.stroke();
+        }
+    };
+
+    var StartRGB;
+    var EndRGB;
+
     var DrawText = function (
         canvas, context,
         x, y,
@@ -14171,29 +14292,26 @@
 
             context.save();
 
-            var style;
             if (this.barColor2) {
-                var x0 = x + (barRadius * Math.cos(startAngle)),
-                    y0 = x + (barRadius * Math.sin(startAngle)),
-                    x1 = x + (barRadius * Math.cos(barEndAngle)),
-                    y1 = x + (barRadius * Math.sin(barEndAngle));
-                var grd = context.createLinearGradient(x0, y0, x1, y1);
-                grd.addColorStop(0, this.barColor2);
-                grd.addColorStop(1, this.barColor);
-                style = grd;
-            } else {
-                style = this.barColor;
-            }
+                DrawGradientArc(
+                    canvas, context,
+                    x, x,
+                    barRadius, barRadius,
+                    this.barColor2, this.barColor, lineWidth,
+                    startAngle, barEndAngle, anticlockwise
+                );
 
-            DrawCircle(
-                canvas, context,
-                x, x,
-                barRadius, barRadius,
-                undefined,
-                style,
-                lineWidth,
-                startAngle, barEndAngle, anticlockwise
-            );
+            } else {
+                DrawCircle(
+                    canvas, context,
+                    x, x,
+                    barRadius, barRadius,
+                    undefined,
+                    this.barColor,
+                    lineWidth,
+                    startAngle, barEndAngle, anticlockwise
+                );
+            }
 
             context.restore();
         }
@@ -14272,9 +14390,20 @@
             this.setCenterColor(GetValue$4(config, 'centerColor', undefined));
 
             this.setThickness(GetValue$4(config, 'thickness', 0.2));
-            this.setStartAngle(GetValue$4(config, 'startAngle', DefaultStartAngle));
-            this.setEndAngle(GetValue$4(config, 'endAngle', this.startAngle + PI2));
+
             this.setAnticlockwise(GetValue$4(config, 'anticlockwise', false));
+
+            this.setStartAngle(GetValue$4(config, 'startAngle', DefaultStartAngle));
+
+            var endAngle = GetValue$4(config, 'endAngle');
+            if (endAngle === undefined) {
+                if (this.anticlockwise) {
+                    endAngle = this.startAngle - PI2;
+                } else {
+                    endAngle = this.startAngle + PI2;
+                }
+            }
+            this.setEndAngle(GetValue$4(config, 'endAngle', endAngle));
 
             this.setTextColor(GetValue$4(config, 'textColor', undefined));
             this.setTextStrokeColor(

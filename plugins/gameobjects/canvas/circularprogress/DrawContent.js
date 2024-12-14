@@ -1,4 +1,5 @@
 import DrawCicle from '../../../utils/canvas/DrawCircle.js';
+import DrawGradientArc from '../../../utils/canvas/DrawGradientArc.js';
 import DrawText from '../../../utils/canvas/DrawText.js';
 
 const PI2 = Math.PI * 2;
@@ -49,29 +50,26 @@ var DrawContent = function () {
 
         context.save();
 
-        var style;
         if (this.barColor2) {
-            var x0 = x + (barRadius * Math.cos(startAngle)),
-                y0 = x + (barRadius * Math.sin(startAngle)),
-                x1 = x + (barRadius * Math.cos(barEndAngle)),
-                y1 = x + (barRadius * Math.sin(barEndAngle));
-            var grd = context.createLinearGradient(x0, y0, x1, y1);
-            grd.addColorStop(0, this.barColor2);
-            grd.addColorStop(1, this.barColor);
-            style = grd;
-        } else {
-            style = this.barColor;
-        }
+            DrawGradientArc(
+                canvas, context,
+                x, x,
+                barRadius, barRadius,
+                this.barColor2, this.barColor, lineWidth,
+                startAngle, barEndAngle, anticlockwise
+            );
 
-        DrawCicle(
-            canvas, context,
-            x, x,
-            barRadius, barRadius,
-            undefined,
-            style,
-            lineWidth,
-            startAngle, barEndAngle, anticlockwise
-        );
+        } else {
+            DrawCicle(
+                canvas, context,
+                x, x,
+                barRadius, barRadius,
+                undefined,
+                this.barColor,
+                lineWidth,
+                startAngle, barEndAngle, anticlockwise
+            );
+        }
 
         context.restore();
     }
