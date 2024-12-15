@@ -27,19 +27,19 @@ class Demo extends Phaser.Scene {
             height: 20
         })
 
-        var lineManager = new Lines();
+        var edgeManager = new EdgeManager();
         board
             .forEachTileXY(function (tileXY, board) {
                 if (Math.random() < 0.5) {
                     var chess = this.rexBoard.add.shape(board, tileXY.x, tileXY.y, 0, 0x333333);
                     var points = board.getGridPoints(tileXY.x, tileXY.y, true);
                     for (var i = 0, cnt = points.length; i < cnt; i++) {
-                        lineManager.add(points[i], points[(i + 1) % cnt]);
+                        edgeManager.add(points[i], points[(i + 1) % cnt]);
                     }
                 }
             }, this);
 
-        lineManager.draw(graphics, 2, 0xff0000, 1);
+        edgeManager.draw(graphics, 2, 0xff0000, 1);
     }
 
     update() { }
@@ -71,10 +71,9 @@ var getHexagonGrid = function (scene) {
     return grid;
 };
 
-class Lines {
+class EdgeManager {
     constructor() {
-        this.lines = {};
-        this.duplicated = {};
+        this.edges = {};
     }
 
     add(p0, p1) {
@@ -88,23 +87,20 @@ class Lines {
         }
 
         var key = JSON.stringify(line);
-        if (key in this.duplicated) {
-            // Do nothing
-        } else if (key in this.lines) {
-            delete this.lines[key];
-            this.duplicated[key] = line;
+        if (key in this.edges) {
+            delete this.edges[key];
         } else {
-            this.lines[key] = line;
+            this.edges[key] = line;
         }
 
         return this;
     }
 
     draw(graphics, lineWidth, color, alpha) {
-        for (var key in this.lines) {
+        for (var key in this.edges) {
             graphics
                 .lineStyle(lineWidth, color, alpha)
-                .strokeLineShape(this.lines[key])
+                .strokeLineShape(this.edges[key])
         }
         return this;
     }
