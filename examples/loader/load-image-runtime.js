@@ -8,6 +8,7 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
+        this.load.image('classroom', 'assets/images/backgrounds/classroom.png');
     }
 
     create() {
