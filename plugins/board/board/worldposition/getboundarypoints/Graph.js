@@ -37,28 +37,38 @@ class Graph {
 
         var nodes = this.nodes;
         var path = [startNodeKey];
-        var dfs = function (currentNodeKey) {
-            var nextNodes = nodes.get(currentNodeKey);
-            for (var i = 0, cnt = nextNodes.length; i < cnt; i++) {
-                var nextNodeKey = nextNodes[i];
+        var visitedEdges = new Set();
+        var stack = [{ current: startNodeKey, nextIndex: 0 }];
+        while (stack.length > 0) {
+            var frame = stack[stack.length - 1];
+            var currentNodeKey = frame.current;
+            var adjacency = nodes.get(currentNodeKey);
+            if (frame.nextIndex >= adjacency.length) {
+                path.pop();
+                stack.pop();
+                continue;
+            }
 
-                if ((path.length > 3) && (nextNodeKey === startNodeKey)) { // Found cycle
-                    return path.map(KeyToPoint);
+            var nextNodeKey = adjacency[frame.nextIndex];
+            frame.nextIndex += 1;
 
-                } else if (path.indexOf(nextNodeKey) === -1) {
-                    path.push(nextNodeKey);
-                    var result = dfs(nextNodeKey);
-                    if (result) {
-                        return result;
-                    }
-                    path.pop();
+            var edgeKey = [currentNodeKey, nextNodeKey].sort().join('->');
+            if (visitedEdges.has(edgeKey)) {
+                continue;
+            }
 
-                }
+            if (nextNodeKey === startNodeKey && path.length > 2) {
+                return path.map(KeyToPoint);
+            }
+
+            if (!path.includes(nextNodeKey)) {
+                visitedEdges.add(edgeKey);
+                stack.push({ current: nextNodeKey, nextIndex: 0 });
+                path.push(nextNodeKey);
             }
         }
 
-        var points = dfs(startNodeKey);
-        return points;
+        return [];
     }
 
 }
