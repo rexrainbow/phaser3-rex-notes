@@ -1196,7 +1196,8 @@ Offset all of tile positions to `(0, 0)`, and set board size to fit these tile p
     graphics.strokePoints(points, true);
     ```
 
-### Boundary points around tiles
+
+### Boundary points
 
 - Get boundary points around tiles
     ```javascript
