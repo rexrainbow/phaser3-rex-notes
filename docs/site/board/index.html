@@ -9537,6 +9537,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#boundary-points-around-tiles" class="md-nav__link">
+    Boundary points around tiles
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#bounds" class="md-nav__link">
     Bounds
   </a>
@@ -10859,6 +10866,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#boundary-points-around-tiles" class="md-nav__link">
+    Boundary points around tiles
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#bounds" class="md-nav__link">
     Bounds
   </a>
@@ -10938,6 +10952,7 @@
 <li><a href="https://codepen.io/rexrainbow/pen/wLYmyw">Triangle to tileXY array</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/LYYJmxE">Ellipse to tileXY array</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/PoeZOGo">Bounds</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/zxOoXPN">Boundary points</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/board">Sample code</a></p>
@@ -12105,6 +12120,28 @@
 </li>
 <li>Draw grid polygon on <a href="../graphics/#lines">graphics object</a>
     <div class="highlight"><pre><span></span><code><span class="nx">graphics</span><span class="p">.</span><span class="nx">strokePoints</span><span class="p">(</span><span class="nx">points</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h3 id="boundary-points-around-tiles">Boundary points around tiles<a class="headerlink" href="#boundary-points-around-tiles" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get boundary points around tiles
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">pointsAarray</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">board</span><span class="p">.</span><span class="nx">getBoundaryPoints</span><span class="p">(</span><span class="nx">tileXYArray</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">pointsAarray</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">board</span><span class="p">.</span><span class="nx">getBoundaryPoints</span><span class="p">(</span><span class="nx">chessArray</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">pointsAarray</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">board</span><span class="p">.</span><span class="nx">getBoundaryPoints</span><span class="p">(</span><span class="nx">tileZ</span><span class="p">);</span><span class="w"> </span><span class="c1">// All tiles on tileZ</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">pointsAarray</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">board</span><span class="p">.</span><span class="nx">getBoundaryPoints</span><span class="p">();</span><span class="w"> </span><span class="c1">// All tileXY position</span>
+</code></pre></div></li>
+<li>Draw grid polygon on <a href="../graphics/#lines">graphics object</a>
+    <div class="highlight"><pre><span></span><code><span class="nx">pointsAarray</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">points</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">graphics</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">lineStyle</span><span class="p">(</span><span class="nx">lineWidth</span><span class="p">,</span><span class="w"> </span><span class="nx">color</span><span class="p">,</span><span class="w"> </span><span class="nx">alpha</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">strokePoints</span><span class="p">(</span><span class="nx">points</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
+<span class="p">})</span>
 </code></pre></div></li>
 </ul>
 <h3 id="bounds">Bounds<a class="headerlink" href="#bounds" title="Permanent link">&para;</a></h3>
