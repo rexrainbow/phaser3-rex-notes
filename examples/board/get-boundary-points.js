@@ -67,42 +67,6 @@ var getHexagonGrid = function (scene) {
     return grid;
 };
 
-class EdgeManager {
-    constructor() {
-        this.edges = {};
-    }
-
-    add(p0, p1) {
-        let line;
-        if (p0.x < p1.x) {
-            line = { x1: p0.x, y1: p0.y, x2: p1.x, y2: p1.y };
-        } else if ((p0.x === p1.x) && (p0.y < p1.y)) {
-            line = { x1: p0.x, y1: p0.y, x2: p1.x, y2: p1.y };
-        } else {
-            line = { x1: p1.x, y1: p1.y, x2: p0.x, y2: p0.y };
-        }
-
-        var key = JSON.stringify(line);
-        if (key in this.edges) {
-            delete this.edges[key];
-        } else {
-            this.edges[key] = line;
-        }
-
-        return this;
-    }
-
-    draw(graphics, lineWidth, color, alpha) {
-        for (var key in this.edges) {
-            graphics
-                .lineStyle(lineWidth, color, alpha)
-                .strokeLineShape(this.edges[key])
-        }
-        return this;
-    }
-}
-
-
 var config = {
     type: Phaser.AUTO,
     parent: 'phaser-example',
