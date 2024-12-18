@@ -26,16 +26,16 @@ class Demo extends Phaser.Scene {
             width: 20,
             height: 20
         })
-        .forEachTileXY(function (tileXY, board) {
-            if (Math.random() < 0.5) {
-                var chess = this.rexBoard.add.shape(board, tileXY.x, tileXY.y, 0, 0x333333);               
-            }
-        }, this);
+            .forEachTileXY(function (tileXY, board) {
+                if (Math.random() < 0.5) {
+                    var chess = this.rexBoard.add.shape(board, tileXY.x, tileXY.y, 0, 0x333333);
+                }
+            }, this);
 
-        var boundaries = board.getBoundaryPoints(0);
-        for (var i = 0, cnt = boundaries.length; i < cnt; i++) {
-            graphics.lineStyle(2, 0xff0000, 1).strokePoints(boundaries[i], true);
-        }
+        var pointsAarray = board.getBoundaryPoints(0);
+        pointsAarray.forEach(function (points) {
+            graphics.lineStyle(2, 0xff0000, 1).strokePoints(points, true);
+        })
     }
 
     update() { }
