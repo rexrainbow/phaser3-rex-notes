@@ -1203,18 +1203,16 @@ Offset all of tile positions to `(0, 0)`, and set board size to fit these tile p
     ```javascript
     var pointsAarray = board.getBoundaryPoints(tileXYArray);
     ```
-    or
     ```javascript
     var pointsAarray = board.getBoundaryPoints(chessArray);
     ```
-    or
     ```javascript
     var pointsAarray = board.getBoundaryPoints(tileZ); // All tiles on tileZ
     ```
-    or
     ```javascript
     var pointsAarray = board.getBoundaryPoints(); // All tileXY position
     ```
+    - `pointsAarray` : `[ [{x,y}, {x,y}, ...], [{x,y}, {x,y}, ...], ...]`. Array of polygon path in points.
 - Draw grid polygon on [graphics object](graphics.md#lines)
     ```javascript
     pointsAarray.forEach(function (points) {

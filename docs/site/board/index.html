@@ -12127,15 +12127,15 @@
 <li>Get boundary points around tiles
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">pointsAarray</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">board</span><span class="p">.</span><span class="nx">getBoundaryPoints</span><span class="p">(</span><span class="nx">tileXYArray</span><span class="p">);</span>
 </code></pre></div>
-    or
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">pointsAarray</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">board</span><span class="p">.</span><span class="nx">getBoundaryPoints</span><span class="p">(</span><span class="nx">chessArray</span><span class="p">);</span>
 </code></pre></div>
-    or
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">pointsAarray</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">board</span><span class="p">.</span><span class="nx">getBoundaryPoints</span><span class="p">(</span><span class="nx">tileZ</span><span class="p">);</span><span class="w"> </span><span class="c1">// All tiles on tileZ</span>
 </code></pre></div>
-    or
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">pointsAarray</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">board</span><span class="p">.</span><span class="nx">getBoundaryPoints</span><span class="p">();</span><span class="w"> </span><span class="c1">// All tileXY position</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li><code>pointsAarray</code> : <code>[ [{x,y}, {x,y}, ...], [{x,y}, {x,y}, ...], ...]</code>. Array of polygon path in points.</li>
+</ul>
+</li>
 <li>Draw grid polygon on <a href="../graphics/#lines">graphics object</a>
     <div class="highlight"><pre><span></span><code><span class="nx">pointsAarray</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">points</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">graphics</span>
