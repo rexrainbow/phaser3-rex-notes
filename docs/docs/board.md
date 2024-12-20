@@ -13,6 +13,7 @@ Core object of Board system.
 - [Triangle to tileXY array](https://codepen.io/rexrainbow/pen/wLYmyw)
 - [Ellipse to tileXY array](https://codepen.io/rexrainbow/pen/LYYJmxE)
 - [Bounds](https://codepen.io/rexrainbow/pen/PoeZOGo)
+- [Boundary points](https://codepen.io/rexrainbow/pen/zxOoXPN)
 
 ## Usage
 
@@ -1194,6 +1195,33 @@ Offset all of tile positions to `(0, 0)`, and set board size to fit these tile p
     ```javascript
     graphics.strokePoints(points, true);
     ```
+
+
+### Boundary points
+
+- Get boundary points around tiles
+    ```javascript
+    var pointsAarray = board.getBoundaryPoints(tileXYArray);
+    ```
+    ```javascript
+    var pointsAarray = board.getBoundaryPoints(chessArray);
+    ```
+    ```javascript
+    var pointsAarray = board.getBoundaryPoints(tileZ); // All tiles on tileZ
+    ```
+    ```javascript
+    var pointsAarray = board.getBoundaryPoints(); // All tileXY position
+    ```
+    - `pointsAarray` : `[ [{x,y}, {x,y}, ...], [{x,y}, {x,y}, ...], ...]`. Array of polygon path in points.
+- Draw grid polygon on [graphics object](graphics.md#lines)
+    ```javascript
+    pointsAarray.forEach(function (points) {
+        graphics
+            .lineStyle(lineWidth, color, alpha)
+            .strokePoints(points, true);
+    })
+    ```
+
 
 ### Bounds
 

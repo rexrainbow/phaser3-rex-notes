@@ -10621,6 +10621,12 @@ or
 <span class="kd">var</span><span class="w"> </span><span class="nx">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">getCenter</span><span class="p">(</span><span class="nx">output</span><span class="p">);</span><span class="w">      </span><span class="c1">// output: {x, y}</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">getBounds</span><span class="p">(</span><span class="nx">output</span><span class="p">);</span><span class="w">      </span><span class="c1">// output: {x, y, width, height}</span>
 </code></pre></div>
+<p>Draw bounds on <a href="../graphics/">graphics</a></p>
+<div class="highlight"><pre><span></span><code><span class="c1">// var graphics = scene.add.graphics();</span>
+<span class="nx">graphics</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">lineStyle</span><span class="p">(</span><span class="nx">lineWidth</span><span class="p">,</span><span class="w"> </span><span class="nx">color</span><span class="p">,</span><span class="w"> </span><span class="nx">alpha</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">strokeRectShape</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">getBounds</span><span class="p">());</span>
+</code></pre></div>
 <h3 id="origin">Origin<a class="headerlink" href="#origin" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get

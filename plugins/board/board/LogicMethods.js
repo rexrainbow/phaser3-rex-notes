@@ -27,6 +27,7 @@ import GridAlign from './worldposition/GridAlign.js';
 import GetGridPoints from './worldposition/GetGridPoints.js';
 import GetGridBounds from './worldposition/GetGridBounds.js';
 import GetBoardBounds from './worldposition/GetBoardBounds.js';
+import GetBoundaryPoints from './worldposition/getboundarypoints/GetBoundaryPoints.js';
 
 import LineToTileXYArray from './shape/LineToTileXYArray.js';
 import CircleToTileXYArray from './shape/CircleToTileXYArray.js';
@@ -118,6 +119,7 @@ export default {
     getGridPoints: GetGridPoints,
     getGridBounds: GetGridBounds,
     getBoardBounds: GetBoardBounds,
+    getBoundaryPoints: GetBoundaryPoints,
 
     lineToTileXYArray: LineToTileXYArray,
     circleToTileXYArray: CircleToTileXYArray,

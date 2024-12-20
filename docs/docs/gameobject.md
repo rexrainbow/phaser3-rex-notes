@@ -234,6 +234,15 @@ var output = gameObject.getCenter(output);      // output: {x, y}
 var output = gameObject.getBounds(output);      // output: {x, y, width, height}
 ```
 
+Draw bounds on [graphics](graphics.md)
+
+```javascript
+// var graphics = scene.add.graphics();
+graphics
+    .lineStyle(lineWidth, color, alpha)
+    .strokeRectShape(gameObject.getBounds());
+```
+
 ### Origin
 
 - Get

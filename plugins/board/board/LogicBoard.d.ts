@@ -445,6 +445,16 @@ declare class Board<ChessType = unknown> extends EE {
         out?: Rectangle | true
     ): Rectangle;
 
+    getBoundaryPoints(
+        tileXYArray?: ChessType[] | TileXYType[],
+        out?: WorldXYType[]
+    ): WorldXYType[];
+
+    getBoundaryPoints(
+        tileZ?: number | string,
+        out?: WorldXYType[]
+    ): WorldXYType[];
+
     chessToBoard(chess: any): Board;
     static GetBoard(chess: any): Board;
 

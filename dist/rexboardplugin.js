@@ -3349,6 +3349,183 @@
 
     var globalBounds$2 = new Rectangle$3();
 
+    var GetTileXYArray = function (board, chessArray) {
+        var tileXYArray = [];
+        if (chessArray === undefined) {
+            board.forEachTileXY(function (tileXY, board) {
+                tileXYArray.push({ x: tileXY.x, y: tileXY.y });
+            });
+
+        } else {
+            if (typeof (chessArray) === 'number') {
+                var tileZ = chessArray;
+                chessArray = board.tileZToChessArray(tileZ);
+            }
+            for (var i = 0, cnt = chessArray.length; i < cnt; i++) {
+                tileXYArray.push(board.chessToTileXYZ(chessArray[i]));
+            }
+        }
+
+
+        return tileXYArray;
+    };
+
+    var PointsToSegments = function (points) {
+        var segments = [];
+        for (var i = 0, cnt = points.length; i < cnt; i++) {
+            segments.push(BuildSegment(points[i], points[(i + 1) % cnt]));
+        }
+
+        return segments;
+    };
+
+    var BuildSegment = function (p0, p1) {
+        var segment = [p0, p1];
+        segment = segment.sort(function (a, b) { return (a.x === b.x) ? (a.y - b.y) : (a.x - b.x); });
+        return segment;
+    };
+
+    var GetBoundarySegments = function (board, tileXYArray) {
+        var segmentMap = new Map();
+
+        tileXYArray.forEach(function (tileXY) {
+            var points = board.getGridPoints(tileXY.x, tileXY.y, true);
+            var segments = PointsToSegments(points);
+            segments.forEach(function (segment) {
+                var key = JSON.stringify(segment); // line in json string
+                segmentMap.set(key, (segmentMap.get(key) || 0) + 1);  // Count duplicated lines
+            });
+        });
+
+        return Array.from(segmentMap.entries())
+            // Remove duplicated lines
+            .filter(function (entry) {
+                return (entry[1] === 1)
+            })
+            // Reverse json string back to line [{x,y}, {x,y}]   
+            .map(function (entry) {
+                return JSON.parse(entry[0])
+            })
+    };
+
+    class Graph {
+        constructor() {
+            this.nodes = new Map();
+        }
+
+        addEdges(edges) {
+            for (var i = 0, cnt = edges.length; i < cnt; i++) {
+                this.addEdge(edges[i]);
+            }
+            return this;
+        }
+
+        addEdge(edge) {
+            var nodes = this.nodes;
+
+            var [point1, point2] = edge;
+            var key1 = PointToKey(point1);
+            var key2 = PointToKey(point2);
+
+            if (!nodes.has(key1)) {
+                nodes.set(key1, []);
+            }        nodes.get(key1).push(key2);
+
+            if (!nodes.has(key2)) {
+                nodes.set(key2, []);
+            }        nodes.get(key2).push(key1);
+
+            return this;
+        }
+
+        findCycle(startNodeKey) {
+            if (typeof (startNodeKey) !== 'string') {
+                startNodeKey = PointToKey(startNodeKey);
+            }
+
+            var nodes = this.nodes;
+            var path = [startNodeKey];
+            var visitedEdges = new Set();
+            var stack = [{ current: startNodeKey, nextIndex: 0 }];
+            while (stack.length > 0) {
+                var frame = stack[stack.length - 1];
+                var currentNodeKey = frame.current;
+                var adjacency = nodes.get(currentNodeKey);
+                if (frame.nextIndex >= adjacency.length) {
+                    path.pop();
+                    stack.pop();
+                    continue;
+                }
+
+                var nextNodeKey = adjacency[frame.nextIndex];
+                frame.nextIndex += 1;
+
+                var edgeKey = [currentNodeKey, nextNodeKey].sort().join('->');
+                if (visitedEdges.has(edgeKey)) {
+                    continue;
+                }
+
+                if (nextNodeKey === startNodeKey && path.length > 2) {
+                    return path.map(KeyToPoint);
+                }
+
+                if (!path.includes(nextNodeKey)) {
+                    visitedEdges.add(edgeKey);
+                    stack.push({ current: nextNodeKey, nextIndex: 0 });
+                    path.push(nextNodeKey);
+                }
+            }
+
+            return [];
+        }
+
+    }
+
+    var PointToKey = function (point) {
+        return `${point.x},${point.y}`;
+    };
+
+    var KeyToPoint = function (key) {
+        var [x, y] = key.split(',').map(Number);
+        return { x, y };
+    };
+
+    var GetCyclesPoints = function (segments, out) {
+        if (out === undefined) {
+            out = [];
+        }
+
+        var remainderSegmentMap = new Map();
+        segments.forEach(function (segment) {
+            remainderSegmentMap.set(JSON.stringify(segment), segment);
+        });
+
+        var graph = new Graph();
+        graph.addEdges(segments);
+
+        while (segments.length) {
+            var segment = segments[0];
+            var points = graph.findCycle(segment[0]);
+            out.push(points);
+
+            var cycleSegments = PointsToSegments(points);
+            cycleSegments.forEach(function (segment) {
+                remainderSegmentMap.delete(JSON.stringify(segment));
+            });
+
+            segments = [...remainderSegmentMap.values()];
+        }
+
+        return out;
+    };
+
+    var GetBoundaryPoints = function (chessArray, out) {
+        var tileXYArray = GetTileXYArray(this, chessArray);
+        var segments = GetBoundarySegments(this, tileXYArray);
+        out = GetCyclesPoints(segments, out);
+        return out;
+    };
+
     /**
      * @author       Richard Davey <rich@photonstorm.com>
      * @copyright    2019 Photon Storm Ltd.
@@ -4792,6 +4969,7 @@
         getGridPoints: GetGridPoints$2,
         getGridBounds: GetGridBounds,
         getBoardBounds: GetBoardBounds,
+        getBoundaryPoints: GetBoundaryPoints,
 
         lineToTileXYArray: LineToTileXYArray,
         circleToTileXYArray: CircleToTileXYArray,
