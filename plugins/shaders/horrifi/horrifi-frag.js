@@ -1,4 +1,6 @@
 const frag = `\
+#pragma phaserTemplate(shaderName)
+
 #ifdef GL_FRAGMENT_PRECISION_HIGH
 #define highmedp highp
 #else
@@ -104,6 +106,8 @@ vec2 crtCurve( vec2 uv ) {
   uv = uv * .5 + .5;
   return uv;
 }
+
+#pragma phaserTemplate(fragmentHeader)
 
 void main() {	
   vec2 mainUv = outTexCoord;

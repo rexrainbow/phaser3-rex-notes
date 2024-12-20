@@ -1,21 +1,19 @@
 // import * as Phaser from 'phaser';
-import HorrifiPostFxPipeline from './horrifipipeline';
+import {
+    HorrifiFilter,
+    HorrifiController
+} from './horrififilter';
 
-export default HorrifiPipelinePlugin;
+export default HorrifiFilterPlugin;
 
-declare namespace HorrifiPipelinePlugin {
-
-    interface IConfig extends HorrifiPostFxPipeline.IConfig {
-        name?: string,
-    }
-
+declare namespace HorrifiFilterPlugin {
 }
 
-declare class HorrifiPipelinePlugin extends Phaser.Plugins.BasePlugin {
+declare class HorrifiFilterPlugin extends Phaser.Plugins.BasePlugin {
     add(
         gameObject: Phaser.GameObjects.GameObject,
-        config?: HorrifiPipelinePlugin.IConfig
-    ): HorrifiPostFxPipeline;
+        config?: HorrifiController.IConfig
+    ): HorrifiController;
 
     remove(
         gameObject: Phaser.GameObjects.GameObject,
@@ -25,5 +23,5 @@ declare class HorrifiPipelinePlugin extends Phaser.Plugins.BasePlugin {
     get(
         gameObject: Phaser.GameObjects.GameObject,
         name?: string
-    ): HorrifiPostFxPipeline | HorrifiPostFxPipeline[];
+    ): HorrifiController | HorrifiController[];
 }

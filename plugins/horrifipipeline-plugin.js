@@ -1,14 +1,19 @@
-import HorrifiPostFxPipeline from './horrifipipeline.js';
-import BasePostFxPipelinePlugin from './utils/renderer/postfxpipeline/BasePostFxPipelinePlugin.js';
+import {
+    HorrifiFilter,
+    HorrifiController
+} from './horrififilter.js';
+
+import FilterPluginBase from './utils/renderer/filterpluginbase/FilterPluginBase.js';
 import SetValue from './utils/object/SetValue.js';
 
-class HorrifiPipelinePlugin extends BasePostFxPipelinePlugin {
+class HorrifiFilterPlugin extends FilterPluginBase {
     constructor(pluginManager) {
         super(pluginManager);
-        this.setPostPipelineClass(HorrifiPostFxPipeline, 'rexHorrifiPostFx');
+        this.setFilterClass(HorrifiFilter, HorrifiController);
     }
 }
 
-SetValue(window, 'RexPlugins.Pipelines.HorrifiPostFx', HorrifiPostFxPipeline);
+SetValue(window, 'RexPlugins.Filters.HorrifiFilter', HorrifiFilter);
+SetValue(window, 'RexPlugins.Filters.HorrifiController', HorrifiController);
 
-export default HorrifiPipelinePlugin;
+export default HorrifiFilterPlugin;

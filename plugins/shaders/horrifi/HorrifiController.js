@@ -1,19 +1,14 @@
-import FragSrc from './horrifi-frag.js';
+import { FilterName } from './const.js';
 import Methods from './methods/Methods.js';
-import GetTickDelta from '../../utils/system/GetTickDelta.js';
 
-const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class HorrifiPostFxPipeline extends PostFXPipeline {
-    constructor(game) {
-        super({
-            name: 'rexHorrifiPostFx',
-            game: game,
-            renderTarget: true,
-            fragShader: FragSrc
-        });
-        
+class HorrifiController extends Phaser.Filters.Controller {
+    static FilterName = FilterName;
+
+    constructor(camera, config) {
+        super(camera, FilterName);
+
         this.now = 0;
 
         // Bloon
@@ -50,6 +45,8 @@ class HorrifiPostFxPipeline extends PostFXPipeline {
         this.crtEnable = false;
         this.crtWidth = 0;
         this.crtHeight = 0;
+
+        this.resetFromJSON(config);
     }
 
     resetFromJSON(o) {
@@ -90,50 +87,11 @@ class HorrifiPostFxPipeline extends PostFXPipeline {
 
         return this;
     }
-
-    onPreRender() {
-        this.set1f('noiseSeed', this.noiseSeed);
-
-        // Bloon
-        this.set1f('bloomEnable', (this.bloomEnable) ? 1 : 0);
-        this.set3f('bloom', this.bloomRadius, this.bloomIntensity, this.bloomThreshold);
-        this.set2f('bloomTexel', this.bloomTexelWidth, this.bloomTexelHeight);
-
-        // Chromatic abberation
-        this.set1f('chromaticEnable', (this.chromaticEnable) ? 1 : 0);
-        this.set1f('chabIntensity', this.chabIntensity);
-
-        // Vignette
-        this.set1f('vignetteEnable', (this.vignetteEnable) ? 1 : 0);
-        this.set2f('vignette', this.vignetteStrength, this.vignetteIntensity);
-
-        // Noise
-        this.set1f('noiseEnable', (this.noiseEnable) ? 1 : 0);
-        this.set1f('noiseStrength', this.noiseStrength);
-
-        // VHS
-        this.set1f('vhsEnable', (this.vhsEnable) ? 1 : 0);
-        this.set1f('vhsStrength', this.vhsStrength);
-
-        // Scanlines
-        this.set1f('scanlinesEnable', (this.scanlinesEnable) ? 1 : 0);
-        this.set1f('scanStrength', this.scanStrength);
-
-        // CRT        
-        this.set1f('crtEnable', (this.crtEnable) ? 1 : 0);
-        this.set2f('crtSize', this.crtWidth, this.crtHeight);
-
-        // Eanble by VHS    
-        if (this.vhsEnable) {
-            this.now += GetTickDelta(this.game);
-        }
-        this.set1f('time', this.now);
-    }
 }
 
 Object.assign(
-    HorrifiPostFxPipeline.prototype,
+    HorrifiController.prototype,
     Methods
 )
 
-export default HorrifiPostFxPipeline;
+export default HorrifiController;
