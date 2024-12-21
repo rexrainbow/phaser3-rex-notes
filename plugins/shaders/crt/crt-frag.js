@@ -1,4 +1,6 @@
 const frag = `\
+#pragma phaserTemplate(shaderName)
+
 #ifdef GL_FRAGMENT_PRECISION_HIGH
 #define highmedp highp
 #else
@@ -14,6 +16,8 @@ varying vec2 outTexCoord;
 uniform vec2 warp;
 uniform float scanLineStrength;
 uniform float scanLineWidth;
+
+#pragma phaserTemplate(fragmentHeader)
 
 void main (void) {
   // squared distance from center

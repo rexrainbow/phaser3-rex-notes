@@ -1,20 +1,18 @@
-import FragSrc from './crt-frag.js';
+import { FilterName } from './const.js';
 
-const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class CrtPostFxPipeline extends PostFXPipeline {
-    constructor(game) {
-        super({
-            name: 'rexCrtPostFx',
-            game: game,
-            renderTarget: true,
-            fragShader: FragSrc
-        });
+class CrtController extends Phaser.Filters.Controller {
+    static FilterName = FilterName;
+
+    constructor(camera, config) {
+        super(camera, FilterName);
 
         this.warp = 0;
         this.scanLineStrength = 0.2;
         this.scanLineWidth = 1024;
+
+        this.resetFromJSON(config);
     }
 
     resetFromJSON(o) {
@@ -22,12 +20,6 @@ class CrtPostFxPipeline extends PostFXPipeline {
         this.setScanStrength(GetValue(o, 'scanLineStrength', 0.2));
         this.setScanLineWidth(GetValue(o, 'scanLineWidth', 1024));
         return this;
-    }
-
-    onPreRender() {
-        this.set2f('warp', this.warpX, this.warpY);
-        this.set1f('scanLineStrength', this.scanLineStrength);
-        this.set1f('scanLineWidth', this.scanLineWidth);
     }
 
     // warp
@@ -50,4 +42,4 @@ class CrtPostFxPipeline extends PostFXPipeline {
     }
 }
 
-export default CrtPostFxPipeline;
+export default CrtController;
