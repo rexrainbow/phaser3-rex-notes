@@ -1,6 +1,8 @@
 import BaseState from './BaseState.js';
+// Actions
 import EliminateChess from '../actions/EliminateChess.js';
 import FallingAllChess from '../actions/FallingAllChess.js';
+import IsPromise from '../../../plugins/utils/object/IsPromise.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const SetStruct = Phaser.Structs.Set;
@@ -96,11 +98,19 @@ class State extends BaseState {
     // ELIMINATING
     enter_ELIMINATING() {
         var board = this.board.board,
+            bejeweled = this.bejeweled,
             chessArray = this.eliminatedChessArray;
 
-        this.bejeweled.emit('eliminate', chessArray, board, this.bejeweled);
+        this.bejeweled.emit('eliminate', chessArray, board, bejeweled);
 
-        this.eliminatingAction(chessArray, board, this.bejeweled);
+        var result = this.eliminatingAction(chessArray, board, bejeweled);
+        if (IsPromise(result)) {
+            bejeweled.waitEvent(bejeweled, 'eliminate.complete');
+            result
+                .then(function () {
+                    bejeweled.emit('eliminate.complete');
+                })
+        }
 
         // Remove eliminated chess
         chessArray.forEach(board.removeChess, board);
@@ -118,11 +128,19 @@ class State extends BaseState {
 
     // FALLING
     enter_FALLING() {
-        var board = this.board.board;
+        var board = this.board.board,
+            bejeweled = this.bejeweled;
 
-        this.bejeweled.emit('fall', board, this.bejeweled);
+        this.bejeweled.emit('fall', board, bejeweled);
 
-        this.fallingAction(board, this.bejeweled);
+        var result = this.fallingAction(board, bejeweled);
+        if (IsPromise(result)) {
+            bejeweled.waitEvent(bejeweled, 'fall.complete');
+            result
+                .then(function () {
+                    bejeweled.emit('fall.complete');
+                })
+        }
 
         // To next state when all completed
         this.next();

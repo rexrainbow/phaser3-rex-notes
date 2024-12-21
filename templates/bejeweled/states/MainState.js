@@ -3,6 +3,7 @@ import MatchState from './MatchState.js';
 // Actions
 import SelectChess from '../actions/SelectChess.js';
 import SwapChess from '../actions/SwapChess.js'
+import IsPromise from '../../../plugins/utils/object/IsPromise.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -105,11 +106,19 @@ class State extends BaseState {
     // SELECT1
     enter_SELECT1() {
         var board = this.board.board,
+            bejeweled = this.bejeweled,
             chess = this.selectedChess1;
 
-        this.bejeweled.emit('select1', chess, board, this.bejeweled);
+        this.bejeweled.emit('select1', chess, board, bejeweled);
 
-        this.select1Action(chess, board, this.bejeweled);
+        var result = this.select1Action(chess, board, bejeweled);
+        if (IsPromise(result)) {
+            bejeweled.waitEvent(bejeweled, 'select1.complete');
+            result
+                .then(function () {
+                    bejeweled.emit('select1.complete');
+                })
+        }
 
         // To next state when all completed
         this.next();
@@ -145,11 +154,19 @@ class State extends BaseState {
     // SELECT2
     enter_SELECT2() {
         var board = this.board.board,
+            bejeweled = this.bejeweled,
             chess = this.selectedChess2;
 
-        this.bejeweled.emit('select2', chess, board, this.bejeweled);
+        this.bejeweled.emit('select2', chess, board, bejeweled);
 
-        this.select2Action(chess, board, this.bejeweled);
+        var result = this.select2Action(chess, board, bejeweled);
+        if (IsPromise(result)) {
+            bejeweled.waitEvent(bejeweled, 'select2.complete');
+            result
+                .then(function () {
+                    bejeweled.emit('select2.complete');
+                })
+        }
 
         // To next state when all completed
         this.next();
@@ -162,12 +179,20 @@ class State extends BaseState {
     // SWAP
     enter_SWAP() {
         var board = this.board.board,
+            bejeweled = this.bejeweled,
             chess1 = this.selectedChess1,
             chess2 = this.selectedChess2;
 
-        this.bejeweled.emit('swap', chess1, chess2, board, this.bejeweled);
+        this.bejeweled.emit('swap', chess1, chess2, board, bejeweled);
 
-        this.swapAction(chess1, chess2, board, this.bejeweled);
+        var result = this.swapAction(chess1, chess2, board, bejeweled);
+        if (IsPromise(result)) {
+            bejeweled.waitEvent(bejeweled, 'swap.complete');
+            result
+                .then(function () {
+                    bejeweled.emit('swap.complete');
+                })
+        }
 
         // To next state when all completed
         this.next();
@@ -197,12 +222,20 @@ class State extends BaseState {
     // UNDO_SWAP
     enter_UNDOSWAP() {
         var board = this.board.board,
+            bejeweled = this.bejeweled,
             chess1 = this.selectedChess1,
             chess2 = this.selectedChess2;
 
-        this.bejeweled.emit('undo-swap', chess1, chess2, board, this.bejeweled);
+        this.bejeweled.emit('undo-swap', chess1, chess2, board, bejeweled);
 
-        this.undoSwapAction(chess1, chess2, board, this.bejeweled);
+        var result = this.undoSwapAction(chess1, chess2, board, bejeweled);
+        if (IsPromise(result)) {
+            bejeweled.waitEvent(bejeweled, 'undo-swap.complete');
+            result
+                .then(function () {
+                    bejeweled.emit('undo-swap.complete');
+                })
+        }
 
         // To next state when all completed
         this.next();
