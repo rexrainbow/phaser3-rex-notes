@@ -7,6 +7,10 @@ export default {
         return this;
     },
 
+    waitCallback() {
+        return this.waitEvents.waitCallback();
+    },
+
     isWaitingEvent() {
         return !this.waitEvents.noWaitEvent;
     },
