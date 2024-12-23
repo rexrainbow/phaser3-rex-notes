@@ -28,20 +28,23 @@ var MoveToTile = function (tileX, tileY, direction) {
         }
     }
 
-    // invalid tile position
+    // Invalid tile position
     if ((tileX == null) || (tileY == null)) {
         this.lastMoveResult = false;
         return this;
     }
+
     if (direction === undefined) {
         globTileXYZ.x = tileX;
         globTileXYZ.y = tileY
         direction = board.getNeighborTileDirection(myTileXYZ, globTileXYZ);
     }
+
     if (!this.canMoveTo(tileX, tileY, direction)) {
         this.lastMoveResult = false;
         return this;
     }
+
     this.destinationTileX = tileX;
     this.destinationTileY = tileY;
     this.destinationDirection = direction;

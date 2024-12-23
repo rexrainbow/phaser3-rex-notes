@@ -81,7 +81,7 @@ class State extends BaseState {
     // PRETEST
 
     // SELECT1START
-    enter_SELECT1() {
+    enter_SELECT1START() {
         this.selectedChess1 = undefined;
         this.selectedChess2 = undefined;
 
