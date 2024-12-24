@@ -1,5 +1,5 @@
 import TickTask from '../../utils/componentbase/SceneUpdateTickTask.js';
-import Methods from './Methods.js';
+import Methods from './methods/Methods.js';
 import MoveToTask from './movetotask/MoveToTask.js';
 import MoveNextLine from './movetotask/MoveNextLine.js';
 import GetChessData from '../chess/GetChessData.js';
