@@ -3,7 +3,9 @@ var GetFilterList = function (gameObject, external) {
         external = false;
     }
 
-    gameObject.enableFilters(); // Do nothing if filters feature is enabled.
+    if (!gameObject.filters) {
+        gameObject.enableFilters().focusFilters()
+    }
 
     var filterList = (!external) ? gameObject.filters.internal : gameObject.filters.external;
 

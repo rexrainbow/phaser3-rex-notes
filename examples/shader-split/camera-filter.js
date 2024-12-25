@@ -1,5 +1,5 @@
 import phaser from '../../../phaser/src/phaser.js';
-import { SplitFilter, SplitController } from '../../plugins/splitfilter.js';
+import SplitFilterPlugin from '../../plugins/splitfilter-plugin.js';
 import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 
 class Demo extends Phaser.Scene {
@@ -11,26 +11,16 @@ class Demo extends Phaser.Scene {
 
     preload() {
         this.load.image('classroom', 'assets/images/backgrounds/classroom.png');
-
-        if (!this.renderer.renderNodes.hasNode(SplitFilter.FilterName)) {
-            this.renderer.renderNodes.addNodeConstructor(SplitFilter.FilterName, SplitFilter);
-        }
     }
 
     create() {
         var gameObject = this.add.image(400, 300, 'classroom').setScale(0.8);
 
-        var filterList = this.cameras.main.filters.internal;
-        var controller = filterList.add(
-            new SplitController(filterList.camera, {
-                width: 20,
-                height: 20,
-                angle: 30
-            })
-        )
-
-        this.input.on('pointerdown', function (pointer) {
-            controller.setSplit(pointer.x, pointer.y);
+        var camera = this.cameras.main;
+        var controller = this.plugins.get('rexSplitFilter').add(camera, {
+            width: 20,
+            height: 20,
+            angle: 30
         })
 
         var gui = new Dat.GUI();
@@ -56,6 +46,13 @@ var config = {
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
     scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexSplitFilter',
+            plugin: SplitFilterPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

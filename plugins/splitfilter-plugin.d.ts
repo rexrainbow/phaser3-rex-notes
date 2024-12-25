@@ -3,25 +3,12 @@ import {
     SplitFilter,
     SplitController
 } from './splitfilter';
+import FilterPluginBase from './utils/renderer/filterpluginbase/FilterPluginBase';
 
 export default SplitFilterPlugin;
 
 declare namespace SplitFilterPlugin {
 }
 
-declare class SplitFilterPlugin extends Phaser.Plugins.BasePlugin {
-    add(
-        gameObject: Phaser.GameObjects.GameObject,
-        config?: SplitController.IConfig
-    ): SplitController;
-
-    remove(
-        gameObject: Phaser.GameObjects.GameObject,
-        name?: string
-    ): this;
-
-    get(
-        gameObject: Phaser.GameObjects.GameObject,
-        name?: string
-    ): SplitController | SplitController[];
+declare class SplitFilterPlugin extends FilterPluginBase<SplitController, SplitController.IConfig> {
 }

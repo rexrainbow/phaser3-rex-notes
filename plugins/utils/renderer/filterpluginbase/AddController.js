@@ -6,7 +6,6 @@ var AddController = function (gameObject, ControllerClass, config, external) {
     }
 
     var filterList = GetFilterList(gameObject, external);
-    gameObject.focusFilters(); // Suggestion: invoke `focusFilters()` inside `enableFilters()` method
 
     var controller = filterList.add(
         new ControllerClass(filterList.camera, config)
