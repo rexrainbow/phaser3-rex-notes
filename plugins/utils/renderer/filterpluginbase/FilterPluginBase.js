@@ -14,19 +14,22 @@ class FilterPluginBase extends Phaser.Plugins.BasePlugin {
         var eventEmitter = this.game.events;
         eventEmitter.once('destroy', this.destroy, this);
 
-        RegisterFilter(this.game, this.FilterClass);
+        eventEmitter.once('ready', function () {
+            RegisterFilter(this.game, this.FilterClass);
+        }, this)
+
     }
 
-    add(gameObject, config, external=false) {
+    add(gameObject, config, external = false) {
         return AddController(gameObject, this.ControllerClass, config, external);
     }
 
-    remove(gameObject, name, external=false) {
+    remove(gameObject, name, external = false) {
         RemoveController(gameObject, this.ControllerClass, name, external);
         return this;
     }
 
-    get(gameObject, name, external=false) {
+    get(gameObject, name, external = false) {
         return GetController(gameObject, this.ControllerClass, name, external);
     }
 }
