@@ -18,21 +18,17 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var gameObject = this.add.image(440, 340, 'classroom').setScale(0.8);
+        var gameObject = this.add.image(440, 340, 'classroom').setScale(0.8)
+            .enableFilters();
 
-        var box = this.add.renderFilters(gameObject);
-        var filterList = box.filters.internal;
+        var filterList = gameObject.filters.internal;
         var controller = filterList.add(
-            new SplitController(box.camera, {
+            new SplitController(filterList.camera, {
                 width: 20,
                 height: 20,
                 angle: 30
             })
         );
-
-        this.input.on('pointerdown', function (pointer) {
-            controller.setSplit(pointer.x, pointer.y);
-        })
 
         var gui = new Dat.GUI();
         gui.add(controller, 'splitX', 0, 800);
