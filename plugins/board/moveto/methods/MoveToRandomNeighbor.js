@@ -1,5 +1,5 @@
-import Clone from '../../utils/object/Clone.js';
-import Shuffle from '../../utils/array/Shuffle.js';
+import Clone from '../../../utils/object/Clone.js';
+import Shuffle from '../../../utils/array/Shuffle.js';
 
 var MoveToRandomNeighbor = function () {
     var board = this.chessData.board;

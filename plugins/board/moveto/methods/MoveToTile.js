@@ -1,5 +1,7 @@
-import GetValue from '../../utils/object/GetValue.js';
+import GetValue from '../../../utils/object/GetValue.js';
 import GetSneakTileZ from './GetSneakTileZ.js';
+import MoveAloneLine from '../movetotask/MoveAloneLine.js';
+import AddMoveLine from '../movetotask/AddMoveLine.js';
 
 var MoveToTile = function (tileX, tileY, direction) {
     var board = this.chessData.board;
@@ -28,20 +30,23 @@ var MoveToTile = function (tileX, tileY, direction) {
         }
     }
 
-    // invalid tile position
+    // Invalid tile position
     if ((tileX == null) || (tileY == null)) {
         this.lastMoveResult = false;
         return this;
     }
+
     if (direction === undefined) {
         globTileXYZ.x = tileX;
         globTileXYZ.y = tileY
         direction = board.getNeighborTileDirection(myTileXYZ, globTileXYZ);
     }
+
     if (!this.canMoveTo(tileX, tileY, direction)) {
         this.lastMoveResult = false;
         return this;
     }
+
     this.destinationTileX = tileX;
     this.destinationTileY = tileY;
     this.destinationDirection = direction;
@@ -52,7 +57,7 @@ var MoveToTile = function (tileX, tileY, direction) {
         if ((neighborTileXY.x === tileX) && (neighborTileXY.y === tileY)) {
             // not a wrapped neighbor
             var out = board.tileXYToWorldXY(tileX, tileY, true);
-            this.moveAlongLine(undefined, undefined, out.x, out.y);
+            MoveAloneLine.call(this, undefined, undefined, out.x, out.y);
         } else {
             // wrapped neighbor
             // line 0
@@ -64,7 +69,7 @@ var MoveToTile = function (tileX, tileY, direction) {
             var startY = out.y;
             var endX = (startX + originNeighborWorldX) / 2;
             var endY = (startY + originNeighborWorldY) / 2;
-            this.moveAlongLine(undefined, undefined, endX, endY);
+            MoveAloneLine.call(this, undefined, undefined, endX, endY);
             // line 1
             var oppositeDirection = board.getOppositeDirection(tileX, tileY, direction);
             board.grid.getNeighborTileXY(tileX, tileY, oppositeDirection, neighborTileXY);
@@ -76,11 +81,11 @@ var MoveToTile = function (tileX, tileY, direction) {
             endY = out.y;
             startX = (originNeighborWorldX + endX) / 2;
             startY = (originNeighborWorldY + endY) / 2;
-            this.addMoveLine(startX, startY, endX, endY);
+            AddMoveLine.call(this, startX, startY, endX, endY);
         }
     } else {
         var out = board.tileXYToWorldXY(tileX, tileY, true);
-        this.moveAlongLine(undefined, undefined, out.x, out.y);
+        MoveAloneLine.call(this, undefined, undefined, out.x, out.y);
     }
 
     var tileZ = myTileXYZ.z;

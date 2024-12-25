@@ -1,6 +1,7 @@
 import TickTask from '../../utils/componentbase/SceneUpdateTickTask.js';
-import Methods from './Methods.js';
-import MoveToTask from '../../behaviors/moveto/MoveTo.js';
+import Methods from './methods/Methods.js';
+import MoveToTask from './movetotask/MoveToTask.js';
+import MoveNextLine from './movetotask/MoveNextLine.js';
 import GetChessData from '../chess/GetChessData.js';
 import GetValue from '../../utils/object/GetValue.js';
 
@@ -153,41 +154,6 @@ class MoveTo extends TickTask {
         return this;
     }
 
-    moveAlongLine(startX, startY, endX, endY) {
-        if (startX !== undefined) {
-            this.parent.x = startX;
-        }
-        if (startY !== undefined) {
-            this.parent.y = startY;
-        }
-        this.moveToTask.moveTo(endX, endY);
-        return this;
-    };
-
-    addMoveLine(startX, startY, endX, endY) {
-        if (!this.moveToTask.hasOwnProperty('nextlines')) {
-            this.moveToTask.nextlines = [];
-        }
-        this.moveToTask.nextlines.push(
-            [startX, startY, endX, endY]
-        );
-        return this;
-    };
-
-    moveNextLine() {
-        var nextlines = this.moveToTask.nextlines;
-        if (!nextlines) {
-            return false;
-        }
-        if (nextlines.length === 0) {
-            return false;
-        }
-        // has next line
-        this.moveAlongLine.apply(this, nextlines[0]);
-        nextlines.length = 0;
-        return true;
-    }
-
     update(time, delta) {
         if ((!this.isRunning) || (!this.enable)) {
             return this;
@@ -196,7 +162,7 @@ class MoveTo extends TickTask {
         var moveToTask = this.moveToTask;
         moveToTask.update(time, delta);
         if (!moveToTask.isRunning) {
-            if (!this.moveNextLine()) {
+            if (!MoveNextLine.call(this)) {
                 this.complete();
             }
             return this;

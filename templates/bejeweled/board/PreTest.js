@@ -16,12 +16,12 @@ var PreTest = function () {
             tileA.y = tileY;
             for (var dir = 0, dirCnt = directions.length; dir < dirCnt; dir++) {
                 tileB = this.board.getNeighborTileXY(tileA, dir);
-                // swap symbol
-                swapSymbols(match, tileA, tileB);
-                // any match?
+                // Swap symbol
+                SwapSymbols(match, tileA, tileB);
+                // Any match?
                 this.preTestResult = AnyMatch.call(this, 3);
-                // swap symbol back
-                swapSymbols(match, tileA, tileB);
+                // Swap symbol back
+                SwapSymbols(match, tileA, tileB);
 
                 if (this.preTestResult) {
                     return true;
@@ -32,7 +32,7 @@ var PreTest = function () {
     return false;
 }
 
-var swapSymbols = function (match, tileA, tileB) {
+var SwapSymbols = function (match, tileA, tileB) {
     var symbolA = match.getSymbol(tileA.x, tileA.y);
     var symbolB = match.getSymbol(tileB.x, tileB.y);
     match.setSymbol(tileA.x, tileA.y, symbolB);
