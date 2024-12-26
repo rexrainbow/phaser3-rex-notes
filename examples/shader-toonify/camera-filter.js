@@ -1,5 +1,5 @@
 import phaser from '../../../phaser/src/phaser.js';
-import { ToonifyFilter, ToonifyController } from '../../plugins/toonifyfilter.js';
+import ToonifyFilterPlugin from '../../plugins/toonifyfilter-plugin.js';
 import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 
 class Demo extends Phaser.Scene {
@@ -11,20 +11,16 @@ class Demo extends Phaser.Scene {
 
     preload() {
         this.load.image('classroom', 'assets/images/backgrounds/classroom.png');
-
-        if (!this.renderer.renderNodes.hasNode(ToonifyFilter.FilterName)) {
-            this.renderer.renderNodes.addNodeConstructor(ToonifyFilter.FilterName, ToonifyFilter);
-        }
     }
 
     create() {
         this.add.image(400, 300, 'classroom');
 
-        var filterList = this.cameras.main.filters.internal;
-        var controller = filterList.add(
-            new ToonifyController(filterList.camera)
-        )
-    
+
+        var camera = this.cameras.main;
+        var controller = this.plugins.get('rexToonifyFilter').add(camera, {
+        })
+
         var gui = new Dat.GUI();
         gui.add(controller, 'edgeThreshold', 0, 1.1);
         gui.add(controller, 'hueLevels', 0, 10);
@@ -46,6 +42,13 @@ var config = {
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
     scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexToonifyFilter',
+            plugin: ToonifyFilterPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

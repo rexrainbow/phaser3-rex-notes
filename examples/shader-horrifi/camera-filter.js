@@ -1,5 +1,5 @@
 import phaser from '../../../phaser/src/phaser.js';
-import { HorrifiFilter, HorrifiController } from '../../plugins/horrififilter.js';
+import HorrifiFilterPlugin from '../../plugins/horrififilter-plugin.js';
 import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 
 class Demo extends Phaser.Scene {
@@ -11,47 +11,40 @@ class Demo extends Phaser.Scene {
 
     preload() {
         this.load.image('classroom', 'assets/images/backgrounds/classroom.png');
-
-        if (!this.renderer.renderNodes.hasNode(HorrifiFilter.FilterName)) {
-            this.renderer.renderNodes.addNodeConstructor(HorrifiFilter.FilterName, HorrifiFilter);
-        }
     }
 
     create() {
         var gameObject = this.add.image(400, 300, 'classroom')//.setScale(0.75);
 
-        var filterList = this.cameras.main.filters.internal;
-        var controller = filterList.add(
-            new HorrifiController(filterList.camera, {
-                enable: true,
+        var controller = this.plugins.get('rexHorrifiFilter').add(gameObject, {
+            enable: true,
 
-                // Bloom
-                bloomRadius: 25,
-                bloomIntensity: 0.5,
-                bloomThreshold: 0.75,
-                bloomTexelWidth: 0.5,
+            // Bloom
+            bloomRadius: 25,
+            bloomIntensity: 0.5,
+            bloomThreshold: 0.75,
+            bloomTexelWidth: 0.5,
 
-                // Chromatic abberation
-                chabIntensity: 0.6,
+            // Chromatic abberation
+            chabIntensity: 0.6,
 
-                // Vignette
-                vignetteStrength: 0.8,
-                vignetteIntensity: 0.85,
+            // Vignette
+            vignetteStrength: 0.8,
+            vignetteIntensity: 0.85,
 
-                // Noise
-                noiseStrength: 0.5,
-                // noiseSeed: 0.5,
+            // Noise
+            noiseStrength: 0.5,
+            // noiseSeed: 0.5,
 
-                // VHS
-                vhsStrength: 0.5,
+            // VHS
+            vhsStrength: 0.5,
 
-                // Scanlines
-                scanStrength: 0.5,
+            // Scanlines
+            scanStrength: 0.5,
 
-                //CRT
-                crtWidth: 2,
-            })
-        )
+            //CRT
+            crtWidth: 2,
+        })
 
         var gui = new Dat.GUI();
 
@@ -113,6 +106,13 @@ var config = {
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
     scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexHorrifiFilter',
+            plugin: HorrifiFilterPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

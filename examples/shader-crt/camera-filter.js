@@ -1,5 +1,6 @@
 import phaser from '../../../phaser/src/phaser.js';
 import { CrtFilter, CrtController } from '../../plugins/crtfilter.js';
+import CrtFilterPlugin from '../../plugins/crtfilter-plugin.js';
 import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 
 class Demo extends Phaser.Scene {
@@ -20,15 +21,12 @@ class Demo extends Phaser.Scene {
     create() {
         var gameObject = this.add.image(400, 300, 'classroom');
 
-        var filterList = this.cameras.main.filters.internal;
-        var controller = filterList.add(
-            new CrtController(filterList.camera, {
-                warpX: 0.75,
-                warpY: 0.75,
-                scanLineStrength: 0.2,
-                scanLineWidth: 1024
-            })
-        )
+        var controller = this.plugins.get('rexCrtFilter').add(gameObject, {
+            warpX: 0.75,
+            warpY: 0.75,
+            scanLineStrength: 0.2,
+            scanLineWidth: 1024
+        })
 
         var gui = new Dat.GUI();
         gui.add(controller, 'warpX', 0, 1);
@@ -50,8 +48,15 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo,
     pixelArt: true,
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexCrtFilter',
+            plugin: CrtFilterPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

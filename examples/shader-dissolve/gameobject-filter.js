@@ -1,5 +1,5 @@
 import phaser from '../../../phaser/src/phaser.js';
-import { DisolveFilter, DissolveController } from '../../plugins/dissolvefilter.js';
+import DisolveFilterPlugin from '../../plugins/dissolvefilter-plugin.js';
 import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 
 class Demo extends Phaser.Scene {
@@ -12,20 +12,13 @@ class Demo extends Phaser.Scene {
     preload() {
         this.load.image('classroom', 'assets/images/backgrounds/classroom.png');
         this.load.image('road', 'assets/images/backgrounds/road.png');
-
-        if (!this.renderer.renderNodes.hasNode(DisolveFilter.FilterName)) {
-            this.renderer.renderNodes.addNodeConstructor(DisolveFilter.FilterName, DisolveFilter);
-        }
     }
 
     create() {
         var gameObject = this.add.image(400, 300, 'classroom');
 
-        var box = this.add.renderFilters(gameObject);
-        var filterList = box.filters.internal;
-        var controller = filterList.add(
-            new DissolveController(box.camera)
-        );
+        var controller = this.plugins.get('rexDisolveFilter').add(gameObject, {
+        })
 
         var tweenTask;
         this.input.on('pointerdown', function () {
@@ -73,6 +66,13 @@ var config = {
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
     scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexDisolveFilter',
+            plugin: DisolveFilterPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

@@ -1,16 +1,10 @@
 import phaser from '../../../phaser/src/phaser.js';
-import { DisolveFilter, DissolveController } from '../../plugins/dissolvefilter.js';
+import DisolveFilterPlugin from '../../plugins/dissolvefilter-plugin.js';
 
 var DissolveMainCamera = function (scene, duration) {
-    if (!scene.renderer.renderNodes.hasNode(DisolveFilter.FilterName)) {
-        scene.renderer.renderNodes.addNodeConstructor(DisolveFilter.FilterName, DisolveFilter);
-    }
-
-    var filterList = scene.cameras.main.filters.internal;
-    var controller = filterList.add(
-        new DissolveController(filterList.camera)
-    )
-
+    var camera = scene.cameras.main;
+    var controller = scene.plugins.get('rexDisolveFilter').add(camera, {
+    })
 
     scene.tweens.add({
         targets: controller,
@@ -21,7 +15,7 @@ var DissolveMainCamera = function (scene, duration) {
         yoyo: false
     })
         .on('complete', function () {
-            filterList.remove(controller);
+            scene.plugins.get('rexDisolveFilter').remove(camera);
         })
 }
 
@@ -99,6 +93,13 @@ var config = {
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
     scene: [SceneA, SceneB],
+    plugins: {
+        global: [{
+            key: 'rexDisolveFilter',
+            plugin: DisolveFilterPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);
