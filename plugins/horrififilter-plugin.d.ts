@@ -3,25 +3,12 @@ import {
     HorrifiFilter,
     HorrifiController
 } from './horrififilter';
+import FilterPluginBase from './utils/renderer/filterpluginbase/FilterPluginBase';
 
 export default HorrifiFilterPlugin;
 
 declare namespace HorrifiFilterPlugin {
 }
 
-declare class HorrifiFilterPlugin extends Phaser.Plugins.BasePlugin {
-    add(
-        gameObject: Phaser.GameObjects.GameObject,
-        config?: HorrifiController.IConfig
-    ): HorrifiController;
-
-    remove(
-        gameObject: Phaser.GameObjects.GameObject,
-        name?: string
-    ): this;
-
-    get(
-        gameObject: Phaser.GameObjects.GameObject,
-        name?: string
-    ): HorrifiController | HorrifiController[];
+declare class HorrifiFilterPlugin extends FilterPluginBase<HorrifiController, HorrifiController.IConfig> {
 }

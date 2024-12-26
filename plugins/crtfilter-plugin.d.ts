@@ -1,29 +1,14 @@
 // import * as Phaser from 'phaser';
-import BarrelPostFxPipeline from './barrelpipeline';
+import {
+    CrtFilter,
+    CrtController
+} from './crtfilter';
+import FilterPluginBase from './utils/renderer/filterpluginbase/FilterPluginBase';
 
-export default BarrelPipelinePlugin;
+export default CrtFilterPlugin;
 
-declare namespace BarrelPipelinePlugin {
-
-    interface IConfig extends BarrelPostFxPipeline.IConfig {
-        name?: string
-    }
-
+declare namespace CrtFilterPlugin {
 }
 
-declare class BarrelPipelinePlugin extends Phaser.Plugins.BasePlugin {
-    add(
-        gameObject: Phaser.GameObjects.GameObject,
-        config?: BarrelPipelinePlugin.IConfig
-    ): BarrelPostFxPipeline;
-
-    remove(
-        gameObject: Phaser.GameObjects.GameObject,
-        name?: string
-    ): this;
-
-    get(
-        gameObject: Phaser.GameObjects.GameObject,
-        name?: string
-    ): BarrelPostFxPipeline | BarrelPostFxPipeline[];
+declare class CrtFilterPlugin extends FilterPluginBase<CrtController, CrtController.IConfig> {
 }
