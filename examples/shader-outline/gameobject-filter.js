@@ -1,5 +1,5 @@
-import phaser from 'phaser/src/phaser.js';
-import OutlinePipelinePlugin from '../../plugins/outlinepipeline-plugin.js';
+import phaser from '../../../phaser/src/phaser.js';
+import OutlineFilterPlugin from '../../plugins/outlinefilter-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -13,37 +13,36 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var postFxPlugin = this.plugins.get('rexOutlinePipeline');
-        // postFxPlugin.setQuality(0.08); // Will sample 8 points, default is 10 points with quality = 0.1
         for (var i = 0; i < 20; i++) {
-            let gameObject = this.add.container(0, 0, [
-                this.add.image(0, 0, 'mushroom')
-            ])
-                .setSize(64, 64)
-                .setRandomPosition(100, 100, 600, 400)
-
-            // let gameObject = this.add.image(0, 0, 'mushroom')
+            // let gameObject = this.add.container(0, 0, [
+            //     this.add.image(0, 0, 'mushroom')
+            // ])
+            //     .setSize(64, 64)
             //     .setRandomPosition(100, 100, 600, 400)
+
+            let gameObject = this.add.image(0, 0, 'mushroom')
+                .setRandomPosition(100, 100, 600, 400)
 
             gameObject
                 .setInteractive()
                 .on('pointerover', function () {
-                    // Add postfx pipeline
-                    postFxPlugin.add(gameObject, {
+                    // Add outline filter
+                    this.plugins.get('rexOutlineFilter').add(gameObject, {
                         thickness: 3,
                         outlineColor: 0xff8a50
                     });
 
                     // Cascade 2nd outline
-                    postFxPlugin.add(gameObject, {
+                    this.plugins.get('rexOutlineFilter').add(gameObject, {
                         thickness: 5,
                         outlineColor: 0xc41c00
                     });
-                })
+                }, this)
                 .on('pointerout', function () {
-                    // Remove all outline post-fx pipelines
-                    postFxPlugin.remove(gameObject);
-                })
+                    // Remove all outline filter
+                    this.plugins.get('rexOutlineFilter').remove(gameObject);
+                }, this)
+
         }
     }
 
@@ -64,8 +63,8 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-            key: 'rexOutlinePipeline',
-            plugin: OutlinePipelinePlugin,
+            key: 'rexOutlineFilter',
+            plugin: OutlineFilterPlugin,
             start: true
         }]
     }

@@ -1,6 +1,10 @@
 // Reference: https://github.com/pixijs/pixi-filters/blob/master/filters/outline/src/outline.frag
 
 const frag = `\
+#pragma phaserTemplate(shaderName)
+
+#define ANGLESTEP 0.314
+
 #ifdef GL_FRAGMENT_PRECISION_HIGH
 #define highmedp highp
 #else
@@ -19,6 +23,8 @@ uniform vec3 outlineColor;
 
 const float DOUBLE_PI = 3.14159265358979323846264 * 2.;
 
+#pragma phaserTemplate(fragmentHeader)
+
 void main() {
   vec4 front = texture2D(uMainSampler, outTexCoord);
 
@@ -27,7 +33,7 @@ void main() {
     vec4 curColor;
     float maxAlpha = front.a;
     vec2 offset;
-    for (float angle = 0.; angle < DOUBLE_PI; angle += #{angleStep}) {
+    for (float angle = 0.; angle < DOUBLE_PI; angle += ANGLESTEP) {
         offset = vec2(mag.x * cos(angle), mag.y * sin(angle));        
         curColor = texture2D(uMainSampler, outTexCoord + offset);
         maxAlpha = max(maxAlpha, curColor.a);
@@ -40,15 +46,4 @@ void main() {
 }
 `;
 
-const MAX_SAMPLES = 100;
-const MIN_SAMPLES = 1;
-var GetFrag = function (quality) {
-  if (quality === undefined) {
-    quality = 0.1;
-  }
-  var samples = Math.max((quality * MAX_SAMPLES), MIN_SAMPLES);
-  var angleStep = (Math.PI * 2 / samples).toFixed(7);
-  return frag.replace(/\#\{angleStep\}/, angleStep);
-}
-
-export default GetFrag;
+export default frag;
