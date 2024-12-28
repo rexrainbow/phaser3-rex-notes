@@ -29,6 +29,37 @@ All Game Objects and camera support filters. These are effects applied after the
 
 ## Usage
 
+Steps :
+
+- Game object
+    1. Enable `filters`
+        ```javascript
+        gameObject.enableFilters();
+        ```
+    1. Get filter list
+        ```javascript
+        var filterList = gameObject.filters.internal;
+        ```
+        ```javascript
+        var filterList = gameObject.filters.external;
+        ```
+    1. Add filter controller
+        ```javascript
+        var controller = filterList.addBarrel();
+        ```
+- Camera
+    1. Get filter list
+        ```javascript
+        var filterList = camera.filters.internal;
+        ```
+        ```javascript
+        var filterList = camera.filters.external;
+        ```
+    1. Add filter controller
+        ```javascript
+        var controller = filterList.addBarrel();
+        ```
+
 ### Barrel
 
 - Add filter controller to game object
