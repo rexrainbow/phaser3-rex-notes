@@ -3,7 +3,7 @@
 Shockwave post processing filter. [Reference](https://www.geeks3d.com/20091116/shader-library-2d-shockwave-post-processing-filter-glsl/)
 
 - Author: Rex
-- A post-fx shader effect
+- A filter shader effect
 
 !!! warning "WebGL only"
     Only work in WebGL render mode.

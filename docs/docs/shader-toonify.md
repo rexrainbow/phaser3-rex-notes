@@ -1,9 +1,9 @@
 ## Introduction
 
-Draw outlines and quantize color in HSV domain, post processing filter. [Reference](https://www.geeks3d.com/20140523/glsl-shader-library-toonify-post-processing-filter/)
+Draw outlines and quantize color in HSV domain. [Reference](https://www.geeks3d.com/20140523/glsl-shader-library-toonify-post-processing-filter/)
 
 - Author: Rex
-- A post-fx shader effect
+- A filter shader effect
 
 !!! warning "WebGL only"
     Only work in WebGL render mode.
@@ -22,16 +22,16 @@ Draw outlines and quantize color in HSV domain, post processing filter. [Referen
 
 - Load plugin (minify file) in preload stage
     ```javascript
-    scene.load.plugin('rextoonifypipelineplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rextoonifypipelineplugin.min.js', true);
+    scene.load.plugin('rextoonifyfilterplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rextoonifyfilterplugin.min.js', true);
     ```
 - Apply effect
     - Apply effect to game object
         ```javascript
-        var pipelineInstance = scene.plugins.get('rextoonifypipelineplugin').add(gameObject, config);
+        var controller = scene.plugins.get('rextoonifyfilterplugin').add(gameObject, config);
         ```
     - Apply effect to camera
         ```javascript
-        var pipelineInstance = scene.plugins.get('rextoonifypipelineplugin').add(camera, config);
+        var controller = scene.plugins.get('rextoonifyfilterplugin').add(camera, config);
         ```
 
 #### Import plugin
@@ -42,13 +42,13 @@ Draw outlines and quantize color in HSV domain, post processing filter. [Referen
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import ToonifyPipelinePlugin from 'phaser3-rex-plugins/plugins/toonifypipeline-plugin.js';
+    import ToonifyFilterPlugin from 'phaser3-rex-plugins/plugins/toonifyfilter-plugin.js';
     var config = {
         // ...
         plugins: {
             global: [{
-                key: 'rexToonifyPipeline',
-                plugin: ToonifyPipelinePlugin,
+                key: 'rexToonifyFilter',
+                plugin: ToonifyFilterPlugin,
                 start: true
             },
             // ...
@@ -61,11 +61,11 @@ Draw outlines and quantize color in HSV domain, post processing filter. [Referen
 - Apply effect
     - Apply effect to game object
         ```javascript
-        var pipelineInstance = scene.plugins.get('rexToonifyPipeline').add(gameObject, config);
+        var controller = scene.plugins.get('rexToonifyFilter').add(gameObject, config);
         ```
     - Apply effect to camera
         ```javascript
-        var pipelineInstance = scene.plugins.get('rexToonifyPipeline').add(camera, config);
+        var controller = scene.plugins.get('rexToonifyFilter').add(camera, config);
         ```
 
 #### Import class
@@ -74,31 +74,38 @@ Draw outlines and quantize color in HSV domain, post processing filter. [Referen
     ```
     npm i phaser3-rex-plugins
     ```
-- Add to game config
+- Import filter and controller class
     ```javascript
-    import ToonifyPostFx from 'phaser3-rex-plugins/plugins/toonifypipeline.js';
-    var config = {
-        // ...
-        pipeline: [ToonifyPostFx]
-        // ...
-    };
-    var game = new Phaser.Game(config);
+    import { ToonifyFilter, ToonifyController } from 'phaser3-rex-plugins/plugins/toonifyfilter.js';
+    ```
+- Register effect
+    ```js
+    if (!scene.renderer.renderNodes.hasNode(ToonifyFilter.FilterName)) {
+        scene.renderer.renderNodes.addNodeConstructor(ToonifyFilter.FilterName, ToonifyFilter);
+    }
     ```
 - Apply effect
     - Apply effect to game object
         ```javascript
-        gameObject.setPostPipeline(ToonifyPostFx);
+        // gameObject.enableFilters();
+        var filterList = gameObject.filters.internal;
+        var controller = filterList.add(
+            new ToonifyController(filterList.camera, config)
+        );
         ```
     - Apply effect to camera
         ```javascript
-        camera.setPostPipeline(ToonifyPostFx);
+        var filterList = camera.filters.internal;
+        var controller = filterList.add(
+            new ToonifyController(filterList.camera, config)
+        );
         ```
 
 ### Apply effect
 
-- Apply effect to game object. A game object only can add 1 toonify effect.
+- Apply effect to game object.
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexToonifyPipeline').add(gameObject, {
+    var controller = scene.plugins.get('rexToonifyFilter').add(gameObject, {
         // edgeThreshold: 0.2,
         // hueLevels: 0,
         // sLevels: 0,
@@ -113,48 +120,48 @@ Draw outlines and quantize color in HSV domain, post processing filter. [Referen
     - `sLevels` : Amount of saturation levels. Set `0` to disable this feature.
     - `vLevels` : Amount of value levels. Set `0` to disable this feature.
     - `edgeColor` : Color of edge, could be a number `0xRRGGBB`, or a JSON object `{r:255, g:255, b:255}`
-- Apply effect to camera. A camera only can add 1 toonify effect.
+- Apply effect to camera.
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexToonifyPipeline').add(camera, config);
+    var controller = scene.plugins.get('rexToonifyFilter').add(camera, config);
     ```
 
 ### Remove effect
 
 - Remove effect from game object
     ```javascript
-    scene.plugins.get('rexToonifyPipeline').remove(gameObject);
+    scene.plugins.get('rexToonifyFilter').remove(gameObject);
     ```
 - Remove effect from camera
     ```javascript
-    scene.plugins.get('rexToonifyPipeline').remove(camera);
+    scene.plugins.get('rexToonifyFilter').remove(camera);
     ```
 
 ### Get effect
 
 - Get effect from game object
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexToonifyPipeline').get(gameObject)[0];
-    // var pipelineInstances = scene.plugins.get('rexToonifyPipeline').get(gameObject);
+    var controller = scene.plugins.get('rexToonifyFilter').get(gameObject)[0];
+    // var controllers = scene.plugins.get('rexToonifyFilter').get(gameObject);
     ```
 - Get effect from camera
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexToonifyPipeline').get(camera)[0];
-    // var pipelineInstances = scene.plugins.get('rexToonifyPipeline').get(camera);
+    var controller = scene.plugins.get('rexToonifyFilter').get(camera)[0];
+    // var controllers = scene.plugins.get('rexToonifyFilter').get(camera);
     ```
 
 ### Edge threshold
 
 - Get
     ```javascript
-    var edgeThreshold = pipelineInstance.edgeThreshold;
+    var edgeThreshold = controller.edgeThreshold;
     ```
 - Set
     ```javascript
-    pipelineInstance.edgeThreshold = edgeThreshold;
+    controller.edgeThreshold = edgeThreshold;
     ```
     or
     ```javascript
-    pipelineInstance.setEdgeThreshold(value);
+    controller.setEdgeThreshold(value);
     ```
     - Set `1.1` (or any number larger then `1`) to disable this feature.
 
@@ -162,15 +169,15 @@ Draw outlines and quantize color in HSV domain, post processing filter. [Referen
 
 - Get
     ```javascript
-    var hueLevels = pipelineInstance.hueLevels;
+    var hueLevels = controller.hueLevels;
     ```
 - Set
     ```javascript
-    pipelineInstance.hueLevels = hueLevels;
+    controller.hueLevels = hueLevels;
     ```
     or
     ```javascript
-    pipelineInstance.setHueLevels(value);
+    controller.setHueLevels(value);
     ```
     - Set `0` to disable this feature.
 
@@ -178,15 +185,15 @@ Draw outlines and quantize color in HSV domain, post processing filter. [Referen
 
 - Get
     ```javascript
-    var satLevels = pipelineInstance.satLevels;
+    var satLevels = controller.satLevels;
     ```
 - Set
     ```javascript
-    pipelineInstance.satLevels = satLevels;
+    controller.satLevels = satLevels;
     ```
     or
     ```javascript
-    pipelineInstance.setSatLevels(value);
+    controller.setSatLevels(value);
     ```
     - Set `0` to disable this feature.
 
@@ -194,15 +201,15 @@ Draw outlines and quantize color in HSV domain, post processing filter. [Referen
 
 - Get
     ```javascript
-    var valLevels = pipelineInstance.valLevels;
+    var valLevels = controller.valLevels;
     ```
 - Set
     ```javascript
-    pipelineInstance.valLevels = valLevels;
+    controller.valLevels = valLevels;
     ```
     or
     ```javascript
-    pipelineInstance.setValLevels(value);
+    controller.setValLevels(value);
     ```
     - Set `0` to disable this feature.
 
@@ -210,7 +217,7 @@ Draw outlines and quantize color in HSV domain, post processing filter. [Referen
 
 - Get
     ```javascript
-    var color = pipelineInstance.edgeColor;
+    var color = controller.edgeColor;
     ```
     - `color` : [Color](color.md) object.
         - Red: `color.red`, 0~255.
@@ -218,10 +225,10 @@ Draw outlines and quantize color in HSV domain, post processing filter. [Referen
         - Blue: `color.blue`, 0~255.
 - Set
     ```javascript
-    pipelineInstance.setEdgeColor(value);
+    controller.setEdgeColor(value);
     ```
     or
     ```javascript
-    pipelineInstance.edgeColor = value;
+    controller.edgeColor = value;
     ```
     - `value` : A number `0xRRGGBB`, or a JSON object `{r:255, g:255, b:255}`

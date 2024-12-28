@@ -6,7 +6,7 @@
 Drop-shadow post processing filter. [Reference](https://github.com/pixijs/filters/blob/main/filters/drop-shadow/src/dropshadow.frag)
 
 - Author: Rex
-- A post-fx shader effect
+- A filter shader effect
 
 !!! warning "WebGL only"
     Only work in WebGL render mode.

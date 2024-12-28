@@ -1,5 +1,4 @@
 import HasProperty from '../../utils/object/HasProperty.js';
-import GetFXFactory from './GetFXFactory.js';
 import AddClearEffectCallback from './AddClearEffectCallback.js';
 
 var AddShineProperties = function (gameObject) {
@@ -8,10 +7,7 @@ var AddShineProperties = function (gameObject) {
         return gameObject;
     }
 
-    var fxFactory = GetFXFactory(gameObject);
-    if (!fxFactory) {
-        return gameObject;
-    }
+    var filterList = gameObject.filters.internal;
 
     var shineSpeed,
         shineLineWidth = 0.5,
@@ -29,12 +25,12 @@ var AddShineProperties = function (gameObject) {
 
             if ((shineSpeed === null) || (shineSpeed === false)) {
                 if (gameObject._shine) {
-                    fxFactory.remove(gameObject._shine);
+                    filterList.remove(gameObject._shine);
                     gameObject._shine = undefined;
                 }
             } else {
                 if (!gameObject._shine) {
-                    gameObject._shine = fxFactory.addShine(shineSpeed, shineLineWidth, shineGradient);
+                    gameObject._shine = filterList.addShine(shineSpeed, shineLineWidth, shineGradient);
                 }
 
                 gameObject._shine.speed = shineSpeed;

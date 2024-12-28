@@ -13,6 +13,10 @@ var AddEffectProperties = function (gameObject, config) {
         }
     }
 
+    if (!gameObject.filters) {
+        gameObject.enableFilters();
+    }
+
     if (config === true) {
         // Enable all effect properties
         for (var name in EffectMap) {

@@ -1,5 +1,4 @@
 import HasProperty from '../../utils/object/HasProperty.js';
-import GetFXFactory from './GetFXFactory.js';
 import AddClearEffectCallback from './AddClearEffectCallback.js';
 
 var AddWipeProperties = function (gameObject) {
@@ -8,10 +7,7 @@ var AddWipeProperties = function (gameObject) {
         return gameObject;
     }
 
-    var fxFactory = GetFXFactory(gameObject);
-    if (!fxFactory) {
-        return gameObject;
-    }
+    var filterList = gameObject.filters.internal;
 
     var wipeLeft,
         wipeRight,
@@ -28,7 +24,7 @@ var AddWipeProperties = function (gameObject) {
 
     var RemoveEffect = function (gameObject) {
         if (gameObject._wipeEffect) {
-            fxFactory.remove(gameObject._wipeEffect);
+            filterList.remove(gameObject._wipeEffect);
             gameObject._wipeEffect = undefined;
         }
     }
@@ -50,7 +46,7 @@ var AddWipeProperties = function (gameObject) {
                 RemoveEffect(gameObject);
             } else {
                 if (!gameObject._wipeEffect) {
-                    gameObject._wipeEffect = fxFactory.addWipe(wipeWidth, 0, 0);
+                    gameObject._wipeEffect = filterList.addWipe(wipeWidth, 0, 0);
                 }
 
                 gameObject._wipeEffect.direction = 1;
@@ -78,7 +74,7 @@ var AddWipeProperties = function (gameObject) {
                 RemoveEffect(gameObject);
             } else {
                 if (!gameObject._wipeEffect) {
-                    gameObject._wipeEffect = fxFactory.addWipe(wipeWidth, 0, 0);
+                    gameObject._wipeEffect = filterList.addWipe(wipeWidth, 0, 0);
                 }
                 gameObject._wipeEffect.direction = 0;
                 gameObject._wipeEffect.axis = 0;
@@ -105,7 +101,7 @@ var AddWipeProperties = function (gameObject) {
                 RemoveEffect(gameObject);
             } else {
                 if (!gameObject._wipeEffect) {
-                    gameObject._wipeEffect = fxFactory.addWipe(wipeWidth, 0, 0);
+                    gameObject._wipeEffect = filterList.addWipe(wipeWidth, 0, 0);
                 }
                 gameObject._wipeEffect.direction = 1;
                 gameObject._wipeEffect.axis = 1;
@@ -132,7 +128,7 @@ var AddWipeProperties = function (gameObject) {
                 RemoveEffect(gameObject);
             } else {
                 if (!gameObject._wipeEffect) {
-                    gameObject._wipeEffect = fxFactory.addWipe(wipeWidth, 0, 0);
+                    gameObject._wipeEffect = filterList.addWipe(wipeWidth, 0, 0);
                 }
                 gameObject._wipeEffect.direction = 0;
                 gameObject._wipeEffect.axis = 1;

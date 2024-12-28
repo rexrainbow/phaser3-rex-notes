@@ -1,4 +1,4 @@
-var GetFXFactory = function (gameObject) {
+var GetfilterList = function (gameObject) {
     if (gameObject.preFX) {
         return gameObject.preFX;
     }
@@ -8,4 +8,4 @@ var GetFXFactory = function (gameObject) {
     return null;
 }
 
-export default GetFXFactory;
+export default GetfilterList;

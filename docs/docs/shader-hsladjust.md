@@ -6,7 +6,7 @@
 Adjust color in HSL domain, post processing filter.
 
 - Author: Rex
-- A post-fx shader effect
+- A filter shader effect
 
 !!! warning "WebGL only"
     Only work in WebGL render mode.

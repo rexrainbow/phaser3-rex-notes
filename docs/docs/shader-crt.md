@@ -1,9 +1,9 @@
 ## Introduction
 
-CRT post processing filter. [Reference](https://www.shadertoy.com/view/WsVSzV)
+CRT effect. [Reference](https://www.shadertoy.com/view/WsVSzV)
 
 - Author: Rex
-- A post-fx shader effect
+- A filter shader effect
 
 !!! warning "WebGL only"
     Only work in WebGL render mode.
@@ -22,16 +22,16 @@ CRT post processing filter. [Reference](https://www.shadertoy.com/view/WsVSzV)
 
 - Load plugin (minify file) in preload stage
     ```javascript
-    scene.load.plugin('rexcrtpipelineplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexcrtpipelineplugin.min.js', true);
+    scene.load.plugin('rexcrtfilterplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexcrtfilterplugin.min.js', true);
     ```
 - Apply effect
     - Apply effect to game object
         ```javascript
-        var pipelineInstance = scene.plugins.get('rexcrtpipelineplugin').add(gameObject, config);
+        var controller = scene.plugins.get('rexcrtfilterplugin').add(gameObject, config);
         ```
     - Apply effect to camera
         ```javascript
-        var pipelineInstance = scene.plugins.get('rexcrtpipelineplugin').add(camera, config);
+        var controller = scene.plugins.get('rexcrtfilterplugin').add(camera, config);
         ```
 
 #### Import plugin
@@ -42,13 +42,13 @@ CRT post processing filter. [Reference](https://www.shadertoy.com/view/WsVSzV)
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import CrtPipelinePlugin from 'phaser3-rex-plugins/plugins/crtpipeline-plugin.js';
+    import CrtFilterPlugin from 'phaser3-rex-plugins/plugins/crtfilter-plugin.js';
     var config = {
         // ...
         plugins: {
             global: [{
-                key: 'rexCrtPipeline',
-                plugin: CrtPipelinePlugin,
+                key: 'rexCrtFilter',
+                plugin: CrtFilterPlugin,
                 start: true
             },
             // ...
@@ -61,11 +61,11 @@ CRT post processing filter. [Reference](https://www.shadertoy.com/view/WsVSzV)
 - Apply effect
     - Apply effect to game object
         ```javascript
-        var pipelineInstance = scene.plugins.get('rexCrtPipeline').add(gameObject, config);
+        var controller = scene.plugins.get('rexCrtFilter').add(gameObject, config);
         ```
     - Apply effect to camera
         ```javascript
-        var pipelineInstance = scene.plugins.get('rexCrtPipeline').add(camera, config);
+        var controller = scene.plugins.get('rexCrtFilter').add(camera, config);
         ```
 
 #### Import class
@@ -74,31 +74,38 @@ CRT post processing filter. [Reference](https://www.shadertoy.com/view/WsVSzV)
     ```
     npm i phaser3-rex-plugins
     ```
-- Add to game config
+- Import filter and controller class
     ```javascript
-    import CrtPostFx from 'phaser3-rex-plugins/plugins/crtpipeline.js';
-    var config = {
-        // ...
-        pipeline: [CrtPostFx]
-        // ...
-    };
-    var game = new Phaser.Game(config);
+    import { CrtFilter, CrtController } from 'phaser3-rex-plugins/plugins/crtfilter.js';
+    ```
+- Register effect
+    ```js
+    if (!scene.renderer.renderNodes.hasNode(CrtFilter.FilterName)) {
+        scene.renderer.renderNodes.addNodeConstructor(CrtFilter.FilterName, CrtFilter);
+    }
     ```
 - Apply effect
     - Apply effect to game object
         ```javascript
-        gameObject.setPostPipeline(CrtPostFx);
+        // gameObject.enableFilters();
+        var filterList = gameObject.filters.internal;
+        var controller = filterList.add(
+            new CrtController(filterList.camera, config)
+        );
         ```
     - Apply effect to camera
         ```javascript
-        camera.setPostPipeline(CrtPostFx);
+        var filterList = camera.filters.internal;
+        var controller = filterList.add(
+            new CrtController(filterList.camera, config)
+        );
         ```
 
 ### Apply effect
 
-- Apply effect to game object. A game object only can add 1 crt effect.
+- Apply effect to game object.
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexCrtPipeline').add(gameObject, {
+    var controller = scene.plugins.get('rexCrtFilter').add(gameObject, {
         // warpX: 0.75,
         // warpY: 0.75,
         // scanLineStrength: 0.2,
@@ -109,66 +116,66 @@ CRT post processing filter. [Reference](https://www.shadertoy.com/view/WsVSzV)
     ```
     - `warpX`, `warpY` : Horizontal and Vertical warp.
     - `scanLineStrength`, `scanLineWidth` : Scan line parameters.
-- Apply effect to camera. A camera only can add 1 crt effect.
+- Apply effect to camera.
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexCrtPipeline').add(camera, config);
+    var controller = scene.plugins.get('rexCrtFilter').add(camera, config);
     ```
 
 ### Remove effect
 
 - Remove effect from game object
     ```javascript
-    scene.plugins.get('rexCrtPipeline').remove(gameObject);
+    scene.plugins.get('rexCrtFilter').remove(gameObject);
     ```
 - Remove effect from camera
     ```javascript
-    scene.plugins.get('rexCrtPipeline').remove(camera);
+    scene.plugins.get('rexCrtFilter').remove(camera);
     ```
 
 ### Get effect
 
 - Get effect from game object
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexCrtPipeline').get(gameObject)[0];
-    // var pipelineInstances = scene.plugins.get('rexCrtPipeline').get(gameObject);
+    var controller = scene.plugins.get('rexCrtFilter').get(gameObject)[0];
+    // var controllers = scene.plugins.get('rexCrtFilter').get(gameObject);
     ```
 - Get effect from camera
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexCrtPipeline').get(camera)[0];
-    // var pipelineInstances = scene.plugins.get('rexCrtPipeline').get(camera);
+    var controller = scene.plugins.get('rexCrtFilter').get(camera)[0];
+    // var controllers = scene.plugins.get('rexCrtFilter').get(camera);
     ```
 
 ### Warp
 
 - Get
     ```javascript
-    var warpX = pipelineInstance.warpX;
-    var warpY = pipelineInstance.warpY;
+    var warpX = controller.warpX;
+    var warpY = controller.warpY;
     ```
 - Set
     ```javascript
-    pipelineInstance.setWarp(warpX, warpY);
+    controller.setWarp(warpX, warpY);
     ```
     or
     ```javascript
-    pipelineInstance.warpX = warpX;
-    pipelineInstance.warpY = warpY;
+    controller.warpX = warpX;
+    controller.warpY = warpY;
     ```
 
 ### Scan lines
 
 - Get
     ```javascript
-    var scanLineStrength = pipelineInstance.scanLineStrength;
-    var scanLineWidth = pipelineInstance.scanLineWidth;
+    var scanLineStrength = controller.scanLineStrength;
+    var scanLineWidth = controller.scanLineWidth;
     ```
 - Set
     ```javascript
-    pipelineInstance.setScanStrength(scanLineStrength);
-    pipelineInstance.setScanLineWidth(scanLineWidth);
+    controller.setScanStrength(scanLineStrength);
+    controller.setScanLineWidth(scanLineWidth);
     ```
     or
     ```javascript
-    pipelineInstance.scanLineStrength = scanLineStrength;
-    pipelineInstance.scanLineWidth = scanLineWidth;
+    controller.scanLineStrength = scanLineStrength;
+    controller.scanLineWidth = scanLineWidth;
     ```

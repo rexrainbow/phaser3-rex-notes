@@ -1,5 +1,4 @@
 import HasProperty from '../../utils/object/HasProperty.js';
-import GetFXFactory from './GetFXFactory.js';
 import AddClearEffectCallback from './AddClearEffectCallback.js';
 
 var AddTiltShiftProperties = function (gameObject) {
@@ -8,10 +7,7 @@ var AddTiltShiftProperties = function (gameObject) {
         return gameObject;
     }
 
-    var fxFactory = GetFXFactory(gameObject);
-    if (!fxFactory) {
-        return gameObject;
-    }
+    var filterList = gameObject.filters.internal;
 
     var tiltShiftRadius,
         tiltShiftAmount = 1,
@@ -32,12 +28,12 @@ var AddTiltShiftProperties = function (gameObject) {
 
             if ((tiltShiftRadius === null) || (tiltShiftRadius === false)) {
                 if (gameObject._tiltShift) {
-                    fxFactory.remove(gameObject._tiltShift);
+                    filterList.remove(gameObject._tiltShift);
                     gameObject._tiltShift = undefined;
                 }
             } else {
                 if (!gameObject._tiltShift) {
-                    gameObject._tiltShift = fxFactory.addTiltShift(tiltShiftRadius, tiltShiftAmount, tiltShiftContrast, tiltShiftBlurX, tiltShiftBlurY, tiltShiftStrength);
+                    gameObject._tiltShift = filterList.addTiltShift(tiltShiftRadius, tiltShiftAmount, tiltShiftContrast, tiltShiftBlurX, tiltShiftBlurY, tiltShiftStrength);
                 }
 
                 gameObject._tiltShift.radius = tiltShiftRadius;

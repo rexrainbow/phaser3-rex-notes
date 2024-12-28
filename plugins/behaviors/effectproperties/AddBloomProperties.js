@@ -1,5 +1,4 @@
 import HasProperty from '../../utils/object/HasProperty.js';
-import GetFXFactory from './GetFXFactory.js';
 import AddClearEffectCallback from './AddClearEffectCallback.js';
 
 var AddBloomProperties = function (gameObject) {
@@ -8,10 +7,7 @@ var AddBloomProperties = function (gameObject) {
         return gameObject;
     }
 
-    var fxFactory = GetFXFactory(gameObject);
-    if (!fxFactory) {
-        return gameObject;
-    }
+    var filterList = gameObject.filters.internal;
 
     var bloomColor,
         bloomOffsetX = 1,
@@ -32,14 +28,12 @@ var AddBloomProperties = function (gameObject) {
 
             if ((bloomColor === null) || (bloomColor === false)) {
                 if (gameObject._bloom) {
-                    fxFactory.remove(gameObject._bloom);
+                    filterList.remove(gameObject._bloom);
                     gameObject._bloom = undefined;
-                    fxFactory.setPadding(0);
                 }
             } else {
                 if (!gameObject._bloom) {
-                    gameObject._bloom = fxFactory.addBloom(bloomColor, bloomOffsetX, bloomOffsetY, bloomBlurStrength, bloomStrength, bloomSteps);
-                    fxFactory.setPadding(Math.max(bloomOffsetX, bloomOffsetY) + 1);
+                    gameObject._bloom = filterList.addBloom(bloomColor, bloomOffsetX, bloomOffsetY, bloomBlurStrength, bloomStrength, bloomSteps);
                 }
 
                 gameObject._bloom.color = bloomColor;
@@ -60,8 +54,7 @@ var AddBloomProperties = function (gameObject) {
             bloomOffsetX = value;
 
             if (gameObject._bloom) {
-                var offset = Math.max(bloomOffsetX, bloomOffsetY);
-                fxFactory.setPadding(offset + 1);
+                var offset = Math.max(bloomOffsetX, bloomOffsetY);                
                 gameObject._bloom.offsetX = bloomOffsetX;
             }
         },
@@ -80,7 +73,6 @@ var AddBloomProperties = function (gameObject) {
 
             if (gameObject._bloom) {
                 var offset = Math.max(bloomOffsetX, bloomOffsetY);
-                fxFactory.setPadding(offset + 1);
                 gameObject._bloom.offsetY = bloomOffsetY;
             }
         },

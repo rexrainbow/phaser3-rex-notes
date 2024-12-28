@@ -1,5 +1,4 @@
 import HasProperty from '../../utils/object/HasProperty.js';
-import GetFXFactory from './GetFXFactory.js';
 import AddClearEffectCallback from './AddClearEffectCallback.js';
 
 var AddGradientProperties = function (gameObject) {
@@ -8,10 +7,7 @@ var AddGradientProperties = function (gameObject) {
         return gameObject;
     }
 
-    var fxFactory = GetFXFactory(gameObject);
-    if (!fxFactory) {
-        return gameObject;
-    }
+    var filterList = gameObject.filters.internal;
 
     var gradientColor1,
         gradientColor2,
@@ -45,12 +41,12 @@ var AddGradientProperties = function (gameObject) {
 
             if ((gradientColor1 === null) || (gradientColor1 === false)) {
                 if (gameObject._gradient) {
-                    fxFactory.remove(gameObject._gradient);
+                    filterList.remove(gameObject._gradient);
                     gameObject._gradient = undefined;
                 }
             } else {
                 if (!gameObject._gradient) {
-                    gameObject._gradient = fxFactory.addGradient(gradientColor1, gradientColor2, gradientAlpha, gradientFromX, gradientFromY, gradientToX, gradientToY, gradientSize);
+                    gameObject._gradient = filterList.addGradient(gradientColor1, gradientColor2, gradientAlpha, gradientFromX, gradientFromY, gradientToX, gradientToY, gradientSize);
                 }
 
                 gameObject._gradient.color1 = gradientColor1;

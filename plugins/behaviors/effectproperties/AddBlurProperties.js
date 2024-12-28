@@ -1,5 +1,4 @@
 import HasProperty from '../../utils/object/HasProperty.js';
-import GetFXFactory from './GetFXFactory.js';
 import AddClearEffectCallback from './AddClearEffectCallback.js';
 
 var AddBlurProperties = function (gameObject) {
@@ -8,10 +7,7 @@ var AddBlurProperties = function (gameObject) {
         return gameObject;
     }
 
-    var fxFactory = GetFXFactory(gameObject);
-    if (!fxFactory) {
-        return gameObject;
-    }
+    var filterList = gameObject.filters.internal;
 
     var blurColor,
         blurQuality = 0,
@@ -32,14 +28,12 @@ var AddBlurProperties = function (gameObject) {
 
             if ((blurColor === null) || (blurColor === false)) {
                 if (gameObject._blur) {
-                    fxFactory.remove(gameObject._blur);
+                    filterList.remove(gameObject._blur);
                     gameObject._blur = undefined;
-                    fxFactory.setPadding(0);
                 }
             } else {
                 if (!gameObject._blur) {
-                    gameObject._blur = fxFactory.addBlur(blurQuality, blurX, blurY, blurStrength, blurColor, blurSteps);
-                    fxFactory.setPadding(Math.max(blurX, blurY) + 1);
+                    gameObject._blur = filterList.addBlur(blurQuality, blurX, blurY, blurStrength, blurColor, blurSteps);
                 }
 
                 gameObject._blur.color = blurColor;
@@ -79,7 +73,6 @@ var AddBlurProperties = function (gameObject) {
 
             if (gameObject._blur) {
                 var offset = Math.max(blurX, blurY);
-                fxFactory.setPadding(offset + 1);
                 gameObject._blur.x = blurX;
             }
         },
@@ -98,7 +91,6 @@ var AddBlurProperties = function (gameObject) {
 
             if (gameObject._blur) {
                 var offset = Math.max(blurX, blurY);
-                fxFactory.setPadding(offset + 1);
                 gameObject._blur.y = blurY;
             }
         },

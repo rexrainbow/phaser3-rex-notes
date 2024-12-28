@@ -1,5 +1,4 @@
 import HasProperty from '../../utils/object/HasProperty.js';
-import GetFXFactory from './GetFXFactory.js';
 import AddClearEffectCallback from './AddClearEffectCallback.js';
 
 var AddRevealProperties = function (gameObject) {
@@ -8,10 +7,7 @@ var AddRevealProperties = function (gameObject) {
         return gameObject;
     }
 
-    var fxFactory = GetFXFactory(gameObject);
-    if (!fxFactory) {
-        return gameObject;
-    }
+    var filterList = gameObject.filters.internal;
 
     var revealLeft,
         revealRight,
@@ -28,7 +24,7 @@ var AddRevealProperties = function (gameObject) {
 
     var RemoveEffect = function (gameObject) {
         if (gameObject._revealEffect) {
-            fxFactory.remove(gameObject._revealEffect);
+            filterList.remove(gameObject._revealEffect);
             gameObject._revealEffect = undefined;
         }
     }
@@ -50,7 +46,7 @@ var AddRevealProperties = function (gameObject) {
                 RemoveEffect(gameObject);
             } else {
                 if (!gameObject._revealEffect) {
-                    gameObject._revealEffect = fxFactory.addReveal(revealWidth, 0, 0);
+                    gameObject._revealEffect = filterList.addReveal(revealWidth, 0, 0);
                 }
 
                 gameObject._revealEffect.direction = 1;
@@ -78,7 +74,7 @@ var AddRevealProperties = function (gameObject) {
                 RemoveEffect(gameObject);
             } else {
                 if (!gameObject._revealEffect) {
-                    gameObject._revealEffect = fxFactory.addReveal(revealWidth, 0, 0);
+                    gameObject._revealEffect = filterList.addReveal(revealWidth, 0, 0);
                 }
                 gameObject._revealEffect.direction = 0;
                 gameObject._revealEffect.axis = 0;
@@ -105,7 +101,7 @@ var AddRevealProperties = function (gameObject) {
                 RemoveEffect(gameObject);
             } else {
                 if (!gameObject._revealEffect) {
-                    gameObject._revealEffect = fxFactory.addReveal(revealWidth, 0, 0);
+                    gameObject._revealEffect = filterList.addReveal(revealWidth, 0, 0);
                 }
                 gameObject._revealEffect.direction = 1;
                 gameObject._revealEffect.axis = 1;
@@ -132,7 +128,7 @@ var AddRevealProperties = function (gameObject) {
                 RemoveEffect(gameObject);
             } else {
                 if (!gameObject._revealEffect) {
-                    gameObject._revealEffect = fxFactory.addReveal(revealWidth, 0, 0);
+                    gameObject._revealEffect = filterList.addReveal(revealWidth, 0, 0);
                 }
                 gameObject._revealEffect.direction = 0;
                 gameObject._revealEffect.axis = 1;

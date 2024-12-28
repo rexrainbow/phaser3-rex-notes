@@ -6,7 +6,7 @@
 Pixelation post processing filter. [Reference](https://www.geeks3d.com/20101029/shader-library-pixelation-post-processing-effect-glsl/)
 
 - Author: Rex
-- A post-fx shader effect
+- A filter shader effect
 
 !!! warning "WebGL only"
     Only work in WebGL render mode.

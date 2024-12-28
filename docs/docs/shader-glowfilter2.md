@@ -6,7 +6,7 @@
 Glow post processing filter, port from pixi. [Reference](https://github.com/pixijs/filters/blob/main/filters/glow/src/glow.frag)
 
 - Author: Rex
-- A post-fx shader effect
+- A filter shader effect
 
 !!! warning "WebGL only"
     Only work in WebGL render mode.

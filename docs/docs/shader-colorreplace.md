@@ -3,7 +3,7 @@
 Replace color post processing filter. [Reference](https://github.com/pixijs/filters/blob/main/filters/color-replace/src/colorReplace.frag)
 
 - Author: Rex
-- A post-fx shader effect
+- A filter shader effect
 
 !!! warning "WebGL only"
     Only work in WebGL render mode.

@@ -1,5 +1,4 @@
 import HasProperty from '../../utils/object/HasProperty.js';
-import GetFXFactory from './GetFXFactory.js';
 import AddClearEffectCallback from './AddClearEffectCallback.js';
 
 var AddPixelateProperties = function (gameObject) {
@@ -8,10 +7,7 @@ var AddPixelateProperties = function (gameObject) {
         return gameObject;
     }
 
-    var fxFactory = GetFXFactory(gameObject);
-    if (!fxFactory) {
-        return gameObject;
-    }
+    var filterList = gameObject.filters.internal;
 
     var pixelate;
     Object.defineProperty(gameObject, 'pixelate', {
@@ -27,12 +23,12 @@ var AddPixelateProperties = function (gameObject) {
 
             if ((pixelate === null) || (pixelate === false)) {
                 if (gameObject._pixelateEffect) {
-                    fxFactory.remove(gameObject._pixelateEffect);
+                    filterList.remove(gameObject._pixelateEffect);
                     gameObject._pixelateEffect = undefined;
                 }
             } else {
                 if (!gameObject._pixelateEffect) {
-                    gameObject._pixelateEffect = fxFactory.addPixelate();
+                    gameObject._pixelateEffect = filterList.addPixelate();
                 }
                 gameObject._pixelateEffect.amount = pixelate;
             }

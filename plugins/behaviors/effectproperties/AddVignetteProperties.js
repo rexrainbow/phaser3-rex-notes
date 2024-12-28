@@ -1,5 +1,4 @@
 import HasProperty from '../../utils/object/HasProperty.js';
-import GetFXFactory from './GetFXFactory.js';
 import AddClearEffectCallback from './AddClearEffectCallback.js';
 
 var AddVignetteProperties = function (gameObject) {
@@ -8,10 +7,7 @@ var AddVignetteProperties = function (gameObject) {
         return gameObject;
     }
 
-    var fxFactory = GetFXFactory(gameObject);
-    if (!fxFactory) {
-        return gameObject;
-    }
+    var filterList = gameObject.filters.internal;
 
     var vignetteRadius,
         vignetteX = 0.5,
@@ -30,12 +26,12 @@ var AddVignetteProperties = function (gameObject) {
 
             if ((vignetteRadius === null) || (vignetteRadius === false)) {
                 if (gameObject._vignette) {
-                    fxFactory.remove(gameObject._vignette);
+                    filterList.remove(gameObject._vignette);
                     gameObject._vignette = undefined;
                 }
             } else {
                 if (!gameObject._vignette) {
-                    gameObject._vignette = fxFactory.addVignette(vignetteX, vignetteY, vignetteRadius, vignetteStrength);
+                    gameObject._vignette = filterList.addVignette(vignetteX, vignetteY, vignetteRadius, vignetteStrength);
                 }
 
                 gameObject._vignette.radius = vignetteRadius;

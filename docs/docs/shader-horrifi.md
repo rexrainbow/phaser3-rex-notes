@@ -1,6 +1,6 @@
 ## Introduction
 
-6-in-1 post processing filter
+6-in-1 effect
 
 - Bloom
 - Chromatic Abberation
@@ -13,7 +13,7 @@
 Reference : [Horri-fi shader effect](https://gizmo199.itch.io/horri-fi)
 
 - Author: Rex
-- A post-fx shader effect
+- A filter shader effect
 
 !!! warning "WebGL only"
     Only work in WebGL render mode.
@@ -32,16 +32,16 @@ Reference : [Horri-fi shader effect](https://gizmo199.itch.io/horri-fi)
 
 - Load plugin (minify file) in preload stage
     ```javascript
-    scene.load.plugin('rexhorrifipipelineplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexhorrifipipelineplugin.min.js', true);
+    scene.load.plugin('rexhorrififilterlugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexhorrififilterlugin.min.js', true);
     ```
 - Apply effect
     - Apply effect to game object
         ```javascript
-        var pipelineInstance = scene.plugins.get('rexhorrifipipelineplugin').add(gameObject, config);
+        var controller = scene.plugins.get('rexhorrififilterlugin').add(gameObject, config);
         ```
     - Apply effect to camera
         ```javascript
-        var pipelineInstance = scene.plugins.get('rexhorrifipipelineplugin').add(camera, config);
+        var controller = scene.plugins.get('rexhorrififilterlugin').add(camera, config);
         ```
 
 #### Import plugin
@@ -52,13 +52,13 @@ Reference : [Horri-fi shader effect](https://gizmo199.itch.io/horri-fi)
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import HorrifiPipelinePlugin from 'phaser3-rex-plugins/plugins/horrifipipeline-plugin.js';
+    import HorrifiFilterPlugin from 'phaser3-rex-plugins/plugins/horrifipipeline-plugin.js';
     var config = {
         // ...
         plugins: {
             global: [{
-                key: 'rexHorrifiPipeline',
-                plugin: HorrifiPipelinePlugin,
+                key: 'rexHorrifiFilter',
+                plugin: HorrifiFilterPlugin,
                 start: true
             },
             // ...
@@ -71,11 +71,11 @@ Reference : [Horri-fi shader effect](https://gizmo199.itch.io/horri-fi)
 - Apply effect
     - Apply effect to game object
         ```javascript
-        var pipelineInstance = scene.plugins.get('rexHorrifiPipeline').add(gameObject, config);
+        var controller = scene.plugins.get('rexHorrifiFilter').add(gameObject, config);
         ```
     - Apply effect to camera
         ```javascript
-        var pipelineInstance = scene.plugins.get('rexHorrifiPipeline').add(camera, config);
+        var controller = scene.plugins.get('rexHorrifiFilter').add(camera, config);
         ```
 
 #### Import class
@@ -84,31 +84,38 @@ Reference : [Horri-fi shader effect](https://gizmo199.itch.io/horri-fi)
     ```
     npm i phaser3-rex-plugins
     ```
-- Add to game config
+- Import filter and controller class
     ```javascript
-    import HorrifiPostFx from 'phaser3-rex-plugins/plugins/horrifipipeline.js';
-    var config = {
-        // ...
-        pipeline: [HorrifiPostFx]
-        // ...
-    };
-    var game = new Phaser.Game(config);
+    import { HorrifiFilter, HorrifiController } from 'phaser3-rex-plugins/plugins/horrifipipeline.js';
+    ```
+- Register effect
+    ```js
+    if (!scene.renderer.renderNodes.hasNode(HorrifiFilter.FilterName)) {
+        scene.renderer.renderNodes.addNodeConstructor(HorrifiFilter.FilterName, HorrifiFilter);
+    }
     ```
 - Apply effect
     - Apply effect to game object
         ```javascript
-        gameObject.setPostPipeline(HorrifiPostFx);
+        // gameObject.enableFilters();
+        var filterList = gameObject.filters.internal;
+        var controller = filterList.add(
+            new HorrifiController(filterList.camera, config)
+        );
         ```
     - Apply effect to camera
         ```javascript
-        camera.setPostPipeline(HorrifiPostFx);
+        var filterList = camera.filters.internal;
+        var controller = filterList.add(
+            new HorrifiController(filterList.camera, config)
+        );
         ```
 
 ### Apply effect
 
-- Apply effect to game object. A game object only can add 1 horrifi effect.
+- Apply effect to game object.
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexHorrifiPipeline').add(gameObject, {
+    var controller = scene.plugins.get('rexHorrifiFilter').add(gameObject, {
         enable: false,
 
         // Bloom
@@ -170,31 +177,31 @@ Reference : [Horri-fi shader effect](https://gizmo199.itch.io/horri-fi)
         - `crtWidth`, `crtHeight`
 - Apply effect to camera. A camera only can add 1 horrifi effect.
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexHorrifiPipeline').add(camera, config);
+    var controller = scene.plugins.get('rexHorrifiFilter').add(camera, config);
     ```
 
 ### Remove effect
 
 - Remove effect from game object
     ```javascript
-    scene.plugins.get('rexHorrifiPipeline').remove(gameObject);
+    scene.plugins.get('rexHorrifiFilter').remove(gameObject);
     ```
 - Remove effect from camera
     ```javascript
-    scene.plugins.get('rexHorrifiPipeline').remove(camera);
+    scene.plugins.get('rexHorrifiFilter').remove(camera);
     ```
 
 ### Get effect
 
 - Get effect from game object
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexHorrifiPipeline').get(gameObject)[0];
-    // var pipelineInstances = scene.plugins.get('rexHorrifiPipeline').get(gameObject);
+    var controller = scene.plugins.get('rexHorrifiFilter').get(gameObject)[0];
+    // var controllers = scene.plugins.get('rexHorrifiFilter').get(gameObject);
     ```
 - Get effect from camera
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexHorrifiPipeline').get(camera)[0];
-    // var pipelineInstances = scene.plugins.get('rexHorrifiPipeline').get(camera);
+    var controller = scene.plugins.get('rexHorrifiFilter').get(camera)[0];
+    // var controllers = scene.plugins.get('rexHorrifiFilter').get(camera);
     ```
 
 ### Bloom
@@ -203,50 +210,50 @@ Reference : [Horri-fi shader effect](https://gizmo199.itch.io/horri-fi)
 
 - Enable
     ```javascript
-    pipelineInstance.setBloomEnable();
-    // pipelineInstance.setBloomEnable(true);
+    controller.setBloomEnable();
+    // controller.setBloomEnable(true);
     ```
     or
     ```javascript
-    pipelineInstance.bloomEnable = true;
+    controller.bloomEnable = true;
     ```
 - Disable
     ```javascript
-    pipelineInstance.setBloomEnable(false);
+    controller.setBloomEnable(false);
     ```
     or
     ```javascript
-    pipelineInstance.bloomEnable = false;
+    controller.bloomEnable = false;
     ```
 - Get
     ```javascript
-    var bloomEnable = pipelineInstance.bloomEnable;
+    var bloomEnable = controller.bloomEnable;
     ```
 
 #### Parameters
 
 - Set
     ```javascript
-    pipelineInstance.setBloomRadius(value);
-    pipelineInstance.setBloomIntensity(value);
-    pipelineInstance.setBloomThreshold(value);
-    pipelineInstance.setBloomTexelSize(width, height);
+    controller.setBloomRadius(value);
+    controller.setBloomIntensity(value);
+    controller.setBloomThreshold(value);
+    controller.setBloomTexelSize(width, height);
     ```
     or
     ```javascript
-    pipelineInstance.bloomRadius = value;
-    pipelineInstance.bloomIntensity = value;
-    pipelineInstance.bloomThreshold = value;
-    pipelineInstance.bloomTexelWidth = width;
-    pipelineInstance.bloomTexelHeight = height;
+    controller.bloomRadius = value;
+    controller.bloomIntensity = value;
+    controller.bloomThreshold = value;
+    controller.bloomTexelWidth = width;
+    controller.bloomTexelHeight = height;
     ```
 - Get
     ```javascript
-    var bloomRadius = pipelineInstance.bloomRadius;
-    var bloomIntensity = pipelineInstance.bloomIntensity;
-    var bloomThreshold = pipelineInstance.bloomThreshold;
-    var bloomTexelWidth = pipelineInstance.bloomTexelWidth;
-    var bloomTexelHeight = pipelineInstance.bloomTexelHeight;
+    var bloomRadius = controller.bloomRadius;
+    var bloomIntensity = controller.bloomIntensity;
+    var bloomThreshold = controller.bloomThreshold;
+    var bloomTexelWidth = controller.bloomTexelWidth;
+    var bloomTexelHeight = controller.bloomTexelHeight;
     ```
 
 ### Chromatic abberation
@@ -255,39 +262,39 @@ Reference : [Horri-fi shader effect](https://gizmo199.itch.io/horri-fi)
 
 - Enable
     ```javascript
-    pipelineInstance.setChromaticEnable();
-    // pipelineInstance.setChromaticEnable(true);
+    controller.setChromaticEnable();
+    // controller.setChromaticEnable(true);
     ```
     or
     ```javascript
-    pipelineInstance.chromaticEnable = true;
+    controller.chromaticEnable = true;
     ```
 - Disable
     ```javascript
-    pipelineInstance.setChromaticEnable(false);
+    controller.setChromaticEnable(false);
     ```
     or
     ```javascript
-    pipelineInstance.chromaticEnable = false;
+    controller.chromaticEnable = false;
     ```
 - Get
     ```javascript
-    var chromaticEnable = pipelineInstance.chromaticEnable;
+    var chromaticEnable = controller.chromaticEnable;
     ```
 
 #### Parameters
 
 - Set
     ```javascript
-    pipelineInstance.setChabIntensity(value);
+    controller.setChabIntensity(value);
     ```
     or
     ```javascript
-    pipelineInstance.chabIntensity = value;
+    controller.chabIntensity = value;
     ```
 - Get
     ```javascript
-    var chabIntensity = pipelineInstance.chabIntensity;
+    var chabIntensity = controller.chabIntensity;
     ```
 
 ### Vignette
@@ -296,42 +303,42 @@ Reference : [Horri-fi shader effect](https://gizmo199.itch.io/horri-fi)
 
 - Enable
     ```javascript
-    pipelineInstance.setVignetteEnable();
-    // pipelineInstance.setVignetteEnable(true);
+    controller.setVignetteEnable();
+    // controller.setVignetteEnable(true);
     ```
     or
     ```javascript
-    pipelineInstance.vignetteEnable = true;
+    controller.vignetteEnable = true;
     ```
 - Disable
     ```javascript
-    pipelineInstance.setVignetteEnable(false);
+    controller.setVignetteEnable(false);
     ```
     or
     ```javascript
-    pipelineInstance.vignetteEnable = false;
+    controller.vignetteEnable = false;
     ```
 - Get
     ```javascript
-    var vignetteEnable = pipelineInstance.vignetteEnable;
+    var vignetteEnable = controller.vignetteEnable;
     ```
 
 #### Parameters
 
 - Set
     ```javascript
-    pipelineInstance.setVignetteStrength(value);
-    pipelineInstance.setVignetteIntensity(value);
+    controller.setVignetteStrength(value);
+    controller.setVignetteIntensity(value);
     ```
     or
     ```javascript
-    pipelineInstance.vignetteStrength = value;
-    pipelineInstance.vignetteIntensity = value;
+    controller.vignetteStrength = value;
+    controller.vignetteIntensity = value;
     ```
 - Get
     ```javascript
-    var vignetteStrength = pipelineInstance.vignetteStrength;
-    var vignetteIntensity = pipelineInstance.vignetteIntensity;
+    var vignetteStrength = controller.vignetteStrength;
+    var vignetteIntensity = controller.vignetteIntensity;
     ```
 
 ### Noise
@@ -340,42 +347,42 @@ Reference : [Horri-fi shader effect](https://gizmo199.itch.io/horri-fi)
 
 - Enable
     ```javascript
-    pipelineInstance.setNoiseEnable();
-    // pipelineInstance.setNoiseEnable(true);
+    controller.setNoiseEnable();
+    // controller.setNoiseEnable(true);
     ```
     or
     ```javascript
-    pipelineInstance.noiseEnable = true;
+    controller.noiseEnable = true;
     ```
 - Disable
     ```javascript
-    pipelineInstance.setNoiseEnable(false);
+    controller.setNoiseEnable(false);
     ```
     or
     ```javascript
-    pipelineInstance.noiseEnable = false;
+    controller.noiseEnable = false;
     ```
 - Get
     ```javascript
-    var noiseEnable = pipelineInstance.noiseEnable;
+    var noiseEnable = controller.noiseEnable;
     ```
 
 #### Parameters
 
 - Set
     ```javascript
-    pipelineInstance.setNoiseStrength(value);
-    pipelineInstance.setNoiseSeed(value);
+    controller.setNoiseStrength(value);
+    controller.setNoiseSeed(value);
     ```
     or
     ```javascript
-    pipelineInstance.noiseStrength = value;
-    pipelineInstance.noiseSeed = value;
+    controller.noiseStrength = value;
+    controller.noiseSeed = value;
     ```
 - Get
     ```javascript
-    var noiseStrength = pipelineInstance.noiseStrength;
-    var noiseSeed = pipelineInstance.noiseSeed;
+    var noiseStrength = controller.noiseStrength;
+    var noiseSeed = controller.noiseSeed;
     ```
 
 ### VHS
@@ -384,39 +391,39 @@ Reference : [Horri-fi shader effect](https://gizmo199.itch.io/horri-fi)
 
 - Enable
     ```javascript
-    pipelineInstance.setVHSEnable();
-    // pipelineInstance.setVHSEnable(true);
+    controller.setVHSEnable();
+    // controller.setVHSEnable(true);
     ```
     or
     ```javascript
-    pipelineInstance.vhsEnable = true;
+    controller.vhsEnable = true;
     ```
 - Disable
     ```javascript
-    pipelineInstance.setVHSEnable(false);
+    controller.setVHSEnable(false);
     ```
     or
     ```javascript
-    pipelineInstance.vhsEnable = false;
+    controller.vhsEnable = false;
     ```
 - Get
     ```javascript
-    var vhsEnable = pipelineInstance.vhsEnable;
+    var vhsEnable = controller.vhsEnable;
     ```
 
 #### Parameters
 
 - Set
     ```javascript
-    pipelineInstance.setVhsStrength(value);
+    controller.setVhsStrength(value);
     ```
     or
     ```javascript
-    pipelineInstance.vhsStrength = value;
+    controller.vhsStrength = value;
     ```
 - Get
     ```javascript
-    var vhsStrength = pipelineInstance.vhsStrength;
+    var vhsStrength = controller.vhsStrength;
     ```
 
 ### Scanlines
@@ -425,39 +432,39 @@ Reference : [Horri-fi shader effect](https://gizmo199.itch.io/horri-fi)
 
 - Enable
     ```javascript
-    pipelineInstance.setScanlinesEnable();
-    // pipelineInstance.setScanlinesEnable(true);
+    controller.setScanlinesEnable();
+    // controller.setScanlinesEnable(true);
     ```
     or
     ```javascript
-    pipelineInstance.scanlinesEnable = true;
+    controller.scanlinesEnable = true;
     ```
 - Disable
     ```javascript
-    pipelineInstance.setScanlinesEnable(false);
+    controller.setScanlinesEnable(false);
     ```
     or
     ```javascript
-    pipelineInstance.scanlinesEnable = false;
+    controller.scanlinesEnable = false;
     ```
 - Get
     ```javascript
-    var scanlinesEnable = pipelineInstance.scanlinesEnable;
+    var scanlinesEnable = controller.scanlinesEnable;
     ```
 
 #### Parameters
 
 - Set
     ```javascript
-    pipelineInstance.setScanStrength(value);
+    controller.setScanStrength(value);
     ```
     or
     ```javascript
-    pipelineInstance.scanStrength = value;
+    controller.scanStrength = value;
     ```
 - Get
     ```javascript
-    var scanStrength = pipelineInstance.scanStrength;
+    var scanStrength = controller.scanStrength;
     ```
 
 ### CRT
@@ -466,51 +473,51 @@ Reference : [Horri-fi shader effect](https://gizmo199.itch.io/horri-fi)
 
 - Enable
     ```javascript
-    pipelineInstance.setCRTEnable();
-    // pipelineInstance.setCRTEnable(true);
+    controller.setCRTEnable();
+    // controller.setCRTEnable(true);
     ```
     or
     ```javascript
-    pipelineInstance.crtEnable = true;
+    controller.crtEnable = true;
     ```
 - Disable
     ```javascript
-    pipelineInstance.setCRTEnable(false);
+    controller.setCRTEnable(false);
     ```
     or
     ```javascript
-    pipelineInstance.crtEnable = false;
+    controller.crtEnable = false;
     ```
 - Get
     ```javascript
-    var crtEnable = pipelineInstance.crtEnable;
+    var crtEnable = controller.crtEnable;
     ```
 
 #### Parameters
 
 - Set
     ```javascript
-    pipelineInstance.setCrtSize(width, height);
+    controller.setCrtSize(width, height);
     ```
     or
     ```javascript
-    pipelineInstance.crtWidth = width;
-    pipelineInstance.crtHeight = height;
+    controller.crtWidth = width;
+    controller.crtHeight = height;
     ```
 - Get
     ```javascript
-    var crtWidth = pipelineInstance.crtWidth;
-    var crtHeight = pipelineInstance.crtHeight;
+    var crtWidth = controller.crtWidth;
+    var crtHeight = controller.crtHeight;
     ```
 
 ### Enable all effects
 
 - Enable all
     ```javascript
-    pipelineInstance.setEnable();
-    // pipelineInstance.setEnable(true);
+    controller.setEnable();
+    // controller.setEnable(true);
     ```
 - Disable all
     ```javascript
-    pipelineInstance.setEnable(false);
+    controller.setEnable(false);
     ```

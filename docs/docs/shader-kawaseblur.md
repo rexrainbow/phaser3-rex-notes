@@ -6,7 +6,7 @@
 Kawase-blur post processing filter. [Reference](https://github.com/pixijs/filters/blob/main/filters/kawase-blur/src/kawase-blur.frag)
 
 - Author: Rex
-- A post-fx shader effect
+- A filter shader effect
 
 !!! warning "WebGL only"
     Only work in WebGL render mode.

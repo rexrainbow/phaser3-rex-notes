@@ -1,5 +1,4 @@
 import HasProperty from '../../utils/object/HasProperty.js';
-import GetFXFactory from './GetFXFactory.js';
 import AddClearEffectCallback from './AddClearEffectCallback.js';
 
 var AddDisplacementProperties = function (gameObject) {
@@ -8,10 +7,7 @@ var AddDisplacementProperties = function (gameObject) {
         return gameObject;
     }
 
-    var fxFactory = GetFXFactory(gameObject);
-    if (!fxFactory) {
-        return gameObject;
-    }
+    var filterList = gameObject.filters.internal;
 
     var displacementKey,
         displacementX = 0.005,
@@ -29,12 +25,12 @@ var AddDisplacementProperties = function (gameObject) {
 
             if ((displacementKey === null) || (displacementKey === false)) {
                 if (gameObject._displacement) {
-                    fxFactory.remove(gameObject._displacement);
+                    filterList.remove(gameObject._displacement);
                     gameObject._displacement = undefined;
                 }
             } else {
                 if (!gameObject._displacement) {
-                    gameObject._displacement = fxFactory.addDisplacement(displacementKey, displacementX, displacementY);
+                    gameObject._displacement = filterList.addDisplacement(displacementKey, displacementX, displacementY);
                 }
 
                 gameObject._displacement.setTexture(displacementKey);

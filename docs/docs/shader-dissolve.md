@@ -1,9 +1,9 @@
 ## Introduction
 
-Dissolve transition post processing filter. ([Reference](https://github.com/ykob/glsl-dissolve/))
+Dissolve transition effect. ([Reference](https://github.com/ykob/glsl-dissolve/))
 
 - Author: Rex
-- A post-fx shader effect
+- A filter shader effect
 
 !!! warning "WebGL only"
     Only work in WebGL render mode.
@@ -23,16 +23,16 @@ Dissolve transition post processing filter. ([Reference](https://github.com/ykob
 
 - Load plugin (minify file) in preload stage
     ```javascript
-    scene.load.plugin('rexdissolvepipelineplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexdissolvepipelineplugin.min.js', true);
+    scene.load.plugin('rexdissolvefilterplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexdissolvefilterplugin.min.js', true);
     ```
 - Apply effect
     - Apply effect to game object
         ```javascript
-        var pipelineInstance = scene.plugins.get('rexdissolvepipelineplugin').add(gameObject, config);
+        var controller = scene.plugins.get('rexdissolvefilterplugin').add(gameObject, config);
         ```
     - Apply effect to camera
         ```javascript
-        var pipelineInstance = scene.plugins.get('rexdissolvepipelineplugin').add(camera, config);
+        var controller = scene.plugins.get('rexdissolvefilterplugin').add(camera, config);
         ```
 
 #### Import plugin
@@ -43,13 +43,13 @@ Dissolve transition post processing filter. ([Reference](https://github.com/ykob
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import DissolvePipelinePlugin from 'phaser3-rex-plugins/plugins/dissolvepipeline-plugin.js';
+    import DissolveFilterPlugin from 'phaser3-rex-plugins/plugins/dissolvefilter-plugin.js';
     var config = {
         // ...
         plugins: {
             global: [{
-                key: 'rexDissolvePipeline',
-                plugin: DissolvePipelinePlugin,
+                key: 'rexDissolveFilter',
+                plugin: DissolveFilterPlugin,
                 start: true
             },
             // ...
@@ -62,11 +62,11 @@ Dissolve transition post processing filter. ([Reference](https://github.com/ykob
 - Apply effect
     - Apply effect to game object
         ```javascript
-        var pipelineInstance = scene.plugins.get('rexDissolvePipeline').add(gameObject, config);
+        var controller = scene.plugins.get('rexDissolveFilter').add(gameObject, config);
         ```
     - Apply effect to camera
         ```javascript
-        var pipelineInstance = scene.plugins.get('rexDissolvePipeline').add(camera, config);
+        var controller = scene.plugins.get('rexDissolveFilter').add(camera, config);
         ```
 
 #### Import class
@@ -75,31 +75,38 @@ Dissolve transition post processing filter. ([Reference](https://github.com/ykob
     ```
     npm i phaser3-rex-plugins
     ```
-- Add to game config
+- Import filter and controller class
     ```javascript
-    import DissolvePostFx from 'phaser3-rex-plugins/plugins/dissolvepipeline.js';
-    var config = {
-        // ...
-        pipeline: [DissolvePostFx]
-        // ...
-    };
-    var game = new Phaser.Game(config);
+    import { DissolveFilter, DissolveController } from 'phaser3-rex-plugins/plugins/dissolvefilter.js';
+    ```
+- Register effect
+    ```js
+    if (!scene.renderer.renderNodes.hasNode(DissolveFilter.FilterName)) {
+        scene.renderer.renderNodes.addNodeConstructor(DissolveFilter.FilterName, DissolveFilter);
+    }
     ```
 - Apply effect
     - Apply effect to game object
         ```javascript
-        gameObject.setPostPipeline(DissolvePostFx);
+        // gameObject.enableFilters();
+        var filterList = gameObject.filters.internal;
+        var controller = filterList.add(
+            new DissolveController(filterList.camera, config)
+        );
         ```
     - Apply effect to camera
         ```javascript
-        camera.setPostPipeline(DissolvePostFx);
+        var filterList = camera.filters.internal;
+        var controller = filterList.add(
+            new DissolveController(filterList.camera, config)
+        );
         ```
 
 ### Apply effect
 
-- Apply effect to game object. A game object only can add 1 dissolve effect.
+- Apply effect to game object. 
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexDissolvePipeline').add(gameObject, {
+    var controller = scene.plugins.get('rexDissolveFilter').add(gameObject, {
         // toTexture: textureKey,
         // toFrame: frameName,
         // resizeMode: 1,
@@ -126,72 +133,72 @@ Dissolve transition post processing filter. ([Reference](https://github.com/ykob
         - `undefined` : A random value.
     - `fromEdgeStart`, `fromEdgeWidth` : Dissolve edge start, edge width of from-texture (texture of game object, or render result of camera).
     - `toEdgeStart`, `toEdgeWidth` : Reveal edge start, edge width of to-texture.
-- Apply effect to camera. A camera only can add 1 dissolve effect.
+- Apply effect to camera.
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexDissolvePipeline').add(camera, config);
+    var controller = scene.plugins.get('rexDissolveFilter').add(camera, config);
     ```
 
 ### Remove effect
 
 - Remove effect from game object
     ```javascript
-    scene.plugins.get('rexDissolvePipeline').remove(gameObject);
+    scene.plugins.get('rexDissolveFilter').remove(gameObject);
     ```
 - Remove effect from camera
     ```javascript
-    scene.plugins.get('rexDissolvePipeline').remove(camera);
+    scene.plugins.get('rexDissolveFilter').remove(camera);
     ```
 
 ### Get effect
 
 - Get effect from game object
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexDissolvePipeline').get(gameObject)[0];
-    // var pipelineInstances = scene.plugins.get('rexDissolvePipeline').get(gameObject);
+    var controller = scene.plugins.get('rexDissolveFilter').get(gameObject)[0];
+    // var controllers = scene.plugins.get('rexDissolveFilter').get(gameObject);
     ```
 - Get effect from camera
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexDissolvePipeline').get(camera)[0];
-    // var pipelineInstances = scene.plugins.get('rexDissolvePipeline').get(camera);
+    var controller = scene.plugins.get('rexDissolveFilter').get(camera)[0];
+    // var controllers = scene.plugins.get('rexDissolveFilter').get(camera);
     ```
 
 ### Transition target texture
 
 - Get
     ```javascript
-    var textureKey = pipelineInstance.toFrame.texture.key;
-    var frameName = pipelineInstance.toFrame.name;
+    var textureKey = controller.toFrame.texture.key;
+    var frameName = controller.toFrame.name;
     ```
 - Set
     ```javascript
-    pipelineInstance.setTransitionTargetTexture(textureKey, frameName);
-    // pipelineInstance.setTransitionTargetTexture(textureKey, frameName, resizeMode);
+    controller.setTransitionTargetTexture(textureKey, frameName);
+    // controller.setTransitionTargetTexture(textureKey, frameName, resizeMode);
     ```
 
 ### Progress
 
 - Get
     ```javascript
-    var progress = pipelineInstance.progress;
+    var progress = controller.progress;
     ```
 - Set
     ```javascript
-    pipelineInstance.setProgress(value);  // value: 0~1
+    controller.setProgress(value);  // value: 0~1
     ```
     or
     ```javascript
-    pipelineInstance.progress = value;  // value: 0~1
+    controller.progress = value;  // value: 0~1
     ```
 
 #### Resize mode
 
 - Get
     ```javascript
-    var mode = pipelineInstance.resizeMode;
+    var mode = controller.resizeMode;
     ```
 - Set
     ```javascript
-    pipelineInstance.setResizeMode(mode);
+    controller.setResizeMode(mode);
     ```
     - `mode` : 
         - `0`, or `'stretch'` : The target texture is stretched to the size of the source texture.
@@ -202,20 +209,20 @@ Dissolve transition post processing filter. ([Reference](https://github.com/ykob
 
 - Get
     ```javascript
-    var noiseX = pipelineInstance.noiseX;
-    var noiseY = pipelineInstance.noiseY;
-    var noiseZ = pipelineInstance.noiseZ;
+    var noiseX = controller.noiseX;
+    var noiseY = controller.noiseY;
+    var noiseZ = controller.noiseZ;
     ```
 - Set
     ```javascript
-    pipelineInstance.noiseX = noiseX;
-    pipelineInstance.noiseY = noiseY;
-    pipelineInstance.noiseZ = noiseZ;
+    controller.noiseX = noiseX;
+    controller.noiseY = noiseY;
+    controller.noiseZ = noiseZ;
     ```
     or
     ```javascript
-    pipelineInstance.setNoise(noiseX, noiseY, noiseZ);
-    // pipelineInstance.setNoise(); // Passing 3 random float numbers
+    controller.setNoise(noiseX, noiseY, noiseZ);
+    // controller.setNoise(); // Passing 3 random float numbers
     ```
 
 ### Edge
@@ -223,34 +230,34 @@ Dissolve transition post processing filter. ([Reference](https://github.com/ykob
 - Get
     - From texture (texture of game object, or render result of camera)
         ```javascript
-        var edgeStart = pipelineInstance.fromEdgeStart;
-        var edgeWidth = pipelineInstance.fromEdgeWidth;
+        var edgeStart = controller.fromEdgeStart;
+        var edgeWidth = controller.fromEdgeWidth;
         ```
     - To texture (transition target texture)
         ```javascript
-        var edgeStart = pipelineInstance.toEdgeStart;
-        var edgeWidth = pipelineInstance.toEdgeWidth;
+        var edgeStart = controller.toEdgeStart;
+        var edgeWidth = controller.toEdgeWidth;
         ``` 
 - Set
     - From texture (texture of game object, or render result of camera)
         ```javascript
-        pipelineInstance.fromEdgeStart = edgeStart;
-        pipelineInstance.fromEdgeWidth = edgeWidth;
+        controller.fromEdgeStart = edgeStart;
+        controller.fromEdgeWidth = edgeWidth;
         ```
         or
         ```javascript
-        pipelineInstance.setFromEdge(edgeStart, edgeWidth);
+        controller.setFromEdge(edgeStart, edgeWidth);
         ```
         - `edgeStart` : `0`~`1`, default value is `0.01`
         - `edgeWidth` : `0`~`1`, default value is `0.05`
     - To texture (transition target texture)
         ```javascript
-        pipelineInstance.toEdgeStart = edgeStart;
-        pipelineInstance.toEdgeWidth = edgeWidth;
+        controller.toEdgeStart = edgeStart;
+        controller.toEdgeWidth = edgeWidth;
         ``` 
         or
         ```javascript
-        pipelineInstance.setToEdge(edgeStart, edgeWidth);
+        controller.setToEdge(edgeStart, edgeWidth);
         ```
         - `edgeStart` : `0`~`1`, default value is `0.01`
         - `edgeWidth` : `0`~`1`, default value is `0.05`

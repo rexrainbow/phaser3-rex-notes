@@ -1,5 +1,4 @@
 import HasProperty from '../../utils/object/HasProperty.js';
-import GetFXFactory from './GetFXFactory.js';
 import AddClearEffectCallback from './AddClearEffectCallback.js';
 
 var AddBokehProperties = function (gameObject) {
@@ -8,10 +7,7 @@ var AddBokehProperties = function (gameObject) {
         return gameObject;
     }
 
-    var fxFactory = GetFXFactory(gameObject);
-    if (!fxFactory) {
-        return gameObject;
-    }
+    var filterList = gameObject.filters.internal;
 
     var bokehRadius,
         bokehAmount = 1,
@@ -29,12 +25,12 @@ var AddBokehProperties = function (gameObject) {
 
             if ((bokehRadius === null) || (bokehRadius === false)) {
                 if (gameObject._bokeh) {
-                    fxFactory.remove(gameObject._bokeh);
+                    filterList.remove(gameObject._bokeh);
                     gameObject._bokeh = undefined;
                 }
             } else {
                 if (!gameObject._bokeh) {
-                    gameObject._bokeh = fxFactory.addBokeh(bokehRadius, bokehAmount, bokehContrast);
+                    gameObject._bokeh = filterList.addBokeh(bokehRadius, bokehAmount, bokehContrast);
                 }
 
                 gameObject._bokeh.radius = bokehRadius;
