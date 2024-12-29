@@ -6,7 +6,7 @@ Carry DOM element, built-in game object of phaser.
 !!! tip "Limitations"
     Dom elements appear above or below your game canvas. You cannot blend them into the display list, meaning you cannot have a DOM Element, then a Sprite, then another DOM Element behind it.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

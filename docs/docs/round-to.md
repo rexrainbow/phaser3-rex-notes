@@ -2,7 +2,7 @@
 
 Round/ceil/floor to the given precision, built-in method of phaser.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

@@ -2,7 +2,7 @@
 
 Wrap the given `value` between `min` and `max`, built-in method of phaser.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

@@ -2,7 +2,7 @@
 
 Base class of all game object in phaser.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

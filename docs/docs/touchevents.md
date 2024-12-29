@@ -2,7 +2,7 @@
 
 Built-in touch/mouse events of phaser.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 !!! note
     No touch input event fired in preload stage.

@@ -2,7 +2,7 @@
 
 Calculates interpolation value over t (0~1), built-in method of phaser.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

@@ -2,7 +2,7 @@
 
 Decode a base64 string to an array buffer, or create a base64 string from an array buffer, built-in method of phaser.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

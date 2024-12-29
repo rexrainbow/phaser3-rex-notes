@@ -2,7 +2,7 @@
 
 lighting system from normal map.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 !!! warning "WebGL only"
     It only works in WebGL render mode.

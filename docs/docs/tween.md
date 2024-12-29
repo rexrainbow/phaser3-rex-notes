@@ -2,7 +2,7 @@
 
 Change properties by tween equations, built-in object of phaser.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

@@ -2,7 +2,7 @@
 
 Create an array representing the range of numbers, built-in method of phaser.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

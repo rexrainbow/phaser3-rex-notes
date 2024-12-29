@@ -2,7 +2,7 @@
 
 Input system of each scene, built-in object of phaser.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

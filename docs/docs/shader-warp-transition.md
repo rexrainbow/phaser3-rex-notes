@@ -2,7 +2,7 @@
 
 Warp transition post processing filter.
 
-- Author: Richard Davey
+- Author: Phaser Team
 - A filter shader effect
 
 !!! warning "WebGL only"

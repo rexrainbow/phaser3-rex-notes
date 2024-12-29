@@ -2,7 +2,7 @@
 
 Capitalizes the first letter of a string, built-in method of phaser.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

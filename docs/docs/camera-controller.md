@@ -2,7 +2,7 @@
 
 Scroll/zoom camera.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

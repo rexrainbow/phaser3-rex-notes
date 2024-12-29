@@ -2,7 +2,7 @@
 
 Store data in key-value pairs, built-in object of phaser.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

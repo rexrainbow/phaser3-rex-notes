@@ -2,7 +2,7 @@
 
 Manipulate the vertices of images, built-in game object of phaser.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 !!! warning "WebGL only"
     It only works in WebGL render mode.

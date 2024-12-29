@@ -2,7 +2,7 @@
 
 Arcade physics body.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

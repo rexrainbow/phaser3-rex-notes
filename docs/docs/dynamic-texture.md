@@ -2,7 +2,7 @@
 
 Canvas Dynamic Texture stored in [texture cache](textures.md), built-in object of phaser.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

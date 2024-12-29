@@ -2,7 +2,7 @@
 
 Parses a [Tiled](https://www.mapeditor.org/) [JSON object](https://doc.mapeditor.org/en/stable/reference/json-map-format/) into a new MapData object.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

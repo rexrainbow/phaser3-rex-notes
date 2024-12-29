@@ -2,7 +2,7 @@
 
 Get random value, built-in methods of phaser.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

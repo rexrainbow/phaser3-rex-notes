@@ -2,7 +2,7 @@
 
 Apply mask on game object. Built-in render of phaser.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

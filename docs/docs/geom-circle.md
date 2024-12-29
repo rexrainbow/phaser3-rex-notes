@@ -2,7 +2,7 @@
 
 Circle shape and methods, built-in methods of phaser.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

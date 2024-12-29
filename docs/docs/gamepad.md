@@ -2,7 +2,7 @@
 
 Gamepad's state of buttons, or axis.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

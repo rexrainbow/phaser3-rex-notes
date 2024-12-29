@@ -2,7 +2,7 @@
 
 Get random value from a random generator, built-in methods of phaser.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

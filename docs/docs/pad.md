@@ -2,7 +2,7 @@
 
 Takes the given string and pads it out, to the length required, built-in method of phaser.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

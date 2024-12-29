@@ -14,7 +14,7 @@ Built-in filters.
 All Game Objects and camera support filters. These are effects applied after the Game Object has been rendered.
 
 
-- Author: Richard Davey
+- Author: Phaser Team
 - Filters shader effects
 
 !!! warning "WebGL only"

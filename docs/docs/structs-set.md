@@ -2,7 +2,7 @@
 
 A collection of unique elements, built-in data structure of phaser.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

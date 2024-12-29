@@ -2,7 +2,7 @@
 
 An ordered list, built-in data structure of phaser.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

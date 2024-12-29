@@ -2,7 +2,7 @@
 
 Shader effect of camera.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

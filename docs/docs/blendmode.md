@@ -2,7 +2,7 @@
 
 Constant value of blend modes.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

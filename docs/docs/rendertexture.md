@@ -2,7 +2,7 @@
 
 Paste game objects or textures on [dynaimc texture](dynamic-texture.md), built-in game object of phaser.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

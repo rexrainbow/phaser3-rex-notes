@@ -2,7 +2,7 @@
 
 Control the position and angle of children game objects, built-in game object of phaser.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

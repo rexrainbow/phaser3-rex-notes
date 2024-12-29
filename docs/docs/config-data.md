@@ -2,7 +2,7 @@
 
 Get parameters from configuration object.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

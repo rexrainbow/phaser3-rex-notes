@@ -2,7 +2,7 @@
 
 Drawing text by texture with a callback for each character triggered at every tick, built-in game object of phaser.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

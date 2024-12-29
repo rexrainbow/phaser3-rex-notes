@@ -2,7 +2,7 @@
 
 Render a group of textured vertices and manipulate the view of those vertices, such as rotation, translation or scaling.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 !!! warning "WebGL only"
     It only works in WebGL render mode.

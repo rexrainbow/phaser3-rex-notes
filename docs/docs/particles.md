@@ -2,7 +2,7 @@
 
 Particles uses its own lightweight physics system, and can interact only with its Emitter's bounds and zones. Built-in game object of phaser.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 !!! note
     API is not compatible with 3.55.x

@@ -2,7 +2,7 @@
 
 Play sounds, built-in object of phaser.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

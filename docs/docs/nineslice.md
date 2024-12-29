@@ -3,7 +3,7 @@
 Display a texture-based object that can be stretched both horizontally and vertically, 
 but that retains fixed-sized corners, built-in game object of phaser.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 !!! warning "WebGL only"
     Only work in WebGL render mode.

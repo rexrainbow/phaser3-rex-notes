@@ -2,7 +2,7 @@
 
 Format string with variables, built-in method of phaser.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

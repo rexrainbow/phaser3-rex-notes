@@ -2,7 +2,7 @@
 
 Snap a value to nearest grid slice, built-in methods of phaser.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

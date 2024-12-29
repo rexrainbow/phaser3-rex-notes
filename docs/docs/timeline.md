@@ -2,7 +2,7 @@
 
 Schedule commands to happen at specific times in the future, built-in object of phaser.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

@@ -2,7 +2,7 @@
 
 Animation and animations manager.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

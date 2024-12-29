@@ -3,7 +3,7 @@
 A Plane is a kind of [Mesh game object](mesh.md) with one-sided grid of cells. which 
 can have a texture that is either repeated (tiled) across each cell, or applied to the full Plane.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 !!! warning "WebGL only"
     It only works in WebGL render mode.

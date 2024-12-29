@@ -2,7 +2,7 @@
 
 *World* of Arcade physics engine in phaser.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

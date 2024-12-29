@@ -2,7 +2,7 @@
 
 Enable or disable full screen mode, built-in method of phaser.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

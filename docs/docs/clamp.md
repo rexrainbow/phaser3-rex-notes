@@ -2,7 +2,7 @@
 
 Force a value within the boundaries by clamping it to the range `min`, `max`, built-in method of phaser.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

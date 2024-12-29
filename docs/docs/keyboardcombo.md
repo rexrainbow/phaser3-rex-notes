@@ -2,7 +2,7 @@
 
 Combo-keys events.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

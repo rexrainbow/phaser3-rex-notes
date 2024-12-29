@@ -2,7 +2,7 @@
 
 Polygon shape, built-in game object of phaser.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

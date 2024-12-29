@@ -12,7 +12,7 @@ A local display list, built-in game object of phaser.
 !!! warning "Layers cannot be added to Containers"
     Containers can be added to Layers, but Layers cannot be added to Containers.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

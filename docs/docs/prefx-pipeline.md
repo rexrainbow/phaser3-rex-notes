@@ -3,7 +3,7 @@
 Pre fx pipelines for texture-base game objects. 
 A texture-base game object has a pre-fx effect.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 !!! warning "WebGL only"
     All kinds of post fx pipelines only work in WebGL render mode.

@@ -2,7 +2,7 @@
 
 Handling playback of a video file, video stream or media stream.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

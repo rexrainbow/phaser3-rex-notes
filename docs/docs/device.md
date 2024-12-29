@@ -2,7 +2,7 @@
 
 Get information of device, built-in properties of phaser.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

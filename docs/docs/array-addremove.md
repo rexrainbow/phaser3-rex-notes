@@ -3,7 +3,7 @@
 
 Add/insert/remove item(s) of an array, built-in methods of phaser.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

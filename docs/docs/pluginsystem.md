@@ -2,7 +2,7 @@
 
 Plugin system, built-in system of phaser.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

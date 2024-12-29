@@ -2,7 +2,7 @@
 
 Arcade physics Image/Sprite/Group object.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

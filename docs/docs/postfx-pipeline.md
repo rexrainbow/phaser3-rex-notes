@@ -3,7 +3,7 @@
 Post fx pipelines for game objects or camera. 
 A game object or a camera can stack many post-fx effect.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 !!! warning "WebGL only"
     All kinds of post fx pipelines only work in WebGL render mode.

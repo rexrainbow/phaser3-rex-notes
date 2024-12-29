@@ -2,7 +2,7 @@
 
 A point light with gradient color in a circle.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 !!! warning "WebGL only"
     It only works in WebGL render mode.

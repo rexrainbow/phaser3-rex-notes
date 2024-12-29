@@ -2,7 +2,7 @@
 
 A representation of a vector in 2D space (`{x, y}`), built-in object of phaser.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 

@@ -2,7 +2,7 @@
 
 Non-rendering rectangular game object for creating drop zones and input hit areas, built-in game object of phaser.
 
-- Author: Richard Davey
+- Author: Phaser Team
 
 ## Usage
 
