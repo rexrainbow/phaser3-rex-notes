@@ -33,6 +33,7 @@ var AddInputEvent = function (gameObject) {
                 gameObject._glowFilter = gameObject
                     .enableFilters()
                     .filters.internal.addGlow()
+                    .setPaddingOverride(null)
             }
             console.log(gameObject.x, gameObject.y)
         }, this)
