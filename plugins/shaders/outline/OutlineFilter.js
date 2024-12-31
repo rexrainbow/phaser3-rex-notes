@@ -22,7 +22,7 @@ class OutlineFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
 
     updateShaderConfig(controller, drawingContext) {
         var programManager = this.programManager;
-        
+
         var samples = Math.max((controller.quality * MAX_SAMPLES), MIN_SAMPLES);
         var angleStep = (Math.PI * 2 / samples).toFixed(7);
         var anglestepAddition = programManager.getAdditionsByTag('anglestep')[0];

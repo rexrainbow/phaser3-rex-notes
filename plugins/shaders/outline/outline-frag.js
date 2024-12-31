@@ -5,6 +5,8 @@ const frag = `\
 
 #define ANGLESTEP 0.314
 
+#pragma phaserTemplate(fragmentDefine)
+
 #ifdef GL_FRAGMENT_PRECISION_HIGH
 #define highmedp highp
 #else
@@ -26,7 +28,7 @@ const float DOUBLE_PI = 3.14159265358979323846264 * 2.;
 #pragma phaserTemplate(fragmentHeader)
 
 void main() {
-  vec4 front = texture2D(uMainSampler, outTexCoord);
+  vec4 front = boundedSampler(uMainSampler, outTexCoord);
 
   if (thickness > 0.0) {
     vec2 mag = vec2(thickness/texSize.x, thickness/texSize.y);
@@ -35,7 +37,7 @@ void main() {
     vec2 offset;
     for (float angle = 0.; angle < DOUBLE_PI; angle += ANGLESTEP) {
         offset = vec2(mag.x * cos(angle), mag.y * sin(angle));        
-        curColor = texture2D(uMainSampler, outTexCoord + offset);
+        curColor = boundedSampler(uMainSampler, outTexCoord + offset);
         maxAlpha = max(maxAlpha, curColor.a);
     }
     vec3 resultColor = front.rgb + (outlineColor.rgb * (1. - front.a)) * maxAlpha;
