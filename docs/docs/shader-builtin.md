@@ -29,7 +29,7 @@ All Game Objects and camera support filters. These are effects applied after the
 
 ## Usage
 
-Steps :
+#### Steps
 
 - Game object
     1. Enable `filters`
