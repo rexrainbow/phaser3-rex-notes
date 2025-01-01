@@ -16,13 +16,14 @@ class Demo extends Phaser.Scene {
         var points = curve.getPoints(36);
         var cat = this.add.rope(400, 300, 'cat', undefined, points, true)
 
-        // var graphics = this.add.graphics({
-        //     lineStyle: { width: 2, color: 0xff0000 }
-        // })
-        // cat.setDebug(graphics)
+        this.debugGraphics = this.add.graphics();
+        cat.setDebug(this.debugGraphics);
     }
 
-    update() { }
+    update() { 
+        this.debugGraphics.clear();
+        this.debugGraphics.lineStyle(2, 0xff0000);
+    }
 }
 
 var config = {
