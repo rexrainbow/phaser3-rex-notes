@@ -1,5 +1,6 @@
 import Render from './render/Render.js';
-import BatchHandlerTriangles from './render/BatchHandlerTriangles.js';
+import Methods from './methods/Methods.js';
+import BatchHandlerTriangles from '../../../utils/renderer/BatchHandlerTriangles.js';
 import AddNodeConstructor from '../../../utils/renderer/AddNodeConstructor.js';
 import { FourPointsTriangles } from './face/DefaultTriangles.js';
 import Face from './face/Face.js';
@@ -27,11 +28,17 @@ class Mesh extends GameObject {
         }
         super(scene, 'rexMesh');
 
+        this.dirtyFlags = 0;
+        // Each face has 3 vertics, each vertex has x,y, u,v, alpha, color members
         this.faces = [];
+        // Collect vertics' x,y
         this.vertices;
+        // Collect vertics' u,v
         this.uv;
-        this.colors;
+        // Collect vertics' alpha
         this.alphas;
+        // Collect vertics' color
+        this.colors;
 
         this.anims = new AnimationState(this);
 
@@ -52,6 +59,16 @@ class Mesh extends GameObject {
         return DefaultMeshNodes;
     }
 
+    get dirty() {
+        return this.dirtyFlags !== 0;
+    }
+
+    clear() {
+        this.faces.length = 0;
+        this.setFaceCountDirtyFlag();
+        return this;
+    }
+
     addFace(u0, v0, u1, v1, u2, v2) {
         var face;
         if (typeof (u0) === 'number') {
@@ -59,35 +76,13 @@ class Mesh extends GameObject {
         } else {
             face = u0;
         }
-        // setFrameSize(frameWidth, frameHeight)
-        // setFrameUV(frameU0, frameV0, frameU1, frameV1)
         this.faces.push(face);
-        return this;
-    }
+        this.setFaceCountDirtyFlag();
 
-    resizeArrays(newSize) {
-        this.vertices = new Float32Array(newSize * 3);
-        this.uv = new Float32Array(newSize * 3);
-        
-        var colors = this.colors;
-        var alphas = this.alphas;
-
-        colors = new Uint32Array(newSize * 3);
-        alphas = new Float32Array(newSize * 3);
-
-        for (var i = 0; i < newSize * 2; i++)
-        {
-            colors[i] = 0xffffff;
-            alphas[i] = 1;
-        }
-
-        this.colors = colors;
-        this.alphas = alphas;
+        // setFrameSize(frameWidth, frameHeight)
+        // setUV(frameU0, frameV0, frameU1, frameV1)
 
         return this;
-    }
-
-    updateVertices() {
     }
 }
 
@@ -106,6 +101,7 @@ Phaser.Class.mixin(Mesh,
         Components.Visible,
         Components.ScrollFactor,
         Render,
+        Methods
     ]
 );
 

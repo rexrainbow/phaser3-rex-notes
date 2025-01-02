@@ -1,53 +1,176 @@
+import Vertex from './VertextData.js';
 import GetInCenter from './GetInCenter.js';
 
+const RadToDeg = Phaser.Math.RadToDeg;
+const DegToRad = Phaser.Math.DegToRad;
+
 class Face {
-    constructor(u0, v0, u1, v1, u2, v2, baseU, baseV) {
+    constructor(mesh, u0, v0, u1, v1, u2, v2, baseU, baseV) {
+        this.mesh = mesh;
+
+        this._x = 0;
+        this._y = 0;
+        this._rotation = 0;
+        this._dx = 0;
+        this._dy = 0;
+
+        this.vertex0 = new Vertex(mesh);
+        this.vertex1 = new Vertex(mesh);
+        this.vertex2 = new Vertex(mesh);
+        this.ox = 0;
+        this.oy = 0;
+
+
+        // Check if baseU is defined, then scale u0, u1, u2 accordingly
         if (baseU !== undefined) {
             u0 /= baseU;
             u1 /= baseU;
             u2 /= baseU;
         }
+        // Check if baseV is defined, then scale v0, v1, v2 accordingly
         if (baseV !== undefined) {
-            v0 /= baseU;
-            v1 /= baseU;
-            v2 /= baseU;
+            v0 /= baseV;
+            v1 /= baseV;
+            v2 /= baseV;
+        }
+        this.setNormalUV(u0, v0, u1, v1, u2, v2);
+    }
+
+    get x() {
+        return this._x;
+    }
+
+    set x(value) {
+        if (value === this._x) {
+            return;
+        }
+        this.
+            this._x = value;
+        this.updateVertices();
+    }
+
+    get y() {
+        return this._y;
+    }
+
+    set y(value) {
+        if (value === this._y) {
+            return;
+        }
+        this._y = value;
+        this.updateVertices();
+    }
+
+    get rotation() {
+        return this._rotation;
+    }
+
+    set rotation(value) {
+        if (value === this._rotation) {
+            return;
         }
 
-        this.u0 = u0; // 0~1
-        this.v0 = v0; // 0~1
-        this.u1 = u1; // 0~1
-        this.v1 = v1; // 0~1
-        this.u2 = u2; // 0~1
-        this.v2 = v2; // 0~1
+        this._rotation = value;
+
+        var ox = this.ox;
+        var oy = this.oy;
+
+        this.vertex0.rotateAround(ox, oy, value);
+        this.vertex1.rotateAround(ox, oy, value);
+        this.vertex2.rotateAround(ox, oy, value);
+    }
+
+    get angle() {
+        return RadToDeg(this._rotation);
+    }
+
+    set angle(value) {
+        return DegToRad(value);
+    }
+
+    setNormalUV(u0, v0, u1, v1, u2, v2) {
+        this.vertex0.setNormalUV(u0, v0);
+        this.vertex1.setNormalUV(u1, v1);
+        this.vertex2.setNormalUV(u2, v2);
+
+        return this;
     }
 
     setFrameSize(frameWidth, frameHeight) {
-        this.frameX0 = this.u0 * frameWidth;
-        this.frameY0 = this.v0 * frameHeight;
-        this.frameX1 = this.u1 * frameWidth;
-        this.frameY1 = this.v1 * frameHeight;
-        this.frameX2 = this.u2 * frameWidth;
-        this.frameY2 = this.v2 * frameHeight;
+        this.vertex0.setFrameSize(frameWidth, frameHeight);
+        this.vertex1.setFrameSize(frameWidth, frameHeight);
+        this.vertex2.setFrameSize(frameWidth, frameHeight);
 
-        var centerUV = GetInCenter(this.frameX0, this.frameY0, this.frameX1, this.frameY1, this.frameX2, this.frameY2, true);
-        this.frameCenterX = centerUV.x;
-        this.frameCenterY = centerUV.y;
+        this.setOXY();
 
         return this;
     }
 
-    setFrameUV(frameU0, frameV0, frameU1, frameV1) {
-        var frameU = frameU1 - frameU0;
-        var frameV = frameV1 = frameV0;
-        this.frameU0 = this.u0 * frameU;
-        this.frameV0 = this.v0 * frameV;
-        this.frameU1 = this.u1 * frameU;
-        this.frameV1 = this.v1 * frameV;
-        this.frameU2 = this.u2 * frameU;
-        this.frameV2 = this.v2 * frameV;
+    setOXY(ox, oy) {
+        if (ox === undefined) {
+            // Calculate the incenter (cx, cy) of the triangle
+            var centerXY = GetInCenter(
+                this.vertex0.x, this.vertex0.y,
+                this.vertex1.x, this.vertex1.y,
+                this.vertex2.x, this.vertex2.y,
+                true
+            );
+            this.ox = centerXY.x;
+            this.oy = centerXY.y;
+        } else if (oy === undefined) {
+            switch (ox) {
+                case 1:
+                    this.ox = triangle.x1;
+                    this.oy = triangle.y1;
+                    break;
+                case 2:
+                    this.ox = triangle.x2;
+                    this.oy = triangle.y2;
+                    break;
+                default:
+                    this.ox = triangle.x0;
+                    this.oy = triangle.y0;
+                    break;
+            }
+        } else {
+            this.ox = ox;
+            this.oy = oy;
+        }
+
+        return this;
+    }
+
+    setUV(frameU0, frameV0, frameU1, frameV1) {
+        this.vertex0.setUV(frameU0, frameV0, frameU1, frameV1);
+        this.vertex1.setUV(frameU0, frameV0, frameU1, frameV1);
+        this.vertex2.setUV(frameU0, frameV0, frameU1, frameV1);
+
+        return this;
+    }
+
+    // TODO
+    updateVertices() {
+        var triangle = this.frameTriangle;
+
+        var offsetX = this.x;
+        var offsetY = this.y;
+
+        this.vertex0.x = triangle.x0 + offsetX;
+        this.vertex0.y = triangle.y0 + offsetY;
+
+        this.vertex1.x = triangle.x1 + offsetX;
+        this.vertex1.y = triangle.y1 + offsetY;
+
+        this.vertex2.x = triangle.x2 + offsetX;
+        this.vertex2.y = triangle.y2 + offsetY;
+
+        return this;
+    }
+
+    setRotation(value) {
+        this.rotation = value;
         return this;
     }
 }
-
 
 export default Face;
