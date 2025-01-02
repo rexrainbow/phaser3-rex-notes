@@ -10,15 +10,31 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('classroom', 'assets/images/backgrounds/classroom.png');
+        this.load.image('card', 'assets/images/card2.png');
     }
 
     create() {
-        var gameObject = new Mesh(this, 400, 300, 'classroom');
+        this.add.image(400, 0, 'card').setOrigin(0);
+
+        var gameObject = new Mesh(this, 0, 0, 'card');
         this.add.existing(gameObject);
+
+        var face0 = gameObject.createFace();
+        face0.setNormalUV(/*0*/ 0, 0, /*2*/ 0, 1, /*3*/ 1, 1);
+
+        var face1 = gameObject.createFace();
+        face1.setNormalUV(/*0*/ 0, 0, /*3*/ 1, 1, /*1*/ 1, 0);
+
+        gameObject.addFaces([face0, face1]);
+
+        this.debugGraphics = this.add.graphics()
+        gameObject.setDebug(this.debugGraphics)
     }
 
-    update() { }
+    update() {
+        this.debugGraphics.clear();
+        this.debugGraphics.lineStyle(2, 0xff0000);
+    }
 }
 
 var config = {

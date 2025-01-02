@@ -54,16 +54,16 @@ export default {
 
     resizeArrays() {
         var size = this.faces.length;
-        this.vertices = new Float32Array(size * 6);
-        this.uv = new Float32Array(size * 6);
-        this.colors = new Uint32Array(size * 3);
-        this.alphas = new Float32Array(size * 3);
+        this.renderData.vertices =  new Float32Array(size * 6);
+        this.renderData.uv = new Float32Array(size * 6);
+        this.renderData.colors = new Uint32Array(size * 3);
+        this.renderData.alphas = new Float32Array(size * 3);
 
         return this;
     },
 
     updateUVs() {
-        var uv = this.uv,
+        var uv = this.renderData.uv,
             index;
         var faces = this.faces,
             face;
@@ -83,7 +83,7 @@ export default {
     },
 
     updateVertices() {
-        var vertices = this.vertices,
+        var vertices = this.renderData.vertices,
             index;
         var faces = this.faces,
             face;
@@ -103,7 +103,7 @@ export default {
     },
 
     updateAlphas() {
-        var alphas = this.alphas,
+        var alphas = this.renderData.alphas,
             index;
         var faces = this.faces,
             face;
@@ -120,7 +120,7 @@ export default {
     },
 
     updateColors() {
-        var colors = this.colors,
+        var colors = this.renderData.colors,
             index;
         var faces = this.faces,
             face;

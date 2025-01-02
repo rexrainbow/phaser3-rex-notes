@@ -132,11 +132,11 @@ class BatchHandlerTriangles extends BatchHandlerQuad {
         var f = calcMatrix.f;
 
         var meshVerticesLength = vertices.length;
-
         for (var i = 0; i < meshVerticesLength; i += 6) {
             for (var j = 0; j < 3; j++) {
-                var x = vertices[i + j * 2];
-                var y = vertices[i + j * 2 + 1];
+                var vertexIndex = i + j * 2;
+                var x = vertices[vertexIndex];
+                var y = vertices[vertexIndex + 1];
 
                 var tx = x * a + y * c + e;
                 var ty = x * b + y * d + f;
@@ -146,16 +146,26 @@ class BatchHandlerTriangles extends BatchHandlerQuad {
                     ty = Math.round(ty);
                 }
 
+                var tu = uv[vertexIndex];
+                var tv = uv[vertexIndex + 1];
+
+                var tintIndex = (i / 2) + j;
+                var tint = getTint(
+                    colors[tintIndex],
+                    alphas[tintIndex] * alpha
+                );
+
                 vertexViewF32[vertexOffset32++] = tx;
                 vertexViewF32[vertexOffset32++] = ty;
-                vertexViewF32[vertexOffset32++] = uv[i + j * 2];
-                vertexViewF32[vertexOffset32++] = uv[i + j * 2 + 1];
+                vertexViewF32[vertexOffset32++] = tu;
+                vertexViewF32[vertexOffset32++] = tv;
                 vertexViewF32[vertexOffset32++] = textureDatum;
                 vertexViewF32[vertexOffset32++] = tintFill;
-                vertexViewU32[vertexOffset32++] = getTint(
-                    colors[i / 2 + j],
-                    alphas[i / 2 + j] * alpha
-                );
+                vertexViewU32[vertexOffset32++] = tint;
+
+                if (debugCallback) {
+                    debugVerts.push(tx, ty);
+                }
             }
 
             this.instanceCount++;
@@ -163,18 +173,6 @@ class BatchHandlerTriangles extends BatchHandlerQuad {
         }
 
         if (debugCallback) {
-            var debugVerts = [];
-            for (var i = 0; i < meshVerticesLength; i += 2) {
-                var x = vertices[i];
-                var y = vertices[i + 1];
-                var tx = x * a + y * c + e;
-                var ty = x * b + y * d + f;
-                if (roundPixels) {
-                    tx = Math.round(tx);
-                    ty = Math.round(ty);
-                }
-                debugVerts.push(tx, ty);
-            }
             debugCallback.call(src, src, meshVerticesLength, debugVerts);
         }
     }

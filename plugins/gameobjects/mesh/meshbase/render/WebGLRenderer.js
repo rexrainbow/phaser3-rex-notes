@@ -9,6 +9,10 @@ var WebGLRenderer = function (renderer, src, drawingContext, parentMatrix) {
     var camera = drawingContext.camera;
     camera.addToRenderList(src);
 
+    if (src.faces.length === 0) {
+        return;
+    }
+
     var calcMatrix = GetCalcMatrix(src, camera, parentMatrix).calc;
 
     if (src.dirty) {
@@ -31,10 +35,10 @@ var WebGLRenderer = function (renderer, src, drawingContext, parentMatrix) {
         src,
         calcMatrix,
         src.texture.source[0].glTexture,
-        src.vertices,
-        src.uv,
-        src.colors,
-        src.alphas,
+        src.renderData.vertices,
+        src.renderData.uv,
+        src.renderData.colors,
+        src.renderData.alphas,
         src.alpha,
         src.tintFill,
         renderOptions,

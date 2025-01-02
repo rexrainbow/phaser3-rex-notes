@@ -105,6 +105,7 @@ class Vertex {
     setFrameSize(frameWidth, frameHeight) {
         this.frameX = this.nu * frameWidth;
         this.frameY = this.nv * frameHeight;
+        this.resetPosition();
         return this;
     }
 

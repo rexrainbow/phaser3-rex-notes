@@ -1,39 +1,28 @@
-import Vertex from './VertextData.js';
+import Vertex from './Vertex.js';
 import GetInCenter from './GetInCenter.js';
 
 const RadToDeg = Phaser.Math.RadToDeg;
 const DegToRad = Phaser.Math.DegToRad;
 
 class Face {
-    constructor(mesh, u0, v0, u1, v1, u2, v2, baseU, baseV) {
+    constructor(mesh, vertex0, vertex1, vertex2) {
+        if (vertex0 === undefined) { vertex0 = new Vertex(mesh); }
+        if (vertex1 === undefined) { vertex1 = new Vertex(mesh); }
+        if (vertex2 === undefined) { vertex2 = new Vertex(mesh); }
+
         this.mesh = mesh;
+
+        this.vertex0 = vertex0;
+        this.vertex1 = vertex1;
+        this.vertex2 = vertex2;
 
         this._x = 0;
         this._y = 0;
         this._rotation = 0;
         this._dx = 0;
         this._dy = 0;
-
-        this.vertex0 = new Vertex(mesh);
-        this.vertex1 = new Vertex(mesh);
-        this.vertex2 = new Vertex(mesh);
         this.ox = 0;
         this.oy = 0;
-
-
-        // Check if baseU is defined, then scale u0, u1, u2 accordingly
-        if (baseU !== undefined) {
-            u0 /= baseU;
-            u1 /= baseU;
-            u2 /= baseU;
-        }
-        // Check if baseV is defined, then scale v0, v1, v2 accordingly
-        if (baseV !== undefined) {
-            v0 /= baseV;
-            v1 /= baseV;
-            v2 /= baseV;
-        }
-        this.setNormalUV(u0, v0, u1, v1, u2, v2);
     }
 
     get x() {
