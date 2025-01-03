@@ -1,4 +1,4 @@
-import FaceMethods from './FaceMethods.js';
+import VertexMethods from './VertexMethods.js';
 import UpdateMethods from './UpdateMethods.js';
 import DebugMethods from './DebugMethods.js';
 
@@ -6,7 +6,7 @@ var Methods = {};
 
 Object.assign(
     Methods,
-    FaceMethods,
+    VertexMethods,
     UpdateMethods,
     DebugMethods
 )

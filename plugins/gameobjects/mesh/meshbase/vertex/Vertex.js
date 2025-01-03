@@ -2,8 +2,9 @@ const Linear = Phaser.Math.Linear;
 const RotateAround = Phaser.Math.RotateAround;
 
 class Vertex {
-    constructor(mesh) {
-        this.mesh = mesh;
+    constructor() {
+        this.parent = undefined;
+        this.name = '';
 
         this.nu = 0;
         this.nv = 0;
@@ -18,6 +19,16 @@ class Vertex {
         this.color = 0xffffff;
     }
 
+    setParent(parent) {
+        this.parent = parent;
+        return this;
+    }
+
+    setName(name) {
+        this.name = name;
+        return this;
+    }
+
     get u() {
         return this._u;
     }
@@ -27,7 +38,10 @@ class Vertex {
             return;
         }
         this._u = value;
-        this.mesh.setUVDirtyFlag();
+
+        if (this.parent) {
+            this.parent.setUVDirtyFlag();
+        }
     }
 
     get v() {
@@ -39,7 +53,10 @@ class Vertex {
             return;
         }
         this._v = value;
-        this.mesh.setUVDirtyFlag();
+
+        if (this.parent) {
+            this.parent.setUVDirtyFlag();
+        }
     }
 
     get x() {
@@ -51,7 +68,10 @@ class Vertex {
             return;
         }
         this._x = value;
-        this.mesh.setVertexDirtyFlag();
+
+        if (this.parent) {
+            this.parent.setVertexDirtyFlag();
+        }
     }
 
     get y() {
@@ -63,7 +83,10 @@ class Vertex {
             return;
         }
         this._y = value;
-        this.mesh.setVertexDirtyFlag();
+
+        if (this.parent) {
+            this.parent.setVertexDirtyFlag();
+        }
     }
 
     get alpha() {
@@ -75,7 +98,10 @@ class Vertex {
             return;
         }
         this._alpha = value;
-        this.mesh.setAlphaDirtyFlag();
+
+        if (this.parent) {
+            this.parent.setAlphaDirtyFlag();
+        }
     }
 
     get color() {
@@ -87,7 +113,10 @@ class Vertex {
             return;
         }
         this._color = value;
-        this.mesh.setColorDirtyFlag();
+
+        if (this.parent) {
+            this.parent.setColorDirtyFlag();
+        }
     }
 
     setNormalUV(u, v) {

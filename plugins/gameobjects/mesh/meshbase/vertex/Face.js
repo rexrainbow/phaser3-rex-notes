@@ -5,16 +5,15 @@ const RadToDeg = Phaser.Math.RadToDeg;
 const DegToRad = Phaser.Math.DegToRad;
 
 class Face {
-    constructor(mesh, vertex0, vertex1, vertex2) {
-        if (vertex0 === undefined) { vertex0 = new Vertex(mesh); }
-        if (vertex1 === undefined) { vertex1 = new Vertex(mesh); }
-        if (vertex2 === undefined) { vertex2 = new Vertex(mesh); }
+    constructor(vertex0, vertex1, vertex2) {
+        if (vertex0 === undefined) { vertex0 = new Vertex(); }
+        if (vertex1 === undefined) { vertex1 = new Vertex(); }
+        if (vertex2 === undefined) { vertex2 = new Vertex(); }
 
-        this.mesh = mesh;
+        this.parent = undefined;
+        this.name = '';
 
-        this.vertex0 = vertex0;
-        this.vertex1 = vertex1;
-        this.vertex2 = vertex2;
+        this.vertices = [vertex0, vertex1, vertex2];
 
         this._x = 0;
         this._y = 0;
@@ -25,6 +24,44 @@ class Face {
         this.oy = 0;
     }
 
+    setParent(parent) {
+        this.parent = parent;
+        this.vertices[0].setParent(parent);
+        this.vertices[1].setParent(parent);
+        this.vertices[2].setParent(parent);
+
+        return this;
+    }
+
+    setName(name) {
+        this.name = name;
+        return this;
+    }
+
+    get vertex0() {
+        return this.vertices[0];
+    }
+
+    set vertex0(value) {
+        this.vertices[0] = value;
+    }
+
+    get vertex1() {
+        return this.vertices[1];
+    }
+
+    set vertex1(value) {
+        this.vertices[1] = value;
+    }
+
+    get vertex2() {
+        return this.vertices[2];
+    }
+
+    set vertex2(value) {
+        this.vertices[2] = value;
+    }
+
     get x() {
         return this._x;
     }
@@ -33,8 +70,7 @@ class Face {
         if (value === this._x) {
             return;
         }
-        this.
-            this._x = value;
+        this._x = value;
         this.updateVertices();
     }
 
@@ -64,9 +100,9 @@ class Face {
         var ox = this.ox;
         var oy = this.oy;
 
-        this.vertex0.rotateAround(ox, oy, value);
-        this.vertex1.rotateAround(ox, oy, value);
-        this.vertex2.rotateAround(ox, oy, value);
+        this.vertices[0].rotateAround(ox, oy, value);
+        this.vertices[1].rotateAround(ox, oy, value);
+        this.vertices[2].rotateAround(ox, oy, value);
     }
 
     get angle() {
@@ -78,17 +114,17 @@ class Face {
     }
 
     setNormalUV(u0, v0, u1, v1, u2, v2) {
-        this.vertex0.setNormalUV(u0, v0);
-        this.vertex1.setNormalUV(u1, v1);
-        this.vertex2.setNormalUV(u2, v2);
+        this.vertices[0].setNormalUV(u0, v0);
+        this.vertices[1].setNormalUV(u1, v1);
+        this.vertices[2].setNormalUV(u2, v2);
 
         return this;
     }
 
     setFrameSize(frameWidth, frameHeight) {
-        this.vertex0.setFrameSize(frameWidth, frameHeight);
-        this.vertex1.setFrameSize(frameWidth, frameHeight);
-        this.vertex2.setFrameSize(frameWidth, frameHeight);
+        for (var i = 0, cnt = this.vertices.length; i < cnt; i++) {
+            this.vertices[i].setFrameSize(frameWidth, frameHeight);
+        }
 
         this.setOXY();
 
@@ -99,9 +135,9 @@ class Face {
         if (ox === undefined) {
             // Calculate the incenter (cx, cy) of the triangle
             var centerXY = GetInCenter(
-                this.vertex0.x, this.vertex0.y,
-                this.vertex1.x, this.vertex1.y,
-                this.vertex2.x, this.vertex2.y,
+                this.vertices[0].x, this.vertices[0].y,
+                this.vertices[1].x, this.vertices[1].y,
+                this.vertices[2].x, this.vertices[2].y,
                 true
             );
             this.ox = centerXY.x;
@@ -130,9 +166,9 @@ class Face {
     }
 
     setUV(frameU0, frameV0, frameU1, frameV1) {
-        this.vertex0.setUV(frameU0, frameV0, frameU1, frameV1);
-        this.vertex1.setUV(frameU0, frameV0, frameU1, frameV1);
-        this.vertex2.setUV(frameU0, frameV0, frameU1, frameV1);
+        this.vertices[0].setUV(frameU0, frameV0, frameU1, frameV1);
+        this.vertices[1].setUV(frameU0, frameV0, frameU1, frameV1);
+        this.vertices[2].setUV(frameU0, frameV0, frameU1, frameV1);
 
         return this;
     }
@@ -144,14 +180,14 @@ class Face {
         var offsetX = this.x;
         var offsetY = this.y;
 
-        this.vertex0.x = triangle.x0 + offsetX;
-        this.vertex0.y = triangle.y0 + offsetY;
+        this.vertices[0].x = triangle.x0 + offsetX;
+        this.vertices[0].y = triangle.y0 + offsetY;
 
-        this.vertex1.x = triangle.x1 + offsetX;
-        this.vertex1.y = triangle.y1 + offsetY;
+        this.vertices[1].x = triangle.x1 + offsetX;
+        this.vertices[1].y = triangle.y1 + offsetY;
 
-        this.vertex2.x = triangle.x2 + offsetX;
-        this.vertex2.y = triangle.y2 + offsetY;
+        this.vertices[2].x = triangle.x2 + offsetX;
+        this.vertices[2].y = triangle.y2 + offsetY;
 
         return this;
     }
