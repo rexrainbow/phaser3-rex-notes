@@ -61,11 +61,20 @@ class BatchHandlerTriangles extends BatchHandlerQuad {
     }
 
     _generateElementIndices(instances) {
-        var buffer = new ArrayBuffer(instances * 3 * 2); // TODO
+        // Independent Triangles
+        var buffer = new ArrayBuffer(instances * 4 + 2);
         var indices = new Uint16Array(buffer);
-        var len = indices.length;
-        for (var i = 0; i < len; i++) {
-            indices[i] = i;
+
+        // 0,0,1,2,2,3,4,5,5,6,7,8,8,...
+        var offset = 0;
+        indices[offset++] = 0;
+        indices[offset++] = 0;
+        for (var i = 0; i < instances; i++) {
+            var index = i * 3;
+            indices[offset++] = index;
+            indices[offset++] = index + 1;
+            indices[offset++] = index + 2;
+            indices[offset++] = index + 2;
         }
         return buffer;
     }

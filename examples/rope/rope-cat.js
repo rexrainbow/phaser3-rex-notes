@@ -12,15 +12,16 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var curve = new Phaser.Curves.Ellipse(0, 0, 200);
-        var points = curve.getPoints(36);
+        // var curve = new Phaser.Curves.Ellipse(0, 0, 200);
+        // var points = curve.getPoints(36);
+        var points = [{ x: -200, y: 0 }, { x: 200, y: 0 }];
         var cat = this.add.rope(400, 300, 'cat', undefined, points, true)
 
         this.debugGraphics = this.add.graphics();
         cat.setDebug(this.debugGraphics);
     }
 
-    update() { 
+    update() {
         this.debugGraphics.clear();
         this.debugGraphics.lineStyle(2, 0xff0000);
     }
