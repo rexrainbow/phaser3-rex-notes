@@ -69,7 +69,7 @@ class Face {
             return;
         }
         this._x = value;
-        this.updateVertices();
+        this.updateVerticesPosition();
     }
 
     get y() {
@@ -81,7 +81,7 @@ class Face {
             return;
         }
         this._y = value;
-        this.updateVertices();
+        this.updateVerticesPosition();
     }
 
     get rotation() {
@@ -172,7 +172,7 @@ class Face {
         return this;
     }
 
-    updateVertices() {
+    updateVerticesPosition() {
         var offsetX = this.x;
         var offsetY = this.y;
 

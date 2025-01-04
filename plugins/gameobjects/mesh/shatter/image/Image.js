@@ -1,16 +1,14 @@
-import MeshBase from '../../utils/MeshBase.js';
+import Mesh from '../../meshbase/Mesh.js';
+import GenerateGridVertices from '../../meshbase/methods/GenerateGridVertices.js';
 import ShatterRectangleToTriangles from '../../../../utils/math/triangulate/ShatterRectangleToTriangles.js';
-import Face from './Face.js';
 import { WorldXYToLocalXY } from '../../utils/LocalXY.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
-const GenerateGridVerts = Phaser.Geom.Mesh.GenerateGridVerts;
-const Vertex = Phaser.Geom.Mesh.Vertex;
 const DistanceSquared = Phaser.Math.Distance.Squared;
 const DefaultRingRadiusList = [1 / 27, 3 / 27, 9 / 27];
 
-class ShatterImage extends MeshBase {
+class ShatterImage extends Mesh {
     constructor(scene, x, y, key, frame, config) {
         if (IsPlainObject(x)) {
             config = x;
@@ -22,7 +20,6 @@ class ShatterImage extends MeshBase {
 
         super(scene, x, y, key, frame);
         this.type = 'rexShatterImage';
-        this.hideCCW = false;
         this.resetImage();
 
         this.shatterCenter = { x: null, y: null };
@@ -48,17 +45,7 @@ class ShatterImage extends MeshBase {
     }
 
     resetImage() {
-        this.setSizeToFrame();
-
-        this.clear();
-        this.dirtyCache[9] = -1;
-        GenerateGridVerts({
-            mesh: this,
-            width: this.frame.cutWidth / this.height,
-            height: this.frame.cutHeight / this.height,
-        });
-
-        this.setOrtho(this.width / this.height, 1);
+        GenerateGridVertices(this, 1, 1);
         return this
     }
 
@@ -101,15 +88,16 @@ class ShatterImage extends MeshBase {
 
         // Clear faces and vertices
         this.clear();
-        this.dirtyCache[9] = -1;
         if ((this.width === 0) || (this.height === 0)) {
             return this;
         }
 
+        centerX /= this.width;
+        centerY /= this.height;
         var result = ShatterRectangleToTriangles({
-            width: this.width,
-            height: this.height,
-            center: this.shatterCenter,
+            width: 1, height: 1,
+            center: { x: centerX, y: centerY },
+
             triangleOutput: false,
             ringRadiusList: this.ringRadiusList,
             variation: this.variation,
@@ -119,46 +107,29 @@ class ShatterImage extends MeshBase {
         var indices = result.indices;
 
         // Calculate vertex data
-        var verticesData = [];
-        var srcWidth = this.width;
-        var srcHeight = this.height;
-        var vHalfWidth = (this.frame.cutWidth / srcHeight) / 2;
-        var vHalfHeight = (this.frame.cutHeight / srcHeight) / 2;
-
-        var frameU0 = this.frame.u0;
-        var frameU1 = this.frame.u1;
-        var frameV0 = this.frame.v0;
-        var frameV1 = this.frame.v1;
-        var frameU = frameU1 - frameU0;
-        var frameV = frameV1 - frameV0;
-
+        var vertexData = [];
         for (var i = 0, cnt = vertices.length; i < cnt; i++) {
             var p = vertices[i];
             var px = p[0];
             var py = p[1];
 
-            verticesData.push({
+            vertexData.push({
                 g: DistanceSquared(centerX, centerY, px, py),
-                x: (px / srcHeight) - vHalfWidth,
-                y: (py / srcHeight) - vHalfHeight,
-                u: frameU0 + (frameU * (px / srcWidth)),
-                v: frameV0 + (frameV * (py / srcHeight))
+                x: px, y: py,
             })
         }
 
         // Build face
         for (var i = 0, cnt = indices.length; i < cnt; i += 3) {
-            var v0 = verticesData[indices[i + 0]];
-            var v1 = verticesData[indices[i + 1]];
-            var v2 = verticesData[indices[i + 2]];
+            var v0 = vertexData[indices[i + 0]];
+            var v1 = vertexData[indices[i + 1]];
+            var v2 = vertexData[indices[i + 2]];
 
-            var vert1 = new Vertex(v0.x, -v0.y, 0, v0.u, v0.v);
-            var vert2 = new Vertex(v1.x, -v1.y, 0, v1.u, v1.v);
-            var vert3 = new Vertex(v2.x, -v2.y, 0, v2.u, v2.v);
-            var face = new Face(vert1, vert2, vert3);
-
-            this.vertices.push(vert1, vert2, vert3);
-            this.faces.push(face);
+            var vertex0 = this.createVertex(v0.x, v0.y);
+            var vertex1 = this.createVertex(v1.x, v1.y);
+            var vertex2 = this.createVertex(v2.x, v2.y);
+            var face = this.createFace(vertex0, vertex1, vertex2);
+            this.addFace(face);
 
             // Sort faces from center
             face.g = Math.min(v0.g, v1.g, v2.g);
@@ -171,17 +142,6 @@ class ShatterImage extends MeshBase {
 
         return this;
     }
-
-    startUpdate() {
-        this.ignoreDirtyCache = true;
-        return this;
-    }
-
-    stopUpdate() {
-        this.ignoreDirtyCache = false;
-        return this;
-    }
-
 }
 
 export default ShatterImage;

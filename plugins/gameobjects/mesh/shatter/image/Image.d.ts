@@ -56,8 +56,5 @@ declare class ShatterImage extends Phaser.GameObjects.Mesh {
     variation: number;
     setVariation(variation: number): this;
 
-    startUpdate(): this;
-    stopUpdate(): this;
-
     resetImage(): this;
 }

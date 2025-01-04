@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import ShatterImagePlugin from '../../plugins/shatterimage-plugin.js'
 
 class Demo extends Phaser.Scene {
@@ -30,21 +30,18 @@ class Demo extends Phaser.Scene {
                 });
             })
             .on('pointerup', function () {
-                image.startUpdate();
                 image.task = this.tweens.add({
                     targets: image.faces,
                     alpha: 0,
                     angle: function () { return -90 + Math.random() * 180; },
-                    y: '-=0.5',
+                    y: '+=400',
                     ease: 'Linear',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
-                    duration: 1000,
+                    duration: 2000,
                     delay: this.tweens.stagger(20),
                     repeat: 0,            // -1: infinity
                     yoyo: false,
                     onComplete: function () {
-                        image
-                            .stopUpdate()
-                            .resetImage()
+                        image.resetImage()
                     }
                 });
             }, this)
