@@ -1,5 +1,6 @@
 import phaser from '../../../phaser/src/phaser.js';
 import Mesh from '../../plugins/gameobjects/mesh/meshbase/Mesh.js';
+import GenerateGridVertices from '../../plugins/gameobjects/mesh/meshbase/methods/GenerateGridVertices.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -19,19 +20,14 @@ class Demo extends Phaser.Scene {
 
         gameObject.setScale(0.5).setAngle(-45)
 
-        var face0 = gameObject.createFace();
-        face0.setNormalUV(/*0*/ 0, 0, /*2*/ 0, 1, /*3*/ 1, 1);
-
-        var face1 = gameObject.createFace();
-        face1.setNormalUV(/*0*/ 0, 0, /*3*/ 1, 1, /*1*/ 1, 0);
-
-        gameObject.addFaces([face0, face1]);
+        GenerateGridVertices(gameObject, 2, 2)
 
         this.debugGraphics = this.add.graphics();
         gameObject.setDebug(this.debugGraphics);
 
-        face0.x -= 300;
-        face0.angle = 90;
+        var face = gameObject.faces[0];
+        face.x -= 200;
+        face.angle = 90;
 
     }
 

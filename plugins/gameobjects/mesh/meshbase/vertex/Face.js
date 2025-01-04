@@ -18,6 +18,8 @@ class Face {
         this._x = 0; // face offsetX
         this._y = 0; // face offsetY
         this._rotation = 0;
+        this._alpha = 1;
+        this._color = 0xffffff;
     }
 
     setParent(parent) {
@@ -110,6 +112,36 @@ class Face {
         this.rotation = DegToRad(value);
     }
 
+    get alpha() {
+        return this._alpha;
+    }
+
+    set alpha(value) {
+        if (this._alpha === value) {
+            return;
+        }
+        this._alpha = value;
+
+        this.vertices[0].setAlpha(value);
+        this.vertices[1].setAlpha(value);
+        this.vertices[2].setAlpha(value);
+    }
+
+    get color() {
+        return this._color;
+    }
+
+    set color(value) {
+        if (this._color === value) {
+            return;
+        }
+        this._color = value;
+
+        this.vertices[0].setColor(value);
+        this.vertices[1].setColor(value);
+        this.vertices[2].setColor(value);
+    }
+
     setNormalUV(u0, v0, u1, v1, u2, v2) {
         this.vertices[0].setNormalUV(u0, v0);
         this.vertices[1].setNormalUV(u1, v1);
@@ -160,6 +192,16 @@ class Face {
 
     setRotation(value) {
         this.rotation = value;
+        return this;
+    }
+
+    setAlpha(value) {
+        this.alpha = value;
+        return this;
+    }
+
+    setColor(value) {
+        this.color = value;
         return this;
     }
 }

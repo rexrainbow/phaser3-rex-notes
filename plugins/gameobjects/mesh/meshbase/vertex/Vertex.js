@@ -188,6 +188,11 @@ class Vertex {
         return this;
     }
 
+    setAlpha(value) {
+        this.alpha = value;
+        return this;
+    }
+
     setColor(value) {
         this.color = value;
         return this;
