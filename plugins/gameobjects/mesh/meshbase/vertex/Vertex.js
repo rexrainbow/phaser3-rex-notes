@@ -59,6 +59,38 @@ class Vertex {
         }
     }
 
+    get frameX() {
+        return this._frameX;
+    }
+
+    set frameX(value) {
+        if (this._frameX === value) {
+            return;
+        }
+        this._frameX = value;
+        this._x = value + this.dx;
+
+        if (this.parent) {
+            this.parent.setVertexDirtyFlag();
+        }
+    }
+
+    get frameY() {
+        return this._frameY;
+    }
+
+    set frameY(value) {
+        if (this._frameY === value) {
+            return;
+        }
+        this._frameY = value;
+        this._y = value + this.dy;
+
+        if (this.parent) {
+            this.parent.setVertexDirtyFlag();
+        }
+    }
+
     get x() {
         return this._x;
     }
@@ -68,6 +100,7 @@ class Vertex {
             return;
         }
         this._x = value;
+        this._dx = value - this._frameX;
 
         if (this.parent) {
             this.parent.setVertexDirtyFlag();
@@ -83,6 +116,7 @@ class Vertex {
             return;
         }
         this._y = value;
+        this._dy = value - this._frameY;
 
         if (this.parent) {
             this.parent.setVertexDirtyFlag();

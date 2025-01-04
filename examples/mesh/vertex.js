@@ -14,27 +14,26 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        // this.add.image(400, 0, 'card').setOrigin(0);
-
         var gameObject = new Mesh(this, 400, 300, 'card');
         this.add.existing(gameObject);
 
-        gameObject.setScale(0.5).setAngle(-45)
+        gameObject.setScale(0.5)
 
-        var face0 = gameObject.createFace();
-        face0.setNormalUV(/*0*/ 0, 0, /*2*/ 0, 1, /*3*/ 1, 1);
+        var vertex0 = gameObject.createVertex(0, 0);
+        var vertex1 = gameObject.createVertex(1, 0);
+        var vertex2 = gameObject.createVertex(0, 1);
+        var vertex3 = gameObject.createVertex(1, 1);
 
-        var face1 = gameObject.createFace();
-        face1.setNormalUV(/*0*/ 0, 0, /*3*/ 1, 1, /*1*/ 1, 0);
+        var face0 = gameObject.createFace(vertex0, vertex2, vertex3);
+        var face1 = gameObject.createFace(vertex0, vertex3, vertex1);
 
         gameObject.addFaces([face0, face1]);
 
         this.debugGraphics = this.add.graphics();
         gameObject.setDebug(this.debugGraphics);
 
-        face0.x -= 300;
-        face0.angle = 90;
-
+        vertex0.y -= 200;
+        vertex2.y += 200;
     }
 
     update() {

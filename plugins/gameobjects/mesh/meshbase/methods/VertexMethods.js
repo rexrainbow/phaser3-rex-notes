@@ -11,8 +11,13 @@ export default {
         return this;
     },
 
-    createVertex() {
-        return new Vertex();
+    createVertex(nu, nv) {
+        if (nu === undefined) { nu = 0; }
+        if (nv === undefined) { nv = 0; }
+
+        var vertex = new Vertex();
+        vertex.setNormalUV(nu, nv);
+        return vertex;
     },
 
     createFace(vertex0, vertex1, vertex2) {
