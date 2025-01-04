@@ -30,8 +30,10 @@ export default {
         this.setFaceCountDirtyFlag();
 
         var frame = this.frame;
-        face.setFrameSize(frame.cutWidth, frame.cutHeight);
-        face.setUV(frame.u0, frame.v0, frame.u1, frame.v1);
+        face
+            .setFrameSize(frame.cutWidth, frame.cutHeight)
+            .setUV(frame.u0, frame.v0, frame.u1, frame.v1)
+            .resetVerticesPosition();
 
         var vertices = this.vertices;
         face.vertices.forEach(function (faceVertex) {

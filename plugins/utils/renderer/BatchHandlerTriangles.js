@@ -62,19 +62,18 @@ class BatchHandlerTriangles extends BatchHandlerQuad {
 
     _generateElementIndices(instances) {
         // Independent Triangles
-        var buffer = new ArrayBuffer(instances * 4 + 2);
+        var buffer = new ArrayBuffer(instances * 5);
         var indices = new Uint16Array(buffer);
 
-        // 0,0,1,2,2,3,4,5,5,6,7,8,8,...
+        // 0,0,1,2,2,3,3,4,5,5,6,6,7,8,8,....
         var offset = 0;
-        indices[offset++] = 0;
-        indices[offset++] = 0;
         for (var i = 0; i < instances; i++) {
             var index = i * 3;
+            indices[offset++] = index;      // Duplicate
             indices[offset++] = index;
             indices[offset++] = index + 1;
             indices[offset++] = index + 2;
-            indices[offset++] = index + 2;
+            indices[offset++] = index + 2;  // Duplicate
         }
         return buffer;
     }
@@ -140,12 +139,18 @@ class BatchHandlerTriangles extends BatchHandlerQuad {
         var e = calcMatrix.e;
         var f = calcMatrix.f;
 
+        var displayOffsetX = -src.displayOriginX;
+        var displayOffsetY = -src.displayOriginY;
+
         var meshVerticesLength = vertices.length;
         for (var i = 0; i < meshVerticesLength; i += 6) {
             for (var j = 0; j < 3; j++) {
                 var vertexIndex = i + j * 2;
                 var x = vertices[vertexIndex];
                 var y = vertices[vertexIndex + 1];
+
+                x += displayOffsetX;
+                y += displayOffsetY;
 
                 var tx = x * a + y * c + e;
                 var ty = x * b + y * d + f;

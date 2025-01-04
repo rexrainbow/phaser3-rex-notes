@@ -15,13 +15,9 @@ class Face {
 
         this.vertices = [vertex0, vertex1, vertex2];
 
-        this._x = 0;
-        this._y = 0;
+        this._x = 0; // face offsetX
+        this._y = 0; // face offsetY
         this._rotation = 0;
-        this._dx = 0;
-        this._dy = 0;
-        this.ox = 0;
-        this.oy = 0;
     }
 
     setParent(parent) {
@@ -97,8 +93,9 @@ class Face {
 
         this._rotation = value;
 
-        var ox = this.ox;
-        var oy = this.oy;
+        var oxy = GetInCenter(this, true);
+        var ox = oxy.x;
+        var oy = oxy.y;
 
         this.vertices[0].rotateAround(ox, oy, value);
         this.vertices[1].rotateAround(ox, oy, value);
@@ -110,7 +107,7 @@ class Face {
     }
 
     set angle(value) {
-        return DegToRad(value);
+        this.rotation = DegToRad(value);
     }
 
     setNormalUV(u0, v0, u1, v1, u2, v2) {
@@ -123,45 +120,15 @@ class Face {
 
     setFrameSize(frameWidth, frameHeight) {
         for (var i = 0, cnt = this.vertices.length; i < cnt; i++) {
-            this.vertices[i].setFrameSize(frameWidth, frameHeight);
+            this.vertices[i].setFrameSize(frameWidth, frameHeight)
         }
-
-        this.setOXY();
-
         return this;
     }
 
-    setOXY(ox, oy) {
-        if (ox === undefined) {
-            // Calculate the incenter (cx, cy) of the triangle
-            var centerXY = GetInCenter(
-                this.vertices[0].x, this.vertices[0].y,
-                this.vertices[1].x, this.vertices[1].y,
-                this.vertices[2].x, this.vertices[2].y,
-                true
-            );
-            this.ox = centerXY.x;
-            this.oy = centerXY.y;
-        } else if (oy === undefined) {
-            switch (ox) {
-                case 1:
-                    this.ox = triangle.x1;
-                    this.oy = triangle.y1;
-                    break;
-                case 2:
-                    this.ox = triangle.x2;
-                    this.oy = triangle.y2;
-                    break;
-                default:
-                    this.ox = triangle.x0;
-                    this.oy = triangle.y0;
-                    break;
-            }
-        } else {
-            this.ox = ox;
-            this.oy = oy;
+    resetVerticesPosition() {
+        for (var i = 0, cnt = this.vertices.length; i < cnt; i++) {
+            this.vertices[i].resetPosition();
         }
-
         return this;
     }
 
@@ -173,21 +140,20 @@ class Face {
         return this;
     }
 
-    // TODO
     updateVertices() {
-        var triangle = this.frameTriangle;
-
         var offsetX = this.x;
         var offsetY = this.y;
 
-        this.vertices[0].x = triangle.x0 + offsetX;
-        this.vertices[0].y = triangle.y0 + offsetY;
+        var vertices = this.vertices;
+        for (var i = 0, cnt = vertices.length; i < cnt; i++) {
+            var vertex = vertices[i];
+            vertex.x = vertex.frameX + offsetX;
+            vertex.y = vertex.frameY + offsetY;
+        }
 
-        this.vertices[1].x = triangle.x1 + offsetX;
-        this.vertices[1].y = triangle.y1 + offsetY;
-
-        this.vertices[2].x = triangle.x2 + offsetX;
-        this.vertices[2].y = triangle.y2 + offsetY;
+        var rotationSave = this.rotation;
+        this._rotation = 0;
+        this.rotation = rotationSave;
 
         return this;
     }

@@ -14,10 +14,12 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        this.add.image(400, 0, 'card').setOrigin(0);
+        // this.add.image(400, 0, 'card').setOrigin(0);
 
-        var gameObject = new Mesh(this, 0, 0, 'card');
+        var gameObject = new Mesh(this, 400, 300, 'card');
         this.add.existing(gameObject);
+
+        gameObject.setScale(0.5).setAngle(-45)
 
         var face0 = gameObject.createFace();
         face0.setNormalUV(/*0*/ 0, 0, /*2*/ 0, 1, /*3*/ 1, 1);
@@ -27,8 +29,12 @@ class Demo extends Phaser.Scene {
 
         gameObject.addFaces([face0, face1]);
 
-        this.debugGraphics = this.add.graphics()
-        gameObject.setDebug(this.debugGraphics)
+        this.debugGraphics = this.add.graphics();
+        gameObject.setDebug(this.debugGraphics);
+
+        face0.x -= 300;
+        face0.angle = 90;
+
     }
 
     update() {
