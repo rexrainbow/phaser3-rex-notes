@@ -1,4 +1,4 @@
-import { LocalXYToWorldXY, WorldXYToLocalXY } from '../../../utils/LocalXY.js';
+import { LocalXYToWorldXY, WorldXYToLocalXY } from '../../../utils/WorldXY.js';
 
 class ControlPoint {
     constructor(parent, vertex) {

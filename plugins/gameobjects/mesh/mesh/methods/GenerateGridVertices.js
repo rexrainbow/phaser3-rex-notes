@@ -8,22 +8,22 @@ var GenerateGridVertices = function (mesh, columns, rows) {
         face;
     for (var r = 0; r < rows; r++) {
         for (var c = 0; c < columns; c++) {
-            var p0x = c / columns, p1x = (c + 1) / columns;
-            var p0y = r / rows, p1y = (r + 1) / rows;
+            var lx = c / columns, rx = (c + 1) / columns;
+            var ty = r / rows, by = (r + 1) / rows;
             face = mesh.createFace()
                 .setUV(
-                    /*0*/ p0x, p0y,
-                    /*2*/ p0x, p1y,
-                    /*3*/ p1x, p1y
+                    lx, ty,  // top-left
+                    lx, by,  // bottom-left
+                    rx, by   // bottom-right
                 );
             mesh.addFace(face);
             faces.push(face)
 
             face = mesh.createFace()
                 .setUV(
-                    /*0*/ p0x, p0y,
-                    /*3*/ p1x, p1y,
-                    /*1*/ p1x, p0y
+                    lx, ty,  // top-left
+                    rx, by,  // bottom-right
+                    rx, ty   //top-right
                 );
             mesh.addFace(face);
             faces.push(face)

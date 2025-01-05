@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import QuadImagePlugin from '../../plugins/quadimage-plugin.js';
 
 class Demo extends Phaser.Scene {
@@ -30,13 +30,12 @@ class Demo extends Phaser.Scene {
 var CreateCard = function (scene, x, y, rtl) {
     scene.add.image(x, y, 'card2').setScale(0.5);
     var image = scene.add.rexQuadImage(x, y, 'card2', null, {
-        hideCCW: false,
         rtl: rtl
     }).setAlpha(0.8).setScale(0.5);
 
-    var controlPoints = image.controlPoints;
-    for (var i = 0, cnt = controlPoints.length; i < cnt; i++) {
-        CreateControlCircle(scene, controlPoints[i]);
+    var vertices = image.vertices;
+    for (var i = 0, cnt = vertices.length; i < cnt; i++) {
+        CreateControlCircle(scene, vertices[i]);
     }
 
     return image;

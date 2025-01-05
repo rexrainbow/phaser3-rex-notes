@@ -16,7 +16,7 @@ var WebGLRenderer = function (renderer, src, drawingContext, parentMatrix) {
     var calcMatrix = GetCalcMatrix(src, camera, parentMatrix).calc;
 
     if (src.dirty) {
-        src.updateArrays();
+        src.updateBuffers();
     }
 
     // Get smooth pixel art option.

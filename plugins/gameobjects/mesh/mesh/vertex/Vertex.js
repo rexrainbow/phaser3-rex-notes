@@ -1,9 +1,11 @@
+import { LocalXYToWorldXY, WorldXYToLocalXY } from '../../utils/WorldXY.js';
+
 const Linear = Phaser.Math.Linear;
 const RotateAround = Phaser.Math.RotateAround;
 
 class Vertex {
     constructor() {
-        this.parent = undefined;
+        this.parent = undefined;  // Mesh game object
         this.name = '';
 
         this.u = 0;
@@ -12,8 +14,8 @@ class Vertex {
         this.frameV = 0;
         this.frameX = 0;
         this.frameY = 0;
-        this.x = 0;
-        this.y = 0;
+        this.localX = 0;
+        this.localY = 0;
         this.alpha = 1;
         this.color = 0xffffff;
     }
@@ -90,15 +92,15 @@ class Vertex {
         }
     }
 
-    get x() {
-        return this._x;
+    get localX() {
+        return this._localX;
     }
 
-    set x(value) {
-        if (this._x === value) {
+    set localX(value) {
+        if (this._localX === value) {
             return;
         }
-        this._x = value;
+        this._localX = value;
         this._dx = value - this._frameX;
 
         if (this.parent) {
@@ -106,15 +108,15 @@ class Vertex {
         }
     }
 
-    get y() {
-        return this._y;
+    get localY() {
+        return this._localY;
     }
 
-    set y(value) {
-        if (this._y === value) {
+    set localY(value) {
+        if (this._localY === value) {
             return;
         }
-        this._y = value;
+        this._localY = value;
         this._dy = value - this._frameY;
 
         if (this.parent) {
@@ -171,19 +173,23 @@ class Vertex {
     }
 
     resetPosition() {
-        this.x = this.frameX;
-        this.y = this.frameY;
+        this.localX = this.frameX;
+        this.localY = this.frameY;
         return this;
     }
 
-    translate(x, y) {
-        this.x += x;
-        this.y += y;
+    setLocalPosition(x, y) {
+        this.localX = x;
+        this.localY = y;
         return this;
     }
 
     rotateAround(ox, oy, rotation) {
-        RotateAround(this, ox, oy, rotation);
+        GlobalXY.x = this.localX;
+        GlobalXY.y = this.localY;
+        RotateAround(GlobalXY, ox, oy, rotation);
+        this.localX = GlobalXY.x;
+        this.localY = GlobalXY.y;
         return this;
     }
 
@@ -196,6 +202,51 @@ class Vertex {
         this.color = value;
         return this;
     }
+
+    getWorldXY(out) {
+        if (this.parent) {
+            return LocalXYToWorldXY(this.parent, this.localX, this.localY, out);
+        } else {
+            return null;
+        }
+    }
+
+    setWorldXY(x, y) {
+        var out = WorldXYToLocalXY(this.parent, x, y, true);
+        this.setLocalPosition(out.x, out.y);
+        return this;
+    }
+
+    setPosition(x, y) {
+        this.setWorldXY(x, y);
+        return this;
+    }
+
+    get x() {
+        if (this.parent) {
+            return this.getWorldXY(true).x;
+        } else {
+            return null;
+        }
+    }
+
+    set x(value) {
+        this.setWorldXY(value, this.y);
+    }
+
+    get y() {
+        if (this.parent) {
+            return this.getWorldXY(true).y;
+        } else {
+            return null;
+        }
+    }
+
+    set y(value) {
+        this.setWorldXY(this.x, value);
+    }
 }
+
+var GlobalXY = {};
 
 export default Vertex;

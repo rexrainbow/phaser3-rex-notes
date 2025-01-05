@@ -1,20 +1,17 @@
-import ControlPoint from './ControlPoint.js';
-
-const Vertex = Phaser.Geom.Mesh.Vertex;
-const Face = Phaser.Geom.Mesh.Face;
-
 var InitFaces = function (quad) {
     var isNinePointMode = quad.isNinePointMode;
-    var pointCount = (isNinePointMode) ? 9 : 4;
+    var pointsPerSide = (isNinePointMode) ? 3 : 2;
 
-    var vertices = quad.vertices;
-    var faces = quad.faces;
-    var controlPoints = quad.controlPoints;
-    for (var i = 0; i < pointCount; i++) {
-        var vertex = new Vertex();
-        vertices.push(vertex);
-        controlPoints.push(new ControlPoint(quad, vertex));
+    var vertices = [];
+    for (var r = 0; r < pointsPerSide; r++) {
+        for (var c = 0; c < pointsPerSide; c++) {
+            var u = c / (pointsPerSide - 1);
+            var v = r / (pointsPerSide - 1);
+            var vertex = quad.createVertex(u, v);
+            vertices.push(vertex);
+        }
     }
+
     var indices;
     if (isNinePointMode) {
         indices = NinePointsIndices;
@@ -27,27 +24,28 @@ var InitFaces = function (quad) {
     }
 
     for (var i = 0, cnt = indices.length; i < cnt; i += 3) {
-        var vert1 = vertices[indices[i + 0]];
-        var vert2 = vertices[indices[i + 1]];
-        var vert3 = vertices[indices[i + 2]];
-        faces.push(new Face(vert1, vert2, vert3));
+        var vertex0 = vertices[indices[i + 0]];
+        var vertex1 = vertices[indices[i + 1]];
+        var vertex2 = vertices[indices[i + 2]];
+        var face = quad.createFace(vertex0, vertex1, vertex2);
+        quad.addFace(face);
     }
 
     if (isNinePointMode) {
-        quad.topLeft = controlPoints[0];
-        quad.topCenter = controlPoints[1];
-        quad.topRight = controlPoints[2];
-        quad.centerLeft = controlPoints[3];
-        quad.center = controlPoints[4];
-        quad.centerRight = controlPoints[5];
-        quad.bottomLeft = controlPoints[6];
-        quad.bottomCenter = controlPoints[7];
-        quad.bottomRight = controlPoints[8];
+        quad.topLeft = vertices[0];
+        quad.topCenter = vertices[1];
+        quad.topRight = vertices[2];
+        quad.centerLeft = vertices[3];
+        quad.center = vertices[4];
+        quad.centerRight = vertices[5];
+        quad.bottomLeft = vertices[6];
+        quad.bottomCenter = vertices[7];
+        quad.bottomRight = vertices[8];
     } else {
-        quad.topLeft = controlPoints[0];
-        quad.topRight = controlPoints[1];
-        quad.bottomLeft = controlPoints[2];
-        quad.bottomRight = controlPoints[3];
+        quad.topLeft = vertices[0];
+        quad.topRight = vertices[1];
+        quad.bottomLeft = vertices[2];
+        quad.bottomRight = vertices[3];
     }
 }
 

@@ -10,7 +10,7 @@ class Face {
         if (vertex1 === undefined) { vertex1 = new Vertex(); }
         if (vertex2 === undefined) { vertex2 = new Vertex(); }
 
-        this.parent = undefined;
+        this.parent = undefined;  // Mesh game object
         this.name = '';
 
         this.vertices = [vertex0, vertex1, vertex2];
@@ -179,8 +179,8 @@ class Face {
         var vertices = this.vertices;
         for (var i = 0, cnt = vertices.length; i < cnt; i++) {
             var vertex = vertices[i];
-            vertex.x = vertex.frameX + offsetX;
-            vertex.y = vertex.frameY + offsetY;
+            vertex.localX = vertex.frameX + offsetX;
+            vertex.localY = vertex.frameY + offsetY;
         }
 
         var rotationSave = this.rotation;

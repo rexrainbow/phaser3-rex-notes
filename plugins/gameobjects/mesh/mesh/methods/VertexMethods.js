@@ -65,4 +65,12 @@ export default {
     getFaceByName(name) {
         return GetFirst(this.faces, 'name', name);
     },
+
+    resetVerticesPosition() {
+        var vertices = this.vertices;
+        for (var i = 0, cnt = vertices.length; i < cnt; i++) {
+            vertices[i].resetPosition();
+        }
+        return this;
+    }
 }

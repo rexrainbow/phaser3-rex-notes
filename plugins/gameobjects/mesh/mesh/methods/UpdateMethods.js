@@ -1,67 +1,34 @@
-const UPDATE_ARRAYS = (1 << 0);
-const UPDATE_UV = (1 << 1);
-const UPDATE_VERTEX = (1 << 2);
-const UPDATE_ALPHA = (1 << 3);
-const UPDATE_COLOR = (1 << 4);
-const UPDATE_ALL = UPDATE_ARRAYS | UPDATE_UV | UPDATE_VERTEX | UPDATE_ALPHA | UPDATE_COLOR;
+import {
+    UPDATE_ARRAYS, UPDATE_UV, UPDATE_VERTEX, UPDATE_ALPHA, UPDATE_COLOR
+} from './DirtyFlags.js';
 
 export default {
-    updateArrays() {
+    updateBuffers() {
         if (!this.dirty) {
             return this;
         }
 
-        if (this.dirtyFlags & UPDATE_ARRAYS) { this.resizeArrays(); }
-        if (this.dirtyFlags & UPDATE_UV) { this.updateUVs(); }
-        if (this.dirtyFlags & UPDATE_VERTEX) { this.updateVertices(); }
-        if (this.dirtyFlags & UPDATE_ALPHA) { this.updateAlphas(); }
-        if (this.dirtyFlags & UPDATE_COLOR) { this.updateColors(); }
+        if (this.dirtyFlags & UPDATE_ARRAYS) { this.resizeBuffers(); }
+        if (this.dirtyFlags & UPDATE_UV) { this.updateUVBuffer(); }
+        if (this.dirtyFlags & UPDATE_VERTEX) { this.updateVertexBuffer(); }
+        if (this.dirtyFlags & UPDATE_ALPHA) { this.updateAlphaBuffer(); }
+        if (this.dirtyFlags & UPDATE_COLOR) { this.updateColorBuffer(); }
 
         this.clearDirtyFlag();
 
         return this;
     },
 
-    clearDirtyFlag() {
-        this.dirtyFlags = 0;
-        return this;
-    },
-
-    setFaceCountDirtyFlag() {
-        this.dirtyFlags |= UPDATE_ALL;
-        return this;
-    },
-
-    setUVDirtyFlag() {
-        this.dirtyFlags |= UPDATE_UV;
-        return this;
-    },
-
-    setVertexDirtyFlag() {
-        this.dirtyFlags |= UPDATE_VERTEX;
-        return this;
-    },
-
-    setAlphaDirtyFlag() {
-        this.dirtyFlags |= UPDATE_ALPHA;
-        return this;
-    },
-
-    setColorDirtyFlag() {
-        this.dirtyFlags |= UPDATE_COLOR;
-        return this;
-    },
-
-    resizeArrays() {
+    resizeBuffers() {
         var size = this.faces.length;
         this.vertexBuffer = new Float32Array(size * 6);
         this.uvBuffer = new Float32Array(size * 6);
-        this.alphaBuffer = new Uint32Array(size * 3);
-        this.colorBuffer = new Float32Array(size * 3);
+        this.colorBuffer = new Uint32Array(size * 3);
+        this.alphaBuffer = new Float32Array(size * 3);
         return this;
     },
 
-    updateUVs() {
+    updateUVBuffer() {
         var uvBuffer = this.uvBuffer,
             index;
         var faces = this.faces,
@@ -81,7 +48,7 @@ export default {
         return this;
     },
 
-    updateVertices() {
+    updateVertexBuffer() {
         var vertexBuffer = this.vertexBuffer,
             index;
         var faces = this.faces,
@@ -90,18 +57,18 @@ export default {
             face = faces[i];
 
             index = i * 6;
-            vertexBuffer[index] = face.vertex0.x;
-            vertexBuffer[index + 1] = face.vertex0.y;
-            vertexBuffer[index + 2] = face.vertex1.x;
-            vertexBuffer[index + 3] = face.vertex1.y;
-            vertexBuffer[index + 4] = face.vertex2.x;
-            vertexBuffer[index + 5] = face.vertex2.y;
+            vertexBuffer[index] = face.vertex0.localX;
+            vertexBuffer[index + 1] = face.vertex0.localY;
+            vertexBuffer[index + 2] = face.vertex1.localX;
+            vertexBuffer[index + 3] = face.vertex1.localY;
+            vertexBuffer[index + 4] = face.vertex2.localX;
+            vertexBuffer[index + 5] = face.vertex2.localY;
         }
 
         return this;
     },
 
-    updateAlphas() {
+    updateAlphaBuffer() {
         var alphaBuffer = this.alphaBuffer,
             index;
         var faces = this.faces,
@@ -118,7 +85,7 @@ export default {
         return this;
     },
 
-    updateColors() {
+    updateColorBuffer() {
         var colorBuffer = this.colorBuffer,
             index;
         var faces = this.faces,
