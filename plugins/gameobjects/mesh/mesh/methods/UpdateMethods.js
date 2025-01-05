@@ -54,16 +54,15 @@ export default {
 
     resizeArrays() {
         var size = this.faces.length;
-        this.renderData.vertices =  new Float32Array(size * 6);
-        this.renderData.uv = new Float32Array(size * 6);
-        this.renderData.colors = new Uint32Array(size * 3);
-        this.renderData.alphas = new Float32Array(size * 3);
-
+        this.vertexBuffer = new Float32Array(size * 6);
+        this.uvBuffer = new Float32Array(size * 6);
+        this.alphaBuffer = new Uint32Array(size * 3);
+        this.colorBuffer = new Float32Array(size * 3);
         return this;
     },
 
     updateUVs() {
-        var uv = this.renderData.uv,
+        var uvBuffer = this.uvBuffer,
             index;
         var faces = this.faces,
             face;
@@ -71,19 +70,19 @@ export default {
             face = faces[i];
 
             index = i * 6;
-            uv[index] = face.vertex0.u;
-            uv[index + 1] = face.vertex0.v;
-            uv[index + 2] = face.vertex1.u;
-            uv[index + 3] = face.vertex1.v;
-            uv[index + 4] = face.vertex2.u;
-            uv[index + 5] = face.vertex2.v;
+            uvBuffer[index] = face.vertex0.frameU;
+            uvBuffer[index + 1] = face.vertex0.frameV;
+            uvBuffer[index + 2] = face.vertex1.frameU;
+            uvBuffer[index + 3] = face.vertex1.frameV;
+            uvBuffer[index + 4] = face.vertex2.frameU;
+            uvBuffer[index + 5] = face.vertex2.frameV;
         }
 
         return this;
     },
 
     updateVertices() {
-        var vertices = this.renderData.vertices,
+        var vertexBuffer = this.vertexBuffer,
             index;
         var faces = this.faces,
             face;
@@ -91,19 +90,19 @@ export default {
             face = faces[i];
 
             index = i * 6;
-            vertices[index] = face.vertex0.x;
-            vertices[index + 1] = face.vertex0.y;
-            vertices[index + 2] = face.vertex1.x;
-            vertices[index + 3] = face.vertex1.y;
-            vertices[index + 4] = face.vertex2.x;
-            vertices[index + 5] = face.vertex2.y;
+            vertexBuffer[index] = face.vertex0.x;
+            vertexBuffer[index + 1] = face.vertex0.y;
+            vertexBuffer[index + 2] = face.vertex1.x;
+            vertexBuffer[index + 3] = face.vertex1.y;
+            vertexBuffer[index + 4] = face.vertex2.x;
+            vertexBuffer[index + 5] = face.vertex2.y;
         }
 
         return this;
     },
 
     updateAlphas() {
-        var alphas = this.renderData.alphas,
+        var alphaBuffer = this.alphaBuffer,
             index;
         var faces = this.faces,
             face;
@@ -111,16 +110,16 @@ export default {
             face = faces[i];
 
             index = i * 3;
-            alphas[index] = face.vertex0.alpha;
-            alphas[index + 1] = face.vertex1.alpha;
-            alphas[index + 2] = face.vertex2.alpha;
+            alphaBuffer[index] = face.vertex0.alpha;
+            alphaBuffer[index + 1] = face.vertex1.alpha;
+            alphaBuffer[index + 2] = face.vertex2.alpha;
         }
 
         return this;
     },
 
     updateColors() {
-        var colors = this.renderData.colors,
+        var colorBuffer = this.colorBuffer,
             index;
         var faces = this.faces,
             face;
@@ -128,9 +127,9 @@ export default {
             face = faces[i];
 
             index = i * 3;
-            colors[index] = face.vertex0.color;
-            colors[index + 1] = face.vertex1.color;
-            colors[index + 2] = face.vertex2.color;
+            colorBuffer[index] = face.vertex0.color;
+            colorBuffer[index + 1] = face.vertex1.color;
+            colorBuffer[index + 2] = face.vertex2.color;
         }
 
         return this;

@@ -1,6 +1,6 @@
 import phaser from '../../../phaser/src/phaser.js';
-import Mesh from '../../plugins/gameobjects/mesh/meshbase/Mesh.js';
-import GenerateGridVertices from '../../plugins/gameobjects/mesh/meshbase/methods/GenerateGridVertices.js';
+import Mesh from '../../plugins/gameobjects/mesh/mesh/Mesh.js';
+import GenerateGridVertices from '../../plugins/gameobjects/mesh/mesh/methods/GenerateGridVertices.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

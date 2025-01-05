@@ -11,12 +11,12 @@ export default {
         return this;
     },
 
-    createVertex(nu, nv) {
-        if (nu === undefined) { nu = 0; }
-        if (nv === undefined) { nv = 0; }
+    createVertex(u, v) {
+        if (u === undefined) { u = 0; }
+        if (v === undefined) { v = 0; }
 
         var vertex = new Vertex();
-        vertex.setNormalUV(nu, nv);
+        vertex.setUV(u, v);
         return vertex;
     },
 
@@ -37,7 +37,7 @@ export default {
         var frame = this.frame;
         face
             .setFrameSize(frame.cutWidth, frame.cutHeight)
-            .setUV(frame.u0, frame.v0, frame.u1, frame.v1)
+            .setFrameUV(frame.u0, frame.v0, frame.u1, frame.v1)
             .resetVerticesPosition();
 
         var vertices = this.vertices;

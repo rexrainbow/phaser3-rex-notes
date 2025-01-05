@@ -1,5 +1,5 @@
 import phaser from '../../../phaser/src/phaser.js';
-import Mesh from '../../plugins/gameobjects/mesh/meshbase/Mesh.js';
+import Mesh from '../../plugins/gameobjects/mesh/mesh/Mesh.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

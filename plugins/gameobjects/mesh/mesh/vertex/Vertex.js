@@ -6,13 +6,12 @@ class Vertex {
         this.parent = undefined;
         this.name = '';
 
-        this.nu = 0;
-        this.nv = 0;
-        this.frameX = 0;
-        this.frameY = 0;
-
         this.u = 0;
         this.v = 0;
+        this.frameU = 0;
+        this.frameV = 0;
+        this.frameX = 0;
+        this.frameY = 0;
         this.x = 0;
         this.y = 0;
         this.alpha = 1;
@@ -29,30 +28,30 @@ class Vertex {
         return this;
     }
 
-    get u() {
-        return this._u;
+    get frameU() {
+        return this._frameU;
     }
 
-    set u(value) {
-        if (this._u === value) {
+    set frameU(value) {
+        if (this._frameU === value) {
             return;
         }
-        this._u = value;
+        this._frameU = value;
 
         if (this.parent) {
             this.parent.setUVDirtyFlag();
         }
     }
 
-    get v() {
-        return this._v;
+    get frameV() {
+        return this._frameV;
     }
 
-    set v(value) {
-        if (this._v === value) {
+    set frameV(value) {
+        if (this._frameV === value) {
             return;
         }
-        this._v = value;
+        this._frameV = value;
 
         if (this.parent) {
             this.parent.setUVDirtyFlag();
@@ -153,21 +152,21 @@ class Vertex {
         }
     }
 
-    setNormalUV(u, v) {
-        this.nu = u;
-        this.nv = v;
+    setUV(u, v) {
+        this.u = u;
+        this.v = v;
         return this;
     }
 
-    setUV(frameU0, frameV0, frameU1, frameV1) {
-        this.u = Linear(frameU0, frameU1, this.nu);
-        this.v = Linear(frameV0, frameV1, this.nv);
+    setFrameUV(frameU0, frameV0, frameU1, frameV1) {
+        this.frameU = Linear(frameU0, frameU1, this.u);
+        this.frameV = Linear(frameV0, frameV1, this.v);
         return this;
     }
 
     setFrameSize(frameWidth, frameHeight) {
-        this.frameX = this.nu * frameWidth;
-        this.frameY = this.nv * frameHeight;
+        this.frameX = this.u * frameWidth;
+        this.frameY = this.v * frameHeight;
         return this;
     }
 

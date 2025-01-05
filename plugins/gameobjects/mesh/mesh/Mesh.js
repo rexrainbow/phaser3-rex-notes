@@ -26,12 +26,12 @@ class Mesh extends GameObject {
         // Each face has 3 vertics, each vertex has x,y, u,v, alpha, color members
         this.vertices = [];
         this.faces = [];
-        this.renderData = {
-            vertices: null,
-            uv: null,
-            alphas: null,
-            colors: null,
-        }
+
+        // Buffers
+        this.vertexBuffer = null;
+        this.uvBuffer = null;
+        this.alphaBuffer = null;
+        this.colorBuffer = null;
 
         this.tintFill = (texture === '__DEFAULT') ? true : false;
 

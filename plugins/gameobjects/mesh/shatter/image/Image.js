@@ -1,5 +1,5 @@
-import Mesh from '../../meshbase/Mesh.js';
-import GenerateGridVertices from '../../meshbase/methods/GenerateGridVertices.js';
+import Mesh from '../../mesh/Mesh.js';
+import GenerateGridVertices from '../../mesh/methods/GenerateGridVertices.js';
 import ShatterRectangleToTriangles from '../../../../utils/math/triangulate/ShatterRectangleToTriangles.js';
 import { WorldXYToLocalXY } from '../../utils/LocalXY.js';
 

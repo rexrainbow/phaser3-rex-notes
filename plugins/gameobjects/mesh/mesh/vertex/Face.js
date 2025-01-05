@@ -142,10 +142,18 @@ class Face {
         this.vertices[2].setColor(value);
     }
 
-    setNormalUV(u0, v0, u1, v1, u2, v2) {
-        this.vertices[0].setNormalUV(u0, v0);
-        this.vertices[1].setNormalUV(u1, v1);
-        this.vertices[2].setNormalUV(u2, v2);
+    setUV(u0, v0, u1, v1, u2, v2) {
+        this.vertices[0].setUV(u0, v0);
+        this.vertices[1].setUV(u1, v1);
+        this.vertices[2].setUV(u2, v2);
+
+        return this;
+    }
+
+    setFrameUV(frameU0, frameV0, frameU1, frameV1) {
+        this.vertices[0].setFrameUV(frameU0, frameV0, frameU1, frameV1);
+        this.vertices[1].setFrameUV(frameU0, frameV0, frameU1, frameV1);
+        this.vertices[2].setFrameUV(frameU0, frameV0, frameU1, frameV1);
 
         return this;
     }
@@ -161,14 +169,6 @@ class Face {
         for (var i = 0, cnt = this.vertices.length; i < cnt; i++) {
             this.vertices[i].resetPosition();
         }
-        return this;
-    }
-
-    setUV(frameU0, frameV0, frameU1, frameV1) {
-        this.vertices[0].setUV(frameU0, frameV0, frameU1, frameV1);
-        this.vertices[1].setUV(frameU0, frameV0, frameU1, frameV1);
-        this.vertices[2].setUV(frameU0, frameV0, frameU1, frameV1);
-
         return this;
     }
 
