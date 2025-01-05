@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import QuadImagePlugin from '../../plugins/quadimage-plugin.js';
 import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 
@@ -14,8 +14,8 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var image = this.add.rexSkewImage(100, 100, 'card2').setSkewDeg(30, 10);
-        this.add.image(100, 100, 'card2').setAlpha(0.2);
+        var image = this.add.rexSkewImage(100, 300, 'card2').setOrigin(0.5, 1);
+        this.add.image(100, 300, 'card2').setAlpha(0.2).setOrigin(0.5, 1);
 
         var gui = new Dat.GUI();
         gui.add(image, 'skewXDeg', -90, 90);

@@ -6,19 +6,27 @@ var Skew = function (gameObject, skewX, skewY) {
         skewY = 0;
     }
 
-    var width = gameObject.width,
-        height = gameObject.height;
-    var ox = width * 0.5;
-    var oy = height * 0.5;
+    var ox = gameObject.displayOriginX;
+    var oy = gameObject.displayOriginY;
     var xOffset = Math.tan(skewX) * oy;
     var yOffset = Math.tan(skewY) * ox;
-    var controlPoints = gameObject.controlPoints;
-    for (var i = 0, cnt = controlPoints.length; i < cnt; i++) {
-        var controlPoint = controlPoints[i];
-        var x = controlPoint.localXOrigin;
-        var y = controlPoint.localYOrigin;
-        controlPoint.localX = x + ((y > oy) ? xOffset : -xOffset);
-        controlPoint.localY = y + ((x > ox) ? yOffset : -yOffset);
+    var vertices = gameObject.vertices;
+    for (var i = 0, cnt = vertices.length; i < cnt; i++) {
+        var vertex = vertices[i];
+        var frameX = vertex.frameX;
+        var frameY = vertex.frameY;
+
+        if (frameY > oy) {
+            vertex.localX = frameX + xOffset;
+        } else if (frameY < oy) {
+            vertex.localX = frameX - xOffset;
+        }
+
+        if (frameX > ox) {
+            vertex.localY = frameY + yOffset;
+        } else if (frameX < ox) {
+            vertex.localY = frameY - yOffset;
+        }
     }
 }
 
