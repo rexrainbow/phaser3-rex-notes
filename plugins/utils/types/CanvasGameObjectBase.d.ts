@@ -27,6 +27,10 @@ export default class CanvasGameObjectBase extends Phaser.GameObjects.GameObject 
 
     depth: number;
     setDepth(value: number): this;
+    setToTop(): this;
+    setToBack(): this;
+    setAbove(gameObject: Phaser.GameObjects.GameObject): this;
+    setBelow(gameObject: Phaser.GameObjects.GameObject): this;
 
     flipX: boolean;
     flipY: boolean;
@@ -54,8 +58,8 @@ export default class CanvasGameObjectBase extends Phaser.GameObjects.GameObject 
     createBitmapMask(renderable?: Phaser.GameObjects.GameObject): Phaser.Display.Masks.BitmapMask;
     createGeometryMask(graphics?: Phaser.GameObjects.Graphics): Phaser.Display.Masks.GeometryMask;
 
-    originX: number;
-    originY: number;
+    readonly originX: number;
+    readonly originY: number;
     displayOriginX: number;
     displayOriginY: number;
     setOrigin(x?: number, y?: number): this;
@@ -63,26 +67,12 @@ export default class CanvasGameObjectBase extends Phaser.GameObjects.GameObject 
     setDisplayOrigin(x?: number, y?: number): this;
     updateDisplayOrigin(): this;
 
-    defaultPipeline: Phaser.Renderer.WebGL.WebGLPipeline;
-    pipeline: Phaser.Renderer.WebGL.WebGLPipeline;
-    pipelineData: object;
-    initPipeline(pipeline?: string | Phaser.Renderer.WebGL.WebGLPipeline): boolean;
-    setPipeline(pipeline: string | Phaser.Renderer.WebGL.WebGLPipeline, pipelineData?: object, copyData?: boolean): this;
-    setPipelineData(key: string, value?: any): this;
-    resetPipeline(resetData?: boolean): boolean;
-    getPipelineName(): string;
-    hasPostPipeline: boolean;
-    postPipelines: Phaser.Renderer.WebGL.Pipelines.PostFXPipeline[];
-    postPipelineData: object;
-    preFX: Phaser.GameObjects.Components.FX | null;
-    postFX: Phaser.GameObjects.Components.FX;
-    initPostPipeline(preFX?: boolean): void;
-    setPostPipeline(pipelines: string | string[] | Function | Function[] | Phaser.Renderer.WebGL.Pipelines.PostFXPipeline | Phaser.Renderer.WebGL.Pipelines.PostFXPipeline[], pipelineData?: object, copyData?: boolean): this;
-    setPostPipelineData(key: string, value?: any): this;
-    getPostPipeline(pipeline: string | Function | Phaser.Renderer.WebGL.Pipelines.PostFXPipeline): Phaser.Renderer.WebGL.Pipelines.PostFXPipeline | Phaser.Renderer.WebGL.Pipelines.PostFXPipeline[];
-    resetPostPipeline(resetData?: boolean): void;
-    removePostPipeline(pipeline: string | Phaser.Renderer.WebGL.Pipelines.PostFXPipeline): this;
-    clearFX(): this;
+    customRenderNodes: object;
+    defaultRenderNodes: object;
+    renderNodeData: object;
+    initRenderNodes(defaultNodes: Map<string, string>): void;
+    setRenderNodeRole(key: string, renderNode: string | Phaser.Renderer.WebGL.RenderNodes.RenderNode | null, renderNodeData?: object, copyData?: boolean): this;
+    setRenderNodeData(renderNode: string | Phaser.Renderer.WebGL.RenderNodes.RenderNode, key: string, value: any): this;
 
     scrollFactorX: number;
     scrollFactorY: number;
@@ -99,6 +89,7 @@ export default class CanvasGameObjectBase extends Phaser.GameObjects.GameObject 
     tint: number;
     readonly isTinted: boolean;
 
+    readonly hasTransformComponent: boolean;
     x: number;
     y: number;
     z: number;
@@ -113,7 +104,7 @@ export default class CanvasGameObjectBase extends Phaser.GameObjects.GameObject 
     setRandomPosition(x?: number, y?: number, width?: number, height?: number): this;
     setRotation(radians?: number): this;
     setAngle(degrees?: number): this;
-    setScale(x: number, y?: number): this;
+    setScale(x?: number, y?: number): this;
     setX(value?: number): this;
     setY(value?: number): this;
     setZ(value?: number): this;
