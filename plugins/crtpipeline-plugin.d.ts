@@ -1,21 +1,21 @@
 // import * as Phaser from 'phaser';
-import BarrelPostFxPipeline from './barrelpipeline';
+import CrtPostFxPipeline from './crtpipeline';
 
-export default BarrelPipelinePlugin;
+export default CrtPipelinePlugin;
 
-declare namespace BarrelPipelinePlugin {
+declare namespace CrtPipelinePlugin {
 
-    interface IConfig extends BarrelPostFxPipeline.IConfig {
+    interface IConfig extends CrtPostFxPipeline.IConfig {
         name?: string
     }
 
 }
 
-declare class BarrelPipelinePlugin extends Phaser.Plugins.BasePlugin {
+declare class CrtPipelinePlugin extends Phaser.Plugins.BasePlugin {
     add(
         gameObject: Phaser.GameObjects.GameObject,
-        config?: BarrelPipelinePlugin.IConfig
-    ): BarrelPostFxPipeline;
+        config?: CrtPipelinePlugin.IConfig
+    ): CrtPostFxPipeline;
 
     remove(
         gameObject: Phaser.GameObjects.GameObject,
@@ -25,5 +25,5 @@ declare class BarrelPipelinePlugin extends Phaser.Plugins.BasePlugin {
     get(
         gameObject: Phaser.GameObjects.GameObject,
         name?: string
-    ): BarrelPostFxPipeline | BarrelPostFxPipeline[];
+    ): CrtPostFxPipeline | CrtPostFxPipeline[];
 }
