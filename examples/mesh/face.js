@@ -1,5 +1,5 @@
 import phaser from '../../../phaser/src/phaser.js';
-import Mesh from '../../plugins/gameobjects/mesh/mesh/Mesh.js';
+import MeshPlugin from '../../plugins/mesh-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -14,19 +14,16 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var gameObject = new Mesh(this, 400, 300, 'card');
-        this.add.existing(gameObject);
-
-        gameObject.setScale(0.5).setAngle(-45)
-
-        gameObject.clear().addGridFaces(2, 2);
+        var gameObject = this.add.rexMesh(400, 300, 'card')
+            .setScale(0.5).setAngle(-45)
+            .clear().addGridFaces(2, 2);
 
         this.debugGraphics = this.add.graphics();
         gameObject.setDebug(this.debugGraphics);
 
         var face = gameObject.faces[0];
         face.x -= 200;
-        face.angle = 90;
+        face.angle = -90;
 
     }
 
@@ -45,7 +42,14 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexMesh',
+            plugin: MeshPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

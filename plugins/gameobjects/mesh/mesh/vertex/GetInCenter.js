@@ -7,12 +7,12 @@ var GetInCenter = function (face, out) {
         out = GlobalOut;
     }
 
-    GlobalTriangle.x1 = face.vertices[0].x;
-    GlobalTriangle.y1 = face.vertices[0].y;
-    GlobalTriangle.x2 = face.vertices[1].x;
-    GlobalTriangle.y2 = face.vertices[1].y;
-    GlobalTriangle.x3 = face.vertices[2].x;
-    GlobalTriangle.y3 = face.vertices[2].y;
+    GlobalTriangle.x1 = face.vertices[0].localX;
+    GlobalTriangle.y1 = face.vertices[0].localY;
+    GlobalTriangle.x2 = face.vertices[1].localX;
+    GlobalTriangle.y2 = face.vertices[1].localY;
+    GlobalTriangle.x3 = face.vertices[2].localX;
+    GlobalTriangle.y3 = face.vertices[2].localY;
 
     return InCenter(GlobalTriangle, out);
 }

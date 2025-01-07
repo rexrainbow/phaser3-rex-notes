@@ -1,5 +1,5 @@
 import phaser from '../../../phaser/src/phaser.js';
-import Mesh from '../../plugins/gameobjects/mesh/mesh/Mesh.js';
+import MeshPlugin from '../../plugins/mesh-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -14,37 +14,31 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var gameObject = new Mesh(this, 400, 300, 'card');
-        this.add.existing(gameObject);
-
-        gameObject.setScale(0.5).setAngle(-45).setOrigin(1)
-
-        var vertex0 = gameObject.createVertex(0, 0);
-        var vertex1 = gameObject.createVertex(1, 0);
-        var vertex2 = gameObject.createVertex(0, 1);
-        var vertex3 = gameObject.createVertex(1, 1);
-
-        var face0 = gameObject.createFace(vertex0, vertex2, vertex3);
-        var face1 = gameObject.createFace(vertex0, vertex3, vertex1);
-
-        gameObject.addFaces([face0, face1]);
+        var gameObject = this.add.rexMesh(400, 300, 'card')
+            .setScale(0.5).setAngle(-45).setOrigin(1)
+            .addGridFaces({
+                columns: 1, rows: 1,
+                sharedVertexMode: true
+            })
 
         this.debugGraphics = this.add.graphics();
         gameObject.setDebug(this.debugGraphics);
 
+        var vertices = gameObject.vertices;
+
         // Test localXY
-        vertex0.localY -= 200;
-        vertex2.localY += 200;
+        vertices[0].localY -= 200;
+        vertices[2].localY += 200;
+
+        this.add.circle(vertices[0].x, vertices[0].y, 10, 0x880000);
+        this.add.circle(vertices[2].x, vertices[2].y, 10, 0x880000);
 
         // Test worldXY
-        this.add.circle(vertex0.x, vertex0.y, 10, 0x880000);
-        this.add.circle(vertex2.x, vertex2.y, 10, 0x880000);
-
-        var controlPoint = this.add.circle(vertex3.x, vertex3.y, 10, 0xff0000)
+        var controlPoint = this.add.circle(vertices[3].x, vertices[3].y, 10, 0xff0000)
             .setInteractive({ draggable: true })
             .on('drag', function (pointer, dragX, dragY) {
                 controlPoint.setPosition(dragX, dragY);
-                vertex3.setPosition(dragX, dragY);
+                vertices[3].setPosition(dragX, dragY);
             });
     }
 
@@ -63,7 +57,14 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexMesh',
+            plugin: MeshPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);
