@@ -1,5 +1,4 @@
 import Mesh from '../../mesh/Mesh.js';
-import GenerateGridVertices from '../../mesh/methods/GenerateGridVertices.js';
 import ShatterRectangleToTriangles from '../../../../utils/math/triangulate/ShatterRectangleToTriangles.js';
 import { WorldXYToLocalXY } from '../../utils/WorldXY.js';
 
@@ -45,7 +44,9 @@ class ShatterImage extends Mesh {
     }
 
     resetImage() {
-        GenerateGridVertices(this, 1, 1);
+        this
+            .clear()
+            .addGridFaces(1, 1);
         return this
     }
 

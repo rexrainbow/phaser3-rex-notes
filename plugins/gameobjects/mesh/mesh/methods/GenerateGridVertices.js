@@ -1,32 +1,68 @@
-var GenerateGridVertices = function (mesh, columns, rows) {
-    if (columns === undefined) { columns = 1; }
-    if (rows === undefined) { rows = 1; }
+var GenerateGridVertices = function (mesh, columns, rows, sharedVertexMode) {
+    if (columns === undefined) {
+        columns = 1;
+    }
+    if (rows === undefined) {
+        rows = 1;
+    }
+    if (sharedVertexMode === undefined) {
+        sharedVertexMode = false;
+    }
 
-    mesh.clear();
+    var faces = [];
+    var vertices = [];
+    if (sharedVertexMode) {
+        for (var r = 0; r <= rows; r++) {
+            for (var c = 0; c <= columns; c++) {
+                var vertex = mesh.createVertex(c / columns, r / rows);
+                vertices.push(vertex);
+            }
+        }
+    }
 
-    var faces = [],
-        face;
+    var vertex0, vertex1, vertex2;
+    var face;
     for (var r = 0; r < rows; r++) {
         for (var c = 0; c < columns; c++) {
-            var lx = c / columns, rx = (c + 1) / columns;
-            var ty = r / rows, by = (r + 1) / rows;
-            face = mesh.createFace()
-                .setUV(
-                    lx, ty,  // top-left
-                    lx, by,  // bottom-left
-                    rx, by   // bottom-right
-                );
-            mesh.addFace(face);
-            faces.push(face)
+            if (sharedVertexMode) {
+                var indexTL = (r * columns) + c,
+                    indexTR = indexTL + 1,
+                    indexBL = ((r + 1) * columns) + c,
+                    indexBR = indexBL + 1;
 
-            face = mesh.createFace()
-                .setUV(
-                    lx, ty,  // top-left
-                    rx, by,  // bottom-right
-                    rx, ty   //top-right
-                );
-            mesh.addFace(face);
-            faces.push(face)
+                var vertexTL = vertices[indexTL];
+                var vertexTR = vertices[indexTR];
+                var vertexBL = vertices[indexBL];
+                var vertexBR = vertices[indexBR];
+
+                face = mesh.createFace(vertexTL, vertexBL, vertexBR);
+                mesh.addFace(face);
+                faces.push(face);
+
+                face = mesh.createFace(vertexTL, vertexBR, vertexTR);
+                mesh.addFace(face);
+                faces.push(face);
+
+            } else {
+                var lx = c / columns,
+                    rx = (c + 1) / columns,
+                    ty = r / rows,
+                    by = (r + 1) / rows;
+
+                vertex0 = mesh.createVertex(lx, ty); // top-left
+                vertex1 = mesh.createVertex(lx, by); // bottom-left
+                vertex2 = mesh.createVertex(rx, by); // bottom-right
+                face = mesh.createFace(vertex0, vertex1, vertex2);
+                mesh.addFace(face);
+                faces.push(face);
+
+                vertex0 = mesh.createVertex(lx, ty); // top-left
+                vertex1 = mesh.createVertex(rx, by); // bottom-right
+                vertex2 = mesh.createVertex(rx, ty); // top-right
+                face = mesh.createFace(vertex0, vertex1, vertex2);
+                mesh.addFace(face);
+                faces.push(face);
+            }
         }
     }
 

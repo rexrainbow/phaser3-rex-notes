@@ -1,5 +1,6 @@
 import Vertex from '../vertex/Vertex.js';
 import Face from '../vertex/Face.js';
+import GenerateGridVertices from './GenerateGridVertices.js';
 
 const GetFirst = Phaser.Utils.Array.GetFirst;
 
@@ -55,6 +56,11 @@ export default {
         for (var i = 0, cnt = faces.length; i < cnt; i++) {
             this.addFace(faces[i]);
         }
+        return this;
+    },
+
+    addGridFaces(columns, rows, sharedVertexMode) {
+        GenerateGridVertices(this, columns, rows, sharedVertexMode);
         return this;
     },
 
