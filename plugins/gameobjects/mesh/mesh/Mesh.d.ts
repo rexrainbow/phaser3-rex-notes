@@ -8,7 +8,7 @@ declare namespace Mesh {
         src: Mesh,
         meshLength: number,
         verts: number[]
-    ) => void
+    ) => void;
 }
 
 declare class Mesh extends Phaser.GameObjects.GameObject {
@@ -24,11 +24,17 @@ declare class Mesh extends Phaser.GameObjects.GameObject {
     ): Face;
     addFace(face: Face): this;
     addFaces(faces: Face[]): this;
+
     addGridFaces(
         columns?: number,
         rows?: number,
         sharedVertexMode?: boolean
     ): this;
+    addGridFaces(config?: {
+        columns?: number,
+        rows?: number,
+        sharedVertexMode?: boolean
+    }): this;
 
     getVertexByName(name: string | number): Vertex | null;
     getFaceByName(name: string | number): Face | null;

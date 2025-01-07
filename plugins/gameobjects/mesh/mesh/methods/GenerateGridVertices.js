@@ -1,4 +1,13 @@
+import IsPlainObject from '../../../../utils/object/IsPlainObject.js';
+
 var GenerateGridVertices = function (mesh, columns, rows, sharedVertexMode) {
+    if (IsPlainObject(columns)) {
+        var config = columns;
+        columns = config.columns;
+        rows = config.rows;
+        sharedVertexMode = config.sharedVertexMode;
+    }
+
     if (columns === undefined) {
         columns = 1;
     }
