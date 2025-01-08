@@ -31,6 +31,14 @@ var InitFaces = function (quad) {
         quad.addFace(face);
     }
 
+    quad.vertices.sort(function (vertexA, vertexB) {
+        if (vertexA.v === vertexB.v) {
+            return vertexA.u - vertexB.u;
+        } else {
+            return vertexA.v - vertexB.v;
+        }
+    })
+
     if (isNinePointMode) {
         quad.topLeft = vertices[0];
         quad.topCenter = vertices[1];

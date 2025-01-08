@@ -26,7 +26,6 @@ var GenerateGridVertices = function (mesh, columns, rows, sharedVertexMode) {
         for (var r = 0; r <= rows; r++) {
             for (var c = 0; c <= columns; c++) {
                 var vertex = mesh.createVertex(c / columns, r / rows);
-                vertex.g = vertices.length;
                 vertices.push(vertex);
             }
         }
@@ -80,11 +79,11 @@ var GenerateGridVertices = function (mesh, columns, rows, sharedVertexMode) {
 
     if (sharedVertexMode) {
         mesh.vertices.sort(function (vertexA, vertexB) {
-            return vertexA.g - vertexB.g;
-        })
-
-        vertices.forEach(function (vertex) {
-            delete vertex.g;
+            if (vertexA.v === vertexB.v) {
+                return vertexA.u - vertexB.u;
+            } else {
+                return vertexA.v - vertexB.v;
+            }
         })
     }
 

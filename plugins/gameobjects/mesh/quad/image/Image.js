@@ -18,7 +18,6 @@ class Image extends Mesh {
         this.type = 'rexQuadImage';
         this.isNinePointMode = GetValue(config, 'ninePointMode', false);
         this.fourPointsModeRTL = GetValue(config, 'rtl', false);
-        this.controlPoints = this.vertices; // TODO: Remove this member?
 
         InitFaces(this);
     }

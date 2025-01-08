@@ -1,9 +1,10 @@
 // import * as Phaser from 'phaser';
+import Mesh from '../../mesh/Mesh';
+import Vertex from '../../mesh/vertex/Vertex';
 
 export default Image;
 
 declare namespace Image {
-
     interface IConfig {
         x: number, y: number,
         key?: string,
@@ -13,19 +14,9 @@ declare namespace Image {
         rtl?: boolean,
     }
 
-    class ControlPoint {
-        setWorldXY(x: number, y: number): this;
-        setPosition(x: number, y: number): this;
-        getWorldXY(): { x: number, y: number };
-
-        x: number;
-        y: number;
-
-    }
-
 }
 
-declare class Image extends Phaser.GameObjects.Mesh {
+declare class Image extends Mesh {
     constructor(
         scene: Phaser.Scene,
         x?: number,
@@ -40,14 +31,13 @@ declare class Image extends Phaser.GameObjects.Mesh {
         config?: Image.IConfig
     )
 
-    readonly controlPoints: Image.ControlPoint[];
-    readonly topLeft: Image.ControlPoint;
-    readonly topCenter: Image.ControlPoint;
-    readonly topRight: Image.ControlPoint;
-    readonly centerLeft: Image.ControlPoint;
-    readonly center: Image.ControlPoint;
-    readonly centerRight: Image.ControlPoint;
-    readonly bottomLeft: Image.ControlPoint;
-    readonly bottomCenter: Image.ControlPoint;
-    readonly bottomRight: Image.ControlPoint;
+    readonly topLeft: Vertex;
+    readonly topCenter: Vertex;
+    readonly topRight: Vertex;
+    readonly centerLeft: Vertex;
+    readonly center: Vertex;
+    readonly centerRight: Vertex;
+    readonly bottomLeft: Vertex;
+    readonly bottomCenter: Vertex;
+    readonly bottomRight: Vertex;
 }
