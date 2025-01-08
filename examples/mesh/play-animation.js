@@ -21,7 +21,7 @@ class Demo extends Phaser.Scene {
             repeat: -1
         });
 
-        var gameObject = this.add.rexMesh(400, 300, 'card')
+        var gameObject = this.add.rexMesh(400, 300)
             .setScale(2)
             .addGridFaces(1, 1);
 

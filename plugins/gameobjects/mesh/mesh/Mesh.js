@@ -33,7 +33,7 @@ class Mesh extends GameObject {
         this.alphaBuffer = null;
         this.colorBuffer = null;
 
-        this.tintFill = (texture === '__DEFAULT') ? true : false;
+        this.tintFill = false;
 
         this.anims = new AnimationState(this);
 
