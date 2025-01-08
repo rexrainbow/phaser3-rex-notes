@@ -24,10 +24,11 @@ declare class Face {
     // setFrameUV(frameU0: number, frameV0: number, frameU1: number, frameV1: number): this;
     // setFrameSize(frameWidth: number, frameHeight: number): this;
 
+    setLocalOffset(x: number, y: number): this;
     resetVerticesPosition(): this;
     updateVerticesPosition(): this;
-    x: number;
-    y: number;
+    localOffsetX: number;
+    localOffsetY: number;
 
     setRotation(value: number): this;
     rotation: number;

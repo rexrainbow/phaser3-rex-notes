@@ -15,10 +15,8 @@ class Face {
 
         this.vertices = [vertex0, vertex1, vertex2];
 
-        this._x = 0; // face offsetX
-        this._y = 0; // face offsetY
-        this._localX = 0;
-        this._localY = 0;
+        this._localOffsetX = 0;
+        this._localOffsetY = 0;
         this._rotation = 0;
         this._alpha = 1;
         this._color = 0xffffff;
@@ -62,28 +60,28 @@ class Face {
         this.vertices[2] = value;
     }
 
-    get x() {
-        return this._x;
+    get localOffsetX() {
+        return this._localOffsetX;
     }
 
-    set x(value) {
-        if (value === this._x) {
+    set localOffsetX(value) {
+        if (value === this._localOffsetX) {
             return;
         }
-        this._x = value;
-        
+        this._localOffsetX = value;
+
         this.updateVerticesPosition();
     }
 
-    get y() {
-        return this._y;
+    get localOffsetY() {
+        return this._localOffsetY;
     }
 
-    set y(value) {
-        if (value === this._y) {
+    set localOffsetY(value) {
+        if (value === this._localOffsetY) {
             return;
         }
-        this._y = value;
+        this._localOffsetY = value;
         this.updateVerticesPosition();
     }
 
@@ -162,14 +160,21 @@ class Face {
     }
 
     setFrameSize(frameWidth, frameHeight) {
+        // Set local position of vertices by frameXY and dxy
         for (var i = 0, cnt = this.vertices.length; i < cnt; i++) {
-            this.vertices[i]
-                .setFrameSize(frameWidth, frameHeight)
+            this.vertices[i].setFrameSize(frameWidth, frameHeight)
         }
 
+        // Apply face offset, and rotation to vertices
         if ((this.x !== 0) || (this.y !== 0) || (this.rotation !== 0)) {
             this.updateVerticesPosition();
         }
+        return this;
+    }
+
+    setLocalOffset(x, y) {
+        this.localOffsetX = x;
+        this.localOffsetY = y;
         return this;
     }
 
@@ -185,8 +190,8 @@ class Face {
     }
 
     updateVerticesPosition() {
-        var offsetX = this.x;
-        var offsetY = this.y;
+        var offsetX = this._localOffsetX;
+        var offsetY = this._localOffsetY;
 
         var vertices = this.vertices;
         for (var i = 0, cnt = vertices.length; i < cnt; i++) {

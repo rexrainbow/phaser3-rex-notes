@@ -34,7 +34,7 @@ class Demo extends Phaser.Scene {
                     targets: image.faces,
                     alpha: 0,
                     angle: function () { return -90 + Math.random() * 180; },
-                    y: '+=400',
+                    localOffsetY: '+=400',
                     ease: 'Linear',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
                     duration: 2000,
                     delay: this.tweens.stagger(20),

@@ -22,7 +22,7 @@ class Demo extends Phaser.Scene {
         gameObject.setDebug(this.debugGraphics);
 
         var face = gameObject.faces[0];
-        face.x -= 200;
+        face.localOffsetX -= 200;
         face.angle = -90;
 
     }

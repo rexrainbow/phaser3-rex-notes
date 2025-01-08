@@ -31,24 +31,13 @@ class Demo extends Phaser.Scene {
         gameObject.setDebug(this.debugGraphics);
 
         var face = gameObject.faces[0];
-        face.x -= 100;
+        face.localOffsetX -= 200 / gameObject.scaleX;
         face.angle = -90;
-
-        this.print = this.add.text(0,0,'');
-        this.meshFace = gameObject.faces[0];
     }
 
     update() {
         this.debugGraphics.clear();
         this.debugGraphics.lineStyle(2, 0xff0000);
-
-        var face = this.meshFace
-        var s = `\
-${face.vertex0.localX}, ${face.vertex0.localY}
-${face.vertex1.localX}, ${face.vertex1.localY}
-${face.vertex2.localX}, ${face.vertex2.localY}\
-`
-        this.print.text = s;
     }
 }
 
