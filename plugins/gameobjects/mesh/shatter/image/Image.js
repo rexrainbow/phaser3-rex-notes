@@ -1,6 +1,6 @@
 import Mesh from '../../mesh/Mesh.js';
 import ShatterRectangleToTriangles from '../../../../utils/math/triangulate/ShatterRectangleToTriangles.js';
-import { WorldXYToLocalXY } from '../../utils/WorldXY.js';
+import { WorldXYToLocalXY } from '../../mesh/methods/WorldXY.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;

@@ -1,4 +1,4 @@
-import { LocalXYToWorldXY, WorldXYToLocalXY } from '../../utils/WorldXY.js';
+import { LocalXYToWorldXY, WorldXYToLocalXY } from '../methods/WorldXY.js';
 
 const Linear = Phaser.Math.Linear;
 const RotateAround = Phaser.Math.RotateAround;
@@ -14,6 +14,8 @@ class Vertex {
         this.frameV = 0;
         this.frameX = 0;
         this.frameY = 0;
+        this._dx = 0;
+        this._dy = 0;
         this.localX = 0;
         this.localY = 0;
         this.alpha = 1;
@@ -69,7 +71,7 @@ class Vertex {
             return;
         }
         this._frameX = value;
-        this._x = value + this.dx;
+        this._localX = value + this._dx;
 
         if (this.parent) {
             this.parent.setVertexDirtyFlag();
@@ -85,7 +87,7 @@ class Vertex {
             return;
         }
         this._frameY = value;
-        this._y = value + this.dy;
+        this._localY = value + this._dy;
 
         if (this.parent) {
             this.parent.setVertexDirtyFlag();
@@ -172,6 +174,7 @@ class Vertex {
         return this;
     }
 
+    // Reset position to frame position
     resetPosition() {
         this.localX = this.frameX;
         this.localY = this.frameY;

@@ -54,6 +54,28 @@ class Mesh extends GameObject {
     get dirty() {
         return this.dirtyFlags !== 0;
     }
+
+    preUpdate(time, delta) {
+        var prevFrame = this.anims.currentFrame;
+        this.anims.update(time, delta);
+
+        if (this.anims.currentFrame !== prevFrame) {
+            var curFrame = this.anims.currentFrame.frame;
+            var frameWidth = (curFrame) ? curFrame.cutWidth : 0;
+            var frameHeight = (curFrame) ? curFrame.cutHeight : 0;
+            var frameU0 = (curFrame) ? curFrame.u0 : 0;
+            var frameV0 = (curFrame) ? curFrame.v0 : 0;
+            var frameU1 = (curFrame) ? curFrame.u1 : 0;
+            var frameV1 = (curFrame) ? curFrame.v1 : 0;
+            var faces = this.faces;
+            for (var i = 0, cnt = faces.length; i < cnt; i++) {
+                faces[i]
+                    .setFrameSize(frameWidth, frameHeight)
+                    .setFrameUV(frameU0, frameV0, frameU1, frameV1)
+            }
+        }
+
+    }
 }
 
 const Components = Phaser.GameObjects.Components;

@@ -17,6 +17,8 @@ class Face {
 
         this._x = 0; // face offsetX
         this._y = 0; // face offsetY
+        this._localX = 0;
+        this._localY = 0;
         this._rotation = 0;
         this._alpha = 1;
         this._color = 0xffffff;
@@ -69,6 +71,7 @@ class Face {
             return;
         }
         this._x = value;
+        
         this.updateVerticesPosition();
     }
 
@@ -160,7 +163,12 @@ class Face {
 
     setFrameSize(frameWidth, frameHeight) {
         for (var i = 0, cnt = this.vertices.length; i < cnt; i++) {
-            this.vertices[i].setFrameSize(frameWidth, frameHeight)
+            this.vertices[i]
+                .setFrameSize(frameWidth, frameHeight)
+        }
+
+        if ((this.x !== 0) || (this.y !== 0) || (this.rotation !== 0)) {
+            this.updateVerticesPosition();
         }
         return this;
     }
@@ -168,6 +176,10 @@ class Face {
     resetVerticesPosition() {
         for (var i = 0, cnt = this.vertices.length; i < cnt; i++) {
             this.vertices[i].resetPosition();
+        }
+
+        if ((this.x !== 0) || (this.y !== 0) || (this.rotation !== 0)) {
+            this.updateVerticesPosition();
         }
         return this;
     }
@@ -179,8 +191,7 @@ class Face {
         var vertices = this.vertices;
         for (var i = 0, cnt = vertices.length; i < cnt; i++) {
             var vertex = vertices[i];
-            vertex.localX = vertex.frameX + offsetX;
-            vertex.localY = vertex.frameY + offsetY;
+            vertex.setLocalPosition(vertex.frameX + offsetX, vertex.frameY + offsetY);
         }
 
         var rotationSave = this.rotation;
