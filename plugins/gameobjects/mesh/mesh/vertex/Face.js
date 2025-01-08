@@ -143,6 +143,10 @@ class Face {
         this.vertices[2].setColor(value);
     }
 
+    get isPositionModified() {
+        return (this._localOffsetX !== 0) || (this._localOffsetY !== 0) || (this._rotation !== 0);
+    }
+
     setUV(u0, v0, u1, v1, u2, v2) {
         this.vertices[0].setUV(u0, v0);
         this.vertices[1].setUV(u1, v1);
@@ -166,7 +170,7 @@ class Face {
         }
 
         // Apply face offset, and rotation to vertices
-        if ((this.x !== 0) || (this.y !== 0) || (this.rotation !== 0)) {
+        if (this.isPositionModified) {
             this.updateVerticesPosition();
         }
         return this;
@@ -183,7 +187,7 @@ class Face {
             this.vertices[i].resetPosition();
         }
 
-        if ((this.x !== 0) || (this.y !== 0) || (this.rotation !== 0)) {
+        if (this.isPositionModified) {
             this.updateVerticesPosition();
         }
         return this;
