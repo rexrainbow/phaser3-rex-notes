@@ -43,6 +43,7 @@ class Mesh extends GameObject {
         this.setTexture(texture, frame);
         this.setPosition(x, y);
         this.setSizeToFrame();
+        this.setOriginFromFrame();
         AddNodeConstructor(scene, 'rexBatchHandlerTriangles', BatchHandlerTriangles);
         this.initRenderNodes(this._defaultRenderNodesMap);
     }
@@ -55,26 +56,45 @@ class Mesh extends GameObject {
         return this.dirtyFlags !== 0;
     }
 
-    preUpdate(time, delta) {
-        var prevFrame = this.anims.currentFrame;
-        this.anims.update(time, delta);
+    get frame() {
+        return this._frame;
+    }
 
-        if (this.anims.currentFrame !== prevFrame) {
-            var curFrame = this.anims.currentFrame.frame;
-            var frameWidth = (curFrame) ? curFrame.cutWidth : 0;
-            var frameHeight = (curFrame) ? curFrame.cutHeight : 0;
-            var frameU0 = (curFrame) ? curFrame.u0 : 0;
-            var frameV0 = (curFrame) ? curFrame.v0 : 0;
-            var frameU1 = (curFrame) ? curFrame.u1 : 0;
-            var frameV1 = (curFrame) ? curFrame.v1 : 0;
-            var faces = this.faces;
-            for (var i = 0, cnt = faces.length; i < cnt; i++) {
-                faces[i]
-                    .setFrameSize(frameWidth, frameHeight)
-                    .setFrameUV(frameU0, frameV0, frameU1, frameV1)
-            }
+    set frame(value) {
+        if (this._frame === value) {
+            return;
         }
 
+        this._frame = value;
+
+        var faces = this.faces;
+        if (!faces) {
+            return;
+        }
+
+        var frameU0 = (value) ? value.u0 : 0;
+        var frameV0 = (value) ? value.v0 : 0;
+        var frameU1 = (value) ? value.u1 : 0;
+        var frameV1 = (value) ? value.v1 : 0;
+        var frameWidth = (value) ? value.cutWidth : 0;
+        var frameHeight = (value) ? value.cutHeight : 0;
+
+        var isSizeChanged = (this._frameWidthSave !== frameWidth) || (this._frameHeightSave !== frameHeight);
+        this._frameWidthSave = frameWidth;
+        this._frameHeightSave = frameHeight;
+
+        var face;
+        for (var i = 0, cnt = faces.length; i < cnt; i++) {
+            face = faces[i]
+            face.setFrameUV(frameU0, frameV0, frameU1, frameV1);
+            if (isSizeChanged) {
+                face.setFrameSize(frameWidth, frameHeight)
+            }
+        }
+    }
+
+    preUpdate(time, delta) {
+        this.anims.update(time, delta);
     }
 }
 

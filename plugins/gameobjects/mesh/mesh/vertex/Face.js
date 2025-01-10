@@ -194,15 +194,20 @@ class Face {
     }
 
     updateVerticesPosition() {
+        // Extract the horizontal offset of the Face to calculate the new vertex positions
         var offsetX = this._localOffsetX;
+        // Extract the vertical offset of the Face to calculate the new vertex positions
         var offsetY = this._localOffsetY;
 
         var vertices = this.vertices;
         for (var i = 0, cnt = vertices.length; i < cnt; i++) {
             var vertex = vertices[i];
+            // Update each vertex position based on frameX, frameY, and the Face's offsets
+            // This process overrides the original dx and dy values, ensuring the relative distance between the three vertices is maintained
             vertex.setLocalPosition(vertex.frameX + offsetX, vertex.frameY + offsetY);
         }
 
+        // Save the current rotation value to reapply after resetting rotation to 0
         var rotationSave = this.rotation;
         this._rotation = 0;
         this.rotation = rotationSave;
@@ -212,6 +217,11 @@ class Face {
 
     setRotation(value) {
         this.rotation = value;
+        return this;
+    }
+
+    setAngle(value) {
+        this.angle = value;
         return this;
     }
 

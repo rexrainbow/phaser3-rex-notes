@@ -21,9 +21,6 @@ declare class Face {
         u2: number, v2: number
     ): this;
 
-    // setFrameUV(frameU0: number, frameV0: number, frameU1: number, frameV1: number): this;
-    // setFrameSize(frameWidth: number, frameHeight: number): this;
-
     setLocalOffset(x: number, y: number): this;
     resetVerticesPosition(): this;
     updateVerticesPosition(): this;
@@ -33,10 +30,16 @@ declare class Face {
     setRotation(value: number): this;
     rotation: number;
 
+    setAngle(value: number): this;
+    angle: number;
+
     setAlpha(value: number): this;
     alpha: number;
 
     setColor(value: number): this;
     color: number;
+
+    setFrameUV(frameU0: number, frameV0: number, frameU1: number, frameV1: number): this;
+    setFrameSize(frameWidth: number, frameHeight: number): this;
 
 }
