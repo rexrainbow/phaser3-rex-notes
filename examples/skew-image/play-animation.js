@@ -21,31 +21,47 @@ class Demo extends Phaser.Scene {
             repeat: -1
         });
 
-        var gameObject = this.add.rexSkewImage(400, 300)
-            .setScale(2)
-            .setOrigin(0.5, 1)
+        this.add.sprite(400, 400)
+            .setScale(4)
+            .setAlpha(1)
+            //.setOrigin(0.5, 1)
+            .play('idle')
 
-        gameObject.anims.play('idle');
+        this.gameObject = this.add.rexSkewImage(400, 400)
+            .setScale(4)
+            .setAlpha(0.3)
+            //.setOrigin(0.5, 1)
+            .play('idle')
 
         var gui = new Dat.GUI();
-        gui.add(gameObject, 'skewXDeg', -90, 90);
-        gui.add(gameObject, 'skewYDeg', -90, 90);
+        gui.add(this.gameObject, 'skewXDeg', -90, 90);
+        gui.add(this.gameObject, 'skewYDeg', -90, 90);
 
         this.debugGraphics = this.add.graphics();
-        gameObject.setDebug(this.debugGraphics);
+        this.gameObject.setDebug(this.debugGraphics);
     }
 
     update() {
-        this.debugGraphics.clear();
-        this.debugGraphics.lineStyle(2, 0xff0000);
+        this.debugGraphics
+            .clear()
+            .lineStyle(2, 0xff0000)
+            .fillStyle(0x00ff00)
+
+        var width = this.gameObject.displayWidth,
+            height = this.gameObject.displayHeight,
+            x = this.gameObject.x - (this.gameObject.originX * width),
+            y = this.gameObject.y - (this.gameObject.originY * width);
+        this.debugGraphics
+            .strokeRect(x, y, width, height)
+            .fillPoint(400, 400, 30)
     }
 }
 
 var config = {
     type: Phaser.AUTO,
     parent: 'phaser-example',
-    width: 1920,
-    height: 1080,
+    width: 800,
+    height: 600,
     scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,

@@ -93,8 +93,24 @@ class Mesh extends GameObject {
         }
     }
 
+    //  Overrides Game Object method
+    addedToScene() {
+        this.scene.sys.updateList.add(this);
+    }
+
+    //  Overrides Game Object method
+    removedFromScene() {
+        this.scene.sys.updateList.remove(this);
+    }
+
     preUpdate(time, delta) {
         this.anims.update(time, delta);
+    }
+
+    preDestroy() {
+        this.anims.destroy();
+
+        this.anims = undefined;
     }
 }
 

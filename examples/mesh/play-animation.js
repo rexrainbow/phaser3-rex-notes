@@ -23,9 +23,8 @@ class Demo extends Phaser.Scene {
 
         var gameObject = this.add.rexMesh(400, 300)
             .setScale(2)
-            .addGridFaces(1, 1);
-
-        gameObject.anims.play('idle');
+            .addGridFaces(1, 1)
+            .play('idle')
 
         this.debugGraphics = this.add.graphics();
         gameObject.setDebug(this.debugGraphics);

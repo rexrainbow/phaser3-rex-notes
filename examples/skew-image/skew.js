@@ -17,6 +17,7 @@ class Demo extends Phaser.Scene {
         var image = this.add.rexSkewImage(100, 300, 'card2').setOrigin(0.5, 1);
         this.add.image(100, 300, 'card2').setAlpha(0.2).setOrigin(0.5, 1);
 
+        image.skewXDeg = -25;
         var gui = new Dat.GUI();
         gui.add(image, 'skewXDeg', -90, 90);
         gui.add(image, 'skewYDeg', -90, 90);
