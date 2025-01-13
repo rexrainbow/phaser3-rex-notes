@@ -10323,10 +10323,42 @@
 <h4 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h4>
 <ul>
 <li><code>frame.source.image</code> : Image of texture source.</li>
+<li>Cut-size from source image<ul>
 <li><code>frame.cutX</code> : X position within the source image to cut from.</li>
 <li><code>frame.cutY</code> : Y position within the source image to cut from.</li>
 <li><code>frame.cutWidth</code> : The width of the area in the source image to cut.</li>
 <li><code>frame.cutHeight</code> : The height of the area in the source image to cut.</li>
+</ul>
+</li>
+<li>Real-size = game object's size<ul>
+<li><code>frame.realWidth</code> : The width of the Frame in its un-trimmed, un-padded state<ul>
+<li><code>gameObject.width</code> is set to <code>frame.realWidth</code>    </li>
+</ul>
+</li>
+<li><code>frame.realHeight</code> : The height of the Frame in its un-trimmed, un-padded state<ul>
+<li><code>gameObject.height</code> is set to <code>frame.realHeight</code></li>
+</ul>
+</li>
+<li><code>frame.trimmed</code> : Is the Frame trimmed or not?<ul>
+<li><code>true</code> : <code>frame.realWidth != frame.cutWidth</code>, <code>frame.realHeight != frame.cutHeight</code></li>
+<li><code>false</code> : <code>frame.realWidth == frame.cutWidth</code>, <code>frame.realHeight == frame.cutHeight</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Render-size<ul>
+<li><code>frame.x</code> : The X rendering offset of this Frame, taking trim into account.</li>
+<li><code>frame.y</code> : The Y rendering offset of this Frame, taking trim into account.</li>
+<li><code>frame.width</code> : The rendering width of this Frame, taking trim into account.<ul>
+<li>Equal to <code>frame.cutWidth</code></li>
+</ul>
+</li>
+<li><code>frame.height</code> : The rendering height of this Frame, taking trim into account.<ul>
+<li>Equal to <code>frame.cutHeight</code></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <h3 id="add-atlas">Add atlas<a class="headerlink" href="#add-atlas" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">addAtlas</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">HTMLImageElement</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">);</span>
