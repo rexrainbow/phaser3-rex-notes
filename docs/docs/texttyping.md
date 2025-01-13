@@ -8,6 +8,7 @@ Typing text on [text object](text.md), [bbcode text object](bbcodetext.md), or [
 ## Live demos
 
 - [BBCode text + page + typing](https://codepen.io/rexrainbow/pen/yjZveb)
+- [Tag text + typing](https://codepen.io/rexrainbow/pen/PwYEdEr)
 - [Text wrap enable](https://codepen.io/rexrainbow/pen/abwVwNX)
 - [TextBox](https://codepen.io/rexrainbow/pen/MzGoJv), see [text-box](ui-textbox).
 

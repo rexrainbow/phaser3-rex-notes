@@ -164,10 +164,26 @@ var frame = scene.textures.getFrame(key, frame);
 #### Properties
 
 - `frame.source.image` : Image of texture source.
-- `frame.cutX` : X position within the source image to cut from.
-- `frame.cutY` : Y position within the source image to cut from.
-- `frame.cutWidth` : The width of the area in the source image to cut.
-- `frame.cutHeight` : The height of the area in the source image to cut.
+- Cut-size from source image
+    - `frame.cutX` : X position within the source image to cut from.
+    - `frame.cutY` : Y position within the source image to cut from.
+    - `frame.cutWidth` : The width of the area in the source image to cut.
+    - `frame.cutHeight` : The height of the area in the source image to cut.
+- Real-size = game object's size
+    - `frame.realWidth` : The width of the Frame in its un-trimmed, un-padded state
+        - `gameObject.width` is set to `frame.realWidth`    
+    - `frame.realHeight` : The height of the Frame in its un-trimmed, un-padded state
+        - `gameObject.height` is set to `frame.realHeight`
+    - `frame.trimmed` : Is the Frame trimmed or not?
+        - `true` : `frame.realWidth != frame.cutWidth`, `frame.realHeight != frame.cutHeight`
+        - `false` : `frame.realWidth == frame.cutWidth`, `frame.realHeight == frame.cutHeight`
+- Render-size
+    - `frame.x` : The X rendering offset of this Frame, taking trim into account.
+    - `frame.y` : The Y rendering offset of this Frame, taking trim into account.
+    - `frame.width` : The rendering width of this Frame, taking trim into account.
+        - Equal to `frame.cutWidth`
+    - `frame.height` : The rendering height of this Frame, taking trim into account.
+        - Equal to `frame.cutHeight`
 
 ### Add atlas
 
