@@ -10,28 +10,28 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.atlas('knight', 'assets/animations/knight.png', 'assets/animations/knight.json');
+        this.load.spritesheet('mummy', 'assets/animations/mummy37x45.png', { frameWidth: 37, frameHeight: 45 });
     }
 
     create() {
         this.anims.create({
-            key: 'idle',
-            frames: this.anims.generateFrameNames('knight', { prefix: 'idle/frame', start: 0, end: 5, zeroPad: 4 }),
-            frameRate: 8,
+            key: 'walk',
+            frames: this.anims.generateFrameNumbers('mummy'),
+            frameRate: 16,
             repeat: -1
         });
 
         this.add.sprite(400, 400)
             .setScale(4)
-            .setAlpha(1)
-            //.setOrigin(0.5, 1)
-            .play('idle')
+            .setAlpha(0.3)
+            .setOrigin(0.5, 1)
+            .play('walk')
 
         this.gameObject = this.add.rexSkewImage(400, 400)
             .setScale(4)
-            .setAlpha(0.3)
-            //.setOrigin(0.5, 1)
-            .play('idle')
+            .setAlpha(0.7)
+            .setOrigin(0.5, 1)
+            .play('walk')
 
         var gui = new Dat.GUI();
         gui.add(this.gameObject, 'skewXDeg', -90, 90);
@@ -46,14 +46,6 @@ class Demo extends Phaser.Scene {
             .clear()
             .lineStyle(2, 0xff0000)
             .fillStyle(0x00ff00)
-
-        var width = this.gameObject.displayWidth,
-            height = this.gameObject.displayHeight,
-            x = this.gameObject.x - (this.gameObject.originX * width),
-            y = this.gameObject.y - (this.gameObject.originY * width);
-        this.debugGraphics
-            .strokeRect(x, y, width, height)
-            .fillPoint(400, 400, 30)
     }
 }
 
