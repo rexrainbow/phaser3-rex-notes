@@ -1,6 +1,6 @@
-import MeshFactory from './gameobjects/mesh/mesh/Factory.js';
-import MeshCreator from './gameobjects/mesh/mesh/Creator.js';
-import Mesh from './gameobjects/mesh/mesh/Mesh.js';
+import MeshFactory from './gameobjects/mesh/mesh/sprite/Factory.js';
+import MeshCreator from './gameobjects/mesh/mesh/sprite/Creator.js';
+import Mesh from './gameobjects/mesh/mesh/sprite/Sprite.js';
 
 import SetValue from './utils/object/SetValue.js';
 

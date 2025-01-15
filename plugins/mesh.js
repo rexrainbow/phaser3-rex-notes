@@ -1,2 +1,2 @@
-import Mesh from './gameobjects/mesh/mesh/Mesh.js';
+import Mesh from './gameobjects/mesh/mesh/sprite/Sprite.js';
 export default Mesh;
