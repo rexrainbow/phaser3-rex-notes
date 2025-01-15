@@ -1,15 +1,14 @@
 import Render from './render/Render.js';
 import Methods from './methods/Methods.js';
-import BatchHandlerTriangles from '../../../utils/renderer/BatchHandlerTriangles.js';
-import AddNodeConstructor from '../../../utils/renderer/AddNodeConstructor.js';
+import BatchHandlerTriangles from '../../../../utils/renderer/BatchHandlerTriangles.js';
+import AddNodeConstructor from '../../../../utils/renderer/AddNodeConstructor.js';
 
 const GameObject = Phaser.GameObjects.GameObject;
-const AnimationState = Phaser.Animations.AnimationState;
 const DefaultMeshNodes = new Phaser.Structs.Map([
     ['BatchHandler', 'rexBatchHandlerTriangles']
 ]);
 
-class Mesh extends GameObject {
+class Image extends GameObject {
     constructor(scene, x, y, texture, frame) {
         if (x === undefined) {
             x = 0;
@@ -20,7 +19,7 @@ class Mesh extends GameObject {
         if (texture === undefined) {
             texture = '__DEFAULT';
         }
-        super(scene, 'rexMesh');
+        super(scene, 'rexMeshImage');
 
         this.dirtyFlags = 0;
         // Each face has 3 vertics, each vertex has x,y, u,v, alpha, color members
@@ -34,8 +33,6 @@ class Mesh extends GameObject {
         this.colorBuffer = null;
 
         this.tintFill = false;
-
-        this.anims = new AnimationState(this);
 
         this.debugCallback = null;
         this.debugGraphic = null;
@@ -102,20 +99,10 @@ class Mesh extends GameObject {
     removedFromScene() {
         this.scene.sys.updateList.remove(this);
     }
-
-    preUpdate(time, delta) {
-        this.anims.update(time, delta);
-    }
-
-    preDestroy() {
-        this.anims.destroy();
-
-        this.anims = undefined;
-    }
 }
 
 const Components = Phaser.GameObjects.Components;
-Phaser.Class.mixin(Mesh,
+Phaser.Class.mixin(Image,
     [
         Components.AlphaSingle,
         Components.BlendMode,
@@ -134,4 +121,4 @@ Phaser.Class.mixin(Mesh,
     ]
 );
 
-export default Mesh;
+export default Image;

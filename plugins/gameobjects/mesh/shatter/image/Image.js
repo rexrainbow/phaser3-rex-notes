@@ -1,4 +1,4 @@
-import Mesh from '../../mesh/Mesh.js';
+import Mesh from '../../mesh/sprite/Sprite.js';
 import Methods from './methods/Methods.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;

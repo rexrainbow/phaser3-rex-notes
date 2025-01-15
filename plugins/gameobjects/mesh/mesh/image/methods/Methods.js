@@ -1,4 +1,3 @@
-import AnmiationMethods from './AnmiationMethods.js';
 import VertexMethods from './VertexMethods.js';
 import DirtyFlagsMethods from './DirtyFlagsMethods.js';
 import UpdateMethods from './UpdateMethods.js';
@@ -9,7 +8,6 @@ var Methods = {};
 
 Object.assign(
     Methods,
-    AnmiationMethods,
     VertexMethods,
     DirtyFlagsMethods,
     UpdateMethods,
