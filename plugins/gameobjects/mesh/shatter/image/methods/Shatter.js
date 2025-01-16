@@ -1,5 +1,5 @@
 import ShatterRectangleToTriangles from '../../../../../utils/math/triangulate/ShatterRectangleToTriangles.js';
-import { WorldXYToLocalXY } from '../../../mesh/image/methods/WorldXY.js';
+import { WorldXYToLocalXY } from '../../../mesh/utils/WorldXY.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const DistanceSquared = Phaser.Math.Distance.Squared;

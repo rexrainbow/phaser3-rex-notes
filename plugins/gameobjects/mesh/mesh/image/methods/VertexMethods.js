@@ -1,6 +1,6 @@
 import Vertex from '../vertex/Vertex.js';
 import Face from '../vertex/Face.js';
-import GenerateGridVertices from './GenerateGridVertices.js';
+import GenerateGridVertices from '../../utils/GenerateGridVertices.js';
 
 const GetFirst = Phaser.Utils.Array.GetFirst;
 

@@ -1,4 +1,4 @@
-import { LocalXYToWorldXY, WorldXYToLocalXY } from '../methods/WorldXY.js';
+import { LocalXYToWorldXY, WorldXYToLocalXY } from '../../utils/WorldXY.js';
 
 const Linear = Phaser.Math.Linear;
 const RotateAround = Phaser.Math.RotateAround;

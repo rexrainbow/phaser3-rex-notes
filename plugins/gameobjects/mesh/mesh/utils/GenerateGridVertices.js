@@ -1,6 +1,6 @@
-import IsPlainObject from '../../../../../utils/object/IsPlainObject.js';
+import IsPlainObject from '../../../../utils/object/IsPlainObject.js';
 
-var GenerateGridVertices = function (mesh, columns, rows, sharedVertexMode) {
+var GenerateGridVertices = function (gameObject, columns, rows, sharedVertexMode) {
     if (IsPlainObject(columns)) {
         var config = columns;
         columns = config.columns;
@@ -25,7 +25,7 @@ var GenerateGridVertices = function (mesh, columns, rows, sharedVertexMode) {
         vertices = [];
         for (var r = 0; r <= rows; r++) {
             for (var c = 0; c <= columns; c++) {
-                var vertex = mesh.createVertex(c / columns, r / rows);
+                var vertex = gameObject.createVertex(c / columns, r / rows);
                 vertices.push(vertex);
             }
         }
@@ -46,12 +46,12 @@ var GenerateGridVertices = function (mesh, columns, rows, sharedVertexMode) {
                 var vertexBL = vertices[indexBL];
                 var vertexBR = vertices[indexBR];
 
-                face = mesh.createFace(vertexTL, vertexBL, vertexBR);
-                mesh.addFace(face);
+                face = gameObject.createFace(vertexTL, vertexBL, vertexBR);
+                gameObject.addFace(face);
                 faces.push(face);
 
-                face = mesh.createFace(vertexTL, vertexBR, vertexTR);
-                mesh.addFace(face);
+                face = gameObject.createFace(vertexTL, vertexBR, vertexTR);
+                gameObject.addFace(face);
                 faces.push(face);
 
             } else {
@@ -60,25 +60,25 @@ var GenerateGridVertices = function (mesh, columns, rows, sharedVertexMode) {
                     ty = r / rows,
                     by = (r + 1) / rows;
 
-                vertex0 = mesh.createVertex(lx, ty); // top-left
-                vertex1 = mesh.createVertex(lx, by); // bottom-left
-                vertex2 = mesh.createVertex(rx, by); // bottom-right
-                face = mesh.createFace(vertex0, vertex1, vertex2);
-                mesh.addFace(face);
+                vertex0 = gameObject.createVertex(lx, ty); // top-left
+                vertex1 = gameObject.createVertex(lx, by); // bottom-left
+                vertex2 = gameObject.createVertex(rx, by); // bottom-right
+                face = gameObject.createFace(vertex0, vertex1, vertex2);
+                gameObject.addFace(face);
                 faces.push(face);
 
-                vertex0 = mesh.createVertex(lx, ty); // top-left
-                vertex1 = mesh.createVertex(rx, by); // bottom-right
-                vertex2 = mesh.createVertex(rx, ty); // top-right
-                face = mesh.createFace(vertex0, vertex1, vertex2);
-                mesh.addFace(face);
+                vertex0 = gameObject.createVertex(lx, ty); // top-left
+                vertex1 = gameObject.createVertex(rx, by); // bottom-right
+                vertex2 = gameObject.createVertex(rx, ty); // top-right
+                face = gameObject.createFace(vertex0, vertex1, vertex2);
+                gameObject.addFace(face);
                 faces.push(face);
             }
         }
     }
 
     if (sharedVertexMode) {
-        mesh.vertices.sort(function (vertexA, vertexB) {
+        gameObject.vertices.sort(function (vertexA, vertexB) {
             if (vertexA.v === vertexB.v) {
                 return vertexA.u - vertexB.u;
             } else {
