@@ -1,5 +1,6 @@
-var RotateXYZ = function (gameObject, rotationX, rotationY, rotationZ, perspective, centerX, centerY) {
+var RotateXYZ = function (gameObject, rotationX, rotationY, rotationZ, centerX, centerY) {
     var vertices = gameObject.vertices;
+
     if ((rotationX === 0) && (rotationY === 0) && (rotationZ === 0)) {
         for (var i = 0, cnt = vertices.length; i < cnt; i++) {
             vertices[i].resetPosition();
@@ -21,7 +22,8 @@ var RotateXYZ = function (gameObject, rotationX, rotationY, rotationZ, perspecti
         sinY = Math.sin(rotationY);
     var cosZ = Math.cos(rotationZ),
         sinZ = Math.sin(rotationZ);
-    var scale;
+    var perspective = gameObject.scene.scale.gameSize.width,
+        scale;
     for (var i = 0, cnt = vertices.length; i < cnt; i++) {
         vertex = vertices[i];
         x = vertex.frameX - centerX;

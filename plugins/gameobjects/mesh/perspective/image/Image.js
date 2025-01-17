@@ -1,16 +1,13 @@
-import MeshBase from '../../utils/MeshBase';
-import TransformVerts from '../utils/TransformVerts';
+import Mesh from '../../mesh/sprite/Sprite.js';
+import Methods from './methods/Methods.js';
+import RotateXYZ from '../../mesh/utils/RotateXYZ.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
-const GenerateGridVerts = Phaser.Geom.Mesh.GenerateGridVerts;
 const RadToDeg = Phaser.Math.RadToDeg;
 const DegToRad = Phaser.Math.DegToRad;
 
-const FOV = 45;
-const PanZ = 1 + (1 / Math.sin(DegToRad(FOV)));
-
-class Image extends MeshBase {
+class Image extends Mesh {
     constructor(scene, x, y, key, frame, config) {
         if (IsPlainObject(x)) {
             config = x;
@@ -22,43 +19,17 @@ class Image extends MeshBase {
 
         super(scene, x, y, key, frame);
         this.type = 'rexPerspectiveImage';
-        this.setSizeToFrame();
-
-        this.resetPerspective();
-        this.panZ(PanZ);
-        this.hideCCW = GetValue(config, 'hideCCW', true);
+        this._rotationX = 0;
+        this._rotationY = 0;
+        this._rotationZ = 0;
 
         var gridWidth = GetValue(config, 'gridWidth', 0);
         var gridHeight = GetValue(config, 'gridHeight', gridWidth);
-        this.resetVerts(gridWidth, gridHeight);
+        this.resetVertices(gridWidth, gridHeight);
 
-        this.prevFrame = this.frame;
     }
 
-    preUpdate(time, delta) {
-        // Reset size and vertex if frame is changed
-        if (this.prevFrame !== this.frame) {
-            this.prevFrame = this.frame;
-            this.syncSize();
-        }
-
-        super.preUpdate(time, delta);
-    }
-
-    get originX() {
-        return 0.5;
-    }
-
-    get originY() {
-        return 0.5;
-    }
-
-    resetPerspective() {
-        this.setPerspective(this.width, this.height, FOV);
-        return this;
-    }
-
-    resetVerts(gridWidth, gridHeight) {
+    resetVertices(gridWidth, gridHeight) {
         if (gridWidth !== undefined) {
             this.gridWidth = gridWidth;
         }
@@ -68,7 +39,6 @@ class Image extends MeshBase {
 
         // Clear faces and vertices
         this.clear();
-        this.dirtyCache[9] = -1;
         if ((this.width === 0) || (this.height === 0)) {
             return this;
         }
@@ -89,41 +59,27 @@ class Image extends MeshBase {
             gridHeight = this.gridHeight;
         }
 
-        GenerateGridVerts({
-            mesh: this,
+        this
+            .addGridFaces({
+                columns: Math.ceil(frameWidth / gridWidth),
+                rows: Math.ceil(frameHeight / gridHeight),
+                sharedVertexMode: true
+            });
 
-            width: frameWidth / this.height,
-            height: frameHeight / this.height,
-
-            widthSegments: Math.ceil(frameWidth / gridWidth),
-            heightSegments: Math.ceil(frameHeight / gridHeight),
-        });
-
-        // Recover vertices transform
-        var transformInfo = this.transformInfo;
-        if (transformInfo) {
-            this.transformVerts(
-                transformInfo.x, transformInfo.y, transformInfo.z,
-                transformInfo.rotateX, transformInfo.rotateY, transformInfo.rotateZ
-            );
-        }
-
-        return this;
-    }
-
-    syncSize() {
-        this.setSizeToFrame();  // Reset size
-        this.resetPerspective();  // Reset perspective
-        this.resetVerts();  // Reset verts
         return this;
     }
 
     get rotationX() {
-        return this.modelRotation.x;
+        return this._rotationX;
     }
 
     set rotationX(value) {
-        this.modelRotation.x = value;
+        if (this._rotationX === value) {
+            return;
+        }
+
+        this._rotationX = value;
+        RotateXYZ(this, this._rotationX, this._rotationY, this._rotationZ);
     }
 
     get angleX() {
@@ -135,11 +91,16 @@ class Image extends MeshBase {
     }
 
     get rotationY() {
-        return this.modelRotation.y;
+        return this._rotationY;
     }
 
     set rotationY(value) {
-        this.modelRotation.y = value;
+        if (this._rotationY === value) {
+            return;
+        }
+
+        this._rotationY = value;
+        RotateXYZ(this, this._rotationX, this._rotationY, this._rotationZ);
     }
 
     get angleY() {
@@ -151,11 +112,16 @@ class Image extends MeshBase {
     }
 
     get rotationZ() {
-        return this.modelRotation.z;
+        return this._rotationZ;
     }
 
     set rotationZ(value) {
-        this.modelRotation.z = value;
+        if (this._rotationZ === value) {
+            return;
+        }
+
+        this._rotationZ = value;
+        RotateXYZ(this, this._rotationX, this._rotationY, this._rotationZ);
     }
 
     get angleZ() {
@@ -165,29 +131,11 @@ class Image extends MeshBase {
     set angleZ(value) {
         this.rotationZ = DegToRad(value);
     }
-
-    transformVerts(x, y, z, rotateX, rotateY, rotateZ) {
-        if (x === undefined) { x = 0; }
-        if (y === undefined) { y = 0; }
-        if (z === undefined) { z = 0; }
-        if (rotateX === undefined) { rotateX = 0; }
-        if (rotateY === undefined) { rotateY = 0; }
-        if (rotateZ === undefined) { rotateZ = 0; }
-
-        if (!this.transformInfo) {
-            this.transformInfo = {};
-        }
-
-        this.transformInfo.x = x;
-        this.transformInfo.y = y;
-        this.transformInfo.rotateX = rotateX;
-        this.transformInfo.rotateY = rotateY;
-        this.transformInfo.rotateZ = rotateZ;
-
-        TransformVerts(this, x, y, z, rotateX, rotateY, rotateZ);
-        return this;
-    }
-
 }
+
+Object.assign(
+    Image.prototype,
+    Methods
+)
 
 export default Image;

@@ -27,7 +27,7 @@ class Demo extends Phaser.Scene {
         this.debugGraphics = this.add.graphics();
         gameObject.setDebug(this.debugGraphics);
 
-        RotateXYZ(gameObject, 0, Math.PI * 0.2, 0, 800);
+        RotateXYZ(gameObject, 0, Math.PI * 0.2, 0);
     }
 
     update() {
