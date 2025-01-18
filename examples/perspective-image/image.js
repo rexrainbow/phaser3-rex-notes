@@ -29,7 +29,9 @@ class Demo extends Phaser.Scene {
         var image2 = this.add.rexPerspectiveImage(300, 300, 'card', null).setAlpha(0.8).setScale(0.5);
 
         this.add.image(500, 300, 'card2').setScale(0.5);
-        var image3 = this.add.rexPerspectiveImage(500, 300, 'card2', null).setAlpha(0.8).setScale(0.5);
+        var image3 = this.add.rexPerspectiveImage(500, 300, 'card2', null, {
+            // hideBackFace: true
+        }).setAlpha(0.8).setScale(0.5);
 
         this.debug = this.add.graphics();
         image.setDebug(this.debug);
@@ -51,8 +53,6 @@ class Demo extends Phaser.Scene {
 
             image2.rotationY = image.rotationY;
             image3.rotationY = image.rotationY;
-
-            image3.tint = (image3.isBackFace) ? 0x888888 : 0xffffff;
         });
     }
 
