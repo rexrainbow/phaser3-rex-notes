@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import PerspectiveImagePlugin from '../../plugins/perspectiveimage-plugin.js';
 
 class Demo extends Phaser.Scene {
@@ -14,7 +14,7 @@ class Demo extends Phaser.Scene {
 
     create() {
         this.add.image(400, 300, 'card').setScale(0.5).setAngle(45);
-        var image = this.add.rexPerspectiveImage(400, 300, 'card', null, { hideCCW: false }).setScale(0.5).setAngle(45);
+        var image = this.add.rexPerspectiveImage(400, 300, 'card', null).setScale(0.5).setAngle(45);
 
         this.input.on('pointermove', function (pointer) {
 

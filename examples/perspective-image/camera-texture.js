@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import PerspectiveImagePlugin from '../../plugins/perspectiveimage-plugin.js';
 import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 
@@ -54,10 +54,12 @@ class RenderScene extends Phaser.Scene {
         var rt = this.make.renderTexture({ x: 0, y: 0, width: 800, height: 600 }, false)
         rt.saveTexture('game')
         this.events.on('postupdate', function () {
-            rt.clear().draw(this.scene.get('Game').children, 0, 0);
+            rt.clear().draw(this.scene.get('Game').children, 0, 0).render();
         }, this);
 
-        var image = this.add.rexPerspectiveImage(400, 300, 'game', undefined, { hideCCW: false });
+        var image = this.add.rexPerspectiveImage(400, 300, 'game', null, {
+            gridWidth: 64, gridHeight: 64
+        });
 
         var gui = new Dat.GUI();
         gui.add(image, 'angleX', -180, 180);
