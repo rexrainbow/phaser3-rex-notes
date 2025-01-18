@@ -46,11 +46,11 @@ var GenerateGridVertices = function (gameObject, columns, rows, sharedVertexMode
                 var vertexBL = vertices[indexBL];
                 var vertexBR = vertices[indexBR];
 
-                face = gameObject.createFace(vertexTL, vertexBL, vertexBR);
+                face = gameObject.createFace(vertexTL, vertexBR, vertexBL);
                 gameObject.addFace(face);
                 faces.push(face);
 
-                face = gameObject.createFace(vertexTL, vertexBR, vertexTR);
+                face = gameObject.createFace(vertexTL, vertexTR, vertexBR);
                 gameObject.addFace(face);
                 faces.push(face);
 

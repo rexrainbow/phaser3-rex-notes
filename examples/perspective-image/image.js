@@ -51,6 +51,8 @@ class Demo extends Phaser.Scene {
 
             image2.rotationY = image.rotationY;
             image3.rotationY = image.rotationY;
+
+            image3.tint = (image3.isBackFace) ? 0x888888 : 0xffffff;
         });
     }
 

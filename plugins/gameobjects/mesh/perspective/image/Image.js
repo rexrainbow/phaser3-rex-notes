@@ -1,6 +1,7 @@
 import Mesh from '../../mesh/sprite/Sprite.js';
 import Methods from './methods/Methods.js';
 import RotateXYZ from '../../mesh/utils/RotateXYZ.js';
+import IsBackFace from '../../mesh/utils/IsBackFace.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -22,6 +23,8 @@ class Image extends Mesh {
         this._rotationX = 0;
         this._rotationY = 0;
         this._rotationZ = 0;
+        this.isBackFace = false;
+        this.hideBackFace = GetValue(config, 'hideBackFace', true);
 
         var gridWidth = GetValue(config, 'gridWidth', 0);
         var gridHeight = GetValue(config, 'gridHeight', gridWidth);
@@ -79,7 +82,7 @@ class Image extends Mesh {
         }
 
         this._rotationX = value;
-        RotateXYZ(this, this._rotationX, this._rotationY, this._rotationZ);
+        Rotate(this, this._rotationX, this._rotationY, this._rotationZ);
     }
 
     get angleX() {
@@ -100,7 +103,7 @@ class Image extends Mesh {
         }
 
         this._rotationY = value;
-        RotateXYZ(this, this._rotationX, this._rotationY, this._rotationZ);
+        Rotate(this, this._rotationX, this._rotationY, this._rotationZ);
     }
 
     get angleY() {
@@ -121,7 +124,7 @@ class Image extends Mesh {
         }
 
         this._rotationZ = value;
-        RotateXYZ(this, this._rotationX, this._rotationY, this._rotationZ);
+        Rotate(this, this._rotationX, this._rotationY, this._rotationZ);
     }
 
     get angleZ() {
@@ -130,6 +133,15 @@ class Image extends Mesh {
 
     set angleZ(value) {
         this.rotationZ = DegToRad(value);
+    }
+}
+
+var Rotate = function (gameObject, rotationX, rotationY, rotationZ) {
+    RotateXYZ(gameObject, rotationX, rotationY, rotationZ);
+    if (gameObject.faces.length > 0) {
+        gameObject.isBackFace = IsBackFace(gameObject.faces[0]);
+    } else {
+        gameObject.isBackFace = false;
     }
 }
 

@@ -82,11 +82,26 @@ class Image extends GameObject {
 
         var face;
         for (var i = 0, cnt = faces.length; i < cnt; i++) {
-            face = faces[i]
+            face = faces[i];
             face.setFrameUV(frameU0, frameV0, frameU1, frameV1);
             if (isSizeChanged) {
                 face.setFrameSize(frameWidth, frameHeight)
             }
+        }
+    }
+
+    get tint() {
+        if (this.faces.length > 0) {
+            return this.faces[0].color;
+        } else {
+            return 0xffffff;
+        }
+    }
+
+    set tint(value) {
+        var faces = this.faces;
+        for (var i = 0, cnt = faces.length; i < cnt; i++) {
+            faces[i].setColor(value);
         }
     }
 

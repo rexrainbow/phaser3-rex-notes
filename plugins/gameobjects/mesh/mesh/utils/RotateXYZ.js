@@ -24,6 +24,7 @@ var RotateXYZ = function (gameObject, rotationX, rotationY, rotationZ, centerX, 
         sinZ = Math.sin(rotationZ);
     var perspective = gameObject.scene.scale.gameSize.width,
         scale;
+    var xyz;
     for (var i = 0, cnt = vertices.length; i < cnt; i++) {
         vertex = vertices[i];
         x = vertex.frameX - centerX;
@@ -48,9 +49,19 @@ var RotateXYZ = function (gameObject, rotationX, rotationY, rotationZ, centerX, 
         x = xTemp;
         y = yTemp;
 
+        // Project from 3d to 2d
         scale = perspective / (perspective - z);
         vertex.localX = x * scale + centerX;
         vertex.localY = y * scale + centerY;
+
+        // Store [x,y,z]
+        if (!vertex.hasOwnProperty('xyz')) {
+            vertex.xyz = [0, 0, 0];
+        }
+        xyz = vertex.xyz;
+        xyz[0] = x;
+        xyz[1] = y;
+        xyz[2] = z;
     }
 }
 
