@@ -9,7 +9,7 @@ var WebGLRenderer = function (renderer, src, drawingContext, parentMatrix) {
     var camera = drawingContext.camera;
     camera.addToRenderList(src);
 
-    if (!src.willRenderFace()) {
+    if (src.skipRender()) {
         return;
     }
 

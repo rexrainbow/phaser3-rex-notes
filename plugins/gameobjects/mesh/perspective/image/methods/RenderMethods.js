@@ -1,9 +1,11 @@
+import SkipRender from '../../../mesh/image/render/SkipRender.js';
+
 export default {
-    willRenderFace() {
+    skipRender() {
         if (this.hideBackFace && this.isBackFace) {
-            return false;
+            return true;
         }
 
-        return this.faces.length > 0;
+        return SkipRender.call(this);
     }
 }
