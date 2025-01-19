@@ -22,7 +22,7 @@ class BatchHandlerTriangles extends BatchHandlerQuad {
         name: 'rexBatchHandlerTriangle',
         verticesPerInstance: 3,
         indicesPerInstance: 3,
-        shaderName: 'REXFLAT',
+        shaderName: 'REXTRI',
         vertexSource: ShaderSourceVS,
         fragmentSource: ShaderSourceFS,
         shaderAdditions: [
@@ -127,9 +127,9 @@ class BatchHandlerTriangles extends BatchHandlerQuad {
 
         var roundPixels = drawingContext.camera.roundPixels;
 
-        var debugVerts;
+        var debugVertices;
         if (debugCallback) {
-            debugVerts = [];
+            debugVertices = [];
         }
 
         var a = calcMatrix.a;
@@ -160,9 +160,6 @@ class BatchHandlerTriangles extends BatchHandlerQuad {
                     ty = Math.round(ty);
                 }
 
-                var tu = uv[vertexIndex];
-                var tv = uv[vertexIndex + 1];
-
                 var tintIndex = (i / 2) + j;
                 var tint = getTint(
                     colors[tintIndex],
@@ -171,14 +168,14 @@ class BatchHandlerTriangles extends BatchHandlerQuad {
 
                 vertexViewF32[vertexOffset32++] = tx;
                 vertexViewF32[vertexOffset32++] = ty;
-                vertexViewF32[vertexOffset32++] = tu;
-                vertexViewF32[vertexOffset32++] = tv;
+                vertexViewF32[vertexOffset32++] = uv[vertexIndex];
+                vertexViewF32[vertexOffset32++] = uv[vertexIndex + 1];
                 vertexViewF32[vertexOffset32++] = textureDatum;
                 vertexViewF32[vertexOffset32++] = tintFill;
                 vertexViewU32[vertexOffset32++] = tint;
 
-                if (debugCallback) {
-                    debugVerts.push(tx, ty);
+                if (debugVertices) {
+                    debugVertices.push(tx, ty);
                 }
             }
 
@@ -187,7 +184,7 @@ class BatchHandlerTriangles extends BatchHandlerQuad {
         }
 
         if (debugCallback) {
-            debugCallback.call(src, src, meshVerticesLength, debugVerts);
+            debugCallback.call(src, src, meshVerticesLength, debugVertices);
         }
     }
 }

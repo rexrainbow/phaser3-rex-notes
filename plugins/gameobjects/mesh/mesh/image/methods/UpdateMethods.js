@@ -32,17 +32,17 @@ export default {
         var uvBuffer = this.uvBuffer,
             index;
         var faces = this.faces,
-            face;
+            vertices;
         for (var i = 0, cnt = faces.length; i < cnt; i++) {
-            face = faces[i];
+            vertices = faces[i].vertices;
 
             index = i * 6;
-            uvBuffer[index] = face.vertex0.frameU;
-            uvBuffer[index + 1] = face.vertex0.frameV;
-            uvBuffer[index + 2] = face.vertex1.frameU;
-            uvBuffer[index + 3] = face.vertex1.frameV;
-            uvBuffer[index + 4] = face.vertex2.frameU;
-            uvBuffer[index + 5] = face.vertex2.frameV;
+            uvBuffer[index] = vertices[0].frameU;
+            uvBuffer[index + 1] = vertices[0].frameV;
+            uvBuffer[index + 2] = vertices[1].frameU;
+            uvBuffer[index + 3] = vertices[1].frameV;
+            uvBuffer[index + 4] = vertices[2].frameU;
+            uvBuffer[index + 5] = vertices[2].frameV;
         }
 
         return this;
@@ -52,17 +52,17 @@ export default {
         var vertexBuffer = this.vertexBuffer,
             index;
         var faces = this.faces,
-            face;
+            vertices;
         for (var i = 0, cnt = faces.length; i < cnt; i++) {
-            face = faces[i];
+            vertices = faces[i].vertices;
 
             index = i * 6;
-            vertexBuffer[index] = face.vertex0.localX;
-            vertexBuffer[index + 1] = face.vertex0.localY;
-            vertexBuffer[index + 2] = face.vertex1.localX;
-            vertexBuffer[index + 3] = face.vertex1.localY;
-            vertexBuffer[index + 4] = face.vertex2.localX;
-            vertexBuffer[index + 5] = face.vertex2.localY;
+            vertexBuffer[index] = vertices[0].localX;
+            vertexBuffer[index + 1] = vertices[0].localY;
+            vertexBuffer[index + 2] = vertices[1].localX;
+            vertexBuffer[index + 3] = vertices[1].localY;
+            vertexBuffer[index + 4] = vertices[2].localX;
+            vertexBuffer[index + 5] = vertices[2].localY;
         }
 
         return this;
@@ -72,14 +72,14 @@ export default {
         var alphaBuffer = this.alphaBuffer,
             index;
         var faces = this.faces,
-            face;
+            vertices;
         for (var i = 0, cnt = faces.length; i < cnt; i++) {
-            face = faces[i];
+            vertices = faces[i].vertices;
 
             index = i * 3;
-            alphaBuffer[index] = face.vertex0.alpha;
-            alphaBuffer[index + 1] = face.vertex1.alpha;
-            alphaBuffer[index + 2] = face.vertex2.alpha;
+            alphaBuffer[index] = vertices[0].alpha;
+            alphaBuffer[index + 1] = vertices[1].alpha;
+            alphaBuffer[index + 2] = vertices[2].alpha;
         }
 
         return this;
@@ -89,14 +89,14 @@ export default {
         var colorBuffer = this.colorBuffer,
             index;
         var faces = this.faces,
-            face;
+            vertices;
         for (var i = 0, cnt = faces.length; i < cnt; i++) {
-            face = faces[i];
+            vertices = faces[i].vertices;
 
             index = i * 3;
-            colorBuffer[index] = face.vertex0.color;
-            colorBuffer[index + 1] = face.vertex1.color;
-            colorBuffer[index + 2] = face.vertex2.color;
+            colorBuffer[index] = vertices[0].color;
+            colorBuffer[index + 1] = vertices[1].color;
+            colorBuffer[index + 2] = vertices[2].color;
         }
 
         return this;
