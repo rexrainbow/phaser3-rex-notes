@@ -2,17 +2,14 @@
 1. Fill empty grids
 */
 
-var Fill = function (map) {
+var Fill = function (initSymbols) {
     var upperBoard = false;
-    if (typeof (map) === 'boolean') {
-        upperBoard = map;
-        map = undefined;
+    if (typeof (initSymbols) === 'boolean') {
+        upperBoard = initSymbols;
+        initSymbols = undefined;
     }
 
-    var symbol;
-    var board = this.board,
-        symbols = this.candidateSymbols;
-
+    var board = this.board;
     var height = this.board.height;
     if (upperBoard) {
         height /= 2;
@@ -23,13 +20,14 @@ var Fill = function (map) {
                 continue;
             }
 
-            if (map !== undefined) {
-                symbol = map[tileX][tileY];
+            var candidateSymbols = this.candidateSymbols;
+            if (initSymbols !== undefined) {
+                var symbol = initSymbols[tileY][tileX];
                 if (symbol !== '?') {
-                    symbols = symbol;
+                    candidateSymbols = symbol;
                 }
             }
-            this.createChess(tileX, tileY, symbols);
+            this.createChess(tileX, tileY, candidateSymbols);
         }
     }
 }

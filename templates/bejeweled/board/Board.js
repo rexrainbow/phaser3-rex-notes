@@ -12,7 +12,7 @@ class Board {
         this.match = this.rexBoard.add.match(GetValue(config, 'match', undefined));
         this.match.setBoard(this.board);
 
-        this.initSymbolsMap = GetValue(config, 'initMap', undefined); // 2d array
+        this.initSymbols = GetValue(config, 'initSymbols', undefined); // 2d array
         // configuration of chess
         this.chessTileZ = GetValue(config, 'chess.tileZ', 1);
         this.candidateSymbols = GetValue(config, 'chess.symbols', undefined);
@@ -51,7 +51,7 @@ class Board {
         this.board = undefined;
         this.match = undefined;
 
-        this.initSymbolsMap = undefined;
+        this.initSymbols = undefined;
         this.candidateSymbols = undefined;
         this.chessCallbackScope = undefined;
         this.chessCreateCallback = undefined;
@@ -75,8 +75,8 @@ class Board {
         return this;
     }
 
-    setInitSymbolsMap(map) {
-        this.initSymbolsMap = map; // 2d array
+    setInitSymbols(symbols) {
+        this.initSymbols = symbols; // 2d array
         return this;
     }
 

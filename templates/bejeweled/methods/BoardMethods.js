@@ -33,6 +33,12 @@ export default {
         return this.board.dumpSymbols();
     },
 
+    reloadSymbols(symbols) {
+        this.board.setInitSymbols(symbols);
+        this.mainState.goto('RESET');
+        return this;
+    },
+
     // Expose board instance
     getBoard() {
         return this.board.board;
