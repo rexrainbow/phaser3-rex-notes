@@ -154,6 +154,8 @@ declare class Bejeweled extends ComponentBase {
         direction: number
     ): Phaser.GameObjects.GameObject;
 
+    isAwaitingInput(): boolean;
+
     dumpSymbols(): any[][];
 
     reloadSymbols(symbols?: any[][]): this;

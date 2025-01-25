@@ -57,6 +57,10 @@ class Demo extends Phaser.Scene {
         this.add.text(0, 0, 'Save', { fontSize: 40 })
             .setInteractive()
             .on('pointerup', function () {
+                if (!bejeweled.isAwaitingInput()) {
+                    return;
+                }
+
                 symbols = bejeweled.dumpSymbols();
                 console.log(symbols)
             })
