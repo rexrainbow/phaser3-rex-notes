@@ -1,7 +1,7 @@
 import GetValue from '../../../utils/object/GetValue.js';
 import GetSneakTileZ from './GetSneakTileZ.js';
-import MoveAloneLine from '../movetotask/MoveAloneLine.js';
-import AddMoveLine from '../movetotask/AddMoveLine.js';
+import MoveAloneLine from './movetotask/MoveAloneLine.js';
+import AddMoveLine from './movetotask/AddMoveLine.js';
 
 var MoveToTile = function (tileX, tileY, direction) {
     var board = this.chessData.board;

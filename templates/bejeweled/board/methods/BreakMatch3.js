@@ -4,9 +4,9 @@
 3. Change symbol to a different value of all neighbors
 */
 
-import RefreshSymbolCache from './match/RefreshSymbolCache.js';
-import GetMatchN from './match/GetMatchN.js';
-import RandomSymbol from './chess/RandomSymobl.js';
+import RefreshSymbolCache from '../match/RefreshSymbolCache.js';
+import GetMatchN from '../match/GetMatchN.js';
+import RandomSymbol from '../chess/RandomSymobl.js';
 
 const GetRandom = Phaser.Utils.Array.GetRandom;
 

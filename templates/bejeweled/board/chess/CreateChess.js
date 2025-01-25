@@ -14,7 +14,7 @@ var CreateChess = function (tileX, tileY, symbols) {
     } else {
         gameObject = this.chessCreateCallback(board);
     }
-    // Set symbol, it also fires 'changedata_symbol' event
+    // Set symbol, it also fires 'changedata-symbol' event
     gameObject.setData('symbol', symbol);
     // Add to board
     board.addChess(gameObject, tileX, tileY, this.chessTileZ, true);
