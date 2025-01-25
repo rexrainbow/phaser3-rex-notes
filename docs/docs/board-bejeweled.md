@@ -200,34 +200,36 @@ Each chess has a `symbol` value stored in `'symbol'` key in private data. Add da
 ```mermaid
 graph TD
 
-Start((Start)) --> Select1Start[select1-start]
+Start((Start)) --> RESET
+
+RESET --> SELECT1START
 
 subgraph Select 1 states
-  Select1Start --> |Input| Select1[select1]
+  SELECT1START --> |Input| SELECT1
 end
 
-Select1 --> select2Start[select2-start]
+SELECT1 --> SELECT2START
 
 subgraph Select 2 states
-  select2Start --> |Input| select2[select2]
+  SELECT2START --> |Input| SELECT2
 end
 
-select2Start --> Select1Start
-select2 --> Swap[swap]
-Swap --> MatchStart[match-start]
+SELECT2START --> SELECT1START
+SELECT2 --> SWAP
+SWAP --> MatchStart[start]
 
-subgraph Match states
-  MatchStart --> Match[match]
-  Match --> Eliminate[eliminate]
-  Match --> MatchEnd[match-end]
-  Eliminate --> Fall[fall]
-  Fall --> Fill[fill]
-  Fill --> Match
+subgraph MATCH3 sub-state
+  MatchStart --> MATCH3
+  MATCH3 --> ELIMINATING
+  MATCH3 --> MatchEnd[end]
+  ELIMINATING --> FALLING
+  FALLING --> FILL
+  FILL --> MATCH3
 end
 
-MatchEnd --> UndoSwap[undo-swap]
-UndoSwap --> Select1Start
-MatchEnd --> Select1Start
+MatchEnd --> |No-matched-line| UndoSwap[undo-swap] --> SELECT1START
+MatchEnd --> |Has-matched-line and<br>Has-potational-matched-line| SELECT1START
+MatchEnd --> |Has-matched-line and<br>No-potational-matched-line| RESET
 ```
 
 #### Select first chess
@@ -446,7 +448,7 @@ function (board, bejeweled) {
 
 #### Fill chess
 
-Fire `'fill'` event
+Fill upper board, fire `'fill'` event
 
 ```javascript
 bejeweled.on('fill', function(board, bejeweled) {
@@ -608,8 +610,18 @@ See [data manager](datamanager.md)
 !!! note
     Ensure data manager is created before binding any data-changed events.
 
-### Misc
+### Helper methods
 
+- Await input
+    ```javascript
+    isAwaitingInput = bejeweled.isAwaitingInput();
+    ```
+    - Return `true` only when state is at `SELECT1START`
+- Dump symbol of all chess
+    ```javascript
+    var symbols = bejeweled.dumpSymbols();
+    ```
+    - `symbols` : A 2d symbols array.
 - Board instance
     ```javascript
     var board = bejeweled.getBoard();

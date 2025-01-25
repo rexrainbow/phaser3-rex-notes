@@ -56,29 +56,17 @@ class State extends BaseState {
 
     // RESET
     enter_RESET() {
-        this.board.reset(); // Refill chess
+        var done = false;
+        while (!done) {
+            this.board.reset(); // Refill chess
+            done = this.board.preTest();
+        }
         this.next();
     }
     next_RESET() {
-        return 'PRETEST';
+        return 'SELECT1START';
     }
     // RESET
-
-
-    // PRETEST
-    enter_PRETEST() {
-        this.next();
-    }
-    next_PRETEST() {
-        var nextState;
-        if (this.board.preTest()) {
-            nextState = 'SELECT1START';
-        } else {
-            nextState = 'RESET';
-        }
-        return nextState;
-    }
-    // PRETEST
 
     // SELECT1START
     enter_SELECT1START() {
@@ -212,14 +200,16 @@ class State extends BaseState {
         var nextState;
         if (this.matchState.totalMatchedLinesCount === 0) {
             nextState = 'UNDOSWAP';
+        } else if (this.board.preTest()) {
+            nextState = 'SELECT1START';
         } else {
-            nextState = 'PRETEST';
+            nextState = 'RESET';
         }
         return nextState;
     }
     // MATCH3
 
-    // UNDO_SWAP
+    // UNDOSWAP
     enter_UNDOSWAP() {
         var board = this.board.board,
             bejeweled = this.bejeweled,
@@ -243,7 +233,7 @@ class State extends BaseState {
     next_UNDOSWAP() {
         return 'SELECT1START';
     }
-    // UNDO_SWAP
+    // UNDOSWAP
 
     // debug
     printState() {
