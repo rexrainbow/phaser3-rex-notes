@@ -134,7 +134,7 @@
         }
     };
 
-    const GetValue$b = Phaser.Utils.Objects.GetValue;
+    const GetValue$c = Phaser.Utils.Objects.GetValue;
 
     class ComponentBase {
         constructor(parent, config) {
@@ -143,7 +143,7 @@
             this.isShutdown = false;
 
             // Event emitter, default is private event emitter
-            this.setEventEmitter(GetValue$b(config, 'eventEmitter', true));
+            this.setEventEmitter(GetValue$c(config, 'eventEmitter', true));
 
             // Register callback of parent destroy event, also see `shutdown` method
             if (this.parent) {
@@ -668,7 +668,7 @@
         },
     };
 
-    var GetValue$a = function (source, key, defaultValue) {
+    var GetValue$b = function (source, key, defaultValue) {
         if (!source || typeof source === 'number') {
             return defaultValue;
         }
@@ -733,13 +733,13 @@
         */
         constructor(config) {
             // Attach get-next-state function
-            var states = GetValue$a(config, 'states', undefined);
+            var states = GetValue$b(config, 'states', undefined);
             if (states) {
                 this.addStates(states);
             }
 
             // Attach extend members
-            var extend = GetValue$a(config, 'extend', undefined);
+            var extend = GetValue$b(config, 'extend', undefined);
             if (extend) {
                 for (var name in extend) {
                     if (!this.hasOwnProperty(name) || this[name] === undefined) {
@@ -749,8 +749,8 @@
             }
 
             // Event emitter
-            var eventEmitter = GetValue$a(config, 'eventEmitter', undefined);
-            var EventEmitterClass = GetValue$a(config, 'EventEmitterClass', undefined);
+            var eventEmitter = GetValue$b(config, 'eventEmitter', undefined);
+            var EventEmitterClass = GetValue$b(config, 'EventEmitterClass', undefined);
             this.setEventEmitter(eventEmitter, EventEmitterClass);
 
             this._stateLock = false;
@@ -766,9 +766,9 @@
         }
 
         resetFromJSON(o) {
-            this.setEnable(GetValue$a(o, 'enable', true));
-            this.start(GetValue$a(o, 'start', undefined));
-            var init = GetValue$a(o, 'init', undefined);
+            this.setEnable(GetValue$b(o, 'enable', true));
+            this.start(GetValue$b(o, 'start', undefined));
+            var init = GetValue$b(o, 'init', undefined);
             if (init) {
                 init.call(this);
             }
@@ -998,7 +998,7 @@
 
         resetFromJSON(o) {
             super.resetFromJSON(o);
-            this._scene = GetValue$a(o, 'scene', undefined);
+            this._scene = GetValue$b(o, 'scene', undefined);
             return this;
         }
 
@@ -1124,7 +1124,7 @@
         }
     }
 
-    const GetValue$9 = Phaser.Utils.Objects.GetValue;
+    const GetValue$a = Phaser.Utils.Objects.GetValue;
 
     class TickTask extends ComponentBase {
         constructor(parent, config) {
@@ -1133,7 +1133,7 @@
             this._isRunning = false;
             this.isPaused = false;
             this.tickingState = false;
-            this.setTickingMode(GetValue$9(config, 'tickingMode', 1));
+            this.setTickingMode(GetValue$a(config, 'tickingMode', 1));
             // boot() later
         }
 
@@ -1237,7 +1237,7 @@
         'always': 2
     };
 
-    const GetValue$8 = Phaser.Utils.Objects.GetValue;
+    const GetValue$9 = Phaser.Utils.Objects.GetValue;
 
     class SceneUpdateTickTask extends TickTask {
         constructor(parent, config) {
@@ -1248,7 +1248,7 @@
 
             // If this.scene is not available, use game's 'step' event
             var defaultEventName = (this.scene) ? 'update' : 'step';
-            this.tickEventName = GetValue$8(config, 'tickEventName', defaultEventName);
+            this.tickEventName = GetValue$9(config, 'tickEventName', defaultEventName);
             this.isSceneTicker = !IsGameUpdateEvent(this.tickEventName);
 
         }
@@ -1284,7 +1284,7 @@
         return (eventName === 'step') || (eventName === 'poststep');
     };
 
-    const GetValue$7 = Phaser.Utils.Objects.GetValue;
+    const GetValue$8 = Phaser.Utils.Objects.GetValue;
     const Clamp = Phaser.Math.Clamp;
 
     class Timer {
@@ -1293,15 +1293,15 @@
         }
 
         resetFromJSON(o) {
-            this.state = GetValue$7(o, 'state', IDLE);
-            this.timeScale = GetValue$7(o, 'timeScale', 1);
-            this.delay = GetValue$7(o, 'delay', 0);
-            this.repeat = GetValue$7(o, 'repeat', 0);
-            this.repeatCounter = GetValue$7(o, 'repeatCounter', 0);
-            this.repeatDelay = GetValue$7(o, 'repeatDelay', 0);
-            this.duration = GetValue$7(o, 'duration', 0);
-            this.nowTime = GetValue$7(o, 'nowTime', 0);
-            this.justRestart = GetValue$7(o, 'justRestart', false);
+            this.state = GetValue$8(o, 'state', IDLE);
+            this.timeScale = GetValue$8(o, 'timeScale', 1);
+            this.delay = GetValue$8(o, 'delay', 0);
+            this.repeat = GetValue$8(o, 'repeat', 0);
+            this.repeatCounter = GetValue$8(o, 'repeatCounter', 0);
+            this.repeatDelay = GetValue$8(o, 'repeatDelay', 0);
+            this.duration = GetValue$8(o, 'duration', 0);
+            this.nowTime = GetValue$8(o, 'nowTime', 0);
+            this.justRestart = GetValue$8(o, 'justRestart', false);
         }
 
         toJSON() {
@@ -1509,19 +1509,19 @@
 
     }
 
-    const GetValue$6 = Phaser.Utils.Objects.GetValue;
-    const GetAdvancedValue$1 = Phaser.Utils.Objects.GetAdvancedValue;
+    const GetValue$7 = Phaser.Utils.Objects.GetValue;
+    const GetAdvancedValue$2 = Phaser.Utils.Objects.GetAdvancedValue;
     const GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
 
     class EaseValueTaskBase extends TimerTickTask {
         resetFromJSON(o) {
-            this.timer.resetFromJSON(GetValue$6(o, 'timer'));
-            this.setEnable(GetValue$6(o, 'enable', true));
-            this.setTarget(GetValue$6(o, 'target', this.parent));
-            this.setDelay(GetAdvancedValue$1(o, 'delay', 0));
-            this.setDuration(GetAdvancedValue$1(o, 'duration', 1000));
-            this.setEase(GetValue$6(o, 'ease', 'Linear'));
-            this.setRepeat(GetValue$6(o, 'repeat', 0));
+            this.timer.resetFromJSON(GetValue$7(o, 'timer'));
+            this.setEnable(GetValue$7(o, 'enable', true));
+            this.setTarget(GetValue$7(o, 'target', this.parent));
+            this.setDelay(GetAdvancedValue$2(o, 'delay', 0));
+            this.setDuration(GetAdvancedValue$2(o, 'duration', 1000));
+            this.setEase(GetValue$7(o, 'ease', 'Linear'));
+            this.setRepeat(GetValue$7(o, 'repeat', 0));
 
             return this;
         }
@@ -1641,9 +1641,9 @@
         }
     }
 
-    const GetValue$5 = Phaser.Utils.Objects.GetValue;
-    const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
-    const Linear = Phaser.Math.Linear;
+    const GetValue$6 = Phaser.Utils.Objects.GetValue;
+    const GetAdvancedValue$1 = Phaser.Utils.Objects.GetAdvancedValue;
+    const Linear$1 = Phaser.Math.Linear;
 
     class Fade extends EaseValueTaskBase {
         constructor(gameObject, config) {
@@ -1658,17 +1658,17 @@
         resetFromJSON(o) {
             super.resetFromJSON(o);
 
-            this.setMode(GetValue$5(o, 'mode', 0));
+            this.setMode(GetValue$6(o, 'mode', 0));
             this.setAlphaRange(
-                GetAdvancedValue(o, 'start', this.parent.alpha),
-                GetAdvancedValue(o, 'end', 0)
+                GetAdvancedValue$1(o, 'start', this.parent.alpha),
+                GetAdvancedValue$1(o, 'end', 0)
             );
             return this;
         }
 
         setMode(m) {
             if (typeof (m) === 'string') {
-                m = MODE[m];
+                m = MODE$1[m];
             }
             this.mode = m;
             return this;
@@ -1703,7 +1703,7 @@
                 t = 1 - t;
             }
 
-            gameObject.alpha = Linear(this.alphaStart, this.alphaEnd, t);
+            gameObject.alpha = Linear$1(this.alphaStart, this.alphaEnd, t);
         }
 
         complete() {
@@ -1717,7 +1717,7 @@
 
     }
 
-    const MODE = {
+    const MODE$1 = {
         stop: 0,
         destroy: 1,
         yoyo: 2
@@ -1787,7 +1787,11 @@
         }
     };
 
-    const GetValue$4 = Phaser.Utils.Objects.GetValue;
+    var IsPromise = function (obj) {
+        return obj && (typeof obj.then === 'function');
+    };
+
+    const GetValue$5 = Phaser.Utils.Objects.GetValue;
     const SetStruct$2 = Phaser.Structs.Set;
 
     let State$1 = class State extends BaseState {
@@ -1801,11 +1805,11 @@
 
             // Actions
             // Eliminating action
-            this.eliminatingAction = GetValue$4(config, 'eliminatingAction', EliminateChess);
+            this.eliminatingAction = GetValue$5(config, 'eliminatingAction', EliminateChess);
             // on falling chess
-            this.fallingAction = GetValue$4(config, 'fallingAction', FallingAllChess);
+            this.fallingAction = GetValue$5(config, 'fallingAction', FallingAllChess);
 
-            var debug = GetValue$4(config, 'debug', false);
+            var debug = GetValue$5(config, 'debug', false);
             if (debug) {
                 this.on('statechange', this.printState, this);
             }
@@ -1881,11 +1885,19 @@
         // ELIMINATING
         enter_ELIMINATING() {
             var board = this.board.board,
+                bejeweled = this.bejeweled,
                 chessArray = this.eliminatedChessArray;
 
-            this.bejeweled.emit('eliminate', chessArray, board, this.bejeweled);
+            this.bejeweled.emit('eliminate', chessArray, board, bejeweled);
 
-            this.eliminatingAction(chessArray, board, this.bejeweled);
+            var result = this.eliminatingAction(chessArray, board, bejeweled);
+            if (IsPromise(result)) {
+                bejeweled.waitEvent(bejeweled, 'eliminate.complete');
+                result
+                    .then(function () {
+                        bejeweled.emit('eliminate.complete');
+                    });
+            }
 
             // Remove eliminated chess
             chessArray.forEach(board.removeChess, board);
@@ -1903,11 +1915,19 @@
 
         // FALLING
         enter_FALLING() {
-            var board = this.board.board;
+            var board = this.board.board,
+                bejeweled = this.bejeweled;
 
-            this.bejeweled.emit('fall', board, this.bejeweled);
+            this.bejeweled.emit('fall', board, bejeweled);
 
-            this.fallingAction(board, this.bejeweled);
+            var result = this.fallingAction(board, bejeweled);
+            if (IsPromise(result)) {
+                bejeweled.waitEvent(bejeweled, 'fall.complete');
+                result
+                    .then(function () {
+                        bejeweled.emit('fall.complete');
+                    });
+            }
 
             // To next state when all completed
             this.next();
@@ -1940,6 +1960,180 @@
 
         printState() {
             console.log('Match state: ' + this.prevState + ' -> ' + this.state);
+        }
+    };
+
+    const GetValue$4 = Phaser.Utils.Objects.GetValue;
+    const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
+    const Linear = Phaser.Math.Linear;
+
+    class Scale extends EaseValueTaskBase {
+        constructor(gameObject, config) {
+            super(gameObject, config);
+            // this.parent = gameObject;
+            // this.timer
+
+            this.scaleStart = {};
+            this.scaleEnd = {};
+
+            this.resetFromJSON(config);
+            this.boot();
+        }
+
+        resetFromJSON(o) {
+            super.resetFromJSON(o);
+
+            this.setMode(GetValue$4(o, 'mode', 0));
+            this.setScaleRange(
+                GetAdvancedValue(o, 'start', undefined),
+                GetAdvancedValue(o, 'end', 0)
+            );
+
+            return this;
+        }
+
+        setMode(m) {
+            if (typeof (m) === 'string') {
+                m = MODE[m];
+            }
+            this.mode = m;
+            return this;
+        }
+
+        setScaleRange(start, end) {
+            if (typeof (start) === 'number') {
+                this.startX = start;
+                this.startY = start;
+            } else {
+                this.startX = GetAdvancedValue(start, 'x', this.parent.scaleX);
+                this.startY = GetAdvancedValue(start, 'y', this.parent.scaleY);
+            }
+            if (typeof (end) === 'number') {
+                this.endX = end;
+                this.endY = end;
+            } else {
+                this.endX = GetAdvancedValue(end, 'x', undefined);
+                this.endY = GetAdvancedValue(end, 'y', undefined);
+            }
+
+            this.hasScaleX = (this.startX !== undefined) && (this.endX !== undefined);
+            this.hasScaleY = (this.startY !== undefined) && (this.endY !== undefined);
+            return this;
+        }
+
+        start() {
+            if (this.timer.isRunning) {
+                return this;
+            }
+
+            var gameObject = this.parent;
+            if (this.hasScaleX) {
+                gameObject.scaleX = this.startX;
+            }
+            if (this.hasScaleY) {
+                gameObject.scaleY = this.startY;
+            }
+
+            var repeat = this.repeat;
+            if (this.mode === 2) {  // Yoyo
+                if (repeat !== -1) {
+                    repeat = ((repeat + 1) * 2) - 1;
+                }
+            }
+
+            this.timer
+                .setDelay(this.delay)
+                .setDuration(this.duration)
+                .setRepeat(repeat);
+
+            super.start();
+            return this;
+        }
+
+        updateTarget(gameObject, timer) {
+            var t = timer.t;
+            if (timer.isOddIteration) {  // Yoyo
+                t = 1 - t;
+            }
+            t = this.easeFn(t);
+
+            if (this.hasScaleX) {
+                gameObject.scaleX = Linear(this.startX, this.endX, t);
+            }
+            if (this.hasScaleY) {
+                gameObject.scaleY = Linear(this.startY, this.endY, t);
+            }
+        }
+
+        complete() {
+            super.complete();
+
+            if (this.mode === 1) {
+                this.parent.destroy();
+                // Will also destroy this behavior
+            }
+            return this;
+        }
+    }
+
+    const MODE = {
+        stop: 0,
+        destroy: 1,
+        yoyo: 2
+    };
+
+    var PopUp = function (gameObject, duration, orientation, ease, scale) {
+        if (ease === undefined) {
+            ease = 'Cubic';
+        }
+
+        // Ease scale from 0 to current scale
+        var start, end;
+        switch (orientation) {
+            case 0:
+            case 'x':
+                start = { x: 0 };
+                end = { x: gameObject.scaleX };
+                break;
+            case 1:
+            case 'y':
+                start = { y: 0 };
+                end = { y: gameObject.scaleY };
+                break;
+            default:
+                start = 0;
+                end = gameObject.scale;
+                break;
+        }
+
+        var config = {
+            mode: 0,
+            start: start,
+            end: end,
+            duration: duration,
+            ease: ease
+        };
+
+        if (scale === undefined) {
+            scale = new Scale(gameObject, config);
+        } else {
+            scale.resetFromJSON(config);
+        }
+        scale.restart();
+
+        return scale;
+    };
+
+    /* 
+    1. Pop-up chess
+    */
+
+
+    var PlaceChess = function (chessArray, board, bejeweled) {
+        const duration = 500; //ms
+        for (var i = 0, cnt = chessArray.length; i < cnt; i++) {
+            var fade = PopUp(chessArray[i], duration);
+            bejeweled.waitEvent(fade, 'complete');
         }
     };
 
@@ -1993,6 +2187,7 @@
             this.matchState = new State$1(bejeweled, config); // sub-state
 
             // Actions
+            this.placeAction = GetValue$3(config, 'placeAction', PlaceChess);
             // select1 action
             this.select1Action = GetValue$3(config, 'select1Action', SelectChess);
             // select2 action
@@ -2031,32 +2226,47 @@
 
         // RESET
         enter_RESET() {
-            this.board.reset(); // Refill chess
+            var board = this.board;
+
+            var done = false;
+            while (!done) {
+                board.reset(); // Refill chess
+                done = board.preTest();
+            }
+
             this.next();
         }
         next_RESET() {
-            return 'PRETEST';
+            return 'PLACE';
         }
         // RESET
 
+        // PLACE
+        enter_PLACE() {
+            var board = this.board.board,
+                bejeweled = this.bejeweled;
 
-        // PRETEST
-        enter_PRETEST() {
+            bejeweled.emit('place', board, bejeweled);
+
+            var chessArray = this.board.getChessArray('lower');
+            var result = this.placeAction(chessArray, board, bejeweled);
+            if (IsPromise(result)) {
+                bejeweled.waitEvent(bejeweled, 'place.complete');
+                result
+                    .then(function () {
+                        bejeweled.emit('place.complete');
+                    });
+            }
+
             this.next();
         }
-        next_PRETEST() {
-            var nextState;
-            if (this.board.preTest()) {
-                nextState = 'SELECT1START';
-            } else {
-                nextState = 'RESET';
-            }
-            return nextState;
+        next_PLACE() {
+            return 'SELECT1START';
         }
-        // PRETEST
+        // PLACE
 
         // SELECT1START
-        enter_SELECT1() {
+        enter_SELECT1START() {
             this.selectedChess1 = undefined;
             this.selectedChess2 = undefined;
 
@@ -2081,11 +2291,19 @@
         // SELECT1
         enter_SELECT1() {
             var board = this.board.board,
+                bejeweled = this.bejeweled,
                 chess = this.selectedChess1;
 
-            this.bejeweled.emit('select1', chess, board, this.bejeweled);
+            this.bejeweled.emit('select1', chess, board, bejeweled);
 
-            this.select1Action(chess, board, this.bejeweled);
+            var result = this.select1Action(chess, board, bejeweled);
+            if (IsPromise(result)) {
+                bejeweled.waitEvent(bejeweled, 'select1.complete');
+                result
+                    .then(function () {
+                        bejeweled.emit('select1.complete');
+                    });
+            }
 
             // To next state when all completed
             this.next();
@@ -2121,11 +2339,19 @@
         // SELECT2
         enter_SELECT2() {
             var board = this.board.board,
+                bejeweled = this.bejeweled,
                 chess = this.selectedChess2;
 
-            this.bejeweled.emit('select2', chess, board, this.bejeweled);
+            this.bejeweled.emit('select2', chess, board, bejeweled);
 
-            this.select2Action(chess, board, this.bejeweled);
+            var result = this.select2Action(chess, board, bejeweled);
+            if (IsPromise(result)) {
+                bejeweled.waitEvent(bejeweled, 'select2.complete');
+                result
+                    .then(function () {
+                        bejeweled.emit('select2.complete');
+                    });
+            }
 
             // To next state when all completed
             this.next();
@@ -2138,12 +2364,20 @@
         // SWAP
         enter_SWAP() {
             var board = this.board.board,
+                bejeweled = this.bejeweled,
                 chess1 = this.selectedChess1,
                 chess2 = this.selectedChess2;
 
-            this.bejeweled.emit('swap', chess1, chess2, board, this.bejeweled);
+            this.bejeweled.emit('swap', chess1, chess2, board, bejeweled);
 
-            this.swapAction(chess1, chess2, board, this.bejeweled);
+            var result = this.swapAction(chess1, chess2, board, bejeweled);
+            if (IsPromise(result)) {
+                bejeweled.waitEvent(bejeweled, 'swap.complete');
+                result
+                    .then(function () {
+                        bejeweled.emit('swap.complete');
+                    });
+            }
 
             // To next state when all completed
             this.next();
@@ -2163,22 +2397,32 @@
             var nextState;
             if (this.matchState.totalMatchedLinesCount === 0) {
                 nextState = 'UNDOSWAP';
+            } else if (this.board.preTest()) {
+                nextState = 'SELECT1START';
             } else {
-                nextState = 'PRETEST';
+                nextState = 'RESET';
             }
             return nextState;
         }
         // MATCH3
 
-        // UNDO_SWAP
+        // UNDOSWAP
         enter_UNDOSWAP() {
             var board = this.board.board,
+                bejeweled = this.bejeweled,
                 chess1 = this.selectedChess1,
                 chess2 = this.selectedChess2;
 
-            this.bejeweled.emit('undo-swap', chess1, chess2, board, this.bejeweled);
+            this.bejeweled.emit('undo-swap', chess1, chess2, board, bejeweled);
 
-            this.undoSwapAction(chess1, chess2, board, this.bejeweled);
+            var result = this.undoSwapAction(chess1, chess2, board, bejeweled);
+            if (IsPromise(result)) {
+                bejeweled.waitEvent(bejeweled, 'undo-swap.complete');
+                result
+                    .then(function () {
+                        bejeweled.emit('undo-swap.complete');
+                    });
+            }
 
             // To next state when all completed
             this.next();
@@ -2186,7 +2430,7 @@
         next_UNDOSWAP() {
             return 'SELECT1START';
         }
-        // UNDO_SWAP
+        // UNDOSWAP
 
         // debug
         printState() {
@@ -2209,11 +2453,13 @@
     3. Break match3
     */
 
-    var Reset = function() {
+    var Reset = function () {
         // Destroy all chess
-        this.board.removeAllChess();
+        this.board.removeAllChess(true);
         // Fill chess (with initial symbol map)
-        this.fill(this.initSymbolsMap);
+        var symbols = this.initSymbols;
+        this.initSymbols = undefined;
+        this.fill(symbols);
         // Break match3
         this.breakMatch3();
     };
@@ -2262,7 +2508,7 @@
             scope = this.chessCallbackScope;
 
         // Get symbol
-        var symbol = RandomSymbol(board, tileX, tileY, symbols, scope);
+        var symbol = (Array.isArray(symbols)) ? RandomSymbol(board, tileX, tileY, symbols, scope) : symbols;
         // Create game object
         var gameObject;
         if (scope) {
@@ -2270,7 +2516,7 @@
         } else {
             gameObject = this.chessCreateCallback(board);
         }
-        // Set symbol, it also fires 'changedata_symbol' event
+        // Set symbol, it also fires 'changedata-symbol' event
         gameObject.setData('symbol', symbol);
         // Add to board
         board.addChess(gameObject, tileX, tileY, this.chessTileZ, true);
@@ -2287,50 +2533,51 @@
     1. Fill empty grids
     */
 
-    var Fill = function (map) {
+    var Fill = function (initSymbols) {
         var upperBoard = false;
-        if (typeof (map) === 'boolean') {
-            upperBoard = map;
-            map = undefined;
+        if (typeof (initSymbols) === 'boolean') {
+            upperBoard = initSymbols;
+            initSymbols = undefined;
         }
 
-        var symbol;
-        var board = this.board,
-            symbols = this.candidateSymbols;
-
-        var height = this.board.height;
+        var hasInitSymbols = (initSymbols !== undefined);
+        var board = this.board;
+        var height = board.height;
+        var chessTileZ = this.chessTileZ;
         if (upperBoard) {
             height /= 2;
         }
         for (var tileY = 0; tileY < height; tileY++) {
-            for (var tileX = 0, width = this.board.width; tileX < width; tileX++) {
-                if (board.contains(tileX, tileY, this.chessTileZ)) { // not empty                
+            for (var tileX = 0, width = board.width; tileX < width; tileX++) {
+                if (board.contains(tileX, tileY, chessTileZ)) { // not empty                
                     continue;
                 }
 
-                if (map !== undefined) {
-                    symbol = map[tileX][tileY];
+                var candidateSymbols = this.candidateSymbols;
+                if (hasInitSymbols) {
+                    var symbol = initSymbols[tileY][tileX];
                     if (symbol !== '?') {
-                        symbols = symbol;
+                        candidateSymbols = symbol;
                     }
                 }
-                this.createChess(tileX, tileY, symbols);
+                this.createChess(tileX, tileY, candidateSymbols);
             }
         }
     };
 
     var RefreshSymbolCache = function () {
+        var chessTileZ = this.chessTileZ;
         this.match.refreshSymbols(function (tileXY, board) {
             // Return null in upper board
             if (tileXY.y < (board.height / 2)) {
                 return null;
             }
-            var chess = board.tileXYZToChess(tileXY.x, tileXY.y, this.chessTileZ);
+            var chess = board.tileXYZToChess(tileXY.x, tileXY.y, chessTileZ);
             if (chess == null) {
                 return null;
             }
             return chess.getData('symbol');
-        }, this);
+        });
     };
 
     var GetMatchN = function (n, callback, scope) {
@@ -2392,12 +2639,12 @@
                 tileA.y = tileY;
                 for (var dir = 0, dirCnt = directions.length; dir < dirCnt; dir++) {
                     tileB = this.board.getNeighborTileXY(tileA, dir);
-                    // swap symbol
-                    swapSymbols(match, tileA, tileB);
-                    // any match?
+                    // Swap symbol
+                    SwapSymbols(match, tileA, tileB);
+                    // Any match?
                     this.preTestResult = AnyMatch.call(this, 3);
-                    // swap symbol back
-                    swapSymbols(match, tileA, tileB);
+                    // Swap symbol back
+                    SwapSymbols(match, tileA, tileB);
 
                     if (this.preTestResult) {
                         return true;
@@ -2408,7 +2655,7 @@
         return false;
     };
 
-    var swapSymbols = function (match, tileA, tileB) {
+    var SwapSymbols = function (match, tileA, tileB) {
         var symbolA = match.getSymbol(tileA.x, tileA.y);
         var symbolB = match.getSymbol(tileB.x, tileB.y);
         match.setSymbol(tileA.x, tileA.y, symbolB);
@@ -2451,7 +2698,71 @@
         return true;
     };
 
-    // methods
+    var GetChessArray = function (part) {
+        part = part.toLowerCase();
+        var board = this.board;
+        var height = board.height;
+
+        var startY, endY;
+        switch (part) {
+            case 'upper':
+                startY = 0;
+                endY = height / 2;
+                break;
+            case 'lower':
+                startY = height / 2;
+                endY = height;
+                break;
+            default:
+                startY = 0;
+                endY = height;
+                break;
+        }
+
+        var tileZ = this.chessTileZ;
+        var chessArray = [];
+        for (var tileY = startY; tileY < endY; tileY++) {
+            for (var tileX = 0, endX = board.width; tileX < endX; tileX++) {
+                var chess = board.tileXYZToChess(tileX, tileY, tileZ);
+                if (chess === null) {
+                    continue;
+                }
+                chessArray.push(chess);
+            }
+        }
+
+        return chessArray;
+    };
+
+    var DumpSymbols = function () {
+        var board = this.board;
+        var chessTileZ = this.chessTileZ;
+
+        var symbols = [];
+        for (var tileY = 0, rowCnt = board.height; tileY < rowCnt; tileY++) {
+            var row = [];
+            symbols.push(row);
+            for (var tileX = 0, colCnt = board.width; tileX < colCnt; tileX++) {
+                var chess = board.tileXYZToChess(tileX, tileY, chessTileZ);
+                var symbol = (chess == null) ? null : chess.getData('symbol');
+                row.push(symbol);
+            }
+        }
+
+        return symbols;
+    };
+
+    var Methods = {
+        init: Init,
+        reset: Reset,
+        createChess: CreateChess,
+        fill: Fill,
+        breakMatch3: BreakMatch3,
+        preTest: PreTest,
+        getAllMatch: GetAllMatch,
+        getChessArray: GetChessArray,
+        dumpSymbols: DumpSymbols,
+    };
 
     const GetValue$2 = Phaser.Utils.Objects.GetValue;
 
@@ -2465,7 +2776,7 @@
             this.match = this.rexBoard.add.match(GetValue$2(config, 'match', undefined));
             this.match.setBoard(this.board);
 
-            this.initSymbolsMap = GetValue$2(config, 'initMap', undefined); // 2d array
+            this.initSymbols = GetValue$2(config, 'initSymbols', undefined); // 2d array
             // configuration of chess
             this.chessTileZ = GetValue$2(config, 'chess.tileZ', 1);
             this.candidateSymbols = GetValue$2(config, 'chess.symbols', undefined);
@@ -2504,7 +2815,7 @@
             this.board = undefined;
             this.match = undefined;
 
-            this.initSymbolsMap = undefined;
+            this.initSymbols = undefined;
             this.candidateSymbols = undefined;
             this.chessCallbackScope = undefined;
             this.chessCreateCallback = undefined;
@@ -2528,8 +2839,8 @@
             return this;
         }
 
-        setInitSymbolsMap(map) {
-            this.initSymbolsMap = map; // 2d array
+        setInitSymbols(symbols) {
+            this.initSymbols = symbols; // 2d array
             return this;
         }
 
@@ -2582,18 +2893,9 @@
         }
     }
 
-    var methods = {
-        init: Init,
-        reset: Reset,
-        createChess: CreateChess,
-        fill: Fill,
-        breakMatch3: BreakMatch3,
-        preTest: PreTest,
-        getAllMatch: GetAllMatch,
-    };
     Object.assign(
         Board.prototype,
-        methods
+        Methods
     );
 
     const GetValue$1 = Phaser.Utils.Objects.GetValue;
@@ -2778,6 +3080,22 @@
             return this.board.getNeighborChessAtDirection(chess, direction);
         },
 
+        // State
+        isAwaitingInput() {
+            return this.mainState.state === 'SELECT1START';
+        },
+
+        // Symbols
+        dumpSymbols() {
+            return this.board.dumpSymbols();
+        },
+
+        loadSymbols(symbols) {
+            this.board.setInitSymbols(symbols);
+            this.mainState.goto('RESET');
+            return this;
+        },
+
         // Expose board instance
         getBoard() {
             return this.board.board;
@@ -2796,6 +3114,10 @@
             }
             this.waitEvents.waitEvent(eventEmitter, eventName);
             return this;
+        },
+
+        waitCallback() {
+            return this.waitEvents.waitCallback();
         },
 
         isWaitingEvent() {

@@ -16179,8 +16179,10 @@
     );
 
     const GameObjectClass = Phaser.GameObjects.GameObject;
+    const LayerClass$1 = Phaser.GameObjects.Layer;
+
     var IsGameObject = function (object) {
-        return (object instanceof GameObjectClass);
+        return (object instanceof GameObjectClass) || (object instanceof LayerClass$1);
     };
 
     const LayerClass = Phaser.GameObjects.Layer;
