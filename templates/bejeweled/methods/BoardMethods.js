@@ -39,7 +39,7 @@ export default {
         return this.board.dumpSymbols();
     },
 
-    reloadSymbols(symbols) {
+    loadSymbols(symbols) {
         this.board.setInitSymbols(symbols);
         this.mainState.goto('RESET');
         return this;

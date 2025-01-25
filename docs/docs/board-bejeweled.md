@@ -112,6 +112,7 @@ var bejeweled = new Bejeweled(scene, {
     },
     // mask: false,
 
+    placeAction: undefined,
     select1Action: undefined,
     select2Action: undefined,
     swapAction: undefined,
@@ -128,20 +129,21 @@ Configurations
 - `rexBoard` : Key of 'rexBoard' plugin. Default is `'rexBoard'`.
 - Board properties
     - `board.width` : Board width in tiles.
-    - `board.height` : [Board height](board-bejeweled.md#board-height) in tiles.
+    - `board.height` : [Board height](#board-height) in tiles.
     - `board.grid.x`, `board.grid.y` : World position of tile (0, 0)
     - `board.grid.cellWidth`, `board.grid.cellHeight` : The width/height of the cell, in pixels.
 - Chess properties
-    - `chess.symbols` : An array of possible symbols, or a callback to return a symbol. See [Generate symbol](board-bejeweled.md#generate-symbol)
-    - `chess.create`, `chess.scope` : Callback of [creating chess object](board-bejeweled.md#create-chess-object).
+    - `chess.symbols` : An array of possible symbols, or a callback to return a symbol. See [Generate symbol](#generate-symbol)
+    - `chess.create`, `chess.scope` : Callback of [creating chess object](#create-chess-object).
     - `chess.moveTo.speed` : Constant moving speed of chess, in pixel per-second.
 - Custom actions
-    - `select1Action` : [Custom select first chess Action](board-bejeweled.md#custom-select-first-chess-action)
-    - `select2Action` : [Custom select second chess Action](board-bejeweled.md#custom-select-second-chess-action)
-    - `swapAction` : [Custon swap action](board-bejeweled.md#custom-swap-action)
-    - `undoSwapAction` : [Custon undo-swap action](board-bejeweled.md#custom-undo-swap-action)
-    - `eliminatingAction` : [Custon eliminating action](board-bejeweled.md#custom-eliminating-action)
-    - `fallingAction` : [Custon falling action](board-bejeweled.md#custom-falling-action)
+    - `placeAction` : [Custom place chess Action](#place-chess-action)
+    - `select1Action` : [Custom select first chess Action](#custom-select-first-chess-action)
+    - `select2Action` : [Custom select second chess Action](#custom-select-second-chess-action)
+    - `swapAction` : [Custon swap action](#custom-swap-action)
+    - `undoSwapAction` : [Custon undo-swap action](#custom-undo-swap-action)
+    - `eliminatingAction` : [Custon eliminating action](#custom-eliminating-action)
+    - `fallingAction` : [Custon falling action](#custom-falling-action)
 - Touch input
     - `input` : Set `true` to register default touch input logic.
 - Mask
@@ -200,9 +202,9 @@ Each chess has a `symbol` value stored in `'symbol'` key in private data. Add da
 ```mermaid
 graph TD
 
-Start((Start)) --> RESET
+Start((Start)) --> RESET --> PLACE
 
-RESET --> SELECT1START
+PLACE --> SELECT1START
 
 subgraph Select 1 states
   SELECT1START --> |Input| SELECT1
@@ -231,6 +233,31 @@ MatchEnd --> |No-matched-line| UndoSwap[undo-swap] --> SELECT1START
 MatchEnd --> |Has-matched-line and<br>Has-potational-matched-line| SELECT1START
 MatchEnd --> |Has-matched-line and<br>No-potational-matched-line| RESET
 ```
+
+#### Place chess Action
+
+Fire `'place'` event after filling chess, then run place action. 
+
+```javascript
+bejeweled.on('place', function(board, bejeweled) {
+
+}, scope);
+```
+
+Default place action:
+
+```javascript
+function (chessArray, board, bejeweled) {
+    const duration = 500; //ms
+    for (var i = 0, cnt = chessArray.length; i < cnt; i++) {
+        var fade = PopUp(chessArray[i], duration);
+        bejeweled.waitEvent(fade, 'complete');
+    }
+}
+```
+
+- `chessArray` : Chess array at lower board.
+
 
 #### Select first chess
 
@@ -573,6 +600,30 @@ Helper methods
         - `0` ~ `7` : [Quad grid](board-quadgrid.md#directions) in 8 directions mode.
         - `0` ~ `5` : [Hexagon grid](board-hexagongrid.md#directions).
 
+### Await input
+
+```javascript
+isAwaitingInput = bejeweled.isAwaitingInput();
+```
+
+- Return `true` only when state is at `SELECT1START`
+
+### Save / load board
+
+- Save board
+    ```javascript
+    var symbols = bejeweled.dumpSymbols();
+    ```
+    - `symbols` : A 2d symbols array.
+    - Invoke this method when `bejeweled.isAwaitingInput()` return `true`
+- Load board
+    ```javascript
+    bejeweled.loadSymbols(symbols);
+    ```
+    - `symbols` : A 2d symbols array, return valeu of `bejeweled.dumpSymbols()`
+    - Invoke this method when `bejeweled.isAwaitingInput()` return `true`
+    - Chage state to `RESET` -> `PLACE` -> `SELECT1START` -> ...
+
 ### Data
 
 - Get
@@ -612,16 +663,6 @@ See [data manager](datamanager.md)
 
 ### Helper methods
 
-- Await input
-    ```javascript
-    isAwaitingInput = bejeweled.isAwaitingInput();
-    ```
-    - Return `true` only when state is at `SELECT1START`
-- Dump symbol of all chess
-    ```javascript
-    var symbols = bejeweled.dumpSymbols();
-    ```
-    - `symbols` : A 2d symbols array.
 - Board instance
     ```javascript
     var board = bejeweled.getBoard();

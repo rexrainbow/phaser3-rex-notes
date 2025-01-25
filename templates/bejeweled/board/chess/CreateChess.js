@@ -6,7 +6,7 @@ var CreateChess = function (tileX, tileY, symbols) {
         scope = this.chessCallbackScope;
 
     // Get symbol
-    var symbol = RandomSymbol(board, tileX, tileY, symbols, scope);
+    var symbol = (Array.isArray(symbols)) ? RandomSymbol(board, tileX, tileY, symbols, scope) : symbols;
     // Create game object
     var gameObject;
     if (scope) {

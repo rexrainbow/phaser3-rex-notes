@@ -158,7 +158,7 @@ declare class Bejeweled extends ComponentBase {
 
     dumpSymbols(): any[][];
 
-    reloadSymbols(symbols?: any[][]): this;
+    loadSymbols(symbols?: any[][]): this;
 
     selectChess1(
         chess: Phaser.GameObjects.GameObject

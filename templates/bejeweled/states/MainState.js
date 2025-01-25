@@ -1,6 +1,7 @@
 import BaseState from './BaseState.js';
 import MatchState from './MatchState.js';
 // Actions
+import PlaceChess from '../actions/PlaceChess.js';
 import SelectChess from '../actions/SelectChess.js';
 import SwapChess from '../actions/SwapChess.js'
 import IsPromise from '../../../plugins/utils/object/IsPromise.js';
@@ -18,6 +19,7 @@ class State extends BaseState {
         this.matchState = new MatchState(bejeweled, config); // sub-state
 
         // Actions
+        this.placeAction = GetValue(config, 'placeAction', PlaceChess);
         // select1 action
         this.select1Action = GetValue(config, 'select1Action', SelectChess);
         // select2 action
@@ -56,17 +58,44 @@ class State extends BaseState {
 
     // RESET
     enter_RESET() {
+        var board = this.board;
+
         var done = false;
         while (!done) {
-            this.board.reset(); // Refill chess
-            done = this.board.preTest();
+            board.reset(); // Refill chess
+            done = board.preTest();
         }
+
         this.next();
     }
     next_RESET() {
-        return 'SELECT1START';
+        return 'PLACE';
     }
     // RESET
+
+    // PLACE
+    enter_PLACE() {
+        var board = this.board.board,
+            bejeweled = this.bejeweled;
+
+        bejeweled.emit('place', board, bejeweled);
+
+        var chessArray = this.board.getChessArray('lower');
+        var result = this.placeAction(chessArray, board, bejeweled);
+        if (IsPromise(result)) {
+            bejeweled.waitEvent(bejeweled, 'place.complete');
+            result
+                .then(function () {
+                    bejeweled.emit('place.complete');
+                })
+        }
+
+        this.next();
+    }
+    next_PLACE() {
+        return 'SELECT1START';
+    }
+    // PLACE
 
     // SELECT1START
     enter_SELECT1START() {

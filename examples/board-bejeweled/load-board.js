@@ -72,7 +72,7 @@ class Demo extends Phaser.Scene {
                     return;
                 }
 
-                bejeweled.reloadSymbols(symbols);
+                bejeweled.loadSymbols(symbols);
             })
     }
 
