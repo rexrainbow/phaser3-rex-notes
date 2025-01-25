@@ -5,6 +5,7 @@ import Fill from './Fill.js';
 import BreakMatch3 from './BreakMatch3.js';
 import PreTest from './PreTest.js';
 import GetAllMatch from '../match/GetAllMatch.js';
+import DumpSymbols from './DumpSymbols.js';
 
 var Methods = {
     init: Init,
@@ -14,6 +15,7 @@ var Methods = {
     breakMatch3: BreakMatch3,
     preTest: PreTest,
     getAllMatch: GetAllMatch,
+    dumpSymbols: DumpSymbols,
 }
 
 export default Methods;

@@ -29,6 +29,10 @@ export default {
         return this.board.getNeighborChessAtDirection(chess, direction);
     },
 
+    dumpSymbols() {
+        return this.board.dumpSymbols();
+    },
+
     // Expose board instance
     getBoard() {
         return this.board.board;
