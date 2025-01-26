@@ -1,12 +1,8 @@
 import PositionToPercent from './PositionToPercent.js';
 
-var OnDragThumb = function (pointer, dragX, dragY) {
-    if (!this.enable) {
-        return;
-    }
-    tmpPoint.x = dragX;
-    tmpPoint.y = dragY;
-
+var GetValueByPosition = function (x, y) {
+    tmpPoint.x = x;
+    tmpPoint.y = y;
     var startPoint, endPoint;
     if (!this.reverseAxis) {
         startPoint = this.getStartPoint();
@@ -15,8 +11,9 @@ var OnDragThumb = function (pointer, dragX, dragY) {
         startPoint = this.getEndPoint();
         endPoint = this.getStartPoint();
     }
-    this.value = PositionToPercent(startPoint, endPoint, tmpPoint);
+    var value = PositionToPercent(startPoint, endPoint, tmpPoint);
+    return value;
 }
 var tmpPoint = {};
 
-export default OnDragThumb;
+export default GetValueByPosition;
