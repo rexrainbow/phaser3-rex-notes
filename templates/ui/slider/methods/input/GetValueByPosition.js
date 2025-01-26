@@ -1,4 +1,4 @@
-import PositionToPercent from './PositionToPercent.js';
+import PositionToPercent from '../PositionToPercent.js';
 
 var GetValueByPosition = function (x, y) {
     tmpPoint.x = x;
