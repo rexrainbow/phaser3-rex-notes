@@ -37,19 +37,11 @@ var RegisterInputEvents = function (config) {
                     this.inputActive = true;
                     this.eventEmitter.emit('inputstart', pointer);
                 }, this)
-                .on('pointerover', function (pointer) {
-                    if (!pointer.isDown) {
-                        return;
-                    }
-                    this.inputActive = true;
-                    this.eventEmitter.emit('inputstart', pointer);
-                }, this)
                 .on('pointerup', function (pointer) {
                     this.inputActive = false;
                     this.eventEmitter.emit('inputend', pointer);
                 }, this)
                 .on('pointerdown', OnTouchTrack, this)
-                .on('pointerover', OnTouchTrack, this)
 
             // pointermove event
             this.scene.input.on('pointermove', OnTouchTrack, this);
