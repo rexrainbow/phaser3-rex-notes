@@ -1,4 +1,4 @@
-import AlignIn from '../../../plugins/utils/actions/AlignIn.js';
+import AlignIn from '../../../../plugins/utils/actions/AlignIn.js';
 
 var GetThumbAlignPoint = function (align, out) {
     if (out === undefined) {
