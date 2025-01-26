@@ -1,7 +1,7 @@
 import GetValueByPosition from './GetValueByPosition.js';
 
-var OnTouchTrack = function (pointer, localX, localY) {
-    if (!this.enable) {
+var OnTouchTrack = function (pointer) {
+    if (!this.enable || !this.inputActive) {
         return;
     }
     if (!pointer.isDown) {

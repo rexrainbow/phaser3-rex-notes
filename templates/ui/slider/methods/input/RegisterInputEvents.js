@@ -4,6 +4,8 @@ import OnTouchTrack from './OnTouchTrack.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 var RegisterInputEvents = function (config) {
+    this.inputActive = false;
+
     var inputMode = GetValue(config, 'input', 0);
     if (typeof (inputMode) === 'string') {
         inputMode = INPUTMODE[inputMode];
@@ -17,37 +19,43 @@ var RegisterInputEvents = function (config) {
                 thumb.setInteractive();
                 this.scene.input.setDraggable(thumb);
                 thumb
-                    .on('drag', OnDragThumb, this)
                     .on('dragstart', function (pointer) {
+                        this.inputActive = true;
                         this.eventEmitter.emit('inputstart', pointer);
                     }, this)
                     .on('dragend', function (pointer) {
+                        this.inputActive = false;
                         this.eventEmitter.emit('inputend', pointer);
                     }, this)
-
+                    .on('drag', OnDragThumb, this)
             }
             break;
         case 1: // 'click'
             this
-                .on('pointerdown', OnTouchTrack, this)
-                .on('pointermove', OnTouchTrack, this)
+                .setInteractive()
                 .on('pointerdown', function (pointer) {
+                    this.inputActive = true;
+                    this.eventEmitter.emit('inputstart', pointer);
+                }, this)
+                .on('pointerover', function (pointer) {
+                    if (!pointer.isDown) {
+                        return;
+                    }
+                    this.inputActive = true;
                     this.eventEmitter.emit('inputstart', pointer);
                 }, this)
                 .on('pointerup', function (pointer) {
+                    this.inputActive = false;
                     this.eventEmitter.emit('inputend', pointer);
                 }, this)
-                .on('pointerover', function (pointer) {
-                    if (pointer.isDown) {
-                        this.eventEmitter.emit('inputstart', pointer);
-                    }
-                }, this)
-                .on('pointerout', function (pointer) {
-                    if (pointer.isDown) {
-                        this.eventEmitter.emit('inputend', pointer);
-                    }
-                }, this)
-                .setInteractive()
+                .on('pointerdown', OnTouchTrack, this)
+                .on('pointerover', OnTouchTrack, this)
+
+            // pointermove event
+            this.scene.input.on('pointermove', OnTouchTrack, this);
+            this.once('destroy', function () {
+                this.scene.input.off('pointermove', OnTouchTrack, this);
+            }, this)
 
             break;
     }
