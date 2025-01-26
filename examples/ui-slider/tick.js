@@ -32,8 +32,8 @@ class Demo extends Phaser.Scene {
             thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_LIGHT),
 
             valuechangeCallback: function (value) {
-                value = (value * range) + min;
-                print0.text = Math.floor(value);
+                value = Math.round((value * range) + min);
+                print0.text = value;
             },
             tick: tick / range,
 
