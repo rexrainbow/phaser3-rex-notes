@@ -1,4 +1,4 @@
-import GridSizer from '../../gridsizer/GridSizer.js';
+import GridSizer from '../../../gridsizer/GridSizer.js';
 import AddChild from './AddChild.js';
 import AddSlider from './AddSlider.js';
 

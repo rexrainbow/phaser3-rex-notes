@@ -1,5 +1,5 @@
-import ScrollBar from '../../scrollbar/ScrollBar.js';
-import Clone from '../../../../plugins/utils/object/Clone.js';
+import ScrollBar from '../../../scrollbar/ScrollBar.js';
+import Clone from '../../../../../plugins/utils/object/Clone.js';
 
 var CreateScrollbar = function (scene, config) {
     if (config === undefined) {

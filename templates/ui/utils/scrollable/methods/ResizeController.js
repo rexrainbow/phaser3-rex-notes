@@ -1,4 +1,4 @@
-import ResizeGameObject from '../../../../plugins/utils/size/ResizeGameObject.js';
+import ResizeGameObject from '../../../../../plugins/utils/size/ResizeGameObject.js';
 
 var ResizeController = function () {
     switch (this.scrollMode) {
