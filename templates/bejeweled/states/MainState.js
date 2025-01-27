@@ -1,6 +1,7 @@
 import BaseState from './BaseState.js';
 import MatchState from './MatchState.js';
 // Actions
+import PlaceChess from '../actions/PlaceChess.js';
 import SelectChess from '../actions/SelectChess.js';
 import SwapChess from '../actions/SwapChess.js'
 import IsPromise from '../../../plugins/utils/object/IsPromise.js';
@@ -18,6 +19,7 @@ class State extends BaseState {
         this.matchState = new MatchState(bejeweled, config); // sub-state
 
         // Actions
+        this.placeAction = GetValue(config, 'placeAction', PlaceChess);
         // select1 action
         this.select1Action = GetValue(config, 'select1Action', SelectChess);
         // select2 action
@@ -56,29 +58,44 @@ class State extends BaseState {
 
     // RESET
     enter_RESET() {
-        this.board.reset(); // Refill chess
+        var board = this.board;
+
+        var done = false;
+        while (!done) {
+            board.reset(); // Refill chess
+            done = board.preTest();
+        }
+
         this.next();
     }
     next_RESET() {
-        return 'PRETEST';
+        return 'PLACE';
     }
     // RESET
 
+    // PLACE
+    enter_PLACE() {
+        var board = this.board.board,
+            bejeweled = this.bejeweled;
 
-    // PRETEST
-    enter_PRETEST() {
+        bejeweled.emit('place', board, bejeweled);
+
+        var chessArray = this.board.getChessArray('lower');
+        var result = this.placeAction(chessArray, board, bejeweled);
+        if (IsPromise(result)) {
+            bejeweled.waitEvent(bejeweled, 'place.complete');
+            result
+                .then(function () {
+                    bejeweled.emit('place.complete');
+                })
+        }
+
         this.next();
     }
-    next_PRETEST() {
-        var nextState;
-        if (this.board.preTest()) {
-            nextState = 'SELECT1START';
-        } else {
-            nextState = 'RESET';
-        }
-        return nextState;
+    next_PLACE() {
+        return 'SELECT1START';
     }
-    // PRETEST
+    // PLACE
 
     // SELECT1START
     enter_SELECT1START() {
@@ -212,14 +229,16 @@ class State extends BaseState {
         var nextState;
         if (this.matchState.totalMatchedLinesCount === 0) {
             nextState = 'UNDOSWAP';
+        } else if (this.board.preTest()) {
+            nextState = 'SELECT1START';
         } else {
-            nextState = 'PRETEST';
+            nextState = 'RESET';
         }
         return nextState;
     }
     // MATCH3
 
-    // UNDO_SWAP
+    // UNDOSWAP
     enter_UNDOSWAP() {
         var board = this.board.board,
             bejeweled = this.bejeweled,
@@ -243,7 +262,7 @@ class State extends BaseState {
     next_UNDOSWAP() {
         return 'SELECT1START';
     }
-    // UNDO_SWAP
+    // UNDOSWAP
 
     // debug
     printState() {

@@ -1,12 +1,11 @@
 import Sizer from '../sizer/Sizer.js';
 import CreateBackground from '../utils/build/CreateBackground.js';
 import ProgressBase from '../../../plugins/utils/progressbase/ProgressBase.js';
-import OnDragThumb from './OnDragThumb.js';
-import OnTouchTrack from './OnTouchTrack.js';
-import GetStartPoint from './GetStartPoint.js';
-import GetEndPoint from './GetEndPoint.js';
-import UpdateThumb from './UpdateThumb.js';
-import UpdateIndicator from './UpdateIndicator.js';
+import RegisterInputEvents from './methods/input/RegisterInputEvents.js';
+import GetStartPoint from './methods/GetStartPoint.js';
+import GetEndPoint from './methods/GetEndPoint.js';
+import UpdateThumb from './methods/UpdateThumb.js';
+import UpdateIndicator from './methods/UpdateIndicator.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
@@ -68,52 +67,6 @@ class Slider extends ProgressBase(Sizer) {
             this.setThumbOffset(thumbOffsetX, thumbOffsetY);
         }
 
-        // Input
-        var inputMode = GetValue(config, 'input', 0);
-        if (typeof (inputMode) === 'string') {
-            inputMode = INPUTMODE[inputMode];
-        }
-        switch (inputMode) {
-            case 0: // 'drag'
-                if (thumb) {
-                    thumb.setInteractive();
-                    this.scene.input.setDraggable(thumb);
-                    thumb
-                        .on('drag', OnDragThumb, this)
-                        .on('dragstart', function (pointer) {
-                            this.eventEmitter.emit('inputstart', pointer);
-                        }, this)
-                        .on('dragend', function (pointer) {
-                            this.eventEmitter.emit('inputend', pointer);
-                        }, this)
-
-                }
-                break;
-            case 1: // 'click'
-                this
-                    .on('pointerdown', OnTouchTrack, this)
-                    .on('pointermove', OnTouchTrack, this)
-                    .on('pointerdown', function (pointer) {
-                        this.eventEmitter.emit('inputstart', pointer);
-                    }, this)
-                    .on('pointerup', function (pointer) {
-                        this.eventEmitter.emit('inputend', pointer);
-                    }, this)
-                    .on('pointerover', function (pointer) {
-                        if (pointer.isDown) {
-                            this.eventEmitter.emit('inputstart', pointer);
-                        }
-                    }, this)
-                    .on('pointerout', function (pointer) {
-                        if (pointer.isDown) {
-                            this.eventEmitter.emit('inputend', pointer);
-                        }
-                    }, this)
-                    .setInteractive()
-
-                break;
-        }
-
         this.addChildrenMap('background', background);
         this.addChildrenMap('track', track);
         this.addChildrenMap('indicator', indicator);
@@ -126,6 +79,9 @@ class Slider extends ProgressBase(Sizer) {
             gap = GetValue(config, 'gap', undefined)
         }
         this.setGap(gap);
+
+        // Input
+        RegisterInputEvents.call(this, config);
 
         this.setValue(GetValue(config, 'value', 0), GetValue(config, 'min', undefined), GetValue(config, 'max', undefined));
 
@@ -193,13 +149,6 @@ class Slider extends ProgressBase(Sizer) {
         super.postLayout(parent, newWidth, newHeight);
         return this;
     }
-}
-
-const INPUTMODE = {
-    pan: 0,
-    drag: 0,
-    click: 1,
-    none: -1,
 }
 
 var methods = {

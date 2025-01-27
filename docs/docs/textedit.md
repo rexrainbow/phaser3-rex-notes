@@ -293,6 +293,14 @@ var inputText = editor.inputText.node;
 
 See [InputText/Bypass key input](inputtext.md#bypass-key-input)
 
+### Deactive editor
+
+```javascript
+textObject.disableInteractive();
+```
+
+See also [touch input/disable interactive](touchevents.md#disable-interactive)
+
 
 ### Interactive with other game objects
 

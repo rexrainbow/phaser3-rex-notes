@@ -2,8 +2,8 @@
 1. Test if there has any matched line after chess swapping
 */
 
-import RefreshSymbolCache from './match/RefreshSymbolCache.js';
-import AnyMatch from './match/AnyMatch.js';
+import RefreshSymbolCache from '../match/RefreshSymbolCache.js';
+import AnyMatch from '../match/AnyMatch.js';
 
 var PreTest = function () {
     var match = this.match;

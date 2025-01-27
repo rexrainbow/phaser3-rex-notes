@@ -4,11 +4,13 @@
 3. Break match3
 */
 
-var Reset = function() {
+var Reset = function () {
     // Destroy all chess
-    this.board.removeAllChess();
+    this.board.removeAllChess(true);
     // Fill chess (with initial symbol map)
-    this.fill(this.initSymbolsMap);
+    var symbols = this.initSymbols;
+    this.initSymbols = undefined;
+    this.fill(symbols);
     // Break match3
     this.breakMatch3();
 }

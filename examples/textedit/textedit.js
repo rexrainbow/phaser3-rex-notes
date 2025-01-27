@@ -37,6 +37,8 @@ class Demo extends Phaser.Scene {
             selectAll: true,
             // enterClose: false
         });
+
+        // printText.disableInteractive()
     }
 
     update() { }

@@ -12,7 +12,7 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        this.bejeweled = new Bejeweled(this, {
+        var bejeweled = new Bejeweled(this, {
             board: {
                 grid: {
                     x: 180,
@@ -47,11 +47,33 @@ class Demo extends Phaser.Scene {
                     speed: 400
                 },
             },
-            mask:true,
+            mask: true,
 
             debug: true,
         });
-        this.bejeweled.start();
+        bejeweled.start();
+
+        var symbols = null;
+        this.add.text(0, 0, 'Save', { fontSize: 40 })
+            .setInteractive()
+            .on('pointerup', function () {
+                if (!bejeweled.isAwaitingInput()) {
+                    return;
+                }
+
+                symbols = bejeweled.dumpSymbols();
+                console.log(symbols)
+            })
+
+        this.add.text(0, 300, 'Load', { fontSize: 40 })
+            .setInteractive()
+            .on('pointerup', function () {
+                if (!symbols) {
+                    return;
+                }
+
+                bejeweled.loadSymbols(symbols);
+            })
     }
 
     update() { }

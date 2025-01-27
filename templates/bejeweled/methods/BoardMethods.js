@@ -29,6 +29,22 @@ export default {
         return this.board.getNeighborChessAtDirection(chess, direction);
     },
 
+    // State
+    isAwaitingInput() {
+        return this.mainState.state === 'SELECT1START';
+    },
+
+    // Symbols
+    dumpSymbols() {
+        return this.board.dumpSymbols();
+    },
+
+    loadSymbols(symbols) {
+        this.board.setInitSymbols(symbols);
+        this.mainState.goto('RESET');
+        return this;
+    },
+
     // Expose board instance
     getBoard() {
         return this.board.board;

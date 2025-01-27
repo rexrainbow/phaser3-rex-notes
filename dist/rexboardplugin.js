@@ -9638,6 +9638,27 @@
         return sneakTileZ;
     };
 
+    var MoveAloneLine = function (startX, startY, endX, endY) {
+        if (startX !== undefined) {
+            this.parent.x = startX;
+        }
+        if (startY !== undefined) {
+            this.parent.y = startY;
+        }
+        this.moveToTask.moveTo(endX, endY);
+        return this;
+    };
+
+    var AddMoveLine = function (startX, startY, endX, endY) {
+        if (!this.moveToTask.hasOwnProperty('nextlines')) {
+            this.moveToTask.nextlines = [];
+        }
+        this.moveToTask.nextlines.push(
+            [startX, startY, endX, endY]
+        );
+        return this;
+    };
+
     var MoveToTile$1 = function (tileX, tileY, direction) {
         var board = this.chessData.board;
         if (board === null) { // chess is not in a board
@@ -9665,20 +9686,23 @@
             }
         }
 
-        // invalid tile position
+        // Invalid tile position
         if ((tileX == null) || (tileY == null)) {
             this.lastMoveResult = false;
             return this;
         }
+
         if (direction === undefined) {
             globTileXYZ.x = tileX;
             globTileXYZ.y = tileY;
             direction = board.getNeighborTileDirection(myTileXYZ, globTileXYZ);
         }
+
         if (!this.canMoveTo(tileX, tileY, direction)) {
             this.lastMoveResult = false;
             return this;
         }
+
         this.destinationTileX = tileX;
         this.destinationTileY = tileY;
         this.destinationDirection = direction;
@@ -9689,7 +9713,7 @@
             if ((neighborTileXY.x === tileX) && (neighborTileXY.y === tileY)) {
                 // not a wrapped neighbor
                 var out = board.tileXYToWorldXY(tileX, tileY, true);
-                this.moveAlongLine(undefined, undefined, out.x, out.y);
+                MoveAloneLine.call(this, undefined, undefined, out.x, out.y);
             } else {
                 // wrapped neighbor
                 // line 0
@@ -9701,7 +9725,7 @@
                 var startY = out.y;
                 var endX = (startX + originNeighborWorldX) / 2;
                 var endY = (startY + originNeighborWorldY) / 2;
-                this.moveAlongLine(undefined, undefined, endX, endY);
+                MoveAloneLine.call(this, undefined, undefined, endX, endY);
                 // line 1
                 var oppositeDirection = board.getOppositeDirection(tileX, tileY, direction);
                 board.grid.getNeighborTileXY(tileX, tileY, oppositeDirection, neighborTileXY);
@@ -9713,11 +9737,11 @@
                 endY = out.y;
                 startX = (originNeighborWorldX + endX) / 2;
                 startY = (originNeighborWorldY + endY) / 2;
-                this.addMoveLine(startX, startY, endX, endY);
+                AddMoveLine.call(this, startX, startY, endX, endY);
             }
         } else {
             var out = board.tileXYToWorldXY(tileX, tileY, true);
-            this.moveAlongLine(undefined, undefined, out.x, out.y);
+            MoveAloneLine.call(this, undefined, undefined, out.x, out.y);
         }
 
         var tileZ = myTileXYZ.z;
@@ -10071,6 +10095,20 @@
         }
     };
 
+    var MoveNextLine = function () {
+        var nextlines = this.moveToTask.nextlines;
+        if (!nextlines) {
+            return false;
+        }
+        if (nextlines.length === 0) {
+            return false;
+        }
+        // has next line
+        MoveAloneLine.apply(this, nextlines[0]);
+        nextlines.length = 0;
+        return true;
+    };
+
     let MoveTo$1 = class MoveTo extends SceneUpdateTickTask {
         constructor(gameObject, config) {
             super(gameObject, config);
@@ -10220,41 +10258,6 @@
             return this;
         }
 
-        moveAlongLine(startX, startY, endX, endY) {
-            if (startX !== undefined) {
-                this.parent.x = startX;
-            }
-            if (startY !== undefined) {
-                this.parent.y = startY;
-            }
-            this.moveToTask.moveTo(endX, endY);
-            return this;
-        };
-
-        addMoveLine(startX, startY, endX, endY) {
-            if (!this.moveToTask.hasOwnProperty('nextlines')) {
-                this.moveToTask.nextlines = [];
-            }
-            this.moveToTask.nextlines.push(
-                [startX, startY, endX, endY]
-            );
-            return this;
-        };
-
-        moveNextLine() {
-            var nextlines = this.moveToTask.nextlines;
-            if (!nextlines) {
-                return false;
-            }
-            if (nextlines.length === 0) {
-                return false;
-            }
-            // has next line
-            this.moveAlongLine.apply(this, nextlines[0]);
-            nextlines.length = 0;
-            return true;
-        }
-
         update(time, delta) {
             if ((!this.isRunning) || (!this.enable)) {
                 return this;
@@ -10263,7 +10266,7 @@
             var moveToTask = this.moveToTask;
             moveToTask.update(time, delta);
             if (!moveToTask.isRunning) {
-                if (!this.moveNextLine()) {
+                if (!MoveNextLine.call(this)) {
                     this.complete();
                 }
                 return this;
@@ -10500,17 +10503,6 @@
             this.speed = speed;
             return this;
         }
-
-        moveAlongLine(startX, startY, endX, endY) {
-            if (startX !== undefined) {
-                this.parent.x = startX;
-            }
-            if (startY !== undefined) {
-                this.parent.y = startY;
-            }
-            this.moveToTask.moveTo(endX, endY);
-            return this;
-        };
 
         update(time, delta) {
             if ((!this.isRunning) || (!this.enable)) {
@@ -14182,10 +14174,10 @@
         return (gameObject instanceof ContainerClass);
     };
 
-    const LayerClass = Phaser.GameObjects.Layer;
+    const LayerClass$1 = Phaser.GameObjects.Layer;
 
     var IsLayerGameObject = function (gameObject) {
-        return (gameObject instanceof LayerClass);
+        return (gameObject instanceof LayerClass$1);
     };
 
     var GetValidChildren = function (parent) {
@@ -14483,8 +14475,10 @@
     var GlobRect;
 
     const GameObjectClass = Phaser.GameObjects.GameObject;
+    const LayerClass = Phaser.GameObjects.Layer;
+
     var IsGameObject = function (object) {
-        return (object instanceof GameObjectClass);
+        return (object instanceof GameObjectClass) || (object instanceof LayerClass);
     };
 
     var GetValue$2 = Phaser.Utils.Objects.GetValue;

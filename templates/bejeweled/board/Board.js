@@ -1,11 +1,4 @@
-// methods
-import Init from './Init.js'
-import Reset from './Reset.js';
-import CreateChess from './chess/CreateChess.js';
-import Fill from './Fill.js';
-import BreakMatch3 from './BreakMatch3.js';
-import PreTest from './PreTest.js';
-import GetAllMatch from './match/GetAllMatch.js';
+import Methods from './methods/Methods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -19,7 +12,7 @@ class Board {
         this.match = this.rexBoard.add.match(GetValue(config, 'match', undefined));
         this.match.setBoard(this.board);
 
-        this.initSymbolsMap = GetValue(config, 'initMap', undefined); // 2d array
+        this.initSymbols = GetValue(config, 'initSymbols', undefined); // 2d array
         // configuration of chess
         this.chessTileZ = GetValue(config, 'chess.tileZ', 1);
         this.candidateSymbols = GetValue(config, 'chess.symbols', undefined);
@@ -58,7 +51,7 @@ class Board {
         this.board = undefined;
         this.match = undefined;
 
-        this.initSymbolsMap = undefined;
+        this.initSymbols = undefined;
         this.candidateSymbols = undefined;
         this.chessCallbackScope = undefined;
         this.chessCreateCallback = undefined;
@@ -82,8 +75,8 @@ class Board {
         return this;
     }
 
-    setInitSymbolsMap(map) {
-        this.initSymbolsMap = map; // 2d array
+    setInitSymbols(symbols) {
+        this.initSymbols = symbols; // 2d array
         return this;
     }
 
@@ -136,17 +129,8 @@ class Board {
     }
 }
 
-var methods = {
-    init: Init,
-    reset: Reset,
-    createChess: CreateChess,
-    fill: Fill,
-    breakMatch3: BreakMatch3,
-    preTest: PreTest,
-    getAllMatch: GetAllMatch,
-}
 Object.assign(
     Board.prototype,
-    methods
+    Methods
 );
 export default Board;
