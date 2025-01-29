@@ -106,7 +106,7 @@ var scroller = scene.plugins.get('rexScroller').add(gameObject, {
 - `bounds` : An array of 2 values `[bound0, bound1]`
 - `value` : Initial value between bound0 and bound1
     - Map this value to position of content under [event 'valuechange'](scroller.md#events)
-- `snapStep` : Snap value.
+- `snapStep` : The interval at which a value snaps to the nearest multiple, ensuring discrete steps instead of continuous changes.
     - `undefined`, or `0` : Disable snapping mode, default behavior.
 - `threshold` : Minimal movement to scroll. Set `0` to scroll immediately.
 - `slidingDeceleration` : Deceleration of slow down when dragging released.
