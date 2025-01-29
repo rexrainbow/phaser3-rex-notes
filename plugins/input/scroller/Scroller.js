@@ -1,5 +1,6 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
-import State from './State.js';
+import StateActions from './methods/StateActions.js';
+import State from './methods/State.js';
 import DrapSpeed from '../../dragspeed.js';
 import SlowDown from '../../utils/movement/SlowDown.js';
 
@@ -29,6 +30,8 @@ class Scroller extends ComponentBase {
         this._enable = undefined;
         this._value = undefined;
         this._slowDown = new SlowDown();
+
+        this.setSnapStep(GetValue(config, 'snapStep', undefined))
 
         var callback = GetValue(config, 'valuechangeCallback', null);
         if (callback !== null) {
@@ -164,6 +167,11 @@ class Scroller extends ComponentBase {
         return this;
     }
 
+    setSnapStep(snapStep) {
+        this.snapStep = snapStep;
+        return this;
+    }
+
     get value() {
         return this._value;
     }
@@ -283,75 +291,6 @@ class Scroller extends ComponentBase {
         speed *= this.dragRate;
         return speed;
     }
-
-    // enter_DRAG
-    onDragStart() {
-        this.emit('dragstart');
-    }
-
-    // exit_DRAG
-    onDragEnd() {
-        this.emit('dragend');
-    }
-
-    // everyTick_DRAG
-    dragging() {
-        this.value += this.dragDelta;
-    }
-
-    // enter_SLIDE 
-    onSliding() {
-        var start = this.value;
-        var speed = this.dragSpeed;
-        if (speed === 0) {
-            this._slowDown.stop();
-            this._state.next();
-            return;
-        }
-        var dec = this.slidingDeceleration;
-        this._slowDown.init(start, (speed > 0), Math.abs(speed), dec)
-    }
-
-    // everyTick_SLIDE
-    sliding(time, delta) {
-        delta *= 0.001;
-        var newValue = this._slowDown.update(delta).value;
-        if (this.overMax(newValue)) {
-            this.value = this.maxValue;
-            this._slowDown.stop();
-        } else if (this.overMin(newValue)) {
-            this.value = this.minValue;
-            this._slowDown.stop();
-        } else {
-            this.value = newValue;
-        }
-    }
-
-    // enter_BACK
-    onPullBack() {
-        var start = this.value;
-        var end = (this.outOfMinBound) ? this.minValue : this.maxValue;
-        var dist = Math.abs(end - start);
-        var dec = this.backDeceleration;
-        var speed = Math.sqrt(2 * dec * dist);
-        this._slowDown.init(start, undefined, speed, dec, end);
-    }
-
-    // everyTick_BACK
-    pullBack(time, delta) {
-        delta *= 0.001;
-        this.value = this._slowDown.update(delta).value;
-
-        if (!this._slowDown.isMoving) {
-            this._state.next();
-        }
-    }
-
-    // exit_SLIDE, exit_BACK
-    stop() {
-        this._slowDown.stop();
-    }
-
 }
 
 const ORIENTATIONMODE = {
@@ -362,5 +301,10 @@ const ORIENTATIONMODE = {
     h: 1,
     horizontal: 1,
 };
+
+Object.assign(
+    Scroller.prototype,
+    StateActions
+)
 
 export default Scroller;

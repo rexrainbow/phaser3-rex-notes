@@ -1,4 +1,10 @@
-import FSM from '../../fsm.js';
+import FSM from '../../../fsm.js';
+import {
+    OnDragStart, OnDragEnd, Dragging,
+    OnSliding, Sliding,
+    OnBack, Back,
+    Stop,
+} from './StateActions.js';
 
 class State extends FSM {
     constructor(parent, config) {
@@ -63,15 +69,15 @@ class State extends FSM {
         var parent = this.parent,
             dragState = parent.dragState;
         if (dragState.justMoved) {
-            parent.dragging();
+            Dragging.call(parent);
         }
         this.next();
     }
     enter_DRAG() {
-        this.parent.onDragStart();
+        OnDragStart.call(this.parent);
     }
     exit_DRAG() {
-        this.parent.onDragEnd();
+        OnDragEnd.call(this.parent);
     }
     // DRAG    
 
@@ -88,13 +94,13 @@ class State extends FSM {
         return nextState;
     }
     enter_SLIDE() {
-        this.parent.onSliding();
+        OnSliding.call(this.parent);
     }
     exit_SLIDE() {
-        this.parent.stop();
+        Stop.call(this.parent);
     }
     update_SLIDE(time, delta) {
-        this.parent.sliding(time, delta);
+        Sliding.call(this.parent, time, delta);
         this.next();
     }
     // SLIDE    
@@ -112,13 +118,13 @@ class State extends FSM {
         return nextState;
     }
     enter_BACK() {
-        this.parent.onPullBack();
+        OnBack.call(this.parent);
     }
     exit_BACK() {
-        this.parent.stop();
+        Stop.call(this.parent);
     }
     update_BACK(time, delta) {
-        this.parent.pullBack(time, delta);
+        Back.call(this.parent, time, delta);
         this.next();
     }
     // BACK
