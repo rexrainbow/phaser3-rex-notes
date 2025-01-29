@@ -1,3 +1,6 @@
+const SnapTo = Phaser.Math.Snap.To;
+const Clamp = Phaser.Math.Clamp;
+
 // this: Scroller
 
 // enter_DRAG
@@ -19,13 +22,49 @@ var Dragging = function () {
 var OnSliding = function () {
     var start = this.value;
     var speed = this.dragSpeed;
-    if (speed === 0) {
-        this._slowDown.stop();
-        this._state.next();
-        return;
+    var snapStep = this.snapStep;
+    var snapMode = !!snapStep;
+
+    if (!snapMode) {
+        if (speed === 0) {
+            this._slowDown.stop();
+            this._state.next();
+
+        } else {
+            var dec = this.slidingDeceleration;
+            this._slowDown.init(start, (speed > 0), speed, dec);
+
+        }
+
+    } else { // snapMode
+        var end = start;
+        // Distance of deceleration
+        var dist = (speed === 0) ? 0 : (speed * speed) / (2 * this.slidingDeceleration);
+        end += (speed > 0) ? dist : -dist;
+
+        var value0 = this.minValue;
+        end = SnapTo(end - value0, snapStep) + value0;
+        // Distance of snapping
+        dist = Math.abs(end - start);
+
+        if (dist > 0) {
+            var dec;
+            if (speed === 0) {
+                dec = this.backDeceleration;
+                speed = Math.sqrt(2 * dec * dist);
+            } else {
+                dec = (speed * speed) / (2 * dist);
+                dec *= 0.99; // Smaller deceleration value
+            }
+
+            this._slowDown.init(start, undefined, speed, dec, end);
+
+        } else {
+            this._slowDown.stop();
+            this._state.next();
+
+        }
     }
-    var dec = this.slidingDeceleration;
-    this._slowDown.init(start, (speed > 0), Math.abs(speed), dec)
 }
 
 // everyTick_SLIDE
@@ -64,7 +103,7 @@ var Back = function (time, delta) {
 }
 
 // exit_SLIDE, exit_BACK
-var Stop = function() {
+var Stop = function () {
     this._slowDown.stop();
 }
 
