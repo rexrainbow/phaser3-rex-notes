@@ -1,5 +1,4 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
-import StateActions from './methods/StateActions.js';
 import State from './methods/State.js';
 import DrapSpeed from '../../dragspeed.js';
 import SlowDown from '../../utils/movement/SlowDown.js';
@@ -301,10 +300,5 @@ const ORIENTATIONMODE = {
     h: 1,
     horizontal: 1,
 };
-
-Object.assign(
-    Scroller.prototype,
-    StateActions
-)
 
 export default Scroller;

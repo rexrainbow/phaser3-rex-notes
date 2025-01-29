@@ -246,7 +246,7 @@
 
         getValue(min, max) {
             var value = this.value;
-            if (min !== undefined) {
+            if ((min !== undefined) && (max !== undefined)) {
                 value = Linear$1(min, max, value);
             }
             return value;
