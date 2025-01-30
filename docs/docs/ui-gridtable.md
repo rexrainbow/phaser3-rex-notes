@@ -18,6 +18,9 @@ A container with a [grid table](gridtable.md), slider, and scroller.
     - [Demo 2](https://codepen.io/rexrainbow/pen/abOgyPo)
 - [Click child of cell](https://codepen.io/rexrainbow/pen/abgROwW)
 - [Two sliders](https://codepen.io/rexrainbow/pen/KKrrYRm)
+- Snap
+    - [Snap step](https://codepen.io/rexrainbow/pen/KwPJEOL)
+    - [Swipe Carousel](https://codepen.io/rexrainbow/pen/yyBZrOL)
 - [Separator](https://codepen.io/rexrainbow/pen/YzRrOOP)
 - [Modal](https://codepen.io/rexrainbow/pen/zYarzzO)
 - [Fixed cell size](https://codepen.io/rexrainbow/pen/poXqqXK)

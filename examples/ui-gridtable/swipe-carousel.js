@@ -17,20 +17,19 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var cellHeight = 60;
+        var cellWidth = 300;
         var gridTable = this.rexUI.add.gridTable({
             x: 400,
             y: 300,
-            width: 300,
 
-            scrollMode: 0,
+            scrollMode: 1,
 
             background: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_MAIN),
 
             table: {
-                height: cellHeight * 5,
-                cellWidth: undefined,
-                cellHeight: cellHeight,
+                width: cellWidth,
+                height: 100,
+                cellWidth: cellWidth,
 
                 mask: {
                     padding: 2,
@@ -40,15 +39,11 @@ class Demo extends Phaser.Scene {
                 reuseCellContainer: true,
             },
 
-            snapStep: cellHeight,
-
-            slider: {
-                track: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_DARK),
-                thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 13, COLOR_LIGHT),
-            },
+            snapStep: cellWidth,
 
             scroller: {
                 // pointerOutRelease: false,
+                slidingDeceleration : 30000
             },
 
             mouseWheelScroller: {
@@ -60,10 +55,6 @@ class Demo extends Phaser.Scene {
                 right: 20,
                 top: 20,
                 bottom: 20,
-
-                table: 10,
-                header: 10,
-                footer: 10,
             },
 
             createCellContainerCallback: function (cell, cellContainer) {
@@ -78,25 +69,20 @@ class Demo extends Phaser.Scene {
                         height: height,
 
                         orientation: 0,
-                        background: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 0).setStrokeStyle(2, COLOR_DARK),
-                        icon: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 10, 0x0),
-                        text: scene.add.text(0, 0, ''),
+                        background: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 0),
+                        text: scene.add.text(0, 0, '', { fontSize: 30 }),
 
-                        space: {
-                            icon: 10,
-                            left: 15,
-                        }
+                        align: 'center',
                     });
                 }
 
                 // Set properties from item value
-                cellContainer.setMinSize(width, height); // Size might changed in this demo
+                cellContainer.setMinSize(width - 10, height); // Size might changed in this demo
                 cellContainer.getElement('text').setText(item.id); // Set text of text object
-                cellContainer.getElement('icon').setFillStyle(item.color); // Set fill color of round rectangle object
-                cellContainer.getElement('background').setStrokeStyle(2, COLOR_DARK);
+                cellContainer.getElement('background').setFillStyle(item.color);
                 return cellContainer;
             },
-            items: CreateItems(300)
+            items: CreateItems(20)
         })
             .layout()
     }
