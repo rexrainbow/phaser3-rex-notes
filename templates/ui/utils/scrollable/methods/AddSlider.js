@@ -3,12 +3,25 @@ import Scroller from '../../../../../plugins/scroller.js';
 import MouseWheelScroller from '../../../../../plugins/input/mousewheelscroller/MouseWheelScroller.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
+const SnapTo = Phaser.Math.Snap.To;
 
 var AddSlider = function (topPatent, sliderParent, axis, config) {
     axis = axis.toUpperCase();
     var isAxisY = (axis === 'Y');
     var isScrollXYMode = (topPatent.scrollMode === 2);
     var child = topPatent.childrenMap.child;
+
+    var snapStep;
+    var snapStepKey = `snapStep${axis}`;
+    if (isScrollXYMode) {
+        snapStep = GetValue(config, snapStepKey, undefined);
+    } else {
+        var snapStep = GetValue(config, 'snapStep', undefined);
+        if (snapStep === undefined) {
+            snapStep = GetValue(config, snapStepKey, undefined);
+        }
+    }
+    topPatent[snapStepKey] = snapStep;
 
     var sliderConfig, slider;
     var sliderConfigKey = `slider${axis}`;
@@ -29,8 +42,6 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
 
         sliderConfig.orientation = (isAxisY) ? 1 : 0;
         slider = CreateScrollbar(topPatent.scene, sliderConfig);
-
-        slider.tickLength = GetValue(sliderConfig, 'tickLength', undefined);
 
         var column, row, padding;
 
@@ -160,6 +171,8 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
             scrollerConfig.rectBoundsInteractive = (scrollDetectionMode === 1);
         }
 
+        scrollerConfig.snapStep = snapStep;
+
         scroller = new Scroller(child, scrollerConfig);
 
         if (child.isRexContainerLite) {
@@ -208,7 +221,21 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
             .on('valuechange', function (newValue) {
                 topPatent[keyST] = newValue;
                 topPatent.emit(eventName, topPatent);
-            });
+            })
+            .on('inputend', function () {
+                var snapStep = topPatent[`snapStep${axis}`];
+                if (snapStep) {
+                    var min = topPatent[(isAxisY) ? `topChildOY` : `leftChildOX`];
+                    var max = topPatent[(isAxisY) ? `bottomChildOY` : `rightChildOX`];
+                    var valueEnd = topPatent[`childO${axis}`];
+                    var valueTo = SnapTo(valueEnd, snapStep, min);
+                    var easeDuration = 500 * (Math.abs(valueTo - valueEnd) / snapStep);
+                    slider
+                        .setEaseValueDuration(easeDuration)
+                        .easeValueTo(valueTo, min, max);
+                }
+            })
+
     }
 
     if (scroller) {
@@ -236,6 +263,10 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
         }
         mouseWheelScroller
             .on('scroll', function (incValue) {
+                var snapStep = topPatent[snapStepKey];
+                if (snapStep) {
+                    incValue = snapStep;
+                }
                 topPatent[methodAddChildOXY](-incValue, true);
             });
     }

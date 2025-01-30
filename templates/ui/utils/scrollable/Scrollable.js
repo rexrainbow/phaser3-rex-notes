@@ -17,7 +17,7 @@ class Scrollable extends Sizer {
         config.orientation = (!isRevererXY) ? 1 : 0;
         super(scene, config);
         this.type = GetValue(config, 'type', 'rexScrollable');
-        this.scrollMode = scrollMode;        
+        this.scrollMode = scrollMode;
 
         // Add elements
         // Background
@@ -475,12 +475,6 @@ class Scrollable extends Sizer {
         child.input.dropZone = enable;
         return this;
     }
-
-    setSnapStep(snapStep) {
-        this.snapStep = snapStep;
-        return this;
-    }
-
 }
 
 // mixin
