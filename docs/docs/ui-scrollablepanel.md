@@ -27,6 +27,8 @@ A container with a panel, slider, and scroller.
 - Drag&drop items between panels : 
     - [With scroller](https://codepen.io/rexrainbow/pen/jOXPXOg)
     - [Without scroller](https://codepen.io/rexrainbow/pen/KKbdPRy)
+- Snap
+    - [Swipe Carousel](https://codepen.io/rexrainbow/pen/raBPbpW)
 - [Nested scroll-able panel](https://codepen.io/rexrainbow/pen/RwEoLzy)
 - [Typing on Label](https://codepen.io/rexrainbow/pen/QWPRGVB)
 
