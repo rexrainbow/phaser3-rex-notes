@@ -1,6 +1,8 @@
 // reference : https://www.geeks3d.com/20110428/shader-library-swirl-post-processing-filter-in-glsl/
 
 const frag = `\
+#pragma phaserTemplate(shaderName)
+
 #ifdef GL_FRAGMENT_PRECISION_HIGH
 #define highmedp highp
 #else
@@ -17,6 +19,8 @@ uniform vec2 texSize;
 uniform vec2 center;
 uniform float radius;
 uniform float angle;
+
+#pragma phaserTemplate(fragmentHeader)
 
 void main (void) {
   vec2 tc = outTexCoord * texSize;

@@ -1,5 +1,5 @@
-import phaser from 'phaser/src/phaser.js';
-import SwirlPipelinePlugin from '../../plugins/swirlpipeline-plugin.js';
+import phaser from '../../../phaser/src/phaser.js';
+import SwirlFilterPlugin from '../../plugins/swirlfilter-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -19,13 +19,14 @@ class Demo extends Phaser.Scene {
                 .setAlpha(Math.random());
         }
 
-        var postFxPlugin = this.plugins.get('rexSwirlPipeline');
-        this.cameraFilter = postFxPlugin.add(this.cameras.main);
+        var camera = this.cameras.main;
+        var controller = this.plugins.get('rexSwirlFilter').add(camera, {
+        })
 
         var scene = this;
         this.input.on('pointerup', function (pointer) {
             scene.tweens.add({
-                targets: scene.cameraFilter,
+                targets: controller,
                 angle: 0,
                 radius: 0,
                 ease: 'Linear',
@@ -34,14 +35,16 @@ class Demo extends Phaser.Scene {
                 yoyo: false
             });
         });
+
+        this.cameraSwirlFilter = controller;
     }
 
     update() {
         var activePointer = this.input.activePointer;
         if (activePointer.isDown) {
-            this.cameraFilter.angle += 1;
-            this.cameraFilter.radius += 5;
-            this.cameraFilter.setCenter(activePointer.x, activePointer.y);
+            this.cameraSwirlFilter.angle += 1;
+            this.cameraSwirlFilter.radius += 5;
+            this.cameraSwirlFilter.setCenter(activePointer.x, activePointer.y);
         }
     }
 }
@@ -58,8 +61,8 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-            key: 'rexSwirlPipeline',
-            plugin: SwirlPipelinePlugin,
+            key: 'rexSwirlFilter',
+            plugin: SwirlFilterPlugin,
             start: true
         }]
     }
