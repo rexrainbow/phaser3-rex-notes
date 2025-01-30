@@ -1,6 +1,7 @@
+import IsWebGLRenderMode from '../system/IsWebGLRenderMode.js';
+
 var AddMask = function (gameObject, maskGameObject, invert) {
-    var renderer = gameObject.scene.sys.renderer;
-    if (renderer && renderer.gl) {
+    if (IsWebGLRenderMode(gameObject)) {
         // WEBGL render mode
         var maskFilter = gameObject.mask;
         if (maskFilter) {
@@ -27,7 +28,7 @@ var AddMask = function (gameObject, maskGameObject, invert) {
 }
 
 var RemoveMask = function (gameObject) {
-    if (gameObject.renderer && gameObject.renderer.gl) {
+    if (IsWebGLRenderMode(gameObject)) {
         // WEBGL render mode
         var maskFilter = gameObject.mask;
         if (maskFilter) {
