@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -16,8 +16,9 @@ class Demo extends Phaser.Scene {
             .setScale(0.5)
         var maskGameObject = this.add.circle(400, 300, 200, 0x330000)
             .setScale(0.5).setVisible(false);
-        maskGameObject.type = 'Graphics';
-        image.setMask(maskGameObject.createGeometryMask());
+
+        image.enableFilters()
+            .filters.external.addMask(maskGameObject);
     }
 
     update() { }
