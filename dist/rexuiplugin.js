@@ -42777,7 +42777,7 @@
     };
 
     const GetValue$2l = Phaser.Utils.Objects.GetValue;
-    const SnapTo$2 = Phaser.Math.Snap.To;
+    const SnapTo$3 = Phaser.Math.Snap.To;
 
     class Knob extends ProgressBase(OverlapSizer) {
         constructor(scene, config) {
@@ -42867,7 +42867,7 @@
         // Override
         set value(value) {
             if (this.gap !== undefined) {
-                value = SnapTo$2(value, this.gap);
+                value = SnapTo$3(value, this.gap);
             }
             var oldValue = this.value;
             this.sizerChildren.knob.value = value;
@@ -53422,7 +53422,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
     const GetValue$1L = Phaser.Utils.Objects.GetValue;
     const IsPlainObject$d = Phaser.Utils.Objects.IsPlainObject;
     const Clamp$7 = Phaser.Math.Clamp;
-    const SnapTo$1 = Phaser.Math.Snap.To;
+    const SnapTo$2 = Phaser.Math.Snap.To;
 
     class Slider extends ProgressBase(Sizer) {
         constructor(scene, config) {
@@ -53543,7 +53543,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         // Override
         set value(value) {
             if (this.gap !== undefined) {
-                value = SnapTo$1(value, this.gap);
+                value = SnapTo$2(value, this.gap);
             }
             var oldValue = this._value;
             this._value = Clamp$7(value, 0, 1);
@@ -53832,7 +53832,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return scrollBar;
     };
 
-    const SnapTo = Phaser.Math.Snap.To;
+    const SnapTo$1 = Phaser.Math.Snap.To;
     Phaser.Math.Clamp;
 
     // this: Scroller
@@ -53875,9 +53875,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             // Distance of deceleration
             var dist = (speed === 0) ? 0 : (speed * speed) / (2 * this.slidingDeceleration);
             end += (speed > 0) ? dist : -dist;
-
-            var value0 = this.minValue;
-            end = SnapTo(end - value0, snapStep) + value0;
+            end = SnapTo$1(end, snapStep, this.minValue);
             // Distance of snapping
             dist = Math.abs(end - start);
 
@@ -54843,12 +54841,25 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
     }
 
     const GetValue$1F = Phaser.Utils.Objects.GetValue;
+    const SnapTo = Phaser.Math.Snap.To;
 
     var AddSlider = function (topPatent, sliderParent, axis, config) {
         axis = axis.toUpperCase();
         var isAxisY = (axis === 'Y');
         var isScrollXYMode = (topPatent.scrollMode === 2);
         var child = topPatent.childrenMap.child;
+
+        var snapStep;
+        var snapStepKey = `snapStep${axis}`;
+        if (isScrollXYMode) {
+            snapStep = GetValue$1F(config, snapStepKey, undefined);
+        } else {
+            var snapStep = GetValue$1F(config, 'snapStep', undefined);
+            if (snapStep === undefined) {
+                snapStep = GetValue$1F(config, snapStepKey, undefined);
+            }
+        }
+        topPatent[snapStepKey] = snapStep;
 
         var sliderConfig, slider;
         var sliderConfigKey = `slider${axis}`;
@@ -54869,8 +54880,6 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
             sliderConfig.orientation = (isAxisY) ? 1 : 0;
             slider = CreateScrollbar(topPatent.scene, sliderConfig);
-
-            slider.tickLength = GetValue$1F(sliderConfig, 'tickLength', undefined);
 
             var column, row, padding;
 
@@ -55000,6 +55009,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 scrollerConfig.rectBoundsInteractive = (scrollDetectionMode === 1);
             }
 
+            scrollerConfig.snapStep = snapStep;
+
             scroller = new Scroller(child, scrollerConfig);
 
             if (child.isRexContainerLite) {
@@ -55048,7 +55059,21 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 .on('valuechange', function (newValue) {
                     topPatent[keyST] = newValue;
                     topPatent.emit(eventName, topPatent);
+                })
+                .on('inputend', function () {
+                    var snapStep = topPatent[`snapStep${axis}`];
+                    if (snapStep) {
+                        var min = topPatent[(isAxisY) ? `topChildOY` : `leftChildOX`];
+                        var max = topPatent[(isAxisY) ? `bottomChildOY` : `rightChildOX`];
+                        var valueEnd = topPatent[`childO${axis}`];
+                        var valueTo = SnapTo(valueEnd, snapStep, min);
+                        var easeDuration = 500 * (Math.abs(valueTo - valueEnd) / snapStep);
+                        slider
+                            .setEaseValueDuration(easeDuration)
+                            .easeValueTo(valueTo, min, max);
+                    }
                 });
+
         }
 
         if (scroller) {
@@ -55076,6 +55101,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             }
             mouseWheelScroller
                 .on('scroll', function (incValue) {
+                    var snapStep = topPatent[snapStepKey];
+                    if (snapStep) {
+                        incValue = snapStep;
+                    }
                     topPatent[methodAddChildOXY](-incValue, true);
                 });
         }
@@ -55154,7 +55183,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             config.orientation = (!isRevererXY) ? 1 : 0;
             super(scene, config);
             this.type = GetValue$1D(config, 'type', 'rexScrollable');
-            this.scrollMode = scrollMode;        
+            this.scrollMode = scrollMode;
 
             // Add elements
             // Background
@@ -55612,12 +55641,6 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             child.input.dropZone = enable;
             return this;
         }
-
-        setSnapStep(snapStep) {
-            this.snapStep = snapStep;
-            return this;
-        }
-
     };
 
     // mixin

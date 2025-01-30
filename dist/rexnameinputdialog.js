@@ -33321,7 +33321,7 @@
     const GetValue$j = Phaser.Utils.Objects.GetValue;
     const IsPlainObject$2 = Phaser.Utils.Objects.IsPlainObject;
     const Clamp$2 = Phaser.Math.Clamp;
-    const SnapTo$1 = Phaser.Math.Snap.To;
+    const SnapTo$2 = Phaser.Math.Snap.To;
 
     class Slider extends ProgressBase(Sizer) {
         constructor(scene, config) {
@@ -33442,7 +33442,7 @@
         // Override
         set value(value) {
             if (this.gap !== undefined) {
-                value = SnapTo$1(value, this.gap);
+                value = SnapTo$2(value, this.gap);
             }
             var oldValue = this._value;
             this._value = Clamp$2(value, 0, 1);
@@ -33731,7 +33731,7 @@
         return scrollBar;
     };
 
-    const SnapTo = Phaser.Math.Snap.To;
+    const SnapTo$1 = Phaser.Math.Snap.To;
     Phaser.Math.Clamp;
 
     // this: Scroller
@@ -33774,9 +33774,7 @@
             // Distance of deceleration
             var dist = (speed === 0) ? 0 : (speed * speed) / (2 * this.slidingDeceleration);
             end += (speed > 0) ? dist : -dist;
-
-            var value0 = this.minValue;
-            end = SnapTo(end - value0, snapStep) + value0;
+            end = SnapTo$1(end, snapStep, this.minValue);
             // Distance of snapping
             dist = Math.abs(end - start);
 
@@ -34742,12 +34740,25 @@
     }
 
     const GetValue$d = Phaser.Utils.Objects.GetValue;
+    const SnapTo = Phaser.Math.Snap.To;
 
     var AddSlider = function (topPatent, sliderParent, axis, config) {
         axis = axis.toUpperCase();
         var isAxisY = (axis === 'Y');
         var isScrollXYMode = (topPatent.scrollMode === 2);
         var child = topPatent.childrenMap.child;
+
+        var snapStep;
+        var snapStepKey = `snapStep${axis}`;
+        if (isScrollXYMode) {
+            snapStep = GetValue$d(config, snapStepKey, undefined);
+        } else {
+            var snapStep = GetValue$d(config, 'snapStep', undefined);
+            if (snapStep === undefined) {
+                snapStep = GetValue$d(config, snapStepKey, undefined);
+            }
+        }
+        topPatent[snapStepKey] = snapStep;
 
         var sliderConfig, slider;
         var sliderConfigKey = `slider${axis}`;
@@ -34768,8 +34779,6 @@
 
             sliderConfig.orientation = (isAxisY) ? 1 : 0;
             slider = CreateScrollbar(topPatent.scene, sliderConfig);
-
-            slider.tickLength = GetValue$d(sliderConfig, 'tickLength', undefined);
 
             var column, row, padding;
 
@@ -34899,6 +34908,8 @@
                 scrollerConfig.rectBoundsInteractive = (scrollDetectionMode === 1);
             }
 
+            scrollerConfig.snapStep = snapStep;
+
             scroller = new Scroller(child, scrollerConfig);
 
             if (child.isRexContainerLite) {
@@ -34947,7 +34958,21 @@
                 .on('valuechange', function (newValue) {
                     topPatent[keyST] = newValue;
                     topPatent.emit(eventName, topPatent);
+                })
+                .on('inputend', function () {
+                    var snapStep = topPatent[`snapStep${axis}`];
+                    if (snapStep) {
+                        var min = topPatent[(isAxisY) ? `topChildOY` : `leftChildOX`];
+                        var max = topPatent[(isAxisY) ? `bottomChildOY` : `rightChildOX`];
+                        var valueEnd = topPatent[`childO${axis}`];
+                        var valueTo = SnapTo(valueEnd, snapStep, min);
+                        var easeDuration = 500 * (Math.abs(valueTo - valueEnd) / snapStep);
+                        slider
+                            .setEaseValueDuration(easeDuration)
+                            .easeValueTo(valueTo, min, max);
+                    }
                 });
+
         }
 
         if (scroller) {
@@ -34975,6 +35000,10 @@
             }
             mouseWheelScroller
                 .on('scroll', function (incValue) {
+                    var snapStep = topPatent[snapStepKey];
+                    if (snapStep) {
+                        incValue = snapStep;
+                    }
                     topPatent[methodAddChildOXY](-incValue, true);
                 });
         }
@@ -35053,7 +35082,7 @@
             config.orientation = (!isRevererXY) ? 1 : 0;
             super(scene, config);
             this.type = GetValue$b(config, 'type', 'rexScrollable');
-            this.scrollMode = scrollMode;        
+            this.scrollMode = scrollMode;
 
             // Add elements
             // Background
@@ -35511,12 +35540,6 @@
             child.input.dropZone = enable;
             return this;
         }
-
-        setSnapStep(snapStep) {
-            this.snapStep = snapStep;
-            return this;
-        }
-
     }
 
     // mixin

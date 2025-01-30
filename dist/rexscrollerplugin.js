@@ -1134,9 +1134,7 @@
             // Distance of deceleration
             var dist = (speed === 0) ? 0 : (speed * speed) / (2 * this.slidingDeceleration);
             end += (speed > 0) ? dist : -dist;
-
-            var value0 = this.minValue;
-            end = SnapTo(end - value0, snapStep) + value0;
+            end = SnapTo(end, snapStep, this.minValue);
             // Distance of snapping
             dist = Math.abs(end - start);
 
