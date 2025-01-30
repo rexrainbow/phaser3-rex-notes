@@ -13,6 +13,7 @@ declare namespace Scroller {
             topBound: number
         ],
         value?: number,
+        snapStep?: number,
         threshold?: number,
         slidingDeceleration?: number,
         backDeceleration?: number,
@@ -59,6 +60,8 @@ declare class Scroller extends ComponentBase {
     setValue(value: number, clamp?: boolean): this;
     addValue(inc: number, clamp?: boolean): this;
     value: number;
+
+    setSnapStep(snapStep?: number): this;
 
     readonly isDragging: boolean;
 

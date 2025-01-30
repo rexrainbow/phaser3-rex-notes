@@ -10320,6 +10320,10 @@
 <li><a href="https://codepen.io/rexrainbow/pen/KKbdPRy">Without scroller</a></li>
 </ul>
 </li>
+<li>Snap<ul>
+<li><a href="https://codepen.io/rexrainbow/pen/raBPbpW">Swipe Carousel</a></li>
+</ul>
+</li>
 <li><a href="https://codepen.io/rexrainbow/pen/RwEoLzy">Nested scroll-able panel</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/QWPRGVB">Typing on Label</a></li>
 </ul>
@@ -10468,6 +10472,9 @@
 
 <span class="w">    </span><span class="nx">clampChildOY</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 <span class="w">    </span><span class="c1">// clampChildOX: false,</span>
+
+<span class="w">    </span><span class="c1">// snapStepY: undefined,</span>
+<span class="w">    </span><span class="c1">// snapStepX: undefined,</span>
 
 <span class="w">    </span><span class="nx">header</span><span class="o">:</span><span class="w"> </span><span class="nx">headerGameObject</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">footer</span><span class="o">:</span><span class="w"> </span><span class="nx">footerGameObject</span><span class="p">,</span>
@@ -10697,6 +10704,14 @@
 <li><code>mouseWheelScrollerX</code>, <code>mouseWheelScrollerY</code> : Configuration of mouse-wheel-scrollerX, or mouse-wheel-scrollerY behavior, for two-sliders mode.</li>
 <li><code>clampChildOY</code> : Set <code>true</code> to clamp scrolling.</li>
 <li><code>clampChildOX</code> : Set <code>true</code> to clamp scrolling, for two-sliders mode.</li>
+<li><code>snapStepY</code> : The interval at which a value snaps to the nearest multiple.<ul>
+<li><code>undefined</code>, or <code>0</code> : Disable snapping mode, default behavior.</li>
+</ul>
+</li>
+<li><code>snapStepX</code> : The interval at which a value snaps to the nearest multiple, for two-sliders mode.<ul>
+<li><code>undefined</code>, or <code>0</code> : Disable snapping mode, default behavior. </li>
+</ul>
+</li>
 <li><code>header</code> : Game object of header, optional.</li>
 <li><code>footer</code> : Game object of footer, optional.</li>
 <li><code>space</code> : Pads spaces<ul>

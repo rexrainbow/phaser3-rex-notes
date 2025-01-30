@@ -78,7 +78,8 @@ var scroller = scene.plugins.get('rexScroller').add(gameObject, {
         bottomBound,
         topBound
     ],
-    value: topBound,    
+    value: topBound,
+    // snapStep: undefined,
     // threshold: 10,
     // slidingDeceleration: 5000,
     // backDeceleration: 2000,
@@ -105,6 +106,8 @@ var scroller = scene.plugins.get('rexScroller').add(gameObject, {
 - `bounds` : An array of 2 values `[bound0, bound1]`
 - `value` : Initial value between bound0 and bound1
     - Map this value to position of content under [event 'valuechange'](scroller.md#events)
+- `snapStep` : The interval at which a value snaps to the nearest multiple.
+    - `undefined`, or `0` : Disable snapping mode, default behavior.
 - `threshold` : Minimal movement to scroll. Set `0` to scroll immediately.
 - `slidingDeceleration` : Deceleration of slow down when dragging released.
     - Set `false` to disable it.

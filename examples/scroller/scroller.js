@@ -17,10 +17,11 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
+        var snapStep = 75;
         var x = 400,
             y = 300,
             w = 300,
-            h = 400;
+            h = (snapStep) ? (snapStep * 5) : 400;
         var topY = y - (h / 2),
             leftX = x - (w / 2);
         var bg = this.add.graphics()
@@ -59,8 +60,9 @@ class Demo extends Phaser.Scene {
             value: topBound,
             slidingDeceleration: slidingDeceleration,
             backDeceleration: backDeceleration,
+            snapStep: snapStep,
 
-            valuechangeCallback: function(newValue) {
+            valuechangeCallback: function (newValue) {
                 txt.y = newValue;
             }
         });

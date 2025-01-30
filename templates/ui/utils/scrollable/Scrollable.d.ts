@@ -18,7 +18,6 @@ declare namespace Scrollable {
         input?: SliderInputTypes,
         position?: SliderPositionTypes,
         tick?: number,
-        tickLength?: number,
 
         hideUnscrollableSlider?: boolean,
         disableUnscrollableDrag?: boolean,
@@ -62,10 +61,13 @@ declare namespace Scrollable {
 
         background?: Phaser.GameObjects.GameObject,
 
+        snapStep?: number,
+        snapStepX?: number,
+        snapStepY?: number,
+
         slider?: ISliderConfig | boolean,
         sliderX?: ISliderConfig | boolean,
         sliderY?: ISliderConfig | boolean,
-
 
         scrollDetectionMode?: 0 | 1 | 'rectBounds' | 'gameObject',
 

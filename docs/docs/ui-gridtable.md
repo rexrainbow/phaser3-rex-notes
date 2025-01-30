@@ -18,6 +18,9 @@ A container with a [grid table](gridtable.md), slider, and scroller.
     - [Demo 2](https://codepen.io/rexrainbow/pen/abOgyPo)
 - [Click child of cell](https://codepen.io/rexrainbow/pen/abgROwW)
 - [Two sliders](https://codepen.io/rexrainbow/pen/KKrrYRm)
+- Snap
+    - [Snap step](https://codepen.io/rexrainbow/pen/KwPJEOL)
+    - [Swipe Carousel](https://codepen.io/rexrainbow/pen/yyBZrOL)
 - [Separator](https://codepen.io/rexrainbow/pen/YzRrOOP)
 - [Modal](https://codepen.io/rexrainbow/pen/zYarzzO)
 - [Fixed cell size](https://codepen.io/rexrainbow/pen/poXqqXK)
@@ -197,6 +200,8 @@ var table = scene.rexUI.add.gridTable({
 
     clampChildOY: false,
 
+    // snapStep: undefined,
+
     header: headerGameObject,
     footer: footerGameObject,
 
@@ -374,6 +379,8 @@ var table = scene.rexUI.add.gridTable({
     - Set to `false` to skip creating mouse-wheel-scroller. Default behavior.
 - `mouseWheelScrollerX`, `mouseWheelScrollerY` : Configuration of mouse-wheel-scrollerX, or mouse-wheel-scrollerY behavior, for two-sliders mode.
 - `clampChildOY` : Set `true` to clamp scrolling.
+- `snapStep` : The interval at which a value snaps to the nearest multiple.
+    - `undefined`, or `0` : Disable snapping mode, default behavior.
 - `createCellContainerCallback` : Callback to return a container object, or `null` of each visible cell.
     - Properties of `cell` parameter
         - `cell.scene` : Scene of this grid table object.

@@ -24,7 +24,7 @@ export default {
 
     getValue(min, max) {
         var value = this.value;
-        if (min !== undefined) {
+        if ((min !== undefined) && (max !== undefined)) {
             value = Linear(min, max, value);
         }
         return value;

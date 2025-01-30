@@ -27,6 +27,8 @@ A container with a panel, slider, and scroller.
 - Drag&drop items between panels : 
     - [With scroller](https://codepen.io/rexrainbow/pen/jOXPXOg)
     - [Without scroller](https://codepen.io/rexrainbow/pen/KKbdPRy)
+- Snap
+    - [Swipe Carousel](https://codepen.io/rexrainbow/pen/raBPbpW)
 - [Nested scroll-able panel](https://codepen.io/rexrainbow/pen/RwEoLzy)
 - [Typing on Label](https://codepen.io/rexrainbow/pen/QWPRGVB)
 
@@ -189,6 +191,9 @@ var panel = scene.rexUI.add.scrollablePanel({
 
     clampChildOY: false,
     // clampChildOX: false,
+
+    // snapStepY: undefined,
+    // snapStepX: undefined,
 
     header: headerGameObject,
     footer: footerGameObject,
@@ -366,6 +371,10 @@ var panel = scene.rexUI.add.scrollablePanel({
 - `mouseWheelScrollerX`, `mouseWheelScrollerY` : Configuration of mouse-wheel-scrollerX, or mouse-wheel-scrollerY behavior, for two-sliders mode.
 - `clampChildOY` : Set `true` to clamp scrolling.
 - `clampChildOX` : Set `true` to clamp scrolling, for two-sliders mode.
+- `snapStepY` : The interval at which a value snaps to the nearest multiple.
+    - `undefined`, or `0` : Disable snapping mode, default behavior.
+- `snapStepX` : The interval at which a value snaps to the nearest multiple, for two-sliders mode.
+    - `undefined`, or `0` : Disable snapping mode, default behavior. 
 - `header` : Game object of header, optional.
 - `footer` : Game object of footer, optional.
 - `space` : Pads spaces

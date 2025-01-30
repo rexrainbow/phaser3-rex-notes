@@ -16,6 +16,8 @@ class SlowDown {
             this.dir = dir;
         }
 
+        speed = Math.abs(speed);
+
         this.movement
             .setSpeed(speed)
             .setAcceleration(-dec);

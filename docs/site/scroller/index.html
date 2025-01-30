@@ -10204,7 +10204,8 @@
 <span class="w">        </span><span class="nx">bottomBound</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">topBound</span>
 <span class="w">    </span><span class="p">],</span>
-<span class="w">    </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">topBound</span><span class="p">,</span><span class="w">    </span>
+<span class="w">    </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">topBound</span><span class="p">,</span>
+<span class="w">    </span><span class="c1">// snapStep: undefined,</span>
 <span class="w">    </span><span class="c1">// threshold: 10,</span>
 <span class="w">    </span><span class="c1">// slidingDeceleration: 5000,</span>
 <span class="w">    </span><span class="c1">// backDeceleration: 2000,</span>
@@ -10231,6 +10232,10 @@
 <li><code>bounds</code> : An array of 2 values <code>[bound0, bound1]</code></li>
 <li><code>value</code> : Initial value between bound0 and bound1<ul>
 <li>Map this value to position of content under <a href="./#events">event 'valuechange'</a></li>
+</ul>
+</li>
+<li><code>snapStep</code> : The interval at which a value snaps to the nearest multiple.<ul>
+<li><code>undefined</code>, or <code>0</code> : Disable snapping mode, default behavior.</li>
 </ul>
 </li>
 <li><code>threshold</code> : Minimal movement to scroll. Set <code>0</code> to scroll immediately.</li>

@@ -20803,6 +20803,359 @@
         ButtonStateMethods
     );
 
+    var ResizeController = function () {
+        switch (this.scrollMode) {
+            case 0:
+            case 1:
+                SetControllerBounds.call(this);
+
+                this.updateController();
+
+                HideUnscrollableSlider.call(this);
+
+                AdaptThumbSize.call(this);
+
+                break;
+
+            default: // 2
+                SetControllerBounds.call(this, 'y');
+                SetControllerBounds.call(this, 'x');
+
+                this.updateController();
+
+                HideUnscrollableSlider.call(this, 'y');
+                HideUnscrollableSlider.call(this, 'x');
+
+                AdaptThumbSize.call(this, 'y');
+                AdaptThumbSize.call(this, 'x');
+                break;
+        }
+
+        return this;
+    };
+
+
+    var SetControllerBounds = function (axis) {
+        // Scale will force to 1
+        var bound0, bound1;
+        var scroller, slider;
+        switch (this.scrollMode) {
+            case 0:
+            case 1:
+                bound0 = this.topChildOY;
+                bound1 = this.bottomChildOY;
+                scroller = this.childrenMap.scroller;
+                slider = this.childrenMap.slider;
+                axis = (this.scrollMode === 0) ? 'Y' : 'X';
+                break;
+
+            default:  // 2
+                axis = axis.toUpperCase();
+                if (axis === 'Y') {
+                    bound0 = this.topChildOY;
+                    bound1 = this.bottomChildOY;
+                } else {
+                    bound0 = this.leftChildOX;
+                    bound1 = this.rightChildOX;
+                }
+                scroller = this.childrenMap[`scroller${axis}`];
+                slider = this.childrenMap[`slider${axis}`];
+        }
+
+        var scale = (axis === 'Y') ? this.scaleY : this.scaleX;
+        bound1 *= scale;
+
+        if (scroller) {
+            scroller.setBounds(bound0, bound1);
+        }
+        if (slider) {
+            slider.setEnable(bound0 !== bound1);
+
+            if (slider.tickLength) {
+                slider.setTick(slider.tickLength, bound0, bound1);
+            }
+        }
+    };
+
+    var HideUnscrollableSlider = function (axis) {
+        switch (this.scrollMode) {
+            case 0:
+            case 1:
+                var slider = this.childrenMap.slider;
+                if (slider && this.hideUnscrollableSlider) {
+                    this.setChildVisible(slider, this.isOverflow);
+                }
+
+                var scroller = this.childrenMap.scroller;
+                if (scroller && this.disableUnscrollableDrag) {
+                    scroller.setEnable(this.isOverflow);
+                }
+
+                break;
+
+            default:
+                axis = axis.toUpperCase();
+                var isOverflow = this[`isOverflow${axis}`];
+
+                var slider = this.childrenMap[`slider${axis}`];
+                var hideUnscrollableSlider = this[`hideUnscrollableSlider${axis}`];
+                if (slider && hideUnscrollableSlider) {
+                    this.setChildVisible(slider, isOverflow);
+                }
+
+                var scroller = this.childrenMap.scroller;
+                var disableUnscrollableDrag = this[`disableUnscrollableDrag${axis}`];
+                if (scroller && disableUnscrollableDrag) {
+                    scroller.setEnable(isOverflow);
+                }
+                break;
+        }
+    };
+
+    var AdaptThumbSize = function (axis) {
+        switch (this.scrollMode) {
+            case 0:
+            case 1:
+                if (!this.adaptThumbSizeMode) {
+                    return;
+                }
+                var slider = this.childrenMap.slider;
+                if (!slider) {
+                    return;
+                }
+
+                // Change slider size according to visible ratio
+                var ratio = Math.min(this.childVisibleHeight / this.childHeight, 1);
+                var track = slider.childrenMap.track;
+                var thumb = slider.childrenMap.thumb;
+                var minThumbSize = this.minThumbSize;
+                if (this.scrollMode === 0) {
+                    var newHeight = track.displayHeight * ratio;
+                    if ((minThumbSize !== undefined) && (newHeight < minThumbSize)) {
+                        newHeight = minThumbSize;
+                    }
+                    ResizeGameObject(thumb, undefined, newHeight);
+                } else {
+                    var newWidth = track.displayWidth * ratio;
+                    if ((minThumbSize !== undefined) && (newWidth < minThumbSize)) {
+                        newWidth = minThumbSize;
+                    }
+                    ResizeGameObject(thumb, newWidth, undefined);
+
+                }
+                LayoutSlider(slider);
+                break;
+
+            default:
+                // TODO
+                axis = axis.toUpperCase();
+                var adaptThumbSizeMode = this[`adaptThumb${axis}SizeMode`];
+                if (!adaptThumbSizeMode) {
+                    return;
+                }
+                var slider = this.childrenMap[`slider${axis}`];
+                if (!slider) {
+                    return;
+                }
+
+                // Change slider size according to visible ratio            
+                var track = slider.childrenMap.track;
+                var thumb = slider.childrenMap.thumb;
+                var minThumbSize = this[`minThumb${axis}Size`];
+                if (axis === 'Y') {
+                    var ratio = Math.min(this.childVisibleHeight / this.childHeight, 1);
+                    var newHeight = track.displayHeight * ratio;
+                    if ((minThumbSize !== undefined) && (newHeight < minThumbSize)) {
+                        newHeight = minThumbSize;
+                    }
+                    ResizeGameObject(thumb, undefined, newHeight);
+                } else {
+                    var ratio = Math.min(this.childVisibleWidth / this.childWidth, 1);
+                    var newWidth = track.displayWidth * ratio;
+                    if ((minThumbSize !== undefined) && (newWidth < minThumbSize)) {
+                        newWidth = minThumbSize;
+                    }
+                    ResizeGameObject(thumb, newWidth, undefined);
+
+                }
+                LayoutSlider(slider);
+                break;
+
+        }
+
+
+    };
+
+    var LayoutSlider = function (slider) {
+        // Save minSize
+        var minWidthSave = slider.minWidth;
+        var minHeightSave = slider.minHeight;
+        // Set minSize to current size
+        slider.minWidth = slider.width;
+        slider.minHeight = slider.height;
+        // Layout slider
+        slider.layout();
+        // Restore minSize
+        slider.minWidth = minWidthSave;
+        slider.minHeight = minHeightSave;
+    };
+
+    var UpdateController = function () {
+        switch (this.scrollMode) {
+            case 0:
+            case 1:
+                var scroller = this.childrenMap.scroller;
+                var slider = this.childrenMap.slider;
+                if (scroller) {
+                    scroller.setValue(this.childOY);
+                }
+                if (slider) {
+                    slider.setValue(this.t);
+                }
+                break;
+
+            default:
+                var scrollerY = this.childrenMap.scrollerY;
+                var sliderY = this.childrenMap.sliderY;
+                var scrollerX = this.childrenMap.scrollerX;
+                var sliderX = this.childrenMap.sliderX;
+
+                if (scrollerY) {
+                    scrollerY.setValue(this.childOY);
+                }
+                if (sliderY) {
+                    sliderY.setValue(this.t);
+                }
+                if (scrollerX) {
+                    scrollerX.setValue(this.childOX);
+                }
+                if (sliderX) {
+                    sliderX.setValue(this.s);
+                }
+                break;
+        }
+
+    };
+
+    const Clamp$3 = Phaser.Math.Clamp;
+
+    var ChildPositionMethods = {
+        setChildOY(value, clamp) {
+            if (clamp === undefined) {
+                clamp = false;
+            }
+            if (clamp) {
+                value = Clamp$3(value, this.bottomChildOY, this.topChildOY);
+            }
+            this.childOY = value;
+            return this;
+        },
+
+        addChildOY(inc, clamp) {
+            this.setChildOY(this.childOY + inc, clamp);
+            return this;
+        },
+
+        setT(value, clamp) {
+            if (clamp === undefined) {
+                clamp = false;
+            }
+            if (clamp) {
+                value = Clamp$3(value, 0, 1);
+            }
+            this.t = value;
+            return this;
+        },
+
+        addT(inc, clamp) {
+            this.setT(this.t + inc, clamp);
+            return this;
+        },
+
+        scrollToTop() {
+            this.t = 0;
+            return this;
+        },
+
+        scrollToBottom() {
+            this.t = 1;
+            // t will be 0 if panel/table does not exceed visible area
+            if (this.t === 0) {
+                return this;
+            }
+
+            // Panel/Table height might be expanded while cells are visible        
+            do {
+                this.t = 1;
+            } while (this.t !== 1)
+
+            return this;
+        },
+
+        setChildOX(value, clamp) {
+            if (clamp === undefined) {
+                clamp = false;
+            }
+            if (clamp) {
+                value = Clamp$3(value, this.leftChildOX, this.rightChildOX);
+            }
+            this.childOX = value;
+            return this;
+        },
+
+        addChildOX(inc, clamp) {
+            this.setChildOX(this.childOX + inc, clamp);
+            return this;
+        },
+
+        setS(value, clamp) {
+            if (clamp === undefined) {
+                clamp = false;
+            }
+            if (clamp) {
+                value = Clamp$3(value, 0, 1);
+            }
+            this.s = value;
+            return this;
+        },
+
+        addS(inc, clamp) {
+            this.setS(this.s + inc, clamp);
+            return this;
+        },
+
+        scrollToLeft() {
+            this.s = 0;
+            return this;
+        },
+
+        scrollToRight() {
+            this.s = 1;
+            // s will be 0 if panel/table does not exceed visible area
+            if (this.s === 0) {
+                return this;
+            }
+
+            // Panel/Table height might be expanded while cells are visible        
+            do {
+                this.s = 1;
+            } while (this.s !== 1)
+
+            return this;
+        },
+
+    };
+
+    var Methods$5 = {
+        resizeController: ResizeController,
+        updateController: UpdateController
+    };
+
+    Object.assign(
+        Methods$5,
+        ChildPositionMethods
+    );
+
     var SCROLLMODE = {
         v: 0,
         vertical: 0,
@@ -23076,7 +23429,7 @@
 
         getValue(min, max) {
             var value = this.value;
-            if (min !== undefined) {
+            if ((min !== undefined) && (max !== undefined)) {
                 value = Linear$2(min, max, value);
             }
             return value;
@@ -23085,85 +23438,78 @@
 
     const Percent$1 = Phaser.Math.Percent;
 
-    var SetEaseValuePropName = function (name) {
-        this.easeValuePropName = name;
-        return this;
-    };
-
-    var SetEaseValueDuration = function (duration) {
-        this.easeValueDuration = duration;
-        return this;
-    };
-
-    var SetEaseValueFunction = function (ease) {
-        this.easeFunction = ease;
-        return this;
-    };
-
-    var StopEaseValue = function () {
-        if (this.easeValueTask) {
-            this.easeValueTask.stop();
-        }
-        return this;
-    };
-
-    var EaseValueTo = function (value, min, max) {
-        if ((value === undefined) || (value === null)) {
-            return this;
-        }
-
-        if (min !== undefined) {
-            value = Percent$1(value, min, max);
-        }
-
-        if (this.easeValueTask === undefined) {
-            this.easeValueTask = new EaseValueTask(this, { eventEmitter: null });
-        }
-
-        this.easeValueTask.restart({
-            key: this.easeValuePropName,
-            to: value,
-            duration: this.easeValueDuration,
-            ease: this.easeFunction,
-        });
-
-        return this;
-    };
-
-    var EaseValueRepeat = function (from, to, repeat, repeatDelay) {     
-        if (repeat === undefined) {
-            repeat = -1;
-        }
-        if (repeatDelay === undefined) {
-            repeatDelay = 0;
-        }
-
-        if (this.easeValueTask === undefined) {
-            this.easeValueTask = new EaseValueTask(this, { eventEmitter: null });
-        }
-
-        this.easeValueTask.restart({
-            key: this.easeValuePropName,
-            from: from, to: to,
-            duration: this.easeValueDuration,
-            ease: this.easeFunction,
-            repeat: repeat, repeatDelay: repeatDelay,
-        });
-
-        return this;
-    };
-
     var EaseValueMethods = {
-        setEaseValuePropName: SetEaseValuePropName,
-        setEaseValueDuration: SetEaseValueDuration,
-        setEaseValueFunction: SetEaseValueFunction,
-        stopEaseValue: StopEaseValue,
-        easeValueTo: EaseValueTo,
-        easeValueRepeat: EaseValueRepeat
+        setEaseValuePropName(name) {
+            this.easeValuePropName = name;
+            return this;
+        },
+
+        setEaseValueDuration(duration) {
+            this.easeValueDuration = duration;
+            return this;
+        },
+
+        setEaseValueFunction(ease) {
+            this.easeFunction = ease;
+            return this;
+        },
+
+        stopEaseValue() {
+            if (this.easeValueTask) {
+                this.easeValueTask.stop();
+            }
+            return this;
+        },
+
+        easeValueTo(value, min, max) {
+            if ((value === undefined) || (value === null)) {
+                return this;
+            }
+
+            if (min !== undefined) {
+                value = Percent$1(value, min, max);
+            }
+
+            if (this.easeValueTask === undefined) {
+                this.easeValueTask = new EaseValueTask(this, { eventEmitter: null });
+            }
+
+            this.easeValueTask.restart({
+                key: this.easeValuePropName,
+                to: value,
+                duration: this.easeValueDuration,
+                ease: this.easeFunction,
+            });
+
+            return this;
+        },
+
+        easeValueRepeat(from, to, repeat, repeatDelay) {
+            if (repeat === undefined) {
+                repeat = -1;
+            }
+            if (repeatDelay === undefined) {
+                repeatDelay = 0;
+            }
+
+            if (this.easeValueTask === undefined) {
+                this.easeValueTask = new EaseValueTask(this, { eventEmitter: null });
+            }
+
+            this.easeValueTask.restart({
+                key: this.easeValuePropName,
+                from: from, to: to,
+                duration: this.easeValueDuration,
+                ease: this.easeFunction,
+                repeat: repeat, repeatDelay: repeatDelay,
+            });
+
+            return this;
+        },
     };
 
     const GetValue$z = Phaser.Utils.Objects.GetValue;
-    const Clamp$3 = Phaser.Math.Clamp;
+    const Clamp$2 = Phaser.Math.Clamp;
 
     function ProgressBase (BaseClass) {
         class ProgressBase extends BaseClass {
@@ -23189,7 +23535,7 @@
             }
 
             set value(value) {
-                value = Clamp$3(value, 0, 1);
+                value = Clamp$2(value, 0, 1);
 
                 var oldValue = this._value;
                 var valueChanged = (oldValue != value);
@@ -24281,13 +24627,13 @@
 
     }
 
-    var Methods$5 = {
+    var Methods$4 = {
         updateShapes: UpdateShapes,
     };
 
     Object.assign(
         LineProgress.prototype,
-        Methods$5,
+        Methods$4,
     );
 
     var IsInValidKey = function (keys) {
@@ -26952,7 +27298,7 @@
         return this;
     };
 
-    var Methods$4 = {
+    var Methods$3 = {
         _beginDraw: NOOP,
         _drawImage: NOOP,
         _drawTileSprite: NOOP,
@@ -27110,7 +27456,7 @@
 
         Object.assign(
             NinePatch.prototype,
-            Methods$4
+            Methods$3
         );
 
         return NinePatch;
@@ -27164,13 +27510,13 @@
     class NinePatch extends NinePatchBase(RenderTexture, 'rexNinePatch') {
     }
 
-    var Methods$3 = {
+    var Methods$2 = {
         _drawImage: DrawImage$1,
         _drawTileSprite: DrawTileSprite,
     };
     Object.assign(
         NinePatch.prototype,
-        Methods$3
+        Methods$2
     );
 
     let Style$1 = class Style extends ComponentBase {
@@ -27615,8 +27961,8 @@
 
     const GetValue$r = Phaser.Utils.Objects.GetValue;
     const IsPlainObject$4 = Phaser.Utils.Objects.IsPlainObject;
-    const Clamp$2 = Phaser.Math.Clamp;
-    const SnapTo = Phaser.Math.Snap.To;
+    const Clamp$1 = Phaser.Math.Clamp;
+    const SnapTo$2 = Phaser.Math.Snap.To;
 
     class Slider extends ProgressBase(Sizer) {
         constructor(scene, config) {
@@ -27737,10 +28083,10 @@
         // Override
         set value(value) {
             if (this.gap !== undefined) {
-                value = SnapTo(value, this.gap);
+                value = SnapTo$2(value, this.gap);
             }
             var oldValue = this._value;
-            this._value = Clamp$2(value, 0, 1);
+            this._value = Clamp$1(value, 0, 1);
 
             if (oldValue !== this._value) {
                 this.updateThumb(this._value);
@@ -28026,6 +28372,113 @@
         return scrollBar;
     };
 
+    const SnapTo$1 = Phaser.Math.Snap.To;
+    Phaser.Math.Clamp;
+
+    // this: Scroller
+
+    // enter_DRAG
+    var OnDragStart = function () {
+        this.emit('dragstart');
+    };
+
+    // exit_DRAG
+    var OnDragEnd = function () {
+        this.emit('dragend');
+    };
+
+    // everyTick_DRAG
+    var Dragging = function () {
+        this.value += this.dragDelta;
+    };
+
+    // enter_SLIDE 
+    var OnSliding = function () {
+        var start = this.value;
+        var speed = this.dragSpeed;
+        var snapStep = this.snapStep;
+        var snapMode = !!snapStep;
+
+        if (!snapMode) {
+            if (speed === 0) {
+                this._slowDown.stop();
+                this._state.next();
+
+            } else {
+                var dec = this.slidingDeceleration;
+                this._slowDown.init(start, (speed > 0), speed, dec);
+
+            }
+
+        } else { // snapMode
+            var end = start;
+            // Distance of deceleration
+            var dist = (speed === 0) ? 0 : (speed * speed) / (2 * this.slidingDeceleration);
+            end += (speed > 0) ? dist : -dist;
+            end = SnapTo$1(end, snapStep, this.minValue);
+            // Distance of snapping
+            dist = Math.abs(end - start);
+
+            if (dist > 0) {
+                var dec;
+                if (speed === 0) {
+                    dec = this.backDeceleration;
+                    speed = Math.sqrt(2 * dec * dist);
+                } else {
+                    dec = (speed * speed) / (2 * dist);
+                    dec *= 0.99; // Smaller deceleration value
+                }
+
+                this._slowDown.init(start, undefined, speed, dec, end);
+
+            } else {
+                this._slowDown.stop();
+                this._state.next();
+
+            }
+        }
+    };
+
+    // everyTick_SLIDE
+    var Sliding = function (time, delta) {
+        delta *= 0.001;
+        var newValue = this._slowDown.update(delta).value;
+        if (this.overMax(newValue)) {
+            this.value = this.maxValue;
+            this._slowDown.stop();
+        } else if (this.overMin(newValue)) {
+            this.value = this.minValue;
+            this._slowDown.stop();
+        } else {
+            this.value = newValue;
+        }
+    };
+
+    // enter_BACK
+    var OnBack = function () {
+        var start = this.value;
+        var end = (this.outOfMinBound) ? this.minValue : this.maxValue;
+        var dist = Math.abs(end - start);
+        var dec = this.backDeceleration;
+        var speed = Math.sqrt(2 * dec * dist);
+        this._slowDown.init(start, undefined, speed, dec, end);
+    };
+
+    // everyTick_BACK
+    var Back = function (time, delta) {
+        delta *= 0.001;
+        this.value = this._slowDown.update(delta).value;
+
+        if (!this._slowDown.isMoving) {
+            this._state.next();
+        }
+    };
+
+    // exit_SLIDE, exit_BACK
+    var Stop = function () {
+        this._slowDown.stop();
+    };
+
     class State extends FSM {
         constructor(parent, config) {
             super(config);
@@ -28089,15 +28542,15 @@
             var parent = this.parent,
                 dragState = parent.dragState;
             if (dragState.justMoved) {
-                parent.dragging();
+                Dragging.call(parent);
             }
             this.next();
         }
         enter_DRAG() {
-            this.parent.onDragStart();
+            OnDragStart.call(this.parent);
         }
         exit_DRAG() {
-            this.parent.onDragEnd();
+            OnDragEnd.call(this.parent);
         }
         // DRAG    
 
@@ -28114,13 +28567,13 @@
             return nextState;
         }
         enter_SLIDE() {
-            this.parent.onSliding();
+            OnSliding.call(this.parent);
         }
         exit_SLIDE() {
-            this.parent.stop();
+            Stop.call(this.parent);
         }
         update_SLIDE(time, delta) {
-            this.parent.sliding(time, delta);
+            Sliding.call(this.parent, time, delta);
             this.next();
         }
         // SLIDE    
@@ -28138,13 +28591,13 @@
             return nextState;
         }
         enter_BACK() {
-            this.parent.onPullBack();
+            OnBack.call(this.parent);
         }
         exit_BACK() {
-            this.parent.stop();
+            Stop.call(this.parent);
         }
         update_BACK(time, delta) {
-            this.parent.pullBack(time, delta);
+            Back.call(this.parent, time, delta);
             this.next();
         }
         // BACK
@@ -28500,6 +28953,8 @@
                 this.dir = dir;
             }
 
+            speed = Math.abs(speed);
+
             this.movement
                 .setSpeed(speed)
                 .setAcceleration(-dec);
@@ -28544,7 +28999,7 @@
     }
 
     const GetValue$n = Phaser.Utils.Objects.GetValue;
-    const Clamp$1 = Phaser.Math.Clamp;
+    const Clamp = Phaser.Math.Clamp;
 
     class Scroller extends ComponentBase {
         constructor(gameObject, config) {
@@ -28569,6 +29024,8 @@
             this._enable = undefined;
             this._value = undefined;
             this._slowDown = new SlowDown();
+
+            this.setSnapStep(GetValue$n(config, 'snapStep', undefined));
 
             var callback = GetValue$n(config, 'valuechangeCallback', null);
             if (callback !== null) {
@@ -28704,6 +29161,11 @@
             return this;
         }
 
+        setSnapStep(snapStep) {
+            this.snapStep = snapStep;
+            return this;
+        }
+
         get value() {
             return this._value;
         }
@@ -28741,7 +29203,7 @@
             }
 
             if (clamp) {
-                value = Clamp$1(value, this.minValue, this.maxValue);
+                value = Clamp(value, this.minValue, this.maxValue);
             }
 
             this.value = value;
@@ -28823,75 +29285,6 @@
             speed *= this.dragRate;
             return speed;
         }
-
-        // enter_DRAG
-        onDragStart() {
-            this.emit('dragstart');
-        }
-
-        // exit_DRAG
-        onDragEnd() {
-            this.emit('dragend');
-        }
-
-        // everyTick_DRAG
-        dragging() {
-            this.value += this.dragDelta;
-        }
-
-        // enter_SLIDE 
-        onSliding() {
-            var start = this.value;
-            var speed = this.dragSpeed;
-            if (speed === 0) {
-                this._slowDown.stop();
-                this._state.next();
-                return;
-            }
-            var dec = this.slidingDeceleration;
-            this._slowDown.init(start, (speed > 0), Math.abs(speed), dec);
-        }
-
-        // everyTick_SLIDE
-        sliding(time, delta) {
-            delta *= 0.001;
-            var newValue = this._slowDown.update(delta).value;
-            if (this.overMax(newValue)) {
-                this.value = this.maxValue;
-                this._slowDown.stop();
-            } else if (this.overMin(newValue)) {
-                this.value = this.minValue;
-                this._slowDown.stop();
-            } else {
-                this.value = newValue;
-            }
-        }
-
-        // enter_BACK
-        onPullBack() {
-            var start = this.value;
-            var end = (this.outOfMinBound) ? this.minValue : this.maxValue;
-            var dist = Math.abs(end - start);
-            var dec = this.backDeceleration;
-            var speed = Math.sqrt(2 * dec * dist);
-            this._slowDown.init(start, undefined, speed, dec, end);
-        }
-
-        // everyTick_BACK
-        pullBack(time, delta) {
-            delta *= 0.001;
-            this.value = this._slowDown.update(delta).value;
-
-            if (!this._slowDown.isMoving) {
-                this._state.next();
-            }
-        }
-
-        // exit_SLIDE, exit_BACK
-        stop() {
-            this._slowDown.stop();
-        }
-
     }
 
     const ORIENTATIONMODE = {
@@ -28988,12 +29381,25 @@
     }
 
     const GetValue$l = Phaser.Utils.Objects.GetValue;
+    const SnapTo = Phaser.Math.Snap.To;
 
     var AddSlider = function (topPatent, sliderParent, axis, config) {
         axis = axis.toUpperCase();
         var isAxisY = (axis === 'Y');
         var isScrollXYMode = (topPatent.scrollMode === 2);
         var child = topPatent.childrenMap.child;
+
+        var snapStep;
+        var snapStepKey = `snapStep${axis}`;
+        if (isScrollXYMode) {
+            snapStep = GetValue$l(config, snapStepKey, undefined);
+        } else {
+            var snapStep = GetValue$l(config, 'snapStep', undefined);
+            if (snapStep === undefined) {
+                snapStep = GetValue$l(config, snapStepKey, undefined);
+            }
+        }
+        topPatent[snapStepKey] = snapStep;
 
         var sliderConfig, slider;
         var sliderConfigKey = `slider${axis}`;
@@ -29014,8 +29420,6 @@
 
             sliderConfig.orientation = (isAxisY) ? 1 : 0;
             slider = CreateScrollbar(topPatent.scene, sliderConfig);
-
-            slider.tickLength = GetValue$l(sliderConfig, 'tickLength', undefined);
 
             var column, row, padding;
 
@@ -29145,6 +29549,8 @@
                 scrollerConfig.rectBoundsInteractive = (scrollDetectionMode === 1);
             }
 
+            scrollerConfig.snapStep = snapStep;
+
             scroller = new Scroller(child, scrollerConfig);
 
             if (child.isRexContainerLite) {
@@ -29193,7 +29599,21 @@
                 .on('valuechange', function (newValue) {
                     topPatent[keyST] = newValue;
                     topPatent.emit(eventName, topPatent);
+                })
+                .on('inputend', function () {
+                    var snapStep = topPatent[`snapStep${axis}`];
+                    if (snapStep) {
+                        var min = topPatent[(isAxisY) ? `topChildOY` : `leftChildOX`];
+                        var max = topPatent[(isAxisY) ? `bottomChildOY` : `rightChildOX`];
+                        var valueEnd = topPatent[`childO${axis}`];
+                        var valueTo = SnapTo(valueEnd, snapStep, min);
+                        var easeDuration = 500 * (Math.abs(valueTo - valueEnd) / snapStep);
+                        slider
+                            .setEaseValueDuration(easeDuration)
+                            .easeValueTo(valueTo, min, max);
+                    }
                 });
+
         }
 
         if (scroller) {
@@ -29221,6 +29641,10 @@
             }
             mouseWheelScroller
                 .on('scroll', function (incValue) {
+                    var snapStep = topPatent[snapStepKey];
+                    if (snapStep) {
+                        incValue = snapStep;
+                    }
                     topPatent[methodAddChildOXY](-incValue, true);
                 });
         }
@@ -29285,242 +29709,7 @@
         return scrollableSizer;
     };
 
-    var ResizeController = function () {
-        switch (this.scrollMode) {
-            case 0:
-            case 1:
-                SetControllerBounds.call(this);
-
-                this.updateController();
-
-                HideUnscrollableSlider.call(this);
-
-                AdaptThumbSize.call(this);
-
-                break;
-
-            default: // 2
-                SetControllerBounds.call(this, 'y');
-                SetControllerBounds.call(this, 'x');
-
-                this.updateController();
-
-                HideUnscrollableSlider.call(this, 'y');
-                HideUnscrollableSlider.call(this, 'x');
-
-                AdaptThumbSize.call(this, 'y');
-                AdaptThumbSize.call(this, 'x');
-                break;
-        }
-
-        return this;
-    };
-
-
-    var SetControllerBounds = function (axis) {
-        // Scale will force to 1
-        var bound0, bound1;
-        var scroller, slider;
-        switch (this.scrollMode) {
-            case 0:
-            case 1:
-                bound0 = this.topChildOY;
-                bound1 = this.bottomChildOY;
-                scroller = this.childrenMap.scroller;
-                slider = this.childrenMap.slider;
-                axis = (this.scrollMode === 0) ? 'Y' : 'X';
-                break;
-
-            default:  // 2
-                axis = axis.toUpperCase();
-                if (axis === 'Y') {
-                    bound0 = this.topChildOY;
-                    bound1 = this.bottomChildOY;
-                } else {
-                    bound0 = this.leftChildOX;
-                    bound1 = this.rightChildOX;
-                }
-                scroller = this.childrenMap[`scroller${axis}`];
-                slider = this.childrenMap[`slider${axis}`];
-        }
-
-        var scale = (axis === 'Y') ? this.scaleY : this.scaleX;
-        bound1 *= scale;
-
-        if (scroller) {
-            scroller.setBounds(bound0, bound1);
-        }
-        if (slider) {
-            slider.setEnable(bound0 !== bound1);
-
-            if (slider.tickLength) {
-                slider.setTick(slider.tickLength, bound0, bound1);
-            }
-        }
-    };
-
-    var HideUnscrollableSlider = function (axis) {
-        switch (this.scrollMode) {
-            case 0:
-            case 1:
-                var slider = this.childrenMap.slider;
-                if (slider && this.hideUnscrollableSlider) {
-                    this.setChildVisible(slider, this.isOverflow);
-                }
-
-                var scroller = this.childrenMap.scroller;
-                if (scroller && this.disableUnscrollableDrag) {
-                    scroller.setEnable(this.isOverflow);
-                }
-
-                break;
-
-            default:
-                axis = axis.toUpperCase();
-                var isOverflow = this[`isOverflow${axis}`];
-
-                var slider = this.childrenMap[`slider${axis}`];
-                var hideUnscrollableSlider = this[`hideUnscrollableSlider${axis}`];
-                if (slider && hideUnscrollableSlider) {
-                    this.setChildVisible(slider, isOverflow);
-                }
-
-                var scroller = this.childrenMap.scroller;
-                var disableUnscrollableDrag = this[`disableUnscrollableDrag${axis}`];
-                if (scroller && disableUnscrollableDrag) {
-                    scroller.setEnable(isOverflow);
-                }
-                break;
-        }
-    };
-
-    var AdaptThumbSize = function (axis) {
-        switch (this.scrollMode) {
-            case 0:
-            case 1:
-                if (!this.adaptThumbSizeMode) {
-                    return;
-                }
-                var slider = this.childrenMap.slider;
-                if (!slider) {
-                    return;
-                }
-
-                // Change slider size according to visible ratio
-                var ratio = Math.min(this.childVisibleHeight / this.childHeight, 1);
-                var track = slider.childrenMap.track;
-                var thumb = slider.childrenMap.thumb;
-                var minThumbSize = this.minThumbSize;
-                if (this.scrollMode === 0) {
-                    var newHeight = track.displayHeight * ratio;
-                    if ((minThumbSize !== undefined) && (newHeight < minThumbSize)) {
-                        newHeight = minThumbSize;
-                    }
-                    ResizeGameObject(thumb, undefined, newHeight);
-                } else {
-                    var newWidth = track.displayWidth * ratio;
-                    if ((minThumbSize !== undefined) && (newWidth < minThumbSize)) {
-                        newWidth = minThumbSize;
-                    }
-                    ResizeGameObject(thumb, newWidth, undefined);
-
-                }
-                LayoutSlider(slider);
-                break;
-
-            default:
-                // TODO
-                axis = axis.toUpperCase();
-                var adaptThumbSizeMode = this[`adaptThumb${axis}SizeMode`];
-                if (!adaptThumbSizeMode) {
-                    return;
-                }
-                var slider = this.childrenMap[`slider${axis}`];
-                if (!slider) {
-                    return;
-                }
-
-                // Change slider size according to visible ratio            
-                var track = slider.childrenMap.track;
-                var thumb = slider.childrenMap.thumb;
-                var minThumbSize = this[`minThumb${axis}Size`];
-                if (axis === 'Y') {
-                    var ratio = Math.min(this.childVisibleHeight / this.childHeight, 1);
-                    var newHeight = track.displayHeight * ratio;
-                    if ((minThumbSize !== undefined) && (newHeight < minThumbSize)) {
-                        newHeight = minThumbSize;
-                    }
-                    ResizeGameObject(thumb, undefined, newHeight);
-                } else {
-                    var ratio = Math.min(this.childVisibleWidth / this.childWidth, 1);
-                    var newWidth = track.displayWidth * ratio;
-                    if ((minThumbSize !== undefined) && (newWidth < minThumbSize)) {
-                        newWidth = minThumbSize;
-                    }
-                    ResizeGameObject(thumb, newWidth, undefined);
-
-                }
-                LayoutSlider(slider);
-                break;
-
-        }
-
-
-    };
-
-    var LayoutSlider = function (slider) {
-        // Save minSize
-        var minWidthSave = slider.minWidth;
-        var minHeightSave = slider.minHeight;
-        // Set minSize to current size
-        slider.minWidth = slider.width;
-        slider.minHeight = slider.height;
-        // Layout slider
-        slider.layout();
-        // Restore minSize
-        slider.minWidth = minWidthSave;
-        slider.minHeight = minHeightSave;
-    };
-
-    var UpdateController = function () {
-        switch (this.scrollMode) {
-            case 0:
-            case 1:
-                var scroller = this.childrenMap.scroller;
-                var slider = this.childrenMap.slider;
-                if (scroller) {
-                    scroller.setValue(this.childOY);
-                }
-                if (slider) {
-                    slider.setValue(this.t);
-                }
-                break;
-
-            default:
-                var scrollerY = this.childrenMap.scrollerY;
-                var sliderY = this.childrenMap.sliderY;
-                var scrollerX = this.childrenMap.scrollerX;
-                var sliderX = this.childrenMap.sliderX;
-
-                if (scrollerY) {
-                    scrollerY.setValue(this.childOY);
-                }
-                if (sliderY) {
-                    sliderY.setValue(this.t);
-                }
-                if (scrollerX) {
-                    scrollerX.setValue(this.childOX);
-                }
-                if (sliderX) {
-                    sliderX.setValue(this.s);
-                }
-                break;
-        }
-
-    };
-
     const GetValue$j = Phaser.Utils.Objects.GetValue;
-    const Clamp = Phaser.Math.Clamp;
 
     class Scrollable extends Sizer {
         constructor(scene, config) {
@@ -29768,110 +29957,6 @@
             return child.leftChildOX !== child.rightChildOX;
         }
 
-        setChildOY(value, clamp) {
-            if (clamp === undefined) {
-                clamp = false;
-            }
-            if (clamp) {
-                value = Clamp(value, this.bottomChildOY, this.topChildOY);
-            }
-            this.childOY = value;
-            return this;
-        }
-
-        addChildOY(inc, clamp) {
-            this.setChildOY(this.childOY + inc, clamp);
-            return this;
-        }
-
-        setT(value, clamp) {
-            if (clamp === undefined) {
-                clamp = false;
-            }
-            if (clamp) {
-                value = Clamp(value, 0, 1);
-            }
-            this.t = value;
-            return this;
-        }
-
-        addT(inc, clamp) {
-            this.setT(this.t + inc, clamp);
-            return this;
-        }
-
-        scrollToTop() {
-            this.t = 0;
-            return this;
-        }
-
-        scrollToBottom() {
-            this.t = 1;
-            // t will be 0 if panel/table does not exceed visible area
-            if (this.t === 0) {
-                return this;
-            }
-
-            // Panel/Table height might be expanded while cells are visible        
-            do {
-                this.t = 1;
-            } while (this.t !== 1)
-
-            return this;
-        }
-
-        setChildOX(value, clamp) {
-            if (clamp === undefined) {
-                clamp = false;
-            }
-            if (clamp) {
-                value = Clamp(value, this.leftChildOX, this.rightChildOX);
-            }
-            this.childOX = value;
-            return this;
-        }
-
-        addChildOX(inc, clamp) {
-            this.setChildOX(this.childOX + inc, clamp);
-            return this;
-        }
-
-        setS(value, clamp) {
-            if (clamp === undefined) {
-                clamp = false;
-            }
-            if (clamp) {
-                value = Clamp(value, 0, 1);
-            }
-            this.s = value;
-            return this;
-        }
-
-        addS(inc, clamp) {
-            this.setS(this.s + inc, clamp);
-            return this;
-        }
-
-        scrollToLeft() {
-            this.s = 0;
-            return this;
-        }
-
-        scrollToRight() {
-            this.s = 1;
-            // s will be 0 if panel/table does not exceed visible area
-            if (this.s === 0) {
-                return this;
-            }
-
-            // Panel/Table height might be expanded while cells are visible        
-            do {
-                this.s = 1;
-            } while (this.s !== 1)
-
-            return this;
-        }
-
         get sliderEnable() {
             var slider = this.childrenMap.slider;
             if (!slider) {
@@ -30096,18 +30181,12 @@
             child.input.dropZone = enable;
             return this;
         }
-
     }
-
-    var Methods$2 = {
-        resizeController: ResizeController,
-        updateController: UpdateController
-    };
 
     // mixin
     Object.assign(
         Scrollable.prototype,
-        Methods$2
+        Methods$5
     );
 
     var GetChildrenWidth = function () {
