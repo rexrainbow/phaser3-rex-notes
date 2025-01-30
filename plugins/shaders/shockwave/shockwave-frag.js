@@ -1,6 +1,8 @@
 // reference : https://www.geeks3d.com/20110408/cross-stitching-post-processing-shader-glsl-filter-geexlab-pixel-bender/
 
 const frag = `\
+#pragma phaserTemplate(shaderName)
+
 #ifdef GL_FRAGMENT_PRECISION_HIGH
 #define highmedp highp
 #else
@@ -19,6 +21,8 @@ uniform float waveRadius;
 uniform float waveHalfWidth; // 10.0
 uniform float powBaseScale; // 0.8
 uniform float powExponent; // 0.1
+
+#pragma phaserTemplate(fragmentHeader)
 
 void main (void) {
   if (waveHalfWidth > 0.0) {

@@ -1,5 +1,5 @@
-import phaser from 'phaser/src/phaser.js';
-import ShockwavePipelinePlugin from '../../plugins/shockwavepipeline-plugin.js'
+import phaser from '../../../phaser/src/phaser.js';
+import ShockwaveFilterPlugin from '../../plugins/shockwavefilter-plugin.js'
 import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 
 class Demo extends Phaser.Scene {
@@ -14,19 +14,21 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var postFxPlugin = this.plugins.get('rexShockwavePipelinePlugin');
         var gameObject = this.add.image(400, 300, 'classroom');
-        var postFxPipeline = postFxPlugin.add(gameObject, { waveRadius: 200 });
+
+        var controller = this.plugins.get('rexShockwaveFilter').add(gameObject, {
+            waveRadius: 200
+        })
 
         this.input.on('pointerdown', function (pointer) {
-            postFxPipeline.setCenter(pointer.x, pointer.y);
+            controller.setCenter(pointer.x, pointer.y);
         })
 
         var gui = new Dat.GUI();
-        gui.add(postFxPipeline, 'waveRadius', 0, 600);
-        gui.add(postFxPipeline, 'waveWidth', 5, 100);
-        // gui.add(postFxPipeline, 'powBaseScale', 0, 5);
-        // gui.add(postFxPipeline, 'powExponent', 0, 5);
+        gui.add(controller, 'waveRadius', 0, 600);
+        gui.add(controller, 'waveWidth', 5, 100);
+        // gui.add(postFxFilter, 'powBaseScale', 0, 5);
+        // gui.add(postFxFilter, 'powExponent', 0, 5);
     }
 
     update() {
@@ -45,8 +47,8 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-            key: 'rexShockwavePipelinePlugin',
-            plugin: ShockwavePipelinePlugin,
+            key: 'rexShockwaveFilter',
+            plugin: ShockwaveFilterPlugin,
             start: true
         }]
     }

@@ -16,6 +16,11 @@ declare namespace SwirlController {
 }
 
 declare class SwirlController extends Phaser.Filters.Controller {
+    constructor(
+        camera: Phaser.Cameras.Scene2D.BaseCamera,
+        config?: SwirlController.IConfig
+    );
+
     setCenter(x: number, y?: number): this;
     centerX: number;
     centerY: number;
