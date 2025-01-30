@@ -12541,7 +12541,11 @@
                             return;
                         }
 
-                        self.onLoad();
+                        // Invoke onLoad next tick
+                        setTimeout(function () {
+                            self.onLoad();
+                        }, 0);
+
                         runOnce = true;
                     };
                     var failureCallback = function () {
@@ -12549,7 +12553,11 @@
                             return;
                         }
 
-                        self.onError();
+                        // Invoke onError next tick
+                        setTimeout(function () {
+                            self.onError();
+                        }, 0);
+
                         runOnce = true;
                     };
 
