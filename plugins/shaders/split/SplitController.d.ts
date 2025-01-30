@@ -27,6 +27,8 @@ declare class SplitController extends Phaser.Filters.Controller {
         config?: SplitController.IConfig
     );
 
+    resetFromJSON(config?: SplitController.IConfig): this;
+
     setSplit(x?: number, y?: number): this;
     splitX: number;
     splitY: number;

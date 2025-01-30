@@ -1,7 +1,7 @@
 // import * as Phaser from 'phaser';
-export default WarpPostFxPipeline;
+export default WarpController;
 
-declare namespace WarpPostFxPipeline {
+declare namespace WarpController {
     interface IConfig {
         frequencyX?: number, frequencyY?: number,
         frequency?: number,
@@ -15,10 +15,13 @@ declare namespace WarpPostFxPipeline {
     }
 }
 
-declare class WarpPostFxPipeline extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
-    resetFromJSON(
-        config?: WarpPostFxPipeline.IConfig
-    ): this;
+declare class WarpController extends Phaser.Filters.Controller {
+    constructor(
+        camera: Phaser.Cameras.Scene2D.BaseCamera,
+        config?: WarpController.IConfig
+    );
+
+    resetFromJSON(config?: WarpController.IConfig): this;
 
     setFrequency(width: number, height?: number): this;
     setFrequencyX(value: number): this;

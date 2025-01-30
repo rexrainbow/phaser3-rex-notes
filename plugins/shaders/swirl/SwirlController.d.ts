@@ -21,6 +21,8 @@ declare class SwirlController extends Phaser.Filters.Controller {
         config?: SwirlController.IConfig
     );
 
+    resetFromJSON(config?: SwirlController.IConfig): this;
+
     setCenter(x: number, y?: number): this;
     centerX: number;
     centerY: number;

@@ -1,10 +1,6 @@
 import { FilterName } from './const.js';
 import FragSrc from './swirl-frag.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const DegToRad = Phaser.Math.DegToRad;
-const RadToDeg = Phaser.Math.RadToDeg;
-
 class SwirlFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
     static FilterName = FilterName;
 

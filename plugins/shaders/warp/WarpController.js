@@ -1,20 +1,13 @@
-import FragSrc from './warp-frag.js';
-import GetTickDelta from '../../utils/system/GetTickDelta.js';
+import { FilterName } from './const.js';
 
-const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const Vector2 = Phaser.Math.Vector2;
 const GetValue = Phaser.Utils.Objects.GetValue;
-const PI2 = Math.PI * 2;
 
+class WarpController extends Phaser.Filters.Controller {
+    static FilterName = FilterName;
 
-class WarpPostFxPipeline extends PostFXPipeline {
-    constructor(game) {
-        super({
-            name: 'rexWarpPostFx',
-            game: game,
-            renderTarget: true,
-            fragShader: FragSrc
-        });
+    constructor(camera, config) {
+        super(camera, FilterName);
 
         this.frequencyX = 10;
         this.frequencyY = 10;
@@ -26,6 +19,7 @@ class WarpPostFxPipeline extends PostFXPipeline {
         this.now = 0;
         this.speed = new Vector2(0, 0);
 
+        this.resetFromJSON(config);
     }
 
     resetFromJSON(o) {
@@ -41,20 +35,6 @@ class WarpPostFxPipeline extends PostFXPipeline {
         this.setSpeedEnable(GetValue(o, 'speedEnable', (this.speedX !== 0) || (this.speedY !== 0)));
 
         return this;
-    }
-
-    onPreRender() {
-        if (this.speedEnable) {
-            this.now += GetTickDelta(this.game);
-        }
-
-        this.set2f('frequency', this.frequencyX, this.frequencyY);
-        this.set2f('amplitude', this.amplitudeX, this.amplitudeY);
-
-        this.set2f('speed', this.speed.x, this.speed.y);
-        this.set1f('time', this.now);
-
-        this.set2f('texSize', this.renderer.width, this.renderer.height);
     }
 
     // frequencyX
@@ -159,4 +139,4 @@ class WarpPostFxPipeline extends PostFXPipeline {
 
 }
 
-export default WarpPostFxPipeline;
+export default WarpController;

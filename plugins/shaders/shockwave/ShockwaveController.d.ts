@@ -22,6 +22,8 @@ declare class ShockwaveController extends Phaser.Filters.Controller {
         config?: ShockwaveController.IConfig
     );
 
+    resetFromJSON(config?: ShockwaveController.IConfig): this;
+
     setCenter(x?: number, y?: number): this;
     centerX: number;
     centerY: number;

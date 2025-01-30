@@ -1,5 +1,5 @@
 import phaser from '../../../phaser/src/phaser.js';
-import CrtFilterPlugin from '../../plugins/crtfilter-plugin.js';
+import WarpFilterPlugin from '../../plugins/warpfilter-plugin.js';
 import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 
 class Demo extends Phaser.Scene {
@@ -14,20 +14,19 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var gameObject = this.add.image(400, 300, 'classroom');
+        var gameObject = this.add.image(400, 300, 'classroom').setScale(0.8)
 
-        var controller = this.plugins.get('rexCrtFilter').add(gameObject, {
-            warpX: 0.75,
-            warpY: 0.75,
-            scanLineStrength: 0.2,
-            scanLineWidth: 1024
+        var controller = this.plugins.get('rexWarpFilter').add(gameObject, {
+            speedY: 6
         })
 
         var gui = new Dat.GUI();
-        gui.add(controller, 'warpX', 0, 1);
-        gui.add(controller, 'warpY', 0, 1);
-        gui.add(controller, 'scanLineStrength', 0, 1);
-        gui.add(controller, 'scanLineWidth', 0, 4096);
+        gui.add(controller, 'frequencyX', 0, 100);
+        gui.add(controller, 'frequencyY', 0, 100);
+        gui.add(controller, 'amplitudeX', 0, 100);
+        gui.add(controller, 'amplitudeY', 0, 100);
+        gui.add(controller, 'speedX', 0, 100);
+        gui.add(controller, 'speedY', 0, 100);
     }
 
     update() {
@@ -43,12 +42,11 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    pixelArt: true,
     scene: Demo,
     plugins: {
         global: [{
-            key: 'rexCrtFilter',
-            plugin: CrtFilterPlugin,
+            key: 'rexWarpFilter',
+            plugin: WarpFilterPlugin,
             start: true
         }]
     }

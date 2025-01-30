@@ -1,4 +1,4 @@
-// reference : https://www.geeks3d.com/20110408/cross-stitching-post-processing-shader-glsl-filter-geexlab-pixel-bender/
+// reference : https://www.geeks3d.com/20091116/shader-library-2d-shockwave-post-processing-filter-glsl/
 
 const frag = `\
 #pragma phaserTemplate(shaderName)

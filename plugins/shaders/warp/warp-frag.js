@@ -1,6 +1,6 @@
-// reference : https://www.geeks3d.com/20101029/shader-library-pixelation-post-processing-effect-glsl/
-
 const frag = `\
+#pragma phaserTemplate(shaderName)
+
 #ifdef GL_FRAGMENT_PRECISION_HIGH
 #define highmedp highp
 #else
@@ -19,6 +19,7 @@ uniform vec2 frequency;
 uniform vec2 speed;
 uniform float time;
 
+#pragma phaserTemplate(fragmentHeader)
 
 void main (void) {
   vec2 dxy = frequency/texSize;
