@@ -1,20 +1,18 @@
-import FragSrc from './hslAdjust-frag.js';
+import { FilterName } from './const.js';
 
-const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class HslAdjustPostFxPipeline extends PostFXPipeline {
-    constructor(game) {
-        super({
-            name: 'rexHslAdjustPostFx',
-            game: game,
-            renderTarget: true,
-            fragShader: FragSrc
-        });
+class HslAdjustController extends Phaser.Filters.Controller {
+    static FilterName = FilterName;
+
+    constructor(camera, config) {
+        super(camera, FilterName);
 
         this.hueRotate = 0;
         this.satAdjust = 1;
         this.lumAdjust = 0.5;
+
+        this.resetFromJSON(config);
     }
 
     resetFromJSON(o) {
@@ -22,12 +20,6 @@ class HslAdjustPostFxPipeline extends PostFXPipeline {
         this.setSatAdjust(GetValue(o, 'satAdjust', 1));
         this.setLumAdjust(GetValue(o, 'lumAdjust', 0.5));
         return this;
-    }
-
-    onPreRender() {
-        this.set1f('hueRotate', (this.hueRotate) % 1);
-        this.set1f('satAdjust', this.satAdjust);
-        this.set1f('lumAdjust', this.lumAdjust);
     }
 
     // hueRotate
@@ -49,4 +41,4 @@ class HslAdjustPostFxPipeline extends PostFXPipeline {
     }
 }
 
-export default HslAdjustPostFxPipeline;
+export default HslAdjustController;

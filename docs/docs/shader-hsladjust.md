@@ -116,7 +116,7 @@ Adjust color in HSL domain, post processing filter.
     - `satAdjust` : Saturation adjustment
         - `0` : Gray
         - `1` : Original color (Default value)
-        - > 1 :
+        - `> 1` :
     - `lumAdjust` : Lumen adjustment
         - `0` : Dark
         - `0.5` : Original color (Default value)
@@ -186,7 +186,7 @@ Adjust color in HSL domain, post processing filter.
     ```
     - `0` : Gray
     - `1` : Original color
-    - > 1 :
+    - `> 1` :
 
 ### Lumen adjustment
 

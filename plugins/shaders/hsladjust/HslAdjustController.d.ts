@@ -1,7 +1,7 @@
 // import * as Phaser from 'phaser';
-export default HslAdjustPostFxPipeline;
+export default HslAdjustController;
 
-declare namespace HslAdjustPostFxPipeline {
+declare namespace HslAdjustController {
     interface IConfig {
         hueRotate?: number,
         satAdjust?: number,
@@ -9,8 +9,13 @@ declare namespace HslAdjustPostFxPipeline {
     }
 }
 
-declare class HslAdjustPostFxPipeline extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
-    resetFromJSON(o?: HslAdjustPostFxPipeline.IConfig): this;
+declare class HslAdjustController extends Phaser.Filters.Controller {
+    constructor(
+        camera: Phaser.Cameras.Scene2D.BaseCamera,
+        config?: HslAdjustController.IConfig
+    );
+
+    resetFromJSON(o?: HslAdjustController.IConfig): this;
 
     setHueRotate(value: number): this;
     hueRotate: number;

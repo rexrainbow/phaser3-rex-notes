@@ -1,5 +1,5 @@
-import phaser from 'phaser/src/phaser.js';
-import HslAdjustPipelinePlugin from '../../plugins/hsladjustpipeline-plugin.js';
+import phaser from '../../../phaser/src/phaser.js';
+import HslAdjustFilterPlugin from '../../plugins/hsladjustfilter-plugin.js';
 import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 
 class Demo extends Phaser.Scene {
@@ -20,13 +20,14 @@ class Demo extends Phaser.Scene {
                 .setAlpha(Math.random());
         }
 
-        var postFxPlugin = this.plugins.get('rexHslAdjustPipeline');
-        var customPipeline = postFxPlugin.add(this.cameras.main);
+        var camera = this.cameras.main;
+        var controller = this.plugins.get('rexHslAdjustFilter').add(camera, {
+        })
 
         var gui = new Dat.GUI();
-        gui.add(customPipeline, 'hueRotate', 0, 1);
-        gui.add(customPipeline, 'satAdjust', 0);
-        gui.add(customPipeline, 'lumAdjust', 0, 1);
+        gui.add(controller, 'hueRotate', 0, 1);
+        gui.add(controller, 'satAdjust', 0);
+        gui.add(controller, 'lumAdjust', 0, 1);
     }
 
     update() {
@@ -45,8 +46,8 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-            key: 'rexHslAdjustPipeline',
-            plugin: HslAdjustPipelinePlugin,
+            key: 'rexHslAdjustFilter',
+            plugin: HslAdjustFilterPlugin,
             start: true
         }]
     }

@@ -2,6 +2,8 @@ import RGBToHSL from '../utils/RGBToHSL.js';
 import HSLToRGB from '../utils/HSLToRGB.js';
 
 const frag = `\
+#pragma phaserTemplate(shaderName)
+
 #ifdef GL_FRAGMENT_PRECISION_HIGH
 #define highmedp highp
 #else
@@ -19,7 +21,9 @@ uniform float satAdjust;
 uniform float lumAdjust;
 `
 + RGBToHSL + HSLToRGB + 
-`\
+`
+#pragma phaserTemplate(fragmentHeader)
+
 void main(void) {
 	vec4 front = texture2D(uMainSampler, outTexCoord);
 	vec3 hsl = RGBToHSL(front.rgb);

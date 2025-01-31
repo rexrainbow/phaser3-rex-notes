@@ -1,5 +1,5 @@
-import phaser from 'phaser/src/phaser.js';
-import HslAdjustPipelinePlugin from '../../plugins/hsladjustpipeline-plugin.js';
+import phaser from '../../../phaser/src/phaser.js';
+import HslAdjustFilterPlugin from '../../plugins/hsladjustfilter-plugin.js';
 import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 
 class Demo extends Phaser.Scene {
@@ -15,13 +15,15 @@ class Demo extends Phaser.Scene {
 
     create() {
         var gameObject = this.add.image(400, 300, 'classroom');
-        var pipeline = this.plugins.get('rexHslAdjustPipeline').add(gameObject);
-        pipeline.setHueRotate(0.5);
+
+        var controller = this.plugins.get('rexHslAdjustFilter').add(gameObject, {
+            hueRotate: 0.5,
+        })
 
         var gui = new Dat.GUI();
-        gui.add(pipeline, 'hueRotate', 0, 1);
-        gui.add(pipeline, 'satAdjust', 0);
-        gui.add(pipeline, 'lumAdjust', 0, 1);
+        gui.add(controller, 'hueRotate', 0, 1);
+        gui.add(controller, 'satAdjust', 0);
+        gui.add(controller, 'lumAdjust', 0, 1);
     }
 
     update() {
@@ -40,8 +42,8 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-            key: 'rexHslAdjustPipeline',
-            plugin: HslAdjustPipelinePlugin,
+            key: 'rexHslAdjustFilter',
+            plugin: HslAdjustFilterPlugin,
             start: true
         }]
     }
