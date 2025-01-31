@@ -34,7 +34,7 @@ class Demo extends Phaser.Scene {
 
                     // Cascade 2nd outline
                     this.plugins.get('rexOutlineFilter').add(gameObject, {
-                        thickness: 5,
+                        thickness: 3,
                         outlineColor: 0xc41c00
                     });
                 }, this)

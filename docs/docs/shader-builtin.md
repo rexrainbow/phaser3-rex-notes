@@ -417,18 +417,20 @@ All Game Objects and camera support filters. These are effects applied after the
     ```javascript
     var controller = gameObject
         .enableFilters()
-        .filters.internal.addGlow(color, outerStrength, innerStrength, knockout);
+        .filters.internal.addGlow(color, outerStrength, innerStrength, scale, knockout, quality, distance);
     ```
     - `color` : The color of the glow effect as a number value. Default value is `0xffffff`.
     - `outerStrength`, `innerStrength` : The strength of the glow outward/inward from the edge of the Sprite. Default value is `4`/`0`.
+    - `scale` : The scale of the glow effect. This multiplies the fixed distance. Default value is `1`.
     - `knockout` : 
         - `true` : Only the glow is drawn
         - `false` : Draw glow and texture. Default behavior.
-    - `quality` : Only available for PostFX. Sets the quality of this Glow effect. Default is 0.1. Cannot be changed post-creation.
+    - `quality` : The quality of the glow effect. Default is `10`. Cannot be changed after the filter has been created.
+    - `distance` : The distance of the glow effect. Default is `10`. Cannot be changed after the filter has been created.
 - Add filter controller to camera
     ```javascript
     var controller = camera
-        .filters.internal.addGlow(color, outerStrength, innerStrength, knockout, quality, distance);
+        .filters.internal.addGlow(color, outerStrength, innerStrength, scale, knockout, quality, distance);
     ```
 - Disable filter controller
     ```javascript

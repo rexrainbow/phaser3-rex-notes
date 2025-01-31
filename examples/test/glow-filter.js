@@ -32,10 +32,9 @@ var AddInputEvent = function (gameObject) {
             } else {
                 gameObject._glowFilter = gameObject
                     .enableFilters()
-                    .filters.internal.addGlow()
+                    .filters.internal.addGlow(0xffffff, 30, 0, 1, false, 10, 30)
                     .setPaddingOverride(null)
             }
-            console.log(gameObject.x, gameObject.y)
         }, this)
         .on('pointerout', function () {
             if (gameObject._glowFilter) {
