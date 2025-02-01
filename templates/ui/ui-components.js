@@ -25,7 +25,7 @@ import Knob from './knob/Knob.js';
 import CustomShapes from './customshapes/CustomShapes.js';
 import CustomProgress from './customprogress/CustomProgress.js';
 import AIOSpinner from './aiospinner/AIOSpinner.js';
-import TransitionImage from './transitionimage/TransitionImage.js';
+// import TransitionImage from './transitionimage/TransitionImage.js';
 // import TransitionImagePack from './transitionimagepack/TransitionImagePack.js';
 import ImageBox from './imagebox/ImageBox.js';
 import ImageInputLabel from './imageinputlabel/ImageInputLabel.js';
@@ -181,7 +181,7 @@ export {
     CustomShapes,
     CustomProgress,
     AIOSpinner,
-    TransitionImage,
+    // TransitionImage,
     // TransitionImagePack,
     ImageBox,
     ImageInputLabel,

@@ -22,7 +22,7 @@ import Knob from './knob/Knob';
 import CustomShapes from './customshapes/CustomShapes';
 import CustomProgress from './customprogress/CustomProgress';
 import AIOSpinner from './aiospinner/AIOSpinner';
-import TransitionImage from './transitionimage/TransitionImage';
+// import TransitionImage from './transitionimage/TransitionImage';
 // import TransitionImagePack from './transitionimagepack/TransitionImagePack';
 import ImageBox from './imagebox/ImageBox';
 import FullWindowRectangle from './fullwindowrectangle/FullWindowRectangle';
@@ -179,7 +179,7 @@ export {
     CustomShapes,
     CustomProgress,
     AIOSpinner,
-    TransitionImage,
+    // TransitionImage,
     // TransitionImagePack,
     ImageBox,
     NinePatch,

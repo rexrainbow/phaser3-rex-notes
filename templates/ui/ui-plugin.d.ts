@@ -109,7 +109,7 @@ import ToggleSwitchFactory from './toggleswitch/Factory';
 import TouchEventStopFactory from './toucheventstop/Factory';
 import TreesFactory from './trees/Factory';
 import TriangleFactory from './triangle/Factory';
-import TransitionImageFactory from './transitionimage/Factory';
+// import TransitionImageFactory from './transitionimage/Factory';
 // import TransitionImagePackFactory from './transitionimagepack/Factory';
 import TweakerFactory from './tweaker/Factory';
 
@@ -241,7 +241,7 @@ declare class Factories {
     touchEventStop: typeof TouchEventStopFactory;
     trees: typeof TreesFactory;
     triangle: typeof TriangleFactory;
-    transitionImage: typeof TransitionImageFactory;
+    // transitionImage: typeof TransitionImageFactory;
     // transitionImagePack: typeof TransitionImagePackFactory;
     tweaker: typeof TweakerFactory;
     twoRowsLabel: typeof TitleLabelFactory;
