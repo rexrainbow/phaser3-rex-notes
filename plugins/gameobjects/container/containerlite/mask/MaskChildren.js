@@ -1,14 +1,17 @@
-import MaskToGameObject from '../../../../utils/mask/MaskToGameObject.js';
+import { SetMask, CleaerMask } from '../../../../utils/mask/MaskMethods.js';
 
 const Intersects = Phaser.Geom.Intersects.RectangleToRectangle;
 const Overlaps = Phaser.Geom.Rectangle.Overlaps;
 
 var MaskChildren = function ({
-    parent, mask, children,    
+    parent,
+    maskGameObject,
+    children,
+
     onVisible, onInvisible, scope,
 }) {
 
-    if (!mask) {
+    if (!maskGameObject) {
         return;
     }
 
@@ -19,7 +22,6 @@ var MaskChildren = function ({
     var hasAnyVisibleCallback = !!onVisible || !!onInvisible;
 
     var parentBounds = parent.getBounds();
-    var maskGameObject = MaskToGameObject(mask);
 
     var child, childBounds, visiblePointsNumber;
     var isChildVisible;
@@ -39,22 +41,22 @@ var MaskChildren = function ({
             visiblePointsNumber = ContainsPoints(parentBounds, childBounds);
             switch (visiblePointsNumber) {
                 case 4: // 4 points are all inside visible window, set visible                     
-                    ShowAll(parent, child, mask);
+                    ShowAll(parent, child, maskGameObject);
                     break;
                 case 0: // No point is inside visible window
                     // Parent intersects with child, or parent is inside child, set visible, and apply mask
                     if (Intersects(parentBounds, childBounds) || Overlaps(parentBounds, childBounds)) {
-                        ShowSome(parent, child, mask);
+                        ShowSome(parent, child, maskGameObject);
                     } else { // Set invisible
-                        ShowNone(parent, child, mask);
+                        ShowNone(parent, child, maskGameObject);
                     }
                     break;
                 default: // Part of points are inside visible window, set visible, and apply mask
-                    ShowSome(parent, child, mask);
+                    ShowSome(parent, child, maskGameObject);
                     break;
             }
         } else {
-            ShowSome(parent, child, mask);
+            ShowSome(parent, child, maskGameObject);
         }
 
         if (hasAnyVisibleCallback && (child.visible !== isChildVisible)) {
@@ -107,12 +109,9 @@ var ContainsPoints = function (rectA, rectB) {
     return result;
 };
 
-var ShowAll = function (parent, child, mask) {
+var ShowAll = function (parent, child, maskGameObject) {
     if (!child.hasOwnProperty('isRexContainerLite')) {
-        if (child.clearMask) {
-            child.clearMask();
-        }
-
+        CleaerMask(child);
         parent.setChildMaskVisible(child, true);
 
     } else {
@@ -124,12 +123,9 @@ var ShowAll = function (parent, child, mask) {
 
 }
 
-var ShowSome = function (parent, child, mask) {
+var ShowSome = function (parent, child, maskGameObject) {
     if (!child.hasOwnProperty('isRexContainerLite')) {
-        if (child.setMask) {
-            child.setMask(mask);
-        }
-
+        SetMask(child, maskGameObject);
         parent.setChildMaskVisible(child, true);
 
     } else {
@@ -141,12 +137,9 @@ var ShowSome = function (parent, child, mask) {
 
 }
 
-var ShowNone = function (parent, child, mask) {
+var ShowNone = function (parent, child, maskGameObject) {
     if (!child.hasOwnProperty('isRexContainerLite')) {
-        if (child.clearMask) {
-            child.clearMask();
-        }
-
+        CleaerMask(child);
         parent.setChildMaskVisible(child, false);
 
     } else {
@@ -155,7 +148,6 @@ var ShowNone = function (parent, child, mask) {
         child.syncChildrenEnable = true;
 
     }
-
 
 }
 

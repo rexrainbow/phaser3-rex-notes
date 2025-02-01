@@ -1,6 +1,6 @@
 import MaskChildren from './MaskChildren.js';
 import AddChildMask from './AddChildMask.js';
-import MaskToGameObject from '../../../../utils/mask/MaskToGameObject.js'
+import { SetMask } from '../../../../utils/mask/MaskMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -30,13 +30,13 @@ export default {
     },
 
     destroyChildrenMask() {
-        if (!this.childrenMask) {
+        if (!this.childrenMaskGameObject) {
             return this;
         }
 
         this.stopMaskUpdate();
-        this.childrenMask.destroy();
-        this.childrenMask = undefined;
+        this.childrenMaskGameObject.destroy();
+        this.childrenMaskGameObject = undefined;
 
         this.onMaskGameObjectVisible = null;
         this.onMaskGameObjectInvisible = null;
@@ -62,9 +62,7 @@ export default {
     },
 
     enableChildrenMask(maskPadding) {
-        var maskGameObject = AddChildMask.call(this, null, this, 0, maskPadding);
-        this.childrenMask = maskGameObject.createGeometryMask();
-        // this.childrenMask is a mask object, not a (Graphics) game object
+        this.childrenMaskGameObject = AddChildMask.call(this, null, this, 0, maskPadding);  // A Graphics game object
         return this;
     },
 
@@ -84,7 +82,7 @@ export default {
 
     maskChildren() {
         if (
-            (!this.childrenMask) ||                // No childrenMask
+            (!this.childrenMaskGameObject) ||      // No childrenMaskGameObject
             (!this.maskChildrenFlag) ||            // No maskChildrenFlag set
             (this.alpha === 0) || (!this.visible)  // Parent is not visible
         ) {
@@ -92,18 +90,18 @@ export default {
         }
 
         if (this.privateRenderLayer) {
-            this.privateRenderLayer.setMask(this.childrenMask);
+            SetMask(this.privateRenderLayer, this.childrenMaskGameObject);
 
         } else if (this.maskLayer) {
             // 1. Add parent and children into layer
             this.addToLayer(this.maskLayer);
             // 2. Mask this layer
-            this.maskLayer.setMask(this.childrenMask);
+            SetMask(this.maskLayer, this.childrenMaskGameObject);
 
         } else {
             MaskChildren({
                 parent: this,
-                mask: this.childrenMask,
+                maskGameObject: this.childrenMaskGameObject,
 
                 onVisible: this.onMaskGameObjectVisible,
                 onInvisible: this.onMaskGameObjectInvisible,
@@ -119,11 +117,11 @@ export default {
     },
 
     layoutChildrenMask() {
-        if (!this.childrenMask) {
+        if (!this.childrenMaskGameObject) {
             return this;
         }
 
-        var maskGameObject = MaskToGameObject(this.childrenMask);
+        var maskGameObject = this.childrenMaskGameObject;
         maskGameObject.setPosition().resize();
         this.resetChildPositionState(maskGameObject);
         return this;

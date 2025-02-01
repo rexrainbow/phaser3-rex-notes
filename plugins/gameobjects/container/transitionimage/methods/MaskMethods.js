@@ -1,4 +1,5 @@
 import DefaultMaskGraphics from '../../../../utils/mask/defaultmaskgraphics/DefaultMaskGraphics.js';
+import { SetMask, CleaerMask } from '../../../../utils/mask/MaskMethods.js';
 
 export default {
     setMaskGameObject(gameObject) {
@@ -33,15 +34,6 @@ export default {
         this.addLocal(gameObject);
         this.maskGameObject = gameObject;
 
-        if (!gameObject._maskObject) {
-            gameObject._maskObject = gameObject.createGeometryMask();
-            gameObject.once('destroy', function () {
-                gameObject._maskObject.destroy();
-                gameObject._maskObject = undefined;
-            })
-        }
-        this.childrenMask = gameObject._maskObject;
-
         return this;
     },
 
@@ -50,9 +42,8 @@ export default {
             destroyMaskGameObject = true;
         }
 
-        this.backImage.clearMask();
-        this.frontImage.clearMask();
-        this.childrenMask = undefined;
+        CleaerMask(this.backImage);
+        CleaerMask(this.frontImage);
         this.remove(this.maskGameObject, destroyMaskGameObject);
         this.maskGameObject = undefined;
         return this;
@@ -67,14 +58,14 @@ export default {
         }
 
         if (enable) {
-            // Use DefaultMaskGraphics if not given    
-            if (!this.childrenMask) {
+            // Use DefaultMaskGraphics if not given
+            if (!this.maskGameObject) {
                 this.setMaskGameObject(true);
             }
-            gameObject.setMask(this.childrenMask);
-            this.childrenMask.setInvertAlpha(invertAlpha);
+            SetMask(gameObject, this.maskGameObject, invertAlpha);
+
         } else {
-            gameObject.clearMask();
+            CleaerMask(gameObject);
         }
 
         return this;

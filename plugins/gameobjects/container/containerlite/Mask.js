@@ -1,3 +1,4 @@
+// canvas mask only
 export default {
     updateChildMask(child) {
         // Don't propagate null mask to clear children's mask

@@ -114,10 +114,6 @@ class TransitionImage extends Container {
             return;
         }
 
-        if (this.childrenMask) {
-            this.childrenMask.destroy();
-            this.childrenMask = undefined;
-        }
         this.backImage = undefined;
         this.frontImage = undefined;
         this.images.length = 0;

@@ -24,13 +24,15 @@ var SetMask = function (gameObject, maskGameObject, invert) {
             return;
         }
 
-        var maskObject = maskGameObject.__maskObject;
+        var maskObject = maskGameObject._maskObject;
         if (!maskObject) {
             // Only support GeometryMask
             maskObject = maskGameObject.createGeometryMask();
-            maskGameObject.__maskObject = maskObject;
+            maskGameObject._maskObject = maskObject;
+            // Destroy mask object when mask game object is destroyed
             maskGameObject.once('destroy', function () {
                 maskObject.destroy();
+                maskGameObject._maskObject = undefined;
             });
         }
         gameObject.setMask(maskObject);
@@ -43,7 +45,8 @@ var CleaerMask = function (gameObject) {
         // WEBGL mask
         var maskFilter = gameObject.mask;
         if (maskFilter) {
-            gameObject.filters.external.remove(maskFilter); // Also destroy mask controller
+            gameObject.filters.external.remove(maskFilter); 
+            // Also destroy mask controller, but maskGameObject is not destroyed
             gameObject.mask = null;
         }
 
