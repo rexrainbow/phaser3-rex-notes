@@ -18,48 +18,6 @@ class BatchHandlerTriangles extends BatchHandlerQuad {
         this.renderOptions.multiTexturing = true;
     }
 
-    static defaultConfig = {
-        name: 'rexBatchHandlerTriangle',
-        verticesPerInstance: 3,
-        indicesPerInstance: 3,
-        shaderName: 'REXTRI',
-        vertexSource: ShaderSourceVS,
-        fragmentSource: ShaderSourceFS,
-        shaderAdditions: [
-            MakeGetTexCoordOut(),
-            MakeGetTexRes(true),
-            MakeSmoothPixelArt(true),
-            MakeDefineTexCount(1),
-            MakeGetTexture(),
-            MakeApplyTint()
-        ],
-        vertexBufferLayout: {
-            usage: 'DYNAMIC_DRAW',
-            layout: [
-                {
-                    name: 'inPosition',
-                    size: 2
-                },
-                {
-                    name: 'inTexCoord',
-                    size: 2
-                },
-                {
-                    name: 'inTexDatum'
-                },
-                {
-                    name: 'inTintEffect'
-                },
-                {
-                    name: 'inTint',
-                    size: 4,
-                    type: 'UNSIGNED_BYTE',
-                    normalized: true
-                }
-            ]
-        }
-    }
-
     _generateElementIndices(instances) {
         // Independent Triangles
         var buffer = new ArrayBuffer(instances * 5 * 2);
@@ -188,5 +146,47 @@ class BatchHandlerTriangles extends BatchHandlerQuad {
         }
     }
 }
+
+BatchHandlerTriangles.defaultConfig = {
+    name: 'rexBatchHandlerTriangle',
+    verticesPerInstance: 3,
+    indicesPerInstance: 3,
+    shaderName: 'REXTRI',
+    vertexSource: ShaderSourceVS,
+    fragmentSource: ShaderSourceFS,
+    shaderAdditions: [
+        MakeGetTexCoordOut(),
+        MakeGetTexRes(true),
+        MakeSmoothPixelArt(true),
+        MakeDefineTexCount(1),
+        MakeGetTexture(),
+        MakeApplyTint()
+    ],
+    vertexBufferLayout: {
+        usage: 'DYNAMIC_DRAW',
+        layout: [
+            {
+                name: 'inPosition',
+                size: 2
+            },
+            {
+                name: 'inTexCoord',
+                size: 2
+            },
+            {
+                name: 'inTexDatum'
+            },
+            {
+                name: 'inTintEffect'
+            },
+            {
+                name: 'inTint',
+                size: 4,
+                type: 'UNSIGNED_BYTE',
+                normalized: true
+            }
+        ]
+    }
+};
 
 export default BatchHandlerTriangles;
