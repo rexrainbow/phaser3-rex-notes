@@ -87,6 +87,7 @@ All Game Objects and camera support filters. These are effects applied after the
     ```javascript
     camera.filters.internal.remove(controller);
     ```
+    - Also destroy this controller.
 - Properties
     ```javascript
     controller.amount = amount;
@@ -127,6 +128,7 @@ All Game Objects and camera support filters. These are effects applied after the
     ```javascript
     camera.filters.internal.remove(controller);
     ```
+    - Also destroy this controller.
 - Properties
     ```javascript
     controller.quality = quality;
@@ -165,6 +167,7 @@ All Game Objects and camera support filters. These are effects applied after the
     ```javascript
     camera.filters.internal.remove(controller);
     ```
+    - Also destroy this controller.
 - Properties
     ```javascript
     controller.radius = radius;
@@ -202,6 +205,7 @@ All Game Objects and camera support filters. These are effects applied after the
     ```javascript
     camera.filters.internal.remove(controller);
     ```
+    - Also destroy this controller.
 - Properties
     ```javascript
     controller.radius = radius;
@@ -238,6 +242,7 @@ All Game Objects and camera support filters. These are effects applied after the
     ```javascript
     camera.filters.internal.remove(controller);
     ```
+    - Also destroy this controller.
 - Methods
     - Brightness : Changes the brightness of this ColorMatrix by the given amount.
         ```javascript
@@ -400,6 +405,7 @@ All Game Objects and camera support filters. These are effects applied after the
     ```javascript
     camera.filters.internal.remove(controller);
     ```
+    - Also destroy this controller.
 - Properties
     ```javascript
     controller.x = x;
@@ -444,6 +450,7 @@ All Game Objects and camera support filters. These are effects applied after the
     ```javascript
     camera.filters.internal.remove(controller);
     ```
+    - Also destroy this controller.
 - Properties
     ```javascript
     controller.color = color;
@@ -478,6 +485,7 @@ All Game Objects and camera support filters. These are effects applied after the
     ```javascript
     camera.filters.internal.remove(controller);
     ```
+    - Also destroy this controller.
 - Properties
     ```javascript
     controller.amount = amount;
@@ -516,6 +524,7 @@ All Game Objects and camera support filters. These are effects applied after the
     ```javascript
     camera.filters.internal.remove(controller);
     ```
+    - Also destroy this controller.
 - Properties
     ```javascript
     controller.x = x;
