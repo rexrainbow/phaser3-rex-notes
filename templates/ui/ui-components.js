@@ -26,7 +26,7 @@ import CustomShapes from './customshapes/CustomShapes.js';
 import CustomProgress from './customprogress/CustomProgress.js';
 import AIOSpinner from './aiospinner/AIOSpinner.js';
 import TransitionImage from './transitionimage/TransitionImage.js';
-import TransitionImagePack from './transitionimagepack/TransitionImagePack.js';
+// import TransitionImagePack from './transitionimagepack/TransitionImagePack.js';
 import ImageBox from './imagebox/ImageBox.js';
 import ImageInputLabel from './imageinputlabel/ImageInputLabel.js';
 import FullWindowRectangle from './fullwindowrectangle/FullWindowRectangle.js';
@@ -182,7 +182,7 @@ export {
     CustomProgress,
     AIOSpinner,
     TransitionImage,
-    TransitionImagePack,
+    // TransitionImagePack,
     ImageBox,
     ImageInputLabel,
 

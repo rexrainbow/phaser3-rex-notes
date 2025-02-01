@@ -110,7 +110,7 @@ import TouchEventStopFactory from './toucheventstop/Factory';
 import TreesFactory from './trees/Factory';
 import TriangleFactory from './triangle/Factory';
 import TransitionImageFactory from './transitionimage/Factory';
-import TransitionImagePackFactory from './transitionimagepack/Factory';
+// import TransitionImagePackFactory from './transitionimagepack/Factory';
 import TweakerFactory from './tweaker/Factory';
 
 import { EaseMoveTo, EaseMoveFrom } from './easemove/EaseMove';
@@ -242,7 +242,7 @@ declare class Factories {
     trees: typeof TreesFactory;
     triangle: typeof TriangleFactory;
     transitionImage: typeof TransitionImageFactory;
-    transitionImagePack: typeof TransitionImagePackFactory;
+    // transitionImagePack: typeof TransitionImagePackFactory;
     tweaker: typeof TweakerFactory;
     twoRowsLabel: typeof TitleLabelFactory;
 }

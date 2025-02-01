@@ -23,7 +23,7 @@ import CustomShapes from './customshapes/CustomShapes';
 import CustomProgress from './customprogress/CustomProgress';
 import AIOSpinner from './aiospinner/AIOSpinner';
 import TransitionImage from './transitionimage/TransitionImage';
-import TransitionImagePack from './transitionimagepack/TransitionImagePack';
+// import TransitionImagePack from './transitionimagepack/TransitionImagePack';
 import ImageBox from './imagebox/ImageBox';
 import FullWindowRectangle from './fullwindowrectangle/FullWindowRectangle';
 import FullWindowZone from './fullwindowzone/FullWindowZone';
@@ -180,7 +180,7 @@ export {
     CustomProgress,
     AIOSpinner,
     TransitionImage,
-    TransitionImagePack,
+    // TransitionImagePack,
     ImageBox,
     NinePatch,
     NinePatch2,
