@@ -1,5 +1,5 @@
 import phaser from '../../../phaser/src/phaser.js';
-import { AddMask, RemoveMask } from '../../plugins/utils/mask/MaskMethods.js';
+import { SetMask, ClearMask } from '../../plugins/utils/mask/MaskMethods.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -20,10 +20,10 @@ class Demo extends Phaser.Scene {
 
         this.input
             .on('pointerdown', function () {
-                AddMask(image, maskGameObject);
+                SetMask(image, maskGameObject);
             })
             .on('pointerup', function () {
-                RemoveMask(image);
+                ClearMask(image);
             })
     }
 

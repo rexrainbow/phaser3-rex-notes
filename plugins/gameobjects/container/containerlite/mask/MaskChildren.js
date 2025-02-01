@@ -1,4 +1,4 @@
-import { SetMask, CleaerMask } from '../../../../utils/mask/MaskMethods.js';
+import { SetMask, ClearMask } from '../../../../utils/mask/MaskMethods.js';
 
 const Intersects = Phaser.Geom.Intersects.RectangleToRectangle;
 const Overlaps = Phaser.Geom.Rectangle.Overlaps;
@@ -111,7 +111,7 @@ var ContainsPoints = function (rectA, rectB) {
 
 var ShowAll = function (parent, child, maskGameObject) {
     if (!child.hasOwnProperty('isRexContainerLite')) {
-        CleaerMask(child);
+        ClearMask(child);
         parent.setChildMaskVisible(child, true);
 
     } else {
@@ -139,7 +139,7 @@ var ShowSome = function (parent, child, maskGameObject) {
 
 var ShowNone = function (parent, child, maskGameObject) {
     if (!child.hasOwnProperty('isRexContainerLite')) {
-        CleaerMask(child);
+        ClearMask(child);
         parent.setChildMaskVisible(child, false);
 
     } else {

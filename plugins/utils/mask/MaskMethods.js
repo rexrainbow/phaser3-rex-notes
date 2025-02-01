@@ -1,54 +1,91 @@
 import IsWebGLRenderMode from '../system/IsWebGLRenderMode.js';
 
+const MaskController = Phaser.Filters.Mask;
+
+var CreateMaskObject = function (gameObject, invert) {
+    // invert : WebGL only feature
+
+    // A gameObject can own a (WEBGL) MaskController, or a (CANVAS) GeometryMask
+    // Share this MaskController/GeometryMask for all mask target game object
+    var maskObject = gameObject._maskObject;
+    if (maskObject) {
+        return maskObject;
+    }
+
+    if (IsWebGLRenderMode(gameObject)) {
+        maskObject = new MaskController(gameObject.scene.cameras.main, gameObject, invert);
+
+    } else {
+        // CANVAS Only support GeometryMask
+        maskObject = gameObject.createGeometryMask();
+
+    }
+
+    gameObject._maskObject = maskObject;
+
+    // Destroy mask object when mask source game object is destroyed
+    gameObject.once('destroy', function () {
+        maskObject.destroy();
+        gameObject._maskObject = undefined;
+    });
+
+    return maskObject;
+}
+
 var SetMask = function (gameObject, maskGameObject, invert) {
+    var maskObject = CreateMaskObject(maskGameObject, invert);
+    // A (WEBGL) MaskController, or a (CANVAS) GeometryMask
+
+    if (gameObject.mask === maskObject) {
+        // The same mask object
+        return;
+    }
+
     if (IsWebGLRenderMode(gameObject)) {
         // WEBGL mask
-        var maskFilter = gameObject.mask;
-        if (maskFilter) {
-            maskFilter.setGameObject(maskGameObject);
-            maskFilter.invert = invert;
-        } else {
-            if (!gameObject.filters) {
-                if (!gameObject.enableFilters) {
-                    return;
-                }
-
-                gameObject.enableFilters();
+        if (!gameObject.filters) {
+            if (!gameObject.enableFilters) {
+                return;
             }
-            gameObject.mask = gameObject.filters.external.addMask(maskGameObject, invert);
+
+            gameObject.enableFilters();
         }
+
+        var filterList = gameObject.filters.external;
+        var list = filterList.list;
+
+        // Remove current mask object from external filter list
+        var index = list.indexOf(gameObject.mask);
+        list.splice(index, 1);
+
+        // Add new mask object to external filter list
+        list.push(maskObject);
+
+        // gameObject.filters.external.add(maskObject);
 
     } else {
         // CANVAS mask
         if (!gameObject.setMask) {
             return;
         }
-
-        var maskObject = maskGameObject._maskObject;
-        if (!maskObject) {
-            // Only support GeometryMask
-            maskObject = maskGameObject.createGeometryMask();
-            maskGameObject._maskObject = maskObject;
-            // Destroy mask object when mask game object is destroyed
-            maskGameObject.once('destroy', function () {
-                maskObject.destroy();
-                maskGameObject._maskObject = undefined;
-            });
-        }
-        gameObject.setMask(maskObject);
     }
 
+    gameObject.mask = maskObject;
 }
 
-var CleaerMask = function (gameObject) {
+var ClearMask = function (gameObject) {
+    if (!gameObject.mask) {
+        return;
+    }
+
     if (IsWebGLRenderMode(gameObject)) {
         // WEBGL mask
-        var maskFilter = gameObject.mask;
-        if (maskFilter) {
-            gameObject.filters.external.remove(maskFilter); 
-            // Also destroy mask controller, but maskGameObject is not destroyed
-            gameObject.mask = null;
-        }
+        var filterList = gameObject.filters.external;
+        var list = filterList.list;
+
+        // Remove current mask object from external filter list
+        var index = list.indexOf(gameObject.mask);
+        list.splice(index, 1);
 
     } else {
         // CANVAS mask
@@ -56,9 +93,9 @@ var CleaerMask = function (gameObject) {
             return;
         }
 
-        gameObject.clearMask();
     }
 
+    gameObject.mask = null;
 }
 
 var GetMaskGameObject = function (gameObject) {
@@ -78,6 +115,6 @@ var GetMaskGameObject = function (gameObject) {
 
 export {
     SetMask,
-    CleaerMask,
+    ClearMask,
     GetMaskGameObject,
 }

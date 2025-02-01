@@ -1,5 +1,5 @@
 import DefaultMaskGraphics from '../../../../utils/mask/defaultmaskgraphics/DefaultMaskGraphics.js';
-import { SetMask, CleaerMask } from '../../../../utils/mask/MaskMethods.js';
+import { SetMask, ClearMask } from '../../../../utils/mask/MaskMethods.js';
 
 export default {
     setMaskGameObject(gameObject) {
@@ -42,8 +42,8 @@ export default {
             destroyMaskGameObject = true;
         }
 
-        CleaerMask(this.backImage);
-        CleaerMask(this.frontImage);
+        ClearMask(this.backImage);
+        ClearMask(this.frontImage);
         this.remove(this.maskGameObject, destroyMaskGameObject);
         this.maskGameObject = undefined;
         return this;
@@ -65,7 +65,7 @@ export default {
             SetMask(gameObject, this.maskGameObject, invertAlpha);
 
         } else {
-            CleaerMask(gameObject);
+            ClearMask(gameObject);
         }
 
         return this;
