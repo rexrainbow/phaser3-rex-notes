@@ -55,8 +55,10 @@ var SetMask = function (gameObject, maskGameObject, invert) {
         var list = filterList.list;
 
         // Remove current mask object from external filter list
-        var index = list.indexOf(gameObject.mask);
-        list.splice(index, 1);
+        if (gameObject.mask) {
+            var index = list.indexOf(gameObject.mask);
+            list.splice(index, 1);
+        }
 
         // Add new mask object to external filter list
         list.push(maskObject);
@@ -114,6 +116,7 @@ var GetMaskGameObject = function (gameObject) {
 }
 
 export {
+    CreateMaskObject,
     SetMask,
     ClearMask,
     GetMaskGameObject,

@@ -2,7 +2,6 @@ import BaseSizer from '../../basesizer/BaseSizer.js';
 import Methods from './Methods.js';
 import SCROLLMODE from '../../utils/ScrollModeConst.js';
 import { GetDisplayWidth, GetDisplayHeight } from '../../../../plugins/utils/size/GetDisplaySize.js';
-import MaskToGameObject from '../../../../plugins/utils/mask/MaskToGameObject.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -25,7 +24,6 @@ class ScrollableBlock extends BaseSizer {
 
         this.type = 'rexScrollableBlock';
         this.child = undefined;
-        this.childrenMask = undefined;
         this._childOY = 0;
         this._childOX = 0;
         this.execeedTopState = false;
@@ -57,12 +55,7 @@ class ScrollableBlock extends BaseSizer {
         this.child = child;
 
         // Create mask of child object
-        var maskConfig = GetValue(config, 'mask');
-        this.setupChildrenMask(maskConfig);
-
-        if (this.childrenMask) {
-            this.maskGameObject = MaskToGameObject(this.childrenMask);
-        }
+        this.setupChildrenMask(GetValue(config, 'mask', undefined));
     }
 
     destroy(fromScene) {
