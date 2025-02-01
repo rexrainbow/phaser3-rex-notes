@@ -23,7 +23,7 @@ var RemoveCells = function (cellIdx, count) {
     for (var i = cellIdx, endIdx = cellIdx + count; i < endIdx; i++) {
         cell = this.getCell(i, false);
         if (cell) {
-            if (this.visibleCells.contains(cell)) {
+            if (this.visibleCells.has(cell)) {
                 HideCell.call(this, cell);
                 this.visibleCells.delete(cell);
             }

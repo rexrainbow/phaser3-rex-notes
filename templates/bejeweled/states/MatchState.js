@@ -5,7 +5,6 @@ import FallingAllChess from '../actions/FallingAllChess.js';
 import IsPromise from '../../../plugins/utils/object/IsPromise.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
-const SetStruct = Phaser.Structs.Set;
 
 class State extends BaseState {
     constructor(bejeweled, config) {
@@ -69,17 +68,17 @@ class State extends BaseState {
                 this.eliminatedChessArray = [];
                 break;
             case 1:
-                this.eliminatedChessArray = matchedLines[0].entries;
+                this.eliminatedChessArray = Array.from(matchedLines[0]);
                 break;
             default:
                 // Put all chess to a set
-                var newSet = new SetStruct();
+                var newSet = new Set();
                 for (var i = 0; i < matchedLinesCount; i++) {
-                    matchedLines[i].entries.forEach(function (value) {
-                        newSet.set(value);
+                    matchedLines[i].forEach(function (value) {
+                        newSet.add(value);
                     });
                 }
-                this.eliminatedChessArray = newSet.entries;
+                this.eliminatedChessArray = Array.from(newSet);
                 break;
         }
         this.next();

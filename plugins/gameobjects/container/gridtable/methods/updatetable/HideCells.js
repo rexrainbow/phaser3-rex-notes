@@ -1,11 +1,12 @@
 var HideCells = function () {
     var preList = this.preVisibleCells;
     var curList = this.visibleCells;
-    preList.iterate(function (cell) {
-        if (!curList.contains(cell)) {
-            this.hideCell(cell);
+    var self = this;
+    preList.forEach(function (cell) {
+        if (!curList.has(cell)) {
+            self.hideCell(cell);
         }
-    }, this);
+    });
 }
 
 export default HideCells;

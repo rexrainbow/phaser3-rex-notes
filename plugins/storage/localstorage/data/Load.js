@@ -3,7 +3,7 @@ var LoadDataKeys = function () {
     var keys = this.getItem('__keys__');
     if (keys) {
         for (var i = 0, cnt = keys.length; i < cnt; i++) {
-            this.dataKeys.set(keys[i]);
+            this.dataKeys.add(keys[i]);
         }
     }
     return this;
@@ -21,7 +21,7 @@ var Load = function (defaultData, reset) {
     this.reset();
     if (!reset) {
         // Load data from localstorage according to dataKeys
-        this.dataKeys.iterate(function (dataKey, index) {
+        this.dataKeys.forEach(function (dataKey, index) {
             this.set(dataKey, this.getItem(dataKey));
         }, this);
     }
@@ -35,7 +35,7 @@ var Load = function (defaultData, reset) {
             this.set(dataKey, value);
         }
 
-        this.setItem('__keys__', this.dataKeys.entries);
+        this.setItem('__keys__', Array.from(this.dataKeys));
     }
 
     return this;

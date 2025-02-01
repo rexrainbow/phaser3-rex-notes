@@ -1,8 +1,7 @@
-const SetStruct = Phaser.Structs.Set;
 class WaitEvents {
     constructor(completeCallback, scope) {
         this.setCompleteCallback(completeCallback, scope);
-        this.events = new SetStruct();
+        this.events = new Set();
     }
 
     shutdown() {
@@ -28,7 +27,7 @@ class WaitEvents {
         var callback = function () {
             self.remove(callback);
         }
-        this.events.set(callback);
+        this.events.add(callback);
         return callback;
     }
 

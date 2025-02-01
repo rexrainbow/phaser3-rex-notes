@@ -86,7 +86,7 @@ declare namespace Bejeweled {
         type MatchStartCallbackType = (board: Board, bejeweled: Bejeweled) => void;
 
         type MatchCallbackType = (
-            lines: Phaser.Structs.Set<Phaser.GameObjects.GameObject>[],
+            lines: Set<Phaser.GameObjects.GameObject>[],
             board: Board, bejeweled: Bejeweled
         ) => void;
 

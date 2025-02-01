@@ -10,9 +10,9 @@ var AddCallbacks = function (dataManager) {
                 return;
             }
             this.setItem(key, value);
-            if (!this.dataKeys.contains(key)) {
-                this.dataKeys.set(key);
-                this.setItem('__keys__', this.dataKeys.entries);
+            if (!this.dataKeys.has(key)) {
+                this.dataKeys.add(key);
+                this.setItem('__keys__', Array.from(this.dataKeys));
             }
         }, dataManager)
 
@@ -22,8 +22,8 @@ var AddCallbacks = function (dataManager) {
                 return;
             }
             this.setItem(key, value);
-            this.dataKeys.set(key);
-            this.setItem('__keys__', this.dataKeys.entries);
+            this.dataKeys.add(key);
+            this.setItem('__keys__', Array.from(this.dataKeys));
         }, dataManager)
 
         // Remove key
@@ -33,7 +33,7 @@ var AddCallbacks = function (dataManager) {
             }
             this.removeItem(key);
             this.dataKeys.delete(key);
-            this.setItem('__keys__', this.dataKeys.entries);
+            this.setItem('__keys__', Array.from(this.dataKeys));
         }, dataManager);
 
 }

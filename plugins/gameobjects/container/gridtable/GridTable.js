@@ -3,7 +3,6 @@ import Table from './table/Table.js';
 import Methods from './methods/Methods.js';
 
 const Group = Phaser.GameObjects.Group;
-const Set = Phaser.Structs.Set;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class GridTable extends ContainerLite {
