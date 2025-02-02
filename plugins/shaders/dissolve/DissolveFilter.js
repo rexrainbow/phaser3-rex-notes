@@ -9,7 +9,7 @@ class DissolveFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader 
     }
 
     setupTextures(controller, textures, drawingContext) {
-        textures[1] = controller.targetTexture;
+        textures[1] = controller.toFrame.glTexture;
     }
 
     // This method sets up the uniforms for the shader.
@@ -28,6 +28,7 @@ class DissolveFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader 
 
         programManager.setUniform('fromRatio', drawingContext.width / drawingContext.height);
         programManager.setUniform('toRatio', controller.toRatio);
+
         programManager.setUniform('uMainSampler2', 1);
 
     }

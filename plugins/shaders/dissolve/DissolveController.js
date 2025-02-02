@@ -20,14 +20,13 @@ class DissolveController extends Phaser.Filters.Controller {
         this.toEdgeWidth = 0.05;
 
         this.toFrame = null;
-        this.targetTexture = null;
         this.toRatio = 1;
 
         this.resetFromJSON(config);
     }
 
     destroy() {
-        this.targetTexture = null;
+        this.toFrame = null;
         super.destroy();
     }
 
@@ -102,7 +101,6 @@ class DissolveController extends Phaser.Filters.Controller {
         this.toRatio = phaserTexture.width / phaserTexture.height;
 
         this.toFrame = phaserTexture;
-        this.targetTexture = phaserTexture.glTexture;
 
         if (resizeMode !== undefined) {
             this.resizeMode = resizeMode;

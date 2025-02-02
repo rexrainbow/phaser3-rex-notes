@@ -38,13 +38,13 @@ vec4 getFromColor (vec2 uv) {
 vec4 getToColor (vec2 uv) {
   if (resizeMode == 2) {
     //  cover
-    return texture2D(uMainSampler2, 0.5 + (vec2(uv.x, 1.0 - uv.y) - 0.5) * vec2(min(fromRatio / toRatio, 1.0), min((toRatio / fromRatio), 1.0)));
+    return texture2D(uMainSampler2, 0.5 + (vec2(uv.x, uv.y) - 0.5) * vec2(min(fromRatio / toRatio, 1.0), min((toRatio / fromRatio), 1.0)));
   } else if (resizeMode == 1) {
     //  contain
-    return texture2D(uMainSampler2, 0.5 + (vec2(uv.x, 1.0 - uv.y) - 0.5) * vec2(max(fromRatio / toRatio, 1.0), max((toRatio / fromRatio), 1.0)));
+    return texture2D(uMainSampler2, 0.5 + (vec2(uv.x, uv.y) - 0.5) * vec2(max(fromRatio / toRatio, 1.0), max((toRatio / fromRatio), 1.0)));
   } else {
     //  stretch
-    return texture2D(uMainSampler2, vec2(uv.x, 1.0 - uv.y));
+    return texture2D(uMainSampler2, vec2(uv.x, uv.y));
   }
 }
 
