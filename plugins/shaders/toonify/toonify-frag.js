@@ -19,9 +19,7 @@ uniform vec2 texSize;
 
 // Effect parameters
 uniform float edgeThreshold; // 0.2;
-uniform float hStep;  // 60
-uniform float sStep;  // 0.15
-uniform float vStep;  // 0.33
+uniform vec3 hsvStep;
 uniform vec3 edgeColor; // (0, 0, 0);
 `
 + RGBToHSV + IsEdge + HSVToRGB +
@@ -29,6 +27,10 @@ uniform vec3 edgeColor; // (0, 0, 0);
 #pragma phaserTemplate(fragmentHeader)
 
 void main() {
+  float hStep = hsvStep.x;
+  float sStep = hsvStep.y;
+  float vStep = hsvStep.z;
+
   vec4 front = texture2D(uMainSampler, outTexCoord);  
   vec3 colorLevel;
   if ((hStep > 0.0) || (sStep > 0.0) || (vStep > 0.0)) {

@@ -17,12 +17,14 @@ varying vec2 outTexCoord;
 // Effect parameters
 uniform vec2 texSize;
 uniform vec2 center;
-uniform float radius;
-uniform float angle;
+uniform vec2 config;
 
 #pragma phaserTemplate(fragmentHeader)
 
 void main (void) {
+  float radius = config.x;
+  float angle = config.y;
+
   vec2 tc = outTexCoord * texSize;
   tc -= center;
   float dist = length(tc);

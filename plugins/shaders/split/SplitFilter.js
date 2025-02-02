@@ -16,10 +16,7 @@ class SplitFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
         programManager.setUniform('angle', controller.rotation);
         programManager.setUniform('texSize', [drawingContext.width, drawingContext.height]);
 
-        programManager.setUniform('spaceLeft', controller.spaceLeft);
-        programManager.setUniform('spaceRight', controller.spaceRight);
-        programManager.setUniform('spaceTop', controller.spaceTop);
-        programManager.setUniform('spaceBottom', controller.spaceBottom);
+        programManager.setUniform('spaceConfig', [controller.spaceLeft, controller.spaceRight, controller.spaceTop, controller.spaceBottom]);
 
         programManager.setUniform('shiftEnable', (controller.shiftEnable) ? 1 : 0);
     }

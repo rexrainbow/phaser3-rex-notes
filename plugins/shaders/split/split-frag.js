@@ -15,10 +15,7 @@ varying vec2 outTexCoord;
 // Effect parameters
 uniform vec2 texSize;
 uniform vec2 split;
-uniform float spaceLeft;
-uniform float spaceRight;
-uniform float spaceTop;
-uniform float spaceBottom;
+uniform vec4 spaceConfig;
 uniform float angle;
 uniform float shiftEnable;
 
@@ -34,6 +31,11 @@ vec2 rotate(vec2 uv, float angle) {
 #pragma phaserTemplate(fragmentHeader)
 
 void main (void) {
+  float spaceLeft = spaceConfig.x;
+  float spaceRight = spaceConfig.y;
+  float spaceTop = spaceConfig.z;
+  float spaceBottom = spaceConfig.z;
+
   vec2 tc = outTexCoord * texSize;  
   tc -= split;
   tc = rotate(tc, -angle);

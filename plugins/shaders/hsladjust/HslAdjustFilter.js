@@ -12,9 +12,7 @@ class HslAdjustFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader
     setupUniforms(controller, drawingContext) {
         const programManager = this.programManager;
 
-        programManager.setUniform('hueRotate', (controller.hueRotate) % 1);
-        programManager.setUniform('satAdjust', controller.satAdjust);
-        programManager.setUniform('lumAdjust', controller.lumAdjust);
+        programManager.setUniform('hsvAdjust', [(controller.hueRotate) % 1, controller.satAdjust, controller.lumAdjust]);
     }
 }
 
