@@ -11,9 +11,9 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var rect0 = this.add.rectangle(300, 300, 100, 100).setStrokeStyle(5, 0x4e342e)
+        var rect0 = this.add.rectangle(300, 300, 100, 100).setStrokeStyle(10, 0x4e342e)
 
-        var rect1 = this.add.rectangle(500, 300, 100, 100).setStrokeStyle(5, 0x4e342e)
+        var rect1 = this.add.rectangle(500, 300, 100, 100).setStrokeStyle(10, 0x4e342e)
 
         var maskGameObject = this.add.rectangle(400, 300, 800, 600, 0xffffff).setVisible(false)
 
