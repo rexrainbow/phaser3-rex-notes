@@ -2,6 +2,7 @@ import {
     Pixellate
 } from './Const.js';
 import Yoyo from './Yoyo.js';
+import GetFilterList from '../../../plugins/utils/renderer/filterpluginbase/GetFilterList.js';
 
 var AddPixellateMode = function (image) {
     image
@@ -10,8 +11,8 @@ var AddPixellateMode = function (image) {
 
             onStart: function (parent, currentImage, nextImage, t) {
                 parent.setChildVisible(nextImage, false);
-                currentImage.effect = currentImage.preFX.addPixelate(0);
-                nextImage.effect = nextImage.preFX.addPixelate(0);
+                currentImage.effect = GetFilterList(currentImage).addPixelate(0);
+                nextImage.effect = GetFilterList(nextImage).addPixelate(0)
             },
             onProgress: function (parent, currentImage, nextImage, t) {
                 if (t < 0.5) {
@@ -32,11 +33,11 @@ var AddPixellateMode = function (image) {
                 }
             },
             onComplete: function (parent, currentImage, nextImage, t) {
-                currentImage.preFX.remove(currentImage.effect);
+                GetFilterList(currentImage).remove(currentImage.effect);
                 delete currentImage.effect;
                 parent.setChildVisible(currentImage, true);
 
-                nextImage.preFX.remove(nextImage.effect);
+                GetFilterList(nextImage).remove(nextImage.effect);
                 delete nextImage.effect;
             },
         })

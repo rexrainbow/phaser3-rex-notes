@@ -107,9 +107,9 @@ class Rectangle extends BaseGeom {
         return this;
     }
 
-    webglRender(gameObject, drawingContext, submitter, calcMatrix, alpha, dx, dy) {
-        if (src.isFilled) {
-            var fillTintColor = Utils.getTintAppendFloatAlpha(src.fillColor, src.fillAlpha * alpha);
+    webglRender(drawingContext, submitter, calcMatrix, gameObject, alpha, dx, dy) {
+        if (this.isFilled) {
+            var fillTintColor = Utils.getTintAppendFloatAlpha(this.fillColor, this.fillAlpha * alpha);
 
             var FillRect = gameObject.customRenderNodes.FillRect || gameObject.defaultRenderNodes.FillRect;
 
@@ -117,8 +117,10 @@ class Rectangle extends BaseGeom {
                 drawingContext,
                 calcMatrix,
                 submitter,
-                -dx, -dy,
-                src.width, src.height,
+                -dx + this.x,
+                -dy + this.y,
+                this.width,
+                this.height,
                 fillTintColor,
                 fillTintColor,
                 fillTintColor,

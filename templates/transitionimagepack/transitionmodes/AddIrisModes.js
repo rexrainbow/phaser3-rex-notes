@@ -90,6 +90,7 @@ var AddIrisModes = function (image) {
                 nextImage.tint = 0xffffff;
             },
         })
+
 }
 
 export default AddIrisModes;

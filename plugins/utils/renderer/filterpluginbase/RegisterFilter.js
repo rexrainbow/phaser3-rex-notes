@@ -1,12 +1,13 @@
 import GetGame from '../../system/GetGame.js';
 
 var RegisterPostPipeline = function (game, FilterClass) {
+    var filterName = FilterClass.FilterName;
     var renderNodes = GetGame(game).renderer.renderNodes;
-    if (renderNodes.hasNode(FilterClass.FilterName)) {
+    if (renderNodes.hasNode(filterName)) {
         return;
     }
 
-    renderNodes.addNodeConstructor(FilterClass.FilterName, FilterClass);
+    renderNodes.addNodeConstructor(filterName, FilterClass);
 }
 
 export default RegisterPostPipeline;

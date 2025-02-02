@@ -1,5 +1,5 @@
-import SwirlFilter from './shaders/swirl/SwirlFilter.js';
-import SwirlController from './shaders/swirl/SwirlController.js';
+import SwirlFilter from './shaders/swirl/SwirlFilter';
+import SwirlController from './shaders/swirl/SwirlController';
 
 export {
     SwirlFilter,

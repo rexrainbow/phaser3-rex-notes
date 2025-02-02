@@ -21,7 +21,9 @@ const Modes = [
     AddFadeModes,
     AddIrisModes, AddPieModes, AddWipeModes,
     AddBlindsModes, AddSquaresModes, AddDiamondsMode, AddCirclesMode, AddCurtainMode,
-    AddPixellateMode, AddDissolveMode, AddRevealModes
+
+    AddPixellateMode, AddDissolveMode, AddRevealModes,
+
 ];
 
 export default Modes;

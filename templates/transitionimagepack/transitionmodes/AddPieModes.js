@@ -74,6 +74,7 @@ var AddPieModes = function (image) {
                     tintGray = Math.floor(255 * (1 - t));
                     parent.maskGameObject.setValue(1 - t);
                     currentImage.tint = (tintGray << 16) + (tintGray << 8) + tintGray;
+
                 } else {
                     if (currentImage.visible) {
                         parent.setChildVisible(currentImage, false);

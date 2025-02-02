@@ -1,26 +1,27 @@
 import {
     Dissolve
 } from './Const.js';
-import DissolvePostFxPipeline from '../../../plugins/dissolvepipeline.js';
-import RegisterPostPipeline from '../../../plugins/utils/renderer/postfxpipeline/RegisterPostPipeline.js';
-import AddPostFxPipelineInstance from '../../../plugins/utils/renderer/postfxpipeline/AddPostFxPipelineInstance.js';
-import RemovePostFxPipelineInstance from '../../../plugins/utils/renderer/postfxpipeline/RemovePostFxPipelineInstance.js';
+
+import { DissolveFilter, DissolveController } from '../../../plugins/dissolvefilter.js';
+import RegisterFilter from '../../../plugins/utils/renderer/filterpluginbase/RegisterFilter.js';
+import AddController from '../../../plugins/utils/renderer/filterpluginbase/AddController.js';
+import RemoveController from '../../../plugins/utils/renderer/filterpluginbase/RemoveController.js';
 
 var AddDissolveMode = function (image) {
-    RegisterPostPipeline(image.scene.game, 'rexDissolvePostFx', DissolvePostFxPipeline);
+    RegisterFilter(image.scene.game, DissolveFilter);
 
     image
         .addTransitionMode(Dissolve, {
             ease: 'Linear', dir: 'out', mask: false,
 
             onStart: function (parent, currentImage, nextImage, t) {
-                currentImage.effect = AddPostFxPipelineInstance(currentImage, DissolvePostFxPipeline);
+                currentImage.effect = AddController(currentImage, DissolveController, {});
             },
             onProgress: function (parent, currentImage, nextImage, t) {
                 currentImage.effect.setProgress(t);
             },
             onComplete: function (parent, currentImage, nextImage, t) {
-                RemovePostFxPipelineInstance(currentImage, DissolvePostFxPipeline);
+                RemoveController(currentImage, DissolveController);
                 delete currentImage.effect;
             },
         })

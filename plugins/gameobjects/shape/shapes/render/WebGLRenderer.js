@@ -20,7 +20,7 @@ var WebGLRenderer = function (renderer, src, drawingContext, parentMatrix) {
     for (var i = 0, cnt = shapes.length; i < cnt; i++) {
         shape = shapes[i];
         if (shape.visible) {
-            shape.webglRender(drawingContext, submitter, calcMatrix, this, alpha, dx, dy);
+            shape.webglRender(drawingContext, submitter, calcMatrix, src, alpha, dx, dy);
         }
     }
 };

@@ -9,6 +9,9 @@ var CreateMaskObject = function (gameObject, invert) {
     // Share this MaskController/GeometryMask for all mask target game object
     var maskObject = gameObject._maskObject;
     if (maskObject) {
+        if ((invert !== undefined) && (maskObject.invert !== undefined)) {
+            maskObject.invert = invert;
+        }
         return maskObject;
     }
 
@@ -54,16 +57,14 @@ var SetMask = function (gameObject, maskGameObject, invert) {
         var filterList = gameObject.filters.external;
         var list = filterList.list;
 
-        // Remove current mask object from external filter list
         if (gameObject.mask) {
+            // Replace current mask controller
             var index = list.indexOf(gameObject.mask);
-            list.splice(index, 1);
+            list[index] = maskGameObject;
+        } else {
+            // Append mask controller
+            list.push(maskObject);
         }
-
-        // Add new mask object to external filter list
-        list.push(maskObject);
-
-        // gameObject.filters.external.add(maskObject);
 
     } else {
         // CANVAS mask

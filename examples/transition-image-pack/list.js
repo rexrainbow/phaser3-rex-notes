@@ -1,5 +1,6 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
+import TransitionImagePackPlugin from '../../templates/transitionimagepack/transitionimagepack-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -14,7 +15,7 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var image = this.rexUI.add.transitionImagePack(400, 300, 'classroom')
+        var image = this.add.rexTransitionImagePack(400, 300, 'classroom')
             .setScale(0.85)
             .on('complete', function () {
                 console.log('complete')
@@ -220,6 +221,11 @@ var config = {
     },
     scene: Demo,
     plugins: {
+        global: [{
+            key: 'rexTransitionImagePack',
+            plugin: TransitionImagePackPlugin,
+            start: true
+        }],
         scene: [{
             key: 'rexUI',
             plugin: UIPlugin,

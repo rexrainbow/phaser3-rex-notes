@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import TransitionImagePackPlugin from '../../templates/transitionimagepack/transitionimagepack-plugin.js';
 
 class Demo extends Phaser.Scene {
@@ -22,8 +22,9 @@ class Demo extends Phaser.Scene {
             })
 
         var transitionModes = [
-            'pixellate', 'dissolve',
-            'revealLeft', 'revealRight', 'revealUp', 'revealDown',
+            'pixellate', 
+            'dissolve',
+            'revealLeft', 'revealRight', 'revealUp', 'revealDown',            
         ];
         var idx = 0;
         this.input.on('pointerdown', function () {

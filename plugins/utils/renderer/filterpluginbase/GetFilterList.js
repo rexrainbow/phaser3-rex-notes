@@ -4,7 +4,7 @@ var GetFilterList = function (gameObject, external) {
     }
 
     if (!gameObject.filters) {
-        gameObject.enableFilters().focusFilters()
+        gameObject.enableFilters().focusFilters();
     }
 
     var filterList = (!external) ? gameObject.filters.internal : gameObject.filters.external;

@@ -13,9 +13,7 @@ class ToonifyFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
         const programManager = this.programManager;
 
         programManager.setUniform('edgeThreshold', controller.edgeThreshold);
-        programManager.setUniform('hStep', controller.hueStep);
-        programManager.setUniform('sStep', controller.satStep);
-        programManager.setUniform('vStep', controller.valStep);
+        programManager.setUniform('hsvStep', [controller.hueStep, controller.satStep, controller.valStep]);
         programManager.setUniform('edgeColor', [controller._edgeColor.redGL, controller._edgeColor.greenGL, controller._edgeColor.blueGL]);
         programManager.setUniform('texSize', [drawingContext.width, drawingContext.height]);
     }

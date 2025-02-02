@@ -40,11 +40,13 @@ var AddZoomModes = function (image) {
             onProgress: function (parent, currentImage, nextImage, t) {
                 var scale;
                 if (t < 0.5) {
+                    // Scale down current image
                     scale = 1 - Yoyo(t);
                     parent.setChildLocalScale(currentImage, scale, scale);
                 } else {
                     if (currentImage.visible) {
                         parent.setChildVisible(currentImage, false);
+                        nextImage.tint = 0xffffff;
                     }
 
                     scale = 1 - Yoyo(t);
