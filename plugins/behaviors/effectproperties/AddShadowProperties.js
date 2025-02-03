@@ -1,4 +1,5 @@
 import HasProperty from '../../utils/object/HasProperty.js';
+import GetFilterList from '../../utils/renderer/filterpluginbase/GetFilterList.js';
 import AddClearEffectCallback from './AddClearEffectCallback.js';
 
 var AddShadowProperties = function (gameObject) {
@@ -7,7 +8,7 @@ var AddShadowProperties = function (gameObject) {
         return gameObject;
     }
 
-    var filterList = gameObject.filters.internal;
+    var filterList = GetFilterList(gameObject);
 
     var shadowColor,
         shadowX = 0,

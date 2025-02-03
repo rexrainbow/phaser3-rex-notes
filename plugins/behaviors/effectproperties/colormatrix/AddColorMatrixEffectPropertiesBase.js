@@ -1,4 +1,5 @@
 import HasProperty from '../../../utils/object/HasProperty.js';
+import GetFilterList from '../../../utils/renderer/filterpluginbase/GetFilterList.js';
 import AddClearEffectCallback from '../AddClearEffectCallback.js';
 
 var AddColorMatrixEffectPropertiesBase = function (gameObject, effectName, inputMode) {
@@ -7,7 +8,7 @@ var AddColorMatrixEffectPropertiesBase = function (gameObject, effectName, input
         return gameObject;
     }
 
-    var filterList = gameObject.filters.internal;
+    var filterList = GetFilterList(gameObject);
 
     var EffectInstancePropertyName = `_${effectName}Effect`;
 
@@ -33,7 +34,7 @@ var AddColorMatrixEffectPropertiesBase = function (gameObject, effectName, input
                     gameObject[EffectInstancePropertyName] = filterList.addColorMatrix();
                 }
                 var effectInstance = gameObject[EffectInstancePropertyName];
-                effectInstance[effectName]((inputMode === 1) ? value : undefined);
+                effectInstance.colorMatrix[effectName]((inputMode === 1) ? value : undefined);
             }
 
         },

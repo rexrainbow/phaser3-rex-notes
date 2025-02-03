@@ -1,4 +1,5 @@
 import HasProperty from '../../utils/object/HasProperty.js';
+import GetFilterList from '../../utils/renderer/filterpluginbase/GetFilterList.js';
 import AddClearEffectCallback from './AddClearEffectCallback.js';
 
 var AddGlowProperties = function (gameObject) {
@@ -7,7 +8,7 @@ var AddGlowProperties = function (gameObject) {
         return gameObject;
     }
 
-    var filterList = gameObject.filters.internal;
+    var filterList = GetFilterList(gameObject);
 
     var glowColor,
         glowOuterStrength = 4,

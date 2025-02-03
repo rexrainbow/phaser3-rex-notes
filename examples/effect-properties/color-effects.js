@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import EffectPropertiesPlugin from '../../plugins/effectproperties-plugin.js';
 import FSMPlugin from '../../plugins/fsm-plugin.js';
 
