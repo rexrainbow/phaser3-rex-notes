@@ -29,20 +29,28 @@ class Demo extends Phaser.Scene {
         }
 
         var maskGameObject = this.add.circle(400, 300, 50, 0xff0000).setVisible(false)
-        var maskFilter = new Phaser.Filters.Mask(this.cameras.main, maskGameObject, true);
 
+        var maskFilters = [];
         gameObjecs.forEach(function (gameObject) {
-            gameObject.enableFilters()
-                .filters.external.add(maskFilter)
+            var maskFilter = gameObject.enableFilters()
+                .filters.external.addMask(maskGameObject, true)
+            maskFilters.push(maskFilter);
         })
 
-        maskFilter.setActive(false)
+        maskFilters.forEach(function (maskFilter) {
+            maskFilter.setActive(false)
+        })
+
         this.input
             .on('pointerdown', function () {
-                maskFilter.setActive(true)
+                maskFilters.forEach(function (maskFilter) {
+                    maskFilter.setActive(true)
+                })
             })
             .on('pointerup', function () {
-                maskFilter.setActive(false)
+                maskFilters.forEach(function (maskFilter) {
+                    maskFilter.setActive(false)
+                })
             })
             .on('pointermove', function (pointer) {
                 maskGameObject.setPosition(pointer.x, pointer.y);
