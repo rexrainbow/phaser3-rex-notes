@@ -1,5 +1,5 @@
 import phaser from '../../../phaser/src/phaser.js';
-import ColorReplaceFilterPlugin from '../../plugins/colorreplacefilter-plugin'
+import ColorReplaceFilterPlugin from '../../plugins/colorreplacefilter-plugin.js'
 import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 
 class Demo extends Phaser.Scene {

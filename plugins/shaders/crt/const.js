@@ -1,1 +1,1 @@
-export const FilterName = 'rexCrt';
+export const FilterName = 'rexFilterCrt';

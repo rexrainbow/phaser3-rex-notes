@@ -1,5 +1,5 @@
-import phaser from 'phaser/src/phaser.js';
-import CrossStitchingPipelinePlugin from '../../plugins/crossstitchingpipeline-plugin.js'
+import phaser from '../../../phaser/src/phaser.js';
+import CrossStitchingFilterPlugin from '../../plugins/crossstitchingfilter-plugin.js'
 import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 
 class Demo extends Phaser.Scene {
@@ -14,16 +14,16 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var postFxPlugin = this.plugins.get('rexCrossStitchingPipelinePlugin');
         var gameObject = this.add.image(400, 300, 'classroom');
-        var postFxPipeline = postFxPlugin.add(gameObject, {
+
+        var controller = this.plugins.get('rexCrossStitchingFilterPlugin').add(gameObject, {
             stitchingWidth: 6,
             stitchingHeight: 6,
             brightness: 0
         });
 
         var gui = new Dat.GUI();
-        gui.add(postFxPipeline, 'brightness', 0, 1);
+        gui.add(controller, 'brightness', 0, 1);
     }
 
     update() {
@@ -42,8 +42,8 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-            key: 'rexCrossStitchingPipelinePlugin',
-            plugin: CrossStitchingPipelinePlugin,
+            key: 'rexCrossStitchingFilterPlugin',
+            plugin: CrossStitchingFilterPlugin,
             start: true
         }]
     }

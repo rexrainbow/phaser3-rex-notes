@@ -1,1 +1,1 @@
-export const FilterName = 'rexOutline';
+export const FilterName = 'rexFilterOutline';

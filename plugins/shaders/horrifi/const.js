@@ -1,1 +1,1 @@
-export const FilterName = 'rexHorrifi';
+export const FilterName = 'rexFilterHorrifi';

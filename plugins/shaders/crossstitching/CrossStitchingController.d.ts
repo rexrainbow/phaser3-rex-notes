@@ -1,7 +1,7 @@
 // import * as Phaser from 'phaser';
-export default CrossStitchingPostFxPipeline;
+export default CrossStitchingController;
 
-declare namespace CrossStitchingPostFxPipeline {
+declare namespace CrossStitchingController {
     interface IConfig {
         stitchingWidth?: number,
         stitchingHeight?: number,
@@ -9,8 +9,13 @@ declare namespace CrossStitchingPostFxPipeline {
     }
 }
 
-declare class CrossStitchingPostFxPipeline extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
-    resetFromJSON(o?: CrossStitchingPostFxPipeline.IConfig): this;
+declare class CrossStitchingController extends Phaser.Filters.Controller {
+    constructor(
+        camera: Phaser.Cameras.Scene2D.BaseCamera,
+        config?: CrossStitchingController.IConfig
+    );
+
+    resetFromJSON(o?: CrossStitchingController.IConfig): this;
 
     setStitchingWidth(value: number): this;
     stitchingWidth: number;

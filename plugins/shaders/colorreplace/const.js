@@ -1,1 +1,1 @@
-export const FilterName = 'rexColorReplace';
+export const FilterName = 'rexFilterColorReplace';
