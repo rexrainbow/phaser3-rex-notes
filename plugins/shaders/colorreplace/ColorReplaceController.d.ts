@@ -1,8 +1,8 @@
 // import * as Phaser from 'phaser';
 
-export default ColorReplacePostFxPipeline;
+export default ColorReplaceController;
 
-declare namespace ColorReplacePostFxPipeline {
+declare namespace ColorReplaceController {
     interface IConfig {
         originalColor?: number,
         newColor?: number,
@@ -10,8 +10,13 @@ declare namespace ColorReplacePostFxPipeline {
     }
 }
 
-declare class ColorReplacePostFxPipeline extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
-    resetFromJSON(o?: ColorReplacePostFxPipeline.IConfig): this;
+declare class ColorReplaceController extends Phaser.Filters.Controller {
+    constructor(
+        camera: Phaser.Cameras.Scene2D.BaseCamera,
+        config?: ColorReplaceController.IConfig
+    );
+
+    resetFromJSON(o?: ColorReplaceController.IConfig): this;
 
     setEpsilon(value: number): this;
     epsilon: number;

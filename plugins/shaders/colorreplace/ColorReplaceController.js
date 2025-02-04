@@ -1,22 +1,20 @@
-import FragSrc from './colorreplace-frag.js';
+import { FilterName } from './const.js';
 
-const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IntegerToRGB = Phaser.Display.Color.IntegerToRGB;
 const Color = Phaser.Display.Color;
 
-class ColorReplacePostFxPipeline extends PostFXPipeline {
-    constructor(game) {
-        super({
-            name: 'rexColorReplacePostFx',
-            game: game,
-            renderTarget: true,
-            fragShader: FragSrc
-        });
+class ColorReplaceController extends Phaser.Filters.Controller {
+    static FilterName = FilterName;
+
+    constructor(camera, config) {
+        super(camera, FilterName);
 
         this.epsilon = 0.4;
         this._originalColor = new Color();
         this._newColor = new Color();
+
+        this.resetFromJSON(config);
     }
 
     resetFromJSON(o) {
@@ -24,12 +22,6 @@ class ColorReplacePostFxPipeline extends PostFXPipeline {
         this.setOriginalColor(GetValue(o, 'originalColor', 0xff0000));
         this.setNewColor(GetValue(o, 'newColor', 0x000000));
         return this;
-    }
-
-    onPreRender() {
-        this.set1f('epsilon', this.epsilon);
-        this.set3f('originalColor', this._originalColor.redGL, this._originalColor.greenGL, this._originalColor.blueGL);
-        this.set3f('newColor', this._newColor.redGL, this._newColor.greenGL, this._newColor.blueGL);
     }
 
     setEpsilon(value) {
@@ -70,4 +62,4 @@ class ColorReplacePostFxPipeline extends PostFXPipeline {
     }
 }
 
-export default ColorReplacePostFxPipeline;
+export default ColorReplaceController;

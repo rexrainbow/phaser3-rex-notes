@@ -1,4 +1,6 @@
 const frag = `\
+#pragma phaserTemplate(shaderName)
+
 #ifdef GL_FRAGMENT_PRECISION_HIGH
 #define highmedp highp
 #else
@@ -14,6 +16,8 @@ varying vec2 outTexCoord;
 uniform float epsilon;
 uniform vec3 originalColor;
 uniform vec3 newColor;
+
+#pragma phaserTemplate(fragmentHeader)
 
 void main (void) {
   vec4 currentColor = texture2D(uMainSampler, outTexCoord);
