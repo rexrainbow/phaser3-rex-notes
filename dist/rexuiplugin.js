@@ -77488,10 +77488,17 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             onCloseCallback = GetValue$1(config, 'onClose', undefined);
         }
 
+        var onCreateInputTextCallback = GetValue$1(config, 'onCreate', undefined);
         var onOpenCallback = GetValue$1(config, 'onOpen', undefined);
         var customOnTextChanged = GetValue$1(config, 'onTextChanged', undefined);
 
-        this.inputText = CreateInputText(this.parent, config)
+        this.inputText = CreateInputText(this.parent, config);
+
+        if (onCreateInputTextCallback) {
+            onCreateInputTextCallback(this.parent, this.inputText);
+        }
+
+        this.inputText
             .on('textchange', function (inputText) {
                 var text = inputText.text;
                 if (customOnTextChanged) { // Custom on-text-changed callback
@@ -77501,6 +77508,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 }
             }, this)
             .setFocus();
+
         this.parent.setVisible(false); // Set parent text invisible
 
         // Attach close event
@@ -77514,9 +77522,9 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
             // Open editor completly, invoke onOpenCallback
             if (onOpenCallback) {
-                onOpenCallback(this.parent);
+                onOpenCallback(this.parent, this.inputText);
             }
-            this.emit('open', this.parent);
+            this.emit('open', this.parent, this.inputText);
 
         }, this);
 

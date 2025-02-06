@@ -10276,11 +10276,14 @@
 <span class="w">    </span><span class="c1">// enterClose: true,</span>
 <span class="w">    </span><span class="c1">// selectAll: false,</span>
 
+<span class="w">    </span><span class="c1">// onCreate: undefined,</span>
 <span class="w">    </span><span class="c1">// onOpen: undefined,</span>
 <span class="w">    </span><span class="c1">// onTextChanged: undefined,</span>
 <span class="w">    </span><span class="c1">// onClose: undefined,</span>
 
 <span class="w">    </span><span class="c1">// text: &#39;&#39;,</span>
+
+<span class="w">    </span><span class="c1">// other_style: &#39;...&#39;</span>
 <span class="p">});</span>
 <span class="c1">// var editor = scene.plugins.get(&#39;rexTextEdit&#39;).edit(textObject, config, onClose);</span>
 </code></pre></div>
@@ -10293,10 +10296,22 @@
 <li><code>'number'</code></li>
 </ul>
 </li>
-<li><code>config.onOpen</code> : Callback invoked when input text is created.
-    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">textObject</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<li><code>config.onCreate</code> : Callback invoked when input text is created, before focusing.
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">textObject</span><span class="p">,</span><span class="w"> </span><span class="nx">inputText</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="p">}</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li><code>textObject</code> : Target text object.</li>
+<li><code>inputText</code> : <a href="../inputtext/">input text object</a> for editor.</li>
+</ul>
+</li>
+<li><code>config.onOpen</code> : Callback invoked when <a href="../inputtext/">input text object</a> is created and focused.
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">textObject</span><span class="p">,</span><span class="w"> </span><span class="nx">inputText</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li><code>textObject</code> : Target text object.</li>
+<li><code>inputText</code> : <a href="../inputtext/">input text object</a> for editor.</li>
+</ul>
+</li>
 <li><code>config.onTextChanged</code> : Callback invoked when input text changed.
     <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">textObject</span><span class="p">,</span><span class="w"> </span><span class="nx">text</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">textObject</span><span class="p">.</span><span class="nx">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">text</span><span class="p">;</span>
