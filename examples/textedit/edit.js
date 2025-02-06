@@ -18,15 +18,15 @@ class Demo extends Phaser.Scene {
             fixedWidth: 200,
             fixedHeight: 80,
             backgroundColor: '#333333',
-            valign: 'center'
+            valign: 'center',
         })
             .setOrigin(0.5)
             .setInteractive()
             .on('pointerdown', function () {
                 var config = {
                     inputType: 'textarea',  // 'text'
-                    onOpen: function (textObject, inputText) {                        
-                        console.log('Open text editor', inputText.node.style);                        
+                    onOpen: function (textObject, inputText) {
+                        console.log('Open text editor', inputText.node.style);
                     },
                     onTextChanged: function (textObject, text) {
                         textObject.text = text;

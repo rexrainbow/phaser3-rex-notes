@@ -163,6 +163,8 @@ var editor = scene.plugins.get('rexTextEdit').edit(textObject, {
     // onClose: undefined,
 
     // text: '',
+
+    // other_style: '...'
 });
 // var editor = scene.plugins.get('rexTextEdit').edit(textObject, config, onClose);
 ```
