@@ -28,10 +28,17 @@ var Open = function (config, onCloseCallback) {
         onCloseCallback = GetValue(config, 'onClose', undefined);
     }
 
+    var onCreateInputTextCallback = GetValue(config, 'onCreate', undefined);
     var onOpenCallback = GetValue(config, 'onOpen', undefined);
     var customOnTextChanged = GetValue(config, 'onTextChanged', undefined);
 
     this.inputText = CreateInputTextFromText(this.parent, config)
+
+    if (onCreateInputTextCallback) {
+        onCreateInputTextCallback(this.parent, this.inputText);
+    }
+
+    this.inputText
         .on('textchange', function (inputText) {
             var text = inputText.text;
             if (customOnTextChanged) { // Custom on-text-changed callback
@@ -41,6 +48,7 @@ var Open = function (config, onCloseCallback) {
             }
         }, this)
         .setFocus();
+
     this.parent.setVisible(false); // Set parent text invisible
 
     // Attach close event
