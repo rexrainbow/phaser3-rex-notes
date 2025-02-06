@@ -54,9 +54,9 @@ var Open = function (config, onCloseCallback) {
 
         // Open editor completly, invoke onOpenCallback
         if (onOpenCallback) {
-            onOpenCallback(this.parent);
+            onOpenCallback(this.parent, this.inputText);
         }
-        this.emit('open', this.parent);
+        this.emit('open', this.parent, this.inputText);
 
     }, this);
 

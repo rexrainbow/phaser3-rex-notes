@@ -25,8 +25,8 @@ class Demo extends Phaser.Scene {
             .on('pointerdown', function () {
                 var config = {
                     inputType: 'textarea',  // 'text'
-                    onOpen: function (textObject) {
-                        console.log('Open text editor');
+                    onOpen: function (textObject, inputText) {                        
+                        console.log('Open text editor', inputText.node.style);                        
                     },
                     onTextChanged: function (textObject, text) {
                         textObject.text = text;

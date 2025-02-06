@@ -175,9 +175,11 @@ var editor = scene.plugins.get('rexTextEdit').edit(textObject, {
         - `'number'`
     - `config.onOpen` : Callback invoked when input text is created.
         ```javascript
-        function (textObject) {
+        function (textObject, inputText) {
         }
         ```
+        - `textObject` : Target text object.
+        - `inputText` : [input text object](inputtext.md) for editor.
     - `config.onTextChanged` : Callback invoked when input text changed.
         ```javascript
         function (textObject, text) {
