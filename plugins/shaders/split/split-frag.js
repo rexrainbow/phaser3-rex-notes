@@ -34,7 +34,7 @@ void main (void) {
   float spaceLeft = spaceConfig.x;
   float spaceRight = spaceConfig.y;
   float spaceTop = spaceConfig.z;
-  float spaceBottom = spaceConfig.z;
+  float spaceBottom = spaceConfig.w;
 
   vec2 tc = outTexCoord * texSize;  
   tc -= split;

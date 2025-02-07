@@ -12,10 +12,8 @@ class ShockwaveFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader
     setupUniforms(controller, drawingContext) {
         const programManager = this.programManager;
 
-        programManager.setUniform('waveRadius', controller.waveRadius);
-        programManager.setUniform('waveHalfWidth', controller.waveWidth / 2);
-        programManager.setUniform('powBaseScale', controller.powBaseScale);
-        programManager.setUniform('powExponent', controller.powExponent);
+        programManager.setUniform('waveConfig', [controller.waveRadius, controller.waveWidth / 2]);
+        programManager.setUniform('powConfig', [controller.powBaseScale, controller.powExponent]);
         programManager.setUniform('center', [controller.centerX, controller.centerY]);
         programManager.setUniform('texSize', [drawingContext.width, drawingContext.height]);
     }

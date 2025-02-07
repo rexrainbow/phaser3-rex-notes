@@ -17,14 +17,17 @@ varying vec2 outTexCoord;
 // Effect parameters
 uniform vec2 texSize;
 uniform vec2 center;
-uniform float waveRadius;
-uniform float waveHalfWidth; // 10.0
-uniform float powBaseScale; // 0.8
-uniform float powExponent; // 0.1
+uniform vec2 waveConfig;
+uniform vec2 powConfig;
 
 #pragma phaserTemplate(fragmentHeader)
 
 void main (void) {
+  float waveRadius = waveConfig.x;
+  float waveHalfWidth = waveConfig.y;
+  float powBaseScale = powConfig.x;
+  float powExponent = powConfig.y;
+
   if (waveHalfWidth > 0.0) {
     vec2 tc = outTexCoord * texSize;
     tc -= center;
