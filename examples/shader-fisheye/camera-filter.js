@@ -1,5 +1,5 @@
-import phaser from 'phaser/src/phaser.js';
-import FishEyePipelinePlugin from '../../plugins/fisheyepipeline-plugin'
+import phaser from '../../../phaser/src/phaser.js';
+import FishEyeFilterPlugin from '../../plugins/fisheyefilter-plugin'
 import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 
 class Demo extends Phaser.Scene {
@@ -16,22 +16,22 @@ class Demo extends Phaser.Scene {
     create() {
         var gameObject = this.add.image(400, 300, 'classroom');
 
-        var postFxPlugin = this.plugins.get('rexFishEyePipelinePlugin');
-        var postFxPipeline = postFxPlugin.add(this.cameras.main, {
+        var camera = this.cameras.main;
+        var controller = this.plugins.get('rexFishEyeFilterPlugin').add(camera, {
             radius: 300,
-            mode:'asin'
+            mode: 'asin'
         });
 
         this.input.on('pointerdown', function (pointer) {
-            postFxPipeline.setCenter(pointer.x, pointer.y);
+            controller.setCenter(pointer.x, pointer.y);
         })
 
         var gui = new Dat.GUI();
-        gui.add(postFxPipeline, 'centerX', 0, 800);
-        gui.add(postFxPipeline, 'centerY', 0, 600);
-        gui.add(postFxPipeline, 'radius', 0, 800);
-        gui.add(postFxPipeline, 'intensity', 0, 1);
-        gui.add(postFxPipeline, 'fishEyeMode', 0, 1, 1);
+        gui.add(controller, 'centerX', 0, 800);
+        gui.add(controller, 'centerY', 0, 600);
+        gui.add(controller, 'radius', 0, 800);
+        gui.add(controller, 'intensity', 0, 1);
+        gui.add(controller, 'fishEyeMode', 0, 1, 1);
     }
 
     update() {
@@ -50,8 +50,8 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-            key: 'rexFishEyePipelinePlugin',
-            plugin: FishEyePipelinePlugin,
+            key: 'rexFishEyeFilterPlugin',
+            plugin: FishEyeFilterPlugin,
             start: true
         }]
     }

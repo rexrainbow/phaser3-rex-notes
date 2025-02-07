@@ -1,6 +1,6 @@
-export default FishEyePostFxPipeline;
+export default FishEyeController;
 
-declare namespace FishEyePostFxPipeline {
+declare namespace FishEyeController {
     interface IConfig {
         mode?: 0 | 1 | 'asin' | 'sin',
         center?: {
@@ -12,8 +12,13 @@ declare namespace FishEyePostFxPipeline {
     }
 }
 
-declare class FishEyePostFxPipeline extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
-    resetFromJSON(o?: FishEyePostFxPipeline.IConfig): this;
+declare class FishEyeController extends Phaser.Filters.Controller {
+    constructor(
+        camera: Phaser.Cameras.Scene2D.BaseCamera,
+        config?: FishEyeController.IConfig
+    );
+
+    resetFromJSON(o?: FishEyeController.IConfig): this;
 
     setFishEyeMode(mode: number | string): this;
     fishEyeMode: number;
