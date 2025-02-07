@@ -274,6 +274,7 @@
         readOnly: ['readOnly', false],
         spellCheck: ['spellcheck', false],
         autoComplete: ['autocomplete', 'off'],
+        autoCapitalize: ['autocapitalize', 'off']
     };
 
     const StyleProperties = {
@@ -419,6 +420,8 @@
                     continue;
                 } else if (key in elementStyle) {
                     style[key] = config[key];
+                } else if (key in element) {
+                    element[key] = config[key];
                 }
             }
             style['box-sizing'] = 'border-box';
