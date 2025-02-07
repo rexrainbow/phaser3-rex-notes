@@ -20,6 +20,7 @@ declare namespace InputText {
         readOnly?: boolean,
         spellCheck?: boolean,
         autoComplete?: string,
+        autoCapitalize?: string,
 
         // Style properties
         align?: string,
