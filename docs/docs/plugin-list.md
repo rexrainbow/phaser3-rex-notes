@@ -149,17 +149,10 @@
 140. [Shader/Cross-stitching](shader-crossstitching.md): Cross-stitching post processing filter.
 140. [Shader/CRT](shader-crt.md): CRT post processing filter.
 141. [Shader/Dissolve](shader-dissolve.md): Dissolve transition post processing filter.
-142. [Shader/Drop-shadow](shader-dropshadow.md): Drop-shadow post processing filter.
 143. [Shader/Fish-eye](shader-fisheye.md): Fish-eye post processing filter.
-144. [Shader/Glow-filter](shader-glowfilter.md): Glow post processing filter.
-145. [Shader/Glow-filter](shader-glowfilter2.md): Glow post processing filter, ported from pixi.
-146. [Shader/Gray-scale](shader-grayscale.md): Gray scale post processing filter.
 147. [Shader/Horri-fi](shader-horrifi.md): 6-in-1 post processing filter.
 148. [Shader/Hsl-adjust](shader-hsladjust.md): Adjust color in HSL domain, post processing filter.
-149. [Shader/Inverse](shader-inverse.md): Inverse color post processing filter.
-150. [Shader/Kawaseblur](shader-kawaseblur.md): Kawase-blur post processing filter.
 151. [Shader/Outline](shader-outline.md): Outline post processing filter, ported from pixi.
-152. [Shader/Pixelation](shader-pixelation.md): Pixelation post processing filter.
 153. [Shader/Shockwave](shader-shockwave.md): Shockwave post processing filter.
 154. [Shader/Split](shader-split.md): Split image into 4 parts.
 155. [Shader/Swirl](shader-swirl.md): Swirl post processing filter.
