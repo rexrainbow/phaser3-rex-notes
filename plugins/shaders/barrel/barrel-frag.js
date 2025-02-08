@@ -1,4 +1,6 @@
 const frag = `\
+#pragma phaserTemplate(shaderName)
+
 #ifdef GL_FRAGMENT_PRECISION_HIGH
 #define highmedp highp
 #else
@@ -11,14 +13,17 @@ uniform sampler2D uMainSampler;
 varying vec2 outTexCoord;
 
 // Effect parameters
-uniform float shrinkMode;
+uniform vec4 config;
 uniform vec2 texSize;
 uniform vec2 center;
-uniform float radius;
-uniform float power;
-uniform float intensity;
+
+#pragma phaserTemplate(fragmentHeader)
 
 void main (void) {
+  float shrinkMode = config.x;
+  float radius = config.y;
+  float power = config.z;
+  float intensity = config.w;
   vec2 tc = outTexCoord * texSize;  
   tc -= center;
   float dist = length(tc) / radius;

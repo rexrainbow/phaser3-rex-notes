@@ -16,7 +16,8 @@ class Demo extends Phaser.Scene {
     create() {
         var gameObject = this.add.image(400, 300, 'classroom');
 
-        var controller = this.plugins.get('rexCrtFilter').add(gameObject, {
+        var camera = this.cameras.main;
+        var controller = this.plugins.get('rexCrtFilter').add(camera, {
             warpX: 0.75,
             warpY: 0.75,
             scanLineStrength: 0.2,

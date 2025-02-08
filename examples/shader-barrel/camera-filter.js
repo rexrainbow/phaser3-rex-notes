@@ -1,5 +1,5 @@
-import phaser from 'phaser/src/phaser.js';
-import BarrelPipelinePlugin from '../../plugins/barrelpipeline-plugin'
+import phaser from '../../../phaser/src/phaser.js';
+import BarrelFilterPlugin from '../../plugins/barrelfilter-plugin.js'
 import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 
 class Demo extends Phaser.Scene {
@@ -16,24 +16,24 @@ class Demo extends Phaser.Scene {
     create() {
         var gameObject = this.add.image(400, 300, 'classroom');
 
-        var postFxPlugin = this.plugins.get('rexBarrelPipelinePlugin');
-        var postFxPipeline = postFxPlugin.add(this.cameras.main, {
+        var camera = this.cameras.main;
+        var postFxFilter = this.plugins.get('rexBarrelFilterPlugin').add(camera, {
             radius: 300,
             power: 0.5,
             shrink: true
         });
 
         this.input.on('pointerdown', function (pointer) {
-            postFxPipeline.setCenter(pointer.x, pointer.y);
+            postFxFilter.setCenter(pointer.x, pointer.y);
         })
 
         var gui = new Dat.GUI();
-        gui.add(postFxPipeline, 'centerX', 0, 800);
-        gui.add(postFxPipeline, 'centerY', 0, 600);
-        gui.add(postFxPipeline, 'radius', 0, 800);
-        gui.add(postFxPipeline, 'power', 0, 2);
-        gui.add(postFxPipeline, 'intensity', 0, 1);
-        gui.add(postFxPipeline, 'shrinkMode');
+        gui.add(postFxFilter, 'centerX', 0, 800);
+        gui.add(postFxFilter, 'centerY', 0, 600);
+        gui.add(postFxFilter, 'radius', 0, 800);
+        gui.add(postFxFilter, 'power', 0, 2);
+        gui.add(postFxFilter, 'intensity', 0, 1);
+        gui.add(postFxFilter, 'shrinkMode');
     }
 
     update() {
@@ -52,8 +52,8 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-            key: 'rexBarrelPipelinePlugin',
-            plugin: BarrelPipelinePlugin,
+            key: 'rexBarrelFilterPlugin',
+            plugin: BarrelFilterPlugin,
             start: true
         }]
     }

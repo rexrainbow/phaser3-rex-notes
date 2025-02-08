@@ -1,17 +1,12 @@
-import FragSrc from './barrel-frag.js';
+import { FilterName } from './const.js';
 
-const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
+class BarrelController extends Phaser.Filters.Controller {
+    static FilterName = FilterName;
 
-class BarrelPostFxPipeline extends PostFXPipeline {
-    constructor(game) {
-        super({
-            name: 'rexBarrelPostFx',
-            game: game,
-            renderTarget: true,
-            fragShader: FragSrc
-        });
+    constructor(camera, config) {
+        super(camera, FilterName);
 
         this.shrinkMode = false;
         this.centerX = 0; // position wo resolution
@@ -19,6 +14,8 @@ class BarrelPostFxPipeline extends PostFXPipeline {
         this.radius = 0;
         this.power = 1;
         this.intensity = 1;
+
+        this.resetFromJSON(config);
     }
 
     resetFromJSON(o) {
@@ -30,19 +27,6 @@ class BarrelPostFxPipeline extends PostFXPipeline {
         return this;
     }
 
-    onPreRender() {
-        this.set1f('shrinkMode', (this.shrinkMode) ? 1 : 0);
-        this.set1f('radius', this.radius);
-
-        var texWidth = this.renderer.width,
-            textHeight = this.renderer.height;
-        this.set2f('center', this.centerX, (textHeight - this.centerY));
-        this.set2f('texSize', texWidth, textHeight);
-
-        this.set1f('power', this.power);
-        this.set1f('intensity', this.intensity);
-    }
-
     // radius
     setRadius(value) {
         this.radius = value;
@@ -52,8 +36,8 @@ class BarrelPostFxPipeline extends PostFXPipeline {
     // center
     setCenter(x, y) {
         if (x === undefined) {
-            x = this.renderer.width / 2;
-            y = this.renderer.height / 2;
+            x = this.camera.centerX;
+            y = this.camera.centerY;
         }
         this.centerX = x;
         this.centerY = y;
@@ -82,4 +66,4 @@ class BarrelPostFxPipeline extends PostFXPipeline {
     }
 }
 
-export default BarrelPostFxPipeline;
+export default BarrelController;

@@ -1,6 +1,6 @@
-export default BarrelPostFxPipeline;
+export default BarrelContrtoller;
 
-declare namespace BarrelPostFxPipeline {
+declare namespace BarrelContrtoller {
     interface IConfig {
         shrink?: boolean,
         center?: {
@@ -12,8 +12,13 @@ declare namespace BarrelPostFxPipeline {
     }
 }
 
-declare class BarrelPostFxPipeline extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
-    resetFromJSON(o?: BarrelPostFxPipeline.IConfig): this;
+declare class BarrelContrtoller extends Phaser.Filters.Controller {
+    constructor(
+        camera: Phaser.Cameras.Scene2D.BaseCamera,
+        config?: BarrelContrtoller.IConfig
+    );
+
+    resetFromJSON(o?: BarrelContrtoller.IConfig): this;
 
     setShrinkMode(mode?: boolean): this;
     shrinkMode: boolean;
