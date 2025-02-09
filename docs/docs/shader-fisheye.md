@@ -22,16 +22,16 @@ Fish-eye post processing filter. [Reference](https://www.geeks3d.com/20140213/gl
 
 - Load plugin (minify file) in preload stage
     ```javascript
-    scene.load.plugin('rexfisheyepipelineplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexfisheyepipelineplugin.min.js', true);
+    scene.load.plugin('rexfisheyefilterplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexfisheyefilterplugin.min.js', true);
     ```
 - Apply effect
     - Apply effect to game object
         ```javascript
-        var pipelineInstance = scene.plugins.get('rexfisheyepipelineplugin').add(gameObject, config);
+        var controller = scene.plugins.get('rexfisheyefilterplugin').add(gameObject, config);
         ```
     - Apply effect to camera
         ```javascript
-        var pipelineInstance = scene.plugins.get('rexfisheyepipelineplugin').add(camera, config);
+        var controller = scene.plugins.get('rexfisheyefilterplugin').add(camera, config);
         ```
 
 #### Import plugin
@@ -42,13 +42,13 @@ Fish-eye post processing filter. [Reference](https://www.geeks3d.com/20140213/gl
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import FishEyePipelinePlugin from 'phaser3-rex-plugins/plugins/fisheyepipeline-plugin.js';
+    import FishEyeFilterPlugin from 'phaser3-rex-plugins/plugins/fisheyefilter-plugin.js';
     var config = {
         // ...
         plugins: {
             global: [{
-                key: 'rexFishEyePipeline',
-                plugin: FishEyePipelinePlugin,
+                key: 'rexFishEyeFilter',
+                plugin: FishEyeFilterPlugin,
                 start: true
             },
             // ...
@@ -61,11 +61,11 @@ Fish-eye post processing filter. [Reference](https://www.geeks3d.com/20140213/gl
 - Apply effect
     - Apply effect to game object
         ```javascript
-        var pipelineInstance = scene.plugins.get('rexFishEyePipeline').add(gameObject, config);
+        var controller = scene.plugins.get('rexFishEyeFilter').add(gameObject, config);
         ```
     - Apply effect to camera
         ```javascript
-        var pipelineInstance = scene.plugins.get('rexFishEyePipeline').add(camera, config);
+        var controller = scene.plugins.get('rexFishEyeFilter').add(camera, config);
         ```
 
 #### Import class
@@ -74,31 +74,38 @@ Fish-eye post processing filter. [Reference](https://www.geeks3d.com/20140213/gl
     ```
     npm i phaser3-rex-plugins
     ```
-- Add to game config
+- Import filter and controller class
     ```javascript
-    import FishEyePostFx from 'phaser3-rex-plugins/plugins/fisheyepipeline.js';
-    var config = {
-        // ...
-        pipeline: [FishEyePostFx]
-        // ...
-    };
-    var game = new Phaser.Game(config);
+    import { FishEyeFilter, FishEyeController } from 'phaser3-rex-plugins/plugins/fisheyefilter.js';
+    ```
+- Register effect
+    ```js
+    if (!scene.renderer.renderNodes.hasNode(FishEyeFilter.FilterName)) {
+        scene.renderer.renderNodes.addNodeConstructor(FishEyeFilter.FilterName, FishEyeFilter);
+    }
     ```
 - Apply effect
     - Apply effect to game object
         ```javascript
-        gameObject.setPostPipeline(FishEyePostFx);
+        // gameObject.enableFilters();
+        var filterList = gameObject.filters.internal;
+        var controller = filterList.add(
+            new FishEyeController(filterList.camera, config)
+        );
         ```
     - Apply effect to camera
         ```javascript
-        camera.setPostPipeline(FishEyePostFx);
+        var filterList = camera.filters.internal;
+        var controller = filterList.add(
+            new FishEyeController(filterList.camera, config)
+        );
         ```
 
 ### Apply effect
 
 - Apply effect to game object. A game object only can add 1 fisheye effect.
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexFishEyePipeline').add(gameObject, {
+    var controller = scene.plugins.get('rexFishEyeFilter').add(gameObject, {
         // center: {
         //    x: windowWidth / 2,
         //    y: windowHeight / 2
@@ -118,63 +125,63 @@ Fish-eye post processing filter. [Reference](https://www.geeks3d.com/20140213/gl
         - `1`, or `'sin'` : sin mode.
 - Apply effect to camera. A camera only can add 1 fisheye effect.
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexFishEyePipeline').add(camera, config);
+    var controller = scene.plugins.get('rexFishEyeFilter').add(camera, config);
     ```
 
 ### Remove effect
 
 - Remove effect from game object
     ```javascript
-    scene.plugins.get('rexFishEyePipeline').remove(gameObject);
+    scene.plugins.get('rexFishEyeFilter').remove(gameObject);
     ```
 - Remove effect from camera
     ```javascript
-    scene.plugins.get('rexFishEyePipeline').remove(camera);
+    scene.plugins.get('rexFishEyeFilter').remove(camera);
     ```
 
 ### Get effect
 
 - Get effect from game object
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexFishEyePipeline').get(gameObject)[0];
-    // var pipelineInstances = scene.plugins.get('rexFishEyePipeline').get(gameObject);
+    var controller = scene.plugins.get('rexFishEyeFilter').get(gameObject)[0];
+    // var controllers = scene.plugins.get('rexFishEyeFilter').get(gameObject);
     ```
 - Get effect from camera
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexFishEyePipeline').get(camera)[0];
-    // var pipelineInstances = scene.plugins.get('rexFishEyePipeline').get(camera);
+    var controller = scene.plugins.get('rexFishEyeFilter').get(camera)[0];
+    // var controllers = scene.plugins.get('rexFishEyeFilter').get(camera);
     ```
 
 ### Radius
 
 - Get
     ```javascript
-    var radius = pipelineInstance.radius;
+    var radius = controller.radius;
     ```
 - Set
     ```javascript
-    pipelineInstance.radius = radius;
-    // pipelineInstance.radius += value;
+    controller.radius = radius;
+    // controller.radius += value;
     ```
     or
     ```javascript
-    pipelineInstance.setRadius(radius);
+    controller.setRadius(radius);
     ```
 
 ### Intensity
 
 - Get
     ```javascript
-    var intensity = pipelineInstance.intensity;
+    var intensity = controller.intensity;
     ```
 - Set
     ```javascript
-    pipelineInstance.intensity = intensity;
-    // pipelineInstance.intensity += value;
+    controller.intensity = intensity;
+    // controller.intensity += value;
     ```
     or
     ```javascript
-    pipelineInstance.setIntensity(intensity);
+    controller.setIntensity(intensity);
     ```
     - `intensity` : 0(original) ~ 1(fisheye)
 
@@ -184,29 +191,29 @@ Default value is center of window.
 
 - Get
     ```javascript
-    var x = pipelineInstance.centerX;
-    var y = pipelineInstance.centerY;
+    var x = controller.centerX;
+    var y = controller.centerY;
     ```
 - Set
     ```javascript
-    pipelineInstance.centerX = x;
-    pipelineInstance.centerY = y;
+    controller.centerX = x;
+    controller.centerY = y;
     ```
     or
     ```javascript
-    pipelineInstance.setCenter(x, y);
-    // pipelineInstance.setCenter();   // set to center of window
+    controller.setCenter(x, y);
+    // controller.setCenter();   // set to center of window
     ```
 
 ### Mode
 
 - Get
     ```javascript
-    var mode = pipelineInstance.fishEyeMode;
+    var mode = controller.fishEyeMode;
     ```
 - Set
     ```javascript
-    pipelineInstance.setFishEyeMode(mode);
+    controller.setFishEyeMode(mode);
     ```
     - `0`, or `'asin'` : asin mode.
     - `1`, or `'sin'` : sin mode.

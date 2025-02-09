@@ -22,16 +22,16 @@ Outline post processing filter. [Reference](https://github.com/pixijs/pixi-filte
 
 - Load plugin (minify file) in preload stage
     ```javascript
-    scene.load.plugin('rexoutlinepipelineplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexoutlinepipelineplugin.min.js', true);
+    scene.load.plugin('rexoutlinefilterlugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexoutlinefilterlugin.min.js', true);
     ```
 - Apply effect
     - Apply effect to game object
         ```javascript
-        var pipelineInstance = scene.plugins.get('rexoutlinepipelineplugin').add(gameObject, config);
+        var controller = scene.plugins.get('rexoutlinefilterlugin').add(gameObject, config);
         ```
     - Apply effect to camera
         ```javascript
-        var pipelineInstance = scene.plugins.get('rexoutlinepipelineplugin').add(camera, config);
+        var controller = scene.plugins.get('rexoutlinefilterlugin').add(camera, config);
         ```
 
 #### Import plugin
@@ -42,13 +42,13 @@ Outline post processing filter. [Reference](https://github.com/pixijs/pixi-filte
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import OutlinePipelinePlugin from 'phaser3-rex-plugins/plugins/outlinepipeline-plugin.js';
+    import OutlineFilterPlugin from 'phaser3-rex-plugins/plugins/outlinepipeline-plugin.js';
     var config = {
         // ...
         plugins: {
             global: [{
-                key: 'rexOutlinePipeline',
-                plugin: OutlinePipelinePlugin,
+                key: 'rexOutlineFilter',
+                plugin: OutlineFilterPlugin,
                 start: true
             },
             // ...
@@ -61,11 +61,11 @@ Outline post processing filter. [Reference](https://github.com/pixijs/pixi-filte
 - Apply effect
     - Apply effect to game object
         ```javascript
-        var pipelineInstance = scene.plugins.get('rexOutlinePipeline').add(gameObject, config);
+        var controller = scene.plugins.get('rexOutlineFilter').add(gameObject, config);
         ```
     - Apply effect to camera
         ```javascript
-        var pipelineInstance = scene.plugins.get('rexOutlinePipeline').add(camera, config);
+        var controller = scene.plugins.get('rexOutlineFilter').add(camera, config);
         ```
 
 #### Import class
@@ -74,31 +74,38 @@ Outline post processing filter. [Reference](https://github.com/pixijs/pixi-filte
     ```
     npm i phaser3-rex-plugins
     ```
-- Add to game config
+- Import filter and controller class
     ```javascript
-    import OutlinePostFx from 'phaser3-rex-plugins/plugins/outlinepipeline.js';
-    var config = {
-        // ...
-        pipeline: [OutlinePostFx]
-        // ...
-    };
-    var game = new Phaser.Game(config);
+    import { OutlineFilter, OutlineController } from 'phaser3-rex-plugins/plugins/outlinepipeline.js';
+    ```
+- Register effect
+    ```js
+    if (!scene.renderer.renderNodes.hasNode(OutlineFilter.FilterName)) {
+        scene.renderer.renderNodes.addNodeConstructor(OutlineFilter.FilterName, OutlineFilter);
+    }
     ```
 - Apply effect
     - Apply effect to game object
         ```javascript
-        gameObject.setPostPipeline(OutlinePostFx);
+        // gameObject.enableFilters();
+        var filterList = gameObject.filters.internal;
+        var controller = filterList.add(
+            new OutlineController(filterList.camera, config)
+        );
         ```
     - Apply effect to camera
         ```javascript
-        camera.setPostPipeline(OutlinePostFx);
+        var filterList = camera.filters.internal;
+        var controller = filterList.add(
+            new OutlineController(filterList.camera, config)
+        );
         ```
 
 ### Apply effect
 
 - Apply effect to game object. A game object only can add 1 outline effect.
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexOutlinePipeline').add(gameObject, {
+    var controller = scene.plugins.get('rexOutlineFilter').add(gameObject, {
         // thickness: 3,
         // outlineColor: 0x000000,
 
@@ -112,54 +119,54 @@ Outline post processing filter. [Reference](https://github.com/pixijs/pixi-filte
     - `quality` : 0~1. The higher the number the less performant. It can't be changed after filter creation.
 - Apply effect to camera. A camera only can add 1 outline effect.
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexOutlinePipeline').add(camera, config);
+    var controller = scene.plugins.get('rexOutlineFilter').add(camera, config);
     ```
 
 ### Remove effect
 
 - Remove effect from game object
     ```javascript
-    scene.plugins.get('rexOutlinePipeline').remove(gameObject);
+    scene.plugins.get('rexOutlineFilter').remove(gameObject);
     ```
 - Remove effect from camera
     ```javascript
-    scene.plugins.get('rexOutlinePipeline').remove(camera);
+    scene.plugins.get('rexOutlineFilter').remove(camera);
     ```
 
 ### Get effect
 
 - Get effect from game object
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexOutlinePipeline').get(gameObject)[0];
-    // var pipelineInstances = scene.plugins.get('rexOutlinePipeline').get(gameObject);
+    var controller = scene.plugins.get('rexOutlineFilter').get(gameObject)[0];
+    // var controllers = scene.plugins.get('rexOutlineFilter').get(gameObject);
     ```
 - Get effect from camera
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexOutlinePipeline').get(camera)[0];
-    // var pipelineInstances = scene.plugins.get('rexOutlinePipeline').get(camera);
+    var controller = scene.plugins.get('rexOutlineFilter').get(camera)[0];
+    // var controllers = scene.plugins.get('rexOutlineFilter').get(camera);
     ```
 
 ### Thickness
 
 - Get
     ```javascript
-    var thickness = pipelineInstance.thickness;
+    var thickness = controller.thickness;
     ```
 - Set
     ```javascript
-    pipelineInstance.thickness = thickness;
-    // pipelineInstance.thickness += value;
+    controller.thickness = thickness;
+    // controller.thickness += value;
     ```
     or
     ```javascript
-    pipelineInstance.setThickness(value);
+    controller.setThickness(value);
     ```
 
 ### Outline color
 
 - Get
     ```javascript
-    var color = pipelineInstance.outlineColor;
+    var color = controller.outlineColor;
     ```
     - `color` : [Color](color.md) object.
         - Red: `color.red`, 0~255.
@@ -167,10 +174,10 @@ Outline post processing filter. [Reference](https://github.com/pixijs/pixi-filte
         - Blue: `color.blue`, 0~255.
 - Set
     ```javascript
-    pipelineInstance.setOutlineColor(value);
+    controller.setOutlineColor(value);
     ```
     ```javascript
-    pipelineInstance.outlineColor = value;
+    controller.outlineColor = value;
     ```
     - `value` : A number `0xRRGGBB`, or a JSON object `{r:255, g:255, b:255}`
 
@@ -181,15 +188,15 @@ result in slower performance and more accuracy.
 
 - Get
     ```javascript
-    var quality = pipelineInstance.quality;
+    var quality = controller.quality;
     ```
 - Set
     ```javascript
-    pipelineInstance.setQuality(quality);
+    controller.setQuality(quality);
     ```
     or
     ```javascript
-    pipelineInstance.quality = quality;
+    controller.quality = quality;
     ```
     - `quality` : `0` ~ `1`, default is `0.1`.
         - `0.1` : 10 sample points.

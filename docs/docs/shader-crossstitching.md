@@ -22,16 +22,16 @@ Cross-stitching post processing filter. [Reference](https://www.geeks3d.com/2011
 
 - Load plugin (minify file) in preload stage
     ```javascript
-    scene.load.plugin('rexcrossstitchingpipelineplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexcrossstitchingpipelineplugin.min.js', true);
+    scene.load.plugin('rexcrossstitchingfilterplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexcrossstitchingfilterplugin.min.js', true);
     ```
 - Apply effect
     - Apply effect to game object
         ```javascript
-        var pipelineInstance = scene.plugins.get('rexcrossstitchingpipelineplugin').add(gameObject, config);
+        var controller = scene.plugins.get('rexcrossstitchingfilterplugin').add(gameObject, config);
         ```
     - Apply effect to camera
         ```javascript
-        var pipelineInstance = scene.plugins.get('rexcrossstitchingpipelineplugin').add(camera, config);
+        var controller = scene.plugins.get('rexcrossstitchingfilterplugin').add(camera, config);
         ```
 
 #### Import plugin
@@ -42,13 +42,13 @@ Cross-stitching post processing filter. [Reference](https://www.geeks3d.com/2011
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import CrossStitchingPipelinePlugin from 'phaser3-rex-plugins/plugins/crossstitchingpipeline-plugin.js';
+    import CrossStitchingFilterPlugin from 'phaser3-rex-plugins/plugins/crossstitchingfilter-plugin.js';
     var config = {
         // ...
         plugins: {
             global: [{
-                key: 'rexCrossStitchingPipeline',
-                plugin: CrossStitchingPipelinePlugin,
+                key: 'rexCrossStitchingFilter',
+                plugin: CrossStitchingFilterPlugin,
                 start: true
             },
             // ...
@@ -61,11 +61,11 @@ Cross-stitching post processing filter. [Reference](https://www.geeks3d.com/2011
 - Apply effect
     - Apply effect to game object
         ```javascript
-        var pipelineInstance = scene.plugins.get('rexCrossStitchingPipeline').add(gameObject, config);
+        var controller = scene.plugins.get('rexCrossStitchingFilter').add(gameObject, config);
         ```
     - Apply effect to camera
         ```javascript
-        var pipelineInstance = scene.plugins.get('rexCrossStitchingPipeline').add(camera, config);
+        var controller = scene.plugins.get('rexCrossStitchingFilter').add(camera, config);
         ```
 
 #### Import class
@@ -74,31 +74,38 @@ Cross-stitching post processing filter. [Reference](https://www.geeks3d.com/2011
     ```
     npm i phaser3-rex-plugins
     ```
-- Add to game config
+- Import filter and controller class
     ```javascript
-    import CrossStitchingPostFx from 'phaser3-rex-plugins/plugins/crossstitchingpipeline.js';
-    var config = {
-        // ...
-        pipeline: [CrossStitchingPostFx]
-        // ...
-    };
-    var game = new Phaser.Game(config);
+    import { CrossStitchingFilter, CrossStitchingController } from 'phaser3-rex-plugins/plugins/crossstitchingfilter.js';
+    ```
+- Register effect
+    ```js
+    if (!scene.renderer.renderNodes.hasNode(CrossStitchingFilter.FilterName)) {
+        scene.renderer.renderNodes.addNodeConstructor(CrossStitchingFilter.FilterName, CrossStitchingFilter);
+    }
     ```
 - Apply effect
     - Apply effect to game object
         ```javascript
-        gameObject.setPostPipeline(CrossStitchingPostFx);
+        // gameObject.enableFilters();
+        var filterList = gameObject.filters.internal;
+        var controller = filterList.add(
+            new CrossStitchingController(filterList.camera, config)
+        );
         ```
     - Apply effect to camera
         ```javascript
-        camera.setPostPipeline(CrossStitchingPostFx);
+        var filterList = camera.filters.internal;
+        var controller = filterList.add(
+            new CrossStitchingController(filterList.camera, config)
+        );
         ```
 
 ### Apply effect
 
 - Apply effect to game object. A game object only can add 1 cross-stitching effect.
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexCrossStitchingPipeline').add(gameObject, {
+    var controller = scene.plugins.get('rexCrossStitchingFilter').add(gameObject, {
         // stitchingWidth: 6,
         // stitchingHeight: 6,
         // brightness: 0,
@@ -110,67 +117,67 @@ Cross-stitching post processing filter. [Reference](https://www.geeks3d.com/2011
     - `brightness` : Brightness of stitching edges
 - Apply effect to camera. A camera only can add 1 cross-stitching effect.
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexCrossStitchingPipeline').add(camera, config);
+    var controller = scene.plugins.get('rexCrossStitchingFilter').add(camera, config);
     ```
 
 ### Remove effect
 
 - Remove effect from game object
     ```javascript
-    scene.plugins.get('rexCrossStitchingPipeline').remove(gameObject);
+    scene.plugins.get('rexCrossStitchingFilter').remove(gameObject);
     ```
 - Remove effect from camera
     ```javascript
-    scene.plugins.get('rexCrossStitchingPipeline').remove(camera);
+    scene.plugins.get('rexCrossStitchingFilter').remove(camera);
     ```
 
 ### Get effect
 
 - Get effect from game object
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexCrossStitchingPipeline').get(gameObject)[0];
-    // var pipelineInstances = scene.plugins.get('rexCrossStitchingPipeline').get(gameObject);
+    var controller = scene.plugins.get('rexCrossStitchingFilter').get(gameObject)[0];
+    // var controllers = scene.plugins.get('rexCrossStitchingFilter').get(gameObject);
     ```
 - Get effect from camera
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexCrossStitchingPipeline').get(camera)[0];
-    // var pipelineInstances = scene.plugins.get('rexCrossStitchingPipeline').get(camera);
+    var controller = scene.plugins.get('rexCrossStitchingFilter').get(camera)[0];
+    // var controllers = scene.plugins.get('rexCrossStitchingFilter').get(camera);
     ```
 
 ### Stitching size
 
 - Get
     ```javascript
-    var stitchingWidth = pipelineInstance.stitchingWidth;
-    var stitchingHeight = pipelineInstance.stitchingHeight;
+    var stitchingWidth = controller.stitchingWidth;
+    var stitchingHeight = controller.stitchingHeight;
     ```
 - Set
     ```javascript
-    pipelineInstance.stitchingWidth = stitchingWidth;
-    pipelineInstance.stitchingHeight = stitchingHeight;
-    // pipelineInstance.stitchingWidth += value;
-    // pipelineInstance.stitchingHeight += value;
+    controller.stitchingWidth = stitchingWidth;
+    controller.stitchingHeight = stitchingHeight;
+    // controller.stitchingWidth += value;
+    // controller.stitchingHeight += value;
     ```
     or
     ```javascript
-    pipelineInstance.setStitchingWidth(stitchingWidth);
-    pipelineInstance.setStitchingHeight(stitchingHeight);
-    pipelineInstance.setStitchingSize(stitchingWidth, stitchingHeight);
+    controller.setStitchingWidth(stitchingWidth);
+    controller.setStitchingHeight(stitchingHeight);
+    controller.setStitchingSize(stitchingWidth, stitchingHeight);
     ```
 
 ### Brightness
 
 - Get
     ```javascript
-    var brightness = pipelineInstance.brightness;
+    var brightness = controller.brightness;
     ```
 - Set
     ```javascript
-    pipelineInstance.brightness = brightness;
-    // pipelineInstance.brightness += value;
+    controller.brightness = brightness;
+    // controller.brightness += value;
     ```
     or
     ```javascript
-    pipelineInstance.setBrightness(radius);
+    controller.setBrightness(radius);
     ```
     - `brightness` : 0(black) ~ 1(white)

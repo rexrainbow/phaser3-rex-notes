@@ -22,16 +22,16 @@ Swirl post processing filter. [Reference](https://www.geeks3d.com/20110428/shade
 
 - Load plugin (minify file) in preload stage
     ```javascript
-    scene.load.plugin('rexswirlpipelineplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexswirlpipelineplugin.min.js', true);
+    scene.load.plugin('rexswirlfilterplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexswirlfilterplugin.min.js', true);
     ```
 - Apply effect
     - Apply effect to game object
         ```javascript
-        var pipelineInstance = scene.plugins.get('rexswirlpipelineplugin').add(gameObject, config);
+        var controller = scene.plugins.get('rexswirlfilterplugin').add(gameObject, config);
         ```
     - Apply effect to camera
         ```javascript
-        var pipelineInstance = scene.plugins.get('rexswirlpipelineplugin').add(camera, config);
+        var controller = scene.plugins.get('rexswirlfilterplugin').add(camera, config);
         ```
 
 #### Import plugin
@@ -42,13 +42,13 @@ Swirl post processing filter. [Reference](https://www.geeks3d.com/20110428/shade
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import SwirlPipelinePlugin from 'phaser3-rex-plugins/plugins/swirlpipeline-plugin.js';
+    import SwirlFilterPlugin from 'phaser3-rex-plugins/plugins/swirlfilter-plugin.js';
     var config = {
         // ...
         plugins: {
             global: [{
-                key: 'rexSwirlPipeline',
-                plugin: SwirlPipelinePlugin,
+                key: 'rexSwirlFilter',
+                plugin: SwirlFilterPlugin,
                 start: true
             },
             // ...
@@ -61,11 +61,11 @@ Swirl post processing filter. [Reference](https://www.geeks3d.com/20110428/shade
 - Apply effect
     - Apply effect to game object
         ```javascript
-        var pipelineInstance = scene.plugins.get('rexSwirlPipeline').add(gameObject, config);
+        var controller = scene.plugins.get('rexSwirlFilter').add(gameObject, config);
         ```
     - Apply effect to camera
         ```javascript
-        var pipelineInstance = scene.plugins.get('rexSwirlPipeline').add(camera, config);
+        var controller = scene.plugins.get('rexSwirlFilter').add(camera, config);
         ```
 
 #### Import class
@@ -74,31 +74,38 @@ Swirl post processing filter. [Reference](https://www.geeks3d.com/20110428/shade
     ```
     npm i phaser3-rex-plugins
     ```
-- Add to game config
+- Import filter and controller class
     ```javascript
-    import SwirlPostFx from 'phaser3-rex-plugins/plugins/swirlpipeline.js';
-    var config = {
-        // ...
-        pipeline: [SwirlPostFx]
-        // ...
-    };
-    var game = new Phaser.Game(config);
+    import { SwirlFilter, SwirlController } from 'phaser3-rex-plugins/plugins/swirlfilter.js';
+    ```
+- Register effect
+    ```js
+    if (!scene.renderer.renderNodes.hasNode(SwirlFilter.FilterName)) {
+        scene.renderer.renderNodes.addNodeConstructor(SwirlFilter.FilterName, SwirlFilter);
+    }
     ```
 - Apply effect
     - Apply effect to game object
         ```javascript
-        gameObject.setPostPipeline(SwirlPostFx);
+        // gameObject.enableFilters();
+        var filterList = gameObject.filters.internal;
+        var controller = filterList.add(
+            new SwirlController(filterList.camera, config)
+        );
         ```
     - Apply effect to camera
         ```javascript
-        camera.setPostPipeline(SwirlPostFx);
+        var filterList = camera.filters.internal;
+        var controller = filterList.add(
+            new SwirlController(filterList.camera, config)
+        );
         ```
 
 ### Apply effect
 
 - Apply effect to game object. A game object only can add 1 swirl effect.
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexSwirlPipeline').add(gameObject, {
+    var controller = scene.plugins.get('rexSwirlFilter').add(gameObject, {
         // center: {
         //    x: windowWidth / 2,
         //    y: windowHeight / 2
@@ -114,67 +121,67 @@ Swirl post processing filter. [Reference](https://www.geeks3d.com/20110428/shade
     - `rotation` (`angle`) : Swirl angle.
 - Apply effect to camera. A camera only can add 1 swirl effect.
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexSwirlPipeline').add(camera, config);
+    var controller = scene.plugins.get('rexSwirlFilter').add(camera, config);
     ```
 
 ### Remove effect
 
 - Remove effect from game object
     ```javascript
-    scene.plugins.get('rexSwirlPipeline').remove(gameObject);
+    scene.plugins.get('rexSwirlFilter').remove(gameObject);
     ```
 - Remove effect from camera
     ```javascript
-    scene.plugins.get('rexSwirlPipeline').remove(camera);
+    scene.plugins.get('rexSwirlFilter').remove(camera);
     ```
 
 ### Get effect
 
 - Get effect from game object
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexSwirlPipeline').get(gameObject)[0];
-    // var pipelineInstances = scene.plugins.get('rexSwirlPipeline').get(gameObject);
+    var controller = scene.plugins.get('rexSwirlFilter').get(gameObject)[0];
+    // var controllers = scene.plugins.get('rexSwirlFilter').get(gameObject);
     ```
 - Get effect from camera
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexSwirlPipeline').get(camera)[0];
-    // var pipelineInstances = scene.plugins.get('rexSwirlPipeline').get(camera);
+    var controller = scene.plugins.get('rexSwirlFilter').get(camera)[0];
+    // var controllers = scene.plugins.get('rexSwirlFilter').get(camera);
     ```
 
 ### Radius
 
 - Get
     ```javascript
-    var radius = pipelineInstance.radius;
+    var radius = controller.radius;
     ```
 - Set
     ```javascript
-    pipelineInstance.radius = radius;
-    // pipelineInstance.radius += value;
+    controller.radius = radius;
+    // controller.radius += value;
     ```
     or
     ```javascript
-    pipelineInstance.setRadius(radius);
+    controller.setRadius(radius);
     ```
 
 ### Rotation
 
 - Get
     ```javascript
-    var rotation = pipelineInstance.rotation;  // radians
-    // var angle = pipelineInstance.angle;     // degrees
+    var rotation = controller.rotation;  // radians
+    // var angle = controller.angle;     // degrees
     ```
 - Set
     ```javascript
-    pipelineInstance.rotation = rotation;
-    pipelineInstance.rotation += value;
-    // pipelineInstance.angle = angle;
-    // pipelineInstance.angle += value;
+    controller.rotation = rotation;
+    controller.rotation += value;
+    // controller.angle = angle;
+    // controller.angle += value;
     ```
     or
     ```javascript
-    pipelineInstance.setRotation(rotation);
-    // pipelineInstance.setAngle(angle);
+    controller.setRotation(rotation);
+    // controller.setAngle(angle);
     ```
 
 ### Center position
@@ -183,16 +190,16 @@ Default value is center of window.
 
 - Get
     ```javascript
-    var x = pipelineInstance.centerX;
-    var y = pipelineInstance.centerY;
+    var x = controller.centerX;
+    var y = controller.centerY;
     ```
 - Set
     ```javascript
-    pipelineInstance.centerX = x;
-    pipelineInstance.centerY = y;
+    controller.centerX = x;
+    controller.centerY = y;
     ```
     or
     ```javascript
-    pipelineInstance.setCenter(x, y);
-    // pipelineInstance.setCenter();   // set to center of window
+    controller.setCenter(x, y);
+    // controller.setCenter();   // set to center of window
     ```

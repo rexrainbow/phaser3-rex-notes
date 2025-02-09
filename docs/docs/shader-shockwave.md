@@ -22,16 +22,16 @@ Shockwave post processing filter. [Reference](https://www.geeks3d.com/20091116/s
 
 - Load plugin (minify file) in preload stage
     ```javascript
-    scene.load.plugin('rexshockwavepipelineplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexshockwavepipelineplugin.min.js', true);
+    scene.load.plugin('rexshockwavefilterplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexshockwavefilterplugin.min.js', true);
     ```
 - Apply effect
     - Apply effect to game object
         ```javascript
-        var pipelineInstance = scene.plugins.get('rexshockwavepipelineplugin').add(gameObject, config);
+        var controller = scene.plugins.get('rexshockwavefilterplugin').add(gameObject, config);
         ```
     - Apply effect to camera
         ```javascript
-        var pipelineInstance = scene.plugins.get('rexshockwavepipelineplugin').add(camera, config);
+        var controller = scene.plugins.get('rexshockwavefilterplugin').add(camera, config);
         ```
 
 #### Import plugin
@@ -42,13 +42,13 @@ Shockwave post processing filter. [Reference](https://www.geeks3d.com/20091116/s
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import ShockwavePipelinePlugin from 'phaser3-rex-plugins/plugins/shockwavepipeline-plugin.js';
+    import ShockwaveFilterPlugin from 'phaser3-rex-plugins/plugins/shockwavefilter-plugin.js';
     var config = {
         // ...
         plugins: {
             global: [{
-                key: 'rexShockwavePipeline',
-                plugin: ShockwavePipelinePlugin,
+                key: 'rexShockwaveFilter',
+                plugin: ShockwaveFilterPlugin,
                 start: true
             },
             // ...
@@ -61,11 +61,11 @@ Shockwave post processing filter. [Reference](https://www.geeks3d.com/20091116/s
 - Apply effect
     - Apply effect to game object
         ```javascript
-        var pipelineInstance = scene.plugins.get('rexShockwavePipeline').add(gameObject, config);
+        var controller = scene.plugins.get('rexShockwaveFilter').add(gameObject, config);
         ```
     - Apply effect to camera
         ```javascript
-        var pipelineInstance = scene.plugins.get('rexShockwavePipeline').add(camera, config);
+        var controller = scene.plugins.get('rexShockwaveFilter').add(camera, config);
         ```
 
 #### Import class
@@ -74,31 +74,38 @@ Shockwave post processing filter. [Reference](https://www.geeks3d.com/20091116/s
     ```
     npm i phaser3-rex-plugins
     ```
-- Add to game config
+- Import filter and controller class
     ```javascript
-    import ShockwavePostFx from 'phaser3-rex-plugins/plugins/shockwavepipeline.js';
-    var config = {
-        // ...
-        pipeline: [ShockwavePostFx]
-        // ...
-    };
-    var game = new Phaser.Game(config);
+    import { ShockwaveFilter, ShockwaveController } from 'phaser3-rex-plugins/plugins/shockwavefilter.js';
+    ```
+- Register effect
+    ```js
+    if (!scene.renderer.renderNodes.hasNode(ShockwaveFilter.FilterName)) {
+        scene.renderer.renderNodes.addNodeConstructor(ShockwaveFilter.FilterName, ShockwaveFilter);
+    }
     ```
 - Apply effect
     - Apply effect to game object
         ```javascript
-        gameObject.setPostPipeline(ShockwavePostFx);
+        // gameObject.enableFilters();
+        var filterList = gameObject.filters.internal;
+        var controller = filterList.add(
+            new ShockwaveController(filterList.camera, config)
+        );
         ```
     - Apply effect to camera
         ```javascript
-        camera.setPostPipeline(ShockwavePostFx);
+        var filterList = camera.filters.internal;
+        var controller = filterList.add(
+            new ShockwaveController(filterList.camera, config)
+        );
         ```
 
 ### Apply effect
 
 - Apply effect to game object. A game object only can add 1 shockwave effect.
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexShockwavePipeline').add(gameObject, {
+    var controller = scene.plugins.get('rexShockwaveFilter').add(gameObject, {
         // center: {
         //    x: windowWidth / 2,
         //    y: windowHeight / 2
@@ -116,59 +123,59 @@ Shockwave post processing filter. [Reference](https://www.geeks3d.com/20091116/s
     - `powBaseScale`, `powExponent` : Parameters of shockwave.
 - Apply effect to camera. A camera only can add 1 shockwave effect.
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexShockwavePipeline').add(camera, config);
+    var controller = scene.plugins.get('rexShockwaveFilter').add(camera, config);
     ```
 
 ### Remove effect
 
 - Remove effect from game object
     ```javascript
-    scene.plugins.get('rexShockwavePipeline').remove(gameObject);
+    scene.plugins.get('rexShockwaveFilter').remove(gameObject);
     ```
 - Remove effect from camera
     ```javascript
-    scene.plugins.get('rexShockwavePipeline').remove(camera);
+    scene.plugins.get('rexShockwaveFilter').remove(camera);
     ```
 
 ### Get effect
 
 - Get effect from game object
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexShockwavePipeline').get(gameObject)[0];
-    // var pipelineInstances = scene.plugins.get('rexShockwavePipeline').get(gameObject);
+    var controller = scene.plugins.get('rexShockwaveFilter').get(gameObject)[0];
+    // var controllers = scene.plugins.get('rexShockwaveFilter').get(gameObject);
     ```
 - Get effect from camera
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexShockwavePipeline').get(camera)[0];
-    // var pipelineInstances = scene.plugins.get('rexShockwavePipeline').get(camera);
+    var controller = scene.plugins.get('rexShockwaveFilter').get(camera)[0];
+    // var controllers = scene.plugins.get('rexShockwaveFilter').get(camera);
     ```
 
 ### Wave radius
 
 - Get
     ```javascript
-    var waveRadius = pipelineInstance.waveRadius;
+    var waveRadius = controller.waveRadius;
     ```
 - Set
     ```javascript
-    pipelineInstance.waveRadius = waveRadius;
+    controller.waveRadius = waveRadius;
     ```
     or
     ```javascript
-    pipelineInstance.setWaveRadius(waveRadius);
+    controller.setWaveRadius(waveRadius);
     ```
 
 ### Wave width
 
 - Get
     ```javascript
-    var waveWidth = pipelineInstance.waveWidth;
+    var waveWidth = controller.waveWidth;
     ```
 - Set
     ```javascript
-    pipelineInstance.waveWidth = waveWidth;
+    controller.waveWidth = waveWidth;
     ```
     or
     ```javascript
-    pipelineInstance.setWaveWidth(waveWidth);
+    controller.setWaveWidth(waveWidth);
     ```

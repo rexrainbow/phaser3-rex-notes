@@ -25,16 +25,16 @@ Adjust color in HSL domain, post processing filter.
 
 - Load plugin (minify file) in preload stage
     ```javascript
-    scene.load.plugin('rexhsladjustpipelineplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexhsladjustpipelineplugin.min.js', true);
+    scene.load.plugin('rexhsladjustfilterplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexhsladjustfilterplugin.min.js', true);
     ```
 - Apply effect
     - Apply effect to game object
         ```javascript
-        var pipelineInstance = scene.plugins.get('rexhsladjustpipelineplugin').add(gameObject, config);
+        var controller = scene.plugins.get('rexhsladjustfilterplugin').add(gameObject, config);
         ```
     - Apply effect to camera
         ```javascript
-        var pipelineInstance = scene.plugins.get('rexhsladjustpipelineplugin').add(camera, config);
+        var controller = scene.plugins.get('rexhsladjustfilterplugin').add(camera, config);
         ```
 
 #### Import plugin
@@ -45,13 +45,13 @@ Adjust color in HSL domain, post processing filter.
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import HSLAdjustPipelinePlugin from 'phaser3-rex-plugins/plugins/hsladjustpipeline-plugin.js';
+    import HSLAdjustFilterPlugin from 'phaser3-rex-plugins/plugins/hsladjustfilter-plugin.js';
     var config = {
         // ...
         plugins: {
             global: [{
-                key: 'rexHSLAdjustPipeline',
-                plugin: HSLAdjustPipelinePlugin,
+                key: 'rexHSLAdjustFilter',
+                plugin: HSLAdjustFilterPlugin,
                 start: true
             },
             // ...
@@ -64,11 +64,11 @@ Adjust color in HSL domain, post processing filter.
 - Apply effect
     - Apply effect to game object
         ```javascript
-        var pipelineInstance = scene.plugins.get('rexHSLAdjustPipeline').add(gameObject, config);
+        var controller = scene.plugins.get('rexHSLAdjustFilter').add(gameObject, config);
         ```
     - Apply effect to camera
         ```javascript
-        var pipelineInstance = scene.plugins.get('rexHSLAdjustPipeline').add(camera, config);
+        var controller = scene.plugins.get('rexHSLAdjustFilter').add(camera, config);
         ```
 
 #### Import class
@@ -77,31 +77,38 @@ Adjust color in HSL domain, post processing filter.
     ```
     npm i phaser3-rex-plugins
     ```
-- Add to game config
+- Import filter and controller class
     ```javascript
-    import HSLAdjustPostFx from 'phaser3-rex-plugins/plugins/hsladjustpipeline.js';
-    var config = {
-        // ...
-        pipeline: [HSLAdjustPostFx]
-        // ...
-    };
-    var game = new Phaser.Game(config);
+    import { HSLAdjustFilter, HSLAdjustController } from 'phaser3-rex-plugins/plugins/hsladjustfilter.js';
+    ```
+- Register effect
+    ```js
+    if (!scene.renderer.renderNodes.hasNode(HSLAdjustFilter.FilterName)) {
+        scene.renderer.renderNodes.addNodeConstructor(HSLAdjustFilter.FilterName, HSLAdjustFilter);
+    }
     ```
 - Apply effect
     - Apply effect to game object
         ```javascript
-        gameObject.setPostPipeline(HSLAdjustPostFx);
+        // gameObject.enableFilters();
+        var filterList = gameObject.filters.internal;
+        var controller = filterList.add(
+            new HSLAdjustController(filterList.camera, config)
+        );
         ```
     - Apply effect to camera
         ```javascript
-        camera.setPostPipeline(HSLAdjustPostFx);
+        var filterList = camera.filters.internal;
+        var controller = filterList.add(
+            new HSLAdjustController(filterList.camera, config)
+        );
         ```
 
 ### Apply effect
 
 - Apply effect to game object. A game object only can add 1 hsl-adjust effect.
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexHslAdjustPipeline').add(gameObject, {
+    var controller = scene.plugins.get('rexHslAdjustFilter').add(gameObject, {
         // hueRotate: 0,
         // satAdjust: 1,
         // lumAdjust: 0.5,
@@ -123,47 +130,47 @@ Adjust color in HSL domain, post processing filter.
         - `1` : White
 - Apply effect to camera. A camera only can add 1 hsl-adjust effect.
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexHslAdjustPipeline').add(camera, config);
+    var controller = scene.plugins.get('rexHslAdjustFilter').add(camera, config);
     ```
 
 ### Remove effect
 
 - Remove effect from game object
     ```javascript
-    scene.plugins.get('rexHslAdjustPipeline').remove(gameObject);
+    scene.plugins.get('rexHslAdjustFilter').remove(gameObject);
     ```
 - Remove effect from camera
     ```javascript
-    scene.plugins.get('rexHslAdjustPipeline').remove(camera);
+    scene.plugins.get('rexHslAdjustFilter').remove(camera);
     ```
 
 ### Get effect
 
 - Get effect from game object
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexHslAdjustPipeline').get(gameObject)[0];
-    // var pipelineInstances = scene.plugins.get('rexHslAdjustPipeline').get(gameObject);
+    var controller = scene.plugins.get('rexHslAdjustFilter').get(gameObject)[0];
+    // var controllers = scene.plugins.get('rexHslAdjustFilter').get(gameObject);
     ```
 - Get effect from camera
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexHslAdjustPipeline').get(camera)[0];
-    // var pipelineInstances = scene.plugins.get('rexHslAdjustPipeline').get(camera);
+    var controller = scene.plugins.get('rexHslAdjustFilter').get(camera)[0];
+    // var controllers = scene.plugins.get('rexHslAdjustFilter').get(camera);
     ```
 
 ### Hue rotation
 
 - Get
     ```javascript
-    var hueRotate = pipelineInstance.hueRotate;
+    var hueRotate = controller.hueRotate;
     ```
 - Set
     ```javascript
-    pipelineInstance.hueRotate = hueRotate;
-    // pipelineInstance.hueRotate += value;
+    controller.hueRotate = hueRotate;
+    // controller.hueRotate += value;
     ```
     or
     ```javascript
-    pipelineInstance.setHueRotate(value);
+    controller.setHueRotate(value);
     ```
     - `0` : Rotate 0 degrees, original color
     - `0.5` : Rotate 180 degrees
@@ -173,16 +180,16 @@ Adjust color in HSL domain, post processing filter.
 
 - Get
     ```javascript
-    var satAdjust = pipelineInstance.satAdjust;
+    var satAdjust = controller.satAdjust;
     ```
 - Set
     ```javascript
-    pipelineInstance.satAdjust = satAdjust;
-    // pipelineInstance.satAdjust += value;
+    controller.satAdjust = satAdjust;
+    // controller.satAdjust += value;
     ```
     or
     ```javascript
-    pipelineInstance.setSatAdjust(value);
+    controller.setSatAdjust(value);
     ```
     - `0` : Gray
     - `1` : Original color
@@ -192,16 +199,16 @@ Adjust color in HSL domain, post processing filter.
 
 - Get
     ```javascript
-    var lumAdjust = pipelineInstance.lumAdjust;
+    var lumAdjust = controller.lumAdjust;
     ```
 - Set
     ```javascript
-    pipelineInstance.lumAdjust = lumAdjust;
-    // pipelineInstance.lumAdjust += value;
+    controller.lumAdjust = lumAdjust;
+    // controller.lumAdjust += value;
     ```
     or
     ```javascript
-    pipelineInstance.setLumAdjust(value);
+    controller.setLumAdjust(value);
     ```
     - `0` : Dark
     - `0.5` : Original color

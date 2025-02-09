@@ -1,5 +1,5 @@
 !!! note
-    Phaser3.60 has a built-in [barrel effect](shader-builtin.md#barrel).
+    Phaser4 has a built-in [barrel effect](shader-builtin.md#barrel).
 
 
 ## Introduction
@@ -26,16 +26,16 @@ Barrel post processing filter. [Reference](http://www.geeks3d.com/20140213/glsl-
 
 - Load plugin (minify file) in preload stage
     ```javascript
-    scene.load.plugin('rexbarrelpipelineplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexbarrelpipelineplugin.min.js', true);
+    scene.load.plugin('rexbarrelfilterplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexbarrelfilterplugin.min.js', true);
     ```
 - Apply effect
     - Apply effect to game object
         ```javascript
-        var pipelineInstance = scene.plugins.get('rexbarrelpipelineplugin').add(gameObject, config);
+        var controller = scene.plugins.get('rexbarrelfilterplugin').add(gameObject, config);
         ```
     - Apply effect to camera
         ```javascript
-        var pipelineInstance = scene.plugins.get('rexbarrelpipelineplugin').add(camera, config);
+        var controller = scene.plugins.get('rexbarrelfilterplugin').add(camera, config);
         ```
 
 #### Import plugin
@@ -46,13 +46,13 @@ Barrel post processing filter. [Reference](http://www.geeks3d.com/20140213/glsl-
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import BarrelPipelinePlugin from 'phaser3-rex-plugins/plugins/barrelpipeline-plugin.js';
+    import BarrelFilterPlugin from 'phaser3-rex-plugins/plugins/barrelfilter-plugin.js';
     var config = {
         // ...
         plugins: {
             global: [{
-                key: 'rexBarrelPipeline',
-                plugin: BarrelPipelinePlugin,
+                key: 'rexBarrelFilter',
+                plugin: BarrelFilterPlugin,
                 start: true
             },
             // ...
@@ -65,11 +65,11 @@ Barrel post processing filter. [Reference](http://www.geeks3d.com/20140213/glsl-
 - Apply effect
     - Apply effect to game object
         ```javascript
-        var pipelineInstance = scene.plugins.get('rexBarrelPipeline').add(gameObject, config);
+        var controller = scene.plugins.get('rexBarrelFilter').add(gameObject, config);
         ```
     - Apply effect to camera
         ```javascript
-        var pipelineInstance = scene.plugins.get('rexBarrelPipeline').add(camera, config);
+        var controller = scene.plugins.get('rexBarrelFilter').add(camera, config);
         ```
 
 #### Import class
@@ -78,31 +78,37 @@ Barrel post processing filter. [Reference](http://www.geeks3d.com/20140213/glsl-
     ```
     npm i phaser3-rex-plugins
     ```
-- Add to game config
+- Import filter and controller class
     ```javascript
-    import BarrelPostFx from 'phaser3-rex-plugins/plugins/barrelpipeline.js';
-    var config = {
-        // ...
-        pipeline: [BarrelPostFx]
-        // ...
-    };
-    var game = new Phaser.Game(config);
+    import { BarrelFilter, BarrelController } from 'phaser3-rex-plugins/plugins/barrelfilter.js';
+- Register effect
+    ```js
+    if (!scene.renderer.renderNodes.hasNode(BarrelFilter.FilterName)) {
+        scene.renderer.renderNodes.addNodeConstructor(BarrelFilter.FilterName, BarrelFilter);
+    }
     ```
 - Apply effect
     - Apply effect to game object
         ```javascript
-        gameObject.setPostPipeline(BarrelPostFx);
+        // gameObject.enableFilters();
+        var filterList = gameObject.filters.internal;
+        var controller = filterList.add(
+            new BarrelController(filterList.camera, config)
+        );
         ```
     - Apply effect to camera
         ```javascript
-        camera.setPostPipeline(BarrelPostFx);
+        var filterList = camera.filters.internal;
+        var controller = filterList.add(
+            new BarrelController(filterList.camera, config)
+        );
         ```
 
 ### Apply effect
 
 - Apply effect to game object. A game object only can add 1 barrel effect.
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexBarrelPipeline').add(gameObject, {
+    var controller = scene.plugins.get('rexBarrelFilter').add(gameObject, {
         // shrink: false,
         // center: {
         //    x: windowWidth / 2,
@@ -124,90 +130,90 @@ Barrel post processing filter. [Reference](http://www.geeks3d.com/20140213/glsl-
     - `intensity` : 0(original) ~ 1(barrel). Default value is `1`.
 - Apply effect to camera. A camera only can add 1 barrel effect.
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexBarrelPipeline').add(camera, config);
+    var controller = scene.plugins.get('rexBarrelFilter').add(camera, config);
     ```
 
 ### Remove effect
 
 - Remove effect from game object
     ```javascript
-    scene.plugins.get('rexBarrelPipeline').remove(gameObject);
+    scene.plugins.get('rexBarrelFilter').remove(gameObject);
     ```
 - Remove effect from camera
     ```javascript
-    scene.plugins.get('rexBarrelPipeline').remove(camera);
+    scene.plugins.get('rexBarrelFilter').remove(camera);
     ```
 
 ### Get effect
 
 - Get effect from game object
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexBarrelPipeline').get(gameObject)[0];
-    // var pipelineInstances = scene.plugins.get('rexBarrelPipeline').get(gameObject);
+    var controller = scene.plugins.get('rexBarrelFilter').get(gameObject)[0];
+    // var controllers = scene.plugins.get('rexBarrelFilter').get(gameObject);
     ```
 - Get effect from camera
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexBarrelPipeline').get(camera)[0];
-    // var pipelineInstances = scene.plugins.get('rexBarrelPipeline').get(camera);
+    var controller = scene.plugins.get('rexBarrelFilter').get(camera)[0];
+    // var controllers = scene.plugins.get('rexBarrelFilter').get(camera);
     ```
 
 ### Shrink mode
 
 - Get
     ```javascript
-    var shrinkMode = pipelineInstance.shrinkMode;
+    var shrinkMode = controller.shrinkMode;
     ```
 - Set
     ```javascript
-    pipelineInstance.setShrinkMode(true);
-    // pipelineInstance.setShrinkMode(false);
+    controller.setShrinkMode(true);
+    // controller.setShrinkMode(false);
     ```
 
 ### Radius
 
 - Get
     ```javascript
-    var radius = pipelineInstance.radius;
+    var radius = controller.radius;
     ```
 - Set
     ```javascript
-    pipelineInstance.radius = radius;
-    // pipelineInstance.radius += value;
+    controller.radius = radius;
+    // controller.radius += value;
     ```
     or
     ```javascript
-    pipelineInstance.setRadius(radius);
+    controller.setRadius(radius);
     ```
 
 ### Power
 
 - Get
     ```javascript
-    var power = pipelineInstance.power;
+    var power = controller.power;
     ```
 - Set
     ```javascript
-    pipelineInstance.power = power;
+    controller.power = power;
     ```
     or
     ```javascript
-    pipelineInstance.setPower(power);
+    controller.setPower(power);
     ```
 
 ### Intensity
 
 - Get
     ```javascript
-    var intensity = pipelineInstance.intensity;
+    var intensity = controller.intensity;
     ```
 - Set
     ```javascript
-    pipelineInstance.intensity = intensity;
-    // pipelineInstance.intensity += value;
+    controller.intensity = intensity;
+    // controller.intensity += value;
     ```
     or
     ```javascript
-    pipelineInstance.setIntensity(radius);
+    controller.setIntensity(radius);
     ```
     - `intensity` : 0(original) ~ 1(barrel)
 
@@ -217,16 +223,16 @@ Default value is center of window.
 
 - Get
     ```javascript
-    var x = pipelineInstance.centerX;
-    var y = pipelineInstance.centerY;
+    var x = controller.centerX;
+    var y = controller.centerY;
     ```
 - Set
     ```javascript
-    pipelineInstance.centerX = x;
-    pipelineInstance.centerY = y;
+    controller.centerX = x;
+    controller.centerY = y;
     ```
     or
     ```javascript
-    pipelineInstance.setCenter(x, y);
-    // pipelineInstance.setCenter();   // set to center of window
+    controller.setCenter(x, y);
+    // controller.setCenter();   // set to center of window
     ```

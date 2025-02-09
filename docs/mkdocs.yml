@@ -262,8 +262,6 @@ nav:
     - Built-in shader effects:
         - Effects : shader-builtin.md
         - Effect properties: effect-properties.md
-    - Pre fx pipeline: prefx-pipeline.md
-    - Post fx pipeline: postfx-pipeline.md    
     - Color:
         - HSL adjust: shader-hsladjust.md
         - Color replace: shader-colorreplace.md
@@ -279,7 +277,6 @@ nav:
         - Split: shader-split.md        
         - Warp: shader-warp.md
     - Transition:
-        - Warp: shader-warp-transition.md
         - Dissolve: shader-dissolve.md
     - Horri-fi: shader-horrifi.md
 - Logic:
