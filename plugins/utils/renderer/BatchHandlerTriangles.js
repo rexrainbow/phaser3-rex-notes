@@ -54,7 +54,7 @@ class BatchHandlerTriangles extends BatchHandlerQuad {
             this.manager.setCurrentBatchNode(this, drawingContext);
         }
 
-        var submittedInstanceCount = vertices.length / (3 * this.verticesPerInstance);
+        var submittedInstanceCount = vertices.length / (2 * this.verticesPerInstance);
         if (submittedInstanceCount > this.instancesPerBatch) {
             throw new Error('rexBatchHandlerTriangle: Vertex count exceeds maximum per batch (' + this.maxVerticesPerBatch + ')');
         }
@@ -150,7 +150,7 @@ class BatchHandlerTriangles extends BatchHandlerQuad {
 BatchHandlerTriangles.defaultConfig = {
     name: 'rexBatchHandlerTriangle',
     verticesPerInstance: 3,
-    indicesPerInstance: 3,
+    indicesPerInstance: 5,
     shaderName: 'REXTRI',
     vertexSource: ShaderSourceVS,
     fragmentSource: ShaderSourceFS,
