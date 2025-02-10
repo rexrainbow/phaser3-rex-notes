@@ -439,10 +439,7 @@ layer.setRenderOrder(renderOrder);
 
 ### Shader effects
 
-`layer`` support [postFX effects](shader-builtin.md)
-
-!!! note
-    No preFX effect support
+`layer`` support [internal and external filters](shader-builtin.md)
 
 ### Tile
 

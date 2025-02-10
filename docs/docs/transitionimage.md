@@ -512,4 +512,4 @@ See [game object](gameobject.md)
 
 ### Shader effects
 
-Internal image game objects (`image.currentImage`, `image.nextImage`) support [preFX and postFX effects](shader-builtin.md)
+Internal image game objects (`image.currentImage`, `image.nextImage`) support [internal and external filters](shader-builtin.md)

@@ -198,4 +198,4 @@ See [mask](mask.md)
 
 ### Shader effects
 
-Internal image game object (`image.image`) support [preFX and postFX effects](shader-builtin.md)
+Internal image game object (`image.image`) support [internal and external filters](shader-builtin.md)

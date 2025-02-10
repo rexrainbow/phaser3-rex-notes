@@ -4,6 +4,9 @@ A quad with its own shader, built-in game object of phaser.
 
 - Author: Phaser Team
 
+!!! warning "WebGL only"
+    Only work in WebGL render mode.
+
 ## Usage
 
 ### Load GLSL

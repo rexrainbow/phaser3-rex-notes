@@ -178,7 +178,7 @@ See [mask](mask.md)
 
 ### Shader effects
 
-Support [preFX and postFX effects](shader-builtin.md)
+Support [internal and external filters](shader-builtin.md)
 
 ### Compare with [TileSprite](tilesprite.md)
 

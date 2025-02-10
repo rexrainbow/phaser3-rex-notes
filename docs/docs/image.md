@@ -46,7 +46,7 @@ var image = scene.make.image({
 
 - `key`, `frame` : 
     - A string
-    - An array of string to pick one element at random        
+    - An array of string to pick one element at random
 - `x`, `y`, `scale.x`, `scale.y` :
     - A number
     - A callback to get return value
@@ -103,4 +103,4 @@ See [mask](mask.md)
 
 ### Shader effects
 
-Support [preFX and postFX effects](shader-builtin.md)
+Support [internal and external filters](shader-builtin.md)

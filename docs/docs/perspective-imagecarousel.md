@@ -247,10 +247,7 @@ See [mask](mask.md)
 
 ### Shader effects
 
-Support [postFX effects](shader-builtin.md)
-
-!!! note
-    No preFX effect support
+Support [internal and external filters](shader-builtin.md)
 
 ### Compare with Plane game object
 
