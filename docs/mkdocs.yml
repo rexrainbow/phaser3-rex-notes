@@ -39,14 +39,17 @@ nav:
                 - Transition image: transitionimage.md
                 - Transition image pack: transitionimagepack.md
         - Multiple images: 
-            - Blitter: blitter.md
+            - Blitter:
+                - Blitter: blitter.md
+                - Sprite GPU Layer: sprite-gpulayer.md
             - Particles:
                 - Particles: particles.md
                 - Bitmap zone: bitmapzone.md
             - Tile sprite: tilesprite.md
-            - Nine slice : nineslice.md
-            - Nine patch: ninepatch.md
-            - Nine patch2: ninepatch2.md
+            - Nine slice:
+                - Nine slice : nineslice.md
+                - Nine patch: ninepatch.md
+                - Nine patch2: ninepatch2.md
             - Line: line.md
         - Shader: shader.md        
     - Mesh:
