@@ -1177,7 +1177,7 @@
         }
     }
 
-    BatchHandlerTriangles.defaultConfig = {
+    BatchHandlerTriangles.prototype.defaultConfig = {
         name: 'rexBatchHandlerTriangle',
         verticesPerInstance: 3,
         indicesPerInstance: 5,
