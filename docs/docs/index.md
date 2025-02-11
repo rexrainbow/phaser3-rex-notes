@@ -16,6 +16,7 @@
 
 - [Plugin list](plugin-list.md)
     - [Demos](https://codepen.io/rexrainbow/pens/public)
+- [Change log v3-to-v4](chagelog-v3-v4.md)
 - [Discord channel](https://discord.gg/kWkuFZK)
 - [Bug report](https://github.com/rexrainbow/phaser3-rex-notes/issues)
 - [Feature suggestion & discussion](https://github.com/rexrainbow/phaser3-rex-notes/discussions)
