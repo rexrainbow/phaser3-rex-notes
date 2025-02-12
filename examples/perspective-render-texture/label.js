@@ -17,8 +17,6 @@ class Demo extends Phaser.Scene {
         var image = this.add.rexPerspectiveRenderTexture(200, 300)
             .snapshot(card.getAllVisibleChildren())
 
-        this.add.circle(200, 300, 30, 0xff0000)
-
         this.input.on('pointermove', function (pointer) {
 
             if (!pointer.isDown) {

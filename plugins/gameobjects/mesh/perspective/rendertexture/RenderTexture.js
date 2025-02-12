@@ -41,6 +41,8 @@ class RenderTexture extends Image {
 
         super.setSizeToFrame(frame);
 
+        this.updateDisplayOrigin();
+
         if ((this.width !== width) || (this.height !== height)) {
             if (this.gridWidth !== undefined) {
                 this.resetVertices();

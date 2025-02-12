@@ -54,7 +54,7 @@ class Image extends Mesh {
         if (this.gridWidth === 0) {
             gridWidth = Math.max(frameWidth / 8, 32);
         } else {
-            gridHeight = this.gridWidth;
+            gridWidth = this.gridWidth;
         }
         if (this.gridHeight === 0) {
             gridHeight = Math.max(frameHeight / 8, 32);
