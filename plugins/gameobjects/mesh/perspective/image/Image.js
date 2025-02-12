@@ -24,7 +24,7 @@ class Image extends Mesh {
         this._rotationY = 0;
         this._rotationZ = 0;
         this.isBackFace = false;
-        this.hideBackFace = GetValue(config, 'hideBackFace', false);
+        this.hideBackFace = GetValue(config, 'hideBackFace', true);
 
         var gridWidth = GetValue(config, 'gridWidth', 0);
         var gridHeight = GetValue(config, 'gridHeight', gridWidth);
