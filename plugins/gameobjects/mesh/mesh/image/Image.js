@@ -1,14 +1,14 @@
+import Base from './Base.js';
 import Render from './render/Render.js';
 import Methods from './methods/Methods.js';
 import BatchHandlerTriangles from '../../../../utils/renderer/BatchHandlerTriangles.js';
 import AddNodeConstructor from '../../../../utils/renderer/AddNodeConstructor.js';
 
-const GameObject = Phaser.GameObjects.GameObject;
 const DefaultMeshNodes = new Phaser.Structs.Map([
     ['BatchHandler', 'rexBatchHandlerTriangles']
 ]);
 
-class Image extends GameObject {
+class Image extends Base {
     constructor(scene, x, y, texture, frame) {
         if (x === undefined) {
             x = 0;
@@ -116,24 +116,10 @@ class Image extends GameObject {
     }
 }
 
-const Components = Phaser.GameObjects.Components;
-Phaser.Class.mixin(Image,
-    [
-        Components.AlphaSingle,
-        Components.BlendMode,
-        Components.Depth,
-        Components.Flip,
-        Components.Mask,
-        Components.Origin,
-        Components.RenderNodes,
-        Components.Size,
-        Components.Texture,
-        Components.Transform,
-        Components.Visible,
-        Components.ScrollFactor,
-        Render,
-        Methods
-    ]
+Object.assign(
+    Image.prototype,
+    Render,
+    Methods
 );
 
 export default Image;
