@@ -4,6 +4,29 @@
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexperspectiveimageplugin = factory());
 })(this, (function () { 'use strict';
 
+    const GameObject = Phaser.GameObjects.GameObject;
+
+    let Image$2 = class Image extends GameObject {
+    };
+
+    const Components$1 = Phaser.GameObjects.Components;
+    Phaser.Class.mixin(Image$2,
+        [
+            Components$1.AlphaSingle,
+            Components$1.BlendMode,
+            Components$1.Depth,
+            Components$1.Flip,
+            Components$1.Mask,
+            Components$1.Origin,
+            Components$1.RenderNodes,
+            Components$1.Size,
+            Components$1.Texture,
+            Components$1.Transform,
+            Components$1.Visible,
+            Components$1.ScrollFactor,
+        ]
+    );
+
     const GetCalcMatrix = Phaser.GameObjects.GetCalcMatrix;
 
     var renderOptions = {
@@ -111,7 +134,7 @@
 
     var GlobalXY$1 = {};
 
-    const Linear$3 = Phaser.Math.Linear;
+    const Linear$1 = Phaser.Math.Linear;
     const RotateAround$2 = Phaser.Math.RotateAround;
 
     class Vertex {
@@ -274,8 +297,8 @@
         }
 
         setFrameUV(frameU0, frameV0, frameU1, frameV1) {
-            this.frameU = Linear$3(frameU0, frameU1, this.u);
-            this.frameV = Linear$3(frameV0, frameV1, this.v);
+            this.frameU = Linear$1(frameU0, frameU1, this.u);
+            this.frameV = Linear$1(frameV0, frameV1, this.v);
             return this;
         }
 
@@ -385,8 +408,8 @@
     var GlobalTriangle = {};
     var GlobalOut = {};
 
-    const RadToDeg$5 = Phaser.Math.RadToDeg;
-    const DegToRad$7 = Phaser.Math.DegToRad;
+    const RadToDeg$3 = Phaser.Math.RadToDeg;
+    const DegToRad$4 = Phaser.Math.DegToRad;
 
     class Face {
         constructor(vertex0, vertex1, vertex2) {
@@ -490,11 +513,11 @@
         }
 
         get angle() {
-            return RadToDeg$5(this._rotation);
+            return RadToDeg$3(this._rotation);
         }
 
         set angle(value) {
-            this.rotation = DegToRad$7(value);
+            this.rotation = DegToRad$4(value);
         }
 
         get alpha() {
@@ -620,7 +643,7 @@
         }
     }
 
-    var IsPlainObject$7 = function (obj)
+    var IsPlainObject$4 = function (obj)
     {
         // Not plain objects:
         // - Any object or value whose internal [[Class]] property is not "[object Object]"
@@ -653,7 +676,7 @@
     };
 
     var GenerateGridVertices = function (gameObject, columns, rows, sharedVertexMode) {
-        if (IsPlainObject$7(columns)) {
+        if (IsPlainObject$4(columns)) {
             var config = columns;
             columns = config.columns;
             rows = config.rows;
@@ -1250,12 +1273,11 @@
         }
     };
 
-    const GameObject = Phaser.GameObjects.GameObject;
     const DefaultMeshNodes = new Phaser.Structs.Map([
         ['BatchHandler', 'rexBatchHandlerTriangles']
     ]);
 
-    let Image$1 = class Image extends GameObject {
+    let Image$1 = class Image extends Image$2 {
         constructor(scene, x, y, texture, frame) {
             if (x === undefined) {
                 x = 0;
@@ -1363,24 +1385,10 @@
         }
     };
 
-    const Components$1 = Phaser.GameObjects.Components;
-    Phaser.Class.mixin(Image$1,
-        [
-            Components$1.AlphaSingle,
-            Components$1.BlendMode,
-            Components$1.Depth,
-            Components$1.Flip,
-            Components$1.Mask,
-            Components$1.Origin,
-            Components$1.RenderNodes,
-            Components$1.Size,
-            Components$1.Texture,
-            Components$1.Transform,
-            Components$1.Visible,
-            Components$1.ScrollFactor,
-            Render,
-            Methods$2
-        ]
+    Object.assign(
+        Image$1.prototype,
+        Render,
+        Methods$2
     );
 
     var AnmiationMethods = {
@@ -1428,14 +1436,14 @@
         AnmiationMethods,
     );
 
-    const AnimationState$1 = Phaser.Animations.AnimationState;
+    const AnimationState = Phaser.Animations.AnimationState;
 
-    let Sprite$1 = class Sprite extends Image$1 {
+    class Sprite extends Image$1 {
         constructor(scene, x, y, texture, frame) {
             super(scene, x, y, texture, frame);
             this.type = 'rexMeshSprite';
 
-            this.anims = new AnimationState$1(this);
+            this.anims = new AnimationState(this);
         }
 
         preUpdate(time, delta) {
@@ -1447,10 +1455,10 @@
 
             this.anims = undefined;
         }
-    };
+    }
 
     Object.assign(
-        Sprite$1.prototype,
+        Sprite.prototype,
         Methods$1,
     );
 
@@ -1465,7 +1473,7 @@
     };
 
     var RotateMethods = {
-        setRotateXYZ(rotationX, rotationY, rotationZ) {
+        setRotationXYZ(rotationX, rotationY, rotationZ) {
             if (rotationX !== undefined) {
                 this.rotationX = rotationX;
             }
@@ -1478,9 +1486,24 @@
             return this;
         },
 
+        setRotationX(rotationX) {
+            this.rotationX = rotationX;
+            return this;
+        },
+
+        setRotationY(rotationY) {
+            this.rotationY = rotationY;
+            return this;
+        },
+
+        setRotationZ(rotationZ) {
+            this.rotationZ = rotationZ;
+            return this;
+        },
+
         setAngleXYZ(angleX, angleY, angleZ) {
             if (angleX !== undefined) {
-                this.angleX = rotaangleXtionX;
+                this.angleX = angleX;
             }
             if (angleY !== undefined) {
                 this.angleY = angleY;
@@ -1489,7 +1512,22 @@
                 this.angleZ = angleZ;
             }
             return this;
-        }
+        },
+
+        setAngleX(angleX) {
+            this.angleX = angleX;
+            return this;
+        },
+
+        setAngleXY(angleY) {
+            this.angleY = angleY;
+            return this;
+        },
+
+        setAngleXZ(angleZ) {
+            this.angleZ = angleZ;
+            return this;
+        },
     };
 
     var Methods = {};
@@ -1584,19 +1622,19 @@
         return normal[2] < 0;
     };
 
-    const IsPlainObject$6 = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$h = Phaser.Utils.Objects.GetValue;
-    const RadToDeg$4 = Phaser.Math.RadToDeg;
-    const DegToRad$6 = Phaser.Math.DegToRad;
+    const IsPlainObject$3 = Phaser.Utils.Objects.IsPlainObject;
+    const GetValue$d = Phaser.Utils.Objects.GetValue;
+    const RadToDeg$2 = Phaser.Math.RadToDeg;
+    const DegToRad$3 = Phaser.Math.DegToRad;
 
-    class Image extends Sprite$1 {
+    class Image extends Sprite {
         constructor(scene, x, y, key, frame, config) {
-            if (IsPlainObject$6(x)) {
+            if (IsPlainObject$3(x)) {
                 config = x;
-                x = GetValue$h(config, 'x', 0);
-                y = GetValue$h(config, 'y', 0);
-                key = GetValue$h(config, 'key', null);
-                frame = GetValue$h(config, 'frame', null);
+                x = GetValue$d(config, 'x', 0);
+                y = GetValue$d(config, 'y', 0);
+                key = GetValue$d(config, 'key', null);
+                frame = GetValue$d(config, 'frame', null);
             }
 
             super(scene, x, y, key, frame);
@@ -1605,10 +1643,10 @@
             this._rotationY = 0;
             this._rotationZ = 0;
             this.isBackFace = false;
-            this.hideBackFace = GetValue$h(config, 'hideBackFace', false);
+            this.hideBackFace = GetValue$d(config, 'hideBackFace', true);
 
-            var gridWidth = GetValue$h(config, 'gridWidth', 0);
-            var gridHeight = GetValue$h(config, 'gridHeight', gridWidth);
+            var gridWidth = GetValue$d(config, 'gridWidth', 0);
+            var gridHeight = GetValue$d(config, 'gridHeight', gridWidth);
             this.resetVertices(gridWidth, gridHeight);
 
         }
@@ -1635,7 +1673,7 @@
             if (this.gridWidth === 0) {
                 gridWidth = Math.max(frameWidth / 8, 32);
             } else {
-                gridHeight = this.gridWidth;
+                gridWidth = this.gridWidth;
             }
             if (this.gridHeight === 0) {
                 gridHeight = Math.max(frameHeight / 8, 32);
@@ -1667,11 +1705,11 @@
         }
 
         get angleX() {
-            return RadToDeg$4(this.rotationX);
+            return RadToDeg$2(this.rotationX);
         }
 
         set angleX(value) {
-            this.rotationX = DegToRad$6(value);
+            this.rotationX = DegToRad$3(value);
         }
 
         get rotationY() {
@@ -1688,11 +1726,11 @@
         }
 
         get angleY() {
-            return RadToDeg$4(this.rotationY);
+            return RadToDeg$2(this.rotationY);
         }
 
         set angleY(value) {
-            this.rotationY = DegToRad$6(value);
+            this.rotationY = DegToRad$3(value);
         }
 
         get rotationZ() {
@@ -1709,11 +1747,11 @@
         }
 
         get angleZ() {
-            return RadToDeg$4(this.rotationZ);
+            return RadToDeg$2(this.rotationZ);
         }
 
         set angleZ(value) {
-            this.rotationZ = DegToRad$6(value);
+            this.rotationZ = DegToRad$3(value);
         }
     }
 
@@ -1737,18 +1775,18 @@
         return gameObject;
     }
 
-    const GetAdvancedValue$3 = Phaser.Utils.Objects.GetAdvancedValue;
-    const BuildGameObject$5 = Phaser.GameObjects.BuildGameObject;
+    const GetAdvancedValue$2 = Phaser.Utils.Objects.GetAdvancedValue;
+    const BuildGameObject$2 = Phaser.GameObjects.BuildGameObject;
 
     function PerspectiveImageCreator (config, addToScene) {
         if (config === undefined) { config = {}; }
         if (addToScene !== undefined) {
             config.add = addToScene;
         }
-        var key = GetAdvancedValue$3(config, 'key', null);
-        var frame = GetAdvancedValue$3(config, 'frame', null);
+        var key = GetAdvancedValue$2(config, 'key', null);
+        var frame = GetAdvancedValue$2(config, 'frame', null);
         var gameObject = new Image(this.scene, 0, 0, key, frame, config);
-        BuildGameObject$5(this.scene, gameObject, config);
+        BuildGameObject$2(this.scene, gameObject, config);
 
         return gameObject;
     }
@@ -2104,7 +2142,7 @@
         return (object instanceof GameObjectClass) || (object instanceof LayerClass$1);
     };
 
-    var GetValue$g = Phaser.Utils.Objects.GetValue;
+    var GetValue$c = Phaser.Utils.Objects.GetValue;
 
     var Snapshot = function (config) {
         if (!config) {
@@ -2114,13 +2152,13 @@
         var gameObjects = config.gameObjects;
         var renderTexture = config.renderTexture;  // renderTexture, or dynamicTexture
         var saveTexture = config.saveTexture;
-        var x = GetValue$g(config, 'x', undefined);
-        var y = GetValue$g(config, 'y', undefined);
-        var width = GetValue$g(config, 'width', undefined);
-        var height = GetValue$g(config, 'height', undefined);
-        var originX = GetValue$g(config, 'originX', 0);
-        var originY = GetValue$g(config, 'originY', 0);
-        var padding = GetValue$g(config, 'padding', 0);
+        var x = GetValue$c(config, 'x', undefined);
+        var y = GetValue$c(config, 'y', undefined);
+        var width = GetValue$c(config, 'width', undefined);
+        var height = GetValue$c(config, 'height', undefined);
+        var originX = GetValue$c(config, 'originX', 0);
+        var originY = GetValue$c(config, 'originY', 0);
+        var padding = GetValue$c(config, 'padding', 0);
 
         var scrollX, scrollY;
         if ((width === undefined) || (height === undefined) || (x === undefined) || (y === undefined)) {
@@ -2181,7 +2219,7 @@
 
         // Draw gameObjects
         gameObjects = SortGameObjectsByDepth(Clone(gameObjects));
-        renderTexture.draw(gameObjects);
+        renderTexture.draw(gameObjects).render();
 
         // Save render result to texture
         if (saveTexture) {
@@ -2195,17 +2233,17 @@
         return renderTexture;
     };
 
-    const IsPlainObject$5 = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$f = Phaser.Utils.Objects.GetValue;
+    const IsPlainObject$2 = Phaser.Utils.Objects.IsPlainObject;
+    const GetValue$b = Phaser.Utils.Objects.GetValue;
 
     let RenderTexture$1 = class RenderTexture extends Image {
         constructor(scene, x, y, width, height, config) {
-            if (IsPlainObject$5(x)) {
+            if (IsPlainObject$2(x)) {
                 config = x;
-                x = GetValue$f(config, 'x', 0);
-                y = GetValue$f(config, 'y', 0);
-                width = GetValue$f(config, 'width', 32);
-                height = GetValue$f(config, 'height', 32);
+                x = GetValue$b(config, 'x', 0);
+                y = GetValue$b(config, 'y', 0);
+                width = GetValue$b(config, 'width', 32);
+                height = GetValue$b(config, 'height', 32);
             }
 
             // dynamic-texture -> quad-image
@@ -2228,6 +2266,23 @@
             this.rt = null;
         }
 
+        setSizeToFrame(frame) {
+            var width = this.width;
+            var height = this.height;
+
+            super.setSizeToFrame(frame);
+
+            this.updateDisplayOrigin();
+
+            if ((this.width !== width) || (this.height !== height)) {
+                if (this.gridWidth !== undefined) {
+                    this.resetVertices();
+                }
+            }
+
+            return this;
+        }
+
         snapshot(gameObjects, config) {
             if (config === undefined) {
                 config = {};
@@ -2237,9 +2292,7 @@
 
             Snapshot(config);
 
-            if ((this.width !== this.frame.realWidth) || (this.height !== this.frame.realHeight)) {
-                this.syncSize();
-            }
+            this.setSizeToFrame();
 
             return this;
         }
@@ -2251,108 +2304,18 @@
         return gameObject;
     }
 
-    const GetAdvancedValue$2 = Phaser.Utils.Objects.GetAdvancedValue;
-    const BuildGameObject$4 = Phaser.GameObjects.BuildGameObject;
+    const GetAdvancedValue$1 = Phaser.Utils.Objects.GetAdvancedValue;
+    const BuildGameObject$1 = Phaser.GameObjects.BuildGameObject;
 
     function PerspectiveRenderTextureCreator (config, addToScene) {
         if (config === undefined) { config = {}; }
         if (addToScene !== undefined) {
             config.add = addToScene;
         }
-        var width = GetAdvancedValue$2(config, 'width', 32);
-        var height = GetAdvancedValue$2(config, 'height', 32);
+        var width = GetAdvancedValue$1(config, 'width', 32);
+        var height = GetAdvancedValue$1(config, 'height', 32);
         var gameObject = new RenderTexture$1(this.scene, 0, 0, width, height, config);
-        BuildGameObject$4(this.scene, gameObject, config);
-
-        return gameObject;
-    }
-
-    const AnimationState = Phaser.Animations.AnimationState;
-    const IsPlainObject$4 = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$e = Phaser.Utils.Objects.GetValue;
-
-    class Sprite extends Image {
-        constructor(scene, x, y, key, frame, config) {
-            if (IsPlainObject$4(x)) {
-                config = x;
-                x = GetValue$e(config, 'x', 0);
-                y = GetValue$e(config, 'y', 0);
-                key = GetValue$e(config, 'key', null);
-                frame = GetValue$e(config, 'frame', null);
-            }
-
-            super(scene, x, y, key, frame, config);
-            this.type = 'rexPerspectiveSprite';
-            this.anims = new AnimationState(this);
-        }
-
-        preDestroy() {
-            super.preDestroy();
-
-            this.anims.destroy();
-            this.anims = undefined;
-        }
-
-        preUpdate(time, delta) {
-            this.anims.update(time, delta);
-            super.preUpdate(time, delta);
-        }
-
-        play(key, ignoreIfPlaying, startFrame) {
-            return this.anims.play(key, ignoreIfPlaying, startFrame);
-        }
-
-        playReverse(key, ignoreIfPlaying) {
-            return this.anims.playReverse(key, ignoreIfPlaying);
-        }
-
-        playAfterDelay(key, delay) {
-            return this.anims.playAfterDelay(key, delay);
-        }
-
-        playAfterRepeat(key, repeatCount) {
-            return this.anims.playAfterRepeat(key, repeatCount);
-        }
-
-        chain(key) {
-            return this.anims.chain(key);
-        }
-
-        stop() {
-            return this.anims.stop();
-        }
-
-        stopAfterDelay(delay) {
-            return this.anims.stopAfterDelay(delay);
-        }
-
-        stopAfterRepeat(repeatCount) {
-            return this.anims.stopAfterRepeat(repeatCount);
-        }
-
-        stopOnFrame(frame) {
-            return this.anims.stopOnFrame(frame);
-        }
-    }
-
-    function PerspectiveSpriteFactory (x, y, texture, frame, config) {
-        var gameObject = new Sprite(this.scene, x, y, texture, frame, config);
-        this.scene.add.existing(gameObject);
-        return gameObject;
-    }
-
-    const GetAdvancedValue$1 = Phaser.Utils.Objects.GetAdvancedValue;
-    const BuildGameObject$3 = Phaser.GameObjects.BuildGameObject;
-
-    function PerspectiveSpriteCreator (config, addToScene) {
-        if (config === undefined) { config = {}; }
-        if (addToScene !== undefined) {
-            config.add = addToScene;
-        }
-        var key = GetAdvancedValue$1(config, 'key', null);
-        var frame = GetAdvancedValue$1(config, 'frame', null);
-        var gameObject = new Sprite(this.scene, 0, 0, key, frame, config);
-        BuildGameObject$3(this.scene, gameObject, config);
+        BuildGameObject$1(this.scene, gameObject, config);
 
         return gameObject;
     }
@@ -2516,8 +2479,8 @@
         return gameObject;
     };
 
-    const DegToRad$5 = Phaser.Math.DegToRad;
-    const RadToDeg$3 = Phaser.Math.RadToDeg;
+    const DegToRad$2 = Phaser.Math.DegToRad;
+    const RadToDeg$1 = Phaser.Math.RadToDeg;
 
     var GetLocalState = function (gameObject) {
         if (!gameObject.hasOwnProperty('rexContainer')) {
@@ -2536,10 +2499,10 @@
 
             Object.defineProperty(rexContainer, 'angle', {
                 get: function () {
-                    return RadToDeg$3(this.rotation);
+                    return RadToDeg$1(this.rotation);
                 },
                 set: function (value) {
-                    this.rotation = DegToRad$5(value);
+                    this.rotation = DegToRad$2(value);
                 }
             });
             Object.defineProperty(rexContainer, 'displayWidth', {
@@ -2599,7 +2562,7 @@
         }
     };
 
-    const GetValue$d = Phaser.Utils.Objects.GetValue;
+    const GetValue$a = Phaser.Utils.Objects.GetValue;
     const BaseAdd = Base.prototype.add;
 
     var Add = function (gameObject, config) {
@@ -2671,13 +2634,13 @@
             state.syncCameraFilter = config;
             state.syncDisplayList = config;
         } else {
-            state.syncPosition = GetValue$d(config, 'syncPosition', true);
-            state.syncRotation = GetValue$d(config, 'syncRotation', true);
-            state.syncScale = GetValue$d(config, 'syncScale', true);
-            state.syncAlpha = GetValue$d(config, 'syncAlpha', true);
-            state.syncScrollFactor = GetValue$d(config, 'syncScrollFactor', true);
-            state.syncCameraFilter = GetValue$d(config, 'syncCameraFilter', true);
-            state.syncDisplayList = GetValue$d(config, 'syncDisplayList', true);
+            state.syncPosition = GetValue$a(config, 'syncPosition', true);
+            state.syncRotation = GetValue$a(config, 'syncRotation', true);
+            state.syncScale = GetValue$a(config, 'syncScale', true);
+            state.syncAlpha = GetValue$a(config, 'syncAlpha', true);
+            state.syncScrollFactor = GetValue$a(config, 'syncScrollFactor', true);
+            state.syncCameraFilter = GetValue$a(config, 'syncCameraFilter', true);
+            state.syncDisplayList = GetValue$a(config, 'syncDisplayList', true);
         }
 
     };
@@ -2966,7 +2929,7 @@
 
     };
 
-    const DegToRad$4 = Phaser.Math.DegToRad;
+    const DegToRad$1 = Phaser.Math.DegToRad;
 
     var Rotation = {
         updateChildRotation(child) {
@@ -3013,7 +2976,7 @@
 
         setChildLocalAngle(child, angle) {
             var localState = GetLocalState(child);
-            localState.rotation = DegToRad$4(angle);
+            localState.rotation = DegToRad$1(angle);
             this.updateChildRotation(child);
             return this;
         },
@@ -4171,18 +4134,18 @@
         }
     };
 
-    const GetValue$c = Phaser.Utils.Objects.GetValue;
+    const GetValue$9 = Phaser.Utils.Objects.GetValue;
 
     var DrawBounds$1 = function (gameObjects, graphics, config) {
         var strokeColor, lineWidth, fillColor, fillAlpha, padding;
         if (typeof (config) === 'number') {
             strokeColor = config;
         } else {
-            strokeColor = GetValue$c(config, 'color');
-            lineWidth = GetValue$c(config, 'lineWidth');
-            fillColor = GetValue$c(config, 'fillColor');
-            fillAlpha = GetValue$c(config, 'fillAlpha', 1);
-            padding = GetValue$c(config, 'padding', 0);
+            strokeColor = GetValue$9(config, 'color');
+            lineWidth = GetValue$9(config, 'lineWidth');
+            fillColor = GetValue$9(config, 'fillColor');
+            fillAlpha = GetValue$9(config, 'fillAlpha', 1);
+            padding = GetValue$9(config, 'padding', 0);
         }
 
         if (Array.isArray(gameObjects)) {
@@ -4236,12 +4199,12 @@
 
     var Points = [{ x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 }];
 
-    const GetValue$b = Phaser.Utils.Objects.GetValue;
+    const GetValue$8 = Phaser.Utils.Objects.GetValue;
 
     var DrawBounds = function (graphics, config) {
-        var drawContainer = GetValue$b(config, 'drawContainer', true);
+        var drawContainer = GetValue$8(config, 'drawContainer', true);
 
-        var gameObjects = GetValue$b(config, 'children');
+        var gameObjects = GetValue$8(config, 'children');
         if (gameObjects === undefined) {
             gameObjects = this.getAllVisibleChildren([this]);
         }
@@ -4636,8 +4599,8 @@
         }
     };
 
-    const RadToDeg$2 = Phaser.Math.RadToDeg;
-    const DegToRad$3 = Phaser.Math.DegToRad;
+    const RadToDeg = Phaser.Math.RadToDeg;
+    const DegToRad = Phaser.Math.DegToRad;
 
     class FaceContainer extends ContainerLite {
         constructor(scene, x, y, width, height, faces) {
@@ -4661,19 +4624,19 @@
         }
 
         get angleX() {
-            return RadToDeg$2(this.rotationX);
+            return RadToDeg(this.rotationX);
         }
 
         set angleX(value) {
-            this.rotationX = DegToRad$3(value);
+            this.rotationX = DegToRad(value);
         }
 
         get rotateX() {
-            return RadToDeg$2(this.rotationX);
+            return RadToDeg(this.rotationX);
         }
 
         set rotateX(value) {
-            this.rotationX = DegToRad$3(value);
+            this.rotationX = DegToRad(value);
         }
 
         // Override
@@ -4687,19 +4650,19 @@
         }
 
         get angleY() {
-            return RadToDeg$2(this.rotationY);
+            return RadToDeg(this.rotationY);
         }
 
         set angleY(value) {
-            this.rotationY = DegToRad$3(value);
+            this.rotationY = DegToRad(value);
         }
 
         get rotateY() {
-            return RadToDeg$2(this.rotationY);
+            return RadToDeg(this.rotationY);
         }
 
         set rotateY(value) {
-            this.rotationY = DegToRad$3(value);
+            this.rotationY = DegToRad(value);
         }
 
         // Override
@@ -4713,52 +4676,24 @@
         }
 
         get angleZ() {
-            return RadToDeg$2(this.rotationZ);
+            return RadToDeg(this.rotationZ);
         }
 
         set angleZ(value) {
-            this.rotationZ = DegToRad$3(value);
+            this.rotationZ = DegToRad(value);
         }
 
         get rotateZ() {
-            return RadToDeg$2(this.rotationZ);
+            return RadToDeg(this.rotationZ);
         }
 
         set rotateZ(value) {
-            this.rotationZ = DegToRad$3(value);
+            this.rotationZ = DegToRad(value);
         }
 
         setDebug(graphic, callback) {
             ForEachFace(this.faces, function (face) {
                 face.setDebug(graphic, callback);
-            }, null, true);
-            return this;
-        }
-
-        panX(v) {
-            ForEachFace(this.faces, function (face) {
-                face.panX(v);
-            }, null, true);
-            return this;
-        }
-
-        panY(v) {
-            ForEachFace(this.faces, function (face) {
-                face.panY(v);
-            }, null, true);
-            return this;
-        }
-
-        panZ(v) {
-            ForEachFace(this.faces, function (face) {
-                face.panZ(v);
-            }, null, true);
-            return this;
-        }
-
-        transformVerts(x, y, z, rotateX, rotateY, rotateZ) {
-            ForEachFace(this.faces, function (face) {
-                face.transformVerts(x, y, z, rotateX, rotateY, rotateZ);
             }, null, true);
             return this;
         }
@@ -4770,7 +4705,7 @@
 
     }
 
-    const IsPlainObject$3 = Phaser.Utils.Objects.IsPlainObject;
+    const IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
     const DefaultImageConfig = { key: '__WHITE' };
     const ClassMap = {
         image: Image,
@@ -4783,7 +4718,7 @@
         }
 
         var perspectiveObject;
-        if (IsPlainObject$3(config)) {
+        if (IsPlainObject$1(config)) {
             if (!config.hasOwnProperty('type')) {
                 if (config.hasOwnProperty('key')) {
                     config.type = 'image';
@@ -4833,17 +4768,13 @@
         return faces;
     };
 
-    const DegToRad$2 = Phaser.Math.DegToRad;
-
-    const RAD180 = DegToRad$2(180);
-
-    var LayoutFaces$1 = function (parent, faces) {
+    var LayoutFaces = function (parent, faces) {
         var backFace = faces.back;
         if (backFace) {
             if (parent.orientation === 0) { // Flip around Y
-                backFace.transformVerts(0, 0, 0, 0, RAD180, 0);
+                backFace.angleY = 180;
             } else { // Flip around X
-                backFace.transformVerts(0, 0, 0, RAD180, 0, 0);
+                backFace.angleX = 180;
             }
         }
     };
@@ -4954,7 +4885,7 @@
         }
     };
 
-    const GetValue$a = Phaser.Utils.Objects.GetValue;
+    const GetValue$7 = Phaser.Utils.Objects.GetValue;
 
     class ComponentBase {
         constructor(parent, config) {
@@ -4963,7 +4894,7 @@
             this.isShutdown = false;
 
             // Event emitter, default is private event emitter
-            this.setEventEmitter(GetValue$a(config, 'eventEmitter', true));
+            this.setEventEmitter(GetValue$7(config, 'eventEmitter', true));
 
             // Register callback of parent destroy event, also see `shutdown` method
             if (this.parent) {
@@ -5040,7 +4971,7 @@
         EventEmitterMethods
     );
 
-    const GetValue$9 = Phaser.Utils.Objects.GetValue;
+    const GetValue$6 = Phaser.Utils.Objects.GetValue;
 
     class TickTask extends ComponentBase {
         constructor(parent, config) {
@@ -5049,7 +4980,7 @@
             this._isRunning = false;
             this.isPaused = false;
             this.tickingState = false;
-            this.setTickingMode(GetValue$9(config, 'tickingMode', 1));
+            this.setTickingMode(GetValue$6(config, 'tickingMode', 1));
             // boot() later
         }
 
@@ -5153,7 +5084,7 @@
         'always': 2
     };
 
-    const GetValue$8 = Phaser.Utils.Objects.GetValue;
+    const GetValue$5 = Phaser.Utils.Objects.GetValue;
 
     class SceneUpdateTickTask extends TickTask {
         constructor(parent, config) {
@@ -5164,7 +5095,7 @@
 
             // If this.scene is not available, use game's 'step' event
             var defaultEventName = (this.scene) ? 'update' : 'step';
-            this.tickEventName = GetValue$8(config, 'tickEventName', defaultEventName);
+            this.tickEventName = GetValue$5(config, 'tickEventName', defaultEventName);
             this.isSceneTicker = !IsGameUpdateEvent(this.tickEventName);
 
         }
@@ -5200,7 +5131,7 @@
         return (eventName === 'step') || (eventName === 'poststep');
     };
 
-    const GetValue$7 = Phaser.Utils.Objects.GetValue;
+    const GetValue$4 = Phaser.Utils.Objects.GetValue;
     const Clamp = Phaser.Math.Clamp;
 
     class Timer {
@@ -5209,15 +5140,15 @@
         }
 
         resetFromJSON(o) {
-            this.state = GetValue$7(o, 'state', IDLE);
-            this.timeScale = GetValue$7(o, 'timeScale', 1);
-            this.delay = GetValue$7(o, 'delay', 0);
-            this.repeat = GetValue$7(o, 'repeat', 0);
-            this.repeatCounter = GetValue$7(o, 'repeatCounter', 0);
-            this.repeatDelay = GetValue$7(o, 'repeatDelay', 0);
-            this.duration = GetValue$7(o, 'duration', 0);
-            this.nowTime = GetValue$7(o, 'nowTime', 0);
-            this.justRestart = GetValue$7(o, 'justRestart', false);
+            this.state = GetValue$4(o, 'state', IDLE);
+            this.timeScale = GetValue$4(o, 'timeScale', 1);
+            this.delay = GetValue$4(o, 'delay', 0);
+            this.repeat = GetValue$4(o, 'repeat', 0);
+            this.repeatCounter = GetValue$4(o, 'repeatCounter', 0);
+            this.repeatDelay = GetValue$4(o, 'repeatDelay', 0);
+            this.duration = GetValue$4(o, 'duration', 0);
+            this.nowTime = GetValue$4(o, 'nowTime', 0);
+            this.justRestart = GetValue$4(o, 'justRestart', false);
         }
 
         toJSON() {
@@ -5425,19 +5356,19 @@
 
     }
 
-    const GetValue$6 = Phaser.Utils.Objects.GetValue;
+    const GetValue$3 = Phaser.Utils.Objects.GetValue;
     const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
     const GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
 
     class EaseValueTaskBase extends TimerTickTask {
         resetFromJSON(o) {
-            this.timer.resetFromJSON(GetValue$6(o, 'timer'));
-            this.setEnable(GetValue$6(o, 'enable', true));
-            this.setTarget(GetValue$6(o, 'target', this.parent));
+            this.timer.resetFromJSON(GetValue$3(o, 'timer'));
+            this.setEnable(GetValue$3(o, 'enable', true));
+            this.setTarget(GetValue$3(o, 'target', this.parent));
             this.setDelay(GetAdvancedValue(o, 'delay', 0));
             this.setDuration(GetAdvancedValue(o, 'duration', 1000));
-            this.setEase(GetValue$6(o, 'ease', 'Linear'));
-            this.setRepeat(GetValue$6(o, 'repeat', 0));
+            this.setEase(GetValue$3(o, 'ease', 'Linear'));
+            this.setRepeat(GetValue$3(o, 'repeat', 0));
 
             return this;
         }
@@ -5557,8 +5488,8 @@
         }
     }
 
-    const GetValue$5 = Phaser.Utils.Objects.GetValue;
-    const Linear$2 = Phaser.Math.Linear;
+    const GetValue$2 = Phaser.Utils.Objects.GetValue;
+    const Linear = Phaser.Math.Linear;
 
     class Flip extends EaseValueTaskBase {
         constructor(gameObject, config) {
@@ -5572,10 +5503,10 @@
 
         resetFromJSON(o) {
             super.resetFromJSON(o);
-            this.setEase(GetValue$5(o, 'ease', 'Cubic'));
+            this.setEase(GetValue$2(o, 'ease', 'Cubic'));
 
-            this.setFrontToBackDirection(GetValue$5(o, 'frontToBack', 0));
-            this.setBackToFrontDirection(GetValue$5(o, 'backToFront', 1));
+            this.setFrontToBackDirection(GetValue$2(o, 'frontToBack', 0));
+            this.setBackToFrontDirection(GetValue$2(o, 'backToFront', 1));
             return this;
         }
 
@@ -5660,7 +5591,7 @@
         updateTarget(gameObject, timer) {
             var t = this.easeFn(timer.t);
 
-            var value = Linear$2(this.startAngle, this.endAngle, t);
+            var value = Linear(this.startAngle, this.endAngle, t);
             if (gameObject.orientation === 0) {
                 gameObject.angleY = value;
             } else {
@@ -5676,25 +5607,25 @@
         'right-to-left': 1
     };
 
-    const IsPlainObject$2 = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$4 = Phaser.Utils.Objects.GetValue;
+    const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+    const GetValue$1 = Phaser.Utils.Objects.GetValue;
 
     const FaceNames = ['back', 'front'];
 
     class Card extends FaceContainer {
         constructor(scene, x, y, config) {
-            if (IsPlainObject$2(x)) {
+            if (IsPlainObject(x)) {
                 config = x;
-                x = GetValue$4(config, 'x', 0);
-                y = GetValue$4(config, 'y', 0);
+                x = GetValue$1(config, 'x', 0);
+                y = GetValue$1(config, 'y', 0);
             }
 
             var faces = CreateFaces(scene, config, FaceNames);
             var backFace = faces.back;
             var frontFace = faces.front;
 
-            var width = GetValue$4(config, 'width');
-            var height = GetValue$4(config, 'height');
+            var width = GetValue$1(config, 'width');
+            var height = GetValue$1(config, 'height');
             if ((width === undefined) || (height === undefined)) {
                 if (width === undefined) {
                     var frontFaceWidth = (frontFace) ? frontFace.width : 0;
@@ -5720,15 +5651,15 @@
                 this[`${name}Face`] = face;
             }, this);
 
-            var flipConfig = GetValue$4(config, 'flip', undefined);
+            var flipConfig = GetValue$1(config, 'flip', undefined);
             if (flipConfig !== false) {
                 this.flip = new Flip(this, flipConfig);
             }
 
-            this.setOrientation(GetValue$4(config, 'orientation', 0));
-            LayoutFaces$1(this, faces);
+            this.setOrientation(GetValue$1(config, 'orientation', 0));
+            LayoutFaces(this, faces);
 
-            this.setFace(GetValue$4(config, 'face', 0));
+            this.setFace(GetValue$1(config, 'face', 0));
         }
 
         get rotationX() {
@@ -5740,9 +5671,10 @@
                 return;
             }
 
+            var delta = value - this.frontFaceRotationX;
             this.frontFaceRotationX = value;
             ForEachFace(this.faces, function (face) {
-                face.rotationX = value;
+                face.rotationX += delta;
             }, null, true);
         }
 
@@ -5755,9 +5687,10 @@
                 return;
             }
 
+            var delta = value - this.frontFaceRotationY;
             this.frontFaceRotationY = value;
             ForEachFace(this.faces, function (face) {
-                face.rotationY = value;
+                face.rotationY += delta;
             }, null, true);
         }
 
@@ -5770,9 +5703,10 @@
                 return;
             }
 
+            var delta = value - this.frontFaceRotationZ;
             this.frontFaceRotationZ = value;
             ForEachFace(this.faces, function (face) {
-                face.rotationZ = value;
+                face.rotationZ += delta;
             }, null, true);
         }
 
@@ -5836,7 +5770,7 @@
         return gameObject;
     }
 
-    const BuildGameObject$2 = Phaser.GameObjects.BuildGameObject;
+    const BuildGameObject = Phaser.GameObjects.BuildGameObject;
 
     function PerspectiveCardCreator (config, addToScene) {
         if (config === undefined) { config = {}; }
@@ -5844,450 +5778,6 @@
             config.add = addToScene;
         }
         var gameObject = new Card(this.scene, 0, 0, config);
-        BuildGameObject$2(this.scene, gameObject, config);
-
-        return gameObject;
-    }
-
-    var FaceNameToIndex = function (faces, name) {
-        for (var i = 0, cnt = faces.length; i < cnt; i++) {
-            if (face && (face.name === name)) {
-                return i;
-            }
-        }
-        return -1;
-    };
-
-    const GetValue$3 = Phaser.Utils.Objects.GetValue;
-    const RadToDeg$1 = Phaser.Math.RadToDeg;
-    const DegToRad$1 = Phaser.Math.DegToRad;
-    const WrapDegrees$1 = Phaser.Math.Angle.WrapDegrees;
-    const ShortestBetween = Phaser.Math.Angle.ShortestBetween;
-    const Wrap$2 = Phaser.Math.Wrap;
-    const Linear$1 = Phaser.Math.Linear;
-
-    let Roll$1 = class Roll extends EaseValueTaskBase {
-        constructor(gameObject, config) {
-            super(gameObject, config);
-            // this.parent = gameObject;
-            // this.timer
-
-            this.resetFromJSON(config);
-            this.boot();
-        }
-
-        resetFromJSON(o) {
-            super.resetFromJSON(o);
-            this.setEase(GetValue$3(o, 'ease', 'Cubic'));
-            return this;
-        }
-
-        start(deltaRotation) {
-            if (this.timer.isRunning) {
-                return this;
-            }
-
-            this.timer
-                .setDelay(this.delay)
-                .setDuration(this.duration);
-
-            var gameObject = this.parent;
-            this.startRotationY = gameObject.rotationY;
-            this.endRotationY = this.startRotationY + deltaRotation;
-
-            super.start();
-            return this;
-        }
-
-        to(index, duration) {
-            if (this.isRunning) {
-                return this;
-            }
-
-            var carousel = this.parent;
-
-            if (typeof (index) === 'string') {
-                index = FaceNameToIndex(carousel.faces, index);
-                if (index === -1) {
-                    index = 0;
-                }
-            }
-            index = Wrap$2(index, 0, carousel.faces.length);
-
-            if (duration !== undefined) {
-                this.setDuration(duration);
-            }
-
-            var start = WrapDegrees$1(RadToDeg$1(carousel.rotationY));
-            var end = WrapDegrees$1(RadToDeg$1(((carousel.rtl) ? 1 : -1) * carousel.faceAngle * index));
-            var delta = ShortestBetween(start, end); // Degrees
-            this.start(DegToRad$1(delta));
-
-            carousel.currentFaceIndex = index;
-            return this;
-        }
-
-        toNext(duration) {
-            var index = this.parent.currentFaceIndex + 1;
-            this.to(index, duration);
-            return this;
-        }
-
-        toPrevious(duration) {
-            var index = this.parent.currentFaceIndex - 1;
-            this.to(index, duration);
-            return this;
-        }
-
-        toRight(duration) {
-            if (!this.parent.rtl) {
-                this.toNext(duration);
-            } else {
-                this.toPrevious(duration);
-            }
-            return this;
-        }
-
-        toLeft(duration) {
-            if (!this.parent.rtl) {
-                this.toPrevious(duration);
-            } else {
-                this.toNext(duration);
-            }
-            return this;
-        }
-
-        updateTarget(gameObject, timer) {
-            var t = this.easeFn(timer.t);
-            gameObject.rotationY = Linear$1(this.startRotationY, this.endRotationY, t);
-        }
-    };
-
-    var GetFirstFace = function (faces) {
-        var face;
-        for (var i = 0, cnt = faces.length; i < cnt; i++) {
-            face = faces[i];
-            if (face) {
-                break;
-            }
-        }
-        return face;
-    };
-
-    var LayoutFaces = function (parent, faces) {
-        if (parent.faceWidth === 0) {
-            return;
-        }
-
-        var radius = parent.faceRadius;
-        ForEachFace(faces, function (face) {
-            var transferZ = radius / face.height;
-            face
-                .transformVerts(0, 0, transferZ)
-                .panZ(transferZ);
-
-        }, null, true);
-    };
-
-    const IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$2 = Phaser.Utils.Objects.GetValue;
-    const DegToRad = Phaser.Math.DegToRad;
-    const RadToDeg = Phaser.Math.RadToDeg;
-    const WrapDegrees = Phaser.Math.Angle.WrapDegrees;
-    const Linear = Phaser.Math.Linear;
-    const Wrap$1 = Phaser.Math.Wrap;
-
-    class Carousel extends FaceContainer {
-        constructor(scene, x, y, config) {
-            if (IsPlainObject$1(x)) {
-                config = x;
-                x = GetValue$2(config, 'x', 0);
-                y = GetValue$2(config, 'y', 0);
-            }
-
-            var faceConfig = GetValue$2(config, 'faces', undefined);
-            if (!faceConfig) {
-                faceConfig = [];
-            }
-            var faces = CreateFaces(scene, faceConfig);
-            var firstFace = GetFirstFace(faces);
-
-            var width = GetValue$2(config, 'width');
-            var height = GetValue$2(config, 'height');
-            if (width === undefined) {
-                width = (firstFace) ? firstFace.width : 0;
-            }
-            if (height === undefined) {
-                height = (firstFace) ? firstFace.height : 0;
-            }
-
-            super(scene, x, y, width, height, faces);
-            this.type = 'rexPerspectiveCarousel';
-
-            this.face0RotationY = undefined;
-
-            var faceCount = faces.length;
-            // Face angle
-            this.faceAngle = (faceCount > 0) ? DegToRad(360 / faces.length) : 0;
-
-            // Face width, face radius
-            var faceWidth = GetValue$2(config, 'faceWidth', undefined);
-            if (faceWidth === undefined) {
-                var faceSpace = GetValue$2(config, 'faceSpace', 0);
-                faceWidth = (firstFace) ? (firstFace.width + faceSpace) : 0;
-            }
-            this.faceWidth = faceWidth;
-            if (faceCount > 2) {
-                this.faceRadius = (faceWidth / 2) / Math.tan(this.faceAngle / 2);
-            } else {
-                this.faceRadius = faceWidth / 2;
-            }
-
-            LayoutFaces(this, faces);
-            
-            var rollConfig = GetValue$2(config, 'roll', undefined);
-            if (rollConfig !== false) {
-                var RollClass = GetValue$2(config, 'rollClass', Roll$1);
-                this.roll = new RollClass(this, rollConfig);
-            }
-
-            // Left-To-Right, or Right-To-Left
-            this.rtl = GetValue$2(config, 'rtl', false);
-
-            // z-index
-            this.zStart = GetValue$2(config, 'z', 1);
-            this.zEnd = GetValue$2(config, 'zEnd', this.zStart - 1);
-
-            this.setFace(GetValue$2(config, 'face', 0));
-        }
-
-        get rotationY() {
-            return this.face0RotationY;
-        }
-
-        set rotationY(value) {
-            if (this.face0RotationY === value) {
-                return;
-            }
-
-            this.face0RotationY = value;
-            var deltaAngle = this.faceAngle;
-            var zStart = this.zStart;
-            var zEnd = this.zEnd;
-            var sign = (this.rtl) ? -1 : 1;
-            ForEachFace(this.faces, function (face, i) {
-                // Set rotationY
-                var rotationY = value + (sign * deltaAngle * i);
-                face.rotationY = rotationY;
-
-                // Set depth
-                var angle = Math.abs(WrapDegrees(RadToDeg(rotationY))); // 0~180
-                var z = Linear(zStart, zEnd, angle / 180);
-                face.setDepth(z);
-            }, null, true);
-        }
-
-        get face() {
-            return this.currentFaceIndex;
-        }
-
-        set face(index) {
-            if (typeof (index) === 'string') {
-                index = FaceNameToIndex(this.faces, index);
-                if (index === -1) {
-                    index = 0;
-                }
-            }
-
-            index = Wrap$1(index, 0, this.faces.length);
-            this.currentFaceIndex = index;
-            this.rotationY = ((this.rtl) ? 1 : -1) * this.faceAngle * index;
-        }
-
-        setFace(index) {
-            this.face = index;
-            return this;
-        }
-    }
-
-    function PerspectiveCarouselFactory (x, y, config) {
-        var gameObject = new Carousel(this.scene, x, y, config);
-        this.scene.add.existing(gameObject);
-        return gameObject;
-    }
-
-    const BuildGameObject$1 = Phaser.GameObjects.BuildGameObject;
-
-    function PerspectiveCarouselCreator (config, addToScene) {
-        if (config === undefined) { config = {}; }
-        if (addToScene !== undefined) {
-            config.add = addToScene;
-        }
-        var gameObject = new Carousel(this.scene, 0, 0, config);
-        BuildGameObject$1(this.scene, gameObject, config);
-
-        return gameObject;
-    }
-
-    class Roll extends Roll$1 {
-
-        toNext(duration) {
-            var gameObject = this.parent;
-            if (!gameObject.repeat && gameObject.isLastImage) {
-                return this;
-            }
-
-            if (this.isRunning) {
-                return this;
-            }
-
-            gameObject.setImageIndex(gameObject.currentImageIndex + 1);
-            super
-                .toNext(duration)
-                .once('complete', gameObject.updateTexture, gameObject);
-
-            return this;
-        }
-
-        toPrevious(duration) {
-            var gameObject = this.parent;
-            if (!gameObject.repeat && gameObject.isFirstImage) {
-                return this;
-            }
-
-            if (this.isRunning) {
-                return this;
-            }
-
-            gameObject.setImageIndex(gameObject.currentImageIndex - 1);
-            super
-                .toPrevious(duration)
-                .once('complete', gameObject.updateTexture, gameObject);
-
-            return this;
-        }
-    }
-
-    var GetFaceSize = function (scene, images) {
-        if (!images) {
-            return null;
-        }
-        if (Array.isArray(images)) {
-            var textureKey = images[0];
-            var frame = scene.sys.textures.getFrame(textureKey.key, textureKey.frame);
-            result.width = frame.cutWidth;
-            result.height = frame.cutHeight;
-        } else {
-            result.width = images.width;
-            result.height = images.height;
-        }
-        return result;
-    };
-
-    var result = {};
-
-    var GetIndexOffsetMap = function (faceCount) {
-        var indexOffsetMap = [0];
-        for (var i = 1, cnt = Math.floor((faceCount - 1) / 2); i <= cnt; i++) {
-            indexOffsetMap.push(i);
-            indexOffsetMap.push(-i);
-        }
-        return indexOffsetMap;
-    };
-
-    const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$1 = Phaser.Utils.Objects.GetValue;
-    const Wrap = Phaser.Math.Wrap;
-
-    class ImageCarousel extends Carousel {
-        constructor(scene, x, y, config) {
-            if (IsPlainObject(x)) {
-                config = x;
-                x = GetValue$1(config, 'x', 0);
-                y = GetValue$1(config, 'y', 0);
-            }
-
-            if (config === undefined) {
-                config = {};
-            }
-
-            var faceWidth, faceHeight;
-            var images = GetValue$1(config, 'images');
-            var faceSize = GetFaceSize(scene, images);
-            if (faceSize) {
-                faceWidth = faceSize.width;
-                faceHeight = faceSize.height;
-            } else {
-                faceWidth = GetValue$1(config, 'width');
-                faceHeight = GetValue$1(config, 'height');
-            }
-
-            // Create 4 render-texture faces
-            var faceCount = GetValue$1(config, 'faceCount', 4);
-            var face, faces = [];
-            for (var i = 0; i < faceCount; i++) {
-                face = new RenderTexture$1(scene, 0, 0, faceWidth, faceHeight, config);
-                scene.add.existing(face);
-                faces.push(face);
-            }
-
-            config.faces = faces;
-            config.rollClass = Roll;
-            super(scene, x, y, config);
-            this.type = 'rexPerspectiveImageCarousel';
-
-            this.images = images;
-            this.indexOffsetMap = GetIndexOffsetMap(faceCount);
-            this.repeat = GetValue$1(config, 'repeat', true);
-            this
-                .setImageIndex(GetValue$1(config, 'index', 0))
-                .updateTexture();
-        }
-
-        setImageIndex(index) {
-            this.currentImageIndex = Wrap(index, 0, this.images.length);
-            return this;
-        }
-
-        get isFirstImage() {
-            return (this.images.length === 0) || (this.currentImageIndex === 0);
-        }
-
-        get isLastImage() {
-            return (this.images.length === 0) || (this.currentImageIndex === (this.images.length - 1));
-        }
-
-        updateTexture() {
-            var totalKeys = this.images.length;
-            var totalFaces = this.faces.length;
-
-            this.indexOffsetMap.forEach(function (indexOffset) {
-                var textureIndex = Wrap(this.currentImageIndex + indexOffset, 0, totalKeys);
-                var faceIndex = Wrap(this.currentFaceIndex + indexOffset, 0, totalFaces);
-
-                var textureKey = this.images[textureIndex];
-                this.faces[faceIndex].rt.drawFrame(textureKey.key, textureKey.frame);
-            }, this);
-
-            return this;
-        }
-
-    }
-
-    function PerspectiveImageCarouselFactory (x, y, config) {
-        var gameObject = new ImageCarousel(this.scene, x, y, config);
-        this.scene.add.existing(gameObject);
-        return gameObject;
-    }
-
-    const BuildGameObject = Phaser.GameObjects.BuildGameObject;
-
-    function PerspectiveImageCarouselCreator (config, addToScene) {
-        if (config === undefined) { config = {}; }
-        if (addToScene !== undefined) {
-            config.add = addToScene;
-        }
-        var gameObject = new ImageCarousel(this.scene, config);
         BuildGameObject(this.scene, gameObject, config);
 
         return gameObject;
@@ -6482,11 +5972,8 @@
 
             //  Register our new Game Object type
             pluginManager.registerGameObject('rexPerspectiveImage', PerspectiveImageFactory, PerspectiveImageCreator);
-            pluginManager.registerGameObject('rexPerspectiveRenderTexture', PerspectiveRenderTextureFactory, PerspectiveRenderTextureCreator);
-            pluginManager.registerGameObject('rexPerspectiveSprite', PerspectiveSpriteFactory, PerspectiveSpriteCreator);
+            pluginManager.registerGameObject('rexPerspectiveRenderTexture', PerspectiveRenderTextureFactory, PerspectiveRenderTextureCreator);        
             pluginManager.registerGameObject('rexPerspectiveCard', PerspectiveCardFactory, PerspectiveCardCreator);
-            pluginManager.registerGameObject('rexPerspectiveCarousel', PerspectiveCarouselFactory, PerspectiveCarouselCreator);
-            pluginManager.registerGameObject('rexPerspectiveImageCarousel', PerspectiveImageCarouselFactory, PerspectiveImageCarouselCreator);
         }
 
         start() {
@@ -6501,10 +5988,7 @@
 
     SetValue(window, 'RexPlugins.GameObjects.PerspectiveImage', Image);
     SetValue(window, 'RexPlugins.GameObjects.PerspectiveRenderTexture', RenderTexture$1);
-    SetValue(window, 'RexPlugins.GameObjects.PerspectiveSprite', Sprite);
     SetValue(window, 'RexPlugins.GameObjects.PerspectiveCard', Card);
-    SetValue(window, 'RexPlugins.GameObjects.PerspectiveCarousel', Carousel);
-    SetValue(window, 'RexPlugins.GameObjects.PerspectiveImageCarousel', ImageCarousel);
 
     SetValue(window, 'RexPlugins.GameObjects.ContainerPerspective', ContainerPerspective);
 

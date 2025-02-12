@@ -4,6 +4,29 @@
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexquadimageplugin = factory());
 })(this, (function () { 'use strict';
 
+    const GameObject = Phaser.GameObjects.GameObject;
+
+    let Image$2 = class Image extends GameObject {
+    };
+
+    const Components = Phaser.GameObjects.Components;
+    Phaser.Class.mixin(Image$2,
+        [
+            Components.AlphaSingle,
+            Components.BlendMode,
+            Components.Depth,
+            Components.Flip,
+            Components.Mask,
+            Components.Origin,
+            Components.RenderNodes,
+            Components.Size,
+            Components.Texture,
+            Components.Transform,
+            Components.Visible,
+            Components.ScrollFactor,
+        ]
+    );
+
     const GetCalcMatrix = Phaser.GameObjects.GetCalcMatrix;
 
     var renderOptions = {
@@ -1250,12 +1273,11 @@
         }
     };
 
-    const GameObject = Phaser.GameObjects.GameObject;
     const DefaultMeshNodes = new Phaser.Structs.Map([
         ['BatchHandler', 'rexBatchHandlerTriangles']
     ]);
 
-    let Image$1 = class Image extends GameObject {
+    let Image$1 = class Image extends Image$2 {
         constructor(scene, x, y, texture, frame) {
             if (x === undefined) {
                 x = 0;
@@ -1363,24 +1385,10 @@
         }
     };
 
-    const Components = Phaser.GameObjects.Components;
-    Phaser.Class.mixin(Image$1,
-        [
-            Components.AlphaSingle,
-            Components.BlendMode,
-            Components.Depth,
-            Components.Flip,
-            Components.Mask,
-            Components.Origin,
-            Components.RenderNodes,
-            Components.Size,
-            Components.Texture,
-            Components.Transform,
-            Components.Visible,
-            Components.ScrollFactor,
-            Render,
-            Methods$1
-        ]
+    Object.assign(
+        Image$1.prototype,
+        Render,
+        Methods$1
     );
 
     var AnmiationMethods = {
@@ -2025,7 +2033,7 @@
 
         // Draw gameObjects
         gameObjects = SortGameObjectsByDepth(Clone(gameObjects));
-        renderTexture.draw(gameObjects);
+        renderTexture.draw(gameObjects).render();
 
         // Save render result to texture
         if (saveTexture) {
@@ -2072,6 +2080,22 @@
             this.rt = null;
         }
 
+        setSizeToFrame(frame) {
+            var width = this.width;
+            var height = this.height;
+
+            super.setSizeToFrame(frame);
+            this.updateDisplayOrigin();
+
+            if ((this.width !== width) || (this.height !== height)) {
+                if (this.gridWidth !== undefined) {
+                    this.resetVertices();
+                }
+            }
+
+            return this;
+        }
+
         snapshot(gameObjects, config) {
             if (config === undefined) {
                 config = {};
@@ -2081,9 +2105,7 @@
 
             Snapshot(config);
 
-            if ((this.width !== this.frame.realWidth) || (this.height !== this.frame.realHeight)) {
-                this.syncSize();
-            }
+            this.setSizeToFrame();
 
             return this;
         }

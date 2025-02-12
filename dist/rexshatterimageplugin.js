@@ -4,6 +4,29 @@
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexshatterimageplugin = factory());
 })(this, (function () { 'use strict';
 
+    const GameObject = Phaser.GameObjects.GameObject;
+
+    let Image$1 = class Image extends GameObject {
+    };
+
+    const Components = Phaser.GameObjects.Components;
+    Phaser.Class.mixin(Image$1,
+        [
+            Components.AlphaSingle,
+            Components.BlendMode,
+            Components.Depth,
+            Components.Flip,
+            Components.Mask,
+            Components.Origin,
+            Components.RenderNodes,
+            Components.Size,
+            Components.Texture,
+            Components.Transform,
+            Components.Visible,
+            Components.ScrollFactor,
+        ]
+    );
+
     const GetCalcMatrix = Phaser.GameObjects.GetCalcMatrix;
 
     var renderOptions = {
@@ -1250,12 +1273,11 @@
         }
     };
 
-    const GameObject = Phaser.GameObjects.GameObject;
     const DefaultMeshNodes = new Phaser.Structs.Map([
         ['BatchHandler', 'rexBatchHandlerTriangles']
     ]);
 
-    class Image extends GameObject {
+    class Image extends Image$1 {
         constructor(scene, x, y, texture, frame) {
             if (x === undefined) {
                 x = 0;
@@ -1363,24 +1385,10 @@
         }
     }
 
-    const Components = Phaser.GameObjects.Components;
-    Phaser.Class.mixin(Image,
-        [
-            Components.AlphaSingle,
-            Components.BlendMode,
-            Components.Depth,
-            Components.Flip,
-            Components.Mask,
-            Components.Origin,
-            Components.RenderNodes,
-            Components.Size,
-            Components.Texture,
-            Components.Transform,
-            Components.Visible,
-            Components.ScrollFactor,
-            Render,
-            Methods$2
-        ]
+    Object.assign(
+        Image.prototype,
+        Render,
+        Methods$2
     );
 
     var AnmiationMethods = {
