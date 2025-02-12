@@ -55,6 +55,8 @@ class InputText extends DOMElement {
                 continue;
             } else if (key in elementStyle) {
                 style[key] = config[key];
+            } else if (key in element) {
+                element[key] = config[key];
             }
         }
         style['box-sizing'] = 'border-box';

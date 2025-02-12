@@ -18,21 +18,27 @@ class Demo extends Phaser.Scene {
             fixedWidth: 200,
             fixedHeight: 80,
             backgroundColor: '#333333',
-            valign: 'center'
+            valign: 'center',
         })
             .setOrigin(0.5)
             .setInteractive()
             .on('pointerdown', function () {
                 var config = {
                     inputType: 'textarea',  // 'text'
-                    onOpen: function (textObject) {
-                        console.log('Open text editor');
+
+                    onCreate(textObject, inputText) {
+                        console.log('Create inputText, focus = ', inputText.isFocused);
                     },
-                    onTextChanged: function (textObject, text) {
+
+                    onOpen(textObject, inputText) {
+                        console.log('Open text editor', inputText.node.style);
+                    },
+
+                    onTextChanged(textObject, text) {
                         textObject.text = text;
                         console.log(`Text: ${text}`);
                     },
-                    onClose: function (textObject) {
+                    onClose(textObject) {
                         console.log('Close text editor');
                     },
                     selectAll: true,

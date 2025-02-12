@@ -8,6 +8,7 @@ const ElementProperties = {
     readOnly: ['readOnly', false],
     spellCheck: ['spellcheck', false],
     autoComplete: ['autocomplete', 'off'],
+    autoCapitalize: ['autocapitalize', 'off']
 };
 
 const StyleProperties = {

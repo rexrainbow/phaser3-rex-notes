@@ -158,11 +158,14 @@ var editor = scene.plugins.get('rexTextEdit').edit(textObject, {
     // enterClose: true,
     // selectAll: false,
 
+    // onCreate: undefined,
     // onOpen: undefined,
     // onTextChanged: undefined,
     // onClose: undefined,
 
     // text: '',
+
+    // other_style: '...'
 });
 // var editor = scene.plugins.get('rexTextEdit').edit(textObject, config, onClose);
 ```
@@ -173,11 +176,20 @@ var editor = scene.plugins.get('rexTextEdit').edit(textObject, {
         - `'text'` (default), or 
         - `'password'`
         - `'number'`
-    - `config.onOpen` : Callback invoked when input text is created.
+    - `config.onCreate` : Callback invoked when input text is created, before focusing.
         ```javascript
-        function (textObject) {
+        function (textObject, inputText) {
         }
         ```
+        - `textObject` : Target text object.
+        - `inputText` : [input text object](inputtext.md) for editor.
+    - `config.onOpen` : Callback invoked when [input text object](inputtext.md) is created and focused.
+        ```javascript
+        function (textObject, inputText) {
+        }
+        ```
+        - `textObject` : Target text object.
+        - `inputText` : [input text object](inputtext.md) for editor.
     - `config.onTextChanged` : Callback invoked when input text changed.
         ```javascript
         function (textObject, text) {

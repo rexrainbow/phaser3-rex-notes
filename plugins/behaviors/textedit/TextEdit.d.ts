@@ -10,7 +10,16 @@ declare namespace TextEdit {
         enterClose?: boolean,
         selectAll?: boolean,
 
-        onOpen?: (textObject: Phaser.GameObjects.GameObject) => void,
+        onCreate?: (
+            textObject: Phaser.GameObjects.GameObject,
+            inputText: InputText
+        ) => void,
+
+        onOpen?: (
+            textObject: Phaser.GameObjects.GameObject,
+            inputText: InputText
+        ) => void,
+
         onTextChanged?: (textObject: Phaser.GameObjects.GameObject, text: string) => void,
         onClose?: (textObject: Phaser.GameObjects.GameObject) => void,
 

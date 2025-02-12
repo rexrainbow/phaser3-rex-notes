@@ -159,6 +159,7 @@ Default configuration
     readOnly: false,
     spellCheck: false,
     autoComplete: 'off',
+    autoCapitalize: 'off',
 
     // Style properties
     align: undefined,
@@ -194,6 +195,7 @@ Default configuration
     - `readOnly` : `readonly` element property.
     - `spellCheck` : `spellcheck` element property.
     - `autoComplete` : `autocomplete` element property.
+    - `autoCapitalize` : `autocapitalize` element property.
 - Element style properties
     - `align` : `text-align` style property.
     - `paddingLeft`, `paddingRight`, `paddingTop`, `paddingBottom` : `padding-left`, `padding-right`, `padding-top`, `padding-bottom` style property.

@@ -35,6 +35,10 @@ var config = {
     parent: 'phaser-example',
     width: 800,
     height: 600,
+    // max: {
+    //     width: 4000,
+    //     height: 3000,
+    // },
     scale: {
         mode: Phaser.Scale.EXPAND,
         autoCenter: Phaser.Scale.CENTER_BOTH,
