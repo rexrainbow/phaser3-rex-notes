@@ -120,9 +120,7 @@
 111. [Path follower](pathfollower.md): Set position of game object on a path.
 112. [Perlin](perlin.md): Perlin2/Perlin3 noise and simplex2/simplex3 noise.
 113. [Perspective/Card](perspective-card.md): A container with two perspective-images.
-114. [Perspective/Carousel](perspective-carousel.md): A container with cards.
 115. [Perspective/Image](perspective-image.md): Image with perspective rotation.
-116. [Perspective/ImageCarousel](perspective-imagecarousel.md): Display list of images.
 117. [Perspective/Render texture](perspective-rendertexture.md): Render texture with perspective rotation.
 118. [Perspective/Sprite](perspective-sprite.md): Play animation on perspective-image..
 119. [PNG appender](png-appender.md): Append user data below tail of PNG data, or extract this user data from PNG data.
