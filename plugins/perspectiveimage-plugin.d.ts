@@ -7,12 +7,6 @@ import PerspectiveRenderTextureCreator from './gameobjects/mesh/perspective/rend
 import PerspectiveCardFactory from './gameobjects/mesh/perspective/card/Factory';
 import PerspectiveCardCreator from './gameobjects/mesh/perspective/card/Creator';
 
-import PerspectiveCarouselFactory from './gameobjects/mesh/perspective/carousel/Factory';
-import PerspectiveCarouselCreator from './gameobjects/mesh/perspective/carousel/Creator';
-
-import PerspectiveImageCarouselFactory from './gameobjects/mesh/perspective/imagecarousel/Factory';
-import PerspectiveImageCarouselCreator from './gameobjects/mesh/perspective/imagecarousel/Creator';
-
 import ContainerPerspective from './behaviors/containerperspective/ContainerPerspective.js';
 import ContainerLite from './gameobjects/container/containerlite/ContainerLite';
 
@@ -30,16 +24,12 @@ declare module 'phaser' {
             rexPerspectiveImage: typeof PerspectiveImageFactory,
             rexPerspectiveRenderTexture: typeof PerspectiveRenderTextureFactory,
             rexPerspectiveCard: typeof PerspectiveCardFactory,
-            rexPerspectiveCarousel: typeof PerspectiveCarouselFactory,
-            rexPerspectiveImageCarousel: typeof PerspectiveImageCarouselFactory,
         }
 
         interface GameObjectCreator {
             rexPerspectiveImage: typeof PerspectiveImageCreator,
             rexPerspectiveRenderTexture: typeof PerspectiveRenderTextureCreator,
             rexPerspectiveCard: typeof PerspectiveCardCreator,
-            rexPerspectiveCarousel: typeof PerspectiveCarouselCreator,
-            rexPerspectiveImageCarousel: typeof PerspectiveImageCarouselCreator,
         }
     }
 }
