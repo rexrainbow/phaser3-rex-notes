@@ -35,6 +35,21 @@ class RenderTexture extends Image {
         this.rt = null;
     }
 
+    setSizeToFrame(frame) {
+        var width = this.width;
+        var height = this.height;
+
+        super.setSizeToFrame(frame);
+
+        if ((this.width !== width) || (this.height !== height)) {
+            if (this.gridWidth !== undefined) {
+                this.resetVertices();
+            }
+        }
+
+        return this;
+    }
+
     snapshot(gameObjects, config) {
         if (config === undefined) {
             config = {};
@@ -44,9 +59,7 @@ class RenderTexture extends Image {
 
         Snapshot(config);
 
-        if ((this.width !== this.frame.realWidth) || (this.height !== this.frame.realHeight)) {
-            this.syncSize();
-        }
+        this.setSizeToFrame();
 
         return this;
     }

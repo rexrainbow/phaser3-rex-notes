@@ -80,7 +80,7 @@ var Snapshot = function (config) {
 
     // Draw gameObjects
     gameObjects = SortGameObjectsByDepth(Clone(gameObjects));
-    renderTexture.draw(gameObjects);
+    renderTexture.draw(gameObjects).render();
 
     // Save render result to texture
     if (saveTexture) {

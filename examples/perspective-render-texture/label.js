@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import PerspectiveImagePlugin from '../../plugins/perspectiveimage-plugin.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
@@ -16,6 +16,8 @@ class Demo extends Phaser.Scene {
         var card = CreateLabel(this).setPosition(600, 300);
         var image = this.add.rexPerspectiveRenderTexture(200, 300)
             .snapshot(card.getAllVisibleChildren())
+
+        this.add.circle(200, 300, 30, 0xff0000)
 
         this.input.on('pointermove', function (pointer) {
 
