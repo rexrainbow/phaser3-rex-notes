@@ -68,9 +68,10 @@ class Card extends FaceContainer {
             return;
         }
 
+        var delta = value - this.frontFaceRotationX;
         this.frontFaceRotationX = value;
         ForEachFace(this.faces, function (face) {
-            face.rotationX = value;
+            face.rotationX += delta;
         }, null, true);
     }
 
@@ -83,9 +84,10 @@ class Card extends FaceContainer {
             return;
         }
 
+        var delta = value - this.frontFaceRotationY;
         this.frontFaceRotationY = value;
         ForEachFace(this.faces, function (face) {
-            face.rotationY = value;
+            face.rotationY += delta;
         }, null, true);
     }
 
@@ -98,9 +100,10 @@ class Card extends FaceContainer {
             return;
         }
 
+        var delta = value - this.frontFaceRotationZ;
         this.frontFaceRotationZ = value;
         ForEachFace(this.faces, function (face) {
-            face.rotationZ = value;
+            face.rotationZ += delta;
         }, null, true);
     }
 

@@ -100,34 +100,6 @@ class FaceContainer extends Container {
         return this;
     }
 
-    panX(v) {
-        ForEachFace(this.faces, function (face) {
-            face.panX(v);
-        }, null, true);
-        return this;
-    }
-
-    panY(v) {
-        ForEachFace(this.faces, function (face) {
-            face.panY(v);
-        }, null, true);
-        return this;
-    }
-
-    panZ(v) {
-        ForEachFace(this.faces, function (face) {
-            face.panZ(v);
-        }, null, true);
-        return this;
-    }
-
-    transformVerts(x, y, z, rotateX, rotateY, rotateZ) {
-        ForEachFace(this.faces, function (face) {
-            face.transformVerts(x, y, z, rotateX, rotateY, rotateZ);
-        }, null, true);
-        return this;
-    }
-
     forEachFace(callback, scope, ignoreInvalid) {
         ForEachFace(this.faces, callback, scope, ignoreInvalid);
         return this;

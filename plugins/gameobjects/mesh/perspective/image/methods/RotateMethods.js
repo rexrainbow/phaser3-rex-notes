@@ -1,5 +1,5 @@
 export default {
-    setRotateXYZ(rotationX, rotationY, rotationZ) {
+    setRotationXYZ(rotationX, rotationY, rotationZ) {
         if (rotationX !== undefined) {
             this.rotationX = rotationX;
         }
@@ -12,9 +12,24 @@ export default {
         return this;
     },
 
+    setRotationX(rotationX) {
+        this.rotationX = rotationX;
+        return this;
+    },
+
+    setRotationY(rotationY) {
+        this.rotationY = rotationY;
+        return this;
+    },
+
+    setRotationZ(rotationZ) {
+        this.rotationZ = rotationZ;
+        return this;
+    },
+
     setAngleXYZ(angleX, angleY, angleZ) {
         if (angleX !== undefined) {
-            this.angleX = rotaangleXtionX;
+            this.angleX = angleX;
         }
         if (angleY !== undefined) {
             this.angleY = angleY;
@@ -23,5 +38,20 @@ export default {
             this.angleZ = angleZ;
         }
         return this;
-    }
+    },
+
+    setAngleX(angleX) {
+        this.angleX = angleX;
+        return this;
+    },
+
+    setAngleXY(angleY) {
+        this.angleY = angleY;
+        return this;
+    },
+
+    setAngleXZ(angleZ) {
+        this.angleZ = angleZ;
+        return this;
+    },
 }
