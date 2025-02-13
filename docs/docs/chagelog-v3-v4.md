@@ -1,5 +1,9 @@
 ## Game objects
 
+- Implement rexMesh game object, official Mesh game object has beeen removed.
+- Abandon PerspectiveSprite, now PerspectiveImage can play frame animation.
+- Abandon PerspectiveCarousel and PerspectiveImageCarousel.
+- TransitionImage and TransitionImagePack are removed from rexUI.
 
 ## Shader effects
 
@@ -17,9 +21,9 @@
 - Rename Swirl pipeline to Swirl filter
 - Rename Toonify pipeline to Toonify filter
 - Rename Warp pipeline to Warp filter
-- Remove Drop shadow pipeline
-- Remove Glow pipeline
-- Remove Gray scale pipeline
-- Remove Inverse pipeline
-- Remove Kawase blur pipeline
-- Remove Pixelation pipeline
+- Abandon Drop shadow pipeline
+- Abandon Glow pipeline
+- Abandon Gray scale pipeline
+- Abandon Inverse pipeline
+- Abandon Kawase blur pipeline
+- Abandon Pixelation pipeline
