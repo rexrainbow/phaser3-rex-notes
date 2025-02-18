@@ -305,12 +305,20 @@ card.flip.setEase(ease);
     card.angleX = angleX; // Angle in degrees
     card.angleY = angleY; // Angle in degrees
     card.angleZ = angleZ; // Angle in degrees
+    image.setAngleX(angleX);
+    image.setAngleY(angleY);
+    image.setAngleZ(angleZ);
+    image.setAngleXYZ(angleX, angleY, angleZ);
     ```
     or
     ```javascript
     card.rotationX = rotationX; // Angle in radians
     card.rotationY = rotationY; // Angle in radians
     card.rotationZ = rotationZ; // Angle in radians
+    image.setRotationX(rotationX);
+    image.setRotationY(rotationY);
+    image.setRotationZ(rotationZ);
+    image.setRotationXYZ(rotationX, rotationY, rotationZ);
     ```
 
 ### Debug
@@ -329,14 +337,6 @@ card.flip.setEase(ease);
 ### Other properties
 
 See [container](containerlite.md), [Mesh game object](mesh.md), [game object](gameobject.md)
-
-### Create mask
-
-```javascript
-var mask = card.createBitmapMask();
-```
-
-See [mask](mask.md)
 
 ### Shader effects
 

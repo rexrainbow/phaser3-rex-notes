@@ -1,5 +1,6 @@
 import Vertex from './Vertex.js';
 import GetInCenter from './GetInCenter.js';
+import Contains from './Contains.js';
 
 const RadToDeg = Phaser.Math.RadToDeg;
 const DegToRad = Phaser.Math.DegToRad;
@@ -233,6 +234,10 @@ class Face {
     setColor(value) {
         this.color = value;
         return this;
+    }
+
+    contains(localX, localY) {
+        return Contains(this, localX, localY);
     }
 }
 

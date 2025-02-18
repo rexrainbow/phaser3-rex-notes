@@ -1,4 +1,8 @@
 export default {
+    /*
+    this.rotationX, this.rotationY, this.rotationZ,
+    this.angleX, this.angleY, this.angleZ
+    */ 
     setRotationXYZ(rotationX, rotationY, rotationZ) {
         if (rotationX !== undefined) {
             this.rotationX = rotationX;

@@ -1,132 +1,79 @@
 ## Introduction
 
-Render a group of textured vertices and manipulate the view of those vertices, such as rotation, translation or scaling.
+Render a group of textured vertices.
 
-- Author: Phaser Team
+- Author:Rex
+- Game object 
 
 !!! warning "WebGL only"
     It only works in WebGL render mode.
 
+!!! warning "Incompatible"
+    Does not support 3D model display.
+
 ## Usage
 
-### Quad
+### Load texture
 
-!!! note 
-    See also [Plane](plane.md)
+```javascript
+scene.load.image(key, url);
+```
 
-1. Load texture
-    ```javascript
-    scene.load.image(key, url);
-    ```
-1. Add mesh object
-    ```javascript
-    var mesh = scene.add.mesh(x, y, texture, frame);
-    ```
-    or
-    ```javascript
-    var mesh = scene.make.mesh({
-        x: 0,
-        y: 0,
-        add: true,
+Reference: [load image](loader.md#image)
 
-        key: null,
-        frame: null
-    });
-    ```
-1. Set perspective or orthographic projection
-    - Perspective projection
+### Add image object
+
+```javascript
+var image = scene.add.rexMesh(x, y, key);
+// var image = scene.add.rexMesh(x, y, key, frame);
+```
+
+Add image from JSON
+
+```javascript
+var image = scene.make.rexMesh({
+    x: 0,
+    y: 0,
+    key: '',
+    // frame: '',
+
+    // angle: 0,
+    // alpha: 1,
+    // scale : {
+    //    x: 1,
+    //    y: 1
+    //},
+    // origin: {x: 0.5, y: 0.5},
+
+    add: true
+});
+```
+
+- `key`, `frame` : 
+    - A string
+    - An array of string to pick one element at random
+- `x`, `y`, `scale.x`, `scale.y` :
+    - A number
+    - A callback to get return value
         ```javascript
-        mesh.setPerspective(width, height, fov);
-        // mesh.setPerspective(width, height, fov, near, far);
+        function() { return 0; }
         ```
-        - `width`, `height` : The width/height of the projection matrix. Typically the same as the Mesh and/or Renderer.
-        - `fov` : The field of view, in degrees.
-        - `near`, `far` : The near/far value of the view. Default value are `0.01`/`1000`.
-    - Orthographic projection
+    - Random integer between min and max
         ```javascript
-        mesh.setOrtho(mesh.width/mesh.height, 1);
-        // mesh.setOrtho(scaleX, scaleY, near, far);
+        { randInt: [min, max] }
         ```
-        - `scaleX`, `scaleY` : The default horizontal/vertical scale in relation to the Mesh / Renderer dimensions.
-        - `near`, `far` : The near/far value of the view. Default value are `0.01`/`1000`.
-1. Creates a grid of vertices
-    ```javascript
-    Phaser.Geom.Mesh.GenerateGridVerts({
-        mesh: mesh,
-        texture: textureKey,
-        frame: frameName,
-        width: 1,
-        height: 1,
-        widthSegments: 1,
-        heightSegments: 1,
-
-        // x: 0,
-        // y: 0,
-        // colors: 0xffffff,
-        // alphas: 1,
-        // tile: false,
-        // isOrtho: false
-    })
-    ```
-    - `mesh` : The vertices of the generated grid will be added to this Mesh Game Object.
-    - `texture` : The texture to be used for this Grid.
-    - `frame` : The name or index of the frame within the Texture.
-    - `width` , `height` : The width/height of the grid in 3D units.
+    - Random float between min and max
         ```javascript
-        {
-            // ...
-            width: (frameWidth/frameHeight),
-            height: (frameHeight/frameHeight)
-            // ...
-        }
-        
+        { randFloat: [min, max] }
         ```
-    - `widthSegments`, `heightSegments` : The number of segments to split the grid horizontally/vertically in to.
-    - `colors` : An array of colors, one per vertex, or a single color value applied to all vertices.
-    - `alphas` An array of alpha values, one per vertex, or a single alpha value applied to all vertices.
-    - `tile` :
-        - `false` : Display as a single texture. Default value.
-        - `true` : Texture tile (repeat) across the grid segments.
 
-### Model
-
-1. Load model
-    ```javascript
-    scene.load.obj(key, url, objURL, matURL);
-    ```
-    - `objURL` : URL to load the obj file.
-    - `matURL` : URL to load the material file.
-1. Add mesh object
-    ```javascript
-    var mesh = scene.add.mesh(x, y);
-    ```
-    or
-    ```javascript
-    var mesh = scene.make.mesh({
-        x: 0,
-        y: 0,
-        add: true
-    });
-    ```
-1. Add model
-    ```javascript
-    mesh.addVerticesFromObj(key, scale, x, y, z, rotateX, rotateY, rotateZ, zIsUp);
-    ```
-    - `key` : The key of the model data in the OBJ Cache to add to this Mesh.
-    - `scale` : An amount to scale the model data by. Default is `1`.
-    - `x`, `y`, `z` : Translate the model x/y/z position by this amount.
-    - `rotateX`, `rotateY`, `rotateZ` : Rotate the model on the x/y/z axis by this amount, in radians.
-    - `zIsUp` : 
-        - `true` : Z axis is up.
-        - `false` : Y axis is up.
-
-### Custom mesh class
+### Custom class
 
 - Define class
     ```javascript
-    class MyMesh extends Phaser.GameObjects.mesh {
-        constructor(scene, x, y, texture, frame, vertices, uvs, indicies, containsZ, normals, colors, alphas) {
-            super(scene, x, y, texture, frame, vertices, uvs, indicies, containsZ, normals, colors, alphas);
+    class MyMesh extends Mesh {
+        constructor(scene, x, y, texture, frame) {
+            super(scene, x, y, texture, frame);
             // ...
             scene.add.existing(this);
         }
@@ -142,90 +89,70 @@ Render a group of textured vertices and manipulate the view of those vertices, s
         - If it has a `preUpdate` method, it will be added to the Update List.
 - Create instance
     ```javascript
-    var mesh = new MyMesh(scene, x, y, texture, frame);
+    var image = new MyMesh(scene, x, y, key);
     ```
 
-### Control
+### Texture
 
-#### View
-
-- Translates the view position of this Mesh on the x/y/z axis by the given amount.
-    ```javascript
-    mesh.panX(x);
-    mesh.panY(y);
-    mesh.panZ(z);
-    ```
-
-#### Model
-
-- Position
-    ```javascript
-    mesh.modelPosition.x = x;
-    mesh.modelPosition.y = y;
-    mesh.modelPosition.z = z;
-    ```
-    - `x`, `y`, `z` : Offset position.
-        - `z+` : Near
-        - `z-` : Far
-        - `x-` : Left
-        - `x+` : Right
-        - `y+` : Up
-        - `y-` : Down
-- Rotation
-    ```javascript
-    mesh.modelRotation.x = radiansX;
-    mesh.modelRotation.y = radiansY;
-    mesh.modelRotation.z = radiansZ;
-    ```
-    or
-    ```javascript
-    mesh.rotateX = degreesX;
-    mesh.rotateY = degreesY;
-    mesh.rotateZ = degreesZ;
-    ```
-    - `radiansX`, `radiansY`, `radiansZ` : Rotation angle in radians.
-    - `degreesX`, `degreesY`, `degreesZ` : Rotation angle in degrees.
-- Scale
-    ```javascript
-    mesh.modelScale.x = scaleX;
-    mesh.modelScale.y = scaleY;
-    mesh.modelScale.z = scaleZ;
-    ```
-    - `scaleX`, `scaleY`, `scaleZ` : Scale value, `1` is origin size.
-
-### Backward facing Faces
-
-- Hide backward facing Faces. Default behavior.
-    ```javascript
-    mesh.hideCCW = true;
-    ```
-- Show backward facing Faces
-    ```javascript
-    mesh.hideCCW = false;
-    ```
+See [game object - texture](gameobject.md#texture)
 
 ### Faces
 
-Mesh is composed of triangle faces.
+#### Add grid faces
+
+```javascript
+mesh.addGridFaces(columns, rows);
+```
+
+#### Add faces with vertices
+
+1. Create vertiex
+    ```javascript
+    var v0 = mesh.createVertex(u0, v0);
+    var v1 = mesh.createVertex(u1, v1);
+    var v2 = mesh.createVertex(u2, v2);
+    ```
+    - `u0`, `v0`, `u1`. `v1`, ... : `0` ~ `1`
+2. Create face
+    ```javascript
+    var face = mesh.createFace(v0, v1, v2);
+    ```
+    - A face can use vertices shared by other faces.
+3. Add face(s)
+    ```javascript
+    mesh.addFace(face);
+    ```
+    or
+    ```javascript
+    mesh.addFaces(faces);
+    ```
+
+#### Clear faces
+
+```javascript
+mesh.clear();
+```
+
+#### Get all faces
 
 ```javascript
 var faces = mesh.faces;
 ```
 
-#### Contains
+#### Point inside face
 
-- Has any face which contains point
-    ```javascript
-    var isHit = mesh.hasFaceAt(worldX, worldY);
-    // var isHit = mesh.hasFaceAt(worldX, worldY, camera);
-    ```
 - Get face contains point
     ```javascript
     var face = mesh.getFaceAt(worldX, worldY);
     // var face = mesh.getFaceAt(worldX, worldY, camera);
     ```
+- Has any face which contains point
+    ```javascript
+    var isHit = mesh.hasFaceAt(worldX, worldY);
+    // var isHit = mesh.hasFaceAt(worldX, worldY, camera);
+    ```
 
-#### Properties
+#### Face properties
 
 - Alpha
     - Get
@@ -241,29 +168,34 @@ var faces = mesh.faces;
         ```javascript
         Phaser.Geom.Mesh.RotateFace(face, radians);
         ```
-- Center position
+- Offset position
     - Get
         ```javascript
-        var x = face.x;
-        var y = face.y;
-        ```
-        - `x` : 0(left) ~ 1(right)
-        - `y` : 1(top) ~ 0(bottom)
+        var localX = face.localOffsetX;
+        var localY = face.localOffsetY;
+        ```       
     - Set
         ```javascript
-        face.x = x;
-        face.y = y;
+        face.localOffsetX = localX;
+        face.localOffsetY = localY;
         ```
-        or
-        ```javascript
-        face.translate(x, y);
-        ```
-        - `x` : 0(left) ~ 1(right)
-        - `y` : 1(top) ~ 0(bottom)
+- Vertices
+    ```javascript
+    var vertex0 = face.vertex0;
+    var vertex1 = face.vertex1;
+    var vertex2 = face.vertex2;
+    ```
+    or
+    ```javascript
+    var vertices = face.vertices;
+    var vertex0 = vertices[0];
+    var vertex1 = vertices[1];
+    var vertex2 = vertices[2];
+    ```
 
 ### Vertices
 
-Each face has 3 vertices.
+Each face has 3 vertices, and a face can use vertices shared by other faces.
 
 ```javascript
 var vertices = mesh.vertices;
@@ -271,8 +203,55 @@ var vertices = mesh.vertices;
 
 - `vertices` : Array of vertex.
 
+```javascript
+var vertices = face.vertices;
+```
+
 #### Properties
 
+- World position
+    - Get
+        ```javascript
+        var worldX = vertex.worldX;
+        var worldY = vertex.worldY;
+        // var worldX = vertex.x;
+        // var worldY = vertex.y;
+        ```
+        or
+        ```javascript
+        var wordXY = vertex.getWorldXY();       // {x,y}
+        // var worldXY= vertex.getWorldXY(out);
+        ```
+    - Set
+        ```javascript
+        vertex.setWorldXY(worldX, worldY);
+        vertex.setPosition(worldX, worldY);
+        ```
+- Local position
+    - Get
+        ```javascript
+        var localX = vertex.localX;
+        var localY = vertex.localY;
+        ```
+    - Set
+        ```javascript
+        vertext.setLocalPosition(localX, localY);
+        ```
+        or
+        ```javascript
+        vertext.localX = localX;
+        vertext.localY = localY;
+        ```
+- Rotate local position around another point
+    ```javascript
+    vertex.rotateAround(ox, oy, rotation);
+    ```
+    - `ox`, `oy` : Origin point.
+    - `rotation` : Rotation angle by radius.
+- Reset to default position
+    ```javascript
+    vertex.resetPosition();
+    ```
 - Alpha
     - Get
         ```javascript
@@ -289,27 +268,53 @@ var vertices = mesh.vertices;
         ```
     - Set
         ```javascript
-        vertex.color = color;
-        ```
+        vertex.color = color;        ```
 
-##### Update properties
 
-- Start updating
-    ```javascript
-    mesh.ignoreDirtyCache = true;
-    ```
-- Stop updating
-    ```javascript
-    mesh.ignoreDirtyCache = false;
-    ```
+### Interactive with texture rectangle
 
-### Interactive
-
-To test if pointer is at any face of this mesh game object.
+Texture rectangle the same as normal Image Game object.
 
 ```javascript
 mesh.setInteractive();
 ```
+
+### Interactive with faces
+
+- Set face-interactive
+    ```javascript
+    mesh.setFaceInteractive();
+    ```
+- On pointer down at face
+    ```javascript
+    mesh.on('face.pointerdown', function (face, pointer, localX, localY, event) {
+
+    })
+    ```
+- On pointer up at face
+    ```javascript
+    mesh.on('face.pointerup', function (face, pointer, localX, localY, event) {
+
+    })
+    ```
+- On pointer move at face
+    ```javascript
+    mesh.on('face.pointermove', function (face, pointer, localX, localY, event) {
+
+    })
+    ```
+- On pointer over face
+    ```javascript
+    mesh.on('face.pointerover', function (face, pointer, event) {
+
+    })
+    ```
+- On pointer out face
+    ```javascript
+    mesh.on('face.pointerout', function (face, pointer, event) {
+
+    })
+    ```
 
 ### Debug
 
@@ -327,14 +332,6 @@ mesh.setInteractive();
 ### Other properties
 
 See [game object](gameobject.md)
-
-### Create mask
-
-```javascript
-var mask = mesh.createBitmapMask();
-```
-
-See [mask](mask.md)
 
 ### Shader effects
 

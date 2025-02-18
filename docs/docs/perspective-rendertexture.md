@@ -78,7 +78,7 @@ Render texture with perspective rotation.
 
 ```javascript
 var image = scene.add.rexPerspectiveRenderTexturege(x, y, width, height, {
-    // hideCCW: true,
+    // hideBackFace: true,
     // gridWidth: 32,
     // girdHeight: 32
 });
@@ -92,7 +92,7 @@ var image = scene.add.rexPerspectiveRenderTexturege({
     // y: 0,
     // width: 32,
     // height: 32,
-    // hideCCW: true,
+    // hideBackFace: true,
     // gridWidth: 32,
     // girdHeight: 32
 });
@@ -107,7 +107,7 @@ var image = scene.make.rexPerspectiveRenderTexturege({
     width: 32,
     height: 32,
 
-    // hideCCW: false,
+    // hideBackFace: false,
     // gridWidth: 32,
     // girdHeight: 32,
 
@@ -207,14 +207,6 @@ image.rt.fill(rgb, alpha);
 ### Other properties
 
 See [Perspective image game object](perspective-image.md), [Mesh game object](mesh.md), [game object](gameobject.md)
-
-### Create mask
-
-```javascript
-var mask = image.createBitmapMask();
-```
-
-See [mask](mask.md)
 
 ### Shader effects
 

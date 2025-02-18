@@ -1,4 +1,5 @@
 import Container from '../../../container/containerlite/ContainerLite.js';
+import RotateMethods from './RotateMethods.js';
 import ForEachFace from './ForEachFace.js';
 
 const RadToDeg = Phaser.Math.RadToDeg;
@@ -106,5 +107,10 @@ class FaceContainer extends Container {
     }
 
 }
+
+Object.assign(
+    FaceContainer.prototype,
+    RotateMethods
+)
 
 export default FaceContainer;

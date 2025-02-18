@@ -8,7 +8,7 @@ declare namespace Image {
         x: number, y: number,
         key?: string,
         frame?: string,
-        hideCCW?: boolean,
+        hideBackFace?: boolean,
         gridWidth?: number,
         girdHeight?: number
     }
@@ -25,18 +25,19 @@ declare class Image extends Phaser.GameObjects.Mesh {
         config?: Image.IConfig
     )
 
-    readonly originX: number;
-    readonly originY: number;
-    readonly displayOriginX: number;
-    readonly displayOriginY: number;
-
-    angleX: number;
-    angleY: number;
-    angleZ: number;
+    setRotationXYZ(rotationX?: number, rotationY?: number, rotationZ?: number): this;
+    setRotationX(rotationX?: number): this;
+    setRotatioY(rotationY?: number): this;
+    setRotationZ(rotationZ?: number): this;
     rotationX: number;
     rotationY: number;
     rotationZ: number;
 
-    setTint(color: number): this;
-
+    setAngleXYZ(angleX?: number, angleY?: number, angleZ?: number): this;
+    setAngleX(angleX?: number): this;
+    setAngleY(angleY?: number): this;
+    setAngleZ(angleZ?: number): this;
+    angleX: number;
+    angleY: number;
+    angleZ: number;
 }

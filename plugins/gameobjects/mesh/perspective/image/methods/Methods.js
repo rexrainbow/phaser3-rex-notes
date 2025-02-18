@@ -1,5 +1,5 @@
 import RenderMethods from './RenderMethods.js';
-import RotateMethods from './RotateMethods.js';
+import RotateMethods from '../../utils/RotateMethods.js';
 
 var Methods = {};
 

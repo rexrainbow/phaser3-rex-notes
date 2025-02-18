@@ -42,4 +42,6 @@ declare class Face {
     setFrameUV(frameU0: number, frameV0: number, frameU1: number, frameV1: number): this;
     setFrameSize(frameWidth: number, frameHeight: number): this;
 
+    contains(localX: number, localY: number): this;
+
 }

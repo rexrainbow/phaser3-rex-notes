@@ -37,16 +37,30 @@ declare class Mesh extends Phaser.GameObjects.GameObject {
     }): this;
 
     getVertexByName(name: string | number): Vertex | null;
-    getFaceByName(name: string | number): Face | null;
+    getFaceByName(name: string | numbeclearTintr): Face | null;
 
     resetVerticesPosition(): this;
 
+    getFaceAt(
+        worldX: number, worldY: number,
+        camera?: Phaser.Cameras.Scene2D.Camera
+    ): Face;
+
+    hasFaceAt(
+        worldX: number, worldY: number,
+        camera?: Phaser.Cameras.Scene2D.Camera
+    ): boolean;
+
     setTintFill(value?: boolean): this;
+    setTint(tint?: number): this;
+    clearTint(): this;
 
     setDebug(
         graphic: Phaser.GameObjects.Graphics,
         callback?: Mesh.DebugCallback
     ): this;
+
+    setFaceInteractive(): this;
 
     // Components
     clearAlpha(): this;
@@ -71,12 +85,6 @@ declare class Mesh extends Phaser.GameObjects.GameObject {
     setFlipY(value: boolean): this;
     setFlip(x: boolean, y: boolean): this;
     resetFlip(): this;
-
-    mask: Phaser.Display.Masks.BitmapMask | Phaser.Display.Masks.GeometryMask;
-    setMask(mask: Phaser.Display.Masks.BitmapMask | Phaser.Display.Masks.GeometryMask): this;
-    clearMask(destroyMask?: boolean): this;
-    createBitmapMask(renderable?: Phaser.GameObjects.GameObject): Phaser.Display.Masks.BitmapMask;
-    createGeometryMask(graphics?: Phaser.GameObjects.Graphics): Phaser.Display.Masks.GeometryMask;
 
     readonly originX: number;
     readonly originY: number;
@@ -138,16 +146,5 @@ declare class Mesh extends Phaser.GameObjects.GameObject {
     scrollFactorX: number;
     scrollFactorY: number;
     setScrollFactor(x: number, y?: number): this;
-
-    anims: Phaser.Animations.AnimationState;
-    play(key: string | Phaser.Animations.Animation | Phaser.Types.Animations.PlayAnimationConfig, ignoreIfPlaying?: boolean): this;
-    playReverse(key: string | Phaser.Animations.Animation | Phaser.Types.Animations.PlayAnimationConfig, ignoreIfPlaying?: boolean): this;
-    playAfterDelay(key: string | Phaser.Animations.Animation | Phaser.Types.Animations.PlayAnimationConfig, delay: number): this;
-    playAfterRepeat(key: string | Phaser.Animations.Animation | Phaser.Types.Animations.PlayAnimationConfig, repeatCount?: number): this;
-    chain(key?: string | Phaser.Animations.Animation | Phaser.Types.Animations.PlayAnimationConfig | string[] | Phaser.Animations.Animation[] | Phaser.Types.Animations.PlayAnimationConfig[]): this;
-    stop(): this;
-    stopAfterDelay(delay: number): this;
-    stopAfterRepeat(repeatCount?: number): this;
-    stopOnFrame(frame: Phaser.Animations.AnimationFrame): this;
 
 }

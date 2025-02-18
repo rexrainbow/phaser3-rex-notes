@@ -3,8 +3,12 @@ import DirtyFlagsMethods from './DirtyFlagsMethods.js';
 import UpdateMethods from './UpdateMethods.js';
 import TintMethods from './TintMethods.js';
 import DebugMethods from './DebugMethods.js';
+import PointMethods from './PointMethods.js';
+import SetFaceInteractive from './setfaceinteractive/SetFaceInteractive.js';
 
-var Methods = {};
+var Methods = {
+    setFaceInteractive: SetFaceInteractive
+};
 
 Object.assign(
     Methods,
@@ -12,7 +16,8 @@ Object.assign(
     DirtyFlagsMethods,
     UpdateMethods,
     TintMethods,
-    DebugMethods
+    DebugMethods,
+    PointMethods,
 )
 
 export default Methods;

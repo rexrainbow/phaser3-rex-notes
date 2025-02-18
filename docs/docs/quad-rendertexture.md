@@ -78,7 +78,7 @@ Render texture with 4 or 9 vertex control points.
 
 ```javascript
 var image = scene.add.rexQuadRenderTexturege(x, y, width, height, {
-    // hideCCW: true,
+    // hideBackFace: true,
     // ninePointMode: false,
 });
 ```
@@ -91,7 +91,7 @@ var image = scene.add.rexQuadRenderTexturege({
     // y: 0,
     // width: 32,
     // height: 32,
-    // hideCCW: true,
+    // hideBackFace: true,
     // ninePointMode: false,
 });
 ```
@@ -109,7 +109,7 @@ var image = scene.make.rexQuadRenderTexturege({
     width: 32,
     height: 32,
 
-    // hideCCW: false,
+    // hideBackFace: false,
     // ninePointMode: false,
 
     add: true

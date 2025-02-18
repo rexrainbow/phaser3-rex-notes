@@ -78,7 +78,7 @@ Image with perspective rotation.
 
 ```javascript
 var image = scene.add.rexPerspectiveImage(x, y, texture, frame, {
-    // hideCCW: true,
+    // hideBackFace: true,
     // gridWidth: 32,
     // girdHeight: 32
 });
@@ -92,7 +92,7 @@ var image = scene.add.rexPerspectiveImage({
     // y: 0,
     key,
     // frame: null,
-    // hideCCW: true,
+    // hideBackFace: true,
     // gridWidth: 32,
     // girdHeight: 32
 });
@@ -108,7 +108,7 @@ var perspectiveimage = scene.make.rexPerspectiveImage({
     key: null,
     frame: null,
 
-    // hideCCW: false,
+    // hideBackFace: false,
     // gridWidth: 32,
     // girdHeight: 32,
 
@@ -128,9 +128,9 @@ var perspectiveimage = scene.make.rexPerspectiveImage({
         }
         // ...
 
-        // preUpdate(time, delta) {
-        //     super.preUpdate(time, delta);
-        // }
+        preUpdate(time, delta) {
+            super.preUpdate(time, delta);
+        }
     }
     ```
     - `scene.add.existing(gameObject)` : Adds an existing Game Object to this Scene.
@@ -140,23 +140,6 @@ var perspectiveimage = scene.make.rexPerspectiveImage({
     ```javascript
     var image = new MyPerspectiveImage(scene, x, y, texture, frame, config);
     ```
-
-### Transform vertices
-
-Offset then rotate all vertices.
-
-```javascript
-image.transformVerts(x, y, z, rotateX, rotateY, rotateZ);
-```
-
-- `x`, `y`, `z` : Offset vertices
-    - `z+` : Near
-    - `z-` : Far
-    - `x-` : Left
-    - `x+` : Right
-    - `y+` : Up
-    - `y-` : Down
-- `rotateX`, `rotateY`, `rotateZ` : Rotate vertices
 
 ### Rotation
 
@@ -177,12 +160,20 @@ image.transformVerts(x, y, z, rotateX, rotateY, rotateZ);
     image.angleX = angleX; // Angle in degrees
     image.angleY = angleY; // Angle in degrees
     image.angleZ = angleZ; // Angle in degrees
+    image.setAngleX(angleX);
+    image.setAngleY(angleY);
+    image.setAngleZ(angleZ);
+    image.setAngleXYZ(angleX, angleY, angleZ);
     ```
     or
     ```javascript
     image.rotationX = rotationX; // Angle in radians
     image.rotationY = rotationY; // Angle in radians
     image.rotationZ = rotationZ; // Angle in radians
+    image.setRotationX(rotationX);
+    image.setRotationY(rotationY);
+    image.setRotationZ(rotationZ);
+    image.setRotationXYZ(rotationX, rotationY, rotationZ);
     ```
 
 #### Flip
@@ -219,14 +210,6 @@ image.setTexture(key);
 ### Other properties
 
 See [Mesh game object](mesh.md), [game object](gameobject.md)
-
-### Create mask
-
-```javascript
-var mask = image.createBitmapMask();
-```
-
-See [mask](mask.md)
 
 ### Shader effects
 

@@ -22,9 +22,17 @@ class Demo extends Phaser.Scene {
         gameObject.setDebug(this.debugGraphics);
 
         var face = gameObject.faces[0];
-        face.localOffsetX -= 200;
+        face.localOffsetX -= 300;
         face.angle = -90;
 
+        gameObject
+            .setFaceInteractive()
+            .on('face.pointerout', function (face) {
+                face.setAlpha(1);
+            })
+            .on('face.pointerover', function (face) {
+                face.setAlpha(0.5);
+            })
     }
 
     update() {
