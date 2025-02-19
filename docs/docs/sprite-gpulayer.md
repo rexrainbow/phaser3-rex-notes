@@ -29,7 +29,7 @@ var image = scene.add.spriteGPULayer(texture, size);
 Add image from JSON
 
 ```javascript
-var image = scene.make.image({
+var image = scene.make.spriteGPULayer({
     key: '',
     // size: 1,
 
@@ -126,6 +126,13 @@ layer.addMember({
 ```
 value = base + amplitude * ease(time)
 ```
+
+- `tintFill` : 
+    - `false` : The member texture will be multiplied by the tint. 
+    - `true` :  The member will use the texture alpha and the tint color.
+- `tintBlend` : The tint blend mode of the member. `0` is no tint (equivalent to white), `1` is full tint.
+- `tintBottomLeft`, `tintTopLeft`, `tintBottomRight`, `tintTopRight` : Tint color of the member, as a 24-bit RGB value.
+- `alphaBottomLeft`, `alphaTopLeft`, `alphaBottomRight`, `alphaTopRight` : Alpha value of the member, in the range `0`-`1`.
 
 #### Get member
 

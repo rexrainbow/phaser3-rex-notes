@@ -1,6 +1,6 @@
 ## Game objects
 
-- Implement rexMesh game object, official Mesh game object has beeen removed.
+- Implement rexMesh game object, official Mesh game object has beeen removed. 
 - Abandon PerspectiveSprite, now PerspectiveImage can play frame animation.
 - Abandon PerspectiveCarousel and PerspectiveImageCarousel.
 - TransitionImage and TransitionImagePack are removed from rexUI.
