@@ -4570,7 +4570,7 @@
         }
 
         setDelimiters(delimiterLeft, delimiterRight) {
-            this.parse.setDelimiters(delimiterLeft, delimiterRight);
+            this.parser.setDelimiters(delimiterLeft, delimiterRight);
             return this;
         }
     }
