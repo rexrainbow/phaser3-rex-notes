@@ -54762,7 +54762,7 @@ void main () {
 	    }
 
 	    setDelimiters(delimiterLeft, delimiterRight) {
-	        this.parse.setDelimiters(delimiterLeft, delimiterRight);
+	        this.parser.setDelimiters(delimiterLeft, delimiterRight);
 	        return this;
 	    }
 	}
@@ -56604,17 +56604,29 @@ void main () {
 	                    this.inputActive = true;
 	                    this.eventEmitter.emit('inputstart', pointer);
 	                }, this)
-	                .on('pointerup', function (pointer) {
-	                    this.inputActive = false;
-	                    this.eventEmitter.emit('inputend', pointer);
-	                }, this)
 	                .on('pointerdown', OnTouchTrack, this);
 
-	            // pointermove event
-	            this.scene.input.on('pointermove', OnTouchTrack, this);
-	            this.once('destroy', function () {
-	                this.scene.input.off('pointermove', OnTouchTrack, this);
-	            }, this);
+	            var OnReleaseTrack = function (pointer) {
+	                if (!this.inputActive) {
+	                    return;
+	                }
+	                this.inputActive = false;
+	                this.eventEmitter.emit('inputend', pointer);
+	            };
+
+	            this.scene.input
+	                // pointerup event
+	                .on('pointerup', OnReleaseTrack, this)
+	                // pointermove event
+	                .on('pointermove', OnTouchTrack, this);
+
+	            this
+	                .once('destroy', function () {
+	                    this.scene.input
+	                        .on('pointerup', OnReleaseTrack, this)
+	                        .off('pointermove', OnTouchTrack, this);
+
+	                }, this);
 
 	            break;
 	    }
