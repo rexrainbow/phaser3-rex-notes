@@ -4,6 +4,7 @@
 - Abandon PerspectiveSprite, now PerspectiveImage can play frame animation.
 - Abandon PerspectiveCarousel and PerspectiveImageCarousel.
 - TransitionImage and TransitionImagePack are removed from rexUI.
+- Live2d Game Object is not supported yet.
 
 ## Shader effects
 

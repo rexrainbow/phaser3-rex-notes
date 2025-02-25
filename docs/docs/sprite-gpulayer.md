@@ -81,29 +81,31 @@ A "member" is an individual quad with its own position, animation, and visual pr
 ```javascript
 layer.addMember({
     x: 0,
-    // x: {base, amplitude, duration, delay, ease, yoyo},
+    // x: {base, amplitude, duration, delay, ease, yoyo, loop},
 
     y: ,
-    // y: {base, amplitude, duration, delay, ease, yoyo},
+    // y: {base, amplitude, duration, delay, ease, yoyo, loop},
 
     rotation: ,
-    // rotation: {base, amplitude, duration, delay, ease, yoyo},
+    // rotation: {base, amplitude, duration, delay, ease, yoyo, loop},
 
     scaleX: ,
-    // scaleX: {base, amplitude, duration, delay, ease, yoyo},
+    // scaleX: {base, amplitude, duration, delay, ease, yoyo, loop},
 
     scaleY: ,
-    // scaleY: {base, amplitude, duration, delay, ease, yoyo},
+    // scaleY: {base, amplitude, duration, delay, ease, yoyo, loop},
 
     alpha: ,
-    // alpha: {base, amplitude, duration, delay, ease, yoyo},
+    // alpha: {base, amplitude, duration, delay, ease, yoyo, loop},
 
     tintBlend: ,
-    // tintBlend: {base, amplitude, duration, delay, ease, yoyo},
+    // tintBlend: {base, amplitude, duration, delay, ease, yoyo, loop},
 
     originX: 0.5,
     originY: 0.5,
+
     tintFill: false,
+
     scrollFactorX: 1,
     scrollFactorY: 1,
 
@@ -158,27 +160,28 @@ value = base + amplitude * ease(time)
 | 17    | scaleY-amplitude    |
 | 18    | scaleY-duration     |
 | 19    | scaleY-delay        |
-| 20    | originX             |
-| 21    | originY             |
-| 22    | tintFill            |
-| 23    | scrollFactorX       |
-| 24    | scrollFactorY       |
-| 25    | frame-base          |
-| 26    | frame-amplitude     |
-| 27    | frame-duration      |
-| 28    | frame-delay         |
-| 29    | tintBlend-base      |
-| 30    | tintBlend-amplitude |
-| 31    | tintBlend-duration  |
-| 32    | tintBlend-delay     |
-| 33    | tintBottomLeft      |
-| 34    | tintTopLeft         |
-| 35    | tintBottomRight     |
-| 36    | tintTopRight        |
-| 37    | alpha-base          |
-| 38    | alpha-amplitude     |
-| 39    | alpha-duration      |
-| 40    | alpha-delay         |
+| 20    | alpha-base          |
+| 21    | alpha-amplitude     |
+| 22    | alpha-duration      |
+| 23    | alpha-delay         |
+| 24    | frame-base          |
+| 25    | frame-amplitude     |
+| 26    | frame-duration      |
+| 27    | frame-delay         |
+| 28    | tintBlend-base      |
+| 29    | tintBlend-amplitude |
+| 30    | tintBlend-duration  |
+| 31    | tintBlend-delay     |
+| 32    | tintBottomLeft      |
+| 33    | tintTopLeft         |
+| 34    | tintBottomRight     |
+| 35    | tintTopRight        |
+| 36    | originX             |
+| 37    | originY             |
+| 38    | tintFill            |
+| 39    | creationTime        |
+| 40    | scrollFactorX       |
+| 41    | scrollFactorY       |
 
 #### Insert member
 
