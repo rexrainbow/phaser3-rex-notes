@@ -1,11 +1,11 @@
 import Live2dGameObjectBase from './Live2dGameObjectBase.js';
-import Render from './render/Render.js';
 import Methods from './methods/Methods.js';
 import Model from './model/Model.js';
 
 class Live2dGameObject extends Live2dGameObjectBase {
     constructor(scene, x, y, key, config) {
-        super(scene, 'rexLive2d');
+        super(scene);
+        this.type = 'rexLive2d';
 
         this.model = new Model(this);
 
@@ -13,6 +13,21 @@ class Live2dGameObject extends Live2dGameObjectBase {
         this.setOrigin(0.5);
         this.setPosition(x, y);
         this.setTimeScale(1);
+    }
+
+    render(renderer, drawingContext, calcMatrix) {
+        // Set GL state to default values.
+
+        // Ensure the DrawingContext framebuffer is bound.
+        // This allows you to use Filters on the external render.
+        renderer.glWrapper.updateBindingsFramebuffer({
+            bindings: {
+                framebuffer: drawingContext.framebuffer
+            }
+        }, true);
+
+        // Run the external render method.
+        this.model.draw(calcMatrix);
     }
 
     preUpdate(time, delta) {
@@ -53,7 +68,6 @@ class Live2dGameObject extends Live2dGameObjectBase {
 
 Object.assign(
     Live2dGameObject.prototype,
-    Render,
     Methods,
 )
 

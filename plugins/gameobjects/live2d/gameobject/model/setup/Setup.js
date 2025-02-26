@@ -130,6 +130,8 @@ var Setup = function (data) {
     // Load texture
     var textures = data.textures;
     for (var i in textures) {
+        // TODO: texture is upside-down, flip y again
+        // textures[i] is a WebGLTextureWrapperS
         this.getRenderer().bindTexture(parseInt(i), textures[i].webGLTexture);
     }
 

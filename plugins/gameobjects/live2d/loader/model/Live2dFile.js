@@ -26,7 +26,7 @@ class Live2dFile extends Phaser.Loader.MultiFile {
         this.homeDir = url.substring(0, url.lastIndexOf('/') + 1);
     }
 
-    onFileComplete(file) {        
+    onFileComplete(file) {
         var index = this.files.indexOf(file);
         if (index === -1) {
             return;
