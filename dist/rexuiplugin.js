@@ -47165,6 +47165,9 @@ void main () {
                 } else if (key in elementStyle) {
                     style[key] = config[key];
                 } else if (key in element) {
+                    if (key === 'type') {
+                        continue;
+                    }
                     element[key] = config[key];
                 }
             }
