@@ -10101,6 +10101,7 @@
 <span class="w">    </span><span class="c1">// pinchZoomEnable: true,</span>
 <span class="w">    </span><span class="c1">// pinchZoomMin: undefined,</span>
 <span class="w">    </span><span class="c1">// pinchZoomMax: undefined,</span>
+<span class="w">    </span><span class="c1">// pinchZoomFocusEnable: true,</span>
 
 <span class="w">    </span><span class="c1">// inputTarget: undefined,</span>
 
@@ -10141,6 +10142,11 @@
 <li><code>pinchZoom</code> : Set to <code>false</code> will discard pinch-zoom controller. Default is <code>true</code>.</li>
 <li><code>pinchZoomEnable</code> : Set to <code>true</code> to enable pinch-zoom behavior. Default value is <code>true</code>.</li>
 <li><code>pinchZoomMin</code>, <code>pinchZoomMax</code>  : Minumun/maximum camera zoom value. Default value is <code>minZoom</code>, <code>maxZoom</code>.</li>
+<li><code>pinchZoomFocusEnable</code> : <ul>
+<li><code>true</code> : Scroll camera to focus on middle of pinch points. Default is <code>true</code>.</li>
+<li><code>false</code> : Only zoom camera.</li>
+</ul>
+</li>
 <li><code>inputTarget</code> : <ul>
 <li><code>undefined</code> : Receive pan/pinch input by scene's input event. Default behavior.</li>
 <li>A game object : Receive pan/pinch input only on this game object.    </li>
