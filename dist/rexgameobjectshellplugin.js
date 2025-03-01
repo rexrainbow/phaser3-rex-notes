@@ -3204,6 +3204,9 @@
     var UpdateCameraMetrix = function (camera) {
         var width = camera.width;
         var height = camera.height;
+        var halfWidth = width * 0.5;
+        var halfHeight = height * 0.5;
+
         var zoomX = camera.zoomX;
         var zoomY = camera.zoomY;
         var matrix = camera.matrix;
@@ -3211,8 +3214,7 @@
         var sx = camera.scrollX;
         var sy = camera.scrollY;
 
-        if (camera.useBounds)
-        {
+        if (camera.useBounds) {
             sx = camera.clampX(sx);
             sy = camera.clampY(sy);
         }
@@ -3221,8 +3223,8 @@
         camera.scrollX = sx;
         camera.scrollY = sy;
 
-        var midX = sx + (width * 0.5);
-        var midY = sy + (height * 0.5);
+        var midX = sx + halfWidth;
+        var midY = sy + halfHeight;
 
         //  The center of the camera, in world space, so taking zoom into account
         //  Basically the pixel value of what it's looking at in the middle of the cam
@@ -3231,12 +3233,10 @@
         var displayWidth = width / zoomX;
         var displayHeight = height / zoomY;
 
-        camera.worldView.setTo(
-            midX - (displayWidth / 2),
-            midY - (displayHeight / 2),
-            displayWidth,
-            displayHeight
-        );
+        var vwx = midX - (displayWidth / 2);
+        var vwy = midY - (displayHeight / 2);
+
+        camera.worldView.setTo(vwx, vwy, displayWidth, displayHeight);
 
         var originX = width * camera.originX;
         var originY = height * camera.originY;
@@ -3282,7 +3282,8 @@
                 .setCamera(camera)
                 .setEnable(GetValue$2n(config, 'enable', true))
                 .setMinZoom(GetValue$2n(config, 'minZoom', undefined))
-                .setMaxZoom(GetValue$2n(config, 'maxZoom', undefined));
+                .setMaxZoom(GetValue$2n(config, 'maxZoom', undefined))
+                .setFocusEnable(GetValue$2n(config, 'focusEnable', true));
 
             this.boot();
         }
@@ -3304,12 +3305,17 @@
                         zoom = this.maxZoom;
                     }
 
-                    var pointer0 = pinch.pointers[0];
-                    var pointer1 = pinch.pointers[1];
-                    var focusLocalX = (pointer0.x + pointer1.x) / 2;
-                    var focusLocalY = (pointer0.y + pointer1.y) / 2;
+                    var focusLocalX, focusLocalY;
+                    if (this.focusEnable) {
+                        var pointer0 = pinch.pointers[0];
+                        var pointer1 = pinch.pointers[1];
+                        focusLocalX = (pointer0.x + pointer1.x) / 2;
+                        focusLocalY = (pointer0.y + pointer1.y) / 2;
+                    }
 
                     ZoomAt(camera, zoom, focusLocalX, focusLocalY);
+
+
                 }, this);
         }
 
@@ -3346,6 +3352,11 @@
 
         setMaxZoom(value) {
             this.maxZoom = value;
+            return this;
+        }
+
+        setFocusEnable(value) {
+            this.focusEnable = value;
             return this;
         }
 
@@ -4427,6 +4438,7 @@
                     enable: GetValue$2g(config, 'pinchZoomEnable', true),
                     minZoom: GetValue$2g(config, 'pinchZoomMin', minZoom),
                     maxZoom: GetValue$2g(config, 'pinchZoomMax', maxZoom),
+                    focusEnable:GetValue$2g(config, 'pinchZoomFocusEnable', true),
                 });
             }
 
