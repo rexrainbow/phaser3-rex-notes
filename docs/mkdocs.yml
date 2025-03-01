@@ -137,7 +137,7 @@ nav:
     - Layer:
         - Layer: layer.md
         - Layer manager: layermanager.md
-    # - Live2d: live2d.md
+    - Live2d: live2d.md
     - Light:
         - Light: light.md
         - Point light: point-light.md

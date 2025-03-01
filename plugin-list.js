@@ -41,7 +41,7 @@ module.exports = {
     'transitionimagepackplugin': './templates/transitionimagepack/transitionimagepack-plugin.js',
     'fullwindowrectangleplugin': './plugins/fullwindowrectangle-plugin.js',
     'coverplugin': './plugins/cover-plugin.js',
-    // 'live2dplugin': ['./plugins/live2d-plugin.js', true],
+    'live2dplugin': ['./plugins/live2d-plugin.js', true],
     'layermanagerplugin': './plugins/layermanager-plugin.js',
     // texture
     'framemanagerplugin': './plugins/framemanager-plugin.js',

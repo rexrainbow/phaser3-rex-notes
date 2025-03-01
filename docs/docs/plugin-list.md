@@ -102,7 +102,7 @@
 93. [Level counter](levelcounter.md): Map level value from experience value, by callback or a number array.
 94. [Life time](lifetime.md): Destroy game object when time-out.
 95. [Line](line.md): Draw a line with start/end/body textures.
-<!-- 96. [Live2d](live2d.md): Display [live2d](https://www.live2d.com/en/) model. -->
+96. [Live2d](live2d.md): Display [live2d](https://www.live2d.com/en/) model.
 97. [Loading animation scene](loading-animation-scene.md): Start loading animation scene, stop this scene when loading complete.
 98. [Loading-progress](loadingprogress.md): Pop-up dialog for loading-progress, then scale-down this dialog.
 99. [LocalForage/Files](localforage-files.md): Save JSON data, using localforage.
