@@ -27,6 +27,8 @@ class Demo extends Phaser.Scene {
         var pinchZoomController = new PinchZoom(this, {
             // camera: this.cameras.main,
             inputTarget: (bg) ? bg : this,
+
+            // focusEnable: false
         });
 
         var panScrollController = new PanScroll(this, {
@@ -34,6 +36,14 @@ class Demo extends Phaser.Scene {
             inputTarget: (bg) ? bg : this,
         })
 
+    }
+
+    update() {
+        var camera = this.cameras.main;
+        if (this.cameraZoom !== camera.zoom) {
+            console.log(camera.zoom, camera.scrollX, camera.scrollY)
+            this.cameraZoom = camera.zoom;
+        }
     }
 }
 

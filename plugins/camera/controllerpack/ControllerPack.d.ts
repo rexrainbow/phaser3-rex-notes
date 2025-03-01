@@ -16,6 +16,7 @@ declare namespace ControllerPack {
         pinchZoomEnable?: boolean,
         pinchZoomMin?: number,
         pinchZoomMax?: number,
+        pinchZoomFocusEnable?: boolean,
 
         boundsScroll?: boolean,
         boundsScrollEnable?: boolean,

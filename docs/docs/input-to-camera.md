@@ -85,6 +85,7 @@ var cameraController = scene.plugins.get('rexCameraController').add(scene, {
     // pinchZoomEnable: true,
     // pinchZoomMin: undefined,
     // pinchZoomMax: undefined,
+    // pinchZoomFocusEnable: true,
     
     // inputTarget: undefined,
 
@@ -117,6 +118,9 @@ var cameraController = scene.plugins.get('rexCameraController').add(scene, {
     - `pinchZoom` : Set to `false` will discard pinch-zoom controller. Default is `true`.
     - `pinchZoomEnable` : Set to `true` to enable pinch-zoom behavior. Default value is `true`.
     - `pinchZoomMin`, `pinchZoomMax`  : Minumun/maximum camera zoom value. Default value is `minZoom`, `maxZoom`.
+    - `pinchZoomFocusEnable` : 
+        - `true` : Scroll camera to focus on middle of pinch points. Default is `true`.
+        - `false` : Only zoom camera.
     - `inputTarget` : 
         - `undefined` : Receive pan/pinch input by scene's input event. Default behavior.
         - A game object : Receive pan/pinch input only on this game object.    

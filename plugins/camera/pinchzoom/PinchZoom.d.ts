@@ -8,6 +8,8 @@ declare namespace PinchZoom {
         minZoom?: number,
         maxZoom?: number,
 
+        focusEnable?: boolean,
+
         inputTarget?: Phaser.Scene | Phaser.GameObjects.GameObject,
     }
 }
