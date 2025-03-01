@@ -61,11 +61,12 @@ class Live2dFile extends Phaser.Loader.MultiFile {
                     // Add image to textureManager manually
                     if (!textureManager.exists(key)) {
                         texture = textureManager.addImage(key, file.data);
+                        texture.source[0].setFlipY(false);
                     } else {
                         texture = textureManager.get(key);
                     }
 
-                    // Store glTexture to live2d data cache
+                    // Store glTexture (textureWrapper) to live2d data cache
                     fileData = texture.source[0].glTexture;
                 }
 
