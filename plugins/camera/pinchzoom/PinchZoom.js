@@ -25,6 +25,7 @@ class PinchZoom extends ComponentBase {
             .setEnable(GetValue(config, 'enable', true))
             .setMinZoom(GetValue(config, 'minZoom', undefined))
             .setMaxZoom(GetValue(config, 'maxZoom', undefined))
+            .setFocusEnable(GetValue(config, 'focusEnable', true))
 
         this.boot();
     }
@@ -46,12 +47,17 @@ class PinchZoom extends ComponentBase {
                     zoom = this.maxZoom;
                 }
 
-                var pointer0 = pinch.pointers[0];
-                var pointer1 = pinch.pointers[1];
-                var focusLocalX = (pointer0.x + pointer1.x) / 2;
-                var focusLocalY = (pointer0.y + pointer1.y) / 2;
+                var focusLocalX, focusLocalY;
+                if (this.focusEnable) {
+                    var pointer0 = pinch.pointers[0];
+                    var pointer1 = pinch.pointers[1];
+                    focusLocalX = (pointer0.x + pointer1.x) / 2;
+                    focusLocalY = (pointer0.y + pointer1.y) / 2;
+                }
 
                 ZoomAt(camera, zoom, focusLocalX, focusLocalY);
+
+
             }, this)
     }
 
@@ -88,6 +94,11 @@ class PinchZoom extends ComponentBase {
 
     setMaxZoom(value) {
         this.maxZoom = value;
+        return this;
+    }
+
+    setFocusEnable(value) {
+        this.focusEnable = value;
         return this;
     }
 

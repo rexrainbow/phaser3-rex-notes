@@ -2,6 +2,9 @@
 var UpdateCameraMetrix = function (camera) {
     var width = camera.width;
     var height = camera.height;
+    var halfWidth = width * 0.5;
+    var halfHeight = height * 0.5;
+
     var zoomX = camera.zoomX;
     var zoomY = camera.zoomY;
     var matrix = camera.matrix;
@@ -9,8 +12,7 @@ var UpdateCameraMetrix = function (camera) {
     var sx = camera.scrollX;
     var sy = camera.scrollY;
 
-    if (camera.useBounds)
-    {
+    if (camera.useBounds) {
         sx = camera.clampX(sx);
         sy = camera.clampY(sy);
     }
@@ -19,8 +21,8 @@ var UpdateCameraMetrix = function (camera) {
     camera.scrollX = sx;
     camera.scrollY = sy;
 
-    var midX = sx + (width * 0.5);
-    var midY = sy + (height * 0.5);
+    var midX = sx + halfWidth;
+    var midY = sy + halfHeight;
 
     //  The center of the camera, in world space, so taking zoom into account
     //  Basically the pixel value of what it's looking at in the middle of the cam
@@ -29,12 +31,10 @@ var UpdateCameraMetrix = function (camera) {
     var displayWidth = width / zoomX;
     var displayHeight = height / zoomY;
 
-    camera.worldView.setTo(
-        midX - (displayWidth / 2),
-        midY - (displayHeight / 2),
-        displayWidth,
-        displayHeight
-    );
+    var vwx = midX - (displayWidth / 2);
+    var vwy = midY - (displayHeight / 2);
+
+    camera.worldView.setTo(vwx, vwy, displayWidth, displayHeight);
 
     var originX = width * camera.originX;
     var originY = height * camera.originY;

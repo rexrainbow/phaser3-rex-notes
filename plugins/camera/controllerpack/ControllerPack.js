@@ -41,6 +41,7 @@ class ControllerPack extends ComponentBase {
                 enable: GetValue(config, 'pinchZoomEnable', true),
                 minZoom: GetValue(config, 'pinchZoomMin', minZoom),
                 maxZoom: GetValue(config, 'pinchZoomMax', maxZoom),
+                focusEnable:GetValue(config, 'pinchZoomFocusEnable', true),
             });
         }
 
