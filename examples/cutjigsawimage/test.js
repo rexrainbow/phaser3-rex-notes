@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import CutJigsawImagePlugin from '../../plugins/cutjigsawimage-plugin.js';
 import DrawBounds from '../../plugins/utils/bounds/DrawBounds.js';
 
@@ -21,8 +21,11 @@ class Demo extends Phaser.Scene {
         for (var i = 0, cnt = pieces.length; i < cnt; i++) {
             let piece = pieces[i];
             piece.setAlpha(0.75)
-            piece.preFX.setPadding(2);
-            piece.preFX.addGlow(0x000000, 1, 0);
+
+            piece
+                .enableFilters()
+                .filters.internal.addGlow(0x000000, 1, 0)
+                .setPaddingOverride(null)
 
             piece
                 .setInteractive({

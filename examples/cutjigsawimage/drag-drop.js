@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import CutJigsawImagePlugin from '../../plugins/cutjigsawimage-plugin.js';
 
 class Demo extends Phaser.Scene {
@@ -17,8 +17,11 @@ class Demo extends Phaser.Scene {
 
         for (var i = 0, cnt = pieces.length; i < cnt; i++) {
             let piece = pieces[i];
-            piece.preFX.setPadding(2);
-            piece.preFX.addGlow(0xff0000, 2, 0);
+
+            piece
+                .enableFilters()
+                .filters.internal.addGlow(0xff0000, 2, 0)
+                .setPaddingOverride(null)
 
             piece
                 .setInteractive({

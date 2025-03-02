@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import CutJigsawImagePlugin from '../../plugins/cutjigsawimage-plugin.js';
 import DrawBounds from '../../plugins/utils/bounds/DrawBounds.js';
 
@@ -18,13 +18,17 @@ class Demo extends Phaser.Scene {
         var pieces = this.plugins.get('rexCutJigsawImage').gridCut(sourceImage, {
             piecesKey: 'pieces',
             columns: 8, rows: 6,
-            edgeWidth: 15, edgeHeight: 15
+            edgeWidth: 15, edgeHeight: 15,
+            useDynamicTexture: false
         });
 
         for (var i = 0, cnt = pieces.length; i < cnt; i++) {
             let piece = pieces[i];
-            piece.preFX.setPadding(2);
-            piece.preFX.addGlow(0xff0000, 2, 0);
+
+            piece
+                .enableFilters()
+                .filters.internal.addGlow(0xff0000, 2, 0)
+                .setPaddingOverride(null)
         }
 
         // DrawBounds(pieces, this.add.graphics(), 0xff0000)

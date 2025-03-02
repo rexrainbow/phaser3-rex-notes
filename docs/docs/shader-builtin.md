@@ -423,7 +423,8 @@ All Game Objects and camera support filters. These are effects applied after the
     ```javascript
     var controller = gameObject
         .enableFilters()
-        .filters.internal.addGlow(color, outerStrength, innerStrength, scale, knockout, quality, distance);
+        .filters.internal.addGlow(color, outerStrength, innerStrength, scale, knockout, quality, distance)
+        .setPaddingOverride(null)
     ```
     - `color` : The color of the glow effect as a number value. Default value is `0xffffff`.
     - `outerStrength`, `innerStrength` : The strength of the glow outward/inward from the edge of the Sprite. Default value is `4`/`0`.
@@ -497,7 +498,8 @@ All Game Objects and camera support filters. These are effects applied after the
     ```javascript
     var controller = gameObject
         .enableFilters()
-        .filters.internal.addShadow(x, y, decay, power, color, samples, intensity);
+        .filters.internal.addShadow(x, y, decay, power, color, samples, intensity)
+        .setPaddingOverride(null)
     ```
     - `padding` : The amount of padding to add to this Game Object, in pixels.
         - Used when `amount` is larger than `1`.    
