@@ -362,7 +362,7 @@ scene.input.on('dragleave', function(pointer, gameObject, target){ /* ... */ }, 
     ```javascript
     scene.input.forceOutState(pointer, gameObject);
     ```
-    - Emit `'pointeroutr'` event from game object.
+    - Emit `'pointerout'` event from game object.
     - Emit `'gameobjectout'` event from `scene.input`.
 
 ### First event of all
