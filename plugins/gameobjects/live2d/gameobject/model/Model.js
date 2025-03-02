@@ -31,6 +31,7 @@ class Model extends CubismUserModel {
         this._pixelHeight = 0;
 
         this._hitTestResult = {};
+        this._prevHitTestResult = {};
 
         // this._wavFileHandler = new LAppWavFileHandler();
     }

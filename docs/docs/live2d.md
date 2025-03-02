@@ -314,6 +314,29 @@ live2dGameObject.setModel(key, {
             var hitTestResult = live2dGameObject.getHitTestResult(); // {hitAreaName: isHit}
         }, scope);
         ```
+    - On pointer over
+        ```javascript
+        live2dGameObject.on('pointerover-' + hitAreaName, function(pointer, localX, localY, event){
+
+        }, scope);
+        ```
+        or
+        ```javascript
+        live2dGameObject.on('pointerover', function(pointer, localX, localY, event){
+            var hitTestResult = live2dGameObject.getHitTestResult(); // {hitAreaName: isHit}
+        }, scope);
+        ```
+    - On pointer out
+        ```javascript
+        live2dGameObject.on('pointerout-' + hitAreaName, function(pointer, event){
+
+        }, scope);
+        ```
+        or
+        ```javascript
+        live2dGameObject.on('pointerout', function(pointer, event){
+        }, scope);
+        ```
 
 #### Is hit
 

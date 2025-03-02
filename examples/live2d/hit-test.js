@@ -39,6 +39,12 @@ class Demo extends Phaser.Scene {
                 character.setModel(key);
                 anyHit = true;
             })
+            .on('pointerover-Body', function () {
+                console.log('pointerover-Body')
+            })
+            .on('pointerout-Body', function () {
+                console.log('pointerout-Body')
+            })
 
         this.input
             .on('pointerdown', function () {

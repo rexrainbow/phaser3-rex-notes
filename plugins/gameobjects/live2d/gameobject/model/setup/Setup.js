@@ -155,6 +155,7 @@ var Setup = function (data) {
     for (var i = 0; i < count; i++) {
         var hitAreaName = this._modelSetting.getHitAreaName(i);
         this._hitTestResult[hitAreaName] = false;
+        this._prevHitTestResult[hitAreaName] = false;
     }
 
     return this;

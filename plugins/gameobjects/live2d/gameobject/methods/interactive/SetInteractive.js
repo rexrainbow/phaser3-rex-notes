@@ -26,6 +26,11 @@ var SetInteractive = function (hitArea, hitAreaCallback, dropZone) {
             })
             .on('pointermove', function (pointer, localX, localY, event) {
                 FireEvent(this, 'pointermove', pointer, localX, localY, event);
+                FireOutEvent(this, pointer, event);
+                FireOverEvent(this, pointer, localX, localY, event);
+            })
+            .on('pointerout', function (pointer, event) {
+                FireOutEvent(this, pointer, event);
             })
     }
 
@@ -37,6 +42,26 @@ var FireEvent = function (gameObject, eventPrefix, pointer, localX, localY, even
     for (var name in hitTestResult) {
         if (hitTestResult[name]) {
             gameObject.emit(`${eventPrefix}-${name}`, pointer, localX, localY, event);
+        }
+    }
+}
+
+var FireOutEvent = function (gameObject, pointer, event) {
+    var prevHitTestResult = gameObject.prevHitTestResult;
+    var hitTestResult = gameObject.hitTestResult;
+    for (var name in hitTestResult) {
+        if (prevHitTestResult[name] && !hitTestResult[name]) {
+            gameObject.emit(`pointerout-${name}`, pointer, event);
+        }
+    }
+}
+
+var FireOverEvent = function (gameObject, pointer, localX, localY, event) {
+    var prevHitTestResult = gameObject.prevHitTestResult;
+    var hitTestResult = gameObject.hitTestResult;
+    for (var name in hitTestResult) {
+        if (!prevHitTestResult[name] && hitTestResult[name]) {
+            gameObject.emit(`pointerover-${name}`, pointer, localX, localY, event);
         }
     }
 }

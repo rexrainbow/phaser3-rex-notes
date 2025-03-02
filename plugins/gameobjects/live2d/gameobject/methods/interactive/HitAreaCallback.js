@@ -10,12 +10,16 @@ var HitAreaCallback = function (shape, localX, localY, gameObject) {
     var modelSetting = model._modelSetting;
     var count = modelSetting.getHitAreasCount();
     var anyHit = false;
+
+    var prevHitTestResult = model._prevHitTestResult;
     var hitTestResult = model._hitTestResult;
     for (var i = 0; i < count; i++) {
         var hitAreaName = modelSetting.getHitAreaName(i);
         var isHit = model.hitTest(hitAreaName, x, y);
-        hitTestResult[hitAreaName] = isHit;
         anyHit = anyHit || isHit;
+
+        prevHitTestResult[hitAreaName] = hitTestResult[hitAreaName];
+        hitTestResult[hitAreaName] = isHit;
     }
 
     return anyHit;

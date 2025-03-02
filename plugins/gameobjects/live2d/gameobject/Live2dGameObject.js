@@ -61,7 +61,11 @@ class Live2dGameObject extends Live2dGameObjectBase {
     }
 
     get hitTestResult() {
-        return this.getHitTestResult();
+        return this.model._hitTestResult;
+    }
+
+    get prevHitTestResult() {
+        return this.model._prevHitTestResult;
     }
 
 }
