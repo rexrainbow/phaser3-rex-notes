@@ -32,6 +32,7 @@ class Demo extends Phaser.Scene {
 
 }
 
+var LAYER_FILTER = true;
 var CreateCharacter = function (scene, x, y) {
     var gameObject = scene.add.rexLive2d(
         x, y, 'Haru',
@@ -39,11 +40,19 @@ var CreateCharacter = function (scene, x, y) {
     )
         .setScale(0.2)
 
-    var layer = scene.add.layer();
-    layer.add(gameObject);
-    layer
-        .enableFilters()
-        .filters.internal.addPixelate(10);
+    if (LAYER_FILTER) {
+        var layer = scene.add.layer();
+        layer.add(gameObject);
+        layer
+            .enableFilters()
+            .filters.internal.addPixelate(10);
+
+    } else {
+        gameObject
+            .enableFilters()
+            .filters.internal.addPixelate(10);
+
+    }
 
     return gameObject;
 }

@@ -4,7 +4,8 @@
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexlive2dplugin = factory());
 })(this, (function () { 'use strict';
 
-    const MinVersion = 60;
+    const MainVersionNumber = 4;
+    const SubVersionNumber = 0;
 
     var IsChecked = false;
 
@@ -14,14 +15,14 @@
         }
 
         if (minVersion === undefined) {
-            minVersion = MinVersion;
+            minVersion = SubVersionNumber;
         }
         var version = Phaser.VERSION.split('.');
         var mainVersion = parseInt(version[0]);
-        if (mainVersion === 3) {
-            var currentVersion = parseInt(version[1]);
-            if (currentVersion < minVersion) {
-                console.error(`Minimum supported version : ${mainVersion}.${currentVersion}`);
+        if (mainVersion === MainVersionNumber) {
+            var subVersion = parseInt(version[1]);
+            if (subVersion < minVersion) {
+                console.error(`Minimum supported version : ${mainVersion}.${subVersion}`);
             }
         } else {
             console.error(`Can't supported version : ${mainVersion}`);
@@ -32,7 +33,9 @@
 
     CheckP3Version();
 
-    class Live2dGameObjectBase extends Phaser.GameObjects.GameObject { 
+    const Extern = Phaser.GameObjects.Extern;
+
+    class Live2dGameObjectBase extends Extern { 
 
     }
 
@@ -40,44 +43,10 @@
     Phaser.Class.mixin(Live2dGameObjectBase,
         [
             Components.AlphaSingle,
-            Components.BlendMode,
             Components.ComputedSize,
-            Components.Depth,
             Components.GetBounds,
-            Components.Origin,
-            Components.ScrollFactor,
-            Components.Transform,
-            Components.Visible,
         ]
     );
-
-    // const Utils = Phaser.Renderer.WebGL.Utils;
-    const GetCalcMatrix = Phaser.GameObjects.GetCalcMatrix;
-
-    var WebGLRenderer = function (renderer, src, camera, parentMatrix) {
-        if (renderer.newType) {
-            renderer.pipelines.clear();
-        }
-
-        camera.addToRenderList(src);
-
-        var calcMatrix = GetCalcMatrix(src, camera, parentMatrix).calc;
-
-        src.model.draw(calcMatrix);
-
-        if (!renderer.nextTypeMatch) {
-            renderer.pipelines.rebind();
-        }
-    };
-
-    var CanvasRenderer = function (renderer, src, camera, parentMatrix) {
-    };
-
-    var Render = {
-        renderWebGL: WebGLRenderer,
-        renderCanvas: CanvasRenderer
-
-    };
 
     /**
      * Copyright(c) Live2D Inc. All rights reserved.
@@ -11428,6 +11397,8 @@
         // Load texture
         var textures = data.textures;
         for (var i in textures) {
+            // TODO: texture is upside-down, flip y again
+            // textures[i] is a WebGLTextureWrapperS
             this.getRenderer().bindTexture(parseInt(i), textures[i].webGLTexture);
         }
 
@@ -11451,6 +11422,7 @@
         for (var i = 0; i < count; i++) {
             var hitAreaName = this._modelSetting.getHitAreaName(i);
             this._hitTestResult[hitAreaName] = false;
+            this._prevHitTestResult[hitAreaName] = false;
         }
 
         return this;
@@ -11573,18 +11545,16 @@
         return matrix;
     };
 
-    var Draw = function (calcMatrix) {
+    var Draw = function (drawingContext, calcMatrix) {
         if (!this._model) {
             return;
         }
-
-        var globalData = this._globalData;
 
         var matrix = UpdateViewMatrix(this, calcMatrix);
 
         var renderer = this.getRenderer();
         renderer.setMvpMatrix(matrix);
-        renderer.setRenderState(globalData.frameBuffer, globalData.viewportRect);
+        renderer.setRenderState(drawingContext.framebuffer.webGLFramebuffer, drawingContext.state.viewport);
         renderer.drawModel();
 
         return this;
@@ -12070,6 +12040,7 @@
             this._pixelHeight = 0;
 
             this._hitTestResult = {};
+            this._prevHitTestResult = {};
 
             // this._wavFileHandler = new LAppWavFileHandler();
         }
@@ -12273,12 +12244,16 @@
         var modelSetting = model._modelSetting;
         var count = modelSetting.getHitAreasCount();
         var anyHit = false;
+
+        var prevHitTestResult = model._prevHitTestResult;
         var hitTestResult = model._hitTestResult;
         for (var i = 0; i < count; i++) {
             var hitAreaName = modelSetting.getHitAreaName(i);
             var isHit = model.hitTest(hitAreaName, x, y);
-            hitTestResult[hitAreaName] = isHit;
             anyHit = anyHit || isHit;
+
+            prevHitTestResult[hitAreaName] = hitTestResult[hitAreaName];
+            hitTestResult[hitAreaName] = isHit;
         }
 
         return anyHit;
@@ -12310,6 +12285,11 @@
                 })
                 .on('pointermove', function (pointer, localX, localY, event) {
                     FireEvent(this, 'pointermove', pointer, localX, localY, event);
+                    FireOutEvent(this, pointer, event);
+                    FireOverEvent(this, pointer, localX, localY, event);
+                })
+                .on('pointerout', function (pointer, event) {
+                    FireOutEvent(this, pointer, event);
                 });
         }
 
@@ -12321,6 +12301,26 @@
         for (var name in hitTestResult) {
             if (hitTestResult[name]) {
                 gameObject.emit(`${eventPrefix}-${name}`, pointer, localX, localY, event);
+            }
+        }
+    };
+
+    var FireOutEvent = function (gameObject, pointer, event) {
+        var prevHitTestResult = gameObject.prevHitTestResult;
+        var hitTestResult = gameObject.hitTestResult;
+        for (var name in hitTestResult) {
+            if (prevHitTestResult[name] && !hitTestResult[name]) {
+                gameObject.emit(`pointerout-${name}`, pointer, event);
+            }
+        }
+    };
+
+    var FireOverEvent = function (gameObject, pointer, localX, localY, event) {
+        var prevHitTestResult = gameObject.prevHitTestResult;
+        var hitTestResult = gameObject.hitTestResult;
+        for (var name in hitTestResult) {
+            if (!prevHitTestResult[name] && hitTestResult[name]) {
+                gameObject.emit(`pointerover-${name}`, pointer, localX, localY, event);
             }
         }
     };
@@ -12434,7 +12434,8 @@
 
     class Live2dGameObject extends Live2dGameObjectBase {
         constructor(scene, x, y, key, config) {
-            super(scene, 'rexLive2d');
+            super(scene);
+            this.type = 'rexLive2d';
 
             this.model = new Model(this);
 
@@ -12442,6 +12443,19 @@
             this.setOrigin(0.5);
             this.setPosition(x, y);
             this.setTimeScale(1);
+        }
+
+        render(renderer, drawingContext, calcMatrix) {
+            // Ensure the DrawingContext framebuffer is bound.
+            // This allows you to use Filters on the external render.
+            renderer.glWrapper.updateBindingsFramebuffer({
+                bindings: {
+                    framebuffer: drawingContext.framebuffer
+                }
+            }, true);
+
+            // Run the external render method.
+            this.model.draw(drawingContext, calcMatrix);
         }
 
         preUpdate(time, delta) {
@@ -12475,14 +12489,17 @@
         }
 
         get hitTestResult() {
-            return this.getHitTestResult();
+            return this.model._hitTestResult;
+        }
+
+        get prevHitTestResult() {
+            return this.model._prevHitTestResult;
         }
 
     }
 
     Object.assign(
         Live2dGameObject.prototype,
-        Render,
         Methods,
     );
 
@@ -13632,7 +13649,7 @@
             this.homeDir = url.substring(0, url.lastIndexOf('/') + 1);
         }
 
-        onFileComplete(file) {        
+        onFileComplete(file) {
             var index = this.files.indexOf(file);
             if (index === -1) {
                 return;
@@ -13667,11 +13684,12 @@
                         // Add image to textureManager manually
                         if (!textureManager.exists(key)) {
                             texture = textureManager.addImage(key, file.data);
+                            texture.source[0].setFlipY(false);
                         } else {
                             texture = textureManager.get(key);
                         }
 
-                        // Store glTexture to live2d data cache
+                        // Store glTexture (textureWrapper) to live2d data cache
                         fileData = texture.source[0].glTexture;
                     }
 
