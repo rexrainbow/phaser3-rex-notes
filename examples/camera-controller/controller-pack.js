@@ -26,7 +26,10 @@ class Demo extends Phaser.Scene {
             // camera: this.cameras.main,
             inputTarget: (bg) ? bg : this,
 
-            mouseWheelZoomMin: 0.01
+            mouseWheelZoomMin: 0.01,
+
+            // panScroll: false,
+            // pinchZoomFocusEnable: false,
         });
 
         // controller.toggleEnable().toggleEnable()
@@ -36,7 +39,7 @@ class Demo extends Phaser.Scene {
         var camera = this.cameras.main;
         if (this.prevCameraZoom !== camera.zoom) {
             this.prevCameraZoom = camera.zoom;
-            console.log(this.prevCameraZoom);
+            console.log(camera.zoom, camera.scrollX, camera.scrollY);
         }
     }
 }
