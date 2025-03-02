@@ -16,8 +16,6 @@ class Live2dGameObject extends Live2dGameObjectBase {
     }
 
     render(renderer, drawingContext, calcMatrix) {
-        // Set GL state to default values.
-
         // Ensure the DrawingContext framebuffer is bound.
         // This allows you to use Filters on the external render.
         renderer.glWrapper.updateBindingsFramebuffer({

@@ -1,104 +1,50 @@
 ## Introduction
 
-Apply mask on game object. Built-in render of phaser.
+Apply mask on game object.
 
 - Author: Phaser Team
 
 ## Usage
 
-### Add mask
+### WEBGL render mode
 
-#### Create mask object
-
-##### Bitmap mask
-
-1. Create image ([image](image.md), [sprite](sprite.md), [bitmap text](bitmaptext.md), [particles](particles.md), [text](text.md)),or [shader](shader.md)
+1. Create mask game object, from graphics ([Graphics](graphics.md)), image ([image](image.md), [sprite](sprite.md), [bitmap text](bitmaptext.md), [particles](particles.md), [text](text.md)),or [shader](shader.md)
     ```javascript
-    var shape = scene.add.image(x, y, key).setVisible(false);
+    var maskGameObject = new Phaser.GameObjects.Graphics(scene); 
     ```
-1. Create mask
+1. Create shared mask object
     ```javascript
-    var mask = shape.createBitmapMask();
+    var maskObject = new Phaser.Filters.Mask(maskGameObject.scene.cameras.main, maskGameObject);
+    maskObject.ignoreDestroy = true;
     ```
-    or
+1. Apply shared mask object to game object
     ```javascript
-    var mask = scene.add.bitmapMask(shape);
+    gameObject
+        .enableFilters()
+        .filters.external.add(maskObject)
     ```
-
-or
-
-```javascript
-var mask =  scene.add.bitmapMask(undefined, x, y, key, frame);
-```
-
-##### Geometry mask
-
-The mask is essentially a clipping path which can only make a masked pixel 
-fully visible or fully invisible without changing its alpha (opacity).
-
-1. Create [graphics](graphics.md)
+1. clear mask object
     ```javascript
-    var shape = scene.make.graphics();
-    ```
-1. Create mask
-    ```javascript
-    var mask = shape.createGeometryMask();
+    gameObject.filters.external.remove(maskObject)
     ```
 
-#### Apply mask object
+### CANVAS render mode
 
-```javascript
-gameObject.setMask(mask); // image.mask = mask;
-```
-    
-A mask object could be added to many game objects.
-
-
-!!! error
-    Don't put game object and its mask into a [container](container.md) together.
-    See this [testing](https://codepen.io/rexrainbow/pen/mdBZJmb), enable line 22-24.
-
-!!! note
-    Bitmap Mask is WebGL only.
-
-!!! note
-    Can combine Geometry Masks and Blend Modes on the same Game Object, 
-    but Bitmap Masks can't.
-
-
-### Clear mask
-
-- Clear mask
+1. Create mask game object, from [Graphics](graphics.md) game object
     ```javascript
-    image.clearMask();
+    var maskGameObject = new Phaser.GameObjects.Graphics(scene);
     ```
-- Clear mask and destroy mask object
+1. Create shared mask object
     ```javascript
-    image.clearMask(true);
+    var maskObject = maskGameObject.createGeometryMask();
     ```
-
-### Invert alpha
-
-Only GeometryMask has `inverse alpha` feature.
-
-- Inverse alpha
+1. Apply shared mask object to game object
     ```javascript
-    mask.setInvertAlpha();
-    // mask.invertAlpha = true;
+    gameObject.setMask(maskObject);
+    // gameObject.mask = maskObject;
     ```
-- Disable
+1. clear mask object
     ```javascript
-    mask.setInvertAlpha(false);
-    // mask.invertAlpha = false;
-    ```
-
-### Get shape game object
-
-- Bitmap mask
-    ```javascript
-    var shape = mask.bitmapMask;
-    ```
-- Geometry mask
-    ```javascript
-    var shape = mask.geometryMask;
+    gameObject.clearMask();
+    // gameObject.mask = null;
     ```
