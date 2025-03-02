@@ -27,7 +27,7 @@ class Live2dGameObject extends Live2dGameObjectBase {
         }, true);
 
         // Run the external render method.
-        this.model.draw(calcMatrix);
+        this.model.draw(drawingContext, calcMatrix);
     }
 
     preUpdate(time, delta) {
