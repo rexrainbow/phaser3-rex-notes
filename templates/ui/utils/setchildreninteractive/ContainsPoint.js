@@ -1,4 +1,5 @@
 import ContainsPointTest from '../ContainsPoint.js';
+import PointToChild from '../../basesizer/PointToChild.js';
 
 var ContainsPoint = function (targetMode, gameObjects, x, y) {
     if (targetMode === 'parent') {
@@ -9,7 +10,11 @@ var ContainsPoint = function (targetMode, gameObjects, x, y) {
                 continue;
             }
 
-            return parent.pointToChild(x, y);
+            if (parent.pointToChild) {
+                return parent.pointToChild(x, y);
+            } else {
+                return PointToChild.call(parent, x, y);
+            }
         }
     } else {  // direct mode
         for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {

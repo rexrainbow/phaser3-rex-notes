@@ -11,9 +11,11 @@ var PointToChild = function (x, y, preTest, postTest, children) {
 
     if (children === undefined) {
         if (this.sizerChildren) {
-            children = this.sizerChildren;
+            children = this.sizerChildren; // rexSizer 
+        } else if (this.isRexContainerLite) {
+            children = this.children; // rexContainerLite
         } else {
-            children = this.children;
+            children = this.list; // container, or layer
         }
     }
 
