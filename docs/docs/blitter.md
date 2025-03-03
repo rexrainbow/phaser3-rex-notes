@@ -211,10 +211,6 @@ See [game object](gameobject.md)
 
 ### Create mask
 
-```javascript
-var mask = bob.createBitmapMask();
-```
-
 See [mask](mask.md)
 
 ### Shader effects

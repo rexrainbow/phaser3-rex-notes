@@ -120,10 +120,6 @@ See  [bitmap text](bitmaptext.md), [game object](gameobject.md)
 
 ### Create mask
 
-```javascript
-var mask = txt.createBitmapMask();
-```
-
 See [mask](mask.md)
 
 ### Shader effects

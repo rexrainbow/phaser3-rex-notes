@@ -457,10 +457,6 @@ See [game object](gameobject.md)
 
 ### Create mask
 
-```javascript
-var mask = circularProgress.createBitmapMask();
-```
-
 See [mask](mask.md)
 
 ### Shader effects

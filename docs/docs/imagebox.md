@@ -188,12 +188,6 @@ See [game object](gameobject.md)
 
 ### Create mask
 
-Create mask from internal image game object (`image.image`).
-
-```javascript
-var mask = image.image.createBitmapMask();
-```
-
 See [mask](mask.md)
 
 ### Shader effects

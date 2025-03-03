@@ -115,10 +115,6 @@ See [game object](gameobject.md)
 
 ### Create mask
 
-```javascript
-var mask = sprite.createBitmapMask();
-```
-
 See [mask](mask.md)
 
 ### Shader effects

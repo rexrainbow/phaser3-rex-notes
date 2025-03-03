@@ -370,10 +370,6 @@ See [game object](gameobject.md)
 
 ### Create mask
 
-```javascript
-var mask = lineProgress.createBitmapMask();
-```
-
 See [mask](mask.md)
 
 ### Shader effects

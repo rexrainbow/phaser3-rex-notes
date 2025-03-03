@@ -202,10 +202,6 @@ See [Shatter image game object](shatter-image.md), [Mesh game object](mesh.md), 
 
 ### Create mask
 
-```javascript
-var mask = image.createBitmapMask();
-```
-
 See [mask](mask.md)
 
 ### Shader effects

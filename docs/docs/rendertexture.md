@@ -250,10 +250,6 @@ See [game object](gameobject.md)
 
 ### Create mask
 
-```javascript
-var mask = rt.createBitmapMask();
-```
-
 See [mask](mask.md)
 
 

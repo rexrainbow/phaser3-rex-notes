@@ -190,10 +190,6 @@ See [Skew image game object](skew-image.md), [Mesh game object](mesh.md), [game 
 
 ### Create mask
 
-```javascript
-var mask = image.createBitmapMask();
-```
-
 See [mask](mask.md)
 
 ### Shader effects

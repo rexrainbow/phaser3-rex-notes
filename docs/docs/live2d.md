@@ -364,7 +364,7 @@ var isHit = live2dGameObject.hitTest(hitAreaName, x, y);
     parameters[name] = value;
     ```
 
-### Limitation
 
-- `alpha`, `tint` properties does not work
-- Can't apply any post-fx effect or blend mode.
+### Shader effects
+
+Add live2dGameObject to [Layer game object](layer.md), then apply [internal and external filters](shader-builtin.md) to this Layer game object.
