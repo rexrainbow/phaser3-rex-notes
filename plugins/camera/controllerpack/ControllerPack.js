@@ -21,29 +21,8 @@ class ControllerPack extends ComponentBase {
         this._enable = true;
         this._camera = undefined;
 
-        var enableMask = GetValue(config, 'enable', true);
-
         var minZoom = GetValue(config, 'minZoom');
         var maxZoom = GetValue(config, 'maxZoom');
-
-        if (GetValue(config, 'panScroll', true)) {
-            this.panScroll = new PanScroll(scene, {
-                camera: GetValue(config, 'camera'),
-                inputTarget: GetValue(config, 'inputTarget', scene),
-                enable: GetValue(config, 'panScrollEnable', true),
-            });
-        }
-
-        if (GetValue(config, 'pinchZoom', true)) {
-            this.pinchZoom = new PinchZoom(scene, {
-                camera: GetValue(config, 'camera'),
-                inputTarget: GetValue(config, 'inputTarget', scene),
-                enable: GetValue(config, 'pinchZoomEnable', true),
-                minZoom: GetValue(config, 'pinchZoomMin', minZoom),
-                maxZoom: GetValue(config, 'pinchZoomMax', maxZoom),
-                focusEnable: GetValue(config, 'pinchZoomFocusEnable', true),
-            });
-        }
 
         if (GetValue(config, 'boundsScroll', true)) {
             this.boundsScroll = new BoundsScroll(scene, {
@@ -62,7 +41,37 @@ class ControllerPack extends ComponentBase {
             });
         }
 
-        this.setEnable(enableMask);
+        if (GetValue(config, 'pinchZoom', true)) {
+            this.pinchZoom = new PinchZoom(scene, {
+                camera: GetValue(config, 'camera'),
+                inputTarget: GetValue(config, 'inputTarget', scene),
+                enable: GetValue(config, 'pinchZoomEnable', true),
+                minZoom: GetValue(config, 'pinchZoomMin', minZoom),
+                maxZoom: GetValue(config, 'pinchZoomMax', maxZoom),
+                focusEnable: GetValue(config, 'pinchZoomFocusEnable', true),
+            });
+        }
+
+        if (GetValue(config, 'panScroll', true)) {
+            this.panScroll = new PanScroll(scene, {
+                camera: GetValue(config, 'camera'),
+                inputTarget: GetValue(config, 'inputTarget', scene),
+                enable: GetValue(config, 'panScrollEnable', true),
+            });
+        }
+
+        this.setEnable(GetValue(config, 'enable', true));
+
+        if (this.pinchZoomEnable && this.panScrollEnable) {
+            // Disable panScroll when pinch
+            this.pinchZoom
+                .on('pinchstart', function () {
+                    this.panScroll.setEnable(false);
+                }, this)
+                .on('pinchend', function () {
+                    this.panScroll.setEnable(true);
+                }, this)
+        }
     }
 
     destroy(fromScene) {

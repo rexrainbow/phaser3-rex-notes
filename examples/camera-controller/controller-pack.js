@@ -27,21 +27,10 @@ class Demo extends Phaser.Scene {
             inputTarget: (bg) ? bg : this,
 
             mouseWheelZoomMin: 0.01,
-
-            // panScroll: false,
-            // pinchZoomFocusEnable: false,
         });
-
-        // controller.toggleEnable().toggleEnable()
     }
 
-    update() {
-        var camera = this.cameras.main;
-        if (this.prevCameraZoom !== camera.zoom) {
-            this.prevCameraZoom = camera.zoom;
-            console.log(camera.zoom, camera.scrollX, camera.scrollY);
-        }
-    }
+    update() { }
 }
 
 const Random = Phaser.Math.Between;

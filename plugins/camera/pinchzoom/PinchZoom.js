@@ -56,8 +56,22 @@ class PinchZoom extends ComponentBase {
                 }
 
                 ZoomAt(camera, zoom, focusLocalX, focusLocalY);
+            }, this)
+            .on('pinchstart', function () {
+                var camera = this.camera;
+                if (!this.enable || !camera) {
+                    return;
+                }
 
+                this.emit('pinchstart');
+            }, this)
+            .on('pinchend', function () {
+                var camera = this.camera;
+                if (!this.enable || !camera) {
+                    return;
+                }
 
+                this.emit('pinchend');
             }, this)
     }
 
