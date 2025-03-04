@@ -1,4 +1,4 @@
-import phaser from '../../../phaser3-rex/src/phaser';
+import phaser from '../../../rex-phaser/src/phaser';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -35,10 +35,10 @@ var config = {
     parent: 'phaser-example',
     width: 800,
     height: 600,
-    // max: {
-    //     width: 4000,
-    //     height: 3000,
-    // },
+    max: {
+        width: 4000,
+        height: 3000,
+    },
     scale: {
         mode: Phaser.Scale.EXPAND,
         autoCenter: Phaser.Scale.CENTER_BOTH,
