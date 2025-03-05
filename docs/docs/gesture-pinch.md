@@ -195,10 +195,10 @@ var drag1Vector = pinch.drag1Vector; // {x, y}
     var pointer1 = pinch.pointers[1];
     ```
 
-### Is pinched
+### Is pinching
 
 ```javascript
-var isPinched = pinch.isPinched;
+var isPinching = pinch.isPinching;
 ```
 
 Return `true` if pinched.

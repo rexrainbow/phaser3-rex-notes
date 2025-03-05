@@ -26,6 +26,7 @@ declare class PinchZoom extends ComponentBase {
     setCamera(camera?: Phaser.Cameras.Scene2D.Camera): this;
     camera?: Phaser.Cameras.Scene2D.Camera
 
+    readonly isPinching: boolean;
 }
 
 export default PinchZoom;

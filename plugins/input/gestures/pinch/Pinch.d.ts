@@ -26,5 +26,5 @@ declare class Pinch extends TwoPointersTracer {
     dragThreshold: number;
 
     readonly scaleFactor: number;
-    readonly isPinched: boolean;
+    readonly isPinching: boolean;
 }

@@ -168,10 +168,10 @@ tap.on('tappingstart', function(tap, gameObject, lastPointer){
 }, scope);
 ```
 
-### Is tapped
+### Is tapping
 
 ```javascript
-var isTapped = tap.isTapped;
+var isTapping = tap.isTapping;
 ```
 
 Return `true` if tapped end.

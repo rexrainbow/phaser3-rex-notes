@@ -29,13 +29,19 @@ class PanScroll extends ComponentBase {
         this.pan
             .on('pan', function (pan) {
                 var camera = this.camera;
-                if (!this.enable || !camera) {
+                if (!camera) {
                     return;
                 }
 
                 var zoom = camera.zoom;
                 camera.scrollX -= pan.dx / zoom;
                 camera.scrollY -= pan.dy / zoom;
+            }, this)
+            .on('panstart', function () {
+                this.emit('panstart');
+            }, this)
+            .on('panend', function () {
+                this.emit('panend');
             }, this)
     }
 
@@ -57,12 +63,24 @@ class PanScroll extends ComponentBase {
         return this;
     }
 
+    get enable() {
+        return this.pan.enable;
+    }
+
+    set enable(value) {
+        this.pan.enable = value;
+    }
+
     setEnable = function (enable) {
         if (enable === undefined) {
             enable = true;
         }
         this.enable = enable;
         return this;
+    }
+
+    get isPanning() {
+        return this.pan.isPanning;
     }
 }
 

@@ -1735,7 +1735,7 @@
             }
         }
 
-        get isPinched() {
+        get isPinching() {
             return (this.state === RECOGNIZED);
         }
 

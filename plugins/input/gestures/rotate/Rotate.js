@@ -78,7 +78,7 @@ class Rotate extends TwoPointersTracer {
         }
     }
 
-    get isRotated() {
+    get isRotating() {
         return (this.state === RECOGNIZED);
     }
 

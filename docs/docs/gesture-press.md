@@ -138,10 +138,10 @@ press.on('pressend', function(press, gameObject, lastPointer){
 }, scope);
 ```
 
-### Is pressed
+### Is pressing
 
 ```javascript
-var isPressed = press.isPressed;
+var isPressing = press.isPressing;
 ```
 
 Return `true` if pressed.

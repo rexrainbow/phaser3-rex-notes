@@ -37,5 +37,5 @@ declare class Swipe extends OnePointerTracer {
     ): this;
     dirMode: number;
 
-    readonly isSwiped: boolean;
+    readonly isSwiping: boolean;
 }

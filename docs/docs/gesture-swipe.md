@@ -140,10 +140,10 @@ swipe.on('swipe', function(swipe, gameObject, lastPointer){
 - `gameObject`, `swipe.gameObject` : Parent gameobject of this pan behavior.
 - `lastPointer` : Last touch pointer.
 
-### Is swiped
+### Is swiping
 
 ```javascript
-var isSwiped = swipe.isSwiped;
+var isSwiping = swipe.isSwiping;
 ```
 
 Return `true` if panning.

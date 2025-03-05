@@ -154,10 +154,10 @@ pan.on('panend', function(pan, gameObject, lastPointer){
 - `gameObject`, `pan.gameObject` : Parent gameobject of this pan behavior.
 - `lastPointer` : Last touch pointer.
 
-### Is panned
+### Is panning
 
 ```javascript
-var isPanned = pan.isPanned;
+var isPanning = pan.isPanning;
 ```
 
 Return `true` if panned.
