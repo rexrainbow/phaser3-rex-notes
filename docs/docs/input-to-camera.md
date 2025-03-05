@@ -179,3 +179,14 @@ cameraController.setCamera(camera);
     cameraController.toggleEnable();
     // cameraController.enable = !cameraController.enable;
     ```
+
+### Status
+
+- Is pinching
+    ```javascript
+    var isPinching = cameraController.isPinching;
+    ```
+- Is panning
+    ```javascript
+    var isPanning = cameraController.isPanning;
+    ```
