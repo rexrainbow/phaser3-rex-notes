@@ -22,6 +22,7 @@ declare class PanScroll extends ComponentBase {
     setCamera(camera?: Phaser.Cameras.Scene2D.Camera): this;
     camera?: Phaser.Cameras.Scene2D.Camera
 
+    readonly isPanning: boolean;
 }
 
 export default PanScroll;

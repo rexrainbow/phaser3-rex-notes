@@ -4,7 +4,6 @@ import GetCameraByName from '../../utils/camera/GetCameraByName.js';
 import ZoomAt from '../../utils/camera/ZoomAt.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
-const Clamp = Phaser.Math.Clamp;
 
 class PinchZoom extends ComponentBase {
     constructor(scene, config) {
@@ -34,7 +33,7 @@ class PinchZoom extends ComponentBase {
         this.pinch
             .on('pinch', function (pinch) {
                 var camera = this.camera;
-                if (!this.enable || !camera) {
+                if (!camera) {
                     return;
                 }
 
@@ -58,19 +57,9 @@ class PinchZoom extends ComponentBase {
                 ZoomAt(camera, zoom, focusLocalX, focusLocalY);
             }, this)
             .on('pinchstart', function () {
-                var camera = this.camera;
-                if (!this.enable || !camera) {
-                    return;
-                }
-
                 this.emit('pinchstart');
             }, this)
             .on('pinchend', function () {
-                var camera = this.camera;
-                if (!this.enable || !camera) {
-                    return;
-                }
-
                 this.emit('pinchend');
             }, this)
     }
@@ -91,6 +80,14 @@ class PinchZoom extends ComponentBase {
     setCamera(camera) {
         this.camera = camera;
         return this;
+    }
+
+    get enable() {
+        return this.pinch.enable;
+    }
+
+    set enable(value) {
+        this.pinch.enable = value;
     }
 
     setEnable = function (enable) {
@@ -116,6 +113,9 @@ class PinchZoom extends ComponentBase {
         return this;
     }
 
+    get isPinching() {
+        return this.pinch.isPinching;
+    }
 }
 
 export default PinchZoom;

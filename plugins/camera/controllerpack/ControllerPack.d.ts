@@ -45,17 +45,19 @@ declare class ControllerPack extends ComponentBase {
     setCamera(camera?: Phaser.Cameras.Scene2D.Camera): this;
     camera?: Phaser.Cameras.Scene2D.Camera
 
-    setPanScrollEnable(enable?: boolean): this;
-    panScrollEnable: boolean;
-
-    setPinchZoomEnable(enable?: boolean): this;
-    pinchZoomEnable: boolean;
-
     setBoundsScrollEnable(enable?: boolean): this;
     boundsScrollEnable: boolean;
 
     setMouseWheelZoomEnable(enable?: boolean): this;
     mouseWheelZoomEnable: boolean;
+
+    setPinchZoomEnable(enable?: boolean): this;
+    pinchZoomEnable: boolean;
+    readonly isPinching: boolean;
+
+    setPanScrollEnable(enable?: boolean): this;
+    panScrollEnable: boolean;
+    readonly isPanning: boolean;
 
 }
 
