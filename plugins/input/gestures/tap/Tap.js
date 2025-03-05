@@ -149,7 +149,7 @@ class Tap extends OnePointerTracer {
         }
     }
 
-    get isTapped() {
+    get isTapping() {
         return (this.state === RECOGNIZED);
     }
 

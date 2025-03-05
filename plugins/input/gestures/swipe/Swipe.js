@@ -93,7 +93,7 @@ class Swipe extends OnePointerTracer {
         }
     }
 
-    get isSwiped() {
+    get isSwiping() {
         return (this.state === RECOGNIZED);
     }
 

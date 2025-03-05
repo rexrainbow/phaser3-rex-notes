@@ -1901,7 +1901,7 @@
             }
         }
 
-        get isTapped() {
+        get isTapping() {
             return (this.state === RECOGNIZED$2);
         }
 
@@ -2165,7 +2165,7 @@
             }
         }
 
-        get isSwiped() {
+        get isSwiping() {
             return (this.state === RECOGNIZED$1);
         }
 
@@ -2736,7 +2736,7 @@
             }
         }
 
-        get isRotated() {
+        get isRotating() {
             return (this.state === RECOGNIZED);
         }
 

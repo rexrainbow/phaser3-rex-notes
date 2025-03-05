@@ -204,10 +204,10 @@ var drag1Vector = rotate.drag1Vector; // {x, y}
     var pointer0 = rotate.pointers[1];
     ```
 
-### Is rotated
+### Is rtating
 
 ```javascript
-var isRotated = rotate.isRotated;
+var isRotating = rotate.isRotating;
 ```
 
 Return `true` if pinched.

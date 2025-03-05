@@ -91,7 +91,7 @@ class Press extends OnePointerTracer {
         }
     }
 
-    get isPressed() {
+    get isPressing() {
         return (this.state === RECOGNIZED);
     }
 

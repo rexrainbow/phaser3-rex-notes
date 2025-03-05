@@ -1973,7 +1973,7 @@
             }
         }
 
-        get isSwiped() {
+        get isSwiping() {
             return (this.state === RECOGNIZED$2);
         }
 
@@ -2485,7 +2485,7 @@
             }
         }
 
-        get isPinched() {
+        get isPinching() {
             return (this.state === RECOGNIZED$1);
         }
 
@@ -2629,7 +2629,7 @@
             }
         }
 
-        get isRotated() {
+        get isRotating() {
             return (this.state === RECOGNIZED);
         }
 

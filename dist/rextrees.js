@@ -8792,9 +8792,11 @@
 
         if (children === undefined) {
             if (this.sizerChildren) {
-                children = this.sizerChildren;
+                children = this.sizerChildren; // rexSizer 
+            } else if (this.isRexContainerLite) {
+                children = this.children; // rexContainerLite
             } else {
-                children = this.children;
+                children = this.list; // container, or layer
             }
         }
 
@@ -9931,7 +9933,11 @@
                     continue;
                 }
 
-                return parent.pointToChild(x, y);
+                if (parent.pointToChild) {
+                    return parent.pointToChild(x, y);
+                } else {
+                    return PointToChild$2.call(parent, x, y);
+                }
             }
         } else {  // direct mode
             for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
@@ -10522,7 +10528,7 @@
             }
         }
 
-        get isTapped() {
+        get isTapping() {
             return (this.state === RECOGNIZED$3);
         }
 
@@ -10659,7 +10665,7 @@
             }
         }
 
-        get isPressed() {
+        get isPressing() {
             return (this.state === RECOGNIZED$2);
         }
 
@@ -10893,7 +10899,7 @@
             }
         }
 
-        get isSwiped() {
+        get isSwiping() {
             return (this.state === RECOGNIZED$1);
         }
 
@@ -11448,7 +11454,7 @@
             }
         }
 
-        get isRotated() {
+        get isRotating() {
             return (this.state === RECOGNIZED);
         }
 

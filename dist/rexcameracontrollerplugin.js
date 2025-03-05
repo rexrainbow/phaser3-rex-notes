@@ -1863,7 +1863,7 @@
             }
         }
 
-        get isPanned() {
+        get isPanning() {
             return (this.state === RECOGNIZED$3);
         }
 
@@ -2090,7 +2090,7 @@
             }
         }
 
-        get isSwiped() {
+        get isSwiping() {
             return (this.state === RECOGNIZED$2);
         }
 
@@ -2602,7 +2602,7 @@
             }
         }
 
-        get isPinched() {
+        get isPinching() {
             return (this.state === RECOGNIZED$1);
         }
 
@@ -2746,7 +2746,7 @@
             }
         }
 
-        get isRotated() {
+        get isRotating() {
             return (this.state === RECOGNIZED);
         }
 
@@ -2977,8 +2977,22 @@
                     }
 
                     ZoomAt(camera, zoom, focusLocalX, focusLocalY);
+                }, this)
+                .on('pinchstart', function () {
+                    var camera = this.camera;
+                    if (!this.enable || !camera) {
+                        return;
+                    }
 
+                    this.emit('pinchstart');
+                }, this)
+                .on('pinchend', function () {
+                    var camera = this.camera;
+                    if (!this.enable || !camera) {
+                        return;
+                    }
 
+                    this.emit('pinchend');
                 }, this);
         }
 
@@ -4081,29 +4095,8 @@
             this._enable = true;
             this._camera = undefined;
 
-            var enableMask = GetValue(config, 'enable', true);
-
             var minZoom = GetValue(config, 'minZoom');
             var maxZoom = GetValue(config, 'maxZoom');
-
-            if (GetValue(config, 'panScroll', true)) {
-                this.panScroll = new PanScroll(scene, {
-                    camera: GetValue(config, 'camera'),
-                    inputTarget: GetValue(config, 'inputTarget', scene),
-                    enable: GetValue(config, 'panScrollEnable', true),
-                });
-            }
-
-            if (GetValue(config, 'pinchZoom', true)) {
-                this.pinchZoom = new PinchZoom(scene, {
-                    camera: GetValue(config, 'camera'),
-                    inputTarget: GetValue(config, 'inputTarget', scene),
-                    enable: GetValue(config, 'pinchZoomEnable', true),
-                    minZoom: GetValue(config, 'pinchZoomMin', minZoom),
-                    maxZoom: GetValue(config, 'pinchZoomMax', maxZoom),
-                    focusEnable:GetValue(config, 'pinchZoomFocusEnable', true),
-                });
-            }
 
             if (GetValue(config, 'boundsScroll', true)) {
                 this.boundsScroll = new BoundsScroll(scene, {
@@ -4122,7 +4115,37 @@
                 });
             }
 
-            this.setEnable(enableMask);
+            if (GetValue(config, 'pinchZoom', true)) {
+                this.pinchZoom = new PinchZoom(scene, {
+                    camera: GetValue(config, 'camera'),
+                    inputTarget: GetValue(config, 'inputTarget', scene),
+                    enable: GetValue(config, 'pinchZoomEnable', true),
+                    minZoom: GetValue(config, 'pinchZoomMin', minZoom),
+                    maxZoom: GetValue(config, 'pinchZoomMax', maxZoom),
+                    focusEnable: GetValue(config, 'pinchZoomFocusEnable', true),
+                });
+            }
+
+            if (GetValue(config, 'panScroll', true)) {
+                this.panScroll = new PanScroll(scene, {
+                    camera: GetValue(config, 'camera'),
+                    inputTarget: GetValue(config, 'inputTarget', scene),
+                    enable: GetValue(config, 'panScrollEnable', true),
+                });
+            }
+
+            this.setEnable(GetValue(config, 'enable', true));
+
+            if (this.pinchZoomEnable && this.panScrollEnable) {
+                // Disable panScroll when pinch
+                this.pinchZoom
+                    .on('pinchstart', function () {
+                        this.panScroll.setEnable(false);
+                    }, this)
+                    .on('pinchend', function () {
+                        this.panScroll.setEnable(true);
+                    }, this);
+            }
         }
 
         destroy(fromScene) {

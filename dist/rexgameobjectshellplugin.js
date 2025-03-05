@@ -1939,7 +1939,7 @@
             }
         }
 
-        get isTapped() {
+        get isTapping() {
             return (this.state === RECOGNIZED$5);
         }
 
@@ -2076,7 +2076,7 @@
             }
         }
 
-        get isPressed() {
+        get isPressing() {
             return (this.state === RECOGNIZED$4);
         }
 
@@ -2200,7 +2200,7 @@
             }
         }
 
-        get isPanned() {
+        get isPanning() {
             return (this.state === RECOGNIZED$3);
         }
 
@@ -2427,7 +2427,7 @@
             }
         }
 
-        get isSwiped() {
+        get isSwiping() {
             return (this.state === RECOGNIZED$2);
         }
 
@@ -2939,7 +2939,7 @@
             }
         }
 
-        get isPinched() {
+        get isPinching() {
             return (this.state === RECOGNIZED$1);
         }
 
@@ -3083,7 +3083,7 @@
             }
         }
 
-        get isRotated() {
+        get isRotating() {
             return (this.state === RECOGNIZED);
         }
 
@@ -3314,8 +3314,22 @@
                     }
 
                     ZoomAt(camera, zoom, focusLocalX, focusLocalY);
+                }, this)
+                .on('pinchstart', function () {
+                    var camera = this.camera;
+                    if (!this.enable || !camera) {
+                        return;
+                    }
 
+                    this.emit('pinchstart');
+                }, this)
+                .on('pinchend', function () {
+                    var camera = this.camera;
+                    if (!this.enable || !camera) {
+                        return;
+                    }
 
+                    this.emit('pinchend');
                 }, this);
         }
 
@@ -4418,29 +4432,8 @@
             this._enable = true;
             this._camera = undefined;
 
-            var enableMask = GetValue$2g(config, 'enable', true);
-
             var minZoom = GetValue$2g(config, 'minZoom');
             var maxZoom = GetValue$2g(config, 'maxZoom');
-
-            if (GetValue$2g(config, 'panScroll', true)) {
-                this.panScroll = new PanScroll(scene, {
-                    camera: GetValue$2g(config, 'camera'),
-                    inputTarget: GetValue$2g(config, 'inputTarget', scene),
-                    enable: GetValue$2g(config, 'panScrollEnable', true),
-                });
-            }
-
-            if (GetValue$2g(config, 'pinchZoom', true)) {
-                this.pinchZoom = new PinchZoom(scene, {
-                    camera: GetValue$2g(config, 'camera'),
-                    inputTarget: GetValue$2g(config, 'inputTarget', scene),
-                    enable: GetValue$2g(config, 'pinchZoomEnable', true),
-                    minZoom: GetValue$2g(config, 'pinchZoomMin', minZoom),
-                    maxZoom: GetValue$2g(config, 'pinchZoomMax', maxZoom),
-                    focusEnable:GetValue$2g(config, 'pinchZoomFocusEnable', true),
-                });
-            }
 
             if (GetValue$2g(config, 'boundsScroll', true)) {
                 this.boundsScroll = new BoundsScroll(scene, {
@@ -4459,7 +4452,37 @@
                 });
             }
 
-            this.setEnable(enableMask);
+            if (GetValue$2g(config, 'pinchZoom', true)) {
+                this.pinchZoom = new PinchZoom(scene, {
+                    camera: GetValue$2g(config, 'camera'),
+                    inputTarget: GetValue$2g(config, 'inputTarget', scene),
+                    enable: GetValue$2g(config, 'pinchZoomEnable', true),
+                    minZoom: GetValue$2g(config, 'pinchZoomMin', minZoom),
+                    maxZoom: GetValue$2g(config, 'pinchZoomMax', maxZoom),
+                    focusEnable: GetValue$2g(config, 'pinchZoomFocusEnable', true),
+                });
+            }
+
+            if (GetValue$2g(config, 'panScroll', true)) {
+                this.panScroll = new PanScroll(scene, {
+                    camera: GetValue$2g(config, 'camera'),
+                    inputTarget: GetValue$2g(config, 'inputTarget', scene),
+                    enable: GetValue$2g(config, 'panScrollEnable', true),
+                });
+            }
+
+            this.setEnable(GetValue$2g(config, 'enable', true));
+
+            if (this.pinchZoomEnable && this.panScrollEnable) {
+                // Disable panScroll when pinch
+                this.pinchZoom
+                    .on('pinchstart', function () {
+                        this.panScroll.setEnable(false);
+                    }, this)
+                    .on('pinchend', function () {
+                        this.panScroll.setEnable(true);
+                    }, this);
+            }
         }
 
         destroy(fromScene) {
@@ -15645,9 +15668,11 @@
 
         if (children === undefined) {
             if (this.sizerChildren) {
-                children = this.sizerChildren;
+                children = this.sizerChildren; // rexSizer 
+            } else if (this.isRexContainerLite) {
+                children = this.children; // rexContainerLite
             } else {
-                children = this.children;
+                children = this.list; // container, or layer
             }
         }
 
@@ -16784,7 +16809,11 @@
                     continue;
                 }
 
-                return parent.pointToChild(x, y);
+                if (parent.pointToChild) {
+                    return parent.pointToChild(x, y);
+                } else {
+                    return PointToChild.call(parent, x, y);
+                }
             }
         } else {  // direct mode
             for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
