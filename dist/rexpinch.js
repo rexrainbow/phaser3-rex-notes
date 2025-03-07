@@ -1977,6 +1977,11 @@
             return (this.state === RECOGNIZED$2);
         }
 
+        // Backward compatible
+        get isSwiped() {
+            return this.isSwiping;
+        }
+
         get dragVelocity() {
             var velocity;
             switch (this.dirMode) {
@@ -2489,6 +2494,11 @@
             return (this.state === RECOGNIZED$1);
         }
 
+        // Backward compatible
+        get isPinched() {
+            return this.isPinching;
+        }
+
         setDragThreshold(distance) {
             this.dragThreshold = distance;
             return this;
@@ -2631,6 +2641,11 @@
 
         get isRotating() {
             return (this.state === RECOGNIZED);
+        }
+
+        // Backward compatible
+        get isRotated() {
+            return this.isRotating;
         }
 
         get rotation() {

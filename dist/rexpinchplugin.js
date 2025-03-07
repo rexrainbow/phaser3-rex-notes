@@ -1739,6 +1739,11 @@
             return (this.state === RECOGNIZED);
         }
 
+        // Backward compatible
+        get isPinched() {
+            return this.isPinching;
+        }
+
         setDragThreshold(distance) {
             this.dragThreshold = distance;
             return this;
