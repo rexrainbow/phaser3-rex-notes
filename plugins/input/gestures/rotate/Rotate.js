@@ -82,6 +82,11 @@ class Rotate extends TwoPointersTracer {
         return (this.state === RECOGNIZED);
     }
 
+    // Backward compatible
+    get isRotated() {
+        return this.isRotating;
+    }
+
     get rotation() {
         return DegToRad(this.angle);
     }

@@ -95,6 +95,11 @@ class Press extends OnePointerTracer {
         return (this.state === RECOGNIZED);
     }
 
+    // Backward compatible
+    get isPressed() {
+        return this.isPressing;
+    }
+
     setHoldTime(time) {
         this.holdTime = time; // ms
         return this;

@@ -23,7 +23,7 @@ class Demo extends Phaser.Scene {
     }
 
     update() {
-        if (this.swipeInput.isSwiped) {
+        if (this.swipeInput.isSwiping) {
             this.print.text += `update(): swipe ${dumpDirectionStates(this.swipeInput)}\n`;
         }
     }
