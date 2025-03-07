@@ -2,6 +2,7 @@ import Board from './board/board/Board';
 import HexagonGrid from './board/grid/hexagon/Hexagon';
 import QuadGrid from './board/grid/quad/Quad';
 
+import ChessData from './board/chess/ChessData';
 import Shape from './board/shape/Shape.js';
 import Image from './board/image/Image.js';
 import Sprite from './board/sprite/Sprite.js';
@@ -21,6 +22,7 @@ export {
     HexagonGrid,
     QuadGrid,
 
+    ChessData,
     Shape,
     Image,
     Sprite,
