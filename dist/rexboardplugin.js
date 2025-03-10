@@ -8525,6 +8525,11 @@
             return (this.state === RECOGNIZED$2);
         }
 
+        // Backward compatible
+        get isTapped() {
+            return this.isTapping;
+        }
+
         setHoldTime(time) {
             this.holdTime = time; // ms
             return this;
@@ -8696,6 +8701,11 @@
 
         get isPressing() {
             return (this.state === RECOGNIZED$1);
+        }
+
+        // Backward compatible
+        get isPressed() {
+            return this.isPressing;
         }
 
         setHoldTime(time) {
@@ -8978,6 +8988,11 @@
 
         get isSwiping() {
             return (this.state === RECOGNIZED);
+        }
+
+        // Backward compatible
+        get isSwiped() {
+            return this.isSwiping;
         }
 
         get dragVelocity() {

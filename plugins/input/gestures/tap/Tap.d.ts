@@ -49,4 +49,5 @@ declare class Tap extends OnePointerTracer {
     setTaps(minTaps: number, maxTaps: number): this;
 
     readonly isTapping: boolean;
+    readonly isTapped: boolean;
 }

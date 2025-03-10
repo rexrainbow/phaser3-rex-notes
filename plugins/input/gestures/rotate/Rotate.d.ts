@@ -32,4 +32,5 @@ declare class Rotate extends TwoPointersTracer {
 
     readonly rotation: number;
     readonly isRotating: boolean;
+    readonly isRotated: boolean;
 }

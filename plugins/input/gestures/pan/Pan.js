@@ -111,6 +111,11 @@ class Pan extends OnePointerTracer {
         return (this.state === RECOGNIZED);
     }
 
+    // Backward compatible
+    get isPanned() {
+        return this.isPanning;
+    }
+
     setDragThreshold(distance) {
         this.dragThreshold = distance;
         return this;

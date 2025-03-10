@@ -153,6 +153,11 @@ class Tap extends OnePointerTracer {
         return (this.state === RECOGNIZED);
     }
 
+    // Backward compatible
+    get isTapped() {
+        return this.isTapping;
+    }
+
     setHoldTime(time) {
         this.holdTime = time; // ms
         return this;

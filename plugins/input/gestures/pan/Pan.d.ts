@@ -39,4 +39,5 @@ declare class Pan extends OnePointerTracer {
     dragThreshold: number;
 
     readonly isPanning: boolean;
+    readonly isPanned: boolean;
 }

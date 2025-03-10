@@ -97,6 +97,11 @@ class Swipe extends OnePointerTracer {
         return (this.state === RECOGNIZED);
     }
 
+    // Backward compatible
+    get isSwiped() {
+        return this.isSwiping;
+    }
+
     get dragVelocity() {
         var velocity;
         switch (this.dirMode) {

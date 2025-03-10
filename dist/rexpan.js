@@ -1867,6 +1867,11 @@
             return (this.state === RECOGNIZED$2);
         }
 
+        // Backward compatible
+        get isPanned() {
+            return this.isPanning;
+        }
+
         setDragThreshold(distance) {
             this.dragThreshold = distance;
             return this;
@@ -2092,6 +2097,11 @@
 
         get isSwiping() {
             return (this.state === RECOGNIZED$1);
+        }
+
+        // Backward compatible
+        get isSwiped() {
+            return this.isSwiping;
         }
 
         get dragVelocity() {
@@ -2663,6 +2673,11 @@
 
         get isRotating() {
             return (this.state === RECOGNIZED);
+        }
+
+        // Backward compatible
+        get isRotated() {
+            return this.isRotating;
         }
 
         get rotation() {

@@ -31,4 +31,5 @@ declare class Press extends OnePointerTracer {
     dragThreshold: number;
 
     readonly isPressing: boolean;
+    readonly isPressed: boolean;
 }

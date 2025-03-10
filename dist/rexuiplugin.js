@@ -40483,6 +40483,11 @@
             return (this.state === RECOGNIZED$5);
         }
 
+        // Backward compatible
+        get isTapped() {
+            return this.isTapping;
+        }
+
         setHoldTime(time) {
             this.holdTime = time; // ms
             return this;
@@ -40620,6 +40625,11 @@
             return (this.state === RECOGNIZED$4);
         }
 
+        // Backward compatible
+        get isPressed() {
+            return this.isPressing;
+        }
+
         setHoldTime(time) {
             this.holdTime = time; // ms
             return this;
@@ -40742,6 +40752,11 @@
 
         get isPanning() {
             return (this.state === RECOGNIZED$3);
+        }
+
+        // Backward compatible
+        get isPanned() {
+            return this.isPanning;
         }
 
         setDragThreshold(distance) {
@@ -40965,6 +40980,11 @@
 
         get isSwiping() {
             return (this.state === RECOGNIZED$2);
+        }
+
+        // Backward compatible
+        get isSwiped() {
+            return this.isSwiping;
         }
 
         get dragVelocity() {
@@ -41463,6 +41483,11 @@
             return (this.state === RECOGNIZED$1);
         }
 
+        // Backward compatible
+        get isPinched() {
+            return this.isPinching;
+        }
+
         setDragThreshold(distance) {
             this.dragThreshold = distance;
             return this;
@@ -41605,6 +41630,11 @@
 
         get isRotating() {
             return (this.state === RECOGNIZED);
+        }
+
+        // Backward compatible
+        get isRotated() {
+            return this.isRotating;
         }
 
         get rotation() {

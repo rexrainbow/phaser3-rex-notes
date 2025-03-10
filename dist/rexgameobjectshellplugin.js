@@ -1943,6 +1943,11 @@
             return (this.state === RECOGNIZED$5);
         }
 
+        // Backward compatible
+        get isTapped() {
+            return this.isTapping;
+        }
+
         setHoldTime(time) {
             this.holdTime = time; // ms
             return this;
@@ -2080,6 +2085,11 @@
             return (this.state === RECOGNIZED$4);
         }
 
+        // Backward compatible
+        get isPressed() {
+            return this.isPressing;
+        }
+
         setHoldTime(time) {
             this.holdTime = time; // ms
             return this;
@@ -2202,6 +2212,11 @@
 
         get isPanning() {
             return (this.state === RECOGNIZED$3);
+        }
+
+        // Backward compatible
+        get isPanned() {
+            return this.isPanning;
         }
 
         setDragThreshold(distance) {
@@ -2429,6 +2444,11 @@
 
         get isSwiping() {
             return (this.state === RECOGNIZED$2);
+        }
+
+        // Backward compatible
+        get isSwiped() {
+            return this.isSwiping;
         }
 
         get dragVelocity() {
@@ -2943,6 +2963,11 @@
             return (this.state === RECOGNIZED$1);
         }
 
+        // Backward compatible
+        get isPinched() {
+            return this.isPinching;
+        }
+
         setDragThreshold(distance) {
             this.dragThreshold = distance;
             return this;
@@ -3087,6 +3112,11 @@
             return (this.state === RECOGNIZED);
         }
 
+        // Backward compatible
+        get isRotated() {
+            return this.isRotating;
+        }
+
         get rotation() {
             return DegToRad$8(this.angle);
         }
@@ -3163,13 +3193,19 @@
             this.pan
                 .on('pan', function (pan) {
                     var camera = this.camera;
-                    if (!this.enable || !camera) {
+                    if (!camera) {
                         return;
                     }
 
                     var zoom = camera.zoom;
                     camera.scrollX -= pan.dx / zoom;
                     camera.scrollY -= pan.dy / zoom;
+                }, this)
+                .on('panstart', function () {
+                    this.emit('panstart');
+                }, this)
+                .on('panend', function () {
+                    this.emit('panend');
                 }, this);
         }
 
@@ -3191,12 +3227,24 @@
             return this;
         }
 
+        get enable() {
+            return this.pan.enable;
+        }
+
+        set enable(value) {
+            this.pan.enable = value;
+        }
+
         setEnable = function (enable) {
             if (enable === undefined) {
                 enable = true;
             }
             this.enable = enable;
             return this;
+        }
+
+        get isPanning() {
+            return this.pan.isPanning;
         }
     }
 
@@ -3262,7 +3310,6 @@
     };
 
     const GetValue$2n = Phaser.Utils.Objects.GetValue;
-    Phaser.Math.Clamp;
 
     class PinchZoom extends ComponentBase {
         constructor(scene, config) {
@@ -3292,7 +3339,7 @@
             this.pinch
                 .on('pinch', function (pinch) {
                     var camera = this.camera;
-                    if (!this.enable || !camera) {
+                    if (!camera) {
                         return;
                     }
 
@@ -3316,19 +3363,9 @@
                     ZoomAt(camera, zoom, focusLocalX, focusLocalY);
                 }, this)
                 .on('pinchstart', function () {
-                    var camera = this.camera;
-                    if (!this.enable || !camera) {
-                        return;
-                    }
-
                     this.emit('pinchstart');
                 }, this)
                 .on('pinchend', function () {
-                    var camera = this.camera;
-                    if (!this.enable || !camera) {
-                        return;
-                    }
-
                     this.emit('pinchend');
                 }, this);
         }
@@ -3349,6 +3386,14 @@
         setCamera(camera) {
             this.camera = camera;
             return this;
+        }
+
+        get enable() {
+            return this.pinch.enable;
+        }
+
+        set enable(value) {
+            this.pinch.enable = value;
         }
 
         setEnable = function (enable) {
@@ -3374,6 +3419,9 @@
             return this;
         }
 
+        get isPinching() {
+            return this.pinch.isPinching;
+        }
     }
 
     const Key = Phaser.Input.Keyboard.Key;
@@ -4473,14 +4521,16 @@
 
             this.setEnable(GetValue$2g(config, 'enable', true));
 
-            if (this.pinchZoomEnable && this.panScrollEnable) {
+            if (this.pinchZoom && this.panScroll) {
                 // Disable panScroll when pinch
+                var panScrollEnableSave;
                 this.pinchZoom
                     .on('pinchstart', function () {
+                        panScrollEnableSave = this.panScroll.enable;
                         this.panScroll.setEnable(false);
                     }, this)
                     .on('pinchend', function () {
-                        this.panScroll.setEnable(true);
+                        this.panScroll.setEnable(panScrollEnableSave);
                     }, this);
             }
         }
@@ -4546,48 +4596,6 @@
             return this;
         }
 
-        set panScrollEnable(value) {
-            if (this.panScroll) {
-                this.panScroll.enable = value;
-            }
-        }
-
-        get panScrollEnable() {
-            if (this.panScroll) {
-                return this.panScroll.enable;
-            }
-            return false;
-        }
-
-        setPanScrollEnable = function (enable) {
-            if (enable === undefined) {
-                enable = true;
-            }
-            this.panScrollEnable = enable;
-            return this;
-        }
-
-        set pinchZoomEnable(value) {
-            if (this.pinchZoom) {
-                this.pinchZoom.enable = value;
-            }
-        }
-
-        get pinchZoomEnable() {
-            if (this.pinchZoom) {
-                return this.pinchZoom.enable;
-            }
-            return false;
-        }
-
-        setPinchZoomEnable = function (enable) {
-            if (enable === undefined) {
-                enable = true;
-            }
-            this.pinchZoomEnable = enable;
-            return this;
-        }
-
         set boundsScrollEnable(value) {
             if (this.boundsScroll) {
                 this.boundsScroll.enable = value;
@@ -4627,6 +4635,62 @@
             }
             this.mouseWheelZoom = enable;
             return this;
+        }
+
+        set pinchZoomEnable(value) {
+            if (this.pinchZoom) {
+                this.pinchZoom.enable = value;
+            }
+        }
+
+        get pinchZoomEnable() {
+            if (this.pinchZoom) {
+                return this.pinchZoom.enable;
+            }
+            return false;
+        }
+
+        setPinchZoomEnable = function (enable) {
+            if (enable === undefined) {
+                enable = true;
+            }
+            this.pinchZoomEnable = enable;
+            return this;
+        }
+
+        get isPinching() {
+            if (this.pinchZoom) {
+                return this.pinchZoom.isPinching;
+            }
+            return false;
+        }
+
+        set panScrollEnable(value) {
+            if (this.panScroll) {
+                this.panScroll.enable = value;
+            }
+        }
+
+        get panScrollEnable() {
+            if (this.panScroll) {
+                return this.panScroll.enable;
+            }
+            return false;
+        }
+
+        setPanScrollEnable = function (enable) {
+            if (enable === undefined) {
+                enable = true;
+            }
+            this.panScrollEnable = enable;
+            return this;
+        }
+
+        get isPanning() {
+            if (this.panScroll) {
+                return this.panScroll.isPanning;
+            }
+            return false;
         }
 
         set enable(value) {
