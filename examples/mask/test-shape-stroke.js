@@ -21,8 +21,7 @@ class Demo extends Phaser.Scene {
             .filters.external.addMask(maskGameObject)
     }
 
-    update() {
-    }
+    update() { }
 }
 
 var config = {
@@ -34,7 +33,7 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo,
+    scene: Demo
 };
 
 var game = new Phaser.Game(config);
