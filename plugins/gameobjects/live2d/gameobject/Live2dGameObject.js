@@ -15,7 +15,7 @@ class Live2dGameObject extends Live2dGameObjectBase {
         this.setTimeScale(1);
     }
 
-    render(renderer, drawingContext, calcMatrix) {
+    render(renderer, drawingContext, calcMatrix, displayList, displayListIndex) {
         // Ensure the DrawingContext framebuffer is bound.
         // This allows you to use Filters on the external render.
         renderer.glWrapper.updateBindingsFramebuffer({
