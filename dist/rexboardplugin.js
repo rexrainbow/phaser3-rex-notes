@@ -888,7 +888,7 @@
             return ChessBank.get(gameObject);
         } else {
             // game object
-            if (!gameObject.hasOwnProperty('rexChess')) {
+            if (!gameObject.hasOwnProperty('rexChess') || !gameObject.rexChess) {
                 gameObject.rexChess = new Chess(gameObject);
             }
             return gameObject.rexChess;
