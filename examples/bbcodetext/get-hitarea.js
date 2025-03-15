@@ -9,7 +9,6 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('key', 'assets/images/key.png');
     }
 
     create() {

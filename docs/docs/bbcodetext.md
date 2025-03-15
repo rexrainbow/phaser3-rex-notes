@@ -8,7 +8,9 @@ Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 ## Live demos
 
 - [BBCode text](https://codepen.io/rexrainbow/pen/OZbOyg)
-- [Hit area of words](https://codepen.io/rexrainbow/pen/voXPRM)
+- Hit area
+    - [Hit area of words](https://codepen.io/rexrainbow/pen/voXPRM)
+    - [Get hit area by world position](https://codepen.io/rexrainbow/pen/raNpWgW)
 - [Align](https://codepen.io/rexrainbow/pen/qGxrjZ)
 - [Escape](https://codepen.io/rexrainbow/pen/yLPWgWX)
 - [Page, typing](https://codepen.io/rexrainbow/pen/yjZveb)
@@ -673,6 +675,16 @@ txt.drawAreaBounds(graphics, color);
 
 - `graphics` : [Graphics game object](graphics.md)
 - `color` : Default value is `0xffffff`
+
+### Get hit area by world position
+
+```javascript
+var key = txt.getHitArea(worldX, worldY);
+// var key = txt.getHitArea(worldX, worldY, camera);
+```
+
+- `camera` : Camera of world position
+    - `undefined` : Use default camera (`scene.cameras.main`)
 
 ### Line spacing
 
