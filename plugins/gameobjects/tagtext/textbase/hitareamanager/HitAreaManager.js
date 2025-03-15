@@ -67,9 +67,9 @@ class HitAreaManager {
         if (parent) {
             graphics
                 .save()
-                .scaleCanvas(parent.scaleX, parent.scaleY)
-                .rotateCanvas(parent.rotation)
                 .translateCanvas(parent.x, parent.y)
+                .rotateCanvas(parent.rotation)
+                .scaleCanvas(parent.scaleX, parent.scaleY)
         }
 
         for (var i = 0, cnt = this.hitAreas.length; i < cnt; i++) {

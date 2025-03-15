@@ -25,6 +25,8 @@ class Demo extends Phaser.Scene {
             backgroundColor: '#555',
             fontSize: '24px',
         })
+            .setScale(1.25)
+            .setAngle(45)
             .drawAreaBounds(this.add.graphics(), 0xff0000)
 
         this.input
