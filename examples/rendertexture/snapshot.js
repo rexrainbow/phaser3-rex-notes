@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import Snapshot from '../../plugins/utils/rendertexture/Snapshot.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 

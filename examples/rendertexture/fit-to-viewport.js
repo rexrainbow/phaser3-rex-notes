@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import FitToViewport from '../../plugins/utils/rendertexture/FitToViewport';
 
 
@@ -29,6 +29,7 @@ class Demo extends Phaser.Scene {
         var rt = this.add.renderTexture(0, 0, 1, 1).setOrigin(0);
         FitToViewport(rt)
             .draw(sprites)
+            .render()
             .setTint(0xff0000)
             .setAlpha(0.75)
     }
