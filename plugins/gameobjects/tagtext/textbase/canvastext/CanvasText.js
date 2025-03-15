@@ -2,6 +2,7 @@ import DrawMethods from './DrawMethods.js';
 import PenManager from '../penmanger/PenManager.js';
 import HitAreaManager from '../hitareamanager/HitAreaManager.js';
 import SetInteractive from './SetInteractive.js';
+import GetHitArea from './GetHitArea.js';
 import CONST from '../../../textbase/const.js';
 import WrapText from '../wraptext/WrapText.js';
 import Clone from '../../../../utils/object/Clone.js';
@@ -342,6 +343,7 @@ class CanvasText {
 
 var methods = {
     setInteractive: SetInteractive,
+    getHitArea: GetHitArea,
 }
 
 Object.assign(

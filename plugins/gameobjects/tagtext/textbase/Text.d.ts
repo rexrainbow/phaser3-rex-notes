@@ -247,6 +247,11 @@ declare class Text extends CanvasGameObjectBase {
     setUrlTagCursor(cursor?: string): this;
     urlTagCursor: string;
 
+    getHitArea(
+        worldX: number, worldY: number,
+        camera: Phaser.Cameras.Scene2D.Camera
+    ): string;
+
     style: {
         color: string | null,
         stroke: string | null,
