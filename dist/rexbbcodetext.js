@@ -2336,9 +2336,9 @@
             if (parent) {
                 graphics
                     .save()
-                    .scaleCanvas(parent.scaleX, parent.scaleY)
+                    .translateCanvas(parent.x, parent.y)
                     .rotateCanvas(parent.rotation)
-                    .translateCanvas(parent.x, parent.y);
+                    .scaleCanvas(parent.scaleX, parent.scaleY);
             }
 
             for (var i = 0, cnt = this.hitAreas.length; i < cnt; i++) {
