@@ -1760,6 +1760,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#get-hit-area-by-world-position" class="md-nav__link">
+    Get hit area by world position
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#line-spacing" class="md-nav__link">
     Line spacing
   </a>
@@ -10242,6 +10249,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#get-hit-area-by-world-position" class="md-nav__link">
+    Get hit area by world position
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#line-spacing" class="md-nav__link">
     Line spacing
   </a>
@@ -10373,7 +10387,11 @@
 <h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://codepen.io/rexrainbow/pen/OZbOyg">BBCode text</a></li>
+<li>Hit area<ul>
 <li><a href="https://codepen.io/rexrainbow/pen/voXPRM">Hit area of words</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/raNpWgW">Get hit area by world position</a></li>
+</ul>
+</li>
 <li><a href="https://codepen.io/rexrainbow/pen/qGxrjZ">Align</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/yLPWgWX">Escape</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/yjZveb">Page, typing</a></li>
@@ -11071,6 +11089,16 @@
 <ul>
 <li><code>graphics</code> : <a href="../graphics/">Graphics game object</a></li>
 <li><code>color</code> : Default value is <code>0xffffff</code></li>
+</ul>
+<h3 id="get-hit-area-by-world-position">Get hit area by world position<a class="headerlink" href="#get-hit-area-by-world-position" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">txt</span><span class="p">.</span><span class="nx">getHitArea</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span><span class="w"> </span><span class="nx">worldY</span><span class="p">);</span>
+<span class="c1">// var key = txt.getHitArea(worldX, worldY, camera);</span>
+</code></pre></div>
+<ul>
+<li><code>camera</code> : Camera of world position<ul>
+<li><code>undefined</code> : Use default camera (<code>scene.cameras.main</code>)</li>
+</ul>
+</li>
 </ul>
 <h3 id="line-spacing">Line spacing<a class="headerlink" href="#line-spacing" title="Permanent link">&para;</a></h3>
 <p>This value is <em>added</em> to the height of the font when calculating the overall line height.</p>
