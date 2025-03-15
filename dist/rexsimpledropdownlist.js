@@ -10770,7 +10770,7 @@
         if (out === undefined) {
             out = {};
         } else if (out === true) {
-            out = globOut$1;
+            out = globOut$2;
         }
 
         out.left = false;
@@ -10836,7 +10836,7 @@
         return out;
     };
 
-    var globOut$1 = {};
+    var globOut$2 = {};
 
     const GetValue$13 = Phaser.Utils.Objects.GetValue;
     const RadToDeg$2 = Phaser.Math.RadToDeg;
@@ -14485,37 +14485,37 @@
 
     var globPoint;
 
-    const TransformMatrix = Phaser.GameObjects.Components.TransformMatrix;
+    const TransformMatrix$1 = Phaser.GameObjects.Components.TransformMatrix;
 
     var GameObjectLocalXYToWorldXY = function (gameObject, localX, localY, out) {
         if (out === undefined) {
             out = {};
         } else if (out === true) {
-            out = globOut;
+            out = globOut$1;
         }
 
         var px = localX - (gameObject.width * gameObject.originX);
         var py = localY - (gameObject.height * gameObject.originY);
 
-        if (tempMatrix === undefined) {
-            tempMatrix = new TransformMatrix();
-            parentMatrix = new TransformMatrix();
+        if (tempMatrix$1 === undefined) {
+            tempMatrix$1 = new TransformMatrix$1();
+            parentMatrix$1 = new TransformMatrix$1();
         }
 
         if (gameObject.parentContainer) {
-            gameObject.getWorldTransformMatrix(tempMatrix, parentMatrix);
+            gameObject.getWorldTransformMatrix(tempMatrix$1, parentMatrix$1);
         }
         else {
-            tempMatrix.applyITRS(gameObject.x, gameObject.y, gameObject.rotation, gameObject.scaleX, gameObject.scaleY);
+            tempMatrix$1.applyITRS(gameObject.x, gameObject.y, gameObject.rotation, gameObject.scaleX, gameObject.scaleY);
         }
 
-        tempMatrix.transformPoint(px, py, out);
+        tempMatrix$1.transformPoint(px, py, out);
 
         return out;
     };
 
-    var tempMatrix, parentMatrix;
-    var globOut = {};
+    var tempMatrix$1, parentMatrix$1;
+    var globOut$1 = {};
 
     var BobPositionToWorldPosition = function (dynamicText, bob, bobX, bobY, out) {
         var localXY = BobPositionToCanvasPosition(bob, bobX, bobY, true);
@@ -33869,6 +33869,56 @@
         scene.input.manager.canvas.style.cursor = cursorStyle;
     };
 
+    const TransformMatrix = Phaser.GameObjects.Components.TransformMatrix;
+    const TransformXY = Phaser.Math.TransformXY;
+
+    var WorldXYToGameObjectLocalXY = function (gameObject, worldX, worldY, camera, out) {
+        if (camera === undefined) {
+            camera = gameObject.scene.cameras.main;
+        }
+
+        if (out === undefined) {
+            out = {};
+        } else if (out === true) {
+            out = globOut;
+        }
+
+        var csx = camera.scrollX;
+        var csy = camera.scrollY;
+        var px = worldX + (csx * gameObject.scrollFactorX) - csx;
+        var py = worldY + (csy * gameObject.scrollFactorY) - csy;
+        if (gameObject.parentContainer) {
+            if (tempMatrix === undefined) {
+                tempMatrix = new TransformMatrix();
+                parentMatrix = new TransformMatrix();
+            }
+
+            gameObject.getWorldTransformMatrix(tempMatrix, parentMatrix);
+            tempMatrix.applyInverse(px, py, out);
+        }
+        else {
+            TransformXY(px, py, gameObject.x, gameObject.y, gameObject.rotation, gameObject.scaleX, gameObject.scaleY, out);
+        }
+
+        out.x += gameObject.displayOriginX;
+        out.y += gameObject.displayOriginY;
+
+        return out;
+    };
+
+    var tempMatrix, parentMatrix;
+    var globOut = {};
+
+    var GetHitArea = function (worldX, worldY, camera) {
+        var localXY = WorldXYToGameObjectLocalXY(this.parent, worldX, worldY, camera, true);
+        var area = this.hitAreaManager.getFirst(localXY.x, localXY.y);
+        if (area === null) {
+            return;
+        }
+
+        return area.data.key;
+    };
+
     const NO_NEWLINE$1 = CONST.NO_NEWLINE;
     const RAW_NEWLINE = CONST.RAW_NEWLINE;
     const WRAPPED_NEWLINE$1 = CONST.WRAPPED_NEWLINE;
@@ -34369,6 +34419,7 @@
     }
     var methods$3 = {
         setInteractive: SetInteractive,
+        getHitArea: GetHitArea,
     };
 
     Object.assign(
@@ -35100,6 +35151,10 @@
 
             CopyCanvasToTexture(this.scene, srcCanvas, key, x, y, width, height);
             return this;
+        }
+
+        getHitArea(worldX, worldY, camera) {
+            return this.canvasText.getHitArea(worldX, worldY, camera);
         }
     }
 
