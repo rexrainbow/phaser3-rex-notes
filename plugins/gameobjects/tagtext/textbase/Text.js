@@ -566,6 +566,10 @@ class Text extends TextBase {
         CopyCanvasToTexture(this.scene, srcCanvas, key, x, y, width, height);
         return this;
     }
+
+    getHitArea(worldX, worldY, camera) {
+        return this.canvasText.getHitArea(worldX, worldY, camera);
+    }
 }
 
 var methods = {

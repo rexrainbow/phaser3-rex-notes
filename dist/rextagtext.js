@@ -2336,9 +2336,9 @@
             if (parent) {
                 graphics
                     .save()
-                    .scaleCanvas(parent.scaleX, parent.scaleY)
+                    .translateCanvas(parent.x, parent.y)
                     .rotateCanvas(parent.rotation)
-                    .translateCanvas(parent.x, parent.y);
+                    .scaleCanvas(parent.scaleX, parent.scaleY);
             }
 
             for (var i = 0, cnt = this.hitAreas.length; i < cnt; i++) {
@@ -2476,6 +2476,56 @@
         }
 
         scene.input.manager.canvas.style.cursor = cursorStyle;
+    };
+
+    const TransformMatrix = Phaser.GameObjects.Components.TransformMatrix;
+    const TransformXY = Phaser.Math.TransformXY;
+
+    var WorldXYToGameObjectLocalXY = function (gameObject, worldX, worldY, camera, out) {
+        if (camera === undefined) {
+            camera = gameObject.scene.cameras.main;
+        }
+
+        if (out === undefined) {
+            out = {};
+        } else if (out === true) {
+            out = globOut;
+        }
+
+        var csx = camera.scrollX;
+        var csy = camera.scrollY;
+        var px = worldX + (csx * gameObject.scrollFactorX) - csx;
+        var py = worldY + (csy * gameObject.scrollFactorY) - csy;
+        if (gameObject.parentContainer) {
+            if (tempMatrix === undefined) {
+                tempMatrix = new TransformMatrix();
+                parentMatrix = new TransformMatrix();
+            }
+
+            gameObject.getWorldTransformMatrix(tempMatrix, parentMatrix);
+            tempMatrix.applyInverse(px, py, out);
+        }
+        else {
+            TransformXY(px, py, gameObject.x, gameObject.y, gameObject.rotation, gameObject.scaleX, gameObject.scaleY, out);
+        }
+
+        out.x += gameObject.displayOriginX;
+        out.y += gameObject.displayOriginY;
+
+        return out;
+    };
+
+    var tempMatrix, parentMatrix;
+    var globOut = {};
+
+    var GetHitArea = function (worldX, worldY, camera) {
+        var localXY = WorldXYToGameObjectLocalXY(this.parent, worldX, worldY, camera, true);
+        var area = this.hitAreaManager.getFirst(localXY.x, localXY.y);
+        if (area === null) {
+            return;
+        }
+
+        return area.data.key;
     };
 
     var RE_ASCII = /^[\x00-\x7F]+$/;
@@ -2983,6 +3033,7 @@
     }
     var methods$2 = {
         setInteractive: SetInteractive,
+        getHitArea: GetHitArea,
     };
 
     Object.assign(
@@ -3833,6 +3884,10 @@
 
             CopyCanvasToTexture(this.scene, srcCanvas, key, x, y, width, height);
             return this;
+        }
+
+        getHitArea(worldX, worldY, camera) {
+            return this.canvasText.getHitArea(worldX, worldY, camera);
         }
     }
 

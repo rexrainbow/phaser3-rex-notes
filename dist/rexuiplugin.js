@@ -6209,9 +6209,9 @@
             if (parent) {
                 graphics
                     .save()
-                    .scaleCanvas(parent.scaleX, parent.scaleY)
+                    .translateCanvas(parent.x, parent.y)
                     .rotateCanvas(parent.rotation)
-                    .translateCanvas(parent.x, parent.y);
+                    .scaleCanvas(parent.scaleX, parent.scaleY);
             }
 
             for (var i = 0, cnt = this.hitAreas.length; i < cnt; i++) {
@@ -6349,6 +6349,56 @@
         }
 
         scene.input.manager.canvas.style.cursor = cursorStyle;
+    };
+
+    const TransformMatrix$1 = Phaser.GameObjects.Components.TransformMatrix;
+    const TransformXY = Phaser.Math.TransformXY;
+
+    var WorldXYToGameObjectLocalXY = function (gameObject, worldX, worldY, camera, out) {
+        if (camera === undefined) {
+            camera = gameObject.scene.cameras.main;
+        }
+
+        if (out === undefined) {
+            out = {};
+        } else if (out === true) {
+            out = globOut$2;
+        }
+
+        var csx = camera.scrollX;
+        var csy = camera.scrollY;
+        var px = worldX + (csx * gameObject.scrollFactorX) - csx;
+        var py = worldY + (csy * gameObject.scrollFactorY) - csy;
+        if (gameObject.parentContainer) {
+            if (tempMatrix$2 === undefined) {
+                tempMatrix$2 = new TransformMatrix$1();
+                parentMatrix$1 = new TransformMatrix$1();
+            }
+
+            gameObject.getWorldTransformMatrix(tempMatrix$2, parentMatrix$1);
+            tempMatrix$2.applyInverse(px, py, out);
+        }
+        else {
+            TransformXY(px, py, gameObject.x, gameObject.y, gameObject.rotation, gameObject.scaleX, gameObject.scaleY, out);
+        }
+
+        out.x += gameObject.displayOriginX;
+        out.y += gameObject.displayOriginY;
+
+        return out;
+    };
+
+    var tempMatrix$2, parentMatrix$1;
+    var globOut$2 = {};
+
+    var GetHitArea = function (worldX, worldY, camera) {
+        var localXY = WorldXYToGameObjectLocalXY(this.parent, worldX, worldY, camera, true);
+        var area = this.hitAreaManager.getFirst(localXY.x, localXY.y);
+        if (area === null) {
+            return;
+        }
+
+        return area.data.key;
     };
 
     var RE_ASCII = /^[\x00-\x7F]+$/;
@@ -6856,6 +6906,7 @@
     }
     var methods$I = {
         setInteractive: SetInteractive$1,
+        getHitArea: GetHitArea,
     };
 
     Object.assign(
@@ -7666,6 +7717,10 @@
 
             CopyCanvasToTexture(this.scene, srcCanvas, key, x, y, width, height);
             return this;
+        }
+
+        getHitArea(worldX, worldY, camera) {
+            return this.canvasText.getHitArea(worldX, worldY, camera);
         }
     }
 
@@ -9015,37 +9070,37 @@
 
     var globPoint;
 
-    const TransformMatrix$1 = Phaser.GameObjects.Components.TransformMatrix;
+    const TransformMatrix = Phaser.GameObjects.Components.TransformMatrix;
 
     var GameObjectLocalXYToWorldXY = function (gameObject, localX, localY, out) {
         if (out === undefined) {
             out = {};
         } else if (out === true) {
-            out = globOut$2;
+            out = globOut$1;
         }
 
         var px = localX - (gameObject.width * gameObject.originX);
         var py = localY - (gameObject.height * gameObject.originY);
 
-        if (tempMatrix$2 === undefined) {
-            tempMatrix$2 = new TransformMatrix$1();
-            parentMatrix$1 = new TransformMatrix$1();
+        if (tempMatrix$1 === undefined) {
+            tempMatrix$1 = new TransformMatrix();
+            parentMatrix = new TransformMatrix();
         }
 
         if (gameObject.parentContainer) {
-            gameObject.getWorldTransformMatrix(tempMatrix$2, parentMatrix$1);
+            gameObject.getWorldTransformMatrix(tempMatrix$1, parentMatrix);
         }
         else {
-            tempMatrix$2.applyITRS(gameObject.x, gameObject.y, gameObject.rotation, gameObject.scaleX, gameObject.scaleY);
+            tempMatrix$1.applyITRS(gameObject.x, gameObject.y, gameObject.rotation, gameObject.scaleX, gameObject.scaleY);
         }
 
-        tempMatrix$2.transformPoint(px, py, out);
+        tempMatrix$1.transformPoint(px, py, out);
 
         return out;
     };
 
-    var tempMatrix$2, parentMatrix$1;
-    var globOut$2 = {};
+    var tempMatrix$1, parentMatrix;
+    var globOut$1 = {};
 
     var BobPositionToWorldPosition = function (dynamicText, bob, bobX, bobY, out) {
         var localXY = BobPositionToCanvasPosition(bob, bobX, bobY, true);
@@ -40821,7 +40876,7 @@
         if (out === undefined) {
             out = {};
         } else if (out === true) {
-            out = globOut$1;
+            out = globOut;
         }
 
         out.left = false;
@@ -40887,7 +40942,7 @@
         return out;
     };
 
-    var globOut$1 = {};
+    var globOut = {};
 
     const GetValue$2w = Phaser.Utils.Objects.GetValue;
     const RadToDeg$5 = Phaser.Math.RadToDeg;
@@ -43023,46 +43078,6 @@
             this.updateCallback.call(this);
         }
     };
-
-    const TransformMatrix = Phaser.GameObjects.Components.TransformMatrix;
-    const TransformXY = Phaser.Math.TransformXY;
-
-    var WorldXYToGameObjectLocalXY = function (gameObject, worldX, worldY, camera, out) {
-        if (camera === undefined) {
-            camera = gameObject.scene.cameras.main;
-        }
-
-        if (out === undefined) {
-            out = {};
-        } else if (out === true) {
-            out = globOut;
-        }
-
-        var csx = camera.scrollX;
-        var csy = camera.scrollY;
-        var px = worldX + (csx * gameObject.scrollFactorX) - csx;
-        var py = worldY + (csy * gameObject.scrollFactorY) - csy;
-        if (gameObject.parentContainer) {
-            if (tempMatrix$1 === undefined) {
-                tempMatrix$1 = new TransformMatrix();
-                parentMatrix = new TransformMatrix();
-            }
-
-            gameObject.getWorldTransformMatrix(tempMatrix$1, parentMatrix);
-            tempMatrix$1.applyInverse(px, py, out);
-        }
-        else {
-            TransformXY(px, py, gameObject.x, gameObject.y, gameObject.rotation, gameObject.scaleX, gameObject.scaleY, out);
-        }
-
-        out.x += gameObject.displayOriginX;
-        out.y += gameObject.displayOriginY;
-
-        return out;
-    };
-
-    var tempMatrix$1, parentMatrix;
-    var globOut = {};
 
     const GetValue$2j = Phaser.Utils.Objects.GetValue;
     const IsPlainObject$s = Phaser.Utils.Objects.IsPlainObject;

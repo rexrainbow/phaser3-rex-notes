@@ -52768,9 +52768,9 @@ void main () {
 	        if (parent) {
 	            graphics
 	                .save()
-	                .scaleCanvas(parent.scaleX, parent.scaleY)
+	                .translateCanvas(parent.x, parent.y)
 	                .rotateCanvas(parent.rotation)
-	                .translateCanvas(parent.x, parent.y);
+	                .scaleCanvas(parent.scaleX, parent.scaleY);
 	        }
 
 	        for (var i = 0, cnt = this.hitAreas.length; i < cnt; i++) {
@@ -52908,6 +52908,16 @@ void main () {
 	    }
 
 	    scene.input.manager.canvas.style.cursor = cursorStyle;
+	};
+
+	var GetHitArea = function (worldX, worldY, camera) {
+	    var localXY = WorldXYToGameObjectLocalXY(this.parent, worldX, worldY, camera, true);
+	    var area = this.hitAreaManager.getFirst(localXY.x, localXY.y);
+	    if (area === null) {
+	        return;
+	    }
+
+	    return area.data.key;
 	};
 
 	const NO_NEWLINE$1 = CONST.NO_NEWLINE;
@@ -53410,6 +53420,7 @@ void main () {
 	}
 	var methods$k = {
 	    setInteractive: SetInteractive,
+	    getHitArea: GetHitArea,
 	};
 
 	Object.assign(
@@ -54141,6 +54152,10 @@ void main () {
 
 	        CopyCanvasToTexture(this.scene, srcCanvas, key, x, y, width, height);
 	        return this;
+	    }
+
+	    getHitArea(worldX, worldY, camera) {
+	        return this.canvasText.getHitArea(worldX, worldY, camera);
 	    }
 	}
 
