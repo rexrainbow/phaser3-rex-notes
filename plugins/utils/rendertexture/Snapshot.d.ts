@@ -2,7 +2,7 @@ export default Snapshot;
 
 declare namespace Snapshot {
     interface IConfig {
-        gameObjects: Phaser.GameObjects.GameObject[],
+        gameObjects: Phaser.GameObjects.GameObject | Phaser.GameObjects.GameObject[],
         renderTexture?: Phaser.GameObjects.RenderTexture,
 
         x?: number, y?: number,

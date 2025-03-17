@@ -11,6 +11,9 @@ var Snapshot = function (config) {
     }
 
     var gameObjects = config.gameObjects;
+    if (!Array.isArray(gameObjects)) {
+        gameObjects = [gameObjects];
+    }
     var renderTexture = config.renderTexture;  // renderTexture, or dynamicTexture
     var saveTexture = config.saveTexture;
     var x = GetValue(config, 'x', undefined);
