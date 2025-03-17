@@ -13,25 +13,21 @@ class Demo extends Phaser.Scene {
 
     create() {
         var ApplyMask = true;
-        var DrawToRenderTexture = false;
+        var DrawToRenderTexture = true;
 
         var image = this.add.image(400, 300, 'classroom')
 
-        if (ApplyMask) {
-            var maskGameObject = this.add.circle(400, 300, 300, 0x330000)
-                .setVisible(false);
-            image.enableFilters()
-                .filters.external.addMask(maskGameObject);
-        }
+        var maskGameObject = this.add.circle(400, 300, 300, 0x330000)
+            .setVisible(false);
+        image.enableFilters()
+            .filters.external.addMask(maskGameObject);
 
-        if (DrawToRenderTexture) {
-            var renderTexture = this.add.renderTexture(0, 0, image.width, image.height)
-                .setOrigin(0)
-                .draw(image)
-                .render()
+        var renderTexture = this.add.renderTexture(0, 0, image.width, image.height)
+            .setOrigin(0)
+            .draw(image)
+            .render()
 
-            image.destroy()
-        }
+        image.destroy()
 
     }
 
