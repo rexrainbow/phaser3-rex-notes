@@ -90,7 +90,6 @@ nav:
         - Input text: list-inputtext.md    
     - Graphics:
         - Graphics: graphics.md
-        - Render texture: rendertexture.md
         - Shape:
             - Rectangle: shape-rectangle.md
             - Circle: shape-circle.md
@@ -117,13 +116,14 @@ nav:
                 - Circular progress: shape-circularprogress.md
                 - Line progress: shape-lineprogress.md
                 - Round rectangle progress: shape-roundrectangleprogress.md
-                - Custom progress: shape-custom-progress.md
-        - Canvas:
-            - Canvas: canvas.md
-            - Round rectangle: canvas-roundrectangle.md
-            - Progress:
-                - Circular progres: canvas-circularprogress.md
-                - Line progres: canvas-lineprogress.md
+                - Custom progress: shape-custom-progress.md        
+    - Render texture: rendertexture.md
+    - Canvas:
+        - Canvas: canvas.md
+        - Round rectangle: canvas-roundrectangle.md
+        - Progress:
+            - Circular progres: canvas-circularprogress.md
+            - Line progres: canvas-lineprogress.md    
     - Tile map:
         - Tile map: tilemap.md
     - Container:
