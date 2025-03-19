@@ -8,22 +8,15 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('classroom', 'assets/images/backgrounds/classroom.png');
+        this.load.image('mushroom', 'assets/images/mushroom.png');
     }
 
     create() {
-        var image = this.add.image(0, 0, 'classroom')
+        var image = this.add.image(0, 0, 'mushroom');
+        var container = this.add.container(400, 300, [image])
 
-        var maskGameObject = this.add.circle(0, 0, 300, 0x330000)
-            .setVisible(false);
-        image.enableFilters()
-            .filters.external.addMask(maskGameObject);
-
-        var container = this.add.container(400, 300, [image, maskGameObject])
-
-        var renderTexture = this.add.renderTexture(0, 0, image.width, image.height)
-            .setOrigin(0)
-            .draw(container)
+        var renderTexture = this.add.renderTexture(400, 300, 800, 600)
+            .capture(image, { transform: 'world', camera: this.cameras.main })
             .render()
 
         container.destroy()
