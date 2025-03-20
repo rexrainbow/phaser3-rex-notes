@@ -13,14 +13,27 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
+        var Scroll = true;
+        var ApplyMask = true;        
+
         var image = this.add.image(0, 0, 'classroom')
-        var maskGameObject = this.add.circle(0, 0, 300, 0x330000)
-            .setVisible(false);
 
-        image.enableFilters()
-            .filters.external.addMask(maskGameObject);
+        var container = this.add.container(400, 300, [image]);
 
-        var container = this.add.container(400, 300, [image, maskGameObject]);
+        if (Scroll) {
+            this.cameras.main.setScroll(1000, 1000)
+            container.setPosition(1400, 1300)
+        }
+
+        if (ApplyMask) {
+            var maskGameObject = this.add.circle(0, 0, 300, 0x330000)
+                .setVisible(false);
+
+            image.enableFilters()
+                .filters.external.addMask(maskGameObject);
+
+            container.add(maskGameObject);
+        }
     }
 
     update() { }
