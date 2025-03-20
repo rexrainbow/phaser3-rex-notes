@@ -115,6 +115,28 @@ var rect = scene.add.rectangle(x, y, width, height, fillColor);
     rect.displayHeight = height;
     ```
 
+### Round
+
+
+- Set
+    ```javascript
+    rect.setRounded(radius);
+    ```
+    - `radius` :
+        - `> 0` : The radius of all four rounded corners.
+        - `0` : Disable rounded corners.
+- Get
+    ```javascript
+    var radius = rect.radius;
+    ```
+- Is rounded
+    ```javascript
+    var isRounded = rect.isRounded;
+    ```
+    
+See also [round-rectangle](shape-roundrectangle.md)
+
+
 ### Other properties
 
 See [game object](gameobject.md)
