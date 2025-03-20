@@ -1,5 +1,4 @@
 import phaser from '../../../phaser/src/phaser.js';
-import { AddMask, RemoveMask } from '../../plugins/utils/mask/MaskMethods.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
