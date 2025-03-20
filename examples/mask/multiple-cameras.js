@@ -12,12 +12,13 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        this.cameras.add(0, 0, 400, 300);
-        this.cameras.add(400, 0, 400, 300);
-        this.cameras.add(400, 300, 400, 300);
-        this.cameras.add(0, 300, 400, 300);
+        var camera0 = this.cameras.add(0, 0, 400, 300).setScroll(1000, 1000);
+        var camera1 = this.cameras.add(400, 0, 400, 300).setScroll(1000, 1000);
+        var camera2 = this.cameras.add(400, 300, 400, 300).setScroll(1000, 1000);
+        var camera3 = this.cameras.add(0, 300, 400, 300).setScroll(1000, 1000);
 
-        var gameObject = CreateGameObject(this);
+        var gameObject = CreateGameObject(this)
+            .setPosition(1200, 1150);
 
         this.cameras.main.ignore(gameObject);
     }
