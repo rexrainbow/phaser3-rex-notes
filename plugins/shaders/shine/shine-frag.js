@@ -22,17 +22,17 @@ uniform vec2 texSize;
 #pragma phaserTemplate(fragmentHeader)
 
 void main (void) {
+    float speed = config.x;
+    float time = config.y;
+    float lineWidth = config.z;
+    float gradient = config.w;
+
 	vec2 uv = gl_FragCoord.xy / texSize;
 
     vec4 tex = texture2D(uMainSampler, outTexCoord);
 
     vec4 col1 = vec4(0.3, 0.0, 0.0, 1.0);
     vec4 col2 = vec4(0.85, 0.85, 0.85, 1.0);
-
-    float speed = config.x;
-    float time = config.y;
-    float lineWidth = config.z;
-    float gradient = config.w;
 
     uv.x = uv.x - mod(time * speed, 2.0) + 0.5;
     float y = uv.x * gradient;
