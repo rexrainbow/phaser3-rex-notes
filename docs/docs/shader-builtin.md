@@ -3,6 +3,7 @@
 Built-in filters.
 
 - [Barrel Distortion](shader-builtin.md#barrel) : A nice pinch / bulge distortion effect.
+- [Blend mode](shader-builtin.md#blend) : Adds a Blend effect.
 - [Blur](shader-builtin.md#blur) : 3 different levels of gaussian blur (low, medium and high) and custom distance and color.
 - [Bokeh](shader-builtin.md#bokeh) / [Tilt Shift](shader-builtin.md#tilt-shift) : A bokeh and tiltshift effect, with intensity, contrast and distance settings.
 - [Color Matrix](shader-builtin.md#colormatrix) : Add a ColorMatrix to any Game Object with access to all of its methods, such as `sepia`, `greyscale`, `lsd` and lots more.
@@ -93,6 +94,72 @@ All Game Objects and camera support filters. These are effects applied after the
     controller.amount = amount;
     ```
 
+### Blend
+
+- Add filter controller to game object
+    ```javascript
+    var controller = gameObject
+        .enableFilters()
+        .filters.internal.addBlend(texture, blendMode, amount, color);
+    ```
+    - `texture` : The texture to apply to the view.
+        - `undefined` : Use built-in 4x4 white `'__WHITE'` texture.
+    - `blendMode` : The blend mode to apply to the view.
+        - `Phaser.BlendModes.NORMAL`, or `0` : Normal blend mode. Default value.
+        - `Phaser.BlendModes.ADD`, or `1` : Add blend mode. Where both shapes overlap the color is determined by adding color values.
+        - `Phaser.BlendModes.MULTIPLY`, or `2` : Multiply blend mode. The pixels are of the top layer are multiplied with the corresponding pixel of the bottom layer. A darker picture is the result.
+        - `Phaser.BlendModes.SCREEN`, or `3` : Screen blend mode. The pixels are inverted, multiplied, and inverted again. A lighter picture is the result (opposite of multiply)
+        - `Phaser.BlendModes.OVERLAY`, or `4` : Overlay blend mode. A combination of multiply and screen. Dark parts on the base layer become darker, and light parts become lighter.
+        - `Phaser.BlendModes.DARKEN`, or `5` : Darken blend mode. Retains the darkest pixels of both layers.
+        - `Phaser.BlendModes.LIGHTEN`, or `6` : Lighten blend mode. Retains the lightest pixels of both layers.
+        - `Phaser.BlendModes.COLOR_DODGE`, or `7` : Color Dodge blend mode. Divides the bottom layer by the inverted top layer.
+        - `Phaser.BlendModes.COLOR_BURN`, or `8` : Color Burn blend mode. Divides the inverted bottom layer by the top layer, and then inverts the result.
+        - `Phaser.BlendModes.HARD_LIGHT`, or `9` : Hard Light blend mode. A combination of multiply and screen like overlay, but with top and bottom layer swapped.
+        - `Phaser.BlendModes.SOFT_LIGHT`, or `10` : Soft Light blend mode. A softer version of hard-light. Pure black or white does not result in pure black or white.
+        - `Phaser.BlendModes.DIFFERENCE`, or `11` : Difference blend mode. Subtracts the bottom layer from the top layer or the other way round to always get a positive value.
+        - `Phaser.BlendModes.EXCLUSION`, or `12` : Exclusion blend mode. Like difference, but with lower contrast.
+        - `Phaser.BlendModes.HUE`, or `13` : Hue blend mode. Preserves the luma and chroma of the bottom layer, while adopting the hue of the top layer.
+        - `Phaser.BlendModes.SATURATION`, or `14` : Saturation blend mode. Preserves the luma and hue of the bottom layer, while adopting the chroma of the top layer.
+        - `Phaser.BlendModes.COLOR`, or `15` : Color blend mode. Preserves the luma of the bottom layer, while adopting the hue and chroma of the top layer.
+        - `Phaser.BlendModes.LUMINOSITY`, or `16` : Luminosity blend mode. Preserves the hue and chroma of the bottom layer, while adopting the luma of the top layer.
+        - `Phaser.BlendModes.ERASE`, or `17` : Alpha erase blend mode.
+        - `Phaser.BlendModes.SOURCE_IN`, or `18` : Source-in blend mode. The new shape is drawn only where both the new shape and the destination canvas overlap. Everything else is made transparent.
+        - `Phaser.BlendModes.SOURCE_OUT`, or `19` : Source-out blend mode. The new shape is drawn where it doesn't overlap the existing canvas content.
+        - `Phaser.BlendModes.SOURCE_ATOP`, or `20` : Source-out blend mode. The new shape is only drawn where it overlaps the existing canvas content.
+        - `Phaser.BlendModes.DESTINATION_OVER`, or `21` : Destination-over blend mode. New shapes are drawn behind the existing canvas content.
+        - `Phaser.BlendModes.DESTINATION_IN`, or `22` : Destination-in blend mode. The existing canvas content is kept where both the new shape and existing canvas content overlap. Everything else is made transparent.
+        - `Phaser.BlendModes.DESTINATION_OUT`, or `23` : Destination-out blend mode. The existing content is kept where it doesn't overlap the new shape.
+        - `Phaser.BlendModes.DESTINATION_ATOP`, or `24` : Destination-out blend mode. The existing canvas is only kept where it overlaps the new shape. The new shape is drawn behind the canvas content.
+        - `Phaser.BlendModes.LIGHTER`, or `25` : Lighten blend mode. Where both shapes overlap the color is determined by adding color values.
+        - `Phaser.BlendModes.COPY`, or `26` : Copy blend mode. Only the new shape is shown.
+        - `Phaser.BlendModes.XOR`, or `27` : Xor blend mode. Shapes are made transparent where both overlap and drawn normal everywhere else.
+    - `amount` : The amount of the blend effect to apply to the view. The expected range is `0` to `1`.
+        - `0` : The original image is preserved. 
+        - `1` : The blend texture is fully applied. Default value.
+    - `color` : The color `[r, g, b, a]` to apply to the blend texture, each component's range is `0` to `1`
+        - `undefined` : The default value is `[1, 1, 1, 1]`.
+- Add filter controller to camera
+    ```javascript
+    var controller = camera
+        .filters.internal.addBlend();
+    ```
+- Disable filter controller
+    ```javascript
+    controller.setActive(false);
+    // controller.active = false;
+    ```
+- Remove filter controller
+    ```javascript
+    gameObject.filters.internal.remove(controller);
+    ```
+    ```javascript
+    camera.filters.internal.remove(controller);
+    ```
+    - Also destroy this controller.
+- Properties
+    ```javascript
+    controller.amount = amount;
+    ```
 
 ### Blur
 
