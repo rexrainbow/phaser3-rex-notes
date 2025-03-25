@@ -15,7 +15,7 @@ class CircleFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
         programManager.setUniform('texSize', [drawingContext.width, drawingContext.height]);
         programManager.setUniform('color', controller.glcolor);
         programManager.setUniform('backgroundColor', controller.glcolor2);
-        programManager.setUniform('config', [controller.thickness, controller.scale, controller.feather]);        
+        programManager.setUniform('config', [controller.thickness, controller.scale, controller.feather]);
     }
 
 }

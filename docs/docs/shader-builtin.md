@@ -22,7 +22,7 @@ All Game Objects and camera support filters. These are effects applied after the
     Only work in WebGL render mode.
 
 !!! note
-    Abandoned effects : Bloom, Circle Outline, Gradient, Shine, Vignette, Wipe, Reveal
+    Abandoned effects : Bloom, Circle, Gradient, Shine, Vignette, Wipe, Reveal
 
 ## Live demos
 
