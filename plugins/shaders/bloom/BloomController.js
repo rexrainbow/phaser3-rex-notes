@@ -28,15 +28,6 @@ class BloomController extends Phaser.Filters.ParallelFilters {
 
     forEachController(callback, scope) {
         this.top.list.forEach(callback, scope);
-        this.bottom.list.forEach(callback, scope);
-    }
-
-    forEachTopController(callback, scope) {
-        this.top.list.forEach(callback, scope);
-    }
-
-    forEachBottomController(callback, scope) {
-        this.bottom.list.forEach(callback, scope);
     }
 
     get steps() {
@@ -48,25 +39,22 @@ class BloomController extends Phaser.Filters.ParallelFilters {
             return;
         }
 
-        var topFilters = this.top;
-        var bottomFilters = this.bottom;
         var camera = this.camera;
         if (this.steps < value) {
-            var topFilters = this.top;
-            var bottomFilters = this.bottom;
-            for (var i = this.steps; i < value; i++) {
-                topFilters.add(new BloomStepController(camera));
-                bottomFilters.add(new BloomStepController(camera));
+            var filters = this.top;
+            var startIndex = this.steps * 2;
+            var stopIndex = value * 2;
+            for (var i = startIndex; i < stopIndex; i++) {
+                filters.add(new BloomStepController(camera));
             }
         } else { // this.steps > value
-            var topFiltersList = this.top.list;
-            var bottomFiltersList = this.bottom.list;
-            for (var i = this.steps - 1; i >= value; i--) {
-                topFiltersList[i].destroy();
-                bottomFiltersList[i].destroy();
+            var filtersList = this.top.list;
+            var startIndex = this.steps * 2;
+            var stopIndex = value * 2;
+            for (var i = startIndex - 1; i >= stopIndex; i--) {
+                filtersList[i].destroy();
             }
-            topFiltersList.length = value;
-            bottomFiltersList.length = value;
+            filtersList.length = stopIndex;
         }
 
         this._steps = value;
@@ -87,11 +75,8 @@ class BloomController extends Phaser.Filters.ParallelFilters {
 
     set offsetX(value) {
         this._offsetX = value;
-        this.forEachTopController(function (bloomStepController) {
-            bloomStepController.offsetX = value;
-        })
-        this.forEachBottomController(function (bloomStepController) {
-            bloomStepController.offsetX = 0;
+        this.forEachController(function (bloomStepController, i) {
+            bloomStepController.offsetX = (i % 2 === 0) ? value : 0;
         })
     }
 
@@ -101,11 +86,8 @@ class BloomController extends Phaser.Filters.ParallelFilters {
 
     set offsetY(value) {
         this._offsetY = value;
-        this.forEachTopController(function (bloomStepController) {
-            bloomStepController.offsetY = 0;
-        })
-        this.forEachBottomController(function (bloomStepController) {
-            bloomStepController.offsetY = value;
+        this.forEachController(function (bloomStepController, i) {
+            bloomStepController.offsetY = (i % 2 === 1) ? value : 0;
         })
     }
 
