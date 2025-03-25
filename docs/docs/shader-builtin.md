@@ -2,15 +2,16 @@
 
 Built-in filters.
 
-- [Barrel Distortion](shader-builtin.md#barrel) : A nice pinch / bulge distortion effect.
-- [Blend mode](shader-builtin.md#blend) : Adds a Blend effect.
-- [Blur](shader-builtin.md#blur) : 3 different levels of gaussian blur (low, medium and high) and custom distance and color.
-- [Bokeh](shader-builtin.md#bokeh) / [Tilt Shift](shader-builtin.md#tilt-shift) : A bokeh and tiltshift effect, with intensity, contrast and distance settings.
-- [Color Matrix](shader-builtin.md#colormatrix) : Add a ColorMatrix to any Game Object with access to all of its methods, such as `sepia`, `greyscale`, `lsd` and lots more.
-- [Glow](shader-builtin.md#glow) : Add a smooth inner or outer glow, with custom distance, strength and color.
-- [Displacement](shader-builtin.md#displacement) : Use a displacement texture, such as a noise texture, to drastically (or subtly!) alter the appearance of a Game Object.
-- [Pixelate](shader-builtin.md#pixelate) : Make any Game Object appear pixelated, to a varying degree.
-- [Shadow](shader-builtin.md#shadow) : Add a drop shadow behind a Game Object, with custom depth and color.
+- [Barrel Distortion](#barrel) : A nice pinch / bulge distortion effect.
+- [Blend mode](#blend) : Adds a Blend effect.
+- [Blur](#blur) : 3 different levels of gaussian blur (low, medium and high) and custom distance and color.
+- [Bokeh](#bokeh) / [Tilt Shift](#tilt-shift) : A bokeh and tiltshift effect, with intensity, contrast and distance settings.
+- [Color Matrix](#colormatrix) : Add a ColorMatrix to any Game Object with access to all of its methods, such as `sepia`, `greyscale`, `lsd` and lots more.
+- [Glow](#glow) : Add a smooth inner or outer glow, with custom distance, strength and color.
+- [Displacement](#displacement) : Use a displacement texture, such as a noise texture, to drastically (or subtly!) alter the appearance of a Game Object.
+- [Pixelate](#pixelate) : Make any Game Object appear pixelated, to a varying degree.
+- [Shadow](#shadow) : Add a drop shadow behind a Game Object, with custom depth and color.
+- [Parallel](#parallel) : Blend result of 2 filter lists.
 
 All Game Objects and camera support filters. These are effects applied after the Game Object has been rendered.
 
@@ -604,6 +605,43 @@ All Game Objects and camera support filters. These are effects applied after the
     controller.samples = samples;
     controller.intensity = intensity;
     ```
+
+### Parallel
+
+Blend result of 2 filter lists
+
+- Add filter controller to game object
+    ```javascript
+    var controller = gameObject
+        .enableFilters()
+        .filters.internal.addParallelFilters()
+    ```
+- Add filter controller to camera
+    ```javascript
+    var controller = camera
+        .filters.internal.addParallelFilters();
+    ``` 
+- Disable filter controller
+    ```javascript
+    controller.setActive(false);
+    // controller.active = false;
+    ```
+- Remove filter controller
+    ```javascript
+    gameObject.filters.internal.remove(controller);
+    ```
+    ```javascript
+    camera.filters.internal.remove(controller);
+    ```
+    - Also destroy this controller.
+- Properties
+    ```javascript
+    var top = controller.top;
+    var bottom = controller.bottom;
+    var blend = controller.blend;
+    ```
+    - `top`, `bottom` : FilterList, add controller via `top.addThreshold(0.5, 1)`
+    - `blend` : [Blend controller](#blend)
 
 ### Remove all effects
 
