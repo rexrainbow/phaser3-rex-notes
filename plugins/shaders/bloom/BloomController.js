@@ -39,34 +39,45 @@ class BloomController extends Phaser.Filters.ParallelFilters {
         this.bottom.list.forEach(callback, scope);
     }
 
-    setSteps(steps) {
-        if (this.steps === steps) {
-            return this;
+    get steps() {
+        return this._steps;
+    }
+
+    set steps(value) {
+        if (this._steps === value) {
+            return;
         }
 
         var topFilters = this.top;
         var bottomFilters = this.bottom;
         var camera = this.camera;
-        if (this.steps < steps) {
-            for (var i = this.steps; i < steps; i++) {
+        if (this.steps < value) {
+            var topFilters = this.top;
+            var bottomFilters = this.bottom;
+            for (var i = this.steps; i < value; i++) {
                 topFilters.add(new BloomStepController(camera));
                 bottomFilters.add(new BloomStepController(camera));
             }
-        } else { // this.steps > steps
-            for (var i = this.steps - 1; i >= steps; i--) {
-                topFilters[i].destroy();
-                bottomFilters[i].destroy();
+        } else { // this.steps > value
+            var topFiltersList = this.top.list;
+            var bottomFiltersList = this.bottom.list;
+            for (var i = this.steps - 1; i >= value; i--) {
+                topFiltersList[i].destroy();
+                bottomFiltersList[i].destroy();
             }
-            topFilters.list.length = steps;
-            bottomFilters.list.length = steps;
+            topFiltersList.length = value;
+            bottomFiltersList.length = value;
         }
 
-        this.steps = steps;
+        this._steps = value;
 
         this.setOffset(this.offsetX, this.offsetY);
         this.setBlurStrength(this.strength);
         this.setColor(this.color);
+    }
 
+    setSteps(steps) {
+        this.steps = steps;
         return this;
     }
 
