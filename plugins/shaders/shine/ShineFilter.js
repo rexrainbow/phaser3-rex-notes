@@ -1,6 +1,6 @@
 import { FilterName } from './const.js';
 import FragSrc from './shine-frag.js';
-import GetTickDelta from '../../utils/system/GetTickDelta.js';
+import GetCurrentTime from '../utils/GetCurrentTime.js';
 
 class ShineFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
     static FilterName = FilterName;
@@ -13,7 +13,7 @@ class ShineFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
     setupUniforms(controller, drawingContext) {
         const programManager = this.programManager;
 
-        controller.now += GetTickDelta(this.manager.renderer.game);
+        controller.now = GetCurrentTime(this.manager.renderer.game, controller.now);
         programManager.setUniform('config', [controller.speed, controller.now, controller.lineWidth, controller.gradient]);
         programManager.setUniform('reveal', controller.reveal);
         programManager.setUniform('texSize', [drawingContext.width, drawingContext.height]);

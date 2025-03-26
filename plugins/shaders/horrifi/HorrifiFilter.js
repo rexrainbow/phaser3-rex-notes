@@ -1,6 +1,6 @@
 import { FilterName } from './const.js';
 import FragSrc from './horrifi-frag.js';
-import GetTickDelta from '../../utils/system/GetTickDelta.js';
+import GetCurrentTime from '../utils/GetCurrentTime.js';
 
 class ToonifyFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
     static FilterName = FilterName;
@@ -46,7 +46,7 @@ class ToonifyFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
 
         // Eanble by VHS    
         if (controller.vhsEnable) {
-            controller.now += GetTickDelta(this.manager.renderer.game);
+            controller.now = GetCurrentTime(this.manager.renderer.game, controller.now);
         }
         programManager.setUniform('time', controller.now);
     }

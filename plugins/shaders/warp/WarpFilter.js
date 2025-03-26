@@ -1,6 +1,6 @@
 import { FilterName } from './const.js';
 import FragSrc from './warp-frag.js';
-import GetTickDelta from '../../utils/system/GetTickDelta.js';
+import GetCurrentTime from '../utils/GetCurrentTime.js';
 
 class WarpFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
     static FilterName = FilterName;
@@ -14,7 +14,7 @@ class WarpFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
         const programManager = this.programManager;
 
         if (controller.speedEnable) {
-            controller.now += GetTickDelta(this.manager.renderer.game);
+            controller.now = GetCurrentTime(this.manager.renderer.game, controller.now);
         }
 
         programManager.setUniform('frequency', [controller.frequencyX, controller.frequencyY]);
