@@ -1,1 +1,1 @@
-export const FilterName = 'FilterVignette';
+export const FilterName = 'FilterP3Vignette';

@@ -1,1 +1,1 @@
-export const FilterName = 'FilterCircle';
+export const FilterName = 'FilterP3Circle';

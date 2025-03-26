@@ -608,14 +608,19 @@ All Game Objects and camera support filters. These are effects applied after the
 
 ### Parallel
 
-Blend result of 2 filter lists
+Blend results of 2 filter lists
 
 - Add filter controller to game object
     ```javascript
     var controller = gameObject
         .enableFilters()
         .filters.internal.addParallelFilters()
+    var top = controller.top;
+    var bottom = controller.bottom;
+    var blend = controller.blend;
     ```
+    - `top`, `bottom` : FilterList, add controller by `top.addThreshold(0.5, 1)`...
+    - `blend` : [Blend controller](#blend)
 - Add filter controller to camera
     ```javascript
     var controller = camera
@@ -634,14 +639,6 @@ Blend result of 2 filter lists
     camera.filters.internal.remove(controller);
     ```
     - Also destroy this controller.
-- Properties
-    ```javascript
-    var top = controller.top;
-    var bottom = controller.bottom;
-    var blend = controller.blend;
-    ```
-    - `top`, `bottom` : FilterList, add controller via `top.addThreshold(0.5, 1)`
-    - `blend` : [Blend controller](#blend)
 
 ### Remove all effects
 

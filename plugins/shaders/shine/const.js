@@ -1,1 +1,1 @@
-export const FilterName = 'FilterShine';
+export const FilterName = 'FilterP3Shine';

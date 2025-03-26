@@ -1,1 +1,1 @@
-export const FilterName = 'FilterGradient';
+export const FilterName = 'FilterP3Gradient';
