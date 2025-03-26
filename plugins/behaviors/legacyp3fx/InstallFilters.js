@@ -24,7 +24,7 @@ var InstallFilters = function (game) {
 
     var FilterListComponent = Phaser.GameObjects.Components.FilterList.prototype;
 
-    FilterListComponent.addBloom = function (color, offsetX, offsetY, blurStrength, strength, steps) {
+    FilterListComponent.addP3Bloom = function (color, offsetX, offsetY, blurStrength, strength, steps) {
         if (color === undefined) { color = 0xFFFFFF; }
         if (offsetX === undefined) { offsetX = 1; }
         if (offsetY === undefined) { offsetY = 1; }
@@ -38,7 +38,7 @@ var InstallFilters = function (game) {
         ));
     }
 
-    FilterListComponent.addCircle = function (thickness, color, backgroundColor, scale, feather) {
+    FilterListComponent.addP3Circle = function (thickness, color, backgroundColor, scale, feather) {
         if (thickness === undefined) { thickness = 8; }
         if (color === undefined) { color = 0xFF33B2; }
         if (backgroundColor === undefined) { backgroundColor = 0xFF0000; }
@@ -51,7 +51,7 @@ var InstallFilters = function (game) {
         ));
     }
 
-    FilterListComponent.addGradient = function (color1, color2, alpha, fromX, fromY, toX, toY, size) {
+    FilterListComponent.addP3Gradient = function (color1, color2, alpha, fromX, fromY, toX, toY, size) {
         if (color1 === undefined) { color1 = 0xff0000; }
         if (color2 === undefined) { color2 = 0x00ff00; }
         if (alpha === undefined) { alpha = 0.2; }
@@ -67,7 +67,7 @@ var InstallFilters = function (game) {
         ));
     }
 
-    FilterListComponent.addShine = function (speed, lineWidth, gradient, reveal) {
+    FilterListComponent.addP3Shine = function (speed, lineWidth, gradient, reveal) {
         if (speed === undefined) { speed = 0.5; }
         if (lineWidth === undefined) { lineWidth = 0.5; }
         if (gradient === undefined) { gradient = 3; }
@@ -79,7 +79,7 @@ var InstallFilters = function (game) {
         ));
     }
 
-    FilterListComponent.addVignette = function (x, y, radius, strength) {
+    FilterListComponent.addP3Vignette = function (x, y, radius, strength) {
         if (x === undefined) { x = 0.5; }
         if (y === undefined) { y = 0.5; }
         if (radius === undefined) { radius = 0.5; }
@@ -91,7 +91,7 @@ var InstallFilters = function (game) {
         ));
     }
 
-    FilterListComponent.addWipe = function (wipeWidth, direction, axis) {
+    FilterListComponent.addP3Wipe = function (wipeWidth, direction, axis) {
         if (wipeWidth === undefined) { wipeWidth = 0.1; }
         if (direction === undefined) { direction = 0; }
         if (axis === undefined) { axis = 0; }
@@ -102,7 +102,7 @@ var InstallFilters = function (game) {
         ));
     }
 
-    FilterListComponent.addReveal = function (wipeWidth, direction, axis) {
+    FilterListComponent.addP3Reveal = function (wipeWidth, direction, axis) {
         if (wipeWidth === undefined) { wipeWidth = 0.1; }
         if (direction === undefined) { direction = 0; }
         if (axis === undefined) { axis = 0; }

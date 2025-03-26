@@ -15,7 +15,7 @@ class Demo extends Phaser.Scene {
     create() {
         var gameObject = this.add.image(400, 300, 'classroom').setScale(0.8)
         gameObject.enableFilters()
-            .filters.internal.addShine(0.002);
+            .filters.internal.addP3Shine(0.002);
     }
 
     update() {
