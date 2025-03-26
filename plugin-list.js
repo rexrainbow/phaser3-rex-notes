@@ -214,6 +214,7 @@ module.exports = {
     'warpfilterplugin': './plugins/warpfilter-plugin.js',
     'horrififilterplugin': './plugins/horrififilter-plugin.js',
     'crtfilterplugin': './plugins/crtfilter-plugin.js',
+    'legacyp3fxplugin': './plugins/legacyp3fx-plugin.js',
 
     // board
     'boardplugin': './plugins/board-plugin.js',
