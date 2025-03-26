@@ -23,6 +23,7 @@ var InstallFilters = function (game) {
     RegisterFilter(game, WipeFilter);
 
     var FilterListComponent = Phaser.GameObjects.Components.FilterList.prototype;
+    console.log(FilterListComponent);
 
     FilterListComponent.addBloom = function (color, offsetX, offsetY, blurStrength, strength, steps) {
         if (color === undefined) { color = 0xFFFFFF; }
