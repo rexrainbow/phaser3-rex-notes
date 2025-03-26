@@ -1063,7 +1063,6 @@ void main (void) {
         RegisterFilter(game, WarpFilter);
 
         var FilterListComponent = Phaser.GameObjects.Components.FilterList.prototype;
-        console.log(FilterListComponent);
 
         FilterListComponent.addBloom = function (color, offsetX, offsetY, blurStrength, strength, steps) {
             if (color === undefined) { color = 0xFFFFFF; }
@@ -1164,11 +1163,16 @@ void main (void) {
             var eventEmitter = this.game.events;
             eventEmitter.on('destroy', this.destroy, this);
 
-            console.log('LegacyP3FXPlugin.start');
-            eventEmitter.once('ready', function () {
+            if (this.game.isRunning) {
                 console.log('InstallFilters');
                 InstallFilters(this.game);
-            }, this);
+            } else {
+                eventEmitter.once('ready', function () {
+                    console.log('InstallFilters');
+                    InstallFilters(this.game);
+                }, this);
+            }
+
         }
     }
 
