@@ -14,9 +14,15 @@ class FilterPluginBase extends Phaser.Plugins.BasePlugin {
         var eventEmitter = this.game.events;
         eventEmitter.once('destroy', this.destroy, this);
 
-        eventEmitter.once('ready', function () {
+        if (this.game.isRunning) {
             RegisterFilter(this.game, this.FilterClass);
-        }, this)
+
+        } else {
+            eventEmitter.once('ready', function () {
+                RegisterFilter(this.game, this.FilterClass);
+            }, this)
+
+        }
 
     }
 

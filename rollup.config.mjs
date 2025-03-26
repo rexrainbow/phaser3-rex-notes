@@ -6,10 +6,8 @@ import typescript from '@rollup/plugin-typescript';
 // import uglify from "@lopatnov/rollup-plugin-uglify";  // Uglify for ES5
 import terser from '@rollup/plugin-terser'; // Uglify for ES6
 
-// import pluginList from './plugin-list.js';
-const pluginList = {
-    'legacyp3fxplugin': './plugins/legacyp3fx-plugin.js',
-};
+import pluginList from './plugin-list.js';
+// const pluginList = {};
 // {name: path}           // pure javascript
 // {name: [path, true]}   // javascript + typescript
 

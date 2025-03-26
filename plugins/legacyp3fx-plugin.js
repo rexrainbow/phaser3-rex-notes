@@ -10,13 +10,13 @@ class LegacyP3FXPlugin extends Phaser.Plugins.BasePlugin {
         eventEmitter.on('destroy', this.destroy, this);
 
         if (this.game.isRunning) {
-            console.log('InstallFilters')
             InstallFilters(this.game);
+
         } else {
             eventEmitter.once('ready', function () {
-                console.log('InstallFilters')
                 InstallFilters(this.game);
             }, this)
+
         }
 
     }
