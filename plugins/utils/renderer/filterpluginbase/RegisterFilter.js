@@ -1,6 +1,6 @@
 import GetGame from '../../system/GetGame.js';
 
-var RegisterPostPipeline = function (game, FilterClass) {
+var RegisterFilter = function (game, FilterClass) {
     var filterName = FilterClass.FilterName;
     var renderNodes = GetGame(game).renderer.renderNodes;
     if (renderNodes.hasNode(filterName)) {
@@ -10,4 +10,4 @@ var RegisterPostPipeline = function (game, FilterClass) {
     renderNodes.addNodeConstructor(filterName, FilterClass);
 }
 
-export default RegisterPostPipeline;
+export default RegisterFilter;

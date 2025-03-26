@@ -12,7 +12,6 @@ var GetController = function (gameObject, ControllerClass, name, external) {
         }
         return result;
     } else {
-        var list = gameObject.postPipelines;
         for (var i = 0, cnt = list.length; i < cnt; i++) {
             var controller = list[i];
             if ((controller instanceof ControllerClass) && (controller.name === name)) {
