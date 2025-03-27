@@ -1,21 +1,16 @@
-import BloomFilter from '../../shaders/bloom/BloomStepFilter.js';
-import CircleFilter from '../../shaders/circle/CircleFilter.js';
-import GradientFilter from '../../shaders/gradient/GradientFilter.js';
-import ShineFilter from '../../shaders/shine/ShineFilter.js';
-import VignetteFilter from '../../shaders/vignette/VignetteFilter.js';
-import WipeFilter from '../../shaders/wipe/WipeFilter.js';
-import RegisterFilter from '../../utils/renderer/filterpluginbase/RegisterFilter.js';
-
-import BloomController from '../../shaders/bloom/BloomController.js';
-import CircleController from '../../shaders/circle/CircleController.js';
-import GradientController from '../../shaders/gradient/GradientController.js';
-import ShineController from '../../shaders/shine/ShineController.js';
-import VignetteController from '../../shaders/vignette/VignetteController.js';
-import WipeController from '../../shaders/wipe/WipeController.js';
-import AddFilterListMethod from '../../utils/renderer/AddFilterListMethod.js';
+import GetGame from './utils/system/GetGame.js';
+import RegisterFilter from './utils/renderer/filterpluginbase/RegisterFilter.js';
+import AddFilterListMethod from './utils/renderer/AddFilterListMethod.js';
+import { BloomFilter, BloomController } from './bloomfilter';
+import { CircleFilter, CircleController } from './circlefilter';
+import { GradientFilter, GradientController } from './gradientfilter';
+import { ShineFilter, ShineController } from './shinefilter';
+import { VignetteFilter, VignetteController } from './vignettefilter';
+import { WipeFilter, WipeController } from './wipefilter';
 
 
-var InstallFilters = function (game) {
+var InstallP3Fx = function (game) {
+    game = GetGame(game);
     RegisterFilter(game, BloomFilter);
     RegisterFilter(game, CircleFilter);
     RegisterFilter(game, GradientFilter);
@@ -135,4 +130,4 @@ var InstallFilters = function (game) {
 
 }
 
-export default InstallFilters;
+export default InstallP3Fx;

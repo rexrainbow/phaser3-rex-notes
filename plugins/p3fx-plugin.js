@@ -1,4 +1,4 @@
-import InstallFilters from './behaviors/p3fx/InstallFilters.js';
+import InstallP3Fx from './p3fx.js';
 
 class P3FXPlugin extends Phaser.Plugins.BasePlugin {
     constructor(pluginManager) {
@@ -10,11 +10,11 @@ class P3FXPlugin extends Phaser.Plugins.BasePlugin {
         eventEmitter.on('destroy', this.destroy, this);
 
         if (this.game.isRunning) {
-            InstallFilters(this.game);
+            InstallP3Fx(this.game);
 
         } else {
             eventEmitter.once('ready', function () {
-                InstallFilters(this.game);
+                InstallP3Fx(this.game);
             }, this)
 
         }

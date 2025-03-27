@@ -13,7 +13,7 @@ class SwirlFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
         const programManager = this.programManager;
 
         programManager.setUniform('config', [controller.radius, controller.rotation]);
-        programManager.setUniform('center', [controller.centerX, drawingContext.height - controller.centerY]);
+        programManager.setUniform('center', [controller.centerX, (drawingContext.height - controller.centerY)]);
         programManager.setUniform('texSize', [drawingContext.width, drawingContext.height]);
     }
 }

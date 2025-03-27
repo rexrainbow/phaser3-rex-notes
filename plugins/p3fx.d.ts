@@ -1,9 +1,9 @@
-import BloomController from '../../shaders/bloom/BloomController';
-import CircleController from '../../shaders/circle/CircleController';
-import GradientController from '../../shaders/gradient/GradientController';
-import ShineController from '../../shaders/shine/ShineController';
-import VignetteController from '../../shaders/vignette/VignetteController';
-import WipeController from '../../shaders/wipe/WipeController';
+import { BloomController } from './bloomfilter';
+import { CircleController } from './circlefilter';
+import { GradientController } from './gradientfilter';
+import { ShineController } from './shinefilter';
+import { VignetteController } from './vignettefilter';
+import { WipeController } from './wipefilter';
 
 declare module 'phaser' {
     namespace GameObjects.Components {
@@ -18,3 +18,11 @@ declare module 'phaser' {
         }
     }
 }
+
+declare function InstallP3Fx(scene: Phaser.Scene | Phaser.Game): void;
+
+export {
+    BloomController, CircleController, GradientController, ShineController, VignetteController, WipeController
+}
+
+export default InstallP3Fx;
