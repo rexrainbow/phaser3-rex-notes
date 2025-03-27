@@ -1,5 +1,5 @@
 import phaser from '../../../phaser/src/phaser.js';
-import LegacyP3FXPlugin from '../../plugins/legacyp3fx-plugin.js';
+import P3FXPlugin from '../../plugins/p3fx-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -34,8 +34,8 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-            key: 'rexLegacyP3FX',
-            plugin: LegacyP3FXPlugin,
+            key: 'rexP3FX',
+            plugin: P3FXPlugin,
             start: true
         }]
     }

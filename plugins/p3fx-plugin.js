@@ -1,6 +1,6 @@
-import InstallFilters from './behaviors/legacyp3fx/InstallFilters.js';
+import InstallFilters from './behaviors/p3fx/InstallFilters.js';
 
-class LegacyP3FXPlugin extends Phaser.Plugins.BasePlugin {
+class P3FXPlugin extends Phaser.Plugins.BasePlugin {
     constructor(pluginManager) {
         super(pluginManager);
     }
@@ -22,4 +22,4 @@ class LegacyP3FXPlugin extends Phaser.Plugins.BasePlugin {
     }
 }
 
-export default LegacyP3FXPlugin;
+export default P3FXPlugin;
