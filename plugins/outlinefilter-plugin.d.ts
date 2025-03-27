@@ -1,37 +1,22 @@
 // import * as Phaser from 'phaser';
-import OutlinePostFxPipeline from './outlinepipeline';
+import {
+    OutlineFilter,
+    OutlineController
+} from './outlinefilter';
+import FilterPluginBase from './utils/renderer/filterpluginbase/FilterPluginBase';
 
+export default OutlineFilterPlugin;
 
-export default OutlinePipelinePlugin;
-
-declare namespace OutlinePipelinePlugin {
-
-    interface IConfig {
-        thickness?: number,
-        outlineColor?: number,
-        quality?: number,
-
-        name?: string,
-    }
-
+declare namespace OutlineFilterPlugin {
 }
 
-declare class OutlinePipelinePlugin extends Phaser.Plugins.BasePlugin {
-    add(
-        gameObject: Phaser.GameObjects.GameObject,
-        config?: OutlinePipelinePlugin.IConfig
-    ): OutlinePostFxPipeline;
+declare class OutlineFilterPlugin extends FilterPluginBase<OutlineController, OutlineController.IConfig> {
+}
 
-    remove(
-        gameObject: Phaser.GameObjects.GameObject,
-        name?: string
-    ): this;
-
-    get(
-        gameObject: Phaser.GameObjects.GameObject,
-        name?: string
-    ): OutlinePostFxPipeline | OutlinePostFxPipeline[];
-
-    setQuality(value: number): this;
-    quality: number;
+declare module 'phaser' {
+    namespace GameObjects.Components {
+        interface FilterList {
+            addRexOutline: (config?: OutlineController.IConfig) => OutlineController
+        }
+    }
 }

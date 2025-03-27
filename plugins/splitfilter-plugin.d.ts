@@ -12,3 +12,11 @@ declare namespace SplitFilterPlugin {
 
 declare class SplitFilterPlugin extends FilterPluginBase<SplitController, SplitController.IConfig> {
 }
+
+declare module 'phaser' {
+    namespace GameObjects.Components {
+        interface FilterList {
+            addRexSplit: (config?: SplitController.IConfig) => SplitController
+        }
+    }
+}

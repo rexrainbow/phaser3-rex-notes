@@ -10,6 +10,13 @@ class ColorReplaceFilterPlugin extends FilterPluginBase {
     constructor(pluginManager) {
         super(pluginManager);
         this.setFilterClass(ColorReplaceFilter, ColorReplaceController);
+
+        this.setFilterListMethod(
+            'addRexColorReplace',
+            function (config) {
+                return this.add(new ColorReplaceController(this.camera, config));
+            }
+        );
     }
 }
 

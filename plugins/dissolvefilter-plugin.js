@@ -10,6 +10,13 @@ class DissolveFilterPlugin extends PipelinePluginBase {
     constructor(pluginManager) {
         super(pluginManager);
         this.setFilterClass(DissolveFilter, DissolveController);
+
+        this.setFilterListMethod(
+            'addRexDissolve',
+            function (config) {
+                return this.add(new DissolveController(this.camera, config));
+            }
+        );
     }
 }
 

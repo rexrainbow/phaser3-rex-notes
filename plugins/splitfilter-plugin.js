@@ -9,7 +9,15 @@ import SetValue from './utils/object/SetValue.js';
 class SplitFilterPlugin extends FilterPluginBase {
     constructor(pluginManager) {
         super(pluginManager);
+
         this.setFilterClass(SplitFilter, SplitController);
+
+        this.setFilterListMethod(
+            'addRexSplit',
+            function (config) {
+                return this.add(new SplitController(this.camera, config));
+            }
+        );
     }
 }
 

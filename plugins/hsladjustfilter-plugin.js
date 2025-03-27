@@ -9,7 +9,15 @@ import SetValue from './utils/object/SetValue.js';
 class HslAdjustFilterPlugin extends FilterPluginBase {
     constructor(pluginManager) {
         super(pluginManager);
+
         this.setFilterClass(HslAdjustFilter, HslAdjustController);
+
+        this.setFilterListMethod(
+            'addRexHslAdjust',
+            function (config) {
+                return this.add(new HslAdjustController(this.camera, config));
+            }
+        );
     }
 }
 

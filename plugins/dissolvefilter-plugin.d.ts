@@ -12,3 +12,11 @@ declare namespace DissolveFilterPlugin {
 
 declare class DissolveFilterPlugin extends FilterPluginBase<DissolveController, DissolveController.IConfig> {
 }
+
+declare module 'phaser' {
+    namespace GameObjects.Components {
+        interface FilterList {
+            addRexDissolve: (config?: DissolveController.IConfig) => DissolveController
+        }
+    }
+}

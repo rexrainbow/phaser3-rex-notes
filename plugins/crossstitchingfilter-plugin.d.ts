@@ -12,3 +12,11 @@ declare namespace CrossStitchingFilterPlugin {
 
 declare class CrossStitchingFilterPlugin extends FilterPluginBase<CrossStitchingController, CrossStitchingController.IConfig> {
 }
+
+declare module 'phaser' {
+    namespace GameObjects.Components {
+        interface FilterList {
+            addRexCrossStitching: (config?: CrossStitchingController.IConfig) => CrossStitchingController
+        }
+    }
+}

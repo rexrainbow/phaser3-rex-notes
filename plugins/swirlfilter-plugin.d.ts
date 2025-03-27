@@ -12,3 +12,11 @@ declare namespace SwirlFilterPlugin {
 
 declare class SwirlFilterPlugin extends FilterPluginBase<SwirlController, SwirlController.IConfig> {
 }
+
+declare module 'phaser' {
+    namespace GameObjects.Components {
+        interface FilterList {
+            addRexSwirl: (config?: SwirlController.IConfig) => SwirlController
+        }
+    }
+}

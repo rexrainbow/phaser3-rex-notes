@@ -1,6 +1,20 @@
 // import * as Phaser from 'phaser';
+export default OutlineController;
 
-export default class OutlinePostFxPipeline extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
+declare namespace OutlineController {
+    interface IConfig {
+        thickness?: number,
+        outlineColor?: number,
+        quality?: number
+    }
+}
+
+declare class OutlineController extends Phaser.Filters.Controller {
+    constructor(
+        camera: Phaser.Cameras.Scene2D.BaseCamera,
+        config?: OutlineController.IConfig
+    );
+
     setThickness(value: number): this;
     thickness: number;
 

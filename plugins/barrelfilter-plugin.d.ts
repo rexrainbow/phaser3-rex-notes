@@ -12,3 +12,11 @@ declare namespace BarrelFilterPlugin {
 
 declare class BarrelFilterPlugin extends FilterPluginBase<BarrelController, BarrelController.IConfig> {
 }
+
+declare module 'phaser' {
+    namespace GameObjects.Components {
+        interface FilterList {
+            addRexBarrel: (config?: BarrelController.IConfig) => BarrelController
+        }
+    }
+}

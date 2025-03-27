@@ -17,23 +17,31 @@ class Demo extends Phaser.Scene {
         var gameObject = this.add.image(400, 300, 'classroom');
 
         var camera = this.cameras.main;
-        var postFxFilter = this.plugins.get('rexBarrelFilterPlugin').add(camera, {
+        /*
+        var controller = this.plugins.get('rexBarrelFilterPlugin').add(camera, {
             radius: 300,
             power: 0.5,
             shrink: true
         });
+        */
+        var controller = camera
+            .filters.internal.addRexBarrel({
+                radius: 300,
+                power: 0.5,
+                shrink: true
+            });
 
         this.input.on('pointerdown', function (pointer) {
-            postFxFilter.setCenter(pointer.x, pointer.y);
+            controller.setCenter(pointer.x, pointer.y);
         })
 
         var gui = new Dat.GUI();
-        gui.add(postFxFilter, 'centerX', 0, 800);
-        gui.add(postFxFilter, 'centerY', 0, 600);
-        gui.add(postFxFilter, 'radius', 0, 800);
-        gui.add(postFxFilter, 'power', 0, 2);
-        gui.add(postFxFilter, 'intensity', 0, 1);
-        gui.add(postFxFilter, 'shrinkMode');
+        gui.add(controller, 'centerX', 0, 800);
+        gui.add(controller, 'centerY', 0, 600);
+        gui.add(controller, 'radius', 0, 800);
+        gui.add(controller, 'power', 0, 2);
+        gui.add(controller, 'intensity', 0, 1);
+        gui.add(controller, 'shrinkMode');
     }
 
     update() {

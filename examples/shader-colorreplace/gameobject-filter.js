@@ -17,11 +17,20 @@ class Demo extends Phaser.Scene {
         this.add.image(300, 300, 'mushroom')
         var gameObject = this.add.image(400, 300, 'mushroom')
 
+        /*
         var controller = this.plugins.get('rexColorReplaceFilter').add(gameObject, {
             originalColor: 0x008800,
             newColor: 0xff0000,
             epsilon: 0.4
         });
+        */
+        var controller = gameObject
+            .enableFilters()
+            .filters.internal.addRexColorReplace({
+                originalColor: 0x008800,
+                newColor: 0xff0000,
+                epsilon: 0.4
+            });
 
         var gui = new Dat.GUI();
         gui.addColor(controller, 'originalColor');

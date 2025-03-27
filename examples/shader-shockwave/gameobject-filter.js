@@ -16,9 +16,18 @@ class Demo extends Phaser.Scene {
     create() {
         var gameObject = this.add.image(400, 300, 'classroom');
 
+        /*
         var controller = this.plugins.get('rexShockwaveFilter').add(gameObject, {
             waveRadius: 200
         })
+        */
+        var controller = gameObject
+            .enableFilters()
+            .focusFilters()
+            .filters.internal.addRexShockwave({
+                waveRadius: 200
+            })
+
 
         this.input.on('pointerdown', function (pointer) {
             controller.setCenter(pointer.x, pointer.y);

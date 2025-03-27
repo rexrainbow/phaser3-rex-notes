@@ -16,9 +16,17 @@ class Demo extends Phaser.Scene {
     create() {
         var gameObject = this.add.image(400, 300, 'classroom');
 
+        /*
         var controller = this.plugins.get('rexHslAdjustFilter').add(gameObject, {
             hueRotate: 0.5,
         })
+        */
+
+        var controller = gameObject
+            .enableFilters()
+            .filters.internal.addRexHslAdjust({
+                hueRotate: 0.5,
+            });
 
         var gui = new Dat.GUI();
         gui.add(controller, 'hueRotate', 0, 1);

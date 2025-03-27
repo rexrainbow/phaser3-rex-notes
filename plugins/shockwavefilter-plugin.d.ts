@@ -12,3 +12,11 @@ declare namespace ShockwaveFilterPlugin {
 
 declare class ShockwaveFilterPlugin extends FilterPluginBase<ShockwaveController, ShockwaveController.IConfig> {
 }
+
+declare module 'phaser' {
+    namespace GameObjects.Components {
+        interface FilterList {
+            addRexShockwave: (config?: ShockwaveController.IConfig) => ShockwaveController
+        }
+    }
+}

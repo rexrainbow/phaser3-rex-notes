@@ -20,8 +20,13 @@ class Demo extends Phaser.Scene {
         }
 
         var camera = this.cameras.main;
+        /*
         var controller = this.plugins.get('rexSwirlFilter').add(camera, {
         })
+        */
+
+        var controller = camera
+            .filters.internal.addRexSwirl();
 
         var scene = this;
         this.input.on('pointerup', function (pointer) {

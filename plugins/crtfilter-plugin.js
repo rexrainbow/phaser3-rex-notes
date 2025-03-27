@@ -9,7 +9,15 @@ import SetValue from './utils/object/SetValue.js';
 class CrtFilterPlugin extends FilterPluginBase {
     constructor(pluginManager) {
         super(pluginManager);
+
         this.setFilterClass(CrtFilter, CrtController);
+
+        this.setFilterListMethod(
+            'addRexCrt',
+            function (config) {
+                return this.add(new CrtController(this.camera, config));
+            }
+        );
     }
 }
 

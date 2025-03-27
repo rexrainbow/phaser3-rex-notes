@@ -12,3 +12,11 @@ declare namespace ToonifyFilterPlugin {
 
 declare class ToonifyFilterPlugin extends FilterPluginBase<ToonifyController, ToonifyController.IConfig> {
 }
+
+declare module 'phaser' {
+    namespace GameObjects.Components {
+        interface FilterList {
+            addRexToonify: (config?: ToonifyController.IConfig) => ToonifyController
+        }
+    }
+}

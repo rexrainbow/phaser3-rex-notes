@@ -17,10 +17,17 @@ class Demo extends Phaser.Scene {
         var gameObject = this.add.image(400, 300, 'classroom');
 
         var camera = this.cameras.main;
+        /*
         var controller = this.plugins.get('rexFishEyeFilterPlugin').add(camera, {
             radius: 300,
             mode: 'asin'
         });
+        */
+        var controller = camera
+            .filters.internal.addRexFishEye({
+                radius: 300,
+                mode: 'asin'
+            });
 
         this.input.on('pointerdown', function (pointer) {
             controller.setCenter(pointer.x, pointer.y);

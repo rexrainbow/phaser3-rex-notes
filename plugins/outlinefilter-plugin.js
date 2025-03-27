@@ -9,7 +9,15 @@ import SetValue from './utils/object/SetValue.js';
 class OutlineFilterPlugin extends FilterPluginBase {
     constructor(pluginManager) {
         super(pluginManager);
+
         this.setFilterClass(OutlineFilter, OutlineController);
+
+        this.setFilterListMethod(
+            'addRexOutline',
+            function (config) {
+                return this.add(new OutlineController(this.camera, config));
+            }
+        );
     }
 }
 

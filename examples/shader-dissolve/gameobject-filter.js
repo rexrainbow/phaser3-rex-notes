@@ -17,8 +17,14 @@ class Demo extends Phaser.Scene {
     create() {
         var gameObject = this.add.image(400, 300, 'classroom');
 
+        /*
         var controller = this.plugins.get('rexDisolveFilter').add(gameObject, {
         })
+        */
+
+        var controller = gameObject
+            .enableFilters()
+            .filters.internal.addRexDissolve();
 
         var tweenTask;
         this.input.on('pointerdown', function () {

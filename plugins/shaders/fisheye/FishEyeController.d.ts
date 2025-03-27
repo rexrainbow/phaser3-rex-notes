@@ -1,8 +1,10 @@
 export default FishEyeController;
 
 declare namespace FishEyeController {
+    type ModeType = 0 | 1 | 'asin' | 'sin';
+
     interface IConfig {
-        mode?: 0 | 1 | 'asin' | 'sin',
+        mode?: ModeType,
         center?: {
             x?: number, y?: number
         },

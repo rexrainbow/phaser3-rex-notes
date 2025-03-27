@@ -9,7 +9,15 @@ import SetValue from './utils/object/SetValue.js';
 class HorrifiFilterPlugin extends FilterPluginBase {
     constructor(pluginManager) {
         super(pluginManager);
+
         this.setFilterClass(HorrifiFilter, HorrifiController);
+
+        this.setFilterListMethod(
+            'addRexHorrifi',
+            function (config) {
+                return this.add(new HorrifiController(this.camera, config));
+            }
+        );
     }
 }
 

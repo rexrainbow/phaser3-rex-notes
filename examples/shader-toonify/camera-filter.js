@@ -16,10 +16,13 @@ class Demo extends Phaser.Scene {
     create() {
         this.add.image(400, 300, 'classroom');
 
-
         var camera = this.cameras.main;
+        /*
         var controller = this.plugins.get('rexToonifyFilter').add(camera, {
         })
+        */
+        var controller = camera
+            .filters.internal.addRexToonify();
 
         var gui = new Dat.GUI();
         gui.add(controller, 'edgeThreshold', 0, 1.1);

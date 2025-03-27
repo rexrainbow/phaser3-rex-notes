@@ -3,8 +3,13 @@ import DisolveFilterPlugin from '../../plugins/dissolvefilter-plugin.js';
 
 var DissolveMainCamera = function (scene, duration) {
     var camera = scene.cameras.main;
+
+    /*
     var controller = scene.plugins.get('rexDisolveFilter').add(camera, {
     })
+    */
+    var controller = camera
+        .filters.internal.addRexDissolve();
 
     scene.tweens.add({
         targets: controller,

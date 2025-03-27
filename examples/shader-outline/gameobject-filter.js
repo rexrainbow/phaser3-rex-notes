@@ -26,6 +26,7 @@ class Demo extends Phaser.Scene {
             gameObject
                 .setInteractive()
                 .on('pointerover', function () {
+                    /*
                     // Add outline filter
                     this.plugins.get('rexOutlineFilter').add(gameObject, {
                         thickness: 3,
@@ -37,10 +38,40 @@ class Demo extends Phaser.Scene {
                         thickness: 3,
                         outlineColor: 0xc41c00
                     });
+                    */
+                    var controller0 = gameObject
+                        .enableFilters()
+                        .filters.internal.addRexOutline({
+                            thickness: 3,
+                            outlineColor: 0xff8a50
+                        })
+                        .setPaddingOverride(null)
+
+                    var controller1 = gameObject
+                        .enableFilters()
+                        .filters.internal.addRexOutline({
+                            thickness: 3,
+                            outlineColor: 0xc41c00
+                        })
+                        .setPaddingOverride(null)
+
+                    gameObject.setData('controller0', controller0);
+                    gameObject.setData('controller1', controller1);
                 }, this)
                 .on('pointerout', function () {
+                    /*
                     // Remove all outline filter
                     this.plugins.get('rexOutlineFilter').remove(gameObject);
+                    */
+
+                    gameObject
+                        .enableFilters()
+                        .filters.internal
+                        .remove(gameObject.getData('controller0'))
+                        .remove(gameObject.getData('controller1'))
+
+                    gameObject.setData('controller0', null);
+                    gameObject.setData('controller1', null);
                 }, this)
 
         }

@@ -16,7 +16,9 @@ class Demo extends Phaser.Scene {
     create() {
         var gameObject = this.add.image(400, 300, 'classroom')//.setScale(0.75);
 
-        var controller = this.plugins.get('rexHorrifiFilter').add(gameObject, {
+        var camera = this.cameras.main;
+        /*
+        var controller = this.plugins.get('rexHorrifiFilter').add(camera, {
             enable: true,
 
             // Bloom
@@ -45,6 +47,38 @@ class Demo extends Phaser.Scene {
             //CRT
             crtWidth: 2,
         })
+        */
+
+        camera
+            .filters.internal.addRexHorrifi({
+                enable: true,
+
+                // Bloom
+                bloomRadius: 25,
+                bloomIntensity: 0.5,
+                bloomThreshold: 0.75,
+                bloomTexelWidth: 0.5,
+
+                // Chromatic abberation
+                chabIntensity: 0.6,
+
+                // Vignette
+                vignetteStrength: 0.8,
+                vignetteIntensity: 0.85,
+
+                // Noise
+                noiseStrength: 0.5,
+                // noiseSeed: 0.5,
+
+                // VHS
+                vhsStrength: 0.5,
+
+                // Scanlines
+                scanStrength: 0.5,
+
+                //CRT
+                crtWidth: 2,
+            });
 
         var gui = new Dat.GUI();
 

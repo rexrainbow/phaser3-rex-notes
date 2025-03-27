@@ -1,4 +1,5 @@
 import RegisterFilter from './RegisterFilter.js';
+import AddFilterListMethod from '../AddFilterListMethod.js';
 import AddController from './AddController.js';
 import RemoveController from './RemoveController.js';
 import GetController from './GetController.js'
@@ -7,6 +8,11 @@ class FilterPluginBase extends Phaser.Plugins.BasePlugin {
     setFilterClass(FilterClass, ControllerClass) {
         this.FilterClass = FilterClass;
         this.ControllerClass = ControllerClass;
+        return this;
+    }
+
+    setFilterListMethod(name, callback) {
+        AddFilterListMethod(name, callback);
         return this;
     }
 

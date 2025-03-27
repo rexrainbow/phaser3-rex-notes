@@ -12,3 +12,11 @@ declare namespace FishEyeFilterPlugin {
 
 declare class FishEyeFilterPlugin extends FilterPluginBase<FishEyeController, FishEyeController.IConfig> {
 }
+
+declare module 'phaser' {
+    namespace GameObjects.Components {
+        interface FilterList {
+            addRexFishEye: (config?: FishEyeController.IConfig) => FishEyeController
+        }
+    }
+}

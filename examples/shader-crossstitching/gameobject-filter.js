@@ -16,11 +16,20 @@ class Demo extends Phaser.Scene {
     create() {
         var gameObject = this.add.image(400, 300, 'classroom');
 
+        /*
         var controller = this.plugins.get('rexCrossStitchingFilterPlugin').add(gameObject, {
             stitchingWidth: 6,
             stitchingHeight: 6,
             brightness: 0
         });
+        */
+        var controller = gameObject
+            .enableFilters()
+            .filters.internal.addRexCrossStitching({
+                stitchingWidth: 6,
+                stitchingHeight: 6,
+                brightness: 0
+            });
 
         var gui = new Dat.GUI();
         gui.add(controller, 'brightness', 0, 1);

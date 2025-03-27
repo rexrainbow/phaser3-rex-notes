@@ -9,7 +9,15 @@ import SetValue from './utils/object/SetValue.js';
 class FishEyeFilterPlugin extends FilterPluginBase {
     constructor(pluginManager) {
         super(pluginManager);
+
         this.setFilterClass(FishEyeFilter, FishEyeController);
+
+        this.setFilterListMethod(
+            'addRexFishEye',
+            function (config) {
+                return this.add(new FishEyeController(this.camera, config));
+            }
+        );
     }
 }
 

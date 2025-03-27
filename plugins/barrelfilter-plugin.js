@@ -9,7 +9,15 @@ import SetValue from './utils/object/SetValue.js';
 class BarrelFilterPlugin extends FilterPluginBase {
     constructor(pluginManager) {
         super(pluginManager);
+
         this.setFilterClass(BarrelFilter, BarrelController);
+
+        this.setFilterListMethod(
+            'addRexBarrel',
+            function (config) {
+                return this.add(new BarrelController(this.camera, config));
+            }
+        );
     }
 }
 

@@ -9,7 +9,15 @@ import SetValue from './utils/object/SetValue.js';
 class WarpFilterPlugin extends FilterPluginBase {
     constructor(pluginManager) {
         super(pluginManager);
+
         this.setFilterClass(WarpFilter, WarpController);
+
+        this.setFilterListMethod(
+            'addRexWarp',
+            function (config) {
+                return this.add(new WarpController(this.camera, config));
+            }
+        );
     }
 }
 

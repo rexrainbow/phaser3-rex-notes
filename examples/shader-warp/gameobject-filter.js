@@ -16,9 +16,17 @@ class Demo extends Phaser.Scene {
     create() {
         var gameObject = this.add.image(400, 300, 'classroom').setScale(0.8)
 
+        /*
         var controller = this.plugins.get('rexWarpFilter').add(gameObject, {
             speedY: 6
         })
+        */
+
+        var controller = gameObject
+            .enableFilters()
+            .filters.internal.addRexWarp({
+                speedY: 6
+            })
 
         var gui = new Dat.GUI();
         gui.add(controller, 'frequencyX', 0, 100);

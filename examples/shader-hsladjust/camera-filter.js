@@ -21,8 +21,14 @@ class Demo extends Phaser.Scene {
         }
 
         var camera = this.cameras.main;
+
+        /*
         var controller = this.plugins.get('rexHslAdjustFilter').add(camera, {
         })
+        */
+
+        var controller = camera
+            .filters.internal.addRexHslAdjust();
 
         var gui = new Dat.GUI();
         gui.add(controller, 'hueRotate', 0, 1);

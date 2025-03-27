@@ -17,12 +17,22 @@ class Demo extends Phaser.Scene {
         var gameObject = this.add.image(400, 300, 'classroom');
 
         var camera = this.cameras.main;
+
+        /*
         var controller = this.plugins.get('rexCrtFilter').add(camera, {
             warpX: 0.75,
             warpY: 0.75,
             scanLineStrength: 0.2,
             scanLineWidth: 1024
         })
+        */
+        var controller = camera
+            .filters.internal.addRexCrt({
+                warpX: 0.75,
+                warpY: 0.75,
+                scanLineStrength: 0.2,
+                scanLineWidth: 1024
+            });
 
         var gui = new Dat.GUI();
         gui.add(controller, 'warpX', 0, 1);

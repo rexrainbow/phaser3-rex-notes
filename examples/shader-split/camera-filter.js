@@ -17,11 +17,19 @@ class Demo extends Phaser.Scene {
         var gameObject = this.add.image(400, 300, 'classroom').setScale(0.8);
 
         var camera = this.cameras.main;
+        /*
         var controller = this.plugins.get('rexSplitFilter').add(camera, {
             width: 20,
             height: 20,
             angle: 30
         })
+        */
+        var controller = camera
+            .filters.internal.addRexSplit({
+                width: 20,
+                height: 20,
+                angle: 30
+            });
 
         var gui = new Dat.GUI();
         gui.add(controller, 'splitX', 0, 800);

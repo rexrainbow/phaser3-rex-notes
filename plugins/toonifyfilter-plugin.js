@@ -9,7 +9,15 @@ import SetValue from './utils/object/SetValue.js';
 class ToonifyFilterPlugin extends FilterPluginBase {
     constructor(pluginManager) {
         super(pluginManager);
+
         this.setFilterClass(ToonifyFilter, ToonifyController);
+
+        this.setFilterListMethod(
+            'addRexToonify',
+            function (config) {
+                return this.add(new ToonifyController(this.camera, config));
+            }
+        );
     }
 }
 
