@@ -131,3 +131,7 @@ var InstallP3Fx = function (game) {
 }
 
 export default InstallP3Fx;
+
+export {
+    BloomController, CircleController, GradientController, ShineController, VignetteController, WipeController
+}

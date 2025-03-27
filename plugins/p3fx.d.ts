@@ -21,8 +21,8 @@ declare module 'phaser' {
 
 declare function InstallP3Fx(scene: Phaser.Scene | Phaser.Game): void;
 
+export default InstallP3Fx;
+
 export {
     BloomController, CircleController, GradientController, ShineController, VignetteController, WipeController
 }
-
-export default InstallP3Fx;
