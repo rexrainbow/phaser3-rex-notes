@@ -27,9 +27,19 @@ Split image into 4 parts.
 - Apply effect
     - Apply effect to game object
         ```javascript
+        var filterList = gameObject.filters.internal;
+        var controller = filterList.addRexSplit(config);
+        ```
+        or
+        ```javascript
         var controller = scene.plugins.get('rexsplitfilterplugin').add(gameObject, config);
         ```
     - Apply effect to camera
+        ```javascript
+        var filterList = camera.filters.internal;
+        var controller = filterList.addRexSplit(config);
+        ```
+        or
         ```javascript
         var controller = scene.plugins.get('rexsplitfilterplugin').add(camera, config);
         ```
@@ -61,9 +71,19 @@ Split image into 4 parts.
 - Apply effect
     - Apply effect to game object
         ```javascript
+        var filterList = gameObject.filters.internal;
+        var controller = filterList.addRexSplit(config);
+        ```
+        or
+        ```javascript
         var controller = scene.plugins.get('rexSplitFilter').add(gameObject, config);
         ```
     - Apply effect to camera
+        ```javascript
+        var filterList = camera.filters.internal;
+        var controller = filterList.addRexSplit(config);
+        ```
+        or
         ```javascript
         var controller = scene.plugins.get('rexSplitFilter').add(camera, config);
         ```
@@ -105,7 +125,8 @@ Split image into 4 parts.
 
 - Apply effect to game object. A game object only can add 1 split effect.
     ```javascript
-    var controller = scene.plugins.get('rexSplitFilter').add(gameObject, {
+    var filterList = gameObject.filters.internal;
+    var controller = filterList.addRexSplit({
         // x: undefined,  // renderer.width / 2
         // y: undefined,  // renderer.height / 2
 
@@ -138,13 +159,30 @@ Split image into 4 parts.
     var controller = scene.plugins.get('rexSplitFilter').add(camera, config);
     ```
 
+### Disable effect
+
+```javascript
+controller.setActive(false);
+// controller.active = false;
+```
+
 ### Remove effect
 
 - Remove effect from game object
     ```javascript
+    var filterList = gameObject.filters.internal;
+    filterList.remove(controller);
+    ```
+    or
+    ```javascript
     scene.plugins.get('rexSplitFilter').remove(gameObject);
     ```
 - Remove effect from camera
+    ```javascript
+    var filterList = camera.filters.internal;
+    filterList.remove(controller);
+    ```
+    or
     ```javascript
     scene.plugins.get('rexSplitFilter').remove(camera);
     ```

@@ -28,9 +28,19 @@ Dissolve transition effect. ([Reference](https://github.com/ykob/glsl-dissolve/)
 - Apply effect
     - Apply effect to game object
         ```javascript
+        var filterList = gameObject.filters.internal;
+        var controller = filterList.addRexDissolve(config);
+        ```
+        or
+        ```javascript
         var controller = scene.plugins.get('rexdissolvefilterplugin').add(gameObject, config);
         ```
     - Apply effect to camera
+        ```javascript
+        var filterList = camera.filters.internal;
+        var controller = filterList.addRexDissolve(config);
+        ```
+        or
         ```javascript
         var controller = scene.plugins.get('rexdissolvefilterplugin').add(camera, config);
         ```
@@ -62,9 +72,19 @@ Dissolve transition effect. ([Reference](https://github.com/ykob/glsl-dissolve/)
 - Apply effect
     - Apply effect to game object
         ```javascript
+        var filterList = gameObject.filters.internal;
+        var controller = filterList.addRexDissolve(config);
+        ```
+        or
+        ```javascript
         var controller = scene.plugins.get('rexDissolveFilter').add(gameObject, config);
         ```
     - Apply effect to camera
+        ```javascript
+        var filterList = camera.filters.internal;
+        var controller = filterList.addRexDissolve(config);
+        ```
+        or
         ```javascript
         var controller = scene.plugins.get('rexDissolveFilter').add(camera, config);
         ```
@@ -106,7 +126,8 @@ Dissolve transition effect. ([Reference](https://github.com/ykob/glsl-dissolve/)
 
 - Apply effect to game object. 
     ```javascript
-    var controller = scene.plugins.get('rexDissolveFilter').add(gameObject, {
+    var filterList = gameObject.filters.internal;
+    var controller = filterList.addRexDissolve({
         // toTexture: textureKey,
         // toFrame: frameName,
         // resizeMode: 1,
@@ -138,13 +159,30 @@ Dissolve transition effect. ([Reference](https://github.com/ykob/glsl-dissolve/)
     var controller = scene.plugins.get('rexDissolveFilter').add(camera, config);
     ```
 
+### Disable effect
+
+```javascript
+controller.setActive(false);
+// controller.active = false;
+```
+
 ### Remove effect
 
 - Remove effect from game object
     ```javascript
+    var filterList = gameObject.filters.internal;
+    filterList.remove(controller);
+    ```
+    or
+    ```javascript
     scene.plugins.get('rexDissolveFilter').remove(gameObject);
     ```
 - Remove effect from camera
+    ```javascript
+    var filterList = camera.filters.internal;
+    filterList.remove(controller);
+    ```
+    or
     ```javascript
     scene.plugins.get('rexDissolveFilter').remove(camera);
     ```

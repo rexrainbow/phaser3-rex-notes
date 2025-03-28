@@ -27,9 +27,19 @@ Warp post processing filter.
 - Apply effect
     - Apply effect to game object
         ```javascript
+        var filterList = gameObject.filters.internal;
+        var controller = filterList.addRexWarp(config);
+        ```
+        or
+        ```javascript
         var controller = scene.plugins.get('rexwarpfilterplugin').add(gameObject, config);
         ```
     - Apply effect to camera
+        ```javascript
+        var filterList = camera.filters.internal;
+        var controller = filterList.addRexWarp(config);
+        ```
+        or
         ```javascript
         var controller = scene.plugins.get('rexwarpfilterplugin').add(camera, config);
         ```
@@ -61,9 +71,19 @@ Warp post processing filter.
 - Apply effect
     - Apply effect to game object
         ```javascript
+        var filterList = gameObject.filters.internal;
+        var controller = filterList.addRexWarp(config);
+        ```
+        or
+        ```javascript
         var controller = scene.plugins.get('rexWarpFilter').add(gameObject, config);
         ```
     - Apply effect to camera
+        ```javascript
+        var filterList = camera.filters.internal;
+        var controller = filterList.addRexWarp(config);
+        ```
+        or
         ```javascript
         var controller = scene.plugins.get('rexWarpFilter').add(camera, config);
         ```
@@ -105,7 +125,8 @@ Warp post processing filter.
 
 - Apply effect to game object. A game object only can add 1 warp effect.
     ```javascript
-    var controller = scene.plugins.get('rexWarpFilter').add(gameObject, {
+    var filterList = gameObject.filters.internal;
+    var controller = filterList.addRexWarp({
         // frequencyX: 10,
         // frequencyY: 10,
 
@@ -131,13 +152,30 @@ Warp post processing filter.
     var controller = scene.plugins.get('rexWarpFilter').add(camera, config);
     ```
 
+### Disable effect
+
+```javascript
+controller.setActive(false);
+// controller.active = false;
+```
+
 ### Remove effect
 
 - Remove effect from game object
     ```javascript
+    var filterList = gameObject.filters.internal;
+    filterList.remove(controller);
+    ```
+    or
+    ```javascript
     scene.plugins.get('rexWarpFilter').remove(gameObject);
     ```
 - Remove effect from camera
+    ```javascript
+    var filterList = camera.filters.internal;
+    filterList.remove(controller);
+    ```
+    or
     ```javascript
     scene.plugins.get('rexWarpFilter').remove(camera);
     ```

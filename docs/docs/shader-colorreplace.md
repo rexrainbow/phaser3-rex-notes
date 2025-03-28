@@ -27,9 +27,19 @@ Replace color post processing filter. [Reference](https://github.com/pixijs/filt
 - Apply effect
     - Apply effect to game object
         ```javascript
+        var filterList = gameObject.filters.internal;
+        var controller = filterList.addRexColorReplace(config);
+        ```
+        or
+        ```javascript
         var controller = scene.plugins.get('rexcolorreplacefilterplugin').add(gameObject, config);
         ```
     - Apply effect to camera
+        ```javascript
+        var filterList = camera.filters.internal;
+        var controller = filterList.addRexColorReplace(config);
+        ```
+        or
         ```javascript
         var controller = scene.plugins.get('rexcolorreplacefilterplugin').add(camera, config);
         ```
@@ -61,9 +71,19 @@ Replace color post processing filter. [Reference](https://github.com/pixijs/filt
 - Apply effect
     - Apply effect to game object
         ```javascript
+        var filterList = gameObject.filters.internal;
+        var controller = filterList.addRexColorReplace(config);
+        ```
+        or
+        ```javascript
         var controller = scene.plugins.get('rexColorReplaceFilter').add(gameObject, config);
         ```
     - Apply effect to camera
+        ```javascript
+        var filterList = camera.filters.internal;
+        var controller = filterList.addRexColorReplace(config);
+        ```
+        or
         ```javascript
         var controller = scene.plugins.get('rexColorReplaceFilter').add(camera, config);
         ```
@@ -105,7 +125,8 @@ Replace color post processing filter. [Reference](https://github.com/pixijs/filt
 
 - Apply effect to game object. A game object only can add 1 colorreplace effect.
     ```javascript
-    var controller = scene.plugins.get('rexColorReplaceFilter').add(gameObject, {
+    var filterList = gameObject.filters.internal;
+    var controller = filterList.addRexColorReplace({
         originalColor: 0xFF0000,
         newColor: 0x000000,
         // epsilon: 0.4,
@@ -121,13 +142,30 @@ Replace color post processing filter. [Reference](https://github.com/pixijs/filt
     var controller = scene.plugins.get('rexColorReplaceFilter').add(camera, config);
     ```
 
+### Disable effect
+
+```javascript
+controller.setActive(false);
+// controller.active = false;
+```
+
 ### Remove effect
 
 - Remove effect from game object
     ```javascript
+    var filterList = gameObject.filters.internal;
+    filterList.remove(controller);
+    ```
+    or
+    ```javascript
     scene.plugins.get('rexColorReplaceFilter').remove(gameObject);
     ```
 - Remove effect from camera
+    ```javascript
+    var filterList = camera.filters.internal;
+    filterList.remove(controller);
+    ```
+    or
     ```javascript
     scene.plugins.get('rexColorReplaceFilter').remove(camera);
     ```

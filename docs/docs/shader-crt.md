@@ -27,9 +27,19 @@ CRT effect. [Reference](https://www.shadertoy.com/view/WsVSzV)
 - Apply effect
     - Apply effect to game object
         ```javascript
+        var filterList = gameObject.filters.internal;
+        var controller = filterList.addRexCrt(config);
+        ```
+        or
+        ```javascript
         var controller = scene.plugins.get('rexcrtfilterplugin').add(gameObject, config);
         ```
     - Apply effect to camera
+        ```javascript
+        var filterList = camera.filters.internal;
+        var controller = filterList.addRexCrt(config);
+        ```
+        or
         ```javascript
         var controller = scene.plugins.get('rexcrtfilterplugin').add(camera, config);
         ```
@@ -61,9 +71,19 @@ CRT effect. [Reference](https://www.shadertoy.com/view/WsVSzV)
 - Apply effect
     - Apply effect to game object
         ```javascript
+        var filterList = gameObject.filters.internal;
+        var controller = filterList.addRexCrt(config);
+        ```
+        or
+        ```javascript
         var controller = scene.plugins.get('rexCrtFilter').add(gameObject, config);
         ```
     - Apply effect to camera
+        ```javascript
+        var filterList = camera.filters.internal;
+        var controller = filterList.addRexCrt(config);
+        ```
+        or
         ```javascript
         var controller = scene.plugins.get('rexCrtFilter').add(camera, config);
         ```
@@ -105,7 +125,8 @@ CRT effect. [Reference](https://www.shadertoy.com/view/WsVSzV)
 
 - Apply effect to game object.
     ```javascript
-    var controller = scene.plugins.get('rexCrtFilter').add(gameObject, {
+    var filterList = gameObject.filters.internal;
+    var controller = filterList.addRexCrt({
         // warpX: 0.75,
         // warpY: 0.75,
         // scanLineStrength: 0.2,
@@ -121,13 +142,30 @@ CRT effect. [Reference](https://www.shadertoy.com/view/WsVSzV)
     var controller = scene.plugins.get('rexCrtFilter').add(camera, config);
     ```
 
+### Disable effect
+
+```javascript
+controller.setActive(false);
+// controller.active = false;
+```
+
 ### Remove effect
 
 - Remove effect from game object
     ```javascript
+    var filterList = gameObject.filters.internal;
+    filterList.remove(controller);
+    ```
+    or
+    ```javascript
     scene.plugins.get('rexCrtFilter').remove(gameObject);
     ```
 - Remove effect from camera
+    ```javascript
+    var filterList = camera.filters.internal;
+    filterList.remove(controller);
+    ```
+    or
     ```javascript
     scene.plugins.get('rexCrtFilter').remove(camera);
     ```

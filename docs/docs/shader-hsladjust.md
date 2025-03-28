@@ -30,9 +30,19 @@ Adjust color in HSL domain, post processing filter.
 - Apply effect
     - Apply effect to game object
         ```javascript
+        var filterList = gameObject.filters.internal;
+        var controller = filterList.addRexHSLAdjust(config);
+        ```
+        or
+        ```javascript
         var controller = scene.plugins.get('rexhsladjustfilterplugin').add(gameObject, config);
         ```
     - Apply effect to camera
+        ```javascript
+        var filterList = camera.filters.internal;
+        var controller = filterList.addRexHSLAdjust(config);
+        ```
+        or
         ```javascript
         var controller = scene.plugins.get('rexhsladjustfilterplugin').add(camera, config);
         ```
@@ -64,9 +74,19 @@ Adjust color in HSL domain, post processing filter.
 - Apply effect
     - Apply effect to game object
         ```javascript
+        var filterList = gameObject.filters.internal;
+        var controller = filterList.addRexHSLAdjust(config);
+        ```
+        or
+        ```javascript
         var controller = scene.plugins.get('rexHSLAdjustFilter').add(gameObject, config);
         ```
     - Apply effect to camera
+        ```javascript
+        var filterList = camera.filters.internal;
+        var controller = filterList.addRexHSLAdjust(config);
+        ```
+        or
         ```javascript
         var controller = scene.plugins.get('rexHSLAdjustFilter').add(camera, config);
         ```
@@ -108,7 +128,8 @@ Adjust color in HSL domain, post processing filter.
 
 - Apply effect to game object. A game object only can add 1 hsl-adjust effect.
     ```javascript
-    var controller = scene.plugins.get('rexHslAdjustFilter').add(gameObject, {
+    var filterList = gameObject.filters.internal;
+    var controller = filterList.addRexHslAdjust({
         // hueRotate: 0,
         // satAdjust: 1,
         // lumAdjust: 0.5,
@@ -133,13 +154,30 @@ Adjust color in HSL domain, post processing filter.
     var controller = scene.plugins.get('rexHslAdjustFilter').add(camera, config);
     ```
 
+### Disable effect
+
+```javascript
+controller.setActive(false);
+// controller.active = false;
+```
+
 ### Remove effect
 
 - Remove effect from game object
     ```javascript
+    var filterList = gameObject.filters.internal;
+    filterList.remove(controller);
+    ```
+    or
+    ```javascript
     scene.plugins.get('rexHslAdjustFilter').remove(gameObject);
     ```
 - Remove effect from camera
+    ```javascript
+    var filterList = camera.filters.internal;
+    filterList.remove(controller);
+    ```
+    or
     ```javascript
     scene.plugins.get('rexHslAdjustFilter').remove(camera);
     ```

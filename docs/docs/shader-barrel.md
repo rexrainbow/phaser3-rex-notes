@@ -31,9 +31,19 @@ Barrel post processing filter. [Reference](http://www.geeks3d.com/20140213/glsl-
 - Apply effect
     - Apply effect to game object
         ```javascript
+        var filterList = gameObject.filters.internal;
+        var controller = filterList.addRexBarrel(config);
+        ```
+        or
+        ```javascript
         var controller = scene.plugins.get('rexbarrelfilterplugin').add(gameObject, config);
         ```
     - Apply effect to camera
+        ```javascript
+        var filterList = camera.filters.internal;
+        var controller = filterList.addRexBarrel(config);
+        ```
+        or
         ```javascript
         var controller = scene.plugins.get('rexbarrelfilterplugin').add(camera, config);
         ```
@@ -65,9 +75,19 @@ Barrel post processing filter. [Reference](http://www.geeks3d.com/20140213/glsl-
 - Apply effect
     - Apply effect to game object
         ```javascript
+        var filterList = gameObject.filters.internal;
+        var controller = filterList.addRexBarrel(config);
+        ```
+        or
+        ```javascript
         var controller = scene.plugins.get('rexBarrelFilter').add(gameObject, config);
         ```
     - Apply effect to camera
+        ```javascript
+        var filterList = camera.filters.internal;
+        var controller = filterList.addRexBarrel(config);
+        ```
+        or
         ```javascript
         var controller = scene.plugins.get('rexBarrelFilter').add(camera, config);
         ```
@@ -108,7 +128,8 @@ Barrel post processing filter. [Reference](http://www.geeks3d.com/20140213/glsl-
 
 - Apply effect to game object. A game object only can add 1 barrel effect.
     ```javascript
-    var controller = scene.plugins.get('rexBarrelFilter').add(gameObject, {
+    var filterList = gameObject.filters.internal;
+    var controller = filterList.addRexBarrel({
         // shrink: false,
         // center: {
         //    x: windowWidth / 2,
@@ -133,13 +154,30 @@ Barrel post processing filter. [Reference](http://www.geeks3d.com/20140213/glsl-
     var controller = scene.plugins.get('rexBarrelFilter').add(camera, config);
     ```
 
+### Disable effect
+
+```javascript
+controller.setActive(false);
+// controller.active = false;
+```
+
 ### Remove effect
 
 - Remove effect from game object
     ```javascript
+    var filterList = gameObject.filters.internal;
+    filterList.remove(controller);
+    ```
+    or
+    ```javascript
     scene.plugins.get('rexBarrelFilter').remove(gameObject);
     ```
 - Remove effect from camera
+    ```javascript
+    var filterList = camera.filters.internal;
+    filterList.remove(controller);
+    ```
+    or
     ```javascript
     scene.plugins.get('rexBarrelFilter').remove(camera);
     ```

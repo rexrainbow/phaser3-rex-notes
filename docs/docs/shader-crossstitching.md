@@ -27,9 +27,19 @@ Cross-stitching post processing filter. [Reference](https://www.geeks3d.com/2011
 - Apply effect
     - Apply effect to game object
         ```javascript
+        var filterList = gameObject.filters.internal;
+        var controller = filterList.addRexCrossStitching(config);
+        ```
+        or
+        ```javascript
         var controller = scene.plugins.get('rexcrossstitchingfilterplugin').add(gameObject, config);
         ```
     - Apply effect to camera
+        ```javascript
+        var filterList = camera.filters.internal;
+        var controller = filterList.addRexCrossStitching(config);
+        ```
+        or
         ```javascript
         var controller = scene.plugins.get('rexcrossstitchingfilterplugin').add(camera, config);
         ```
@@ -61,9 +71,19 @@ Cross-stitching post processing filter. [Reference](https://www.geeks3d.com/2011
 - Apply effect
     - Apply effect to game object
         ```javascript
+        var filterList = gameObject.filters.internal;
+        var controller = filterList.addRexCrossStitching(config);
+        ```
+        or
+        ```javascript
         var controller = scene.plugins.get('rexCrossStitchingFilter').add(gameObject, config);
         ```
     - Apply effect to camera
+        ```javascript
+        var filterList = camera.filters.internal;
+        var controller = filterList.addRexCrossStitching(config);
+        ```
+        or
         ```javascript
         var controller = scene.plugins.get('rexCrossStitchingFilter').add(camera, config);
         ```
@@ -105,7 +125,8 @@ Cross-stitching post processing filter. [Reference](https://www.geeks3d.com/2011
 
 - Apply effect to game object. A game object only can add 1 cross-stitching effect.
     ```javascript
-    var controller = scene.plugins.get('rexCrossStitchingFilter').add(gameObject, {
+    var filterList = gameObject.filters.internal;
+    var controller = filterList.addRexCrossStitching({
         // stitchingWidth: 6,
         // stitchingHeight: 6,
         // brightness: 0,
@@ -120,13 +141,30 @@ Cross-stitching post processing filter. [Reference](https://www.geeks3d.com/2011
     var controller = scene.plugins.get('rexCrossStitchingFilter').add(camera, config);
     ```
 
+### Disable effect
+
+```javascript
+controller.setActive(false);
+// controller.active = false;
+```
+
 ### Remove effect
 
 - Remove effect from game object
     ```javascript
+    var filterList = gameObject.filters.internal;
+    filterList.remove(controller);
+    ```
+    or
+    ```javascript
     scene.plugins.get('rexCrossStitchingFilter').remove(gameObject);
     ```
 - Remove effect from camera
+    ```javascript
+    var filterList = camera.filters.internal;
+    filterList.remove(controller);
+    ```
+    or
     ```javascript
     scene.plugins.get('rexCrossStitchingFilter').remove(camera);
     ```

@@ -27,9 +27,19 @@ Shockwave post processing filter. [Reference](https://www.geeks3d.com/20091116/s
 - Apply effect
     - Apply effect to game object
         ```javascript
+        var filterList = gameObject.filters.internal;
+        var controller = filterList.addRexShockwave(config);
+        ```
+        or
+        ```javascript
         var controller = scene.plugins.get('rexshockwavefilterplugin').add(gameObject, config);
         ```
     - Apply effect to camera
+        ```javascript
+        var filterList = camera.filters.internal;
+        var controller = filterList.addRexShockwave(config);
+        ```
+        or
         ```javascript
         var controller = scene.plugins.get('rexshockwavefilterplugin').add(camera, config);
         ```
@@ -61,9 +71,19 @@ Shockwave post processing filter. [Reference](https://www.geeks3d.com/20091116/s
 - Apply effect
     - Apply effect to game object
         ```javascript
+        var filterList = gameObject.filters.internal;
+        var controller = filterList.addRexShockwave(config);
+        ```
+        or
+        ```javascript
         var controller = scene.plugins.get('rexShockwaveFilter').add(gameObject, config);
         ```
     - Apply effect to camera
+        ```javascript
+        var filterList = camera.filters.internal;
+        var controller = filterList.addRexShockwave(config);
+        ```
+        or
         ```javascript
         var controller = scene.plugins.get('rexShockwaveFilter').add(camera, config);
         ```
@@ -105,7 +125,8 @@ Shockwave post processing filter. [Reference](https://www.geeks3d.com/20091116/s
 
 - Apply effect to game object. A game object only can add 1 shockwave effect.
     ```javascript
-    var controller = scene.plugins.get('rexShockwaveFilter').add(gameObject, {
+    var filterList = gameObject.filters.internal;
+    var controller = filterList.addRexShockwave({
         // center: {
         //    x: windowWidth / 2,
         //    y: windowHeight / 2
@@ -126,13 +147,30 @@ Shockwave post processing filter. [Reference](https://www.geeks3d.com/20091116/s
     var controller = scene.plugins.get('rexShockwaveFilter').add(camera, config);
     ```
 
+### Disable effect
+
+```javascript
+controller.setActive(false);
+// controller.active = false;
+```
+
 ### Remove effect
 
 - Remove effect from game object
     ```javascript
+    var filterList = gameObject.filters.internal;
+    filterList.remove(controller);
+    ```
+    or
+    ```javascript
     scene.plugins.get('rexShockwaveFilter').remove(gameObject);
     ```
 - Remove effect from camera
+    ```javascript
+    var filterList = camera.filters.internal;
+    filterList.remove(controller);
+    ```
+    or
     ```javascript
     scene.plugins.get('rexShockwaveFilter').remove(camera);
     ```

@@ -37,9 +37,19 @@ Reference : [Horri-fi shader effect](https://gizmo199.itch.io/horri-fi)
 - Apply effect
     - Apply effect to game object
         ```javascript
+        var filterList = gameObject.filters.internal;
+        var controller = filterList.addRexHorrifi(config);
+        ```
+        or
+        ```javascript
         var controller = scene.plugins.get('rexhorrififilterlugin').add(gameObject, config);
         ```
     - Apply effect to camera
+        ```javascript
+        var filterList = camera.filters.internal;
+        var controller = filterList.addRexHorrifi(config);
+        ```
+        or
         ```javascript
         var controller = scene.plugins.get('rexhorrififilterlugin').add(camera, config);
         ```
@@ -71,9 +81,19 @@ Reference : [Horri-fi shader effect](https://gizmo199.itch.io/horri-fi)
 - Apply effect
     - Apply effect to game object
         ```javascript
+        var filterList = gameObject.filters.internal;
+        var controller = filterList.addRexHorrifi(config);
+        ```
+        or
+        ```javascript
         var controller = scene.plugins.get('rexHorrifiFilter').add(gameObject, config);
         ```
     - Apply effect to camera
+        ```javascript
+        var filterList = camera.filters.internal;
+        var controller = filterList.addRexHorrifi(config);
+        ```
+        or
         ```javascript
         var controller = scene.plugins.get('rexHorrifiFilter').add(camera, config);
         ```
@@ -115,7 +135,8 @@ Reference : [Horri-fi shader effect](https://gizmo199.itch.io/horri-fi)
 
 - Apply effect to game object.
     ```javascript
-    var controller = scene.plugins.get('rexHorrifiFilter').add(gameObject, {
+    var filterList = gameObject.filters.internal;
+    var controller = filterList.addRexHorrifi({
         enable: false,
 
         // Bloom
@@ -180,13 +201,30 @@ Reference : [Horri-fi shader effect](https://gizmo199.itch.io/horri-fi)
     var controller = scene.plugins.get('rexHorrifiFilter').add(camera, config);
     ```
 
+### Disable effect
+
+```javascript
+controller.setActive(false);
+// controller.active = false;
+```
+
 ### Remove effect
 
 - Remove effect from game object
     ```javascript
+    var filterList = gameObject.filters.internal;
+    filterList.remove(controller);
+    ```
+    or
+    ```javascript
     scene.plugins.get('rexHorrifiFilter').remove(gameObject);
     ```
 - Remove effect from camera
+    ```javascript
+    var filterList = camera.filters.internal;
+    filterList.remove(controller);
+    ```
+    or
     ```javascript
     scene.plugins.get('rexHorrifiFilter').remove(camera);
     ```

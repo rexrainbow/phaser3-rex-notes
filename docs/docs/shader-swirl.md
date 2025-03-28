@@ -27,9 +27,19 @@ Swirl post processing filter. [Reference](https://www.geeks3d.com/20110428/shade
 - Apply effect
     - Apply effect to game object
         ```javascript
+        var filterList = gameObject.filters.internal;
+        var controller = filterList.addRexSwirl(config);
+        ```
+        or
+        ```javascript
         var controller = scene.plugins.get('rexswirlfilterplugin').add(gameObject, config);
         ```
     - Apply effect to camera
+        ```javascript
+        var filterList = camera.filters.internal;
+        var controller = filterList.addRexSwirl(config);
+        ```
+        or
         ```javascript
         var controller = scene.plugins.get('rexswirlfilterplugin').add(camera, config);
         ```
@@ -61,9 +71,19 @@ Swirl post processing filter. [Reference](https://www.geeks3d.com/20110428/shade
 - Apply effect
     - Apply effect to game object
         ```javascript
+        var filterList = gameObject.filters.internal;
+        var controller = filterList.addRexSwirl(config);
+        ```
+        or
+        ```javascript
         var controller = scene.plugins.get('rexSwirlFilter').add(gameObject, config);
         ```
     - Apply effect to camera
+        ```javascript
+        var filterList = camera.filters.internal;
+        var controller = filterList.addRexSwirl(config);
+        ```
+        or
         ```javascript
         var controller = scene.plugins.get('rexSwirlFilter').add(camera, config);
         ```
@@ -105,7 +125,8 @@ Swirl post processing filter. [Reference](https://www.geeks3d.com/20110428/shade
 
 - Apply effect to game object. A game object only can add 1 swirl effect.
     ```javascript
-    var controller = scene.plugins.get('rexSwirlFilter').add(gameObject, {
+    var filterList = gameObject.filters.internal;
+    var controller = filterList.addRexSwirl({
         // center: {
         //    x: windowWidth / 2,
         //    y: windowHeight / 2
@@ -124,13 +145,30 @@ Swirl post processing filter. [Reference](https://www.geeks3d.com/20110428/shade
     var controller = scene.plugins.get('rexSwirlFilter').add(camera, config);
     ```
 
+### Disable effect
+
+```javascript
+controller.setActive(false);
+// controller.active = false;
+```
+
 ### Remove effect
 
 - Remove effect from game object
     ```javascript
+    var filterList = gameObject.filters.internal;
+    filterList.remove(controller);
+    ```
+    or
+    ```javascript
     scene.plugins.get('rexSwirlFilter').remove(gameObject);
     ```
 - Remove effect from camera
+    ```javascript
+    var filterList = camera.filters.internal;
+    filterList.remove(controller);
+    ```
+    or
     ```javascript
     scene.plugins.get('rexSwirlFilter').remove(camera);
     ```

@@ -27,9 +27,19 @@ Draw outlines and quantize color in HSV domain. [Reference](https://www.geeks3d.
 - Apply effect
     - Apply effect to game object
         ```javascript
+        var filterList = gameObject.filters.internal;
+        var controller = filterList.addRexToonify(config);
+        ```
+        or
+        ```javascript
         var controller = scene.plugins.get('rextoonifyfilterplugin').add(gameObject, config);
         ```
     - Apply effect to camera
+        ```javascript
+        var filterList = camera.filters.internal;
+        var controller = filterList.addRexToonify(config);
+        ```
+        or
         ```javascript
         var controller = scene.plugins.get('rextoonifyfilterplugin').add(camera, config);
         ```
@@ -61,9 +71,19 @@ Draw outlines and quantize color in HSV domain. [Reference](https://www.geeks3d.
 - Apply effect
     - Apply effect to game object
         ```javascript
+        var filterList = gameObject.filters.internal;
+        var controller = filterList.addRexToonify(config);
+        ```
+        or
+        ```javascript
         var controller = scene.plugins.get('rexToonifyFilter').add(gameObject, config);
         ```
     - Apply effect to camera
+        ```javascript
+        var filterList = camera.filters.internal;
+        var controller = filterList.addRexToonify(config);
+        ```
+        or
         ```javascript
         var controller = scene.plugins.get('rexToonifyFilter').add(camera, config);
         ```
@@ -105,7 +125,8 @@ Draw outlines and quantize color in HSV domain. [Reference](https://www.geeks3d.
 
 - Apply effect to game object.
     ```javascript
-    var controller = scene.plugins.get('rexToonifyFilter').add(gameObject, {
+    var filterList = gameObject.filters.internal;
+    var controller = filterList.addRexToonify({
         // edgeThreshold: 0.2,
         // hueLevels: 0,
         // sLevels: 0,
@@ -125,13 +146,30 @@ Draw outlines and quantize color in HSV domain. [Reference](https://www.geeks3d.
     var controller = scene.plugins.get('rexToonifyFilter').add(camera, config);
     ```
 
+### Disable effect
+
+```javascript
+controller.setActive(false);
+// controller.active = false;
+```
+
 ### Remove effect
 
 - Remove effect from game object
     ```javascript
+    var filterList = gameObject.filters.internal;
+    filterList.remove(controller);
+    ```
+    or
+    ```javascript
     scene.plugins.get('rexToonifyFilter').remove(gameObject);
     ```
 - Remove effect from camera
+    ```javascript
+    var filterList = camera.filters.internal;
+    filterList.remove(controller);
+    ```
+    or
     ```javascript
     scene.plugins.get('rexToonifyFilter').remove(camera);
     ```

@@ -27,9 +27,19 @@ Outline post processing filter. [Reference](https://github.com/pixijs/pixi-filte
 - Apply effect
     - Apply effect to game object
         ```javascript
+        var filterList = gameObject.filters.internal;
+        var controller = filterList.addRexOutline(config);
+        ```
+        or
+        ```javascript
         var controller = scene.plugins.get('rexoutlinefilterlugin').add(gameObject, config);
         ```
     - Apply effect to camera
+        ```javascript
+        var filterList = camera.filters.internal;
+        var controller = filterList.addRexOutline(config);
+        ```
+        or
         ```javascript
         var controller = scene.plugins.get('rexoutlinefilterlugin').add(camera, config);
         ```
@@ -61,9 +71,19 @@ Outline post processing filter. [Reference](https://github.com/pixijs/pixi-filte
 - Apply effect
     - Apply effect to game object
         ```javascript
+        var filterList = gameObject.filters.internal;
+        var controller = filterList.addRexOutline(config);
+        ```
+        or
+        ```javascript
         var controller = scene.plugins.get('rexOutlineFilter').add(gameObject, config);
         ```
     - Apply effect to camera
+        ```javascript
+        var filterList = camera.filters.internal;
+        var controller = filterList.addRexOutline(config);
+        ```
+        or
         ```javascript
         var controller = scene.plugins.get('rexOutlineFilter').add(camera, config);
         ```
@@ -105,7 +125,8 @@ Outline post processing filter. [Reference](https://github.com/pixijs/pixi-filte
 
 - Apply effect to game object. A game object only can add 1 outline effect.
     ```javascript
-    var controller = scene.plugins.get('rexOutlineFilter').add(gameObject, {
+    var filterList = gameObject.filters.internal;
+    var controller = filterList.addRexOutline({
         // thickness: 3,
         // outlineColor: 0x000000,
 
@@ -122,13 +143,30 @@ Outline post processing filter. [Reference](https://github.com/pixijs/pixi-filte
     var controller = scene.plugins.get('rexOutlineFilter').add(camera, config);
     ```
 
+### Disable effect
+
+```javascript
+controller.setActive(false);
+// controller.active = false;
+```
+
 ### Remove effect
 
 - Remove effect from game object
     ```javascript
+    var filterList = gameObject.filters.internal;
+    filterList.remove(controller);
+    ```
+    or
+    ```javascript
     scene.plugins.get('rexOutlineFilter').remove(gameObject);
     ```
 - Remove effect from camera
+    ```javascript
+    var filterList = camera.filters.internal;
+    filterList.remove(controller);
+    ```
+    or
     ```javascript
     scene.plugins.get('rexOutlineFilter').remove(camera);
     ```
