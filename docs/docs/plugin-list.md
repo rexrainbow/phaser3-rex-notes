@@ -151,6 +151,7 @@
 143. [Shader/Horri-fi](shader-horrifi.md): 6-in-1 post processing filter.
 144. [Shader/Hsl-adjust](shader-hsladjust.md): Adjust color in HSL domain, post processing filter.
 145. [Shader/Outline](shader-outline.md): Outline post processing filter, ported from pixi.
+145. [Shader/p3-fx](shader-p3fx.md): Reintroduce unsupported fx effects from phaser3.
 146. [Shader/Shockwave](shader-shockwave.md): Shockwave post processing filter.
 147. [Shader/Split](shader-split.md): Split image into 4 parts.
 148. [Shader/Swirl](shader-swirl.md): Swirl post processing filter.

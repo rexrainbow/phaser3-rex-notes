@@ -261,6 +261,7 @@ nav:
     - Built-in shader effects:
         - Effects : shader-builtin.md
         - Effect properties: effect-properties.md
+        - P3 fx : shader-p3fx.md
     - Color:
         - HSL adjust: shader-hsladjust.md
         - Color replace: shader-colorreplace.md

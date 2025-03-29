@@ -23,7 +23,8 @@ All Game Objects and camera support filters. These are effects applied after the
     Only work in WebGL render mode.
 
 !!! note
-    Abandoned effects : Bloom, Circle, Gradient, Shine, Vignette, Wipe, Reveal
+    Abandoned effects : Bloom, Circle, Gradient, Shine, Vignette, Wipe, Reveal. 
+    Use [p3-fx](shader-p3fx) to reintroduce unsupported features.
 
 ## Live demos
 
