@@ -1,5 +1,5 @@
 import LabelBase from './Base.js';
-import AddChildMask from '../../../plugins/gameobjects/container/containerlite/mask/AddChildMask.js';
+import AddChildCircleMask from '../utils/AddChildCircleMask.js';
 
 import SetWrapMode from '../../../plugins/utils/text/SetWrapMode.js';
 import WrapExpandText from '../utils/wrapexpandtext/WrapExpandText.js';
@@ -62,7 +62,7 @@ class Label extends LabelBase {
             );
 
             if (iconMask) {
-                iconMask = AddChildMask.call(this, icon, icon, 1); // Circle mask
+                iconMask = AddChildCircleMask(this, icon);
             }
 
             if (!fitRatio) {
@@ -139,7 +139,7 @@ class Label extends LabelBase {
             );
 
             if (actionMask) {
-                actionMask = AddChildMask.call(this, action, action, 1); // Circle mask
+                actionMask = AddChildCircleMask(this, action);
             }
 
             if (!fitRatio) {

@@ -1,5 +1,5 @@
 import Sizer from '../sizer/Sizer.js';
-import AddChildMask from '../../../plugins/gameobjects/container/containerlite/mask/AddChildMask.js';
+import AddChildCircleMask from '../utils/AddChildCircleMask.js';
 import Slider from '../slider/Slider.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -46,7 +46,7 @@ class NumberBar extends Sizer {
             )
 
             if (iconMask) {
-                iconMask = AddChildMask.call(this, icon, icon, 1); // Circle mask
+                iconMask = AddChildCircleMask(this, icon);
             }
         }
 

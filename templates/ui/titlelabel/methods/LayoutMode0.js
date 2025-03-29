@@ -8,7 +8,7 @@ Icon  Text       ActionIcon
 */
 
 import Sizer from '../../sizer/Sizer.js';
-import AddChildMask from '../../../../plugins/gameobjects/container/containerlite/mask/AddChildMask.js';
+import AddChildCircleMask from '../../utils/AddChildCircleMask.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -55,7 +55,7 @@ var LayoutMode0 = function (config) {
         );
 
         if (iconMask) {
-            iconMask = AddChildMask.call(this, icon, icon, 1); // Circle mask
+            iconMask = AddChildCircleMask(this, icon);
         }
 
         if (!fitRatio) {
@@ -163,7 +163,7 @@ var LayoutMode0 = function (config) {
         );
 
         if (actionMask) {
-            actionMask = AddChildMask.call(this, action, action, 1); // Circle mask
+            actionMask = AddChildCircleMask(this, action);
         }
 
         if (!fitRatio) {
