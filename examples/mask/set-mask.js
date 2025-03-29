@@ -14,11 +14,17 @@ class Demo extends Phaser.Scene {
 
     create() {
         var image = this.add.image(400, 300, 'classroom')
-        var maskGameObject = this.add.circle(400, 300, 300, 0x330000)
-            .setVisible(false);
+            .setScale(0.5)
+        var maskGameObject = this.add.circle(400, 300, 200, 0x330000)
+            .setScale(0.5).setVisible(false);
 
-        image.enableFilters()
-            .filters.external.addMask(maskGameObject);
+        this.input
+            .on('pointerdown', function () {
+                SetMask(image, maskGameObject);
+            })
+            .on('pointerup', function () {
+                ClearMask(image);
+            })
     }
 
     update() { }
