@@ -3,10 +3,10 @@ import Board from '../board/LogicBoard';
 
 export default ChessData;
 
-declare class ChessData<ChessType> extends ComponentBase {
+declare class ChessData<BoardType=Board> extends ComponentBase {
     readonly $uid: number;
 
-    readonly board: Board<ChessType>;
+    readonly board: Board<BoardType>;
 
     readonly tileXYZ: { x: number, y: number, z: number };
 
