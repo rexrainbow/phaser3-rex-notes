@@ -13,7 +13,7 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        this.cameras.main.setForceComposite(true);
+        // this.cameras.main.setForceComposite(true);
 
         this.add.image(400, 300, 'classroom').setAlpha(0.5);
 
@@ -26,6 +26,8 @@ class Demo extends Phaser.Scene {
         layer.add([image, captureFrame]);
 
         var image1 = this.add.image(0, 0, 'myCaptureFrame');
+
+        layer.enableFilters().filtersForceComposite = true;
     }
 
     update() {
