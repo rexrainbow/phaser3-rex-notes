@@ -151,8 +151,9 @@ var label = scene.rexUI.add.label({
     - `false` : Layout children from left to right. Default behavior.
 - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of label.
 - `icon` : Game object of icon, optional.
-- `iconMask` : Set true to add a *circle* mask on icon game object.
-    - *Phaser 3 engine does not support nested mask*, uses [circle mask image](circlemaskimage.md) instead.
+- `iconMask` : Cut into a round shape.
+    - WEBGL : Apply [circle effect](shader-p3fx.md#circle).
+    - CANVAS : Apply circle mask.
 - `squareFitIcon` : 
     - `true` : Resize icon size to square to fit label height/width.
         - Can't work wit `expandTextWidth: true`
@@ -181,8 +182,9 @@ var label = scene.rexUI.add.label({
         - Can't work with `squareFitIcon: true`.
 - `expandTextHeight` : Set `true` to expand height of text object.
 - `action` : Game object of action icon, optional.
-- `actionMask` : Set true to add a *circle* mask on action icon game object.
-    - *Phaser 3 engine does not support nested mask*, uses [circle mask image](circlemaskimage.md) instead.
+- `actionMask` : Cut into a round shape.
+    - WEBGL : Apply [circle effect](shader-p3fx.md#circle).
+    - CANVAS : Apply circle mask.
 - `squareFitAction` : 
     - `true` : Resize action icon size to square to fit label height/width.
     - `false` : Ignore this feature. Default behavior.

@@ -324,14 +324,16 @@ var dropDownList = scene.rexUI.add.dropDownList({
         - `false` : Layout children from left to right. Default behavior.
     - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of label.
     - `icon` : Game object of icon, optional.
-    - `iconMask` : Set true to add a *circle* mask on icon game object.
-        - *Phaser 3 engine does not support nested mask*, uses [circle mask image](circlemaskimage.md) instead.
+    - `iconMask` : Cut into a round shape.
+        - WEBGL : Apply [circle effect](shader-p3fx.md#circle).
+        - CANVAS : Apply circle mask.
     - `text` : Game object of text, optional.
     - `expandTextWidth` : Set `true` to expand width of text object.
     - `expandTextHeight` : Set `true` to expand height of text object.
     - `action` : Game object of action icon, optional.
-    - `actionMask` : Set true to add a *circle* mask on action icon game object.
-        - *Phaser 3 engine does not support nested mask*, uses [circle mask image](circlemaskimage.md) instead.
+    - `actionMask` : Cut into a round shape.
+        - WEBGL : Apply [circle effect](shader-p3fx.md#circle).
+        - CANVAS : Apply circle mask.
     - `align` : Alignment of icon, text, action-icon game objects.
         - `undefined`, or `'left'`, or `'top'` : Align game objects at left, or top.
         - `'center'` : Align game objects at center.

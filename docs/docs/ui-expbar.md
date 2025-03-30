@@ -195,8 +195,9 @@ var expBar = scene.rexUI.add.expBar({
     - `false` : Layout children from left to right. Default behavior.
 - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of expBar.
 - `icon` : Game object of icon, optional.
-- `iconMask` : Set true to add a *circle* mask on icon game object.
-    - *Phaser 3 engine does not support nested mask*, uses [circle mask image](circlemaskimage.md) instead.   
+- `iconMask` : Cut into a round shape.
+    - WEBGL : Apply [circle effect](shader-p3fx.md#circle).
+    - CANVAS : Apply circle mask.
 - `nameText` : Game object of nameText. 
     - OriginX of nameText will be set to `0`.
     - Empty text will be set to a space character `' '`. To preserve height of this text game object.
@@ -234,8 +235,9 @@ var expBar = scene.rexUI.add.expBar({
     - ([CustomProgress](shape-custom-progress.md)) Game object.
     - `undefined` : No bar game object.
 - `action` : Game object of action icon, optional.
-- `actionMask` : Set true to add a *circle* mask on action icon game object.
-    - *Phaser 3 engine does not support nested mask*, uses [circle mask image](circlemaskimage.md) instead.
+- `actionMask` : Cut into a round shape.
+    - WEBGL : Apply [circle effect](shader-p3fx.md#circle).
+    - CANVAS : Apply circle mask.
 - `align` : 
     - `align.text` : Alignment of nameText, valueText game objects.
         - `'top'`, `'center'`, or `'bottom'`. Default value is `'bottom'`.

@@ -179,8 +179,9 @@ var label = scene.rexUI.add.titleLabel({
 - `expandTitleHeight` : Set `true` to expand height of title object.
 - `separator` : Game object of separator, optional.
 - `icon` : Game object of icon, optional.
-- `iconMask` : Set true to add a *circle* mask on icon game object.
-    - *Phaser 3 engine does not support nested mask*, uses [circle mask image](circlemaskimage.md) instead.   
+- `iconMask` : Cut into a round shape.
+    - WEBGL : Apply [circle effect](shader-p3fx.md#circle).
+    - CANVAS : Apply circle mask.  
 - `text` : Game object of text.
 - `wrapText` : Enable [WrapExpandText](ui-text-helper.md#wrap-expand-text) feature.
     - `false`, `0` : No WrapExpandText feature. Default behavior.
@@ -197,8 +198,9 @@ var label = scene.rexUI.add.titleLabel({
         - Can't work with `squareFitIcon: true`.
 - `expandTextHeight` : Set `true` to expand height of text object.
 - `action` : Game object of action icon, optional.
-- `actionMask` : Set true to add a *circle* mask on action icon game object.
-    - *Phaser 3 engine does not support nested mask*, uses [circle mask image](circlemaskimage.md) instead.
+- `actionMask` : Cut into a round shape.
+    - WEBGL : Apply [circle effect](shader-p3fx.md#circle).
+    - CANVAS : Apply circle mask.
 - `align` : Alignment of title, text, icon, action game objects.
     - `align.title`, `align.text` : `'left'`, `'center'`, or `'right'`. Default vale is `'left'`.
     - `align.icon`, `align.action` : `'top'`, `'center'`, or `'bottom'`. Default vale is `'center'`.
