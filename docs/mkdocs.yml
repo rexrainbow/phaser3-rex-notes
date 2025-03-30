@@ -117,7 +117,9 @@ nav:
                 - Line progress: shape-lineprogress.md
                 - Round rectangle progress: shape-roundrectangleprogress.md
                 - Custom progress: shape-custom-progress.md        
-    - Render texture: rendertexture.md
+    - Copy frame buffer :
+        - Render texture: rendertexture.md
+        - Capture frame : captureframe.md
     - Canvas:
         - Canvas: canvas.md
         - Round rectangle: canvas-roundrectangle.md
