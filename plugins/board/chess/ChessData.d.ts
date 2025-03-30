@@ -6,7 +6,7 @@ export default ChessData;
 declare class ChessData<BoardType=Board> extends ComponentBase {
     readonly $uid: number;
 
-    readonly board: Board<BoardType>;
+    readonly board: BoardType;
 
     readonly tileXYZ: { x: number, y: number, z: number };
 
