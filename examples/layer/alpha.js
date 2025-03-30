@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import LayerManagerPlugin from '../../plugins/layermanager-plugin.js';
 
 class Demo extends Phaser.Scene {
@@ -12,9 +12,11 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var layer = this.add.layer().setAlpha(0.5)
+        var layer = this.add.layer()
         layer.add(this.add.circle(400, 300, 50, 0xff0000))
         layer.add(this.add.circle(400, 300, 50, 0x0000ff))
+        layer.enableFilters()
+        // .filtersForceComposite = true;
     }
 
     update() { }
