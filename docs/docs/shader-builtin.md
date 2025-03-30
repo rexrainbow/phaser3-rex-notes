@@ -39,6 +39,10 @@ All Game Objects and camera support filters. These are effects applied after the
         ```javascript
         gameObject.enableFilters();
         ```
+    1. Setup internal camera, optional
+        ```javascript
+        gameObject.focusFilters();
+        ```
     1. Get filter list
         ```javascript
         var filterList = gameObject.filters.internal;
@@ -50,7 +54,7 @@ All Game Objects and camera support filters. These are effects applied after the
         ```javascript
         var controller = filterList.addBarrel();
         ```
-    1. Use default filter padding
+    1. Apply filter padding, default is no filter padding
         ```javascript
         controller.setPaddingOverride(null);
         ```

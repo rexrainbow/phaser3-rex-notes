@@ -13,11 +13,11 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var gameObject = this.add.rectangle(400, 300, 200, 200, 0xff0000)
-        gameObject.enableFilters()
+        var gameObject = this.add.rectangle(400, 300, 200, 200, 0x00ff00)
+        gameObject.enableFilters().focusFilters()
             .filters.internal.addP3Circle(0);
 
-        gameObject.filtersAutoFocus = true;
+        gameObject.filtersFocusContext = false;
 
         this.add.graphics()
             .lineStyle(2, 0xffffff)

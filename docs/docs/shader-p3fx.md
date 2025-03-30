@@ -153,9 +153,10 @@ Reintroduce unsupported fx effects from phaser3.
 
 - Apply effect to game object.
     ```javascript
-    gameObject.enableFilters();
+    gameObject.enableFilters().focusFilters();
     var filterList = gameObject.filters.internal;
     var controller = filterList.addP3Circle(thickness, color, backgroundColor, scale, feather);
+    // gameObject.filtersFocusContext = false;  // If gameObject is a Shape game object
     ```
     - `thickness` : The width of the circle around the texture, in pixels. Default value is `8`.
     - `color` : The color of the circular ring, given as a number value. Default value is `0xfeedb6`.
