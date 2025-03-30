@@ -28,6 +28,7 @@ Dissolve transition effect. ([Reference](https://github.com/ykob/glsl-dissolve/)
 - Apply effect
     - Apply effect to game object
         ```javascript
+        gameObject.enableFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.addRexDissolve(config);
         ```
@@ -72,6 +73,7 @@ Dissolve transition effect. ([Reference](https://github.com/ykob/glsl-dissolve/)
 - Apply effect
     - Apply effect to game object
         ```javascript
+        gameObject.enableFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.addRexDissolve(config);
         ```
@@ -108,7 +110,7 @@ Dissolve transition effect. ([Reference](https://github.com/ykob/glsl-dissolve/)
 - Apply effect
     - Apply effect to game object
         ```javascript
-        // gameObject.enableFilters();
+        gameObject.enableFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.add(
             new DissolveController(filterList.camera, config)
@@ -126,6 +128,7 @@ Dissolve transition effect. ([Reference](https://github.com/ykob/glsl-dissolve/)
 
 - Apply effect to game object. 
     ```javascript
+    gameObject.enableFilters();
     var filterList = gameObject.filters.internal;
     var controller = filterList.addRexDissolve({
         // toTexture: textureKey,

@@ -27,8 +27,9 @@ Outline post processing filter. [Reference](https://github.com/pixijs/pixi-filte
 - Apply effect
     - Apply effect to game object
         ```javascript
+        gameObject.enableFilters();
         var filterList = gameObject.filters.internal;
-        var controller = filterList.addRexOutline(config);
+        var controller = filterList.addRexOutline(config).setPaddingOverride(null);
         ```
         or
         ```javascript
@@ -71,8 +72,9 @@ Outline post processing filter. [Reference](https://github.com/pixijs/pixi-filte
 - Apply effect
     - Apply effect to game object
         ```javascript
+        gameObject.enableFilters();
         var filterList = gameObject.filters.internal;
-        var controller = filterList.addRexOutline(config);
+        var controller = filterList.addRexOutline(config).setPaddingOverride(null);
         ```
         or
         ```javascript
@@ -107,11 +109,12 @@ Outline post processing filter. [Reference](https://github.com/pixijs/pixi-filte
 - Apply effect
     - Apply effect to game object
         ```javascript
-        // gameObject.enableFilters();
+        gameObject.enableFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.add(
             new OutlineController(filterList.camera, config)
-        );
+        )
+        .setPaddingOverride(null);
         ```
     - Apply effect to camera
         ```javascript
@@ -125,6 +128,7 @@ Outline post processing filter. [Reference](https://github.com/pixijs/pixi-filte
 
 - Apply effect to game object. A game object only can add 1 outline effect.
     ```javascript
+    gameObject.enableFilters();
     var filterList = gameObject.filters.internal;
     var controller = filterList.addRexOutline({
         // thickness: 3,

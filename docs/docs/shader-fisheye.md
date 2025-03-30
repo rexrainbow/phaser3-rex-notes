@@ -27,6 +27,7 @@ Fish-eye post processing filter. [Reference](https://www.geeks3d.com/20140213/gl
 - Apply effect
     - Apply effect to game object
         ```javascript
+        gameObject.enableFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.addRexFishEye(config);
         ```
@@ -71,6 +72,7 @@ Fish-eye post processing filter. [Reference](https://www.geeks3d.com/20140213/gl
 - Apply effect
     - Apply effect to game object
         ```javascript
+        gameObject.enableFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.addRexFishEye(config);
         ```
@@ -107,7 +109,7 @@ Fish-eye post processing filter. [Reference](https://www.geeks3d.com/20140213/gl
 - Apply effect
     - Apply effect to game object
         ```javascript
-        // gameObject.enableFilters();
+        gameObject.enableFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.add(
             new FishEyeController(filterList.camera, config)
@@ -125,6 +127,7 @@ Fish-eye post processing filter. [Reference](https://www.geeks3d.com/20140213/gl
 
 - Apply effect to game object. A game object only can add 1 fisheye effect.
     ```javascript
+    gameObject.enableFilters();
     var filterList = gameObject.filters.internal;
     var controller = filterList.addRexFishEye({
         // center: {

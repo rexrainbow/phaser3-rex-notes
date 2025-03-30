@@ -50,6 +50,10 @@ All Game Objects and camera support filters. These are effects applied after the
         ```javascript
         var controller = filterList.addBarrel();
         ```
+    1. Use default filter padding
+        ```javascript
+        controller.setPaddingOverride(null);
+        ```
 - Camera
     1. Get filter list
         ```javascript

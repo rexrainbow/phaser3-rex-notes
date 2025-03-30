@@ -16,7 +16,7 @@ Apply custom filter.
 ### Classes
 
 ```javascript
-var FilterName = 'MyFilter';
+var MyFilterName = 'MyFilter';
 ```
 
 Filter name used in [filter class](#filter-class) and [filter controller class](#filter-controller-class).
@@ -43,11 +43,11 @@ void main ()
 #### Filter class
 
 ```javascript
-class MyFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader
+class MyFilterClass extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader
 {
     constructor (manager)
     {
-        super(FilterName, manager, null, MyFilterFragmentShader);
+        super(MyFilterName, manager, null, MyFilterFragmentShader);
     }
 
     setupUniforms (controller, drawingContext)
@@ -70,7 +70,7 @@ class MyFilterController extends Phaser.Filters.Controller
 {
     constructor (camera)
     { 
-        super(camera, FilterName);
+        super(camera, MyFilterName);
 
         this.strength = 1;
     }
@@ -79,4 +79,26 @@ class MyFilterController extends Phaser.Filters.Controller
 
 ### Install
 
-See [steps](shader-builtin.md#steps)
+#### Register filter class
+
+```javascript
+var renderNodeManager = scene..sys.game.renderer.renderNodes;
+if (!renderNodeManager.hasNode(MyFilterName)) {
+    renderNodeManager.addNodeConstructor(MyFilterName, MyFilterClass);
+}
+```
+
+#### Add controller instance
+
+```javascript
+// gameObject.enableFilters();
+var filterList = gameObject.filters.internal;
+filterList.add(new MyFilterController(filterList.camera));
+```
+
+or
+
+```javascript
+var filterList = camera.filters.internal;
+filterList.add(new MyFilterController(filterList.camera));
+```

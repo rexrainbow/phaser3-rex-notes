@@ -37,6 +37,7 @@ Reference : [Horri-fi shader effect](https://gizmo199.itch.io/horri-fi)
 - Apply effect
     - Apply effect to game object
         ```javascript
+        gameObject.enableFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.addRexHorrifi(config);
         ```
@@ -81,6 +82,7 @@ Reference : [Horri-fi shader effect](https://gizmo199.itch.io/horri-fi)
 - Apply effect
     - Apply effect to game object
         ```javascript
+        gameObject.enableFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.addRexHorrifi(config);
         ```
@@ -117,7 +119,7 @@ Reference : [Horri-fi shader effect](https://gizmo199.itch.io/horri-fi)
 - Apply effect
     - Apply effect to game object
         ```javascript
-        // gameObject.enableFilters();
+        gameObject.enableFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.add(
             new HorrifiController(filterList.camera, config)
@@ -135,6 +137,7 @@ Reference : [Horri-fi shader effect](https://gizmo199.itch.io/horri-fi)
 
 - Apply effect to game object.
     ```javascript
+    gameObject.enableFilters();
     var filterList = gameObject.filters.internal;
     var controller = filterList.addRexHorrifi({
         enable: false,

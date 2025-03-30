@@ -27,6 +27,7 @@ Cross-stitching post processing filter. [Reference](https://www.geeks3d.com/2011
 - Apply effect
     - Apply effect to game object
         ```javascript
+        gameObject.enableFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.addRexCrossStitching(config);
         ```
@@ -71,6 +72,7 @@ Cross-stitching post processing filter. [Reference](https://www.geeks3d.com/2011
 - Apply effect
     - Apply effect to game object
         ```javascript
+        gameObject.enableFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.addRexCrossStitching(config);
         ```
@@ -107,7 +109,7 @@ Cross-stitching post processing filter. [Reference](https://www.geeks3d.com/2011
 - Apply effect
     - Apply effect to game object
         ```javascript
-        // gameObject.enableFilters();
+        gameObject.enableFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.add(
             new CrossStitchingController(filterList.camera, config)
@@ -125,6 +127,7 @@ Cross-stitching post processing filter. [Reference](https://www.geeks3d.com/2011
 
 - Apply effect to game object. A game object only can add 1 cross-stitching effect.
     ```javascript
+    gameObject.enableFilters();
     var filterList = gameObject.filters.internal;
     var controller = filterList.addRexCrossStitching({
         // stitchingWidth: 6,

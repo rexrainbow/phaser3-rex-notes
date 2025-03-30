@@ -27,6 +27,7 @@ Split image into 4 parts.
 - Apply effect
     - Apply effect to game object
         ```javascript
+        gameObject.enableFilters().focusFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.addRexSplit(config);
         ```
@@ -71,6 +72,7 @@ Split image into 4 parts.
 - Apply effect
     - Apply effect to game object
         ```javascript
+        gameObject.enableFilters().focusFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.addRexSplit(config);
         ```
@@ -107,7 +109,7 @@ Split image into 4 parts.
 - Apply effect
     - Apply effect to game object
         ```javascript
-        // gameObject.enableFilters();
+        gameObject.enableFilters().focusFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.add(
             new SplitController(filterList.camera, config)
@@ -125,6 +127,7 @@ Split image into 4 parts.
 
 - Apply effect to game object. A game object only can add 1 split effect.
     ```javascript
+    gameObject.enableFilters().focusFilters();
     var filterList = gameObject.filters.internal;
     var controller = filterList.addRexSplit({
         // x: undefined,  // renderer.width / 2

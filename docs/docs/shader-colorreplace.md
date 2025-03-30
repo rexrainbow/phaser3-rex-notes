@@ -27,6 +27,7 @@ Replace color post processing filter. [Reference](https://github.com/pixijs/filt
 - Apply effect
     - Apply effect to game object
         ```javascript
+        gameObject.enableFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.addRexColorReplace(config);
         ```
@@ -36,6 +37,7 @@ Replace color post processing filter. [Reference](https://github.com/pixijs/filt
         ```
     - Apply effect to camera
         ```javascript
+        gameObject.enableFilters();
         var filterList = camera.filters.internal;
         var controller = filterList.addRexColorReplace(config);
         ```
@@ -71,6 +73,7 @@ Replace color post processing filter. [Reference](https://github.com/pixijs/filt
 - Apply effect
     - Apply effect to game object
         ```javascript
+        gameObject.enableFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.addRexColorReplace(config);
         ```
@@ -107,7 +110,7 @@ Replace color post processing filter. [Reference](https://github.com/pixijs/filt
 - Apply effect
     - Apply effect to game object
         ```javascript
-        // gameObject.enableFilters();
+        gameObject.enableFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.add(
             new ColorReplaceController(filterList.camera, config)
@@ -125,6 +128,7 @@ Replace color post processing filter. [Reference](https://github.com/pixijs/filt
 
 - Apply effect to game object. A game object only can add 1 colorreplace effect.
     ```javascript
+    gameObject.enableFilters();
     var filterList = gameObject.filters.internal;
     var controller = filterList.addRexColorReplace({
         originalColor: 0xFF0000,

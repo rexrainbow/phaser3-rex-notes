@@ -27,6 +27,7 @@ Draw outlines and quantize color in HSV domain. [Reference](https://www.geeks3d.
 - Apply effect
     - Apply effect to game object
         ```javascript
+        gameObject.enableFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.addRexToonify(config);
         ```
@@ -71,6 +72,7 @@ Draw outlines and quantize color in HSV domain. [Reference](https://www.geeks3d.
 - Apply effect
     - Apply effect to game object
         ```javascript
+        gameObject.enableFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.addRexToonify(config);
         ```
@@ -107,7 +109,7 @@ Draw outlines and quantize color in HSV domain. [Reference](https://www.geeks3d.
 - Apply effect
     - Apply effect to game object
         ```javascript
-        // gameObject.enableFilters();
+        gameObject.enableFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.add(
             new ToonifyController(filterList.camera, config)
@@ -125,6 +127,7 @@ Draw outlines and quantize color in HSV domain. [Reference](https://www.geeks3d.
 
 - Apply effect to game object.
     ```javascript
+    gameObject.enableFilters();
     var filterList = gameObject.filters.internal;
     var controller = filterList.addRexToonify({
         // edgeThreshold: 0.2,

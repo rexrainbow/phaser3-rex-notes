@@ -27,6 +27,7 @@ Shockwave post processing filter. [Reference](https://www.geeks3d.com/20091116/s
 - Apply effect
     - Apply effect to game object
         ```javascript
+        gameObject.enableFilters().focusFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.addRexShockwave(config);
         ```
@@ -71,6 +72,7 @@ Shockwave post processing filter. [Reference](https://www.geeks3d.com/20091116/s
 - Apply effect
     - Apply effect to game object
         ```javascript
+        gameObject.enableFilters().focusFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.addRexShockwave(config);
         ```
@@ -107,7 +109,7 @@ Shockwave post processing filter. [Reference](https://www.geeks3d.com/20091116/s
 - Apply effect
     - Apply effect to game object
         ```javascript
-        // gameObject.enableFilters();
+        gameObject.enableFilters().focusFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.add(
             new ShockwaveController(filterList.camera, config)
@@ -125,6 +127,7 @@ Shockwave post processing filter. [Reference](https://www.geeks3d.com/20091116/s
 
 - Apply effect to game object. A game object only can add 1 shockwave effect.
     ```javascript
+    gameObject.enableFilters().focusFilters();
     var filterList = gameObject.filters.internal;
     var controller = filterList.addRexShockwave({
         // center: {

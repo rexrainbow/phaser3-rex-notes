@@ -27,6 +27,7 @@ Warp post processing filter.
 - Apply effect
     - Apply effect to game object
         ```javascript
+        gameObject.enableFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.addRexWarp(config);
         ```
@@ -71,6 +72,7 @@ Warp post processing filter.
 - Apply effect
     - Apply effect to game object
         ```javascript
+        gameObject.enableFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.addRexWarp(config);
         ```
@@ -107,7 +109,7 @@ Warp post processing filter.
 - Apply effect
     - Apply effect to game object
         ```javascript
-        // gameObject.enableFilters();
+        gameObject.enableFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.add(
             new WarpController(filterList.camera, config)
@@ -125,6 +127,7 @@ Warp post processing filter.
 
 - Apply effect to game object. A game object only can add 1 warp effect.
     ```javascript
+    gameObject.enableFilters();
     var filterList = gameObject.filters.internal;
     var controller = filterList.addRexWarp({
         // frequencyX: 10,

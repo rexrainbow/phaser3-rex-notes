@@ -32,6 +32,7 @@ Reintroduce unsupported fx effects from phaser3.
 - Apply effect
     - Apply effect to game object
         ```javascript
+        gameObject.enableFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.addP3Circle();
         ```
@@ -68,6 +69,7 @@ Reintroduce unsupported fx effects from phaser3.
 - Apply effect
     - Apply effect to game object
         ```javascript
+        gameObject.enableFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.addP3Circle();
         ```
@@ -93,6 +95,7 @@ Reintroduce unsupported fx effects from phaser3.
 - Apply effect
     - Apply effect to game object
         ```javascript
+        gameObject.enableFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.addP3Circle();
         ```
@@ -108,6 +111,7 @@ Reintroduce unsupported fx effects from phaser3.
 
 - Apply effect to game object.
     ```javascript
+    gameObject.enableFilters();
     var filterList = gameObject.filters.internal;
     var controller = filterList.addP3Bloom(color, offsetX, offsetY, blurStrength, strength, steps);
     ```
@@ -149,6 +153,7 @@ Reintroduce unsupported fx effects from phaser3.
 
 - Apply effect to game object.
     ```javascript
+    gameObject.enableFilters();
     var filterList = gameObject.filters.internal;
     var controller = filterList.addP3Circle(thickness, color, backgroundColor, scale, feather);
     ```
@@ -191,6 +196,7 @@ Reintroduce unsupported fx effects from phaser3.
 
 - Apply effect to game object.
     ```javascript
+    gameObject.enableFilters();
     var filterList = gameObject.filters.internal;
     var controller = filterList.addP3Gradient(color1, color2, alpha, fromX, fromY, toX, toY, size);
     ```
@@ -236,6 +242,7 @@ Reintroduce unsupported fx effects from phaser3.
 
 - Apply effect to game object.
     ```javascript
+    gameObject.enableFilters();
     var filterList = gameObject.filters.internal;
     var controller = filterList.addP3Shine(speed, lineWidth, gradient, reveal);
     ```
@@ -274,6 +281,7 @@ Reintroduce unsupported fx effects from phaser3.
 
 - Apply effect to game object.
     ```javascript
+    gameObject.enableFilters();
     var filterList = gameObject.filters.internal;
     var controller = filterList.addP3Vignette(x, y, radius, strength);
     ```
@@ -311,6 +319,7 @@ Reintroduce unsupported fx effects from phaser3.
 
 - Apply effect to game object.
     ```javascript
+    gameObject.enableFilters();
     var filterList = gameObject.filters.internal;
     var controller = filterList.addP3Wipe(wipeWidth, direction, axis);
     ```
@@ -352,6 +361,7 @@ Reintroduce unsupported fx effects from phaser3.
 
 - Apply effect to game object.
     ```javascript
+    gameObject.enableFilters();
     var filterList = gameObject.filters.internal;
     var controller = filterList.addP3Reveal(wipeWidth, direction, axis);
     ```

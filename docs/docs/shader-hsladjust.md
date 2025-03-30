@@ -30,6 +30,7 @@ Adjust color in HSL domain, post processing filter.
 - Apply effect
     - Apply effect to game object
         ```javascript
+        gameObject.enableFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.addRexHSLAdjust(config);
         ```
@@ -74,6 +75,7 @@ Adjust color in HSL domain, post processing filter.
 - Apply effect
     - Apply effect to game object
         ```javascript
+        gameObject.enableFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.addRexHSLAdjust(config);
         ```
@@ -110,7 +112,7 @@ Adjust color in HSL domain, post processing filter.
 - Apply effect
     - Apply effect to game object
         ```javascript
-        // gameObject.enableFilters();
+        gameObject.enableFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.add(
             new HSLAdjustController(filterList.camera, config)
@@ -128,6 +130,7 @@ Adjust color in HSL domain, post processing filter.
 
 - Apply effect to game object. A game object only can add 1 hsl-adjust effect.
     ```javascript
+    gameObject.enableFilters();
     var filterList = gameObject.filters.internal;
     var controller = filterList.addRexHslAdjust({
         // hueRotate: 0,

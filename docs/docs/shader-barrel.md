@@ -31,6 +31,7 @@ Barrel post processing filter. [Reference](http://www.geeks3d.com/20140213/glsl-
 - Apply effect
     - Apply effect to game object
         ```javascript
+        gameObject.enableFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.addRexBarrel(config);
         ```
@@ -75,6 +76,7 @@ Barrel post processing filter. [Reference](http://www.geeks3d.com/20140213/glsl-
 - Apply effect
     - Apply effect to game object
         ```javascript
+        gameObject.enableFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.addRexBarrel(config);
         ```
@@ -110,7 +112,7 @@ Barrel post processing filter. [Reference](http://www.geeks3d.com/20140213/glsl-
 - Apply effect
     - Apply effect to game object
         ```javascript
-        // gameObject.enableFilters();
+        gameObject.enableFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.add(
             new BarrelController(filterList.camera, config)
@@ -128,6 +130,7 @@ Barrel post processing filter. [Reference](http://www.geeks3d.com/20140213/glsl-
 
 - Apply effect to game object. A game object only can add 1 barrel effect.
     ```javascript
+    gameObject.enableFilters();
     var filterList = gameObject.filters.internal;
     var controller = filterList.addRexBarrel({
         // shrink: false,

@@ -27,6 +27,7 @@ Swirl post processing filter. [Reference](https://www.geeks3d.com/20110428/shade
 - Apply effect
     - Apply effect to game object
         ```javascript
+        gameObject.enableFilters().focusFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.addRexSwirl(config);
         ```
@@ -71,6 +72,7 @@ Swirl post processing filter. [Reference](https://www.geeks3d.com/20110428/shade
 - Apply effect
     - Apply effect to game object
         ```javascript
+        gameObject.enableFilters().focusFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.addRexSwirl(config);
         ```
@@ -107,7 +109,7 @@ Swirl post processing filter. [Reference](https://www.geeks3d.com/20110428/shade
 - Apply effect
     - Apply effect to game object
         ```javascript
-        // gameObject.enableFilters();
+        gameObject.enableFilters().focusFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.add(
             new SwirlController(filterList.camera, config)
@@ -125,6 +127,7 @@ Swirl post processing filter. [Reference](https://www.geeks3d.com/20110428/shade
 
 - Apply effect to game object. A game object only can add 1 swirl effect.
     ```javascript
+    gameObject.enableFilters().focusFilters();
     var filterList = gameObject.filters.internal;
     var controller = filterList.addRexSwirl({
         // center: {

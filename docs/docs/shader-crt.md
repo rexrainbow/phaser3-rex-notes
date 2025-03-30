@@ -27,6 +27,7 @@ CRT effect. [Reference](https://www.shadertoy.com/view/WsVSzV)
 - Apply effect
     - Apply effect to game object
         ```javascript
+        gameObject.enableFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.addRexCrt(config);
         ```
@@ -71,6 +72,7 @@ CRT effect. [Reference](https://www.shadertoy.com/view/WsVSzV)
 - Apply effect
     - Apply effect to game object
         ```javascript
+        gameObject.enableFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.addRexCrt(config);
         ```
@@ -107,7 +109,7 @@ CRT effect. [Reference](https://www.shadertoy.com/view/WsVSzV)
 - Apply effect
     - Apply effect to game object
         ```javascript
-        // gameObject.enableFilters();
+        gameObject.enableFilters();
         var filterList = gameObject.filters.internal;
         var controller = filterList.add(
             new CrtController(filterList.camera, config)
@@ -125,6 +127,7 @@ CRT effect. [Reference](https://www.shadertoy.com/view/WsVSzV)
 
 - Apply effect to game object.
     ```javascript
+    gameObject.enableFilters();
     var filterList = gameObject.filters.internal;
     var controller = filterList.addRexCrt({
         // warpX: 0.75,

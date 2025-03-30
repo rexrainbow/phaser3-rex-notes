@@ -17,6 +17,8 @@ class Demo extends Phaser.Scene {
         gameObject.enableFilters()
             .filters.internal.addP3Circle(0);
 
+        gameObject.filtersAutoFocus = true;
+
         this.add.graphics()
             .lineStyle(2, 0xffffff)
             .strokeRectShape(gameObject.getBounds());
