@@ -266,6 +266,24 @@ var scaleX = matrix.scaleX;
 var scaleY = matrix.scaleY;
 ```
 
+### Alpha
+
+- Set alpha to all children
+    ```javascript    
+    container.alpha = value;
+    // container.setAlpha(value);
+    ```
+- Set alpha to rendering result of container
+    1. Eanble dedicated framebuffer
+        ```javascript
+        container.enableFilters().filtersForceComposite = true;
+        ```
+    2. Set alpha to internal camera
+        ```javascript
+        var camera = container.filters.internal.camera;
+        camera.alpha = value;
+        ```
+
 ### Other properties
 
 See [game object](gameobject.md)

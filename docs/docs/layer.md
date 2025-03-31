@@ -223,6 +223,24 @@ layer.setAll(property, value);
 // layer.setAll(property, value, startIndex, endIndex);
 ```
 
+### Alpha
+
+- Set alpha to all children
+    ```javascript    
+    layer.alpha = value;
+    // layer.setAlpha(value);
+    ```
+- Set alpha to rendering result of layer
+    1. Eanble dedicated framebuffer
+        ```javascript
+        layer.enableFilters().filtersForceComposite = true;
+        ```
+    2. Set alpha to internal camera
+        ```javascript
+        var camera = layer.filters.internal.camera;
+        camera.alpha = value;
+        ```
+
 ### Events
 
 - On add game object

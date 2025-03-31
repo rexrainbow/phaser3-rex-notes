@@ -12,14 +12,27 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var layer = this.add.layer()
-        layer.add(this.add.circle(400, 300, 50, 0xff0000))
-        layer.add(this.add.circle(400, 300, 50, 0x0000ff))
-        layer.enableFilters()
-        // .filtersForceComposite = true;
+        var layer0 = CreateLayer(this, 300, 300);
+        var layer1 = CreateLayer(this, 500, 300);
+
+        layer0.enableFilters()
+            .filtersForceComposite = true;
+
+        var internalCamera = layer0.filters.internal.camera;
+        internalCamera.alpha = 0.5;
+
+        layer1.alpha = 0.5;
     }
 
     update() { }
+}
+
+var CreateLayer = function (scene, x, y) {
+    var layer = scene.add.layer()
+    layer.add(scene.add.circle(x - 15, y, 50, 0xff0000))
+    layer.add(scene.add.circle(x + 15, y, 50, 0x0000ff))
+
+    return layer;
 }
 
 var config = {
