@@ -11,7 +11,7 @@ var WebGLRenderer = function (renderer, src, drawingContext, parentMatrix) {
         return;
     }
 
-    var result = GetCalcMatrix(src, camera, parentMatrix, true);
+    var result = GetCalcMatrix(src, camera, parentMatrix, !drawingContext.useCanvas);
     var calcMatrix = tempMatrix.copyFrom(result.calc);
 
     var alpha = camera.alpha * src.alpha;

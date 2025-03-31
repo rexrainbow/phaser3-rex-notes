@@ -13,7 +13,7 @@ var WebGLRenderer = function (renderer, src, drawingContext, parentMatrix) {
         return;
     }
 
-    var calcMatrix = GetCalcMatrix(src, camera, parentMatrix, true).calc;
+    var calcMatrix = GetCalcMatrix(src, camera, parentMatrix, !drawingContext.useCanvas).calc;
 
     if (src.dirty) {
         src.updateBuffers();

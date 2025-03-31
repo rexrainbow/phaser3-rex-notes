@@ -6,7 +6,7 @@ var WebGLRenderer = function (renderer, src, drawingContext, parentMatrix) {
     var camera = drawingContext.camera;
     camera.addToRenderList(src);
 
-    var calcMatrix = GetCalcMatrix(src, camera, parentMatrix, true).calc;
+    var calcMatrix = GetCalcMatrix(src, camera, parentMatrix, !drawingContext.useCanvas).calc;
 
     var dx = src._displayOriginX;
     var dy = src._displayOriginY;
