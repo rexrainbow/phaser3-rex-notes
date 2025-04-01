@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import PerspectiveImagePlugin from '../../plugins/perspectiveimage-plugin.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 

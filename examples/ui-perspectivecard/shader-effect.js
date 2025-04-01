@@ -1,6 +1,5 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
-import GrayScalePipelinePlugin from '../../plugins/grayscalepipeline-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -30,7 +29,6 @@ class Demo extends Phaser.Scene {
 }
 
 var CreateCard = function (scene, orientation) {
-    var postFxPlugin = scene.plugins.get('rexGrayScalePipeline');
     return scene.rexUI.add.perspectiveCard({
         front: CreateFrontFace(scene),
         back: CreateBackFace(scene),
@@ -56,12 +54,22 @@ var CreateCard = function (scene, orientation) {
             // this.flip.flip();
         })
         .on('pointerover', function () {
-            // Add postfx pipeline
-            postFxPlugin.add(this.getLayer());
+            // Add grayscale effect
+            var layer = this.getLayer();
+            var controller = layer
+                .enableFilters()
+                .filters.internal.addColorMatrix();
+            controller.colorMatrix.grayscale();
+            layer.setData('effect', controller);
         })
         .on('pointerout', function () {
-            // Remove postfx pipeline
-            postFxPlugin.remove(this.getLayer());
+            // Remove grayscale effect
+            var layer = this.getLayer();
+            var controller = layer.getData('effect');
+            if (!controller) {
+                return;
+            }
+            layer.filters.internal.remove(controller);
         })
 }
 
@@ -99,11 +107,6 @@ var config = {
     },
     scene: Demo,
     plugins: {
-        global: [{
-            key: 'rexGrayScalePipeline',
-            plugin: GrayScalePipelinePlugin,
-            start: true
-        }],
         scene: [{
             key: 'rexUI',
             plugin: UIPlugin,

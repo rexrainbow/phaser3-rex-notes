@@ -1,5 +1,6 @@
 import SkewImage from '../skewimage/SkewImage.js';
 import CreateDynamicTexture from '../../../../utils/rendertexture/CreateDynamicTexture.js';
+import Snapshot from '../../../../utils/rendertexture/Snapshot.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -32,6 +33,29 @@ class SkewRenderTexture extends SkewImage {
 
         this.rt.destroy();
         this.rt = null;
+    }
+
+    setSizeToFrame(frame) {
+
+        super.setSizeToFrame(frame);
+
+        this.updateDisplayOrigin();
+
+        return this;
+    }
+
+    snapshot(gameObjects, config) {
+        if (config === undefined) {
+            config = {};
+        }
+        config.gameObjects = gameObjects;
+        config.renderTexture = this.rt;
+
+        Snapshot(config);
+
+        this.setSizeToFrame();
+
+        return this;
     }
 }
 

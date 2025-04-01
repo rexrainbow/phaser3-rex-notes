@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import PerspectiveImagePlugin from '../../plugins/perspectiveimage-plugin.js';
 
 class Demo extends Phaser.Scene {
@@ -25,6 +25,7 @@ class Demo extends Phaser.Scene {
             .fill(0x888888)
             .draw(numberText, 150, 200)
             .draw(mushroom, 75, 100)
+            .render()
 
         //this.debug = this.add.graphics();
         //image.setDebug(this.debug);

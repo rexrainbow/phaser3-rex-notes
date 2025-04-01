@@ -1,4 +1,6 @@
 import phaser from '../../../phaser/src/phaser.js';
+import QuadImagePlugin from '../../plugins/quadimage-plugin.js';
+import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
 class Demo extends Phaser.Scene {
@@ -12,54 +14,29 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        this.rexUI.add.sizer({
-            x: 400, y: 300,
+        var card = CreateLabel(this).setPosition(600, 300);
 
-            orientation: 'x',
-            space: { item: 20 }
-        })
-            .add(CreateCard(this, 0))
-            .add(CreateCard(this, 1))
-            .layout();
+        var image = this.add.rexSkewRenderTexture(200, 300)
+            .snapshot(card.getAllVisibleChildren())
+
+        // image.skewXDeg = -25;
+        // var gui = new Dat.GUI();
+        // gui.add(image, 'skewXDeg', -90, 90);
+        // gui.add(image, 'skewYDeg', -90, 90);
+
     }
 
     update() {
     }
 }
 
-var CreateCard = function (scene, orientation) {
-    return scene.rexUI.add.perspectiveCard({
-        front: CreateFrontFace(scene),
-        back: CreateBackFace(scene),
-        face: 'back',
-        orientation: orientation,
-        snapshotPadding: 3,
-
-        flip: {
-            frontToBack: 'right',
-            backToFront: 'left',
-            duration: 1000,
-            ease: 'Cubic'
-        }
-    })
-        .setInteractive()
-        // .setFace(0)
-        .on('pointerdown', function (pointer, localX, localY) {
-            if (localX <= (this.width / 2)) {
-                this.flip.flipLeft();
-            } else {
-                this.flip.flipRight(1000, 2);
-            }
-            // this.flip.flip();
-        })
-}
-
 const COLOR_MAIN = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
-var CreateFrontFace = function (scene) {
+var CreateLabel = function (scene) {
     var content = 'Phaser is a fast, free, and fun open source HTML5 game framework that offers WebGL and Canvas rendering across desktop and mobile web browsers. Games can be compiled to iOS, Android and native apps by using 3rd party tools. You can use JavaScript or TypeScript for development.';
     return scene.rexUI.add.label({
+        width: 300, height: 400,
         orientation: 1,
         background: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_MAIN).setStrokeStyle(2, COLOR_LIGHT),
         text: scene.add.text(0, 0, content, {
@@ -67,15 +44,7 @@ var CreateFrontFace = function (scene) {
         }),
         icon: scene.rexUI.add.roundRectangle(0, 0, 160, 160, 20, COLOR_DARK),
         space: { left: 20, right: 20, top: 20, bottom: 20, icon: 10, }
-    });
-}
-var CreateBackFace = function (scene) {
-    return scene.rexUI.add.label({
-        orientation: 1,
-        background: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_MAIN).setStrokeStyle(2, COLOR_LIGHT),
-        icon: scene.rexUI.add.roundRectangle(0, 0, 240, 240, 20, COLOR_DARK),
-        space: { left: 20, right: 20, top: 20, bottom: 20, icon: 10, }
-    });
+    }).layout();
 }
 
 var config = {
@@ -88,6 +57,11 @@ var config = {
     },
     scene: Demo,
     plugins: {
+        global: [{
+            key: 'rexQuadImage',
+            plugin: QuadImagePlugin,
+            start: true
+        }],
         scene: [{
             key: 'rexUI',
             plugin: UIPlugin,

@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
 const COLOR_MAIN = 0x4e342e;
@@ -19,6 +19,7 @@ class Demo extends Phaser.Scene {
         var card = CreateCard(this).setPosition(400, 300);
         var skew = this.rexUI.add.skew(card, { useParentBounds: true });
 
+        debugger
         skew.enter();  // Snapshot before tween
         this.tweens.add({
             targets: skew,

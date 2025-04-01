@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
 const COLOR_MAIN = 0x4e342e;
@@ -36,7 +36,7 @@ class Demo extends Phaser.Scene {
 
         var flip = this.rexUI.add.flip(card, {
             face: 'front',
-            front: function (gameObject) {
+            front(gameObject) {
                 var children = gameObject.getChildren(), child;
                 var background = gameObject.getElement('background');
                 for (var i = 0, cnt = children.length; i < cnt; i++) {
@@ -48,7 +48,7 @@ class Demo extends Phaser.Scene {
                     }
                 }
             },
-            back: function (gameObject) {
+            back(gameObject) {
                 var children = gameObject.getChildren(), child;
                 var background = gameObject.getElement('background');
                 for (var i = 0, cnt = children.length; i < cnt; i++) {

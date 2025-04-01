@@ -40,6 +40,7 @@ class RenderTexture extends Image {
         var height = this.height;
 
         super.setSizeToFrame(frame);
+
         this.updateDisplayOrigin();
 
         if ((this.width !== width) || (this.height !== height)) {
