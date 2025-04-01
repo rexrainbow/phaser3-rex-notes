@@ -7,6 +7,7 @@ A container with an icon, text, and background.
 
 ## Live demos
 
+- [Card](https://codepen.io/rexrainbow/pen/bNGQzwO)
 - [Align](https://codepen.io/rexrainbow/pen/WNvpoWw)
 - [Add to layer](https://codepen.io/rexrainbow/pen/oNZKmKZ)
 - [Text wrap in horizontal label](https://codepen.io/rexrainbow/pen/rNdyveo)
