@@ -19,7 +19,6 @@ class Demo extends Phaser.Scene {
         var card = CreateCard(this).setPosition(400, 300);
         var skew = this.rexUI.add.skew(card, { useParentBounds: true });
 
-        debugger
         skew.enter();  // Snapshot before tween
         this.tweens.add({
             targets: skew,

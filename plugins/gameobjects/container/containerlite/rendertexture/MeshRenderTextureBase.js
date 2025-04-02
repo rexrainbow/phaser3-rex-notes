@@ -22,7 +22,10 @@ var MeshRenderTextureBase = function (RenderTextureOwnerClass) {
         }
 
         enter() {
-            Enter(this.rexContainer.parent, this);
+            var result = Enter(this.rexContainer.parent, this);
+            if (result) {
+                this.setSizeToFrame();
+            }
             return this;
         }
 
