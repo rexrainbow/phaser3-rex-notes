@@ -15,14 +15,13 @@ class Demo extends Phaser.Scene {
 
     create() {
         var card = CreateLabel(this).setPosition(600, 300);
-
         var image = this.add.rexSkewRenderTexture(200, 300)
             .snapshot(card.getAllVisibleChildren())
 
-        // image.skewXDeg = -25;
-        // var gui = new Dat.GUI();
-        // gui.add(image, 'skewXDeg', -90, 90);
-        // gui.add(image, 'skewYDeg', -90, 90);
+        image.skewXDeg = -25;
+        var gui = new Dat.GUI();
+        gui.add(image, 'skewXDeg', -90, 90);
+        gui.add(image, 'skewYDeg', -90, 90);
 
     }
 

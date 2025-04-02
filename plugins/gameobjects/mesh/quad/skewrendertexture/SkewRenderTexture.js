@@ -36,10 +36,11 @@ class SkewRenderTexture extends SkewImage {
     }
 
     setSizeToFrame(frame) {
-
         super.setSizeToFrame(frame);
 
         this.updateDisplayOrigin();
+
+        this.resetFaceSize();
 
         return this;
     }

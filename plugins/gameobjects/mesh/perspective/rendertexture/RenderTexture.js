@@ -15,7 +15,7 @@ class RenderTexture extends Image {
             height = GetValue(config, 'height', 32);
         }
 
-        // dynamic-texture -> quad-image
+        // Dynamic-texture -> quad-image
         var texture = CreateDynamicTexture(scene, width, height);
 
         super(scene, x, y, texture, null, config);

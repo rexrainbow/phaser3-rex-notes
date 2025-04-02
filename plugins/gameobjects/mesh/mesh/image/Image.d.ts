@@ -25,6 +25,8 @@ declare class Mesh extends Phaser.GameObjects.GameObject {
     addFace(face: Face): this;
     addFaces(faces: Face[]): this;
 
+    resetFaceSize(): this;
+
     addGridFaces(
         columns?: number,
         rows?: number,

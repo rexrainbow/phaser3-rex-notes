@@ -15,7 +15,7 @@ class RenderTexture extends Image {
             height = GetValue(config, 'height', 32);
         }
 
-        // dynamic-texture -> quad-image
+        // Dynamic-texture -> quad-image
         var texture = CreateDynamicTexture(scene, width, height);
 
         super(scene, x, y, texture, null, config);
@@ -36,18 +36,11 @@ class RenderTexture extends Image {
     }
 
     setSizeToFrame(frame) {
-        var width = this.width;
-        var height = this.height;
-
         super.setSizeToFrame(frame);
 
         this.updateDisplayOrigin();
 
-        if ((this.width !== width) || (this.height !== height)) {
-            if (this.gridWidth !== undefined) {
-                this.resetVertices();
-            }
-        }
+        this.resetFaceSize();
 
         return this;
     }

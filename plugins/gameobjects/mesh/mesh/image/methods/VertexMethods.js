@@ -59,6 +59,19 @@ export default {
         return this;
     },
 
+    resetFaceSize() {
+        var frame = this.frame;
+        var frameWidth = frame.realWidth;
+        var frameHeight = frame.realHeight;
+
+        var faces = this.faces;
+        for (var i = 0, cnt = faces.length; i < cnt; i++) {
+            faces[i].setFrameSize(frameWidth, frameHeight)
+        }
+
+        return this;
+    },
+
     addGridFaces(columns, rows, sharedVertexMode) {
         GenerateGridVertices(this, columns, rows, sharedVertexMode);
         return this;

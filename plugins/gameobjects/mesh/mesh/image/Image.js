@@ -80,9 +80,8 @@ class Image extends Base {
         this._frameWidthSave = frameWidth;
         this._frameHeightSave = frameHeight;
 
-        var face;
         for (var i = 0, cnt = faces.length; i < cnt; i++) {
-            face = faces[i];
+            var face = faces[i];
             face.setFrameUV(frameU0, frameV0, frameU1, frameV1);
             if (isSizeChanged) {
                 face.setFrameSize(frameWidth, frameHeight)
