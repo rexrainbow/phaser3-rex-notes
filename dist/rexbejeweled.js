@@ -1792,7 +1792,6 @@
     };
 
     const GetValue$5 = Phaser.Utils.Objects.GetValue;
-    const SetStruct$2 = Phaser.Structs.Set;
 
     let State$1 = class State extends BaseState {
         constructor(bejeweled, config) {
@@ -1856,17 +1855,17 @@
                     this.eliminatedChessArray = [];
                     break;
                 case 1:
-                    this.eliminatedChessArray = matchedLines[0].entries;
+                    this.eliminatedChessArray = Array.from(matchedLines[0]);
                     break;
                 default:
                     // Put all chess to a set
-                    var newSet = new SetStruct$2();
+                    var newSet = new Set();
                     for (var i = 0; i < matchedLinesCount; i++) {
-                        matchedLines[i].entries.forEach(function (value) {
-                            newSet.set(value);
+                        matchedLines[i].forEach(function (value) {
+                            newSet.add(value);
                         });
                     }
-                    this.eliminatedChessArray = newSet.entries;
+                    this.eliminatedChessArray = Array.from(newSet);
                     break;
             }
             this.next();
@@ -2667,7 +2666,6 @@
         y: 0
     };
 
-    const SetStruct$1 = Phaser.Structs.Set;
     var GetAllMatch = function () {
         RefreshSymbolCache.call(this); // only refresh symbol cache once
         // Get match5, match4, match3
@@ -2675,9 +2673,9 @@
         var matchLines = [];
         for (var n = 5; n >= 3; n--) {
             GetMatchN.call(this, n, function (result, board) {
-                var newSet = new SetStruct$1(board.tileXYArrayToChessArray(result.tileXY, self.chessTileZ));
+                var newSet = new Set(board.tileXYArrayToChessArray(result.tileXY, self.chessTileZ));
                 for (var i = 0, cnt = matchLines.length; i < cnt; i++) {
-                    if (subSetTest(matchLines[i], newSet)) {
+                    if (SubSetTest(matchLines[i], newSet)) {
                         return; // not a new set
                     }
                 }
@@ -2687,11 +2685,11 @@
         return matchLines;
     };
 
-    var subSetTest = function (setA, setB) {
+    var SubSetTest = function (setA, setB) {
         // Return true if setB is a subset of setA
         var itemsA = setA.entries;
         for (var i = 0, cnt = itemsA.length; i < cnt; i++) {
-            if (!setB.contains(itemsA[i])) {
+            if (!setB.has(itemsA[i])) {
                 return false;
             }
         }
@@ -2961,11 +2959,10 @@
         }
     }
 
-    const SetStruct = Phaser.Structs.Set;
     class WaitEvents {
         constructor(completeCallback, scope) {
             this.setCompleteCallback(completeCallback, scope);
-            this.events = new SetStruct();
+            this.events = new Set();
         }
 
         shutdown() {
@@ -2991,7 +2988,7 @@
             var callback = function () {
                 self.remove(callback);
             };
-            this.events.set(callback);
+            this.events.add(callback);
             return callback;
         }
 

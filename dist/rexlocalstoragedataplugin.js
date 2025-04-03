@@ -72,7 +72,7 @@
         var keys = this.getItem('__keys__');
         if (keys) {
             for (var i = 0, cnt = keys.length; i < cnt; i++) {
-                this.dataKeys.set(keys[i]);
+                this.dataKeys.add(keys[i]);
             }
         }
         return this;
@@ -90,7 +90,7 @@
         this.reset();
         if (!reset) {
             // Load data from localstorage according to dataKeys
-            this.dataKeys.iterate(function (dataKey, index) {
+            this.dataKeys.forEach(function (dataKey, index) {
                 this.set(dataKey, this.getItem(dataKey));
             }, this);
         }
@@ -104,7 +104,7 @@
                 this.set(dataKey, value);
             }
 
-            this.setItem('__keys__', this.dataKeys.entries);
+            this.setItem('__keys__', Array.from(this.dataKeys));
         }
 
         return this;
@@ -126,9 +126,9 @@
                     return;
                 }
                 this.setItem(key, value);
-                if (!this.dataKeys.contains(key)) {
-                    this.dataKeys.set(key);
-                    this.setItem('__keys__', this.dataKeys.entries);
+                if (!this.dataKeys.has(key)) {
+                    this.dataKeys.add(key);
+                    this.setItem('__keys__', Array.from(this.dataKeys));
                 }
             }, dataManager)
 
@@ -138,8 +138,8 @@
                     return;
                 }
                 this.setItem(key, value);
-                this.dataKeys.set(key);
-                this.setItem('__keys__', this.dataKeys.entries);
+                this.dataKeys.add(key);
+                this.setItem('__keys__', Array.from(this.dataKeys));
             }, dataManager)
 
             // Remove key
@@ -149,14 +149,12 @@
                 }
                 this.removeItem(key);
                 this.dataKeys.delete(key);
-                this.setItem('__keys__', this.dataKeys.entries);
+                this.setItem('__keys__', Array.from(this.dataKeys));
             }, dataManager);
 
     };
 
     const GetValue = Phaser.Utils.Objects.GetValue;
-    const SetStruct = Phaser.Structs.Set;
-
 
     var methods = {
         load: Load,
@@ -170,7 +168,7 @@
         }
 
         dataManager._syncEnable = true;
-        dataManager.dataKeys = new SetStruct();
+        dataManager.dataKeys = new Set();
         dataManager.defaultData = undefined;
 
         Object.assign(

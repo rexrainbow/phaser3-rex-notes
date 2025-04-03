@@ -4,49 +4,24 @@
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rextagtext = factory());
 })(this, (function () { 'use strict';
 
-    var Utils = Phaser.Renderer.WebGL.Utils;
-
-    var WebGLRenderer = function (renderer, src, camera, parentMatrix) {
+    var WebGLRenderer = function (renderer, src, drawingContext, parentMatrix) {
         if ((src.width === 0) || (src.height === 0)) {
             return;
         }
 
-        camera.addToRenderList(src);
+        drawingContext.camera.addToRenderList(src);
 
-        var frame = src.frame;
-        var width = frame.width;
-        var height = frame.height;
-        var getTint = Utils.getTintAppendFloatAlpha;
-        var pipeline = renderer.pipelines.set(src.pipeline, src);
-        var textureUnit = pipeline.setTexture2D(frame.glTexture, src);
+        var customRenderNodes = src.customRenderNodes;
+        var defaultRenderNodes = src.defaultRenderNodes;
 
-        renderer.pipelines.preBatch(src);
-
-        pipeline.batchTexture(
+        (customRenderNodes.Submitter || defaultRenderNodes.Submitter).run(
+            drawingContext,
             src,
-            frame.glTexture,
-            width, height,
-            src.x, src.y,
-            width / src.style.resolution, height / src.style.resolution,
-            src.scaleX, src.scaleY,
-            src.rotation,
-            src.flipX, src.flipY,
-            src.scrollFactorX, src.scrollFactorY,
-            src.displayOriginX, src.displayOriginY,
-            0, 0, width, height,
-            getTint(src.tintTopLeft, camera.alpha * src._alphaTL),
-            getTint(src.tintTopRight, camera.alpha * src._alphaTR),
-            getTint(src.tintBottomLeft, camera.alpha * src._alphaBL),
-            getTint(src.tintBottomRight, camera.alpha * src._alphaBR),
-            src.tintFill,
-            0, 0,
-            camera,
             parentMatrix,
-            false,
-            textureUnit
+            0,
+            customRenderNodes.Texturer || defaultRenderNodes.Texturer,
+            customRenderNodes.Transformer || defaultRenderNodes.Transformer
         );
-
-        renderer.pipelines.postBatch(src);
     };
 
     var CanvasRenderer = function (renderer, src, camera, parentMatrix) {
@@ -124,7 +99,8 @@
         return out;
     };
 
-    const MinVersion = 60;
+    const MainVersionNumber = 4;
+    const SubVersionNumber = 0;
 
     var IsChecked = false;
 
@@ -134,14 +110,14 @@
         }
 
         if (minVersion === undefined) {
-            minVersion = MinVersion;
+            minVersion = SubVersionNumber;
         }
         var version = Phaser.VERSION.split('.');
         var mainVersion = parseInt(version[0]);
-        if (mainVersion === 3) {
-            var currentVersion = parseInt(version[1]);
-            if (currentVersion < minVersion) {
-                console.error(`Minimum supported version : ${mainVersion}.${currentVersion}`);
+        if (mainVersion === MainVersionNumber) {
+            var subVersion = parseInt(version[1]);
+            if (subVersion < minVersion) {
+                console.error(`Minimum supported version : ${mainVersion}.${subVersion}`);
             }
         } else {
             console.error(`Can't supported version : ${mainVersion}`);
@@ -337,10 +313,10 @@
             Components$1.Depth,
             Components$1.Flip,
             Components$1.GetBounds,
+            Components$1.Lighting,
             Components$1.Mask,
             Components$1.Origin,
-            Components$1.Pipeline,
-            Components$1.PostPipeline,
+            Components$1.RenderNodes,
             Components$1.ScrollFactor,
             Components$1.Tint,
             Components$1.Transform,
@@ -3344,6 +3320,7 @@
     const RemoveFromDOM = Phaser.DOM.RemoveFromDOM;
     const SPLITREGEXP = CONST.SPLITREGEXP;
     const UUID = Phaser.Utils.String.UUID;
+    const DefaultImageNodes = Phaser.Renderer.WebGL.RenderNodes.Defaults.DefaultImageNodes;
 
     // Reuse objects can increase performance
     var SharedPensPools = null;
@@ -3372,12 +3349,9 @@
 
             this.setPosition(x, y);
             this.setOrigin(0, 0);
-            this.initPipeline();
-            this.initPostPipeline(true);
+            this.initRenderNodes(this._defaultRenderNodesMap);
 
             this.canvas = CanvasPool.create(this);
-
-            this.context = this.canvas.getContext('2d', { willReadFrequently: true });
 
             this._imageManager = undefined;
 
@@ -3428,6 +3402,9 @@
             this._textureKey = UUID();
 
             this.texture = scene.sys.textures.addCanvas(this._textureKey, this.canvas);
+
+            //  Set the context to be the CanvasTexture context
+            this.context = this.texture.context;
 
             //  Get the frame
             this.frame = this.texture.get();
@@ -3495,6 +3472,10 @@
             if (GetValue$1(style, 'interactive', false)) {
                 this.setInteractive();
             }
+        }
+
+        get _defaultRenderNodesMap() {
+            return DefaultImageNodes;
         }
 
         preDestroy() {
@@ -3709,6 +3690,9 @@
                 canvas.width = w;
                 canvas.height = h;
                 this.frame.setSize(w, h);
+                this.frame.source.updateSize(w, h);
+                this.frame.updateUVs();
+
             } else {
                 context.clearRect(0, 0, w, h);
             }

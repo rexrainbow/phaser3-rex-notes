@@ -5,39 +5,32 @@
 })(this, (function () { 'use strict';
 
     const GetCalcMatrix = Phaser.GameObjects.GetCalcMatrix;
+    const TransformMatrix$1 = Phaser.GameObjects.Components.TransformMatrix;
+    var tempMatrix$1 = new TransformMatrix$1();
 
-    var WebGLRenderer = function (renderer, src, camera, parentMatrix) {
+    var WebGLRenderer = function (renderer, src, drawingContext, parentMatrix) {
         var bobs = src.getRenderList();
-        if (bobs.length === 0) {
+        var camera = drawingContext.camera;
+
+        if (bobs.length === 0 || alpha === 0) {
+            //  Nothing to see, so abort early
             return;
         }
 
-        camera.addToRenderList(src);
+        var result = GetCalcMatrix(src, camera, parentMatrix, !drawingContext.useCanvas);
+        var calcMatrix = tempMatrix$1.copyFrom(result.calc);
 
-        var pipeline = renderer.pipelines.set(src.pipeline);
-
-        var texture = src.frame.glTexture;
-
-        var textureUnit = pipeline.setGameObject(src);
-
-        var roundPixels = camera.roundPixels;
-
-        var result = GetCalcMatrix(src, camera, parentMatrix);
-
-        var calcMatrix = pipeline.calcMatrix.copyFrom(result.calc);
-
+        var alpha = camera.alpha * src.alpha;
         var dx = src._displayOriginX;
         var dy = src._displayOriginY;
 
-        var alpha = camera.alpha * src.alpha;
-
-        renderer.pipelines.preBatch(src);
+        var customRenderNodes = src.customRenderNodes;
+        var defaultRenderNodes = src.defaultRenderNodes;
+        var Submitter = customRenderNodes.Submitter || defaultRenderNodes.Submitter;
 
         for (var i = 0, cnt = bobs.length; i < cnt; i++) {
-            bobs[i].webglRender(pipeline, calcMatrix, alpha, dx, dy, texture, textureUnit, roundPixels);
+            bobs[i].webglRender(Submitter, drawingContext, parentMatrix, calcMatrix, alpha, dx, dy);
         }
-
-        renderer.pipelines.postBatch(src);
     };
 
     const SetTransform = Phaser.Renderer.Canvas.SetTransform;
@@ -263,7 +256,8 @@
         }
     }
 
-    const MinVersion = 60;
+    const MainVersionNumber = 4;
+    const SubVersionNumber = 0;
 
     var IsChecked = false;
 
@@ -273,14 +267,14 @@
         }
 
         if (minVersion === undefined) {
-            minVersion = MinVersion;
+            minVersion = SubVersionNumber;
         }
         var version = Phaser.VERSION.split('.');
         var mainVersion = parseInt(version[0]);
-        if (mainVersion === 3) {
-            var currentVersion = parseInt(version[1]);
-            if (currentVersion < minVersion) {
-                console.error(`Minimum supported version : ${mainVersion}.${currentVersion}`);
+        if (mainVersion === MainVersionNumber) {
+            var subVersion = parseInt(version[1]);
+            if (subVersion < minVersion) {
+                console.error(`Minimum supported version : ${mainVersion}.${subVersion}`);
             }
         } else {
             console.error(`Can't supported version : ${mainVersion}`);
@@ -296,6 +290,7 @@
     const GetValue$4 = Phaser.Utils.Objects.GetValue;
     const List = Phaser.Structs.List;
     const StableSort = Phaser.Utils.Array.StableSort;
+    const DefaultBlitterNodes = Phaser.Renderer.WebGL.RenderNodes.Defaults.DefaultBlitterNodes;
 
     class Blitter extends GameObject {
         constructor(scene, x, y, texture, frame, config) {
@@ -325,13 +320,17 @@
             this.poolManager = (reuseBob) ? (new PoolManager(config)) : undefined;
 
             this.setTexture(texture, frame);
-            this.setPosition(x, y);
+            this.setPosition(x, y);        
+            this.initRenderNodes(this._defaultRenderNodesMap);
             this.setOrigin(0, 0);
             this.clearTint();
-            this.initPipeline();
-            this.initPostPipeline();
 
         }
+
+        get _defaultRenderNodesMap() {
+            return DefaultBlitterNodes;
+        }
+
 
         preDestroy() {
             this.removeChildren();
@@ -388,9 +387,8 @@
             Components.Depth,
             Components.GetBounds,
             Components.Mask,
+            Components.RenderNodes,
             Components.Origin,
-            Components.Pipeline,
-            Components.PostPipeline,
             Components.ScrollFactor,
             Components.Transform,
             Components.Visible,
@@ -1428,9 +1426,14 @@
     const TransformMatrix = Phaser.GameObjects.Components.TransformMatrix;
     const GetTint = Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 
-    var FrameMatrix = new TransformMatrix();
+    var tempMatrix = new TransformMatrix();
+    var tempTransformer = {
+        quad: new Float32Array(8)
+    };
+    var tempTexturer = {};
+    var tempTinter = {};
 
-    var WebglRender = function (pipeline, calcMatrix, alpha, dx, dy, texture, textureUnit, roundPixels) {
+    var WebglRender = function (Submitter, drawingContext, parentMatrix, calcMatrix, alpha, dx, dy) {
         var frame = this.frame;
         if (!frame) {
             return;
@@ -1442,8 +1445,6 @@
             displayOriginY = height * this.originY;
         var x = this.x - dx,
             y = this.y - dy;
-
-        var u0, v0, u1, v1;
         var frameX, frameY;
         var frameWidth, frameHeight;
         if (this.isCropped) {
@@ -1453,10 +1454,10 @@
                 frame.updateCropUVs(crop, this.flipX, this.flipY);
             }
 
-            u0 = crop.u0;
-            v0 = crop.v0;
-            u1 = crop.u1;
-            v1 = crop.v1;
+            crop.u0;
+            crop.v0;
+            crop.u1;
+            crop.v1;
 
             frameWidth = crop.width;
             frameHeight = crop.height;
@@ -1465,10 +1466,10 @@
             frameY = crop.y;
 
         } else {
-            u0 = this.frame.u0;
-            v0 = this.frame.v0;
-            u1 = this.frame.u1;
-            v1 = this.frame.v1;
+            this.frame.u0;
+            this.frame.v0;
+            this.frame.u1;
+            this.frame.v1;
 
             frameWidth = width;
             frameHeight = height;
@@ -1489,27 +1490,38 @@
             flipY = -1;
         }
 
-        FrameMatrix.applyITRS(x, y, this.rotation, this.scaleX * flipX, this.scaleY * flipY);
-        calcMatrix.multiply(FrameMatrix, FrameMatrix);
+        tempMatrix.applyITRS(x, y, this.rotation, this.scaleX * flipX, this.scaleY * flipY);
+        calcMatrix.multiply(tempMatrix, tempMatrix);
 
         var tx = -displayOriginX + frameX;
         var ty = -displayOriginY + frameY;
         var tw = tx + frameWidth;
         var th = ty + frameHeight;
 
-        var quad = FrameMatrix.setQuad(tx, ty, tw, th, roundPixels);
+        tempMatrix.setQuad(tx, ty, tw, th, false, tempTransformer.quad);
+
+        tempTexturer.frame = frame;
+        tempTexturer.uvSource = frame;    
 
         var tint = GetTint(this.tint, this.alpha * alpha);
 
-        pipeline.batchQuad(
+        tempTinter.tintTopLeft = tint;
+        tempTinter.tintBottomLeft = tint;
+        tempTinter.tintTopRight = tint;
+        tempTinter.tintBottomRight = tint;
+
+        Submitter.run(
+            drawingContext,
             this.parent,
-            quad[0], quad[1], quad[2], quad[3], quad[4], quad[5], quad[6], quad[7],
-            u0, v0,
-            u1, v1,
-            tint, tint, tint, tint,
-            this.tintFill,
-            texture,
-            textureUnit
+            parentMatrix,
+            0,
+            tempTexturer,
+            tempTransformer,
+            tempTinter,
+
+            // Optional normal map parameters.
+            undefined,
+            0
         );
     };
 

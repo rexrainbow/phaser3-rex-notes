@@ -4,7 +4,8 @@
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexperspectivecard = factory());
 })(this, (function () { 'use strict';
 
-    const MinVersion = 60;
+    const MainVersionNumber = 4;
+    const SubVersionNumber = 0;
 
     var IsChecked = false;
 
@@ -14,14 +15,14 @@
         }
 
         if (minVersion === undefined) {
-            minVersion = MinVersion;
+            minVersion = SubVersionNumber;
         }
         var version = Phaser.VERSION.split('.');
         var mainVersion = parseInt(version[0]);
-        if (mainVersion === 3) {
-            var currentVersion = parseInt(version[1]);
-            if (currentVersion < minVersion) {
-                console.error(`Minimum supported version : ${mainVersion}.${currentVersion}`);
+        if (mainVersion === MainVersionNumber) {
+            var subVersion = parseInt(version[1]);
+            if (subVersion < minVersion) {
+                console.error(`Minimum supported version : ${mainVersion}.${subVersion}`);
             }
         } else {
             console.error(`Can't supported version : ${mainVersion}`);
@@ -127,11 +128,11 @@
         }
     };
 
-    const Components = Phaser.GameObjects.Components;
+    const Components$1 = Phaser.GameObjects.Components;
     Phaser.Class.mixin(Base$1,
         [
-            Components.Alpha,
-            Components.Flip
+            Components$1.Alpha,
+            Components$1.Flip
         ]
     );
 
@@ -163,7 +164,7 @@
     };
 
     const DegToRad$5 = Phaser.Math.DegToRad;
-    const RadToDeg$4 = Phaser.Math.RadToDeg;
+    const RadToDeg$5 = Phaser.Math.RadToDeg;
 
     var GetLocalState = function (gameObject) {
         if (!gameObject.hasOwnProperty('rexContainer')) {
@@ -182,7 +183,7 @@
 
             Object.defineProperty(rexContainer, 'angle', {
                 get: function () {
-                    return RadToDeg$4(this.rotation);
+                    return RadToDeg$5(this.rotation);
                 },
                 set: function (value) {
                     this.rotation = DegToRad$5(value);
@@ -978,6 +979,7 @@
         },
     };
 
+    // canvas mask only
     var Mask = {
         updateChildMask(child) {
             // Don't propagate null mask to clear children's mask
@@ -1852,7 +1854,7 @@
 
     const Rectangle$3 = Phaser.Geom.Rectangle;
     const Vector2 = Phaser.Math.Vector2;
-    const RotateAround$2 = Phaser.Math.RotateAround;
+    const RotateAround$4 = Phaser.Math.RotateAround;
     const P3Container$1 = Phaser.GameObjects.Container;
 
     var GetBounds = function (gameObject, output) {
@@ -2017,7 +2019,7 @@
         if (includeParent === undefined) { includeParent = false; }
 
         if (gameObject.rotation !== 0) {
-            RotateAround$2(output, gameObject.x, gameObject.y, gameObject.rotation);
+            RotateAround$4(output, gameObject.x, gameObject.y, gameObject.rotation);
         }
 
         if (includeParent && gameObject.parentContainer) {
@@ -2127,6 +2129,9 @@
         }
 
         var gameObjects = config.gameObjects;
+        if (!Array.isArray(gameObjects)) {
+            gameObjects = [gameObjects];
+        }
         var renderTexture = config.renderTexture;  // renderTexture, or dynamicTexture
         var saveTexture = config.saveTexture;
         var x = GetValue$L(config, 'x', undefined);
@@ -2196,7 +2201,7 @@
 
         // Draw gameObjects
         gameObjects = SortGameObjectsByDepth(Clone(gameObjects));
-        renderTexture.draw(gameObjects);
+        renderTexture.draw(gameObjects).render();
 
         // Save render result to texture
         if (saveTexture) {
@@ -2331,7 +2336,7 @@
         return this;
     };
 
-    const RotateAround$1 = Phaser.Math.RotateAround;
+    const RotateAround$3 = Phaser.Math.RotateAround;
 
     var ChangeOrigin$1 = function (gameObject, originX, originY) {
         if (originY === undefined) {
@@ -2342,7 +2347,7 @@
             x: (originX - gameObject.originX) * gameObject.displayWidth,
             y: (originY - gameObject.originY) * gameObject.displayHeight
         };
-        RotateAround$1(deltaXY, 0, 0, gameObject.rotation);
+        RotateAround$3(deltaXY, 0, 0, gameObject.rotation);
 
         gameObject.originX = originX;
         gameObject.originY = originY;
@@ -5196,7 +5201,7 @@
 
     const GetValue$z = Phaser.Utils.Objects.GetValue;
     const GetAdvancedValue$2 = Phaser.Utils.Objects.GetAdvancedValue;
-    const Linear$4 = Phaser.Math.Linear;
+    const Linear$5 = Phaser.Math.Linear;
 
     class Scale extends EaseValueTaskBase {
         constructor(gameObject, config) {
@@ -5289,10 +5294,10 @@
             t = this.easeFn(t);
 
             if (this.hasScaleX) {
-                gameObject.scaleX = Linear$4(this.startX, this.endX, t);
+                gameObject.scaleX = Linear$5(this.startX, this.endX, t);
             }
             if (this.hasScaleY) {
-                gameObject.scaleY = Linear$4(this.startY, this.endY, t);
+                gameObject.scaleY = Linear$5(this.startY, this.endY, t);
             }
         }
 
@@ -5463,7 +5468,7 @@
         return WaitEvent(eventEmitter, 'complete');
     };
 
-    const IsPlainObject$c = Phaser.Utils.Objects.IsPlainObject;
+    const IsPlainObject$d = Phaser.Utils.Objects.IsPlainObject;
 
     var ScaleMethods = {
         onInitScale() {
@@ -5481,7 +5486,7 @@
         },
 
         popUp(duration, orientation, ease) {
-            if (IsPlainObject$c(duration)) {
+            if (IsPlainObject$d(duration)) {
                 var config = duration;
                 duration = config.duration;
                 orientation = config.orientation;
@@ -5511,7 +5516,7 @@
         },
 
         scaleDownDestroy(duration, orientation, ease, destroyMode) {
-            if (IsPlainObject$c(duration)) {
+            if (IsPlainObject$d(duration)) {
                 var config = duration;
                 duration = config.duration;
                 orientation = config.orientation;
@@ -5552,7 +5557,7 @@
         },
 
         scaleYoyo(duration, peakValue, repeat, orientation, ease) {
-            if (IsPlainObject$c(duration)) {
+            if (IsPlainObject$d(duration)) {
                 var config = duration;
                 duration = config.duration;
                 peakValue = config.peakValue;
@@ -5607,7 +5612,7 @@
 
     const GetValue$y = Phaser.Utils.Objects.GetValue;
     const GetAdvancedValue$1 = Phaser.Utils.Objects.GetAdvancedValue;
-    const Linear$3 = Phaser.Math.Linear;
+    const Linear$4 = Phaser.Math.Linear;
 
     class Fade extends EaseValueTaskBase {
         constructor(gameObject, config) {
@@ -5667,7 +5672,7 @@
                 t = 1 - t;
             }
 
-            gameObject.alpha = Linear$3(this.alphaStart, this.alphaEnd, t);
+            gameObject.alpha = Linear$4(this.alphaStart, this.alphaEnd, t);
         }
 
         complete() {
@@ -5687,11 +5692,11 @@
         yoyo: 2
     };
 
-    const IsPlainObject$b = Phaser.Utils.Objects.IsPlainObject;
+    const IsPlainObject$c = Phaser.Utils.Objects.IsPlainObject;
 
     var FadeIn = function (gameObject, duration, alpha, fade) {
         var startAlpha, endAlpha;
-        if (IsPlainObject$b(alpha)) {
+        if (IsPlainObject$c(alpha)) {
             startAlpha = alpha.start;
             endAlpha = alpha.end;
         } else {
@@ -5747,7 +5752,7 @@
         return fade;
     };
 
-    const IsPlainObject$a = Phaser.Utils.Objects.IsPlainObject;
+    const IsPlainObject$b = Phaser.Utils.Objects.IsPlainObject;
 
     var FadeMethods = {
         onInitFade() {
@@ -5765,7 +5770,7 @@
         },
 
         fadeIn(duration, alpha) {
-            if (IsPlainObject$a(duration)) {
+            if (IsPlainObject$b(duration)) {
                 var config = duration;
                 duration = config.duration;
                 alpha = config.alpha;
@@ -5794,7 +5799,7 @@
         },
 
         fadeOutDestroy(duration, destroyMode) {
-            if (IsPlainObject$a(duration)) {
+            if (IsPlainObject$b(duration)) {
                 var config = duration;
                 duration = config.duration;
                 destroyMode = config.destroy;
@@ -5856,7 +5861,7 @@
 
     const GetValue$x = Phaser.Utils.Objects.GetValue;
     const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
-    const Linear$2 = Phaser.Math.Linear;
+    const Linear$3 = Phaser.Math.Linear;
 
     class EaseMove extends EaseValueTaskBase {
         constructor(gameObject, config) {
@@ -5943,10 +5948,10 @@
             t = this.easeFn(t);
 
             if (this.hasMoveX) {
-                gameObject.x = Linear$2(this.startX, this.endX, t);
+                gameObject.x = Linear$3(this.startX, this.endX, t);
             }
             if (this.hasMoveY) {
-                gameObject.y = Linear$2(this.startY, this.endY, t);
+                gameObject.y = Linear$3(this.startY, this.endY, t);
             }
         }
 
@@ -6049,7 +6054,7 @@
         return easeMove;
     };
 
-    const IsPlainObject$9 = Phaser.Utils.Objects.IsPlainObject;
+    const IsPlainObject$a = Phaser.Utils.Objects.IsPlainObject;
     const DistanceBetween$3 = Phaser.Math.Distance.Between;
 
     var EaseMoveMethods = {
@@ -6067,7 +6072,7 @@
         },
 
         moveFrom(duration, x, y, ease, destroyMode) {
-            if (IsPlainObject$9(duration)) {
+            if (IsPlainObject$a(duration)) {
                 var config = duration;
                 x = config.x;
                 y = config.y;
@@ -6113,7 +6118,7 @@
         },
 
         moveTo(duration, x, y, ease, destroyMode) {
-            if (IsPlainObject$9(duration)) {
+            if (IsPlainObject$a(duration)) {
                 var config = duration;
                 x = config.x;
                 y = config.y;
@@ -6436,7 +6441,7 @@
         decay: 1,
     };
 
-    const IsPlainObject$8 = Phaser.Utils.Objects.IsPlainObject;
+    const IsPlainObject$9 = Phaser.Utils.Objects.IsPlainObject;
 
     var OnInitShake = function (gameObject, shake) {
         // Route 'complete' of shake to gameObject
@@ -6449,7 +6454,7 @@
 
     var ShakeMethods = {
         shake(duration, magnitude, magnitudeMode) {
-            if (IsPlainObject$8(duration)) {
+            if (IsPlainObject$9(duration)) {
                 var config = duration;
                 duration = config.duration;
                 magnitude = config.magnitude;
@@ -6488,7 +6493,7 @@
     };
 
     const GetValue$v = Phaser.Utils.Objects.GetValue;
-    const Linear$1 = Phaser.Math.Linear;
+    const Linear$2 = Phaser.Math.Linear;
 
     class EaseValueTask extends EaseValueTaskBase {
         constructor(gameObject, config) {
@@ -6533,11 +6538,11 @@
             var t = timer.t;
             t = this.easeFn(t);
 
-            target[this.propertyKey] = Linear$1(this.fromValue, this.toValue, t);
+            target[this.propertyKey] = Linear$2(this.fromValue, this.toValue, t);
         }
     }
 
-    const IsPlainObject$7 = Phaser.Utils.Objects.IsPlainObject;
+    const IsPlainObject$8 = Phaser.Utils.Objects.IsPlainObject;
 
     class EaseData extends ComponentBase {
         constructor(parent, config) {
@@ -6568,7 +6573,7 @@
         }
 
         easeTo(key, value, duration, ease) {
-            if (IsPlainObject$7(key)) {
+            if (IsPlainObject$8(key)) {
                 var config = key;
                 key = config.key;
                 value = config.value;
@@ -6600,7 +6605,7 @@
         }
 
         easeFrom(key, value, duration, ease) {
-            if (IsPlainObject$7(key)) {
+            if (IsPlainObject$8(key)) {
                 var config = key;
                 key = config.key;
                 value = config.value;
@@ -8904,9 +8909,9 @@
         }
     };
 
-    const IsPlainObject$6 = Phaser.Utils.Objects.IsPlainObject;
+    const IsPlainObject$7 = Phaser.Utils.Objects.IsPlainObject;
     var SetDraggable = function (sensor, draggable, dragTarget) {
-        if (IsPlainObject$6(sensor)) {
+        if (IsPlainObject$7(sensor)) {
             var config = sensor;
             sensor = config.sensor;
             dragTarget = config.target;
@@ -10752,7 +10757,7 @@
         if (out === undefined) {
             out = {};
         } else if (out === true) {
-            out = globOut;
+            out = globOut$1;
         }
 
         out.left = false;
@@ -10818,10 +10823,10 @@
         return out;
     };
 
-    var globOut = {};
+    var globOut$1 = {};
 
     const GetValue$f = Phaser.Utils.Objects.GetValue;
-    const RadToDeg$3 = Phaser.Math.RadToDeg;
+    const RadToDeg$4 = Phaser.Math.RadToDeg;
 
     class Swipe extends OnePointerTracer {
         constructor(gameObject, config) {
@@ -10947,7 +10952,7 @@
         }
 
         updateDirectionStates() {
-            var angle = RadToDeg$3(this.getVelocityAngle());
+            var angle = RadToDeg$4(this.getVelocityAngle());
             AngleToDirections(angle, this.dirMode, this);
             return this;
         }
@@ -11339,10 +11344,10 @@
 
     Phaser.Utils.Objects.GetValue;
 
-    const RotateAround = Phaser.Math.RotateAround;
+    const RotateAround$2 = Phaser.Math.RotateAround;
 
     var RotateObjectAround = function (gameObject, x, y, angle) {
-        RotateAround(gameObject, x, y, angle);
+        RotateAround$2(gameObject, x, y, angle);
         gameObject.rotation += angle;
         return gameObject;
     };
@@ -11396,10 +11401,10 @@
     const GetValue$d = Phaser.Utils.Objects.GetValue;
     const WrapDegrees = Phaser.Math.Angle.WrapDegrees; // Wrap degrees: -180 to 180 
     const ShortestBetween = Phaser.Math.Angle.ShortestBetween;
-    const RadToDeg$2 = Phaser.Math.RadToDeg;
+    const RadToDeg$3 = Phaser.Math.RadToDeg;
     const DegToRad$3 = Phaser.Math.DegToRad;
 
-    class Rotate extends TwoPointersTracer {
+    let Rotate$1 = class Rotate extends TwoPointersTracer {
         constructor(gameObject, config) {
             super(gameObject, config);
 
@@ -11438,7 +11443,7 @@
         }
 
         onDrag2Start() {
-            this.prevAngle = WrapDegrees(RadToDeg$2(this.angleBetween)); // Degrees
+            this.prevAngle = WrapDegrees(RadToDeg$3(this.angleBetween)); // Degrees
             this.state = BEGIN;
             if (this.dragThreshold === 0) {
                 this.state = RECOGNIZED;
@@ -11454,14 +11459,14 @@
                 case BEGIN:
                     if ((this.pointers[0].getDistance() >= this.dragThreshold) &&
                         (this.pointers[1].getDistance() >= this.dragThreshold)) {
-                        var curAngle = WrapDegrees(RadToDeg$2(this.angleBetween));
+                        var curAngle = WrapDegrees(RadToDeg$3(this.angleBetween));
                         this.angle = ShortestBetween(this.prevAngle, curAngle);
                         this.prevAngle = curAngle;
                         this.state = RECOGNIZED;
                     }
                     break;
                 case RECOGNIZED:
-                    var curAngle = WrapDegrees(RadToDeg$2(this.angleBetween));
+                    var curAngle = WrapDegrees(RadToDeg$3(this.angleBetween));
                     this.angle = ShortestBetween(this.prevAngle, curAngle);
                     this.prevAngle = curAngle;
                     this.emit('rotate', this);
@@ -11487,13 +11492,13 @@
             return this;
         }
 
-    }
+    };
 
     var methods$2 = {
         spinObject: SpinObject,
     };
     Object.assign(
-        Rotate.prototype,
+        Rotate$1.prototype,
         methods$2
     );
 
@@ -12209,7 +12214,7 @@
     var sourceSize = {};
     var targetSize = {};
 
-    const IsPlainObject$5 = Phaser.Utils.Objects.IsPlainObject;
+    const IsPlainObject$6 = Phaser.Utils.Objects.IsPlainObject;
     const GetValue$7 = Phaser.Utils.Objects.GetValue;
     const ALIGN_CENTER = Phaser.Display.Align.CENTER;
     const UUID = Phaser.Utils.String.UUID;
@@ -12219,7 +12224,7 @@
 
         AddChild.call(this, gameObject);
 
-        if (IsPlainObject$5(childKey)) {
+        if (IsPlainObject$6(childKey)) {
             var config = childKey;
             childKey = GetValue$7(config, 'key', undefined);
             align = GetValue$7(config, 'align', ALIGN_CENTER);
@@ -12303,7 +12308,7 @@
 
         config.padding = GetBoundsConfig(padding);
 
-        if (IsPlainObject$5(expand)) {
+        if (IsPlainObject$6(expand)) {
             config.expandWidth = GetValue$7(expand, 'width', false);
             config.expandHeight = GetValue$7(expand, 'height', false);
         } else {
@@ -12442,18 +12447,18 @@
         }
     };
 
-    const IsPlainObject$4 = Phaser.Utils.Objects.IsPlainObject;
+    const IsPlainObject$5 = Phaser.Utils.Objects.IsPlainObject;
     const GetValue$6 = Phaser.Utils.Objects.GetValue;
 
     class OverlapSizer extends Base {
         constructor(scene, x, y, minWidth, minHeight, config) {
-            if (IsPlainObject$4(x)) {
+            if (IsPlainObject$5(x)) {
                 config = x;
                 x = GetValue$6(config, 'x', 0);
                 y = GetValue$6(config, 'y', 0);
                 minWidth = GetValue$6(config, 'width', undefined);
                 minHeight = GetValue$6(config, 'height', undefined);
-            } else if (IsPlainObject$4(minWidth)) {
+            } else if (IsPlainObject$5(minWidth)) {
                 config = minWidth;
                 minWidth = GetValue$6(config, 'width', undefined);
                 minHeight = GetValue$6(config, 'height', undefined);
@@ -12485,58 +12490,1781 @@
         methods
     );
 
-    const Mesh = Phaser.GameObjects.Mesh;
+    const GameObject = Phaser.GameObjects.GameObject;
 
-    class MeshBase extends Mesh {
-        get tint() {
-            if (this.vertices.length === 0) {
-                return 0xffffff;
-            } else {
-                return this.vertices[0].color;
-            }
+    let Image$2 = class Image extends GameObject {
+    };
+
+    const Components = Phaser.GameObjects.Components;
+    Phaser.Class.mixin(Image$2,
+        [
+            Components.AlphaSingle,
+            Components.BlendMode,
+            Components.Depth,
+            Components.Flip,
+            Components.Mask,
+            Components.Origin,
+            Components.RenderNodes,
+            Components.Size,
+            Components.Texture,
+            Components.Transform,
+            Components.Visible,
+            Components.ScrollFactor,
+        ]
+    );
+
+    const GetCalcMatrix = Phaser.GameObjects.GetCalcMatrix;
+
+    var renderOptions = {
+        multiTexturing: false,
+        smoothPixelArt: false
+    };
+
+    var WebGLRenderer = function (renderer, src, drawingContext, parentMatrix) {
+        var camera = drawingContext.camera;
+        camera.addToRenderList(src);
+
+        if (src.skipRender()) {
+            return;
         }
 
-        forceUpdate() {
-            this.dirtyCache[10] = 1;
+        var calcMatrix = GetCalcMatrix(src, camera, parentMatrix, !drawingContext.useCanvas).calc;
+
+        if (src.dirty) {
+            src.updateBuffers();
+        }
+
+        // Get smooth pixel art option.
+        var smoothPixelArt;
+        var srcTexture = src.texture;
+        if (srcTexture && srcTexture.smoothPixelArt !== null) {
+            smoothPixelArt = srcTexture.smoothPixelArt;
+        }
+        else {
+            smoothPixelArt = src.scene.sys.game.config.smoothPixelArt;
+        }
+        renderOptions.smoothPixelArt = smoothPixelArt;
+
+        (src.customRenderNodes.BatchHandler || src.defaultRenderNodes.BatchHandler).batchTriangles(
+            drawingContext,
+            src,
+            calcMatrix,
+            src.texture.source[0].glTexture,
+            src.vertexBuffer,
+            src.uvBuffer,
+            src.colorBuffer,
+            src.alphaBuffer,
+            src.alpha,
+            src.tintFill,
+            renderOptions,
+            src.debugCallback
+        );
+    };
+
+    var CanvasRenderer = function (renderer, src, camera, parentMatrix) {
+    };
+
+    var SkipRender = function () {
+        return this.faces.length === 0;
+    };
+
+    var Render = {
+        renderWebGL: WebGLRenderer,
+        renderCanvas: CanvasRenderer,
+        skipRender: SkipRender,
+    };
+
+    const RotateAround$1 = Phaser.Math.RotateAround;
+
+    var LocalXYToWorldXY = function (gameObject, localX, localY, out) {
+        if (out === undefined) {
+            out = {};
+        } else if (out === true) {
+            out = GlobalXY$1;
+        }
+
+        var ox = gameObject.displayOriginX;
+        var oy = gameObject.displayOriginY;
+
+        out.x = localX - ox;
+        out.y = localY - oy;
+        RotateAround$1(out, 0, 0, gameObject.rotation);
+        out.x *= gameObject.scaleX;
+        out.y *= gameObject.scaleY;
+        out.x += gameObject.x;
+        out.y += gameObject.y;
+
+        return out;
+    };
+
+    var WorldXYToLocalXY = function (gameObject, worldX, worldY, out) {
+        if (out === undefined) {
+            out = {};
+        } else if (out === true) {
+            out = GlobalXY$1;
+        }
+
+        var ox = gameObject.displayOriginX;
+        var oy = gameObject.displayOriginY;
+
+        out.x = worldX - gameObject.x;
+        out.y = worldY - gameObject.y;
+        out.x /= gameObject.scaleX;
+        out.y /= gameObject.scaleY;
+        RotateAround$1(out, 0, 0, -gameObject.rotation);
+        out.x += ox;
+        out.y += oy;
+
+        return out;
+    };
+
+    var GlobalXY$1 = {};
+
+    const Linear$1 = Phaser.Math.Linear;
+    const RotateAround = Phaser.Math.RotateAround;
+
+    class Vertex {
+        constructor() {
+            this.parent = undefined;  // Mesh game object
+            this.name = '';
+
+            this.u = 0;
+            this.v = 0;
+            this.frameU = 0;
+            this.frameV = 0;
+            this.frameX = 0;
+            this.frameY = 0;
+            this._dx = 0;
+            this._dy = 0;
+            this.localX = 0;
+            this.localY = 0;
+            this.alpha = 1;
+            this.color = 0xffffff;
+        }
+
+        setParent(parent) {
+            this.parent = parent;
             return this;
         }
 
+        setName(name) {
+            this.name = name;
+            return this;
+        }
+
+        get frameU() {
+            return this._frameU;
+        }
+
+        set frameU(value) {
+            if (this._frameU === value) {
+                return;
+            }
+            this._frameU = value;
+
+            if (this.parent) {
+                this.parent.setUVDirtyFlag();
+            }
+        }
+
+        get frameV() {
+            return this._frameV;
+        }
+
+        set frameV(value) {
+            if (this._frameV === value) {
+                return;
+            }
+            this._frameV = value;
+
+            if (this.parent) {
+                this.parent.setUVDirtyFlag();
+            }
+        }
+
+        get frameX() {
+            return this._frameX;
+        }
+
+        set frameX(value) {
+            if (this._frameX === value) {
+                return;
+            }
+            this._frameX = value;
+            this._localX = value + this._dx;
+
+            if (this.parent) {
+                this.parent.setVertexDirtyFlag();
+            }
+        }
+
+        get frameY() {
+            return this._frameY;
+        }
+
+        set frameY(value) {
+            if (this._frameY === value) {
+                return;
+            }
+            this._frameY = value;
+            this._localY = value + this._dy;
+
+            if (this.parent) {
+                this.parent.setVertexDirtyFlag();
+            }
+        }
+
+        get localX() {
+            return this._localX;
+        }
+
+        set localX(value) {
+            if (this._localX === value) {
+                return;
+            }
+            this._localX = value;
+            this._dx = value - this._frameX;
+
+            if (this.parent) {
+                this.parent.setVertexDirtyFlag();
+            }
+        }
+
+        get localY() {
+            return this._localY;
+        }
+
+        set localY(value) {
+            if (this._localY === value) {
+                return;
+            }
+            this._localY = value;
+            this._dy = value - this._frameY;
+
+            if (this.parent) {
+                this.parent.setVertexDirtyFlag();
+            }
+        }
+
+        get alpha() {
+            return this._alpha;
+        }
+
+        set alpha(value) {
+            if (this._alpha === value) {
+                return;
+            }
+            this._alpha = value;
+
+            if (this.parent) {
+                this.parent.setAlphaDirtyFlag();
+            }
+        }
+
+        get color() {
+            return this._color;
+        }
+
+        set color(value) {
+            if (this._color === value) {
+                return;
+            }
+            this._color = value;
+
+            if (this.parent) {
+                this.parent.setColorDirtyFlag();
+            }
+        }
+
+        setUV(u, v) {
+            this.u = u;
+            this.v = v;
+            return this;
+        }
+
+        setFrameUV(frameU0, frameV0, frameU1, frameV1) {
+            this.frameU = Linear$1(frameU0, frameU1, this.u);
+            this.frameV = Linear$1(frameV0, frameV1, this.v);
+            return this;
+        }
+
+        setFrameSize(frameWidth, frameHeight) {
+            this.frameX = this.u * frameWidth;
+            this.frameY = this.v * frameHeight;
+            return this;
+        }
+
+        // Reset position to frame position
+        resetPosition() {
+            this.localX = this.frameX;
+            this.localY = this.frameY;
+            return this;
+        }
+
+        setLocalPosition(x, y) {
+            this.localX = x;
+            this.localY = y;
+            return this;
+        }
+
+        rotateAround(ox, oy, rotation) {
+            GlobalXY.x = this.localX;
+            GlobalXY.y = this.localY;
+            RotateAround(GlobalXY, ox, oy, rotation);
+            this.localX = GlobalXY.x;
+            this.localY = GlobalXY.y;
+            return this;
+        }
+
+        setAlpha(value) {
+            this.alpha = value;
+            return this;
+        }
+
+        setColor(value) {
+            this.color = value;
+            return this;
+        }
+
+        getWorldXY(out) {
+            if (this.parent) {
+                return LocalXYToWorldXY(this.parent, this.localX, this.localY, out);
+            } else {
+                return null;
+            }
+        }
+
+        setWorldXY(x, y) {
+            var out = WorldXYToLocalXY(this.parent, x, y, true);
+            this.setLocalPosition(out.x, out.y);
+            return this;
+        }
+
+        setPosition(x, y) {
+            this.setWorldXY(x, y);
+            return this;
+        }
+
+        get x() {
+            if (this.parent) {
+                return this.getWorldXY(true).x;
+            } else {
+                return null;
+            }
+        }
+
+        set x(value) {
+            this.setWorldXY(value, this.y);
+        }
+
+        get y() {
+            if (this.parent) {
+                return this.getWorldXY(true).y;
+            } else {
+                return null;
+            }
+        }
+
+        set y(value) {
+            this.setWorldXY(this.x, value);
+        }
     }
 
-    const Vector3 = Phaser.Math.Vector3;
-    const Matrix4 = Phaser.Math.Matrix4;
+    var GlobalXY = {};
 
-    var tempPosition = new Vector3();
-    var tempRotation = new Vector3();
-    var tempMatrix = new Matrix4();
+    const InCenter = Phaser.Geom.Triangle.InCenter;
 
-    var TransformVerts = function (mesh, x, y, z, rotateX, rotateY, rotateZ) {
-        if (x === undefined) { x = 0; }
-        if (y === undefined) { y = 0; }
-        if (z === undefined) { z = 0; }
-        if (rotateX === undefined) { rotateX = 0; }
-        if (rotateY === undefined) { rotateY = 0; }
-        if (rotateZ === undefined) { rotateZ = 0; }
-
-        tempPosition.set(x, y, z);
-        tempRotation.set(rotateX, rotateY, rotateZ);
-        tempMatrix.fromRotationXYTranslation(tempRotation, tempPosition, true);
-
-        for (var i = 0, cnt = mesh.vertices.length; i < cnt; i++) {
-            mesh.vertices[i].transformMat4(tempMatrix);
+    var GetInCenter = function (face, out) {
+        if (out === undefined) {
+            out = {};
+        } else if (out === true) {
+            out = GlobalOut;
         }
+
+        GlobalTriangle.x1 = face.vertices[0].localX;
+        GlobalTriangle.y1 = face.vertices[0].localY;
+        GlobalTriangle.x2 = face.vertices[1].localX;
+        GlobalTriangle.y2 = face.vertices[1].localY;
+        GlobalTriangle.x3 = face.vertices[2].localX;
+        GlobalTriangle.y3 = face.vertices[2].localY;
+
+        return InCenter(GlobalTriangle, out);
+    };
+
+    var GlobalTriangle = {};
+    var GlobalOut = {};
+
+    var Contains$1 = function (face, x, y) {
+        var vertices = face.vertices;
+        var v0 = vertices[0];
+        var v1 = vertices[1];
+        var v2 = vertices[2];
+        GlobTriangle.setTo(
+            v0.localX, v0.localY,
+            v1.localX, v1.localY,
+            v2.localX, v2.localY,
+        );
+
+        return GlobTriangle.contains(x, y);
+    };
+
+    var GlobTriangle = new Phaser.Geom.Triangle();
+
+    const RadToDeg$2 = Phaser.Math.RadToDeg;
+    const DegToRad$2 = Phaser.Math.DegToRad;
+
+    class Face {
+        constructor(vertex0, vertex1, vertex2) {
+            if (vertex0 === undefined) { vertex0 = new Vertex(); }
+            if (vertex1 === undefined) { vertex1 = new Vertex(); }
+            if (vertex2 === undefined) { vertex2 = new Vertex(); }
+
+            this.parent = undefined;  // Mesh game object
+            this.name = '';
+
+            this.vertices = [vertex0, vertex1, vertex2];
+
+            this._localOffsetX = 0;
+            this._localOffsetY = 0;
+            this._rotation = 0;
+            this._alpha = 1;
+            this._color = 0xffffff;
+        }
+
+        setParent(parent) {
+            this.parent = parent;
+            this.vertices[0].setParent(parent);
+            this.vertices[1].setParent(parent);
+            this.vertices[2].setParent(parent);
+
+            return this;
+        }
+
+        setName(name) {
+            this.name = name;
+            return this;
+        }
+
+        get vertex0() {
+            return this.vertices[0];
+        }
+
+        set vertex0(value) {
+            this.vertices[0] = value;
+        }
+
+        get vertex1() {
+            return this.vertices[1];
+        }
+
+        set vertex1(value) {
+            this.vertices[1] = value;
+        }
+
+        get vertex2() {
+            return this.vertices[2];
+        }
+
+        set vertex2(value) {
+            this.vertices[2] = value;
+        }
+
+        get localOffsetX() {
+            return this._localOffsetX;
+        }
+
+        set localOffsetX(value) {
+            if (value === this._localOffsetX) {
+                return;
+            }
+            this._localOffsetX = value;
+
+            this.updateVerticesPosition();
+        }
+
+        get localOffsetY() {
+            return this._localOffsetY;
+        }
+
+        set localOffsetY(value) {
+            if (value === this._localOffsetY) {
+                return;
+            }
+            this._localOffsetY = value;
+            this.updateVerticesPosition();
+        }
+
+        get rotation() {
+            return this._rotation;
+        }
+
+        set rotation(value) {
+            if (value === this._rotation) {
+                return;
+            }
+
+            this._rotation = value;
+
+            var oxy = GetInCenter(this, true);
+            var ox = oxy.x;
+            var oy = oxy.y;
+
+            this.vertices[0].rotateAround(ox, oy, value);
+            this.vertices[1].rotateAround(ox, oy, value);
+            this.vertices[2].rotateAround(ox, oy, value);
+        }
+
+        get angle() {
+            return RadToDeg$2(this._rotation);
+        }
+
+        set angle(value) {
+            this.rotation = DegToRad$2(value);
+        }
+
+        get alpha() {
+            return this._alpha;
+        }
+
+        set alpha(value) {
+            if (this._alpha === value) {
+                return;
+            }
+            this._alpha = value;
+
+            this.vertices[0].setAlpha(value);
+            this.vertices[1].setAlpha(value);
+            this.vertices[2].setAlpha(value);
+        }
+
+        get color() {
+            return this._color;
+        }
+
+        set color(value) {
+            if (this._color === value) {
+                return;
+            }
+            this._color = value;
+
+            this.vertices[0].setColor(value);
+            this.vertices[1].setColor(value);
+            this.vertices[2].setColor(value);
+        }
+
+        get isPositionModified() {
+            return (this._localOffsetX !== 0) || (this._localOffsetY !== 0) || (this._rotation !== 0);
+        }
+
+        setUV(u0, v0, u1, v1, u2, v2) {
+            this.vertices[0].setUV(u0, v0);
+            this.vertices[1].setUV(u1, v1);
+            this.vertices[2].setUV(u2, v2);
+
+            return this;
+        }
+
+        setFrameUV(frameU0, frameV0, frameU1, frameV1) {
+            this.vertices[0].setFrameUV(frameU0, frameV0, frameU1, frameV1);
+            this.vertices[1].setFrameUV(frameU0, frameV0, frameU1, frameV1);
+            this.vertices[2].setFrameUV(frameU0, frameV0, frameU1, frameV1);
+
+            return this;
+        }
+
+        setFrameSize(frameWidth, frameHeight) {
+            // Set local position of vertices by frameXY and dxy
+            for (var i = 0, cnt = this.vertices.length; i < cnt; i++) {
+                this.vertices[i].setFrameSize(frameWidth, frameHeight);
+            }
+
+            // Apply face offset, and rotation to vertices
+            if (this.isPositionModified) {
+                this.updateVerticesPosition();
+            }
+            return this;
+        }
+
+        setLocalOffset(x, y) {
+            this.localOffsetX = x;
+            this.localOffsetY = y;
+            return this;
+        }
+
+        resetVerticesPosition() {
+            for (var i = 0, cnt = this.vertices.length; i < cnt; i++) {
+                this.vertices[i].resetPosition();
+            }
+
+            if (this.isPositionModified) {
+                this.updateVerticesPosition();
+            }
+            return this;
+        }
+
+        updateVerticesPosition() {
+            // Extract the horizontal offset of the Face to calculate the new vertex positions
+            var offsetX = this._localOffsetX;
+            // Extract the vertical offset of the Face to calculate the new vertex positions
+            var offsetY = this._localOffsetY;
+
+            var vertices = this.vertices;
+            for (var i = 0, cnt = vertices.length; i < cnt; i++) {
+                var vertex = vertices[i];
+                // Update each vertex position based on frameX, frameY, and the Face's offsets
+                // This process overrides the original dx and dy values, ensuring the relative distance between the three vertices is maintained
+                vertex.setLocalPosition(vertex.frameX + offsetX, vertex.frameY + offsetY);
+            }
+
+            // Save the current rotation value to reapply after resetting rotation to 0
+            var rotationSave = this.rotation;
+            this._rotation = 0;
+            this.rotation = rotationSave;
+
+            return this;
+        }
+
+        setRotation(value) {
+            this.rotation = value;
+            return this;
+        }
+
+        setAngle(value) {
+            this.angle = value;
+            return this;
+        }
+
+        setAlpha(value) {
+            this.alpha = value;
+            return this;
+        }
+
+        setColor(value) {
+            this.color = value;
+            return this;
+        }
+
+        contains(localX, localY) {
+            return Contains$1(this, localX, localY);
+        }
+    }
+
+    var IsPlainObject$4 = function (obj)
+    {
+        // Not plain objects:
+        // - Any object or value whose internal [[Class]] property is not "[object Object]"
+        // - DOM nodes
+        // - window
+        if (typeof(obj) !== 'object' || obj.nodeType || obj === obj.window)
+        {
+            return false;
+        }
+
+        // Support: Firefox <20
+        // The try/catch suppresses exceptions thrown when attempting to access
+        // the "constructor" property of certain host objects, ie. |window.location|
+        // https://bugzilla.mozilla.org/show_bug.cgi?id=814622
+        try
+        {
+            if (obj.constructor && !({}).hasOwnProperty.call(obj.constructor.prototype, 'isPrototypeOf'))
+            {
+                return false;
+            }
+        }
+        catch (e)
+        {
+            return false;
+        }
+
+        // If the function hasn't returned already, we're confident that
+        // |obj| is a plain object, created by {} or constructed with new Object
+        return true;
+    };
+
+    var GenerateGridVertices = function (gameObject, columns, rows, sharedVertexMode) {
+        if (IsPlainObject$4(columns)) {
+            var config = columns;
+            columns = config.columns;
+            rows = config.rows;
+            sharedVertexMode = config.sharedVertexMode;
+        }
+
+        if (columns === undefined) {
+            columns = 1;
+        }
+        if (rows === undefined) {
+            rows = 1;
+        }
+        if (sharedVertexMode === undefined) {
+            sharedVertexMode = false;
+        }
+
+        var faces = [];
+        var vertices;
+
+        if (sharedVertexMode) {
+            vertices = [];
+            for (var r = 0; r <= rows; r++) {
+                for (var c = 0; c <= columns; c++) {
+                    var vertex = gameObject.createVertex(c / columns, r / rows);
+                    vertices.push(vertex);
+                }
+            }
+        }
+
+        var vertex0, vertex1, vertex2;
+        var face;
+        for (var r = 0; r < rows; r++) {
+            for (var c = 0; c < columns; c++) {
+                if (sharedVertexMode) {
+                    var indexTL = (r * (columns + 1)) + c,
+                        indexTR = indexTL + 1,
+                        indexBL = ((r + 1) * (columns + 1)) + c,
+                        indexBR = indexBL + 1;
+
+                    var vertexTL = vertices[indexTL];
+                    var vertexTR = vertices[indexTR];
+                    var vertexBL = vertices[indexBL];
+                    var vertexBR = vertices[indexBR];
+
+                    face = gameObject.createFace(vertexTL, vertexBR, vertexBL);
+                    gameObject.addFace(face);
+                    faces.push(face);
+
+                    face = gameObject.createFace(vertexTL, vertexTR, vertexBR);
+                    gameObject.addFace(face);
+                    faces.push(face);
+
+                } else {
+                    var lx = c / columns,
+                        rx = (c + 1) / columns,
+                        ty = r / rows,
+                        by = (r + 1) / rows;
+
+                    vertex0 = gameObject.createVertex(lx, ty); // top-left
+                    vertex1 = gameObject.createVertex(lx, by); // bottom-left
+                    vertex2 = gameObject.createVertex(rx, by); // bottom-right
+                    face = gameObject.createFace(vertex0, vertex1, vertex2);
+                    gameObject.addFace(face);
+                    faces.push(face);
+
+                    vertex0 = gameObject.createVertex(lx, ty); // top-left
+                    vertex1 = gameObject.createVertex(rx, by); // bottom-right
+                    vertex2 = gameObject.createVertex(rx, ty); // top-right
+                    face = gameObject.createFace(vertex0, vertex1, vertex2);
+                    gameObject.addFace(face);
+                    faces.push(face);
+                }
+            }
+        }
+
+        if (sharedVertexMode) {
+            gameObject.vertices.sort(function (vertexA, vertexB) {
+                if (vertexA.v === vertexB.v) {
+                    return vertexA.u - vertexB.u;
+                } else {
+                    return vertexA.v - vertexB.v;
+                }
+            });
+        }
+
+        return faces;
+    };
+
+    const GetFirst = Phaser.Utils.Array.GetFirst;
+
+    var VertexMethods = {
+        clear() {
+            this.faces.length = 0;
+            this.vertices.length = 0;
+            this.setFaceCountDirtyFlag();
+            return this;
+        },
+
+        createVertex(u, v) {
+            if (u === undefined) { u = 0; }
+            if (v === undefined) { v = 0; }
+
+            var vertex = new Vertex();
+            vertex.setUV(u, v);
+            return vertex;
+        },
+
+        createFace(vertex0, vertex1, vertex2) {
+            return new Face(vertex0, vertex1, vertex2);
+        },
+
+        addFace(face) {
+            if (this.faces.includes(face)) {
+                return this;
+            }
+
+            face.setParent(this);
+
+            this.faces.push(face);
+            this.setFaceCountDirtyFlag();
+
+            var frame = this.frame;
+            face
+                .setFrameSize(frame.cutWidth, frame.cutHeight)
+                .setFrameUV(frame.u0, frame.v0, frame.u1, frame.v1)
+                .resetVerticesPosition();
+
+            var vertices = this.vertices;
+            face.vertices.forEach(function (faceVertex) {
+                if (vertices.includes(faceVertex)) {
+                    return;
+                }
+                vertices.push(faceVertex);
+            });
+
+            return this;
+        },
+
+        addFaces(faces) {
+            for (var i = 0, cnt = faces.length; i < cnt; i++) {
+                this.addFace(faces[i]);
+            }
+            return this;
+        },
+
+        resetFaceSize() {
+            var frame = this.frame;
+            var frameWidth = frame.realWidth;
+            var frameHeight = frame.realHeight;
+
+            var faces = this.faces;
+            for (var i = 0, cnt = faces.length; i < cnt; i++) {
+                faces[i].setFrameSize(frameWidth, frameHeight);
+            }
+
+            return this;
+        },
+
+        addGridFaces(columns, rows, sharedVertexMode) {
+            GenerateGridVertices(this, columns, rows, sharedVertexMode);
+            return this;
+        },
+
+        getVertexByName(name) {
+            return GetFirst(this.vertices, 'name', name);
+        },
+
+        getFaceByName(name) {
+            return GetFirst(this.faces, 'name', name);
+        },
+
+        resetVerticesPosition() {
+            var vertices = this.vertices;
+            for (var i = 0, cnt = vertices.length; i < cnt; i++) {
+                vertices[i].resetPosition();
+            }
+            return this;
+        }
+    };
+
+    const UPDATE_ARRAYS = (1 << 0);
+    const UPDATE_UV = (1 << 1);
+    const UPDATE_VERTEX = (1 << 2);
+    const UPDATE_ALPHA = (1 << 3);
+    const UPDATE_COLOR = (1 << 4);
+    const UPDATE_ALL = UPDATE_ARRAYS | UPDATE_UV | UPDATE_VERTEX | UPDATE_ALPHA | UPDATE_COLOR;
+
+    var DirtyFlagsMethods = {
+        clearDirtyFlag() {
+            this.dirtyFlags = 0;
+            return this;
+        },
+
+        setFaceCountDirtyFlag() {
+            this.dirtyFlags |= UPDATE_ALL;
+            return this;
+        },
+
+        setUVDirtyFlag() {
+            this.dirtyFlags |= UPDATE_UV;
+            return this;
+        },
+
+        setVertexDirtyFlag() {
+            this.dirtyFlags |= UPDATE_VERTEX;
+            return this;
+        },
+
+        setAlphaDirtyFlag() {
+            this.dirtyFlags |= UPDATE_ALPHA;
+            return this;
+        },
+
+        setColorDirtyFlag() {
+            this.dirtyFlags |= UPDATE_COLOR;
+            return this;
+        },
+    };
+
+    var UpdateMethods = {
+        updateBuffers() {
+            if (!this.dirty) {
+                return this;
+            }
+
+            if (this.dirtyFlags & UPDATE_ARRAYS) { this.resizeBuffers(); }
+            if (this.dirtyFlags & UPDATE_UV) { this.updateUVBuffer(); }
+            if (this.dirtyFlags & UPDATE_VERTEX) { this.updateVertexBuffer(); }
+            if (this.dirtyFlags & UPDATE_ALPHA) { this.updateAlphaBuffer(); }
+            if (this.dirtyFlags & UPDATE_COLOR) { this.updateColorBuffer(); }
+
+            this.clearDirtyFlag();
+
+            return this;
+        },
+
+        resizeBuffers() {
+            var size = this.faces.length;
+            this.vertexBuffer = new Float32Array(size * 6);
+            this.uvBuffer = new Float32Array(size * 6);
+            this.colorBuffer = new Uint32Array(size * 3);
+            this.alphaBuffer = new Float32Array(size * 3);
+            return this;
+        },
+
+        updateUVBuffer() {
+            var uvBuffer = this.uvBuffer,
+                index;
+            var faces = this.faces,
+                vertices;
+            for (var i = 0, cnt = faces.length; i < cnt; i++) {
+                vertices = faces[i].vertices;
+
+                index = i * 6;
+                uvBuffer[index] = vertices[0].frameU;
+                uvBuffer[index + 1] = vertices[0].frameV;
+                uvBuffer[index + 2] = vertices[1].frameU;
+                uvBuffer[index + 3] = vertices[1].frameV;
+                uvBuffer[index + 4] = vertices[2].frameU;
+                uvBuffer[index + 5] = vertices[2].frameV;
+            }
+
+            return this;
+        },
+
+        updateVertexBuffer() {
+            var vertexBuffer = this.vertexBuffer,
+                index;
+            var faces = this.faces,
+                vertices;
+            for (var i = 0, cnt = faces.length; i < cnt; i++) {
+                vertices = faces[i].vertices;
+
+                index = i * 6;
+                vertexBuffer[index] = vertices[0].localX;
+                vertexBuffer[index + 1] = vertices[0].localY;
+                vertexBuffer[index + 2] = vertices[1].localX;
+                vertexBuffer[index + 3] = vertices[1].localY;
+                vertexBuffer[index + 4] = vertices[2].localX;
+                vertexBuffer[index + 5] = vertices[2].localY;
+            }
+
+            return this;
+        },
+
+        updateAlphaBuffer() {
+            var alphaBuffer = this.alphaBuffer,
+                index;
+            var faces = this.faces,
+                vertices;
+            for (var i = 0, cnt = faces.length; i < cnt; i++) {
+                vertices = faces[i].vertices;
+
+                index = i * 3;
+                alphaBuffer[index] = vertices[0].alpha;
+                alphaBuffer[index + 1] = vertices[1].alpha;
+                alphaBuffer[index + 2] = vertices[2].alpha;
+            }
+
+            return this;
+        },
+
+        updateColorBuffer() {
+            var colorBuffer = this.colorBuffer,
+                index;
+            var faces = this.faces,
+                vertices;
+            for (var i = 0, cnt = faces.length; i < cnt; i++) {
+                vertices = faces[i].vertices;
+
+                index = i * 3;
+                colorBuffer[index] = vertices[0].color;
+                colorBuffer[index + 1] = vertices[1].color;
+                colorBuffer[index + 2] = vertices[2].color;
+            }
+
+            return this;
+        }
+
+    };
+
+    var TintMethods = {
+        setTintFill(value) {
+            if (value === undefined) {
+                value = false;
+            }
+            this.tintFill = value;
+            return this;
+        },
+
+        setTint(color) {
+            this.tint = color;
+            return this;
+        },
+
+        clearTint() {
+            this.setTint(0xffffff);
+            return this;
+        }
+    };
+
+    var DebugMethods = {
+        setDebug(graphic, callback) {
+            this.debugGraphic = graphic;
+
+            if (!graphic && !callback) {
+                this.debugCallback = null;
+            }
+            else if (!callback) {
+                this.debugCallback = this.renderDebugVerts;
+            }
+            else {
+                this.debugCallback = callback;
+            }
+
+            return this;
+        },
+
+        renderDebugVerts(src, meshLength, verts) {
+            var graphic = src.debugGraphic;
+
+            for (var i = 0; i < meshLength; i += 6) {
+                var x0 = verts[i + 0];
+                var y0 = verts[i + 1];
+                var x1 = verts[i + 2];
+                var y1 = verts[i + 3];
+                var x2 = verts[i + 4];
+                var y2 = verts[i + 5];
+
+                graphic.lineBetween(x0, y0, x1, y1);
+                graphic.lineBetween(x1, y1, x2, y2);
+                graphic.lineBetween(x2, y2, x0, y0);
+            }
+        },
+    };
+
+    const TransformMatrix = Phaser.GameObjects.Components.TransformMatrix;
+    const TransformXY = Phaser.Math.TransformXY;
+
+    var WorldXYToGameObjectLocalXY = function (gameObject, worldX, worldY, camera, out) {
+        if (camera === undefined) {
+            camera = gameObject.scene.cameras.main;
+        }
+
+        if (out === undefined) {
+            out = {};
+        } else if (out === true) {
+            out = globOut;
+        }
+
+        var csx = camera.scrollX;
+        var csy = camera.scrollY;
+        var px = worldX + (csx * gameObject.scrollFactorX) - csx;
+        var py = worldY + (csy * gameObject.scrollFactorY) - csy;
+        if (gameObject.parentContainer) {
+            if (tempMatrix === undefined) {
+                tempMatrix = new TransformMatrix();
+                parentMatrix = new TransformMatrix();
+            }
+
+            gameObject.getWorldTransformMatrix(tempMatrix, parentMatrix);
+            tempMatrix.applyInverse(px, py, out);
+        }
+        else {
+            TransformXY(px, py, gameObject.x, gameObject.y, gameObject.rotation, gameObject.scaleX, gameObject.scaleY, out);
+        }
+
+        out.x += gameObject.displayOriginX;
+        out.y += gameObject.displayOriginY;
+
+        return out;
+    };
+
+    var tempMatrix, parentMatrix;
+    var globOut = {};
+
+    var PointMethods = {
+        getFaceAt(worldX, worldY, camera) {
+            var localXY = WorldXYToGameObjectLocalXY(this, worldX, worldY, camera, true);
+            var localX = localXY.x,
+                localY = localXY.y;
+            var faces = this.faces;
+            for (var i = 0, cnt = faces.length; i < cnt; i++) {
+                var face = faces[i];
+                if (face.contains(localX, localY)) {
+                    return face;
+                }
+            }
+
+            return null;
+        },
+
+        hasFaceAt(worldX, worldY, camera) {
+            return !!this.getFaceAt(worldX, worldY, camera);
+        },
+    };
+
+    var Contains = function (shape, x, y, gameObject) {
+        var faces = gameObject.faces;
+        for (var i = 0, cnt = faces.length; i < cnt; i++) {
+            var face = faces[i];
+            if (face.contains(x, y)) {
+                gameObject.input.hitFace = face;
+                return true;
+            }
+        }
+        gameObject.input.hitFace = null;
+        return false;
+    };
+
+    var OnPointerDown = function (pointer, localX, localY, event) {
+        var face = this.input.hitFace;
+        this.emit('face.pointerdown', face, pointer, localX, localY, event);
+    };
+
+    var OnPointerUp = function (pointer, localX, localY, event) {
+        var face = this.input.hitFace;
+        this.emit('face.pointerup', face, pointer, localX, localY, event);
+        this.input.hitFace = null;
+    };
+
+    var OnPointerMove = function (pointer, localX, localY, event) {
+        var face = this.input.hitFace;
+        var prevFace = this.input.prevHitFace;
+        if (face === prevFace) {
+            this.emit('face.pointermove', face, pointer, localX, localY, event);
+            return
+        }
+
+        if (prevFace) {
+            this.emit('face.pointerout', prevFace, pointer, event);
+        }
+
+        if (face) {
+            this.emit('face.pointerover', face, pointer, event);
+        }
+
+        this.input.prevHitFace = face;
+    };
+
+    var OnPointerOut = function (pointer, event) {
+        var face = this.input.prevHitFace;
+        if (face) {
+            this.emit('face.pointerout', face, pointer, event);
+        }
+
+        this.input.hitFace = null;
+        this.input.prevHitFace = null;
+    };
+
+    var SetFaceInteractive = function (config) {
+        if (this.input) {
+            return;
+        }
+
+        if (config === undefined) {
+            config = {};
+        }
+        config.hitArea = {};
+        config.hitAreaCallback = Contains;
+
+        this
+            .setInteractive(config)
+            .on('pointerdown', OnPointerDown, this)
+            .on('pointerup', OnPointerUp, this)
+            .on('pointermove', OnPointerMove, this)
+            .on('pointerover', OnPointerMove, this)
+            .on('pointerout', OnPointerOut, this);
+
+        return this;
+    };
+
+    var Methods$2 = {
+        setFaceInteractive: SetFaceInteractive
+    };
+
+    Object.assign(
+        Methods$2,
+        VertexMethods,
+        DirtyFlagsMethods,
+        UpdateMethods,
+        TintMethods,
+        DebugMethods,
+        PointMethods,
+    );
+
+    const ShaderSourceFS = Phaser.Renderer.WebGL.Shaders.MultiFrag;
+    const ShaderSourceVS = Phaser.Renderer.WebGL.Shaders.MultiVert;
+    const ShaderAdditionMakers = Phaser.Renderer.WebGL.ShaderAdditionMakers;
+    const MakeApplyTint = ShaderAdditionMakers.MakeApplyTint;
+    const MakeDefineTexCount = ShaderAdditionMakers.MakeDefineTexCount;
+    const MakeGetTexCoordOut = ShaderAdditionMakers.MakeGetTexCoordOut;
+    const MakeGetTexRes = ShaderAdditionMakers.MakeGetTexRes;
+    const MakeSmoothPixelArt = ShaderAdditionMakers.MakeSmoothPixelArt;
+    const MakeGetTexture = ShaderAdditionMakers.MakeGetTexture;
+    const Utils = Phaser.Renderer.WebGL.Utils;
+    const BatchHandlerQuad = Phaser.Renderer.WebGL.RenderNodes.BatchHandlerQuad;
+    const getTint = Utils.getTintAppendFloatAlpha;
+
+    class BatchHandlerTriangles extends BatchHandlerQuad {
+        constructor(manager, config) {
+            super(manager, config);
+            // We do not expect to use extra textures.
+            this.renderOptions.multiTexturing = true;
+        }
+
+        _generateElementIndices(instances) {
+            // Independent Triangles
+            var buffer = new ArrayBuffer(instances * 5 * 2);
+            var indices = new Uint16Array(buffer);
+
+            // 0,0,1,2,2,3,3,4,5,5,6,6,7,8,8,....
+            var offset = 0;
+            for (var i = 0; i < instances; i++) {
+                var index = i * 3;
+                indices[offset++] = index;      // Duplicate
+                indices[offset++] = index;
+                indices[offset++] = index + 1;
+                indices[offset++] = index + 2;
+                indices[offset++] = index + 2;  // Duplicate
+            }
+            return buffer;
+        }
+
+        batchTriangles(
+            drawingContext,
+            src,
+            calcMatrix,
+            glTexture,
+            vertices,
+            uv,
+            colors,
+            alphas,
+            alpha,
+            tintFill,
+            renderOptions,
+            debugCallback
+        ) {
+            if (this.instanceCount === 0) {
+                this.manager.setCurrentBatchNode(this, drawingContext);
+            }
+
+            var submittedInstanceCount = vertices.length / (2 * this.verticesPerInstance);
+            if (submittedInstanceCount > this.instancesPerBatch) {
+                throw new Error('rexBatchHandlerTriangle: Vertex count exceeds maximum per batch (' + this.maxVerticesPerBatch + ')');
+            }
+
+            // Check whether the batch should be rendered immediately.
+            // This guarantees that none of the arrays are full below.
+            if (this.instanceCount + submittedInstanceCount > this.instancesPerBatch) {
+                this.run(drawingContext);
+
+                // Now the batch is empty.
+            }
+
+            // Check render options and run the batch if they differ.
+            this.updateRenderOptions(renderOptions);
+            if (this._renderOptionsChanged) {
+                this.run(drawingContext);
+                this.updateShaderConfig();
+            }
+
+            // Process textures and get relevant data.
+            var textureDatum = this.batchTextures(glTexture);
+
+            // Update the vertex buffer.
+            var vertexOffset32 = this.instanceCount * this.floatsPerInstance;
+            var vertexBuffer = this.vertexBufferLayout.buffer;
+            var vertexViewF32 = vertexBuffer.viewF32;
+            var vertexViewU32 = vertexBuffer.viewU32;
+
+            var roundPixels = drawingContext.camera.roundPixels;
+
+            var debugVertices;
+            if (debugCallback) {
+                debugVertices = [];
+            }
+
+            var a = calcMatrix.a;
+            var b = calcMatrix.b;
+            var c = calcMatrix.c;
+            var d = calcMatrix.d;
+            var e = calcMatrix.e;
+            var f = calcMatrix.f;
+
+            var displayOffsetX = -src.displayOriginX;
+            var displayOffsetY = -src.displayOriginY;
+
+            var meshVerticesLength = vertices.length;
+            for (var i = 0; i < meshVerticesLength; i += 6) {
+                for (var j = 0; j < 3; j++) {
+                    var vertexIndex = i + j * 2;
+                    var x = vertices[vertexIndex];
+                    var y = vertices[vertexIndex + 1];
+
+                    x += displayOffsetX;
+                    y += displayOffsetY;
+
+                    var tx = x * a + y * c + e;
+                    var ty = x * b + y * d + f;
+
+                    if (roundPixels) {
+                        tx = Math.round(tx);
+                        ty = Math.round(ty);
+                    }
+
+                    var tintIndex = (i / 2) + j;
+                    var tint = getTint(
+                        colors[tintIndex],
+                        alphas[tintIndex] * alpha
+                    );
+
+                    vertexViewF32[vertexOffset32++] = tx;
+                    vertexViewF32[vertexOffset32++] = ty;
+                    vertexViewF32[vertexOffset32++] = uv[vertexIndex];
+                    vertexViewF32[vertexOffset32++] = uv[vertexIndex + 1];
+                    vertexViewF32[vertexOffset32++] = textureDatum;
+                    vertexViewF32[vertexOffset32++] = tintFill;
+                    vertexViewU32[vertexOffset32++] = tint;
+
+                    if (debugVertices) {
+                        debugVertices.push(tx, ty);
+                    }
+                }
+
+                this.instanceCount++;
+                this.currentBatchEntry.count++;
+            }
+
+            if (debugCallback) {
+                debugCallback.call(src, src, meshVerticesLength, debugVertices);
+            }
+        }
+    }
+
+    BatchHandlerTriangles.prototype.defaultConfig = {
+        name: 'rexBatchHandlerTriangle',
+        verticesPerInstance: 3,
+        indicesPerInstance: 5,
+        shaderName: 'REXTRI',
+        vertexSource: ShaderSourceVS,
+        fragmentSource: ShaderSourceFS,
+        shaderAdditions: [
+            MakeGetTexCoordOut(),
+            MakeGetTexRes(true),
+            MakeSmoothPixelArt(true),
+            MakeDefineTexCount(1),
+            MakeGetTexture(),
+            MakeApplyTint()
+        ],
+        vertexBufferLayout: {
+            usage: 'DYNAMIC_DRAW',
+            layout: [
+                {
+                    name: 'inPosition',
+                    size: 2
+                },
+                {
+                    name: 'inTexCoord',
+                    size: 2
+                },
+                {
+                    name: 'inTexDatum'
+                },
+                {
+                    name: 'inTintEffect'
+                },
+                {
+                    name: 'inTint',
+                    size: 4,
+                    type: 'UNSIGNED_BYTE',
+                    normalized: true
+                }
+            ]
+        }
+    };
+
+    var AddNodeConstructor = function (game, name, constructor) {
+        var renderNodes = GetGame(game).renderer.renderNodes;
+        if (!renderNodes.hasNode(name, true)) {
+            renderNodes.addNodeConstructor(name, constructor);
+        }
+    };
+
+    const DefaultMeshNodes = new Phaser.Structs.Map([
+        ['BatchHandler', 'rexBatchHandlerTriangles']
+    ]);
+
+    let Image$1 = class Image extends Image$2 {
+        constructor(scene, x, y, texture, frame) {
+            if (x === undefined) {
+                x = 0;
+            }
+            if (y === undefined) {
+                y = 0;
+            }
+            if (texture === undefined) {
+                texture = '__DEFAULT';
+            }
+            super(scene, 'rexMeshImage');
+
+            this.dirtyFlags = 0;
+            // Each face has 3 vertics, each vertex has x,y, u,v, alpha, color members
+            this.vertices = [];
+            this.faces = [];
+
+            // Buffers
+            this.vertexBuffer = null;
+            this.uvBuffer = null;
+            this.alphaBuffer = null;
+            this.colorBuffer = null;
+
+            this.tintFill = false;
+
+            this.debugCallback = null;
+            this.debugGraphic = null;
+
+            this.setTexture(texture, frame);
+            this.setPosition(x, y);
+            this.setSizeToFrame();
+            this.setOriginFromFrame();
+            AddNodeConstructor(scene, 'rexBatchHandlerTriangles', BatchHandlerTriangles);
+            this.initRenderNodes(this._defaultRenderNodesMap);
+        }
+
+        get _defaultRenderNodesMap() {
+            return DefaultMeshNodes;
+        }
+
+        get dirty() {
+            return this.dirtyFlags !== 0;
+        }
+
+        get frame() {
+            return this._frame;
+        }
+
+        set frame(value) {
+            if (this._frame === value) {
+                return;
+            }
+
+            this._frame = value;
+
+            var faces = this.faces;
+            if (!faces) {
+                return;
+            }
+
+            var frameU0 = (value) ? value.u0 : 0;
+            var frameV0 = (value) ? value.v0 : 0;
+            var frameU1 = (value) ? value.u1 : 0;
+            var frameV1 = (value) ? value.v1 : 0;
+            var frameWidth = (value) ? value.cutWidth : 0;
+            var frameHeight = (value) ? value.cutHeight : 0;
+
+            var isSizeChanged = (this._frameWidthSave !== frameWidth) || (this._frameHeightSave !== frameHeight);
+            this._frameWidthSave = frameWidth;
+            this._frameHeightSave = frameHeight;
+
+            for (var i = 0, cnt = faces.length; i < cnt; i++) {
+                var face = faces[i];
+                face.setFrameUV(frameU0, frameV0, frameU1, frameV1);
+                if (isSizeChanged) {
+                    face.setFrameSize(frameWidth, frameHeight);
+                }
+            }
+        }
+
+        get tint() {
+            if (this.faces.length > 0) {
+                return this.faces[0].color;
+            } else {
+                return 0xffffff;
+            }
+        }
+
+        set tint(value) {
+            var faces = this.faces;
+            for (var i = 0, cnt = faces.length; i < cnt; i++) {
+                faces[i].setColor(value);
+            }
+        }
+
+        //  Overrides Game Object method
+        addedToScene() {
+            this.scene.sys.updateList.add(this);
+        }
+
+        //  Overrides Game Object method
+        removedFromScene() {
+            this.scene.sys.updateList.remove(this);
+        }
+    };
+
+    Object.assign(
+        Image$1.prototype,
+        Render,
+        Methods$2
+    );
+
+    var AnmiationMethods = {
+        play(key, ignoreIfPlaying) {
+            return this.anims.play(key, ignoreIfPlaying);
+        },
+
+        playReverse(key, ignoreIfPlaying) {
+            return this.anims.playReverse(key, ignoreIfPlaying);
+        },
+
+        playAfterDelay(key, delay) {
+            return this.anims.playAfterDelay(key, delay);
+        },
+
+        playAfterRepeat(key, repeatCount) {
+            return this.anims.playAfterRepeat(key, repeatCount);
+        },
+
+        chain(key) {
+            return this.anims.chain(key);
+        },
+
+        stop() {
+            return this.anims.stop();
+        },
+
+        stopAfterDelay(delay) {
+            return this.anims.stopAfterDelay(delay);
+        },
+
+        stopAfterRepeat(repeatCount) {
+            return this.anims.stopAfterRepeat(repeatCount);
+        },
+
+        stopOnFrame(frame) {
+            return this.anims.stopOnFrame(frame);
+        },
+    };
+
+    var Methods$1 = {};
+
+    Object.assign(
+        Methods$1,
+        AnmiationMethods,
+    );
+
+    const AnimationState = Phaser.Animations.AnimationState;
+
+    class Sprite extends Image$1 {
+        constructor(scene, x, y, texture, frame) {
+            super(scene, x, y, texture, frame);
+            this.type = 'rexMeshSprite';
+
+            this.anims = new AnimationState(this);
+        }
+
+        preUpdate(time, delta) {
+            this.anims.update(time, delta);
+        }
+
+        preDestroy() {
+            this.anims.destroy();
+
+            this.anims = undefined;
+        }
+    }
+
+    Object.assign(
+        Sprite.prototype,
+        Methods$1,
+    );
+
+    var RenderMethods = {
+        skipRender() {
+            if (this.hideBackFace && this.isBackFace) {
+                return true;
+            }
+
+            return SkipRender.call(this);
+        }
+    };
+
+    var RotateMethods = {
+        /*
+        this.rotationX, this.rotationY, this.rotationZ,
+        this.angleX, this.angleY, this.angleZ
+        */ 
+        setRotationXYZ(rotationX, rotationY, rotationZ) {
+            if (rotationX !== undefined) {
+                this.rotationX = rotationX;
+            }
+            if (rotationY !== undefined) {
+                this.rotationY = rotationY;
+            }
+            if (rotationZ !== undefined) {
+                this.rotationZ = rotationZ;
+            }
+            return this;
+        },
+
+        setRotationX(rotationX) {
+            this.rotationX = rotationX;
+            return this;
+        },
+
+        setRotationY(rotationY) {
+            this.rotationY = rotationY;
+            return this;
+        },
+
+        setRotationZ(rotationZ) {
+            this.rotationZ = rotationZ;
+            return this;
+        },
+
+        setAngleXYZ(angleX, angleY, angleZ) {
+            if (angleX !== undefined) {
+                this.angleX = angleX;
+            }
+            if (angleY !== undefined) {
+                this.angleY = angleY;
+            }
+            if (angleZ !== undefined) {
+                this.angleZ = angleZ;
+            }
+            return this;
+        },
+
+        setAngleX(angleX) {
+            this.angleX = angleX;
+            return this;
+        },
+
+        setAngleXY(angleY) {
+            this.angleY = angleY;
+            return this;
+        },
+
+        setAngleXZ(angleZ) {
+            this.angleZ = angleZ;
+            return this;
+        },
+    };
+
+    var Methods = {};
+
+    Object.assign(
+        Methods,
+        RenderMethods,
+        RotateMethods
+    );
+
+    var RotateXYZ = function (gameObject, rotationX, rotationY, rotationZ, centerX, centerY) {
+        var vertices = gameObject.vertices;
+
+        if ((rotationX === 0) && (rotationY === 0) && (rotationZ === 0)) {
+            for (var i = 0, cnt = vertices.length; i < cnt; i++) {
+                vertices[i].resetPosition();
+            }
+            return;
+        }
+
+        if (centerX === undefined) {
+            centerX = gameObject.width / 2;
+        }
+        if (centerY === undefined) {
+            centerY = gameObject.height / 2;
+        }
+
+        var vertex, x, y, z, xTemp, yTemp, zTemp;
+        var cosX = Math.cos(rotationX),
+            sinX = Math.sin(rotationX);
+        var cosY = Math.cos(rotationY),
+            sinY = Math.sin(rotationY);
+        var cosZ = Math.cos(rotationZ),
+            sinZ = Math.sin(rotationZ);
+        var perspective = gameObject.scene.scale.gameSize.width,
+            scale;
+        var xyz;
+        for (var i = 0, cnt = vertices.length; i < cnt; i++) {
+            vertex = vertices[i];
+            x = vertex.frameX - centerX;
+            y = vertex.frameY - centerY;
+            z = 0;
+
+            // Rotate around x-axis
+            yTemp = y * cosX - z * sinX;
+            zTemp = y * sinX + z * cosX;
+            y = yTemp;
+            z = zTemp;
+
+            // Rotate around y-axis
+            xTemp = x * cosY + z * sinY;
+            zTemp = -x * sinY + z * cosY;
+            x = xTemp;
+            z = zTemp;
+
+            // Rotate around z-axis
+            xTemp = x * cosZ - y * sinZ;
+            yTemp = x * sinZ + y * cosZ;
+            x = xTemp;
+            y = yTemp;
+
+            // Project from 3d to 2d
+            scale = perspective / (perspective - z);
+            vertex.localX = x * scale + centerX;
+            vertex.localY = y * scale + centerY;
+
+            // Store [x,y,z]
+            if (!vertex.hasOwnProperty('xyz')) {
+                vertex.xyz = [0, 0, 0];
+            }
+            xyz = vertex.xyz;
+            xyz[0] = x;
+            xyz[1] = y;
+            xyz[2] = z;
+        }
+    };
+
+    var IsBackFace = function (face) {
+        var v0 = face.vertices[0].xyz;  // [x,y,z]
+        var v1 = face.vertices[1].xyz;  // [x,y,z]
+        var v2 = face.vertices[2].xyz;  // [x,y,z]
+
+        var edge1 = [v1[0] - v0[0], v1[1] - v0[1], v1[2] - v0[2]];
+        var edge2 = [v2[0] - v0[0], v2[1] - v0[1], v2[2] - v0[2]];
+
+        var normal = [
+            edge1[1] * edge2[2] - edge1[2] * edge2[1],
+            edge1[2] * edge2[0] - edge1[0] * edge2[2],
+            edge1[0] * edge2[1] - edge1[1] * edge2[0]
+        ];
+
+        return normal[2] < 0;
     };
 
     const IsPlainObject$3 = Phaser.Utils.Objects.IsPlainObject;
     const GetValue$5 = Phaser.Utils.Objects.GetValue;
-    const GenerateGridVerts = Phaser.Geom.Mesh.GenerateGridVerts;
     const RadToDeg$1 = Phaser.Math.RadToDeg;
-    const DegToRad$2 = Phaser.Math.DegToRad;
+    const DegToRad$1 = Phaser.Math.DegToRad;
 
-    const FOV = 45;
-    const PanZ = 1 + (1 / Math.sin(DegToRad$2(FOV)));
-
-    class Image extends MeshBase {
+    class Image extends Sprite {
         constructor(scene, x, y, key, frame, config) {
             if (IsPlainObject$3(x)) {
                 config = x;
@@ -12548,43 +14276,19 @@
 
             super(scene, x, y, key, frame);
             this.type = 'rexPerspectiveImage';
-            this.setSizeToFrame();
-
-            this.resetPerspective();
-            this.panZ(PanZ);
-            this.hideCCW = GetValue$5(config, 'hideCCW', true);
+            this._rotationX = 0;
+            this._rotationY = 0;
+            this._rotationZ = 0;
+            this.isBackFace = false;
+            this.hideBackFace = GetValue$5(config, 'hideBackFace', true);
 
             var gridWidth = GetValue$5(config, 'gridWidth', 0);
             var gridHeight = GetValue$5(config, 'gridHeight', gridWidth);
-            this.resetVerts(gridWidth, gridHeight);
+            this.resetVertices(gridWidth, gridHeight);
 
-            this.prevFrame = this.frame;
         }
 
-        preUpdate(time, delta) {
-            // Reset size and vertex if frame is changed
-            if (this.prevFrame !== this.frame) {
-                this.prevFrame = this.frame;
-                this.syncSize();
-            }
-
-            super.preUpdate(time, delta);
-        }
-
-        get originX() {
-            return 0.5;
-        }
-
-        get originY() {
-            return 0.5;
-        }
-
-        resetPerspective() {
-            this.setPerspective(this.width, this.height, FOV);
-            return this;
-        }
-
-        resetVerts(gridWidth, gridHeight) {
+        resetVertices(gridWidth, gridHeight) {
             if (gridWidth !== undefined) {
                 this.gridWidth = gridWidth;
             }
@@ -12594,7 +14298,6 @@
 
             // Clear faces and vertices
             this.clear();
-            this.dirtyCache[9] = -1;
             if ((this.width === 0) || (this.height === 0)) {
                 return this;
             }
@@ -12607,7 +14310,7 @@
             if (this.gridWidth === 0) {
                 gridWidth = Math.max(frameWidth / 8, 32);
             } else {
-                gridHeight = this.gridWidth;
+                gridWidth = this.gridWidth;
             }
             if (this.gridHeight === 0) {
                 gridHeight = Math.max(frameHeight / 8, 32);
@@ -12615,41 +14318,27 @@
                 gridHeight = this.gridHeight;
             }
 
-            GenerateGridVerts({
-                mesh: this,
+            this
+                .addGridFaces({
+                    columns: Math.ceil(frameWidth / gridWidth),
+                    rows: Math.ceil(frameHeight / gridHeight),
+                    sharedVertexMode: true
+                });
 
-                width: frameWidth / this.height,
-                height: frameHeight / this.height,
-
-                widthSegments: Math.ceil(frameWidth / gridWidth),
-                heightSegments: Math.ceil(frameHeight / gridHeight),
-            });
-
-            // Recover vertices transform
-            var transformInfo = this.transformInfo;
-            if (transformInfo) {
-                this.transformVerts(
-                    transformInfo.x, transformInfo.y, transformInfo.z,
-                    transformInfo.rotateX, transformInfo.rotateY, transformInfo.rotateZ
-                );
-            }
-
-            return this;
-        }
-
-        syncSize() {
-            this.setSizeToFrame();  // Reset size
-            this.resetPerspective();  // Reset perspective
-            this.resetVerts();  // Reset verts
             return this;
         }
 
         get rotationX() {
-            return this.modelRotation.x;
+            return this._rotationX;
         }
 
         set rotationX(value) {
-            this.modelRotation.x = value;
+            if (this._rotationX === value) {
+                return;
+            }
+
+            this._rotationX = value;
+            Rotate(this, this._rotationX, this._rotationY, this._rotationZ);
         }
 
         get angleX() {
@@ -12657,15 +14346,20 @@
         }
 
         set angleX(value) {
-            this.rotationX = DegToRad$2(value);
+            this.rotationX = DegToRad$1(value);
         }
 
         get rotationY() {
-            return this.modelRotation.y;
+            return this._rotationY;
         }
 
         set rotationY(value) {
-            this.modelRotation.y = value;
+            if (this._rotationY === value) {
+                return;
+            }
+
+            this._rotationY = value;
+            Rotate(this, this._rotationX, this._rotationY, this._rotationZ);
         }
 
         get angleY() {
@@ -12673,15 +14367,20 @@
         }
 
         set angleY(value) {
-            this.rotationY = DegToRad$2(value);
+            this.rotationY = DegToRad$1(value);
         }
 
         get rotationZ() {
-            return this.modelRotation.z;
+            return this._rotationZ;
         }
 
         set rotationZ(value) {
-            this.modelRotation.z = value;
+            if (this._rotationZ === value) {
+                return;
+            }
+
+            this._rotationZ = value;
+            Rotate(this, this._rotationX, this._rotationY, this._rotationZ);
         }
 
         get angleZ() {
@@ -12689,32 +14388,23 @@
         }
 
         set angleZ(value) {
-            this.rotationZ = DegToRad$2(value);
+            this.rotationZ = DegToRad$1(value);
         }
-
-        transformVerts(x, y, z, rotateX, rotateY, rotateZ) {
-            if (x === undefined) { x = 0; }
-            if (y === undefined) { y = 0; }
-            if (z === undefined) { z = 0; }
-            if (rotateX === undefined) { rotateX = 0; }
-            if (rotateY === undefined) { rotateY = 0; }
-            if (rotateZ === undefined) { rotateZ = 0; }
-
-            if (!this.transformInfo) {
-                this.transformInfo = {};
-            }
-
-            this.transformInfo.x = x;
-            this.transformInfo.y = y;
-            this.transformInfo.rotateX = rotateX;
-            this.transformInfo.rotateY = rotateY;
-            this.transformInfo.rotateZ = rotateZ;
-
-            TransformVerts(this, x, y, z, rotateX, rotateY, rotateZ);
-            return this;
-        }
-
     }
+
+    var Rotate = function (gameObject, rotationX, rotationY, rotationZ) {
+        RotateXYZ(gameObject, rotationX, rotationY, rotationZ);
+        if (gameObject.faces.length > 0) {
+            gameObject.isBackFace = IsBackFace(gameObject.faces[0]);
+        } else {
+            gameObject.isBackFace = false;
+        }
+    };
+
+    Object.assign(
+        Image.prototype,
+        Methods
+    );
 
     const DynamicTexture = Phaser.Textures.DynamicTexture;
 
@@ -12742,7 +14432,7 @@
                 height = GetValue$4(config, 'height', 32);
             }
 
-            // dynamic-texture -> quad-image
+            // Dynamic-texture -> quad-image
             var texture = CreateDynamicTexture(scene, width, height);
 
             super(scene, x, y, texture, null, config);
@@ -12762,6 +14452,23 @@
             this.rt = null;
         }
 
+        setSizeToFrame(frame) {
+            var width = this.width;
+            var height = this.height;
+
+            super.setSizeToFrame(frame);
+
+            this.updateDisplayOrigin();
+
+            if ((this.width !== width) || (this.height !== height)) {
+                if (this.gridWidth !== undefined) {
+                    this.resetVertices();
+                }
+            }
+
+            return this;
+        }
+
         snapshot(gameObjects, config) {
             if (config === undefined) {
                 config = {};
@@ -12771,17 +14478,11 @@
 
             Snapshot(config);
 
-            if ((this.width !== this.frame.realWidth) || (this.height !== this.frame.realHeight)) {
-                this.syncSize();
-            }
+            this.setSizeToFrame();
 
             return this;
         }
     }
-
-    Phaser.Animations.AnimationState;
-    Phaser.Utils.Objects.IsPlainObject;
-    Phaser.Utils.Objects.GetValue;
 
     var ForEachFace = function (faces, callback, scope, ignoreInvalid) {
         if (Array.isArray(faces)) {
@@ -12822,7 +14523,7 @@
     };
 
     const RadToDeg = Phaser.Math.RadToDeg;
-    const DegToRad$1 = Phaser.Math.DegToRad;
+    const DegToRad = Phaser.Math.DegToRad;
 
     class FaceContainer extends ContainerLite {
         constructor(scene, x, y, width, height, faces) {
@@ -12850,7 +14551,7 @@
         }
 
         set angleX(value) {
-            this.rotationX = DegToRad$1(value);
+            this.rotationX = DegToRad(value);
         }
 
         get rotateX() {
@@ -12858,7 +14559,7 @@
         }
 
         set rotateX(value) {
-            this.rotationX = DegToRad$1(value);
+            this.rotationX = DegToRad(value);
         }
 
         // Override
@@ -12876,7 +14577,7 @@
         }
 
         set angleY(value) {
-            this.rotationY = DegToRad$1(value);
+            this.rotationY = DegToRad(value);
         }
 
         get rotateY() {
@@ -12884,7 +14585,7 @@
         }
 
         set rotateY(value) {
-            this.rotationY = DegToRad$1(value);
+            this.rotationY = DegToRad(value);
         }
 
         // Override
@@ -12902,7 +14603,7 @@
         }
 
         set angleZ(value) {
-            this.rotationZ = DegToRad$1(value);
+            this.rotationZ = DegToRad(value);
         }
 
         get rotateZ() {
@@ -12910,40 +14611,12 @@
         }
 
         set rotateZ(value) {
-            this.rotationZ = DegToRad$1(value);
+            this.rotationZ = DegToRad(value);
         }
 
         setDebug(graphic, callback) {
             ForEachFace(this.faces, function (face) {
                 face.setDebug(graphic, callback);
-            }, null, true);
-            return this;
-        }
-
-        panX(v) {
-            ForEachFace(this.faces, function (face) {
-                face.panX(v);
-            }, null, true);
-            return this;
-        }
-
-        panY(v) {
-            ForEachFace(this.faces, function (face) {
-                face.panY(v);
-            }, null, true);
-            return this;
-        }
-
-        panZ(v) {
-            ForEachFace(this.faces, function (face) {
-                face.panZ(v);
-            }, null, true);
-            return this;
-        }
-
-        transformVerts(x, y, z, rotateX, rotateY, rotateZ) {
-            ForEachFace(this.faces, function (face) {
-                face.transformVerts(x, y, z, rotateX, rotateY, rotateZ);
             }, null, true);
             return this;
         }
@@ -12954,6 +14627,11 @@
         }
 
     }
+
+    Object.assign(
+        FaceContainer.prototype,
+        RotateMethods
+    );
 
     const IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
     const DefaultImageConfig = { key: '__WHITE' };
@@ -13018,17 +14696,13 @@
         return faces;
     };
 
-    const DegToRad = Phaser.Math.DegToRad;
-
-    const RAD180 = DegToRad(180);
-
     var LayoutFaces = function (parent, faces) {
         var backFace = faces.back;
         if (backFace) {
             if (parent.orientation === 0) { // Flip around Y
-                backFace.transformVerts(0, 0, 0, 0, RAD180, 0);
+                backFace.angleY = 180;
             } else { // Flip around X
-                backFace.transformVerts(0, 0, 0, RAD180, 0, 0);
+                backFace.angleX = 180;
             }
         }
     };
@@ -13216,9 +14890,10 @@
                 return;
             }
 
+            var delta = value - this.frontFaceRotationX;
             this.frontFaceRotationX = value;
             ForEachFace(this.faces, function (face) {
-                face.rotationX = value;
+                face.rotationX += delta;
             }, null, true);
         }
 
@@ -13231,9 +14906,10 @@
                 return;
             }
 
+            var delta = value - this.frontFaceRotationY;
             this.frontFaceRotationY = value;
             ForEachFace(this.faces, function (face) {
-                face.rotationY = value;
+                face.rotationY += delta;
             }, null, true);
         }
 
@@ -13246,9 +14922,10 @@
                 return;
             }
 
+            var delta = value - this.frontFaceRotationZ;
             this.frontFaceRotationZ = value;
             ForEachFace(this.faces, function (face) {
-                face.rotationZ = value;
+                face.rotationZ += delta;
             }, null, true);
         }
 
@@ -13305,26 +14982,6 @@
         front: 0,
         back: 1,
     };
-
-    Phaser.Utils.Objects.GetValue;
-    Phaser.Math.RadToDeg;
-    Phaser.Math.DegToRad;
-    Phaser.Math.Angle.WrapDegrees;
-    Phaser.Math.Angle.ShortestBetween;
-    Phaser.Math.Wrap;
-    Phaser.Math.Linear;
-
-    Phaser.Utils.Objects.IsPlainObject;
-    Phaser.Utils.Objects.GetValue;
-    Phaser.Math.DegToRad;
-    Phaser.Math.RadToDeg;
-    Phaser.Math.Angle.WrapDegrees;
-    Phaser.Math.Linear;
-    Phaser.Math.Wrap;
-
-    Phaser.Utils.Objects.IsPlainObject;
-    Phaser.Utils.Objects.GetValue;
-    Phaser.Math.Wrap;
 
     Phaser.Utils.Objects.GetValue;
 

@@ -4,7 +4,8 @@
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexgridtableplugin = factory());
 })(this, (function () { 'use strict';
 
-    const MinVersion = 60;
+    const MainVersionNumber = 4;
+    const SubVersionNumber = 0;
 
     var IsChecked = false;
 
@@ -14,14 +15,14 @@
         }
 
         if (minVersion === undefined) {
-            minVersion = MinVersion;
+            minVersion = SubVersionNumber;
         }
         var version = Phaser.VERSION.split('.');
         var mainVersion = parseInt(version[0]);
-        if (mainVersion === 3) {
-            var currentVersion = parseInt(version[1]);
-            if (currentVersion < minVersion) {
-                console.error(`Minimum supported version : ${mainVersion}.${currentVersion}`);
+        if (mainVersion === MainVersionNumber) {
+            var subVersion = parseInt(version[1]);
+            if (subVersion < minVersion) {
+                console.error(`Minimum supported version : ${mainVersion}.${subVersion}`);
             }
         } else {
             console.error(`Can't supported version : ${mainVersion}`);
@@ -978,6 +979,7 @@
         },
     };
 
+    // canvas mask only
     var Mask = {
         updateChildMask(child) {
             // Don't propagate null mask to clear children's mask
@@ -2127,6 +2129,9 @@
         }
 
         var gameObjects = config.gameObjects;
+        if (!Array.isArray(gameObjects)) {
+            gameObjects = [gameObjects];
+        }
         var renderTexture = config.renderTexture;  // renderTexture, or dynamicTexture
         var saveTexture = config.saveTexture;
         var x = GetValue$8(config, 'x', undefined);
@@ -2196,7 +2201,7 @@
 
         // Draw gameObjects
         gameObjects = SortGameObjectsByDepth(Clone(gameObjects));
-        renderTexture.draw(gameObjects);
+        renderTexture.draw(gameObjects).render();
 
         // Save render result to texture
         if (saveTexture) {
@@ -3483,19 +3488,156 @@
         return this;
     };
 
-    var MaskToGameObject = function (mask) {
-        return (mask.hasOwnProperty('geometryMask')) ? mask.geometryMask : mask.bitmapMask;
+    const SceneClass = Phaser.Scene;
+    var IsSceneObject = function (object) {
+        return (object instanceof SceneClass);
+    };
+
+    var GetSceneObject = function (object) {
+        if ((object == null) || (typeof (object) !== 'object')) {
+            return null;
+        } else if (IsSceneObject(object)) { // object = scene
+            return object;
+        } else if (object.scene && IsSceneObject(object.scene)) { // object = game object
+            return object.scene;
+        } else if (object.parent && object.parent.scene && IsSceneObject(object.parent.scene)) { // parent = bob object
+            return object.parent.scene;
+        } else {
+            return null;
+        }
+    };
+
+    var GetRenderer = function (scene) {
+        scene = GetSceneObject(scene);
+        if (!scene) {
+            return null;
+        }
+
+        return scene.sys.renderer;
+    };
+
+    var IsWebGLRenderMode = function (scene) {
+        var renderer = GetRenderer(scene);
+        if (!renderer) {
+            return false;
+        }
+
+        return !!renderer.gl;
+    };
+
+    const MaskController = Phaser.Filters.Mask;
+
+    var CreateMaskObject = function (gameObject, invert) {
+        // invert : WebGL only feature
+
+        // A gameObject can own a (WEBGL) MaskController, or a (CANVAS) GeometryMask
+        // Share this MaskController/GeometryMask for all mask target game object
+        var maskObject = gameObject._maskObject;
+        if (maskObject) {
+            if ((invert !== undefined) && (maskObject.invert !== undefined)) {
+                maskObject.invert = invert;
+            }
+            return maskObject;
+        }
+
+        if (IsWebGLRenderMode(gameObject)) {
+            maskObject = new MaskController(gameObject.scene.cameras.main, gameObject, invert);
+
+        } else {
+            // CANVAS Only support GeometryMask
+            maskObject = gameObject.createGeometryMask();
+
+        }
+
+        gameObject._maskObject = maskObject;
+
+        // Destroy mask object when mask source game object is destroyed
+        gameObject.once('destroy', function () {
+            maskObject.destroy();
+            gameObject._maskObject = undefined;
+        });
+
+        return maskObject;
+    };
+
+    var SetMask = function (gameObject, maskGameObject, invert) {
+        var maskObject = CreateMaskObject(maskGameObject, invert);
+        // A (WEBGL) MaskController, or a (CANVAS) GeometryMask
+
+        if (gameObject.mask === maskObject) {
+            // The same mask object
+            return;
+        }
+
+        if (IsWebGLRenderMode(gameObject)) {
+            // WEBGL mask
+            if (!gameObject.filters) {
+                if (!gameObject.enableFilters) {
+                    return;
+                }
+
+                gameObject.enableFilters();
+            }
+
+            var filterList = gameObject.filters.external;
+            var list = filterList.list;
+
+            if (gameObject.mask) {
+                // Replace current mask controller
+                var index = list.indexOf(gameObject.mask);
+                list[index] = maskGameObject;
+            } else {
+                // Append mask controller
+                list.push(maskObject);
+            }
+
+        } else {
+            // CANVAS mask
+            if (!gameObject.setMask) {
+                return;
+            }
+        }
+
+        gameObject.mask = maskObject;
+    };
+
+    var ClearMask = function (gameObject) {
+        if (!gameObject.mask) {
+            return;
+        }
+
+        if (IsWebGLRenderMode(gameObject)) {
+            // WEBGL mask
+            var filterList = gameObject.filters.external;
+            var list = filterList.list;
+
+            // Remove current mask object from external filter list
+            var index = list.indexOf(gameObject.mask);
+            list.splice(index, 1);
+
+        } else {
+            // CANVAS mask
+            if (!gameObject.clearMask) {
+                return;
+            }
+
+        }
+
+        gameObject.mask = null;
     };
 
     const Intersects = Phaser.Geom.Intersects.RectangleToRectangle;
     const Overlaps = Phaser.Geom.Rectangle.Overlaps;
 
     var MaskChildren = function ({
-        parent, mask, children,    
+        parent,
+        maskGameObject,
+        children,
+
         onVisible, onInvisible, scope,
     }) {
 
-        if (!mask) {
+        if (!maskGameObject) {
             return;
         }
 
@@ -3506,7 +3648,6 @@
         var hasAnyVisibleCallback = !!onVisible || !!onInvisible;
 
         var parentBounds = parent.getBounds();
-        var maskGameObject = MaskToGameObject(mask);
 
         var child, childBounds, visiblePointsNumber;
         var isChildVisible;
@@ -3531,17 +3672,17 @@
                     case 0: // No point is inside visible window
                         // Parent intersects with child, or parent is inside child, set visible, and apply mask
                         if (Intersects(parentBounds, childBounds) || Overlaps(parentBounds, childBounds)) {
-                            ShowSome(parent, child, mask);
+                            ShowSome(parent, child, maskGameObject);
                         } else { // Set invisible
                             ShowNone(parent, child);
                         }
                         break;
                     default: // Part of points are inside visible window, set visible, and apply mask
-                        ShowSome(parent, child, mask);
+                        ShowSome(parent, child, maskGameObject);
                         break;
                 }
             } else {
-                ShowSome(parent, child, mask);
+                ShowSome(parent, child, maskGameObject);
             }
 
             if (hasAnyVisibleCallback && (child.visible !== isChildVisible)) {
@@ -3594,12 +3735,9 @@
         return result;
     };
 
-    var ShowAll = function (parent, child, mask) {
+    var ShowAll = function (parent, child, maskGameObject) {
         if (!child.hasOwnProperty('isRexContainerLite')) {
-            if (child.clearMask) {
-                child.clearMask();
-            }
-
+            ClearMask(child);
             parent.setChildMaskVisible(child, true);
 
         } else {
@@ -3611,12 +3749,9 @@
 
     };
 
-    var ShowSome = function (parent, child, mask) {
+    var ShowSome = function (parent, child, maskGameObject) {
         if (!child.hasOwnProperty('isRexContainerLite')) {
-            if (child.setMask) {
-                child.setMask(mask);
-            }
-
+            SetMask(child, maskGameObject);
             parent.setChildMaskVisible(child, true);
 
         } else {
@@ -3628,12 +3763,9 @@
 
     };
 
-    var ShowNone = function (parent, child, mask) {
+    var ShowNone = function (parent, child, maskGameObject) {
         if (!child.hasOwnProperty('isRexContainerLite')) {
-            if (child.clearMask) {
-                child.clearMask();
-            }
-
+            ClearMask(child);
             parent.setChildMaskVisible(child, false);
 
         } else {
@@ -3642,7 +3774,6 @@
             child.syncChildrenEnable = true;
 
         }
-
 
     };
 
@@ -3873,14 +4004,9 @@
     var AddChildMask = function (maskTarget, sizeTarget, shape, padding) {
         var maskGameObject = new DefaultMaskGraphics(sizeTarget, shape, padding); // A Graphics game object
         if (maskTarget && !maskTarget.isRexSizer) { // Sizer game object can't apply mask
-            var mask = maskGameObject.createGeometryMask();
-            maskTarget.setMask(mask);
-            this.once('destroy', function () {
-                maskTarget.setMask();
-                mask.destroy();
-            });
+            SetMask(maskTarget, maskGameObject);
         }
-        this.pin(maskGameObject);
+        this.pin(maskGameObject); // maskGameObject will be destroyed with parent container
         return maskGameObject;
     };
 
@@ -3912,13 +4038,13 @@
         },
 
         destroyChildrenMask() {
-            if (!this.childrenMask) {
+            if (!this.childrenMaskGameObject) {
                 return this;
             }
 
             this.stopMaskUpdate();
-            this.childrenMask.destroy();
-            this.childrenMask = undefined;
+            this.childrenMaskGameObject.destroy();
+            this.childrenMaskGameObject = undefined;
 
             this.onMaskGameObjectVisible = null;
             this.onMaskGameObjectInvisible = null;
@@ -3944,9 +4070,7 @@
         },
 
         enableChildrenMask(maskPadding) {
-            var maskGameObject = AddChildMask.call(this, null, this, 0, maskPadding);
-            this.childrenMask = maskGameObject.createGeometryMask();
-            // this.childrenMask is a mask object, not a (Graphics) game object
+            this.childrenMaskGameObject = AddChildMask.call(this, null, this, 0, maskPadding);  // A Graphics game object
             return this;
         },
 
@@ -3966,7 +4090,7 @@
 
         maskChildren() {
             if (
-                (!this.childrenMask) ||                // No childrenMask
+                (!this.childrenMaskGameObject) ||      // No childrenMaskGameObject
                 (!this.maskChildrenFlag) ||            // No maskChildrenFlag set
                 (this.alpha === 0) || (!this.visible)  // Parent is not visible
             ) {
@@ -3974,18 +4098,18 @@
             }
 
             if (this.privateRenderLayer) {
-                this.privateRenderLayer.setMask(this.childrenMask);
+                SetMask(this.privateRenderLayer, this.childrenMaskGameObject);
 
             } else if (this.maskLayer) {
                 // 1. Add parent and children into layer
                 this.addToLayer(this.maskLayer);
                 // 2. Mask this layer
-                this.maskLayer.setMask(this.childrenMask);
+                SetMask(this.maskLayer, this.childrenMaskGameObject);
 
             } else {
                 MaskChildren({
                     parent: this,
-                    mask: this.childrenMask,
+                    maskGameObject: this.childrenMaskGameObject,
 
                     onVisible: this.onMaskGameObjectVisible,
                     onInvisible: this.onMaskGameObjectInvisible,
@@ -4001,11 +4125,11 @@
         },
 
         layoutChildrenMask() {
-            if (!this.childrenMask) {
+            if (!this.childrenMaskGameObject) {
                 return this;
             }
 
-            var maskGameObject = MaskToGameObject(this.childrenMask);
+            var maskGameObject = this.childrenMaskGameObject;
             maskGameObject.setPosition().resize();
             this.resetChildPositionState(maskGameObject);
             return this;
@@ -4371,8 +4495,8 @@
         while ((cellTLY < bottomBound) && (cellIdx <= lastIdx)) {
             if (this.table.isValidCellIdx(cellIdx)) {
                 var cell = table.getCell(cellIdx, true);
-                this.visibleCells.set(cell);
-                if (!this.preVisibleCells.contains(cell)) {
+                this.visibleCells.add(cell);
+                if (!this.preVisibleCells.has(cell)) {
                     this.showCell(cell);
                 }
 
@@ -4462,11 +4586,12 @@
     var HideCells = function () {
         var preList = this.preVisibleCells;
         var curList = this.visibleCells;
-        preList.iterate(function (cell) {
-            if (!curList.contains(cell)) {
-                this.hideCell(cell);
+        var self = this;
+        preList.forEach(function (cell) {
+            if (!curList.has(cell)) {
+                self.hideCell(cell);
             }
-        }, this);
+        });
     };
 
     var HideCell = function (cell) {
@@ -4521,7 +4646,7 @@
 
     var IsCellVisible = function (cellIdx) {
         var cell = this.table.getCell(cellIdx, false);
-        return cell && this.visibleCells.contains(cell);
+        return cell && this.visibleCells.has(cell);
     };
 
     var PointToCellIndex = function (x, y) {
@@ -4551,15 +4676,47 @@
         return this.getCellContainer(cellIdx);
     };
 
+    // Use this function when you know this Set will be modified during the iteration, otherwise use `iterate`.
+    var Each = function (set, callback, scope) {
+        set = Array.from(set); // Clone one
+        for (var i = 0, cnt = set.length; i < cnt; i++) {
+            if (scope) {
+                if (callback.call(scope, set[i], i) === false) {
+                    break;
+                }
+            } else {
+                if (callback(set[i], i) === false) {
+                    break
+                }        }
+        }
+    };
+
+    // For when you absolutely know this Set won't be modified during the iteration.
+    var Iterate = function (set, callback, scope) {
+        var i = 0;
+        for (var value of set) {
+            if (scope) {
+                if (callback.call(scope, value, i) === false) {
+                    break;
+                }
+            } else {
+                if (callback(value, i) === false) {
+                    break
+                }        }
+
+            i++;
+        }
+    };
+
     // For when you know this Set will be modified during the iteration
     var EachVisibleCell = function (callback, scope) {
-        this.visibleCells.each(callback, scope);
+        Each(this.visibleCells, callback, scope);
         return this;
     };
 
     // For when you absolutely know this Set won't be modified during the iteration
     var IterateVisibleCell = function (callback, scope) {
-        this.visibleCells.iterate(callback, scope);
+        Iterate(this.visibleCells, callback, scope);
         return this;
     };
 
@@ -4627,7 +4784,7 @@
         for (var i = cellIdx, endIdx = cellIdx + count; i < endIdx; i++) {
             cell = this.getCell(i, false);
             if (cell) {
-                if (this.visibleCells.contains(cell)) {
+                if (this.visibleCells.has(cell)) {
                     HideCell.call(this, cell);
                     this.visibleCells.delete(cell);
                 }
@@ -4698,7 +4855,6 @@
     );
 
     const Group = Phaser.GameObjects.Group;
-    const Set = Phaser.Structs.Set;
     const GetValue$1 = Phaser.Utils.Objects.GetValue;
 
     class GridTable extends ContainerLite {

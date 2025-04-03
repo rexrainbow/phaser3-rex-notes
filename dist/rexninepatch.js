@@ -582,7 +582,7 @@
             .setTexture(key, frame)
             .setDisplaySize(width, height);
 
-        this.draw(gameObject, x, y);
+        this.draw(gameObject, x, y).render();
     };
 
     var DrawTileSprite = function (key, frame, x, y, width, height) {
@@ -590,7 +590,7 @@
             .setTexture(key, frame)
             .setSize(width, height);
 
-        this.draw(gameObject, x, y);
+        this.draw(gameObject, x, y).render();
     };
 
     const RenderTexture = Phaser.GameObjects.RenderTexture;

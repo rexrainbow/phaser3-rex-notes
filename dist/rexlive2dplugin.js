@@ -11397,8 +11397,7 @@
         // Load texture
         var textures = data.textures;
         for (var i in textures) {
-            // TODO: texture is upside-down, flip y again
-            // textures[i] is a WebGLTextureWrapperS
+            // textures[i] is a WebGLTextureWrapper
             this.getRenderer().bindTexture(parseInt(i), textures[i].webGLTexture);
         }
 
@@ -12445,7 +12444,7 @@
             this.setTimeScale(1);
         }
 
-        render(renderer, drawingContext, calcMatrix) {
+        render(renderer, drawingContext, calcMatrix, displayList, displayListIndex) {
             // Ensure the DrawingContext framebuffer is bound.
             // This allows you to use Filters on the external render.
             renderer.glWrapper.updateBindingsFramebuffer({
@@ -13684,12 +13683,12 @@
                         // Add image to textureManager manually
                         if (!textureManager.exists(key)) {
                             texture = textureManager.addImage(key, file.data);
-                            texture.source[0].setFlipY(false);
+                            texture.source[0].setFlipY(false); // Default is flipY, disable this behavior
                         } else {
                             texture = textureManager.get(key);
                         }
 
-                        // Store glTexture (textureWrapper) to live2d data cache
+                        // Store glTexture (WebGLTextureWrapper) to live2d data cache
                         fileData = texture.source[0].glTexture;
                     }
 

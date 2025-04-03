@@ -4,7 +4,8 @@
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rextextareainput = factory());
 })(this, (function () { 'use strict';
 
-    const MinVersion = 60;
+    const MainVersionNumber = 4;
+    const SubVersionNumber = 0;
 
     var IsChecked = false;
 
@@ -14,14 +15,14 @@
         }
 
         if (minVersion === undefined) {
-            minVersion = MinVersion;
+            minVersion = SubVersionNumber;
         }
         var version = Phaser.VERSION.split('.');
         var mainVersion = parseInt(version[0]);
-        if (mainVersion === 3) {
-            var currentVersion = parseInt(version[1]);
-            if (currentVersion < minVersion) {
-                console.error(`Minimum supported version : ${mainVersion}.${currentVersion}`);
+        if (mainVersion === MainVersionNumber) {
+            var subVersion = parseInt(version[1]);
+            if (subVersion < minVersion) {
+                console.error(`Minimum supported version : ${mainVersion}.${subVersion}`);
             }
         } else {
             console.error(`Can't supported version : ${mainVersion}`);
@@ -978,6 +979,7 @@
         },
     };
 
+    // canvas mask only
     var Mask = {
         updateChildMask(child) {
             // Don't propagate null mask to clear children's mask
@@ -2127,6 +2129,9 @@
         }
 
         var gameObjects = config.gameObjects;
+        if (!Array.isArray(gameObjects)) {
+            gameObjects = [gameObjects];
+        }
         var renderTexture = config.renderTexture;  // renderTexture, or dynamicTexture
         var saveTexture = config.saveTexture;
         var x = GetValue$1f(config, 'x', undefined);
@@ -2196,7 +2201,7 @@
 
         // Draw gameObjects
         gameObjects = SortGameObjectsByDepth(Clone(gameObjects));
-        renderTexture.draw(gameObjects);
+        renderTexture.draw(gameObjects).render();
 
         // Save render result to texture
         if (saveTexture) {
@@ -14490,7 +14495,7 @@
     };
 
     /*
-    src: {
+    shapeData: {
         fillColor, 
         fillAlpha, 
         pathData, 
@@ -14498,41 +14503,49 @@
     }
     */
 
-    var Utils$2 = Phaser.Renderer.WebGL.Utils;
+    var Utils$1 = Phaser.Renderer.WebGL.Utils;
 
-    var FillPathWebGL = function (pipeline, calcMatrix, src, alpha, dx, dy)
-    {
-        var fillTintColor = Utils$2.getTintAppendFloatAlpha(src.fillColor, src.fillAlpha * alpha);
+    var FillPathWebGL = function (drawingContext, submitter, calcMatrix, gameObject, shapeData, alpha, dx, dy) {
+        // This is very similar to the FillPath RenderNode, but it already
+        // has access to the Earcut indexes, so it doesn't need to calculate them.
 
-        var path = src.pathData;
-        var pathIndexes = src.pathIndexes;
+        var fillTintColor = Utils$1.getTintAppendFloatAlpha(shapeData.fillColor, shapeData.fillAlpha * alpha);
 
-        for (var i = 0; i < pathIndexes.length; i += 3)
-        {
-            var p0 = pathIndexes[i] * 2;
-            var p1 = pathIndexes[i + 1] * 2;
-            var p2 = pathIndexes[i + 2] * 2;
+        var path = shapeData.pathData;
+        var pathIndexes = shapeData.pathIndexes;
 
-            var x0 = path[p0 + 0] - dx;
-            var y0 = path[p0 + 1] - dy;
-            var x1 = path[p1 + 0] - dx;
-            var y1 = path[p1 + 1] - dy;
-            var x2 = path[p2 + 0] - dx;
-            var y2 = path[p2 + 1] - dy;
+        var length = path.length;
+        var pathIndex, pointX, pointY, x, y;
 
-            var tx0 = calcMatrix.getX(x0, y0);
-            var ty0 = calcMatrix.getY(x0, y0);
-            var tx1 = calcMatrix.getX(x1, y1);
-            var ty1 = calcMatrix.getY(x1, y1);
-            var tx2 = calcMatrix.getX(x2, y2);
-            var ty2 = calcMatrix.getY(x2, y2);
+        var vertices = Array(length * 2);
+        var colors = Array(length);
 
-            pipeline.batchTri(src, tx0, ty0, tx1, ty1, tx2, ty2, 0, 0, 1, 1, fillTintColor, fillTintColor, fillTintColor, 2);
+        var verticesIndex = 0;
+        var colorsIndex = 0;
+
+        for (pathIndex = 0; pathIndex < length; pathIndex += 2) {
+            pointX = path[pathIndex] - dx;
+            pointY = path[pathIndex + 1] - dy;
+
+            // Transform the point.
+            x = calcMatrix.getX(pointX, pointY);
+            y = calcMatrix.getY(pointX, pointY);
+
+            vertices[verticesIndex++] = x;
+            vertices[verticesIndex++] = y;
+            colors[colorsIndex++] = fillTintColor;
         }
+
+        submitter.batch(
+            drawingContext,
+            pathIndexes,
+            vertices,
+            colors
+        );
     };
 
     /*
-    src: {
+    shapeData: {
         strokeColor,
         strokeAlpha,
         pathData,
@@ -14540,85 +14553,79 @@
         closePath
     }
     */
-    var Utils$1 = Phaser.Renderer.WebGL.Utils;
+    var Utils = Phaser.Renderer.WebGL.Utils;
 
-    var StrokePathWebGL = function (pipeline, src, alpha, dx, dy)
-    {
-        var strokeTint = pipeline.strokeTint;
-        var strokeTintColor = Utils$1.getTintAppendFloatAlpha(src.strokeColor, src.strokeAlpha * alpha);
+    var StrokePathWebGL = function (drawingContext, submitter, matrix, gameObject, shapeData, alpha, dx, dy) {
+        var strokeTintColor = Utils.getTintAppendFloatAlpha(shapeData.strokeColor, shapeData.strokeAlpha * alpha);
 
-        strokeTint.TL = strokeTintColor;
-        strokeTint.TR = strokeTintColor;
-        strokeTint.BL = strokeTintColor;
-        strokeTint.BR = strokeTintColor;
-
-        var path = src.pathData;
+        var path = shapeData.pathData;
         var pathLength = path.length - 1;
-        var lineWidth = src.lineWidth;
-        var halfLineWidth = lineWidth / 2;
+        var lineWidth = shapeData.lineWidth;
+        var openPath = !shapeData.closePath;
 
-        var px1 = path[0] - dx;
-        var py1 = path[1] - dy;
+        var strokePath = gameObject.customRenderNodes.StrokePath || gameObject.defaultRenderNodes.StrokePath;
 
-        if (!src.closePath)
-        {
+        var pointPath = [];
+
+        // Don't add the last point to open paths.
+        if (openPath) {
             pathLength -= 2;
         }
 
-        for (var i = 2; i < pathLength; i += 2)
-        {
-            var px2 = path[i] - dx;
-            var py2 = path[i + 1] - dy;
-
-            pipeline.batchLine(
-                px1,
-                py1,
-                px2,
-                py2,
-                halfLineWidth,
-                halfLineWidth,
-                lineWidth,
-                i - 2,
-                (src.closePath) ? (i === pathLength - 1) : false
-            );
-
-            px1 = px2;
-            py1 = py2;
+        for (var i = 0; i < pathLength; i += 2) {
+            var x = path[i] - dx;
+            var y = path[i + 1] - dy;
+            if (i > 0) {
+                if (x === path[i - 2] && y === path[i - 1]) {
+                    // Duplicate point, skip it
+                    continue;
+                }
+            }
+            pointPath.push({
+                x: x,
+                y: y,
+                width: lineWidth
+            });
         }
+
+        strokePath.run(
+            drawingContext,
+            submitter,
+            pointPath,
+            lineWidth,
+            openPath,
+            matrix,
+            strokeTintColor, strokeTintColor, strokeTintColor, strokeTintColor
+        );
     };
 
     const GetCalcMatrix$1 = Phaser.GameObjects.GetCalcMatrix;
 
-    var PolygonWebGLRenderer = function (renderer, src, camera, parentMatrix) {    
+    var PolygonWebGLRenderer = function (renderer, src, drawingContext, parentMatrix) {
         if (src.dirty) {
             src.updateData();
             src.dirty = false;
         }
 
+        var camera = drawingContext.camera;
         camera.addToRenderList(src);
 
-        var pipeline = renderer.pipelines.set(src.pipeline);
-
-        var result = GetCalcMatrix$1(src, camera, parentMatrix);
-
-        var calcMatrix = pipeline.calcMatrix.copyFrom(result.calc);
+        var calcMatrix = GetCalcMatrix$1(src, camera, parentMatrix, !drawingContext.useCanvas).calc;
 
         var dx = src._displayOriginX;
         var dy = src._displayOriginY;
 
-        var alpha = camera.alpha * src.alpha;
+        var alpha = src.alpha;
 
-        renderer.pipelines.preBatch(src);
+        var submitter = src.customRenderNodes.Submitter || src.defaultRenderNodes.Submitter;
 
         if (src.isFilled) {
-            FillPathWebGL(pipeline, calcMatrix, src, alpha, dx, dy);
+            FillPathWebGL(drawingContext, submitter, calcMatrix, src, src, alpha, dx, dy);
         }
 
         if (src.isStroked) {
-            StrokePathWebGL(pipeline, src, alpha, dx, dy);
+            StrokePathWebGL(drawingContext, submitter, calcMatrix, src, src, alpha, dx, dy);
         }
-
-        renderer.pipelines.postBatch(src);
     };
 
     var FillStyleCanvas = function (ctx, src, altColor, altAlpha)
@@ -15565,33 +15572,29 @@
 
     const GetCalcMatrix = Phaser.GameObjects.GetCalcMatrix;
 
-    var WebGLRenderer$1 = function (renderer, src, camera, parentMatrix) {
+    var WebGLRenderer$1 = function (renderer, src, drawingContext, parentMatrix) {
         src.updateData();
+
+        var camera = drawingContext.camera;
         camera.addToRenderList(src);
 
-        var pipeline = renderer.pipelines.set(src.pipeline);
-
-        var result = GetCalcMatrix(src, camera, parentMatrix);
-
-        var calcMatrix = pipeline.calcMatrix.copyFrom(result.calc);
+        var calcMatrix = GetCalcMatrix(src, camera, parentMatrix, !drawingContext.useCanvas).calc;
 
         var dx = src._displayOriginX;
         var dy = src._displayOriginY;
 
-        var alpha = camera.alpha * src.alpha;
+        var alpha = src.alpha;
 
-        renderer.pipelines.preBatch(src);
+        var submitter = src.customRenderNodes.Submitter || src.defaultRenderNodes.Submitter;
 
         var shapes = src.geom,
             shape;
         for (var i = 0, cnt = shapes.length; i < cnt; i++) {
             shape = shapes[i];
             if (shape.visible) {
-                shape.webglRender(pipeline, calcMatrix, alpha, dx, dy);
+                shape.webglRender(drawingContext, submitter, calcMatrix, src, alpha, dx, dy);
             }
         }
-
-        renderer.pipelines.postBatch(src);
     };
 
     const SetTransform = Phaser.Renderer.Canvas.SetTransform;
@@ -16117,7 +16120,7 @@
             return this;
         }
 
-        webglRender(pipeline, calcMatrix, alpha, dx, dy) {
+        webglRender(drawingContext, submitter, gameObject, calcMatrix, alpha, dx, dy) {
 
         }
 
@@ -16154,13 +16157,13 @@
             return this;
         }
 
-        webglRender(pipeline, calcMatrix, alpha, dx, dy) {
+        webglRender(drawingContext, submitter, calcMatrix, gameObject, alpha, dx, dy) {
             if (this.isFilled) {
-                FillPathWebGL(pipeline, calcMatrix, this, alpha, dx, dy);
+                FillPathWebGL(drawingContext, submitter, calcMatrix, gameObject, this, alpha, dx, dy);
             }
 
             if (this.isStroked) {
-                StrokePathWebGL(pipeline, this, alpha, dx, dy);
+                StrokePathWebGL(drawingContext, submitter, calcMatrix, gameObject, this, alpha, dx, dy);
             }
         }
 
@@ -16898,11 +16901,11 @@
         }
     }
 
-    Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
+    Phaser.Renderer.WebGL.Utils;
 
     Phaser.Utils.Objects.GetValue;
 
-    Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
+    Phaser.Renderer.WebGL.Utils;
 
     var UpdateShapes = function () {
         var skewX = this.skewX;
@@ -17278,14 +17281,18 @@
         return false;
     };
 
-    var GetFXFactory = function (gameObject) {
-        if (gameObject.preFX) {
-            return gameObject.preFX;
+    var GetFilterList = function (gameObject, external) {
+        if (external === undefined) {
+            external = false;
         }
-        if (gameObject.postFX) {
-            return gameObject.postFX;
+
+        if (!gameObject.filters) {
+            gameObject.enableFilters().focusFilters();
         }
-        return null;
+
+        var filterList = (!external) ? gameObject.filters.internal : gameObject.filters.external;
+
+        return filterList;
     };
 
     var AddClearEffectCallback = function (gameObject, effectSwitchName) {
@@ -17312,10 +17319,7 @@
             return gameObject;
         }
 
-        var fxFactory = GetFXFactory(gameObject);
-        if (!fxFactory) {
-            return gameObject;
-        }
+        var filterList = GetFilterList(gameObject);
 
         var barrel;
         Object.defineProperty(gameObject, 'barrel', {
@@ -17331,12 +17335,12 @@
 
                 if ((barrel === null) || (barrel === false)) {
                     if (gameObject._barrelEffect) {
-                        fxFactory.remove(gameObject._barrelEffect);
+                        filterList.remove(gameObject._barrelEffect);
                         gameObject._barrelEffect = undefined;
                     }
                 } else {
                     if (!gameObject._barrelEffect) {
-                        gameObject._barrelEffect = fxFactory.addBarrel();
+                        gameObject._barrelEffect = filterList.addBarrel();
                     }
                     gameObject._barrelEffect.amount = barrel;
                 }
@@ -17357,10 +17361,7 @@
             return gameObject;
         }
 
-        var fxFactory = GetFXFactory(gameObject);
-        if (!fxFactory) {
-            return gameObject;
-        }
+        var filterList = GetFilterList(gameObject);
 
         var EffectInstancePropertyName = `_${effectName}Effect`;
 
@@ -17378,15 +17379,15 @@
 
                 if ((currentValue === null) || (currentValue === false)) {
                     if (gameObject[EffectInstancePropertyName]) {
-                        fxFactory.remove(gameObject[EffectInstancePropertyName]);
+                        filterList.remove(gameObject[EffectInstancePropertyName]);
                         gameObject[EffectInstancePropertyName] = undefined;
                     }
                 } else {
                     if (!gameObject[EffectInstancePropertyName]) {
-                        gameObject[EffectInstancePropertyName] = fxFactory.addColorMatrix();
+                        gameObject[EffectInstancePropertyName] = filterList.addColorMatrix();
                     }
                     var effectInstance = gameObject[EffectInstancePropertyName];
-                    effectInstance[effectName]((inputMode === 1) ? value : undefined);
+                    effectInstance.colorMatrix[effectName]((inputMode === 1) ? value : undefined);
                 }
 
             },
@@ -17404,158 +17405,13 @@
         return gameObject;
     };
 
-    var AddBloomProperties = function (gameObject) {
-        // Don't attach properties again
-        if (HasProperty(gameObject, 'bloomColor')) {
-            return gameObject;
-        }
-
-        var fxFactory = GetFXFactory(gameObject);
-        if (!fxFactory) {
-            return gameObject;
-        }
-
-        var bloomColor,
-            bloomOffsetX = 1,
-            bloomOffsetY = 1,
-            bloomBlurStrength = 1,
-            bloomStrength = 1,
-            bloomSteps = 4;
-        Object.defineProperty(gameObject, 'bloomColor', {
-            get: function () {
-                return bloomColor;
-            },
-            set: function (value) {
-                if (bloomColor === value) {
-                    return;
-                }
-
-                bloomColor = value;
-
-                if ((bloomColor === null) || (bloomColor === false)) {
-                    if (gameObject._bloom) {
-                        fxFactory.remove(gameObject._bloom);
-                        gameObject._bloom = undefined;
-                        fxFactory.setPadding(0);
-                    }
-                } else {
-                    if (!gameObject._bloom) {
-                        gameObject._bloom = fxFactory.addBloom(bloomColor, bloomOffsetX, bloomOffsetY, bloomBlurStrength, bloomStrength, bloomSteps);
-                        fxFactory.setPadding(Math.max(bloomOffsetX, bloomOffsetY) + 1);
-                    }
-
-                    gameObject._bloom.color = bloomColor;
-                }
-
-            },
-        });
-
-        Object.defineProperty(gameObject, 'bloomOffsetX', {
-            get: function () {
-                return bloomOffsetX;
-            },
-            set: function (value) {
-                if (bloomOffsetX === value) {
-                    return;
-                }
-
-                bloomOffsetX = value;
-
-                if (gameObject._bloom) {
-                    var offset = Math.max(bloomOffsetX, bloomOffsetY);
-                    fxFactory.setPadding(offset + 1);
-                    gameObject._bloom.offsetX = bloomOffsetX;
-                }
-            },
-        });
-
-        Object.defineProperty(gameObject, 'bloomOffsetY', {
-            get: function () {
-                return bloomOffsetY;
-            },
-            set: function (value) {
-                if (bloomOffsetY === value) {
-                    return;
-                }
-
-                bloomOffsetY = value;
-
-                if (gameObject._bloom) {
-                    var offset = Math.max(bloomOffsetX, bloomOffsetY);
-                    fxFactory.setPadding(offset + 1);
-                    gameObject._bloom.offsetY = bloomOffsetY;
-                }
-            },
-        });
-
-        Object.defineProperty(gameObject, 'bloomBlurStrength', {
-            get: function () {
-                return bloomBlurStrength;
-            },
-            set: function (value) {
-                if (bloomBlurStrength === value) {
-                    return;
-                }
-
-                bloomBlurStrength = value;
-
-                if (gameObject._bloom) {
-                    gameObject._bloom.blurStrength = bloomBlurStrength;
-                }
-            },
-        });
-
-        Object.defineProperty(gameObject, 'bloomStrength', {
-            get: function () {
-                return bloomStrength;
-            },
-            set: function (value) {
-                if (bloomStrength === value) {
-                    return;
-                }
-
-                bloomStrength = value;
-
-                if (gameObject._bloom) {
-                    gameObject._bloom.strength = bloomStrength;
-                }
-            },
-        });
-
-        Object.defineProperty(gameObject, 'bloomSteps', {
-            get: function () {
-                return bloomSteps;
-            },
-            set: function (value) {
-                if (bloomSteps === value) {
-                    return;
-                }
-
-                bloomSteps = value;
-
-                if (gameObject._bloom) {
-                    gameObject._bloom.steps = bloomSteps;
-                }
-            },
-        });
-
-        gameObject.bloomColor = null;
-
-        AddClearEffectCallback(gameObject, 'bloomColor');
-
-        return gameObject;
-    };
-
     var AddBlurProperties = function (gameObject) {
         // Don't attach properties again
         if (HasProperty(gameObject, 'blurColor')) {
             return gameObject;
         }
 
-        var fxFactory = GetFXFactory(gameObject);
-        if (!fxFactory) {
-            return gameObject;
-        }
+        var filterList = GetFilterList(gameObject);
 
         var blurColor,
             blurQuality = 0,
@@ -17576,14 +17432,12 @@
 
                 if ((blurColor === null) || (blurColor === false)) {
                     if (gameObject._blur) {
-                        fxFactory.remove(gameObject._blur);
+                        filterList.remove(gameObject._blur);
                         gameObject._blur = undefined;
-                        fxFactory.setPadding(0);
                     }
                 } else {
                     if (!gameObject._blur) {
-                        gameObject._blur = fxFactory.addBlur(blurQuality, blurX, blurY, blurStrength, blurColor, blurSteps);
-                        fxFactory.setPadding(Math.max(blurX, blurY) + 1);
+                        gameObject._blur = filterList.addBlur(blurQuality, blurX, blurY, blurStrength, blurColor, blurSteps);
                     }
 
                     gameObject._blur.color = blurColor;
@@ -17622,8 +17476,6 @@
                 blurX = value;
 
                 if (gameObject._blur) {
-                    var offset = Math.max(blurX, blurY);
-                    fxFactory.setPadding(offset + 1);
                     gameObject._blur.x = blurX;
                 }
             },
@@ -17641,8 +17493,6 @@
                 blurY = value;
 
                 if (gameObject._blur) {
-                    var offset = Math.max(blurX, blurY);
-                    fxFactory.setPadding(offset + 1);
                     gameObject._blur.y = blurY;
                 }
             },
@@ -17695,10 +17545,7 @@
             return gameObject;
         }
 
-        var fxFactory = GetFXFactory(gameObject);
-        if (!fxFactory) {
-            return gameObject;
-        }
+        var filterList = GetFilterList(gameObject);
 
         var bokehRadius,
             bokehAmount = 1,
@@ -17716,12 +17563,12 @@
 
                 if ((bokehRadius === null) || (bokehRadius === false)) {
                     if (gameObject._bokeh) {
-                        fxFactory.remove(gameObject._bokeh);
+                        filterList.remove(gameObject._bokeh);
                         gameObject._bokeh = undefined;
                     }
                 } else {
                     if (!gameObject._bokeh) {
-                        gameObject._bokeh = fxFactory.addBokeh(bokehRadius, bokehAmount, bokehContrast);
+                        gameObject._bokeh = filterList.addBokeh(bokehRadius, bokehAmount, bokehContrast);
                     }
 
                     gameObject._bokeh.radius = bokehRadius;
@@ -17781,144 +17628,6 @@
         return gameObject;
     };
 
-    var AddCircleProperties = function (gameObject) {
-        // Don't attach properties again
-        if (HasProperty(gameObject, 'circleColor')) {
-            return gameObject;
-        }
-
-        var fxFactory = GetFXFactory(gameObject);
-        if (!fxFactory) {
-            return gameObject;
-        }
-
-        var circleColor,
-            circleThickness = 8,
-            circleBackgroundColor = 0x000000,
-            circleBackgroundAlpha = 0.4,
-            circleScale = 1,
-            circleFeather = 0.005;
-        Object.defineProperty(gameObject, 'circleColor', {
-            get: function () {
-                return circleColor;
-            },
-            set: function (value) {
-                if (circleColor === value) {
-                    return;
-                }
-
-                circleColor = value;
-
-                if ((circleColor === null) || (circleColor === false)) {
-                    if (gameObject._circle) {
-                        fxFactory.remove(gameObject._circle);
-                        gameObject._circle = undefined;
-                    }
-                } else {
-                    if (!gameObject._circle) {
-                        gameObject._circle = fxFactory.addCircle(circleThickness, circleColor, circleBackgroundColor, circleScale, circleFeather);
-                        gameObject.circleBackgroundAlpha = circleBackgroundAlpha;
-                    }
-
-                    gameObject._circle.color = circleColor;
-                }
-
-            },
-        });
-
-        Object.defineProperty(gameObject, 'circleThickness', {
-            get: function () {
-                return circleThickness;
-            },
-            set: function (value) {
-                if (circleThickness === value) {
-                    return;
-                }
-
-                circleThickness = value;
-
-                if (gameObject._circle) {
-                    gameObject._circle.thickness = circleThickness;
-                }
-            },
-        });
-
-        Object.defineProperty(gameObject, 'circleBackgroundColor', {
-            get: function () {
-                return circleBackgroundColor;
-            },
-            set: function (value) {
-                if (circleBackgroundColor === value) {
-                    return;
-                }
-
-                circleBackgroundColor = value;
-
-                if (gameObject._circle) {
-                    gameObject._circle.backgroundColor = circleBackgroundColor;
-                }
-            },
-        });
-
-        Object.defineProperty(gameObject, 'circleBackgroundAlpha', {
-            get: function () {
-                return circleBackgroundAlpha;
-            },
-            set: function (value) {
-                if (circleBackgroundAlpha === value) {
-                    return;
-                }
-
-                circleBackgroundAlpha = value;
-
-                if (gameObject._circle) {
-                    gameObject._circle.glcolor2[3] = circleBackgroundAlpha;
-                }
-            },
-        });
-
-
-        Object.defineProperty(gameObject, 'circleScale', {
-            get: function () {
-                return circleScale;
-            },
-            set: function (value) {
-                if (circleScale === value) {
-                    return;
-                }
-
-                circleScale = value;
-
-                if (gameObject._circle) {
-                    gameObject._circle.scale = circleScale;
-                }
-            },
-        });
-
-        Object.defineProperty(gameObject, 'circleFeather', {
-            get: function () {
-                return circleFeather;
-            },
-            set: function (value) {
-                if (circleFeather === value) {
-                    return;
-                }
-
-                circleFeather = value;
-
-                if (gameObject._circle) {
-                    gameObject._circle.feather = circleFeather;
-                }
-            },
-        });
-
-        gameObject.circleColor = null;
-
-        AddClearEffectCallback(gameObject, 'circleColor');
-
-        return gameObject;
-    };
-
     var AddContrastProperties = function (gameObject) {
         AddColorMatrixEffectPropertiesBase(gameObject, 'contrast', 1);
         return gameObject;
@@ -17940,10 +17649,7 @@
             return gameObject;
         }
 
-        var fxFactory = GetFXFactory(gameObject);
-        if (!fxFactory) {
-            return gameObject;
-        }
+        var filterList = GetFilterList(gameObject);
 
         var displacementKey,
             displacementX = 0.005,
@@ -17961,12 +17667,12 @@
 
                 if ((displacementKey === null) || (displacementKey === false)) {
                     if (gameObject._displacement) {
-                        fxFactory.remove(gameObject._displacement);
+                        filterList.remove(gameObject._displacement);
                         gameObject._displacement = undefined;
                     }
                 } else {
                     if (!gameObject._displacement) {
-                        gameObject._displacement = fxFactory.addDisplacement(displacementKey, displacementX, displacementY);
+                        gameObject._displacement = filterList.addDisplacement(displacementKey, displacementX, displacementY);
                     }
 
                     gameObject._displacement.setTexture(displacementKey);
@@ -18022,10 +17728,7 @@
             return gameObject;
         }
 
-        var fxFactory = GetFXFactory(gameObject);
-        if (!fxFactory) {
-            return gameObject;
-        }
+        var filterList = GetFilterList(gameObject);
 
         var glowColor,
             glowOuterStrength = 4,
@@ -18043,14 +17746,12 @@
 
                 if ((glowColor === null) || (glowColor === false)) {
                     if (gameObject._glow) {
-                        fxFactory.remove(gameObject._glow);
+                        filterList.remove(gameObject._glow);
                         gameObject._glow = undefined;
-                        fxFactory.setPadding(0);
                     }
                 } else {
                     if (!gameObject._glow) {
-                        gameObject._glow = fxFactory.addGlow(glowColor, glowOuterStrength, glowInnerStrength);
-                        fxFactory.setPadding(glowOuterStrength + 1);
+                        gameObject._glow = filterList.addGlow(glowColor, glowOuterStrength, glowInnerStrength);
                     }
 
                     gameObject._glow.color = glowColor;
@@ -18071,7 +17772,6 @@
                 glowOuterStrength = value;
 
                 if (gameObject._glow) {
-                    fxFactory.setPadding(glowOuterStrength + 1);
                     gameObject._glow.outerStrength = glowOuterStrength;
                 }
             },
@@ -18097,218 +17797,6 @@
         gameObject.glowColor = null;
 
         AddClearEffectCallback(gameObject, 'glowColor');
-
-        return gameObject;
-    };
-
-    var AddGradientProperties = function (gameObject) {
-        // Don't attach properties again
-        if (HasProperty(gameObject, 'gradientColor')) {
-            return gameObject;
-        }
-
-        var fxFactory = GetFXFactory(gameObject);
-        if (!fxFactory) {
-            return gameObject;
-        }
-
-        var gradientColor1,
-            gradientColor2,
-            gradientAlpha = 0.5,
-            gradientFromX = 0,
-            gradientFromY = 0,
-            gradientToX = 0,
-            gradientToY = 1,
-            gradientSize = 0;
-        Object.defineProperty(gameObject, 'gradientColor', {
-            get: function () {
-                return [gradientColor1, gradientColor2];
-            },
-
-            set: function (value) {
-                var color1, color2;
-                if ((value === null) || (value === false)) {
-                    color1 = null;
-                    color2 = null;
-                } else {
-                    color1 = value[0];
-                    color2 = value[1];
-                }
-
-                if ((gradientColor1 === color1) && (gradientColor2 === color2)) {
-                    return;
-                }
-
-                gradientColor1 = color1;
-                gradientColor2 = color2;
-
-                if ((gradientColor1 === null) || (gradientColor1 === false)) {
-                    if (gameObject._gradient) {
-                        fxFactory.remove(gameObject._gradient);
-                        gameObject._gradient = undefined;
-                    }
-                } else {
-                    if (!gameObject._gradient) {
-                        gameObject._gradient = fxFactory.addGradient(gradientColor1, gradientColor2, gradientAlpha, gradientFromX, gradientFromY, gradientToX, gradientToY, gradientSize);
-                    }
-
-                    gameObject._gradient.color1 = gradientColor1;
-                    gameObject._gradient.color2 = gradientColor2;
-                }
-
-            },
-        });
-
-        Object.defineProperty(gameObject, 'gradientColor1', {
-            get: function () {
-                return gradientColor1;
-            },
-            set: function (value) {
-                if ((value === null) || (value === false)) {
-                    gameObject.gradientColor = value;
-                    return;
-                }
-
-                if (gradientColor1 === value) {
-                    return;
-                }
-
-                gradientColor1 = value;
-
-                if (gameObject._gradient) {
-                    gameObject._gradient.color1 = gradientColor1;
-                }
-            },
-        });
-
-        Object.defineProperty(gameObject, 'gradientColor2', {
-            get: function () {
-                return gradientColor2;
-            },
-            set: function (value) {
-                if ((value === null) || (value === false)) {
-                    gameObject.gradientColor = value;
-                    return;
-                }
-
-                if (gradientColor2 === value) {
-                    return;
-                }
-
-                gradientColor2 = value;
-
-                if (gameObject._gradient) {
-                    gameObject._gradient.color2 = gradientColor2;
-                }
-            },
-        });
-
-        Object.defineProperty(gameObject, 'gradientAlpha', {
-            get: function () {
-                return gradientAlpha;
-            },
-            set: function (value) {
-                if (gradientAlpha === value) {
-                    return;
-                }
-
-                gradientAlpha = value;
-
-                if (gameObject._gradient) {
-                    gameObject._gradient.alpha = gradientAlpha;
-                }
-            },
-        });
-
-        Object.defineProperty(gameObject, 'gradientFromX', {
-            get: function () {
-                return gradientFromX;
-            },
-            set: function (value) {
-                if (gradientFromX === value) {
-                    return;
-                }
-
-                gradientFromX = value;
-
-                if (gameObject._gradient) {
-                    gameObject._gradient.fromX = gradientFromX;
-                }
-            },
-        });
-
-        Object.defineProperty(gameObject, 'gradientFromY', {
-            get: function () {
-                return gradientFromY;
-            },
-            set: function (value) {
-                if (gradientFromY === value) {
-                    return;
-                }
-
-                gradientFromY = value;
-
-                if (gameObject._gradient) {
-                    gameObject._gradient.fromY = gradientFromY;
-                }
-            },
-        });
-
-
-        Object.defineProperty(gameObject, 'gradientToX', {
-            get: function () {
-                return gradientToX;
-            },
-            set: function (value) {
-                if (gradientToX === value) {
-                    return;
-                }
-
-                gradientToX = value;
-
-                if (gameObject._gradient) {
-                    gameObject._gradient.toX = gradientToX;
-                }
-            },
-        });
-
-        Object.defineProperty(gameObject, 'gradientToY', {
-            get: function () {
-                return gradientToY;
-            },
-            set: function (value) {
-                if (gradientToY === value) {
-                    return;
-                }
-
-                gradientToY = value;
-
-                if (gameObject._gradient) {
-                    gameObject._gradient.toY = gradientToY;
-                }
-            },
-        });
-
-        Object.defineProperty(gameObject, 'gradientSize', {
-            get: function () {
-                return gradientSize;
-            },
-            set: function (value) {
-                if (gradientSize === value) {
-                    return;
-                }
-
-                gradientSize = value;
-
-                if (gameObject._gradient) {
-                    gameObject._gradient.size = gradientSize;
-                }
-            },
-        });
-
-        gameObject.gradientColor = null;
-
-        AddClearEffectCallback(gameObject, 'gradientColor');
 
         return gameObject;
     };
@@ -18344,10 +17832,7 @@
             return gameObject;
         }
 
-        var fxFactory = GetFXFactory(gameObject);
-        if (!fxFactory) {
-            return gameObject;
-        }
+        var filterList = GetFilterList(gameObject);
 
         var pixelate;
         Object.defineProperty(gameObject, 'pixelate', {
@@ -18363,12 +17848,12 @@
 
                 if ((pixelate === null) || (pixelate === false)) {
                     if (gameObject._pixelateEffect) {
-                        fxFactory.remove(gameObject._pixelateEffect);
+                        filterList.remove(gameObject._pixelateEffect);
                         gameObject._pixelateEffect = undefined;
                     }
                 } else {
                     if (!gameObject._pixelateEffect) {
-                        gameObject._pixelateEffect = fxFactory.addPixelate();
+                        gameObject._pixelateEffect = filterList.addPixelate();
                     }
                     gameObject._pixelateEffect.amount = pixelate;
                 }
@@ -18388,173 +17873,6 @@
         return gameObject;
     };
 
-    var AddRevealProperties = function (gameObject) {
-        // Don't attach properties again
-        if (HasProperty(gameObject, 'revealLeft')) {
-            return gameObject;
-        }
-
-        var fxFactory = GetFXFactory(gameObject);
-        if (!fxFactory) {
-            return gameObject;
-        }
-
-        var revealLeft,
-            revealRight,
-            revealUp,
-            revealDown,
-            revealWidth = 0.1;
-
-        var ClearRevealFlags = function () {
-            revealLeft = null;
-            revealRight = null;
-            revealUp = null;
-            revealDown = null;
-        };
-
-        var RemoveEffect = function (gameObject) {
-            if (gameObject._revealEffect) {
-                fxFactory.remove(gameObject._revealEffect);
-                gameObject._revealEffect = undefined;
-            }
-        };
-
-        Object.defineProperty(gameObject, 'revealLeft', {
-            get: function () {
-                return revealLeft;
-            },
-            set: function (value) {
-                if (revealLeft === value) {
-                    return;
-                }
-
-                ClearRevealFlags();
-
-                revealLeft = value;
-
-                if ((revealLeft === null) || (revealLeft === false)) {
-                    RemoveEffect(gameObject);
-                } else {
-                    if (!gameObject._revealEffect) {
-                        gameObject._revealEffect = fxFactory.addReveal(revealWidth, 0, 0);
-                    }
-
-                    gameObject._revealEffect.direction = 1;
-                    gameObject._revealEffect.axis = 0;
-                    gameObject._revealEffect.progress = revealLeft;
-                }
-
-            },
-        });
-
-        Object.defineProperty(gameObject, 'revealRight', {
-            get: function () {
-                return revealRight;
-            },
-            set: function (value) {
-                if (revealRight === value) {
-                    return;
-                }
-
-                ClearRevealFlags();
-
-                revealRight = value;
-
-                if ((revealRight === null) || (revealRight === false)) {
-                    RemoveEffect(gameObject);
-                } else {
-                    if (!gameObject._revealEffect) {
-                        gameObject._revealEffect = fxFactory.addReveal(revealWidth, 0, 0);
-                    }
-                    gameObject._revealEffect.direction = 0;
-                    gameObject._revealEffect.axis = 0;
-                    gameObject._revealEffect.progress = revealRight;
-                }
-
-            },
-        });
-
-        Object.defineProperty(gameObject, 'revealUp', {
-            get: function () {
-                return revealUp;
-            },
-            set: function (value) {
-                if (revealUp === value) {
-                    return;
-                }
-
-                ClearRevealFlags();
-
-                revealUp = value;
-
-                if ((revealUp === null) || (revealUp === false)) {
-                    RemoveEffect(gameObject);
-                } else {
-                    if (!gameObject._revealEffect) {
-                        gameObject._revealEffect = fxFactory.addReveal(revealWidth, 0, 0);
-                    }
-                    gameObject._revealEffect.direction = 1;
-                    gameObject._revealEffect.axis = 1;
-                    gameObject._revealEffect.progress = revealUp;
-                }
-
-            },
-        });
-
-        Object.defineProperty(gameObject, 'revealDown', {
-            get: function () {
-                return revealDown;
-            },
-            set: function (value) {
-                if (revealDown === value) {
-                    return;
-                }
-
-                ClearRevealFlags();
-
-                revealDown = value;
-
-                if ((revealDown === null) || (revealDown === false)) {
-                    RemoveEffect(gameObject);
-                } else {
-                    if (!gameObject._revealEffect) {
-                        gameObject._revealEffect = fxFactory.addReveal(revealWidth, 0, 0);
-                    }
-                    gameObject._revealEffect.direction = 0;
-                    gameObject._revealEffect.axis = 1;
-                    gameObject._revealEffect.progress = revealDown;
-                }
-
-            },
-        });
-
-        Object.defineProperty(gameObject, 'revealWidth', {
-            get: function () {
-                return revealWidth;
-            },
-            set: function (value) {
-                if (revealWidth === value) {
-                    return;
-                }
-
-                revealWidth = value;
-
-                if (gameObject._revealEffect) {
-                    gameObject._revealEffect.wipeWidth = revealWidth;
-                }
-            },
-        });
-
-        gameObject.revealLeft = null;
-
-        AddClearEffectCallback(gameObject, 'revealLeft');
-        AddClearEffectCallback(gameObject, 'revealRight');
-        AddClearEffectCallback(gameObject, 'revealUp');
-        AddClearEffectCallback(gameObject, 'revealDown');
-
-        return gameObject;
-    };
-
     var AddSaturateProperties = function (gameObject) {
         AddColorMatrixEffectPropertiesBase(gameObject, 'saturate', 1);
         return gameObject;
@@ -18571,10 +17889,7 @@
             return gameObject;
         }
 
-        var fxFactory = GetFXFactory(gameObject);
-        if (!fxFactory) {
-            return gameObject;
-        }
+        var filterList = GetFilterList(gameObject);
 
         var shadowColor,
             shadowX = 0,
@@ -18596,12 +17911,12 @@
 
                 if ((shadowColor === null) || (shadowColor === false)) {
                     if (gameObject._shadow) {
-                        fxFactory.remove(gameObject._shadow);
+                        filterList.remove(gameObject._shadow);
                         gameObject._shadow = undefined;
                     }
                 } else {
                     if (!gameObject._shadow) {
-                        gameObject._shadow = fxFactory.addShadow(shadowX, shadowY, shadowDecay, shadowPower, shadowColor, shadowSamples, shadowIntensity);
+                        gameObject._shadow = filterList.addShadow(shadowX, shadowY, shadowDecay, shadowPower, shadowColor, shadowSamples, shadowIntensity);
                     }
 
                     gameObject._shadow.color = shadowColor;
@@ -18724,88 +18039,6 @@
         return gameObject;
     };
 
-    var AddShineProperties = function (gameObject) {
-        // Don't attach properties again
-        if (HasProperty(gameObject, 'shineSpeed')) {
-            return gameObject;
-        }
-
-        var fxFactory = GetFXFactory(gameObject);
-        if (!fxFactory) {
-            return gameObject;
-        }
-
-        var shineSpeed,
-            shineLineWidth = 0.5,
-            shineGradient = 3;
-        Object.defineProperty(gameObject, 'shineSpeed', {
-            get: function () {
-                return shineSpeed;
-            },
-            set: function (value) {
-                if (shineSpeed === value) {
-                    return;
-                }
-
-                shineSpeed = value;
-
-                if ((shineSpeed === null) || (shineSpeed === false)) {
-                    if (gameObject._shine) {
-                        fxFactory.remove(gameObject._shine);
-                        gameObject._shine = undefined;
-                    }
-                } else {
-                    if (!gameObject._shine) {
-                        gameObject._shine = fxFactory.addShine(shineSpeed, shineLineWidth, shineGradient);
-                    }
-
-                    gameObject._shine.speed = shineSpeed;
-                }
-
-            },
-        });
-
-        Object.defineProperty(gameObject, 'shineLineWidth', {
-            get: function () {
-                return shineLineWidth;
-            },
-            set: function (value) {
-                if (shineLineWidth === value) {
-                    return;
-                }
-
-                shineLineWidth = value;
-
-                if (gameObject._shine) {
-                    gameObject._shine.lineWidth = shineLineWidth;
-                }
-            },
-        });
-
-        Object.defineProperty(gameObject, 'shineGradient', {
-            get: function () {
-                return shineGradient;
-            },
-            set: function (value) {
-                if (shineGradient === value) {
-                    return;
-                }
-
-                shineGradient = value;
-
-                if (gameObject._shine) {
-                    gameObject._shine.gradient = shineGradient;
-                }
-            },
-        });
-
-        gameObject.shineSpeed = null;
-
-        AddClearEffectCallback(gameObject, 'shineSpeed');
-
-        return gameObject;
-    };
-
     var AddTechnicolorProperties = function (gameObject) {
         AddColorMatrixEffectPropertiesBase(gameObject, 'technicolor');
         return gameObject;
@@ -18817,10 +18050,7 @@
             return gameObject;
         }
 
-        var fxFactory = GetFXFactory(gameObject);
-        if (!fxFactory) {
-            return gameObject;
-        }
+        var filterList = GetFilterList(gameObject);
 
         var tiltShiftRadius,
             tiltShiftAmount = 1,
@@ -18841,12 +18071,12 @@
 
                 if ((tiltShiftRadius === null) || (tiltShiftRadius === false)) {
                     if (gameObject._tiltShift) {
-                        fxFactory.remove(gameObject._tiltShift);
+                        filterList.remove(gameObject._tiltShift);
                         gameObject._tiltShift = undefined;
                     }
                 } else {
                     if (!gameObject._tiltShift) {
-                        gameObject._tiltShift = fxFactory.addTiltShift(tiltShiftRadius, tiltShiftAmount, tiltShiftContrast, tiltShiftBlurX, tiltShiftBlurY, tiltShiftStrength);
+                        gameObject._tiltShift = filterList.addTiltShift(tiltShiftRadius, tiltShiftAmount, tiltShiftContrast, tiltShiftBlurX, tiltShiftBlurY, tiltShiftStrength);
                     }
 
                     gameObject._tiltShift.radius = tiltShiftRadius;
@@ -18947,293 +18177,23 @@
         return gameObject;
     };
 
-    var AddVignetteProperties = function (gameObject) {
-        // Don't attach properties again
-        if (HasProperty(gameObject, 'vignetteRadius')) {
-            return gameObject;
-        }
-
-        var fxFactory = GetFXFactory(gameObject);
-        if (!fxFactory) {
-            return gameObject;
-        }
-
-        var vignetteRadius,
-            vignetteX = 0.5,
-            vignetteY = 0.5,
-            vignetteStrength = 0.5;
-        Object.defineProperty(gameObject, 'vignetteRadius', {
-            get: function () {
-                return vignetteRadius;
-            },
-            set: function (value) {
-                if (vignetteRadius === value) {
-                    return;
-                }
-
-                vignetteRadius = value;
-
-                if ((vignetteRadius === null) || (vignetteRadius === false)) {
-                    if (gameObject._vignette) {
-                        fxFactory.remove(gameObject._vignette);
-                        gameObject._vignette = undefined;
-                    }
-                } else {
-                    if (!gameObject._vignette) {
-                        gameObject._vignette = fxFactory.addVignette(vignetteX, vignetteY, vignetteRadius, vignetteStrength);
-                    }
-
-                    gameObject._vignette.radius = vignetteRadius;
-                }
-
-            },
-        });
-
-        Object.defineProperty(gameObject, 'vignetteX', {
-            get: function () {
-                return vignetteX;
-            },
-            set: function (value) {
-                if (vignetteX === value) {
-                    return;
-                }
-
-                vignetteX = value;
-
-                if (gameObject._vignette) {
-                    gameObject._vignette.x = vignetteX;
-                }
-            },
-        });
-
-        Object.defineProperty(gameObject, 'vignetteY', {
-            get: function () {
-                return vignetteY;
-            },
-            set: function (value) {
-                if (vignetteY === value) {
-                    return;
-                }
-
-                vignetteY = value;
-
-                if (gameObject._vignette) {
-                    gameObject._vignette.y = vignetteY;
-                }
-            },
-        });
-
-        Object.defineProperty(gameObject, 'vignetteStrength', {
-            get: function () {
-                return vignetteStrength;
-            },
-            set: function (value) {
-                if (vignetteStrength === value) {
-                    return;
-                }
-
-                vignetteStrength = value;
-
-                if (gameObject._vignette) {
-                    gameObject._vignette.strength = vignetteStrength;
-                }
-            },
-        });
-
-        gameObject.vignetteRadius = null;
-
-        AddClearEffectCallback(gameObject, 'vignetteRadius');
-
-        return gameObject;
-    };
-
     var AddVintagePinholeProperties = function (gameObject) {
         AddColorMatrixEffectPropertiesBase(gameObject, 'vintagePinhole');
-        return gameObject;
-    };
-
-    var AddWipeProperties = function (gameObject) {
-        // Don't attach properties again
-        if (HasProperty(gameObject, 'wipeLeft')) {
-            return gameObject;
-        }
-
-        var fxFactory = GetFXFactory(gameObject);
-        if (!fxFactory) {
-            return gameObject;
-        }
-
-        var wipeLeft,
-            wipeRight,
-            wipeUp,
-            wipeDown,
-            wipeWidth = 0.1;
-
-        var ClearWipeFlags = function () {
-            wipeLeft = null;
-            wipeRight = null;
-            wipeUp = null;
-            wipeDown = null;
-        };
-
-        var RemoveEffect = function (gameObject) {
-            if (gameObject._wipeEffect) {
-                fxFactory.remove(gameObject._wipeEffect);
-                gameObject._wipeEffect = undefined;
-            }
-        };
-
-        Object.defineProperty(gameObject, 'wipeLeft', {
-            get: function () {
-                return wipeLeft;
-            },
-            set: function (value) {
-                if (wipeLeft === value) {
-                    return;
-                }
-
-                ClearWipeFlags();
-
-                wipeLeft = value;
-
-                if ((wipeLeft === null) || (wipeLeft === false)) {
-                    RemoveEffect(gameObject);
-                } else {
-                    if (!gameObject._wipeEffect) {
-                        gameObject._wipeEffect = fxFactory.addWipe(wipeWidth, 0, 0);
-                    }
-
-                    gameObject._wipeEffect.direction = 1;
-                    gameObject._wipeEffect.axis = 0;
-                    gameObject._wipeEffect.progress = wipeLeft;
-                }
-
-            },
-        });
-
-        Object.defineProperty(gameObject, 'wipeRight', {
-            get: function () {
-                return wipeRight;
-            },
-            set: function (value) {
-                if (wipeRight === value) {
-                    return;
-                }
-
-                ClearWipeFlags();
-
-                wipeRight = value;
-
-                if ((wipeRight === null) || (wipeRight === false)) {
-                    RemoveEffect(gameObject);
-                } else {
-                    if (!gameObject._wipeEffect) {
-                        gameObject._wipeEffect = fxFactory.addWipe(wipeWidth, 0, 0);
-                    }
-                    gameObject._wipeEffect.direction = 0;
-                    gameObject._wipeEffect.axis = 0;
-                    gameObject._wipeEffect.progress = wipeRight;
-                }
-
-            },
-        });
-
-        Object.defineProperty(gameObject, 'wipeUp', {
-            get: function () {
-                return wipeUp;
-            },
-            set: function (value) {
-                if (wipeUp === value) {
-                    return;
-                }
-
-                ClearWipeFlags();
-
-                wipeUp = value;
-
-                if ((wipeUp === null) || (wipeUp === false)) {
-                    RemoveEffect(gameObject);
-                } else {
-                    if (!gameObject._wipeEffect) {
-                        gameObject._wipeEffect = fxFactory.addWipe(wipeWidth, 0, 0);
-                    }
-                    gameObject._wipeEffect.direction = 1;
-                    gameObject._wipeEffect.axis = 1;
-                    gameObject._wipeEffect.progress = wipeUp;
-                }
-
-            },
-        });
-
-        Object.defineProperty(gameObject, 'wipeDown', {
-            get: function () {
-                return wipeDown;
-            },
-            set: function (value) {
-                if (wipeDown === value) {
-                    return;
-                }
-
-                ClearWipeFlags();
-
-                wipeDown = value;
-
-                if ((wipeDown === null) || (wipeDown === false)) {
-                    RemoveEffect(gameObject);
-                } else {
-                    if (!gameObject._wipeEffect) {
-                        gameObject._wipeEffect = fxFactory.addWipe(wipeWidth, 0, 0);
-                    }
-                    gameObject._wipeEffect.direction = 0;
-                    gameObject._wipeEffect.axis = 1;
-                    gameObject._wipeEffect.progress = wipeDown;
-                }
-
-            },
-        });
-
-        Object.defineProperty(gameObject, 'wipeWidth', {
-            get: function () {
-                return wipeWidth;
-            },
-            set: function (value) {
-                if (wipeWidth === value) {
-                    return;
-                }
-
-                wipeWidth = value;
-
-                if (gameObject._wipeEffect) {
-                    gameObject._wipeEffect.wipeWidth = wipeWidth;
-                }
-            },
-        });
-
-        gameObject.wipeLeft = null;
-
-        AddClearEffectCallback(gameObject, 'wipeLeft');
-        AddClearEffectCallback(gameObject, 'wipeRight');
-        AddClearEffectCallback(gameObject, 'wipeUp');
-        AddClearEffectCallback(gameObject, 'wipeDown');
-
         return gameObject;
     };
 
     const EffectMap = {
         barrel: AddBarrelProperties,
         blackWhite: AddBlackWhiteProperties,
-        bloom: AddBloomProperties,
         blur: AddBlurProperties,
         bokeh: AddBokehProperties,
         brightness: AddBrightnessProperties,
         brown: AddBrownProperties,
-        circle: AddCircleProperties,
         contrast: AddContrastProperties,
         desaturate: AddDesaturateProperties,
         desaturateLuminance: AddDesaturateLuminanceProperties,
         displacement: AddDisplacementProperties,
         glow: AddGlowProperties,
-        gradient: AddGradientProperties,
         grayscale: AddGrayscaleProperties,
         hue: AddHueProperties,
         kodachrome: AddKodachromeProperties,
@@ -19241,17 +18201,13 @@
         negative: AddNegativeProperties,
         pixelate: AddPixelateProperties,
         polaroid: AddPolaroidProperties,
-        reveal: AddRevealProperties,
         saturate: AddSaturateProperties,
         sepia: AddSepiaProperties,
         shadow: AddShadowProperties,
         shiftToBGR: AddShiftToBGRProperties,
-        shine: AddShineProperties,
         technicolor: AddTechnicolorProperties,
         tiltShift: AddTiltShiftProperties,
-        vignette: AddVignetteProperties,
         vintagePinhole: AddVintagePinholeProperties,
-        wipe: AddWipeProperties
     };
 
     var AddEffectProperties = function (gameObject, config) {
@@ -20017,7 +18973,7 @@
             .setTexture(key, frame)
             .setDisplaySize(width, height);
 
-        this.draw(gameObject, x, y);
+        this.draw(gameObject, x, y).render();
     };
 
     var DrawTileSprite = function (key, frame, x, y, width, height) {
@@ -20025,7 +18981,7 @@
             .setTexture(key, frame)
             .setSize(width, height);
 
-        this.draw(gameObject, x, y);
+        this.draw(gameObject, x, y).render();
     };
 
     const RenderTexture = Phaser.GameObjects.RenderTexture;
@@ -22725,10 +21681,7 @@
     );
 
     // copy from Phaser.GameObjects.Text
-
-    const Utils = Phaser.Renderer.WebGL.Utils;
-
-    var WebGLRenderer = function (renderer, src, camera, parentMatrix) {
+    var WebGLRenderer = function (renderer, src, drawingContext, parentMatrix) {
         if (src.dirty) {
             src.updateTexture();
             src.dirty = false;
@@ -22738,42 +21691,19 @@
             return;
         }
 
-        camera.addToRenderList(src);
+        drawingContext.camera.addToRenderList(src);
 
-        var frame = src.frame;
-        var width = frame.width;
-        var height = frame.height;
-        var getTint = Utils.getTintAppendFloatAlpha;
-        var pipeline = renderer.pipelines.set(src.pipeline, src);
-        var textureUnit = pipeline.setTexture2D(frame.glTexture, src);
+        var customRenderNodes = src.customRenderNodes;
+        var defaultRenderNodes = src.defaultRenderNodes;
 
-        renderer.pipelines.preBatch(src);
-
-        pipeline.batchTexture(
+        (customRenderNodes.Submitter || defaultRenderNodes.Submitter).run(
+            drawingContext,
             src,
-            frame.glTexture,
-            width, height,
-            src.x, src.y,
-            width / src.resolution, height / src.resolution,
-            src.scaleX, src.scaleY,
-            src.rotation,
-            src.flipX, src.flipY,
-            src.scrollFactorX, src.scrollFactorY,
-            src.displayOriginX, src.displayOriginY,
-            0, 0, width, height,
-            getTint(src.tintTopLeft, camera.alpha * src._alphaTL),
-            getTint(src.tintTopRight, camera.alpha * src._alphaTR),
-            getTint(src.tintBottomLeft, camera.alpha * src._alphaBL),
-            getTint(src.tintBottomRight, camera.alpha * src._alphaBR),
-            src.tintFill,
-            0, 0,
-            camera,
             parentMatrix,
-            false,
-            textureUnit
+            0,
+            customRenderNodes.Texturer || defaultRenderNodes.Texturer,
+            customRenderNodes.Transformer || defaultRenderNodes.Transformer
         );
-
-        renderer.pipelines.postBatch(src);
     };
 
     // copy from Phaser.GameObjects.Text
@@ -22927,6 +21857,9 @@
 
     var TextureMethods = {
         updateTexture(callback, scope) {
+            var canvas = this.canvas;
+            var context = this.context;
+
             if (callback) {
                 var scale = this.resolution;
                 if (scale !== 1) {
@@ -22935,9 +21868,9 @@
                 }
 
                 if (scope) {
-                    callback.call(scope, this.canvas, this.context);
+                    callback.call(scope, canvas, context);
                 } else {
-                    callback(this.canvas, this.context);
+                    callback(canvas, context);
                 }
 
                 if (scale !== 1) {
@@ -22945,15 +21878,20 @@
                 }
             }
 
-            if ((this.canvas.width !== this.frame.width) || (this.canvas.height !== this.frame.height)) {
-                this.frame.setSize(this.canvas.width, this.canvas.height);
+            var newWidth = canvas.width,
+                newHeight = canvas.height;
+            if ((newWidth !== this.frame.width) || (newHeight !== this.frame.height)) {
+                this.frame.setSize(newWidth, newHeight);
+                this.frame.source.updateSize(newWidth, newHeight);
+                this.frame.updateUVs();
             }
             if (this.renderer && this.renderer.gl) {
-                this.frame.source.glTexture = this.renderer.canvasToTexture(this.canvas, this.frame.source.glTexture, true);
+                this.frame.source.glTexture = this.renderer.canvasToTexture(canvas, this.frame.source.glTexture, true);
                 if (typeof WEBGL_DEBUG) {
                     this.frame.glTexture.spectorMetadata = { textureKey: 'Canvas Game Object' };
                 }
             }
+
             this.dirty = false;
 
             var input = this.input;
@@ -23006,6 +21944,7 @@
     const CanvasPool$1 = Phaser.Display.Canvas.CanvasPool;
     const GameObject$1 = Phaser.GameObjects.GameObject;
     const UUID = Phaser.Utils.String.UUID;
+    const DefaultImageNodes = Phaser.Renderer.WebGL.RenderNodes.Defaults.DefaultImageNodes;
 
     class Canvas extends GameObject$1 {
         constructor(scene, x, y, width, height, resolution) {
@@ -23036,14 +21975,12 @@
             width = Math.max(Math.ceil(width * this.resolution), 1);
             height = Math.max(Math.ceil(height * this.resolution), 1);
             this.canvas = CanvasPool$1.create(this, width, height);
-            this.context = this.canvas.getContext('2d', { willReadFrequently: true });
 
             this.dirty = false;
 
             this.setPosition(x, y);
             this.setOrigin(0.5, 0.5);
-            this.initPipeline();
-            this.initPostPipeline(true);
+            this.initRenderNodes(this._defaultRenderNodesMap);
 
             this._crop = this.resetCropObject();
 
@@ -23051,6 +21988,9 @@
             this._textureKey = UUID();
 
             this.texture = scene.sys.textures.addCanvas(this._textureKey, this.canvas);
+
+            //  Set the context to be the CanvasTexture context
+            this.context = this.texture.context;
 
             //  Get the frame
             this.frame = this.texture.get();
@@ -23078,6 +22018,10 @@
             if (texture) {
                 texture.destroy();
             }
+        }
+
+        get _defaultRenderNodesMap() {
+            return DefaultImageNodes;
         }
 
         setResolution(resolution) {
@@ -23130,6 +22074,8 @@
             this.canvas.height = height;
 
             this.frame.setSize(width, height);
+            this.frame.source.updateSize(width, height);
+            this.frame.updateUVs();
 
             this.dirty = true;
             return this;
@@ -23197,10 +22143,10 @@
             Components.Depth,
             Components.Flip,
             Components.GetBounds,
+            Components.Lighting,
             Components.Mask,
             Components.Origin,
-            Components.Pipeline,
-            Components.PostPipeline,
+            Components.RenderNodes,
             Components.ScrollFactor,
             Components.Tint,
             Components.Transform,

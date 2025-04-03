@@ -96,14 +96,13 @@
 
     const Rectangle = Phaser.Geom.Rectangle;
     const CopyRectangle = Phaser.Geom.Rectangle.CopyFrom;
-    const SetStruct = Phaser.Structs.Set;
 
     class ScaleOuter {
         constructor(scene) {
             this.scene = scene;
             // Set gameConfig.scale.mode to Phaser.Scale.RESIZE
 
-            this.cameras = new SetStruct();
+            this.cameras = new Set();
             this.scrollX = 0;
             this.scrollY = 0;
             this.zoom = 1;
@@ -158,7 +157,7 @@
         }
 
         add(camera) {
-            this.cameras.set(camera);
+            this.cameras.add(camera);
             this.scale();
             return this;
         }
@@ -205,7 +204,7 @@
 
         scale() {
             GetScaleOutCameraParameters(this.scene, this);
-            this.cameras.iterate(function (camera, index) {
+            this.cameras.forEach(function (camera, index) {
                 camera.zoomX = this.zoom;
                 camera.zoomY = this.zoom;
                 camera.scrollX = this.scrollX;

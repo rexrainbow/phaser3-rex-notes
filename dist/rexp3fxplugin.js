@@ -4,6 +4,50 @@
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexp3fxplugin = factory());
 })(this, (function () { 'use strict';
 
+    const GameClass = Phaser.Game;
+    var IsGame = function (object) {
+        return (object instanceof GameClass);
+    };
+
+    const SceneClass = Phaser.Scene;
+    var IsSceneObject = function (object) {
+        return (object instanceof SceneClass);
+    };
+
+    var GetGame = function (object) {
+        if ((object == null) || (typeof (object) !== 'object')) {
+            return null;
+        } else if (IsGame(object)) {
+            return object;
+        } else if (IsGame(object.game)) {
+            return object.game;
+        } else if (IsSceneObject(object)) { // object = scene object
+            return object.sys.game;
+        } else if (IsSceneObject(object.scene)) { // object = game object
+            return object.scene.sys.game;
+        }
+    };
+
+    var RegisterFilter = function (game, FilterClass) {
+        var filterName = FilterClass.FilterName;
+        var renderNodes = GetGame(game).renderer.renderNodes;
+        if (renderNodes.hasNode(filterName)) {
+            return;
+        }
+
+        renderNodes.addNodeConstructor(filterName, FilterClass);
+    };
+
+    var AddFilterListMethod = function (name, callback) {
+        var FilterListComponent = Phaser.GameObjects.Components.FilterList.prototype;
+        if (FilterListComponent[name]) {
+            console.warn(`FilterList method: ${name} is already defined`);
+            return;
+        }
+
+        FilterListComponent[name] = callback;
+    };
+
     const StepFilterName = 'FilterP3BloomStep';
 
     // Built-in fx in phaser3
@@ -62,434 +106,6 @@ void main (void) {
         }
 
     }
-
-    const FilterName$4 = 'FilterP3Circle';
-
-    // Built-in fx in phaser3
-
-    const frag$4 = `\
-#pragma phaserTemplate(shaderName)
-
-#ifdef GL_FRAGMENT_PRECISION_HIGH
-#define highmedp highp
-#else
-#define highmedp mediump
-#endif
-precision highmedp float;
-
-// Scene buffer
-uniform sampler2D uMainSampler; 
-varying vec2 outTexCoord;
-
-// Effect parameters
-uniform vec2 texSize;
-uniform vec3 color;
-uniform vec4 backgroundColor;
-uniform vec3 config;
-
-#pragma phaserTemplate(fragmentHeader)
-
-void main (void) {
-    float thickness = config.x;
-    float scale = config.y;
-    float feather = config.z;
-
-    vec4 texture = texture2D(uMainSampler, outTexCoord);
-
-    vec2 position = (gl_FragCoord.xy / texSize.xy) * 2.0 - 1.0;
-
-    float aspectRatio = texSize.x / texSize.y;
-
-    position.x *= aspectRatio;
-
-    float grad = length(position);
-
-    //  height > width
-    float outer = aspectRatio;
-    float inner = outer - (thickness * 2.0 / texSize.y);
-
-    //  width > height
-    if (aspectRatio >= 1.0)
-    {
-        float f = 2.0 + (texSize.y / texSize.x);
-        outer = 1.0;
-        inner = 1.0 - (thickness * f / texSize.x);
-    }
-
-    outer *= scale;
-    inner *= scale;
-
-    float circle = smoothstep(outer, outer - 0.01, grad);
-
-    float ring = circle - smoothstep(inner, inner - feather, grad);
-
-    texture = mix(backgroundColor * backgroundColor.a, texture, texture.a);
-
-    texture = (texture * (circle - ring));
-
-    gl_FragColor = vec4(texture.rgb + (ring * color), texture.a);
-}
-`;
-
-    class CircleFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
-        static FilterName = FilterName$4;
-
-        constructor(manager) {
-            super(FilterName$4, manager, null, frag$4);
-        }
-
-        // This method sets up the uniforms for the shader.
-        setupUniforms(controller, drawingContext) {
-            const programManager = this.programManager;
-
-            programManager.setUniform('texSize', [drawingContext.width, drawingContext.height]);
-            programManager.setUniform('color', controller.glcolor);
-            programManager.setUniform('backgroundColor', controller.glcolor2);
-            programManager.setUniform('config', [controller.thickness, controller.scale, controller.feather]);
-        }
-
-    }
-
-    const FilterName$3 = 'FilterP3Gradient';
-
-    // Built-in fx in phaser3
-
-    const frag$3 = `\
-#pragma phaserTemplate(shaderName)
-
-#ifdef GL_FRAGMENT_PRECISION_HIGH
-#define highmedp highp
-#else
-#define highmedp mediump
-#endif
-precision highmedp float;
-
-#define SRGB_TO_LINEAR(c) pow((c), vec3(2.2))
-#define LINEAR_TO_SRGB(c) pow((c), vec3(1.0 / 2.2))
-#define SRGB(r, g, b) SRGB_TO_LINEAR(vec3(float(r), float(g), float(b)) / 255.0)
-
-// Scene buffer
-uniform sampler2D uMainSampler; 
-varying vec2 outTexCoord;
-
-// Effect parameters
-uniform float alpha;
-uniform vec2 positionFrom;
-uniform vec2 positionTo;
-uniform vec3 color1;
-uniform vec3 color2;
-uniform int size;
-
-#pragma phaserTemplate(fragmentHeader)
-
-float gradientNoise(in vec2 uv)
-{
-    const vec3 magic = vec3(0.06711056, 0.00583715, 52.9829189);
-    return fract(magic.z * fract(dot(uv, magic.xy)));
-}
-
-float stepped (in float s, in float scale, in int steps)
-{
-    return steps > 0 ? floor( s / ((1.0 * scale) / float(steps))) * 1.0 / float(steps - 1) : s;
-}
-
-void main ()
-{
-    vec2 a = positionFrom;
-    vec2 b = positionTo;
-    vec2 ba = b - a;
-
-    float d = dot(outTexCoord - a, ba) / dot(ba, ba);
-    float t = size > 0 ? stepped(d, 1.0, size) : d;
-
-    t = smoothstep(0.0, 1.0, clamp(t, 0.0, 1.0));
-
-    vec3 color = mix(SRGB(color1.r, color1.g, color1.b), SRGB(color2.r, color2.g, color2.b), t);
-
-    color = LINEAR_TO_SRGB(color);
-    color += (1.0 / 255.0) * gradientNoise(outTexCoord) - (0.5 / 255.0);
-
-    vec4 texture = texture2D(uMainSampler, outTexCoord);
-
-    gl_FragColor = vec4(mix(color.rgb, texture.rgb, alpha), 1.0) * texture.a;
-}
-`;
-
-    class GradientFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
-        static FilterName = FilterName$3;
-
-        constructor(manager) {
-            super(FilterName$3, manager, null, frag$3);
-        }
-
-        // This method sets up the uniforms for the shader.
-        setupUniforms(controller, drawingContext) {
-            const programManager = this.programManager;
-
-            programManager.setUniform('alpha', controller.alpha);
-
-            programManager.setUniform('positionFrom', [controller.fromX, controller.fromY]);
-            programManager.setUniform('positionTo', [controller.toX, controller.toY]);
-            programManager.setUniform('color1', controller.glcolor1);
-            programManager.setUniform('color2', controller.glcolor2);
-            programManager.setUniform('size', controller.size);
-        }
-
-    }
-
-    const FilterName$2 = 'FilterP3Shine';
-
-    // Built-in fx in phaser3
-
-    const frag$2 = `\
-#pragma phaserTemplate(shaderName)
-
-#ifdef GL_FRAGMENT_PRECISION_HIGH
-#define highmedp highp
-#else
-#define highmedp mediump
-#endif
-precision highmedp float;
-
-// Scene buffer
-uniform sampler2D uMainSampler; 
-varying vec2 outTexCoord;
-
-// Effect parameters
-uniform vec4 config;
-uniform bool reveal;
-uniform vec2 texSize;
-
-#pragma phaserTemplate(fragmentHeader)
-
-void main (void) {
-    float speed = config.x;
-    float time = config.y;
-    float lineWidth = config.z;
-    float gradient = config.w;
-
-	vec2 uv = gl_FragCoord.xy / texSize;
-
-    vec4 tex = texture2D(uMainSampler, outTexCoord);
-
-    vec4 col1 = vec4(0.3, 0.0, 0.0, 1.0);
-    vec4 col2 = vec4(0.85, 0.85, 0.85, 1.0);
-
-    uv.x = uv.x - mod(time * speed, 2.0) + 0.5;
-    float y = uv.x * gradient;
-
-    float s = smoothstep(y - lineWidth, y, uv.y) - smoothstep(y, y + lineWidth, uv.y);
-
-    gl_FragColor = (((s * col1) + (s * col2)) * tex);
-
-    if (!reveal)
-    {
-        //  Apply the shine effect
-        gl_FragColor += tex;
-    }
-}
-`;
-
-    const GameClass = Phaser.Game;
-    var IsGame = function (object) {
-        return (object instanceof GameClass);
-    };
-
-    const SceneClass = Phaser.Scene;
-    var IsSceneObject = function (object) {
-        return (object instanceof SceneClass);
-    };
-
-    var GetGame = function (object) {
-        if ((object == null) || (typeof (object) !== 'object')) {
-            return null;
-        } else if (IsGame(object)) {
-            return object;
-        } else if (IsGame(object.game)) {
-            return object.game;
-        } else if (IsSceneObject(object)) { // object = scene object
-            return object.sys.game;
-        } else if (IsSceneObject(object.scene)) { // object = game object
-            return object.scene.sys.game;
-        }
-    };
-
-    var GetTickDelta = function (game) {
-        return GetGame(game).loop.delta;
-    };
-
-    const MaxPeriod = 60 * 60 * 1000;
-
-    var GetCurrentTime = function (scene, prevTime) {
-        var tickDelta = GetTickDelta(scene);
-        var currentTime = prevTime + tickDelta;
-        if (currentTime >= MaxPeriod) {
-            currentTime -= MaxPeriod;
-        }
-
-        return currentTime;
-    };
-
-    class ShineFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
-        static FilterName = FilterName$2;
-
-        constructor(manager) {
-            super(FilterName$2, manager, null, frag$2);
-        }
-
-        // This method sets up the uniforms for the shader.
-        setupUniforms(controller, drawingContext) {
-            const programManager = this.programManager;
-
-            controller.now = GetCurrentTime(this.manager.renderer.game, controller.now);
-            programManager.setUniform('config', [controller.speed, controller.now, controller.lineWidth, controller.gradient]);
-            programManager.setUniform('reveal', controller.reveal);
-            programManager.setUniform('texSize', [drawingContext.width, drawingContext.height]);
-        }
-
-    }
-
-    const FilterName$1 = 'FilterP3Vignette';
-
-    // Built-in fx in phaser3
-
-    const frag$1 = `\
-#pragma phaserTemplate(shaderName)
-
-#ifdef GL_FRAGMENT_PRECISION_HIGH
-#define highmedp highp
-#else
-#define highmedp mediump
-#endif
-precision highmedp float;
-
-// Scene buffer
-uniform sampler2D uMainSampler; 
-varying vec2 outTexCoord;
-
-// Effect parameters
-uniform vec2 config;
-uniform vec2 position;
-
-#pragma phaserTemplate(fragmentHeader)
-
-void main (void) {
-    float radius = config.x;
-    float strength = config.y;
-
-    vec4 col = vec4(1.0);
-
-    float d = length(outTexCoord - position);
-
-    if (d <= radius)
-    {
-        float g = d / radius;
-        g = sin(g * 3.14 * strength);
-    	col = vec4(g * g * g);
-    }
-
-    vec4 texture = texture2D(uMainSampler, outTexCoord);
-
-    gl_FragColor = texture * (1.0 - col);
-}
-`;
-
-    class VignetteFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
-        static FilterName = FilterName$1;
-
-        constructor(manager) {
-            super(FilterName$1, manager, null, frag$1);
-        }
-
-        // This method sets up the uniforms for the shader.
-        setupUniforms(controller, drawingContext) {
-            const programManager = this.programManager;
-
-            programManager.setUniform('config', [controller.radius, controller.strength]);
-            programManager.setUniform('position', [controller.x, controller.y]);
-        }
-
-    }
-
-    const FilterName = 'FilterP3Wipe';
-
-    // Built-in fx in phaser3
-
-    const frag = `\
-#pragma phaserTemplate(shaderName)
-
-#ifdef GL_FRAGMENT_PRECISION_HIGH
-#define highmedp highp
-#else
-#define highmedp mediump
-#endif
-precision highmedp float;
-
-// Scene buffer
-uniform sampler2D uMainSampler; 
-varying vec2 outTexCoord;
-
-// Effect parameters
-uniform vec4 config;
-uniform bool reveal;
-
-#pragma phaserTemplate(fragmentHeader)
-
-void main (void) {
-    vec2 uv = outTexCoord;
-
-    vec4 color0;
-    vec4 color1;
-
-    if (reveal) {
-        color0 = vec4(0);
-        color1 = texture2D(uMainSampler, uv);
-    } else {
-        color0 = texture2D(uMainSampler, uv);
-        color1 = vec4(0);
-    }
-
-    float distance = config.x;
-    float width = config.y;
-    float direction = config.z;
-    float axis = uv.x;
-
-    if (config.w == 1.0) {
-        axis = uv.y;
-    }
-
-    float adjust = mix(width, -width, distance);
-    float value = smoothstep(distance - width, distance + width, abs(direction - axis) + adjust);
-    gl_FragColor = mix(color1, color0, value);
-}
-`;
-
-    class WarpFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
-        static FilterName = FilterName;
-
-        constructor(manager) {
-            super(FilterName, manager, null, frag);
-        }
-
-        // This method sets up the uniforms for the shader.
-        setupUniforms(controller, drawingContext) {
-            const programManager = this.programManager;
-
-            programManager.setUniform('config', [controller.progress, controller.wipeWidth, controller.direction, controller.axis]);
-            programManager.setUniform('reveal', controller.reveal);
-        }
-
-    }
-
-    var RegisterFilter = function (game, FilterClass) {
-        var filterName = FilterClass.FilterName;
-        var renderNodes = GetGame(game).renderer.renderNodes;
-        if (renderNodes.hasNode(filterName)) {
-            return;
-        }
-
-        renderNodes.addNodeConstructor(filterName, FilterClass);
-    };
 
     const GetValue$6 = Phaser.Utils.Objects.GetValue;
 
@@ -692,6 +308,93 @@ void main (void) {
 
     }
 
+    const FilterName$4 = 'FilterP3Circle';
+
+    // Built-in fx in phaser3
+
+    const frag$4 = `\
+#pragma phaserTemplate(shaderName)
+
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+#define highmedp highp
+#else
+#define highmedp mediump
+#endif
+precision highmedp float;
+
+// Scene buffer
+uniform sampler2D uMainSampler; 
+varying vec2 outTexCoord;
+
+// Effect parameters
+uniform vec2 texSize;
+uniform vec3 color;
+uniform vec4 backgroundColor;
+uniform vec3 config;
+
+#pragma phaserTemplate(fragmentHeader)
+
+void main (void) {
+    float thickness = config.x;
+    float scale = config.y;
+    float feather = config.z;
+
+    vec4 texture = texture2D(uMainSampler, outTexCoord);
+
+    vec2 position = (gl_FragCoord.xy / texSize.xy) * 2.0 - 1.0;
+
+    float aspectRatio = texSize.x / texSize.y;
+
+    position.x *= aspectRatio;
+
+    float grad = length(position);
+
+    //  height > width
+    float outer = aspectRatio;
+    float inner = outer - (thickness * 2.0 / texSize.y);
+
+    //  width > height
+    if (aspectRatio >= 1.0)
+    {
+        float f = 2.0 + (texSize.y / texSize.x);
+        outer = 1.0;
+        inner = 1.0 - (thickness * f / texSize.x);
+    }
+
+    outer *= scale;
+    inner *= scale;
+
+    float circle = smoothstep(outer, outer - 0.01, grad);
+
+    float ring = circle - smoothstep(inner, inner - feather, grad);
+
+    texture = mix(backgroundColor * backgroundColor.a, texture, texture.a);
+
+    texture = (texture * (circle - ring));
+
+    gl_FragColor = vec4(texture.rgb + (ring * color), texture.a);
+}
+`;
+
+    class CircleFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
+        static FilterName = FilterName$4;
+
+        constructor(manager) {
+            super(FilterName$4, manager, null, frag$4);
+        }
+
+        // This method sets up the uniforms for the shader.
+        setupUniforms(controller, drawingContext) {
+            const programManager = this.programManager;
+
+            programManager.setUniform('texSize', [drawingContext.width, drawingContext.height]);
+            programManager.setUniform('color', controller.glcolor);
+            programManager.setUniform('backgroundColor', controller.glcolor2);
+            programManager.setUniform('config', [controller.thickness, controller.scale, controller.feather]);
+        }
+
+    }
+
     const GetValue$4 = Phaser.Utils.Objects.GetValue;
 
     class CircleController extends Phaser.Filters.Controller {
@@ -791,6 +494,93 @@ void main (void) {
 
     }
 
+    const FilterName$3 = 'FilterP3Gradient';
+
+    // Built-in fx in phaser3
+
+    const frag$3 = `\
+#pragma phaserTemplate(shaderName)
+
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+#define highmedp highp
+#else
+#define highmedp mediump
+#endif
+precision highmedp float;
+
+#define SRGB_TO_LINEAR(c) pow((c), vec3(2.2))
+#define LINEAR_TO_SRGB(c) pow((c), vec3(1.0 / 2.2))
+#define SRGB(r, g, b) SRGB_TO_LINEAR(vec3(float(r), float(g), float(b)) / 255.0)
+
+// Scene buffer
+uniform sampler2D uMainSampler; 
+varying vec2 outTexCoord;
+
+// Effect parameters
+uniform float alpha;
+uniform vec2 positionFrom;
+uniform vec2 positionTo;
+uniform vec3 color1;
+uniform vec3 color2;
+uniform int size;
+
+#pragma phaserTemplate(fragmentHeader)
+
+float gradientNoise(in vec2 uv)
+{
+    const vec3 magic = vec3(0.06711056, 0.00583715, 52.9829189);
+    return fract(magic.z * fract(dot(uv, magic.xy)));
+}
+
+float stepped (in float s, in float scale, in int steps)
+{
+    return steps > 0 ? floor( s / ((1.0 * scale) / float(steps))) * 1.0 / float(steps - 1) : s;
+}
+
+void main ()
+{
+    vec2 a = positionFrom;
+    vec2 b = positionTo;
+    vec2 ba = b - a;
+
+    float d = dot(outTexCoord - a, ba) / dot(ba, ba);
+    float t = size > 0 ? stepped(d, 1.0, size) : d;
+
+    t = smoothstep(0.0, 1.0, clamp(t, 0.0, 1.0));
+
+    vec3 color = mix(SRGB(color1.r, color1.g, color1.b), SRGB(color2.r, color2.g, color2.b), t);
+
+    color = LINEAR_TO_SRGB(color);
+    color += (1.0 / 255.0) * gradientNoise(outTexCoord) - (0.5 / 255.0);
+
+    vec4 texture = texture2D(uMainSampler, outTexCoord);
+
+    gl_FragColor = vec4(mix(color.rgb, texture.rgb, alpha), 1.0) * texture.a;
+}
+`;
+
+    class GradientFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
+        static FilterName = FilterName$3;
+
+        constructor(manager) {
+            super(FilterName$3, manager, null, frag$3);
+        }
+
+        // This method sets up the uniforms for the shader.
+        setupUniforms(controller, drawingContext) {
+            const programManager = this.programManager;
+
+            programManager.setUniform('alpha', controller.alpha);
+
+            programManager.setUniform('positionFrom', [controller.fromX, controller.fromY]);
+            programManager.setUniform('positionTo', [controller.toX, controller.toY]);
+            programManager.setUniform('color1', controller.glcolor1);
+            programManager.setUniform('color2', controller.glcolor2);
+            programManager.setUniform('size', controller.size);
+        }
+
+    }
+
     const GetValue$3 = Phaser.Utils.Objects.GetValue;
 
     class GradientController extends Phaser.Filters.Controller {
@@ -880,6 +670,94 @@ void main (void) {
 
     }
 
+    const FilterName$2 = 'FilterP3Shine';
+
+    // Built-in fx in phaser3
+
+    const frag$2 = `\
+#pragma phaserTemplate(shaderName)
+
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+#define highmedp highp
+#else
+#define highmedp mediump
+#endif
+precision highmedp float;
+
+// Scene buffer
+uniform sampler2D uMainSampler; 
+varying vec2 outTexCoord;
+
+// Effect parameters
+uniform vec4 config;
+uniform bool reveal;
+uniform vec2 texSize;
+
+#pragma phaserTemplate(fragmentHeader)
+
+void main (void) {
+    float speed = config.x;
+    float time = config.y;
+    float lineWidth = config.z;
+    float gradient = config.w;
+
+	vec2 uv = gl_FragCoord.xy / texSize;
+
+    vec4 tex = texture2D(uMainSampler, outTexCoord);
+
+    vec4 col1 = vec4(0.3, 0.0, 0.0, 1.0);
+    vec4 col2 = vec4(0.85, 0.85, 0.85, 1.0);
+
+    uv.x = uv.x - mod(time * speed, 2.0) + 0.5;
+    float y = uv.x * gradient;
+
+    float s = smoothstep(y - lineWidth, y, uv.y) - smoothstep(y, y + lineWidth, uv.y);
+
+    gl_FragColor = (((s * col1) + (s * col2)) * tex);
+
+    if (!reveal)
+    {
+        //  Apply the shine effect
+        gl_FragColor += tex;
+    }
+}
+`;
+
+    var GetTickDelta = function (game) {
+        return GetGame(game).loop.delta;
+    };
+
+    const MaxPeriod = 60 * 60 * 1000;
+
+    var GetCurrentTime = function (scene, prevTime) {
+        var tickDelta = GetTickDelta(scene);
+        var currentTime = prevTime + tickDelta;
+        if (currentTime >= MaxPeriod) {
+            currentTime -= MaxPeriod;
+        }
+
+        return currentTime;
+    };
+
+    class ShineFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
+        static FilterName = FilterName$2;
+
+        constructor(manager) {
+            super(FilterName$2, manager, null, frag$2);
+        }
+
+        // This method sets up the uniforms for the shader.
+        setupUniforms(controller, drawingContext) {
+            const programManager = this.programManager;
+
+            controller.now = GetCurrentTime(this.manager.renderer.game, controller.now);
+            programManager.setUniform('config', [controller.speed, controller.now, controller.lineWidth, controller.gradient]);
+            programManager.setUniform('reveal', controller.reveal);
+            programManager.setUniform('texSize', [drawingContext.width, drawingContext.height]);
+        }
+
+    }
+
     const GetValue$2 = Phaser.Utils.Objects.GetValue;
 
     class ShineController extends Phaser.Filters.Controller {
@@ -928,6 +806,68 @@ void main (void) {
         }
     }
 
+    const FilterName$1 = 'FilterP3Vignette';
+
+    // Built-in fx in phaser3
+
+    const frag$1 = `\
+#pragma phaserTemplate(shaderName)
+
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+#define highmedp highp
+#else
+#define highmedp mediump
+#endif
+precision highmedp float;
+
+// Scene buffer
+uniform sampler2D uMainSampler; 
+varying vec2 outTexCoord;
+
+// Effect parameters
+uniform vec2 config;
+uniform vec2 position;
+
+#pragma phaserTemplate(fragmentHeader)
+
+void main (void) {
+    float radius = config.x;
+    float strength = config.y;
+
+    vec4 col = vec4(1.0);
+
+    float d = length(outTexCoord - position);
+
+    if (d <= radius)
+    {
+        float g = d / radius;
+        g = sin(g * 3.14 * strength);
+    	col = vec4(g * g * g);
+    }
+
+    vec4 texture = texture2D(uMainSampler, outTexCoord);
+
+    gl_FragColor = texture * (1.0 - col);
+}
+`;
+
+    class VignetteFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
+        static FilterName = FilterName$1;
+
+        constructor(manager) {
+            super(FilterName$1, manager, null, frag$1);
+        }
+
+        // This method sets up the uniforms for the shader.
+        setupUniforms(controller, drawingContext) {
+            const programManager = this.programManager;
+
+            programManager.setUniform('config', [controller.radius, controller.strength]);
+            programManager.setUniform('position', [controller.x, controller.y]);
+        }
+
+    }
+
     const GetValue$1 = Phaser.Utils.Objects.GetValue;
 
     class VignetteController extends Phaser.Filters.Controller {
@@ -967,6 +907,76 @@ void main (void) {
             this.strength = strength;
             return this;
         }
+    }
+
+    const FilterName = 'FilterP3Wipe';
+
+    // Built-in fx in phaser3
+
+    const frag = `\
+#pragma phaserTemplate(shaderName)
+
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+#define highmedp highp
+#else
+#define highmedp mediump
+#endif
+precision highmedp float;
+
+// Scene buffer
+uniform sampler2D uMainSampler; 
+varying vec2 outTexCoord;
+
+// Effect parameters
+uniform vec4 config;
+uniform bool reveal;
+
+#pragma phaserTemplate(fragmentHeader)
+
+void main (void) {
+    vec2 uv = outTexCoord;
+
+    vec4 color0;
+    vec4 color1;
+
+    if (reveal) {
+        color0 = vec4(0);
+        color1 = texture2D(uMainSampler, uv);
+    } else {
+        color0 = texture2D(uMainSampler, uv);
+        color1 = vec4(0);
+    }
+
+    float distance = config.x;
+    float width = config.y;
+    float direction = config.z;
+    float axis = uv.x;
+
+    if (config.w == 1.0) {
+        axis = uv.y;
+    }
+
+    float adjust = mix(width, -width, distance);
+    float value = smoothstep(distance - width, distance + width, abs(direction - axis) + adjust);
+    gl_FragColor = mix(color1, color0, value);
+}
+`;
+
+    class WarpFilter extends Phaser.Renderer.WebGL.RenderNodes.BaseFilterShader {
+        static FilterName = FilterName;
+
+        constructor(manager) {
+            super(FilterName, manager, null, frag);
+        }
+
+        // This method sets up the uniforms for the shader.
+        setupUniforms(controller, drawingContext) {
+            const programManager = this.programManager;
+
+            programManager.setUniform('config', [controller.progress, controller.wipeWidth, controller.direction, controller.axis]);
+            programManager.setUniform('reveal', controller.reveal);
+        }
+
     }
 
     const GetValue = Phaser.Utils.Objects.GetValue;
@@ -1054,7 +1064,8 @@ void main (void) {
 
     }
 
-    var InstallFilters = function (game) {
+    var InstallP3Fx = function (game) {
+        game = GetGame(game);
         RegisterFilter(game, BloomStepFilter);
         RegisterFilter(game, CircleFilter);
         RegisterFilter(game, GradientFilter);
@@ -1062,96 +1073,116 @@ void main (void) {
         RegisterFilter(game, VignetteFilter);
         RegisterFilter(game, WarpFilter);
 
-        var FilterListComponent = Phaser.GameObjects.Components.FilterList.prototype;
+        AddFilterListMethod(
+            'addP3Bloom',
+            function (color, offsetX, offsetY, blurStrength, strength, steps) {
+                if (color === undefined) { color = 0xFFFFFF; }
+                if (offsetX === undefined) { offsetX = 1; }
+                if (offsetY === undefined) { offsetY = 1; }
+                if (blurStrength === undefined) { blurStrength = 1; }
+                if (strength === undefined) { strength = 1; }
+                if (steps === undefined) { steps = 4; }
 
-        FilterListComponent.addP3Bloom = function (color, offsetX, offsetY, blurStrength, strength, steps) {
-            if (color === undefined) { color = 0xFFFFFF; }
-            if (offsetX === undefined) { offsetX = 1; }
-            if (offsetY === undefined) { offsetY = 1; }
-            if (blurStrength === undefined) { blurStrength = 1; }
-            if (strength === undefined) { strength = 1; }
-            if (steps === undefined) { steps = 4; }
+                return this.add(new BloomController(
+                    this.camera,
+                    { color, offsetX, offsetY, blurStrength, strength, steps }
+                ));
+            }
+        );
 
-            return this.add(new BloomController(
-                this.camera,
-                { color, offsetX, offsetY, blurStrength, strength, steps }
-            ));
-        };
+        AddFilterListMethod(
+            'addP3Circle',
+            function (thickness, color, backgroundColor, scale, feather) {
+                if (thickness === undefined) { thickness = 8; }
+                if (color === undefined) { color = 0xFF33B2; }
+                if (backgroundColor === undefined) { backgroundColor = 0xFF0000; }
+                if (scale === undefined) { scale = 1; }
+                if (feather === undefined) { feather = 0.005; }
 
-        FilterListComponent.addP3Circle = function (thickness, color, backgroundColor, scale, feather) {
-            if (thickness === undefined) { thickness = 8; }
-            if (color === undefined) { color = 0xFF33B2; }
-            if (backgroundColor === undefined) { backgroundColor = 0xFF0000; }
-            if (scale === undefined) { scale = 1; }
-            if (feather === undefined) { feather = 0.005; }
+                return this.add(new CircleController(
+                    this.camera,
+                    { thickness, color, backgroundColor, scale, feather }
+                ));
+            }
+        );
 
-            return this.add(new CircleController(
-                this.camera,
-                { thickness, color, backgroundColor, scale, feather }
-            ));
-        };
+        AddFilterListMethod(
+            'addP3Gradient',
+            function (color1, color2, alpha, fromX, fromY, toX, toY, size) {
+                if (color1 === undefined) { color1 = 0xff0000; }
+                if (color2 === undefined) { color2 = 0x00ff00; }
+                if (alpha === undefined) { alpha = 0.2; }
+                if (fromX === undefined) { fromX = 0; }
+                if (fromY === undefined) { fromY = 0; }
+                if (toX === undefined) { toX = 0; }
+                if (toY === undefined) { toY = 1; }
+                if (size === undefined) { size = 0; }
 
-        FilterListComponent.addP3Gradient = function (color1, color2, alpha, fromX, fromY, toX, toY, size) {
-            if (color1 === undefined) { color1 = 0xff0000; }
-            if (color2 === undefined) { color2 = 0x00ff00; }
-            if (alpha === undefined) { alpha = 0.2; }
-            if (fromX === undefined) { fromX = 0; }
-            if (fromY === undefined) { fromY = 0; }
-            if (toX === undefined) { toX = 0; }
-            if (toY === undefined) { toY = 1; }
-            if (size === undefined) { size = 0; }
+                return this.add(new GradientController(
+                    this.camera,
+                    { color1, color2, alpha, fromX, fromY, toX, toY, size }
+                ));
+            }
+        );
 
-            return this.add(new GradientController(
-                this.camera,
-                { color1, color2, alpha, fromX, fromY, toX, toY, size }
-            ));
-        };
+        AddFilterListMethod(
+            'addP3Shine',
+            function (speed, lineWidth, gradient, reveal) {
+                if (speed === undefined) { speed = 0.5; }
+                if (lineWidth === undefined) { lineWidth = 0.5; }
+                if (gradient === undefined) { gradient = 3; }
+                if (reveal === undefined) { reveal = false; }
 
-        FilterListComponent.addP3Shine = function (speed, lineWidth, gradient, reveal) {
-            if (speed === undefined) { speed = 0.5; }
-            if (lineWidth === undefined) { lineWidth = 0.5; }
-            if (gradient === undefined) { gradient = 3; }
-            if (reveal === undefined) { reveal = false; }
+                return this.add(new ShineController(
+                    this.camera,
+                    { speed, lineWidth, gradient, reveal }
+                ));
+            }
+        );
 
-            return this.add(new ShineController(
-                this.camera,
-                { speed, lineWidth, gradient, reveal }
-            ));
-        };
+        AddFilterListMethod(
+            'addP3Vignette',
+            function (x, y, radius, strength) {
+                if (x === undefined) { x = 0.5; }
+                if (y === undefined) { y = 0.5; }
+                if (radius === undefined) { radius = 0.5; }
+                if (strength === undefined) { strength = 0.5; }
 
-        FilterListComponent.addP3Vignette = function (x, y, radius, strength) {
-            if (x === undefined) { x = 0.5; }
-            if (y === undefined) { y = 0.5; }
-            if (radius === undefined) { radius = 0.5; }
-            if (strength === undefined) { strength = 0.5; }
+                return this.add(new VignetteController(
+                    this.camera,
+                    { x, y, radius, strength }
+                ));
+            }
+        );
 
-            return this.add(new VignetteController(
-                this.camera,
-                { x, y, radius, strength }
-            ));
-        };
+        AddFilterListMethod(
+            'addP3Wipe',
+            function (wipeWidth, direction, axis) {
+                if (wipeWidth === undefined) { wipeWidth = 0.1; }
+                if (direction === undefined) { direction = 0; }
+                if (axis === undefined) { axis = 0; }
 
-        FilterListComponent.addP3Wipe = function (wipeWidth, direction, axis) {
-            if (wipeWidth === undefined) { wipeWidth = 0.1; }
-            if (direction === undefined) { direction = 0; }
-            if (axis === undefined) { axis = 0; }
+                return this.add(new WipeController(
+                    this.camera,
+                    { wipeWidth, direction, axis }
+                ));
+            }
+        );
 
-            return this.add(new WipeController(
-                this.camera,
-                { wipeWidth, direction, axis }
-            ));
-        };
+        AddFilterListMethod(
+            'addP3Reveal',
+            function (wipeWidth, direction, axis) {
+                if (wipeWidth === undefined) { wipeWidth = 0.1; }
+                if (direction === undefined) { direction = 0; }
+                if (axis === undefined) { axis = 0; }
 
-        FilterListComponent.addP3Reveal = function (wipeWidth, direction, axis) {
-            if (wipeWidth === undefined) { wipeWidth = 0.1; }
-            if (direction === undefined) { direction = 0; }
-            if (axis === undefined) { axis = 0; }
+                return this.add(new WipeController(
+                    this.camera,
+                    { wipeWidth, direction, axis, reveal: true }
+                ));
+            }
+        );
 
-            return this.add(new WipeController(
-                this.camera,
-                { wipeWidth, direction, axis, reveal: true }
-            ));
-        };
     };
 
     class P3FXPlugin extends Phaser.Plugins.BasePlugin {
@@ -1164,11 +1195,11 @@ void main (void) {
             eventEmitter.on('destroy', this.destroy, this);
 
             if (this.game.isRunning) {
-                InstallFilters(this.game);
+                InstallP3Fx(this.game);
 
             } else {
                 eventEmitter.once('ready', function () {
-                    InstallFilters(this.game);
+                    InstallP3Fx(this.game);
                 }, this);
 
             }

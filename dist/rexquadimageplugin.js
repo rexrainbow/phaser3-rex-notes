@@ -42,7 +42,7 @@
             return;
         }
 
-        var calcMatrix = GetCalcMatrix(src, camera, parentMatrix).calc;
+        var calcMatrix = GetCalcMatrix(src, camera, parentMatrix, !drawingContext.useCanvas).calc;
 
         if (src.dirty) {
             src.updateBuffers();
@@ -408,6 +408,22 @@
     var GlobalTriangle = {};
     var GlobalOut = {};
 
+    var Contains$1 = function (face, x, y) {
+        var vertices = face.vertices;
+        var v0 = vertices[0];
+        var v1 = vertices[1];
+        var v2 = vertices[2];
+        GlobTriangle.setTo(
+            v0.localX, v0.localY,
+            v1.localX, v1.localY,
+            v2.localX, v2.localY,
+        );
+
+        return GlobTriangle.contains(x, y);
+    };
+
+    var GlobTriangle = new Phaser.Geom.Triangle();
+
     const RadToDeg$1 = Phaser.Math.RadToDeg;
     const DegToRad$1 = Phaser.Math.DegToRad;
 
@@ -641,6 +657,10 @@
             this.color = value;
             return this;
         }
+
+        contains(localX, localY) {
+            return Contains$1(this, localX, localY);
+        }
     }
 
     var IsPlainObject$4 = function (obj)
@@ -819,6 +839,19 @@
             for (var i = 0, cnt = faces.length; i < cnt; i++) {
                 this.addFace(faces[i]);
             }
+            return this;
+        },
+
+        resetFaceSize() {
+            var frame = this.frame;
+            var frameWidth = frame.realWidth;
+            var frameHeight = frame.realHeight;
+
+            var faces = this.faces;
+            for (var i = 0, cnt = faces.length; i < cnt; i++) {
+                faces[i].setFrameSize(frameWidth, frameHeight);
+            }
+
             return this;
         },
 
@@ -1040,7 +1073,145 @@
         },
     };
 
-    var Methods$1 = {};
+    const TransformMatrix = Phaser.GameObjects.Components.TransformMatrix;
+    const TransformXY = Phaser.Math.TransformXY;
+
+    var WorldXYToGameObjectLocalXY = function (gameObject, worldX, worldY, camera, out) {
+        if (camera === undefined) {
+            camera = gameObject.scene.cameras.main;
+        }
+
+        if (out === undefined) {
+            out = {};
+        } else if (out === true) {
+            out = globOut;
+        }
+
+        var csx = camera.scrollX;
+        var csy = camera.scrollY;
+        var px = worldX + (csx * gameObject.scrollFactorX) - csx;
+        var py = worldY + (csy * gameObject.scrollFactorY) - csy;
+        if (gameObject.parentContainer) {
+            if (tempMatrix === undefined) {
+                tempMatrix = new TransformMatrix();
+                parentMatrix = new TransformMatrix();
+            }
+
+            gameObject.getWorldTransformMatrix(tempMatrix, parentMatrix);
+            tempMatrix.applyInverse(px, py, out);
+        }
+        else {
+            TransformXY(px, py, gameObject.x, gameObject.y, gameObject.rotation, gameObject.scaleX, gameObject.scaleY, out);
+        }
+
+        out.x += gameObject.displayOriginX;
+        out.y += gameObject.displayOriginY;
+
+        return out;
+    };
+
+    var tempMatrix, parentMatrix;
+    var globOut = {};
+
+    var PointMethods = {
+        getFaceAt(worldX, worldY, camera) {
+            var localXY = WorldXYToGameObjectLocalXY(this, worldX, worldY, camera, true);
+            var localX = localXY.x,
+                localY = localXY.y;
+            var faces = this.faces;
+            for (var i = 0, cnt = faces.length; i < cnt; i++) {
+                var face = faces[i];
+                if (face.contains(localX, localY)) {
+                    return face;
+                }
+            }
+
+            return null;
+        },
+
+        hasFaceAt(worldX, worldY, camera) {
+            return !!this.getFaceAt(worldX, worldY, camera);
+        },
+    };
+
+    var Contains = function (shape, x, y, gameObject) {
+        var faces = gameObject.faces;
+        for (var i = 0, cnt = faces.length; i < cnt; i++) {
+            var face = faces[i];
+            if (face.contains(x, y)) {
+                gameObject.input.hitFace = face;
+                return true;
+            }
+        }
+        gameObject.input.hitFace = null;
+        return false;
+    };
+
+    var OnPointerDown = function (pointer, localX, localY, event) {
+        var face = this.input.hitFace;
+        this.emit('face.pointerdown', face, pointer, localX, localY, event);
+    };
+
+    var OnPointerUp = function (pointer, localX, localY, event) {
+        var face = this.input.hitFace;
+        this.emit('face.pointerup', face, pointer, localX, localY, event);
+        this.input.hitFace = null;
+    };
+
+    var OnPointerMove = function (pointer, localX, localY, event) {
+        var face = this.input.hitFace;
+        var prevFace = this.input.prevHitFace;
+        if (face === prevFace) {
+            this.emit('face.pointermove', face, pointer, localX, localY, event);
+            return
+        }
+
+        if (prevFace) {
+            this.emit('face.pointerout', prevFace, pointer, event);
+        }
+
+        if (face) {
+            this.emit('face.pointerover', face, pointer, event);
+        }
+
+        this.input.prevHitFace = face;
+    };
+
+    var OnPointerOut = function (pointer, event) {
+        var face = this.input.prevHitFace;
+        if (face) {
+            this.emit('face.pointerout', face, pointer, event);
+        }
+
+        this.input.hitFace = null;
+        this.input.prevHitFace = null;
+    };
+
+    var SetFaceInteractive = function (config) {
+        if (this.input) {
+            return;
+        }
+
+        if (config === undefined) {
+            config = {};
+        }
+        config.hitArea = {};
+        config.hitAreaCallback = Contains;
+
+        this
+            .setInteractive(config)
+            .on('pointerdown', OnPointerDown, this)
+            .on('pointerup', OnPointerUp, this)
+            .on('pointermove', OnPointerMove, this)
+            .on('pointerover', OnPointerMove, this)
+            .on('pointerout', OnPointerOut, this);
+
+        return this;
+    };
+
+    var Methods$1 = {
+        setFaceInteractive: SetFaceInteractive
+    };
 
     Object.assign(
         Methods$1,
@@ -1048,7 +1219,8 @@
         DirtyFlagsMethods,
         UpdateMethods,
         TintMethods,
-        DebugMethods
+        DebugMethods,
+        PointMethods,
     );
 
     const ShaderSourceFS = Phaser.Renderer.WebGL.Shaders.MultiFrag;
@@ -1349,9 +1521,8 @@
             this._frameWidthSave = frameWidth;
             this._frameHeightSave = frameHeight;
 
-            var face;
             for (var i = 0, cnt = faces.length; i < cnt; i++) {
-                face = faces[i];
+                var face = faces[i];
                 face.setFrameUV(frameU0, frameV0, frameU1, frameV1);
                 if (isSizeChanged) {
                     face.setFrameSize(frameWidth, frameHeight);
@@ -1964,6 +2135,9 @@
         }
 
         var gameObjects = config.gameObjects;
+        if (!Array.isArray(gameObjects)) {
+            gameObjects = [gameObjects];
+        }
         var renderTexture = config.renderTexture;  // renderTexture, or dynamicTexture
         var saveTexture = config.saveTexture;
         var x = GetValue$4(config, 'x', undefined);
@@ -2060,7 +2234,7 @@
                 height = GetValue$3(config, 'height', 32);
             }
 
-            // dynamic-texture -> quad-image
+            // Dynamic-texture -> quad-image
             var texture = CreateDynamicTexture(scene, width, height);
 
             super(scene, x, y, texture, null, config);
@@ -2081,17 +2255,11 @@
         }
 
         setSizeToFrame(frame) {
-            var width = this.width;
-            var height = this.height;
-
             super.setSizeToFrame(frame);
+
             this.updateDisplayOrigin();
 
-            if ((this.width !== width) || (this.height !== height)) {
-                if (this.gridWidth !== undefined) {
-                    this.resetVertices();
-                }
-            }
+            this.resetFaceSize();
 
             return this;
         }
@@ -2315,6 +2483,30 @@
             this.rt.destroy();
             this.rt = null;
         }
+
+        setSizeToFrame(frame) {
+            super.setSizeToFrame(frame);
+
+            this.updateDisplayOrigin();
+
+            this.resetFaceSize();
+
+            return this;
+        }
+
+        snapshot(gameObjects, config) {
+            if (config === undefined) {
+                config = {};
+            }
+            config.gameObjects = gameObjects;
+            config.renderTexture = this.rt;
+
+            Snapshot(config);
+
+            this.setSizeToFrame();
+
+            return this;
+        }
     }
 
     function SkewRenderTextureFactory (x, y, width, height) {
@@ -2433,9 +2625,8 @@
             enter() {
                 var result = Enter(this.rexContainer.parent, this);
                 if (result) {
-                    this.syncSize();
+                    this.setSizeToFrame();
                 }
-
                 return this;
             }
 

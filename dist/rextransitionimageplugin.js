@@ -4,7 +4,8 @@
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rextransitionimageplugin = factory());
 })(this, (function () { 'use strict';
 
-    const MinVersion = 60;
+    const MainVersionNumber = 4;
+    const SubVersionNumber = 0;
 
     var IsChecked = false;
 
@@ -14,14 +15,14 @@
         }
 
         if (minVersion === undefined) {
-            minVersion = MinVersion;
+            minVersion = SubVersionNumber;
         }
         var version = Phaser.VERSION.split('.');
         var mainVersion = parseInt(version[0]);
-        if (mainVersion === 3) {
-            var currentVersion = parseInt(version[1]);
-            if (currentVersion < minVersion) {
-                console.error(`Minimum supported version : ${mainVersion}.${currentVersion}`);
+        if (mainVersion === MainVersionNumber) {
+            var subVersion = parseInt(version[1]);
+            if (subVersion < minVersion) {
+                console.error(`Minimum supported version : ${mainVersion}.${subVersion}`);
             }
         } else {
             console.error(`Can't supported version : ${mainVersion}`);
@@ -978,6 +979,7 @@
         },
     };
 
+    // canvas mask only
     var Mask = {
         updateChildMask(child) {
             // Don't propagate null mask to clear children's mask
@@ -2127,6 +2129,9 @@
         }
 
         var gameObjects = config.gameObjects;
+        if (!Array.isArray(gameObjects)) {
+            gameObjects = [gameObjects];
+        }
         var renderTexture = config.renderTexture;  // renderTexture, or dynamicTexture
         var saveTexture = config.saveTexture;
         var x = GetValue$c(config, 'x', undefined);
@@ -2196,7 +2201,7 @@
 
         // Draw gameObjects
         gameObjects = SortGameObjectsByDepth(Clone(gameObjects));
-        renderTexture.draw(gameObjects);
+        renderTexture.draw(gameObjects).render();
 
         // Save render result to texture
         if (saveTexture) {
@@ -3922,6 +3927,125 @@
         Methods
     );
 
+    var GetRenderer = function (scene) {
+        scene = GetSceneObject(scene);
+        if (!scene) {
+            return null;
+        }
+
+        return scene.sys.renderer;
+    };
+
+    var IsWebGLRenderMode = function (scene) {
+        var renderer = GetRenderer(scene);
+        if (!renderer) {
+            return false;
+        }
+
+        return !!renderer.gl;
+    };
+
+    const MaskController = Phaser.Filters.Mask;
+
+    var CreateMaskObject = function (gameObject, invert) {
+        // invert : WebGL only feature
+
+        // A gameObject can own a (WEBGL) MaskController, or a (CANVAS) GeometryMask
+        // Share this MaskController/GeometryMask for all mask target game object
+        var maskObject = gameObject._maskObject;
+        if (maskObject) {
+            if ((invert !== undefined) && (maskObject.invert !== undefined)) {
+                maskObject.invert = invert;
+            }
+            return maskObject;
+        }
+
+        if (IsWebGLRenderMode(gameObject)) {
+            maskObject = new MaskController(gameObject.scene.cameras.main, gameObject, invert);
+
+        } else {
+            // CANVAS Only support GeometryMask
+            maskObject = gameObject.createGeometryMask();
+
+        }
+
+        gameObject._maskObject = maskObject;
+
+        // Destroy mask object when mask source game object is destroyed
+        gameObject.once('destroy', function () {
+            maskObject.destroy();
+            gameObject._maskObject = undefined;
+        });
+
+        return maskObject;
+    };
+
+    var SetMask = function (gameObject, maskGameObject, invert) {
+        var maskObject = CreateMaskObject(maskGameObject, invert);
+        // A (WEBGL) MaskController, or a (CANVAS) GeometryMask
+
+        if (gameObject.mask === maskObject) {
+            // The same mask object
+            return;
+        }
+
+        if (IsWebGLRenderMode(gameObject)) {
+            // WEBGL mask
+            if (!gameObject.filters) {
+                if (!gameObject.enableFilters) {
+                    return;
+                }
+
+                gameObject.enableFilters();
+            }
+
+            var filterList = gameObject.filters.external;
+            var list = filterList.list;
+
+            if (gameObject.mask) {
+                // Replace current mask controller
+                var index = list.indexOf(gameObject.mask);
+                list[index] = maskGameObject;
+            } else {
+                // Append mask controller
+                list.push(maskObject);
+            }
+
+        } else {
+            // CANVAS mask
+            if (!gameObject.setMask) {
+                return;
+            }
+        }
+
+        gameObject.mask = maskObject;
+    };
+
+    var ClearMask = function (gameObject) {
+        if (!gameObject.mask) {
+            return;
+        }
+
+        if (IsWebGLRenderMode(gameObject)) {
+            // WEBGL mask
+            var filterList = gameObject.filters.external;
+            var list = filterList.list;
+
+            // Remove current mask object from external filter list
+            var index = list.indexOf(gameObject.mask);
+            list.splice(index, 1);
+
+        } else {
+            // CANVAS mask
+            if (!gameObject.clearMask) {
+                return;
+            }
+
+        }
+
+        gameObject.mask = null;
+    };
+
     var MaskMethods = {
         setMaskGameObject(gameObject) {
             if (!gameObject) {
@@ -3955,15 +4079,6 @@
             this.addLocal(gameObject);
             this.maskGameObject = gameObject;
 
-            if (!gameObject._maskObject) {
-                gameObject._maskObject = gameObject.createGeometryMask();
-                gameObject.once('destroy', function () {
-                    gameObject._maskObject.destroy();
-                    gameObject._maskObject = undefined;
-                });
-            }
-            this.childrenMask = gameObject._maskObject;
-
             return this;
         },
 
@@ -3972,9 +4087,8 @@
                 destroyMaskGameObject = true;
             }
 
-            this.backImage.clearMask();
-            this.frontImage.clearMask();
-            this.childrenMask = undefined;
+            ClearMask(this.backImage);
+            ClearMask(this.frontImage);
             this.remove(this.maskGameObject, destroyMaskGameObject);
             this.maskGameObject = undefined;
             return this;
@@ -3989,14 +4103,14 @@
             }
 
             if (enable) {
-                // Use DefaultMaskGraphics if not given    
-                if (!this.childrenMask) {
+                // Use DefaultMaskGraphics if not given
+                if (!this.maskGameObject) {
                     this.setMaskGameObject(true);
                 }
-                gameObject.setMask(this.childrenMask);
-                this.childrenMask.setInvertAlpha(invertAlpha);
+                SetMask(gameObject, this.maskGameObject, invertAlpha);
+
             } else {
-                gameObject.clearMask();
+                ClearMask(gameObject);
             }
 
             return this;
@@ -4406,10 +4520,6 @@
                 return;
             }
 
-            if (this.childrenMask) {
-                this.childrenMask.destroy();
-                this.childrenMask = undefined;
-            }
             this.backImage = undefined;
             this.frontImage = undefined;
             this.images.length = 0;

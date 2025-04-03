@@ -4,11 +4,10 @@
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexwaiteventsplugin = factory());
 })(this, (function () { 'use strict';
 
-    const SetStruct = Phaser.Structs.Set;
     class WaitEvents {
         constructor(completeCallback, scope) {
             this.setCompleteCallback(completeCallback, scope);
-            this.events = new SetStruct();
+            this.events = new Set();
         }
 
         shutdown() {
@@ -34,7 +33,7 @@
             var callback = function () {
                 self.remove(callback);
             };
-            this.events.set(callback);
+            this.events.add(callback);
             return callback;
         }
 
