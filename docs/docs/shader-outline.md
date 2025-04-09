@@ -22,7 +22,7 @@ Outline post processing filter. [Reference](https://github.com/pixijs/pixi-filte
 
 - Load plugin (minify file) in preload stage
     ```javascript
-    scene.load.plugin('rexoutlinefilterlugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexoutlinefilterlugin.min.js', true);
+    scene.load.plugin('rexoutlinefilterplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexoutlinefilterplugin.min.js', true);
     ```
 - Apply effect
     - Apply effect to game object
@@ -33,7 +33,7 @@ Outline post processing filter. [Reference](https://github.com/pixijs/pixi-filte
         ```
         or
         ```javascript
-        var controller = scene.plugins.get('rexoutlinefilterlugin').add(gameObject, config);
+        var controller = scene.plugins.get('rexoutlinefilterplugin').add(gameObject, config);
         ```
     - Apply effect to camera
         ```javascript
@@ -42,7 +42,7 @@ Outline post processing filter. [Reference](https://github.com/pixijs/pixi-filte
         ```
         or
         ```javascript
-        var controller = scene.plugins.get('rexoutlinefilterlugin').add(camera, config);
+        var controller = scene.plugins.get('rexoutlinefilterplugin').add(camera, config);
         ```
 
 #### Import plugin
