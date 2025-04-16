@@ -376,7 +376,7 @@ var isSuccess = miniBoard.lastTransferResult;
     gameObject.on('miniboard.pointerdown', function(pointer) {
     })
     ```
-    - `pointer` : [Touch pointer](touchevents.md#properties-of-point)
+    - `pointer` : [Touch pointer](touchevents.md#pointer)
     - `gameObject` : Game object at touched (tileX, tileY)
 
 ##### Pointer up
@@ -396,7 +396,7 @@ var isSuccess = miniBoard.lastTransferResult;
     gameObject.on('miniboard.pointerup', function(pointer) {
     })
     ```
-    - `pointer` : [Touch pointer](touchevents.md#properties-of-point)
+    - `pointer` : [Touch pointer](touchevents.md#pointer)
     - `gameObject` : Game object at touched (tileX, tileY)    
 
 ##### Pointer move
@@ -416,7 +416,7 @@ var isSuccess = miniBoard.lastTransferResult;
     gameObject.on('miniboard.pointermove', function(pointer) {
     })
     ```
-    - `pointer` : [Touch pointer](touchevents.md#properties-of-point)
+    - `pointer` : [Touch pointer](touchevents.md#pointer)
     - `gameObject` : Game object at touched (tileX, tileY)
 
 #### Drag events

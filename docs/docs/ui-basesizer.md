@@ -1177,7 +1177,7 @@ sizer.setChildrenInteractive({
     }, scope);
     ```
     - `child` : Triggered child game object.
-    - `pointer` : [Pointer](touchevents.md#properties-of-point) object.    
+    - `pointer` : [Pointer](touchevents.md#pointer) object.    
 - Press
     ```javascript
     sizer.on('child.pressstart', function(child, pointer) { 

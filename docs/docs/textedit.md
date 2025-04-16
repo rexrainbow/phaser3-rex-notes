@@ -264,7 +264,7 @@ editor.open(config);
             textObject.text = text;
         }
         ```
-    - [More configuration parameters](textedit.md#add-text-object)...
+    - [More configuration parameters](inputtext.md#add-input-text-object)...
 - `onClose` : Callback invoked when text editor is closed.
     ```javascript
     var callback = function(textObject) {

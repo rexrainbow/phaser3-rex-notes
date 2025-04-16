@@ -300,8 +300,8 @@ txt.appendText(text,
 
 To overwrite some properties of text-style.
 
-Each [character](dynamictext.md#character-data) will be placed at position (0,0), without rotation. 
-Uses [word-wrap](dynamictext.md#word-wrap) method to rearrange position of characters. 
+Each [character](dynamictext.md#child) will be placed at position (0,0), without rotation. 
+Uses [wrap](dynamictext.md#wrap) method to rearrange position of characters. 
 
 #### Set text
 

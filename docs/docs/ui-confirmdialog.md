@@ -284,7 +284,7 @@ var dialog = scene.rexUI.add.confirmDialog({
 - `sizerEvents` : Set `true` to fire [sizer events](ui-basesizer.md#events). Default value is `false`..
 - `enableLayer` : 
     - `false` : Add child game objects into scene's display list. Default behavior.
-    - `true` : Add child game objects into an internal [layer game object](layer.md). [See also](containerlite.md#layer).
+    - `true` : Add child game objects into an internal [layer game object](layer.md). [See also](containerlite.md#render-layer).
 - `confirmButtonIndex`, `cancelButtonIndex` : Button index for firing `'confirm'`, `'cancel'` events. Default values are `0`, `1`.
 - `creators` : Callbacks for creating components.
     ```javascript

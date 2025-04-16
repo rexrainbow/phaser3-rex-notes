@@ -213,14 +213,14 @@ var particles = scene.add.particles(x, y, texture, {
 - `timeScale` : The time rate applied to active particles, affecting lifespan, movement, and tweens. Values larger than 1 are faster than normal.
 - `trackVisible` : Whether the emitter's `visible` state will track the follow target's visibility state.
 - `emitZone` :
-    - [Emit zone](particles.md#emit-zone)
+    - [Emit zone](#add-emit-zone)
         ```javascript
         {
             type: 'random',
             source: geom,
         }            
         ```
-    - [Emit edge](particles.md#emit-edge)
+    - [Emit edge](#add-emit-edge)
         ```javascript
         {
             type: 'edge',
@@ -232,7 +232,7 @@ var particles = scene.add.particles(x, y, texture, {
             seamless: true
         }            
         ```
-- [`deathZone`](particles.md#death-zone)
+- [`deathZone`](#death-zone)
     ```javascript
     {
         type: 'onEnter', // 'onEnter', or 'onLeave'
@@ -242,7 +242,7 @@ var particles = scene.add.particles(x, y, texture, {
 - `bounds` : `{x, y, w, h}`, or `{x, y, width, height}`, or [Rectangle](geom-rectangle.md). 
 - `collideLeft`, `collideRight`, `collideTop`, `collideBottom` : Whether particles interact with the left/right/top/bottom edge of the bounds.
 - `name`
-- [`particleClass`](particles.md#custom-particle-class)
+- [`particleClass`](#custom-particle-class)
 
 ### Control
 

@@ -210,7 +210,7 @@ dragRotate.dragCancel();
 
 ### Catched touch pointer
 
-- [Pointer](touchevents.md#properties-of-point), available when state is `1`
+- [Pointer](touchevents.md#pointer), available when state is `1`
     ```javascript
     var pointer = dragRotate.pointer;
     ```

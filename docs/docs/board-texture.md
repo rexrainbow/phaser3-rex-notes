@@ -1,6 +1,6 @@
 ## Introduction
 
-Create [canvas-texture](canvas-texture) of tile.
+Create [canvas-texture](canvas-texture.md) of tile.
 
 - Author: Rex
 - Help method of board

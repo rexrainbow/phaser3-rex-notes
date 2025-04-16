@@ -152,10 +152,10 @@ var tagPlayer = scene.plugins.get('rexTagPlayerPlugin').add(scene, {
             - `sprite.fade.mode` : Fade mode
                 - `'tint'`, or `0` : Fade-in or fade-out via `tint` property.
                 - `'alpha'`, or `1` : Fade-in or fade-out via `alpha` property. 
-                - `'revealUp'`, or `2` : [Reveal](shader-builtin.md#reveal) up for fade-in.
-                - `'revealDown'`, or `3` : [Reveal](shader-builtin.md#reveal) down for fade-in.
-                - `'revealLeft'`, or `4` : [Reveal](shader-builtin.md#reveal) left for fade-in.
-                - `'revealRight'`, or `5` : [Reveal](shader-builtin.md#reveal) right for fade-in.
+                - `'revealUp'`, or `2` : [Reveal](shader-p3fx.md#reveal) up for fade-in.
+                - `'revealDown'`, or `3` : [Reveal](shader-p3fx.md#reveal) down for fade-in.
+                - `'revealLeft'`, or `4` : [Reveal](shader-p3fx.md#reveal) left for fade-in.
+                - `'revealRight'`, or `5` : [Reveal](shader-p3fx.md#reveal) right for fade-in.
             - `sprite.fade.time` : Duration of fading. Default value is `500`.
     - `sprites.viewportCoordinate` : Apply [viewportCoordinate behavior](viewport-coordinate.md) to sprite game object.
         - `true` : Attach `vpx`, `vpy`, `vp` to sprite game object.
@@ -182,10 +182,10 @@ var tagPlayer = scene.plugins.get('rexTagPlayerPlugin').add(scene, {
             - `texts.fade.mode` : Fade mode
                 - `'tint'`, or `0` : Fade-in or fade-out via `tint` property.
                 - `'alpha'`, or `1` : Fade-in or fade-out via `alpha` property. 
-                - `'revealUp'`, or `2` : [Reveal](shader-builtin.md#reveal) up for fade-in.
-                - `'revealDown'`, or `3` : [Reveal](shader-builtin.md#reveal) down for fade-in.
-                - `'revealLeft'`, or `4` : [Reveal](shader-builtin.md#reveal) left for fade-in.
-                - `'revealRight'`, or `5` : [Reveal](shader-builtin.md#reveal) right for fade-in.
+                - `'revealUp'`, or `2` : [Reveal](shader-p3fx.md#reveal) up for fade-in.
+                - `'revealDown'`, or `3` : [Reveal](shader-p3fx.md#reveal) down for fade-in.
+                - `'revealLeft'`, or `4` : [Reveal](shader-p3fx.md#reveal) left for fade-in.
+                - `'revealRight'`, or `5` : [Reveal](shader-p3fx.md#reveal) right for fade-in.
             - `texts.fade.time` : Duration of fading. Default value is `500`.
     - `texts.viewportCoordinate` : Apply [viewportCoordinate behavior](viewport-coordinate.md) to text game object.
         - `true` : Attach `vpx`, `vpy`, `vp` to sprite game object.
@@ -263,10 +263,10 @@ tagPlayer.addGameObjectManager({
         - `fade.mode` : Fade mode
             - `'tint'`, or `0` : Fade-in or fade-out via `tint` property.
             - `'alpha'`, or `1` : Fade-in or fade-out via `alpha` property. 
-            - `'revealUp'`, or `2` : [Reveal](shader-builtin.md#reveal) up for fade-in.
-            - `'revealDown'`, or `3` : [Reveal](shader-builtin.md#reveal) down for fade-in.
-            - `'revealLeft'`, or `4` : [Reveal](shader-builtin.md#reveal) left for fade-in.
-            - `'revealRight'`, or `5` : [Reveal](shader-builtin.md#reveal) right for fade-in.
+            - `'revealUp'`, or `2` : [Reveal](shader-p3fx.md#reveal) up for fade-in.
+            - `'revealDown'`, or `3` : [Reveal](shader-p3fx.md#reveal) down for fade-in.
+            - `'revealLeft'`, or `4` : [Reveal](shader-p3fx.md#reveal) left for fade-in.
+            - `'revealRight'`, or `5` : [Reveal](shader-p3fx.md#reveal) right for fade-in.
         - `fade.time` : Duration of fading. Default value is `500`.
 - `viewportCoordinate` : Apply [viewportCoordinate behavior](viewport-coordinate.md) to sprite game object.
     - `false` : Do nothing, default behavior.

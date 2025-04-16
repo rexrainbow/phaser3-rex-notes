@@ -210,7 +210,7 @@ var textBox = scene.rexUI.add.textBox({
 - `sizerEvents` : Set `true` to fire [sizer events](ui-basesizer.md#events). Default value is `false`.
 - `enableLayer` : 
     - `false` : Add child game objects into scene's display list. Default behavior.
-    - `true` : Add child game objects into an internal [layer game object](layer.md). [See also](containerlite.md#layer).
+    - `true` : Add child game objects into an internal [layer game object](layer.md). [See also](containerlite.md#render-layer).
 - `page` : Configuration of [page behavior](textpage.md#create-instance)
     - `page.maxLines` : Max lines of a page. If not given in `text` game object.
     - `page.pageBreak` : Symbol of page-break. Default value is `'\f\n'`.

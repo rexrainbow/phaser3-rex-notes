@@ -8,7 +8,7 @@ Drawing text by texture with a callback for each character triggered at every ti
 
 ### Load bitmap font
 
-Reference: [load bitmap font](bitmaptext.md##load-bitmap-font)
+Reference: [load bitmap font](bitmaptext.md#load-bitmap-font)
 
 ### Add bitmap text object
 

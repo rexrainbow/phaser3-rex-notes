@@ -158,7 +158,7 @@ var table = scene.add.rexGridTable(x, y, width, height, {
     - `false` : No mask.
 - `enableLayer` : 
     - `false` : Add cell game objects into scene's display list. Default behavior.
-    - `true` : Add cell game objects into an internal [layer game object](layer.md). [See also](containerlite.md#layer).
+    - `true` : Add cell game objects into an internal [layer game object](layer.md). [See also](containerlite.md#render-layer).
 
 Add grid table from JSON
 

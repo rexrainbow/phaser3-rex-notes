@@ -261,7 +261,7 @@ var trees = scene.rexUI.add.trees({
 - `sizerEvents` : Set `true` to fire [trees events](ui-basesizer.md#events). Default value is `false`.
 - `enableLayer` : 
     - `false` : Add child game objects into scene's display list. Default behavior.
-    - `true` : Add child game objects into an internal [layer game object](layer.md). [See also](containerlite.md#layer).
+    - `true` : Add child game objects into an internal [layer game object](layer.md). [See also](containerlite.md#render-layer).
 
 #### Add tree object
 
@@ -748,7 +748,7 @@ tree.setChildrenInteractive({
     - `child` : Tree or leaf-node.
         - Pointer on tree's title : `child.isTree`
         - Pointer on leaf-node : `child.isNode`
-    - `pointer` : [Pointer](touchevents.md#properties-of-point) object.    
+    - `pointer` : [Pointer](touchevents.md#pointer) object.    
 - Press
     ```javascript
     trees.on('child.pressstart', function(child, pointer, press) { 

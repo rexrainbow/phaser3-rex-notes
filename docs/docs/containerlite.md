@@ -302,7 +302,7 @@ For example, container-lite is at (100, 100), and child is at **(10, 10)**, then
         ```javascript
         layer.add(container.getAllChildren([container]));
         ```
-    - Draw on [render texture](rendertexture.md#paste-texture)
+    - Draw on [render texture](rendertexture.md#draw-game-object)
         ```javascript
         rt.draw(container.getAllChildren());
         ```
@@ -624,7 +624,7 @@ Current children and new children will draw on this layer, instead of display li
 
 ### Shader effects
 
-Apply post-fx pipeline on [layer of containerLite](containerlite.md#render-layer).
+Apply [filter effect](shader-builtin.md) on [layer of containerLite](containerlite.md#render-layer).
 
 ### Snapshot
 

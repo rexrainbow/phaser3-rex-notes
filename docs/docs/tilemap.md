@@ -239,17 +239,9 @@ A [Game Object](gameobject.md) that renders LayerData from a map when used in co
     map.layer = layer;
     ```
 
-#### Render pipeline
+### Shader effects
 
-```javascript
-layer.setPipeline(pipelineName);
-```
-
-```javascript
-layer.setPostPipeline(pipelineName);
-```
-
-See [Render pipeline section](gameobject.md#render-pipeline) of Game object.
+Support [internal and external filters](shader-builtin.md)
 
 #### Render order
 

@@ -127,7 +127,7 @@ var eightDirection = scene.plugins.get('rexEightDirection').add(gameObject, {
     - `wrap` : Set `true` to enable wrap mode. Default value is `false`.
     - `padding`
 - `enable` : set `false` to disable moving.
-- `cursorKeys` : CursorKey object, using [keyboard's cursorKeys](keyboardevents.md#get-state-of-cursorkeys) by default.
+- `cursorKeys` : CursorKey object, using [keyboard's cursorKeys](keyboardevents.md#key-object-of-cursorkeys) by default.
 
 ### Set speed
 

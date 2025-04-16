@@ -181,7 +181,7 @@ Will try to create preFX effect if gameObject has preFX, otherwise, try to creat
     - `true`, or `1` : Enable this effect.
     - `null` : Remove this effect
 
-#### [Bloom](shader-builtin.md#bloom)
+#### [Bloom](shader-p3fx.md#bloom)
 
 - `bloomColor` : 
     - A number : Enable this effect and set color of bloom (0xffffff).
@@ -217,7 +217,7 @@ Will try to create preFX effect if gameObject has preFX, otherwise, try to creat
     - `true`, or `1` : Enable this effect.
     - `null` : Remove this effect
 
-#### [Circle](shader-builtin.md#circle-outline)
+#### [Circle](shader-p3fx.md#circle)
 
 - `circleColor` : 
     - A number : Enable this effect and set color of circle (0xffffff).
@@ -259,7 +259,7 @@ Will try to create preFX effect if gameObject has preFX, otherwise, try to creat
 - `glowOuterStrength`, `glowInnerStrength` : 
     - A number
 
-#### [Gradient](shader-builtin.md#gradient)
+#### [Gradient](shader-p3fx.md#gradient)
 
 - `gradientColor` : 
     - `[number, number]` : Enable this effect and set gradient color1 and gradient color2 (0xffffff).
@@ -309,7 +309,7 @@ Will try to create preFX effect if gameObject has preFX, otherwise, try to creat
     - `true`, or `1` : Enable this effect.
     - `null` : Remove this effect
 
-#### [Reveal](shader-builtin.md#reveal)
+#### [Reveal](shader-p3fx.md#reveal)
 
 - `revealLeft`, `revealRight`, `revealUp`, or `revealDown` :
     - A number : Enable this effect with specific reveal direction and set progress (0~1).
@@ -343,7 +343,7 @@ Will try to create preFX effect if gameObject has preFX, otherwise, try to creat
     - `true`, or `1` : Enable this effect.
     - `null` : Remove this effect
 
-#### [Shine](shader-builtin.md#shine)
+#### [Shine](shader-p3fx.md#shine)
 
 - `shineSpeed` : 
     - A number : Enable this effect and set speed of shine, in seconds.
@@ -365,7 +365,7 @@ Will try to create preFX effect if gameObject has preFX, otherwise, try to creat
 - `tiltShiftAmount`, `tiltShiftContrast`, `tiltShiftBlurX`, `tiltShiftBlurY`, `tiltShiftStrength` : 
     - A number
 
-#### [Vignette](shader-builtin.md#vignette)
+#### [Vignette](shader-p3fx.md#vignette)
 
 - `vignetteRadius` : 
     - A number : Enable this effect and set radius of vignette (0~1).
@@ -379,7 +379,7 @@ Will try to create preFX effect if gameObject has preFX, otherwise, try to creat
     - `true`, or `1` : Enable this effect.
     - `null` : Remove this effect
 
-#### [Wipe](shader-builtin.md#wipe)
+#### [Wipe](shader-p3fx.md#wipe)
 
 - `wipeLeft`, `wipeRight`, `wipeUp`, or `wipeDown` :
     - A number : Enable this effect with specific wipe direction and set progress (0~1).

@@ -168,7 +168,7 @@ var buttons = scene.rexUI.add.buttons({
 - `sizerEvents` : Set `true` to fire [sizer events](ui-basesizer.md#events). Default value is `false`.
 - `enableLayer` : 
     - `false` : Add child game objects into scene's display list. Default behavior.
-    - `true` : Add child game objects into an internal [layer game object](layer.md). [See also](containerlite.md#layer).
+    - `true` : Add child game objects into an internal [layer game object](layer.md). [See also](containerlite.md#render-layer).
 - `eventEmitter` : Dispatch buttons' touch events to other game object, default is this buttons game object.
 - `groupName` : Optional group name for argument of touch events.
 - `setValueCallback`, or `setButtonStateCallback` : Callback to set value of a button.
@@ -232,7 +232,7 @@ See [sizer object](ui-sizer.md)
     - `groupName` : Optional group name.
     - `button` : Triggered button game object.
     - `index` : Index of triggered button game object.
-    - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
+    - `pointer` : [Pointer](touchevents.md#pointer) object.
     - Cancel remaining touched events : `event.stopPropagation()`
 - Pointer-over button
     ```javascript
@@ -476,7 +476,7 @@ buttons.forEachButtton(callback, scope);
     });
     ```
     - `buttons` : Array of button game objects.
-        - Property `name` of each button game object will be used as a key in [`buttons.data`](gameobject.md#private-data)
+        - Property `name` of each button game object will be used as a key in [`buttons.data`](gameobject.md#data)
     - `buttonsType` : Set type to `'checkboxes'`, or `'radio'`.
     - `setValueCallback` or `setButtonStateCallback` : Callback to set value of a button.
         ```javascript
@@ -488,7 +488,7 @@ buttons.forEachButtton(callback, scope);
         - `value`: `true`, or `false`.
         - `previousValue` : `true`, or `false`.
         - Also trigger `'button.statechange'` event.
-    - State of a button : Stored in [`buttons.data`](gameobject.md#private-data)
+    - State of a button : Stored in [`buttons.data`](gameobject.md#data)
     - Get states of all buttons :
         ```javascript
         var states = buttons.getAllButtonsState();  // { key: boolean }

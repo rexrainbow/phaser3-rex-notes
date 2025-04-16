@@ -313,7 +313,7 @@ var dialog = scene.rexUI.add.dialog({
 - `sizerEvents` : Set `true` to fire [sizer events](ui-basesizer.md#events). Default value is `false`..
 - `enableLayer` : 
     - `false` : Add child game objects into scene's display list. Default behavior.
-    - `true` : Add child game objects into an internal [layer game object](layer.md). [See also](containerlite.md#layer).
+    - `true` : Add child game objects into an internal [layer game object](layer.md). [See also](containerlite.md#render-layer).
 
 ### Custom class
 
@@ -449,7 +449,7 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md), [containe
     - `button` : Triggered button game object.
     - `groupName` : `'choices'`, `'actions'`, or `'toolbar'`, `'leftToolbar'`.
     - `index` : Index of triggered button game object.
-    - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
+    - `pointer` : [Pointer](touchevents.md#pointer) object.
     - Cancel remaining touched events : `event.stopPropagation()`
 - Pointer-over button
     ```javascript
@@ -481,7 +481,7 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md), [containe
     - `button` : Triggered button game object
     - `groupName` : `'choices'`, `'actions'`, `'toolbar'`, or `'leftToolbar'`.
     - `index` : Index of triggered button game object.
-    - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
+    - `pointer` : [Pointer](touchevents.md#pointer) object.
     - Cancel remaining touched events : `event.stopPropagation()`
 - Pointer-out button
     ```javascript
@@ -513,7 +513,7 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md), [containe
     - `button` : Triggered button game object.
     - `groupName` : `'choices'`, `'actions'`, `'toolbar'`, or `'leftToolbar'`
     - `index` : Index of triggered button game object.
-    - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
+    - `pointer` : [Pointer](touchevents.md#pointer) object.
     - Cancel remaining touched events : `event.stopPropagation()`
 - Enable button's input
     ```javascript

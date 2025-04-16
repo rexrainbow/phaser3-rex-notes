@@ -127,9 +127,9 @@ var image = scene.add.rexTransitionImage(x, y, texture, frame, {
 - `dir` : Transition direction.
     - `0`, or `'out'` : Transit current texture/[image](image.md) out.
     - `1`, or `'in'` : Transit next texture/[image](image.md) in.
-- `onStart`, `onStartScope` : Callback and scope of transition-start. See [Set transition callbacks](transitionimage.md#set-transition-callbacks)
-- `onProgress`, `onProgressScope` : Callback and scope of transition-progress. See [Set transition callbacks](transitionimage.md#set-transition-callbacks)
-- `onComplete`, `onCompleteScope` : Callback and scope of transition-complete. See [Set transition callbacks](transitionimage.md#set-transition-callbacks)
+- `onStart`, `onStartScope` : Callback and scope of transition-start. See [Set transition callbacks](transitionimage.md#transition-callbacks)
+- `onProgress`, `onProgressScope` : Callback and scope of transition-progress. See [Set transition callbacks](transitionimage.md#transition-callbacks)
+- `onComplete`, `onCompleteScope` : Callback and scope of transition-complete. See [Set transition callbacks](transitionimage.md#transition-callbacks)
 - `duration` : Duration of transition.
 - `ease` : [Ease function](tween.md#ease-equations) of transition-progress.
 - `mask` : Mask game object.
