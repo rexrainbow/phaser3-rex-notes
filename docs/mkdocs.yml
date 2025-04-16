@@ -517,9 +517,6 @@ repo_name: 'phaser3-rex-notes'
 repo_url: 'https://github.com/rexrainbow/phaser3-rex-notes/'
 
 extra:
-    analytics:
-        provider: google
-        property: UA-119804412-1
     social:    
         - icon: fontawesome/brands/twitter
           link: https://twitter.com/rexrainbow
@@ -538,12 +535,14 @@ theme:
     features:
         - search.suggest
         - search.highlight
+        - content.code.copy
 
 plugins:
     - search
 
 markdown_extensions:
 - admonition
+- attr_list
 - codehilite:
     guess_lang: false
     linenums: false
@@ -552,7 +551,8 @@ markdown_extensions:
 - footnotes
 - meta
 - def_list
-- pymdownx.arithmatex
+- md_in_html
+- pymdownx.blocks.caption
 - pymdownx.betterem:
     smart_enable: all
 - pymdownx.caret
@@ -571,6 +571,7 @@ markdown_extensions:
         - name: mermaid
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
-- pymdownx.tasklist
+- pymdownx.tasklist:
+    custom_checkbox: true
 - pymdownx.tilde
 
