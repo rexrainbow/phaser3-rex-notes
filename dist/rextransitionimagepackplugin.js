@@ -8678,10 +8678,11 @@ void main () {
         var filterName = FilterClass.FilterName;
         var renderNodes = GetGame(game).renderer.renderNodes;
         if (renderNodes.hasNode(filterName)) {
-            return;
+            return false;
         }
 
         renderNodes.addNodeConstructor(filterName, FilterClass);
+        return true;
     };
 
     var AddController = function (gameObject, ControllerClass, config, external) {

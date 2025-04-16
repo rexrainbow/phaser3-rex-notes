@@ -14932,10 +14932,11 @@
         var filterName = FilterClass.FilterName;
         var renderNodes = GetGame(game).renderer.renderNodes;
         if (renderNodes.hasNode(filterName)) {
-            return;
+            return false;
         }
 
         renderNodes.addNodeConstructor(filterName, FilterClass);
+        return true;
     };
 
     const FilterName = 'FilterP3Circle';

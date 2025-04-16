@@ -32,16 +32,16 @@
         var filterName = FilterClass.FilterName;
         var renderNodes = GetGame(game).renderer.renderNodes;
         if (renderNodes.hasNode(filterName)) {
-            return;
+            return false;
         }
 
         renderNodes.addNodeConstructor(filterName, FilterClass);
+        return true;
     };
 
     var AddFilterListMethod = function (name, callback) {
         var FilterListComponent = Phaser.GameObjects.Components.FilterList.prototype;
         if (FilterListComponent[name]) {
-            console.warn(`FilterList method: ${name} is already defined`);
             return;
         }
 
@@ -165,7 +165,7 @@ void main (void) {
 
     const GetValue$5 = Phaser.Utils.Objects.GetValue;
 
-    class BloomController extends Phaser.Filters.ParallelFilters {
+    let BloomController$1 = class BloomController extends Phaser.Filters.ParallelFilters {
         constructor(camera, config) {
             super(camera);
 
@@ -306,7 +306,35 @@ void main (void) {
             return this;
         }
 
-    }
+    };
+
+    var InstallBloomFX = function (game) {
+        game = GetGame(game);
+
+        var success = RegisterFilter(game, BloomStepFilter);
+        if (!success) {
+            return false;
+        }
+
+        AddFilterListMethod(
+            'addP3Bloom',
+            function (color, offsetX, offsetY, blurStrength, strength, steps) {
+                if (color === undefined) { color = 0xFFFFFF; }
+                if (offsetX === undefined) { offsetX = 1; }
+                if (offsetY === undefined) { offsetY = 1; }
+                if (blurStrength === undefined) { blurStrength = 1; }
+                if (strength === undefined) { strength = 1; }
+                if (steps === undefined) { steps = 4; }
+
+                return this.add(new BloomController$1(
+                    this.camera,
+                    { color, offsetX, offsetY, blurStrength, strength, steps }
+                ));
+            }
+        );
+
+        return true;
+    };
 
     const FilterName$4 = 'FilterP3Circle';
 
@@ -494,6 +522,50 @@ void main (void) {
 
     }
 
+    var InstallCircleFX = function (game) {
+        game = GetGame(game);
+
+        var success = RegisterFilter(game, CircleFilter);
+        if (!success) {
+            return false;
+        }
+
+        AddFilterListMethod(
+            'addP3Bloom',
+            function (color, offsetX, offsetY, blurStrength, strength, steps) {
+                if (color === undefined) { color = 0xFFFFFF; }
+                if (offsetX === undefined) { offsetX = 1; }
+                if (offsetY === undefined) { offsetY = 1; }
+                if (blurStrength === undefined) { blurStrength = 1; }
+                if (strength === undefined) { strength = 1; }
+                if (steps === undefined) { steps = 4; }
+
+                return this.add(new BloomController(
+                    this.camera,
+                    { color, offsetX, offsetY, blurStrength, strength, steps }
+                ));
+            }
+        );
+
+        AddFilterListMethod(
+            'addP3Circle',
+            function (thickness, color, backgroundColor, scale, feather) {
+                if (thickness === undefined) { thickness = 8; }
+                if (color === undefined) { color = 0xFF33B2; }
+                if (backgroundColor === undefined) { backgroundColor = 0xFF0000; }
+                if (scale === undefined) { scale = 1; }
+                if (feather === undefined) { feather = 0.005; }
+
+                return this.add(new CircleController(
+                    this.camera,
+                    { thickness, color, backgroundColor, scale, feather }
+                ));
+            }
+        );
+
+        return true;
+    };
+
     const FilterName$3 = 'FilterP3Gradient';
 
     // Built-in fx in phaser3
@@ -670,6 +742,35 @@ void main ()
 
     }
 
+    var InstallGradientFX = function (game) {
+        game = GetGame(game);
+
+        var success = RegisterFilter(game, GradientFilter);    if (!success) {
+            return false;
+        }
+
+        AddFilterListMethod(
+            'addP3Gradient',
+            function (color1, color2, alpha, fromX, fromY, toX, toY, size) {
+                if (color1 === undefined) { color1 = 0xff0000; }
+                if (color2 === undefined) { color2 = 0x00ff00; }
+                if (alpha === undefined) { alpha = 0.2; }
+                if (fromX === undefined) { fromX = 0; }
+                if (fromY === undefined) { fromY = 0; }
+                if (toX === undefined) { toX = 0; }
+                if (toY === undefined) { toY = 1; }
+                if (size === undefined) { size = 0; }
+
+                return this.add(new GradientController(
+                    this.camera,
+                    { color1, color2, alpha, fromX, fromY, toX, toY, size }
+                ));
+            }
+        );
+
+        return true;
+    };
+
     const FilterName$2 = 'FilterP3Shine';
 
     // Built-in fx in phaser3
@@ -806,6 +907,32 @@ void main (void) {
         }
     }
 
+    var InstallShineFX = function (game) {
+        game = GetGame(game);
+
+        var success = RegisterFilter(game, ShineFilter);
+        if (!success) {
+            return false;
+        }
+
+        AddFilterListMethod(
+            'addP3Shine',
+            function (speed, lineWidth, gradient, reveal) {
+                if (speed === undefined) { speed = 0.5; }
+                if (lineWidth === undefined) { lineWidth = 0.5; }
+                if (gradient === undefined) { gradient = 3; }
+                if (reveal === undefined) { reveal = false; }
+
+                return this.add(new ShineController(
+                    this.camera,
+                    { speed, lineWidth, gradient, reveal }
+                ));
+            }
+        );
+
+        return true;
+    };
+
     const FilterName$1 = 'FilterP3Vignette';
 
     // Built-in fx in phaser3
@@ -908,6 +1035,32 @@ void main (void) {
             return this;
         }
     }
+
+    var InstallVignetteFX = function (game) {
+        game = GetGame(game);
+
+        var success = RegisterFilter(game, VignetteFilter);
+        if (!success) {
+            return false;
+        }
+
+        AddFilterListMethod(
+            'addP3Vignette',
+            function (x, y, radius, strength) {
+                if (x === undefined) { x = 0.5; }
+                if (y === undefined) { y = 0.5; }
+                if (radius === undefined) { radius = 0.5; }
+                if (strength === undefined) { strength = 0.5; }
+
+                return this.add(new VignetteController(
+                    this.camera,
+                    { x, y, radius, strength }
+                ));
+            }
+        );
+
+        return true;
+    };
 
     const FilterName = 'FilterP3Wipe';
 
@@ -1064,96 +1217,13 @@ void main (void) {
 
     }
 
-    var InstallP3Fx = function (game) {
+    var InstallWipeFX = function (game) {
         game = GetGame(game);
-        RegisterFilter(game, BloomStepFilter);
-        RegisterFilter(game, CircleFilter);
-        RegisterFilter(game, GradientFilter);
-        RegisterFilter(game, ShineFilter);
-        RegisterFilter(game, VignetteFilter);
-        RegisterFilter(game, WarpFilter);
 
-        AddFilterListMethod(
-            'addP3Bloom',
-            function (color, offsetX, offsetY, blurStrength, strength, steps) {
-                if (color === undefined) { color = 0xFFFFFF; }
-                if (offsetX === undefined) { offsetX = 1; }
-                if (offsetY === undefined) { offsetY = 1; }
-                if (blurStrength === undefined) { blurStrength = 1; }
-                if (strength === undefined) { strength = 1; }
-                if (steps === undefined) { steps = 4; }
-
-                return this.add(new BloomController(
-                    this.camera,
-                    { color, offsetX, offsetY, blurStrength, strength, steps }
-                ));
-            }
-        );
-
-        AddFilterListMethod(
-            'addP3Circle',
-            function (thickness, color, backgroundColor, scale, feather) {
-                if (thickness === undefined) { thickness = 8; }
-                if (color === undefined) { color = 0xFF33B2; }
-                if (backgroundColor === undefined) { backgroundColor = 0xFF0000; }
-                if (scale === undefined) { scale = 1; }
-                if (feather === undefined) { feather = 0.005; }
-
-                return this.add(new CircleController(
-                    this.camera,
-                    { thickness, color, backgroundColor, scale, feather }
-                ));
-            }
-        );
-
-        AddFilterListMethod(
-            'addP3Gradient',
-            function (color1, color2, alpha, fromX, fromY, toX, toY, size) {
-                if (color1 === undefined) { color1 = 0xff0000; }
-                if (color2 === undefined) { color2 = 0x00ff00; }
-                if (alpha === undefined) { alpha = 0.2; }
-                if (fromX === undefined) { fromX = 0; }
-                if (fromY === undefined) { fromY = 0; }
-                if (toX === undefined) { toX = 0; }
-                if (toY === undefined) { toY = 1; }
-                if (size === undefined) { size = 0; }
-
-                return this.add(new GradientController(
-                    this.camera,
-                    { color1, color2, alpha, fromX, fromY, toX, toY, size }
-                ));
-            }
-        );
-
-        AddFilterListMethod(
-            'addP3Shine',
-            function (speed, lineWidth, gradient, reveal) {
-                if (speed === undefined) { speed = 0.5; }
-                if (lineWidth === undefined) { lineWidth = 0.5; }
-                if (gradient === undefined) { gradient = 3; }
-                if (reveal === undefined) { reveal = false; }
-
-                return this.add(new ShineController(
-                    this.camera,
-                    { speed, lineWidth, gradient, reveal }
-                ));
-            }
-        );
-
-        AddFilterListMethod(
-            'addP3Vignette',
-            function (x, y, radius, strength) {
-                if (x === undefined) { x = 0.5; }
-                if (y === undefined) { y = 0.5; }
-                if (radius === undefined) { radius = 0.5; }
-                if (strength === undefined) { strength = 0.5; }
-
-                return this.add(new VignetteController(
-                    this.camera,
-                    { x, y, radius, strength }
-                ));
-            }
-        );
+        var success = RegisterFilter(game, WarpFilter);
+        if (!success) {
+            return false;
+        }
 
         AddFilterListMethod(
             'addP3Wipe',
@@ -1183,6 +1253,24 @@ void main (void) {
             }
         );
 
+        return true;
+    };
+
+    var InstallCallbacks = [
+        InstallBloomFX,
+        InstallCircleFX,
+        InstallGradientFX,
+        InstallShineFX,
+        InstallVignetteFX,
+        InstallWipeFX
+    ];
+
+    var InstallP3FX = function (game) {
+        var success = false;
+        for (var i = 0, cnt = InstallCallbacks.length; i < cnt; i++) {
+            success = InstallCallbacks[i](game) | success;
+        }
+        return success;
     };
 
     class P3FXPlugin extends Phaser.Plugins.BasePlugin {
@@ -1195,11 +1283,11 @@ void main (void) {
             eventEmitter.on('destroy', this.destroy, this);
 
             if (this.game.isRunning) {
-                InstallP3Fx(this.game);
+                InstallP3FX(this.game);
 
             } else {
                 eventEmitter.once('ready', function () {
-                    InstallP3Fx(this.game);
+                    InstallP3FX(this.game);
                 }, this);
 
             }

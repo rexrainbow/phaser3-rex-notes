@@ -170,16 +170,16 @@ void main (void) {
       var filterName = FilterClass.FilterName;
       var renderNodes = GetGame(game).renderer.renderNodes;
       if (renderNodes.hasNode(filterName)) {
-          return;
+          return false;
       }
 
       renderNodes.addNodeConstructor(filterName, FilterClass);
+      return true;
   };
 
   var AddFilterListMethod = function (name, callback) {
       var FilterListComponent = Phaser.GameObjects.Components.FilterList.prototype;
       if (FilterListComponent[name]) {
-          console.warn(`FilterList method: ${name} is already defined`);
           return;
       }
 
