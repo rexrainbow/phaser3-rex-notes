@@ -12,20 +12,21 @@ import { VignetteController } from './InstallVignetteFX.js';
 import { WipeController } from './InstallWipeFX.js';
 
 
+var InstallCallbacks = [
+    InstallBloomFX,
+    InstallCircleFX,
+    InstallGradientFX,
+    InstallShineFX,
+    InstallVignetteFX,
+    InstallWipeFX
+]
+
 var InstallP3FX = function (game) {
-
-    var success = InstallBloomFX(game);
-    if (!success) {
-        return false;
+    var success = false;
+    for (var i = 0, cnt = InstallCallbacks.length; i < cnt; i++) {
+        success = InstallCallbacks[i](game) | success;
     }
-
-    InstallCircleFX(game);
-    InstallGradientFX(game);
-    InstallShineFX(game);
-    InstallVignetteFX(game);
-    InstallWipeFX(game);
-
-    return true;
+    return success;
 }
 
 export default InstallP3FX;
