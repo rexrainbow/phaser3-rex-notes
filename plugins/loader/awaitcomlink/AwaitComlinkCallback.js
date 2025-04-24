@@ -45,7 +45,8 @@ const LoaderCallback = function (config) {
 }
 
 var CreateAwiatFile = function (loader, config) {
-    var workerFilePath = GetFastValue(config, 'worker');
+    var workerFilePath = GetFastValue(config, 'workerFilePath');
+    var workerCode = GetFastValue(config, 'workerCode');
     var data = GetFastValue(config, 'data');
 
     var onBegin = GetFastValue(config, 'onBegin');
@@ -58,7 +59,10 @@ var CreateAwiatFile = function (loader, config) {
         if (workerFilePath) {
             worker = new Worker(workerFilePath);
         } else {
-            var blob = new Blob([DefaultWorkerCode], { type: 'application/javascript' });
+            if (!workerCode) {
+                workerCode = DefaultWorkerCode;
+            }
+            var blob = new Blob([workerCode], { type: 'application/javascript' });
             worker = new Worker(URL.createObjectURL(blob));
         }
 

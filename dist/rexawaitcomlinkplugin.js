@@ -160,7 +160,6 @@
 
     const DefaultWorker = `\
 importScripts('https://unpkg.com/comlink/dist/umd/comlink.js');
-
 (() => {
     async function run(data, onBefore, onEnd) {
         var newData;
@@ -220,7 +219,8 @@ importScripts('https://unpkg.com/comlink/dist/umd/comlink.js');
     };
 
     var CreateAwiatFile = function (loader, config) {
-        var workerFilePath = GetFastValue(config, 'worker');
+        var workerFilePath = GetFastValue(config, 'workerFilePath');
+        var workerCode = GetFastValue(config, 'workerCode');
         var data = GetFastValue(config, 'data');
 
         var onBegin = GetFastValue(config, 'onBegin');
@@ -233,7 +233,10 @@ importScripts('https://unpkg.com/comlink/dist/umd/comlink.js');
             if (workerFilePath) {
                 worker = new Worker(workerFilePath);
             } else {
-                var blob = new Blob([DefaultWorker], { type: 'application/javascript' });
+                if (!workerCode) {
+                    workerCode = DefaultWorker;
+                }
+                var blob = new Blob([workerCode], { type: 'application/javascript' });
                 worker = new Worker(URL.createObjectURL(blob));
             }
 

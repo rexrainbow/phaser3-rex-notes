@@ -25,7 +25,7 @@ class Demo extends Phaser.Scene {
             // load comlink api before start worker
             // comlink: './assets/comlink/comlink.js',
 
-            worker: './examples/awaitcomlinkloader/worker.js',
+            workerFilePath: './examples/awaitcomlinkloader/worker.js',
 
             data: {
                 a: 10, b: 20

@@ -5,7 +5,9 @@ declare function AwaitComlinkCallback(
     config: {
         comlink?: string,
 
-        worker?: string,
+        workerFilePath?: string,
+        workerCode?: string,
+
         data?: unknown,
 
         onBegin?: (data: unknown) => unknown,

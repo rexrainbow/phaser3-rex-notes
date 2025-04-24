@@ -1,4 +1,4 @@
-importScripts('../../assets/comlink/comlink.js');
+importScripts('https://unpkg.com/comlink/dist/umd/comlink.js');
 (() => {
     async function run(data, onBefore, onEnd) {
         var newData;
