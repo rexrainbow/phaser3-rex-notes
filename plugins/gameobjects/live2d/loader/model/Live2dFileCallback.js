@@ -32,7 +32,7 @@ var Live2dFileCallback = function (key, url) {
         // Can load model assets directly
         LoadFiles(loader, key, url);
     } else {
-        // Core script is loading
+        // Core script is loaded under this event
         loader.once('filecomplete-live2dcore-live2dcore', function () {
             // Load model assets
             LoadFiles(loader, key, url);

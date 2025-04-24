@@ -1,11 +1,10 @@
-import LoaderCallback from './loader/awaitloader/AwaitLoaderCallback.js';
-
+import LoaderCallback from './loader/awaitcomlink/AwaitComlinkCallback';
 export default LoaderCallback;
 
 declare module 'phaser' {
     namespace Loader {
         interface LoaderPlugin {
-            rexAwait: typeof LoaderCallback,
+            rexAwaitComlink: typeof LoaderCallback,
         }
     }
 }
