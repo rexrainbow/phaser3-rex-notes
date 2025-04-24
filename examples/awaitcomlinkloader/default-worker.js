@@ -5,15 +5,6 @@ class Demo extends Phaser.Scene {
     constructor() {
         super({
             key: 'examples',
-
-            // load comlink api before preload stage
-            pack: {
-                files: [{
-                    'type': 'script',
-                    'key': 'comlink',
-                    'url': './assets/comlink/comlink.js'
-                }]
-            }
         })
     }
 
