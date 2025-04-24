@@ -11,7 +11,7 @@ var config = {
   // cameras: null,
   // map: {},
   // physics: {},
-  // loader: {},
+  // pack: {files: [{...}]},
   // plugins: false,
   // input: {}
 };
