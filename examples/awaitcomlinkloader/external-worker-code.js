@@ -12,7 +12,7 @@ class Demo extends Phaser.Scene {
                     {
                         'type': 'script',
                         'key': 'comlink',
-                        'url': './assets/comlink/comlink.js'
+                        'url': 'https://unpkg.com/comlink/dist/umd/comlink.js'
                     },
                     {
                         'type': 'text',
