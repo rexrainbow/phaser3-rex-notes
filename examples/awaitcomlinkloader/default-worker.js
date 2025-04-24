@@ -20,22 +20,40 @@ class Demo extends Phaser.Scene {
     preload() {
         var textObject = this.add.text(0, 0, 'Preload\n');
 
-        this.load.rexAwaitComlink({
-            // load comlink api before start worker
-            // comlink: './assets/comlink/comlink.js',
-
-            worker: './examples/awaitcomlinkloader/worker.js',
-
-            payload: {
+        console.log('preload');
+        this.load.rexAwaitComlink({          
+            data: {
                 a: 10, b: 20
             },
 
-            onBeforeWorker(payload) {
-                textObject.text += `a=${payload.a}, b=${payload.b}\n`
+            async onBegin(data) {
+                console.log('onBegin', data);
+                textObject.text += `a=${data.a}, b=${data.b}\n`;
+                await new Promise(function (resolve, reject) {
+                    setTimeout(resolve, 1000);
+                });
             },
 
-            onAfterWorker(payload) {
-                textObject.text += `a=${payload.a}, b=${payload.b}\n`
+            async onBeforeWorker(data) {
+                console.log('onBeforeWorker', data);
+                await new Promise(function (resolve, reject) {
+                    setTimeout(resolve, 1000);
+                });
+            },
+
+            async onAfterWorker(data) {
+                console.log('onAfterWorker', data);
+                await new Promise(function (resolve, reject) {
+                    setTimeout(resolve, 1000);
+                });
+            },
+
+            async onEnd(data) {
+                console.log('onEnd', data);
+                textObject.text += `a=${data.a}, b=${data.b}\n`;
+                await new Promise(function (resolve, reject) {
+                    setTimeout(resolve, 1000);
+                });
             }
         })
 
@@ -43,6 +61,7 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
+        console.log('create');
         this.print.text += 'Create\n';
     }
 

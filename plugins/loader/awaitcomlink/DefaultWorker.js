@@ -1,5 +1,5 @@
-// import * as Comlink from 'comlink'
-importScripts('../../assets/comlink/comlink.js');
+const DefaultWorker = `\
+importScripts('https://unpkg.com/comlink/dist/umd/comlink.js');
 
 (() => {
     async function run(data, onBefore, onEnd) {
@@ -11,14 +11,6 @@ importScripts('../../assets/comlink/comlink.js');
             }
         }
 
-        console.log('onWorker');
-        await new Promise(function (resolve, reject) {
-            setTimeout(resolve, 1000);
-        });
-
-        data.a += 10;
-        data.b += 20;
-
         if (onEnd) {
             newData = await onEnd(data);
             if (newData !== undefined) {
@@ -28,6 +20,8 @@ importScripts('../../assets/comlink/comlink.js');
 
         return data;
     }
-
     Comlink.expose(run);
-})();
+})();\
+`;
+
+export default DefaultWorker;

@@ -6,12 +6,12 @@ import {
     SetState as SetComlinkScriptState,
     LOADED
 } from './AwaitComlinkScriptState';
+import DefaultWorkerCode from './DefaultWorker.js';
 
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 
-const LoaderCallback = function (workerFilePath, workerConfig, onAfterWorker, onBeforeWorker) {
+const LoaderCallback = function (config) {
     var loader = this;
 
     if (IsComlinkNotLoad()) {
@@ -20,7 +20,7 @@ const LoaderCallback = function (workerFilePath, workerConfig, onAfterWorker, on
 
         } else {
             // Comlink script is not loaded
-            var comlinkFilePath = GetFastValue(workerFilePath, 'comlink');
+            var comlinkFilePath = GetFastValue(config, 'comlink');
             loader.addFile(new AwaitComlinkScriptFile(loader, comlinkFilePath));
 
         }
@@ -30,13 +30,13 @@ const LoaderCallback = function (workerFilePath, workerConfig, onAfterWorker, on
     if (IsComlinkLoaded()) {
         // Comlink script is loaded
         // Can run Comlink directly
-        this.addFile(CreateAwiatFile(this, workerFilePath, workerConfig, onAfterWorker, onBeforeWorker));
+        this.addFile(CreateAwiatFile(this, config));
 
     } else {
         // Comlink script is loaded under this event
         loader.once('filecomplete-comlink-comlink', function () {
             // Run Comlink directly
-            this.addFile(CreateAwiatFile(loader, workerFilePath, workerConfig, onAfterWorker, onBeforeWorker));
+            this.addFile(CreateAwiatFile(loader, config));
         })
 
     }
@@ -44,42 +44,50 @@ const LoaderCallback = function (workerFilePath, workerConfig, onAfterWorker, on
     return this;
 }
 
-var CreateAwiatFile = function (loader, workerFilePath, payload, onAfterWorker, onBeforeWorker) {
-    var runWorkerCallbackName;
-    var onAfterWorkerScope, onBeforeWorkerScope;
-    if (IsPlainObject(workerFilePath)) {
-        var config = workerFilePath;
-        workerFilePath = GetFastValue(config, 'worker');
-        runWorkerCallbackName = GetFastValue(config, 'run', 'run');
-        payload = GetFastValue(config, 'payload');
-        onAfterWorker = GetFastValue(config, 'onAfterWorker');
-        onBeforeWorker = GetFastValue(config, 'onBeforeWorker');
-        onAfterWorkerScope = GetFastValue(config, 'onAfterWorkerScope');
-        onBeforeWorkerScope = GetFastValue(config, 'onBeforeWorkerScope');
-    }
+var CreateAwiatFile = function (loader, config) {
+    var workerFilePath = GetFastValue(config, 'worker');
+    var data = GetFastValue(config, 'data');
+
+    var onBegin = GetFastValue(config, 'onBegin');
+    var onBeforeWorker = GetFastValue(config, 'onBeforeWorker');
+    var onAfterWorker = GetFastValue(config, 'onAfterWorker');
+    var onEnd = GetFastValue(config, 'onEnd');
 
     var callback = async function (successCallback, failureCallback) {
-        var newPayload;
+        var worker;
+        if (workerFilePath) {
+            worker = new Worker(workerFilePath);
+        } else {
+            var blob = new Blob([DefaultWorkerCode], { type: 'application/javascript' });
+            worker = new Worker(URL.createObjectURL(blob));
+        }
+
+        var newData;
+
+        if (onBegin) {
+            var newData = await onBegin(data);
+            if (newData !== undefined) {
+                data = newData;
+            }
+        }
 
         if (onBeforeWorker) {
-            var newPayload = await onBeforeWorker.call(onBeforeWorkerScope, payload);
-            if (newPayload !== undefined) {
-                payload = newPayload;
-            }
+            onBeforeWorker = Comlink.proxy(onBeforeWorker);
         }
-
-        var worker = new Worker(workerFilePath);
-        var obj = Comlink.wrap(worker);
-        payload = await obj[runWorkerCallbackName](payload);
-
         if (onAfterWorker) {
-            newPayload = await onAfterWorker.call(onAfterWorkerScope, payload);
-            if (newPayload !== undefined) {
-                payload = newPayload;
+            onAfterWorker = Comlink.proxy(onAfterWorker);
+        }
+        var workerCallback = Comlink.wrap(worker);
+        data = await workerCallback(data, onBeforeWorker, onAfterWorker);
+
+        if (onEnd) {
+            newData = await onEnd(data);
+            if (newData !== undefined) {
+                data = newData;
             }
         }
 
-        if (payload) {
+        if (data) {
             successCallback();
         } else {
             failureCallback();
