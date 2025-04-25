@@ -132,7 +132,6 @@
 
             var callback = function (successCallback, failureCallback) {
                 if (window.Comlink) {
-                    console.log('comlink is loaded');
                     SetState(LOADED);
                     successCallback();
 
@@ -161,7 +160,7 @@
     const DefaultWorker = `\
 importScripts('https://unpkg.com/comlink/dist/umd/comlink.js');
 (() => {
-    async function run(data, onBefore, onEnd) {
+    async function run(data, onBefore, onAfter) {
         var newData;
         if (onBefore) {
             newData = await onBefore(data);
@@ -170,8 +169,8 @@ importScripts('https://unpkg.com/comlink/dist/umd/comlink.js');
             }
         }
 
-        if (onEnd) {
-            newData = await onEnd(data);
+        if (onAfter) {
+            newData = await onAfter(data);
             if (newData !== undefined) {
                 data = newData;
             }
@@ -222,6 +221,7 @@ importScripts('https://unpkg.com/comlink/dist/umd/comlink.js');
         var workerFilePath = GetFastValue(config, 'workerFilePath');
         var workerCode = GetFastValue(config, 'workerCode');
         var data = GetFastValue(config, 'data');
+        var terminateWorker = GetFastValue(config, 'terminateWorker', true);
 
         var onBegin = GetFastValue(config, 'onBegin');
         var onBeforeWorker = GetFastValue(config, 'onBeforeWorker');
@@ -263,6 +263,10 @@ importScripts('https://unpkg.com/comlink/dist/umd/comlink.js');
                 if (newData !== undefined) {
                     data = newData;
                 }
+            }
+
+            if (terminateWorker) {
+                worker.terminate();
             }
 
             if (data) {

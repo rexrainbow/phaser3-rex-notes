@@ -1,6 +1,6 @@
 importScripts('../../assets/comlink/comlink.js');
 (() => {
-    async function run(data, onBefore, onEnd) {
+    async function run(data, onBefore, onAfter) {
         var newData;
         if (onBefore) {
             newData = await onBefore(data);
@@ -17,8 +17,8 @@ importScripts('../../assets/comlink/comlink.js');
         data.a += 10;
         data.b += 20;
 
-        if (onEnd) {
-            newData = await onEnd(data);
+        if (onAfter) {
+            newData = await onAfter(data);
             if (newData !== undefined) {
                 data = newData;
             }

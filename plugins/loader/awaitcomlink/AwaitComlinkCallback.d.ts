@@ -7,8 +7,8 @@ declare function AwaitComlinkCallback(
 
         workerFilePath?: string,
         workerCode?: string,
-
         data?: unknown,
+        terminateWorker?: boolean,
 
         onBegin?: (data: unknown) => unknown,
         onBeforeWorker?: (data: unknown) => unknown,

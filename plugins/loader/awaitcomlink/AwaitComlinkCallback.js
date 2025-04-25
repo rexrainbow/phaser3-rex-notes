@@ -48,6 +48,7 @@ var CreateAwiatFile = function (loader, config) {
     var workerFilePath = GetFastValue(config, 'workerFilePath');
     var workerCode = GetFastValue(config, 'workerCode');
     var data = GetFastValue(config, 'data');
+    var terminateWorker = GetFastValue(config, 'terminateWorker', true);
 
     var onBegin = GetFastValue(config, 'onBegin');
     var onBeforeWorker = GetFastValue(config, 'onBeforeWorker');
@@ -89,6 +90,10 @@ var CreateAwiatFile = function (loader, config) {
             if (newData !== undefined) {
                 data = newData;
             }
+        }
+
+        if (terminateWorker) {
+            worker.terminate();
         }
 
         if (data) {

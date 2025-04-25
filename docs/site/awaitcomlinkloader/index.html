@@ -15142,6 +15142,7 @@
 
 <span class="w">    </span><span class="nx">workerFilePath</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">data</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="c1">// terminateWorker: true,</span>
 
 <span class="w">    </span><span class="c1">// onBegin(data) { /*...*/ },</span>
 <span class="w">    </span><span class="c1">// onBeforeWorker(data) { /*...*/ },</span>
@@ -15157,6 +15158,11 @@
 </li>
 <li><code>workerFilePath</code> : URL of user worker file.</li>
 <li><code>data</code> : User-defined data that will be passed to other callbacks.</li>
+<li><code>terminateWorker</code> : <ul>
+<li><code>true</code> : Terminate worker after <code>onEnd</code> callback. Default behavior.</li>
+<li><code>false</code> : Keep worker alive.</li>
+</ul>
+</li>
 <li><code>onBegin</code> : Callback invoked befor running worker thread, in main thread.
     <div class="highlight"><pre><span></span><code><span class="nx">onBegin</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// return data;</span>
@@ -15227,7 +15233,7 @@
 <p>Sample code of worker file.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">importScripts</span><span class="p">(</span><span class="s1">&#39;https://unpkg.com/comlink/dist/umd/comlink.js&#39;</span><span class="p">);</span>
 <span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">run</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span><span class="w"> </span><span class="nx">onBefore</span><span class="p">,</span><span class="w"> </span><span class="nx">onEnd</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">run</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span><span class="w"> </span><span class="nx">onBefore</span><span class="p">,</span><span class="w"> </span><span class="nx">onAfter</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">newData</span><span class="p">;</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">onBefore</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="nx">newData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">onBefore</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
@@ -15238,8 +15244,8 @@
 
 <span class="w">        </span><span class="c1">// worker logic...</span>
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">onEnd</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nx">newData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">onEnd</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">onAfter</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">newData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">onAfter</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">newData</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">undefined</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">newData</span><span class="p">;</span>
 <span class="w">            </span><span class="p">}</span>
@@ -15276,7 +15282,7 @@
 <h5 id="default-worker-code">Default worker code<a class="headerlink" href="#default-worker-code" title="Permanent link">&para;</a></h5>
 <div class="highlight"><pre><span></span><code><span class="nx">importScripts</span><span class="p">(</span><span class="s1">&#39;https://unpkg.com/comlink/dist/umd/comlink.js&#39;</span><span class="p">);</span>
 <span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">run</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span><span class="w"> </span><span class="nx">onBefore</span><span class="p">,</span><span class="w"> </span><span class="nx">onEnd</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">run</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span><span class="w"> </span><span class="nx">onBefore</span><span class="p">,</span><span class="w"> </span><span class="nx">onAfter</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">newData</span><span class="p">;</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">onBefore</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="nx">newData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">onBefore</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
@@ -15285,8 +15291,8 @@
 <span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">onEnd</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nx">newData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">onEnd</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">onAfter</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">newData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">onAfter</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">newData</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">undefined</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">newData</span><span class="p">;</span>
 <span class="w">            </span><span class="p">}</span>

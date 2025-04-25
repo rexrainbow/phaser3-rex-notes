@@ -148,6 +148,7 @@ scene.load.rexAwaitComlink({
 
     workerFilePath: undefined,
     data: undefined,
+    // terminateWorker: true,
 
     // onBegin(data) { /*...*/ },
     // onBeforeWorker(data) { /*...*/ },
@@ -161,6 +162,9 @@ scene.load.rexAwaitComlink({
     - `undefined` : Using default value , `'https://unpkg.com/comlink/dist/umd/comlink.js'`
 - `workerFilePath` : URL of user worker file.
 - `data` : User-defined data that will be passed to other callbacks.
+- `terminateWorker` : 
+    - `true` : Terminate worker after `onEnd` callback. Default behavior.
+    - `false` : Keep worker alive.
 - `onBegin` : Callback invoked befor running worker thread, in main thread.
     ```javascript
     onBegin(data) {
@@ -226,7 +230,7 @@ Sample code of worker file.
 ```javascript
 importScripts('https://unpkg.com/comlink/dist/umd/comlink.js');
 (() => {
-    async function run(data, onBefore, onEnd) {
+    async function run(data, onBefore, onAfter) {
         var newData;
         if (onBefore) {
             newData = await onBefore(data);
@@ -237,8 +241,8 @@ importScripts('https://unpkg.com/comlink/dist/umd/comlink.js');
 
         // worker logic...
 
-        if (onEnd) {
-            newData = await onEnd(data);
+        if (onAfter) {
+            newData = await onAfter(data);
             if (newData !== undefined) {
                 data = newData;
             }
@@ -281,7 +285,7 @@ Note that `workerFilePath` is not given (`undefined`) in this use case.
 ```js
 importScripts('https://unpkg.com/comlink/dist/umd/comlink.js');
 (() => {
-    async function run(data, onBefore, onEnd) {
+    async function run(data, onBefore, onAfter) {
         var newData;
         if (onBefore) {
             newData = await onBefore(data);
@@ -290,8 +294,8 @@ importScripts('https://unpkg.com/comlink/dist/umd/comlink.js');
             }
         }
 
-        if (onEnd) {
-            newData = await onEnd(data);
+        if (onAfter) {
+            newData = await onAfter(data);
             if (newData !== undefined) {
                 data = newData;
             }
