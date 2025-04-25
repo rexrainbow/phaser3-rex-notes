@@ -23,6 +23,7 @@ nav:
     - Script tag loader: scripttagloader.md
     - Loading progress: loadingprogress.md
     - Loading animation scene: loading-animation-scene.md
+    - Await Comlink loader: awaitcomlinkloader.md
 - Game object:
     - Game object: gameobject.md
     - Sprite:

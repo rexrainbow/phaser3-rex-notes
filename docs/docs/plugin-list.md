@@ -9,6 +9,7 @@
 4. [Arcade-TCRP/Player](arcade-tcrp-player.md): Run commands on step of Arcade.
 5. [Arcade-TCRP/Recorder](arcade-tcrp-recorder.md): Store commands with step of Arcade.
 6. [AwaitLoader](awaitloader.md): Await custom task in preload stage.
+6. [AwaitComlinkLoader](awaitcomlinkloader.md): Running web worker by using [Comlink](https://github.com/GoogleChromeLabs/comlink) in preload stage.
 7. [Away time](awaytime.md): Get time from previous closing application to now.
 8. [BBCode-text](bbcodetext.md): Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 9.  [Board](board.md): Core object of Board system.

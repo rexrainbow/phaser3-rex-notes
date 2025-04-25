@@ -27,9 +27,9 @@ class Demo extends Phaser.Scene {
     preload() {
         var textObject = this.add.text(0, 0, 'Preload\n');
 
-        console.log('preload');
         var workerCode = this.cache.text.get('worker-code');
-        this.load.rexAwaitComlink({            
+        console.log('preload');
+        this.load.rexAwaitComlink({
             workerCode: workerCode,
 
             data: {

@@ -87,11 +87,11 @@ Await custom task in preload stage.
     ```
 - Import class
     ```javascript
-    import Awaitloader from 'phaser3-rex-plugins/plugins/awaitloader.js';
+    import AwaitLoader from 'phaser3-rex-plugins/plugins/awaitloader.js';
     ```
 - Start loading task
     ```javascript
-    Awaitloader.call(scene.load, function(successCallback, failureCallback) {
+    AwaitLoader.call(scene.load, function(successCallback, failureCallback) {
         // successCallback();
     }, scope)
     ```
