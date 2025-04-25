@@ -14,7 +14,6 @@ class AwaitComlinkScriptFile extends AwaitFile {
 
         var callback = function (successCallback, failureCallback) {
             if (window.Comlink) {
-                console.log('comlink is loaded')
                 SetComlinkScriptState(LOADED);
                 successCallback();
 
