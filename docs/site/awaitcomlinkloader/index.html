@@ -15142,6 +15142,7 @@
 
 <span class="w">    </span><span class="nx">workerFilePath</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">data</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="c1">// run: undefined,</span>
 <span class="w">    </span><span class="c1">// terminateWorker: true,</span>
 
 <span class="w">    </span><span class="c1">// onBegin(data) { /*...*/ },</span>
@@ -15158,13 +15159,18 @@
 </li>
 <li><code>workerFilePath</code> : URL of user worker file.</li>
 <li><code>data</code> : User-defined data that will be passed to other callbacks.</li>
+<li><code>run</code> :<ul>
+<li><code>undefined</code> : Expose a function in worker file, run this function directly. Default behavior.</li>
+<li>A string : Expose an object in worker file, run method by this name.</li>
+</ul>
+</li>
 <li><code>terminateWorker</code> : <ul>
 <li><code>true</code> : Terminate worker after <code>onEnd</code> callback. Default behavior.</li>
 <li><code>false</code> : Keep worker alive.</li>
 </ul>
 </li>
 <li><code>onBegin</code> : Callback invoked befor running worker thread, in main thread.
-    <div class="highlight"><pre><span></span><code><span class="nx">onBegin</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">onBegin</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span><span class="w"> </span><span class="nx">comlinkWrapperObject</span><span class="p">,</span><span class="w"> </span><span class="nx">worker</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// return data;</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -15177,6 +15183,7 @@
 <li><code>undefined</code> : Bypass data to worker task.</li>
 </ul>
 </li>
+<li>Store reference of comlinkWrapperObject, worker in this callback.</li>
 </ul>
 </li>
 <li><code>onBeforeWorker</code> : Proxy callback for inovking in worker thread. Implemented in <a href="#worker-code">worker code</a>.

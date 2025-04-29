@@ -148,6 +148,7 @@ scene.load.rexAwaitComlink({
 
     workerFilePath: undefined,
     data: undefined,
+    // run: undefined,
     // terminateWorker: true,
 
     // onBegin(data) { /*...*/ },
@@ -162,12 +163,15 @@ scene.load.rexAwaitComlink({
     - `undefined` : Using default value , `'https://unpkg.com/comlink/dist/umd/comlink.js'`
 - `workerFilePath` : URL of user worker file.
 - `data` : User-defined data that will be passed to other callbacks.
+- `run` :
+    - `undefined` : Expose a function in worker file, run this function directly. Default behavior.
+    - A string : Expose an object in worker file, run method by this name.
 - `terminateWorker` : 
     - `true` : Terminate worker after `onEnd` callback. Default behavior.
     - `false` : Keep worker alive.
 - `onBegin` : Callback invoked befor running worker thread, in main thread.
     ```javascript
-    onBegin(data) {
+    onBegin(data, comlinkWrapperObject, worker) {
         // return data;
     }
     ```
@@ -179,6 +183,7 @@ scene.load.rexAwaitComlink({
     ```
     - Return value will be passed to worker task.
         - `undefined` : Bypass data to worker task.
+    - Store reference of comlinkWrapperObject, worker in this callback.
 - `onBeforeWorker` : Proxy callback for inovking in worker thread. Implemented in [worker code](#worker-code).
     ```javascript
     onBeforeWorker(data) {

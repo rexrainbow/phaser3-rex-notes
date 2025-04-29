@@ -220,6 +220,7 @@ importScripts('https://unpkg.com/comlink/dist/umd/comlink.js');
     var CreateAwiatFile = function (loader, config) {
         var workerFilePath = GetFastValue(config, 'workerFilePath');
         var workerCode = GetFastValue(config, 'workerCode');
+        var runMethod = GetFastValue(config, 'run');
         var data = GetFastValue(config, 'data');
         var terminateWorker = GetFastValue(config, 'terminateWorker', true);
 
@@ -242,12 +243,7 @@ importScripts('https://unpkg.com/comlink/dist/umd/comlink.js');
 
             var newData;
 
-            if (onBegin) {
-                var newData = await onBegin(data);
-                if (newData !== undefined) {
-                    data = newData;
-                }
-            }
+            var comlinkObj = Comlink.wrap(worker);
 
             if (onBeforeWorker) {
                 onBeforeWorker = Comlink.proxy(onBeforeWorker);
@@ -255,8 +251,20 @@ importScripts('https://unpkg.com/comlink/dist/umd/comlink.js');
             if (onAfterWorker) {
                 onAfterWorker = Comlink.proxy(onAfterWorker);
             }
-            var workerCallback = Comlink.wrap(worker);
-            data = await workerCallback(data, onBeforeWorker, onAfterWorker);
+
+            if (onBegin) {
+                var newData = await onBegin(data, comlinkObj, worker);
+                if (newData !== undefined) {
+                    data = newData;
+                }
+            }
+
+            if (runMethod) {
+                data = await comlinkObj[runMethod](data, onBeforeWorker, onAfterWorker);
+            } else {
+                data = await comlinkObj(data, onBeforeWorker, onAfterWorker);
+            }
+
 
             if (onEnd) {
                 newData = await onEnd(data);

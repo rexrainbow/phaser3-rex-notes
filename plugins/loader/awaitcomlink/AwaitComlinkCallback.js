@@ -47,6 +47,7 @@ const LoaderCallback = function (config) {
 var CreateAwiatFile = function (loader, config) {
     var workerFilePath = GetFastValue(config, 'workerFilePath');
     var workerCode = GetFastValue(config, 'workerCode');
+    var runMethod = GetFastValue(config, 'run');
     var data = GetFastValue(config, 'data');
     var terminateWorker = GetFastValue(config, 'terminateWorker', true);
 
@@ -69,12 +70,7 @@ var CreateAwiatFile = function (loader, config) {
 
         var newData;
 
-        if (onBegin) {
-            var newData = await onBegin(data);
-            if (newData !== undefined) {
-                data = newData;
-            }
-        }
+        var comlinkObj = Comlink.wrap(worker);
 
         if (onBeforeWorker) {
             onBeforeWorker = Comlink.proxy(onBeforeWorker);
@@ -82,8 +78,20 @@ var CreateAwiatFile = function (loader, config) {
         if (onAfterWorker) {
             onAfterWorker = Comlink.proxy(onAfterWorker);
         }
-        var workerCallback = Comlink.wrap(worker);
-        data = await workerCallback(data, onBeforeWorker, onAfterWorker);
+
+        if (onBegin) {
+            var newData = await onBegin(data, comlinkObj, worker);
+            if (newData !== undefined) {
+                data = newData;
+            }
+        }
+
+        if (runMethod) {
+            data = await comlinkObj[runMethod](data, onBeforeWorker, onAfterWorker);
+        } else {
+            data = await comlinkObj(data, onBeforeWorker, onAfterWorker);
+        }
+
 
         if (onEnd) {
             newData = await onEnd(data);

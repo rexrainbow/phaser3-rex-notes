@@ -10,7 +10,7 @@ declare function AwaitComlinkCallback(
         data?: unknown,
         terminateWorker?: boolean,
 
-        onBegin?: (data: unknown) => unknown,
+        onBegin?: (data: unknown, comlinkWrapperObject: any, worker: Worker) => unknown,
         onBeforeWorker?: (data: unknown) => unknown,
         onAfterWorker?: (data: unknown) => unknown,
         onEnd?: (data: unknown) => unknown,
