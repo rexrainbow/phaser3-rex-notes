@@ -267,7 +267,7 @@ importScripts('https://unpkg.com/comlink/dist/umd/comlink.js');
 
 
             if (onEnd) {
-                newData = await onEnd(data);
+                newData = await onEnd(data, comlinkObj, worker);
                 if (newData !== undefined) {
                     data = newData;
                 }

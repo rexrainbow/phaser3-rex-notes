@@ -94,7 +94,7 @@ var CreateAwiatFile = function (loader, config) {
 
 
         if (onEnd) {
-            newData = await onEnd(data);
+            newData = await onEnd(data, comlinkObj, worker);
             if (newData !== undefined) {
                 data = newData;
             }

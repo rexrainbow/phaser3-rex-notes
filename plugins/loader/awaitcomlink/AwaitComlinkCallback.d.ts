@@ -13,7 +13,7 @@ declare function AwaitComlinkCallback(
         onBegin?: (data: unknown, comlinkWrapperObject: any, worker: Worker) => unknown,
         onBeforeWorker?: (data: unknown) => unknown,
         onAfterWorker?: (data: unknown) => unknown,
-        onEnd?: (data: unknown) => unknown,
+        onEnd?: (data: unknown, comlinkWrapperObject: any, worker: Worker) => unknown,
 
     }
 ): Phaser.Loader.LoaderPlugin;

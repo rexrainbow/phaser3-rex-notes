@@ -15175,7 +15175,7 @@
 <span class="p">}</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="k">async</span><span class="w"> </span><span class="nx">onBegin</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+    <div class="highlight"><pre><span></span><code><span class="k">async</span><span class="w"> </span><span class="nx">onBegin</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span><span class="w"> </span><span class="nx">comlinkWrapperObject</span><span class="p">,</span><span class="w"> </span><span class="nx">worker</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// return data;</span>
 <span class="p">}</span>
 </code></pre></div><ul>
@@ -15219,12 +15219,12 @@
 </ul>
 </li>
 <li><code>onEnd</code> : Callback invoked after running worker thread, in main thread.
-    <div class="highlight"><pre><span></span><code><span class="nx">onEnd</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">onEnd</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span><span class="w"> </span><span class="nx">comlinkWrapperObject</span><span class="p">,</span><span class="w"> </span><span class="nx">worker</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// return false;</span>
 <span class="p">}</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="k">async</span><span class="w"> </span><span class="nx">onEnd</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+    <div class="highlight"><pre><span></span><code><span class="k">async</span><span class="w"> </span><span class="nx">onEnd</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span><span class="w"> </span><span class="nx">comlinkWrapperObject</span><span class="p">,</span><span class="w"> </span><span class="nx">worker</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// return false;</span>
 <span class="p">}</span>
 </code></pre></div><ul>
@@ -15233,6 +15233,7 @@
 <li>Others : Simulate loading Success.</li>
 </ul>
 </li>
+<li>Retrieve reference of comlinkWrapperObject, worker in this callback.</li>
 </ul>
 </li>
 </ul>

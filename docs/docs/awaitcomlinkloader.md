@@ -177,7 +177,7 @@ scene.load.rexAwaitComlink({
     ```
     or
     ```javascript
-    async onBegin(data) {
+    async onBegin(data, comlinkWrapperObject, worker) {
         // return data;
     }
     ```
@@ -214,19 +214,20 @@ scene.load.rexAwaitComlink({
         - `undefined` : Bypass data to worker task.
 - `onEnd` : Callback invoked after running worker thread, in main thread.
     ```javascript
-    onEnd(data) {
+    onEnd(data, comlinkWrapperObject, worker) {
         // return false;
     }
     ```
     or
     ```javascript
-    async onEnd(data) {
+    async onEnd(data, comlinkWrapperObject, worker) {
         // return false;
     }
     ```
     - Return value
         - `false` : Simulate loading failled.
         - Others : Simulate loading Success.
+    - Retrieve reference of comlinkWrapperObject, worker in this callback.
 
 ##### Worker code
 
