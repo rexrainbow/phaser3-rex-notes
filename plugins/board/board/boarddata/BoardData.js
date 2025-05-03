@@ -42,13 +42,15 @@ class BoardData {
             yMax = -Infinity;
 
         var UIDToXYZ = this.UIDToXYZ,
-            x, y;
+            xyz, x, y;
         for (var uid in UIDToXYZ) {
-            x = UIDToXYZ[uid].x;
+            xyz = UIDToXYZ[uid];
+            x = xyz.x;
+            y = xyz.y;
             if (xMin > x) { xMin = x; }
             if (xMax < x) { xMax = x; }
-            if (yMin > x) { yMin = x; }
-            if (yMax < x) { yMax = x; }
+            if (yMin > y) { yMin = y; }
+            if (yMax < y) { yMax = y; }
         }
 
         return {
