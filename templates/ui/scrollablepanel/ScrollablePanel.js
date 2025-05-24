@@ -2,7 +2,7 @@ import Scrollable from '../utils/scrollable/Scrollable.js';
 import GetScrollMode from '../utils/GetScrollMode.js';
 import ScrollableBlock from './scrollableblock/ScrollableBlock.js';
 import SetChildrenInteractive from '../utils/setchildreninteractive/SetChildrenInteractive.js';
-import ScrollToChild from './ScrollToChild.js';
+import ScrollToChild from './methods/ScrollToChild.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
