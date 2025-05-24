@@ -1,65 +1,73 @@
-import phaser from 'phaser/src/phaser.js';
-import PinchZoom from '../../plugins/camera/pinchzoom/PinchZoom.js';
-import PanScroll from '../../plugins/camera/panscroll/PanScroll.js';
-import FullWindowRectangle from '../../plugins/fullwindowrectangle.js'
+import phaser from '../../../phaser/src/phaser.js';
+import CameraControllerPlugin from '../../plugins/cameracontroller-plugin.js';
 
-class Demo extends Phaser.Scene {
+class SceneA extends Phaser.Scene {
     constructor() {
         super({
-            key: 'examples'
+            key: 'sceneA',
+            active: true,
         })
     }
 
-    preload() { }
+    preload() {
+        this.load.image('classroom', 'assets/images/backgrounds/classroom.png');
+    }
 
     create() {
-        var TEST_INPUTTARGET = false;
-
-        var bg;
-        if (TEST_INPUTTARGET) {
-            bg = new FullWindowRectangle(this);
-            bg.setDepth(-1);
-            this.add.existing(bg);
-        }
-
-        DrawSomethings(this, TEST_INPUTTARGET);
-
-        var pinchZoomController = new PinchZoom(this, {
-            // camera: this.cameras.main,
-            inputTarget: (bg) ? bg : this,
-
-            // focusEnable: false
+        this.add.image(400, 300, 'classroom');
+        var controller = this.plugins.get('rexCameraController').add(this, {
         });
 
-        var panScrollController = new PanScroll(this, {
-            // camera: this.cameras.main,
-            inputTarget: (bg) ? bg : this,
-        })
+        var pointer0GO = this.add.rectangle(0, 0, 40, 40, 0xff0000).setVisible(false);
+        var pointer1GO = this.add.rectangle(0, 0, 40, 40, 0xff0000).setVisible(false);
+        var midPointerGO = this.add.rectangle(0, 0, 40, 40, 0x00ff00).setVisible(false);
+        var camera = this.cameras.main;
+        var pinch = controller.pinchZoom.pinch;
+        var pointers = pinch.pointers;
+        pinch
+            .on('pinchstart', function () {
+                pointer0GO.setVisible(true);
+                pointer1GO.setVisible(true);
+                midPointerGO.setVisible(true);
+            })
+            .on('pinchend', function () {
+                pointer0GO.setVisible(false);
+                pointer1GO.setVisible(false);
+                midPointerGO.setVisible(false);
+            })
+            .on('pinch', function () {
+                pointer0GO.setScale(1 / camera.zoom).setPosition(pointers[0].worldX, pointers[0].worldY);
+                pointer1GO.setScale(1 / camera.zoom).setPosition(pointers[1].worldX, pointers[1].worldY);
+                midPointerGO.setScale(1 / camera.zoom).setPosition((pointer0GO.x + pointer1GO.x) * 0.5, (pointer0GO.y + pointer1GO.y) * 0.5);
+            });
 
     }
 
     update() {
-        var camera = this.cameras.main;
-        if (this.cameraZoom !== camera.zoom) {
-            console.log(camera.zoom, camera.scrollX, camera.scrollY)
-            this.cameraZoom = camera.zoom;
+        // var camera = this.cameras.main;
+        // this.print(`${camera.scrollX}\n${camera.scrollY}\n${camera.zoom}`)
+    }
+
+    print(text, appendMode) {
+        var sceneB = this.scene.get('sceneB');
+
+        if (appendMode) {
+            text = sceneB.print.text + text;
         }
+        sceneB.print.text = text;
     }
 }
 
-const Random = Phaser.Math.Between;
-var DrawSomethings = function (scene, TEST_INPUTTARGET) {
-    for (var i = 0; i < 500; i++) {
-        let gameObject = scene.add.circle(
-            Random(-1000, 1000), Random(-1000, 1000), // x, y
-            Random(10, 100), // r
-            Random(0, 0xffffff), // color
-            0.5 // alpha
-        );
+class SceneB extends Phaser.Scene {
+    constructor() {
+        super({
+            key: 'sceneB',
+            active: true,
+        })
+    }
 
-        if (TEST_INPUTTARGET) {
-            gameObject.setInteractive();
-        }
+    create() {
+        this.print = this.add.text(0, 0, '');
     }
 }
 
@@ -72,7 +80,16 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo
+    scene: [SceneA, SceneB],
+    plugins: {
+        global: [
+            {
+                key: 'rexCameraController',
+                plugin: CameraControllerPlugin,
+                start: true
+            },
+        ]
+    }
 };
 
 var game = new Phaser.Game(config);
