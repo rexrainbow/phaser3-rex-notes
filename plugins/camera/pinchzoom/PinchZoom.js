@@ -1,7 +1,6 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 import { Pinch } from '../../gestures.js';
 import GetCameraByName from '../../utils/camera/GetCameraByName.js';
-import ZoomAt from '../../utils/camera/ZoomAt.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -30,36 +29,51 @@ class PinchZoom extends ComponentBase {
     }
 
     boot() {
+        this.focusWorldX = undefined;
+        this.focusWorldY = undefined;
+
         this.pinch
+            .on('pinchstart', function (pinch) {
+                var pointer0 = pinch.pointers[0];
+                var pointer1 = pinch.pointers[1];
+                if (this.focusEnable && (this.focusWorldX === undefined)) {
+                    this.focusWorldX = (pointer0.worldX + pointer1.worldX) * 0.5;
+                    this.focusWorldY = (pointer0.worldY + pointer1.worldY) * 0.5;
+                }
+                this.emit('pinchstart');
+            }, this)
+
             .on('pinch', function (pinch) {
                 var camera = this.camera;
                 if (!camera) {
                     return;
                 }
 
-                var zoom = camera.zoom * pinch.scaleFactor;
-
-                if ((this.minZoom !== undefined) && (zoom < this.minZoom)) {
-                    zoom = this.minZoom;
+                var newZoom = camera.zoom * pinch.scaleFactor;
+                if ((this.minZoom !== undefined) && (newZoom < this.minZoom)) {
+                    newZoom = this.minZoom;
                 }
-                if ((this.maxZoom !== undefined) && (zoom > this.maxZoom)) {
-                    zoom = this.maxZoom;
+                if ((this.maxZoom !== undefined) && (newZoom > this.maxZoom)) {
+                    newZoom = this.maxZoom;
                 }
+                camera.zoom = newZoom;
+                camera.preRender();
 
-                var focusLocalX, focusLocalY;
                 if (this.focusEnable) {
                     var pointer0 = pinch.pointers[0];
                     var pointer1 = pinch.pointers[1];
-                    focusLocalX = (pointer0.x + pointer1.x) / 2;
-                    focusLocalY = (pointer0.y + pointer1.y) / 2;
+                    var focusLocalX = (pointer0.x + pointer1.x) * 0.5;
+                    var focusLocalY = (pointer0.y + pointer1.y) * 0.5;
+                    var newWorldXY = camera.getWorldPoint(focusLocalX, focusLocalY);
+                    camera.scrollX -= (newWorldXY.x - this.focusWorldX);
+                    camera.scrollY -= (newWorldXY.y - this.focusWorldY);
                 }
 
-                ZoomAt(camera, zoom, focusLocalX, focusLocalY);
             }, this)
-            .on('pinchstart', function () {
-                this.emit('pinchstart');
-            }, this)
+
             .on('pinchend', function () {
+                this.focusWorldX = undefined;
+                this.focusWorldY = undefined;
                 this.emit('pinchend');
             }, this)
     }
