@@ -15763,13 +15763,30 @@ User can inject it by</p>
 </li>
 </ul>
 <h4 id="scroll-to-child">Scroll to child<a class="headerlink" href="#scroll-to-child" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nx">panel</span><span class="p">.</span><span class="nx">scrollToChild</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
+</code></pre></div>
+<p>or</p>
 <div class="highlight"><pre><span></span><code><span class="nx">panel</span><span class="p">.</span><span class="nx">scrollToChild</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span><span class="w"> </span><span class="nx">align</span><span class="p">);</span>
 </code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="nx">panel</span><span class="p">.</span><span class="nx">scrollToChild</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span><span class="w"> </span><span class="nx">align</span><span class="p">,</span><span class="w"> </span><span class="nx">duration</span><span class="p">,</span><span class="w"> </span><span class="nx">ease</span><span class="p">);</span>
+</code></pre></div>
 <ul>
+<li><code>child</code> : Child game object.</li>
 <li><code>align</code> : <ul>
 <li><code>undefined</code> : Align child to top(left), or bottom(right) of panel. Default value.</li>
 <li><code>'top'</code>, <code>'center'</code>, <code>'bottom'</code> : Align child to top/center/bottom of panel.</li>
 <li><code>'left'</code>, <code>'center'</code>, <code>'right'</code> : Align child to left/center/right of panel.</li>
+</ul>
+</li>
+<li><code>duration</code> :<ul>
+<li><code>undefined</code>, or <code>0</code> : Scroll to child immediately. Default value.</li>
+<li>A number : Scroll to child with easing.</li>
+</ul>
+</li>
+<li><code>ease</code> :<ul>
+<li><code>undefined</code> : Linear easeing. Default value.</li>
+<li>A string : Easing mode.</li>
 </ul>
 </li>
 </ul>
