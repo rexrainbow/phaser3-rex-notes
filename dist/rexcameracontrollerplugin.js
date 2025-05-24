@@ -2901,67 +2901,6 @@
         }
     }
 
-    // BaseCamera.preRender()
-    var UpdateCameraMetrix = function (camera) {
-        var width = camera.width;
-        var height = camera.height;
-        var halfWidth = width * 0.5;
-        var halfHeight = height * 0.5;
-
-        var zoomX = camera.zoomX;
-        var zoomY = camera.zoomY;
-        var matrix = camera.matrix;
-
-        var sx = camera.scrollX;
-        var sy = camera.scrollY;
-
-        if (camera.useBounds) {
-            sx = camera.clampX(sx);
-            sy = camera.clampY(sy);
-        }
-
-        //  Values are in pixels and not impacted by zooming the Camera
-        camera.scrollX = sx;
-        camera.scrollY = sy;
-
-        var midX = sx + halfWidth;
-        var midY = sy + halfHeight;
-
-        //  The center of the camera, in world space, so taking zoom into account
-        //  Basically the pixel value of what it's looking at in the middle of the cam
-        camera.midPoint.set(midX, midY);
-
-        var displayWidth = width / zoomX;
-        var displayHeight = height / zoomY;
-
-        var vwx = midX - (displayWidth / 2);
-        var vwy = midY - (displayHeight / 2);
-
-        camera.worldView.setTo(vwx, vwy, displayWidth, displayHeight);
-
-        var originX = width * camera.originX;
-        var originY = height * camera.originY;
-
-        matrix.applyITRS(camera.x + originX, camera.y + originY, camera.rotation, zoomX, zoomY);
-        matrix.translate(-originX, -originY);
-    };
-
-    var ZoomAt = function (camera, zoom, focusLocalX, focusLocalY) {
-        if (focusLocalX === undefined) {
-            camera.zoom = zoom;
-            return;
-        }
-
-        var worldXY = camera.getWorldPoint(focusLocalX, focusLocalY);
-        camera.zoom = zoom;
-
-        UpdateCameraMetrix(camera);
-
-        var newWorldXY = camera.getWorldPoint(focusLocalX, focusLocalY);
-        camera.scrollX -= (newWorldXY.x - worldXY.x);
-        camera.scrollY -= (newWorldXY.y - worldXY.y);
-    };
-
     const GetValue$7 = Phaser.Utils.Objects.GetValue;
 
     class PinchZoom extends ComponentBase {
@@ -2989,36 +2928,51 @@
         }
 
         boot() {
+            this.focusWorldX = undefined;
+            this.focusWorldY = undefined;
+
             this.pinch
+                .on('pinchstart', function (pinch) {
+                    var pointer0 = pinch.pointers[0];
+                    var pointer1 = pinch.pointers[1];
+                    if (this.focusEnable && (this.focusWorldX === undefined)) {
+                        this.focusWorldX = (pointer0.worldX + pointer1.worldX) * 0.5;
+                        this.focusWorldY = (pointer0.worldY + pointer1.worldY) * 0.5;
+                    }
+                    this.emit('pinchstart');
+                }, this)
+
                 .on('pinch', function (pinch) {
                     var camera = this.camera;
                     if (!camera) {
                         return;
                     }
 
-                    var zoom = camera.zoom * pinch.scaleFactor;
-
-                    if ((this.minZoom !== undefined) && (zoom < this.minZoom)) {
-                        zoom = this.minZoom;
+                    var newZoom = camera.zoom * pinch.scaleFactor;
+                    if ((this.minZoom !== undefined) && (newZoom < this.minZoom)) {
+                        newZoom = this.minZoom;
                     }
-                    if ((this.maxZoom !== undefined) && (zoom > this.maxZoom)) {
-                        zoom = this.maxZoom;
+                    if ((this.maxZoom !== undefined) && (newZoom > this.maxZoom)) {
+                        newZoom = this.maxZoom;
                     }
+                    camera.zoom = newZoom;
+                    camera.preRender();
 
-                    var focusLocalX, focusLocalY;
                     if (this.focusEnable) {
                         var pointer0 = pinch.pointers[0];
                         var pointer1 = pinch.pointers[1];
-                        focusLocalX = (pointer0.x + pointer1.x) / 2;
-                        focusLocalY = (pointer0.y + pointer1.y) / 2;
+                        var focusLocalX = (pointer0.x + pointer1.x) * 0.5;
+                        var focusLocalY = (pointer0.y + pointer1.y) * 0.5;
+                        var newWorldXY = camera.getWorldPoint(focusLocalX, focusLocalY);
+                        camera.scrollX -= (newWorldXY.x - this.focusWorldX);
+                        camera.scrollY -= (newWorldXY.y - this.focusWorldY);
                     }
 
-                    ZoomAt(camera, zoom, focusLocalX, focusLocalY);
                 }, this)
-                .on('pinchstart', function () {
-                    this.emit('pinchstart');
-                }, this)
+
                 .on('pinchend', function () {
+                    this.focusWorldX = undefined;
+                    this.focusWorldY = undefined;
                     this.emit('pinchend');
                 }, this);
         }
@@ -3895,6 +3849,22 @@
 
         }
     }
+
+    var ZoomAt = function (camera, zoom, focusLocalX, focusLocalY) {
+        if (focusLocalX === undefined) {
+            camera.zoom = zoom;
+            return;
+        }
+
+        var worldXY = camera.getWorldPoint(focusLocalX, focusLocalY);
+        camera.zoom = zoom;
+
+        camera.preRender();
+
+        var newWorldXY = camera.getWorldPoint(focusLocalX, focusLocalY);
+        camera.scrollX -= (newWorldXY.x - worldXY.x);
+        camera.scrollY -= (newWorldXY.y - worldXY.y);
+    };
 
     const Linear = Phaser.Math.Linear;
 
