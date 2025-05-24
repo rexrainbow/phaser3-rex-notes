@@ -546,13 +546,33 @@ See also - [dirty](ui-basesizer.md#dirty)
 #### Scroll to child
 
 ```javascript
+panel.scrollToChild(child);
+```
+
+or
+ 
+```javascript
 panel.scrollToChild(child, align);
 ```
 
+or
+
+```javascript
+panel.scrollToChild(child, align, duration, ease);
+```
+
+- `child` : Child game object.
 - `align` : 
     - `undefined` : Align child to top(left), or bottom(right) of panel. Default value.
     - `'top'`, `'center'`, `'bottom'` : Align child to top/center/bottom of panel.
     - `'left'`, `'center'`, `'right'` : Align child to left/center/right of panel.
+- `duration` :
+    - `undefined`, or `0` : Scroll to child immediately. Default value.
+    - A number : Scroll to child with easing.
+- `ease` :
+    - `undefined` : Linear easeing. Default value.
+    - A string : Easing mode.
+
 
 #### Enable/disable scrolling
 

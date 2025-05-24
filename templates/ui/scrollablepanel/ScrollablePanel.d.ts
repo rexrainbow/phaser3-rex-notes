@@ -55,7 +55,9 @@ declare class ScrollablePanel extends Scrollable {
 
     scrollToChild(
         child: Phaser.GameObjects.GameObject,
-        align?: 'top' | 'bottom' | 'centerY' | 'left' | 'right' | 'centerX' | 'center'
+        align?: 'top' | 'bottom' | 'centerY' | 'left' | 'right' | 'centerX' | 'center',
+        duration?: number,
+        ease?: string
     ): this;
 
 }

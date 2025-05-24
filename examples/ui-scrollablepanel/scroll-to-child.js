@@ -59,7 +59,8 @@ class Demo extends Phaser.Scene {
         })
             .layout()
 
-        panel.scrollToChild(panel.getByName('item-20', true));
+        var childGameObject = panel.getByName('item-20', true)
+        panel.scrollToChild(childGameObject, undefined, 2000, 'Cubic');
     }
 
     update() { }

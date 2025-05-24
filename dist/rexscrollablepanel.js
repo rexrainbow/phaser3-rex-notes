@@ -24985,24 +24985,55 @@ void main (void) {
         methods$1
     );
 
-    var ScrollToChild = function (child, align) {
+    var ScrollToChild = function (child, align, duration, ease) {
         if (!this.hasChild(child)) {
             return this;
         }
 
+        var newChildOY, newChildOX;
         switch (this.scrollMode) {
             case 0:
-                AlignChild.call(this, child, 'y', align);
+                newChildOY = this.childOY + AlignChild.call(this, child, 'y', align);
                 break;
 
             case 1:
-                AlignChild.call(this, child, 'x', align);
+                newChildOY = this.childOY + AlignChild.call(this, child, 'x', align);
                 break;
 
             default:
-                AlignChild.call(this, child, 'y', align);
-                AlignChild.call(this, child, 'x', align);
+                newChildOY = this.childOY + AlignChild.call(this, child, 'y', align);
+                newChildOX = this.childOX + AlignChild.call(this, child, 'x', align);
                 break;
+        }
+
+        if ((duration === undefined) || (duration <= 0)) {
+            this.childOY = newChildOY;
+            if (this.scrollMode === 2) {
+                this.childOX = newChildOX;
+            }
+        } else {
+            if (this._easeScrollChildOY === undefined) {
+                this._easeScrollChildOY = new EaseValueTask(this);
+            }
+            this._easeScrollChildOY.restart({
+                key: 'childOY',
+                to: newChildOY,
+                duration: duration,
+                ease: ease
+            });
+
+            if (this.scrollMode === 2) {
+                if (this._easeScrollChildOX === undefined) {
+                    this._easeScrollChildOX = new EaseValueTask(this);
+                }
+
+                this._easeScrollChildOX.restart({
+                    key: 'childOX',
+                    to: newChildOX,
+                    duration: duration,
+                    ease: ease
+                });
+            }
         }
 
         return this;
@@ -25089,16 +25120,7 @@ void main (void) {
             }
         }
 
-        switch (this.scrollMode) {
-            case 0:
-            case 1:
-                this.childOY += delta;
-                break;
-
-            default:
-                this[`childO${axis}`] += delta;
-                break;
-        }
+        return delta;
     };
 
     const GetValue = Phaser.Utils.Objects.GetValue;
