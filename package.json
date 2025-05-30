@@ -1,6 +1,6 @@
 {
-    "name": "phaser3-rex-plugins",
-    "version": "1.80.15",
+    "name": "@petkoneo/phaser3-rex-plugins",
+    "version": "1.0.0",
     "description": "Plugins of phaser3",
     "author": "Rex",
     "files": [
