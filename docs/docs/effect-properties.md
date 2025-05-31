@@ -88,7 +88,7 @@ Attach properties to a game object or camera, to add/remove/control [builtin pre
 
 ### Attach properties
 
-Supported effects are `barrel`, `blackWhite`, `bloom`, `blur`, `bokeh`, `brightness`, `brown`,
+Supported effects are `barrel`, `blackWhite`, `blocky`, `bloom`, `blur`, `bokeh`, `brightness`, `brown`,
 `circle`, `contrast`,  `desaturate`, `desaturateLuminance`, `displacement`, 
 `glow`, `gradient`, `grayscale`, `hue`, `kodachrome`, `lsd`, `negative`, `pixelate`, `polaroid`, 
 `reveal`, `saturate`, `sepia`, `shadow`, `shiftToBGR`, `shine`, `technicolor`, `tiltShift`, 
@@ -106,6 +106,7 @@ Supported effects are `barrel`, `blackWhite`, `bloom`, `blur`, `bokeh`, `brightn
     scene.plugins.get('rexEffectProperties').add(gameObject, {
         barrel: true,
         blackWhite: true,
+        blocky: true,
         bloom: true,
         blur: true,
         bokeh: true,
@@ -141,7 +142,7 @@ Supported effects are `barrel`, `blackWhite`, `bloom`, `blur`, `bokeh`, `brightn
     or
     ```javascript
     scene.plugins.get('rexEffectProperties').add(gameObject, [
-        'barrel', 'blackWhite', 'bloom', 'blur', 'bokeh', 'brightness', 'brown',
+        'barrel', 'blackWhite', 'blocky', 'bloom', 'blur', 'bokeh', 'brightness', 'brown',
         'circle', 'contrast',
         'desaturate', 'desaturateLuminance', 'displacement',
         'glow', 'gradient', 'grayscale',
@@ -180,6 +181,14 @@ Will try to create preFX effect if gameObject has preFX, otherwise, try to creat
 - `blackWhite` : 
     - `true`, or `1` : Enable this effect.
     - `null` : Remove this effect
+
+#### [Blocky](shader-builtin.md#blocky)
+
+- `blockySize`
+    - A number : Enable this effect and set size of blocky
+    - `null` : Remove this effect
+- `blockOffsetX`, `blockOffsetY`
+    - A number
 
 #### [Bloom](shader-p3fx.md#bloom)
 

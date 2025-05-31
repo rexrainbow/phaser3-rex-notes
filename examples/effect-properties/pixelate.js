@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import EffectPropertiesPlugin from '../../plugins/effectproperties-plugin.js';
 
 class Demo extends Phaser.Scene {
@@ -13,10 +13,13 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var image = this.add.image(400, 300, 'logo');
+        var image = this.add.image(200, 300, 'logo');
         this.plugins.get('rexEffectProperties').add(image);
-
         image.pixelate = 5;
+
+        var image = this.add.image(600, 300, 'logo');
+        this.plugins.get('rexEffectProperties').add(image);
+        image.blockySize = 5;
     }
 
     update() { }

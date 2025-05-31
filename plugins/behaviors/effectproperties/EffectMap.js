@@ -3,6 +3,7 @@ import * as EffectProperties from './EffectProperties.js'
 const EffectMap = {
     barrel: EffectProperties.AddBarrelProperties,
     blackWhite: EffectProperties.AddBlackWhiteProperties,
+    blocky: EffectProperties.AddBlockyProperties,
     bloom: EffectProperties.AddBloomProperties,
     blur: EffectProperties.AddBlurProperties,
     bokeh: EffectProperties.AddBokehProperties,

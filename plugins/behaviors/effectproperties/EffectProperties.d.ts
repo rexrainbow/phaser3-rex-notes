@@ -1,5 +1,6 @@
 import AddBarrelProperties from './AddBarrelProperties';
 import AddBlackWhiteProperties from './colormatrix/AddBlackWhiteProperties';
+import AddBlockyProperties from './AddBlockyProperties';
 import AddBloomProperties from './AddBloomProperties';
 import AddBlurProperties from './AddBlurProperties';
 import AddBokehProperties from './AddBokehProperties';
@@ -34,6 +35,7 @@ import AddWipeProperties from './AddWipeProperties';
 export {
     AddBarrelProperties,
     AddBlackWhiteProperties,
+    AddBlockyProperties,
     AddBloomProperties,
     AddBlurProperties,
     AddBokehProperties,

@@ -34,6 +34,7 @@ declare namespace AddEffectProperties {
     interface EffectProperties extends
         EffectProperties.AddBarrelProperties.Barrel,
         EffectProperties.AddBlackWhiteProperties.BlackWhite,
+        EffectProperties.AddBlockyProperties.Blocky,
         EffectProperties.AddBlurProperties.Blur,
         EffectProperties.AddBokehProperties.Bokeh,
         EffectProperties.AddBrightnessProperties.Brightness,

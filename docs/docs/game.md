@@ -118,9 +118,8 @@ or
         maxLights: 10,
         maxTextures: -1,
         mipmapFilter: 'LINEAR', // 'NEAREST', 'LINEAR', 'NEAREST_MIPMAP_NEAREST', 'LINEAR_MIPMAP_NEAREST', 'NEAREST_MIPMAP_LINEAR', 'LINEAR_MIPMAP_LINEAR'
-        autoMobilePipeline: true,
-        defaultPipeline: 'MultiPipeline',
-        pipeline:[]
+        autoMobileTextures: true,
+        renderNodes: {}
     },
     disablePreFX: false,
     disablePostFX: false,

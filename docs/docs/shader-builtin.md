@@ -4,12 +4,13 @@ Built-in filters.
 
 - [Barrel Distortion](#barrel) : A nice pinch / bulge distortion effect.
 - [Blend mode](#blend) : Adds a Blend effect.
+- [Blocky](#blocky) : Uses one color per block for a sharp, pixelated style. Ideal for retro art or clear visual masking.
 - [Blur](#blur) : 3 different levels of gaussian blur (low, medium and high) and custom distance and color.
 - [Bokeh](#bokeh) / [Tilt Shift](#tilt-shift) : A bokeh and tiltshift effect, with intensity, contrast and distance settings.
 - [Color Matrix](#colormatrix) : Add a ColorMatrix to any Game Object with access to all of its methods, such as `sepia`, `greyscale`, `lsd` and lots more.
 - [Glow](#glow) : Add a smooth inner or outer glow, with custom distance, strength and color.
 - [Displacement](#displacement) : Use a displacement texture, such as a noise texture, to drastically (or subtly!) alter the appearance of a Game Object.
-- [Pixelate](#pixelate) : Make any Game Object appear pixelated, to a varying degree.
+- [Pixelate](#pixelate) : Blends colors in each block for a soft, mosaic look. Great for smooth transitions or gentle censorship.
 - [Shadow](#shadow) : Add a drop shadow behind a Game Object, with custom depth and color.
 - [Parallel](#parallel) : Blend result of 2 filter lists.
 
@@ -152,6 +153,43 @@ All Game Objects and camera support filters. These are effects applied after the
     ```javascript
     var controller = camera
         .filters.internal.addBlend();
+    ```
+- Disable filter controller
+    ```javascript
+    controller.setActive(false);
+    // controller.active = false;
+    ```
+- Remove filter controller
+    ```javascript
+    gameObject.filters.internal.remove(controller);
+    ```
+    ```javascript
+    camera.filters.internal.remove(controller);
+    ```
+    - Also destroy this controller.
+- Properties
+    ```javascript
+    controller.amount = amount;
+    ```
+
+### Blocky
+
+- Add filter controller to game object
+    ```javascript
+    var controller = gameObject
+        .enableFilters()
+        .filters.internal.addBlocky({size, offset});
+    ```
+    - `size` : The size of the blocks.
+        - A number : Sets both x and y to the same value. Default value is `4`.
+        - `{x, y}` 
+    - `offset` : The offset of the blocks.
+        - A number : Sets both x and y to the same value.  Default value is `0`.
+        - `{x, y}` 
+- Add filter controller to camera
+    ```javascript
+    var controller = camera
+        .filters.internal.addBlocky({size, offset});
     ```
 - Disable filter controller
     ```javascript
