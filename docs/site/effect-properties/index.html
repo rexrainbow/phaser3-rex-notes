@@ -5140,6 +5140,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#blocky" class="md-nav__link">
+    <span class="md-ellipsis">
+      Blocky
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#bloom" class="md-nav__link">
     <span class="md-ellipsis">
       Bloom
@@ -8266,6 +8275,15 @@
   <a href="#blackwhite" class="md-nav__link">
     <span class="md-ellipsis">
       BlackWhite
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#blocky" class="md-nav__link">
+    <span class="md-ellipsis">
+      Blocky
     </span>
   </a>
   
@@ -15559,6 +15577,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#blocky" class="md-nav__link">
+    <span class="md-ellipsis">
+      Blocky
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#bloom" class="md-nav__link">
     <span class="md-ellipsis">
       Bloom
@@ -15943,7 +15970,7 @@
 </code></pre></div></li>
 </ul>
 <h3 id="attach-properties">Attach properties<a class="headerlink" href="#attach-properties" title="Permanent link">&para;</a></h3>
-<p>Supported effects are <code>barrel</code>, <code>blackWhite</code>, <code>bloom</code>, <code>blur</code>, <code>bokeh</code>, <code>brightness</code>, <code>brown</code>,
+<p>Supported effects are <code>barrel</code>, <code>blackWhite</code>, <code>blocky</code>, <code>bloom</code>, <code>blur</code>, <code>bokeh</code>, <code>brightness</code>, <code>brown</code>,
 <code>circle</code>, <code>contrast</code>,  <code>desaturate</code>, <code>desaturateLuminance</code>, <code>displacement</code>, 
 <code>glow</code>, <code>gradient</code>, <code>grayscale</code>, <code>hue</code>, <code>kodachrome</code>, <code>lsd</code>, <code>negative</code>, <code>pixelate</code>, <code>polaroid</code>, 
 <code>reveal</code>, <code>saturate</code>, <code>sepia</code>, <code>shadow</code>, <code>shiftToBGR</code>, <code>shine</code>, <code>technicolor</code>, <code>tiltShift</code>, 
@@ -15958,6 +15985,7 @@
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexEffectProperties&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">barrel</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">blackWhite</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">blocky</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">bloom</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">blur</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">bokeh</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
@@ -15992,7 +16020,7 @@
 </code></pre></div>
     or
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexEffectProperties&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="p">[</span>
-<span class="w">    </span><span class="s1">&#39;barrel&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;blackWhite&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;bloom&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;blur&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;bokeh&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;brightness&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;brown&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;barrel&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;blackWhite&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;blocky&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;bloom&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;blur&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;bokeh&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;brightness&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;brown&#39;</span><span class="p">,</span>
 <span class="w">    </span><span class="s1">&#39;circle&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;contrast&#39;</span><span class="p">,</span>
 <span class="w">    </span><span class="s1">&#39;desaturate&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;desaturateLuminance&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;displacement&#39;</span><span class="p">,</span>
 <span class="w">    </span><span class="s1">&#39;glow&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;gradient&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;grayscale&#39;</span><span class="p">,</span>
@@ -16032,6 +16060,18 @@
 <li><code>blackWhite</code> : <ul>
 <li><code>true</code>, or <code>1</code> : Enable this effect.</li>
 <li><code>null</code> : Remove this effect</li>
+</ul>
+</li>
+</ul>
+<h4 id="blocky"><a href="../shader-builtin/#blocky">Blocky</a><a class="headerlink" href="#blocky" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>blockySize</code><ul>
+<li>A number : Enable this effect and set size of blocky</li>
+<li><code>null</code> : Remove this effect</li>
+</ul>
+</li>
+<li><code>blockOffsetX</code>, <code>blockOffsetY</code><ul>
+<li>A number</li>
 </ul>
 </li>
 </ul>

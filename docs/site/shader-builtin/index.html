@@ -7763,6 +7763,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#blocky" class="md-nav__link">
+    <span class="md-ellipsis">
+      Blocky
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#blur" class="md-nav__link">
     <span class="md-ellipsis">
       Blur
@@ -14827,6 +14836,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#blocky" class="md-nav__link">
+    <span class="md-ellipsis">
+      Blocky
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#blur" class="md-nav__link">
     <span class="md-ellipsis">
       Blur
@@ -14947,12 +14965,13 @@
 <ul>
 <li><a href="#barrel">Barrel Distortion</a> : A nice pinch / bulge distortion effect.</li>
 <li><a href="#blend">Blend mode</a> : Adds a Blend effect.</li>
+<li><a href="#blocky">Blocky</a> : Uses one color per block for a sharp, pixelated style. Ideal for retro art or clear visual masking.</li>
 <li><a href="#blur">Blur</a> : 3 different levels of gaussian blur (low, medium and high) and custom distance and color.</li>
 <li><a href="#bokeh">Bokeh</a> / <a href="#tilt-shift">Tilt Shift</a> : A bokeh and tiltshift effect, with intensity, contrast and distance settings.</li>
 <li><a href="#colormatrix">Color Matrix</a> : Add a ColorMatrix to any Game Object with access to all of its methods, such as <code>sepia</code>, <code>greyscale</code>, <code>lsd</code> and lots more.</li>
 <li><a href="#glow">Glow</a> : Add a smooth inner or outer glow, with custom distance, strength and color.</li>
 <li><a href="#displacement">Displacement</a> : Use a displacement texture, such as a noise texture, to drastically (or subtly!) alter the appearance of a Game Object.</li>
-<li><a href="#pixelate">Pixelate</a> : Make any Game Object appear pixelated, to a varying degree.</li>
+<li><a href="#pixelate">Pixelate</a> : Blends colors in each block for a soft, mosaic look. Great for smooth transitions or gentle censorship.</li>
 <li><a href="#shadow">Shadow</a> : Add a drop shadow behind a Game Object, with custom depth and color.</li>
 <li><a href="#parallel">Parallel</a> : Blend result of 2 filter lists.</li>
 </ul>
@@ -15098,6 +15117,45 @@ Use <a href="../shader-p3fx/">p3-fx</a> to reintroduce unsupported features.</p>
 <li>Add filter controller to camera
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">camera</span>
 <span class="w">    </span><span class="p">.</span><span class="nx">filters</span><span class="p">.</span><span class="nx">internal</span><span class="p">.</span><span class="nx">addBlend</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Disable filter controller
+    <div class="highlight"><pre><span></span><code><span class="nx">controller</span><span class="p">.</span><span class="nx">setActive</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+<span class="c1">// controller.active = false;</span>
+</code></pre></div></li>
+<li>Remove filter controller
+    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">filters</span><span class="p">.</span><span class="nx">internal</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">controller</span><span class="p">);</span>
+</code></pre></div>
+    <div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">filters</span><span class="p">.</span><span class="nx">internal</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">controller</span><span class="p">);</span>
+</code></pre></div><ul>
+<li>Also destroy this controller.</li>
+</ul>
+</li>
+<li>Properties
+    <div class="highlight"><pre><span></span><code><span class="nx">controller</span><span class="p">.</span><span class="nx">amount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">amount</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+<h3 id="blocky">Blocky<a class="headerlink" href="#blocky" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Add filter controller to game object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">gameObject</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">enableFilters</span><span class="p">()</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">filters</span><span class="p">.</span><span class="nx">internal</span><span class="p">.</span><span class="nx">addBlocky</span><span class="p">({</span><span class="nx">size</span><span class="p">,</span><span class="w"> </span><span class="nx">offset</span><span class="p">});</span>
+</code></pre></div><ul>
+<li><code>size</code> : The size of the blocks.<ul>
+<li>A number : Sets both x and y to the same value. Default value is <code>4</code>.</li>
+<li><code>{x, y}</code> </li>
+</ul>
+</li>
+<li><code>offset</code> : The offset of the blocks.<ul>
+<li>A number : Sets both x and y to the same value.  Default value is <code>0</code>.</li>
+<li><code>{x, y}</code> </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Add filter controller to camera
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">camera</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">filters</span><span class="p">.</span><span class="nx">internal</span><span class="p">.</span><span class="nx">addBlocky</span><span class="p">({</span><span class="nx">size</span><span class="p">,</span><span class="w"> </span><span class="nx">offset</span><span class="p">});</span>
 </code></pre></div></li>
 <li>Disable filter controller
     <div class="highlight"><pre><span></span><code><span class="nx">controller</span><span class="p">.</span><span class="nx">setActive</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>

@@ -15735,7 +15735,11 @@ layerB --&gt; tilesB["tiles"]</code></pre>
 <li>Array of indexes : One-to-one mapping <code>indexes</code> to <code>replacements</code>.</li>
 </ul>
 </li>
-<li><code>spriteConfig</code> : The config object to pass into the Sprite creator (i.e. <code>scene.make.sprite</code>).<ul>
+<li><code>spriteConfig</code> : The config object to pass into the Sprite creator (i.e. <code>scene.make.sprite</code>).
+    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nx">useSpriteSheet</span>
+<span class="p">}</span>
+</code></pre></div><ul>
 <li><code>useSpriteSheet</code> : Set to <code>true</code> to load the tileset as a sprite sheet (not an image), map frame to tile index.</li>
 <li>Copy <code>rotation</code>, <code>flipX</code>, <code>flipY</code>, <code>alpha</code>, <code>visible</code> and <code>tint</code> properties from Tile to sprites if these properties are not given.</li>
 </ul>

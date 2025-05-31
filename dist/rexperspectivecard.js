@@ -13794,8 +13794,6 @@
             var vertexViewF32 = vertexBuffer.viewF32;
             var vertexViewU32 = vertexBuffer.viewU32;
 
-            var roundPixels = drawingContext.camera.roundPixels;
-
             var debugVertices;
             if (debugCallback) {
                 debugVertices = [];
@@ -13823,11 +13821,6 @@
 
                     var tx = x * a + y * c + e;
                     var ty = x * b + y * d + f;
-
-                    if (roundPixels) {
-                        tx = Math.round(tx);
-                        ty = Math.round(ty);
-                    }
 
                     var tintIndex = (i / 2) + j;
                     var tint = getTint(

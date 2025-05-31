@@ -14851,8 +14851,8 @@
 </ul>
 <h3 id="angle-between-angles">Angle between angles<a class="headerlink" href="#angle-between-angles" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Shortest angle (degrees) between 2 angles
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">deg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">Angle</span><span class="p">.</span><span class="nx">ShortestBetween</span><span class="p">(</span><span class="nx">angle1</span><span class="p">,</span><span class="w"> </span><span class="nx">angle2</span><span class="p">)</span>
+<li>Shortest angle distance (degrees) between 2 angles
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">deg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">Angle</span><span class="p">.</span><span class="nx">ShortestBetween</span><span class="p">(</span><span class="nx">angle1</span><span class="p">,</span><span class="w"> </span><span class="nx">angle2</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>angle1</code>, <code>angle2</code> : Angle in degrees in the range of -180 to 180</li>
 <li><code>deg</code> : Shortest angle in degrees<ul>
@@ -14860,6 +14860,30 @@
 <li>deg &lt; 0 : ClockWise rotation</li>
 </ul>
 </li>
+</ul>
+</li>
+<li>Shortest signed angular distance between 2 angles
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">rad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">Angle</span><span class="p">.</span><span class="nx">GetShortestDistance</span><span class="p">(</span><span class="nx">angle1</span><span class="p">,</span><span class="w"> </span><span class="nx">angle2</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>angle1</code> : Start angle in radians</li>
+<li><code>angle2</code> : Target angle in radians</li>
+<li><code>rad</code> : The distance in radians, in the range <code>[-pi, pi)</code></li>
+</ul>
+</li>
+<li>Shortest nonnegative angular distance (radians) between two angles
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">rad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">Angle</span><span class="p">.</span><span class="nx">GetClockwiseDistance</span><span class="p">(</span><span class="nx">angle1</span><span class="p">,</span><span class="w"> </span><span class="nx">angle2</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>angle1</code> : Start angle in radians</li>
+<li><code>angle2</code> : Target angle in radians</li>
+<li><code>rad</code> : The distance in radians, in the range <code>[0, 2pi)</code></li>
+</ul>
+</li>
+<li>Shortest nonpositive angular distance (radians) between two angles
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">rad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">Angle</span><span class="p">.</span><span class="nx">GetCounterClockwiseDistance</span><span class="p">(</span><span class="nx">angle1</span><span class="p">,</span><span class="w"> </span><span class="nx">angle2</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>angle1</code> : Start angle in radians</li>
+<li><code>angle2</code> : Target angle in radians</li>
+<li><code>rad</code> : The distance in radians, in the range <code>(-2pi, 0]</code></li>
 </ul>
 </li>
 </ul>
