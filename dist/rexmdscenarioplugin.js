@@ -37401,6 +37401,8 @@ void main () {
 	            o = {};
 	        }
 
+	        var gameObject = this.parent;
+
 	        // Position
 	        var alignX, configX;
 	        if (o.x !== undefined) {
@@ -37462,6 +37464,11 @@ void main () {
 	            paddingHeight = (configHeight[1] === '') ? 0 : parseFloat(configHeight[1]);
 	        }
 
+	        var aspectRatio = o.aspectRatio;
+	        if (aspectRatio === true) {
+	            aspectRatio = gameObject.displayWidth / gameObject.displayHeight;
+	        }
+
 	        // Position
 	        this.setAlign(alignX, alignY);
 	        this.setPercentage(percentageX, percentageY);
@@ -37469,6 +37476,7 @@ void main () {
 	        // Size
 	        this.setSizePercentage(percentageWidth, percentageHeight);
 	        this.setSizePadding(paddingWidth, paddingHeight);
+	        this.setAspectRatio(aspectRatio);
 
 	        var onResizeCallback = GetValue$2h(o, 'onResizeCallback', DefaultResizeCallback);
 	        var onResizeCallbackScope = GetValue$2h(o, 'onResizeCallbackScope');
@@ -37537,6 +37545,11 @@ void main () {
 	        return this;
 	    }
 
+	    setAspectRatio(aspectRatio) {
+	        this.aspectRatio = aspectRatio;
+	        return this;
+	    }
+
 	    setResizeCallback(callback, scope) {
 	        this.onResizeCallback = callback;
 	        this.onResizeCallbackScope = scope;
@@ -37567,10 +37580,19 @@ void main () {
 
 	        var gameObject = this.parent;
 	        if (newWidth === undefined) {
-	            newWidth = gameObject.width;
+	            if (this.aspectRatio && newHeight) {
+	                newWidth = this.aspectRatio * newHeight;
+	            } else {
+	                newWidth = gameObject.width;
+	            }
+
 	        }
 	        if (newHeight === undefined) {
-	            newHeight = gameObject.height;
+	            if (this.aspectRatio && newWidth) {
+	                newHeight = newWidth / this.aspectRatio;
+	            } else {
+	                newHeight = gameObject.height;
+	            }
 	        }
 
 	        if (scope) {
@@ -37648,11 +37670,11 @@ void main () {
 	    var hasOnResizeCallback = config.hasOwnProperty('onResizeCallback');
 	    if ((hasMinWidth || hasMinHeight) && !hasOnResizeCallback) {
 	        config.onResizeCallback = function (width, height, sizer) {
-	            if (hasMinWidth) {
+	            if (width !== undefined) {
 	                sizer.setMinWidth(width);
 	            }
 
-	            if (hasMinHeight) {
+	            if (height !== undefined) {
 	                sizer.setMinHeight(height);
 	            }
 

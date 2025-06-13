@@ -14962,6 +14962,8 @@
 
 <span class="w">    </span><span class="c1">// width: &#39;100%+0&#39;,</span>
 <span class="w">    </span><span class="c1">// height: &#39;100%+0&#39;,</span>
+<span class="w">    </span><span class="c1">// aspectRatio: false,</span>
+
 <span class="w">    </span><span class="c1">// onResizeCallback: function(width, height, gameObject, anchor) {},</span>
 <span class="w">    </span><span class="c1">// onResizeCallbackScope: undefined,</span>
 
@@ -14992,6 +14994,12 @@
 <li><code>width</code>, <code>height</code> : Set size (invoke <code>onResizeCallback</code>) based on visible window, which composed of<ul>
 <li>Percentage of visible width/height : <code>'p%'</code>, p: <code>0</code> ~ <code>100</code>.        </li>
 <li>Padding : <code>'+n'</code>, or <code>'-n'</code>.</li>
+</ul>
+</li>
+<li><code>aspectRatio</code> :<ul>
+<li><code>undefined</code>, or <code>false</code> : Does not keep aspect ratio. Default behavior.</li>
+<li><code>true</code> : Use the current width and height as the aspect ratio.</li>
+<li>A number : Use given number as the aspect ratio.    </li>
 </ul>
 </li>
 <li><code>onResizeCallback</code>, <code>onResizeCallbackScope</code> : Callback of resizing game object<ul>

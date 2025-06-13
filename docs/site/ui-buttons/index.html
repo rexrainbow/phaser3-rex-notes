@@ -15217,7 +15217,7 @@
 <ul>
 <li><code>x</code>, <code>y</code> : Position of this object, it is valid when this object is the top object.</li>
 <li><code>anchor</code> : See <a href="../anchor/#create-instance">anchor</a>.<ul>
-<li><code>left</code>, <code>right</code>, <code>centerX</code>, <code>x</code>, <code>top</code>, <code>bottom</code>, <code>centerY</code>, <code>y</code> : Position based on visible window, which composed of<ul>
+<li><code>left</code>, <code>right</code>, <code>centerX</code>, <code>x</code>, <code>top</code>, <code>bottom</code>, <code>centerY</code>, <code>y</code>, <code>aspectRatio</code> : Position based on visible window, which composed of<ul>
 <li>Percentage of visible width/height : <code>'p%'</code>, p: <code>0</code> ~ <code>100</code>.<ul>
 <li><code>'left'</code>(=0%), <code>'center'</code>(=50%), <code>'right'</code>(=100%)</li>
 <li><code>'top'</code>(=0%), <code>'center'</code>(=50%), <code>'bottom'</code>(=100%)</li>
@@ -15231,7 +15231,13 @@
 <li>Padding : <code>'+n'</code>, or <code>'-n'</code>.</li>
 </ul>
 </li>
-<li><code>onResizeCallback</code> : A default resize callback will be assigned interanlly. </li>
+<li><code>aspectRatio</code> :<ul>
+<li><code>undefined</code>, or <code>false</code> : Does not keep aspect ratio. Default behavior.</li>
+<li><code>true</code> : Use the current width and height as the aspect ratio.</li>
+<li>A number : Use given number as the aspect ratio.    </li>
+</ul>
+</li>
+<li><code>onResizeCallback</code> : A default resize callback will be assigned interanlly.</li>
 </ul>
 </li>
 <li><code>width</code>, <code>height</code> : Minimum width, minimum height.</li>
