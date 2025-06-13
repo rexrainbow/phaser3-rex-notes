@@ -21,6 +21,7 @@ declare namespace Anchor {
         top?: string, bottom?: string, centerY?: string, y?: string,
 
         width?: string, height?: string,
+        aspectRatio?: boolean | number;
 
         onResizeCallback?: OnResizeCallbackType,
         onResizeCallbackScope?: unknown,

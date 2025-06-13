@@ -126,7 +126,7 @@ var buttons = scene.rexUI.add.gridButtons({
 
 - `x`, `y` : Position of this object, it is valid when this object is the top object.
 - `anchor` : See [anchor](anchor.md#create-instance).
-    - `left`, `right`, `centerX`, `x`, `top`, `bottom`, `centerY`, `y` : Position based on visible window, which composed of
+    - `left`, `right`, `centerX`, `x`, `top`, `bottom`, `centerY`, `y`, `aspectRatio` : Position based on visible window, which composed of
         - Percentage of visible width/height : `'p%'`, p: `0` ~ `100`.
             - `'left'`(=0%), `'center'`(=50%), `'right'`(=100%)
             - `'top'`(=0%), `'center'`(=50%), `'bottom'`(=100%)
@@ -134,7 +134,11 @@ var buttons = scene.rexUI.add.gridButtons({
     - `width`, `height` : Set size (invoke `onResizeCallback`) based on visible window, which composed of
         - Percentage of visible width/height : `'p%'`, p: `0` ~ `100`.        
         - Padding : `'+n'`, or `'-n'`.
-    - `onResizeCallback` : A default resize callback will be assigned interanlly. 
+    - `aspectRatio` :
+        - `undefined`, or `false` : Does not keep aspect ratio. Default behavior.
+        - `true` : Use the current width and height as the aspect ratio.
+        - A number : Use given number as the aspect ratio.    
+    - `onResizeCallback` : A default resize callback will be assigned interanlly.
 - `width` : Minimum width. i.e. Width of this gridButtons will larger then this value.
 - `height` : Minimum height. i.e. Hieght of this gridButtons will larger then this value.
 - `origin`, `originX`, `originY` : Set origin of this sizer. Default value is (0.5, 0.5).

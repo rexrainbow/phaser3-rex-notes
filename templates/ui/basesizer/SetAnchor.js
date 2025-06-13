@@ -11,11 +11,11 @@ var SetAnchor = function (config) {
     var hasOnResizeCallback = config.hasOwnProperty('onResizeCallback');
     if ((hasMinWidth || hasMinHeight) && !hasOnResizeCallback) {
         config.onResizeCallback = function (width, height, sizer) {
-            if (hasMinWidth) {
+            if (width !== undefined) {
                 sizer.setMinWidth(width);
             }
 
-            if (hasMinHeight) {
+            if (height !== undefined) {
                 sizer.setMinHeight(height);
             }
 

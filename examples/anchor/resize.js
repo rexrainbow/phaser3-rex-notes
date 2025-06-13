@@ -15,7 +15,7 @@ class Demo extends Phaser.Scene {
     create() {
         var bg = this.add.image(400, 300, 'classroom');
 
-        var leftTopPanel = this.add.rectangle(400, 300, 50, 200, 0xffffff)
+        var leftTopPanel = this.add.rectangle(400, 300, 200, 200, 0xffffff)
             .setStrokeStyle(4, 0x00ff00);
 
         this.plugins.get('rexAnchor').add(leftTopPanel, {
@@ -24,6 +24,8 @@ class Demo extends Phaser.Scene {
 
             width: '30%',
             //height: '30%',
+
+            // aspectRatio: true
           
         });
 

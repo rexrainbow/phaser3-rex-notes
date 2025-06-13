@@ -91,6 +91,8 @@ var anchor = scene.plugins.get('rexAnchor').add(gameObject, {
 
     // width: '100%+0',
     // height: '100%+0',
+    // aspectRatio: false,
+
     // onResizeCallback: function(width, height, gameObject, anchor) {},
     // onResizeCallbackScope: undefined,
 
@@ -119,6 +121,10 @@ For example, anchor game object's left bound to viewport's left+10, centerY to v
 - `width`, `height` : Set size (invoke `onResizeCallback`) based on visible window, which composed of
     - Percentage of visible width/height : `'p%'`, p: `0` ~ `100`.        
     - Padding : `'+n'`, or `'-n'`.
+- `aspectRatio` :
+    - `undefined`, or `false` : Does not keep aspect ratio. Default behavior.
+    - `true` : Use the current width and height as the aspect ratio.
+    - A number : Use given number as the aspect ratio.    
 - `onResizeCallback`, `onResizeCallbackScope` : Callback of resizing game object
     - `undefined` : Default resize method.
     - Custom method
