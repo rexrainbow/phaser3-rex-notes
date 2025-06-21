@@ -142,12 +142,12 @@ frameManager.paste(frameName, gameObject);
         -  Any render-able game object except :
             -  [Graphics](graphics.md) can't paste directly, because that Graphics game object does not have size. 
                 - Draw Graphics to [RenderTexture](rendertexture.md), then paste this [RenderTexture](rendertexture.md) to frameMamager.
-
+        - Draw multiple game objects : Draw game objects on [RenderTexture](rendertexture.md), then paste this [RenderTexture]
 
 #### Custom drawing
 
 ```javascript
-frameManager.draw(frameName, callback, scope)
+frameManager.draw(frameName, callback, scope);
 ```
 - `frameName` : Frame name.
 - `callback` : 
