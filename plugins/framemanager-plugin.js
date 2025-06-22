@@ -1,4 +1,6 @@
-import FrameManager from './framemanager.js';
+import {
+    FrameManager, FrameManagerPool
+} from './framemanager.js';
 
 class FrameManagerPlugin extends Phaser.Plugins.BasePlugin {
 
@@ -14,6 +16,11 @@ class FrameManagerPlugin extends Phaser.Plugins.BasePlugin {
     add(scene, key, width, height, cellWidth, cellHeight, fillColor, useDynamicTexture) {
         return new FrameManager(scene, key, width, height, cellWidth, cellHeight, fillColor, useDynamicTexture);
     }
+
+    addPool(scene, key, width, height, cellWidth, cellHeight, fillColor, useDynamicTexture) {
+        return new FrameManagerPool(scene, key, width, height, cellWidth, cellHeight, fillColor, useDynamicTexture);
+    }
+
 }
 
 export default FrameManagerPlugin;

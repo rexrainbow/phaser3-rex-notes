@@ -13,17 +13,14 @@ class Demo extends Phaser.Scene {
 
     create() {
         var useDynamicTexture = true;
-        var frameManager = this.plugins.get('rexCanvasFrameManager').add(this,
+        var frameManagerPool = this.plugins.get('rexCanvasFrameManager').addPool(this,
             {
                 key: 'test',
-                width: 512, height: 512,
+                width: 128, height: 128,
                 cellWidth: 64, cellHeight: 64,
                 fillColor: (useDynamicTexture) ? 0x666666 : '#666666',
                 useDynamicTexture: useDynamicTexture,
             });
-
-        // Show texture
-        this.add.image(800, 600, 'test').setOrigin(1).setScale(0.5);
 
         // A text object for drawing character
         var txt = this.make.text({
@@ -39,26 +36,26 @@ class Demo extends Phaser.Scene {
         });
 
         // Draw character on text object then paste to canvas texture
-        var characters = '兒童樂園';
+        var characters = '兒童樂園雲霄飛車旋轉木馬';
         for (var i = 0, cnt = characters.length; i < cnt; i++) {
             var c = characters.charAt(i);
             txt.setText(c)
-            frameManager.paste(c, txt);
+            frameManagerPool.paste(c, txt);
         }
-        frameManager.updateTexture();
+        frameManagerPool.updateTexture();
 
         // Show frame by Image
         for (var i = 0, cnt = characters.length; i < cnt; i++) {
             var c = characters.charAt(i);
-            this.add.image(50 + i * 64, 50, 'test', c);
+            var key = frameManagerPool.getKey(c)
+            this.add.image(50 + i * 64, 50, key, c);
         }
 
-        // Add frames to bitmapfont, for bitmaptext
-        frameManager.addToBitmapFont();
-        this.add.bitmapText(50, 100, 'test', '兒樂童園')
-            .setScale(0.5)
-            .setCharacterTint(0, 1, false, 0xff0000)
-            .setCharacterTint(-1, 1, false, 0x0000ff)
+        // Show texture
+        var keys = frameManagerPool.getKeys();
+        for (var i = 0, cnt = keys.length; i < cnt; i++) {
+            this.add.image(800, 400 + (i * 72), keys[i], '__BASE').setOrigin(1, 1).setScale(0.5);
+        }
     }
 
     update() {

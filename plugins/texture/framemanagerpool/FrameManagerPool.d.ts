@@ -1,15 +1,17 @@
-export default FrameManager;
+export default FrameManagerPool;
 
-declare namespace FrameManager {
+declare namespace FrameManagerPool {
+    type KeyGeneratorType = (index: number) => string | string;
+
     interface IConfig {
-        key: string,
+        key: KeyGeneratorType,
         width?: number,
         height?: number,
         cellWidth?: number,
         cellHeight?: number,
         cellPadding?: number,
         columns?: number,
-        rows?: number,        
+        rows?: number,
         fillColor?: string | number,
         useDynamicTexture?: boolean
     }
@@ -32,10 +34,10 @@ declare namespace FrameManager {
     ) => void
 }
 
-declare class FrameManager {
+declare class FrameManagerPool {
     constructor(
         scene: Phaser.Scene | Phaser.Game,
-        key: string,
+        key: FrameManagerPool.KeyGeneratorType,
         width?: number,
         height?: number,
         cellWidth?: number,
@@ -46,7 +48,7 @@ declare class FrameManager {
 
     constructor(
         scene: Phaser.Scene | Phaser.Game,
-        key: string,
+        key: FrameManagerPool.KeyGeneratorType,
         width?: number,
         height?: number,
         cellWidth?: number,
@@ -56,25 +58,21 @@ declare class FrameManager {
 
     constructor(
         scene: Phaser.Scene | Phaser.Game,
-        config: FrameManager.IConfig
+        config: FrameManagerPool.IConfig
     );
 
+    readonly keyGenerator: FrameManagerPool.KeyGeneratorType;
     readonly useDynamicTexture: boolean;
-    readonly key: string;
-    readonly texture: Phaser.Textures.CanvasTexture | Phaser.Textures.DynamicTexture;
-    readonly canvas: HTMLCanvasElement | undefined;
-    readonly context: CanvasRenderingContext2D | undefined;
     readonly width: number;
     readonly height: number;
     readonly cellWidth: number;
     readonly cellHeight: number;
-    readonly isFull: boolean;
 
     destroy(): void;
 
     draw(
         frameName: string | number,
-        callback: FrameManager.DrawCanvasFrameCallback | FrameManager.DrawDynamicTextureFrameCallback,
+        callback: FrameManagerPool.DrawCanvasFrameCallback | FrameManagerPool.DrawDynamicTextureFrameCallback,
         scope?: object
     ): this;
 
@@ -100,4 +98,18 @@ declare class FrameManager {
     contains(
         frameName: string | number
     ): boolean;
+
+    getKeys(): string[];
+
+    getTexture(
+        frameName: string | number
+    ): Phaser.Textures.CanvasTexture | Phaser.Textures.DynamicTexture;
+
+    getCanvas(
+        frameName: string | number
+    ): HTMLCanvasElement | undefined;
+
+    getContext(
+        frameName: string | number
+    ): CanvasRenderingContext2D | undefined;
 }

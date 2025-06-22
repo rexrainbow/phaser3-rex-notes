@@ -30,6 +30,7 @@ var Draw = function (frameName, callback, scope) {
 
     this.texture.add(frameName, 0, innerX, innerY, frameSize.width, frameSize.height);
     this.addFrameName(index, frameName);
+    this.dirty = true;
 
     return this;
 }

@@ -9,8 +9,6 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        // TODO : remove this line
-        this.load.image('classroom', 'assets/images/phaser-dude.png');
     }
 
     create() {
