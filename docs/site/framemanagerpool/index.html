@@ -10,13 +10,13 @@
         <meta name="author" content="rexrainbow">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/levelcounter/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/framemanagerpool/">
       
       
-        <link rel="prev" href="../ymlachievements/">
+        <link rel="prev" href="../framemanager/">
       
       
-        <link rel="next" href="../quest/">
+        <link rel="next" href="../charactercache/">
       
       
       <link rel="icon" href="../images/logo.svg">
@@ -24,7 +24,7 @@
     
     
       
-        <title>Level counter - Notes of Phaser 3</title>
+        <title>Frame manager pool - Notes of Phaser 3</title>
       
     
     
@@ -109,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Level counter
+              Frame manager pool
             
           </span>
         </div>
@@ -891,18 +891,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
@@ -918,7 +920,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             Game object
@@ -5943,18 +5945,20 @@
                 
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_17" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_17" checked>
         
           
           <label class="md-nav__link" for="__nav_4_17" id="__nav_4_17_label" tabindex="0">
@@ -5970,7 +5974,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_17_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_17_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4_17">
             <span class="md-nav__icon md-icon"></span>
             Textures
@@ -6050,18 +6054,20 @@
                 
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_17_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_17_4" checked>
         
           
           <label class="md-nav__link" for="__nav_4_17_4" id="__nav_4_17_4_label" tabindex="0">
@@ -6077,7 +6083,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_17_4_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_17_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4_17_4">
             <span class="md-nav__icon md-icon"></span>
             Frame manager
@@ -6111,10 +6117,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../framemanagerpool/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Frame manager pool
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -6125,6 +6151,186 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#live-demos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Live demos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-plugin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install plugin
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Install plugin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-minify-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      Load minify file
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-plugin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Import plugin
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      Import class
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-instance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create instance
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-frame" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add frame
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Add frame">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#from-game-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      From game object
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-drawing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom drawing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#empty-frame" class="md-nav__link">
+    <span class="md-ellipsis">
+      Empty frame
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-texture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Update texture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-frame" class="md-nav__link">
+    <span class="md-ellipsis">
+      Remove frame
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-texture-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get texture key
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#destroy-instance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Destroy instance
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -8245,20 +8451,18 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
         
           
           <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
@@ -8274,7 +8478,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_10">
             <span class="md-nav__icon md-icon"></span>
             Logic
@@ -9021,30 +9225,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Level counter
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../levelcounter/" class="md-nav__link">
         
   
   
@@ -9055,135 +9239,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
-    <span class="md-ellipsis">
-      Introduction
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#live-demos" class="md-nav__link">
-    <span class="md-ellipsis">
-      Live demos
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    <span class="md-ellipsis">
-      Usage
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Usage">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#install-plugin" class="md-nav__link">
-    <span class="md-ellipsis">
-      Install plugin
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Install plugin">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#load-minify-file" class="md-nav__link">
-    <span class="md-ellipsis">
-      Load minify file
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#import-plugin" class="md-nav__link">
-    <span class="md-ellipsis">
-      Import plugin
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#import-class" class="md-nav__link">
-    <span class="md-ellipsis">
-      Import class
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#create-instance" class="md-nav__link">
-    <span class="md-ellipsis">
-      Create instance
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#accumulate-experience" class="md-nav__link">
-    <span class="md-ellipsis">
-      Accumulate experience
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#level-and-experience" class="md-nav__link">
-    <span class="md-ellipsis">
-      Level and experience
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#events" class="md-nav__link">
-    <span class="md-ellipsis">
-      Events
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -14833,27 +14888,78 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#accumulate-experience" class="md-nav__link">
+  <a href="#add-frame" class="md-nav__link">
     <span class="md-ellipsis">
-      Accumulate experience
+      Add frame
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Add frame">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#from-game-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      From game object
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#level-and-experience" class="md-nav__link">
+  <a href="#custom-drawing" class="md-nav__link">
     <span class="md-ellipsis">
-      Level and experience
+      Custom drawing
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#events" class="md-nav__link">
+  <a href="#empty-frame" class="md-nav__link">
     <span class="md-ellipsis">
-      Events
+      Empty frame
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-texture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Update texture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-frame" class="md-nav__link">
+    <span class="md-ellipsis">
+      Remove frame
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-texture-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get texture key
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#destroy-instance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Destroy instance
     </span>
   </a>
   
@@ -14883,28 +14989,28 @@
   
 
 
-  <h1>Level counter</h1>
+  <h1>Frame manager pool</h1>
 
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Map level value from experience value, by callback or a number array.</p>
+<p>Draw frames on <a href="../canvas-texture/">canvas texture</a>, or <a href="../dynamic-texture/">dynamic texture</a>. It maintains a list of <a href="../framemanager/">frame manager</a>, to support unlimited frames.</p>
 <ul>
 <li>Author: Rex</li>
-<li>Object</li>
+<li>Member of scene</li>
 </ul>
 <h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="https://codepen.io/rexrainbow/pen/jOXomJK">Exp-bar</a></li>
+<li><a href="">Pool</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/levelcounter">Sample code</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/framemanager">Sample code</a></p>
 <h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
 <h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Load plugin (minify file) in preload stage
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexlevelcounterplugin&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexlevelcounterplugin.min.js&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexframemanagerplugin&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexframemanagerplugin.min.js&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Add level-counter object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">levelCounter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexlevelcounterplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<li>Add frame-manager object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">frameManagerPool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexframemanagerplugin&#39;</span><span class="p">).</span><span class="nx">addPool</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
@@ -14913,13 +15019,13 @@
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Install plugin in <a href="../game/#configuration">configuration of game</a>
-    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">LevelCounterPlugin</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/plugins/levelcounter-plugin.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">FrameManagerPlugin</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/plugins/framemanager-plugin.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// ...</span>
 <span class="w">    </span><span class="nx">plugins</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nb">global</span><span class="o">:</span><span class="w"> </span><span class="p">[{</span>
-<span class="w">            </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;rexLevelCounter&#39;</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">plugin</span><span class="o">:</span><span class="w"> </span><span class="nx">LevelCounterPlugin</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;rexFrameManager&#39;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">plugin</span><span class="o">:</span><span class="w"> </span><span class="nx">FrameManagerPlugin</span><span class="p">,</span>
 <span class="w">            </span><span class="nx">start</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="c1">// ...</span>
@@ -14929,8 +15035,8 @@
 <span class="p">};</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">game</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Add level-counter object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">levelCounter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexLevelCounter&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<li>Add frame-manager object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">frameManagerPool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexFrameManager&#39;</span><span class="p">).</span><span class="nx">addPool</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
@@ -14939,123 +15045,188 @@
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Import class
-    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">LevelCounter</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/plugins/levelcounter.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">FrameManagerPool</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/plugins/framemanager.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
-<li>Add level-counter object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">levelCounter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">LevelCounter</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<li>Add frame-manager object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">frameManagerPool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">FrameManagerPool</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">levelCounter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexLevelCounter&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">({</span>
-<span class="w">    </span><span class="nx">table</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">level</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">level</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">100</span><span class="p">;</span><span class="w"> </span><span class="p">},</span>
-<span class="w">    </span><span class="c1">// table: [0, 100, 200, 300,],</span>
-
-<span class="w">    </span><span class="c1">// maxLevel: -1,</span>
-
-<span class="w">    </span><span class="c1">// exp: 0,</span>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">frameManagerPool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexFrameManager&#39;</span><span class="p">).</span><span class="nx">addPool</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">width</span><span class="o">:</span><span class="w"> </span><span class="mf">4096</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">height</span><span class="o">:</span><span class="w"> </span><span class="mf">4096</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">cellWidth</span><span class="o">:</span><span class="w"> </span><span class="mf">64</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">cellHeight</span><span class="o">:</span><span class="w"> </span><span class="mf">64</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">cellPadding</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">columns</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">rows</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">fillColor</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">useDynamicTexture</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 <span class="p">});</span>
 </code></pre></div>
 <ul>
-<li><code>table</code> : Level table, return experience value from level value. Level value starts from <code>0</code>.<ul>
-<li>A callback
-    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">level</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">experience</span><span class="p">;</span>
+<li><code>key</code> : <ul>
+<li>A callback to generate texture key (ref: <a href="../textures/">texture manager</a>)
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">index</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">index</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
 <span class="p">}</span>
 </code></pre></div></li>
-<li>A number array : Experience value of each level.</li>
+<li>A string to generate texture key by <code>${key}_${index}</code></li>
 </ul>
 </li>
-<li><code>maxLevel</code> :<ul>
-<li><code>undefined</code> : Default value<ul>
-<li>No upper limit for callback level table.</li>
-<li><code>(table.length - 1)</code> for number array level table.</li>
+<li><code>width</code>, <code>height</code> : Size of canvas.<ul>
+<li>Calculate <code>width</code>/<code>height</code> by <code>columns</code>/<code>rows</code> and <code>cellWidth</code>/<code>cellHeight</code>, if <code>columns</code>, <code>rows</code> parameters are given.</li>
 </ul>
 </li>
-<li>A number : Maximum level value</li>
+<li><code>columns</code>, <code>rows</code> : <ul>
+<li><code>undefined</code> : Calculate <code>columns</code>/<code>rows</code> by <code>width</code>/<code>height</code> and <code>cellWidth</code>/<code>cellHeight</code>.</li>
 </ul>
 </li>
-<li><code>exp</code> : Initial experience value. Default value is <code>0</code>.</li>
+<li><code>cellWidth</code>, <code>cellHeight</code> : Maximum frame size.</li>
+<li><code>cellPadding</code> : Extra space around frame. Default value is <code>0</code>.<ul>
+<li>Total cell width will be <code>cellWidth + (cellPadding * 2)</code></li>
+<li>Total cell height will be <code>cellHeight + (cellPadding * 2)</code></li>
 </ul>
-<h3 id="accumulate-experience">Accumulate experience<a class="headerlink" href="#accumulate-experience" title="Permanent link">&para;</a></h3>
+</li>
+<li><code>fillColor</code> : Fill an initial color, in css color string (for <a href="../canvas-texture/">canvas-texture</a>), or number (for <a href="../dynamic-texture/">dynamic-texture</a>)<ul>
+<li><code>undefined</code> : Don't fill color.</li>
+</ul>
+</li>
+<li><code>useDynamicTexture</code><ul>
+<li><code>false</code> : Use <a href="../canvas-texture/">canvas-texture</a>. Default behavior.</li>
+<li><code>true</code> : Use <a href="../dynamic-texture/">dynamic-texture</a>.</li>
+</ul>
+</li>
+</ul>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">frameManagerPool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexFrameManager&#39;</span><span class="p">).</span><span class="nx">addPool</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="nx">cellWidth</span><span class="p">,</span><span class="w"> </span><span class="nx">cellHeight</span><span class="p">,</span><span class="w"> </span><span class="nx">fillColor</span><span class="p">,</span><span class="w"> </span><span class="nx">useDynamicTexture</span><span class="p">);</span>
+</code></pre></div>
+<p>Steps of generating bitmapfont :</p>
+<ol>
+<li>Add frames : 
+   <div class="highlight"><pre><span></span><code><span class="nx">frameManagerPool</span><span class="p">.</span><span class="nx">paste</span><span class="p">(</span><span class="nx">frameName</span><span class="p">,</span><span class="w"> </span><span class="nx">gameObject</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Update texture
+   <div class="highlight"><pre><span></span><code><span class="nx">frameManagerPool</span><span class="p">.</span><span class="nx">updateTexture</span><span class="p">();</span>
+</code></pre></div></li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Frame manager pool can't export date to bitmapfont</p>
+</div>
+<h3 id="add-frame">Add frame<a class="headerlink" href="#add-frame" title="Permanent link">&para;</a></h3>
+<h4 id="from-game-object">From game object<a class="headerlink" href="#from-game-object" title="Permanent link">&para;</a></h4>
+<p>After rendering content on <a href="../text/">text</a>, <a href="../bbcodetext/">bbcode text</a>, <a href="../canvas/">canvas</a></p>
+<div class="highlight"><pre><span></span><code><span class="nx">frameManagerPool</span><span class="p">.</span><span class="nx">paste</span><span class="p">(</span><span class="nx">frameName</span><span class="p">,</span><span class="w"> </span><span class="nx">gameObject</span><span class="p">);</span>
+</code></pre></div>
 <ul>
-<li>Accumulate experience
-    <div class="highlight"><pre><span></span><code><span class="nx">levelCounter</span><span class="p">.</span><span class="nx">gainExp</span><span class="p">(</span><span class="nx">incExp</span><span class="p">);</span>
-<span class="c1">// levelCounter.exp += incExp;</span>
+<li><code>frameName</code> : Frame name.</li>
+<li><code>gameObject</code> : <ul>
+<li><a href="../canvas-texture/">Canvas-texture</a> mode :<ul>
+<li>Game objects which has canvas, for example, <a href="../text/">text</a>, <a href="../bbcodetext/">bbcode text</a>, or <a href="../canvas/">canvas</a>.</li>
+</ul>
+</li>
+<li><a href="../dynamic-texture/">Dynamic-texture</a> mode :<ul>
+<li>Any render-able game object except :<ul>
+<li><a href="../graphics/">Graphics</a> can't paste directly, because that Graphics game object does not have size. <ul>
+<li>Draw Graphics to <a href="../rendertexture/">RenderTexture</a>, then paste this <a href="../rendertexture/">RenderTexture</a> to frameMamager.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Draw multiple game objects : Draw game objects on <a href="../rendertexture/">RenderTexture</a>, then paste this [RenderTexture]</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Get textrure key of last pasting action</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">frameManagerPool</span><span class="p">.</span><span class="nx">lastKey</span><span class="p">;</span>
+</code></pre></div>
+<h4 id="custom-drawing">Custom drawing<a class="headerlink" href="#custom-drawing" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nx">frameManagerPool</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">frameName</span><span class="p">,</span><span class="w"> </span><span class="nx">callback</span><span class="p">,</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
+</code></pre></div>
+<ul>
+<li><code>frameName</code> : Frame name.</li>
+<li><code>callback</code> : <ul>
+<li><a href="../canvas-texture/">Canvas-texture</a> mode : 
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">canvas</span><span class="p">,</span><span class="w"> </span><span class="nx">context</span><span class="p">,</span><span class="w"> </span><span class="nx">frameSize</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// The maximum frame size</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">cellWidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">frameSize</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">cellHeight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">frameSize</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Draw content in area of (0, 0) - (cellWidth, cellHeight)</span>
+
+<span class="w">    </span><span class="c1">// Update frame size</span>
+<span class="w">    </span><span class="c1">// frameSize.width = ...</span>
+<span class="w">    </span><span class="c1">// frameSize.height = ...</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li><a href="../dynamic-texture/">Dynamic-texture</a> mode :
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">texture</span><span class="p">,</span><span class="w"> </span><span class="nx">frameSize</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// The maximum frame size</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">cellWidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">frameSize</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">cellHeight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">frameSize</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Draw content in area of (0, 0) - (cellWidth, cellHeight)</span>
+
+<span class="w">    </span><span class="c1">// Update frame size</span>
+<span class="w">    </span><span class="c1">// frameSize.width = ...</span>
+<span class="w">    </span><span class="c1">// frameSize.height = ...</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
+<p>Get textrure key of last pasting action</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">frameManagerPool</span><span class="p">.</span><span class="nx">lastKey</span><span class="p">;</span>
+</code></pre></div>
+<h4 id="empty-frame">Empty frame<a class="headerlink" href="#empty-frame" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nx">frameManagerPool</span><span class="p">.</span><span class="nx">addEmptyFrame</span><span class="p">(</span><span class="nx">frameName</span><span class="p">);</span>
+<span class="c1">// frameManagerPool.addEmptyFrame(frameName, width, height);</span>
+</code></pre></div>
+<ul>
+<li><code>frameName</code> : Frame name.</li>
+<li><code>width</code> : Frame width, default value is <code>cellWidth</code></li>
+<li><code>height</code> : Frame height, default value is <code>cellHeight</code></li>
+</ul>
+<p>Get textrure key of last pasting action</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">frameManagerPool</span><span class="p">.</span><span class="nx">lastKey</span><span class="p">;</span>
+</code></pre></div>
+<h3 id="update-texture">Update texture<a class="headerlink" href="#update-texture" title="Permanent link">&para;</a></h3>
+<p>Update texture after adding frames, for <a href="../canvas-texture/">Canvas-texture</a> mode.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">frameManagerPool</span><span class="p">.</span><span class="nx">updateTexture</span><span class="p">();</span>
+</code></pre></div>
+<p>Do nothing in <a href="../dynamic-texture/">Dynamic-texture</a> mode.</p>
+<h3 id="remove-frame">Remove frame<a class="headerlink" href="#remove-frame" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Remove a frame
+    <div class="highlight"><pre><span></span><code><span class="nx">frameManagerPool</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">frameName</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>frameName</code> : Frame name.</li>
+</ul>
+</li>
+<li>Remove all frames
+    <div class="highlight"><pre><span></span><code><span class="nx">frameManagerPool</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+</code></pre></div></li>
+</ul>
+<p>Remove frame data but won't clear texture image.</p>
+<h3 id="get-texture-key">Get texture key<a class="headerlink" href="#get-texture-key" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get all texture keys used by frame managers
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">keys</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">frameManagerPool</span><span class="p">.</span><span class="nx">keys</span><span class="p">;</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="nx">levelCounter</span><span class="p">.</span><span class="nx">gainExp</span><span class="p">(</span><span class="nx">incExp</span><span class="p">,</span><span class="w"> </span><span class="nx">callback</span><span class="p">,</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
-</code></pre></div><ul>
-<li>Will fire <code>'levelup'</code> event, or invoke <code>callback</code> many times.
-    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">level</span><span class="p">,</span><span class="w"> </span><span class="nx">fromExp</span><span class="p">,</span><span class="w"> </span><span class="nx">toExp</span><span class="p">,</span><span class="w"> </span><span class="nx">levelStartExp</span><span class="p">,</span><span class="w"> </span><span class="nx">levelEndExp</span><span class="p">){</span><span class="w">        </span>
-<span class="p">}</span>
-</code></pre></div><ul>
-<li><code>level</code> : To next level</li>
-<li><code>fromExp</code>, <code>toExp</code> : Experience increment from <code>fromExp</code> to <code>toExp</code>.</li>
-<li><code>levelStartExp</code>, <code>levelEndExp</code> : Range of this level.</li>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">keys</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">frameManagerPool</span><span class="p">.</span><span class="nx">getKeys</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Get texture key by frameName
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">frameManagerPool</span><span class="p">.</span><span class="nx">getKey</span><span class="p">(</span><span class="nx">frameName</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
-</li>
-</ul>
-</li>
-<li>Reset experience value
-    <div class="highlight"><pre><span></span><code><span class="nx">levelCounter</span><span class="p">.</span><span class="nx">resetExp</span><span class="p">(</span><span class="nx">exp</span><span class="p">);</span>
-</code></pre></div><ul>
-<li>Won't fire <code>'levelup'</code> event.</li>
-</ul>
-</li>
-<li>Force level up
-    <div class="highlight"><pre><span></span><code><span class="nx">levelCounter</span><span class="p">.</span><span class="nx">setLevel</span><span class="p">(</span><span class="nx">level</span><span class="p">);</span>
+<h3 id="destroy-instance">Destroy instance<a class="headerlink" href="#destroy-instance" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">frameManagerPool</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
 </code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="nx">levelCounter</span><span class="p">.</span><span class="nx">setLevel</span><span class="p">(</span><span class="nx">level</span><span class="p">,</span><span class="w"> </span><span class="nx">callback</span><span class="p">,</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
-</code></pre></div><ul>
-<li>Will fire <code>'levelup'</code> event, or invoke <code>callback</code> many times.
-    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">level</span><span class="p">,</span><span class="w"> </span><span class="nx">fromExp</span><span class="p">,</span><span class="w"> </span><span class="nx">toExp</span><span class="p">,</span><span class="w"> </span><span class="nx">levelStartExp</span><span class="p">,</span><span class="w"> </span><span class="nx">levelEndExp</span><span class="p">){</span><span class="w">        </span>
-<span class="p">}</span>
-</code></pre></div><ul>
-<li><code>level</code> : To next level</li>
-<li><code>fromExp</code>, <code>toExp</code> : Experience increment from <code>fromExp</code> to <code>toExp</code>.</li>
-<li><code>levelStartExp</code>, <code>levelEndExp</code> : Range of this level.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="level-and-experience">Level and experience<a class="headerlink" href="#level-and-experience" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Get current experience
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">exp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">levelCounter</span><span class="p">.</span><span class="nx">getExp</span><span class="p">();</span>
-<span class="c1">// var exp = levelCounter.exp;</span>
-</code></pre></div></li>
-<li>Get current level
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">levelCounter</span><span class="p">.</span><span class="nx">getLevel</span><span class="p">();</span>
-<span class="c1">// var level = levelCounter.level;</span>
-</code></pre></div></li>
-<li>Get current required experience to next level
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">exp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">levelCounter</span><span class="p">.</span><span class="nx">requiredExp</span><span class="p">;</span>
-</code></pre></div></li>
-<li>Get experience of level
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">exp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">levelCounter</span><span class="p">.</span><span class="nx">getExp</span><span class="p">(</span><span class="nx">level</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Get level from experience
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">levelCounter</span><span class="p">.</span><span class="nx">getLevel</span><span class="p">(</span><span class="nx">exp</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Get required experience to level
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">exp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">levelCounter</span><span class="p">.</span><span class="nx">getRequiredExpToNextLevel</span><span class="p">(</span><span class="nx">level</span><span class="p">);</span>
-<span class="c1">// var exp = levelCounter.getRequiredExpToNextLevel(level, exp);</span>
-</code></pre></div></li>
-</ul>
-<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Level-up when accumulating experience
-    <div class="highlight"><pre><span></span><code><span class="nx">levelCounter</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;levelup&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">level</span><span class="p">,</span><span class="w"> </span><span class="nx">fromExp</span><span class="p">,</span><span class="w"> </span><span class="nx">toExp</span><span class="p">,</span><span class="w"> </span><span class="nx">levelStartExp</span><span class="p">,</span><span class="w"> </span><span class="nx">levelEndExp</span><span class="p">){</span><span class="w">        </span>
-<span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>level</code> : To next level</li>
-<li><code>fromExp</code>, <code>toExp</code> : Experience increment from <code>fromExp</code> to <code>toExp</code>.</li>
-<li><code>levelStartExp</code>, <code>levelEndExp</code> : Range of this level.</li>
-</ul>
-</li>
-</ul>
 
 
 

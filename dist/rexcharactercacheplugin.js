@@ -175,6 +175,7 @@
 
         this.texture.add(frameName, 0, innerX, innerY, frameSize.width, frameSize.height);
         this.addFrameName(index, frameName);
+        this.dirty = true;
 
         return this;
     };
@@ -457,7 +458,7 @@
                 columns = GetValue$3(config, 'columns');
                 rows = GetValue$3(config, 'rows');
                 fillColor = GetValue$3(config, 'fillColor');
-                useDynamicTexture = GetValue$3(config, 'useDynamicTexture');            
+                useDynamicTexture = GetValue$3(config, 'useDynamicTexture');
             } else {
                 if (typeof (fillColor) === 'boolean') {
                     useDynamicTexture = fillColor;
@@ -477,9 +478,12 @@
                 cellPadding = 0;
             }
 
+            this.scene = scene;
             this.cellWidth = cellWidth;
             this.cellHeight = cellHeight;
             this.cellPadding = cellPadding;
+            this.outerCellWidth = cellWidth + (cellPadding * 2);
+            this.outerCellHeight = cellHeight + (cellPadding * 2);
 
             if (columns) {
                 width = this.outerCellWidth * columns;
@@ -528,22 +532,18 @@
             this.columns = columns;
             this.rows = rows;
             this.totalCount = this.columns * this.rows;
+            this.fillColor = fillColor;
 
             this.frameNames = Array(this.totalCount);
             for (var i = 0, cnt = this.frameNames.length; i < cnt; i++) {
                 this.frameNames[i] = undefined;
             }
-        }
 
-        get outerCellWidth() {
-            return this.cellWidth + (this.cellPadding * 2);
-        }
-
-        get outerCellHeight() {
-            return this.cellHeight + (this.cellPadding * 2);
+            this.dirty = false;
         }
 
         destroy() {
+            this.scene = undefined;
             this.texture = undefined;
             this.canvas = undefined;
             this.context = undefined;
@@ -584,6 +584,9 @@
             if (this.useDynamicTexture) ; else {
                 this.texture.refresh();
             }
+
+            this.dirty = false;
+
             return this;
         }
 
