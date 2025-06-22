@@ -78,6 +78,7 @@
 70. [Flash](flash.md): Flashing (set invisible then visible) game object.
 71. [Flip](flip.md): Flipping game object to another face by scaling width/height.
 72. [Frame manager](framemanager.md): Draw frames on canvas texture, or dynamic texture.
+72. [Frame manager pool](framemanagerpool.md): Draw frames on canvas texture, or dynamic texture. It maintains a list of [frame manager](framemanager.md), to support unlimited frames.
 73. [FSM](fsm.md): Finite state machine.
 74. [Fuzzy](fuzzy.md): A wrap of fuzzy logic.
 75. [Gashapon](gashapon.md): Pick random item from box.
