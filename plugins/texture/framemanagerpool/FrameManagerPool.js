@@ -28,6 +28,7 @@ class FrameManagerPool {
         );
 
         this.list.push(this.firstItem);
+        this.lastKey = undefined;
     }
 
     get scene() {
@@ -123,6 +124,8 @@ class FrameManagerPool {
 
         items.push(item);
 
+        this.lastKey = item.key;
+
         return item;
     }
 
@@ -137,17 +140,20 @@ class FrameManagerPool {
     }
 
     draw(frameName, callback, scope) {
-        this.getAvailableFrameManager().draw(frameName, callback, scope);
+        var item = this.getAvailableFrameManager();
+        item.draw(frameName, callback, scope);
         return this;
     }
 
     paste(frameName, gameObject) {
-        this.getAvailableFrameManager().paste(frameName, gameObject);
+        var item = this.getAvailableFrameManager();
+        item.paste(frameName, gameObject);
         return this;
     }
 
     addEmptyFrame(frameName, width, height) {
-        this.getAvailableFrameManager().addEmptyFrame(frameName, width, height);
+        var item = this.getAvailableFrameManager();
+        item.addEmptyFrame(frameName, width, height);
         return this;
     }
 
@@ -203,6 +209,10 @@ class FrameManagerPool {
         }
 
         return undefined;
+    }
+
+    get keys() {
+        return this.getKeys();
     }
 
     getKeys() {

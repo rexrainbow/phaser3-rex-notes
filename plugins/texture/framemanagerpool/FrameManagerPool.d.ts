@@ -67,6 +67,8 @@ declare class FrameManagerPool {
     readonly height: number;
     readonly cellWidth: number;
     readonly cellHeight: number;
+    readonly lastKey: string;
+    readonly keys: string[];
 
     destroy(): void;
 

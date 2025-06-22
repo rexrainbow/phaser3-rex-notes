@@ -209,6 +209,7 @@ nav:
         - Dynamic texture: dynamic-texture.md
         - Frame manager:
             - Frame manager: framemanager.md
+            - Frame manager pool: framemanagerpool.md
             - Character cache: charactercache.md      
     - Display:
         - Mask: mask.md

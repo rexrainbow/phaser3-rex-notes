@@ -1,13 +1,13 @@
 ## Introduction
 
-Draw frames on [canvas texture](canvas-texture.md), or [dynamic texture](dynamic-texture.md).
+Draw frames on [canvas texture](canvas-texture.md), or [dynamic texture](dynamic-texture.md). It maintains a list of [frame manager](framemanager.md), to support unlimited frames.
 
 - Author: Rex
 - Member of scene
 
 ## Live demos
 
-- [Paste text](https://codepen.io/rexrainbow/pen/PoOXdwE)
+- [Pool]()
 
 ## Usage
 
@@ -23,7 +23,7 @@ Draw frames on [canvas texture](canvas-texture.md), or [dynamic texture](dynamic
     ```
 - Add frame-manager object
     ```javascript
-    var frameManager = scene.plugins.get('rexframemanagerplugin').add(scene, config);
+    var frameManagerPool = scene.plugins.get('rexframemanagerplugin').addPool(scene, config);
     ```
 
 #### Import plugin
@@ -52,7 +52,7 @@ Draw frames on [canvas texture](canvas-texture.md), or [dynamic texture](dynamic
     ```
 - Add frame-manager object
     ```javascript
-    var frameManager = scene.plugins.get('rexFrameManager').add(scene, config);
+    var frameManagerPool = scene.plugins.get('rexFrameManager').addPool(scene, config);
     ```
 
 #### Import class
@@ -63,17 +63,17 @@ Draw frames on [canvas texture](canvas-texture.md), or [dynamic texture](dynamic
     ```
 - Import class
     ```javascript
-    import { FrameManager } from 'phaser3-rex-plugins/plugins/framemanager.js';
+    import { FrameManagerPool } from 'phaser3-rex-plugins/plugins/framemanager.js';
     ```
 - Add frame-manager object
     ```javascript
-    var frameManager = new FrameManager(scene, config);
+    var frameManagerPool = new FrameManagerPool(scene, config);
     ```
 
 ### Create instance
 
 ```javascript
-var frameManager = scene.plugins.get('rexFrameManager').add(scene, {
+var frameManagerPool = scene.plugins.get('rexFrameManager').addPool(scene, {
     key: '',
     width: 4096,
     height: 4096,
@@ -87,7 +87,14 @@ var frameManager = scene.plugins.get('rexFrameManager').add(scene, {
 });
 ```
 
-- `key` : Texture key in [texture manager](textures.md)
+- `key` : 
+    - A callback to generate texture key (ref: [texture manager](textures.md))
+        ```javascript
+        function(index) {
+            return key + index.toString();
+        }
+        ```
+    - A string to generate texture key by `${key}_${index}`
 - `width`, `height` : Size of canvas.
     - Calculate `width`/`height` by `columns`/`rows` and `cellWidth`/`cellHeight`, if `columns`, `rows` parameters are given.
 - `columns`, `rows` : 
@@ -106,23 +113,22 @@ var frameManager = scene.plugins.get('rexFrameManager').add(scene, {
 or
 
 ```javascript
-var frameManager = scene.plugins.get('rexFrameManager').add(scene, key, width, height, cellWidth, cellHeight, fillColor, useDynamicTexture);
+var frameManagerPool = scene.plugins.get('rexFrameManager').addPool(scene, key, width, height, cellWidth, cellHeight, fillColor, useDynamicTexture);
 ```
 
 Steps of generating bitmapfont :
 
 1. Add frames : 
    ```javascript
-   frameManager.paste(frameName, gameObject);
+   frameManagerPool.paste(frameName, gameObject);
    ```
 2. Update texture
    ```javascript
-   frameManager.updateTexture();
+   frameManagerPool.updateTexture();
    ```
-3. Export frame data to bitmapfont
-   ```javascript
-   frameManager.addToBitmapFont();
-   ```
+
+!!! warning
+    Frame manager pool can't export date to bitmapfont
 
 ### Add frame
 
@@ -131,7 +137,7 @@ Steps of generating bitmapfont :
 After rendering content on [text](text.md), [bbcode text](bbcodetext.md), [canvas](canvas.md)
 
 ```javascript
-frameManager.paste(frameName, gameObject);
+frameManagerPool.paste(frameName, gameObject);
 ```
 
 - `frameName` : Frame name.
@@ -144,10 +150,17 @@ frameManager.paste(frameName, gameObject);
                 - Draw Graphics to [RenderTexture](rendertexture.md), then paste this [RenderTexture](rendertexture.md) to frameMamager.
         - Draw multiple game objects : Draw game objects on [RenderTexture](rendertexture.md), then paste this [RenderTexture]
 
+
+Get textrure key of last pasting action
+
+```javascript
+var key = frameManagerPool.lastKey;
+```
+
 #### Custom drawing
 
 ```javascript
-frameManager.draw(frameName, callback, scope);
+frameManagerPool.draw(frameName, callback, scope);
 ```
 
 - `frameName` : Frame name.
@@ -181,24 +194,35 @@ frameManager.draw(frameName, callback, scope);
         }
         ```
 
+Get textrure key of last pasting action
+
+```javascript
+var key = frameManagerPool.lastKey;
+```
 
 #### Empty frame
 
 ```javascript
-frameManager.addEmptyFrame(frameName);
-// frameManager.addEmptyFrame(frameName, width, height);
+frameManagerPool.addEmptyFrame(frameName);
+// frameManagerPool.addEmptyFrame(frameName, width, height);
 ```
 
 - `frameName` : Frame name.
 - `width` : Frame width, default value is `cellWidth`
 - `height` : Frame height, default value is `cellHeight`
 
+Get textrure key of last pasting action
+
+```javascript
+var key = frameManagerPool.lastKey;
+```
+
 ### Update texture
 
 Update texture after adding frames, for [Canvas-texture](canvas-texture.md) mode.
 
 ```javascript
-frameManager.updateTexture();
+frameManagerPool.updateTexture();
 ```
 
 Do nothing in [Dynamic-texture](dynamic-texture.md) mode.
@@ -207,24 +231,33 @@ Do nothing in [Dynamic-texture](dynamic-texture.md) mode.
 
 - Remove a frame
     ```javascript
-    frameManager.remove(frameName);
+    frameManagerPool.remove(frameName);
     ```
     - `frameName` : Frame name.
 - Remove all frames
     ```javascript
-    frameManager.clear();
+    frameManagerPool.clear();
     ```
 
 Remove frame data but won't clear texture image.
 
-### Export to bitmapfont
+### Get texture key
 
-```javascript
-frameManager.addToBitmapFont();
-```
+- Get all texture keys used by frame managers
+    ```javascript
+    var keys = frameManagerPool.keys;
+    ```
+    or
+    ```javascript
+    var keys = frameManagerPool.getKeys();
+    ```
+- Get texture key by frameName
+    ```javascript
+    var key = frameManagerPool.getKey(frameName);
+    ```
 
 ### Destroy instance
 
 ```javascript
-frameManager.destroy();
+frameManagerPool.destroy();
 ```
