@@ -4077,6 +4077,12 @@
                 result.strikethroughOffset = defaultStyle.strikethroughOffset;
             }
 
+            if (prop.hasOwnProperty('bgcolor')) {
+                result.bgcolor = prop.bgcolor;
+            } else {
+                result.bgcolor = null;
+            }
+
             return result;
         }
 
