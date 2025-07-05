@@ -47,6 +47,7 @@ module.exports = {
     'framemanagerplugin': './plugins/framemanager-plugin.js',
     'canvasframemanagerplugin': './plugins/canvasframemanager-plugin.js',
     'charactercacheplugin': './plugins/charactercache-plugin.js',
+    'clickboardtotextureplugin': './plugins/clickboardtotexture-plugin.js',
 
     // custom file loader
     'webfontloaderplugin': './plugins/webfontloader-plugin.js',
