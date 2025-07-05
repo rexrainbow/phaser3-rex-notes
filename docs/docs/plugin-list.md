@@ -211,6 +211,7 @@
 205. [UI/Fixwidthbuttons](ui-fixwidthbuttons.md): A container with a group of fix-width buttons.
 206. [UI/Fixwidthsizer](ui-fixwidthsizer.md): Layout children game objects into lines.
 207. [UI/Folder](ui-folder.md): A container with a title, foldable child, and background.
+206. [UI/Fullscreen button](ui-fullscreenbutton.md): A behavior attached to a game object that toggles fullscreen mode when the object is clicked.
 208. [UI/Grid buttons](ui-gridbuttons.md): A container with a group of buttons in grids.
 209. [UI/Grid sizer](ui-gridsizer.md): Layout children game objects in grids.
 210. [UI/Gird table](ui-gridtable.md): A container with a grid table, slider, and scroller.
