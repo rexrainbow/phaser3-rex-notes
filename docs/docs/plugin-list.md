@@ -40,6 +40,7 @@
 31. [Canvas/Round rectangle](canvas-roundrectangle.md): Round rectangle on canvas.
 32. [Canvas image data](canvas-data.md): Get image data from texture, or text object.
 33. [Circle mask image](circlemaskimage.md): Load a texture, then apply a circle mask.
+33. [Clickboard-to-Texture](clickboardtotexture.md): Store the image pasted from the clipboard into the texture manager.
 34. [Click outside](clickoutside.md): Fires 'clickoutside' event when pointer-down or pointer-up outside of game object.
 35. [Clock](clock.md): A clock to count elapsed time.
 36. [Character cache](charactercache.md): Generate bitmapfont from [text game object](text.md), or [bbcode text game object](bbcodetext.md).
