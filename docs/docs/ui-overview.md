@@ -869,6 +869,14 @@ var layerManager = scene.rexUI.add.layerManager({
     ```javascript
     var skew = new RexPlugins.UI.Skew(gameObject, config);
     ```
+1. [Fullscreen button](ui-fullscreenbutton.md): A behavior attached to a game object that toggles fullscreen mode when the object is clicked.
+    ```javascript
+    scene.rexUI.add.fullscreenButton(gameObject, config);
+    ```
+    or
+    ```javascript
+    new FullscreenButton(gameObject, config);
+    ```
 
 ### Helper methods
 
