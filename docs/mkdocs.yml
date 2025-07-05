@@ -211,6 +211,7 @@ nav:
             - Frame manager: framemanager.md
             - Frame manager pool: framemanagerpool.md
             - Character cache: charactercache.md      
+        - Clickboard to texture: clickboardtotexture.md
     - Display:
         - Mask: mask.md
         - Blend mode: blendmode.md
