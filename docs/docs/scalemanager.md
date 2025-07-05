@@ -141,57 +141,6 @@ This method dose not have to be invoked, unless the canvas position, or visibili
 scene.scale.updateBounds();
 ```
 
-### Full screen
-
-Under `'pointerup'` touch event :
-
-- Start full screen
-    ```javascript
-    scene.scale.startFullscreen();
-    ```
-- Stop full screen
-    ```javascript
-    scene.scale.stopFullscreen();
-    ```
-- Toggle full screen
-    ```javascript
-    scene.scale.toggleFullscreen();
-    ```
-- Is full screen
-    ```javascript
-    var isFullscreen = scene.scale.isFullscreen;
-    ```
-
-Games within an iframe will also be blocked from fullscreen 
-unless the iframe has the `allowfullscreen` attribute.
-
-Performing an action that navigates to another page, 
-or opens another tab, will automatically cancel fullscreen mode, 
-as will the user pressing the ESC key.
-
-#### Events
-
-- Enter full screen
-    ```javascript
-    scene.scale.on('enterfullscreen', function() {}, scope);
-    ```
-- Enter full screen failed
-    ```javascript
-    scene.scale.on('fullscreenfailed', function(error) {}, scope);
-    ```
-- Leave full screen
-    ```javascript
-    scene.scale.on('leavefullscreen', function() {}, scope);
-    ```
-- Full screen unsupport
-    ```javascript
-    scene.scale.on('fullscreenunsupported', function() {}, scope);
-    ```
-- Leave full screen
-    ```javascript
-    scene.scale.on('leavefullscreen', function() {}, scope);
-    ```
-
 ### Orientation 
 
 #### Properties

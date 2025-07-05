@@ -14,10 +14,10 @@ Under any input event ([touch](touchevents.md) or [keyboard](keyboardevents.md))
 gameObject.setInteractive().on('pointerdown', function() {
     if (scene.scale.isFullscreen) {
         scene.scale.stopFullscreen();
-        // On stop fulll screen
+        // Will leave full screen
     } else {
         scene.scale.startFullscreen();
-        // On start fulll screen
+        // Will enter full screen
     }
 });
 ```
@@ -34,12 +34,12 @@ Under any input event ([touch](touchevents.md) or [keyboard](keyboardevents.md))
 
 ```javascript
 gameObject.setInteractive().on('pointerdown', function() {
-    scene.scale.toggleFullscreen();
     if (scene.scale.isFullscreen) {
-        // On start fulll screen
+        // Will leave full screen
     } else {
-        // On stop fulll screen
+        // Will enter full screen
     }
+    scene.scale.toggleFullscreen();
 });
 ```
 
@@ -58,13 +58,25 @@ gameObject.setInteractive().on('pointerdown', function() {
 
 ### Events
 
-- Full screen mode unsupported
+- Enter full screen
     ```javascript
-    scene.scale.on('fullscreenunsupported', function() {});
+    scene.scale.on('enterfullscreen', function() {}, scope);
     ```
-- Enter full screen mode
+- Enter full screen failed
     ```javascript
-    scene.scale.on('enterfullscreen', function() {});
+    scene.scale.on('fullscreenfailed', function(error) {}, scope);
+    ```
+- Leave full screen
+    ```javascript
+    scene.scale.on('leavefullscreen', function() {}, scope);
+    ```
+- Full screen unsupport
+    ```javascript
+    scene.scale.on('fullscreenunsupported', function() {}, scope);
+    ```
+- Leave full screen
+    ```javascript
+    scene.scale.on('leavefullscreen', function() {}, scope);
     ```
 
 ### With DOM game object
