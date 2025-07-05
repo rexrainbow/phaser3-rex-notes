@@ -10,13 +10,9 @@
         <meta name="author" content="rexrainbow">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/fullscreen/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/ui-fullscreenbutton/">
       
       
-        <link rel="prev" href="../scaleouter/">
-      
-      
-        <link rel="next" href="../orientation/">
       
       
       <link rel="icon" href="../images/logo.svg">
@@ -24,7 +20,7 @@
     
     
       
-        <title>Full screen - Notes of Phaser 3</title>
+        <title>Ui fullscreenbutton - Notes of Phaser 3</title>
       
     
     
@@ -109,7 +105,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Full screen
+              Ui fullscreenbutton
             
           </span>
         </div>
@@ -249,20 +245,18 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
@@ -278,7 +272,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             System
@@ -565,30 +559,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Full screen
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../fullscreen/" class="md-nav__link">
         
   
   
@@ -599,93 +573,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
-    <span class="md-ellipsis">
-      Introduction
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    <span class="md-ellipsis">
-      Usage
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Usage">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#enabledisable" class="md-nav__link">
-    <span class="md-ellipsis">
-      Enable/disable
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#toggle" class="md-nav__link">
-    <span class="md-ellipsis">
-      Toggle
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#state" class="md-nav__link">
-    <span class="md-ellipsis">
-      State
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#events" class="md-nav__link">
-    <span class="md-ellipsis">
-      Events
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#with-dom-game-object" class="md-nav__link">
-    <span class="md-ellipsis">
-      With DOM game object
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -14721,6 +14608,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#live-demos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Live demos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#usage" class="md-nav__link">
     <span class="md-ellipsis">
       Usage
@@ -14731,45 +14627,69 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#enabledisable" class="md-nav__link">
+  <a href="#install-plugin" class="md-nav__link">
     <span class="md-ellipsis">
-      Enable/disable
+      Install plugin
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Install plugin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-minify-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      Load minify file
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#toggle" class="md-nav__link">
+  <a href="#import-plugin" class="md-nav__link">
     <span class="md-ellipsis">
-      Toggle
+      Import plugin
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#state" class="md-nav__link">
+  <a href="#import-class" class="md-nav__link">
     <span class="md-ellipsis">
-      State
+      Import class
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-fullscreen-button-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add fullscreen-button behavior
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#events" class="md-nav__link">
+  <a href="#custom-class" class="md-nav__link">
     <span class="md-ellipsis">
-      Events
+      Custom class
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#with-dom-game-object" class="md-nav__link">
+  <a href="#other-properties" class="md-nav__link">
     <span class="md-ellipsis">
-      With DOM game object
+      Other properties
     </span>
   </a>
   
@@ -14799,82 +14719,111 @@
   
 
 
-  <h1>Full screen</h1>
+  <h1>Ui fullscreenbutton</h1>
 
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Enable or disable full screen mode, built-in method of phaser.</p>
+<p>A behavior attached to a game object that toggles fullscreen mode when the object is clicked.</p>
 <ul>
-<li>Author: Phaser Team</li>
+<li>Author: Rex</li>
+<li>Behavior</li>
+</ul>
+<h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="">Full screen button</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="enabledisable">Enable/disable<a class="headerlink" href="#enabledisable" title="Permanent link">&para;</a></h3>
-<p>Under any input event (<a href="../touchevents/">touch</a> or <a href="../keyboardevents/">keyboard</a>)</p>
-<div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setInteractive</span><span class="p">().</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerdown&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">isFullscreen</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">stopFullscreen</span><span class="p">();</span>
-<span class="w">        </span><span class="c1">// Will leave full screen</span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">startFullscreen</span><span class="p">();</span>
-<span class="w">        </span><span class="c1">// Will enter full screen</span>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-fullscreenbutton">Sample code</a></p>
+<h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
+<h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Load plugin (minify file) in preload stage
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">scenePlugin</span><span class="p">(</span><span class="s1">&#39;rexuiplugin&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;rexUI&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;rexUI&#39;</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Add fullscreen-button behavior
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">fullscreenButton</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Install rex plugins from npm
+    <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
+</code></pre></div></li>
+<li>Install plugin in <a href="../game/#configuration">configuration of game</a>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">UIPlugin</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-plugin.js&#39;</span><span class="p">;</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="w">    </span><span class="nx">plugins</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">scene</span><span class="o">:</span><span class="w"> </span><span class="p">[{</span>
+<span class="w">            </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;rexUI&#39;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">plugin</span><span class="o">:</span><span class="w"> </span><span class="nx">UIPlugin</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">mapping</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;rexUI&#39;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="c1">// ...</span>
+<span class="w">        </span><span class="p">]</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="p">});</span>
-</code></pre></div>
-<p>Fire one of these events</p>
-<ul>
-<li><code>'fullscreenunsupported'</code> : Tried to enter fullscreen mode, but it is unsupported by the browser.</li>
-<li><code>'enterfullscreen'</code> : Entered fullscreen mode successfully.</li>
-<li><code>'fullscreenfailed'</code> : Tried to enter fullscreen mode but failed.</li>
-</ul>
-<h3 id="toggle">Toggle<a class="headerlink" href="#toggle" title="Permanent link">&para;</a></h3>
-<p>Under any input event (<a href="../touchevents/">touch</a> or <a href="../keyboardevents/">keyboard</a>)</p>
-<div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setInteractive</span><span class="p">().</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerdown&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">isFullscreen</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// Will leave full screen</span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// Will enter full screen</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">toggleFullscreen</span><span class="p">();</span>
-<span class="p">});</span>
-</code></pre></div>
-<ul>
-<li>Fire <code>'fullscreenunsupported'</code> or <code>'enterfullscreen'</code> event.</li>
-</ul>
-<h3 id="state">State<a class="headerlink" href="#state" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Is in full screen mode
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">isFullScreen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">isFullscreen</span><span class="p">;</span>
-</code></pre></div></li>
-<li>Support full screen
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">supported</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Device</span><span class="p">.</span><span class="nx">Fullscreen</span><span class="p">.</span><span class="nx">available</span><span class="p">;</span>
-</code></pre></div></li>
-</ul>
-<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Enter full screen
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;enterfullscreen&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Enter full screen failed
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;fullscreenfailed&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Leave full screen
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;leavefullscreen&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Full screen unsupport
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;fullscreenunsupported&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Leave full screen
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;leavefullscreen&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
-</code></pre></div></li>
-</ul>
-<h3 id="with-dom-game-object">With DOM game object<a class="headerlink" href="#with-dom-game-object" title="Permanent link">&para;</a></h3>
-<p>Set <code>gameConfig.fullscreenTarget</code> to parent id.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">parent</span><span class="o">:</span><span class="w"> </span><span class="nx">parentDivID</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">fullscreenTarget</span><span class="o">:</span><span class="w"> </span><span class="nx">parentDivID</span>
+<span class="w">    </span><span class="c1">// ...</span>
 <span class="p">};</span>
-
 <span class="kd">var</span><span class="w"> </span><span class="nx">game</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Add fullscreen-button behavior
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">fullscreenButton</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Install rex plugins from npm
+    <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
+</code></pre></div></li>
+<li>Import class
+    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">FullscreenButton</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-components.js&#39;</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Add fullscreen-button behavior
+    <div class="highlight"><pre><span></span><code><span class="ow">new</span><span class="w"> </span><span class="nx">FullscreenButton</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h3 id="add-fullscreen-button-behavior">Add fullscreen-button behavior<a class="headerlink" href="#add-fullscreen-button-behavior" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">fullscreenButton</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">onEnter</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">onLeave</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="p">});</span>
 </code></pre></div>
+<ul>
+<li><code>onEnter</code> :<ul>
+<li>A string or <code>{key, frame}</code> : Set <a href="../gameobject/#texture">texture key</a> while entering fullscreen</li>
+<li>A callback : Invoking while entering fullscreen
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li><code>onLeave</code> :<ul>
+<li>A string or <code>{key, frame}</code> : Set <a href="../gameobject/#texture">texture key</a> while leaving fullscreen</li>
+<li>A callback : Invoking while leaving fullscreen
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
+<h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Define class
+    <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyFullscreenButton</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">FullscreenButton</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// ...</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li>Create instance
+    <div class="highlight"><pre><span></span><code><span class="ow">new</span><span class="w"> </span><span class="nx">MyFullscreenButton</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
+<p>See <a href="../button/">Click/button behavior</a></p>
 
 
 
