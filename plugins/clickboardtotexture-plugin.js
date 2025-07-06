@@ -11,8 +11,8 @@ class ClickboardToTexturePlugin extends Phaser.Plugins.BasePlugin {
         eventEmitter.on('destroy', this.destroy, this);
     }
 
-    add(scene, config) {
-        return new ClickboardToTexture(scene, config);
+    add(scene) {
+        return new ClickboardToTexture(scene);
     }
 }
 

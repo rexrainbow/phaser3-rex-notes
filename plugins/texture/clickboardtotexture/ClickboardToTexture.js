@@ -27,8 +27,8 @@ class ClickboardToTexture extends ComponentBase {
     saveTexturePromise(key) {
         var self = this;
         return new Promise(function (resolve, reject) {
-            var onComplete = function (data) {
-                resolve(data)
+            var onComplete = function () {
+                resolve()
             }
             FileObjectToCache(self.scene, self.file, 'image', key, undefined, onComplete);
         });

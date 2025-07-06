@@ -3,16 +3,21 @@ import ComponentBase from '../../utils/componentbase/ComponentBase';
 export default ClickboardToTexture;
 
 declare namespace ClickboardToTexture {
-    interface IConfig {
-        key?: string,
-    }
 }
 
 declare class ClickboardToTexture extends ComponentBase {
-    constructor(scene: Phaser.Scene, config?: ClickboardToTexture.IConfig);
+    constructor(scene: Phaser.Scene);
 
     destroy(): void;
 
-    setKey(key: string): this;
+    saveTexture(
+        key: string,
+        onComplete?: () => void
+    ): this;
 
+    saveTexturePromise(
+        key: string
+    ): Promise<void>;
+
+    releaseFile(): this;
 }
