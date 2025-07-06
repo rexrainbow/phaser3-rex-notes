@@ -25,7 +25,7 @@ var RunHeightWrap = function (parentHeight) {
             child.runHeightWrap(childHeight);
 
         } else if (child.minHeight > 0) {
-            // Child has minWidth
+            // Child has minHeight
             child.runHeightWrap(child.minHeight);
 
         }
