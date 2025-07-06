@@ -1,3 +1,6 @@
+import ResizeGameObject from './ResizeGameObject.js';
+import IsGameObject from '../../utils/system/IsGameObject.js'
+
 var FitTo = function (source, target, fitMode, out) {
     if (fitMode === undefined) {
         fitMode = 0;
@@ -20,8 +23,15 @@ var FitTo = function (source, target, fitMode, out) {
     var scaleX = target.width / source.width;
     var scaleY = target.height / source.height;
     var scale = (!fitMode) ? Math.min(scaleX, scaleY) : Math.max(scaleX, scaleY);
-    out.width = source.width * scale;
-    out.height = source.height * scale;
+    var newWidth = source.width * scale;
+    var newHeight = source.height * scale;
+
+    if (IsGameObject(out)) {
+        ResizeGameObject(out, newWidth, newHeight);
+    } else {
+        out.width = newWidth;
+        out.height = newHeight;
+    }
 
     return out;
 }
