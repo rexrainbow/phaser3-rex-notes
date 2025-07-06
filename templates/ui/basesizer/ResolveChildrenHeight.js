@@ -5,6 +5,7 @@ var ResolveChildrenHeight = function (parentHeight) {
         child = this.sizerChildren[i];
         if (child && child.isRexSizer && !child.ignoreLayout) {
             if (parentHeight !== undefined) {
+                // Normal case
                 expandedChildHeight = this.getExpandedChildHeight(child, parentHeight);
                 childHeight = child.resolveHeight(expandedChildHeight);
                 if (childHeight === undefined) {
@@ -13,6 +14,7 @@ var ResolveChildrenHeight = function (parentHeight) {
                 child.resolveChildrenHeight(childHeight);
 
             } else if (child.minHeight > 0) {
+                // Child has minHeight
                 child.resolveChildrenHeight(child.minHeight);
             }
 
