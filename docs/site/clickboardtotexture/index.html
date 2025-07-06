@@ -10,9 +10,13 @@
         <meta name="author" content="rexrainbow">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/clickboard-to-texture/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/clickboardtotexture/">
       
       
+        <link rel="prev" href="../charactercache/">
+      
+      
+        <link rel="next" href="../mask/">
       
       
       <link rel="icon" href="../images/logo.svg">
@@ -887,18 +891,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
@@ -914,7 +920,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             Game object
@@ -5939,18 +5945,20 @@
                 
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_17" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_17" checked>
         
           
           <label class="md-nav__link" for="__nav_4_17" id="__nav_4_17_label" tabindex="0">
@@ -5966,7 +5974,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_17_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_17_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4_17">
             <span class="md-nav__icon md-icon"></span>
             Textures
@@ -6161,10 +6169,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../clickboardtotexture.md" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Clickboard to texture
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -6175,6 +6203,144 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#live-demos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Live demos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-plugin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install plugin
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Install plugin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-minify-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      Load minify file
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-plugin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Import plugin
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      Import class
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-instance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create instance
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#destroy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Destroy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#event" class="md-nav__link">
+    <span class="md-ellipsis">
+      Event
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#save-texture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Save texture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#release-clickboard-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Release clickboard data
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -14710,18 +14876,27 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#set-texture" class="md-nav__link">
+  <a href="#event" class="md-nav__link">
     <span class="md-ellipsis">
-      Set texture
+      Event
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#event" class="md-nav__link">
+  <a href="#save-texture" class="md-nav__link">
     <span class="md-ellipsis">
-      Event
+      Save texture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#release-clickboard-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Release clickboard data
     </span>
   </a>
   
@@ -14772,7 +14947,7 @@
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexclickboardtotextureplugin&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexclickboardtotextureplugin.min.js&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Add clickboard-to-texture object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">clickboardToTexture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexclickboardtotextureplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">clickboardToTexture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexclickboardtotextureplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
@@ -14798,7 +14973,7 @@
 <span class="kd">var</span><span class="w"> </span><span class="nx">game</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Add clickboard-to-texture object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">clickboardToTexture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexClickboardToTexture&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">clickboardToTexture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexClickboardToTexture&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
@@ -14810,31 +14985,36 @@
     <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">ClickboardToTexture</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/plugins/clickboardtotexture.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Add clickboard-to-texture object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">clickboardToTexture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">ClickboardToTexture</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">clickboardToTexture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">ClickboardToTexture</span><span class="p">(</span><span class="nx">scene</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">clickboardToTexture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexClickboardToTexture&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
-<span class="p">});</span>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">clickboardToTexture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexClickboardToTexture&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">);</span>
 </code></pre></div>
-<ul>
-<li><code>key</code> : Store the image to texture cache by key.</li>
-</ul>
 <h3 id="destroy">Destroy<a class="headerlink" href="#destroy" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">clickboardToTexture</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
-</code></pre></div>
-<h3 id="set-texture">Set texture<a class="headerlink" href="#set-texture" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">clickboardToTexture</span><span class="p">.</span><span class="nx">setKey</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="event">Event<a class="headerlink" href="#event" title="Permanent link">&para;</a></h3>
 <ul>
 <li>On paste
-    <div class="highlight"><pre><span></span><code><span class="nx">clickboardToTexture</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;paste&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// clickboardToTexture.setKey(newKey)</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">clickboardToTexture</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;paste&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">clickboardToTexture</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// await clickboardToTexture.saveTexturePromise(key);</span>
+<span class="w">    </span><span class="c1">// ...</span>
 <span class="p">})</span>
 </code></pre></div></li>
 </ul>
+<h3 id="save-texture">Save texture<a class="headerlink" href="#save-texture" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">clickboardToTexture</span><span class="p">.</span><span class="nx">saveTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">onComplete</span><span class="p">);</span>
+</code></pre></div>
+<ul>
+<li><code>onComplete</code> : Callback invoked upon completion of texture saving.</li>
+</ul>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="k">await</span><span class="w"> </span><span class="nx">clickboardToTexture</span><span class="p">.</span><span class="nx">saveTexturePromise</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="release-clickboard-data">Release clickboard data<a class="headerlink" href="#release-clickboard-data" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">clickboardToTexture</span><span class="p">.</span><span class="nx">releaseFile</span><span class="p">();</span>
+</code></pre></div>
 
 
 

@@ -134,7 +134,7 @@
         }
     };
 
-    const GetValue$1 = Phaser.Utils.Objects.GetValue;
+    const GetValue = Phaser.Utils.Objects.GetValue;
 
     class ComponentBase {
         constructor(parent, config) {
@@ -143,7 +143,7 @@
             this.isShutdown = false;
 
             // Event emitter, default is private event emitter
-            this.setEventEmitter(GetValue$1(config, 'eventEmitter', true));
+            this.setEventEmitter(GetValue(config, 'eventEmitter', true));
 
             // Register callback of parent destroy event, also see `shutdown` method
             if (this.parent) {
@@ -328,8 +328,6 @@
         loader.start();
     };
 
-    const GetValue = Phaser.Utils.Objects.GetValue;
-
     class ClickboardToTexture extends ComponentBase {
         constructor(scene, config) {
             if (config === undefined) {
@@ -339,25 +337,38 @@
             super(scene, config);
             // this.scene
 
-            this.setKey(GetValue(config, 'key'));
-
             var self = this;
             var onPaste = function (file) {
-                FileObjectToCache(self.scene, file, 'image', self.key, undefined, function () {
-                    self.emit('paste', self.key);
-                });
+                self.file = file;
+                self.emit('paste', self);
             };
             this.clickboardPaster = new ClickboardPaster('image', onPaste);
         }
 
-        setKey(key) {
-            this.key = key;
+        saveTexture(key, onComplete) {
+            FileObjectToCache(this.scene, this.file, 'image', key, undefined, onComplete);
+            return this;
+        }
+
+        saveTexturePromise(key) {
+            var self = this;
+            return new Promise(function (resolve, reject) {
+                var onComplete = function () {
+                    resolve();
+                };
+                FileObjectToCache(self.scene, self.file, 'image', key, undefined, onComplete);
+            });
+        }
+
+        releaseFile() {
+            this.file = null;
             return this;
         }
 
         destroy() {
             this.clickboardPaster.destroy();
             this.clickboardPaster = null;
+            this.file = null;
         }
     }
 
@@ -372,8 +383,8 @@
             eventEmitter.on('destroy', this.destroy, this);
         }
 
-        add(scene, config) {
-            return new ClickboardToTexture(scene, config);
+        add(scene) {
+            return new ClickboardToTexture(scene);
         }
     }
 
