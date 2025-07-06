@@ -28603,6 +28603,102 @@ void main (void) {
 	    }
 	}
 
+	var HasResizeMethod = function (gameObject) {
+	    // 1st pass : Has `resize` method?
+	    if (gameObject.resize) {
+	        return true;
+	    }
+
+	    // 2nd pass : Has `setSize` method?
+	    // Does not have `setSize` method
+	    if (!gameObject.setSize) {
+	        return false;
+	    }
+
+	    // Has `setSize` method but only for internal usage.
+	    for (var i = 0, cnt = ExcludeClassList$1.length; i < cnt; i++) {
+	        var excludeClass = ExcludeClassList$1[i];
+	        if (excludeClass && gameObject instanceof excludeClass) {
+	            return false;
+	        }
+	    }
+
+	    return true;
+	};
+
+	var ExcludeClassList$1 = [
+	    Phaser.GameObjects.Image,
+	    Phaser.GameObjects.Sprite,
+	    Phaser.GameObjects.Mesh,
+	    Phaser.GameObjects.Shader,
+	    Phaser.GameObjects.Video
+	];
+
+	var CanSetDisplaySize = function (gameObject) {
+	    if (gameObject.displayWidth === undefined) {
+	        return false;
+	    }
+
+	    for (var i = 0, cnt = ExcludeClassList.length; i < cnt; i++) {
+	        var excludeClass = ExcludeClassList[i];
+	        if (excludeClass && gameObject instanceof excludeClass) {
+	            return false;
+	        }
+	    }
+
+	    return true;
+	};
+
+	var ExcludeClassList = [
+	    Phaser.GameObjects.BitmapText,
+	];
+
+	var ResizeGameObject = function (gameObject, newDisplayWidth, newDisplayHeight) {
+	    // Set display size
+
+	    if (!gameObject || ((newDisplayWidth === undefined) && (newDisplayHeight === undefined))) {
+	        return;
+	    }
+
+	    if (HasResizeMethod(gameObject)) { // Has `resize`, or `setSize` method
+	        var newWidth, newHeight;
+	        if (newDisplayWidth === undefined) {
+	            newWidth = gameObject.width;
+	        } else {
+	            newWidth = newDisplayWidth / gameObject.scaleX;
+	        }
+	        if (newDisplayHeight === undefined) {
+	            newHeight = gameObject.height;
+	        } else {
+	            newHeight = newDisplayHeight / gameObject.scaleY;
+	        }
+
+	        if (gameObject.resize) {
+	            gameObject.resize(newWidth, newHeight);
+	        } else {
+	            gameObject.setSize(newWidth, newHeight);
+	        }
+
+	    } else {
+	        var canSetDisplaySize = CanSetDisplaySize(gameObject);
+	        if (newDisplayWidth !== undefined) {
+	            if (canSetDisplaySize) {
+	                gameObject.displayWidth = newDisplayWidth;
+	            } else {
+	                gameObject.scaleX = newDisplayWidth / gameObject.width;
+	            }
+	        }
+	        if (newDisplayHeight !== undefined) {
+	            if (canSetDisplaySize) {
+	                gameObject.displayHeight = newDisplayHeight;
+	            } else {
+	                gameObject.scaleY = newDisplayHeight / gameObject.height;
+	            }
+	        }
+
+	    }
+	};
+
 	var FitTo = function (source, target, fitMode, out) {
 	    if (fitMode === undefined) {
 	        fitMode = 0;
@@ -28625,8 +28721,15 @@ void main (void) {
 	    var scaleX = target.width / source.width;
 	    var scaleY = target.height / source.height;
 	    var scale = (!fitMode) ? Math.min(scaleX, scaleY) : Math.max(scaleX, scaleY);
-	    out.width = source.width * scale;
-	    out.height = source.height * scale;
+	    var newWidth = source.width * scale;
+	    var newHeight = source.height * scale;
+
+	    if (IsGameObject(out)) {
+	        ResizeGameObject(out, newWidth, newHeight);
+	    } else {
+	        out.width = newWidth;
+	        out.height = newHeight;
+	    }
 
 	    return out;
 	};
@@ -36865,12 +36968,19 @@ void main () {
 	    for (var i in this.sizerChildren) {
 	        child = this.sizerChildren[i];
 	        if (child && child.isRexSizer && !child.ignoreLayout) {
-	            expandedChildWidth = this.getExpandedChildWidth(child, parentWidth);
-	            childWidth = child.resolveWidth(expandedChildWidth);
-	            if (childWidth === undefined) {
-	                childWidth = expandedChildWidth;
+	            if (parentWidth !== undefined) {
+	                // Normal case
+	                expandedChildWidth = this.getExpandedChildWidth(child, parentWidth);
+	                childWidth = child.resolveWidth(expandedChildWidth);
+	                if (childWidth === undefined) {
+	                    childWidth = expandedChildWidth;
+	                }
+	                child.resolveChildrenWidth(childWidth);
+
+	            } else if (child.minWidth > 0) {
+	                // Child has minWidth
+	                child.resolveChildrenWidth(child.minWidth);
 	            }
-	            child.resolveChildrenWidth(childWidth);
 	        }
 	    }
 	};
@@ -36888,16 +36998,24 @@ void main () {
 	            continue;
 	        }
 
-	        expandedChildWidth = this.getExpandedChildWidth(child, parentWidth);
-	        if (child.isRexSizer) {
-	            childWidth = child.resolveWidth(expandedChildWidth);
-	            if (childWidth === undefined) {
+	        if (parentWidth !== undefined) {
+	            // Normal case
+	            expandedChildWidth = this.getExpandedChildWidth(child, parentWidth);
+	            if (child.isRexSizer) {
+	                childWidth = child.resolveWidth(expandedChildWidth);
+	                if (childWidth === undefined) {
+	                    childWidth = expandedChildWidth;
+	                }
+	            } else {
 	                childWidth = expandedChildWidth;
 	            }
-	        } else {
-	            childWidth = expandedChildWidth;
+	            child.runWidthWrap(childWidth);
+
+	        } else if (child.minWidth > 0) {
+	            // Child has minWidth
+	            child.runWidthWrap(child.minWidth);
+
 	        }
-	        child.runWidthWrap(childWidth);
 	    }
 	    return this;
 	};
@@ -36957,12 +37075,19 @@ void main () {
 	    for (var i in this.sizerChildren) {
 	        child = this.sizerChildren[i];
 	        if (child && child.isRexSizer && !child.ignoreLayout) {
-	            expandedChildHeight = this.getExpandedChildHeight(child, parentHeight);
-	            childHeight = child.resolveHeight(expandedChildHeight);
-	            if (childHeight === undefined) {
-	                childHeight = expandedChildHeight;
+	            if (parentHeight !== undefined) {
+	                expandedChildHeight = this.getExpandedChildHeight(child, parentHeight);
+	                childHeight = child.resolveHeight(expandedChildHeight);
+	                if (childHeight === undefined) {
+	                    childHeight = expandedChildHeight;
+	                }
+	                child.resolveChildrenHeight(childHeight);
+
+	            } else if (child.minHeight > 0) {
+	                child.resolveChildrenHeight(child.minHeight);
 	            }
-	            child.resolveChildrenHeight(childHeight);
+
+
 	        }
 	    }
 	};
@@ -36980,16 +37105,24 @@ void main () {
 	            continue;
 	        }
 
-	        expandedChildHeight = this.getExpandedChildHeight(child, parentHeight);
-	        if (child.isRexSizer) {
-	            childHeight = child.resolveHeight(expandedChildHeight);
-	            if (childHeight === undefined) {
+	        if (parentHeight !== undefined) {
+	            // Normal case
+	            expandedChildHeight = this.getExpandedChildHeight(child, parentHeight);
+	            if (child.isRexSizer) {
+	                childHeight = child.resolveHeight(expandedChildHeight);
+	                if (childHeight === undefined) {
+	                    childHeight = expandedChildHeight;
+	                }
+	            } else {
 	                childHeight = expandedChildHeight;
 	            }
-	        } else {
-	            childHeight = expandedChildHeight;
+	            child.runHeightWrap(childHeight);
+
+	        } else if (child.minHeight > 0) {
+	            // Child has minWidth
+	            child.runHeightWrap(child.minHeight);
+
 	        }
-	        child.runHeightWrap(childHeight);
 	    }
 	    return this;
 	};
@@ -37145,102 +37278,6 @@ void main () {
 	    return this;
 	};
 
-	var HasResizeMethod = function (gameObject) {
-	    // 1st pass : Has `resize` method?
-	    if (gameObject.resize) {
-	        return true;
-	    }
-
-	    // 2nd pass : Has `setSize` method?
-	    // Does not have `setSize` method
-	    if (!gameObject.setSize) {
-	        return false;
-	    }
-
-	    // Has `setSize` method but only for internal usage.
-	    for (var i = 0, cnt = ExcludeClassList$1.length; i < cnt; i++) {
-	        var excludeClass = ExcludeClassList$1[i];
-	        if (excludeClass && gameObject instanceof excludeClass) {
-	            return false;
-	        }
-	    }
-
-	    return true;
-	};
-
-	var ExcludeClassList$1 = [
-	    Phaser.GameObjects.Image,
-	    Phaser.GameObjects.Sprite,
-	    Phaser.GameObjects.Mesh,
-	    Phaser.GameObjects.Shader,
-	    Phaser.GameObjects.Video
-	];
-
-	var CanSetDisplaySize = function (gameObject) {
-	    if (gameObject.displayWidth === undefined) {
-	        return false;
-	    }
-
-	    for (var i = 0, cnt = ExcludeClassList.length; i < cnt; i++) {
-	        var excludeClass = ExcludeClassList[i];
-	        if (excludeClass && gameObject instanceof excludeClass) {
-	            return false;
-	        }
-	    }
-
-	    return true;
-	};
-
-	var ExcludeClassList = [
-	    Phaser.GameObjects.BitmapText,
-	];
-
-	var ResizeGameObject = function (gameObject, newDisplayWidth, newDisplayHeight) {
-	    // Set display size
-
-	    if (!gameObject || ((newDisplayWidth === undefined) && (newDisplayHeight === undefined))) {
-	        return;
-	    }
-
-	    if (HasResizeMethod(gameObject)) { // Has `resize`, or `setSize` method
-	        var newWidth, newHeight;
-	        if (newDisplayWidth === undefined) {
-	            newWidth = gameObject.width;
-	        } else {
-	            newWidth = newDisplayWidth / gameObject.scaleX;
-	        }
-	        if (newDisplayHeight === undefined) {
-	            newHeight = gameObject.height;
-	        } else {
-	            newHeight = newDisplayHeight / gameObject.scaleY;
-	        }
-
-	        if (gameObject.resize) {
-	            gameObject.resize(newWidth, newHeight);
-	        } else {
-	            gameObject.setSize(newWidth, newHeight);
-	        }
-
-	    } else {
-	        var canSetDisplaySize = CanSetDisplaySize(gameObject);
-	        if (newDisplayWidth !== undefined) {
-	            if (canSetDisplaySize) {
-	                gameObject.displayWidth = newDisplayWidth;
-	            } else {
-	                gameObject.scaleX = newDisplayWidth / gameObject.width;
-	            }
-	        }
-	        if (newDisplayHeight !== undefined) {
-	            if (canSetDisplaySize) {
-	                gameObject.displayHeight = newDisplayHeight;
-	            } else {
-	                gameObject.scaleY = newDisplayHeight / gameObject.height;
-	            }
-	        }
-
-	    }
-	};
-
 	// Override
 	var RunLayout = function (parent, newWidth, newHeight) {
 	    // Skip hidden or !dirty sizer
@@ -37328,11 +37365,9 @@ void main () {
 	    var width = self.resolveWidth(width);
 
 	    // Calculate all children width, run width wrap
-	    if (width !== undefined) {
-	        if (runWidthWrap) {
-	            self.resolveChildrenWidth(width);
-	            self.runWidthWrap(width);
-	        }
+	    if (runWidthWrap) {
+	        self.resolveChildrenWidth(width);
+	        self.runWidthWrap(width);
 	    }
 
 	    return width;
@@ -37343,11 +37378,9 @@ void main () {
 	    var height = self.resolveHeight(height);
 
 	    // Calculate all children width, run width wrap
-	    if (height !== undefined) {
-	        if (runHeightWrap) {
-	            self.resolveChildrenHeight(height);
-	            self.runHeightWrap(height);
-	        }
+	    if (runHeightWrap) {
+	        self.resolveChildrenHeight(height);
+	        self.runHeightWrap(height);
 	    }
 
 	    return height;

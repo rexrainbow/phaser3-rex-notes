@@ -3480,6 +3480,102 @@
         }
     }
 
+    var HasResizeMethod = function (gameObject) {
+        // 1st pass : Has `resize` method?
+        if (gameObject.resize) {
+            return true;
+        }
+
+        // 2nd pass : Has `setSize` method?
+        // Does not have `setSize` method
+        if (!gameObject.setSize) {
+            return false;
+        }
+
+        // Has `setSize` method but only for internal usage.
+        for (var i = 0, cnt = ExcludeClassList$1.length; i < cnt; i++) {
+            var excludeClass = ExcludeClassList$1[i];
+            if (excludeClass && gameObject instanceof excludeClass) {
+                return false;
+            }
+        }
+
+        return true;
+    };
+
+    var ExcludeClassList$1 = [
+        Phaser.GameObjects.Image,
+        Phaser.GameObjects.Sprite,
+        Phaser.GameObjects.Mesh,
+        Phaser.GameObjects.Shader,
+        Phaser.GameObjects.Video
+    ];
+
+    var CanSetDisplaySize = function (gameObject) {
+        if (gameObject.displayWidth === undefined) {
+            return false;
+        }
+
+        for (var i = 0, cnt = ExcludeClassList.length; i < cnt; i++) {
+            var excludeClass = ExcludeClassList[i];
+            if (excludeClass && gameObject instanceof excludeClass) {
+                return false;
+            }
+        }
+
+        return true;
+    };
+
+    var ExcludeClassList = [
+        Phaser.GameObjects.BitmapText,
+    ];
+
+    var ResizeGameObject = function (gameObject, newDisplayWidth, newDisplayHeight) {
+        // Set display size
+
+        if (!gameObject || ((newDisplayWidth === undefined) && (newDisplayHeight === undefined))) {
+            return;
+        }
+
+        if (HasResizeMethod(gameObject)) { // Has `resize`, or `setSize` method
+            var newWidth, newHeight;
+            if (newDisplayWidth === undefined) {
+                newWidth = gameObject.width;
+            } else {
+                newWidth = newDisplayWidth / gameObject.scaleX;
+            }
+            if (newDisplayHeight === undefined) {
+                newHeight = gameObject.height;
+            } else {
+                newHeight = newDisplayHeight / gameObject.scaleY;
+            }
+
+            if (gameObject.resize) {
+                gameObject.resize(newWidth, newHeight);
+            } else {
+                gameObject.setSize(newWidth, newHeight);
+            }
+
+        } else {
+            var canSetDisplaySize = CanSetDisplaySize(gameObject);
+            if (newDisplayWidth !== undefined) {
+                if (canSetDisplaySize) {
+                    gameObject.displayWidth = newDisplayWidth;
+                } else {
+                    gameObject.scaleX = newDisplayWidth / gameObject.width;
+                }
+            }
+            if (newDisplayHeight !== undefined) {
+                if (canSetDisplaySize) {
+                    gameObject.displayHeight = newDisplayHeight;
+                } else {
+                    gameObject.scaleY = newDisplayHeight / gameObject.height;
+                }
+            }
+
+        }
+    };
+
     var FitTo = function (source, target, fitMode, out) {
         if (fitMode === undefined) {
             fitMode = 0;
@@ -3502,8 +3598,15 @@
         var scaleX = target.width / source.width;
         var scaleY = target.height / source.height;
         var scale = (!fitMode) ? Math.min(scaleX, scaleY) : Math.max(scaleX, scaleY);
-        out.width = source.width * scale;
-        out.height = source.height * scale;
+        var newWidth = source.width * scale;
+        var newHeight = source.height * scale;
+
+        if (IsGameObject(out)) {
+            ResizeGameObject(out, newWidth, newHeight);
+        } else {
+            out.width = newWidth;
+            out.height = newHeight;
+        }
 
         return out;
     };

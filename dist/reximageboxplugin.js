@@ -2677,96 +2677,6 @@
         methods$1
     );
 
-    var FitTo = function (source, target, fitMode, out) {
-        if (fitMode === undefined) {
-            fitMode = 0;
-        } else {
-            var fitModeType = typeof (fitMode);
-            if (fitModeType === 'boolean') {
-                out = fitMode;
-                fitMode = 0;
-            } else if (fitModeType === 'string') {
-                fitMode = FitModeMap[fitMode];
-            }
-        }
-
-        if (out === undefined) {
-            out = {};
-        } else if (out === true) {
-            out = globalSize;
-        }
-
-        var scaleX = target.width / source.width;
-        var scaleY = target.height / source.height;
-        var scale = (!fitMode) ? Math.min(scaleX, scaleY) : Math.max(scaleX, scaleY);
-        out.width = source.width * scale;
-        out.height = source.height * scale;
-
-        return out;
-    };
-
-    const FitModeMap = {
-        'fit': 0,
-        'FIT': 0,
-        'envelop': 1,
-        'ENVELOP': 1
-    };
-
-    var globalSize = {};
-
-    var ScaleImage = function () {
-        var image = this.image;
-
-        if ((!this.scaleUp) &&
-            (image.width <= this.width) && (image.height <= this.height)
-        ) {
-            return this;
-        }
-
-        var result = FitTo(image, this, 'FIT', true);
-        image.setDisplaySize(result.width, result.height);
-        this.resetChildScaleState(image);
-        return this;
-    };
-
-    var FlipMethods = {
-        setFlipX(value) {
-            this.flipX = value;
-            return this;
-        },
-        setFlipY(value) {
-            this.flipY = value;
-            return this;
-        },
-        toggleFlipX() {
-            this.flipX = !this.flipX;
-            return this;
-        },
-        toggleFlipY() {
-            this.flipY = !this.flipY;
-            return this;
-        },
-        setFlip(x, y) {
-            this.flipX = x;
-            this.flipY = y;
-            return this;
-        },
-        resetFlip() {
-            this.flipX = false;
-            this.flipY = false;
-            return this;
-        }
-    };
-
-    var methods = {
-        scaleImage: ScaleImage
-    };
-
-    Object.assign(
-        methods,
-        FlipMethods
-    );
-
     var HasResizeMethod = function (gameObject) {
         // 1st pass : Has `resize` method?
         if (gameObject.resize) {
@@ -2862,6 +2772,103 @@
 
         }
     };
+
+    var FitTo = function (source, target, fitMode, out) {
+        if (fitMode === undefined) {
+            fitMode = 0;
+        } else {
+            var fitModeType = typeof (fitMode);
+            if (fitModeType === 'boolean') {
+                out = fitMode;
+                fitMode = 0;
+            } else if (fitModeType === 'string') {
+                fitMode = FitModeMap[fitMode];
+            }
+        }
+
+        if (out === undefined) {
+            out = {};
+        } else if (out === true) {
+            out = globalSize;
+        }
+
+        var scaleX = target.width / source.width;
+        var scaleY = target.height / source.height;
+        var scale = (!fitMode) ? Math.min(scaleX, scaleY) : Math.max(scaleX, scaleY);
+        var newWidth = source.width * scale;
+        var newHeight = source.height * scale;
+
+        if (IsGameObject(out)) {
+            ResizeGameObject(out, newWidth, newHeight);
+        } else {
+            out.width = newWidth;
+            out.height = newHeight;
+        }
+
+        return out;
+    };
+
+    const FitModeMap = {
+        'fit': 0,
+        'FIT': 0,
+        'envelop': 1,
+        'ENVELOP': 1
+    };
+
+    var globalSize = {};
+
+    var ScaleImage = function () {
+        var image = this.image;
+
+        if ((!this.scaleUp) &&
+            (image.width <= this.width) && (image.height <= this.height)
+        ) {
+            return this;
+        }
+
+        var result = FitTo(image, this, 'FIT', true);
+        image.setDisplaySize(result.width, result.height);
+        this.resetChildScaleState(image);
+        return this;
+    };
+
+    var FlipMethods = {
+        setFlipX(value) {
+            this.flipX = value;
+            return this;
+        },
+        setFlipY(value) {
+            this.flipY = value;
+            return this;
+        },
+        toggleFlipX() {
+            this.flipX = !this.flipX;
+            return this;
+        },
+        toggleFlipY() {
+            this.flipY = !this.flipY;
+            return this;
+        },
+        setFlip(x, y) {
+            this.flipX = x;
+            this.flipY = y;
+            return this;
+        },
+        resetFlip() {
+            this.flipX = false;
+            this.flipY = false;
+            return this;
+        }
+    };
+
+    var methods = {
+        scaleImage: ScaleImage
+    };
+
+    Object.assign(
+        methods,
+        FlipMethods
+    );
 
     var ResizeBackground = function () {
         var background = this.background;

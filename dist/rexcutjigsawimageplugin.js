@@ -601,6 +601,12 @@
             rightX = width - edgeWidth,
             topY = edgeHeight,
             bottomY = height - edgeHeight;
+        var hasEdgeWidth = edgeWidth > 0,
+            hasEdgeHeight = edgeHeight > 0;
+        var topEdgeMode = (hasEdgeHeight) ? edgeMode.top : 0;
+        var bottomEdgeMode = (hasEdgeHeight) ? edgeMode.bottom : 0;
+        var rightEdgeMode = (hasEdgeWidth) ? edgeMode.right : 0;
+        var leftEdgeMode = (hasEdgeWidth) ? edgeMode.left : 0;
 
         graphics.clear();
 
@@ -608,7 +614,7 @@
 
         graphics.moveTo(leftX, topY);
 
-        switch (edgeMode.top) {
+        switch (topEdgeMode) {
             case 1:
                 graphics.lineTo(centerX - edgeHeight - 1, topY);
                 graphics.arc(centerX, topY, edgeHeight + 1, RAD180, RAD360, false);
@@ -620,7 +626,7 @@
         }
         graphics.lineTo(rightX, topY);
 
-        switch (edgeMode.right) {
+        switch (rightEdgeMode) {
             case 1:
                 graphics.arc(rightX, centerY, edgeWidth + 1, RAD270, RAD90, false);
                 break;
@@ -630,7 +636,7 @@
         }
         graphics.lineTo(rightX, bottomY);
 
-        switch (edgeMode.bottom) {
+        switch (bottomEdgeMode) {
             case 1:
                 graphics.arc(centerX, bottomY, edgeHeight + 1, RAD0, RAD180, false);
                 break;
@@ -640,7 +646,7 @@
         }
         graphics.lineTo(leftX, bottomY);
 
-        switch (edgeMode.left) {
+        switch (leftEdgeMode) {
             case 1:
                 graphics.arc(leftX, centerY, edgeWidth + 1, RAD90, RAD270, false);
                 break;

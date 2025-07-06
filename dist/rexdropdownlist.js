@@ -3681,12 +3681,19 @@
         for (var i in this.sizerChildren) {
             child = this.sizerChildren[i];
             if (child && child.isRexSizer && !child.ignoreLayout) {
-                expandedChildWidth = this.getExpandedChildWidth(child, parentWidth);
-                childWidth = child.resolveWidth(expandedChildWidth);
-                if (childWidth === undefined) {
-                    childWidth = expandedChildWidth;
+                if (parentWidth !== undefined) {
+                    // Normal case
+                    expandedChildWidth = this.getExpandedChildWidth(child, parentWidth);
+                    childWidth = child.resolveWidth(expandedChildWidth);
+                    if (childWidth === undefined) {
+                        childWidth = expandedChildWidth;
+                    }
+                    child.resolveChildrenWidth(childWidth);
+
+                } else if (child.minWidth > 0) {
+                    // Child has minWidth
+                    child.resolveChildrenWidth(child.minWidth);
                 }
-                child.resolveChildrenWidth(childWidth);
             }
         }
     };
@@ -3704,16 +3711,24 @@
                 continue;
             }
 
-            expandedChildWidth = this.getExpandedChildWidth(child, parentWidth);
-            if (child.isRexSizer) {
-                childWidth = child.resolveWidth(expandedChildWidth);
-                if (childWidth === undefined) {
+            if (parentWidth !== undefined) {
+                // Normal case
+                expandedChildWidth = this.getExpandedChildWidth(child, parentWidth);
+                if (child.isRexSizer) {
+                    childWidth = child.resolveWidth(expandedChildWidth);
+                    if (childWidth === undefined) {
+                        childWidth = expandedChildWidth;
+                    }
+                } else {
                     childWidth = expandedChildWidth;
                 }
-            } else {
-                childWidth = expandedChildWidth;
+                child.runWidthWrap(childWidth);
+
+            } else if (child.minWidth > 0) {
+                // Child has minWidth
+                child.runWidthWrap(child.minWidth);
+
             }
-            child.runWidthWrap(childWidth);
         }
         return this;
     };
@@ -3773,12 +3788,19 @@
         for (var i in this.sizerChildren) {
             child = this.sizerChildren[i];
             if (child && child.isRexSizer && !child.ignoreLayout) {
-                expandedChildHeight = this.getExpandedChildHeight(child, parentHeight);
-                childHeight = child.resolveHeight(expandedChildHeight);
-                if (childHeight === undefined) {
-                    childHeight = expandedChildHeight;
+                if (parentHeight !== undefined) {
+                    expandedChildHeight = this.getExpandedChildHeight(child, parentHeight);
+                    childHeight = child.resolveHeight(expandedChildHeight);
+                    if (childHeight === undefined) {
+                        childHeight = expandedChildHeight;
+                    }
+                    child.resolveChildrenHeight(childHeight);
+
+                } else if (child.minHeight > 0) {
+                    child.resolveChildrenHeight(child.minHeight);
                 }
-                child.resolveChildrenHeight(childHeight);
+
+
             }
         }
     };
@@ -3796,16 +3818,24 @@
                 continue;
             }
 
-            expandedChildHeight = this.getExpandedChildHeight(child, parentHeight);
-            if (child.isRexSizer) {
-                childHeight = child.resolveHeight(expandedChildHeight);
-                if (childHeight === undefined) {
+            if (parentHeight !== undefined) {
+                // Normal case
+                expandedChildHeight = this.getExpandedChildHeight(child, parentHeight);
+                if (child.isRexSizer) {
+                    childHeight = child.resolveHeight(expandedChildHeight);
+                    if (childHeight === undefined) {
+                        childHeight = expandedChildHeight;
+                    }
+                } else {
                     childHeight = expandedChildHeight;
                 }
-            } else {
-                childHeight = expandedChildHeight;
+                child.runHeightWrap(childHeight);
+
+            } else if (child.minHeight > 0) {
+                // Child has minWidth
+                child.runHeightWrap(child.minHeight);
+
             }
-            child.runHeightWrap(childHeight);
         }
         return this;
     };
@@ -4144,11 +4174,9 @@
         var width = self.resolveWidth(width);
 
         // Calculate all children width, run width wrap
-        if (width !== undefined) {
-            if (runWidthWrap) {
-                self.resolveChildrenWidth(width);
-                self.runWidthWrap(width);
-            }
+        if (runWidthWrap) {
+            self.resolveChildrenWidth(width);
+            self.runWidthWrap(width);
         }
 
         return width;
@@ -4159,11 +4187,9 @@
         var height = self.resolveHeight(height);
 
         // Calculate all children width, run width wrap
-        if (height !== undefined) {
-            if (runHeightWrap) {
-                self.resolveChildrenHeight(height);
-                self.runHeightWrap(height);
-            }
+        if (runHeightWrap) {
+            self.resolveChildrenHeight(height);
+            self.runHeightWrap(height);
         }
 
         return height;
