@@ -11,16 +11,24 @@ var RunHeightWrap = function (parentHeight) {
             continue;
         }
 
-        expandedChildHeight = this.getExpandedChildHeight(child, parentHeight);
-        if (child.isRexSizer) {
-            childHeight = child.resolveHeight(expandedChildHeight);
-            if (childHeight === undefined) {
+        if (parentHeight !== undefined) {
+            // Normal case
+            expandedChildHeight = this.getExpandedChildHeight(child, parentHeight);
+            if (child.isRexSizer) {
+                childHeight = child.resolveHeight(expandedChildHeight);
+                if (childHeight === undefined) {
+                    childHeight = expandedChildHeight;
+                }
+            } else {
                 childHeight = expandedChildHeight;
             }
-        } else {
-            childHeight = expandedChildHeight;
+            child.runHeightWrap(childHeight);
+
+        } else if (child.minHeight > 0) {
+            // Child has minWidth
+            child.runHeightWrap(child.minHeight);
+
         }
-        child.runHeightWrap(childHeight);
     }
     return this;
 }

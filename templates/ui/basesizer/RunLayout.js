@@ -87,11 +87,9 @@ var ResolveWidth = function (self, width, runWidthWrap) {
     var width = self.resolveWidth(width);
 
     // Calculate all children width, run width wrap
-    if (width !== undefined) {
-        if (runWidthWrap) {
-            self.resolveChildrenWidth(width);
-            self.runWidthWrap(width);
-        }
+    if (runWidthWrap) {
+        self.resolveChildrenWidth(width);
+        self.runWidthWrap(width);
     }
 
     return width;
@@ -102,11 +100,9 @@ var ResolveHeight = function (self, height, runHeightWrap) {
     var height = self.resolveHeight(height);
 
     // Calculate all children width, run width wrap
-    if (height !== undefined) {
-        if (runHeightWrap) {
-            self.resolveChildrenHeight(height);
-            self.runHeightWrap(height);
-        }
+    if (runHeightWrap) {
+        self.resolveChildrenHeight(height);
+        self.runHeightWrap(height);
     }
 
     return height;

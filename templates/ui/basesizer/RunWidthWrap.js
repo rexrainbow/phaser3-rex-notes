@@ -11,16 +11,24 @@ var RunWidthWrap = function (parentWidth) {
             continue;
         }
 
-        expandedChildWidth = this.getExpandedChildWidth(child, parentWidth);
-        if (child.isRexSizer) {
-            childWidth = child.resolveWidth(expandedChildWidth);
-            if (childWidth === undefined) {
+        if (parentWidth !== undefined) {
+            // Normal case
+            expandedChildWidth = this.getExpandedChildWidth(child, parentWidth);
+            if (child.isRexSizer) {
+                childWidth = child.resolveWidth(expandedChildWidth);
+                if (childWidth === undefined) {
+                    childWidth = expandedChildWidth;
+                }
+            } else {
                 childWidth = expandedChildWidth;
             }
-        } else {
-            childWidth = expandedChildWidth;
+            child.runWidthWrap(childWidth);
+
+        } else if (child.minWidth > 0) {
+            // Child has minWidth
+            child.runWidthWrap(child.minWidth);
+
         }
-        child.runWidthWrap(childWidth);
     }
     return this;
 }
