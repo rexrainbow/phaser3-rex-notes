@@ -23,7 +23,7 @@ Store the image pasted from the clipboard into the texture manager.
     ```
 - Add clickboard-to-texture object
     ```javascript
-    var clickboardToTexture = scene.plugins.get('rexclickboardtotextureplugin').add(scene, config);
+    var clickboardToTexture = scene.plugins.get('rexclickboardtotextureplugin').add(scene);
     ```
 
 #### Import plugin
@@ -52,7 +52,7 @@ Store the image pasted from the clipboard into the texture manager.
     ```
 - Add clickboard-to-texture object
     ```javascript
-    var clickboardToTexture = scene.plugins.get('rexClickboardToTexture').add(scene, config);
+    var clickboardToTexture = scene.plugins.get('rexClickboardToTexture').add(scene);
     ```
 
 #### Import class
@@ -67,18 +67,14 @@ Store the image pasted from the clipboard into the texture manager.
     ```
 - Add clickboard-to-texture object
     ```javascript
-    var clickboardToTexture = new ClickboardToTexture(scene, config);
+    var clickboardToTexture = new ClickboardToTexture(scene);
     ```
 
 ### Create instance
 
 ```javascript
-var clickboardToTexture = scene.plugins.get('rexClickboardToTexture').add(scene, {
-    key: undefined,
-});
+var clickboardToTexture = scene.plugins.get('rexClickboardToTexture').add(scene);
 ```
-
-- `key` : Store the image to texture cache by key.
 
 ### Destroy
 
@@ -86,17 +82,32 @@ var clickboardToTexture = scene.plugins.get('rexClickboardToTexture').add(scene,
 clickboardToTexture.destroy();
 ```
 
-### Set texture
-
-```javascript
-clickboardToTexture.setKey(key);
-```
-
 ### Event
 
 - On paste
     ```javascript
-    clickboardToTexture.on('paste', function(key) {
-        // clickboardToTexture.setKey(newKey)
+    clickboardToTexture.on('paste', async function(clickboardToTexture) {
+        // await clickboardToTexture.saveTexturePromise(key);
+        // ...
     })
     ```
+
+### Save texture
+
+```javascript
+clickboardToTexture.saveTexture(key, onComplete);
+```
+
+- `onComplete` : Callback invoked upon completion of texture saving.
+
+or
+
+```javascript
+await clickboardToTexture.saveTexturePromise(key);
+```
+
+### Release clickboard data
+
+```javascript
+clickboardToTexture.releaseFile();
+```

@@ -1,5 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import ClickboardToTextureCache from '../../plugins/texture/clickboardtotexture/ClickboardToTexture';
+import ClickboardToTexturePlugin from '../../plugins/clickboardtotexture-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -13,10 +13,11 @@ class Demo extends Phaser.Scene {
     create() {
         var image = this.add.image(1920 / 2, 1080 / 2).setVisible(false);
 
-        var clickboardToTextureCache = new ClickboardToTextureCache(this, {
-            key: 'image',
-        })
-            .on('paste', function (key) {
+        this.plugins.get('rexClickboardToTexture').add(this)
+            .on('paste', async function (clickboardToTexture) {
+                var key = 'image';
+                await clickboardToTexture.saveTexturePromise(key);
+                clickboardToTexture.releaseFile();
                 image.setTexture(key).setVisible(true)
             })
 
@@ -35,7 +36,14 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexClickboardToTexture',
+            plugin: ClickboardToTexturePlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);
