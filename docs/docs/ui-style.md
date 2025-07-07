@@ -446,7 +446,7 @@ Bar-rectangle = Line-progress
 {
     // $type: 'bitmaptext',  // or 'bitmap'
 
-    font: '',
+    key: '',                // not font:
     fontSize: undefined,
     align: undefined,
     tint: undefined,

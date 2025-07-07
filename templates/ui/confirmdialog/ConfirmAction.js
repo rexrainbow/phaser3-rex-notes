@@ -7,7 +7,10 @@ var ConfirmAction = function (scene, config) {
     var newDialogMode = !dialog;
     if (newDialogMode) {
         var dialogStyle = config.style;
-        dialogStyle.buttonMode = 2;
+
+        if (dialogStyle.buttonMode === undefined) {
+            dialogStyle.buttonMode = 2;
+        }
 
         dialog = new ConfirmDialog(scene, dialogStyle, config.creators);
         scene.add.existing(dialog);

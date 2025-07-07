@@ -97,6 +97,7 @@ var dialog = scene.rexUI.confirmAction(scene, {
 
 - Build confirm dialog
     - `style` : [Config parameter of Confirm dialog](ui-confirmdialog.md#add-dialog-object)
+        - `style.buttonMode` : Default is `2`, dialog with 2 action buttons, clicking any action button to close modal dialog.
     - `content` : [Content strings of title, content, button](ui-confirmdialog.md#reset-display-content).
     - `modal` : [Config parameter of modal method](ui-confirmdialog.md#modal)
     - `onCreateDialog` : Callback invoking after creating dialog.
