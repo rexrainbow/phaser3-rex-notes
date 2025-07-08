@@ -425,6 +425,21 @@ sizer
     - `'right'`, or `'bottom'` : Align game objects at right, or bottom.
         - Add space as first child.
 
+
+### Change orientation
+
+```javascript
+sizer.setOrientation(orientation);
+```
+
+- `orientation` : Orientation of the sizer.
+    - `'left-to-right'`, `'horizontal'`,`'h'`, `'x'`, or `0` : Arrange game objects from left ot right. Default value is `0`.
+    - `'top-to-bottom'`, `'vertical'`,`'v'`, `'y'`, or `1` : Arrange game objects from top to bottom.
+
+
+Run `sizer.layout()` again after changing orientation.
+
+
 ### Layout children
 
 Arrange position of all children.
