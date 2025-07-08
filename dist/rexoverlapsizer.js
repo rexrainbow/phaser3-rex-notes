@@ -3771,6 +3771,7 @@
             child = this.sizerChildren[i];
             if (child && child.isRexSizer && !child.ignoreLayout) {
                 if (parentHeight !== undefined) {
+                    // Normal case
                     expandedChildHeight = this.getExpandedChildHeight(child, parentHeight);
                     childHeight = child.resolveHeight(expandedChildHeight);
                     if (childHeight === undefined) {
@@ -3779,6 +3780,7 @@
                     child.resolveChildrenHeight(childHeight);
 
                 } else if (child.minHeight > 0) {
+                    // Child has minHeight
                     child.resolveChildrenHeight(child.minHeight);
                 }
 
@@ -3814,7 +3816,7 @@
                 child.runHeightWrap(childHeight);
 
             } else if (child.minHeight > 0) {
-                // Child has minWidth
+                // Child has minHeight
                 child.runHeightWrap(child.minHeight);
 
             }
@@ -12240,7 +12242,7 @@
             if (child.isRexSizer) {
                 child.runLayout(this, childWidth, childHeight);
                 CheckSize(child, this);
-            } else {
+            } else if (!childConfig.noResize) {
                 ResizeGameObject(child, childWidth, childHeight);
             }
 

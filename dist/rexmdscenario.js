@@ -36997,6 +36997,7 @@ void main () {
 	        child = this.sizerChildren[i];
 	        if (child && child.isRexSizer && !child.ignoreLayout) {
 	            if (parentHeight !== undefined) {
+	                // Normal case
 	                expandedChildHeight = this.getExpandedChildHeight(child, parentHeight);
 	                childHeight = child.resolveHeight(expandedChildHeight);
 	                if (childHeight === undefined) {
@@ -37005,6 +37006,7 @@ void main () {
 	                child.resolveChildrenHeight(childHeight);
 
 	            } else if (child.minHeight > 0) {
+	                // Child has minHeight
 	                child.resolveChildrenHeight(child.minHeight);
 	            }
 
@@ -37040,7 +37042,7 @@ void main () {
 	            child.runHeightWrap(childHeight);
 
 	        } else if (child.minHeight > 0) {
-	            // Child has minWidth
+	            // Child has minHeight
 	            child.runHeightWrap(child.minHeight);
 
 	        }
@@ -43724,7 +43726,7 @@ void main () {
 	    }
 
 	    var childWidth;
-	    var sizerConfig = child.rexSizer;
+	    var sizerConfig = child.rexSizer;    
 	    if (this.orientation === 0) { // x
 	        if ((sizerConfig.proportion > 0) && (this.proportionLength > 0)) {
 	            childWidth = (sizerConfig.proportion * this.proportionLength);
@@ -43863,7 +43865,7 @@ void main () {
 	        if (child.isRexSizer) {
 	            child.runLayout(this, childWidth, childHeight);
 	            CheckSize(child, this);
-	        } else {
+	        } else if (!childConfig.noResize) {
 	            ResizeGameObject(child, childWidth, childHeight);
 	        }
 
@@ -43974,17 +43976,17 @@ void main () {
 	        width - ((this.getInnerPadding('left') + this.getInnerPadding('right')) * this.scaleX);
 	    }
 
-	    var child, sizerConfig;
+	    var child, childConfig;
 	    var childWidth, childHeight;
 	    var children = this.sizerChildren;
 	    for (var i = 0, cnt = children.length; i < cnt; i++) {
 	        var child = children[i];
-	        var sizerConfig = child.rexSizer;
-	        if (sizerConfig.hidden) {
+	        var childConfig = child.rexSizer;
+	        if (childConfig.hidden) {
 	            continue;
 	        }
 
-	        var fitRatio = sizerConfig.fitRatio;
+	        var fitRatio = childConfig.fitRatio;
 	        if (!fitRatio) {
 	            continue;
 	        }
@@ -43999,12 +44001,15 @@ void main () {
 	            childHeight = childWidth / fitRatio;
 	        }
 
-	        ResizeGameObject(child, childWidth, childHeight);
+	        if (!childConfig.noResize) {
+	            ResizeGameObject(child, childWidth, childHeight);
+	        }
+
 	        if (child.isRexSizer) {
 	            child.setMinSize(childWidth, childHeight);
 	        }
 
-	        sizerConfig.resolved = true;
+	        childConfig.resolved = true;
 	    }
 	};
 
@@ -50155,10 +50160,17 @@ void main () {
 
 	    textObject._minWidth = minWidth;
 
-	    textObject.runWidthWrap =
-	        IsDynamicTextGameObject(textObject) ? DynamicTextRunWidthWrap(textObject) :
-	            IsBitmapTextGameObject(textObject) ? BitmapTextRunWidthWrap(textObject) :
-	                TextRunWidthWrap(textObject);
+	    if (IsDynamicTextGameObject(textObject)) {
+	        textObject.runWidthWrap = DynamicTextRunWidthWrap(textObject);
+
+	    } else if (IsBitmapTextGameObject(textObject)) {
+	        textObject.runWidthWrap = BitmapTextRunWidthWrap(textObject);
+	        GetSizerConfig$1(textObject).noResize = true;
+
+	    } else {
+	        textObject.runWidthWrap = TextRunWidthWrap(textObject);
+
+	    }
 
 	    return textObject;
 	};
@@ -56467,13 +56479,17 @@ void main () {
 	            var textSpace = GetValue$H(config, 'space.text', 0);
 	            var expandTextWidth = GetValue$H(config, 'expandTextWidth', false);
 	            var expandTextHeight = GetValue$H(config, 'expandTextHeight', false);
-	            var proportion, padding, expand;
+	            var proportion, padding, expand, textAlign;
+	            var textAlign = (wrapText && IsBitmapTextGameObject(text)) ? 'left' : undefined;
 	            if (this.orientation === 0) {
 	                proportion = (expandTextWidth) ? 1 : 0;
 	                if (action) {
 	                    padding = { right: textSpace };
 	                }
 	                expand = expandTextHeight;
+
+
+
 	            } else {
 	                proportion = (expandTextHeight) ? 1 : 0;
 	                if (action) {
@@ -56484,7 +56500,7 @@ void main () {
 
 	            this.add(
 	                text,
-	                { proportion: proportion, expand: expand, padding: padding, }
+	                { proportion: proportion, expand: expand, padding: padding, align: textAlign }
 	            );
 	        }
 
@@ -57187,16 +57203,16 @@ void main () {
 
 	            PreLayoutChild.call(this, child);
 
+	            childConfig = child.rexSizer;
 	            childWidth = this.getExpandedChildWidth(child, colWidth);
 	            childHeight = this.getExpandedChildHeight(child, rowHeight);
 	            if (child.isRexSizer) {
 	                child.runLayout(this, childWidth, childHeight);
 	                CheckSize(child, this);
-	            } else {
+	            } else if (!childConfig.noResize) {
 	                ResizeGameObject(child, childWidth, childHeight);
 	            }
 
-	            childConfig = child.rexSizer;
 	            padding = childConfig.padding;
 
 	            x = itemX + (padding.left * this.scaleX);
@@ -63383,7 +63399,7 @@ void main () {
 	        if (child.isRexSizer) {
 	            child.runLayout(this, childWidth, childHeight);
 	            CheckSize(child, this);
-	        } else {
+	        } else if (!childConfig.noResize) {
 	            ResizeGameObject(child, childWidth, childHeight);
 	        }
 
