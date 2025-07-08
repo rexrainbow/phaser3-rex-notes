@@ -31,16 +31,16 @@ var LayoutChildren = function () {
 
             PreLayoutChild.call(this, child);
 
+            childConfig = child.rexSizer;
             childWidth = this.getExpandedChildWidth(child, colWidth);
             childHeight = this.getExpandedChildHeight(child, rowHeight);
             if (child.isRexSizer) {
                 child.runLayout(this, childWidth, childHeight);
                 CheckSize(child, this);
-            } else {
+            } else if (!childConfig.noResize) {
                 ResizeGameObject(child, childWidth, childHeight);
             }
 
-            childConfig = child.rexSizer;
             padding = childConfig.padding;
 
             x = itemX + (padding.left * this.scaleX);

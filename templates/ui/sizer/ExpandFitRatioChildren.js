@@ -12,17 +12,17 @@ var ExpandFitRatioChildren = function (width, height) {
         innerWidth = width - ((this.getInnerPadding('left') + this.getInnerPadding('right')) * this.scaleX);
     }
 
-    var child, sizerConfig;
+    var child, childConfig;
     var childWidth, childHeight;
     var children = this.sizerChildren;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
         var child = children[i];
-        var sizerConfig = child.rexSizer;
-        if (sizerConfig.hidden) {
+        var childConfig = child.rexSizer;
+        if (childConfig.hidden) {
             continue;
         }
 
-        var fitRatio = sizerConfig.fitRatio;
+        var fitRatio = childConfig.fitRatio;
         if (!fitRatio) {
             continue;
         }
@@ -37,12 +37,15 @@ var ExpandFitRatioChildren = function (width, height) {
             childHeight = childWidth / fitRatio;
         }
 
-        ResizeGameObject(child, childWidth, childHeight);
+        if (!childConfig.noResize) {
+            ResizeGameObject(child, childWidth, childHeight);
+        }
+
         if (child.isRexSizer) {
             child.setMinSize(childWidth, childHeight)
         }
 
-        sizerConfig.resolved = true;
+        childConfig.resolved = true;
     }
 }
 

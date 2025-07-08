@@ -18,9 +18,10 @@ var LayoutChildren = function () {
                 break;
         }
 
+        childConfig = child.rexSizer;
         if (child.isRexSizer) {
             child.runLayout(this, childWidth, childHeight);
-        } else {
+        } else if (!childConfig.noResize) {
             ResizeGameObject(child, childWidth, childHeight);
         }
 

@@ -3,7 +3,7 @@ import IsBitmapTextGameObject from '../../../../plugins/utils/bitmaptext/IsBitma
 import TextRunWidthWrap from './TextRunWidthWrap.js';
 import DynamicTextRunWidthWrap from './DynamicTextRunWidthWrap.js';
 import BitmapTextRunWidthWrap from './BitmapTextRunWidthWrap.js';
-
+import GetSizerConfig from '../GetSizerConfig.js';
 
 var IsDynamicTextGameObject = function (gameObject) {
     return (gameObject instanceof DynamicTextClass);
@@ -16,10 +16,17 @@ var WrapExpandText = function (textObject, minWidth) {
 
     textObject._minWidth = minWidth;
 
-    textObject.runWidthWrap =
-        IsDynamicTextGameObject(textObject) ? DynamicTextRunWidthWrap(textObject) :
-            IsBitmapTextGameObject(textObject) ? BitmapTextRunWidthWrap(textObject) :
-                TextRunWidthWrap(textObject);
+    if (IsDynamicTextGameObject(textObject)) {
+        textObject.runWidthWrap = DynamicTextRunWidthWrap(textObject);
+
+    } else if (IsBitmapTextGameObject(textObject)) {
+        textObject.runWidthWrap = BitmapTextRunWidthWrap(textObject);
+        GetSizerConfig(textObject).noResize = true;
+
+    } else {
+        textObject.runWidthWrap = TextRunWidthWrap(textObject);
+
+    }
 
     return textObject;
 }

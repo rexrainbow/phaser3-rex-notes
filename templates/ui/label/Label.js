@@ -4,6 +4,7 @@ import AddChildCircleMask from '../utils/AddChildCircleMask.js';
 import SetWrapMode from '../../../plugins/utils/text/SetWrapMode.js';
 import WrapExpandText from '../utils/wrapexpandtext/WrapExpandText.js';
 import FontSizeExpandText from '../utils/fontsizeexpandtext/FontSizeExpandText.js';
+import IsBitmapTextGameObject from '../../../plugins/utils/bitmaptext/IsBitmapTextGameObject.js';
 
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -96,13 +97,17 @@ class Label extends LabelBase {
             var textSpace = GetValue(config, 'space.text', 0);
             var expandTextWidth = GetValue(config, 'expandTextWidth', false);
             var expandTextHeight = GetValue(config, 'expandTextHeight', false);
-            var proportion, padding, expand;
+            var proportion, padding, expand, textAlign;
+            var textAlign = (wrapText && IsBitmapTextGameObject(text)) ? 'left' : undefined;
             if (this.orientation === 0) {
                 proportion = (expandTextWidth) ? 1 : 0;
                 if (action) {
                     padding = { right: textSpace };
                 }
                 expand = expandTextHeight;
+
+
+
             } else {
                 proportion = (expandTextHeight) ? 1 : 0;
                 if (action) {
@@ -113,7 +118,7 @@ class Label extends LabelBase {
 
             this.add(
                 text,
-                { proportion: proportion, expand: expand, padding: padding, }
+                { proportion: proportion, expand: expand, padding: padding, align: textAlign }
             );
         }
 

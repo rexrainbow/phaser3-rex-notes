@@ -50,7 +50,7 @@ var LayoutChildren = function () {
         if (child.isRexSizer) {
             child.runLayout(this, childWidth, childHeight);
             CheckSize(child, this);
-        } else {
+        } else if (!childConfig.noResize) {
             ResizeGameObject(child, childWidth, childHeight);
         }
 
