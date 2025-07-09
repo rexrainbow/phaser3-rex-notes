@@ -79,21 +79,22 @@ var WrapText = function (text, context, wrapMode, wrapWidth, offset, wrapTextLin
                     lineText = '';
                     lineWidth = 0;
                 }
-                continue;
-            }
-
-            currLineWidth = lineWidth + tokenWidth;
-            if (currLineWidth > remainWidth) {
-                // New line
-                retLines.push(wrapTextLinesPool.getLine(lineText, lineWidth, WRAPPED_NEWLINE));
-                lineText = token;
-                lineWidth = tokenWidth;
-                remainWidth = wrapWidth;
 
             } else {
-                // Append token, continue
-                lineText += token;
-                lineWidth = currLineWidth;
+                currLineWidth = lineWidth + tokenWidth;
+                if (currLineWidth > remainWidth) {
+                    // New line
+                    retLines.push(wrapTextLinesPool.getLine(lineText, lineWidth, WRAPPED_NEWLINE));
+                    lineText = token;
+                    lineWidth = tokenWidth;
+                    remainWidth = wrapWidth;
+
+                } else {
+                    // Append token, continue
+                    lineText += token;
+                    lineWidth = currLineWidth;
+                }
+
             }
 
             if (j === (tokenLen - 1)) {
