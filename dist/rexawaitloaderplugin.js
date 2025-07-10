@@ -85,7 +85,7 @@
 
     const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
-    const loaderCallback = function (key, config) {
+    const LoaderCallback = function (key, config) {
         if (IsFunction(key)) {
             var callback = key;
             var scope = config;
@@ -117,11 +117,11 @@
         constructor(pluginManager) {
             super(pluginManager);
 
-            pluginManager.registerFileType('rexAwait', loaderCallback);
+            pluginManager.registerFileType('rexAwait', LoaderCallback);
         }
 
         addToScene(scene) {
-            scene.sys.load.rexAwait = loaderCallback;
+            scene.sys.load.rexAwait = LoaderCallback;
         }
     }
 

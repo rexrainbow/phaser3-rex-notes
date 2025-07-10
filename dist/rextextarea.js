@@ -24397,8 +24397,11 @@ void main (void) {
     };
 
     var LinesCountToTextHeight = function (linesCount) {
-        // height = (linesCount * (lineHeight + lineSpacing)) - lineSpacing
-        return (linesCount * (this.textLineHeight + this.textLineSpacing)) - this.textLineSpacing;
+        var height = linesCount * (this.textLineHeight + this.textLineSpacing);
+        if (linesCount > 1) {
+            height -= this.textLineSpacing;
+        }
+        return height;
     };
 
     var GetLines = function (startLineIdx) {

@@ -192,7 +192,7 @@
 
     const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
-    const loaderCallback = function (key, config) {
+    const LoaderCallback = function (key, config) {
         if (IsFunction(key)) {
             var callback = key;
             var scope = config;
@@ -220,7 +220,7 @@
         return this;
     };
 
-    Phaser.Loader.FileTypesManager.register('rexAwait', loaderCallback);
+    Phaser.Loader.FileTypesManager.register('rexAwait', LoaderCallback);
 
     function _typeof$3(o) {
       "@babel/helpers - typeof";
@@ -4143,7 +4143,7 @@
         }
 
         initI18Next(scene, config) {
-            loaderCallback.call(scene.load, function (successCallback, failureCallback) {
+            LoaderCallback.call(scene.load, function (successCallback, failureCallback) {
                 instance.use(Backend).init(config, successCallback);
             });
             return this;

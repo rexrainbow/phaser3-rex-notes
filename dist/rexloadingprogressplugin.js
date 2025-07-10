@@ -2181,7 +2181,7 @@
 
     const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
-    const loaderCallback = function (key, config) {
+    const LoaderCallback = function (key, config) {
         if (IsFunction(key)) {
             var callback = key;
             var scope = config;
@@ -2209,7 +2209,7 @@
         return this;
     };
 
-    Phaser.Loader.FileTypesManager.register('rexAwait', loaderCallback);
+    Phaser.Loader.FileTypesManager.register('rexAwait', LoaderCallback);
 
     var GetLoader = function (loader) {
         if (IsSceneObject(loader)) {
@@ -2268,7 +2268,7 @@
 
         start() {
             var self = this;
-            loaderCallback.call(this.scene.load, function (successCallback, failureCallback) {
+            LoaderCallback.call(this.scene.load, function (successCallback, failureCallback) {
                 self.once('close', successCallback);
             });
 

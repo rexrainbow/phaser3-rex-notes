@@ -6462,21 +6462,22 @@
                         lineText = '';
                         lineWidth = 0;
                     }
-                    continue;
-                }
-
-                currLineWidth = lineWidth + tokenWidth;
-                if (currLineWidth > remainWidth) {
-                    // New line
-                    retLines.push(wrapTextLinesPool.getLine(lineText, lineWidth, WRAPPED_NEWLINE$1));
-                    lineText = token;
-                    lineWidth = tokenWidth;
-                    remainWidth = wrapWidth;
 
                 } else {
-                    // Append token, continue
-                    lineText += token;
-                    lineWidth = currLineWidth;
+                    currLineWidth = lineWidth + tokenWidth;
+                    if (currLineWidth > remainWidth) {
+                        // New line
+                        retLines.push(wrapTextLinesPool.getLine(lineText, lineWidth, WRAPPED_NEWLINE$1));
+                        lineText = token;
+                        lineWidth = tokenWidth;
+                        remainWidth = wrapWidth;
+
+                    } else {
+                        // Append token, continue
+                        lineText += token;
+                        lineWidth = currLineWidth;
+                    }
+
                 }
 
                 if (j === (tokenLen - 1)) {
@@ -54927,8 +54928,11 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
     };
 
     var LinesCountToTextHeight = function (linesCount) {
-        // height = (linesCount * (lineHeight + lineSpacing)) - lineSpacing
-        return (linesCount * (this.textLineHeight + this.textLineSpacing)) - this.textLineSpacing;
+        var height = linesCount * (this.textLineHeight + this.textLineSpacing);
+        if (linesCount > 1) {
+            height -= this.textLineSpacing;
+        }
+        return height;
     };
 
     var GetLines$1 = function (startLineIdx) {
