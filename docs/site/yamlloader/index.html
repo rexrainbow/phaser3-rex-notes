@@ -10,13 +10,13 @@
         <meta name="author" content="rexrainbow">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/ui-simpletextbox/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/yamlloader/">
       
       
-        <link rel="prev" href="../ui-textbox/">
+        <link rel="prev" href="../awaitloader/">
       
       
-        <link rel="next" href="../ui-toast/">
+        <link rel="next" href="../scripttagloader/">
       
       
       <link rel="icon" href="../images/logo.svg">
@@ -24,7 +24,7 @@
     
     
       
-        <title>Simple text box - Notes of Phaser 3</title>
+        <title>YAML loader - Notes of Phaser 3</title>
       
     
     
@@ -109,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Simple text box
+              YAML loader
             
           </span>
         </div>
@@ -685,18 +685,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
@@ -712,7 +714,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Loader
@@ -792,10 +794,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../yamlloader/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    YAML loader
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -806,6 +828,132 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#live-demos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Live demos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-plugin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install plugin
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Install plugin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-minify-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      Load minify file
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-plugin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Import plugin
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      Import class
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#start-loading-task" class="md-nav__link">
+    <span class="md-ellipsis">
+      Start loading task
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#on-load-complete" class="md-nav__link">
+    <span class="md-ellipsis">
+      On load complete
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="On load complete">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get data
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -11575,20 +11723,18 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
         
           
           <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="0">
@@ -11604,7 +11750,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_15">
             <span class="md-nav__icon md-icon"></span>
             UI
@@ -12880,20 +13026,18 @@
                 
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_12" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_12" >
         
           
           <label class="md-nav__link" for="__nav_15_12" id="__nav_15_12_label" tabindex="0">
@@ -12909,7 +13053,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_12_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_12_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_15_12">
             <span class="md-nav__icon md-icon"></span>
             Text box
@@ -12943,30 +13087,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Simple text box
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../ui-simpletextbox/" class="md-nav__link">
         
   
   
@@ -12977,171 +13101,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
-    <span class="md-ellipsis">
-      Introduction
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#live-demos" class="md-nav__link">
-    <span class="md-ellipsis">
-      Live demos
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    <span class="md-ellipsis">
-      Usage
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Usage">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#install-plugin" class="md-nav__link">
-    <span class="md-ellipsis">
-      Install plugin
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Install plugin">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#load-minify-file" class="md-nav__link">
-    <span class="md-ellipsis">
-      Load minify file
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#import-plugin" class="md-nav__link">
-    <span class="md-ellipsis">
-      Import plugin
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#import-class" class="md-nav__link">
-    <span class="md-ellipsis">
-      Import class
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#add-textbox-object" class="md-nav__link">
-    <span class="md-ellipsis">
-      Add textBox object
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#custom-class" class="md-nav__link">
-    <span class="md-ellipsis">
-      Custom class
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#reset-display-content" class="md-nav__link">
-    <span class="md-ellipsis">
-      Reset display content
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#layout-children" class="md-nav__link">
-    <span class="md-ellipsis">
-      Layout children
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#typing" class="md-nav__link">
-    <span class="md-ellipsis">
-      Typing
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-element" class="md-nav__link">
-    <span class="md-ellipsis">
-      Get element
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#events" class="md-nav__link">
-    <span class="md-ellipsis">
-      Events
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#other-properties" class="md-nav__link">
-    <span class="md-ellipsis">
-      Other properties
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -14908,74 +14867,35 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-textbox-object" class="md-nav__link">
+  <a href="#start-loading-task" class="md-nav__link">
     <span class="md-ellipsis">
-      Add textBox object
+      Start loading task
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#custom-class" class="md-nav__link">
+  <a href="#on-load-complete" class="md-nav__link">
     <span class="md-ellipsis">
-      Custom class
+      On load complete
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="On load complete">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get data
     </span>
   </a>
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#reset-display-content" class="md-nav__link">
-    <span class="md-ellipsis">
-      Reset display content
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#layout-children" class="md-nav__link">
-    <span class="md-ellipsis">
-      Layout children
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#typing" class="md-nav__link">
-    <span class="md-ellipsis">
-      Typing
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-element" class="md-nav__link">
-    <span class="md-ellipsis">
-      Get element
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#events" class="md-nav__link">
-    <span class="md-ellipsis">
-      Events
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#other-properties" class="md-nav__link">
-    <span class="md-ellipsis">
-      Other properties
-    </span>
-  </a>
+      </ul>
+    </nav>
   
 </li>
         
@@ -15003,29 +14923,50 @@
   
 
 
-  <h1>Simple text box</h1>
+  <h1>YAML loader</h1>
 
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Using plain object to create <a href="../ui-textbox/">textBox</a>.</p>
+<p>Load a YAML text file, parse its contents, and store the result in a JSON cache.</p>
 <ul>
 <li>Author: Rex</li>
-<li>Game object</li>
+<li>Custom File of loader</li>
 </ul>
 <h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="https://codepen.io/rexrainbow/pen/OJGxdzJ">Inner sizer</a></li>
+<li><a href=""></a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-simpletextbox">Sample code</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/yamlloader">Sample code</a></p>
 <h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
 <h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Load plugin (minify file) in preload stage
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">scenePlugin</span><span class="p">(</span><span class="s1">&#39;rexuiplugin&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;rexUI&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;rexUI&#39;</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Add textBox object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">textBox</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">simpleTextBox</span><span class="p">(</span><span class="nx">style</span><span class="p">).</span><span class="nx">resetDisplayContent</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-<span class="c1">//var textBox = scene.rexUI.add.simpleTextBox(style, creators).resetDisplayContent(config);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">sceneConfig</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// ....</span>
+<span class="w">    </span><span class="nx">pack</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">files</span><span class="o">:</span><span class="w"> </span><span class="p">[{</span>
+<span class="w">            </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;plugin&#39;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;rexyamlloaderplugin&#39;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">url</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/    rexyamlloaderplugin.min.js&#39;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">start</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">        </span><span class="p">}]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+<span class="kd">class</span><span class="w"> </span><span class="nx">MyScene</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scene</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">constructor</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">sceneConfig</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// ....</span>
+
+<span class="w">    </span><span class="nx">preload</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// rexyamlloaderplugin will be installed before preload(), but not added to loader yet</span>
+<span class="w">        </span><span class="c1">// Call addToScene(scene) to add this yaml loader to loader of this scene</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexyamlloaderplugin&#39;</span><span class="p">).</span><span class="nx">addToScene</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">rexYAML</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">url</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// this.load.rexYAML(key, url, dataKey, xhrSettings);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
@@ -15034,14 +14975,14 @@
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Install plugin in <a href="../game/#configuration">configuration of game</a>
-    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">UIPlugin</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-plugin.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">YAMLLoaderPlugin</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/plugins/yamlloader-plugin.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// ...</span>
 <span class="w">    </span><span class="nx">plugins</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">scene</span><span class="o">:</span><span class="w"> </span><span class="p">[{</span>
-<span class="w">            </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;rexUI&#39;</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">plugin</span><span class="o">:</span><span class="w"> </span><span class="nx">UIPlugin</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">mapping</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;rexUI&#39;</span>
+<span class="w">        </span><span class="nb">global</span><span class="o">:</span><span class="w"> </span><span class="p">[{</span>
+<span class="w">            </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;rexYAMLLoader&#39;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">plugin</span><span class="o">:</span><span class="w"> </span><span class="nx">YAMLLoaderPlugin</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">start</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="c1">// ...</span>
 <span class="w">        </span><span class="p">]</span>
@@ -15050,9 +14991,9 @@
 <span class="p">};</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">game</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Add textBox object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">textBox</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">simpleTextBox</span><span class="p">(</span><span class="nx">style</span><span class="p">).</span><span class="nx">resetDisplayContent</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-<span class="c1">//var textBox = scene.rexUI.add.simpleTextBox(style, creators).resetDisplayContent(config);</span>
+<li>In preload stage
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">rexYAML</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">url</span><span class="p">);</span>
+<span class="c1">// scene.load.rexYAML(key, url, dataKey, xhrSettings);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
@@ -15061,194 +15002,24 @@
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Import class
-    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">SimpleTextBox</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-components.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">YAMLLoader</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/plugins/yamlloader.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
-<li>Add textBox object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">textBox</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">SimpleTextBox</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">style</span><span class="p">);</span>
-<span class="c1">// var textBox = new SimpleTextBox(scene, style, creators);</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="nx">textBox</span><span class="p">);</span>
-<span class="nx">textBox</span><span class="p">.</span><span class="nx">resetDisplayContent</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span>
+<li>Start loading task
+    <div class="highlight"><pre><span></span><code><span class="nx">YAMLLoader</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">url</span><span class="p">);</span>
+<span class="c1">// YAMLLoader.call(scene.load, key, url, dataKey, xhrSettings)</span>
 </code></pre></div></li>
 </ul>
-<h3 id="add-textbox-object">Add textBox object<a class="headerlink" href="#add-textbox-object" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">textBox</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">simpleTextBox</span><span class="p">({</span>
-<span class="w">    </span><span class="c1">// x: 0,</span>
-<span class="w">    </span><span class="c1">// y: 0,</span>
-<span class="w">    </span><span class="c1">// anchor: undefined,</span>
-<span class="w">    </span><span class="c1">// width: undefined,</span>
-<span class="w">    </span><span class="c1">// height: undefined,</span>
-<span class="w">    </span><span class="c1">// origin: 0.5</span>
-<span class="w">    </span><span class="c1">// originX:</span>
-<span class="w">    </span><span class="c1">// originY:</span>
-
-<span class="w">    </span><span class="nx">layoutMode</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
-
-<span class="w">    </span><span class="c1">// rtl: false,</span>
-
-<span class="w">    </span><span class="nx">background</span><span class="o">:</span><span class="w"> </span><span class="nx">backgroundStyle</span><span class="p">,</span>
-<span class="w">    </span><span class="c1">// background: null,</span>
-
-<span class="w">    </span><span class="nx">innerBackground</span><span class="o">:</span><span class="w"> </span><span class="nx">backgroundStyle</span><span class="p">,</span>
-<span class="w">    </span><span class="c1">// innerBackground: null,</span>
-
-<span class="w">    </span><span class="nx">icon</span><span class="o">:</span><span class="w"> </span><span class="nx">iconStyle</span><span class="p">,</span>
-<span class="w">    </span><span class="c1">// icon: null,</span>
-
-<span class="w">    </span><span class="c1">// iconMask: false,</span>
-<span class="w">    </span><span class="c1">// squareFitIcon: false,</span>
-<span class="w">    </span><span class="c1">// iconSize: undefined, iconWidth: undefined, iconHeight: undefined,</span>
-
-<span class="w">    </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="nx">textStyle</span><span class="p">,</span>
-<span class="w">    </span><span class="c1">// title: null,</span>
-<span class="w">    </span><span class="c1">// wrapTitle: false,</span>
-<span class="w">    </span><span class="c1">// adjustTitleFontSize: false,</span>
-<span class="w">    </span><span class="c1">// expandTitleWidth: false,</span>
-<span class="w">    </span><span class="c1">// expandTitleHeight: false,</span>
-
-<span class="w">    </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="nx">testStyle</span><span class="p">,</span>
-<span class="w">    </span><span class="c1">// text: null,</span>
-<span class="w">    </span><span class="c1">// wrapText: false,</span>
-<span class="w">    </span><span class="c1">// adjustTextFontSize: false,</span>
-<span class="w">    </span><span class="c1">// expandTextWidth: false,</span>
-<span class="w">    </span><span class="c1">// expandTextHeight: false,</span>
-
-<span class="w">    </span><span class="nx">separator</span><span class="o">:</span><span class="w"> </span><span class="nx">separatorStyle</span><span class="p">,</span>
-<span class="w">    </span><span class="c1">// separator: null,</span>
-
-<span class="w">    </span><span class="nx">action</span><span class="o">:</span><span class="w"> </span><span class="nx">actionStyle</span><span class="p">,</span>
-<span class="w">    </span><span class="c1">// action: null,</span>
-
-<span class="w">    </span><span class="c1">// squareFitAction: false,</span>
-<span class="w">    </span><span class="c1">// actionMask: false,</span>
-<span class="w">    </span><span class="c1">// actionSize: undefined, actionWidth: undefined, actionHeight: undefined,</span>
-
-<span class="w">    </span><span class="nx">space</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">left</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">right</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">top</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">bottom</span><span class="o">:</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span>
-<span class="w">        </span><span class="nx">icon</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="nx">align</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;left&#39;</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;left&#39;</span><span class="p">,</span>
-<span class="w">    </span><span class="p">},</span>
-
-<span class="w">    </span><span class="nx">space</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">left</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">right</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">top</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">bottom</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">innerLeft</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">innerRight</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">innerTop</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">innerBottom</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
-
-<span class="w">        </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">titleLeft</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">titleRight</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">icon</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">iconTop</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">iconBottom</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">textLeft</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">textRight</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">separator</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">separatorLeft</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">separatorRight</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">actionTop</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">actionBottom</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
-<span class="w">    </span><span class="p">},</span>
-
-<span class="w">    </span><span class="c1">// page: { </span>
-<span class="w">    </span><span class="c1">//    maxLines: undefined,</span>
-<span class="w">    </span><span class="c1">//    pageBreak: &#39;\f\n&#39;,</span>
-<span class="w">    </span><span class="c1">// },</span>
-<span class="w">    </span><span class="c1">// typing: { </span>
-<span class="w">    </span><span class="c1">//    wrap: false,</span>
-<span class="w">    </span><span class="c1">//    speed: 333,    </span>
-<span class="w">    </span><span class="c1">// },</span>
-
-<span class="w">    </span><span class="c1">// name: &#39;&#39;,</span>
-<span class="w">    </span><span class="c1">// draggable: false,</span>
-<span class="w">    </span><span class="c1">// sizerEvents: false,</span>
-<span class="w">    </span><span class="c1">// enableLayer: false,</span>
-<span class="p">});</span>
+<h3 id="start-loading-task">Start loading task<a class="headerlink" href="#start-loading-task" title="Permanent link">&para;</a></h3>
+<p>In preload stage:</p>
+<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">rexYAML</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">url</span><span class="p">);</span>
+<span class="c1">// scene.load.rexYAML(key, url, dataKey, xhrSettings);</span>
 </code></pre></div>
-<ul>
-<li><code>background</code>, <code>innerBackground</code> : <ul>
-<li><a href="../ui-style/#style-of-background">Style of Background</a> : Create Round-rectangle, Nine-slice, or Image as background element.</li>
-<li><code>null</code> : Don't create any game object.</li>
-</ul>
-</li>
-<li><code>title</code> : <ul>
-<li><a href="../ui-style/#style-of-text">Style of Text</a> : Create Text, BBCodeText, BitmapText, SimpleLabel, or TextArea as title element.        </li>
-<li><code>null</code> : Don't create any game object.</li>
-</ul>
-</li>
-<li><code>text</code> : <ul>
-<li><a href="../ui-style/#style-of-text">Style of Text</a> : Create Text, BBCodeText, BitmapText as text element.<ul>
-<li>Don't use SimpleLabel, or TextArea as text element.</li>
-</ul>
-</li>
-<li><code>null</code> : Don't create any game object.</li>
-</ul>
-</li>
-<li><code>separator</code> : <ul>
-<li><a href="../ui-style/#style-of-background">Style of Background</a> : Create Round-rectangle, Nine-slice, or Image as separator element.</li>
-<li><code>null</code> : Don't create any game object.</li>
-</ul>
-</li>
-<li><code>icon</code>, <code>action</code> : <ul>
-<li><a href="../ui-style/#style-of-image">Style of Image</a> : Create Image, Nine-slice, or Round-rectangle as image, action element.</li>
-<li><code>null</code> : Don't create any game object.</li>
-</ul>
-</li>
-<li><code>wrapTitle</code> : Enable WrapExpandText feature.<ul>
-<li><code>false</code>, <code>0</code> : No WrapExpandText feature. Default behavior.</li>
-<li><code>true</code>, <code>1</code>, <code>'word'</code> : Word WrapExpandText.</li>
-<li><code>2</code>, <code>'char'</code> : Character WrapExpandText.</li>
-</ul>
-</li>
-<li><code>adjustTitleFontSize</code> : Enable <a href="../ui-text-helper/#fontsize-expand-text">FontSizeExpandText</a> feature.<ul>
-<li><code>false</code> : No FontSizeExpandText feature. Default behavior.</li>
-<li><code>true</code> : Enable FontSizeExpandText feature. Can't work with <code>wrapText: true</code>.<ul>
-<li>Text-width and text-height will be expanding.</li>
-<li>Use BBCodeText (<code>scene.rexUI.add.BBCodeText</code>) with <code>{valign: 'center'}</code> style.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><code>wrapText</code> : Enable <a href="../ui-text-helper/#wrap-expand-text">WrapExpandText</a> feature.<ul>
-<li><code>false</code>, <code>0</code> : No WrapExpandText feature. Default behavior.</li>
-<li><code>true</code>, <code>1</code>, <code>'word'</code> : Word WrapExpandText.</li>
-<li><code>2</code>, <code>'char'</code> : Character WrapExpandText.</li>
-</ul>
-</li>
-<li><code>adjustTextFontSize</code> : Enable <a href="../ui-text-helper/#fontsize-expand-text">FontSizeExpandText</a> feature.<ul>
-<li><code>false</code> : No FontSizeExpandText feature. Default behavior.</li>
-<li><code>true</code> : Enable FontSizeExpandText feature. Can't work with <code>wrapText: true</code>.<ul>
-<li>Text-width and text-height will be expanding.</li>
-<li>Use BBCodeText (<code>scene.rexUI.add.BBCodeText</code>) with <code>{valign: 'center'}</code> style.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Define class
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyTextBox</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">SimpleTextBox</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">,</span><span class="w"> </span><span class="nx">creators</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">,</span><span class="w"> </span><span class="nx">creators</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="p">}</span>
-</code></pre></div></li>
-<li>Create instance
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">textBox</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">MyTextBox</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">,</span><span class="w"> </span><span class="nx">creators</span><span class="p">);</span>
-</code></pre></div></li>
-</ul>
-<h3 id="reset-display-content">Reset display content<a class="headerlink" href="#reset-display-content" title="Permanent link">&para;</a></h3>
-<p>See <a href="../ui-titlelabel/#reset-display-content">title-label</a></p>
-<h3 id="layout-children">Layout children<a class="headerlink" href="#layout-children" title="Permanent link">&para;</a></h3>
-<p>Arrange position of all elements.</p>
-<div class="highlight"><pre><span></span><code><span class="nx">textBox</span><span class="p">.</span><span class="nx">layout</span><span class="p">();</span>
+<h3 id="on-load-complete">On load complete<a class="headerlink" href="#on-load-complete" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;filecomplete-json-&#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">type</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="p">{},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
-<p>See also - <a href="../ui-basesizer/#dirty">dirty</a></p>
-<h3 id="typing">Typing<a class="headerlink" href="#typing" title="Permanent link">&para;</a></h3>
-<p>See <a href="../ui-textbox/#typing">textBox</a></p>
-<h3 id="get-element">Get element<a class="headerlink" href="#get-element" title="Permanent link">&para;</a></h3>
-<p>See <a href="../ui-textbox/#get-element">textBox</a></p>
-<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
-<p>See <a href="../ui-textbox/#events">textBox</a></p>
-<h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
-<p>See <a href="../ui-textbox/">textBox</a>, <a href="../ui-sizer/">sizer object</a>, <a href="../ui-basesizer/">base sizer object</a>, <a href="../containerlite/">container-lite</a>.</p>
+<h4 id="get-data">Get data<a class="headerlink" href="#get-data" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">json</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</code></pre></div>
 
 
 

@@ -795,6 +795,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../yamlloader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    YAML loader
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../scripttagloader/" class="md-nav__link">
         
   
@@ -11884,6 +11907,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#change-orientation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Change orientation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#layout-children" class="md-nav__link">
     <span class="md-ellipsis">
       Layout children
@@ -15086,6 +15118,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#change-orientation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Change orientation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#layout-children" class="md-nav__link">
     <span class="md-ellipsis">
       Layout children
@@ -15629,6 +15670,17 @@
 </ul>
 </li>
 </ul>
+<h3 id="change-orientation">Change orientation<a class="headerlink" href="#change-orientation" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">setOrientation</span><span class="p">(</span><span class="nx">orientation</span><span class="p">);</span>
+</code></pre></div>
+<ul>
+<li><code>orientation</code> : Orientation of the sizer.<ul>
+<li><code>'left-to-right'</code>, <code>'horizontal'</code>,<code>'h'</code>, <code>'x'</code>, or <code>0</code> : Arrange game objects from left ot right. Default value is <code>0</code>.</li>
+<li><code>'top-to-bottom'</code>, <code>'vertical'</code>,<code>'v'</code>, <code>'y'</code>, or <code>1</code> : Arrange game objects from top to bottom.</li>
+</ul>
+</li>
+</ul>
+<p>Run <code>sizer.layout()</code> again after changing orientation.</p>
 <h3 id="layout-children">Layout children<a class="headerlink" href="#layout-children" title="Permanent link">&para;</a></h3>
 <p>Arrange position of all children.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">layout</span><span class="p">();</span>

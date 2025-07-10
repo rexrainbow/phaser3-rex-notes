@@ -19,7 +19,7 @@ class YAMLFile extends Phaser.Loader.File {
         }
 
         var fileConfig = {
-            type: 'yaml',
+            type: 'json',
             cache: loader.cacheManager.json,
             extension: extension,
             responseType: 'text',
