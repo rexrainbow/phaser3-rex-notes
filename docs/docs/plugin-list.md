@@ -252,6 +252,7 @@
 244. [Wait events](waitevents.md): Wait fired events or callbacks.
 245. [Webfont-loader](webfontloader.md): Load web font by google webfont loader in preload stage.
 246. [XOR](xor.md): Encrypt or decrypt string by XOR algorithm.
+246. [YAML loader](yamlloader.md): Load a YAML text file, parse its contents, and store the result in a JSON cache.
 247. [YML-Achievements](ymlachievements.md): Achievements in a YAML table.
 248. [YML-Conditions table](ymlconditionstable.md): Check conditions to find passed tests listed in a YAML table.
 249. [Youtube player](youtubeplayer.md): Play youtube video on iframe.

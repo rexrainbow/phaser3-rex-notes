@@ -20,6 +20,7 @@ nav:
     - Loader: loader.md
     - Webfont loader: webfontloader.md
     - Await loader: awaitloader.md
+    - YAML loader: yamlloader.md
     - Script tag loader: scripttagloader.md
     - Loading progress: loadingprogress.md
     - Loading animation scene: loading-animation-scene.md
