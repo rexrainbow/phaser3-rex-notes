@@ -50,8 +50,9 @@ module.exports = {
     'clickboardtotextureplugin': './plugins/clickboardtotexture-plugin.js',
 
     // custom file loader
-    'webfontloaderplugin': './plugins/webfontloader-plugin.js',
     'awaitloaderplugin': './plugins/awaitloader-plugin.js',
+    'yamlloaderplugin': './plugins/yamlloader-plugin.js',
+    'webfontloaderplugin': './plugins/webfontloader-plugin.js',    
     'scripttagloaderplugin': './plugins/scripttagloader-plugin.js',
     'imageuriloaderplugin': './plugins/imageuriloader-plugin.js',
     'loadinganimationsceneplugin': './plugins/loadinganimationscene-plugin.js',

@@ -3,7 +3,7 @@ import IsFunction from '../../utils/object/IsFunction.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
-const loaderCallback = function (key, config) {
+const LoaderCallback = function (key, config) {
     if (IsFunction(key)) {
         var callback = key;
         var scope = config;
@@ -31,4 +31,4 @@ const loaderCallback = function (key, config) {
     return this;
 }
 
-export default loaderCallback;
+export default LoaderCallback;
