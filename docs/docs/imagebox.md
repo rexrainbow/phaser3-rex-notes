@@ -109,6 +109,8 @@ var image = scene.add.rexImageBox({
 - `width`, `height` : Resize this game object.
     - `undefined` : Use original size of image. Default behavior.
 - `background` : Game object of background, optional. This background game object will be resized to fit the size of imageBox.
+    - A game object
+    - A plain object with `{color, alpha, strokeColor, strokeWidth, strokeAlpha}`, to create a [rectangle shape](shape-rectangle.md) as a background game object.
 - `image` : Custom image game object instance.
     - `undefined` : Use built-in image game object. Default behavior.
 

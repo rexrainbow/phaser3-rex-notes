@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import ImageBoxPlugin from '../../plugins/imagebox-plugin.js';
 
 class Demo extends Phaser.Scene {
@@ -18,26 +18,26 @@ class Demo extends Phaser.Scene {
         var graphics = this.add.graphics();
 
         this.add.rexImageBox(200, 200, 'classroom', undefined, {
-            background: this.add.rectangle(0, 0, 10, 10, 0x888888)
+            background: { color: 0x888888 },
         })
             .resize(200, 200)
             .drawBounds(graphics, 0xff0000)
 
         this.add.rexImageBox(600, 200, 'card', undefined, {
-            background: this.add.rectangle(0, 0, 10, 10, 0x888888)
+            background: { color: 0x888888 },
         })
             .resize(200, 200)
             .drawBounds(graphics, 0xff0000)
 
         this.add.rexImageBox(200, 450, 'bolt', undefined, {
             scaleUp: true,
-            background: this.add.rectangle(0, 0, 10, 10, 0x888888)
+            background: { color: 0x888888 },
         })
             .resize(200, 200)
             .drawBounds(graphics, 0xff0000)
 
         this.add.rexImageBox(600, 450, 'bolt', undefined, {
-            background: this.add.rectangle(0, 0, 10, 10, 0x888888)
+            background: { color: 0x888888 },
         })
             .resize(200, 200)
             .drawBounds(graphics, 0xff0000)
