@@ -1,5 +1,5 @@
 import ScaleImage from './ScaleImage.js';
-import FlipMethods from '../../utils/FlipMethods.js';
+import FlipMethods from '../../../container/utils/FlipMethods.js';
 
 var methods = {
     scaleImage: ScaleImage

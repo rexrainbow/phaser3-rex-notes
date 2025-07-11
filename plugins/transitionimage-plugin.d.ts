@@ -1,5 +1,5 @@
-import Factory from './gameobjects/container/transitionimage/Factory';
-import Creator from './gameobjects/container/transitionimage/Creator';
+import Factory from './gameobjects/image/transitionimage/Factory';
+import Creator from './gameobjects/image/transitionimage/Creator';
 
 export default class extends Phaser.Plugins.BasePlugin { }
 

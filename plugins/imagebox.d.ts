@@ -1,2 +1,2 @@
-import ImageBox from './gameobjects/container/imagebox/ImageBox';
+import ImageBox from './gameobjects/image/imagebox/ImageBox';
 export default ImageBox;

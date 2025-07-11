@@ -1,4 +1,4 @@
-import Container from '../containerlite/ContainerLite.js';
+import Container from '../../container/containerlite/ContainerLite.js';
 import Methods from './methods/Methods.js';
 import {
     OnStart as DefaultOnStart,

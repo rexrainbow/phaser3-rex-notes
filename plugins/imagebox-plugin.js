@@ -1,6 +1,6 @@
-import Factory from './gameobjects/container/imagebox/Factory.js';
-import Creator from './gameobjects/container/imagebox/Creator.js';
-import ImageBox from './gameobjects/container/imagebox/ImageBox.js';
+import Factory from './gameobjects/image/imagebox/Factory.js';
+import Creator from './gameobjects/image/imagebox/Creator.js';
+import ImageBox from './gameobjects/image/imagebox/ImageBox.js';
 import SetValue from './utils/object/SetValue.js';
 
 class ImageBoxPlugin extends Phaser.Plugins.BasePlugin {

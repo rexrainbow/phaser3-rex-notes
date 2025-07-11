@@ -85,11 +85,29 @@ var image = scene.add.rexImageBox(x, y, texture, frame, {
 });
 ```
 
+or 
+
+```javascript
+var image = scene.add.rexImageBox({
+    // x: 0,
+    // y: 0,
+    // texture: undefined,
+    // frame: undefined,
+
+    // scaleUp: false,
+    // width: undefined,
+    // height: undefined,
+
+    // background: undefined,
+    // image: undefined
+});
+```
+
 - `scaleUp` : Scale up or keep original size of image when size of imageBox is larger.
     - `true` : Scale up image when size of imageBox is larger.
     - `false` : Keep original size of image size of imageBox is larger. Default behavior.
 - `width`, `height` : Resize this game object.
-    - `undefined` : Use original size. Default behavior.
+    - `undefined` : Use original size of image. Default behavior.
 - `background` : Game object of background, optional. This background game object will be resized to fit the size of imageBox.
 - `image` : Custom image game object instance.
     - `undefined` : Use built-in image game object. Default behavior.
@@ -103,6 +121,7 @@ var image = scene.make.rexImageBox({
     key: null,
     frame: null,
 
+    // scaleUp: false,
     // width: undefined,
     // height: undefined,
 

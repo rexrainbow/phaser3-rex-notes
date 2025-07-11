@@ -1,6 +1,6 @@
-import Factory from './gameobjects/container/transitionimage/Factory.js';
-import Creator from './gameobjects/container/transitionimage/Creator.js';
-import TransitionImage from './gameobjects/container/transitionimage/TransitionImage.js';
+import Factory from './gameobjects/image/transitionimage/Factory.js';
+import Creator from './gameobjects/image/transitionimage/Creator.js';
+import TransitionImage from './gameobjects/image/transitionimage/TransitionImage.js';
 import SetValue from './utils/object/SetValue.js';
 
 class TransitionImagePlugin extends Phaser.Plugins.BasePlugin {
