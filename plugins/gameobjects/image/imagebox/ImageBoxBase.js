@@ -103,7 +103,7 @@ class ImageBoxBase extends Container {
         var image = this.image;
         image.setTexture(texture, frame);
 
-        if (!texture) {
+        if (texture) {
             this.setChildVisible(image, true);
             this.scaleImage();
 

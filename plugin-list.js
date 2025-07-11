@@ -37,6 +37,7 @@ module.exports = {
     'quadimageplugin': './plugins/quadimage-plugin.js',
     'shatterimageplugin': './plugins/shatterimage-plugin.js',
     'imageboxplugin': './plugins/imagebox-plugin.js',
+    'lazyloadimageboxplugin': './templates/lazyloadimagebox/lazyloadimagebox-plugin.js',
     'transitionimageplugin': './plugins/transitionimage-plugin.js',
     'transitionimagepackplugin': './templates/transitionimagepack/transitionimagepack-plugin.js',
     'fullwindowrectangleplugin': './plugins/fullwindowrectangle-plugin.js',

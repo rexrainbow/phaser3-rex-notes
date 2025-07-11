@@ -1,4 +1,4 @@
-import ContainerLite from '../../container/containerlite/ContainerLite';
+import ImageBoxBase from './ImageBoxBase';
 
 export default ImageBox;
 
@@ -11,13 +11,18 @@ declare namespace ImageBox {
         scaleUp?: boolean,
         width?: number, height?: number,
 
-        background?: Phaser.GameObjects.GameObject,
+        background?: ImageBoxBase.IRectangle | Phaser.GameObjects.GameObject,
         image?: Phaser.GameObjects.GameObject,
 
     }
 }
 
-declare class ImageBox extends ContainerLite {
+declare class ImageBox extends ImageBoxBase {
+    constructor(
+        scene: Phaser.Scene,
+        config?: ImageBox.IConfig
+    );
+
     constructor(
         scene: Phaser.Scene,
         x?: number, y?: number,
@@ -30,23 +35,4 @@ declare class ImageBox extends ContainerLite {
         x?: number, y?: number,
         config?: ImageBox.IConfig
     );
-
-    constructor(
-        scene: Phaser.Scene,
-        config?: ImageBox.IConfig
-    );
-
-    image: Phaser.GameObjects.GameObject;
-
-    setTexture(texture?: string, frame?: string): this;
-    readonly texture: Phaser.Textures.Texture | Phaser.Textures.CanvasTexture;
-    readonly frame: Phaser.Textures.Frame;
-
-    setFlipX(value: boolean): this;
-    setFlipY(value: boolean): this;
-    toggleFlipX(): this;
-    toggleFlipY(): this;
-    setFlip(x: boolean, y: boolean): this;
-    flipX: boolean;
-    flipY: boolean;
 }

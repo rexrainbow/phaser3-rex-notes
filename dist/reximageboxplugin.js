@@ -246,7 +246,7 @@
         }
     };
 
-    const GetValue$4 = Phaser.Utils.Objects.GetValue;
+    const GetValue$5 = Phaser.Utils.Objects.GetValue;
     const BaseAdd = Base.prototype.add;
 
     var Add = function (gameObject, config) {
@@ -318,13 +318,13 @@
             state.syncCameraFilter = config;
             state.syncDisplayList = config;
         } else {
-            state.syncPosition = GetValue$4(config, 'syncPosition', true);
-            state.syncRotation = GetValue$4(config, 'syncRotation', true);
-            state.syncScale = GetValue$4(config, 'syncScale', true);
-            state.syncAlpha = GetValue$4(config, 'syncAlpha', true);
-            state.syncScrollFactor = GetValue$4(config, 'syncScrollFactor', true);
-            state.syncCameraFilter = GetValue$4(config, 'syncCameraFilter', true);
-            state.syncDisplayList = GetValue$4(config, 'syncDisplayList', true);
+            state.syncPosition = GetValue$5(config, 'syncPosition', true);
+            state.syncRotation = GetValue$5(config, 'syncRotation', true);
+            state.syncScale = GetValue$5(config, 'syncScale', true);
+            state.syncAlpha = GetValue$5(config, 'syncAlpha', true);
+            state.syncScrollFactor = GetValue$5(config, 'syncScrollFactor', true);
+            state.syncCameraFilter = GetValue$5(config, 'syncCameraFilter', true);
+            state.syncDisplayList = GetValue$5(config, 'syncDisplayList', true);
         }
 
     };
@@ -2121,7 +2121,7 @@
         return (object instanceof GameObjectClass) || (object instanceof LayerClass);
     };
 
-    var GetValue$3 = Phaser.Utils.Objects.GetValue;
+    var GetValue$4 = Phaser.Utils.Objects.GetValue;
 
     var Snapshot = function (config) {
         if (!config) {
@@ -2134,13 +2134,13 @@
         }
         var renderTexture = config.renderTexture;  // renderTexture, or dynamicTexture
         var saveTexture = config.saveTexture;
-        var x = GetValue$3(config, 'x', undefined);
-        var y = GetValue$3(config, 'y', undefined);
-        var width = GetValue$3(config, 'width', undefined);
-        var height = GetValue$3(config, 'height', undefined);
-        var originX = GetValue$3(config, 'originX', 0);
-        var originY = GetValue$3(config, 'originY', 0);
-        var padding = GetValue$3(config, 'padding', 0);
+        var x = GetValue$4(config, 'x', undefined);
+        var y = GetValue$4(config, 'y', undefined);
+        var width = GetValue$4(config, 'width', undefined);
+        var height = GetValue$4(config, 'height', undefined);
+        var originX = GetValue$4(config, 'originX', 0);
+        var originY = GetValue$4(config, 'originY', 0);
+        var padding = GetValue$4(config, 'padding', 0);
 
         var scrollX, scrollY;
         if ((width === undefined) || (height === undefined) || (x === undefined) || (y === undefined)) {
@@ -2250,18 +2250,18 @@
         }
     };
 
-    const GetValue$2 = Phaser.Utils.Objects.GetValue;
+    const GetValue$3 = Phaser.Utils.Objects.GetValue;
 
     var DrawBounds$1 = function (gameObjects, graphics, config) {
         var strokeColor, lineWidth, fillColor, fillAlpha, padding;
         if (typeof (config) === 'number') {
             strokeColor = config;
         } else {
-            strokeColor = GetValue$2(config, 'color');
-            lineWidth = GetValue$2(config, 'lineWidth');
-            fillColor = GetValue$2(config, 'fillColor');
-            fillAlpha = GetValue$2(config, 'fillAlpha', 1);
-            padding = GetValue$2(config, 'padding', 0);
+            strokeColor = GetValue$3(config, 'color');
+            lineWidth = GetValue$3(config, 'lineWidth');
+            fillColor = GetValue$3(config, 'fillColor');
+            fillAlpha = GetValue$3(config, 'fillAlpha', 1);
+            padding = GetValue$3(config, 'padding', 0);
         }
 
         if (Array.isArray(gameObjects)) {
@@ -2315,12 +2315,12 @@
 
     var Points = [{ x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 }];
 
-    const GetValue$1 = Phaser.Utils.Objects.GetValue;
+    const GetValue$2 = Phaser.Utils.Objects.GetValue;
 
     var DrawBounds = function (graphics, config) {
-        var drawContainer = GetValue$1(config, 'drawContainer', true);
+        var drawContainer = GetValue$2(config, 'drawContainer', true);
 
-        var gameObjects = GetValue$1(config, 'children');
+        var gameObjects = GetValue$2(config, 'children');
         if (gameObjects === undefined) {
             gameObjects = this.getAllVisibleChildren([this]);
         }
@@ -2369,13 +2369,13 @@
         return this;
     };
 
-    var methods$1 = {
+    var methods = {
         changeOrigin: ChangeOrigin,
         drawBounds: DrawBounds,
     };
 
     Object.assign(
-        methods$1,
+        methods,
         Parent,
         AddChild,
         RemoveChild,
@@ -2674,8 +2674,60 @@
 
     Object.assign(
         ContainerLite.prototype,
-        methods$1
+        methods
     );
+
+    const GetValue$1 = Phaser.Utils.Objects.GetValue;
+
+    var CreateRectangle = function (scene, config) {
+        var x = GetValue$1(config, 'x', 0);
+        var y = GetValue$1(config, 'y', 0);
+        var width = GetValue$1(config, 'width', 1);
+        var height = GetValue$1(config, 'height', 1);
+        var color = GetValue$1(config, 'color', undefined);
+        var alpha = GetValue$1(config, 'alpha', 1);
+        var strokeColor = GetValue$1(config, 'strokeColor', undefined);
+        var strokeAlpha = GetValue$1(config, 'strokeAlpha', 1);
+        var strokeWidth = GetValue$1(config, 'strokeWidth', 2);
+
+        var gameObject = scene.add.rectangle(x, y, width, height);
+        if (color !== undefined) {
+            gameObject.setFillStyle(color, alpha);
+        }
+        if (strokeColor !== undefined) {
+            gameObject.setStrokeStyle(strokeWidth, strokeColor, strokeAlpha);
+        }
+        return gameObject;
+    };
+
+    var FlipMethods = {
+        setFlipX(value) {
+            this.flipX = value;
+            return this;
+        },
+        setFlipY(value) {
+            this.flipY = value;
+            return this;
+        },
+        toggleFlipX() {
+            this.flipX = !this.flipX;
+            return this;
+        },
+        toggleFlipY() {
+            this.flipY = !this.flipY;
+            return this;
+        },
+        setFlip(x, y) {
+            this.flipX = x;
+            this.flipY = y;
+            return this;
+        },
+        resetFlip() {
+            this.flipX = false;
+            this.flipY = false;
+            return this;
+        }
+    };
 
     var HasResizeMethod = function (gameObject) {
         // 1st pass : Has `resize` method?
@@ -2817,116 +2869,30 @@
 
     var globalSize = {};
 
-    var ScaleImage = function () {
-        var image = this.image;
+    const IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
 
-        if ((!this.scaleUp) &&
-            (image.width <= this.width) && (image.height <= this.height)
-        ) {
-            return this;
-        }
+    class ImageBoxBase extends ContainerLite {
 
-        var result = FitTo(image, this, 'FIT', true);
-        image.setDisplaySize(result.width, result.height);
-        this.resetChildScaleState(image);
-        return this;
-    };
-
-    var FlipMethods = {
-        setFlipX(value) {
-            this.flipX = value;
-            return this;
-        },
-        setFlipY(value) {
-            this.flipY = value;
-            return this;
-        },
-        toggleFlipX() {
-            this.flipX = !this.flipX;
-            return this;
-        },
-        toggleFlipY() {
-            this.flipY = !this.flipY;
-            return this;
-        },
-        setFlip(x, y) {
-            this.flipX = x;
-            this.flipY = y;
-            return this;
-        },
-        resetFlip() {
-            this.flipX = false;
-            this.flipY = false;
-            return this;
-        }
-    };
-
-    var methods = {
-        scaleImage: ScaleImage
-    };
-
-    Object.assign(
-        methods,
-        FlipMethods
-    );
-
-    var ResizeBackground = function () {
-        var background = this.background;
-        if (!background) {
-            return this;
-        }
-
-        background.setOrigin(this.originX, this.originY);
-        background.setPosition(this.x, this.y);
-        ResizeGameObject(background, this.displayWidth, this.displayHeight);
-        this.resetChildScaleState(background);
-        return this;
-    };
-
-    const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue = Phaser.Utils.Objects.GetValue;
-
-    class ImageBox extends ContainerLite {
-        constructor(scene, x, y, texture, frame, config) {
-            if (IsPlainObject(x)) {
-                config = x;
-                x = GetValue(config, 'x', 0);
-                y = GetValue(config, 'y', 0);
-                texture = GetValue(config, 'key', undefined);
-                frame = GetValue(config, 'frame', undefined);
-            } else if (IsPlainObject(frame)) {
-                config = frame;
-                frame = undefined;
+        setBackground(background) {
+            if (IsPlainObject$1(background)) {
+                background = CreateRectangle(this.scene, background);
             }
-
-            var image = GetValue(config, 'image');
-            if (!image) {
-                image = scene.add.image(x, y, texture, frame);
-                if (texture === undefined) {
-                    image.setVisible(false);
-                }
-            } else {
-                image.setPosition(x, y).setOrigin(0.5);
-            }
-
-            super(scene, x, y, 1, 1);
-            this.type = 'rexImageBox';
-
-            var background = GetValue(config, 'background');
             if (background) {
                 this.add(background);
             }
             this.background = background;
+            return this;
+        }
 
+        setImage(image) {
+            if (!image) {
+                image = this.scene.add.image(this.x, this.y);
+            } else {
+                image.setPosition(this.x, this.y).setOrigin(0.5);
+            }
             this.add(image);
             this.image = image;
-
-            this.scaleUp = GetValue(config, 'scaleUp', false);
-
-            var width = GetValue(config, 'width', image.width);
-            var height = GetValue(config, 'height', image.height);
-            this.resize(width, height);
-
+            return this;
         }
 
         get texture() {
@@ -2962,10 +2928,38 @@
             this.image.setFlipY(value);
         }
 
+        resizeBackground() {
+            var background = this.background;
+            if (!background) {
+                return this;
+            }
+
+            background.setOrigin(this.originX, this.originY);
+            background.setPosition(this.x, this.y);
+            ResizeGameObject(background, this.displayWidth, this.displayHeight);
+            this.resetChildScaleState(background);
+            return this;
+        }
+
+        scaleImage() {
+            var image = this.image;
+
+            if ((!this.scaleUp) &&
+                (image.width <= this.width) && (image.height <= this.height)
+            ) {
+                return this;
+            }
+
+            var result = FitTo(image, this, 'FIT', true);
+            image.setDisplaySize(result.width, result.height);
+            this.resetChildScaleState(image);
+            return this;
+        }
+
         resize(width, height) {
             super.resize(width, height);
 
-            ResizeBackground.call(this);
+            this.resizeBackground();
             this.scaleImage();
             return this;
         }
@@ -2974,7 +2968,7 @@
             var image = this.image;
             image.setTexture(texture, frame);
 
-            if (texture !== null) {
+            if (texture) {
                 this.setChildVisible(image, true);
                 this.scaleImage();
 
@@ -2987,9 +2981,50 @@
     }
 
     Object.assign(
-        ImageBox.prototype,
-        methods,
+        ImageBoxBase.prototype,
+        FlipMethods,
     );
+
+    const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+    const GetValue = Phaser.Utils.Objects.GetValue;
+
+    class ImageBox extends ImageBoxBase {
+        constructor(scene, x, y, texture, frame, config) {
+            if (IsPlainObject(x)) {
+                config = x;
+                x = GetValue(config, 'x', 0);
+                y = GetValue(config, 'y', 0);
+                texture = GetValue(config, 'key', undefined);
+                frame = GetValue(config, 'frame', undefined);
+            } else if (IsPlainObject(frame)) {
+                config = frame;
+                frame = undefined;
+            }
+
+            super(scene, x, y, 1, 1);
+            this.type = 'rexImageBox';
+
+            var background = GetValue(config, 'background');
+            this.setBackground(background);
+
+            var image = GetValue(config, 'image');
+            this.setImage(image);
+            image = this.image;
+            // Size has not assigned yet
+            if (texture === undefined) {
+                this.setChildVisible(image, false);
+            } else {
+                image.setTexture(texture, frame);
+            }
+
+            this.scaleUp = GetValue(config, 'scaleUp', false);
+
+            var width = GetValue(config, 'width', image.width);
+            var height = GetValue(config, 'height', image.height);
+            this.resize(width, height);
+
+        }
+    }
 
     function Factory (x, y, texture, frame, config) {
         var gameObject = new ImageBox(this.scene, x, y, texture, frame, config);

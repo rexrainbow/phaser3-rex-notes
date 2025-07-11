@@ -1,5 +1,5 @@
-import ImageBox from './ImageBox';
-import ImageBoxBase from './ImageBoxBase';
+import LazyLoadImageBox from './LazyLoadImageBox';
+import ImageBoxBase from '../../plugins/gameobjects/image/imagebox/ImageBoxBase';
 
 export default Creator;
 
@@ -11,10 +11,11 @@ declare namespace Creator {
         scaleUp?: boolean,
         background?: ImageBoxBase.IRectangle | Phaser.GameObjects.GameObject,
         image?: Phaser.GameObjects.GameObject,
+        spinner?: LazyLoadImageBox.ISPinnerConfig | Phaser.GameObjects.GameObject,
     }
 }
 
 declare function Creator(
     config?: Creator.IConfig,
     addToScene?: boolean,
-): ImageBox;
+): LazyLoadImageBox;

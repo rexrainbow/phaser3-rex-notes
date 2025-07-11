@@ -25,6 +25,7 @@ import AIOSpinner from './aiospinner/AIOSpinner';
 // import TransitionImage from './transitionimage/TransitionImage';
 // import TransitionImagePack from './transitionimagepack/TransitionImagePack';
 import ImageBox from './imagebox/ImageBox';
+import LazyLoadImageBox from '../lazyloadimagebox/LazyLoadImageBox';
 import FullWindowRectangle from './fullwindowrectangle/FullWindowRectangle';
 import FullWindowZone from './fullwindowzone/FullWindowZone';
 import Cover from './cover/Cover';
@@ -183,6 +184,7 @@ export {
     // TransitionImage,
     // TransitionImagePack,
     ImageBox,
+    LazyLoadImageBox,
     NinePatch,
     NinePatch2,
 

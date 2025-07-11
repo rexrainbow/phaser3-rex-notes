@@ -28,6 +28,7 @@ import AIOSpinner from './aiospinner/AIOSpinner.js';
 // import TransitionImage from './transitionimage/TransitionImage.js';
 // import TransitionImagePack from './transitionimagepack/TransitionImagePack.js';
 import ImageBox from './imagebox/ImageBox.js';
+import LazyLoadImageBox from '../lazyloadimagebox/LazyLoadImageBox.js';
 import ImageInputLabel from './imageinputlabel/ImageInputLabel.js';
 import FullWindowRectangle from './fullwindowrectangle/FullWindowRectangle.js';
 import FullWindowZone from './fullwindowzone/FullWindowZone.js';
@@ -185,6 +186,7 @@ export {
     // TransitionImage,
     // TransitionImagePack,
     ImageBox,
+    LazyLoadImageBox,
     ImageInputLabel,
 
     Container,
