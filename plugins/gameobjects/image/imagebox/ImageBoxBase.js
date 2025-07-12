@@ -11,6 +11,7 @@ class ImageBoxBase extends Container {
     setBackground(background) {
         if (IsPlainObject(background)) {
             background = CreateRectangle(this.scene, background);
+            this.scene.add.existing(background);
         }
         if (background) {
             this.add(background);
@@ -86,7 +87,7 @@ class ImageBoxBase extends Container {
         }
 
         var result = FitToSize(image, this, 'FIT', true);
-        image.setDisplaySize(result.width, result.height);
+        image.setDisplaySize(result.width * this.scaleX, result.height * this.scaleY);
         this.resetChildScaleState(image);
         return this;
     }

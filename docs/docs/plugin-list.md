@@ -102,6 +102,7 @@
 91. [In touching](intouching.md): Fires 'intouch' event every tick when pressing on a game object.
 91. [Keys hub](keyshub.md): Key object interface mapping from multiple source of key objects.
 92. [Layer manager](layermanager.md): A container of Layer game objects.
+92. [Lazy-load image box](lazyloadimagebox.md): Lazy-load image with spinner, then show scaled image.
 93. [Level counter](levelcounter.md): Map level value from experience value, by callback or a number array.
 94. [Life time](lifetime.md): Destroy game object when time-out.
 95. [Line](line.md): Draw a line with start/end/body textures.

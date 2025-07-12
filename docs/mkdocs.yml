@@ -37,6 +37,7 @@ nav:
             - Alpha mask image: alphamaskimage.md
             - Repeat image: repeatimage.md
             - Image box: imagebox.md
+            - Lazy load image box: lazyloadimagebox.md
             - Transition image:
                 - Transition image: transitionimage.md
                 - Transition image pack: transitionimagepack.md

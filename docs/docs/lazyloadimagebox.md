@@ -1,18 +1,17 @@
 ## Introduction
 
-Keep aspect ratio of image game object when scale-down resizing. 
-A [containerLite game object ](containerlite.md) with 1 [image game object](image.md).
+Lazy-load image with spinner, then show scaled image, based on [image-box](imagebox.md) game object.
 
 - Author: Rex
 - Game object
 
 ## Live demos
 
-- [Resize](https://codepen.io/rexrainbow/pen/gOjQJOp)
+- []()
 
 ## Usage
 
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/imagebox)
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/lazyloadimagebox)
 
 ### Install plugin
 
@@ -20,11 +19,11 @@ A [containerLite game object ](containerlite.md) with 1 [image game object](imag
 
 - Load plugin (minify file) in preload stage
     ```javascript
-    scene.load.plugin('reximageboxplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/reximageboxplugin.min.js', true);
+    scene.load.plugin('rexlazyloadimageboxplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexlazyloadimageboxplugin.min.js', true);
     ```
 - Add image object
     ```javascript
-    var image = scene.add.rexImageBox(x, y, texture, frame, config);
+    var image = scene.add.rexLazyLoadLazyLoadimagebox(config);
     ```
 
 #### Import plugin
@@ -35,13 +34,13 @@ A [containerLite game object ](containerlite.md) with 1 [image game object](imag
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import ImageBoxPlugin from 'phaser3-rex-plugins/plugins/imagebox-plugin.js';
+    import LazyLoadimageboxPlugin from 'phaser3-rex-plugins/templates/lazyloadimagebox/lazyloadimagebox-plugin.js';
     var config = {
         // ...
         plugins: {
             global: [{
-                key: 'rexImageBoxPlugin',
-                plugin: ImageBoxPlugin,
+                key: 'rexLazyLoadimageboxPlugin',
+                plugin: LazyLoadimageboxPlugin,
                 start: true
             },
             // ...
@@ -53,7 +52,7 @@ A [containerLite game object ](containerlite.md) with 1 [image game object](imag
     ```
 - Add image object
     ```javascript
-    var image = scene.add.rexImageBox(x, y, texture, frame, config);
+    var image = scene.add.rexLazyLoadimagebox(config);
     ```
 
 #### Import class
@@ -64,47 +63,42 @@ A [containerLite game object ](containerlite.md) with 1 [image game object](imag
     ```
 - Import class
     ```javascript
-    import ImageBox from 'phaser3-rex-plugins/plugins/imagebox.js';
+    import LazyLoadimagebox from 'phaser3-rex-plugins/templates/lazyloadimagebox/lazyloadimagebox.js';
     ```
 - Add image object
     ```javascript    
-    var image = new ImageBox(scene, x, y, texture, frame, config);
+    var image = new LazyLoadimagebox(scene, config);
     scene.add.existing(image);
     ```
 
 ### Create instance
 
 ```javascript
-var image = scene.add.rexImageBox(x, y, texture, frame, {
-    // scaleUp: false,
-    // width: undefined,
-    // height: undefined,
-
-    // background: undefined,
-    // image: undefined
-});
-```
-
-or 
-
-```javascript
-var image = scene.add.rexImageBox({
+var image = scene.add.rexLazyLoadimagebox({
     // x: 0,
     // y: 0,
+    // width: 0,
+    // height: 0,
     // key: undefined,
     // frame: undefined,
+    // url: undefined,
 
     // scaleUp: false,
     // width: undefined,
     // height: undefined,
 
     // background: undefined,
-    // image: undefined
+    // image: undefined,
+    // spinner: {
+    //     animationMode: 'ios',
+    //     sizeRatio: 0.6
+    // }
 });
 ```
 
-- `width`, `height` : Size of this image box
+- `width`, `height` : Size of this image box.
 - `key`, `frame` : Display texture by [image](image.md) game object.
+- `url` : Load texture if it is not ready yet.
 - `scaleUp` : Scale up or keep original size of image when size of imageBox is larger.
     - `true` : Scale up image when size of imageBox is larger.
     - `false` : Keep original size of image size of imageBox is larger. Default behavior.
@@ -113,35 +107,19 @@ var image = scene.add.rexImageBox({
     - A plain object with `{color, alpha, strokeColor, strokeWidth, strokeAlpha}`, to create a [rectangle shape](shape-rectangle.md) as a background game object.
 - `image` : Custom image game object instance.
     - `undefined` : Use built-in image game object. Default behavior.
+- `spinner` : Custom [spinner](shape-spinner.md) game object.
+    - `undefined`, or a plain object : Use [aio-spinner](shape-spinner.md#aio) by default.
+        - `spinner.animationMode` : See `animationMode` parameter of aio-spinner, default is `ios`
+        - `spinner.sizeRatio` : Set the spinner size as a multiple (ratio) of the image size.
 
-Add imagebox from JSON
-
-```javascript
-var image = scene.make.rexImageBox({
-    x: 0,
-    y: 0,
-    key: null,
-    frame: null,
-
-    // scaleUp: false,
-    // width: undefined,
-    // height: undefined,
-
-    // background: undefined,
-    // image: undefined
-
-    // origin: {x: 0.5, y: 0.5},
-    add: true
-});
-```
 
 ### Custom class
 
 - Define class
     ```javascript
-    class MyImageBox extends ImageBox {
-        constructor(scene, x, y, key, frame, config) {
-            super(scene, x, y, key, frame, config);
+    class MyLazyLoadimagebox extends LazyLoadimagebox {
+        constructor(scene, config) {
+            super(scene, config);
             // ...
             scene.add.existing(this);
         }
@@ -155,7 +133,7 @@ var image = scene.make.rexImageBox({
         - If it has a `preUpdate` method, it will be added to the Update List.
 - Create instance
     ```javascript
-    var image = new MyImageBox(scene, x, y, texture, frame, config);
+    var image = new MyLazyLoadimagebox(scene, x, y, texture, frame, config);
     ```
 
 ### Resize
@@ -167,7 +145,7 @@ image.resize(width, height);
 ### Set texture
 
 ```javascript
-image.setTexture(key, frame);
+image.setTexture(key, frame, url);
 ``` 
 
 #### Current texture

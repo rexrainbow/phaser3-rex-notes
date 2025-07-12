@@ -624,6 +624,21 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
         // ...
     }
     ```
+2. [Lazy-load Image box](lazyloadimagebox.md): Lazy-load image with spinner, then show scaled image, based on [image-box](imagebox.md) game object.
+    ```javascript
+    var image = scene.rexUI.add.lazyLoadImageBox(config);
+    ```
+    or
+    ```javascript
+    class MyLazyLoadImageBox extends RexPlugins.UI.LazyLoadImageBox {
+        constructor(scene, config) {
+            super(scene, config);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
 
 ### Transition image
 

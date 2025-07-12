@@ -14,7 +14,7 @@ declare class ImageBoxBase extends ContainerLite {
     background: Phaser.GameObjects.GameObject;
     image: Phaser.GameObjects.GameObject;
 
-    setTexture(texture?: string, frame?: string): this;
+    setTexture(key?: string, frame?: string): this;
     readonly texture: Phaser.Textures.Texture | Phaser.Textures.CanvasTexture;
     readonly frame: Phaser.Textures.Frame;
 

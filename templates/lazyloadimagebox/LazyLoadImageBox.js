@@ -46,8 +46,9 @@ class LazyLoadImageBox extends ImageBoxBase {
             var self = this;
             var callback = super.setTexture;
             scene.load.image(texture, url)
-                .once(`filecomplete-image-${texture}`, function (key) {
-                    if (key === self._textureKey) {
+                .once(`filecomplete-image-${texture}`, function (key) {                    
+                    // This Image game object might be destroyed -> scene = undefined
+                    if (!!self.scene && (key === self._textureKey)) {
                         callback.call(self, texture, frame);
                         self.stopSpinner();
                     }

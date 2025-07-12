@@ -6,7 +6,7 @@ export default Creator;
 declare namespace Creator {
     interface IConfig extends Phaser.Types.GameObjects.GameObjectConfig {
         width?: number, height?: number,
-        key?: string, frame?: string,
+        key?: string, frame?: string, url?: string,
 
         scaleUp?: boolean,
         background?: ImageBoxBase.IRectangle | Phaser.GameObjects.GameObject,

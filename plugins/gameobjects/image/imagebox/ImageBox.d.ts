@@ -6,7 +6,7 @@ declare namespace ImageBox {
 
     interface IConfig {
         x?: number, y?: number,
-        texture?: string, frame?: string,
+        key?: string, frame?: string,
 
         scaleUp?: boolean,
         width?: number, height?: number,

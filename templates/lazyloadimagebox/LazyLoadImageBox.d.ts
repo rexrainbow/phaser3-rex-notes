@@ -10,7 +10,7 @@ declare namespace LazyLoadImageBox {
 
     interface IConfig {
         x?: number, y?: number,
-        texture?: string, frame?: string,
+        key?: string, frame?: string, url?: string,
 
         scaleUp?: boolean,
         width?: number, height?: number,
@@ -32,7 +32,7 @@ declare class LazyLoadImageBox extends ImageBoxBase {
     spinner: Phaser.GameObjects.GameObject;
 
     setTexture(
-        texture?: string,
+        key?: string,
         frame?: string,
         url?: string
     ): this;
