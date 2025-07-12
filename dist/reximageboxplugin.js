@@ -2876,6 +2876,7 @@
         setBackground(background) {
             if (IsPlainObject$1(background)) {
                 background = CreateRectangle(this.scene, background);
+                this.scene.add.existing(background);
             }
             if (background) {
                 this.add(background);
@@ -2951,7 +2952,7 @@
             }
 
             var result = FitTo(image, this, 'FIT', true);
-            image.setDisplaySize(result.width, result.height);
+            image.setDisplaySize(result.width * this.scaleX, result.height * this.scaleY);
             this.resetChildScaleState(image);
             return this;
         }

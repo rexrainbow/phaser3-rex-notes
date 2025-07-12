@@ -10,9 +10,13 @@
         <meta name="author" content="rexrainbow">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/chagelog-v3-v4/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/lazyloadimagebox/">
       
       
+        <link rel="prev" href="../imagebox/">
+      
+      
+        <link rel="next" href="../transitionimage/">
       
       
       <link rel="icon" href="../images/logo.svg">
@@ -20,7 +24,7 @@
     
     
       
-        <title>Chagelog v3 v4 - Notes of Phaser 3</title>
+        <title>Lazy load image box - Notes of Phaser 3</title>
       
     
     
@@ -70,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#game-objects" class="md-skip">
+        <a href="#introduction" class="md-skip">
           Skip to content
         </a>
       
@@ -105,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Chagelog v3 v4
+              Lazy load image box
             
           </span>
         </div>
@@ -910,18 +914,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
@@ -937,7 +943,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             Game object
@@ -971,18 +977,20 @@
                 
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" checked>
         
           
           <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
@@ -998,7 +1006,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4_2">
             <span class="md-nav__icon md-icon"></span>
             Sprite
@@ -1009,18 +1017,20 @@
                 
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_1" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_1" checked>
         
           
           <label class="md-nav__link" for="__nav_4_2_1" id="__nav_4_2_1_label" tabindex="0">
@@ -1036,7 +1046,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_1_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_1_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4_2_1">
             <span class="md-nav__icon md-icon"></span>
             Single image
@@ -1231,10 +1241,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../lazyloadimagebox/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Lazy load image box
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1245,6 +1275,204 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#live-demos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Live demos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-plugin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install plugin
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Install plugin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-minify-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      Load minify file
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-plugin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Import plugin
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      Import class
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-instance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create instance
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom class
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resize" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resize
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-texture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Set texture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Set texture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#current-texture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Current texture
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clear-texture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Clear texture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scale-image" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scale image
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#internal-image-game-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      Internal image game object
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      Other properties
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-mask" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create mask
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shader-effects" class="md-nav__link">
+    <span class="md-ellipsis">
+      Shader effects
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -14668,20 +14896,182 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#game-objects" class="md-nav__link">
+  <a href="#introduction" class="md-nav__link">
     <span class="md-ellipsis">
-      Game objects
+      Introduction
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
+  <a href="#live-demos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Live demos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-plugin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install plugin
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Install plugin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-minify-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      Load minify file
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-plugin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Import plugin
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      Import class
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-instance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create instance
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom class
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resize" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resize
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-texture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Set texture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Set texture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#current-texture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Current texture
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clear-texture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Clear texture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scale-image" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scale image
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#internal-image-game-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      Internal image game object
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      Other properties
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-mask" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create mask
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#shader-effects" class="md-nav__link">
     <span class="md-ellipsis">
       Shader effects
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -14704,39 +15094,170 @@
   
 
 
-  <h1>Chagelog v3 v4</h1>
+  <h1>Lazy load image box</h1>
 
-<h2 id="game-objects">Game objects<a class="headerlink" href="#game-objects" title="Permanent link">&para;</a></h2>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
+<p>Lazy-load image with spinner, then show scaled image, based on <a href="../imagebox/">image-box</a> game object.</p>
 <ul>
-<li>Implement rexMesh game object, official Mesh game object has beeen removed. </li>
-<li>Abandon PerspectiveSprite, now PerspectiveImage can play frame animation.</li>
-<li>Abandon PerspectiveCarousel and PerspectiveImageCarousel.</li>
-<li>TransitionImage and TransitionImagePack are removed from rexUI.</li>
-<li>Live2d Game Object is not supported yet.</li>
+<li>Author: Rex</li>
+<li>Game object</li>
 </ul>
-<h2 id="shader-effects">Shader effects<a class="headerlink" href="#shader-effects" title="Permanent link">&para;</a></h2>
+<h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Rename Barrel pipeline to Barrel filter</li>
-<li>Rename Color-replace pipeline to Color-replace filter</li>
-<li>Rename Cross-stitching pipeline to Cross-stitching filter</li>
-<li>Rename CRT pipeline to CRT filter</li>
-<li>Rename Dissolve pipeline to Dissolve filter</li>
-<li>Rename Fish-eye pipeline to Fish-eye filter</li>
-<li>Rename Horri-fi pipeline to Horri-fi filter</li>
-<li>Rename Hsl-adjust pipeline to Hsl-adjust filter</li>
-<li>Rename Outline pipeline to Outline filter</li>
-<li>Rename Shockwave pipeline to Shockwave filter</li>
-<li>Rename Split pipeline to Split filter</li>
-<li>Rename Swirl pipeline to Swirl filter</li>
-<li>Rename Toonify pipeline to Toonify filter</li>
-<li>Rename Warp pipeline to Warp filter</li>
-<li>Abandon Drop shadow pipeline</li>
-<li>Abandon Glow pipeline</li>
-<li>Abandon Gray scale pipeline</li>
-<li>Abandon Inverse pipeline</li>
-<li>Abandon Kawase blur pipeline</li>
-<li>Abandon Pixelation pipeline</li>
+<li><a href=""></a></li>
 </ul>
+<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/lazyloadimagebox">Sample code</a></p>
+<h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
+<h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Load plugin (minify file) in preload stage
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexlazyloadimageboxplugin&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexlazyloadimageboxplugin.min.js&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Add image object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexLazyLoadLazyLoadimagebox</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Install rex plugins from npm
+    <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
+</code></pre></div></li>
+<li>Install plugin in <a href="../game/#configuration">configuration of game</a>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">LazyLoadimageboxPlugin</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/templates/lazyloadimagebox/lazyloadimagebox-plugin.js&#39;</span><span class="p">;</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="w">    </span><span class="nx">plugins</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">global</span><span class="o">:</span><span class="w"> </span><span class="p">[{</span>
+<span class="w">            </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;rexLazyLoadimageboxPlugin&#39;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">plugin</span><span class="o">:</span><span class="w"> </span><span class="nx">LazyLoadimageboxPlugin</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">start</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="c1">// ...</span>
+<span class="w">        </span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">};</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">game</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Add image object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexLazyLoadimagebox</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Install rex plugins from npm
+    <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
+</code></pre></div></li>
+<li>Import class
+    <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">LazyLoadimagebox</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;phaser3-rex-plugins/templates/lazyloadimagebox/lazyloadimagebox.js&#39;</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Add image object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">LazyLoadimagebox</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="nx">image</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexLazyLoadimagebox</span><span class="p">({</span>
+<span class="w">    </span><span class="c1">// x: 0,</span>
+<span class="w">    </span><span class="c1">// y: 0,</span>
+<span class="w">    </span><span class="c1">// width: 0,</span>
+<span class="w">    </span><span class="c1">// height: 0,</span>
+<span class="w">    </span><span class="c1">// key: undefined,</span>
+<span class="w">    </span><span class="c1">// frame: undefined,</span>
+<span class="w">    </span><span class="c1">// url: undefined,</span>
+
+<span class="w">    </span><span class="c1">// scaleUp: false,</span>
+<span class="w">    </span><span class="c1">// width: undefined,</span>
+<span class="w">    </span><span class="c1">// height: undefined,</span>
+
+<span class="w">    </span><span class="c1">// background: undefined,</span>
+<span class="w">    </span><span class="c1">// image: undefined,</span>
+<span class="w">    </span><span class="c1">// spinner: {</span>
+<span class="w">    </span><span class="c1">//     animationMode: &#39;ios&#39;,</span>
+<span class="w">    </span><span class="c1">//     sizeRatio: 0.6</span>
+<span class="w">    </span><span class="c1">// }</span>
+<span class="p">});</span>
+</code></pre></div>
+<ul>
+<li><code>width</code>, <code>height</code> : Size of this image box.</li>
+<li><code>key</code>, <code>frame</code> : Display texture by <a href="../image/">image</a> game object.</li>
+<li><code>url</code> : Load texture if it is not ready yet.</li>
+<li><code>scaleUp</code> : Scale up or keep original size of image when size of imageBox is larger.<ul>
+<li><code>true</code> : Scale up image when size of imageBox is larger.</li>
+<li><code>false</code> : Keep original size of image size of imageBox is larger. Default behavior.</li>
+</ul>
+</li>
+<li><code>background</code> : Game object of background, optional. This background game object will be resized to fit the size of imageBox.<ul>
+<li>A game object</li>
+<li>A plain object with <code>{color, alpha, strokeColor, strokeWidth, strokeAlpha}</code>, to create a <a href="../shape-rectangle/">rectangle shape</a> as a background game object.</li>
+</ul>
+</li>
+<li><code>image</code> : Custom image game object instance.<ul>
+<li><code>undefined</code> : Use built-in image game object. Default behavior.</li>
+</ul>
+</li>
+<li><code>spinner</code> : Custom <a href="../shape-spinner/">spinner</a> game object.<ul>
+<li><code>undefined</code>, or a plain object : Use <a href="../shape-spinner/#aio">aio-spinner</a> by default.<ul>
+<li><code>spinner.animationMode</code> : See <code>animationMode</code> parameter of aio-spinner, default is <code>ios</code></li>
+<li><code>spinner.sizeRatio</code> : Set the spinner size as a multiple (ratio) of the image size.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Define class
+    <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyLazyLoadimagebox</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">LazyLoadimagebox</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// ...</span>
+<span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// ...</span>
+
+<span class="w">    </span><span class="c1">// preUpdate(time, delta) {}</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li><code>scene.add.existing(gameObject)</code> : Adds an existing Game Object to this Scene.<ul>
+<li>If the Game Object renders, it will be added to the Display List.</li>
+<li>If it has a <code>preUpdate</code> method, it will be added to the Update List.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Create instance
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">MyLazyLoadimagebox</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">texture</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h3 id="resize">Resize<a class="headerlink" href="#resize" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">resize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="set-texture">Set texture<a class="headerlink" href="#set-texture" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">setTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">,</span><span class="w"> </span><span class="nx">url</span><span class="p">);</span>
+</code></pre></div>
+<h4 id="current-texture">Current texture<a class="headerlink" href="#current-texture" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">textureKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">image</span><span class="p">.</span><span class="nx">texture</span><span class="p">.</span><span class="nx">key</span><span class="p">;</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">frameName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">image</span><span class="p">.</span><span class="nx">frame</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+</code></pre></div>
+<h3 id="clear-texture">Clear texture<a class="headerlink" href="#clear-texture" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">setTexture</span><span class="p">();</span>
+</code></pre></div>
+<p>Will set internal image game object to invisible.</p>
+<h3 id="scale-image">Scale image<a class="headerlink" href="#scale-image" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">scaleImage</span><span class="p">();</span>
+</code></pre></div>
+<p><code>image.resize(width, height)</code>, or <code>image.setTexture(key, frame)</code> will invoke this method internally.</p>
+<h3 id="internal-image-game-object">Internal image game object<a class="headerlink" href="#internal-image-game-object" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">internalImageGO</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">image</span><span class="p">.</span><span class="nx">image</span><span class="p">;</span>
+</code></pre></div>
+<h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
+<p>See <a href="../gameobject/">game object</a></p>
+<h3 id="create-mask">Create mask<a class="headerlink" href="#create-mask" title="Permanent link">&para;</a></h3>
+<p>See <a href="../mask/">mask</a></p>
+<h3 id="shader-effects">Shader effects<a class="headerlink" href="#shader-effects" title="Permanent link">&para;</a></h3>
+<p>Internal image game object (<code>image.image</code>) support <a href="../shader-builtin/">internal and external filters</a></p>
 
 
 

@@ -16,7 +16,7 @@
         <link rel="prev" href="../repeatimage/">
       
       
-        <link rel="next" href="../transitionimage/">
+        <link rel="next" href="../lazyloadimagebox/">
       
       
       <link rel="icon" href="../images/logo.svg">
@@ -1461,6 +1461,29 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../lazyloadimagebox/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lazy load image box
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
     
     
     
@@ -1470,10 +1493,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_1_9" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_1_10" >
         
           
-          <label class="md-nav__link" for="__nav_4_2_1_9" id="__nav_4_2_1_9_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4_2_1_10" id="__nav_4_2_1_10_label" tabindex="0">
             
   
   
@@ -1486,8 +1509,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_4_2_1_9_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_2_1_9">
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_4_2_1_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_1_10">
             <span class="md-nav__icon md-icon"></span>
             Transition image
           </label>
@@ -15145,17 +15168,34 @@ A <a href="../containerlite/">containerLite game object </a> with 1 <a href="../
 <span class="w">    </span><span class="c1">// image: undefined</span>
 <span class="p">});</span>
 </code></pre></div>
+<p>or </p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexImageBox</span><span class="p">({</span>
+<span class="w">    </span><span class="c1">// x: 0,</span>
+<span class="w">    </span><span class="c1">// y: 0,</span>
+<span class="w">    </span><span class="c1">// key: undefined,</span>
+<span class="w">    </span><span class="c1">// frame: undefined,</span>
+
+<span class="w">    </span><span class="c1">// scaleUp: false,</span>
+<span class="w">    </span><span class="c1">// width: undefined,</span>
+<span class="w">    </span><span class="c1">// height: undefined,</span>
+
+<span class="w">    </span><span class="c1">// background: undefined,</span>
+<span class="w">    </span><span class="c1">// image: undefined</span>
+<span class="p">});</span>
+</code></pre></div>
 <ul>
+<li><code>width</code>, <code>height</code> : Size of this image box</li>
+<li><code>key</code>, <code>frame</code> : Display texture by <a href="../image/">image</a> game object.</li>
 <li><code>scaleUp</code> : Scale up or keep original size of image when size of imageBox is larger.<ul>
 <li><code>true</code> : Scale up image when size of imageBox is larger.</li>
 <li><code>false</code> : Keep original size of image size of imageBox is larger. Default behavior.</li>
 </ul>
 </li>
-<li><code>width</code>, <code>height</code> : Resize this game object.<ul>
-<li><code>undefined</code> : Use original size. Default behavior.</li>
+<li><code>background</code> : Game object of background, optional. This background game object will be resized to fit the size of imageBox.<ul>
+<li>A game object</li>
+<li>A plain object with <code>{color, alpha, strokeColor, strokeWidth, strokeAlpha}</code>, to create a <a href="../shape-rectangle/">rectangle shape</a> as a background game object.</li>
 </ul>
 </li>
-<li><code>background</code> : Game object of background, optional. This background game object will be resized to fit the size of imageBox.</li>
 <li><code>image</code> : Custom image game object instance.<ul>
 <li><code>undefined</code> : Use built-in image game object. Default behavior.</li>
 </ul>
@@ -15168,6 +15208,7 @@ A <a href="../containerlite/">containerLite game object </a> with 1 <a href="../
 <span class="w">    </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">frame</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
 
+<span class="w">    </span><span class="c1">// scaleUp: false,</span>
 <span class="w">    </span><span class="c1">// width: undefined,</span>
 <span class="w">    </span><span class="c1">// height: undefined,</span>
 
@@ -15182,8 +15223,8 @@ A <a href="../containerlite/">containerLite game object </a> with 1 <a href="../
 <ul>
 <li>Define class
     <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">MyImageBox</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">ImageBox</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">texture</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">texture</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
+<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">// ...</span>
 <span class="w">        </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
@@ -15206,13 +15247,6 @@ A <a href="../containerlite/">containerLite game object </a> with 1 <a href="../
 <h3 id="resize">Resize<a class="headerlink" href="#resize" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">resize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">);</span>
 </code></pre></div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-</div>
-<ul>
-<li>If new size is bigger than original size, uses original size. (i.e won't scale up)  </li>
-<li>If new size is smaller than original size, scales down and keeps aspect ratio.</li>
-</ul>
 <h3 id="set-texture">Set texture<a class="headerlink" href="#set-texture" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">setTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">);</span>
 </code></pre></div>
