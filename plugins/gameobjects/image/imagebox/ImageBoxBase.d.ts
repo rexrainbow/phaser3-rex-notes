@@ -25,4 +25,6 @@ declare class ImageBoxBase extends ContainerLite {
     setFlip(x: boolean, y: boolean): this;
     flipX: boolean;
     flipY: boolean;
+
+    setTint(topLeft?: number, topRight?: number, bottomLeft?: number, bottomRight?: number): this;
 }

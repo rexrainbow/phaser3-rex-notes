@@ -28,6 +28,11 @@ class ImageBoxBase extends Container {
         }
         this.add(image);
         this.image = image;
+
+        this.image.setFlipX(this.flipX).setFlipY(this.flipY);
+        if (this._colorTopLeft !== undefined) {
+            this.image.setTint(this._colorTopLeft, this._colorTopRight, this._colorBottomLeft, this._colorBottomRight);
+        }
         return this;
     }
 
@@ -62,6 +67,23 @@ class ImageBoxBase extends Container {
         }
         this._flipY = value;
         this.image.setFlipY(value);
+    }
+
+    set tint(value) {
+        this.image.tint = value;
+    }
+
+    get isTinted() {
+        return this.image.isTinted;
+    }
+
+    setTint(colorTopLeft, colorTopRight, colorBottomLeft, colorBottomRight) {
+        this._colorTopLeft = colorTopLeft;
+        this._colorTopRight = colorTopRight;
+        this._colorBottomLeft = colorBottomLeft;
+        this._colorBottomRight = colorBottomRight;
+        this.image.setTint(colorTopLeft, colorTopRight, colorBottomLeft, colorBottomRight);
+        return this;
     }
 
     resizeBackground() {
