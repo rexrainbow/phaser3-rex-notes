@@ -2893,6 +2893,11 @@
             }
             this.add(image);
             this.image = image;
+
+            this.image.setFlipX(this.flipX).setFlipY(this.flipY);
+            if (this._colorTopLeft !== undefined) {
+                this.image.setTint(this._colorTopLeft, this._colorTopRight, this._colorBottomLeft, this._colorBottomRight);
+            }
             return this;
         }
 
@@ -2927,6 +2932,23 @@
             }
             this._flipY = value;
             this.image.setFlipY(value);
+        }
+
+        set tint(value) {
+            this.image.tint = value;
+        }
+
+        get isTinted() {
+            return this.image.isTinted;
+        }
+
+        setTint(colorTopLeft, colorTopRight, colorBottomLeft, colorBottomRight) {
+            this._colorTopLeft = colorTopLeft;
+            this._colorTopRight = colorTopRight;
+            this._colorBottomLeft = colorBottomLeft;
+            this._colorBottomRight = colorBottomRight;
+            this.image.setTint(colorTopLeft, colorTopRight, colorBottomLeft, colorBottomRight);
+            return this;
         }
 
         resizeBackground() {
@@ -6650,20 +6672,22 @@
                 return this;
             }
 
+            var sizeRatio;
             if (!IsGameObject(spinner)) {
                 var scene = this.scene;
                 var animationMode = GetValue$1(spinner, 'animationMode', 'ios');
-                var sizeRatio = GetValue$1(spinner, 'sizeRatio', 0.6);
+                sizeRatio = GetValue$1(spinner, 'sizeRatio', 0.6);
                 var size = Math.min(this.displayWidth, this.displayHeight) * sizeRatio;
                 spinner = new AIO(scene, {
                     width: size, height: size,
                     animationMode: animationMode,
                 });
                 scene.add.existing(spinner);
+            } else {
+                sizeRatio = spinner.width / Math.min(this.width, this.height);
             }
 
-
-            this.spinnerSizeRatio = spinner.width / Math.min(this.displayWidth, this.displayHeight);
+            this.spinnerSizeRatio = sizeRatio;
             spinner.setPosition(this.x, this.y).setOrigin(0.5);
             this.add(spinner);
             this.spinner = spinner;
@@ -6751,7 +6775,7 @@
                 var self = this;
                 var callback = super.setTexture;
                 scene.load.image(texture, url)
-                    .once(`filecomplete-image-${texture}`, function (key) {                    
+                    .once(`filecomplete-image-${texture}`, function (key) {
                         // This Image game object might be destroyed -> scene = undefined
                         if (!!self.scene && (key === self._textureKey)) {
                             callback.call(self, texture, frame);
@@ -6764,6 +6788,8 @@
                 super.setTexture(texture, frame);
                 this.stopSpinner();
             }
+
+            return this;
         }
 
         resize(width, height) {

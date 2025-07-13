@@ -40573,6 +40573,18 @@ void main (void) {
     };
 
     var ClickMethods = {
+        getClickController(gameObject, config) {
+            if (!gameObject) {
+                gameObject = this;
+            }
+
+            if (gameObject._click === undefined) {
+                gameObject._click = new Button(gameObject, config);
+            }
+
+            return gameObject._click;
+        },
+
         onClick(gameObject, callback, scope, config) {
             if (!gameObject) {
                 return this;
@@ -40585,10 +40597,8 @@ void main (void) {
                 gameObject = this;
             }
 
-            if (gameObject._click === undefined) {
-                gameObject._click = new Button(gameObject, config);
-            }
-            gameObject._click.on('click', callback, scope);
+            this.getClickController(gameObject, config)
+                .on('click', callback, scope);
 
             return this;
         },
@@ -40843,6 +40853,18 @@ void main (void) {
     };
 
     var ClickOutsideMethods = {
+        getClickOutsideController(gameObject, config) {
+            if (!gameObject) {
+                gameObject = this;
+            }
+
+            if (gameObject._clickOutside === undefined) {
+                gameObject._clickOutside = new ClickOutside(gameObject, config);
+            }
+
+            return gameObject._clickOutside;
+        },
+
         onClickOutside(gameObject, callback, scope, config) {
             if (!gameObject) {
                 return this;
@@ -40855,10 +40877,8 @@ void main (void) {
                 gameObject = this;
             }
 
-            if (gameObject._clickOutside === undefined) {
-                gameObject._clickOutside = new ClickOutside(gameObject, config);
-            }
-            gameObject._clickOutside.on('clickoutside', callback, scope);
+            this.getClickOutsideController(gameObject, config)
+                .on('clickoutside', callback, scope);
 
             return this;
         },
@@ -45784,6 +45804,11 @@ void main (void) {
             }
             this.add(image);
             this.image = image;
+
+            this.image.setFlipX(this.flipX).setFlipY(this.flipY);
+            if (this._colorTopLeft !== undefined) {
+                this.image.setTint(this._colorTopLeft, this._colorTopRight, this._colorBottomLeft, this._colorBottomRight);
+            }
             return this;
         }
 
@@ -45818,6 +45843,23 @@ void main (void) {
             }
             this._flipY = value;
             this.image.setFlipY(value);
+        }
+
+        set tint(value) {
+            this.image.tint = value;
+        }
+
+        get isTinted() {
+            return this.image.isTinted;
+        }
+
+        setTint(colorTopLeft, colorTopRight, colorBottomLeft, colorBottomRight) {
+            this._colorTopLeft = colorTopLeft;
+            this._colorTopRight = colorTopRight;
+            this._colorBottomLeft = colorBottomLeft;
+            this._colorBottomRight = colorBottomRight;
+            this.image.setTint(colorTopLeft, colorTopRight, colorBottomLeft, colorBottomRight);
+            return this;
         }
 
         resizeBackground() {
@@ -45935,20 +45977,22 @@ void main (void) {
                 return this;
             }
 
+            var sizeRatio;
             if (!IsGameObject(spinner)) {
                 var scene = this.scene;
                 var animationMode = GetValue$2d(spinner, 'animationMode', 'ios');
-                var sizeRatio = GetValue$2d(spinner, 'sizeRatio', 0.6);
+                sizeRatio = GetValue$2d(spinner, 'sizeRatio', 0.6);
                 var size = Math.min(this.displayWidth, this.displayHeight) * sizeRatio;
                 spinner = new AIO(scene, {
                     width: size, height: size,
                     animationMode: animationMode,
                 });
                 scene.add.existing(spinner);
+            } else {
+                sizeRatio = spinner.width / Math.min(this.width, this.height);
             }
 
-
-            this.spinnerSizeRatio = spinner.width / Math.min(this.displayWidth, this.displayHeight);
+            this.spinnerSizeRatio = sizeRatio;
             spinner.setPosition(this.x, this.y).setOrigin(0.5);
             this.add(spinner);
             this.spinner = spinner;
@@ -46036,7 +46080,7 @@ void main (void) {
                 var self = this;
                 var callback = super.setTexture;
                 scene.load.image(texture, url)
-                    .once(`filecomplete-image-${texture}`, function (key) {                    
+                    .once(`filecomplete-image-${texture}`, function (key) {
                         // This Image game object might be destroyed -> scene = undefined
                         if (!!self.scene && (key === self._textureKey)) {
                             callback.call(self, texture, frame);
@@ -46049,6 +46093,8 @@ void main (void) {
                 super.setTexture(texture, frame);
                 this.stopSpinner();
             }
+
+            return this;
         }
 
         resize(width, height) {
