@@ -326,6 +326,7 @@ nav:
         - Built-in data: datamanager.md
         - Restorable data: restorabledata.md
         - Buff data: buffdata.md
+        - Localstorage data manager: localstorage-data.md
     - Set: structs-set.md
     - List: structs-list.md
     - Array:
@@ -506,8 +507,7 @@ nav:
         - ID-alias: firebase-idalias.md
 - Storage:
     - LocalStorage:
-        - LocalStorage: localstorage.md
-        - Data manager: localstorage-data.md
+        - LocalStorage: localstorage.md        
     - LocalForage:
         - LocalForage: localforage.md
         - Files: localforage-files.md

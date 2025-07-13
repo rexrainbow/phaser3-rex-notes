@@ -1,6 +1,18 @@
 import Click from '../click/Click.js';
 
 export default {
+    getClickController(gameObject, config) {
+        if (!gameObject) {
+            gameObject = this;
+        }
+
+        if (gameObject._click === undefined) {
+            gameObject._click = new Click(gameObject, config);
+        }
+
+        return gameObject._click;
+    },
+
     onClick(gameObject, callback, scope, config) {
         if (!gameObject) {
             return this;
@@ -13,10 +25,8 @@ export default {
             gameObject = this;
         }
 
-        if (gameObject._click === undefined) {
-            gameObject._click = new Click(gameObject, config);
-        }
-        gameObject._click.on('click', callback, scope);
+        this.getClickController(gameObject, config)
+            .on('click', callback, scope);
 
         return this;
     },

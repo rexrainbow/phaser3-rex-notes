@@ -930,6 +930,10 @@ sizer.destroy();
     ```javascript
     sizer.disableClick();
     ```
+- Get [click controller](button.md)
+    ```javascript
+    sizer.getClickController();
+    ```
 
 Equal to 
 
@@ -984,6 +988,10 @@ click.on('click', callback, scope);
 - Disable click-outside event
     ```javascript
     sizer.disableClickOutside();
+    ```
+- Get [click-outside controller](clickoutside.md)
+    ```javascript
+    sizer.getClickOutsideController();
     ```
 
 Equal to 

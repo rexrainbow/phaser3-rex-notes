@@ -1,6 +1,18 @@
 import ClickOutside from '../clickoutside/ClickOutside.js';
 
 export default {
+    getClickOutsideController(gameObject, config) {
+        if (!gameObject) {
+            gameObject = this;
+        }
+
+        if (gameObject._clickOutside === undefined) {
+            gameObject._clickOutside = new ClickOutside(gameObject, config);
+        }
+
+        return gameObject._clickOutside;
+    },
+
     onClickOutside(gameObject, callback, scope, config) {
         if (!gameObject) {
             return this;
@@ -13,10 +25,8 @@ export default {
             gameObject = this;
         }
 
-        if (gameObject._clickOutside === undefined) {
-            gameObject._clickOutside = new ClickOutside(gameObject, config);
-        }
-        gameObject._clickOutside.on('clickoutside', callback, scope);
+        this.getClickOutsideController(gameObject, config)
+            .on('clickoutside', callback, scope);
 
         return this;
     },

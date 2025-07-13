@@ -557,6 +557,15 @@ declare class BaseSizer extends ContainerLite {
         }
     ): this;
 
+    readonly _click: Click;
+
+    getClickController(config?: Click.IConfig): Click;
+
+    getClickController(
+        gameObject: Phaser.GameObjects.GameObject,
+        config?: Click.IConfig
+    ): Click;
+
     onClick(
         callback: (
             click: Click,
@@ -567,7 +576,6 @@ declare class BaseSizer extends ContainerLite {
         scope?: object,
         config?: Click.IConfig
     ): this;
-
 
     onClick(
         gameObject: Phaser.GameObjects.GameObject,
@@ -602,6 +610,16 @@ declare class BaseSizer extends ContainerLite {
     disableClick(): this;
 
     disableClick(gameObject: Phaser.GameObjects.GameObject): this;
+
+
+    readonly _clickOutside: ClickOutside;
+
+    getClickOutsideController(config?: ClickOutside.IConfig): ClickOutside;
+
+    getClickOutsideController(
+        gameObject: Phaser.GameObjects.GameObject,
+        config?: ClickOutside.IConfig
+    ): ClickOutside;
 
     onClickOutside(
         callback: (
@@ -650,6 +668,9 @@ declare class BaseSizer extends ContainerLite {
     isPointerInBounds(): boolean;
     isPointerInBounds(gameObject: Phaser.GameObjects.GameObject): boolean;
     isPointerInBounds(name: string): boolean;
+
+
+    readonly _inTouching: InTouching;
 
     onTouching(
         callback: (

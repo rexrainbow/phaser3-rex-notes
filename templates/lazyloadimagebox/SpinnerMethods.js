@@ -10,20 +10,22 @@ export default {
             return this;
         }
 
+        var sizeRatio;
         if (!IsGameObject(spinner)) {
             var scene = this.scene;
             var animationMode = GetValue(spinner, 'animationMode', 'ios');
-            var sizeRatio = GetValue(spinner, 'sizeRatio', 0.6);
+            sizeRatio = GetValue(spinner, 'sizeRatio', 0.6);
             var size = Math.min(this.displayWidth, this.displayHeight) * sizeRatio;
             spinner = new AIOSpinner(scene, {
                 width: size, height: size,
                 animationMode: animationMode,
             })
             scene.add.existing(spinner);
+        } else {
+            sizeRatio = spinner.width / Math.min(this.width, this.height);
         }
 
-
-        this.spinnerSizeRatio = spinner.width / Math.min(this.displayWidth, this.displayHeight);
+        this.spinnerSizeRatio = sizeRatio;
         spinner.setPosition(this.x, this.y).setOrigin(0.5);
         this.add(spinner);
         this.spinner = spinner;
