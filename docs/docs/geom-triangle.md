@@ -136,9 +136,9 @@ var out = Phaser.Geom.Triangle.BuildFromPolygon(data);
     ```
 - Lines around triangle
     ```javascript
-    var line12 = rect.getLineA();     // line from (x1, y1) to (x2, y2)
-    var line23 = rect.getLineB();     // line from (x2, y2) to (x3, y3)
-    var line31 = rect.getLineC();     // line from (x3, y3) to (x1, y1)
+    var line12 = triangle.getLineA();     // line from (x1, y1) to (x2, y2)
+    var line23 = triangle.getLineB();     // line from (x2, y2) to (x3, y3)
+    var line31 = triangle.getLineC();     // line from (x3, y3) to (x1, y1)
     ```
 - Centroid
     ```javascript

@@ -1,8 +1,10 @@
+import Random from './Random.js';
+
 const Triangle = Phaser.Geom.Triangle;
 
-var SplitTriangleTo3Triangles = function (triangle) {
-    var r1 = Math.random();
-    var r2 = Math.random();
+var SplitTriangleTo3Triangles = function (triangle, variation) {
+    var r1 = Random(variation);
+    var r2 = Random(variation);
     var s = Math.sqrt(r1);
 
     var ax = triangle.x1, ay = triangle.y1;

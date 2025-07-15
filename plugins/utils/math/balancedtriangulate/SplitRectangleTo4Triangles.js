@@ -1,12 +1,15 @@
-const Triangle = Phaser.Geom.Triangle;
+import Random from './Random.js';
 
-var SplitRectangleTo4Triangles = function (rectangle) {
+const Triangle = Phaser.Geom.Triangle;
+const Linear = Phaser.Math.Linear;
+
+var SplitRectangleTo4Triangles = function (rectangle, variation) {
     var ax = rectangle.x, ay = rectangle.y;
     var bx = rectangle.right, by = rectangle.y;
     var cx = rectangle.right, cy = rectangle.bottom;
     var dx = rectangle.x, dy = rectangle.bottom;
-    var px = ax + Math.random() * (cx - ax);
-    var py = ay + Math.random() * (cy - ay);
+    var px = Linear(ax, cx, Random(variation));
+    var py = Linear(ay, cy, Random(variation));
 
     var triangleA = new Triangle(ax, ay, bx, by, px, py);  // ABP
     var triangleB = new Triangle(bx, by, cx, cy, px, py);  // BCP
