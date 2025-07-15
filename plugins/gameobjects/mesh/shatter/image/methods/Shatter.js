@@ -1,4 +1,4 @@
-import ShatterRectangleToTriangles from '../../../../../utils/math/triangulate/ShatterRectangleToTriangles.js';
+import ShatterRectangleToTriangles from '../../../../../utils/math/fantriangulate/ShatterRectangleToTriangles.js';
 import { WorldXYToLocalXY } from '../../../mesh/utils/WorldXY.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;

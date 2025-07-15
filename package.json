@@ -83,6 +83,7 @@
         "js-yaml": "^4.1.0",
         "mustache": "^4.2.0",
         "papaparse": "^5.4.1",
-        "webfontloader": "^1.6.28"
+        "webfontloader": "^1.6.28",
+        "tinyqueue": "^3.0.0"
     }
 }
