@@ -1,4 +1,4 @@
-import Triangulate from './Triangulate.js';
+import Triangulate from '../delaunay/Triangulate.js';
 import IsFunction from '../../object/IsFunction.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
