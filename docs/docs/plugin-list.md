@@ -54,6 +54,7 @@
 44. [Cursor at bound](cursoratbounds.md): Map position pf cursor to cursor key state.
 45. [Curve/Spiral](curve-spiral.md): Spiral curve.
 46. [Cut Jigsaw Image](cutjigsawimage.md): Cut image into pieces for jigsaw application.
+46. [Delaunay Image](delaunay-image.md): Split image to triangle faces.
 47. [Drag](drag.md): Drag game object.
 48. [Drag-rotate](dragrotate.md): Get dragging angle around a specific point.
 49. [Drop down](dropdown.md): Drop down game object below another target game object.

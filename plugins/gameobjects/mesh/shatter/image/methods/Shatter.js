@@ -1,4 +1,4 @@
-import ShatterRectangleToTriangles from '../../../../../utils/math/fantriangulate/ShatterRectangleToTriangles.js';
+import RectangleToTriangles from '../../../../../utils/math/rectangletotriangles/fantriangulate/RectangleToTriangles.js';
 import { WorldXYToLocalXY } from '../../../mesh/utils/WorldXY.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
@@ -49,7 +49,7 @@ var Shatter = function (centerX, centerY, config) {
 
     centerX /= this.width;
     centerY /= this.height;
-    var result = ShatterRectangleToTriangles({
+    var result = RectangleToTriangles({
         width: 1, height: 1,
         center: { x: centerX, y: centerY },
 

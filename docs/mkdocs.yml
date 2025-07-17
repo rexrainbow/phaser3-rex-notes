@@ -70,6 +70,8 @@ nav:
         - Shatter:
             - Image: shatter-image.md
             - Render texture: shatter-rendertexture.md
+        - Delaunay:
+            - Image: delaunay-image.md            
         - Rope: rope.md
     - Text:
         - Canvas text:

@@ -1,9 +1,9 @@
-import Triangulate from '../delaunay/Triangulate.js';
+import Triangulate from '../../delaunay/Triangulate.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Rectangle = Phaser.Geom.Rectangle;
 
-var SplitRectangleToTriangles = function (config) {
+var RectangleToTriangles = function (config) {
     var rectangle = config.rectangle;
     if (!rectangle) {
         rectangle = new Rectangle(0, 0, config.width, config.height);
@@ -40,4 +40,4 @@ var SplitRectangleToTriangles = function (config) {
 
 var InnerRectangle = new Rectangle();
 
-export default SplitRectangleToTriangles;
+export default RectangleToTriangles;

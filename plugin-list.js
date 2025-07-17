@@ -36,6 +36,7 @@ module.exports = {
     'perspectiveimageplugin': './plugins/perspectiveimage-plugin.js',
     'quadimageplugin': './plugins/quadimage-plugin.js',
     'shatterimageplugin': './plugins/shatterimage-plugin.js',
+    'delaunayimageplugin': './plugins/delaunayimage-plugin.js',
     'imageboxplugin': './plugins/imagebox-plugin.js',
     'lazyloadimageboxplugin': './templates/lazyloadimagebox/lazyloadimagebox-plugin.js',
     'transitionimageplugin': './plugins/transitionimage-plugin.js',

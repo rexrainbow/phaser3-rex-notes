@@ -1,6 +1,6 @@
 import phaser from '../../../phaser/src/phaser.js';
 import MeshPlugin from '../../plugins/mesh-plugin.js';
-import SplitRectangleToTriangles from '../../plugins/utils/math/balancedtriangulate/SplitRectangleToTriangles.js';
+import RectangleToTriangles from '../../plugins/utils/math/rectangletotriangles/delaunay/RectangleToTriangles.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -18,7 +18,7 @@ class Demo extends Phaser.Scene {
         var gameObject = this.add.rexMesh(400, 300, '__WHITE')
             .setDisplaySize(400, 400)
 
-        var triangles = SplitRectangleToTriangles({
+        var triangles = RectangleToTriangles({
             width: 1,
             height: 1,
             amount: 30,

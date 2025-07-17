@@ -277,24 +277,18 @@ Faces will be sorted nearby shatter-center to far away.
         ```
         - `x` : 0(left) ~ 1(right)
         - `y` : 1(top) ~ 0(bottom)
-
-##### Update properties
-
-- Start updating
+- Vertices
     ```javascript
-    image.startUpdate();
+    var vertex0 = face.vertex0;
+    var vertex1 = face.vertex1;
+    var vertex2 = face.vertex2;
     ```
     or
     ```javascript
-    image.ignoreDirtyCache = true;
-    ```
-- Stop updating
-    ```javascript
-    image.stopUpdate();
-    ```
-    or
-    ```javascript
-    image.ignoreDirtyCache = false;
+    var vertices = face.vertices;
+    var vertex0 = vertices[0];
+    var vertex1 = vertices[1];
+    var vertex2 = vertices[2];
     ```
 
 ##### Tween properties
@@ -312,10 +306,68 @@ scene.tweens.add({
     repeat: 0,            // -1: infinity
     yoyo: false,
     onComplete: function () {
-        image.stopUpdate()
+        // image.resetImage()
     }
 });
 ```
+
+### Vertices
+
+Each face has 3 vertices, and a face can use vertices shared by other faces.
+
+```javascript
+var vertices = mesh.vertices;
+```
+
+- `vertices` : Array of vertex.
+
+```javascript
+var vertices = face.vertices;
+```
+
+#### Properties
+
+- World position
+    - Get
+        ```javascript
+        var worldX = vertex.worldX;
+        var worldY = vertex.worldY;
+        // var worldX = vertex.x;
+        // var worldY = vertex.y;
+        ```
+        or
+        ```javascript
+        var wordXY = vertex.getWorldXY();       // {x,y}
+        // var worldXY= vertex.getWorldXY(out);
+        ```
+- Local position
+    - Get
+        ```javascript
+        var localX = vertex.localX;
+        var localY = vertex.localY;
+        ```
+- Reset to default position
+    ```javascript
+    vertex.resetPosition();
+    ```
+- Alpha
+    - Get
+        ```javascript
+        var alpha = vertex.alpha;
+        ```
+    - Set
+        ```javascript
+        vertex.alpha = alpha;
+        ```
+- Tint
+    - Get
+        ```javascript
+        var color = vertex.color;
+        ```
+    - Set
+        ```javascript
+        vertex.color = color;        
+        ```
 
 ### Reset image
 

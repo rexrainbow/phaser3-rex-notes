@@ -2234,6 +2234,75 @@
   
   
   
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3_6" id="__nav_4_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Delaunay
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            Delaunay
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../delaunay-image/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Image
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
     <li class="md-nav__item">
       <a href="../rope/" class="md-nav__link">
         
@@ -15190,9 +15259,9 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">area</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Triangle</span><span class="p">.</span><span class="nx">Area</span><span class="p">(</span><span class="nx">triangle</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Lines around triangle
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">line12</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">rect</span><span class="p">.</span><span class="nx">getLineA</span><span class="p">();</span><span class="w">     </span><span class="c1">// line from (x1, y1) to (x2, y2)</span>
-<span class="kd">var</span><span class="w"> </span><span class="nx">line23</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">rect</span><span class="p">.</span><span class="nx">getLineB</span><span class="p">();</span><span class="w">     </span><span class="c1">// line from (x2, y2) to (x3, y3)</span>
-<span class="kd">var</span><span class="w"> </span><span class="nx">line31</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">rect</span><span class="p">.</span><span class="nx">getLineC</span><span class="p">();</span><span class="w">     </span><span class="c1">// line from (x3, y3) to (x1, y1)</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">line12</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">triangle</span><span class="p">.</span><span class="nx">getLineA</span><span class="p">();</span><span class="w">     </span><span class="c1">// line from (x1, y1) to (x2, y2)</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">line23</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">triangle</span><span class="p">.</span><span class="nx">getLineB</span><span class="p">();</span><span class="w">     </span><span class="c1">// line from (x2, y2) to (x3, y3)</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">line31</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">triangle</span><span class="p">.</span><span class="nx">getLineC</span><span class="p">();</span><span class="w">     </span><span class="c1">// line from (x3, y3) to (x1, y1)</span>
 </code></pre></div></li>
 <li>Centroid
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Triangle</span><span class="p">.</span><span class="nx">Centroid</span><span class="p">(</span><span class="nx">triangle</span><span class="p">);</span><span class="w">  </span><span class="c1">// out: {x,y}</span>

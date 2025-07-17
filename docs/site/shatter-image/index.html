@@ -2365,15 +2365,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#update-properties" class="md-nav__link">
-    <span class="md-ellipsis">
-      Update properties
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#tween-properties" class="md-nav__link">
     <span class="md-ellipsis">
       Tween properties
@@ -2384,6 +2375,30 @@
         
       </ul>
     </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vertices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vertices
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Vertices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#properties_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Properties
+    </span>
+  </a>
   
 </li>
         
@@ -2464,6 +2479,75 @@
   
   <span class="md-ellipsis">
     Render texture
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3_6" id="__nav_4_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Delaunay
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            Delaunay
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../delaunay-image/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Image
     
   </span>
   
@@ -15058,15 +15142,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#update-properties" class="md-nav__link">
-    <span class="md-ellipsis">
-      Update properties
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#tween-properties" class="md-nav__link">
     <span class="md-ellipsis">
       Tween properties
@@ -15077,6 +15152,30 @@
         
       </ul>
     </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vertices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vertices
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Vertices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#properties_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Properties
+    </span>
+  </a>
   
 </li>
         
@@ -15404,20 +15503,16 @@
 </li>
 </ul>
 </li>
-</ul>
-<h5 id="update-properties">Update properties<a class="headerlink" href="#update-properties" title="Permanent link">&para;</a></h5>
-<ul>
-<li>Start updating
-    <div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">startUpdate</span><span class="p">();</span>
+<li>Vertices
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">vertex0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">face</span><span class="p">.</span><span class="nx">vertex0</span><span class="p">;</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">vertex1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">face</span><span class="p">.</span><span class="nx">vertex1</span><span class="p">;</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">vertex2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">face</span><span class="p">.</span><span class="nx">vertex2</span><span class="p">;</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">ignoreDirtyCache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
-</code></pre></div></li>
-<li>Stop updating
-    <div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">stopUpdate</span><span class="p">();</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">ignoreDirtyCache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">vertices</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">face</span><span class="p">.</span><span class="nx">vertices</span><span class="p">;</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">vertex0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">vertices</span><span class="p">[</span><span class="mf">0</span><span class="p">];</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">vertex1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">vertices</span><span class="p">[</span><span class="mf">1</span><span class="p">];</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">vertex2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">vertices</span><span class="p">[</span><span class="mf">2</span><span class="p">];</span>
 </code></pre></div></li>
 </ul>
 <h5 id="tween-properties">Tween properties<a class="headerlink" href="#tween-properties" title="Permanent link">&para;</a></h5>
@@ -15433,10 +15528,63 @@
 <span class="w">    </span><span class="nx">repeat</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w">            </span><span class="c1">// -1: infinity</span>
 <span class="w">    </span><span class="nx">yoyo</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">onComplete</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">image</span><span class="p">.</span><span class="nx">stopUpdate</span><span class="p">()</span>
+<span class="w">        </span><span class="c1">// image.resetImage()</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">});</span>
 </code></pre></div>
+<h3 id="vertices">Vertices<a class="headerlink" href="#vertices" title="Permanent link">&para;</a></h3>
+<p>Each face has 3 vertices, and a face can use vertices shared by other faces.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">vertices</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">mesh</span><span class="p">.</span><span class="nx">vertices</span><span class="p">;</span>
+</code></pre></div>
+<ul>
+<li><code>vertices</code> : Array of vertex.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">vertices</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">face</span><span class="p">.</span><span class="nx">vertices</span><span class="p">;</span>
+</code></pre></div>
+<h4 id="properties_1">Properties<a class="headerlink" href="#properties_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>World position<ul>
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">worldX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">vertex</span><span class="p">.</span><span class="nx">worldX</span><span class="p">;</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">worldY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">vertex</span><span class="p">.</span><span class="nx">worldY</span><span class="p">;</span>
+<span class="c1">// var worldX = vertex.x;</span>
+<span class="c1">// var worldY = vertex.y;</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">wordXY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">vertex</span><span class="p">.</span><span class="nx">getWorldXY</span><span class="p">();</span><span class="w">       </span><span class="c1">// {x,y}</span>
+<span class="c1">// var worldXY= vertex.getWorldXY(out);</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Local position<ul>
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">localX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">vertex</span><span class="p">.</span><span class="nx">localX</span><span class="p">;</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">localY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">vertex</span><span class="p">.</span><span class="nx">localY</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Reset to default position
+    <div class="highlight"><pre><span></span><code><span class="nx">vertex</span><span class="p">.</span><span class="nx">resetPosition</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Alpha<ul>
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">vertex</span><span class="p">.</span><span class="nx">alpha</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="highlight"><pre><span></span><code><span class="nx">vertex</span><span class="p">.</span><span class="nx">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">alpha</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Tint<ul>
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">vertex</span><span class="p">.</span><span class="nx">color</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="highlight"><pre><span></span><code><span class="nx">vertex</span><span class="p">.</span><span class="nx">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">color</span><span class="p">;</span><span class="w">        </span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
 <h3 id="reset-image">Reset image<a class="headerlink" href="#reset-image" title="Permanent link">&para;</a></h3>
 <p>Display original image with 2 faces.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">resetImage</span><span class="p">();</span>

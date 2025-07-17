@@ -268,7 +268,8 @@ var vertices = face.vertices;
         ```
     - Set
         ```javascript
-        vertex.color = color;        ```
+        vertex.color = color;        
+        ```
 
 
 ### Interactive with texture rectangle

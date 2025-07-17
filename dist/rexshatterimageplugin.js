@@ -1913,6 +1913,7 @@
                 var triangle = new Triangle(p0[0], p0[1], p1[0], p1[1], p2[0], p2[1]);
                 triangles.push(triangle);
             }
+            console.log(triangles.length);
             return triangles;
         } else {
             return {
@@ -1930,7 +1931,7 @@
     const Clamp = Phaser.Math.Clamp;
     const DefaultRingRadiusList$1 = [1 / 27, 3 / 27, 9 / 27];
 
-    var ShatterRectangleToTriangles = function (config) {
+    var RectangleToTriangles = function (config) {
         var left, right, top, bottom, width, height;
         var rectangle = config.rectangle;
         if (rectangle) {
@@ -2092,7 +2093,7 @@
 
         centerX /= this.width;
         centerY /= this.height;
-        var result = ShatterRectangleToTriangles({
+        var result = RectangleToTriangles({
             width: 1, height: 1,
             center: { x: centerX, y: centerY },
 

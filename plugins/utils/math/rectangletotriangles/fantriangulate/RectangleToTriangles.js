@@ -1,11 +1,11 @@
-import Triangulate from '../delaunay/Triangulate.js';
-import IsFunction from '../../object/IsFunction.js';
+import Triangulate from '../../delaunay/Triangulate.js';
+import IsFunction from '../../../object/IsFunction.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Clamp = Phaser.Math.Clamp;
 const DefaultRingRadiusList = [1 / 27, 3 / 27, 9 / 27];
 
-var ShatterRectangleToTriangles = function (config) {
+var RectangleToTriangles = function (config) {
     var left, right, top, bottom, width, height;
     var rectangle = config.rectangle;
     if (rectangle) {
@@ -119,4 +119,4 @@ var RandomRange = function (min, max) {
     }
 }
 
-export default ShatterRectangleToTriangles;
+export default RectangleToTriangles;
