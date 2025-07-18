@@ -153,6 +153,7 @@ var composite = scene.matter.add.imageStack(key, frame, x, y, columns, rows);
     - `{radius: value}`
     - `{radius: [topLeft, topRight, bottomRight, bottomLeft]}`
 - `isStatic` : A flag that indicates whether a body is considered static. A static body can never change position or angle and is completely fixed.
+    - A collision event will not occur between two static bodies. i.e. at least one of the bodies must not be a static body.
 - `isSensor` : A flag that indicates whether a body is a sensor. Sensor triggers collision events, but doesn't react with colliding body physically.
 - `isSleeping` : A flag that indicates whether the body is considered sleeping. A sleeping body acts similar to a static body, except it is only temporary and can be awoken.
 - `sleepThreshold` : The number of updates in which this body must have *near-zero velocity* before it is set as sleeping.
@@ -317,11 +318,18 @@ gameObject.setAngularVelocity(v);
         // gameObject.setCollidesWith(categoryA);
         ```
 
-#### Collision event
+#### Collision event for all bodies
 
 ```javascript
 scene.matter.world.on('collisionstart', function (event, bodyA, bodyB) {
-    // var pairs = event.pairs;
+    /*
+    var pairs = event.pairs;
+    pairs.forEach(function(bodyA, bodyB) {
+        // bodyA.label
+        // bodyB.label
+        // ...
+    })
+    */
 });
 ```
 
@@ -330,6 +338,23 @@ scene.matter.world.on('collisionstart', function (event, bodyA, bodyB) {
         - `event.pairs[i].bodyA`, `event.pairs[i].bodyB` : Matter body object.
             - `body.gameObject` : Game object of matter body.
 - `bodyA`, `bodyB` : Equal to `event.pairs[0].bodyA`, `event.pairs[0].bodyB`.
+
+#### Collision callback between 2 bodies
+
+- Set callback
+    ```javascript
+    gameObjectA.setOnCollideWith(gameObjectB, callback);
+    ```
+    - `callback`
+        ```javascript
+        function(bodyB, pair) {
+            // ...
+        }
+        ```
+- Remove callback
+    ```javascript
+    gameObjectA.setOnCollideWith(gameObjectB, null);
+    ```
 
 #### Collision bound
 

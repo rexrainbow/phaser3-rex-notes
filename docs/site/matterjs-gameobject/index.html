@@ -6243,9 +6243,18 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#collision-event" class="md-nav__link">
+  <a href="#collision-event-for-all-bodies" class="md-nav__link">
     <span class="md-ellipsis">
-      Collision event
+      Collision event for all bodies
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#collision-callback-between-2-bodies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Collision callback between 2 bodies
     </span>
   </a>
   
@@ -15317,9 +15326,18 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#collision-event" class="md-nav__link">
+  <a href="#collision-event-for-all-bodies" class="md-nav__link">
     <span class="md-ellipsis">
-      Collision event
+      Collision event for all bodies
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#collision-callback-between-2-bodies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Collision callback between 2 bodies
     </span>
   </a>
   
@@ -15571,7 +15589,10 @@
 <li><code>{radius: [topLeft, topRight, bottomRight, bottomLeft]}</code></li>
 </ul>
 </li>
-<li><code>isStatic</code> : A flag that indicates whether a body is considered static. A static body can never change position or angle and is completely fixed.</li>
+<li><code>isStatic</code> : A flag that indicates whether a body is considered static. A static body can never change position or angle and is completely fixed.<ul>
+<li>A collision event will not occur between two static bodies. i.e. at least one of the bodies must not be a static body.</li>
+</ul>
+</li>
 <li><code>isSensor</code> : A flag that indicates whether a body is a sensor. Sensor triggers collision events, but doesn't react with colliding body physically.</li>
 <li><code>isSleeping</code> : A flag that indicates whether the body is considered sleeping. A sleeping body acts similar to a static body, except it is only temporary and can be awoken.</li>
 <li><code>sleepThreshold</code> : The number of updates in which this body must have <em>near-zero velocity</em> before it is set as sleeping.</li>
@@ -15735,9 +15756,16 @@
 </ol>
 </li>
 </ul>
-<h4 id="collision-event">Collision event<a class="headerlink" href="#collision-event" title="Permanent link">&para;</a></h4>
+<h4 id="collision-event-for-all-bodies">Collision event for all bodies<a class="headerlink" href="#collision-event-for-all-bodies" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">matter</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;collisionstart&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">event</span><span class="p">,</span><span class="w"> </span><span class="nx">bodyA</span><span class="p">,</span><span class="w"> </span><span class="nx">bodyB</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// var pairs = event.pairs;</span>
+<span class="w">    </span><span class="cm">/*</span>
+<span class="cm">    var pairs = event.pairs;</span>
+<span class="cm">    pairs.forEach(function(bodyA, bodyB) {</span>
+<span class="cm">        // bodyA.label</span>
+<span class="cm">        // bodyB.label</span>
+<span class="cm">        // ...</span>
+<span class="cm">    })</span>
+<span class="cm">    */</span>
 <span class="p">});</span>
 </code></pre></div>
 <ul>
@@ -15752,6 +15780,22 @@
 </ul>
 </li>
 <li><code>bodyA</code>, <code>bodyB</code> : Equal to <code>event.pairs[0].bodyA</code>, <code>event.pairs[0].bodyB</code>.</li>
+</ul>
+<h4 id="collision-callback-between-2-bodies">Collision callback between 2 bodies<a class="headerlink" href="#collision-callback-between-2-bodies" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Set callback
+    <div class="highlight"><pre><span></span><code><span class="nx">gameObjectA</span><span class="p">.</span><span class="nx">setOnCollideWith</span><span class="p">(</span><span class="nx">gameObjectB</span><span class="p">,</span><span class="w"> </span><span class="nx">callback</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>callback</code>
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">bodyB</span><span class="p">,</span><span class="w"> </span><span class="nx">pair</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Remove callback
+    <div class="highlight"><pre><span></span><code><span class="nx">gameObjectA</span><span class="p">.</span><span class="nx">setOnCollideWith</span><span class="p">(</span><span class="nx">gameObjectB</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
 <h4 id="collision-bound">Collision bound<a class="headerlink" href="#collision-bound" title="Permanent link">&para;</a></h4>
 <ul>
