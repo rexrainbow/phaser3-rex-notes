@@ -19,7 +19,7 @@ var polygon = scene.add.polygon(x, y, points, fillColor);
     - A string : `'x0 y0 x1 y1 ...'`
 
 !!! note
-    Shift given points to align position **(0, 0)**
+    Shift given points to align position **(0, 0)**, not around **(0, 0)**
 
 ### Custom class
 

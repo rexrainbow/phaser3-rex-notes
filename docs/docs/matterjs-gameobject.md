@@ -37,6 +37,9 @@ var gameObject = scene.matter.add.gameObject(gameObject);
 
 - `config` : [Config object](matterjs-gameobject.md#config)
 
+!!! note  
+    Origin of added game object will be changed
+
 #### Image composite
 
 Create a new composite containing Matter Image objects created in a grid arrangement.
