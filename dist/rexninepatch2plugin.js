@@ -1498,7 +1498,7 @@
         var tw = tx + frameWidth;
         var th = ty + frameHeight;
 
-        tempMatrix.setQuad(tx, ty, tw, th, false, tempTransformer.quad);
+        tempMatrix.setQuad(tx, ty, tw, th, tempTransformer.quad);
 
         tempTexturer.frame = frame;
         tempTexturer.uvSource = frame;    
