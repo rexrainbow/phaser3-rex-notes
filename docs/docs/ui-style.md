@@ -507,7 +507,7 @@ Bar-rectangle = Line-progress
     // iconSize: undefined, iconWidth: undefined, iconHeight: undefined,
 
     text: testStyle,
-    // wrapText: false,  // false|'word'|'char',
+    // wrapText: false,  // false|'word'|'char'|'character',
     // adjustTextFontSize: false,
     // expandTextWidth: false,
     // expandTextHeight: false,

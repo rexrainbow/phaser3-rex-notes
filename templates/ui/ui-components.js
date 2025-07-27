@@ -128,6 +128,7 @@ import {
     IsShown,
 } from './utils/Hide.js';
 import ConfirmAction from './confirmdialog/ConfirmAction.js';
+import ConfirmActionPromise from './confirmdialog/ConfirmActionPromise.js';
 import Edit from './textedit/Edit.js';
 import WrapExpandText from './utils/wrapexpandtext/WrapExpandText.js';
 import FontSizeExpandText from './utils/fontsizeexpandtext/FontSizeExpandText.js';
@@ -271,6 +272,7 @@ export {
     Hide,
     IsShown,
     ConfirmAction,
+    ConfirmActionPromise,
     Edit,
     WrapExpandText,
     FontSizeExpandText,

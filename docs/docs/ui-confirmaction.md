@@ -92,6 +92,9 @@ var dialog = scene.rexUI.confirmAction(scene, {
     // cancel: function() {},
     // cancelScope: 
     // cancelButtonIndex: 1,
+
+    // close: function() {},
+    // closeScope:
 })
 ```
 
@@ -112,3 +115,26 @@ var dialog = scene.rexUI.confirmAction(scene, {
     - `cancel`, `cancelScope` : Callback invoking when click cancel/cancel button of Confirm dialog
     - `cancelButtonIndex` : Index of cancel/cancel button on Confirm dialog. Default value is `1`.
 - `dialog` : Confirm dialog will be destroy after clicking any button.
+
+
+### Confirm action promise
+
+```javascript
+var result = await scene.rexUI.confirmActionPromise(scene, {    
+    style: confirmDialogConfig
+
+    content: confirmDialogResetChoiceDisplayContentConfig,
+
+    // modal: confirmDialogModalConfig,
+
+    // onCreateDialog: function(dialog) { },
+
+    confirm: function() {},
+    // confirmScope: 
+    // confirmButtonIndex: 0,
+
+    // cancel: function() {},
+    // cancelScope: 
+    // cancelButtonIndex: 1,
+})
+```

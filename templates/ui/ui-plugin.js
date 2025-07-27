@@ -125,6 +125,7 @@ import RemoveFromParent from './utils/RemoveFromParent.js';
 import IsPointerInBounds from '../../plugins/utils/input/IsPointerInBounds.js';
 import { Show, Hide, IsShown, } from './utils/Hide.js';
 import ConfirmAction from './confirmdialog/ConfirmAction.js';
+import ConfirmActionPromise from './confirmdialog/ConfirmActionPromise.js';
 import Edit from './textedit/Edit.js';
 import WrapExpandText from './utils/wrapexpandtext/WrapExpandText.js';
 import FontSizeExpandText from './utils/fontsizeexpandtext/FontSizeExpandText.js';
@@ -178,6 +179,7 @@ var methods = {
     show: Show,
     isShown: IsShown,
     confirmAction: ConfirmAction,
+    confirmActionPromise: ConfirmActionPromise,
     edit: Edit,
     wrapExpandText: WrapExpandText,
     fontSizeExpandText: FontSizeExpandText,

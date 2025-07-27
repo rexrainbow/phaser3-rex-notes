@@ -23,6 +23,9 @@ declare namespace ConfirmAction {
         cancel?: Function,
         cancelScope?: Object,
         cancelButtonIndex?: number,
+
+        close?: (data: Object) => void;
+        closeScope?: Object;
     }
 }
 

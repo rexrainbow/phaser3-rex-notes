@@ -117,6 +117,7 @@ import TweakerFactory from './tweaker/Factory';
 
 import { EaseMoveTo, EaseMoveFrom } from './easemove/EaseMove';
 import ConfirmAction from './confirmdialog/ConfirmAction';
+import ConfirmActionPromise from './confirmdialog/ConfirmActionPromise'
 import Edit from './textedit/Edit';
 import { FadeIn, FadeOutDestroy } from './fade/Fade';
 import { Modal, ModalPromise, ModalClose } from './modal/Modal';
@@ -258,6 +259,7 @@ declare class UIPlugin extends Phaser.Plugins.ScenePlugin {
     easeMoveTo: typeof EaseMoveTo;
     easeMoveFrom: typeof EaseMoveFrom;
     confirmAction: typeof ConfirmAction;
+    confirmActionPromise: typeof ConfirmActionPromise;
     edit: typeof Edit;
     fadeIn: typeof FadeIn;
     fadeOutDestroy: typeof FadeOutDestroy;

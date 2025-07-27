@@ -823,6 +823,11 @@ var layerManager = scene.rexUI.add.layerManager({
     scene.rexUI.confirmAction(scene, config)
         .then(function(data){ })
     ```
+1. [Confirm action promise](ui-confirmaction.md#confirm-action-promise) : Confirm action wrapped into promise.
+    ```javascript
+    scene.rexUI.confirmActionPromise(scene, config)
+        .then(function(data){ })
+    ```
 1. [Modal promise](modal-promise.md) : [Modal behavior](modal.md) wrapped into promise.
     ```javascript
     scene.rexUI.modalPromise(gameObject, config)

@@ -35,6 +35,8 @@ var ConfirmAction = function (scene, config) {
     var cancelCallback = config.cancel;
     var confirmScope = config.confirmScope;
     var cancelScope = config.cancelScope;
+    var closeCallback = config.close;
+    var closeScope = config.closeScope;
 
     if (confirmCallback) {
         dialog.once('confirm', confirmCallback, confirmScope);
@@ -44,8 +46,16 @@ var ConfirmAction = function (scene, config) {
     }
 
     var onClose = function (data) {
-        dialog.off('confirm', confirmCallback, confirmScope);
-        dialog.off('cancel', cancelCallback, cancelScope);
+        if (confirmCallback) {
+            dialog.off('confirm', confirmCallback, confirmScope);
+        }
+        if (cancelCallback) {
+            dialog.off('cancel', cancelCallback, cancelScope);
+        }
+
+        if (closeCallback) {
+            closeCallback.call(closeScope, data);
+        }
     }
 
     dialog.modal(modalConfig, onClose);
