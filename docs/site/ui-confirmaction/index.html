@@ -12926,6 +12926,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#confirm-action-promise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Confirm action promise
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -14947,6 +14956,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#confirm-action-promise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Confirm action promise
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -15059,6 +15077,9 @@
 <span class="w">    </span><span class="c1">// cancel: function() {},</span>
 <span class="w">    </span><span class="c1">// cancelScope: </span>
 <span class="w">    </span><span class="c1">// cancelButtonIndex: 1,</span>
+
+<span class="w">    </span><span class="c1">// close: function() {},</span>
+<span class="w">    </span><span class="c1">// closeScope:</span>
 <span class="p">})</span>
 </code></pre></div>
 <ul>
@@ -15085,6 +15106,25 @@
 </li>
 <li><code>dialog</code> : Confirm dialog will be destroy after clicking any button.</li>
 </ul>
+<h3 id="confirm-action-promise">Confirm action promise<a class="headerlink" href="#confirm-action-promise" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">confirmActionPromise</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w">    </span>
+<span class="w">    </span><span class="nx">style</span><span class="o">:</span><span class="w"> </span><span class="nx">confirmDialogConfig</span>
+
+<span class="w">    </span><span class="nx">content</span><span class="o">:</span><span class="w"> </span><span class="nx">confirmDialogResetChoiceDisplayContentConfig</span><span class="p">,</span>
+
+<span class="w">    </span><span class="c1">// modal: confirmDialogModalConfig,</span>
+
+<span class="w">    </span><span class="c1">// onCreateDialog: function(dialog) { },</span>
+
+<span class="w">    </span><span class="nx">confirm</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">    </span><span class="c1">// confirmScope: </span>
+<span class="w">    </span><span class="c1">// confirmButtonIndex: 0,</span>
+
+<span class="w">    </span><span class="c1">// cancel: function() {},</span>
+<span class="w">    </span><span class="c1">// cancelScope: </span>
+<span class="w">    </span><span class="c1">// cancelButtonIndex: 1,</span>
+<span class="p">})</span>
+</code></pre></div>
 
 
 

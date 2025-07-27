@@ -60088,6 +60088,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         var cancelCallback = config.cancel;
         var confirmScope = config.confirmScope;
         var cancelScope = config.cancelScope;
+        var closeCallback = config.close;
+        var closeScope = config.closeScope;
 
         if (confirmCallback) {
             dialog.once('confirm', confirmCallback, confirmScope);
@@ -60097,8 +60099,16 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
 
         var onClose = function (data) {
-            dialog.off('confirm', confirmCallback, confirmScope);
-            dialog.off('cancel', cancelCallback, cancelScope);
+            if (confirmCallback) {
+                dialog.off('confirm', confirmCallback, confirmScope);
+            }
+            if (cancelCallback) {
+                dialog.off('cancel', cancelCallback, cancelScope);
+            }
+
+            if (closeCallback) {
+                closeCallback.call(closeScope, data);
+            }
         };
 
         dialog.modal(modalConfig, onClose);
@@ -78598,6 +78608,15 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     SetValue(window, 'RexPlugins.UI.LayerManager', LayerManager);
 
+    var ConfirmActionPromise = function (scene, config) {
+        var dialog = ConfirmAction(scene, config);
+        return new Promise(function (resolve, reject) {
+            dialog.once('modal.close', function (closeEventData) {
+                resolve(closeEventData);
+            });
+        });
+    };
+
     class UIPlugin extends Phaser.Plugins.ScenePlugin {
         constructor(scene, pluginManager) {
             super(scene, pluginManager);
@@ -78636,6 +78655,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         show: Show,
         isShown: IsShown,
         confirmAction: ConfirmAction,
+        confirmActionPromise: ConfirmActionPromise,
         edit: Edit,
         wrapExpandText: WrapExpandText,
         fontSizeExpandText: FontSizeExpandText,
