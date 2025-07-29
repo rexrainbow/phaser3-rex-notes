@@ -23,6 +23,16 @@ class Parser {
         return strokeThickness;
     }
 
+    getLetterSpacing(defaultStyle, prop) {
+        var letterSpacing;
+        if (prop.hasOwnProperty('spacing')) {
+            letterSpacing = prop.spacing;
+        } else {
+            letterSpacing = defaultStyle.letterSpacing;
+        }
+        return letterSpacing;
+    }
+
     setDelimiters(delimiterLeft, delimiterRight) {
         if (SetDelimiters(delimiterLeft, delimiterRight)) {
             this.tagRegex = GetTagRegex();

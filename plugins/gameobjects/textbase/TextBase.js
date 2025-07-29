@@ -153,6 +153,20 @@ class TextBase extends GameObject {
         return this;
     }
 
+    get letterSpacing() {
+        return this.style.letterSpacing;
+    }
+
+    set letterSpacing(value) {
+        this.style.letterSpacing = value;
+    }
+
+    setLetterSpacing(value) {
+        this.style.letterSpacing = value;
+        this.updateText(true);
+        return this;
+    }
+
     setXOffset(value) {
         return this.style.setXOffset(value);
     }

@@ -211,14 +211,35 @@ export default {
         }
 
         var context = this.context;
-        if (style.stroke && (style.stroke !== 'none') && (style.strokeThickness > 0)) {
-            style.syncShadow(context, style.shadowStroke);
-            context.strokeText(text, x, y);
-        }
+        var letterSpacing = style.letterSpacing;
+        if (letterSpacing === 0) {
+            if (style.stroke && (style.stroke !== 'none') && (style.strokeThickness > 0)) {
+                style.syncShadow(context, style.shadowStroke);
+                context.strokeText(text, x, y);
+            }
 
-        if (style.color && (style.color !== 'none')) {
-            style.syncShadow(context, style.shadowFill);
-            context.fillText(text, x, y);
+            if (style.color && (style.color !== 'none')) {
+                style.syncShadow(context, style.shadowFill);
+                context.fillText(text, x, y);
+            }
+
+        } else {
+            var charcters = text.split('');
+            for (var i = 0, cnt = charcters.length; i < cnt; i++) {
+                var character = charcters[i];
+                if (style.stroke && (style.stroke !== 'none') && (style.strokeThickness > 0)) {
+                    style.syncShadow(context, style.shadowStroke);
+                    context.strokeText(character, x, y);
+                }
+
+                if (style.color && (style.color !== 'none')) {
+                    style.syncShadow(context, style.shadowFill);
+                    context.fillText(character, x, y);
+                }
+
+                x += context.measureText(character).width + letterSpacing;
+            }
+
         }
     },
 

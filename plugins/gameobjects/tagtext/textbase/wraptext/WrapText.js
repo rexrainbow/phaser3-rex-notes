@@ -10,7 +10,16 @@ const CHAR_WRAP = CONST.CHAR_WRAP;
 const MIX_WRAP = CONST.MIX_WRAP;
 const splitRegExp = CONST.SPLITREGEXP;
 
-var WrapText = function (text, context, wrapMode, wrapWidth, offset, wrapTextLinesPool) {
+var WrapText = function (
+    text,
+    context,
+    wrapMode, wrapWidth, letterSpacing,
+    offset,
+    wrapTextLinesPool
+) {
+
+    // Add letterSpacing at right side of each character, including last character of a line
+
     if (wrapWidth <= 0) {
         wrapMode = NO_WRAP;
     }
@@ -28,8 +37,9 @@ var WrapText = function (text, context, wrapMode, wrapWidth, offset, wrapTextLin
         line = lines[i];
         newLineMode = (i === (linesLen - 1)) ? NO_NEWLINE : RAW_NEWLINE;
 
+        // Push single line
         if (isNoWrap) {
-            var textWidth = context.measureText(line).width;
+            var textWidth = context.measureText(line).width + (letterSpacing * line.length);
             retLines.push(wrapTextLinesPool.getLine(line, textWidth, newLineMode));
             continue;
         }
@@ -38,20 +48,22 @@ var WrapText = function (text, context, wrapMode, wrapWidth, offset, wrapTextLin
 
         // Short string testing
         if (line.length <= 100) {
-            var textWidth = context.measureText(line).width;
+            var textWidth = context.measureText(line).width + (letterSpacing * line.length);
             if (textWidth <= remainWidth) {
                 retLines.push(wrapTextLinesPool.getLine(line, textWidth, newLineMode));
                 continue;
             }
         }
+        // Push single line
 
+        // Run word/character wrapping
         var tokenArray = ParseLine(line, wrapMode);
-        var token, tokenWidth, isLastToken;
+        var token, tokenWidth;
         var lineText = '', lineWidth = 0;
         var currLineWidth;
         for (var j = 0, tokenLen = tokenArray.length; j < tokenLen; j++) {
             token = tokenArray[j];
-            tokenWidth = context.measureText(token).width;
+            tokenWidth = context.measureText(token).width + (letterSpacing * token.length);
 
             // Text width of single token is larger than a line width
             if ((tokenWidth > wrapWidth) && IsWord(token)) {
@@ -66,7 +78,14 @@ var WrapText = function (text, context, wrapMode, wrapWidth, offset, wrapTextLin
                 }
 
                 // Word break
-                retLines.push(...WrapText(token, context, CHAR_WRAP, wrapWidth, 0, wrapTextLinesPool));
+                retLines.push(...WrapText(
+                    token,
+                    context,
+                    CHAR_WRAP, wrapWidth, letterSpacing,
+                    0,
+                    wrapTextLinesPool
+                ));
+
                 // Continue at last-wordBreak-line
                 var lastwordBreakLine = retLines.pop();
                 lineText = lastwordBreakLine.text;
@@ -97,11 +116,13 @@ var WrapText = function (text, context, wrapMode, wrapWidth, offset, wrapTextLin
 
             }
 
+            // Is last token
             if (j === (tokenLen - 1)) {
                 // Flush remain text
                 retLines.push(wrapTextLinesPool.getLine(lineText, lineWidth, newLineMode));
             }
         } // for token in tokenArray
+        // Run word/character wrapping
 
     } // for each line in lines
 

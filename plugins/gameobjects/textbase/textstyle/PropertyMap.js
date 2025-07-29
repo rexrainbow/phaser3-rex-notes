@@ -46,6 +46,7 @@ var PropertyMap = {
     fixedHeight: ['fixedHeight', 0, null],
     resolution: ['resolution', 0, null],
     lineSpacing: ['lineSpacing', 0, null],
+    letterSpacing: ['letterSpacing', 0, null],
     xOffset: ['xOffset', 0, null],
 
     rtl: ['rtl', false, null],
