@@ -277,6 +277,20 @@
             return this;
         }
 
+        get letterSpacing() {
+            return this.style.letterSpacing;
+        }
+
+        set letterSpacing(value) {
+            this.style.letterSpacing = value;
+        }
+
+        setLetterSpacing(value) {
+            this.style.letterSpacing = value;
+            this.updateText(true);
+            return this;
+        }
+
         setXOffset(value) {
             return this.style.setXOffset(value);
         }
@@ -401,6 +415,7 @@
         fixedHeight: ['fixedHeight', 0, null],
         resolution: ['resolution', 0, null],
         lineSpacing: ['lineSpacing', 0, null],
+        letterSpacing: ['letterSpacing', 0, null],
         xOffset: ['xOffset', 0, null],
 
         rtl: ['rtl', false, null],
@@ -1799,14 +1814,35 @@
             }
 
             var context = this.context;
-            if (style.stroke && (style.stroke !== 'none') && (style.strokeThickness > 0)) {
-                style.syncShadow(context, style.shadowStroke);
-                context.strokeText(text, x, y);
-            }
+            var letterSpacing = style.letterSpacing;
+            if (letterSpacing === 0) {
+                if (style.stroke && (style.stroke !== 'none') && (style.strokeThickness > 0)) {
+                    style.syncShadow(context, style.shadowStroke);
+                    context.strokeText(text, x, y);
+                }
 
-            if (style.color && (style.color !== 'none')) {
-                style.syncShadow(context, style.shadowFill);
-                context.fillText(text, x, y);
+                if (style.color && (style.color !== 'none')) {
+                    style.syncShadow(context, style.shadowFill);
+                    context.fillText(text, x, y);
+                }
+
+            } else {
+                var charcters = text.split('');
+                for (var i = 0, cnt = charcters.length; i < cnt; i++) {
+                    var character = charcters[i];
+                    if (style.stroke && (style.stroke !== 'none') && (style.strokeThickness > 0)) {
+                        style.syncShadow(context, style.shadowStroke);
+                        context.strokeText(character, x, y);
+                    }
+
+                    if (style.color && (style.color !== 'none')) {
+                        style.syncShadow(context, style.shadowFill);
+                        context.fillText(character, x, y);
+                    }
+
+                    x += context.measureText(character).width + letterSpacing;
+                }
+
             }
         },
 
@@ -2517,7 +2553,16 @@
     const CHAR_WRAP = CONST.CHAR_WRAP;
     const splitRegExp = CONST.SPLITREGEXP;
 
-    var WrapText = function (text, context, wrapMode, wrapWidth, offset, wrapTextLinesPool) {
+    var WrapText = function (
+        text,
+        context,
+        wrapMode, wrapWidth, letterSpacing,
+        offset,
+        wrapTextLinesPool
+    ) {
+
+        // Add letterSpacing at right side of each character, including last character of a line
+
         if (wrapWidth <= 0) {
             wrapMode = NO_WRAP$1;
         }
@@ -2535,8 +2580,9 @@
             line = lines[i];
             newLineMode = (i === (linesLen - 1)) ? NO_NEWLINE$1 : RAW_NEWLINE;
 
+            // Push single line
             if (isNoWrap) {
-                var textWidth = context.measureText(line).width;
+                var textWidth = context.measureText(line).width + (letterSpacing * line.length);
                 retLines.push(wrapTextLinesPool.getLine(line, textWidth, newLineMode));
                 continue;
             }
@@ -2545,20 +2591,22 @@
 
             // Short string testing
             if (line.length <= 100) {
-                var textWidth = context.measureText(line).width;
+                var textWidth = context.measureText(line).width + (letterSpacing * line.length);
                 if (textWidth <= remainWidth) {
                     retLines.push(wrapTextLinesPool.getLine(line, textWidth, newLineMode));
                     continue;
                 }
             }
+            // Push single line
 
+            // Run word/character wrapping
             var tokenArray = ParseLine(line, wrapMode);
             var token, tokenWidth;
             var lineText = '', lineWidth = 0;
             var currLineWidth;
             for (var j = 0, tokenLen = tokenArray.length; j < tokenLen; j++) {
                 token = tokenArray[j];
-                tokenWidth = context.measureText(token).width;
+                tokenWidth = context.measureText(token).width + (letterSpacing * token.length);
 
                 // Text width of single token is larger than a line width
                 if ((tokenWidth > wrapWidth) && IsWord(token)) {
@@ -2573,7 +2621,14 @@
                     }
 
                     // Word break
-                    retLines.push(...WrapText(token, context, CHAR_WRAP, wrapWidth, 0, wrapTextLinesPool));
+                    retLines.push(...WrapText(
+                        token,
+                        context,
+                        CHAR_WRAP, wrapWidth, letterSpacing,
+                        0,
+                        wrapTextLinesPool
+                    ));
+
                     // Continue at last-wordBreak-line
                     var lastwordBreakLine = retLines.pop();
                     lineText = lastwordBreakLine.text;
@@ -2604,11 +2659,13 @@
 
                 }
 
+                // Is last token
                 if (j === (tokenLen - 1)) {
                     // Flush remain text
                     retLines.push(wrapTextLinesPool.getLine(lineText, lineWidth, newLineMode));
                 }
             } // for token in tokenArray
+            // Run word/character wrapping
 
         } // for each line in lines
 
@@ -2752,6 +2809,7 @@
 
             var customTextWrapCallback = textStyle.wrapCallback,
                 customTextWrapCallbackScope = textStyle.wrapCallbackScope;
+            var isBuiltInWrappingMode = (!customTextWrapCallback);
             var reuseLines = true;
 
             var plainText, curProp, curStyle;
@@ -2784,20 +2842,21 @@
                     curStyle.syncFont(canvas, context);
                     curStyle.syncStyle(canvas, context);
 
-                    if (!customTextWrapCallback) {
+                    if (isBuiltInWrappingMode) {
                         wrapLines = WrapText(
                             plainText,
                             context,
-                            wrapMode, wrapWidth,
+                            wrapMode, wrapWidth, curStyle.letterSpacing,
                             cursorX,
                             wrapTextLinesPool
                         );
 
-                    } else { // customTextWrapCallback
+                    } else {
+                        // customTextWrapCallback
                         wrapLines = customTextWrapCallback.call(customTextWrapCallbackScope,
                             plainText,
                             context,
-                            wrapWidth,
+                            wrapWidth, curStyle.letterSpacing,
                             cursorX
                         );
 
@@ -2824,6 +2883,7 @@
                     var segment;
                     for (var j = 0, jLen = wrapLines.length; j < jLen; j++) {
                         segment = wrapLines[j];
+
                         penManager.addTextPen(
                             segment.text,
                             cursorX, cursorY,
@@ -2835,8 +2895,10 @@
                         if (segment.newLineMode !== NO_NEWLINE) {
                             cursorX = 0;
                             cursorY += lineHeight;
+
                         } else {
                             cursorX += segment.width;
+
                         }
 
                     }
@@ -2852,12 +2914,16 @@
 
             }
 
-            // Add strokeThinkness to last pen of each line
+            // Process last pen of each line
             for (var i = 0, len = this.lines.length; i < len; i++) {
+                // Last pen of a line
                 var line = this.lines[i];
                 var lastPen = line[line.length - 1];
                 if (lastPen) {
+                    // Add strokeThinkness
                     lastPen.width += this.parser.getStrokeThinkness(this.defaultStyle, lastPen.prop);
+                    // Remove letterSpacing
+                    lastPen.width -= this.parser.getLetterSpacing(this.defaultStyle, lastPen.prop);
                 }
             }
 
@@ -4084,6 +4150,12 @@
                 result.bgcolor = null;
             }
 
+            if (prop.hasOwnProperty('spacing')) {
+                result.letterSpacing = prop.spacing;
+            } else {
+                result.letterSpacing = defaultStyle.letterSpacing;
+            }
+
             return result;
         }
 
@@ -4096,6 +4168,16 @@
                 strokeThinkness = defaultStyle.strokeThickness;
             }
             return strokeThinkness;
+        }
+
+        getLetterSpacing(defaultStyle, prop) {
+            var letterSpacing;
+            if (prop.hasOwnProperty('spacing')) {
+                letterSpacing = prop.spacing;
+            } else {
+                letterSpacing = defaultStyle.letterSpacing;
+            }
+            return letterSpacing;
         }
 
         propToTagText(text, prop, prevProp) {
@@ -4194,6 +4276,7 @@
                     break;
 
                 case 'y':
+                case 'spacing':
                     v = parseFloat(v);
                     break;
             }
