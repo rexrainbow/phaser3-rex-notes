@@ -111,6 +111,7 @@ Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
     - `[bgcolor=rgb(255,0,0)]text[/bgcolor]`
     - `[bgcolor=rgba(255,0,0,1)]text[/bgcolor]`
 - Superscript, subscript : `[y=-12]text[y]`
+- Letter spacing : `[spacing=10]text[/spacing]`
 - Image : `[img=imgKey]`
 - Hit area of words : `[area=key]text[/area]`
 - Url link : `[url=http...]text[/url]`
@@ -191,6 +192,7 @@ Default style
     },
     maxLines: 0,
     lineSpacing: 0,
+    letterSpacing: 0,
     fixedWidth: 0,
     fixedHeight: 0,
     testString: '|MÉqgy',
@@ -697,6 +699,19 @@ This value is *added* to the height of the font when calculating the overall lin
 - Set
    ```javascript
    txt.setLineSpacing(value);
+   ```
+
+### Letter spacing
+
+Spacing between characters.
+
+- Get
+   ```javascript
+   var letterSpacing = txt.style.letterSpacing;
+   ```
+- Set
+   ```javascript
+   txt.setLetterSpacing(value);
    ```
 
 ### Padding
