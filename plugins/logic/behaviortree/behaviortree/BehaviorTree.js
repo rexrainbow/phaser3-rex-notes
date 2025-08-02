@@ -24,6 +24,8 @@ class BehaviorTree {
 
         this.id = id;
 
+        this.name = '';
+
         this.category = TREE;
 
         this.title = title || '';
