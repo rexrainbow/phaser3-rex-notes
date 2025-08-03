@@ -1,10 +1,30 @@
 import EventEmitter from '../../../utils/eventemitter/EventEmitter';
+import { BehaviorTree, Blackboard } from '../../behaviortree';
 
 export default EventSheetManager;
 
 declare namespace EventSheetManager {
+    type CommandHandler = (
+        parameters: { [key: string]: any },
+        manager: EventSheetManager,
+        eventSheet: BehaviorTree
+    ) => EventEmitter | void;
+
+    type DefaultHandler = (
+        taskName: string,
+        parameters: { [key: string]: any },
+        manager: EventSheetManager,
+        eventSheet?: BehaviorTree
+    ) => EventEmitter | void;
+
+    interface ICommandExecutor {
+        [taskName: string]: CommandHandler | DefaultHandler | Function /*Any function object*/;
+        defaultHandler?: DefaultHandler;
+        destroy?(fromScene?: unknown): void;
+    }
+
     interface IConfig {
-        commandExecutor?: Object,
+        commandExecutor?: ICommandExecutor,
         parallel?: boolean,
     }
 
@@ -13,6 +33,18 @@ declare namespace EventSheetManager {
         groupName: string,
         once?: boolean
     }
+
+    interface ITreeGroupState {
+        isRunning: boolean,
+        pendingTrees: string[],
+        trees?: BehaviorTree.IDump[],
+    }
+
+    interface IState {
+        blackboard: ReturnType<Blackboard['dump']>;
+        treeGroups: { [groupName: string]: EventSheetManager.ITreeGroupState },
+    }
+
 }
 
 declare class EventSheetManager extends EventEmitter {
@@ -21,40 +53,60 @@ declare class EventSheetManager extends EventEmitter {
 
     destroy(): void;
 
-    readonly memory: { [key: string]: any };
+    readonly blackboard: Blackboard;
+    readonly memory: ReturnType<Blackboard['getGlobalMemory']>;
 
-    setCommandExecutor(commandExecutor?: Object): this;
-    commandExecutor: Object;
+    setCommandExecutor(commandExecutor?: EventSheetManager.ICommandExecutor): this;
+    commandExecutor: EventSheetManager.ICommandExecutor;
 
     addEventSheet(
         content: string,
         groupName?: string,
-        config?: any,
+        config?: Record<string, unknown>
     ): this;
+
+    hasTreeGroup(name: string): boolean;
+
+    getTreeGroup(name: string): unknown;
+
+    getTree(title: string, groupName?: string): BehaviorTree | undefined;
+
+    getTreeState(
+        eventsheet: string | BehaviorTree,
+        groupName?: string
+    ): number;
 
     removeAllEventSheets(groupName?: string): this;
 
     removeEventSheet(title: string, groupName?: string): this;
 
-    getEventSheetTitleList(groupName?: string): string[];
+    getEventSheetTitleList(out?: string[], groupName?: string): string[];
 
     getEventSheetActiveState(title: string, groupName?: string): boolean;
 
-    setEventSheetActiveState(title: string, groupName?: string, active?: boolean): this;
+    setEventSheetActiveState(
+        title: string,
+        groupName: string,
+        active?: boolean
+    ): this;
     setEventSheetActiveState(title: string, active?: boolean): this;
 
-    dumpEventSheetGroup(groupName?: string): Object[];
+    dumpEventSheetGroup(groupName?: string): BehaviorTree.IDump[];
 
-    loadEventSheetGroup(data: Object[], groupName?: string): this;
+    loadEventSheetGroup(
+        data: BehaviorTree.IDump[],
+        groupName?: string
+    ): this;
 
-    setData(key: string, value: any): this;
-    setData(data: { [key: string]: any }): this;
+    setData(key: string, value: unknown): this;
+    setData(data: Record<string, unknown>): this;
+    incData(key: string, inc: number): this;
 
-    hasData(key: string): this;
+    hasData(key: string): boolean;
 
     toggleData(key: string): this;
 
-    getData(key: string): any;
+    getData(key: string): unknown;
 
     removeData(key: string): this;
 
@@ -68,11 +120,11 @@ declare class EventSheetManager extends EventEmitter {
         }
     ): this;
 
-    dumpState(includeTree?: boolean, groupName?: string): Object;
+    dumpState(includeTree?: boolean): EventSheetManager.IState;
 
-    loadState(state: Object, groupName?: string): this;
+    loadState(state?: EventSheetManager.IState): this;
 
-    evalExpression(expression: any): any;
+    evalExpression(expression: unknown): unknown;
 
     renderString(template: string): string;
 
@@ -92,7 +144,13 @@ declare class EventSheetManager extends EventEmitter {
     start(title: string, ignoreCondition: boolean): this;
 
     // startTree by title in groupName eventSheetGroup
-    start(title: string, groupName: string, ignoreCondition: boolean): this;
+    start(
+        title: string,
+        groupName: string,
+        ignoreCondition: boolean
+    ): this;
+
+    continue(groupName?: string): this;
 
     stopGroup(groupName?: string): this;
     stop(groupName?: string): this;
@@ -105,10 +163,13 @@ declare class EventSheetManager extends EventEmitter {
     updateRoundCounter(value?: number): this;
     getRoundCounter(): number;
     setRoundCounter(value: number): this;
-    roundCounter: number;
+    $roundCounter: number;
 
     // Invoked by Handler of TaskAction node
-    pauseEventSheet(): Function | null;
-    pauseEventSheetUnitlEvent(eventEmitter: EventEmitter, eventName?: string): this;
+    pauseEventSheet(): (() => void) | null;
+    pauseEventSheetUnitlEvent(
+        eventEmitter: EventEmitter,
+        eventName?: string
+    ): this;
 
 }
