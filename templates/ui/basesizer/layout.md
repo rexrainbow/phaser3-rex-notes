@@ -1,38 +1,50 @@
 # Layout
 
-Resize and place children.
+The `layout()` method recalculates the size of a sizer and arranges all of its children.
+It simply delegates to `runLayout()` with no arguments so the sizer acts as the top-most
+parent.
 
-## Steps
+## Process overview
 
-1. Skip layout if this game object is
-    - Hidden
-    - Not dirty
-1. From isTopmostParent, Prelayout : 
-    - Clear `_childrenWidth`, `_childrenHeight` properties of all children.
-    - Custom logic of Prelayout
-1. Resolve width and height
-    1. From isTopmostParent, test if it needs `runWidthWrap` or `runHeightWrap`
-    1. If `runWidthWrap`, calculate width of this game object (`resolveWidth()`)
-        - Max value of total children width, or `minWidth` of this game object
-        - Custom logic :
-            - Sizer : Get proportionLength, if orientation is `x`
-            - GridSizer : Get horizontal proportionLength
-            - FixWidthSizer : Given width to layout children line by line. To get height of this FixWidthSizer, if orientation is `x`
-    1. If `runHeightWrap`, calculate width of this game object (`resolveHeight()`)
-        - Max value of total children height, or `minHeight` of this game object
-        - Custom logic :
-            - Sizer : Get proportionLength, if orientation is `y`
-            - GridSizer : Get vertical proportionLength
-            - FixWidthSizer : Given height to layout children line by line. To get width of this FixWidthSizer, if orientation is `y`
-    1. If still can't get width, calculate width of this game object (`resolveWidth()`) again
-        - `runWidthWrap` -> `runHeightWrap`, or
-        - `runHeightWrap` -> `runWidthWrap`
-        - If still can't get width or height, **resolving size failled**
-1. Resize this game object
-1. Layout children, start from step 3
-    - Custom logic of `layoutChildren`
-1.  Layout background
-1.  Custom logic of PostLayout
-    - Position and size of this element and children elements are all resolved
-1.  From isTopmostParent, anchor position
+1. **Early exit** – `runLayout()` returns immediately when `ignoreLayout` is set
+   (hidden or not marked as dirty).
+2. **Pre-layout** – if this call is from the top parent, `preLayout()` clears cached
+   child sizes and propagates the call to child sizers.
+3. **Determine wrapping** – the top parent (or a parent that sets `runChildrenWrapFlag`)
+   checks `hasWidthWrap()` and `hasHeightWrap()` to know whether children require
+   width/height wrapping.
+4. **Resolve size**
+   - `resolveWidth()` and `resolveHeight()` compare the sizer's measured
+     `childrenWidth`/`childrenHeight` with its minimum size and any explicitly supplied
+     width/height to produce final dimensions (F:templates/ui/basesizer/ResolveWidth.js)(F:templates/ui/basesizer/ResolveHeight.js)
+   - If the sizer or its descendants may wrap, `resolveChildrenWidth/Height()` first
+     gathers provisional child sizes and `runWidthWrap/HeightWrap()` lets them run a
+     wrap pass. The resolvers then retry with the updated measurements, falling back to
+     the alternate wrap routine once more before logging an error if a dimension cannot
+     be determined.
+5. **Resize self** – apply the computed width and height via `ResizeGameObject`.
+6. **Layout children** – `layoutChildren()` (overridden by subclasses) positions normal
+   children, then `layoutBackgrounds()` sizes and centers background children while
+   respecting padding.
+7. **Post-layout** – when `sizerEventsEnable` is true, emit a `postlayout` event and run
+    the optional `postLayout()` callback.
+8. **Finalize** – if this sizer is the top parent and has an anchor, update its position.
 
+### Resolving size in different objects
+
+- **Sizer** – Measures children according to orientation. In horizontal mode it sums
+  child widths (plus spacing) and uses the maximum height; vertical mode does the
+  opposite, accounting for padding, proportions and `fitRatio` settings (F:templates/ui/sizer/GetChildrenWidth.js)(F:templates/ui/sizer/GetChildrenHeight.js)
+- **GridSizer** – Scans each column and row to find the largest child, summing those
+  maxima with configured gaps to obtain the minimum grid size (F:templates/ui/gridsizer/GetChildrenWidth.js)(F:templates/ui/gridsizer/GetChildrenHeight.js)
+- **FixWidthSizer** – Uses the fixed dimension and a wrap routine to build lines of
+  children; the resulting `wrapResult` supplies the width and height for resolution
+  calls (F:templates/ui/fixwidthsizer/RunWidthWrap.js)(F:templates/ui/fixwidthsizer/GetChildrenWidth.js)(F:templates/ui/fixwidthsizer/GetChildrenHeight.js)
+- **OverlapSizer** – Resolves to the maximum width and height among its children because
+  they share the same origin and overlap (F:templates/ui/overlapsizer/GetChildrenWidth.js)(F:templates/ui/overlapsizer/GetChildrenHeight.js)
+- **General game object** – Non-sizer children don't implement their own resolver; the
+  parent simply reads their display size or explicit `minWidth`/`minHeight` when
+  calculating `childrenWidth`/`childrenHeight` (F:templates/ui/basesizer/GetChildWidth.js)(F:templates/ui/basesizer/GetChildHeight.js)
+
+After `layout()` completes, the sizer and all descendants have their sizes and positions
+resolved.
