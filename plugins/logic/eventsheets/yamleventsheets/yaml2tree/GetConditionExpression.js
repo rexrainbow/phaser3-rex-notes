@@ -1,7 +1,7 @@
 var GetConditionExpression = function (conditions) {
     if (typeof (conditions) === 'string') {
         return conditions;
-    } else if (!Array.isArray(conds) || !conds.length) {
+    } else if (!Array.isArray(conditions) || !conditions.length) {
         return 'true'
     };
 

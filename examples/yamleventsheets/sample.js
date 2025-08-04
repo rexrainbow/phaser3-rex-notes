@@ -1,5 +1,5 @@
-import MarkedEventSheets from '../../plugins/markedeventsheets.js';
-import content from 'raw-loader!/assets/markedeventsheet/sample/sample.md';
+import YAMLEventSheets from '../../plugins/logic/eventsheets/yamleventsheets/YAMLEventSheets.js';
+import content from 'raw-loader!/assets/yamleventsheets/sample/sample.yml';
 
 class CommandExecutor {
     print({ text = '' } = {}, eventSheetManager, eventSheet) {
@@ -22,19 +22,19 @@ class CommandExecutor {
 }
 var commandExecutor = new CommandExecutor();
 
-var eventSheetManager = new MarkedEventSheets({
+var eventSheetManager = new YAMLEventSheets({
     commandExecutor: commandExecutor
 });
 eventSheetManager.addEventSheet(content);
 console.log(eventSheetManager.dumpEventSheetGroup())
 
-eventSheetManager.
-    on('label.enter', function (title) {
-        console.log(`Enter label '${title}'`)
-    })
-    .on('label.exit', function (title) {
-        console.log(`Exit label '${title}'`)
-    })
+// eventSheetManager.
+//     on('label.enter', function (title) {
+//         console.log(`Enter label '${title}'`)
+//     })
+//     .on('label.exit', function (title) {
+//         console.log(`Exit label '${title}'`)
+//     })
 
 eventSheetManager
     .setData('name', 'rex')

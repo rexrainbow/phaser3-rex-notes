@@ -11,19 +11,23 @@ var Marked2Tree = function (
     yamlString,
     {
         groupName,
-        lineBreak = '\\',
-        commentLineStart = '\/\/',
         parallel = false,
         active = true,
         once = false,
     } = {}
 ) {
 
-    var jsonData = ParseYaml(yamlString);
+    var jsonData;
+    if (typeof (yamlString) === 'string') {
+        jsonData = ParseYaml(yamlString);
+    } else {
+        jsonData = yamlString;
+    }
+
     var {
         title,
         condition = [],
-        script = [],
+        actions = [],
         catch: catchScript = [],
     } = jsonData;
 
@@ -42,15 +46,11 @@ var Marked2Tree = function (
     );
 
     // Build node tree
-    var taskSequence = CreateActionSequence(script);
+    var taskSequence = CreateActionSequence(actions);
     eventsheet.root.addChild(taskSequence);
 
     var forceFailure = new ForceFailure();
-    if (catchScript && catchScript.length > 0) {
-        forceFailure.addChild(CreateActionSequence(catchScript));
-    } else {
-        forceFailure.addChild(new Succeeder());
-    }
+    forceFailure.addChild(CreateActionSequence(catchScript));
     eventsheet.root.addChild(forceFailure);
 
     return eventsheet;

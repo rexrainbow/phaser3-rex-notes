@@ -39,8 +39,6 @@ class YAMLEventSheets extends EventSheetManager {
         }
 
         var {
-            lineBreak = '\\',
-            commentLineStart = '\/\/',
             parallel = this.parallel,
             groupName = groupName
         } = config;
@@ -50,8 +48,6 @@ class YAMLEventSheets extends EventSheetManager {
             yamlString,
             {
                 groupName,
-                lineBreak,
-                commentLineStart,
                 parallel
             }
         );

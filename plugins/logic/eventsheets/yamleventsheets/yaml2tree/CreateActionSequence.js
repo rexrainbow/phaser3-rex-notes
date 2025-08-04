@@ -8,13 +8,15 @@ import DeactivateAction from '../../eventsheetmanager/nodes/DeactivateAction.js'
 import GetConditionExpression from './GetConditionExpression.js';
 
 
-var CreateActionSequence = function (actions = []) {
-    var parentNode = new Sequence();
+var CreateActionSequence = function (actions) {
+    if (!actions || !actions.length) {
+        return new Succeeder();
+    }
 
+    var nodes = [];
     for (var i = 0, cnt = actions.length; i < cnt; i++) {
-        var nodeData = actions[i];
-
         var node;
+        var nodeData = actions[i];
         switch (nodeData.type) {
             case 'command':
             case undefined:
@@ -23,7 +25,7 @@ var CreateActionSequence = function (actions = []) {
                 break;
 
             case 'if':
-                var node = new Selector({
+                node = new Selector({
                     title: '[if]'
                 });
 
@@ -45,7 +47,7 @@ var CreateActionSequence = function (actions = []) {
                             expression: 'false'
                         });
                     }
-                    ifDecorator.addChild(CreateActionSequence(node.actions));
+                    ifDecorator.addChild(CreateActionSequence(branch.actions));
                     node.addChild(ifDecorator);
                 }
 
@@ -54,7 +56,7 @@ var CreateActionSequence = function (actions = []) {
                 break;
 
             case 'while':
-                var node = new RepeatUntilFailure({
+                node = new RepeatUntilFailure({
                     title: '[while]',
                     returnSuccess: true,
                 });
@@ -74,17 +76,17 @@ var CreateActionSequence = function (actions = []) {
                         expression: 'false'
                     });
                 }
-                ifDecorator.addChild(CreateActionSequence(node.actions));
+                ifDecorator.addChild(CreateActionSequence(nodeData.actions));
 
                 node.addChild(ifDecorator);
                 break;
 
             case 'repeat':
-                var node = new Repeat({
+                node = new Repeat({
                     title: '[repeat]',
                     maxLoop: nodeData.times,
                 })
-                node.addChild(CreateActionSequence(node.actions));
+                node.addChild(CreateActionSequence(nodeData.actions));
                 break;
 
             case 'label':
@@ -113,14 +115,20 @@ var CreateActionSequence = function (actions = []) {
                 });
                 break;
 
-
             default:
                 console.warn(`Unsupported nodeData.type '${nodeData.type}' - treated as success.`);
                 node = new Succeeder();
                 break;
         }
 
-        parentNode.addChild(node);
+        nodes.push(node);
+    }
+
+    var parentNode;
+    if (nodes.length === 1) {
+        parentNode = nodes[0];
+    } else {
+        parentNode = new Sequence({ children: nodes });
     }
 
     return parentNode;
