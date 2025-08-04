@@ -45,6 +45,7 @@ declare namespace EventSheetManager {
         treeGroups: { [groupName: string]: EventSheetManager.ITreeGroupState },
     }
 
+    type ExpressionCallbackType = (...args: any[]) => any;
 }
 
 declare class EventSheetManager extends EventEmitter {
@@ -112,11 +113,11 @@ declare class EventSheetManager extends EventEmitter {
 
     addExpression(
         key: string,
-        callback: (...args: number[]) => number
+        callback: EventSheetManager.ExpressionCallbackType
     ): this;
     addExpressions(
         expressions: {
-            [key: string]: (...args: number[]) => number
+            [key: string]: EventSheetManager.ExpressionCallbackType
         }
     ): this;
 

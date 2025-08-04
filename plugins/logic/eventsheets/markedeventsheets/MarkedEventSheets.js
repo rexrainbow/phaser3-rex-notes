@@ -23,6 +23,7 @@ class MarkedEventSheets extends EventSheetManager {
 
         return this;
     }
+
     addEventSheet(markedString, groupName, config) {
         if (typeof (groupName) !== 'string') {
             config = groupName;
