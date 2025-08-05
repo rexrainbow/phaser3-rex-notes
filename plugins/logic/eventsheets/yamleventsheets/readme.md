@@ -195,6 +195,9 @@ Each branch may include:
 
 ---
 
-## 4. `catch` Actions
+## 4. `fallback` Actions
 
-`catch` is an array of actions, same as `script`. It executes when the main process fails, wrapped in a `ForceFailure` node, so that execution still returns failure after `catch`. This aids error handling and logging.
+`fallback` is an **array of actions** at the same level as `script`.  
+When the top-level `condition` evaluates to **false**, causing the `script` block to **not execute at all**, the system will instead execute the actions listed in `fallback` in order.  
+After execution, the overall process will still end in a **failure** state (wrapped in a `ForceFailure` node), allowing higher-level handlers to intercept or log the event.  
+In other words, `fallback` does not catch exceptions during `script` execution, but rather provides an alternative flow for cases where the conditions are not met.

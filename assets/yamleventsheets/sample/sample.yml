@@ -109,6 +109,6 @@ script:
       - name: print
         parameters: { text: "Here" }
 
-catch:
+fallback:
   - name: print
     parameters: { text: "Try again" }

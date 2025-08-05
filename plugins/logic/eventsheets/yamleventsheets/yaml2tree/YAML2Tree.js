@@ -28,7 +28,7 @@ var Marked2Tree = function (
         title,
         condition = [],
         script,
-        catch: catchScript = [],
+        fallback,
     } = jsonData;
 
     var treeConfig = Object.assign(
@@ -50,7 +50,7 @@ var Marked2Tree = function (
     eventsheet.root.addChild(taskSequence);
 
     var forceFailure = new ForceFailure();
-    forceFailure.addChild(CreateActionSequence(catchScript));
+    forceFailure.addChild(CreateActionSequence(fallback));
     eventsheet.root.addChild(forceFailure);
 
     return eventsheet;
