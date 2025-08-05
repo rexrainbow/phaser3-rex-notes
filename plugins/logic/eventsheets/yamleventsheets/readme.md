@@ -12,11 +12,11 @@ condition:                          # Execution condition for the event sheet
   - ...
 script:                             # Main process script
   - ...
-catch:                              # Recovery script executed when main process fails (optional)
+fallback:                              # Recovery script executed when main process fails (optional)
   - ...
 ```
 
-`script` and `catch` are both arrays of actions, converted into behavior tree nodes and added to the event sheet; `catch` executes only if `script` fails.
+`script` and `fallback` are both arrays of actions, converted into behavior tree nodes and added to the event sheet; `fallback` executes only if `script` fails.
 
 ---
 
