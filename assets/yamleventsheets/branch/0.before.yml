@@ -1,0 +1,6 @@
+title: Before
+script:
+  - name: set
+    parameters: { block:1 }
+  - name: print
+    parameters: { text: "Before branch" }
