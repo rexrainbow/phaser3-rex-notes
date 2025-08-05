@@ -26,38 +26,50 @@ script:
   - name: print
     parameters: { text: "Now I have {{coin}} coin" }
 
-  - name: print
-    parameters: { text: "Before if" }
+  - type: label
+    title: Before if
+    actions:
+      - name: print
+        parameters: { text: "Before if" }
 
   - type: if
     branches:
       - condition: coin < 5
+        title: IF-A
         actions:
           - name: print
             parameters: { text: "If (coin < 5)" }
 
-      - actions: # ELSE
+      - title: ELSE-A
+        actions: # ELSE
           - name: print
             parameters: { text: "Else (coin < 5)" }
 
   - type: if
     branches:
       - condition: coin > 10
+        title: IF-B
         actions:
           - name: print
             parameters: { text: "If (coin > 10)" }
 
-  - name: print
-    parameters: { text: "After If" }
+  - type: label
+    title: After If
+    actions:
+      - name: print
+        parameters: { text: "After If" }
 
-  - name: print
-    parameters: { text: "Before while" }
-
-  - name: set
-    parameters: { loopCount: 3 }
+  - type: label
+    title: Before while
+    actions:
+      - name: print
+        parameters: { text: "Before while" }
+      - name: set
+        parameters: { loopCount: 3 }
 
   - type: while
     condition: loopCount > 0
+    title: Do-While
     actions:
       - name: print
         parameters: { text: "do-while {{loopCount}}" }
@@ -65,18 +77,37 @@ script:
       - name: set
         parameters: { loopCount: "#(loopCount-1)" }
 
-  - name: print
-    parameters: { text: "After while" }
+  - type: label
+    title: After while
+    actions:
+      - name: print
+        parameters: { text: "After while" }
 
-  # TODO: Break label test
+  - type: label
+    title: Break label test
+    actions:
+      - name: print
+        parameters: { text: "Before break-label" }
+      - type: break
+      - name: print
+        parameters: { text: "After break-label" }
 
-  - name: print
-    parameters: { text: "Before exit" }
+  - type: label
+    title: Exit test
+    actions:
+      - name: print
+        parameters: { text: "Before exit" }
+      - type: exit
+      - name: print
+        parameters: { text: "After exit" }
 
-  - type: exit
-
-  - name: print
-    parameters: { text: "After exit" }
+  - type: label
+    title: Remainder
+    actions:
+      - name:
+        parameters: { text: "Here" }
+      - name:
+        parameters: { text: "Here" }
 
 catch:
   - name: print

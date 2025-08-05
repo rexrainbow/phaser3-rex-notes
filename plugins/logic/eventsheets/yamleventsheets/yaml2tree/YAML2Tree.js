@@ -1,4 +1,4 @@
-import { ForceFailure, Succeeder } from '../../../behaviortree/index.js';
+import { ForceFailure } from '../../../behaviortree/index.js';
 import EventSheet from '../../eventsheetmanager/eventsheet/EventSheet.js';
 import ParseYaml from '../../../../utils/yaml/ParseYaml.js';
 import GetTreeConfig from './GetTreeConfig.js';

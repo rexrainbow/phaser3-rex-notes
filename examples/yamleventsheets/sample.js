@@ -28,13 +28,13 @@ var eventSheetManager = new YAMLEventSheets({
 eventSheetManager.addEventSheet(content);
 console.log(eventSheetManager.dumpEventSheetGroup())
 
-// eventSheetManager.
-//     on('label.enter', function (title) {
-//         console.log(`Enter label '${title}'`)
-//     })
-//     .on('label.exit', function (title) {
-//         console.log(`Exit label '${title}'`)
-//     })
+eventSheetManager.
+    on('label.enter', function (title) {
+        console.log(`Enter label '${title}'`)
+    })
+    .on('label.exit', function (title) {
+        console.log(`Exit label '${title}'`)
+    })
 
 eventSheetManager
     .setData('name', 'rex')

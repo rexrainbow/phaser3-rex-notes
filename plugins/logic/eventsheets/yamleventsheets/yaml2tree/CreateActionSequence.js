@@ -1,23 +1,28 @@
-import TaskAction from '../../eventsheetmanager/nodes/taskaction/TaskAction.js';
 import {
     Sequence, Selector, If, RepeatUntilFailure, Repeat,
     Succeeder, Abort, Failer,
 } from '../../../behaviortree/index.js';
+import TaskAction from '../../eventsheetmanager/nodes/taskaction/TaskAction.js';
+import TaskSequence from '../../eventsheetmanager/nodes/TaskSequence.js';
 import ActivateAction from '../../eventsheetmanager/nodes/ActivateAction.js';
 import DeactivateAction from '../../eventsheetmanager/nodes/DeactivateAction.js';
 import GetConditionExpression from './GetConditionExpression.js';
 
 
-var CreateActionSequence = function (actions) {
+var CreateActionSequence = function (actions, title) {
     if (!actions || !actions.length) {
         return new Succeeder();
     }
 
-    var isSingleNode = (actions.length === 1);
+    var isSingleNode = (actions.length === 1) && (!title);
 
     var parentNode;
     if (!isSingleNode) {
-        parentNode = new Sequence();
+        if (title) {
+            parentNode = new TaskSequence({ title: title })
+        } else {
+            parentNode = new Sequence();
+        }
     }
 
     var node;
@@ -44,7 +49,7 @@ var CreateActionSequence = function (actions) {
                     if (expression === 'true') {
                         hasTrueExpression = true;
 
-                        node.addChild(CreateActionSequence(branch.actions));
+                        node.addChild(CreateActionSequence(branch.actions, branch.title));
 
                     } else {
                         var ifDecorator;
@@ -60,7 +65,7 @@ var CreateActionSequence = function (actions) {
                                 expression: 'false'
                             });
                         }
-                        ifDecorator.addChild(CreateActionSequence(branch.actions));
+                        ifDecorator.addChild(CreateActionSequence(branch.actions, branch.title));
                         node.addChild(ifDecorator);
 
                     }
@@ -82,7 +87,6 @@ var CreateActionSequence = function (actions) {
                 var expression = GetConditionExpression(nodeData.condition);
                 try {
                     ifDecorator = new If({
-                        title: '[while-IF]',
                         expression: expression
                     });
                 } catch (e) {
@@ -90,11 +94,10 @@ var CreateActionSequence = function (actions) {
                     console.error(e);
 
                     ifDecorator = new If({
-                        title: '[while-IF]',
                         expression: 'false'
                     });
                 }
-                ifDecorator.addChild(CreateActionSequence(nodeData.actions));
+                ifDecorator.addChild(CreateActionSequence(nodeData.actions, nodeData.title));
 
                 node.addChild(ifDecorator);
                 break;
@@ -104,11 +107,32 @@ var CreateActionSequence = function (actions) {
                     title: '[repeat]',
                     maxLoop: nodeData.times,
                 })
-                node.addChild(CreateActionSequence(nodeData.actions));
+                node.addChild(CreateActionSequence(nodeData.actions, nodeData.title));
                 break;
 
             case 'label':
-                // TODO
+                var expression = GetConditionExpression(nodeData.condition);
+                if (expression === 'true') {
+                    node = CreateActionSequence(nodeData.actions, nodeData.title);
+
+                } else {
+                    var ifDecorator;
+                    try {
+                        ifDecorator = new If({
+                            expression: expression
+                        });
+                    } catch (e) {
+                        console.error(`[EventSheet] Parse expression '${expression}' failed, replace expression by 'false'`);
+                        console.error(e);
+
+                        ifDecorator = new If({
+                            expression: 'false'
+                        });
+                    }
+                    ifDecorator.addChild(CreateActionSequence(nodeData.actions, nodeData.title));
+                    node = ifDecorator;
+
+                }
                 break;
 
             case 'exit':
