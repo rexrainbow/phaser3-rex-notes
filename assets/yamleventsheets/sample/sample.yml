@@ -104,9 +104,9 @@ script:
   - type: label
     title: Remainder
     actions:
-      - name:
+      - name: print
         parameters: { text: "Here" }
-      - name:
+      - name: print
         parameters: { text: "Here" }
 
 catch:
