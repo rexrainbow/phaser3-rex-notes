@@ -1,5 +1,5 @@
 import MarkedEventSheets from '../../plugins/markedeventsheets.js';
-import content from 'raw-loader!/assets/markedeventsheet/if-else/if-else.md';
+import content from 'raw-loader!/assets/markedeventsheets/if-else/if-else.md';
 
 class CommandExecutor {
     print({ text = '' } = {}, eventSheetManager, eventSheet) {

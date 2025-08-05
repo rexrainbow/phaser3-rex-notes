@@ -1,5 +1,5 @@
 import MarkedEventSheets from '../../plugins/markedeventsheets.js';
-import content from 'raw-loader!/assets/markedeventsheet/ignore-condition/ignore-condition.md';
+import content from 'raw-loader!/assets/markedeventsheets/ignore-condition/ignore-condition.md';
 
 class CommandExecutor {
     print({ text = '' } = {}, eventSheetManager, eventSheet) {

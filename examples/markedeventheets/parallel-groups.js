@@ -1,6 +1,6 @@
 import MarkedEventSheets from '../../plugins/markedeventsheets.js';
-import eventSheet0 from 'raw-loader!/assets/markedeventsheet/parallel-groups/parallel0.md';
-import eventSheet1 from 'raw-loader!/assets/markedeventsheet/parallel-groups/parallel1.md';
+import eventSheet0 from 'raw-loader!/assets/markedeventsheets/parallel-groups/parallel0.md';
+import eventSheet1 from 'raw-loader!/assets/markedeventsheets/parallel-groups/parallel1.md';
 
 class CommandExecutor {
     constructor({

@@ -1,7 +1,7 @@
 import MarkedEventSheets from '../../plugins/markedeventsheets.js';
-import eventSheet0 from 'raw-loader!/assets/markedeventsheet/save-load/eventsheet0.md';
-import eventSheet1 from 'raw-loader!/assets/markedeventsheet/save-load/eventsheet1.md';
-import eventSheet2 from 'raw-loader!/assets/markedeventsheet/save-load/eventsheet2.md';
+import eventSheet0 from 'raw-loader!/assets/markedeventsheets/save-load/eventsheet0.md';
+import eventSheet1 from 'raw-loader!/assets/markedeventsheets/save-load/eventsheet1.md';
+import eventSheet2 from 'raw-loader!/assets/markedeventsheets/save-load/eventsheet2.md';
 
 class CommandExecutor {
     print({ text = '' } = {}, eventSheetManager, eventSheet) {

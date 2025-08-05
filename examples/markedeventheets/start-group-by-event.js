@@ -1,5 +1,5 @@
 import MarkedEventSheets from '../../plugins/markedeventsheets.js';
-import eventSheet0 from 'raw-loader!/assets/markedeventsheet/start-group-by-event/eventA.md';
+import eventSheet0 from 'raw-loader!/assets/markedeventsheets/start-group-by-event/eventA.md';
 
 class CommandExecutor {
     constructor({

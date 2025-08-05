@@ -11,7 +11,7 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.text('eventSheet0', 'assets/markedeventsheet/memory-monitor/memory-monitor.md');
+        this.load.text('eventSheet0', 'assets/markedeventsheets/memory-monitor/memory-monitor.md');
         this.load.image('bg', 'assets/images/ninepatch/blue_icon.png');
     }
 

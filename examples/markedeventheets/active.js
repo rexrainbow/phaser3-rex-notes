@@ -1,6 +1,6 @@
 import MarkedEventSheets from '../../plugins/markedeventsheets.js';
-import TaskventSheet from 'raw-loader!/assets/markedeventsheet/active/task.md';
-import DeactivateEventSheet from 'raw-loader!/assets/markedeventsheet/active/deactivate.md';
+import TaskventSheet from 'raw-loader!/assets/markedeventsheets/active/task.md';
+import DeactivateEventSheet from 'raw-loader!/assets/markedeventsheets/active/deactivate.md';
 
 
 class CommandExecutor {

@@ -13,7 +13,7 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.text('eventSheet0', 'assets/markedeventsheet/mds/fast-typing.md');
+        this.load.text('eventSheet0', 'assets/markedeventsheets/mds/fast-typing.md');
     }
 
     create() {

@@ -1,5 +1,5 @@
 import MarkedEventSheets from '../../plugins/markedeventsheets.js';
-import content from 'raw-loader!/assets/markedeventsheet/json-data/json-data.md';
+import content from 'raw-loader!/assets/markedeventsheets/json-data/json-data.md';
 
 class CommandExecutor {
     print({ text = '' } = {}, eventSheetManager, eventSheet) {

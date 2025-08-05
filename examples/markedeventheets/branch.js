@@ -1,9 +1,9 @@
 import MarkedEventSheets from '../../plugins/markedeventsheets.js';
-import beforeEventSheet from 'raw-loader!/assets/markedeventsheet/branch/0.before.md';
-import ifAEventSheet from 'raw-loader!/assets/markedeventsheet/branch/1.if-a.md';
-import ifBEventSheet from 'raw-loader!/assets/markedeventsheet/branch/2.if-b.md';
-import elseEventSheet from 'raw-loader!/assets/markedeventsheet/branch/3.else.md';
-import afterEventSheet from 'raw-loader!/assets/markedeventsheet/branch/4.after.md';
+import beforeEventSheet from 'raw-loader!/assets/markedeventsheets/branch/0.before.md';
+import ifAEventSheet from 'raw-loader!/assets/markedeventsheets/branch/1.if-a.md';
+import ifBEventSheet from 'raw-loader!/assets/markedeventsheets/branch/2.if-b.md';
+import elseEventSheet from 'raw-loader!/assets/markedeventsheets/branch/3.else.md';
+import afterEventSheet from 'raw-loader!/assets/markedeventsheets/branch/4.after.md';
 
 class CommandExecutor {
     constructor({
