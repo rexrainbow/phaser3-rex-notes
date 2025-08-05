@@ -1,0 +1,27 @@
+title: Title
+script:
+  - title: Initial
+    type: label
+    actions:
+      - name: log.memory
+      - type: If
+        branches:
+          - condition: coin > 10
+            actions:
+              - name: log
+                parameters: { text: "(coin > 10)" }
+              - name: setData
+                parameters: { coin: "#(coin-5)" }
+
+          - condition: (coin > 5) && (coin <=10)
+            actions:
+              - name: log
+                parameters: { text: "(coin > 5 and coin <=10)" }
+              - name: setData
+                parameters: { coin: "#(coin+3)" }
+
+          - actions:
+              - name: log
+                parameters: { text: "(coin < 5)" }
+              - name: setData
+                parameters: { coin: "#(coin+7)" }
