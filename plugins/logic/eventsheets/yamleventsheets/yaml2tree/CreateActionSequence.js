@@ -28,6 +28,10 @@ var CreateActionSequence = function (actions, title) {
     var node;
     for (var nodeIndex = 0, nodeCount = actions.length; nodeIndex < nodeCount; nodeIndex++) {
         var nodeData = actions[nodeIndex];
+        if (typeof (nodeData) === 'string') {
+            nodeData = { type: nodeData };
+        }
+
         switch (nodeData.type) {
             case 'command':
             case undefined:
@@ -144,16 +148,18 @@ var CreateActionSequence = function (actions, title) {
                 break;
 
             case 'activate':
+                var activateTreeTitle = nodeData.target || '';
                 node = new ActivateAction({
                     title: '[activate]',
-                    activateTreeTitle: nodeData.target.trim(),
+                    activateTreeTitle: activateTreeTitle.trim(),
                 });
                 break;
 
             case 'deactivate':
+                var deactivateTreeTitle = nodeData.target || '';
                 node = new DeactivateAction({
                     title: '[deactivate]',
-                    deactivateTreeTitle: nodeData.target.trim(),
+                    deactivateTreeTitle: deactivateTreeTitle.trim(),
                 });
                 break;
 
