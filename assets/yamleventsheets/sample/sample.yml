@@ -3,7 +3,7 @@ condition:
   - coin > 5
   - hp > 3
 
-actions:
+script:
   # single comment line
   - name: print
     # comment line inside command lines

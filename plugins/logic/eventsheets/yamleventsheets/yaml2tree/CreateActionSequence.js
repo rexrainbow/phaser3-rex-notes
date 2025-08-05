@@ -13,10 +13,16 @@ var CreateActionSequence = function (actions) {
         return new Succeeder();
     }
 
-    var nodes = [];
-    for (var i = 0, cnt = actions.length; i < cnt; i++) {
-        var node;
-        var nodeData = actions[i];
+    var isSingleNode = (actions.length === 1);
+
+    var parentNode;
+    if (!isSingleNode) {
+        parentNode = new Sequence();
+    }
+
+    var node;
+    for (var nodeIndex = 0, nodeCount = actions.length; nodeIndex < nodeCount; nodeIndex++) {
+        var nodeData = actions[nodeIndex];
         switch (nodeData.type) {
             case 'command':
             case undefined:
@@ -30,29 +36,41 @@ var CreateActionSequence = function (actions) {
                 });
 
                 var branches = nodeData.branches;
-                for (var i = 0, cnt = branches.length; i < cnt; i++) {
-                    var branch = branches[i];
+                var hasTrueExpression = false;
+                for (var branchIndex = 0, branchCount = branches.length; branchIndex < branchCount; branchIndex++) {
+                    var branch = branches[branchIndex];
 
-                    var ifDecorator;
                     var expression = GetConditionExpression(branch.condition);
-                    try {
-                        ifDecorator = new If({
-                            expression: expression
-                        });
-                    } catch (e) {
-                        console.error(`[EventSheet] Parse expression '${expression}' failed, replace expression by 'false'`);
-                        console.error(e);
+                    if (expression === 'true') {
+                        hasTrueExpression = true;
 
-                        ifDecorator = new If({
-                            expression: 'false'
-                        });
+                        node.addChild(CreateActionSequence(branch.actions));
+
+                    } else {
+                        var ifDecorator;
+                        try {
+                            ifDecorator = new If({
+                                expression: expression
+                            });
+                        } catch (e) {
+                            console.error(`[EventSheet] Parse expression '${expression}' failed, replace expression by 'false'`);
+                            console.error(e);
+
+                            ifDecorator = new If({
+                                expression: 'false'
+                            });
+                        }
+                        ifDecorator.addChild(CreateActionSequence(branch.actions));
+                        node.addChild(ifDecorator);
+
                     }
-                    ifDecorator.addChild(CreateActionSequence(branch.actions));
-                    node.addChild(ifDecorator);
+
                 }
 
-                var succeeder = new Succeeder();
-                node.addChild(succeeder);
+                if (!hasTrueExpression) {
+                    node.addChild(new Succeeder());
+                }
+
                 break;
 
             case 'while':
@@ -121,14 +139,13 @@ var CreateActionSequence = function (actions) {
                 break;
         }
 
-        nodes.push(node);
+        if (!isSingleNode) {
+            parentNode.addChild(node);
+        }
     }
 
-    var parentNode;
-    if (nodes.length === 1) {
-        parentNode = nodes[0];
-    } else {
-        parentNode = new Sequence({ children: nodes });
+    if (isSingleNode) {
+        parentNode = node;
     }
 
     return parentNode;

@@ -27,7 +27,7 @@ var Marked2Tree = function (
     var {
         title,
         condition = [],
-        actions = [],
+        script,
         catch: catchScript = [],
     } = jsonData;
 
@@ -46,7 +46,7 @@ var Marked2Tree = function (
     );
 
     // Build node tree
-    var taskSequence = CreateActionSequence(actions);
+    var taskSequence = CreateActionSequence(script);
     eventsheet.root.addChild(taskSequence);
 
     var forceFailure = new ForceFailure();
