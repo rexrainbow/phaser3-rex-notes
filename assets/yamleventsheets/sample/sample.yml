@@ -26,8 +26,8 @@ script:
   - name: print
     parameters: { text: "Now I have {{coin}} coin" }
 
-  - type: label
-    title: Before if
+  - title: Before if
+    type: label
     actions:
       - name: print
         parameters: { text: "Before if" }
@@ -53,23 +53,23 @@ script:
           - name: print
             parameters: { text: "If (coin > 10)" }
 
-  - type: label
-    title: After If
+  - title: After If
+    type: label
     actions:
       - name: print
         parameters: { text: "After If" }
 
-  - type: label
-    title: Before while
+  - title: Before while
+    type: label
     actions:
       - name: print
         parameters: { text: "Before while" }
       - name: set
         parameters: { loopCount: 3 }
 
-  - type: while
+  - title: Do-While
+    type: while
     condition: loopCount > 0
-    title: Do-While
     actions:
       - name: print
         parameters: { text: "do-while {{loopCount}}" }
@@ -77,14 +77,14 @@ script:
       - name: set
         parameters: { loopCount: "#(loopCount-1)" }
 
-  - type: label
-    title: After while
+  - title: After while
+    type: label
     actions:
       - name: print
         parameters: { text: "After while" }
 
-  - type: label
-    title: Break label test
+  - title: Break label test
+    type: label
     actions:
       - name: print
         parameters: { text: "Before break-label" }
@@ -92,8 +92,8 @@ script:
       - name: print
         parameters: { text: "After break-label" }
 
-  - type: label
-    title: Exit test
+  - title: Exit test
+    type: label
     actions:
       - name: print
         parameters: { text: "Before exit" }
@@ -101,8 +101,8 @@ script:
       - name: print
         parameters: { text: "After exit" }
 
-  - type: label
-    title: Remainder
+  - title: Remainder
+    type: label
     actions:
       - name: print
         parameters: { text: "Here" }
