@@ -2,6 +2,6 @@ title: Else
 condition: block == 1
 script:
   - name: set
-    parameters: { block:0 }
+    parameters: { block: 0 }
   - name: print
     parameters: { text: "ELSE" }
