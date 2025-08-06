@@ -1,4 +1,4 @@
-import EventSheetManager from '../../plugins/logic/eventsheets/eventsheetmanager/EventSheetManager';
+import EventSheetManager from '../../plugins/logic/eventsheets/eventsheetmanager/EventSheetManager.js';
 import CreateCommandExecutor from './commandexecutor/CreateCommandExecutor.js';
 import RegisterExpressions from './expressions/RegisterExpressions.js';
 import RegisterDefaultVariables from './defaultvariables/RegisterDefaultVariables.js';

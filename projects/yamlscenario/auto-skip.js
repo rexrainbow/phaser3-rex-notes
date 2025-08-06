@@ -1,5 +1,5 @@
-import phaser from 'phaser/src/phaser.js';
-import MDScenario from '../../templates/scenario/MDScenario.js';
+import phaser from '../../../phaser/src/phaser.js';
+import YAMLScenario from '../../templates/scenario/YAMLScenario.js';
 import CreateMonitorPanel from '../../templates/scenario/monitor/CreateMonitorPanel.js';
 import TextBoxStyle from './styles/TextBoxStyle.js';
 
@@ -13,14 +13,14 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.text('eventSheet0', 'assets/markedeventsheets/scenario/fast-typing.md');
+        this.load.text('eventSheet0', 'assets/yamleventsheets/scenario/fast-typing.yml');
     }
 
     create() {
         var rootLayer = this.add.layer().setName('root');
         var viewport = this.scale.getViewPort();
 
-        var eventSheetManager = new MDScenario(this, {
+        var eventSheetManager = new YAMLScenario(this, {
             styles: {
                 TEXTBOX: TextBoxStyle,
             },
