@@ -8,13 +8,13 @@ import ActivateAction from '../../eventsheetmanager/nodes/ActivateAction.js';
 import DeactivateAction from '../../eventsheetmanager/nodes/DeactivateAction.js';
 
 var CreateActionNode = function (nodeData) {
-    var node, forceSuccessDecorator, ifDecorator;
+    var node, ifDecorator;
 
     var expression = GetConditionExpression(nodeData.condition);
     if (expression !== 'true') {
-        // forceSuccess <- If
-        forceSuccessDecorator = new ForceSuccess();
-        ifDecorator = CreateIfDecorator(expression);
+        // ForceSuccess <- If
+        ifDecorator = new ForceSuccess();
+        ifDecorator.chainChild(CreateIfDecorator(expression))
     }
 
     switch (nodeData.type) {
@@ -56,9 +56,8 @@ var CreateActionNode = function (nodeData) {
 
     if (ifDecorator) {
         // ForceSuccess <- If <- Action
-        forceSuccessDecorator.addChild(ifDecorator);
-        ifDecorator.addChild(node);
-        node = forceSuccessDecorator;
+        ifDecorator.chainChild(node);
+        node = ifDecorator;
     }
 
     return node;

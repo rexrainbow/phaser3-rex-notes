@@ -46,6 +46,16 @@ class Decorator extends BaseNode {
         return this;
     }
 
+    chainChild(node, nodePool) {
+        // Get last decorator
+        var decorator = this;
+        while (decorator.child instanceof Decorator) {
+            decorator = decorator.child;
+        }
+        decorator.addChild(node, nodePool);
+        return this;
+    }
+
     isChildRunning(tick) {
         return this.child.getOpenState(tick);
     }

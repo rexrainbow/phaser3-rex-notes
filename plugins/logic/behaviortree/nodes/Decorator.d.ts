@@ -21,6 +21,8 @@ declare class Decorator extends BaseNode {
 
     addChild(node: string | BaseNode, nodePool?: BaseNode.NodePoolType): this;
 
+    chainChild(node: string | BaseNode, nodePool?: BaseNode.NodePoolType): this;
+
     isChildRunning(tick: Tick): boolean;
 
     abortChildren(tick: Tick): void;
