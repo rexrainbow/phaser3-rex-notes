@@ -1,0 +1,24 @@
+title: Event sheet 0
+parallel: true
+condition: coin > 5
+script:
+  - name: set
+    parameters: { coin: 3 }
+  - name: print
+    parameters: { text: "Event 0 start" }
+  - name: wait
+
+  - name: print
+    parameters: { text: "Event 0 progress 0" }
+  - name: wait
+
+  - name: print
+    parameters: { text: "Event 0 progress 1" }
+  - name: wait
+
+  - name: print
+    parameters: { text: "Event 0 complete" }
+
+fallback:
+  - name: print
+    parameters: { text: "str(coin = {{coin}})" }
