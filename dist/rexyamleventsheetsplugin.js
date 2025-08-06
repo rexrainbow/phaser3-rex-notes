@@ -18759,7 +18759,9 @@
 	    for (var i = 0, cnt = actions.length; i < cnt; i++) {
 	        var nodeData = actions[i];
 	        if (typeof (nodeData) === 'string') {
-	            nodeData = { type: nodeData };
+	            nodeData = { type: nodeData.toLowerCase() };
+	        } else if (nodeData.type) {
+	            nodeData.type = nodeData.type.toLowerCase();
 	        }
 
 	        switch (nodeData.type) {
@@ -29323,7 +29325,7 @@ void main (void) {
 	    var gameObjectManager = this.sys.getGameObjectManager(config.goType, config.id);
 	    if (gameObjectManager) {
 	        // Command registered in gameObjectManager
-	        var command = gameObjectManager.commands[commandName];
+	        var command = (gameObjectManager.commands) ? gameObjectManager.commands[commandName] : undefined;
 	        if (command) {
 	            var gameObjects = gameObjectManager.getGO(config.id);
 	            if (!Array.isArray(gameObjects)) {
