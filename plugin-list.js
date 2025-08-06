@@ -340,9 +340,11 @@ module.exports = {
     'ringsspinner': './templates/spinner/rings/Rings.js',
     'spinner': './templates/spinner/spinner/Spinner.js',
 
-    // mdscenario
-    'mdscenario': './templates/mdscenario/MDScenario.js',
-    'mdscenarioplugin': './templates/mdscenario/mdscenario-plugin.js',
+    // scenario
+    'mdscenario': './templates/scenario/MDScenario.js',
+    'mdscenarioplugin': './templates/scenario/mdscenario-plugin.js',
+    'yamlscenario': './templates/scenario/YAMLScenario.js',
+    'yamlscenarioplugin': './templates/scenario/yamlscenario-plugin.js',
 
     // network
     'firebase': './plugins/firebase.js',

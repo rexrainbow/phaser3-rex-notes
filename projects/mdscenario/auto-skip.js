@@ -1,6 +1,6 @@
 import phaser from 'phaser/src/phaser.js';
-import MDScenario from '../../templates/mdscenario/MDScenario.js';
-import CreateMonitorPanel from '../../templates/mdscenario/monitor/CreateMonitorPanel.js';
+import MDScenario from '../../templates/scenario/MDScenario.js';
+import CreateMonitorPanel from '../../templates/scenario/monitor/CreateMonitorPanel.js';
 import TextBoxStyle from './styles/TextBoxStyle.js';
 
 

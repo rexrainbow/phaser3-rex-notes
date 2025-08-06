@@ -1,5 +1,5 @@
-import phaser from 'phaser/src/phaser.js';
-import MDScenario from '../../templates/mdscenario/MDScenario.js';
+import phaser from '../../../phaser/src/phaser.js';
+import MDScenario from '../../templates/scenario/MDScenario.js';
 import TextBoxStyle from './styles/TextBoxStyle.js';
 import ChoiceStyle from './styles/ChoiceStyle.js';
 import TitleStyle from './styles/TitleStyle.js';
