@@ -1,0 +1,16 @@
+title: Event sheet 2
+script:
+  - name: print
+    parameters: { text: "Event 2 start" }
+  - name: wait
+
+  - name: print
+    parameters: { text: "Event 2 progress 0" }
+  - name: wait
+
+  - name: print
+    parameters: { text: "Event 2 progress 1" }
+  - name: wait
+
+  - name: print
+    parameters: { text: "Event 2 complete" }
