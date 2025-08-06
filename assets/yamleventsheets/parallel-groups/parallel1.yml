@@ -1,0 +1,8 @@
+title: Event sheet 1
+script:
+  - name: print
+    parameters: { text: "Task1 start" }
+  - name: wait
+    parameters: { duration: 4000 }
+  - name: print
+    parameters: { text: "Task1 end" }

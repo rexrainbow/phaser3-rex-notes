@@ -1,0 +1,15 @@
+title: Event sheet 0
+script:
+  - name: print
+    parameters: { text: "Task0 start" }
+
+  - type: repeat
+    times: 7
+    actions:
+      - name: print
+        parameters: { text: "Task0 loop" }
+      - name: wait
+        parameters: { duration: 1000 }
+
+  - name: print
+    parameters: { text: "Task0 end" }

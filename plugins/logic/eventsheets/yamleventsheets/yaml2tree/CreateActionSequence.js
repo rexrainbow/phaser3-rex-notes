@@ -102,7 +102,7 @@ var CreateRepeatNode = function (nodeData) {
         title: '[repeat]',
         maxLoop: nodeData.times,
     })
-    node.addChild(CreateLabelNode(nodeData, ignoreCondition = true));
+    node.addChild(CreateLabelNode(nodeData, true));
     return node;
 }
 
