@@ -17,14 +17,8 @@ declare namespace EventSheetManager {
         eventSheet?: BehaviorTree
     ) => EventEmitter | void;
 
-    interface ICommandExecutor {
-        [taskName: string]: CommandHandler | DefaultHandler | Function /*Any function object*/;
-        defaultHandler?: DefaultHandler;
-        destroy?(fromScene?: unknown): void;
-    }
-
     interface IConfig {
-        commandExecutor?: ICommandExecutor,
+        commandExecutor?: object,
         parallel?: boolean,
     }
 
@@ -57,8 +51,8 @@ declare class EventSheetManager extends EventEmitter {
     readonly blackboard: Blackboard;
     readonly memory: ReturnType<Blackboard['getGlobalMemory']>;
 
-    setCommandExecutor(commandExecutor?: EventSheetManager.ICommandExecutor): this;
-    commandExecutor: EventSheetManager.ICommandExecutor;
+    setCommandExecutor(commandExecutor?: object): this;
+    commandExecutor: object;
 
     addEventSheet(
         content: string,

@@ -62,8 +62,6 @@ declare namespace CommandExecutor {
     }
 }
 
-interface CommandExecutor extends EventSheetManager.ICommandExecutor { }
-
 declare class CommandExecutor {
     constructor(scene: Phaser.Scene, config?: CommandExecutor.IConfig);
 
