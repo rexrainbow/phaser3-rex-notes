@@ -11,7 +11,7 @@ script:
 
   - name: print
     parameters:
-      text: |
+      text: |-
         Hello, {{name}}
         Line1
         Line2
