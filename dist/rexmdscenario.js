@@ -2145,6 +2145,16 @@
 	        return this;
 	    }
 
+	    chainChild(node, nodePool) {
+	        // Get last decorator
+	        var decorator = this;
+	        while (decorator.child instanceof Decorator) {
+	            decorator = decorator.child;
+	        }
+	        decorator.addChild(node, nodePool);
+	        return this;
+	    }
+
 	    isChildRunning(tick) {
 	        return this.child.getOpenState(tick);
 	    }
@@ -4064,6 +4074,8 @@
 	        }
 
 	        this.id = id;
+
+	        this.name = '';
 
 	        this.category = TREE;
 
@@ -14605,7 +14617,7 @@
 	const RoundRun = 1;
 	const RoundComplete = 2;
 
-	const PropertyTable = {
+	const BuiltInProperties = {
 	    'groupName': { defaultValue: '_', rewritable: true },
 	    'parallel': { defaultValue: false, rewritable: true },
 	    'active': { defaultValue: true, rewritable: true },
@@ -14629,8 +14641,8 @@
 	        super(config);
 
 	        // Store default properties
-	        for (var propertyKey in PropertyTable) {
-	            var { defaultValue, rewritable } = PropertyTable[propertyKey];
+	        for (var propertyKey in BuiltInProperties) {
+	            var { defaultValue, rewritable } = BuiltInProperties[propertyKey];
 
 	            this.wrapProperty(propertyKey);
 
@@ -15452,6 +15464,7 @@
 
 	        return this;
 	    }
+
 	    addEventSheet(markedString, groupName, config) {
 	        if (typeof (groupName) !== 'string') {
 	            config = groupName;

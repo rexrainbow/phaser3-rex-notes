@@ -166,6 +166,7 @@ module.exports = {
     'bracketparser2plugin': './plugins/bracketparser2-plugin.js',
     'tagplayerplugin': './plugins/tagplayer-plugin.js',
     'markedeventsheetsplugin': './plugins/markedeventsheets-plugin.js',
+    'yamleventsheetsplugin': './plugins/yamleventsheets-plugin.js',
 
     // time
     'clockplugin': './plugins/clock-plugin.js',
