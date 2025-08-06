@@ -1,5 +1,5 @@
 import phaser from '../../../phaser/src/phaser.js';
-import MarkedEventSheetsPlugin from '../../plugins/markedeventsheets-plugin.js';
+import YAMLEventSheetsPlugin from '../../plugins/yamleventsheets-plugin.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
 class Demo extends Phaser.Scene {
@@ -11,13 +11,13 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.text('eventSheet0', 'assets/markedeventsheet/memory-monitor/memory-monitor.md');
+        this.load.text('eventSheet0', 'assets/yamleventsheets/memory-monitor/memory-monitor.yml');
         this.load.image('bg', 'assets/images/ninepatch/blue_icon.png');
     }
 
     create() {
-        var eventSheetManager = this.plugins.get('rexMarkedEventSheets').add({
-            commandExecutor: this.plugins.get('rexMarkedEventSheets').addCommandExecutor(this)
+        var eventSheetManager = this.plugins.get('rexYAMLEventSheets').add({
+            commandExecutor: this.plugins.get('rexYAMLEventSheets').addCommandExecutor(this)
         })
             .addEventSheet(this.cache.text.get('eventSheet0'))
             .setData('coin', 8)
@@ -251,8 +251,8 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-            key: 'rexMarkedEventSheets',
-            plugin: MarkedEventSheetsPlugin,
+            key: 'rexYAMLEventSheets',
+            plugin: YAMLEventSheetsPlugin,
             start: true
         }],
         scene: [{
