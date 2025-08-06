@@ -1,0 +1,6 @@
+title: Event sheet 0
+script:
+  - name: print
+    parameters: { text: "EventA process start" }
+  - name: print
+    parameters: { text: "EventA process end" }
