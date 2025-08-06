@@ -1,0 +1,5 @@
+title: Title
+condition: flag == 1
+script:
+  - name: print
+    parameters: { text: "Hello world" }

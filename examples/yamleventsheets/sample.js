@@ -1,4 +1,4 @@
-import YAMLEventSheets from '../../plugins/logic/eventsheets/yamleventsheets/YAMLEventSheets.js';
+import YAMLEventSheets from '../../plugins/yamleventsheets.js';
 import content from 'raw-loader!/assets/yamleventsheets/sample/sample.yml';
 
 class CommandExecutor {

@@ -1,7 +1,5 @@
 import YAMLEventSheets from '../../plugins/yamleventsheets.js';
-import TaskventSheet from 'raw-loader!/assets/yamleventsheets/active/task.yml';
-import DeactivateEventSheet from 'raw-loader!/assets/yamleventsheets/active/deactivate.yml';
-
+import content from 'raw-loader!/assets/yamleventsheets/ignore-condition/ignore-condition.yml';
 
 class CommandExecutor {
     print({ text = '' } = {}, eventSheetManager, eventSheet) {
@@ -25,29 +23,11 @@ var commandExecutor = new CommandExecutor();
 
 var eventSheetManager = new YAMLEventSheets({
     commandExecutor: commandExecutor
-});
-eventSheetManager
-    .addEventSheet(TaskventSheet)
-    .addEventSheet(DeactivateEventSheet)
-
-console.log(eventSheetManager.dumpEventSheetGroup())
-
-console.log(eventSheetManager.memory)
-
-eventSheetManager.on('complete', function () {
-    if (eventSheetManager.$roundCounter < 10) {
-        // Run next round
-        eventSheetManager.updateRoundCounter();
-        console.log(`---- Round : ${eventSheetManager.$roundCounter} ----`)
-
-        if (eventSheetManager.$roundCounter === 3) {
-            eventSheetManager.setEventSheetActiveState('Task');
-        }
-
-        eventSheetManager.startGroup()
-    }
 })
+    .addEventSheet(content)
 
+console.log('Run event with condition')
 eventSheetManager.startGroup()
 
-
+console.log('Run event without condition')
+eventSheetManager.start('Title')

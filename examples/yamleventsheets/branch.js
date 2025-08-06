@@ -1,4 +1,4 @@
-import YAMLEventSheets from '../../plugins/logic/eventsheets/yamleventsheets/YAMLEventSheets.js';
+import YAMLEventSheets from '../../plugins/yamleventsheets.js';
 import beforeEventSheet from 'raw-loader!/assets/yamleventsheets/branch/0.before.yml';
 import ifAEventSheet from 'raw-loader!/assets/yamleventsheets/branch/1.if-a.yml';
 import ifBEventSheet from 'raw-loader!/assets/yamleventsheets/branch/2.if-b.yml';
