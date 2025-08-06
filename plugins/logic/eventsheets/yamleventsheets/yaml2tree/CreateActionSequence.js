@@ -1,11 +1,10 @@
 import {
     Sequence, Selector, If, RepeatUntilFailure, Repeat,
-    Succeeder, Abort, Failer,
+    Succeeder,
 } from '../../../behaviortree/index.js';
-import TaskAction from '../../eventsheetmanager/nodes/taskaction/TaskAction.js';
 import TaskSequence from '../../eventsheetmanager/nodes/TaskSequence.js';
-import ActivateAction from '../../eventsheetmanager/nodes/ActivateAction.js';
-import DeactivateAction from '../../eventsheetmanager/nodes/DeactivateAction.js';
+import CreateIfDecorator from './CreateIfDecorator.js';
+import CreateActionNode from './CreateActionNode.js';
 import GetConditionExpression from './GetConditionExpression.js';
 
 
@@ -26,146 +25,31 @@ var CreateActionSequence = function (actions, title) {
     }
 
     var node;
-    for (var nodeIndex = 0, nodeCount = actions.length; nodeIndex < nodeCount; nodeIndex++) {
-        var nodeData = actions[nodeIndex];
+    for (var i = 0, cnt = actions.length; i < cnt; i++) {
+        var nodeData = actions[i];
         if (typeof (nodeData) === 'string') {
             nodeData = { type: nodeData };
         }
 
         switch (nodeData.type) {
-            case 'command':
-            case undefined:
-                delete nodeData.type;
-                node = new TaskAction(nodeData);
-                break;
-
             case 'if':
-                node = new Selector({
-                    title: '[if]'
-                });
-
-                var branches = nodeData.branches;
-                var hasTrueExpression = false;
-                for (var branchIndex = 0, branchCount = branches.length; branchIndex < branchCount; branchIndex++) {
-                    var branch = branches[branchIndex];
-
-                    var expression = GetConditionExpression(branch.condition);
-                    if (expression === 'true') {
-                        hasTrueExpression = true;
-
-                        node.addChild(CreateActionSequence(branch.actions, branch.title));
-
-                    } else {
-                        var ifDecorator;
-                        try {
-                            ifDecorator = new If({
-                                expression: expression
-                            });
-                        } catch (e) {
-                            console.error(`[EventSheet] Parse expression '${expression}' failed, replace expression by 'false'`);
-                            console.error(e);
-
-                            ifDecorator = new If({
-                                expression: 'false'
-                            });
-                        }
-                        ifDecorator.addChild(CreateActionSequence(branch.actions, branch.title));
-                        node.addChild(ifDecorator);
-
-                    }
-
-                }
-
-                if (!hasTrueExpression) {
-                    node.addChild(new Succeeder());
-                }
-
+                node = CreateIFNode(nodeData);
                 break;
 
             case 'while':
-                node = new RepeatUntilFailure({
-                    title: '[while]',
-                    returnSuccess: true,
-                });
-
-                var expression = GetConditionExpression(nodeData.condition);
-                try {
-                    ifDecorator = new If({
-                        expression: expression
-                    });
-                } catch (e) {
-                    console.error(`[EventSheet] Parse expression '${expression}' failed, replace expression by 'false'`);
-                    console.error(e);
-
-                    ifDecorator = new If({
-                        expression: 'false'
-                    });
-                }
-                ifDecorator.addChild(CreateActionSequence(nodeData.actions, nodeData.title));
-
-                node.addChild(ifDecorator);
+                node = CreateWhileNode(nodeData);
                 break;
 
             case 'repeat':
-                node = new Repeat({
-                    title: '[repeat]',
-                    maxLoop: nodeData.times,
-                })
-                node.addChild(CreateActionSequence(nodeData.actions, nodeData.title));
+                node = CreateRepeatNode(nodeData);
                 break;
 
             case 'label':
-                var expression = GetConditionExpression(nodeData.condition);
-                if (expression === 'true') {
-                    node = CreateActionSequence(nodeData.actions, nodeData.title);
-
-                } else {
-                    var ifDecorator;
-                    try {
-                        ifDecorator = new If({
-                            expression: expression
-                        });
-                    } catch (e) {
-                        console.error(`[EventSheet] Parse expression '${expression}' failed, replace expression by 'false'`);
-                        console.error(e);
-
-                        ifDecorator = new If({
-                            expression: 'false'
-                        });
-                    }
-                    ifDecorator.addChild(CreateActionSequence(nodeData.actions, nodeData.title));
-                    node = ifDecorator;
-
-                }
-                break;
-
-            case 'exit':
-                node = new Abort({ title: '[exit]' });
-                break;
-
-            case 'break':
-                node = new Failer({ title: '[break]' });
-                break;
-
-            case 'activate':
-                var activateTreeTitle = nodeData.target || '';
-                node = new ActivateAction({
-                    title: '[activate]',
-                    activateTreeTitle: activateTreeTitle.trim(),
-                });
-                break;
-
-            case 'deactivate':
-                var deactivateTreeTitle = nodeData.target || '';
-                node = new DeactivateAction({
-                    title: '[deactivate]',
-                    deactivateTreeTitle: deactivateTreeTitle.trim(),
-                });
+                node = CreateLabelNode(nodeData);
                 break;
 
             default:
-                console.warn(`Unsupported nodeData.type '${nodeData.type}' - treated as success.`);
-                node = new Succeeder();
+                node = CreateActionNode(nodeData)
                 break;
         }
 
@@ -179,6 +63,73 @@ var CreateActionSequence = function (actions, title) {
     }
 
     return parentNode;
+}
+
+var CreateIFNode = function (nodeData) {
+    var node = new Selector({
+        title: '[if]'
+    });
+
+    var branches = nodeData.branches;
+    var hasTrueExpression = false;
+    for (var i = 0, cnt = branches.length; i < cnt; i++) {
+        var branchNode = CreateLabelNode(branches[i]);
+        node.addChild(branchNode);
+
+        hasTrueExpression = !(branchNode instanceof If);
+        if (hasTrueExpression) {
+            break;
+        }
+    }
+
+    if (!hasTrueExpression) {
+        node.addChild(new Succeeder());
+    }
+    return node;
+}
+
+var CreateWhileNode = function (nodeData) {
+    var node = new RepeatUntilFailure({
+        title: '[while]',
+        returnSuccess: true,
+    });
+    node.addChild(CreateLabelNode(nodeData));
+    return node;
+}
+
+var CreateRepeatNode = function (nodeData) {
+    var node = new Repeat({
+        title: '[repeat]',
+        maxLoop: nodeData.times,
+    })
+    node.addChild(CreateLabelNode(nodeData, ignoreCondition = true));
+    return node;
+}
+
+var CreateLabelNode = function (nodeData, ignoreCondition) {
+    // properties: title, condition(can be ignored), actions
+
+    if (ignoreCondition === undefined) {
+        ignoreCondition = false;
+    }
+
+    var node, ifDecorator;
+
+    if (!ignoreCondition) {
+        var expression = GetConditionExpression(nodeData.condition);
+        if (expression !== 'true') {
+            ifDecorator = CreateIfDecorator(expression);
+        }
+    }
+
+    node = CreateActionSequence(nodeData.actions, nodeData.title);
+
+    if (ifDecorator) {
+        ifDecorator.addChild(node);
+        node = ifDecorator;
+    }
+
+    return node;
 }
 
 

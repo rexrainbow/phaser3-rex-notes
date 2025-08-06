@@ -53,6 +53,14 @@ script:
           - name: print
             parameters: { text: "If (coin > 10)" }
 
+  - condition: coin > 10
+    name: print
+    parameters: { text: "Embedded condition: coin > 10" }
+
+  - condition: coin < 10
+    name: print
+    parameters: { text: "Embedded condition: coin < 10" }
+
   - title: After If
     type: label
     actions:

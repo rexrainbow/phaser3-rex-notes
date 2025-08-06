@@ -1,5 +1,9 @@
 var GetConditionExpression = function (conditions) {
-    if (typeof (conditions) === 'string') {
+    var t = typeof (conditions);
+
+    if (conditions == null) {
+        return 'true';
+    } else if ((t === 'string') || (t === 'number')) {
         return conditions;
     } else if (!Array.isArray(conditions) || !conditions.length) {
         return 'true'
@@ -8,7 +12,7 @@ var GetConditionExpression = function (conditions) {
     // conditions is an array
     var condition;
     for (var i = 0, cnt = conditions.length; i < cnt; i++) {
-        condition = conditions[i];        
+        condition = conditions[i];
         if (typeof (condition) === 'string') {
             // Do nothing
         } else if (Array.isArray(condition)) {
