@@ -6156,7 +6156,7 @@
 
 	var AddTreeMethods = {
 	    // Override it
-	    addEventSheet(s, groupName, config) {
+	    addEventSheet(data, groupName, config) {
 	        return this;
 	    },
 
@@ -15396,7 +15396,7 @@
 	    return expression;
 	};
 
-	var Marked2Tree = function (
+	var BuildTree = function (
 	    eventSheetManager,
 	    markedString,
 	    {
@@ -15486,7 +15486,7 @@
 	            groupName = groupName
 	        } = config;
 
-	        var eventsheet = Marked2Tree(
+	        var eventsheet = BuildTree(
 	            this,
 	            markedString,
 	            {
@@ -26198,7 +26198,7 @@ void main (void) {
 	const AddItem = Phaser.Utils.Array.Add;
 	const RemoveItem$a = Phaser.Utils.Array.Remove;
 
-	let Base$3 = class Base extends Zone$1 {
+	let Base$4 = class Base extends Zone$1 {
 	    constructor(scene, x, y, width, height) {
 	        if (x === undefined) {
 	            x = 0;
@@ -26290,7 +26290,7 @@ void main (void) {
 	};
 
 	const Components$3 = Phaser.GameObjects.Components;
-	Phaser.Class.mixin(Base$3,
+	Phaser.Class.mixin(Base$4,
 	    [
 	        Components$3.Alpha,
 	        Components$3.Flip
@@ -26408,7 +26408,7 @@ void main (void) {
 	};
 
 	const GetValue$1W = Phaser.Utils.Objects.GetValue;
-	const BaseAdd = Base$3.prototype.add;
+	const BaseAdd = Base$4.prototype.add;
 
 	var Add$7 = function (gameObject, config) {
 	    this.setParent(gameObject);
@@ -26558,8 +26558,8 @@ void main (void) {
 	    }
 	};
 
-	const BaseRemove = Base$3.prototype.remove;
-	const BaseClear = Base$3.prototype.clear;
+	const BaseRemove = Base$4.prototype.remove;
+	const BaseClear = Base$4.prototype.clear;
 
 	var RemoveChild$2 = {
 	    // Can override this method
@@ -28188,7 +28188,7 @@ void main (void) {
 	    RenderTexture$1,
 	);
 
-	class ContainerLite extends Base$3 {
+	class ContainerLite extends Base$4 {
 	    constructor(scene, x, y, width, height, children) {
 	        if (Array.isArray(width)) {
 	            children = width;
@@ -43307,7 +43307,7 @@ void main () {
 
 	const GetValue$1b = Phaser.Utils.Objects.GetValue;
 
-	let Base$2 = class Base extends ContainerLite {
+	let Base$3 = class Base extends ContainerLite {
 	    constructor(scene, x, y, minWidth, minHeight, config) {
 	        super(scene, x, y, 1, 1);
 	        this.isRexSizer = true;
@@ -43554,7 +43554,7 @@ void main () {
 	};
 
 	Object.assign(
-	    Base$2.prototype,
+	    Base$3.prototype,
 	    methods$c
 	);
 
@@ -44556,7 +44556,7 @@ void main () {
 	const IsPlainObject$k = Phaser.Utils.Objects.IsPlainObject;
 	const GetValue$19 = Phaser.Utils.Objects.GetValue;
 
-	class Sizer extends Base$2 {
+	class Sizer extends Base$3 {
 	    constructor(scene, x, y, minWidth, minHeight, orientation, config) {
 	        if (IsPlainObject$k(x)) {
 	            config = x;
@@ -45953,7 +45953,7 @@ void main () {
 	    ]
 	);
 
-	let Base$1 = class Base {
+	let Base$2 = class Base {
 	    constructor(parent, type) {
 	        this.setParent(parent);
 	        this.type = type;
@@ -46031,7 +46031,7 @@ void main () {
 	};
 
 	Object.assign(
-	    Base$1.prototype,
+	    Base$2.prototype,
 	    DataMethods
 	);
 
@@ -46221,7 +46221,7 @@ void main () {
 	const RadToDeg$1 = Phaser.Math.RadToDeg;
 	const GetValue$16 = Phaser.Utils.Objects.GetValue;
 
-	class RenderBase extends Base$1 {
+	class RenderBase extends Base$2 {
 	    constructor(parent, type) {
 	        super(parent, type);
 
@@ -48542,7 +48542,7 @@ void main () {
 	    return this;
 	};
 
-	class Command extends Base$1 {
+	class Command extends Base$2 {
 	    constructor(parent, name, callback, param, scope) {
 	        super(parent, CmdTypeName);
 
@@ -57939,7 +57939,7 @@ void main () {
 	const IsPlainObject$b = Phaser.Utils.Objects.IsPlainObject;
 	const GetValue$E = Phaser.Utils.Objects.GetValue;
 
-	class GridSizer extends Base$2 {
+	class GridSizer extends Base$3 {
 	    constructor(scene, x, y, minWidth, minHeight, columnCount, rowCount, columnProportions, rowProportions, config) {
 	        if (IsPlainObject$b(x)) {
 	            config = x;
@@ -60870,7 +60870,7 @@ void main () {
 	const GetValue$s = Phaser.Utils.Objects.GetValue;
 	const ALIGN_LEFTTOP = Phaser.Display.Align.TOP_LEFT;
 
-	class TextBlock extends Base$2 {
+	class TextBlock extends Base$3 {
 	    constructor(scene, x, y, minWidth, minHeight, config) {
 	        if (IsPlainObject$9(x)) {
 	            config = x;
@@ -61582,7 +61582,7 @@ void main () {
 
 	const GetValue$n = Phaser.Utils.Objects.GetValue;
 
-	class Base extends BaseShapes {
+	let Base$1 = class Base extends BaseShapes {
 	    constructor(scene, config) {
 	        var x = GetValue$n(config, 'x', 0);
 	        var y = GetValue$n(config, 'y', 0);
@@ -61700,10 +61700,10 @@ void main () {
 	    get isRunning() {
 	        return (this.tweenTask) ? this.tweenTask.isRunning : false;
 	    }
-	}
+	};
 
 	Object.assign(
-	    Base.prototype,
+	    Base$1.prototype,
 	    EaseValueMethods
 	);
 
@@ -62700,7 +62700,7 @@ void main () {
 
 	const GetValue$m = Phaser.Utils.Objects.GetValue;
 
-	class AIO extends Base {
+	class AIO extends Base$1 {
 	    constructor(scene, config) {
 	        super(scene, config);
 	        this.type = 'rexSpinnerAIO';
@@ -63772,7 +63772,7 @@ void main () {
 	const IsPlainObject$5 = Phaser.Utils.Objects.IsPlainObject;
 	const GetValue$i = Phaser.Utils.Objects.GetValue;
 
-	class OverlapSizer extends Base$2 {
+	class OverlapSizer extends Base$3 {
 	    constructor(scene, x, y, minWidth, minHeight, config) {
 	        if (IsPlainObject$5(x)) {
 	            config = x;
@@ -65257,7 +65257,7 @@ void main () {
 	const IsPlainObject$3 = Phaser.Utils.Objects.IsPlainObject;
 	const GetValue$e = Phaser.Utils.Objects.GetValue;
 
-	class FixWidthSizer extends Base$2 {
+	class FixWidthSizer extends Base$3 {
 	    constructor(scene, x, y, minWidth, minHeight, config) {
 	        if (IsPlainObject$3(x)) {
 	            config = x;
@@ -69672,7 +69672,7 @@ void main () {
 	    }
 	};
 
-	var ScenarioBase = function (EventSheetManagerClass) {
+	var Base = function (EventSheetManagerClass) {
 	    if (EventSheetManagerClass === undefined) {
 	        EventSheetManagerClass = EventSheetManager;
 	    }
@@ -69690,7 +69690,7 @@ void main () {
 	    }
 	};
 
-	class MDScenario extends ScenarioBase(MarkedEventSheets) {
+	class MDScenario extends Base(MarkedEventSheets) {
 	}
 
 	return MDScenario;

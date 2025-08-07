@@ -6154,7 +6154,7 @@
 
 	var AddTreeMethods = {
 	    // Override it
-	    addEventSheet(s, groupName, config) {
+	    addEventSheet(data, groupName, config) {
 	        return this;
 	    },
 
@@ -14766,6 +14766,349 @@
 	    }
 	}
 
+	const Properties = ['groupName', 'parallel', 'active', 'once'];
+
+	var GetTreeConfig = function (jsonData) {
+	    var config = {};
+	    for (var i = 0, cnt = Properties.length; i < cnt; i++) {
+	        var name = Properties[i];
+	        if (jsonData.hasOwnProperty(name)) {
+	            config[name] = jsonData[name];
+	        }
+	    }
+
+	    return config;
+	};
+
+	var GetConditionExpression = function (conditions) {
+	    var t = typeof (conditions);
+
+	    if (conditions == null) {
+	        return 'true';
+	    } else if ((t === 'string') || (t === 'number')) {
+	        return conditions;
+	    } else if (!Array.isArray(conditions) || !conditions.length) {
+	        return 'true'
+	    }
+	    // conditions is an array
+	    var condition;
+	    for (var i = 0, cnt = conditions.length; i < cnt; i++) {
+	        condition = conditions[i];
+	        if (typeof (condition) === 'string') ; else if (Array.isArray(condition)) {
+	            conditions[i] = `(${condition.join(') && (')})`;
+	        } else if (condition.and) {
+	            conditions[i] = `(${condition.and.join(') && (')})`;
+	        } else {
+	            conditions[i] = '(false)';
+	        }
+	    }
+	    condition = `(${conditions.join(') || (')})`;
+
+	    return condition;
+	};
+
+	var CreateIfDecorator = function (expression) {
+	    var ifDecorator;
+	    try {
+	        ifDecorator = new If({
+	            expression: expression
+	        });
+	    } catch (e) {
+	        console.error(`[EventSheet] Parse expression '${expression}' failed, replace expression by 'false'`);
+	        console.error(e);
+
+	        ifDecorator = new If({
+	            expression: 'false'
+	        });
+	    }
+
+	    return ifDecorator;
+	};
+
+	var CreateActionNode = function (nodeData) {
+	    var node, ifDecorator;
+
+	    var expression = GetConditionExpression(nodeData.condition);
+	    if (expression !== 'true') {
+	        // ForceSuccess <- If
+	        ifDecorator = new ForceSuccess();
+	        ifDecorator.chainChild(CreateIfDecorator(expression));
+	    }
+
+	    switch (nodeData.type) {
+	        case 'command':
+	        case undefined:
+	            delete nodeData.type;
+	            node = new TaskAction(nodeData);
+	            break;
+
+	        case 'exit':
+	            node = new Abort({ title: '[exit]' });
+	            break;
+
+	        case 'break':
+	            node = new Failer({ title: '[break]' });
+	            break;
+
+	        case 'activate':
+	            var activateTreeTitle = nodeData.target || '';
+	            node = new ActivateAction({
+	                title: '[activate]',
+	                activateTreeTitle: activateTreeTitle.trim(),
+	            });
+	            break;
+
+	        case 'deactivate':
+	            var deactivateTreeTitle = nodeData.target || '';
+	            node = new DeactivateAction({
+	                title: '[deactivate]',
+	                deactivateTreeTitle: deactivateTreeTitle.trim(),
+	            });
+	            break;
+
+	        default:
+	            console.warn(`Unsupported nodeData.type '${nodeData.type}' - treated as success.`);
+	            node = new Succeeder();
+	            break;
+	    }
+
+	    if (ifDecorator) {
+	        // ForceSuccess <- If <- Action
+	        ifDecorator.chainChild(node);
+	        node = ifDecorator;
+	    }
+
+	    return node;
+	};
+
+	var CreateActionSequence = function (actions, title) {
+	    if (!actions || !actions.length) {
+	        return new Succeeder();
+	    }
+
+	    var isSingleNode = (actions.length === 1) && (!title);
+
+	    var parentNode;
+	    if (!isSingleNode) {
+	        if (title) {
+	            parentNode = new TaskSequence({ title: title });
+	        } else {
+	            parentNode = new Sequence();
+	        }
+	    }
+
+	    var node;
+	    for (var i = 0, cnt = actions.length; i < cnt; i++) {
+	        var nodeData = actions[i];
+	        if (typeof (nodeData) === 'string') {
+	            nodeData = { type: nodeData.toLowerCase() };
+	        } else if (nodeData.type) {
+	            nodeData.type = nodeData.type.toLowerCase();
+	        }
+
+	        switch (nodeData.type) {
+	            case 'if':
+	                node = CreateIFNode(nodeData);
+	                break;
+
+	            case 'while':
+	                node = CreateWhileNode(nodeData);
+	                break;
+
+	            case 'repeat':
+	                node = CreateRepeatNode(nodeData);
+	                break;
+
+	            case 'label':
+	                node = CreateLabelNode(nodeData);
+	                break;
+
+	            default:
+	                node = CreateActionNode(nodeData);
+	                break;
+	        }
+
+	        if (!isSingleNode) {
+	            parentNode.addChild(node);
+	        }
+	    }
+
+	    if (isSingleNode) {
+	        parentNode = node;
+	    }
+
+	    return parentNode;
+	};
+
+	var CreateIFNode = function (nodeData) {
+	    var node = new Selector({
+	        title: '[if]'
+	    });
+
+	    var branches = nodeData.branches;
+	    var hasTrueExpression = false;
+	    for (var i = 0, cnt = branches.length; i < cnt; i++) {
+	        var branchNode = CreateLabelNode(branches[i]);
+	        node.addChild(branchNode);
+
+	        hasTrueExpression = !(branchNode instanceof If);
+	        if (hasTrueExpression) {
+	            break;
+	        }
+	    }
+
+	    if (!hasTrueExpression) {
+	        node.addChild(new Succeeder());
+	    }
+	    return node;
+	};
+
+	var CreateWhileNode = function (nodeData) {
+	    var node = new RepeatUntilFailure({
+	        title: '[while]',
+	        returnSuccess: true,
+	    });
+	    node.addChild(CreateLabelNode(nodeData));
+	    return node;
+	};
+
+	var CreateRepeatNode = function (nodeData) {
+	    var node = new Repeat({
+	        title: '[repeat]',
+	        maxLoop: nodeData.times,
+	    });
+	    node.addChild(CreateLabelNode(nodeData, true));
+	    return node;
+	};
+
+	var CreateLabelNode = function (nodeData, ignoreCondition) {
+	    // properties: title, condition(can be ignored), actions
+
+	    if (ignoreCondition === undefined) {
+	        ignoreCondition = false;
+	    }
+
+	    var node, ifDecorator;
+
+	    if (!ignoreCondition) {
+	        var expression = GetConditionExpression(nodeData.condition);
+	        if (expression !== 'true') {
+	            ifDecorator = CreateIfDecorator(expression);
+	        }
+	    }
+
+	    node = CreateActionSequence(nodeData.actions, nodeData.title);
+
+	    if (ifDecorator) {
+	        ifDecorator.addChild(node);
+	        node = ifDecorator;
+	    }
+
+	    return node;
+	};
+
+	var BuildTree = function (
+	    eventSheetManager,
+	    jsonData,
+	    config = {}
+	) {
+
+	    var {
+	        title,
+	        condition = [],
+	        script,
+	        fallback,
+	    } = jsonData;
+
+	    var {
+	        groupName,
+	        parallel = false,
+	        active = true,
+	        once = false,
+	    } = config;
+
+	    var treeConfig = Object.assign(
+	        { groupName, parallel, active, once },
+	        GetTreeConfig(jsonData)
+	    );
+
+	    var eventsheet = new EventSheet(
+	        eventSheetManager,
+	        {
+	            title: title,
+	            condition: GetConditionExpression(condition),
+	            properties: treeConfig
+	        }
+	    );
+
+	    // Build node tree
+	    var taskSequence = CreateActionSequence(script);
+	    eventsheet.root.addChild(taskSequence);
+
+	    var forceFailure = new ForceFailure();
+	    forceFailure.addChild(CreateActionSequence(fallback));
+	    eventsheet.root.addChild(forceFailure);
+
+	    return eventsheet;
+	};
+
+	class JSONEventSheets extends EventSheetManager {
+	    boot() {
+	        super.boot();
+
+	        if (this.scene) {
+	            this.scene.sys.events.once('shutdown', this.destroy, this);
+	        }
+	    }
+
+	    shutdown(fromScene) {
+	        if (this.isShutdown) {
+	            return;
+	        }
+
+	        if (this.scene) {
+	            this.scene.sys.events.off('shutdown', this.destroy, this);
+	        }
+
+	        super.shutdown(fromScene);
+
+	        return this;
+	    }
+
+	    addEventSheet(jsonData, groupName, config) {
+	        if (typeof (groupName) !== 'string') {
+	            config = groupName;
+	            groupName = undefined;
+	        }
+
+	        if (groupName === undefined) {
+	            groupName = this.defaultTreeGroupName;
+	        }
+
+	        if (config === undefined) {
+	            config = {};
+	        }
+
+	        var {
+	            parallel = this.parallel,
+	            groupName = groupName
+	        } = config;
+
+	        var eventsheet = BuildTree(
+	            this,
+	            jsonData,
+	            {
+	                groupName,
+	                parallel
+	            }
+	        );
+
+	        this.addTree(eventsheet, eventsheet.groupName);
+
+	        return this;
+	    }
+	}
+
 	/*! js-yaml 4.1.0 https://github.com/nodeca/js-yaml @license MIT */
 	function isNothing(subject) {
 	  return (typeof subject === 'undefined') || (subject === null);
@@ -18624,349 +18967,17 @@
 	    return doc;
 	};
 
-	const Properties = ['groupName', 'parallel', 'active', 'once'];
-
-	var GetTreeConfig = function (jsonData) {
-	    var config = {};
-	    for (var i = 0, cnt = Properties.length; i < cnt; i++) {
-	        var name = Properties[i];
-	        if (jsonData.hasOwnProperty(name)) {
-	            config[name] = jsonData[name];
-	        }
-	    }
-
-	    return config;
-	};
-
-	var GetConditionExpression = function (conditions) {
-	    var t = typeof (conditions);
-
-	    if (conditions == null) {
-	        return 'true';
-	    } else if ((t === 'string') || (t === 'number')) {
-	        return conditions;
-	    } else if (!Array.isArray(conditions) || !conditions.length) {
-	        return 'true'
-	    }
-	    // conditions is an array
-	    var condition;
-	    for (var i = 0, cnt = conditions.length; i < cnt; i++) {
-	        condition = conditions[i];
-	        if (typeof (condition) === 'string') ; else if (Array.isArray(condition)) {
-	            conditions[i] = `(${condition.join(') && (')})`;
-	        } else if (condition.and) {
-	            conditions[i] = `(${condition.and.join(') && (')})`;
-	        } else {
-	            conditions[i] = '(false)';
-	        }
-	    }
-	    condition = `(${conditions.join(') || (')})`;
-
-	    return condition;
-	};
-
-	var CreateIfDecorator = function (expression) {
-	    var ifDecorator;
-	    try {
-	        ifDecorator = new If({
-	            expression: expression
-	        });
-	    } catch (e) {
-	        console.error(`[EventSheet] Parse expression '${expression}' failed, replace expression by 'false'`);
-	        console.error(e);
-
-	        ifDecorator = new If({
-	            expression: 'false'
-	        });
-	    }
-
-	    return ifDecorator;
-	};
-
-	var CreateActionNode = function (nodeData) {
-	    var node, ifDecorator;
-
-	    var expression = GetConditionExpression(nodeData.condition);
-	    if (expression !== 'true') {
-	        // ForceSuccess <- If
-	        ifDecorator = new ForceSuccess();
-	        ifDecorator.chainChild(CreateIfDecorator(expression));
-	    }
-
-	    switch (nodeData.type) {
-	        case 'command':
-	        case undefined:
-	            delete nodeData.type;
-	            node = new TaskAction(nodeData);
-	            break;
-
-	        case 'exit':
-	            node = new Abort({ title: '[exit]' });
-	            break;
-
-	        case 'break':
-	            node = new Failer({ title: '[break]' });
-	            break;
-
-	        case 'activate':
-	            var activateTreeTitle = nodeData.target || '';
-	            node = new ActivateAction({
-	                title: '[activate]',
-	                activateTreeTitle: activateTreeTitle.trim(),
-	            });
-	            break;
-
-	        case 'deactivate':
-	            var deactivateTreeTitle = nodeData.target || '';
-	            node = new DeactivateAction({
-	                title: '[deactivate]',
-	                deactivateTreeTitle: deactivateTreeTitle.trim(),
-	            });
-	            break;
-
-	        default:
-	            console.warn(`Unsupported nodeData.type '${nodeData.type}' - treated as success.`);
-	            node = new Succeeder();
-	            break;
-	    }
-
-	    if (ifDecorator) {
-	        // ForceSuccess <- If <- Action
-	        ifDecorator.chainChild(node);
-	        node = ifDecorator;
-	    }
-
-	    return node;
-	};
-
-	var CreateActionSequence = function (actions, title) {
-	    if (!actions || !actions.length) {
-	        return new Succeeder();
-	    }
-
-	    var isSingleNode = (actions.length === 1) && (!title);
-
-	    var parentNode;
-	    if (!isSingleNode) {
-	        if (title) {
-	            parentNode = new TaskSequence({ title: title });
-	        } else {
-	            parentNode = new Sequence();
-	        }
-	    }
-
-	    var node;
-	    for (var i = 0, cnt = actions.length; i < cnt; i++) {
-	        var nodeData = actions[i];
-	        if (typeof (nodeData) === 'string') {
-	            nodeData = { type: nodeData.toLowerCase() };
-	        } else if (nodeData.type) {
-	            nodeData.type = nodeData.type.toLowerCase();
-	        }
-
-	        switch (nodeData.type) {
-	            case 'if':
-	                node = CreateIFNode(nodeData);
-	                break;
-
-	            case 'while':
-	                node = CreateWhileNode(nodeData);
-	                break;
-
-	            case 'repeat':
-	                node = CreateRepeatNode(nodeData);
-	                break;
-
-	            case 'label':
-	                node = CreateLabelNode(nodeData);
-	                break;
-
-	            default:
-	                node = CreateActionNode(nodeData);
-	                break;
-	        }
-
-	        if (!isSingleNode) {
-	            parentNode.addChild(node);
-	        }
-	    }
-
-	    if (isSingleNode) {
-	        parentNode = node;
-	    }
-
-	    return parentNode;
-	};
-
-	var CreateIFNode = function (nodeData) {
-	    var node = new Selector({
-	        title: '[if]'
-	    });
-
-	    var branches = nodeData.branches;
-	    var hasTrueExpression = false;
-	    for (var i = 0, cnt = branches.length; i < cnt; i++) {
-	        var branchNode = CreateLabelNode(branches[i]);
-	        node.addChild(branchNode);
-
-	        hasTrueExpression = !(branchNode instanceof If);
-	        if (hasTrueExpression) {
-	            break;
-	        }
-	    }
-
-	    if (!hasTrueExpression) {
-	        node.addChild(new Succeeder());
-	    }
-	    return node;
-	};
-
-	var CreateWhileNode = function (nodeData) {
-	    var node = new RepeatUntilFailure({
-	        title: '[while]',
-	        returnSuccess: true,
-	    });
-	    node.addChild(CreateLabelNode(nodeData));
-	    return node;
-	};
-
-	var CreateRepeatNode = function (nodeData) {
-	    var node = new Repeat({
-	        title: '[repeat]',
-	        maxLoop: nodeData.times,
-	    });
-	    node.addChild(CreateLabelNode(nodeData, true));
-	    return node;
-	};
-
-	var CreateLabelNode = function (nodeData, ignoreCondition) {
-	    // properties: title, condition(can be ignored), actions
-
-	    if (ignoreCondition === undefined) {
-	        ignoreCondition = false;
-	    }
-
-	    var node, ifDecorator;
-
-	    if (!ignoreCondition) {
-	        var expression = GetConditionExpression(nodeData.condition);
-	        if (expression !== 'true') {
-	            ifDecorator = CreateIfDecorator(expression);
-	        }
-	    }
-
-	    node = CreateActionSequence(nodeData.actions, nodeData.title);
-
-	    if (ifDecorator) {
-	        ifDecorator.addChild(node);
-	        node = ifDecorator;
-	    }
-
-	    return node;
-	};
-
-	var Marked2Tree = function (
-	    eventSheetManager,
-	    yamlString,
-	    {
-	        groupName,
-	        parallel = false,
-	        active = true,
-	        once = false,
-	    } = {}
-	) {
-
-	    var jsonData;
-	    if (typeof (yamlString) === 'string') {
-	        jsonData = ParseYaml(yamlString);
-	    } else {
-	        jsonData = yamlString;
-	    }
-
-	    var {
-	        title,
-	        condition = [],
-	        script,
-	        fallback,
-	    } = jsonData;
-
-	    var treeConfig = Object.assign(
-	        { groupName, parallel, active, once },
-	        GetTreeConfig(jsonData)
-	    );
-
-	    var eventsheet = new EventSheet(
-	        eventSheetManager,
-	        {
-	            title: title,
-	            condition: GetConditionExpression(condition),
-	            properties: treeConfig
-	        }
-	    );
-
-	    // Build node tree
-	    var taskSequence = CreateActionSequence(script);
-	    eventsheet.root.addChild(taskSequence);
-
-	    var forceFailure = new ForceFailure();
-	    forceFailure.addChild(CreateActionSequence(fallback));
-	    eventsheet.root.addChild(forceFailure);
-
-	    return eventsheet;
-	};
-
-	class YAMLEventSheets extends EventSheetManager {
-	    boot() {
-	        super.boot();
-
-	        if (this.scene) {
-	            this.scene.sys.events.once('shutdown', this.destroy, this);
-	        }
-	    }
-
-	    shutdown(fromScene) {
-	        if (this.isShutdown) {
-	            return;
-	        }
-
-	        if (this.scene) {
-	            this.scene.sys.events.off('shutdown', this.destroy, this);
-	        }
-
-	        super.shutdown(fromScene);
-
-	        return this;
-	    }
+	class YAMLEventSheets extends JSONEventSheets {
 
 	    addEventSheet(yamlString, groupName, config) {
-	        if (typeof (groupName) !== 'string') {
-	            config = groupName;
-	            groupName = undefined;
+	        var jsonData;
+	        if (typeof (yamlString) === 'string') {
+	            jsonData = ParseYaml(yamlString);
+	        } else {
+	            jsonData = yamlString;
 	        }
 
-	        if (groupName === undefined) {
-	            groupName = this.defaultTreeGroupName;
-	        }
-
-	        if (config === undefined) {
-	            config = {};
-	        }
-
-	        var {
-	            parallel = this.parallel,
-	            groupName = groupName
-	        } = config;
-
-	        var eventsheet = Marked2Tree(
-	            this,
-	            yamlString,
-	            {
-	                groupName,
-	                parallel
-	            }
-	        );
-
-	        this.addTree(eventsheet, eventsheet.groupName);
+	        super.addEventSheet(jsonData, groupName, config);
 
 	        return this;
 	    }

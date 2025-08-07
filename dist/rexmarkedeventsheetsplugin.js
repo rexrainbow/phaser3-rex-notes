@@ -6156,7 +6156,7 @@
 
 	var AddTreeMethods = {
 	    // Override it
-	    addEventSheet(s, groupName, config) {
+	    addEventSheet(data, groupName, config) {
 	        return this;
 	    },
 
@@ -15396,7 +15396,7 @@
 	    return expression;
 	};
 
-	var Marked2Tree = function (
+	var BuildTree = function (
 	    eventSheetManager,
 	    markedString,
 	    {
@@ -15486,7 +15486,7 @@
 	            groupName = groupName
 	        } = config;
 
-	        var eventsheet = Marked2Tree(
+	        var eventsheet = BuildTree(
 	            this,
 	            markedString,
 	            {
