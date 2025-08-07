@@ -7,6 +7,7 @@ declare namespace If {
     interface IConfig extends Decorator.IConfig {
         expression?: BaseNode.ExpressionValue;
         conditionEvalBreak?: boolean;
+        onFailState?: number;
     }
 }
 

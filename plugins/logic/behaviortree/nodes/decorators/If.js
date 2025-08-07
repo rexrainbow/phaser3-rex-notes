@@ -8,6 +8,7 @@ class If extends Decorator {
         {
             expression = 'true',
             conditionEvalBreak = false,
+            onFailState = FAILURE,
             child = null,
             title,
             name = 'If'
@@ -22,7 +23,8 @@ class If extends Decorator {
                 name,
                 properties: {
                     expression,
-                    conditionEvalBreak
+                    conditionEvalBreak,
+                    onFailState
                 },
             },
             nodePool
@@ -30,6 +32,7 @@ class If extends Decorator {
 
         this.expression = this.addBooleanExpression(expression);
         this.conditionEvalBreak = conditionEvalBreak;
+        this.onFailState = onFailState;
     }
 
     tick(tick) {
@@ -39,9 +42,15 @@ class If extends Decorator {
 
         // child is not running
         if (!this.isChildRunning(tick)) {
-            // Return FAILURE to run next node
+            /* 
+            Return FAILURE/SUCCESS to run next node
+            
+              - FAILURE : parent node is a Selector
+              - SUCCESS : parent node is a Sequence
+
+            */
             if (!tick.evalExpression(this.expression)) {
-                return FAILURE;
+                return this.onFailState;
             } else if (this.conditionEvalBreak) {
                 // Open child but not run it now
                 this.openChild();
