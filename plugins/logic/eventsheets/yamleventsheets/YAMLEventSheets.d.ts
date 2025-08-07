@@ -1,21 +1,17 @@
-import EventSheetManager from '../eventsheetmanager/EventSheetManager.js';
+import JSONEventSheets from '../jsoneventsheets/JSONEventSheets';
 
 export default YAMLEventSheets;
 
 declare namespace YAMLEventSheets {
-    interface IConfig extends EventSheetManager.IConfig {
+    interface IConfig extends JSONEventSheets.IConfig {
 
     }
 
-    interface IAddEventSheet {
-        parallel?: boolean,
-        groupName?: string,
+    interface IAddEventSheet extends JSONEventSheets.IAddEventSheet {
     }
 }
 
-declare class YAMLEventSheets extends EventSheetManager {
-    constructor(scene: unknown, config?: YAMLEventSheets.IConfig);
-    constructor(config?: YAMLEventSheets.IConfig);
+declare class YAMLEventSheets extends JSONEventSheets {
 
     addEventSheet(
         yamlString: string,

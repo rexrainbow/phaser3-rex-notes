@@ -1,28 +1,15 @@
 import { ForceFailure } from '../../../behaviortree/index.js';
 import EventSheet from '../../eventsheetmanager/eventsheet/EventSheet.js';
-import ParseYaml from '../../../../utils/yaml/ParseYaml.js';
 import GetTreeConfig from './GetTreeConfig.js';
 import GetConditionExpression from './GetConditionExpression.js';
 import CreateActionSequence from './CreateActionSequence.js';
 
 
-var Marked2Tree = function (
+var BuildTree = function (
     eventSheetManager,
-    yamlString,
-    {
-        groupName,
-        parallel = false,
-        active = true,
-        once = false,
-    } = {}
+    jsonData,
+    config = {}
 ) {
-
-    var jsonData;
-    if (typeof (yamlString) === 'string') {
-        jsonData = ParseYaml(yamlString);
-    } else {
-        jsonData = yamlString;
-    }
 
     var {
         title,
@@ -30,6 +17,13 @@ var Marked2Tree = function (
         script,
         fallback,
     } = jsonData;
+
+    var {
+        groupName,
+        parallel = false,
+        active = true,
+        once = false,
+    } = config;
 
     var treeConfig = Object.assign(
         { groupName, parallel, active, once },
@@ -56,4 +50,4 @@ var Marked2Tree = function (
     return eventsheet;
 }
 
-export default Marked2Tree;
+export default BuildTree;

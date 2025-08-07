@@ -343,6 +343,8 @@ module.exports = {
     // scenario
     'mdscenario': './templates/scenario/MDScenario.js',
     'mdscenarioplugin': './templates/scenario/mdscenario-plugin.js',
+    'jsonscenario': './templates/scenario/JSONScenario.js',
+    'jsonscenarioplugin': './templates/scenario/jsonscenario-plugin.js',
     'yamlscenario': './templates/scenario/YAMLScenario.js',
     'yamlscenarioplugin': './templates/scenario/yamlscenario-plugin.js',
 

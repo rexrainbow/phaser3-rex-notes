@@ -1,7 +1,7 @@
 import EventSheetManager from '../eventsheetmanager/EventSheetManager.js';
 import BuildTree from './buildtree/BuildTree.js';
 
-class MarkedEventSheets extends EventSheetManager {
+class JSONEventSheets extends EventSheetManager {
     boot() {
         super.boot();
 
@@ -24,7 +24,7 @@ class MarkedEventSheets extends EventSheetManager {
         return this;
     }
 
-    addEventSheet(markedString, groupName, config) {
+    addEventSheet(jsonData, groupName, config) {
         if (typeof (groupName) !== 'string') {
             config = groupName;
             groupName = undefined;
@@ -39,19 +39,15 @@ class MarkedEventSheets extends EventSheetManager {
         }
 
         var {
-            lineBreak = '\\',
-            commentLineStart = '\/\/',
             parallel = this.parallel,
             groupName = groupName
         } = config;
 
         var eventsheet = BuildTree(
             this,
-            markedString,
+            jsonData,
             {
                 groupName,
-                lineBreak,
-                commentLineStart,
                 parallel
             }
         );
@@ -62,4 +58,4 @@ class MarkedEventSheets extends EventSheetManager {
     }
 }
 
-export default MarkedEventSheets;
+export default JSONEventSheets;

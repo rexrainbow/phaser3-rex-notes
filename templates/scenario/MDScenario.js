@@ -1,7 +1,7 @@
 import MarkedEventSheets from '../../plugins/markedeventsheets.js';
-import ScenarioBase from './ScenarioBase.js';
+import Base from './ScenarioBase.js';
 
-class MDScenario extends ScenarioBase(MarkedEventSheets) {
+class MDScenario extends Base(MarkedEventSheets) {
 }
 
 export default MDScenario;

@@ -7,7 +7,7 @@ import ParseTopLevelNodes from './ParseTopLevelNodes.js';
 import GetConditionExpression from './GetConditionExpression.js';
 import CreateParentNode from './CreateParentNode.js';
 
-var Marked2Tree = function (
+var BuildTree = function (
     eventSheetManager,
     markedString,
     {
@@ -53,4 +53,4 @@ var Marked2Tree = function (
     return eventsheet;
 }
 
-export default Marked2Tree;
+export default BuildTree;

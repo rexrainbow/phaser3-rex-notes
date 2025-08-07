@@ -3,7 +3,7 @@ import CreateCommandExecutor from './commandexecutor/CreateCommandExecutor.js';
 import RegisterExpressions from './expressions/RegisterExpressions.js';
 import RegisterDefaultVariables from './defaultvariables/RegisterDefaultVariables.js';
 
-var ScenarioBase = function (EventSheetManagerClass) {
+var Base = function (EventSheetManagerClass) {
     if (EventSheetManagerClass === undefined) {
         EventSheetManagerClass = EventSheetManager;
     }
@@ -21,4 +21,4 @@ var ScenarioBase = function (EventSheetManagerClass) {
     }
 }
 
-export default ScenarioBase;
+export default Base;

@@ -1,7 +1,7 @@
 import YAMLEventSheets from '../../plugins/yamleventsheets.js';
-import ScenarioBase from './ScenarioBase.js';
+import Base from './ScenarioBase.js';
 
-class YAMLScenario extends ScenarioBase(YAMLEventSheets) {
+class YAMLScenario extends Base(YAMLEventSheets) {
 }
 
 export default YAMLScenario;

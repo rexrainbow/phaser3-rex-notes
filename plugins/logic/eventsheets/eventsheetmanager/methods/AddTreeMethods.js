@@ -1,6 +1,6 @@
 export default {
     // Override it
-    addEventSheet(s, groupName, config) {
+    addEventSheet(data, groupName, config) {
         return this;
     },
 

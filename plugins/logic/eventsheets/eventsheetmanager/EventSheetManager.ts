@@ -54,12 +54,6 @@ declare class EventSheetManager extends EventEmitter {
     setCommandExecutor(commandExecutor?: object): this;
     commandExecutor: object;
 
-    addEventSheet(
-        content: string,
-        groupName?: string,
-        config?: Record<string, unknown>
-    ): this;
-
     hasTreeGroup(name: string): boolean;
 
     getTreeGroup(name: string): unknown;

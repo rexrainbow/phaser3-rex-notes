@@ -1,58 +1,17 @@
-import EventSheetManager from '../eventsheetmanager/EventSheetManager.js';
-import YAML2Tree from './yaml2tree/YAML2Tree.js';
+import JSONEventSheets from '../jsoneventsheets/JSONEventSheets.js';
+import ParseYaml from '../../../utils/yaml/ParseYaml.js';
 
-class YAMLEventSheets extends EventSheetManager {
-    boot() {
-        super.boot();
-
-        if (this.scene) {
-            this.scene.sys.events.once('shutdown', this.destroy, this);
-        }
-    }
-
-    shutdown(fromScene) {
-        if (this.isShutdown) {
-            return;
-        }
-
-        if (this.scene) {
-            this.scene.sys.events.off('shutdown', this.destroy, this);
-        }
-
-        super.shutdown(fromScene);
-
-        return this;
-    }
+class YAMLEventSheets extends JSONEventSheets {
 
     addEventSheet(yamlString, groupName, config) {
-        if (typeof (groupName) !== 'string') {
-            config = groupName;
-            groupName = undefined;
+        var jsonData;
+        if (typeof (yamlString) === 'string') {
+            jsonData = ParseYaml(yamlString);
+        } else {
+            jsonData = yamlString;
         }
 
-        if (groupName === undefined) {
-            groupName = this.defaultTreeGroupName;
-        }
-
-        if (config === undefined) {
-            config = {};
-        }
-
-        var {
-            parallel = this.parallel,
-            groupName = groupName
-        } = config;
-
-        var eventsheet = YAML2Tree(
-            this,
-            yamlString,
-            {
-                groupName,
-                parallel
-            }
-        );
-
-        this.addTree(eventsheet, eventsheet.groupName);
+        super.addEventSheet(jsonData, groupName, config);
 
         return this;
     }
