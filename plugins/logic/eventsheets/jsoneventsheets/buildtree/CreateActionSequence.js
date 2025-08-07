@@ -47,7 +47,15 @@ var CreateActionSequence = function (actions, title) {
                 break;
 
             case 'label':
-                node = CreateLabelNode(nodeData);
+                node = CreateLabelNode(nodeData, { onConditionFailValue: true });
+                break;
+
+            case undefined:
+                if (nodeData.actions) {
+                    node = CreateLabelNode(nodeData, { onConditionFailValue: true });
+                } else {
+                    node = CreateActionNode(nodeData)
+                }
                 break;
 
             default:
@@ -104,23 +112,24 @@ var CreateRepeatNode = function (nodeData) {
         title: '[repeat]',
         maxLoop: nodeData.times,
     })
-    node.addChild(CreateLabelNode(nodeData, true));
+    node.addChild(CreateLabelNode(nodeData, { ignoreCondition: true }));
     return node;
 }
 
-var CreateLabelNode = function (nodeData, ignoreCondition) {
+var CreateLabelNode = function (nodeData, config = {}) {
     // properties: title, condition(can be ignored), actions
 
-    if (ignoreCondition === undefined) {
-        ignoreCondition = false;
-    }
+    var {
+        ignoreCondition = false,
+        onConditionFailValue = false
+    } = config;
 
     var node, ifDecorator;
 
     if (!ignoreCondition) {
         var expression = GetConditionExpression(nodeData.condition);
         if (expression !== 'true') {
-            ifDecorator = CreateIfDecorator(expression);
+            ifDecorator = CreateIfDecorator(expression, onConditionFailValue);
         }
     }
 

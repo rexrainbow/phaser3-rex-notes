@@ -1,6 +1,23 @@
-# YAML Event Sheet Format Description
+# YAMLEventSheets
 
-## 1. Basic Structure
+`YAMLEventSheets` is a thin wrapper around `JSONEventSheets` that accepts event sheet definitions written in YAML. It parses the provided YAML text using `ParseYaml` and then delegates to `JSONEventSheets` to build the behavior tree.
+
+```javascript
+import YAMLEventSheets from './YAMLEventSheets.js';
+
+const sheets = new YAMLEventSheets(scene);
+sheets.addEventSheet(`
+title: Task Name
+script:
+  - name: move
+`);
+```
+
+The first argument of `addEventSheet` can be either a YAML string or a pre-parsed JavaScript object.
+
+## YAML Event Sheet Format Description
+
+### 1. Basic Structure
 
 ```yaml
 title: Task Name
@@ -12,11 +29,11 @@ condition:                          # Execution condition for the event sheet
   - ...
 script:                             # Main process script
   - ...
-fallback:                              # Recovery script executed when main process fails (optional)
+fallback:                              # Recovery script executed when top-level condition is false (optional)
   - ...
 ```
 
-`script` and `fallback` are both arrays of actions, converted into behavior tree nodes and added to the event sheet; `fallback` executes only if `script` fails.
+`script` and `fallback` are arrays of actions converted into behavior tree nodes and added to the event sheet. The `fallback` block runs only when the top-level `condition` evaluates to `false`.
 
 ---
 
@@ -44,7 +61,7 @@ condition:
 ```
 
 > **Note**: When omitted or malformed, defaults to `"true"`.
-> This format also applies to `if`, `while`, `label`, etc., in their `condition` fields.
+> This format also applies to any action's `condition` field (e.g., `command`, `while`, `label`, `exit`, `break`, `activate`, `deactivate`, etc.).
 
 ---
 
@@ -54,13 +71,16 @@ condition:
 
 | Field        | Description                                                          |
 | ------------ | -------------------------------------------------------------------- |
+| `type`       | Optional; defaults to `command`                                      |
 | `name`       | Command name                                                         |
 | `parameters` | Parameter object; use `#(expr)` for evaluation or `{{}}` as template |
+| `condition`  | Optional expression controlling execution                            |
 
 #### Example
 
 ```yaml
 - name: move
+  condition: "hp > 0"
   parameters:
     x: 100
     speed: "#(baseSpeed*2)"
@@ -153,25 +173,36 @@ Each branch may include:
 
 ### 3.6 `exit`
 
-> Immediately terminates the event sheet
+| Field       | Description                          |
+|-------------|--------------------------------------|
+| `condition` | Optional expression to trigger exit  |
+
+Immediately terminates the event sheet.
 
 ```yaml
 - type: exit
+  condition: "hp <= 0"
 ```
 
 ### 3.7 `break`
 
-> Interrupts the current sequence (returns failure)
+| Field       | Description                               |
+|-------------|-------------------------------------------|
+| `condition` | Optional expression to trigger the break  |
+
+Interrupts the current sequence (returns failure).
 
 ```yaml
 - type: break
+  condition: "enemyFled"
 ```
 
 ### 3.8 `activate`
 
-| Field    | Description              |
-| -------- | ------------------------ |
-| `target` | Target event sheet title |
+| Field       | Description                          |
+| ----------- | ------------------------------------ |
+| `target`    | Target event sheet title             |
+| `condition` | Optional expression to trigger call |
 
 #### Example
 
@@ -182,9 +213,10 @@ Each branch may include:
 
 ### 3.9 `deactivate`
 
-| Field    | Description              |
-| -------- | ------------------------ |
-| `target` | Target event sheet title |
+| Field       | Description                          |
+| ----------- | ------------------------------------ |
+| `target`    | Target event sheet title             |
+| `condition` | Optional expression to trigger call |
 
 #### Example
 
@@ -197,7 +229,7 @@ Each branch may include:
 
 ## 4. `fallback` Actions
 
-`fallback` is an **array of actions** at the same level as `script`.  
-When the top-level `condition` evaluates to **false**, causing the `script` block to **not execute at all**, the system will instead execute the actions listed in `fallback` in order.  
-After execution, the overall process will still end in a **failure** state (wrapped in a `ForceFailure` node), allowing higher-level handlers to intercept or log the event.  
+`fallback` is an **array of actions** at the same level as `script`.
+When the top-level `condition` evaluates to **false**, causing the `script` block to **not execute at all**, the system will instead execute the actions listed in `fallback` in order.
+After execution, the overall process will still end in a **failure** state (wrapped in a `ForceFailure` node), allowing higher-level handlers to intercept or log the event.
 In other words, `fallback` does not catch exceptions during `script` execution, but rather provides an alternative flow for cases where the conditions are not met.

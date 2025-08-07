@@ -1,5 +1,5 @@
 import YAMLEventSheets from '../../plugins/yamleventsheets.js';
-import content from 'raw-loader!/assets/yamleventsheets/if-else/if-else.yml';
+import content from 'raw-loader!/assets/yamleventsheets/condition/condition.yml';
 
 class CommandExecutor {
     print({ text = '' } = {}, eventSheetManager, eventSheet) {
@@ -20,6 +20,11 @@ var eventSheetManager = new YAMLEventSheets({
 eventSheetManager.addEventSheet(content);
 console.log(eventSheetManager.dumpEventSheetGroup())
 
-eventSheetManager.startGroup()
+eventSheetManager
+    .on('complete', function () {
+        console.log('..Execute events complete..')
+    })
+    .setData('coin', 8)
+    .startGroup()
 
 console.log(eventSheetManager.memory)

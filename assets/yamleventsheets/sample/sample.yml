@@ -27,7 +27,6 @@ script:
     parameters: { text: "Now I have {{coin}} coin" }
 
   - title: Before if
-    type: label
     actions:
       - name: print
         parameters: { text: "Before if" }
@@ -62,13 +61,11 @@ script:
     parameters: { text: "Embedded condition: coin < 10" }
 
   - title: After If
-    type: label
     actions:
       - name: print
         parameters: { text: "After If" }
 
   - title: Before while
-    type: label
     actions:
       - name: print
         parameters: { text: "Before while" }
@@ -86,13 +83,11 @@ script:
         parameters: { loopCount: "#(loopCount-1)" }
 
   - title: After while
-    type: label
     actions:
       - name: print
         parameters: { text: "After while" }
 
   - title: Break label test
-    type: label
     actions:
       - name: print
         parameters: { text: "Before break-label" }
@@ -101,7 +96,6 @@ script:
         parameters: { text: "After break-label" }
 
   - title: Exit test
-    type: label
     actions:
       - name: print
         parameters: { text: "Before exit" }
@@ -110,7 +104,6 @@ script:
         parameters: { text: "After exit" }
 
   - title: Remainder
-    type: label
     actions:
       - name: print
         parameters: { text: "Here" }

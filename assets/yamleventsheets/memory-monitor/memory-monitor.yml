@@ -1,7 +1,6 @@
 title: Title
 script:
   - title: Initial
-    type: label
     actions:
       - name: log.memory
       - type: if

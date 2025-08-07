@@ -12,9 +12,7 @@ var CreateActionNode = function (nodeData) {
 
     var expression = GetConditionExpression(nodeData.condition);
     if (expression !== 'true') {
-        // ForceSuccess <- If
-        ifDecorator = new ForceSuccess();
-        ifDecorator.chainChild(CreateIfDecorator(expression))
+        ifDecorator = CreateIfDecorator(expression, true)
     }
 
     switch (nodeData.type) {
@@ -55,8 +53,8 @@ var CreateActionNode = function (nodeData) {
     }
 
     if (ifDecorator) {
-        // ForceSuccess <- If <- Action
-        ifDecorator.chainChild(node);
+        // If <- Action
+        ifDecorator.addChild(node);
         node = ifDecorator;
     }
 
