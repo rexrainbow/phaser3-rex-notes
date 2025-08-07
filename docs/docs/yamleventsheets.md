@@ -1,6 +1,6 @@
 ## Introduction
 
-Event sheets contains main condition(s) and actions, in simple markdown format (headings, code block).
+Event sheets contains main condition(s) and actions, in YAML format.
 
 - Author: Rex
 - Member of scene
@@ -11,8 +11,8 @@ Event sheets contains main condition(s) and actions, in simple markdown format (
 
 ## Usage
 
-- [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/markedeventheets)
-- [Event sheets](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/assets/markedeventsheet)
+- [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/yamleventheets)
+- [Event sheets](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/assets/yamleventsheet)
 
 ### Install plugin
 
@@ -20,11 +20,11 @@ Event sheets contains main condition(s) and actions, in simple markdown format (
 
 - Load plugin (minify file) in preload stage
     ```javascript
-    scene.load.plugin('rexmarkedeventsheetsplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexmarkedeventsheetsplugin.min.js', true);
+    scene.load.plugin('rexyamleventsheetsplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexyamleventsheetsplugin.min.js', true);
     ```
 - Add event-sheet-manager object
     ```javascript
-    var eventSheetManager = scene.plugins.get('rexmarkedeventsheetsplugin').add(config);
+    var eventSheetManager = scene.plugins.get('rexyamleventsheetsplugin').add(config);
     ```
 
 #### Import plugin
@@ -35,13 +35,13 @@ Event sheets contains main condition(s) and actions, in simple markdown format (
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import MarkedEventSheetsPlugin from 'phaser3-rex-plugins/plugins/markedeventsheets-plugin.js';
+    import YAMLEventSheetsPlugin from 'phaser3-rex-plugins/plugins/yamleventsheets-plugin.js';
     var config = {
         // ...
         plugins: {
             global: [{
-                key: 'rexMarkedEventSheets',
-                plugin: MarkedEventSheetsPlugin,
+                key: 'rexYAMLEventSheets',
+                plugin: YAMLEventSheetsPlugin,
                 start: true
             },
             // ...
@@ -53,7 +53,7 @@ Event sheets contains main condition(s) and actions, in simple markdown format (
     ```
 - Add event-sheet-manager object
     ```javascript
-    var eventSheetManager = scene.plugins.get('rexMarkedEventSheets').add(config);
+    var eventSheetManager = scene.plugins.get('rexYAMLEventSheets').add(config);
     ```
 
 #### Import class
@@ -64,24 +64,24 @@ Event sheets contains main condition(s) and actions, in simple markdown format (
     ```
 - Import class
     ```javascript
-    import MarkedEventSheets from 'phaser3-rex-plugins/plugins/markedeventsheets.js';
+    import YAMLEventSheets from 'phaser3-rex-plugins/plugins/yamleventsheets.js';
     ```
 - Add event-sheet-manager object
     ```javascript
-    var eventSheetManager = new MarkedEventSheets(config);
+    var eventSheetManager = new YAMLEventSheets(config);
     ```
 
 ### Create instance
 
 ```javascript
-var eventSheetManager = scene.plugins.get('rexMarkedEventSheets').add({
+var eventSheetManager = scene.plugins.get('rexYAMLEventSheets').add({
     commandExecutor: Object,
     parallel: false
 });
 ```
 
-- `commandExecutor` : Command executor of [actions](markedeventsheets.md#custom-command).
-    - This plugin provides a built-in [command executor](markedeventsheets.md#command-executor).
+- `commandExecutor` : Command executor of [actions](yamleventsheets.md#custom-command).
+    - This plugin provides a built-in [command executor](yamleventsheets.md#command-executor).
 - `parallel` :
     - `false` : Test condition then execute event sheet one by one. Default behavior.
     - `true` : Test all condition of event sheets then execute event sheets one by one.
@@ -93,8 +93,6 @@ Each event sheet belong a group.
 
 ```javascript
 eventSheetManager.addEventSheet(content, {
-    commentLineStart: '\/\/',
-    lineBreak: '\\',
     parallel: undefined,
     active: true,
     once: false
@@ -105,8 +103,6 @@ or
 
 ```javascript
 eventSheetManager.addEventSheet(content, groupName, {
-    commentLineStart: '\/\/',
-    lineBreak: '\\',
     parallel: undefined,
     active: true,
     once: false
@@ -117,18 +113,14 @@ or
 
 ```javascript
 eventSheetManager.addEventSheet(content, {
-    groupName: '_'
-    commentLineStart: '\/\/',
-    lineBreak: '\\',
+    groupName: '_',
     parallel: undefined,
     active: true,
     once: false
 })
 ```
 
-- `content` : See [structure of event sheet](markedeventsheets.md#structure-of-event-sheet)
-- `commentLineStart` : Content line start by this symobl (default value is `//`) will be ignored as a comment line.
-- `lineBreak` : Markdown will use `\` as line break. So the last character `\` will be discarded.
+- `content` : See [structure of event sheet](yamleventsheets.md#structure-of-event-sheet)
 - `parallel` : 
     - `undefined` : Use default `parallel` property.
 - `active` : 
@@ -403,13 +395,13 @@ Expression will store at [local memory](#local-memory)
 
     });
     ```
-- Enter a label (any heading) an event sheet
+- Enter a [label](yamleventsheets.md#label) an event sheet
     ```javascript
     eventSheetManager.on('label.enter', function(headingTitle, eventSheetTitle, groupName, eventSheetManager){ 
 
     });
     ```
-- Exit a label (any heading) of an event sheet
+- Exit a [label](yamleventsheets.md#label) of an event sheet
     ```javascript
     eventSheetManager.on('label.exit', function(headingTitle, eventSheetTitle, groupName, eventSheetManager){ 
 
@@ -424,234 +416,229 @@ Expression will store at [local memory](#local-memory)
 
 ### Structure of event sheet
 
-[Sample](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/assets/markedeventsheet/sample.md?plain=1)
+[Sample](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/assets/yamleventsheet/sample.md?plain=1)
 
 #### Main headings
 
-```
-# Title
+```yaml
+title: Title
 
-groupName
-parallel
-active=false
-once
+groupName: 
+parallel: 
+active: false
+once: false
 
-## [Condition]
+condition: expression
 
-coin > 5
+script:
 
-## Script
-
-## [Catch]
+fallback:
 
 ```
 
-- H1 heading : Title of this event sheet
-- Content under Title (H1 heading) : Setting of this event sheet, optional.
-    - `groupName` : Assign `groupName` in event sheet, put this event sheet in to that group.
-    - `parallel` : Set `parallel` property of this event sheet to `true`.
-    - `active=false` : Set `active` property of this event sheet to `false`.
-    - `once` : Set `once` property of this event sheet to `true`.
-- H2 heading with `[Condition]` : Main condition.
-    - Each line under `[Condition]` is a boolean equation, composed of `AND` logic.
-    - Can have many `[Condition]` heading, each `[Condition]` heading will be composed of `OR` logic.
-    - Read data from [local memory](markedeventsheets.md#local-memory)
-- H2/H3/... headings between `[Condition]` and `[Catch]` : Actions when main condition is `true`.
-    - [Flow control instructions of headings](markedeventsheets.md#flow-control-instructions)
-    - Actions : [Custom command](markedeventsheets.md#custom-command)
-- H2 heading with `[Catch]` : Actions when main condition is `false`.
+- `title` : Title of this event sheet
+- `groupName` : Assign `groupName` in event sheet, put this event sheet in to that group.
+- `parallel` : Set `parallel` property of this event sheet to `true`.
+- `active=false` : Set `active` property of this event sheet to `false`.
+- `once` : Set `once` property of this event sheet to `true`.
+- `condition` : Main condition.
+    - A string : Single boolean expression
+        ```yaml
+        condition: "hp > 0 && mp > 0"
+        ```
+    - An array : Represents OR, elements can be
+        - A string : Single expression
+        - An array : Represents AND, e.g., `["a", "b"]` -> `(a) && (b)`
+        - Object `{and: [...]}`: Equivalent to AND
+            ```yaml
+            condition:
+              - "score > 0"                    # (score > 0)
+              - ["hp > 0", "mp > 0"]           # OR ((hp > 0) && (mp > 0))
+              - and: ["stage == 1", "boss"]    # OR ((stage == 1) && (boss))
+            ```
+        - When omitted or malformed, defaults to `"true"`
+    - Read data from [local memory](yamleventsheets.md#local-memory)
+- `script` : Actions when main condition is `true`.
+    - [Flow control instructions](yamleventsheets.md#flow-control-instructions)
+    - Actions : [Custom command](yamleventsheets.md#custom-command)
+- `fallback` : Actions when main condition is `false`.
 
 #### Flow control instructions
 
 ##### If, Else if, Else
 
-```
-### [If coin > 10]
+```yaml
+- type: if
+  branches:
+    - condition: coin > 10  # IF
+    - actions:
+      # - name: 
 
-actions...
+    - condition: (coin > 5) && (coin <10)  # ELSE IF
+    - actions:
+      # - name:
 
-### [Else If (coin > 5) && (coin <10)]
-
-actions...
-
-### [Else]
-
-actions...
-```
-
-- H2/H3/... heading with `[If expression]`, or `[Else if expression]` : If/Else If condition with expression
-    - Read data from [local memory](markedeventsheets.md#local-memory)
-    - Boolean expression AND/OR : `&&`.
-    - Boolean expression OR : `||`.
-    - Actions when expression is `true`.
-- H2/H3/... heading with `[Else]` :
-    - Actions when previous expressions are all `false`.
-
-
-```
-## [If]
-
-coin > 10
-
-### Label
-
-actions...
-
-## [Else If]
-
-coin > 5
-coin < 10
-
-### Label
-
-actions...
-
-## [Else]
-
-### Label
-
-actions...
+    - actions:  # ELSE
+      # - name:
 ```
 
-- H2/H3/... heading with `[If]`, or `[Else if]` : If, Else If condition
-    - Each line under `[If]`, `[Else If]` is a boolean equation, composed of `AND` logic.
-    - Read data from [local memory](markedeventsheets.md#local-memory)
-- H3/H4/... heading under `[If]`, `[Else if]` : - Actions when previous expressions are all `false`.
-
+- `type: if` with `branches:`, each branch contains `condition: expression`, and `actions: `
+    - `condition: expression`
+        - Read data from [local memory](yamleventsheets.md#local-memory)
+        - Boolean expression AND/OR : `&&`.
+        - Boolean expression OR : `||`.
+        - No `condition` : ELSE part
+    - And `actions: `, run actions when expression is `true`.
 
 ##### Repeat loop
 
-```
-## [Repeat 3]
-
-actions...
-```
-
-or
-
-```
-## [Repeat loopCount]
-
-actions...
+```yaml
+- type: repeat
+  times: 3
+  actions:
+    # - name:
 ```
 
 or
 
+```yaml
+- type: repeat
+  times: loopCount
+  actions:
+    # - name:
 ```
-## [Repeat 3]
-
-### Label
-
-actions...
-```
-
-
-- H2/H3/... heading with `[Repeat N]`, or `[Repeat var]` : Repeat loop N times
-
 
 ##### While loop
 
-```
-## [While loopCount > 0]
-
-actions...
-```
-
-- H2/H3/... heading with `[While expression]` : While loop with expression    
-    - Read data from [local memory](markedeventsheets.md#local-memory)
-    - Actions when expression is `true`.
-
-
-```
-## [While]
-
-loopCount > 0
-
-### Label
-
-actions...
+```yaml
+- type: while
+  condition: loopCount > 0
+  actions:
+    # - name:
 ```
 
-- H2/H3/... heading with `[While]` : While loop
-    - Each line under `[While]` is a boolean equation, composed of `AND` logic.
-    - Read data from [local memory](markedeventsheets.md#local-memory)
-- H3/H4/... heading under `[While]` : Actions running when condition is `true`
+
+##### Label
+
+```yaml
+- title: labelTitle
+  actions:
+    # - name: 
+```
+
+or
+
+```yaml
+- actions:
+    # - name: 
+```
+
+or
+
+```yaml
+- title: labelTitle
+  type: label
+  actions:
+    # - name: 
+```
+
+or
+
+```yaml
+- title: labelTitle
+  condition: expression
+  type: label
+  actions:
+    # - name: 
+```
+
+- `title: labelTitle` : Optional title name.
+- `actions` : Run commands sequentially
+- `condition: expression` : Run commands if `expression` return `true`, optional
+    - Each custom command can have this `condition` property, including all command in [Command executor](yamleventsheets.md#command-executor)
 
 
 ##### Break
 
+```yaml
+- type: break
 ```
 
-[break]
-
-```
-
-- Action line with `[break]` : Ignore remainder actions in current label (heading).
+- Action `type: break` : Ignore remainder actions in current level.
 
 
 ##### Exit
 
+```yaml
+- type: exit
 ```
 
-[exit]
-
-```
-
-- Action line with `[exit]` : Skip remainder label (heading) and actions.
+- Action `type: exit` : Skip remainder instructions.
 
 ##### Deactivate
 
-```
-
-[deactivate]
-
+```yaml
+- type: deactivate
 ```
 
 or
 
 
+```yaml
+- type: deactivate 
+  target: eventSheetTitle
+
 ```
 
-[deactivate title]
-
-```
-
-- Action line with `[deactivate]`, or `[deactivate title]` : Deactivate this event sheet, or deactivate event sheet by title in the same tree group. i.e. Set `active` property of this event shhet to `false`.
-
-
+- Action `type: deactivate` : Deactivate this event sheet, or deactivate event sheet by title in the same tree group. i.e. Set `active` property of this event shhet to `false`.
 
 ##### Activate
 
-```
-
-[activate]
-
+```yaml
+- type: activate
 ```
 
 or
 
 
+```yaml
+- type: activate
+  target: eventSheetTitle
 ```
 
-[activate title]
-
-```
-
-- Action line with `[activate]`, or `[activate title]` : Activate this event sheet, or activate event sheet by title in the same tree group. i.e. Set `active` property of this event shhet to `true`.
+- Action `type: activate` : Activate this event sheet, or activate event sheet by title in the same tree group. i.e. Set `active` property of this event shhet to `true`.
 
 
 #### Custom command
 
+```yaml
+- name: commandName
+  parameters: 
+    param0: value, 
+    param1: value
 ```
 
-commandName
-  param0=value
-  param1=value
+or
 
+```yaml
+- condition: expression
+  name: commandName
+  parameters:
+    param0: value
+    param1: value
 ```
 
-- Each command is divided by space line. i.e. add space lines above and below command.
-- First line is the command name.
+or
+
+```yaml
+- type: command
+  name: commandName
+  parameters:
+    param0: value
+    param1: value
+```
+
+- `name: commandName` :
     1. Invoke `commandExecutor.commandName` method if this `commandName` method is existed.
         ```javascript
         commandName(config, eventSheetManager) {
@@ -691,38 +678,9 @@ commandName
                 ```javascript
                 eventSheetManager.pauseEventSheetUnitlEvent(eventEmitter, eventName);
                 ```
-- Remainder lines are parameter composed of parameter name and value, with `=`
-    - Space characters at line start will be discarded.
-    - Value will be parsed to number, boolean, or string.
-        - String value contains `{{`, and `}}` will be interpolation by [mustache](https://mustache.github.io/mustache.5.html) template syntax, return a string value.
-        - String value wrapped by `#(` `)` will be treated as expression, return a number value.
-- Any line start with `//` will be ignored as comment line.
+- `condition: expression` : Run command if `expression` return `true`, optional
+    - Each custom command can have this `condition` property, including all command in [Command executor](yamleventsheets.md#command-executor)
 
-
-For multiple lines parameter :
-
-~~~
-```commandName,param0=value,param1=value
-line0
-line1
-line2
-```
-~~~
-
-- Lines in code block will be assigned to `text` parameter.
-
-So it will be equal to
-
-```
-
-commandName
-  text=...
-  param0=value
-  param1=value
-
-```
-
-- `'\n'`
 
 ### Command executor
 
@@ -731,7 +689,7 @@ A command executor for phaser3 engine.
 #### Create command executor instance
 
 ```javascript
-var commandExecutor = scene.plugins.get('rexMarkedEventSheets').addCommandExecutor(scene, {
+var commandExecutor = scene.plugins.get('rexYAMLEventSheets').addCommandExecutor(scene, {
     // layers: ['layer0', 'layer1', ...]
     // layers: [{name, cameraName}, ...]
 
@@ -745,7 +703,7 @@ var commandExecutor = scene.plugins.get('rexMarkedEventSheets').addCommandExecut
 });
 
 // Add to event sheet manager
-// var eventSheetManager = scene.plugins.get('rexMarkedEventSheets').add({
+// var eventSheetManager = scene.plugins.get('rexYAMLEventSheets').add({
 //     commandExecutor: commandExecutor
 // });
 ```
@@ -753,12 +711,12 @@ var commandExecutor = scene.plugins.get('rexMarkedEventSheets').addCommandExecut
 or
 
 ```javascript
-// import MarkedEventSheets from 'phaser3-rex-plugins/plugins/markedeventsheets.js';
+// import YAMLEventSheets from 'phaser3-rex-plugins/plugins/yamleventsheets.js';
 // import CommandExecutor from 'phaser3-rex-plugins/plugins/commandexecutor.js';
 
 var commandExecutor = new CommandExecutor(scene, config);
 
-// var eventSheetManager = new MarkedEventSheets({
+// var eventSheetManager = new YAMLEventSheets({
 //     commandExecutor: commandExecutor
 // });
 ```
@@ -784,24 +742,24 @@ var commandExecutor = new CommandExecutor(scene, config);
 #### Local memory of event sheet manager
 
 - Set value by key
-    ```
-    setData
-      key=value
+    ```yaml
+    - name: setData
+      parameters: { key: value }      
     ```
 - Increase value of key
-    ```
-    incData
-      key=value
+    ```yaml
+    - name: incData
+      parameters: { key: value }
     ```
     or
-    ```
-    setData
-      key=#(key+value)
+    ```yaml
+    - name: setData
+      parameters: { key: "#(key+value)" }
     ```
 - Toggle value of key
-    ```
-    toggleData
-      key
+    ```yaml
+    - name: toggleData
+      parameters: { key: true }
     ```
 
 
@@ -812,20 +770,21 @@ See [Local memory](#local-memory)
 
 ##### Print message on console
 
-```
-log
-  text=...
+```yaml
+- name: log
+  parameters: { text: "..." }
 ```
 
 or
 
-```
-log
-  text=...
-  // logType='log'
-  // showTitle=true
-  // title
-  // titleColor='green'
+```yaml
+- name: log
+  parameters:
+    logType: log
+    showTitle: true
+    titleL : "..."
+    titleColor: green
+    text: "..."
 ```
 
 - `text` : Message with bbcode format.
@@ -848,17 +807,17 @@ log
 
 ##### Disable console message
 
-```
-log.disable
+```yaml
+- name: log.disable
 ```
 
 - Disable console message of current event sheet.
 
 or
 
-```
-log.disable
-  title=...
+```yaml
+- name: log.disable
+  parameters: {title: "..." }
 ```
 
 - `title` : Disable console message of event sheet by title.
@@ -866,17 +825,17 @@ log.disable
 
 ##### Enable console message
 
-```
-log.enable
+```yaml
+- name: log.enable
 ```
 
 - Enable console message of current event sheet.
 
 or
 
-```
-log.enable
-  title=...
+```yaml
+- name: log.enable
+  paramterers : { title: "..." }
 ```
 
 - `title` : Enable console message of event sheet by title.
@@ -884,18 +843,19 @@ log.enable
 
 ##### Dump memory
 
-```
-log.memory
+```yaml
+- name: log.memory
 ```
 
 - Dump all key in memory
 
 or
 
-```
-log.memory
-  text=...
-  keys=a,b,c
+```yaml
+- name: log.memory
+  parameters:
+    text: "..."
+    keys: "a,b,c"
 ```
 
 - `keys` : Dump part of memory by keys.
@@ -928,14 +888,14 @@ commandExecutor.addGameObjectManager({
 })
 ```
 
-- `name` : A string name of game object's type. Will [register command](markedeventsheets.md#add-custom-command) `GOTYPE` to this command executor.
+- `name` : A string name of game object's type. Will [register command](yamleventsheets.md#add-custom-command) `GOTYPE` to this command executor.
 - `createGameObject` : A callback for creating game object
     ```javascript
     function(scene, config) {
         return gameObject;
     }
     ```
-    - `config` : Parameters passed from [event sheet](markedeventsheets.md#create-custom-game-object).
+    - `config` : Parameters passed from [event sheet](yamleventsheets.md#create-custom-game-object).
         - `id`, `layer`, `autoClear`, `eventSheetManager`, `eventsheet` : These parameters are reserved.
         - `eventSheetManager` : This event sheet manager.
 - `viewportCoordinate` : Apply [viewportCoordinate behavior](viewport-coordinate.md) to game object.
@@ -955,7 +915,7 @@ commandExecutor.addGameObjectManager({
             - `'revealLeft'`, or `4` : [Reveal](shader-p3fx.md#reveal) left for fade-in.
             - `'revealRight'`, or `5` : [Reveal](shader-p3fx.md#reveal) right for fade-in.
         - `fade.time` : Duration of fading. Default value is `500`.
-- `defaultLayer` : A layer name defined in `layers` parameter of [`addCommandExecutor` method](markedeventsheets.md#create-command-executor-instance)
+- `defaultLayer` : A layer name defined in `layers` parameter of [`addCommandExecutor` method](yamleventsheets.md#create-command-executor-instance)
 - `autoClear` : 
     - `true` : Clear game objects when exiting current event sheet. Default behavior.
     - `false` : Ignore this behavior.
@@ -965,24 +925,23 @@ commandExecutor.addGameObjectManager({
         // commandExecutor.waitEvent(eventEmitter, eventName);
     }
     ```
-    - `commandName` : Command name. These command names are reserved : [`to`](markedeventsheets.md#ease-properties-of-custom-game-object), [`yoyo`](markedeventsheets.md#ease-properties-of-custom-game-object), [`destroy`](markedeventsheets.md#destroy-custom-game-object)
+    - `commandName` : Command name. These command names are reserved : [`to`](yamleventsheets.md#ease-properties-of-custom-game-object), [`yoyo`](yamleventsheets.md#ease-properties-of-custom-game-object), [`destroy`](yamleventsheets.md#destroy-custom-game-object)
     - `gameObject` : Game object instance.
-    - `config` : Parameters passed from [event sheet](markedeventsheets.md#invoke-custom-command).
+    - `config` : Parameters passed from [event sheet](yamleventsheets.md#invoke-custom-command).
     - `commandExecutor` : This command executor instance. [See also](#methods-used-in-command)
     - `eventSheetManager` : This event sheet manager instance.
         - Store variable into blackboard of eventSheetManager : `eventSheetManager.setData(key, value)`
 
 ##### Create custom game object
 
-```
-
-GOTYPE
-  id=NAME
-  layer=
-  autoClear=
-  param0=value
-  param1=value
-
+```yaml
+- name: GOTYPE
+  parameters:
+    id: NAME
+    layer:
+    autoClear:
+    param0: value
+    param1: value
 ```
 
 - Create custom game object `GOTYPE` with config `{param0, param1}`, indexed by `id`
@@ -1001,15 +960,14 @@ can see it by `log.memory`, or get property of game object via `#(@NAME.x + 3)`.
 ##### Set properties of custom game object
 
 - Set properties of a game object indexing by `NAME`
-    ```
-    
-    NAME.set
-      x=
-      vpx=
-      y=
-      vpy=
-      alpha=
-    
+    ```yaml    
+    - name: NAME.set
+      parameters:
+        x:
+        vpx:
+        y:
+        vpy:
+        alpha:    
     ```
     - `vpx`, `vpy` : [viewportCoordinate properties](viewport-coordinate.md) injected if `viewportCoordinate` is `true`.
     - Add empty line above and below this command block.
@@ -1025,64 +983,60 @@ can see it by `log.memory`, or get property of game object via `#(@NAME.x + 3)`.
     
     ```
 - Set properties of all game objects belong GOTYPE excluding `NAME`
-    ```
-    
-    !NAME.set
-      x=
-      vpx=
-      y=
-      vpy=
-      alpha=
-    
+    ```yaml
+    - name: "!NAME.set"
+      parameters:
+        x:
+        vpx:
+        y:
+        vpy:
+        alpha:    
     ```
 
 ##### Ease properties of custom game object
 
 - Ease properties of a game object indexing by `NAME`
+    ```yaml
+    - name: NAME.to
+      parameters:
+        x:
+        vpx:
+        y:
+        vpy:
+        alpha:
+        duration: 1000
+        delay: 0
+        ease: Linear
+        repeat: 0
+        wait:
     ```
-    
-    NAME.to
-      x=
-      vpx=
-      y=
-      vpy=
-      alpha=
-      duration=1000
-      delay=0
-      ease=Linear
-      repeat=0
-      wait=
-    
+    ```yaml
+    - name: NAME.from
+      parameters:
+        x:
+        vpx:
+        y:
+        vpy:
+        alpha:
+        duration: 1000
+        delay: 0
+        ease: Linear
+        repeat: 0
+        wait:
     ```
-    ```
-    
-    NAME.from
-      x=
-      vpx=
-      y=
-      vpy=
-      alpha=
-      duration=1000
-      delay=0
-      ease=Linear
-      repeat=0
-      wait=
-    
-    ```
-    ```
-    
-    NAME.yoyo
-      x=
-      vpx=
-      y=
-      vpy=
-      alpha=
-      duration=1000
-      delay=0
-      ease=Linear
-      repeat=0
-      wait=
-    
+    ```yaml
+    - name: NAME.yoyo
+      parameters:
+        x:
+        vpx:
+        y:
+        vpy:
+        alpha:
+        duration: 1000
+        delay: 0
+        ease: Linear
+        repeat: 0
+        wait:
     ```
     - These properties are reserved : `id`, `duration`, `delay`, `ease`, `repeat`, `yoyo`, `wait`
     - `wait` :
@@ -1090,106 +1044,100 @@ can see it by `log.memory`, or get property of game object via `#(@NAME.x + 3)`.
         - `true` : Run next command after playing sound complete.
     - Add empty line above and below this command block.
 - Ease properties of all game objects belong GOTYPE
+    ```yaml
+    - name: GOTYPE.to
+      parameters:
+        x:
+        vpx:
+        y:
+        vpy:
+        alpha:
+        duration: 1000
+        delay: 0
+        ease: Linear
+        repeat: 0
+        wait:
     ```
-    
-    GOTYPE.to
-      x=
-      vpx=
-      y=
-      vpy=
-      alpha=
-      duration=1000
-      delay=0
-      ease=Linear
-      repeat=0
-      wait=
-    
+    ```yaml
+    - name: GOTYPE.from
+      parameters:
+        x:
+        vpx:
+        y:
+        vpy:
+        alpha:
+        duration: 1000
+        delay: 0
+        ease: Linear
+        repeat: 0
+        wait:
     ```
-    ```
-    
-    GOTYPE.from
-      x=
-      vpx=
-      y=
-      vpy=
-      alpha=
-      duration=1000
-      delay=0
-      ease=Linear
-      repeat=0
-      wait=
-    
-    ```
-    ```
-    
-    GOTYPE.yoyo
-      x=
-      vpx=
-      y=
-      vpy=
-      alpha=
-      duration=1000
-      delay=0
-      ease=Linear
-      repeat=0
-      wait=
-    
+    ```yaml
+    - name: GOTYPE.yoyo
+      parameters:
+        x:
+        vpx:
+        y:
+        vpy:
+        alpha:
+        duration: 1000
+        delay: 0
+        ease: Linear
+        repeat: 0
+        wait:
     ```
 - Ease properties of all game objects belong GOTYPE excluding `NAME`
+    ```yaml
+    - name: "!NAME.to"
+      parameters:
+        x:
+        vpx:
+        y:
+        vpy:
+        alpha:
+        duration: 1000
+        delay: 0
+        ease: Linear
+        repeat: 0
+        wait:
     ```
-    
-    !NAME.to
-      x=
-      vpx=
-      y=
-      vpy=
-      alpha=
-      duration=1000
-      delay=0
-      ease=Linear
-      repeat=0
-      wait=
-    
+    ```yaml
+    - name: "!NAME.from"
+      parameters:
+        x:
+        vpx:
+        y:
+        vpy:
+        alpha:
+        duration: 1000
+        delay: 0
+        ease: Linear
+        repeat: 0
+        wait:
     ```
-    ```
-    
-    !NAME.from
-      x=
-      vpx=
-      y=
-      vpy=
-      alpha=
-      duration=1000
-      delay=0
-      ease=Linear
-      repeat=0
-      wait=
-    
-    ```
-    ```
-    
-    !NAME.yoyo
-      x=
-      vpx=
-      y=
-      vpy=
-      alpha=
-      duration=1000
-      delay=0
-      ease=Linear
-      repeat=0
-      wait=
-    
+    ```yaml
+    - name: "!NAME.yoyo"
+      parameters:
+        x:
+        vpx:
+        y:
+        vpy:
+        alpha:
+        duration: 1000
+        delay: 0
+        ease: Linear
+        repeat: 0
+        wait:
     ```
 
 ##### Invoke custom command 
 
 - Invoke custom command of a game object indexing by `NAME`
-    ```
-    
-    NAME.commandName
-      param0=value
-      param1=value
+    ```yaml
+    - name: NAME.commandName
+      parameters:
+        param0: value
+        param1: value
     
     ```
     - Invoke custom command `commandName` method with these parameters
@@ -1199,20 +1147,18 @@ can see it by `log.memory`, or get property of game object via `#(@NAME.x + 3)`.
     - `value` :
         - For string value, characters `\n` (2 characters) will be replaced by `\n` new line character (1 character)
 - Invoke custom command of all game objects belong GOTYPE
-    ```
-    
-    GOTYPE.commandName
-      param0=value
-      param1=value
-    
+    ```yaml
+    - name: GOTYPE.commandName
+      parameters:
+        param0: value
+        param1: value    
     ```
 - Invoke custom command of all game objects belong GOTYPE excluding `NAME`
-    ```
-    
-    !NAME.commandName
-      param0=value
-      param1=value
-    
+    ```yaml
+    - name: "!NAME.commandName"
+      parameters:
+        param0: value
+        param1: value    
     ```
 
 
@@ -1221,22 +1167,16 @@ Do nothing if gameObject or commandName is not found.
 ##### Destroy custom game object
 
 - Destroy game object indexing by `NAME`
-    ```
-    
-    NAME.destroy
-    
+    ```yaml
+    - name: NAME.destroy    
     ```
 - Destroy all game objects belong GOTYPE
-    ```
-    
-    GOTYPE.destroy
-    
+    ```yaml
+    - name: GOTYPE.destroy    
     ```
 - Destroy all game objects belong GOTYPE excluding `NAME`
-    ```
-    
-    !NAME.destroy
-    
+    ```yaml
+    - name: "!NAME.destroy"    
     ```
 
 ##### Methods used in command
@@ -1288,10 +1228,8 @@ Do nothing if gameObject or commandName is not found.
 
 ##### Wait click
 
-```
-
-click
-
+```yaml
+- name: click
 ```
 
 - Run next command after clicking.
@@ -1300,18 +1238,17 @@ click
 
 Run next command after...
 
-```
-
-wait
-  click
-  key=keyName
-  time=
-  GONAME.destroy
-  GONAME.PROPNAME
-  GONAME.DATAKEY
-  GONAME.EVTNAME
-  event=EVENTNAME
-
+```yaml
+- name: wait
+  parameters:
+    click: true
+    key: keyName
+    time: 
+    GONAME.destroy: true
+    GONAME.PROPNAME: true
+    GONAME.DATAKEY: true
+    GONAME.EVTNAME: true
+    event: EVENTNAME
 ```
 
 - `click` : Run next command after clicking.
@@ -1360,27 +1297,28 @@ This command executor provides
 
 ##### Sound properties
 
-```
-
-bgm.set
-  volume
-  mute
-  unmute
+```yaml
+- name: bgm.set
+  parameters:
+    volume:
+    mute:
+    unmute:
 ```
 
 - Command name : `bgm`, `bgm2`, `se`, `se2`
 
 ##### Play sound
 
-```
-bgm.play
-  key=
-  // volume
-  // detune
-  // rate
-  fadeIn=0
-  // loop
-  wait=false
+```yaml
+- name: bgm.play
+  parameters:
+    key:
+    # volume:
+    # detune:
+    # rate:
+    # fadeIn: 0
+    # loop: false
+    wait: false
 ```
 
 - Command name : `bgm.play`, `bgm2.play`, `se.play`, `se2.play`
@@ -1390,12 +1328,12 @@ bgm.play
 
 ##### Cross fade in sound
 
-```
-
-bgm.cross
-  key=
-  duration=500
-  wait=false
+```yaml
+- name: bgm.cross
+  parameters:
+    key:
+    duration: 500
+    wait: false
 
 ```
 
@@ -1406,21 +1344,20 @@ bgm.cross
 
 ##### Stop sound
 
-```
-bgm.stop
+```yaml
+- name: bgm.stop
 ```
 
 - Command name : `bgm.stop`, `bgm2.stop`, `se.stop`, `se2.stop`
 
 ##### Fade out sound
 
-```
-
-bgm.fadeOut
-  duration=500
-  stop=true
-  wait=false
-
+```yaml
+- name: bgm.fadeOut
+  parameters:
+    duration: 500
+    stop: true
+    wait: false
 ```
 
 - Command name : `bgm.fadeOut`, `bgm2.fadeOut`, `se.fadeOut`, `se2.fadeOut`
@@ -1430,51 +1367,41 @@ bgm.fadeOut
 
 ##### Fade in sound
 
-```
-
-bgm.fadeIn
-  duration=500
-
+```yaml
+- name: bgm.fadeIn
+  parameters: { duration: 500 }
 ```
 
 - Command name : `bgm.fadeIn`, `bgm2.fadeIn`
 
 ##### Pause sound
 
-```
-
-bgm.pause
-
+```yaml
+- name: bgm.pause
 ```
 
 - Command name : `bgm.pause`, `bgm2.pause`
 
 ##### Resume sound
 
-```
-
-bgm.resume
-
+```yaml
+- name: bgm.resume
 ```
 
 - Command name : `bgm.resume`, `bgm2.resume`
 
 ##### Mute sound
 
-```
-
-bgm.mute
-
+```yaml
+- name: bgm.mute
 ```
 
 - Command name : `bgm.mute`, `bgm2.mute`, `se.mute`, `se2.mute`
 
 ##### Unmute sound
 
-```
-
-bgm.unmute
-
+```yaml
+- name: bgm.unmute
 ```
 
 - Command name : `bgm.unmute`, `bgm2.unmute`, `se.unmute`, `se2.unmute`
@@ -1483,15 +1410,14 @@ bgm.unmute
 
 ##### Camera properties
 
-```
-
-camera.set
-  x=
-  y=
-  rotate=
-  zoom=
-  name
-
+```yaml
+- name: camera.set
+  parameters:
+    x:
+    y:
+    rotate:
+    zoom:
+    name:
 ```
 
 - `x`, `y` : Scroll
@@ -1503,16 +1429,15 @@ Run next command immediately.
 
 ##### Fade in
 
-```
-
-camera.fadeIn
-  duration=1000
-  red
-  green
-  blue
-  name
-  wait=false
-
+```yaml
+- name: camera.fadeIn
+  parameters:
+    duration: 1000
+    red:
+    green:
+    blue:
+    name:
+    wait: false
 ```
 
 - `duration`, `red`, `green`, `blue` : See [fade effect](camera-effects.md/#fade)
@@ -1523,16 +1448,15 @@ camera.fadeIn
 
 ##### Fade out
 
-```
-
-camera.fadeOut
-  duration=1000
-  red
-  green
-  blue
-  name
-  wait=false
-
+```yaml
+- name: camera.fadeOut
+  parameters:
+    duration: 1000
+    red:
+    green:
+    blue:
+    name:
+    wait: false
 ```
 
 - `duration`, `red`, `green`, `blue` : See [fade effect](camera-effects.md/#fade)
@@ -1543,16 +1467,15 @@ camera.fadeOut
 
 ##### Flash
 
-```
-
-camera.flash
-  duration=1000
-  red
-  green
-  blue
-  name
-  wait=false
-
+```yaml
+- name: camera.flash
+  parameters:
+    duration: 1000
+    red:
+    green:
+    blue:
+    name:
+    wait: false
 ```
 
 - `duration`, `red`, `green`, `blue` : See [flash effect](camera-effects.md/#flash)
@@ -1563,14 +1486,13 @@ camera.flash
 
 ##### Shake
 
-```
-
-camera.shake
-  duration=1000
-  intensity
-  name
-  wait=false
-
+```yaml
+- name: camera.shake
+  parameters:
+    duration: 1000
+    intensity:
+    name:
+    wait: false
 ```
 
 - `duration`, `intensity` : See [shake effect](camera-effects.md/#shake)
@@ -1581,12 +1503,13 @@ camera.shake
 
 ##### Zoom
 
-```
-camera.zoomTo
-  duration=1000
-  zoom
-  name
-  wait=false
+```yaml
+- name: camera.zoomTo
+  parameters:
+    duration: 1000
+    zoom:
+    name:
+    wait: false
 ```
 
 - `duration`, `zoom` : See [zoom effect](camera-effects.md/#zoom)
@@ -1597,15 +1520,14 @@ camera.zoomTo
 
 ##### Rotate to
 
-```
-
-camera.rotateTo
-  duration=1000
-  rotate
-  ease
-  name
-  wait=false
-
+```yaml
+- name: camera.rotateTo
+  parameters:
+    duration: 1000
+    rotate: 
+    ease: 
+    name: 
+    wait: false
 ```
 
 - `duration`, `rotate`, `ease` : See [rotateTo effect](camera-effects.md/#rotate-to)
@@ -1616,16 +1538,15 @@ camera.rotateTo
 
 ##### Scroll to
 
-```
-
-camera.scrollTo
-  duration=1000
-  x
-  y
-  ease
-  name
-  wait=false
-
+```yaml
+- name: camera.scrollTo
+  parameters:
+    duration: 1000
+    x: 
+    y: 
+    ease:
+    name: 
+    wait: false
 ```
 
 - `duration`, `x`, `y`, `ease` : Scroll to position.
@@ -1644,7 +1565,7 @@ commandExecutor.addCommand(commandName, function(config, eventSheetManager){
 }, scope);
 ```
 
-- `config` : Parameters passed from [event sheet](markedeventsheets.md#custom-command).
+- `config` : Parameters passed from [event sheet](yamleventsheets.md#custom-command).
 - `eventSheetManager` : This event mangager.
     - Pause running of current event sheet
         ```javascript

@@ -297,7 +297,8 @@ nav:
         - Run commands: runcommands.md
         - Sequence: sequence.md
         - CSV scenario: csvscenario.md
-        - Markdown event sheets: markedeventsheet.md
+        - Markdown event sheets: markedeventsheets.md
+        - YAML event sheets: yamleventsheets.md
         - TCRP:
             - Recoder: tcrp-recoder.md
             - Player: tcrp-player.md

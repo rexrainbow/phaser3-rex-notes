@@ -113,7 +113,7 @@
 99. [LocalForage/Files](localforage-files.md): Save JSON data, using localforage.
 100. [LocalStorage/Data](localstorage-data.md): Sync data from data manager to local-storage.
 101. [LZ-string](lzstring.md): Compress string using LZ-based compression algorithm.
-102. [Markdown event sheets](markedeventsheet.md): Event sheets contains main condition(s) and actions, in simple markdown format (headings, code block).
+102. [Markdown event sheets](markedeventsheets.md): Event sheets contains main condition(s) and actions, in simple markdown format (headings, code block).
 102. [Mesh](mesh.md): Render a group of textured vertices.
 103. [Modal promise](modal-promise.md): Modal behavior wrapped into promise.
 104. [Mouse-wheel to up/down](mousewheeltoupdown.md): Map mouse-wheeling to (up/down) cursor key state.
@@ -254,6 +254,7 @@
 244. [Wait events](waitevents.md): Wait fired events or callbacks.
 245. [Webfont-loader](webfontloader.md): Load web font by google webfont loader in preload stage.
 246. [XOR](xor.md): Encrypt or decrypt string by XOR algorithm.
+246. [YAML event sheets](yamleventsheets.md): Event sheets contains main condition(s) and actions, in YAML format.
 246. [YAML loader](yamlloader.md): Load a YAML text file, parse its contents, and store the result in a JSON cache.
 247. [YML-Achievements](ymlachievements.md): Achievements in a YAML table.
 248. [YML-Conditions table](ymlconditionstable.md): Check conditions to find passed tests listed in a YAML table.
