@@ -27,13 +27,21 @@ var CreateActionSequence = function (actions, title) {
     var node;
     for (var i = 0, cnt = actions.length; i < cnt; i++) {
         var nodeData = actions[i];
-        if (typeof (nodeData) === 'string') {
-            nodeData = { type: nodeData.toLowerCase() };
-        } else if (nodeData.type) {
+        if (nodeData.type) {
             nodeData.type = nodeData.type.toLowerCase();
         }
 
         switch (nodeData.type) {
+            case undefined:
+                if (nodeData.branches) {
+                    node = CreateIFNode(nodeData);
+                } else if (nodeData.actions) {
+                    node = CreateLabelNode(nodeData, { onConditionFailValue: true });
+                } else {
+                    node = CreateActionNode(nodeData)
+                }
+                break;
+
             case 'if':
                 node = CreateIFNode(nodeData);
                 break;
@@ -48,14 +56,6 @@ var CreateActionSequence = function (actions, title) {
 
             case 'label':
                 node = CreateLabelNode(nodeData, { onConditionFailValue: true });
-                break;
-
-            case undefined:
-                if (nodeData.actions) {
-                    node = CreateLabelNode(nodeData, { onConditionFailValue: true });
-                } else {
-                    node = CreateActionNode(nodeData)
-                }
                 break;
 
             default:
