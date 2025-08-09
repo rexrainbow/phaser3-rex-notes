@@ -8,20 +8,17 @@ import CreateActionNode from './CreateActionNode.js';
 import GetConditionExpression from './GetConditionExpression.js';
 
 
-var CreateActionSequence = function (actions, title) {
+var CreateActionSequence = function (actions, title, isTaskSequence) {
     if (!actions || !actions.length) {
         return new Succeeder();
     }
 
-    var isSingleNode = (actions.length === 1) && (!title);
-
     var parentNode;
-    if (!isSingleNode) {
-        if (title) {
-            parentNode = new TaskSequence({ title: title })
-        } else {
-            parentNode = new Sequence();
-        }
+    if (isTaskSequence) {
+        // label
+        parentNode = new TaskSequence({ title: title });
+    } else {
+        parentNode = new Sequence();
     }
 
     var node;
@@ -33,11 +30,16 @@ var CreateActionSequence = function (actions, title) {
 
         switch (nodeData.type) {
             case undefined:
-                if (nodeData.branches) {
+                if (nodeData.branches) { // type: if
                     node = CreateIFNode(nodeData);
-                } else if (nodeData.actions) {
-                    node = CreateLabelNode(nodeData, { onConditionFailValue: true });
-                } else {
+                } else if (nodeData.actions) {  // type: label
+                    node = CreateSequenceNode(nodeData,
+                        {
+                            isTaskSequence: true,
+                            onConditionFailValue: true
+                        }
+                    );
+                } else {  // type: command
                     node = CreateActionNode(nodeData)
                 }
                 break;
@@ -55,7 +57,12 @@ var CreateActionSequence = function (actions, title) {
                 break;
 
             case 'label':
-                node = CreateLabelNode(nodeData, { onConditionFailValue: true });
+                node = CreateSequenceNode(nodeData,
+                    {
+                        isTaskSequence: true,
+                        onConditionFailValue: true
+                    }
+                );
                 break;
 
             default:
@@ -63,13 +70,7 @@ var CreateActionSequence = function (actions, title) {
                 break;
         }
 
-        if (!isSingleNode) {
-            parentNode.addChild(node);
-        }
-    }
-
-    if (isSingleNode) {
-        parentNode = node;
+        parentNode.addChild(node);
     }
 
     return parentNode;
@@ -83,7 +84,7 @@ var CreateIFNode = function (nodeData) {
     var branches = nodeData.branches;
     var hasTrueExpression = false;
     for (var i = 0, cnt = branches.length; i < cnt; i++) {
-        var branchNode = CreateLabelNode(branches[i]);
+        var branchNode = CreateSequenceNode(branches[i]);
         node.addChild(branchNode);
 
         hasTrueExpression = !(branchNode instanceof If);
@@ -103,7 +104,7 @@ var CreateWhileNode = function (nodeData) {
         title: '[while]',
         returnSuccess: true,
     });
-    node.addChild(CreateLabelNode(nodeData));
+    node.addChild(CreateSequenceNode(nodeData));
     return node;
 }
 
@@ -112,16 +113,17 @@ var CreateRepeatNode = function (nodeData) {
         title: '[repeat]',
         maxLoop: nodeData.times,
     })
-    node.addChild(CreateLabelNode(nodeData, { ignoreCondition: true }));
+    node.addChild(CreateSequenceNode(nodeData, { ignoreCondition: true }));
     return node;
 }
 
-var CreateLabelNode = function (nodeData, config = {}) {
-    // properties: title, condition(can be ignored), actions
+var CreateSequenceNode = function (nodeData, config = {}) {
+    // properties: title(for label only), condition(can be ignored), actions
 
     var {
+        isTaskSequence = false,
         ignoreCondition = false,
-        onConditionFailValue = false
+        onConditionFailValue = false,
     } = config;
 
     var node, ifDecorator;
@@ -133,7 +135,8 @@ var CreateLabelNode = function (nodeData, config = {}) {
         }
     }
 
-    node = CreateActionSequence(nodeData.actions, nodeData.title);
+    var title = (isTaskSequence) ? nodeData.title : undefined;
+    node = CreateActionSequence(nodeData.actions, title, isTaskSequence);
 
     if (ifDecorator) {
         ifDecorator.addChild(node);

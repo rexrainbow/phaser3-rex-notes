@@ -34,20 +34,17 @@ script:
   - type: if
     branches:
       - condition: coin < 5
-        title: IF-A
         actions:
           - name: print
             parameters: { text: "If (coin < 5)" }
 
-      - title: ELSE-A
-        actions: # ELSE
+      - actions: # ELSE
           - name: print
             parameters: { text: "Else (coin < 5)" }
 
   - type: if
     branches:
       - condition: coin > 10
-        title: IF-B
         actions:
           - name: print
             parameters: { text: "If (coin > 10)" }

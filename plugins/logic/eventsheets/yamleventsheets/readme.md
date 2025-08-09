@@ -97,7 +97,6 @@ Each branch may include:
 
 * `condition`: Expression; omitted means `else`
 * `actions`: Array of actions to execute if condition is true
-* `title`: Optional label
 
 #### Example
 
@@ -105,17 +104,14 @@ Each branch may include:
 - type: if
   branches:
     - condition: "hp <= 0"
-      title: "Player Dead"
       actions:
         - name: gameOver
 
     - condition: ["hasKey", "doorLocked == false"]
-      title: "Open Door"
       actions:
         - name: openDoor
 
-    - title: "Waiting"       # No condition → else
-      actions:
+    - actions:              # No condition → else
         - name: wait
 ```
 
@@ -125,7 +121,6 @@ Each branch may include:
 | ----------- | ------------------------ |
 | `condition` | Expression               |
 | `actions`   | Array of actions in loop |
-| `title`     | Optional label           |
 
 #### Example
 
@@ -142,7 +137,6 @@ Each branch may include:
 | --------- | ------------------------ |
 | `times`   | Number of repetitions    |
 | `actions` | Array of actions in loop |
-| `title`   | Optional label           |
 
 #### Example
 

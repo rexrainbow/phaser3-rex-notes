@@ -1,0 +1,29 @@
+title: Condition-Break
+script:
+  - name: print
+    parameters: { text: "...before action group..." }
+
+  - actions:
+      - name: print
+        parameters: { text: "before break" }
+
+      - condition: coin > 5
+        type: break
+
+      - name: print
+        parameters: { text: "after break" }
+
+  - branches:
+      - condition: coin > 0
+        actions:
+          - name: print
+            parameters: { text: "[IF] before break" }
+
+          - condition: coin > 5
+            type: break
+
+          - name: print
+            parameters: { text: "[IF] after break" }
+
+  - name: print
+    parameters: { text: "...after action group..." }
