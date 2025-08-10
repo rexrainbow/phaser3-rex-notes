@@ -341,12 +341,12 @@ module.exports = {
     'spinner': './templates/spinner/spinner/Spinner.js',
 
     // scenario
-    'mdscenario': './templates/scenario/MDScenario.js',
-    'mdscenarioplugin': './templates/scenario/mdscenario-plugin.js',
-    'jsonscenario': './templates/scenario/JSONScenario.js',
-    'jsonscenarioplugin': './templates/scenario/jsonscenario-plugin.js',
-    'yamlscenario': './templates/scenario/YAMLScenario.js',
-    'yamlscenarioplugin': './templates/scenario/yamlscenario-plugin.js',
+    'mdscenario': './templates/scenario/mdscenario/MDScenario.js',
+    'mdscenarioplugin': './templates/scenario/mdscenario/mdscenario-plugin.js',
+    'jsonscenario': './templates/scenario/jsonscenario/JSONScenario.js',
+    'jsonscenarioplugin': './templates/scenario/jsonscenario/jsonscenario-plugin.js',
+    'yamlscenario': './templates/scenario/yamlscenario/YAMLScenario.js',
+    'yamlscenarioplugin': './templates/scenario/yamlscenario/yamlscenario-plugin.js',
 
     // network
     'firebase': './plugins/firebase.js',

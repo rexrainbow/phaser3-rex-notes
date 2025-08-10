@@ -2,7 +2,7 @@
 
 ## Create Game Object Instance
 
-```
+```markdown
 
 BG
   id=NAME
@@ -22,7 +22,7 @@ Create TransitionImagePack as Background game object.
 
 ## Destroy
 
-```
+```markdown
 
 NAME.destroy
 
@@ -30,7 +30,7 @@ NAME.destroy
 
 ## Set properties
 
-```
+```markdown
 
 NAME.set
   x=
@@ -47,7 +47,7 @@ NAME.set
 
 ## Ease properties
 
-```
+```markdown
 
 NAME.to
   x=
@@ -64,7 +64,7 @@ NAME.to
 
 or
 
-```
+```markdown
 
 NAME.yoyo
   x=
@@ -83,7 +83,7 @@ NAME.yoyo
 
 ### Transition image
 
-```
+```markdown
 
 NAME.cross
   key=
@@ -110,7 +110,7 @@ NAME.cross
 
 ### Shake
 
-```
+```markdown
 
 NAME.shake
   duration=

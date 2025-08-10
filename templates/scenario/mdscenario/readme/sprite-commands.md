@@ -3,7 +3,7 @@
 ## Create Game Object Instance
 
 - Multiple altas
-    ```
+    ```markdown
     
     SPRITE
       id=NAME
@@ -18,7 +18,7 @@
     ```
     - `name`, `expression` : Set texture key to `name`, and frame name to `expression`.
 - Single altas
-    ```
+    ```markdown
     
     SPRITE
       id=NAME
@@ -39,19 +39,19 @@ Create TransitionImagePack as Sprite game object.
 
 ## Destroy
 
-```
+```markdown
 
 NAME.destroy
 
 ```
 
-```
+```markdown
 
 SPRITE.destroy
 
 ```
 
-```
+```markdown
 
 !NAME.destroy
 
@@ -59,7 +59,7 @@ SPRITE.destroy
 
 ## Set properties
 
-```
+```markdown
 
 NAME.set
   x=
@@ -74,7 +74,7 @@ NAME.set
 
 ```
 
-```
+```markdown
 
 SPRITE.set
   x=
@@ -89,7 +89,7 @@ SPRITE.set
 
 ```
 
-```
+```markdown
 
 !NAME.set
   x=
@@ -106,7 +106,7 @@ SPRITE.set
 
 ## Ease properties
 
-```
+```markdown
 
 NAME.to
   x=
@@ -121,7 +121,7 @@ NAME.to
 
 ```
 
-```
+```markdown
 
 SPRITE.to
   x=
@@ -136,7 +136,7 @@ SPRITE.to
 
 ```
 
-```
+```markdown
 
 !NAME.to
   x=
@@ -153,7 +153,7 @@ SPRITE.to
 
 or
 
-```
+```markdown
 
 NAME.yoyo
   x=
@@ -168,7 +168,7 @@ NAME.yoyo
 
 ```
 
-```
+```markdown
 
 SPRITE.yoyo
   x=
@@ -183,7 +183,7 @@ SPRITE.yoyo
 
 ```
 
-```
+```markdown
 
 !NAME.yoyo
   x=
@@ -202,7 +202,7 @@ SPRITE.yoyo
 
 ### Transition image
 
-```
+```markdown
 
 NAME.cross
   name=
@@ -212,7 +212,7 @@ NAME.cross
   wait=true
 
 ```
-```
+```markdown
 
 SPRITE.cross
   name=
@@ -222,7 +222,7 @@ SPRITE.cross
   wait=true
 
 ```
-```
+```markdown
 
 !NAME.cross
   name=
@@ -254,7 +254,7 @@ SPRITE.cross
 
 Bring me to top and set tint to 0x0 to other sprites
 
-```
+```markdown
 
 NAME.focus
   tintOthers=
@@ -265,7 +265,7 @@ NAME.focus
 
 Set tint to 0xffffff to all sprites
 
-```
+```markdown
 
 NAME.unfocus
 
@@ -275,7 +275,7 @@ NAME.unfocus
 
 SPRITE.cross + SPRITE.focus + TEXTBOX.typing
 
-```
+```markdown
 
 NAME.say
   name=
@@ -309,7 +309,7 @@ Wait an extra clicking after typing complete internally.
 
 ### Shake
 
-```
+```markdown
 
 NAME.shake
   duration=

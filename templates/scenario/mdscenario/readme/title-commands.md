@@ -2,7 +2,7 @@
 
 ## Create Game Object Instance
 
-```
+```markdown
 
 TITLE
   id=NAME
@@ -29,7 +29,7 @@ Create TitleLabel as Title game object
 
 ## Destroy
 
-```
+```markdown
 
 NAME.destroy
 
@@ -37,7 +37,7 @@ NAME.destroy
 
 ## Set properties
 
-```
+```markdown
 
 NAME.set
   x=
@@ -54,7 +54,7 @@ NAME.set
 
 ## Ease properties
 
-```
+```markdown
 
 NAME.to
   x=
@@ -70,7 +70,7 @@ NAME.to
 
 or
 
-```
+```markdown
 
 NAME.yoyo
   x=
@@ -89,7 +89,7 @@ NAME.yoyo
 
 ### Set text
 
-```
+```markdown
 
 NAME.setText
   text0=
@@ -99,7 +99,7 @@ NAME.setText
 
 ### Pop up
 
-```
+```markdown
 
 NAME.popUp
   text0=
@@ -122,7 +122,7 @@ NAME.popUp
 
 ### Shake
 
-```
+```markdown
 
 NAME.shake
   duration=

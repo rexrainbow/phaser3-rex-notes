@@ -2,7 +2,7 @@
 
 ## Create Game Object Instance
 
-```
+```markdown
 
 CHOICE
   id=NAME
@@ -19,7 +19,7 @@ Create ConfirmDialog as Choice dailog game object
 
 ## Destroy game object
 
-```
+```markdown
 
 NAME.destroy
 
@@ -27,7 +27,7 @@ NAME.destroy
 
 ## Set properties
 
-```
+```markdown
 
 NAME.set
   x=
@@ -44,7 +44,7 @@ NAME.set
 
 ## Ease properties
 
-```
+```markdown
 
 NAME.to
   x=
@@ -61,7 +61,7 @@ NAME.to
 
 or
 
-```
+```markdown
 
 NAME.yoyo
   x=
@@ -80,7 +80,7 @@ NAME.yoyo
 
 ### Choice
 
-```
+```markdown
 
 NAME.choice
   title=
@@ -98,7 +98,7 @@ NAME.choice
 
 ### Shake
 
-```
+```markdown
 
 NAME.shake
   duration=

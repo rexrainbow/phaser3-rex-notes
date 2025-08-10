@@ -35,7 +35,7 @@
 
 ## Create Game Object Instance
 
-```
+```markdown
 
 TEXTBOX
   id=NAME
@@ -68,7 +68,7 @@ Create TextBox as Text-box game object
 
 ## Destroy
 
-```
+```markdown
 
 NAME.destroy
 
@@ -76,7 +76,7 @@ NAME.destroy
 
 ## Set properties
 
-```
+```markdown
 
 NAME.set
   x=
@@ -93,7 +93,7 @@ NAME.set
 
 ## Ease properties
 
-```
+```markdown
 
 NAME.to
   x=
@@ -109,7 +109,7 @@ NAME.to
 
 or
 
-```
+```markdown
 
 NAME.yoyo
   x=
@@ -128,7 +128,7 @@ NAME.yoyo
 
 ### Typing
 
-```
+```markdown
 
 NAME.typing
   displayName=
@@ -149,7 +149,7 @@ NAME.typing
 
 or
 
-~~~
+~~~markdown
 
 ```NAME.typing, name=, expression=, icon=, iconFrame=, typingSpeed=, iconCrossDuration=, iconCrossMode='crossFade', wait=true
 text-line0
@@ -193,7 +193,7 @@ Wait an extra clicking after typing complete internally.
 
 ### Shake
 
-```
+```markdown
 
 NAME.shake
   duration=
