@@ -14913,8 +14913,10 @@
 
 	        switch (nodeData.type) {
 	            case undefined:
-	                if (nodeData.branches) { // type: if
+	                if (nodeData.branches) {  // type: if
 	                    node = CreateIFNode(nodeData);
+	                } else if (nodeData.times) {  // type: repeat
+	                    node = CreateRepeatNode(nodeData);
 	                } else if (nodeData.actions) {  // type: label
 	                    node = CreateSequenceNode(nodeData,
 	                        {
