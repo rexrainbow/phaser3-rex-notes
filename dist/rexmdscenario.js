@@ -3711,6 +3711,7 @@
 	        {
 	            expression = 'true',
 	            conditionEvalBreak = false,
+	            onFailState = FAILURE,
 	            child = null,
 	            title,
 	            name = 'If'
@@ -3725,7 +3726,8 @@
 	                name,
 	                properties: {
 	                    expression,
-	                    conditionEvalBreak
+	                    conditionEvalBreak,
+	                    onFailState
 	                },
 	            },
 	            nodePool
@@ -3733,6 +3735,7 @@
 
 	        this.expression = this.addBooleanExpression(expression);
 	        this.conditionEvalBreak = conditionEvalBreak;
+	        this.onFailState = onFailState;
 	    }
 
 	    tick(tick) {
@@ -3742,9 +3745,15 @@
 
 	        // child is not running
 	        if (!this.isChildRunning(tick)) {
-	            // Return FAILURE to run next node
+	            /* 
+	            Return FAILURE/SUCCESS to run next node
+	            
+	              - FAILURE : parent node is a Selector
+	              - SUCCESS : parent node is a Sequence
+
+	            */
 	            if (!tick.evalExpression(this.expression)) {
-	                return FAILURE;
+	                return this.onFailState;
 	            } else if (this.conditionEvalBreak) {
 	                // Open child but not run it now
 	                this.openChild();
