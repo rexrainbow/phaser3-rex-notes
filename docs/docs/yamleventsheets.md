@@ -490,6 +490,9 @@ fallback:
         - No `condition` : ELSE part
     - And `actions: `, run actions when expression is `true`.
 
+!!! note Single if condition
+   Using [Label](yamleventsheets.md#label) with `condition: expression` for single if condition
+
 ##### Repeat loop
 
 ```yaml
@@ -504,6 +507,14 @@ or
 ```yaml
 - type: repeat
   times: loopCount
+  actions:
+    # - name:
+```
+
+or
+
+```yaml
+- times: 3
   actions:
     # - name:
 ```
@@ -552,6 +563,14 @@ or
     # - name: 
 ```
 
+or
+
+```yaml
+- condition: expression
+  actions:
+    # - name: 
+```
+
 - `title: labelTitle` : Optional title name.
 - `actions` : Run commands sequentially
 - `condition: expression` : Run commands if `expression` return `true`, optional
@@ -564,6 +583,13 @@ or
 - type: break
 ```
 
+or
+
+```yaml
+- type: break
+  condition: expression
+```
+
 - Action `type: break` : Ignore remainder actions in current level.
 
 
@@ -571,6 +597,13 @@ or
 
 ```yaml
 - type: exit
+```
+
+or
+
+```yaml
+- type: exit
+  condition: expression
 ```
 
 - Action `type: exit` : Skip remainder instructions.
@@ -587,7 +620,14 @@ or
 ```yaml
 - type: deactivate 
   target: eventSheetTitle
+```
 
+or
+
+```yaml
+- type: deactivate
+  condition: expression
+  target: eventSheetTitle
 ```
 
 - Action `type: deactivate` : Deactivate this event sheet, or deactivate event sheet by title in the same tree group. i.e. Set `active` property of this event shhet to `false`.
@@ -600,9 +640,16 @@ or
 
 or
 
+```yaml
+- type: activate
+  target: eventSheetTitle
+```
+
+or
 
 ```yaml
 - type: activate
+  condition: expression
   target: eventSheetTitle
 ```
 
@@ -610,6 +657,16 @@ or
 
 
 #### Custom command
+
+```yaml
+- type: command
+  name: commandName
+  parameters:
+    param0: value
+    param1: value
+```
+
+or
 
 ```yaml
 - name: commandName
@@ -622,16 +679,6 @@ or
 
 ```yaml
 - condition: expression
-  name: commandName
-  parameters:
-    param0: value
-    param1: value
-```
-
-or
-
-```yaml
-- type: command
   name: commandName
   parameters:
     param0: value
@@ -778,13 +825,14 @@ See [Local memory](#local-memory)
 or
 
 ```yaml
-- name: log
+- name: log  
   parameters:
     logType: log
     showTitle: true
     titleL : "..."
     titleColor: green
     text: "..."
+  # condition: expression
 ```
 
 - `text` : Message with bbcode format.
@@ -818,6 +866,7 @@ or
 ```yaml
 - name: log.disable
   parameters: {title: "..." }
+  # condition: expression
 ```
 
 - `title` : Disable console message of event sheet by title.
@@ -836,6 +885,7 @@ or
 ```yaml
 - name: log.enable
   paramterers : { title: "..." }
+  # condition: expression
 ```
 
 - `title` : Enable console message of event sheet by title.
@@ -856,6 +906,7 @@ or
   parameters:
     text: "..."
     keys: "a,b,c"
+  # condition: expression
 ```
 
 - `keys` : Dump part of memory by keys.
@@ -942,6 +993,7 @@ commandExecutor.addGameObjectManager({
     autoClear:
     param0: value
     param1: value
+  # condition: expression
 ```
 
 - Create custom game object `GOTYPE` with config `{param0, param1}`, indexed by `id`
@@ -967,20 +1019,21 @@ can see it by `log.memory`, or get property of game object via `#(@NAME.x + 3)`.
         vpx:
         y:
         vpy:
-        alpha:    
+        alpha:
+      # condition: expression
     ```
     - `vpx`, `vpy` : [viewportCoordinate properties](viewport-coordinate.md) injected if `viewportCoordinate` is `true`.
     - Add empty line above and below this command block.
 - Set properties of all game objects belong GOTYPE
-    ```
-    
-    GOTYPE.set
-      x=
-      vpx=
-      y=
-      vpy=
-      alpha=
-    
+    ```yaml
+    - name: GOTYPE.set
+      parameters:
+        x:
+        vpx:
+        y:
+        vpy:
+        alpha:
+      # condition: expression
     ```
 - Set properties of all game objects belong GOTYPE excluding `NAME`
     ```yaml
@@ -990,7 +1043,8 @@ can see it by `log.memory`, or get property of game object via `#(@NAME.x + 3)`.
         vpx:
         y:
         vpy:
-        alpha:    
+        alpha:
+      # condition: expression 
     ```
 
 ##### Ease properties of custom game object
@@ -1009,6 +1063,7 @@ can see it by `log.memory`, or get property of game object via `#(@NAME.x + 3)`.
         ease: Linear
         repeat: 0
         wait:
+      # condition: expression
     ```
     ```yaml
     - name: NAME.from
@@ -1023,6 +1078,7 @@ can see it by `log.memory`, or get property of game object via `#(@NAME.x + 3)`.
         ease: Linear
         repeat: 0
         wait:
+      # condition: expression
     ```
     ```yaml
     - name: NAME.yoyo
@@ -1037,6 +1093,7 @@ can see it by `log.memory`, or get property of game object via `#(@NAME.x + 3)`.
         ease: Linear
         repeat: 0
         wait:
+      # condition: expression
     ```
     - These properties are reserved : `id`, `duration`, `delay`, `ease`, `repeat`, `yoyo`, `wait`
     - `wait` :
@@ -1057,6 +1114,7 @@ can see it by `log.memory`, or get property of game object via `#(@NAME.x + 3)`.
         ease: Linear
         repeat: 0
         wait:
+      # condition: expression
     ```
     ```yaml
     - name: GOTYPE.from
@@ -1071,6 +1129,7 @@ can see it by `log.memory`, or get property of game object via `#(@NAME.x + 3)`.
         ease: Linear
         repeat: 0
         wait:
+      # condition: expression
     ```
     ```yaml
     - name: GOTYPE.yoyo
@@ -1085,6 +1144,7 @@ can see it by `log.memory`, or get property of game object via `#(@NAME.x + 3)`.
         ease: Linear
         repeat: 0
         wait:
+      # condition: expression
     ```
 - Ease properties of all game objects belong GOTYPE excluding `NAME`
     ```yaml
@@ -1100,6 +1160,7 @@ can see it by `log.memory`, or get property of game object via `#(@NAME.x + 3)`.
         ease: Linear
         repeat: 0
         wait:
+      # condition: expression
     ```
     ```yaml
     - name: "!NAME.from"
@@ -1114,6 +1175,7 @@ can see it by `log.memory`, or get property of game object via `#(@NAME.x + 3)`.
         ease: Linear
         repeat: 0
         wait:
+      # condition: expression
     ```
     ```yaml
     - name: "!NAME.yoyo"
@@ -1128,6 +1190,7 @@ can see it by `log.memory`, or get property of game object via `#(@NAME.x + 3)`.
         ease: Linear
         repeat: 0
         wait:
+      # condition: expression
     ```
 
 ##### Invoke custom command 
@@ -1138,7 +1201,7 @@ can see it by `log.memory`, or get property of game object via `#(@NAME.x + 3)`.
       parameters:
         param0: value
         param1: value
-    
+      # condition: expression
     ```
     - Invoke custom command `commandName` method with these parameters
         - `gameObject` : Indexed by `NAME`
@@ -1151,14 +1214,16 @@ can see it by `log.memory`, or get property of game object via `#(@NAME.x + 3)`.
     - name: GOTYPE.commandName
       parameters:
         param0: value
-        param1: value    
+        param1: value
+      # condition: expression 
     ```
 - Invoke custom command of all game objects belong GOTYPE excluding `NAME`
     ```yaml
     - name: "!NAME.commandName"
       parameters:
         param0: value
-        param1: value    
+        param1: value
+      # condition: expression    
     ```
 
 
@@ -1169,14 +1234,17 @@ Do nothing if gameObject or commandName is not found.
 - Destroy game object indexing by `NAME`
     ```yaml
     - name: NAME.destroy    
+      # condition: expression
     ```
 - Destroy all game objects belong GOTYPE
     ```yaml
-    - name: GOTYPE.destroy    
+    - name: GOTYPE.destroy
+      # condition: expression
     ```
 - Destroy all game objects belong GOTYPE excluding `NAME`
     ```yaml
-    - name: "!NAME.destroy"    
+    - name: "!NAME.destroy"
+      # condition: expression
     ```
 
 ##### Methods used in command
@@ -1230,6 +1298,7 @@ Do nothing if gameObject or commandName is not found.
 
 ```yaml
 - name: click
+  # condition: expression
 ```
 
 - Run next command after clicking.
@@ -1249,6 +1318,7 @@ Run next command after...
     GONAME.DATAKEY: true
     GONAME.EVTNAME: true
     event: EVENTNAME
+  # condition: expression
 ```
 
 - `click` : Run next command after clicking.
@@ -1303,6 +1373,7 @@ This command executor provides
     volume:
     mute:
     unmute:
+  # condition: expression
 ```
 
 - Command name : `bgm`, `bgm2`, `se`, `se2`
@@ -1319,6 +1390,7 @@ This command executor provides
     # fadeIn: 0
     # loop: false
     wait: false
+  # condition: expression
 ```
 
 - Command name : `bgm.play`, `bgm2.play`, `se.play`, `se2.play`
@@ -1334,7 +1406,7 @@ This command executor provides
     key:
     duration: 500
     wait: false
-
+  # condition: expression
 ```
 
 - Command name : `bgm.cross`, `bgm2.cross`
@@ -1346,6 +1418,7 @@ This command executor provides
 
 ```yaml
 - name: bgm.stop
+  # condition: expression
 ```
 
 - Command name : `bgm.stop`, `bgm2.stop`, `se.stop`, `se2.stop`
@@ -1358,6 +1431,7 @@ This command executor provides
     duration: 500
     stop: true
     wait: false
+  # condition: expression
 ```
 
 - Command name : `bgm.fadeOut`, `bgm2.fadeOut`, `se.fadeOut`, `se2.fadeOut`
@@ -1370,6 +1444,7 @@ This command executor provides
 ```yaml
 - name: bgm.fadeIn
   parameters: { duration: 500 }
+  # condition: expression
 ```
 
 - Command name : `bgm.fadeIn`, `bgm2.fadeIn`
@@ -1378,6 +1453,7 @@ This command executor provides
 
 ```yaml
 - name: bgm.pause
+  # condition: expression
 ```
 
 - Command name : `bgm.pause`, `bgm2.pause`
@@ -1386,6 +1462,7 @@ This command executor provides
 
 ```yaml
 - name: bgm.resume
+  # condition: expression
 ```
 
 - Command name : `bgm.resume`, `bgm2.resume`
@@ -1394,6 +1471,7 @@ This command executor provides
 
 ```yaml
 - name: bgm.mute
+  # condition: expression
 ```
 
 - Command name : `bgm.mute`, `bgm2.mute`, `se.mute`, `se2.mute`
@@ -1402,6 +1480,7 @@ This command executor provides
 
 ```yaml
 - name: bgm.unmute
+  # condition: expression
 ```
 
 - Command name : `bgm.unmute`, `bgm2.unmute`, `se.unmute`, `se2.unmute`
@@ -1418,6 +1497,7 @@ This command executor provides
     rotate:
     zoom:
     name:
+  # condition: expression
 ```
 
 - `x`, `y` : Scroll
@@ -1438,6 +1518,7 @@ Run next command immediately.
     blue:
     name:
     wait: false
+  # condition: expression
 ```
 
 - `duration`, `red`, `green`, `blue` : See [fade effect](camera-effects.md/#fade)
@@ -1457,6 +1538,7 @@ Run next command immediately.
     blue:
     name:
     wait: false
+  # condition: expression
 ```
 
 - `duration`, `red`, `green`, `blue` : See [fade effect](camera-effects.md/#fade)
@@ -1476,6 +1558,7 @@ Run next command immediately.
     blue:
     name:
     wait: false
+  # condition: expression
 ```
 
 - `duration`, `red`, `green`, `blue` : See [flash effect](camera-effects.md/#flash)
@@ -1493,6 +1576,7 @@ Run next command immediately.
     intensity:
     name:
     wait: false
+  # condition: expression
 ```
 
 - `duration`, `intensity` : See [shake effect](camera-effects.md/#shake)
@@ -1510,6 +1594,7 @@ Run next command immediately.
     zoom:
     name:
     wait: false
+  # condition: expression
 ```
 
 - `duration`, `zoom` : See [zoom effect](camera-effects.md/#zoom)
@@ -1528,6 +1613,7 @@ Run next command immediately.
     ease: 
     name: 
     wait: false
+  # condition: expression
 ```
 
 - `duration`, `rotate`, `ease` : See [rotateTo effect](camera-effects.md/#rotate-to)
@@ -1547,6 +1633,7 @@ Run next command immediately.
     ease:
     name: 
     wait: false
+  # condition: expression
 ```
 
 - `duration`, `x`, `y`, `ease` : Scroll to position.
