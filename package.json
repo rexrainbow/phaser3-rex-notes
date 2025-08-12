@@ -49,7 +49,7 @@
         "chart.js": "^2.9.4",
         "clean-webpack-plugin": "^4.0.0",
         "copy-webpack-plugin": "^11.0.0",
-        "eslint": "^5.16.0",
+        "eslint": "^9.32.0",
         "eslint-plugin-import": "^2.29.1",
         "expose-loader": "^4.1.0",
         "file-saver": "^2.0.5",
