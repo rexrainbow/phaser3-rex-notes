@@ -17,7 +17,7 @@ var CanPutOnMainBoard = function (mainBoard, tileX, tileY, chessTileXYMap) {
         if (this.putTestCallback) {
             // Custom test function
             targetTileXY.x = mappedTileXY.x;
-            targetTileXY.y = mappedTileXY.x;
+            targetTileXY.y = mappedTileXY.y;
             targetTileXY.z = chessTileXYZ.z;
             var chess = this.board.uidToChess(uid);
             if (this.putTestCallbackScpe) {
