@@ -44,6 +44,19 @@ fallback:
     # - name:
 ```
 
+### For loop
+
+```yaml
+- type: for
+  init:
+    # - name:
+  condition: expression
+  step:
+    # - name:
+  actions:
+    # - name:
+```
+
 ### While Loop
 
 ```yaml

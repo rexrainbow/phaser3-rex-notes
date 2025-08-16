@@ -519,6 +519,30 @@ or
     # - name:
 ```
 
+##### For loop
+
+```yaml
+- type: for
+  init:
+    # - name:
+  condition: expression
+  step:
+    # - name:
+  actions:
+    # - name:
+```
+
+- `type: for`
+    - `init` : Actions executed at the beginning
+    - `condition: expression` : Evaluate the condition at the beginning of each loop.
+        - Read data from [local memory](yamleventsheets.md#local-memory)
+        - Boolean expression AND/OR : `&&`.
+        - Boolean expression OR : `||`.
+        - No `condition` : ELSE part
+    - `step` : Actions executed at the end of each loop
+    - And `actions: `, the loop body.
+
+
 ##### While loop
 
 ```yaml

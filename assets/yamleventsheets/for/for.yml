@@ -1,0 +1,20 @@
+title: Title
+script:
+  - name: print
+    parameters: { text: "Before for" }
+
+  - type: for
+    init:
+      - name: set
+        parameters: { loopCount: 3 }
+    condition:
+      - loopCount > 0
+    step:
+      - name: set
+        parameters: { loopCount: "#(loopCount-1)" }
+    actions:
+      - name: print
+        parameters: { text: "for {{loopCount}}" }
+
+  - name: print
+    parameters: { text: "After for" }
