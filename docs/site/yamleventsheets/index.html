@@ -9000,6 +9000,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#for-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      For loop
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#while-loop" class="md-nav__link">
     <span class="md-ellipsis">
       While loop
@@ -15856,6 +15865,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#for-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      For loop
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#while-loop" class="md-nav__link">
     <span class="md-ellipsis">
       While loop
@@ -16794,6 +16812,31 @@ And game objects with <code>'autoClear'</code> will be destroyed.</p>
 <span class="w">  </span><span class="nt">actions</span><span class="p">:</span>
 <span class="w">    </span><span class="c1"># - name:</span>
 </code></pre></div>
+<h5 id="for-loop">For loop<a class="headerlink" href="#for-loop" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">for</span>
+<span class="w">  </span><span class="nt">init</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># - name:</span>
+<span class="w">  </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">expression</span>
+<span class="w">  </span><span class="nt">step</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># - name:</span>
+<span class="w">  </span><span class="nt">actions</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># - name:</span>
+</code></pre></div>
+<ul>
+<li><code>type: for</code><ul>
+<li><code>init</code> : Actions executed at the beginning</li>
+<li><code>condition: expression</code> : Evaluate the condition at the beginning of each loop.<ul>
+<li>Read data from <a href="./#local-memory">local memory</a></li>
+<li>Boolean expression AND/OR : <code>&amp;&amp;</code>.</li>
+<li>Boolean expression OR : <code>||</code>.</li>
+<li>No <code>condition</code> : ELSE part</li>
+</ul>
+</li>
+<li><code>step</code> : Actions executed at the end of each loop</li>
+<li>And <code>actions:</code>, the loop body.</li>
+</ul>
+</li>
+</ul>
 <h5 id="while-loop">While loop<a class="headerlink" href="#while-loop" title="Permanent link">&para;</a></h5>
 <div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">while</span>
 <span class="w">  </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">loopCount &gt; 0</span>

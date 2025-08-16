@@ -14941,6 +14941,10 @@
 	                node = CreateRepeatNode(nodeData);
 	                break;
 
+	            case 'for':
+	                node = CreateForNode(nodeData);
+	                break;
+
 	            case 'label':
 	                node = CreateSequenceNode(nodeData,
 	                    {
@@ -14999,6 +15003,36 @@
 	        maxLoop: nodeData.times,
 	    });
 	    node.addChild(CreateSequenceNode(nodeData, { ignoreCondition: true }));
+	    return node;
+	};
+
+	var CreateForNode = function (nodeData) {
+	    var node = new Sequence({ title: '[for]' });
+
+	    // init
+	    if (nodeData.init) {
+	        node.addChild(CreateActionSequence(nodeData.init, undefined, true));
+	    }
+
+	    // while
+	    var whileNode = new RepeatUntilFailure({
+	        returnSuccess: true,
+	    });
+
+	    var actions = [];
+	    if (nodeData.actions) {
+	        actions.push({ actions: nodeData.actions });
+	    }
+	    if (nodeData.step) {
+	        actions.push({ actions: nodeData.step });
+	    }
+	    whileNode.addChild(CreateSequenceNode({
+	        condition: nodeData.condition,
+	        actions: actions
+	    }));
+
+	    node.addChild(whileNode);
+
 	    return node;
 	};
 
