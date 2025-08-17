@@ -299,7 +299,6 @@ nav:
         - CSV scenario: csvscenario.md
         - Event sheets:        
             - YAML event sheets: yamleventsheets.md
-            - Markdown event sheets: markedeventsheets.md
         - TCRP:
             - Recoder: tcrp-recoder.md
             - Player: tcrp-player.md
