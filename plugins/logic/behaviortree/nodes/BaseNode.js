@@ -54,13 +54,35 @@ export default class BaseNode {
         return this;
     }
 
+    setProperty(name, value) {
+        this.properties[name] = value;
+        return this;
+    }
+
+    getProperty(name) {
+        return this.properties[name];
+    }
+
     setParent(parent) {
         this.parent = parent;
         return this;
     }
 
-    getParent() {
-        return this.parent;
+    getParent(isValidParent) {
+        var parent = this.parent;
+        if (!isValidParent) {
+            return parent;
+        }
+
+        while (parent) {
+            if (isValidParent(parent)) {
+                return parent;
+            }
+
+            parent = parent.parent;
+        }
+
+        return null;
     }
 
     getTree(tick) {

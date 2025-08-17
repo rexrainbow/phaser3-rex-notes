@@ -41,6 +41,10 @@ var CreateActionSequence = function (actions, title, isTaskSequence) {
                             onConditionFailValue: true
                         }
                     );
+                    var isBreakTarget = nodeData.hasOwnProperty('isBreakTarget') ? nodeData.isBreakTarget : true;
+                    if (isBreakTarget) {
+                        node.setProperty('isBreakTarget', true);
+                    }
                 } else {  // type: command
                     node = CreateActionNode(nodeData)
                 }
@@ -110,7 +114,12 @@ var CreateWhileNode = function (nodeData) {
         title: '[while]',
         returnSuccess: true,
     });
-    node.addChild(CreateSequenceNode(nodeData));
+
+    var loopBodyNode = CreateSequenceNode(nodeData)
+        .setProperty('isBreakTarget', true);
+
+    node.addChild(loopBodyNode);
+
     return node;
 }
 
@@ -119,7 +128,12 @@ var CreateRepeatNode = function (nodeData) {
         title: '[repeat]',
         maxLoop: nodeData.times,
     })
-    node.addChild(CreateSequenceNode(nodeData, { ignoreCondition: true }));
+
+    var loopBodyNode = CreateSequenceNode(nodeData, { ignoreCondition: true })
+        .setProperty('isBreakTarget', true);
+
+    node.addChild(loopBodyNode);
+
     return node;
 }
 
@@ -138,15 +152,26 @@ var CreateForNode = function (nodeData) {
 
     var actions = [];
     if (nodeData.actions) {
-        actions.push({ actions: nodeData.actions });
+        actions.push({
+            actions: nodeData.actions,
+            isBreakTarget: false,
+        });
     }
     if (nodeData.step) {
-        actions.push({ actions: nodeData.step });
+        actions.push({
+            actions: nodeData.step,
+            isBreakTarget: false,
+        });
     }
-    whileNode.addChild(CreateSequenceNode({
+    var loopBodyNodeData = {
         condition: nodeData.condition,
         actions: actions
-    }));
+    };
+
+    var loopBodyNode = CreateSequenceNode(loopBodyNodeData)
+        .setProperty('isBreakTarget', true);
+
+    whileNode.addChild(loopBodyNode);
 
     node.addChild(whileNode);
 
