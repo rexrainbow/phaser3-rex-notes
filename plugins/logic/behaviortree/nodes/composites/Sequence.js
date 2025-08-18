@@ -35,34 +35,11 @@ class Sequence extends Composite {
             nodePool
         );
 
-    }
+        this.allowNextA = allowNextA;
+        this.allowNextB = allowNextB;
+        this.allowNextC = allowNextC;
+        this.allowNextD = allowNextD;
 
-    get allowNextA() {
-        return this.getProperty('allowNextA');
-    }
-
-    set allowNextA(value) {
-        this.setProperty('allowNextA', value);
-    }
-
-    get allowNextB() {
-        return this.getProperty('allowNextB');
-    }
-
-    set allowNextB(value) {
-        this.setProperty('allowNextB', value);
-    }
-
-    get allowNextC() {
-        return this.getProperty('allowNextC');
-    }
-
-    set allowNextC(value) {
-        this.setProperty('allowNextC', value);
-    }
-
-    get allowNextD() {
-        return this.getProperty('allowNextD');
     }
 
     set allowNextD(value) {
