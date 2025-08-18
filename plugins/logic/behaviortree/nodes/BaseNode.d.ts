@@ -49,14 +49,8 @@ declare class BaseNode {
     setTitle(title: string): this;
     setName(name: string): this;
     setDescription(description: string): this;
-    setProperty(name: string, value: any): this;
-    getProperty(name: string): any;
     setParent(parent: BaseNode | null): this;
-
-    getParent(
-        isValidParent?: (parent: BaseNode) => boolean
-    ): BaseNode | null;
-
+    getParent(): BaseNode | null;
     getTree(tick?: Tick): BaseNode | null;
 
     addExpression(expression: BaseNode.ExpressionValue): Expression;

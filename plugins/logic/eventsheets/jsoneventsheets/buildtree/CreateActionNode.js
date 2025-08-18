@@ -4,7 +4,6 @@ import {
 import GetConditionExpression from './GetConditionExpression.js';
 import CreateIfDecorator from './CreateIfDecorator.js';
 import TaskAction from '../../eventsheetmanager/nodes/taskaction/TaskAction.js';
-import BreakAction from '../../eventsheetmanager/nodes/BreakAction.js';
 import ActivateAction from '../../eventsheetmanager/nodes/ActivateAction.js';
 import DeactivateAction from '../../eventsheetmanager/nodes/DeactivateAction.js';
 
@@ -28,7 +27,7 @@ var CreateActionNode = function (nodeData) {
             break;
 
         case 'break':
-            node = new BreakAction({ title: '[break]' });
+            node = new Failer({ title: '[break]' });
             break;
 
         case 'activate':

@@ -22,23 +22,11 @@ class Sequence extends Composite {
             nodePool
         );
 
-        this.continueOnAbort = false;
-
-    }
-
-    setContinueOnAbortFlag(enable) {
-        if (enable === undefined) {
-            enable = true;
-        }
-
-        this.continueOnAbort = enable;
-        return this;
     }
 
     open(tick) {
         var nodeMemory = this.getNodeMemory(tick);
         nodeMemory.$runningChild = 0;
-        this.continueOnAbort = false;
     }
 
     tick(tick) {
@@ -53,22 +41,9 @@ class Sequence extends Composite {
         for (var i = childIndex, cnt = this.children.length; i < cnt; i++) {
             status = this.children[i]._execute(tick);
 
-            // Bypass to upper level
-            if (
-                (status === RUNNING) ||
-                (status === FAILURE) ||
-                ((status === ABORT) && !this.continueOnAbort)
-            ) {
+            if ((status === RUNNING) || (status === FAILURE) || (status === ABORT)) {
                 break;
             }
-
-            /* 
-            Run next child if :
-            
-            - SUCCESS or 
-            - (status === ABORT) && this.continueOnAbort
-            */
-
         }
 
         nodeMemory.$runningChild = (status === RUNNING) ? i : -1;
