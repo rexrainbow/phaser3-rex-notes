@@ -15,4 +15,5 @@ declare class Sequence extends Composite {
         nodePool?: BaseNode.NodePoolType
     );
 
+    allowNext: boolean;
 }

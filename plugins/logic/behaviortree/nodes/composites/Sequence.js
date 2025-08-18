@@ -1,5 +1,8 @@
 import Composite from '../Composite.js';
-import { SUCCESS, FAILURE, RUNNING, ABORT, NEXT, ERROR } from '../../constants.js';
+import {
+    SUCCESS, FAILURE, RUNNING, ABORT, ERROR,
+    NEXTA, NEXTB, NEXTC, NEXTD
+} from '../../constants.js';
 
 class Sequence extends Composite {
     constructor(
@@ -8,7 +11,10 @@ class Sequence extends Composite {
             services,
             title,
             name = 'Sequence',
-            allowNext = false,
+            allowNextA = false,
+            allowNextB = false,
+            allowNextC = false,
+            allowNextD = false,
         } = {},
         nodePool
     ) {
@@ -20,13 +26,47 @@ class Sequence extends Composite {
                 title,
                 name,
                 properties: {
-                    allowNext
+                    allowNextA,
+                    allowNextB,
+                    allowNextC,
+                    allowNextD,
                 }
             },
             nodePool
         );
 
-        this.allowNext = allowNext;
+    }
+
+    get allowNextA() {
+        return this.getProperty('allowNextA');
+    }
+
+    set allowNextA(value) {
+        this.setProperty('allowNextA', value);
+    }
+
+    get allowNextB() {
+        return this.getProperty('allowNextB');
+    }
+
+    set allowNextB(value) {
+        this.setProperty('allowNextB', value);
+    }
+
+    get allowNextC() {
+        return this.getProperty('allowNextC');
+    }
+
+    set allowNextC(value) {
+        this.setProperty('allowNextC', value);
+    }
+
+    get allowNextD() {
+        return this.getProperty('allowNextD');
+    }
+
+    set allowNextD(value) {
+        this.setProperty('allowNextD', value);
     }
 
     open(tick) {
@@ -48,12 +88,21 @@ class Sequence extends Composite {
 
             if (
                 (status === RUNNING) || (status === FAILURE) || (status === ABORT) ||
-                ((state === NEXT) && (!this.allowNext))
+                ((state === NEXTA) && (!this.allowNextA)) ||
+                ((state === NEXTB) && (!this.allowNextB)) ||
+                ((state === NEXTC) && (!this.allowNextC)) ||
+                ((state === NEXTD) && (!this.allowNextD))
             ) {
                 break;
             }
 
-            // Running next node forcely if (state === NEXT) && this.allowNext
+            /* 
+            Running next node forcely if 
+            - (state === NEXTA) && this.allowNextA, or
+            - (state === NEXTB) && this.allowNextB, or
+            - (state === NEXTC) && this.allowNextC, or
+            - (state === NEXTD) && this.allowNextD
+            */
         }
 
         nodeMemory.$runningChild = (status === RUNNING) ? i : -1;

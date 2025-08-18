@@ -1,5 +1,8 @@
 import Decorator from '../Decorator.js';
-import { SUCCESS, FAILURE, RUNNING, ABORT, NEXT, ERROR } from '../../constants.js';
+import {
+    SUCCESS, FAILURE, RUNNING, ABORT, ERROR,
+    NEXTA, NEXTB, NEXTC, NEXTD
+} from '../../constants.js';
 
 class Cooldown extends Decorator {
     constructor(
@@ -53,7 +56,10 @@ class Cooldown extends Decorator {
 
         var status = this.child._execute(tick);
 
-        if ((status === SUCCESS) || (status === FAILURE) || (status === ABORT) || (state === NEXT)) {
+        if (
+            (status === SUCCESS) || (status === FAILURE) || (status === ABORT) ||
+            ((status >= NEXTA) && (status <= NEXTD))
+        ) {
             nodeMemory.$lastEndTime = currTime;
         }
 

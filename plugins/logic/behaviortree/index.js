@@ -1,5 +1,5 @@
 import {
-    IDLE, SUCCESS, FAILURE, RUNNING, ABORT, NEXT, ERROR,
+    IDLE, SUCCESS, FAILURE, RUNNING, ABORT, NEXTA, NEXTB, NEXTC, NEXTD, ERROR,
     COMPOSITE, DECORATOR, ACTION, SERVICE
 } from './constants';
 
@@ -21,7 +21,7 @@ import {
     Error,
     Wait,
     Abort,
-    Next,
+    NextA, NextB, NextC, NextD,
 
     Selector,
     Sequence,
@@ -53,8 +53,9 @@ export {
     FAILURE,
     RUNNING,
     ABORT,
-    NEXT,
     ERROR,
+    NEXTA, NEXTB, NEXTC, NEXTD,
+
 
     COMPOSITE,
     DECORATOR,
@@ -81,7 +82,7 @@ export {
     Error,
     Wait,
     Abort,
-    Next,
+    NextA, NextB, NextC, NextD,
 
     Selector,
     Sequence,

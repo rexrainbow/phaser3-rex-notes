@@ -1,7 +1,7 @@
 import Action from '../Action';
 
-export default Abort;
+export default NextD;
 
-declare class Abort extends Action {
+declare class NextD extends Action {
     constructor(config?: Action.IConfig);
 }

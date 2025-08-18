@@ -1,6 +1,10 @@
 import { CreateID } from '../utils/CreateID.js';
 import { Expression, BooleanExpression, StringTemplateExpression } from './expressions';
-import { TREE, SUCCESS, FAILURE, RUNNING, ABORT, NEXT, ERROR } from '../constants.js';
+import {
+    TREE,
+    SUCCESS, FAILURE, RUNNING, ABORT, ERROR,
+    NEXTA, NEXTB, NEXTC, NEXTD,
+} from '../constants.js';
 
 export default class BaseNode {
 
@@ -104,8 +108,11 @@ export default class BaseNode {
         var status = this._tick(tick);
 
         // CLOSE
-        if ((status === SUCCESS) || (status === FAILURE) ||
-            (status === ABORT) || (state === NEXT) || (status === ERROR)) {
+        if (
+            (status === SUCCESS) || (status === FAILURE) ||
+            (status === ABORT) || (status === ERROR) ||
+            ((status >= NEXTA) && (status <= NEXTD))
+        ) {
             this._close(tick);
         }
 

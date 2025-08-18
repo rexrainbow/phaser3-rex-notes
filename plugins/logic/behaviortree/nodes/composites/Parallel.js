@@ -1,5 +1,8 @@
 import Composite from '../Composite.js';
-import { SUCCESS, FAILURE, RUNNING, ABORT, NEXT, ERROR } from '../../constants.js';
+import {
+    SUCCESS, FAILURE, RUNNING, ABORT, ERROR,
+    NEXTA, NEXTB, NEXTC, NEXTD
+} from '../../constants.js';
 import RemoveItem from '../../../../utils/array/Remove.js';
 
 class Parallel extends Composite {
@@ -49,7 +52,10 @@ class Parallel extends Composite {
         var hasAnyFinishStatus = false;
         var hasAnyRunningStatus = false;
         var hasAnyAbortStatus = false;
-        var hasAnyNextStatus = false;
+        var hasAnyNextAStatus = false;
+        var hasAnyNextBStatus = false;
+        var hasAnyNextCStatus = false;
+        var hasAnyNextDStatus = false;
         var hasAnyErrorStatus = false;
         for (var i = 0, cnt = childIndexes.length; i < cnt; i++) {
             var childIndex = childIndexes[i];
@@ -74,13 +80,23 @@ class Parallel extends Composite {
                     hasAnyAbortStatus = true;
                     break;
 
-                case NEXT:
-                    hasAnyNextStatus = true;
-                    break;
-
                 case ERROR:
                     hasAnyErrorStatus = true;
                     break;
+
+                case NEXTA:
+                    hasAnyNextAStatus = true;
+                    break;
+                case NEXTB:
+                    hasAnyNextBStatus = true;
+                    break;
+                case NEXTC:
+                    hasAnyNextCStatus = true;
+                    break;
+                case NEXTD:
+                    hasAnyNextDStatus = true;
+                    break;
+
             }
         }
 
@@ -101,8 +117,14 @@ class Parallel extends Composite {
                 return ERROR;
             } else if (hasAnyAbortStatus) {
                 return ABORT;
-            } else if (hasAnyNextStatus) {
-                return NEXT;
+            } else if (hasAnyNextAStatus) {
+                return NEXTA;
+            } else if (hasAnyNextBStatus) {
+                return NEXTB;
+            } else if (hasAnyNextCStatus) {
+                return NEXTC;
+            } else if (hasAnyNextDStatus) {
+                return NEXTD;
             } else if (hasAnyRunningStatus) {
                 return RUNNING;
             } else if (this.returnSuccess) {

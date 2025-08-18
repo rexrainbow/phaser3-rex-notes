@@ -1,7 +1,7 @@
 import Action from '../Action.js';
-import { NEXT } from '../../constants.js';
+import { NEXTC } from '../../constants.js';
 
-class Next extends Action {
+class NextC extends Action {
 
     constructor({
         services,
@@ -18,8 +18,8 @@ class Next extends Action {
 
     tick(tick) {
         // Running next node forcely in Seqence node
-        return NEXT;
+        return NEXTC;
     }
 };
 
-export default Next;
+export default NextC;
