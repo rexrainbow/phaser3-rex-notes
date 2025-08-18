@@ -10,6 +10,7 @@ import Runner from './actions/Runner';
 import Error from './actions/Error';
 import Wait from './actions/Wait';
 import Abort from './actions/Abort';
+import Next from './actions/Next';
 
 import Selector from './composites/Selector';
 import Sequence from './composites/Sequence';
@@ -47,6 +48,7 @@ export {
     Error,
     Wait,
     Abort,
+    Next,
 
     Selector,
     Sequence,

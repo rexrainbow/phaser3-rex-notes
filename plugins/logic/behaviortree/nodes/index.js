@@ -10,6 +10,7 @@ import Runner from './actions/Runner.js';
 import Error from './actions/Error.js';
 import Wait from './actions/Wait.js';
 import Abort from './actions/Abort.js';
+import Next from './actions/Next.js';
 
 import Selector from './composites/Selector.js';
 import Sequence from './composites/Sequence.js';
@@ -47,6 +48,7 @@ export {
     Error,
     Wait,
     Abort,
+    Next,
 
     Selector,
     Sequence,

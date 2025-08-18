@@ -1,5 +1,5 @@
 import Composite from '../Composite.js';
-import { SUCCESS, FAILURE, RUNNING, ABORT, ERROR } from '../../constants.js';
+import { SUCCESS, FAILURE, RUNNING, ABORT, NEXT, ERROR } from '../../constants.js';
 import RemoveItem from '../../../../utils/array/Remove.js';
 
 class Parallel extends Composite {
@@ -49,6 +49,7 @@ class Parallel extends Composite {
         var hasAnyFinishStatus = false;
         var hasAnyRunningStatus = false;
         var hasAnyAbortStatus = false;
+        var hasAnyNextStatus = false;
         var hasAnyErrorStatus = false;
         for (var i = 0, cnt = childIndexes.length; i < cnt; i++) {
             var childIndex = childIndexes[i];
@@ -71,6 +72,10 @@ class Parallel extends Composite {
 
                 case ABORT:
                     hasAnyAbortStatus = true;
+                    break;
+
+                case NEXT:
+                    hasAnyNextStatus = true;
                     break;
 
                 case ERROR:
@@ -96,6 +101,8 @@ class Parallel extends Composite {
                 return ERROR;
             } else if (hasAnyAbortStatus) {
                 return ABORT;
+            } else if (hasAnyNextStatus) {
+                return NEXT;
             } else if (hasAnyRunningStatus) {
                 return RUNNING;
             } else if (this.returnSuccess) {

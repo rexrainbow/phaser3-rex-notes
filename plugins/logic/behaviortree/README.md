@@ -15,6 +15,8 @@ tree evaluates them each tick while using a blackboard to store state.
 - **ABORT** : Node was aborted by its parent or an `Abort` action.
 - **ERROR** : Indicates a runtime error, such as a composite or decorator
   without a required child.
+- **NEXT** : Running next node forcely, in Sequence node.
+  - Next(action) node -> Sequence node
 
 ## Nodes
 
@@ -57,6 +59,7 @@ tree evaluates them each tick while using a blackboard to store state.
         - Wait 0 : Wait a tick
     - Error : Always return `ERROR`.
     - Abort : Always return `ABORT`.
+    - Next : Always return `NEXT`.
 
 ## Blackboard
 
