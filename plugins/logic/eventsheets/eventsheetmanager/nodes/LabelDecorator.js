@@ -1,6 +1,28 @@
-import { Sequence, SUCCESS, FAILURE } from '../../../behaviortree';
+import {
+    Decorator,
+    SUCCESS, FAILURE
+} from '../../../behaviortree/index.js';
 
-class TaskSequence extends Sequence {
+class LabelDecorator extends Decorator {
+    constructor(
+        {
+            child = null,
+            title,
+            name = 'Label'
+        } = {},
+        nodePool
+    ) {
+
+        super(
+            {
+                child,
+                title,
+                name,
+            },
+            nodePool
+        );
+    }
+
     open(tick) {
         super.open(tick);
 
@@ -13,11 +35,13 @@ class TaskSequence extends Sequence {
     }
 
     tick(tick) {
-        var status = super.tick(tick);
-        // Turn FAILURE by SUCCESS
-        if (status === FAILURE) {
-            status = SUCCESS;
+        if (!this.child) {
+            return SUCCESS;
         }
+
+        // Bypass
+        var status = this.child._execute(tick);
+
         return status;
     }
 
@@ -32,4 +56,4 @@ class TaskSequence extends Sequence {
     }
 }
 
-export default TaskSequence;
+export default LabelDecorator;

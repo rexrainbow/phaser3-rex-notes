@@ -12,6 +12,17 @@ script:
       - name: print
         parameters: { text: "after break" }
 
+  - type: repeat
+    times: 3
+    actions:
+      - name: print
+        parameters: { text: "repeat - 0" }
+
+      - type: break
+
+      - name: print
+        parameters: { text: "repeat - 1" }
+
   - type: for
     init:
       - name: set
@@ -24,11 +35,22 @@ script:
     actions:
       - name: print
         parameters: { text: "for {{loopCount}} - 0" }
-      
+
       - type: break
 
       - name: print
         parameters: { text: "for {{loopCount}} - 1" }
+
+  - type: while
+    condition: 'true'
+    actions:
+      - name: print
+        parameters: { text: "while - 0" }
+
+      - type: break
+
+      - name: print
+        parameters: { text: "while - 1" }
 
   - name: print
     parameters: { text: "...after action group..." }

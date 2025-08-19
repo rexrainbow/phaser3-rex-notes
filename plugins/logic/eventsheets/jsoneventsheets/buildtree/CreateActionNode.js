@@ -1,11 +1,12 @@
 import {
-    Succeeder, Abort, Failer, ForceSuccess,
+    Succeeder, Abort,
 } from '../../../behaviortree/index.js';
 import GetConditionExpression from './GetConditionExpression.js';
 import CreateIfDecorator from './CreateIfDecorator.js';
 import TaskAction from '../../eventsheetmanager/nodes/taskaction/TaskAction.js';
 import ActivateAction from '../../eventsheetmanager/nodes/ActivateAction.js';
 import DeactivateAction from '../../eventsheetmanager/nodes/DeactivateAction.js';
+import BreakAction from '../../eventsheetmanager/nodes/BreakAction.js';
 
 var CreateActionNode = function (nodeData) {
     var node, ifDecorator;
@@ -26,10 +27,6 @@ var CreateActionNode = function (nodeData) {
             node = new Abort({ title: '[exit]' });
             break;
 
-        case 'break':
-            node = new Failer({ title: '[break]' });
-            break;
-
         case 'activate':
             var activateTreeTitle = nodeData.target || '';
             node = new ActivateAction({
@@ -44,6 +41,10 @@ var CreateActionNode = function (nodeData) {
                 title: '[deactivate]',
                 deactivateTreeTitle: deactivateTreeTitle.trim(),
             });
+            break;
+
+        case 'break':
+            node = new BreakAction({ title: '[break]' });
             break;
 
         default:
