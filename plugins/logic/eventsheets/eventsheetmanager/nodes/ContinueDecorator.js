@@ -1,52 +1,19 @@
-import {
-    Decorator,
-    SUCCESS, FAILURE
-} from '../../../behaviortree/index.js';
+import { BreakDecorator as Base } from '../../../behaviortree/index.js';
 
-class ContinueDecorator extends Decorator {
+class ContinueDecorator extends Base {
     constructor(
-        {
-            child = null,
-            title,
-            name = 'Continue'
-        } = {},
+        config,
         nodePool
     ) {
-
+        if (config === undefined) {
+            config = {};
+        }
+        config.tag = 'continue';
         super(
-            {
-                child,
-                title,
-                name,
-            },
+            config,
             nodePool
         );
 
-        this.continueFlag = false;
-    }
-
-    setContinueFlag(enable) {
-        if (enable === undefined) {
-            enable = true;
-        }
-        this.continueFlag = enable;
-        return this;
-    }
-
-    tick(tick) {
-        if (!this.child) {
-            return SUCCESS;
-        }
-
-        var status = this.child._execute(tick);
-
-        // continueFlag will be set by BreakAction of grandchild node
-        if (this.continueFlag) {
-            status = SUCCESS;
-            this.continueFlag = false;
-        }
-
-        return status;
     }
 }
 

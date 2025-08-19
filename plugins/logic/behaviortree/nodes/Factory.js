@@ -9,6 +9,8 @@ import Failer from './actions/Failer.js';
 import Runner from './actions/Runner.js';
 import Error from './actions/Error.js';
 import Wait from './actions/Wait.js';
+import Abort from './actions/Abort.js';
+import BreakAction from './actions/BreakAction.js';
 
 import Selector from './composites/Selector.js';
 import Sequence from './composites/Sequence.js';
@@ -32,6 +34,7 @@ import Limiter from './decorators/Limiter.js';
 import If from './decorators/If.js';
 import ContinueIf from './decorators/ContinueIf.js';
 import AbortIf from './decorators/AbortIf.js';
+import BreakDecorator from './decorators/BreakDecorator.js';
 
 import ObjectFactory from '../ObjectFactory.js';
 import SetValue from '../../../utils/object/SetValue.js';
@@ -51,6 +54,12 @@ ObjectFactory.register('errorAction', function (config) {
 });
 ObjectFactory.register('wait', function (config) {
     return new Wait(config);
+});
+ObjectFactory.register('abort', function (config) {
+    return new Abort(config);
+});
+ObjectFactory.register('breakAction', function (config) {
+    return new BreakAction(config);
 });
 
 // Composites
@@ -119,6 +128,9 @@ ObjectFactory.register('continueIf', function (config) {
 ObjectFactory.register('abortIf', function (config) {
     return new AbortIf(config);
 });
+ObjectFactory.register('breakDecorator', function (config) {
+    return new BreakDecorator(config);
+});
 
 
 SetValue(window, 'RexPlugins.BehaviorTree.Action', Action);
@@ -131,6 +143,8 @@ SetValue(window, 'RexPlugins.BehaviorTree.Failer', Failer);
 SetValue(window, 'RexPlugins.BehaviorTree.Runner', Runner);
 SetValue(window, 'RexPlugins.BehaviorTree.Error', Error);
 SetValue(window, 'RexPlugins.BehaviorTree.Wait', Wait);
+SetValue(window, 'RexPlugins.BehaviorTree.Abort', Abort);
+SetValue(window, 'RexPlugins.BehaviorTree.BreakAction', BreakAction);
 
 SetValue(window, 'RexPlugins.BehaviorTree.Selector', Selector);
 SetValue(window, 'RexPlugins.BehaviorTree.Sequence', Sequence);
@@ -154,6 +168,8 @@ SetValue(window, 'RexPlugins.BehaviorTree.Limiter', Limiter);
 SetValue(window, 'RexPlugins.BehaviorTree.If', If);
 SetValue(window, 'RexPlugins.BehaviorTree.ContinueIf', ContinueIf);
 SetValue(window, 'RexPlugins.BehaviorTree.AbortIf', AbortIf);
+SetValue(window, 'RexPlugins.BehaviorTree.BreakDecorator', BreakDecorator);
+
 
 export {
     BaseNode,
@@ -166,6 +182,8 @@ export {
     Runner,
     Error,
     Wait,
+    Abort,
+    BreakAction,
 
     Selector,
     Sequence,
@@ -189,4 +207,5 @@ export {
     If,
     ContinueIf,
     AbortIf,
+    BreakDecorator,
 };
