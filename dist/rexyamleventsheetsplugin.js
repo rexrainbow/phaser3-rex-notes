@@ -2380,6 +2380,113 @@
 	    }
 	}
 
+	let BreakDecorator$1 = class BreakDecorator extends Decorator {
+	    constructor(
+	        {
+	            child = null,
+	            title,
+	            name = 'Break',
+	            tag,
+	        } = {},
+	        nodePool
+	    ) {
+
+	        super(
+	            {
+	                child,
+	                title,
+	                name,
+	                properties: {
+	                    tag
+	                }
+	            },
+	            nodePool
+	        );
+
+	        this.breakFlag = false;
+	        this.tag = tag;
+	    }
+
+	    setBreakFlag(enable) {
+	        if (enable === undefined) {
+	            enable = true;
+	        }
+	        this.breakFlag = enable;
+	        return this;
+	    }
+
+	    tick(tick) {
+	        if (!this.child) {
+	            return SUCCESS$1;
+	        }
+
+	        var status = this.child._execute(tick);
+
+	        // breakFlag will be set by BreakAction of grandchild node
+	        if (this.breakFlag) {
+	            status = SUCCESS$1;
+	            this.breakFlag = false;
+	        }
+
+	        return status;
+	    }
+	};
+
+	let BreakAction$1 = class BreakAction extends Action {
+	    constructor({
+	        breakDecoratorTitle,
+	        tag,
+	        services,
+	        title,
+	        name = 'Break'
+	    } = {}) {
+
+	        super({
+	            name,
+	            title,
+	            properties: {
+	                breakDecoratorTitle,
+	                tag
+	            },
+	            services,
+	        });
+
+	        this.breakDecoratorTitle = breakDecoratorTitle;
+	        this.tag = tag;
+	    }
+
+	    tick(tick) {
+	        // Find nearest BreakDecorator
+	        var parent = this.getParent();
+	        while (true) {
+	            if ((parent instanceof BreakDecorator$1) &&
+	                ((!this.tag) || (this.tag === parent.tag)) &&
+	                ((!this.breakDecoratorTitle) || (this.breakDecoratorTitle === parent.title))
+	            ) {
+	                break;
+	            }
+
+	            if (!parent.getParent) {
+	                parent = null;
+	                break;
+	            }
+	            parent = parent.getParent();
+	        }
+
+	        var status;
+	        if (parent) {
+	            parent.setBreakFlag();
+	            status = ABORT;
+	        } else {
+	            // Can't get responded BreakDecorator, ignore this break action node
+	            console.error(`[EventSheet] Can't get responded BreakDecorator, ignore this break action node.`);
+	            status = SUCCESS$1;
+	        }
+
+	        return status;
+	    }
+	};
+
 	class Selector extends Composite {
 	    constructor(
 	        {
@@ -3743,12 +3850,12 @@
 
 	        // child is not running
 	        if (!this.isChildRunning(tick)) {
-	            /* 
-	            Return FAILURE/SUCCESS to run next node
-	            
-	              - FAILURE : parent node is a Selector
-	              - SUCCESS : parent node is a Sequence
-
+	            /*
+	            If expression return false:
+	              - Don't run child node
+	              - Return SUCCESS to run next child for Sequence node, or 
+	                - Equal to `ForceSuccess + If`
+	              - Return FAILURE for Selector node
 	            */
 	            if (!tick.evalExpression(this.expression)) {
 	                return this.onFailState;
@@ -3869,6 +3976,8 @@
 		AbortIf: AbortIf,
 		Action: Action,
 		BaseNode: BaseNode,
+		BreakAction: BreakAction$1,
+		BreakDecorator: BreakDecorator$1,
 		Bypass: Bypass,
 		Composite: Composite,
 		ContinueIf: ContinueIf,
@@ -4782,36 +4891,49 @@
 	    },
 	};
 
-	class TaskSequence extends Sequence {
-	    open(tick) {
-	        super.open(tick);
-
-	        var blackboard = tick.blackboard;
-	        var eventSheetManager = blackboard.eventSheetManager;
-	        var eventsheet = tick.tree;
-	        var eventSheetGroup = eventsheet.eventSheetGroup;
-	        eventSheetManager.emit('label.enter', this.title, eventsheet.title, eventSheetGroup.name, eventSheetManager);
-
-	    }
-
-	    tick(tick) {
-	        var status = super.tick(tick);
-	        // Turn FAILURE by SUCCESS
-	        if (status === FAILURE) {
-	            status = SUCCESS$1;
+	class BreakDecorator extends BreakDecorator$1 {
+	    constructor(
+	        config,
+	        nodePool
+	    ) {
+	        if (config === undefined) {
+	            config = {};
 	        }
-	        return status;
+	        config.tag = 'break';
+	        super(
+	            config,
+	            nodePool
+	        );
+
+	    }
+	}
+
+	class ContinueDecorator extends BreakDecorator$1 {
+	    constructor(
+	        config,
+	        nodePool
+	    ) {
+	        if (config === undefined) {
+	            config = {};
+	        }
+	        config.tag = 'continue';
+	        super(
+	            config,
+	            nodePool
+	        );
+
+	    }
+	}
+
+	class BreakAction extends BreakAction$1 {
+	    constructor(config) {
+	        if (config === undefined) {
+	            config = {};
+	        }
+	        config.tag = 'break';
+	        super(config);
 	    }
 
-	    close(tick) {
-	        super.close(tick);
-
-	        var blackboard = tick.blackboard;
-	        var eventSheetManager = blackboard.eventSheetManager;
-	        var eventsheet = tick.tree;
-	        var eventSheetGroup = eventsheet.eventSheetGroup;
-	        eventSheetManager.emit('label.exit', this.title, eventsheet.title, eventSheetGroup.name, eventSheetManager);
-	    }
 	}
 
 	var PauseEventSheetMethods = {
@@ -5797,7 +5919,9 @@
 	}
 
 	var CustomNodeMapping = {
-	    TaskSequence: TaskSequence,
+	    BreakDecorator: BreakDecorator,
+	    ContinueDecorator: ContinueDecorator,
+	    BreakAction: BreakAction,
 	    TaskAction: TaskAction,
 	    ActivateAction: ActivateAction,
 	    DeactivateAction: DeactivateAction,
@@ -14816,6 +14940,59 @@
 	    return condition;
 	};
 
+	class LabelDecorator extends Decorator {
+	    constructor(
+	        {
+	            child = null,
+	            title,
+	            name = 'Label'
+	        } = {},
+	        nodePool
+	    ) {
+
+	        super(
+	            {
+	                child,
+	                title,
+	                name,
+	            },
+	            nodePool
+	        );
+	    }
+
+	    open(tick) {
+	        super.open(tick);
+
+	        var blackboard = tick.blackboard;
+	        var eventSheetManager = blackboard.eventSheetManager;
+	        var eventsheet = tick.tree;
+	        var eventSheetGroup = eventsheet.eventSheetGroup;
+	        eventSheetManager.emit('label.enter', this.title, eventsheet.title, eventSheetGroup.name, eventSheetManager);
+
+	    }
+
+	    tick(tick) {
+	        if (!this.child) {
+	            return SUCCESS$1;
+	        }
+
+	        // Bypass
+	        var status = this.child._execute(tick);
+
+	        return status;
+	    }
+
+	    close(tick) {
+	        super.close(tick);
+
+	        var blackboard = tick.blackboard;
+	        var eventSheetManager = blackboard.eventSheetManager;
+	        var eventsheet = tick.tree;
+	        var eventSheetGroup = eventsheet.eventSheetGroup;
+	        eventSheetManager.emit('label.exit', this.title, eventsheet.title, eventSheetGroup.name, eventSheetManager);
+	    }
+	}
+
 	var CreateIfDecorator = function (expression, onConditionFailValue) {
 	    var onFailState = (onConditionFailValue) ? SUCCESS$1 : FAILURE;
 	    var ifDecorator;
@@ -14837,6 +15014,17 @@
 	    return ifDecorator;
 	};
 
+	class ContinueAction extends BreakAction$1 {
+	    constructor(config) {
+	        if (config === undefined) {
+	            config = {};
+	        }
+	        config.tag = 'continue';
+	        super(config);
+	    }
+
+	}
+
 	var CreateActionNode = function (nodeData) {
 	    var node, ifDecorator;
 
@@ -14856,10 +15044,6 @@
 	            node = new Abort({ title: '[exit]' });
 	            break;
 
-	        case 'break':
-	            node = new Failer({ title: '[break]' });
-	            break;
-
 	        case 'activate':
 	            var activateTreeTitle = nodeData.target || '';
 	            node = new ActivateAction({
@@ -14873,6 +15057,20 @@
 	            node = new DeactivateAction({
 	                title: '[deactivate]',
 	                deactivateTreeTitle: deactivateTreeTitle.trim(),
+	            });
+	            break;
+
+	        case 'break':
+	            var breakDecoratorTitle = nodeData.target || '';
+	            node = new BreakAction({
+	                title: '[break]',
+	                breakDecoratorTitle: breakDecoratorTitle.trim(),
+	            });
+	            break;
+
+	        case 'continue':
+	            node = new ContinueAction({
+	                title: '[continue]',
 	            });
 	            break;
 
@@ -14891,80 +15089,99 @@
 	    return node;
 	};
 
-	var CreateActionSequence = function (actions, title, isTaskSequence) {
+	var CreateActionSequence = function (actions, title, hasLabel) {
+	    var parentNode, sequenceNode;
+	    if (hasLabel) {
+	        // break decorator
+	        var breakDecorator = new BreakDecorator({ title: title });
+	        // label decorator
+	        var labelDecorator = new LabelDecorator({ title: title });
+	        breakDecorator.chainChild(labelDecorator);
+	        parentNode = breakDecorator;
+	    }
+
 	    if (!actions || !actions.length) {
-	        return new Succeeder();
-	    }
+	        sequenceNode = new Succeeder();
 
-	    var parentNode;
-	    if (isTaskSequence) {
-	        // label
-	        parentNode = new TaskSequence({ title: title });
 	    } else {
-	        parentNode = new Sequence();
+	        sequenceNode = new Sequence();
+
+	        var node;
+	        for (var i = 0, cnt = actions.length; i < cnt; i++) {
+	            var nodeData = actions[i];
+	            if (nodeData.type) {
+	                nodeData.type = nodeData.type.toLowerCase();
+	            }
+
+	            switch (nodeData.type) {
+	                case undefined:
+	                    if (nodeData.branches) {  // type: if
+	                        node = CreateIFNode(nodeData);
+	                    } else if (nodeData.times) {  // type: repeat
+	                        node = CreateRepeatNode(nodeData);
+	                    } else if (nodeData.actions) {  // type: label
+	                        node = CreateSequenceNode(nodeData,
+	                            { hasLabel: true, nConditionFailValue: true }
+	                        );
+	                    } else {  // type: command
+	                        node = CreateActionNode(nodeData);
+	                    }
+	                    break;
+
+	                case 'if':
+	                    node = CreateIFNode(nodeData);
+	                    break;
+
+	                case 'while':
+	                    node = CreateWhileNode(nodeData);
+	                    break;
+
+	                case 'repeat':
+	                    node = CreateRepeatNode(nodeData);
+	                    break;
+
+	                case 'for':
+	                    node = CreateForNode(nodeData);
+	                    break;
+
+	                case 'label':
+	                    node = CreateSequenceNode(nodeData,
+	                        { hasLabel: true, onConditionFailValue: true }
+	                    );
+	                    break;
+
+	                case 'block':
+	                    node = CreateSequenceNode(nodeData,
+	                        { onConditionFailValue: true }
+	                    );
+	                    break;
+
+	                default:
+	                    node = CreateActionNode(nodeData);
+	                    break;
+	            }
+
+	            sequenceNode.addChild(node);
+	        }
 	    }
 
-	    var node;
-	    for (var i = 0, cnt = actions.length; i < cnt; i++) {
-	        var nodeData = actions[i];
-	        if (nodeData.type) {
-	            nodeData.type = nodeData.type.toLowerCase();
-	        }
-
-	        switch (nodeData.type) {
-	            case undefined:
-	                if (nodeData.branches) {  // type: if
-	                    node = CreateIFNode(nodeData);
-	                } else if (nodeData.times) {  // type: repeat
-	                    node = CreateRepeatNode(nodeData);
-	                } else if (nodeData.actions) {  // type: label
-	                    node = CreateSequenceNode(nodeData,
-	                        {
-	                            isTaskSequence: true,
-	                            onConditionFailValue: true
-	                        }
-	                    );
-	                } else {  // type: command
-	                    node = CreateActionNode(nodeData);
-	                }
-	                break;
-
-	            case 'if':
-	                node = CreateIFNode(nodeData);
-	                break;
-
-	            case 'while':
-	                node = CreateWhileNode(nodeData);
-	                break;
-
-	            case 'repeat':
-	                node = CreateRepeatNode(nodeData);
-	                break;
-
-	            case 'for':
-	                node = CreateForNode(nodeData);
-	                break;
-
-	            case 'label':
-	                node = CreateSequenceNode(nodeData,
-	                    {
-	                        isTaskSequence: true,
-	                        onConditionFailValue: true
-	                    }
-	                );
-	                break;
-
-	            default:
-	                node = CreateActionNode(nodeData);
-	                break;
-	        }
-
-	        parentNode.addChild(node);
+	    if (parentNode) {
+	        parentNode.chainChild(sequenceNode);
+	    } else {
+	        parentNode = sequenceNode;
 	    }
 
 	    return parentNode;
 	};
 
+	/*
+	- Selector
+	  - If(Decorator)
+	    - Sequence
+	  - If(Decorator)
+	    - Sequence
+	  ...
+	*/
 	var CreateIFNode = function (nodeData) {
 	    var node = new Selector({
 	        title: '[if]'
@@ -14988,59 +15205,143 @@
 	    return node;
 	};
 
+	/*
+	- BreakDecorator + RepeatUntilFailure(Decorator)
+	  - condition block: If(Decorator)
+	    - actions block: ContinueDecorator + Sequence
+	*/
 	var CreateWhileNode = function (nodeData) {
-	    var node = new RepeatUntilFailure({
+	    // Prepare nodes
+	    var breakDecorator = new BreakDecorator();
+
+	    var whileNode = new RepeatUntilFailure({
 	        title: '[while]',
 	        returnSuccess: true,
 	    });
-	    node.addChild(CreateSequenceNode(nodeData));
-	    return node;
+
+	    var loopBodyNode = CreateSequenceNode(nodeData);
+
+	    // Connect nodes
+	    breakDecorator.addChild(whileNode);
+
+	    whileNode.addChild(loopBodyNode);
+
+	    return breakDecorator;
 	};
 
+	/*
+	- BreakDecorator + Repeat(Decorator)
+	  - actions block: ContinueDecorator + [ignoreCondition] Sequence
+	*/
 	var CreateRepeatNode = function (nodeData) {
-	    var node = new Repeat({
+	    // Prepare nodes
+	    var breakDecorator = new BreakDecorator();
+
+	    var whileNode = new Repeat({
 	        title: '[repeat]',
 	        maxLoop: nodeData.times,
 	    });
-	    node.addChild(CreateSequenceNode(nodeData, { ignoreCondition: true }));
-	    return node;
+
+	    var continueDecorator = new ContinueDecorator();
+
+	    var loopBodyNode = CreateSequenceNode(nodeData, { ignoreCondition: true });
+
+	    // Connect nodes
+	    breakDecorator.addChild(whileNode);
+
+	    whileNode.addChild(continueDecorator);
+
+	    continueDecorator.addChild(loopBodyNode);
+
+	    return breakDecorator;
 	};
 
+	/*
+	- BreakDecorator + Sequence
+	  - init block: Sequence
+	  - RepeatUntilFailure(Decorator)
+	    - condition block: If(Decorator)
+	      - Sequence
+	        - actions block: ContinueDecorator + Sequence
+	        - step block: Sequence
+	*/
 	var CreateForNode = function (nodeData) {
-	    var node = new Sequence({ title: '[for]' });
+	    // Prepare nodes
+	    var breakDecorator = new BreakDecorator();
 
-	    // init
-	    if (nodeData.init) {
-	        node.addChild(CreateActionSequence(nodeData.init, undefined, true));
-	    }
+	    var outerSequenceNode = new Sequence({ title: '[for]' });
 
-	    // while
+	    var initNode = (nodeData.init) ? CreateActionSequence(nodeData.init, undefined, false) : undefined;
+
 	    var whileNode = new RepeatUntilFailure({
 	        returnSuccess: true,
 	    });
 
-	    var actions = [];
-	    if (nodeData.actions) {
-	        actions.push({ actions: nodeData.actions });
-	    }
-	    if (nodeData.step) {
-	        actions.push({ actions: nodeData.step });
-	    }
-	    whileNode.addChild(CreateSequenceNode({
-	        condition: nodeData.condition,
-	        actions: actions
-	    }));
+	    var expression = GetConditionExpression(nodeData.condition);
+	    var ifDecorator = CreateIfDecorator(expression);
 
-	    node.addChild(whileNode);
+	    var outerLoopBodyNode = new Sequence();
 
-	    return node;
+	    var continueDecorator = new ContinueDecorator();
+
+	    var actionsNode = CreateSequenceNode(
+	        { actions: nodeData.actions },
+	        { onConditionFailValue: true, ignoreCondition: true }
+	    );
+
+	    var stepNode = CreateSequenceNode(
+	        { actions: nodeData.step },
+	        { onConditionFailValue: true, ignoreCondition: true }
+	    );
+
+	    // Connect nodes
+	    breakDecorator.addChild(outerSequenceNode);
+
+	    if (initNode) {
+	        outerSequenceNode.addChild(initNode);
+	    }
+
+	    outerSequenceNode.addChild(whileNode);
+
+	    whileNode.addChild(ifDecorator);
+
+	    ifDecorator.addChild(outerLoopBodyNode);
+
+	    outerLoopBodyNode.addChild(continueDecorator);
+
+	    continueDecorator.addChild(actionsNode);
+
+	    outerLoopBodyNode.addChild(stepNode);
+
+	    return breakDecorator;
 	};
 
+	/*
+	!ignoreCondition
+
+	- If(Decorator)
+	  - Sequence
+	  
+	or 
+	  
+	- If(Decorator)
+	  - LabelDecorator + Sequence
+
+	---
+
+	ignoreCondition
+
+	- Sequence
+
+	or 
+
+	- BreakDecorator + LabelDecorator + Sequence
+	*/
 	var CreateSequenceNode = function (nodeData, config = {}) {
 	    // properties: title(for label only), condition(can be ignored), actions
 
 	    var {
-	        isTaskSequence = false,
+	        hasLabel = false,
 	        ignoreCondition = false,
 	        onConditionFailValue = false,
 	    } = config;
@@ -15054,8 +15355,8 @@
 	        }
 	    }
 
-	    var title = (isTaskSequence) ? nodeData.title : undefined;
-	    node = CreateActionSequence(nodeData.actions, title, isTaskSequence);
+	    var title = (hasLabel) ? nodeData.title : undefined;
+	    node = CreateActionSequence(nodeData.actions, title, hasLabel);
 
 	    if (ifDecorator) {
 	        ifDecorator.addChild(node);

@@ -2382,6 +2382,113 @@
 	    }
 	}
 
+	let BreakDecorator$1 = class BreakDecorator extends Decorator {
+	    constructor(
+	        {
+	            child = null,
+	            title,
+	            name = 'Break',
+	            tag,
+	        } = {},
+	        nodePool
+	    ) {
+
+	        super(
+	            {
+	                child,
+	                title,
+	                name,
+	                properties: {
+	                    tag
+	                }
+	            },
+	            nodePool
+	        );
+
+	        this.breakFlag = false;
+	        this.tag = tag;
+	    }
+
+	    setBreakFlag(enable) {
+	        if (enable === undefined) {
+	            enable = true;
+	        }
+	        this.breakFlag = enable;
+	        return this;
+	    }
+
+	    tick(tick) {
+	        if (!this.child) {
+	            return SUCCESS$1;
+	        }
+
+	        var status = this.child._execute(tick);
+
+	        // breakFlag will be set by BreakAction of grandchild node
+	        if (this.breakFlag) {
+	            status = SUCCESS$1;
+	            this.breakFlag = false;
+	        }
+
+	        return status;
+	    }
+	};
+
+	let BreakAction$1 = class BreakAction extends Action {
+	    constructor({
+	        breakDecoratorTitle,
+	        tag,
+	        services,
+	        title,
+	        name = 'Break'
+	    } = {}) {
+
+	        super({
+	            name,
+	            title,
+	            properties: {
+	                breakDecoratorTitle,
+	                tag
+	            },
+	            services,
+	        });
+
+	        this.breakDecoratorTitle = breakDecoratorTitle;
+	        this.tag = tag;
+	    }
+
+	    tick(tick) {
+	        // Find nearest BreakDecorator
+	        var parent = this.getParent();
+	        while (true) {
+	            if ((parent instanceof BreakDecorator$1) &&
+	                ((!this.tag) || (this.tag === parent.tag)) &&
+	                ((!this.breakDecoratorTitle) || (this.breakDecoratorTitle === parent.title))
+	            ) {
+	                break;
+	            }
+
+	            if (!parent.getParent) {
+	                parent = null;
+	                break;
+	            }
+	            parent = parent.getParent();
+	        }
+
+	        var status;
+	        if (parent) {
+	            parent.setBreakFlag();
+	            status = ABORT;
+	        } else {
+	            // Can't get responded BreakDecorator, ignore this break action node
+	            console.error(`[EventSheet] Can't get responded BreakDecorator, ignore this break action node.`);
+	            status = SUCCESS$1;
+	        }
+
+	        return status;
+	    }
+	};
+
 	class Selector extends Composite {
 	    constructor(
 	        {
@@ -3745,12 +3852,12 @@
 
 	        // child is not running
 	        if (!this.isChildRunning(tick)) {
-	            /* 
-	            Return FAILURE/SUCCESS to run next node
-	            
-	              - FAILURE : parent node is a Selector
-	              - SUCCESS : parent node is a Sequence
-
+	            /*
+	            If expression return false:
+	              - Don't run child node
+	              - Return SUCCESS to run next child for Sequence node, or 
+	                - Equal to `ForceSuccess + If`
+	              - Return FAILURE for Selector node
 	            */
 	            if (!tick.evalExpression(this.expression)) {
 	                return this.onFailState;
@@ -3871,6 +3978,8 @@
 		AbortIf: AbortIf,
 		Action: Action,
 		BaseNode: BaseNode,
+		BreakAction: BreakAction$1,
+		BreakDecorator: BreakDecorator$1,
 		Bypass: Bypass,
 		Composite: Composite,
 		ContinueIf: ContinueIf,
@@ -4784,36 +4893,49 @@
 	    },
 	};
 
-	class TaskSequence extends Sequence {
-	    open(tick) {
-	        super.open(tick);
-
-	        var blackboard = tick.blackboard;
-	        var eventSheetManager = blackboard.eventSheetManager;
-	        var eventsheet = tick.tree;
-	        var eventSheetGroup = eventsheet.eventSheetGroup;
-	        eventSheetManager.emit('label.enter', this.title, eventsheet.title, eventSheetGroup.name, eventSheetManager);
-
-	    }
-
-	    tick(tick) {
-	        var status = super.tick(tick);
-	        // Turn FAILURE by SUCCESS
-	        if (status === FAILURE) {
-	            status = SUCCESS$1;
+	class BreakDecorator extends BreakDecorator$1 {
+	    constructor(
+	        config,
+	        nodePool
+	    ) {
+	        if (config === undefined) {
+	            config = {};
 	        }
-	        return status;
+	        config.tag = 'break';
+	        super(
+	            config,
+	            nodePool
+	        );
+
+	    }
+	}
+
+	class ContinueDecorator extends BreakDecorator$1 {
+	    constructor(
+	        config,
+	        nodePool
+	    ) {
+	        if (config === undefined) {
+	            config = {};
+	        }
+	        config.tag = 'continue';
+	        super(
+	            config,
+	            nodePool
+	        );
+
+	    }
+	}
+
+	class BreakAction extends BreakAction$1 {
+	    constructor(config) {
+	        if (config === undefined) {
+	            config = {};
+	        }
+	        config.tag = 'break';
+	        super(config);
 	    }
 
-	    close(tick) {
-	        super.close(tick);
-
-	        var blackboard = tick.blackboard;
-	        var eventSheetManager = blackboard.eventSheetManager;
-	        var eventsheet = tick.tree;
-	        var eventSheetGroup = eventsheet.eventSheetGroup;
-	        eventSheetManager.emit('label.exit', this.title, eventsheet.title, eventSheetGroup.name, eventSheetManager);
-	    }
 	}
 
 	var PauseEventSheetMethods = {
@@ -5799,7 +5921,9 @@
 	}
 
 	var CustomNodeMapping = {
-	    TaskSequence: TaskSequence,
+	    BreakDecorator: BreakDecorator,
+	    ContinueDecorator: ContinueDecorator,
+	    BreakAction: BreakAction,
 	    TaskAction: TaskAction,
 	    ActivateAction: ActivateAction,
 	    DeactivateAction: DeactivateAction,
@@ -63345,6 +63469,59 @@ void main (void) {
 	    return expression;
 	};
 
+	class LabelDecorator extends Decorator {
+	    constructor(
+	        {
+	            child = null,
+	            title,
+	            name = 'Label'
+	        } = {},
+	        nodePool
+	    ) {
+
+	        super(
+	            {
+	                child,
+	                title,
+	                name,
+	            },
+	            nodePool
+	        );
+	    }
+
+	    open(tick) {
+	        super.open(tick);
+
+	        var blackboard = tick.blackboard;
+	        var eventSheetManager = blackboard.eventSheetManager;
+	        var eventsheet = tick.tree;
+	        var eventSheetGroup = eventsheet.eventSheetGroup;
+	        eventSheetManager.emit('label.enter', this.title, eventsheet.title, eventSheetGroup.name, eventSheetManager);
+
+	    }
+
+	    tick(tick) {
+	        if (!this.child) {
+	            return SUCCESS$1;
+	        }
+
+	        // Bypass
+	        var status = this.child._execute(tick);
+
+	        return status;
+	    }
+
+	    close(tick) {
+	        super.close(tick);
+
+	        var blackboard = tick.blackboard;
+	        var eventSheetManager = blackboard.eventSheetManager;
+	        var eventsheet = tick.tree;
+	        var eventSheetGroup = eventsheet.eventSheetGroup;
+	        eventSheetManager.emit('label.exit', this.title, eventsheet.title, eventSheetGroup.name, eventSheetManager);
+	    }
+	}
+
 	var CreateActionNode = function (paragraph, config) {
 	    var commandData = GetCommandData(paragraph, config);
 	    if (!commandData) {
@@ -63448,7 +63625,10 @@ void main (void) {
 	};
 
 	var CreateActionSequence = function (node, config) {
-	    var sequence = new TaskSequence({ title: node.title });
+	    var labelDecorator = new LabelDecorator({ title: node.title });
+
+	    var sequence = new Sequence({ title: node.title });
+
 	    var paragraphs = node.paragraphs;  // paragraphs -> TaskAction[]
 	    var actionNode;
 	    for (var i = 0, cnt = paragraphs.length; i < cnt; i++) {
@@ -63458,7 +63638,10 @@ void main (void) {
 	        }
 	        sequence.addChild(actionNode);
 	    }
-	    return sequence;
+
+	    labelDecorator.addChild(sequence);
+
+	    return labelDecorator;
 	};
 
 	var ExtraNumberExpression = function (s) {
