@@ -42,12 +42,12 @@ class If extends Decorator {
 
         // child is not running
         if (!this.isChildRunning(tick)) {
-            /* 
-            Return FAILURE/SUCCESS to run next node
-            
-              - FAILURE : parent node is a Selector
-              - SUCCESS : parent node is a Sequence
-
+            /*
+            If expression return false:
+              - Don't run child node
+              - Return SUCCESS to run next child for Sequence node, or 
+                - Equal to `ForceSuccess + If`
+              - Return FAILURE for Selector node
             */
             if (!tick.evalExpression(this.expression)) {
                 return this.onFailState;
