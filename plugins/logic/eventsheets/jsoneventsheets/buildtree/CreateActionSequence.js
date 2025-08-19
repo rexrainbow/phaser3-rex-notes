@@ -4,6 +4,7 @@ import {
 } from '../../../behaviortree/index.js';
 import LabelDecorator from '../../eventsheetmanager/nodes/LabelDecorator.js';
 import BreakDecorator from '../../eventsheetmanager/nodes/BreakDecorator.js';
+import ContinueDecorator from '../../eventsheetmanager/nodes/ContinueDecorator.js';
 import CreateIfDecorator from './CreateIfDecorator.js';
 import CreateActionNode from './CreateActionNode.js';
 import GetConditionExpression from './GetConditionExpression.js';
@@ -41,10 +42,7 @@ var CreateActionSequence = function (actions, title, hasLabel) {
                         node = CreateRepeatNode(nodeData);
                     } else if (nodeData.actions) {  // type: label
                         node = CreateSequenceNode(nodeData,
-                            {
-                                hasLabel: true,
-                                onConditionFailValue: true
-                            }
+                            { hasLabel: true, nConditionFailValue: true }
                         );
                     } else {  // type: command
                         node = CreateActionNode(nodeData)
@@ -69,18 +67,13 @@ var CreateActionSequence = function (actions, title, hasLabel) {
 
                 case 'label':
                     node = CreateSequenceNode(nodeData,
-                        {
-                            hasLabel: true,
-                            onConditionFailValue: true
-                        }
+                        { hasLabel: true, onConditionFailValue: true }
                     );
                     break;
 
                 case 'block':
                     node = CreateSequenceNode(nodeData,
-                        {
-                            onConditionFailValue: true
-                        }
+                        { onConditionFailValue: true }
                     );
                     break;
 
@@ -136,44 +129,52 @@ var CreateIFNode = function (nodeData) {
 /*
 - BreakDecorator + RepeatUntilFailure(Decorator)
   - condition block: If(Decorator)
-    - actions block: Sequence
+    - actions block: ContinueDecorator + Sequence
 */
-// break : Return SUCCESS in RepeatUntilFailure
-// continue : Return SUCCESS in actions block
 var CreateWhileNode = function (nodeData) {
-    var topNode = new BreakDecorator();
+    // Prepare nodes
+    var breakDecorator = new BreakDecorator();
 
-    var node = new RepeatUntilFailure({
+    var whileNode = new RepeatUntilFailure({
         title: '[while]',
         returnSuccess: true,
     });
-    node.addChild(CreateSequenceNode(nodeData));
 
-    topNode.addChild(node);
-    node = topNode;
+    var loopBodyNode = CreateSequenceNode(nodeData)
 
-    return node;
+    // Connect nodes
+    breakDecorator.addChild(whileNode);
+
+    whileNode.addChild(loopBodyNode);
+
+    return breakDecorator;
 }
 
 /*
 - BreakDecorator + Repeat(Decorator)
-  - actions block: [ignoreCondition] Sequence
+  - actions block: ContinueDecorator + [ignoreCondition] Sequence
 */
-// break : Return SUCCESS in Repeat
-// continue : Return SUCCESS in actions block
 var CreateRepeatNode = function (nodeData) {
-    var topNode = new BreakDecorator();
+    // Prepare nodes
+    var breakDecorator = new BreakDecorator();
 
-    var node = new Repeat({
+    var whileNode = new Repeat({
         title: '[repeat]',
         maxLoop: nodeData.times,
     })
-    node.addChild(CreateSequenceNode(nodeData, { ignoreCondition: true }));
 
-    topNode.addChild(node);
-    node = topNode;
+    var continueDecorator = new ContinueDecorator();
 
-    return node;
+    var loopBodyNode = CreateSequenceNode(nodeData, { ignoreCondition: true });
+
+    // Connect nodes
+    breakDecorator.addChild(whileNode);
+
+    whileNode.addChild(continueDecorator);
+
+    continueDecorator.addChild(loopBodyNode);
+
+    return breakDecorator;
 }
 
 /*
@@ -181,45 +182,59 @@ var CreateRepeatNode = function (nodeData) {
   - init block: Sequence
   - RepeatUntilFailure(Decorator)
     - condition block: If(Decorator)
-    - Sequence
-      - actions block: Sequence
-      - step block: Sequence
+      - Sequence
+        - actions block: ContinueDecorator + Sequence
+        - step block: Sequence
 */
-// break : Return SUCCESS in tick of Sequence
-// continue : Return SUCCESS in actions block
 var CreateForNode = function (nodeData) {
-    var topNode = new BreakDecorator();
+    // Prepare nodes
+    var breakDecorator = new BreakDecorator();
 
-    var node = new Sequence({ title: '[for]' });
+    var outerSequenceNode = new Sequence({ title: '[for]' });
 
-    // init
-    if (nodeData.init) {
-        node.addChild(CreateActionSequence(nodeData.init, undefined, false));
-    }
+    var initNode = (nodeData.init) ? CreateActionSequence(nodeData.init, undefined, false) : undefined;
 
-    // while
     var whileNode = new RepeatUntilFailure({
         returnSuccess: true,
     });
 
-    var actions = [];
-    if (nodeData.actions) {
-        actions.push({ actions: nodeData.actions, type: 'block' });
+    var expression = GetConditionExpression(nodeData.condition);
+    var ifDecorator = CreateIfDecorator(expression);
+
+    var outerLoopBodyNode = new Sequence();
+
+    var continueDecorator = new ContinueDecorator();
+
+    var actionsNode = CreateSequenceNode(
+        { actions: nodeData.actions },
+        { onConditionFailValue: true, ignoreCondition: true }
+    );
+
+    var stepNode = CreateSequenceNode(
+        { actions: nodeData.step },
+        { onConditionFailValue: true, ignoreCondition: true }
+    );
+
+    // Connect nodes
+    breakDecorator.addChild(outerSequenceNode);
+
+    if (initNode) {
+        outerSequenceNode.addChild(initNode);
     }
-    if (nodeData.step) {
-        actions.push({ actions: nodeData.step, type: 'block' });
-    }
-    whileNode.addChild(CreateSequenceNode({
-        condition: nodeData.condition,
-        actions: actions
-    }));
 
-    node.addChild(whileNode);
+    outerSequenceNode.addChild(whileNode);
 
-    topNode.addChild(node);
-    node = topNode;
+    whileNode.addChild(ifDecorator);
 
-    return node;
+    ifDecorator.addChild(outerLoopBodyNode);
+
+    outerLoopBodyNode.addChild(continueDecorator);
+
+    continueDecorator.addChild(actionsNode);
+
+    outerLoopBodyNode.addChild(stepNode);
+
+    return breakDecorator;
 }
 
 /*

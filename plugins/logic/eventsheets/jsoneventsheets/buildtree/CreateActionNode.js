@@ -7,6 +7,7 @@ import TaskAction from '../../eventsheetmanager/nodes/taskaction/TaskAction.js';
 import ActivateAction from '../../eventsheetmanager/nodes/ActivateAction.js';
 import DeactivateAction from '../../eventsheetmanager/nodes/DeactivateAction.js';
 import BreakAction from '../../eventsheetmanager/nodes/BreakAction.js';
+import ContinueAction from '../../eventsheetmanager/nodes/ContinueAction.js';
 
 var CreateActionNode = function (nodeData) {
     var node, ifDecorator;
@@ -48,6 +49,12 @@ var CreateActionNode = function (nodeData) {
             node = new BreakAction({
                 title: '[break]',
                 breakDecoratorTitle: breakDecoratorTitle.trim(),
+            });
+            break;
+
+        case 'continue':
+            node = new ContinueAction({
+                title: '[continue]',
             });
             break;
 

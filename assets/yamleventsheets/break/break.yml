@@ -80,5 +80,24 @@ script:
       - name: print
         parameters: { text: "label level 1 - 1" }
 
+  - type: for
+    init:
+      - name: set
+        parameters: { loopCount: 3 }
+    condition:
+      - loopCount > 0
+    step:
+      - name: set
+        parameters: { loopCount: "#(loopCount-1)" }
+    actions:
+      - name: print
+        parameters: { text: "for {{loopCount}} - 0" }
+
+      - type: continue
+
+      - name: print
+        parameters: { text: "for {{loopCount}} - 1" }
+
+
   - name: print
     parameters: { text: "...after action group..." }
