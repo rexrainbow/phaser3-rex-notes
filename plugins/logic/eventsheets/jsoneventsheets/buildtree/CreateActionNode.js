@@ -44,7 +44,11 @@ var CreateActionNode = function (nodeData) {
             break;
 
         case 'break':
-            node = new BreakAction({ title: '[break]' });
+            var breakDecoratorTitle = nodeData.target || '';
+            node = new BreakAction({
+                title: '[break]',
+                breakDecoratorTitle: breakDecoratorTitle.trim(),
+            });
             break;
 
         default:

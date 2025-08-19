@@ -13,7 +13,7 @@ var CreateActionSequence = function (actions, title, hasLabel) {
     var parentNode, sequenceNode;
     if (hasLabel) {
         // break decorator
-        var breakDecorator = new BreakDecorator();
+        var breakDecorator = new BreakDecorator({ title: title });
         // label decorator
         var labelDecorator = new LabelDecorator({ title: title });
         breakDecorator.chainChild(labelDecorator);

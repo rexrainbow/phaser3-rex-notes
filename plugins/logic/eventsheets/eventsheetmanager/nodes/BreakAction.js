@@ -6,6 +6,7 @@ import BreakDecorator from './BreakDecorator.js';
 
 class BreakAction extends Action {
     constructor({
+        breakDecoratorTitle,
         services,
         title,
         name = 'Break'
@@ -14,8 +15,13 @@ class BreakAction extends Action {
         super({
             name,
             title,
+            properties: {
+                breakDecoratorTitle
+            },
             services,
         });
+
+        this.breakDecoratorTitle = breakDecoratorTitle;
     }
 
     tick(tick) {
@@ -23,7 +29,12 @@ class BreakAction extends Action {
         var parent = this.getParent();
         while (true) {
             if (parent instanceof BreakDecorator) {
-                break;
+                if (
+                    !this.breakDecoratorTitle || (this.breakDecoratorTitle === '') ||
+                    (this.breakDecoratorTitle === parent.title)
+                ) {
+                    break;
+                }
             }
             if (!parent.getParent) {
                 parent = null;
