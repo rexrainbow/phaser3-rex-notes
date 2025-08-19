@@ -1,8 +1,5 @@
 import Composite from '../Composite.js';
-import {
-    SUCCESS, FAILURE, RUNNING, ABORT, ERROR,
-    NEXTA, NEXTB, NEXTC, NEXTD
-} from '../../constants.js';
+import { SUCCESS, FAILURE, RUNNING, ABORT, NEXT, ERROR } from '../../constants.js';
 
 class Selector extends Composite {
     constructor(
@@ -44,10 +41,7 @@ class Selector extends Composite {
             for (var i = 0, cnt = this.children.length; i < cnt; i++) {
                 status = this.children[i]._execute(tick);
 
-                if (
-                    (status === RUNNING) || (status === SUCCESS) || (status === ABORT) ||
-                    ((status >= NEXTA) && (status <= NEXTD))
-                ) {
+                if ((status === RUNNING) || (status === SUCCESS) || (status === ABORT) || (status === NEXT)) {
                     childIndex = i;
                     break;
                 }

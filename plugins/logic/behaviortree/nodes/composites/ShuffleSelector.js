@@ -1,9 +1,6 @@
 import Composite from '../Composite.js';
 import Shuffle from '../../../../utils/array/Shuffle.js';
-import {
-    SUCCESS, FAILURE, RUNNING, ABORT, ERROR,
-    NEXTA, NEXTB, NEXTC, NEXTD
-} from '../../constants.js';
+import { SUCCESS, FAILURE, RUNNING, ABORT, NEXT, ERROR } from '../../constants.js';
 
 class ShuffleSelector extends Composite {
     constructor(
@@ -51,10 +48,7 @@ class ShuffleSelector extends Composite {
         for (var i = childIndex, cnt = children.length; i < cnt; i++) {
             status = this.children[children[i]]._execute(tick);
 
-            if (
-                (status === RUNNING) || (status === SUCCESS) || (status === ABORT) ||
-                ((status >= NEXTA) && (status <= NEXTD))
-            ) {
+            if ((status === RUNNING) || (status === SUCCESS) || (status === ABORT) || (state === NEXT)) {
                 break;
             }
         }

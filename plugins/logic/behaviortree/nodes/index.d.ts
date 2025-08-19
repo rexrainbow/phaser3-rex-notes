@@ -10,10 +10,7 @@ import Runner from './actions/Runner';
 import Error from './actions/Error';
 import Wait from './actions/Wait';
 import Abort from './actions/Abort';
-import NextA from './actions/NextA';
-import NextB from './actions/NextB';
-import NextC from './actions/NextC';
-import NextD from './actions/NextD';
+import Next from './actions/Next';
 
 import Selector from './composites/Selector';
 import Sequence from './composites/Sequence';
@@ -51,7 +48,7 @@ export {
     Error,
     Wait,
     Abort,
-    NextA, NextB, NextC, NextD,
+    Next,
 
     Selector,
     Sequence,

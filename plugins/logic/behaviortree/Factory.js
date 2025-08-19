@@ -10,9 +10,7 @@ import {
     Succeeder,
     Failer,
     Runner,
-    Abort,
     Error,
-    NextA, NextB, NextC, NextD,
     Wait,
 
     Selector,
@@ -80,9 +78,7 @@ export {
     Succeeder,
     Failer,
     Runner,
-    Abort,
     Error,
-    NextA, NextB, NextC, NextD,
     Wait,
 
     // Parsers

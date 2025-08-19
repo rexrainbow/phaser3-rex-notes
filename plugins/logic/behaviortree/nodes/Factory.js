@@ -7,12 +7,7 @@ import Service from './Service.js';
 import Succeeder from './actions/Succeeder.js';
 import Failer from './actions/Failer.js';
 import Runner from './actions/Runner.js';
-import Abort from './actions/Abort.js';
 import Error from './actions/Error.js';
-import NextA from './actions/NextA.js';
-import NextB from './actions/NextB.js';
-import NextC from './actions/NextC.js';
-import NextD from './actions/NextD.js';
 import Wait from './actions/Wait.js';
 
 import Selector from './composites/Selector.js';
@@ -51,23 +46,8 @@ ObjectFactory.register('failureAction', function (config) {
 ObjectFactory.register('runningAction', function (config) {
     return new Runner(config);
 });
-ObjectFactory.register('abortAction', function (config) {
-    return new Abort(config);
-});
 ObjectFactory.register('errorAction', function (config) {
     return new Error(config);
-});
-ObjectFactory.register('nextAAction', function (config) {
-    return new NextA(config);
-});
-ObjectFactory.register('nextBAction', function (config) {
-    return new NextB(config);
-});
-ObjectFactory.register('nextCAction', function (config) {
-    return new NextC(config);
-});
-ObjectFactory.register('nextDAction', function (config) {
-    return new NextD(config);
 });
 ObjectFactory.register('wait', function (config) {
     return new Wait(config);
@@ -149,12 +129,7 @@ SetValue(window, 'RexPlugins.BehaviorTree.Service', Service);
 SetValue(window, 'RexPlugins.BehaviorTree.Succeeder', Succeeder);
 SetValue(window, 'RexPlugins.BehaviorTree.Failer', Failer);
 SetValue(window, 'RexPlugins.BehaviorTree.Runner', Runner);
-SetValue(window, 'RexPlugins.BehaviorTree.Abort', Abort);
 SetValue(window, 'RexPlugins.BehaviorTree.Error', Error);
-SetValue(window, 'RexPlugins.BehaviorTree.NextA', NextA);
-SetValue(window, 'RexPlugins.BehaviorTree.NextB', NextB);
-SetValue(window, 'RexPlugins.BehaviorTree.NextC', NextC);
-SetValue(window, 'RexPlugins.BehaviorTree.NextD', NextD);
 SetValue(window, 'RexPlugins.BehaviorTree.Wait', Wait);
 
 SetValue(window, 'RexPlugins.BehaviorTree.Selector', Selector);
@@ -189,9 +164,7 @@ export {
     Succeeder,
     Failer,
     Runner,
-    Abort,
     Error,
-    NextA, NextB, NextC, NextD,
     Wait,
 
     Selector,
