@@ -10,6 +10,7 @@ import Runner from './actions/Runner.js';
 import Error from './actions/Error.js';
 import Wait from './actions/Wait.js';
 import Abort from './actions/Abort.js';
+import BreakAction from './actions/BreakAction.js';
 
 import Selector from './composites/Selector.js';
 import Sequence from './composites/Sequence.js';
@@ -33,6 +34,7 @@ import Limiter from './decorators/Limiter.js';
 import If from './decorators/If.js';
 import ContinueIf from './decorators/ContinueIf.js';
 import AbortIf from './decorators/AbortIf.js';
+import BreakDecorator from './decorators/BreakDecorator.js';
 
 export {
     BaseNode,
@@ -47,6 +49,7 @@ export {
     Error,
     Wait,
     Abort,
+    BreakAction,
 
     Selector,
     Sequence,
@@ -70,4 +73,5 @@ export {
     If,
     ContinueIf,
     AbortIf,
+    BreakDecorator,
 }

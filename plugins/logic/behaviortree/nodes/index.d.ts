@@ -10,6 +10,7 @@ import Runner from './actions/Runner';
 import Error from './actions/Error';
 import Wait from './actions/Wait';
 import Abort from './actions/Abort';
+import BreakAction from './actions/BreakAction'
 
 import Selector from './composites/Selector';
 import Sequence from './composites/Sequence';
@@ -33,6 +34,7 @@ import Limiter from './decorators/Limiter';
 import If from './decorators/If';
 import ContinueIf from './decorators/ContinueIf';
 import AbortIf from './decorators/AbortIf';
+import BreakDecorator from './decorators/BreakDecorator';
 
 export {
     BaseNode,
@@ -47,6 +49,7 @@ export {
     Error,
     Wait,
     Abort,
+    BreakAction,
 
     Selector,
     Sequence,
@@ -70,4 +73,5 @@ export {
     If,
     ContinueIf,
     AbortIf,
+    BreakDecorator,
 }

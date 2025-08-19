@@ -12,6 +12,8 @@ import {
     Runner,
     Error,
     Wait,
+    Abort,
+    BreakAction,
 
     Selector,
     Sequence,
@@ -35,9 +37,8 @@ import {
     If,
     ContinueIf,
     AbortIf,
+    BreakDecorator,
 } from './nodes/Factory.js';
-
-import { LoadYaml } from './parsers/yaml/Factory.js'
 
 export {
     // Core
@@ -73,6 +74,7 @@ export {
     If,
     ContinueIf,
     AbortIf,
+    BreakDecorator,
 
     // Actions
     Succeeder,
@@ -80,7 +82,6 @@ export {
     Runner,
     Error,
     Wait,
-
-    // Parsers
-    LoadYaml,
+    Abort,
+    BreakAction,
 };
