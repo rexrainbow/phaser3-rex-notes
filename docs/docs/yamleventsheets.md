@@ -617,6 +617,22 @@ or
 - Action `type: break` : Ignore remainder actions in current level.
 
 
+##### Continue
+
+```yaml
+- type: continue
+```
+
+or
+
+```yaml
+- type: continue
+  condition: expression
+```
+
+- Action `type: continue` : Simulate `continue` instruction of programming language.
+
+
 ##### Exit
 
 ```yaml

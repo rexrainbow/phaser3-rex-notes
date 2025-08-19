@@ -66,7 +66,7 @@ fallback:
     # - name:
 ```
 
-### Leave Current Heading
+### Leave Current Loop
 
 ```yaml
 - type: break
@@ -77,6 +77,14 @@ fallback:
 ```yaml
 - type: exit
 ```
+
+### Restart next loop
+
+```yaml
+- type: continue
+```
+
+Simulate `continue` instruction of programming language.
 
 ### Deactive Event Sheet
 
