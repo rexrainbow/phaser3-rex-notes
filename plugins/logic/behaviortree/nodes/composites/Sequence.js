@@ -1,5 +1,5 @@
 import Composite from '../Composite.js';
-import { SUCCESS, FAILURE, RUNNING, ABORT, NEXT, ERROR } from '../../constants.js';
+import { SUCCESS, FAILURE, RUNNING, ABORT, ERROR } from '../../constants.js';
 
 class Sequence extends Composite {
     constructor(
@@ -7,8 +7,7 @@ class Sequence extends Composite {
             children = [],
             services,
             title,
-            name = 'Sequence',
-            allowNext = false,
+            name = 'Sequence'
         } = {},
         nodePool
     ) {
@@ -19,14 +18,10 @@ class Sequence extends Composite {
                 services,
                 title,
                 name,
-                properties: {
-                    allowNext
-                }
             },
             nodePool
         );
 
-        this.allowNext = allowNext;
     }
 
     open(tick) {
@@ -46,14 +41,9 @@ class Sequence extends Composite {
         for (var i = childIndex, cnt = this.children.length; i < cnt; i++) {
             status = this.children[i]._execute(tick);
 
-            if (
-                (status === RUNNING) || (status === FAILURE) || (status === ABORT) ||
-                ((state === NEXT) && (!this.allowNext))
-            ) {
+            if ((status === RUNNING) || (status === FAILURE) || (status === ABORT)) {
                 break;
             }
-
-            // Running next node forcely if (state === NEXT) && this.allowNext
         }
 
         nodeMemory.$runningChild = (status === RUNNING) ? i : -1;

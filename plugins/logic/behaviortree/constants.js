@@ -3,7 +3,6 @@ export const SUCCESS = 1;
 export const FAILURE = 2;
 export const RUNNING = 3;
 export const ABORT = 5;
-export const NEXT = 6;
 export const ERROR = 9;
 
 export const TREE = 'tree';
