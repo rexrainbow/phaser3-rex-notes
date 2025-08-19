@@ -1,8 +1,12 @@
-import TaskSequence from '../../eventsheetmanager/nodes/TaskSequence.js';
+import LabelDecorator from '../../eventsheetmanager/nodes/LabelDecorator.js';
+import { Sequence } from '../../../behaviortree/index.js';
 import CreateActionNode from './CreateActionNode.js';
 
 var CreateActionSequence = function (node, config) {
-    var sequence = new TaskSequence({ title: node.title });
+    var labelDecorator = new LabelDecorator({ title: node.title });
+
+    var sequence = new Sequence({ title: node.title });
+
     var paragraphs = node.paragraphs;  // paragraphs -> TaskAction[]
     var actionNode;
     for (var i = 0, cnt = paragraphs.length; i < cnt; i++) {
@@ -12,7 +16,10 @@ var CreateActionSequence = function (node, config) {
         }
         sequence.addChild(actionNode);
     }
-    return sequence;
+
+    labelDecorator.addChild(sequence);
+
+    return labelDecorator;
 }
 
 export default CreateActionSequence;
