@@ -36,6 +36,8 @@ tree evaluates them each tick while using a blackboard to store state.
     - If
     - AbortIf
     - ContinueIf
+    - BreakDecorator
+        - Responds to a descendant BreakAction by returning SUCCESS and clearing a break flag
     - Bypass
     - ForceSuccess
     - ForceFailure
@@ -57,6 +59,8 @@ tree evaluates them each tick while using a blackboard to store state.
         - Wait 0 : Wait a tick
     - Error : Always return `ERROR`.
     - Abort : Always return `ABORT`.
+    - BreakAction
+        - Search for the nearest BreakDecorator ancestor, set its break flag, and return `ABORT`.
 
 ## Blackboard
 
@@ -80,13 +84,13 @@ else
 Map to
 
 - Selector
-    - if-ConditionA
+    - If(Decorator)
         - TaskA
-    - if-ConditionB
+    - If(Decorator)
         - TaskB   
     - TaskC
 
-### While
+### While loop
 
 ```
 while ConditionA
@@ -95,9 +99,65 @@ while ConditionA
 
 Map to
 
-- RepeatUntilFailure
-    - if-ConditionA
+- RepeatUntilFailure(Decorator)
+    - If(Decorator)
         - TaskA
+
+
+Support `break` and `continue`
+
+- BreakDecorator(tag='break') + RepeatUntilFailure(Decorator)
+  - condition block: If(Decorator)
+    - actions block: BreakDecorator(tag='continue') + Sequence
+
+
+### Repeat loop
+
+```
+Repeat 3
+  TaskA
+```
+
+Map to
+
+- Repeat(Decorator)
+  - Sequence
+
+
+Support `break` and `continue`
+
+- BreakDecorator(tag='break') + Repeat(Decorator)
+  - BreakDecorator(tag='continue') + Sequence
+
+
+### For loop
+
+```
+for(init; condition; step)
+  TaskA
+```
+
+Map to
+
+- Sequence
+  - init block: Sequence
+  - RepeatUntilFailure(Decorator)
+    - condition block: If(Decorator)
+      - Sequence
+        - actions block: Sequence
+        - step block: Sequence
+
+
+Support `break` and `continue`
+
+- BreakDecorator(tag='break') + Sequence
+  - init block: Sequence
+  - RepeatUntilFailure(Decorator)
+    - condition block: If(Decorator)
+      - Sequence
+        - actions block: BreakDecorator(tag='continue') + Sequence
+        - step block: Sequence
+
 
 ### Tick
 
