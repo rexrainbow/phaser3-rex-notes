@@ -44,6 +44,21 @@ fallback:
     # - name:
 ```
 
+with `break` or `continue`
+
+```yaml
+- type: repeat
+  times: 3
+  actions:
+    # - name:
+    ...
+    - type: break
+
+    - type: continue
+```
+
+
+
 ### For loop
 
 ```yaml
@@ -57,6 +72,25 @@ fallback:
     # - name:
 ```
 
+
+with `break` or `continue`
+
+```yaml
+- type: for
+  init:
+    # - name:
+  condition: expression
+  step:
+    # - name:
+  actions:
+    # - name:
+    ...
+    - type: break
+
+    - type: continue
+```
+
+
 ### While Loop
 
 ```yaml
@@ -66,10 +100,30 @@ fallback:
     # - name:
 ```
 
-### Leave Current Loop
+
+with `break` or `continue`
+
+```yaml
+- type: while
+  condition: loopCount > 0
+  actions:
+    # - name:
+    ...
+    - type: break
+
+    - type: continue
+```
+
+### Leave Current loop
 
 ```yaml
 - type: break
+```
+
+### Start next loop
+
+```yaml
+- type: continue
 ```
 
 ### Leave Current Event Sheet
