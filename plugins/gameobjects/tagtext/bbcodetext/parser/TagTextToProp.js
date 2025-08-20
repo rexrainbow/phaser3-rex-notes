@@ -123,6 +123,12 @@ var TagTextToProp = function (text, prevProp) {
         } else if (TagRegex.RE_OFFSETY_CLOSE.test(text)) {
             UpdateProp(prevProp, PROP_REMOVE, 'y');
 
+        } else if (TagRegex.RE_SPACING_OPEN.test(text)) {
+            var innerMatch = text.match(TagRegex.RE_SPACING_OPEN);
+            UpdateProp(prevProp, PROP_ADD, 'spacing', parseFloat(innerMatch[1]));
+        } else if (TagRegex.RE_SPACING_CLOSE.test(text)) {
+            UpdateProp(prevProp, PROP_REMOVE, 'spacing');
+
         } else if (TagRegex.RE_IMAGE_OPEN.test(text)) {
             var innerMatch = text.match(TagRegex.RE_IMAGE_OPEN);
             UpdateProp(prevProp, PROP_ADD, 'img', innerMatch[1]);

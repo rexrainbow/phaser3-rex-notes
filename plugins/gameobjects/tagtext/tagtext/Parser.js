@@ -199,6 +199,12 @@ class Parser {
             result.bgcolor = null;
         }
 
+        if (prop.hasOwnProperty('spacing')) {
+            result.letterSpacing = prop.spacing;
+        } else {
+            result.letterSpacing = defaultStyle.letterSpacing;
+        }
+
         return result;
     }
 
@@ -211,6 +217,16 @@ class Parser {
             strokeThinkness = defaultStyle.strokeThickness;
         }
         return strokeThinkness;
+    }
+
+    getLetterSpacing(defaultStyle, prop) {
+        var letterSpacing;
+        if (prop.hasOwnProperty('spacing')) {
+            letterSpacing = prop.spacing;
+        } else {
+            letterSpacing = defaultStyle.letterSpacing;
+        }
+        return letterSpacing;
     }
 
     propToTagText(text, prop, prevProp) {
@@ -310,6 +326,7 @@ var StyleToProp = function (s) {
                 break;
 
             case 'y':
+            case 'spacing':
                 v = parseFloat(v);
                 break;
         }

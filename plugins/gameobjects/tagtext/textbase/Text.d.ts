@@ -207,6 +207,9 @@ declare class Text extends CanvasGameObjectBase {
     setLineSpacing(value: number): this;
     lineSpacing: number;
 
+    setLetterSpacing(value: number): this;
+    letterSpacing: number;
+
     setXOffset(value: number): this;
 
     setPadding(

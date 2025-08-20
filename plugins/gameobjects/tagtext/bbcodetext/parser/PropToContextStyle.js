@@ -107,6 +107,12 @@ var PropToContextStyle = function (defaultStyle, prop) {
         result.bgcolor = null;
     }
 
+    if (prop.hasOwnProperty('spacing')) {
+        result.letterSpacing = prop.spacing;
+    } else {
+        result.letterSpacing = defaultStyle.letterSpacing;
+    }
+
     return result;
 }
 

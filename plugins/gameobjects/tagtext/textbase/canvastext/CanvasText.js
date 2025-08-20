@@ -84,6 +84,7 @@ class CanvasText {
 
         var customTextWrapCallback = textStyle.wrapCallback,
             customTextWrapCallbackScope = textStyle.wrapCallbackScope;
+        var isBuiltInWrappingMode = (!customTextWrapCallback);
         var reuseLines = true;
 
         var plainText, curProp, curStyle;
@@ -116,20 +117,21 @@ class CanvasText {
                 curStyle.syncFont(canvas, context);
                 curStyle.syncStyle(canvas, context);
 
-                if (!customTextWrapCallback) {
+                if (isBuiltInWrappingMode) {
                     wrapLines = WrapText(
                         plainText,
                         context,
-                        wrapMode, wrapWidth,
+                        wrapMode, wrapWidth, curStyle.letterSpacing,
                         cursorX,
                         wrapTextLinesPool
                     );
 
-                } else { // customTextWrapCallback
+                } else {
+                    // customTextWrapCallback
                     wrapLines = customTextWrapCallback.call(customTextWrapCallbackScope,
                         plainText,
                         context,
-                        wrapWidth,
+                        wrapWidth, curStyle.letterSpacing,
                         cursorX
                     );
 
@@ -156,6 +158,7 @@ class CanvasText {
                 var segment;
                 for (var j = 0, jLen = wrapLines.length; j < jLen; j++) {
                     segment = wrapLines[j];
+
                     penManager.addTextPen(
                         segment.text,
                         cursorX, cursorY,
@@ -167,8 +170,10 @@ class CanvasText {
                     if (segment.newLineMode !== NO_NEWLINE) {
                         cursorX = 0;
                         cursorY += lineHeight;
+
                     } else {
                         cursorX += segment.width;
+
                     }
 
                 }
@@ -184,12 +189,16 @@ class CanvasText {
 
         }
 
-        // Add strokeThinkness to last pen of each line
+        // Process last pen of each line
         for (var i = 0, len = this.lines.length; i < len; i++) {
+            // Last pen of a line
             var line = this.lines[i];
             var lastPen = line[line.length - 1];
             if (lastPen) {
+                // Add strokeThinkness
                 lastPen.width += this.parser.getStrokeThinkness(this.defaultStyle, lastPen.prop);
+                // Remove letterSpacing
+                lastPen.width -= this.parser.getLetterSpacing(this.defaultStyle, lastPen.prop);
             }
         }
 
