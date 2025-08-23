@@ -1,6 +1,6 @@
 import phaser from 'phaser/src/phaser.js';
-import MDScenario from '../../templates/mdscenario/MDScenario.js';
-import CreateMonitorPanel from '../../templates/mdscenario/monitor/CreateMonitorPanel.js';
+import MDScenario from '../../templates/scenario/mdscenario/MDScenario.js';
+import CreateMonitorPanel from '../../templates/scenario/monitor/CreateMonitorPanel.js';
 import TextBoxStyle from './styles/TextBoxStyle.js';
 
 
@@ -13,7 +13,7 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.text('eventSheet0', 'assets/markedeventsheet/mds/fast-typing.md');
+        this.load.text('eventSheet0', 'assets/markedeventsheets/scenario/fast-typing.md');
     }
 
     create() {

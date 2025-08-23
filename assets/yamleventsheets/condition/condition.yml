@@ -1,0 +1,46 @@
+title: Title
+script:
+  - name: print
+    parameters: { text: "-- start --" }
+
+  - title: Label condition
+    actions:
+      - title: If coin >= 5
+        condition: coin >= 5
+        actions:
+          - name: print
+            parameters: { text: "label: coin >= 5" }
+    
+      - title: If coin < 5
+        condition: coin < 5
+        actions:
+          - name: print
+            parameters: { text: "label: coin < 5" }
+
+  - title: Action condition
+    actions:
+      - condition: coin >= 5
+        name: print
+        parameters: { text: "action: coin >= 5" }
+      - condition: coin < 5
+        name: print
+        parameters: { text: "action: coin < 5" }
+
+  - title: IF branch
+    actions:
+      - type: if
+        branches:
+          - condition: coin > 10
+            actions:
+              - name: print
+                parameters: { text: "IF branch: (coin > 10)" }
+          - condition: (coin > 5) && (coin <=10)
+            actions:
+              - name: print
+                parameters: { text: "IF branch: (coin > 5) && (coin <=10)" }
+          - actions:
+              - name: print
+                parameters: { text: "IF branch: (coin < 5)" }
+
+  - name: print
+    parameters: { text: "-- end --" }

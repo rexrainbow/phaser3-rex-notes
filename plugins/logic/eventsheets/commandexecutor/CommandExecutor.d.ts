@@ -1,6 +1,7 @@
 import Managers from '../../runcommands/managers/Managers';
 import BBCodeLog from '../../../bbcodelog';
 import EventSheetManager from '../eventsheetmanager/EventSheetManager';
+import { BehaviorTree } from '../../behaviortree';
 
 export default CommandExecutor;
 
@@ -12,6 +13,7 @@ declare namespace CommandExecutor {
         config: GeneralConfigType,
         commandExecutor: CommandExecutor,
         eventSheetManager: EventSheetManager,
+        eventSheet: BehaviorTree,
     ) => void;
 
     interface IAddGameObjectManagerConfig extends Managers.IAddGameObjectManagerConfig {
@@ -20,10 +22,40 @@ declare namespace CommandExecutor {
         commands?: { [name: string]: GameObjectCommandType; }
     }
 
+    interface ISetGOPropertyConfig {
+        id?: string,
+        goType?: string,
+        [property: string]: any,
+    }
+
+    interface IEaseGOPropertyConfig extends ISetGOPropertyConfig {
+        duration?: number,
+        delay?: number,
+        ease?: string,
+        repeat?: number,
+        yoyo?: boolean,
+        from?: boolean,
+        wait?: boolean,
+    }
+
+    interface IDestroyGOConfig {
+        id?: string,
+        goType?: string,
+        wait?: boolean,
+    }
+
+    interface IRunGOMethodConfig {
+        id?: string,
+        goType?: string,
+        methodName: string,
+        parameters?: any[],
+    }
+
     type CommandCallbackType = (
         config: GeneralConfigType,
         eventsheetManager: EventSheetManager,
-    ) => CommandExecutor;
+        eventSheet: BehaviorTree,
+    ) => Phaser.Events.EventEmitter | CommandExecutor | void;
 
     interface IConfig extends Managers.IConfig {
         log?: BBCodeLog.IConfig
@@ -36,19 +68,19 @@ declare class CommandExecutor {
     destroy(fromScene?: boolean): void;
 
     addGameObjectManager(
-        config?: CommandExecutor.IAddGameObjectManagerConfig
+        config: CommandExecutor.IAddGameObjectManagerConfig
     ): this;
 
     addGameObjectCommand(
-        goype: string,
+        goType: string,
         commandName: string,
         callback: CommandExecutor.GameObjectCommandType
     ): this;
 
     addCommand(
         name: string,
-        callback: this,
-        scope?: Object
+        callback: CommandExecutor.CommandCallbackType,
+        scope?: object
     ): this;
 
     defaultHandler(
@@ -58,23 +90,27 @@ declare class CommandExecutor {
     ): void | Phaser.Events.EventEmitter;
 
     setGOProperty(
-        config: { [name: string]: any },
+        config: CommandExecutor.ISetGOPropertyConfig,
         eventSheetManager: EventSheetManager,
+        eventSheet: BehaviorTree,
     ): this;
 
     easeGOProperty(
-        config: { [name: string]: any },
+        config: CommandExecutor.IEaseGOPropertyConfig,
         eventSheetManager: EventSheetManager,
+        eventSheet: BehaviorTree,
     ): this;
 
     destroyGO(
-        config: { id?: string, goType?: string, wait?: boolean },
+        config: CommandExecutor.IDestroyGOConfig,
         eventSheetManager: EventSheetManager,
+        eventSheet: BehaviorTree,
     ): this;
 
     runGOMethod(
-        config: { id?: string, goType?: string, methodName: string, parameters: any[] },
+        config: CommandExecutor.IRunGOMethodConfig,
         eventSheetManager: EventSheetManager,
+        eventSheet: BehaviorTree,
     ): this;
 
     waitEvent(
@@ -82,7 +118,14 @@ declare class CommandExecutor {
         eventName: string
     ): this;
 
-    setWaitEventFlag(): this;
+    setData: CommandExecutor.CommandCallbackType;
+    incData: CommandExecutor.CommandCallbackType;
+    toggleData: CommandExecutor.CommandCallbackType;
+
+    log: CommandExecutor.CommandCallbackType;
+    'log.disable': CommandExecutor.CommandCallbackType;
+    'log.enable': CommandExecutor.CommandCallbackType;
+    'log.memory': CommandExecutor.CommandCallbackType;
 
     set: CommandExecutor.CommandCallbackType;
 
@@ -135,7 +178,7 @@ declare class CommandExecutor {
     'camera.scrollTo': CommandExecutor.CommandCallbackType;
 
     getGameObject(
-        name: string[],
+        name: string,
         out?: Phaser.GameObjects.GameObject[]
     ): Phaser.GameObjects.GameObject | Phaser.GameObjects.GameObject[];
 

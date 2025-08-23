@@ -4,7 +4,7 @@ const RoundIdle = 0;
 const RoundRun = 1;
 const RoundComplete = 2;
 
-const PropertyTable = {
+const BuiltInProperties = {
     'groupName': { defaultValue: '_', rewritable: true },
     'parallel': { defaultValue: false, rewritable: true },
     'active': { defaultValue: true, rewritable: true },
@@ -28,8 +28,8 @@ class EventSheet extends BehaviorTree {
         super(config);
 
         // Store default properties
-        for (var propertyKey in PropertyTable) {
-            var { defaultValue, rewritable } = PropertyTable[propertyKey];
+        for (var propertyKey in BuiltInProperties) {
+            var { defaultValue, rewritable } = BuiltInProperties[propertyKey];
 
             this.wrapProperty(propertyKey);
 

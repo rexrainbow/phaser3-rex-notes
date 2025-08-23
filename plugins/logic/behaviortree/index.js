@@ -21,6 +21,7 @@ import {
     Error,
     Wait,
     Abort,
+    BreakAction,
 
     Selector,
     Sequence,
@@ -44,6 +45,7 @@ import {
     If,
     ContinueIf,
     AbortIf,
+    BreakDecorator,
 } from './nodes';
 
 export {
@@ -79,6 +81,7 @@ export {
     Error,
     Wait,
     Abort,
+    BreakAction,
 
     Selector,
     Sequence,
@@ -102,4 +105,5 @@ export {
     If,
     ContinueIf,
     AbortIf,
+    BreakDecorator,
 };

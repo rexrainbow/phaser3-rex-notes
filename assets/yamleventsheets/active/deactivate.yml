@@ -1,0 +1,6 @@
+title: Deactivate
+condition: ($roundCounter) >= 5
+script:
+  - name: print
+    parameters: { text: "[deactivate] Run me" }
+  - type: deactivate

@@ -1,0 +1,112 @@
+title: Title
+condition:
+  - coin > 5
+  - hp > 3
+
+script:
+  # single comment line
+  - name: print
+    # comment line inside command lines
+    parameters: { text: "Hello" }
+
+  - name: print
+    parameters:
+      text: |-
+        Hello, {{name}}
+        Line1
+        Line2
+        Line3
+
+  - name: print
+    parameters: { text: "I have {{coin}} coin" }
+
+  - name: set
+    parameters: { coin: "#( coin + randomInt(1, 10) )" }
+
+  - name: print
+    parameters: { text: "Now I have {{coin}} coin" }
+
+  - title: Before if
+    actions:
+      - name: print
+        parameters: { text: "Before if" }
+
+  - type: if
+    branches:
+      - condition: coin < 5
+        actions:
+          - name: print
+            parameters: { text: "If (coin < 5)" }
+
+      - actions: # ELSE
+          - name: print
+            parameters: { text: "Else (coin < 5)" }
+
+  - type: if
+    branches:
+      - condition: coin > 10
+        actions:
+          - name: print
+            parameters: { text: "If (coin > 10)" }
+
+  - condition: coin > 10
+    name: print
+    parameters: { text: "Embedded condition: coin > 10" }
+
+  - condition: coin < 10
+    name: print
+    parameters: { text: "Embedded condition: coin < 10" }
+
+  - title: After If
+    actions:
+      - name: print
+        parameters: { text: "After If" }
+
+  - title: Before while
+    actions:
+      - name: print
+        parameters: { text: "Before while" }
+      - name: set
+        parameters: { loopCount: 3 }
+
+  - title: Do-While
+    type: while
+    condition: loopCount > 0
+    actions:
+      - name: print
+        parameters: { text: "do-while {{loopCount}}" }
+
+      - name: set
+        parameters: { loopCount: "#(loopCount-1)" }
+
+  - title: After while
+    actions:
+      - name: print
+        parameters: { text: "After while" }
+
+  - title: Break label test
+    actions:
+      - name: print
+        parameters: { text: "Before break-label" }
+      - type: break
+      - name: print
+        parameters: { text: "After break-label" }
+
+  - title: Exit test
+    actions:
+      - name: print
+        parameters: { text: "Before exit" }
+      - type: exit
+      - name: print
+        parameters: { text: "After exit" }
+
+  - title: Remainder
+    actions:
+      - name: print
+        parameters: { text: "Here" }
+      - name: print
+        parameters: { text: "Here" }
+
+fallback:
+  - name: print
+    parameters: { text: "Try again" }

@@ -1,0 +1,6 @@
+title: Task
+active: false
+once: true
+script:
+  - name: print
+    parameters: { text: "[Task] Run me" }

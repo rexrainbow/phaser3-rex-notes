@@ -11,8 +11,7 @@ declare namespace MarkedEventSheets {
         lineBreak?: string,
         commentLineStart?: string,
         parallel?: boolean,
-        active?: boolean,
-        once?: boolean,
+        groupName?: string,
     }
 }
 

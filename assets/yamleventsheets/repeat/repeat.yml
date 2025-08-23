@@ -1,0 +1,30 @@
+title: Title
+script:
+  - name: set
+    parameters: { loopCount: 3 }
+
+  - type: repeat
+    times: 5
+    actions:
+      - name: print
+        parameters: { text: "repeat 3 - 0" }
+
+  - type: repeat
+    times: loopCount
+    actions:
+      - name: print
+        parameters: { text: "repeat 3 - 1" }
+
+  - name: print
+    parameters: { text: "Before while" }
+
+  - name: set
+    parameters: { loopCount: 3 }
+
+  - type: while
+    condition: loopCount > 0
+    actions:
+      - name: print
+        parameters: { text: "do-while {{loopCount}}" }
+      - name: set
+        parameters: { loopCount: "#(loopCount-1)" }

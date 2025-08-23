@@ -1,0 +1,14 @@
+title: Title
+condition: CharA.hp > 50 && CharA.mp > 50
+script:
+  - name: setData
+    parameters:
+      CharA.hp: "#( CharA.hp - 10 )"
+  - name: print
+    parameters:
+      text: "Sheet: {{CharA.hp}}"
+
+fallback:
+  - name: print
+    parameters:
+      text: "Condition failed"

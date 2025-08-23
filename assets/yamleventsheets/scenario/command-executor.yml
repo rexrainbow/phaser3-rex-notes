@@ -1,0 +1,290 @@
+title: Example
+groupName: Story
+script:
+  # Create gameobjects
+  - title: Initialize
+    actions:
+      - name: BG
+        parameters:
+          id: Background
+          vpw: 1
+          vph: 1
+          scaleMode: ENVELOP
+
+      - name: TEXTBOX
+        parameters:
+          id: Dialog
+          vpw: 0.6
+          vph: 0.2
+          vpy: 0.99
+
+      - name: TITLE
+        parameters:
+          id: Title
+          vpx: 0.99
+          vpy: 0.1
+          text0: "Day0"
+          text1: "Classroom"
+
+      - name: SPRITE
+        parameters:
+          id: CharacterA
+          key: characters
+          name: A
+          expression: smile
+          vpx: -1
+
+      - name: SPRITE
+        parameters:
+          id: CharacterB
+          key: characters
+          name: B
+          expression: smile
+          vpx: -1
+
+      - name: SPRITE
+        parameters:
+          id: CharacterC
+          key: characters
+          name: C
+          expression: smile
+          vpx: -1
+
+      - name: CHOICE
+        parameters:
+          id: Choice
+          vpw: 0.6
+
+      - name: NAMEINPUT
+        parameters:
+          id: NameInput
+          vpw: 0.4
+
+    # Manipulate gameobjects
+  - title: Section A
+    actions:
+      - name: log.disable
+
+      - name: log
+        parameters: { text: "Test disable" }
+
+      - name: log.enable
+
+      - name: log
+        parameters: { text: "Start..." }
+
+      - name: setData
+        parameters: { coin: "#(randomInt(1,10))" }
+
+      - name: log
+        parameters: { text: "I have {{coin}} coins" }
+
+      - name: Dialog.set
+        parameters: { alpha: 0.8 }
+
+      - name: Title.popUp
+        parameters: { separatorDir: left, duration: 1000 }
+
+      - name: CharacterA.set
+        parameters: { vpx: -0.2 }
+
+      - name: CharacterB.set
+        parameters: { vpx: -0.4 }
+
+      - name: CharacterC.set
+        parameters: { vpx: -0.3 }
+
+      - name: Dialog.typing
+        parameters:
+          displayName: null
+          icon: null
+
+      - name: bgm.play
+        parameters: { key: theme0 }
+
+      - name: Background.cross
+        parameters: { key: classroom, mode: curtain, duration: 2000 }
+
+      - name: NameInput.input
+        parameters:
+          title: "My name is ..."
+          firstName: "BBB"
+          lastName: "AAA"
+
+      - name: CharacterA.to
+        parameters:
+          vpx: 0.8
+          ease: Back
+          duration: 2000
+          wait: false
+
+      - name: CharacterB.to
+        parameters:
+          vpx: 0.2
+          ease: Back
+          duration: 2000
+          wait: false
+
+      # Wait until tween complete
+      - name: CharacterC.to
+        parameters:
+          vpx: 0.5
+          ease: Back
+          duration: 2000
+      # Ease all SPRITE game objects excluding CharacterA
+      # Wait until tween complete
+      # - name: "!CharacterA.to"
+      #   parameters:
+      #     alpha: 0.5
+      #     duration: 300
+
+      - name: CharacterA.say
+        parameters:
+          name: A
+          expression: smile
+          displayName: "???"
+          icon: portraits
+          text: "Hi, {{firstName}} {{lastName}}"
+
+      - name: CharacterA.say
+        parameters:
+          expression: happy
+          text: "Hello"
+          clickAfterComplete: false
+
+      - name: CharacterA.say
+        parameters:
+          text: "World"
+          typingSpeed: 500
+          more: true
+
+      - name: "!CharacterA.shake"
+
+      - name: Dialog.shake
+        parameters: { wait: false }
+
+      # Wait until typing complete + one more click
+      - name: Dialog.typing
+        parameters:
+          displayName: A
+          icon: portraits
+          name: A
+          expression: smile
+          text: |-
+            Line0...
+            Line1...
+            Line2...
+            Line3...
+      # Wait until typing complete + one more click
+      - name: Dialog.typin
+        parameters:
+          text: |-
+            AAAA
+            BBBB
+            CCCC
+            DDDD
+
+  # Test choice and IF-branch
+  - title: Section B
+    actions:
+      - name: setData
+        parameters: { hp: 5, coin: 100 }
+
+      - name: log.memory
+        parameters: { text: "Befor choice" }
+
+      # Wait until clicking any chioce button
+      - name: Choice.choice
+        parameters:
+          title: "Would you like some..."
+          resultKey: choiceIndex
+          option1: "Ice cream"
+          option2: "Burger"
+          option3: "Cola Cola Cola Cola Cola Cola Cola Cola Cola Cola Cola Cola"
+
+      - name: log
+        parameters:
+          text: "Select option[color: red]{{choiceIndex}}[/color]"
+
+      - type: if
+        branches:
+          - condition: choiceIndex == 1
+            actions:
+              - name: Dialog.typing
+                parameters:
+                  name: A
+                  expression: anger
+                  text: "Not today"
+                  speed: 100
+
+              - name: setData
+                parameters: { hp: "#(hp+3)", coin: "#(coin-10)" }
+
+          - condition: choiceIndex == 2
+            actions:
+              - name: Dialog.typing
+                parameters:
+                  name: A
+                  expression: dizzy
+                  text: "Too fat"
+                  speed: 100
+
+              - name: incData
+                parameters: { hp: 5, coin: -10 }
+
+          - condition: choiceIndex == 3
+            actions:
+              - name: Dialog.typing
+                parameters:
+                  name: A
+                  expression: happy
+                  text: "Another bottle!"
+                  speed: 100
+
+              - name: incData
+                parameters: { hp: 10, coin: -20 }
+
+  - title: Section C
+    actions:
+      - name: Title.setText
+        parameters: { text0: "Day1" }
+
+      - name: log.memory
+        parameters: { text: "After choice" }
+
+      - name: wait
+        parameters: { time: 3000 }
+
+      - name: click
+      # Wait until 3s or any touch
+
+      - name: SPRITE.set
+        parameters: { tint: 0xffffff }
+
+      - name: CharacterA.unfocus
+
+      # Wait until playing se complete
+      - name: se.play
+        parameters: { key: explosion, wait: true }
+
+      - name: SPRITE.cross
+        parameters: { expression: dizzy }
+
+      - name: bgm.cross
+        parameters: { key: theme1 }
+
+      - name: wait
+        parameters: { time: 200 }
+
+      - name: Background.cross
+        parameters: { key: road, mode: irisOut }
+
+      - name: wait
+        parameters: { time: 200 }
+
+      # Ease all SPRITE game objects
+      # Wait until tween complete
+      - name: SPRITE.to
+        parameters: { vpx: -0.3 }
+
+      - name: bgm.stop

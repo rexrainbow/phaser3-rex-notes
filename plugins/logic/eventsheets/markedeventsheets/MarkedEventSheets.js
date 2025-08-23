@@ -1,5 +1,5 @@
 import EventSheetManager from '../eventsheetmanager/EventSheetManager.js';
-import Marked2Tree from './marked2tree/Marked2Tree.js';
+import BuildTree from './buildtree/BuildTree.js';
 
 class MarkedEventSheets extends EventSheetManager {
     boot() {
@@ -23,6 +23,7 @@ class MarkedEventSheets extends EventSheetManager {
 
         return this;
     }
+
     addEventSheet(markedString, groupName, config) {
         if (typeof (groupName) !== 'string') {
             config = groupName;
@@ -44,7 +45,7 @@ class MarkedEventSheets extends EventSheetManager {
             groupName = groupName
         } = config;
 
-        var eventsheet = Marked2Tree(
+        var eventsheet = BuildTree(
             this,
             markedString,
             {

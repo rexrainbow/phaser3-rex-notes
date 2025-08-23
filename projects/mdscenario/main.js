@@ -1,5 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import MDScenario from '../../templates/mdscenario/MDScenario.js';
+import MDScenario from '../../templates/scenario/mdscenario/MDScenario.js';
 import TextBoxStyle from './styles/TextBoxStyle.js';
 import ChoiceStyle from './styles/ChoiceStyle.js';
 import TitleStyle from './styles/TitleStyle.js';
@@ -14,7 +14,7 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.text('eventSheet0', 'assets/markedeventsheet/mds/command-executor.md');
+        this.load.text('eventSheet0', 'assets/markedeventsheets/scenario/command-executor.md');
 
         this.load.image('classroom', 'assets/images/backgrounds/classroom.png');
         this.load.image('road', 'assets/images/backgrounds/road.png');
