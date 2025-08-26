@@ -16,10 +16,9 @@ class Bejeweled extends ComponentBase {
         super(scene, config);
         // this.scene
 
-        var rexBoardKey = GetValue(config, 'rexBoard', 'rexBoard');
-        this.rexBoard = scene[rexBoardKey];
+        this.rexBoard = scene[GetValue(config, 'rexBoard', 'rexBoard')];
 
-        this.board = new Board(this, config);
+        this.board = new Board(scene, config);
 
         var defaultInput = GetValue(config, 'input', true);
         if (defaultInput) {

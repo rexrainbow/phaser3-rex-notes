@@ -3,10 +3,9 @@ import Methods from './methods/Methods.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Board {
-    constructor(bejeweled, config) {
-        var scene = bejeweled.scene;
+    constructor(scene, config) {
         this.scene = scene;
-        this.rexBoard = bejeweled.rexBoard;
+        this.rexBoard = scene[GetValue(config, 'rexBoard', 'rexBoard')];
 
         this.board = this.rexBoard.add.board(GetValue(config, 'board', undefined));
         this.match = this.rexBoard.add.match(GetValue(config, 'match', undefined));
