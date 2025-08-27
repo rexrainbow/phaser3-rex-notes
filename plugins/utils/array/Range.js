@@ -1,4 +1,4 @@
-var Range = function (start, end, step = 1) {
+var Range = function (start, end, step) {
     if (step === undefined) {
         step = (end >= start) ? 1 : -1;
     }
