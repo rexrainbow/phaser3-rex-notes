@@ -9,6 +9,7 @@ import PreTest from './PreTest.js';
 import GetAllMatch from '../match/GetAllMatch.js';
 import GetChessArray from './GetChessArray.js';
 import DumpSymbols from './DumpSymbols.js';
+import MaskMethods from './MaskMethods.js';
 import ActivateAreaMethods from './ActivateAreaMethods.js';
 
 var Methods = {
@@ -27,6 +28,7 @@ var Methods = {
 
 Object.assign(
     Methods,
+    MaskMethods,
     ActivateAreaMethods,
 )
 
