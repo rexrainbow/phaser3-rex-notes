@@ -15,7 +15,7 @@ class State extends BaseState {
 
         this.totalMatchedLinesCount = 0;
         this.eliminatedChessArray;
-        this.fillPrepareRowSuccess = false;
+        this.continueFilling = false;
 
         // Actions
         // Eliminating action
@@ -133,6 +133,10 @@ class State extends BaseState {
             bejeweled = this.bejeweled;
         var direction = this.board.fallingDirection;
 
+        if (this.prevState === 'ELIMINATING') {
+            this.bejeweled.emit('fill.start', board, bejeweled);
+        }
+
         this.bejeweled.emit('fall', board, bejeweled);
 
         var result = this.fallingAction(direction, board, bejeweled);
@@ -144,11 +148,13 @@ class State extends BaseState {
                 })
         }
 
+        this.continueFilling = !this.waitEvents.noWaitEvent;
+
         // To next state when all completed
         this.next();
     }
     next_FALLING() {
-        return 'FILL';
+        return (this.continueFilling) ? 'FILL' : 'MATCH3';
     }
     // FALLING
 
@@ -158,16 +164,14 @@ class State extends BaseState {
             bejeweled = this.bejeweled;
         var direction = this.board.fallingDirection;
 
-        this.fillPrepareRowSuccess = this.board.fillPrepareRow(direction); // Fill prepare row
+        this.board.fillPrepareRow(direction); // Fill prepare row
 
-        if (this.fillPrepareRowSuccess) {
-            this.bejeweled.emit('fill', this.board.board, this.bejeweled);
-        }
+        this.bejeweled.emit('fill', this.board.board, this.bejeweled);
 
         this.next();
     }
     next_FILL() {
-        return (this.fillPrepareRowSuccess) ? 'FALLING' : 'MATCH3';
+        return 'FALLING';
     }
     // FILL
 

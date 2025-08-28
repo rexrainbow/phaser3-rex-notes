@@ -26,32 +26,24 @@ var FillPrepareRow = function (direction) {
 
     var chessTileZ = this.chessTileZ;
     var candidateSymbols = this.candidateSymbols;
-    var hasEmptyGrid = false;
     if (loopType === 'xy') {
         for (var y = startY; y <= endY; y++) {
-            var result = LoopBody(this, endX, y, chessTileZ, candidateSymbols);
-            if (result) {
-                hasEmptyGrid = true;
-            }
+            LoopBody(this, endX, y, chessTileZ, candidateSymbols);
         }
     } else { // loopType === 'yx'
         for (var x = startX; x <= endX; x++) {
-            var result = LoopBody(this, x, endY, chessTileZ, candidateSymbols);
-            if (result) {
-                hasEmptyGrid = true;
-            }
+            LoopBody(this, x, endY, chessTileZ, candidateSymbols);
         }
     }
 
-    return hasEmptyGrid;
+    return this;
 }
 
 var LoopBody = function (self, tileX, tileY, tileZ, candidateSymbols) {
     if (self.board.contains(tileX, tileY, tileZ)) { // not empty
-        return false;
+        return;
     }
     self.createChess(tileX, tileY, candidateSymbols);
-    return true;
 }
 
 export default FillPrepareRow;
