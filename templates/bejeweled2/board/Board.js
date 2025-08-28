@@ -9,8 +9,18 @@ class Board {
         this.rexBoard = scene[GetValue(config, 'rexBoard', 'rexBoard')];
 
         var boardConfig = GetValue(config, 'board', {});
+        var x = GetValue(boardConfig, 'x', 0);
+        var y = GetValue(boardConfig, 'y', 0);
+        var cellSize = GetValue(boardConfig, 'cellSize', 0);
+        var cellWidth = GetValue(boardConfig, 'cellWidth', cellSize);
+        var cellHeight = GetValue(boardConfig, 'cellHeight', cellSize);
         this.board = this.rexBoard.add.board({
-            grid: boardConfig.grid
+            grid: {
+                x: x - (cellWidth / 2),
+                y: y - (cellHeight / 2),
+                cellWidth: cellWidth,
+                cellHeight: cellHeight
+            }
         })
         this.setActivateBoardWidth(boardConfig.width).setActivateBoardHeight(boardConfig.height);
 
@@ -36,7 +46,7 @@ class Board {
             this.enableBoardLayer(layer);
         }
 
-        if (GetValue(config, 'mask', false)) {
+        if (GetValue(config, 'mask', true)) {
             this.resetBoardMask();
         }
     }

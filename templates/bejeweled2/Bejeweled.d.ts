@@ -7,6 +7,11 @@ import { TileXYType } from '../../plugins/board/types/Position';
 export default Bejeweled;
 
 declare namespace Bejeweled {
+    interface IBoardConfig {
+        x?: number, y?: number,
+        cellSize?: number, cellWidth?: number, cellHeight?: number,
+        width?: number, height?: number,
+    }
 
     type ChessSymbol = number | string;
 
@@ -42,7 +47,7 @@ declare namespace Bejeweled {
     interface IConfig {
         rexBoard?: string,
 
-        board: Board.IConfig,
+        board: IBoardConfig,
         match?: Match.IConfig,
 
         chess: {

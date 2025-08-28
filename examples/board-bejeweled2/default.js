@@ -1,6 +1,6 @@
 import phaser from 'phaser/src/phaser.js';
 import BoardPlugin from '../../plugins/board-plugin.js';
-import Bejeweled from '../../templates/bejeweled.v2/Bejeweled.js';
+import Bejeweled from '../../templates/bejeweled2/Bejeweled.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -14,12 +14,9 @@ class Demo extends Phaser.Scene {
     create() {
         this.bejeweled = new Bejeweled(this, {
             board: {
-                grid: {
-                    x: 100,
-                    y: 100,
-                    cellWidth: 36,
-                    cellHeight: 36,
-                },
+                x: 100,
+                y: 100,
+                cellSize: 36,
                 width: 7,
                 height: 7
             },
@@ -47,8 +44,6 @@ class Demo extends Phaser.Scene {
                     speed: 400
                 },
             },
-
-            // mask: true,
 
             debug: true,
         });
