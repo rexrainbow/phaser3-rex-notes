@@ -120,22 +120,28 @@ class State extends BaseState {
         this.next();
     }
     next_ELIMINATING() {
-        return 'MOVING';
+        return 'FILLSTART';
     }
     exit_ELIMINATING() {
         this.eliminatedPieceArray = undefined;
     }
     // ELIMINATING
 
+    // FILLSTART
+    enter_FILLSTART() {
+        this.bejeweled.emit('fill.start', board, bejeweled);
+        this.next();
+    }
+    next_FILLSTART() {
+        return 'MOVING';
+    }
+    // FILLSTART
+
     // MOVING
     enter_MOVING() {
         var board = this.board.board,
             bejeweled = this.bejeweled;
         var directionFlags = this.board.fallingDirectionFlags;
-
-        if (this.prevState === 'ELIMINATING') {
-            this.bejeweled.emit('fill.start', board, bejeweled);
-        }
 
         this.bejeweled.emit('move', board, bejeweled);
 
@@ -154,26 +160,37 @@ class State extends BaseState {
         this.next();
     }
     next_MOVING() {
-        return (this.continueFilling) ? 'FILL' : 'MATCH3';
+        return (this.continueFilling) ? 'PREPARE' : 'FILLEND';
     }
     // MOVING
 
-    // FILL
-    enter_FILL() {
+    // PREPARE
+    enter_PREPARE() {
         var board = this.board.board,
             bejeweled = this.bejeweled;
         var directionFlags = this.board.fallingDirectionFlags;
 
         this.continueFilling = this.board.fillPrepareRows();
 
-        this.bejeweled.emit('fill', this.board.board, this.bejeweled);
+        this.bejeweled.emit('prepare', this.board.board, this.bejeweled);
 
         this.next();
     }
-    next_FILL() {
-        return (this.continueFilling) ? 'MOVING' : 'MATCH3';
+    next_PREPARE() {
+        return (this.continueFilling) ? 'MOVING' : 'FILLEND';
     }
-    // FILL
+    // PREPARE
+
+    // FILLEND
+    enter_FILLEND() {
+        this.bejeweled.emit('fill.end', board, bejeweled);
+        this.next();
+    }
+    next_FILLEND() {
+        return 'MATCH3';
+    }
+    // FILLEND
+
 
     // END
     enter_END() {
