@@ -143,11 +143,11 @@ class State extends BaseState {
     enter_MOVING() {
         var board = this.boardWrapper.board,
             bejeweled = this.bejeweled;
-        var directionFlags = this.boardWrapper.fallingDirectionFlags;
+        var movingDirection = this.boardWrapper.movingDirection;
 
         this.bejeweled.emit('move', board, bejeweled);
 
-        var result = this.movingAction(directionFlags, board, bejeweled);
+        var result = this.movingAction(movingDirection, board, bejeweled);
         if (IsPromise(result)) {
             bejeweled.waitEvent(bejeweled, 'move.complete');
             result
@@ -170,7 +170,7 @@ class State extends BaseState {
     enter_PREPARE() {
         var board = this.boardWrapper.board,
             bejeweled = this.bejeweled;
-        var directionFlags = this.boardWrapper.fallingDirectionFlags;
+        var movingDirection = this.boardWrapper.movingDirection;
 
         this.continueFilling = this.boardWrapper.fillPrepareRows();
 

@@ -1,8 +1,8 @@
-export const FallingDirectionFlags = {
-    'right': 1,
-    'down': 2,
-    'left': 4,
-    'up': 8,
+export const MovingDirectionMap = {
+    'right': 0,
+    'down': 1,
+    'left': 2,
+    'up': 3,
 }
 
 export const MovingIndices = [

@@ -38,8 +38,8 @@ declare namespace Bejeweled {
         bejeweled: Bejeweled,
     ) => void;
 
-    type FallingActionType = (
-        directionFlags: number,  // 1|2|4|8
+    type MovingActionType = (
+        movingDirection: any,
         board: Board,
         bejeweled: Bejeweled,
     ) => void;
@@ -68,13 +68,13 @@ declare namespace Bejeweled {
 
         eliminatingAction?: EliminatingActionType,
 
-        fallingAction?: FallingActionType,
+        fallingAction?: MovingActionType,
 
         input?: boolean,
 
         mask?: boolean,
 
-        fallingDirectionFlags?: number | string,
+        movingDirection?: number | string,
 
         debug?: boolean,
 
@@ -141,6 +141,8 @@ declare class Bejeweled extends ComponentBase {
     start(): this;
 
     setInputEnable(enable?: boolean): this;
+
+    setMovingDirection(direction: any): this;
 
     worldXYToChess(
         worldX: number,

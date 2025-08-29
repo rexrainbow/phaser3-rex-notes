@@ -51,8 +51,8 @@ export default {
     },
 
     // Falling 
-    setFallingDirectionFlags(direction) {
-        this.boardWrapper.setFallingDirectionFlags(direction);
+    setMovingDirection(direction) {
+        this.boardWrapper.setMovingDirection(direction);
         return this;
     },
 
