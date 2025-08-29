@@ -1,15 +1,8 @@
 import { MovingIndices } from '../../const.js';
 
-var FillPrepareRows = function (directionFlags) {
+var FillPrepareRows = function () {
     var hasNewPiece = false;
     for (var direction = 0; direction < 4; direction++) {
-        if (
-            (directionFlags !== undefined) &&
-            ((directionFlags & (1 << direction)) === 0)
-        ) {
-            continue;
-        }
-
         var result = FillPrepareRowByDirection.call(this, direction);
         if (result) {
             hasNewPiece = true;
