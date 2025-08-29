@@ -4,7 +4,7 @@
 
 import FadeOutDestroy from '../../../plugins/fade-out-destroy.js';
 
-var EliminateChess = function (chessArray, board, bejeweled) {
+var Eliminate = function (chessArray, board, bejeweled) {
     const duration = 500; //ms
     for (var i = 0, cnt = chessArray.length; i < cnt; i++) {
         var fade = FadeOutDestroy(chessArray[i], duration);
@@ -12,4 +12,4 @@ var EliminateChess = function (chessArray, board, bejeweled) {
     }
 }
 
-export default EliminateChess;
+export default Eliminate;

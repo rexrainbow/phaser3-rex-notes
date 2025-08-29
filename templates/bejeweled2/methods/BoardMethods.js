@@ -51,8 +51,8 @@ export default {
     },
 
     // Falling 
-    setFallingDirection(direction) {
-        this.board.setFallingDirection(direction);
+    setFallingDirectionFlags(direction) {
+        this.board.setFallingDirectionFlags(direction);
         return this;
     },
 

@@ -1,4 +1,4 @@
-var SwapChess = function (chess1, chess2, board, bejeweled) {
+var Swap = function (chess1, chess2, board, bejeweled) {
     var tileXYZ1 = board.chessToTileXYZ(chess1);
     var tileXYZ2 = board.chessToTileXYZ(chess2);
     var tileX1 = tileXYZ1.x,
@@ -27,4 +27,4 @@ var SwapChess = function (chess1, chess2, board, bejeweled) {
     }
 };
 
-export default SwapChess;
+export default Swap;

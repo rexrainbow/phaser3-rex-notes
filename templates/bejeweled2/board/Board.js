@@ -1,5 +1,5 @@
 import Methods from './methods/Methods.js';
-import { FallingDirectionMap } from '../const.js';
+import { FallingDirectionFlags } from '../const.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -104,11 +104,14 @@ class Board {
         return this;
     }
 
-    setFallingDirection(direction) {
-        if (typeof (direction) === 'string') {
-            direction = FallingDirectionMap[direction.toLowerCase()];
+    setFallingDirectionFlags(flags) {
+        if (typeof (flags) === 'string') {
+            flags = flags
+                .split('|')
+                .map(s => s.trim().toLowerCase())
+                .reduce((mask, dir) => mask | (FallingDirectionFlags[dir] || 0), 0);
         }
-        this.fallingDirection = direction;
+        this.fallingDirectionFlags = flags;
         return this;
     }
 

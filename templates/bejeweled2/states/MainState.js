@@ -1,9 +1,9 @@
 import BaseState from './BaseState.js';
 import MatchState from './MatchState.js';
 // Actions
-import PlaceChess from '../actions/PlaceChess.js';
-import SelectChess from '../actions/SelectChess.js';
-import SwapChess from '../actions/SwapChess.js'
+import Place from '../actions/Place.js';
+import Select from '../actions/Select.js';
+import Swap from '../actions/Swap.js'
 import IsPromise from '../../../plugins/utils/object/IsPromise.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -19,13 +19,13 @@ class State extends BaseState {
         this.matchState = new MatchState(bejeweled, config); // sub-state
 
         // Actions
-        this.placeAction = GetValue(config, 'placeAction', PlaceChess);
+        this.placeAction = GetValue(config, 'placeAction', Place);
         // select1 action
-        this.select1Action = GetValue(config, 'select1Action', SelectChess);
+        this.select1Action = GetValue(config, 'select1Action', Select);
         // select2 action
         this.select2Action = GetValue(config, 'select2Action', this.select1Action);
         // Swap action
-        this.swapAction = GetValue(config, 'swapAction', SwapChess);
+        this.swapAction = GetValue(config, 'swapAction', Swap);
         // UndoSwap action
         this.undoSwapAction = GetValue(config, 'undoSwapAction', this.swapAction);
 
@@ -66,10 +66,8 @@ class State extends BaseState {
             done = board.preTest();
         }
 
-        // Fill 4 prepare rows
-        for (var i = 0; i < 4; i++) {
-            board.fillPrepareRow(i);
-        }
+        // Fill all prepare rows        
+        board.fillPrepareRows();
 
         this.next();
     }

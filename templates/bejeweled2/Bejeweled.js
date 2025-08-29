@@ -31,7 +31,7 @@ class Bejeweled extends ComponentBase {
 
         this.mainState = new MainState(this, config);
 
-        this.setFallingDirection(GetValue(config, 'fallingDirection', 1));
+        this.setFallingDirectionFlags(GetValue(config, 'fallingDirectionFlags', 'down'));
 
         this.boot();
     }

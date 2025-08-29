@@ -1,7 +1,7 @@
 import BaseState from './BaseState.js';
 // Actions
-import EliminateChess from '../actions/EliminateChess.js';
-import FallingAllChess from '../actions/FallingAllChess.js';
+import Eliminate from '../actions/Eliminate.js';
+import MovingAllPieces from '../actions/Move.js';
 import IsPromise from '../../../plugins/utils/object/IsPromise.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -14,14 +14,14 @@ class State extends BaseState {
         // this.board = bejeweled.board;       // Bejeweled.board
 
         this.totalMatchedLinesCount = 0;
-        this.eliminatedChessArray;
+        this.eliminatedPieceArray;
         this.continueFilling = false;
 
         // Actions
         // Eliminating action
-        this.eliminatingAction = GetValue(config, 'eliminatingAction', EliminateChess);
-        // on falling chess
-        this.fallingAction = GetValue(config, 'fallingAction', FallingAllChess);
+        this.eliminatingAction = GetValue(config, 'eliminatingAction', Eliminate);
+        // On moving pieces
+        this.movingAction = GetValue(config, 'movingAction', MovingAllPieces);
 
         var debug = GetValue(config, 'debug', false);
         if (debug) {
@@ -32,10 +32,10 @@ class State extends BaseState {
     shutdown() {
         super.shutdown();
 
-        this.eliminatedChessArray = undefined;
+        this.eliminatedPieceArray = undefined;
         // Actions
         this.eliminatingAction = undefined;
-        this.fallingAction = undefined;
+        this.movingAction = undefined;
         return this;
     }
 
@@ -67,10 +67,10 @@ class State extends BaseState {
         this.totalMatchedLinesCount += matchedLinesCount;
         switch (matchedLinesCount) {
             case 0:
-                this.eliminatedChessArray = [];
+                this.eliminatedPieceArray = [];
                 break;
             case 1:
-                this.eliminatedChessArray = matchedLines[0].entries;
+                this.eliminatedPieceArray = matchedLines[0].entries;
                 break;
             default:
                 // Put all chess to a set
@@ -80,14 +80,14 @@ class State extends BaseState {
                         newSet.set(value);
                     });
                 }
-                this.eliminatedChessArray = newSet.entries;
+                this.eliminatedPieceArray = newSet.entries;
                 break;
         }
         this.next();
     }
     next_MATCH3() {
         var nextState;
-        if (this.eliminatedChessArray.length === 0) {
+        if (this.eliminatedPieceArray.length === 0) {
             nextState = 'END'
         } else {
             nextState = 'ELIMINATING';
@@ -100,7 +100,7 @@ class State extends BaseState {
     enter_ELIMINATING() {
         var board = this.board.board,
             bejeweled = this.bejeweled,
-            chessArray = this.eliminatedChessArray;
+            chessArray = this.eliminatedPieceArray;
 
         this.bejeweled.emit('eliminate', chessArray, board, bejeweled);
 
@@ -120,31 +120,31 @@ class State extends BaseState {
         this.next();
     }
     next_ELIMINATING() {
-        return 'FALLING';
+        return 'MOVING';
     }
     exit_ELIMINATING() {
-        this.eliminatedChessArray = undefined;
+        this.eliminatedPieceArray = undefined;
     }
     // ELIMINATING
 
-    // FALLING
-    enter_FALLING() {
+    // MOVING
+    enter_MOVING() {
         var board = this.board.board,
             bejeweled = this.bejeweled;
-        var direction = this.board.fallingDirection;
+        var directionFlags = this.board.fallingDirectionFlags;
 
         if (this.prevState === 'ELIMINATING') {
             this.bejeweled.emit('fill.start', board, bejeweled);
         }
 
-        this.bejeweled.emit('fall', board, bejeweled);
+        this.bejeweled.emit('move', board, bejeweled);
 
-        var result = this.fallingAction(direction, board, bejeweled);
+        var result = this.movingAction(directionFlags, board, bejeweled);
         if (IsPromise(result)) {
-            bejeweled.waitEvent(bejeweled, 'fall.complete');
+            bejeweled.waitEvent(bejeweled, 'move.complete');
             result
                 .then(function () {
-                    bejeweled.emit('fall.complete');
+                    bejeweled.emit('move.complete');
                 })
         }
 
@@ -153,25 +153,25 @@ class State extends BaseState {
         // To next state when all completed
         this.next();
     }
-    next_FALLING() {
+    next_MOVING() {
         return (this.continueFilling) ? 'FILL' : 'MATCH3';
     }
-    // FALLING
+    // MOVING
 
     // FILL
     enter_FILL() {
         var board = this.board.board,
             bejeweled = this.bejeweled;
-        var direction = this.board.fallingDirection;
+        var directionFlags = this.board.fallingDirectionFlags;
 
-        this.board.fillPrepareRow(direction); // Fill prepare row
+        this.continueFilling = this.board.fillPrepareRows(directionFlags);
 
         this.bejeweled.emit('fill', this.board.board, this.bejeweled);
 
         this.next();
     }
     next_FILL() {
-        return 'FALLING';
+        return (this.continueFilling) ? 'MOVING' : 'MATCH3';
     }
     // FILL
 

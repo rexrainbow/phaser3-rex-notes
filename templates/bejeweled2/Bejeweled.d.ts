@@ -39,7 +39,7 @@ declare namespace Bejeweled {
     ) => void;
 
     type FallingActionType = (
-        direction: number,  // 0: right-to-left, 1:top-to-bottom, 2: left-to-right, 3: bottom-to-top
+        directionFlags: number,  // 1|2|4|8
         board: Board,
         bejeweled: Bejeweled,
     ) => void;
@@ -74,7 +74,7 @@ declare namespace Bejeweled {
 
         mask?: boolean,
 
-        fallingDirection?: 0 | 1 | 2 | 3 | 'left-to-right' | 'top-to-bottom' | 'right-to-left' | 'bottom-to-top',
+        fallingDirectionFlags?: number | string,
 
         debug?: boolean,
 

@@ -1,7 +1,7 @@
 import BaseState from './BaseState.js';
 // Actions
 import EliminateChess from '../actions/EliminateChess.js';
-import FallingAllChess from '../actions/FallingAllChess.js';
+import MovingAllPieces from '../actions/MovingAllPieces.js';
 import IsPromise from '../../../plugins/utils/object/IsPromise.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -20,7 +20,7 @@ class State extends BaseState {
         // Eliminating action
         this.eliminatingAction = GetValue(config, 'eliminatingAction', EliminateChess);
         // on falling chess
-        this.fallingAction = GetValue(config, 'fallingAction', FallingAllChess);
+        this.fallingAction = GetValue(config, 'fallingAction', MovingAllPieces);
 
         var debug = GetValue(config, 'debug', false);
         if (debug) {

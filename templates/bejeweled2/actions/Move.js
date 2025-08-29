@@ -3,10 +3,21 @@
 */
 
 import Range from '../../../plugins/utils/array/Range.js';
-import { FallingIndices } from '../const.js';
+import { MovingIndices } from '../const.js';
 
-var FallingAllChess = function (direction, board, bejeweled) {
-    var { loopType, startX, endX, startY, endY } = FallingIndices[direction];
+var MoveAllPieces = function (directionFlags, board, bejeweled) {
+    for (var direction = 0; direction < 4; direction++) {
+        if ((directionFlags & (1 << direction)) === 0) {
+            continue;
+        }
+
+        MoveByDirection(direction, board, bejeweled);
+    }
+
+}
+
+var MoveByDirection = function (direction, board, bejeweled) {
+    var { loopType, startX, endX, startY, endY } = MovingIndices[direction];
 
     if (startX < 0) {
         startX = board.width + startX;
@@ -54,4 +65,4 @@ var LoopBody = function (bejeweled, board, tileX, tileY, tileZ, direction) {
     }
 }
 
-export default FallingAllChess;
+export default MoveAllPieces;

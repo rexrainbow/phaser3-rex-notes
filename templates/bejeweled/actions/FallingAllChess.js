@@ -2,7 +2,7 @@
 1. Falling down all chess
 */
 
-var FallingAllChess = function (board, bejeweled) {
+var MovingAllPieces = function (board, bejeweled) {
     var tileZ = bejeweled.getChessTileZ(),
         chess, moveTo;
 
@@ -23,4 +23,4 @@ var FallingAllChess = function (board, bejeweled) {
     }
 }
 
-export default FallingAllChess;
+export default MovingAllPieces;
