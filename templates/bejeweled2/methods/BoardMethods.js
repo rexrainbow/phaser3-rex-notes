@@ -1,11 +1,11 @@
 export default {
     setBoardSize(width, height) {
-        this.board.setBoardWidth(width).setBoardHeight(height);
+        this.boardWrapper.setBoardWidth(width).setBoardHeight(height);
         return this;
     },
 
     setActivateBoardSize(width, height) {
-        this.board.setActivateWidth(width).setActivateHeight(height);
+        this.boardWrapper.setActivateWidth(width).setActivateHeight(height);
         return this;
     },
 
@@ -15,23 +15,23 @@ export default {
     },
 
     getChessTileZ() {
-        return this.board.chessTileZ;
+        return this.boardWrapper.chessTileZ;
     },
 
     worldXYToChess(worldX, worldY) {
-        return this.board.worldXYToChess(worldX, worldY);
+        return this.boardWrapper.worldXYToChess(worldX, worldY);
     },
 
     tileXYToChess(tileX, tileY) {
-        return this.board.tileXYToChess(tileX, tileY);
+        return this.boardWrapper.tileXYToChess(tileX, tileY);
     },
 
     getNeighborChessAtAngle(chess, angle) {
-        return this.board.getNeighborChessAtAngle(chess, angle);
+        return this.boardWrapper.getNeighborChessAtAngle(chess, angle);
     },
 
     getNeighborChessAtDirection(chess, direction) {
-        return this.board.getNeighborChessAtDirection(chess, direction);
+        return this.boardWrapper.getNeighborChessAtDirection(chess, direction);
     },
 
     // State
@@ -41,28 +41,28 @@ export default {
 
     // Symbols
     dumpSymbols() {
-        return this.board.dumpSymbols();
+        return this.boardWrapper.dumpSymbols();
     },
 
     loadSymbols(symbols) {
-        this.board.setInitSymbols(symbols);
+        this.boardWrapper.setInitSymbols(symbols);
         this.mainState.goto('RESET');
         return this;
     },
 
     // Falling 
     setFallingDirectionFlags(direction) {
-        this.board.setFallingDirectionFlags(direction);
+        this.boardWrapper.setFallingDirectionFlags(direction);
         return this;
     },
 
     // Expose board instance
     getBoard() {
-        return this.board.board;
+        return this.boardWrapper.board;
     },
 
     // Expose match instance
     getMatch() {
-        return this.board.match;
+        return this.boardWrapper.match;
     }
 }

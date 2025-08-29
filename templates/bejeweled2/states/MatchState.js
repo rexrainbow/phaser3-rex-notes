@@ -10,8 +10,8 @@ const SetStruct = Phaser.Structs.Set;
 class State extends BaseState {
     constructor(bejeweled, config) {
         super(bejeweled, config);
-        // this.bejeweled = bejeweled;            // Bejeweled
-        // this.board = bejeweled.board;       // Bejeweled.board
+        // this.bejeweled = bejeweled;                // Bejeweled
+        // this.boardWrapper = bejeweled.boardWrapper;// Bejeweled.boardWrapper
 
         this.totalMatchedLinesCount = 0;
         this.eliminatedPieceArray;
@@ -48,7 +48,7 @@ class State extends BaseState {
     enter_START() {
         this.totalMatchedLinesCount = 0;
 
-        this.bejeweled.emit('match-start', this.board.board, this.bejeweled);
+        this.bejeweled.emit('match-start', this.boardWrapper.board, this.bejeweled);
 
         this.next();
     }
@@ -59,9 +59,9 @@ class State extends BaseState {
 
     // MATCH3
     enter_MATCH3() {
-        var matchedLines = this.board.getAllMatch();
+        var matchedLines = this.boardWrapper.getAllMatch();
 
-        this.bejeweled.emit('match', matchedLines, this.board.board, this.bejeweled);
+        this.bejeweled.emit('match', matchedLines, this.boardWrapper.board, this.bejeweled);
 
         var matchedLinesCount = matchedLines.length;
         this.totalMatchedLinesCount += matchedLinesCount;
@@ -98,7 +98,7 @@ class State extends BaseState {
 
     // ELIMINATING
     enter_ELIMINATING() {
-        var board = this.board.board,
+        var board = this.boardWrapper.board,
             bejeweled = this.bejeweled,
             chessArray = this.eliminatedPieceArray;
 
@@ -129,6 +129,8 @@ class State extends BaseState {
 
     // FILLSTART
     enter_FILLSTART() {
+        var board = this.boardWrapper.board,
+            bejeweled = this.bejeweled;
         this.bejeweled.emit('fill.start', board, bejeweled);
         this.next();
     }
@@ -139,9 +141,9 @@ class State extends BaseState {
 
     // MOVING
     enter_MOVING() {
-        var board = this.board.board,
+        var board = this.boardWrapper.board,
             bejeweled = this.bejeweled;
-        var directionFlags = this.board.fallingDirectionFlags;
+        var directionFlags = this.boardWrapper.fallingDirectionFlags;
 
         this.bejeweled.emit('move', board, bejeweled);
 
@@ -166,13 +168,13 @@ class State extends BaseState {
 
     // PREPARE
     enter_PREPARE() {
-        var board = this.board.board,
+        var board = this.boardWrapper.board,
             bejeweled = this.bejeweled;
-        var directionFlags = this.board.fallingDirectionFlags;
+        var directionFlags = this.boardWrapper.fallingDirectionFlags;
 
-        this.continueFilling = this.board.fillPrepareRows();
+        this.continueFilling = this.boardWrapper.fillPrepareRows();
 
-        this.bejeweled.emit('prepare', this.board.board, this.bejeweled);
+        this.bejeweled.emit('prepare', this.boardWrapper.board, this.bejeweled);
 
         this.next();
     }
@@ -183,6 +185,8 @@ class State extends BaseState {
 
     // FILLEND
     enter_FILLEND() {
+        var board = this.boardWrapper.board,
+            bejeweled = this.bejeweled;
         this.bejeweled.emit('fill.end', board, bejeweled);
         this.next();
     }
@@ -194,7 +198,7 @@ class State extends BaseState {
 
     // END
     enter_END() {
-        this.bejeweled.emit('match-end', this.board.board, this.bejeweled);
+        this.bejeweled.emit('match-end', this.boardWrapper.board, this.bejeweled);
 
         this.emit('complete');
     }

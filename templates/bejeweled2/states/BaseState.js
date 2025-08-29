@@ -5,14 +5,14 @@ class BaseState extends FSM {
         super(config);
 
         this.bejeweled = bejeweled;                 // Bejeweled
-        this.board = bejeweled.board;            // Bejeweled.board
-        this.waitEvents = bejeweled.waitEvents;  // Bejeweled.waitEvents
+        this.boardWrapper = bejeweled.boardWrapper; // Bejeweled.boardWrapper
+        this.waitEvents = bejeweled.waitEvents;     // Bejeweled.waitEvents
     }
 
     shutdown() {
         super.shutdown();
         this.bejeweled = undefined;
-        this.board = undefined;
+        this.boardWrapper = undefined;
         this.waitEvents = undefined;
     }
 

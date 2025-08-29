@@ -3,7 +3,7 @@ import { FallingDirectionFlags } from '../const.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class Board {
+class BoardWrapper {
     constructor(scene, config) {
         this.scene = scene;
         this.rexBoard = scene[GetValue(config, 'rexBoard', 'rexBoard')];
@@ -138,7 +138,7 @@ class Board {
 }
 
 Object.assign(
-    Board.prototype,
+    BoardWrapper.prototype,
     Methods
 );
-export default Board;
+export default BoardWrapper;

@@ -1,6 +1,6 @@
 import ComponentBase from '../../plugins/utils/componentbase/ComponentBase.js';
 import MainState from './states/MainState.js';
-import Board from './board/Board.js';
+import Board from './board/BoardWrapper.js';
 import Input from './input/Input.js';
 import WaitEvents from '../../plugins/waitevents.js';
 import InputMethods from './methods/InputMethods.js';
@@ -18,7 +18,7 @@ class Bejeweled extends ComponentBase {
 
         this.rexBoard = scene[GetValue(config, 'rexBoard', 'rexBoard')];
 
-        this.board = new Board(scene, config);
+        this.boardWrapper = new Board(scene, config);
 
         var defaultInput = GetValue(config, 'input', true);
         if (defaultInput) {
@@ -46,13 +46,13 @@ class Bejeweled extends ComponentBase {
         if (this.input) {
             this.input.destroy();
         }
-        this.board.destroy();
+        this.boardWrapper.destroy();
         this.mainState.destroy();
         this.waitEvents.destroy();
 
         this.destroyDataManager();
 
-        this.board = undefined;
+        this.boardWrapper = undefined;
         this.mainState = undefined;
         this.input = undefined;
         this.waitEvents = undefined;
