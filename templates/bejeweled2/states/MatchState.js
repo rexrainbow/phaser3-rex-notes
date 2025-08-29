@@ -164,7 +164,7 @@ class State extends BaseState {
             bejeweled = this.bejeweled;
         var directionFlags = this.board.fallingDirectionFlags;
 
-        this.continueFilling = this.board.fillPrepareRows(directionFlags);
+        this.continueFilling = this.board.fillPrepareRows();
 
         this.bejeweled.emit('fill', this.board.board, this.bejeweled);
 
