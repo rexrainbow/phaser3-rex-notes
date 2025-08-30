@@ -160,13 +160,15 @@ class State extends BaseState {
         return this;
     }
     next_SELECT2START() {
-        var nextState;
-        if (this.selectedChess2 &&
-            this.boardWrapper.board.areNeighbors(this.selectedChess1, this.selectedChess2)) {
-            nextState = 'SELECT2';
+        var areNeighbors;
+        if (this.selectedChess2) {
+            var direction = this.boardWrapper.board.getNeighborChessDirection(this.selectedChess1, this.selectedChess2);
+            areNeighbors = (direction < 4);
         } else {
-            nextState = 'SELECT1START';
+            areNeighbors = false;
         }
+
+        var nextState = (areNeighbors) ? 'SELECT2' : 'SELECT1START';
         return nextState;
     }
     // SELECT2START

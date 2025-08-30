@@ -12,7 +12,7 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        this.bejeweled = new Bejeweled(this, {
+        var bejeweled = new Bejeweled(this, {
             board: {
                 x: 100,
                 y: 100,
@@ -46,8 +46,12 @@ class Demo extends Phaser.Scene {
             },
 
             debug: true,
-        });
-        this.bejeweled.start();
+        })
+
+            .on('fill.end', function () {
+                bejeweled.movingDirection = (bejeweled.movingDirection + 1) % 4;
+            })
+            .start()
     }
 
     update() { }

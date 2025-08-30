@@ -70,6 +70,14 @@ class Bejeweled extends ComponentBase {
         this.mainState.goto('START');
         return this;
     }
+
+    get movingDirection() {
+        return this.getMovingDirection();
+    }
+
+    set movingDirection(value) {
+        this.setMovingDirection(value);
+    }
 }
 
 Object.assign(

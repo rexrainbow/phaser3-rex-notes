@@ -50,10 +50,14 @@ export default {
         return this;
     },
 
-    // Falling 
+    // Moving 
     setMovingDirection(direction) {
         this.boardWrapper.setMovingDirection(direction);
         return this;
+    },
+
+    getMovingDirection() {
+        return this.boardWrapper.movingDirection;
     },
 
     // Expose board instance

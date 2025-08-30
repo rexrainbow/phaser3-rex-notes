@@ -143,6 +143,8 @@ declare class Bejeweled extends ComponentBase {
     setInputEnable(enable?: boolean): this;
 
     setMovingDirection(direction: any): this;
+    getMovingDirection(): any;
+    movingDirection: any;
 
     worldXYToChess(
         worldX: number,
