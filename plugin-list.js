@@ -241,6 +241,7 @@ module.exports = {
 
     // templates
     'bejeweled': './templates/bejeweled/Bejeweled.js',
+    'bejeweled2': './templates/bejeweled2/Bejeweled.js',
     'uiplugin': './templates/ui/ui-plugin.js',
     'dialogquest': './templates/dialog-quest/DialogQuest.js',
     'spinnerplugin': './templates/spinner/spinner-plugin.js',
