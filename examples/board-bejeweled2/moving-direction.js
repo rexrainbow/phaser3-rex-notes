@@ -14,11 +14,11 @@ class Demo extends Phaser.Scene {
     create() {
         var bejeweled = new Bejeweled(this, {
             board: {
-                x: 100,
-                y: 100,
-                cellSize: 36,
-                width: 7,
-                height: 7
+                x: 10,
+                y: 10,
+                cellSize: 40,
+                width: 10,
+                height: 10
             },
             chess: {
                 // pick random symbol from array, or a callback to return symbol
