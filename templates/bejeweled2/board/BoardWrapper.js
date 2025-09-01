@@ -116,25 +116,16 @@ class BoardWrapper {
         return this;
     }
 
+    chessToTileXYZ(chess) {
+        return this.board.chessToTileXYZ(chess);
+    }
+
     worldXYToChess(worldX, worldY) {
         return this.board.worldXYToChess(worldX, worldY, this.chessTileZ);
     }
 
     tileXYToChess(tileX, tileY) {
         return this.board.tileXYZToChess(tileX, tileY, this.chessTileZ);
-    }
-
-    getNeighborChessAtAngle(chess, angle) {
-        var direction = this.board.angleSnapToDirection(chess, angle);
-        return this.getNeighborChessAtDirection(chess, direction);
-    }
-
-    getNeighborChessAtDirection(chess, direction) {
-        var neighborTileXY = this.board.getNeighborTileXY(chess, direction);
-        var neighborChess = (neighborTileXY) ?
-            this.board.tileXYZToChess(neighborTileXY.x, neighborTileXY.y, this.chessTileZ) :
-            null;
-        return neighborChess;
     }
 }
 

@@ -14,7 +14,7 @@ class State extends BaseState {
         // this.boardWrapper = bejeweled.boardWrapper;// Bejeweled.boardWrapper
 
         this.totalMatchedLinesCount = 0;
-        this.eliminatedPieceArray;
+        this.eliminatedPieceArray = undefined;
         this.continueFilling = false;
 
         // Actions
@@ -44,6 +44,15 @@ class State extends BaseState {
         return this;
     }
 
+    setEliminatedPieces(pieces) {
+        this.eliminatedPieceArray = pieces;
+        return this;
+    }
+
+    getEliminatedPieces() {
+        return this.eliminatedPieceArray;
+    }
+
     // START
     enter_START() {
         this.totalMatchedLinesCount = 0;
@@ -53,7 +62,8 @@ class State extends BaseState {
         this.next();
     }
     next_START() {
-        return 'MATCH3';
+        var pieces = this.getEliminatedPieces();
+        return (!pieces) ? 'MATCH3' : 'ELIMINATING';
     }
     // START
 
@@ -65,12 +75,13 @@ class State extends BaseState {
 
         var matchedLinesCount = matchedLines.length;
         this.totalMatchedLinesCount += matchedLinesCount;
+        var pieces;
         switch (matchedLinesCount) {
             case 0:
-                this.eliminatedPieceArray = [];
+                pieces = [];
                 break;
             case 1:
-                this.eliminatedPieceArray = matchedLines[0].entries;
+                pieces = matchedLines[0].entries;
                 break;
             default:
                 // Put all chess to a set
@@ -80,14 +91,17 @@ class State extends BaseState {
                         newSet.set(value);
                     });
                 }
-                this.eliminatedPieceArray = newSet.entries;
+                pieces = newSet.entries;
                 break;
         }
+
+        this.setEliminatedPieces(pieces);
         this.next();
     }
     next_MATCH3() {
         var nextState;
-        if (this.eliminatedPieceArray.length === 0) {
+        var pieces = this.getEliminatedPieces();
+        if (pieces && (pieces.length === 0)) {
             nextState = 'END'
         } else {
             nextState = 'ELIMINATING';
@@ -100,11 +114,11 @@ class State extends BaseState {
     enter_ELIMINATING() {
         var board = this.boardWrapper.board,
             bejeweled = this.bejeweled,
-            chessArray = this.eliminatedPieceArray;
+            pieces = this.getEliminatedPieces();
 
-        this.bejeweled.emit('eliminate', chessArray, board, bejeweled);
+        this.bejeweled.emit('eliminate', pieces, board, bejeweled);
 
-        var result = this.eliminatingAction(chessArray, board, bejeweled);
+        var result = this.eliminatingAction(pieces, board, bejeweled);
         if (IsPromise(result)) {
             bejeweled.waitEvent(bejeweled, 'eliminate.complete');
             result
@@ -114,7 +128,7 @@ class State extends BaseState {
         }
 
         // Remove eliminated chess
-        chessArray.forEach(board.removeChess, board);
+        pieces.forEach(board.removeChess, board);
 
         // To next state when all completed
         this.next();
@@ -123,7 +137,7 @@ class State extends BaseState {
         return 'FILLSTART';
     }
     exit_ELIMINATING() {
-        this.eliminatedPieceArray = undefined;
+        this.setEliminatedPieces();
     }
     // ELIMINATING
 

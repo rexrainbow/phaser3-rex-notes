@@ -2,7 +2,7 @@ import ComponentBase from '../../plugins/utils/componentbase/ComponentBase';
 import Board from '../../plugins/board/board/Board';
 import Match from '../../plugins/board/match/Match';
 import MoveTo from '../../plugins/board/moveto/MoveTo';
-import { TileXYType } from '../../plugins/board/types/Position';
+import { TileXYType, TileXYZType } from '../../plugins/board/types/Position';
 
 export default Bejeweled;
 
@@ -151,6 +151,8 @@ declare class Bejeweled extends ComponentBase {
         worldY: number
     ): Phaser.GameObjects.GameObject;
 
+    chessToTileXY(chess: Phaser.GameObjects.GameObject): TileXYZType;
+
     tileXYToChess(
         tileX: number,
         tileY: number
@@ -165,6 +167,26 @@ declare class Bejeweled extends ComponentBase {
         chess: Phaser.GameObjects.GameObject | TileXYType,
         direction: number
     ): Phaser.GameObjects.GameObject;
+
+    getChessArray(
+        out?: Phaser.GameObjects.GameObject[]
+    ): Phaser.GameObjects.GameObject[];
+
+    getChessArrayAtTileX(
+        tileX: number,
+        out?: Phaser.GameObjects.GameObject[]
+    ): Phaser.GameObjects.GameObject[];
+
+    getChessArrayAtTileY(
+        tileY: number,
+        out?: Phaser.GameObjects.GameObject[]
+    ): Phaser.GameObjects.GameObject[];
+
+    getChessArrayAtTileXYInRange(
+        tileX: number, tileY: number, rangeX: number, rangeY: number,
+        out?: Phaser.GameObjects.GameObject[]
+    ): Phaser.GameObjects.GameObject[];
+
 
     isAwaitingInput(): boolean;
 
@@ -181,6 +203,10 @@ declare class Bejeweled extends ComponentBase {
         chess: Phaser.GameObjects.GameObject
     ): this;
     getSelectedChess2(): Phaser.GameObjects.GameObject;
+
+    setEliminatingChess(
+        chessArray: Phaser.GameObjects.GameObject | Phaser.GameObjects.GameObject[]
+    ): this;
 
     getChessMoveTo(
         chess: Phaser.GameObjects.GameObject

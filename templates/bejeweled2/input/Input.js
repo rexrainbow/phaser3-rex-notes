@@ -12,13 +12,15 @@ class Input {
         // Touch control
         this.scene.input
             .on('pointerdown', this.selectChess1, this)
-            .on('pointermove', this.selectChess2, this);
+            .on('pointermove', this.selectChess2, this)
+            .on('pointerup', this.pickChess, this);
     }
 
     shutdown() {
         this.scene.input
             .off('pointerdown', this.selectChess1, this)
-            .off('pointermove', this.selectChess2, this);
+            .off('pointermove', this.selectChess2, this)
+            .off('pointerup', this.pickChess, this);
         this.bejeweled = undefined;
         this.scene = undefined;
     }
@@ -57,6 +59,16 @@ class Input {
         var chess = this.bejeweled.worldXYToChess(pointer.worldX, pointer.worldY);
         if (chess && (chess !== this.bejeweled.getSelectedChess1())) {
             this.bejeweled.selectChess2(chess);
+        }
+    }
+
+    pickChess(pointer) {
+        if (!this.enable) {
+            return this;
+        }
+        var chess = this.bejeweled.worldXYToChess(pointer.worldX, pointer.worldY);
+        if (chess && (chess === this.bejeweled.getSelectedChess1())) {
+            this.bejeweled.pickChess(chess);
         }
     }
 }

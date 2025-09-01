@@ -3,6 +3,7 @@ import MatchState from './MatchState.js';
 // Actions
 import Place from '../actions/Place.js';
 import Select from '../actions/Select.js';
+import Pick from '../actions/Pick.js';
 import Swap from '../actions/Swap.js'
 import IsPromise from '../../../plugins/utils/object/IsPromise.js';
 
@@ -16,6 +17,7 @@ class State extends BaseState {
 
         this.selectedChess1;
         this.selectedChess2;
+        this.pickedChess;
         this.matchState = new MatchState(bejeweled, config); // sub-state
 
         // Actions
@@ -24,6 +26,8 @@ class State extends BaseState {
         this.select1Action = GetValue(config, 'select1Action', Select);
         // select2 action
         this.select2Action = GetValue(config, 'select2Action', this.select1Action);
+        // pick action
+        this.pickAction = GetValue(config, 'pickAction', Pick);
         // Swap action
         this.swapAction = GetValue(config, 'swapAction', Swap);
         // UndoSwap action
@@ -43,6 +47,7 @@ class State extends BaseState {
         this.matchState = undefined;
         this.selectedChess1 = undefined;
         this.selectedChess2 = undefined;
+        this.pickedChess = undefined;
         return this;
     }
 
@@ -104,6 +109,7 @@ class State extends BaseState {
     enter_SELECT1START() {
         this.selectedChess1 = undefined;
         this.selectedChess2 = undefined;
+        this.pickedChess = undefined;
 
         this.bejeweled.emit('select1-start', this.boardWrapper.board, this.bejeweled);
     }
@@ -159,7 +165,18 @@ class State extends BaseState {
         }
         return this;
     }
+    pickChess(chess) {
+        if (this.state === 'SELECT2START') {
+            this.pickedChess = chess;
+            this.next();
+        }
+        return this;
+    }
     next_SELECT2START() {
+        if (this.pickedChess) {
+            return 'PICK';
+        }
+
         var areNeighbors;
         if (this.selectedChess2) {
             var direction = this.boardWrapper.board.getNeighborChessDirection(this.selectedChess1, this.selectedChess2);
@@ -224,6 +241,34 @@ class State extends BaseState {
     }
     // SWAP
 
+    // PCIK
+    enter_PICK() {
+        var board = this.boardWrapper.board,
+            bejeweled = this.bejeweled,
+            chess = this.pickedChess;
+
+        this.bejeweled.emit('pick', chess, board, bejeweled);
+
+        var result = this.pickAction(chess, board, bejeweled);
+        if (IsPromise(result)) {
+            bejeweled.waitEvent(bejeweled, 'pick.complete');
+            result
+                .then(function () {
+                    bejeweled.emit('pick.complete');
+                })
+        }
+
+        // To next state when all completed
+        this.next();
+    }
+    setEliminatingChess(chessArray) {
+        this.matchState.setEliminatedPieces(chessArray);
+    }
+    next_PICK() {
+        return 'MATCH3';
+    }
+    // PICK
+
     // MATCH3
     enter_MATCH3() {
         this.matchState
@@ -233,7 +278,12 @@ class State extends BaseState {
     next_MATCH3() {
         var nextState;
         if (this.matchState.totalMatchedLinesCount === 0) {
-            nextState = 'UNDOSWAP';
+            // No matched line
+            if (this.prevState === 'SWAP') {
+                nextState = 'UNDOSWAP';
+            } else { // PICK
+                nextState = 'SELECT1START';
+            }
         } else if (this.boardWrapper.preTest()) {
             nextState = 'SELECT1START';
         } else {
