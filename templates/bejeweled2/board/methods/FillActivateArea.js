@@ -1,5 +1,7 @@
 /*
-1. Fill activate grids
+1. Fill activate area
+    - x: 1 ~ board.width - 2
+    - y: 1 ~ board.height - 2
 */
 
 var FillActivateArea = function (initSymbols) {
@@ -14,13 +16,13 @@ var FillActivateArea = function (initSymbols) {
 
     for (var tileY = startY; tileY <= endY; tileY++) {
         for (var tileX = startX; tileX <= endX; tileX++) {
-            if (board.contains(tileX, tileY, chessTileZ)) { // not empty                
+            if (board.contains(tileX, tileY, chessTileZ)) { // not empty
                 continue;
             }
 
             var candidateSymbols = this.candidateSymbols;
             if (hasInitSymbols) {
-                var symbol = initSymbols[tileY][tileX];
+                var symbol = initSymbols[tileY - 1][tileX - 1];
                 if (symbol !== '?') {
                     candidateSymbols = symbol;
                 }
