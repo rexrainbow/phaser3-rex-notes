@@ -1881,7 +1881,7 @@
             // this.boardWrapper = bejeweled.boardWrapper;// Bejeweled.boardWrapper
 
             this.totalMatchedLinesCount = 0;
-            this.eliminatedPieceArray;
+            this.eliminatedPieceArray = undefined;
             this.continueFilling = false;
 
             // Actions
@@ -1911,6 +1911,15 @@
             return this;
         }
 
+        setEliminatedPieces(pieces) {
+            this.eliminatedPieceArray = pieces;
+            return this;
+        }
+
+        getEliminatedPieces() {
+            return this.eliminatedPieceArray;
+        }
+
         // START
         enter_START() {
             this.totalMatchedLinesCount = 0;
@@ -1920,7 +1929,8 @@
             this.next();
         }
         next_START() {
-            return 'MATCH3';
+            var pieces = this.getEliminatedPieces();
+            return (!pieces) ? 'MATCH3' : 'ELIMINATING';
         }
         // START
 
@@ -1932,12 +1942,13 @@
 
             var matchedLinesCount = matchedLines.length;
             this.totalMatchedLinesCount += matchedLinesCount;
+            var pieces;
             switch (matchedLinesCount) {
                 case 0:
-                    this.eliminatedPieceArray = [];
+                    pieces = [];
                     break;
                 case 1:
-                    this.eliminatedPieceArray = matchedLines[0].entries;
+                    pieces = matchedLines[0].entries;
                     break;
                 default:
                     // Put all chess to a set
@@ -1947,14 +1958,17 @@
                             newSet.set(value);
                         });
                     }
-                    this.eliminatedPieceArray = newSet.entries;
+                    pieces = newSet.entries;
                     break;
             }
+
+            this.setEliminatedPieces(pieces);
             this.next();
         }
         next_MATCH3() {
             var nextState;
-            if (this.eliminatedPieceArray.length === 0) {
+            var pieces = this.getEliminatedPieces();
+            if (pieces && (pieces.length === 0)) {
                 nextState = 'END';
             } else {
                 nextState = 'ELIMINATING';
@@ -1967,11 +1981,11 @@
         enter_ELIMINATING() {
             var board = this.boardWrapper.board,
                 bejeweled = this.bejeweled,
-                chessArray = this.eliminatedPieceArray;
+                pieces = this.getEliminatedPieces();
 
-            this.bejeweled.emit('eliminate', chessArray, board, bejeweled);
+            this.bejeweled.emit('eliminate', pieces, board, bejeweled);
 
-            var result = this.eliminatingAction(chessArray, board, bejeweled);
+            var result = this.eliminatingAction(pieces, board, bejeweled);
             if (IsPromise(result)) {
                 bejeweled.waitEvent(bejeweled, 'eliminate.complete');
                 result
@@ -1981,7 +1995,7 @@
             }
 
             // Remove eliminated chess
-            chessArray.forEach(board.removeChess, board);
+            pieces.forEach(board.removeChess, board);
 
             // To next state when all completed
             this.next();
@@ -1990,7 +2004,7 @@
             return 'FILLSTART';
         }
         exit_ELIMINATING() {
-            this.eliminatedPieceArray = undefined;
+            this.setEliminatedPieces();
         }
         // ELIMINATING
 
@@ -2258,6 +2272,14 @@
         // Do nothing
     };
 
+    /* 
+    Do nothing
+    */
+
+    var Pick = function (chess, board, bejeweled) {
+        // Do nothing
+    };
+
     var Swap = function (chess1, chess2, board, bejeweled) {
         var tileXYZ1 = board.chessToTileXYZ(chess1);
         var tileXYZ2 = board.chessToTileXYZ(chess2);
@@ -2297,6 +2319,7 @@
 
             this.selectedChess1;
             this.selectedChess2;
+            this.pickedChess;
             this.matchState = new State$1(bejeweled, config); // sub-state
 
             // Actions
@@ -2305,6 +2328,8 @@
             this.select1Action = GetValue$3(config, 'select1Action', Select);
             // select2 action
             this.select2Action = GetValue$3(config, 'select2Action', this.select1Action);
+            // pick action
+            this.pickAction = GetValue$3(config, 'pickAction', Pick);
             // Swap action
             this.swapAction = GetValue$3(config, 'swapAction', Swap);
             // UndoSwap action
@@ -2324,6 +2349,7 @@
             this.matchState = undefined;
             this.selectedChess1 = undefined;
             this.selectedChess2 = undefined;
+            this.pickedChess = undefined;
             return this;
         }
 
@@ -2385,6 +2411,7 @@
         enter_SELECT1START() {
             this.selectedChess1 = undefined;
             this.selectedChess2 = undefined;
+            this.pickedChess = undefined;
 
             this.bejeweled.emit('select1-start', this.boardWrapper.board, this.bejeweled);
         }
@@ -2440,7 +2467,18 @@
             }
             return this;
         }
+        pickChess(chess) {
+            if (this.state === 'SELECT2START') {
+                this.pickedChess = chess;
+                this.next();
+            }
+            return this;
+        }
         next_SELECT2START() {
+            if (this.pickedChess) {
+                return 'PICK';
+            }
+
             var areNeighbors;
             if (this.selectedChess2) {
                 var direction = this.boardWrapper.board.getNeighborChessDirection(this.selectedChess1, this.selectedChess2);
@@ -2505,6 +2543,34 @@
         }
         // SWAP
 
+        // PCIK
+        enter_PICK() {
+            var board = this.boardWrapper.board,
+                bejeweled = this.bejeweled,
+                chess = this.pickedChess;
+
+            this.bejeweled.emit('pick', chess, board, bejeweled);
+
+            var result = this.pickAction(chess, board, bejeweled);
+            if (IsPromise(result)) {
+                bejeweled.waitEvent(bejeweled, 'pick.complete');
+                result
+                    .then(function () {
+                        bejeweled.emit('pick.complete');
+                    });
+            }
+
+            // To next state when all completed
+            this.next();
+        }
+        setEliminatingChess(chessArray) {
+            this.matchState.setEliminatedPieces(chessArray);
+        }
+        next_PICK() {
+            return 'MATCH3';
+        }
+        // PICK
+
         // MATCH3
         enter_MATCH3() {
             this.matchState
@@ -2514,7 +2580,12 @@
         next_MATCH3() {
             var nextState;
             if (this.matchState.totalMatchedLinesCount === 0) {
-                nextState = 'UNDOSWAP';
+                // No matched line
+                if (this.prevState === 'SWAP') {
+                    nextState = 'UNDOSWAP';
+                } else { // PICK
+                    nextState = 'SELECT1START';
+                }
             } else if (this.boardWrapper.preTest()) {
                 nextState = 'SELECT1START';
             } else {
@@ -2556,6 +2627,118 @@
         }
 
     }
+
+    var GetChessMethods = {
+        getChessArray(out) {
+            if (out === undefined) {
+                out = [];
+            }
+
+            var board = this.board;
+            var startX = 1;
+            var endX = board.width - 2;
+            var startY = 1;
+            var endY = board.height - 2;
+
+            var tileZ = this.chessTileZ;
+            for (var tileY = startY; tileY <= endY; tileY++) {
+                for (var tileX = startX; tileX <= endX; tileX++) {
+                    var chess = board.tileXYZToChess(tileX, tileY, tileZ);
+                    if (chess === null) {
+                        continue;
+                    }
+                    out.push(chess);
+                }
+            }
+
+            return out;
+        },
+
+        getChessArrayAtTileX(tileOX, out) {
+            if (out === undefined) {
+                out = [];
+            }
+
+            var board = this.board;
+            var startY = 1;
+            var endY = board.height - 2;
+
+            var tileZ = this.chessTileZ;
+            for (var tileY = startY; tileY <= endY; tileY++) {
+                var chess = board.tileXYZToChess(tileOX, tileY, tileZ);
+                if (chess === null) {
+                    continue;
+                }
+                out.push(chess);
+            }
+
+            return out;
+        },
+
+        getChessArrayAtTileY(tileOY, out) {
+            if (out === undefined) {
+                out = [];
+            }
+
+            var board = this.board;
+            var startX = 1;
+            var endX = board.width - 2;
+
+            var tileZ = this.chessTileZ;
+            for (var tileX = startX; tileX <= endX; tileX++) {
+                var chess = board.tileXYZToChess(tileX, tileOY, tileZ);
+                if (chess === null) {
+                    continue;
+                }
+                out.push(chess);
+            }
+
+            return out;
+        },
+
+        getChessArrayAtTileXYInRange(tileOX, tileOY, rangeX, rangeY, out) {
+            if (out === undefined) {
+                out = [];
+            }
+
+            var board = this.board;
+            var startX = 1;
+            var endX = board.width - 2;
+            var startY = 1;
+            var endY = board.height - 2;
+
+            var tileZ = this.chessTileZ;
+            for (var tileY = startY; tileY <= endY; tileY++) {
+                for (var tileX = startX; tileX <= endX; tileX++) {
+                    if ((Math.abs(tileX - tileOX) > rangeX) || (Math.abs(tileY - tileOY) > rangeY)) {
+                        continue;
+                    }
+
+                    var chess = board.tileXYZToChess(tileX, tileY, tileZ);
+                    if (chess === null) {
+                        continue;
+                    }
+
+                    out.push(chess);
+                }
+            }
+
+            return out;
+        },
+
+        getNeighborChessAtAngle(chess, angle) {
+            var direction = this.board.angleSnapToDirection(chess, angle);
+            return this.getNeighborChessAtDirection(chess, direction);
+        },
+
+        getNeighborChessAtDirection(chess, direction) {
+            var neighborTileXY = this.board.getNeighborTileXY(chess, direction);
+            var neighborChess = (neighborTileXY) ?
+                this.board.tileXYZToChess(neighborTileXY.x, neighborTileXY.y, this.chessTileZ) :
+                null;
+            return neighborChess;
+        }
+    };
 
     var Clear = function () {
         // Destroy all chess
@@ -2654,7 +2837,9 @@
     };
 
     /*
-    1. Fill activate grids
+    1. Fill activate area
+        - x: 1 ~ board.width - 2
+        - y: 1 ~ board.height - 2
     */
 
     var FillActivateArea = function (initSymbols) {
@@ -2669,13 +2854,13 @@
 
         for (var tileY = startY; tileY <= endY; tileY++) {
             for (var tileX = startX; tileX <= endX; tileX++) {
-                if (board.contains(tileX, tileY, chessTileZ)) { // not empty                
+                if (board.contains(tileX, tileY, chessTileZ)) { // not empty
                     continue;
                 }
 
                 var candidateSymbols = this.candidateSymbols;
                 if (hasInitSymbols) {
-                    var symbol = initSymbols[tileY][tileX];
+                    var symbol = initSymbols[tileY - 1][tileX - 1];
                     if (symbol !== '?') {
                         candidateSymbols = symbol;
                     }
@@ -2898,28 +3083,6 @@
         return true;
     };
 
-    var GetChessArray = function () {
-        var board = this.board;
-        var startX = 1;
-        var endX = board.width -2;
-        var startY = 1;
-        var endY = board.height -2;
-
-        var tileZ = this.chessTileZ;
-        var chessArray = [];
-        for (var tileY = startY; tileY <= endY; tileY++) {
-            for (var tileX = startX; tileX <= endX; tileX++) {
-                var chess = board.tileXYZToChess(tileX, tileY, tileZ);
-                if (chess === null) {
-                    continue;
-                }
-                chessArray.push(chess);
-            }
-        }
-
-        return chessArray;
-    };
-
     var DumpSymbols = function () {
         var board = this.board;
         var chessTileZ = this.chessTileZ;
@@ -3002,12 +3165,12 @@
         breakMatch3: BreakMatch3,
         preTest: PreTest,
         getAllMatch: GetAllMatch,
-        getChessArray: GetChessArray,
         dumpSymbols: DumpSymbols,
     };
 
     Object.assign(
         Methods,
+        GetChessMethods,
         MaskMethods,
         ActivateAreaMethods,
     );
@@ -3127,25 +3290,16 @@
             return this;
         }
 
+        chessToTileXYZ(chess) {
+            return this.board.chessToTileXYZ(chess);
+        }
+
         worldXYToChess(worldX, worldY) {
             return this.board.worldXYToChess(worldX, worldY, this.chessTileZ);
         }
 
         tileXYToChess(tileX, tileY) {
             return this.board.tileXYZToChess(tileX, tileY, this.chessTileZ);
-        }
-
-        getNeighborChessAtAngle(chess, angle) {
-            var direction = this.board.angleSnapToDirection(chess, angle);
-            return this.getNeighborChessAtDirection(chess, direction);
-        }
-
-        getNeighborChessAtDirection(chess, direction) {
-            var neighborTileXY = this.board.getNeighborTileXY(chess, direction);
-            var neighborChess = (neighborTileXY) ?
-                this.board.tileXYZToChess(neighborTileXY.x, neighborTileXY.y, this.chessTileZ) :
-                null;
-            return neighborChess;
         }
     }
 
@@ -3168,13 +3322,15 @@
             // Touch control
             this.scene.input
                 .on('pointerdown', this.selectChess1, this)
-                .on('pointermove', this.selectChess2, this);
+                .on('pointermove', this.selectChess2, this)
+                .on('pointerup', this.pickChess, this);
         }
 
         shutdown() {
             this.scene.input
                 .off('pointerdown', this.selectChess1, this)
-                .off('pointermove', this.selectChess2, this);
+                .off('pointermove', this.selectChess2, this)
+                .off('pointerup', this.pickChess, this);
             this.bejeweled = undefined;
             this.scene = undefined;
         }
@@ -3213,6 +3369,16 @@
             var chess = this.bejeweled.worldXYToChess(pointer.worldX, pointer.worldY);
             if (chess && (chess !== this.bejeweled.getSelectedChess1())) {
                 this.bejeweled.selectChess2(chess);
+            }
+        }
+
+        pickChess(pointer) {
+            if (!this.enable) {
+                return this;
+            }
+            var chess = this.bejeweled.worldXYToChess(pointer.worldX, pointer.worldY);
+            if (chess && (chess === this.bejeweled.getSelectedChess1())) {
+                this.bejeweled.pickChess(chess);
             }
         }
     }
@@ -3297,6 +3463,11 @@
             return this;
         },
 
+        pickChess(chess) {
+            this.mainState.pickChess(chess);
+            return this;
+        },
+
         setInputEnable(enable) {
             if (this.input) {
                 this.input.setEnable(enable);
@@ -3306,11 +3477,7 @@
     };
 
     var BoardMethods = {
-        setBoardSize(width, height) {
-            this.boardWrapper.setBoardWidth(width).setBoardHeight(height);
-            return this;
-        },
-
+        // Board size
         setActivateBoardSize(width, height) {
             this.boardWrapper.setActivateWidth(width).setActivateHeight(height);
             return this;
@@ -3325,6 +3492,10 @@
             return this.boardWrapper.chessTileZ;
         },
 
+        chessToTileXY(chess) {
+            return this.boardWrapper.chessToTileXYZ(chess);
+        },
+
         worldXYToChess(worldX, worldY) {
             return this.boardWrapper.worldXYToChess(worldX, worldY);
         },
@@ -3333,12 +3504,29 @@
             return this.boardWrapper.tileXYToChess(tileX, tileY);
         },
 
+        // Get chess
         getNeighborChessAtAngle(chess, angle) {
             return this.boardWrapper.getNeighborChessAtAngle(chess, angle);
         },
 
         getNeighborChessAtDirection(chess, direction) {
             return this.boardWrapper.getNeighborChessAtDirection(chess, direction);
+        },
+
+        getChessArray(out) {
+            return this.boardWrapper.getChessArray(out);
+        },
+
+        getChessArrayAtTileX(tileX, out) {
+            return this.boardWrapper.getChessArrayAtTileX(tileX, out);
+        },
+
+        getChessArrayAtTileY(tileY, out) {
+            return this.boardWrapper.getChessArrayAtTileY(tileY, out);
+        },
+
+        getChessArrayAtTileXYInRange(tileX, tileY, rangeX, rangeY, out) {
+            return this.boardWrapper.getChessArrayAtTileXYInRange(tileX, tileY, rangeX, rangeY, out);
         },
 
         // State
@@ -3365,6 +3553,15 @@
 
         getMovingDirection() {
             return this.boardWrapper.movingDirection;
+        },
+
+        // After picking piece
+        setEliminatingChess(chessArray) {
+            if (!Array.isArray(chessArray)) {
+                chessArray = [chessArray];
+            }
+            this.mainState.setEliminatingChess(chessArray);
+            return this;
         },
 
         // Expose board instance
