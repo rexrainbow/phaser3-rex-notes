@@ -2,11 +2,16 @@ import ComponentBase from '../../plugins/utils/componentbase/ComponentBase';
 import Board from '../../plugins/board/board/Board';
 import Match from '../../plugins/board/match/Match';
 import MoveTo from '../../plugins/board/moveto/MoveTo';
-import { TileXYType } from '../../plugins/board/types/Position';
+import { TileXYType, TileXYZType } from '../../plugins/board/types/Position';
 
 export default Bejeweled;
 
 declare namespace Bejeweled {
+    interface IBoardConfig {
+        x?: number, y?: number,
+        cellSize?: number, cellWidth?: number, cellHeight?: number,
+        width?: number, height?: number,
+    }
 
     type ChessSymbol = number | string;
 
@@ -41,7 +46,7 @@ declare namespace Bejeweled {
     interface IConfig {
         rexBoard?: string,
 
-        board: Board.IConfig,
+        board: IBoardConfig,
         match?: Match.IConfig,
 
         chess: {

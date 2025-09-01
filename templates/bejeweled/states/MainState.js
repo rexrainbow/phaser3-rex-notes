@@ -3,6 +3,7 @@ import MatchState from './MatchState.js';
 // Actions
 import PlaceChess from '../actions/PlaceChess.js';
 import SelectChess from '../actions/SelectChess.js';
+import PickChess from '../actions/PickChess.js';
 import SwapChess from '../actions/SwapChess.js'
 import IsPromise from '../../../plugins/utils/object/IsPromise.js';
 
@@ -12,10 +13,11 @@ class State extends BaseState {
     constructor(bejeweled, config) {
         super(bejeweled, config);
         // this.bejeweled = bejeweled;      // Bejeweled
-        // this.board = bejeweled.board; // Bejeweled.board
+        // this.boardWrapper = bejeweled.board; // Bejeweled.board
 
         this.selectedChess1;
         this.selectedChess2;
+        this.pickedChess;
         this.matchState = new MatchState(bejeweled, config); // sub-state
 
         // Actions
@@ -24,6 +26,8 @@ class State extends BaseState {
         this.select1Action = GetValue(config, 'select1Action', SelectChess);
         // select2 action
         this.select2Action = GetValue(config, 'select2Action', this.select1Action);
+        // pick action
+        this.pickAction = GetValue(config, 'pickAction', PickChess);
         // Swap action
         this.swapAction = GetValue(config, 'swapAction', SwapChess);
         // UndoSwap action
@@ -43,12 +47,13 @@ class State extends BaseState {
         this.matchState = undefined;
         this.selectedChess1 = undefined;
         this.selectedChess2 = undefined;
+        this.pickedChess = undefined;
         return this;
     }
 
     // START
     enter_START() {
-        this.board.init(); // Fill background tiles
+        this.boardWrapper.init(); // Fill background tiles
         this.next();
     }
     next_START() {
@@ -58,7 +63,7 @@ class State extends BaseState {
 
     // RESET
     enter_RESET() {
-        var board = this.board;
+        var board = this.boardWrapper;
 
         var done = false;
         while (!done) {
@@ -75,12 +80,12 @@ class State extends BaseState {
 
     // PLACE
     enter_PLACE() {
-        var board = this.board.board,
+        var board = this.boardWrapper.board,
             bejeweled = this.bejeweled;
 
         bejeweled.emit('place', board, bejeweled);
 
-        var chessArray = this.board.getChessArray('lower');
+        var chessArray = this.boardWrapper.getChessArray();
         var result = this.placeAction(chessArray, board, bejeweled);
         if (IsPromise(result)) {
             bejeweled.waitEvent(bejeweled, 'place.complete');
@@ -101,8 +106,9 @@ class State extends BaseState {
     enter_SELECT1START() {
         this.selectedChess1 = undefined;
         this.selectedChess2 = undefined;
+        this.pickedChess = undefined;
 
-        this.bejeweled.emit('select1-start', this.board.board, this.bejeweled);
+        this.bejeweled.emit('select1-start', this.boardWrapper.board, this.bejeweled);
     }
     selectChess1(chess) {
         if (this.state === 'SELECT1START') {
@@ -122,7 +128,7 @@ class State extends BaseState {
 
     // SELECT1
     enter_SELECT1() {
-        var board = this.board.board,
+        var board = this.boardWrapper.board,
             bejeweled = this.bejeweled,
             chess = this.selectedChess1;
 
@@ -147,7 +153,7 @@ class State extends BaseState {
 
     // SELECT2START
     enter_SELECT2START() {
-        this.bejeweled.emit('select2-start', this.board.board, this.bejeweled);
+        this.bejeweled.emit('select2-start', this.boardWrapper.board, this.bejeweled);
     }
     selectChess2(chess) {
         if (this.state === 'SELECT2START') {
@@ -156,21 +162,34 @@ class State extends BaseState {
         }
         return this;
     }
-    next_SELECT2START() {
-        var nextState;
-        if (this.selectedChess2 &&
-            this.board.board.areNeighbors(this.selectedChess1, this.selectedChess2)) {
-            nextState = 'SELECT2';
-        } else {
-            nextState = 'SELECT1START';
+    pickChess(chess) {
+        if (this.state === 'SELECT2START') {
+            this.pickedChess = chess;
+            this.next();
         }
+        return this;
+    }
+    next_SELECT2START() {
+        if (this.pickedChess) {
+            return 'PICK';
+        }
+
+        var areNeighbors;
+        if (this.selectedChess2) {
+            var direction = this.boardWrapper.board.getNeighborChessDirection(this.selectedChess1, this.selectedChess2);
+            areNeighbors = (direction < 4);
+        } else {
+            areNeighbors = false;
+        }
+
+        var nextState = (areNeighbors) ? 'SELECT2' : 'SELECT1START';
         return nextState;
     }
     // SELECT2START
 
     // SELECT2
     enter_SELECT2() {
-        var board = this.board.board,
+        var board = this.boardWrapper.board,
             bejeweled = this.bejeweled,
             chess = this.selectedChess2;
 
@@ -195,7 +214,7 @@ class State extends BaseState {
 
     // SWAP
     enter_SWAP() {
-        var board = this.board.board,
+        var board = this.boardWrapper.board,
             bejeweled = this.bejeweled,
             chess1 = this.selectedChess1,
             chess2 = this.selectedChess2;
@@ -219,6 +238,34 @@ class State extends BaseState {
     }
     // SWAP
 
+    // PCIK
+    enter_PICK() {
+        var board = this.boardWrapper.board,
+            bejeweled = this.bejeweled,
+            chess = this.pickedChess;
+
+        this.bejeweled.emit('pick', chess, board, bejeweled);
+
+        var result = this.pickAction(chess, board, bejeweled);
+        if (IsPromise(result)) {
+            bejeweled.waitEvent(bejeweled, 'pick.complete');
+            result
+                .then(function () {
+                    bejeweled.emit('pick.complete');
+                })
+        }
+
+        // To next state when all completed
+        this.next();
+    }
+    setEliminatingChess(chessArray) {
+        this.matchState.setEliminatedPieces(chessArray);
+    }
+    next_PICK() {
+        return 'MATCH3';
+    }
+    // PICK
+
     // MATCH3
     enter_MATCH3() {
         this.matchState
@@ -228,8 +275,13 @@ class State extends BaseState {
     next_MATCH3() {
         var nextState;
         if (this.matchState.totalMatchedLinesCount === 0) {
-            nextState = 'UNDOSWAP';
-        } else if (this.board.preTest()) {
+            // No matched line
+            if (this.prevState === 'SWAP') {
+                nextState = 'UNDOSWAP';
+            } else { // PICK
+                nextState = 'SELECT1START';
+            }
+        } else if (this.boardWrapper.preTest()) {
             nextState = 'SELECT1START';
         } else {
             nextState = 'RESET';
@@ -240,7 +292,7 @@ class State extends BaseState {
 
     // UNDOSWAP
     enter_UNDOSWAP() {
-        var board = this.board.board,
+        var board = this.boardWrapper.board,
             bejeweled = this.bejeweled,
             chess1 = this.selectedChess1,
             chess2 = this.selectedChess2;

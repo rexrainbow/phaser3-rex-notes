@@ -11,7 +11,7 @@ var GetAllMatch = function () {
         GetMatchN.call(this, n, function (result, board) {
             var newSet = new SetStruct(board.tileXYArrayToChessArray(result.tileXY, self.chessTileZ));
             for (var i = 0, cnt = matchLines.length; i < cnt; i++) {
-                if (subSetTest(matchLines[i], newSet)) {
+                if (SubSetTest(matchLines[i], newSet)) {
                     return; // not a new set
                 }
             }
@@ -21,7 +21,7 @@ var GetAllMatch = function () {
     return matchLines;
 }
 
-var subSetTest = function (setA, setB) {
+var SubSetTest = function (setA, setB) {
     // Return true if setB is a subset of setA
     var itemsA = setA.entries;
     for (var i = 0, cnt = itemsA.length; i < cnt; i++) {

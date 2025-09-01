@@ -17,6 +17,11 @@ export default {
         return this;
     },
 
+    pickChess(chess) {
+        this.mainState.pickChess(chess);
+        return this;
+    },
+
     setInputEnable(enable) {
         if (this.input) {
             this.input.setEnable(enable);

@@ -10,12 +10,24 @@ var PreTest = function () {
     var directions = this.board.grid.halfDirections;
     var tileB;
     RefreshSymbolCache.call(this); // only refresh symbol cache once
-    for (var tileY = (this.board.height / 2), rowCnt = this.board.height; tileY < rowCnt; tileY++) {
+
+    for (var tileY = 0, rowCnt = this.board.height; tileY < rowCnt; tileY++) {
         for (var tileX = 0, colCnt = this.board.width; tileX < colCnt; tileX++) {
+            if (!this.isAtActivateArea(tileX, tileY)) {
+                continue;
+            }
+
             tileA.x = tileX;
             tileA.y = tileY;
+
             for (var dir = 0, dirCnt = directions.length; dir < dirCnt; dir++) {
                 tileB = this.board.getNeighborTileXY(tileA, dir);
+
+                // In prepare rows
+                if (!this.isAtActivateArea(tileB.x, tileB.y)) {
+                    continue;
+                }
+
                 // Swap symbol
                 SwapSymbols(match, tileA, tileB);
                 // Any match?
