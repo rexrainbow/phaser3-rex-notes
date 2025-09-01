@@ -5,6 +5,7 @@ import Reset from './Reset.js';
 import CreateChess from '../chess/CreateChess.js';
 import FillActivateArea from './FillActivateArea.js'
 import FillPrepareRows from './FillPrepareRows.js';
+import FillAllRows from './FillAllRows.js';
 import BreakMatch3 from './BreakMatch3.js';
 import PreTest from './PreTest.js';
 import GetAllMatch from '../match/GetAllMatch.js';
@@ -19,6 +20,7 @@ var Methods = {
     createChess: CreateChess,
     fillActivateArea: FillActivateArea,
     fillPrepareRows: FillPrepareRows,
+    fillAllRows: FillAllRows,
     breakMatch3: BreakMatch3,
     preTest: PreTest,
     getAllMatch: GetAllMatch,
