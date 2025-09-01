@@ -1,22 +1,15 @@
 /*
-1. Fill empty grids
+1. Fill activate area
 */
 
-var Fill = function (initSymbols) {
-    var upperBoard = false;
-    if (typeof (initSymbols) === 'boolean') {
-        upperBoard = initSymbols;
-        initSymbols = undefined;
-    }
-
+var FillActivateArea = function (initSymbols) {
     var hasInitSymbols = (initSymbols !== undefined);
     var board = this.board;
     var height = board.height;
+    var startY = (height / 2);
+    var endY = height - 1;
     var chessTileZ = this.chessTileZ;
-    if (upperBoard) {
-        height /= 2;
-    }
-    for (var tileY = 0; tileY < height; tileY++) {
+    for (var tileY = startY; tileY <= endY; tileY++) {
         for (var tileX = 0, width = board.width; tileX < width; tileX++) {
             if (board.contains(tileX, tileY, chessTileZ)) { // not empty                
                 continue;
@@ -24,7 +17,7 @@ var Fill = function (initSymbols) {
 
             var candidateSymbols = this.candidateSymbols;
             if (hasInitSymbols) {
-                var symbol = initSymbols[tileY][tileX];
+                var symbol = initSymbols[tileY - startY][tileX];
                 if (symbol !== '?') {
                     candidateSymbols = symbol;
                 }
@@ -33,4 +26,4 @@ var Fill = function (initSymbols) {
         }
     }
 }
-export default Fill;
+export default FillActivateArea;

@@ -166,7 +166,7 @@ class State extends BaseState {
 
     // FILL
     enter_FILL() {
-        this.boardWrapper.fill(true); // Fill upper board only
+        this.boardWrapper.fillPrepareRows();
 
         this.bejeweled.emit('fill', this.boardWrapper.board, this.bejeweled);
 

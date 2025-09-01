@@ -19,7 +19,7 @@ class Demo extends Phaser.Scene {
                 cellWidth: 60,
                 cellHeight: 60,
                 width: 10,
-                height: 10 // Prepared rows: upper 10 rows
+                height: 10
             },
             chess: {
                 // pick random symbol from array, or a callback to return symbol

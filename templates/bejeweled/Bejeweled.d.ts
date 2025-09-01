@@ -46,7 +46,7 @@ declare namespace Bejeweled {
     interface IConfig {
         rexBoard?: string,
 
-        board: IBoardConfig,
+        board: IBoardConfig | Board.IConfig,
         match?: Match.IConfig,
 
         chess: {

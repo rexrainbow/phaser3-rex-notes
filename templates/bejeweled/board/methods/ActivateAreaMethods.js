@@ -11,6 +11,6 @@ export default {
 
     isAtActivateArea(tileX, tileY) {
         var boardHeight = this.board.height;
-        return (tileY > boardHeight / 2) && (tileY <= boardHeight - 1);
+        return (tileY >= boardHeight / 2) && (tileY <= boardHeight - 1);
     }
 }

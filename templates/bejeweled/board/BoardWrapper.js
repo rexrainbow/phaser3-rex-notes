@@ -21,7 +21,6 @@ class BoardWrapper {
             var cellHeight = GetValue(boardConfig, 'cellHeight', cellSize);
             var boardWidth = boardConfig.width;
             var boardHeight = boardConfig.height;
-            debugger
             this.board = this.rexBoard.add.board({
                 grid: {
                     x: x + (cellWidth / 2),

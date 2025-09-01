@@ -10,7 +10,8 @@ var Reset = function () {
     // Fill chess (with initial symbol map)
     var symbols = this.initSymbols;
     this.initSymbols = undefined;
-    this.fill(symbols);
+    this.fillActivateArea(symbols);
+    this.fillPrepareRows();
     // Break match3
     this.breakMatch3();
 }
