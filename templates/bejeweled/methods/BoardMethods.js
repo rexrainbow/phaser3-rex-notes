@@ -56,7 +56,7 @@ export default {
         return this.mainState.state === 'SELECT1START';
     },
 
-    // Symbols
+    // Symbols of activate area
     dumpSymbols() {
         return this.boardWrapper.dumpSymbols();
     },
