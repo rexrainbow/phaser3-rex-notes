@@ -159,6 +159,30 @@ declare class Bejeweled extends ComponentBase {
         direction: number
     ): Phaser.GameObjects.GameObject;
 
+    getChessArray(
+        out?: Phaser.GameObjects.GameObject[]
+    ): Phaser.GameObjects.GameObject[];
+
+    getChessArrayAtTileX(
+        tileX: number,
+        out?: Phaser.GameObjects.GameObject[]
+    ): Phaser.GameObjects.GameObject[];
+
+    getChessArrayAtTileY(
+        tileY: number,
+        out?: Phaser.GameObjects.GameObject[]
+    ): Phaser.GameObjects.GameObject[];
+
+    getChessArrayAtTileXYInRange(
+        tileX: number, tileY: number, rangeX: number, rangeY: number,
+        out?: Phaser.GameObjects.GameObject[]
+    ): Phaser.GameObjects.GameObject[];
+
+    getChessArrayWithSymbol(
+        symbol: any,
+        out?: Phaser.GameObjects.GameObject[]
+    ): Phaser.GameObjects.GameObject[];
+
     isAwaitingInput(): boolean;
 
     dumpSymbols(): any[][];

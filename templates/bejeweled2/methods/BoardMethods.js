@@ -51,6 +51,10 @@ export default {
         return this.boardWrapper.getChessArrayAtTileXYInRange(tileX, tileY, rangeX, rangeY, out);
     },
 
+    getNeighborChessAtDirection(chess, direction) {
+        return this.boardWrapper.getNeighborChessAtDirection(chess, direction);
+    },
+
     // State
     isAwaitingInput() {
         return this.mainState.state === 'SELECT1START';

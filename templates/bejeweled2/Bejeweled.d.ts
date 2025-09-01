@@ -187,6 +187,10 @@ declare class Bejeweled extends ComponentBase {
         out?: Phaser.GameObjects.GameObject[]
     ): Phaser.GameObjects.GameObject[];
 
+    getChessArrayWithSymbol(
+        symbol: any,
+        out?: Phaser.GameObjects.GameObject[]
+    ): Phaser.GameObjects.GameObject[];
 
     isAwaitingInput(): boolean;
 
