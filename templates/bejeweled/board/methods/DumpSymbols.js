@@ -1,9 +1,10 @@
 var DumpSymbols = function () {
+    // Dump symbols of all grids
     var board = this.board;
     var chessTileZ = this.chessTileZ;
     var board = this.board;
     var height = board.height;
-    var startY = (height / 2);
+    var startY = 0;
     var endY = height - 1;
 
     var symbols = [];
