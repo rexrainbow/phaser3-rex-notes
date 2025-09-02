@@ -20,22 +20,13 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() { }
+    preload() {
+        this.load.image('diamond', 'assets/images/diamond.png');
+        this.load.image('fission', 'assets/images/fission.png');
+        this.load.image('snowflake', 'assets/images/snowflake.png');
+    }
 
     create() {
-        var initSymbols = `\
-0123443210
-5432112345
-5432112345
-0123443210
-0123443210
-5432612345
-5432172345
-0123443210
-0123443210
-5432112345\
-`.trim().split('\n').map(line => line.split('').map(ch => Number(ch)));
-
         this.bejeweled = new Bejeweled(this, {
             board: {
                 x: 0,
@@ -63,15 +54,12 @@ class Demo extends Phaser.Scene {
                 // User-defined chess game object
                 create: function (board) {
                     var scene = board.scene;
-                    var gameObject = scene.rexBoard.add.shape(board, 0, 0, 0, 0x0, 1, false)
-                        .setScale(0.95)
+                    var gameObject = scene.add.image()
                         // Initial 'symbol' value
                         .setData('symbol', undefined);
                     // Symbol is stored in gameObject's data manager (`gameObject.getData('symbol')`)
                     // Add data changed event to change the appearance of game object via new symbol value
-                    gameObject.data.events.on('changedata-symbol', function (gameObject, value, previousValue) {
-                        gameObject.setFillStyle(GetColor(value));
-                    });
+                    gameObject.data.events.on('changedata-symbol', SetAppearance);
                     return gameObject;
                 },
 
@@ -117,7 +105,7 @@ class Demo extends Phaser.Scene {
 }
 
 var colors = [
-    0xDC143C,  // 0: #DC143C
+    0xDC143C,
     0x1E90FF,  // 1: #1E90FF
     0x32CD32,  // 2: #32CD32
     0xFFD700,  // 3: #FFD700
@@ -126,8 +114,20 @@ var colors = [
     0x212121,  // 6: #212121
     0xF5F5F5,  // 7: #F5F5F5
 ]
-var GetColor = function (symbol) {
-    return colors[symbol];
+var Appearances = [
+    { key: 'diamond', color: 0xDC143C },  // 0: #DC143C
+    { key: 'diamond', color: 0x1E90FF },  // 1: #1E90FF
+    { key: 'diamond', color: 0x32CD32 },  // 2: #32CD32
+    { key: 'diamond', color: 0xFFD700 },  // 3: #FFD700
+    { key: 'diamond', color: 0x9400D3 },  // 4: #9400D3
+    { key: 'diamond', color: 0xFF8C00 },  // 5: #FF8C00
+    { key: 'snowflake', color: 0xF5F5F5 },// 6: #F5F5F5
+    { key: 'fission', color: 0xF5F5F5 },  // 7: #F5F5F5
+]
+var SetAppearance = function (gameObject, value, previousValue) {
+    var data = Appearances[value];
+    var size = 60 * 0.9;
+    gameObject.setTexture(data.key).setTint(data.color).setDisplaySize(size, size);
 }
 
 var config = {
