@@ -110,16 +110,6 @@ class Demo extends Phaser.Scene {
     update() { }
 }
 
-var colors = [
-    0xDC143C,
-    0x1E90FF,  // 1: #1E90FF
-    0x32CD32,  // 2: #32CD32
-    0xFFD700,  // 3: #FFD700
-    0x9400D3,  // 4: #9400D3
-    0xFF8C00,  // 5: #FF8C00
-    0x212121,  // 6: #212121
-    0xF5F5F5,  // 7: #F5F5F5
-]
 var Appearances = [
     { key: 'diamond', color: 0xDC143C },  // 0: #DC143C
     { key: 'diamond', color: 0x1E90FF },  // 1: #1E90FF
