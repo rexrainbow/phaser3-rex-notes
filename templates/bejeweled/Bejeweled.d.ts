@@ -254,5 +254,7 @@ declare class Bejeweled extends ComponentBase {
     getData(key: string): any;
     data: Phaser.Data.DataManager;
 
+    // Other commands
+    runMatch3(): this;
 
 }

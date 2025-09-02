@@ -104,9 +104,7 @@ class State extends BaseState {
 
     // SELECT1START
     enter_SELECT1START() {
-        this.selectedChess1 = undefined;
-        this.selectedChess2 = undefined;
-        this.pickedChess = undefined;
+        this.clearInput();
 
         this.bejeweled.emit('select1-start', this.boardWrapper.board, this.bejeweled);
     }
@@ -276,9 +274,9 @@ class State extends BaseState {
         var nextState;
         if (this.matchState.totalMatchedLinesCount === 0) {
             // No matched line
-            if (this.prevState === 'SWAP') {
+            if (this.selectedChess2) {  // Can undo swap
                 nextState = 'UNDOSWAP';
-            } else { // PICK
+            } else {
                 nextState = 'SELECT1START';
             }
         } else if (this.boardWrapper.preTest()) {
@@ -316,10 +314,34 @@ class State extends BaseState {
     }
     // UNDOSWAP
 
-    // debug
+
+    // Utils
+    clearInput() {
+        this.selectedChess1 = undefined;
+        this.selectedChess2 = undefined;
+        this.pickedChess = undefined;
+        return this;
+    }
+
+    isAwaitingInput() {
+        var state = this.state
+        return (state === 'SELECT1START') || (state === 'SELECT2START');
+    }
+
+    runMatch3() {
+        if (!this.isAwaitingInput()) {
+            return this;
+        }
+        this.clearInput();
+        this.goto('MATCH3');
+        return this;
+    }
+
     printState() {
+        // debug
         console.log('Main state: ' + this.prevState + ' -> ' + this.state);
     }
+    // Utils
 
 }
 

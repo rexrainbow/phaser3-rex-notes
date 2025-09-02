@@ -64,11 +64,6 @@ export default {
         this.boardWrapper.setSymbolAt(tileX, tileY, newSymbol);
     },
 
-    // State
-    isAwaitingInput() {
-        return this.mainState.state === 'SELECT1START';
-    },
-
     // Symbols of activate area
     dumpSymbols() {
         return this.boardWrapper.dumpSymbols();

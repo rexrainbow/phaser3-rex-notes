@@ -7,7 +7,7 @@ import InputMethods from './methods/InputMethods.js';
 import BoardMethods from './methods/BoardMethods.js';
 import WaitEventMethods from './methods/WaitEventMethods.js';
 import DataManagerMethods from '../../plugins/utils/data/DataManagerMethods.js';
-
+import CommandMethods from './methods/CommandMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -63,11 +63,6 @@ class Bejeweled extends ComponentBase {
         super.destroy(fromScene);
         return this;
     }
-
-    start() {
-        this.mainState.goto('START');
-        return this;
-    }
 }
 
 Object.assign(
@@ -75,7 +70,8 @@ Object.assign(
     InputMethods,
     BoardMethods,
     WaitEventMethods,
-    DataManagerMethods
+    DataManagerMethods,
+    CommandMethods,
 );
 
 export default Bejeweled;
