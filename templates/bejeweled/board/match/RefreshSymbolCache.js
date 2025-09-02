@@ -11,7 +11,16 @@ var RefreshSymbolCache = function () {
         if (chess == null) {
             return null;
         }
-        return chess.getData('symbol');
+
+        var symbol = chess.getData('symbol');
+
+        if (self.matchAcceptList && !(symbol in self.matchAcceptList)) {
+            symbol = null;
+        } else if (self.matchIgnoreList && (symbol in self.matchIgnoreList)) {
+            symbol = null;
+        }
+
+        return symbol;
     });
 };
 

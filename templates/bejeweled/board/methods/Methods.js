@@ -13,6 +13,7 @@ import DumpSymbols from './DumpSymbols.js';
 import GetBoardBounds from './GetBoardBounds.js';
 import MaskMethods from './MaskMethods.js';
 import ActivateAreaMethods from './ActivateAreaMethods.js';
+import MatchMethods from './MatchMethods.js';
 
 var Methods = {
     clear: Clear,
@@ -34,6 +35,7 @@ Object.assign(
     GetChessMethods,
     MaskMethods,
     ActivateAreaMethods,
+    MatchMethods,
 )
 
 export default Methods;

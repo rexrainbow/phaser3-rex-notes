@@ -7,6 +7,8 @@ import { TileXYType, TileXYZType } from '../../plugins/board/types/Position';
 export default Bejeweled;
 
 declare namespace Bejeweled {
+    type SymbolType = number | string;
+
     interface IBoardConfig {
         x?: number, y?: number,
         cellSize?: number, cellWidth?: number, cellHeight?: number,
@@ -43,11 +45,16 @@ declare namespace Bejeweled {
         bejeweled: Bejeweled,
     ) => void;
 
+    interface IMatch extends Match.IConfig {
+        accept?: SymbolType[],
+        ignore?: SymbolType[],
+    }
+
     interface IConfig {
         rexBoard?: string,
 
         board: IBoardConfig | Board.IConfig,
-        match?: Match.IConfig,
+        match?: IMatch,
 
         chess: {
             symbols: ChessSymbol[] | GenerateSymbolCallbackType,
@@ -179,7 +186,7 @@ declare class Bejeweled extends ComponentBase {
     ): Phaser.GameObjects.GameObject[];
 
     getChessArrayWithSymbol(
-        symbol: any,
+        symbol: Bejeweled.ChessSymbol,
         out?: Phaser.GameObjects.GameObject[]
     ): Phaser.GameObjects.GameObject[];
 
@@ -205,8 +212,16 @@ declare class Bejeweled extends ComponentBase {
 
     getChessTileZ(): number | string;
 
+    setMatchAcceptList(acceptList?: Bejeweled.SymbolType[]): this;
+    setMatchIgnoreList(ignoreList?: Bejeweled.SymbolType[]): this;
+
+    getBoardBounds(
+        out?: Phaser.Geom.Rectangle
+    ): Phaser.Geom.Rectangle;
+
     getBoard(): Board;
     getMatch(): Match;
+    getLayer(): Phaser.GameObjects.Layer;
 
     // Custom eliminateChess, falling action
     waitEvent(
