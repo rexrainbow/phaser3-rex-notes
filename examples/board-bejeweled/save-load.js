@@ -12,17 +12,27 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
+        var initSymbols = `\
+00004432
+54321123
+54321123
+01234432
+01234432
+54322123
+54321123
+01234432\
+`.trim().split('\n').map(line => line.split('').map(ch => Number(ch)));
+
         var bejeweled = new Bejeweled(this, {
             board: {
-                grid: {
-                    x: 180,
-                    y: 50,
-                    cellWidth: 60,
-                    cellHeight: 60,
-                },
+                x: 160,
+                y: 400,
+                cellWidth: 60,
+                cellHeight: 60,
                 width: 8,
-                height: 16 // Prepared rows: upper 8 rows
+                height: 8 // Prepared rows: upper 8 rows
             },
+            initSymbols: initSymbols,
             chess: {
                 // pick random symbol from array, or a callback to return symbol
                 symbols: [0, 1, 2, 3, 4, 5],
@@ -37,7 +47,7 @@ class Demo extends Phaser.Scene {
                     // Symbol is stored in gameObject's data manager (`gameObject.getData('symbol')`)
                     // Add data changed event to change the appearance of game object via new symbol value
                     gameObject.data.events.on('changedata-symbol', function (gameObject, value, previousValue) {
-                        gameObject.setFillStyle(getColor(value));
+                        gameObject.setFillStyle(GetColor(value));
                     });
                     return gameObject;
                 },
@@ -79,10 +89,18 @@ class Demo extends Phaser.Scene {
     update() { }
 }
 
-var colorArray = Phaser.Display.Color.HSVColorWheel(0.5, 1);
-var getColor = function (symbol) {
-    // symbols: [0, 1, 2, 3, 4, 5]
-    return colorArray[symbol * 60].color;
+var colors = [
+    0xDC143C,  // 0: #DC143C
+    0x1E90FF,  // 1: #1E90FF
+    0x32CD32,  // 2: #32CD32
+    0xFFD700,  // 3: #FFD700
+    0x9400D3,  // 4: #9400D3
+    0xFF8C00,  // 5: #FF8C00
+    0x212121,  // 6: #212121
+    0xF5F5F5,  // 7: #F5F5F5
+]
+var GetColor = function (symbol) {
+    return colors[symbol];
 }
 
 var config = {

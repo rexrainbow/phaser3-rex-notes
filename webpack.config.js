@@ -59,6 +59,7 @@ module.exports = {
                     '/assets': assetsFolder,
                 }
             },
+            ui: false,
         })
     ],
     module: {

@@ -1,6 +1,7 @@
 export default {
-    setBoardSize(width, height) {
-        this.board.setBoardWidth(width).setBoardHeight(height);
+    // Board size
+    setActivateBoardSize(width, height) {
+        this.boardWrapper.setActivateWidth(width).setActivateHeight(height);
         return this;
     },
 
@@ -10,23 +11,48 @@ export default {
     },
 
     getChessTileZ() {
-        return this.board.chessTileZ;
+        return this.boardWrapper.chessTileZ;
+    },
+
+    chessToTileXY(chess) {
+        return this.boardWrapper.chessToTileXYZ(chess);
     },
 
     worldXYToChess(worldX, worldY) {
-        return this.board.worldXYToChess(worldX, worldY);
+        return this.boardWrapper.worldXYToChess(worldX, worldY);
     },
 
     tileXYToChess(tileX, tileY) {
-        return this.board.tileXYToChess(tileX, tileY);
+        return this.boardWrapper.tileXYToChess(tileX, tileY);
     },
 
+    // Get chess
     getNeighborChessAtAngle(chess, angle) {
-        return this.board.getNeighborChessAtAngle(chess, angle);
+        return this.boardWrapper.getNeighborChessAtAngle(chess, angle);
     },
 
     getNeighborChessAtDirection(chess, direction) {
-        return this.board.getNeighborChessAtDirection(chess, direction);
+        return this.boardWrapper.getNeighborChessAtDirection(chess, direction);
+    },
+
+    getChessArray(out) {
+        return this.boardWrapper.getChessArray(out);
+    },
+
+    getChessArrayAtTileX(tileX, out) {
+        return this.boardWrapper.getChessArrayAtTileX(tileX, out);
+    },
+
+    getChessArrayAtTileY(tileY, out) {
+        return this.boardWrapper.getChessArrayAtTileY(tileY, out);
+    },
+
+    getChessArrayAtTileXYInRange(tileX, tileY, rangeX, rangeY, out) {
+        return this.boardWrapper.getChessArrayAtTileXYInRange(tileX, tileY, rangeX, rangeY, out);
+    },
+
+    getChessArrayWithSymbol(symbol, out) {
+        return this.boardWrapper.getChessArrayWithSymbol(symbol, out);
     },
 
     // State
@@ -34,24 +60,33 @@ export default {
         return this.mainState.state === 'SELECT1START';
     },
 
-    // Symbols
+    // Symbols of activate area
     dumpSymbols() {
-        return this.board.dumpSymbols();
+        return this.boardWrapper.dumpSymbols();
     },
 
     loadSymbols(symbols) {
-        this.board.setInitSymbols(symbols);
+        this.boardWrapper.setInitSymbols(symbols);
         this.mainState.goto('RESET');
+        return this;
+    },
+
+    // After picking piece
+    setEliminatingChess(chessArray) {
+        if (!Array.isArray(chessArray)) {
+            chessArray = [chessArray];
+        }
+        this.mainState.setEliminatingChess(chessArray);
         return this;
     },
 
     // Expose board instance
     getBoard() {
-        return this.board.board;
+        return this.boardWrapper.board;
     },
 
     // Expose match instance
     getMatch() {
-        return this.board.match;
+        return this.boardWrapper.match;
     }
 }

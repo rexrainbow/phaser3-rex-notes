@@ -1096,14 +1096,14 @@
             super(config);
 
             this.bejeweled = bejeweled;                 // Bejeweled
-            this.board = bejeweled.board;            // Bejeweled.board
-            this.waitEvents = bejeweled.waitEvents;  // Bejeweled.waitEvents
+            this.boardWrapper = bejeweled.boardWrapper; // Bejeweled.boardWrapper
+            this.waitEvents = bejeweled.waitEvents;     // Bejeweled.waitEvents
         }
 
         shutdown() {
             super.shutdown();
             this.bejeweled = undefined;
-            this.board = undefined;
+            this.boardWrapper = undefined;
             this.waitEvents = undefined;
         }
 
@@ -1792,15 +1792,16 @@
     };
 
     const GetValue$5 = Phaser.Utils.Objects.GetValue;
+    const SetStruct$2 = Phaser.Structs.Set;
 
     let State$1 = class State extends BaseState {
         constructor(bejeweled, config) {
             super(bejeweled, config);
-            // this.bejeweled = bejeweled;            // Bejeweled
-            // this.board = bejeweled.board;       // Bejeweled.board
+            // this.bejeweled = bejeweled;                // Bejeweled
+            // this.boardWrapper = bejeweled.boardWrapper;// Bejeweled.boardWrapper
 
             this.totalMatchedLinesCount = 0;
-            this.eliminatedChessArray;
+            this.eliminatedPieceArray = undefined;
 
             // Actions
             // Eliminating action
@@ -1817,7 +1818,7 @@
         shutdown() {
             super.shutdown();
 
-            this.eliminatedChessArray = undefined;
+            this.eliminatedPieceArray = undefined;
             // Actions
             this.eliminatingAction = undefined;
             this.fallingAction = undefined;
@@ -1829,50 +1830,64 @@
             return this;
         }
 
+        setEliminatedPieces(pieces) {
+            this.eliminatedPieceArray = [...new Set(pieces)];
+            return this;
+        }
+
+        getEliminatedPieces() {
+            return this.eliminatedPieceArray;
+        }
+
         // START
         enter_START() {
             this.totalMatchedLinesCount = 0;
 
-            this.bejeweled.emit('match-start', this.board.board, this.bejeweled);
+            this.bejeweled.emit('match-start', this.boardWrapper.board, this.bejeweled);
 
             this.next();
         }
         next_START() {
-            return 'MATCH3';
+            var pieces = this.getEliminatedPieces();
+            return (!pieces) ? 'MATCH3' : 'ELIMINATING';
         }
         // START
 
         // MATCH3
         enter_MATCH3() {
-            var matchedLines = this.board.getAllMatch();
+            var matchedLines = this.boardWrapper.getAllMatch();
 
-            this.bejeweled.emit('match', matchedLines, this.board.board, this.bejeweled);
+            this.bejeweled.emit('match', matchedLines, this.boardWrapper.board, this.bejeweled);
 
             var matchedLinesCount = matchedLines.length;
             this.totalMatchedLinesCount += matchedLinesCount;
+            var pieces;
             switch (matchedLinesCount) {
                 case 0:
-                    this.eliminatedChessArray = [];
+                    pieces = [];
                     break;
                 case 1:
-                    this.eliminatedChessArray = Array.from(matchedLines[0]);
+                    pieces = matchedLines[0].entries;
                     break;
                 default:
                     // Put all chess to a set
-                    var newSet = new Set();
+                    var newSet = new SetStruct$2();
                     for (var i = 0; i < matchedLinesCount; i++) {
-                        matchedLines[i].forEach(function (value) {
-                            newSet.add(value);
+                        matchedLines[i].entries.forEach(function (value) {
+                            newSet.set(value);
                         });
                     }
-                    this.eliminatedChessArray = Array.from(newSet);
+                    pieces = newSet.entries;
                     break;
             }
+
+            this.setEliminatedPieces(pieces);
             this.next();
         }
         next_MATCH3() {
             var nextState;
-            if (this.eliminatedChessArray.length === 0) {
+            var pieces = this.getEliminatedPieces();
+            if (pieces && (pieces.length === 0)) {
                 nextState = 'END';
             } else {
                 nextState = 'ELIMINATING';
@@ -1883,13 +1898,13 @@
 
         // ELIMINATING
         enter_ELIMINATING() {
-            var board = this.board.board,
+            var board = this.boardWrapper.board,
                 bejeweled = this.bejeweled,
-                chessArray = this.eliminatedChessArray;
+                pieces = this.getEliminatedPieces();
 
-            this.bejeweled.emit('eliminate', chessArray, board, bejeweled);
+            this.bejeweled.emit('eliminate', pieces, board, bejeweled);
 
-            var result = this.eliminatingAction(chessArray, board, bejeweled);
+            var result = this.eliminatingAction(pieces, board, bejeweled);
             if (IsPromise(result)) {
                 bejeweled.waitEvent(bejeweled, 'eliminate.complete');
                 result
@@ -1899,7 +1914,7 @@
             }
 
             // Remove eliminated chess
-            chessArray.forEach(board.removeChess, board);
+            pieces.forEach(board.removeChess, board);
 
             // To next state when all completed
             this.next();
@@ -1908,13 +1923,13 @@
             return 'FALLING';
         }
         exit_ELIMINATING() {
-            this.eliminatedChessArray = undefined;
+            this.setEliminatedPieces();
         }
         // ELIMINATING
 
         // FALLING
         enter_FALLING() {
-            var board = this.board.board,
+            var board = this.boardWrapper.board,
                 bejeweled = this.bejeweled;
 
             this.bejeweled.emit('fall', board, bejeweled);
@@ -1938,9 +1953,9 @@
 
         // FILL
         enter_FILL() {
-            this.board.fill(true); // Fill upper board only
+            this.boardWrapper.fillPrepareRows();
 
-            this.bejeweled.emit('fill', this.board.board, this.bejeweled);
+            this.bejeweled.emit('fill', this.boardWrapper.board, this.bejeweled);
 
             this.next();
         }
@@ -1951,7 +1966,7 @@
 
         // END
         enter_END() {
-            this.bejeweled.emit('match-end', this.board.board, this.bejeweled);
+            this.bejeweled.emit('match-end', this.boardWrapper.board, this.bejeweled);
 
             this.emit('complete');
         }
@@ -2144,6 +2159,14 @@
         // Do nothing
     };
 
+    /* 
+    Do nothing
+    */
+
+    var PickChess = function (chess, board, bejeweled) {
+        // Do nothing
+    };
+
     var SwapChess = function (chess1, chess2, board, bejeweled) {
         var tileXYZ1 = board.chessToTileXYZ(chess1);
         var tileXYZ2 = board.chessToTileXYZ(chess2);
@@ -2179,10 +2202,11 @@
         constructor(bejeweled, config) {
             super(bejeweled, config);
             // this.bejeweled = bejeweled;      // Bejeweled
-            // this.board = bejeweled.board; // Bejeweled.board
+            // this.boardWrapper = bejeweled.board; // Bejeweled.board
 
             this.selectedChess1;
             this.selectedChess2;
+            this.pickedChess;
             this.matchState = new State$1(bejeweled, config); // sub-state
 
             // Actions
@@ -2191,6 +2215,8 @@
             this.select1Action = GetValue$3(config, 'select1Action', SelectChess);
             // select2 action
             this.select2Action = GetValue$3(config, 'select2Action', this.select1Action);
+            // pick action
+            this.pickAction = GetValue$3(config, 'pickAction', PickChess);
             // Swap action
             this.swapAction = GetValue$3(config, 'swapAction', SwapChess);
             // UndoSwap action
@@ -2210,12 +2236,13 @@
             this.matchState = undefined;
             this.selectedChess1 = undefined;
             this.selectedChess2 = undefined;
+            this.pickedChess = undefined;
             return this;
         }
 
         // START
         enter_START() {
-            this.board.init(); // Fill background tiles
+            this.boardWrapper.init(); // Fill background tiles
             this.next();
         }
         next_START() {
@@ -2225,7 +2252,7 @@
 
         // RESET
         enter_RESET() {
-            var board = this.board;
+            var board = this.boardWrapper;
 
             var done = false;
             while (!done) {
@@ -2242,12 +2269,12 @@
 
         // PLACE
         enter_PLACE() {
-            var board = this.board.board,
+            var board = this.boardWrapper.board,
                 bejeweled = this.bejeweled;
 
             bejeweled.emit('place', board, bejeweled);
 
-            var chessArray = this.board.getChessArray('lower');
+            var chessArray = this.boardWrapper.getChessArray();
             var result = this.placeAction(chessArray, board, bejeweled);
             if (IsPromise(result)) {
                 bejeweled.waitEvent(bejeweled, 'place.complete');
@@ -2268,8 +2295,9 @@
         enter_SELECT1START() {
             this.selectedChess1 = undefined;
             this.selectedChess2 = undefined;
+            this.pickedChess = undefined;
 
-            this.bejeweled.emit('select1-start', this.board.board, this.bejeweled);
+            this.bejeweled.emit('select1-start', this.boardWrapper.board, this.bejeweled);
         }
         selectChess1(chess) {
             if (this.state === 'SELECT1START') {
@@ -2289,7 +2317,7 @@
 
         // SELECT1
         enter_SELECT1() {
-            var board = this.board.board,
+            var board = this.boardWrapper.board,
                 bejeweled = this.bejeweled,
                 chess = this.selectedChess1;
 
@@ -2314,7 +2342,7 @@
 
         // SELECT2START
         enter_SELECT2START() {
-            this.bejeweled.emit('select2-start', this.board.board, this.bejeweled);
+            this.bejeweled.emit('select2-start', this.boardWrapper.board, this.bejeweled);
         }
         selectChess2(chess) {
             if (this.state === 'SELECT2START') {
@@ -2323,21 +2351,34 @@
             }
             return this;
         }
-        next_SELECT2START() {
-            var nextState;
-            if (this.selectedChess2 &&
-                this.board.board.areNeighbors(this.selectedChess1, this.selectedChess2)) {
-                nextState = 'SELECT2';
-            } else {
-                nextState = 'SELECT1START';
+        pickChess(chess) {
+            if (this.state === 'SELECT2START') {
+                this.pickedChess = chess;
+                this.next();
             }
+            return this;
+        }
+        next_SELECT2START() {
+            if (this.pickedChess) {
+                return 'PICK';
+            }
+
+            var areNeighbors;
+            if (this.selectedChess2) {
+                var direction = this.boardWrapper.board.getNeighborChessDirection(this.selectedChess1, this.selectedChess2);
+                areNeighbors = (direction < 4);
+            } else {
+                areNeighbors = false;
+            }
+
+            var nextState = (areNeighbors) ? 'SELECT2' : 'SELECT1START';
             return nextState;
         }
         // SELECT2START
 
         // SELECT2
         enter_SELECT2() {
-            var board = this.board.board,
+            var board = this.boardWrapper.board,
                 bejeweled = this.bejeweled,
                 chess = this.selectedChess2;
 
@@ -2362,7 +2403,7 @@
 
         // SWAP
         enter_SWAP() {
-            var board = this.board.board,
+            var board = this.boardWrapper.board,
                 bejeweled = this.bejeweled,
                 chess1 = this.selectedChess1,
                 chess2 = this.selectedChess2;
@@ -2386,6 +2427,34 @@
         }
         // SWAP
 
+        // PCIK
+        enter_PICK() {
+            var board = this.boardWrapper.board,
+                bejeweled = this.bejeweled,
+                chess = this.pickedChess;
+
+            this.bejeweled.emit('pick', chess, board, bejeweled);
+
+            var result = this.pickAction(chess, board, bejeweled);
+            if (IsPromise(result)) {
+                bejeweled.waitEvent(bejeweled, 'pick.complete');
+                result
+                    .then(function () {
+                        bejeweled.emit('pick.complete');
+                    });
+            }
+
+            // To next state when all completed
+            this.next();
+        }
+        setEliminatingChess(chessArray) {
+            this.matchState.setEliminatedPieces(chessArray);
+        }
+        next_PICK() {
+            return 'MATCH3';
+        }
+        // PICK
+
         // MATCH3
         enter_MATCH3() {
             this.matchState
@@ -2395,8 +2464,13 @@
         next_MATCH3() {
             var nextState;
             if (this.matchState.totalMatchedLinesCount === 0) {
-                nextState = 'UNDOSWAP';
-            } else if (this.board.preTest()) {
+                // No matched line
+                if (this.prevState === 'SWAP') {
+                    nextState = 'UNDOSWAP';
+                } else { // PICK
+                    nextState = 'SELECT1START';
+                }
+            } else if (this.boardWrapper.preTest()) {
                 nextState = 'SELECT1START';
             } else {
                 nextState = 'RESET';
@@ -2407,7 +2481,7 @@
 
         // UNDOSWAP
         enter_UNDOSWAP() {
-            var board = this.board.board,
+            var board = this.boardWrapper.board,
                 bejeweled = this.bejeweled,
                 chess1 = this.selectedChess1,
                 chess2 = this.selectedChess2;
@@ -2438,6 +2512,166 @@
 
     }
 
+    var GetChessMethods = {
+        getChessArray(out) {
+            if (out === undefined) {
+                out = [];
+            }
+
+            var board = this.board;
+            var startX = 0;
+            var endX = board.width - 1;
+            var startY = board.height / 2;
+            var endY = board.height - 1;
+
+            var tileZ = this.chessTileZ;
+            for (var tileY = startY; tileY <= endY; tileY++) {
+                for (var tileX = startX; tileX <= endX; tileX++) {
+                    var chess = board.tileXYZToChess(tileX, tileY, tileZ);
+                    if (chess === null) {
+                        continue;
+                    }
+                    out.push(chess);
+                }
+            }
+
+            return out;
+        },
+
+        getChessArrayAtTileX(tileOX, out) {
+            if (out === undefined) {
+                out = [];
+            }
+
+            var board = this.board;
+            var startX = 0;
+            var endX = board.width - 1;
+            if ((tileOX < startX) || (tileOX > endX)) {
+                return out;
+            }
+
+            var startY = board.height / 2;
+            var endY = board.height - 1;
+
+            var tileZ = this.chessTileZ;
+            for (var tileY = startY; tileY <= endY; tileY++) {
+                var chess = board.tileXYZToChess(tileOX, tileY, tileZ);
+                if (chess === null) {
+                    continue;
+                }
+                out.push(chess);
+            }
+
+            return out;
+        },
+
+        getChessArrayAtTileY(tileOY, out) {
+            if (out === undefined) {
+                out = [];
+            }
+
+            var board = this.board;
+            var startY = board.height / 2;
+            var endY = board.height - 1;
+            if ((tileOY < startY) || (tileOY > endY)) {
+                return out;
+            }
+
+            var startX = 0;
+            var endX = board.width - 1;
+
+            var tileZ = this.chessTileZ;
+            for (var tileX = startX; tileX <= endX; tileX++) {
+                var chess = board.tileXYZToChess(tileX, tileOY, tileZ);
+                if (chess === null) {
+                    continue;
+                }
+                out.push(chess);
+            }
+
+            return out;
+        },
+
+        getChessArrayAtTileXYInRange(tileOX, tileOY, rangeX, rangeY, out) {
+            if (out === undefined) {
+                out = [];
+            }
+
+            var board = this.board;
+            var startX = 0;
+            var endX = board.width - 1;
+            var startY = board.height / 2;
+            var endY = board.height - 1;
+
+            var tileZ = this.chessTileZ;
+            for (var tileY = startY; tileY <= endY; tileY++) {
+                for (var tileX = startX; tileX <= endX; tileX++) {
+                    if ((Math.abs(tileX - tileOX) > rangeX) || (Math.abs(tileY - tileOY) > rangeY)) {
+                        continue;
+                    }
+
+                    var chess = board.tileXYZToChess(tileX, tileY, tileZ);
+                    if (chess === null) {
+                        continue;
+                    }
+
+                    out.push(chess);
+                }
+            }
+
+            return out;
+        },
+
+        getChessArrayWithSymbol(symbol, out) {
+            if (out === undefined) {
+                out = [];
+            }
+
+            var board = this.board;
+            var startX = 0;
+            var endX = board.width - 1;
+            var startY = board.height / 2;
+            var endY = board.height - 1;
+
+            var tileZ = this.chessTileZ;
+            for (var tileY = startY; tileY <= endY; tileY++) {
+                for (var tileX = startX; tileX <= endX; tileX++) {
+                    var chess = board.tileXYZToChess(tileX, tileY, tileZ);
+                    if (chess === null) {
+                        continue;
+                    }
+
+                    if (chess.getData('symbol') !== symbol) {
+                        continue;
+                    }
+
+                    out.push(chess);
+                }
+            }
+
+            return out;
+        },
+
+        getNeighborChessAtAngle(chess, angle) {
+            var direction = this.board.angleSnapToDirection(chess, angle);
+            return this.getNeighborChessAtDirection(chess, direction);
+        },
+
+        getNeighborChessAtDirection(chess, direction) {
+            var neighborTileXY = this.board.getNeighborTileXY(chess, direction);
+            var neighborChess = (neighborTileXY) ?
+                this.board.tileXYZToChess(neighborTileXY.x, neighborTileXY.y, this.chessTileZ) :
+                null;
+            return neighborChess;
+        },
+    };
+
+    var Clear = function () {
+        // Destroy all chess
+        this.board.removeAllChess(true);
+        return this;
+    };
+
     /* 
     1. Fill background tiles
     */
@@ -2453,12 +2687,19 @@
     */
 
     var Reset = function () {
+        var board = this.board;
         // Destroy all chess
-        this.board.removeAllChess(true);
+        board.removeAllChess(true);
         // Fill chess (with initial symbol map)
         var symbols = this.initSymbols;
         this.initSymbols = undefined;
-        this.fill(symbols);
+        var boardHeight = board.height;
+        if (symbols && (symbols.length === boardHeight)) {
+            this.fillAllRows(symbols);
+        } else {
+            this.fillActivateArea(symbols);
+            this.fillPrepareRows();
+        }
         // Break match3
         this.breakMatch3();
     };
@@ -2529,32 +2770,25 @@
     };
 
     /*
-    1. Fill empty grids
+    1. Fill activate area
     */
 
-    var Fill = function (initSymbols) {
-        var upperBoard = false;
-        if (typeof (initSymbols) === 'boolean') {
-            upperBoard = initSymbols;
-            initSymbols = undefined;
-        }
-
-        var hasInitSymbols = (initSymbols !== undefined);
+    var FillActivateArea = function (symbols) {
+        var hasInitSymbols = (symbols !== undefined);
         var board = this.board;
         var height = board.height;
+        var startY = (height / 2);
+        var endY = height - 1;
         var chessTileZ = this.chessTileZ;
-        if (upperBoard) {
-            height /= 2;
-        }
-        for (var tileY = 0; tileY < height; tileY++) {
+        for (var tileY = startY; tileY <= endY; tileY++) {
             for (var tileX = 0, width = board.width; tileX < width; tileX++) {
-                if (board.contains(tileX, tileY, chessTileZ)) { // not empty                
+                if (board.contains(tileX, tileY, chessTileZ)) { // not empty
                     continue;
                 }
 
                 var candidateSymbols = this.candidateSymbols;
                 if (hasInitSymbols) {
-                    var symbol = initSymbols[tileY][tileX];
+                    var symbol = symbols[tileY - startY][tileX];
                     if (symbol !== '?') {
                         candidateSymbols = symbol;
                     }
@@ -2564,13 +2798,51 @@
         }
     };
 
+    var FillPrepareRows = function () {
+        var board = this.board;
+        var height = board.height;
+        var startY = 0;
+        var endY = (height / 2) - 1;
+        var chessTileZ = this.chessTileZ;
+        for (var tileY = startY; tileY <= endY; tileY++) {
+            for (var tileX = 0, width = board.width; tileX < width; tileX++) {
+                if (board.contains(tileX, tileY, chessTileZ)) { // not empty                
+                    continue;
+                }
+
+                this.createChess(tileX, tileY, this.candidateSymbols);
+            }
+        }
+    };
+
+    var FillAllRows = function (symbols) {
+        var board = this.board;
+        board.removeAllChess(true);
+
+        var height = board.height;
+        var startY = 0;
+        var endY = height - 1;
+        for (var tileY = startY; tileY <= endY; tileY++) {
+            for (var tileX = 0, width = board.width; tileX < width; tileX++) {
+                var candidateSymbols = this.candidateSymbols;
+                var symbol = symbols[tileY - startY][tileX];
+                if (symbol !== '?') {
+                    candidateSymbols = symbol;
+                }
+                this.createChess(tileX, tileY, candidateSymbols);
+            }
+        }
+    };
+
     var RefreshSymbolCache = function () {
+        var self = this;
         var chessTileZ = this.chessTileZ;
         this.match.refreshSymbols(function (tileXY, board) {
-            // Return null in upper board
-            if (tileXY.y < (board.height / 2)) {
+            // Return null in prepare rows
+            if (!self.isAtActivateArea(tileXY.x, tileXY.y)) {
                 return null;
             }
+
             var chess = board.tileXYZToChess(tileXY.x, tileXY.y, chessTileZ);
             if (chess == null) {
                 return null;
@@ -2632,12 +2904,24 @@
         var directions = this.board.grid.halfDirections;
         var tileB;
         RefreshSymbolCache.call(this); // only refresh symbol cache once
-        for (var tileY = (this.board.height / 2), rowCnt = this.board.height; tileY < rowCnt; tileY++) {
+
+        for (var tileY = 0, rowCnt = this.board.height; tileY < rowCnt; tileY++) {
             for (var tileX = 0, colCnt = this.board.width; tileX < colCnt; tileX++) {
+                if (!this.isAtActivateArea(tileX, tileY)) {
+                    continue;
+                }
+
                 tileA.x = tileX;
                 tileA.y = tileY;
+
                 for (var dir = 0, dirCnt = directions.length; dir < dirCnt; dir++) {
                     tileB = this.board.getNeighborTileXY(tileA, dir);
+
+                    // In prepare rows
+                    if (!this.isAtActivateArea(tileB.x, tileB.y)) {
+                        continue;
+                    }
+
                     // Swap symbol
                     SwapSymbols(match, tileA, tileB);
                     // Any match?
@@ -2666,6 +2950,7 @@
         y: 0
     };
 
+    const SetStruct$1 = Phaser.Structs.Set;
     var GetAllMatch = function () {
         RefreshSymbolCache.call(this); // only refresh symbol cache once
         // Get match5, match4, match3
@@ -2673,7 +2958,7 @@
         var matchLines = [];
         for (var n = 5; n >= 3; n--) {
             GetMatchN.call(this, n, function (result, board) {
-                var newSet = new Set(board.tileXYArrayToChessArray(result.tileXY, self.chessTileZ));
+                var newSet = new SetStruct$1(board.tileXYArrayToChessArray(result.tileXY, self.chessTileZ));
                 for (var i = 0, cnt = matchLines.length; i < cnt; i++) {
                     if (SubSetTest(matchLines[i], newSet)) {
                         return; // not a new set
@@ -2689,55 +2974,24 @@
         // Return true if setB is a subset of setA
         var itemsA = setA.entries;
         for (var i = 0, cnt = itemsA.length; i < cnt; i++) {
-            if (!setB.has(itemsA[i])) {
+            if (!setB.contains(itemsA[i])) {
                 return false;
             }
         }
         return true;
     };
 
-    var GetChessArray = function (part) {
-        part = part.toLowerCase();
-        var board = this.board;
-        var height = board.height;
-
-        var startY, endY;
-        switch (part) {
-            case 'upper':
-                startY = 0;
-                endY = height / 2;
-                break;
-            case 'lower':
-                startY = height / 2;
-                endY = height;
-                break;
-            default:
-                startY = 0;
-                endY = height;
-                break;
-        }
-
-        var tileZ = this.chessTileZ;
-        var chessArray = [];
-        for (var tileY = startY; tileY < endY; tileY++) {
-            for (var tileX = 0, endX = board.width; tileX < endX; tileX++) {
-                var chess = board.tileXYZToChess(tileX, tileY, tileZ);
-                if (chess === null) {
-                    continue;
-                }
-                chessArray.push(chess);
-            }
-        }
-
-        return chessArray;
-    };
-
     var DumpSymbols = function () {
+        // Dump symbols of all grids
         var board = this.board;
         var chessTileZ = this.chessTileZ;
+        var board = this.board;
+        var height = board.height;
+        var startY = 0;
+        var endY = height - 1;
 
         var symbols = [];
-        for (var tileY = 0, rowCnt = board.height; tileY < rowCnt; tileY++) {
+        for (var tileY = startY; tileY <= endY; tileY++) {
             var row = [];
             symbols.push(row);
             for (var tileX = 0, colCnt = board.width; tileX < colCnt; tileX++) {
@@ -2750,50 +3004,139 @@
         return symbols;
     };
 
+    var MaskMethods = {
+        enableBoardLayer(layer) {
+            if (this.layer) {
+                return this;
+            }
+
+            if ((layer === undefined) || (layer === true)) {
+                layer = this.scene.add.layer();
+            }
+            this.layer = layer;
+            return this;
+        },
+
+        resetBoardMask() {
+            // Create Graphics game object, mask object
+            if (!this.activateAreaMaskGameObject) {
+                this.activateAreaMaskGameObject = this.scene.make.graphics().setVisible(false);
+                this.activateAreaMask = this.activateAreaMaskGameObject.createGeometryMask();
+                this.enableBoardLayer();
+                this.layer.setMask(this.activateAreaMask);
+            }
+
+            // Draw Graphics game object, a rectangle of activate area
+            var board = this.board;
+            var grid = board.grid;
+
+            var worldTL = board.tileXYToWorldXY(0, board.height / 2);
+            var x = worldTL.x - (grid.width / 2);
+            var y = worldTL.y - (grid.height / 2);
+            var width = this.activateBoardWidth * grid.width;
+            var height = this.activateBoardHeight * grid.height;
+            this.activateAreaMaskGameObject.fillRect(x, y, width, height);
+
+            return this;
+        },
+
+    };
+
+    var ActivateAreaMethods = {
+        setActivateBoardWidth(width) {
+            this.setBoardWidth(width);
+            return this;
+        },
+
+        setActivateBoardHeight(height) {
+            this.setBoardHeight(height * 2);
+            return this;
+        },
+
+        isAtActivateArea(tileX, tileY) {
+            var boardHeight = this.board.height;
+            return (tileY >= boardHeight / 2) && (tileY <= boardHeight - 1);
+        }
+    };
+
     var Methods = {
+        clear: Clear,
         init: Init,
         reset: Reset,
         createChess: CreateChess,
-        fill: Fill,
+        fillActivateArea: FillActivateArea,
+        fillPrepareRows: FillPrepareRows,
+        fillAllRows: FillAllRows,
         breakMatch3: BreakMatch3,
         preTest: PreTest,
         getAllMatch: GetAllMatch,
-        getChessArray: GetChessArray,
         dumpSymbols: DumpSymbols,
     };
 
+    Object.assign(
+        Methods,
+        GetChessMethods,
+        MaskMethods,
+        ActivateAreaMethods,
+    );
+
     const GetValue$2 = Phaser.Utils.Objects.GetValue;
 
-    class Board {
-        constructor(bejeweled, config) {
-            var scene = bejeweled.scene;
+    class BoardWrapper {
+        constructor(scene, config) {
             this.scene = scene;
-            this.rexBoard = bejeweled.rexBoard;
+            this.rexBoard = scene[GetValue$2(config, 'rexBoard', 'rexBoard')];
 
-            this.board = this.rexBoard.add.board(GetValue$2(config, 'board', undefined));
-            this.match = this.rexBoard.add.match(GetValue$2(config, 'match', undefined));
+            var boardConfig = GetValue$2(config, 'board', {});
+            if (boardConfig.hasOwnProperty('grid')) {
+                // Backward compatible
+                this.board = this.rexBoard.add.board(boardConfig);
+
+            } else {
+                // New version
+                var x = GetValue$2(boardConfig, 'x', 0);
+                var y = GetValue$2(boardConfig, 'y', 0);
+                var cellSize = GetValue$2(boardConfig, 'cellSize', 0);
+                var cellWidth = GetValue$2(boardConfig, 'cellWidth', cellSize);
+                var cellHeight = GetValue$2(boardConfig, 'cellHeight', cellSize);
+                var boardWidth = boardConfig.width;
+                var boardHeight = boardConfig.height;
+                this.board = this.rexBoard.add.board({
+                    grid: {
+                        x: x + (cellWidth / 2),
+                        y: y + (cellHeight / 2) - (boardHeight * cellHeight),
+                        cellWidth: cellWidth,
+                        cellHeight: cellHeight
+                    }
+                });
+                this.setActivateBoardWidth(boardWidth).setActivateBoardHeight(boardHeight);
+
+            }
+
+            this.match = this.rexBoard.add.match(GetValue$2(config, 'match'));
             this.match.setBoard(this.board);
 
-            this.initSymbols = GetValue$2(config, 'initSymbols', undefined); // 2d array
+            this.initSymbols = GetValue$2(config, 'initSymbols'); // 2d array
             // configuration of chess
             this.chessTileZ = GetValue$2(config, 'chess.tileZ', 1);
-            this.candidateSymbols = GetValue$2(config, 'chess.symbols', undefined);
-            this.chessCallbackScope = GetValue$2(config, 'chess.scope', undefined);
-            this.chessCreateCallback = GetValue$2(config, 'chess.create', undefined);
+            this.candidateSymbols = GetValue$2(config, 'chess.symbols');
+            this.chessCallbackScope = GetValue$2(config, 'chess.scope');
+            this.chessCreateCallback = GetValue$2(config, 'chess.create');
             this.chessMoveTo = GetValue$2(config, 'chess.moveTo', {});
             this.chessMoveTo.occupiedTest = true;
 
             // Mask & layer
-            this.rowMaskGameObject = undefined;
-            this.rowMask = undefined;
+            this.activateAreaMaskGameObject = undefined;
+            this.activateAreaMask = undefined;
             this.layer = undefined;
 
-            if (GetValue$2(config, 'mask', false)) {
-                this.resetBoardMask();
+            var layer = GetValue$2(config, 'layer', false);
+            if (layer) {
+                this.enableBoardLayer(layer);
             }
 
-            if (GetValue$2(config, 'layer', false)) {
-                this.enableBoardLayer();
+            if (GetValue$2(config, 'mask', true)) {
+                this.resetBoardMask();
             }
         }
 
@@ -2801,10 +3144,10 @@
             this.match.destroy();
             this.board.destroy();
 
-            if (this.rowMaskGameObject) {
+            if (this.activateAreaMaskGameObject) {
                 this.layer.setMask();
-                this.rowMaskGameObject.destroy();
-                this.rowMask.destroy();
+                this.activateAreaMaskGameObject.destroy();
+                this.activateAreaMask.destroy();
             }
             if (this.layer) {
                 this.layer.destroy();
@@ -2837,36 +3180,21 @@
             return this;
         }
 
+        get activateBoardWidth() {
+            return this.board.width;
+        }
+
+        get activateBoardHeight() {
+            return this.board.height / 2;
+        }
+
         setInitSymbols(symbols) {
             this.initSymbols = symbols; // 2d array
             return this;
         }
 
-        enableBoardLayer() {
-            if (!this.layer) {
-                this.layer = this.scene.add.layer();
-            }
-            return this;
-        }
-
-        resetBoardMask() {
-            if (!this.rowMaskGameObject) {
-                this.rowMaskGameObject = this.scene.make.graphics().setVisible(false);
-                this.rowMask = this.rowMaskGameObject.createGeometryMask().setInvertAlpha();
-                this.enableBoardLayer();
-                this.layer.setMask(this.rowMask);
-            }
-
-            // Rectangle of upper rows
-            var board = this.board;
-            var grid = board.grid;
-            var x = grid.x - (grid.width / 2);
-            var y = grid.y - (grid.height / 2);
-            var width = board.width * grid.width;
-            var height = (board.height / 2) * grid.height;
-            this.rowMaskGameObject.fillRect(x, y, width, height);
-
-            return this;
+        chessToTileXYZ(chess) {
+            return this.board.chessToTileXYZ(chess);
         }
 
         worldXYToChess(worldX, worldY) {
@@ -2876,23 +3204,10 @@
         tileXYToChess(tileX, tileY) {
             return this.board.tileXYZToChess(tileX, tileY, this.chessTileZ);
         }
-
-        getNeighborChessAtAngle(chess, angle) {
-            var direction = this.board.angleSnapToDirection(chess, angle);
-            return this.getNeighborChessAtDirection(chess, direction);
-        }
-
-        getNeighborChessAtDirection(chess, direction) {
-            var neighborTileXY = this.board.getNeighborTileXY(chess, direction);
-            var neighborChess = (neighborTileXY) ?
-                this.board.tileXYZToChess(neighborTileXY.x, neighborTileXY.y, this.chessTileZ) :
-                null;
-            return neighborChess;
-        }
     }
 
     Object.assign(
-        Board.prototype,
+        BoardWrapper.prototype,
         Methods
     );
 
@@ -2910,13 +3225,15 @@
             // Touch control
             this.scene.input
                 .on('pointerdown', this.selectChess1, this)
-                .on('pointermove', this.selectChess2, this);
+                .on('pointermove', this.selectChess2, this)
+                .on('pointerup', this.pickChess, this);
         }
 
         shutdown() {
             this.scene.input
                 .off('pointerdown', this.selectChess1, this)
-                .off('pointermove', this.selectChess2, this);
+                .off('pointermove', this.selectChess2, this)
+                .off('pointerup', this.pickChess, this);
             this.bejeweled = undefined;
             this.scene = undefined;
         }
@@ -2957,12 +3274,23 @@
                 this.bejeweled.selectChess2(chess);
             }
         }
+
+        pickChess(pointer) {
+            if (!this.enable) {
+                return this;
+            }
+            var chess = this.bejeweled.worldXYToChess(pointer.worldX, pointer.worldY);
+            if (chess && (chess === this.bejeweled.getSelectedChess1())) {
+                this.bejeweled.pickChess(chess);
+            }
+        }
     }
 
+    const SetStruct = Phaser.Structs.Set;
     class WaitEvents {
         constructor(completeCallback, scope) {
             this.setCompleteCallback(completeCallback, scope);
-            this.events = new Set();
+            this.events = new SetStruct();
         }
 
         shutdown() {
@@ -2988,7 +3316,7 @@
             var callback = function () {
                 self.remove(callback);
             };
-            this.events.add(callback);
+            this.events.set(callback);
             return callback;
         }
 
@@ -3038,6 +3366,11 @@
             return this;
         },
 
+        pickChess(chess) {
+            this.mainState.pickChess(chess);
+            return this;
+        },
+
         setInputEnable(enable) {
             if (this.input) {
                 this.input.setEnable(enable);
@@ -3047,8 +3380,9 @@
     };
 
     var BoardMethods = {
-        setBoardSize(width, height) {
-            this.board.setBoardWidth(width).setBoardHeight(height);
+        // Board size
+        setActivateBoardSize(width, height) {
+            this.boardWrapper.setActivateWidth(width).setActivateHeight(height);
             return this;
         },
 
@@ -3058,23 +3392,48 @@
         },
 
         getChessTileZ() {
-            return this.board.chessTileZ;
+            return this.boardWrapper.chessTileZ;
+        },
+
+        chessToTileXY(chess) {
+            return this.boardWrapper.chessToTileXYZ(chess);
         },
 
         worldXYToChess(worldX, worldY) {
-            return this.board.worldXYToChess(worldX, worldY);
+            return this.boardWrapper.worldXYToChess(worldX, worldY);
         },
 
         tileXYToChess(tileX, tileY) {
-            return this.board.tileXYToChess(tileX, tileY);
+            return this.boardWrapper.tileXYToChess(tileX, tileY);
         },
 
+        // Get chess
         getNeighborChessAtAngle(chess, angle) {
-            return this.board.getNeighborChessAtAngle(chess, angle);
+            return this.boardWrapper.getNeighborChessAtAngle(chess, angle);
         },
 
         getNeighborChessAtDirection(chess, direction) {
-            return this.board.getNeighborChessAtDirection(chess, direction);
+            return this.boardWrapper.getNeighborChessAtDirection(chess, direction);
+        },
+
+        getChessArray(out) {
+            return this.boardWrapper.getChessArray(out);
+        },
+
+        getChessArrayAtTileX(tileX, out) {
+            return this.boardWrapper.getChessArrayAtTileX(tileX, out);
+        },
+
+        getChessArrayAtTileY(tileY, out) {
+            return this.boardWrapper.getChessArrayAtTileY(tileY, out);
+        },
+
+        getChessArrayAtTileXYInRange(tileX, tileY, rangeX, rangeY, out) {
+            return this.boardWrapper.getChessArrayAtTileXYInRange(tileX, tileY, rangeX, rangeY, out);
+        },
+
+        getChessArrayWithSymbol(symbol, out) {
+            return this.boardWrapper.getChessArrayWithSymbol(symbol, out);
         },
 
         // State
@@ -3082,25 +3441,34 @@
             return this.mainState.state === 'SELECT1START';
         },
 
-        // Symbols
+        // Symbols of activate area
         dumpSymbols() {
-            return this.board.dumpSymbols();
+            return this.boardWrapper.dumpSymbols();
         },
 
         loadSymbols(symbols) {
-            this.board.setInitSymbols(symbols);
+            this.boardWrapper.setInitSymbols(symbols);
             this.mainState.goto('RESET');
+            return this;
+        },
+
+        // After picking piece
+        setEliminatingChess(chessArray) {
+            if (!Array.isArray(chessArray)) {
+                chessArray = [chessArray];
+            }
+            this.mainState.setEliminatingChess(chessArray);
             return this;
         },
 
         // Expose board instance
         getBoard() {
-            return this.board.board;
+            return this.boardWrapper.board;
         },
 
         // Expose match instance
         getMatch() {
-            return this.board.match;
+            return this.boardWrapper.match;
         }
     };
 
@@ -3187,10 +3555,9 @@
             super(scene, config);
             // this.scene
 
-            var rexBoardKey = GetValue(config, 'rexBoard', 'rexBoard');
-            this.rexBoard = scene[rexBoardKey];
+            this.rexBoard = scene[GetValue(config, 'rexBoard', 'rexBoard')];
 
-            this.board = new Board(this, config);
+            this.boardWrapper = new BoardWrapper(scene, config);
 
             var defaultInput = GetValue(config, 'input', true);
             if (defaultInput) {
@@ -3216,13 +3583,13 @@
             if (this.input) {
                 this.input.destroy();
             }
-            this.board.destroy();
+            this.boardWrapper.destroy();
             this.mainState.destroy();
             this.waitEvents.destroy();
 
             this.destroyDataManager();
 
-            this.board = undefined;
+            this.boardWrapper = undefined;
             this.mainState = undefined;
             this.input = undefined;
             this.waitEvents = undefined;

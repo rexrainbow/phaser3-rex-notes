@@ -16,15 +16,12 @@ class Demo extends Phaser.Scene {
         let bejeweled = new Bejeweled(this, {
             // debug: true, // Show state changed log
             board: {
-                grid: {
-                    gridType: 'quadGrid',
-                    x: 30,
-                    y: 30 - 600,
-                    cellWidth: 60,
-                    cellHeight: 60,
-                },
+                x: 0,
+                y: 0,
+                cellWidth: 60,
+                cellHeight: 60,
                 width: 10,
-                height: 20 // Prepared rows: upper 10 rows
+                height: 10
             },
             match: {
                 // wildcard: undefined
@@ -107,10 +104,18 @@ class Demo extends Phaser.Scene {
     update() { }
 }
 
-var colorArray = Phaser.Display.Color.HSVColorWheel(0.5, 1);
-var GetColor = function (symbol: number) {
-    // symbols: [0, 1, 2, 3, 4, 5]
-    return (colorArray[symbol * 60] as any).color;
+var colors = [
+    0xDC143C,  // 0: #DC143C
+    0x1E90FF,  // 1: #1E90FF
+    0x32CD32,  // 2: #32CD32
+    0xFFD700,  // 3: #FFD700
+    0x9400D3,  // 4: #9400D3
+    0xFF8C00,  // 5: #FF8C00
+    0x212121,  // 6: #212121
+    0xF5F5F5,  // 7: #F5F5F5
+]
+var GetColor = function (symbol) {
+    return colors[symbol];
 }
 
 var config = {

@@ -5,15 +5,16 @@ import FallingAllChess from '../actions/FallingAllChess.js';
 import IsPromise from '../../../plugins/utils/object/IsPromise.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
+const SetStruct = Phaser.Structs.Set;
 
 class State extends BaseState {
     constructor(bejeweled, config) {
         super(bejeweled, config);
-        // this.bejeweled = bejeweled;            // Bejeweled
-        // this.board = bejeweled.board;       // Bejeweled.board
+        // this.bejeweled = bejeweled;                // Bejeweled
+        // this.boardWrapper = bejeweled.boardWrapper;// Bejeweled.boardWrapper
 
         this.totalMatchedLinesCount = 0;
-        this.eliminatedChessArray;
+        this.eliminatedPieceArray = undefined;
 
         // Actions
         // Eliminating action
@@ -30,7 +31,7 @@ class State extends BaseState {
     shutdown() {
         super.shutdown();
 
-        this.eliminatedChessArray = undefined;
+        this.eliminatedPieceArray = undefined;
         // Actions
         this.eliminatingAction = undefined;
         this.fallingAction = undefined;
@@ -42,50 +43,64 @@ class State extends BaseState {
         return this;
     }
 
+    setEliminatedPieces(pieces) {
+        this.eliminatedPieceArray = [...new Set(pieces)];
+        return this;
+    }
+
+    getEliminatedPieces() {
+        return this.eliminatedPieceArray;
+    }
+
     // START
     enter_START() {
         this.totalMatchedLinesCount = 0;
 
-        this.bejeweled.emit('match-start', this.board.board, this.bejeweled);
+        this.bejeweled.emit('match-start', this.boardWrapper.board, this.bejeweled);
 
         this.next();
     }
     next_START() {
-        return 'MATCH3';
+        var pieces = this.getEliminatedPieces();
+        return (!pieces) ? 'MATCH3' : 'ELIMINATING';
     }
     // START
 
     // MATCH3
     enter_MATCH3() {
-        var matchedLines = this.board.getAllMatch();
+        var matchedLines = this.boardWrapper.getAllMatch();
 
-        this.bejeweled.emit('match', matchedLines, this.board.board, this.bejeweled);
+        this.bejeweled.emit('match', matchedLines, this.boardWrapper.board, this.bejeweled);
 
         var matchedLinesCount = matchedLines.length;
         this.totalMatchedLinesCount += matchedLinesCount;
+        var pieces;
         switch (matchedLinesCount) {
             case 0:
-                this.eliminatedChessArray = [];
+                pieces = [];
                 break;
             case 1:
-                this.eliminatedChessArray = Array.from(matchedLines[0]);
+                pieces = matchedLines[0].entries;
                 break;
             default:
                 // Put all chess to a set
-                var newSet = new Set();
+                var newSet = new SetStruct();
                 for (var i = 0; i < matchedLinesCount; i++) {
-                    matchedLines[i].forEach(function (value) {
-                        newSet.add(value);
+                    matchedLines[i].entries.forEach(function (value) {
+                        newSet.set(value);
                     });
                 }
-                this.eliminatedChessArray = Array.from(newSet);
+                pieces = newSet.entries;
                 break;
         }
+
+        this.setEliminatedPieces(pieces);
         this.next();
     }
     next_MATCH3() {
         var nextState;
-        if (this.eliminatedChessArray.length === 0) {
+        var pieces = this.getEliminatedPieces();
+        if (pieces && (pieces.length === 0)) {
             nextState = 'END'
         } else {
             nextState = 'ELIMINATING';
@@ -96,13 +111,13 @@ class State extends BaseState {
 
     // ELIMINATING
     enter_ELIMINATING() {
-        var board = this.board.board,
+        var board = this.boardWrapper.board,
             bejeweled = this.bejeweled,
-            chessArray = this.eliminatedChessArray;
+            pieces = this.getEliminatedPieces();
 
-        this.bejeweled.emit('eliminate', chessArray, board, bejeweled);
+        this.bejeweled.emit('eliminate', pieces, board, bejeweled);
 
-        var result = this.eliminatingAction(chessArray, board, bejeweled);
+        var result = this.eliminatingAction(pieces, board, bejeweled);
         if (IsPromise(result)) {
             bejeweled.waitEvent(bejeweled, 'eliminate.complete');
             result
@@ -112,7 +127,7 @@ class State extends BaseState {
         }
 
         // Remove eliminated chess
-        chessArray.forEach(board.removeChess, board);
+        pieces.forEach(board.removeChess, board);
 
         // To next state when all completed
         this.next();
@@ -121,13 +136,13 @@ class State extends BaseState {
         return 'FALLING';
     }
     exit_ELIMINATING() {
-        this.eliminatedChessArray = undefined;
+        this.setEliminatedPieces();
     }
     // ELIMINATING
 
     // FALLING
     enter_FALLING() {
-        var board = this.board.board,
+        var board = this.boardWrapper.board,
             bejeweled = this.bejeweled;
 
         this.bejeweled.emit('fall', board, bejeweled);
@@ -151,9 +166,9 @@ class State extends BaseState {
 
     // FILL
     enter_FILL() {
-        this.board.fill(true); // Fill upper board only
+        this.boardWrapper.fillPrepareRows();
 
-        this.bejeweled.emit('fill', this.board.board, this.bejeweled);
+        this.bejeweled.emit('fill', this.boardWrapper.board, this.bejeweled);
 
         this.next();
     }
@@ -164,7 +179,7 @@ class State extends BaseState {
 
     // END
     enter_END() {
-        this.bejeweled.emit('match-end', this.board.board, this.bejeweled);
+        this.bejeweled.emit('match-end', this.boardWrapper.board, this.bejeweled);
 
         this.emit('complete');
     }

@@ -2,11 +2,16 @@ import ComponentBase from '../../plugins/utils/componentbase/ComponentBase';
 import Board from '../../plugins/board/board/Board';
 import Match from '../../plugins/board/match/Match';
 import MoveTo from '../../plugins/board/moveto/MoveTo';
-import { TileXYType } from '../../plugins/board/types/Position';
+import { TileXYType, TileXYZType } from '../../plugins/board/types/Position';
 
 export default Bejeweled;
 
 declare namespace Bejeweled {
+    interface IBoardConfig {
+        x?: number, y?: number,
+        cellSize?: number, cellWidth?: number, cellHeight?: number,
+        width?: number, height?: number,
+    }
 
     type ChessSymbol = number | string;
 
@@ -41,7 +46,7 @@ declare namespace Bejeweled {
     interface IConfig {
         rexBoard?: string,
 
-        board: Board.IConfig,
+        board: IBoardConfig | Board.IConfig,
         match?: Match.IConfig,
 
         chess: {
@@ -153,6 +158,30 @@ declare class Bejeweled extends ComponentBase {
         chess: Phaser.GameObjects.GameObject | TileXYType,
         direction: number
     ): Phaser.GameObjects.GameObject;
+
+    getChessArray(
+        out?: Phaser.GameObjects.GameObject[]
+    ): Phaser.GameObjects.GameObject[];
+
+    getChessArrayAtTileX(
+        tileX: number,
+        out?: Phaser.GameObjects.GameObject[]
+    ): Phaser.GameObjects.GameObject[];
+
+    getChessArrayAtTileY(
+        tileY: number,
+        out?: Phaser.GameObjects.GameObject[]
+    ): Phaser.GameObjects.GameObject[];
+
+    getChessArrayAtTileXYInRange(
+        tileX: number, tileY: number, rangeX: number, rangeY: number,
+        out?: Phaser.GameObjects.GameObject[]
+    ): Phaser.GameObjects.GameObject[];
+
+    getChessArrayWithSymbol(
+        symbol: any,
+        out?: Phaser.GameObjects.GameObject[]
+    ): Phaser.GameObjects.GameObject[];
 
     isAwaitingInput(): boolean;
 
