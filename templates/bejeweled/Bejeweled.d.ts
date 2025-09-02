@@ -190,6 +190,22 @@ declare class Bejeweled extends ComponentBase {
         out?: Phaser.GameObjects.GameObject[]
     ): Phaser.GameObjects.GameObject[];
 
+    getSymbolAt(
+        tileX: number, tileY: number
+    ): Bejeweled.ChessSymbol;
+    getSymbolAt(
+        chess: Phaser.GameObjects.GameObject
+    ): Bejeweled.ChessSymbol;
+
+    setSymbolAt(
+        tileX: number, tileY: number,
+        newSymbol: Bejeweled.ChessSymbol
+    ): this;
+    setSymbolAt(
+        chess: Phaser.GameObjects.GameObject,
+        newSymbol: Bejeweled.ChessSymbol
+    ): this;
+
     isAwaitingInput(): boolean;
 
     dumpSymbols(): any[][];

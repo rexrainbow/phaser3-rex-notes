@@ -55,6 +55,15 @@ export default {
         return this.boardWrapper.getChessArrayWithSymbol(symbol, out);
     },
 
+    // Chess symbol
+    getSymbolAt(tileX, tileY) {
+        return this.boardWrapper.getSymbolAt(tileX, tileY);
+    },
+
+    setSymbolAt(tileX, tileY, newSymbol) {
+        this.boardWrapper.setSymbolAt(tileX, tileY, newSymbol);
+    },
+
     // State
     isAwaitingInput() {
         return this.mainState.state === 'SELECT1START';
