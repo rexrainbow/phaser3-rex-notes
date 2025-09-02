@@ -2,9 +2,10 @@ import ResizeGameObject from '../../../../plugins/utils/size/ResizeGameObject.js
 
 var LayoutChildren = function () {
     // LayoutChildren child
-    var child = this.child;
+    var child = this.child,
+        childConfig = child.rexSizer;
     var childWidth, childHeight;
-    if (!child.rexSizer.hidden) {
+    if (!childConfig.hidden) {
         // Set size
         switch (this.scrollMode) {
             case 0:
@@ -18,7 +19,6 @@ var LayoutChildren = function () {
                 break;
         }
 
-        childConfig = child.rexSizer;
         if (child.isRexSizer) {
             child.runLayout(this, childWidth, childHeight);
         } else if (!childConfig.noResize) {
