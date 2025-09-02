@@ -64,22 +64,22 @@ class Demo extends Phaser.Scene {
                 var symbol = chess.getData('symbol');
                 var tileXY = bejeweled.chessToTileXY(chess);
 
-                var chessSet = new Phaser.Structs.Set();
                 var chessArray = [];
                 switch (symbol) {
                     case 6:
+                        bejeweled.getChessArrayAtTileY(tileXY.y - 1, chessArray);
                         bejeweled.getChessArrayAtTileY(tileXY.y, chessArray);
+                        bejeweled.getChessArrayAtTileY(tileXY.y + 1, chessArray);
+                        bejeweled.getChessArrayAtTileX(tileXY.x - 1, chessArray);
                         bejeweled.getChessArrayAtTileX(tileXY.x, chessArray);
+                        bejeweled.getChessArrayAtTileX(tileXY.x + 1, chessArray);
                         break;
                     case 7:
                         bejeweled.getChessArrayAtTileXYInRange(tileXY.x, tileXY.y, 3, 3, chessArray);
                         break;
                 }
 
-                chessArray.forEach(function (chess) {
-                    chessSet.set(chess);
-                })
-                bejeweled.setEliminatingChess(chessSet.entries);
+                bejeweled.setEliminatingChess(chessArray);
 
             },
 

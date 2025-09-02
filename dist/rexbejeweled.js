@@ -1831,7 +1831,7 @@
         }
 
         setEliminatedPieces(pieces) {
-            this.eliminatedPieceArray = pieces;
+            this.eliminatedPieceArray = [...new Set(pieces)];
             return this;
         }
 
@@ -2520,7 +2520,7 @@
 
             var board = this.board;
             var startX = 0;
-            var endX = board.width;
+            var endX = board.width - 1;
             var startY = board.height / 2;
             var endY = board.height - 1;
 
@@ -2544,6 +2544,12 @@
             }
 
             var board = this.board;
+            var startX = 0;
+            var endX = board.width - 1;
+            if ((tileOX < startX) || (tileOX > endX)) {
+                return out;
+            }
+
             var startY = board.height / 2;
             var endY = board.height - 1;
 
@@ -2565,8 +2571,14 @@
             }
 
             var board = this.board;
+            var startY = board.height / 2;
+            var endY = board.height - 1;
+            if ((tileOY < startY) || (tileOY > endY)) {
+                return out;
+            }
+
             var startX = 0;
-            var endX = board.width;
+            var endX = board.width - 1;
 
             var tileZ = this.chessTileZ;
             for (var tileX = startX; tileX <= endX; tileX++) {
@@ -2587,7 +2599,7 @@
 
             var board = this.board;
             var startX = 0;
-            var endX = board.width;
+            var endX = board.width - 1;
             var startY = board.height / 2;
             var endY = board.height - 1;
 
@@ -2610,6 +2622,36 @@
             return out;
         },
 
+        getChessArrayWithSymbol(symbol, out) {
+            if (out === undefined) {
+                out = [];
+            }
+
+            var board = this.board;
+            var startX = 0;
+            var endX = board.width - 1;
+            var startY = board.height / 2;
+            var endY = board.height - 1;
+
+            var tileZ = this.chessTileZ;
+            for (var tileY = startY; tileY <= endY; tileY++) {
+                for (var tileX = startX; tileX <= endX; tileX++) {
+                    var chess = board.tileXYZToChess(tileX, tileY, tileZ);
+                    if (chess === null) {
+                        continue;
+                    }
+
+                    if (chess.getData('symbol') !== symbol) {
+                        continue;
+                    }
+
+                    out.push(chess);
+                }
+            }
+
+            return out;
+        },
+
         getNeighborChessAtAngle(chess, angle) {
             var direction = this.board.angleSnapToDirection(chess, angle);
             return this.getNeighborChessAtDirection(chess, direction);
@@ -2621,7 +2663,7 @@
                 this.board.tileXYZToChess(neighborTileXY.x, neighborTileXY.y, this.chessTileZ) :
                 null;
             return neighborChess;
-        }
+        },
     };
 
     var Clear = function () {
@@ -2645,13 +2687,19 @@
     */
 
     var Reset = function () {
+        var board = this.board;
         // Destroy all chess
-        this.board.removeAllChess(true);
+        board.removeAllChess(true);
         // Fill chess (with initial symbol map)
         var symbols = this.initSymbols;
         this.initSymbols = undefined;
-        this.fillActivateArea(symbols);
-        this.fillPrepareRows();
+        var boardHeight = board.height;
+        if (symbols && (symbols.length === boardHeight)) {
+            this.fillAllRows(symbols);
+        } else {
+            this.fillActivateArea(symbols);
+            this.fillPrepareRows();
+        }
         // Break match3
         this.breakMatch3();
     };
@@ -2725,8 +2773,8 @@
     1. Fill activate area
     */
 
-    var FillActivateArea = function (initSymbols) {
-        var hasInitSymbols = (initSymbols !== undefined);
+    var FillActivateArea = function (symbols) {
+        var hasInitSymbols = (symbols !== undefined);
         var board = this.board;
         var height = board.height;
         var startY = (height / 2);
@@ -2734,13 +2782,13 @@
         var chessTileZ = this.chessTileZ;
         for (var tileY = startY; tileY <= endY; tileY++) {
             for (var tileX = 0, width = board.width; tileX < width; tileX++) {
-                if (board.contains(tileX, tileY, chessTileZ)) { // not empty                
+                if (board.contains(tileX, tileY, chessTileZ)) { // not empty
                     continue;
                 }
 
                 var candidateSymbols = this.candidateSymbols;
                 if (hasInitSymbols) {
-                    var symbol = initSymbols[tileY - startY][tileX];
+                    var symbol = symbols[tileY - startY][tileX];
                     if (symbol !== '?') {
                         candidateSymbols = symbol;
                     }
@@ -2763,6 +2811,25 @@
                 }
 
                 this.createChess(tileX, tileY, this.candidateSymbols);
+            }
+        }
+    };
+
+    var FillAllRows = function (symbols) {
+        var board = this.board;
+        board.removeAllChess(true);
+
+        var height = board.height;
+        var startY = 0;
+        var endY = height - 1;
+        for (var tileY = startY; tileY <= endY; tileY++) {
+            for (var tileX = 0, width = board.width; tileX < width; tileX++) {
+                var candidateSymbols = this.candidateSymbols;
+                var symbol = symbols[tileY - startY][tileX];
+                if (symbol !== '?') {
+                    candidateSymbols = symbol;
+                }
+                this.createChess(tileX, tileY, candidateSymbols);
             }
         }
     };
@@ -2915,11 +2982,12 @@
     };
 
     var DumpSymbols = function () {
+        // Dump symbols of all grids
         var board = this.board;
         var chessTileZ = this.chessTileZ;
         var board = this.board;
         var height = board.height;
-        var startY = (height / 2);
+        var startY = 0;
         var endY = height - 1;
 
         var symbols = [];
@@ -2998,6 +3066,7 @@
         createChess: CreateChess,
         fillActivateArea: FillActivateArea,
         fillPrepareRows: FillPrepareRows,
+        fillAllRows: FillAllRows,
         breakMatch3: BreakMatch3,
         preTest: PreTest,
         getAllMatch: GetAllMatch,
@@ -3361,6 +3430,10 @@
 
         getChessArrayAtTileXYInRange(tileX, tileY, rangeX, rangeY, out) {
             return this.boardWrapper.getChessArrayAtTileXYInRange(tileX, tileY, rangeX, rangeY, out);
+        },
+
+        getChessArrayWithSymbol(symbol, out) {
+            return this.boardWrapper.getChessArrayWithSymbol(symbol, out);
         },
 
         // State

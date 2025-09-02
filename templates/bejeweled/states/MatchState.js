@@ -44,7 +44,7 @@ class State extends BaseState {
     }
 
     setEliminatedPieces(pieces) {
-        this.eliminatedPieceArray = pieces;
+        this.eliminatedPieceArray = [...new Set(pieces)];
         return this;
     }
 

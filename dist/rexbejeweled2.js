@@ -2726,6 +2726,36 @@
             return out;
         },
 
+        getChessArrayWithSymbol(symbol, out) {
+            if (out === undefined) {
+                out = [];
+            }
+
+            var board = this.board;
+            var startX = 0;
+            var endX = board.width;
+            var startY = board.height / 2;
+            var endY = board.height - 1;
+
+            var tileZ = this.chessTileZ;
+            for (var tileY = startY; tileY <= endY; tileY++) {
+                for (var tileX = startX; tileX <= endX; tileX++) {
+                    var chess = board.tileXYZToChess(tileX, tileY, tileZ);
+                    if (chess === null) {
+                        continue;
+                    }
+
+                    if (chess.getData('symbol') !== symbol) {
+                        continue;
+                    }
+
+                    out.push(chess);
+                }
+            }
+
+            return out;
+        },
+
         getNeighborChessAtAngle(chess, angle) {
             var direction = this.board.angleSnapToDirection(chess, angle);
             return this.getNeighborChessAtDirection(chess, direction);
@@ -3527,6 +3557,10 @@
 
         getChessArrayAtTileXYInRange(tileX, tileY, rangeX, rangeY, out) {
             return this.boardWrapper.getChessArrayAtTileXYInRange(tileX, tileY, rangeX, rangeY, out);
+        },
+
+        getNeighborChessAtDirection(chess, direction) {
+            return this.boardWrapper.getNeighborChessAtDirection(chess, direction);
         },
 
         // State

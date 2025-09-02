@@ -6,7 +6,7 @@ export default {
 
         var board = this.board;
         var startX = 0;
-        var endX = board.width;
+        var endX = board.width - 1;
         var startY = board.height / 2;
         var endY = board.height - 1;
 
@@ -30,6 +30,12 @@ export default {
         }
 
         var board = this.board;
+        var startX = 0;
+        var endX = board.width - 1;
+        if ((tileOX < startX) || (tileOX > endX)) {
+            return out;
+        }
+
         var startY = board.height / 2;
         var endY = board.height - 1;
 
@@ -51,8 +57,14 @@ export default {
         }
 
         var board = this.board;
+        var startY = board.height / 2;
+        var endY = board.height - 1;
+        if ((tileOY < startY) || (tileOY > endY)) {
+            return out;
+        }
+
         var startX = 0;
-        var endX = board.width;
+        var endX = board.width - 1;
 
         var tileZ = this.chessTileZ;
         for (var tileX = startX; tileX <= endX; tileX++) {
@@ -73,7 +85,7 @@ export default {
 
         var board = this.board;
         var startX = 0;
-        var endX = board.width;
+        var endX = board.width - 1;
         var startY = board.height / 2;
         var endY = board.height - 1;
 
@@ -103,7 +115,7 @@ export default {
 
         var board = this.board;
         var startX = 0;
-        var endX = board.width;
+        var endX = board.width - 1;
         var startY = board.height / 2;
         var endY = board.height - 1;
 
