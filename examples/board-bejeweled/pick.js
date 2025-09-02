@@ -48,16 +48,20 @@ class Demo extends Phaser.Scene {
             // initSymbols: initSymbols,
             chess: {
                 // pick random symbol from array, or a callback to return symbol
-                symbols() {
-                    const rand = Math.random() * 100;
-                    let sum = 0;
-                    for (let i = 0; i < probabilities.length; i++) {
-                        sum += probabilities[i];
-                        if (rand < sum) {
-                            return i;
+                symbols(board, tileX, tileY, excluded) {
+                    while (true) {
+                        const rand = Math.random() * 100;
+                        let sum = 0;
+                        for (let i = 0; i < probabilities.length; i++) {
+                            sum += probabilities[i];
+                            if (rand < sum) {
+                                if (!excluded || !excluded.includes(i)) {
+                                    return i;
+                                }
+                                break;
+                            }
                         }
                     }
-                    return probabilities.length - 1;
                 },
 
                 // User-defined chess game object

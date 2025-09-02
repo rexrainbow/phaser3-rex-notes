@@ -83,12 +83,12 @@ class State extends BaseState {
                 pieces = [];
                 break;
             case 1:
-                pieces = matchedLines[0].entries;
+                pieces = [...matchedLines[0]];
                 break;
             default:
                 pieces = [];
                 for (var i = 0; i < matchedLinesCount; i++) {
-                    pieces.push(...matchedLines[i].entries);
+                    pieces.push(...matchedLines[i]);
                 }
                 break;
         }

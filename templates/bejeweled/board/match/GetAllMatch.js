@@ -22,9 +22,8 @@ var GetAllMatch = function () {
 
 var SubSetTest = function (setA, setB) {
     // Return true if setB is a subset of setA
-    var itemsA = setA.entries;
-    for (var i = 0, cnt = itemsA.length; i < cnt; i++) {
-        if (!setB.has(itemsA[i])) {
+    for (let item of setB) {
+        if (!setA.has(item)) {
             return false;
         }
     }
