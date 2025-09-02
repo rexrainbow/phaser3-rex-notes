@@ -14364,6 +14364,30 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#pick" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pick
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pick">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#custom-pick-chess-action" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Pick chess Action
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#match-start" class="md-nav__link">
     <span class="md-ellipsis">
       Match start
@@ -15411,6 +15435,30 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#pick" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pick
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pick">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#custom-pick-chess-action" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Pick chess Action
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#match-start" class="md-nav__link">
     <span class="md-ellipsis">
       Match start
@@ -15635,6 +15683,7 @@
 </ul>
 <h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
 <ul>
+<li><a href="https://codepen.io/rexrainbow/pen/VYvVwoj">Pick item</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/wEVYoY">Events</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/XWWyELV">Custom input</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/rNdYYGB">Mask</a></li>
@@ -15685,15 +15734,12 @@
 <span class="w">    </span><span class="c1">// rexBoard: &#39;rexBoard&#39;,</span>
 
 <span class="w">    </span><span class="nx">board</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">grid</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nx">gridType</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;quadGrid&#39;</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">x</span><span class="o">:</span><span class="w"> </span><span class="mf">30</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">y</span><span class="o">:</span><span class="w"> </span><span class="mf">30</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">600</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">cellWidth</span><span class="o">:</span><span class="w"> </span><span class="mf">60</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">cellHeight</span><span class="o">:</span><span class="w"> </span><span class="mf">60</span><span class="p">,</span>
-<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nx">x</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">y</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">cellWidth</span><span class="o">:</span><span class="w"> </span><span class="mf">60</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">cellHeight</span><span class="o">:</span><span class="w"> </span><span class="mf">60</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">width</span><span class="o">:</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">height</span><span class="o">:</span><span class="w"> </span><span class="mf">20</span><span class="w"> </span><span class="c1">// Prepared rows: upper 10 rows</span>
+<span class="w">        </span><span class="nx">height</span><span class="o">:</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span>
 <span class="w">    </span><span class="p">},</span>
 <span class="w">    </span><span class="nx">match</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="c1">// wildcard: undefined</span>
@@ -15728,7 +15774,8 @@
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="c1">// tileZ: 1,</span>
 <span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="c1">// mask: false,</span>
+<span class="w">    </span><span class="c1">// initSymbols: [[...], [...]],</span>
+<span class="w">    </span><span class="c1">// mask: true,</span>
 
 <span class="w">    </span><span class="nx">placeAction</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">select1Action</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
@@ -15745,10 +15792,12 @@
 <ul>
 <li><code>rexBoard</code> : Key of 'rexBoard' plugin. Default is <code>'rexBoard'</code>.</li>
 <li>Board properties<ul>
-<li><code>board.width</code> : Board width in tiles.</li>
-<li><code>board.height</code> : <a href="#board-height">Board height</a> in tiles.</li>
-<li><code>board.grid.x</code>, <code>board.grid.y</code> : World position of tile (0, 0)</li>
-<li><code>board.grid.cellWidth</code>, <code>board.grid.cellHeight</code> : The width/height of the cell, in pixels.</li>
+<li><code>board.x</code>, <code>board.y</code> : Top-left position of visible area.</li>
+<li><code>board.cellWidth</code>, <code>board.cellHeight</code> : The width/height of the cell, in pixels.</li>
+<li><code>board.width</code>, <code>board.height</code> : Visible area, in tiles.<ul>
+<li>Total board size is <code>board.width x (board.height*2)</code>, the upper <code>board.width x board.height</code> area is for prepared chess.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>Chess properties<ul>
@@ -15757,6 +15806,7 @@
 <li><code>chess.moveTo.speed</code> : Constant moving speed of chess, in pixel per-second.</li>
 </ul>
 </li>
+<li><code>initSymbols</code> : Fill visible area with this 2d symbol array.</li>
 <li>Custom actions<ul>
 <li><code>placeAction</code> : <a href="#place-chess-action">Custom place chess Action</a></li>
 <li><code>select1Action</code> : <a href="#custom-select-first-chess-action">Custom select first chess Action</a></li>
@@ -15771,16 +15821,13 @@
 <li><code>input</code> : Set <code>true</code> to register default touch input logic.</li>
 </ul>
 </li>
-<li>Mask<ul>
 <li><code>mask</code> :<ul>
-<li><code>false</code> : No mask. Default behavior.</li>
-<li><code>true</code> : Mask <em>invisible</em> upper rows.<ol>
+<li><code>true</code> : Mask of visible area. Default behavior.<ol>
 <li>Create an internal layer</li>
-<li>Mask this internal layer.</li>
+<li>Mask this internal layer</li>
 </ol>
 </li>
-</ul>
-</li>
+<li><code>false</code> : No mask.</li>
 </ul>
 </li>
 </ul>
@@ -15790,7 +15837,7 @@
 <li>Bottom : <strong>Visible N rows</strong>, to swap chess and run matching.</li>
 <li>Upper : <strong>Invisible N rows</strong>, chess in these rows will move down, to fill bottom rows.</li>
 </ul>
-<p>For example, if amount of visible rows is <code>10</code>, <code>board.height</code> should set to <code>20</code>.</p>
+<p>For example, if amount of visible rows is <code>10</code>, <code>board.height</code> is set to <code>10</code>, and total board height is <code>board.height * 2</code></p>
 <h4 id="generate-symbol">Generate symbol<a class="headerlink" href="#generate-symbol" title="Permanent link">&para;</a></h4>
 <p>Symbols are declared in property <code>chess.symbols</code> in a symbol array like <code>[0, 1, 2, 3, 4, 5]</code>, or a callback to return a symbol. The callback also use <code>chess.scope</code> as the scope.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">board</span><span class="p">,</span><span class="w"> </span><span class="nx">tileX</span><span class="p">,</span><span class="w"> </span><span class="nx">tileY</span><span class="p">,</span><span class="w"> </span><span class="nx">excluded</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -15825,13 +15872,13 @@ Start((Start)) --&gt; RESET --&gt; PLACE
 PLACE --&gt; SELECT1START
 
 subgraph Select 1 states
-  SELECT1START --&gt; |Input| SELECT1
+  SELECT1START --&gt; |Input&lt;br&gt;pointerdown| SELECT1
 end
 
 SELECT1 --&gt; SELECT2START
 
 subgraph Select 2 states
-  SELECT2START --&gt; |Input| SELECT2
+  SELECT2START --&gt; |Input&lt;br&gt;pointermove| SELECT2
 end
 
 SELECT2START --&gt; SELECT1START
@@ -15845,11 +15892,18 @@ subgraph MATCH3 sub-state
   ELIMINATING --&gt; FALLING
   FALLING --&gt; FILL
   FILL --&gt; MATCH3
+
+  MatchStart --&gt; |Has eleminating chess&lt;br&gt;From PICK state| ELIMINATING
 end
 
-MatchEnd --&gt; |No-matched-line| UndoSwap[undo-swap] --&gt; SELECT1START
+SELECT2START --&gt; |Input&lt;br&gt;pointerup| PICK
+PICK --&gt; MatchStart[start]
+
+MatchEnd --&gt; |No-matched-line and&lt;br&gt;From SWAP| UndoSwap[undo-swap] --&gt; SELECT1START
 MatchEnd --&gt; |Has-matched-line and&lt;br&gt;Has-potational-matched-line| SELECT1START
-MatchEnd --&gt; |Has-matched-line and&lt;br&gt;No-potational-matched-line| RESET</code></pre>
+MatchEnd --&gt; |Has-matched-line and&lt;br&gt;No-potational-matched-line| RESET
+MatchEnd --&gt; |No-matched-line and&lt;br&gt;From PICK| SELECT1START
+</code></pre>
 <h4 id="place-chess-action">Place chess Action<a class="headerlink" href="#place-chess-action" title="Permanent link">&para;</a></h4>
 <p>Fire <code>'place'</code> event after filling chess, then run place action. </p>
 <div class="highlight"><pre><span></span><code><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;place&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">board</span><span class="p">,</span><span class="w"> </span><span class="nx">bejeweled</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -15946,6 +16000,41 @@ MatchEnd --&gt; |Has-matched-line and&lt;br&gt;No-potational-matched-line| RESET
 <li><code>bejeweled.getChessMoveTo(chess)</code> : Get <a href="../board-moveto/">moveTo behavior</a> of a chess.</li>
 <li><code>bejeweled.waitEvent(moveTo, 'complete')</code> : Wait 'complete' event of this <a href="../board-moveto/">moveTo behavior</a>.</li>
 </ul>
+<h4 id="pick">Pick<a class="headerlink" href="#pick" title="Permanent link">&para;</a></h4>
+<p>Pointerup on selected chess1, fire <code>'pick'</code> event</p>
+<div class="highlight"><pre><span></span><code><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;swap&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">chess1</span><span class="p">,</span><span class="w"> </span><span class="nx">board</span><span class="p">,</span><span class="w"> </span><span class="nx">bejeweled</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
+</code></pre></div>
+<ul>
+<li><code>board</code> : <a href="../board/">Board object</a>.</li>
+<li><code>bejeweled</code> : This bejeweled object.</li>
+</ul>
+<h5 id="custom-pick-chess-action">Custom Pick chess Action<a class="headerlink" href="#custom-pick-chess-action" title="Permanent link">&para;</a></h5>
+<p>Default pick action:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span><span class="w"> </span><span class="nx">board</span><span class="p">,</span><span class="w"> </span><span class="nx">bejeweled</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Do nothing</span>
+
+<span class="w">    </span><span class="c1">// var chessArray = [];</span>
+<span class="w">    </span><span class="c1">// bejeweled.getChessArrayAtTileX(tileX, chessArray);</span>
+<span class="w">    </span><span class="c1">// bejeweled.getChessArrayAtTileY(tileX, chessArray);</span>
+<span class="w">    </span><span class="c1">// bejeweled.getChessArrayAtTileXYInRange(tileX, tileY, rangeX, rangeY, chessArray);</span>
+<span class="w">    </span><span class="c1">// bejeweled.getChessArrayWithSymbol(symbol, chessArray);</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="w">    </span><span class="c1">// bejeweled.setEliminatingChess(chessArray);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Eliminating chess by using picked item</p>
+<ol>
+<li>Get Chess array by <ul>
+<li><code>bejeweled.getChessArrayAtTileX</code></li>
+<li><code>bejeweled.getChessArrayAtTileY</code></li>
+<li><code>bejeweled.getChessArrayAtTileXYInRange</code></li>
+<li><code>bejeweled.getChessArrayWithSymbol</code>.</li>
+</ul>
+</li>
+<li>Invoke <code>bejeweled.setEliminatingChess</code></li>
+</ol>
 <h4 id="match-start">Match start<a class="headerlink" href="#match-start" title="Permanent link">&para;</a></h4>
 <p>Fire <code>'match-start'</code> event</p>
 <div class="highlight"><pre><span></span><code><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;match-start&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">board</span><span class="p">,</span><span class="w"> </span><span class="nx">bejeweled</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -16128,9 +16217,15 @@ MatchEnd --&gt; |Has-matched-line and&lt;br&gt;No-potational-matched-line| RESET
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">chess</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="nx">chess</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">getSelectedChess1</span><span class="p">()))</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">selectChess2</span><span class="p">(</span><span class="nx">chess</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
-<span class="w">    </span><span class="p">},</span><span class="w"> </span><span class="nx">scene</span><span class="p">);</span>
+<span class="w">    </span><span class="p">},</span><span class="w"> </span><span class="nx">scene</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerup&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">){</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">chess</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">worldXYToChess</span><span class="p">(</span><span class="nx">pointer</span><span class="p">.</span><span class="nx">worldX</span><span class="p">,</span><span class="w"> </span><span class="nx">pointer</span><span class="p">.</span><span class="nx">worldY</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">chess</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="nx">chess</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">getSelectedChess1</span><span class="p">()))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">pickChess</span><span class="p">(</span><span class="nx">chess</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">})</span>
 </code></pre></div><ul>
-<li>Invoke <code>bejeweled.selectChess1(chess)</code>, and <code>bejeweled.selectChess2(chess)</code> under custom logic.</li>
+<li>Invoke <code>bejeweled.selectChess1(chess)</code>, and <code>bejeweled.selectChess2(chess)</code>, <code>bejeweled.pickChess(chess)</code> under custom logic.</li>
 </ul>
 </li>
 </ol>
@@ -16161,6 +16256,25 @@ MatchEnd --&gt; |Has-matched-line and&lt;br&gt;No-potational-matched-line| RESET
 </li>
 </ul>
 </li>
+<li>Get chess in visible area
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">chessArray</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">getChessArray</span><span class="p">();</span>
+<span class="c1">// bejeweled.getChessArray(out);</span>
+</code></pre></div></li>
+<li>Get chess at row or column, in visible area
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">chessArray</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">getChessArrayAtTileX</span><span class="p">(</span><span class="nx">tileX</span><span class="p">);</span>
+<span class="c1">// bejeweled.getChessArrayAtTileX(tileX, out);</span>
+</code></pre></div>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">chessArray</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">getChessArrayAtTileY</span><span class="p">(</span><span class="nx">tileY</span><span class="p">);</span>
+<span class="c1">// bejeweled.getChessArrayAtTileY(tileX, out);</span>
+</code></pre></div></li>
+<li>Get chess at tile position with range, in visible area
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">chessArray</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">getChessArrayAtTileXYInRange</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span><span class="w"> </span><span class="nx">tileY</span><span class="p">,</span><span class="w"> </span><span class="nx">rangeX</span><span class="p">,</span><span class="w"> </span><span class="nx">rangeY</span><span class="p">);</span>
+<span class="c1">// bejeweled.getChessArrayAtTileXYInRange(tileX, tileY, rangeX, rangeY, out);</span>
+</code></pre></div></li>
+<li>Get all chess with symobl, in visible area
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">chessArray</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">getChessArrayWithSymbol</span><span class="p">(</span><span class="nx">symbol</span><span class="p">);</span>
+<span class="nx">bejeweled</span><span class="p">.</span><span class="nx">getChessArrayWithSymbol</span><span class="p">(</span><span class="nx">symbol</span><span class="p">,</span><span class="w"> </span><span class="nx">out</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
 <h3 id="await-input">Await input<a class="headerlink" href="#await-input" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">isAwaitingInput</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">isAwaitingInput</span><span class="p">();</span>
@@ -16173,7 +16287,7 @@ MatchEnd --&gt; |Has-matched-line and&lt;br&gt;No-potational-matched-line| RESET
 <li>Save board
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">symbols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">dumpSymbols</span><span class="p">();</span>
 </code></pre></div><ul>
-<li><code>symbols</code> : A 2d symbols array.</li>
+<li><code>symbols</code> : A 2d symbol array of whole board including prepared rows and visible area.</li>
 <li>Invoke this method when <code>bejeweled.isAwaitingInput()</code> return <code>true</code></li>
 </ul>
 </li>
@@ -16231,6 +16345,12 @@ MatchEnd --&gt; |Has-matched-line and&lt;br&gt;No-potational-matched-line| RESET
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">match</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">getMatch</span><span class="p">();</span>
 </code></pre></div><ul>
 <li><code>match</code> : <a href="../board-match/">Match</a> instance.</li>
+</ul>
+</li>
+<li>Layer instance, for all chess game objects.
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">getLayer</span><span class="p">();</span>
+</code></pre></div><ul>
+<li><code>layer</code> : <a href="../layer/">Layer</a> instance.</li>
 </ul>
 </li>
 </ul>

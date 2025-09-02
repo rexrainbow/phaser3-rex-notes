@@ -7,6 +7,7 @@ Match3-like gameplay template.
 
 ## Live demos
 
+- [Pick item](https://codepen.io/rexrainbow/pen/VYvVwoj)
 - [Events](https://codepen.io/rexrainbow/pen/wEVYoY)
 - [Custom input](https://codepen.io/rexrainbow/pen/XWWyELV)
 - [Mask](https://codepen.io/rexrainbow/pen/rNdYYGB)
@@ -67,15 +68,12 @@ var bejeweled = new Bejeweled(scene, {
     // rexBoard: 'rexBoard',
 
     board: {
-        grid: {
-            gridType: 'quadGrid',
-            x: 30,
-            y: 30 - 600,
-            cellWidth: 60,
-            cellHeight: 60,
-        },
+        x: 0,
+        y: 0,
+        cellWidth: 60,
+        cellHeight: 60,
         width: 10,
-        height: 20 // Prepared rows: upper 10 rows
+        height: 10,
     },
     match: {
         // wildcard: undefined
@@ -110,7 +108,8 @@ var bejeweled = new Bejeweled(scene, {
         },
         // tileZ: 1,
     },
-    // mask: false,
+    // initSymbols: [[...], [...]],
+    // mask: true,
 
     placeAction: undefined,
     select1Action: undefined,
@@ -128,14 +127,15 @@ Configurations
 
 - `rexBoard` : Key of 'rexBoard' plugin. Default is `'rexBoard'`.
 - Board properties
-    - `board.width` : Board width in tiles.
-    - `board.height` : [Board height](#board-height) in tiles.
-    - `board.grid.x`, `board.grid.y` : World position of tile (0, 0)
-    - `board.grid.cellWidth`, `board.grid.cellHeight` : The width/height of the cell, in pixels.
+    - `board.x`, `board.y` : Top-left position of visible area.
+    - `board.cellWidth`, `board.cellHeight` : The width/height of the cell, in pixels.
+    - `board.width`, `board.height` : Visible area, in tiles.
+        - Total board size is `board.width x (board.height*2)`, the upper `board.width x board.height` area is for prepared chess.
 - Chess properties
     - `chess.symbols` : An array of possible symbols, or a callback to return a symbol. See [Generate symbol](#generate-symbol)
     - `chess.create`, `chess.scope` : Callback of [creating chess object](#create-chess-object).
     - `chess.moveTo.speed` : Constant moving speed of chess, in pixel per-second.
+- `initSymbols` : Fill visible area with this 2d symbol array.
 - Custom actions
     - `placeAction` : [Custom place chess Action](#place-chess-action)
     - `select1Action` : [Custom select first chess Action](#custom-select-first-chess-action)
@@ -146,12 +146,11 @@ Configurations
     - `fallingAction` : [Custon falling action](#custom-falling-action)
 - Touch input
     - `input` : Set `true` to register default touch input logic.
-- Mask
-    - `mask` :
-        - `false` : No mask. Default behavior.
-        - `true` : Mask *invisible* upper rows.
-            1. Create an internal layer
-            1. Mask this internal layer.
+- `mask` :
+    - `true` : Mask of visible area. Default behavior.
+        1. Create an internal layer
+        2. Mask this internal layer
+    - `false` : No mask.
 
 
 #### Board height
@@ -161,7 +160,7 @@ Board is separated into two parts: upper and bottom
 - Bottom : **Visible N rows**, to swap chess and run matching.
 - Upper : **Invisible N rows**, chess in these rows will move down, to fill bottom rows.
 
-For example, if amount of visible rows is `10`, `board.height` should set to `20`.
+For example, if amount of visible rows is `10`, `board.height` is set to `10`, and total board height is `board.height * 2`
 
 #### Generate symbol
 
@@ -207,13 +206,13 @@ Start((Start)) --> RESET --> PLACE
 PLACE --> SELECT1START
 
 subgraph Select 1 states
-  SELECT1START --> |Input| SELECT1
+  SELECT1START --> |Input<br>pointerdown| SELECT1
 end
 
 SELECT1 --> SELECT2START
 
 subgraph Select 2 states
-  SELECT2START --> |Input| SELECT2
+  SELECT2START --> |Input<br>pointermove| SELECT2
 end
 
 SELECT2START --> SELECT1START
@@ -227,11 +226,18 @@ subgraph MATCH3 sub-state
   ELIMINATING --> FALLING
   FALLING --> FILL
   FILL --> MATCH3
+
+  MatchStart --> |Has eleminating chess<br>From PICK state| ELIMINATING
 end
 
-MatchEnd --> |No-matched-line| UndoSwap[undo-swap] --> SELECT1START
+SELECT2START --> |Input<br>pointerup| PICK
+PICK --> MatchStart[start]
+
+MatchEnd --> |No-matched-line and<br>From SWAP| UndoSwap[undo-swap] --> SELECT1START
 MatchEnd --> |Has-matched-line and<br>Has-potational-matched-line| SELECT1START
 MatchEnd --> |Has-matched-line and<br>No-potational-matched-line| RESET
+MatchEnd --> |No-matched-line and<br>From PICK| SELECT1START
+
 ```
 
 #### Place chess Action
@@ -353,6 +359,48 @@ function (chess1, chess2, board, bejeweled) {
 
 - `bejeweled.getChessMoveTo(chess)` : Get [moveTo behavior](board-moveto.md) of a chess.
 - `bejeweled.waitEvent(moveTo, 'complete')` : Wait 'complete' event of this [moveTo behavior](board-moveto.md).
+
+
+#### Pick
+
+Pointerup on selected chess1, fire `'pick'` event
+
+```javascript
+bejeweled.on('swap', function(chess1, board, bejeweled) {
+
+}, scope);
+```
+
+- `board` : [Board object](board.md).
+- `bejeweled` : This bejeweled object.
+
+##### Custom Pick chess Action
+
+Default pick action:
+
+```javascript
+function (chess, board, bejeweled) {
+    // Do nothing
+
+    // var chessArray = [];
+    // bejeweled.getChessArrayAtTileX(tileX, chessArray);
+    // bejeweled.getChessArrayAtTileY(tileX, chessArray);
+    // bejeweled.getChessArrayAtTileXYInRange(tileX, tileY, rangeX, rangeY, chessArray);
+    // bejeweled.getChessArrayWithSymbol(symbol, chessArray);
+    // ...
+    // bejeweled.setEliminatingChess(chessArray);
+}
+```
+
+Eliminating chess by using picked item
+
+1. Get Chess array by 
+    - `bejeweled.getChessArrayAtTileX`
+    - `bejeweled.getChessArrayAtTileY`
+    - `bejeweled.getChessArrayAtTileXYInRange`
+    - `bejeweled.getChessArrayWithSymbol`.
+2. Invoke `bejeweled.setEliminatingChess`
+
 
 #### Match start
 
@@ -569,9 +617,15 @@ bejeweled.start();
             if (chess && (chess !== this.bejeweled.getSelectedChess1())) {
                 bejeweled.selectChess2(chess);
             }
-        }, scene);
+        }, scene)
+        .on('pointerup', function(pointer){
+            var chess = bejeweled.worldXYToChess(pointer.worldX, pointer.worldY);
+            if (chess && (chess === bejeweled.getSelectedChess1())) {
+                bejeweled.pickChess(chess);
+            }
+        })
     ```
-    - Invoke `bejeweled.selectChess1(chess)`, and `bejeweled.selectChess2(chess)` under custom logic.
+    - Invoke `bejeweled.selectChess1(chess)`, and `bejeweled.selectChess2(chess)`, `bejeweled.pickChess(chess)` under custom logic.
 
 
 Helper methods
@@ -599,6 +653,31 @@ Helper methods
         - `0` ~ `3` : [Quad grid](board-quadgrid.md#directions) in 4 directions mode.
         - `0` ~ `7` : [Quad grid](board-quadgrid.md#directions) in 8 directions mode.
         - `0` ~ `5` : [Hexagon grid](board-hexagongrid.md#directions).
+- Get chess in visible area
+    ```javascript
+    var chessArray = bejeweled.getChessArray();
+    // bejeweled.getChessArray(out);
+    ```
+- Get chess at row or column, in visible area
+    ```javascript
+    var chessArray = bejeweled.getChessArrayAtTileX(tileX);
+    // bejeweled.getChessArrayAtTileX(tileX, out);
+    ```
+    ```javascript
+    var chessArray = bejeweled.getChessArrayAtTileY(tileY);
+    // bejeweled.getChessArrayAtTileY(tileX, out);
+    ```
+- Get chess at tile position with range, in visible area
+    ```javascript
+    var chessArray = bejeweled.getChessArrayAtTileXYInRange(tileX, tileY, rangeX, rangeY);
+    // bejeweled.getChessArrayAtTileXYInRange(tileX, tileY, rangeX, rangeY, out);
+    ```
+- Get all chess with symobl, in visible area
+    ```javascript
+    var chessArray = bejeweled.getChessArrayWithSymbol(symbol);
+    bejeweled.getChessArrayWithSymbol(symbol, out);
+    ```
+
 
 ### Await input
 
@@ -614,7 +693,7 @@ isAwaitingInput = bejeweled.isAwaitingInput();
     ```javascript
     var symbols = bejeweled.dumpSymbols();
     ```
-    - `symbols` : A 2d symbols array.
+    - `symbols` : A 2d symbol array of whole board including prepared rows and visible area.
     - Invoke this method when `bejeweled.isAwaitingInput()` return `true`
 - Load board
     ```javascript
@@ -673,3 +752,8 @@ See [data manager](datamanager.md)
     var match = bejeweled.getMatch();
     ```
     - `match` : [Match](board-match.md) instance.
+- Layer instance, for all chess game objects.
+    ```javascript
+    var layer = bejeweled.getLayer();
+    ```
+    - `layer` : [Layer](layer.md) instance.
