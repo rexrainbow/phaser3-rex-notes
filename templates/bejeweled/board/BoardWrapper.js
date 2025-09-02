@@ -1,4 +1,5 @@
 import Methods from './methods/Methods.js';
+import { ClearMask } from '../../../plugins/utils/mask/MaskMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -47,7 +48,6 @@ class BoardWrapper {
 
         // Mask & layer
         this.activateAreaMaskGameObject = undefined;
-        this.activateAreaMask = undefined;
         this.layer = undefined;
 
         var layer = GetValue(config, 'layer', false);
@@ -65,9 +65,8 @@ class BoardWrapper {
         this.board.destroy();
 
         if (this.activateAreaMaskGameObject) {
-            this.layer.setMask();
+            ClearMask(this.layer)
             this.activateAreaMaskGameObject.destroy();
-            this.activateAreaMask.destroy();
         }
         if (this.layer) {
             this.layer.destroy();

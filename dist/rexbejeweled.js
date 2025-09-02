@@ -1792,7 +1792,7 @@
     };
 
     const GetValue$5 = Phaser.Utils.Objects.GetValue;
-    const SetStruct$2 = Phaser.Structs.Set;
+    const SetStruct = Phaser.Structs.Set;
 
     let State$1 = class State extends BaseState {
         constructor(bejeweled, config) {
@@ -1871,7 +1871,7 @@
                     break;
                 default:
                     // Put all chess to a set
-                    var newSet = new SetStruct$2();
+                    var newSet = new SetStruct();
                     for (var i = 0; i < matchedLinesCount; i++) {
                         matchedLines[i].entries.forEach(function (value) {
                             newSet.set(value);
@@ -2950,7 +2950,6 @@
         y: 0
     };
 
-    const SetStruct$1 = Phaser.Structs.Set;
     var GetAllMatch = function () {
         RefreshSymbolCache.call(this); // only refresh symbol cache once
         // Get match5, match4, match3
@@ -2958,7 +2957,7 @@
         var matchLines = [];
         for (var n = 5; n >= 3; n--) {
             GetMatchN.call(this, n, function (result, board) {
-                var newSet = new SetStruct$1(board.tileXYArrayToChessArray(result.tileXY, self.chessTileZ));
+                var newSet = new Set(board.tileXYArrayToChessArray(result.tileXY, self.chessTileZ));
                 for (var i = 0, cnt = matchLines.length; i < cnt; i++) {
                     if (SubSetTest(matchLines[i], newSet)) {
                         return; // not a new set
@@ -2974,7 +2973,7 @@
         // Return true if setB is a subset of setA
         var itemsA = setA.entries;
         for (var i = 0, cnt = itemsA.length; i < cnt; i++) {
-            if (!setB.contains(itemsA[i])) {
+            if (!setB.has(itemsA[i])) {
                 return false;
             }
         }
@@ -3004,6 +3003,127 @@
         return symbols;
     };
 
+    var GetRenderer = function (scene) {
+        scene = GetSceneObject(scene);
+        if (!scene) {
+            return null;
+        }
+
+        return scene.sys.renderer;
+    };
+
+    var IsWebGLRenderMode = function (scene) {
+        var renderer = GetRenderer(scene);
+        if (!renderer) {
+            return false;
+        }
+
+        return !!renderer.gl;
+    };
+
+    const MaskController = Phaser.Filters.Mask;
+
+    var CreateMaskObject = function (gameObject, invert) {
+        // invert : WebGL only feature
+
+        // A gameObject can own a (WEBGL) MaskController, or a (CANVAS) GeometryMask
+        // Share this MaskController/GeometryMask for all mask target game object
+        var maskObject = gameObject._maskObject;
+        if (maskObject) {
+            if ((invert !== undefined) && (maskObject.invert !== undefined)) {
+                maskObject.invert = invert;
+            }
+            return maskObject;
+        }
+
+        if (IsWebGLRenderMode(gameObject)) {
+            maskObject = new MaskController(gameObject.scene.cameras.main, gameObject, invert);
+
+        } else {
+            // CANVAS Only support GeometryMask
+            maskObject = gameObject.createGeometryMask();
+
+        }
+
+        gameObject._maskObject = maskObject;
+
+        // Destroy mask object when mask source game object is destroyed
+        gameObject.once('destroy', function () {
+            maskObject.destroy();
+            gameObject._maskObject = undefined;
+        });
+
+        return maskObject;
+    };
+
+    var SetMask = function (gameObject, maskGameObject, invert) {
+        var maskObject = CreateMaskObject(maskGameObject, invert);
+        // A (WEBGL) MaskController, or a (CANVAS) GeometryMask
+
+        if (gameObject.mask === maskObject) {
+            // The same mask object
+            return;
+        }
+
+        if (IsWebGLRenderMode(gameObject)) {
+            // WEBGL mask
+            if (!gameObject.filters) {
+                if (!gameObject.enableFilters) {
+                    return;
+                }
+
+                gameObject.enableFilters();
+            }
+
+            var filterList = gameObject.filters.external;
+            var list = filterList.list;
+
+            if (gameObject.mask) {
+                // Replace current mask controller
+                var index = list.indexOf(gameObject.mask);
+                list[index] = maskGameObject;
+            } else {
+                // Append mask controller
+                list.push(maskObject);
+            }
+
+        } else {
+            // CANVAS mask
+            if (!gameObject.setMask) {
+                return;
+            }
+        }
+
+        gameObject.mask = maskObject;
+    };
+
+    var ClearMask = function (gameObject) {
+        if (!gameObject.mask) {
+            return;
+        }
+
+        if (IsWebGLRenderMode(gameObject)) {
+            // WEBGL mask
+            var filterList = gameObject.filters.external;
+            var list = filterList.list;
+
+            // Remove current mask object from external filter list
+            var index = list.indexOf(gameObject.mask);
+            list.splice(index, 1);
+
+        } else {
+            // CANVAS mask
+            if (!gameObject.clearMask) {
+                return;
+            }
+
+        }
+
+        gameObject.mask = null;
+    };
+
+    const Graphics = Phaser.GameObjects.Graphics;
+
     var MaskMethods = {
         enableBoardLayer(layer) {
             if (this.layer) {
@@ -3020,10 +3140,9 @@
         resetBoardMask() {
             // Create Graphics game object, mask object
             if (!this.activateAreaMaskGameObject) {
-                this.activateAreaMaskGameObject = this.scene.make.graphics().setVisible(false);
-                this.activateAreaMask = this.activateAreaMaskGameObject.createGeometryMask();
+                this.activateAreaMaskGameObject = new Graphics(this.scene);
                 this.enableBoardLayer();
-                this.layer.setMask(this.activateAreaMask);
+                SetMask(this.layer, this.activateAreaMaskGameObject);
             }
 
             // Draw Graphics game object, a rectangle of activate area
@@ -3035,7 +3154,10 @@
             var y = worldTL.y - (grid.height / 2);
             var width = this.activateBoardWidth * grid.width;
             var height = this.activateBoardHeight * grid.height;
-            this.activateAreaMaskGameObject.fillRect(x, y, width, height);
+            this.activateAreaMaskGameObject
+                .clear()
+                .fillStyle(0xffffff)
+                .fillRect(x, y, width, height);
 
             return this;
         },
@@ -3127,7 +3249,6 @@
 
             // Mask & layer
             this.activateAreaMaskGameObject = undefined;
-            this.activateAreaMask = undefined;
             this.layer = undefined;
 
             var layer = GetValue$2(config, 'layer', false);
@@ -3145,9 +3266,8 @@
             this.board.destroy();
 
             if (this.activateAreaMaskGameObject) {
-                this.layer.setMask();
+                ClearMask(this.layer);
                 this.activateAreaMaskGameObject.destroy();
-                this.activateAreaMask.destroy();
             }
             if (this.layer) {
                 this.layer.destroy();
@@ -3286,11 +3406,10 @@
         }
     }
 
-    const SetStruct = Phaser.Structs.Set;
     class WaitEvents {
         constructor(completeCallback, scope) {
             this.setCompleteCallback(completeCallback, scope);
-            this.events = new SetStruct();
+            this.events = new Set();
         }
 
         shutdown() {
@@ -3316,7 +3435,7 @@
             var callback = function () {
                 self.remove(callback);
             };
-            this.events.set(callback);
+            this.events.add(callback);
             return callback;
         }
 
@@ -3469,6 +3588,11 @@
         // Expose match instance
         getMatch() {
             return this.boardWrapper.match;
+        },
+
+        // Expose masked layer instance
+        getLayer() {
+            return this.boardWrapper.layer;
         }
     };
 

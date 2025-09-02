@@ -54265,9 +54265,10 @@ void main (void) {
 
 	var LayoutChildren = function () {
 	    // LayoutChildren child
-	    var child = this.child;
+	    var child = this.child,
+	        childConfig = child.rexSizer;
 	    var childWidth, childHeight;
-	    if (!child.rexSizer.hidden) {
+	    if (!childConfig.hidden) {
 	        // Set size
 	        switch (this.scrollMode) {
 	            case 0:
@@ -54278,7 +54279,6 @@ void main (void) {
 	                break;
 	        }
 
-	        childConfig = child.rexSizer;
 	        if (child.isRexSizer) {
 	            child.runLayout(this, childWidth, childHeight);
 	        } else if (!childConfig.noResize) {

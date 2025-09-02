@@ -1,3 +1,7 @@
+import { SetMask } from '../../../../plugins/utils/mask/MaskMethods.js';
+
+const Graphics = Phaser.GameObjects.Graphics;
+
 export default {
     enableBoardLayer(layer) {
         if (this.layer) {
@@ -14,10 +18,9 @@ export default {
     resetBoardMask() {
         // Create Graphics game object, mask object
         if (!this.activateAreaMaskGameObject) {
-            this.activateAreaMaskGameObject = this.scene.make.graphics().setVisible(false);
-            this.activateAreaMask = this.activateAreaMaskGameObject.createGeometryMask();
+            this.activateAreaMaskGameObject = new Graphics(this.scene);
             this.enableBoardLayer();
-            this.layer.setMask(this.activateAreaMask);
+            SetMask(this.layer, this.activateAreaMaskGameObject);
         }
 
         // Draw Graphics game object, a rectangle of activate area
@@ -29,7 +32,10 @@ export default {
         var y = worldTL.y - (grid.height / 2);
         var width = this.activateBoardWidth * grid.width;
         var height = this.activateBoardHeight * grid.height;
-        this.activateAreaMaskGameObject.fillRect(x, y, width, height);
+        this.activateAreaMaskGameObject
+            .clear()
+            .fillStyle(0xffffff)
+            .fillRect(x, y, width, height);
 
         return this;
     },

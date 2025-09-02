@@ -88,5 +88,10 @@ export default {
     // Expose match instance
     getMatch() {
         return this.boardWrapper.match;
+    },
+
+    // Expose masked layer instance
+    getLayer() {
+        return this.boardWrapper.layer;
     }
 }

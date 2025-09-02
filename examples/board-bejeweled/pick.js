@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import BoardPlugin from '../../plugins/board-plugin.js';
 import Bejeweled from '../../templates/bejeweled/Bejeweled.js';
 
@@ -82,6 +82,8 @@ class Demo extends Phaser.Scene {
                 bejeweled.setEliminatingChess(chessArray);
 
             },
+
+            // mask: false,
 
             debug: true,
         });

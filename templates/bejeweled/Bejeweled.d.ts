@@ -207,6 +207,7 @@ declare class Bejeweled extends ComponentBase {
 
     getBoard(): Board;
     getMatch(): Match;
+    getLayer(): Phaser.GameObjects.Layer;
 
     // Custom eliminateChess, falling action
     waitEvent(
