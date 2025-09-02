@@ -2,6 +2,17 @@ import phaser from '../../../phaser/src/phaser.js';
 import BoardPlugin from '../../plugins/board-plugin.js';
 import Bejeweled from '../../templates/bejeweled/Bejeweled.js';
 
+const probabilities = [
+    15.8333, // 0
+    15.8333, // 1
+    15.8333, // 2
+    15.8333, // 3
+    15.8333, // 4
+    15.8333, // 5
+    4,       // 6
+    1        // 7
+];
+
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -34,10 +45,21 @@ class Demo extends Phaser.Scene {
                 width: 10,
                 height: 10
             },
-            initSymbols: initSymbols,
+            // initSymbols: initSymbols,
             chess: {
                 // pick random symbol from array, or a callback to return symbol
-                symbols: [0, 1, 2, 3, 4, 5],
+                // symbols: [0, 1, 2, 3, 4, 5],
+                symbols() {
+                    const rand = Math.random() * 100;
+                    let sum = 0;
+                    for (let i = 0; i < probabilities.length; i++) {
+                        sum += probabilities[i];
+                        if (rand < sum) {
+                            return i;
+                        }
+                    }
+                    return probabilities.length - 1;
+                },
 
                 // User-defined chess game object
                 create: function (board) {
