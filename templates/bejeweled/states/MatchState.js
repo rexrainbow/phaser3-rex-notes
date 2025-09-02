@@ -44,7 +44,10 @@ class State extends BaseState {
     }
 
     setEliminatedPieces(pieces) {
-        this.eliminatedPieceArray = [...new Set(pieces)];
+        if (Array.isArray(pieces)) {
+            pieces = [...new Set(pieces)];
+        }
+        this.eliminatedPieceArray = pieces;
         return this;
     }
 
@@ -83,14 +86,10 @@ class State extends BaseState {
                 pieces = matchedLines[0].entries;
                 break;
             default:
-                // Put all chess to a set
-                var newSet = new SetStruct();
+                pieces = [];
                 for (var i = 0; i < matchedLinesCount; i++) {
-                    matchedLines[i].entries.forEach(function (value) {
-                        newSet.set(value);
-                    });
+                    pieces.push(...matchedLines[i].entries);
                 }
-                pieces = newSet.entries;
                 break;
         }
 
