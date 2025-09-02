@@ -80,6 +80,21 @@ export default {
         return this;
     },
 
+    // Match accept/ignore list
+    setMatchAcceptList(acceptList) {
+        this.boardWrapper.setMatchAcceptList(acceptList);
+        return this;
+    },
+    setMatchIgnoreList(ignoreList) {
+        this.boardWrapper.setMatchIgnoreList(ignoreList);
+        return this;
+    },
+
+    // Rectangle of board's bounds
+    getBoardBounds(out) {
+        return this.boardWrapper.getBoardBounds(out);
+    },
+
     // Expose board instance
     getBoard() {
         return this.boardWrapper.board;
@@ -90,8 +105,9 @@ export default {
         return this.boardWrapper.match;
     },
 
-    // Expose masked layer instance
+    // Expose Layer instance
     getLayer() {
         return this.boardWrapper.layer;
     }
+
 }

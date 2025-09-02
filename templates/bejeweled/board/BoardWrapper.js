@@ -31,19 +31,28 @@ class BoardWrapper {
                 }
             })
             this.setActivateBoardWidth(boardWidth).setActivateBoardHeight(boardHeight);
-
         }
 
-        this.match = this.rexBoard.add.match(GetValue(config, 'match'));
+
+        var matchConfig = config.match || {};
+
+        this.matchAcceptList = matchConfig.accept;
+        delete matchConfig.accept;
+        this.matchIgnoreList = matchConfig.ignore;
+        delete matchConfig.ignore;
+
+        this.match = this.rexBoard.add.match(matchConfig);
         this.match.setBoard(this.board);
+
 
         this.initSymbols = GetValue(config, 'initSymbols'); // 2d array
         // configuration of chess
-        this.chessTileZ = GetValue(config, 'chess.tileZ', 1);
-        this.candidateSymbols = GetValue(config, 'chess.symbols');
-        this.chessCallbackScope = GetValue(config, 'chess.scope');
-        this.chessCreateCallback = GetValue(config, 'chess.create');
-        this.chessMoveTo = GetValue(config, 'chess.moveTo', {});
+        var chessConfig = config.chess;
+        this.chessTileZ = GetValue(chessConfig, 'tileZ', 1);
+        this.candidateSymbols = chessConfig.symbols;
+        this.chessCallbackScope = chessConfig.scope;
+        this.chessCreateCallback = chessConfig.create;
+        this.chessMoveTo = chessConfig.moveTo || {};
         this.chessMoveTo.occupiedTest = true;
 
         // Mask & layer

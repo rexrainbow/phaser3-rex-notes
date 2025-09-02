@@ -10,8 +10,10 @@ import BreakMatch3 from './BreakMatch3.js';
 import PreTest from './PreTest.js';
 import GetAllMatch from '../match/GetAllMatch.js';
 import DumpSymbols from './DumpSymbols.js';
+import GetBoardBounds from './GetBoardBounds.js';
 import MaskMethods from './MaskMethods.js';
 import ActivateAreaMethods from './ActivateAreaMethods.js';
+import MatchMethods from './MatchMethods.js';
 
 var Methods = {
     clear: Clear,
@@ -25,6 +27,7 @@ var Methods = {
     preTest: PreTest,
     getAllMatch: GetAllMatch,
     dumpSymbols: DumpSymbols,
+    getBoardBounds: GetBoardBounds,
 }
 
 Object.assign(
@@ -32,6 +35,7 @@ Object.assign(
     GetChessMethods,
     MaskMethods,
     ActivateAreaMethods,
+    MatchMethods,
 )
 
 export default Methods;

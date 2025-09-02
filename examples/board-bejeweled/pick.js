@@ -48,7 +48,6 @@ class Demo extends Phaser.Scene {
             // initSymbols: initSymbols,
             chess: {
                 // pick random symbol from array, or a callback to return symbol
-                // symbols: [0, 1, 2, 3, 4, 5],
                 symbols() {
                     const rand = Math.random() * 100;
                     let sum = 0;
@@ -80,6 +79,10 @@ class Demo extends Phaser.Scene {
                 moveTo: {
                     speed: 400
                 },
+            },
+
+            match: {
+                accept: [0, 1, 2, 3, 4, 5],
             },
 
             pickAction(chess, board, bejeweled) {
