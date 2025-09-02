@@ -20,7 +20,7 @@ var RandomSymbol = function (board, tileX, tileY, callback, scope, excluded) {
             symbol = GetRandom(symbols);
         }
 
-    } else if (typeof (obj) === 'function') {
+    } else if (typeof (callback) === 'function') {
         // symbols from return of callback
         if (scope) {
             symbol = callback.call(scope, board, tileX, tileY, excluded);
