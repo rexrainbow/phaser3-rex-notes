@@ -21,7 +21,10 @@ export default {
         }
 
         // Draw Graphics game object, a rectangle of activate area
-        this.activateAreaMaskGameObject.fillRectShape(this.getBoardBounds());
+        this.activateAreaMaskGameObject
+            .clear()
+            .fillStyle(0xffffff)
+            .fillRectShape(this.getBoardBounds());
 
         return this;
     },

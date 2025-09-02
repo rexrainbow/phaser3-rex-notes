@@ -109,6 +109,13 @@ var bejeweled = new Bejeweled(scene, {
         // tileZ: 1,
     },
     // initSymbols: [[...], [...]],
+    
+    match: {
+        accept: undefined,
+        ignore: undefined,
+    },
+
+
     // mask: true,
 
     placeAction: undefined,
@@ -136,6 +143,8 @@ Configurations
     - `chess.create`, `chess.scope` : Callback of [creating chess object](#create-chess-object).
     - `chess.moveTo.speed` : Constant moving speed of chess, in pixel per-second.
 - `initSymbols` : Fill visible area with this 2d symbol array.
+- Match:
+    - `match.accept`, `match.ignore` : A list of symbol, chess symbol in `match.ignore`, or not in `match.accept` will be ignored.
 - Custom actions
     - `placeAction` : [Custom place chess Action](#place-chess-action)
     - `select1Action` : [Custom select first chess Action](#custom-select-first-chess-action)

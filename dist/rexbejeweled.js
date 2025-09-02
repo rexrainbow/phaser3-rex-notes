@@ -1792,7 +1792,7 @@
     };
 
     const GetValue$5 = Phaser.Utils.Objects.GetValue;
-    const SetStruct = Phaser.Structs.Set;
+    Phaser.Structs.Set;
 
     let State$1 = class State extends BaseState {
         constructor(bejeweled, config) {
@@ -1831,7 +1831,10 @@
         }
 
         setEliminatedPieces(pieces) {
-            this.eliminatedPieceArray = [...new Set(pieces)];
+            if (Array.isArray(pieces)) {
+                pieces = [...new Set(pieces)];
+            }
+            this.eliminatedPieceArray = pieces;
             return this;
         }
 
@@ -1867,17 +1870,13 @@
                     pieces = [];
                     break;
                 case 1:
-                    pieces = matchedLines[0].entries;
+                    pieces = [...matchedLines[0]];
                     break;
                 default:
-                    // Put all chess to a set
-                    var newSet = new SetStruct();
+                    pieces = [];
                     for (var i = 0; i < matchedLinesCount; i++) {
-                        matchedLines[i].entries.forEach(function (value) {
-                            newSet.set(value);
-                        });
+                        pieces.push(...matchedLines[i]);
                     }
-                    pieces = newSet.entries;
                     break;
             }
 
@@ -2293,9 +2292,7 @@
 
         // SELECT1START
         enter_SELECT1START() {
-            this.selectedChess1 = undefined;
-            this.selectedChess2 = undefined;
-            this.pickedChess = undefined;
+            this.clearInput();
 
             this.bejeweled.emit('select1-start', this.boardWrapper.board, this.bejeweled);
         }
@@ -2465,9 +2462,9 @@
             var nextState;
             if (this.matchState.totalMatchedLinesCount === 0) {
                 // No matched line
-                if (this.prevState === 'SWAP') {
+                if (this.selectedChess2) {  // Can undo swap
                     nextState = 'UNDOSWAP';
-                } else { // PICK
+                } else {
                     nextState = 'SELECT1START';
                 }
             } else if (this.boardWrapper.preTest()) {
@@ -2505,10 +2502,34 @@
         }
         // UNDOSWAP
 
-        // debug
+
+        // Utils
+        clearInput() {
+            this.selectedChess1 = undefined;
+            this.selectedChess2 = undefined;
+            this.pickedChess = undefined;
+            return this;
+        }
+
+        isAwaitingInput() {
+            var state = this.state;
+            return (state === 'SELECT1START') || (state === 'SELECT2START');
+        }
+
+        runMatch3() {
+            if (!this.isAwaitingInput()) {
+                return this;
+            }
+            this.clearInput();
+            this.goto('MATCH3');
+            return this;
+        }
+
         printState() {
+            // debug
             console.log('Main state: ' + this.prevState + ' -> ' + this.state);
         }
+        // Utils
 
     }
 
@@ -2726,7 +2747,7 @@
                 symbol = GetRandom$1(symbols);
             }
 
-        } else if (typeof (obj) === 'function') {
+        } else if (typeof (callback) === 'function') {
             // symbols from return of callback
             if (scope) {
                 symbol = callback.call(scope, board, tileX, tileY, excluded);
@@ -2748,7 +2769,7 @@
             scope = this.chessCallbackScope;
 
         // Get symbol
-        var symbol = (Array.isArray(symbols)) ? RandomSymbol(board, tileX, tileY, symbols, scope) : symbols;
+        var symbol = RandomSymbol(board, tileX, tileY, symbols, scope);
         // Create game object
         var gameObject;
         if (scope) {
@@ -2847,7 +2868,16 @@
             if (chess == null) {
                 return null;
             }
-            return chess.getData('symbol');
+
+            var symbol = chess.getData('symbol');
+
+            if (self.matchAcceptList && !(symbol in self.matchAcceptList)) {
+                symbol = null;
+            } else if (self.matchIgnoreList && (symbol in self.matchIgnoreList)) {
+                symbol = null;
+            }
+
+            return symbol;
         });
     };
 
@@ -2971,9 +3001,8 @@
 
     var SubSetTest = function (setA, setB) {
         // Return true if setB is a subset of setA
-        var itemsA = setA.entries;
-        for (var i = 0, cnt = itemsA.length; i < cnt; i++) {
-            if (!setB.has(itemsA[i])) {
+        for (let item of setB) {
+            if (!setA.has(item)) {
                 return false;
             }
         }
@@ -3003,6 +3032,141 @@
         return symbols;
     };
 
+    var Rectangle = Phaser.Geom.Rectangle;
+    var GetBoardBounds = function (out) {
+        if (out === undefined) {
+            out = new Rectangle();
+        }
+
+        var board = this.board;
+        var grid = board.grid;
+
+        var worldTL = board.tileXYToWorldXY(0, board.height / 2);
+        var x = worldTL.x - (grid.width / 2);
+        var y = worldTL.y - (grid.height / 2);
+        var width = this.activateBoardWidth * grid.width;
+        var height = this.activateBoardHeight * grid.height;
+        out.setTo(x, y, width, height);
+
+        return out;
+    };
+
+    var MaskMethods = {
+        enableBoardLayer(layer) {
+            if (this.layer) {
+                return this;
+            }
+
+            if ((layer === undefined) || (layer === true)) {
+                layer = this.scene.add.layer();
+            }
+            this.layer = layer;
+            return this;
+        },
+
+        resetBoardMask() {
+            // Create Graphics game object, mask object
+            if (!this.activateAreaMaskGameObject) {
+                this.activateAreaMaskGameObject = this.scene.make.graphics().setVisible(false);
+                this.activateAreaMask = this.activateAreaMaskGameObject.createGeometryMask();
+                this.enableBoardLayer();
+                this.layer.setMask(this.activateAreaMask);
+            }
+
+            // Draw Graphics game object, a rectangle of activate area
+            this.activateAreaMaskGameObject
+                .clear()
+                .fillStyle(0xffffff)
+                .fillRectShape(this.getBoardBounds());
+
+            return this;
+        },
+
+    };
+
+    var ActivateAreaMethods = {
+        setActivateBoardWidth(width) {
+            this.setBoardWidth(width);
+            return this;
+        },
+
+        setActivateBoardHeight(height) {
+            this.setBoardHeight(height * 2);
+            return this;
+        },
+
+        isAtActivateArea(tileX, tileY) {
+            var boardHeight = this.board.height;
+            return (tileY >= boardHeight / 2) && (tileY <= boardHeight - 1);
+        }
+    };
+
+    var MatchMethods = {
+        setMatchAcceptList(acceptList) {
+            this.matchAcceptList = acceptList;
+            return this;
+        },
+
+        setMatchIgnoreList(ignoreList) {
+            this.matchIgnoreList = ignoreList;
+            return this;
+        }
+    };
+
+    var ChessSymbolMethods = {
+        getSymbolAt(tileX, tileY) {
+            var chess;
+            if (typeof (tileX) === 'number') {
+                chess = this.board.tileXYZToChess(tileX, tileY, this.chessTileZ);
+            } else {
+                chess = tileX;
+            }
+
+            return (chess) ? chess.getData('symbol') : null;
+        },
+
+        setSymbolAt(tileX, tileY, newSymbol) {
+            var chess;
+            if (typeof (tileX) === 'number') {
+                chess = this.board.tileXYZToChess(tileX, tileY, this.chessTileZ);
+            } else {
+                chess = tileX;
+                newSymbol = tileY;
+            }
+
+            if (chess) {
+                chess.setData('symbol', newSymbol);
+            }
+            return this;
+        },
+
+
+    };
+
+    var Methods = {
+        clear: Clear,
+        init: Init,
+        reset: Reset,
+        createChess: CreateChess,
+        fillActivateArea: FillActivateArea,
+        fillPrepareRows: FillPrepareRows,
+        fillAllRows: FillAllRows,
+        breakMatch3: BreakMatch3,
+        preTest: PreTest,
+        getAllMatch: GetAllMatch,
+        dumpSymbols: DumpSymbols,
+        getBoardBounds: GetBoardBounds,
+    };
+
+    Object.assign(
+        Methods,
+        GetChessMethods,
+        MaskMethods,
+        ActivateAreaMethods,
+        MatchMethods,
+        ChessSymbolMethods,
+    );
+
     var GetRenderer = function (scene) {
         scene = GetSceneObject(scene);
         if (!scene) {
@@ -3021,81 +3185,7 @@
         return !!renderer.gl;
     };
 
-    const MaskController = Phaser.Filters.Mask;
-
-    var CreateMaskObject = function (gameObject, invert) {
-        // invert : WebGL only feature
-
-        // A gameObject can own a (WEBGL) MaskController, or a (CANVAS) GeometryMask
-        // Share this MaskController/GeometryMask for all mask target game object
-        var maskObject = gameObject._maskObject;
-        if (maskObject) {
-            if ((invert !== undefined) && (maskObject.invert !== undefined)) {
-                maskObject.invert = invert;
-            }
-            return maskObject;
-        }
-
-        if (IsWebGLRenderMode(gameObject)) {
-            maskObject = new MaskController(gameObject.scene.cameras.main, gameObject, invert);
-
-        } else {
-            // CANVAS Only support GeometryMask
-            maskObject = gameObject.createGeometryMask();
-
-        }
-
-        gameObject._maskObject = maskObject;
-
-        // Destroy mask object when mask source game object is destroyed
-        gameObject.once('destroy', function () {
-            maskObject.destroy();
-            gameObject._maskObject = undefined;
-        });
-
-        return maskObject;
-    };
-
-    var SetMask = function (gameObject, maskGameObject, invert) {
-        var maskObject = CreateMaskObject(maskGameObject, invert);
-        // A (WEBGL) MaskController, or a (CANVAS) GeometryMask
-
-        if (gameObject.mask === maskObject) {
-            // The same mask object
-            return;
-        }
-
-        if (IsWebGLRenderMode(gameObject)) {
-            // WEBGL mask
-            if (!gameObject.filters) {
-                if (!gameObject.enableFilters) {
-                    return;
-                }
-
-                gameObject.enableFilters();
-            }
-
-            var filterList = gameObject.filters.external;
-            var list = filterList.list;
-
-            if (gameObject.mask) {
-                // Replace current mask controller
-                var index = list.indexOf(gameObject.mask);
-                list[index] = maskGameObject;
-            } else {
-                // Append mask controller
-                list.push(maskObject);
-            }
-
-        } else {
-            // CANVAS mask
-            if (!gameObject.setMask) {
-                return;
-            }
-        }
-
-        gameObject.mask = maskObject;
-    };
+    Phaser.Filters.Mask;
 
     var ClearMask = function (gameObject) {
         if (!gameObject.mask) {
@@ -3121,86 +3211,6 @@
 
         gameObject.mask = null;
     };
-
-    const Graphics = Phaser.GameObjects.Graphics;
-
-    var MaskMethods = {
-        enableBoardLayer(layer) {
-            if (this.layer) {
-                return this;
-            }
-
-            if ((layer === undefined) || (layer === true)) {
-                layer = this.scene.add.layer();
-            }
-            this.layer = layer;
-            return this;
-        },
-
-        resetBoardMask() {
-            // Create Graphics game object, mask object
-            if (!this.activateAreaMaskGameObject) {
-                this.activateAreaMaskGameObject = new Graphics(this.scene);
-                this.enableBoardLayer();
-                SetMask(this.layer, this.activateAreaMaskGameObject);
-            }
-
-            // Draw Graphics game object, a rectangle of activate area
-            var board = this.board;
-            var grid = board.grid;
-
-            var worldTL = board.tileXYToWorldXY(0, board.height / 2);
-            var x = worldTL.x - (grid.width / 2);
-            var y = worldTL.y - (grid.height / 2);
-            var width = this.activateBoardWidth * grid.width;
-            var height = this.activateBoardHeight * grid.height;
-            this.activateAreaMaskGameObject
-                .clear()
-                .fillStyle(0xffffff)
-                .fillRect(x, y, width, height);
-
-            return this;
-        },
-
-    };
-
-    var ActivateAreaMethods = {
-        setActivateBoardWidth(width) {
-            this.setBoardWidth(width);
-            return this;
-        },
-
-        setActivateBoardHeight(height) {
-            this.setBoardHeight(height * 2);
-            return this;
-        },
-
-        isAtActivateArea(tileX, tileY) {
-            var boardHeight = this.board.height;
-            return (tileY >= boardHeight / 2) && (tileY <= boardHeight - 1);
-        }
-    };
-
-    var Methods = {
-        clear: Clear,
-        init: Init,
-        reset: Reset,
-        createChess: CreateChess,
-        fillActivateArea: FillActivateArea,
-        fillPrepareRows: FillPrepareRows,
-        fillAllRows: FillAllRows,
-        breakMatch3: BreakMatch3,
-        preTest: PreTest,
-        getAllMatch: GetAllMatch,
-        dumpSymbols: DumpSymbols,
-    };
-
-    Object.assign(
-        Methods,
-        GetChessMethods,
-        MaskMethods,
-        ActivateAreaMethods,
-    );
 
     const GetValue$2 = Phaser.Utils.Objects.GetValue;
 
@@ -3232,19 +3242,28 @@
                     }
                 });
                 this.setActivateBoardWidth(boardWidth).setActivateBoardHeight(boardHeight);
-
             }
 
-            this.match = this.rexBoard.add.match(GetValue$2(config, 'match'));
+
+            var matchConfig = config.match || {};
+
+            this.matchAcceptList = matchConfig.accept;
+            delete matchConfig.accept;
+            this.matchIgnoreList = matchConfig.ignore;
+            delete matchConfig.ignore;
+
+            this.match = this.rexBoard.add.match(matchConfig);
             this.match.setBoard(this.board);
+
 
             this.initSymbols = GetValue$2(config, 'initSymbols'); // 2d array
             // configuration of chess
-            this.chessTileZ = GetValue$2(config, 'chess.tileZ', 1);
-            this.candidateSymbols = GetValue$2(config, 'chess.symbols');
-            this.chessCallbackScope = GetValue$2(config, 'chess.scope');
-            this.chessCreateCallback = GetValue$2(config, 'chess.create');
-            this.chessMoveTo = GetValue$2(config, 'chess.moveTo', {});
+            var chessConfig = config.chess;
+            this.chessTileZ = GetValue$2(chessConfig, 'tileZ', 1);
+            this.candidateSymbols = chessConfig.symbols;
+            this.chessCallbackScope = chessConfig.scope;
+            this.chessCreateCallback = chessConfig.create;
+            this.chessMoveTo = chessConfig.moveTo || {};
             this.chessMoveTo.occupiedTest = true;
 
             // Mask & layer
@@ -3476,16 +3495,19 @@
         },
 
         selectChess1(chess) {
+            // state === 'SELECT1START'
             this.mainState.selectChess1(chess);
             return this;
         },
 
         selectChess2(chess) {
+            // state === 'SELECT2START'
             this.mainState.selectChess2(chess);
             return this;
         },
 
         pickChess(chess) {
+            // state === 'SELECT2START'
             this.mainState.pickChess(chess);
             return this;
         },
@@ -3495,6 +3517,12 @@
                 this.input.setEnable(enable);
             }
             return this;
+        },
+
+        // State
+        isAwaitingInput() {
+            // state === 'SELECT1START' || state === 'SELECT2START'
+            return this.mainState.isAwaitingInput();
         },
     };
 
@@ -3555,9 +3583,13 @@
             return this.boardWrapper.getChessArrayWithSymbol(symbol, out);
         },
 
-        // State
-        isAwaitingInput() {
-            return this.mainState.state === 'SELECT1START';
+        // Chess symbol
+        getSymbolAt(tileX, tileY) {
+            return this.boardWrapper.getSymbolAt(tileX, tileY);
+        },
+
+        setSymbolAt(tileX, tileY, newSymbol) {
+            this.boardWrapper.setSymbolAt(tileX, tileY, newSymbol);
         },
 
         // Symbols of activate area
@@ -3580,6 +3612,21 @@
             return this;
         },
 
+        // Match accept/ignore list
+        setMatchAcceptList(acceptList) {
+            this.boardWrapper.setMatchAcceptList(acceptList);
+            return this;
+        },
+        setMatchIgnoreList(ignoreList) {
+            this.boardWrapper.setMatchIgnoreList(ignoreList);
+            return this;
+        },
+
+        // Rectangle of board's bounds
+        getBoardBounds(out) {
+            return this.boardWrapper.getBoardBounds(out);
+        },
+
         // Expose board instance
         getBoard() {
             return this.boardWrapper.board;
@@ -3590,10 +3637,11 @@
             return this.boardWrapper.match;
         },
 
-        // Expose masked layer instance
+        // Expose Layer instance
         getLayer() {
             return this.boardWrapper.layer;
         }
+
     };
 
     var WaitEventMethods = {
@@ -3672,6 +3720,18 @@
         },
     };
 
+    var CommandMethods = {
+        start() {
+            this.mainState.goto('START');
+            return this;
+        },
+
+        runMatch3() {
+            this.mainState.runMatch3();
+            return this;
+        }
+    };
+
     const GetValue = Phaser.Utils.Objects.GetValue;
 
     class Bejeweled extends ComponentBase {
@@ -3726,11 +3786,6 @@
             super.destroy(fromScene);
             return this;
         }
-
-        start() {
-            this.mainState.goto('START');
-            return this;
-        }
     }
 
     Object.assign(
@@ -3738,7 +3793,8 @@
         InputMethods,
         BoardMethods,
         WaitEventMethods,
-        DataManagerMethods
+        DataManagerMethods,
+        CommandMethods,
     );
 
     return Bejeweled;
