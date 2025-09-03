@@ -2789,8 +2789,8 @@
 
         // Set swappable to true by default
         gameObject.setData('swappable', true);
-        // Set clickable to true by default
-        gameObject.setData('clickable', true);
+        // Set clickable to false by default
+        gameObject.setData('clickable', false);
 
         // Set symbol, it also fires 'changedata-symbol' event
         gameObject.setData('symbol', symbol);
