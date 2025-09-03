@@ -14364,19 +14364,19 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#pick" class="md-nav__link">
+  <a href="#click" class="md-nav__link">
     <span class="md-ellipsis">
-      Pick
+      Click
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Pick">
+    <nav class="md-nav" aria-label="Click">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#custom-pick-chess-action" class="md-nav__link">
+  <a href="#custom-click-chess-action" class="md-nav__link">
     <span class="md-ellipsis">
-      Custom Pick chess Action
+      Custom Click chess Action
     </span>
   </a>
   
@@ -15435,19 +15435,19 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#pick" class="md-nav__link">
+  <a href="#click" class="md-nav__link">
     <span class="md-ellipsis">
-      Pick
+      Click
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Pick">
+    <nav class="md-nav" aria-label="Click">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#custom-pick-chess-action" class="md-nav__link">
+  <a href="#custom-click-chess-action" class="md-nav__link">
     <span class="md-ellipsis">
-      Custom Pick chess Action
+      Custom Click chess Action
     </span>
   </a>
   
@@ -15683,7 +15683,7 @@
 </ul>
 <h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="https://codepen.io/rexrainbow/pen/VYvVwoj">Pick item</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/VYvVwoj">Click item</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/wEVYoY">Events</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/XWWyELV">Custom input</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/rNdYYGB">Mask</a></li>
@@ -15746,7 +15746,7 @@
 <span class="w">        </span><span class="c1">// dirMask: undefined</span>
 <span class="w">    </span><span class="p">},</span>
 <span class="w">    </span><span class="nx">chess</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// pick random symbol from array, or a callback to return symbol</span>
+<span class="w">        </span><span class="c1">// click random symbol from array, or a callback to return symbol</span>
 <span class="w">        </span><span class="nx">symbols</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="mf">3</span><span class="p">,</span><span class="w"> </span><span class="mf">4</span><span class="p">,</span><span class="w"> </span><span class="mf">5</span><span class="p">],</span>
 <span class="w">        </span><span class="c1">// symbols: function(board, tileX, tileY, excluded) { return symbol; }</span>
 
@@ -15822,6 +15822,7 @@
 <li><code>placeAction</code> : <a href="#place-chess-action">Custom place chess Action</a></li>
 <li><code>select1Action</code> : <a href="#custom-select-first-chess-action">Custom select first chess Action</a></li>
 <li><code>select2Action</code> : <a href="#custom-select-second-chess-action">Custom select second chess Action</a></li>
+<li><code>clickAction</code> : <a href="#custom-click-chess-action">Custom click chess Action</a></li>
 <li><code>swapAction</code> : <a href="#custom-swap-action">Custon swap action</a></li>
 <li><code>undoSwapAction</code> : <a href="#custom-undo-swap-action">Custon undo-swap action</a></li>
 <li><code>eliminatingAction</code> : <a href="#custom-eliminating-action">Custon eliminating action</a></li>
@@ -15866,15 +15867,32 @@
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">gameObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">sprite</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">textureKey</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">// Initial &#39;symbol&#39; value</span>
 <span class="w">    </span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setData</span><span class="p">(</span><span class="s1">&#39;symbol&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">undefined</span><span class="p">);</span>
+
 <span class="w">    </span><span class="c1">// Add data changed event of &#39;symbol` key</span>
-<span class="w">    </span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;changedata_symbol&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">previousValue</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;changedata-symbol&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">previousValue</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="c1">// Change the appearance of game object via new symbol value</span>
 <span class="w">        </span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setFrame</span><span class="p">(</span><span class="nx">newFrame</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Override swappable and clickable, default values: swappable=trur, clickable=false </span>
+<span class="w">        </span><span class="nx">gameObject</span>
+<span class="w">          </span><span class="p">.</span><span class="nx">setData</span><span class="p">(</span><span class="s1">&#39;swappable&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span>
+<span class="w">          </span><span class="p">.</span><span class="nx">setData</span><span class="p">(</span><span class="s1">&#39;clickable&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span>
 <span class="w">    </span><span class="p">});</span>
+
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">gameObject</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>Each chess has a <code>symbol</code> value stored in <code>'symbol'</code> key in private data. Add data changed event of <code>'symbol'</code> key to change the appearance of game object via new symbol value.</p>
+<ul>
+<li>Each chess has a <code>symbol</code> value stored in <code>'symbol'</code> key in private data. Add data changed event of <code>'symbol'</code> key to change the appearance of game object via new symbol value.</li>
+<li>Each chess piece has <code>swappable</code> and <code>clickable</code> properties stored in its private data. These properties are assigned based on the piece's symbol.<ul>
+<li>Default values :<ul>
+<li><code>swappable = true</code></li>
+<li><code>clickable = false</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h3 id="states">States<a class="headerlink" href="#states" title="Permanent link">&para;</a></h3>
 <pre class="mermaid"><code>graph TD
 
@@ -15890,7 +15908,7 @@ SELECT1 --&gt; SELECT2START
 
 subgraph Select 2 states
   SELECT2START --&gt; |Wait input&lt;br&gt;pointermove&lt;br&gt;2nd chess| SELECT2
-  SELECT2START --&gt; |Wait input&lt;br&gt;pointerup&lt;br&gt;1st chess| PICK
+  SELECT2START --&gt; |Wait input&lt;br&gt;pointerup&lt;br&gt;1st chess| CLICK
 end
 
 SELECT2START --&gt; SELECT1START
@@ -15905,15 +15923,15 @@ subgraph MATCH3 sub-state
   FALLING --&gt; FILL
   FILL --&gt; MATCH3
 
-  MatchStart --&gt; |Has eleminating chess&lt;br&gt;From PICK state| ELIMINATING
+  MatchStart --&gt; |Has eleminating chess&lt;br&gt;From CLICK state| ELIMINATING
 end
 
-PICK --&gt; MatchStart[start]
+CLICK --&gt; MatchStart[start]
 
 MatchEnd --&gt; |No-matched-line and&lt;br&gt;From SWAP| UndoSwap[undo-swap] --&gt; SELECT1START
 MatchEnd --&gt; |Has-matched-line and&lt;br&gt;Has-potational-matched-line| SELECT1START
 MatchEnd --&gt; |Has-matched-line and&lt;br&gt;No-potational-matched-line| RESET
-MatchEnd --&gt; |No-matched-line and&lt;br&gt;From PICK| SELECT1START
+MatchEnd --&gt; |No-matched-line and&lt;br&gt;From CLICK| SELECT1START
 </code></pre>
 <h4 id="place-chess-action">Place chess Action<a class="headerlink" href="#place-chess-action" title="Permanent link">&para;</a></h4>
 <p>Fire <code>'place'</code> event after filling chess, then run place action. </p>
@@ -16011,8 +16029,8 @@ MatchEnd --&gt; |No-matched-line and&lt;br&gt;From PICK| SELECT1START
 <li><code>bejeweled.getChessMoveTo(chess)</code> : Get <a href="../board-moveto/">moveTo behavior</a> of a chess.</li>
 <li><code>bejeweled.waitEvent(moveTo, 'complete')</code> : Wait 'complete' event of this <a href="../board-moveto/">moveTo behavior</a>.</li>
 </ul>
-<h4 id="pick">Pick<a class="headerlink" href="#pick" title="Permanent link">&para;</a></h4>
-<p>Pointerup on selected chess1, fire <code>'pick'</code> event</p>
+<h4 id="click">Click<a class="headerlink" href="#click" title="Permanent link">&para;</a></h4>
+<p>Pointerup on selected chess1, fire <code>'click'</code> event</p>
 <div class="highlight"><pre><span></span><code><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;swap&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">chess1</span><span class="p">,</span><span class="w"> </span><span class="nx">board</span><span class="p">,</span><span class="w"> </span><span class="nx">bejeweled</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
@@ -16021,8 +16039,8 @@ MatchEnd --&gt; |No-matched-line and&lt;br&gt;From PICK| SELECT1START
 <li><code>board</code> : <a href="../board/">Board object</a>.</li>
 <li><code>bejeweled</code> : This bejeweled object.</li>
 </ul>
-<h5 id="custom-pick-chess-action">Custom Pick chess Action<a class="headerlink" href="#custom-pick-chess-action" title="Permanent link">&para;</a></h5>
-<p>Default pick action:</p>
+<h5 id="custom-click-chess-action">Custom Click chess Action<a class="headerlink" href="#custom-click-chess-action" title="Permanent link">&para;</a></h5>
+<p>Default click action:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span><span class="w"> </span><span class="nx">board</span><span class="p">,</span><span class="w"> </span><span class="nx">bejeweled</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// Do nothing</span>
 
@@ -16035,7 +16053,7 @@ MatchEnd --&gt; |No-matched-line and&lt;br&gt;From PICK| SELECT1START
 <span class="w">    </span><span class="c1">// bejeweled.setEliminatingChess(chessArray);</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>Eliminating chess by using picked item</p>
+<p>Eliminating chess by using clicked item</p>
 <ol>
 <li>Get Chess array by <ul>
 <li><code>bejeweled.getChessArrayAtTileX</code></li>
@@ -16232,11 +16250,11 @@ MatchEnd --&gt; |No-matched-line and&lt;br&gt;From PICK| SELECT1START
 <span class="w">    </span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerup&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">){</span>
 <span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">chess</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">worldXYToChess</span><span class="p">(</span><span class="nx">pointer</span><span class="p">.</span><span class="nx">worldX</span><span class="p">,</span><span class="w"> </span><span class="nx">pointer</span><span class="p">.</span><span class="nx">worldY</span><span class="p">);</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">chess</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="nx">chess</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">getSelectedChess1</span><span class="p">()))</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">pickChess</span><span class="p">(</span><span class="nx">chess</span><span class="p">);</span>
+<span class="w">            </span><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">clickChess</span><span class="p">(</span><span class="nx">chess</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">})</span>
 </code></pre></div><ul>
-<li>Invoke <code>bejeweled.selectChess1(chess)</code>, and <code>bejeweled.selectChess2(chess)</code>, <code>bejeweled.pickChess(chess)</code> under custom logic.</li>
+<li>Invoke <code>bejeweled.selectChess1(chess)</code>, and <code>bejeweled.selectChess2(chess)</code>, <code>bejeweled.clickChess(chess)</code> under custom logic.</li>
 </ul>
 </li>
 </ol>

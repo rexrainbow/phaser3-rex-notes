@@ -7,7 +7,7 @@ Match3-like gameplay template.
 
 ## Live demos
 
-- [Pick item](https://codepen.io/rexrainbow/pen/VYvVwoj)
+- [Click item](https://codepen.io/rexrainbow/pen/VYvVwoj)
 - [Events](https://codepen.io/rexrainbow/pen/wEVYoY)
 - [Custom input](https://codepen.io/rexrainbow/pen/XWWyELV)
 - [Mask](https://codepen.io/rexrainbow/pen/rNdYYGB)
@@ -80,7 +80,7 @@ var bejeweled = new Bejeweled(scene, {
         // dirMask: undefined
     },
     chess: {
-        // pick random symbol from array, or a callback to return symbol
+        // click random symbol from array, or a callback to return symbol
         symbols: [0, 1, 2, 3, 4, 5],
         // symbols: function(board, tileX, tileY, excluded) { return symbol; }
 
@@ -149,6 +149,7 @@ Configurations
     - `placeAction` : [Custom place chess Action](#place-chess-action)
     - `select1Action` : [Custom select first chess Action](#custom-select-first-chess-action)
     - `select2Action` : [Custom select second chess Action](#custom-select-second-chess-action)
+    - `clickAction` : [Custom click chess Action](#custom-click-chess-action)
     - `swapAction` : [Custon swap action](#custom-swap-action)
     - `undoSwapAction` : [Custon undo-swap action](#custom-undo-swap-action)
     - `eliminatingAction` : [Custon eliminating action](#custom-eliminating-action)
@@ -194,16 +195,28 @@ function(board) {
     var gameObject = scene.add.sprite(0, 0, textureKey, frame);
     // Initial 'symbol' value
     gameObject.setData('symbol', undefined);
+
     // Add data changed event of 'symbol` key
-    gameObject.data.events.on('changedata_symbol', function (gameObject, value, previousValue) {
+    gameObject.data.events.on('changedata-symbol', function (gameObject, value, previousValue) {
         // Change the appearance of game object via new symbol value
         gameObject.setFrame(newFrame);
+
+        // Override swappable and clickable, default values: swappable=trur, clickable=false 
+        gameObject
+          .setData('swappable', true)
+          .setData('clickable', false)
     });
+
     return gameObject;
 }
 ```
 
-Each chess has a `symbol` value stored in `'symbol'` key in private data. Add data changed event of `'symbol'` key to change the appearance of game object via new symbol value.
+- Each chess has a `symbol` value stored in `'symbol'` key in private data. Add data changed event of `'symbol'` key to change the appearance of game object via new symbol value.
+- Each chess piece has `swappable` and `clickable` properties stored in its private data. These properties are assigned based on the piece's symbol.
+    - Default values :
+        - `swappable = true`
+        - `clickable = false`
+
 
 ### States
 
@@ -222,7 +235,7 @@ SELECT1 --> SELECT2START
 
 subgraph Select 2 states
   SELECT2START --> |Wait input<br>pointermove<br>2nd chess| SELECT2
-  SELECT2START --> |Wait input<br>pointerup<br>1st chess| PICK
+  SELECT2START --> |Wait input<br>pointerup<br>1st chess| CLICK
 end
 
 SELECT2START --> SELECT1START
@@ -237,15 +250,15 @@ subgraph MATCH3 sub-state
   FALLING --> FILL
   FILL --> MATCH3
 
-  MatchStart --> |Has eleminating chess<br>From PICK state| ELIMINATING
+  MatchStart --> |Has eleminating chess<br>From CLICK state| ELIMINATING
 end
 
-PICK --> MatchStart[start]
+CLICK --> MatchStart[start]
 
 MatchEnd --> |No-matched-line and<br>From SWAP| UndoSwap[undo-swap] --> SELECT1START
 MatchEnd --> |Has-matched-line and<br>Has-potational-matched-line| SELECT1START
 MatchEnd --> |Has-matched-line and<br>No-potational-matched-line| RESET
-MatchEnd --> |No-matched-line and<br>From PICK| SELECT1START
+MatchEnd --> |No-matched-line and<br>From CLICK| SELECT1START
 
 ```
 
@@ -370,9 +383,9 @@ function (chess1, chess2, board, bejeweled) {
 - `bejeweled.waitEvent(moveTo, 'complete')` : Wait 'complete' event of this [moveTo behavior](board-moveto.md).
 
 
-#### Pick
+#### Click
 
-Pointerup on selected chess1, fire `'pick'` event
+Pointerup on selected chess1, fire `'click'` event
 
 ```javascript
 bejeweled.on('swap', function(chess1, board, bejeweled) {
@@ -383,9 +396,9 @@ bejeweled.on('swap', function(chess1, board, bejeweled) {
 - `board` : [Board object](board.md).
 - `bejeweled` : This bejeweled object.
 
-##### Custom Pick chess Action
+##### Custom Click chess Action
 
-Default pick action:
+Default click action:
 
 ```javascript
 function (chess, board, bejeweled) {
@@ -401,7 +414,7 @@ function (chess, board, bejeweled) {
 }
 ```
 
-Eliminating chess by using picked item
+Eliminating chess by using clicked item
 
 1. Get Chess array by 
     - `bejeweled.getChessArrayAtTileX`
@@ -630,11 +643,11 @@ bejeweled.start();
         .on('pointerup', function(pointer){
             var chess = bejeweled.worldXYToChess(pointer.worldX, pointer.worldY);
             if (chess && (chess === bejeweled.getSelectedChess1())) {
-                bejeweled.pickChess(chess);
+                bejeweled.clickChess(chess);
             }
         })
     ```
-    - Invoke `bejeweled.selectChess1(chess)`, and `bejeweled.selectChess2(chess)`, `bejeweled.pickChess(chess)` under custom logic.
+    - Invoke `bejeweled.selectChess1(chess)`, and `bejeweled.selectChess2(chess)`, `bejeweled.clickChess(chess)` under custom logic.
 
 
 Helper methods
