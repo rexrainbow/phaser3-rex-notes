@@ -180,7 +180,7 @@ declare class Bejeweled extends ComponentBase {
         out?: Phaser.GameObjects.GameObject[]
     ): Phaser.GameObjects.GameObject[];
 
-    getChessArrayAtTileXYInRange(
+    getChessArrayWithinTileRadius(
         tileX: number, tileY: number, rangeX: number, rangeY: number,
         out?: Phaser.GameObjects.GameObject[]
     ): Phaser.GameObjects.GameObject[];

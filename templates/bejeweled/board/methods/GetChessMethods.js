@@ -78,7 +78,7 @@ export default {
         return out;
     },
 
-    getChessArrayAtTileXYInRange(tileOX, tileOY, rangeX, rangeY, out) {
+    getChessArrayWithinTileRadius(tileOX, tileOY, rangeX, rangeY, out) {
         if (out === undefined) {
             out = [];
         }

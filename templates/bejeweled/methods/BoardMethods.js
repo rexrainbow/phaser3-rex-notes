@@ -47,8 +47,8 @@ export default {
         return this.boardWrapper.getChessArrayAtTileY(tileY, out);
     },
 
-    getChessArrayAtTileXYInRange(tileX, tileY, rangeX, rangeY, out) {
-        return this.boardWrapper.getChessArrayAtTileXYInRange(tileX, tileY, rangeX, rangeY, out);
+    getChessArrayWithinTileRadius(tileX, tileY, rangeX, rangeY, out) {
+        return this.boardWrapper.getChessArrayWithinTileRadius(tileX, tileY, rangeX, rangeY, out);
     },
 
     getChessArrayWithSymbol(symbol, out) {

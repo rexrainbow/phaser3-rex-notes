@@ -152,7 +152,7 @@ class Demo extends Phaser.Scene {
                         bejeweled.getChessArrayAtTileX(tileXY.x + 1, chessArray);
                         break;
                     case 7:
-                        bejeweled.getChessArrayAtTileXYInRange(tileXY.x, tileXY.y, 3, 3, chessArray);
+                        bejeweled.getChessArrayWithinTileRadius(tileXY.x, tileXY.y, 3, 3, chessArray);
                         break;
                 }
 
