@@ -2162,7 +2162,7 @@
     Do nothing
     */
 
-    var PickChess = function (chess, board, bejeweled) {
+    var ClickChess = function (chess, board, bejeweled) {
         // Do nothing
     };
 
@@ -2205,7 +2205,7 @@
 
             this.selectedChess1;
             this.selectedChess2;
-            this.pickedChess;
+            this.clickedChess;
             this.matchState = new State$1(bejeweled, config); // sub-state
 
             // Actions
@@ -2214,8 +2214,8 @@
             this.select1Action = GetValue$3(config, 'select1Action', SelectChess);
             // select2 action
             this.select2Action = GetValue$3(config, 'select2Action', this.select1Action);
-            // pick action
-            this.pickAction = GetValue$3(config, 'pickAction', PickChess);
+            // click action
+            this.clickAction = GetValue$3(config, 'clickAction', ClickChess);
             // Swap action
             this.swapAction = GetValue$3(config, 'swapAction', SwapChess);
             // UndoSwap action
@@ -2235,7 +2235,7 @@
             this.matchState = undefined;
             this.selectedChess1 = undefined;
             this.selectedChess2 = undefined;
-            this.pickedChess = undefined;
+            this.clickedChess = undefined;
             return this;
         }
 
@@ -2256,7 +2256,7 @@
             var done = false;
             while (!done) {
                 board.reset(); // Refill chess
-                done = board.preTest();
+                done = board.inputTest();
             }
 
             this.next();
@@ -2297,7 +2297,11 @@
             this.bejeweled.emit('select1-start', this.boardWrapper.board, this.bejeweled);
         }
         selectChess1(chess) {
-            if (this.state === 'SELECT1START') {
+            if (
+                (this.state === 'SELECT1START') &&
+                (chess.getData('swappable') || chess.getData('clickable'))
+            ) {
+
                 this.selectedChess1 = chess;
                 this.next();
             }
@@ -2342,34 +2346,39 @@
             this.bejeweled.emit('select2-start', this.boardWrapper.board, this.bejeweled);
         }
         selectChess2(chess) {
-            if (this.state === 'SELECT2START') {
+            if (
+                (this.state === 'SELECT2START') &&
+                chess.getData('swappable')
+            ) {
+
                 this.selectedChess2 = chess;
                 this.next();
             }
             return this;
         }
-        pickChess(chess) {
-            if (this.state === 'SELECT2START') {
-                this.pickedChess = chess;
+        clickChess(chess) {
+            if (
+                (this.state === 'SELECT2START') &&
+                chess.getData('clickable')
+            ) {
+
+                this.clickedChess = chess;
                 this.next();
             }
             return this;
         }
         next_SELECT2START() {
-            if (this.pickedChess) {
-                return 'PICK';
+            // clickChess()
+            if (this.clickedChess) {
+                return 'CLICK';
             }
 
-            var areNeighbors;
-            if (this.selectedChess2) {
-                var direction = this.boardWrapper.board.getNeighborChessDirection(this.selectedChess1, this.selectedChess2);
-                areNeighbors = (direction < 4);
-            } else {
-                areNeighbors = false;
-            }
+            // selectChess2()
+            // Ensure two chess are neighbors
+            var direction = this.boardWrapper.board.getNeighborChessDirection(this.selectedChess1, this.selectedChess2);
+            var areNeighbors = (direction < 4);
+            return (areNeighbors) ? 'SELECT2' : 'SELECT1START';
 
-            var nextState = (areNeighbors) ? 'SELECT2' : 'SELECT1START';
-            return nextState;
         }
         // SELECT2START
 
@@ -2424,20 +2433,20 @@
         }
         // SWAP
 
-        // PCIK
-        enter_PICK() {
+        // CLICK
+        enter_CLICK() {
             var board = this.boardWrapper.board,
                 bejeweled = this.bejeweled,
-                chess = this.pickedChess;
+                chess = this.clickedChess;
 
-            this.bejeweled.emit('pick', chess, board, bejeweled);
+            this.bejeweled.emit('click', chess, board, bejeweled);
 
-            var result = this.pickAction(chess, board, bejeweled);
+            var result = this.clickAction(chess, board, bejeweled);
             if (IsPromise(result)) {
-                bejeweled.waitEvent(bejeweled, 'pick.complete');
+                bejeweled.waitEvent(bejeweled, 'click.complete');
                 result
                     .then(function () {
-                        bejeweled.emit('pick.complete');
+                        bejeweled.emit('click.complete');
                     });
             }
 
@@ -2447,10 +2456,10 @@
         setEliminatingChess(chessArray) {
             this.matchState.setEliminatedPieces(chessArray);
         }
-        next_PICK() {
+        next_CLICK() {
             return 'MATCH3';
         }
-        // PICK
+        // CLICK
 
         // MATCH3
         enter_MATCH3() {
@@ -2467,7 +2476,7 @@
                 } else {
                     nextState = 'SELECT1START';
                 }
-            } else if (this.boardWrapper.preTest()) {
+            } else if (this.boardWrapper.inputTest()) {
                 nextState = 'SELECT1START';
             } else {
                 nextState = 'RESET';
@@ -2507,7 +2516,7 @@
         clearInput() {
             this.selectedChess1 = undefined;
             this.selectedChess2 = undefined;
-            this.pickedChess = undefined;
+            this.clickedChess = undefined;
             return this;
         }
 
@@ -2777,6 +2786,12 @@
         } else {
             gameObject = this.chessCreateCallback(board);
         }
+
+        // Set swappable to true by default
+        gameObject.setData('swappable', true);
+        // Set clickable to true by default
+        gameObject.setData('clickable', true);
+
         // Set symbol, it also fires 'changedata-symbol' event
         gameObject.setData('symbol', symbol);
         // Add to board
@@ -2925,41 +2940,69 @@
     };
 
     /*
-    1. Test if there has any matched line after chess swapping
+    1. Return true if the user can make a next move:
+      - There is at least one clickable chess piece
+      - Or, there exists a swappable pair of chess pieces that would result in a match-3
     */
 
 
-    var PreTest = function () {
+    var InputTest = function () {
         var match = this.match;
-        var directions = this.board.grid.halfDirections;
-        var tileB;
+        var board = this.board;
+        var directions = board.grid.halfDirections;
+
         RefreshSymbolCache.call(this); // only refresh symbol cache once
 
-        for (var tileY = 0, rowCnt = this.board.height; tileY < rowCnt; tileY++) {
-            for (var tileX = 0, colCnt = this.board.width; tileX < colCnt; tileX++) {
+        var tileZ = this.chessTileZ;
+        var tileA = {}, tileB;
+        var chessA, chessB;
+        var matchResult;
+
+        for (var tileY = 0, rowCnt = board.height; tileY < rowCnt; tileY++) {
+            for (var tileX = 0, colCnt = board.width; tileX < colCnt; tileX++) {
+
+                // In prepare rows
                 if (!this.isAtActivateArea(tileX, tileY)) {
                     continue;
                 }
+
+                chessA = board.tileXYZToChess(tileX, tileY, tileZ);
+
+                // chess is clickable, return true
+                if (chessA.getData('clickable')) {
+                    return true;
+                }
+
+                if (!chessA.getData('swappable')) {
+                    continue;
+                }
+                // chessA is swappable
 
                 tileA.x = tileX;
                 tileA.y = tileY;
 
                 for (var dir = 0, dirCnt = directions.length; dir < dirCnt; dir++) {
-                    tileB = this.board.getNeighborTileXY(tileA, dir);
+                    tileB = board.getNeighborTileXY(tileA, dir);
 
                     // In prepare rows
                     if (!this.isAtActivateArea(tileB.x, tileB.y)) {
                         continue;
                     }
 
+                    chessB = board.tileXYZToChess(tileB.x, tileB.y, tileZ);
+                    if (!chessB.getData('swappable')) {
+                        continue;
+                    }
+
+                    // chessA and chessB are swappable
                     // Swap symbol
                     SwapSymbols(match, tileA, tileB);
                     // Any match?
-                    this.preTestResult = AnyMatch.call(this, 3);
+                    matchResult = AnyMatch.call(this, 3);
                     // Swap symbol back
                     SwapSymbols(match, tileA, tileB);
 
-                    if (this.preTestResult) {
+                    if (matchResult) {
                         return true;
                     }
                 }
@@ -2973,11 +3016,6 @@
         var symbolB = match.getSymbol(tileB.x, tileB.y);
         match.setSymbol(tileA.x, tileA.y, symbolB);
         match.setSymbol(tileB.x, tileB.y, symbolA);
-    };
-
-    var tileA = {
-        x: 0,
-        y: 0
     };
 
     const SetStruct$1 = Phaser.Structs.Set;
@@ -3151,7 +3189,7 @@
         fillPrepareRows: FillPrepareRows,
         fillAllRows: FillAllRows,
         breakMatch3: BreakMatch3,
-        preTest: PreTest,
+        inputTest: InputTest,
         getAllMatch: GetAllMatch,
         dumpSymbols: DumpSymbols,
         getBoardBounds: GetBoardBounds,
@@ -3321,14 +3359,14 @@
             this.scene.input
                 .on('pointerdown', this.selectChess1, this)
                 .on('pointermove', this.selectChess2, this)
-                .on('pointerup', this.pickChess, this);
+                .on('pointerup', this.clickChess, this);
         }
 
         shutdown() {
             this.scene.input
                 .off('pointerdown', this.selectChess1, this)
                 .off('pointermove', this.selectChess2, this)
-                .off('pointerup', this.pickChess, this);
+                .off('pointerup', this.clickChess, this);
             this.bejeweled = undefined;
             this.scene = undefined;
         }
@@ -3370,13 +3408,13 @@
             }
         }
 
-        pickChess(pointer) {
+        clickChess(pointer) {
             if (!this.enable) {
                 return this;
             }
             var chess = this.bejeweled.worldXYToChess(pointer.worldX, pointer.worldY);
             if (chess && (chess === this.bejeweled.getSelectedChess1())) {
-                this.bejeweled.pickChess(chess);
+                this.bejeweled.clickChess(chess);
             }
         }
     }
@@ -3463,9 +3501,9 @@
             return this;
         },
 
-        pickChess(chess) {
+        clickChess(chess) {
             // state === 'SELECT2START'
-            this.mainState.pickChess(chess);
+            this.mainState.clickChess(chess);
             return this;
         },
 
