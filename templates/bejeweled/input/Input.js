@@ -13,14 +13,14 @@ class Input {
         this.scene.input
             .on('pointerdown', this.selectChess1, this)
             .on('pointermove', this.selectChess2, this)
-            .on('pointerup', this.pickChess, this);
+            .on('pointerup', this.clickChess, this);
     }
 
     shutdown() {
         this.scene.input
             .off('pointerdown', this.selectChess1, this)
             .off('pointermove', this.selectChess2, this)
-            .off('pointerup', this.pickChess, this);
+            .off('pointerup', this.clickChess, this);
         this.bejeweled = undefined;
         this.scene = undefined;
     }
@@ -62,13 +62,13 @@ class Input {
         }
     }
 
-    pickChess(pointer) {
+    clickChess(pointer) {
         if (!this.enable) {
             return this;
         }
         var chess = this.bejeweled.worldXYToChess(pointer.worldX, pointer.worldY);
         if (chess && (chess === this.bejeweled.getSelectedChess1())) {
-            this.bejeweled.pickChess(chess);
+            this.bejeweled.clickChess(chess);
         }
     }
 }

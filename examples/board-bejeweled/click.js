@@ -2,6 +2,70 @@ import phaser from 'phaser/src/phaser.js';
 import BoardPlugin from '../../plugins/board-plugin.js';
 import Bejeweled from '../../templates/bejeweled/Bejeweled.js';
 
+const CELLSIZE = 60;
+const ItemData = [
+    // 0: #DC143C
+    {
+        key: 'diamond', color: 0xDC143C,
+        swappable: true, clickable: false
+    },
+
+    // 1: #1E90FF
+    {
+        key: 'diamond', color: 0x1E90FF,
+        swappable: true, clickable: false
+    },
+
+    // 2: #32CD32
+    {
+        key: 'diamond', color: 0x32CD32,
+        swappable: true, clickable: false
+    },
+
+    // 3: #FFD700
+    {
+        key: 'diamond', color: 0xFFD700,
+        swappable: true, clickable: false
+    },
+
+    // 4: #9400D3
+    {
+        key: 'diamond', color: 0x9400D3,
+        swappable: true, clickable: false
+    },
+
+    // 5: #FF8C00
+    {
+        key: 'diamond', color: 0xFF8C00,
+        swappable: true, clickable: false
+    },
+
+    // 6: #F5F5F5
+    {
+        key: 'snowflake', color: 0xF5F5F5,
+        swappable: true, clickable: true
+    },
+
+    // 7: #F5F5F5
+    {
+        key: 'fission', color: 0xF5F5F5,
+        swappable: true, clickable: true
+    },
+]
+
+var SetupChess = function (gameObject, value, previousValue) {
+    var data = ItemData[value];
+    gameObject
+        .setTexture(data.key)
+        .setTint(data.color)
+        .setData('swappable', data.swappable)
+        .setData('clickable', data.clickable)
+
+    var size = CELLSIZE * 0.9;
+    gameObject.setDisplaySize(size, size);
+}
+
+
 const probabilities = [
     15.8333, // 0
     15.8333, // 1
@@ -31,8 +95,8 @@ class Demo extends Phaser.Scene {
             board: {
                 x: 0,
                 y: 0,
-                cellWidth: 60,
-                cellHeight: 60,
+                cellWidth: CELLSIZE,
+                cellHeight: CELLSIZE,
                 width: 10,
                 height: 10
             },
@@ -59,7 +123,7 @@ class Demo extends Phaser.Scene {
                         .setData('symbol', undefined);
                     // Symbol is stored in gameObject's data manager (`gameObject.getData('symbol')`)
                     // Add data changed event to change the appearance of game object via new symbol value
-                    gameObject.data.events.on('changedata-symbol', SetAppearance);
+                    gameObject.data.events.on('changedata-symbol', SetupChess);
                     return gameObject;
                 },
 
@@ -73,7 +137,7 @@ class Demo extends Phaser.Scene {
                 accept: [0, 1, 2, 3, 4, 5],
             },
 
-            pickAction(chess, board, bejeweled) {
+            clickAction(chess, board, bejeweled) {
                 var symbol = chess.getData('symbol');
                 var tileXY = bejeweled.chessToTileXY(chess);
 
@@ -104,31 +168,7 @@ class Demo extends Phaser.Scene {
     update() { }
 }
 
-var colors = [
-    0xDC143C,
-    0x1E90FF,  // 1: #1E90FF
-    0x32CD32,  // 2: #32CD32
-    0xFFD700,  // 3: #FFD700
-    0x9400D3,  // 4: #9400D3
-    0xFF8C00,  // 5: #FF8C00
-    0x212121,  // 6: #212121
-    0xF5F5F5,  // 7: #F5F5F5
-]
-var Appearances = [
-    { key: 'diamond', color: 0xDC143C },  // 0: #DC143C
-    { key: 'diamond', color: 0x1E90FF },  // 1: #1E90FF
-    { key: 'diamond', color: 0x32CD32 },  // 2: #32CD32
-    { key: 'diamond', color: 0xFFD700 },  // 3: #FFD700
-    { key: 'diamond', color: 0x9400D3 },  // 4: #9400D3
-    { key: 'diamond', color: 0xFF8C00 },  // 5: #FF8C00
-    { key: 'snowflake', color: 0xF5F5F5 },// 6: #F5F5F5
-    { key: 'fission', color: 0xF5F5F5 },  // 7: #F5F5F5
-]
-var SetAppearance = function (gameObject, value, previousValue) {
-    var data = Appearances[value];
-    var size = 60 * 0.9;
-    gameObject.setTexture(data.key).setTint(data.color).setDisplaySize(size, size);
-}
+
 
 var config = {
     type: Phaser.AUTO,

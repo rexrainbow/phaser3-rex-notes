@@ -7,7 +7,7 @@ import FillActivateArea from './FillActivateArea.js'
 import FillPrepareRows from './FillPrepareRows.js';
 import FillAllRows from './FillAllRows.js';
 import BreakMatch3 from './BreakMatch3.js';
-import PreTest from './PreTest.js';
+import InputTest from './InputTest.js';
 import GetAllMatch from '../match/GetAllMatch.js';
 import DumpSymbols from './DumpSymbols.js';
 import GetBoardBounds from './GetBoardBounds.js';
@@ -26,7 +26,7 @@ var Methods = {
     fillPrepareRows: FillPrepareRows,
     fillAllRows: FillAllRows,
     breakMatch3: BreakMatch3,
-    preTest: PreTest,
+    inputTest: InputTest,
     getAllMatch: GetAllMatch,
     dumpSymbols: DumpSymbols,
     getBoardBounds: GetBoardBounds,

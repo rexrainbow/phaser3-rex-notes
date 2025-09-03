@@ -14,6 +14,12 @@ var CreateChess = function (tileX, tileY, symbols) {
     } else {
         gameObject = this.chessCreateCallback(board);
     }
+
+    // Set swappable to true by default
+    gameObject.setData('swappable', true);
+    // Set clickable to true by default
+    gameObject.setData('clickable', true);
+
     // Set symbol, it also fires 'changedata-symbol' event
     gameObject.setData('symbol', symbol);
     // Add to board
