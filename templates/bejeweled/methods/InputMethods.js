@@ -19,9 +19,9 @@ export default {
         return this;
     },
 
-    pickChess(chess) {
+    clickChess(chess) {
         // state === 'SELECT2START'
-        this.mainState.pickChess(chess);
+        this.mainState.clickChess(chess);
         return this;
     },
 
