@@ -215,13 +215,14 @@ Start((Start)) --> RESET --> PLACE
 PLACE --> SELECT1START
 
 subgraph Select 1 states
-  SELECT1START --> |Input<br>pointerdown| SELECT1
+  SELECT1START --> |Wait input<br>pointerdown<br>1st chess| SELECT1
 end
 
 SELECT1 --> SELECT2START
 
 subgraph Select 2 states
-  SELECT2START --> |Input<br>pointermove| SELECT2
+  SELECT2START --> |Wait input<br>pointermove<br>2nd chess| SELECT2
+  SELECT2START --> |Wait input<br>pointerup<br>1st chess| PICK
 end
 
 SELECT2START --> SELECT1START
@@ -239,7 +240,6 @@ subgraph MATCH3 sub-state
   MatchStart --> |Has eleminating chess<br>From PICK state| ELIMINATING
 end
 
-SELECT2START --> |Input<br>pointerup| PICK
 PICK --> MatchStart[start]
 
 MatchEnd --> |No-matched-line and<br>From SWAP| UndoSwap[undo-swap] --> SELECT1START

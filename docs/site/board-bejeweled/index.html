@@ -15775,6 +15775,13 @@
 <span class="w">        </span><span class="c1">// tileZ: 1,</span>
 <span class="w">    </span><span class="p">},</span>
 <span class="w">    </span><span class="c1">// initSymbols: [[...], [...]],</span>
+
+<span class="w">    </span><span class="nx">match</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">accept</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">ignore</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="p">},</span>
+
+
 <span class="w">    </span><span class="c1">// mask: true,</span>
 
 <span class="w">    </span><span class="nx">placeAction</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
@@ -15807,6 +15814,10 @@
 </ul>
 </li>
 <li><code>initSymbols</code> : Fill visible area with this 2d symbol array.</li>
+<li>Match:<ul>
+<li><code>match.accept</code>, <code>match.ignore</code> : A list of symbol, chess symbol in <code>match.ignore</code>, or not in <code>match.accept</code> will be ignored.</li>
+</ul>
+</li>
 <li>Custom actions<ul>
 <li><code>placeAction</code> : <a href="#place-chess-action">Custom place chess Action</a></li>
 <li><code>select1Action</code> : <a href="#custom-select-first-chess-action">Custom select first chess Action</a></li>
@@ -15872,13 +15883,14 @@ Start((Start)) --&gt; RESET --&gt; PLACE
 PLACE --&gt; SELECT1START
 
 subgraph Select 1 states
-  SELECT1START --&gt; |Input&lt;br&gt;pointerdown| SELECT1
+  SELECT1START --&gt; |Wait input&lt;br&gt;pointerdown&lt;br&gt;1st chess| SELECT1
 end
 
 SELECT1 --&gt; SELECT2START
 
 subgraph Select 2 states
-  SELECT2START --&gt; |Input&lt;br&gt;pointermove| SELECT2
+  SELECT2START --&gt; |Wait input&lt;br&gt;pointermove&lt;br&gt;2nd chess| SELECT2
+  SELECT2START --&gt; |Wait input&lt;br&gt;pointerup&lt;br&gt;1st chess| PICK
 end
 
 SELECT2START --&gt; SELECT1START
@@ -15896,7 +15908,6 @@ subgraph MATCH3 sub-state
   MatchStart --&gt; |Has eleminating chess&lt;br&gt;From PICK state| ELIMINATING
 end
 
-SELECT2START --&gt; |Input&lt;br&gt;pointerup| PICK
 PICK --&gt; MatchStart[start]
 
 MatchEnd --&gt; |No-matched-line and&lt;br&gt;From SWAP| UndoSwap[undo-swap] --&gt; SELECT1START
