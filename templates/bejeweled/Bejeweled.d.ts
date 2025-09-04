@@ -192,6 +192,11 @@ declare class Bejeweled extends ComponentBase {
         out?: Phaser.GameObjects.GameObject[]
     ): Phaser.GameObjects.GameObject[];
 
+    createChess(
+        tileX: number, tileY: number,
+        symbol: Bejeweled.ChessSymbol | Bejeweled.ChessSymbol[] | Bejeweled.GenerateSymbolCallbackType
+    ): this;
+
     getSymbolAt(
         tileX: number, tileY: number
     ): Bejeweled.ChessSymbol;

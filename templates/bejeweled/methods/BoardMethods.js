@@ -55,6 +55,12 @@ export default {
         return this.boardWrapper.getChessArrayWithSymbol(symbol, out);
     },
 
+    // Create chess
+    createChess(tileX, tileY, symbols) {
+        this.boardWrapper.createChess(tileX, tileY, symbols);
+        return this;
+    },
+
     // Chess symbol
     getSymbolAt(tileX, tileY) {
         return this.boardWrapper.getSymbolAt(tileX, tileY);
