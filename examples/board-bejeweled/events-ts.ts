@@ -58,7 +58,7 @@ class Demo extends Phaser.Scene {
             },
         })
             .on('match', function (
-                lines: Phaser.Structs.Set<BoardPlugin.Shape>[],
+                lines: Set<BoardPlugin.Shape>[],
                 board: BoardPlugin.Board,
                 bejeweled: Bejeweled
             ) {
