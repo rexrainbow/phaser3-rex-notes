@@ -62,7 +62,7 @@ class Demo extends Phaser.Scene {
                 for (var i = 0, icnt = lines.length; i < icnt; i++) {
                     line = lines[i];
                     var s = [`Get matched ${line.size}`];
-                    var chessArray = line.entries;
+                    var chessArray = [...line];
                     for (var j = 0, jcnt = chessArray.length; j < jcnt; j++) {
                         gameObject = chessArray[j];
                         tileXYZ = gameObject.rexChess.tileXYZ;

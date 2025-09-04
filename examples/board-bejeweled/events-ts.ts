@@ -58,7 +58,7 @@ class Demo extends Phaser.Scene {
             },
         })
             .on('match', function (
-                lines: Phaser.Structs.Set<BoardPlugin.Shape>[],
+                lines: Set<BoardPlugin.Shape>[],
                 board: BoardPlugin.Board,
                 bejeweled: Bejeweled
             ) {
@@ -67,7 +67,7 @@ class Demo extends Phaser.Scene {
                 for (let i = 0, icnt = lines.length; i < icnt; i++) {
                     let line = lines[i];
                     let s = [`Get matched ${line.size}`];
-                    let chessArray = line.entries;
+                    let chessArray = [...line];
                     for (let j = 0, jcnt = chessArray.length; j < jcnt; j++) {
                         let gameObject = chessArray[j];
                         let tileXYZ = board.chessToTileXYZ(gameObject);
