@@ -3,58 +3,66 @@ import BoardPlugin from '../../plugins/board-plugin.js';
 import Bejeweled from '../../templates/bejeweled/Bejeweled.js';
 
 const CELLSIZE = 60;
-const ItemData = [
+const PieceData = [
     // 0: #DC143C
     {
         key: 'diamond', color: 0xDC143C,
-        swappable: true, clickable: false
+        swappable: true, clickable: false,
+        probability: 15.8333
     },
 
     // 1: #1E90FF
     {
         key: 'diamond', color: 0x1E90FF,
-        swappable: true, clickable: false
+        swappable: true, clickable: false,
+        probability: 15.8333
     },
 
     // 2: #32CD32
     {
         key: 'diamond', color: 0x32CD32,
-        swappable: true, clickable: false
+        swappable: true, clickable: false,
+        probability: 15.8333
     },
 
     // 3: #FFD700
     {
         key: 'diamond', color: 0xFFD700,
-        swappable: true, clickable: false
+        swappable: true, clickable: false,
+        probability: 15.8333
     },
 
     // 4: #9400D3
     {
         key: 'diamond', color: 0x9400D3,
-        swappable: true, clickable: false
+        swappable: true, clickable: false,
+        probability: 15.8333
     },
 
     // 5: #FF8C00
     {
         key: 'diamond', color: 0xFF8C00,
-        swappable: true, clickable: false
+        swappable: true, clickable: false,
+        probability: 15.8333
     },
 
     // 6: #F5F5F5
     {
         key: 'snowflake', color: 0xF5F5F5,
-        swappable: true, clickable: true
+        swappable: true, clickable: true,
+        probability: 4
     },
 
     // 7: #F5F5F5
     {
         key: 'fission', color: 0xF5F5F5,
-        swappable: true, clickable: true
+        swappable: true, clickable: true,
+        probability: 1
     },
 ]
 
 var SetupChess = function (gameObject, value, previousValue) {
-    var data = ItemData[value];
+    var data = PieceData[value];
     gameObject
         .setTexture(data.key)
         .setTint(data.color)
@@ -64,18 +72,6 @@ var SetupChess = function (gameObject, value, previousValue) {
     var size = CELLSIZE * 0.9;
     gameObject.setDisplaySize(size, size);
 }
-
-
-const probabilities = [
-    15.8333, // 0
-    15.8333, // 1
-    15.8333, // 2
-    15.8333, // 3
-    15.8333, // 4
-    15.8333, // 5
-    4,       // 6
-    1        // 7
-];
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -91,7 +87,7 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        this.bejeweled = new Bejeweled(this, {
+        var bejeweled = new Bejeweled(this, {
             board: {
                 x: 0,
                 y: 0,
@@ -107,8 +103,8 @@ class Demo extends Phaser.Scene {
                     while (true) {
                         const rand = Math.random() * 100;
                         let sum = 0;
-                        for (let i = 0; i < probabilities.length; i++) {
-                            sum += probabilities[i];
+                        for (let i = 0; i < PieceData.length; i++) {
+                            sum += PieceData[i].probability;
                             if (rand < sum) {
                                 if (!excluded || !excluded.includes(i)) {
                                     return i;
@@ -156,7 +152,7 @@ class Demo extends Phaser.Scene {
                         bejeweled.getChessArrayAtTileX(tileXY.x + 1, chessArray);
                         break;
                     case 7:
-                        bejeweled.getChessArrayAtTileXYInRange(tileXY.x, tileXY.y, 3, 3, chessArray);
+                        bejeweled.getChessArrayWithinTileRadius(tileXY.x, tileXY.y, 3, 3, chessArray);
                         break;
                 }
 
@@ -165,8 +161,40 @@ class Demo extends Phaser.Scene {
             },
 
             debug: true,
-        });
-        this.bejeweled.start();
+        })
+            .on('match', function (lines, board, bejeweled) {
+                // get Game object/tile position of matched lines
+                var line, gameObject, tileXYZ;
+                for (var i = 0, icnt = lines.length; i < icnt; i++) {
+                    line = lines[i];
+                    var s = [`Get matched ${line.size}`];
+                    var chessArray = line.entries;
+                    for (var j = 0, jcnt = chessArray.length; j < jcnt; j++) {
+                        gameObject = chessArray[j];
+                        tileXYZ = gameObject.rexChess.tileXYZ;
+                        s.push(`(${tileXYZ.x},${tileXYZ.y})`);
+                    }
+                    console.log(s.join(' '));
+                }
+            })
+            .on('eliminate', function (chessArray, board, bejeweled) {
+                bejeweled.incData('scores', chessArray.length);
+            })
+            .setData('scores', 0)
+
+        // Mointor 'scores' variable
+        var txtScore = this.add.text(
+            650, 30,
+            bejeweled.getData('scores'),
+            { fontSize: '24px', color: '#fff' }
+        );
+        bejeweled.on(
+            'changedata-scores',
+            function (bejeweled, value, previousValue) {
+                txtScore.setText(value);
+            });
+
+        bejeweled.start();
     }
 
     update() { }
