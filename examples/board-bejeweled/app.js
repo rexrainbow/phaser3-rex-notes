@@ -87,7 +87,7 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        this.bejeweled = new Bejeweled(this, {
+        var bejeweled = new Bejeweled(this, {
             board: {
                 x: 0,
                 y: 0,
@@ -162,7 +162,39 @@ class Demo extends Phaser.Scene {
 
             debug: true,
         })
-            .start();
+            .on('match', function (lines, board, bejeweled) {
+                // get Game object/tile position of matched lines
+                var line, gameObject, tileXYZ;
+                for (var i = 0, icnt = lines.length; i < icnt; i++) {
+                    line = lines[i];
+                    var s = [`Get matched ${line.size}`];
+                    var chessArray = line.entries;
+                    for (var j = 0, jcnt = chessArray.length; j < jcnt; j++) {
+                        gameObject = chessArray[j];
+                        tileXYZ = gameObject.rexChess.tileXYZ;
+                        s.push(`(${tileXYZ.x},${tileXYZ.y})`);
+                    }
+                    console.log(s.join(' '));
+                }
+            })
+            .on('eliminate', function (chessArray, board, bejeweled) {
+                bejeweled.incData('scores', chessArray.length);
+            })
+            .setData('scores', 0)
+
+        // Mointor 'scores' variable
+        var txtScore = this.add.text(
+            650, 30,
+            bejeweled.getData('scores'),
+            { fontSize: '24px', color: '#fff' }
+        );
+        bejeweled.on(
+            'changedata-scores',
+            function (bejeweled, value, previousValue) {
+                txtScore.setText(value);
+            });
+
+        bejeweled.start();
     }
 
     update() { }
