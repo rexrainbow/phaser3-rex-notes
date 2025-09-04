@@ -164,17 +164,32 @@ class Demo extends Phaser.Scene {
         })
             .on('match', function (lines, board, bejeweled) {
                 // get Game object/tile position of matched lines
-                var line, gameObject, tileXYZ;
-                for (var i = 0, icnt = lines.length; i < icnt; i++) {
-                    line = lines[i];
-                    var s = [`Get matched ${line.size}`];
-                    var chessArray = [...line];
-                    for (var j = 0, jcnt = chessArray.length; j < jcnt; j++) {
-                        gameObject = chessArray[j];
-                        tileXYZ = gameObject.rexChess.tileXYZ;
-                        s.push(`(${tileXYZ.x},${tileXYZ.y})`);
+                for (const line of lines) {
+                    const parts = [`Match ${line.size}`];
+                    for (const piece of line) {
+                        const { x, y } = board.chessToTileXYZ(piece);
+                        parts.push(`(${x},${y})`);
                     }
-                    console.log(s.join(' '));
+                    console.log(parts.join(' '));
+                }
+
+                // Find intersection of 2 matched line
+                for (let i = 0; i < lines.length; i++) {
+                    for (let j = i + 1; j < lines.length; j++) {
+                        const inter = bejeweled.intersection(lines[i], lines[j]);
+                        if (inter.size === 0) {
+                            continue;
+                        }
+
+                        const coords = [];
+                        for (const piece of inter) {
+                            const tileXYZ = board.chessToTileXYZ(piece);
+                            if (tileXYZ) {
+                                coords.push(`(${tileXYZ.x},${tileXYZ.y})`);
+                            }
+                        }
+                        console.log(`Intersection Line ${i} ∩ Line ${j} -> ${inter.size}: ${coords.join(' ')}`);
+                    }
                 }
             })
             .on('eliminate', function (chessArray, board, bejeweled) {
@@ -199,8 +214,6 @@ class Demo extends Phaser.Scene {
 
     update() { }
 }
-
-
 
 var config = {
     type: Phaser.AUTO,
