@@ -57,8 +57,7 @@ export default {
 
     // Create chess
     createChess(tileX, tileY, symbols) {
-        this.boardWrapper.createChess(tileX, tileY, symbols);
-        return this;
+        return this.boardWrapper.createChess(tileX, tileY, symbols);
     },
 
     // Chess symbol
