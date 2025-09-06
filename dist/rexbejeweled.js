@@ -1757,6 +1757,8 @@
     var EliminateChess = function (chessArray, board, bejeweled) {
         const duration = 500; //ms
         for (var i = 0, cnt = chessArray.length; i < cnt; i++) {
+            // Destroy chess game object after fading
+            // Chess won't be reused in this case
             var fade = FadeOutDestroy(chessArray[i], duration);
             bejeweled.waitEvent(fade, 'complete');
         }
@@ -1870,12 +1872,12 @@
                     pieces = [];
                     break;
                 case 1:
-                    pieces = matchedLines[0].entries;
+                    pieces = [...matchedLines[0]];
                     break;
                 default:
                     pieces = [];
                     for (var i = 0; i < matchedLinesCount; i++) {
-                        pieces.push(...matchedLines[i].entries);
+                        pieces.push(...matchedLines[i]);
                     }
                     break;
             }
@@ -2622,7 +2624,7 @@
             return out;
         },
 
-        getChessArrayAtTileXYInRange(tileOX, tileOY, rangeX, rangeY, out) {
+        getChessArrayWithinTileRadius(tileOX, tileOY, rangeX, rangeY, out) {
             if (out === undefined) {
                 out = [];
             }
@@ -2793,7 +2795,7 @@
         gameObject.setData('clickable', false);
 
         // Set symbol, it also fires 'changedata-symbol' event
-        gameObject.setData('symbol', symbol);
+        gameObject.setData('symbol', undefined).setData('symbol', symbol);
         // Add to board
         board.addChess(gameObject, tileX, tileY, this.chessTileZ, true);
         // behaviors
@@ -2803,6 +2805,8 @@
             // Move chess gameObject from scene to layer
             this.layer.add(gameObject);
         }
+
+        return gameObject;
     };
 
     /*
@@ -3018,7 +3022,6 @@
         match.setSymbol(tileB.x, tileB.y, symbolA);
     };
 
-    const SetStruct$1 = Phaser.Structs.Set;
     var GetAllMatch = function () {
         RefreshSymbolCache.call(this); // only refresh symbol cache once
         // Get match5, match4, match3
@@ -3026,7 +3029,7 @@
         var matchLines = [];
         for (var n = 5; n >= 3; n--) {
             GetMatchN.call(this, n, function (result, board) {
-                var newSet = new SetStruct$1(board.tileXYArrayToChessArray(result.tileXY, self.chessTileZ));
+                var newSet = new Set(board.tileXYArrayToChessArray(result.tileXY, self.chessTileZ));
                 for (var i = 0, cnt = matchLines.length; i < cnt; i++) {
                     if (SubSetTest(matchLines[i], newSet)) {
                         return; // not a new set
@@ -3040,9 +3043,8 @@
 
     var SubSetTest = function (setA, setB) {
         // Return true if setB is a subset of setA
-        var itemsA = setA.entries;
-        for (var i = 0, cnt = itemsA.length; i < cnt; i++) {
-            if (!setB.contains(itemsA[i])) {
+        for (let item of setB) {
+            if (!setA.has(item)) {
                 return false;
             }
         }
@@ -3570,12 +3572,17 @@
             return this.boardWrapper.getChessArrayAtTileY(tileY, out);
         },
 
-        getChessArrayAtTileXYInRange(tileX, tileY, rangeX, rangeY, out) {
-            return this.boardWrapper.getChessArrayAtTileXYInRange(tileX, tileY, rangeX, rangeY, out);
+        getChessArrayWithinTileRadius(tileX, tileY, rangeX, rangeY, out) {
+            return this.boardWrapper.getChessArrayWithinTileRadius(tileX, tileY, rangeX, rangeY, out);
         },
 
         getChessArrayWithSymbol(symbol, out) {
             return this.boardWrapper.getChessArrayWithSymbol(symbol, out);
+        },
+
+        // Create chess
+        createChess(tileX, tileY, symbols) {
+            return this.boardWrapper.createChess(tileX, tileY, symbols);
         },
 
         // Chess symbol
@@ -3727,6 +3734,17 @@
         }
     };
 
+    const Intersection = function (a, b) {
+        if (a.size > b.size) {
+            [a, b] = [b, a];
+        }
+        return new Set([...a].filter(x => b.has(x)));
+    };
+
+    var SetMethods = {
+        intersection: Intersection
+    };
+
     const GetValue = Phaser.Utils.Objects.GetValue;
 
     class Bejeweled extends ComponentBase {
@@ -3790,6 +3808,7 @@
         WaitEventMethods,
         DataManagerMethods,
         CommandMethods,
+        SetMethods,
     );
 
     return Bejeweled;
