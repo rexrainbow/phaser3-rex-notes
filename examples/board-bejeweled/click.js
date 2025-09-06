@@ -118,9 +118,7 @@ class Demo extends Phaser.Scene {
                 // User-defined chess game object
                 create: function (board) {
                     var scene = board.scene;
-                    var gameObject = scene.add.image()
-                        // Initial 'symbol' value
-                        .setData('symbol', undefined);
+                    var gameObject = scene.add.image().setDataEnabled();
                     // Symbol is stored in gameObject's data manager (`gameObject.getData('symbol')`)
                     // Add data changed event to change the appearance of game object via new symbol value
                     gameObject.data.events.on('changedata-symbol', SetupChess);
