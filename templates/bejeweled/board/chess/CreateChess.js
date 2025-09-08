@@ -21,7 +21,7 @@ var CreateChess = function (tileX, tileY, symbols) {
     gameObject.setData('clickable', false);
 
     // Set symbol, it also fires 'changedata-symbol' event
-    gameObject.setData('symbol', symbol);
+    gameObject.setData('symbol', undefined).setData('symbol', symbol);
     // Add to board
     board.addChess(gameObject, tileX, tileY, this.chessTileZ, true);
     // behaviors
@@ -31,6 +31,8 @@ var CreateChess = function (tileX, tileY, symbols) {
         // Move chess gameObject from scene to layer
         this.layer.add(gameObject);
     }
+
+    return gameObject;
 }
 
 export default CreateChess;

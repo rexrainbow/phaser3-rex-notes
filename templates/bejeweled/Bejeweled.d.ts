@@ -45,6 +45,8 @@ declare namespace Bejeweled {
         bejeweled: Bejeweled,
     ) => void;
 
+    type MatchedLineType = Set<Phaser.GameObjects.GameObject>;
+
     interface IMatch extends Match.IConfig {
         accept?: SymbolType[],
         ignore?: SymbolType[],
@@ -98,7 +100,7 @@ declare namespace Bejeweled {
         type MatchStartCallbackType = (board: Board, bejeweled: Bejeweled) => void;
 
         type MatchCallbackType = (
-            lines: Set<Phaser.GameObjects.GameObject>[],
+            lines: MatchedLineType[],
             board: Board, bejeweled: Bejeweled
         ) => void;
 
@@ -190,6 +192,11 @@ declare class Bejeweled extends ComponentBase {
         out?: Phaser.GameObjects.GameObject[]
     ): Phaser.GameObjects.GameObject[];
 
+    createChess(
+        tileX: number, tileY: number,
+        symbol: Bejeweled.ChessSymbol | Bejeweled.ChessSymbol[] | Bejeweled.GenerateSymbolCallbackType
+    ): Phaser.GameObjects.GameObject;
+
     getSymbolAt(
         tileX: number, tileY: number
     ): Bejeweled.ChessSymbol;
@@ -256,5 +263,10 @@ declare class Bejeweled extends ComponentBase {
 
     // Other commands
     runMatch3(): this;
+
+    intersection(
+        setA: Bejeweled.MatchedLineType,
+        setB: Bejeweled.MatchedLineType
+    ): Bejeweled.MatchedLineType;
 
 }

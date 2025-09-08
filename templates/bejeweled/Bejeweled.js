@@ -8,6 +8,7 @@ import BoardMethods from './methods/BoardMethods.js';
 import WaitEventMethods from './methods/WaitEventMethods.js';
 import DataManagerMethods from '../../plugins/utils/data/DataManagerMethods.js';
 import CommandMethods from './methods/CommandMethods.js';
+import SetMethods from './methods/SetMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -72,6 +73,7 @@ Object.assign(
     WaitEventMethods,
     DataManagerMethods,
     CommandMethods,
+    SetMethods,
 );
 
 export default Bejeweled;

@@ -1757,6 +1757,8 @@
     var EliminateChess = function (chessArray, board, bejeweled) {
         const duration = 500; //ms
         for (var i = 0, cnt = chessArray.length; i < cnt; i++) {
+            // Destroy chess game object after fading
+            // Chess won't be reused in this case
             var fade = FadeOutDestroy(chessArray[i], duration);
             bejeweled.waitEvent(fade, 'complete');
         }
@@ -2622,7 +2624,7 @@
             return out;
         },
 
-        getChessArrayAtTileXYInRange(tileOX, tileOY, rangeX, rangeY, out) {
+        getChessArrayWithinTileRadius(tileOX, tileOY, rangeX, rangeY, out) {
             if (out === undefined) {
                 out = [];
             }
@@ -2793,7 +2795,7 @@
         gameObject.setData('clickable', false);
 
         // Set symbol, it also fires 'changedata-symbol' event
-        gameObject.setData('symbol', symbol);
+        gameObject.setData('symbol', undefined).setData('symbol', symbol);
         // Add to board
         board.addChess(gameObject, tileX, tileY, this.chessTileZ, true);
         // behaviors
@@ -2803,6 +2805,8 @@
             // Move chess gameObject from scene to layer
             this.layer.add(gameObject);
         }
+
+        return gameObject;
     };
 
     /*
@@ -3613,12 +3617,17 @@
             return this.boardWrapper.getChessArrayAtTileY(tileY, out);
         },
 
-        getChessArrayAtTileXYInRange(tileX, tileY, rangeX, rangeY, out) {
-            return this.boardWrapper.getChessArrayAtTileXYInRange(tileX, tileY, rangeX, rangeY, out);
+        getChessArrayWithinTileRadius(tileX, tileY, rangeX, rangeY, out) {
+            return this.boardWrapper.getChessArrayWithinTileRadius(tileX, tileY, rangeX, rangeY, out);
         },
 
         getChessArrayWithSymbol(symbol, out) {
             return this.boardWrapper.getChessArrayWithSymbol(symbol, out);
+        },
+
+        // Create chess
+        createChess(tileX, tileY, symbols) {
+            return this.boardWrapper.createChess(tileX, tileY, symbols);
         },
 
         // Chess symbol
@@ -3770,6 +3779,17 @@
         }
     };
 
+    const Intersection = function (a, b) {
+        if (a.size > b.size) {
+            [a, b] = [b, a];
+        }
+        return new Set([...a].filter(x => b.has(x)));
+    };
+
+    var SetMethods = {
+        intersection: Intersection
+    };
+
     const GetValue = Phaser.Utils.Objects.GetValue;
 
     class Bejeweled extends ComponentBase {
@@ -3833,6 +3853,7 @@
         WaitEventMethods,
         DataManagerMethods,
         CommandMethods,
+        SetMethods,
     );
 
     return Bejeweled;

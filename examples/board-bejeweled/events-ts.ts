@@ -64,16 +64,13 @@ class Demo extends Phaser.Scene {
             ) {
 
                 // get Game object/tile position of matched lines
-                for (let i = 0, icnt = lines.length; i < icnt; i++) {
-                    let line = lines[i];
-                    let s = [`Get matched ${line.size}`];
-                    let chessArray = line.entries;
-                    for (let j = 0, jcnt = chessArray.length; j < jcnt; j++) {
-                        let gameObject = chessArray[j];
-                        let tileXYZ = board.chessToTileXYZ(gameObject);
-                        s.push(`(${tileXYZ.x},${tileXYZ.y})`);
+                for (const line of lines) {
+                    const parts: string[] = [`Match ${line.size}`];
+                    for (const piece of line) {
+                        const { x, y } = board.chessToTileXYZ(piece);
+                        parts.push(`(${x},${y})`);
                     }
-                    console.log(s.join(' '));
+                    console.log(parts.join(' '));
                 }
             })
             .on('eliminate', function (
