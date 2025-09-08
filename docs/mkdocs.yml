@@ -525,11 +525,12 @@ repo_name: 'phaser3-rex-notes'
 repo_url: 'https://github.com/rexrainbow/phaser3-rex-notes/'
 
 extra:
-    social:    
-        - icon: fontawesome/brands/twitter
-          link: https://twitter.com/rexrainbow
+    social:
         - icon: fontawesome/brands/github
           link: https://github.com/rexrainbow/
+        - icon: fontawesome/brands/discord
+          link: https://discord.gg/kWkuFZK
+
 
 theme:
     name: material
