@@ -1,4 +1,8 @@
-site_name: Notes of Phaser 3
+site_name: "Notes of Phaser 4"
+site_description: "Notes of phaser4's built-in features, and my plugins"
+site_author: rex
+site_url: "https://rexrainbow.github.io/phaser3-rex-notes/docs/site/"
+
 nav:
 - Home: index.md
 - System:
