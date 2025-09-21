@@ -95,6 +95,16 @@ class Demo extends Phaser.Scene {
             tl: 20, tr: 20,
             bl: -20, br: -20
         }, 0x008888);
+
+        // Right trapezoids
+        this.add.rexRoundRectangle(550, 460, 100, 100, {
+            tl: 0, tr: 0, bl: 0,
+            br: {
+                x: 30,
+                y: 100
+            },
+            iteration: 0
+        }, 0x008888);
     }
 
     update() { }
