@@ -104,6 +104,7 @@ nav:
             - Circle: shape-circle.md
             - Arc: shape-arc.md
             - Line: shape-line.md
+            - Line2: shape-line2.md
             - Ellipse: shape-ellipse.md
             - Polygon: shape-polygon.md
             - Curve: shape-curve.md
