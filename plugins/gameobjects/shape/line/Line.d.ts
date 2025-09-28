@@ -39,4 +39,8 @@ declare class Line extends BaseShapes {
 
     setLineType(lineType: Line.LineType): this;
 
+    readonly points: Line.PointType[];
+    readonly lineType: number;
+
+    setPointRadius(radius: number): this;
 }
