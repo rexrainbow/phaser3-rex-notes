@@ -17,6 +17,9 @@ var BuildGraphData = function (graph, config) {
             gameObject: nodeGameObject, padding: padding,
             id: uid, width: width, height: height
         };
+        if (attributes.hasOwnProperty('layoutOptions')) {
+            nodeData.layoutOptions = structuredClone(attributes.layoutOptions);
+        }
         nodes.push(nodeData);
 
         nodeGameObjectMap[uid] = nodeGameObject;

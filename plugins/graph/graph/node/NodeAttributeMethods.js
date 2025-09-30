@@ -17,9 +17,22 @@ export default {
         var nodeUID = GetObjUID(gameObject);
 
         if (IsPlainObject(key)) {
-            return this.graph.updateNodeAttribute(nodeUID, key);
+            var data = key;
+            for (var key in data) {
+                this.graph.setNodeAttribute(nodeUID, key, data[key]);
+            }
         } else {
-            return this.graph.setNodeAttribute(nodeUID, key, value);
+            this.graph.setNodeAttribute(nodeUID, key, value);
         }
+
+        return this;
+    },
+
+    setNodesAttribute(gameObjects, key, value) {
+        for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+            this.setNodeAttribute(gameObjects[i], key, value);
+        }
+
+        return this;
     }
 }
