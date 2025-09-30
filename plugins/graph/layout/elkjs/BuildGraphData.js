@@ -18,7 +18,7 @@ var BuildGraphData = function (graph, config) {
             id: uid, width: width, height: height
         };
         if (attributes.hasOwnProperty('layoutOptions')) {
-            nodeData.layoutOptions = structuredClone(attributes.layoutOptions);
+            nodeData.layoutOptions = { ...attributes.layoutOptions };
         }
         nodes.push(nodeData);
 
