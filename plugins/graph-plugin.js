@@ -1,9 +1,5 @@
 import ObjectFactory from './graph/ObjectFactory.js';
-
 import GraphFactory from './graph/graph/Factory.js';
-import {
-    ELKLayout, DagreLayout
-} from './graph-components.js';
 
 class GraphPlugin extends Phaser.Plugins.ScenePlugin {
     constructor(scene, pluginManager) {
@@ -20,20 +16,6 @@ class GraphPlugin extends Phaser.Plugins.ScenePlugin {
     destroy() {
         this.add.destroy();
         super.destroy();
-    }
-
-    async ELKLayoutPromise(graph, config) {
-        return ELKLayout(graph, config);
-    }
-
-    ELKLayout(graph, config) {
-        ELKLayout(graph, config);
-        return this;
-    }
-
-    DagreLayout(graph, config) {
-        DagreLayout(graph, config);
-        return this;
     }
 }
 

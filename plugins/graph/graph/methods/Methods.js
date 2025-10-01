@@ -13,6 +13,7 @@ import GetEdgeLength from '../edge/GetEdgeLength.js';
 import EdgeAttributeMethods from '../edge/EdgeAttributeMethods.js';
 
 import BuildFromTextMethods from './BuildFromTextMethods.js';
+import LayoutMethods from './LayoutMethods.js';
 
 var Methods = {
     isNode: IsNode,
@@ -35,7 +36,7 @@ Object.assign(
     EdgeAttributeMethods,
 
     BuildFromTextMethods,
-
+    LayoutMethods,
 )
 
 export default Methods;

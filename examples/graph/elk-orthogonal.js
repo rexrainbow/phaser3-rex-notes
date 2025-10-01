@@ -53,16 +53,15 @@ G -> I ; H -> I
                 console.log('layout.complete')
             })
             .buildFromText(context)
-
-        this.rexGraph.ELKLayout(graph, {
-            layoutOptions: {
-                'elk.algorithm': 'layered',
-                'elk.direction': 'DOWN',
-                'elk.edgeRouting': 'ORTHOGONAL',
-                //'elk.layered.spacing.nodeNodeBetweenLayers': '60',
-                //'elk.spacing.nodeNode': '40'
-            },
-        })
+            .elkLayout({
+                layoutOptions: {
+                    'elk.algorithm': 'layered',
+                    'elk.direction': 'DOWN',
+                    'elk.edgeRouting': 'ORTHOGONAL',
+                    //'elk.layered.spacing.nodeNodeBetweenLayers': '60',
+                    //'elk.spacing.nodeNode': '40'
+                },
+            })
 
         console.log('done')
 

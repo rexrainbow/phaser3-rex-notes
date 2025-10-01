@@ -12,36 +12,47 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var nodeA = CreateNode(this, 0xFFFF00);
-        var nodeB = CreateNode(this);
-        var nodeC = CreateNode(this);
-        var nodeD = CreateNode(this);
-        var edgeAB = CreateEdge(this);
-        var edgeAC = CreateEdge(this);
-        var edgeBD = CreateEdge(this);
-        var edgeCD = CreateEdge(this);
+        var context = `
+NODE [color=0x888888]
+A [color=0xFFFF00]
 
-        var graph = this.rexGraph.add.graph()
-            .addNodes([nodeA, nodeB, nodeC, nodeD], { padding: 3 })
-            .addEdge(edgeAB, nodeA, nodeB)
-            .addEdge(edgeAC, nodeA, nodeC)
-            .addEdge(edgeBD, nodeB, nodeD)
-            .addEdge(edgeCD, nodeC, nodeD)
+A -> B -> D
+A -> C -> D
+        `
 
-        graph.on('layout.edge', function (edgeGameObject, points) {            
-            edgeGameObject.setLine(points);
-        });
+        var layer = this.add.layer().setVisible(false);
 
-
-        graph.once('layout.complete', function () {
-            console.log('layout.complete')
+        var graph = this.rexGraph.add.graph({
+            onCreateNodeGameObject(scene, id, parameters) {
+                if (parameters.$dummy) {
+                    return CreateDummyNode(scene);
+                } else {
+                    return CreateNode(scene, parameters.color);
+                }
+            },
+            onCreateEdgeGameObject(scene, id, parameters) {
+                return CreateEdge(scene);
+            },
+            layer: layer,
         })
-
-        this.rexGraph.ELKLayout(graph, {
-            layoutOptions: {
-                // 'elk.direction': 'DOWN'
-            }
-        })
+            .on('layout.edge', function (edgeGameObject, points) {
+                if (edgeGameObject.setLine) {
+                    edgeGameObject.setLine(points);
+                }
+            })
+            .on('layout.start', function () {
+                layer.setVisible(false);
+            })
+            .on('layout.complete', function () {
+                layer.setVisible(true);
+                console.log('layout.complete')
+            })
+            .buildFromText(context)
+            .elkLayout({
+                layoutOptions: {
+                    // 'elk.direction': 'DOWN'
+                }
+            })
 
         console.log('done')
 
@@ -52,10 +63,11 @@ class Demo extends Phaser.Scene {
 }
 
 var CreateNode = function (scene, color) {
-    if (color === undefined) {
-        color = 0x888888;
-    }
     return scene.add.rectangle(0, 0, 100, 100).setStrokeStyle(3, color)
+}
+
+var CreateDummyNode = function (scene) {
+    return scene.add.zone(0, 0, 0, 0);
 }
 
 var CreateEdge = function (scene) {
