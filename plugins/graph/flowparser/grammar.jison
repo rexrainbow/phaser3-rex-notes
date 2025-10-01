@@ -18,7 +18,7 @@
 
 "*"                                   return 'STAR'
 
-#color                                return 'COLOR'          /* e.g., #FFAA00 or #abc */
+\b0x[0-9A-Fa-f]+\b                    return 'HEXNUMBER'
 \-?[0-9]+(\.[0-9]+)?\b                return 'NUMBER'         /* integer/float */
 \"(\\.|[^\"\\])*\"|\'(\\.|[^\'\\])*\' return 'QUOTED_STRING'
 [A-Za-z_][A-Za-z0-9_-]*               return 'IDENT'          /* bare identifiers */
@@ -61,8 +61,8 @@
     return id;
   }
 
-  function addEdge(sourceId, targetId) {
-    edges.push({ sourceId: sourceId, targetId: targetId });
+  function addEdge(sourceId, targetId, edgeParameters) {
+    edges.push({ sourceId: sourceId, targetId: targetId, parameters: edgeParameters || {} });
   }
 
   function getNodesArray() {
@@ -128,23 +128,37 @@ node_statement
 
 /* Edge chain: node_ref -> node_ref (-> node_ref)* */
 edge_statement
-  : edge_chain opt_semicolon
+  : edge_chain edge_attribute_opt opt_semicolon
+      {
+        var edgeParametersForChain = $2 || {};
+        for (var i = 0; i < $1.edgePairs.length; i += 1) {
+          var pair = $1.edgePairs[i];
+          addEdge(pair.sourceId, pair.targetId, edgeParametersForChain);
+        }
+      }
   ;
 
 edge_chain
-  : node_ref "->" node_ref
+  : node_ref '->' node_ref
       {
         ensureNode($1.id, $1.parameters);
         ensureNode($3.id, $3.parameters);
-        addEdge($1.id, $3.id);
-        $$ = { lastNodeId: $3.id };
+        $$ = {
+          lastNodeId: $3.id,
+          edgePairs: [{ sourceId: $1.id, targetId: $3.id }]
+        };
       }
-  | edge_chain "->" node_ref
+  | edge_chain '->' node_ref
       {
         ensureNode($3.id, $3.parameters);
-        addEdge($1.lastNodeId, $3.id);
-        $$ = { lastNodeId: $3.id };
+        $1.edgePairs.push({ sourceId: $1.lastNodeId, targetId: $3.id });
+        $$ = { lastNodeId: $3.id, edgePairs: $1.edgePairs };
       }
+  ;
+
+edge_attribute_opt
+  : /* empty */                { $$ = null; }
+  | '[' attribute_list ']'     { $$ = $2; }
   ;
 
 /* node_ref: IDENT | QUOTED_STRING | STAR */
@@ -163,9 +177,7 @@ node_ref
 /* [ key=value (, key=value)* ] */
 attribute_list
   : attribute
-      {
-        var obj = {}; obj[$1.key] = $1.value; $$ = obj;
-      }
+      { var parametersObject = {}; parametersObject[$1.key] = $1.value; $$ = parametersObject; }
   | attribute_list ',' attribute
       { $1[$3.key] = $3.value; $$ = $1; }
   ;
@@ -177,7 +189,7 @@ attribute
 
 attribute_value
   : NUMBER         { $$ = Number(yytext); }
-  | COLOR          { $$ = yytext; }
+  | HEXNUMBER      { $$ = parseInt(yytext, 16); }
   | QUOTED_STRING  { $$ = unquote(yytext); }
   | IDENT          { $$ = yytext; }
   ;

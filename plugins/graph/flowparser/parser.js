@@ -72,12 +72,12 @@
   }
 */
 var parser = (function(){
-var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[6,10,12,19,20],$V1=[1,12],$V2=[1,13],$V3=[2,15],$V4=[6,12,19,20],$V5=[2,8],$V6=[1,18],$V7=[6,10,12,18,19,20],$V8=[1,22],$V9=[1,24],$Va=[15,22];
+var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[6,10,12,20,21],$V1=[1,12],$V2=[1,13],$V3=[2,17],$V4=[6,10,12,13,19,20,21],$V5=[1,22],$V6=[6,12,20,21],$V7=[2,8],$V8=[1,24],$V9=[1,26],$Va=[1,30],$Vb=[15,23];
 var parser = {trace: function trace () { },
 yy: {},
-symbols_: {"error":2,"document":3,"init":4,"statements":5,"EOF":6,"statement":7,"node_statement":8,"edge_statement":9,";":10,"opt_semicolon":11,"IDENT":12,"[":13,"attribute_list":14,"]":15,"edge_chain":16,"node_ref":17,"->":18,"QUOTED_STRING":19,"STAR":20,"attribute":21,",":22,"=":23,"attribute_value":24,"NUMBER":25,"COLOR":26,"$accept":0,"$end":1},
-terminals_: {2:"error",6:"EOF",10:";",12:"IDENT",13:"[",15:"]",18:"->",19:"QUOTED_STRING",20:"STAR",22:",",23:"=",25:"NUMBER",26:"COLOR"},
-productions_: [0,[3,3],[4,0],[5,0],[5,2],[7,1],[7,1],[7,1],[11,0],[11,1],[8,5],[8,2],[9,2],[16,3],[16,3],[17,1],[17,1],[17,1],[14,1],[14,3],[21,3],[24,1],[24,1],[24,1],[24,1]],
+symbols_: {"error":2,"document":3,"init":4,"statements":5,"EOF":6,"statement":7,"node_statement":8,"edge_statement":9,";":10,"opt_semicolon":11,"IDENT":12,"[":13,"attribute_list":14,"]":15,"edge_chain":16,"edge_attribute_opt":17,"node_ref":18,"->":19,"QUOTED_STRING":20,"STAR":21,"attribute":22,",":23,"=":24,"attribute_value":25,"NUMBER":26,"HEXNUMBER":27,"$accept":0,"$end":1},
+terminals_: {2:"error",6:"EOF",10:";",12:"IDENT",13:"[",15:"]",19:"->",20:"QUOTED_STRING",21:"STAR",23:",",24:"=",26:"NUMBER",27:"HEXNUMBER"},
+productions_: [0,[3,3],[4,0],[5,0],[5,2],[7,1],[7,1],[7,1],[11,0],[11,1],[8,5],[8,2],[9,3],[16,3],[16,3],[17,0],[17,3],[18,1],[18,1],[18,1],[14,1],[14,3],[22,3],[25,1],[25,1],[25,1],[25,1]],
 performAction: function anonymous(yytext, yyleng, yylineno, yy, yystate /* action[1] */, $$ /* vstack */, _$ /* lstack */) {
 /* this == yyval */
 
@@ -100,56 +100,74 @@ break;
 case 11:
  ensureNode($$[$0-1], {}); 
 break;
+case 12:
+
+        var edgeParametersForChain = $$[$0-1] || {};
+        for (var i = 0; i < $$[$0-2].edgePairs.length; i += 1) {
+          var pair = $$[$0-2].edgePairs[i];
+          addEdge(pair.sourceId, pair.targetId, edgeParametersForChain);
+        }
+      
+break;
 case 13:
 
         ensureNode($$[$0-2].id, $$[$0-2].parameters);
         ensureNode($$[$0].id, $$[$0].parameters);
-        addEdge($$[$0-2].id, $$[$0].id);
-        this.$ = { lastNodeId: $$[$0].id };
+        this.$ = {
+          lastNodeId: $$[$0].id,
+          edgePairs: [{ sourceId: $$[$0-2].id, targetId: $$[$0].id }]
+        };
       
 break;
 case 14:
 
         ensureNode($$[$0].id, $$[$0].parameters);
-        addEdge($$[$0-2].lastNodeId, $$[$0].id);
-        this.$ = { lastNodeId: $$[$0].id };
+        $$[$0-2].edgePairs.push({ sourceId: $$[$0-2].lastNodeId, targetId: $$[$0].id });
+        this.$ = { lastNodeId: $$[$0].id, edgePairs: $$[$0-2].edgePairs };
       
 break;
 case 15:
- this.$ = { id: $$[$0], parameters: {} }; 
+ this.$ = null; 
 break;
 case 16:
- this.$ = { id: unquote(yytext), parameters: {} }; 
+ this.$ = $$[$0-1]; 
 break;
 case 17:
+ this.$ = { id: $$[$0], parameters: {} }; 
+break;
+case 18:
+ this.$ = { id: unquote(yytext), parameters: {} }; 
+break;
+case 19:
 
         var gen = createAnonymousDummyNode();
         this.$ = { id: gen, parameters: { $dummy: true } };
       
 break;
-case 18:
-
-        var obj = {}; obj[$$[$0].key] = $$[$0].value; this.$ = obj;
-      
-break;
-case 19:
- $$[$0-2][$$[$0].key] = $$[$0].value; this.$ = $$[$0-2]; 
-break;
 case 20:
- this.$ = { key: $$[$0-2], value: $$[$0] }; 
+ var parametersObject = {}; parametersObject[$$[$0].key] = $$[$0].value; this.$ = parametersObject; 
 break;
 case 21:
- this.$ = Number(yytext); 
+ $$[$0-2][$$[$0].key] = $$[$0].value; this.$ = $$[$0-2]; 
 break;
-case 22: case 24:
- this.$ = yytext; 
+case 22:
+ this.$ = { key: $$[$0-2], value: $$[$0] }; 
 break;
 case 23:
+ this.$ = Number(yytext); 
+break;
+case 24:
+ this.$ = parseInt(yytext, 16); 
+break;
+case 25:
  this.$ = unquote(yytext); 
+break;
+case 26:
+ this.$ = yytext; 
 break;
 }
 },
-table: [o($V0,[2,2],{3:1,4:2}),{1:[3]},o($V0,[2,3],{5:3}),{6:[1,4],7:5,8:6,9:7,10:[1,8],12:[1,9],16:10,17:11,19:$V1,20:$V2},{1:[2,1]},o($V0,[2,4]),o($V0,[2,5]),o($V0,[2,6]),o($V0,[2,7]),{10:[1,15],13:[1,14],18:$V3},o($V4,$V5,{11:16,10:$V6,18:[1,17]}),{18:[1,19]},o($V7,[2,16]),o($V7,[2,17]),{12:$V8,14:20,21:21},o($V0,[2,11]),o($V0,[2,12]),{12:$V9,17:23,19:$V1,20:$V2},o($V0,[2,9]),{12:$V9,17:25,19:$V1,20:$V2},{15:[1,26],22:[1,27]},o($Va,[2,18]),{23:[1,28]},o($V7,[2,14]),o($V7,$V3),o($V7,[2,13]),o($V4,$V5,{11:29,10:$V6}),{12:$V8,21:30},{12:[1,35],19:[1,34],24:31,25:[1,32],26:[1,33]},o($V0,[2,10]),o($Va,[2,19]),o($Va,[2,20]),o($Va,[2,21]),o($Va,[2,22]),o($Va,[2,23]),o($Va,[2,24])],
+table: [o($V0,[2,2],{3:1,4:2}),{1:[3]},o($V0,[2,3],{5:3}),{6:[1,4],7:5,8:6,9:7,10:[1,8],12:[1,9],16:10,18:11,20:$V1,21:$V2},{1:[2,1]},o($V0,[2,4]),o($V0,[2,5]),o($V0,[2,6]),o($V0,[2,7]),{10:[1,15],13:[1,14],19:$V3},o($V0,[2,15],{17:16,13:[1,18],19:[1,17]}),{19:[1,19]},o($V4,[2,18]),o($V4,[2,19]),{12:$V5,14:20,22:21},o($V0,[2,11]),o($V6,$V7,{11:23,10:$V8}),{12:$V9,18:25,20:$V1,21:$V2},{12:$V5,14:27,22:21},{12:$V9,18:28,20:$V1,21:$V2},{15:[1,29],23:$Va},o($Vb,[2,20]),{24:[1,31]},o($V0,[2,12]),o($V0,[2,9]),o($V4,[2,14]),o($V4,$V3),{15:[1,32],23:$Va},o($V4,[2,13]),o($V6,$V7,{11:33,10:$V8}),{12:$V5,22:34},{12:[1,39],20:[1,38],25:35,26:[1,36],27:[1,37]},o($V0,[2,16]),o($V0,[2,10]),o($Vb,[2,21]),o($Vb,[2,22]),o($Vb,[2,23]),o($Vb,[2,24]),o($Vb,[2,25]),o($Vb,[2,26])],
 defaultActions: {4:[2,1]},
 parseError: function parseError (str, hash) {
     if (hash.recoverable) {
@@ -330,8 +348,8 @@ parse: function parse(input) {
     return id;
   }
 
-  function addEdge(sourceId, targetId) {
-    edges.push({ sourceId: sourceId, targetId: targetId });
+  function addEdge(sourceId, targetId, edgeParameters) {
+    edges.push({ sourceId: sourceId, targetId: targetId, parameters: edgeParameters || {} });
   }
 
   function getNodesArray() {
@@ -678,25 +696,25 @@ case 0:/* skip whitespace */
 break;
 case 1:/* skip line comments starting with # */
 break;
-case 2:return 18
+case 2:return 19
 break;
 case 3:return 13
 break;
 case 4:return 15
 break;
-case 5:return 22
+case 5:return 23
 break;
-case 6:return 23
+case 6:return 24
 break;
 case 7:return 10
 break;
-case 8:return 20
+case 8:return 21
 break;
-case 9:return 26          /* e.g., #FFAA00 or #abc */
+case 9:return 27
 break;
-case 10:return 25         /* integer/float */
+case 10:return 26         /* integer/float */
 break;
-case 11:return 19
+case 11:return 20
 break;
 case 12:return 12          /* bare identifiers */
 break;
@@ -706,7 +724,7 @@ case 14:return 'INVALID'
 break;
 }
 },
-rules: [/^(?:\s+)/,/^(?:#.*)/,/^(?:->)/,/^(?:\[)/,/^(?:\])/,/^(?:,)/,/^(?:=)/,/^(?:;)/,/^(?:\*)/,/^(?:color\b)/,/^(?:-?[0-9]+(\.[0-9]+)?\b)/,/^(?:"(\\.|[^\"\\])*"|'(\\.|[^\'\\])*')/,/^(?:[A-Za-z_][A-Za-z0-9_-]*)/,/^(?:$)/,/^(?:.)/],
+rules: [/^(?:\s+)/,/^(?:#.*)/,/^(?:->)/,/^(?:\[)/,/^(?:\])/,/^(?:,)/,/^(?:=)/,/^(?:;)/,/^(?:\*)/,/^(?:\b0x[0-9A-Fa-f]+\b)/,/^(?:-?[0-9]+(\.[0-9]+)?\b)/,/^(?:"(\\.|[^\"\\])*"|'(\\.|[^\'\\])*')/,/^(?:[A-Za-z_][A-Za-z0-9_-]*)/,/^(?:$)/,/^(?:.)/],
 conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14],"inclusive":true}}
 });
 return lexer;
