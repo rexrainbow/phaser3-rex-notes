@@ -12,7 +12,7 @@ export default {
             attributes = undefined;
         }
 
-        GetGraphItem(gameObejct).setGraph(this);
+        GetGraphItem(gameObejct, nodeUID).setGraph(this);
 
         if (nodeUID === undefined) {
             nodeUID = GetObjUID(gameObejct);

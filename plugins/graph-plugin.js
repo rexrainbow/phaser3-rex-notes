@@ -1,8 +1,9 @@
 import ObjectFactory from './graph/ObjectFactory.js';
 
 import GraphFactory from './graph/graph/Factory.js';
-import ELKLayout from './graph/layout/elkjs/Layout.js';
-import DagreLayout from './graph/layout/dagre/Layout.js';
+import {
+    BuildGraph, ELKLayout, DagreLayout
+} from './graph-components.js';
 
 class GraphPlugin extends Phaser.Plugins.ScenePlugin {
     constructor(scene, pluginManager) {
@@ -25,14 +26,19 @@ class GraphPlugin extends Phaser.Plugins.ScenePlugin {
         return ELKLayout(graph, config);
     }
 
+    buildGraph(graph, config) {
+        BuildGraph(graph, config);
+        return this;
+    }
+
     ELKLayout(graph, config) {
         ELKLayout(graph, config);
-        return graph;
+        return this;
     }
 
     DagreLayout(graph, config) {
         DagreLayout(graph, config);
-        return graph;
+        return this;
     }
 }
 

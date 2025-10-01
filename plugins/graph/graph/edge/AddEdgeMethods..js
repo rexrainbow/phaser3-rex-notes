@@ -29,7 +29,12 @@ export default {
         }
 
         // Add node to graph
-        this.addNode(nodeAGameObject).addNode(nodeBGameObject);
+        if (typeof (nodeAGameObject) !== 'string') {
+            this.addNode(nodeAGameObject)
+        }
+        if (typeof (nodeBGameObject) !== 'string') {
+            this.addNode(nodeBGameObject);
+        }
 
         // Add edge
         GetGraphItem(edgeGameObject).setGraph(this);

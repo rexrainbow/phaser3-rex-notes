@@ -3,12 +3,16 @@ import ObjBank from './ObjBank.js';
 import IsUID from './IsUID.js';
 
 const uidKey = ObjBank.uidKey;
-var GetObjUID = function (gameObject) {
+var GetObjUID = function (gameObject, newUID) {
+    if (newUID === undefined) {
+        newUID = true;
+    }
+
     // Game object or uid
-    var uid;
+    var uid = null;
     if (IsUID(gameObject)) {
         uid = gameObject;
-    } else {
+    } else if (newUID) {
         uid = GetGraphItem(gameObject)[uidKey];
     }
     return uid;

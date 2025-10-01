@@ -13,38 +13,35 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var nodeA = CreateNode(this, 'A', 0xFFFF00);
-        var nodeB = CreateNode(this, 'B');
-        var nodeC = CreateNode(this, 'C');
-        var nodeD = CreateNode(this, 'D');
-        var nodeE = CreateNode(this, 'E');
-        var nodeF = CreateNode(this, 'F');
-        var dummyNodeFG = CreateDummyNode(this);
-        var nodeG = CreateNode(this, 'G');
-        var nodeH = CreateNode(this, 'H');
-        var nodeI = CreateNode(this, 'I');
-
-        // A -> B -> C
-        var edgeAB = CreateEdge(this);
-        var edgeBC = CreateEdge(this);
-        // A -> D -> E
-        var edgeAD = CreateEdge(this);
-        var edgeDE = CreateEdge(this);
-        // A -> F -> dummyNodeFG -> G
-        var edgeAF = CreateEdge(this);
-        var edgeFDummyFG = CreateEdge(this);
-        var edgeDummyFGG = CreateEdge(this);
-        // C -> H, E -> H
-        var edgeCH = CreateEdge(this);
-        var edgeEH = CreateEdge(this);
-        // G -> I, H -> I
-        var edgeGI = CreateEdge(this);
-        var edgeHI = CreateEdge(this);
-
-        // Alignment edge
-        // var dummyEdgeEG = CreateDummyEdge(this);
-
         var graph = this.rexGraph.add.graph()
+
+        var context = `
+NODE [padding=3, color=0x888888]
+
+A [color=0xFFFF00]
+
+A -> B -> C
+A -> D -> E
+A -> F -> * -> G
+C -> H ; E -> H
+G -> I ; H -> I
+        `
+        this.rexGraph.buildGraph(graph, {
+            context,
+            onCreateNodeGameObject(scene, id, parameters) {
+                if (parameters.$dummy) {
+                    return CreateDummyNode(scene);
+                } else {
+                    return CreateNode(scene, id, parameters.color);
+                }
+            },
+            onCreateEdgeGameObject(scene, id, parameters) {
+                return CreateEdge(scene);
+            }
+        })
+
+
+        graph
             .on('layout.edge', function (edgeGameObject, points) {
                 if (edgeGameObject.setLine) {
                     edgeGameObject.setLine(points);
@@ -53,29 +50,6 @@ class Demo extends Phaser.Scene {
             .on('layout.complete', function () {
                 console.log('layout.complete')
             })
-
-        graph
-            .addNodes([nodeA, nodeB, nodeC, nodeD, nodeE, nodeF, nodeG, nodeH, nodeI], { padding: 3 })
-
-            // A -> B -> C
-            .addEdge(edgeAB, nodeA, nodeB)
-            .addEdge(edgeBC, nodeB, nodeC)
-
-            // A -> D -> E
-            .addEdge(edgeAD, nodeA, nodeD)
-            .addEdge(edgeDE, nodeD, nodeE)
-
-            // A -> F -> edgeFDummyFG -> G
-            .addEdge(edgeAF, nodeA, nodeF)
-            .addEdge(edgeFDummyFG, nodeF, dummyNodeFG)
-            .addEdge(edgeDummyFGG, dummyNodeFG, nodeG)
-
-            // C -> H, E -> H
-            .addEdge(edgeCH, nodeC, nodeH)
-            .addEdge(edgeEH, nodeE, nodeH)
-            // G -> I, H -> I
-            .addEdge(edgeGI, nodeG, nodeI)
-            .addEdge(edgeHI, nodeH, nodeI)           
 
         this.rexGraph.ELKLayout(graph, {
             layoutOptions: {

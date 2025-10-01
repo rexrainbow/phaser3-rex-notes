@@ -13,8 +13,7 @@ class Bank {
         var refs = this.refs;
         var uidKey = this.uidKey;
         if (uidKey) {
-            var uid = gameObject[uidKey];
-            if (uid != null) {
+            if (gameObject.hasOwnProperty('uidKey') && gameObject[uidKey] != null) {
                 return this;
             }
         }

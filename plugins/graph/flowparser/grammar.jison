@@ -9,6 +9,9 @@
 \s+                                   /* skip whitespace */
 "#".*                                 /* skip line comments starting with # */
 
+"NODE"                                return 'NODE'     /* defaults for nodes (UPPERCASE) */
+"EDGE"                                return 'EDGE'     /* defaults for edges (UPPERCASE) */
+
 "->"                                  return '->'
 "["                                   return '['
 "]"                                   return ']'
@@ -30,28 +33,50 @@
 
 %{
   // ----- module-scope state -----
-  var nodesMap, edges, dummyAutoId;
+  var nodesMap, edges, dummyAutoId, currentDefaults;
 
   function resetState() {
     nodesMap = Object.create(null);
     edges = [];
     dummyAutoId = 0;
+    currentDefaults = {
+      node: {},   // defaults applied when a node is first created
+      edge: {}    // defaults applied when an edge is created
+    };
   }
 
+  function shallowCopy(obj) {
+    var out = {};
+    for (var k in obj) if (Object.prototype.hasOwnProperty.call(obj, k)) out[k] = obj[k];
+    return out;
+  }
+  function mergeInto(target, src) {
+    if (!src) return target;
+    for (var k in src) if (Object.prototype.hasOwnProperty.call(src, k)) target[k] = src[k];
+    return target;
+  }
+  function merged(a, b) {
+    return mergeInto(mergeInto({}, a || {}), b || {});
+  }
+
+  /**
+   * Ensure a node exists. On first creation, seed with NODE defaults, then merge explicit params.
+   * On subsequent calls, merge new explicit params over existing (non-retroactive defaults).
+   */
   function ensureNode(nodeId, newParameters) {
-    var node = nodesMap[nodeId];
-    if (!node) {
-      node = { id: nodeId, parameters: {} };
-      nodesMap[nodeId] = node;
+    var isDummyCreation = !!(newParameters && newParameters.$dummy === true);
+    var nodeItem = nodesMap[nodeId];
+    if (!nodeItem) {
+      // seed parameters: {} for dummy, NODE defaults for normal nodes
+      var seed = isDummyCreation ? {} : shallowCopy(currentDefaults.node);
+      nodeItem = { id: nodeId, parameters: seed };
+      nodesMap[nodeId] = nodeItem;
     }
     if (newParameters && typeof newParameters === 'object') {
-      for (var k in newParameters) {
-        if (Object.prototype.hasOwnProperty.call(newParameters, k)) {
-          node.parameters[k] = newParameters[k];
-        }
-      }
+      // merge caller-provided parameters; dummy=true will be set/kept
+      mergeInto(nodeItem.parameters, newParameters);
     }
-    return node;
+    return nodeItem;
   }
 
   function createAnonymousDummyNode() {
@@ -108,14 +133,22 @@ statements
   ;
 
 statement
-  : node_statement
-  | edge_statement
+  : defaults_statement
+  | node_statement
+  | edge_statement   
   | ';'
   ;
 
 opt_semicolon
   : /* empty */
   | ';'
+  ;
+
+defaults_statement
+  : 'NODE' '[' attribute_list ']' opt_semicolon
+      { mergeInto(currentDefaults.node, $3); }
+  | 'EDGE' '[' attribute_list ']' opt_semicolon
+      { mergeInto(currentDefaults.edge, $3); }
   ;
 
 /* Node: IDENT [ attr_list ] | IDENT ;*/
@@ -130,10 +163,11 @@ node_statement
 edge_statement
   : edge_chain edge_attribute_opt opt_semicolon
       {
-        var edgeParametersForChain = $2 || {};
+        var chainParams = $2 || null;
+        var effectiveEdgeParamsForChain = merged(currentDefaults.edge, chainParams);
         for (var i = 0; i < $1.edgePairs.length; i += 1) {
           var pair = $1.edgePairs[i];
-          addEdge(pair.sourceId, pair.targetId, edgeParametersForChain);
+          addEdge(pair.sourceId, pair.targetId, effectiveEdgeParamsForChain);
         }
       }
   ;
