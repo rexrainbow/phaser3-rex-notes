@@ -2,7 +2,7 @@ import ObjectFactory from './graph/ObjectFactory.js';
 
 import GraphFactory from './graph/graph/Factory.js';
 import {
-    BuildGraph, ELKLayout, DagreLayout
+    ELKLayout, DagreLayout
 } from './graph-components.js';
 
 class GraphPlugin extends Phaser.Plugins.ScenePlugin {
@@ -24,11 +24,6 @@ class GraphPlugin extends Phaser.Plugins.ScenePlugin {
 
     async ELKLayoutPromise(graph, config) {
         return ELKLayout(graph, config);
-    }
-
-    buildGraph(graph, config) {
-        BuildGraph(graph, config);
-        return this;
     }
 
     ELKLayout(graph, config) {

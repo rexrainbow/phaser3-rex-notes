@@ -13,8 +13,6 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var graph = this.rexGraph.add.graph()
-
         var context = `
 NODE [padding=3, color=0x888888]
 
@@ -26,8 +24,10 @@ A -> F -> * -> G
 C -> H ; E -> H
 G -> I ; H -> I
         `
-        this.rexGraph.buildGraph(graph, {
-            context,
+
+        var layer = this.add.layer().setVisible(false);
+
+        var graph = this.rexGraph.add.graph({
             onCreateNodeGameObject(scene, id, parameters) {
                 if (parameters.$dummy) {
                     return CreateDummyNode(scene);
@@ -37,19 +37,22 @@ G -> I ; H -> I
             },
             onCreateEdgeGameObject(scene, id, parameters) {
                 return CreateEdge(scene);
-            }
+            },
+            layer: layer,
         })
-
-
-        graph
             .on('layout.edge', function (edgeGameObject, points) {
                 if (edgeGameObject.setLine) {
                     edgeGameObject.setLine(points);
                 }
             })
+            .on('layout.start', function () {
+                layer.setVisible(false);
+            })
             .on('layout.complete', function () {
+                layer.setVisible(true);
                 console.log('layout.complete')
             })
+            .buildFromText(context)
 
         this.rexGraph.ELKLayout(graph, {
             layoutOptions: {

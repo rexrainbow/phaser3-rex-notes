@@ -1,15 +1,24 @@
 import EE from '../../utils/eventemitter/EventEmitter.js';
-import Methods from './Methods.js';
+import Methods from './methods/Methods.js';
 import GraphData from 'graphology';
 
 class Graph extends EE {
-    constructor(scene) {
+    constructor(scene, config) {
+        if (config === undefined) {
+            config = {};
+        }
+
         // scene: scene instance, or undefined
         super();
 
         this.isShutdown = false;
         this.scene = scene;
         this.graph = new GraphData();
+
+        this.setOnCreateNodeGameObjectCallback(config.onCreateNodeGameObject);
+        this.setOnCreateEdgeGameObjectCallback(config.onCreateEdgeGameObject);
+        this.setGameObjectLayer(config.layer);
+
         this.boot();
     }
 
