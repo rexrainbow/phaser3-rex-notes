@@ -51,7 +51,9 @@ A -> C -> D
             .elkLayout({
                 layoutOptions: {
                     // 'elk.direction': 'DOWN'
-                }
+                },
+
+                x: 100, y: 100,
             })
 
         console.log('done')
