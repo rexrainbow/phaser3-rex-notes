@@ -17,7 +17,7 @@ export default {
     },
 
     buildFromText(context) {
-        this.removeAllNodes(true);
+        this.clear();
 
         var { nodes, edges } = new Parser().parse(context);
 
