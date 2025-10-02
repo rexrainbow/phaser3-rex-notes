@@ -12,14 +12,9 @@ const DIRMODE = {
 };
 
 export default {
-    addEdge(edgeGameObject, nodeAGameObject, nodeBGameObject, dir, attributes) {
+    addEdge(edgeGameObject, nodeAGameObject, nodeBGameObject, dir, attributes, edgeUID) {
         if (this.isEdge(edgeGameObject)) {
             return this;
-        }
-
-        if (IsPlainObject(dir)) {
-            attributes = dir;
-            dir == undefined;
         }
 
         if (dir === undefined) {
@@ -37,7 +32,7 @@ export default {
         }
 
         // Add edge
-        GetGraphItem(edgeGameObject).setGraph(this);
+        GetGraphItem(edgeGameObject, edgeUID).setGraph(this);
 
         var edgeUID = GetObjUID(edgeGameObject);
         var nodeAUID = GetObjUID(nodeAGameObject);

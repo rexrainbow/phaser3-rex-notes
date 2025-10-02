@@ -43,13 +43,13 @@ export default {
         var edgeGameObject;
         for (var i = 0, cnt = edges.length; i < cnt; i++) {
             var edgeData = edges[i];
-            var id = undefined;
+            var id = edgeData.id;
             var parameters = edgeData.parameters;
             var sourceId = edgeData.sourceId;
             var targetId = edgeData.targetId;
             edgeGameObject = onCreateEdgeGameObject(scene, id, parameters);
 
-            this.addEdge(edgeGameObject, sourceId, targetId, undefined, parameters);
+            this.addEdge(edgeGameObject, sourceId, targetId, undefined, parameters, id);
 
             if (layer) {
                 layer.add(edgeGameObject);

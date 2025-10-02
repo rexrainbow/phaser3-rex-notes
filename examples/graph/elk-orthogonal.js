@@ -18,11 +18,9 @@ NODE [padding=3, color=0x888888]
 
 A [color=0xFFFF00]
 
-A -> B -> C
-A -> D -> E
-A -> F -> * -> G
-C -> H ; E -> H
-G -> I ; H -> I
+A -> B -> C -> H -> I
+A -> D -> E -> H -> I
+A -> F -> * -> G -> I
         `
 
         var layer = this.add.layer().setVisible(false);

@@ -6,7 +6,9 @@
 %lex
 %%
 
-\s+                                   /* skip whitespace */
+[ \t\f]+                              /* skip horizontal whitespace only */
+\r\n|\r|\n                            return 'EOL'
+
 "#".*                                 /* skip line comments starting with # */
 
 "NODE"                                return 'NODE'     /* defaults for nodes (UPPERCASE) */
@@ -33,16 +35,22 @@
 
 %{
   // ----- module-scope state -----
-  var nodesMap, edges, dummyAutoId, currentDefaults;
+  var nodesMap, edges, dummyAutoId, edgeAutoId, currentDefaults;
+  // --- switches & indices ---
+  var allowParallelEdges;               // default true
+  var edgeKeyToIndexMap;                // (sourceId,targetId) -> edges[] index
 
   function resetState() {
     nodesMap = Object.create(null);
     edges = [];
-    dummyAutoId = 0;
+    dummyAutoId = 0;   // for anonymous dummy nodes: _d1, _d2, ...
+    edgeAutoId  = 0;   // for edges: _e1, _e2, ...
     currentDefaults = {
-      node: {},   // defaults applied when a node is first created
-      edge: {}    // defaults applied when an edge is created
+      node: {},   // defaults applied when a *non-dummy* node is first created
+      edge: {}    // defaults applied to each edge at creation (chain-tail can override)
     };
+    allowParallelEdges = false;
+    edgeKeyToIndexMap = Object.create(null);
   }
 
   function shallowCopy(obj) {
@@ -59,9 +67,16 @@
     return mergeInto(mergeInto({}, a || {}), b || {});
   }
 
+  function makeEdgeKey(sourceId, targetId) {
+    return sourceId + '->' + targetId;
+  }
+  var dedupePolicy = "first-wins";
+
   /**
-   * Ensure a node exists. On first creation, seed with NODE defaults, then merge explicit params.
-   * On subsequent calls, merge new explicit params over existing (non-retroactive defaults).
+   * Ensure a node exists.
+   * - If creating a **dummy** (newParameters && newParameters.$dummy === true):
+   *     DO NOT seed with NODE defaults; start from {} and only set $dummy flag (+ any explicit fields).
+   * - Else (normal node first creation): seed with NODE defaults, then merge explicit params.
    */
   function ensureNode(nodeId, newParameters) {
     var isDummyCreation = !!(newParameters && newParameters.$dummy === true);
@@ -79,15 +94,47 @@
     return nodeItem;
   }
 
+  /** Create a fresh anonymous dummy node id like _d1, and register it as dummy (no NODE defaults). */
   function createAnonymousDummyNode() {
     dummyAutoId += 1;
-    var id = "_d" + String(dummyAutoId);
-    ensureNode(id, { $dummy: true });
-    return id;
+    var dummyNodeId = "_d" + String(dummyAutoId);
+    ensureNode(dummyNodeId, { $dummy: true });
+    return dummyNodeId;
   }
 
+  /** Create a fresh edge id like _e1. */
+  function createEdgeId() {
+    edgeAutoId += 1;
+    return "_e" + String(edgeAutoId);
+  }
+
+  /**
+   * Push an edge with a generated id and merged parameters:
+   * effectiveEdgeParams = merge(currentDefaults.edge, edgeParameters)
+   */
+  var dedupePolicy = "first-wins";
   function addEdge(sourceId, targetId, edgeParameters) {
-    edges.push({ sourceId: sourceId, targetId: targetId, parameters: edgeParameters || {} });
+    var key = makeEdgeKey(sourceId, targetId);
+
+    if (!allowParallelEdges) {
+      var existIdx = edgeKeyToIndexMap[key];
+      if (existIdx != null) {
+        if (dedupePolicy === 'last-wins') {
+          edges[existIdx].parameters = merged(currentDefaults.edge, edgeParameters || {});
+        }
+        return;
+      }
+    }
+
+    var effective = merged(currentDefaults.edge, edgeParameters || {});
+    edges.push({
+      id: createEdgeId(),
+      sourceId: sourceId,
+      targetId: targetId,
+      parameters: effective
+    });
+
+    edgeKeyToIndexMap[key] = edges.length - 1;
   }
 
   function getNodesArray() {
@@ -127,8 +174,18 @@ init
       { resetState(); }
   ;
 
+line_end
+  : EOL
+  | ';'
+  ;
+
+blank_line
+  : EOL
+  ;
+
 statements
   : /* empty */
+  | statements blank_line
   | statements statement
   ;
 
@@ -151,17 +208,17 @@ defaults_statement
       { mergeInto(currentDefaults.edge, $3); }
   ;
 
-/* Node: IDENT [ attr_list ] | IDENT ;*/
+/* Node: IDENT [ attr_list ] line_end | IDENT line_end */
 node_statement
-  : IDENT '[' attribute_list ']' opt_semicolon
+  : IDENT '[' attribute_list ']' line_end
       { ensureNode($1, $3); }
-  | IDENT ';'
+  | IDENT line_end
       { ensureNode($1, {}); }
   ;
 
 /* Edge chain: node_ref -> node_ref (-> node_ref)* */
 edge_statement
-  : edge_chain edge_attribute_opt opt_semicolon
+  : edge_chain edge_attribute_opt line_end
       {
         var chainParams = $2 || null;
         var effectiveEdgeParamsForChain = merged(currentDefaults.edge, chainParams);
@@ -202,7 +259,7 @@ node_ref
   | QUOTED_STRING
       { $$ = { id: unquote(yytext), parameters: {} }; }
   | STAR
-      {
+      {        
         var gen = createAnonymousDummyNode();
         $$ = { id: gen, parameters: { $dummy: true } };
       }

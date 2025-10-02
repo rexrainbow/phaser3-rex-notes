@@ -7,11 +7,6 @@ export default {
             return this;
         }
 
-        if (typeof (attributes) === 'string') {
-            nodeUID = attributes;
-            attributes = undefined;
-        }
-
         GetGraphItem(gameObejct, nodeUID).setGraph(this);
 
         if (nodeUID === undefined) {
