@@ -9,11 +9,17 @@ var GetObjUID = function (gameObject, newUID) {
     }
 
     // Game object or uid
-    var uid = null;
+    var uid;
     if (IsUID(gameObject)) {
         uid = gameObject;
-    } else if (newUID) {
-        uid = GetGraphItem(gameObject)[uidKey];
+    } else {
+        if (gameObject.hasOwnProperty('rexGraph')) {
+            uid = gameObject.rexGraph[uidKey];
+        } else if (newUID) {
+            uid = GetGraphItem(gameObject)[uidKey];
+        } else {
+            uid = null;
+        }
     }
     return uid;
 }
