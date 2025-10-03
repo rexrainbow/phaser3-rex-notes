@@ -4,7 +4,6 @@ var BuildGraphFromText = function (config) {
     var {
         graph,
         onCreateNodeGameObject, onCreateEdgeGameObject,
-        layer,
         context
     } = config;
 
@@ -25,10 +24,6 @@ var BuildGraphFromText = function (config) {
         }
 
         graph.addNode(nodeGameObject, parameters, id);
-
-        if (layer) {
-            layer.add(nodeGameObject);
-        }
     }
 
     var edgeGameObject;
@@ -46,10 +41,6 @@ var BuildGraphFromText = function (config) {
         }
 
         graph.addEdge(edgeGameObject, sourceId, targetId, undefined, parameters, id);
-
-        if (layer) {
-            layer.add(edgeGameObject);
-        }
     }
 
 }

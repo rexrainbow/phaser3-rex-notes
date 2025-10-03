@@ -13,7 +13,7 @@ export default {
                 return;
             }
 
-            out.puth(edgeGameObject);
+            out.push(edgeGameObject);
         })
 
         return out;
@@ -30,7 +30,7 @@ export default {
             if (!edgeGameObject) {
                 return;
             }
-            out.puth(edgeGameObject);
+            out.push(edgeGameObject);
         })
 
         return out;

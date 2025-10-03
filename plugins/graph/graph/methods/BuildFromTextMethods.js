@@ -11,11 +11,6 @@ export default {
         return this;
     },
 
-    setGameObjectLayer(layer) {
-        this.gameObjectLayer = layer;
-        return this;
-    },
-
     buildFromText(context) {
         this.clear();
 
@@ -23,9 +18,10 @@ export default {
             graph: this,
             onCreateNodeGameObject: this.onCreateNodeGameObject,
             onCreateEdgeGameObject: this.onCreateEdgeGameObject,
-            layer: this.gameObjectLayer,
             context: context,
         })
+
+        this.addToContainer();
 
         return this;
     }

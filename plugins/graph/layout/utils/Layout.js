@@ -21,8 +21,7 @@ var Layout = async function (layoutConfig, graph, userConfig) {
         runLayout(graphData, userConfig);
     }
 
-    var offset = { x: 0, y: 0 };
-    graph.emit('layout.postlayout', graph, graphBounds, offset);
+    graph.emit('layout.postlayout', graph);
 
     placeGameObjects(graph, graphData, userConfig);
 

@@ -23,7 +23,8 @@ A -> D -> E -> H -> I
 A -> F -> * -> G -> I
         `
 
-        var layer = this.add.layer().setVisible(false);
+        var background = this.add.rectangle()
+        var container = this.add.container(400, 300).setVisible(false);
 
         var graph = this.rexGraph.add.graph({
             onCreateNodeGameObject(scene, id, parameters) {
@@ -36,7 +37,7 @@ A -> F -> * -> G -> I
             onCreateEdgeGameObject(scene, id, parameters) {
                 return CreateEdge(scene);
             },
-            layer: layer,
+            container: container,
         })
             .on('layout.edge', function (edgeGameObject, points) {
                 if (edgeGameObject.setLine) {
@@ -44,12 +45,21 @@ A -> F -> * -> G -> I
                 }
             })
             .on('layout.start', function () {
-                layer.setVisible(false);
+                container.setVisible(false);
             })
             .on('layout.complete', function () {
-                layer.setVisible(true);
+                container.setVisible(true);
                 console.log('layout.complete')
-            })
+
+                background
+                    .setPosition(container.x, container.y)
+                    .setSize(container.width, container.height)
+                    .setFillStyle(0x333333)
+
+                var graphics = this.add.graphics()
+
+                graph.drawBounds(graphics, 0xff0000)
+            }, this)
             .buildFromText(context)
             .elkLayout({
                 layoutOptions: {
