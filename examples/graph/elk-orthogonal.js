@@ -37,7 +37,9 @@ A -> F -> * -> G -> I
             onCreateEdgeGameObject(scene, id, parameters) {
                 return CreateEdge(scene);
             },
+
             container: container,
+            // containerPadding: 20,
         })
             .on('layout.edge', function (edgeGameObject, points) {
                 if (edgeGameObject.setLine) {

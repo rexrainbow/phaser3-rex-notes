@@ -1,5 +1,6 @@
 import LogicGraph from './LogicGraph.js';
 import GameObjectsMethods from './methods/GameObjectsMethods.js';
+import ContainerMethods from './methods/ContainerMethods.js';
 import BuildFromTextMethods from './methods/BuildFromTextMethods.js';
 import LayoutMethods from './methods/LayoutMethods.js';
 
@@ -14,8 +15,11 @@ class Graph extends LogicGraph {
         this.setOnCreateEdgeGameObjectCallback(config.onCreateEdgeGameObject);
 
         this.setGameObjectContainer(config.container);
+        this.setContainerPadding(config.containerPadding);
 
-        this.on('layout.complete', this.fitContainer, this);
+        this.on('layout.complete', function () {
+            this.fitContainer()
+        }, this);
     }
 
 }
@@ -23,6 +27,7 @@ class Graph extends LogicGraph {
 Object.assign(
     Graph.prototype,
     GameObjectsMethods,
+    ContainerMethods,
     BuildFromTextMethods,
     LayoutMethods
 );
