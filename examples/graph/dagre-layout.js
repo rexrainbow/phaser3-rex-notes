@@ -50,7 +50,6 @@ A -> C -> D
             .buildFromText(context)
             .dagreLayout({
                 rankdir: 'LR',
-                x: 100, y: 100
             })
 
         console.log('done')

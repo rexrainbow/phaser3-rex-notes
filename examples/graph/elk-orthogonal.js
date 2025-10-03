@@ -59,7 +59,6 @@ A -> F -> * -> G -> I
                     //'elk.layered.spacing.nodeNodeBetweenLayers': '60',
                     //'elk.spacing.nodeNode': '40'
                 },
-                x: 100, y: 100
             })
 
         console.log('done')
