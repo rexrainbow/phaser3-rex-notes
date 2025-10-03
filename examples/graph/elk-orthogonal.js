@@ -56,9 +56,8 @@ A -> F -> * -> G -> I
                     .setSize(container.width, container.height)
                     .setFillStyle(0x333333)
 
-                var graphics = this.add.graphics()
-
-                graph.drawBounds(graphics, 0xff0000)
+                // var graphics = this.add.graphics()
+                // graph.drawBounds(graphics, 0xff0000)
             }, this)
             .buildFromText(context)
             .elkLayout({
