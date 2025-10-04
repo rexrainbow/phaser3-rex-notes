@@ -1412,62 +1412,44 @@
 
     var DrawQuadraticBezierCurve = function (line) {
         var points = this.points;
-
-        var startPoint = points[0];
-        var startX = startPoint.x;
-        var startY = startPoint.y;
-
         var controlPoint = points[1];
-        var cx = controlPoint.x - startX;
-        var cy = controlPoint.y - startY;
-
         var endPoint = points[2];
-        var endX = endPoint.x - startX;
-        var endY = endPoint.y - startY;
 
         line
             .startAt(0, 0)
-            .quadraticBezierTo(cx, cy, endX, endY)
+            .quadraticBezierTo(
+                controlPoint.x,
+                controlPoint.y,
+                endPoint.x, endPoint.y
+            )
             .end();
 
     };
 
     var DrawBezierCurve = function (line) {
         var points = this.points;
-        var startPoint = points[0];
-        var startX = startPoint.x;
-        var startY = startPoint.y;
-
         var controlPoint0 = points[1];
-        var cx0 = controlPoint0.x - startX;
-        var cy0 = controlPoint0.y - startY;
-
         var controlPoint1 = points[2];
-        var cx1 = controlPoint1.x - startX;
-        var cy1 = controlPoint1.y - startY;
-
         var endPoint = points[3];
-        var endX = endPoint.x - startX;
-        var endY = endPoint.y - startY;
 
         line
             .startAt(0, 0)
-            .cubicBezierTo(cx0, cy0, cx1, cy1, endX, endY)
+            .cubicBezierTo(
+                controlPoint0.x, controlPoint0.y, 
+                controlPoint1.x, controlPoint1.y, 
+                endPoint.x, endPoint.y
+            )
             .end();
 
     };
 
     var DrawSpinleCurve = function (line) {
         var points = this.points;
-        var startPoint = points[0];
-        var startX = startPoint.x;
-        var startY = startPoint.y;
-
         var splinePoints = [];
-        for (var i = 1, cnt = points.length; i < cnt; i ++) {
+        for (var i = 1, cnt = points.length; i < cnt; i++) {
             var point = points[i];
-            splinePoints.push(point.x - startX);
-            splinePoints.push(point.y - startY);
+            splinePoints.push(point.x);
+            splinePoints.push(point.y);
         }
 
         line
@@ -1479,35 +1461,23 @@
 
     var DrawStraightLine = function (line) {
         var points = this.points;
-        var startPoint = points[0];
-        var startX = startPoint.x;
-        var startY = startPoint.y;
-
-
         var pointsCount = points.length;
         var endPoint = points[pointsCount - 1];
-        var endX = endPoint.x - startX;
-        var endY = endPoint.y - startY;
 
         line
             .startAt(0, 0)
-            .lineTo(endX, endY)
+            .lineTo(endPoint.x, endPoint.y)
             .end();
 
     };
 
     var DrawPolyLine = function (line) {
         var points = this.points;
-        var startPoint = points[0];
-        var startX = startPoint.x;
-        var startY = startPoint.y;
         line.startAt(0, 0);
 
         for (var i = 1, cnt = points.length; i < cnt; i++) {
             var point = points[i];
-            var x = point.x - startX;
-            var y = point.y - startY;
-            line.lineTo(x, y);
+            line.lineTo(point.x, point.y);
         }
 
         line.end();
@@ -1559,8 +1529,6 @@
         // Origin
         this.setOrigin(-x / width, -y / height);
         // Position
-        var point = this.points[0];
-        this.setPosition(point.x, point.y);
         line.offset(-x, -y);
     };
 
@@ -1699,7 +1667,9 @@
             if (pointRadius === undefined) { pointRadius = 10; }
 
             super(scene);
-            this.type = 'rexPath';
+            this.type = 'rexLine';
+
+            this.points = [];
             this.padding = {};
             this.bounds = undefined;
 
@@ -1723,7 +1693,24 @@
                 this.lineType = lineType;
             }
 
-            this.points = points;
+            this.points.length = 0;
+
+            var x = 0, y = 0;
+            if (points.length > 0) {
+                x = points[0].x;
+                y = points[0].y;
+            }
+            this.x = x;
+            this.y = y;
+
+            for (var i = 0, cnt = points.length; i < cnt; i++) {
+                var p = points[i];
+                this.points.push({
+                    x: p.x - x,
+                    y: p.y - y
+                });
+            }
+
             this.dirty = true;
 
             if (this.geom.length > 0) {
@@ -1748,6 +1735,24 @@
             }
 
             return this;
+        }
+
+        getPoints(out) {
+            if (out === undefined) {
+                out = [];
+            }
+            var x = this.x;
+            var y = this.y;    
+            var points = this.points;
+            for (var i = 0, cnt = points.length; i < cnt; i++) {
+                var p = points[i];
+                out.push({
+                    x: p.x + x,
+                    y: p.y + y,
+                });
+            }
+
+            return out;
         }
     }
 

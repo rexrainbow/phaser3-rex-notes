@@ -378,7 +378,7 @@
         }
     }
 
-    var GetValue$2 = function (source, key, defaultValue) {
+    var GetValue$3 = function (source, key, defaultValue) {
         if (!source || typeof source === 'number') {
             return defaultValue;
         }
@@ -419,9 +419,9 @@
 
     class Bank {
         constructor(config) {
-            this.nextId = GetValue$2(config, 'start', 1); // start index
-            this.uidKey = GetValue$2(config, 'uidKey', '$uid');
-            this.autoRemove = GetValue$2(config, 'remove', true);
+            this.nextId = GetValue$3(config, 'start', 1); // start index
+            this.uidKey = GetValue$3(config, 'uidKey', '$uid');
+            this.autoRemove = GetValue$3(config, 'remove', true);
             this.refs = {};
             this.count = 0;
         }
@@ -647,7 +647,7 @@
         }
     };
 
-    const GetValue$1 = Phaser.Utils.Objects.GetValue;
+    const GetValue$2 = Phaser.Utils.Objects.GetValue;
 
     class ComponentBase {
         constructor(parent, config) {
@@ -656,7 +656,7 @@
             this.isShutdown = false;
 
             // Event emitter, default is private event emitter
-            this.setEventEmitter(GetValue$1(config, 'eventEmitter', true));
+            this.setEventEmitter(GetValue$2(config, 'eventEmitter', true));
 
             // Register callback of parent destroy event, also see `shutdown` method
             if (this.parent) {
@@ -948,7 +948,7 @@
                     return;
                 }
 
-                out.puth(nodeGameObject);
+                out.push(nodeGameObject);
             });
 
             return out;
@@ -1162,7 +1162,7 @@
                     return;
                 }
 
-                out.puth(edgeGameObject);
+                out.push(edgeGameObject);
             });
 
             return out;
@@ -1179,7 +1179,7 @@
                 if (!edgeGameObject) {
                     return;
                 }
-                out.puth(edgeGameObject);
+                out.push(edgeGameObject);
             });
 
             return out;
@@ -1373,6 +1373,452 @@
         LogicGraph.prototype,
         Methods
     );
+
+    const GameObjectClass = Phaser.GameObjects.GameObject;
+    const LayerClass$1 = Phaser.GameObjects.Layer;
+
+    var IsGameObject = function (object) {
+        return (object instanceof GameObjectClass) || (object instanceof LayerClass$1);
+    };
+
+    var GetDisplayWidth = function (gameObject) {
+        if (gameObject.displayWidth !== undefined) {
+            return gameObject.displayWidth;
+        } else {
+            return gameObject.width;
+        }
+    };
+
+    var GetDisplayHeight = function (gameObject) {
+        if (gameObject.displayHeight !== undefined) {
+            return gameObject.displayHeight;
+        } else {
+            return gameObject.height;
+        }
+    };
+
+    const Rectangle = Phaser.Geom.Rectangle;
+    const Vector2 = Phaser.Math.Vector2;
+    const RotateAround = Phaser.Math.RotateAround;
+    const P3Container = Phaser.GameObjects.Container;
+
+    var GetBounds = function (gameObject, output) {
+        if (output === undefined) {
+            output = new Rectangle();
+        } else if (output === true) {
+            if (GlobRect === undefined) {
+                GlobRect = new Rectangle();
+            }
+            output = GlobRect;
+        }
+
+        if (gameObject.getBounds && !(gameObject instanceof P3Container)) {
+            return gameObject.getBounds(output);
+        }
+
+        //  We can use the output object to temporarily store the x/y coords in:
+
+        var TLx, TLy, TRx, TRy, BLx, BLy, BRx, BRy;
+
+        // Instead of doing a check if parent container is
+        // defined per corner we only do it once.
+        if (gameObject.parentContainer) {
+            var parentMatrix = gameObject.parentContainer.getBoundsTransformMatrix();
+
+            GetTopLeft(gameObject, output);
+            parentMatrix.transformPoint(output.x, output.y, output);
+
+            TLx = output.x;
+            TLy = output.y;
+
+            GetTopRight(gameObject, output);
+            parentMatrix.transformPoint(output.x, output.y, output);
+
+            TRx = output.x;
+            TRy = output.y;
+
+            GetBottomLeft(gameObject, output);        parentMatrix.transformPoint(output.x, output.y, output);
+
+            BLx = output.x;
+            BLy = output.y;
+
+            GetBottomRight(gameObject, output);
+            parentMatrix.transformPoint(output.x, output.y, output);
+
+            BRx = output.x;
+            BRy = output.y;
+        }
+        else {
+            GetTopLeft(gameObject, output);
+
+            TLx = output.x;
+            TLy = output.y;
+
+            GetTopRight(gameObject, output);
+            TRx = output.x;
+            TRy = output.y;
+
+            GetBottomLeft(gameObject, output);
+            BLx = output.x;
+            BLy = output.y;
+
+            GetBottomRight(gameObject, output);
+
+            BRx = output.x;
+            BRy = output.y;
+        }
+
+        output.x = Math.min(TLx, TRx, BLx, BRx);
+        output.y = Math.min(TLy, TRy, BLy, BRy);
+        output.width = Math.max(TLx, TRx, BLx, BRx) - output.x;
+        output.height = Math.max(TLy, TRy, BLy, BRy) - output.y;
+
+        return output;
+    };
+
+    var GlobRect = undefined;
+
+    var GetTopLeft = function (gameObject, output, includeParent) {
+        if (output === undefined) {
+            output = new Vector2();
+        } else if (output === true) {
+            if (GlobVector === undefined) {
+                GlobVector = new Vector2();
+            }
+            output = GlobVector;
+        }
+
+        if (gameObject.getTopLeft) {
+            return gameObject.getTopLeft(output, includeParent);
+        }
+
+        output.x = gameObject.x - (GetDisplayWidth(gameObject) * gameObject.originX);
+        output.y = gameObject.y - (GetDisplayHeight(gameObject) * gameObject.originY);
+
+        return PrepareBoundsOutput(gameObject, output, includeParent);
+    };
+
+    var GetTopRight = function (gameObject, output, includeParent) {
+        if (output === undefined) {
+            output = new Vector2();
+        } else if (output === true) {
+            if (GlobVector === undefined) {
+                GlobVector = new Vector2();
+            }
+            output = GlobVector;
+        }
+
+        if (gameObject.getTopRight) {
+            return gameObject.getTopRight(output, includeParent);
+        }
+
+        output.x = (gameObject.x - (GetDisplayWidth(gameObject) * gameObject.originX)) + GetDisplayWidth(gameObject);
+        output.y = gameObject.y - (GetDisplayHeight(gameObject) * gameObject.originY);
+
+        return PrepareBoundsOutput(gameObject, output, includeParent);
+    };
+
+    var GetBottomLeft = function (gameObject, output, includeParent) {
+        if (output === undefined) {
+            output = new Vector2();
+        } else if (output === true) {
+            if (GlobVector === undefined) {
+                GlobVector = new Vector2();
+            }
+            output = GlobVector;
+        }
+
+        if (gameObject.getBottomLeft) {
+            return gameObject.getBottomLeft(output, includeParent);
+        }
+
+        output.x = gameObject.x - (GetDisplayWidth(gameObject) * gameObject.originX);
+        output.y = (gameObject.y - (GetDisplayHeight(gameObject) * gameObject.originY)) + GetDisplayHeight(gameObject);
+
+        return PrepareBoundsOutput(gameObject, output, includeParent);
+    };
+
+    var GetBottomRight = function (gameObject, output, includeParent) {
+        if (output === undefined) {
+            output = new Vector2();
+        } else if (output === true) {
+            if (GlobVector === undefined) {
+                GlobVector = new Vector2();
+            }
+            output = GlobVector;
+        }
+
+        if (gameObject.getBottomRight) {
+            return gameObject.getBottomRight(output, includeParent);
+        }
+
+        output.x = (gameObject.x - (GetDisplayWidth(gameObject) * gameObject.originX)) + GetDisplayWidth(gameObject);
+        output.y = (gameObject.y - (GetDisplayHeight(gameObject) * gameObject.originY)) + GetDisplayHeight(gameObject);
+
+        return PrepareBoundsOutput(gameObject, output, includeParent);
+    };
+
+    var GlobVector = undefined;
+
+    var PrepareBoundsOutput = function (gameObject, output, includeParent) {
+        if (includeParent === undefined) { includeParent = false; }
+
+        if (gameObject.rotation !== 0) {
+            RotateAround(output, gameObject.x, gameObject.y, gameObject.rotation);
+        }
+
+        if (includeParent && gameObject.parentContainer) {
+            var parentMatrix = gameObject.parentContainer.getBoundsTransformMatrix();
+
+            parentMatrix.transformPoint(output.x, output.y, output);
+        }
+
+        return output;
+    };
+
+    const GetValue$1 = Phaser.Utils.Objects.GetValue;
+
+    var DrawBounds = function (gameObjects, graphics, config) {
+        var strokeColor, lineWidth, fillColor, fillAlpha, padding, includeParent;
+        if (typeof (config) === 'number') {
+            strokeColor = config;
+        } else {
+            strokeColor = GetValue$1(config, 'color');
+            lineWidth = GetValue$1(config, 'lineWidth');
+            fillColor = GetValue$1(config, 'fillColor');
+            fillAlpha = GetValue$1(config, 'fillAlpha');
+            padding = GetValue$1(config, 'padding');
+            includeParent = GetValue$1(config, 'includeParent');
+        }
+
+        if (strokeColor === undefined) { strokeColor = 0xffffff; }
+        if (lineWidth === undefined) { lineWidth = 1; }
+        if (fillColor === undefined) { fillColor = null; }    if (fillAlpha === undefined) { fillAlpha = 1; }    if (padding === undefined) { padding = 0; }
+        if (includeParent === undefined) { includeParent = true; }
+
+        if (Array.isArray(gameObjects)) {
+            for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+                Draw(gameObjects[i], graphics, strokeColor, lineWidth, fillColor, fillAlpha, padding, includeParent);
+            }
+        } else {
+            Draw(gameObjects, graphics, strokeColor, lineWidth, fillColor, fillAlpha, padding, includeParent);
+        }
+    };
+
+    var Draw = function (gameObject, graphics, strokeColor, lineWidth, fillColor, fillAlpha, padding, includeParent) {
+        var canDrawBound = gameObject.getBounds ||
+            ((gameObject.width !== undefined) && (gameObject.height !== undefined));
+        if (!canDrawBound) {
+            return;
+        }
+
+        var p0 = GetTopLeft(gameObject, Points[0], includeParent);
+        p0.x -= padding;
+        p0.y -= padding;
+
+        var p1 = GetTopRight(gameObject, Points[1], includeParent);
+        p1.x += padding;
+        p1.y -= padding;
+
+        var p2 = GetBottomRight(gameObject, Points[2], includeParent);
+        p2.x += padding;
+        p2.y += padding;
+
+        var p3 = GetBottomLeft(gameObject, Points[3], includeParent);
+        p3.x -= padding;
+        p3.y += padding;
+
+        if (fillColor !== null) {
+            graphics
+                .fillStyle(fillColor, fillAlpha)
+                .fillPoints(Points, true, true);
+        }
+        if (strokeColor !== null) {
+            graphics
+                .lineStyle(lineWidth, strokeColor)
+                .strokePoints(Points, true, true);
+        }
+
+    };
+
+    var Points = [{ x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 }];
+
+    const MergeRect = Phaser.Geom.Rectangle.MergeRect;
+
+    var GameObjectsMethods = {
+        forEachGameObject(callback) {
+            var gameObjects = [];
+            this.getAllEdges(gameObjects);
+            this.getAllNodes(gameObjects);
+
+            for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+                var gameObject = gameObjects[i];
+                if (!IsGameObject(gameObject)) {
+                    continue;
+                }
+
+                callback(gameObject);
+            }
+
+            return this;
+        },
+
+        setGraphOffset(x, y) {
+            var dx = x - this.graphOffsetX;
+            var dy = y - this.graphOffsetY;
+            this.graphOffsetX = x;
+            this.graphOffsetY = y;
+
+            this.forEachGameObject(function (gameObject) {
+                if (dx !== 0) {
+                    gameObject.x += dx;
+                }
+                if (dy !== 0) {
+                    gameObject.y += dy;
+                }
+            });
+
+            return this;
+        },
+
+        getBounds(out) {
+            if (out === undefined) {
+                out = new Phaser.Geom.Rectangle();
+            }
+
+            var firstBounds = true;
+            var source = new Phaser.Geom.Rectangle();
+            this.forEachGameObject(function (gameObject) {
+                if (gameObject.getBounds) {
+                    source = GetBounds(gameObject, source);
+
+                    if (firstBounds) {
+                        out.setTo(source.x, source.y, source.width, source.height);
+                        firstBounds = false;
+
+                    } else {
+                        MergeRect(out, source);
+                    }
+                }
+            });
+
+            return out;
+        },
+
+        drawBounds(graphics, config) {
+            var gameObjects = [];
+            this.getAllEdges(gameObjects);
+            this.getAllNodes(gameObjects);
+            DrawBounds(gameObjects, graphics, config);
+            return this;
+        },
+    };
+
+    const LayerClass = Phaser.GameObjects.Layer;
+
+    var IsLayerGameObject = function (gameObject) {
+        return (gameObject instanceof LayerClass);
+    };
+
+    const ContainerClass = Phaser.GameObjects.Container;
+
+    var IsContainerGameObject = function (gameObject) {
+        return (gameObject instanceof ContainerClass);
+    };
+
+    const GetValue = Phaser.Utils.Objects.GetValue;
+
+    var GetBoundsConfig = function (config, out) {
+        if (config === undefined) {
+            config = 0;
+        }
+        if (out === undefined) {
+            out = {};
+        }
+
+        if (typeof (config) === 'number') {
+            out.left = config;
+            out.right = config;
+            out.top = config;
+            out.bottom = config;
+        } else {
+            out.left = GetValue(config, 'left', 0);
+            out.right = GetValue(config, 'right', 0);
+            out.top = GetValue(config, 'top', 0);
+            out.bottom = GetValue(config, 'bottom', 0);
+        }
+        return out;
+    };
+
+    var ContainerMethods = {
+        setGameObjectContainer(container) {
+            this.container = container;  // p3Container, Layer, rexContainerLite
+            return this;
+        },
+
+        addToContainer(container) {
+            if (container) {
+                this.container = container;
+            }
+
+            var container = this.container;
+            if (!container) {
+                return this;
+            }
+
+            this.forEachGameObject(function (gameObject) {
+                container.add(gameObject);
+            });
+
+            return this;
+        },
+
+        setContainerPadding(padding) {
+            this.containerPadding = padding;
+            return this;
+        },
+
+        fitContainer(padding) {
+            var container = this.container;
+            if (!container) {
+                return this;
+            }
+
+            // p3Container, Layer, rexContainerLite
+
+            if (IsLayerGameObject(container)) {
+                return this;
+            }
+
+            if (padding !== undefined) {
+                this.setContainerPadding(padding);
+            }
+
+            var padding = GetBoundsConfig(this.containerPadding);
+            var bounds = this.getBounds();
+
+            var width = bounds.width + padding.left + padding.right;
+            var height = bounds.height + padding.top + padding.bottom;
+            container.setSize(width, height);
+
+            var offsetX = -(width * container.originX) + padding.left;
+            var offsetY = -(height * container.originY) + padding.top;
+
+            if (IsContainerGameObject(container)) {
+                this.setGraphOffset(offsetX, offsetY);
+
+            } else if (container.isRexContainerLite) {
+                this.setGraphOffset(offsetX, offsetY);
+
+                this.forEachGameObject(function (gameObject) {
+                    container.setChildLocalPosition(gameObject, gameObject.x, gameObject.y);
+                });
+            }
+
+            return this;
+        },
+
+    };
 
     function commonjsRequire(path) {
     	throw new Error('Could not dynamically require "' + path + '". Please configure the dynamicRequireTargets or/and ignoreDynamicRequires option of @rollup/plugin-commonjs appropriately for this require call to work.');
@@ -2178,6 +2624,51 @@
     	} 
     } (parser));
 
+    var BuildGraphFromText = function (config) {
+        var {
+            graph,
+            onCreateNodeGameObject, onCreateEdgeGameObject,
+            context
+        } = config;
+
+        var { nodes, edges } = new parser.Parser().parse(context);
+
+        var scene = graph.scene;
+
+        var nodeGameObject;
+        for (var i = 0, cnt = nodes.length; i < cnt; i++) {
+            var nodeData = nodes[i];
+            var id = nodeData.id;
+            var parameters = nodeData.parameters;
+
+            if (onCreateNodeGameObject) {
+                nodeGameObject = onCreateNodeGameObject(scene, id, parameters);
+            } else {
+                nodeGameObject = { width: 0, height: 0 };
+            }
+
+            graph.addNode(nodeGameObject, parameters, id);
+        }
+
+        var edgeGameObject;
+        for (var i = 0, cnt = edges.length; i < cnt; i++) {
+            var edgeData = edges[i];
+            var id = edgeData.id;
+            var parameters = edgeData.parameters;
+            var sourceId = edgeData.sourceId;
+            var targetId = edgeData.targetId;
+
+            if (onCreateEdgeGameObject) {
+                edgeGameObject = onCreateEdgeGameObject(scene, id, parameters);
+            } else {
+                edgeGameObject = {};
+            }
+
+            graph.addEdge(edgeGameObject, sourceId, targetId, undefined, parameters, id);
+        }
+
+    };
+
     var BuildFromTextMethods = {
         setOnCreateNodeGameObjectCallback(callback, scope) {
             this.onCreateNodeGameObject = callback;
@@ -2189,50 +2680,17 @@
             return this;
         },
 
-        setGameObjectLayer(layer) {
-            this.gameObjectLayer = layer;
-            return this;
-        },
-
         buildFromText(context) {
             this.clear();
 
-            var { nodes, edges } = new parser.Parser().parse(context);
+            BuildGraphFromText({
+                graph: this,
+                onCreateNodeGameObject: this.onCreateNodeGameObject,
+                onCreateEdgeGameObject: this.onCreateEdgeGameObject,
+                context: context,
+            });
 
-            var scene = this.scene;
-            var onCreateNodeGameObject = this.onCreateNodeGameObject;
-            var onCreateEdgeGameObject = this.onCreateEdgeGameObject;
-            var layer = this.gameObjectLayer;
-
-            var nodeGameObject;
-            for (var i = 0, cnt = nodes.length; i < cnt; i++) {
-                var nodeData = nodes[i];
-                var id = nodeData.id;
-                var parameters = nodeData.parameters;
-                nodeGameObject = onCreateNodeGameObject(scene, id, parameters);
-
-                this.addNode(nodeGameObject, parameters, id);
-
-                if (layer) {
-                    layer.add(nodeGameObject);
-                }
-            }
-
-            var edgeGameObject;
-            for (var i = 0, cnt = edges.length; i < cnt; i++) {
-                var edgeData = edges[i];
-                var id = edgeData.id;
-                var parameters = edgeData.parameters;
-                var sourceId = edgeData.sourceId;
-                var targetId = edgeData.targetId;
-                edgeGameObject = onCreateEdgeGameObject(scene, id, parameters);
-
-                this.addEdge(edgeGameObject, sourceId, targetId, undefined, parameters, id);
-
-                if (layer) {
-                    layer.add(edgeGameObject);
-                }
-            }
+            this.addToContainer();
 
             return this;
         }
@@ -2240,51 +2698,33 @@
     };
 
     var Layout$2 = async function (layoutConfig, graph, userConfig) {
+        var {
+            buildGraphData,
+            isAsyncRunLayout, runLayout,
+            placeGameObjects,
+        } = layoutConfig;
+
         if (userConfig === undefined) {
             userConfig = {};
         }
 
         graph.emit('layout.start', graph);
 
-        var graphData = layoutConfig.buildGraphData(graph, userConfig);
+        var graphData = buildGraphData(graph, userConfig);
 
         graph.emit('layout.prelayout', graph);
 
-        if (layoutConfig.isAsyncRunLayout) {
-            await layoutConfig.runLayout(graphData, userConfig);
+        if (isAsyncRunLayout) {
+            await runLayout(graphData, userConfig);
         } else {
-            layoutConfig.runLayout(graphData, userConfig);
+            runLayout(graphData, userConfig);
         }
 
         graph.emit('layout.postlayout', graph);
 
-        layoutConfig.placeGameObjects(graph, graphData, userConfig);
+        placeGameObjects(graph, graphData, userConfig);
 
         graph.emit('layout.complete', graph);
-    };
-
-    const GetValue = Phaser.Utils.Objects.GetValue;
-
-    var GetBoundsConfig = function (config, out) {
-        if (config === undefined) {
-            config = 0;
-        }
-        if (out === undefined) {
-            out = {};
-        }
-
-        if (typeof (config) === 'number') {
-            out.left = config;
-            out.right = config;
-            out.top = config;
-            out.bottom = config;
-        } else {
-            out.left = GetValue(config, 'left', 0);
-            out.right = GetValue(config, 'right', 0);
-            out.top = GetValue(config, 'top', 0);
-            out.bottom = GetValue(config, 'bottom', 0);
-        }
-        return out;
     };
 
     var BuildGraphData$1 = function (graph, config) {
@@ -9177,22 +9617,6 @@
 
     };
 
-    var GetDisplayWidth = function (gameObject) {
-        if (gameObject.displayWidth !== undefined) {
-            return gameObject.displayWidth;
-        } else {
-            return gameObject.width;
-        }
-    };
-
-    var GetDisplayHeight = function (gameObject) {
-        if (gameObject.displayHeight !== undefined) {
-            return gameObject.displayHeight;
-        } else {
-            return gameObject.height;
-        }
-    };
-
     var GetBottom = function (gameObject) {
         var height = GetDisplayHeight(gameObject);
         return (gameObject.y + height) - (height * gameObject.originY);
@@ -9400,6 +9824,9 @@
     const ALIGN_CENTER$1 = Phaser.Display.Align.CENTER;
 
     var PlaceGameObjects$1 = function (graph, graphData, config) {
+        var xMin = Infinity,
+            yMin = Infinity;
+
         graphData.children.forEach(function (nodeData) {
             var gameObject = nodeData.gameObject;
             var padding = nodeData.padding;
@@ -9408,12 +9835,22 @@
             var width = nodeData.width - padding.left - padding.right;
             var height = nodeData.height - padding.top - padding.bottom;
             AlignIn(gameObject, x, y, width, height, ALIGN_CENTER$1);
+
+            if (xMin > x) { xMin = x; }
+            if (yMin > y) { yMin = y; }
+
             graph.emit('layout.node', nodeData.gameObject);
         });
 
         graphData.edges.forEach(function (edgeData) {
             var path = GetPath$1(edgeData);
             graph.emit('layout.edge', edgeData.gameObject, path, edgeData.sourceGameObject, edgeData.targetGameObject);
+        });
+
+        // Align graph to (0,0)
+        graph.forEachGameObject(function (gameObject) {
+            gameObject.x -= xMin;
+            gameObject.y -= yMin;
         });
     };
 
@@ -22874,6 +23311,9 @@
     const ALIGN_CENTER = Phaser.Display.Align.CENTER;
 
     var PlaceGameObjects = function (graph, graphData, config) {
+        var xMin = Infinity,
+            yMin = Infinity;
+
         graphData.nodes().forEach(function (nodeKey) {
             var nodeData = graphData.node(nodeKey);
             var gameObject = nodeData.gameObject;
@@ -22883,6 +23323,10 @@
             var width = nodeData.width - padding.left - padding.right;
             var height = nodeData.height - padding.top - padding.bottom;
             AlignIn(gameObject, x, y, width, height, ALIGN_CENTER);
+
+            if (xMin > x) { xMin = x; }
+            if (yMin > y) { yMin = y; }
+
             graph.emit('layout.node', nodeData.gameObject);
         });
 
@@ -22890,6 +23334,12 @@
             var edgeData = graphData.edge(edgeKey);
             var path = GetPath(edgeData);
             graph.emit('layout.edge', edgeData.gameObject, path, edgeData.sourceGameObject, edgeData.targetGameObject);
+        });
+
+        // Align graph to (0,0)
+        graph.forEachGameObject(function (gameObject) {
+            gameObject.x -= xMin;
+            gameObject.y -= yMin;
         });
     };
 
@@ -22909,15 +23359,21 @@
 
     var LayoutMethods = {
         elkLayout(config) {
+            this.graphOffsetX = 0;
+            this.graphOffsetY = 0;
             Layout$1(this, config);
             return this;
         },
 
         async elkLayoutPromise(config) {
+            this.graphOffsetX = 0;
+            this.graphOffsetY = 0;
             return Layout$1(this, config);
         },
 
         dagreLayout(config) {
+            this.graphOffsetX = 0;
+            this.graphOffsetY = 0;
             Layout(this, config);
             return this;
         }
@@ -22927,15 +23383,26 @@
         constructor(scene, config) {
             super(scene, config);
 
+            this.graphOffsetX = 0;
+            this.graphOffsetY = 0;
+
             this.setOnCreateNodeGameObjectCallback(config.onCreateNodeGameObject);
             this.setOnCreateEdgeGameObjectCallback(config.onCreateEdgeGameObject);
-            this.setGameObjectLayer(config.layer);
+
+            this.setGameObjectContainer(config.container);
+            this.setContainerPadding(config.containerPadding);
+
+            this.on('layout.complete', function () {
+                this.fitContainer();
+            }, this);
         }
 
     }
 
     Object.assign(
         Graph.prototype,
+        GameObjectsMethods,
+        ContainerMethods,
         BuildFromTextMethods,
         LayoutMethods
     );
