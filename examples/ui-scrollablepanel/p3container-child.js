@@ -59,16 +59,23 @@ class Demo extends Phaser.Scene {
         })
             .layout()
 
+        // Can update child later
+        updatePanel(scrollablePanel);
     }
 
     update() { }
 }
 
 var createPanel = function (scene) {
-    var panel = scene.rexUI.add.sizer({
+    return scene.rexUI.add.sizer({
         orientation: 'y',
         space: { item: 5 }
     })
+}
+
+var updatePanel = function (panel) {
+    var scene = panel.scene;
+    var sizer = panel.getElement('panel');
 
     for (let i = 0; i < 20; i++) {
         let background = scene.rexUI.add.roundRectangle({
@@ -87,10 +94,11 @@ var createPanel = function (scene) {
             .setSize(200, 60)
             .add([background, text, button])
 
-        panel.add(child)
+        sizer.add(child)
     }
 
-    return panel;
+    // Run layout again
+    panel.layout()
 }
 
 var config = {
