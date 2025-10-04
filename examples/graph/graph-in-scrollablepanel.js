@@ -21,9 +21,15 @@ A [color=0xFFFF00]
 A -> B -> C -> H -> I
 A -> D -> E -> H -> I
 A -> F -> * -> G -> I
+J -> K -> L -> * -> I
+M -> * -> * -> * -> I
+O -> P -> Q -> R -> S
+T -> U -> Q
+V -> W -> X -> R
+Y -> Z -> X
         `
 
-        var panel = CreateScrollablePanel(this, 400, 400)
+        var panel = CreateScrollablePanel(this, 300, 300)
             .setPosition(400, 300)
             .layout();
 
@@ -84,9 +90,8 @@ var BuildGraph = async function (panel, context) {
 
     panel.layout();
 
-    var graphics = panel.scene.add.graphics()
-
-    panel.drawBounds(graphics, 0xff0000)
+    // var graphics = panel.scene.add.graphics()
+    // panel.drawBounds(graphics, 0xff0000)
 }
 
 var CreateNode = function (scene, label, color) {
