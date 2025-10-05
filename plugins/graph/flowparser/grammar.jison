@@ -4,32 +4,33 @@
  * Lexical grammar
  * =========================== */
 %lex
+
 %%
 
 [ \t\f]+                              /* skip horizontal whitespace only */
-\r\n|\r|\n                            return 'EOL'
+\r\n|\r|\n                                      return 'EOL'
 
 "#".*                                 /* skip line comments starting with # */
 
-"NODE"                                return 'NODE'     /* defaults for nodes (UPPERCASE) */
-"EDGE"                                return 'EDGE'     /* defaults for edges (UPPERCASE) */
+"NODE"                                          return 'NODE'     /* defaults for nodes (UPPERCASE) */
+"EDGE"                                          return 'EDGE'     /* defaults for edges (UPPERCASE) */
 
-"->"                                  return '->'
-"["                                   return '['
-"]"                                   return ']'
-","                                   return ','
-"="                                   return '='
-";"                                   return ';'
+"->"                                            return '->'
+"["                                             return '['
+"]"                                             return ']'
+","                                             return ','
+"="                                             return '='
+";"                                             return ';'
 
-"*"                                   return 'STAR'
+"*"                                             return 'STAR'
 
-\b0x[0-9A-Fa-f]+\b                    return 'HEXNUMBER'
-\-?[0-9]+(\.[0-9]+)?\b                return 'NUMBER'         /* integer/float */
-\"(\\.|[^\"\\])*\"|\'(\\.|[^\'\\])*\' return 'QUOTED_STRING'
-[A-Za-z_][A-Za-z0-9_-]*               return 'IDENT'          /* bare identifiers */
+\b0x[0-9A-Fa-f]+\b                              return 'HEXNUMBER'
+\-?[0-9]+(\.[0-9]+)?\b                          return 'NUMBER'         /* integer/float */
+\"(\\.|[^\"\\])*\"|\'(\\.|[^\'\\])*\'           return 'QUOTED_STRING'
+[A-Za-z_](?:[A-Za-z0-9_-]|\.[A-Za-z0-9_-])*     return 'IDENT'          /* bare identifiers */
 
-<<EOF>>                               return 'EOF'
-.                                     return 'INVALID'
+<<EOF>>                                         return 'EOF'
+.                                               return 'INVALID'
 
 /lex
 
@@ -46,8 +47,9 @@
     dummyAutoId = 0;   // for anonymous dummy nodes: _d1, _d2, ...
     edgeAutoId  = 0;   // for edges: _e1, _e2, ...
     currentDefaults = {
-      node: {},   // defaults applied when a *non-dummy* node is first created
-      edge: {}    // defaults applied to each edge at creation (chain-tail can override)
+      node: {},
+      nodeLayout: {},
+      edge: {}
     };
     allowParallelEdges = false;
     edgeKeyToIndexMap = Object.create(null);
@@ -66,6 +68,29 @@
   function merged(a, b) {
     return mergeInto(mergeInto({}, a || {}), b || {});
   }
+  function splitNodeParameters(parameters) {
+    const normalParameters = {};
+    const elkLayoutOptions = {};
+  
+    for (const key in parameters) {
+      if (!Object.prototype.hasOwnProperty.call(parameters, key)) {
+        continue;
+      }
+  
+      const value = parameters[key];
+      if (key.startsWith('elk.')) {
+        elkLayoutOptions[key] = value;
+      } else {
+        normalParameters[key] = value;
+      }
+    }
+  
+    return {
+      parameters: normalParameters,
+      layoutOptions: elkLayoutOptions
+    };
+  }
+
 
   function makeEdgeKey(sourceId, targetId) {
     return sourceId + '->' + targetId;
@@ -83,12 +108,14 @@
     var nodeItem = nodesMap[nodeId];
     if (!nodeItem) {
       // seed parameters: {} for dummy, NODE defaults for normal nodes
-      var seed = isDummyCreation ? {} : shallowCopy(currentDefaults.node);
-      nodeItem = { id: nodeId, parameters: seed };
+      var seed = (isDummyCreation)? {} : shallowCopy(currentDefaults.node);
+      nodeItem = { id: nodeId, parameters: seed, layoutOptions: {} };
+      if (!isDummyCreation) {
+        mergeInto(nodeItem.layoutOptions, currentDefaults.nodeLayout);
+      }
       nodesMap[nodeId] = nodeItem;
     }
     if (newParameters && typeof newParameters === 'object') {
-      // merge caller-provided parameters; dummy=true will be set/kept
       mergeInto(nodeItem.parameters, newParameters);
     }
     return nodeItem;
@@ -147,7 +174,9 @@
     return out;
   }
 
-  function unquote(text) { return text.slice(1, -1); }
+  function unquote(text) { 
+    return text.slice(1, -1); 
+  }
 
 %}
 
@@ -201,19 +230,55 @@ opt_semicolon
   | ';'
   ;
 
+opt_eol
+  : /* empty */
+  | EOL
+  | opt_eol EOL
+  ;
+
+sep
+  : ','
+  | ',' opt_eol
+  ;
+
+/* [ key=value (, key=value)* ] */
+attribute_list
+  : attribute
+      { var parametersObject = {}; parametersObject[$1.key] = $1.value; $$ = parametersObject; }
+  | attribute_list sep attribute
+      { $1[$3.key] = $3.value; $$ = $1; }
+  ;
+
+attribute_block
+  : '[' opt_eol attribute_list opt_eol ']'
+      { $$ = $3; }
+  ;
+
 defaults_statement
-  : 'NODE' '[' attribute_list ']' opt_semicolon
-      { mergeInto(currentDefaults.node, $3); }
-  | 'EDGE' '[' attribute_list ']' opt_semicolon
-      { mergeInto(currentDefaults.edge, $3); }
+  : 'NODE' attribute_block opt_semicolon
+      {
+        var parts = splitNodeParameters($2);
+        mergeInto(currentDefaults.node, parts.parameters);
+        mergeInto(currentDefaults.nodeLayout, parts.layoutOptions);
+      }
+  | 'EDGE' attribute_block opt_semicolon
+      { 
+        mergeInto(currentDefaults.edge, $2); 
+      }
   ;
 
 /* Node: IDENT [ attr_list ] line_end | IDENT line_end */
 node_statement
-  : IDENT '[' attribute_list ']' line_end
-      { ensureNode($1, $3); }
+  : IDENT attribute_block line_end
+      { 
+        var parts = splitNodeParameters($2);
+        var n = ensureNode($1, parts.parameters);
+        mergeInto(n.layoutOptions, parts.layoutOptions);
+      }
   | IDENT line_end
-      { ensureNode($1, {}); }
+      { 
+        ensureNode($1, {}); 
+      }
   ;
 
 /* Edge chain: node_ref -> node_ref (-> node_ref)* */
@@ -248,8 +313,8 @@ edge_chain
   ;
 
 edge_attribute_opt
-  : /* empty */                { $$ = null; }
-  | '[' attribute_list ']'     { $$ = $2; }
+  : /* empty */         { $$ = null; }
+  | attribute_block     { $$ = $1; }
   ;
 
 /* node_ref: IDENT | QUOTED_STRING | STAR */
@@ -265,16 +330,13 @@ node_ref
       }
   ;
 
-/* [ key=value (, key=value)* ] */
-attribute_list
-  : attribute
-      { var parametersObject = {}; parametersObject[$1.key] = $1.value; $$ = parametersObject; }
-  | attribute_list ',' attribute
-      { $1[$3.key] = $3.value; $$ = $1; }
+attribute_key
+  : IDENT           { $$ = yytext; }
+  | QUOTED_STRING   { $$ = unquote(yytext); }
   ;
 
 attribute
-  : IDENT '=' attribute_value
+  : attribute_key '=' attribute_value
       { $$ = { key: $1, value: $3 }; }
   ;
 
