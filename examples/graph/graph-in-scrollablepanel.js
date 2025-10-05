@@ -14,7 +14,9 @@ class Demo extends Phaser.Scene {
 
     create() {
         var context = `
-NODE [padding=3, color=0x888888]
+NODE [padding=3, 
+      color=0x888888,
+     ]
 
 A [color=0xFFFF00]
 
@@ -48,7 +50,7 @@ var CreateGraphContainer = function (scene) {
             if (parameters.$dummy) {
                 return CreateDummyNode(scene);
             } else {
-                return CreateNode(scene, id, parameters.color);
+                return CreateNode(scene, id, parameters);
             }
         },
         onCreateEdgeGameObject(scene, id, parameters) {
@@ -56,7 +58,7 @@ var CreateGraphContainer = function (scene) {
         },
 
         container: container,
-        containerPadding: 20,
+        // containerPadding: 20,
     })
         .on('layout.edge', function (edgeGameObject, points) {
             if (edgeGameObject.setLine) {
@@ -81,8 +83,9 @@ var BuildGraph = async function (panel, context) {
                 'elk.algorithm': 'layered',
                 'elk.direction': 'DOWN',
                 'elk.edgeRouting': 'ORTHOGONAL',
-                //'elk.layered.spacing.nodeNodeBetweenLayers': '60',
-                //'elk.spacing.nodeNode': '40'
+
+                'elk.layered.considerModelOrder.strategy': 'NODES_AND_EDGES',
+                'elk.layered.considerModelOrder.components': 'MODEL_ORDER',
             },
         })
 
@@ -94,13 +97,14 @@ var BuildGraph = async function (panel, context) {
     // panel.drawBounds(graphics, 0xff0000)
 }
 
-var CreateNode = function (scene, label, color) {
+var CreateNode = function (scene, label, parameters) {
     if (label === undefined) {
         label = ''
     }
-    if (color === undefined) {
-        color = 0x888888;
-    }
+
+    var {
+        color = 0x888888,
+    } = parameters;
 
     return scene.rexUI.add.label({
         width: 40, height: 40,

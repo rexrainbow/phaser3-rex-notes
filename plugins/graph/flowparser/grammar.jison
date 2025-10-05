@@ -245,6 +245,8 @@ sep
 attribute_list
   : attribute
       { var parametersObject = {}; parametersObject[$1.key] = $1.value; $$ = parametersObject; }
+  | attribute_list sep attribute sep
+      { $1[$3.key] = $3.value; $$ = $1; }
   | attribute_list sep attribute
       { $1[$3.key] = $3.value; $$ = $1; }
   ;

@@ -14,8 +14,8 @@ var BuildGraphFromText = function (config) {
     var nodeGameObject;
     for (var i = 0, cnt = nodes.length; i < cnt; i++) {
         var nodeData = nodes[i];
-        var id = nodeData.id;
-        var parameters = nodeData.parameters;
+        var { id, parameters, layoutOptions } = nodeData;
+        parameters.layoutOptions = layoutOptions;
 
         if (onCreateNodeGameObject) {
             nodeGameObject = onCreateNodeGameObject(scene, id, parameters);

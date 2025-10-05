@@ -3,8 +3,8 @@ import parser from '../../plugins/graph/flowparser/parser.js';
 var expression = `
 NODE [padding=3]
 
-A [label="A"]
-B [label="B"]
+A [label=A, elk.layered.priority=1]
+B [label=B]
 
 A -> B -> C
 A -> * -> D [color=0xFF0000]

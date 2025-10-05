@@ -14,13 +14,21 @@ class Demo extends Phaser.Scene {
 
     create() {
         var context = `
-NODE [padding=3, color=0x888888]
+NODE [padding=3, 
+      color=0x888888,
+     ]
 
 A [color=0xFFFF00]
 
 A -> B -> C -> H -> I
 A -> D -> E -> H -> I
 A -> F -> * -> G -> I
+J -> K -> L -> * -> I
+M -> * -> * -> * -> I
+O -> P -> Q -> R -> S
+T -> U -> Q
+V -> W -> X -> R
+Y -> Z -> X
         `
 
         var background = this.add.rectangle()
@@ -39,7 +47,7 @@ A -> F -> * -> G -> I
             },
 
             container: container,
-            // containerPadding: 20,
+            containerPadding: 20,
         })
             .on('layout.edge', function (edgeGameObject, points) {
                 if (edgeGameObject.setLine) {
@@ -67,8 +75,9 @@ A -> F -> * -> G -> I
                     'elk.algorithm': 'layered',
                     'elk.direction': 'DOWN',
                     'elk.edgeRouting': 'ORTHOGONAL',
-                    //'elk.layered.spacing.nodeNodeBetweenLayers': '60',
-                    //'elk.spacing.nodeNode': '40'
+
+                    'elk.layered.considerModelOrder.strategy': 'NODES_AND_EDGES',
+                    'elk.layered.considerModelOrder.components': 'MODEL_ORDER',
                 },
             })
 
