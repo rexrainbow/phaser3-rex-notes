@@ -9,6 +9,10 @@ var PlaceGameObjects = function (graph, graphData, config) {
 
     graphData.children.forEach(function (nodeData) {
         var gameObject = nodeData.gameObject;
+        if (gameObject.$dummy) {
+            return;
+        }
+
         var padding = nodeData.padding;
         var x = nodeData.x + padding.left;
         var y = nodeData.y + padding.top;
@@ -23,8 +27,12 @@ var PlaceGameObjects = function (graph, graphData, config) {
     })
 
     graphData.edges.forEach(function (edgeData) {
+        var gameObject = edgeData.gameObject;
+        if (gameObject.$invisible) {
+            return;
+        }
         var path = GetPath(edgeData);
-        graph.emit('layout.edge', edgeData.gameObject, path, edgeData.sourceGameObject, edgeData.targetGameObject);
+        graph.emit('layout.edge', gameObject, path, edgeData.sourceGameObject, edgeData.targetGameObject);
     })
 
     // Align graph to (0,0)

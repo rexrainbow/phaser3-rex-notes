@@ -10,6 +10,10 @@ var PlaceGameObjects = function (graph, graphData, config) {
     graphData.nodes().forEach(function (nodeKey) {
         var nodeData = graphData.node(nodeKey);
         var gameObject = nodeData.gameObject;
+        if (gameObject.$dummy) {
+            return;
+        }
+
         var padding = nodeData.padding;
         var x = nodeData.x - (nodeData.width / 2) + padding.left;  // nodeData.x is centerX
         var y = nodeData.y - (nodeData.height / 2) + padding.top;  // nodeData.y is centerY
@@ -24,9 +28,13 @@ var PlaceGameObjects = function (graph, graphData, config) {
     });
 
     graphData.edges().forEach(function (edgeKey) {
+        var gameObject = edgeData.gameObject;
+        if (gameObject.$invisible) {
+            return;
+        }
         var edgeData = graphData.edge(edgeKey);
         var path = GetPath(edgeData);
-        graph.emit('layout.edge', edgeData.gameObject, path, edgeData.sourceGameObject, edgeData.targetGameObject);
+        graph.emit('layout.edge', gameObject, path, edgeData.sourceGameObject, edgeData.targetGameObject);
     });
 
     // Align graph to (0,0)

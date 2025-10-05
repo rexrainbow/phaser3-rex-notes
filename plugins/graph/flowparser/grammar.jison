@@ -15,13 +15,14 @@
 "NODE"                                          return 'NODE'     /* defaults for nodes (UPPERCASE) */
 "EDGE"                                          return 'EDGE'     /* defaults for edges (UPPERCASE) */
 
-"->"                                            return '->'
 "["                                             return '['
 "]"                                             return ']'
 ","                                             return ','
 "="                                             return '='
 ";"                                             return ';'
 
+"->"                                            return '->'
+"*>"                                            return 'INVIS_ARROW'
 \*[A-Za-z0-9_]+                                 return 'STAR_NAMED'
 "*"                                             return 'STAR'
 
@@ -256,14 +257,23 @@ sep
   | ',' opt_eol
   ;
 
-/* [ key=value (, key=value)* ] */
 attribute_list
   : attribute
-      { var parametersObject = {}; parametersObject[$1.key] = $1.value; $$ = parametersObject; }
-  | attribute_list sep attribute sep
-      { $1[$3.key] = $3.value; $$ = $1; }
+      {
+        var o = {};
+        o[$1.key] = $1.value;
+        $$ = o;
+      }
   | attribute_list sep attribute
-      { $1[$3.key] = $3.value; $$ = $1; }
+      {
+        $1[$3.key] = $3.value;
+        $$ = $1;
+      }
+  | attribute_list sep
+      {
+        /* trailing comma: nothing to add */
+        $$ = $1;
+      }
   ;
 
 attribute_block
@@ -296,6 +306,14 @@ node_statement
       { 
         ensureNode($1, {}); 
       }
+  | STAR_NAMED attribute_block line_end
+      {
+        var label = yytext.slice(1);
+        var id = getOrCreateNamedDummy(label);
+        var parts = splitNodeParameters($2);
+        var n = ensureNode(id, parts.parameters);
+        mergeInto(n.layoutOptions, parts.layoutOptions);
+      }
   ;
 
 /* Edge chain: node_ref -> node_ref (-> node_ref)* */
@@ -303,10 +321,13 @@ edge_statement
   : edge_chain edge_attribute_opt line_end
       {
         var chainParams = $2 || null;
-        var effectiveEdgeParamsForChain = merged(currentDefaults.edge, chainParams);
+        var chainBase = merged(currentDefaults.edge, chainParams);
         for (var i = 0; i < $1.edgePairs.length; i += 1) {
           var pair = $1.edgePairs[i];
-          addEdge(pair.sourceId, pair.targetId, effectiveEdgeParamsForChain);
+          var perPair = pair.$invisible
+            ? merged(chainBase, { render: false, $invisible: true, 'elk.edge.thickness': 0 })
+            : chainBase;
+          addEdge(pair.sourceId, pair.targetId, perPair);
         }
       }
   ;
@@ -321,7 +342,22 @@ edge_chain
           edgePairs: [{ sourceId: $1.id, targetId: $3.id }]
         };
       }
+  | node_ref INVIS_ARROW node_ref
+      {
+        ensureNode($1.id, $1.parameters);
+        ensureNode($3.id, $3.parameters);
+        $$ = {
+          lastNodeId: $3.id,
+          edgePairs: [{ sourceId: $1.id, targetId: $3.id, $invisible: true }]
+        };
+      }
   | edge_chain '->' node_ref
+      {
+        ensureNode($3.id, $3.parameters);
+        $1.edgePairs.push({ sourceId: $1.lastNodeId, targetId: $3.id });
+        $$ = { lastNodeId: $3.id, edgePairs: $1.edgePairs };
+      }
+  | edge_chain INVIS_ARROW node_ref
       {
         ensureNode($3.id, $3.parameters);
         $1.edgePairs.push({ sourceId: $1.lastNodeId, targetId: $3.id });

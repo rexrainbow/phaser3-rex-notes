@@ -17,10 +17,10 @@ var BuildGraphFromText = function (config) {
         var { id, parameters, layoutOptions } = nodeData;
         parameters.layoutOptions = layoutOptions;
 
-        if (onCreateNodeGameObject) {
+        if (onCreateNodeGameObject && !parameters.$dummy) {
             nodeGameObject = onCreateNodeGameObject(scene, id, parameters);
         } else {
-            nodeGameObject = { width: 0, height: 0 };
+            nodeGameObject = { $dummy: true, width: 0, height: 0, };
         }
 
         graph.addNode(nodeGameObject, parameters, id);
@@ -33,11 +33,10 @@ var BuildGraphFromText = function (config) {
         var parameters = edgeData.parameters;
         var sourceId = edgeData.sourceId;
         var targetId = edgeData.targetId;
-
-        if (onCreateEdgeGameObject) {
+        if (onCreateEdgeGameObject && !parameters.$invisible) {
             edgeGameObject = onCreateEdgeGameObject(scene, id, parameters);
         } else {
-            edgeGameObject = {};
+            edgeGameObject = { $invisible: true };
         }
 
         graph.addEdge(edgeGameObject, sourceId, targetId, undefined, parameters, id);

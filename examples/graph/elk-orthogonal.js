@@ -24,14 +24,16 @@ A -> B -> C -> H -> I
 A -> D -> E -> H -> I
 A -> F -> * -> G -> I
 J -> K -> L -> * -> I
-M -> * -> * -> * -> I
+* *> M -> * -> * -> I
 O -> P -> Q -> R -> S
 T -> U -> Q
 V -> W -> X -> R
 Y -> Z -> X
 
-I -> *1
-S -> *1
+# For trees alignment, 
+# connect to dummy node with invisible edge
+I *> *1
+S *> *1
         `
 
         var background = this.add.rectangle()
@@ -39,11 +41,7 @@ S -> *1
 
         var graph = this.rexGraph.add.graph({
             onCreateNodeGameObject(scene, id, parameters) {
-                if (parameters.$dummy) {
-                    return CreateDummyNode(scene);
-                } else {
-                    return CreateNode(scene, id, parameters.color);
-                }
+                return CreateNode(scene, id, parameters.color);
             },
             onCreateEdgeGameObject(scene, id, parameters) {
                 return CreateEdge(scene);
@@ -53,9 +51,7 @@ S -> *1
             containerPadding: 20,
         })
             .on('layout.edge', function (edgeGameObject, points) {
-                if (edgeGameObject.setLine) {
-                    edgeGameObject.setLine(points);
-                }
+                edgeGameObject.setLine(points);
             })
             .on('layout.start', function () {
                 container.setVisible(false);
@@ -108,20 +104,12 @@ var CreateNode = function (scene, label, color) {
     }).layout();
 }
 
-var CreateDummyNode = function (scene) {
-    return scene.add.zone(0, 0, 0, 0);
-}
-
 var CreateEdge = function (scene) {
     return scene.add.rexLineShape({
         color: 0x008800,
         lineWidth: 2,
         lineType: 'poly'
     });
-}
-
-var CreateDummyEdge = function (scene) {
-    return {};
 }
 
 var config = {
