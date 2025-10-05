@@ -72,12 +72,12 @@
   }
 */
 var parser = (function(){
-var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[6,8,9,24,25,26,31,32],$V1=[1,17],$V2=[1,18],$V3=[1,20],$V4=[1,24],$V5=[1,25],$V6=[2,33],$V7=[8,9],$V8=[8,9,22,30],$V9=[6,8,24,25,26,31,32],$Va=[2,13],$Vb=[1,31],$Vc=[2,15],$Vd=[1,33],$Ve=[1,38],$Vf=[1,41],$Vg=[1,44],$Vh=[1,45],$Vi=[8,18,23,26,31],$Vj=[1,48],$Vk=[8,18,23],$Vl=[18,23,26,31];
+var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[6,8,9,24,25,26,31,32,33],$V1=[1,17],$V2=[1,18],$V3=[1,19],$V4=[1,21],$V5=[1,25],$V6=[1,26],$V7=[2,33],$V8=[8,9],$V9=[8,9,22,30],$Va=[6,8,24,25,26,31,32,33],$Vb=[2,13],$Vc=[1,32],$Vd=[2,15],$Ve=[1,34],$Vf=[1,39],$Vg=[1,42],$Vh=[1,45],$Vi=[1,46],$Vj=[8,18,23,26,31],$Vk=[1,49],$Vl=[8,18,23],$Vm=[18,23,26,31];
 var parser = {trace: function trace () { },
 yy: {},
-symbols_: {"error":2,"document":3,"init":4,"statements":5,"EOF":6,"line_end":7,"EOL":8,";":9,"blank_line":10,"statement":11,"defaults_statement":12,"node_statement":13,"edge_statement":14,"opt_semicolon":15,"opt_eol":16,"sep":17,",":18,"attribute_list":19,"attribute":20,"attribute_block":21,"[":22,"]":23,"NODE":24,"EDGE":25,"IDENT":26,"edge_chain":27,"edge_attribute_opt":28,"node_ref":29,"->":30,"QUOTED_STRING":31,"STAR":32,"attribute_key":33,"=":34,"attribute_value":35,"NUMBER":36,"HEXNUMBER":37,"$accept":0,"$end":1},
-terminals_: {2:"error",6:"EOF",8:"EOL",9:";",18:",",22:"[",23:"]",24:"NODE",25:"EDGE",26:"IDENT",30:"->",31:"QUOTED_STRING",32:"STAR",34:"=",36:"NUMBER",37:"HEXNUMBER"},
-productions_: [0,[3,3],[4,0],[7,1],[7,1],[10,1],[5,0],[5,2],[5,2],[11,1],[11,1],[11,1],[11,1],[15,0],[15,1],[16,0],[16,1],[16,2],[17,1],[17,2],[19,1],[19,4],[19,3],[21,5],[12,3],[12,3],[13,3],[13,2],[14,3],[27,3],[27,3],[28,0],[28,1],[29,1],[29,1],[29,1],[33,1],[33,1],[20,3],[35,1],[35,1],[35,1],[35,1]],
+symbols_: {"error":2,"document":3,"init":4,"statements":5,"EOF":6,"line_end":7,"EOL":8,";":9,"blank_line":10,"statement":11,"defaults_statement":12,"node_statement":13,"edge_statement":14,"opt_semicolon":15,"opt_eol":16,"sep":17,",":18,"attribute_list":19,"attribute":20,"attribute_block":21,"[":22,"]":23,"NODE":24,"EDGE":25,"IDENT":26,"edge_chain":27,"edge_attribute_opt":28,"node_ref":29,"->":30,"QUOTED_STRING":31,"STAR":32,"STAR_NAMED":33,"attribute_key":34,"=":35,"attribute_value":36,"NUMBER":37,"HEXNUMBER":38,"$accept":0,"$end":1},
+terminals_: {2:"error",6:"EOF",8:"EOL",9:";",18:",",22:"[",23:"]",24:"NODE",25:"EDGE",26:"IDENT",30:"->",31:"QUOTED_STRING",32:"STAR",33:"STAR_NAMED",35:"=",37:"NUMBER",38:"HEXNUMBER"},
+productions_: [0,[3,3],[4,0],[7,1],[7,1],[10,1],[5,0],[5,2],[5,2],[11,1],[11,1],[11,1],[11,1],[15,0],[15,1],[16,0],[16,1],[16,2],[17,1],[17,2],[19,1],[19,4],[19,3],[21,5],[12,3],[12,3],[13,3],[13,2],[14,3],[27,3],[27,3],[28,0],[28,1],[29,1],[29,1],[29,1],[29,1],[34,1],[34,1],[20,3],[36,1],[36,1],[36,1],[36,1]],
 performAction: function anonymous(yytext, yyleng, yylineno, yy, yystate /* action[1] */, $$ /* vstack */, _$ /* lstack */) {
 /* this == yyval */
 
@@ -175,25 +175,32 @@ case 35:
         this.$ = { id: gen, parameters: { $dummy: true } };
       
 break;
-case 36: case 42:
+case 36:
+
+        var label = yytext.slice(1);
+        var id = getOrCreateNamedDummy(label);
+        this.$ = { id: id, parameters: { $dummy: true } };
+      
+break;
+case 37: case 43:
  this.$ = yytext; 
 break;
-case 37: case 41:
+case 38: case 42:
  this.$ = unquote(yytext); 
 break;
-case 38:
+case 39:
  this.$ = { key: $$[$0-2], value: $$[$0] }; 
 break;
-case 39:
+case 40:
  this.$ = Number(yytext); 
 break;
-case 40:
+case 41:
  this.$ = parseInt(yytext, 16); 
 break;
 }
 },
-table: [o($V0,[2,2],{3:1,4:2}),{1:[3]},o($V0,[2,6],{5:3}),{6:[1,4],8:[1,7],9:[1,11],10:5,11:6,12:8,13:9,14:10,24:[1,12],25:[1,13],26:[1,14],27:15,29:16,31:$V1,32:$V2},{1:[2,1]},o($V0,[2,7]),o($V0,[2,8]),o($V0,[2,5]),o($V0,[2,9]),o($V0,[2,10]),o($V0,[2,11]),o($V0,[2,12]),{21:19,22:$V3},{21:21,22:$V3},{7:23,8:$V4,9:$V5,21:22,22:$V3,30:$V6},o($V7,[2,31],{28:26,21:28,22:$V3,30:[1,27]}),{30:[1,29]},o($V8,[2,34]),o($V8,[2,35]),o($V9,$Va,{15:30,9:$Vb}),o([26,31],$Vc,{16:32,8:$Vd}),o($V9,$Va,{15:34,9:$Vb}),{7:35,8:$V4,9:$V5},o($V0,[2,27]),o($V0,[2,3]),o($V0,[2,4]),{7:36,8:$V4,9:$V5},{26:$Ve,29:37,31:$V1,32:$V2},o($V7,[2,32]),{26:$Ve,29:39,31:$V1,32:$V2},o($V0,[2,24]),o($V0,[2,14]),{8:$Vf,19:40,20:42,26:$Vg,31:$Vh,33:43},o($Vi,[2,16]),o($V0,[2,25]),o($V0,[2,26]),o($V0,[2,28]),o($V8,[2,30]),o($V8,$V6),o($V8,[2,29]),{8:$Vd,16:46,17:47,18:$Vj,23:$Vc},o($Vi,[2,17]),o($Vk,[2,20]),{34:[1,49]},{34:[2,36]},{34:[2,37]},{8:$Vf,23:[1,50]},{20:51,26:$Vg,31:$Vh,33:43},o($Vl,[2,18],{16:52,8:$Vd}),{26:[1,57],31:[1,56],35:53,36:[1,54],37:[1,55]},o($V0,[2,23]),o([8,23],[2,22],{17:58,18:$Vj}),o($Vl,[2,19],{8:$Vf}),o($Vk,[2,38]),o($Vk,[2,39]),o($Vk,[2,40]),o($Vk,[2,41]),o($Vk,[2,42]),o($Vk,[2,21])],
-defaultActions: {4:[2,1],44:[2,36],45:[2,37]},
+table: [o($V0,[2,2],{3:1,4:2}),{1:[3]},o($V0,[2,6],{5:3}),{6:[1,4],8:[1,7],9:[1,11],10:5,11:6,12:8,13:9,14:10,24:[1,12],25:[1,13],26:[1,14],27:15,29:16,31:$V1,32:$V2,33:$V3},{1:[2,1]},o($V0,[2,7]),o($V0,[2,8]),o($V0,[2,5]),o($V0,[2,9]),o($V0,[2,10]),o($V0,[2,11]),o($V0,[2,12]),{21:20,22:$V4},{21:22,22:$V4},{7:24,8:$V5,9:$V6,21:23,22:$V4,30:$V7},o($V8,[2,31],{28:27,21:29,22:$V4,30:[1,28]}),{30:[1,30]},o($V9,[2,34]),o($V9,[2,35]),o($V9,[2,36]),o($Va,$Vb,{15:31,9:$Vc}),o([26,31],$Vd,{16:33,8:$Ve}),o($Va,$Vb,{15:35,9:$Vc}),{7:36,8:$V5,9:$V6},o($V0,[2,27]),o($V0,[2,3]),o($V0,[2,4]),{7:37,8:$V5,9:$V6},{26:$Vf,29:38,31:$V1,32:$V2,33:$V3},o($V8,[2,32]),{26:$Vf,29:40,31:$V1,32:$V2,33:$V3},o($V0,[2,24]),o($V0,[2,14]),{8:$Vg,19:41,20:43,26:$Vh,31:$Vi,34:44},o($Vj,[2,16]),o($V0,[2,25]),o($V0,[2,26]),o($V0,[2,28]),o($V9,[2,30]),o($V9,$V7),o($V9,[2,29]),{8:$Ve,16:47,17:48,18:$Vk,23:$Vd},o($Vj,[2,17]),o($Vl,[2,20]),{35:[1,50]},{35:[2,37]},{35:[2,38]},{8:$Vg,23:[1,51]},{20:52,26:$Vh,31:$Vi,34:44},o($Vm,[2,18],{16:53,8:$Ve}),{26:[1,58],31:[1,57],36:54,37:[1,55],38:[1,56]},o($V0,[2,23]),o([8,23],[2,22],{17:59,18:$Vk}),o($Vm,[2,19],{8:$Vg}),o($Vl,[2,39]),o($Vl,[2,40]),o($Vl,[2,41]),o($Vl,[2,42]),o($Vl,[2,43]),o($Vl,[2,21])],
+defaultActions: {4:[2,1],45:[2,37],46:[2,38]},
 parseError: function parseError (str, hash) {
     if (hash.recoverable) {
         this.trace(str);
@@ -342,7 +349,7 @@ parse: function parse(input) {
 }};
 
   // ----- module-scope state -----
-  var nodesMap, edges, dummyAutoId, edgeAutoId, currentDefaults;
+  var nodesMap, edges, dummyAutoId, edgeAutoId, currentDefaults, namedDummyMap;
   // --- switches & indices ---
   var allowParallelEdges;               // default true
   var edgeKeyToIndexMap;                // (sourceId,targetId) -> edges[] index
@@ -359,6 +366,7 @@ parse: function parse(input) {
     };
     allowParallelEdges = false;
     edgeKeyToIndexMap = Object.create(null);
+    namedDummyMap = Object.create(null);
   }
 
   function shallowCopy(obj) {
@@ -430,9 +438,22 @@ parse: function parse(input) {
   /** Create a fresh anonymous dummy node id like _d1, and register it as dummy (no NODE defaults). */
   function createAnonymousDummyNode() {
     dummyAutoId += 1;
-    var dummyNodeId = "_d" + String(dummyAutoId);
+    var dummyNodeId = "_d$" + String(dummyAutoId);
     ensureNode(dummyNodeId, { $dummy: true });
     return dummyNodeId;
+  }
+
+  function getOrCreateNamedDummy(label) {
+    var id = namedDummyMap[label];
+    if (id) {
+      return id
+    };
+  
+    id = '_d#' + label;
+    namedDummyMap[label] = id;
+  
+    ensureNode(id, { $dummy: true });
+    return id;
   }
 
   /** Create a fresh edge id like _e1. */
@@ -830,28 +851,30 @@ case 7:return 23
 break;
 case 8:return 18
 break;
-case 9:return 34
+case 9:return 35
 break;
 case 10:return 9
 break;
-case 11:return 32
+case 11:return 33
 break;
-case 12:return 37
+case 12:return 32
 break;
-case 13:return 36         /* integer/float */
+case 13:return 38
 break;
-case 14:return 31
+case 14:return 37         /* integer/float */
 break;
-case 15:return 26          /* bare identifiers */
+case 15:return 31
 break;
-case 16:return 6
+case 16:return 26          /* bare identifiers */
 break;
-case 17:return 'INVALID'
+case 17:return 6
+break;
+case 18:return 'INVALID'
 break;
 }
 },
-rules: [/^(?:[ \t\f]+)/,/^(?:\r\n|\r|\n)/,/^(?:#.*)/,/^(?:NODE\b)/,/^(?:EDGE\b)/,/^(?:->)/,/^(?:\[)/,/^(?:\])/,/^(?:,)/,/^(?:=)/,/^(?:;)/,/^(?:\*)/,/^(?:\b0x[0-9A-Fa-f]+\b)/,/^(?:-?[0-9]+(\.[0-9]+)?\b)/,/^(?:"(\\.|[^\"\\])*"|'(\\.|[^\'\\])*')/,/^(?:[A-Za-z_](?:[A-Za-z0-9_-]|\.[A-Za-z0-9_-])*)/,/^(?:$)/,/^(?:.)/],
-conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17],"inclusive":true}}
+rules: [/^(?:[ \t\f]+)/,/^(?:\r\n|\r|\n)/,/^(?:#.*)/,/^(?:NODE\b)/,/^(?:EDGE\b)/,/^(?:->)/,/^(?:\[)/,/^(?:\])/,/^(?:,)/,/^(?:=)/,/^(?:;)/,/^(?:\*[A-Za-z0-9_]+)/,/^(?:\*)/,/^(?:\b0x[0-9A-Fa-f]+\b)/,/^(?:-?[0-9]+(\.[0-9]+)?\b)/,/^(?:"(\\.|[^\"\\])*"|'(\\.|[^\'\\])*')/,/^(?:[A-Za-z_](?:[A-Za-z0-9_-]|\.[A-Za-z0-9_-])*)/,/^(?:$)/,/^(?:.)/],
+conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],"inclusive":true}}
 });
 return lexer;
 })();

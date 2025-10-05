@@ -22,6 +22,7 @@
 "="                                             return '='
 ";"                                             return ';'
 
+\*[A-Za-z0-9_]+                                 return 'STAR_NAMED'
 "*"                                             return 'STAR'
 
 \b0x[0-9A-Fa-f]+\b                              return 'HEXNUMBER'
@@ -36,7 +37,7 @@
 
 %{
   // ----- module-scope state -----
-  var nodesMap, edges, dummyAutoId, edgeAutoId, currentDefaults;
+  var nodesMap, edges, dummyAutoId, edgeAutoId, currentDefaults, namedDummyMap;
   // --- switches & indices ---
   var allowParallelEdges;               // default true
   var edgeKeyToIndexMap;                // (sourceId,targetId) -> edges[] index
@@ -53,6 +54,7 @@
     };
     allowParallelEdges = false;
     edgeKeyToIndexMap = Object.create(null);
+    namedDummyMap = Object.create(null);
   }
 
   function shallowCopy(obj) {
@@ -124,9 +126,22 @@
   /** Create a fresh anonymous dummy node id like _d1, and register it as dummy (no NODE defaults). */
   function createAnonymousDummyNode() {
     dummyAutoId += 1;
-    var dummyNodeId = "_d" + String(dummyAutoId);
+    var dummyNodeId = "_d$" + String(dummyAutoId);
     ensureNode(dummyNodeId, { $dummy: true });
     return dummyNodeId;
+  }
+
+  function getOrCreateNamedDummy(label) {
+    var id = namedDummyMap[label];
+    if (id) {
+      return id
+    };
+  
+    id = '_d#' + label;
+    namedDummyMap[label] = id;
+  
+    ensureNode(id, { $dummy: true });
+    return id;
   }
 
   /** Create a fresh edge id like _e1. */
@@ -329,6 +344,12 @@ node_ref
       {        
         var gen = createAnonymousDummyNode();
         $$ = { id: gen, parameters: { $dummy: true } };
+      }
+  | STAR_NAMED
+      {
+        var label = yytext.slice(1);
+        var id = getOrCreateNamedDummy(label);
+        $$ = { id: id, parameters: { $dummy: true } };
       }
   ;
 

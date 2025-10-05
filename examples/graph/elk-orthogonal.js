@@ -29,6 +29,9 @@ O -> P -> Q -> R -> S
 T -> U -> Q
 V -> W -> X -> R
 Y -> Z -> X
+
+I -> *1
+S -> *1
         `
 
         var background = this.add.rectangle()
