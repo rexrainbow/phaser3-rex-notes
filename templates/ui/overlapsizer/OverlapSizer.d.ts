@@ -1,5 +1,6 @@
 // import * as Phaser from 'phaser';
 import BaseSizer from '../basesizer/BaseSizer.js';
+import GetBoundsConfig from '../../../plugins/utils/bounds/GetBoundsConfig.js';
 
 export default OverlapSizer;
 
@@ -9,13 +10,7 @@ declare namespace OverlapSizer {
         'center-top' | 'center-center' | 'center-bottom' |
         'right-top' | 'right-center' | 'right-bottom';
 
-    type PaddingTypes = number |
-    {
-        left?: number,
-        right?: number,
-        top?: number,
-        bottom?: number
-    };
+    type PaddingTypes = GetBoundsConfig.PaddingConfigType;
 
     interface IConfig extends BaseSizer.IConfig {
         x?: number,

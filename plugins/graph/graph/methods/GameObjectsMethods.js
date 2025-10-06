@@ -72,4 +72,20 @@ export default {
         DrawBounds(gameObjects, graphics, config);
         return this;
     },
+
+    createNullEdge() {
+        return { $invisible: true };
+    },
+
+    isNullEdge(edge) {
+        return !!edge.$invisible;
+    },
+
+    createNullNode() {
+        return { $dummy: true, width: 0, height: 0, }
+    },
+
+    isNullNode(node) {
+        return !!node.$dummy;
+    },
 }

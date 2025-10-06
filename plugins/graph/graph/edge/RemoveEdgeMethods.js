@@ -26,4 +26,11 @@ export default {
         return this;
     },
 
+    removeAllEdges(destroy) {
+        for (var edgeUid in this.edges) {
+            this.removeEdge(edgeUid, destroy)
+        }
+
+        return this;
+    },
 };

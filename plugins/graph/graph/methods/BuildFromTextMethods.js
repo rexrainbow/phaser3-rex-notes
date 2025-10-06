@@ -1,7 +1,7 @@
 import BuildGraphFromText from '../../flowparser/BuildGraphFromText.js';
 
 export default {
-    setOnCreateNodeGameObjectCallback(callback, scope) {
+    setOnCreateNodeGameObjectCallback(callback) {
         this.onCreateNodeGameObject = callback;
         return this;
     },

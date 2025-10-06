@@ -14,7 +14,7 @@ class Graph extends LogicGraph {
         this.setOnCreateNodeGameObjectCallback(config.onCreateNodeGameObject);
         this.setOnCreateEdgeGameObjectCallback(config.onCreateEdgeGameObject);
 
-        this.setGameObjectContainer(config.container);
+        this.setContainer(config.container);
         this.setContainerPadding(config.containerPadding);
 
         this.on('layout.complete', function () {
