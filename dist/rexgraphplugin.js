@@ -836,6 +836,16 @@
         return this.graph.hasNode(uid);
     };
 
+    var NullNodeMethod = {
+        createNullNode() {
+            return { $dummy: true, width: 0, height: 0, }
+        },
+
+        isNullNode(node) {
+            return !!node.$dummy;
+        },
+    };
+
     var AddNodeMethods = {
         addNode(gameObejct, attributes, nodeUID) {
             if (this.isNode(gameObejct)) {
@@ -858,7 +868,8 @@
                 this.addNode(gameObjects[i], { ...attributes });
             }
             return this;
-        }
+        },
+
     };
 
     var UIDToObj = function (uid) {
@@ -1062,6 +1073,16 @@
         return this.graph.hasEdge(uid);
     };
 
+    var NulEdgeMethod = {
+        createNullEdge() {
+            return { $invisible: true };
+        },
+
+        isNullEdge(edge) {
+            return !!edge.$invisible;
+        },
+    };
+
     Phaser.Utils.Objects.IsPlainObject;
 
     const DIRAtoB = 1;
@@ -1119,7 +1140,7 @@
 
 
             return this;
-        }
+        },
 
     };
 
@@ -1254,12 +1275,15 @@
 
     Object.assign(
         Methods,
+
+        NullNodeMethod,
         AddNodeMethods,
         RemoveNodeMethods,
         GetNodeMethods,
         NeighborNodeMethods,
         NodeAttributeMethods,
 
+        NulEdgeMethod,
         AddEdgeMethods,
         RemoveEdgeMethods,
         GetEdgeMethods,
@@ -1902,12 +1926,12 @@
     	  }
     	*/
     	var parser = (function(){
-    	var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[6,8,9,16,20,21,26,27],$V1=[1,17],$V2=[1,18],$V3=[1,23],$V4=[1,24],$V5=[2,24],$V6=[8,9],$V7=[8,9,17,25],$V8=[1,31],$V9=[1,36],$Va=[1,40],$Vb=[19,29],$Vc=[6,8,16,20,21,26,27],$Vd=[2,13],$Ve=[1,46];
+    	var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[6,8,9,24,25,26,27,33,34],$V1=[1,18],$V2=[1,19],$V3=[1,21],$V4=[31,32],$V5=[2,36],$V6=[1,25],$V7=[1,26],$V8=[2,39],$V9=[8,9],$Va=[8,9,22,31,32],$Vb=[6,8,24,25,26,27,33,34],$Vc=[2,13],$Vd=[1,35],$Ve=[2,15],$Vf=[1,37],$Vg=[1,43],$Vh=[1,44],$Vi=[1,49],$Vj=[1,52],$Vk=[1,53],$Vl=[8,18,23,26,33],$Vm=[8,18,23],$Vn=[18,23,26,33];
     	var parser = {trace: function trace () { },
     	yy: {},
-    	symbols_: {"error":2,"document":3,"init":4,"statements":5,"EOF":6,"line_end":7,"EOL":8,";":9,"blank_line":10,"statement":11,"defaults_statement":12,"node_statement":13,"edge_statement":14,"opt_semicolon":15,"NODE":16,"[":17,"attribute_list":18,"]":19,"EDGE":20,"IDENT":21,"edge_chain":22,"edge_attribute_opt":23,"node_ref":24,"->":25,"QUOTED_STRING":26,"STAR":27,"attribute":28,",":29,"=":30,"attribute_value":31,"NUMBER":32,"HEXNUMBER":33,"$accept":0,"$end":1},
-    	terminals_: {2:"error",6:"EOF",8:"EOL",9:";",16:"NODE",17:"[",19:"]",20:"EDGE",21:"IDENT",25:"->",26:"QUOTED_STRING",27:"STAR",29:",",30:"=",32:"NUMBER",33:"HEXNUMBER"},
-    	productions_: [0,[3,3],[4,0],[7,1],[7,1],[10,1],[5,0],[5,2],[5,2],[11,1],[11,1],[11,1],[11,1],[15,0],[15,1],[12,5],[12,5],[13,5],[13,2],[14,3],[22,3],[22,3],[23,0],[23,3],[24,1],[24,1],[24,1],[18,1],[18,3],[28,3],[31,1],[31,1],[31,1],[31,1]],
+    	symbols_: {"error":2,"document":3,"init":4,"statements":5,"EOF":6,"line_end":7,"EOL":8,";":9,"blank_line":10,"statement":11,"defaults_statement":12,"node_statement":13,"edge_statement":14,"opt_semicolon":15,"opt_eol":16,"sep":17,",":18,"attribute_list":19,"attribute":20,"attribute_block":21,"[":22,"]":23,"NODE":24,"EDGE":25,"IDENT":26,"STAR_NAMED":27,"edge_chain":28,"edge_attribute_opt":29,"node_ref":30,"->":31,"INVIS_ARROW":32,"QUOTED_STRING":33,"STAR":34,"attribute_key":35,"=":36,"attribute_value":37,"NUMBER":38,"HEXNUMBER":39,"$accept":0,"$end":1},
+    	terminals_: {2:"error",6:"EOF",8:"EOL",9:";",18:",",22:"[",23:"]",24:"NODE",25:"EDGE",26:"IDENT",27:"STAR_NAMED",31:"->",32:"INVIS_ARROW",33:"QUOTED_STRING",34:"STAR",36:"=",38:"NUMBER",39:"HEXNUMBER"},
+    	productions_: [0,[3,3],[4,0],[7,1],[7,1],[10,1],[5,0],[5,2],[5,2],[11,1],[11,1],[11,1],[11,1],[15,0],[15,1],[16,0],[16,1],[16,2],[17,1],[17,2],[19,1],[19,3],[19,2],[21,5],[12,3],[12,3],[13,3],[13,2],[13,3],[14,3],[28,3],[28,3],[28,3],[28,3],[29,0],[29,1],[30,1],[30,1],[30,1],[30,1],[35,1],[35,1],[20,3],[37,1],[37,1],[37,1],[37,1]],
     	performAction: function anonymous(yytext, yyleng, yylineno, yy, yystate /* action[1] */, $$ /* vstack */, _$ /* lstack */) {
     	/* this == yyval */
 
@@ -1922,29 +1946,75 @@
     	case 2:
     	 resetState(); 
     	break;
-    	case 15:
-    	 mergeInto(currentDefaults.node, $$[$0-2]); 
+    	case 20:
+
+    	        var o = {};
+    	        o[$$[$0].key] = $$[$0].value;
+    	        this.$ = o;
+    	      
     	break;
-    	case 16:
-    	 mergeInto(currentDefaults.edge, $$[$0-2]); 
+    	case 21:
+
+    	        $$[$0-2][$$[$0].key] = $$[$0].value;
+    	        this.$ = $$[$0-2];
+    	      
     	break;
-    	case 17:
-    	 ensureNode($$[$0-4], $$[$0-2]); 
+    	case 22:
+
+    	        /* trailing comma: nothing to add */
+    	        this.$ = $$[$0-1];
+    	      
     	break;
-    	case 18:
-    	 ensureNode($$[$0-1], {}); 
+    	case 23:
+    	 this.$ = $$[$0-2]; 
     	break;
-    	case 19:
+    	case 24:
+
+    	        var parts = splitNodeParameters($$[$0-1]);
+    	        mergeInto(currentDefaults.node, parts.parameters);
+    	        mergeInto(currentDefaults.nodeLayout, parts.layoutOptions);
+    	      
+    	break;
+    	case 25:
+    	 
+    	        mergeInto(currentDefaults.edge, $$[$0-1]); 
+    	      
+    	break;
+    	case 26:
+    	 
+    	        var parts = splitNodeParameters($$[$0-1]);
+    	        var n = ensureNode($$[$0-2], parts.parameters);
+    	        mergeInto(n.layoutOptions, parts.layoutOptions);
+    	      
+    	break;
+    	case 27:
+    	 
+    	        ensureNode($$[$0-1], {}); 
+    	      
+    	break;
+    	case 28:
+
+    	        var label = yytext.slice(1);
+    	        var id = getOrCreateNamedDummy(label);
+    	        var parts = splitNodeParameters($$[$0-1]);
+    	        var n = ensureNode(id, parts.parameters);
+    	        mergeInto(n.layoutOptions, parts.layoutOptions);
+    	      
+    	break;
+    	case 29:
 
     	        var chainParams = $$[$0-1] || null;
-    	        var effectiveEdgeParamsForChain = merged(currentDefaults.edge, chainParams);
+    	        var chainBase = merged(currentDefaults.edge, chainParams);
     	        for (var i = 0; i < $$[$0-2].edgePairs.length; i += 1) {
     	          var pair = $$[$0-2].edgePairs[i];
-    	          addEdge(pair.sourceId, pair.targetId, effectiveEdgeParamsForChain);
+    	          var perPair = pair.$invisible
+    	            ? merged(chainBase, { render: false, $invisible: true, 'elk.edge.thickness': 0 })
+    	            : chainBase;
+    	          addEdge(pair.sourceId, pair.targetId, perPair);
     	        }
     	      
     	break;
-    	case 20:
+    	case 30:
 
     	        ensureNode($$[$0-2].id, $$[$0-2].parameters);
     	        ensureNode($$[$0].id, $$[$0].parameters);
@@ -1954,56 +2024,67 @@
     	        };
     	      
     	break;
-    	case 21:
+    	case 31:
+
+    	        ensureNode($$[$0-2].id, $$[$0-2].parameters);
+    	        ensureNode($$[$0].id, $$[$0].parameters);
+    	        this.$ = {
+    	          lastNodeId: $$[$0].id,
+    	          edgePairs: [{ sourceId: $$[$0-2].id, targetId: $$[$0].id, $invisible: true }]
+    	        };
+    	      
+    	break;
+    	case 32: case 33:
 
     	        ensureNode($$[$0].id, $$[$0].parameters);
     	        $$[$0-2].edgePairs.push({ sourceId: $$[$0-2].lastNodeId, targetId: $$[$0].id });
     	        this.$ = { lastNodeId: $$[$0].id, edgePairs: $$[$0-2].edgePairs };
     	      
     	break;
-    	case 22:
+    	case 34:
     	 this.$ = null; 
     	break;
-    	case 23:
-    	 this.$ = $$[$0-1]; 
+    	case 35:
+    	 this.$ = $$[$0]; 
     	break;
-    	case 24:
+    	case 36:
     	 this.$ = { id: $$[$0], parameters: {} }; 
     	break;
-    	case 25:
+    	case 37:
     	 this.$ = { id: unquote(yytext), parameters: {} }; 
     	break;
-    	case 26:
+    	case 38:
     	        
     	        var gen = createAnonymousDummyNode();
     	        this.$ = { id: gen, parameters: { $dummy: true } };
     	      
     	break;
-    	case 27:
-    	 var parametersObject = {}; parametersObject[$$[$0].key] = $$[$0].value; this.$ = parametersObject; 
+    	case 39:
+
+    	        var label = yytext.slice(1);
+    	        var id = getOrCreateNamedDummy(label);
+    	        this.$ = { id: id, parameters: { $dummy: true } };
+    	      
     	break;
-    	case 28:
-    	 $$[$0-2][$$[$0].key] = $$[$0].value; this.$ = $$[$0-2]; 
+    	case 40: case 46:
+    	 this.$ = yytext; 
     	break;
-    	case 29:
-    	 this.$ = { key: $$[$0-2], value: $$[$0] }; 
-    	break;
-    	case 30:
-    	 this.$ = Number(yytext); 
-    	break;
-    	case 31:
-    	 this.$ = parseInt(yytext, 16); 
-    	break;
-    	case 32:
+    	case 41: case 45:
     	 this.$ = unquote(yytext); 
     	break;
-    	case 33:
-    	 this.$ = yytext; 
+    	case 42:
+    	 this.$ = { key: $$[$0-2], value: $$[$0] }; 
+    	break;
+    	case 43:
+    	 this.$ = Number(yytext); 
+    	break;
+    	case 44:
+    	 this.$ = parseInt(yytext, 16); 
     	break;
     	}
     	},
-    	table: [o($V0,[2,2],{3:1,4:2}),{1:[3]},o($V0,[2,6],{5:3}),{6:[1,4],8:[1,7],9:[1,11],10:5,11:6,12:8,13:9,14:10,16:[1,12],20:[1,13],21:[1,14],22:15,24:16,26:$V1,27:$V2},{1:[2,1]},o($V0,[2,7]),o($V0,[2,8]),o($V0,[2,5]),o($V0,[2,9]),o($V0,[2,10]),o($V0,[2,11]),o($V0,[2,12]),{17:[1,19]},{17:[1,20]},{7:22,8:$V3,9:$V4,17:[1,21],25:$V5},o($V6,[2,22],{23:25,17:[1,27],25:[1,26]}),{25:[1,28]},o($V7,[2,25]),o($V7,[2,26]),{18:29,21:$V8,28:30},{18:32,21:$V8,28:30},{18:33,21:$V8,28:30},o($V0,[2,18]),o($V0,[2,3]),o($V0,[2,4]),{7:34,8:$V3,9:$V4},{21:$V9,24:35,26:$V1,27:$V2},{18:37,21:$V8,28:30},{21:$V9,24:38,26:$V1,27:$V2},{19:[1,39],29:$Va},o($Vb,[2,27]),{30:[1,41]},{19:[1,42],29:$Va},{19:[1,43],29:$Va},o($V0,[2,19]),o($V7,[2,21]),o($V7,$V5),{19:[1,44],29:$Va},o($V7,[2,20]),o($Vc,$Vd,{15:45,9:$Ve}),{21:$V8,28:47},{21:[1,52],26:[1,51],31:48,32:[1,49],33:[1,50]},o($Vc,$Vd,{15:53,9:$Ve}),{7:54,8:$V3,9:$V4},o($V6,[2,23]),o($V0,[2,15]),o($V0,[2,14]),o($Vb,[2,28]),o($Vb,[2,29]),o($Vb,[2,30]),o($Vb,[2,31]),o($Vb,[2,32]),o($Vb,[2,33]),o($V0,[2,16]),o($V0,[2,17])],
-    	defaultActions: {4:[2,1]},
+    	table: [o($V0,[2,2],{3:1,4:2}),{1:[3]},o($V0,[2,6],{5:3}),{6:[1,4],8:[1,7],9:[1,11],10:5,11:6,12:8,13:9,14:10,24:[1,12],25:[1,13],26:[1,14],27:[1,15],28:16,30:17,33:$V1,34:$V2},{1:[2,1]},o($V0,[2,7]),o($V0,[2,8]),o($V0,[2,5]),o($V0,[2,9]),o($V0,[2,10]),o($V0,[2,11]),o($V0,[2,12]),{21:20,22:$V3},{21:22,22:$V3},o($V4,$V5,{21:23,7:24,8:$V6,9:$V7,22:$V3}),o($V4,$V8,{21:27,22:$V3}),o($V9,[2,34],{29:28,21:31,22:$V3,31:[1,29],32:[1,30]}),{31:[1,32],32:[1,33]},o($Va,[2,37]),o($Va,[2,38]),o($Vb,$Vc,{15:34,9:$Vd}),o([26,33],$Ve,{16:36,8:$Vf}),o($Vb,$Vc,{15:38,9:$Vd}),{7:39,8:$V6,9:$V7},o($V0,[2,27]),o($V0,[2,3]),o($V0,[2,4]),{7:40,8:$V6,9:$V7},{7:41,8:$V6,9:$V7},{26:$Vg,27:$Vh,30:42,33:$V1,34:$V2},{26:$Vg,27:$Vh,30:45,33:$V1,34:$V2},o($V9,[2,35]),{26:$Vg,27:$Vh,30:46,33:$V1,34:$V2},{26:$Vg,27:$Vh,30:47,33:$V1,34:$V2},o($V0,[2,24]),o($V0,[2,14]),{8:$Vi,19:48,20:50,26:$Vj,33:$Vk,35:51},o($Vl,[2,16]),o($V0,[2,25]),o($V0,[2,26]),o($V0,[2,28]),o($V0,[2,29]),o($Va,[2,32]),o($Va,$V5),o($Va,$V8),o($Va,[2,33]),o($Va,[2,30]),o($Va,[2,31]),{8:$Vf,16:54,17:55,18:[1,56],23:$Ve},o($Vl,[2,17]),o($Vm,[2,20]),{36:[1,57]},{36:[2,40]},{36:[2,41]},{8:$Vi,23:[1,58]},o($Vm,[2,22],{35:51,20:59,26:$Vj,33:$Vk}),o($Vn,[2,18],{16:60,8:$Vf}),{26:[1,65],33:[1,64],37:61,38:[1,62],39:[1,63]},o($V0,[2,23]),o($Vm,[2,21]),o($Vn,[2,19],{8:$Vi}),o($Vm,[2,42]),o($Vm,[2,43]),o($Vm,[2,44]),o($Vm,[2,45]),o($Vm,[2,46])],
+    	defaultActions: {4:[2,1],52:[2,40],53:[2,41]},
     	parseError: function parseError (str, hash) {
     	    if (hash.recoverable) {
     	        this.trace(str);
@@ -2140,7 +2221,7 @@
     	}};
 
     	  // ----- module-scope state -----
-    	  var nodesMap, edges, dummyAutoId, edgeAutoId, currentDefaults;
+    	  var nodesMap, edges, dummyAutoId, edgeAutoId, currentDefaults, namedDummyMap;
     	  // --- switches & indices ---
     	  var allowParallelEdges;               // default true
     	  var edgeKeyToIndexMap;                // (sourceId,targetId) -> edges[] index
@@ -2151,11 +2232,13 @@
     	    dummyAutoId = 0;   // for anonymous dummy nodes: _d1, _d2, ...
     	    edgeAutoId  = 0;   // for edges: _e1, _e2, ...
     	    currentDefaults = {
-    	      node: {},   // defaults applied when a *non-dummy* node is first created
-    	      edge: {}    // defaults applied to each edge at creation (chain-tail can override)
+    	      node: {},
+    	      nodeLayout: {},
+    	      edge: {}
     	    };
     	    allowParallelEdges = false;
     	    edgeKeyToIndexMap = Object.create(null);
+    	    namedDummyMap = Object.create(null);
     	  }
 
     	  function shallowCopy(obj) {
@@ -2171,6 +2254,29 @@
     	  function merged(a, b) {
     	    return mergeInto(mergeInto({}, a || {}), b || {});
     	  }
+    	  function splitNodeParameters(parameters) {
+    	    const normalParameters = {};
+    	    const elkLayoutOptions = {};
+    	  
+    	    for (const key in parameters) {
+    	      if (!Object.prototype.hasOwnProperty.call(parameters, key)) {
+    	        continue;
+    	      }
+    	  
+    	      const value = parameters[key];
+    	      if (key.startsWith('elk.')) {
+    	        elkLayoutOptions[key] = value;
+    	      } else {
+    	        normalParameters[key] = value;
+    	      }
+    	    }
+    	  
+    	    return {
+    	      parameters: normalParameters,
+    	      layoutOptions: elkLayoutOptions
+    	    };
+    	  }
+
 
     	  function makeEdgeKey(sourceId, targetId) {
     	    return sourceId + '->' + targetId;
@@ -2188,12 +2294,14 @@
     	    var nodeItem = nodesMap[nodeId];
     	    if (!nodeItem) {
     	      // seed parameters: {} for dummy, NODE defaults for normal nodes
-    	      var seed = isDummyCreation ? {} : shallowCopy(currentDefaults.node);
-    	      nodeItem = { id: nodeId, parameters: seed };
+    	      var seed = (isDummyCreation)? {} : shallowCopy(currentDefaults.node);
+    	      nodeItem = { id: nodeId, parameters: seed, layoutOptions: {} };
+    	      if (!isDummyCreation) {
+    	        mergeInto(nodeItem.layoutOptions, currentDefaults.nodeLayout);
+    	      }
     	      nodesMap[nodeId] = nodeItem;
     	    }
     	    if (newParameters && typeof newParameters === 'object') {
-    	      // merge caller-provided parameters; dummy=true will be set/kept
     	      mergeInto(nodeItem.parameters, newParameters);
     	    }
     	    return nodeItem;
@@ -2202,9 +2310,21 @@
     	  /** Create a fresh anonymous dummy node id like _d1, and register it as dummy (no NODE defaults). */
     	  function createAnonymousDummyNode() {
     	    dummyAutoId += 1;
-    	    var dummyNodeId = "_d" + String(dummyAutoId);
+    	    var dummyNodeId = "_d$" + String(dummyAutoId);
     	    ensureNode(dummyNodeId, { $dummy: true });
     	    return dummyNodeId;
+    	  }
+
+    	  function getOrCreateNamedDummy(label) {
+    	    var id = namedDummyMap[label];
+    	    if (id) {
+    	      return id
+    	    }	  
+    	    id = '_d#' + label;
+    	    namedDummyMap[label] = id;
+    	  
+    	    ensureNode(id, { $dummy: true });
+    	    return id;
     	  }
 
     	  /** Create a fresh edge id like _e1. */
@@ -2252,7 +2372,9 @@
     	    return out;
     	  }
 
-    	  function unquote(text) { return text.slice(1, -1); }
+    	  function unquote(text) { 
+    	    return text.slice(1, -1); 
+    	  }
 
     	/* generated by jison-lex 0.3.4 */
     	var lexer = (function(){
@@ -2586,25 +2708,31 @@
     	case 1:return 8
     	case 2:/* skip line comments starting with # */
     	break;
-    	case 3:return 16     /* defaults for nodes (UPPERCASE) */
-    	case 4:return 20     /* defaults for edges (UPPERCASE) */
-    	case 5:return 25
-    	case 6:return 17
-    	case 7:return 19
-    	case 8:return 29
-    	case 9:return 30
-    	case 10:return 9
-    	case 11:return 27
-    	case 12:return 33
-    	case 13:return 32         /* integer/float */
-    	case 14:return 26
-    	case 15:return 21          /* bare identifiers */
-    	case 16:return 6
-    	case 17:return 'INVALID'
+    	case 3:/* skip line comments starting with // */
+    	break;
+    	case 4:/* skip C-style block comments */
+    	break;
+    	case 5:return 24     /* defaults for nodes (UPPERCASE) */
+    	case 6:return 25     /* defaults for edges (UPPERCASE) */
+    	case 7:return 22
+    	case 8:return 23
+    	case 9:return 18
+    	case 10:return 36
+    	case 11:return 9
+    	case 12:return 31
+    	case 13:return 32
+    	case 14:return 27
+    	case 15:return 34
+    	case 16:return 39
+    	case 17:return 38         /* integer/float */
+    	case 18:return 33
+    	case 19:return 26          /* bare identifiers */
+    	case 20:return 6
+    	case 21:return 'INVALID'
     	}
     	},
-    	rules: [/^(?:[ \t\f]+)/,/^(?:\r\n|\r|\n)/,/^(?:#.*)/,/^(?:NODE\b)/,/^(?:EDGE\b)/,/^(?:->)/,/^(?:\[)/,/^(?:\])/,/^(?:,)/,/^(?:=)/,/^(?:;)/,/^(?:\*)/,/^(?:\b0x[0-9A-Fa-f]+\b)/,/^(?:-?[0-9]+(\.[0-9]+)?\b)/,/^(?:"(\\.|[^\"\\])*"|'(\\.|[^\'\\])*')/,/^(?:[A-Za-z_][A-Za-z0-9_-]*)/,/^(?:$)/,/^(?:.)/],
-    	conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17],"inclusive":true}}
+    	rules: [/^(?:[ \t\f]+)/,/^(?:\r\n|\r|\n)/,/^(?:#.*)/,/^(?:\/\/.*)/,/^(?:\/\*([^*]|\*+[^*/])*\*+\/)/,/^(?:NODE\b)/,/^(?:EDGE\b)/,/^(?:\[)/,/^(?:\])/,/^(?:,)/,/^(?:=)/,/^(?:;)/,/^(?:->)/,/^(?:\*>)/,/^(?:\*[A-Za-z0-9_]+)/,/^(?:\*)/,/^(?:\b0x[0-9A-Fa-f]+\b)/,/^(?:-?[0-9]+(\.[0-9]+)?\b)/,/^(?:"(\\.|[^\"\\])*"|'(\\.|[^\'\\])*')/,/^(?:[A-Za-z_](?:[A-Za-z0-9_-]|\.[A-Za-z0-9_-])*)/,/^(?:$)/,/^(?:.)/],
+    	conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21],"inclusive":true}}
     	});
     	return lexer;
     	})();
@@ -2638,13 +2766,13 @@
         var nodeGameObject;
         for (var i = 0, cnt = nodes.length; i < cnt; i++) {
             var nodeData = nodes[i];
-            var id = nodeData.id;
-            var parameters = nodeData.parameters;
+            var { id, parameters, layoutOptions } = nodeData;
+            parameters.layoutOptions = layoutOptions;
 
-            if (onCreateNodeGameObject) {
+            if (onCreateNodeGameObject && !parameters.$dummy) {
                 nodeGameObject = onCreateNodeGameObject(scene, id, parameters);
             } else {
-                nodeGameObject = { width: 0, height: 0 };
+                nodeGameObject = graph.createNullNode();
             }
 
             graph.addNode(nodeGameObject, parameters, id);
@@ -2657,11 +2785,10 @@
             var parameters = edgeData.parameters;
             var sourceId = edgeData.sourceId;
             var targetId = edgeData.targetId;
-
-            if (onCreateEdgeGameObject) {
+            if (onCreateEdgeGameObject && !parameters.$invisible) {
                 edgeGameObject = onCreateEdgeGameObject(scene, id, parameters);
             } else {
-                edgeGameObject = {};
+                edgeGameObject = graph.createNullEdge();
             }
 
             graph.addEdge(edgeGameObject, sourceId, targetId, undefined, parameters, id);
@@ -9829,6 +9956,10 @@
 
         graphData.children.forEach(function (nodeData) {
             var gameObject = nodeData.gameObject;
+            if (graph.isNullNode(gameObject)) {
+                return;
+            }
+
             var padding = nodeData.padding;
             var x = nodeData.x + padding.left;
             var y = nodeData.y + padding.top;
@@ -9843,8 +9974,12 @@
         });
 
         graphData.edges.forEach(function (edgeData) {
+            var gameObject = edgeData.gameObject;
+            if (graph.isNullEdge(gameObject)) {
+                return;
+            }
             var path = GetPath$1(edgeData);
-            graph.emit('layout.edge', edgeData.gameObject, path, edgeData.sourceGameObject, edgeData.targetGameObject);
+            graph.emit('layout.edge', gameObject, path, edgeData.sourceGameObject, edgeData.targetGameObject);
         });
 
         // Align graph to (0,0)
@@ -23317,6 +23452,10 @@
         graphData.nodes().forEach(function (nodeKey) {
             var nodeData = graphData.node(nodeKey);
             var gameObject = nodeData.gameObject;
+            if (graph.isNullNode(gameObject)) {
+                return;
+            }
+
             var padding = nodeData.padding;
             var x = nodeData.x - (nodeData.width / 2) + padding.left;  // nodeData.x is centerX
             var y = nodeData.y - (nodeData.height / 2) + padding.top;  // nodeData.y is centerY
@@ -23331,9 +23470,14 @@
         });
 
         graphData.edges().forEach(function (edgeKey) {
+            var gameObject = edgeData.gameObject;
+            if (graph.isNullEdge(gameObject)) {
+                return;
+            }
+
             var edgeData = graphData.edge(edgeKey);
             var path = GetPath(edgeData);
-            graph.emit('layout.edge', edgeData.gameObject, path, edgeData.sourceGameObject, edgeData.targetGameObject);
+            graph.emit('layout.edge', gameObject, path, edgeData.sourceGameObject, edgeData.targetGameObject);
         });
 
         // Align graph to (0,0)
