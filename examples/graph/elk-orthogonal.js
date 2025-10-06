@@ -30,8 +30,10 @@ T -> U -> Q
 V -> W -> X -> R
 Y -> Z -> X
 
-# For trees alignment, 
-# connect to dummy node with invisible edge
+/*
+For trees alignment, 
+connect to dummy node with invisible edge
+*/
 I *> *1
 S *> *1
         `

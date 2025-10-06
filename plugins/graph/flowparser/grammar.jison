@@ -7,10 +7,12 @@
 
 %%
 
-[ \t\f]+                              /* skip horizontal whitespace only */
+[ \t\f]+                                        /* skip horizontal whitespace only */
 \r\n|\r|\n                                      return 'EOL'
 
-"#".*                                 /* skip line comments starting with # */
+"#".*                                           /* skip line comments starting with # */
+"//".*                                          /* skip line comments starting with // */
+"/*"([^*]|\*+[^*/])*\*+"/"                      /* skip C-style block comments */
 
 "NODE"                                          return 'NODE'     /* defaults for nodes (UPPERCASE) */
 "EDGE"                                          return 'EDGE'     /* defaults for edges (UPPERCASE) */
