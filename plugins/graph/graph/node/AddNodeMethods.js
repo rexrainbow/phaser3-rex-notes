@@ -23,5 +23,6 @@ export default {
             this.addNode(gameObjects[i], { ...attributes });
         }
         return this;
-    }
+    },
+
 }

@@ -20,7 +20,7 @@ var BuildGraphFromText = function (config) {
         if (onCreateNodeGameObject && !parameters.$dummy) {
             nodeGameObject = onCreateNodeGameObject(scene, id, parameters);
         } else {
-            nodeGameObject = { $dummy: true, width: 0, height: 0, };
+            nodeGameObject = graph.createNullNode();
         }
 
         graph.addNode(nodeGameObject, parameters, id);
@@ -36,7 +36,7 @@ var BuildGraphFromText = function (config) {
         if (onCreateEdgeGameObject && !parameters.$invisible) {
             edgeGameObject = onCreateEdgeGameObject(scene, id, parameters);
         } else {
-            edgeGameObject = { $invisible: true };
+            edgeGameObject = graph.createNullEdge();
         }
 
         graph.addEdge(edgeGameObject, sourceId, targetId, undefined, parameters, id);
