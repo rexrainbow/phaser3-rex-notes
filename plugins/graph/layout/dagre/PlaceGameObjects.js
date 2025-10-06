@@ -38,11 +38,7 @@ var PlaceGameObjects = function (graph, graphData, config) {
         graph.emit('layout.edge', gameObject, path, edgeData.sourceGameObject, edgeData.targetGameObject);
     });
 
-    // Align graph to (0,0)
-    graph.forEachGameObject(function (gameObject) {
-        gameObject.x -= xMin;
-        gameObject.y -= yMin;
-    })
+    return { xMin, yMin };
 }
 
 export default PlaceGameObjects;

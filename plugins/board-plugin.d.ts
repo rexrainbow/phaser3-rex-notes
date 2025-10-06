@@ -1,12 +1,12 @@
 // import * as Phaser from 'phaser';
 
-import BoardFactory from './board/board/Factory.js';
+import BoardFactory from './board/board/Factory';
 import QuadGridFactory from './board/grid/quad/Factory';
 import HexagonGridFactory from './board/grid/hexagon/Factory';
 
 import ShapeFactory from './board/shape/Factory';
 import ImageFactory from './board/image/Factory';
-import SpriteFactory from './board/sprite/Factory.js';
+import SpriteFactory from './board/sprite/Factory';
 
 import MoveToFactory from './board/moveto/Factory';
 import PathFinderFactory from './board/pathfinder/Factory';

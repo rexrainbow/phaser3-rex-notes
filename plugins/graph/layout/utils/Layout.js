@@ -23,7 +23,19 @@ var Layout = async function (layoutConfig, graph, userConfig) {
 
     graph.emit('layout.postlayout', graph);
 
-    placeGameObjects(graph, graphData, userConfig);
+    var { xMin, yMin } = placeGameObjects(graph, graphData, userConfig);
+    graph.graphOffsetX = xMin;
+    graph.graphOffsetY = yMin;
+
+    var {
+        container,
+        containerPadding,
+    } = userConfig;
+    if (container) {
+        graph.fitContainer(container, containerPadding);
+    } else {
+        graph.setGraphOffset(0, 0);
+    }
 
     graph.emit('layout.complete', graph);
 }

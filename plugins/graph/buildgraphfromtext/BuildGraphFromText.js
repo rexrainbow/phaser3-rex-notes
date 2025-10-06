@@ -1,13 +1,15 @@
-import { Parser } from './parser.js';
+import { Parser } from './flowparser/parser.js';
 
-var BuildGraphFromText = function (config) {
+var BuildGraphFromText = function (graph, config) {
+    graph.clear();
+
     var {
-        graph,
-        onCreateNodeGameObject, onCreateEdgeGameObject,
-        context
+        onCreateNodeGameObject,
+        onCreateEdgeGameObject,
+        text
     } = config;
 
-    var { nodes, edges } = new Parser().parse(context);
+    var { nodes, edges } = new Parser().parse(text);
 
     var scene = graph.scene;
 
@@ -41,7 +43,6 @@ var BuildGraphFromText = function (config) {
 
         graph.addEdge(edgeGameObject, sourceId, targetId, undefined, parameters, id);
     }
-
 }
 
 export default BuildGraphFromText;

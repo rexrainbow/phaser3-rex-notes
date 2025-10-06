@@ -3,13 +3,7 @@ import IsContainerGameObject from '../../../utils/system/IsContainerGameObject.j
 import GetBoundsConfig from '../../../utils/bounds/GetBoundsConfig.js';
 
 export default {
-    setContainer(container) {
-        this.container = container;  // p3Container, Layer, rexContainerLite
-        return this;
-    },
-
-    addToContainer() {
-        var container = this.container;
+    addToContainer(container) {
         if (!container) {
             return this;
         }
@@ -21,16 +15,12 @@ export default {
         return this;
     },
 
-    setContainerPadding(padding) {
-        this.containerPadding = padding;
-        return this;
-    },
-
-    fitContainer() {
-        var container = this.container;
+    fitContainer(container, padding) {
         if (!container) {
             return this;
         }
+
+        this.addToContainer(container);
 
         // p3Container, Layer, rexContainerLite
 
@@ -38,7 +28,7 @@ export default {
             return this;
         }
 
-        var padding = GetBoundsConfig(this.containerPadding);
+        var padding = GetBoundsConfig(padding);
         var bounds = this.getBounds();
 
         var width = bounds.width + padding.left + padding.right;

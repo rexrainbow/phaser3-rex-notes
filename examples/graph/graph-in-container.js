@@ -1,6 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
 import GraphPlugin from '../../plugins/graph-plugin.js';
-import LineShapePlugin from '../../plugins/lineshape-plugin.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
 class Demo extends Phaser.Scene {
@@ -13,7 +12,7 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var context = `
+        var text = `
 NODE [padding=3, 
       color=0x888888,
      ]
@@ -38,10 +37,13 @@ I *> *1
 S *> *1
         `
 
+        var text = 'A -> B;'
         var background = this.add.rectangle()
         var container = this.add.container(400, 300).setVisible(false);
 
-        var graph = this.rexGraph.add.graph({
+        var graph = this.rexGraph.add.graph()
+
+        this.rexGraph.buildGraphFromText(graph, {
             onCreateNodeGameObject(scene, id, parameters) {
                 return CreateNode(scene, id, parameters.color);
             },
@@ -49,9 +51,10 @@ S *> *1
                 return CreateEdge(scene);
             },
 
-            container: container,
-            containerPadding: 20,
+            text: text
         })
+
+        graph
             .on('layout.edge', function (edgeGameObject, points) {
                 edgeGameObject.setLine(points);
             })
@@ -70,17 +73,19 @@ S *> *1
                 // var graphics = this.add.graphics()
                 // graph.drawBounds(graphics, 0xff0000)
             }, this)
-            .buildFromText(context)
-            .elkLayout({
-                layoutOptions: {
-                    'elk.algorithm': 'layered',
-                    'elk.direction': 'DOWN',
-                    'elk.edgeRouting': 'ORTHOGONAL',
+        this.rexGraph.ELKLayout(graph, {
+            // container: container,
+            // containerPadding: 20,
 
-                    'elk.layered.considerModelOrder.strategy': 'NODES_AND_EDGES',
-                    'elk.layered.considerModelOrder.components': 'MODEL_ORDER',
-                },
-            })
+            layoutOptions: {
+                'elk.algorithm': 'layered',
+                'elk.direction': 'DOWN',
+                'elk.edgeRouting': 'ORTHOGONAL',
+
+                'elk.layered.considerModelOrder.strategy': 'NODES_AND_EDGES',
+                'elk.layered.considerModelOrder.components': 'MODEL_ORDER',
+            },
+        })
 
         console.log('done')
 
@@ -107,7 +112,7 @@ var CreateNode = function (scene, label, color) {
 }
 
 var CreateEdge = function (scene) {
-    return scene.add.rexLineShape({
+    return scene.rexGraph.add.line({
         color: 0x008800,
         lineWidth: 2,
         lineType: 'poly'
@@ -137,13 +142,6 @@ var config = {
                 mapping: 'rexUI'
             }
         ],
-        global: [
-            {
-                key: 'rexLineShape',
-                plugin: LineShapePlugin,
-                start: true
-            }
-        ]
     }
 };
 

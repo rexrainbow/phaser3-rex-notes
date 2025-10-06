@@ -5,9 +5,11 @@ import DrawBounds from '../../utils/bounds/DrawBounds';
 export default Graph;
 
 declare namespace Graph {
+    type IDType = LogicGraph.IDType;
+
     type OnCreateGameObjectCallbackType = (
         scene: Phaser.Scene,
-        id: LogicGraph.IDType,
+        id: IDType,
         parameters: Record<string, unknown>
     ) => Object;
 
@@ -18,14 +20,7 @@ declare namespace Graph {
     type ContainerType = Phaser.GameObjects.Container | Phaser.GameObjects.Layer | RexContainerLite;
 
     interface IConfig extends LogicGraph.IConfig {
-        onCreateNodeGameObject?: OnCreateGameObjectCallbackType,
-        onCreateEdgeGameObject?: OnCreateGameObjectCallbackType,
-
-        container?: ContainerType,
-        containerPadding?: GetBoundsConfig.PaddingConfigType,
-
     }
-
 
     interface INullNode {
         $dummy: true,
@@ -85,13 +80,11 @@ declare class Graph extends LogicGraph {
     createNullEdge(): Graph.INullNode;
     isNullEdge(object: Object): boolean;
 
-    setContainer(container?: Graph.ContainerType): this;
+    addToContainer(container?: Graph.ContainerType): this;
 
-    addToContainer(): this;
-
-    setContainerPadding(padding?: GetBoundsConfig.PaddingConfigType): this;
-
-    fitContainer(): this;
-
+    fitContainer(
+        container?: Graph.ContainerType,
+        padding?: GetBoundsConfig.PaddingConfigType
+    ): this;
 
 }
