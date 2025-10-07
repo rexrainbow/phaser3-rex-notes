@@ -7,12 +7,6 @@ export default Graph;
 declare namespace Graph {
     type IDType = LogicGraph.IDType;
 
-    type OnCreateGameObjectCallbackType = (
-        scene: Phaser.Scene,
-        id: IDType,
-        parameters: Record<string, unknown>
-    ) => Object;
-
     interface RexContainerLite {
         isRexContainerLite: true;
     }
@@ -38,14 +32,6 @@ declare class Graph extends LogicGraph {
         scene: Phaser.Scene,
         config: Graph.IConfig
     );
-
-    setOnCreateNodeGameObjectCallback(
-        callback?: Graph.OnCreateGameObjectCallbackType
-    ): this;
-
-    setOnCreateEdgeGameObjectCallback(
-        callback?: Graph.OnCreateGameObjectCallbackType
-    ): this;
 
     buildFromText(context: string): this;
 

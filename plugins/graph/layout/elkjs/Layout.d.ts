@@ -1,12 +1,2 @@
-import Graph from '../../graph/Graph';
-
+import Layout from '../utils/Layout';
 export default Layout;
-
-declare namespace Layout {
-
-}
-
-declare function Layout(
-    graph: Graph,
-    config?: Record<string, unknown>
-): Promise<any>;

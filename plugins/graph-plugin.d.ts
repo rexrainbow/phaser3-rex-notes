@@ -19,3 +19,11 @@ declare class GraphPlugin extends Phaser.Plugins.ScenePlugin {
     ELKLayout: typeof ELKLayout;
     DagreLayout: typeof DagreLayout;
 }
+
+import GraphClass from './graph/graph/Graph';
+import LineClass from './graph/line/Line';
+
+declare namespace GraphPlugin {
+    type Graph = GraphClass;
+    type Line = LineClass;
+}

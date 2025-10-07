@@ -1,2 +1,2 @@
-import ELKLayout from './elkjs/Layout';
+import ELKLayout from './utils/Layout';
 export default ELKLayout;
