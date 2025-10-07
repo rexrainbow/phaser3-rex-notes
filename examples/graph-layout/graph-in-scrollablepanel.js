@@ -77,10 +77,6 @@ var BuildGraph = async function (panel, text) {
         container: container,
         // containerPadding: 20,
 
-        onLayoutEdge(edgeGameObject, points) {
-            edgeGameObject.setLine(points);
-        },
-
         layoutConfig: {
             layoutOptions: {
                 'elk.algorithm': 'layered',

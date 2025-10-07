@@ -71,10 +71,6 @@ S *> *1
                     .setFillStyle(0x333333)
             },
 
-            onLayoutEdge(edgeGameObject, points) {
-                edgeGameObject.setLine(points);
-            },
-
             layoutConfig: {
                 layoutOptions: {
                     'elk.algorithm': 'layered',

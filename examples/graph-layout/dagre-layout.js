@@ -32,10 +32,6 @@ class Demo extends Phaser.Scene {
                 console.log('layout.complete')
             },
 
-            onLayoutEdge(edgeGameObject, points) {
-                edgeGameObject.setLine(points);
-            },
-
             layoutConfig: {
                 rankdir: 'LR'
             }

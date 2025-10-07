@@ -11747,6 +11747,12 @@
         return result;
     };
 
+    var DefaultLayoutEdgeCallback = function (gameObject, path, sourceGameObject, targetGameObject) {
+        if (gameObject.setLine) {
+            gameObject.setLine(path);
+        }
+    };
+
     const ALIGN_CENTER$1 = Phaser.Display.Align.CENTER;
 
     var PlaceGameObjects$1 = function (graph, graphData, config) {
@@ -11756,7 +11762,7 @@
 
         var {
             onLayoutNode,
-            onLayoutEdge
+            onLayoutEdge = DefaultLayoutEdgeCallback
         } = config;
 
 
@@ -25267,7 +25273,7 @@
 
         var {
             onLayoutNode,
-            onLayoutEdge
+            onLayoutEdge = DefaultLayoutEdgeCallback
         } = config;
 
         var xMin = Infinity,

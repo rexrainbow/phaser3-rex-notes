@@ -1,5 +1,6 @@
 import AlignIn from '../../../utils/actions/AlignIn.js';
 import GetPath from './GetPath.js';
+import DefaultLayoutEdgeCallback from '../utils/DefaultLayoutEdgeCallback.js';
 
 const ALIGN_CENTER = Phaser.Display.Align.CENTER;
 
@@ -10,7 +11,7 @@ var PlaceGameObjects = function (graph, graphData, config) {
 
     var {
         onLayoutNode,
-        onLayoutEdge
+        onLayoutEdge = DefaultLayoutEdgeCallback
     } = config;
 
 
