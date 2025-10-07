@@ -37,7 +37,6 @@ I *> *1
 S *> *1
         `
 
-        var text = 'A -> B;'
         var background = this.add.rectangle()
         var container = this.add.container(400, 300).setVisible(false);
 
@@ -54,14 +53,15 @@ S *> *1
             text: text
         })
 
-        graph
-            .on('layout.edge', function (edgeGameObject, points) {
-                edgeGameObject.setLine(points);
-            })
-            .on('layout.start', function () {
+        this.rexGraph.ELKLayout(graph, {
+            container: container,
+            containerPadding: 20,
+
+            onLayoutStart() {
                 container.setVisible(false);
-            })
-            .on('layout.complete', function () {
+            },
+
+            onLayoutComplete() {
                 container.setVisible(true);
                 console.log('layout.complete')
 
@@ -69,22 +69,22 @@ S *> *1
                     .setPosition(container.x, container.y)
                     .setSize(container.width, container.height)
                     .setFillStyle(0x333333)
-
-                // var graphics = this.add.graphics()
-                // graph.drawBounds(graphics, 0xff0000)
-            }, this)
-        this.rexGraph.ELKLayout(graph, {
-            // container: container,
-            // containerPadding: 20,
-
-            layoutOptions: {
-                'elk.algorithm': 'layered',
-                'elk.direction': 'DOWN',
-                'elk.edgeRouting': 'ORTHOGONAL',
-
-                'elk.layered.considerModelOrder.strategy': 'NODES_AND_EDGES',
-                'elk.layered.considerModelOrder.components': 'MODEL_ORDER',
             },
+
+            onLayoutEdge(edgeGameObject, points) {
+                edgeGameObject.setLine(points);
+            },
+
+            layoutConfig: {
+                layoutOptions: {
+                    'elk.algorithm': 'layered',
+                    'elk.direction': 'DOWN',
+                    'elk.edgeRouting': 'ORTHOGONAL',
+
+                    'elk.layered.considerModelOrder.strategy': 'NODES_AND_EDGES',
+                    'elk.layered.considerModelOrder.components': 'MODEL_ORDER',
+                },
+            }
         })
 
         console.log('done')

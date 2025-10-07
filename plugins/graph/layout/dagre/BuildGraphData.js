@@ -3,8 +3,12 @@ import UIDToObj from '../../graphitem/UIDToObj.js';
 import GetBoundsConfig from '../../../utils/bounds/GetBoundsConfig.js';
 
 var BuildGraphData = function (graph, config) {
+    if (config === undefined) {
+        config = {};
+
+    }
     var graphData = new dagre.graphlib.Graph();
-    graphData.setGraph(config);
+    graphData.setGraph(config.layoutConfig);
     graphData.setDefaultEdgeLabel(function () { });
 
     var nodeGameObjectMap = {};

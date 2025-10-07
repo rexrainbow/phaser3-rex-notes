@@ -207,7 +207,7 @@
 %%
 
 document
-  : init statements EOF
+  : init statements opt_eof
       {
         return {
           nodes: getNodesArray(),
@@ -215,6 +215,11 @@ document
         };
       }
   ;
+
+opt_eof
+ : /* empty */
+ | EOF
+ ;
 
 init
   : /* empty */
@@ -224,6 +229,7 @@ init
 line_end
   : EOL
   | ';'
+  | EOF
   ;
 
 blank_line
@@ -362,7 +368,7 @@ edge_chain
   | edge_chain INVIS_ARROW node_ref
       {
         ensureNode($3.id, $3.parameters);
-        $1.edgePairs.push({ sourceId: $1.lastNodeId, targetId: $3.id });
+        $1.edgePairs.push({ sourceId: $1.lastNodeId, targetId: $3.id, $invisible: true });
         $$ = { lastNodeId: $3.id, edgePairs: $1.edgePairs };
       }
   ;

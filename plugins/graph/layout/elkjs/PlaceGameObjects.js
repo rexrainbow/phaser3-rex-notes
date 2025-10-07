@@ -4,6 +4,16 @@ import GetPath from './GetPath.js';
 const ALIGN_CENTER = Phaser.Display.Align.CENTER;
 
 var PlaceGameObjects = function (graph, graphData, config) {
+    if (config === undefined) {
+        config = {};
+    }
+
+    var {
+        onLayoutNode,
+        onLayoutEdge
+    } = config;
+
+
     var xMin = Infinity,
         yMin = Infinity;
 
@@ -23,7 +33,9 @@ var PlaceGameObjects = function (graph, graphData, config) {
         if (xMin > x) { xMin = x; }
         if (yMin > y) { yMin = y; }
 
-        graph.emit('layout.node', nodeData.gameObject);
+        if (onLayoutNode) {
+            onLayoutNode(gameObject);
+        }
     })
 
     graphData.edges.forEach(function (edgeData) {
@@ -32,7 +44,10 @@ var PlaceGameObjects = function (graph, graphData, config) {
             return;
         }
         var path = GetPath(edgeData);
-        graph.emit('layout.edge', gameObject, path, edgeData.sourceGameObject, edgeData.targetGameObject);
+
+        if (onLayoutEdge) {
+            onLayoutEdge(gameObject, path, edgeData.sourceGameObject, edgeData.targetGameObject);
+        }
     })
 
     return { xMin, yMin };

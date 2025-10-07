@@ -72,12 +72,12 @@
   }
 */
 var parser = (function(){
-var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[6,8,9,24,25,26,27,33,34],$V1=[1,18],$V2=[1,19],$V3=[1,21],$V4=[31,32],$V5=[2,36],$V6=[1,25],$V7=[1,26],$V8=[2,39],$V9=[8,9],$Va=[8,9,22,31,32],$Vb=[6,8,24,25,26,27,33,34],$Vc=[2,13],$Vd=[1,35],$Ve=[2,15],$Vf=[1,37],$Vg=[1,43],$Vh=[1,44],$Vi=[1,49],$Vj=[1,52],$Vk=[1,53],$Vl=[8,18,23,26,33],$Vm=[8,18,23],$Vn=[18,23,26,33];
+var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,7,9,10,25,26,27,28,34,35],$V1=[1,19],$V2=[1,20],$V3=[1,22],$V4=[32,33],$V5=[2,39],$V6=[1,28],$V7=[1,26],$V8=[1,27],$V9=[2,42],$Va=[7,9,10],$Vb=[7,9,10,23,32,33],$Vc=[1,7,9,25,26,27,28,34,35],$Vd=[2,16],$Ve=[1,37],$Vf=[2,18],$Vg=[1,39],$Vh=[1,45],$Vi=[1,46],$Vj=[1,51],$Vk=[1,54],$Vl=[1,55],$Vm=[9,19,24,27,34],$Vn=[9,19,24],$Vo=[19,24,27,34];
 var parser = {trace: function trace () { },
 yy: {},
-symbols_: {"error":2,"document":3,"init":4,"statements":5,"EOF":6,"line_end":7,"EOL":8,";":9,"blank_line":10,"statement":11,"defaults_statement":12,"node_statement":13,"edge_statement":14,"opt_semicolon":15,"opt_eol":16,"sep":17,",":18,"attribute_list":19,"attribute":20,"attribute_block":21,"[":22,"]":23,"NODE":24,"EDGE":25,"IDENT":26,"STAR_NAMED":27,"edge_chain":28,"edge_attribute_opt":29,"node_ref":30,"->":31,"INVIS_ARROW":32,"QUOTED_STRING":33,"STAR":34,"attribute_key":35,"=":36,"attribute_value":37,"NUMBER":38,"HEXNUMBER":39,"$accept":0,"$end":1},
-terminals_: {2:"error",6:"EOF",8:"EOL",9:";",18:",",22:"[",23:"]",24:"NODE",25:"EDGE",26:"IDENT",27:"STAR_NAMED",31:"->",32:"INVIS_ARROW",33:"QUOTED_STRING",34:"STAR",36:"=",38:"NUMBER",39:"HEXNUMBER"},
-productions_: [0,[3,3],[4,0],[7,1],[7,1],[10,1],[5,0],[5,2],[5,2],[11,1],[11,1],[11,1],[11,1],[15,0],[15,1],[16,0],[16,1],[16,2],[17,1],[17,2],[19,1],[19,3],[19,2],[21,5],[12,3],[12,3],[13,3],[13,2],[13,3],[14,3],[28,3],[28,3],[28,3],[28,3],[29,0],[29,1],[30,1],[30,1],[30,1],[30,1],[35,1],[35,1],[20,3],[37,1],[37,1],[37,1],[37,1]],
+symbols_: {"error":2,"document":3,"init":4,"statements":5,"opt_eof":6,"EOF":7,"line_end":8,"EOL":9,";":10,"blank_line":11,"statement":12,"defaults_statement":13,"node_statement":14,"edge_statement":15,"opt_semicolon":16,"opt_eol":17,"sep":18,",":19,"attribute_list":20,"attribute":21,"attribute_block":22,"[":23,"]":24,"NODE":25,"EDGE":26,"IDENT":27,"STAR_NAMED":28,"edge_chain":29,"edge_attribute_opt":30,"node_ref":31,"->":32,"INVIS_ARROW":33,"QUOTED_STRING":34,"STAR":35,"attribute_key":36,"=":37,"attribute_value":38,"NUMBER":39,"HEXNUMBER":40,"$accept":0,"$end":1},
+terminals_: {2:"error",7:"EOF",9:"EOL",10:";",19:",",23:"[",24:"]",25:"NODE",26:"EDGE",27:"IDENT",28:"STAR_NAMED",32:"->",33:"INVIS_ARROW",34:"QUOTED_STRING",35:"STAR",37:"=",39:"NUMBER",40:"HEXNUMBER"},
+productions_: [0,[3,3],[6,0],[6,1],[4,0],[8,1],[8,1],[8,1],[11,1],[5,0],[5,2],[5,2],[12,1],[12,1],[12,1],[12,1],[16,0],[16,1],[17,0],[17,1],[17,2],[18,1],[18,2],[20,1],[20,3],[20,2],[22,5],[13,3],[13,3],[14,3],[14,2],[14,3],[15,3],[29,3],[29,3],[29,3],[29,3],[30,0],[30,1],[31,1],[31,1],[31,1],[31,1],[36,1],[36,1],[21,3],[38,1],[38,1],[38,1],[38,1]],
 performAction: function anonymous(yytext, yyleng, yylineno, yy, yystate /* action[1] */, $$ /* vstack */, _$ /* lstack */) {
 /* this == yyval */
 
@@ -91,56 +91,56 @@ case 1:
         };
       
 break;
-case 2:
+case 4:
  resetState(); 
 break;
-case 20:
+case 23:
 
         var o = {};
         o[$$[$0].key] = $$[$0].value;
         this.$ = o;
       
 break;
-case 21:
+case 24:
 
         $$[$0-2][$$[$0].key] = $$[$0].value;
         this.$ = $$[$0-2];
       
 break;
-case 22:
+case 25:
 
         /* trailing comma: nothing to add */
         this.$ = $$[$0-1];
       
 break;
-case 23:
+case 26:
  this.$ = $$[$0-2]; 
 break;
-case 24:
+case 27:
 
         var parts = splitNodeParameters($$[$0-1]);
         mergeInto(currentDefaults.node, parts.parameters);
         mergeInto(currentDefaults.nodeLayout, parts.layoutOptions);
       
 break;
-case 25:
+case 28:
  
         mergeInto(currentDefaults.edge, $$[$0-1]); 
       
 break;
-case 26:
+case 29:
  
         var parts = splitNodeParameters($$[$0-1]);
         var n = ensureNode($$[$0-2], parts.parameters);
         mergeInto(n.layoutOptions, parts.layoutOptions);
       
 break;
-case 27:
+case 30:
  
         ensureNode($$[$0-1], {}); 
       
 break;
-case 28:
+case 31:
 
         var label = yytext.slice(1);
         var id = getOrCreateNamedDummy(label);
@@ -149,7 +149,7 @@ case 28:
         mergeInto(n.layoutOptions, parts.layoutOptions);
       
 break;
-case 29:
+case 32:
 
         var chainParams = $$[$0-1] || null;
         var chainBase = merged(currentDefaults.edge, chainParams);
@@ -162,7 +162,7 @@ case 29:
         }
       
 break;
-case 30:
+case 33:
 
         ensureNode($$[$0-2].id, $$[$0-2].parameters);
         ensureNode($$[$0].id, $$[$0].parameters);
@@ -172,7 +172,7 @@ case 30:
         };
       
 break;
-case 31:
+case 34:
 
         ensureNode($$[$0-2].id, $$[$0-2].parameters);
         ensureNode($$[$0].id, $$[$0].parameters);
@@ -182,57 +182,64 @@ case 31:
         };
       
 break;
-case 32: case 33:
+case 35:
 
         ensureNode($$[$0].id, $$[$0].parameters);
         $$[$0-2].edgePairs.push({ sourceId: $$[$0-2].lastNodeId, targetId: $$[$0].id });
         this.$ = { lastNodeId: $$[$0].id, edgePairs: $$[$0-2].edgePairs };
       
 break;
-case 34:
- this.$ = null; 
-break;
-case 35:
- this.$ = $$[$0]; 
-break;
 case 36:
- this.$ = { id: $$[$0], parameters: {} }; 
+
+        ensureNode($$[$0].id, $$[$0].parameters);
+        $$[$0-2].edgePairs.push({ sourceId: $$[$0-2].lastNodeId, targetId: $$[$0].id, $invisible: true });
+        this.$ = { lastNodeId: $$[$0].id, edgePairs: $$[$0-2].edgePairs };
+      
 break;
 case 37:
- this.$ = { id: unquote(yytext), parameters: {} }; 
+ this.$ = null; 
 break;
 case 38:
+ this.$ = $$[$0]; 
+break;
+case 39:
+ this.$ = { id: $$[$0], parameters: {} }; 
+break;
+case 40:
+ this.$ = { id: unquote(yytext), parameters: {} }; 
+break;
+case 41:
         
         var gen = createAnonymousDummyNode();
         this.$ = { id: gen, parameters: { $dummy: true } };
       
 break;
-case 39:
+case 42:
 
         var label = yytext.slice(1);
         var id = getOrCreateNamedDummy(label);
         this.$ = { id: id, parameters: { $dummy: true } };
       
 break;
-case 40: case 46:
+case 43: case 49:
  this.$ = yytext; 
 break;
-case 41: case 45:
+case 44: case 48:
  this.$ = unquote(yytext); 
 break;
-case 42:
+case 45:
  this.$ = { key: $$[$0-2], value: $$[$0] }; 
 break;
-case 43:
+case 46:
  this.$ = Number(yytext); 
 break;
-case 44:
+case 47:
  this.$ = parseInt(yytext, 16); 
 break;
 }
 },
-table: [o($V0,[2,2],{3:1,4:2}),{1:[3]},o($V0,[2,6],{5:3}),{6:[1,4],8:[1,7],9:[1,11],10:5,11:6,12:8,13:9,14:10,24:[1,12],25:[1,13],26:[1,14],27:[1,15],28:16,30:17,33:$V1,34:$V2},{1:[2,1]},o($V0,[2,7]),o($V0,[2,8]),o($V0,[2,5]),o($V0,[2,9]),o($V0,[2,10]),o($V0,[2,11]),o($V0,[2,12]),{21:20,22:$V3},{21:22,22:$V3},o($V4,$V5,{21:23,7:24,8:$V6,9:$V7,22:$V3}),o($V4,$V8,{21:27,22:$V3}),o($V9,[2,34],{29:28,21:31,22:$V3,31:[1,29],32:[1,30]}),{31:[1,32],32:[1,33]},o($Va,[2,37]),o($Va,[2,38]),o($Vb,$Vc,{15:34,9:$Vd}),o([26,33],$Ve,{16:36,8:$Vf}),o($Vb,$Vc,{15:38,9:$Vd}),{7:39,8:$V6,9:$V7},o($V0,[2,27]),o($V0,[2,3]),o($V0,[2,4]),{7:40,8:$V6,9:$V7},{7:41,8:$V6,9:$V7},{26:$Vg,27:$Vh,30:42,33:$V1,34:$V2},{26:$Vg,27:$Vh,30:45,33:$V1,34:$V2},o($V9,[2,35]),{26:$Vg,27:$Vh,30:46,33:$V1,34:$V2},{26:$Vg,27:$Vh,30:47,33:$V1,34:$V2},o($V0,[2,24]),o($V0,[2,14]),{8:$Vi,19:48,20:50,26:$Vj,33:$Vk,35:51},o($Vl,[2,16]),o($V0,[2,25]),o($V0,[2,26]),o($V0,[2,28]),o($V0,[2,29]),o($Va,[2,32]),o($Va,$V5),o($Va,$V8),o($Va,[2,33]),o($Va,[2,30]),o($Va,[2,31]),{8:$Vf,16:54,17:55,18:[1,56],23:$Ve},o($Vl,[2,17]),o($Vm,[2,20]),{36:[1,57]},{36:[2,40]},{36:[2,41]},{8:$Vi,23:[1,58]},o($Vm,[2,22],{35:51,20:59,26:$Vj,33:$Vk}),o($Vn,[2,18],{16:60,8:$Vf}),{26:[1,65],33:[1,64],37:61,38:[1,62],39:[1,63]},o($V0,[2,23]),o($Vm,[2,21]),o($Vn,[2,19],{8:$Vi}),o($Vm,[2,42]),o($Vm,[2,43]),o($Vm,[2,44]),o($Vm,[2,45]),o($Vm,[2,46])],
-defaultActions: {4:[2,1],52:[2,40],53:[2,41]},
+table: [o($V0,[2,4],{3:1,4:2}),{1:[3]},o($V0,[2,9],{5:3}),{1:[2,2],6:4,7:[1,7],9:[1,8],10:[1,12],11:5,12:6,13:9,14:10,15:11,25:[1,13],26:[1,14],27:[1,15],28:[1,16],29:17,31:18,34:$V1,35:$V2},{1:[2,1]},o($V0,[2,10]),o($V0,[2,11]),{1:[2,3]},o($V0,[2,8]),o($V0,[2,12]),o($V0,[2,13]),o($V0,[2,14]),o($V0,[2,15]),{22:21,23:$V3},{22:23,23:$V3},o($V4,$V5,{22:24,8:25,7:$V6,9:$V7,10:$V8,23:$V3}),o($V4,$V9,{22:29,23:$V3}),o($Va,[2,37],{30:30,22:33,23:$V3,32:[1,31],33:[1,32]}),{32:[1,34],33:[1,35]},o($Vb,[2,40]),o($Vb,[2,41]),o($Vc,$Vd,{16:36,10:$Ve}),o([27,34],$Vf,{17:38,9:$Vg}),o($Vc,$Vd,{16:40,10:$Ve}),{7:$V6,8:41,9:$V7,10:$V8},o($V0,[2,30]),o($V0,[2,5]),o($V0,[2,6]),o($V0,[2,7]),{7:$V6,8:42,9:$V7,10:$V8},{7:$V6,8:43,9:$V7,10:$V8},{27:$Vh,28:$Vi,31:44,34:$V1,35:$V2},{27:$Vh,28:$Vi,31:47,34:$V1,35:$V2},o($Va,[2,38]),{27:$Vh,28:$Vi,31:48,34:$V1,35:$V2},{27:$Vh,28:$Vi,31:49,34:$V1,35:$V2},o($V0,[2,27]),o($V0,[2,17]),{9:$Vj,20:50,21:52,27:$Vk,34:$Vl,36:53},o($Vm,[2,19]),o($V0,[2,28]),o($V0,[2,29]),o($V0,[2,31]),o($V0,[2,32]),o($Vb,[2,35]),o($Vb,$V5),o($Vb,$V9),o($Vb,[2,36]),o($Vb,[2,33]),o($Vb,[2,34]),{9:$Vg,17:56,18:57,19:[1,58],24:$Vf},o($Vm,[2,20]),o($Vn,[2,23]),{37:[1,59]},{37:[2,43]},{37:[2,44]},{9:$Vj,24:[1,60]},o($Vn,[2,25],{36:53,21:61,27:$Vk,34:$Vl}),o($Vo,[2,21],{17:62,9:$Vg}),{27:[1,67],34:[1,66],38:63,39:[1,64],40:[1,65]},o($V0,[2,26]),o($Vn,[2,24]),o($Vo,[2,22],{9:$Vj}),o($Vn,[2,45]),o($Vn,[2,46]),o($Vn,[2,47]),o($Vn,[2,48]),o($Vn,[2,49])],
+defaultActions: {4:[2,1],7:[2,3],54:[2,43],55:[2,44]},
 parseError: function parseError (str, hash) {
     if (hash.recoverable) {
         this.trace(str);
@@ -867,7 +874,7 @@ var YYSTATE=YY_START;
 switch($avoiding_name_collisions) {
 case 0:/* skip horizontal whitespace only */
 break;
-case 1:return 8
+case 1:return 9
 break;
 case 2:/* skip line comments starting with # */
 break;
@@ -875,37 +882,37 @@ case 3:/* skip line comments starting with // */
 break;
 case 4:/* skip C-style block comments */
 break;
-case 5:return 24     /* defaults for nodes (UPPERCASE) */
+case 5:return 25     /* defaults for nodes (UPPERCASE) */
 break;
-case 6:return 25     /* defaults for edges (UPPERCASE) */
+case 6:return 26     /* defaults for edges (UPPERCASE) */
 break;
-case 7:return 22
+case 7:return 23
 break;
-case 8:return 23
+case 8:return 24
 break;
-case 9:return 18
+case 9:return 19
 break;
-case 10:return 36
+case 10:return 37
 break;
-case 11:return 9
+case 11:return 10
 break;
-case 12:return 31
+case 12:return 32
 break;
-case 13:return 32
+case 13:return 33
 break;
-case 14:return 27
+case 14:return 28
 break;
-case 15:return 34
+case 15:return 35
 break;
-case 16:return 39
+case 16:return 40
 break;
-case 17:return 38         /* integer/float */
+case 17:return 39         /* integer/float */
 break;
-case 18:return 33
+case 18:return 34
 break;
-case 19:return 26          /* bare identifiers */
+case 19:return 27          /* bare identifiers */
 break;
-case 20:return 6
+case 20:return 7
 break;
 case 21:return 'INVALID'
 break;

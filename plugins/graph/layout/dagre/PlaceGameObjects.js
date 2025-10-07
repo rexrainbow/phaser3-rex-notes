@@ -4,6 +4,10 @@ import GetPath from './GetPath.js';
 const ALIGN_CENTER = Phaser.Display.Align.CENTER;
 
 var PlaceGameObjects = function (graph, graphData, config) {
+    if (config === undefined) {
+        config = {};
+    }
+
     var xMin = Infinity,
         yMin = Infinity;
 

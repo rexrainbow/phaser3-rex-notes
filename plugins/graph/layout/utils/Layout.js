@@ -1,43 +1,50 @@
-var Layout = async function (layoutConfig, graph, userConfig) {
+var Layout = async function (layoutConfig, graph, config) {
     var {
         buildGraphData,
         isAsyncRunLayout, runLayout,
         placeGameObjects,
     } = layoutConfig;
 
-    if (userConfig === undefined) {
-        userConfig = {};
+    if (config === undefined) {
+        config = {};
     }
 
-    graph.emit('layout.start', graph);
+    var {
+        onLayoutStart,
+        onLayoutComplete
+    } = config;
 
-    var graphData = buildGraphData(graph, userConfig);
+    if (onLayoutStart) {
+        onLayoutStart(graph);
+    }
 
-    graph.emit('layout.prelayout', graph);
+    var graphData = buildGraphData(graph, config);
 
     if (isAsyncRunLayout) {
-        await runLayout(graphData, userConfig);
+        await runLayout(graphData, config);
     } else {
-        runLayout(graphData, userConfig);
+        runLayout(graphData, config);
     }
 
-    graph.emit('layout.postlayout', graph);
-
-    var { xMin, yMin } = placeGameObjects(graph, graphData, userConfig);
+    var { xMin, yMin } = placeGameObjects(graph, graphData, config);
     graph.graphOffsetX = xMin;
     graph.graphOffsetY = yMin;
 
-    var {
-        container,
-        containerPadding,
-    } = userConfig;
+    var container = config.container;
     if (container) {
+        var containerPadding = config.containerPadding;
         graph.fitContainer(container, containerPadding);
     } else {
-        graph.setGraphOffset(0, 0);
+        var {
+            graphOffsetX = 0,
+            graphOffsetY = 0
+        } = config;
+        graph.setGraphOffset(graphOffsetX, graphOffsetY);
     }
 
-    graph.emit('layout.complete', graph);
+    if (onLayoutComplete) {
+        onLayoutComplete(graph);
+    }
 }
 
 export default Layout;
