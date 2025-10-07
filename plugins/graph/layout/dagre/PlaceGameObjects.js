@@ -8,6 +8,11 @@ var PlaceGameObjects = function (graph, graphData, config) {
         config = {};
     }
 
+    var {
+        onLayoutNode,
+        onLayoutEdge
+    } = config;
+
     var xMin = Infinity,
         yMin = Infinity;
 
@@ -28,18 +33,22 @@ var PlaceGameObjects = function (graph, graphData, config) {
         if (xMin > x) { xMin = x; }
         if (yMin > y) { yMin = y; }
 
-        graph.emit('layout.node', nodeData.gameObject);
+        if (onLayoutNode) {
+            onLayoutNode(gameObject);
+        }
     });
 
     graphData.edges().forEach(function (edgeKey) {
+        var edgeData = graphData.edge(edgeKey);
         var gameObject = edgeData.gameObject;
         if (graph.isNullEdge(gameObject)) {
             return;
         }
 
-        var edgeData = graphData.edge(edgeKey);
         var path = GetPath(edgeData);
-        graph.emit('layout.edge', gameObject, path, edgeData.sourceGameObject, edgeData.targetGameObject);
+        if (onLayoutEdge) {
+            onLayoutEdge(gameObject, path, edgeData.sourceGameObject, edgeData.targetGameObject);
+        }
     });
 
     return { xMin, yMin };

@@ -1,4 +1,4 @@
-import parser from '../../plugins/graph/flowparser/parser.js';
+import parser from '../../plugins/graph/buildgraphfromtext/flowparser.js';
 
 var expression = `
 NODE [padding=3]

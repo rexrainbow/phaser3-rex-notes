@@ -1,6 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
 import GraphPlugin from '../../plugins/graph-plugin.js';
-import LineShapePlugin from '../../plugins/lineshape-plugin.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
 class Demo extends Phaser.Scene {
@@ -13,7 +12,7 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var context = `
+        var text = `
 NODE [padding=3, 
       color=0x888888,
      ]
@@ -24,18 +23,25 @@ A -> B -> C -> H -> I
 A -> D -> E -> H -> I
 A -> F -> * -> G -> I
 J -> K -> L -> * -> I
-M -> * -> * -> * -> I
+* *> M -> * -> * -> I
 O -> P -> Q -> R -> S
 T -> U -> Q
 V -> W -> X -> R
 Y -> Z -> X
+
+/*
+For trees alignment, 
+connect to dummy node with invisible edge
+*/
+I *> *1
+S *> *1
         `
 
         var panel = CreateScrollablePanel(this, 300, 300)
             .setPosition(400, 300)
             .layout();
 
-        BuildGraph(panel, context)
+        BuildGraph(panel, text)
 
     }
 
@@ -45,40 +51,37 @@ Y -> Z -> X
 
 var CreateGraphContainer = function (scene) {
     var container = scene.add.container()
-    var graph = scene.rexGraph.add.graph({
+    container.graph = scene.rexGraph.add.graph()
+    return container;
+}
+
+var BuildGraph = async function (panel, text) {
+    var scene = panel.scene;
+    var container = panel.getElement('panel');
+    var graph = container.graph;
+
+    container.setVisible(false);
+
+    scene.rexGraph.buildGraphFromText(graph, {
         onCreateNodeGameObject(scene, id, parameters) {
-            if (parameters.$dummy) {
-                return CreateDummyNode(scene);
-            } else {
-                return CreateNode(scene, id, parameters);
-            }
+            return CreateNode(scene, id, parameters);
         },
         onCreateEdgeGameObject(scene, id, parameters) {
             return CreateEdge(scene);
         },
 
+        text: text
+    })
+
+    await scene.rexGraph.ELKLayout(graph, {
         container: container,
         // containerPadding: 20,
-    })
-        .on('layout.edge', function (edgeGameObject, points) {
-            if (edgeGameObject.setLine) {
-                edgeGameObject.setLine(points);
-            }
-        })
 
-    container.graph = graph;
+        onLayoutEdge(edgeGameObject, points) {
+            edgeGameObject.setLine(points);
+        },
 
-    return container;
-}
-
-var BuildGraph = async function (panel, context) {
-    var container = panel.getElement('panel');
-
-    container.setVisible(false);
-
-    await container.graph
-        .buildFromText(context)
-        .elkLayoutPromise({
+        layoutConfig: {
             layoutOptions: {
                 'elk.algorithm': 'layered',
                 'elk.direction': 'DOWN',
@@ -87,14 +90,13 @@ var BuildGraph = async function (panel, context) {
                 'elk.layered.considerModelOrder.strategy': 'NODES_AND_EDGES',
                 'elk.layered.considerModelOrder.components': 'MODEL_ORDER',
             },
-        })
+        }
+    })
 
     container.setVisible(true);
 
     panel.layout();
 
-    // var graphics = panel.scene.add.graphics()
-    // panel.drawBounds(graphics, 0xff0000)
 }
 
 var CreateNode = function (scene, label, parameters) {
@@ -114,20 +116,12 @@ var CreateNode = function (scene, label, parameters) {
     }).layout();
 }
 
-var CreateDummyNode = function (scene) {
-    return scene.add.zone(0, 0, 0, 0);
-}
-
 var CreateEdge = function (scene) {
-    return scene.add.rexLineShape({
+    return scene.rexGraph.add.line({
         color: 0x008800,
         lineWidth: 2,
         lineType: 'poly'
     });
-}
-
-var CreateDummyEdge = function (scene) {
-    return {};
 }
 
 const COLOR_MAIN = 0x4e342e;
@@ -197,13 +191,6 @@ var config = {
                 mapping: 'rexUI'
             }
         ],
-        global: [
-            {
-                key: 'rexLineShape',
-                plugin: LineShapePlugin,
-                start: true
-            }
-        ]
     }
 };
 
