@@ -47,7 +47,7 @@ declare class LogicGraph extends EventEmitter {
         gameObjects: Phaser.GameObjects.GameObject[],
         key: string, value: unknown
     ): this;
-    setEdgeAttribute(
+    setEdgesAttribute(
         gameObjects: Phaser.GameObjects.GameObject[],
         key: string, value: unknown
     ): this;

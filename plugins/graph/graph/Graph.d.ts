@@ -16,13 +16,13 @@ declare namespace Graph {
     interface IConfig extends LogicGraph.IConfig {
     }
 
-    interface INullNode {
+    interface IDummyNode {
         $dummy: true,
         width: 0,
         height: 0,
     }
 
-    interface INullEdge {
+    interface IInvisibleEdge {
         $invisible: true
     }
 }
@@ -48,11 +48,11 @@ declare class Graph extends LogicGraph {
         config?: number | DrawBounds.IConfig
     ): this;
 
-    creatNullNode(): Graph.INullNode;
-    isNullNode(object: Object): boolean;
+    creatDummyNode(): Graph.IDummyNode;
+    isDummyNode(object: Object): boolean;
 
-    createNullEdge(): Graph.INullNode;
-    isNullEdge(object: Object): boolean;
+    createInvisibleEdge(): Graph.IDummyNode;
+    isInvisibleEdge(object: Object): boolean;
 
     addToContainer(container?: Graph.ContainerType): this;
     addToLayer(layer?: Graph.ContainerType): this;

@@ -73,19 +73,19 @@ export default {
         return this;
     },
 
-    createNullEdge() {
+    createInvisibleEdge() {
         return { $invisible: true };
     },
 
-    isNullEdge(edge) {
+    isInvisibleEdge(edge) {
         return !!edge.$invisible;
     },
 
-    createNullNode() {
+    createDummyNode() {
         return { $dummy: true, width: 0, height: 0, }
     },
 
-    isNullNode(node) {
+    isDummyNode(node) {
         return !!node.$dummy;
     },
 }
