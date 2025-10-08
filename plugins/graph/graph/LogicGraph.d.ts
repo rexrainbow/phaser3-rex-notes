@@ -21,19 +21,14 @@ declare class LogicGraph extends EventEmitter {
     readonly nodeCount: number;
     readonly edgeCount: number;
 
-    isNode(
-        gameObject: Phaser.GameObjects.GameObject
-    ): boolean;
-    isEdge(
-        gameObject: Phaser.GameObjects.GameObject
-    ): boolean;
-    exists(
-        gameObject: Phaser.GameObjects.GameObject
-    ): boolean;
+    isNode(gameObject: Phaser.GameObjects.GameObject): boolean;
+    isEdge(gameObject: Phaser.GameObjects.GameObject): boolean;
+    exists(gameObject: Phaser.GameObjects.GameObject): boolean;
 
-    remove(gameObject: Phaser.GameObjects.GameObject): this;
-    removeNode(gameObject: Phaser.GameObjects.GameObject): this;
-    removeEdge(gameObject: Phaser.GameObjects.GameObject): this;
+    remove(
+        gameObject: Phaser.GameObjects.GameObject,
+        destroy?: boolean,
+    ): this;
 
     setAttribute(
         gameObject: Phaser.GameObjects.GameObject,

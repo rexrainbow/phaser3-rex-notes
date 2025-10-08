@@ -33,25 +33,13 @@ declare class Graph extends LogicGraph {
         config: Graph.IConfig
     );
 
-    buildFromText(context: string): this;
-
-    elkLayout(
-        config?: Record<string, unknown>
-    ): this;
-
-    elkLayoutPromise(
-        config?: Record<string, unknown>
-    ): Promise<any>;
-
-    dagreLayout(
-        config?: Record<string, unknown>
-    ): this;
-
     forEachGameObject(
         callback: (gameObject: Phaser.GameObjects.GameObject) => void
     ): this;
 
     setGraphOffset(x: number, y: number): this;
+    readonly graphOffsetX: number;
+    readonly graphOffsetY: number;
 
     getBounds(out?: Phaser.Geom.Rectangle): Phaser.Geom.Rectangle;
 
@@ -67,6 +55,7 @@ declare class Graph extends LogicGraph {
     isNullEdge(object: Object): boolean;
 
     addToContainer(container?: Graph.ContainerType): this;
+    addToLayer(layer?: Graph.ContainerType): this;
 
     fitContainer(
         container?: Graph.ContainerType,

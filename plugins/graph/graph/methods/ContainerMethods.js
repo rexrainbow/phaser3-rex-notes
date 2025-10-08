@@ -15,6 +15,11 @@ export default {
         return this;
     },
 
+    addToLayer(layer) {
+        this.addToContainer(layer);
+        return this;
+    },
+
     fitContainer(container, padding) {
         if (!container) {
             return this;

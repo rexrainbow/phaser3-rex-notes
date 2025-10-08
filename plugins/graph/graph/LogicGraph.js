@@ -62,11 +62,14 @@ class LogicGraph extends EE {
         return this.isEdge(gameObject) || this.isNode(gameObject);
     }
 
-    remove(gameObject) {
+    remove(gameObject, destroy) {
+        if (destroy === undefined) {
+            destroy = false;
+        }
         if (this.isNode(gameObject)) {
-            this.removeNode(gameObject);
+            this.removeNode(gameObject, destroy);
         } else if (this.isEdge(gameObject)) {
-            this.removeEdge(gameObject);
+            this.removeEdge(gameObject, destroy);
         }
         return this;
     }
