@@ -218,6 +218,14 @@ G -> *1           # Reuses the same named dummy node
 
 Builder won't create game object for dummy node, they exist only for layout.
 
+Equal to
+
+```javascript
+graph.addNode(graph.createDummyNode());
+```
+
+See also [ELK layout](graph-elk-layout.md#layout-alignment-assistant)
+
 #### Invisible Edges
 
 ```
@@ -231,7 +239,13 @@ Builder won't create game object for dummy node, they exist only for layout.
     H *> I
     ```
 
----
+Equal to
+
+```javascript
+graph.addEdge(graph.createInvisibleEdge());
+```
+
+See also [ELK layout](graph-elk-layout.md#layout-alignment-assistant)
 
 #### Attribute Blocks
 

@@ -286,3 +286,45 @@ graph.drawBounds(graphics, color);
 ```
 
 - `graphics` : [Graphics](graphics.md)
+
+### Attribute
+
+Attribute = private data of node or edge, used for layout ([ELK-layout](graph-elk-layout.md))
+
+#### Set attribute
+
+- Set attribute of node or edge
+    ```javascript
+    graph.setAttribute(gameObject, key, value);
+    ```
+- Set attribute of node
+    ```javascript
+    graph.setNodeAttribute(gameObject, key, value);
+    ```
+- Set attribute of nodes
+    ```javascript
+    graph.setNodesAttribute(gameObjects, key, value);
+    ```
+- Set attribute of edge
+    ```javascript
+    graph.setEdgeAttribute(gameObject, key, value);
+    ```
+- Set attribute of edges
+    ```javascript
+    graph.setEdgesttribute(gameObjects, key, value);
+    ```
+
+#### Get attribute
+
+- Get attribute of node or edge
+    ```javascript
+    var value = graph.getAttribute(gameObject, key);
+    ```
+- Get attribute of node
+    ```javascript
+    var value = graph.setNodeAttribute(gameObject, key);
+    ```
+- Get attribute of edge
+    ```javascript
+    var value = graph.setEdgesAttribute(gameObjects, key);
+    ```
