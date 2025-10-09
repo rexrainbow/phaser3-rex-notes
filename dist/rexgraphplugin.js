@@ -1235,6 +1235,14 @@
                 return this.graph.setEdgeAttribute(edgeUID, key, value);
             }
         },
+
+        setEdgesAttribute(gameObjects, key, value) {
+            for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+                this.setEdgeAttribute(gameObjects[i], key, value);
+            }
+
+            return this;
+        }
     };
 
     var Methods$1 = {
@@ -1323,11 +1331,14 @@
             return this.isEdge(gameObject) || this.isNode(gameObject);
         }
 
-        remove(gameObject) {
+        remove(gameObject, destroy) {
+            if (destroy === undefined) {
+                destroy = false;
+            }
             if (this.isNode(gameObject)) {
-                this.removeNode(gameObject);
+                this.removeNode(gameObject, destroy);
             } else if (this.isEdge(gameObject)) {
-                this.removeEdge(gameObject);
+                this.removeEdge(gameObject, destroy);
             }
             return this;
         }
@@ -1703,19 +1714,19 @@
             return this;
         },
 
-        createNullEdge() {
+        createInvisibleEdge() {
             return { $invisible: true };
         },
 
-        isNullEdge(edge) {
+        isInvisibleEdge(edge) {
             return !!edge.$invisible;
         },
 
-        createNullNode() {
+        createDummyNode() {
             return { $dummy: true, width: 0, height: 0, }
         },
 
-        isNullNode(node) {
+        isDummyNode(node) {
             return !!node.$dummy;
         },
     };
@@ -1766,6 +1777,11 @@
                 container.add(gameObject);
             });
 
+            return this;
+        },
+
+        addToLayer(layer) {
+            this.addToContainer(layer);
             return this;
         },
 
@@ -4578,7 +4594,7 @@
             if (onCreateNodeGameObject && !parameters.$dummy) {
                 nodeGameObject = onCreateNodeGameObject(scene, id, parameters);
             } else {
-                nodeGameObject = graph.createNullNode();
+                nodeGameObject = graph.createDummyNode();
             }
 
             graph.addNode(nodeGameObject, parameters, id);
@@ -4594,7 +4610,7 @@
             if (onCreateEdgeGameObject && !parameters.$invisible) {
                 edgeGameObject = onCreateEdgeGameObject(scene, id, parameters);
             } else {
-                edgeGameObject = graph.createNullEdge();
+                edgeGameObject = graph.createInvisibleEdge();
             }
 
             graph.addEdge(edgeGameObject, sourceId, targetId, undefined, parameters, id);
@@ -11771,7 +11787,7 @@
 
         graphData.children.forEach(function (nodeData) {
             var gameObject = nodeData.gameObject;
-            if (graph.isNullNode(gameObject)) {
+            if (graph.isDummyNode(gameObject)) {
                 return;
             }
 
@@ -11792,7 +11808,7 @@
 
         graphData.edges.forEach(function (edgeData) {
             var gameObject = edgeData.gameObject;
-            if (graph.isNullEdge(gameObject)) {
+            if (graph.isInvisibleEdge(gameObject)) {
                 return;
             }
             var path = GetPath$1(edgeData);
@@ -25282,7 +25298,7 @@
         graphData.nodes().forEach(function (nodeKey) {
             var nodeData = graphData.node(nodeKey);
             var gameObject = nodeData.gameObject;
-            if (graph.isNullNode(gameObject)) {
+            if (graph.isDummyNode(gameObject)) {
                 return;
             }
 
@@ -25304,7 +25320,7 @@
         graphData.edges().forEach(function (edgeKey) {
             var edgeData = graphData.edge(edgeKey);
             var gameObject = edgeData.gameObject;
-            if (graph.isNullEdge(gameObject)) {
+            if (graph.isInvisibleEdge(gameObject)) {
                 return;
             }
 
