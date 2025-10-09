@@ -96,9 +96,13 @@ var game = new Phaser.Game(config);
 ### Create instance
 
 ```javascript
-var circularProgress = scene.add.rexCircularProgress(x, y, radius, barColor, value, {    
+var circularProgress = scene.add.rexCircularProgress(x, y, radius, barColor, value, {
+    barAlpha: 1,
     trackColor: undefined,
+    trackAlpha: 1,
     centerColor: undefined,
+    centerAlpha: 1,
+
     thickness: 0.2,
     startAngle: Phaser.Math.DegToRad(270),
     anticlockwise: false,
@@ -122,8 +126,12 @@ var circularProgress = scene.add.rexCircularProgress({
     radius: 1,
 
     barColor: undefined,
+    barAlpha: 1,
     trackColor: undefined,
+    trackAlpha: 1,
     centerColor: undefined,
+    centerAlpha: 1,
+
     thickness: 0.2,
     startAngle: Phaser.Math.DegToRad(270),
     anticlockwise: false,
@@ -141,9 +149,9 @@ var circularProgress = scene.add.rexCircularProgress({
 
 - `x`, `y` : Position of this object.
 - `radius` : Radius of this circle. Size will be `(radius*2, radius*2)`.
-- `barColor` : Color of circular bar, in number or css string value.
-- `trackColor` : Color of circular track, in number or css string value.
-- `centerColor` : Color of center circle, in number or css string value.
+- `barColor`, `barAlpha` : Color/alpha of circular bar, in number or css string value.
+- `trackColor`, `trackAlpha` : Color/alpha of circular track, in number or css string value.
+- `centerColor`, `centerAlpha` : Color/alpha of center circle, in number or css string value.
 - `thickness` : `0` ~ `1`, thickness of circular bar. Default value is `0.2` (`0.2*radius`)
 - `startAngle` : Start angle of circular bar, in radians. Default value is 270 degrees.
 - `anticlockwise` : Set `true` to put anticlockwise circular bar. Default value is `false`.

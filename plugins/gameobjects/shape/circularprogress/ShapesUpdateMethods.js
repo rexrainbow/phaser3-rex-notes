@@ -48,7 +48,7 @@ export default {
         // Track shape
         var trackShape = this.getShape('track');
         if ((this.trackColor != null) && (this.thickness > 0)) {
-            trackShape.fillStyle(this.trackColor);
+            trackShape.fillStyle(this.trackColor, this.trackAlpha);
             FillArc(trackShape, x, x, barOuterRadius, barInnerRadius, 0, 360, false);
         } else {
             trackShape.reset();
@@ -69,7 +69,7 @@ export default {
                 endAngle = deltaAngle + startAngle;
             }
 
-            barShape.fillStyle(this.barColor);
+            barShape.fillStyle(this.barColor, this.barAlpha);
             FillArc(barShape, x, x, barOuterRadius + 1, barInnerRadius - 1, startAngle, endAngle, false);
 
         } else {
@@ -82,7 +82,7 @@ export default {
             centerShape
                 .setCenterPosition(x, x)
                 .setRadius(barInnerRadius)
-                .fillStyle(this.centerColor);
+                .fillStyle(this.centerColor, this.centerAlpha);
         } else {
             centerShape.reset();
         }
