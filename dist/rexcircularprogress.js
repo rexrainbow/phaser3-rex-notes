@@ -2593,7 +2593,7 @@
             // Track shape
             var trackShape = this.getShape('track');
             if ((this.trackColor != null) && (this.thickness > 0)) {
-                trackShape.fillStyle(this.trackColor);
+                trackShape.fillStyle(this.trackColor, this.trackAlpha);
                 FillArc(trackShape, x, x, barOuterRadius, barInnerRadius, 0, 360, false);
             } else {
                 trackShape.reset();
@@ -2614,7 +2614,7 @@
                     endAngle = deltaAngle + startAngle;
                 }
 
-                barShape.fillStyle(this.barColor);
+                barShape.fillStyle(this.barColor, this.barAlpha);
                 FillArc(barShape, x, x, barOuterRadius + 1, barInnerRadius - 1, startAngle, endAngle, false);
 
             } else {
@@ -2627,7 +2627,7 @@
                 centerShape
                     .setCenterPosition(x, x)
                     .setRadius(barInnerRadius)
-                    .fillStyle(this.centerColor);
+                    .fillStyle(this.centerColor, this.centerAlpha);
             } else {
                 centerShape.reset();
             }
@@ -2642,6 +2642,9 @@
 
     class CircularProgress extends ProgressBase(BaseShapes) {
         constructor(scene, x, y, radius, barColor, value, config) {
+            var barAlpha;
+            var trackColor, trackAlpha;
+            var centerColor, centerAlpha;
             if (IsPlainObject(x)) {
                 config = x;
                 x = GetValue(config, 'x', 0);
@@ -2650,6 +2653,12 @@
                 barColor = GetValue(config, 'barColor', undefined);
                 value = GetValue(config, 'value', 0);
             }
+
+            barAlpha = GetValue(config, 'barAlpha', 1);
+            trackColor = GetValue(config, 'trackColor', undefined);
+            trackAlpha = GetValue(config, 'trackAlpha', 1);
+            centerColor = GetValue(config, 'centerColor', undefined);
+            centerAlpha = GetValue(config, 'centerAlpha', 1);
 
             if (radius === undefined) { radius = 1; }
 
@@ -2660,9 +2669,9 @@
             this.bootProgressBase(config);
 
             this.setRadius(radius);
-            this.setTrackColor(GetValue(config, 'trackColor', undefined));
-            this.setBarColor(barColor);
-            this.setCenterColor(GetValue(config, 'centerColor', undefined));
+            this.setTrackColor(trackColor, trackAlpha);
+            this.setBarColor(barColor, barAlpha);
+            this.setCenterColor(centerColor, centerAlpha);
 
             this.setThickness(GetValue(config, 'thickness', 0.2));
             this.setStartAngle(GetValue(config, 'startAngle', DefaultStartAngle));
@@ -2711,8 +2720,23 @@
             this._trackColor = value;
         }
 
-        setTrackColor(color) {
+        get trackAlpha() {
+            return this._trackColor;
+        }
+
+        set trackAlpha(value) {
+            this.dirty = this.dirty || (this._trackAlpha != value);
+            this._trackAlpha = value;
+        }
+
+
+        setTrackColor(color, alpha) {
+            if (alpha === undefined) {
+                alpha = 1;
+            }
+
             this.trackColor = color;
+            this.trackAlpha = alpha;
             return this;
         }
 
@@ -2725,8 +2749,22 @@
             this._barColor = value;
         }
 
-        setBarColor(color) {
+        get barAlpha() {
+            return this._barAlpha;
+        }
+
+        set barAlpha(value) {
+            this.dirty = this.dirty || (this._barAlpha != value);
+            this._barAlpha = value;
+        }
+
+        setBarColor(color, alpha) {
+            if (alpha === undefined) {
+                alpha = 1;
+            }
+
             this.barColor = color;
+            this.barAlpha = alpha;
             return this;
         }
 
@@ -2785,8 +2823,22 @@
             this._centerColor = value;
         }
 
-        setCenterColor(color) {
+        get centerAlpha() {
+            return this._centerAlpha;
+        }
+
+        set centerAlpha(value) {
+            this.dirty = this.dirty || (this._centerAlpha != value);
+            this._centerAlpha = value;
+        }
+
+        setCenterColor(color, alpha) {
+            if (alpha === undefined) {
+                alpha = 1;
+            }
+
             this.centerColor = color;
+            this.centerAlpha = alpha;
             return this;
         }
 
