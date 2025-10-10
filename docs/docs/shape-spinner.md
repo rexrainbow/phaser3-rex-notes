@@ -10,7 +10,9 @@ Loading animations on shape.
 - [Spinners](https://codepen.io/rexrainbow/pen/vYgNRMp)
     - [Arrow](https://codepen.io/rexrainbow/pen/gOJmKZy)
     - [AIO](https://codepen.io/rexrainbow/pen/abrVgEd)
-- [Custom spinner](https://codepen.io/rexrainbow/pen/YzNqJEd)
+- Custom spinner
+    - [Custom spinner](https://codepen.io/rexrainbow/pen/YzNqJEd)
+    - [Hourglass](https://codepen.io/rexrainbow/pen/WbrOevK)
 - [Loading animation](https://codepen.io/rexrainbow/pen/OJdMzbL)
 
 ## Usage
@@ -435,6 +437,10 @@ var customSpinner = scene.rexSpinner.add.custom({
 #### Shape class
 
 See [Shape class](shape-custom-shapes.md#shape-class)
+
+### Prompt
+
+[Prompt for generating customize logic](prompts/shape-spinner-custom.md)
 
 ### Other properties
 
