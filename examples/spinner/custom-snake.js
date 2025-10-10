@@ -44,32 +44,21 @@ function AddSnakeRandomTickedSpinner(scene, x, y, width, height, options = {}) {
 
         create: function () {
             const cols = 5, rows = 5;
-            const R = this.radius, cx = this.centerX, cy = this.centerY;
-
-            const squareSize = R * 2;
-            const gapPx = R * gap;
-            const cellSize = (squareSize - gapPx * (cols - 1)) / cols;
-            const left = cx - R, top = cy - R;
 
             for (let r = 0; r < rows; r++) {
                 for (let c = 0; c < cols; c++) {
                     const idx = r * cols + c;
                     const rect = this.createShape('rectangle', `cell${idx}`);
-                    const xx = left + c * (cellSize + gapPx);
-                    const yy = top + r * (cellSize + gapPx);
-                    rect.setSize(cellSize, cellSize).setTopLeftPosition(xx, yy);
-                    rect.lineStyle();
-                    rect.fillStyle();
                     this.addShape(rect);
                 }
             }
 
             const L = Math.max(1, Math.floor(length));
             const body = [];
-            const occ = new Uint8Array(25);
+            const occ = new Uint8Array(rows * cols);
 
-            let hr = 2, hc = 2;
-            body.push(hr * 5 + hc); occ[body[0]] = 1;
+            let hr = 2, hc = 2
+            body.push(hr * cols + hc); occ[body[0]] = 1;
 
             const tryDirs = [[0, -1], [0, 1], [-1, 0], [1, 0]];
             outer:
@@ -80,11 +69,11 @@ function AddSnakeRandomTickedSpinner(scene, x, y, width, height, options = {}) {
                 for (let k = 1; k < L; k++) {
                     const nr = r + dr, nc = c + dc;
                     if (nr < 0 || nr >= rows || nc < 0 || nc >= cols) { ok = false; break; }
-                    tmp.push(nr * 5 + nc); r = nr; c = nc;
+                    tmp.push(nr * cols + nc); r = nr; c = nc;
                 }
                 if (ok) {
                     for (let i = 1; i < tmp.length; i++) { body.push(tmp[i]); occ[tmp[i]] = 1; }
-                    hr = Math.floor(body[0] / 5); hc = body[0] % 5;
+                    hr = Math.floor(body[0] / cols); hc = body[0] % cols;
                     break outer;
                 }
             }
@@ -112,10 +101,30 @@ function AddSnakeRandomTickedSpinner(scene, x, y, width, height, options = {}) {
             const occ = holder.getData('occ');
             let hr = holder.getData('headR'), hc = holder.getData('headC');
 
+            const R = this.radius, cx = this.centerX, cy = this.centerY;
+            const squareSize = R * 2;
+            const gapPx = R * holder.getData('gapPx') ?? (R * 0);
+            const actualGapPx = R * (typeof this.getData === 'function' ? 0 : 0);
+            const gapVal = (typeof gap === 'number') ? gap : 0.08;
+            const cellGap = R * gapVal;
+
+            const cellSize = (squareSize - cellGap * (cols - 1)) / cols;
+            const left = cx - R, top = cy - R;
+
+            for (let idx = 0; idx < rows * cols; idx++) {
+                const r = Math.floor(idx / cols);
+                const c = idx % cols;
+                const s = this.getShape(`cell${idx}`);
+                const xx = left + c * (cellSize + cellGap);
+                const yy = top + r * (cellSize + cellGap);
+                s.setSize(cellSize, cellSize).setTopLeftPosition(xx, yy);
+                s.lineStyle();
+                s.fillStyle();
+            }
+
             const spc = holder.getData('stepsPerCycle');
             const tick = Math.floor(this.value * spc);
             let prevTick = holder.getData('prevTick', -1);
-
             let steps = tick - prevTick;
             if (prevTick === -1) steps = 1;
             else if (steps < 0) steps += spc;
@@ -133,13 +142,13 @@ function AddSnakeRandomTickedSpinner(scene, x, y, width, height, options = {}) {
                     const dr = dir[d * 2], dc = dir[d * 2 + 1];
                     const nr = hr + dr, nc = hc + dc;
                     if (nr < 0 || nr >= rows || nc < 0 || nc >= cols) continue;
-                    const nextIdx = nr * 5 + nc;
+                    const nextIdx = nr * cols + nc;
                     if (occ[nextIdx] && nextIdx !== tailIdx) continue;
                     tr = nr; tc = nc; moved = true; break;
                 }
 
                 if (moved) {
-                    const newHead = tr * 5 + tc;
+                    const newHead = tr * cols + tc;
                     body.unshift(newHead);
                     occ[newHead] = 1;
                     while (body.length > L) {
@@ -153,8 +162,6 @@ function AddSnakeRandomTickedSpinner(scene, x, y, width, height, options = {}) {
             holder.setData('headR', hr);
             holder.setData('headC', hc);
             holder.setData('prevTick', tick);
-
-            for (let i = 0; i < shapes.length; i++) shapes[i].fillStyle();
 
             const headAlpha = 1.0, tailAlpha = 0.25;
             const stepA = (L > 1) ? (headAlpha - tailAlpha) / (L - 1) : 0;
