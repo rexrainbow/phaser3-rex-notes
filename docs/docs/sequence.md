@@ -107,7 +107,7 @@ seq.load(commands, actionScope);
     ```
 - [ActionScope](sequence.md#action-of-commands)
 
-Format of command is the same as [run-command](sequence#run-commands).
+Format of command is the same as [run-command](#run-commands).
 
 ### Run commands
 
