@@ -129,7 +129,7 @@ class Rectangle extends BaseGeom {
         }
 
         if (this.isStroked) {
-            StrokePathWebGL(drawingContext, submitter, calcMatrix, this, this, alpha, dx, dy);
+            StrokePathWebGL(drawingContext, submitter, calcMatrix, gameObject, this, alpha, dx, dy);
         }
     }
 

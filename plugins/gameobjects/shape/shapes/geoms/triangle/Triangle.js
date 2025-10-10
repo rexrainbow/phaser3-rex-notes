@@ -110,7 +110,7 @@ class Triangle extends BaseGeom {
 
     webglRender(drawingContext, submitter, calcMatrix, gameObject, alpha, dx, dy) {
         if (this.isFilled) {
-            var fillTintColor = Utils.getTintAppendFloatAlpha(src.fillColor, src.fillAlpha * alpha);
+            var fillTintColor = Utils.getTintAppendFloatAlpha(this.fillColor, this.fillAlpha * alpha);
 
             var x0 = this.x0 - dx;
             var y0 = this.y0 - dy;
@@ -138,7 +138,7 @@ class Triangle extends BaseGeom {
         }
 
         if (this.isStroked) {
-            StrokePathWebGL(drawingContext, submitter, calcMatrix, this, this, alpha, dx, dy);
+            StrokePathWebGL(drawingContext, submitter, calcMatrix, gameObject, this, alpha, dx, dy);
         }
     }
 
