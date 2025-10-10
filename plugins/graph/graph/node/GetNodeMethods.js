@@ -14,7 +14,7 @@ export default {
                 return;
             }
 
-            out.puth(nodeGameObject);
+            out.push(nodeGameObject);
         })
 
         return out;

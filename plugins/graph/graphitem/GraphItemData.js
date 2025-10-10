@@ -53,8 +53,4 @@ Object.assign(
     methods
 );
 
-const OBJTYPE = {
-    vertex: 0,
-    edge: 1,
-}
 export default GraphItemData;

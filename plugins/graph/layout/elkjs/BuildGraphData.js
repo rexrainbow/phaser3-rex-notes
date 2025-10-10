@@ -2,6 +2,10 @@ import UIDToObj from '../../graphitem/UIDToObj.js';
 import GetBoundsConfig from '../../../utils/bounds/GetBoundsConfig.js';
 
 var BuildGraphData = function (graph, config) {
+    if (config === undefined) {
+        config = {};
+    }
+
     var nodes = [];
     var nodeGameObjectMap = {};
     graph.graph.forEachNode(function (uid, attributes) {
@@ -17,6 +21,9 @@ var BuildGraphData = function (graph, config) {
             gameObject: nodeGameObject, padding: padding,
             id: uid, width: width, height: height
         };
+        if (attributes.hasOwnProperty('layoutOptions')) {
+            nodeData.layoutOptions = { ...attributes.layoutOptions };
+        }
         nodes.push(nodeData);
 
         nodeGameObjectMap[uid] = nodeGameObject;

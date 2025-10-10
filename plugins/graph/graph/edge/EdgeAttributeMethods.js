@@ -22,4 +22,12 @@ export default {
             return this.graph.setEdgeAttribute(edgeUID, key, value);
         }
     },
+
+    setEdgesAttribute(gameObjects, key, value) {
+        for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+            this.setEdgeAttribute(gameObjects[i], key, value);
+        }
+
+        return this;
+    }
 }

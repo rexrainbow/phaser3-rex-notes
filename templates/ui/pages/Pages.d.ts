@@ -1,5 +1,6 @@
 // import * as Phaser from 'phaser';
 import OverlapSizer from '../overlapsizer/OverlapSizer';
+import GetBoundsConfig from '../../../plugins/utils/bounds/GetBoundsConfig';
 
 
 export default Pages;
@@ -11,13 +12,7 @@ declare namespace Pages {
         'center-top' | 'center-center' | 'center-bottom' |
         'right-top' | 'right-center' | 'right-bottom';
 
-    type PaddingTypes = number |
-    {
-        left?: number,
-        right?: number,
-        top?: number,
-        bottom?: number,
-    };
+    type PaddingTypes = GetBoundsConfig.PaddingConfigType;
 
     interface IConfig extends OverlapSizer.IConfig {
         fadeIn?: number,

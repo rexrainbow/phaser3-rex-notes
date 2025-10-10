@@ -16,8 +16,11 @@ declare namespace CircularProgress {
         radius?: number,
 
         barColor?: string | number,
+        barAlpha?: number,
         trackColor?: string | number,
+        trackAlpha?: number,
         centerColor?: string | number,
+        centerAlpha?: number,
         thickness?: number,
         startAngle?: number,
         anticlockwise?: boolean,

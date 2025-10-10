@@ -1,5 +1,6 @@
 // import * as Phaser from 'phaser';
 import BaseSizer from '../basesizer/BaseSizer.js';
+import GetBoundsConfig from '../../../plugins/utils/bounds/GetBoundsConfig.js';
 
 export default GridSizer;
 
@@ -8,13 +9,7 @@ declare namespace GridSizer {
         'left-top' | 'left-center' | 'left-bottom' |
         'center-top' | 'center-center' | 'center-bottom' |
         'right-top' | 'right-center' | 'right-bottom';
-    type PaddingTypes = number |
-    {
-        left?: number,
-        right?: number,
-        top?: number,
-        bottom?: number
-    };
+    type PaddingTypes = GetBoundsConfig.PaddingConfigType;
 
     type CreateCellContainerCallbackType = (
         scene: Phaser.Scene,

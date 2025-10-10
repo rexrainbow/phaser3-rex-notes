@@ -378,7 +378,7 @@
         }
     }
 
-    var GetValue$2 = function (source, key, defaultValue) {
+    var GetValue$3 = function (source, key, defaultValue) {
         if (!source || typeof source === 'number') {
             return defaultValue;
         }
@@ -419,9 +419,9 @@
 
     class Bank {
         constructor(config) {
-            this.nextId = GetValue$2(config, 'start', 1); // start index
-            this.uidKey = GetValue$2(config, 'uidKey', '$uid');
-            this.autoRemove = GetValue$2(config, 'remove', true);
+            this.nextId = GetValue$3(config, 'start', 1); // start index
+            this.uidKey = GetValue$3(config, 'uidKey', '$uid');
+            this.autoRemove = GetValue$3(config, 'remove', true);
             this.refs = {};
             this.count = 0;
         }
@@ -430,8 +430,7 @@
             var refs = this.refs;
             var uidKey = this.uidKey;
             if (uidKey) {
-                var uid = gameObject[uidKey];
-                if (uid != null) {
+                if (gameObject.hasOwnProperty('uidKey') && gameObject[uidKey] != null) {
                     return this;
                 }
             }
@@ -648,7 +647,7 @@
         }
     };
 
-    const GetValue$1 = Phaser.Utils.Objects.GetValue;
+    const GetValue$2 = Phaser.Utils.Objects.GetValue;
 
     class ComponentBase {
         constructor(parent, config) {
@@ -657,7 +656,7 @@
             this.isShutdown = false;
 
             // Event emitter, default is private event emitter
-            this.setEventEmitter(GetValue$1(config, 'eventEmitter', true));
+            this.setEventEmitter(GetValue$2(config, 'eventEmitter', true));
 
             // Register callback of parent destroy event, also see `shutdown` method
             if (this.parent) {
@@ -791,7 +790,7 @@
         return (type === 'number') || (type === 'string');
     };
 
-    var GetGraphItem = function (gameObject) {
+    var GetGraphItem = function (gameObject, uid) {
         // game object or uid
         if (IsUID(gameObject)) {
             // uid
@@ -799,39 +798,56 @@
         } else {
             // game object
             if (!gameObject.hasOwnProperty('rexGraph')) {
-                gameObject.rexGraph = new GraphItemData(gameObject);
+                gameObject.rexGraph = new GraphItemData(gameObject, uid);
             }
             return gameObject.rexGraph;
         }
     };
 
     const uidKey = ObjBank.uidKey;
-    var GetObjUID = function (gameObject) {
+    var GetObjUID = function (gameObject, newUID) {
+        if (newUID === undefined) {
+            newUID = true;
+        }
+
         // Game object or uid
         var uid;
         if (IsUID(gameObject)) {
             uid = gameObject;
         } else {
-            uid = GetGraphItem(gameObject)[uidKey];
+            if (gameObject.hasOwnProperty('rexGraph')) {
+                uid = gameObject.rexGraph[uidKey];
+            } else if (newUID) {
+                uid = GetGraphItem(gameObject)[uidKey];
+            } else {
+                uid = null;
+            }
         }
         return uid;
     };
 
-    var IsNode = function (gameObejct) {
-        // uid or game object
-        var uid = GetObjUID(gameObejct);
-        return this.graph.hasNode(uid);
-    };
-
     var AddNodeMethods = {
-        addNode(gameObejct, attributes) {
+        isNode(gameObejct) {
+            // uid or game object
+            var uid = GetObjUID(gameObejct, false);
+            if (uid === null) {
+                return false;
+            }
+
+            return this.graph.hasNode(uid);
+        },
+
+        addNode(gameObejct, attributes, nodeUID) {
             if (this.isNode(gameObejct)) {
                 return this;
             }
 
-            GetGraphItem(gameObejct).setGraph(this);
+            GetGraphItem(gameObejct, nodeUID).setGraph(this);
 
-            var nodeUID = GetObjUID(gameObejct);
+            if (nodeUID === undefined) {
+                nodeUID = GetObjUID(gameObejct);
+            }
+
             this.graph.addNode(nodeUID, attributes);
 
             return this;
@@ -842,15 +858,8 @@
                 this.addNode(gameObjects[i], { ...attributes });
             }
             return this;
-        }
-    };
+        },
 
-    var UIDToObj = function (uid) {
-        if (uid == null) {
-            return null;
-        } else {
-            return ObjBank.get(uid).parent;
-        }
     };
 
     var RemoveNodeMethods = {
@@ -883,23 +892,15 @@
                 this.removeNode(nodeUid, destroy);
             }
 
-            this.graph.forEachNode(function (uid) {
-                var gameObject = UIDToObj(uid);
-                if (!gameObject) {
-                    return;
-                }
-
-                // Clear reference of graph
-                GetGraphItem(gameObject).setGraph(null);
-                // Destroy game object
-                if (destroy && gameObject.destroy) {
-                    gameObject.destroy();
-                }
-            });
-
-            // Clear all nodes and all edges
-            this.graph.clear();
             return this;
+        }
+    };
+
+    var UIDToObj = function (uid) {
+        if (uid == null) {
+            return null;
+        } else {
+            return ObjBank.get(uid).parent;
         }
     };
 
@@ -932,7 +933,7 @@
                     return;
                 }
 
-                out.puth(nodeGameObject);
+                out.push(nodeGameObject);
             });
 
             return out;
@@ -999,7 +1000,7 @@
         },
     };
 
-    const IsPlainObject$2 = Phaser.Utils.Objects.IsPlainObject;
+    const IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
 
     var NodeAttributeMethods = {
         getNodeAttribute(gameObject, key) {
@@ -1015,21 +1016,28 @@
         setNodeAttribute(gameObject, key, value) {
             var nodeUID = GetObjUID(gameObject);
 
-            if (IsPlainObject$2(key)) {
-                return this.graph.updateNodeAttribute(nodeUID, key);
+            if (IsPlainObject$1(key)) {
+                var data = key;
+                for (var key in data) {
+                    this.graph.setNodeAttribute(nodeUID, key, data[key]);
+                }
             } else {
-                return this.graph.setNodeAttribute(nodeUID, key, value);
+                this.graph.setNodeAttribute(nodeUID, key, value);
             }
+
+            return this;
+        },
+
+        setNodesAttribute(gameObjects, key, value) {
+            for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+                this.setNodeAttribute(gameObjects[i], key, value);
+            }
+
+            return this;
         }
     };
 
-    var IsEdge = function (gameObejct) {
-        // uid or game object
-        var uid = GetObjUID(gameObejct);
-        return this.graph.hasEdge(uid);
-    };
-
-    const IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
+    Phaser.Utils.Objects.IsPlainObject;
 
     const DIRAtoB = 1;
     const DIRBtoA = 2;
@@ -1040,13 +1048,19 @@
     };
 
     var AddEdgeMethods = {
-        addEdge(edgeGameObject, nodeAGameObject, nodeBGameObject, dir, attributes) {
-            if (this.isEdge(edgeGameObject)) {
-                return this;
+        isEdge(gameObejct) {
+            // uid or game object
+            var uid = GetObjUID(gameObejct, false);
+            if (uid === null) {
+                return false;
             }
 
-            if (IsPlainObject$1(dir)) {
-                attributes = dir;
+            return this.graph.hasEdge(uid);
+        },
+
+        addEdge(edgeGameObject, nodeAGameObject, nodeBGameObject, dir, attributes, edgeUID) {
+            if (this.isEdge(edgeGameObject)) {
+                return this;
             }
 
             if (dir === undefined) {
@@ -1056,10 +1070,15 @@
             }
 
             // Add node to graph
-            this.addNode(nodeAGameObject).addNode(nodeBGameObject);
+            if (typeof (nodeAGameObject) !== 'string') {
+                this.addNode(nodeAGameObject);
+            }
+            if (typeof (nodeBGameObject) !== 'string') {
+                this.addNode(nodeBGameObject);
+            }
 
             // Add edge
-            GetGraphItem(edgeGameObject).setGraph(this);
+            GetGraphItem(edgeGameObject, edgeUID).setGraph(this);
 
             var edgeUID = GetObjUID(edgeGameObject);
             var nodeAUID = GetObjUID(nodeAGameObject);
@@ -1085,7 +1104,7 @@
 
 
             return this;
-        }
+        },
 
     };
 
@@ -1114,6 +1133,13 @@
             return this;
         },
 
+        removeAllEdges(destroy) {
+            for (var edgeUid in this.edges) {
+                this.removeEdge(edgeUid, destroy);
+            }
+
+            return this;
+        },
     };
 
     var GetEdgeMethods = {
@@ -1128,7 +1154,7 @@
                     return;
                 }
 
-                out.puth(edgeGameObject);
+                out.push(edgeGameObject);
             });
 
             return out;
@@ -1145,7 +1171,7 @@
                 if (!edgeGameObject) {
                     return;
                 }
-                out.puth(edgeGameObject);
+                out.push(edgeGameObject);
             });
 
             return out;
@@ -1209,17 +1235,23 @@
                 return this.graph.setEdgeAttribute(edgeUID, key, value);
             }
         },
+
+        setEdgesAttribute(gameObjects, key, value) {
+            for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+                this.setEdgeAttribute(gameObjects[i], key, value);
+            }
+
+            return this;
+        }
     };
 
-    var Methods = {
-        isNode: IsNode,
-
-        isEdge: IsEdge,
+    var Methods$1 = {
         getEdgeLength: GetEdgeLength,
     };
 
     Object.assign(
-        Methods,
+        Methods$1,
+
         AddNodeMethods,
         RemoveNodeMethods,
         GetNodeMethods,
@@ -1230,7 +1262,6 @@
         RemoveEdgeMethods,
         GetEdgeMethods,
         EdgeAttributeMethods,
-
     );
 
     var graphology_umd_min = {exports: {}};
@@ -1243,14 +1274,16 @@
     var graphology_umd_minExports = graphology_umd_min.exports;
     var GraphData = /*@__PURE__*/getDefaultExportFromCjs(graphology_umd_minExports);
 
-    let Graph$8 = class Graph extends EventEmitter {
-        constructor(scene) {
+    class LogicGraph extends EventEmitter {
+        constructor(scene, config) {
+
             // scene: scene instance, or undefined
             super();
 
             this.isShutdown = false;
             this.scene = scene;
             this.graph = new GraphData();
+
             this.boot();
         }
 
@@ -1298,11 +1331,14 @@
             return this.isEdge(gameObject) || this.isNode(gameObject);
         }
 
-        remove(gameObject) {
+        remove(gameObject, destroy) {
+            if (destroy === undefined) {
+                destroy = false;
+            }
             if (this.isNode(gameObject)) {
-                this.removeNode(gameObject);
+                this.removeNode(gameObject, destroy);
             } else if (this.isEdge(gameObject)) {
-                this.removeEdge(gameObject);
+                this.removeEdge(gameObject, destroy);
             }
             return this;
         }
@@ -1332,11 +1368,480 @@
             this.removeAllNodes(destroy);
             return this;
         }
+    }
+
+    Object.assign(
+        LogicGraph.prototype,
+        Methods$1
+    );
+
+    const GameObjectClass = Phaser.GameObjects.GameObject;
+    const LayerClass$1 = Phaser.GameObjects.Layer;
+
+    var IsGameObject = function (object) {
+        return (object instanceof GameObjectClass) || (object instanceof LayerClass$1);
+    };
+
+    var GetDisplayWidth = function (gameObject) {
+        if (gameObject.displayWidth !== undefined) {
+            return gameObject.displayWidth;
+        } else {
+            return gameObject.width;
+        }
+    };
+
+    var GetDisplayHeight = function (gameObject) {
+        if (gameObject.displayHeight !== undefined) {
+            return gameObject.displayHeight;
+        } else {
+            return gameObject.height;
+        }
+    };
+
+    const Rectangle$2 = Phaser.Geom.Rectangle;
+    const Vector2 = Phaser.Math.Vector2;
+    const RotateAround$1 = Phaser.Math.RotateAround;
+    const P3Container = Phaser.GameObjects.Container;
+
+    var GetBounds$1 = function (gameObject, output) {
+        if (output === undefined) {
+            output = new Rectangle$2();
+        } else if (output === true) {
+            if (GlobRect === undefined) {
+                GlobRect = new Rectangle$2();
+            }
+            output = GlobRect;
+        }
+
+        if (gameObject.getBounds && !(gameObject instanceof P3Container)) {
+            return gameObject.getBounds(output);
+        }
+
+        //  We can use the output object to temporarily store the x/y coords in:
+
+        var TLx, TLy, TRx, TRy, BLx, BLy, BRx, BRy;
+
+        // Instead of doing a check if parent container is
+        // defined per corner we only do it once.
+        if (gameObject.parentContainer) {
+            var parentMatrix = gameObject.parentContainer.getBoundsTransformMatrix();
+
+            GetTopLeft(gameObject, output);
+            parentMatrix.transformPoint(output.x, output.y, output);
+
+            TLx = output.x;
+            TLy = output.y;
+
+            GetTopRight(gameObject, output);
+            parentMatrix.transformPoint(output.x, output.y, output);
+
+            TRx = output.x;
+            TRy = output.y;
+
+            GetBottomLeft(gameObject, output);        parentMatrix.transformPoint(output.x, output.y, output);
+
+            BLx = output.x;
+            BLy = output.y;
+
+            GetBottomRight(gameObject, output);
+            parentMatrix.transformPoint(output.x, output.y, output);
+
+            BRx = output.x;
+            BRy = output.y;
+        }
+        else {
+            GetTopLeft(gameObject, output);
+
+            TLx = output.x;
+            TLy = output.y;
+
+            GetTopRight(gameObject, output);
+            TRx = output.x;
+            TRy = output.y;
+
+            GetBottomLeft(gameObject, output);
+            BLx = output.x;
+            BLy = output.y;
+
+            GetBottomRight(gameObject, output);
+
+            BRx = output.x;
+            BRy = output.y;
+        }
+
+        output.x = Math.min(TLx, TRx, BLx, BRx);
+        output.y = Math.min(TLy, TRy, BLy, BRy);
+        output.width = Math.max(TLx, TRx, BLx, BRx) - output.x;
+        output.height = Math.max(TLy, TRy, BLy, BRy) - output.y;
+
+        return output;
+    };
+
+    var GlobRect = undefined;
+
+    var GetTopLeft = function (gameObject, output, includeParent) {
+        if (output === undefined) {
+            output = new Vector2();
+        } else if (output === true) {
+            if (GlobVector === undefined) {
+                GlobVector = new Vector2();
+            }
+            output = GlobVector;
+        }
+
+        if (gameObject.getTopLeft) {
+            return gameObject.getTopLeft(output, includeParent);
+        }
+
+        output.x = gameObject.x - (GetDisplayWidth(gameObject) * gameObject.originX);
+        output.y = gameObject.y - (GetDisplayHeight(gameObject) * gameObject.originY);
+
+        return PrepareBoundsOutput(gameObject, output, includeParent);
+    };
+
+    var GetTopRight = function (gameObject, output, includeParent) {
+        if (output === undefined) {
+            output = new Vector2();
+        } else if (output === true) {
+            if (GlobVector === undefined) {
+                GlobVector = new Vector2();
+            }
+            output = GlobVector;
+        }
+
+        if (gameObject.getTopRight) {
+            return gameObject.getTopRight(output, includeParent);
+        }
+
+        output.x = (gameObject.x - (GetDisplayWidth(gameObject) * gameObject.originX)) + GetDisplayWidth(gameObject);
+        output.y = gameObject.y - (GetDisplayHeight(gameObject) * gameObject.originY);
+
+        return PrepareBoundsOutput(gameObject, output, includeParent);
+    };
+
+    var GetBottomLeft = function (gameObject, output, includeParent) {
+        if (output === undefined) {
+            output = new Vector2();
+        } else if (output === true) {
+            if (GlobVector === undefined) {
+                GlobVector = new Vector2();
+            }
+            output = GlobVector;
+        }
+
+        if (gameObject.getBottomLeft) {
+            return gameObject.getBottomLeft(output, includeParent);
+        }
+
+        output.x = gameObject.x - (GetDisplayWidth(gameObject) * gameObject.originX);
+        output.y = (gameObject.y - (GetDisplayHeight(gameObject) * gameObject.originY)) + GetDisplayHeight(gameObject);
+
+        return PrepareBoundsOutput(gameObject, output, includeParent);
+    };
+
+    var GetBottomRight = function (gameObject, output, includeParent) {
+        if (output === undefined) {
+            output = new Vector2();
+        } else if (output === true) {
+            if (GlobVector === undefined) {
+                GlobVector = new Vector2();
+            }
+            output = GlobVector;
+        }
+
+        if (gameObject.getBottomRight) {
+            return gameObject.getBottomRight(output, includeParent);
+        }
+
+        output.x = (gameObject.x - (GetDisplayWidth(gameObject) * gameObject.originX)) + GetDisplayWidth(gameObject);
+        output.y = (gameObject.y - (GetDisplayHeight(gameObject) * gameObject.originY)) + GetDisplayHeight(gameObject);
+
+        return PrepareBoundsOutput(gameObject, output, includeParent);
+    };
+
+    var GlobVector = undefined;
+
+    var PrepareBoundsOutput = function (gameObject, output, includeParent) {
+        if (includeParent === undefined) { includeParent = false; }
+
+        if (gameObject.rotation !== 0) {
+            RotateAround$1(output, gameObject.x, gameObject.y, gameObject.rotation);
+        }
+
+        if (includeParent && gameObject.parentContainer) {
+            var parentMatrix = gameObject.parentContainer.getBoundsTransformMatrix();
+
+            parentMatrix.transformPoint(output.x, output.y, output);
+        }
+
+        return output;
+    };
+
+    const GetValue$1 = Phaser.Utils.Objects.GetValue;
+
+    var DrawBounds = function (gameObjects, graphics, config) {
+        var strokeColor, lineWidth, fillColor, fillAlpha, padding, includeParent;
+        if (typeof (config) === 'number') {
+            strokeColor = config;
+        } else {
+            strokeColor = GetValue$1(config, 'color');
+            lineWidth = GetValue$1(config, 'lineWidth');
+            fillColor = GetValue$1(config, 'fillColor');
+            fillAlpha = GetValue$1(config, 'fillAlpha');
+            padding = GetValue$1(config, 'padding');
+            includeParent = GetValue$1(config, 'includeParent');
+        }
+
+        if (strokeColor === undefined) { strokeColor = 0xffffff; }
+        if (lineWidth === undefined) { lineWidth = 1; }
+        if (fillColor === undefined) { fillColor = null; }    if (fillAlpha === undefined) { fillAlpha = 1; }    if (padding === undefined) { padding = 0; }
+        if (includeParent === undefined) { includeParent = true; }
+
+        if (Array.isArray(gameObjects)) {
+            for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+                Draw(gameObjects[i], graphics, strokeColor, lineWidth, fillColor, fillAlpha, padding, includeParent);
+            }
+        } else {
+            Draw(gameObjects, graphics, strokeColor, lineWidth, fillColor, fillAlpha, padding, includeParent);
+        }
+    };
+
+    var Draw = function (gameObject, graphics, strokeColor, lineWidth, fillColor, fillAlpha, padding, includeParent) {
+        var canDrawBound = gameObject.getBounds ||
+            ((gameObject.width !== undefined) && (gameObject.height !== undefined));
+        if (!canDrawBound) {
+            return;
+        }
+
+        var p0 = GetTopLeft(gameObject, Points[0], includeParent);
+        p0.x -= padding;
+        p0.y -= padding;
+
+        var p1 = GetTopRight(gameObject, Points[1], includeParent);
+        p1.x += padding;
+        p1.y -= padding;
+
+        var p2 = GetBottomRight(gameObject, Points[2], includeParent);
+        p2.x += padding;
+        p2.y += padding;
+
+        var p3 = GetBottomLeft(gameObject, Points[3], includeParent);
+        p3.x -= padding;
+        p3.y += padding;
+
+        if (fillColor !== null) {
+            graphics
+                .fillStyle(fillColor, fillAlpha)
+                .fillPoints(Points, true, true);
+        }
+        if (strokeColor !== null) {
+            graphics
+                .lineStyle(lineWidth, strokeColor)
+                .strokePoints(Points, true, true);
+        }
+
+    };
+
+    var Points = [{ x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 }];
+
+    const MergeRect = Phaser.Geom.Rectangle.MergeRect;
+
+    var GameObjectsMethods = {
+        forEachGameObject(callback) {
+            var gameObjects = [];
+            this.getAllEdges(gameObjects);
+            this.getAllNodes(gameObjects);
+
+            for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+                var gameObject = gameObjects[i];
+                if (!IsGameObject(gameObject)) {
+                    continue;
+                }
+
+                callback(gameObject);
+            }
+
+            return this;
+        },
+
+        setGraphOffset(x, y) {
+            var dx = x - this.graphOffsetX;
+            var dy = y - this.graphOffsetY;
+            this.graphOffsetX = x;
+            this.graphOffsetY = y;
+
+            this.forEachGameObject(function (gameObject) {
+                if (dx !== 0) {
+                    gameObject.x += dx;
+                }
+                if (dy !== 0) {
+                    gameObject.y += dy;
+                }
+            });
+
+            return this;
+        },
+
+        getBounds(out) {
+            if (out === undefined) {
+                out = new Phaser.Geom.Rectangle();
+            }
+
+            var firstBounds = true;
+            var source = new Phaser.Geom.Rectangle();
+            this.forEachGameObject(function (gameObject) {
+                if (gameObject.getBounds) {
+                    source = GetBounds$1(gameObject, source);
+
+                    if (firstBounds) {
+                        out.setTo(source.x, source.y, source.width, source.height);
+                        firstBounds = false;
+
+                    } else {
+                        MergeRect(out, source);
+                    }
+                }
+            });
+
+            return out;
+        },
+
+        drawBounds(graphics, config) {
+            var gameObjects = [];
+            this.getAllEdges(gameObjects);
+            this.getAllNodes(gameObjects);
+            DrawBounds(gameObjects, graphics, config);
+            return this;
+        },
+
+        createInvisibleEdge() {
+            return { $invisible: true };
+        },
+
+        isInvisibleEdge(edge) {
+            return !!edge.$invisible;
+        },
+
+        createDummyNode() {
+            return { $dummy: true, width: 0, height: 0, }
+        },
+
+        isDummyNode(node) {
+            return !!node.$dummy;
+        },
+    };
+
+    const LayerClass = Phaser.GameObjects.Layer;
+
+    var IsLayerGameObject = function (gameObject) {
+        return (gameObject instanceof LayerClass);
+    };
+
+    const ContainerClass = Phaser.GameObjects.Container;
+
+    var IsContainerGameObject = function (gameObject) {
+        return (gameObject instanceof ContainerClass);
+    };
+
+    const GetValue = Phaser.Utils.Objects.GetValue;
+
+    var GetBoundsConfig = function (config, out) {
+        if (config === undefined) {
+            config = 0;
+        }
+        if (out === undefined) {
+            out = {};
+        }
+
+        if (typeof (config) === 'number') {
+            out.left = config;
+            out.right = config;
+            out.top = config;
+            out.bottom = config;
+        } else {
+            out.left = GetValue(config, 'left', 0);
+            out.right = GetValue(config, 'right', 0);
+            out.top = GetValue(config, 'top', 0);
+            out.bottom = GetValue(config, 'bottom', 0);
+        }
+        return out;
+    };
+
+    var ContainerMethods = {
+        addToContainer(container) {
+            if (!container) {
+                return this;
+            }
+
+            this.forEachGameObject(function (gameObject) {
+                container.add(gameObject);
+            });
+
+            return this;
+        },
+
+        addToLayer(layer) {
+            this.addToContainer(layer);
+            return this;
+        },
+
+        fitContainer(container, padding) {
+            if (!container) {
+                return this;
+            }
+
+            this.addToContainer(container);
+
+            // p3Container, Layer, rexContainerLite
+
+            if (IsLayerGameObject(container)) {
+                return this;
+            }
+
+            var padding = GetBoundsConfig(padding);
+            var bounds = this.getBounds();
+
+            var width = bounds.width + padding.left + padding.right;
+            var height = bounds.height + padding.top + padding.bottom;
+            container.setSize(width, height);
+
+            var offsetX = -(width * container.originX) + padding.left;
+            var offsetY = -(height * container.originY) + padding.top;
+
+            if (IsContainerGameObject(container)) {
+                this.setGraphOffset(offsetX, offsetY);
+
+            } else if (container.isRexContainerLite) {
+                this.setGraphOffset(offsetX, offsetY);
+
+                this.forEachGameObject(function (gameObject) {
+                    container.setChildLocalPosition(gameObject, gameObject.x, gameObject.y);
+                });
+            }
+
+            return this;
+        },
+
+    };
+
+    let Graph$8 = class Graph extends LogicGraph {
+        constructor(scene, config) {
+            if (config === undefined) {
+                config = {};
+            }
+
+            super(scene, config);
+
+            this.graphOffsetX = 0;
+            this.graphOffsetY = 0;
+        }
+
     };
 
     Object.assign(
         Graph$8.prototype,
-        Methods
+        GameObjectsMethods,
+        ContainerMethods,
     );
 
     var IsInValidKey = function (keys) {
@@ -1414,55 +1919,2755 @@
 
     SetValue(window, 'RexPlugins.Graph.Graph', Graph$8);
 
-    var Layout$2 = async function (layoutConfig, graph, userConfig) {
-        if (userConfig === undefined) {
-            userConfig = {};
+    const GetCalcMatrix = Phaser.GameObjects.GetCalcMatrix;
+
+    var WebGLRenderer = function (renderer, src, camera, parentMatrix) {
+        src.updateData();
+        camera.addToRenderList(src);
+
+        var pipeline = renderer.pipelines.set(src.pipeline);
+
+        var result = GetCalcMatrix(src, camera, parentMatrix);
+
+        var calcMatrix = pipeline.calcMatrix.copyFrom(result.calc);
+
+        var dx = src._displayOriginX;
+        var dy = src._displayOriginY;
+
+        var alpha = camera.alpha * src.alpha;
+
+        renderer.pipelines.preBatch(src);
+
+        var shapes = src.geom,
+            shape;
+        for (var i = 0, cnt = shapes.length; i < cnt; i++) {
+            shape = shapes[i];
+            if (shape.visible) {
+                shape.webglRender(pipeline, calcMatrix, alpha, dx, dy);
+            }
         }
 
-        graph.emit('layout.start', graph);
-
-        var graphData = layoutConfig.buildGraphData(graph, userConfig);
-
-        graph.emit('layout.prelayout', graph);
-
-        if (layoutConfig.isAsyncRunLayout) {
-            await layoutConfig.runLayout(graphData, userConfig);
-        } else {
-            layoutConfig.runLayout(graphData, userConfig);
-        }
-
-        graph.emit('layout.postlayout', graph);
-
-        layoutConfig.placeGameObjects(graph, graphData, userConfig);
-
-        graph.emit('layout.complete', graph);
+        renderer.pipelines.postBatch(src);
     };
 
-    const GetValue = Phaser.Utils.Objects.GetValue;
+    const SetTransform = Phaser.Renderer.Canvas.SetTransform;
 
-    var GetBoundsConfig = function (config, out) {
-        if (config === undefined) {
-            config = 0;
+    var CanvasRenderer = function (renderer, src, camera, parentMatrix) {
+        src.updateData();
+        camera.addToRenderList(src);
+
+        var ctx = renderer.currentContext;
+
+        if (SetTransform(renderer, ctx, src, camera, parentMatrix)) {
+            var dx = src._displayOriginX;
+            var dy = src._displayOriginY;
+
+            var shapes = src.geom,
+                shape;
+            for (var i = 0, cnt = shapes.length; i < cnt; i++) {
+                shape = shapes[i];
+                if (shape.visible) {
+                    shape.canvasRender(ctx, dx, dy);
+                }
+            }
+
+            //  Restore the context saved in SetTransform
+            ctx.restore();
         }
-        if (out === undefined) {
-            out = {};
+    };
+
+    var Render = {
+        renderWebGL: WebGLRenderer,
+        renderCanvas: CanvasRenderer
+
+    };
+
+    var Clear = function (obj) {
+        if ((typeof (obj) !== 'object') || (obj === null)) {
+            return obj;
         }
 
-        if (typeof (config) === 'number') {
-            out.left = config;
-            out.right = config;
-            out.top = config;
-            out.bottom = config;
+        if (Array.isArray(obj)) {
+            obj.length = 0;
         } else {
-            out.left = GetValue(config, 'left', 0);
-            out.right = GetValue(config, 'right', 0);
-            out.top = GetValue(config, 'top', 0);
-            out.bottom = GetValue(config, 'bottom', 0);
+            for (var key in obj) {
+                delete obj[key];
+            }
         }
+
+        return obj;
+    };
+
+    const Shape = Phaser.GameObjects.Shape;
+    const RemoveItem = Phaser.Utils.Array.Remove;
+
+    class BaseShapes extends Shape {
+        constructor(scene, x, y, width, height) {
+            if (x === undefined) {
+                x = 0;
+            }
+            if (y === undefined) {
+                y = 0;
+            }
+            if (width === undefined) {
+                width = 2;
+            }
+            if (height === undefined) {
+                height = width;
+            }
+
+            super(scene, 'rexShapes', []);
+
+            this._width = -1;
+            this._height = -1;
+            this.dirty = true;
+            this.isSizeChanged = true;
+            this.shapes = {};
+
+            this.setPosition(x, y);
+            this.setSize(width, height);
+
+            this.updateDisplayOrigin();
+        }
+
+        get width() {
+            return this._width;
+        }
+
+        set width(value) {
+            this.setSize(value, this._height);
+        }
+
+        get height() {
+            return this._height;
+        }
+
+        set height(value) {
+            this.setSize(this._width, value);
+        }
+
+        setDirty(value) {
+            if (value === undefined) {
+                value = true;
+            }
+            this.dirty = value;
+            return this;
+        }
+
+        setSize(width, height) {
+            this.isSizeChanged = this.isSizeChanged || (this._width !== width) || (this._height !== height);
+            this.dirty = this.dirty || this.isSizeChanged;
+            this._width = width;
+            this._height = height;
+            this.updateDisplayOrigin();
+            var input = this.input;
+            if (input && !input.customHitArea) {
+                input.hitArea.width = width;
+                input.hitArea.height = height;
+            }
+            return this;
+        }
+
+        resize(width, height) {
+            this.setSize(width, height);
+            return this;
+        }
+
+        get fillColor() {
+            return this._fillColor;
+        }
+
+        set fillColor(value) {
+            this.setFillStyle(value, this._fillAlpha);
+        }
+
+        get fillAlpha() {
+            return this._fillAlpha;
+        }
+
+        set fillAlpha(value) {
+            this.setFillStyle(this._fillColor, value);
+        }
+
+        setFillStyle(color, alpha) {
+            if (alpha === undefined) {
+                alpha = 1;
+            }
+
+            this.dirty = this.dirty ||
+                (this.fillColor !== color) ||
+                (this.fillAlpha !== alpha);
+
+            this._fillColor = color;
+            this._fillAlpha = alpha;
+
+            return this;
+        }
+
+        get lineWidth() {
+            return this._lineWidth;
+        }
+
+        set lineWidth(value) {
+            this.setStrokeStyle(value, this._strokeColor, this._strokeAlpha);
+        }
+
+        get strokeColor() {
+            return this._strokeColor;
+        }
+
+        set strokeColor(value) {
+            this.setStrokeStyle(this._lineWidth, value, this._strokeAlpha);
+        }
+
+        get strokeAlpha() {
+            return this._strokeAlpha;
+        }
+
+        set strokeAlpha(value) {
+            this.setStrokeStyle(this._lineWidth, this._strokeColor, value);
+        }
+
+        setStrokeStyle(lineWidth, color, alpha) {
+            if (alpha === undefined) {
+                alpha = 1;
+            }
+
+            this.dirty = this.dirty ||
+                (this.lineWidth !== lineWidth) ||
+                (this.strokeColor !== color) ||
+                (this.strokeAlpha !== alpha);
+
+            this._lineWidth = lineWidth;
+            this._strokeColor = color;
+            this._strokeAlpha = alpha;
+
+            return this;
+        }
+
+        updateShapes() {
+
+        }
+
+        updateData() {
+            if (!this.dirty) {
+                return this;
+            }
+
+            this.updateShapes();
+            var shapes = this.geom;
+            for (var i = 0, cnt = shapes.length; i < cnt; i++) {
+                var shape = shapes[i];
+                if (shape.dirty) {
+                    shape.updateData();
+                }
+            }
+
+            this.isSizeChanged = false;
+            this.dirty = false;
+
+
+            return this;
+        }
+
+        clear() {
+            this.geom.length = 0;
+            Clear(this.shapes);
+            this.dirty = true;
+            return this;
+        }
+
+        getShape(name) {
+            return this.shapes[name];
+        }
+
+        getShapes() {
+            return this.geom;
+        }
+
+        addShape(shape) {
+            this.geom.push(shape);
+            var name = shape.name;
+            if (name) {
+                this.shapes[name] = shape;
+            }
+            this.dirty = true;
+            return this;
+        }
+
+        deleteShape(name) {
+            var shape = this.getShape(name);
+            if (shape) {
+                delete this.shapes[name];
+                RemoveItem(this.geom, shape);
+            }
+            return this;
+        }
+    }
+
+    Object.assign(
+        BaseShapes.prototype,
+        Render
+    );
+
+    var FillStyle = function (color, alpha) {
+        if (color == null) {
+            this.isFilled = false;
+        } else {
+            if (alpha === undefined) {
+                alpha = 1;
+            }
+            this.isFilled = true;
+            this.fillColor = color;
+            this.fillAlpha = alpha;
+        }
+        return this;
+    };
+
+    var LineStyle = function (lineWidth, color, alpha) {
+        if ((lineWidth == null) || (color == null)) {
+            this.isStroked = false;
+        } else {
+            if (alpha === undefined) {
+                alpha = 1;
+            }
+            this.isStroked = true;
+            this.lineWidth = lineWidth;
+            this.strokeColor = color;
+            this.strokeAlpha = alpha;
+        }
+        return this;
+    };
+
+    var StyleMethods = {
+        fillStyle: FillStyle,
+        lineStyle: LineStyle
+    };
+
+    var DataMethods = {
+        enableData() {
+            if (this.data === undefined) {
+                this.data = {};
+            }
+            return this;
+        },
+
+        setData(key, value) {
+            this.enableData();
+            if (arguments.length === 1) {
+                var data = key;
+                for (key in data) {
+                    this.data[key] = data[key];
+                }
+            } else {
+                this.data[key] = value;
+            }
+            return this;
+        },
+
+        getData(key, defaultValue) {
+            this.enableData();
+            return (key === undefined) ? this.data : GetValue$3(this.data, key, defaultValue);
+        },
+
+        incData(key, inc, defaultValue) {
+            if (defaultValue === undefined) {
+                defaultValue = 0;
+            }
+            this.enableData();
+            this.setData(key, this.getData(key, defaultValue) + inc);
+            return this;
+        },
+
+        mulData(key, mul, defaultValue) {
+            if (defaultValue === undefined) {
+                defaultValue = 0;
+            }
+            this.enableData();
+            this.setData(key, this.getData(key, defaultValue) * mul);
+            return this;
+        },
+
+        clearData() {
+            if (this.data) {
+                Clear(this.data);
+            }
+            return this;
+        },
+    };
+
+    class BaseGeom {
+        constructor() {
+            this.name = undefined;
+            this.dirty = true;
+            this.visible = true;
+            this.data = undefined;
+
+            this.isFilled = false;
+            this.fillColor = undefined;
+            this.fillAlpha = 1;
+
+            this.isStroked = false;
+            this.lineWidth = 1;
+            this.strokeColor = undefined;
+            this.strokeAlpha = 1;
+        }
+
+        setName(name) {
+            this.name = name;
+            return this;
+        }
+
+        setVisible(visible) {
+            if (visible === undefined) {
+                visible = true;
+            }
+            this.visible = visible;
+            return this;
+        }
+
+        reset() {
+            this
+                .setVisible()
+                .fillStyle()
+                .lineStyle();
+
+            return this;
+        }
+
+        webglRender(pipeline, calcMatrix, alpha, dx, dy) {
+
+        }
+
+        canvasRender(ctx, dx, dy) {
+
+        }
+
+        updateData() {
+            this.dirty = false;
+        }
+    }
+
+    Object.assign(
+        BaseGeom.prototype,
+        StyleMethods,
+        DataMethods
+    );
+
+    /*
+    src: {
+        fillColor, 
+        fillAlpha, 
+        pathData, 
+        pathIndexes  // Earcut(pathData)
+    }
+    */
+
+    var Utils$1 = Phaser.Renderer.WebGL.Utils;
+
+    var FillPathWebGL = function (pipeline, calcMatrix, src, alpha, dx, dy)
+    {
+        var fillTintColor = Utils$1.getTintAppendFloatAlpha(src.fillColor, src.fillAlpha * alpha);
+
+        var path = src.pathData;
+        var pathIndexes = src.pathIndexes;
+
+        for (var i = 0; i < pathIndexes.length; i += 3)
+        {
+            var p0 = pathIndexes[i] * 2;
+            var p1 = pathIndexes[i + 1] * 2;
+            var p2 = pathIndexes[i + 2] * 2;
+
+            var x0 = path[p0 + 0] - dx;
+            var y0 = path[p0 + 1] - dy;
+            var x1 = path[p1 + 0] - dx;
+            var y1 = path[p1 + 1] - dy;
+            var x2 = path[p2 + 0] - dx;
+            var y2 = path[p2 + 1] - dy;
+
+            var tx0 = calcMatrix.getX(x0, y0);
+            var ty0 = calcMatrix.getY(x0, y0);
+            var tx1 = calcMatrix.getX(x1, y1);
+            var ty1 = calcMatrix.getY(x1, y1);
+            var tx2 = calcMatrix.getX(x2, y2);
+            var ty2 = calcMatrix.getY(x2, y2);
+
+            pipeline.batchTri(src, tx0, ty0, tx1, ty1, tx2, ty2, 0, 0, 1, 1, fillTintColor, fillTintColor, fillTintColor, 2);
+        }
+    };
+
+    /*
+    src: {
+        strokeColor,
+        strokeAlpha,
+        pathData,
+        lineWidth,
+        closePath
+    }
+    */
+    var Utils = Phaser.Renderer.WebGL.Utils;
+
+    var StrokePathWebGL = function (pipeline, src, alpha, dx, dy)
+    {
+        var strokeTint = pipeline.strokeTint;
+        var strokeTintColor = Utils.getTintAppendFloatAlpha(src.strokeColor, src.strokeAlpha * alpha);
+
+        strokeTint.TL = strokeTintColor;
+        strokeTint.TR = strokeTintColor;
+        strokeTint.BL = strokeTintColor;
+        strokeTint.BR = strokeTintColor;
+
+        var path = src.pathData;
+        var pathLength = path.length - 1;
+        var lineWidth = src.lineWidth;
+        var halfLineWidth = lineWidth / 2;
+
+        var px1 = path[0] - dx;
+        var py1 = path[1] - dy;
+
+        if (!src.closePath)
+        {
+            pathLength -= 2;
+        }
+
+        for (var i = 2; i < pathLength; i += 2)
+        {
+            var px2 = path[i] - dx;
+            var py2 = path[i + 1] - dy;
+
+            pipeline.batchLine(
+                px1,
+                py1,
+                px2,
+                py2,
+                halfLineWidth,
+                halfLineWidth,
+                lineWidth,
+                i - 2,
+                (src.closePath) ? (i === pathLength - 1) : false
+            );
+
+            px1 = px2;
+            py1 = py2;
+        }
+    };
+
+    var FillStyleCanvas = function (ctx, src, altColor, altAlpha)
+    {
+        var fillColor = (altColor) ? altColor : src.fillColor;
+        var fillAlpha = (altAlpha) ? altAlpha : src.fillAlpha;
+
+        var red = ((fillColor & 0xFF0000) >>> 16);
+        var green = ((fillColor & 0xFF00) >>> 8);
+        var blue = (fillColor & 0xFF);
+
+        ctx.fillStyle = 'rgba(' + red + ',' + green + ',' + blue + ',' + fillAlpha + ')';
+    };
+
+    var LineStyleCanvas = function (ctx, src, altColor, altAlpha)
+    {
+        var strokeColor = (altColor) ? altColor : src.strokeColor;
+        var strokeAlpha = (altAlpha) ? altAlpha : src.strokeAlpha;
+
+        var red = ((strokeColor & 0xFF0000) >>> 16);
+        var green = ((strokeColor & 0xFF00) >>> 8);
+        var blue = (strokeColor & 0xFF);
+
+        ctx.strokeStyle = 'rgba(' + red + ',' + green + ',' + blue + ',' + strokeAlpha + ')';
+        ctx.lineWidth = src.lineWidth;
+    };
+
+    const Earcut = Phaser.Geom.Polygon.Earcut;
+
+    class PathBase extends BaseGeom {
+        constructor() {
+            super();
+
+            this.pathData = [];
+            this.pathIndexes = [];
+            this.closePath = false;
+        }
+
+        updateData() {
+            this.pathIndexes = Earcut(this.pathData);
+
+            super.updateData();
+            return this;
+        }
+
+        webglRender(pipeline, calcMatrix, alpha, dx, dy) {
+            if (this.isFilled) {
+                FillPathWebGL(pipeline, calcMatrix, this, alpha, dx, dy);
+            }
+
+            if (this.isStroked) {
+                StrokePathWebGL(pipeline, this, alpha, dx, dy);
+            }
+        }
+
+        canvasRender(ctx, dx, dy) {
+            var path = this.pathData;
+            var pathLength = path.length - 1;
+
+            var px1 = path[0] - dx;
+            var py1 = path[1] - dy;
+
+            ctx.beginPath();
+
+            ctx.moveTo(px1, py1);
+
+            if (!this.closePath) {
+                pathLength -= 2;
+            }
+
+            for (var i = 2; i < pathLength; i += 2) {
+                var px2 = path[i] - dx;
+                var py2 = path[i + 1] - dy;
+                ctx.lineTo(px2, py2);
+            }
+
+            if (this.closePath) {
+                ctx.closePath();
+            }
+
+
+            if (this.isFilled) {
+                FillStyleCanvas(ctx, this);
+                ctx.fill();
+            }
+
+            if (this.isStroked) {
+                LineStyleCanvas(ctx, this);
+                ctx.stroke();
+            }
+        }
+    }
+
+    var LineTo = function (x, y, pathData) {
+        var cnt = pathData.length;
+        if (cnt >= 2) {
+            var lastX = pathData[cnt - 2];
+            var lastY = pathData[cnt - 1];
+            if ((x === lastX) && (y === lastY)) {
+                return pathData;
+            }
+        }
+
+        pathData.push(x, y);
+        return pathData;
+    };
+
+    const DegToRad$1 = Phaser.Math.DegToRad;
+
+    var ArcTo = function (centerX, centerY, radiusX, radiusY, startAngle, endAngle, antiClockWise, iteration, pathData) {
+        // startAngle, endAngle: 0 ~ 360
+        if (antiClockWise && (endAngle > startAngle)) {
+            endAngle -= 360;
+        } else if (!antiClockWise && (endAngle < startAngle)) {
+            endAngle += 360;
+        }
+
+        var deltaAngle = endAngle - startAngle;
+        var step = DegToRad$1(deltaAngle) / iteration;
+        startAngle = DegToRad$1(startAngle);
+        for (var i = 0; i <= iteration; i++) {
+            var angle = startAngle + (step * i);
+            var x = centerX + (radiusX * Math.cos(angle));
+            var y = centerY + (radiusY * Math.sin(angle));
+            LineTo(x, y, pathData);
+        }
+        return pathData;
+    };
+
+    Phaser.Math.DegToRad;
+
+    var StartAt = function (x, y, pathData) {
+        pathData.length = 0;
+
+        if (x != null) {
+            pathData.push(x, y);
+        }
+
+        return pathData;
+    };
+
+    //import QuadraticBezierInterpolation from '../../utils/math/interpolation/QuadraticBezierInterpolation.js';
+
+    const QuadraticBezierInterpolation = Phaser.Math.Interpolation.QuadraticBezier;
+
+    var QuadraticBezierTo = function (cx, cy, x, y, iterations, pathData) {
+        var pathDataCnt = pathData.length;
+        var p0x = pathData[pathDataCnt - 2];
+        var p0y = pathData[pathDataCnt - 1];
+        for (var i = 1, last = iterations - 1; i <= last; i++) {
+            var t = i / last;
+            pathData.push(
+                QuadraticBezierInterpolation(t, p0x, cx, x),
+                QuadraticBezierInterpolation(t, p0y, cy, y)
+            );
+        }
+        return pathData;
+    };
+
+    // import CubicBezierInterpolation from '../../utils/math/interpolation/CubicBezierInterpolation.js';
+
+    const CubicBezierInterpolation = Phaser.Math.Interpolation.CubicBezier;
+
+    var CubicBezierCurveTo = function (cx0, cy0, cx1, cy1, x, y, iterations, pathData) {
+        var pathDataCnt = pathData.length;
+        var p0x = pathData[pathDataCnt - 2];
+        var p0y = pathData[pathDataCnt - 1];
+        for (var i = 1, last = iterations - 1; i <= last; i++) {
+            var t = i / last;
+            pathData.push(
+                CubicBezierInterpolation(t, p0x, cx0, cx1, x),
+                CubicBezierInterpolation(t, p0y, cy0, cy1, y)
+            );
+        }
+        return pathData;
+    };
+
+    //import CatmullRomInterpolation from '../../utils/math/interpolation/CatmullRomInterpolation.js';
+
+    const CatmullRomInterpolation = Phaser.Math.Interpolation.CatmullRom;
+
+    var CatmullRomTo = function (points, iterations, pathData) {
+        var pathDataCnt = pathData.length;
+        var p0x = pathData[pathDataCnt - 2];
+        var p0y = pathData[pathDataCnt - 1];
+
+        var xList = [p0x];
+        var yList = [p0y];
+        for (var i = 0, cnt = points.length; i < cnt; i += 2) {
+            xList.push(points[i]);
+            yList.push(points[i + 1]);
+        }
+
+        for (var i = 1, last = iterations - 1; i <= last; i++) {
+            var t = i / last;
+            pathData.push(
+                CatmullRomInterpolation(xList, t),
+                CatmullRomInterpolation(yList, t)
+            );
+        }
+        return pathData;
+    };
+
+    var DuplicateLast = function (pathData) {
+        var len = pathData.length;
+        if (len < 2) {
+            return pathData;
+        }
+
+        var lastX = pathData[len - 2];
+        var lastY = pathData[len - 1];
+        pathData.push(lastX);
+        pathData.push(lastY);
+
+        return pathData;
+    };
+
+    var AddPathMethods = {
+        clear() {
+            this.start();
+            return this;
+        },
+
+        start() {
+            this.startAt();
+            return this;
+        },
+
+        startAt(x, y) {
+            this.restorePathData();
+            this.accumulationLengths = undefined;
+
+            StartAt(x, y, this.pathData);
+            this.firstPointX = x;
+            this.firstPointY = y;
+            this.lastPointX = x;
+            this.lastPointY = y;
+
+            return this;
+        },
+
+        lineTo(x, y, relative) {
+            if (relative === undefined) {
+                relative = false;
+            }
+            if (relative) {
+                x += this.lastPointX;
+                y += this.lastPointY;
+            }
+
+            LineTo(x, y, this.pathData);
+
+            this.lastPointX = x;
+            this.lastPointY = y;
+            return this;
+        },
+
+        verticalLineTo(x, relative) {
+            this.lineTo(x, this.lastPointY, relative);
+            return this;
+        },
+
+        horizontalLineTo(y, relative) {
+            this.lineTo(this.lastPointX, y, relative);
+            return this;
+        },
+
+        ellipticalArc(centerX, centerY, radiusX, radiusY, startAngle, endAngle, anticlockwise) {
+            if (anticlockwise === undefined) {
+                anticlockwise = false;
+            }
+
+            ArcTo(
+                centerX, centerY,
+                radiusX, radiusY,
+                startAngle, endAngle, anticlockwise,
+                this.iterations,
+                this.pathData
+            );
+
+            this.lastPointX = this.pathData[this.pathData.length - 2];
+            this.lastPointY = this.pathData[this.pathData.length - 1];
+            return this;
+        },
+
+        arc(centerX, centerY, radius, startAngle, endAngle, anticlockwise) {
+            this.ellipticalArc(centerX, centerY, radius, radius, startAngle, endAngle, anticlockwise);
+            return this;
+        },
+
+        quadraticBezierTo(cx, cy, x, y) {
+            QuadraticBezierTo(
+                cx, cy, x, y,
+                this.iterations,
+                this.pathData
+            );
+
+            this.lastPointX = x;
+            this.lastPointY = y;
+            return this;
+        },
+
+        cubicBezierTo(cx0, cy0, cx1, cy1, x, y) {
+            CubicBezierCurveTo(
+                cx0, cy0, cx1, cy1, x, y,
+                this.iterations,
+                this.pathData
+            );
+
+            this.lastPointX = x;
+            this.lastPointY = y;
+            return this;
+        },
+
+        catmullRomTo(...points) {
+            CatmullRomTo(
+                points,
+                this.iterations,
+                this.pathData
+            );
+
+            this.lastPointX = points[points.length-2];
+            this.lastPointY = points[points.length-1];
+            return this;
+        },
+
+        close() {
+            // Line to first point        
+            var startX = this.pathData[0],
+                startY = this.pathData[1];
+            if ((startX !== this.lastPointX) || (startY !== this.lastPointY)) {
+                this.lineTo(startX, startY);
+            }
+
+            this.closePath = true;
+            return this;
+        },
+
+        end() {
+            DuplicateLast(this.pathData);
+            return this;
+        },
+
+    };
+
+    //import PointRotateAround from '../../utils/math/RotateAround.js';
+
+    const PointRotateAround = Phaser.Math.RotateAround;
+
+    var RotateAround = function (centerX, centerY, angle, pathData) {
+        var point = { x: 0, y: 0 };
+        for (var i = 0, cnt = pathData.length - 1; i < cnt; i += 2) {
+            point.x = pathData[i];
+            point.y = pathData[i + 1];
+            PointRotateAround(point, centerX, centerY, angle);
+            pathData[i] = point.x;
+            pathData[i + 1] = point.y;
+        }
+        return pathData;
+    };
+
+    var Scale = function (centerX, centerY, scaleX, scaleY, pathData) {
+        for (var i = 0, cnt = pathData.length - 1; i < cnt; i += 2) {
+            var x = pathData[i] - centerX;
+            var y = pathData[i + 1] - centerY;
+            x *= scaleX;
+            y *= scaleY;
+            pathData[i] = x + centerX;
+            pathData[i + 1] = y + centerY;
+        }
+        return pathData;
+    };
+
+    var Offset = function (x, y, pathData) {
+        for (var i = 0, cnt = pathData.length - 1; i < cnt; i += 2) {
+            pathData[i] += x;
+            pathData[i + 1] += y;
+        }
+        return pathData;
+    };
+
+    const DegToRad = Phaser.Math.DegToRad;
+    Phaser.Math.RotateAround;
+
+    var TransformPointsMethods = {
+        rotateAround(centerX, centerY, angle) {
+            if (this.pathData.length === 0) {
+                return this;
+            }
+
+            angle = DegToRad(angle);
+
+            RotateAround(centerX, centerY, angle, this.pathData);
+
+            var pathDataCnt = this.pathData.length;
+            this.lastPointX = this.pathData[pathDataCnt - 2];
+            this.lastPointY = this.pathData[pathDataCnt - 1];
+            return this;
+        },
+
+        scale(centerX, centerY, scaleX, scaleY) {
+            if (this.pathData.length === 0) {
+                return this;
+            }
+
+            Scale(centerX, centerY, scaleX, scaleY, this.pathData);
+            this.lastPointX = this.pathData[pathDataCnt - 2];
+            this.lastPointY = this.pathData[pathDataCnt - 1];
+            return this;
+        },
+
+        offset(x, y) {
+            Offset(x, y, this.pathData);
+            return this;
+        }
+
+    };
+
+    var Copy = function (dest, src, startIdx, endIdx) {
+        if (startIdx === undefined) {
+            startIdx = 0;
+        }    if (endIdx === undefined) {
+            endIdx = src.length;
+        }
+        dest.length = endIdx - startIdx;
+        for (var i = 0, len = dest.length; i < len; i++) {
+            dest[i] = src[i + startIdx];
+        }
+        return dest;
+    };
+
+    var SavePathDataMethods = {
+        savePathData() {
+            if (this.pathDataSaved) {
+                return this;
+            }
+
+            this.pathDataSave = [...this.pathData];
+            this.pathData.length = 0;
+            this.pathDataSaved = true;
+            return this;
+        },
+
+        restorePathData() {
+            if (!this.pathDataSaved) {
+                return this;
+            }
+
+            Copy(this.pathData, this.pathDataSave);
+            this.pathDataSave = undefined;
+            this.pathDataSaved = false;
+            return this;
+        },
+    };
+
+    const DistanceBetween = Phaser.Math.Distance.Between;
+    const Wrap = Phaser.Math.Wrap;
+    const Linear = Phaser.Math.Linear;
+
+    var AppendFromPathSegment = function (srcPathData, accumulationLengths, startT, endT, destPathData) {
+        if (endT === undefined) {
+            endT = startT;
+            startT = 0;
+        }
+
+        startT = WrapT(startT);
+        endT = WrapT(endT);
+
+        if (startT === endT) {
+            return;
+        }
+
+        var totalPathLength = accumulationLengths[accumulationLengths.length - 1];
+        var startL = totalPathLength * startT;
+        var endL = totalPathLength * endT;
+        if (startT < endT) {
+            AddPathSegment(srcPathData, accumulationLengths, startL, endL, destPathData);
+        } else {
+            AddPathSegment(srcPathData, accumulationLengths, startL, totalPathLength, destPathData);
+            AddPathSegment(srcPathData, accumulationLengths, 0, endL, destPathData);
+        }
+
+        DuplicateLast(destPathData);
+    };
+
+    var AddPathSegment = function (srcPathData, accumulationLengths, startL, endL, destPathData) {
+        var skipState = (startL > 0);
+        for (var i = 0, cnt = accumulationLengths.length; i < cnt; i++) {
+            var pIdx = i * 2;
+            var d = accumulationLengths[i];
+
+            if (skipState) {
+                if (d < startL) {
+                    continue;
+                } else if (d == startL) {
+                    skipState = false;
+                } else { // d > startL
+                    var deltaD = d - accumulationLengths[i - 1];
+                    var t = 1 - ((d - startL) / deltaD);
+                    destPathData.push(GetInterpolation(srcPathData, pIdx - 2, pIdx, t));
+                    destPathData.push(GetInterpolation(srcPathData, pIdx - 1, pIdx + 1, t));
+                    skipState = false;
+                }
+            }
+
+            if (d <= endL) {
+                destPathData.push(srcPathData[pIdx]);
+                destPathData.push(srcPathData[pIdx + 1]);
+                if (d === endL) {
+                    break;
+                }
+            } else { // d > endL
+                var deltaD = d - accumulationLengths[i - 1];
+                var t = 1 - ((d - endL) / deltaD);
+                destPathData.push(GetInterpolation(srcPathData, pIdx - 2, pIdx, t));
+                destPathData.push(GetInterpolation(srcPathData, pIdx - 1, pIdx + 1, t));
+                break;
+            }
+        }
+    };
+
+    var GetInterpolation = function (pathData, i0, i1, t) {
+        var p0 = pathData[i0], p1 = pathData[i1];
+        return Linear(p0, p1, t);
+    };
+
+    var WrapT = function (t) {
+        if (t === 0) {
+            return 0;
+        } else if ((t % 1) === 0) {
+            return 1;
+        }
+        return Wrap(t, 0, 1);
+    };
+
+    var PathSegmentMethods = {
+        updateAccumulationLengths() {
+            if (this.accumulationLengths == null) {
+                this.accumulationLengths = [];
+            } else if (this.accumulationLengths.length === (this.pathData.length / 2)) {
+                return this;
+            }
+
+            var accumulationLengths = this.accumulationLengths;
+            var pathData = this.pathData;
+            var prevX, prevY, x, y;
+            var d, accumulationLength = 0;
+            for (var i = 0, cnt = pathData.length; i < cnt; i += 2) {
+                x = pathData[i];
+                y = pathData[i + 1];
+
+                d = (prevX === undefined) ? 0 : DistanceBetween(prevX, prevY, x, y);
+                accumulationLength += d;
+                accumulationLengths.push(accumulationLength);
+
+                prevX = x;
+                prevY = y;
+            }
+
+            this.totalPathLength = accumulationLength;
+
+            return this;
+        },
+
+        setDisplayPathSegment(startT, endT) {
+            if (!this.pathDataSaved) {
+                this.updateAccumulationLengths();
+                this.savePathData();
+            }
+
+            this.pathData.length = 0;
+            AppendFromPathSegment(this.pathDataSave, this.accumulationLengths, startT, endT, this.pathData);
+
+            return this;
+        },
+
+        appendFromPathSegment(src, startT, endT) {
+            if (startT === undefined) {
+                this.pathData.push(...src.pathData);
+            } else {
+                src.updateAccumulationLengths();
+                AppendFromPathSegment(src.pathData, src.accumulationLengths, startT, endT, this.pathData);
+            }
+
+            this.firstPointX = this.pathData[0];
+            this.firstPointY = this.pathData[1];
+            this.lastPointX = this.pathData[this.pathData.length - 2];
+            this.lastPointY = this.pathData[this.pathData.length - 1];
+            return this;
+        },
+    };
+
+    var GraphicsMethods = {
+        draw(graphics, isFill, isStroke) {
+            var points = this.toPoints();
+            if (isFill) {
+                graphics.fillPoints(points, this.closePath, this.closePath);
+            }
+            if (isStroke) {
+                graphics.strokePoints(points, this.closePath, this.closePath);
+            }
+
+            return this;
+        }
+    };
+
+    var ToPoints = function (pathData, points) {
+        if (points === undefined) {
+            points = [];
+        }
+        for (var i = 0, cnt = pathData.length - 1; i < cnt; i += 2) {
+            points.push({
+                x: pathData[i],
+                y: pathData[i + 1]
+            });
+        }
+        return points;
+    };
+
+    //import Polygon from '../../utils/geom/polygon/Polygon.js';
+
+    const Polygon = Phaser.Geom.Polygon;
+
+    var ToPolygon = function (pathData, polygon) {
+        if (polygon === undefined) {
+            polygon = new Polygon();
+        }
+        polygon.setTo(pathData);
+        return polygon;
+    };
+
+    class PathDataBuilder {
+        constructor(pathData) {
+            if (pathData === undefined) {
+                pathData = [];
+            }
+
+            this.pathData = pathData;
+            this.closePath = false;
+            this.setIterations(32);
+
+            this.firstPointX = undefined;
+            this.firstPointY = undefined;
+            this.lastPointX = undefined;
+            this.lastPointY = undefined;
+            this.accumulationLengths = undefined;
+        }
+
+        setIterations(iterations) {
+            this.iterations = iterations;
+            return this;
+        }
+
+        toPoints() {
+            return ToPoints(this.pathData);
+        }
+
+        toPolygon(polygon) {
+            return ToPolygon(this.pathData, polygon);
+        }
+
+    }
+
+    Object.assign(
+        PathDataBuilder.prototype,
+        AddPathMethods,
+        TransformPointsMethods,
+        SavePathDataMethods,
+        PathSegmentMethods,
+        GraphicsMethods,
+    );
+
+    class Lines extends PathBase {
+        constructor() {
+            super();
+            this.builder = new PathDataBuilder(this.pathData);
+        }
+
+        get iterations() {
+            return this.builder.iterations;
+        }
+
+        set iterations(value) {
+            this.dirty = this.dirty || (this.builder.iterations !== value);
+            this.builder.setIterations(value);
+        }
+
+        setIterations(iterations) {
+            this.iterations = iterations;
+            return this;
+        }
+
+        get lastPointX() {
+            return this.builder.lastPointX;
+        }
+
+        get lastPointY() {
+            return this.builder.lastPointY;
+        }
+
+        start() {
+            this.builder.start();
+
+            this.dirty = true;
+            return this;
+        }
+
+        startAt(x, y) {
+            this.builder.startAt(x, y);
+
+            this.dirty = true;
+            return this;
+        }
+
+        lineTo(x, y, relative) {
+            this.builder.lineTo(x, y, relative);
+
+            this.dirty = true;
+            return this;
+        }
+
+        verticalLineTo(x, relative) {
+            this.builder.verticalLineTo(x, relative);
+
+            this.dirty = true;
+            return this;
+        }
+
+        horizontalLineTo(y, relative) {
+            this.builder.horizontalLineTo(y, relative);
+
+            this.dirty = true;
+            return this;
+        }
+
+        ellipticalArc(centerX, centerY, radiusX, radiusY, startAngle, endAngle, anticlockwise) {
+            this.builder.ellipticalArc(centerX, centerY, radiusX, radiusY, startAngle, endAngle, anticlockwise);
+
+            this.dirty = true;
+            return this;
+        }
+
+        arc(centerX, centerY, radius, startAngle, endAngle, anticlockwise) {
+            this.builder.arc(centerX, centerY, radius, startAngle, endAngle, anticlockwise);
+
+            this.dirty = true;
+            return this;
+        }
+
+        quadraticBezierTo(cx, cy, x, y) {
+            this.builder.quadraticBezierTo(cx, cy, x, y);
+
+            this.dirty = true;
+            return this;
+        }
+
+        cubicBezierTo(cx0, cy0, cx1, cy1, x, y) {
+            this.builder.cubicBezierTo(cx0, cy0, cx1, cy1, x, y);
+
+            this.dirty = true;
+            return this;
+        }
+
+        catmullRomTo(...points) {
+            this.builder.catmullRomTo(...points);
+
+            this.dirty = true;
+            return this;
+        }
+
+        close() {
+            this.builder.close();
+
+            this.closePath = this.builder.closePath;
+            this.dirty = true;
+            return this;
+        }
+
+        end() {
+            this.builder.end();
+            this.dirty = true;
+            return this;
+        }
+
+        rotateAround(centerX, centerY, angle) {
+            this.builder.rotateAround(centerX, centerY, angle);
+
+            this.dirty = true;
+            return this;
+        }
+
+        scale(centerX, centerY, scaleX, scaleY) {
+            this.builder.scale(centerX, centerY, scaleX, scaleY);
+
+            this.dirty = true;
+            return this;
+        }
+
+        offset(x, y) {
+            this.builder.offset(x, y);
+
+            this.dirty = true;
+            return this;
+        }
+
+        toPolygon(polygon) {
+            return this.builder.toPolygon(polygon);
+        }
+
+        appendPathFrom(src, startT, endT) {
+            this.builder.appendFromPathSegment(src.builder, startT, endT);
+            return this;
+        }
+
+        copyPathFrom(src, startT, endT) {
+            this.builder.clear().appendFromPathSegment(src.builder, startT, endT);
+            return this;
+        }
+
+        setDisplayPathSegment(startT, endT) {
+            this.builder.setDisplayPathSegment(startT, endT);
+            return this;
+        }
+    }
+
+    Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
+
+    Phaser.Utils.Objects.GetValue;
+
+    Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
+
+    const BEZIER = 0;
+    const SPLINE = 1;
+    const POLYLINE = 2;
+    const STRAIGHTLINE = 3;
+
+    var DrawQuadraticBezierCurve = function (line) {
+        var points = this.points;
+        var controlPoint = points[1];
+        var endPoint = points[2];
+
+        line
+            .startAt(0, 0)
+            .quadraticBezierTo(
+                controlPoint.x,
+                controlPoint.y,
+                endPoint.x, endPoint.y
+            )
+            .end();
+
+    };
+
+    var DrawBezierCurve = function (line) {
+        var points = this.points;
+        var controlPoint0 = points[1];
+        var controlPoint1 = points[2];
+        var endPoint = points[3];
+
+        line
+            .startAt(0, 0)
+            .cubicBezierTo(
+                controlPoint0.x, controlPoint0.y, 
+                controlPoint1.x, controlPoint1.y, 
+                endPoint.x, endPoint.y
+            )
+            .end();
+
+    };
+
+    var DrawSpinleCurve = function (line) {
+        var points = this.points;
+        var splinePoints = [];
+        for (var i = 1, cnt = points.length; i < cnt; i++) {
+            var point = points[i];
+            splinePoints.push(point.x);
+            splinePoints.push(point.y);
+        }
+
+        line
+            .startAt(0, 0)
+            .catmullRomTo(...splinePoints)
+            .end();
+
+    };
+
+    var DrawStraightLine = function (line) {
+        var points = this.points;
+        var pointsCount = points.length;
+        var endPoint = points[pointsCount - 1];
+
+        line
+            .startAt(0, 0)
+            .lineTo(endPoint.x, endPoint.y)
+            .end();
+
+    };
+
+    var DrawPolyLine = function (line) {
+        var points = this.points;
+        line.startAt(0, 0);
+
+        for (var i = 1, cnt = points.length; i < cnt; i++) {
+            var point = points[i];
+            line.lineTo(point.x, point.y);
+        }
+
+        line.end();
+    };
+
+    const Rectangle$1 = Phaser.Geom.Rectangle;
+
+    var GetBounds = function (points, out) {
+        if (out === undefined) {
+            out = new Rectangle$1();
+        } else if (out === true) {
+            out = GlobalBounds;
+        }
+
+        var minX = Infinity;
+        var minY = Infinity;
+        var maxX = -minX;
+        var maxY = -minY;
+
+        for (var i = 0, cnt = points.length; i < cnt; i += 2) {
+            var x = points[i];
+            var y = points[i + 1];
+
+            minX = Math.min(minX, x);
+            minY = Math.min(minY, y);
+            maxX = Math.max(maxX, x);
+            maxY = Math.max(maxY, y);
+        }
+
+        out.x = minX;
+        out.y = minY;
+        out.width = maxX - minX;
+        out.height = maxY - minY;
+
         return out;
     };
 
+    var GlobalBounds = new Rectangle$1();
+
+    var SetSizeFromBounds = function (line, bounds) {
+        // Size    
+        var bounds = this.bounds;
+        var radius = this.pointRadius;
+        var x = bounds.x - radius;
+        var y = bounds.y - radius;
+        var width = bounds.width + (radius * 2);
+        var height = bounds.height + (radius * 2);
+        this.setSize(width, height);
+        // Origin
+        this.setOrigin(-x / width, -y / height);
+        // Position
+        line.offset(-x, -y);
+    };
+
+    var ShapesUpdateMethods = {
+        buildShapes() {
+            this
+                .addShape(new Lines());
+        },
+
+        updateShapes() {
+            // Set style
+            var line = this.getShapes()[0]
+                .lineStyle(this.lineWidth, this.strokeColor, this.strokeAlpha);
+
+            var points = this.points;
+            var pointCount = points.length;
+
+            line.setVisible(pointCount >= 2);
+
+            if (pointCount <= 1) {
+                return;
+            }
+
+            if ((this.lineType === STRAIGHTLINE) || (pointCount == 2)) {
+                DrawStraightLine.call(this, line);
+            } else if ((this.lineType === BEZIER) && (pointCount === 3)) {
+                DrawQuadraticBezierCurve.call(this, line);
+            } else if ((this.lineType === BEZIER) && (pointCount === 4)) {
+                DrawBezierCurve.call(this, line);
+            } else if (this.lineType === POLYLINE) {
+                DrawPolyLine.call(this, line);
+            } else {
+                DrawSpinleCurve.call(this, line);
+            }
+
+            this.bounds = GetBounds.call(this, line.pathData, true);
+            SetSizeFromBounds.call(this, line);
+        }
+    };
+
+    const LineToCircle = Phaser.Geom.Intersects.LineToCircle;
+
+    const tmpLine = new Phaser.Geom.Line();
+
+    var LinesToCircle = function (points, circle) {
+        tmpLine.x1 = points[0];
+        tmpLine.y1 = points[1];
+        for (var i = 2, cnt = points.length; i < cnt; i += 2) {
+            tmpLine.x2 = points[i];
+            tmpLine.y2 = points[i + 1];
+
+            if (LineToCircle(tmpLine, circle)) {
+                return true;
+            }
+
+            tmpLine.x1 = tmpLine.x2;
+            tmpLine.y1 = tmpLine.y2;
+        }
+
+        return false;
+    };
+
+    const Rectangle = Phaser.Geom.Rectangle;
+    const RectangleContains = Phaser.Geom.Rectangle.Contains;
+    const SetInteractiveBase = Phaser.GameObjects.GameObject.prototype.setInteractive;
+
+    const GlobPoint = new Phaser.Geom.Circle();
+
+    var HitAreaCallback = function (shape, x, y, gameObject) {
+        if (!RectangleContains(shape, x, y)) {
+            return false;
+        }
+
+        GlobPoint.setTo(x, y, gameObject.pointRadius);
+
+        var line = gameObject.getShapes()[0];
+        var points = line.pathData;
+
+        return LinesToCircle(points, GlobPoint);
+    };
+
+    var SetInteractiveMethods = {
+        setPointRadius(radius) {
+            this.pointRadius = radius;
+            return this;
+        },
+
+        setInteractive(config) {
+            if (config === undefined) {
+                config = {};
+            }
+
+            config.hitArea = new Rectangle(0, 0, this.width, this.height);
+            config.hitAreaCallback = HitAreaCallback;
+
+            SetInteractiveBase.call(this, config);
+
+            return this;
+        }
+    };
+
+    var Methods = {};
+
+    Object.assign(
+        Methods,
+        ShapesUpdateMethods,
+        SetInteractiveMethods
+    );
+
+    class Line extends BaseShapes {
+        constructor(scene, points, lineWidth, color, alpha, lineType) {
+            var pointRadius;
+            if (points !== undefined) {
+                if (typeof (points) === 'number') {
+                    lineType = alpha;
+                    alpha = color;
+                    color = lineWidth;
+                    lineWidth = points;
+                    points = [];
+                } else if (!Array.isArray(points)) {
+                    var config = points;
+                    points = config.points;
+                    lineWidth = config.lineWidth;
+                    color = config.color;
+                    alpha = config.alpha;
+                    lineType = config.lineType;
+                    pointRadius = config.pointRadius;
+                }
+            }
+
+            if (points === undefined) { points = []; }
+            if (lineWidth === undefined) { lineWidth = 2; }
+            if (color === undefined) { color = 0xffffff; }
+            if (alpha === undefined) { alpha = 1; }
+            if (lineType === undefined) { lineType = 0; }
+            if (pointRadius === undefined) { pointRadius = 10; }
+
+            super(scene);
+            this.type = 'rexLine';
+
+            this.points = [];
+            this.padding = {};
+            this.bounds = undefined;
+
+            this.setPointRadius(pointRadius);
+            this.setLine(points, lineType);
+            this.setStrokeStyle(lineWidth, color, alpha);
+
+            this.buildShapes();
+
+            this.updateData();
+        }
+
+        setLine(points, lineType) {
+            if (points === undefined) {
+                points = [];
+            }
+            if (lineType !== undefined) {
+                if (typeof (lineType) === 'string') {
+                    lineType = CURVETYPE_MAP[lineType.toLocaleLowerCase()];
+                }
+                this.lineType = lineType;
+            }
+
+            this.points.length = 0;
+
+            var x = 0, y = 0;
+            if (points.length > 0) {
+                x = points[0].x;
+                y = points[0].y;
+            }
+            this.x = x;
+            this.y = y;
+
+            for (var i = 0, cnt = points.length; i < cnt; i++) {
+                var p = points[i];
+                this.points.push({
+                    x: p.x - x,
+                    y: p.y - y
+                });
+            }
+
+            this.dirty = true;
+
+            if (this.geom.length > 0) {
+                this.updateData();
+            }
+
+            return this;
+        }
+
+        setLineType(lineType) {
+            if (typeof (lineType) === 'string') {
+                lineType = CURVETYPE_MAP[lineType.toLocaleLowerCase()];
+            }
+            if (this.lineType === lineType) {
+                return this;
+            }
+            this.lineType = lineType;
+            this.dirty = true;
+
+            if (this.geom.length > 0) {
+                this.updateData();
+            }
+
+            return this;
+        }
+
+        getPoints(out) {
+            if (out === undefined) {
+                out = [];
+            }
+            var x = this.x;
+            var y = this.y;    
+            var points = this.points;
+            for (var i = 0, cnt = points.length; i < cnt; i++) {
+                var p = points[i];
+                out.push({
+                    x: p.x + x,
+                    y: p.y + y,
+                });
+            }
+
+            return out;
+        }
+    }
+
+    const CURVETYPE_MAP = {
+        bezier: BEZIER,
+
+        spline: SPLINE,
+
+        polyline: POLYLINE,
+        poly: POLYLINE,
+
+        straightline: STRAIGHTLINE,
+        straight: STRAIGHTLINE,
+    };
+
+    Object.assign(
+        Line.prototype,
+        Methods
+    );
+
+    ObjectFactory.register('line', function (points, lineWidth, color, alpha, lineType) {
+        var gameObject = new Line(this.scene, points, lineWidth, color, alpha, lineType);
+        this.scene.add.existing(gameObject);
+        return gameObject;
+    });
+
+    SetValue(window, 'RexPlugins.Graph.Line', Line);
+
+    function commonjsRequire(path) {
+    	throw new Error('Could not dynamically require "' + path + '". Please configure the dynamicRequireTargets or/and ignoreDynamicRequires option of @rollup/plugin-commonjs appropriately for this require call to work.');
+    }
+
+    var parser = {};
+
+    /* parser generated by jison 0.4.18 */
+
+    (function (exports) {
+    	/*
+    	  Returns a Parser object of the following structure:
+
+    	  Parser: {
+    	    yy: {}
+    	  }
+
+    	  Parser.prototype: {
+    	    yy: {},
+    	    trace: function(),
+    	    symbols_: {associative list: name ==> number},
+    	    terminals_: {associative list: number ==> name},
+    	    productions_: [...],
+    	    performAction: function anonymous(yytext, yyleng, yylineno, yy, yystate, $$, _$),
+    	    table: [...],
+    	    defaultActions: {...},
+    	    parseError: function(str, hash),
+    	    parse: function(input),
+
+    	    lexer: {
+    	        EOF: 1,
+    	        parseError: function(str, hash),
+    	        setInput: function(input),
+    	        input: function(),
+    	        unput: function(str),
+    	        more: function(),
+    	        less: function(n),
+    	        pastInput: function(),
+    	        upcomingInput: function(),
+    	        showPosition: function(),
+    	        test_match: function(regex_match_array, rule_index),
+    	        next: function(),
+    	        lex: function(),
+    	        begin: function(condition),
+    	        popState: function(),
+    	        _currentRules: function(),
+    	        topState: function(),
+    	        pushState: function(condition),
+
+    	        options: {
+    	            ranges: boolean           (optional: true ==> token location info will include a .range[] member)
+    	            flex: boolean             (optional: true ==> flex-like lexing behaviour where the rules are tested exhaustively to find the longest match)
+    	            backtrack_lexer: boolean  (optional: true ==> lexer regexes are tested in order and for each matching regex the action code is invoked; the lexer terminates the scan when a token is returned by the action code)
+    	        },
+
+    	        performAction: function(yy, yy_, $avoiding_name_collisions, YY_START),
+    	        rules: [...],
+    	        conditions: {associative list: name ==> set},
+    	    }
+    	  }
+
+
+    	  token location info (@$, _$, etc.): {
+    	    first_line: n,
+    	    last_line: n,
+    	    first_column: n,
+    	    last_column: n,
+    	    range: [start_number, end_number]       (where the numbers are indexes into the input string, regular zero-based)
+    	  }
+
+
+    	  the parseError function receives a 'hash' object with these members for lexer and parser errors: {
+    	    text:        (matched text)
+    	    token:       (the produced terminal token, if any)
+    	    line:        (yylineno)
+    	  }
+    	  while parser (grammar) errors will also provide these members, i.e. parser errors deliver a superset of attributes: {
+    	    loc:         (yylloc)
+    	    expected:    (string describing the set of expected tokens)
+    	    recoverable: (boolean: TRUE when the parser has a error recovery rule available for this particular error)
+    	  }
+    	*/
+    	var parser = (function(){
+    	var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,7,9,10,25,26,27,28,34,35],$V1=[1,19],$V2=[1,20],$V3=[1,22],$V4=[32,33],$V5=[2,39],$V6=[1,28],$V7=[1,26],$V8=[1,27],$V9=[2,42],$Va=[7,9,10],$Vb=[7,9,10,23,32,33],$Vc=[1,7,9,25,26,27,28,34,35],$Vd=[2,16],$Ve=[1,37],$Vf=[2,18],$Vg=[1,39],$Vh=[1,45],$Vi=[1,46],$Vj=[1,51],$Vk=[1,54],$Vl=[1,55],$Vm=[9,19,24,27,34],$Vn=[9,19,24],$Vo=[19,24,27,34];
+    	var parser = {trace: function trace () { },
+    	yy: {},
+    	symbols_: {"error":2,"document":3,"init":4,"statements":5,"opt_eof":6,"EOF":7,"line_end":8,"EOL":9,";":10,"blank_line":11,"statement":12,"defaults_statement":13,"node_statement":14,"edge_statement":15,"opt_semicolon":16,"opt_eol":17,"sep":18,",":19,"attribute_list":20,"attribute":21,"attribute_block":22,"[":23,"]":24,"NODE":25,"EDGE":26,"IDENT":27,"STAR_NAMED":28,"edge_chain":29,"edge_attribute_opt":30,"node_ref":31,"->":32,"INVIS_ARROW":33,"QUOTED_STRING":34,"STAR":35,"attribute_key":36,"=":37,"attribute_value":38,"NUMBER":39,"HEXNUMBER":40,"$accept":0,"$end":1},
+    	terminals_: {2:"error",7:"EOF",9:"EOL",10:";",19:",",23:"[",24:"]",25:"NODE",26:"EDGE",27:"IDENT",28:"STAR_NAMED",32:"->",33:"INVIS_ARROW",34:"QUOTED_STRING",35:"STAR",37:"=",39:"NUMBER",40:"HEXNUMBER"},
+    	productions_: [0,[3,3],[6,0],[6,1],[4,0],[8,1],[8,1],[8,1],[11,1],[5,0],[5,2],[5,2],[12,1],[12,1],[12,1],[12,1],[16,0],[16,1],[17,0],[17,1],[17,2],[18,1],[18,2],[20,1],[20,3],[20,2],[22,5],[13,3],[13,3],[14,3],[14,2],[14,3],[15,3],[29,3],[29,3],[29,3],[29,3],[30,0],[30,1],[31,1],[31,1],[31,1],[31,1],[36,1],[36,1],[21,3],[38,1],[38,1],[38,1],[38,1]],
+    	performAction: function anonymous(yytext, yyleng, yylineno, yy, yystate /* action[1] */, $$ /* vstack */, _$ /* lstack */) {
+    	/* this == yyval */
+
+    	var $0 = $$.length - 1;
+    	switch (yystate) {
+    	case 1:
+
+    	        return {
+    	          nodes: getNodesArray(),
+    	          edges: edges
+    	        };
+    	case 4:
+    	 resetState(); 
+    	break;
+    	case 23:
+
+    	        var o = {};
+    	        o[$$[$0].key] = $$[$0].value;
+    	        this.$ = o;
+    	      
+    	break;
+    	case 24:
+
+    	        $$[$0-2][$$[$0].key] = $$[$0].value;
+    	        this.$ = $$[$0-2];
+    	      
+    	break;
+    	case 25:
+
+    	        /* trailing comma: nothing to add */
+    	        this.$ = $$[$0-1];
+    	      
+    	break;
+    	case 26:
+    	 this.$ = $$[$0-2]; 
+    	break;
+    	case 27:
+
+    	        var parts = splitNodeParameters($$[$0-1]);
+    	        mergeInto(currentDefaults.node, parts.parameters);
+    	        mergeInto(currentDefaults.nodeLayout, parts.layoutOptions);
+    	      
+    	break;
+    	case 28:
+    	 
+    	        mergeInto(currentDefaults.edge, $$[$0-1]); 
+    	      
+    	break;
+    	case 29:
+    	 
+    	        var parts = splitNodeParameters($$[$0-1]);
+    	        var n = ensureNode($$[$0-2], parts.parameters);
+    	        mergeInto(n.layoutOptions, parts.layoutOptions);
+    	      
+    	break;
+    	case 30:
+    	 
+    	        ensureNode($$[$0-1], {}); 
+    	      
+    	break;
+    	case 31:
+
+    	        var label = yytext.slice(1);
+    	        var id = getOrCreateNamedDummy(label);
+    	        var parts = splitNodeParameters($$[$0-1]);
+    	        var n = ensureNode(id, parts.parameters);
+    	        mergeInto(n.layoutOptions, parts.layoutOptions);
+    	      
+    	break;
+    	case 32:
+
+    	        var chainParams = $$[$0-1] || null;
+    	        var chainBase = merged(currentDefaults.edge, chainParams);
+    	        for (var i = 0; i < $$[$0-2].edgePairs.length; i += 1) {
+    	          var pair = $$[$0-2].edgePairs[i];
+    	          var perPair = pair.$invisible
+    	            ? merged(chainBase, { render: false, $invisible: true, 'elk.edge.thickness': 0 })
+    	            : chainBase;
+    	          addEdge(pair.sourceId, pair.targetId, perPair);
+    	        }
+    	      
+    	break;
+    	case 33:
+
+    	        ensureNode($$[$0-2].id, $$[$0-2].parameters);
+    	        ensureNode($$[$0].id, $$[$0].parameters);
+    	        this.$ = {
+    	          lastNodeId: $$[$0].id,
+    	          edgePairs: [{ sourceId: $$[$0-2].id, targetId: $$[$0].id }]
+    	        };
+    	      
+    	break;
+    	case 34:
+
+    	        ensureNode($$[$0-2].id, $$[$0-2].parameters);
+    	        ensureNode($$[$0].id, $$[$0].parameters);
+    	        this.$ = {
+    	          lastNodeId: $$[$0].id,
+    	          edgePairs: [{ sourceId: $$[$0-2].id, targetId: $$[$0].id, $invisible: true }]
+    	        };
+    	      
+    	break;
+    	case 35:
+
+    	        ensureNode($$[$0].id, $$[$0].parameters);
+    	        $$[$0-2].edgePairs.push({ sourceId: $$[$0-2].lastNodeId, targetId: $$[$0].id });
+    	        this.$ = { lastNodeId: $$[$0].id, edgePairs: $$[$0-2].edgePairs };
+    	      
+    	break;
+    	case 36:
+
+    	        ensureNode($$[$0].id, $$[$0].parameters);
+    	        $$[$0-2].edgePairs.push({ sourceId: $$[$0-2].lastNodeId, targetId: $$[$0].id, $invisible: true });
+    	        this.$ = { lastNodeId: $$[$0].id, edgePairs: $$[$0-2].edgePairs };
+    	      
+    	break;
+    	case 37:
+    	 this.$ = null; 
+    	break;
+    	case 38:
+    	 this.$ = $$[$0]; 
+    	break;
+    	case 39:
+    	 this.$ = { id: $$[$0], parameters: {} }; 
+    	break;
+    	case 40:
+    	 this.$ = { id: unquote(yytext), parameters: {} }; 
+    	break;
+    	case 41:
+    	        
+    	        var gen = createAnonymousDummyNode();
+    	        this.$ = { id: gen, parameters: { $dummy: true } };
+    	      
+    	break;
+    	case 42:
+
+    	        var label = yytext.slice(1);
+    	        var id = getOrCreateNamedDummy(label);
+    	        this.$ = { id: id, parameters: { $dummy: true } };
+    	      
+    	break;
+    	case 43: case 49:
+    	 this.$ = yytext; 
+    	break;
+    	case 44: case 48:
+    	 this.$ = unquote(yytext); 
+    	break;
+    	case 45:
+    	 this.$ = { key: $$[$0-2], value: $$[$0] }; 
+    	break;
+    	case 46:
+    	 this.$ = Number(yytext); 
+    	break;
+    	case 47:
+    	 this.$ = parseInt(yytext, 16); 
+    	break;
+    	}
+    	},
+    	table: [o($V0,[2,4],{3:1,4:2}),{1:[3]},o($V0,[2,9],{5:3}),{1:[2,2],6:4,7:[1,7],9:[1,8],10:[1,12],11:5,12:6,13:9,14:10,15:11,25:[1,13],26:[1,14],27:[1,15],28:[1,16],29:17,31:18,34:$V1,35:$V2},{1:[2,1]},o($V0,[2,10]),o($V0,[2,11]),{1:[2,3]},o($V0,[2,8]),o($V0,[2,12]),o($V0,[2,13]),o($V0,[2,14]),o($V0,[2,15]),{22:21,23:$V3},{22:23,23:$V3},o($V4,$V5,{22:24,8:25,7:$V6,9:$V7,10:$V8,23:$V3}),o($V4,$V9,{22:29,23:$V3}),o($Va,[2,37],{30:30,22:33,23:$V3,32:[1,31],33:[1,32]}),{32:[1,34],33:[1,35]},o($Vb,[2,40]),o($Vb,[2,41]),o($Vc,$Vd,{16:36,10:$Ve}),o([27,34],$Vf,{17:38,9:$Vg}),o($Vc,$Vd,{16:40,10:$Ve}),{7:$V6,8:41,9:$V7,10:$V8},o($V0,[2,30]),o($V0,[2,5]),o($V0,[2,6]),o($V0,[2,7]),{7:$V6,8:42,9:$V7,10:$V8},{7:$V6,8:43,9:$V7,10:$V8},{27:$Vh,28:$Vi,31:44,34:$V1,35:$V2},{27:$Vh,28:$Vi,31:47,34:$V1,35:$V2},o($Va,[2,38]),{27:$Vh,28:$Vi,31:48,34:$V1,35:$V2},{27:$Vh,28:$Vi,31:49,34:$V1,35:$V2},o($V0,[2,27]),o($V0,[2,17]),{9:$Vj,20:50,21:52,27:$Vk,34:$Vl,36:53},o($Vm,[2,19]),o($V0,[2,28]),o($V0,[2,29]),o($V0,[2,31]),o($V0,[2,32]),o($Vb,[2,35]),o($Vb,$V5),o($Vb,$V9),o($Vb,[2,36]),o($Vb,[2,33]),o($Vb,[2,34]),{9:$Vg,17:56,18:57,19:[1,58],24:$Vf},o($Vm,[2,20]),o($Vn,[2,23]),{37:[1,59]},{37:[2,43]},{37:[2,44]},{9:$Vj,24:[1,60]},o($Vn,[2,25],{36:53,21:61,27:$Vk,34:$Vl}),o($Vo,[2,21],{17:62,9:$Vg}),{27:[1,67],34:[1,66],38:63,39:[1,64],40:[1,65]},o($V0,[2,26]),o($Vn,[2,24]),o($Vo,[2,22],{9:$Vj}),o($Vn,[2,45]),o($Vn,[2,46]),o($Vn,[2,47]),o($Vn,[2,48]),o($Vn,[2,49])],
+    	defaultActions: {4:[2,1],7:[2,3],54:[2,43],55:[2,44]},
+    	parseError: function parseError (str, hash) {
+    	    if (hash.recoverable) {
+    	        this.trace(str);
+    	    } else {
+    	        var error = new Error(str);
+    	        error.hash = hash;
+    	        throw error;
+    	    }
+    	},
+    	parse: function parse(input) {
+    	    var self = this, stack = [0], vstack = [null], lstack = [], table = this.table, yytext = '', yylineno = 0, yyleng = 0, TERROR = 2, EOF = 1;
+    	    var args = lstack.slice.call(arguments, 1);
+    	    var lexer = Object.create(this.lexer);
+    	    var sharedState = { yy: {} };
+    	    for (var k in this.yy) {
+    	        if (Object.prototype.hasOwnProperty.call(this.yy, k)) {
+    	            sharedState.yy[k] = this.yy[k];
+    	        }
+    	    }
+    	    lexer.setInput(input, sharedState.yy);
+    	    sharedState.yy.lexer = lexer;
+    	    sharedState.yy.parser = this;
+    	    if (typeof lexer.yylloc == 'undefined') {
+    	        lexer.yylloc = {};
+    	    }
+    	    var yyloc = lexer.yylloc;
+    	    lstack.push(yyloc);
+    	    var ranges = lexer.options && lexer.options.ranges;
+    	    if (typeof sharedState.yy.parseError === 'function') {
+    	        this.parseError = sharedState.yy.parseError;
+    	    } else {
+    	        this.parseError = Object.getPrototypeOf(this).parseError;
+    	    }
+    	    var lex = function () {
+    	            var token;
+    	            token = lexer.lex() || EOF;
+    	            if (typeof token !== 'number') {
+    	                token = self.symbols_[token] || token;
+    	            }
+    	            return token;
+    	        };
+    	    var symbol, state, action, r, yyval = {}, p, len, newState, expected;
+    	    while (true) {
+    	        state = stack[stack.length - 1];
+    	        if (this.defaultActions[state]) {
+    	            action = this.defaultActions[state];
+    	        } else {
+    	            if (symbol === null || typeof symbol == 'undefined') {
+    	                symbol = lex();
+    	            }
+    	            action = table[state] && table[state][symbol];
+    	        }
+    	                    if (typeof action === 'undefined' || !action.length || !action[0]) {
+    	                var errStr = '';
+    	                expected = [];
+    	                for (p in table[state]) {
+    	                    if (this.terminals_[p] && p > TERROR) {
+    	                        expected.push('\'' + this.terminals_[p] + '\'');
+    	                    }
+    	                }
+    	                if (lexer.showPosition) {
+    	                    errStr = 'Parse error on line ' + (yylineno + 1) + ':\n' + lexer.showPosition() + '\nExpecting ' + expected.join(', ') + ', got \'' + (this.terminals_[symbol] || symbol) + '\'';
+    	                } else {
+    	                    errStr = 'Parse error on line ' + (yylineno + 1) + ': Unexpected ' + (symbol == EOF ? 'end of input' : '\'' + (this.terminals_[symbol] || symbol) + '\'');
+    	                }
+    	                this.parseError(errStr, {
+    	                    text: lexer.match,
+    	                    token: this.terminals_[symbol] || symbol,
+    	                    line: lexer.yylineno,
+    	                    loc: yyloc,
+    	                    expected: expected
+    	                });
+    	            }
+    	        if (action[0] instanceof Array && action.length > 1) {
+    	            throw new Error('Parse Error: multiple actions possible at state: ' + state + ', token: ' + symbol);
+    	        }
+    	        switch (action[0]) {
+    	        case 1:
+    	            stack.push(symbol);
+    	            vstack.push(lexer.yytext);
+    	            lstack.push(lexer.yylloc);
+    	            stack.push(action[1]);
+    	            symbol = null;
+    	            {
+    	                yyleng = lexer.yyleng;
+    	                yytext = lexer.yytext;
+    	                yylineno = lexer.yylineno;
+    	                yyloc = lexer.yylloc;
+    	            }
+    	            break;
+    	        case 2:
+    	            len = this.productions_[action[1]][1];
+    	            yyval.$ = vstack[vstack.length - len];
+    	            yyval._$ = {
+    	                first_line: lstack[lstack.length - (len || 1)].first_line,
+    	                last_line: lstack[lstack.length - 1].last_line,
+    	                first_column: lstack[lstack.length - (len || 1)].first_column,
+    	                last_column: lstack[lstack.length - 1].last_column
+    	            };
+    	            if (ranges) {
+    	                yyval._$.range = [
+    	                    lstack[lstack.length - (len || 1)].range[0],
+    	                    lstack[lstack.length - 1].range[1]
+    	                ];
+    	            }
+    	            r = this.performAction.apply(yyval, [
+    	                yytext,
+    	                yyleng,
+    	                yylineno,
+    	                sharedState.yy,
+    	                action[1],
+    	                vstack,
+    	                lstack
+    	            ].concat(args));
+    	            if (typeof r !== 'undefined') {
+    	                return r;
+    	            }
+    	            if (len) {
+    	                stack = stack.slice(0, -1 * len * 2);
+    	                vstack = vstack.slice(0, -1 * len);
+    	                lstack = lstack.slice(0, -1 * len);
+    	            }
+    	            stack.push(this.productions_[action[1]][0]);
+    	            vstack.push(yyval.$);
+    	            lstack.push(yyval._$);
+    	            newState = table[stack[stack.length - 2]][stack[stack.length - 1]];
+    	            stack.push(newState);
+    	            break;
+    	        case 3:
+    	            return true;
+    	        }
+    	    }
+    	    return true;
+    	}};
+
+    	  // ----- module-scope state -----
+    	  var nodesMap, edges, dummyAutoId, edgeAutoId, currentDefaults, namedDummyMap;
+    	  // --- switches & indices ---
+    	  var allowParallelEdges;               // default true
+    	  var edgeKeyToIndexMap;                // (sourceId,targetId) -> edges[] index
+
+    	  function resetState() {
+    	    nodesMap = Object.create(null);
+    	    edges = [];
+    	    dummyAutoId = 0;   // for anonymous dummy nodes: _d1, _d2, ...
+    	    edgeAutoId  = 0;   // for edges: _e1, _e2, ...
+    	    currentDefaults = {
+    	      node: {},
+    	      nodeLayout: {},
+    	      edge: {}
+    	    };
+    	    allowParallelEdges = false;
+    	    edgeKeyToIndexMap = Object.create(null);
+    	    namedDummyMap = Object.create(null);
+    	  }
+
+    	  function shallowCopy(obj) {
+    	    var out = {};
+    	    for (var k in obj) if (Object.prototype.hasOwnProperty.call(obj, k)) out[k] = obj[k];
+    	    return out;
+    	  }
+    	  function mergeInto(target, src) {
+    	    if (!src) return target;
+    	    for (var k in src) if (Object.prototype.hasOwnProperty.call(src, k)) target[k] = src[k];
+    	    return target;
+    	  }
+    	  function merged(a, b) {
+    	    return mergeInto(mergeInto({}, a || {}), b || {});
+    	  }
+    	  function splitNodeParameters(parameters) {
+    	    const normalParameters = {};
+    	    const elkLayoutOptions = {};
+    	  
+    	    for (const key in parameters) {
+    	      if (!Object.prototype.hasOwnProperty.call(parameters, key)) {
+    	        continue;
+    	      }
+    	  
+    	      const value = parameters[key];
+    	      if (key.startsWith('elk.')) {
+    	        elkLayoutOptions[key] = value;
+    	      } else {
+    	        normalParameters[key] = value;
+    	      }
+    	    }
+    	  
+    	    return {
+    	      parameters: normalParameters,
+    	      layoutOptions: elkLayoutOptions
+    	    };
+    	  }
+
+
+    	  function makeEdgeKey(sourceId, targetId) {
+    	    return sourceId + '->' + targetId;
+    	  }
+    	  var dedupePolicy = "first-wins";
+
+    	  /**
+    	   * Ensure a node exists.
+    	   * - If creating a **dummy** (newParameters && newParameters.$dummy === true):
+    	   *     DO NOT seed with NODE defaults; start from {} and only set $dummy flag (+ any explicit fields).
+    	   * - Else (normal node first creation): seed with NODE defaults, then merge explicit params.
+    	   */
+    	  function ensureNode(nodeId, newParameters) {
+    	    var isDummyCreation = !!(newParameters && newParameters.$dummy === true);
+    	    var nodeItem = nodesMap[nodeId];
+    	    if (!nodeItem) {
+    	      // seed parameters: {} for dummy, NODE defaults for normal nodes
+    	      var seed = (isDummyCreation)? {} : shallowCopy(currentDefaults.node);
+    	      nodeItem = { id: nodeId, parameters: seed, layoutOptions: {} };
+    	      if (!isDummyCreation) {
+    	        mergeInto(nodeItem.layoutOptions, currentDefaults.nodeLayout);
+    	      }
+    	      nodesMap[nodeId] = nodeItem;
+    	    }
+    	    if (newParameters && typeof newParameters === 'object') {
+    	      mergeInto(nodeItem.parameters, newParameters);
+    	    }
+    	    return nodeItem;
+    	  }
+
+    	  /** Create a fresh anonymous dummy node id like _d1, and register it as dummy (no NODE defaults). */
+    	  function createAnonymousDummyNode() {
+    	    dummyAutoId += 1;
+    	    var dummyNodeId = "_d$" + String(dummyAutoId);
+    	    ensureNode(dummyNodeId, { $dummy: true });
+    	    return dummyNodeId;
+    	  }
+
+    	  function getOrCreateNamedDummy(label) {
+    	    var id = namedDummyMap[label];
+    	    if (id) {
+    	      return id
+    	    }	  
+    	    id = '_d#' + label;
+    	    namedDummyMap[label] = id;
+    	  
+    	    ensureNode(id, { $dummy: true });
+    	    return id;
+    	  }
+
+    	  /** Create a fresh edge id like _e1. */
+    	  function createEdgeId() {
+    	    edgeAutoId += 1;
+    	    return "_e" + String(edgeAutoId);
+    	  }
+
+    	  /**
+    	   * Push an edge with a generated id and merged parameters:
+    	   * effectiveEdgeParams = merge(currentDefaults.edge, edgeParameters)
+    	   */
+    	  var dedupePolicy = "first-wins";
+    	  function addEdge(sourceId, targetId, edgeParameters) {
+    	    var key = makeEdgeKey(sourceId, targetId);
+
+    	    if (!allowParallelEdges) {
+    	      var existIdx = edgeKeyToIndexMap[key];
+    	      if (existIdx != null) {
+    	        if (dedupePolicy === 'last-wins') {
+    	          edges[existIdx].parameters = merged(currentDefaults.edge, edgeParameters || {});
+    	        }
+    	        return;
+    	      }
+    	    }
+
+    	    var effective = merged(currentDefaults.edge, edgeParameters || {});
+    	    edges.push({
+    	      id: createEdgeId(),
+    	      sourceId: sourceId,
+    	      targetId: targetId,
+    	      parameters: effective
+    	    });
+
+    	    edgeKeyToIndexMap[key] = edges.length - 1;
+    	  }
+
+    	  function getNodesArray() {
+    	    var out = [];
+    	    for (var id in nodesMap) {
+    	      if (Object.prototype.hasOwnProperty.call(nodesMap, id)) {
+    	        out.push(nodesMap[id]);
+    	      }
+    	    }
+    	    return out;
+    	  }
+
+    	  function unquote(text) { 
+    	    return text.slice(1, -1); 
+    	  }
+
+    	/* generated by jison-lex 0.3.4 */
+    	var lexer = (function(){
+    	var lexer = ({
+
+    	EOF:1,
+
+    	parseError:function parseError(str, hash) {
+    	        if (this.yy.parser) {
+    	            this.yy.parser.parseError(str, hash);
+    	        } else {
+    	            throw new Error(str);
+    	        }
+    	    },
+
+    	// resets the lexer, sets new input
+    	setInput:function (input, yy) {
+    	        this.yy = yy || this.yy || {};
+    	        this._input = input;
+    	        this._more = this._backtrack = this.done = false;
+    	        this.yylineno = this.yyleng = 0;
+    	        this.yytext = this.matched = this.match = '';
+    	        this.conditionStack = ['INITIAL'];
+    	        this.yylloc = {
+    	            first_line: 1,
+    	            first_column: 0,
+    	            last_line: 1,
+    	            last_column: 0
+    	        };
+    	        if (this.options.ranges) {
+    	            this.yylloc.range = [0,0];
+    	        }
+    	        this.offset = 0;
+    	        return this;
+    	    },
+
+    	// consumes and returns one char from the input
+    	input:function () {
+    	        var ch = this._input[0];
+    	        this.yytext += ch;
+    	        this.yyleng++;
+    	        this.offset++;
+    	        this.match += ch;
+    	        this.matched += ch;
+    	        var lines = ch.match(/(?:\r\n?|\n).*/g);
+    	        if (lines) {
+    	            this.yylineno++;
+    	            this.yylloc.last_line++;
+    	        } else {
+    	            this.yylloc.last_column++;
+    	        }
+    	        if (this.options.ranges) {
+    	            this.yylloc.range[1]++;
+    	        }
+
+    	        this._input = this._input.slice(1);
+    	        return ch;
+    	    },
+
+    	// unshifts one char (or a string) into the input
+    	unput:function (ch) {
+    	        var len = ch.length;
+    	        var lines = ch.split(/(?:\r\n?|\n)/g);
+
+    	        this._input = ch + this._input;
+    	        this.yytext = this.yytext.substr(0, this.yytext.length - len);
+    	        //this.yyleng -= len;
+    	        this.offset -= len;
+    	        var oldLines = this.match.split(/(?:\r\n?|\n)/g);
+    	        this.match = this.match.substr(0, this.match.length - 1);
+    	        this.matched = this.matched.substr(0, this.matched.length - 1);
+
+    	        if (lines.length - 1) {
+    	            this.yylineno -= lines.length - 1;
+    	        }
+    	        var r = this.yylloc.range;
+
+    	        this.yylloc = {
+    	            first_line: this.yylloc.first_line,
+    	            last_line: this.yylineno + 1,
+    	            first_column: this.yylloc.first_column,
+    	            last_column: lines ?
+    	                (lines.length === oldLines.length ? this.yylloc.first_column : 0)
+    	                 + oldLines[oldLines.length - lines.length].length - lines[0].length :
+    	              this.yylloc.first_column - len
+    	        };
+
+    	        if (this.options.ranges) {
+    	            this.yylloc.range = [r[0], r[0] + this.yyleng - len];
+    	        }
+    	        this.yyleng = this.yytext.length;
+    	        return this;
+    	    },
+
+    	// When called from action, caches matched text and appends it on next action
+    	more:function () {
+    	        this._more = true;
+    	        return this;
+    	    },
+
+    	// When called from action, signals the lexer that this rule fails to match the input, so the next matching rule (regex) should be tested instead.
+    	reject:function () {
+    	        if (this.options.backtrack_lexer) {
+    	            this._backtrack = true;
+    	        } else {
+    	            return this.parseError('Lexical error on line ' + (this.yylineno + 1) + '. You can only invoke reject() in the lexer when the lexer is of the backtracking persuasion (options.backtrack_lexer = true).\n' + this.showPosition(), {
+    	                text: "",
+    	                token: null,
+    	                line: this.yylineno
+    	            });
+
+    	        }
+    	        return this;
+    	    },
+
+    	// retain first n characters of the match
+    	less:function (n) {
+    	        this.unput(this.match.slice(n));
+    	    },
+
+    	// displays already matched input, i.e. for error messages
+    	pastInput:function () {
+    	        var past = this.matched.substr(0, this.matched.length - this.match.length);
+    	        return (past.length > 20 ? '...':'') + past.substr(-20).replace(/\n/g, "");
+    	    },
+
+    	// displays upcoming input, i.e. for error messages
+    	upcomingInput:function () {
+    	        var next = this.match;
+    	        if (next.length < 20) {
+    	            next += this._input.substr(0, 20-next.length);
+    	        }
+    	        return (next.substr(0,20) + (next.length > 20 ? '...' : '')).replace(/\n/g, "");
+    	    },
+
+    	// displays the character position where the lexing error occurred, i.e. for error messages
+    	showPosition:function () {
+    	        var pre = this.pastInput();
+    	        var c = new Array(pre.length + 1).join("-");
+    	        return pre + this.upcomingInput() + "\n" + c + "^";
+    	    },
+
+    	// test the lexed token: return FALSE when not a match, otherwise return token
+    	test_match:function(match, indexed_rule) {
+    	        var token,
+    	            lines,
+    	            backup;
+
+    	        if (this.options.backtrack_lexer) {
+    	            // save context
+    	            backup = {
+    	                yylineno: this.yylineno,
+    	                yylloc: {
+    	                    first_line: this.yylloc.first_line,
+    	                    last_line: this.last_line,
+    	                    first_column: this.yylloc.first_column,
+    	                    last_column: this.yylloc.last_column
+    	                },
+    	                yytext: this.yytext,
+    	                match: this.match,
+    	                matches: this.matches,
+    	                matched: this.matched,
+    	                yyleng: this.yyleng,
+    	                offset: this.offset,
+    	                _more: this._more,
+    	                _input: this._input,
+    	                yy: this.yy,
+    	                conditionStack: this.conditionStack.slice(0),
+    	                done: this.done
+    	            };
+    	            if (this.options.ranges) {
+    	                backup.yylloc.range = this.yylloc.range.slice(0);
+    	            }
+    	        }
+
+    	        lines = match[0].match(/(?:\r\n?|\n).*/g);
+    	        if (lines) {
+    	            this.yylineno += lines.length;
+    	        }
+    	        this.yylloc = {
+    	            first_line: this.yylloc.last_line,
+    	            last_line: this.yylineno + 1,
+    	            first_column: this.yylloc.last_column,
+    	            last_column: lines ?
+    	                         lines[lines.length - 1].length - lines[lines.length - 1].match(/\r?\n?/)[0].length :
+    	                         this.yylloc.last_column + match[0].length
+    	        };
+    	        this.yytext += match[0];
+    	        this.match += match[0];
+    	        this.matches = match;
+    	        this.yyleng = this.yytext.length;
+    	        if (this.options.ranges) {
+    	            this.yylloc.range = [this.offset, this.offset += this.yyleng];
+    	        }
+    	        this._more = false;
+    	        this._backtrack = false;
+    	        this._input = this._input.slice(match[0].length);
+    	        this.matched += match[0];
+    	        token = this.performAction.call(this, this.yy, this, indexed_rule, this.conditionStack[this.conditionStack.length - 1]);
+    	        if (this.done && this._input) {
+    	            this.done = false;
+    	        }
+    	        if (token) {
+    	            return token;
+    	        } else if (this._backtrack) {
+    	            // recover context
+    	            for (var k in backup) {
+    	                this[k] = backup[k];
+    	            }
+    	            return false; // rule action called reject() implying the next rule should be tested instead.
+    	        }
+    	        return false;
+    	    },
+
+    	// return next match in input
+    	next:function () {
+    	        if (this.done) {
+    	            return this.EOF;
+    	        }
+    	        if (!this._input) {
+    	            this.done = true;
+    	        }
+
+    	        var token,
+    	            match,
+    	            tempMatch,
+    	            index;
+    	        if (!this._more) {
+    	            this.yytext = '';
+    	            this.match = '';
+    	        }
+    	        var rules = this._currentRules();
+    	        for (var i = 0; i < rules.length; i++) {
+    	            tempMatch = this._input.match(this.rules[rules[i]]);
+    	            if (tempMatch && (!match || tempMatch[0].length > match[0].length)) {
+    	                match = tempMatch;
+    	                index = i;
+    	                if (this.options.backtrack_lexer) {
+    	                    token = this.test_match(tempMatch, rules[i]);
+    	                    if (token !== false) {
+    	                        return token;
+    	                    } else if (this._backtrack) {
+    	                        match = false;
+    	                        continue; // rule action called reject() implying a rule MISmatch.
+    	                    } else {
+    	                        // else: this is a lexer rule which consumes input without producing a token (e.g. whitespace)
+    	                        return false;
+    	                    }
+    	                } else if (!this.options.flex) {
+    	                    break;
+    	                }
+    	            }
+    	        }
+    	        if (match) {
+    	            token = this.test_match(match, rules[index]);
+    	            if (token !== false) {
+    	                return token;
+    	            }
+    	            // else: this is a lexer rule which consumes input without producing a token (e.g. whitespace)
+    	            return false;
+    	        }
+    	        if (this._input === "") {
+    	            return this.EOF;
+    	        } else {
+    	            return this.parseError('Lexical error on line ' + (this.yylineno + 1) + '. Unrecognized text.\n' + this.showPosition(), {
+    	                text: "",
+    	                token: null,
+    	                line: this.yylineno
+    	            });
+    	        }
+    	    },
+
+    	// return next match that has a token
+    	lex:function lex () {
+    	        var r = this.next();
+    	        if (r) {
+    	            return r;
+    	        } else {
+    	            return this.lex();
+    	        }
+    	    },
+
+    	// activates a new lexer condition state (pushes the new lexer condition state onto the condition stack)
+    	begin:function begin (condition) {
+    	        this.conditionStack.push(condition);
+    	    },
+
+    	// pop the previously active lexer condition state off the condition stack
+    	popState:function popState () {
+    	        var n = this.conditionStack.length - 1;
+    	        if (n > 0) {
+    	            return this.conditionStack.pop();
+    	        } else {
+    	            return this.conditionStack[0];
+    	        }
+    	    },
+
+    	// produce the lexer rule set which is active for the currently active lexer condition state
+    	_currentRules:function _currentRules () {
+    	        if (this.conditionStack.length && this.conditionStack[this.conditionStack.length - 1]) {
+    	            return this.conditions[this.conditionStack[this.conditionStack.length - 1]].rules;
+    	        } else {
+    	            return this.conditions["INITIAL"].rules;
+    	        }
+    	    },
+
+    	// return the currently active lexer condition state; when an index argument is provided it produces the N-th previous condition state, if available
+    	topState:function topState (n) {
+    	        n = this.conditionStack.length - 1 - Math.abs(n || 0);
+    	        if (n >= 0) {
+    	            return this.conditionStack[n];
+    	        } else {
+    	            return "INITIAL";
+    	        }
+    	    },
+
+    	// alias for begin(condition)
+    	pushState:function pushState (condition) {
+    	        this.begin(condition);
+    	    },
+
+    	// return the number of states currently on the stack
+    	stateStackSize:function stateStackSize() {
+    	        return this.conditionStack.length;
+    	    },
+    	options: {},
+    	performAction: function anonymous(yy,yy_,$avoiding_name_collisions,YY_START) {
+    	switch($avoiding_name_collisions) {
+    	case 0:/* skip horizontal whitespace only */
+    	break;
+    	case 1:return 9
+    	case 2:/* skip line comments starting with # */
+    	break;
+    	case 3:/* skip line comments starting with // */
+    	break;
+    	case 4:/* skip C-style block comments */
+    	break;
+    	case 5:return 25     /* defaults for nodes (UPPERCASE) */
+    	case 6:return 26     /* defaults for edges (UPPERCASE) */
+    	case 7:return 23
+    	case 8:return 24
+    	case 9:return 19
+    	case 10:return 37
+    	case 11:return 10
+    	case 12:return 32
+    	case 13:return 33
+    	case 14:return 28
+    	case 15:return 35
+    	case 16:return 40
+    	case 17:return 39         /* integer/float */
+    	case 18:return 34
+    	case 19:return 27          /* bare identifiers */
+    	case 20:return 7
+    	case 21:return 'INVALID'
+    	}
+    	},
+    	rules: [/^(?:[ \t\f]+)/,/^(?:\r\n|\r|\n)/,/^(?:#.*)/,/^(?:\/\/.*)/,/^(?:\/\*([^*]|\*+[^*/])*\*+\/)/,/^(?:NODE\b)/,/^(?:EDGE\b)/,/^(?:\[)/,/^(?:\])/,/^(?:,)/,/^(?:=)/,/^(?:;)/,/^(?:->)/,/^(?:\*>)/,/^(?:\*[A-Za-z0-9_]+)/,/^(?:\*)/,/^(?:\b0x[0-9A-Fa-f]+\b)/,/^(?:-?[0-9]+(\.[0-9]+)?\b)/,/^(?:"(\\.|[^\"\\])*"|'(\\.|[^\'\\])*')/,/^(?:[A-Za-z_](?:[A-Za-z0-9_-]|\.[A-Za-z0-9_-])*)/,/^(?:$)/,/^(?:.)/],
+    	conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21],"inclusive":true}}
+    	});
+    	return lexer;
+    	})();
+    	parser.lexer = lexer;
+    	function Parser () {
+    	  this.yy = {};
+    	}
+    	Parser.prototype = parser;parser.Parser = Parser;
+    	return new Parser;
+    	})();
+
+
+    	if (typeof commonjsRequire !== 'undefined' && 'object' !== 'undefined') {
+    	exports.parser = parser;
+    	exports.Parser = parser.Parser;
+    	exports.parse = function () { return parser.parse.apply(parser, arguments); };
+    	} 
+    } (parser));
+
+    var BuildGraphFromText = function (graph, config) {
+        graph.clear();
+
+        var {
+            onCreateNodeGameObject,
+            onCreateEdgeGameObject,
+            text
+        } = config;
+
+        var { nodes, edges } = new parser.Parser().parse(text);
+
+        var scene = graph.scene;
+
+        var nodeGameObject;
+        for (var i = 0, cnt = nodes.length; i < cnt; i++) {
+            var nodeData = nodes[i];
+            var { id, parameters, layoutOptions } = nodeData;
+            parameters.layoutOptions = layoutOptions;
+
+            if (onCreateNodeGameObject && !parameters.$dummy) {
+                nodeGameObject = onCreateNodeGameObject(scene, id, parameters);
+            } else {
+                nodeGameObject = graph.createDummyNode();
+            }
+
+            graph.addNode(nodeGameObject, parameters, id);
+        }
+
+        var edgeGameObject;
+        for (var i = 0, cnt = edges.length; i < cnt; i++) {
+            var edgeData = edges[i];
+            var id = edgeData.id;
+            var parameters = edgeData.parameters;
+            var sourceId = edgeData.sourceId;
+            var targetId = edgeData.targetId;
+            if (onCreateEdgeGameObject && !parameters.$invisible) {
+                edgeGameObject = onCreateEdgeGameObject(scene, id, parameters);
+            } else {
+                edgeGameObject = graph.createInvisibleEdge();
+            }
+
+            graph.addEdge(edgeGameObject, sourceId, targetId, undefined, parameters, id);
+        }
+    };
+
+    var Layout$2 = async function (layoutConfig, graph, config) {
+        var {
+            buildGraphData,
+            isAsyncRunLayout, runLayout,
+            placeGameObjects,
+        } = layoutConfig;
+
+        if (config === undefined) {
+            config = {};
+        }
+
+        var {
+            onLayoutStart,
+            onLayoutComplete
+        } = config;
+
+        if (onLayoutStart) {
+            onLayoutStart(graph);
+        }
+
+        var graphData = buildGraphData(graph, config);
+
+        if (isAsyncRunLayout) {
+            await runLayout(graphData, config);
+        } else {
+            runLayout(graphData, config);
+        }
+
+        var { xMin, yMin } = placeGameObjects(graph, graphData, config);
+        graph.graphOffsetX = xMin;
+        graph.graphOffsetY = yMin;
+
+        var container = config.container;
+        if (container) {
+            var containerPadding = config.containerPadding;
+            graph.fitContainer(container, containerPadding);
+        } else {
+            var {
+                graphOffsetX = 0,
+                graphOffsetY = 0
+            } = config;
+            graph.setGraphOffset(graphOffsetX, graphOffsetY);
+        }
+
+        if (onLayoutComplete) {
+            onLayoutComplete(graph);
+        }
+    };
+
     var BuildGraphData$1 = function (graph, config) {
+
         var nodes = [];
         var nodeGameObjectMap = {};
         graph.graph.forEachNode(function (uid, attributes) {
@@ -1478,6 +4683,9 @@
                 gameObject: nodeGameObject, padding: padding,
                 id: uid, width: width, height: height
             };
+            if (attributes.hasOwnProperty('layoutOptions')) {
+                nodeData.layoutOptions = { ...attributes.layoutOptions };
+            }
             nodes.push(nodeData);
 
             nodeGameObjectMap[uid] = nodeGameObject;
@@ -1510,10 +4718,6 @@
             edges: edges
         }
     };
-
-    function commonjsRequire(path) {
-    	throw new Error('Could not dynamically require "' + path + '". Please configure the dynamicRequireTargets or/and ignoreDynamicRequires option of @rollup/plugin-commonjs appropriately for this require call to work.');
-    }
 
     var elk_bundled = {exports: {}};
 
@@ -8212,10 +11416,12 @@
     var ELK = /*@__PURE__*/getDefaultExportFromCjs(elk_bundledExports);
 
     var RunLayout$1 = async function (graphData, config) {
+        if (config === undefined) {
+            config = {};
+        }
+
         var elk = new ELK();
-        graphData = await elk.layout(graphData, {
-            layoutOptions: config.layoutOptions,
-        });
+        graphData = await elk.layout(graphData, config.layoutConfig);
     };
 
     var NOOP = function () {
@@ -8351,22 +11557,6 @@
         */
         BOTTOM_RIGHT: 12
 
-    };
-
-    var GetDisplayWidth = function (gameObject) {
-        if (gameObject.displayWidth !== undefined) {
-            return gameObject.displayWidth;
-        } else {
-            return gameObject.width;
-        }
-    };
-
-    var GetDisplayHeight = function (gameObject) {
-        if (gameObject.displayHeight !== undefined) {
-            return gameObject.displayHeight;
-        } else {
-            return gameObject.height;
-        }
     };
 
     var GetBottom = function (gameObject) {
@@ -8573,24 +11763,62 @@
         return result;
     };
 
+    var DefaultLayoutEdgeCallback = function (gameObject, path, sourceGameObject, targetGameObject) {
+        if (gameObject.setLine) {
+            gameObject.setLine(path);
+        }
+    };
+
     const ALIGN_CENTER$1 = Phaser.Display.Align.CENTER;
 
     var PlaceGameObjects$1 = function (graph, graphData, config) {
+        if (config === undefined) {
+            config = {};
+        }
+
+        var {
+            onLayoutNode,
+            onLayoutEdge = DefaultLayoutEdgeCallback
+        } = config;
+
+
+        var xMin = Infinity,
+            yMin = Infinity;
+
         graphData.children.forEach(function (nodeData) {
             var gameObject = nodeData.gameObject;
+            if (graph.isDummyNode(gameObject)) {
+                return;
+            }
+
             var padding = nodeData.padding;
             var x = nodeData.x + padding.left;
             var y = nodeData.y + padding.top;
             var width = nodeData.width - padding.left - padding.right;
             var height = nodeData.height - padding.top - padding.bottom;
             AlignIn(gameObject, x, y, width, height, ALIGN_CENTER$1);
-            graph.emit('layout.node', nodeData.gameObject);
+
+            if (xMin > x) { xMin = x; }
+            if (yMin > y) { yMin = y; }
+
+            if (onLayoutNode) {
+                onLayoutNode(gameObject);
+            }
         });
 
         graphData.edges.forEach(function (edgeData) {
+            var gameObject = edgeData.gameObject;
+            if (graph.isInvisibleEdge(gameObject)) {
+                return;
+            }
             var path = GetPath$1(edgeData);
-            graph.emit('layout.edge', edgeData.gameObject, path, edgeData.sourceGameObject, edgeData.targetGameObject);
+
+            if (onLayoutEdge) {
+                onLayoutEdge(gameObject, path, edgeData.sourceGameObject, edgeData.targetGameObject);
+            }
         });
+
+        return { xMin, yMin };
     };
 
     var LayoutConfig$1 = {
@@ -8600,11 +11828,11 @@
         placeGameObjects: PlaceGameObjects$1,
     };
 
-    var Layout$1 = async function (graph, userConfig) {
-        if (userConfig === undefined) {
-            userConfig = {};
+    var Layout$1 = async function (graph, config) {
+        if (config === undefined) {
+            config = {};
         }
-        await Layout$2(LayoutConfig$1, graph, userConfig);
+        await Layout$2(LayoutConfig$1, graph, config);
     };
 
     /**
@@ -21994,8 +25222,12 @@
     var dagre$1 = /*@__PURE__*/getDefaultExportFromCjs(dagre);
 
     var BuildGraphData = function (graph, config) {
+        if (config === undefined) {
+            config = {};
+
+        }
         var graphData = new dagre$1.graphlib.Graph();
-        graphData.setGraph(config);
+        graphData.setGraph(config.layoutConfig);
         graphData.setDefaultEdgeLabel(function () { });
 
         var nodeGameObjectMap = {};
@@ -22040,6 +25272,7 @@
     };
 
     var RunLayout = async function (graphData, config) {
+
         await dagre$1.layout(graphData);
     };
 
@@ -22050,23 +25283,54 @@
     const ALIGN_CENTER = Phaser.Display.Align.CENTER;
 
     var PlaceGameObjects = function (graph, graphData, config) {
+        if (config === undefined) {
+            config = {};
+        }
+
+        var {
+            onLayoutNode,
+            onLayoutEdge = DefaultLayoutEdgeCallback
+        } = config;
+
+        var xMin = Infinity,
+            yMin = Infinity;
+
         graphData.nodes().forEach(function (nodeKey) {
             var nodeData = graphData.node(nodeKey);
             var gameObject = nodeData.gameObject;
+            if (graph.isDummyNode(gameObject)) {
+                return;
+            }
+
             var padding = nodeData.padding;
             var x = nodeData.x - (nodeData.width / 2) + padding.left;  // nodeData.x is centerX
             var y = nodeData.y - (nodeData.height / 2) + padding.top;  // nodeData.y is centerY
             var width = nodeData.width - padding.left - padding.right;
             var height = nodeData.height - padding.top - padding.bottom;
             AlignIn(gameObject, x, y, width, height, ALIGN_CENTER);
-            graph.emit('layout.node', nodeData.gameObject);
+
+            if (xMin > x) { xMin = x; }
+            if (yMin > y) { yMin = y; }
+
+            if (onLayoutNode) {
+                onLayoutNode(gameObject);
+            }
         });
 
         graphData.edges().forEach(function (edgeKey) {
             var edgeData = graphData.edge(edgeKey);
+            var gameObject = edgeData.gameObject;
+            if (graph.isInvisibleEdge(gameObject)) {
+                return;
+            }
+
             var path = GetPath(edgeData);
-            graph.emit('layout.edge', edgeData.gameObject, path, edgeData.sourceGameObject, edgeData.targetGameObject);
+            if (onLayoutEdge) {
+                onLayoutEdge(gameObject, path, edgeData.sourceGameObject, edgeData.targetGameObject);
+            }
         });
+
+        return { xMin, yMin };
     };
 
     var LayoutConfig = {
@@ -22076,11 +25340,11 @@
         placeGameObjects: PlaceGameObjects,
     };
 
-    var Layout = async function (graph, userConfig) {
-        if (userConfig === undefined) {
-            userConfig = {};
+    var Layout = async function (graph, config) {
+        if (config === undefined) {
+            config = {};
         }
-        await Layout$2(LayoutConfig, graph, userConfig);
+        await Layout$2(LayoutConfig, graph, config);
     };
 
     class GraphPlugin extends Phaser.Plugins.ScenePlugin {
@@ -22100,19 +25364,19 @@
             super.destroy();
         }
 
-        async ELKLayoutPromise(graph, config) {
-            return Layout$1(graph, config);
+        buildGraphFromText(graph, config) {
+            BuildGraphFromText(graph, config);
         }
 
         ELKLayout(graph, config) {
-            Layout$1(graph, config);
-            return graph;
+            return Layout$1(graph, config);
         }
 
         DagreLayout(graph, config) {
-            Layout(graph, config);
-            return graph;
+            return Layout(graph, config);
         }
+
+
     }
 
     return GraphPlugin;

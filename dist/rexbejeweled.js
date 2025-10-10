@@ -134,7 +134,7 @@
         }
     };
 
-    const GetValue$c = Phaser.Utils.Objects.GetValue;
+    const GetValue$b = Phaser.Utils.Objects.GetValue;
 
     class ComponentBase {
         constructor(parent, config) {
@@ -143,7 +143,7 @@
             this.isShutdown = false;
 
             // Event emitter, default is private event emitter
-            this.setEventEmitter(GetValue$c(config, 'eventEmitter', true));
+            this.setEventEmitter(GetValue$b(config, 'eventEmitter', true));
 
             // Register callback of parent destroy event, also see `shutdown` method
             if (this.parent) {
@@ -668,7 +668,7 @@
         },
     };
 
-    var GetValue$b = function (source, key, defaultValue) {
+    var GetValue$a = function (source, key, defaultValue) {
         if (!source || typeof source === 'number') {
             return defaultValue;
         }
@@ -733,13 +733,13 @@
         */
         constructor(config) {
             // Attach get-next-state function
-            var states = GetValue$b(config, 'states', undefined);
+            var states = GetValue$a(config, 'states', undefined);
             if (states) {
                 this.addStates(states);
             }
 
             // Attach extend members
-            var extend = GetValue$b(config, 'extend', undefined);
+            var extend = GetValue$a(config, 'extend', undefined);
             if (extend) {
                 for (var name in extend) {
                     if (!this.hasOwnProperty(name) || this[name] === undefined) {
@@ -749,8 +749,8 @@
             }
 
             // Event emitter
-            var eventEmitter = GetValue$b(config, 'eventEmitter', undefined);
-            var EventEmitterClass = GetValue$b(config, 'EventEmitterClass', undefined);
+            var eventEmitter = GetValue$a(config, 'eventEmitter', undefined);
+            var EventEmitterClass = GetValue$a(config, 'EventEmitterClass', undefined);
             this.setEventEmitter(eventEmitter, EventEmitterClass);
 
             this._stateLock = false;
@@ -766,9 +766,9 @@
         }
 
         resetFromJSON(o) {
-            this.setEnable(GetValue$b(o, 'enable', true));
-            this.start(GetValue$b(o, 'start', undefined));
-            var init = GetValue$b(o, 'init', undefined);
+            this.setEnable(GetValue$a(o, 'enable', true));
+            this.start(GetValue$a(o, 'start', undefined));
+            var init = GetValue$a(o, 'init', undefined);
             if (init) {
                 init.call(this);
             }
@@ -998,7 +998,7 @@
 
         resetFromJSON(o) {
             super.resetFromJSON(o);
-            this._scene = GetValue$b(o, 'scene', undefined);
+            this._scene = GetValue$a(o, 'scene', undefined);
             return this;
         }
 
@@ -1124,7 +1124,243 @@
         }
     }
 
-    const GetValue$a = Phaser.Utils.Objects.GetValue;
+    /* 
+    1. Fade-out-destroy chess
+    */
+
+    var EliminateChess = function (chessArray, board, bejeweled) {
+        const duration = 500; //ms
+        for (var i = 0, cnt = chessArray.length; i < cnt; i++) {
+            // Destroy chess game object after fading
+            // Chess won't be reused in this case
+            const gameObject = chessArray[i];
+            var fade = gameObject.scene.tweens.add({
+                targets: gameObject,
+                alpha: 0,
+                duration: duration,
+                onComplete(tw, targets) {
+                    targets[0].destroy();
+                }
+            });
+            bejeweled.waitEvent(fade, 'complete');
+        }
+    };
+
+    /* 
+    1. Falling down all chess
+    */
+
+    var FallingAllChess = function (board, bejeweled) {
+        var tileZ = bejeweled.getChessTileZ(),
+            chess, moveTo;
+
+        for (var tileY = (board.height - 1); tileY >= 0; tileY--) { // bottom to top
+            for (var tileX = 0, cnt = board.width; tileX < cnt; tileX++) { // left to right
+                chess = board.tileXYZToChess(tileX, tileY, tileZ);
+                if (chess === null) {
+                    continue;
+                }
+                moveTo = bejeweled.getChessMoveTo(chess);
+                do {
+                    moveTo.moveToward(1);
+                } while (moveTo.lastMoveResult)
+                if (moveTo.isRunning) {
+                    bejeweled.waitEvent(moveTo, 'complete');
+                }
+            }
+        }
+    };
+
+    var IsPromise = function (obj) {
+        return obj && (typeof obj.then === 'function');
+    };
+
+    const GetValue$9 = Phaser.Utils.Objects.GetValue;
+    Phaser.Structs.Set;
+
+    let State$1 = class State extends BaseState {
+        constructor(bejeweled, config) {
+            super(bejeweled, config);
+            // this.bejeweled = bejeweled;                // Bejeweled
+            // this.boardWrapper = bejeweled.boardWrapper;// Bejeweled.boardWrapper
+
+            this.totalMatchedLinesCount = 0;
+            this.eliminatedPieceArray = undefined;
+
+            // Actions
+            // Eliminating action
+            this.eliminatingAction = GetValue$9(config, 'eliminatingAction', EliminateChess);
+            // on falling chess
+            this.fallingAction = GetValue$9(config, 'fallingAction', FallingAllChess);
+
+            var debug = GetValue$9(config, 'debug', false);
+            if (debug) {
+                this.on('statechange', this.printState, this);
+            }
+        }
+
+        shutdown() {
+            super.shutdown();
+
+            this.eliminatedPieceArray = undefined;
+            // Actions
+            this.eliminatingAction = undefined;
+            this.fallingAction = undefined;
+            return this;
+        }
+
+        destroy() {
+            this.shutdown();
+            return this;
+        }
+
+        setEliminatedPieces(pieces) {
+            if (Array.isArray(pieces)) {
+                pieces = [...new Set(pieces)];
+            }
+            this.eliminatedPieceArray = pieces;
+            return this;
+        }
+
+        getEliminatedPieces() {
+            return this.eliminatedPieceArray;
+        }
+
+        // START
+        enter_START() {
+            this.totalMatchedLinesCount = 0;
+
+            this.bejeweled.emit('match-start', this.boardWrapper.board, this.bejeweled);
+
+            this.next();
+        }
+        next_START() {
+            var pieces = this.getEliminatedPieces();
+            return (!pieces) ? 'MATCH3' : 'ELIMINATING';
+        }
+        // START
+
+        // MATCH3
+        enter_MATCH3() {
+            var matchedLines = this.boardWrapper.getAllMatch();
+
+            this.bejeweled.emit('match', matchedLines, this.boardWrapper.board, this.bejeweled);
+
+            var matchedLinesCount = matchedLines.length;
+            this.totalMatchedLinesCount += matchedLinesCount;
+            var pieces;
+            switch (matchedLinesCount) {
+                case 0:
+                    pieces = [];
+                    break;
+                case 1:
+                    pieces = [...matchedLines[0]];
+                    break;
+                default:
+                    pieces = [];
+                    for (var i = 0; i < matchedLinesCount; i++) {
+                        pieces.push(...matchedLines[i]);
+                    }
+                    break;
+            }
+
+            this.setEliminatedPieces(pieces);
+            this.next();
+        }
+        next_MATCH3() {
+            var nextState;
+            var pieces = this.getEliminatedPieces();
+            if (pieces && (pieces.length === 0)) {
+                nextState = 'END';
+            } else {
+                nextState = 'ELIMINATING';
+            }
+            return nextState;
+        }
+        // MATCH3
+
+        // ELIMINATING
+        enter_ELIMINATING() {
+            var board = this.boardWrapper.board,
+                bejeweled = this.bejeweled,
+                pieces = this.getEliminatedPieces();
+
+            this.bejeweled.emit('eliminate', pieces, board, bejeweled);
+
+            var result = this.eliminatingAction(pieces, board, bejeweled);
+            if (IsPromise(result)) {
+                bejeweled.waitEvent(bejeweled, 'eliminate.complete');
+                result
+                    .then(function () {
+                        bejeweled.emit('eliminate.complete');
+                    });
+            }
+
+            // Remove eliminated chess
+            pieces.forEach(board.removeChess, board);
+
+            // To next state when all completed
+            this.next();
+        }
+        next_ELIMINATING() {
+            return 'FALLING';
+        }
+        exit_ELIMINATING() {
+            this.setEliminatedPieces();
+        }
+        // ELIMINATING
+
+        // FALLING
+        enter_FALLING() {
+            var board = this.boardWrapper.board,
+                bejeweled = this.bejeweled;
+
+            this.bejeweled.emit('fall', board, bejeweled);
+
+            var result = this.fallingAction(board, bejeweled);
+            if (IsPromise(result)) {
+                bejeweled.waitEvent(bejeweled, 'fall.complete');
+                result
+                    .then(function () {
+                        bejeweled.emit('fall.complete');
+                    });
+            }
+
+            // To next state when all completed
+            this.next();
+        }
+        next_FALLING() {
+            return 'FILL';
+        }
+        // FALLING
+
+        // FILL
+        enter_FILL() {
+            this.boardWrapper.fillPrepareRows();
+
+            this.bejeweled.emit('fill', this.boardWrapper.board, this.bejeweled);
+
+            this.next();
+        }
+        next_FILL() {
+            return 'MATCH3';
+        }
+        // FILL
+
+        // END
+        enter_END() {
+            this.bejeweled.emit('match-end', this.boardWrapper.board, this.bejeweled);
+
+            this.emit('complete');
+        }
+        // END
+
+        printState() {
+            console.log('Match state: ' + this.prevState + ' -> ' + this.state);
+        }
+    };
+
+    const GetValue$8 = Phaser.Utils.Objects.GetValue;
 
     class TickTask extends ComponentBase {
         constructor(parent, config) {
@@ -1133,7 +1369,7 @@
             this._isRunning = false;
             this.isPaused = false;
             this.tickingState = false;
-            this.setTickingMode(GetValue$a(config, 'tickingMode', 1));
+            this.setTickingMode(GetValue$8(config, 'tickingMode', 1));
             // boot() later
         }
 
@@ -1237,7 +1473,7 @@
         'always': 2
     };
 
-    const GetValue$9 = Phaser.Utils.Objects.GetValue;
+    const GetValue$7 = Phaser.Utils.Objects.GetValue;
 
     class SceneUpdateTickTask extends TickTask {
         constructor(parent, config) {
@@ -1248,7 +1484,7 @@
 
             // If this.scene is not available, use game's 'step' event
             var defaultEventName = (this.scene) ? 'update' : 'step';
-            this.tickEventName = GetValue$9(config, 'tickEventName', defaultEventName);
+            this.tickEventName = GetValue$7(config, 'tickEventName', defaultEventName);
             this.isSceneTicker = !IsGameUpdateEvent(this.tickEventName);
 
         }
@@ -1284,7 +1520,7 @@
         return (eventName === 'step') || (eventName === 'poststep');
     };
 
-    const GetValue$8 = Phaser.Utils.Objects.GetValue;
+    const GetValue$6 = Phaser.Utils.Objects.GetValue;
     const Clamp = Phaser.Math.Clamp;
 
     class Timer {
@@ -1293,15 +1529,15 @@
         }
 
         resetFromJSON(o) {
-            this.state = GetValue$8(o, 'state', IDLE);
-            this.timeScale = GetValue$8(o, 'timeScale', 1);
-            this.delay = GetValue$8(o, 'delay', 0);
-            this.repeat = GetValue$8(o, 'repeat', 0);
-            this.repeatCounter = GetValue$8(o, 'repeatCounter', 0);
-            this.repeatDelay = GetValue$8(o, 'repeatDelay', 0);
-            this.duration = GetValue$8(o, 'duration', 0);
-            this.nowTime = GetValue$8(o, 'nowTime', 0);
-            this.justRestart = GetValue$8(o, 'justRestart', false);
+            this.state = GetValue$6(o, 'state', IDLE);
+            this.timeScale = GetValue$6(o, 'timeScale', 1);
+            this.delay = GetValue$6(o, 'delay', 0);
+            this.repeat = GetValue$6(o, 'repeat', 0);
+            this.repeatCounter = GetValue$6(o, 'repeatCounter', 0);
+            this.repeatDelay = GetValue$6(o, 'repeatDelay', 0);
+            this.duration = GetValue$6(o, 'duration', 0);
+            this.nowTime = GetValue$6(o, 'nowTime', 0);
+            this.justRestart = GetValue$6(o, 'justRestart', false);
         }
 
         toJSON() {
@@ -1509,19 +1745,19 @@
 
     }
 
-    const GetValue$7 = Phaser.Utils.Objects.GetValue;
-    const GetAdvancedValue$2 = Phaser.Utils.Objects.GetAdvancedValue;
+    const GetValue$5 = Phaser.Utils.Objects.GetValue;
+    const GetAdvancedValue$1 = Phaser.Utils.Objects.GetAdvancedValue;
     const GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
 
     class EaseValueTaskBase extends TimerTickTask {
         resetFromJSON(o) {
-            this.timer.resetFromJSON(GetValue$7(o, 'timer'));
-            this.setEnable(GetValue$7(o, 'enable', true));
-            this.setTarget(GetValue$7(o, 'target', this.parent));
-            this.setDelay(GetAdvancedValue$2(o, 'delay', 0));
-            this.setDuration(GetAdvancedValue$2(o, 'duration', 1000));
-            this.setEase(GetValue$7(o, 'ease', 'Linear'));
-            this.setRepeat(GetValue$7(o, 'repeat', 0));
+            this.timer.resetFromJSON(GetValue$5(o, 'timer'));
+            this.setEnable(GetValue$5(o, 'enable', true));
+            this.setTarget(GetValue$5(o, 'target', this.parent));
+            this.setDelay(GetAdvancedValue$1(o, 'delay', 0));
+            this.setDuration(GetAdvancedValue$1(o, 'duration', 1000));
+            this.setEase(GetValue$5(o, 'ease', 'Linear'));
+            this.setRepeat(GetValue$5(o, 'repeat', 0));
 
             return this;
         }
@@ -1640,343 +1876,6 @@
 
         }
     }
-
-    const GetValue$6 = Phaser.Utils.Objects.GetValue;
-    const GetAdvancedValue$1 = Phaser.Utils.Objects.GetAdvancedValue;
-    const Linear$1 = Phaser.Math.Linear;
-
-    class Fade extends EaseValueTaskBase {
-        constructor(gameObject, config) {
-            super(gameObject, config);
-            // this.parent = gameObject;
-            // this.timer
-
-            this.resetFromJSON(config);
-            this.boot();
-        }
-
-        resetFromJSON(o) {
-            super.resetFromJSON(o);
-
-            this.setMode(GetValue$6(o, 'mode', 0));
-            this.setAlphaRange(
-                GetAdvancedValue$1(o, 'start', this.parent.alpha),
-                GetAdvancedValue$1(o, 'end', 0)
-            );
-            return this;
-        }
-
-        setMode(m) {
-            if (typeof (m) === 'string') {
-                m = MODE$1[m];
-            }
-            this.mode = m;
-            return this;
-        }
-
-        setAlphaRange(start, end) {
-            this.alphaStart = start;
-            this.alphaEnd = end;
-            return this;
-        }
-
-        start() {
-            if (this.timer.isRunning) {
-                return this;
-            }
-
-            var gameObject = this.parent;
-            gameObject.setAlpha(this.alphaStart);
-
-            this.timer
-                .setDelay(this.delay)
-                .setDuration(this.duration)
-                .setRepeat((this.mode === 2) ? -1 : 0);
-
-            super.start();
-            return this;
-        }
-
-        updateTarget(gameObject, timer) {
-            var t = timer.t;
-            if (timer.isOddIteration) {  // Yoyo
-                t = 1 - t;
-            }
-
-            gameObject.alpha = Linear$1(this.alphaStart, this.alphaEnd, t);
-        }
-
-        complete() {
-            super.complete();
-            if (this.mode === 1) {
-                this.parent.destroy();
-                // Will also destroy this behavior
-            }
-            return this;
-        }
-
-    }
-
-    const MODE$1 = {
-        stop: 0,
-        destroy: 1,
-        yoyo: 2
-    };
-
-    var FadeOutDestroy = function (gameObject, duration, destroyMode, fade) {
-        if (destroyMode instanceof Fade) {
-            fade = destroyMode;
-            destroyMode = undefined;
-        }
-
-        if (destroyMode === undefined) {
-            destroyMode = true;
-        }
-
-        var config = {
-            mode: (destroyMode) ? 1 : 0,
-            end: 0,
-            duration: duration,
-        };
-
-        if (fade === undefined) {
-            fade = new Fade(gameObject, config);
-        } else {
-            fade.resetFromJSON(config);
-        }
-        fade.restart();
-
-        return fade;
-    };
-
-    /* 
-    1. Fade-out-destroy chess
-    */
-
-
-    var EliminateChess = function (chessArray, board, bejeweled) {
-        const duration = 500; //ms
-        for (var i = 0, cnt = chessArray.length; i < cnt; i++) {
-            // Destroy chess game object after fading
-            // Chess won't be reused in this case
-            var fade = FadeOutDestroy(chessArray[i], duration);
-            bejeweled.waitEvent(fade, 'complete');
-        }
-    };
-
-    /* 
-    1. Falling down all chess
-    */
-
-    var FallingAllChess = function (board, bejeweled) {
-        var tileZ = bejeweled.getChessTileZ(),
-            chess, moveTo;
-
-        for (var tileY = (board.height - 1); tileY >= 0; tileY--) { // bottom to top
-            for (var tileX = 0, cnt = board.width; tileX < cnt; tileX++) { // left to right
-                chess = board.tileXYZToChess(tileX, tileY, tileZ);
-                if (chess === null) {
-                    continue;
-                }
-                moveTo = bejeweled.getChessMoveTo(chess);
-                do {
-                    moveTo.moveToward(1);
-                } while (moveTo.lastMoveResult)
-                if (moveTo.isRunning) {
-                    bejeweled.waitEvent(moveTo, 'complete');
-                }
-            }
-        }
-    };
-
-    var IsPromise = function (obj) {
-        return obj && (typeof obj.then === 'function');
-    };
-
-    const GetValue$5 = Phaser.Utils.Objects.GetValue;
-    Phaser.Structs.Set;
-
-    let State$1 = class State extends BaseState {
-        constructor(bejeweled, config) {
-            super(bejeweled, config);
-            // this.bejeweled = bejeweled;                // Bejeweled
-            // this.boardWrapper = bejeweled.boardWrapper;// Bejeweled.boardWrapper
-
-            this.totalMatchedLinesCount = 0;
-            this.eliminatedPieceArray = undefined;
-
-            // Actions
-            // Eliminating action
-            this.eliminatingAction = GetValue$5(config, 'eliminatingAction', EliminateChess);
-            // on falling chess
-            this.fallingAction = GetValue$5(config, 'fallingAction', FallingAllChess);
-
-            var debug = GetValue$5(config, 'debug', false);
-            if (debug) {
-                this.on('statechange', this.printState, this);
-            }
-        }
-
-        shutdown() {
-            super.shutdown();
-
-            this.eliminatedPieceArray = undefined;
-            // Actions
-            this.eliminatingAction = undefined;
-            this.fallingAction = undefined;
-            return this;
-        }
-
-        destroy() {
-            this.shutdown();
-            return this;
-        }
-
-        setEliminatedPieces(pieces) {
-            if (Array.isArray(pieces)) {
-                pieces = [...new Set(pieces)];
-            }
-            this.eliminatedPieceArray = pieces;
-            return this;
-        }
-
-        getEliminatedPieces() {
-            return this.eliminatedPieceArray;
-        }
-
-        // START
-        enter_START() {
-            this.totalMatchedLinesCount = 0;
-
-            this.bejeweled.emit('match-start', this.boardWrapper.board, this.bejeweled);
-
-            this.next();
-        }
-        next_START() {
-            var pieces = this.getEliminatedPieces();
-            return (!pieces) ? 'MATCH3' : 'ELIMINATING';
-        }
-        // START
-
-        // MATCH3
-        enter_MATCH3() {
-            var matchedLines = this.boardWrapper.getAllMatch();
-
-            this.bejeweled.emit('match', matchedLines, this.boardWrapper.board, this.bejeweled);
-
-            var matchedLinesCount = matchedLines.length;
-            this.totalMatchedLinesCount += matchedLinesCount;
-            var pieces;
-            switch (matchedLinesCount) {
-                case 0:
-                    pieces = [];
-                    break;
-                case 1:
-                    pieces = [...matchedLines[0]];
-                    break;
-                default:
-                    pieces = [];
-                    for (var i = 0; i < matchedLinesCount; i++) {
-                        pieces.push(...matchedLines[i]);
-                    }
-                    break;
-            }
-
-            this.setEliminatedPieces(pieces);
-            this.next();
-        }
-        next_MATCH3() {
-            var nextState;
-            var pieces = this.getEliminatedPieces();
-            if (pieces && (pieces.length === 0)) {
-                nextState = 'END';
-            } else {
-                nextState = 'ELIMINATING';
-            }
-            return nextState;
-        }
-        // MATCH3
-
-        // ELIMINATING
-        enter_ELIMINATING() {
-            var board = this.boardWrapper.board,
-                bejeweled = this.bejeweled,
-                pieces = this.getEliminatedPieces();
-
-            this.bejeweled.emit('eliminate', pieces, board, bejeweled);
-
-            var result = this.eliminatingAction(pieces, board, bejeweled);
-            if (IsPromise(result)) {
-                bejeweled.waitEvent(bejeweled, 'eliminate.complete');
-                result
-                    .then(function () {
-                        bejeweled.emit('eliminate.complete');
-                    });
-            }
-
-            // Remove eliminated chess
-            pieces.forEach(board.removeChess, board);
-
-            // To next state when all completed
-            this.next();
-        }
-        next_ELIMINATING() {
-            return 'FALLING';
-        }
-        exit_ELIMINATING() {
-            this.setEliminatedPieces();
-        }
-        // ELIMINATING
-
-        // FALLING
-        enter_FALLING() {
-            var board = this.boardWrapper.board,
-                bejeweled = this.bejeweled;
-
-            this.bejeweled.emit('fall', board, bejeweled);
-
-            var result = this.fallingAction(board, bejeweled);
-            if (IsPromise(result)) {
-                bejeweled.waitEvent(bejeweled, 'fall.complete');
-                result
-                    .then(function () {
-                        bejeweled.emit('fall.complete');
-                    });
-            }
-
-            // To next state when all completed
-            this.next();
-        }
-        next_FALLING() {
-            return 'FILL';
-        }
-        // FALLING
-
-        // FILL
-        enter_FILL() {
-            this.boardWrapper.fillPrepareRows();
-
-            this.bejeweled.emit('fill', this.boardWrapper.board, this.bejeweled);
-
-            this.next();
-        }
-        next_FILL() {
-            return 'MATCH3';
-        }
-        // FILL
-
-        // END
-        enter_END() {
-            this.bejeweled.emit('match-end', this.boardWrapper.board, this.bejeweled);
-
-            this.emit('complete');
-        }
-        // END
-
-        printState() {
-            console.log('Match state: ' + this.prevState + ' -> ' + this.state);
-        }
-    };
 
     const GetValue$4 = Phaser.Utils.Objects.GetValue;
     const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;

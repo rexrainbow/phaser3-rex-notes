@@ -42,10 +42,6 @@ class ScrollableBlock extends BaseSizer {
         var child = GetValue(config, 'child', undefined);
         var expand = GetValue(config, 'expand', true);
 
-        if (child.setOrigin) {
-            child.setOrigin(0);
-        }
-
         this.add(child);
         this.sizerChildren = [child];
 
@@ -306,6 +302,14 @@ class ScrollableBlock extends BaseSizer {
 
     setChildOXByPercentage(percentage) {
         this.s = percentage;
+        return this;
+    }
+
+    setChildTopLeftPosition(x, y) {
+        var child = this.child;
+        x += GetDisplayWidth(child) * child.originX;
+        y += GetDisplayHeight(child) * child.originY;
+        child.setPosition(x, y);
         return this;
     }
 }

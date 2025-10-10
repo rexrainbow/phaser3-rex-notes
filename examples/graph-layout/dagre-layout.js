@@ -1,6 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
 import GraphPlugin from '../../plugins/graph-plugin.js';
-import LineShapePlugin from '../../plugins/lineshape-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -28,16 +27,15 @@ class Demo extends Phaser.Scene {
             .addEdge(edgeBD, nodeB, nodeD)
             .addEdge(edgeCD, nodeC, nodeD)
 
-        graph.on('layout.edge', function (edgeGameObject, points) {
-            edgeGameObject.setLine(points);
-        });
+        this.rexGraph.DagreLayout(graph, {
+            onLayoutComplete() {
+                console.log('layout.complete')
+            },
 
-
-        graph.once('layout.complete', function () {
-            console.log('layout.complete')
+            layoutConfig: {
+                rankdir: 'LR'
+            }
         })
-
-        this.rexGraph.DagreLayout(graph, { rankdir: 'LR' })
 
         console.log('done')
 
@@ -55,12 +53,13 @@ var CreateNode = function (scene, color) {
 }
 
 var CreateEdge = function (scene) {
-    return scene.add.rexLineShape({
+    return scene.rexGraph.add.line({
         color: 0xff0000,
         lineWidth: 2,
         lineType: 'poly'
     });
 }
+
 
 var config = {
     type: Phaser.AUTO,
@@ -80,13 +79,6 @@ var config = {
                 mapping: 'rexGraph'
             }
         ],
-        global: [
-            {
-                key: 'rexLineShape',
-                plugin: LineShapePlugin,
-                start: true
-            }
-        ]
     }
 };
 

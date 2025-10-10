@@ -16,11 +16,5 @@ declare namespace DrawBounds {
 declare function DrawBounds(
     gameObjects: Phaser.GameObjects.GameObject[] | Phaser.GameObjects.GameObject,
     graphics: Phaser.GameObjects.Graphics,
-    config?: number,
-): void;
-
-declare function DrawBounds(
-    gameObjects: Phaser.GameObjects.GameObject[] | Phaser.GameObjects.GameObject,
-    graphics: Phaser.GameObjects.Graphics,
-    config?: DrawBounds.IConfig
+    config?: number | DrawBounds.IConfig
 ): void;

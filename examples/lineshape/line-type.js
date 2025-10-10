@@ -22,39 +22,35 @@ class Demo extends Phaser.Scene {
     }
 }
 
-var GetPoints = function (offsetX, offsetY) {
-    return [
-        { x: offsetX, y: offsetY },
-        { x: offsetX + 100, y: offsetY },
-        { x: offsetX + 100, y: offsetY - 100 },
-        { x: offsetX + 200, y: offsetY - 100 },
-    ]
-}
-
-var CreateLine = function (scene, startX, startY, lineType, graphics) {
-    var points = GetPoints(startX, startY);
-    var curve = scene.add.rexLineShape({
-        points: points,
+var CreateLine = function (scene, x, y, lineType, graphics) {
+    var line = scene.add.rexLineShape({
+        points: [
+    { x: 0, y: 0 },
+    { x: 100, y: 0 },
+    { x: 100, y: - 100 },
+    { x: 200, y: - 100 },
+],
         color: 0xffffff,
         lineType: lineType
-    })
-    graphics.lineStyle(2, 0xff0000, 0.5).strokeRectShape(curve.getBounds());
+    }).setPosition(x, y)
+    graphics.lineStyle(2, 0xff0000, 0.5).strokeRectShape(line.getBounds());
 
+    var points = line.getPoints();
     for (var i = 0, cnt = points.length; i < cnt; i++) {
         graphics.fillStyle(0xff0000).fillPoint(points[i].x, points[i].y, 10);
     }
 
 
-    curve
+    line
         .setInteractive()
         .on('pointerover', function () {
-            curve.setStrokeStyle(2, 0x00ff00)
+            line.setStrokeStyle(2, 0x00ff00)
         })
         .on('pointerout', function () {
-            curve.setStrokeStyle(2, 0xffffff)
+            line.setStrokeStyle(2, 0xffffff)
         })
 
-    return curve;
+    return line;
 }
 
 var config = {

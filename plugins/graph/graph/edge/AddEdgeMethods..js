@@ -12,14 +12,19 @@ const DIRMODE = {
 };
 
 export default {
-    addEdge(edgeGameObject, nodeAGameObject, nodeBGameObject, dir, attributes) {
-        if (this.isEdge(edgeGameObject)) {
-            return this;
+    isEdge(gameObejct) {
+        // uid or game object
+        var uid = GetObjUID(gameObejct, false);
+        if (uid === null) {
+            return false;
         }
 
-        if (IsPlainObject(dir)) {
-            attributes = dir;
-            dir == undefined;
+        return this.graph.hasEdge(uid);
+    },
+
+    addEdge(edgeGameObject, nodeAGameObject, nodeBGameObject, dir, attributes, edgeUID) {
+        if (this.isEdge(edgeGameObject)) {
+            return this;
         }
 
         if (dir === undefined) {
@@ -29,10 +34,15 @@ export default {
         }
 
         // Add node to graph
-        this.addNode(nodeAGameObject).addNode(nodeBGameObject);
+        if (typeof (nodeAGameObject) !== 'string') {
+            this.addNode(nodeAGameObject)
+        }
+        if (typeof (nodeBGameObject) !== 'string') {
+            this.addNode(nodeBGameObject);
+        }
 
         // Add edge
-        GetGraphItem(edgeGameObject).setGraph(this);
+        GetGraphItem(edgeGameObject, edgeUID).setGraph(this);
 
         var edgeUID = GetObjUID(edgeGameObject);
         var nodeAUID = GetObjUID(nodeAGameObject);
@@ -58,6 +68,6 @@ export default {
 
 
         return this;
-    }
+    },
 
 };

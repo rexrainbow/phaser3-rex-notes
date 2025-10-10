@@ -31,7 +31,9 @@ class Line extends BaseShapes {
         if (pointRadius === undefined) { pointRadius = 10; }
 
         super(scene);
-        this.type = 'rexPath';
+        this.type = 'rexLine';
+
+        this.points = [];
         this.padding = {};
         this.bounds = undefined;
 
@@ -55,7 +57,24 @@ class Line extends BaseShapes {
             this.lineType = lineType;
         }
 
-        this.points = points;
+        this.points.length = 0;
+
+        var x = 0, y = 0;
+        if (points.length > 0) {
+            x = points[0].x;
+            y = points[0].y;
+        }
+        this.x = x;
+        this.y = y;
+
+        for (var i = 0, cnt = points.length; i < cnt; i++) {
+            var p = points[i];
+            this.points.push({
+                x: p.x - x,
+                y: p.y - y
+            })
+        }
+
         this.dirty = true;
 
         if (this.geom.length > 0) {
@@ -80,6 +99,24 @@ class Line extends BaseShapes {
         }
 
         return this;
+    }
+
+    getPoints(out) {
+        if (out === undefined) {
+            out = [];
+        }
+        var x = this.x;
+        var y = this.y;    
+        var points = this.points;
+        for (var i = 0, cnt = points.length; i < cnt; i++) {
+            var p = points[i]
+            out.push({
+                x: p.x + x,
+                y: p.y + y,
+            })
+        }
+
+        return out;
     }
 }
 

@@ -1,5 +1,6 @@
 // import * as Phaser from 'phaser';
-import ContainerLite from '../../../plugins/containerlite.js';
+import ContainerLite from '../../../plugins/containerlite';
+import GetBoundsConfig from '../../../plugins/utils/bounds/GetBoundsConfig';
 import Anchor from '../anchor/Anchor';
 import Click from '../click/Click';
 import ClickOutside from '../clickoutside/ClickOutside';
@@ -15,13 +16,7 @@ declare namespace BaseSizer {
         'center-top' | 'center-center' | 'center-bottom' |
         'right-top' | 'right-center' | 'right-bottom';
 
-    type PaddingTypes = number |
-    {
-        left?: number,
-        right?: number,
-        top?: number,
-        bottom?: number
-    };
+    type PaddingTypes = GetBoundsConfig.PaddingConfigType;
 
     interface IConfig {
         space?: {

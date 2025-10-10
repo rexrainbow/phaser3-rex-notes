@@ -2,14 +2,27 @@ import GetGraphItem from '../../graphitem/GetGraphItem.js';
 import GetObjUID from '../../graphitem/GetObjUID.js';
 
 export default {
-    addNode(gameObejct, attributes) {
+    isNode(gameObejct) {
+        // uid or game object
+        var uid = GetObjUID(gameObejct, false);
+        if (uid === null) {
+            return false;
+        }
+
+        return this.graph.hasNode(uid);
+    },
+
+    addNode(gameObejct, attributes, nodeUID) {
         if (this.isNode(gameObejct)) {
             return this;
         }
 
-        GetGraphItem(gameObejct).setGraph(this);
+        GetGraphItem(gameObejct, nodeUID).setGraph(this);
 
-        var nodeUID = GetObjUID(gameObejct);
+        if (nodeUID === undefined) {
+            nodeUID = GetObjUID(gameObejct);
+        }
+
         this.graph.addNode(nodeUID, attributes);
 
         return this;
@@ -20,5 +33,6 @@ export default {
             this.addNode(gameObjects[i], { ...attributes });
         }
         return this;
-    }
+    },
+
 }

@@ -1,5 +1,6 @@
 // import * as Phaser from 'phaser';
-import BaseSizer from '../basesizer/BaseSizer.js';
+import BaseSizer from '../basesizer/BaseSizer';
+import GetBoundsConfig from '../../../plugins/utils/bounds/GetBoundsConfig.js';
 
 export default FixWidthSizer;
 
@@ -7,13 +8,7 @@ declare namespace FixWidthSizer {
     type AlignTypes = 0 | 1 | 2 | 3 | 4 | 5 |
         'left' | 'right' | 'center' | 'justify' | 'justify-left' | 'justify-right' | 'justify-center';
 
-    type PaddingTypes = number |
-    {
-        left?: number,
-        right?: number,
-        top?: number,
-        bottom?: number
-    };
+    type PaddingTypes = GetBoundsConfig.PaddingConfigType;
 
     interface IConfig extends BaseSizer.IConfig {
         x?: number,

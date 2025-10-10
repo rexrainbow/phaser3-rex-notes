@@ -10,11 +10,11 @@ var LayoutConfig = {
     placeGameObjects: PlaceGameObjects,
 }
 
-var Layout = async function (graph, userConfig) {
-    if (userConfig === undefined) {
-        userConfig = {};
+var Layout = async function (graph, config) {
+    if (config === undefined) {
+        config = {};
     }
-    await LayoutBase(LayoutConfig, graph, userConfig);
+    await LayoutBase(LayoutConfig, graph, config);
 }
 
 export default Layout;

@@ -499,6 +499,10 @@ nav:
     - Mini board:
         - Mini board: board-miniboard.md
     - Bejeweled: board-bejeweled.md
+- Graph:
+    - Graph: graph.md
+    - Build Graph from text: graph-build-from-text.md
+    - ELK layout: graph-elk-layout.md
 - Firebase:
     - Overview : firebase-overview.md
     - Authentication: firebase-auth.md

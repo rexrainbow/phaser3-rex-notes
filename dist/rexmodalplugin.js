@@ -2671,7 +2671,7 @@
         }
 
         if (gameObject.getTopLeft) {
-            return gameObject.getTopLeft(output);
+            return gameObject.getTopLeft(output, includeParent);
         }
 
         output.x = gameObject.x - (GetDisplayWidth(gameObject) * gameObject.originX);
@@ -2691,7 +2691,7 @@
         }
 
         if (gameObject.getTopRight) {
-            return gameObject.getTopRight(output);
+            return gameObject.getTopRight(output, includeParent);
         }
 
         output.x = (gameObject.x - (GetDisplayWidth(gameObject) * gameObject.originX)) + GetDisplayWidth(gameObject);
@@ -2711,7 +2711,7 @@
         }
 
         if (gameObject.getBottomLeft) {
-            return gameObject.getBottomLeft(output);
+            return gameObject.getBottomLeft(output, includeParent);
         }
 
         output.x = gameObject.x - (GetDisplayWidth(gameObject) * gameObject.originX);
@@ -2731,7 +2731,7 @@
         }
 
         if (gameObject.getBottomRight) {
-            return gameObject.getBottomRight(output);
+            return gameObject.getBottomRight(output, includeParent);
         }
 
         output.x = (gameObject.x - (GetDisplayWidth(gameObject) * gameObject.originX)) + GetDisplayWidth(gameObject);

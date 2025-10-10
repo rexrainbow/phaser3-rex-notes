@@ -35,7 +35,7 @@ class Demo extends Phaser.Scene {
 
 
         var print = this.add.text(0, 0, '');
-        this.input.on('pointerdown', function () {
+        this.events.on('update', function (time, delta) {
             var s = ''
             btns.forEach(function (btn) {
                 if (btn.inTouching.isInTouching) {
@@ -43,7 +43,7 @@ class Demo extends Phaser.Scene {
                 }
             })
             print.text = s;
-        })
+        });
     }
 
     update() { }

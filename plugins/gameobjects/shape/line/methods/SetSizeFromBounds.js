@@ -10,8 +10,6 @@ var SetSizeFromBounds = function (line, bounds) {
     // Origin
     this.setOrigin(-x / width, -y / height);
     // Position
-    var point = this.points[0];
-    this.setPosition(point.x, point.y);
     line.offset(-x, -y);
 }
 

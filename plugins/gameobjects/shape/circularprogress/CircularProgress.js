@@ -10,6 +10,9 @@ const DefaultStartAngle = Phaser.Math.DegToRad(270);
 
 class CircularProgress extends ProgressBase(BaseShapes) {
     constructor(scene, x, y, radius, barColor, value, config) {
+        var barAlpha;
+        var trackColor, trackAlpha;
+        var centerColor, centerAlpha;
         if (IsPlainObject(x)) {
             config = x;
             x = GetValue(config, 'x', 0);
@@ -18,6 +21,12 @@ class CircularProgress extends ProgressBase(BaseShapes) {
             barColor = GetValue(config, 'barColor', undefined);
             value = GetValue(config, 'value', 0);
         }
+
+        barAlpha = GetValue(config, 'barAlpha', 1);
+        trackColor = GetValue(config, 'trackColor', undefined);
+        trackAlpha = GetValue(config, 'trackAlpha', 1);
+        centerColor = GetValue(config, 'centerColor', undefined);
+        centerAlpha = GetValue(config, 'centerAlpha', 1);
 
         if (radius === undefined) { radius = 1; }
 
@@ -28,9 +37,9 @@ class CircularProgress extends ProgressBase(BaseShapes) {
         this.bootProgressBase(config);
 
         this.setRadius(radius);
-        this.setTrackColor(GetValue(config, 'trackColor', undefined));
-        this.setBarColor(barColor);
-        this.setCenterColor(GetValue(config, 'centerColor', undefined));
+        this.setTrackColor(trackColor, trackAlpha);
+        this.setBarColor(barColor, barAlpha);
+        this.setCenterColor(centerColor, centerAlpha);
 
         this.setThickness(GetValue(config, 'thickness', 0.2));
         this.setStartAngle(GetValue(config, 'startAngle', DefaultStartAngle));
@@ -79,8 +88,23 @@ class CircularProgress extends ProgressBase(BaseShapes) {
         this._trackColor = value;
     }
 
-    setTrackColor(color) {
+    get trackAlpha() {
+        return this._trackColor;
+    }
+
+    set trackAlpha(value) {
+        this.dirty = this.dirty || (this._trackAlpha != value);
+        this._trackAlpha = value;
+    }
+
+
+    setTrackColor(color, alpha) {
+        if (alpha === undefined) {
+            alpha = 1;
+        }
+
         this.trackColor = color;
+        this.trackAlpha = alpha;
         return this;
     }
 
@@ -93,8 +117,22 @@ class CircularProgress extends ProgressBase(BaseShapes) {
         this._barColor = value;
     }
 
-    setBarColor(color) {
+    get barAlpha() {
+        return this._barAlpha;
+    }
+
+    set barAlpha(value) {
+        this.dirty = this.dirty || (this._barAlpha != value);
+        this._barAlpha = value;
+    }
+
+    setBarColor(color, alpha) {
+        if (alpha === undefined) {
+            alpha = 1;
+        }
+
         this.barColor = color;
+        this.barAlpha = alpha;
         return this;
     }
 
@@ -153,8 +191,22 @@ class CircularProgress extends ProgressBase(BaseShapes) {
         this._centerColor = value;
     }
 
-    setCenterColor(color) {
+    get centerAlpha() {
+        return this._centerAlpha;
+    }
+
+    set centerAlpha(value) {
+        this.dirty = this.dirty || (this._centerAlpha != value);
+        this._centerAlpha = value;
+    }
+
+    setCenterColor(color, alpha) {
+        if (alpha === undefined) {
+            alpha = 1;
+        }
+
         this.centerColor = color;
+        this.centerAlpha = alpha;
         return this;
     }
 

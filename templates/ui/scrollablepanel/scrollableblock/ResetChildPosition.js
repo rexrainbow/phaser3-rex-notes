@@ -1,4 +1,5 @@
 var ResetChildPosition = function () {
+    // (x, y): top-left position of child
     var x = this.left;
     var y = this.top;
 
@@ -16,7 +17,7 @@ var ResetChildPosition = function () {
             break;
     }
 
-    this.child.setPosition(x, y);
+    this.setChildTopLeftPosition(x, y);
     this.resetChildPositionState(this.child);
 
     this.setMaskChildrenFlag();
