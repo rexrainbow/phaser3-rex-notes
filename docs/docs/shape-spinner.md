@@ -443,6 +443,7 @@ See [Shape class](shape-custom-shapes.md#shape-class)
 ### Prompt
 
 [Prompt for generating customize logic](prompts/shape-spinner-custom.txt)
+[Demo](https://chatgpt.com/share/68e92b21-f668-800f-8865-2b376ff86223)
 
 ### Other properties
 
