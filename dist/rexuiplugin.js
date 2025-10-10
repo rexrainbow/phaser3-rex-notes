@@ -17197,7 +17197,7 @@ void main (void) {
         }
 
         if (gameObject.getTopLeft) {
-            return gameObject.getTopLeft(output);
+            return gameObject.getTopLeft(output, includeParent);
         }
 
         output.x = gameObject.x - (GetDisplayWidth(gameObject) * gameObject.originX);
@@ -17217,7 +17217,7 @@ void main (void) {
         }
 
         if (gameObject.getTopRight) {
-            return gameObject.getTopRight(output);
+            return gameObject.getTopRight(output, includeParent);
         }
 
         output.x = (gameObject.x - (GetDisplayWidth(gameObject) * gameObject.originX)) + GetDisplayWidth(gameObject);
@@ -17237,7 +17237,7 @@ void main (void) {
         }
 
         if (gameObject.getBottomLeft) {
-            return gameObject.getBottomLeft(output);
+            return gameObject.getBottomLeft(output, includeParent);
         }
 
         output.x = gameObject.x - (GetDisplayWidth(gameObject) * gameObject.originX);
@@ -17257,7 +17257,7 @@ void main (void) {
         }
 
         if (gameObject.getBottomRight) {
-            return gameObject.getBottomRight(output);
+            return gameObject.getBottomRight(output, includeParent);
         }
 
         output.x = (gameObject.x - (GetDisplayWidth(gameObject) * gameObject.originX)) + GetDisplayWidth(gameObject);
@@ -17305,50 +17305,52 @@ void main (void) {
     const GetValue$3y = Phaser.Utils.Objects.GetValue;
 
     var DrawBounds$2 = function (gameObjects, graphics, config) {
-        var strokeColor, lineWidth, fillColor, fillAlpha, padding;
+        var strokeColor, lineWidth, fillColor, fillAlpha, padding, includeParent;
         if (typeof (config) === 'number') {
             strokeColor = config;
         } else {
             strokeColor = GetValue$3y(config, 'color');
             lineWidth = GetValue$3y(config, 'lineWidth');
             fillColor = GetValue$3y(config, 'fillColor');
-            fillAlpha = GetValue$3y(config, 'fillAlpha', 1);
-            padding = GetValue$3y(config, 'padding', 0);
+            fillAlpha = GetValue$3y(config, 'fillAlpha');
+            padding = GetValue$3y(config, 'padding');
+            includeParent = GetValue$3y(config, 'includeParent');
         }
+
+        if (strokeColor === undefined) { strokeColor = 0xffffff; }
+        if (lineWidth === undefined) { lineWidth = 1; }
+        if (fillColor === undefined) { fillColor = null; }    if (fillAlpha === undefined) { fillAlpha = 1; }    if (padding === undefined) { padding = 0; }
+        if (includeParent === undefined) { includeParent = true; }
 
         if (Array.isArray(gameObjects)) {
             for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-                Draw(gameObjects[i], graphics, strokeColor, lineWidth, fillColor, fillAlpha, padding);
+                Draw(gameObjects[i], graphics, strokeColor, lineWidth, fillColor, fillAlpha, padding, includeParent);
             }
         } else {
-            Draw(gameObjects, graphics, strokeColor, lineWidth, fillColor, fillAlpha, padding);
+            Draw(gameObjects, graphics, strokeColor, lineWidth, fillColor, fillAlpha, padding, includeParent);
         }
     };
 
-    var Draw = function (gameObject, graphics, strokeColor, lineWidth, fillColor, fillAlpha, padding) {
+    var Draw = function (gameObject, graphics, strokeColor, lineWidth, fillColor, fillAlpha, padding, includeParent) {
         var canDrawBound = gameObject.getBounds ||
             ((gameObject.width !== undefined) && (gameObject.height !== undefined));
         if (!canDrawBound) {
             return;
         }
 
-        if (strokeColor === undefined) { strokeColor = 0xffffff; }
-        if (lineWidth === undefined) { lineWidth = 1; }
-        if (fillColor === undefined) { fillColor = null; }    if (fillAlpha === undefined) { fillAlpha = 1; }    if (padding === undefined) { padding = 0; }
-
-        var p0 = GetTopLeft(gameObject, Points[0]);
+        var p0 = GetTopLeft(gameObject, Points[0], includeParent);
         p0.x -= padding;
         p0.y -= padding;
 
-        var p1 = GetTopRight(gameObject, Points[1]);
+        var p1 = GetTopRight(gameObject, Points[1], includeParent);
         p1.x += padding;
         p1.y -= padding;
 
-        var p2 = GetBottomRight(gameObject, Points[2]);
+        var p2 = GetBottomRight(gameObject, Points[2], includeParent);
         p2.x += padding;
         p2.y += padding;
 
-        var p3 = GetBottomLeft(gameObject, Points[3]);
+        var p3 = GetBottomLeft(gameObject, Points[3], includeParent);
         p3.x -= padding;
         p3.y += padding;
 
@@ -28954,7 +28956,7 @@ void main (void) {
             }
 
             if (this.isStroked) {
-                StrokePathWebGL(drawingContext, submitter, calcMatrix, this, this, alpha, dx, dy);
+                StrokePathWebGL(drawingContext, submitter, calcMatrix, gameObject, this, alpha, dx, dy);
             }
         }
 
@@ -29335,7 +29337,7 @@ void main (void) {
 
         webglRender(drawingContext, submitter, calcMatrix, gameObject, alpha, dx, dy) {
             if (this.isFilled) {
-                var fillTintColor = Utils$1.getTintAppendFloatAlpha(src.fillColor, src.fillAlpha * alpha);
+                var fillTintColor = Utils$1.getTintAppendFloatAlpha(this.fillColor, this.fillAlpha * alpha);
 
                 var x0 = this.x0 - dx;
                 var y0 = this.y0 - dy;
@@ -29363,7 +29365,7 @@ void main (void) {
             }
 
             if (this.isStroked) {
-                StrokePathWebGL(drawingContext, submitter, calcMatrix, this, this, alpha, dx, dy);
+                StrokePathWebGL(drawingContext, submitter, calcMatrix, gameObject, this, alpha, dx, dy);
             }
         }
 
@@ -30922,7 +30924,7 @@ void main (void) {
             // Track shape
             var trackShape = this.getShape('track');
             if ((this.trackColor != null) && (this.thickness > 0)) {
-                trackShape.fillStyle(this.trackColor);
+                trackShape.fillStyle(this.trackColor, this.trackAlpha);
                 FillArc(trackShape, x, x, barOuterRadius, barInnerRadius, 0, 360, false);
             } else {
                 trackShape.reset();
@@ -30943,7 +30945,7 @@ void main (void) {
                     endAngle = deltaAngle + startAngle;
                 }
 
-                barShape.fillStyle(this.barColor);
+                barShape.fillStyle(this.barColor, this.barAlpha);
                 FillArc(barShape, x, x, barOuterRadius + 1, barInnerRadius - 1, startAngle, endAngle, false);
 
             } else {
@@ -30956,7 +30958,7 @@ void main (void) {
                 centerShape
                     .setCenterPosition(x, x)
                     .setRadius(barInnerRadius)
-                    .fillStyle(this.centerColor);
+                    .fillStyle(this.centerColor, this.centerAlpha);
             } else {
                 centerShape.reset();
             }
@@ -30971,6 +30973,9 @@ void main (void) {
 
     let CircularProgress$1 = class CircularProgress extends ProgressBase(BaseShapes) {
         constructor(scene, x, y, radius, barColor, value, config) {
+            var barAlpha;
+            var trackColor, trackAlpha;
+            var centerColor, centerAlpha;
             if (IsPlainObject$I(x)) {
                 config = x;
                 x = GetValue$2_(config, 'x', 0);
@@ -30979,6 +30984,12 @@ void main (void) {
                 barColor = GetValue$2_(config, 'barColor', undefined);
                 value = GetValue$2_(config, 'value', 0);
             }
+
+            barAlpha = GetValue$2_(config, 'barAlpha', 1);
+            trackColor = GetValue$2_(config, 'trackColor', undefined);
+            trackAlpha = GetValue$2_(config, 'trackAlpha', 1);
+            centerColor = GetValue$2_(config, 'centerColor', undefined);
+            centerAlpha = GetValue$2_(config, 'centerAlpha', 1);
 
             if (radius === undefined) { radius = 1; }
 
@@ -30989,9 +31000,9 @@ void main (void) {
             this.bootProgressBase(config);
 
             this.setRadius(radius);
-            this.setTrackColor(GetValue$2_(config, 'trackColor', undefined));
-            this.setBarColor(barColor);
-            this.setCenterColor(GetValue$2_(config, 'centerColor', undefined));
+            this.setTrackColor(trackColor, trackAlpha);
+            this.setBarColor(barColor, barAlpha);
+            this.setCenterColor(centerColor, centerAlpha);
 
             this.setThickness(GetValue$2_(config, 'thickness', 0.2));
             this.setStartAngle(GetValue$2_(config, 'startAngle', DefaultStartAngle$1));
@@ -31040,8 +31051,23 @@ void main (void) {
             this._trackColor = value;
         }
 
-        setTrackColor(color) {
+        get trackAlpha() {
+            return this._trackColor;
+        }
+
+        set trackAlpha(value) {
+            this.dirty = this.dirty || (this._trackAlpha != value);
+            this._trackAlpha = value;
+        }
+
+
+        setTrackColor(color, alpha) {
+            if (alpha === undefined) {
+                alpha = 1;
+            }
+
             this.trackColor = color;
+            this.trackAlpha = alpha;
             return this;
         }
 
@@ -31054,8 +31080,22 @@ void main (void) {
             this._barColor = value;
         }
 
-        setBarColor(color) {
+        get barAlpha() {
+            return this._barAlpha;
+        }
+
+        set barAlpha(value) {
+            this.dirty = this.dirty || (this._barAlpha != value);
+            this._barAlpha = value;
+        }
+
+        setBarColor(color, alpha) {
+            if (alpha === undefined) {
+                alpha = 1;
+            }
+
             this.barColor = color;
+            this.barAlpha = alpha;
             return this;
         }
 
@@ -31114,8 +31154,22 @@ void main (void) {
             this._centerColor = value;
         }
 
-        setCenterColor(color) {
+        get centerAlpha() {
+            return this._centerAlpha;
+        }
+
+        set centerAlpha(value) {
+            this.dirty = this.dirty || (this._centerAlpha != value);
+            this._centerAlpha = value;
+        }
+
+        setCenterColor(color, alpha) {
+            if (alpha === undefined) {
+                alpha = 1;
+            }
+
             this.centerColor = color;
+            this.centerAlpha = alpha;
             return this;
         }
 
@@ -64457,6 +64511,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
     };
 
     var ResetChildPosition = function () {
+        // (x, y): top-left position of child
         var x = this.left;
         var y = this.top;
 
@@ -64474,7 +64529,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 break;
         }
 
-        this.child.setPosition(x, y);
+        this.setChildTopLeftPosition(x, y);
         this.resetChildPositionState(this.child);
 
         this.setMaskChildrenFlag();
@@ -64573,10 +64628,6 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             // No background object, and child does not have padding
             var child = GetValue$15(config, 'child', undefined);
             var expand = GetValue$15(config, 'expand', true);
-
-            if (child.setOrigin) {
-                child.setOrigin(0);
-            }
 
             this.add(child);
             this.sizerChildren = [child];
@@ -64838,6 +64889,14 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
         setChildOXByPercentage(percentage) {
             this.s = percentage;
+            return this;
+        }
+
+        setChildTopLeftPosition(x, y) {
+            var child = this.child;
+            x += GetDisplayWidth(child) * child.originX;
+            y += GetDisplayHeight(child) * child.originY;
+            child.setPosition(x, y);
             return this;
         }
     }

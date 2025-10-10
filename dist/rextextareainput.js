@@ -1944,7 +1944,7 @@
         }
 
         if (gameObject.getTopLeft) {
-            return gameObject.getTopLeft(output);
+            return gameObject.getTopLeft(output, includeParent);
         }
 
         output.x = gameObject.x - (GetDisplayWidth(gameObject) * gameObject.originX);
@@ -1964,7 +1964,7 @@
         }
 
         if (gameObject.getTopRight) {
-            return gameObject.getTopRight(output);
+            return gameObject.getTopRight(output, includeParent);
         }
 
         output.x = (gameObject.x - (GetDisplayWidth(gameObject) * gameObject.originX)) + GetDisplayWidth(gameObject);
@@ -1984,7 +1984,7 @@
         }
 
         if (gameObject.getBottomLeft) {
-            return gameObject.getBottomLeft(output);
+            return gameObject.getBottomLeft(output, includeParent);
         }
 
         output.x = gameObject.x - (GetDisplayWidth(gameObject) * gameObject.originX);
@@ -2004,7 +2004,7 @@
         }
 
         if (gameObject.getBottomRight) {
-            return gameObject.getBottomRight(output);
+            return gameObject.getBottomRight(output, includeParent);
         }
 
         output.x = (gameObject.x - (GetDisplayWidth(gameObject) * gameObject.originX)) + GetDisplayWidth(gameObject);
@@ -2253,50 +2253,52 @@
     const GetValue$1l = Phaser.Utils.Objects.GetValue;
 
     var DrawBounds$2 = function (gameObjects, graphics, config) {
-        var strokeColor, lineWidth, fillColor, fillAlpha, padding;
+        var strokeColor, lineWidth, fillColor, fillAlpha, padding, includeParent;
         if (typeof (config) === 'number') {
             strokeColor = config;
         } else {
             strokeColor = GetValue$1l(config, 'color');
             lineWidth = GetValue$1l(config, 'lineWidth');
             fillColor = GetValue$1l(config, 'fillColor');
-            fillAlpha = GetValue$1l(config, 'fillAlpha', 1);
-            padding = GetValue$1l(config, 'padding', 0);
+            fillAlpha = GetValue$1l(config, 'fillAlpha');
+            padding = GetValue$1l(config, 'padding');
+            includeParent = GetValue$1l(config, 'includeParent');
         }
+
+        if (strokeColor === undefined) { strokeColor = 0xffffff; }
+        if (lineWidth === undefined) { lineWidth = 1; }
+        if (fillColor === undefined) { fillColor = null; }    if (fillAlpha === undefined) { fillAlpha = 1; }    if (padding === undefined) { padding = 0; }
+        if (includeParent === undefined) { includeParent = true; }
 
         if (Array.isArray(gameObjects)) {
             for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-                Draw(gameObjects[i], graphics, strokeColor, lineWidth, fillColor, fillAlpha, padding);
+                Draw(gameObjects[i], graphics, strokeColor, lineWidth, fillColor, fillAlpha, padding, includeParent);
             }
         } else {
-            Draw(gameObjects, graphics, strokeColor, lineWidth, fillColor, fillAlpha, padding);
+            Draw(gameObjects, graphics, strokeColor, lineWidth, fillColor, fillAlpha, padding, includeParent);
         }
     };
 
-    var Draw = function (gameObject, graphics, strokeColor, lineWidth, fillColor, fillAlpha, padding) {
+    var Draw = function (gameObject, graphics, strokeColor, lineWidth, fillColor, fillAlpha, padding, includeParent) {
         var canDrawBound = gameObject.getBounds ||
             ((gameObject.width !== undefined) && (gameObject.height !== undefined));
         if (!canDrawBound) {
             return;
         }
 
-        if (strokeColor === undefined) { strokeColor = 0xffffff; }
-        if (lineWidth === undefined) { lineWidth = 1; }
-        if (fillColor === undefined) { fillColor = null; }    if (fillAlpha === undefined) { fillAlpha = 1; }    if (padding === undefined) { padding = 0; }
-
-        var p0 = GetTopLeft(gameObject, Points[0]);
+        var p0 = GetTopLeft(gameObject, Points[0], includeParent);
         p0.x -= padding;
         p0.y -= padding;
 
-        var p1 = GetTopRight(gameObject, Points[1]);
+        var p1 = GetTopRight(gameObject, Points[1], includeParent);
         p1.x += padding;
         p1.y -= padding;
 
-        var p2 = GetBottomRight(gameObject, Points[2]);
+        var p2 = GetBottomRight(gameObject, Points[2], includeParent);
         p2.x += padding;
         p2.y += padding;
 
-        var p3 = GetBottomLeft(gameObject, Points[3]);
+        var p3 = GetBottomLeft(gameObject, Points[3], includeParent);
         p3.x -= padding;
         p3.y += padding;
 
