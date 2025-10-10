@@ -309,3 +309,96 @@ new Phaser.Game(config);
 * **Rotating box**: first half fill; second half `rotateAround(cx, cy, angle)`.
 
 > This document provides **all authority information GPT needs**—no external files required.
+
+---
+
+## 10) Build a Live Demo (drop-in `.html` that runs immediately)
+
+> **Goal**: In addition to `Add<SpinnerName>Spinner(...)` and the minimal scene, include a **complete HTML file** in the reply. Save as `demo.html` and open in a browser to see the spinner.
+
+**Rules (bake these into your reply template):**
+
+1. Load Phaser 3 from the official CDN.
+2. In `preload()`, load the rexSpinner scene plugin using `this.load.scenePlugin(...)` (GitHub raw URL).
+3. In `create()`, call the just-generated `Add<SpinnerName>Spinner(...)`.
+4. Emit the HTML below and replace the `<Add...>` call, its parameters, and colors to match the user’s request.
+
+**HTML template (runnable as-is):**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Custom Spinner Live Demo</title>
+  <style>
+    html, body { height: 100%; margin: 0; background:#222; }
+    #game-root { width: 100%; height: 100%; }
+  </style>
+  <!-- Phaser CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3/dist/phaser.js"></script>
+</head>
+<body>
+  <div id="game-root"></div>
+  <script>
+    class Demo extends Phaser.Scene {
+      constructor(){ super('demo'); }
+      preload(){
+        this.load.scenePlugin({
+          key: 'rexspinnerplugin',
+          url: 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexspinnerplugin.min.js',
+          sceneKey: 'rexSpinner'
+        });
+      }
+      create(){
+        // Call the spinner function you generated in your reply:
+        AddOrbitDotsSpinner(this, 400, 300, 120, 120, {
+          count: 10, thickness: 0.15, ring: 0.78, duration: 900
+        });
+      }
+    }
+
+    // === Example spinner definition (replace/extend with the user-specific spinner you produce) ===
+    function AddOrbitDotsSpinner(scene, x, y, width, height, options = {}) {
+      const { count = 12, thickness = 0.12, ring = 0.8, duration = 1000, start = true } = options;
+      return scene.rexSpinner.add.custom({
+        x, y, width, height, duration, start,
+        create: { circle: Array.from({ length: count }, (_, i) => `dot${i}`) },
+        update: function () {
+          const cx = this.centerX, cy = this.centerY, R = this.radius;
+          const t = this.value; // 0..1
+          const shapes = this.getShapes();
+          const angleStep = 360 / count;
+          const ringR = R * ring;
+          const dotR = R * thickness;
+          for (let i = 0; i < count; i++) {
+            const phase = (i / count + t) % 1;
+            const deg = i * angleStep + phase * 360;
+            const rad = Phaser.Math.DEG_TO_RAD * deg;
+            const x = cx + ringR * Math.cos(rad);
+            const y = cy + ringR * Math.sin(rad);
+            const s = shapes[i];
+            const alpha = Phaser.Math.Linear(0.35, 1, 1 - phase);
+            s.setCenterPosition(x, y).setRadius(dotR, dotR).fillStyle(this.color, alpha);
+          }
+        }
+      });
+    }
+
+    const config = {
+      type: Phaser.AUTO,
+      parent: 'game-root',
+      width: 800,
+      height: 600,
+      backgroundColor: '#222222',
+      scale: { mode: Phaser.Scale.FIT, autoCenter: Phaser.Scale.CENTER_BOTH },
+      scene: Demo,
+    };
+    new Phaser.Game(config);
+  </script>
+</body>
+</html>
+```
+
+> When delivering, replace the `AddOrbitDotsSpinner(...)` call and the function body above with the spinner you generated for the user, and the demo will run instantly.

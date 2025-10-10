@@ -11,16 +11,23 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var spinner = AddExplodeBlobSpinner(this, 400, 300, 260, 260, {
+        var spinner = AddDualBlobSpinner(this, 400, 300, 280, 280, {
             count: 64,
             base: 0.2,
             amp: 0.7,
             jitter: 0.8,
+            innerMin: 0.60,
+            innerMax: 0.85,
+
             duration: 1100,
-            stroke: true,
-            strokeWidth: 1.5,
+            strokeWidth: 0,
+
+            color: 0x4dabf7,
+            innerColor: 0xffe066,
+
             start: true
         });
+
         var graphics = this.add.graphics({
             lineStyle: {
                 width: 2, color: 0xff0000, alpha: 1
@@ -33,15 +40,18 @@ class Demo extends Phaser.Scene {
     update() { }
 }
 
-function AddExplodeBlobSpinner(scene, x, y, width, height, options = {}) {
+function AddDualBlobSpinner(scene, x, y, width, height, options = {}) {
     const {
         count = 64,
         base = 0.55,
         amp = 0.35,
         jitter = 0.25,
+        innerMin = 0.55,
+        innerMax = 0.85,
         duration = 1000,
-        stroke = true,
-        strokeWidth = 1,
+        strokeWidth = 0,
+        innerColor = 0xffffff,
+        color = 0x33aaff,
         start = true
     } = options;
 
@@ -50,63 +60,71 @@ function AddExplodeBlobSpinner(scene, x, y, width, height, options = {}) {
 
     return scene.rexSpinner.add.custom({
         x, y, width, height, duration, start,
+        color,
 
-        create: { lines: ['rim'] },
+        create: { lines: ['outer', 'inner'] },
 
         update: function () {
             const cx = this.centerX, cy = this.centerY, R = this.radius;
-            const t = this.value; // 0..1
+            const t = this.value;
             const step = 360 / count;
             const rBase = R * base;
             const rAmp = R * amp;
 
-            const path = this.getShape('rim');
+            const outer = this.getShape('outer');
+            const inner = this.getShape('inner');
 
-            let prevT = path.getData('_prevT', 1);
-            let targets = path.getData('targets', null);
+            let prevT = outer.getData('_prevT', 1);
+            let targets = outer.getData('targets', null);
+            let scales = outer.getData('scales', null);
 
-            if (t < prevT || !targets) {
-                if (!targets) {
-                    targets = new Array(count);
-                    path.setData('targets', targets);
-                }
+            if (t < prevT || !targets || !scales) {
+                if (!targets) { targets = new Array(count); outer.setData('targets', targets); }
+                if (!scales) { scales = new Array(count); outer.setData('scales', scales); }
                 for (let i = 0; i < count; i++) {
                     targets[i] = clamp01(1 - jitter + rand(0, jitter * 2));
+                    scales[i] = rand(innerMin, innerMax);
                 }
             }
-            path.setData('_prevT', t);
+            outer.setData('_prevT', t);
 
             let k;
-            if (t < 0.5) {
-                const u = t * 2;
-                k = 1 - Math.pow(1 - u, 3);
-            } else {
-                const u = (t - 0.5) * 2;
-                k = 1 - u * u * u;
-            }
+            if (t < 0.5) { const u = t * 2; k = 1 - Math.pow(1 - u, 3); }
+            else { const u = (t - 0.5) * 2; k = 1 - u * u * u; }
 
-            let firstX = 0, firstY = 0;
+            let fx = 0, fy = 0, gfx = 0, gfy = 0;
+
             for (let i = 0; i < count; i++) {
-                const deg = i * step;
+                const deg = i * (360 / count);
                 const rad = deg * (Math.PI / 180);
-                const rNow = rBase + rAmp * k * targets[i];
-                const x = cx + rNow * Math.cos(rad);
-                const y = cy + rNow * Math.sin(rad);
+
+                const rOuter = rBase + rAmp * k * targets[i];
+                const rInner = rOuter * scales[i];
+
+                const xo = cx + rOuter * Math.cos(rad);
+                const yo = cy + rOuter * Math.sin(rad);
+                const xi = cx + rInner * Math.cos(rad);
+                const yi = cy + rInner * Math.sin(rad);
 
                 if (i === 0) {
-                    path.startAt(x, y);
-                    firstX = x; firstY = y;
+                    outer.startAt(xo, yo); inner.startAt(xi, yi);
+                    fx = xo; fy = yo; gfx = xi; gfy = yi;
                 } else {
-                    path.lineTo(x, y);
+                    outer.lineTo(xo, yo); inner.lineTo(xi, yi);
                 }
             }
-            path.lineTo(firstX, firstY).close();
 
-            path.fillStyle(this.color, 1);
-            if (stroke) {
-                path.lineStyle(strokeWidth, this.color, 1);
+            outer.lineTo(fx, fy).close();
+            inner.lineTo(gfx, gfy).close();
+
+            outer.fillStyle(this.color, 1);
+            inner.fillStyle(innerColor, 1);
+
+            if (strokeWidth > 0) {
+                outer.lineStyle(strokeWidth, this.color, 1);
+                inner.lineStyle(strokeWidth, innerColor, 1);
             } else {
-                path.lineStyle();
+                outer.lineStyle(); inner.lineStyle();
             }
         }
     });
