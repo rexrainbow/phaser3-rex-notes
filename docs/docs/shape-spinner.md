@@ -12,7 +12,9 @@ Loading animations on shape.
     - [AIO](https://codepen.io/rexrainbow/pen/abrVgEd)
 - Custom spinner
     - [Custom spinner](https://codepen.io/rexrainbow/pen/YzNqJEd)
+    - [Snake](https://codepen.io/rexrainbow/pen/PwZjmmQ)
     - [Hourglass](https://codepen.io/rexrainbow/pen/WbrOevK)
+    - [Explode blob](https://codepen.io/rexrainbow/pen/KwVqWrR)    
 - [Loading animation](https://codepen.io/rexrainbow/pen/OJdMzbL)
 
 ## Usage
@@ -440,7 +442,7 @@ See [Shape class](shape-custom-shapes.md#shape-class)
 
 ### Prompt
 
-[Prompt for generating customize logic](prompts/shape-spinner-custom.md)
+[Prompt for generating customize logic](prompts/shape-spinner-custom.txt)
 
 ### Other properties
 
