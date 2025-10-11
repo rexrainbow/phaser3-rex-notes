@@ -131,16 +131,17 @@ class VectorToCursorKeys extends CursorKeys {
 
         if ((this.forceMin > 0) && (this.force < this.forceMin)) {
             // No key pressed
-            this.clearVector();
-            return this;
+            this.clearAllKeysState();
+
+        } else {
+            // Update keys' state
+            this.noKeyDown = true;
+            var dirStates = AngleToDirections(this.angle, this.dirMode, true);
+            for (var dir in dirStates) {
+                this.setKeyState(dir, dirStates[dir]);
+            }
         }
 
-        // Update keys' state
-        this.noKeyDown = true;
-        var dirStates = AngleToDirections(this.angle, this.dirMode, true);
-        for (var dir in dirStates) {
-            this.setKeyState(dir, dirStates[dir]);
-        }
 
         return this;
     }
