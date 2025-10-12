@@ -38,7 +38,12 @@ S *> *1
         `
 
         var background = this.add.rectangle()
+
+        // Use p3-built-in container
         var container = this.add.container(400, 300).setVisible(false);
+
+        // Use rex-containerlite
+        // var container = this.rexUI.add.container(400, 300).setVisible(false);
 
         var graph = this.rexGraph.add.graph()
 
