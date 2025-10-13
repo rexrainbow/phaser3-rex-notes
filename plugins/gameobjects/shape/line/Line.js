@@ -1,10 +1,12 @@
 import BaseShapes from '../shapes/BaseShapes.js';
 import Methods from './methods/Methods.js';
-import { BEZIER, SPLINE, POLYLINE, STRAIGHTLINE } from './Const.js';
+import { CurveTypes } from './Const.js';
 
 class Line extends BaseShapes {
-    constructor(scene, points, lineWidth, color, alpha, lineType) {
-        var pointRadius;
+    constructor(scene, points, lineWidth, color, alpha, config) {
+        var lineType, pointRadius;
+        var headShape, headSize, headColor, headAlpha, headStrokeWidth, headStrokeColor, headStrokeAlpha;
+        var tailShape, tailSize, tailColor, tailAlpha, tailStrokeWidth, tailStrokeColor, tailStrokeAlpha;
         if (points !== undefined) {
             if (typeof (points) === 'number') {
                 lineType = alpha
@@ -13,15 +15,36 @@ class Line extends BaseShapes {
                 lineWidth = points;
                 points = [];
             } else if (!Array.isArray(points)) {
-                var config = points;
+                config = points;
                 points = config.points;
                 lineWidth = config.lineWidth;
                 color = config.color;
                 alpha = config.alpha;
-                lineType = config.lineType;
-                pointRadius = config.pointRadius;
+
             }
         }
+
+        if (config === undefined) { config = {}; }
+
+        lineType = config.lineType;
+        pointRadius = config.pointRadius;
+
+        headShape = config.headShape;
+        headSize = config.headSize;
+        headColor = config.headColor;
+        headAlpha = config.headAlpha;
+        headStrokeWidth = config.headStrokeWidth;
+        headStrokeColor = config.headStrokeColor;
+        headStrokeAlpha = config.headStrokeAlpha;
+
+        tailShape = config.tailShape;
+        tailSize = config.tailSize;
+        tailColor = config.tailColor;
+        tailAlpha = config.tailAlpha;
+        tailStrokeWidth = config.tailStrokeWidth;
+        tailStrokeColor = config.tailStrokeColor;
+        tailStrokeAlpha = config.tailStrokeAlpha;
+
 
         if (points === undefined) { points = []; }
         if (lineWidth === undefined) { lineWidth = 2; }
@@ -29,6 +52,16 @@ class Line extends BaseShapes {
         if (alpha === undefined) { alpha = 1; }
         if (lineType === undefined) { lineType = 0; }
         if (pointRadius === undefined) { pointRadius = 10; }
+
+        if (headShape === undefined) { headShape = 0 };
+        if (headSize === undefined) { headSize = lineWidth * 5; }
+        if (headColor === undefined) { headColor = color; }
+        if (headStrokeWidth === undefined) { headStrokeWidth = 1; }
+
+        if (tailShape === undefined) { tailShape = 0 };
+        if (tailSize === undefined) { tailSize = headSize; }
+        if (tailColor === undefined) { tailColor = color; }
+        if (tailStrokeWidth === undefined) { tailStrokeWidth = 1; }
 
         super(scene);
         this.type = 'rexLine';
@@ -41,6 +74,16 @@ class Line extends BaseShapes {
         this.setLine(points, lineType);
         this.setStrokeStyle(lineWidth, color, alpha);
 
+        this.setHeadShape(headShape);
+        this.setHeadSize(headSize);
+        this.setHeadFillStyle(headColor, headAlpha);
+        this.setHeadStrokeStyle(headStrokeWidth, headStrokeColor, headStrokeAlpha);
+
+        this.setTailShape(tailShape);
+        this.setTailSize(tailSize);
+        this.setTailFillStyle(tailColor, tailAlpha);
+        this.setTailStrokeStyle(tailStrokeWidth, tailStrokeColor, tailStrokeAlpha);
+
         this.buildShapes();
 
         this.updateData();
@@ -52,7 +95,7 @@ class Line extends BaseShapes {
         }
         if (lineType !== undefined) {
             if (typeof (lineType) === 'string') {
-                lineType = CURVETYPE_MAP[lineType.toLocaleLowerCase()];
+                lineType = CurveTypes[lineType.toLocaleLowerCase()];
             }
             this.lineType = lineType;
         }
@@ -86,7 +129,7 @@ class Line extends BaseShapes {
 
     setLineType(lineType) {
         if (typeof (lineType) === 'string') {
-            lineType = CURVETYPE_MAP[lineType.toLocaleLowerCase()];
+            lineType = CurveTypes[lineType.toLocaleLowerCase()];
         }
         if (this.lineType === lineType) {
             return this;
@@ -106,7 +149,7 @@ class Line extends BaseShapes {
             out = [];
         }
         var x = this.x;
-        var y = this.y;    
+        var y = this.y;
         var points = this.points;
         for (var i = 0, cnt = points.length; i < cnt; i++) {
             var p = points[i]
@@ -118,18 +161,6 @@ class Line extends BaseShapes {
 
         return out;
     }
-}
-
-const CURVETYPE_MAP = {
-    bezier: BEZIER,
-
-    spline: SPLINE,
-
-    polyline: POLYLINE,
-    poly: POLYLINE,
-
-    straightline: STRAIGHTLINE,
-    straight: STRAIGHTLINE,
 }
 
 Object.assign(

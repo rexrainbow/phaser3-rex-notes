@@ -1,4 +1,4 @@
-var SetSizeFromBounds = function (line, bounds) {
+var SetSizeFromBounds = function () {
     // Size    
     var bounds = this.bounds;
     var radius = this.pointRadius;
@@ -9,8 +9,15 @@ var SetSizeFromBounds = function (line, bounds) {
     this.setSize(width, height);
     // Origin
     this.setOrigin(-x / width, -y / height);
+
     // Position
-    line.offset(-x, -y);
+    var shapes = this.getShapes();
+    for (var i = 0, cnt = shapes.length; i < cnt; i++) {
+        var shape = shapes[i];
+        if (shape.visible) {
+            shape.offset(-x, -y);
+        }
+    }
 }
 
 export default SetSizeFromBounds;

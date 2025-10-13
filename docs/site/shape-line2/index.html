@@ -15180,7 +15180,26 @@
 <span class="kd">var</span><span class="w"> </span><span class="nx">game</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexLineShape</span><span class="p">(</span><span class="nx">points</span><span class="p">,</span><span class="w"> </span><span class="nx">lineWidth</span><span class="p">,</span><span class="w"> </span><span class="nx">color</span><span class="p">,</span><span class="w"> </span><span class="nx">alpha</span><span class="p">,</span><span class="w"> </span><span class="nx">lineType</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexLineShape</span><span class="p">(</span><span class="nx">points</span><span class="p">,</span><span class="w"> </span><span class="nx">lineWidth</span><span class="p">,</span><span class="w"> </span><span class="nx">color</span><span class="p">,</span><span class="w"> </span><span class="nx">alpha</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">lineType</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">pointRadius</span><span class="o">:</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span>
+
+<span class="w">    </span><span class="nx">headShape</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">headSize</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">headColor</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">headAlpha</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">headStrokeWidth</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">headStrokeColor</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">headStrokeAlpha</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
+
+<span class="w">    </span><span class="nx">tailShape</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">tailSize</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">tailColor</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">tailAlpha</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">tailStrokeWidth</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">tailStrokeColor</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">tailStrokeAlpha</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
+<span class="p">});</span>
 </code></pre></div>
 <p>or </p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexLineShape</span><span class="p">({</span>
@@ -15189,7 +15208,23 @@
 <span class="w">    </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="mh">0xffffff</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">alpha</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">lineType</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">pointRadius</span><span class="o">:</span><span class="w"> </span><span class="mf">10</span>
+<span class="w">    </span><span class="nx">pointRadius</span><span class="o">:</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span>
+
+<span class="w">    </span><span class="nx">headShape</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">headSize</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">headColor</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">headAlpha</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">headStrokeWidth</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">headStrokeColor</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">headStrokeAlpha</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
+
+<span class="w">    </span><span class="nx">tailShape</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">tailSize</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">tailColor</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">tailAlpha</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">tailStrokeWidth</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">tailStrokeColor</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">tailStrokeAlpha</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
 <span class="p">});</span>
 </code></pre></div>
 <ul>
@@ -15208,6 +15243,16 @@
 <li><code>color</code> : Stroke color.</li>
 <li><code>alpha</code> : Stroke alpha.</li>
 <li><code>pointRadius</code> : Radius of the point used in <a href="#input-event">interaction detection</a>, default value is <code>10</code>.</li>
+<li><code>headShape</code>, <code>tailShape</code> : Shape type of end point<ul>
+<li><code>0</code>, or <code>'none'</code> : No end point, default value</li>
+<li><code>1</code>, or <code>'dot'</code> : A circle shape of end point</li>
+<li><code>2</code>, or <code>'box'</code> : A rectangle shape of end point</li>
+<li><code>3</code>, or <code>diamond</code> : A diamond shape of end point</li>
+</ul>
+</li>
+<li><code>headSize</code>, <code>tailSize</code> : Size of end point, default value is <code>lineWidth * 5</code></li>
+<li><code>headColor</code>, <code>headAlpha</code>, <code>tailColor</code>, <code>tailAlpha</code> : Fill style of end point</li>
+<li><code>headStrokeWidth</code>, <code>headStrokeColor</code>, <code>headStrokeAlpha</code>, <code>tailStrokeWidth</code>, <code>tailStrokeColor</code>, <code>tailStrokeAlpha</code> : Stroke style of end point</li>
 </ul>
 <h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
 <ul>
