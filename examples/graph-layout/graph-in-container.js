@@ -116,10 +116,7 @@ var CreateEdge = function (scene) {
     return scene.rexGraph.add.line({
         color: 0x008800,
         lineWidth: 2,
-        lineType: 'poly',
-
-        headShape: 'box',
-        tailShape: 'box'
+        lineType: 'poly'
     });
 }
 
