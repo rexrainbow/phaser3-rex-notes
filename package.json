@@ -1,7 +1,7 @@
 {
-    "name": "phaser3-rex-plugins",
-    "version": "1.80.16",
-    "description": "Plugins of phaser3",
+    "name": "phaser4-rex-plugins",
+    "version": "4.rc5.0",
+    "description": "Plugins of phaser4",
     "author": "Rex",
     "files": [
         "plugins",
@@ -19,9 +19,9 @@
     },
     "keywords": [
         "phaser",
-        "phaser3",
+        "phaser4",
         "phaser-plugin",
-        "phaser3-plugin"
+        "phaser4-plugin"
     ],
     "license": "MIT",
     "bugs": {
