@@ -20,7 +20,7 @@ var PlaceGameObjects = function (graph, graphData, config) {
 
     graphData.children.forEach(function (nodeData) {
         var gameObject = nodeData.gameObject;
-        if (graph.isDummyNode(gameObject)) {
+        if (gameObject.$dummy) {
             return;
         }
 
@@ -41,7 +41,7 @@ var PlaceGameObjects = function (graph, graphData, config) {
 
     graphData.edges.forEach(function (edgeData) {
         var gameObject = edgeData.gameObject;
-        if (graph.isInvisibleEdge(gameObject)) {
+        if (gameObject.$invisible) {
             return;
         }
         var path = GetPath(edgeData);

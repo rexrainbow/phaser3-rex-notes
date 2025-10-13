@@ -3858,6 +3858,133 @@
 
             return out;
         }
+
+        get headShape() {
+            return this._headShape;
+        }
+
+        set headShape(value) {
+            this.dirty = this.dirty || (this._headShape != value);
+            this._headShape = value;
+        }
+
+        get headSize() {
+            return this._headSize;
+        }
+
+        set headSize(value) {
+            this.dirty = this.dirty || (this._headSize != value);
+            this._headSize = value;
+        }
+
+        get headColor() {
+            return this._headColor;
+        }
+
+        set headColor(value) {
+            this.dirty = this.dirty || (this._headColor != value);
+            this._headColor = value;
+        }
+
+        get headAlpha() {
+            return this._headAlpha;
+        }
+
+        set headAlpha(value) {
+            this.dirty = this.dirty || (this._headAlpha != value);
+            this._headAlpha = value;
+        }
+
+        get headStokeWidth() {
+            return this._headStokeWidth;
+        }
+
+        set headStokeWidth(value) {
+            this.dirty = this.dirty || (this._headStokeWidth != value);
+            this._headStokeWidth = value;
+        }
+
+        get headStokeColor() {
+            return this._headStokeColor;
+        }
+
+        set headStokeColor(value) {
+            this.dirty = this.dirty || (this._headStokeColor != value);
+            this._headStokeColor = value;
+        }
+
+        get headStokeAlpha() {
+            return this._headStokeAlpha;
+        }
+
+        set headStokeAlpha(value) {
+            this.dirty = this.dirty || (this._headStokeAlpha != value);
+            this._headStokeAlpha = value;
+        }
+
+        get tailShape() {
+            return this._tailShape;
+        }
+
+        set tailShape(value) {
+            this.dirty = this.dirty || (this._tailShape != value);
+            this._tailShape = value;
+        }
+
+        get tailSize() {
+            return this._tailSize;
+        }
+
+        set tailSize(value) {
+            this.dirty = this.dirty || (this._tailSize != value);
+            this._tailSize = value;
+        }
+
+        get tailColor() {
+            return this._tailColor;
+        }
+
+        set tailColor(value) {
+            this.dirty = this.dirty || (this._tailColor != value);
+            this._tailColor = value;
+        }
+
+        get tailAlpha() {
+            return this._tailAlpha;
+        }
+
+        set tailAlpha(value) {
+            this.dirty = this.dirty || (this._tailAlpha != value);
+            this._tailAlpha = value;
+        }
+
+        get tailStokeWidth() {
+            return this._tailStokeWidth;
+        }
+
+        set tailStokeWidth(value) {
+            this.dirty = this.dirty || (this._tailStokeWidth != value);
+            this._tailStokeWidth = value;
+        }
+
+        get tailStokeColor() {
+            return this._tailStokeColor;
+        }
+
+        set tailStokeColor(value) {
+            this.dirty = this.dirty || (this._tailStokeColor != value);
+            this._tailStokeColor = value;
+        }
+
+        get tailStokeAlpha() {
+            return this._tailStokeAlpha;
+        }
+
+        set tailStokeAlpha(value) {
+            this.dirty = this.dirty || (this._tailStokeAlpha != value);
+            this._tailStokeAlpha = value;
+        }
+
     }
 
     Object.assign(
@@ -11983,6 +12110,30 @@
         if (gameObject.setLine) {
             gameObject.setLine(path);
         }
+
+        if (gameObject.setHeadShape) {
+            if (!gameObject.hasOwnProperty('headShapeSave')) {
+                gameObject.headShapeSave = gameObject.headShape;
+            }
+
+            if (sourceGameObject.$dummy) {
+                gameObject.setHeadShape(0);
+            } else {
+                gameObject.setHeadShape(gameObject.headShapeSave);
+            }
+        }
+        
+        if (gameObject.setTailShape) {
+            if (!gameObject.hasOwnProperty('tailShapeSave')) {
+                gameObject.tailShapeSave = gameObject.tailShape;
+            }
+
+            if (targetGameObject.$dummy) {
+                gameObject.setTailShape(0);
+            } else {
+                gameObject.setTailShape(gameObject.tailShapeSave);
+            }
+        }
     };
 
     const ALIGN_CENTER$1 = Phaser.Display.Align.CENTER;
@@ -12003,7 +12154,7 @@
 
         graphData.children.forEach(function (nodeData) {
             var gameObject = nodeData.gameObject;
-            if (graph.isDummyNode(gameObject)) {
+            if (gameObject.$dummy) {
                 return;
             }
 
@@ -12024,7 +12175,7 @@
 
         graphData.edges.forEach(function (edgeData) {
             var gameObject = edgeData.gameObject;
-            if (graph.isInvisibleEdge(gameObject)) {
+            if (gameObject.$invisible) {
                 return;
             }
             var path = GetPath$1(edgeData);
@@ -25514,7 +25665,7 @@
         graphData.nodes().forEach(function (nodeKey) {
             var nodeData = graphData.node(nodeKey);
             var gameObject = nodeData.gameObject;
-            if (graph.isDummyNode(gameObject)) {
+            if (gameObject.$dummy) {
                 return;
             }
 
@@ -25536,7 +25687,7 @@
         graphData.edges().forEach(function (edgeKey) {
             var edgeData = graphData.edge(edgeKey);
             var gameObject = edgeData.gameObject;
-            if (graph.isInvisibleEdge(gameObject)) {
+            if (gameObject.$invisible) {
                 return;
             }
 
