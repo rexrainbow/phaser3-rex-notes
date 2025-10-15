@@ -21,7 +21,7 @@ NODE [padding=3,
      ]
 
 EDGE [color=0x008800,
-      head=box, tail=dot]
+      head=box, tail=triangle]
 
 A [color=0xFFFF00]
 
