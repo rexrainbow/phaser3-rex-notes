@@ -17,6 +17,9 @@ NODE [padding=3,
       color=0x888888,
      ]
 
+EDGE [color=0x008800,
+      head=box, tail=dot]
+
 A [color=0xFFFF00]
 
 A -> B -> C -> H -> I
@@ -52,7 +55,7 @@ S *> *1
                 return CreateNode(scene, id, parameters.color);
             },
             onCreateEdgeGameObject(scene, id, parameters) {
-                return CreateEdge(scene);
+                return CreateEdge(scene, parameters);
             },
 
             text: text
@@ -112,13 +115,13 @@ var CreateNode = function (scene, label, color) {
     }).layout();
 }
 
-var CreateEdge = function (scene) {
+var CreateEdge = function (scene, parameters) {
     return scene.rexGraph.add.line({
-        color: 0x008800,
+        color: parameters.color,
         lineWidth: 2,
         lineType: 'poly',
-
-        headShape: 'box', tailShape: 'box'
+        headShape: parameters.head,
+        tailShape: parameters.tail,
     });
 }
 

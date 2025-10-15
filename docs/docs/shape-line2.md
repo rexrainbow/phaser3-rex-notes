@@ -162,7 +162,7 @@ var line = scene.add.rexLineShape({
     - `1`, or `'dot'` : A circle shape of end point
     - `2`, or `'box'` : A rectangle shape of end point
     - `3`, or `diamond` : A diamond shape of end point
-- `headSize`, `tailSize` : Size of end point, default value is `lineWidth * 5`
+- `headSize`, `tailSize` : Size of end point, default value is `lineWidth * 4`
 - `headColor`, `headAlpha`, `tailColor`, `tailAlpha` : Fill style of end point
 - `headStrokeWidth`, `headStrokeColor`, `headStrokeAlpha`, `tailStrokeWidth`, `tailStrokeColor`, `tailStrokeAlpha` : Stroke style of end point
 

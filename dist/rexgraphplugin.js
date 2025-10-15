@@ -3752,7 +3752,7 @@
             if (lineType === undefined) { lineType = 0; }
             if (pointRadius === undefined) { pointRadius = 10; }
 
-            if (headShape === undefined) { headShape = 0; }        if (headSize === undefined) { headSize = lineWidth * 5; }
+            if (headShape === undefined) { headShape = 0; }        if (headSize === undefined) { headSize = lineWidth * 4; }
             if (headColor === undefined) { headColor = color; }
             if (headStrokeWidth === undefined) { headStrokeWidth = 1; }
 

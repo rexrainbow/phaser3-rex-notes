@@ -17,7 +17,7 @@ declare namespace Line {
         lineType?: LineType,
         pointRadius?: number,
 
-        headShape?: EndPointType,
+        headShape?: EndPointType | string | number,
         headSize?: number,
         headColor?: number,
         headAlpha?: number,
@@ -25,7 +25,7 @@ declare namespace Line {
         headStrokeColor?: number,
         headStrokeAlpha?: number,
 
-        tailShape?: EndPointType,
+        tailShape?: EndPointType | string | number,
         tailSize?: number,
         tailColor?: number,
         tailAlpha?: number,
