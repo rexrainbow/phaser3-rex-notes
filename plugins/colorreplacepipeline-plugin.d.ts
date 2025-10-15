@@ -18,6 +18,11 @@ declare class ColorReplacePipelinePlugin extends Phaser.Plugins.BasePlugin {
         config?: ColorReplacePipelinePlugin.IConfig
     ): ColorReplacePostFxPipeline;
 
+    add(
+        camera: Phaser.Cameras.Scene2D.Camera,
+        config?: ColorReplacePipelinePlugin.IConfig
+    ): ColorReplacePostFxPipeline;
+
     remove(
         gameObject: Phaser.GameObjects.GameObject,
         name?: string

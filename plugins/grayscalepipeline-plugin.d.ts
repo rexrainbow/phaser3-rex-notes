@@ -17,6 +17,11 @@ declare class GrayScalePipelinePlugin extends Phaser.Plugins.BasePlugin {
         config?: GrayScalePipelinePlugin.IConfig
     ): GrayScalePostFxPipeline;
 
+    add(
+        camera: Phaser.Cameras.Scene2D.Camera,
+        config?: GrayScalePipelinePlugin.IConfig
+    ): GrayScalePostFxPipeline;
+
     remove(
         gameObject: Phaser.GameObjects.GameObject,
         name?: string

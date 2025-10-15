@@ -17,6 +17,11 @@ declare class WarpPipelinePlugin extends Phaser.Plugins.BasePlugin {
         config?: WarpPipelinePlugin.IConfig
     ): WarpPostFxPipeline;
 
+    add(
+        camera: Phaser.Cameras.Scene2D.Camera,
+        config?: WarpPipelinePlugin.IConfig
+    ): WarpPostFxPipeline;
+
     remove(
         gameObject: Phaser.GameObjects.GameObject,
         name?: string

@@ -22,6 +22,11 @@ declare class OutlinePipelinePlugin extends Phaser.Plugins.BasePlugin {
         config?: OutlinePipelinePlugin.IConfig
     ): OutlinePostFxPipeline;
 
+    add(
+        camera: Phaser.Cameras.Scene2D.Camera,
+        config?: OutlinePipelinePlugin.IConfig
+    ): OutlinePostFxPipeline;
+
     remove(
         gameObject: Phaser.GameObjects.GameObject,
         name?: string

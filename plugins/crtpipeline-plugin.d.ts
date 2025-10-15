@@ -17,6 +17,11 @@ declare class CrtPipelinePlugin extends Phaser.Plugins.BasePlugin {
         config?: CrtPipelinePlugin.IConfig
     ): CrtPostFxPipeline;
 
+    add(
+        camera: Phaser.Cameras.Scene2D.Camera,
+        config?: CrtPipelinePlugin.IConfig
+    ): CrtPostFxPipeline;
+
     remove(
         gameObject: Phaser.GameObjects.GameObject,
         name?: string

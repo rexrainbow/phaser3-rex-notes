@@ -20,6 +20,11 @@ declare class PixelationPipelinePlugin extends Phaser.Plugins.BasePlugin {
         config?: PixelationPipelinePlugin.IConfig
     ): PixelationPostFxPipeline;
 
+    add(
+        camera: Phaser.Cameras.Scene2D.Camera,
+        config?: PixelationPipelinePlugin.IConfig
+    ): PixelationPostFxPipeline;
+
     remove(
         gameObject: Phaser.GameObjects.GameObject,
         name?: string

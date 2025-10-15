@@ -23,6 +23,11 @@ declare class ToonifyPipelinePlugin extends Phaser.Plugins.BasePlugin {
         config?: ToonifyPipelinePlugin.IConfig
     ): ToonifyPostFxPipeline;
 
+    add(
+        camera: Phaser.Cameras.Scene2D.Camera,
+        config?: ToonifyPipelinePlugin.IConfig
+    ): ToonifyPostFxPipeline;
+
     remove(
         gameObject: Phaser.GameObjects.GameObject,
         name?: string

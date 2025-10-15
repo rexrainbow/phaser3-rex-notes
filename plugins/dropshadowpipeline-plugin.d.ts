@@ -18,6 +18,11 @@ declare class DropShadowPipelinePlugin extends Phaser.Plugins.BasePlugin {
         config?: DropShadowPipelinePlugin.IConfig
     ): DropShadowPostFxPipeline;
 
+    add(
+        camera: Phaser.Cameras.Scene2D.Camera,
+        config?: DropShadowPipelinePlugin.IConfig
+    ): DropShadowPostFxPipeline;
+
     remove(
         gameObject: Phaser.GameObjects.GameObject,
         name?: string

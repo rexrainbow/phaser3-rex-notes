@@ -17,6 +17,11 @@ declare class HorrifiPipelinePlugin extends Phaser.Plugins.BasePlugin {
         config?: HorrifiPipelinePlugin.IConfig
     ): HorrifiPostFxPipeline;
 
+    add(
+        camera: Phaser.Cameras.Scene2D.Camera,
+        config?: HorrifiPipelinePlugin.IConfig
+    ): HorrifiPostFxPipeline;
+
     remove(
         gameObject: Phaser.GameObjects.GameObject,
         name?: string

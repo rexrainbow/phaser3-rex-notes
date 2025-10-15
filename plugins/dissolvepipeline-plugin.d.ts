@@ -17,6 +17,11 @@ declare class DissolvePipelinePlugin extends Phaser.Plugins.BasePlugin {
         config?: DissolvePipelinePlugin.IConfig
     ): DissolvePostFxPipeline;
 
+    add(
+        camera: Phaser.Cameras.Scene2D.Camera,
+        config?: DissolvePipelinePlugin.IConfig
+    ): DissolvePostFxPipeline;
+
     remove(
         gameObject: Phaser.GameObjects.GameObject,
         name?: string

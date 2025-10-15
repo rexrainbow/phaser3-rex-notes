@@ -17,6 +17,11 @@ declare class FishEyePipelinePlugin extends Phaser.Plugins.BasePlugin {
         config?: FishEyePipelinePlugin.IConfig
     ): FishEyePostFxPipeline;
 
+    add(
+        camera: Phaser.Cameras.Scene2D.Camera,
+        config?: FishEyePipelinePlugin.IConfig
+    ): FishEyePostFxPipeline;
+
     remove(
         gameObject: Phaser.GameObjects.GameObject,
         name?: string

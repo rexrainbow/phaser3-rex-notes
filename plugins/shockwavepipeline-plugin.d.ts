@@ -24,6 +24,11 @@ declare class ShockwavePipelinePlugin extends Phaser.Plugins.BasePlugin {
         config?: ShockwavePipelinePlugin.IConfig
     ): ShockwavePostFxPipeline;
 
+    add(
+        camera: Phaser.Cameras.Scene2D.Camera,
+        config?: ShockwavePipelinePlugin.IConfig
+    ): ShockwavePostFxPipeline;
+
     remove(
         gameObject: Phaser.GameObjects.GameObject,
         name?: string

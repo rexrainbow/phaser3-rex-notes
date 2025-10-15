@@ -18,6 +18,11 @@ declare class InversePipelinePlugin extends Phaser.Plugins.BasePlugin {
         config?: InversePipelinePlugin.IConfig
     ): InversePostFxPipeline;
 
+    add(
+        camera: Phaser.Cameras.Scene2D.Camera,
+        config?: InversePipelinePlugin.IConfig
+    ): InversePostFxPipeline;
+
     remove(
         gameObject: Phaser.GameObjects.GameObject,
         name?: string

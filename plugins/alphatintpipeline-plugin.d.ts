@@ -20,6 +20,11 @@ declare class AlphaTintPipelinePlugin extends Phaser.Plugins.BasePlugin {
         config?: AlphaTintPipelinePlugin.IConfig
     ): AlphaTintPostFxPipeline;
 
+    add(
+        camera: Phaser.Cameras.Scene2D.Camera,
+        config?: AlphaTintPipelinePlugin.IConfig
+    ): AlphaTintPostFxPipeline;
+
     remove(
         gameObject: Phaser.GameObjects.GameObject,
         name?: string

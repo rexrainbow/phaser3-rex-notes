@@ -20,6 +20,11 @@ declare class GlowFilterPipelinePlugin extends Phaser.Plugins.BasePlugin {
         config?: GlowFilterPipelinePlugin.IConfig
     ): GlowFilterPostFxPipeline;
 
+    add(
+        camera: Phaser.Cameras.Scene2D.Camera,
+        config?: GlowFilterPipelinePlugin.IConfig
+    ): GlowFilterPostFxPipeline;
+
     remove(
         gameObject: Phaser.GameObjects.GameObject,
         name?: string

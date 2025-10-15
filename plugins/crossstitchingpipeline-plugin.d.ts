@@ -18,6 +18,11 @@ declare class CrossStitchingPipelinePlugin extends Phaser.Plugins.BasePlugin {
         config?: CrossStitchingPipelinePlugin.IConfig
     ): CrossStitchingPostFxPipeline;
 
+    add(
+        camera: Phaser.Cameras.Scene2D.Camera,
+        config?: CrossStitchingPipelinePlugin.IConfig
+    ): CrossStitchingPostFxPipeline;
+
     remove(
         gameObject: Phaser.GameObjects.GameObject,
         name?: string

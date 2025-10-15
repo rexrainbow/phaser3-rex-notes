@@ -24,6 +24,11 @@ declare class SwirlPipelinePlugin extends Phaser.Plugins.BasePlugin {
         config?: SwirlPipelinePlugin.IConfig
     ): SwirlPostFxPipeline;
 
+    add(
+        camera: Phaser.Cameras.Scene2D.Camera,
+        config?: SwirlPipelinePlugin.IConfig
+    ): SwirlPostFxPipeline;
+
     remove(
         gameObject: Phaser.GameObjects.GameObject,
         name?: string

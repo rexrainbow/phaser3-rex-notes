@@ -17,6 +17,11 @@ declare class BarrelPipelinePlugin extends Phaser.Plugins.BasePlugin {
         config?: BarrelPipelinePlugin.IConfig
     ): BarrelPostFxPipeline;
 
+    add(
+        camera: Phaser.Cameras.Scene2D.Camera,
+        config?: BarrelPipelinePlugin.IConfig
+    ): BarrelPostFxPipeline;
+
     remove(
         gameObject: Phaser.GameObjects.GameObject,
         name?: string

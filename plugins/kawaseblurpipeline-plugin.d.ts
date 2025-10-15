@@ -18,6 +18,11 @@ declare class KawaseBlurFilterPipelinePlugin extends Phaser.Plugins.BasePlugin {
         config?: KawaseBlurFilterPipelinePlugin.IConfig
     ): KawaseBlurFilterPostFxPipeline;
 
+    add(
+        camera: Phaser.Cameras.Scene2D.Camera,
+        config?: KawaseBlurFilterPipelinePlugin.IConfig
+    ): KawaseBlurFilterPostFxPipeline;
+
     remove(
         gameObject: Phaser.GameObjects.GameObject,
         name?: string

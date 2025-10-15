@@ -18,6 +18,11 @@ declare class HslAdjustPipelinePlugin extends Phaser.Plugins.BasePlugin {
         config?: HslAdjustPipelinePlugin.IConfig
     ): HslAdjustPostFxPipeline;
 
+    add(
+        camera: Phaser.Cameras.Scene2D.Camera,
+        config?: HslAdjustPipelinePlugin.IConfig
+    ): HslAdjustPostFxPipeline;
+
     remove(
         gameObject: Phaser.GameObjects.GameObject,
         name?: string

@@ -24,6 +24,11 @@ declare class SplitPipelinePlugin extends Phaser.Plugins.BasePlugin {
         config?: SplitPipelinePlugin.IConfig
     ): SplitPostFxPipeline;
 
+    add(
+        camera: Phaser.Cameras.Scene2D.Camera,
+        config?: SplitPipelinePlugin.IConfig
+    ): SplitPostFxPipeline;
+
     remove(
         gameObject: Phaser.GameObjects.GameObject,
         name?: string
