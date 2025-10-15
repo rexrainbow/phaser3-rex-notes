@@ -7,7 +7,7 @@ declare namespace Line {
     type PointType = { x: number, y: number };
     type LineType = 0 | 'bezier' | 1 | 'spline' | 2 | 'polyline' | 'poly' | 3 | 'straightline' | 'straight';
 
-    type EndPointType = 0 | 'none' | 2 | 'dot' | 3 | 'box' | 4 | 'diamond';
+    type EndPointType = 0 | 'none' | 1 | 'triangle' | 2 | 'dot' | 3 | 'box' | 4 | 'diamond';
 
     interface IConfig {
         points?: PointType[],

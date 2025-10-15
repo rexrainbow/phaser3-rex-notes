@@ -57,15 +57,40 @@ export default {
                 .lineStyle(this.headStrokeWidth, this.headStrokeColor, this.headStrokeAlpha)
 
             var headPoint = this.points[0];
-            BuildEndPoint(head, headPoint.x, headPoint.y, this.headSize, this.headShape);
+            var prevPoint;
+            if (pointCount >= 2) {
+                if (this.lineType === STRAIGHTLINE) {
+                    prevPoint = this.points[pointCount - 1];
+                } else {
+                    prevPoint = this.points[1];
+                }
+            } else {
+                prevPoint = headPoint;
+            }
+            BuildEndPoint(head,
+                headPoint.x, headPoint.y,
+                prevPoint.x, prevPoint.y,
+                this.headSize, this.headShape
+            );
         }
         if (hasTail) {
             tail
                 .fillStyle(this.tailColor, this.tailAlpha)
                 .lineStyle(this.tailStrokeWidth, this.tailStrokeColor, this.tailStrokeAlpha)
 
-            var tailPoint = this.points[this.points.length - 1];
-            BuildEndPoint(tail, tailPoint.x, tailPoint.y, this.tailSize, this.tailShape);
+            var tailPoint = this.points[pointCount - 1];
+
+            var prevPoint;
+            if (this.lineType === STRAIGHTLINE) {
+                prevPoint = this.points[0];
+            } else {
+                prevPoint = this.points[pointCount - 2];
+            }
+            BuildEndPoint(tail,
+                tailPoint.x, tailPoint.y,
+                prevPoint.x, prevPoint.y,
+                this.tailSize, this.tailShape
+            );
         }
 
 

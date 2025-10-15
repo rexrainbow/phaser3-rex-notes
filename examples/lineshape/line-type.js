@@ -34,7 +34,7 @@ var CreateLine = function (scene, x, y, lineType, graphics) {
         lineType: lineType,
 
         headShape: 'diamond', headSize: 30, headColor: 0x0000ff,
-        // tailShape: 'box', tailColor: 0xff0000,
+        tailShape: 'triangle', tailColor: 0xff0000,
     }).setPosition(x, y)
     graphics.lineStyle(2, 0xff0000, 0.5).strokeRectShape(line.getBounds());
 

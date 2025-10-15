@@ -159,9 +159,10 @@ var line = scene.add.rexLineShape({
 - `pointRadius` : Radius of the point used in [interaction detection](#input-event), default value is `10`.
 - `headShape`, `tailShape` : Shape type of end point
     - `0`, or `'none'` : No end point, default value
-    - `1`, or `'dot'` : A circle shape of end point
-    - `2`, or `'box'` : A rectangle shape of end point
-    - `3`, or `diamond` : A diamond shape of end point
+    - `1`, or `'triangle'` : A triangle shape of end point
+    - `2`, or `'dot'` : A circle shape of end point
+    - `3`, or `'box'` : A rectangle shape of end point
+    - `4`, or `diamond` : A diamond shape of end point
 - `headSize`, `tailSize` : Size of end point, default value is `lineWidth * 4`
 - `headColor`, `headAlpha`, `tailColor`, `tailAlpha` : Fill style of end point
 - `headStrokeWidth`, `headStrokeColor`, `headStrokeAlpha`, `tailStrokeWidth`, `tailStrokeColor`, `tailStrokeAlpha` : Stroke style of end point
