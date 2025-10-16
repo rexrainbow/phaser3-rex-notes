@@ -54,9 +54,6 @@ S *> *1
             onCreateNodeGameObject(scene, id, parameters) {
                 return CreateNode(scene, id, parameters.color);
             },
-            onCreateEdgeGameObject(scene, id, parameters) {
-                return CreateEdge(scene, parameters);
-            },
 
             text: text
         })
@@ -113,16 +110,6 @@ var CreateNode = function (scene, label, color) {
         text: scene.add.text(0, 0, label),
         align: 'center',
     }).layout();
-}
-
-var CreateEdge = function (scene, parameters) {
-    return scene.rexGraph.add.line({
-        color: parameters.color,
-        lineWidth: 2,
-        lineType: 'poly',
-        headShape: parameters.head,
-        tailShape: parameters.tail,
-    });
 }
 
 var config = {

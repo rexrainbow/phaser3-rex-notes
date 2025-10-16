@@ -4976,12 +4976,31 @@
     	} 
     } (parser));
 
+    var DefaultCreateEdgeGameObjectCallback = function (scene, id, parameters) {
+        var {
+            color = 0xffffff,
+            width = 2,
+            type = 'poly',
+            head = 'none',
+            tail = 'none,'
+        } = parameters;
+        var gameObject = new Line(scene, {
+            color: color,
+            lineWidth: width,
+            lineType: type,
+            headShape: head,
+            tailShape: tail,
+        });
+        scene.add.existing(gameObject);
+        return gameObject;
+    };
+
     var BuildGraphFromText = function (graph, config) {
         graph.clear();
 
         var {
             onCreateNodeGameObject,
-            onCreateEdgeGameObject,
+            onCreateEdgeGameObject = DefaultCreateEdgeGameObjectCallback,
             text
         } = config;
 

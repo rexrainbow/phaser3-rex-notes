@@ -107,10 +107,25 @@ scene.rexGraph.buildGraphFromText(graph, {
     ```
     - `gameObject` : Game object with position (`{x, y}`) and size (`{width, height}`)
     - `parameters` : See [Syntax of text](#syntax-of-text)
-- `onCreateEdgeGameObject` : Callback to create edge game object
+- `onCreateEdgeGameObject` : Callback to create edge game object. Default value is
     ```javascript
-    function(scene, id, parameters) {
-        return scene.rexGraph.add.line(config)
+    function (scene, id, parameters) {
+        var {
+            color = 0xffffff,
+            width = 2,
+            type = 'poly',
+            head = 'none',
+            tail = 'none,'
+        } = parameters;
+        var gameObject = new Line(scene, {
+            color: color,
+            lineWidth: width,
+            lineType: type,
+            headShape: head,
+            tailShape: tail,
+        })
+        scene.add.existing(gameObject);
+        return gameObject;
     }
     ```
     - `gameObject` : [Line-shape](shape-line2.md)
