@@ -9,5 +9,5 @@ export default function (
     lineWidth?: number,
     color?: number,
     alpha?: number,
-    lineType?: Line.LineType
+    config?: Line.IConfig
 ): Line;

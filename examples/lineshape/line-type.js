@@ -25,19 +25,22 @@ class Demo extends Phaser.Scene {
 var CreateLine = function (scene, x, y, lineType, graphics) {
     var line = scene.add.rexLineShape({
         points: [
-    { x: 0, y: 0 },
-    { x: 100, y: 0 },
-    { x: 100, y: - 100 },
-    { x: 200, y: - 100 },
-],
+            { x: 0, y: 0 },
+            { x: 100, y: 0 },
+            { x: 100, y: - 100 },
+            { x: 200, y: - 100 },
+        ],
         color: 0xffffff,
-        lineType: lineType
+        lineType: lineType,
+
+        headShape: 'diamond', headSize: 30, headColor: 0x0000ff,
+        tailShape: 'triangle', tailColor: 0xff0000,
     }).setPosition(x, y)
     graphics.lineStyle(2, 0xff0000, 0.5).strokeRectShape(line.getBounds());
 
     var points = line.getPoints();
     for (var i = 0, cnt = points.length; i < cnt; i++) {
-        graphics.fillStyle(0xff0000).fillPoint(points[i].x, points[i].y, 10);
+        graphics.fillStyle(0xff0000, 0.5).fillPoint(points[i].x, points[i].y, 10);
     }
 
 

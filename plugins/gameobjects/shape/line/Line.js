@@ -1,10 +1,12 @@
 import BaseShapes from '../shapes/BaseShapes.js';
 import Methods from './methods/Methods.js';
-import { BEZIER, SPLINE, POLYLINE, STRAIGHTLINE } from './Const.js';
+import { CurveTypes } from './Const.js';
 
 class Line extends BaseShapes {
-    constructor(scene, points, lineWidth, color, alpha, lineType) {
-        var pointRadius;
+    constructor(scene, points, lineWidth, color, alpha, config) {
+        var lineType, pointRadius;
+        var headShape, headSize, headColor, headAlpha, headStrokeWidth, headStrokeColor, headStrokeAlpha;
+        var tailShape, tailSize, tailColor, tailAlpha, tailStrokeWidth, tailStrokeColor, tailStrokeAlpha;
         if (points !== undefined) {
             if (typeof (points) === 'number') {
                 lineType = alpha
@@ -13,15 +15,36 @@ class Line extends BaseShapes {
                 lineWidth = points;
                 points = [];
             } else if (!Array.isArray(points)) {
-                var config = points;
+                config = points;
                 points = config.points;
                 lineWidth = config.lineWidth;
                 color = config.color;
                 alpha = config.alpha;
-                lineType = config.lineType;
-                pointRadius = config.pointRadius;
+
             }
         }
+
+        if (config === undefined) { config = {}; }
+
+        lineType = config.lineType;
+        pointRadius = config.pointRadius;
+
+        headShape = config.headShape;
+        headSize = config.headSize;
+        headColor = config.headColor;
+        headAlpha = config.headAlpha;
+        headStrokeWidth = config.headStrokeWidth;
+        headStrokeColor = config.headStrokeColor;
+        headStrokeAlpha = config.headStrokeAlpha;
+
+        tailShape = config.tailShape;
+        tailSize = config.tailSize;
+        tailColor = config.tailColor;
+        tailAlpha = config.tailAlpha;
+        tailStrokeWidth = config.tailStrokeWidth;
+        tailStrokeColor = config.tailStrokeColor;
+        tailStrokeAlpha = config.tailStrokeAlpha;
+
 
         if (points === undefined) { points = []; }
         if (lineWidth === undefined) { lineWidth = 2; }
@@ -29,6 +52,16 @@ class Line extends BaseShapes {
         if (alpha === undefined) { alpha = 1; }
         if (lineType === undefined) { lineType = 0; }
         if (pointRadius === undefined) { pointRadius = 10; }
+
+        if (headShape === undefined) { headShape = 0 };
+        if (headSize === undefined) { headSize = lineWidth * 4; }
+        if (headColor === undefined) { headColor = color; }
+        if (headStrokeWidth === undefined) { headStrokeWidth = 1; }
+
+        if (tailShape === undefined) { tailShape = 0 };
+        if (tailSize === undefined) { tailSize = headSize; }
+        if (tailColor === undefined) { tailColor = color; }
+        if (tailStrokeWidth === undefined) { tailStrokeWidth = 1; }
 
         super(scene);
         this.type = 'rexLine';
@@ -41,6 +74,16 @@ class Line extends BaseShapes {
         this.setLine(points, lineType);
         this.setStrokeStyle(lineWidth, color, alpha);
 
+        this.setHeadShape(headShape);
+        this.setHeadSize(headSize);
+        this.setHeadFillStyle(headColor, headAlpha);
+        this.setHeadStrokeStyle(headStrokeWidth, headStrokeColor, headStrokeAlpha);
+
+        this.setTailShape(tailShape);
+        this.setTailSize(tailSize);
+        this.setTailFillStyle(tailColor, tailAlpha);
+        this.setTailStrokeStyle(tailStrokeWidth, tailStrokeColor, tailStrokeAlpha);
+
         this.buildShapes();
 
         this.updateData();
@@ -52,7 +95,7 @@ class Line extends BaseShapes {
         }
         if (lineType !== undefined) {
             if (typeof (lineType) === 'string') {
-                lineType = CURVETYPE_MAP[lineType.toLocaleLowerCase()];
+                lineType = CurveTypes[lineType.toLocaleLowerCase()];
             }
             this.lineType = lineType;
         }
@@ -86,7 +129,7 @@ class Line extends BaseShapes {
 
     setLineType(lineType) {
         if (typeof (lineType) === 'string') {
-            lineType = CURVETYPE_MAP[lineType.toLocaleLowerCase()];
+            lineType = CurveTypes[lineType.toLocaleLowerCase()];
         }
         if (this.lineType === lineType) {
             return this;
@@ -106,7 +149,7 @@ class Line extends BaseShapes {
             out = [];
         }
         var x = this.x;
-        var y = this.y;    
+        var y = this.y;
         var points = this.points;
         for (var i = 0, cnt = points.length; i < cnt; i++) {
             var p = points[i]
@@ -118,18 +161,133 @@ class Line extends BaseShapes {
 
         return out;
     }
-}
 
-const CURVETYPE_MAP = {
-    bezier: BEZIER,
+    get headShape() {
+        return this._headShape;
+    }
 
-    spline: SPLINE,
+    set headShape(value) {
+        this.dirty = this.dirty || (this._headShape != value);
+        this._headShape = value;
+    }
 
-    polyline: POLYLINE,
-    poly: POLYLINE,
+    get headSize() {
+        return this._headSize;
+    }
 
-    straightline: STRAIGHTLINE,
-    straight: STRAIGHTLINE,
+    set headSize(value) {
+        this.dirty = this.dirty || (this._headSize != value);
+        this._headSize = value;
+    }
+
+    get headColor() {
+        return this._headColor;
+    }
+
+    set headColor(value) {
+        this.dirty = this.dirty || (this._headColor != value);
+        this._headColor = value;
+    }
+
+    get headAlpha() {
+        return this._headAlpha;
+    }
+
+    set headAlpha(value) {
+        this.dirty = this.dirty || (this._headAlpha != value);
+        this._headAlpha = value;
+    }
+
+    get headStokeWidth() {
+        return this._headStokeWidth;
+    }
+
+    set headStokeWidth(value) {
+        this.dirty = this.dirty || (this._headStokeWidth != value);
+        this._headStokeWidth = value;
+    }
+
+    get headStokeColor() {
+        return this._headStokeColor;
+    }
+
+    set headStokeColor(value) {
+        this.dirty = this.dirty || (this._headStokeColor != value);
+        this._headStokeColor = value;
+    }
+
+    get headStokeAlpha() {
+        return this._headStokeAlpha;
+    }
+
+    set headStokeAlpha(value) {
+        this.dirty = this.dirty || (this._headStokeAlpha != value);
+        this._headStokeAlpha = value;
+    }
+
+    get tailShape() {
+        return this._tailShape;
+    }
+
+    set tailShape(value) {
+        this.dirty = this.dirty || (this._tailShape != value);
+        this._tailShape = value;
+    }
+
+    get tailSize() {
+        return this._tailSize;
+    }
+
+    set tailSize(value) {
+        this.dirty = this.dirty || (this._tailSize != value);
+        this._tailSize = value;
+    }
+
+    get tailColor() {
+        return this._tailColor;
+    }
+
+    set tailColor(value) {
+        this.dirty = this.dirty || (this._tailColor != value);
+        this._tailColor = value;
+    }
+
+    get tailAlpha() {
+        return this._tailAlpha;
+    }
+
+    set tailAlpha(value) {
+        this.dirty = this.dirty || (this._tailAlpha != value);
+        this._tailAlpha = value;
+    }
+
+    get tailStokeWidth() {
+        return this._tailStokeWidth;
+    }
+
+    set tailStokeWidth(value) {
+        this.dirty = this.dirty || (this._tailStokeWidth != value);
+        this._tailStokeWidth = value;
+    }
+
+    get tailStokeColor() {
+        return this._tailStokeColor;
+    }
+
+    set tailStokeColor(value) {
+        this.dirty = this.dirty || (this._tailStokeColor != value);
+        this._tailStokeColor = value;
+    }
+
+    get tailStokeAlpha() {
+        return this._tailStokeAlpha;
+    }
+
+    set tailStokeAlpha(value) {
+        this.dirty = this.dirty || (this._tailStokeAlpha != value);
+        this._tailStokeAlpha = value;
+    }
+
 }
 
 Object.assign(

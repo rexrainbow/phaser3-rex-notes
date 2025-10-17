@@ -95,7 +95,26 @@ var game = new Phaser.Game(config);
 ### Create instance
 
 ```javascript
-var line = scene.add.rexLineShape(points, lineWidth, color, alpha, lineType);
+var line = scene.add.rexLineShape(points, lineWidth, color, alpha, {
+    lineType: 0,
+    pointRadius: 10,
+
+    headShape: 0,
+    headSize: undefined,
+    headColor: undefined,
+    headAlpha: 1,
+    headStrokeWidth: undefined,
+    headStrokeColor: undefined,
+    headStrokeAlpha: 1,
+
+    tailShape: 0,
+    tailSize: undefined,
+    tailColor: undefined,
+    tailAlpha: 1,
+    tailStrokeWidth: undefined,
+    tailStrokeColor: undefined,
+    tailStrokeAlpha: 1,
+});
 ```
 
 or 
@@ -107,7 +126,23 @@ var line = scene.add.rexLineShape({
     color: 0xffffff,
     alpha: 1,
     lineType: 0,
-    pointRadius: 10
+    pointRadius: 10,
+
+    headShape: 0,
+    headSize: undefined,
+    headColor: undefined,
+    headAlpha: 1,
+    headStrokeWidth: undefined,
+    headStrokeColor: undefined,
+    headStrokeAlpha: 1,
+
+    tailShape: 0,
+    tailSize: undefined,
+    tailColor: undefined,
+    tailAlpha: 1,
+    tailStrokeWidth: undefined,
+    tailStrokeColor: undefined,
+    tailStrokeAlpha: 1,
 });
 ```
 
@@ -122,6 +157,15 @@ var line = scene.add.rexLineShape({
 - `color` : Stroke color.
 - `alpha` : Stroke alpha.
 - `pointRadius` : Radius of the point used in [interaction detection](#input-event), default value is `10`.
+- `headShape`, `tailShape` : Shape type of end point
+    - `0`, or `'none'` : No end point, default value
+    - `1`, or `'triangle'` : A triangle shape of end point
+    - `2`, or `'dot'` : A circle shape of end point
+    - `3`, or `'box'` : A rectangle shape of end point
+    - `4`, or `diamond` : A diamond shape of end point
+- `headSize`, `tailSize` : Size of end point, default value is `lineWidth * 4`
+- `headColor`, `headAlpha`, `tailColor`, `tailAlpha` : Fill style of end point
+- `headStrokeWidth`, `headStrokeColor`, `headStrokeAlpha`, `tailStrokeWidth`, `tailStrokeColor`, `tailStrokeAlpha` : Stroke style of end point
 
 
 ### Custom class

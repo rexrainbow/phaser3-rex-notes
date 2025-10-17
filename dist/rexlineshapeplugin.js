@@ -291,6 +291,110 @@
         Render
     );
 
+    const BEZIER = 0;
+    const SPLINE = 1;
+    const POLYLINE = 2;
+    const STRAIGHTLINE = 3;
+
+    const CurveTypes = {
+        bezier: BEZIER,
+
+        spline: SPLINE,
+
+        polyline: POLYLINE,
+        poly: POLYLINE,
+
+        straightline: STRAIGHTLINE,
+        straight: STRAIGHTLINE,
+    };
+
+    const NONE = 0;
+    const TRIANGLE = 1;
+    const DOT = 2;
+    const BOX = 3;
+    const DIAMOND = 4;
+
+    const EndPointTypes = {
+        none: NONE,
+
+        triangle: TRIANGLE,
+        dot: DOT,
+        box: BOX,
+        diamond: DIAMOND,
+    };
+
+    var EndPointsMethods = {
+        setHeadShape(endPointType) {
+            if (typeof (endPointType) === 'string') {
+                endPointType = EndPointTypes[endPointType.toLowerCase()];
+            }
+
+            this.headShape = endPointType;
+            return this;
+        },
+
+        setHeadSize(size) {
+            this.headSize = size;
+            return this;
+        },
+
+        setHeadFillStyle(color, alpha) {
+            if (alpha === undefined) {
+                alpha = 1;
+            }
+
+            this.headColor = color;
+            this.headAlpha = alpha;
+            return this;
+        },
+
+        setHeadStrokeStyle(lineWidth, color, alpha) {
+            if (alpha === undefined) {
+                alpha = 1;
+            }
+
+            this.headStrokeWidth = lineWidth;
+            this.headStrokeColor = color;
+            this.headStrokeAlpha = alpha;
+            return this;
+        },
+
+        setTailShape(endPointType) {
+            if (typeof (endPointType) === 'string') {
+                endPointType = EndPointTypes[endPointType.toLowerCase()];
+            }
+
+            this.tailShape = endPointType;
+            return this;
+        },
+
+        setTailSize(size) {
+            this.tailSize = size;
+            return this;
+        },
+
+        setTailFillStyle(color, alpha) {
+            if (alpha === undefined) {
+                alpha = 1;
+            }
+
+            this.tailColor = color;
+            this.tailAlpha = alpha;
+            return this;
+        },
+
+        setTailStrokeStyle(lineWidth, color, alpha) {
+            if (alpha === undefined) {
+                alpha = 1;
+            }
+
+            this.tailStrokeWidth = lineWidth;
+            this.tailStrokeColor = color;
+            this.tailStrokeAlpha = alpha;
+            return this;
+        },
+    };
+
     var FillStyle = function (color, alpha) {
         if (color == null) {
             this.isFilled = false;
@@ -1408,11 +1512,6 @@
 
     Phaser.Renderer.WebGL.Utils;
 
-    const BEZIER = 0;
-    const SPLINE = 1;
-    const POLYLINE = 2;
-    const STRAIGHTLINE = 3;
-
     var DrawQuadraticBezierCurve = function (line) {
         var points = this.points;
         var controlPoint = points[1];
@@ -1495,32 +1594,116 @@
             out = GlobalBounds;
         }
 
-        var minX = Infinity;
-        var minY = Infinity;
-        var maxX = -minX;
-        var maxY = -minY;
+        var pointCount = points.length;
 
-        for (var i = 0, cnt = points.length; i < cnt; i += 2) {
-            var x = points[i];
-            var y = points[i + 1];
+        switch (pointCount) {
+            case 0:
+                out.setTo(0, 0, 0, 0);
+                break;
 
-            minX = Math.min(minX, x);
-            minY = Math.min(minY, y);
-            maxX = Math.max(maxX, x);
-            maxY = Math.max(maxY, y);
+            case 2:
+                out.setTo(points[0], points[1], 0, 0);
+                break;
+
+            default:
+                var minX = Infinity;
+                var minY = Infinity;
+                var maxX = -minX;
+                var maxY = -minY;
+
+                for (var i = 0, cnt = points.length; i < cnt; i += 2) {
+                    var x = points[i];
+                    var y = points[i + 1];
+
+                    minX = Math.min(minX, x);
+                    minY = Math.min(minY, y);
+                    maxX = Math.max(maxX, x);
+                    maxY = Math.max(maxY, y);
+                }
+
+                out.setTo(minX, minY, maxX - minX, maxY - minY);
+                break;
         }
-
-        out.x = minX;
-        out.y = minY;
-        out.width = maxX - minX;
-        out.height = maxY - minY;
 
         return out;
     };
 
     var GlobalBounds = new Rectangle$1();
 
-    var SetSizeFromBounds = function (line, bounds) {
+    var BuildEndPoint = function (shape,
+        x, y,
+        preX, preY,
+        size, shapeType
+    ) {
+
+        var radius = size / 2;
+
+        switch (shapeType) {
+            case TRIANGLE:
+                var vx, vy;
+                if ((x === preX) && (y === preY)) {
+                    vx = 1;
+                    vy = 0;
+                } else {
+                    vx = x - preX;
+                    vy = y - preY;
+                    var len = Math.hypot(vx, vy);
+                    vx /= len;
+                    vy /= len;
+                }
+
+                var nx = -vy;
+                var ny = vx;
+                var cx = x - vx * size;
+                var cy = y - vy * size;
+                var halfSize = size / 2;
+                var bx1 = cx + nx * halfSize;
+                var by1 = cy + ny * halfSize;
+                var bx2 = cx - nx * halfSize;
+                var by2 = cy - ny * halfSize;
+
+                shape.startAt(x, y)
+                    .lineTo(bx1, by1)
+                    .lineTo(bx2, by2)
+                    .close();
+                break;
+
+            case DOT:
+                shape
+                    .start()
+                    .arc(x, y, radius, 0, 360)
+                    .close();
+                break;
+
+            case BOX:
+                shape
+                    .startAt(x - radius, y - radius)
+                    .lineTo(size, 0, true)
+                    .lineTo(0, size, true)
+                    .lineTo(-size, 0, true)
+                    .lineTo(0, -size, true)
+                    .close();
+                break;
+
+            case DIAMOND:
+                shape
+                    .startAt(x, y - radius)
+                    .lineTo(x + radius, y)
+                    .lineTo(x, y + radius)
+                    .lineTo(x - radius, y)
+                    .close();
+                break;
+
+            default: // DOT
+                shape
+                    .start()
+                    .arc(x, y, radius, 0, 360)
+                    .close();
+                break;
+        }
+    };
+
+    var SetSizeFromBounds = function () {
         // Size    
         var bounds = this.bounds;
         var radius = this.pointRadius;
@@ -1531,44 +1714,105 @@
         this.setSize(width, height);
         // Origin
         this.setOrigin(-x / width, -y / height);
+
         // Position
-        line.offset(-x, -y);
+        var shapes = this.getShapes();
+        for (var i = 0, cnt = shapes.length; i < cnt; i++) {
+            var shape = shapes[i];
+            if (shape.visible) {
+                shape.offset(-x, -y);
+            }
+        }
     };
 
     var ShapesUpdateMethods = {
         buildShapes() {
+            var body = new Lines().setName('body');
+            var head = new Lines().setName('head');
+            var tail = new Lines().setName('tail');
+
             this
-                .addShape(new Lines());
+                .addShape(body)
+                .addShape(head)
+                .addShape(tail);
         },
 
         updateShapes() {
-            // Set style
-            var line = this.getShapes()[0]
-                .lineStyle(this.lineWidth, this.strokeColor, this.strokeAlpha);
-
             var points = this.points;
             var pointCount = points.length;
 
-            line.setVisible(pointCount >= 2);
+            // Body
+            var hasPath = pointCount >= 2;
+            var body = this.getShape('body').setVisible(hasPath);
 
-            if (pointCount <= 1) {
-                return;
+            if (hasPath) {
+                body.lineStyle(this.lineWidth, this.strokeColor, this.strokeAlpha);
+                if ((this.lineType === STRAIGHTLINE) || (pointCount == 2)) {
+                    DrawStraightLine.call(this, body);
+                } else if ((this.lineType === BEZIER) && (pointCount === 3)) {
+                    DrawQuadraticBezierCurve.call(this, body);
+                } else if ((this.lineType === BEZIER) && (pointCount === 4)) {
+                    DrawBezierCurve.call(this, body);
+                } else if (this.lineType === POLYLINE) {
+                    DrawPolyLine.call(this, body);
+                } else {
+                    DrawSpinleCurve.call(this, body);
+                }
             }
 
-            if ((this.lineType === STRAIGHTLINE) || (pointCount == 2)) {
-                DrawStraightLine.call(this, line);
-            } else if ((this.lineType === BEZIER) && (pointCount === 3)) {
-                DrawQuadraticBezierCurve.call(this, line);
-            } else if ((this.lineType === BEZIER) && (pointCount === 4)) {
-                DrawBezierCurve.call(this, line);
-            } else if (this.lineType === POLYLINE) {
-                DrawPolyLine.call(this, line);
-            } else {
-                DrawSpinleCurve.call(this, line);
+            // End points
+            var hasEndPoint = pointCount >= 1;
+            var hasHead = hasEndPoint && (this.headShape !== 0);
+            var hasTail = hasEndPoint && (this.tailShape !== 0);
+            var head = this.getShape('head').setVisible(hasHead);
+            var tail = this.getShape('tail').setVisible(hasTail);
+
+            if (hasHead) {
+                head
+                    .fillStyle(this.headColor, this.headAlpha)
+                    .lineStyle(this.headStrokeWidth, this.headStrokeColor, this.headStrokeAlpha);
+
+                var headPoint = this.points[0];
+                var prevPoint;
+                if (pointCount >= 2) {
+                    if (this.lineType === STRAIGHTLINE) {
+                        prevPoint = this.points[pointCount - 1];
+                    } else {
+                        prevPoint = this.points[1];
+                    }
+                } else {
+                    prevPoint = headPoint;
+                }
+                BuildEndPoint(head,
+                    headPoint.x, headPoint.y,
+                    prevPoint.x, prevPoint.y,
+                    this.headSize, this.headShape
+                );
+            }
+            if (hasTail) {
+                tail
+                    .fillStyle(this.tailColor, this.tailAlpha)
+                    .lineStyle(this.tailStrokeWidth, this.tailStrokeColor, this.tailStrokeAlpha);
+
+                var tailPoint = this.points[pointCount - 1];
+
+                var prevPoint;
+                if (this.lineType === STRAIGHTLINE) {
+                    prevPoint = this.points[0];
+                } else {
+                    prevPoint = this.points[pointCount - 2];
+                }
+                BuildEndPoint(tail,
+                    tailPoint.x, tailPoint.y,
+                    prevPoint.x, prevPoint.y,
+                    this.tailSize, this.tailShape
+                );
             }
 
-            this.bounds = GetBounds.call(this, line.pathData, true);
-            SetSizeFromBounds.call(this, line);
+
+            this.bounds = GetBounds.call(this, body.pathData, true);
+            SetSizeFromBounds.call(this);
+
         }
     };
 
@@ -1637,13 +1881,16 @@
 
     Object.assign(
         Methods,
+        EndPointsMethods,
         ShapesUpdateMethods,
         SetInteractiveMethods
     );
 
     class Line extends BaseShapes {
-        constructor(scene, points, lineWidth, color, alpha, lineType) {
-            var pointRadius;
+        constructor(scene, points, lineWidth, color, alpha, config) {
+            var lineType, pointRadius;
+            var headShape, headSize, headColor, headAlpha, headStrokeWidth, headStrokeColor, headStrokeAlpha;
+            var tailShape, tailSize, tailColor, tailAlpha, tailStrokeWidth, tailStrokeColor, tailStrokeAlpha;
             if (points !== undefined) {
                 if (typeof (points) === 'number') {
                     lineType = alpha;
@@ -1652,15 +1899,36 @@
                     lineWidth = points;
                     points = [];
                 } else if (!Array.isArray(points)) {
-                    var config = points;
+                    config = points;
                     points = config.points;
                     lineWidth = config.lineWidth;
                     color = config.color;
                     alpha = config.alpha;
-                    lineType = config.lineType;
-                    pointRadius = config.pointRadius;
+
                 }
             }
+
+            if (config === undefined) { config = {}; }
+
+            lineType = config.lineType;
+            pointRadius = config.pointRadius;
+
+            headShape = config.headShape;
+            headSize = config.headSize;
+            headColor = config.headColor;
+            headAlpha = config.headAlpha;
+            headStrokeWidth = config.headStrokeWidth;
+            headStrokeColor = config.headStrokeColor;
+            headStrokeAlpha = config.headStrokeAlpha;
+
+            tailShape = config.tailShape;
+            tailSize = config.tailSize;
+            tailColor = config.tailColor;
+            tailAlpha = config.tailAlpha;
+            tailStrokeWidth = config.tailStrokeWidth;
+            tailStrokeColor = config.tailStrokeColor;
+            tailStrokeAlpha = config.tailStrokeAlpha;
+
 
             if (points === undefined) { points = []; }
             if (lineWidth === undefined) { lineWidth = 2; }
@@ -1668,6 +1936,14 @@
             if (alpha === undefined) { alpha = 1; }
             if (lineType === undefined) { lineType = 0; }
             if (pointRadius === undefined) { pointRadius = 10; }
+
+            if (headShape === undefined) { headShape = 0; }        if (headSize === undefined) { headSize = lineWidth * 4; }
+            if (headColor === undefined) { headColor = color; }
+            if (headStrokeWidth === undefined) { headStrokeWidth = 1; }
+
+            if (tailShape === undefined) { tailShape = 0; }        if (tailSize === undefined) { tailSize = headSize; }
+            if (tailColor === undefined) { tailColor = color; }
+            if (tailStrokeWidth === undefined) { tailStrokeWidth = 1; }
 
             super(scene);
             this.type = 'rexLine';
@@ -1680,6 +1956,16 @@
             this.setLine(points, lineType);
             this.setStrokeStyle(lineWidth, color, alpha);
 
+            this.setHeadShape(headShape);
+            this.setHeadSize(headSize);
+            this.setHeadFillStyle(headColor, headAlpha);
+            this.setHeadStrokeStyle(headStrokeWidth, headStrokeColor, headStrokeAlpha);
+
+            this.setTailShape(tailShape);
+            this.setTailSize(tailSize);
+            this.setTailFillStyle(tailColor, tailAlpha);
+            this.setTailStrokeStyle(tailStrokeWidth, tailStrokeColor, tailStrokeAlpha);
+
             this.buildShapes();
 
             this.updateData();
@@ -1691,7 +1977,7 @@
             }
             if (lineType !== undefined) {
                 if (typeof (lineType) === 'string') {
-                    lineType = CURVETYPE_MAP[lineType.toLocaleLowerCase()];
+                    lineType = CurveTypes[lineType.toLocaleLowerCase()];
                 }
                 this.lineType = lineType;
             }
@@ -1725,7 +2011,7 @@
 
         setLineType(lineType) {
             if (typeof (lineType) === 'string') {
-                lineType = CURVETYPE_MAP[lineType.toLocaleLowerCase()];
+                lineType = CurveTypes[lineType.toLocaleLowerCase()];
             }
             if (this.lineType === lineType) {
                 return this;
@@ -1745,7 +2031,7 @@
                 out = [];
             }
             var x = this.x;
-            var y = this.y;    
+            var y = this.y;
             var points = this.points;
             for (var i = 0, cnt = points.length; i < cnt; i++) {
                 var p = points[i];
@@ -1757,19 +2043,134 @@
 
             return out;
         }
+
+        get headShape() {
+            return this._headShape;
+        }
+
+        set headShape(value) {
+            this.dirty = this.dirty || (this._headShape != value);
+            this._headShape = value;
+        }
+
+        get headSize() {
+            return this._headSize;
+        }
+
+        set headSize(value) {
+            this.dirty = this.dirty || (this._headSize != value);
+            this._headSize = value;
+        }
+
+        get headColor() {
+            return this._headColor;
+        }
+
+        set headColor(value) {
+            this.dirty = this.dirty || (this._headColor != value);
+            this._headColor = value;
+        }
+
+        get headAlpha() {
+            return this._headAlpha;
+        }
+
+        set headAlpha(value) {
+            this.dirty = this.dirty || (this._headAlpha != value);
+            this._headAlpha = value;
+        }
+
+        get headStokeWidth() {
+            return this._headStokeWidth;
+        }
+
+        set headStokeWidth(value) {
+            this.dirty = this.dirty || (this._headStokeWidth != value);
+            this._headStokeWidth = value;
+        }
+
+        get headStokeColor() {
+            return this._headStokeColor;
+        }
+
+        set headStokeColor(value) {
+            this.dirty = this.dirty || (this._headStokeColor != value);
+            this._headStokeColor = value;
+        }
+
+        get headStokeAlpha() {
+            return this._headStokeAlpha;
+        }
+
+        set headStokeAlpha(value) {
+            this.dirty = this.dirty || (this._headStokeAlpha != value);
+            this._headStokeAlpha = value;
+        }
+
+        get tailShape() {
+            return this._tailShape;
+        }
+
+        set tailShape(value) {
+            this.dirty = this.dirty || (this._tailShape != value);
+            this._tailShape = value;
+        }
+
+        get tailSize() {
+            return this._tailSize;
+        }
+
+        set tailSize(value) {
+            this.dirty = this.dirty || (this._tailSize != value);
+            this._tailSize = value;
+        }
+
+        get tailColor() {
+            return this._tailColor;
+        }
+
+        set tailColor(value) {
+            this.dirty = this.dirty || (this._tailColor != value);
+            this._tailColor = value;
+        }
+
+        get tailAlpha() {
+            return this._tailAlpha;
+        }
+
+        set tailAlpha(value) {
+            this.dirty = this.dirty || (this._tailAlpha != value);
+            this._tailAlpha = value;
+        }
+
+        get tailStokeWidth() {
+            return this._tailStokeWidth;
+        }
+
+        set tailStokeWidth(value) {
+            this.dirty = this.dirty || (this._tailStokeWidth != value);
+            this._tailStokeWidth = value;
+        }
+
+        get tailStokeColor() {
+            return this._tailStokeColor;
+        }
+
+        set tailStokeColor(value) {
+            this.dirty = this.dirty || (this._tailStokeColor != value);
+            this._tailStokeColor = value;
+        }
+
+        get tailStokeAlpha() {
+            return this._tailStokeAlpha;
+        }
+
+        set tailStokeAlpha(value) {
+            this.dirty = this.dirty || (this._tailStokeAlpha != value);
+            this._tailStokeAlpha = value;
+        }
+
     }
-
-    const CURVETYPE_MAP = {
-        bezier: BEZIER,
-
-        spline: SPLINE,
-
-        polyline: POLYLINE,
-        poly: POLYLINE,
-
-        straightline: STRAIGHTLINE,
-        straight: STRAIGHTLINE,
-    };
 
     Object.assign(
         Line.prototype,

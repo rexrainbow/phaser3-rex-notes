@@ -15475,9 +15475,24 @@
 <li><code>parameters</code> : See <a href="#syntax-of-text">Syntax of text</a></li>
 </ul>
 </li>
-<li><code>onCreateEdgeGameObject</code> : Callback to create edge game object
-    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">id</span><span class="p">,</span><span class="w"> </span><span class="nx">parameters</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexGraph</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">line</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span>
+<li><code>onCreateEdgeGameObject</code> : Callback to create edge game object. Default value is
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">id</span><span class="p">,</span><span class="w"> </span><span class="nx">parameters</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0xffffff</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;poly&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">head</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;none&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">tail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;none,&#39;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">parameters</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">gameObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Line</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="nx">color</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">lineWidth</span><span class="o">:</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">lineType</span><span class="o">:</span><span class="w"> </span><span class="nx">type</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">headShape</span><span class="o">:</span><span class="w"> </span><span class="nx">head</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">tailShape</span><span class="o">:</span><span class="w"> </span><span class="nx">tail</span><span class="p">,</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="w">    </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">gameObject</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div><ul>
 <li><code>gameObject</code> : <a href="../shape-line2/">Line-shape</a></li>

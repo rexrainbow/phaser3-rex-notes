@@ -127,9 +127,6 @@ class TouchCursor extends VectorToCursorKeys {
 
         this.setVector(startX, startY, worldXY.x, worldXY.y);
 
-        this.end.x = worldXY.x;
-        this.end.y = worldXY.y;
-
         this.emit('update');
     }
 

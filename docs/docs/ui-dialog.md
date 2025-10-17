@@ -162,6 +162,7 @@ var dialog = scene.rexUI.add.dialog({
         descriptionLeft: 0,
         descriptionRight: 0
 
+        choice: 0,
         choices: 0,
         choicesLeft: 0,
         choicesRight: 0,

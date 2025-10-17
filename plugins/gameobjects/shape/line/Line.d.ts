@@ -7,6 +7,8 @@ declare namespace Line {
     type PointType = { x: number, y: number };
     type LineType = 0 | 'bezier' | 1 | 'spline' | 2 | 'polyline' | 'poly' | 3 | 'straightline' | 'straight';
 
+    type EndPointType = 0 | 'none' | 1 | 'triangle' | 2 | 'dot' | 3 | 'box' | 4 | 'diamond';
+
     interface IConfig {
         points?: PointType[],
         lineWidth?: number,
@@ -14,6 +16,22 @@ declare namespace Line {
         alpha?: number,
         lineType?: LineType,
         pointRadius?: number,
+
+        headShape?: EndPointType | string | number,
+        headSize?: number,
+        headColor?: number,
+        headAlpha?: number,
+        headStrokeWidth?: number,
+        headStrokeColor?: number,
+        headStrokeAlpha?: number,
+
+        tailShape?: EndPointType | string | number,
+        tailSize?: number,
+        tailColor?: number,
+        tailAlpha?: number,
+        tailStrokeWidth?: number,
+        tailStrokeColor?: number,
+        tailStrokeAlpha?: number,
     }
 }
 
@@ -29,7 +47,7 @@ declare class Line extends BaseShapes {
         lineWidth?: number,
         color?: number,
         alpha?: number,
-        lineType?: Line.LineType
+        config?: Line.IConfig
     );
 
     setLine(
@@ -43,4 +61,14 @@ declare class Line extends BaseShapes {
     readonly lineType: number;
 
     setPointRadius(radius: number): this;
+
+    setHeadShape(endPointType?: Line.EndPointType): this;
+    setHeadSize(size?: number): this;
+    setHeadFillStyle(color?: number, alpha?: number): this;
+    setHeadStrokeStyle(lineWidth?: number, color?: number, alpha?: number): this;
+
+    setTailShape(endPointType?: Line.EndPointType): this;
+    setTailSize(size?: number): this;
+    setTailFillStyle(color?: number, alpha?: number): this;
+    setTailStrokeStyle(lineWidth?: number, color?: number, alpha?: number): this;
 }

@@ -17,6 +17,9 @@ NODE [padding=3,
       color=0x888888,
      ]
 
+EDGE [color=0x008800,
+      head=box, tail=triangle]
+
 A [color=0xFFFF00]
 
 A -> B -> C -> H -> I
@@ -38,16 +41,18 @@ S *> *1
         `
 
         var background = this.add.rectangle()
+
+        // Use p3-built-in container
         var container = this.add.container(400, 300).setVisible(false);
+
+        // Use rex-containerlite
+        // var container = this.rexUI.add.container(400, 300).setVisible(false);
 
         var graph = this.rexGraph.add.graph()
 
         this.rexGraph.buildGraphFromText(graph, {
             onCreateNodeGameObject(scene, id, parameters) {
                 return CreateNode(scene, id, parameters.color);
-            },
-            onCreateEdgeGameObject(scene, id, parameters) {
-                return CreateEdge(scene);
             },
 
             text: text
@@ -105,14 +110,6 @@ var CreateNode = function (scene, label, color) {
         text: scene.add.text(0, 0, label),
         align: 'center',
     }).layout();
-}
-
-var CreateEdge = function (scene) {
-    return scene.rexGraph.add.line({
-        color: 0x008800,
-        lineWidth: 2,
-        lineType: 'poly'
-    });
 }
 
 var config = {

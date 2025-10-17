@@ -15419,6 +15419,30 @@
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setLine</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setLine</span><span class="p">(</span><span class="nx">path</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setHeadShape</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">&#39;headShapeSave&#39;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">headShapeSave</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">headShape</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">sourceGameObject</span><span class="p">.</span><span class="nx">$dummy</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setHeadShape</span><span class="p">(</span><span class="mf">0</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setHeadShape</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">headShapeSave</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setTailShape</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">&#39;tailShapeSave&#39;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">tailShapeSave</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">tailShape</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">targetGameObject</span><span class="p">.</span><span class="nx">$dummy</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setTailShape</span><span class="p">(</span><span class="mf">0</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setTailShape</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">tailShapeSave</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div><ul>
 <li><code>gameObject</code> : Assume that edge game object is <a href="../shape-line2/">line game object</a> with <code>'poly'</code> line type</li>

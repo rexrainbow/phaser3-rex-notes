@@ -20,6 +20,9 @@ NODE [padding=3,
       color=0x888888,
      ]
 
+EDGE [color=0x008800,
+      head=box, tail=triangle]
+
 A [color=0xFFFF00]
 
 A -> B -> C -> H -> I
@@ -48,9 +51,6 @@ S *> *1
         this.rexGraph.buildGraphFromText(graph, {
             onCreateNodeGameObject(scene: Demo, id: string, parameters: { color?: number }) {
                 return CreateNode(scene, id, parameters);
-            },
-            onCreateEdgeGameObject(scene: Demo, id: string, parameters) {
-                return CreateEdge(scene);
             },
 
             text: text
@@ -110,17 +110,6 @@ var CreateNode = function (
         text: scene.add.text(0, 0, label),
         align: 'center',
     }).layout();
-}
-
-var CreateEdge = function (
-    scene: Demo
-) {
-
-    return scene.rexGraph.add.line({
-        color: 0x008800,
-        lineWidth: 2,
-        lineType: 'poly'
-    });
 }
 
 var config = {

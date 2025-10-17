@@ -43,10 +43,13 @@ export default {
         var offsetX = -(width * container.originX) + padding.left;
         var offsetY = -(height * container.originY) + padding.top;
 
+
         if (IsContainerGameObject(container)) {
+            // Is built-in container
             this.setGraphOffset(offsetX, offsetY);
 
         } else if (container.isRexContainerLite) {
+            // Is rex-containerlite
             this.setGraphOffset(offsetX, offsetY);
 
             this.forEachGameObject(function (gameObject) {

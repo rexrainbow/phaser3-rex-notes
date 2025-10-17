@@ -17,6 +17,9 @@ NODE [padding=3,
       color=0x888888,
      ]
 
+EDGE [color=0x008800,
+      head=box, tail=triangle]
+
 A [color=0xFFFF00]
 
 A -> B -> C -> H -> I
@@ -66,9 +69,6 @@ var BuildGraph = async function (panel, text) {
         onCreateNodeGameObject(scene, id, parameters) {
             return CreateNode(scene, id, parameters);
         },
-        onCreateEdgeGameObject(scene, id, parameters) {
-            return CreateEdge(scene);
-        },
 
         text: text
     })
@@ -110,14 +110,6 @@ var CreateNode = function (scene, label, parameters) {
         text: scene.add.text(0, 0, label),
         align: 'center',
     }).layout();
-}
-
-var CreateEdge = function (scene) {
-    return scene.rexGraph.add.line({
-        color: 0x008800,
-        lineWidth: 2,
-        lineType: 'poly'
-    });
 }
 
 const COLOR_MAIN = 0x4e342e;
