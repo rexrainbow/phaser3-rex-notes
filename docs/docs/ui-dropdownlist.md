@@ -349,7 +349,7 @@ var dropDownList = scene.rexUI.add.dropDownList({
 - `sizerEvents` : Set `true` to fire [sizer events](ui-basesizer.md#events). Default value is `false`.
 - `enableLayer` : 
     - `false` : Add child game objects into scene's display list. Default behavior.
-    - `true` : Add child game objects into an internal [layer game object](layer.md). [See also](containerlite.md#layer).
+    - `true` : Add child game objects into an internal [layer game object](layer.md). [See also](containerlite.md#add-to-container).
 
 ### Custom class
 
@@ -532,7 +532,7 @@ See [label object](ui-label.md), [sizer object](ui-sizer.md), [base sizer object
     ```
     - `button` : Game object of triggered button on list panel.
     - `index` : Index of triggered button.
-    - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
+    - `pointer` : [Pointer](touchevents.md#pointer) object.
     - Cancel remaining touched events : `event.stopPropagation()`
 - Over button
     ```javascript
@@ -542,7 +542,7 @@ See [label object](ui-label.md), [sizer object](ui-sizer.md), [base sizer object
     ```
     - `button` : Game object of triggered button on list panel.
     - `index` : Index of triggered button.
-    - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
+    - `pointer` : [Pointer](touchevents.md#pointer) object.
     - Cancel remaining touched events : `event.stopPropagation()`
 - Out button
     ```javascript
@@ -552,7 +552,7 @@ See [label object](ui-label.md), [sizer object](ui-sizer.md), [base sizer object
     ```
     - `button` : Game object of triggered button on list panel.
     - `index` : Index of triggered button.
-    - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
+    - `pointer` : [Pointer](touchevents.md#pointer) object.
     - Cancel remaining touched events : `event.stopPropagation()`
 - On value changing
     ```javascript

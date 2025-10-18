@@ -63,7 +63,7 @@ Built-in touch/mouse events of phaser.
         }, scope);
     ```
 
-Reference : [Properties of point](touchevents.md#properties-of-point)
+Reference : [Properties of point](touchevents.md#pointer)
 
 ### Register interactive
 

@@ -269,7 +269,7 @@ var imageInputLabel = scene.rexUI.add.imageInputLabel({
 - `sizerEvents` : Set `true` to fire [sizer events](ui-basesizer.md#events). Default value is `false`.
 - `enableLayer` : 
     - `false` : Add child game objects into scene's display list. Default behavior.
-    - `true` : Add child game objects into an internal [layer game object](layer.md). [See also](containerlite.md#layer).
+    - `true` : Add child game objects into an internal [layer game object](layer.md). [See also](containerlite.md#add-to-container).
 - `clickTarget` : Click target to open file chooser dialog
     - A string, `'icon'`, `'text'`, `'action'`, `'background'` : Click `icon`, `text`, `action`, `background` game object to open file chooser dialog.
     - `undefined` : Click this ImageInputLabel game object to open file chooser dialog. Default behavior.

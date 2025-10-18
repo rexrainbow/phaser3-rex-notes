@@ -213,14 +213,14 @@ var particles = scene.add.particles(x, y, texture, {
 - `timeScale` : The time rate applied to active particles, affecting lifespan, movement, and tweens. Values larger than 1 are faster than normal.
 - `trackVisible` : Whether the emitter's `visible` state will track the follow target's visibility state.
 - `emitZone` :
-    - [Emit zone](particles.md#emit-zone)
+    - [Emit zone](particles.md#add-emit-zone)
         ```javascript
         {
             type: 'random',
             source: geom,
         }            
         ```
-    - [Emit edge](particles.md#emit-edge)
+    - [Emit edge](particles.md#add-emit-edge)
         ```javascript
         {
             type: 'edge',
@@ -600,8 +600,6 @@ emitter.setAnim(anims);
     emitter.setQuantity(quantity);
     ```
     - `quantity` : The number of particles to release at each flow cycle or explosion.
-
-### Zone
 
 ### Emit zone
 

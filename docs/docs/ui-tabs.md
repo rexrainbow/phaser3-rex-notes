@@ -203,7 +203,7 @@ var tabs = scene.rexUI.add.tabs({
 - `sizerEvents` : Set `true` to fire [sizer events](ui-basesizer.md#events). Default value is `false`.
 - `enableLayer` : 
     - `false` : Add child game objects into scene's display list. Default behavior.
-    - `true` : Add child game objects into an internal [layer game object](layer.md). [See also](containerlite.md#layer).
+    - `true` : Add child game objects into an internal [layer game object](layer.md). [See also](containerlite.md#add-to-container).
 
 ### Custom class
 
@@ -248,7 +248,7 @@ See [grid sizer object](ui-gridsizer.md), [base-sizer object](ui-basesizer.md).
     - `button` : Triggered button game object.
     - `groupName` : `'left'`, `'right'`, `'top'`, or `'bottom'`.
     - `index` : Index of triggered button game object.
-    - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
+    - `pointer` : [Pointer](touchevents.md#pointer) object.
 - Pointer-over button
     ```javascript
     tabs.on('button.over', function(button, groupName, index, pointer) {
@@ -258,7 +258,7 @@ See [grid sizer object](ui-gridsizer.md), [base-sizer object](ui-basesizer.md).
     - `button` : Triggered button game object
     - `groupName` : `'left'`, `'right'`, `'top'`, or `'bottom'`.
     - `index` : Index of triggered button game object.
-    - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
+    - `pointer` : [Pointer](touchevents.md#pointer) object.
 - Pointer-out button
     ```javascript
     tabs.on('button.out', function(button, groupName, index, pointer) {
@@ -268,7 +268,7 @@ See [grid sizer object](ui-gridsizer.md), [base-sizer object](ui-basesizer.md).
     - `button` : Triggered button game object.
     - `groupName` : `'left'`, `'right'`, `'top'`, or `'bottom'`.
     - `index` : Index of triggered button game object.
-    - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
+    - `pointer` : [Pointer](touchevents.md#pointer) object.
 - Enable button's input
     ```javascript
     tabs.on('button.enable', function(button, groupName, index) {

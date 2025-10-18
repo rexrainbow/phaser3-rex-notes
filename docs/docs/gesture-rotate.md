@@ -188,7 +188,7 @@ var drag1Vector = rotate.drag1Vector; // {x, y}
 
 ### Catched touch pointers
 
-- [Pointer](touchevents.md#properties-of-point) 0, available when state is `1`
+- [Pointer](touchevents.md#pointer) 0, available when state is `1`
     ```javascript
     var pointer0 = rotate.pointers[0];
     ```
@@ -199,7 +199,7 @@ var drag1Vector = rotate.drag1Vector; // {x, y}
         var worldX = pointer0.worldX;
         var worldY = pointer0.worldY;
         ```
-- [Pointer](touchevents.md#properties-of-point) 1, available when state is `2`
+- [Pointer](touchevents.md#pointer) 1, available when state is `2`
     ```javascript
     var pointer0 = rotate.pointers[1];
     ```

@@ -316,7 +316,7 @@ var table = scene.rexUI.add.gridTable({
         - `false` : No mask.
     - `table.enableLayer` : 
         - `false` : Add cell game objects into scene's display list. Default behavior.
-        - `true` : Add cell game objects into an internal [layer game object](layer.md). [See also](containerlite.md#layer).
+        - `true` : Add cell game objects into an internal [layer game object](layer.md). [See also](containerlite.md#add-to-container).
     - `table.reuseCellContainer` : 
         - `true` : Reuse cell container when creating new cell container. 
         - `false` : Destory cell container when cell is invisible, create new cell container when cell is visible. Default behavior.

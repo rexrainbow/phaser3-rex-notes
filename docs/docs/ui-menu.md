@@ -260,7 +260,7 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md), [containe
     ```
     - `button` : Game object of triggered button.
     - `index` : Index of triggered button.
-    - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
+    - `pointer` : [Pointer](touchevents.md#pointer) object.
     - Cancel remaining touched events : `event.stopPropagation()`
 - Pointer-over button
     ```javascript
@@ -270,7 +270,7 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md), [containe
     ```
     - `button` : Game object of triggered button.
     - `index` : Index of triggered button.
-    - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
+    - `pointer` : [Pointer](touchevents.md#pointer) object.
     - Cancel remaining touched events : `event.stopPropagation()`
 - Pointer-out button
     ```javascript
@@ -280,7 +280,7 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md), [containe
     ```
     - `button` : Game object of triggered button.
     - `index` : Index of triggered button.
-    - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
+    - `pointer` : [Pointer](touchevents.md#pointer) object.
     - Cancel remaining touched events : `event.stopPropagation()`
 - Expand(Pop-up start) sub-menu
     ```javascript

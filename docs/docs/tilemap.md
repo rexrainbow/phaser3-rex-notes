@@ -249,7 +249,7 @@ layer.setPipeline(pipelineName);
 layer.setPostPipeline(pipelineName);
 ```
 
-See [Render pipeline section](gameobject.md#render-pipeline) of Game object.
+See [Render pipeline section](gameobject.md#post-fx-pipeline) of Game object.
 
 #### Render order
 

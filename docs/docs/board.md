@@ -941,7 +941,7 @@ Offset all of tile positions to `(0, 0)`, and set board size to fit these tile p
         // var tileY = tileXY.y;
     });
     ```
-    - `pointer` : [Touch pointer](touchevents.md#properties-of-point)
+    - `pointer` : [Touch pointer](touchevents.md#pointer)
     - `tileXY` : `{x, y}`
 - Pointer down at chess
     ```javascript
@@ -953,7 +953,7 @@ Offset all of tile positions to `(0, 0)`, and set board size to fit these tile p
     gameObject.on('board.pointerdown', function(pointer) {
     })
     ```
-    - `pointer` : [Touch pointer](touchevents.md#properties-of-point)
+    - `pointer` : [Touch pointer](touchevents.md#pointer)
     - `gameObject` : Game object at touched (tileX, tileY)
 
 #### Pointer up
@@ -976,7 +976,7 @@ Offset all of tile positions to `(0, 0)`, and set board size to fit these tile p
     gameObject.on('board.pointerup', function(pointer) {
     })
     ```
-    - `pointer` : [Touch pointer](touchevents.md#properties-of-point)
+    - `pointer` : [Touch pointer](touchevents.md#pointer)
     - `gameObject` : Game object at touched (tileX, tileY)
 
 #### Pointer move
@@ -1000,7 +1000,7 @@ Offset all of tile positions to `(0, 0)`, and set board size to fit these tile p
     gameObject.on('board.pointermove', function(pointer) {
     })
     ```
-    - `pointer` : [Touch pointer](touchevents.md#properties-of-point)
+    - `pointer` : [Touch pointer](touchevents.md#pointer)
     - `gameObject` : Game object at touched (tileX, tileY)
 
 #### Pointer over
@@ -1024,7 +1024,7 @@ Offset all of tile positions to `(0, 0)`, and set board size to fit these tile p
     gameObject.on('board.pointerover', function(pointer) {
     })
     ```
-    - `pointer` : [Touch pointer](touchevents.md#properties-of-point)
+    - `pointer` : [Touch pointer](touchevents.md#pointer)
     - `gameObject` : Game object at touched (tileX, tileY)
 
 #### Pointer out
@@ -1048,7 +1048,7 @@ Offset all of tile positions to `(0, 0)`, and set board size to fit these tile p
     gameObject.on('board.pointerout', function(pointer) {
     })
     ```
-    - `pointer` : [Touch pointer](touchevents.md#properties-of-point)
+    - `pointer` : [Touch pointer](touchevents.md#pointer)
     - `gameObject` : Game object at pointer-out (tileX, tileY)
 
 #### [Tap](gesture-tap.md)

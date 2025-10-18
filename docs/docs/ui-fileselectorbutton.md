@@ -248,7 +248,7 @@ var button = scene.add.fileSelectorButton({
 - `sizerEvents` : Set `true` to fire [sizer events](ui-basesizer.md#events). Default value is `false`.
 - `enableLayer` : 
     - `false` : Add child game objects into scene's display list. Default behavior.
-    - `true` : Add child game objects into an internal [layer game object](layer.md). [See also](containerlite.md#layer).
+    - `true` : Add child game objects into an internal [layer game object](layer.md). [See also](containerlite.md#add-to-container).
 - `accept` : A filter for what file types the user can pick from the file input dialog box.
     - `'image/*'` : The user can pick all image files.
     - `'audio/*'` : The user can pick all sound files.

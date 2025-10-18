@@ -8702,7 +8702,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../markedeventsheet/" class="md-nav__link">
+      <a href="../markedeventsheets/" class="md-nav__link">
         
   
   
@@ -15621,7 +15621,7 @@
 <li><code>sizerEvents</code> : Set <code>true</code> to fire <a href="../ui-basesizer/#events">sizer events</a>. Default value is <code>false</code>.</li>
 <li><code>enableLayer</code> : <ul>
 <li><code>false</code> : Add child game objects into scene's display list. Default behavior.</li>
-<li><code>true</code> : Add child game objects into an internal <a href="../layer/">layer game object</a>. <a href="../containerlite/#layer">See also</a>.</li>
+<li><code>true</code> : Add child game objects into an internal <a href="../layer/">layer game object</a>. <a href="../containerlite/#add-to-container">See also</a>.</li>
 </ul>
 </li>
 <li><code>eventEmitter</code> : Dispatch buttons' touch events to other game object, default is this buttons game object.</li>
@@ -15679,7 +15679,7 @@
 <li><code>groupName</code> : Optional group name.</li>
 <li><code>button</code> : Triggered button game object.</li>
 <li><code>index</code> : Index of triggered button game object.</li>
-<li><code>pointer</code> : <a href="../touchevents/#properties-of-point">Pointer</a> object.</li>
+<li><code>pointer</code> : <a href="../touchevents/#pointer">Pointer</a> object.</li>
 <li>Cancel remaining touched events : <code>event.stopPropagation()</code></li>
 </ul>
 </li>
@@ -15905,7 +15905,7 @@ Call <code>buttons.layout()</code>, or <code>topSizer.layout()</code> after show
 <span class="p">});</span>
 </code></pre></div><ul>
 <li><code>buttons</code> : Array of button game objects.<ul>
-<li>Property <code>name</code> of each button game object will be used as a key in <a href="../gameobject/#private-data"><code>buttons.data</code></a></li>
+<li>Property <code>name</code> of each button game object will be used as a key in <a href="../gameobject/#data"><code>buttons.data</code></a></li>
 </ul>
 </li>
 <li><code>buttonsType</code> : Set type to <code>'checkboxes'</code>, or <code>'radio'</code>.</li>

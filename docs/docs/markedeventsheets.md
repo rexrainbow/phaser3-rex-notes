@@ -80,8 +80,8 @@ var eventSheetManager = scene.plugins.get('rexMarkedEventSheets').add({
 });
 ```
 
-- `commandExecutor` : Command executor of [actions](markedeventsheet.md#custom-command).
-    - This plugin provides a built-in [command executor](markedeventsheet.md#command-executor).
+- `commandExecutor` : Command executor of [actions](#custom-command).
+    - This plugin provides a built-in [command executor](#command-executor).
 - `parallel` :
     - `false` : Test condition then execute event sheet one by one. Default behavior.
     - `true` : Test all condition of event sheets then execute event sheets one by one.
@@ -126,7 +126,7 @@ eventSheetManager.addEventSheet(content, {
 })
 ```
 
-- `content` : See [structure of event sheet](markedeventsheet.md#structure-of-event-sheet)
+- `content` : See [structure of event sheet](#structure-of-event-sheet)
 - `commentLineStart` : Content line start by this symobl (default value is `//`) will be ignored as a comment line.
 - `lineBreak` : Markdown will use `\` as line break. So the last character `\` will be discarded.
 - `parallel` : 
@@ -455,10 +455,10 @@ coin > 5
 - H2 heading with `[Condition]` : Main condition.
     - Each line under `[Condition]` is a boolean equation, composed of `AND` logic.
     - Can have many `[Condition]` heading, each `[Condition]` heading will be composed of `OR` logic.
-    - Read data from [local memory](markedeventsheet.md#local-memory)
+    - Read data from [local memory](#local-memory)
 - H2/H3/... headings between `[Condition]` and `[Catch]` : Actions when main condition is `true`.
-    - [Flow control instructions of headings](markedeventsheet.md#flow-control-instructions)
-    - Actions : [Custom command](markedeventsheet.md#custom-command)
+    - [Flow control instructions of headings](#flow-control-instructions)
+    - Actions : [Custom command](#custom-command)
 - H2 heading with `[Catch]` : Actions when main condition is `false`.
 
 #### Flow control instructions
@@ -480,7 +480,7 @@ actions...
 ```
 
 - H2/H3/... heading with `[If expression]`, or `[Else if expression]` : If/Else If condition with expression
-    - Read data from [local memory](markedeventsheet.md#local-memory)
+    - Read data from [local memory](#local-memory)
     - Boolean expression AND/OR : `&&`.
     - Boolean expression OR : `||`.
     - Actions when expression is `true`.
@@ -515,7 +515,7 @@ actions...
 
 - H2/H3/... heading with `[If]`, or `[Else if]` : If, Else If condition
     - Each line under `[If]`, `[Else If]` is a boolean equation, composed of `AND` logic.
-    - Read data from [local memory](markedeventsheet.md#local-memory)
+    - Read data from [local memory](#local-memory)
 - H3/H4/... heading under `[If]`, `[Else if]` : - Actions when previous expressions are all `false`.
 
 
@@ -558,7 +558,7 @@ actions...
 ```
 
 - H2/H3/... heading with `[While expression]` : While loop with expression    
-    - Read data from [local memory](markedeventsheet.md#local-memory)
+    - Read data from [local memory](#local-memory)
     - Actions when expression is `true`.
 
 
@@ -574,7 +574,7 @@ actions...
 
 - H2/H3/... heading with `[While]` : While loop
     - Each line under `[While]` is a boolean equation, composed of `AND` logic.
-    - Read data from [local memory](markedeventsheet.md#local-memory)
+    - Read data from [local memory](#local-memory)
 - H3/H4/... heading under `[While]` : Actions running when condition is `true`
 
 
@@ -928,14 +928,14 @@ commandExecutor.addGameObjectManager({
 })
 ```
 
-- `name` : A string name of game object's type. Will [register command](markedeventsheet.md#add-custom-command) `GOTYPE` to this command executor.
+- `name` : A string name of game object's type. Will [register command](#add-custom-command) `GOTYPE` to this command executor.
 - `createGameObject` : A callback for creating game object
     ```javascript
     function(scene, config) {
         return gameObject;
     }
     ```
-    - `config` : Parameters passed from [event sheet](markedeventsheet.md#create-custom-game-object).
+    - `config` : Parameters passed from [event sheet](#create-custom-game-object).
         - `id`, `layer`, `autoClear`, `eventSheetManager`, `eventsheet` : These parameters are reserved.
         - `eventSheetManager` : This event sheet manager.
 - `viewportCoordinate` : Apply [viewportCoordinate behavior](viewport-coordinate.md) to game object.
@@ -955,7 +955,7 @@ commandExecutor.addGameObjectManager({
             - `'revealLeft'`, or `4` : [Reveal](shader-builtin.md#reveal) left for fade-in.
             - `'revealRight'`, or `5` : [Reveal](shader-builtin.md#reveal) right for fade-in.
         - `fade.time` : Duration of fading. Default value is `500`.
-- `defaultLayer` : A layer name defined in `layers` parameter of [`addCommandExecutor` method](markedeventsheet.md#create-command-executor-instance)
+- `defaultLayer` : A layer name defined in `layers` parameter of [`addCommandExecutor` method](#create-command-executor-instance)
 - `autoClear` : 
     - `true` : Clear game objects when exiting current event sheet. Default behavior.
     - `false` : Ignore this behavior.
@@ -965,9 +965,9 @@ commandExecutor.addGameObjectManager({
         // commandExecutor.waitEvent(eventEmitter, eventName);
     }
     ```
-    - `commandName` : Command name. These command names are reserved : [`to`](markedeventsheet.md#ease-properties-of-custom-game-object), [`yoyo`](markedeventsheet.md#ease-properties-of-custom-game-object), [`destroy`](markedeventsheet.md#destroy-custom-game-object)
+    - `commandName` : Command name. These command names are reserved : [`to`](#ease-properties-of-custom-game-object), [`yoyo`](#ease-properties-of-custom-game-object), [`destroy`](#destroy-custom-game-object)
     - `gameObject` : Game object instance.
-    - `config` : Parameters passed from [event sheet](markedeventsheet.md#invoke-custom-command).
+    - `config` : Parameters passed from [event sheet](#invoke-custom-command).
     - `commandExecutor` : This command executor instance. [See also](#methods-used-in-command)
     - `eventSheetManager` : This event sheet manager instance.
         - Store variable into blackboard of eventSheetManager : `eventSheetManager.setData(key, value)`
@@ -1644,7 +1644,7 @@ commandExecutor.addCommand(commandName, function(config, eventSheetManager){
 }, scope);
 ```
 
-- `config` : Parameters passed from [event sheet](markedeventsheet.md#custom-command).
+- `config` : Parameters passed from [event sheet](#custom-command).
 - `eventSheetManager` : This event mangager.
     - Pause running of current event sheet
         ```javascript

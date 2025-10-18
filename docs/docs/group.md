@@ -91,7 +91,7 @@ group.clear();
     ```javascript
     var len = group.getLength();
     ```
-- Group is full. Maximun size is set in [`maxSize`](group.md#configuration).
+- Group is full. Maximun size is set in [`maxSize`](group.md#add-group-object).
     ```javascript
     var isFull = group.isFull();
     ```

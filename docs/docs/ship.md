@@ -123,7 +123,7 @@ var ship = scene.plugins.get('rexShip').add(gameObject, {
     - `wrap` : Set `true` to enable wrap mode. Default value is `true`.
     - `padding`
 - `enable` : set `false` to disable moving.
-- `cursorKeys` : CursorKey object, using [keyboard's cursorKeys](keyboardevents.md#get-state-of-cursorkeys) by default.
+- `cursorKeys` : CursorKey object, using [keyboard's cursorKeys](keyboardevents.md#key-object-of-cursorkeys) by default.
 
 ### Set max speed
 

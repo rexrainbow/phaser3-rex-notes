@@ -10,7 +10,7 @@
         <meta name="author" content="rexrainbow">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/markedeventsheet/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/markedeventsheets/">
       
       
         <link rel="prev" href="../csvscenario/">
@@ -16501,8 +16501,8 @@
 <span class="p">});</span>
 </code></pre></div>
 <ul>
-<li><code>commandExecutor</code> : Command executor of <a href="./#custom-command">actions</a>.<ul>
-<li>This plugin provides a built-in <a href="./#command-executor">command executor</a>.</li>
+<li><code>commandExecutor</code> : Command executor of <a href="#custom-command">actions</a>.<ul>
+<li>This plugin provides a built-in <a href="#command-executor">command executor</a>.</li>
 </ul>
 </li>
 <li><code>parallel</code> :<ul>
@@ -16541,7 +16541,7 @@
 <span class="p">})</span>
 </code></pre></div>
 <ul>
-<li><code>content</code> : See <a href="./#structure-of-event-sheet">structure of event sheet</a></li>
+<li><code>content</code> : See <a href="#structure-of-event-sheet">structure of event sheet</a></li>
 <li><code>commentLineStart</code> : Content line start by this symobl (default value is <code>//</code>) will be ignored as a comment line.</li>
 <li><code>lineBreak</code> : Markdown will use <code>\</code> as line break. So the last character <code>\</code> will be discarded.</li>
 <li><code>parallel</code> : <ul>
@@ -16816,12 +16816,12 @@ coin &gt; 5
 <li>H2 heading with <code>[Condition]</code> : Main condition.<ul>
 <li>Each line under <code>[Condition]</code> is a boolean equation, composed of <code>AND</code> logic.</li>
 <li>Can have many <code>[Condition]</code> heading, each <code>[Condition]</code> heading will be composed of <code>OR</code> logic.</li>
-<li>Read data from <a href="./#local-memory">local memory</a></li>
+<li>Read data from <a href="#local-memory">local memory</a></li>
 </ul>
 </li>
 <li>H2/H3/... headings between <code>[Condition]</code> and <code>[Catch]</code> : Actions when main condition is <code>true</code>.<ul>
-<li><a href="./#flow-control-instructions">Flow control instructions of headings</a></li>
-<li>Actions : <a href="./#custom-command">Custom command</a></li>
+<li><a href="#flow-control-instructions">Flow control instructions of headings</a></li>
+<li>Actions : <a href="#custom-command">Custom command</a></li>
 </ul>
 </li>
 <li>H2 heading with <code>[Catch]</code> : Actions when main condition is <code>false</code>.</li>
@@ -16842,7 +16842,7 @@ actions...
 </code></pre></div>
 <ul>
 <li>H2/H3/... heading with <code>[If expression]</code>, or <code>[Else if expression]</code> : If/Else If condition with expression<ul>
-<li>Read data from <a href="./#local-memory">local memory</a></li>
+<li>Read data from <a href="#local-memory">local memory</a></li>
 <li>Boolean expression AND/OR : <code>&amp;&amp;</code>.</li>
 <li>Boolean expression OR : <code>||</code>.</li>
 <li>Actions when expression is <code>true</code>.</li>
@@ -16879,7 +16879,7 @@ actions...
 <ul>
 <li>H2/H3/... heading with <code>[If]</code>, or <code>[Else if]</code> : If, Else If condition<ul>
 <li>Each line under <code>[If]</code>, <code>[Else If]</code> is a boolean equation, composed of <code>AND</code> logic.</li>
-<li>Read data from <a href="./#local-memory">local memory</a></li>
+<li>Read data from <a href="#local-memory">local memory</a></li>
 </ul>
 </li>
 <li>H3/H4/... heading under <code>[If]</code>, <code>[Else if]</code> : - Actions when previous expressions are all <code>false</code>.</li>
@@ -16911,7 +16911,7 @@ actions...
 </code></pre></div>
 <ul>
 <li>H2/H3/... heading with <code>[While expression]</code> : While loop with expression    <ul>
-<li>Read data from <a href="./#local-memory">local memory</a></li>
+<li>Read data from <a href="#local-memory">local memory</a></li>
 <li>Actions when expression is <code>true</code>.</li>
 </ul>
 </li>
@@ -16927,7 +16927,7 @@ actions...
 <ul>
 <li>H2/H3/... heading with <code>[While]</code> : While loop<ul>
 <li>Each line under <code>[While]</code> is a boolean equation, composed of <code>AND</code> logic.</li>
-<li>Read data from <a href="./#local-memory">local memory</a></li>
+<li>Read data from <a href="#local-memory">local memory</a></li>
 </ul>
 </li>
 <li>H3/H4/... heading under <code>[While]</code> : Actions running when condition is <code>true</code></li>
@@ -17227,13 +17227,13 @@ line2
 <span class="p">})</span>
 </code></pre></div>
 <ul>
-<li><code>name</code> : A string name of game object's type. Will <a href="./#add-custom-command">register command</a> <code>GOTYPE</code> to this command executor.</li>
+<li><code>name</code> : A string name of game object's type. Will <a href="#add-custom-command">register command</a> <code>GOTYPE</code> to this command executor.</li>
 <li><code>createGameObject</code> : A callback for creating game object
     <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">gameObject</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div><ul>
-<li><code>config</code> : Parameters passed from <a href="./#create-custom-game-object">event sheet</a>.<ul>
+<li><code>config</code> : Parameters passed from <a href="#create-custom-game-object">event sheet</a>.<ul>
 <li><code>id</code>, <code>layer</code>, <code>autoClear</code>, <code>eventSheetManager</code>, <code>eventsheet</code> : These parameters are reserved.</li>
 <li><code>eventSheetManager</code> : This event sheet manager.</li>
 </ul>
@@ -17267,7 +17267,7 @@ line2
 </li>
 </ul>
 </li>
-<li><code>defaultLayer</code> : A layer name defined in <code>layers</code> parameter of <a href="./#create-command-executor-instance"><code>addCommandExecutor</code> method</a></li>
+<li><code>defaultLayer</code> : A layer name defined in <code>layers</code> parameter of <a href="#create-command-executor-instance"><code>addCommandExecutor</code> method</a></li>
 <li><code>autoClear</code> : <ul>
 <li><code>true</code> : Clear game objects when exiting current event sheet. Default behavior.</li>
 <li><code>false</code> : Ignore this behavior.</li>
@@ -17278,9 +17278,9 @@ line2
 <span class="w">    </span><span class="c1">// commandExecutor.waitEvent(eventEmitter, eventName);</span>
 <span class="p">}</span>
 </code></pre></div><ul>
-<li><code>commandName</code> : Command name. These command names are reserved : <a href="./#ease-properties-of-custom-game-object"><code>to</code></a>, <a href="./#ease-properties-of-custom-game-object"><code>yoyo</code></a>, <a href="./#destroy-custom-game-object"><code>destroy</code></a></li>
+<li><code>commandName</code> : Command name. These command names are reserved : <a href="#ease-properties-of-custom-game-object"><code>to</code></a>, <a href="#ease-properties-of-custom-game-object"><code>yoyo</code></a>, <a href="#destroy-custom-game-object"><code>destroy</code></a></li>
 <li><code>gameObject</code> : Game object instance.</li>
-<li><code>config</code> : Parameters passed from <a href="./#invoke-custom-command">event sheet</a>.</li>
+<li><code>config</code> : Parameters passed from <a href="#invoke-custom-command">event sheet</a>.</li>
 <li><code>commandExecutor</code> : This command executor instance. <a href="#methods-used-in-command">See also</a></li>
 <li><code>eventSheetManager</code> : This event sheet manager instance.<ul>
 <li>Store variable into blackboard of eventSheetManager : <code>eventSheetManager.setData(key, value)</code></li>
@@ -17856,7 +17856,7 @@ can see it by <code>log.memory</code>, or get property of game object via <code>
 <span class="p">},</span><span class="w"> </span><span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
 <ul>
-<li><code>config</code> : Parameters passed from <a href="./#custom-command">event sheet</a>.</li>
+<li><code>config</code> : Parameters passed from <a href="#custom-command">event sheet</a>.</li>
 <li><code>eventSheetManager</code> : This event mangager.<ul>
 <li>Pause running of current event sheet
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">resumeCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">eventSheetManager</span><span class="p">.</span><span class="nx">pauseEventSheet</span><span class="p">();</span>

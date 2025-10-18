@@ -102,8 +102,8 @@ var card = scene.add.rexPerspectiveCard({
 });
 ```
 
-- `front`, `back` : [Perspective image](perspective-image) game object for front and back face.
-    - `{key, frame}` : Texture key and frame name, to create [perspective image](perspective-image)
+- `front`, `back` : [Perspective image](perspective-image.md) game object for front and back face.
+    - `{key, frame}` : Texture key and frame name, to create [perspective image]((perspective-image.md)
     - `{width, height}` : Width and height, to create [perspective render texture](perspective-rendertexture.md).
     - [Perspective image](perspective-image.md)
     - [Perspective render texture](perspective-rendertexture.md)
@@ -208,12 +208,12 @@ var card = scene.make.rexPerspectiveCard({
 
 #### Face texture
 
-- Set texture of front face, assume that front face is a [perspective image](perspective-image)
+- Set texture of front face, assume that front face is a [perspective image]((perspective-image.md)
     ```javascript
     card.frontFace.setTexture(key);
     // card.frontFace.setTexture(key, frame);
     ```
-- Set texture of back face, assume that back face is a [perspective image](perspective-image)
+- Set texture of back face, assume that back face is a [perspective image]((perspective-image.md)
     ```javascript
     card.backFace.setTexture(key);
     // card.backFace.setTexture(key, frame);

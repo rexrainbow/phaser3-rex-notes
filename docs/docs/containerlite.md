@@ -302,7 +302,7 @@ For example, container-lite is at (100, 100), and child is at **(10, 10)**, then
         ```javascript
         layer.add(container.getAllChildren([container]));
         ```
-    - Draw on [render texture](rendertexture.md#paste-texture)
+    - Draw on [render texture](rendertexture.md#draw-game-object)
         ```javascript
         rt.draw(container.getAllChildren());
         ```

@@ -23,7 +23,7 @@
 17. [Board/Shape](board-shape.md): [Grid (polygon) shape](shape-polygon.md) chess object.
 17. [Board/Sprite](board-sprite.md): [Sprite](sprite.md) chess object.
 18. [Board/Tilemap](board-tilemap.md): Create board from [tilemap](tilemap.md).
-19. [Board/Tile texture](board-texture.md): Create [canvas-texture](canvas-texture) of tile.
+19. [Board/Tile texture](board-texture.md): Create [canvas-texture](canvas-texture.md) of tile.
 20. [Bounds](bounds.md): Clamp or wrap position of game object inside target bounds.
 21. [Bracket parser](bracketparser.md): A lite-weight bracket parser.
 22. [Bracket parser2](bracketparser2.md): A lite-weight bracket parser.
@@ -41,7 +41,7 @@
 33. [Circle mask image](circlemaskimage.md): Load a texture, then apply a circle mask.
 34. [Click outside](clickoutside.md): Fires 'clickoutside' event when pointer-down or pointer-up outside of game object.
 35. [Clock](clock.md): A clock to count elapsed time.
-36. [Character cache](charactercache): Generate bitmapfont from [text game object](text.md), or [bbcode text game object](bbcodetext.md).
+36. [Character cache](charactercache.md): Generate bitmapfont from [text game object](text.md), or [bbcode text game object](bbcodetext.md).
 37. [Color/TintRGB](tintrgb.md): Attach `tintR`, `tintG`, `tintB`, and `tintGray` properties to a game object.
 38. [Conditions table](conditionstable.md): Check conditions to find passed tests listed in a csv table.
 39. [ContainerLite](containerlite.md): Control the position and angle of children game objects.
@@ -111,7 +111,7 @@
 103. [LocalForage/Files](localforage-files.md): Save JSON data, using localforage.
 104. [LocalStorage/Data](localstorage-data.md): Sync data from data manager to local-storage.
 105. [LZ-string](lzstring.md): Compress string using LZ-based compression algorithm.
-106. [Markdown event sheets](markedeventsheet.md): Event sheets contains main condition(s) and actions, in simple markdown format (headings, code block).
+106. [Markdown event sheets](markedeventsheets.md): Event sheets contains main condition(s) and actions, in simple markdown format (headings, code block).
 107. [Modal promise](modal-promise.md): Modal behavior wrapped into promise.
 108. [Mouse-wheel to up/down](mousewheeltoupdown.md): Map mouse-wheeling to (up/down) cursor key state.
 109. [Mouse-wheel scroller](mousewheelscroller.md): Emit scroll event when mouse-wheeling.

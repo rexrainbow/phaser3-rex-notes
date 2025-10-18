@@ -200,7 +200,7 @@ var sizer = scene.rexUI.add.sizer(x, y, width, height, orientation, {
 - `sizerEvents` : Set `true` to fire [sizer events](ui-basesizer.md#events). Default value is `false`.
 - `enableLayer` : 
     - `false` : Add child game objects into scene's display list. Default behavior.
-    - `true` : Add child game objects into an internal [layer game object](layer.md). [See also](containerlite.md#layer).
+    - `true` : Add child game objects into an internal [layer game object](layer.md). [See also](containerlite.md#add-to-container).
 
 ### Custom class
 
