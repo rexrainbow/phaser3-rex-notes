@@ -42,6 +42,11 @@ class ScrollableBlock extends BaseSizer {
         var child = GetValue(config, 'child', undefined);
         var expand = GetValue(config, 'expand', true);
 
+        var childOrigin0 = GetValue(config, 'childOrigin0', true);
+        if (childOrigin0 && child.setOrigin) {
+            child.setOrigin(0);
+        }
+
         this.add(child);
         this.sizerChildren = [child];
 

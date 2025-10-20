@@ -43140,6 +43140,11 @@ void main (void) {
             var child = GetValue$C(config, 'child', undefined);
             var expand = GetValue$C(config, 'expand', true);
 
+            var childOrigin0 = GetValue$C(config, 'childOrigin0', true);
+            if (childOrigin0 && child.setOrigin) {
+                child.setOrigin(0);
+            }
+
             this.add(child);
             this.sizerChildren = [child];
 

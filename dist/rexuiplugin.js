@@ -64629,6 +64629,11 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             var child = GetValue$15(config, 'child', undefined);
             var expand = GetValue$15(config, 'expand', true);
 
+            var childOrigin0 = GetValue$15(config, 'childOrigin0', true);
+            if (childOrigin0 && child.setOrigin) {
+                child.setOrigin(0);
+            }
+
             this.add(child);
             this.sizerChildren = [child];
 

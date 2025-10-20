@@ -118,7 +118,8 @@ var panel = scene.rexUI.add.scrollablePanel({
         mask: {
             padding: 0, // or {left, right, top, bottom}
             // updateMode: 0,
-        }
+        },
+        childOrigin0: true,
     }.
 
     slider: {
@@ -276,6 +277,9 @@ var panel = scene.rexUI.add.scrollablePanel({
             - `0`, or `'update'` : Apply mask only when scrolling. Default behavior.
             - `1`, or `'everyTick'` : Apply mask every tick. Use this mode if children game objects of panel are moved after scrolling and still been masked.
         - `false` : No mask
+    - `panel.childOrigin0` :
+        - `true` : Change origin of penal game object to `(0, 0)`. Default behavior for backward compatible.
+        - `false` : Ignore this feature.
 - `slider` : Componments of slider, optional.
     - `slider.background` : 
         - [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of slider.
