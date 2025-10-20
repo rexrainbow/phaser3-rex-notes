@@ -30747,6 +30747,11 @@
             var child = GetValue$5(config, 'child', undefined);
             var expand = GetValue$5(config, 'expand', true);
 
+            var childOrigin0 = GetValue$5(config, 'childOrigin0', true);
+            if (childOrigin0 && child.setOrigin) {
+                child.setOrigin(0);
+            }
+
             this.add(child);
             this.sizerChildren = [child];
 

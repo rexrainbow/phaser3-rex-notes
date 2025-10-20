@@ -31,6 +31,7 @@ declare namespace ScrollablePanel {
                 } |
                 boolean
             ),
+            childOrigin0?: boolean,
         },
 
         align?: {

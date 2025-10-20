@@ -23456,6 +23456,11 @@
             var child = GetValue$1(config, 'child', undefined);
             var expand = GetValue$1(config, 'expand', true);
 
+            var childOrigin0 = GetValue$1(config, 'childOrigin0', true);
+            if (childOrigin0 && child.setOrigin) {
+                child.setOrigin(0);
+            }
+
             this.add(child);
             this.sizerChildren = [child];
 
