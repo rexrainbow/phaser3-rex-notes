@@ -85,6 +85,49 @@ var GetBounds = function (gameObject, output) {
     return output;
 }
 
+var GetLocalBounds = function (gameObject, output) {
+    if (output === undefined) {
+        output = new Rectangle();
+    } else if (output === true) {
+        if (GlobRect === undefined) {
+            GlobRect = new Rectangle();
+        }
+        output = GlobRect;
+    }
+
+
+    var TLx, TLy, TRx, TRy, BLx, BLy, BRx, BRy;
+
+    // Ignore parent container
+
+    GetTopLeft(gameObject, output);
+
+    TLx = output.x;
+    TLy = output.y;
+
+    GetTopRight(gameObject, output);;
+
+    TRx = output.x;
+    TRy = output.y;
+
+    GetBottomLeft(gameObject, output);;
+
+    BLx = output.x;
+    BLy = output.y;
+
+    GetBottomRight(gameObject, output);
+
+    BRx = output.x;
+    BRy = output.y;
+
+    output.x = Math.min(TLx, TRx, BLx, BRx);
+    output.y = Math.min(TLy, TRy, BLy, BRy);
+    output.width = Math.max(TLx, TRx, BLx, BRx) - output.x;
+    output.height = Math.max(TLy, TRy, BLy, BRy) - output.y;
+
+    return output;
+}
+
 var GlobRect = undefined;
 
 var GetTopLeft = function (gameObject, output, includeParent) {
@@ -285,6 +328,7 @@ var PrepareBoundsOutput = function (gameObject, output, includeParent) {
 
 export {
     GetBounds,
+    GetLocalBounds,
     GetTopLeft,
     GetTopRight,
     GetBottomLeft,

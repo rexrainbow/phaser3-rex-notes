@@ -1,4 +1,5 @@
 import { SetMask, ClearMask } from '../../../../utils/mask/MaskMethods.js';
+import { GetLocalBounds } from '../../../../utils/bounds/GetBounds.js';
 
 const Intersects = Phaser.Geom.Intersects.RectangleToRectangle;
 const Overlaps = Phaser.Geom.Rectangle.Overlaps;
@@ -21,7 +22,7 @@ var MaskChildren = function ({
 
     var hasAnyVisibleCallback = !!onVisible || !!onInvisible;
 
-    var parentBounds = parent.getBounds();
+    var parentBounds = GetLocalBounds(parent);
 
     var child, childBounds, visiblePointsNumber;
     var isChildVisible;
@@ -37,7 +38,7 @@ var MaskChildren = function ({
 
         isChildVisible = child.visible;
         if (child.getBounds) {
-            childBounds = child.getBounds(childBounds);
+            childBounds = GetLocalBounds(child, childBounds);
             visiblePointsNumber = ContainsPoints(parentBounds, childBounds);
             switch (visiblePointsNumber) {
                 case 4: // 4 points are all inside visible window, set visible                     
@@ -73,7 +74,7 @@ var MaskChildren = function ({
 }
 
 var IsVisible = function (gameObject) {
-    if (!gameObject.displayList) {
+    if (!gameObject.displayList && !gameObject.parentContainer) {
         return false;
     }
 
