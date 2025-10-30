@@ -22,7 +22,7 @@ var MaskChildren = function ({
 
     var hasAnyVisibleCallback = !!onVisible || !!onInvisible;
 
-    var parentBounds = GetLocalBounds(parent);
+    var parentBounds = parent.getBounds();
 
     var child, childBounds, visiblePointsNumber;
     var isChildVisible;
@@ -38,7 +38,7 @@ var MaskChildren = function ({
 
         isChildVisible = child.visible;
         if (child.getBounds) {
-            childBounds = GetLocalBounds(child, childBounds);
+            childBounds = child.getBounds(childBounds);
             visiblePointsNumber = ContainsPoints(parentBounds, childBounds);
             switch (visiblePointsNumber) {
                 case 4: // 4 points are all inside visible window, set visible                     
