@@ -58,7 +58,7 @@ class ScrollablePanel extends Scrollable {
 
         this.addChildrenMap('panel', scrollableBlock.child);
         this.addChildrenMap('panelLayer', scrollableBlock.maskLayer);
-        this.addChildrenMap('mask', scrollableBlock.maskGameObject);
+        this.addChildrenMap('mask', scrollableBlock.childrenMaskGameObject);
         this.addChildrenMap('scrollableBlock', scrollableBlock);
     }
 
