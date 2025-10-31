@@ -20,14 +20,14 @@ class Demo extends Phaser.Scene {
             // x: 400,
             // y: 300,
             width: 350,
-            height: 200,
+            height: 460,
 
             scrollMode: 0,
 
             background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 10, COLOR_MAIN),
 
             panel: {
-                child: createGrid(this, 1, 1),
+                child: createGrid(this, 3, 20),
                 mask: {
                     mask: true,
                     padding: 1,
@@ -109,6 +109,7 @@ const Random = Phaser.Math.Between;
 var createItem = function (scene, colIdx, rowIdx) {
     var text = colIdx + ',' + rowIdx;
     var item = scene.rexUI.add.label({
+        height: 60,
         background: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 0, undefined)
             .setStrokeStyle(2, COLOR_LIGHT, 1),
         text: scene.add.text(0, 0, text, {
@@ -125,10 +126,6 @@ var createItem = function (scene, colIdx, rowIdx) {
         }
     })
         .setDepth(3)
-    var press = scene.rexUI.add.press(item)
-        .on('pressstart', function () {
-            console.log(`press ${text}`);
-        })
     return item;
 }
 

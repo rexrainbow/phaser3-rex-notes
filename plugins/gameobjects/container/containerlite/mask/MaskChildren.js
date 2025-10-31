@@ -1,5 +1,4 @@
 import { SetMask, ClearMask } from '../../../../utils/mask/MaskMethods.js';
-import { GetLocalBounds } from '../../../../utils/bounds/GetBounds.js';
 
 const Intersects = Phaser.Geom.Intersects.RectangleToRectangle;
 const Overlaps = Phaser.Geom.Rectangle.Overlaps;
@@ -42,22 +41,22 @@ var MaskChildren = function ({
             visiblePointsNumber = ContainsPoints(parentBounds, childBounds);
             switch (visiblePointsNumber) {
                 case 4: // 4 points are all inside visible window, set visible                     
-                    ShowAll(parent, child, maskGameObject);
+                    SetVisible(parent, child, maskGameObject);
                     break;
                 case 0: // No point is inside visible window
                     // Parent intersects with child, or parent is inside child, set visible, and apply mask
                     if (Intersects(parentBounds, childBounds) || Overlaps(parentBounds, childBounds)) {
-                        ShowSome(parent, child, maskGameObject);
+                        SetPartiallyVisible(parent, child, maskGameObject);
                     } else { // Set invisible
-                        ShowNone(parent, child, maskGameObject);
+                        SetInvisible(parent, child, maskGameObject);
                     }
                     break;
                 default: // Part of points are inside visible window, set visible, and apply mask
-                    ShowSome(parent, child, maskGameObject);
+                    SetPartiallyVisible(parent, child, maskGameObject);
                     break;
             }
         } else {
-            ShowSome(parent, child, maskGameObject);
+            SetPartiallyVisible(parent, child, maskGameObject);
         }
 
         if (hasAnyVisibleCallback && (child.visible !== isChildVisible)) {
@@ -110,7 +109,7 @@ var ContainsPoints = function (rectA, rectB) {
     return result;
 };
 
-var ShowAll = function (parent, child, maskGameObject) {
+var SetVisible = function (parent, child, maskGameObject) {
     if (!child.hasOwnProperty('isRexContainerLite')) {
         ClearMask(child);
         parent.setChildMaskVisible(child, true);
@@ -124,7 +123,7 @@ var ShowAll = function (parent, child, maskGameObject) {
 
 }
 
-var ShowSome = function (parent, child, maskGameObject) {
+var SetPartiallyVisible = function (parent, child, maskGameObject) {
     if (!child.hasOwnProperty('isRexContainerLite')) {
         SetMask(child, maskGameObject);
         parent.setChildMaskVisible(child, true);
@@ -138,7 +137,7 @@ var ShowSome = function (parent, child, maskGameObject) {
 
 }
 
-var ShowNone = function (parent, child, maskGameObject) {
+var SetInvisible = function (parent, child, maskGameObject) {
     if (!child.hasOwnProperty('isRexContainerLite')) {
         ClearMask(child);
         parent.setChildMaskVisible(child, false);
