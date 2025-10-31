@@ -3669,22 +3669,22 @@
                 visiblePointsNumber = ContainsPoints(parentBounds, childBounds);
                 switch (visiblePointsNumber) {
                     case 4: // 4 points are all inside visible window, set visible                     
-                        ShowAll(parent, child);
+                        SetVisible(parent, child);
                         break;
                     case 0: // No point is inside visible window
                         // Parent intersects with child, or parent is inside child, set visible, and apply mask
                         if (Intersects(parentBounds, childBounds) || Overlaps(parentBounds, childBounds)) {
-                            ShowSome(parent, child, maskGameObject);
+                            SetPartiallyVisible(parent, child, maskGameObject);
                         } else { // Set invisible
-                            ShowNone(parent, child);
+                            SetInvisible(parent, child);
                         }
                         break;
                     default: // Part of points are inside visible window, set visible, and apply mask
-                        ShowSome(parent, child, maskGameObject);
+                        SetPartiallyVisible(parent, child, maskGameObject);
                         break;
                 }
             } else {
-                ShowSome(parent, child, maskGameObject);
+                SetPartiallyVisible(parent, child, maskGameObject);
             }
 
             if (hasAnyVisibleCallback && (child.visible !== isChildVisible)) {
@@ -3701,7 +3701,7 @@
     };
 
     var IsVisible = function (gameObject) {
-        if (!gameObject.displayList) {
+        if (!gameObject.displayList && !gameObject.parentContainer) {
             return false;
         }
 
@@ -3737,7 +3737,7 @@
         return result;
     };
 
-    var ShowAll = function (parent, child, maskGameObject) {
+    var SetVisible = function (parent, child, maskGameObject) {
         if (!child.hasOwnProperty('isRexContainerLite')) {
             ClearMask(child);
             parent.setChildMaskVisible(child, true);
@@ -3751,7 +3751,7 @@
 
     };
 
-    var ShowSome = function (parent, child, maskGameObject) {
+    var SetPartiallyVisible = function (parent, child, maskGameObject) {
         if (!child.hasOwnProperty('isRexContainerLite')) {
             SetMask(child, maskGameObject);
             parent.setChildMaskVisible(child, true);
@@ -3765,7 +3765,7 @@
 
     };
 
-    var ShowNone = function (parent, child, maskGameObject) {
+    var SetInvisible = function (parent, child, maskGameObject) {
         if (!child.hasOwnProperty('isRexContainerLite')) {
             ClearMask(child);
             parent.setChildMaskVisible(child, false);
@@ -3983,7 +3983,13 @@
             this.shapeType = shapeType;
             this.padding = GetBoundsConfig$1(padding);
             this.setPosition().resize().setVisible(false);
-            // Don't add it to display list
+
+            // Add to display list or container, depend on parent
+            if (parent.parentContainer) {
+                parent.parentContainer.add(this);
+            } else {
+                parent.scene.add.existing(this);
+            }
         }
 
         destroy() {

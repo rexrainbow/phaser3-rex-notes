@@ -13595,7 +13595,13 @@
             this.shapeType = shapeType;
             this.padding = GetBoundsConfig$1(padding);
             this.setPosition().resize().setVisible(false);
-            // Don't add it to display list
+
+            // Add to display list or container, depend on parent
+            if (parent.parentContainer) {
+                parent.parentContainer.add(this);
+            } else {
+                parent.scene.add.existing(this);
+            }
         }
 
         destroy() {
