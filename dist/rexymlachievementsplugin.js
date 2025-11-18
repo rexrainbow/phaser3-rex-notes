@@ -143,7 +143,7 @@
             for (var i = 0, cnt = achievements.length; i < cnt; i++) {
                 out.push(achievements[i].name);
             }
-            return names;
+            return out;
         }
 
         loadObtainedStates(states) {
@@ -166,7 +166,7 @@
         }
 
         clearObtainedState(levelName, achievementName) {
-            this.setObtainedState(levelName, achievementName, gfalse);
+            this.setObtainedState(levelName, achievementName, false);
             return this;
         }
     };
