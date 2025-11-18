@@ -67853,7 +67853,7 @@ void main () {
 	    }
 
 	    get bottomTextOY() {
-	        return -this.tableVisibleHeight;
+	        return -this.textVisibleHeight;
 	    }
 
 	    get leftTextOX() {
