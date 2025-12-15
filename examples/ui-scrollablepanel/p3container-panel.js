@@ -74,6 +74,9 @@ var createPanel = function (scene) {
         .add(text)
         .setSize(200, text.height);
 
+    text.x -= container.width * container.originX;
+    text.y -= container.height * container.originY;
+
     return container;
 }
 
