@@ -1,50 +1,48 @@
 # Layout
 
-The `layout()` method recalculates the size of a sizer and arranges all of its children.
-It simply delegates to `runLayout()` with no arguments so the sizer acts as the top-most
-parent.
+Resize and place children.
 
-## Process overview
+## Steps
 
-1. **Early exit** – `runLayout()` returns immediately when `ignoreLayout` is set
-   (hidden or not marked as dirty).
-2. **Pre-layout** – if this call is from the top parent, `preLayout()` clears cached
-   child sizes and propagates the call to child sizers.
-3. **Determine wrapping** – the top parent (or a parent that sets `runChildrenWrapFlag`)
-   checks `hasWidthWrap()` and `hasHeightWrap()` to know whether children require
-   width/height wrapping.
-4. **Resolve size**
-   - `resolveWidth()` and `resolveHeight()` compare the sizer's measured
-     `childrenWidth`/`childrenHeight` with its minimum size and any explicitly supplied
-     width/height to produce final dimensions (F:templates/ui/basesizer/ResolveWidth.js)(F:templates/ui/basesizer/ResolveHeight.js)
-   - If the sizer or its descendants may wrap, `resolveChildrenWidth/Height()` first
-     gathers provisional child sizes and `runWidthWrap/HeightWrap()` lets them run a
-     wrap pass. The resolvers then retry with the updated measurements, falling back to
-     the alternate wrap routine once more before logging an error if a dimension cannot
-     be determined.
-5. **Resize self** – apply the computed width and height via `ResizeGameObject`.
-6. **Layout children** – `layoutChildren()` (overridden by subclasses) positions normal
-   children, then `layoutBackgrounds()` sizes and centers background children while
-   respecting padding.
-7. **Post-layout** – when `sizerEventsEnable` is true, emit a `postlayout` event and run
-    the optional `postLayout()` callback.
-8. **Finalize** – if this sizer is the top parent and has an anchor, update its position.
+1. Skip layout if `ignoreLayout` is true
+    - Hidden (`rexSizer.hidden`)
+    - Not dirty (`dirty === false`)
+1. If this is the topmost sizer (`parent` is undefined), call `preLayout()`
+    - Clears `_childrenWidth` / `_childrenHeight` caches on this sizer and all visible child sizers
+1. Decide whether to run wrap passes
+    - If topmost, or `parent.runChildrenWrapFlag` is true, set
+        - `runWidthWrap = hasWidthWrap()`
+        - `runHeightWrap = hasHeightWrap()`
+    - Otherwise both flags are `false`
+1. Resolve size (`ResolveSize`)
+    1. `ResolveWidth(self, newWidth, runWidthWrap)`
+        - `resolveWidth(newWidth)` returns target width or `undefined`
+        - If width is known and `runWidthWrap`, then
+            - `resolveChildrenWidth(width)` resolves child sizer widths recursively
+            - `runWidthWrap(width)` lets children adjust to the final width
+    1. `ResolveHeight(self, newHeight, runHeightWrap)`
+        - `resolveHeight(newHeight)` returns target height or `undefined`
+        - If height is known and `runHeightWrap`, then
+            - `resolveChildrenHeight(height)` resolves child sizer heights recursively
+            - `runHeightWrap(height)` lets children adjust to the final height
+    1. If width is still `undefined`, `ResolveWidth` runs once more with the same flags
+    1. If both width and height are defined, `ResolveSize` returns `{ width, height }`
+    1. Otherwise `ResolveSize` returns `false` and logs a console error
+1. Resize this game object with `ResizeGameObject(this, width, height)`
+1. If `sizerEventsEnable`, prepare `layoutedChildren` to collect layout results
+1. Layout children with `layoutChildren()` (sizer-specific override)
+1. Layout background children with `layoutBackgrounds()`
+1. If `sizerEventsEnable`, emit `postlayout` and clear `layoutedChildren`
+1. Call `postLayout(parent, width, height)` (sizer-specific override)
+1. If topmost and anchored, update anchor position
 
-### Resolving size in different objects
+## When layout cannot resolve correct size/position
 
-- **Sizer** – Measures children according to orientation. In horizontal mode it sums
-  child widths (plus spacing) and uses the maximum height; vertical mode does the
-  opposite, accounting for padding, proportions and `fitRatio` settings (F:templates/ui/sizer/GetChildrenWidth.js)(F:templates/ui/sizer/GetChildrenHeight.js)
-- **GridSizer** – Scans each column and row to find the largest child, summing those
-  maxima with configured gaps to obtain the minimum grid size (F:templates/ui/gridsizer/GetChildrenWidth.js)(F:templates/ui/gridsizer/GetChildrenHeight.js)
-- **FixWidthSizer** – Uses the fixed dimension and a wrap routine to build lines of
-  children; the resulting `wrapResult` supplies the width and height for resolution
-  calls (F:templates/ui/fixwidthsizer/RunWidthWrap.js)(F:templates/ui/fixwidthsizer/GetChildrenWidth.js)(F:templates/ui/fixwidthsizer/GetChildrenHeight.js)
-- **OverlapSizer** – Resolves to the maximum width and height among its children because
-  they share the same origin and overlap (F:templates/ui/overlapsizer/GetChildrenWidth.js)(F:templates/ui/overlapsizer/GetChildrenHeight.js)
-- **General game object** – Non-sizer children don't implement their own resolver; the
-  parent simply reads their display size or explicit `minWidth`/`minHeight` when
-  calculating `childrenWidth`/`childrenHeight` (F:templates/ui/basesizer/GetChildWidth.js)(F:templates/ui/basesizer/GetChildHeight.js)
+- `ignoreLayout` is true, so the layout pass is skipped entirely.
+- `ResolveSize` returns `false` because either width or height is `undefined`.
+    - This happens when `resolveWidth()` or `resolveHeight()` returns `undefined`, which in turn happens when `childrenWidth` / `childrenHeight` is `undefined`.
+    - Typical causes:
+        - A sizer's `getChildrenWidth()` / `getChildrenHeight()` cannot compute sizes from its children (e.g. child sizes are still unknown or missing).
+        - A child sizer returns `undefined` in its own `resolveWidth()` / `resolveHeight()`, so the parent's children sizes stay unresolved.
+- Even when width/height are resolved, a warning can be logged if `minWidth` / `minHeight` or `childrenWidth` / `childrenHeight` exceed the target size (`layoutWarnEnable`).
 
-After `layout()` completes, the sizer and all descendants have their sizes and positions
-resolved.
