@@ -7,7 +7,6 @@ import ClickOutside from '../clickoutside/ClickOutside';
 import InTouching from '../intouching/InTouching';
 import SetChildrenInteractive from '../utils/setchildreninteractive/SetChildrenInteractive';
 import { ModalBehavoir } from '../modal/Modal';
-import Base from '../../transitionimagepack/TransitionImagePack';
 
 export default BaseSizer;
 
@@ -1371,6 +1370,15 @@ declare class BaseSizer extends Container {
         config: BaseSizer.IDraggableConfig
     ): this;
 
+    readonly _click: Click;
+
+    getClickController(config?: Click.IConfig): Click;
+
+    getClickController(
+        gameObject: Phaser.GameObjects.GameObject,
+        config?: Click.IConfig
+    ): Click;
+
     /**
      * Register a click handler for this sizer.
      * @param callback - Callback invoked on click.
@@ -1454,6 +1462,15 @@ declare class BaseSizer extends Container {
      * @returns This instance.
      */
     disableClick(gameObject: Phaser.GameObjects.GameObject): this;
+
+    readonly _clickOutside: ClickOutside;
+
+    getClickOutsideController(config?: ClickOutside.IConfig): ClickOutside;
+
+    getClickOutsideController(
+        gameObject: Phaser.GameObjects.GameObject,
+        config?: ClickOutside.IConfig
+    ): ClickOutside;
 
     /**
      * Register a click-outside handler for this sizer.
@@ -1556,6 +1573,8 @@ declare class BaseSizer extends Container {
      * @returns True if pointer is in bounds.
      */
     isPointerInBounds(name: string): boolean;
+
+    readonly _inTouching: InTouching;
 
     /**
      * Register a touching handler for this sizer.
