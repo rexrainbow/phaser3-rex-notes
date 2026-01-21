@@ -7,7 +7,6 @@ import ClickOutside from '../clickoutside/ClickOutside';
 import InTouching from '../intouching/InTouching';
 import SetChildrenInteractive from '../utils/setchildreninteractive/SetChildrenInteractive';
 import { ModalBehavoir } from '../modal/Modal';
-import Base from '../../transitionimagepack/TransitionImagePack';
 
 export default BaseSizer;
 
