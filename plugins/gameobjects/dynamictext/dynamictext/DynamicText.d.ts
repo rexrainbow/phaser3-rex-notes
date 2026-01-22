@@ -17,11 +17,13 @@ declare namespace DynamicText {
     type PaddingTypes = number |
     { left?: number, right?: number, top?: number, bottom?: number };
 
+    type RadiusType = number | { x?: number, y?: number };
+
     interface IRadiusConfig {
-        tl?: (number | { x?: number, y?: number }),
-        tr?: (number | { x?: number, y?: number }),
-        bl?: (number | { x?: number, y?: number }),
-        br?: (number | { x?: number, y?: number })
+        tl?: RadiusType,
+        tr?: RadiusType,
+        bl?: RadiusType,
+        br?: RadiusType
     }
 
     interface IConfigBackground {
