@@ -1370,10 +1370,24 @@ declare class BaseSizer extends Container {
         config: BaseSizer.IDraggableConfig
     ): this;
 
+    /**
+     * Internal click component instance.
+     */
     readonly _click: Click;
 
+    /**
+     * Get or create a click controller for this sizer.
+     * @param config - Click configuration.
+     * @returns Click controller.
+     */
     getClickController(config?: Click.IConfig): Click;
 
+    /**
+     * Get or create a click controller for a child.
+     * @param gameObject - Target child.
+     * @param config - Click configuration.
+     * @returns Click controller.
+     */
     getClickController(
         gameObject: Phaser.GameObjects.GameObject,
         config?: Click.IConfig
@@ -1463,10 +1477,24 @@ declare class BaseSizer extends Container {
      */
     disableClick(gameObject: Phaser.GameObjects.GameObject): this;
 
+    /**
+     * Internal click-outside component instance.
+     */
     readonly _clickOutside: ClickOutside;
 
+    /**
+     * Get or create a click-outside controller for this sizer.
+     * @param config - ClickOutside configuration.
+     * @returns ClickOutside controller.
+     */
     getClickOutsideController(config?: ClickOutside.IConfig): ClickOutside;
 
+    /**
+     * Get or create a click-outside controller for a child.
+     * @param gameObject - Target child.
+     * @param config - ClickOutside configuration.
+     * @returns ClickOutside controller.
+     */
     getClickOutsideController(
         gameObject: Phaser.GameObjects.GameObject,
         config?: ClickOutside.IConfig
@@ -1574,6 +1602,9 @@ declare class BaseSizer extends Container {
      */
     isPointerInBounds(name: string): boolean;
 
+    /**
+     * Internal touching component instance.
+     */
     readonly _inTouching: InTouching;
 
     /**

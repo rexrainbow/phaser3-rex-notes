@@ -19,7 +19,12 @@ export default class CanvasGameObjectBase extends Phaser.GameObjects.GameObject 
      * @param bottomRight - Alpha for bottom-right.
      * @returns This instance.
      */
-    setAlpha(topLeft?: number, topRight?: number, bottomLeft?: number, bottomRight?: number): this;
+    setAlpha(
+        topLeft?: number,
+        topRight?: number,
+        bottomLeft?: number,
+        bottomRight?: number
+    ): this;
     /**
      * Global alpha value.
      */
@@ -102,7 +107,12 @@ export default class CanvasGameObjectBase extends Phaser.GameObjects.GameObject 
      * @param height - Crop height.
      * @returns This instance.
      */
-    setCrop(x?: number | Phaser.Geom.Rectangle, y?: number, width?: number, height?: number): this;
+    setCrop(
+        x?: number | Phaser.Geom.Rectangle,
+        y?: number,
+        width?: number,
+        height?: number
+    ): this;
 
     /**
      * Depth value.
@@ -114,9 +124,27 @@ export default class CanvasGameObjectBase extends Phaser.GameObjects.GameObject 
      * @returns This instance.
      */
     setDepth(value: number): this;
+    /**
+     * Move to the top of the display list.
+     * @returns This instance.
+     */
     setToTop(): this;
+    /**
+     * Move to the bottom of the display list.
+     * @returns This instance.
+     */
     setToBack(): this;
+    /**
+     * Move above another game object.
+     * @param gameObject - Target game object.
+     * @returns This instance.
+     */
     setAbove(gameObject: Phaser.GameObjects.GameObject): this;
+    /**
+     * Move below another game object.
+     * @param gameObject - Target game object.
+     * @returns This instance.
+     */
     setBelow(gameObject: Phaser.GameObjects.GameObject): this;
 
     /**
@@ -174,56 +202,80 @@ export default class CanvasGameObjectBase extends Phaser.GameObjects.GameObject 
      * @param includeParent - True to include parent transform.
      * @returns The output vector.
      */
-    getTopLeft<O extends Phaser.Math.Vector2>(output?: O, includeParent?: boolean): O;
+    getTopLeft<O extends Phaser.Math.Vector2>(
+        output?: O,
+        includeParent?: boolean
+    ): O;
     /**
      * Get top-center point.
      * @param output - Optional output vector.
      * @param includeParent - True to include parent transform.
      * @returns The output vector.
      */
-    getTopCenter<O extends Phaser.Math.Vector2>(output?: O, includeParent?: boolean): O;
+    getTopCenter<O extends Phaser.Math.Vector2>(
+        output?: O,
+        includeParent?: boolean
+    ): O;
     /**
      * Get top-right point.
      * @param output - Optional output vector.
      * @param includeParent - True to include parent transform.
      * @returns The output vector.
      */
-    getTopRight<O extends Phaser.Math.Vector2>(output?: O, includeParent?: boolean): O;
+    getTopRight<O extends Phaser.Math.Vector2>(
+        output?: O,
+        includeParent?: boolean
+    ): O;
     /**
      * Get left-center point.
      * @param output - Optional output vector.
      * @param includeParent - True to include parent transform.
      * @returns The output vector.
      */
-    getLeftCenter<O extends Phaser.Math.Vector2>(output?: O, includeParent?: boolean): O;
+    getLeftCenter<O extends Phaser.Math.Vector2>(
+        output?: O,
+        includeParent?: boolean
+    ): O;
     /**
      * Get right-center point.
      * @param output - Optional output vector.
      * @param includeParent - True to include parent transform.
      * @returns The output vector.
      */
-    getRightCenter<O extends Phaser.Math.Vector2>(output?: O, includeParent?: boolean): O;
+    getRightCenter<O extends Phaser.Math.Vector2>(
+        output?: O,
+        includeParent?: boolean
+    ): O;
     /**
      * Get bottom-left point.
      * @param output - Optional output vector.
      * @param includeParent - True to include parent transform.
      * @returns The output vector.
      */
-    getBottomLeft<O extends Phaser.Math.Vector2>(output?: O, includeParent?: boolean): O;
+    getBottomLeft<O extends Phaser.Math.Vector2>(
+        output?: O,
+        includeParent?: boolean
+    ): O;
     /**
      * Get bottom-center point.
      * @param output - Optional output vector.
      * @param includeParent - True to include parent transform.
      * @returns The output vector.
      */
-    getBottomCenter<O extends Phaser.Math.Vector2>(output?: O, includeParent?: boolean): O;
+    getBottomCenter<O extends Phaser.Math.Vector2>(
+        output?: O,
+        includeParent?: boolean
+    ): O;
     /**
      * Get bottom-right point.
      * @param output - Optional output vector.
      * @param includeParent - True to include parent transform.
      * @returns The output vector.
      */
-    getBottomRight<O extends Phaser.Math.Vector2>(output?: O, includeParent?: boolean): O;
+    getBottomRight<O extends Phaser.Math.Vector2>(
+        output?: O,
+        includeParent?: boolean
+    ): O;
     /**
      * Get bounds rectangle.
      * @param output - Optional output rectangle.
@@ -240,7 +292,9 @@ export default class CanvasGameObjectBase extends Phaser.GameObjects.GameObject 
      * @param mask - Mask to apply.
      * @returns This instance.
      */
-    setMask(mask: Phaser.Display.Masks.BitmapMask | Phaser.Display.Masks.GeometryMask): this;
+    setMask(
+        mask: Phaser.Display.Masks.BitmapMask | Phaser.Display.Masks.GeometryMask
+    ): this;
     /**
      * Clear the current mask.
      * @param destroyMask - True to destroy the mask.
@@ -300,12 +354,49 @@ export default class CanvasGameObjectBase extends Phaser.GameObjects.GameObject 
      */
     updateDisplayOrigin(): this;
 
+    /**
+     * Custom render nodes mapping.
+     */
     customRenderNodes: object;
+    /**
+     * Default render nodes mapping.
+     */
     defaultRenderNodes: object;
+    /**
+     * Render node data storage.
+     */
     renderNodeData: object;
+    /**
+     * Initialize render nodes.
+     * @param defaultNodes - Default nodes mapping.
+     */
     initRenderNodes(defaultNodes: Map<string, string>): void;
-    setRenderNodeRole(key: string, renderNode: string | Phaser.Renderer.WebGL.RenderNodes.RenderNode | null, renderNodeData?: object, copyData?: boolean): this;
-    setRenderNodeData(renderNode: string | Phaser.Renderer.WebGL.RenderNodes.RenderNode, key: string, value: any): this;
+    /**
+     * Assign a render node role.
+     * @param key - Render node role key.
+     * @param renderNode - Render node or name.
+     * @param renderNodeData - Optional render node data.
+     * @param copyData - True to copy data from existing role.
+     * @returns This instance.
+     */
+    setRenderNodeRole(
+        key: string,
+        renderNode: string | Phaser.Renderer.WebGL.RenderNodes.RenderNode | null,
+        renderNodeData?: object,
+        copyData?: boolean
+    ): this;
+    /**
+     * Set render node data value.
+     * @param renderNode - Render node or name.
+     * @param key - Data key.
+     * @param value - Data value.
+     * @returns This instance.
+     */
+    setRenderNodeData(
+        renderNode: string | Phaser.Renderer.WebGL.RenderNodes.RenderNode,
+        key: string,
+        value: any
+    ): this;
 
     /**
      * Scroll factor X.
@@ -321,7 +412,10 @@ export default class CanvasGameObjectBase extends Phaser.GameObjects.GameObject 
      * @param y - Scroll factor y.
      * @returns This instance.
      */
-    setScrollFactor(x: number, y?: number): this;
+    setScrollFactor(
+        x: number,
+        y?: number
+    ): this;
 
     /**
      * Tint for the top-left corner.
@@ -356,7 +450,12 @@ export default class CanvasGameObjectBase extends Phaser.GameObjects.GameObject 
      * @param bottomRight - Tint for bottom-right.
      * @returns This instance.
      */
-    setTint(topLeft?: number, topRight?: number, bottomLeft?: number, bottomRight?: number): this;
+    setTint(
+        topLeft?: number,
+        topRight?: number,
+        bottomLeft?: number,
+        bottomRight?: number
+    ): this;
     /**
      * Set corner tints and enable fill.
      * @param topLeft - Tint for top-left.
@@ -365,7 +464,12 @@ export default class CanvasGameObjectBase extends Phaser.GameObjects.GameObject 
      * @param bottomRight - Tint for bottom-right.
      * @returns This instance.
      */
-    setTintFill(topLeft?: number, topRight?: number, bottomLeft?: number, bottomRight?: number): this;
+    setTintFill(
+        topLeft?: number,
+        topRight?: number,
+        bottomLeft?: number,
+        bottomRight?: number
+    ): this;
     /**
      * Unified tint value.
      */
@@ -375,8 +479,14 @@ export default class CanvasGameObjectBase extends Phaser.GameObjects.GameObject 
      */
     readonly isTinted: boolean;
 
+    /**
+     * True if transform component is present.
+     */
     readonly hasTransformComponent: boolean;
 
+    /**
+     * X position.
+     */
     x: number;
     /**
      * Y position.
@@ -418,7 +528,12 @@ export default class CanvasGameObjectBase extends Phaser.GameObjects.GameObject 
      * @param w - W position.
      * @returns This instance.
      */
-    setPosition(x?: number, y?: number, z?: number, w?: number): this;
+    setPosition(
+        x?: number,
+        y?: number,
+        z?: number,
+        w?: number
+    ): this;
     /**
      * Copy position from another vector.
      * @param source - Source vector.
@@ -452,7 +567,10 @@ export default class CanvasGameObjectBase extends Phaser.GameObjects.GameObject 
      * @param y - Scale y.
      * @returns This instance.
      */
-    setScale(x?: number, y?: number): this;
+    setScale(
+        x?: number,
+        y?: number
+    ): this;
     /**
      * Set x position.
      * @param value - X value.
@@ -489,7 +607,10 @@ export default class CanvasGameObjectBase extends Phaser.GameObjects.GameObject 
      * @param parentMatrix - Optional parent matrix.
      * @returns The world transform matrix.
      */
-    getWorldTransformMatrix(tempMatrix?: Phaser.GameObjects.Components.TransformMatrix, parentMatrix?: Phaser.GameObjects.Components.TransformMatrix): Phaser.GameObjects.Components.TransformMatrix;
+    getWorldTransformMatrix(
+        tempMatrix?: Phaser.GameObjects.Components.TransformMatrix,
+        parentMatrix?: Phaser.GameObjects.Components.TransformMatrix
+    ): Phaser.GameObjects.Components.TransformMatrix;
     /**
      * Convert a point to local space.
      * @param x - World x.
@@ -498,7 +619,12 @@ export default class CanvasGameObjectBase extends Phaser.GameObjects.GameObject 
      * @param camera - Optional camera.
      * @returns The local point.
      */
-    getLocalPoint(x: number, y: number, point?: Phaser.Math.Vector2, camera?: Phaser.Cameras.Scene2D.Camera): Phaser.Math.Vector2;
+    getLocalPoint(
+        x: number,
+        y: number,
+        point?: Phaser.Math.Vector2,
+        camera?: Phaser.Cameras.Scene2D.Camera
+    ): Phaser.Math.Vector2;
     /**
      * Get parent rotation.
      * @returns Parent rotation in radians.

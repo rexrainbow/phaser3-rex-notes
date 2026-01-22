@@ -12,6 +12,9 @@ declare namespace AddEffectProperties {
          * Enable black/white effect.
          */
         blackWhite?: boolean,
+        /**
+         * Enable blur effect.
+         */
         blur?: boolean,
         /**
          * Enable bokeh effect.
@@ -25,6 +28,9 @@ declare namespace AddEffectProperties {
          * Enable brown effect.
          */
         brown?: boolean,
+        /**
+         * Enable contrast effect.
+         */
         contrast?: boolean,
         /**
          * Enable desaturate effect.
@@ -42,6 +48,9 @@ declare namespace AddEffectProperties {
          * Enable glow effect.
          */
         glow?: boolean,
+        /**
+         * Enable grayscale effect.
+         */
         grayscale?: boolean,
         /**
          * Enable hue effect.
@@ -67,6 +76,9 @@ declare namespace AddEffectProperties {
          * Enable polaroid effect.
          */
         polaroid?: boolean,
+        /**
+         * Enable saturate effect.
+         */
         saturate?: boolean,
         /**
          * Enable sepia effect.
@@ -80,14 +92,23 @@ declare namespace AddEffectProperties {
          * Enable shift-to-BGR effect.
          */
         shiftToBGR?: boolean,
+        /**
+         * Enable technicolor effect.
+         */
         technicolor?: boolean,
         /**
          * Enable tilt-shift effect.
          */
         tiltShift?: boolean,
+        /**
+         * Enable vintage pinhole effect.
+         */
         vintagePinhole?: boolean,
     }
 
+    /**
+     * Aggregated effect properties.
+     */
     interface EffectProperties extends
         EffectProperties.AddBarrelProperties.Barrel,
         EffectProperties.AddBlackWhiteProperties.BlackWhite,
@@ -116,10 +137,16 @@ declare namespace AddEffectProperties {
         EffectProperties.AddTiltShiftProperties.TiltShift,
         EffectProperties.AddVintagePinholeProperties.VintagePinhole{ }
 
+    /**
+     * Effect properties mixed into a game object.
+     */
     interface EffectPropertiesGameObject extends EffectProperties, Phaser.GameObjects.GameObject {
         clearAllEffects: () => Phaser.GameObjects.GameObject;
     }
 
+    /**
+     * Effect properties mixed into a camera.
+     */
     interface EffectPropertiesCamera extends EffectProperties, Phaser.Cameras.Scene2D.BaseCamera {
         clearAllEffects: () => Phaser.Cameras.Scene2D.BaseCamera;
     }
