@@ -44,3 +44,13 @@ but must **never submit changes** to any remote repository or open PRs.
 ### Operational Notes
 - All edits must be clearly attributable: prefer small, reviewable changes and include explanations.
 - If uncertain whether an action is permitted, default to **read-only** behavior and ask a human.
+
+## Agent Workflow (Read First)
+
+Before making any modifications in this repository:
+
+1. Identify the type of files being edited (for example: `.d.ts`, `.js`, `.ts`).
+2. Read `CONTRIBUTING.md` and locate the section that corresponds to the file type.
+3. Follow the most specific applicable rules before starting any edits.
+
+Do not begin modifications until the relevant contribution rules are understood.
