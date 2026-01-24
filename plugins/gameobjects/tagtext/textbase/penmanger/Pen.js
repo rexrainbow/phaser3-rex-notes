@@ -10,11 +10,18 @@ class Pen {
         this.resetFromJSON(config);
     }
 
-    resetFromJSON(o) { // (txt, x, y, width, prop, newLineMode, startIndex)
+    resetFromJSON(o) { // (txt, x, y, width, height, ascent, descent, prop, newLineMode, startIndex)
         this.text = GetValue(o, 'text', '');
         this.x = GetValue(o, 'x', 0);
         this.y = GetValue(o, 'y', 0);
         this.width = GetValue(o, 'width', 0);
+        this.ascent = GetValue(o, 'ascent', 0);
+        this.descent = GetValue(o, 'descent', 0);
+        var height = GetValue(o, 'height', null);
+        if (height == null) {
+            height = this.ascent + this.descent;
+        }
+        this.height = height;
 
         var prop = GetValue(o, 'prop', null);
         if (prop === null) {

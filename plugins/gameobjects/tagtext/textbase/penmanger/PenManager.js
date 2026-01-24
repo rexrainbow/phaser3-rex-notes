@@ -35,7 +35,7 @@ class PenManager {
         this.maxLinesWidth = undefined;
     }
 
-    addTextPen(text, x, y, width, prop, newLineMode) {
+    addTextPen(text, x, y, width, prop, newLineMode, metrics) {
         var pen = this.pensPool.pop();
         if (pen == null) {
             pen = new Pen();
@@ -44,6 +44,18 @@ class PenManager {
         PEN_CONFIG.x = x;
         PEN_CONFIG.y = y;
         PEN_CONFIG.width = width;
+        if (metrics) {
+            var ascent = (metrics.ascent != null) ? metrics.ascent : 0;
+            var descent = (metrics.descent != null) ? metrics.descent : 0;
+            var height = (metrics.height != null) ? metrics.height : (ascent + descent);
+            PEN_CONFIG.ascent = ascent;
+            PEN_CONFIG.descent = descent;
+            PEN_CONFIG.height = height;
+        } else {
+            PEN_CONFIG.ascent = 0;
+            PEN_CONFIG.descent = 0;
+            PEN_CONFIG.height = 0;
+        }
         PEN_CONFIG.prop = prop;
         PEN_CONFIG.newLineMode = newLineMode;
         pen.resetFromJSON(PEN_CONFIG);

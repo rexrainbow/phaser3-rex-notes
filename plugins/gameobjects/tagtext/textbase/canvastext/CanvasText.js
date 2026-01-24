@@ -6,6 +6,7 @@ import GetHitArea from './GetHitArea.js';
 import CONST from '../../../textbase/const.js';
 import WrapText from '../wraptext/WrapText.js';
 import Clone from '../../../../utils/object/Clone.js';
+import MeasureText from '../../../textbase/textstyle/MeasureText.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const NO_WRAP = CONST.NO_WRAP;
@@ -117,6 +118,8 @@ class CanvasText {
                 curStyle.syncFont(canvas, context);
                 curStyle.syncStyle(canvas, context);
 
+                var metrics = MeasureText(curStyle);
+
                 if (isBuiltInWrappingMode) {
                     wrapLines = WrapText(
                         plainText,
@@ -164,7 +167,8 @@ class CanvasText {
                         cursorX, cursorY,
                         segment.width,
                         Clone(curProp),
-                        segment.newLineMode
+                        segment.newLineMode,
+                        metrics
                     );
 
                     if (segment.newLineMode !== NO_NEWLINE) {
