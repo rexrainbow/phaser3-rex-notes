@@ -125,7 +125,7 @@ class MoveTo extends TickTask {
         }
 
         if (isNewTask) {
-            super.start();
+            this.start();
             this.emit('start', this.parent, this);
         }
 
@@ -185,8 +185,8 @@ class MoveTo extends TickTask {
     }
 
     complete() {
-        super.complete();
         this.isCompleted = true;
+        super.complete();
         return this;
     }
 
@@ -231,6 +231,7 @@ class MoveTo extends TickTask {
                     continue;
                 }
 
+                debugger
                 this.complete();
                 return this;
             }
@@ -268,6 +269,7 @@ class MoveTo extends TickTask {
                 continue;
             }
 
+            debugger
             this.complete();
             return this;
         }

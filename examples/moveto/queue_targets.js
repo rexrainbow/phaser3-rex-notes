@@ -23,27 +23,33 @@ class Demo extends Phaser.Scene {
             return points;
         };
 
+        // Chain segment by 'complete' event
         var points0 = hexPoints(250, 300, 120);
-        var points1 = hexPoints(550, 300, 120);
-
         var dot0 = this.add.circle(points0[0].x, points0[0].y, 16, 0xffffff);
-        var dot1 = this.add.circle(points1[0].x, points1[0].y, 16, 0xffcc00);
-
+        var txt0 = this.add.text(100, 100, '0');
         dot0.moveTo = this.plugins.get('rexMoveTo').add(dot0, {
             speed: 300
         });
-        dot1.moveTo = this.plugins.get('rexMoveTo').add(dot1, {
-            speed: 300,
-            appendMode: true
-        });
-
         var index0 = 1;
         dot0.moveTo.on('complete', function () {
             index0 = (index0 + 1) % points0.length;
             var next0 = points0[index0];
             dot0.moveTo.moveTo(next0.x, next0.y);
-        });
 
+            if (index0 === 0) {
+                txt0.text = (parseInt(txt0.text) + 1).toString();
+            }
+        });
+        dot0.moveTo.moveTo(points0[index0].x, points0[index0].y);
+
+        // Queue segments by moveTo method        
+        var points1 = hexPoints(550, 300, 120);
+        var dot1 = this.add.circle(points1[0].x, points1[0].y, 16, 0xffcc00);
+        var txt1 = this.add.text(500, 100, '0');
+        dot1.moveTo = this.plugins.get('rexMoveTo').add(dot1, {
+            speed: 300,
+            appendMode: true
+        });
         var queueDot1 = function () {
             for (var i = 1; i <= points1.length; i++) {
                 var next1 = points1[i % points1.length];
@@ -52,9 +58,8 @@ class Demo extends Phaser.Scene {
         };
         dot1.moveTo.on('complete', function () {
             queueDot1();
+            txt1.text = (parseInt(txt1.text) + 1).toString();
         });
-
-        dot0.moveTo.moveTo(points0[index0].x, points0[index0].y);
         queueDot1();
     }
 
