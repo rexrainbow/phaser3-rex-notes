@@ -28,7 +28,7 @@ export default {
         var defaultHalign = defaultStyle.halign,
             valign = defaultStyle.valign;
 
-        var lineWidth, lineHeight = defaultStyle.lineHeight;
+        var lineWidth;
         var lines = penManager.lines;
         var totalLinesNum = lines.length,
             maxLines = defaultStyle.maxLines;
@@ -51,10 +51,11 @@ export default {
         var offsetX, offsetY;
         var rtl = this.rtl,
             rtlOffset = (rtl) ? this.parent.width : undefined;
+        var totalLinesHeight = this.getLinesHeight(drawLineStartIdx, drawLineEndIdx);
         if (valign === 'center') { // center
-            offsetY = Math.max((textHeight - (drawLinesNum * lineHeight)) / 2, 0);
+            offsetY = Math.max((textHeight - totalLinesHeight) / 2, 0);
         } else if (valign === 'bottom') { // bottom
-            offsetY = Math.max(textHeight - (drawLinesNum * lineHeight) - 2, 0);
+            offsetY = Math.max(textHeight - totalLinesHeight - 2, 0);
         } else {
             offsetY = 0;
         }
@@ -65,7 +66,11 @@ export default {
                 continue;
             }
 
-            var pens = lines[lineIdx],
+            var line = lines[lineIdx];
+            if (!line) {
+                continue;
+            }
+            var pens = line.pens,
                 penCount = pens.length;
             var halign = defaultHalign;
             // Seek if there has algin tag
@@ -86,15 +91,16 @@ export default {
             }
             offsetX += startX;
 
+            var hitAreaHeight = this.getLineHeight(line) + defaultStyle.lineSpacing;
             for (var penIdx = 0; penIdx < penCount; penIdx++) {
-                this.drawPen(pens[penIdx], offsetX, offsetY, rtlOffset);
+                this.drawPen(pens[penIdx], offsetX, offsetY, rtlOffset, hitAreaHeight);
             }
         }
 
         context.restore();
     },
 
-    drawPen(pen, offsetX, offsetY, rtlOffset) {
+    drawPen(pen, offsetX, offsetY, rtlOffset, lineHeight) {
         offsetX += pen.x;
         offsetY += pen.y + (pen.prop.y || 0);
 
@@ -162,7 +168,7 @@ export default {
                 offsetX,                       // x
                 (offsetY - this.startYOffset), // y
                 pen.width,                     // width
-                this.defaultStyle.lineHeight,  // height
+                (lineHeight || this.defaultStyle.lineHeight),  // height
                 data
             );
         }
