@@ -52,6 +52,7 @@ interface TextStyle {
     maxLines?: number,
     lineSpacing?: number,
     letterSpacing?: number,
+    fixedLineHeightMode?: boolean,
 
     fixedWidth?: number,
     fixedHeight?: number,

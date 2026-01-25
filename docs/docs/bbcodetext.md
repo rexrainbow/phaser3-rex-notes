@@ -191,8 +191,10 @@ Default style
     },
     maxLines: 0,
     lineSpacing: 0,
+    letterSpacing: 0,
     fixedWidth: 0,
     fixedHeight: 0,
+    fixedLineHeightMode: true,
     testString: '|MÉqgy',
     
     wrap: {
