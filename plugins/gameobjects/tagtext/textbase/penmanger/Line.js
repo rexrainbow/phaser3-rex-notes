@@ -4,6 +4,8 @@ class Line {
         this.maxAscent = 0;
         this.maxDescent = 0;
         this.lineHeight = 0;
+        this.startOffset = 0;
+        this.endOffset = 0;
     }
 
     reset() {
@@ -11,6 +13,8 @@ class Line {
         this.maxAscent = 0;
         this.maxDescent = 0;
         this.lineHeight = 0;
+        this.startOffset = 0;
+        this.endOffset = 0;
         return this;
     }
 
