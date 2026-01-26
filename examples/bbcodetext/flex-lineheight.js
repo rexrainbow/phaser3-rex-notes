@@ -20,7 +20,14 @@ class Demo extends Phaser.Scene {
 [size=60]size=60[/size]\
 `
         this.add.rexBBCodeText(400, 300, s, {
-            fixedLineHeightMode: false
+            fixedLineHeightMode: false,
+            backgroundColor: '#333333',
+            padding: {
+                left: 20,
+                right: 20,
+                top: 20,
+                bottom: 20,
+            }
         })
 
     }
