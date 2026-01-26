@@ -261,12 +261,14 @@ class CanvasText {
             line.maxAscent = lineAscent;
             line.maxDescent = lineDescent;
             line.lineHeight = lineAscent + lineDescent;
+            line.startOffset = offsetY;
+            line.endOffset = offsetY + line.lineHeight;
             var baselineOffset = offsetY + lineAscent - defaultAscent;
             var pens = line.pens;
             for (var penIdx = 0, penCnt = pens.length; penIdx < penCnt; penIdx++) {
                 pens[penIdx].y = baselineOffset;
             }
-            offsetY += line.lineHeight + lineSpacing;
+            offsetY = line.endOffset + lineSpacing;
         }
     }
 

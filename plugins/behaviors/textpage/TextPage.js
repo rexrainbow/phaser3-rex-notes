@@ -124,6 +124,9 @@ class TextPage extends ComponentBase {
         if (this.maxLines !== undefined) {
             return this.maxLines;
 
+        } else if (this.isVariableLineHeightMode) {
+            return 0; // Does not have constant lines count in this mode
+
         } else {
             var count;
             switch (this.textObjectType) {
@@ -143,6 +146,118 @@ class TextPage extends ComponentBase {
             return count;
 
         }
+    }
+
+    get isVariableLineHeightMode() {
+        return (this.textObjectType === TagTextType) &&
+            (!this.parent.style.fixedLineHeightMode) &&
+            (this.maxLines === undefined) &&
+            (this.parent.style.maxLines <= 0);
+    }
+
+    getPageIndexByLineIndex(lineIndex) {
+        var pageCount = this.pageStartIndexes.length;
+        if (pageCount === 0) {
+            return 0;
+        }
+        if (lineIndex == null || lineIndex <= this.pageStartIndexes[0]) {
+            return 0;
+        }
+        for (var i = pageCount - 1; i >= 0; i--) {
+            if (lineIndex >= this.pageStartIndexes[i]) {
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    getLineIndexByHeight(lineIndex, pageHeight) {
+        var lines = this.lines.lines;
+        if (!lines || lines.length === 0) {
+            return 0;
+        }
+        if (lineIndex < 0) {
+            lineIndex = 0;
+        } else if (lineIndex >= lines.length) {
+            return lines.length;
+        }
+        var base = lines[lineIndex].startOffset;
+        var target = base + pageHeight;
+        var left = lineIndex;
+        var right = lines.length - 1;
+        var result = lines.length;
+        while (left <= right) {
+            var mid = (left + right) >> 1;
+            if (lines[mid].endOffset > target) {
+                result = mid;
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return result;
+    }
+
+    getLastStartLineIndexByHeight(pageHeight) {
+        if (pageHeight <= 0) {
+            return 0;
+        }
+        var lines = this.lines.lines;
+        if (!lines || lines.length === 0) {
+            return 0;
+        }
+        var lastLine = lines[lines.length - 1];
+        var targetStartOffset = lastLine.endOffset - pageHeight;
+        if (targetStartOffset <= 0) {
+            return 0;
+        }
+        return this.getLineIndexByStartOffsetCeil(targetStartOffset);
+    }
+
+    getLineIndexByStartOffset(targetOffset) {
+        var lines = this.lines.lines;
+        if (!lines || lines.length === 0) {
+            return 0;
+        }
+        if (targetOffset <= lines[0].startOffset) {
+            return 0;
+        }
+        var left = 0;
+        var right = lines.length - 1;
+        var result = 0;
+        while (left <= right) {
+            var mid = (left + right) >> 1;
+            if (lines[mid].startOffset <= targetOffset) {
+                result = mid;
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return result;
+    }
+
+    getLineIndexByStartOffsetCeil(targetOffset) {
+        var lines = this.lines.lines;
+        if (!lines || lines.length === 0) {
+            return 0;
+        }
+        if (targetOffset <= lines[0].startOffset) {
+            return 0;
+        }
+        var left = 0;
+        var right = lines.length - 1;
+        var result = lines.length - 1;
+        while (left <= right) {
+            var mid = (left + right) >> 1;
+            if (lines[mid].startOffset >= targetOffset) {
+                result = mid;
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return result;
     }
 
     get isFirstLine() {

@@ -12,6 +12,8 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
+        this.textPage = this.plugins.get('rexTextPage');
+
         var lines = [];
         for (var i = 0; i < 50; i++) {
             var s;
@@ -31,29 +33,14 @@ class Demo extends Phaser.Scene {
             fixedHeight: 200,
             padding: 10
         })
-        txt.page = this.plugins.get('rexTextPage').add(txt, {
+        txt.page = this.textPage.add(txt, {
             //text: lines
         });
         txt.page.setText(lines);
-        txt.page.showPage();
+        txt.page.showNextLine();
 
-        this.input.keyboard.on('keydown-DOWN', txt.page.showNextPage, txt.page);
-        this.input.keyboard.on('keydown-UP', txt.page.showPreviousPage, txt.page);
-
-
-        var printPageIdx = function () {
-            var page = txt.page;
-            var s = `${page.pageIndex + 1}/${page.pageCount}`;
-            if (page.pageIndex === 0) {
-                s += '-- first page'
-            } else if (page.isLastPage) {
-                s += "-- last page"
-            }
-            console.log(s);
-        }
-        printPageIdx();
-        this.input.keyboard.on('keydown-UP', printPageIdx);
-        this.input.keyboard.on('keydown-DOWN', printPageIdx);
+        this.input.keyboard.on('keydown-DOWN', txt.page.showNextLine, txt.page);
+        this.input.keyboard.on('keydown-UP', txt.page.showPreviousLine, txt.page);
     }
 
     update() { }

@@ -7,11 +7,24 @@ var GetLines = function (startLineIndex, endLineIdx) {
         startLineIndex = this.startLineIndex;
     }
     if (endLineIdx === undefined) {
-        var pageLinesCount = this.pageLinesCount;
-        if (pageLinesCount > 0) {
-            endLineIdx = startLineIndex + pageLinesCount;
+        if (this.isVariableLineHeightMode) {
+            var padding = this.parent.padding;
+            var pageHeight = this.parent.height - padding.top - padding.bottom;
+            if (pageHeight <= 0) {
+                endLineIdx = this.totalLinesCount;
+            } else {
+                endLineIdx = this.getLineIndexByHeight(startLineIndex, pageHeight);
+                if (endLineIdx <= startLineIndex) {
+                    endLineIdx = startLineIndex + 1;
+                }
+            }
         } else {
-            endLineIdx = this.totalLinesCount
+            var pageLinesCount = this.pageLinesCount;
+            if (pageLinesCount > 0) {
+                endLineIdx = startLineIndex + pageLinesCount;
+            } else {
+                endLineIdx = this.totalLinesCount
+            }
         }
     }
     if (endLineIdx > this.totalLinesCount) {
