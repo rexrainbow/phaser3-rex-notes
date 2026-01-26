@@ -295,6 +295,32 @@ declare namespace TextPlayer {
 
 /**
  * Dynamic text player with typing, parsing, and paging support.
+ *
+ * Supported embedded tags (default [] delimiters):
+ * - [color=red]text[/color]
+ * - [stroke=black]text[/stroke]
+ * - [b]text[/b], [i]text[/i]
+ * - [size=24]text[/size]
+ * - [shadow=black]text[/shadow]
+ * - [align=center]text[/align]
+ * - [x=10]text[/x], [y=10]text[/y]
+ * - [left=4]text[/left], [right=4]text[/right]
+ * - [space=10][/space]
+ * - [img=key][/img]
+ * - [speed=50]text[/speed]
+ * - [r], [pagebreak], [pb]
+ * - [content.on], [content.off]
+ * - [wait=click], [click], [wait=500], [/wait]
+ * - [se=click], [se.fadein=500], [se.fadeout=500], [se.volume=0.5], [se.mute], [se.unmute]
+ * - [se2=click], [se2.fadein=500], [se2.fadeout=500], [se2.volume=0.5], [se2.mute], [se2.unmute]
+ * - [bgm=track], [bgm.fadein=1000], [bgm.fadeout=1000], [bgm.volume=0.5], [bgm.mute], [bgm.unmute], [bgm.pause]
+ * - [bgm2=track], [bgm2.fadein=1000], [bgm2.fadeout=1000], [bgm2.volume=0.5], [bgm2.mute], [bgm2.unmute], [bgm2.pause]
+ * - [bgm.cross=track,1000], [bgm2.cross=track,1000]
+ * - [camera.fadein=1000], [camera.fadeout=1000], [camera.flash=1000], [camera.shake=500,0.02]
+ * - [camera.zoom=1.2], [camera.zoom.to=1.2,1000,ease]
+ * - [camera.rotate=0.5], [camera.rotate.to=1.0,1000,ease]
+ * - [camera.scroll=100,200], [camera.scroll.to=100,200,1000,ease]
+ * - Custom tags: [tag=value]...[/tag] (parsed via parser events)
  */
 declare class TextPlayer extends DynamicText {
     /**

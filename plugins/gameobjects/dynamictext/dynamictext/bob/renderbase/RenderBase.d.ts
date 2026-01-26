@@ -10,6 +10,20 @@ declare namespace RenderBase {
     type DrawCallbackType = (
         bob: RenderBase
     ) => void;
+
+    /**
+     * World position result.
+     */
+    type PositionType = {
+        /**
+         * World x.
+         */
+        x: number,
+        /**
+         * World y.
+         */
+        y: number
+    }
 }
 
 /**
@@ -278,4 +292,26 @@ declare class RenderBase extends Base {
      * Draw bottom-right y.
      */
     readonly drawBRY: number;
+
+    /**
+     * Get world position with an offset.
+     * @param offsetX - Offset x.
+     * @param offsetY - Offset y.
+     * @param out - Optional output object or true to create.
+     * @returns World position.
+     */
+    getWorldPosition(
+        offsetX: number,
+        offsetY: number,
+        out?: RenderBase.PositionType | true
+    ): RenderBase.PositionType;
+
+    /**
+     * Get world position.
+     * @param out - Optional output object or true to create.
+     * @returns World position.
+     */
+    getWorldPosition(
+        out?: RenderBase.PositionType | true
+    ): RenderBase.PositionType;
 }
