@@ -10,19 +10,11 @@ var ResizeText = function (textObject, width, height) {
 
     switch (this.textObjectType) {
         case TextType:
-        case TagTextType:
             textObject.setFixedSize(width, height);
 
             var style = textObject.style;
             var wrapWidth = Math.max(width, 0);
-            if (this.textObjectType === TextType) {  // Built-in text
-                style.wordWrapWidth = wrapWidth;
-            } else {  // BBCode text, Tag text
-                if (style.wrapMode === 0) { // Turn no-wrap to word-wrap
-                    style.wrapMode = 1;
-                }
-                style.wrapWidth = wrapWidth;
-            }
+             style.wordWrapWidth = wrapWidth;
             break;
         case BitmapTextType:
             textObject.setMaxWidth(width);

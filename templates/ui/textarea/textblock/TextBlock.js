@@ -1,4 +1,4 @@
-import { TextType, TagTextType, BitmapTextType } from '../../../../plugins/utils/text/GetTextObjectType.js'
+import { TextType, BitmapTextType } from '../../../../plugins/utils/text/GetTextObjectType.js'
 import GetTextObjectType from '../../../../plugins/utils/text/GetTextObjectType.js';
 import AddChildMask from '../../../../plugins/gameobjects/container/containerlite/mask/AddChildMask.js';
 import BaseSizer from '../../basesizer/BaseSizer.js';
@@ -75,7 +75,8 @@ class TextBlock extends BaseSizer {
         sizerConfig.expand = true;
         this.textObject = textObject;
 
-        this.textObjectType = GetTextObjectType(textObject);
+        this.textObjectType = GetTextObjectType(textObject); 
+        // TagTextType is not included in this class
 
         // Add more variables
         sizerConfig.preOffsetY = 0;
@@ -99,12 +100,10 @@ class TextBlock extends BaseSizer {
         this.textObject = undefined;
         this.textMask = undefined;
         if (this.lines) {
+            this.lines.length = 0;
             switch (this.textObjectType) {
                 case TextType:
                     this.lines.length = 0;
-                    break;
-                case TagTextType:
-                    this.lines.destroy();
                     break;
                 case BitmapTextType:
                     this.lines.length = 0;
@@ -129,7 +128,6 @@ class TextBlock extends BaseSizer {
             var lineHeight;
             switch (this.textObjectType) {
                 case TextType:
-                case TagTextType:
                     var style = this.textObject.style;
                     lineHeight = style.metrics.fontSize + style.strokeThickness;
                     break;
@@ -149,7 +147,6 @@ class TextBlock extends BaseSizer {
             var lineSpacing;
             switch (this.textObjectType) {
                 case TextType:
-                case TagTextType:
                     lineSpacing = this.textObject.lineSpacing;
                     break;
                 case BitmapTextType:

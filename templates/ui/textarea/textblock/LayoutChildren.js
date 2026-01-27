@@ -1,5 +1,3 @@
-import ResizeText from './ResizeText.js';
-import ResetTextObjectPosition from './ResetTextObjectPosition.js';
 import AlignIn from '../../../../plugins/utils/actions/AlignIn.js';
 
 var LayoutChildren = function () {
@@ -18,12 +16,13 @@ var LayoutChildren = function () {
         y = startY + (padding.top * this.scaleY);
         width = (this.width * this.scaleX) - ((padding.left + padding.right) * this.scaleX);
         height = (this.height * this.scaleY) - ((padding.top + padding.bottom) * this.scaleY);
-        ResizeText.call(this, child, width, height);
+        this.resizeText(child, width, height);
 
         AlignIn(child, x, y, width, height, childConfig.align);
 
         childConfig.preOffsetY = 0; // Clear preOffsetY
-        ResetTextObjectPosition.call(this);
+
+        this.resetTextObjectPosition();
 
         if (this.textMask) {
             this.textMask.setPosition().resize();

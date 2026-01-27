@@ -1,5 +1,5 @@
 import Scrollable from '../utils/scrollable/Scrollable.js';
-import TextBlock from './textblock/TextBlock.js';
+import CreateTextBlock from './textblock/CreateTextBlock.js';
 import InjectProperties from './InjectProperties.js';
 import SetTextMethods from './SetTextMethods.js';
 import ScrollMethods from './ScrollMethods.js';
@@ -19,7 +19,7 @@ class TextArea extends Scrollable {
         var textCrop = GetValue(config, 'textCrop', !!textObject.setCrop);
         var textMask = GetValue(config, 'textMask', !textCrop);
         var content = GetValue(config, 'content', '');
-        var textBlock = new TextBlock(scene, {
+        var textBlock = CreateTextBlock(scene, {
             width: textWidth,
             height: textHeight,
             text: textObject,
