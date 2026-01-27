@@ -14,15 +14,23 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var txt = this.add.rexBBCodeText(100, 100, 'Touch to start typing', { fontSize: 30 });
+        var txt = this.add.rexBBCodeText(100, 100, 'Touch to start typing', {
+            fixedLineHeightMode: false,
+            fontSize: 30
+        });
         txt.typing = this.plugins.get('rexTextTyping').add(txt, {
             speed: 0.1 * 1000,
             //typeMode: 'middle-to-sides',
             //setTextCallback: myTypingFn
         });
 
+        var s = `\
+[size=60]size=60[/size]
+[img=key] Find the [img=key], open the door. [img=key]
+[size=20]size=20[/size]
+aaabbb`;
         this.input.on('pointerdown', function () {
-            txt.typing.start('[img=key] Find the [img=key], open the door. [img=key]');
+            txt.typing.start(s);
         }, this);
 
         txt.typing.on('type', function () {
