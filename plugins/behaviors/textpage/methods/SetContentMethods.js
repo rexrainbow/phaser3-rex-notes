@@ -8,8 +8,7 @@ var AppendPageByLineHeight = function (pageStartIndex) {
         return this;
     }
 
-    var padding = this.parent.padding;
-    var pageHeight = this.parent.height - padding.top - padding.bottom;
+    var pageHeight = this.pageHeight;
     this.pageStartIndexes.push(pageStartIndex);
     if (pageHeight <= 0) {
         return this;

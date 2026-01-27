@@ -44,6 +44,7 @@ declare class TextPage extends ComponentBase {
 
     readonly pageIndex: number;
     readonly pageCount: number;
+    readonly pageHeight: number;
 
     showPageByLineIndex(lineIndex: number): this;
     showNextLine(): this;

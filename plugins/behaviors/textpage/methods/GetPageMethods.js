@@ -43,8 +43,7 @@ export default {
 
     setStartLineIndex(idx) {
         if (this.isVariableLineHeightMode) {
-            var padding = this.parent.padding;
-            var pageHeight = this.parent.height - padding.top - padding.bottom;
+            var pageHeight = this.pageHeight;
             if (pageHeight <= 0) {
                 this.startLineIndex = 0;
                 this.endLineIndex = this.totalLinesCount;

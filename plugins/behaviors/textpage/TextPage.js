@@ -113,6 +113,11 @@ class TextPage extends ComponentBase {
         return (this.pageIndex >= (this.pageCount - 1));
     }
 
+    get pageHeight() {
+        var padding = this.parent.padding;
+        return this.parent.height - padding.top - padding.bottom;
+    }
+
     get totalLinesCount() {
         return (this.lines) ? this.lines.length : 0;
     }
@@ -125,7 +130,7 @@ class TextPage extends ComponentBase {
             return this.maxLines;
 
         } else if (this.isVariableLineHeightMode) {
-            return 0; // Does not have constant lines count in this mode
+            throw new Error('pageLinesCount is not supported when isVariableLineHeightMode is enabled');
 
         } else {
             var count;
