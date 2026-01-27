@@ -1,5 +1,39 @@
 import DrawRoundRectangleBackground from '../../../canvas/utils/DrawRoundRectangleBackground.js';
 
+var GetStartLineIndex = function (lines, targetOffset) {
+    // First line whose endOffset is greater than targetOffset
+    var left = 0;
+    var right = lines.length - 1;
+    var result = lines.length;
+    while (left <= right) {
+        var mid = (left + right) >> 1;
+        if (lines[mid].endOffset > targetOffset) {
+            result = mid;
+            right = mid - 1;
+        } else {
+            left = mid + 1;
+        }
+    }
+    return result;
+};
+
+var GetEndLineIndex = function (lines, targetOffset) {
+    // First line whose startOffset is greater than or equal to targetOffset
+    var left = 0;
+    var right = lines.length - 1;
+    var result = lines.length;
+    while (left <= right) {
+        var mid = (left + right) >> 1;
+        if (lines[mid].startOffset >= targetOffset) {
+            result = mid;
+            right = mid - 1;
+        } else {
+            left = mid + 1;
+        }
+    }
+    return result;
+};
+
 export default {
     draw(startX, startY, textWidth, textHeight) {
         var penManager = this.penManager;
@@ -22,6 +56,24 @@ export default {
             defaultStyle.backgroundCornerIteration
         );
 
+        var parent = this.parent;
+        var padding = parent.padding;
+        var viewportWidth = parent.width - padding.left - padding.right;
+        var viewportHeight = parent.height - padding.top - padding.bottom;
+        var contentHeight = this.linesHeight;
+        var hasViewport = (viewportWidth > 0) && (viewportHeight > 0);
+        var hasFixedHeight = (parent.style.fixedHeight > 0);
+        var hasOverflow = (contentHeight > viewportHeight);
+        var maxLines = defaultStyle.maxLines;
+        var useVisibleRange = (maxLines <= 0) && (defaultStyle.valign === 'top') && hasViewport && hasFixedHeight && hasOverflow;
+        var clipText = useVisibleRange;
+        if (clipText) {
+            context.save();
+            context.beginPath();
+            context.rect(padding.left, padding.top, viewportWidth, viewportHeight);
+            context.clip();
+        }
+
         // draw lines
         startX += this.startXOffset;
         startY += this.startYOffset;
@@ -30,10 +82,23 @@ export default {
 
         var lineWidth;
         var lines = penManager.lines;
-        var totalLinesNum = lines.length,
-            maxLines = defaultStyle.maxLines;
+        var totalLinesNum = lines.length;
         var drawLinesNum, drawLineStartIdx, drawLineEndIdx;
-        if ((maxLines > 0) && (totalLinesNum > maxLines)) {
+        if (useVisibleRange && (totalLinesNum > 0)) {
+            var visibleStart = -parent.scrollY;
+            var visibleEnd = visibleStart + viewportHeight;
+            drawLineStartIdx = GetStartLineIndex(lines, visibleStart);
+            drawLineEndIdx = GetEndLineIndex(lines, visibleEnd);
+            if (drawLineStartIdx < 0) {
+                drawLineStartIdx = 0;
+            }
+            if (drawLineEndIdx > totalLinesNum) {
+                drawLineEndIdx = totalLinesNum;
+            }
+            if (drawLineEndIdx < drawLineStartIdx) {
+                drawLineEndIdx = drawLineStartIdx;
+            }
+        } else if ((maxLines > 0) && (totalLinesNum > maxLines)) {
             drawLinesNum = maxLines;
             if (valign === 'center') { // center
                 drawLineStartIdx = Math.floor((totalLinesNum - drawLinesNum) / 2);
@@ -42,24 +107,28 @@ export default {
             } else {
                 drawLineStartIdx = 0;
             }
+            drawLineEndIdx = drawLineStartIdx + drawLinesNum;
         } else {
-            drawLinesNum = totalLinesNum;
             drawLineStartIdx = 0;
+            drawLineEndIdx = totalLinesNum;
         }
-        drawLineEndIdx = drawLineStartIdx + drawLinesNum;
 
         var offsetX, offsetY;
         var rtl = this.rtl,
             rtlOffset = (rtl) ? this.parent.width : undefined;
-        var totalLinesHeight = this.getLinesHeight(drawLineStartIdx, drawLineEndIdx);
-        if (valign === 'center') { // center
-            offsetY = Math.max((textHeight - totalLinesHeight) / 2, 0);
-        } else if (valign === 'bottom') { // bottom
-            offsetY = Math.max(textHeight - totalLinesHeight - 2, 0);
+        if (useVisibleRange) {
+            offsetY = startY;
         } else {
-            offsetY = 0;
+            var totalLinesHeight = this.getLinesHeight(drawLineStartIdx, drawLineEndIdx);
+            if (valign === 'center') { // center
+                offsetY = Math.max((textHeight - totalLinesHeight) / 2, 0);
+            } else if (valign === 'bottom') { // bottom
+                offsetY = Math.max(textHeight - totalLinesHeight - 2, 0);
+            } else {
+                offsetY = 0;
+            }
+            offsetY += startY;
         }
-        offsetY += startY;
         for (var lineIdx = drawLineStartIdx; lineIdx < drawLineEndIdx; lineIdx++) {
             lineWidth = penManager.getLineWidth(lineIdx);
             if (lineWidth === 0) {
@@ -97,6 +166,9 @@ export default {
             }
         }
 
+        if (clipText) {
+            context.restore();
+        }
         context.restore();
     },
 

@@ -297,6 +297,22 @@ declare class Text extends CanvasGameObjectBase {
      */
     text: string;
     /**
+     * Normalized vertical scroll position.
+     */
+    t: number;
+    /**
+     * Current vertical scroll offset.
+     */
+    scrollY: number;
+    /**
+     * Top scroll offset limit.
+     */
+    readonly topScrollY: number;
+    /**
+     * Bottom scroll offset limit.
+     */
+    readonly bottomScrollY: number;
+    /**
      * Set text content.
      * @param text - Text content.
      * @returns This instance.
@@ -312,6 +328,44 @@ declare class Text extends CanvasGameObjectBase {
         text: string | number | string[],
         addCR?: boolean
     ): this;
+    /**
+     * Set normalized vertical scroll position.
+     * @param value - Normalized value.
+     * @param clamp - True to clamp within bounds.
+     * @returns This instance.
+     */
+    setT(value: number, clamp?: boolean): this;
+    /**
+     * Add to normalized vertical scroll position.
+     * @param inc - Delta value.
+     * @param clamp - True to clamp within bounds.
+     * @returns This instance.
+     */
+    addT(inc: number, clamp?: boolean): this;
+    /**
+     * Scroll to the top.
+     * @returns This instance.
+     */
+    scrollToTop(): this;
+    /**
+     * Scroll to the bottom.
+     * @returns This instance.
+     */
+    scrollToBottom(): this;
+    /**
+     * Set vertical scroll offset.
+     * @param value - Offset value.
+     * @param clamp - True to clamp within bounds.
+     * @returns This instance.
+     */
+    setScrollY(value: number, clamp?: boolean): this;
+    /**
+     * Add to vertical scroll offset.
+     * @param inc - Delta value.
+     * @param clamp - True to clamp within bounds.
+     * @returns This instance.
+     */
+    addScrollY(inc: number, clamp?: boolean): this;
 
     /**
      * Get plain text without tags.
