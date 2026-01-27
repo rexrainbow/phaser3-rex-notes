@@ -52,16 +52,13 @@ class TextArea extends Scrollable {
     }
 
     get text() {
-        return this.childrenMap.child.text;
-    }
-
-    get lineHeight() {
         var textBlock = this.childrenMap.child;
-        return textBlock.textLineHeight + textBlock.textLineSpacing;
+        return textBlock.text;
     }
 
     get lineIndex() {
-        return Math.floor(-this.childOY / this.lineHeight);
+        var textBlock = this.childrenMap.child;
+        return textBlock.lineIndex;
     }
 
     get linesCount() {

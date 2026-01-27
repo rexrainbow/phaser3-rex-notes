@@ -1,16 +1,11 @@
 export default {
     scrollToLine(lineIndex) {
-        this.setChildOY(-this.lineHeight * lineIndex);
+        this.childrenMap.child.scrollToLine(lineIndex);
         return this;
     },
 
     scrollToNextLine(lineCount) {
-        if (lineCount === undefined) {
-            lineCount = 1;
-        }
-
-        var lineIndex = this.lineIndex + lineCount;
-        this.scrollToLine(lineIndex);
+        this.childrenMap.child.scrollToNextLine(lineCount);
         return this;
     }
 }

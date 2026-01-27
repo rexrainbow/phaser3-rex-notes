@@ -273,6 +273,26 @@ class TextBlock extends BaseSizer {
         this.t = percentage;
         return this;
     }
+
+    scrollToLine(lineIndex) {
+        var lineHeight = this.textLineHeight + this.textLineSpacing;
+        this.textOY = -lineHeight * lineIndex;
+        return this;
+    }
+
+    get lineIndex() {
+        var lineHeight = this.textLineHeight + this.textLineSpacing;
+        return Math.floor(-this.textOY / lineHeight);
+    }
+
+    scrollToNextLine(lineCount) {
+        if (lineCount === undefined) {
+            lineCount = 1;
+        }
+
+        this.scrollToLine(this.lineIndex + lineCount);
+        return this;
+    }
 }
 
 var CreateDefaultTextObject = function (scene) {
