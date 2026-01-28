@@ -12,8 +12,10 @@ export default class Line extends PathBase {
      * @param y1 - End y.
      */
     constructor(
-        x0?: number, y0?: number,
-        x1?: number, y1?: number
+        x0?: number,
+        y0?: number,
+        x1?: number,
+        y1?: number
     );
 
     /**
@@ -22,7 +24,10 @@ export default class Line extends PathBase {
      * @param y - Start y.
      * @returns This instance.
      */
-    setP0(x: number, y: number): this;
+    setP0(
+        x: number,
+        y: number
+    ): this;
     /**
      * Start x.
      */
@@ -38,7 +43,10 @@ export default class Line extends PathBase {
      * @param y - End y.
      * @returns This instance.
      */
-    setP1(x: number, y: number): this;
+    setP1(
+        x: number,
+        y: number
+    ): this;
     /**
      * End x.
      */

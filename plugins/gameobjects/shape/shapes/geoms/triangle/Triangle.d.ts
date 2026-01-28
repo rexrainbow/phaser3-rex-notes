@@ -14,9 +14,12 @@ export default class Triangle extends BaseGeom {
      * @param y2 - Point 2 y.
      */
     constructor(
-        x0?: number, y0?: number,
-        x1?: number, y1?: number,
-        x2?: number, y2?: number
+        x0?: number,
+        y0?: number,
+        x1?: number,
+        y1?: number,
+        x2?: number,
+        y2?: number
     );
 
     /**
@@ -25,7 +28,10 @@ export default class Triangle extends BaseGeom {
      * @param y - Point 0 y.
      * @returns This instance.
      */
-    setP0(x: number, y: number): this;
+    setP0(
+        x: number,
+        y: number
+    ): this;
     /**
      * Point 0 x.
      */
@@ -41,7 +47,10 @@ export default class Triangle extends BaseGeom {
      * @param y - Point 1 y.
      * @returns This instance.
      */
-    setP1(x: number, y: number): this;
+    setP1(
+        x: number,
+        y: number
+    ): this;
     /**
      * Point 1 x.
      */
@@ -57,7 +66,10 @@ export default class Triangle extends BaseGeom {
      * @param y - Point 2 y.
      * @returns This instance.
      */
-    setP2(x: number, y: number): this;
+    setP2(
+        x: number,
+        y: number
+    ): this;
     /**
      * Point 2 x.
      */

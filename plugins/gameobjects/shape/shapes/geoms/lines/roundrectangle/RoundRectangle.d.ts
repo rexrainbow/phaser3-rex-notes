@@ -37,8 +37,10 @@ declare class RoundRectangle extends PathBase {
      * @param iteration - Corner iteration.
      */
     constructor(
-        x?: number, y?: number,
-        width?: number, height?: number,
+        x?: number,
+        y?: number,
+        width?: number,
+        height?: number,
         radius?: number,
         iteration?: number
     );
@@ -49,7 +51,10 @@ declare class RoundRectangle extends PathBase {
      * @param y - Top-left y.
      * @returns This instance.
      */
-    setTopLeftPosition(x: number, y: number): this;
+    setTopLeftPosition(
+        x: number,
+        y: number
+    ): this;
     /**
      * Top-left x.
      */
@@ -65,7 +70,10 @@ declare class RoundRectangle extends PathBase {
      * @param height - Height.
      * @returns This instance.
      */
-    setSize(width: number, height: number): this;
+    setSize(
+        width: number,
+        height: number
+    ): this;
     /**
      * Width.
      */
@@ -81,7 +89,10 @@ declare class RoundRectangle extends PathBase {
      * @param y - Center y.
      * @returns This instance.
      */
-    setCenterPosition(x: number, y: number): this;
+    setCenterPosition(
+        x: number,
+        y: number
+    ): this;
     /**
      * Center x.
      */

@@ -11,5 +11,10 @@ export default class Ellipse extends Arc {
      * @param radiusX - Radius x.
      * @param radiusY - Radius y.
      */
-    constructor(x?: number, y?: number, radiusX?: number, radiusY?: number);
+    constructor(
+        x?: number,
+        y?: number,
+        radiusX?: number,
+        radiusY?: number
+    );
 }

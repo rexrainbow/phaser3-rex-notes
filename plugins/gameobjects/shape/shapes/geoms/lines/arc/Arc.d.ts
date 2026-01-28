@@ -16,10 +16,14 @@ export default class Arc extends PathBase {
      * @param pie - True to draw as a pie.
      */
     constructor(
-        x?: number, y?: number,
-        radiusX?: number, radiusY?: number,
-        startAngle?: number, endAngle?: number,
-        anticlockwise?: boolean, pie?: boolean
+        x?: number,
+        y?: number,
+        radiusX?: number,
+        radiusY?: number,
+        startAngle?: number,
+        endAngle?: number,
+        anticlockwise?: boolean,
+        pie?: boolean
     );
 
     /**
@@ -28,7 +32,10 @@ export default class Arc extends PathBase {
      * @param y - Center y.
      * @returns This instance.
      */
-    setCenterPosition(x: number, y: number): this;
+    setCenterPosition(
+        x: number,
+        y: number
+    ): this;
     /**
      * Center x.
      */
@@ -44,7 +51,10 @@ export default class Arc extends PathBase {
      * @param radiusY - Radius y.
      * @returns This instance.
      */
-    setRadius(radiusX: number, radiusY?: number): this;
+    setRadius(
+        radiusX: number,
+        radiusY?: number
+    ): this;
     /**
      * Radius x.
      */
@@ -62,7 +72,8 @@ export default class Arc extends PathBase {
      * @returns This instance.
      */
     setAngle(
-        startAngle: number, endAngle: number,
+        startAngle: number,
+        endAngle: number,
         anticlockwise?: boolean
     ): this;
     /**
