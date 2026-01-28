@@ -15,6 +15,7 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
+        var UseBBCodeTextGameObject = false;
         var textArea = this.rexUI.add.textArea({
             x: 400,
             y: 300,
@@ -23,8 +24,9 @@ class Demo extends Phaser.Scene {
 
             background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 0, COLOR_MAIN),
 
-            // text: this.add.text(),
-            text: this.rexUI.add.BBCodeText(),
+            text: (UseBBCodeTextGameObject) ? this.rexUI.add.BBCodeText(0, 0, '', {
+                fixedLineHeightMode: false
+            }) : this.add.text(),
             // textMask: false,
 
             slider: false,
@@ -33,23 +35,16 @@ class Demo extends Phaser.Scene {
             .layout()
             .setText(content);
 
-        this.input.on('pointerdown', function () {
-            textArea.scrollToNextLine();
-        })
+        this.add.text(0, 550, 'Scolll 1 lines')
+            .setInteractive()
+            .on('pointerdown', function () {
+                textArea.scrollToNextLine(1);
+            })
 
         this.add.text(0, 580, 'Scolll 50 lines')
             .setInteractive()
             .on('pointerdown', function () {
-                var y0 = textArea.childOY;
-                textArea.scrollToNextLine(50);
-                var y1 = textArea.childOY;
-
-                textArea.childOY = y0;
-                this.tweens.add({
-                    targets: textArea,
-                    childOY: y1,
-                    duration: 1000
-                })
+                textArea.scrollToNextLine(50, 1000);
             }, this)
     }
 

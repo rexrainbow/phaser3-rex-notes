@@ -1,94 +1,19 @@
-import { TextType, BitmapTextType } from '../../../../plugins/utils/text/GetTextObjectType.js'
-import GetTextObjectType from '../../../../plugins/utils/text/GetTextObjectType.js';
-import AddChildMask from '../../../../plugins/gameobjects/container/containerlite/mask/AddChildMask.js';
-import BaseSizer from '../../basesizer/BaseSizer.js';
-import Methods from './Methods.js';
-import GetBoundsConfig from '../../utils/GetBoundsConfig.js';
-import LinesCountToTextHeight from './LinesCountToTextHeight.js';
-import TextHeightToLinesCount from './TextHeightToLinesCount.js';
+import { TextType, BitmapTextType } from '../../../../plugins/utils/text/GetTextObjectType.js';
+import TextToLines from '../../../../plugins/utils/text/TextToLines.js';
+import SetNoWrapText from '../../../../plugins/utils/text/SetNoWrapText.js';
+import BaseTextBlock from './BaseTextBlock.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const GetValue = Phaser.Utils.Objects.GetValue;
-const ALIGN_LEFTTOP = Phaser.Display.Align.TOP_LEFT;
-
-class TextBlock extends BaseSizer {
+class TextBlock extends BaseTextBlock {
     constructor(scene, x, y, minWidth, minHeight, config) {
-        if (IsPlainObject(x)) {
-            config = x;
-            x = GetValue(config, 'x', 0);
-            y = GetValue(config, 'y', 0);
-            minWidth = GetValue(config, 'width', undefined);
-            minHeight = GetValue(config, 'height', undefined);
-        } else if (IsPlainObject(minWidth)) {
-            config = minWidth;
-            minWidth = GetValue(config, 'width', undefined);
-            minHeight = GetValue(config, 'height', undefined);
-        }
-
         super(scene, x, y, minWidth, minHeight, config);
 
         this.type = 'rexTextBlock';
-        this.textObject = undefined;
-        this.linesCount = 0;
-        this.textMask = undefined;
-        this.textObjectType = undefined;
+        this.lines = undefined;  // string[]
         this._textLineHeight = undefined;
         this._textLineSpacing = undefined;
         this._visibleLinesCount = undefined;
         this._textHeight = undefined;
         this._textVisibleHeight = undefined;
-        this._textObjectRealHeight = 0;
-
-        this.lines = undefined;
-        // Text object : array of string
-        // Tag text object : pens-manager
-        // Bitmap text object : array of string
-
-        this.text = GetValue(config, 'content', '');
-        this._textOY = 0;
-        this.execeedTopState = false;
-        this.execeedBottomState = false;
-
-        this.setClampMode(GetValue(config, 'clampTextOY', true));
-
-        this.alwaysScrollable = GetValue(config, 'alwaysScrollable', false);
-
-        // Add elements
-        var background = GetValue(config, 'background', undefined);
-        var textObject = GetValue(config, 'text', undefined);
-        if (textObject === undefined) {
-            textObject = CreateDefaultTextObject(scene);
-        }
-        this.textCropEnable = GetValue(config, 'textCrop', !!textObject.setCrop)
-        var textMaskEnable = GetValue(config, 'textMask', !this.textCropEnable);
-
-        if (background) {
-            this.addBackground(background);
-        }
-
-        this.add(textObject);
-        this.sizerChildren = [textObject];
-
-        var sizerConfig = this.getSizerConfig(textObject);
-        sizerConfig.align = ALIGN_LEFTTOP;
-        sizerConfig.padding = GetBoundsConfig(0);
-        sizerConfig.expand = true;
-        this.textObject = textObject;
-
-        this.textObjectType = GetTextObjectType(textObject); 
-        // TagTextType is not included in this class
-
-        // Add more variables
-        sizerConfig.preOffsetY = 0;
-        sizerConfig.offsetY = 0;
-
-        // Create mask of text object
-        if (textMaskEnable) {
-            this.textMask = AddChildMask.call(this, this.textObject, this);
-        }
-
-        this.addChildrenMap('background', background);
-        this.addChildrenMap('text', textObject);
     }
 
     destroy(fromScene) {
@@ -97,30 +22,98 @@ class TextBlock extends BaseSizer {
             return;
         }
 
-        this.textObject = undefined;
-        this.textMask = undefined;
         if (this.lines) {
             this.lines.length = 0;
-            switch (this.textObjectType) {
-                case TextType:
-                    this.lines.length = 0;
-                    break;
-                case BitmapTextType:
-                    this.lines.length = 0;
-                    break;
-            }
             this.lines = undefined;
         }
 
         super.destroy(fromScene);
     }
 
-    setClampMode(mode) {
-        if (mode === undefined) {
-            mode = true;
+    clearTextMetricsCache() {
+        this._textLineHeight = undefined;
+        this._textLineSpacing = undefined;
+        this._visibleLinesCount = undefined;
+        this._textHeight = undefined;
+        this._textVisibleHeight = undefined;
+    }
+
+    setText(text) {
+        if (text !== undefined) {
+            this.text = text;
         }
-        this.clampTextOY = mode;
+
+        // Wrap content in lines
+        this.lines = TextToLines(this.textObject, this.text, this.lines);
+
+        // Get lines count
+        this.linesCount = this.lines.length;
+
+        // Re-calculate these values later
+        this._textHeight = undefined;
+        this._textVisibleHeight = undefined;
+
+        this.updateTextObject();
         return this;
+    }
+
+    updateTextObject() {
+        var startLineIndex = Math.max(Math.floor(this.textHeightToLinesCount(-this.textOY)), 0);
+        var textOffset = this.linesCountToTextHeight(startLineIndex) + this.textOY;
+
+        // Grab visible lines
+        var text = this.getLines(startLineIndex);
+
+        // Display visible content
+        SetNoWrapText(this.textObject, text);
+
+        this.textObject.rexSizer.offsetY = textOffset;
+        this.resetTextObjectPosition();
+        return this;
+    }
+
+    resizeText(textObject, width, height) {
+        height += (this.textLineHeight + this.textLineSpacing); // Add 1 line
+        if ((this.textObjectWidth === width) && (this._textObjectRealHeight === height)) {
+            return;
+        }
+        this.textObjectWidth = width;
+        this._textObjectRealHeight = height;
+
+        switch (this.textObjectType) {
+            case TextType:
+                textObject.setFixedSize(width, height);
+
+                var style = textObject.style;
+                var wrapWidth = Math.max(width, 0);
+                style.wordWrapWidth = wrapWidth;
+                break;
+            case BitmapTextType:
+                textObject.setMaxWidth(width);
+                break;
+        }
+
+        // Render content again
+        this.setText();
+    }
+
+    getLines(startLineIdx) {
+        var endLineIdx = startLineIdx + this.visibleLinesCount + 1;
+        var text = this.lines.slice(startLineIdx, endLineIdx).join('\n');
+        return text;
+    }
+
+    textHeightToLinesCount(height) {
+        // height = (lines * (lineHeight + lineSpacing)) - lineSpacing
+        return (height - this.textLineSpacing) / (this.textLineHeight + this.textLineSpacing);
+    }
+
+    linesCountToTextHeight(linesCount) {
+        var height = linesCount * (this.textLineHeight + this.textLineSpacing);
+        if (linesCount > 1) {
+            height -= this.textLineSpacing;
+        }
+        return height;
     }
 
     get textLineHeight() {
@@ -160,22 +153,14 @@ class TextBlock extends BaseSizer {
 
     get visibleLinesCount() {
         if (this._visibleLinesCount === undefined) {
-            this._visibleLinesCount = Math.floor(TextHeightToLinesCount.call(this, this._textObjectRealHeight));
+            this._visibleLinesCount = Math.floor(this.textHeightToLinesCount(this._textObjectRealHeight));
         }
         return this._visibleLinesCount;
     }
 
-    get topTextOY() {
-        return 0;
-    }
-
-    get bottomTextOY() {
-        return -this.textVisibleHeight;
-    }
-
     get textHeight() {
         if (this._textHeight === undefined) {
-            this._textHeight = LinesCountToTextHeight.call(this, this.linesCount);
+            this._textHeight = this.linesCountToTextHeight(this.linesCount);
         }
         return this._textHeight;
     }
@@ -195,80 +180,15 @@ class TextBlock extends BaseSizer {
         return this._textVisibleHeight;
     }
 
-    textOYExceedTop(oy) {
-        if (oy === undefined) {
-            oy = this.textOY;
-        }
-        return (oy > this.topTextOY);
-    }
-
-    textOYExeceedBottom(oy) {
-        if (oy === undefined) {
-            oy = this.textOY;
-        }
-        return (oy < this.bottomTextOY);
-    }
-
     get textOY() {
         return this._textOY;
     }
 
     set textOY(oy) {
-        var topTextOY = this.topTextOY;
-        var bottomTextOY = this.bottomTextOY;
-        var textOYExceedTop = this.textOYExceedTop(oy);
-        var textOYExeceedBottom = this.textOYExeceedBottom(oy);
-
-        if (this.clampTextOY) {
-            if (this.visibleLinesCount > this.linesCount) {
-                oy = 0;
-            } else if (textOYExceedTop) {
-                oy = topTextOY
-            } else if (textOYExeceedBottom) {
-                oy = bottomTextOY;
-            }
+        if (this.clampTextOY && (this.visibleLinesCount > this.linesCount)) {
+            oy = 0;
         }
-
-        if (this._textOY !== oy) {
-            this._textOY = oy;
-            this.updateTextObject();
-        }
-
-        if (textOYExceedTop) {
-            if (!this.execeedTopState) {
-                this.emit('execeedtop', this, oy, topTextOY);
-            }
-        }
-        this.execeedTopState = textOYExceedTop;
-
-        if (textOYExeceedBottom) {
-            if (!this.execeedBottomState) {
-                this.emit('execeedbottom', this, oy, bottomTextOY);
-            }
-        }
-        this.execeedBottomState = textOYExeceedBottom;
-    }
-
-    setTextOY(oy) {
-        this.textOY = oy;
-        return this;
-    }
-
-    set t(value) {
-        this.textOY = -this.textVisibleHeight * value;
-    }
-
-    get t() {
-        var textVisibleHeight = this.textVisibleHeight;
-        if (textVisibleHeight === 0) {
-            return 0;
-        }
-        return (this.textOY / -textVisibleHeight);
-    }
-
-    setTextOYByPercentage(percentage) {
-        this.t = percentage;
-        return this;
+        super.textOY = oy;
     }
 
     scrollToLine(lineIndex) {
@@ -291,14 +211,5 @@ class TextBlock extends BaseSizer {
         return this;
     }
 }
-
-var CreateDefaultTextObject = function (scene) {
-    return scene.add.text(0, 0, '');
-};
-
-Object.assign(
-    TextBlock.prototype,
-    Methods
-);
 
 export default TextBlock;

@@ -1,6 +1,6 @@
-import TextBlock from './TextBlock.js';
+import BaseTextBlock from './BaseTextBlock.js';
 
-class TagTextBlock extends TextBlock {
+class TagTextBlock extends BaseTextBlock {
     constructor(scene, x, y, minWidth, minHeight, config) {
         super(scene, x, y, minWidth, minHeight, config);
         this.type = 'rexTagTextBlock';
@@ -50,65 +50,6 @@ class TagTextBlock extends TextBlock {
             h = 0;
         }
         return h;
-    }
-
-    get topTextOY() {
-        return 0;
-    }
-
-    get bottomTextOY() {
-        return -this.textVisibleHeight;
-    }
-
-    set textOY(oy) {
-        var topTextOY = this.topTextOY;
-        var bottomTextOY = this.bottomTextOY;
-        var textOYExceedTop = (oy > topTextOY);
-        var textOYExeceedBottom = (oy < bottomTextOY);
-
-        if (this.clampTextOY) {
-            if (textOYExceedTop) {
-                oy = topTextOY;
-            } else if (textOYExeceedBottom) {
-                oy = bottomTextOY;
-            }
-        }
-
-        if (this._textOY !== oy) {
-            this._textOY = oy;
-            this.updateTextObject();
-        }
-
-        if (textOYExceedTop) {
-            if (!this.execeedTopState) {
-                this.emit('execeedtop', this, oy, topTextOY);
-            }
-        }
-        this.execeedTopState = textOYExceedTop;
-
-        if (textOYExeceedBottom) {
-            if (!this.execeedBottomState) {
-                this.emit('execeedbottom', this, oy, bottomTextOY);
-            }
-        }
-        this.execeedBottomState = textOYExeceedBottom;
-    }
-
-    get textOY() {
-        return this._textOY;
-    }
-
-    set t(value) {
-        var bottomTextOY = this.bottomTextOY;
-        this.textOY = (bottomTextOY === 0) ? 0 : (bottomTextOY * value);
-    }
-
-    get t() {
-        var bottomTextOY = this.bottomTextOY;
-        if (bottomTextOY === 0) {
-            return 0;
-        }
-        return (this.textOY / bottomTextOY);
     }
 
     resizeText(textObject, width, height) {
