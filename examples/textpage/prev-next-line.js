@@ -11,6 +11,8 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
+        var maxLines = 0; // 7 or 0
+
         this.textPage = this.plugins.get('rexTextPage');
 
         var lines = [];
@@ -22,7 +24,12 @@ class Demo extends Phaser.Scene {
             wordWrap: {
                 width: 500
             },
-            maxLines: 7
+            maxLines: maxLines,
+            backgroundColor: '#555',
+            fixedWidth: 100,
+            fixedHeight: (maxLines === 0) ? 150 : 0,
+            padding: 10,
+            lineSpacing: 10,
         });
         txt.page = this.textPage.add(txt, {
             //text: lines

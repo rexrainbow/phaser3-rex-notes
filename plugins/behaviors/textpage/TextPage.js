@@ -4,7 +4,7 @@ import {
 } from '../../utils/text/GetTextObjectType.js';
 import GetTextObjectType from '../../utils/text/GetTextObjectType.js';
 import TextToLines from '../../utils/text/TextToLines.js';
-import TextHeightToLinesCount from '../../utils/text/TextHeightToLineCount.js';
+import TextHeightToLineCount from '../../utils/text/TextHeightToLineCount.js';
 import Methods from './methods/Methods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -141,7 +141,7 @@ class TextPage extends ComponentBase {
                     if (maxLines > 0) {
                         count = maxLines;
                     } else {
-                        count = Math.floor(TextHeightToLinesCount(this.parent));
+                        count = Math.floor(TextHeightToLineCount(this.parent));
                     }
                     break;
                 case BitmapTextType:
