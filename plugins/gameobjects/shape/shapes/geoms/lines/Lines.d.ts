@@ -38,7 +38,10 @@ export default class Lines extends PathBase {
      * @param y - Start y.
      * @returns This instance.
      */
-    startAt(x: number, y: number): this;
+    startAt(
+        x: number,
+        y: number
+    ): this;
 
     /**
      * Add a line segment.
@@ -47,56 +50,103 @@ export default class Lines extends PathBase {
      * @param relative - True for relative.
      * @returns This instance.
      */
-    lineTo(x: number, y: number, relative?: boolean): this;
+    lineTo(
+        x: number,
+        y: number,
+        relative?: boolean
+    ): this;
     /**
      * Add a vertical line.
      * @param x - Target x.
      * @param relative - True for relative.
      * @returns This instance.
      */
-    verticalLineTo(x: number, relative?: boolean): this;
+    verticalLineTo(
+        x: number,
+        relative?: boolean
+    ): this;
     /**
      * Add a horizontal line.
      * @param y - Target y.
      * @param relative - True for relative.
      * @returns This instance.
      */
-    horizontalLineTo(y: number, relative?: boolean): this;
+    horizontalLineTo(
+        y: number,
+        relative?: boolean
+    ): this;
 
     /**
      * Add an elliptical arc segment.
+     * @param centerX - Center x.
+     * @param centerY - Center y.
+     * @param radiusX - Radius x.
+     * @param radiusY - Radius y.
+     * @param startAngle - Start angle in radians.
+     * @param endAngle - End angle in radians.
+     * @param anticlockwise - True to draw anticlockwise.
+     * @returns This instance.
      */
     ellipticalArc(
-        centerX: number, centerY: number,
-        radiusX: number, radiusY: number,
-        startAngle: number, endAngle: number,
+        centerX: number,
+        centerY: number,
+        radiusX: number,
+        radiusY: number,
+        startAngle: number,
+        endAngle: number,
         anticlockwise?: boolean
     ): this;
     /**
      * Add an arc segment.
+     * @param centerX - Center x.
+     * @param centerY - Center y.
+     * @param radius - Radius value.
+     * @param startAngle - Start angle in radians.
+     * @param endAngle - End angle in radians.
+     * @param anticlockwise - True to draw anticlockwise.
+     * @returns This instance.
      */
     arc(
-        centerX: number, centerY: number,
+        centerX: number,
+        centerY: number,
         radius: number,
-        startAngle: number, endAngle: number,
+        startAngle: number,
+        endAngle: number,
         anticlockwise?: boolean
     ): this;
 
     /**
      * Add a quadratic bezier segment.
+     * @param cx - Control point x.
+     * @param cy - Control point y.
+     * @param x - End x.
+     * @param y - End y.
+     * @returns This instance.
      */
     quadraticBezierTo(
-        cx: number, cy: number,
-        x: number, y: number
+        cx: number,
+        cy: number,
+        x: number,
+        y: number
     ): this;
 
     /**
      * Add a cubic bezier segment.
+     * @param cx0 - First control x.
+     * @param cy0 - First control y.
+     * @param cx1 - Second control x.
+     * @param cy1 - Second control y.
+     * @param x - End x.
+     * @param y - End y.
+     * @returns This instance.
      */
     cubicBezierTo(
-        cx0: number, cy0: number,
-        cx1: number, cy1: number,
-        x: number, y: number
+        cx0: number,
+        cy0: number,
+        cx1: number,
+        cy1: number,
+        x: number,
+        y: number
     ): this;
 
     /**
@@ -126,7 +176,8 @@ export default class Lines extends PathBase {
      * @returns This instance.
      */
     rotateAround(
-        centerX: number, centerY: number,
+        centerX: number,
+        centerY: number,
         angle: number
     ): this;
 
@@ -139,8 +190,10 @@ export default class Lines extends PathBase {
      * @returns This instance.
      */
     scale(
-        centerX: number, centerY: number,
-        scaleX: number, scaleY: number
+        centerX: number,
+        centerY: number,
+        scaleX: number,
+        scaleY: number
     ): this;
 
     /**
@@ -149,7 +202,10 @@ export default class Lines extends PathBase {
      * @param y - Offset y.
      * @returns This instance.
      */
-    offset(x: number, y: number): this;
+    offset(
+        x: number,
+        y: number
+    ): this;
 
     /**
      * Save current path data.
@@ -174,7 +230,10 @@ export default class Lines extends PathBase {
      * @param endT - End t.
      * @returns This instance.
      */
-    appendPathFrom(src: Lines, endT: number): this;
+    appendPathFrom(
+        src: Lines,
+        endT: number
+    ): this;
     /**
      * Append path from another between t range.
      * @param src - Source path.
@@ -182,7 +241,11 @@ export default class Lines extends PathBase {
      * @param endT - End t.
      * @returns This instance.
      */
-    appendPathFrom(src: Lines, startT: number, endT: number): this;
+    appendPathFrom(
+        src: Lines,
+        startT: number,
+        endT: number
+    ): this;
 
     /**
      * Copy path from another.
@@ -196,7 +259,10 @@ export default class Lines extends PathBase {
      * @param endT - End t.
      * @returns This instance.
      */
-    copyPathFrom(src: Lines, endT: number): this;
+    copyPathFrom(
+        src: Lines,
+        endT: number
+    ): this;
     /**
      * Copy path from another between t range.
      * @param src - Source path.
@@ -204,7 +270,11 @@ export default class Lines extends PathBase {
      * @param endT - End t.
      * @returns This instance.
      */
-    copyPathFrom(src: Lines, startT: number, endT: number): this;
+    copyPathFrom(
+        src: Lines,
+        startT: number,
+        endT: number
+    ): this;
 
     /**
      * Set display path segment.
@@ -218,5 +288,8 @@ export default class Lines extends PathBase {
      * @param endT - End t.
      * @returns This instance.
      */
-    setDisplayPathSegment(startT: number, endT: number): this;
+    setDisplayPathSegment(
+        startT: number,
+        endT: number
+    ): this;
 }

@@ -88,6 +88,8 @@ class Text extends TextBase {
 
         this.dirty = false;
 
+        this._scrollY = 0;
+
         //  If resolution wasn't set, force it to 1
         if (this.style.resolution === 0) {
             this.style.resolution = 1;
@@ -201,6 +203,80 @@ class Text extends TextBase {
     }
     get text() {
         return this._text;
+    }
+
+    get topScrollY() {
+        return 0;
+    }
+
+    get bottomScrollY() {
+        var overflow = this.contentHeight - this.viewportHeight;
+        return (overflow > 0) ? -overflow : 0;
+    }
+
+    get scrollY() {
+        return this._scrollY;
+    }
+
+    set scrollY(value) {
+        if (this._scrollY === value) {
+            return;
+        }
+
+        this._scrollY = value;
+        this.updateText(false);
+    }
+
+    setScrollY(value, clamp) {
+        if (clamp === undefined) {
+            clamp = false;
+        }
+        if (clamp) {
+            value = Clamp(value, this.bottomScrollY, this.topScrollY);
+        }
+
+        this.scrollY = value;
+        return this;
+    }
+
+    addScrollY(inc, clamp) {
+        return this.setScrollY(this.scrollY + inc, clamp);
+    }
+
+    get t() {
+        var bottom = this.bottomScrollY;
+        if (bottom === 0) {
+            return 0;
+        }
+        return (this._scrollY / bottom);
+    }
+
+    set t(value) {
+        this.setT(value);
+    }
+
+    setT(value, clamp) {
+        if (clamp === undefined) {
+            clamp = false;
+        }
+        if (clamp) {
+            value = Clamp(value, 0, 1);
+        }
+
+        var scrollY = this.bottomScrollY * value;
+        return this.setScrollY(scrollY, false);
+    }
+
+    addT(inc, clamp) {
+        return this.setT(this.t + inc, clamp);
+    }
+
+    scrollToTop() {
+        return this.setScrollY(this.topScrollY);
+    }
+
+    scrollToBottom() {
+        return this.setScrollY(this.bottomScrollY);
     }
 
     initRTL() {
@@ -399,7 +475,7 @@ class Text extends TextBase {
 
         // draw
         var startX = (!this.style.rtl) ? padding.left : padding.right;
-        var startY = padding.top;
+        var startY = padding.top + this._scrollY;
         canvasText.draw(
             startX,
             startY,
@@ -569,6 +645,16 @@ class Text extends TextBase {
 
     getHitArea(worldX, worldY, camera) {
         return this.canvasText.getHitArea(worldX, worldY, camera);
+    }
+
+    get viewportHeight() {
+        var padding = this.padding;
+        var height = this.height - padding.top - padding.bottom;
+        return Math.max(height, 0);
+    }
+
+    get contentHeight() {
+        return this.canvasText.linesHeight;
     }
 }
 

@@ -15,6 +15,7 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
+        var UseBBCodeTextGameObject = true;
         var textArea = this.rexUI.add.textArea({
             x: 400,
             y: 300,
@@ -23,8 +24,9 @@ class Demo extends Phaser.Scene {
 
             background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 0, COLOR_MAIN),
 
-            // text: this.add.text(),
-            text: this.rexUI.add.BBCodeText(),
+            text: (UseBBCodeTextGameObject) ? this.rexUI.add.BBCodeText(0, 0, '', {
+                fixedLineHeightMode: false
+            }) : this.add.text(),
             // textMask: false,
 
             slider: {
@@ -35,7 +37,7 @@ class Demo extends Phaser.Scene {
             mouseWheelScroller: {
                 focus: false,
                 speed: 0.1
-            },            
+            },
 
             header: this.rexUI.add.label({
                 height: 30,
@@ -53,11 +55,11 @@ class Demo extends Phaser.Scene {
                 text: this.add.text(0, 0, 'Footer'),
             }),
 
-            content: CreateContent(100),
+            content: CreateContent(100, UseBBCodeTextGameObject),
         })
             .layout()
 
-        this.input.once('pointerdown', function(){
+        this.input.once('pointerdown', function () {
             textArea.setMinHeight(400).layout();
         })
     }
@@ -65,10 +67,20 @@ class Demo extends Phaser.Scene {
     update() { }
 }
 
-var CreateContent = function (linesCount) {
+var CreateContent = function (linesCount, useBBCodeTextGameObject) {
     var numbers = [];
     for (var i = 0; i < linesCount; i++) {
-        numbers.push('[color=' + ((i % 2) ? 'green' : 'yellow') + ']' + i.toString() + '[/color]');
+        var line;
+        if (useBBCodeTextGameObject) {
+            if (i % 2) {
+                line = `[color=green][size=40]${i}[/size][/color]`;
+            } else {
+                line = `[color=yellow]${i}[/color]`;
+            }
+        } else {
+            line = i.toString();
+        }
+        numbers.push(line)
     }
     return numbers.join('\n');
 }

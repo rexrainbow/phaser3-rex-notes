@@ -12,8 +12,10 @@ export default class Rectangle extends BaseGeom {
      * @param height - Height.
      */
     constructor(
-        x?: number, y?: number,
-        width?: number, height?: number
+        x?: number,
+        y?: number,
+        width?: number,
+        height?: number
     );
 
     /**
@@ -22,7 +24,10 @@ export default class Rectangle extends BaseGeom {
      * @param y - Top-left y.
      * @returns This instance.
      */
-    setTopLeftPosition(x: number, y: number): this;
+    setTopLeftPosition(
+        x: number,
+        y: number
+    ): this;
     /**
      * Top-left x.
      */
@@ -38,7 +43,10 @@ export default class Rectangle extends BaseGeom {
      * @param height - Height.
      * @returns This instance.
      */
-    setSize(width: number, height: number): this;
+    setSize(
+        width: number,
+        height: number
+    ): this;
     /**
      * Width.
      */
@@ -54,7 +62,10 @@ export default class Rectangle extends BaseGeom {
      * @param y - Center y.
      * @returns This instance.
      */
-    setCenterPosition(x: number, y: number): this;
+    setCenterPosition(
+        x: number,
+        y: number
+    ): this;
     /**
      * Center x.
      */

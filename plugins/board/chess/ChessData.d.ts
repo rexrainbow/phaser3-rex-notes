@@ -3,18 +3,60 @@ import Board from '../board/LogicBoard';
 
 export default ChessData;
 
-declare class ChessData<BoardType=Board> extends ComponentBase {
+/**
+ * Chess data component for board tiles.
+ */
+declare class ChessData<BoardType = Board> extends ComponentBase {
+    /**
+     * Unique id of this chess piece.
+     */
     readonly $uid: number;
 
+    /**
+     * Board instance.
+     */
     readonly board: BoardType;
 
-    readonly tileXYZ: { x: number, y: number, z: number };
+    /**
+     * Current tile coordinates.
+     */
+    readonly tileXYZ: {
+        /**
+         * Tile x.
+         */
+        x: number,
+        /**
+         * Tile y.
+         */
+        y: number,
+        /**
+         * Tile z or layer.
+         */
+        z: number
+    };
 
+    /**
+     * Set tile z value.
+     * @param tileZ - Tile z or layer.
+     * @returns This instance.
+     */
     setTileZ(tileZ: number): this;
 
-    getTileDirection(tileX: number, tileY: number): this;
+    /**
+     * Get direction to a tile.
+     * @param tileX - Target tile x.
+     * @param tileY - Target tile y.
+     * @returns Direction value.
+     */
+    getTileDirection(
+        tileX: number,
+        tileY: number
+    ): this;
 
+    /**
+     * Set blocker flag.
+     * @param value - True to set as blocker.
+     * @returns This instance.
+     */
     setBlocker(value?: boolean): this;
-
-
 }

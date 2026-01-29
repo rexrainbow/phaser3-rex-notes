@@ -42,11 +42,30 @@ export default {
     },
 
     setStartLineIndex(idx) {
-        var lastStartLineIndex = Math.max(this.totalLinesCount - this.pageLinesCount, 0);
-        idx = Clamp(idx, 0, lastStartLineIndex);
+        if (this.isVariableLineHeightMode) {
+            var pageHeight = this.pageHeight;
+            if (pageHeight <= 0) {
+                this.startLineIndex = 0;
+                this.endLineIndex = this.totalLinesCount;
+                return this;
+            }
+            var lastStartLineIndex = this.getLastStartLineIndexByHeight(pageHeight);
+            idx = Clamp(idx, 0, lastStartLineIndex);
+            this.startLineIndex = idx;
+            var endLineIndex = this.getLineIndexByHeight(this.startLineIndex, pageHeight);
+            if (endLineIndex <= idx) {
+                endLineIndex = idx + 1;
+            }
+            this.endLineIndex = endLineIndex;
 
-        this.startLineIndex = idx;
-        this.endLineIndex = idx + this.pageLinesCount;
+        } else {
+            var lastStartLineIndex = Math.max(this.totalLinesCount - this.pageLinesCount, 0);
+            idx = Clamp(idx, 0, lastStartLineIndex);
+
+            this.startLineIndex = idx;
+            this.endLineIndex = idx + this.pageLinesCount;
+        }
+
         return this;
     },
 

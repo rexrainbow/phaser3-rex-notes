@@ -1,4 +1,5 @@
 import Pen from './Pen.js';
+import Line from './Line.js';
 import CONST from '../../../textbase/const.js';
 import Clone from '../../../../utils/object/Clone.js';
 import NOOP from '../../../../utils/object/NOOP.js';
@@ -10,7 +11,7 @@ const WRAPPED_NEWLINE = CONST.WRAPPED_NEWLINE;
 class PenManager {
     constructor(config) {
         this.pens = []; // all pens
-        this.lines = []; // pens in lines [ [],[],[],.. ]
+        this.lines = []; // pens in lines [Line, Line, ...]
         this.maxLinesWidth = undefined;
 
         this.pensPool = config.pensPool;    // Required
@@ -27,7 +28,12 @@ class PenManager {
 
     clear() {
         for (var i = 0, len = this.lines.length; i < len; i++) {
-            this.lines[i].length = 0;
+            var line = this.lines[i];
+            if (line && line.reset) {
+                line.reset();
+            } else if (line) {
+                line.length = 0;
+            }
         }
 
         this.pensPool.pushMultiple(this.pens);
@@ -35,7 +41,7 @@ class PenManager {
         this.maxLinesWidth = undefined;
     }
 
-    addTextPen(text, x, y, width, prop, newLineMode) {
+    addTextPen(text, x, y, width, prop, newLineMode, metrics) {
         var pen = this.pensPool.pop();
         if (pen == null) {
             pen = new Pen();
@@ -44,6 +50,18 @@ class PenManager {
         PEN_CONFIG.x = x;
         PEN_CONFIG.y = y;
         PEN_CONFIG.width = width;
+        if (metrics) {
+            var ascent = (metrics.ascent != null) ? metrics.ascent : 0;
+            var descent = (metrics.descent != null) ? metrics.descent : 0;
+            var height = (metrics.height != null) ? metrics.height : (ascent + descent);
+            PEN_CONFIG.ascent = ascent;
+            PEN_CONFIG.descent = descent;
+            PEN_CONFIG.height = height;
+        } else {
+            PEN_CONFIG.ascent = 0;
+            PEN_CONFIG.descent = 0;
+            PEN_CONFIG.height = 0;
+        }
         PEN_CONFIG.prop = prop;
         PEN_CONFIG.newLineMode = newLineMode;
         pen.resetFromJSON(PEN_CONFIG);
@@ -51,8 +69,8 @@ class PenManager {
         return this;
     }
 
-    addImagePen(x, y, width, prop) {
-        this.addTextPen('', x, y, width, prop, NO_NEWLINE);
+    addImagePen(x, y, width, prop, metrics) {
+        this.addTextPen('', x, y, width, prop, NO_NEWLINE, metrics);
         return this;
     }
 
@@ -77,14 +95,21 @@ class PenManager {
         // maintan lines
         var line = this.lastLine;
         if (line == null) {
-            line = this.linesPool.pop() || [];
+            line = this.newLine();
             this.lines.push(line);
+        } else if (!line.pens) {
+            line = this.convertLine(line);
+            this.lines[this.lines.length - 1] = line;
         }
-        line.push(pen);
+        if (line.addPen) {
+            line.addPen(pen);
+        } else {
+            line.push(pen);
+        }
 
         // new line, add an empty line
         if (pen.newLineMode !== NO_NEWLINE) {
-            line = this.linesPool.pop() || [];
+            line = this.newLine();
             this.lines.push(line);
         }
         this.maxLinesWidth = undefined;
@@ -97,7 +122,8 @@ class PenManager {
         targetPenManager.clear();
 
         for (var li = 0, llen = this.lines.length; li < llen; li++) {
-            var pens = this.lines[li];
+            var line = this.lines[li];
+            var pens = (line && line.pens) ? line.pens : line;
             for (var pi = 0, plen = pens.length; pi < plen; pi++) {
                 var pen = pens[pi];
                 targetPenManager.addPen(
@@ -127,7 +153,8 @@ class PenManager {
             return this.getLineEndIndex(i);
         } else {
             var line = this.lines[i];
-            return (line && line[0]) ? line[0].startIndex : 0;
+            var pens = (line && line.pens) ? line.pens : line;
+            return (pens && pens[0]) ? pens[0].startIndex : 0;
         }
     }
 
@@ -139,7 +166,8 @@ class PenManager {
             line;
         for (li = i; li >= 0; li--) {
             line = this.lines[li];
-            hasLastPen = (line != null) && (line.length > 0);
+            var pens = (line && line.pens) ? line.pens : line;
+            hasLastPen = (pens != null) && (pens.length > 0);
             if (hasLastPen) {
                 break;
             }
@@ -148,7 +176,8 @@ class PenManager {
             return 0;
         }
 
-        var lastPen = line[line.length - 1];
+        var pens = (line && line.pens) ? line.pens : line;
+        var lastPen = pens[pens.length - 1];
         return lastPen.endIndex;
     }
 
@@ -158,7 +187,8 @@ class PenManager {
             return 0;
         }
 
-        var lastPen = line[line.length - 1];
+        var pens = (line && line.pens) ? line.pens : line;
+        var lastPen = pens[pens.length - 1];
         if (lastPen == null) {
             return 0;
         }
@@ -192,6 +222,23 @@ class PenManager {
 
     get linesCount() {
         return this.lines.length;
+    }
+
+    newLine() {
+        return this.convertLine(this.linesPool.pop());
+    }
+
+    convertLine(line) {
+        if (!line) {
+            return new Line();
+        }
+        if (line.pens) {
+            return line.reset();
+        }
+        if (Array.isArray(line)) {
+            return new Line(line).reset();
+        }
+        return new Line();
     }
 
     get plainText() {

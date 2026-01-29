@@ -48,6 +48,7 @@ var PropertyMap = {
     lineSpacing: ['lineSpacing', 0, null],
     letterSpacing: ['letterSpacing', 0, null],
     xOffset: ['xOffset', 0, null],
+    fixedLineHeightMode: ['fixedLineHeightMode', true, null],
 
     rtl: ['rtl', false, null],
     testString: ['testString', '|MÃ‰qgy', null],

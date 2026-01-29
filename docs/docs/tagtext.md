@@ -140,9 +140,10 @@ Default style
     },
     maxLines: 0,
     lineSpacing: 0,
+    letterSpacing: 0,
     fixedWidth: 0,
     fixedHeight: 0,
-    lineSpacing: 0,
+    fixedLineHeightMode: true,
     testString: '|MÉqgy',
     
     wrap: {
@@ -614,6 +615,27 @@ This value is *added* to the height of the font when calculating the overall lin
 - Set
     ```javascript
     txt.setFixedSize(width, height);
+    ```
+
+### Scroll
+
+- Get
+    ```javascript
+    var t = txt.t;
+    var scrollY = txt.scrollY;
+    var top = txt.topScrollY;
+    var bottom = txt.bottomScrollY;
+    ```
+- Set
+    ```javascript
+    txt.setT(0.5);        // normalized
+    txt.addT(0.1);
+    txt.setScrollY(-100); // pixels
+    txt.addScrollY(-20);
+    ```
+    ```javascript
+    txt.scrollToTop();
+    txt.scrollToBottom();
     ```
 
 ### Left margin of text

@@ -15,6 +15,7 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
+        var UseBBCodeTextGameObject = true;
         var maxHeight = 135;
         var textArea = this.rexUI.add.textArea({
             x: 400,
@@ -24,7 +25,9 @@ class Demo extends Phaser.Scene {
 
             background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 0, COLOR_MAIN),
 
-            text: this.add.text(),
+            text: (UseBBCodeTextGameObject) ? this.rexUI.add.BBCodeText(0, 0, '', {
+                fixedLineHeightMode: false
+            }) : this.add.text(),
 
             slider: {
                 track: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_DARK),

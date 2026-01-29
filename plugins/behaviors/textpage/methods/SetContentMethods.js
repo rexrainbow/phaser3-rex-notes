@@ -1,6 +1,36 @@
 import TextToLines from '../../../utils/text/TextToLines.js';
 import GetString from '../../../utils/text/GetString.js';
 
+// Private method, for (TagTextType && !fixedLineHeightMode)
+var AppendPageByLineHeight = function (pageStartIndex) {
+    var lines = this.lines.lines;
+    if (!lines || (lines.length <= pageStartIndex)) {
+        return this;
+    }
+
+    var pageHeight = this.pageHeight;
+    this.pageStartIndexes.push(pageStartIndex);
+    if (pageHeight <= 0) {
+        return this;
+    }
+
+    var i = pageStartIndex;
+    var len = lines.length;
+    while (i < len) {
+        var endLineIdx = this.getLineIndexByHeight(i, pageHeight);
+        if (endLineIdx <= i) {
+            endLineIdx = i + 1;
+        }
+        if (endLineIdx >= len) {
+            break;
+        }
+        this.pageStartIndexes.push(endLineIdx);
+        i = endLineIdx;
+    }
+
+    return this;
+};
+
 export default {
     clearText() {
         this.sections.length = 0;
@@ -18,18 +48,27 @@ export default {
         this.lines = TextToLines(this.parent, text, this.lines);
 
         var newLinesCount = this.totalLinesCount - pageStartIndex;
-        var pageLinesCount = this.pageLinesCount;
-        var pageCount;
-        if (pageLinesCount > 0) {
-            pageCount = Math.ceil(newLinesCount / this.pageLinesCount);
-        } else {  // Height of Text object might be 0
-            pageCount = 1;
+        if (newLinesCount <= 0) {
+            return this;
         }
 
-        for (var i = 0; i < pageCount; i++) {
-            this.pageStartIndexes.push(
-                pageStartIndex + (i * this.pageLinesCount)
-            );
+        if (this.isVariableLineHeightMode) {  // (TagTextType && !fixedLineHeightMode)
+            AppendPageByLineHeight.call(this, pageStartIndex);
+
+        } else {
+            var pageLinesCount = this.pageLinesCount;
+            var pageCount;
+            if (pageLinesCount > 0) {
+                pageCount = Math.ceil(newLinesCount / this.pageLinesCount);
+            } else {  // Height of Text object might be 0
+                pageCount = 1;
+            }
+
+            for (var i = 0; i < pageCount; i++) {
+                this.pageStartIndexes.push(
+                    pageStartIndex + (i * this.pageLinesCount)
+                );
+            }
         }
 
         return this;

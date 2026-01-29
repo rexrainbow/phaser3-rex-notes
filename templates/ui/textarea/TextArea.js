@@ -1,5 +1,8 @@
 import Scrollable from '../utils/scrollable/Scrollable.js';
+import { TagTextType } from '../../../plugins/utils/text/GetTextObjectType.js';
+import GetTextObjectType from '../../../plugins/utils/text/GetTextObjectType.js';
 import TextBlock from './textblock/TextBlock.js';
+import TagTextBlock from './textblock/TagTextBlock.js';
 import InjectProperties from './InjectProperties.js';
 import SetTextMethods from './SetTextMethods.js';
 import ScrollMethods from './ScrollMethods.js';
@@ -19,7 +22,7 @@ class TextArea extends Scrollable {
         var textCrop = GetValue(config, 'textCrop', !!textObject.setCrop);
         var textMask = GetValue(config, 'textMask', !textCrop);
         var content = GetValue(config, 'content', '');
-        var textBlock = new TextBlock(scene, {
+        var textBlockConfig = {
             width: textWidth,
             height: textHeight,
             text: textObject,
@@ -28,7 +31,13 @@ class TextArea extends Scrollable {
             content: content,
             clampTextOY: GetValue(config, 'clampChildOY', false),
             alwaysScrollable: GetValue(config, 'alwaysScrollable', false),
-        });
+        };
+        var textBlock;
+        if (textObject && (GetTextObjectType(textObject) === TagTextType)) {
+            textBlock = new TagTextBlock(scene, textBlockConfig);
+        } else {
+            textBlock = new TextBlock(scene, textBlockConfig);
+        }
         scene.add.existing(textBlock); // Important: Add to display list for touch detecting
         // Inject properties for scrollable interface
         InjectProperties(textBlock);
@@ -52,16 +61,13 @@ class TextArea extends Scrollable {
     }
 
     get text() {
-        return this.childrenMap.child.text;
-    }
-
-    get lineHeight() {
         var textBlock = this.childrenMap.child;
-        return textBlock.textLineHeight + textBlock.textLineSpacing;
+        return textBlock.text;
     }
 
     get lineIndex() {
-        return Math.floor(-this.childOY / this.lineHeight);
+        var textBlock = this.childrenMap.child;
+        return textBlock.lineIndex;
     }
 
     get linesCount() {

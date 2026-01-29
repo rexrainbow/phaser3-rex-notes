@@ -10,5 +10,9 @@ export default class Circle extends Arc {
      * @param y - Center y.
      * @param radius - Radius value.
      */
-    constructor(x?: number, y?: number, radius?: number);
+    constructor(
+        x?: number,
+        y?: number,
+        radius?: number
+    );
 }

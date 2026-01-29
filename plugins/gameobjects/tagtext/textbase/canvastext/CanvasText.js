@@ -6,6 +6,7 @@ import GetHitArea from './GetHitArea.js';
 import CONST from '../../../textbase/const.js';
 import WrapText from '../wraptext/WrapText.js';
 import Clone from '../../../../utils/object/Clone.js';
+import MeasureText from '../../../textbase/textstyle/MeasureText.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const NO_WRAP = CONST.NO_WRAP;
@@ -96,17 +97,15 @@ class CanvasText {
             plainText = result.plainText;
             curProp = result.prop;
 
-            if (curProp.img) { // Image tag                
-                var imgWidth = this.imageManager.getOuterWidth(curProp.img);
-                if ((wrapWidth > 0) && (wrapMode !== NO_WRAP)) {  // Wrap mode
-                    if (wrapWidth < (cursorX + imgWidth)) {
-                        penManager.addNewLinePen();
-                        cursorY += lineHeight;
-                        cursorX = 0;
-                    }
-                }
-                penManager.addImagePen(cursorX, cursorY, imgWidth, Clone(curProp));
-                cursorX += imgWidth;
+            if (curProp.img) { // Image tag
+                var cursor = this.addImagePen(
+                    curProp,
+                    cursorX, cursorY,
+                    wrapWidth, wrapMode, lineHeight,
+                    penManager
+                );
+                cursorX = cursor.x;
+                cursorY = cursor.y;
 
             } else if (plainText !== '') {
                 // wrap text to lines
@@ -116,6 +115,8 @@ class CanvasText {
                 curStyle.buildFont();
                 curStyle.syncFont(canvas, context);
                 curStyle.syncStyle(canvas, context);
+
+                var metrics = MeasureText(curStyle);
 
                 if (isBuiltInWrappingMode) {
                     wrapLines = WrapText(
@@ -164,7 +165,8 @@ class CanvasText {
                         cursorX, cursorY,
                         segment.width,
                         Clone(curProp),
-                        segment.newLineMode
+                        segment.newLineMode,
+                        metrics
                     );
 
                     if (segment.newLineMode !== NO_NEWLINE) {
@@ -190,10 +192,12 @@ class CanvasText {
         }
 
         // Process last pen of each line
-        for (var i = 0, len = this.lines.length; i < len; i++) {
+        var lines = penManager.lines;
+        for (var i = 0, len = lines.length; i < len; i++) {
             // Last pen of a line
-            var line = this.lines[i];
-            var lastPen = line[line.length - 1];
+            var line = lines[i];
+            var pens = line.pens;
+            var lastPen = pens[pens.length - 1];
             if (lastPen) {
                 // Add strokeThinkness
                 lastPen.width += this.parser.getStrokeThinkness(this.defaultStyle, lastPen.prop);
@@ -202,7 +206,70 @@ class CanvasText {
             }
         }
 
+        this.updateLineOffsets(lines, textStyle);
+
         return penManager;
+    }
+
+    addImagePen(prop, cursorX, cursorY, wrapWidth, wrapMode, lineHeight, penManager) {
+        var imgWidth = this.imageManager.getOuterWidth(prop.img);
+        var imgHeight = this.imageManager.getOuterHeight(prop.img);
+        var imgMetrics;
+        if (imgHeight > 0) {
+            var ascent = this.defaultStyle.metrics.ascent;
+            var descent = imgHeight - ascent;
+            if (descent < 0) {
+                descent = 0;
+            }
+            imgMetrics = {
+                ascent: ascent,
+                descent: descent,
+                height: ascent + descent
+            };
+        }
+        if ((wrapWidth > 0) && (wrapMode !== NO_WRAP)) {  // Wrap mode
+            if (wrapWidth < (cursorX + imgWidth)) {
+                penManager.addNewLinePen();
+                cursorY += lineHeight;
+                cursorX = 0;
+            }
+        }
+        penManager.addImagePen(cursorX, cursorY, imgWidth, Clone(prop), imgMetrics);
+        cursorX += imgWidth;
+
+        return {
+            x: cursorX,
+            y: cursorY
+        };
+    }
+
+    updateLineOffsets(lines, textStyle) {
+        var lineSpacing = textStyle.lineSpacing;
+        var defaultMetrics = this.defaultStyle.metrics;
+        var defaultAscent = defaultMetrics.ascent;
+        var defaultDescent = defaultMetrics.descent;
+        var offsetY = 0;
+        var fixedLineHeightMode = textStyle.fixedLineHeightMode;
+        for (var i = 0, len = lines.length; i < len; i++) {
+            var line = lines[i];
+            var lineAscent = line.maxAscent;
+            var lineDescent = line.maxDescent;
+            if (fixedLineHeightMode || (lineAscent === 0 && lineDescent === 0)) {
+                lineAscent = defaultAscent;
+                lineDescent = defaultDescent;
+            }
+            line.maxAscent = lineAscent;
+            line.maxDescent = lineDescent;
+            line.lineHeight = lineAscent + lineDescent;
+            line.startOffset = offsetY;
+            line.endOffset = offsetY + line.lineHeight;
+            var baselineOffset = offsetY + lineAscent - defaultAscent;
+            var pens = line.pens;
+            for (var penIdx = 0, penCnt = pens.length; penIdx < penCnt; penIdx++) {
+                pens[penIdx].y = baselineOffset;
+            }
+            offsetY = line.endOffset + lineSpacing;
+        }
     }
 
     get startXOffset() {
@@ -232,11 +299,39 @@ class CanvasText {
 
     get linesHeight() {
         var linesCount = this.displayLinesCount;
-        var linesHeight = (this.defaultStyle.lineHeight * linesCount);
-        if (linesCount > 0) {
-            linesHeight -= this.defaultStyle.lineSpacing;
+        return this.getLinesHeight(0, linesCount);
+    }
+
+    getLineHeight(line) {
+        var lineHeight = (line) ? line.lineHeight : 0;
+        if (lineHeight > 0) {
+            return lineHeight;
         }
-        return linesHeight;
+        var metrics = this.defaultStyle.metrics;
+        return metrics.ascent + metrics.descent;
+    }
+
+    getLinesHeight(start, end) {
+        var lines = this.penManager.lines;
+        var linesCount = lines.length;
+        if (start === undefined) {
+            start = 0;
+        }
+        if (end === undefined || end > linesCount) {
+            end = linesCount;
+        }
+        if (end <= start) {
+            return 0;
+        }
+        var height = 0;
+        for (var i = start; i < end; i++) {
+            height += this.getLineHeight(lines[i]);
+        }
+        var count = end - start;
+        if (count > 1) {
+            height += this.defaultStyle.lineSpacing * (count - 1);
+        }
+        return height;
     }
 
     get imageManager() {
