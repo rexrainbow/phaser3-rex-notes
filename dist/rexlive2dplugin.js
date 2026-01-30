@@ -11553,7 +11553,10 @@
 
         var renderer = this.getRenderer();
         renderer.setMvpMatrix(matrix);
-        renderer.setRenderState(drawingContext.framebuffer.webGLFramebuffer, drawingContext.state.viewport);
+        renderer.setRenderState(
+            drawingContext.framebuffer.webGLFramebuffer, // null
+            drawingContext.state.viewport
+        );
         renderer.drawModel();
 
         return this;

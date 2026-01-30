@@ -378,7 +378,7 @@
         //  NOOP
     };
 
-    var Methods$q = {
+    var Methods$p = {
         _beginDraw: NOOP,
         _drawImage: NOOP,
         _drawTileSprite: NOOP,
@@ -536,7 +536,7 @@
 
         Object.assign(
             NinePatch.prototype,
-            Methods$q
+            Methods$p
         );
 
         return NinePatch;
@@ -614,13 +614,13 @@
     let NinePatch$1 = class NinePatch extends NinePatchBase(RenderTexture$2, 'rexNinePatch') {
     };
 
-    var Methods$p = {
+    var Methods$o = {
         _drawImage: DrawImage$2,
         _drawTileSprite: DrawTileSprite$1,
     };
     Object.assign(
         NinePatch$1.prototype,
-        Methods$p
+        Methods$o
     );
 
     var IsInValidKey = function (keys) {
@@ -2052,7 +2052,7 @@
 
     };
 
-    var Methods$o = {
+    var Methods$n = {
         _drawImage: DrawImage$1,
         _drawTileSprite: DrawTileSprite,
     };
@@ -2067,7 +2067,7 @@
 
     Object.assign(
         NinePatch.prototype,
-        Methods$o
+        Methods$n
     );
 
     ObjectFactory.register('ninePatch2', function (x, y, width, height, key, columns, rows, config) {
@@ -4731,6 +4731,7 @@
         lineSpacing: ['lineSpacing', 0, null],
         letterSpacing: ['letterSpacing', 0, null],
         xOffset: ['xOffset', 0, null],
+        fixedLineHeightMode: ['fixedLineHeightMode', true, null],
 
         rtl: ['rtl', false, null],
         testString: ['testString', '|MÃ‰qgy', null],
@@ -5530,6 +5531,40 @@
         return value;
     };
 
+    var GetStartLineIndex$1 = function (lines, targetOffset) {
+        // First line whose endOffset is greater than targetOffset
+        var left = 0;
+        var right = lines.length - 1;
+        var result = lines.length;
+        while (left <= right) {
+            var mid = (left + right) >> 1;
+            if (lines[mid].endOffset > targetOffset) {
+                result = mid;
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return result;
+    };
+
+    var GetEndLineIndex = function (lines, targetOffset) {
+        // First line whose startOffset is greater than or equal to targetOffset
+        var left = 0;
+        var right = lines.length - 1;
+        var result = lines.length;
+        while (left <= right) {
+            var mid = (left + right) >> 1;
+            if (lines[mid].startOffset >= targetOffset) {
+                result = mid;
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return result;
+    };
+
     var DrawMethods = {
         draw(startX, startY, textWidth, textHeight) {
             var penManager = this.penManager;
@@ -5552,18 +5587,49 @@
                 defaultStyle.backgroundCornerIteration
             );
 
+            var parent = this.parent;
+            var padding = parent.padding;
+            var viewportWidth = parent.width - padding.left - padding.right;
+            var viewportHeight = parent.height - padding.top - padding.bottom;
+            var contentHeight = this.linesHeight;
+            var hasViewport = (viewportWidth > 0) && (viewportHeight > 0);
+            var hasFixedHeight = (parent.style.fixedHeight > 0);
+            var hasOverflow = (contentHeight > viewportHeight);
+            var maxLines = defaultStyle.maxLines;
+            var useVisibleRange = (maxLines <= 0) && (defaultStyle.valign === 'top') && hasViewport && hasFixedHeight && hasOverflow;
+            var clipText = useVisibleRange;
+            if (clipText) {
+                context.save();
+                context.beginPath();
+                context.rect(padding.left, padding.top, viewportWidth, viewportHeight);
+                context.clip();
+            }
+
             // draw lines
             startX += this.startXOffset;
             startY += this.startYOffset;
             var defaultHalign = defaultStyle.halign,
                 valign = defaultStyle.valign;
 
-            var lineWidth, lineHeight = defaultStyle.lineHeight;
+            var lineWidth;
             var lines = penManager.lines;
-            var totalLinesNum = lines.length,
-                maxLines = defaultStyle.maxLines;
+            var totalLinesNum = lines.length;
             var drawLinesNum, drawLineStartIdx, drawLineEndIdx;
-            if ((maxLines > 0) && (totalLinesNum > maxLines)) {
+            if (useVisibleRange && (totalLinesNum > 0)) {
+                var visibleStart = -parent.scrollY;
+                var visibleEnd = visibleStart + viewportHeight;
+                drawLineStartIdx = GetStartLineIndex$1(lines, visibleStart);
+                drawLineEndIdx = GetEndLineIndex(lines, visibleEnd);
+                if (drawLineStartIdx < 0) {
+                    drawLineStartIdx = 0;
+                }
+                if (drawLineEndIdx > totalLinesNum) {
+                    drawLineEndIdx = totalLinesNum;
+                }
+                if (drawLineEndIdx < drawLineStartIdx) {
+                    drawLineEndIdx = drawLineStartIdx;
+                }
+            } else if ((maxLines > 0) && (totalLinesNum > maxLines)) {
                 drawLinesNum = maxLines;
                 if (valign === 'center') { // center
                     drawLineStartIdx = Math.floor((totalLinesNum - drawLinesNum) / 2);
@@ -5572,30 +5638,39 @@
                 } else {
                     drawLineStartIdx = 0;
                 }
+                drawLineEndIdx = drawLineStartIdx + drawLinesNum;
             } else {
-                drawLinesNum = totalLinesNum;
                 drawLineStartIdx = 0;
+                drawLineEndIdx = totalLinesNum;
             }
-            drawLineEndIdx = drawLineStartIdx + drawLinesNum;
 
             var offsetX, offsetY;
             var rtl = this.rtl,
                 rtlOffset = (rtl) ? this.parent.width : undefined;
-            if (valign === 'center') { // center
-                offsetY = Math.max((textHeight - (drawLinesNum * lineHeight)) / 2, 0);
-            } else if (valign === 'bottom') { // bottom
-                offsetY = Math.max(textHeight - (drawLinesNum * lineHeight) - 2, 0);
+            if (useVisibleRange) {
+                offsetY = startY;
             } else {
-                offsetY = 0;
+                var totalLinesHeight = this.getLinesHeight(drawLineStartIdx, drawLineEndIdx);
+                if (valign === 'center') { // center
+                    offsetY = Math.max((textHeight - totalLinesHeight) / 2, 0);
+                } else if (valign === 'bottom') { // bottom
+                    offsetY = Math.max(textHeight - totalLinesHeight - 2, 0);
+                } else {
+                    offsetY = 0;
+                }
+                offsetY += startY;
             }
-            offsetY += startY;
             for (var lineIdx = drawLineStartIdx; lineIdx < drawLineEndIdx; lineIdx++) {
                 lineWidth = penManager.getLineWidth(lineIdx);
                 if (lineWidth === 0) {
                     continue;
                 }
 
-                var pens = lines[lineIdx],
+                var line = lines[lineIdx];
+                if (!line) {
+                    continue;
+                }
+                var pens = line.pens,
                     penCount = pens.length;
                 var halign = defaultHalign;
                 // Seek if there has algin tag
@@ -5616,15 +5691,19 @@
                 }
                 offsetX += startX;
 
+                var hitAreaHeight = this.getLineHeight(line) + defaultStyle.lineSpacing;
                 for (var penIdx = 0; penIdx < penCount; penIdx++) {
-                    this.drawPen(pens[penIdx], offsetX, offsetY, rtlOffset);
+                    this.drawPen(pens[penIdx], offsetX, offsetY, rtlOffset, hitAreaHeight);
                 }
             }
 
+            if (clipText) {
+                context.restore();
+            }
             context.restore();
         },
 
-        drawPen(pen, offsetX, offsetY, rtlOffset) {
+        drawPen(pen, offsetX, offsetY, rtlOffset, lineHeight) {
             offsetX += pen.x;
             offsetY += pen.y + (pen.prop.y || 0);
 
@@ -5692,7 +5771,7 @@
                     offsetX,                       // x
                     (offsetY - this.startYOffset), // y
                     pen.width,                     // width
-                    this.defaultStyle.lineHeight,  // height
+                    (lineHeight || this.defaultStyle.lineHeight),  // height
                     data
                 );
             }
@@ -5790,11 +5869,18 @@
             this.resetFromJSON(config);
         }
 
-        resetFromJSON(o) { // (txt, x, y, width, prop, newLineMode, startIndex)
+        resetFromJSON(o) { // (txt, x, y, width, height, ascent, descent, prop, newLineMode, startIndex)
             this.text = GetValue$3U(o, 'text', '');
             this.x = GetValue$3U(o, 'x', 0);
             this.y = GetValue$3U(o, 'y', 0);
             this.width = GetValue$3U(o, 'width', 0);
+            this.ascent = GetValue$3U(o, 'ascent', 0);
+            this.descent = GetValue$3U(o, 'descent', 0);
+            var height = GetValue$3U(o, 'height', null);
+            if (height == null) {
+                height = this.ascent + this.descent;
+            }
+            this.height = height;
 
             var prop = GetValue$3U(o, 'prop', null);
             if (prop === null) {
@@ -5852,6 +5938,46 @@
         }
     }
 
+    let Line$1 = class Line {
+        constructor(pens) {
+            this.pens = pens || [];
+            this.maxAscent = 0;
+            this.maxDescent = 0;
+            this.lineHeight = 0;
+            this.startOffset = 0;
+            this.endOffset = 0;
+        }
+
+        reset() {
+            this.pens.length = 0;
+            this.maxAscent = 0;
+            this.maxDescent = 0;
+            this.lineHeight = 0;
+            this.startOffset = 0;
+            this.endOffset = 0;
+            return this;
+        }
+
+        addPen(pen) {
+            this.pens.push(pen);
+            if (pen.ascent > this.maxAscent) {
+                this.maxAscent = pen.ascent;
+            }
+            if (pen.descent > this.maxDescent) {
+                this.maxDescent = pen.descent;
+            }
+            return this;
+        }
+
+        get length() {
+            return this.pens.length;
+        }
+
+        get lastPen() {
+            return this.pens[this.pens.length - 1];
+        }
+    };
+
     /**
      * Shallow Object Clone. Will not out nested objects.
      * @param {object} obj JSON object
@@ -5888,7 +6014,7 @@
     class PenManager {
         constructor(config) {
             this.pens = []; // all pens
-            this.lines = []; // pens in lines [ [],[],[],.. ]
+            this.lines = []; // pens in lines [Line, Line, ...]
             this.maxLinesWidth = undefined;
 
             this.pensPool = config.pensPool;    // Required
@@ -5905,7 +6031,12 @@
 
         clear() {
             for (var i = 0, len = this.lines.length; i < len; i++) {
-                this.lines[i].length = 0;
+                var line = this.lines[i];
+                if (line && line.reset) {
+                    line.reset();
+                } else if (line) {
+                    line.length = 0;
+                }
             }
 
             this.pensPool.pushMultiple(this.pens);
@@ -5913,7 +6044,7 @@
             this.maxLinesWidth = undefined;
         }
 
-        addTextPen(text, x, y, width, prop, newLineMode) {
+        addTextPen(text, x, y, width, prop, newLineMode, metrics) {
             var pen = this.pensPool.pop();
             if (pen == null) {
                 pen = new Pen();
@@ -5922,6 +6053,18 @@
             PEN_CONFIG.x = x;
             PEN_CONFIG.y = y;
             PEN_CONFIG.width = width;
+            if (metrics) {
+                var ascent = (metrics.ascent != null) ? metrics.ascent : 0;
+                var descent = (metrics.descent != null) ? metrics.descent : 0;
+                var height = (metrics.height != null) ? metrics.height : (ascent + descent);
+                PEN_CONFIG.ascent = ascent;
+                PEN_CONFIG.descent = descent;
+                PEN_CONFIG.height = height;
+            } else {
+                PEN_CONFIG.ascent = 0;
+                PEN_CONFIG.descent = 0;
+                PEN_CONFIG.height = 0;
+            }
             PEN_CONFIG.prop = prop;
             PEN_CONFIG.newLineMode = newLineMode;
             pen.resetFromJSON(PEN_CONFIG);
@@ -5929,8 +6072,8 @@
             return this;
         }
 
-        addImagePen(x, y, width, prop) {
-            this.addTextPen('', x, y, width, prop, NO_NEWLINE$2);
+        addImagePen(x, y, width, prop, metrics) {
+            this.addTextPen('', x, y, width, prop, NO_NEWLINE$2, metrics);
             return this;
         }
 
@@ -5955,14 +6098,21 @@
             // maintan lines
             var line = this.lastLine;
             if (line == null) {
-                line = this.linesPool.pop() || [];
+                line = this.newLine();
                 this.lines.push(line);
+            } else if (!line.pens) {
+                line = this.convertLine(line);
+                this.lines[this.lines.length - 1] = line;
             }
-            line.push(pen);
+            if (line.addPen) {
+                line.addPen(pen);
+            } else {
+                line.push(pen);
+            }
 
             // new line, add an empty line
             if (pen.newLineMode !== NO_NEWLINE$2) {
-                line = this.linesPool.pop() || [];
+                line = this.newLine();
                 this.lines.push(line);
             }
             this.maxLinesWidth = undefined;
@@ -5975,7 +6125,8 @@
             targetPenManager.clear();
 
             for (var li = 0, llen = this.lines.length; li < llen; li++) {
-                var pens = this.lines[li];
+                var line = this.lines[li];
+                var pens = (line && line.pens) ? line.pens : line;
                 for (var pi = 0, plen = pens.length; pi < plen; pi++) {
                     var pen = pens[pi];
                     targetPenManager.addPen(
@@ -6005,7 +6156,8 @@
                 return this.getLineEndIndex(i);
             } else {
                 var line = this.lines[i];
-                return (line && line[0]) ? line[0].startIndex : 0;
+                var pens = (line && line.pens) ? line.pens : line;
+                return (pens && pens[0]) ? pens[0].startIndex : 0;
             }
         }
 
@@ -6017,7 +6169,8 @@
                 line;
             for (li = i; li >= 0; li--) {
                 line = this.lines[li];
-                hasLastPen = (line != null) && (line.length > 0);
+                var pens = (line && line.pens) ? line.pens : line;
+                hasLastPen = (pens != null) && (pens.length > 0);
                 if (hasLastPen) {
                     break;
                 }
@@ -6026,7 +6179,8 @@
                 return 0;
             }
 
-            var lastPen = line[line.length - 1];
+            var pens = (line && line.pens) ? line.pens : line;
+            var lastPen = pens[pens.length - 1];
             return lastPen.endIndex;
         }
 
@@ -6036,7 +6190,8 @@
                 return 0;
             }
 
-            var lastPen = line[line.length - 1];
+            var pens = (line && line.pens) ? line.pens : line;
+            var lastPen = pens[pens.length - 1];
             if (lastPen == null) {
                 return 0;
             }
@@ -6070,6 +6225,23 @@
 
         get linesCount() {
             return this.lines.length;
+        }
+
+        newLine() {
+            return this.convertLine(this.linesPool.pop());
+        }
+
+        convertLine(line) {
+            if (!line) {
+                return new Line$1();
+            }
+            if (line.pens) {
+                return line.reset();
+            }
+            if (Array.isArray(line)) {
+                return new Line$1(line).reset();
+            }
+            return new Line$1();
         }
 
         get plainText() {
@@ -6697,17 +6869,15 @@
                 plainText = result.plainText;
                 curProp = result.prop;
 
-                if (curProp.img) { // Image tag                
-                    var imgWidth = this.imageManager.getOuterWidth(curProp.img);
-                    if ((wrapWidth > 0) && (wrapMode !== NO_WRAP)) {  // Wrap mode
-                        if (wrapWidth < (cursorX + imgWidth)) {
-                            penManager.addNewLinePen();
-                            cursorY += lineHeight;
-                            cursorX = 0;
-                        }
-                    }
-                    penManager.addImagePen(cursorX, cursorY, imgWidth, Clone$2(curProp));
-                    cursorX += imgWidth;
+                if (curProp.img) { // Image tag
+                    var cursor = this.addImagePen(
+                        curProp,
+                        cursorX, cursorY,
+                        wrapWidth, wrapMode, lineHeight,
+                        penManager
+                    );
+                    cursorX = cursor.x;
+                    cursorY = cursor.y;
 
                 } else if (plainText !== '') {
                     // wrap text to lines
@@ -6717,6 +6887,8 @@
                     curStyle.buildFont();
                     curStyle.syncFont(canvas, context);
                     curStyle.syncStyle(canvas, context);
+
+                    var metrics = MeasureText(curStyle);
 
                     if (isBuiltInWrappingMode) {
                         wrapLines = WrapText(
@@ -6765,7 +6937,8 @@
                             cursorX, cursorY,
                             segment.width,
                             Clone$2(curProp),
-                            segment.newLineMode
+                            segment.newLineMode,
+                            metrics
                         );
 
                         if (segment.newLineMode !== NO_NEWLINE) {
@@ -6791,10 +6964,12 @@
             }
 
             // Process last pen of each line
-            for (var i = 0, len = this.lines.length; i < len; i++) {
+            var lines = penManager.lines;
+            for (var i = 0, len = lines.length; i < len; i++) {
                 // Last pen of a line
-                var line = this.lines[i];
-                var lastPen = line[line.length - 1];
+                var line = lines[i];
+                var pens = line.pens;
+                var lastPen = pens[pens.length - 1];
                 if (lastPen) {
                     // Add strokeThinkness
                     lastPen.width += this.parser.getStrokeThinkness(this.defaultStyle, lastPen.prop);
@@ -6803,7 +6978,70 @@
                 }
             }
 
+            this.updateLineOffsets(lines, textStyle);
+
             return penManager;
+        }
+
+        addImagePen(prop, cursorX, cursorY, wrapWidth, wrapMode, lineHeight, penManager) {
+            var imgWidth = this.imageManager.getOuterWidth(prop.img);
+            var imgHeight = this.imageManager.getOuterHeight(prop.img);
+            var imgMetrics;
+            if (imgHeight > 0) {
+                var ascent = this.defaultStyle.metrics.ascent;
+                var descent = imgHeight - ascent;
+                if (descent < 0) {
+                    descent = 0;
+                }
+                imgMetrics = {
+                    ascent: ascent,
+                    descent: descent,
+                    height: ascent + descent
+                };
+            }
+            if ((wrapWidth > 0) && (wrapMode !== NO_WRAP)) {  // Wrap mode
+                if (wrapWidth < (cursorX + imgWidth)) {
+                    penManager.addNewLinePen();
+                    cursorY += lineHeight;
+                    cursorX = 0;
+                }
+            }
+            penManager.addImagePen(cursorX, cursorY, imgWidth, Clone$2(prop), imgMetrics);
+            cursorX += imgWidth;
+
+            return {
+                x: cursorX,
+                y: cursorY
+            };
+        }
+
+        updateLineOffsets(lines, textStyle) {
+            var lineSpacing = textStyle.lineSpacing;
+            var defaultMetrics = this.defaultStyle.metrics;
+            var defaultAscent = defaultMetrics.ascent;
+            var defaultDescent = defaultMetrics.descent;
+            var offsetY = 0;
+            var fixedLineHeightMode = textStyle.fixedLineHeightMode;
+            for (var i = 0, len = lines.length; i < len; i++) {
+                var line = lines[i];
+                var lineAscent = line.maxAscent;
+                var lineDescent = line.maxDescent;
+                if (fixedLineHeightMode || (lineAscent === 0 && lineDescent === 0)) {
+                    lineAscent = defaultAscent;
+                    lineDescent = defaultDescent;
+                }
+                line.maxAscent = lineAscent;
+                line.maxDescent = lineDescent;
+                line.lineHeight = lineAscent + lineDescent;
+                line.startOffset = offsetY;
+                line.endOffset = offsetY + line.lineHeight;
+                var baselineOffset = offsetY + lineAscent - defaultAscent;
+                var pens = line.pens;
+                for (var penIdx = 0, penCnt = pens.length; penIdx < penCnt; penIdx++) {
+                    pens[penIdx].y = baselineOffset;
+                }
+                offsetY = line.endOffset + lineSpacing;
+            }
         }
 
         get startXOffset() {
@@ -6833,11 +7071,39 @@
 
         get linesHeight() {
             var linesCount = this.displayLinesCount;
-            var linesHeight = (this.defaultStyle.lineHeight * linesCount);
-            if (linesCount > 0) {
-                linesHeight -= this.defaultStyle.lineSpacing;
+            return this.getLinesHeight(0, linesCount);
+        }
+
+        getLineHeight(line) {
+            var lineHeight = (line) ? line.lineHeight : 0;
+            if (lineHeight > 0) {
+                return lineHeight;
             }
-            return linesHeight;
+            var metrics = this.defaultStyle.metrics;
+            return metrics.ascent + metrics.descent;
+        }
+
+        getLinesHeight(start, end) {
+            var lines = this.penManager.lines;
+            var linesCount = lines.length;
+            if (start === undefined) {
+                start = 0;
+            }
+            if (end === undefined || end > linesCount) {
+                end = linesCount;
+            }
+            if (end <= start) {
+                return 0;
+            }
+            var height = 0;
+            for (var i = start; i < end; i++) {
+                height += this.getLineHeight(lines[i]);
+            }
+            var count = end - start;
+            if (count > 1) {
+                height += this.defaultStyle.lineSpacing * (count - 1);
+            }
+            return height;
         }
 
         get imageManager() {
@@ -7169,6 +7435,11 @@
             return (data) ? (data.width + data.left + data.right) : 0;
         }
 
+        getOuterHeight(key) {
+            var data = this.get(key);
+            return (data) ? data.height : 0;
+        }
+
         getFrame(key) {
             var data = this.get(key);
             return (data) ? this.textureManager.getFrame(data.key, data.frame) : undefined;
@@ -7294,6 +7565,8 @@
 
             this.dirty = false;
 
+            this._scrollY = 0;
+
             //  If resolution wasn't set, force it to 1
             if (this.style.resolution === 0) {
                 this.style.resolution = 1;
@@ -7407,6 +7680,80 @@
         }
         get text() {
             return this._text;
+        }
+
+        get topScrollY() {
+            return 0;
+        }
+
+        get bottomScrollY() {
+            var overflow = this.contentHeight - this.viewportHeight;
+            return (overflow > 0) ? -overflow : 0;
+        }
+
+        get scrollY() {
+            return this._scrollY;
+        }
+
+        set scrollY(value) {
+            if (this._scrollY === value) {
+                return;
+            }
+
+            this._scrollY = value;
+            this.updateText(false);
+        }
+
+        setScrollY(value, clamp) {
+            if (clamp === undefined) {
+                clamp = false;
+            }
+            if (clamp) {
+                value = Clamp(value, this.bottomScrollY, this.topScrollY);
+            }
+
+            this.scrollY = value;
+            return this;
+        }
+
+        addScrollY(inc, clamp) {
+            return this.setScrollY(this.scrollY + inc, clamp);
+        }
+
+        get t() {
+            var bottom = this.bottomScrollY;
+            if (bottom === 0) {
+                return 0;
+            }
+            return (this._scrollY / bottom);
+        }
+
+        set t(value) {
+            this.setT(value);
+        }
+
+        setT(value, clamp) {
+            if (clamp === undefined) {
+                clamp = false;
+            }
+            if (clamp) {
+                value = Clamp(value, 0, 1);
+            }
+
+            var scrollY = this.bottomScrollY * value;
+            return this.setScrollY(scrollY, false);
+        }
+
+        addT(inc, clamp) {
+            return this.setT(this.t + inc, clamp);
+        }
+
+        scrollToTop() {
+            return this.setScrollY(this.topScrollY);
+        }
+
+        scrollToBottom() {
+            return this.setScrollY(this.bottomScrollY);
         }
 
         initRTL() {
@@ -7605,7 +7952,7 @@
 
             // draw
             var startX = (!this.style.rtl) ? padding.left : padding.right;
-            var startY = padding.top;
+            var startY = padding.top + this._scrollY;
             canvasText.draw(
                 startX,
                 startY,
@@ -7775,6 +8122,16 @@
 
         getHitArea(worldX, worldY, camera) {
             return this.canvasText.getHitArea(worldX, worldY, camera);
+        }
+
+        get viewportHeight() {
+            var padding = this.padding;
+            var height = this.height - padding.top - padding.bottom;
+            return Math.max(height, 0);
+        }
+
+        get contentHeight() {
+            return this.canvasText.linesHeight;
         }
     }
 
@@ -9231,13 +9588,13 @@
         return GetBobWorldPosition(this.parent, this, offsetX, offsetY, out);
     };
 
-    var Methods$n = {
+    var Methods$m = {
         contains: Contains$4,
         getWorldPosition: GetWorldPosition,
     };
 
     Object.assign(
-        Methods$n,
+        Methods$m,
         RenderMethods$1
     );
 
@@ -9594,7 +9951,7 @@
 
     Object.assign(
         RenderBase.prototype,
-        Methods$n,
+        Methods$m,
     );
 
     var GetProperty = function (name, config, defaultConfig) {
@@ -10760,7 +11117,7 @@
         return this;
     };
 
-    var SetText$2 = function (text, style) {
+    var SetText$1 = function (text, style) {
         if (text === undefined) {
             text = '';
         }
@@ -12492,7 +12849,7 @@
         },
     };
 
-    var Methods$m = {
+    var Methods$l = {
         setFixedSize: SetFixedSize,
         setPadding: SetPadding,
         getPadding: GetPadding,
@@ -12508,7 +12865,7 @@
         addChild: AddChild$3,
         createCharChild: CreateCharChild,
         createCharChildren: CreateCharChildren,
-        setText: SetText$2,
+        setText: SetText$1,
         appendText: AppendText,
         insertText: InsertText,
         removeText: RemoveText,
@@ -12550,7 +12907,7 @@
     };
 
     Object.assign(
-        Methods$m,
+        Methods$l,
 
         MoveChildMethods,
         BackgroundMethods,
@@ -12695,7 +13052,7 @@
 
     Object.assign(
         DynamicText.prototype,
-        Methods$m
+        Methods$l
     );
 
     ObjectFactory.register('dynamicText', function (x, y, width, height, config) {
@@ -15404,7 +15761,7 @@ void main (void) {
     }
 
     const GetValue$3B = Phaser.Utils.Objects.GetValue;
-    const Clamp$f = Phaser.Math.Clamp;
+    const Clamp$g = Phaser.Math.Clamp;
 
     class WipeController extends Phaser.Filters.Controller {
         static FilterName = FilterName$2;
@@ -15445,7 +15802,7 @@ void main (void) {
         }
 
         set progress(value) {
-            this._progress = Clamp$f(value, 0, 1);
+            this._progress = Clamp$g(value, 0, 1);
         }
 
         setProgress(value) {
@@ -15458,7 +15815,7 @@ void main (void) {
         }
 
         set wipeWidth(value) {
-            this._wipeWidth = Clamp$f(value, 0, 1);
+            this._wipeWidth = Clamp$g(value, 0, 1);
         }
 
         setWipeWidth(wipeWidth) {
@@ -17433,12 +17790,12 @@ void main (void) {
         }
     };
 
-    var Methods$l = {
+    var Methods$k = {
         drawGameObjectsBounds: DrawGameObjectsBounds,
     };
 
     Object.assign(
-        Methods$l,
+        Methods$k,
         GetMethods,
         AddMethods$1,
         RemoveMethods$1,
@@ -17603,7 +17960,7 @@ void main (void) {
     Object.assign(
         GOManager.prototype,
         EventEmitterMethods$1,
-        Methods$l
+        Methods$k
     );
 
     const GameObjectClass = Phaser.GameObjects.GameObject;
@@ -18374,7 +18731,7 @@ void main (void) {
     };
 
     const GetValue$3s = Phaser.Utils.Objects.GetValue;
-    const Clamp$e = Phaser.Math.Clamp;
+    const Clamp$f = Phaser.Math.Clamp;
 
     let Timer$1 = class Timer {
         constructor(config) {
@@ -18500,11 +18857,11 @@ void main (void) {
                     t = 1;
                     break;
             }
-            return Clamp$e(t, 0, 1);
+            return Clamp$f(t, 0, 1);
         }
 
         set t(value) {
-            value = Clamp$e(value, -1, 1);
+            value = Clamp$f(value, -1, 1);
             if (value < 0) {
                 this.state = DELAY;
                 this.nowTime = -this.delay * value;
@@ -19586,12 +19943,12 @@ void main (void) {
         },
     };
 
-    var Methods$k = {
+    var Methods$j = {
         hasAudio: HasaAudio
     };
 
     Object.assign(
-        Methods$k,
+        Methods$j,
         BackgroundMusicMethods,
         BackgroundMusic2Methods,
         SoundEffectsMethods,
@@ -19776,7 +20133,7 @@ void main (void) {
 
     Object.assign(
         SoundManager.prototype,
-        Methods$k
+        Methods$j
     );
 
     const GetValue$3k = Phaser.Utils.Objects.GetValue;
@@ -19875,7 +20232,7 @@ void main (void) {
         return t;
     };
 
-    const Clamp$d = Phaser.Math.Clamp;
+    const Clamp$e = Phaser.Math.Clamp;
 
     class Timer {
         constructor(timeline, config) {
@@ -19961,7 +20318,7 @@ void main (void) {
 
         getProgress() {
             var value = 1 - (this.remainder / this.duration);
-            value = Clamp$d(value, 0, 1);
+            value = Clamp$e(value, 0, 1);
             if (this.yoyo) {
                 value = Yoyo$1(value);
             }
@@ -19969,7 +20326,7 @@ void main (void) {
         }
 
         setProgress(value) {
-            value = Clamp$d(value, 0, 1);
+            value = Clamp$e(value, 0, 1);
             this.remainder = this.duration * (1 - value);
         }
 
@@ -23618,7 +23975,7 @@ void main (void) {
         return this;
     };
 
-    var Methods$j = {
+    var Methods$i = {
         fadeOutPage: FadeOutPage,
         start: Start$1,
         typing: Typing,
@@ -23635,7 +23992,7 @@ void main (void) {
     };
 
     Object.assign(
-        Methods$j,
+        Methods$i,
         TypingSpeedMethods$1
     );
 
@@ -23752,7 +24109,7 @@ void main (void) {
     Object.assign(
         TypeWriter.prototype,
         EventEmitterMethods$1,
-        Methods$j,
+        Methods$i,
     );
 
     class SpriteBob extends BobBase {
@@ -23826,9 +24183,9 @@ void main (void) {
         },
     };
 
-    var Methods$i = {};
+    var Methods$h = {};
     Object.assign(
-        Methods$i,
+        Methods$h,
         AnimationMethods
     );
 
@@ -23876,7 +24233,7 @@ void main (void) {
 
     Object.assign(
         SpriteManager.prototype,
-        Methods$i
+        Methods$h
     );
 
     var IsPlayAnimationTag = function (tags, goType) {
@@ -24632,7 +24989,7 @@ void main (void) {
         },
     };
 
-    var Methods$h = {
+    var Methods$g = {
         setClickTarget: SetClickTarget,
         setCameraTarget: SetCameraTarget,
         setNextPageInput: SetNextPageInput,
@@ -24645,7 +25002,7 @@ void main (void) {
     };
 
     Object.assign(
-        Methods$h,
+        Methods$g,
         GameObjectManagerMethods,
         PlayMethods,
         PauseMethods,
@@ -24775,7 +25132,7 @@ void main (void) {
 
     Object.assign(
         TextPlayer.prototype,
-        Methods$h
+        Methods$g
     );
 
     ObjectFactory.register('textPlayer', function (x, y, width, height, config) {
@@ -25125,7 +25482,7 @@ void main (void) {
         return this;
     };
 
-    var Methods$g = {
+    var Methods$f = {
         open: Open$2,
         close: Close$1,
     };
@@ -25480,7 +25837,7 @@ void main (void) {
 
     Object.assign(
         HiddenTextEditBase.prototype,
-        Methods$g,
+        Methods$f,
     );
 
     var NumberInputUpdateCallback = function (text, textObject, hiddenInputText) {
@@ -26590,7 +26947,7 @@ void main (void) {
 
     const RemoveItem$8 = Phaser.Utils.Array.Remove;
 
-    var SetText$1 = function (textObject, newText) {
+    var SetText = function (textObject, newText) {
         var text = textObject.text;
         if (newText === text) {
             return;
@@ -26666,7 +27023,7 @@ void main (void) {
 
     };
 
-    const Clamp$c = Phaser.Math.Clamp;
+    const Clamp$d = Phaser.Math.Clamp;
 
     var GetIndex = function (characterCountOfLines, position) {
         var result = { lineIndex: 0, position: 0 };
@@ -26716,7 +27073,7 @@ void main (void) {
             }
 
             // Move cursor to previous character
-            var position = Clamp$c(this.cursorPosition - 1, 0, this.inputText.length);
+            var position = Clamp$d(this.cursorPosition - 1, 0, this.inputText.length);
             this.setCursorPosition(position);
 
             return this;
@@ -26728,7 +27085,7 @@ void main (void) {
             }
 
             // Move cursor to next character
-            var position = Clamp$c(this.cursorPosition + 1, 0, this.inputText.length);
+            var position = Clamp$d(this.cursorPosition + 1, 0, this.inputText.length);
             this.setCursorPosition(position);
 
             return this;
@@ -26742,7 +27099,7 @@ void main (void) {
             var result = GetIndex(this.characterCountOfLines, this.cursorPosition);
             result.lineIndex -= 1;
 
-            var position = Clamp$c(GetPosition(this.characterCountOfLines, result), 0, this.inputText.length);
+            var position = Clamp$d(GetPosition(this.characterCountOfLines, result), 0, this.inputText.length);
             this.setCursorPosition(position);
 
             return this;
@@ -26756,7 +27113,7 @@ void main (void) {
             var result = GetIndex(this.characterCountOfLines, this.cursorPosition);
             result.lineIndex += 1;
 
-            var position = Clamp$c(GetPosition(this.characterCountOfLines, result), 0, this.inputText.length);
+            var position = Clamp$d(GetPosition(this.characterCountOfLines, result), 0, this.inputText.length);
             this.setCursorPosition(position);
 
             return this;
@@ -26899,7 +27256,7 @@ void main (void) {
                 return;
             }
 
-            SetText$1(this, value);
+            SetText(this, value);
 
             this._text = value;
         }
@@ -30830,7 +31187,7 @@ void main (void) {
     };
 
     const GetValue$2$ = Phaser.Utils.Objects.GetValue;
-    const Clamp$b = Phaser.Math.Clamp;
+    const Clamp$c = Phaser.Math.Clamp;
 
     function ProgressBase (BaseClass) {
         class ProgressBase extends BaseClass {
@@ -30856,7 +31213,7 @@ void main (void) {
             }
 
             set value(value) {
-                value = Clamp$b(value, 0, 1);
+                value = Clamp$c(value, 0, 1);
 
                 var oldValue = this._value;
                 var valueChanged = (oldValue != value);
@@ -30967,7 +31324,7 @@ void main (void) {
 
     const GetValue$2_ = Phaser.Utils.Objects.GetValue;
     const IsPlainObject$I = Phaser.Utils.Objects.IsPlainObject;
-    const Clamp$a = Phaser.Math.Clamp;
+    const Clamp$b = Phaser.Math.Clamp;
 
     const DefaultStartAngle$1 = Phaser.Math.DegToRad(270);
 
@@ -31135,7 +31492,7 @@ void main (void) {
         }
 
         set thickness(value) {
-            value = Clamp$a(value, 0, 1);
+            value = Clamp$b(value, 0, 1);
             this.dirty = this.dirty || (this._thickness != value);
             this._thickness = value;
         }
@@ -31482,7 +31839,7 @@ void main (void) {
 
     const GetValue$2Z = Phaser.Utils.Objects.GetValue;
     const IsPlainObject$H = Phaser.Utils.Objects.IsPlainObject;
-    const Clamp$9 = Phaser.Math.Clamp;
+    const Clamp$a = Phaser.Math.Clamp;
 
     const DefaultStartAngle = Phaser.Math.DegToRad(270);
     const PI2 = Math.PI * 2;
@@ -31677,7 +32034,7 @@ void main (void) {
         }
 
         set thickness(value) {
-            value = Clamp$9(value, 0, 1);
+            value = Clamp$a(value, 0, 1);
             this.dirty = this.dirty || (this._thickness != value);
             this._thickness = value;
         }
@@ -32039,13 +32396,13 @@ void main (void) {
 
     };
 
-    var Methods$f = {
+    var Methods$e = {
         updateShapes: UpdateShapes$1,
     };
 
     Object.assign(
         LineProgress$1.prototype,
-        Methods$f,
+        Methods$e,
     );
 
     ObjectFactory.register('lineProgress', function (x, y, width, height, barColor, value, config) {
@@ -32756,13 +33113,13 @@ void main (void) {
         }
     }
 
-    var Methods$e = {
+    var Methods$d = {
         updateShapes: UpdateShapes,
     };
 
     Object.assign(
         RoundRectangleProgress.prototype,
-        Methods$e,
+        Methods$d,
     );
 
     ObjectFactory.register('roundRectanleProgress', function (x, y, width, height, radiusConfig, barColor, value, config) {
@@ -37048,7 +37405,7 @@ void main (void) {
         }
     };
 
-    var PreLayout$4 = function () {
+    var PreLayout$3 = function () {
         this._childrenWidth = undefined;
         this._childrenHeight = undefined;
 
@@ -37273,7 +37630,7 @@ void main (void) {
     };
 
     // Override
-    var LayoutChildren$6 = function () {
+    var LayoutChildren$5 = function () {
 
     };
 
@@ -43406,10 +43763,10 @@ void main (void) {
         getChildIndex: GetChildIndex,
         getAllChildrenSizers: GetAllChildrenSizers,
         getChildrenSizers: GetChildrenSizers$5,
-        preLayout: PreLayout$4,
+        preLayout: PreLayout$3,
         layout: Layout,
         runLayout: RunLayout$1,
-        layoutChildren: LayoutChildren$6,
+        layoutChildren: LayoutChildren$5,
 
         layoutBackgrounds: LayoutBackgrounds,
         postLayout: PostLayout,
@@ -43868,7 +44225,7 @@ void main (void) {
         }
     };
 
-    var LayoutChildren$5 = function () {
+    var LayoutChildren$4 = function () {
         var child, childConfig, padding;
         var startX = this.innerLeft,
             startY = this.innerTop;
@@ -44148,7 +44505,7 @@ void main (void) {
         getExpandedChildWidth: GetExpandedChildWidth$3,
         getExpandedChildHeight: GetExpandedChildHeight$3,
         getChildrenSizers: GetChildrenSizers$4,
-        layoutChildren: LayoutChildren$5,
+        layoutChildren: LayoutChildren$4,
     };
 
     Object.assign(
@@ -47019,13 +47376,13 @@ void main (void) {
         },
     };
 
-    var Methods$d = {
+    var Methods$c = {
         resize: Resize$1,
         syncTo: SyncTo,
     };
 
     Object.assign(
-        Methods$d,
+        Methods$c,
         DropEnableMethods,
         FilterMethods,
         LoadFileMethods,
@@ -47112,7 +47469,7 @@ void main (void) {
 
     Object.assign(
         FileDropZone.prototype,
-        Methods$d,
+        Methods$c,
     );
 
     ObjectFactory.register('fileDropZone', function (config) {
@@ -47377,7 +47734,7 @@ void main (void) {
         return out;
     };
 
-    var PreLayout$3 = function () {
+    var PreLayout$2 = function () {
         // Resize child to 1x1 for ratio-fit 
         this.hasRatioFitChild = false;
         var child, sizerConfig;
@@ -47400,13 +47757,13 @@ void main (void) {
         this._childrenProportion = undefined;
         this.hasProportion0Child = false;
         this.proportionLength = undefined; // Display proportion-length, contains scale
-        PreLayout$4.call(this);
+        PreLayout$3.call(this);
         return this;
     };
 
     const Wrap$1 = Phaser.Math.Wrap;
 
-    var LayoutChildren$4 = function () {
+    var LayoutChildren$3 = function () {
         var children = this.sizerChildren;
         var child, childConfig, padding;
         var startX = this.innerLeft,
@@ -48019,8 +48376,8 @@ void main (void) {
         getExpandedChildWidth: GetExpandedChildWidth$2,
         getExpandedChildHeight: GetExpandedChildHeight$2,
         getChildrenSizers: GetChildrenSizers$3,
-        preLayout: PreLayout$3,
-        layoutChildren: LayoutChildren$4,
+        preLayout: PreLayout$2,
+        layoutChildren: LayoutChildren$3,
         resolveWidth: ResolveWidth$1,
         resolveHeight: ResolveHeight$1,
         hasWidthWrap: HasWidthWrap$1,
@@ -48536,7 +48893,7 @@ void main (void) {
         return this.geom.contains(x, y);
     };
 
-    var Methods$c = {
+    var Methods$b = {
         setPosition: SetPosition$1,
         resize: Resize,
         setOrigin: SetOrigin,
@@ -48582,7 +48939,7 @@ void main (void) {
 
     Object.assign(
         DefaultMaskGraphics.prototype,
-        Methods$c
+        Methods$b
     );
 
     var GetRenderer = function (scene) {
@@ -50586,18 +50943,18 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return out;
     };
 
-    var PreLayout$2 = function () {
+    var PreLayout$1 = function () {
         this._totalColumnProportions = undefined;
         this._totalRowProportions = undefined;
         this.hasColumnProportion0Child = false;
         this.hasRowProportion0Child = false;
         this.proportionWidthLength = undefined;  // Display proportion-length, contains scale
         this.proportionHeightLength = undefined; // Display proportion-length, contains scale
-        PreLayout$4.call(this);
+        PreLayout$3.call(this);
         return this;
     };
 
-    var LayoutChildren$3 = function () {
+    var LayoutChildren$2 = function () {
         var child, childConfig, padding;
         var startX = this.innerLeft,
             startY = this.innerTop;
@@ -51174,8 +51531,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         getExpandedChildWidth: GetExpandedChildWidth$1,
         getExpandedChildHeight: GetExpandedChildHeight$1,
         getChildrenSizers: GetChildrenSizers$2,
-        preLayout: PreLayout$2,
-        layoutChildren: LayoutChildren$3,
+        preLayout: PreLayout$1,
+        layoutChildren: LayoutChildren$2,
         resolveWidth: ResolveWidth,
         resolveHeight: ResolveHeight,
         resolveChildrenWidth: ResolveChildrenWidth,
@@ -51454,16 +51811,16 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return out;
     };
 
-    var PreLayout$1 = function () {
+    var PreLayout = function () {
         this._maxChildWidth = undefined;
         this._maxChildHeight = undefined;
         this.wrapResult = undefined;
         this.rexSizer.resolved = false;
-        PreLayout$4.call(this);
+        PreLayout$3.call(this);
         return this;
     };
 
-    var LayoutChildren$2 = function () {
+    var LayoutChildren$1 = function () {
         var horizontalWrap = (this.orientation === 0);
 
         var innerLineWidth = (horizontalWrap) ? this.innerWidth : this.innerHeight;
@@ -51965,8 +52322,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         getChildrenWidth: GetChildrenWidth$1,
         getChildrenHeight: GetChildrenHeight$1,
         getChildrenSizers: GetChildrenSizers$1,
-        preLayout: PreLayout$1,
-        layoutChildren: LayoutChildren$2,
+        preLayout: PreLayout,
+        layoutChildren: LayoutChildren$1,
         hasWidthWrap: HasWidthWrap,
         runWidthWrap: RunWidthWrap,
         hasHeightWrap: HasHeightWrap,
@@ -52515,7 +52872,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     };
 
-    const Clamp$8 = Phaser.Math.Clamp;
+    const Clamp$9 = Phaser.Math.Clamp;
 
     var ChildPositionMethods = {
         setChildOY(value, clamp) {
@@ -52523,7 +52880,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 clamp = false;
             }
             if (clamp) {
-                value = Clamp$8(value, this.bottomChildOY, this.topChildOY);
+                value = Clamp$9(value, this.bottomChildOY, this.topChildOY);
             }
             this.childOY = value;
             return this;
@@ -52539,7 +52896,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 clamp = false;
             }
             if (clamp) {
-                value = Clamp$8(value, 0, 1);
+                value = Clamp$9(value, 0, 1);
             }
             this.t = value;
             return this;
@@ -52575,7 +52932,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 clamp = false;
             }
             if (clamp) {
-                value = Clamp$8(value, this.leftChildOX, this.rightChildOX);
+                value = Clamp$9(value, this.leftChildOX, this.rightChildOX);
             }
             this.childOX = value;
             return this;
@@ -52591,7 +52948,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 clamp = false;
             }
             if (clamp) {
-                value = Clamp$8(value, 0, 1);
+                value = Clamp$9(value, 0, 1);
             }
             this.s = value;
             return this;
@@ -52624,13 +52981,13 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     };
 
-    var Methods$b = {
+    var Methods$a = {
         resizeController: ResizeController,
         updateController: UpdateController
     };
 
     Object.assign(
-        Methods$b,
+        Methods$a,
         ChildPositionMethods
     );
 
@@ -53048,7 +53405,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     const GetValue$1M = Phaser.Utils.Objects.GetValue;
     const IsPlainObject$f = Phaser.Utils.Objects.IsPlainObject;
-    const Clamp$7 = Phaser.Math.Clamp;
+    const Clamp$8 = Phaser.Math.Clamp;
     const SnapTo$2 = Phaser.Math.Snap.To;
 
     class Slider extends ProgressBase(Sizer) {
@@ -53173,7 +53530,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 value = SnapTo$2(value, this.gap);
             }
             var oldValue = this._value;
-            this._value = Clamp$7(value, 0, 1);
+            this._value = Clamp$8(value, 0, 1);
 
             if (oldValue !== this._value) {
                 this.updateThumb(this._value);
@@ -54086,7 +54443,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
     }
 
     const GetValue$1I = Phaser.Utils.Objects.GetValue;
-    const Clamp$6 = Phaser.Math.Clamp;
+    const Clamp$7 = Phaser.Math.Clamp;
 
     class Scroller extends ComponentBase {
         constructor(gameObject, config) {
@@ -54290,7 +54647,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             }
 
             if (clamp) {
-                value = Clamp$6(value, this.minValue, this.maxValue);
+                value = Clamp$7(value, this.minValue, this.maxValue);
             }
 
             this.value = value;
@@ -54534,10 +54891,13 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             }
 
             var isNumberSliderPadding;
+            var isNumberChildPadding;
             if (childPadding === undefined) {
                 isNumberSliderPadding = (typeof (sliderPadding) === 'number');
+                isNumberChildPadding = false;
             } else {
                 isNumberSliderPadding = (typeof (childPadding) === 'number');
+                isNumberChildPadding = isNumberSliderPadding;
             }
 
             if (isAxisY) {
@@ -54548,7 +54908,11 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                     if (childPadding === undefined) {
                         padding = (isNumberSliderPadding) ? { left: sliderPadding } : sliderPadding;
                     } else {
-                        padding = { left: GetValue$1G(childPadding, 'right', childPadding) };
+                        if (isNumberChildPadding) {
+                            padding = { left: childPadding };
+                        } else {
+                            padding = { left: GetValue$1G(childPadding, 'right', 0) };
+                        }
                     }
 
                 } else { // left
@@ -54558,7 +54922,11 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                     if (childPadding === undefined) {
                         padding = (isNumberSliderPadding) ? { right: sliderPadding } : sliderPadding;
                     } else {
-                        padding = { right: GetValue$1G(childPadding, 'left', childPadding) };
+                        if (isNumberChildPadding) {
+                            padding = { right: childPadding };
+                        } else {
+                            padding = { right: GetValue$1G(childPadding, 'left', 0) };
+                        }
                     }
                 }
 
@@ -54570,7 +54938,11 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                     if (childPadding === undefined) {
                         padding = (isNumberSliderPadding) ? { top: sliderPadding } : sliderPadding;
                     } else {
-                        padding = { top: GetValue$1G(childPadding, 'bottom', childPadding) };
+                        if (isNumberChildPadding) {
+                            padding = { top: childPadding };
+                        } else {
+                            padding = { top: GetValue$1G(childPadding, 'bottom', 0) };
+                        }
                     }
 
                 } else { // top
@@ -54580,7 +54952,11 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                     if (childPadding === undefined) {
                         padding = (isNumberSliderPadding) ? { bottom: sliderPadding } : sliderPadding;
                     } else {
-                        padding = { bottom: GetValue$1G(childPadding, 'top', childPadding) };
+                        if (isNumberChildPadding) {
+                            padding = { bottom: childPadding };
+                        } else {
+                            padding = { bottom: GetValue$1G(childPadding, 'top', 0) };
+                        }
                     }
                 }
             }
@@ -55273,7 +55649,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
     // mixin
     Object.assign(
         Scrollable$1.prototype,
-        Methods$b
+        Methods$a
     );
 
     var TextToLines = function (textObject, text, lines) {
@@ -55295,57 +55671,6 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 break;
         }
         return lines;
-    };
-
-    var SetText = function (text) {
-        if (text !== undefined) {
-            this.text = text;
-        }
-
-        // Wrap content in lines
-        this.lines = TextToLines(this.textObject, this.text, this.lines);
-
-        // Get lines count
-        this.linesCount = this.lines.length;
-
-        // Re-calculate these values later
-        this._textHeight = undefined;
-        this._textVisibleHeight = undefined;
-
-        this.updateTextObject();
-        return this;
-    };
-
-    var TextHeightToLinesCount$1 = function (height) {
-        // height = (lines * (lineHeight + lineSpacing)) - lineSpacing
-        return (height - this.textLineSpacing) / (this.textLineHeight + this.textLineSpacing);
-    };
-
-    var LinesCountToTextHeight = function (linesCount) {
-        var height = linesCount * (this.textLineHeight + this.textLineSpacing);
-        if (linesCount > 1) {
-            height -= this.textLineSpacing;
-        }
-        return height;
-    };
-
-    var GetLines$1 = function (startLineIdx) {
-        var endLineIdx = startLineIdx + this.visibleLinesCount + 1;
-        var text;
-        switch (this.textObjectType) {
-            case TextType:
-                text = this.lines.slice(startLineIdx, endLineIdx).join('\n');
-                break;
-            case TagTextType:
-                var startIdx = this.lines.getLineStartIndex(startLineIdx);
-                var endIdx = this.lines.getLineEndIndex(endLineIdx - 1);
-                text = this.lines.getSliceTagText(startIdx, endIdx, true);
-                break;
-            case BitmapTextType:
-                text = this.lines.slice(startLineIdx, endLineIdx).join('\n');
-                break;
-        }
-        return text;
     };
 
     var SetNoWrapText = function (textObject, text) {
@@ -55391,145 +55716,11 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
     };
 
-    var ResetTextObjectPosition = function () {
-        var config = this.textObject.rexSizer;
-        this.textObject.y += (config.offsetY - config.preOffsetY);
-        config.preOffsetY = config.offsetY;
-        this.resetChildPositionState(this.textObject);
-
-        if (this.textCropEnable) {
-            CropTextObject.call(this);
-        }
-    };
-
-    var CropTextObject = function () {
-        // Don't have setCrop method, return
-        if (!this.textObject.setCrop) {
-            return;
-        }
-
-        var offsetY = this.textObject.rexSizer.offsetY;
-        var cropY, cropHeight;
-        if (offsetY <= 0) {
-            cropY = -offsetY;
-            cropHeight = this.height;
-        } else {
-            cropY = 0;
-            cropHeight = this.height - offsetY;
-        }
-        this.textObject.setCrop(
-            0,
-            cropY,
-            this.width,
-            cropHeight
-        );
-    };
-
-    var UpdateTextObject = function () {
-        var startLineIndex = Math.max(Math.floor(TextHeightToLinesCount$1.call(this, -this.textOY)), 0);
-        var textOffset = LinesCountToTextHeight.call(this, startLineIndex) + this.textOY;
-
-        // Grab visible lines
-        var text = GetLines$1.call(this, startLineIndex);
-
-        // Display visible content
-        SetNoWrapText(this.textObject, text);
-
-        this.textObject.rexSizer.offsetY = textOffset;
-        ResetTextObjectPosition.call(this);
-        return this;
-    };
-
-    var PreLayout = function () {
-        // Style of text
-        this._textLineHeight = undefined;
-        this._textLineSpacing = undefined;
-        // Style of text, width of text
-        this._visibleLinesCount = undefined;
-        // Style of text, total lines of content
-        this._textHeight = undefined;
-        this._textVisibleHeight = undefined;
-
-        PreLayout$4.call(this);
-        return this;
-    };
-
-    var ResizeText = function (textObject, width, height) {
-        height += (this.textLineHeight + this.textLineSpacing); // Add 1 line
-        if ((this.textObjectWidth === width) && (this._textObjectRealHeight === height)) {
-            return;
-        }
-        this.textObjectWidth = width;
-        this._textObjectRealHeight = height;
-
-        switch (this.textObjectType) {
-            case TextType:
-            case TagTextType:
-                textObject.setFixedSize(width, height);
-
-                var style = textObject.style;
-                var wrapWidth = Math.max(width, 0);
-                if (this.textObjectType === TextType) {  // Built-in text
-                    style.wordWrapWidth = wrapWidth;
-                } else {  // BBCode text, Tag text
-                    if (style.wrapMode === 0) { // Turn no-wrap to word-wrap
-                        style.wrapMode = 1;
-                    }
-                    style.wrapWidth = wrapWidth;
-                }
-                break;
-            case BitmapTextType:
-                textObject.setMaxWidth(width);
-                break;
-        }
-
-        // Render content again
-        this.setText();
-    };
-
-    var LayoutChildren$1 = function () {
-        var child, childConfig, padding;
-        var startX = this.left,
-            startY = this.top;
-        var x, y, width, height; // Align zone
-
-        // LayoutChildren text child
-        // Skip invisible child
-        child = this.textObject;
-        if (!child.rexSizer.hidden) {
-            childConfig = child.rexSizer;
-            padding = childConfig.padding;
-            x = startX + (padding.left * this.scaleX);
-            y = startY + (padding.top * this.scaleY);
-            width = (this.width * this.scaleX) - ((padding.left + padding.right) * this.scaleX);
-            height = (this.height * this.scaleY) - ((padding.top + padding.bottom) * this.scaleY);
-            ResizeText.call(this, child, width, height);
-
-            AlignIn(child, x, y, width, height, childConfig.align);
-
-            childConfig.preOffsetY = 0; // Clear preOffsetY
-            ResetTextObjectPosition.call(this);
-
-            if (this.textMask) {
-                this.textMask.setPosition().resize();
-                this.resetChildPositionState(this.textMask);
-            }
-
-        }
-    };
-
-    var Methods$a = {
-        setText: SetText,
-        updateTextObject: UpdateTextObject,
-        preLayout: PreLayout,
-        layoutChildren: LayoutChildren$1,
-    };
-
     const IsPlainObject$e = Phaser.Utils.Objects.IsPlainObject;
     const GetValue$1D = Phaser.Utils.Objects.GetValue;
     const ALIGN_LEFTTOP$1 = Phaser.Display.Align.TOP_LEFT;
 
-    class TextBlock extends Base$1 {
+    class BaseTextBlock extends Base$1 {
         constructor(scene, x, y, minWidth, minHeight, config) {
             if (IsPlainObject$e(x)) {
                 config = x;
@@ -55545,22 +55736,13 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
             super(scene, x, y, minWidth, minHeight, config);
 
-            this.type = 'rexTextBlock';
+            this.type = 'rexBaseTextBlock';
             this.textObject = undefined;
-            this.linesCount = 0;
-            this.textMask = undefined;
             this.textObjectType = undefined;
-            this._textLineHeight = undefined;
-            this._textLineSpacing = undefined;
-            this._visibleLinesCount = undefined;
-            this._textHeight = undefined;
-            this._textVisibleHeight = undefined;
+            this.textMask = undefined;
+            this.textObjectWidth = undefined;
             this._textObjectRealHeight = 0;
-
-            this.lines = undefined;
-            // Text object : array of string
-            // Tag text object : pens-manager
-            // Bitmap text object : array of string
+            this.linesCount = 0;
 
             this.text = GetValue$1D(config, 'content', '');
             this._textOY = 0;
@@ -55616,20 +55798,6 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
             this.textObject = undefined;
             this.textMask = undefined;
-            if (this.lines) {
-                switch (this.textObjectType) {
-                    case TextType:
-                        this.lines.length = 0;
-                        break;
-                    case TagTextType:
-                        this.lines.destroy();
-                        break;
-                    case BitmapTextType:
-                        this.lines.length = 0;
-                        break;
-                }
-                this.lines = undefined;
-            }
 
             super.destroy(fromScene);
         }
@@ -55642,78 +55810,83 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             return this;
         }
 
-        get textLineHeight() {
-            if (this._textLineHeight === undefined) {
-                var lineHeight;
-                switch (this.textObjectType) {
-                    case TextType:
-                    case TagTextType:
-                        var style = this.textObject.style;
-                        lineHeight = style.metrics.fontSize + style.strokeThickness;
-                        break;
-                    case BitmapTextType:
-                        var scale = (this.textObject.fontSize / this.textObject.fontData.size);
-                        lineHeight = this.textObject.fontData.lineHeight * scale;
-                        break;
+        clearTextMetricsCache() {
+            // Override in subclass if needed
+        }
 
+        preLayout() {
+            this.clearTextMetricsCache();
+            PreLayout$3.call(this);
+            return this;
+        }
+
+        layoutChildren() {
+            var child, childConfig, padding;
+            var startX = this.left,
+                startY = this.top;
+            var x, y, width, height; // Align zone
+
+            // LayoutChildren text child
+            // Skip invisible child
+            child = this.textObject;
+            if (!child.rexSizer.hidden) {
+                childConfig = child.rexSizer;
+                padding = childConfig.padding;
+                x = startX + (padding.left * this.scaleX);
+                y = startY + (padding.top * this.scaleY);
+                width = (this.width * this.scaleX) - ((padding.left + padding.right) * this.scaleX);
+                height = (this.height * this.scaleY) - ((padding.top + padding.bottom) * this.scaleY);
+                this.resizeText(child, width, height);
+
+                AlignIn(child, x, y, width, height, childConfig.align);
+
+                childConfig.preOffsetY = 0; // Clear preOffsetY
+                this.resetTextObjectPosition();
+
+                if (this.textMask) {
+                    this.textMask.setPosition().resize();
+                    this.resetChildPositionState(this.textMask);
                 }
-                this._textLineHeight = lineHeight;
             }
-            return this._textLineHeight;
         }
 
-        get textLineSpacing() {
-            if (this._textLineSpacing === undefined) {
-                var lineSpacing;
-                switch (this.textObjectType) {
-                    case TextType:
-                    case TagTextType:
-                        lineSpacing = this.textObject.lineSpacing;
-                        break;
-                    case BitmapTextType:
-                        lineSpacing = 0;
-                        break;
-                }
-                this._textLineSpacing = lineSpacing;
+        resizeText(textObject, width, height) {
+            // Override in subclass
+            return this;
+        }
+
+        resetTextObjectPosition() {
+            var config = this.textObject.rexSizer;
+            this.textObject.y += (config.offsetY - config.preOffsetY);
+            config.preOffsetY = config.offsetY;
+            this.resetChildPositionState(this.textObject);
+
+            if (this.textCropEnable) {
+                this.cropTextObject();
             }
-            return this._textLineSpacing;
         }
 
-        get visibleLinesCount() {
-            if (this._visibleLinesCount === undefined) {
-                this._visibleLinesCount = Math.floor(TextHeightToLinesCount$1.call(this, this._textObjectRealHeight));
+        cropTextObject() {
+            // Don't have setCrop method, return
+            if (!this.textObject.setCrop) {
+                return;
             }
-            return this._visibleLinesCount;
-        }
 
-        get topTextOY() {
-            return 0;
-        }
-
-        get bottomTextOY() {
-            return -this.textVisibleHeight;
-        }
-
-        get textHeight() {
-            if (this._textHeight === undefined) {
-                this._textHeight = LinesCountToTextHeight.call(this, this.linesCount);
+            var offsetY = this.textObject.rexSizer.offsetY;
+            var cropY, cropHeight;
+            if (offsetY <= 0) {
+                cropY = -offsetY;
+                cropHeight = this.height;
+            } else {
+                cropY = 0;
+                cropHeight = this.height - offsetY;
             }
-            return this._textHeight;
-        }
-
-        get textObjectHeight() {
-            return this._textObjectRealHeight - (this.textLineHeight + this.textLineSpacing);  // Remove 1 text line
-        }
-
-        get textVisibleHeight() {
-            if (this._textVisibleHeight === undefined) {
-                var h = this.textHeight - this.textObjectHeight;
-                if (!this.alwaysScrollable && (h < 0)) {
-                    h = 0;
-                }
-                this._textVisibleHeight = h;
-            }
-            return this._textVisibleHeight;
+            this.textObject.setCrop(
+                0,
+                cropY,
+                this.width,
+                cropHeight
+            );
         }
 
         textOYExceedTop(oy) {
@@ -55741,9 +55914,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             var textOYExeceedBottom = this.textOYExeceedBottom(oy);
 
             if (this.clampTextOY) {
-                if (this.visibleLinesCount > this.linesCount) {
-                    oy = 0;
-                } else if (textOYExceedTop) {
+                if (textOYExceedTop) {
                     oy = topTextOY;
                 } else if (textOYExeceedBottom) {
                     oy = bottomTextOY;
@@ -55776,20 +55947,41 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
 
         set t(value) {
-            this.textOY = -this.textVisibleHeight * value;
+            var bottomTextOY = this.bottomTextOY;
+            this.textOY = (bottomTextOY === 0) ? 0 : (bottomTextOY * value);
         }
 
         get t() {
-            var textVisibleHeight = this.textVisibleHeight;
-            if (textVisibleHeight === 0) {
+            var bottomTextOY = this.bottomTextOY;
+            if (bottomTextOY === 0) {
                 return 0;
             }
-            return (this.textOY / -textVisibleHeight);
+            return (this.textOY / bottomTextOY);
         }
 
         setTextOYByPercentage(percentage) {
             this.t = percentage;
             return this;
+        }
+
+        get topTextOY() {
+            return 0;
+        }
+
+        get bottomTextOY() {
+            return -this.textVisibleHeight;
+        }
+
+        get textVisibleHeight() {
+            return 0;
+        }
+
+        get textHeight() {
+            return 0;
+        }
+
+        get textObjectHeight() {
+            return 0;
         }
     }
 
@@ -55797,10 +55989,350 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return scene.add.text(0, 0, '');
     };
 
-    Object.assign(
-        TextBlock.prototype,
-        Methods$a
-    );
+    class TextBlock extends BaseTextBlock {
+        constructor(scene, x, y, minWidth, minHeight, config) {
+            super(scene, x, y, minWidth, minHeight, config);
+
+            this.type = 'rexTextBlock';
+            this.lines = undefined;  // string[]
+            this._textLineHeight = undefined;
+            this._textLineSpacing = undefined;
+            this._visibleLinesCount = undefined;
+            this._textHeight = undefined;
+            this._textVisibleHeight = undefined;
+        }
+
+        destroy(fromScene) {
+            //  This Game Object has already been destroyed
+            if (!this.scene || this.ignoreDestroy) {
+                return;
+            }
+
+            if (this.lines) {
+                this.lines.length = 0;
+                this.lines = undefined;
+            }
+
+            super.destroy(fromScene);
+        }
+
+        clearTextMetricsCache() {
+            this._textLineHeight = undefined;
+            this._textLineSpacing = undefined;
+            this._visibleLinesCount = undefined;
+            this._textHeight = undefined;
+            this._textVisibleHeight = undefined;
+        }
+
+        setText(text) {
+            if (text !== undefined) {
+                this.text = text;
+            }
+
+            // Wrap content in lines
+            this.lines = TextToLines(this.textObject, this.text, this.lines);
+
+            // Get lines count
+            this.linesCount = this.lines.length;
+
+            // Re-calculate these values later
+            this._textHeight = undefined;
+            this._textVisibleHeight = undefined;
+
+            this.updateTextObject();
+            return this;
+        }
+
+        updateTextObject() {
+            var startLineIndex = Math.max(Math.floor(this.textHeightToLinesCount(-this.textOY)), 0);
+            var textOffset = this.linesCountToTextHeight(startLineIndex) + this.textOY;
+
+            // Grab visible lines
+            var text = this.getLines(startLineIndex);
+
+            // Display visible content
+            SetNoWrapText(this.textObject, text);
+
+            this.textObject.rexSizer.offsetY = textOffset;
+            this.resetTextObjectPosition();
+            return this;
+        }
+
+        resizeText(textObject, width, height) {
+            height += (this.textLineHeight + this.textLineSpacing); // Add 1 line
+            if ((this.textObjectWidth === width) && (this._textObjectRealHeight === height)) {
+                return;
+            }
+            this.textObjectWidth = width;
+            this._textObjectRealHeight = height;
+
+            switch (this.textObjectType) {
+                case TextType:
+                    textObject.setFixedSize(width, height);
+
+                    var style = textObject.style;
+                    var wrapWidth = Math.max(width, 0);
+                    style.wordWrapWidth = wrapWidth;
+                    break;
+                case BitmapTextType:
+                    textObject.setMaxWidth(width);
+                    break;
+            }
+
+            // Render content again
+            this.setText();
+        }
+
+        getLines(startLineIdx) {
+            var endLineIdx = startLineIdx + this.visibleLinesCount + 1;
+            var text = this.lines.slice(startLineIdx, endLineIdx).join('\n');
+            return text;
+        }
+
+        textHeightToLinesCount(height) {
+            // height = (lines * (lineHeight + lineSpacing)) - lineSpacing
+            return (height - this.textLineSpacing) / (this.textLineHeight + this.textLineSpacing);
+        }
+
+        linesCountToTextHeight(linesCount) {
+            var height = linesCount * (this.textLineHeight + this.textLineSpacing);
+            if (linesCount > 1) {
+                height -= this.textLineSpacing;
+            }
+            return height;
+        }
+
+        get textLineHeight() {
+            if (this._textLineHeight === undefined) {
+                var lineHeight;
+                switch (this.textObjectType) {
+                    case TextType:
+                        var style = this.textObject.style;
+                        lineHeight = style.metrics.fontSize + style.strokeThickness;
+                        break;
+                    case BitmapTextType:
+                        var scale = (this.textObject.fontSize / this.textObject.fontData.size);
+                        lineHeight = this.textObject.fontData.lineHeight * scale;
+                        break;
+
+                }
+                this._textLineHeight = lineHeight;
+            }
+            return this._textLineHeight;
+        }
+
+        get textLineSpacing() {
+            if (this._textLineSpacing === undefined) {
+                var lineSpacing;
+                switch (this.textObjectType) {
+                    case TextType:
+                        lineSpacing = this.textObject.lineSpacing;
+                        break;
+                    case BitmapTextType:
+                        lineSpacing = 0;
+                        break;
+                }
+                this._textLineSpacing = lineSpacing;
+            }
+            return this._textLineSpacing;
+        }
+
+        get visibleLinesCount() {
+            if (this._visibleLinesCount === undefined) {
+                this._visibleLinesCount = Math.floor(this.textHeightToLinesCount(this._textObjectRealHeight));
+            }
+            return this._visibleLinesCount;
+        }
+
+        get textHeight() {
+            if (this._textHeight === undefined) {
+                this._textHeight = this.linesCountToTextHeight(this.linesCount);
+            }
+            return this._textHeight;
+        }
+
+        get textObjectHeight() {
+            return this._textObjectRealHeight - (this.textLineHeight + this.textLineSpacing);  // Remove 1 text line
+        }
+
+        get textVisibleHeight() {
+            if (this._textVisibleHeight === undefined) {
+                var h = this.textHeight - this.textObjectHeight;
+                if (!this.alwaysScrollable && (h < 0)) {
+                    h = 0;
+                }
+                this._textVisibleHeight = h;
+            }
+            return this._textVisibleHeight;
+        }
+
+        get textOY() {
+            return this._textOY;
+        }
+
+        set textOY(oy) {
+            if (this.clampTextOY && (this.visibleLinesCount > this.linesCount)) {
+                oy = 0;
+            }
+            super.textOY = oy;
+        }
+
+        scrollToLine(lineIndex) {
+            var lineHeight = this.textLineHeight + this.textLineSpacing;
+            this.textOY = -lineHeight * lineIndex;
+            return this;
+        }
+
+        get lineIndex() {
+            var lineHeight = this.textLineHeight + this.textLineSpacing;
+            return Math.floor(-this.textOY / lineHeight);
+        }
+
+        scrollToNextLine(lineCount) {
+            if (lineCount === undefined) {
+                lineCount = 1;
+            }
+
+            this.scrollToLine(this.lineIndex + lineCount);
+            return this;
+        }
+    }
+
+    class TagTextBlock extends BaseTextBlock {
+        constructor(scene, x, y, minWidth, minHeight, config) {
+            super(scene, x, y, minWidth, minHeight, config);
+            this.type = 'rexTagTextBlock';
+        }
+
+        setText(text) {
+            if (text !== undefined) {
+                this.text = text;
+            }
+
+            this.textObject.setText(this.text);
+            this.linesCount = this.getLinesCount();
+
+            this._textHeight = undefined;
+            this._textVisibleHeight = undefined;
+
+            this.textOY = this._textOY;
+            return this;
+        }
+
+        updateTextObject() {
+            this.textObject.scrollY = this._textOY;
+            return this;
+        }
+
+        getLinesCount() {
+            var lines = this.getLines();
+            return lines ? lines.length : 0;
+        }
+
+        getLines() {
+            var canvasText = this.textObject.canvasText;
+            return (canvasText) ? canvasText.lines : null;
+        }
+
+        get textHeight() {
+            return this.textObject.contentHeight;
+        }
+
+        get textObjectHeight() {
+            return this.textObject.viewportHeight;
+        }
+
+        get textVisibleHeight() {
+            var h = this.textHeight - this.textObjectHeight;
+            if (!this.alwaysScrollable && (h < 0)) {
+                h = 0;
+            }
+            return h;
+        }
+
+        resizeText(textObject, width, height) {
+            if ((this.textObjectWidth === width) && (this._textObjectRealHeight === height)) {
+                return this;
+            }
+
+            this.textObjectWidth = width;
+            this._textObjectRealHeight = height;
+
+            textObject.setFixedSize(width, height);
+
+            var style = textObject.style;
+            var wrapWidth = Math.max(width, 0);
+            if (style.wrapMode === 0) { // Turn no-wrap to word-wrap
+                style.wrapMode = 1;
+            }
+            style.wrapWidth = wrapWidth;
+
+            // Render content again
+            this.setText();
+            return this;
+        }
+
+        resetTextObjectPosition() {
+            this.resetChildPositionState(this.textObject);
+        }
+
+        scrollToLine(lineIndex) {
+            var lines = this.getLines();
+            if (!lines || lines.length === 0) {
+                this.textOY = 0;
+                return this;
+            }
+
+            if (lineIndex <= 0) {
+                this.textOY = 0;
+                return this;
+            }
+
+            if (lineIndex >= lines.length) {
+                this.textOY = this.bottomTextOY;
+                return this;
+            }
+
+            this.textOY = -lines[lineIndex].startOffset;
+            return this;
+        }
+
+        get lineIndex() {
+            var lines = this.getLines();
+            if (!lines || lines.length === 0) {
+                return 0;
+            }
+
+            var targetOffset = -this.textOY;
+            return GetStartLineIndex(lines, targetOffset);
+        }
+
+        scrollToNextLine(lineCount) {
+            if (lineCount === undefined) {
+                lineCount = 1;
+            }
+
+            this.scrollToLine(this.lineIndex + lineCount);
+            return this;
+        }
+    }
+
+    var GetStartLineIndex = function (lines, targetOffset) {
+        // First line whose endOffset is greater than targetOffset
+        var left = 0;
+        var right = lines.length - 1;
+        var result = lines.length;
+        while (left <= right) {
+            var mid = (left + right) >> 1;
+            if (lines[mid].endOffset > targetOffset) {
+                result = mid;
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return result;
+    };
 
     var InjectProperties$2 = function (textBlock) {
         Object.defineProperty(textBlock, 'childOY', {
@@ -55849,19 +56381,38 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
     };
 
+    var EaseScrollChildOY = function (y0, y1, duration, ease) {
+        if ((duration === undefined) || (duration <= 0)) {
+            return;
+        }
+        if (this._easeScrollChildOY === undefined) {
+            this._easeScrollChildOY = new EaseValueTask(this);
+        }
+        this._easeScrollChildOY.restart({
+            key: 'childOY',
+            from: y0,
+            to: y1,
+            duration: duration,
+            ease: ease
+        });
+    };
+
     var ScrollMethods$2 = {
-        scrollToLine(lineIndex) {
-            this.setChildOY(-this.lineHeight * lineIndex);
+        scrollToLine(lineIndex, duration, ease) {
+            var y0 = this.childOY;
+            this.childrenMap.child.scrollToLine(lineIndex);
+            var y1 = this.childOY;
+
+            EaseScrollChildOY.call(this, y0, y1, duration, ease);
             return this;
         },
 
-        scrollToNextLine(lineCount) {
-            if (lineCount === undefined) {
-                lineCount = 1;
-            }
+        scrollToNextLine(lineCount, duration, ease) {
+            var y0 = this.childOY;
+            this.childrenMap.child.scrollToNextLine(lineCount);
+            var y1 = this.childOY;
 
-            var lineIndex = this.lineIndex + lineCount;
-            this.scrollToLine(lineIndex);
+            EaseScrollChildOY.call(this, y0, y1, duration, ease);
             return this;
         }
     };
@@ -55881,7 +56432,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             var textCrop = GetValue$1C(config, 'textCrop', !!textObject.setCrop);
             var textMask = GetValue$1C(config, 'textMask', !textCrop);
             var content = GetValue$1C(config, 'content', '');
-            var textBlock = new TextBlock(scene, {
+            var textBlockConfig = {
                 width: textWidth,
                 height: textHeight,
                 text: textObject,
@@ -55890,7 +56441,13 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 content: content,
                 clampTextOY: GetValue$1C(config, 'clampChildOY', false),
                 alwaysScrollable: GetValue$1C(config, 'alwaysScrollable', false),
-            });
+            };
+            var textBlock;
+            if (textObject && (GetTextObjectType(textObject) === TagTextType)) {
+                textBlock = new TagTextBlock(scene, textBlockConfig);
+            } else {
+                textBlock = new TextBlock(scene, textBlockConfig);
+            }
             scene.add.existing(textBlock); // Important: Add to display list for touch detecting
             // Inject properties for scrollable interface
             InjectProperties$2(textBlock);
@@ -55914,16 +56471,13 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
 
         get text() {
-            return this.childrenMap.child.text;
-        }
-
-        get lineHeight() {
             var textBlock = this.childrenMap.child;
-            return textBlock.textLineHeight + textBlock.textLineSpacing;
+            return textBlock.text;
         }
 
         get lineIndex() {
-            return Math.floor(-this.childOY / this.lineHeight);
+            var textBlock = this.childrenMap.child;
+            return textBlock.lineIndex;
         }
 
         get linesCount() {
@@ -56954,7 +57508,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return value.toString();
     };
 
-    const Clamp$5 = Phaser.Math.Clamp;
+    const Clamp$6 = Phaser.Math.Clamp;
 
     var SetValueMethods = {
         setValueTextFormatCallback(callback, scope) {
@@ -57006,7 +57560,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 this.maxValue = max;
             }
 
-            value = Clamp$5(value, min, max);
+            value = Clamp$6(value, min, max);
             this.value = value;
             this.updateValueText(value, min, max);
             this.setBarValue(value, min, max);
@@ -62852,7 +63406,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return this;
     };
 
-    const Clamp$4 = Phaser.Math.Clamp;
+    const Clamp$5 = Phaser.Math.Clamp;
 
     var InsertNewCells = function (cellIdx, count) {
         if (typeof (cellIdx) === 'object') {
@@ -62864,7 +63418,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         if (count <= 0) {
             return this;
         }
-        cellIdx = Clamp$4(cellIdx, 0, this.cellsCount);
+        cellIdx = Clamp$5(cellIdx, 0, this.cellsCount);
         this.table.insertNewCells(cellIdx, count);
         return this;
     };
@@ -65915,15 +66469,20 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     SetValue(window, 'RexPlugins.UI.SimpleDropDownList', SimpleDropDownList);
 
-    var TextHeightToLinesCount = function (textObject) {
+    var TextHeightToLineCount = function (textObject) {
         var textObjectType = GetTextObjectType(textObject);
         var height, lineSpacing, lineHeight;
         switch (textObjectType) {
             case TextType:
-            case TagTextType:
                 height = textObject.height - textObject.padding.top - textObject.padding.bottom;
                 lineSpacing = textObject.lineSpacing;
                 lineHeight = textObject.style.metrics.fontSize + textObject.style.strokeThickness;
+                break;
+
+            case TagTextType: // + fixedLineHeightMode: true
+                height = textObject.height - textObject.padding.top - textObject.padding.bottom;
+                lineSpacing = textObject.lineSpacing;
+                lineHeight = textObject.style.metrics.fontSize;
                 break;
 
             case BitmapTextType:
@@ -65935,7 +66494,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
 
         // height = (lines * (lineHeight + lineSpacing)) - lineSpacing
-        return (height - lineSpacing) / (lineHeight + lineSpacing);
+        return (height + lineSpacing) / (lineHeight + lineSpacing);
 
     };
 
@@ -65944,11 +66503,23 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             startLineIndex = this.startLineIndex;
         }
         if (endLineIdx === undefined) {
-            var pageLinesCount = this.pageLinesCount;
-            if (pageLinesCount > 0) {
-                endLineIdx = startLineIndex + pageLinesCount;
+            if (this.isVariableLineHeightMode) {
+                var pageHeight = this.pageHeight;
+                if (pageHeight <= 0) {
+                    endLineIdx = this.totalLinesCount;
+                } else {
+                    endLineIdx = this.getLineIndexByHeight(startLineIndex, pageHeight);
+                    if (endLineIdx <= startLineIndex) {
+                        endLineIdx = startLineIndex + 1;
+                    }
+                }
             } else {
-                endLineIdx = this.totalLinesCount;
+                var pageLinesCount = this.pageLinesCount;
+                if (pageLinesCount > 0) {
+                    endLineIdx = startLineIndex + pageLinesCount;
+                } else {
+                    endLineIdx = this.totalLinesCount;
+                }
             }
         }
         if (endLineIdx > this.totalLinesCount) {
@@ -65979,6 +66550,36 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return text;
     };
 
+    // Private method, for (TagTextType && !fixedLineHeightMode)
+    var AppendPageByLineHeight = function (pageStartIndex) {
+        var lines = this.lines.lines;
+        if (!lines || (lines.length <= pageStartIndex)) {
+            return this;
+        }
+
+        var pageHeight = this.pageHeight;
+        this.pageStartIndexes.push(pageStartIndex);
+        if (pageHeight <= 0) {
+            return this;
+        }
+
+        var i = pageStartIndex;
+        var len = lines.length;
+        while (i < len) {
+            var endLineIdx = this.getLineIndexByHeight(i, pageHeight);
+            if (endLineIdx <= i) {
+                endLineIdx = i + 1;
+            }
+            if (endLineIdx >= len) {
+                break;
+            }
+            this.pageStartIndexes.push(endLineIdx);
+            i = endLineIdx;
+        }
+
+        return this;
+    };
+
     var SetContentMethods = {
         clearText() {
             this.sections.length = 0;
@@ -65996,18 +66597,27 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this.lines = TextToLines(this.parent, text, this.lines);
 
             var newLinesCount = this.totalLinesCount - pageStartIndex;
-            var pageLinesCount = this.pageLinesCount;
-            var pageCount;
-            if (pageLinesCount > 0) {
-                pageCount = Math.ceil(newLinesCount / this.pageLinesCount);
-            } else {  // Height of Text object might be 0
-                pageCount = 1;
+            if (newLinesCount <= 0) {
+                return this;
             }
 
-            for (var i = 0; i < pageCount; i++) {
-                this.pageStartIndexes.push(
-                    pageStartIndex + (i * this.pageLinesCount)
-                );
+            if (this.isVariableLineHeightMode) {  // (TagTextType && !fixedLineHeightMode)
+                AppendPageByLineHeight.call(this, pageStartIndex);
+
+            } else {
+                var pageLinesCount = this.pageLinesCount;
+                var pageCount;
+                if (pageLinesCount > 0) {
+                    pageCount = Math.ceil(newLinesCount / this.pageLinesCount);
+                } else {  // Height of Text object might be 0
+                    pageCount = 1;
+                }
+
+                for (var i = 0; i < pageCount; i++) {
+                    this.pageStartIndexes.push(
+                        pageStartIndex + (i * this.pageLinesCount)
+                    );
+                }
             }
 
             return this;
@@ -66045,7 +66655,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     };
 
-    const Clamp$3 = Phaser.Math.Clamp;
+    const Clamp$4 = Phaser.Math.Clamp;
 
     var GetPageMethods = {
 
@@ -66057,7 +66667,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         },
 
         setPageIndex(idx) {
-            idx = Clamp$3(idx, 0, this.lastPageIndex);
+            idx = Clamp$4(idx, 0, this.lastPageIndex);
             this.pageIndex = idx;
             this.startLineIndex = this.pageStartIndexes[idx];
             this.endLineIndex = this.pageStartIndexes[idx + 1];
@@ -66089,11 +66699,30 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         },
 
         setStartLineIndex(idx) {
-            var lastStartLineIndex = Math.max(this.totalLinesCount - this.pageLinesCount, 0);
-            idx = Clamp$3(idx, 0, lastStartLineIndex);
+            if (this.isVariableLineHeightMode) {
+                var pageHeight = this.pageHeight;
+                if (pageHeight <= 0) {
+                    this.startLineIndex = 0;
+                    this.endLineIndex = this.totalLinesCount;
+                    return this;
+                }
+                var lastStartLineIndex = this.getLastStartLineIndexByHeight(pageHeight);
+                idx = Clamp$4(idx, 0, lastStartLineIndex);
+                this.startLineIndex = idx;
+                var endLineIndex = this.getLineIndexByHeight(this.startLineIndex, pageHeight);
+                if (endLineIndex <= idx) {
+                    endLineIndex = idx + 1;
+                }
+                this.endLineIndex = endLineIndex;
 
-            this.startLineIndex = idx;
-            this.endLineIndex = idx + this.pageLinesCount;
+            } else {
+                var lastStartLineIndex = Math.max(this.totalLinesCount - this.pageLinesCount, 0);
+                idx = Clamp$4(idx, 0, lastStartLineIndex);
+
+                this.startLineIndex = idx;
+                this.endLineIndex = idx + this.pageLinesCount;
+            }
+
             return this;
         },
 
@@ -66319,6 +66948,11 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             return (this.pageIndex >= (this.pageCount - 1));
         }
 
+        get pageHeight() {
+            var padding = this.parent.padding;
+            return this.parent.height - padding.top - padding.bottom;
+        }
+
         get totalLinesCount() {
             return (this.lines) ? this.lines.length : 0;
         }
@@ -66330,6 +66964,9 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             if (this.maxLines !== undefined) {
                 return this.maxLines;
 
+            } else if (this.isVariableLineHeightMode) {
+                throw new Error('pageLinesCount is not supported when isVariableLineHeightMode is enabled');
+
             } else {
                 var count;
                 switch (this.textObjectType) {
@@ -66339,7 +66976,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                         if (maxLines > 0) {
                             count = maxLines;
                         } else {
-                            count = Math.floor(TextHeightToLinesCount(this.parent));
+                            count = Math.floor(TextHeightToLineCount(this.parent));
                         }
                         break;
                     case BitmapTextType:
@@ -66349,6 +66986,118 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 return count;
 
             }
+        }
+
+        get isVariableLineHeightMode() {
+            return (this.textObjectType === TagTextType) &&
+                (!this.parent.style.fixedLineHeightMode) &&
+                (this.maxLines === undefined) &&
+                (this.parent.style.maxLines <= 0);
+        }
+
+        getPageIndexByLineIndex(lineIndex) {
+            var pageCount = this.pageStartIndexes.length;
+            if (pageCount === 0) {
+                return 0;
+            }
+            if (lineIndex == null || lineIndex <= this.pageStartIndexes[0]) {
+                return 0;
+            }
+            for (var i = pageCount - 1; i >= 0; i--) {
+                if (lineIndex >= this.pageStartIndexes[i]) {
+                    return i;
+                }
+            }
+            return 0;
+        }
+
+        getLineIndexByHeight(lineIndex, pageHeight) {
+            var lines = this.lines.lines;
+            if (!lines || lines.length === 0) {
+                return 0;
+            }
+            if (lineIndex < 0) {
+                lineIndex = 0;
+            } else if (lineIndex >= lines.length) {
+                return lines.length;
+            }
+            var base = lines[lineIndex].startOffset;
+            var target = base + pageHeight;
+            var left = lineIndex;
+            var right = lines.length - 1;
+            var result = lines.length;
+            while (left <= right) {
+                var mid = (left + right) >> 1;
+                if (lines[mid].endOffset > target) {
+                    result = mid;
+                    right = mid - 1;
+                } else {
+                    left = mid + 1;
+                }
+            }
+            return result;
+        }
+
+        getLastStartLineIndexByHeight(pageHeight) {
+            if (pageHeight <= 0) {
+                return 0;
+            }
+            var lines = this.lines.lines;
+            if (!lines || lines.length === 0) {
+                return 0;
+            }
+            var lastLine = lines[lines.length - 1];
+            var targetStartOffset = lastLine.endOffset - pageHeight;
+            if (targetStartOffset <= 0) {
+                return 0;
+            }
+            return this.getLineIndexByStartOffsetCeil(targetStartOffset);
+        }
+
+        getLineIndexByStartOffset(targetOffset) {
+            var lines = this.lines.lines;
+            if (!lines || lines.length === 0) {
+                return 0;
+            }
+            if (targetOffset <= lines[0].startOffset) {
+                return 0;
+            }
+            var left = 0;
+            var right = lines.length - 1;
+            var result = 0;
+            while (left <= right) {
+                var mid = (left + right) >> 1;
+                if (lines[mid].startOffset <= targetOffset) {
+                    result = mid;
+                    left = mid + 1;
+                } else {
+                    right = mid - 1;
+                }
+            }
+            return result;
+        }
+
+        getLineIndexByStartOffsetCeil(targetOffset) {
+            var lines = this.lines.lines;
+            if (!lines || lines.length === 0) {
+                return 0;
+            }
+            if (targetOffset <= lines[0].startOffset) {
+                return 0;
+            }
+            var left = 0;
+            var right = lines.length - 1;
+            var result = lines.length - 1;
+            while (left <= right) {
+                var mid = (left + right) >> 1;
+                if (lines[mid].startOffset >= targetOffset) {
+                    result = mid;
+                    right = mid - 1;
+                } else {
+                    left = mid + 1;
+                }
+            }
+            return result;
         }
 
         get isFirstLine() {
@@ -72761,7 +73510,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     const GetValue$D = Phaser.Utils.Objects.GetValue;
     const IsPlainObject$5 = Phaser.Utils.Objects.IsPlainObject;
-    const Clamp$2 = Phaser.Math.Clamp;
+    const Clamp$3 = Phaser.Math.Clamp;
 
     let ColorInput$1 = class ColorInput extends Sizer {
         constructor(scene, config) {
@@ -72853,7 +73602,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                     return;
                 }
             } else {
-                value = Clamp$2(Math.floor(value), 0, 0xffffff);
+                value = Clamp$3(Math.floor(value), 0, 0xffffff);
             }
 
             if (this._value === value) {
@@ -73605,7 +74354,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
     const Color = Phaser.Display.Color;
     const ColorToRGBA = Phaser.Display.Color.ColorToRGBA;
     const HSVToRGB = Phaser.Display.Color.HSVToRGB;
-    const Clamp$1 = Phaser.Math.Clamp;
+    const Clamp$2 = Phaser.Math.Clamp;
 
     class ColorComponents extends Sizer {
         constructor(scene, config) {
@@ -73692,7 +74441,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
 
         set value(value) {
-            value = Clamp$1(Math.floor(value), 0, 0xffffff);
+            value = Clamp$2(Math.floor(value), 0, 0xffffff);
 
             if (this._value === value) {
                 return;
@@ -73768,14 +74517,14 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         updateColorObject() {
             var components = this.childrenMap.components;
             if (this.colorFormat === 'RGB') {
-                var red = Clamp$1(components[0].value, 0, 255);
-                var green = Clamp$1(components[1].value, 0, 255);
-                var blue = Clamp$1(components[2].value, 0, 255);
+                var red = Clamp$2(components[0].value, 0, 255);
+                var green = Clamp$2(components[1].value, 0, 255);
+                var blue = Clamp$2(components[2].value, 0, 255);
                 this.colorObject.setTo(red, green, blue);
             } else {
-                var h = Clamp$1(components[0].value, 0, 359) / 360;
-                var s = Clamp$1(components[1].value, 0, 100) / 100;
-                var v = Clamp$1(components[2].value, 0, 100) / 100;
+                var h = Clamp$2(components[0].value, 0, 359) / 360;
+                var s = Clamp$2(components[1].value, 0, 100) / 100;
+                var v = Clamp$2(components[2].value, 0, 100) / 100;
                 this.colorObject.setFromRGB(HSVToRGB(h, s, v));
             }
             return this;
@@ -74389,7 +75138,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
     };
 
     const GetValue$x = Phaser.Utils.Objects.GetValue;
-    const Clamp = Phaser.Math.Clamp;
+    const Clamp$1 = Phaser.Math.Clamp;
 
 
     class SplitPanels extends Sizer {
@@ -74575,7 +75324,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
 
         set splitRatio(value) {
-            value = Clamp(value, 0, 1);
+            value = Clamp$1(value, 0, 1);
             if (this._splitRatio === value) {
                 return;
             }
