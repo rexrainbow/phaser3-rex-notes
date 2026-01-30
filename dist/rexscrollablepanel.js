@@ -23337,10 +23337,13 @@ void main (void) {
             }
 
             var isNumberSliderPadding;
+            var isNumberChildPadding;
             if (childPadding === undefined) {
                 isNumberSliderPadding = (typeof (sliderPadding) === 'number');
+                isNumberChildPadding = false;
             } else {
                 isNumberSliderPadding = (typeof (childPadding) === 'number');
+                isNumberChildPadding = isNumberSliderPadding;
             }
 
             if (isAxisY) {
@@ -23351,7 +23354,11 @@ void main (void) {
                     if (childPadding === undefined) {
                         padding = (isNumberSliderPadding) ? { left: sliderPadding } : sliderPadding;
                     } else {
-                        padding = { left: GetValue$5(childPadding, 'right', childPadding) };
+                        if (isNumberChildPadding) {
+                            padding = { left: childPadding };
+                        } else {
+                            padding = { left: GetValue$5(childPadding, 'right', 0) };
+                        }
                     }
 
                 } else { // left
@@ -23361,7 +23368,11 @@ void main (void) {
                     if (childPadding === undefined) {
                         padding = (isNumberSliderPadding) ? { right: sliderPadding } : sliderPadding;
                     } else {
-                        padding = { right: GetValue$5(childPadding, 'left', childPadding) };
+                        if (isNumberChildPadding) {
+                            padding = { right: childPadding };
+                        } else {
+                            padding = { right: GetValue$5(childPadding, 'left', 0) };
+                        }
                     }
                 }
 
@@ -23373,7 +23384,11 @@ void main (void) {
                     if (childPadding === undefined) {
                         padding = (isNumberSliderPadding) ? { top: sliderPadding } : sliderPadding;
                     } else {
-                        padding = { top: GetValue$5(childPadding, 'bottom', childPadding) };
+                        if (isNumberChildPadding) {
+                            padding = { top: childPadding };
+                        } else {
+                            padding = { top: GetValue$5(childPadding, 'bottom', 0) };
+                        }
                     }
 
                 } else { // top
@@ -23383,7 +23398,11 @@ void main (void) {
                     if (childPadding === undefined) {
                         padding = (isNumberSliderPadding) ? { bottom: sliderPadding } : sliderPadding;
                     } else {
-                        padding = { bottom: GetValue$5(childPadding, 'top', childPadding) };
+                        if (isNumberChildPadding) {
+                            padding = { bottom: childPadding };
+                        } else {
+                            padding = { bottom: GetValue$5(childPadding, 'top', 0) };
+                        }
                     }
                 }
             }

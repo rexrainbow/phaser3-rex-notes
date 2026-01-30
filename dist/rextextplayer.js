@@ -16033,6 +16033,11 @@ void main (void) {
             return (data) ? (data.width + data.left + data.right) : 0;
         }
 
+        getOuterHeight(key) {
+            var data = this.get(key);
+            return (data) ? data.height : 0;
+        }
+
         getFrame(key) {
             var data = this.get(key);
             return (data) ? this.textureManager.getFrame(data.key, data.frame) : undefined;
