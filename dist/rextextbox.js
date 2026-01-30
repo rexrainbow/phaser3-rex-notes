@@ -270,15 +270,20 @@
         return lines;
     };
 
-    var TextHeightToLinesCount = function (textObject) {
+    var TextHeightToLineCount = function (textObject) {
         var textObjectType = GetTextObjectType(textObject);
         var height, lineSpacing, lineHeight;
         switch (textObjectType) {
             case TextType:
-            case TagTextType:
                 height = textObject.height - textObject.padding.top - textObject.padding.bottom;
                 lineSpacing = textObject.lineSpacing;
                 lineHeight = textObject.style.metrics.fontSize + textObject.style.strokeThickness;
+                break;
+
+            case TagTextType: // + fixedLineHeightMode: true
+                height = textObject.height - textObject.padding.top - textObject.padding.bottom;
+                lineSpacing = textObject.lineSpacing;
+                lineHeight = textObject.style.metrics.fontSize;
                 break;
 
             case BitmapTextType:
@@ -290,7 +295,7 @@
         }
 
         // height = (lines * (lineHeight + lineSpacing)) - lineSpacing
-        return (height - lineSpacing) / (lineHeight + lineSpacing);
+        return (height + lineSpacing) / (lineHeight + lineSpacing);
 
     };
 
@@ -299,11 +304,23 @@
             startLineIndex = this.startLineIndex;
         }
         if (endLineIdx === undefined) {
-            var pageLinesCount = this.pageLinesCount;
-            if (pageLinesCount > 0) {
-                endLineIdx = startLineIndex + pageLinesCount;
+            if (this.isVariableLineHeightMode) {
+                var pageHeight = this.pageHeight;
+                if (pageHeight <= 0) {
+                    endLineIdx = this.totalLinesCount;
+                } else {
+                    endLineIdx = this.getLineIndexByHeight(startLineIndex, pageHeight);
+                    if (endLineIdx <= startLineIndex) {
+                        endLineIdx = startLineIndex + 1;
+                    }
+                }
             } else {
-                endLineIdx = this.totalLinesCount;
+                var pageLinesCount = this.pageLinesCount;
+                if (pageLinesCount > 0) {
+                    endLineIdx = startLineIndex + pageLinesCount;
+                } else {
+                    endLineIdx = this.totalLinesCount;
+                }
             }
         }
         if (endLineIdx > this.totalLinesCount) {
@@ -345,6 +362,36 @@
         return value;
     };
 
+    // Private method, for (TagTextType && !fixedLineHeightMode)
+    var AppendPageByLineHeight = function (pageStartIndex) {
+        var lines = this.lines.lines;
+        if (!lines || (lines.length <= pageStartIndex)) {
+            return this;
+        }
+
+        var pageHeight = this.pageHeight;
+        this.pageStartIndexes.push(pageStartIndex);
+        if (pageHeight <= 0) {
+            return this;
+        }
+
+        var i = pageStartIndex;
+        var len = lines.length;
+        while (i < len) {
+            var endLineIdx = this.getLineIndexByHeight(i, pageHeight);
+            if (endLineIdx <= i) {
+                endLineIdx = i + 1;
+            }
+            if (endLineIdx >= len) {
+                break;
+            }
+            this.pageStartIndexes.push(endLineIdx);
+            i = endLineIdx;
+        }
+
+        return this;
+    };
+
     var SetContentMethods = {
         clearText() {
             this.sections.length = 0;
@@ -362,18 +409,27 @@
             this.lines = TextToLines(this.parent, text, this.lines);
 
             var newLinesCount = this.totalLinesCount - pageStartIndex;
-            var pageLinesCount = this.pageLinesCount;
-            var pageCount;
-            if (pageLinesCount > 0) {
-                pageCount = Math.ceil(newLinesCount / this.pageLinesCount);
-            } else {  // Height of Text object might be 0
-                pageCount = 1;
+            if (newLinesCount <= 0) {
+                return this;
             }
 
-            for (var i = 0; i < pageCount; i++) {
-                this.pageStartIndexes.push(
-                    pageStartIndex + (i * this.pageLinesCount)
-                );
+            if (this.isVariableLineHeightMode) {  // (TagTextType && !fixedLineHeightMode)
+                AppendPageByLineHeight.call(this, pageStartIndex);
+
+            } else {
+                var pageLinesCount = this.pageLinesCount;
+                var pageCount;
+                if (pageLinesCount > 0) {
+                    pageCount = Math.ceil(newLinesCount / this.pageLinesCount);
+                } else {  // Height of Text object might be 0
+                    pageCount = 1;
+                }
+
+                for (var i = 0; i < pageCount; i++) {
+                    this.pageStartIndexes.push(
+                        pageStartIndex + (i * this.pageLinesCount)
+                    );
+                }
             }
 
             return this;
@@ -455,11 +511,30 @@
         },
 
         setStartLineIndex(idx) {
-            var lastStartLineIndex = Math.max(this.totalLinesCount - this.pageLinesCount, 0);
-            idx = Clamp$1(idx, 0, lastStartLineIndex);
+            if (this.isVariableLineHeightMode) {
+                var pageHeight = this.pageHeight;
+                if (pageHeight <= 0) {
+                    this.startLineIndex = 0;
+                    this.endLineIndex = this.totalLinesCount;
+                    return this;
+                }
+                var lastStartLineIndex = this.getLastStartLineIndexByHeight(pageHeight);
+                idx = Clamp$1(idx, 0, lastStartLineIndex);
+                this.startLineIndex = idx;
+                var endLineIndex = this.getLineIndexByHeight(this.startLineIndex, pageHeight);
+                if (endLineIndex <= idx) {
+                    endLineIndex = idx + 1;
+                }
+                this.endLineIndex = endLineIndex;
 
-            this.startLineIndex = idx;
-            this.endLineIndex = idx + this.pageLinesCount;
+            } else {
+                var lastStartLineIndex = Math.max(this.totalLinesCount - this.pageLinesCount, 0);
+                idx = Clamp$1(idx, 0, lastStartLineIndex);
+
+                this.startLineIndex = idx;
+                this.endLineIndex = idx + this.pageLinesCount;
+            }
+
             return this;
         },
 
@@ -728,6 +803,11 @@
             return (this.pageIndex >= (this.pageCount - 1));
         }
 
+        get pageHeight() {
+            var padding = this.parent.padding;
+            return this.parent.height - padding.top - padding.bottom;
+        }
+
         get totalLinesCount() {
             return (this.lines) ? this.lines.length : 0;
         }
@@ -739,6 +819,9 @@
             if (this.maxLines !== undefined) {
                 return this.maxLines;
 
+            } else if (this.isVariableLineHeightMode) {
+                throw new Error('pageLinesCount is not supported when isVariableLineHeightMode is enabled');
+
             } else {
                 var count;
                 switch (this.textObjectType) {
@@ -748,7 +831,7 @@
                         if (maxLines > 0) {
                             count = maxLines;
                         } else {
-                            count = Math.floor(TextHeightToLinesCount(this.parent));
+                            count = Math.floor(TextHeightToLineCount(this.parent));
                         }
                         break;
                     case BitmapTextType:
@@ -758,6 +841,118 @@
                 return count;
 
             }
+        }
+
+        get isVariableLineHeightMode() {
+            return (this.textObjectType === TagTextType) &&
+                (!this.parent.style.fixedLineHeightMode) &&
+                (this.maxLines === undefined) &&
+                (this.parent.style.maxLines <= 0);
+        }
+
+        getPageIndexByLineIndex(lineIndex) {
+            var pageCount = this.pageStartIndexes.length;
+            if (pageCount === 0) {
+                return 0;
+            }
+            if (lineIndex == null || lineIndex <= this.pageStartIndexes[0]) {
+                return 0;
+            }
+            for (var i = pageCount - 1; i >= 0; i--) {
+                if (lineIndex >= this.pageStartIndexes[i]) {
+                    return i;
+                }
+            }
+            return 0;
+        }
+
+        getLineIndexByHeight(lineIndex, pageHeight) {
+            var lines = this.lines.lines;
+            if (!lines || lines.length === 0) {
+                return 0;
+            }
+            if (lineIndex < 0) {
+                lineIndex = 0;
+            } else if (lineIndex >= lines.length) {
+                return lines.length;
+            }
+            var base = lines[lineIndex].startOffset;
+            var target = base + pageHeight;
+            var left = lineIndex;
+            var right = lines.length - 1;
+            var result = lines.length;
+            while (left <= right) {
+                var mid = (left + right) >> 1;
+                if (lines[mid].endOffset > target) {
+                    result = mid;
+                    right = mid - 1;
+                } else {
+                    left = mid + 1;
+                }
+            }
+            return result;
+        }
+
+        getLastStartLineIndexByHeight(pageHeight) {
+            if (pageHeight <= 0) {
+                return 0;
+            }
+            var lines = this.lines.lines;
+            if (!lines || lines.length === 0) {
+                return 0;
+            }
+            var lastLine = lines[lines.length - 1];
+            var targetStartOffset = lastLine.endOffset - pageHeight;
+            if (targetStartOffset <= 0) {
+                return 0;
+            }
+            return this.getLineIndexByStartOffsetCeil(targetStartOffset);
+        }
+
+        getLineIndexByStartOffset(targetOffset) {
+            var lines = this.lines.lines;
+            if (!lines || lines.length === 0) {
+                return 0;
+            }
+            if (targetOffset <= lines[0].startOffset) {
+                return 0;
+            }
+            var left = 0;
+            var right = lines.length - 1;
+            var result = 0;
+            while (left <= right) {
+                var mid = (left + right) >> 1;
+                if (lines[mid].startOffset <= targetOffset) {
+                    result = mid;
+                    left = mid + 1;
+                } else {
+                    right = mid - 1;
+                }
+            }
+            return result;
+        }
+
+        getLineIndexByStartOffsetCeil(targetOffset) {
+            var lines = this.lines.lines;
+            if (!lines || lines.length === 0) {
+                return 0;
+            }
+            if (targetOffset <= lines[0].startOffset) {
+                return 0;
+            }
+            var left = 0;
+            var right = lines.length - 1;
+            var result = lines.length - 1;
+            while (left <= right) {
+                var mid = (left + right) >> 1;
+                if (lines[mid].startOffset >= targetOffset) {
+                    result = mid;
+                    right = mid - 1;
+                } else {
+                    left = mid + 1;
+                }
+            }
+            return result;
         }
 
         get isFirstLine() {

@@ -441,6 +441,7 @@
         lineSpacing: ['lineSpacing', 0, null],
         letterSpacing: ['letterSpacing', 0, null],
         xOffset: ['xOffset', 0, null],
+        fixedLineHeightMode: ['fixedLineHeightMode', true, null],
 
         rtl: ['rtl', false, null],
         testString: ['testString', '|MÃ‰qgy', null],
@@ -1627,6 +1628,40 @@
         );
     };
 
+    var GetStartLineIndex = function (lines, targetOffset) {
+        // First line whose endOffset is greater than targetOffset
+        var left = 0;
+        var right = lines.length - 1;
+        var result = lines.length;
+        while (left <= right) {
+            var mid = (left + right) >> 1;
+            if (lines[mid].endOffset > targetOffset) {
+                result = mid;
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return result;
+    };
+
+    var GetEndLineIndex = function (lines, targetOffset) {
+        // First line whose startOffset is greater than or equal to targetOffset
+        var left = 0;
+        var right = lines.length - 1;
+        var result = lines.length;
+        while (left <= right) {
+            var mid = (left + right) >> 1;
+            if (lines[mid].startOffset >= targetOffset) {
+                result = mid;
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return result;
+    };
+
     var DrawMethods = {
         draw(startX, startY, textWidth, textHeight) {
             var penManager = this.penManager;
@@ -1649,18 +1684,49 @@
                 defaultStyle.backgroundCornerIteration
             );
 
+            var parent = this.parent;
+            var padding = parent.padding;
+            var viewportWidth = parent.width - padding.left - padding.right;
+            var viewportHeight = parent.height - padding.top - padding.bottom;
+            var contentHeight = this.linesHeight;
+            var hasViewport = (viewportWidth > 0) && (viewportHeight > 0);
+            var hasFixedHeight = (parent.style.fixedHeight > 0);
+            var hasOverflow = (contentHeight > viewportHeight);
+            var maxLines = defaultStyle.maxLines;
+            var useVisibleRange = (maxLines <= 0) && (defaultStyle.valign === 'top') && hasViewport && hasFixedHeight && hasOverflow;
+            var clipText = useVisibleRange;
+            if (clipText) {
+                context.save();
+                context.beginPath();
+                context.rect(padding.left, padding.top, viewportWidth, viewportHeight);
+                context.clip();
+            }
+
             // draw lines
             startX += this.startXOffset;
             startY += this.startYOffset;
             var defaultHalign = defaultStyle.halign,
                 valign = defaultStyle.valign;
 
-            var lineWidth, lineHeight = defaultStyle.lineHeight;
+            var lineWidth;
             var lines = penManager.lines;
-            var totalLinesNum = lines.length,
-                maxLines = defaultStyle.maxLines;
+            var totalLinesNum = lines.length;
             var drawLinesNum, drawLineStartIdx, drawLineEndIdx;
-            if ((maxLines > 0) && (totalLinesNum > maxLines)) {
+            if (useVisibleRange && (totalLinesNum > 0)) {
+                var visibleStart = -parent.scrollY;
+                var visibleEnd = visibleStart + viewportHeight;
+                drawLineStartIdx = GetStartLineIndex(lines, visibleStart);
+                drawLineEndIdx = GetEndLineIndex(lines, visibleEnd);
+                if (drawLineStartIdx < 0) {
+                    drawLineStartIdx = 0;
+                }
+                if (drawLineEndIdx > totalLinesNum) {
+                    drawLineEndIdx = totalLinesNum;
+                }
+                if (drawLineEndIdx < drawLineStartIdx) {
+                    drawLineEndIdx = drawLineStartIdx;
+                }
+            } else if ((maxLines > 0) && (totalLinesNum > maxLines)) {
                 drawLinesNum = maxLines;
                 if (valign === 'center') { // center
                     drawLineStartIdx = Math.floor((totalLinesNum - drawLinesNum) / 2);
@@ -1669,30 +1735,39 @@
                 } else {
                     drawLineStartIdx = 0;
                 }
+                drawLineEndIdx = drawLineStartIdx + drawLinesNum;
             } else {
-                drawLinesNum = totalLinesNum;
                 drawLineStartIdx = 0;
+                drawLineEndIdx = totalLinesNum;
             }
-            drawLineEndIdx = drawLineStartIdx + drawLinesNum;
 
             var offsetX, offsetY;
             var rtl = this.rtl,
                 rtlOffset = (rtl) ? this.parent.width : undefined;
-            if (valign === 'center') { // center
-                offsetY = Math.max((textHeight - (drawLinesNum * lineHeight)) / 2, 0);
-            } else if (valign === 'bottom') { // bottom
-                offsetY = Math.max(textHeight - (drawLinesNum * lineHeight) - 2, 0);
+            if (useVisibleRange) {
+                offsetY = startY;
             } else {
-                offsetY = 0;
+                var totalLinesHeight = this.getLinesHeight(drawLineStartIdx, drawLineEndIdx);
+                if (valign === 'center') { // center
+                    offsetY = Math.max((textHeight - totalLinesHeight) / 2, 0);
+                } else if (valign === 'bottom') { // bottom
+                    offsetY = Math.max(textHeight - totalLinesHeight - 2, 0);
+                } else {
+                    offsetY = 0;
+                }
+                offsetY += startY;
             }
-            offsetY += startY;
             for (var lineIdx = drawLineStartIdx; lineIdx < drawLineEndIdx; lineIdx++) {
                 lineWidth = penManager.getLineWidth(lineIdx);
                 if (lineWidth === 0) {
                     continue;
                 }
 
-                var pens = lines[lineIdx],
+                var line = lines[lineIdx];
+                if (!line) {
+                    continue;
+                }
+                var pens = line.pens,
                     penCount = pens.length;
                 var halign = defaultHalign;
                 // Seek if there has algin tag
@@ -1713,15 +1788,19 @@
                 }
                 offsetX += startX;
 
+                var hitAreaHeight = this.getLineHeight(line) + defaultStyle.lineSpacing;
                 for (var penIdx = 0; penIdx < penCount; penIdx++) {
-                    this.drawPen(pens[penIdx], offsetX, offsetY, rtlOffset);
+                    this.drawPen(pens[penIdx], offsetX, offsetY, rtlOffset, hitAreaHeight);
                 }
             }
 
+            if (clipText) {
+                context.restore();
+            }
             context.restore();
         },
 
-        drawPen(pen, offsetX, offsetY, rtlOffset) {
+        drawPen(pen, offsetX, offsetY, rtlOffset, lineHeight) {
             offsetX += pen.x;
             offsetY += pen.y + (pen.prop.y || 0);
 
@@ -1789,7 +1868,7 @@
                     offsetX,                       // x
                     (offsetY - this.startYOffset), // y
                     pen.width,                     // width
-                    this.defaultStyle.lineHeight,  // height
+                    (lineHeight || this.defaultStyle.lineHeight),  // height
                     data
                 );
             }
@@ -1887,11 +1966,18 @@
             this.resetFromJSON(config);
         }
 
-        resetFromJSON(o) { // (txt, x, y, width, prop, newLineMode, startIndex)
+        resetFromJSON(o) { // (txt, x, y, width, height, ascent, descent, prop, newLineMode, startIndex)
             this.text = GetValue$4(o, 'text', '');
             this.x = GetValue$4(o, 'x', 0);
             this.y = GetValue$4(o, 'y', 0);
             this.width = GetValue$4(o, 'width', 0);
+            this.ascent = GetValue$4(o, 'ascent', 0);
+            this.descent = GetValue$4(o, 'descent', 0);
+            var height = GetValue$4(o, 'height', null);
+            if (height == null) {
+                height = this.ascent + this.descent;
+            }
+            this.height = height;
 
             var prop = GetValue$4(o, 'prop', null);
             if (prop === null) {
@@ -1946,6 +2032,46 @@
 
         get hasAreaMarker() {
             return !!this.prop.area || !!this.prop.url;
+        }
+    }
+
+    class Line {
+        constructor(pens) {
+            this.pens = pens || [];
+            this.maxAscent = 0;
+            this.maxDescent = 0;
+            this.lineHeight = 0;
+            this.startOffset = 0;
+            this.endOffset = 0;
+        }
+
+        reset() {
+            this.pens.length = 0;
+            this.maxAscent = 0;
+            this.maxDescent = 0;
+            this.lineHeight = 0;
+            this.startOffset = 0;
+            this.endOffset = 0;
+            return this;
+        }
+
+        addPen(pen) {
+            this.pens.push(pen);
+            if (pen.ascent > this.maxAscent) {
+                this.maxAscent = pen.ascent;
+            }
+            if (pen.descent > this.maxDescent) {
+                this.maxDescent = pen.descent;
+            }
+            return this;
+        }
+
+        get length() {
+            return this.pens.length;
+        }
+
+        get lastPen() {
+            return this.pens[this.pens.length - 1];
         }
     }
 
@@ -2005,7 +2131,7 @@
     class PenManager {
         constructor(config) {
             this.pens = []; // all pens
-            this.lines = []; // pens in lines [ [],[],[],.. ]
+            this.lines = []; // pens in lines [Line, Line, ...]
             this.maxLinesWidth = undefined;
 
             this.pensPool = config.pensPool;    // Required
@@ -2022,7 +2148,12 @@
 
         clear() {
             for (var i = 0, len = this.lines.length; i < len; i++) {
-                this.lines[i].length = 0;
+                var line = this.lines[i];
+                if (line && line.reset) {
+                    line.reset();
+                } else if (line) {
+                    line.length = 0;
+                }
             }
 
             this.pensPool.pushMultiple(this.pens);
@@ -2030,7 +2161,7 @@
             this.maxLinesWidth = undefined;
         }
 
-        addTextPen(text, x, y, width, prop, newLineMode) {
+        addTextPen(text, x, y, width, prop, newLineMode, metrics) {
             var pen = this.pensPool.pop();
             if (pen == null) {
                 pen = new Pen();
@@ -2039,6 +2170,18 @@
             PEN_CONFIG.x = x;
             PEN_CONFIG.y = y;
             PEN_CONFIG.width = width;
+            if (metrics) {
+                var ascent = (metrics.ascent != null) ? metrics.ascent : 0;
+                var descent = (metrics.descent != null) ? metrics.descent : 0;
+                var height = (metrics.height != null) ? metrics.height : (ascent + descent);
+                PEN_CONFIG.ascent = ascent;
+                PEN_CONFIG.descent = descent;
+                PEN_CONFIG.height = height;
+            } else {
+                PEN_CONFIG.ascent = 0;
+                PEN_CONFIG.descent = 0;
+                PEN_CONFIG.height = 0;
+            }
             PEN_CONFIG.prop = prop;
             PEN_CONFIG.newLineMode = newLineMode;
             pen.resetFromJSON(PEN_CONFIG);
@@ -2046,8 +2189,8 @@
             return this;
         }
 
-        addImagePen(x, y, width, prop) {
-            this.addTextPen('', x, y, width, prop, NO_NEWLINE$2);
+        addImagePen(x, y, width, prop, metrics) {
+            this.addTextPen('', x, y, width, prop, NO_NEWLINE$2, metrics);
             return this;
         }
 
@@ -2072,14 +2215,21 @@
             // maintan lines
             var line = this.lastLine;
             if (line == null) {
-                line = this.linesPool.pop() || [];
+                line = this.newLine();
                 this.lines.push(line);
+            } else if (!line.pens) {
+                line = this.convertLine(line);
+                this.lines[this.lines.length - 1] = line;
             }
-            line.push(pen);
+            if (line.addPen) {
+                line.addPen(pen);
+            } else {
+                line.push(pen);
+            }
 
             // new line, add an empty line
             if (pen.newLineMode !== NO_NEWLINE$2) {
-                line = this.linesPool.pop() || [];
+                line = this.newLine();
                 this.lines.push(line);
             }
             this.maxLinesWidth = undefined;
@@ -2092,7 +2242,8 @@
             targetPenManager.clear();
 
             for (var li = 0, llen = this.lines.length; li < llen; li++) {
-                var pens = this.lines[li];
+                var line = this.lines[li];
+                var pens = (line && line.pens) ? line.pens : line;
                 for (var pi = 0, plen = pens.length; pi < plen; pi++) {
                     var pen = pens[pi];
                     targetPenManager.addPen(
@@ -2122,7 +2273,8 @@
                 return this.getLineEndIndex(i);
             } else {
                 var line = this.lines[i];
-                return (line && line[0]) ? line[0].startIndex : 0;
+                var pens = (line && line.pens) ? line.pens : line;
+                return (pens && pens[0]) ? pens[0].startIndex : 0;
             }
         }
 
@@ -2134,7 +2286,8 @@
                 line;
             for (li = i; li >= 0; li--) {
                 line = this.lines[li];
-                hasLastPen = (line != null) && (line.length > 0);
+                var pens = (line && line.pens) ? line.pens : line;
+                hasLastPen = (pens != null) && (pens.length > 0);
                 if (hasLastPen) {
                     break;
                 }
@@ -2143,7 +2296,8 @@
                 return 0;
             }
 
-            var lastPen = line[line.length - 1];
+            var pens = (line && line.pens) ? line.pens : line;
+            var lastPen = pens[pens.length - 1];
             return lastPen.endIndex;
         }
 
@@ -2153,7 +2307,8 @@
                 return 0;
             }
 
-            var lastPen = line[line.length - 1];
+            var pens = (line && line.pens) ? line.pens : line;
+            var lastPen = pens[pens.length - 1];
             if (lastPen == null) {
                 return 0;
             }
@@ -2187,6 +2342,23 @@
 
         get linesCount() {
             return this.lines.length;
+        }
+
+        newLine() {
+            return this.convertLine(this.linesPool.pop());
+        }
+
+        convertLine(line) {
+            if (!line) {
+                return new Line();
+            }
+            if (line.pens) {
+                return line.reset();
+            }
+            if (Array.isArray(line)) {
+                return new Line(line).reset();
+            }
+            return new Line();
         }
 
         get plainText() {
@@ -2845,17 +3017,15 @@
                 plainText = result.plainText;
                 curProp = result.prop;
 
-                if (curProp.img) { // Image tag                
-                    var imgWidth = this.imageManager.getOuterWidth(curProp.img);
-                    if ((wrapWidth > 0) && (wrapMode !== NO_WRAP)) {  // Wrap mode
-                        if (wrapWidth < (cursorX + imgWidth)) {
-                            penManager.addNewLinePen();
-                            cursorY += lineHeight;
-                            cursorX = 0;
-                        }
-                    }
-                    penManager.addImagePen(cursorX, cursorY, imgWidth, Clone(curProp));
-                    cursorX += imgWidth;
+                if (curProp.img) { // Image tag
+                    var cursor = this.addImagePen(
+                        curProp,
+                        cursorX, cursorY,
+                        wrapWidth, wrapMode, lineHeight,
+                        penManager
+                    );
+                    cursorX = cursor.x;
+                    cursorY = cursor.y;
 
                 } else if (plainText !== '') {
                     // wrap text to lines
@@ -2865,6 +3035,8 @@
                     curStyle.buildFont();
                     curStyle.syncFont(canvas, context);
                     curStyle.syncStyle(canvas, context);
+
+                    var metrics = MeasureText(curStyle);
 
                     if (isBuiltInWrappingMode) {
                         wrapLines = WrapText(
@@ -2913,7 +3085,8 @@
                             cursorX, cursorY,
                             segment.width,
                             Clone(curProp),
-                            segment.newLineMode
+                            segment.newLineMode,
+                            metrics
                         );
 
                         if (segment.newLineMode !== NO_NEWLINE) {
@@ -2939,10 +3112,12 @@
             }
 
             // Process last pen of each line
-            for (var i = 0, len = this.lines.length; i < len; i++) {
+            var lines = penManager.lines;
+            for (var i = 0, len = lines.length; i < len; i++) {
                 // Last pen of a line
-                var line = this.lines[i];
-                var lastPen = line[line.length - 1];
+                var line = lines[i];
+                var pens = line.pens;
+                var lastPen = pens[pens.length - 1];
                 if (lastPen) {
                     // Add strokeThinkness
                     lastPen.width += this.parser.getStrokeThinkness(this.defaultStyle, lastPen.prop);
@@ -2951,7 +3126,70 @@
                 }
             }
 
+            this.updateLineOffsets(lines, textStyle);
+
             return penManager;
+        }
+
+        addImagePen(prop, cursorX, cursorY, wrapWidth, wrapMode, lineHeight, penManager) {
+            var imgWidth = this.imageManager.getOuterWidth(prop.img);
+            var imgHeight = this.imageManager.getOuterHeight(prop.img);
+            var imgMetrics;
+            if (imgHeight > 0) {
+                var ascent = this.defaultStyle.metrics.ascent;
+                var descent = imgHeight - ascent;
+                if (descent < 0) {
+                    descent = 0;
+                }
+                imgMetrics = {
+                    ascent: ascent,
+                    descent: descent,
+                    height: ascent + descent
+                };
+            }
+            if ((wrapWidth > 0) && (wrapMode !== NO_WRAP)) {  // Wrap mode
+                if (wrapWidth < (cursorX + imgWidth)) {
+                    penManager.addNewLinePen();
+                    cursorY += lineHeight;
+                    cursorX = 0;
+                }
+            }
+            penManager.addImagePen(cursorX, cursorY, imgWidth, Clone(prop), imgMetrics);
+            cursorX += imgWidth;
+
+            return {
+                x: cursorX,
+                y: cursorY
+            };
+        }
+
+        updateLineOffsets(lines, textStyle) {
+            var lineSpacing = textStyle.lineSpacing;
+            var defaultMetrics = this.defaultStyle.metrics;
+            var defaultAscent = defaultMetrics.ascent;
+            var defaultDescent = defaultMetrics.descent;
+            var offsetY = 0;
+            var fixedLineHeightMode = textStyle.fixedLineHeightMode;
+            for (var i = 0, len = lines.length; i < len; i++) {
+                var line = lines[i];
+                var lineAscent = line.maxAscent;
+                var lineDescent = line.maxDescent;
+                if (fixedLineHeightMode || (lineAscent === 0 && lineDescent === 0)) {
+                    lineAscent = defaultAscent;
+                    lineDescent = defaultDescent;
+                }
+                line.maxAscent = lineAscent;
+                line.maxDescent = lineDescent;
+                line.lineHeight = lineAscent + lineDescent;
+                line.startOffset = offsetY;
+                line.endOffset = offsetY + line.lineHeight;
+                var baselineOffset = offsetY + lineAscent - defaultAscent;
+                var pens = line.pens;
+                for (var penIdx = 0, penCnt = pens.length; penIdx < penCnt; penIdx++) {
+                    pens[penIdx].y = baselineOffset;
+                }
+                offsetY = line.endOffset + lineSpacing;
+            }
         }
 
         get startXOffset() {
@@ -2981,11 +3219,39 @@
 
         get linesHeight() {
             var linesCount = this.displayLinesCount;
-            var linesHeight = (this.defaultStyle.lineHeight * linesCount);
-            if (linesCount > 0) {
-                linesHeight -= this.defaultStyle.lineSpacing;
+            return this.getLinesHeight(0, linesCount);
+        }
+
+        getLineHeight(line) {
+            var lineHeight = (line) ? line.lineHeight : 0;
+            if (lineHeight > 0) {
+                return lineHeight;
             }
-            return linesHeight;
+            var metrics = this.defaultStyle.metrics;
+            return metrics.ascent + metrics.descent;
+        }
+
+        getLinesHeight(start, end) {
+            var lines = this.penManager.lines;
+            var linesCount = lines.length;
+            if (start === undefined) {
+                start = 0;
+            }
+            if (end === undefined || end > linesCount) {
+                end = linesCount;
+            }
+            if (end <= start) {
+                return 0;
+            }
+            var height = 0;
+            for (var i = start; i < end; i++) {
+                height += this.getLineHeight(lines[i]);
+            }
+            var count = end - start;
+            if (count > 1) {
+                height += this.defaultStyle.lineSpacing * (count - 1);
+            }
+            return height;
         }
 
         get imageManager() {
@@ -3317,6 +3583,11 @@
             return (data) ? (data.width + data.left + data.right) : 0;
         }
 
+        getOuterHeight(key) {
+            var data = this.get(key);
+            return (data) ? data.height : 0;
+        }
+
         getFrame(key) {
             var data = this.get(key);
             return (data) ? this.textureManager.getFrame(data.key, data.frame) : undefined;
@@ -3411,6 +3682,7 @@
     const RemoveFromDOM = Phaser.DOM.RemoveFromDOM;
     const SPLITREGEXP = CONST.SPLITREGEXP;
     const UUID = Phaser.Utils.String.UUID;
+    const Clamp = Phaser.Math.Clamp;
 
     // Reuse objects can increase performance
     var SharedPensPools = null;
@@ -3483,6 +3755,8 @@
             this.height = 1;
 
             this.dirty = false;
+
+            this._scrollY = 0;
 
             //  If resolution wasn't set, force it to 1
             if (this.style.resolution === 0) {
@@ -3590,6 +3864,80 @@
         }
         get text() {
             return this._text;
+        }
+
+        get topScrollY() {
+            return 0;
+        }
+
+        get bottomScrollY() {
+            var overflow = this.contentHeight - this.viewportHeight;
+            return (overflow > 0) ? -overflow : 0;
+        }
+
+        get scrollY() {
+            return this._scrollY;
+        }
+
+        set scrollY(value) {
+            if (this._scrollY === value) {
+                return;
+            }
+
+            this._scrollY = value;
+            this.updateText(false);
+        }
+
+        setScrollY(value, clamp) {
+            if (clamp === undefined) {
+                clamp = false;
+            }
+            if (clamp) {
+                value = Clamp(value, this.bottomScrollY, this.topScrollY);
+            }
+
+            this.scrollY = value;
+            return this;
+        }
+
+        addScrollY(inc, clamp) {
+            return this.setScrollY(this.scrollY + inc, clamp);
+        }
+
+        get t() {
+            var bottom = this.bottomScrollY;
+            if (bottom === 0) {
+                return 0;
+            }
+            return (this._scrollY / bottom);
+        }
+
+        set t(value) {
+            this.setT(value);
+        }
+
+        setT(value, clamp) {
+            if (clamp === undefined) {
+                clamp = false;
+            }
+            if (clamp) {
+                value = Clamp(value, 0, 1);
+            }
+
+            var scrollY = this.bottomScrollY * value;
+            return this.setScrollY(scrollY, false);
+        }
+
+        addT(inc, clamp) {
+            return this.setT(this.t + inc, clamp);
+        }
+
+        scrollToTop() {
+            return this.setScrollY(this.topScrollY);
+        }
+
+        scrollToBottom() {
+            return this.setScrollY(this.bottomScrollY);
         }
 
         initRTL() {
@@ -3785,7 +4133,7 @@
 
             // draw
             var startX = (!this.style.rtl) ? padding.left : padding.right;
-            var startY = padding.top;
+            var startY = padding.top + this._scrollY;
             canvasText.draw(
                 startX,
                 startY,
@@ -3955,6 +4303,16 @@
 
         getHitArea(worldX, worldY, camera) {
             return this.canvasText.getHitArea(worldX, worldY, camera);
+        }
+
+        get viewportHeight() {
+            var padding = this.padding;
+            var height = this.height - padding.top - padding.bottom;
+            return Math.max(height, 0);
+        }
+
+        get contentHeight() {
+            return this.canvasText.linesHeight;
         }
     }
 

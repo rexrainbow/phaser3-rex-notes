@@ -22006,10 +22006,13 @@
             }
 
             var isNumberSliderPadding;
+            var isNumberChildPadding;
             if (childPadding === undefined) {
                 isNumberSliderPadding = (typeof (sliderPadding) === 'number');
+                isNumberChildPadding = false;
             } else {
                 isNumberSliderPadding = (typeof (childPadding) === 'number');
+                isNumberChildPadding = isNumberSliderPadding;
             }
 
             if (isAxisY) {
@@ -22020,7 +22023,11 @@
                     if (childPadding === undefined) {
                         padding = (isNumberSliderPadding) ? { left: sliderPadding } : sliderPadding;
                     } else {
-                        padding = { left: GetValue$a(childPadding, 'right', childPadding) };
+                        if (isNumberChildPadding) {
+                            padding = { left: childPadding };
+                        } else {
+                            padding = { left: GetValue$a(childPadding, 'right', 0) };
+                        }
                     }
 
                 } else { // left
@@ -22030,7 +22037,11 @@
                     if (childPadding === undefined) {
                         padding = (isNumberSliderPadding) ? { right: sliderPadding } : sliderPadding;
                     } else {
-                        padding = { right: GetValue$a(childPadding, 'left', childPadding) };
+                        if (isNumberChildPadding) {
+                            padding = { right: childPadding };
+                        } else {
+                            padding = { right: GetValue$a(childPadding, 'left', 0) };
+                        }
                     }
                 }
 
@@ -22042,7 +22053,11 @@
                     if (childPadding === undefined) {
                         padding = (isNumberSliderPadding) ? { top: sliderPadding } : sliderPadding;
                     } else {
-                        padding = { top: GetValue$a(childPadding, 'bottom', childPadding) };
+                        if (isNumberChildPadding) {
+                            padding = { top: childPadding };
+                        } else {
+                            padding = { top: GetValue$a(childPadding, 'bottom', 0) };
+                        }
                     }
 
                 } else { // top
@@ -22052,7 +22067,11 @@
                     if (childPadding === undefined) {
                         padding = (isNumberSliderPadding) ? { bottom: sliderPadding } : sliderPadding;
                     } else {
-                        padding = { bottom: GetValue$a(childPadding, 'top', childPadding) };
+                        if (isNumberChildPadding) {
+                            padding = { bottom: childPadding };
+                        } else {
+                            padding = { bottom: GetValue$a(childPadding, 'top', 0) };
+                        }
                     }
                 }
             }

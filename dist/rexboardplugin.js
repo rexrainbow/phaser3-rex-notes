@@ -9974,7 +9974,7 @@
     const DistanceBetween = Phaser.Math.Distance.Between;
     const Lerp = Phaser.Math.Linear;
     const AngleBetween = Phaser.Math.Angle.Between;
-
+    const arriveEpsilon = 0.0001;
 
     let MoveTo$2 = class MoveTo extends SceneUpdateTickTask {
         constructor(gameObject, config) {
@@ -9986,18 +9986,23 @@
         }
 
         resetFromJSON(o) {
+            this.isCompleted = GetValue$4(o, 'isCompleted', true);
             this.isRunning = GetValue$4(o, 'isRunning', false);
             this.setEnable(GetValue$4(o, 'enable', true));
             this.timeScale = GetValue$4(o, 'timeScale', 1);
             this.setSpeed(GetValue$4(o, 'speed', 400));
             this.setRotateToTarget(GetValue$4(o, 'rotateToTarget', false));
-            this.targetX = GetValue$4(o, 'targetX', 0);
-            this.targetY = GetValue$4(o, 'targetY', 0);
+            this.targetX = GetValue$4(o, 'targetX', null); // Invalid
+            this.targetY = GetValue$4(o, 'targetY', null);
+            this.appendMode = GetValue$4(o, 'appendMode', false);
+            this.targets = GetValue$4(o, 'targets', []); // {x,y}[]
+
             return this;
         }
 
         toJSON() {
             return {
+                isCompleted: this.isCompleted,
                 isRunning: this.isRunning,
                 enable: this.enable,
                 timeScale: this.timeScale,
@@ -10005,15 +10010,27 @@
                 rotateToTarget: this.rotateToTarget,
                 targetX: this.targetX,
                 targetY: this.targetY,
-                tickingMode: this.tickingMode
+                tickingMode: this.tickingMode,
+                appendMode: this.appendMode,
+                targets: this.targets
             };
         }
 
-        setEnable(e) {
-            if (e == undefined) {
-                e = true;
+        get lastTargetPosition() {
+            var queuedLength = this.targets.length;
+            if (queuedLength === 0) {
+                return { x: this.targetX, y: this.targetY };
+            } else {
+                var lastTarget = this.targets[queuedLength - 1];
+                return { x: lastTarget.x, y: lastTarget.y };
             }
-            this.enable = e;
+        }
+
+        setEnable(enable) {
+            if (enable == undefined) {
+                enable = true;
+            }
+            this.enable = enable;
             return this;
         }
 
@@ -10027,26 +10044,72 @@
             return this;
         }
 
+        setAppendMode(appendMode) {
+            this.appendMode = !!appendMode;
+
+            if (!this.appendMode) {
+                this.clearTargets();
+            }
+            return this;
+        }
+
+        clearTargets() {
+            this.targets.length = 0;
+            return this;
+        }
+
         moveTo(x, y) {
+            if (x === undefined) {
+                if (!this.isCompleted) { // Resume
+                    super.start();
+                }
+                return this;
+            }
+
             if (typeof (x) !== 'number') {
                 var config = x;
                 x = config.x;
                 y = config.y;
             }
 
-            this.targetX = x;
-            this.targetY = y;
-            super.start();
-            this.emit('start', this.parent, this);
+            var isNewTask = false;
+            if (this.appendMode) {
+                if (this.isCompleted) { // New task
+                    this.targetX = x;
+                    this.targetY = y;
+                    isNewTask = true;
+
+                } else {
+                    this.targets.push({ x, y });
+
+                }
+
+            } else {
+
+                this.targetX = x;
+                this.targetY = y;
+                isNewTask = true;
+
+            }
+
+            if (isNewTask) {
+                this.start();
+                this.emit('start', this.parent, this);
+            }
+
             return this;
         }
 
         moveFrom(x, y) {
+            // This method will clear queue targets
+
             if (typeof (x) !== 'number') {
                 var config = x;
                 x = config.x;
                 y = config.y;
             }
+
+            this.stop();
 
             var gameObject = this.parent;
             var targetX = gameObject.x;
@@ -10060,10 +10123,38 @@
         }
 
         moveToward(angle, distance) {
-            var gameObject = this.parent;
-            var targetX = gameObject.x + Math.cos(angle) * distance;
-            var targetY = gameObject.y + Math.sin(angle) * distance;
+            var referencePosition;
+
+            if (this.appendMode && !this.isCompleted) {
+                referencePosition = this.lastTargetPosition;
+
+            } else {
+                referencePosition = this.parent;  // gameObject
+            }
+
+            var targetX = referencePosition.x + Math.cos(angle) * distance;
+            var targetY = referencePosition.y + Math.sin(angle) * distance;
             this.moveTo(targetX, targetY);
+
+            return this;
+        }
+
+        start() {
+            this.isCompleted = false;
+            super.start();
+            return this;
+        }
+
+        stop() {
+            super.stop();
+            this.clearTargets();
+            this.isCompleted = true;
+            return this;
+        }
+
+        complete() {
+            this.isCompleted = true;
+            super.complete();
             return this;
         }
 
@@ -10072,17 +10163,13 @@
                 return this;
             }
 
-            var gameObject = this.parent;
-            if (!gameObject.active) {
+            if (this.targetX == null || this.targetY == null) {
+                this.stop();
                 return this;
             }
 
-            var curX = gameObject.x,
-                curY = gameObject.y;
-            var targetX = this.targetX,
-                targetY = this.targetY;
-            if ((curX === targetX) && (curY === targetY)) {
-                this.complete();
+            var gameObject = this.parent;
+            if (!gameObject.active) {
                 return this;
             }
 
@@ -10090,23 +10177,70 @@
                 return this;
             }
 
-            var dt = (delta * this.timeScale) / 1000;
-            var movingDist = this.speed * dt;
-            var distToTarget = DistanceBetween(curX, curY, targetX, targetY);
-            var newX, newY;
-            if (movingDist < distToTarget) {
-                var t = movingDist / distToTarget;
-                newX = Lerp(curX, targetX, t);
-                newY = Lerp(curY, targetY, t);
-            } else {
-                newX = targetX;
-                newY = targetY;
+            var deltaSeconds = (delta * this.timeScale) / 1000;
+            var remainingDistanceBudget = this.speed * deltaSeconds;
+
+            // Consume remainingDistanceBudget across multiple targets in the same tick
+            while (remainingDistanceBudget > 0) {
+                var currentX = gameObject.x;
+                var currentY = gameObject.y;
+
+                var targetX = this.targetX;
+                var targetY = this.targetY;
+
+                var distanceToTarget = DistanceBetween(currentX, currentY, targetX, targetY);
+
+                // If already on the current target, switch to next target or complete
+                if (distanceToTarget <= arriveEpsilon) {
+                    if (this.targets.length > 0) {
+                        var nextTarget = this.targets.shift();
+                        this.targetX = nextTarget.x;
+                        this.targetY = nextTarget.y;
+                        continue;
+                    }
+
+                    debugger
+                    this.complete();
+                    return this;
+                }
+
+                // Move partially toward target
+                else if (remainingDistanceBudget < distanceToTarget) {
+                    var t = remainingDistanceBudget / distanceToTarget;
+                    var newX = Lerp(currentX, targetX, t);
+                    var newY = Lerp(currentY, targetY, t);
+
+                    gameObject.setPosition(newX, newY);
+
+                    if (this.rotateToTarget) {
+                        gameObject.rotation = AngleBetween(currentX, currentY, newX, newY);
+                    }
+
+                    remainingDistanceBudget = 0;
+                    break;
+                }
+
+                // Reach target and still have remaining distance budget
+                gameObject.setPosition(targetX, targetY);
+
+                if (this.rotateToTarget) {
+                    gameObject.rotation = AngleBetween(currentX, currentY, targetX, targetY);
+                }
+
+                remainingDistanceBudget -= distanceToTarget;
+
+                // Continue to next target if any, otherwise complete
+                if (this.targets.length > 0) {
+                    var nextTargetAfterReach = this.targets.shift();
+                    this.targetX = nextTargetAfterReach.x;
+                    this.targetY = nextTargetAfterReach.y;
+                    continue;
+                }
+
+                this.complete();
+                return this;
             }
 
-            gameObject.setPosition(newX, newY);
-            if (this.rotateToTarget) {
-                gameObject.rotation = AngleBetween(curX, curY, newX, newY);
-            }
             return this;
         }
     };

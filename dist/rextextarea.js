@@ -3920,7 +3920,7 @@
         }
     };
 
-    var PreLayout$3 = function () {
+    var PreLayout$2 = function () {
         this._childrenWidth = undefined;
         this._childrenHeight = undefined;
 
@@ -4149,7 +4149,7 @@
     };
 
     // Override
-    var LayoutChildren$3 = function () {
+    var LayoutChildren$2 = function () {
 
     };
 
@@ -11709,10 +11709,10 @@
         getChildIndex: GetChildIndex,
         getAllChildrenSizers: GetAllChildrenSizers,
         getChildrenSizers: GetChildrenSizers$2,
-        preLayout: PreLayout$3,
+        preLayout: PreLayout$2,
         layout: Layout,
         runLayout: RunLayout,
-        layoutChildren: LayoutChildren$3,
+        layoutChildren: LayoutChildren$2,
 
         layoutBackgrounds: LayoutBackgrounds,
         postLayout: PostLayout,
@@ -12255,7 +12255,7 @@
         return out;
     };
 
-    var PreLayout$2 = function () {
+    var PreLayout$1 = function () {
         // Resize child to 1x1 for ratio-fit 
         this.hasRatioFitChild = false;
         var child, sizerConfig;
@@ -12278,7 +12278,7 @@
         this._childrenProportion = undefined;
         this.hasProportion0Child = false;
         this.proportionLength = undefined; // Display proportion-length, contains scale
-        PreLayout$3.call(this);
+        PreLayout$2.call(this);
         return this;
     };
 
@@ -12297,7 +12297,7 @@
 
     const Wrap$1 = Phaser.Math.Wrap;
 
-    var LayoutChildren$2 = function () {
+    var LayoutChildren$1 = function () {
         var children = this.sizerChildren;
         var child, childConfig, padding;
         var startX = this.innerLeft,
@@ -12933,8 +12933,8 @@
         getExpandedChildWidth: GetExpandedChildWidth$1,
         getExpandedChildHeight: GetExpandedChildHeight$1,
         getChildrenSizers: GetChildrenSizers$1,
-        preLayout: PreLayout$2,
-        layoutChildren: LayoutChildren$2,
+        preLayout: PreLayout$1,
+        layoutChildren: LayoutChildren$1,
         resolveWidth: ResolveWidth$1,
         resolveHeight: ResolveHeight$1,
         hasWidthWrap: HasWidthWrap,
@@ -13409,13 +13409,13 @@
 
     };
 
-    var Methods$5 = {
+    var Methods$4 = {
         resizeController: ResizeController,
         updateController: UpdateController
     };
 
     Object.assign(
-        Methods$5,
+        Methods$4,
         ChildPositionMethods
     );
 
@@ -13649,18 +13649,18 @@
         return out;
     };
 
-    var PreLayout$1 = function () {
+    var PreLayout = function () {
         this._totalColumnProportions = undefined;
         this._totalRowProportions = undefined;
         this.hasColumnProportion0Child = false;
         this.hasRowProportion0Child = false;
         this.proportionWidthLength = undefined;  // Display proportion-length, contains scale
         this.proportionHeightLength = undefined; // Display proportion-length, contains scale
-        PreLayout$3.call(this);
+        PreLayout$2.call(this);
         return this;
     };
 
-    var LayoutChildren$1 = function () {
+    var LayoutChildren = function () {
         var child, childConfig, padding;
         var startX = this.innerLeft,
             startY = this.innerTop;
@@ -14237,8 +14237,8 @@
         getExpandedChildWidth: GetExpandedChildWidth,
         getExpandedChildHeight: GetExpandedChildHeight,
         getChildrenSizers: GetChildrenSizers,
-        preLayout: PreLayout$1,
-        layoutChildren: LayoutChildren$1,
+        preLayout: PreLayout,
+        layoutChildren: LayoutChildren,
         resolveWidth: ResolveWidth,
         resolveHeight: ResolveHeight,
         resolveChildrenWidth: ResolveChildrenWidth,
@@ -17138,13 +17138,13 @@
 
     }
 
-    var Methods$4 = {
+    var Methods$3 = {
         updateShapes: UpdateShapes,
     };
 
     Object.assign(
         LineProgress.prototype,
-        Methods$4,
+        Methods$3,
     );
 
     var IsInValidKey = function (keys) {
@@ -19845,7 +19845,7 @@
         return this;
     };
 
-    var Methods$3 = {
+    var Methods$2 = {
         _beginDraw: NOOP,
         _drawImage: NOOP,
         _drawTileSprite: NOOP,
@@ -20003,7 +20003,7 @@
 
         Object.assign(
             NinePatch.prototype,
-            Methods$3
+            Methods$2
         );
 
         return NinePatch;
@@ -20057,13 +20057,13 @@
     class NinePatch extends NinePatchBase(RenderTexture, 'rexNinePatch') {
     }
 
-    var Methods$2 = {
+    var Methods$1 = {
         _drawImage: DrawImage,
         _drawTileSprite: DrawTileSprite,
     };
     Object.assign(
         NinePatch.prototype,
-        Methods$2
+        Methods$1
     );
 
     class Style extends ComponentBase {
@@ -22006,10 +22006,13 @@
             }
 
             var isNumberSliderPadding;
+            var isNumberChildPadding;
             if (childPadding === undefined) {
                 isNumberSliderPadding = (typeof (sliderPadding) === 'number');
+                isNumberChildPadding = false;
             } else {
                 isNumberSliderPadding = (typeof (childPadding) === 'number');
+                isNumberChildPadding = isNumberSliderPadding;
             }
 
             if (isAxisY) {
@@ -22020,7 +22023,11 @@
                     if (childPadding === undefined) {
                         padding = (isNumberSliderPadding) ? { left: sliderPadding } : sliderPadding;
                     } else {
-                        padding = { left: GetValue$4(childPadding, 'right', childPadding) };
+                        if (isNumberChildPadding) {
+                            padding = { left: childPadding };
+                        } else {
+                            padding = { left: GetValue$4(childPadding, 'right', 0) };
+                        }
                     }
 
                 } else { // left
@@ -22030,7 +22037,11 @@
                     if (childPadding === undefined) {
                         padding = (isNumberSliderPadding) ? { right: sliderPadding } : sliderPadding;
                     } else {
-                        padding = { right: GetValue$4(childPadding, 'left', childPadding) };
+                        if (isNumberChildPadding) {
+                            padding = { right: childPadding };
+                        } else {
+                            padding = { right: GetValue$4(childPadding, 'left', 0) };
+                        }
                     }
                 }
 
@@ -22042,7 +22053,11 @@
                     if (childPadding === undefined) {
                         padding = (isNumberSliderPadding) ? { top: sliderPadding } : sliderPadding;
                     } else {
-                        padding = { top: GetValue$4(childPadding, 'bottom', childPadding) };
+                        if (isNumberChildPadding) {
+                            padding = { top: childPadding };
+                        } else {
+                            padding = { top: GetValue$4(childPadding, 'bottom', 0) };
+                        }
                     }
 
                 } else { // top
@@ -22052,7 +22067,11 @@
                     if (childPadding === undefined) {
                         padding = (isNumberSliderPadding) ? { bottom: sliderPadding } : sliderPadding;
                     } else {
-                        padding = { bottom: GetValue$4(childPadding, 'top', childPadding) };
+                        if (isNumberChildPadding) {
+                            padding = { bottom: childPadding };
+                        } else {
+                            padding = { bottom: GetValue$4(childPadding, 'top', 0) };
+                        }
                     }
                 }
             }
@@ -22745,7 +22764,7 @@
     // mixin
     Object.assign(
         Scrollable.prototype,
-        Methods$5
+        Methods$4
     );
 
     const TextClass = Phaser.GameObjects.Text;
@@ -22775,6 +22794,70 @@
         }
 
         return textObjectType;
+    };
+
+    var TextToLines = function (textObject, text, lines) {
+        var textObjectType = GetTextObjectType(textObject);
+        switch (textObjectType) {
+            case TextType:
+                lines = textObject.getWrappedText(text); // Array of string
+                break;
+            case TagTextType:
+                lines = textObject.getPenManager(text, lines); // Pens-manager
+                break;
+            case BitmapTextType:
+                if (textObject.maxWidth > 0) {
+                    lines = textObject.setText(text).getTextBounds().wrappedText.split('\n');
+                } else {
+                    lines = text.split('\n');
+                }
+
+                break;
+        }
+        return lines;
+    };
+
+    var SetNoWrapText = function (textObject, text) {
+        var textObjectType = GetTextObjectType(textObject);
+        switch (textObjectType) {
+            case TextType:
+                // Store wrap properties
+                var style = textObject.style;
+                var wordWrapWidth = style.wordWrapWidth;
+                var wordWrapCallback = style.wordWrapCallback;
+                // Disable wrap
+                style.wordWrapWidth = 0;
+                style.wordWrapCallback = undefined;
+                // Set text
+                textObject.setText(text);
+                // Restore wrap
+                style.wordWrapWidth = wordWrapWidth;
+                style.wordWrapCallback = wordWrapCallback;
+                break;
+
+            case TagTextType:
+                // Store wrap properties
+                var style = textObject.style;
+                var wrapMode = style.wrapMode;
+                // Disable wrap
+                style.wrapMode = 0;
+                // Set text
+                textObject.setText(text);
+                // Restore wrap
+                style.wrapMode = wrapMode;
+                break;
+
+            case BitmapTextType:
+                // Store wrap properties
+                var maxWidth = textObject._maxWidth;
+                // Disable wrap
+                textObject._maxWidth = 0;
+                // Set text
+                textObject.setText(text);
+                // Restore wrap
+                textObject._maxWidth = maxWidth;
+                break;
+        }
     };
 
     const SetPositionBase = Phaser.GameObjects.Graphics.prototype.setPosition;
@@ -22914,7 +22997,7 @@
         return this.geom.contains(x, y);
     };
 
-    var Methods$1 = {
+    var Methods = {
         setPosition: SetPosition,
         resize: Resize,
         setOrigin: SetOrigin,
@@ -22954,7 +23037,7 @@
 
     Object.assign(
         DefaultMaskGraphics.prototype,
-        Methods$1
+        Methods
     );
 
     var AddChildMask = function (maskTarget, sizeTarget, shape, padding) {
@@ -22971,260 +23054,11 @@
         return maskGameObject;
     };
 
-    var TextToLines = function (textObject, text, lines) {
-        var textObjectType = GetTextObjectType(textObject);
-        switch (textObjectType) {
-            case TextType:
-                lines = textObject.getWrappedText(text); // Array of string
-                break;
-            case TagTextType:
-                lines = textObject.getPenManager(text, lines); // Pens-manager
-                break;
-            case BitmapTextType:
-                if (textObject.maxWidth > 0) {
-                    lines = textObject.setText(text).getTextBounds().wrappedText.split('\n');
-                } else {
-                    lines = text.split('\n');
-                }
-
-                break;
-        }
-        return lines;
-    };
-
-    var SetText = function (text) {
-        if (text !== undefined) {
-            this.text = text;
-        }
-
-        // Wrap content in lines
-        this.lines = TextToLines(this.textObject, this.text, this.lines);
-
-        // Get lines count
-        this.linesCount = this.lines.length;
-
-        // Re-calculate these values later
-        this._textHeight = undefined;
-        this._textVisibleHeight = undefined;
-
-        this.updateTextObject();
-        return this;
-    };
-
-    var TextHeightToLinesCount = function (height) {
-        // height = (lines * (lineHeight + lineSpacing)) - lineSpacing
-        return (height - this.textLineSpacing) / (this.textLineHeight + this.textLineSpacing);
-    };
-
-    var LinesCountToTextHeight = function (linesCount) {
-        var height = linesCount * (this.textLineHeight + this.textLineSpacing);
-        if (linesCount > 1) {
-            height -= this.textLineSpacing;
-        }
-        return height;
-    };
-
-    var GetLines = function (startLineIdx) {
-        var endLineIdx = startLineIdx + this.visibleLinesCount + 1;
-        var text;
-        switch (this.textObjectType) {
-            case TextType:
-                text = this.lines.slice(startLineIdx, endLineIdx).join('\n');
-                break;
-            case TagTextType:
-                var startIdx = this.lines.getLineStartIndex(startLineIdx);
-                var endIdx = this.lines.getLineEndIndex(endLineIdx - 1);
-                text = this.lines.getSliceTagText(startIdx, endIdx, true);
-                break;
-            case BitmapTextType:
-                text = this.lines.slice(startLineIdx, endLineIdx).join('\n');
-                break;
-        }
-        return text;
-    };
-
-    var SetNoWrapText = function (textObject, text) {
-        var textObjectType = GetTextObjectType(textObject);
-        switch (textObjectType) {
-            case TextType:
-                // Store wrap properties
-                var style = textObject.style;
-                var wordWrapWidth = style.wordWrapWidth;
-                var wordWrapCallback = style.wordWrapCallback;
-                // Disable wrap
-                style.wordWrapWidth = 0;
-                style.wordWrapCallback = undefined;
-                // Set text
-                textObject.setText(text);
-                // Restore wrap
-                style.wordWrapWidth = wordWrapWidth;
-                style.wordWrapCallback = wordWrapCallback;
-                break;
-
-            case TagTextType:
-                // Store wrap properties
-                var style = textObject.style;
-                var wrapMode = style.wrapMode;
-                // Disable wrap
-                style.wrapMode = 0;
-                // Set text
-                textObject.setText(text);
-                // Restore wrap
-                style.wrapMode = wrapMode;
-                break;
-
-            case BitmapTextType:
-                // Store wrap properties
-                var maxWidth = textObject._maxWidth;
-                // Disable wrap
-                textObject._maxWidth = 0;
-                // Set text
-                textObject.setText(text);
-                // Restore wrap
-                textObject._maxWidth = maxWidth;
-                break;
-        }
-    };
-
-    var ResetTextObjectPosition = function () {
-        var config = this.textObject.rexSizer;
-        this.textObject.y += (config.offsetY - config.preOffsetY);
-        config.preOffsetY = config.offsetY;
-        this.resetChildPositionState(this.textObject);
-
-        if (this.textCropEnable) {
-            CropTextObject.call(this);
-        }
-    };
-
-    var CropTextObject = function () {
-        // Don't have setCrop method, return
-        if (!this.textObject.setCrop) {
-            return;
-        }
-
-        var offsetY = this.textObject.rexSizer.offsetY;
-        var cropY, cropHeight;
-        if (offsetY <= 0) {
-            cropY = -offsetY;
-            cropHeight = this.height;
-        } else {
-            cropY = 0;
-            cropHeight = this.height - offsetY;
-        }
-        this.textObject.setCrop(
-            0,
-            cropY,
-            this.width,
-            cropHeight
-        );
-    };
-
-    var UpdateTextObject = function () {
-        var startLineIndex = Math.max(Math.floor(TextHeightToLinesCount.call(this, -this.textOY)), 0);
-        var textOffset = LinesCountToTextHeight.call(this, startLineIndex) + this.textOY;
-
-        // Grab visible lines
-        var text = GetLines.call(this, startLineIndex);
-
-        // Display visible content
-        SetNoWrapText(this.textObject, text);
-
-        this.textObject.rexSizer.offsetY = textOffset;
-        ResetTextObjectPosition.call(this);
-        return this;
-    };
-
-    var PreLayout = function () {
-        // Style of text
-        this._textLineHeight = undefined;
-        this._textLineSpacing = undefined;
-        // Style of text, width of text
-        this._visibleLinesCount = undefined;
-        // Style of text, total lines of content
-        this._textHeight = undefined;
-        this._textVisibleHeight = undefined;
-
-        PreLayout$3.call(this);
-        return this;
-    };
-
-    var ResizeText = function (textObject, width, height) {
-        height += (this.textLineHeight + this.textLineSpacing); // Add 1 line
-        if ((this.textObjectWidth === width) && (this._textObjectRealHeight === height)) {
-            return;
-        }
-        this.textObjectWidth = width;
-        this._textObjectRealHeight = height;
-
-        switch (this.textObjectType) {
-            case TextType:
-            case TagTextType:
-                textObject.setFixedSize(width, height);
-
-                var style = textObject.style;
-                var wrapWidth = Math.max(width, 0);
-                if (this.textObjectType === TextType) {  // Built-in text
-                    style.wordWrapWidth = wrapWidth;
-                } else {  // BBCode text, Tag text
-                    if (style.wrapMode === 0) { // Turn no-wrap to word-wrap
-                        style.wrapMode = 1;
-                    }
-                    style.wrapWidth = wrapWidth;
-                }
-                break;
-            case BitmapTextType:
-                textObject.setMaxWidth(width);
-                break;
-        }
-
-        // Render content again
-        this.setText();
-    };
-
-    var LayoutChildren = function () {
-        var child, childConfig, padding;
-        var startX = this.left,
-            startY = this.top;
-        var x, y, width, height; // Align zone
-
-        // LayoutChildren text child
-        // Skip invisible child
-        child = this.textObject;
-        if (!child.rexSizer.hidden) {
-            childConfig = child.rexSizer;
-            padding = childConfig.padding;
-            x = startX + (padding.left * this.scaleX);
-            y = startY + (padding.top * this.scaleY);
-            width = (this.width * this.scaleX) - ((padding.left + padding.right) * this.scaleX);
-            height = (this.height * this.scaleY) - ((padding.top + padding.bottom) * this.scaleY);
-            ResizeText.call(this, child, width, height);
-
-            AlignIn(child, x, y, width, height, childConfig.align);
-
-            childConfig.preOffsetY = 0; // Clear preOffsetY
-            ResetTextObjectPosition.call(this);
-
-            if (this.textMask) {
-                this.textMask.setPosition().resize();
-                this.resetChildPositionState(this.textMask);
-            }
-
-        }
-    };
-
-    var Methods = {
-        setText: SetText,
-        updateTextObject: UpdateTextObject,
-        preLayout: PreLayout,
-        layoutChildren: LayoutChildren,
-    };
-
     const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
     const GetValue$1 = Phaser.Utils.Objects.GetValue;
     const ALIGN_LEFTTOP = Phaser.Display.Align.TOP_LEFT;
 
-    class TextBlock extends Base {
+    class BaseTextBlock extends Base {
         constructor(scene, x, y, minWidth, minHeight, config) {
             if (IsPlainObject(x)) {
                 config = x;
@@ -23240,22 +23074,13 @@
 
             super(scene, x, y, minWidth, minHeight, config);
 
-            this.type = 'rexTextBlock';
+            this.type = 'rexBaseTextBlock';
             this.textObject = undefined;
-            this.linesCount = 0;
-            this.textMask = undefined;
             this.textObjectType = undefined;
-            this._textLineHeight = undefined;
-            this._textLineSpacing = undefined;
-            this._visibleLinesCount = undefined;
-            this._textHeight = undefined;
-            this._textVisibleHeight = undefined;
+            this.textMask = undefined;
+            this.textObjectWidth = undefined;
             this._textObjectRealHeight = 0;
-
-            this.lines = undefined;
-            // Text object : array of string
-            // Tag text object : pens-manager
-            // Bitmap text object : array of string
+            this.linesCount = 0;
 
             this.text = GetValue$1(config, 'content', '');
             this._textOY = 0;
@@ -23311,20 +23136,6 @@
 
             this.textObject = undefined;
             this.textMask = undefined;
-            if (this.lines) {
-                switch (this.textObjectType) {
-                    case TextType:
-                        this.lines.length = 0;
-                        break;
-                    case TagTextType:
-                        this.lines.destroy();
-                        break;
-                    case BitmapTextType:
-                        this.lines.length = 0;
-                        break;
-                }
-                this.lines = undefined;
-            }
 
             super.destroy(fromScene);
         }
@@ -23337,78 +23148,83 @@
             return this;
         }
 
-        get textLineHeight() {
-            if (this._textLineHeight === undefined) {
-                var lineHeight;
-                switch (this.textObjectType) {
-                    case TextType:
-                    case TagTextType:
-                        var style = this.textObject.style;
-                        lineHeight = style.metrics.fontSize + style.strokeThickness;
-                        break;
-                    case BitmapTextType:
-                        var scale = (this.textObject.fontSize / this.textObject.fontData.size);
-                        lineHeight = this.textObject.fontData.lineHeight * scale;
-                        break;
+        clearTextMetricsCache() {
+            // Override in subclass if needed
+        }
 
+        preLayout() {
+            this.clearTextMetricsCache();
+            PreLayout$2.call(this);
+            return this;
+        }
+
+        layoutChildren() {
+            var child, childConfig, padding;
+            var startX = this.left,
+                startY = this.top;
+            var x, y, width, height; // Align zone
+
+            // LayoutChildren text child
+            // Skip invisible child
+            child = this.textObject;
+            if (!child.rexSizer.hidden) {
+                childConfig = child.rexSizer;
+                padding = childConfig.padding;
+                x = startX + (padding.left * this.scaleX);
+                y = startY + (padding.top * this.scaleY);
+                width = (this.width * this.scaleX) - ((padding.left + padding.right) * this.scaleX);
+                height = (this.height * this.scaleY) - ((padding.top + padding.bottom) * this.scaleY);
+                this.resizeText(child, width, height);
+
+                AlignIn(child, x, y, width, height, childConfig.align);
+
+                childConfig.preOffsetY = 0; // Clear preOffsetY
+                this.resetTextObjectPosition();
+
+                if (this.textMask) {
+                    this.textMask.setPosition().resize();
+                    this.resetChildPositionState(this.textMask);
                 }
-                this._textLineHeight = lineHeight;
             }
-            return this._textLineHeight;
         }
 
-        get textLineSpacing() {
-            if (this._textLineSpacing === undefined) {
-                var lineSpacing;
-                switch (this.textObjectType) {
-                    case TextType:
-                    case TagTextType:
-                        lineSpacing = this.textObject.lineSpacing;
-                        break;
-                    case BitmapTextType:
-                        lineSpacing = 0;
-                        break;
-                }
-                this._textLineSpacing = lineSpacing;
+        resizeText(textObject, width, height) {
+            // Override in subclass
+            return this;
+        }
+
+        resetTextObjectPosition() {
+            var config = this.textObject.rexSizer;
+            this.textObject.y += (config.offsetY - config.preOffsetY);
+            config.preOffsetY = config.offsetY;
+            this.resetChildPositionState(this.textObject);
+
+            if (this.textCropEnable) {
+                this.cropTextObject();
             }
-            return this._textLineSpacing;
         }
 
-        get visibleLinesCount() {
-            if (this._visibleLinesCount === undefined) {
-                this._visibleLinesCount = Math.floor(TextHeightToLinesCount.call(this, this._textObjectRealHeight));
+        cropTextObject() {
+            // Don't have setCrop method, return
+            if (!this.textObject.setCrop) {
+                return;
             }
-            return this._visibleLinesCount;
-        }
 
-        get topTextOY() {
-            return 0;
-        }
-
-        get bottomTextOY() {
-            return -this.textVisibleHeight;
-        }
-
-        get textHeight() {
-            if (this._textHeight === undefined) {
-                this._textHeight = LinesCountToTextHeight.call(this, this.linesCount);
+            var offsetY = this.textObject.rexSizer.offsetY;
+            var cropY, cropHeight;
+            if (offsetY <= 0) {
+                cropY = -offsetY;
+                cropHeight = this.height;
+            } else {
+                cropY = 0;
+                cropHeight = this.height - offsetY;
             }
-            return this._textHeight;
-        }
-
-        get textObjectHeight() {
-            return this._textObjectRealHeight - (this.textLineHeight + this.textLineSpacing);  // Remove 1 text line
-        }
-
-        get textVisibleHeight() {
-            if (this._textVisibleHeight === undefined) {
-                var h = this.textHeight - this.textObjectHeight;
-                if (!this.alwaysScrollable && (h < 0)) {
-                    h = 0;
-                }
-                this._textVisibleHeight = h;
-            }
-            return this._textVisibleHeight;
+            this.textObject.setCrop(
+                0,
+                cropY,
+                this.width,
+                cropHeight
+            );
         }
 
         textOYExceedTop(oy) {
@@ -23436,9 +23252,7 @@
             var textOYExeceedBottom = this.textOYExeceedBottom(oy);
 
             if (this.clampTextOY) {
-                if (this.visibleLinesCount > this.linesCount) {
-                    oy = 0;
-                } else if (textOYExceedTop) {
+                if (textOYExceedTop) {
                     oy = topTextOY;
                 } else if (textOYExeceedBottom) {
                     oy = bottomTextOY;
@@ -23471,20 +23285,41 @@
         }
 
         set t(value) {
-            this.textOY = -this.textVisibleHeight * value;
+            var bottomTextOY = this.bottomTextOY;
+            this.textOY = (bottomTextOY === 0) ? 0 : (bottomTextOY * value);
         }
 
         get t() {
-            var textVisibleHeight = this.textVisibleHeight;
-            if (textVisibleHeight === 0) {
+            var bottomTextOY = this.bottomTextOY;
+            if (bottomTextOY === 0) {
                 return 0;
             }
-            return (this.textOY / -textVisibleHeight);
+            return (this.textOY / bottomTextOY);
         }
 
         setTextOYByPercentage(percentage) {
             this.t = percentage;
             return this;
+        }
+
+        get topTextOY() {
+            return 0;
+        }
+
+        get bottomTextOY() {
+            return -this.textVisibleHeight;
+        }
+
+        get textVisibleHeight() {
+            return 0;
+        }
+
+        get textHeight() {
+            return 0;
+        }
+
+        get textObjectHeight() {
+            return 0;
         }
     }
 
@@ -23492,10 +23327,350 @@
         return scene.add.text(0, 0, '');
     };
 
-    Object.assign(
-        TextBlock.prototype,
-        Methods
-    );
+    class TextBlock extends BaseTextBlock {
+        constructor(scene, x, y, minWidth, minHeight, config) {
+            super(scene, x, y, minWidth, minHeight, config);
+
+            this.type = 'rexTextBlock';
+            this.lines = undefined;  // string[]
+            this._textLineHeight = undefined;
+            this._textLineSpacing = undefined;
+            this._visibleLinesCount = undefined;
+            this._textHeight = undefined;
+            this._textVisibleHeight = undefined;
+        }
+
+        destroy(fromScene) {
+            //  This Game Object has already been destroyed
+            if (!this.scene || this.ignoreDestroy) {
+                return;
+            }
+
+            if (this.lines) {
+                this.lines.length = 0;
+                this.lines = undefined;
+            }
+
+            super.destroy(fromScene);
+        }
+
+        clearTextMetricsCache() {
+            this._textLineHeight = undefined;
+            this._textLineSpacing = undefined;
+            this._visibleLinesCount = undefined;
+            this._textHeight = undefined;
+            this._textVisibleHeight = undefined;
+        }
+
+        setText(text) {
+            if (text !== undefined) {
+                this.text = text;
+            }
+
+            // Wrap content in lines
+            this.lines = TextToLines(this.textObject, this.text, this.lines);
+
+            // Get lines count
+            this.linesCount = this.lines.length;
+
+            // Re-calculate these values later
+            this._textHeight = undefined;
+            this._textVisibleHeight = undefined;
+
+            this.updateTextObject();
+            return this;
+        }
+
+        updateTextObject() {
+            var startLineIndex = Math.max(Math.floor(this.textHeightToLinesCount(-this.textOY)), 0);
+            var textOffset = this.linesCountToTextHeight(startLineIndex) + this.textOY;
+
+            // Grab visible lines
+            var text = this.getLines(startLineIndex);
+
+            // Display visible content
+            SetNoWrapText(this.textObject, text);
+
+            this.textObject.rexSizer.offsetY = textOffset;
+            this.resetTextObjectPosition();
+            return this;
+        }
+
+        resizeText(textObject, width, height) {
+            height += (this.textLineHeight + this.textLineSpacing); // Add 1 line
+            if ((this.textObjectWidth === width) && (this._textObjectRealHeight === height)) {
+                return;
+            }
+            this.textObjectWidth = width;
+            this._textObjectRealHeight = height;
+
+            switch (this.textObjectType) {
+                case TextType:
+                    textObject.setFixedSize(width, height);
+
+                    var style = textObject.style;
+                    var wrapWidth = Math.max(width, 0);
+                    style.wordWrapWidth = wrapWidth;
+                    break;
+                case BitmapTextType:
+                    textObject.setMaxWidth(width);
+                    break;
+            }
+
+            // Render content again
+            this.setText();
+        }
+
+        getLines(startLineIdx) {
+            var endLineIdx = startLineIdx + this.visibleLinesCount + 1;
+            var text = this.lines.slice(startLineIdx, endLineIdx).join('\n');
+            return text;
+        }
+
+        textHeightToLinesCount(height) {
+            // height = (lines * (lineHeight + lineSpacing)) - lineSpacing
+            return (height - this.textLineSpacing) / (this.textLineHeight + this.textLineSpacing);
+        }
+
+        linesCountToTextHeight(linesCount) {
+            var height = linesCount * (this.textLineHeight + this.textLineSpacing);
+            if (linesCount > 1) {
+                height -= this.textLineSpacing;
+            }
+            return height;
+        }
+
+        get textLineHeight() {
+            if (this._textLineHeight === undefined) {
+                var lineHeight;
+                switch (this.textObjectType) {
+                    case TextType:
+                        var style = this.textObject.style;
+                        lineHeight = style.metrics.fontSize + style.strokeThickness;
+                        break;
+                    case BitmapTextType:
+                        var scale = (this.textObject.fontSize / this.textObject.fontData.size);
+                        lineHeight = this.textObject.fontData.lineHeight * scale;
+                        break;
+
+                }
+                this._textLineHeight = lineHeight;
+            }
+            return this._textLineHeight;
+        }
+
+        get textLineSpacing() {
+            if (this._textLineSpacing === undefined) {
+                var lineSpacing;
+                switch (this.textObjectType) {
+                    case TextType:
+                        lineSpacing = this.textObject.lineSpacing;
+                        break;
+                    case BitmapTextType:
+                        lineSpacing = 0;
+                        break;
+                }
+                this._textLineSpacing = lineSpacing;
+            }
+            return this._textLineSpacing;
+        }
+
+        get visibleLinesCount() {
+            if (this._visibleLinesCount === undefined) {
+                this._visibleLinesCount = Math.floor(this.textHeightToLinesCount(this._textObjectRealHeight));
+            }
+            return this._visibleLinesCount;
+        }
+
+        get textHeight() {
+            if (this._textHeight === undefined) {
+                this._textHeight = this.linesCountToTextHeight(this.linesCount);
+            }
+            return this._textHeight;
+        }
+
+        get textObjectHeight() {
+            return this._textObjectRealHeight - (this.textLineHeight + this.textLineSpacing);  // Remove 1 text line
+        }
+
+        get textVisibleHeight() {
+            if (this._textVisibleHeight === undefined) {
+                var h = this.textHeight - this.textObjectHeight;
+                if (!this.alwaysScrollable && (h < 0)) {
+                    h = 0;
+                }
+                this._textVisibleHeight = h;
+            }
+            return this._textVisibleHeight;
+        }
+
+        get textOY() {
+            return this._textOY;
+        }
+
+        set textOY(oy) {
+            if (this.clampTextOY && (this.visibleLinesCount > this.linesCount)) {
+                oy = 0;
+            }
+            super.textOY = oy;
+        }
+
+        scrollToLine(lineIndex) {
+            var lineHeight = this.textLineHeight + this.textLineSpacing;
+            this.textOY = -lineHeight * lineIndex;
+            return this;
+        }
+
+        get lineIndex() {
+            var lineHeight = this.textLineHeight + this.textLineSpacing;
+            return Math.floor(-this.textOY / lineHeight);
+        }
+
+        scrollToNextLine(lineCount) {
+            if (lineCount === undefined) {
+                lineCount = 1;
+            }
+
+            this.scrollToLine(this.lineIndex + lineCount);
+            return this;
+        }
+    }
+
+    class TagTextBlock extends BaseTextBlock {
+        constructor(scene, x, y, minWidth, minHeight, config) {
+            super(scene, x, y, minWidth, minHeight, config);
+            this.type = 'rexTagTextBlock';
+        }
+
+        setText(text) {
+            if (text !== undefined) {
+                this.text = text;
+            }
+
+            this.textObject.setText(this.text);
+            this.linesCount = this.getLinesCount();
+
+            this._textHeight = undefined;
+            this._textVisibleHeight = undefined;
+
+            this.textOY = this._textOY;
+            return this;
+        }
+
+        updateTextObject() {
+            this.textObject.scrollY = this._textOY;
+            return this;
+        }
+
+        getLinesCount() {
+            var lines = this.getLines();
+            return lines ? lines.length : 0;
+        }
+
+        getLines() {
+            var canvasText = this.textObject.canvasText;
+            return (canvasText) ? canvasText.lines : null;
+        }
+
+        get textHeight() {
+            return this.textObject.contentHeight;
+        }
+
+        get textObjectHeight() {
+            return this.textObject.viewportHeight;
+        }
+
+        get textVisibleHeight() {
+            var h = this.textHeight - this.textObjectHeight;
+            if (!this.alwaysScrollable && (h < 0)) {
+                h = 0;
+            }
+            return h;
+        }
+
+        resizeText(textObject, width, height) {
+            if ((this.textObjectWidth === width) && (this._textObjectRealHeight === height)) {
+                return this;
+            }
+
+            this.textObjectWidth = width;
+            this._textObjectRealHeight = height;
+
+            textObject.setFixedSize(width, height);
+
+            var style = textObject.style;
+            var wrapWidth = Math.max(width, 0);
+            if (style.wrapMode === 0) { // Turn no-wrap to word-wrap
+                style.wrapMode = 1;
+            }
+            style.wrapWidth = wrapWidth;
+
+            // Render content again
+            this.setText();
+            return this;
+        }
+
+        resetTextObjectPosition() {
+            this.resetChildPositionState(this.textObject);
+        }
+
+        scrollToLine(lineIndex) {
+            var lines = this.getLines();
+            if (!lines || lines.length === 0) {
+                this.textOY = 0;
+                return this;
+            }
+
+            if (lineIndex <= 0) {
+                this.textOY = 0;
+                return this;
+            }
+
+            if (lineIndex >= lines.length) {
+                this.textOY = this.bottomTextOY;
+                return this;
+            }
+
+            this.textOY = -lines[lineIndex].startOffset;
+            return this;
+        }
+
+        get lineIndex() {
+            var lines = this.getLines();
+            if (!lines || lines.length === 0) {
+                return 0;
+            }
+
+            var targetOffset = -this.textOY;
+            return GetStartLineIndex(lines, targetOffset);
+        }
+
+        scrollToNextLine(lineCount) {
+            if (lineCount === undefined) {
+                lineCount = 1;
+            }
+
+            this.scrollToLine(this.lineIndex + lineCount);
+            return this;
+        }
+    }
+
+    var GetStartLineIndex = function (lines, targetOffset) {
+        // First line whose endOffset is greater than targetOffset
+        var left = 0;
+        var right = lines.length - 1;
+        var result = lines.length;
+        while (left <= right) {
+            var mid = (left + right) >> 1;
+            if (lines[mid].endOffset > targetOffset) {
+                result = mid;
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return result;
+    };
 
     var InjectProperties = function (textBlock) {
         Object.defineProperty(textBlock, 'childOY', {
@@ -23544,19 +23719,38 @@
         }
     };
 
+    var EaseScrollChildOY = function (y0, y1, duration, ease) {
+        if ((duration === undefined) || (duration <= 0)) {
+            return;
+        }
+        if (this._easeScrollChildOY === undefined) {
+            this._easeScrollChildOY = new EaseValueTask(this);
+        }
+        this._easeScrollChildOY.restart({
+            key: 'childOY',
+            from: y0,
+            to: y1,
+            duration: duration,
+            ease: ease
+        });
+    };
+
     var ScrollMethods = {
-        scrollToLine(lineIndex) {
-            this.setChildOY(-this.lineHeight * lineIndex);
+        scrollToLine(lineIndex, duration, ease) {
+            var y0 = this.childOY;
+            this.childrenMap.child.scrollToLine(lineIndex);
+            var y1 = this.childOY;
+
+            EaseScrollChildOY.call(this, y0, y1, duration, ease);
             return this;
         },
 
-        scrollToNextLine(lineCount) {
-            if (lineCount === undefined) {
-                lineCount = 1;
-            }
+        scrollToNextLine(lineCount, duration, ease) {
+            var y0 = this.childOY;
+            this.childrenMap.child.scrollToNextLine(lineCount);
+            var y1 = this.childOY;
 
-            var lineIndex = this.lineIndex + lineCount;
-            this.scrollToLine(lineIndex);
+            EaseScrollChildOY.call(this, y0, y1, duration, ease);
             return this;
         }
     };
@@ -23576,7 +23770,7 @@
             var textCrop = GetValue(config, 'textCrop', !!textObject.setCrop);
             var textMask = GetValue(config, 'textMask', !textCrop);
             var content = GetValue(config, 'content', '');
-            var textBlock = new TextBlock(scene, {
+            var textBlockConfig = {
                 width: textWidth,
                 height: textHeight,
                 text: textObject,
@@ -23585,7 +23779,13 @@
                 content: content,
                 clampTextOY: GetValue(config, 'clampChildOY', false),
                 alwaysScrollable: GetValue(config, 'alwaysScrollable', false),
-            });
+            };
+            var textBlock;
+            if (textObject && (GetTextObjectType(textObject) === TagTextType)) {
+                textBlock = new TagTextBlock(scene, textBlockConfig);
+            } else {
+                textBlock = new TextBlock(scene, textBlockConfig);
+            }
             scene.add.existing(textBlock); // Important: Add to display list for touch detecting
             // Inject properties for scrollable interface
             InjectProperties(textBlock);
@@ -23609,16 +23809,13 @@
         }
 
         get text() {
-            return this.childrenMap.child.text;
-        }
-
-        get lineHeight() {
             var textBlock = this.childrenMap.child;
-            return textBlock.textLineHeight + textBlock.textLineSpacing;
+            return textBlock.text;
         }
 
         get lineIndex() {
-            return Math.floor(-this.childOY / this.lineHeight);
+            var textBlock = this.childrenMap.child;
+            return textBlock.lineIndex;
         }
 
         get linesCount() {
