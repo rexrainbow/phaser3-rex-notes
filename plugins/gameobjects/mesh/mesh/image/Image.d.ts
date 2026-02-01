@@ -39,7 +39,7 @@ declare class Mesh extends Phaser.GameObjects.GameObject {
     }): this;
 
     getVertexByName(name: string | number): Vertex | null;
-    getFaceByName(name: string | numbeclearTintr): Face | null;
+    getFaceByName(name: string | number): Face | null;
 
     resetVerticesPosition(): this;
 
@@ -53,7 +53,7 @@ declare class Mesh extends Phaser.GameObjects.GameObject {
         camera?: Phaser.Cameras.Scene2D.Camera
     ): boolean;
 
-    setTintFill(value?: boolean): this;
+    setTintFill(mode: number): this;
     setTint(tint?: number): this;
     clearTint(): this;
 

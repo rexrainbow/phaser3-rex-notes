@@ -82,6 +82,7 @@ var WebglRender = function (Submitter, drawingContext, parentMatrix, calcMatrix,
 
     var tint = GetTint(this.tint, this.alpha * alpha);
 
+    tempTinter.tintEffect = this.tintFill;
     tempTinter.tintTopLeft = tint;
     tempTinter.tintBottomLeft = tint;
     tempTinter.tintTopRight = tint;

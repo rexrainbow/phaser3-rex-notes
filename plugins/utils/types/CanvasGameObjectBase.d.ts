@@ -436,7 +436,7 @@ export default class CanvasGameObjectBase extends Phaser.GameObjects.GameObject 
     /**
      * True if tint fill mode is enabled.
      */
-    tintFill: boolean;
+    tintFill: number;
     /**
      * Clear tint.
      * @returns This instance.
@@ -457,19 +457,11 @@ export default class CanvasGameObjectBase extends Phaser.GameObjects.GameObject 
         bottomRight?: number
     ): this;
     /**
-     * Set corner tints and enable fill.
-     * @param topLeft - Tint for top-left.
-     * @param topRight - Tint for top-right.
-     * @param bottomLeft - Tint for bottom-left.
-     * @param bottomRight - Tint for bottom-right.
+     * Sets the tint fill mode to use when applying the tint to the texture.
+     * @param number - The tint mode to use.
      * @returns This instance.
      */
-    setTintFill(
-        topLeft?: number,
-        topRight?: number,
-        bottomLeft?: number,
-        bottomRight?: number
-    ): this;
+    setTintFill(mode:number): this;
     /**
      * Unified tint value.
      */

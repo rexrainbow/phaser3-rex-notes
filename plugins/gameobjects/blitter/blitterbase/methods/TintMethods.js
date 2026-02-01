@@ -1,20 +1,22 @@
 export default {
     setTint(tint) {
-        // 0: Solid tint + texture alpha
         this.tint = tint;
-        this.tintFill = false;
         return this;
     },
 
-    setTintFill(tint) {
-        // 1: Solid tint, no texture
-        this.tint = tint;
-        this.tintFill = true;
+    setTintFill(mode) {
+        if (mode === undefined || mode === true) {
+            mode = Phaser.TintModes.FILL;
+        } else if (mode === false) {
+            mode = Phaser.TintModes.MULTIPLY;
+        }
+        this.tintFill = mode;
         return this;
     },
 
     clearTint() {
-        this.setTint(0xffffff);
+        this.tint = 0xffffff;
+        this.tintFill = Phaser.TintModes.MULTIPLY;
         return this;
     }
 }

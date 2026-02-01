@@ -2,7 +2,7 @@ import RenderBase from '../renderbase/RenderBase.js';
 import { ImageTypeName } from '../Types.js';
 import DrawFrameToCanvas from '../../../../../utils/texture/DrawFrameToCanvas.js';
 
-const CanvasPool = Phaser.Display.Canvas.CanvasPool;
+const TintModes = Phaser.TintModes;
 
 class ImageData extends RenderBase {
     constructor(
@@ -99,10 +99,16 @@ class ImageData extends RenderBase {
     }
 
     renderContent() {
+        var tintMode = undefined;
+        if (this.color !== undefined && this.color !== null) {
+            tintMode = TintModes.FILL;
+        }
+        // TODO: Pass tintMode from paremeter
+
         DrawFrameToCanvas(
             this.frameObj, this.canvas,
             0, 0, this.frameWidth, this.frameHeight,
-            this.color, false
+            this.color, false, tintMode
         );
 
     }

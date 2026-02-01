@@ -26,6 +26,7 @@ class Demo extends Phaser.Scene {
         face.angle = -90;
 
         gameObject
+            //.setTint(0x880000)
             .setFaceInteractive()
             .on('face.pointerout', function (face) {
                 face.setAlpha(1);

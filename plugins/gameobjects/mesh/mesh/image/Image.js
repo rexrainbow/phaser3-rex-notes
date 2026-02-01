@@ -32,7 +32,7 @@ class Image extends Base {
         this.alphaBuffer = null;
         this.colorBuffer = null;
 
-        this.tintFill = false;
+        this.tintFill = Phaser.TintModes.MULTIPLY;
 
         this.debugCallback = null;
         this.debugGraphic = null;

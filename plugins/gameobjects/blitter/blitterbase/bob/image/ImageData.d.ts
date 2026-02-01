@@ -34,9 +34,9 @@ declare class ImageData extends RenderBase {
     resetFlip(): this;
 
     tint: number;
-    tintFill: boolean;
+    tintFill: number;
     setTint(value: number): this;
-    setTintFill(value: number): this;
+    setTintFill(mode: number): this;
     clearTint(): this;
     resetTint(): this;
 

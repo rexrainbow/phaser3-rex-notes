@@ -1,5 +1,6 @@
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
+const TintModes = Phaser.TintModes;
 
 var AddImage = function (key, config) {
     if (IsPlainObject(key)) {
@@ -32,6 +33,13 @@ var AddImage = function (key, config) {
         }
     }
 
+    var tintFill = GetValue(config, 'tintFill', undefined);
+    if (tintFill === true) {
+        tintFill = TintModes.FILL;
+    } else if (tintFill === false) {
+        tintFill = undefined;
+    }
+
     this.images[key] = {
         key: textureKey,
         frame: frameKey,
@@ -42,7 +50,7 @@ var AddImage = function (key, config) {
         right: GetValue(config, 'right', 0),
         originX: GetValue(config, 'originX', 0),
         originY: GetValue(config, 'originY', 0),
-        tintFill: GetValue(config, 'tintFill', false),
+        tintFill: tintFill,
     }
 }
 
