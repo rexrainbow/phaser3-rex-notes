@@ -8,11 +8,15 @@ Built-in filters.
 - [Blur](#blur) : 3 different levels of gaussian blur (low, medium and high) and custom distance and color.
 - [Bokeh](#bokeh) / [Tilt Shift](#tilt-shift) : A bokeh and tiltshift effect, with intensity, contrast and distance settings.
 - [Color Matrix](#colormatrix) : Add a ColorMatrix to any Game Object with access to all of its methods, such as `sepia`, `greyscale`, `lsd` and lots more.
-- [Glow](#glow) : Add a smooth inner or outer glow, with custom distance, strength and color.
 - [Displacement](#displacement) : Use a displacement texture, such as a noise texture, to drastically (or subtly!) alter the appearance of a Game Object.
+- [Glow](#glow) : Add a smooth inner or outer glow, with custom distance, strength and color.
+- [Image Light](#image-light) : Image-based lighting from panorama environment maps and normal maps.
+- [Key](#key) : Remove or isolate a target color with threshold and feather controls.
+- [NormalTools](#normaltools) : Rotate and reshape normal maps, or output normal-facing ratio masks.
+- [Panorama Blur](#panorama-blur) : Panorama-aware blur for environment maps.
+- [Parallel](#parallel) : Blend result of 2 filter lists.
 - [Pixelate](#pixelate) : Blends colors in each block for a soft, mosaic look. Great for smooth transitions or gentle censorship.
 - [Shadow](#shadow) : Add a drop shadow behind a Game Object, with custom depth and color.
-- [Parallel](#parallel) : Blend result of 2 filter lists.
 
 All Game Objects and camera support filters. These are effects applied after the Game Object has been rendered.
 
@@ -290,48 +294,6 @@ All Game Objects and camera support filters. These are effects applied after the
     controller.contrast = contrast;
     ```
 
-### Tilt Shift
-
-- Add filter controller to game object
-    ```javascript
-    var controller = gameObject
-        .enableFilters()
-        .filters.internal.addTiltShift(radius, amount, contrast, blurX, blurY, strength);
-    ```
-    - `radius` : The radius of the bokeh effect. Default value is `0.5`.
-    - `amount` : The amount of the bokeh effect. Default value is `1`.
-    - `contrast` : The color contrast of the bokeh effect. Default value is `0.2`.
-    - `blurX`, `blurY` : The amount of horizontal/vertical blur.
-    - `strength` : The strength of the blur.
-- Add filter controller to camera
-    ```javascript
-    var controller = camera
-        .filters.internal.addTiltShift(radius, amount, contrast, blurX, blurY, strength);
-    ```
-- Disable filter controller
-    ```javascript
-    controller.setActive(false);
-    // controller.active = false;
-    ```
-- Remove filter controller
-    ```javascript
-    gameObject.filters.internal.remove(controller);
-    ```
-    ```javascript
-    camera.filters.internal.remove(controller);
-    ```
-    - Also destroy this controller.
-- Properties
-    ```javascript
-    controller.radius = radius;
-    controller.amount = amount;
-    controller.contrast = contrast;
-    controller.blurX = blurX;
-    controller.blurY = blurY;
-    controller.strength = strength;
-    ```
-
-
 ### ColorMatrix
 
 - Add filter controller to game object
@@ -530,7 +492,7 @@ All Game Objects and camera support filters. These are effects applied after the
     - Set texture
         ```javascript
         controller.setTexture(key);
-        ``` 
+        ```
 
 ### Glow
 
@@ -574,6 +536,266 @@ All Game Objects and camera support filters. These are effects applied after the
     controller.innerStrength = innerStrength;
     controller.knockout = knockout;
     ```
+
+### Image Light
+
+Image-based lighting using a panorama environment map and a normal map.
+
+- Add filter controller to game object
+    ```javascript
+    var controller = gameObject
+        .enableFilters()
+        .filters.internal.addImageLight(config);
+    ```
+- Add filter controller to camera
+    ```javascript
+    var controller = camera
+        .filters.internal.addImageLight(config);
+    ```
+- `config`
+    - `environmentMap` : Panorama texture key or texture instance. Default value is `'__WHITE'`.
+    - `normalMap` : Normal map texture key or texture instance. Default value is `'__NORMAL'`.
+    - `viewMatrix` : Matrix data for environment orientation. Optional.
+    - `modelRotation` : Model rotation in radians. Default value is `0`.
+    - `modelRotationSource` : Rotation source.
+        - A callback function returning radians.
+        - A Game Object with transform component.
+        - `null` : Use `modelRotation`. Default behavior.
+    - `bulge` : Surface bulge amount. Default value is `0`.
+    - `colorFactor` : Light intensity factor per color channel, `[r, g, b]`. Default value is `[1, 1, 1]`.
+- Disable filter controller
+    ```javascript
+    controller.setActive(false);
+    // controller.active = false;
+    ```
+- Remove filter controller
+    ```javascript
+    gameObject.filters.internal.remove(controller);
+    ```
+    ```javascript
+    camera.filters.internal.remove(controller);
+    ```
+    - Also destroy this controller.
+- Properties
+    ```javascript
+    controller.viewMatrix = viewMatrix;
+    controller.modelRotation = modelRotation;
+    controller.modelRotationSource = modelRotationSource;
+    controller.bulge = bulge;
+    controller.colorFactor = [r, g, b];
+    ```
+- Methods
+    - Set environment map
+        ```javascript
+        controller.setEnvironmentMap(texture);
+        ```
+    - Set normal map
+        ```javascript
+        controller.setNormalMap(texture);
+        ```
+    - Set normal map from Game Object texture data source
+        ```javascript
+        controller.setNormalMapFromGameObject(gameObject);
+        ```
+    - Get current model rotation in radians
+        ```javascript
+        var rotation = controller.getModelRotation();
+        ```
+
+### Key
+
+The Key effect removes or isolates a specific color from an image.
+
+- Add filter controller to game object
+    ```javascript
+    var controller = gameObject
+        .enableFilters()
+        .filters.internal.addKey(config);
+    ```
+- Add filter controller to camera
+    ```javascript
+    var controller = camera
+        .filters.internal.addKey(config);
+    ```
+- `config`
+    - `color` : The color to use for the key.
+        - A number : Hex color, like `0xff00ff`.
+        - A string : Hex string, like `'#ff00ff'`.
+        - An array : `[r, g, b]`, each component in range `0` to `1`.
+        - A `Phaser.Display.Color` instance.
+        - Default value is `[1, 1, 1, 1]`.
+    - `alpha` : Alpha value of key color, range `0` to `1`. Default value is `1`.
+    - `isolate` : Keep or remove matching area.
+        - `true` : Keep the area matching key color, remove others.
+        - `false` : Remove the area matching key color, keep others. Default behavior.
+    - `threshold` : Match threshold, range `0` to `1`. Default value is `0.0625` (`1 / 16`).
+    - `feather` : Soft transition outside threshold, range `0` to `1`. Default value is `0`.
+- Disable filter controller
+    ```javascript
+    controller.setActive(false);
+    // controller.active = false;
+    ```
+- Remove filter controller
+    ```javascript
+    gameObject.filters.internal.remove(controller);
+    ```
+    ```javascript
+    camera.filters.internal.remove(controller);
+    ```
+    - Also destroy this controller.
+- Properties
+    ```javascript
+    controller.color = [r, g, b, a];  // Each component in range 0 to 1
+    controller.isolate = isolate;
+    controller.threshold = threshold;
+    controller.feather = feather;
+    ```
+- Methods
+    - Set key color
+        ```javascript
+        controller.setColor(color);
+        ```
+    - Set key alpha
+        ```javascript
+        controller.setAlpha(alpha);
+        ```
+
+### NormalTools
+
+Manipulate normal maps (rotation, facing power, and ratio output).
+
+- Add filter controller to game object
+    ```javascript
+    var controller = gameObject
+        .enableFilters()
+        .filters.internal.addNormalTools(config);
+    ```
+- Add filter controller to camera
+    ```javascript
+    var controller = camera
+        .filters.internal.addNormalTools(config);
+    ```
+- `config`
+    - `rotation` : Initial 2D rotation in radians. Default value is `0`.
+    - `rotationSource` : Rotation source.
+        - A callback function returning radians.
+        - A Game Object with transform component.
+        - `null` : Do not auto-update from source. Default behavior.
+    - `facingPower` : Facing strength. Default value is `1`.
+    - `outputRatio` : Output grayscale normal-facing ratio map. Default value is `false`.
+    - `ratioVector` : Direction vector `[x, y, z]` for ratio output. Default value is `[0, 0, 1]`.
+    - `ratioRadius` : Hemisphere ratio radius. Default value is `1`.
+- Disable filter controller
+    ```javascript
+    controller.setActive(false);
+    // controller.active = false;
+    ```
+- Remove filter controller
+    ```javascript
+    gameObject.filters.internal.remove(controller);
+    ```
+    ```javascript
+    camera.filters.internal.remove(controller);
+    ```
+    - Also destroy this controller.
+- Properties
+    ```javascript
+    controller.viewMatrix = viewMatrix;
+    controller.rotationSource = rotationSource;
+    controller.facingPower = facingPower;
+    controller.outputRatio = outputRatio;
+    controller.ratioVector = ratioVector;
+    controller.ratioRadius = ratioRadius;
+    ```
+- Methods
+    - Get current 2D rotation
+        ```javascript
+        var rotation = controller.getRotation();
+        ```
+    - Set 2D rotation
+        ```javascript
+        controller.setRotation(rotation);
+        ```
+    - Update rotation from rotation source
+        ```javascript
+        controller.updateRotation();
+        ```
+
+### Panorama Blur
+
+Blur a panorama texture with spherical distortion awareness.
+
+- Add filter controller to game object
+    ```javascript
+    var controller = gameObject
+        .enableFilters()
+        .filters.internal.addPanoramaBlur(config);
+    ```
+- Add filter controller to camera
+    ```javascript
+    var controller = camera
+        .filters.internal.addPanoramaBlur(config);
+    ```
+- `config`
+    - `radius` : Blur radius. `1` samples a hemisphere, `0` samples a point. Default value is `1`.
+    - `samplesX` : Sample count on X axis. Default value is `32`.
+    - `samplesY` : Sample count on Y axis. Default value is `16`.
+    - `power` : Sample power curve. Default value is `1`.
+- Disable filter controller
+    ```javascript
+    controller.setActive(false);
+    // controller.active = false;
+    ```
+- Remove filter controller
+    ```javascript
+    gameObject.filters.internal.remove(controller);
+    ```
+    ```javascript
+    camera.filters.internal.remove(controller);
+    ```
+    - Also destroy this controller.
+- Properties
+    ```javascript
+    controller.radius = radius;
+    controller.samplesX = samplesX;
+    controller.samplesY = samplesY;
+    controller.power = power;
+    ```
+    - Changing `samplesX` or `samplesY` will trigger shader recompilation.
+
+### Parallel
+
+Blend results of 2 filter lists
+
+- Add filter controller to game object
+    ```javascript
+    var controller = gameObject
+        .enableFilters()
+        .filters.internal.addParallelFilters()
+    var top = controller.top;
+    var bottom = controller.bottom;
+    var blend = controller.blend;
+    ```
+    - `top`, `bottom` : FilterList, add controller by `top.addThreshold(0.5, 1)`...
+    - `blend` : [Blend controller](#blend)
+- Add filter controller to camera
+    ```javascript
+    var controller = camera
+        .filters.internal.addParallelFilters();
+    ``` 
+- Disable filter controller
+    ```javascript
+    controller.setActive(false);
+    // controller.active = false;
+    ```
+- Remove filter controller
+    ```javascript
+    gameObject.filters.internal.remove(controller);
+    ```
+    ```javascript
+    camera.filters.internal.remove(controller);
+    ```
+    - Also destroy this controller.
 
 ### Pixelate
 
@@ -653,26 +875,24 @@ All Game Objects and camera support filters. These are effects applied after the
     controller.intensity = intensity;
     ```
 
-### Parallel
-
-Blend results of 2 filter lists
+### Tilt Shift
 
 - Add filter controller to game object
     ```javascript
     var controller = gameObject
         .enableFilters()
-        .filters.internal.addParallelFilters()
-    var top = controller.top;
-    var bottom = controller.bottom;
-    var blend = controller.blend;
+        .filters.internal.addTiltShift(radius, amount, contrast, blurX, blurY, strength);
     ```
-    - `top`, `bottom` : FilterList, add controller by `top.addThreshold(0.5, 1)`...
-    - `blend` : [Blend controller](#blend)
+    - `radius` : The radius of the bokeh effect. Default value is `0.5`.
+    - `amount` : The amount of the bokeh effect. Default value is `1`.
+    - `contrast` : The color contrast of the bokeh effect. Default value is `0.2`.
+    - `blurX`, `blurY` : The amount of horizontal/vertical blur.
+    - `strength` : The strength of the blur.
 - Add filter controller to camera
     ```javascript
     var controller = camera
-        .filters.internal.addParallelFilters();
-    ``` 
+        .filters.internal.addTiltShift(radius, amount, contrast, blurX, blurY, strength);
+    ```
 - Disable filter controller
     ```javascript
     controller.setActive(false);
@@ -686,6 +906,15 @@ Blend results of 2 filter lists
     camera.filters.internal.remove(controller);
     ```
     - Also destroy this controller.
+- Properties
+    ```javascript
+    controller.radius = radius;
+    controller.amount = amount;
+    controller.contrast = contrast;
+    controller.blurX = blurX;
+    controller.blurY = blurY;
+    controller.strength = strength;
+    ```
 
 ### Remove all effects
 
@@ -695,3 +924,4 @@ gameObject.filters.internal.clear();
 ```javascript
 camera.filters.internal.clear();
 ```
+
