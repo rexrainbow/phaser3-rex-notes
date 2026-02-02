@@ -212,7 +212,7 @@ controller.setActive(false);
     ```
 - Set
     ```javascript
-    controller.setScanStrength(scanLineStrength);
+    controller.setScanLineStrength(scanLineStrength);
     controller.setScanLineWidth(scanLineWidth);
     ```
     or
