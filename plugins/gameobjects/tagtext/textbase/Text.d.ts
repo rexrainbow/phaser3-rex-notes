@@ -92,6 +92,19 @@ declare namespace Text {
 
     interface IStyle {
         /**
+         * Font family name.
+         */
+        fontFamily: string,
+        /**
+         * Font size value.
+         */
+        fontSize: string,
+        /**
+         * Font style string.
+         */
+        fontStyle: string,
+
+        /**
          * Fill color.
          */
         color: string | null,
@@ -162,6 +175,11 @@ declare namespace Text {
         backgroundCornerIteration: number | undefined,
 
         /**
+         * True to use fixed line height mode.
+         */
+        fixedLineHeightMode: boolean,
+
+        /**
          * Shadow color.
          */
         shadowColor: string | null,
@@ -190,6 +208,14 @@ declare namespace Text {
          * Line spacing.
          */
         lineSpacing: number,
+        /**
+         * Letter spacing.
+         */
+        letterSpacing: number,
+        /**
+         * Horizontal text offset.
+         */
+        xOffset: number,
         /**
          * Maximum lines count.
          */
@@ -226,6 +252,31 @@ declare namespace Text {
          * Wrap mode.
          */
         wrapMode: number,
+        /**
+         * Wrap callback function.
+         */
+        wrapCallback: Function | null,
+        /**
+         * Scope object for wrap callback.
+         */
+        wrapCallbackScope: unknown,
+
+        /**
+         * True to use right-to-left text layout.
+         */
+        rtl: boolean,
+        /**
+         * Test string used for text metrics.
+         */
+        testString: string,
+        /**
+         * Baseline x multiplier.
+         */
+        baselineX: number,
+        /**
+         * Baseline y multiplier.
+         */
+        baselineY: number,
 
         /**
          * Line height.
@@ -284,6 +335,11 @@ declare class Text extends CanvasGameObjectBase {
      * Canvas 2D context.
      */
     context: CanvasRenderingContext2D;
+
+    /**
+     * Current resolved style object.
+     */
+    style: Text.IStyle;
 
     /**
      * Enable or disable RTL layout.
@@ -895,11 +951,6 @@ declare class Text extends CanvasGameObjectBase {
         worldX: number, worldY: number,
         camera: Phaser.Cameras.Scene2D.Camera
     ): string;
-
-    /**
-     * Current resolved style object.
-     */
-    style: Text.IStyle;
 
     /**
      * Padding values.
