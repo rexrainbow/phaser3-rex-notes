@@ -73,7 +73,7 @@ declare namespace TextEdit {
         /**
          * Additional style map.
          */
-        style?: { [name: string]: any },
+        style?: Record<string, unknown>,
     }
 
     /**

@@ -32,7 +32,7 @@ declare class TextTranslationPlugin extends Phaser.Plugins.BasePlugin {
 
     t(
         translationKey: string,
-        interpolations?: { [name: string]: any }
+        interpolations?: Record<string, unknown>
     ): string
 
 }

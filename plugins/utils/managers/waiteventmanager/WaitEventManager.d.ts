@@ -189,5 +189,5 @@ declare class WaitEventManager extends WaitEvent {
      * @param config - Wait config.
      * @returns Managers instance.
      */
-    waitAny(config?: { [name: string]: any }): Managers;
+    waitAny(config?: Record<string, unknown>): Managers;
 }

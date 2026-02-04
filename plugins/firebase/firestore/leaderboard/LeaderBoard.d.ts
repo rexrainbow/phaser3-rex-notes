@@ -59,7 +59,7 @@ declare class LeaderBoard {
 
     post(
         score: number,
-        extraData?: { [name: string]: any },
+        extraData?: Record<string, unknown>,
         timestamp?: number
     ): Promise<void>;
 
