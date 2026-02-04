@@ -13,10 +13,10 @@ declare namespace BracketParser {
         type PauseCallbackType = (parser: BracketParser) => void;
         type ResumeCallbackType = (parser: BracketParser) => void;
 
-        type TagOnCallbackType = (payload: { [name: string]: any }) => void;
-        type AnyTagOnCallbackType = (tagName: string, payload: { [name: string]: any }) => void;
-        type TagOffCallbackType = (payload: { [name: string]: any }) => void;
-        type AnyTagOffCallbackType = (tagName: string, payload: { [name: string]: any }) => void;
+        type TagOnCallbackType = (payload: Record<string, unknown>) => void;
+        type AnyTagOnCallbackType = (tagName: string, payload: Record<string, unknown>) => void;
+        type TagOffCallbackType = (payload: Record<string, unknown>) => void;
+        type AnyTagOffCallbackType = (tagName: string, payload: Record<string, unknown>) => void;
         type ContentCallbackType = (content: string) => void;
     }
 }

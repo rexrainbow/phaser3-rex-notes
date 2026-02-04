@@ -19,7 +19,7 @@ export default class BaseGeom extends DataMethods {
     /**
      * Custom data storage.
      */
-    data: { [name: string]: any } | undefined;
+    data: Record<string, unknown> | undefined;
 
     /**
      * True if filled.

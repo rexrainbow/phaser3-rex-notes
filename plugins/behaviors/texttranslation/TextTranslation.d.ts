@@ -21,7 +21,7 @@ declare namespace TextTranslation {
     /**
      * Interpolation values.
      */
-    type InterpolationsType = { [name: string]: any };
+    type InterpolationsType = Record<string, unknown>;
 
     /**
      * TextTranslation configuration.
