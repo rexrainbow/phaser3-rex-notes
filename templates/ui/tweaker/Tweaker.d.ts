@@ -15,6 +15,9 @@ import ColorInput from '../colorinput/colorinput/ColorInput';
 export default Tweaker;
 
 declare namespace Tweaker {
+    /**
+     * Configuration options for interactive round-rectangle background.
+     */
     interface IInteractiveRoundRectangleConfig extends RoundRectangle.IConfig {
         'active.color'?: number,
         'active.alpha'?: number,
@@ -24,20 +27,32 @@ declare namespace Tweaker {
         'active.strokeWidth'?: number,
     }
 
+    /**
+     * Label config with interactive background support.
+     */
     interface IInteractiveLabelConfig extends SimpleLabel.IConfig {
         background?: IInteractiveRoundRectangleConfig,
     }
 
+    /**
+     * Button style configuration.
+     */
     interface IButtonConfig extends IInteractiveLabelConfig {
         expand?: boolean,
     }
 
+    /**
+     * Increment/decrement control configuration.
+     */
     interface IIncDecConfig {
         incButton?: SimpleLabel.IConfig,
         decButton?: SimpleLabel.IConfig,
         inputTextIndex?: 0 | 1 | 2
     }
 
+    /**
+     * Folder title style configuration.
+     */
     interface IFolderTitleConfig extends SimpleLabel.IConfig {
         expandedIcon?: {
             color?: number,
@@ -52,6 +67,9 @@ declare namespace Tweaker {
         }
     }
 
+    /**
+     * Input row style configuration.
+     */
     interface IInputRowStyle {
         background?: CreateBackground.IConfig,
 
@@ -93,10 +111,16 @@ declare namespace Tweaker {
         }
     }
 
+    /**
+     * Option item configuration for list-like inputs.
+     */
     interface IOptionConfig extends SimpleLabel.IResetDisplayContentConfig {
         value: any
     }
 
+    /**
+     * Root style configuration of tweaker.
+     */
     interface IStyle {
         itemWidth?: number,
         itemHeight?: number,
@@ -111,7 +135,10 @@ declare namespace Tweaker {
             background?: CreateBackground.IConfig,
 
             space?: {
-                left?: number, right?: number, top?: number, bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number,
+                bottom?: number,
                 item?: number
             },
         },
@@ -130,7 +157,10 @@ declare namespace Tweaker {
             background?: CreateBackground.IConfig | CreateBackground.IConfig[],
 
             space?: {
-                left?: number, right?: number, top?: number, bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number,
+                bottom?: number,
                 column?: number,
                 title?: number,
             }
@@ -144,11 +174,15 @@ declare namespace Tweaker {
             background?: CreateBackground.IConfig | CreateBackground.IConfig[],
 
             space?: {
-                left?: number, right?: number, top?: number, bottom?: number,
-                item?: number, line?: number,
+                left?: number,
+                right?: number,
+                top?: number,
+                bottom?: number,
+                item?: number,
+                line?: number,
                 title?: number,
             }
-        }
+        },
 
         scrollable?: {
             title?: SimpleLabel.IConfig,
@@ -173,23 +207,43 @@ declare namespace Tweaker {
         separator?: RoundRectangle.IConfig,
 
         space?: {
-            left?: number, right?: number, top?: number, bottom?: number,
+            left?: number,
+            right?: number,
+            top?: number,
+            bottom?: number,
             item?: number
         }
     }
 
+    /**
+     * Tweaker construction options.
+     */
     interface IConfig extends Sizer.IConfig {
         styles: IStyle,
         style: IStyle,
     }
 
+    /**
+     * Base configuration for adding an input row.
+     */
     interface IAddInputConfig {
         bindingTarget?: Object,
         bindingKey?: string,
         autoUpdate?: boolean,
 
-        onGetValue?: (bindingTarget: Object) => unknown,
-        onSetValue?: (bindingTarget: Object, value: undefined) => void,
+        /**
+         * Callback used to read value from binding target.
+         */
+        onGetValue?: (
+            bindingTarget: Object
+        ) => unknown,
+        /**
+         * Callback used to write value to binding target.
+         */
+        onSetValue?: (
+            bindingTarget: Object,
+            value: undefined
+        ) => void,
 
         view?: string,
 
@@ -202,12 +256,19 @@ declare namespace Tweaker {
         orientation?: Sizer.OrientationTypes,
 
         // range, incdec
-        min?: number, max?: number, step?: number,
+        min?: number,
+        max?: number,
+        step?: number,
 
         // list, buttons
         options?: IOptionConfig[],
 
-        format: (value?: any) => string,
+        /**
+         * Callback used to format value text.
+         */
+        format: (
+            value?: any
+        ) => string,
 
         inputTextReadOnly?: boolean,
 
@@ -216,16 +277,47 @@ declare namespace Tweaker {
         key?: string,
 
         onValidate?: (
-            newValue: any, oldValue: any,
-            bindingTarget: Object, bindingKey: string
+            /**
+             * New candidate value.
+             */
+            newValue: any,
+            /**
+             * Previous value.
+             */
+            oldValue: any,
+            /**
+             * Binding target object.
+             */
+            bindingTarget: Object,
+            /**
+             * Binding key.
+             */
+            bindingKey: string
         ) => boolean;
 
         onValueChange?: (
-            newValue: any, oldValue: any,
-            bindingTarget: Object, bindingKey: string
+            /**
+             * New value.
+             */
+            newValue: any,
+            /**
+             * Previous value.
+             */
+            oldValue: any,
+            /**
+             * Binding target object.
+             */
+            bindingTarget: Object,
+            /**
+             * Binding key.
+             */
+            bindingKey: string
         ) => void,
     }
 
+    /**
+     * Configuration for adding a single action button row.
+     */
     interface IAddButtonConfig {
         bindingTarget?: Object,
 
@@ -236,7 +328,12 @@ declare namespace Tweaker {
         title: string,
 
         label: string | SimpleLabel.IResetDisplayContentConfig,
-        callback: (bindingTarget: Object) => void,
+        /**
+         * Callback invoked when button is clicked.
+         */
+        callback: (
+            bindingTarget: Object
+        ) => void,
 
         key?: string,
     }
@@ -252,7 +349,12 @@ declare namespace Tweaker {
 
         buttons: {
             label: string | SimpleLabel.IResetDisplayContentConfig,
-            callback: (bindingTarget: Object) => void,
+            /**
+             * Callback invoked when button is clicked.
+             */
+            callback: (
+                bindingTarget: Object
+            ) => void,
         }[],
 
         wrap?: boolean,
@@ -298,7 +400,7 @@ declare namespace Tweaker {
 
     interface IAddScrollableConfig {
         title?: string,
-        height?: string
+        height?: string,
 
         key?: string,
     }
@@ -377,21 +479,33 @@ declare namespace Tweaker {
 
         baseClass?: BaseSizer,
 
+        /**
+         * Return true if this handler accepts input config.
+         */
         accept: (
-            config: IAcceptConfig,
+            config: IAcceptConfig
         ) => boolean,
 
+        /**
+         * Build UI objects for this input handler.
+         */
         build: (
             gameObject: BaseSizer,
             style: IInputRowStyle
         ) => void,
 
+        /**
+         * Setup created UI objects with input config values.
+         */
         setup?: (
             gameObject: BaseSizer,
             config: IAddInputConfig,
-            setDefaults: boolean,
+            setDefaults: boolean
         ) => void,
 
+        /**
+         * Display value on created UI objects.
+         */
         displayValue?: (
             gameObject: BaseSizer,
             value: unknown
@@ -401,71 +515,174 @@ declare namespace Tweaker {
 
 }
 
+/**
+ * Dynamic form builder for editing bound object properties.
+ */
 declare class Tweaker extends Sizer {
+    /**
+     * Create a tweaker component.
+     *
+     * @param scene - Scene that owns this component.
+     * @param config - Optional tweaker configuration.
+     */
     constructor(
         scene: Phaser.Scene,
         config?: Tweaker.IConfig
     );
 
+    /**
+     * Register an input handler.
+     *
+     * @param config - Input handler configuration.
+     * @returns This tweaker instance.
+     */
     registerInputHandler(
         config: Tweaker.IInputHandlerConfig
     ): this;
 
+    /**
+     * Remove an input handler by name.
+     *
+     * @param name - Handler name.
+     * @returns This tweaker instance.
+     */
     removeInputHandler(
         name: string
     ): this;
 
+    /**
+     * Add an input row bound to a target object key.
+     *
+     * @param object - Binding target object.
+     * @param key - Binding key.
+     * @param config - Optional input configuration.
+     * @returns This tweaker instance.
+     */
     addInput(
         object: Object,
         key: string,
         config?: Tweaker.IAddInputConfig
     ): this;
 
+    /**
+     * Add an input row from configuration.
+     *
+     * @param config - Optional input configuration.
+     * @returns This tweaker instance.
+     */
     addInput(
         config?: Tweaker.IAddInputConfig
     ): this;
 
+    /**
+     * Add a single action button row.
+     *
+     * @param config - Button row configuration.
+     * @returns This tweaker instance.
+     */
     addButton(
         config: Tweaker.IAddButtonConfig
     ): this;
 
+    /**
+     * Add a multi-buttons action row.
+     *
+     * @param config - Buttons row configuration.
+     * @returns This tweaker instance.
+     */
     addButtons(
         config: Tweaker.IAddButtonsConfig
     ): this;
 
+    /**
+     * Add a separator row.
+     *
+     * @returns This tweaker instance.
+     */
     addSeparator(): this;
 
+    /**
+     * Add a folder row and return nested tweaker.
+     *
+     * @param config - Folder configuration.
+     * @returns Nested tweaker instance.
+     */
     addFolder(
         config: Tweaker.IAddFolderConfig
     ): Tweaker;
 
+    /**
+     * Add tab rows and return tab tweaker pages.
+     *
+     * @param config - Tab configuration.
+     * @returns Array of tab tweaker instances.
+     */
     addTab(
         config: Tweaker.IAddTabConfig
     ): Tweaker[];
 
+    /**
+     * Add columns and return column tweakers.
+     *
+     * @param config - Column count or columns configuration.
+     * @returns Array of column tweaker instances.
+     */
     addColumns(
         config: number | Tweaker.IAddColumnsConfig
     ): Tweaker[];
 
+    /**
+     * Add wrap container and return nested tweaker.
+     *
+     * @param config - Wrap configuration.
+     * @returns Nested tweaker instance.
+     */
     addWrap(
         config: Tweaker.IAddWrapConfig
     ): Tweaker;
 
+    /**
+     * Add scrollable container and return nested tweaker.
+     *
+     * @param config - Scrollable configuration.
+     * @returns Nested tweaker instance.
+     */
     addScrollable(
         config: Tweaker.IAddScrollableConfig
     ): Tweaker;
 
+    /**
+     * Add rows from declarative properties with optional target and monitor.
+     *
+     * @param properties - Row properties list.
+     * @param target - Optional shared binding target.
+     * @param monitor - Set to true to monitor target changes.
+     * @returns This tweaker instance.
+     */
     addRows(
         properties: Tweaker.RowsPropertyType[],
         target?: Object,
-        monitor?: boolean,
+        monitor?: boolean
     ): this;
 
+    /**
+     * Add rows from declarative properties with optional monitor.
+     *
+     * @param properties - Row properties list.
+     * @param monitor - Set to true to monitor target changes.
+     * @returns This tweaker instance.
+     */
     addRows(
         properties: Tweaker.RowsPropertyType[],
-        monitor?: boolean,
+        monitor?: boolean
     ): this;
 
+    /**
+     * Set default binding target for subsequent rows.
+     *
+     * @param object - Binding target object.
+     * @returns This tweaker instance.
+     */
     setBindingTarget(
         object: Object
     ): this;
