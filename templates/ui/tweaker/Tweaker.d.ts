@@ -19,11 +19,16 @@ declare namespace Tweaker {
      * Configuration options for interactive round-rectangle background.
      */
     interface IInteractiveRoundRectangleConfig extends RoundRectangle.IConfig {
+        /** Fill color when the control is active. */
         'active.color'?: number,
+        /** Fill alpha when the control is active. */
         'active.alpha'?: number,
 
+        /** Stroke color when the control is active. */
         'active.strokeColor'?: number,
+        /** Stroke alpha when the control is active. */
         'active.strokeAlpha'?: number,
+        /** Stroke width when the control is active. */
         'active.strokeWidth'?: number,
     }
 
@@ -31,6 +36,7 @@ declare namespace Tweaker {
      * Label config with interactive background support.
      */
     interface IInteractiveLabelConfig extends SimpleLabel.IConfig {
+        /** Interactive background style of the label. */
         background?: IInteractiveRoundRectangleConfig,
     }
 
@@ -38,6 +44,7 @@ declare namespace Tweaker {
      * Button style configuration.
      */
     interface IButtonConfig extends IInteractiveLabelConfig {
+        /** Set to true to expand button size in layout. */
         expand?: boolean,
     }
 
@@ -45,8 +52,11 @@ declare namespace Tweaker {
      * Increment/decrement control configuration.
      */
     interface IIncDecConfig {
+        /** Style for the increment button. */
         incButton?: SimpleLabel.IConfig,
+        /** Style for the decrement button. */
         decButton?: SimpleLabel.IConfig,
+        /** Index of input text element in the inc/dec row. */
         inputTextIndex?: 0 | 1 | 2
     }
 
@@ -54,15 +64,23 @@ declare namespace Tweaker {
      * Folder title style configuration.
      */
     interface IFolderTitleConfig extends SimpleLabel.IConfig {
+        /** Expanded-state icon style for folder titles. */
         expandedIcon?: {
+            /** Fill color of the expanded icon. */
             color?: number,
+            /** Fill alpha of the expanded icon. */
             alpha?: number,
 
+            /** Stroke color of the expanded icon. */
             strokeColor?: number,
+            /** Stroke alpha of the expanded icon. */
             strokeAlpha?: number,
+            /** Stroke width of the expanded icon. */
             strokeWidth?: number,
+            /** Set to true to render only the arrow glyph. */
             arrowOnly?: boolean,
 
+            /** Tween duration for expand/collapse icon transition. */
             easeDuration?: number,
         }
     }
@@ -71,41 +89,63 @@ declare namespace Tweaker {
      * Input row style configuration.
      */
     interface IInputRowStyle {
+        /** Background style of each input row. */
         background?: CreateBackground.IConfig,
 
+        /** Title label style of each input row. */
         title?: SimpleLabel.IConfig,
 
+        /** Single-line text input style. */
         inputText?: InputText.IConfig,
 
+        /** Multi-line text input style. */
         inputTextArea?: InputTextArea.IConfig,
 
+        /** Slider style used by range-like inputs. */
         slider?: {
+            /** Slider track style. */
             track: RoundRectangle.IConfig,
+            /** Slider indicator style. */
             indicator: RoundRectangle.IConfig,
+            /** Slider thumb style. */
             thumb: RoundRectangle.IConfig,
         },
 
+        /** List selector style. */
         list?: {
+            /** List label style. */
             label?: SimpleLabel.IConfig,
 
+            /** List item button style. */
             button?: IInteractiveLabelConfig,
         },
 
+        /** Action button style. */
         button?: IButtonConfig,
 
+        /** Checkbox style. */
         checkbox?: Checkbox.IConfig,
 
+        /** Toggle switch style. */
         toggleSwitch?: ToggleSwitch.IConfig,
 
+        /** Color input style. */
         colorInput?: ColorInput.IConfig,
 
+        /** Increment/decrement control style. */
         incDec?: IIncDecConfig,
 
+        /** Proportion settings for row sections. */
         proportion?: {
+            /** Proportion of title section. */
             title?: number,
+            /** Proportion of input field section. */
             inputField?: number,
+            /** Proportion settings inside range section. */
             range?: {
+                /** Proportion of slider inside range section. */
                 slider?: number,
+                /** Proportion of input text inside range section. */
                 inputText?: number,
             }
         }
@@ -115,6 +155,7 @@ declare namespace Tweaker {
      * Option item configuration for list-like inputs.
      */
     interface IOptionConfig extends SimpleLabel.IResetDisplayContentConfig {
+        /** Backing value represented by this option. */
         value: any
     }
 
@@ -122,18 +163,26 @@ declare namespace Tweaker {
      * Root style configuration of tweaker.
      */
     interface IStyle {
+        /** Default width of each item row. */
         itemWidth?: number,
+        /** Default height of each item row. */
         itemHeight?: number,
 
+        /** Root background style. */
         background?: CreateBackground.IConfig,
 
+        /** Shared style for input rows. */
         inputRow?: IInputRowStyle,
 
+        /** Folder container style. */
         folder?: {
+            /** Folder title style. */
             title?: SimpleLabel.IConfig,
 
+            /** Folder background style. */
             background?: CreateBackground.IConfig,
 
+            /** Spacing around folder content. */
             space?: {
                 left?: number,
                 right?: number,
@@ -143,19 +192,28 @@ declare namespace Tweaker {
             },
         },
 
+        /** Tab container style. */
         tab?: {
+            /** Style of each tab button. */
             tab?: IInteractiveLabelConfig,
 
+            /** Set to true to wrap tabs across lines. */
             wrapTabs?: boolean,
+            /** Tabs button group style. */
             tabs?: Buttons.IConfig | FixWidthButtons.IConfig,
+            /** Tab pages style. */
             pages?: Pages.IConfig,
         },
 
+        /** Columns container style. */
         columns?: {
+            /** Optional columns title style. */
             title?: SimpleLabel.IConfig,
 
+            /** Columns background style per column or shared. */
             background?: CreateBackground.IConfig | CreateBackground.IConfig[],
 
+            /** Spacing around columns layout. */
             space?: {
                 left?: number,
                 right?: number,
@@ -166,13 +224,18 @@ declare namespace Tweaker {
             }
         },
 
+        /** Wrap container style. */
         wrap?: {
+            /** Default item width in wrap container. */
             itemWidth?: number,
 
+            /** Optional wrap title style. */
             title?: SimpleLabel.IConfig,
 
+            /** Wrap background style per section or shared. */
             background?: CreateBackground.IConfig | CreateBackground.IConfig[],
 
+            /** Spacing around wrap layout. */
             space?: {
                 left?: number,
                 right?: number,
@@ -184,11 +247,15 @@ declare namespace Tweaker {
             }
         },
 
+        /** Scrollable container style. */
         scrollable?: {
+            /** Optional scrollable title style. */
             title?: SimpleLabel.IConfig,
 
+            /** Scrollable background style. */
             background?: CreateBackground.IConfig,
 
+            /** Vertical slider style of scrollable container. */
             slider?: {
                 track: CreateBackground.IConfig,
                 thumb: CreateBackground.IConfig,
@@ -199,13 +266,16 @@ declare namespace Tweaker {
                 minThumbSize?: number,
             },
 
+            /** Additional spacing for scrollable panel. */
             space?: {
                 panel?: number
             },
         },
 
+        /** Separator style between rows. */
         separator?: RoundRectangle.IConfig,
 
+        /** Root container spacing. */
         space?: {
             left?: number,
             right?: number,
@@ -219,7 +289,9 @@ declare namespace Tweaker {
      * Tweaker construction options.
      */
     interface IConfig extends Sizer.IConfig {
+        /** Preferred style field. */
         styles: IStyle,
+        /** Legacy style field. */
         style: IStyle,
     }
 
@@ -227,53 +299,73 @@ declare namespace Tweaker {
      * Base configuration for adding an input row.
      */
     interface IAddInputConfig {
+        /** Object that owns the edited property. */
         bindingTarget?: Object,
+        /** Property name on binding target. */
         bindingKey?: string,
+        /** Set to true to refresh value automatically. */
         autoUpdate?: boolean,
 
         /**
          * Callback used to read value from binding target.
          */
         onGetValue?: (
+            /** Object from which the current value is read. */
             bindingTarget: Object
         ) => unknown,
         /**
          * Callback used to write value to binding target.
          */
         onSetValue?: (
+            /** Object to which the value is written. */
             bindingTarget: Object,
+            /** Value to write into the binding target. */
             value: undefined
         ) => void,
 
+        /** Input view type name. */
         view?: string,
 
+        /** Texture key of the row icon. */
         icon?: string,
+        /** Frame name of the row icon. */
         iconFrame?: string,
+        /** Display size of the row icon. */
         iconSize?: number,
 
+        /** Text shown on the row title. */
         title?: string,
 
+        /** Orientation used by this row layout. */
         orientation?: Sizer.OrientationTypes,
 
         // range, incdec
+        /** Minimum value for numeric inputs. */
         min?: number,
+        /** Maximum value for numeric inputs. */
         max?: number,
+        /** Step size for numeric inputs. */
         step?: number,
 
         // list, buttons
+        /** Candidate options for list-like inputs. */
         options?: IOptionConfig[],
 
         /**
          * Callback used to format value text.
          */
         format: (
+            /** Value to format for display. */
             value?: any
         ) => string,
 
+        /** Set to true to make input text read-only. */
         inputTextReadOnly?: boolean,
 
+        /** Set to true to monitor value changes. */
         monitor?: boolean,
 
+        /** Optional row key for lookup. */
         key?: string,
 
         onValidate?: (
@@ -319,104 +411,174 @@ declare namespace Tweaker {
      * Configuration for adding a single action button row.
      */
     interface IAddButtonConfig {
+        /** Object passed to button callback. */
         bindingTarget?: Object,
 
+        /** Texture key of the row icon. */
         icon?: string,
+        /** Frame name of the row icon. */
         iconFrame?: string,
+        /** Display size of the row icon. */
         iconSize?: number,
 
+        /** Row title text. */
         title: string,
 
+        /** Button label content. */
         label: string | SimpleLabel.IResetDisplayContentConfig,
         /**
          * Callback invoked when button is clicked.
          */
         callback: (
+            /** Object passed to the callback. */
             bindingTarget: Object
         ) => void,
 
+        /** Optional row key for lookup. */
         key?: string,
     }
 
+    /**
+     * Configuration for adding a row containing multiple action buttons.
+     */
     interface IAddButtonsConfig {
+        /** Object passed to each button callback. */
         bindingTarget?: Object,
 
+        /** Texture key of the row icon. */
         icon?: string,
+        /** Frame name of the row icon. */
         iconFrame?: string,
+        /** Display size of the row icon. */
         iconSize?: number,
 
+        /** Row title text. */
         title: string,
 
+        /** Button definitions rendered in this row. */
         buttons: {
+            /** Button label content. */
             label: string | SimpleLabel.IResetDisplayContentConfig,
             /**
              * Callback invoked when button is clicked.
              */
             callback: (
+                /** Object passed to the callback. */
                 bindingTarget: Object
             ) => void,
         }[],
 
+        /** Set to true to wrap buttons into multiple lines. */
         wrap?: boolean,
 
+        /** Optional row key for lookup. */
         key?: string,
     }
 
+    /**
+     * Configuration for adding tab pages.
+     */
     interface IAddTabConfig {
+        /** Tab page descriptors. */
         pages: {
+            /** Title shown on the tab header. */
             title: string,
+            /** Set to true to show this page initially. */
             show?: boolean,
 
+            /** Optional page key for lookup. */
             key?: string,
         }[]
     }
 
+    /**
+     * Configuration for adding a collapsible folder row.
+     */
     interface IAddFolderConfig {
+        /** Folder title text. */
         title: string,
+        /** Set to true to start expanded. */
         expanded?: boolean,
 
+        /** Optional folder key for lookup. */
         key?: string,
     }
 
+    /**
+     * Configuration for adding a multi-column container.
+     */
     interface IAddColumnsConfig {
+        /** Optional title shown above columns. */
         title?: string,
 
+        /** Column descriptors. */
         columns?: {
+            /** Fixed width of the column. */
             width?: number,
+            /** Set to true to allow column expansion. */
             expand?: boolean,
 
+            /** Optional column key for lookup. */
             key?: string,
         }[]
     }
 
+    /**
+     * Configuration for adding a wrap container.
+     */
     interface IAddWrapConfig {
+        /** Wrap section title text. */
         title: string,
+        /** Width of each wrapped item. */
         itemWidth?: number,
+        /** Height of each wrapped item. */
         itemHeight?: number,
 
+        /** Optional wrap key for lookup. */
         key?: string,
     }
 
 
+    /**
+     * Configuration for adding a scrollable container.
+     */
     interface IAddScrollableConfig {
+        /** Optional scrollable section title text. */
         title?: string,
+        /** Height of the scrollable section. */
         height?: string,
 
+        /** Optional scrollable key for lookup. */
         key?: string,
     }
 
+    /**
+     * Declarative property row for a standard input control.
+     */
     interface IAddInputRowProperty extends IAddInputConfig {
+        /** Property key in declarative row definitions. */
         $key: string
     }
 
+    /**
+     * Declarative property row for a nested folder.
+     */
     interface IAddFolderRowProperty extends IAddFolderConfig {
+        /** Row type discriminator. */
         $type: 'folder',
+        /** Optional folder-level binding target. */
         $target?: Object,
+        /** Child rows inside this folder. */
         $properties: RowsPropertyType[]
     }
 
+    /**
+     * Declarative property row for tab pages.
+     */
     interface IAddTabRowProperty extends IAddTabConfig {
+        /** Row type discriminator. */
         $type: 'tab',
+        /** Optional tab-level binding target. */
         $target?: Object,
         pages: {
             title: string,
@@ -424,12 +586,18 @@ declare namespace Tweaker {
 
             key?: string,
 
+            /** Child rows inside this tab page. */
             $properties: RowsPropertyType[]
         }[]
     }
 
+    /**
+     * Declarative property row for columns layout.
+     */
     interface IAddColumnsRowProperty extends IAddColumnsConfig {
+        /** Row type discriminator. */
         $type: 'columns',
+        /** Optional columns-level binding target. */
         $target?: Object,
         columns: {
             width?: number,
@@ -438,45 +606,82 @@ declare namespace Tweaker {
 
             key?: string,
 
+            /** Child rows inside this column. */
             $properties: RowsPropertyType[]
         }[]
     }
 
+    /**
+     * Declarative property row for wrap layout.
+     */
     interface IAddWrapRowProperty extends IAddWrapConfig {
+        /** Row type discriminator. */
         $type: 'wrap',
+        /** Optional wrap-level binding target. */
         $target?: Object,
+        /** Child rows inside this wrap container. */
         $properties: RowsPropertyType[]
     }
 
+    /**
+     * Declarative property row for scrollable layout.
+     */
     interface IAddScrollableRowProperty extends IAddScrollableConfig {
+        /** Row type discriminator. */
         $type: 'scrollable',
+        /** Optional scrollable-level binding target. */
         $target?: Object,
+        /** Child rows inside this scrollable container. */
         $properties: RowsPropertyType[]
     }
 
+    /**
+     * Declarative property row for a separator.
+     */
     interface IAddSeparatorRowProperty {
+        /** Row type discriminator. */
         $type: 'separator',
     }
 
+    /**
+     * Declarative property row for a single action button.
+     */
     interface IAddButtonRowProperty extends IAddButtonConfig {
+        /** Row type discriminator. */
         $type: 'button',
     }
 
+    /**
+     * Declarative property row for multiple action buttons.
+     */
     interface IAddButtonsRowProperty extends IAddButtonsConfig {
+        /** Row type discriminator. */
         $type: 'buttons',
     }
 
+    /**
+     * Union of all declarative row property variants.
+     */
     type RowsPropertyType = IAddInputRowProperty |
         IAddFolderRowProperty | IAddTabRowProperty | IAddColumnsRowProperty | IAddScrollableRowProperty |
         IAddSeparatorRowProperty | IAddButtonRowProperty | IAddButtonsRowProperty;
 
+    /**
+     * Input config with a concrete value used by handler acceptance checks.
+     */
     interface IAcceptConfig extends IAddInputConfig {
+        /** Candidate input value. */
         value: unknown
     }
 
+    /**
+     * Registration config for custom input handlers.
+     */
     interface IInputHandlerConfig {
+        /** Name of this handler. */
         name?: string,
 
+        /** Base UI class expected by this handler. */
         baseClass?: BaseSizer,
 
         /**
