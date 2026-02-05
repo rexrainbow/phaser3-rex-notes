@@ -73,12 +73,12 @@ class ConfirmActionButton extends Label {
         return this;
     }
 
-    setConfitmDialogStyle(style) {
+    setConfirmDialogStyle(style) {
         this.confirmActionConfig.style = style;
         return this;
     }
 
-    setConfitmDialogModalConfig(config) {
+    setConfirmDialogModalConfig(config) {
         this.confirmActionConfig.modal = config;
         return this;
     }

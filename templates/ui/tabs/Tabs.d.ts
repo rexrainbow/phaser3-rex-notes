@@ -5,10 +5,52 @@ import GridSizer from '../gridsizer/GridSizer';
 export default Tabs;
 
 declare namespace Tabs {
+    /**
+     * Tab button group names.
+     */
+    type GroupNameType = 'left' | 'right' | 'top' | 'bottom';
 
+    /**
+     * Callback invoked for each button in a group.
+     */
+    type EachButtonCallbackType = (
+        /**
+         * Current button game object.
+         */
+        button: Phaser.GameObjects.GameObject,
+        /**
+         * Zero-based button index.
+         */
+        index: number,
+        /**
+         * Full button list in the group.
+         */
+        buttons: Phaser.GameObjects.GameObject[]
+    ) => void;
+
+    /**
+     * Click behavior configuration for tab buttons.
+     */
+    interface IClickConfig {
+        /**
+         * Click trigger mode.
+         */
+        mode: 0 | 1 | 'pointerup' | 'pointerdown' | 'release' | 'press',
+        /**
+         * Minimum interval between clicks in milliseconds.
+         */
+        clickInterval?: number
+    }
+
+    /**
+     * Configuration options for creating tabs container.
+     */
     interface IConfig extends GridSizer.IConfig {
         space?: {
-            left?: number, right?: number, top?: number, bottom?: number,
+            left?: number,
+            right?: number,
+            top?: number,
+            bottom?: number,
 
             leftButtonsOffset?: number,
             rightButtonsOffset?: number,
@@ -21,19 +63,49 @@ declare namespace Tabs {
             bottomButton?: number,
         },
 
+        /**
+         * Optional background game object.
+         */
         background?: Phaser.GameObjects.GameObject,
+        /**
+         * Optional panel game object.
+         */
         panel?: Phaser.GameObjects.GameObject,
 
+        /**
+         * Left button list.
+         */
         leftButtons?: Phaser.GameObjects.GameObject[],
+        /**
+         * Left buttons background.
+         */
         leftButtonsBackground?: Phaser.GameObjects.GameObject,
 
+        /**
+         * Right button list.
+         */
         rightButtons?: Phaser.GameObjects.GameObject[],
+        /**
+         * Right buttons background.
+         */
         rightButtonsBackground?: Phaser.GameObjects.GameObject,
 
+        /**
+         * Top button list.
+         */
         topButtons?: Phaser.GameObjects.GameObject[],
+        /**
+         * Top buttons background.
+         */
         topButtonsBackground?: Phaser.GameObjects.GameObject,
 
+        /**
+         * Bottom button list.
+         */
         bottomButtons?: Phaser.GameObjects.GameObject[],
+        /**
+         * Bottom buttons background.
+         */
         bottomButtonsBackground?: Phaser.GameObjects.GameObject,
 
         expand?: {
@@ -51,39 +123,87 @@ declare namespace Tabs {
             bottomButtons?: 'left' | 'right' | 'center',
         },
 
-        click?: {
-            mode: 0 | 1 | 'pointerup' | 'pointerdown' | 'release' | 'press',
-            clickInterval?: number
-        },
+        /**
+         * Click behavior configuration.
+         */
+        click?: IClickConfig,
     }
 
 }
 
+/**
+ * Grid-based tabs component with button groups on four sides.
+ */
 declare class Tabs extends GridSizer {
+    /**
+     * Create a tabs component.
+     *
+     * @param scene - Scene that owns this component.
+     * @param config - Optional tabs configuration.
+     */
     constructor(
         scene: Phaser.Scene,
         config?: Tabs.IConfig
     );
 
+    /**
+     * Emit button-click event on a specific group.
+     *
+     * @param groupName - Target button group name.
+     * @param index - Button index or button game object.
+     * @returns This component instance.
+     */
     emitButtonClick(
-        groupName: 'left' | 'right' | 'top' | 'bottom',
+        groupName: Tabs.GroupNameType,
         index: number | Phaser.GameObjects.GameObject
     ): this;
+    /**
+     * Emit click for left button group.
+     *
+     * @param index - Button index or button game object.
+     * @returns This component instance.
+     */
     emitLeftButtonClick(
         index: number | Phaser.GameObjects.GameObject
     ): this;
+    /**
+     * Emit click for right button group.
+     *
+     * @param index - Button index or button game object.
+     * @returns This component instance.
+     */
     emitRightButtonClick(
         index: number | Phaser.GameObjects.GameObject
     ): this;
+    /**
+     * Emit click for top button group.
+     *
+     * @param index - Button index or button game object.
+     * @returns This component instance.
+     */
     emitTopButtonClick(
         index: number | Phaser.GameObjects.GameObject
     ): this;
+    /**
+     * Emit click for bottom button group.
+     *
+     * @param index - Button index or button game object.
+     * @returns This component instance.
+     */
     emitBottomButtonClick(
         index: number | Phaser.GameObjects.GameObject
     ): this;
 
+    /**
+     * Enable or disable button in a specific group.
+     *
+     * @param groupName - Target button group name.
+     * @param index - Button index, button object, or boolean shortcut.
+     * @param enable - Target enabled state.
+     * @returns This component instance.
+     */
     setButtonEnable(
-        groupName: 'left' | 'right' | 'top' | 'bottom',
+        groupName: Tabs.GroupNameType,
         index?: number | Phaser.GameObjects.GameObject | boolean,
         enable?: boolean
     ): this;
@@ -100,8 +220,15 @@ declare class Tabs extends GridSizer {
         index: number | Phaser.GameObjects.GameObject
     ): this;
 
+    /**
+     * Toggle button enable state in a specific group.
+     *
+     * @param groupName - Target button group name.
+     * @param index - Button index or button game object.
+     * @returns This component instance.
+     */
     toggleButtonEnable(
-        groupName: 'left' | 'right' | 'top' | 'bottom',
+        groupName: Tabs.GroupNameType,
         index?: number | Phaser.GameObjects.GameObject
     ): this;
     toggleLeftButtonEnable(
@@ -117,8 +244,15 @@ declare class Tabs extends GridSizer {
         index: number | Phaser.GameObjects.GameObject
     ): this;
 
+    /**
+     * Get button enable state in a specific group.
+     *
+     * @param groupName - Target button group name.
+     * @param index - Button index or button game object.
+     * @returns True if enabled.
+     */
     getButtonEnable(
-        groupName: 'left' | 'right' | 'top' | 'bottom',
+        groupName: Tabs.GroupNameType,
         index: number | Phaser.GameObjects.GameObject
     ): boolean;
     getLeftButtonEnable(
@@ -134,8 +268,15 @@ declare class Tabs extends GridSizer {
         index: number | Phaser.GameObjects.GameObject
     ): boolean;
 
+    /**
+     * Get button object from a specific group.
+     *
+     * @param groupName - Target button group name.
+     * @param index - Button index.
+     * @returns Button game object or null.
+     */
     getButton(
-        groupName: 'left' | 'right' | 'top' | 'bottom',
+        groupName: Tabs.GroupNameType,
         index: number
     ): Phaser.GameObjects.GameObject | null;
     getLeftButton(
@@ -151,8 +292,15 @@ declare class Tabs extends GridSizer {
         index: number
     ): Phaser.GameObjects.GameObject | null;
 
+    /**
+     * Add button to a specific group.
+     *
+     * @param groupName - Target button group name.
+     * @param gameObject - Button game object.
+     * @returns This component instance.
+     */
     addButton(
-        groupName: 'left' | 'right' | 'top' | 'bottom',
+        groupName: Tabs.GroupNameType,
         gameObject: Phaser.GameObjects.GameObject
     ): this;
     addLeftButton(
@@ -168,8 +316,16 @@ declare class Tabs extends GridSizer {
         gameObject: Phaser.GameObjects.GameObject
     ): this;
 
+    /**
+     * Remove button from a specific group.
+     *
+     * @param groupName - Target button group name.
+     * @param gameObject - Button game object.
+     * @param destroyChild - Set to true to destroy removed button.
+     * @returns This component instance.
+     */
     removeButton(
-        groupName: 'left' | 'right' | 'top' | 'bottom',
+        groupName: Tabs.GroupNameType,
         gameObject: Phaser.GameObjects.GameObject,
         destroyChild?: boolean
     ): this;
@@ -190,8 +346,15 @@ declare class Tabs extends GridSizer {
         destroyChild?: boolean
     ): this;
 
+    /**
+     * Clear buttons in a specific group.
+     *
+     * @param groupName - Target button group name.
+     * @param destroyChild - Set to true to destroy removed buttons.
+     * @returns This component instance.
+     */
     clearButtons(
-        groupName: 'left' | 'right' | 'top' | 'bottom',
+        groupName: Tabs.GroupNameType,
         destroyChild?: boolean
     ): this;
     clearLeftButtons(
@@ -207,8 +370,15 @@ declare class Tabs extends GridSizer {
         destroyChild?: boolean
     ): this;
 
+    /**
+     * Show button in a specific group.
+     *
+     * @param groupName - Target button group name.
+     * @param index - Button index or button game object.
+     * @returns This component instance.
+     */
     showButton(
-        groupName: 'left' | 'right' | 'top' | 'bottom',
+        groupName: Tabs.GroupNameType,
         index: number | Phaser.GameObjects.GameObject
     ): this;
     showLeftButton(
@@ -224,8 +394,15 @@ declare class Tabs extends GridSizer {
         index: number | Phaser.GameObjects.GameObject
     ): this;
 
+    /**
+     * Hide button in a specific group.
+     *
+     * @param groupName - Target button group name.
+     * @param index - Button index or button game object.
+     * @returns This component instance.
+     */
     hideButton(
-        groupName: 'left' | 'right' | 'top' | 'bottom',
+        groupName: Tabs.GroupNameType,
         index: number | Phaser.GameObjects.GameObject
     ): this;
     hideLeftButton(
@@ -241,25 +418,61 @@ declare class Tabs extends GridSizer {
         index: number | Phaser.GameObjects.GameObject
     ): this;
 
+    /**
+     * Iterate buttons in a specific group.
+     *
+     * @param groupName - Target button group name.
+     * @param callback - Callback invoked per button.
+     * @param scop - Optional callback execution scope.
+     * @returns This component instance.
+     */
     forEachButtton(
-        groupName: 'left' | 'right' | 'top' | 'bottom',
-        callback: (button: Phaser.GameObjects.GameObject, index: number, buttons: Phaser.GameObjects.GameObject[]) => void,
+        groupName: Tabs.GroupNameType,
+        callback: Tabs.EachButtonCallbackType,
         scop?: unknown
     ): this;
+    /**
+     * Iterate left group buttons.
+     *
+     * @param callback - Callback invoked per button.
+     * @param scop - Optional callback execution scope.
+     * @returns This component instance.
+     */
     forEachLeftButton(
-        callback: (button: Phaser.GameObjects.GameObject, index: number, buttons: Phaser.GameObjects.GameObject[]) => void,
+        callback: Tabs.EachButtonCallbackType,
         scop?: unknown
     ): this;
+    /**
+     * Iterate right group buttons.
+     *
+     * @param callback - Callback invoked per button.
+     * @param scop - Optional callback execution scope.
+     * @returns This component instance.
+     */
     forEachRightButton(
-        callback: (button: Phaser.GameObjects.GameObject, index: number, buttons: Phaser.GameObjects.GameObject[]) => void,
+        callback: Tabs.EachButtonCallbackType,
         scop?: unknown
     ): this;
+    /**
+     * Iterate top group buttons.
+     *
+     * @param callback - Callback invoked per button.
+     * @param scop - Optional callback execution scope.
+     * @returns This component instance.
+     */
     forEachTopButton(
-        callback: (button: Phaser.GameObjects.GameObject, index: number, buttons: Phaser.GameObjects.GameObject[]) => void,
+        callback: Tabs.EachButtonCallbackType,
         scop?: unknown
     ): this;
+    /**
+     * Iterate bottom group buttons.
+     *
+     * @param callback - Callback invoked per button.
+     * @param scop - Optional callback execution scope.
+     * @returns This component instance.
+     */
     forEachBottomButton(
-        callback: (button: Phaser.GameObjects.GameObject, index: number, buttons: Phaser.GameObjects.GameObject[]) => void,
+        callback: Tabs.EachButtonCallbackType,
         scop?: unknown
     ): this;
 }
