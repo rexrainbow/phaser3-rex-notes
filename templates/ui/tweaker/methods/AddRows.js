@@ -50,6 +50,11 @@ var AddProperties = function (tweaker, properties, target, monitor) {
                 }
                 break;
 
+            case 'wrap':
+                var wrap = tweaker.addWrap(property);
+                AddProperties(wrap, property.$properties, target, monitor);
+                break;
+
             case 'scrollable':
                 var scrollable = tweaker.addScrollable(property);
                 AddProperties(scrollable, property.$properties, target, monitor);

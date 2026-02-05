@@ -663,7 +663,7 @@ declare namespace Tweaker {
      * Union of all declarative row property variants.
      */
     type RowsPropertyType = IAddInputRowProperty |
-        IAddFolderRowProperty | IAddTabRowProperty | IAddColumnsRowProperty | IAddScrollableRowProperty |
+        IAddFolderRowProperty | IAddTabRowProperty | IAddColumnsRowProperty | IAddWrapRowProperty | IAddScrollableRowProperty |
         IAddSeparatorRowProperty | IAddButtonRowProperty | IAddButtonsRowProperty;
 
     /**
