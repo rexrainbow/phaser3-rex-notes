@@ -6,6 +6,7 @@ import SimpleLabel from '../simplelabel/SimpleLabel';
 import Buttons from '../buttons/Buttons';
 import FixWidthButtons from '../fixwidthbuttons/FixWidthButtons';
 import Pages from '../pages/Pages';
+import SplitPanels from '../splitpanels/SplitPanels';
 import InputText from '../canvasinput/CanvasInput';
 import InputTextArea from '../textareainput/TextAreaInput';
 import Checkbox from '../checkbox/Checkbox';
@@ -222,6 +223,18 @@ declare namespace Tweaker {
                 column?: number,
                 title?: number,
             }
+        },
+
+        /** Split panels container style. */
+        '2columns'?: {
+            /** Split panels background style. */
+            background?: CreateBackground.IConfig,
+
+            /** Splitter style. */
+            splitter?: CreateBackground.IConfig,
+
+            /** Spacing configuration for split panels. */
+            space?: SplitPanels.IConfig['space'],
         },
 
         /** Wrap container style. */
@@ -553,6 +566,57 @@ declare namespace Tweaker {
     }
 
     /**
+     * Configuration for a split panel section.
+     */
+    interface ISplitPanelConfig {
+        /** Optional panel key for lookup. */
+        key?: string,
+        /** Child rows inside this panel. */
+        $properties?: RowsPropertyType[]
+    }
+
+    /**
+     * Row configuration for split panels.
+     */
+    interface ISplitPanelRowConfig extends ISplitPanelConfig {
+        /** Child rows inside this panel. */
+        $properties: RowsPropertyType[]
+    }
+
+    /**
+     * Configuration for adding a split panels container.
+     */
+    interface IAddSplitConfig {
+        /** Left panel configuration. */
+        left?: ISplitPanelConfig,
+        /** Right panel configuration. */
+        right?: ISplitPanelConfig,
+
+        /** Split ratio between panels. */
+        splitRatio?: number,
+        /** Minimum width for left panel. */
+        minLeftPanelWidth?: number,
+        /** Minimum width for right panel. */
+        minRightPanelWidth?: number,
+
+        /** Split panels space configuration. */
+        space?: SplitPanels.IConfig['space'],
+
+        /** Background game object or config. */
+        background?: Phaser.GameObjects.GameObject | CreateBackground.IConfig,
+        /** Splitter game object or config. */
+        splitter?: Phaser.GameObjects.GameObject | CreateBackground.IConfig,
+    }
+
+    /**
+     * Result of addSplit().
+     */
+    interface ISplitPanelsResult {
+        left: Tweaker,
+        right: Tweaker
+    }
+
+    /**
      * Declarative property row for a standard input control.
      */
     interface IAddInputRowProperty extends IAddInputConfig {
@@ -612,6 +676,20 @@ declare namespace Tweaker {
     }
 
     /**
+     * Declarative property row for split panels layout.
+     */
+    interface IAdd2ColumnsRowProperty extends IAddSplitConfig {
+        /** Row type discriminator. */
+        $type: '2columns',
+        /** Optional split-level binding target. */
+        $target?: Object,
+        /** Left panel configuration. */
+        left?: ISplitPanelRowConfig,
+        /** Right panel configuration. */
+        right?: ISplitPanelRowConfig,
+    }
+
+    /**
      * Declarative property row for wrap layout.
      */
     interface IAddWrapRowProperty extends IAddWrapConfig {
@@ -663,7 +741,7 @@ declare namespace Tweaker {
      * Union of all declarative row property variants.
      */
     type RowsPropertyType = IAddInputRowProperty |
-        IAddFolderRowProperty | IAddTabRowProperty | IAddColumnsRowProperty | IAddWrapRowProperty | IAddScrollableRowProperty |
+        IAddFolderRowProperty | IAddTabRowProperty | IAddColumnsRowProperty | IAdd2ColumnsRowProperty | IAddWrapRowProperty | IAddScrollableRowProperty |
         IAddSeparatorRowProperty | IAddButtonRowProperty | IAddButtonsRowProperty;
 
     /**
@@ -835,6 +913,16 @@ declare class Tweaker extends Sizer {
     addColumns(
         config: number | Tweaker.IAddColumnsConfig
     ): Tweaker[];
+
+    /**
+     * Add split panels and return left/right tweakers.
+     *
+     * @param config - Split panels configuration.
+     * @returns Left/right tweaker instances.
+     */
+    addSplit(
+        config: Tweaker.IAddSplitConfig
+    ): Tweaker.ISplitPanelsResult;
 
     /**
      * Add wrap container and return nested tweaker.

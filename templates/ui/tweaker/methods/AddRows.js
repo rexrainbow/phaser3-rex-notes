@@ -50,6 +50,36 @@ var AddProperties = function (tweaker, properties, target, monitor) {
                 }
                 break;
 
+            case '2columns':
+            case 'two-columns':
+                var splitPanels = tweaker.add2Columns(property);
+                var leftProperties, rightProperties;
+                if (property.columns) {
+                    var columns = property.columns;
+                    if (columns[0] && columns[0].$properties) {
+                        leftProperties = columns[0].$properties;
+                    }
+                    if (columns[1] && columns[1].$properties) {
+                        rightProperties = columns[1].$properties;
+                    }
+                } else {
+                    if (property.left && property.left.$properties) {
+                        leftProperties = property.left.$properties;
+                    }
+                    if (property.right && property.right.$properties) {
+                        rightProperties = property.right.$properties;
+                    }
+                }
+
+                if (leftProperties) {
+                    AddProperties(splitPanels.left, leftProperties, target, monitor);
+                }
+                if (rightProperties) {
+                    AddProperties(splitPanels.right, rightProperties, target, monitor);
+                }
+
+                break;
+
             case 'wrap':
                 var wrap = tweaker.addWrap(property);
                 AddProperties(wrap, property.$properties, target, monitor);

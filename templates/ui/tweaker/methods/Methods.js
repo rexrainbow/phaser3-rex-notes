@@ -3,6 +3,7 @@ import RemoveInputHandler from './RemoveInputHandler.js';
 import AddFolder from './AddFolder.js';
 import AddTab from './AddTab.js';
 import AddColumns from './AddColumns.js';
+import Add2Columns from './Add2Columns.js';
 import AddWrap from './AddWrap.js';
 import AddScrollable from './AddScrollable.js';
 import AddInput from './AddInput.js';
@@ -21,6 +22,7 @@ var methods = {
     addFolder: AddFolder,
     addTab: AddTab,
     addColumns: AddColumns,
+    add2Columns: Add2Columns,
     addWrap: AddWrap,
     addScrollable: AddScrollable,
     addInput: AddInput,
