@@ -1,16 +1,21 @@
 export default {
     getMaxInputRowTitleWidth() {
+        var titleWidth;
         if (this.alignAllColumnsTitleWidth === false) {
-            return 0;
+            // Align title in a column
+            titleWidth = 0;
+
+        } else {
+            // Align all titles in all columns
+            var maxTitleWidth = 0;
+            var children = this.childrenMap.columns;  // tweaker array
+            for (var i = 0, cnt = children.length; i < cnt; i++) {
+                maxTitleWidth = Math.max(maxTitleWidth, children[i].getMaxInputRowTitleWidth());
+            }
+            titleWidth = maxTitleWidth + this.getInnerPadding('left');
         }
 
-        var maxTitleWidth = 0;
-        var children = this.childrenMap.columns;  // tweaker array
-        for (var i = 0, cnt = children.length; i < cnt; i++) {
-            maxTitleWidth = Math.max(maxTitleWidth, children[i].getMaxInputRowTitleWidth());
-        }
-
-        return maxTitleWidth + this.getInnerPadding('left');
+        return titleWidth;
     },
 
     setInputRowTitleWidth(width) {
