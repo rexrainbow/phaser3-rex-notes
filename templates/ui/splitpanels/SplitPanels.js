@@ -9,22 +9,50 @@ const Clamp = Phaser.Math.Clamp;
 class SplitPanels extends Sizer {
     constructor(scene, config) {
         if (!config.hasOwnProperty('orientation')) {
-            config.orientation = (config.hasOwnProperty('leftPanel')) ? 0 : 1;
+            config.orientation = (config.hasOwnProperty('leftPanel')) ? 1 : 0;
         }
+        var splitSizerOrientation = (config.orientation === 1) ? 0 : 1;
 
         super(scene, config);
         this.type = 'rexSplit';
 
         // Add elements
+        // Background
         var background = GetValue(config, 'background', undefined);
+        if (background) {
+            this.addBackground(background);
+        }
+
+        // Header
+        var header = GetValue(config, 'header', undefined);
+        if (header) {
+            var align = GetValue(config, 'align.header', 'center');
+            var headerSpace = GetValue(config, 'space.header', 0);
+            var padding;
+            if (config.orientation === 0) {
+                padding = { bottom: headerSpace };
+            } else {
+                padding = { right: headerSpace };
+            }
+            this.add(header,
+                {
+                    proportion: 0,
+                    align: align,
+                    padding: padding,
+                    expand: GetValue(config, 'expand.header', true)
+                }
+            );
+        }
+
+        // SplitSizer
         var firstChildKey, secondChildKey;
         var minFirstChildSizeKey, minSecondChildSizeKey;
-        if (this.orientation === 0) {
+        if (splitSizerOrientation === 0) { // x
             firstChildKey = 'leftPanel';
             secondChildKey = 'rightPanel';
             minFirstChildSizeKey = 'minLeftPanelWidth';
             minSecondChildSizeKey = 'minRightPanelWidth';
-        } else {
+        } else { // y
             firstChildKey = 'topPanel';
             secondChildKey = 'bottomPanel';
             minFirstChildSizeKey = 'minTopPanelHeight';
@@ -34,14 +62,13 @@ class SplitPanels extends Sizer {
         var firstChild = GetValue(config, firstChildKey, undefined);
         var splitter = GetValue(config, 'splitter', undefined);
         var secondChild = GetValue(config, secondChildKey, undefined);
-
-        if (background) {
-            this.addBackground(background);
-        }
-
         var spaceConfig = GetValue(config, 'space', undefined);
 
-        this.add(
+        var splitterSizer = new Sizer(scene, { orientation: splitSizerOrientation });
+        scene.add.existing(splitterSizer);
+        this.add(splitterSizer, { proportion: 1, expand: true });
+
+        splitterSizer.add(
             firstChild,
             {
                 proportion: 1,
@@ -55,7 +82,7 @@ class SplitPanels extends Sizer {
             }
         )
 
-        this.add(splitter,
+        splitterSizer.add(splitter,
             {
                 proportion: 0,
                 expand: true,
@@ -68,7 +95,7 @@ class SplitPanels extends Sizer {
             }
         );
 
-        this.add(
+        splitterSizer.add(
             secondChild,
             {
                 proportion: 1,
@@ -82,8 +109,32 @@ class SplitPanels extends Sizer {
             }
         );
 
+        // Footer
+        var footer = GetValue(config, 'footer', undefined);
+        if (footer) {
+            var align = GetValue(config, 'align.footer', 'center');
+            var footerSpace = GetValue(config, 'space.footer', 0);
+            var padding;
+            if (config.orientation === 0) {
+                padding = { top: footerSpace };
+            } else {
+                padding = { left: footerSpace };
+            }
+            this.add(footer,
+                {
+                    proportion: 0,
+                    align: align,
+                    padding: padding,
+                    expand: GetValue(config, 'expand.footer', true)
+                }
+            );
+        }
+
 
         this.addChildrenMap('background', background);
+        this.addChildrenMap('header', header);
+        this.addChildrenMap('splitterSizer', splitterSizer);
+        this.addChildrenMap('footer', footer);
         this.addChildrenMap(firstChildKey, firstChild);
         this.addChildrenMap('splitter', splitter)
         this.addChildrenMap(secondChildKey, secondChild);
@@ -93,7 +144,7 @@ class SplitPanels extends Sizer {
         this.setSplitRatio(GetValue(config, 'splitRatio', 0.5));
 
         this.splitterDragBehavior = new Drag(splitter, {
-            axis: (this.orientation === 0) ? 1 : 2,
+            axis: (splitSizerOrientation === 0) ? 1 : 2,
         });
 
         splitter
@@ -130,6 +181,21 @@ class SplitPanels extends Sizer {
         }
         this.splitterEnable = enable;
         return this;
+    }
+
+    get firstPanel() {
+        var splitterSizer = this.childrenMap.splitterSizer;
+        return splitterSizer.sizerChildren[0];
+    }
+
+    get splitter() {
+        var splitterSizer = this.childrenMap.splitterSizer;
+        return splitterSizer.sizerChildren[1];
+    }
+
+    get secondPanel() {
+        var splitterSizer = this.childrenMap.splitterSizer;
+        return splitterSizer.sizerChildren[2];
     }
 
     set minLeftPanelWidth(value) {
@@ -195,8 +261,8 @@ class SplitPanels extends Sizer {
         }
 
         this._splitRatio = value;
-        this.getSizerConfig(this.sizerChildren[0]).proportion = value;
-        this.getSizerConfig(this.sizerChildren[2]).proportion = 1 - value;
+        this.getSizerConfig(this.firstPanel).proportion = value;
+        this.getSizerConfig(this.secondPanel).proportion = 1 - value;
     }
 
     setSplitRatio(value) {

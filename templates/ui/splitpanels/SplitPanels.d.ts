@@ -116,12 +116,31 @@ declare namespace SplitPanels {
              * Extra right spacing for the splitter.
              */
             splitterRight?: number,
+
+            /**
+             * Extra spacing after header.
+             */
+            header?: number,
+            /**
+             * Extra spacing before footer.
+             */
+            footer?: number,
         },
 
         /**
          * Background game object.
          */
         background?: Phaser.GameObjects.GameObject,
+
+        /**
+         * Optional header game object.
+         */
+        header?: Phaser.GameObjects.GameObject,
+
+        /**
+         * Optional footer game object.
+         */
+        footer?: Phaser.GameObjects.GameObject,
 
         /**
          * Left panel game object.
@@ -145,6 +164,22 @@ declare namespace SplitPanels {
          * Splitter game object.
          */
         splitter?: Phaser.GameObjects.GameObject,
+
+        /**
+         * Alignment configuration.
+         */
+        align?: {
+            header?: Sizer.AlignTypes,
+            footer?: Sizer.AlignTypes,
+        },
+
+        /**
+         * Expand configuration.
+         */
+        expand?: {
+            header?: boolean,
+            footer?: boolean,
+        },
 
         /**
          * Minimum width for the left panel.

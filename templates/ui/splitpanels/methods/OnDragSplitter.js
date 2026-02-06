@@ -1,15 +1,16 @@
 import { GetDisplayWidth, GetDisplayHeight } from '../../../../plugins/utils/size/GetDisplaySize.js';
 
 var OnDragSplitter = function () {
-    var firstChild = this.sizerChildren[0];
-    var splitter = this.sizerChildren[1];
-    var secondChild = this.sizerChildren[2];
+    var firstPanel = this.firstPanel;
+    var splitter = this.splitter;
+    var secondPanel = this.secondPanel;
 
-    var firstChildSizerPadding = this.getSizerConfig(firstChild).padding,
+    var firstChildSizerPadding = this.getSizerConfig(firstPanel).padding,
         splitterSizerPadding = this.getSizerConfig(splitter).padding,
-        secondChildSizerPadding = this.getSizerConfig(secondChild).padding;
+        secondChildSizerPadding = this.getSizerConfig(secondPanel).padding;
 
-    if (this.orientation === 0) {
+    var splitSizerOrientation = (this.orientation === 0) ? 1 : 0;
+    if (splitSizerOrientation === 0) {
         var firstChildInnerLeft = this.innerLeft + firstChildSizerPadding.left;
         var secondChildInnerRight = this.innerRight - secondChildSizerPadding.right;
 
