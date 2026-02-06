@@ -291,4 +291,24 @@ declare class SplitPanels extends Sizer {
      * Current split ratio between panels.
      */
     splitRatio: number;
+
+    /**
+     * Left panel game object.
+     */
+    readonly leftPanel: Phaser.GameObjects.GameObject;
+    /**
+     * Top panel game object.
+     */
+    readonly topPanel: Phaser.GameObjects.GameObject;
+
+    /**
+     * Right panel game object.
+     */
+    readonly rightPanel: Phaser.GameObjects.GameObject;
+
+    /**
+     * Bottom panel game object.
+     */
+    readonly bottomPanel: Phaser.GameObjects.GameObject;
+
 }

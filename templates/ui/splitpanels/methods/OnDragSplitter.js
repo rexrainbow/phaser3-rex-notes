@@ -1,9 +1,9 @@
 import { GetDisplayWidth, GetDisplayHeight } from '../../../../plugins/utils/size/GetDisplaySize.js';
 
 var OnDragSplitter = function () {
-    var firstPanel = this.firstPanel;
+    var firstPanel = this.leftPanel;
     var splitter = this.splitter;
-    var secondPanel = this.secondPanel;
+    var secondPanel = this.rightPanel;
 
     var firstChildSizerPadding = this.getSizerConfig(firstPanel).padding,
         splitterSizerPadding = this.getSizerConfig(splitter).padding,

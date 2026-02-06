@@ -183,9 +183,13 @@ class SplitPanels extends Sizer {
         return this;
     }
 
-    get firstPanel() {
+    get leftPanel() {
         var splitterSizer = this.childrenMap.splitterSizer;
         return splitterSizer.sizerChildren[0];
+    }
+
+    get topPanel() {
+        return this.leftPanel;
     }
 
     get splitter() {
@@ -193,9 +197,13 @@ class SplitPanels extends Sizer {
         return splitterSizer.sizerChildren[1];
     }
 
-    get secondPanel() {
+    get rightPanel() {
         var splitterSizer = this.childrenMap.splitterSizer;
         return splitterSizer.sizerChildren[2];
+    }
+    
+    get bottomPanel() {
+        return this.rightPanel;
     }
 
     set minLeftPanelWidth(value) {
@@ -261,8 +269,8 @@ class SplitPanels extends Sizer {
         }
 
         this._splitRatio = value;
-        this.getSizerConfig(this.firstPanel).proportion = value;
-        this.getSizerConfig(this.secondPanel).proportion = 1 - value;
+        this.getSizerConfig(this.leftPanel).proportion = value;
+        this.getSizerConfig(this.rightPanel).proportion = 1 - value;
     }
 
     setSplitRatio(value) {
