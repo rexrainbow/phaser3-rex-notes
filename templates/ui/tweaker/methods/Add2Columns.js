@@ -22,6 +22,8 @@ var AddSplit = function (config) {
         { expand: true }
     );
 
+    splitPanels.setTitle(config);
+
     var leftPanel = splitPanels.childrenMap.leftPanel;
     var rightPanel = splitPanels.childrenMap.rightPanel;
 

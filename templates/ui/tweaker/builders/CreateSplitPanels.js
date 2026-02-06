@@ -1,5 +1,6 @@
-import SplitPanels from '../../splitpanels/SplitPanels.js';
 import CreateBackground from './CreateBackground.js';
+import SplitPanels from '../gameobjects/splitpanels/SplitPanels.js';
+import Title from '../gameobjects/label/Title.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -22,29 +23,45 @@ var CreateSplitPanels = function (parent, config, style) {
     var leftPanel = parent.createTweaker(tweakerConfig);
     var rightPanel = parent.createTweaker(tweakerConfig);
 
+    var titleStyle = GetValue(style, 'title') || {};
+    var title = new Title(scene, titleStyle);
+    scene.add.existing(title);
+
     var splitterConfig = GetValue(config, 'splitter', undefined);
     var splitterStyle = GetValue(style, 'splitter', undefined);
+    var splitter;
     if (!splitterConfig && !splitterStyle) {
         // Default splitStyle
         splitterConfig = DefaultSplitStyle;
     }
-    var splitter = CreateBackground(scene, splitterConfig || {}, splitterStyle || {});
+    splitter = CreateBackground(scene, splitterConfig || {}, splitterStyle || {});
 
     var backgroundConfig = GetValue(config, 'background', undefined);
     var backgroundStyle = GetValue(style, 'background', undefined);
     var background = CreateBackground(scene, backgroundConfig || {}, backgroundStyle || {});
 
+    var space = GetValue(config, 'space', undefined);
+    if (space === undefined) {
+        space = GetValue(style, 'space', undefined);
+    }
+
+    var alignAllColumnsTitleWidth = GetValue(config, 'alignAllColumnsTitleWidth', undefined);
+    if (alignAllColumnsTitleWidth === undefined) {
+        alignAllColumnsTitleWidth = GetValue(style, 'alignAllColumnsTitleWidth', false);
+    }
+
     var splitPanels = new SplitPanels(scene, {
+        header: title,
+        background: background,
         leftPanel: leftPanel,
         rightPanel: rightPanel,
         splitter: splitter,
-        background: background,
-
         splitRatio: GetValue(config, 'splitRatio', 0.5),
         minLeftPanelWidth: GetValue(config, 'minLeftPanelWidth', 0),
         minRightPanelWidth: GetValue(config, 'minRightPanelWidth', 0),
 
-        space: GetValue(config, 'space', GetValue(style, 'space', undefined)),
+        space: space,
+        alignAllColumnsTitleWidth: alignAllColumnsTitleWidth
     });
     scene.add.existing(splitPanels);
 

@@ -229,6 +229,9 @@ declare namespace Tweaker {
 
         /** Split panels container style. */
         '2columns'?: {
+            /** Optional title style. */
+            title?: SimpleLabel.IConfig,
+
             /** Split panels background style. */
             background?: CreateBackground.IConfig,
 
@@ -237,6 +240,9 @@ declare namespace Tweaker {
 
             /** Spacing configuration for split panels. */
             space?: SplitPanels.IConfig['space'],
+
+            /** Set to false to avoid syncing title width across both panels. */
+            alignAllColumnsTitleWidth?: boolean,
         },
 
         /** Wrap container style. */
@@ -591,6 +597,8 @@ declare namespace Tweaker {
      * Configuration for adding a split panels container.
      */
     interface IAddSplitConfig {
+        /** Optional title shown above panels. */
+        title?: string,
         /** Left panel configuration. */
         left?: ISplitPanelConfig,
         /** Right panel configuration. */
@@ -606,6 +614,9 @@ declare namespace Tweaker {
         /** Split panels space configuration. */
         space?: SplitPanels.IConfig['space'],
 
+        /** Set to false to avoid syncing title width across both panels. */
+        alignAllColumnsTitleWidth?: boolean,
+
         /** Background game object or config. */
         background?: Phaser.GameObjects.GameObject | CreateBackground.IConfig,
         /** Splitter game object or config. */
@@ -613,7 +624,7 @@ declare namespace Tweaker {
     }
 
     /**
-     * Result of addSplit().
+     * Result of add2Columns().
      */
     interface ISplitPanelsResult {
         left: Tweaker,
@@ -919,12 +930,12 @@ declare class Tweaker extends Sizer {
     ): Tweaker[];
 
     /**
-     * Add split panels and return left/right tweakers.
+     * Add 2-columns split panels and return left/right tweakers.
      *
      * @param config - Split panels configuration.
      * @returns Left/right tweaker instances.
      */
-    addSplit(
+    add2Columns(
         config: Tweaker.IAddSplitConfig
     ): Tweaker.ISplitPanelsResult;
 
