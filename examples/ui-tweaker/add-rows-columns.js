@@ -60,7 +60,8 @@ class Demo extends Phaser.Scene {
                             { $key: 'lineWidth', title: 'stroke-\nwidth', view: 'incdec', min: 0, max: 10 }
                         ]
                     }
-                ]
+                ],
+                // alignAllColumnsTitleWidth: false
             },
             { $key: 'description', view: 'textarea', orientation: 'y', },
         ]

@@ -210,6 +210,8 @@ declare namespace Tweaker {
         columns?: {
             /** Optional columns title style. */
             title?: SimpleLabel.IConfig,
+            /** Set to false to avoid syncing title width across all columns. */
+            alignAllColumnsTitleWidth?: boolean,
 
             /** Columns background style per column or shared. */
             background?: CreateBackground.IConfig | CreateBackground.IConfig[],
@@ -523,6 +525,8 @@ declare namespace Tweaker {
     interface IAddColumnsConfig {
         /** Optional title shown above columns. */
         title?: string,
+        /** Set to false to avoid syncing title width across all columns. */
+        alignAllColumnsTitleWidth?: boolean,
 
         /** Column descriptors. */
         columns?: {
