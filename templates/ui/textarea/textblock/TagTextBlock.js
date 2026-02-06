@@ -11,7 +11,13 @@ class TagTextBlock extends BaseTextBlock {
             this.text = text;
         }
 
-        this.textObject.setText(this.text);
+        var textObject = this.textObject;
+        if (textObject.text === this.text) {
+            // Force re-wrap when text is unchanged (e.g. after resize).
+            textObject.updateText(true);
+        } else {
+            textObject.setText(this.text);
+        }
         this.linesCount = this.getLinesCount();
 
         this._textHeight = undefined;
