@@ -54,8 +54,9 @@ var CreateSplitPanels = function (parent, config, style) {
         splitRatio: GetValue(config, 'splitRatio', 0.5),
         minLeftPanelWidth: GetValue(config, 'minLeftPanelWidth', 0),
         minRightPanelWidth: GetValue(config, 'minRightPanelWidth', 0),
-
         space: space,
+
+        alignTitle: style.root.alignTitle
     });
     scene.add.existing(splitPanels);
 

@@ -48,6 +48,8 @@ var CreateColumns = function (parent, config, style) {
         title: title,
         columns: columnConfigArray,
         space: GetValue(style, 'space'),
+
+        alignTitle: style.root.alignTitle
     });
     scene.add.existing(columns);
 

@@ -819,6 +819,11 @@ declare class Tweaker extends Sizer {
     );
 
     /**
+     * True if this tweaker is the root instance.
+     */
+    readonly isRoot: boolean;
+
+    /**
      * Register an input handler.
      *
      * @param config - Input handler configuration.

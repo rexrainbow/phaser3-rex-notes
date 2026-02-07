@@ -48,27 +48,30 @@ var GenerateTweakerShellClass = function (config) {
             }
             this.itemHeight = itemHeight;
 
-            if (
-                isWrapMode ||
-                ((this.root === this) && (this.orientation === 1))
-            ) {
-
+            // Set inputRow.alignTitle
+            if (this.isRoot) {
                 var alignTitle = GetValue(config, 'inputRow.alignTitle');
                 if (alignTitle === undefined) {
+                    // alignTitle if inputRow.proportion.title is not 0 (eg. 1)
                     var titleProportion = GetValue(this.styles, 'inputRow.proportion.title');
                     alignTitle = (!titleProportion);
+                    SetValue(config, 'inputRow.alignTitle', alignTitle);
 
                 } else {
-                    if (alignTitle) {  // Override title proportion to 0
+                    // not alignTitle, set title proportion to 0
+                    if (!alignTitle) {  // Override title proportion to 0
                         SetValue(this.styles, 'inputRow.proportion.title', 0);
                     }
 
                 }
-                this.alignInputRowTitleStartFlag = alignTitle;
 
+                this.alignTitle = alignTitle;
+            }
+
+            if ((this.isRoot && (this.orientation === 1)) || isWrapMode) {
+                this.alignInputRowTitleStartFlag = this.root.alignTitle;
             } else {
                 this.alignInputRowTitleStartFlag = false;
-
             }
 
 
@@ -76,6 +79,10 @@ var GenerateTweakerShellClass = function (config) {
             if (background) {
                 this.addBackground(background);
             }
+        }
+
+        get isRoot() {
+            return this.root === this;
         }
 
         preLayout() {

@@ -8,6 +8,16 @@ class SplitPanels extends SplitPanelsBase {
     constructor(scene, config) {
         super(scene, config);
         this.type = 'rexTweaker.SplitPanels';
+
+        this.alignInputRowTitleStartFlag = GetValue(config, 'alignTitle');
+    }
+
+    preLayout() {
+        super.preLayout();
+
+        if (this.alignInputRowTitleStartFlag) {
+            this.setInputRowTitleWidth(this.getMaxInputRowTitleWidth());
+        }
     }
 
     setTitle(config) {
