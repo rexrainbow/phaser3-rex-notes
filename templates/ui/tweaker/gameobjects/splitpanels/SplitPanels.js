@@ -8,7 +8,6 @@ class SplitPanels extends SplitPanelsBase {
     constructor(scene, config) {
         super(scene, config);
         this.type = 'rexTweaker.SplitPanels';
-        this.alignAllColumnsTitleWidth = GetValue(config, 'alignAllColumnsTitleWidth', false);
     }
 
     setTitle(config) {

@@ -44,15 +44,10 @@ var CreateColumns = function (parent, config, style) {
         columnConfig.child = tweakerChild;
     }
 
-    var alignAllColumnsTitleWidth = GetValue(config, 'alignAllColumnsTitleWidth', undefined);
-    if (alignAllColumnsTitleWidth === undefined) {
-        alignAllColumnsTitleWidth = GetValue(style, 'alignAllColumnsTitleWidth', true);
-    }
     var columns = new Columns(scene, {
         title: title,
         columns: columnConfigArray,
         space: GetValue(style, 'space'),
-        alignAllColumnsTitleWidth: alignAllColumnsTitleWidth,
     });
     scene.add.existing(columns);
 

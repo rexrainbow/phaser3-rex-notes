@@ -13,7 +13,6 @@ class Columns extends Sizer {
 
         super(scene, config);
         this.type = 'rexTweaker.Columns';
-        this.alignAllColumnsTitleWidth = GetValue(config, 'alignAllColumnsTitleWidth', true);
 
         // Add elements
         var background = GetValue(config, 'background', undefined);

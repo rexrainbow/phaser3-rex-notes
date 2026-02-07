@@ -45,11 +45,6 @@ var CreateSplitPanels = function (parent, config, style) {
         space = GetValue(style, 'space', undefined);
     }
 
-    var alignAllColumnsTitleWidth = GetValue(config, 'alignAllColumnsTitleWidth', undefined);
-    if (alignAllColumnsTitleWidth === undefined) {
-        alignAllColumnsTitleWidth = GetValue(style, 'alignAllColumnsTitleWidth', false);
-    }
-
     var splitPanels = new SplitPanels(scene, {
         header: title,
         background: background,
@@ -61,7 +56,6 @@ var CreateSplitPanels = function (parent, config, style) {
         minRightPanelWidth: GetValue(config, 'minRightPanelWidth', 0),
 
         space: space,
-        alignAllColumnsTitleWidth: alignAllColumnsTitleWidth
     });
     scene.add.existing(splitPanels);
 
