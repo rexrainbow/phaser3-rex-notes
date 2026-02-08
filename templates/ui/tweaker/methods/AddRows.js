@@ -107,25 +107,14 @@ var AddProperties = function (tweaker, properties, target, monitor) {
             default:
                 var key = property.$key;
                 delete property.$key;
-                if (key.indexOf('.') === -1) {
-                    property.bindingTarget = target;
-                    property.bindingKey = key;
 
-                } else {
-                    var keys = key.split('.');
+                property.bindingTarget = target;
+                property.bindingKey = key;
 
-                    property.bindingKey = keys.pop();
-
-                    var bindingTarget = target;
-                    for (var k = 0, kcnt = keys.length; k < kcnt; k++) {
-                        bindingTarget = bindingTarget[keys[k]];
-                        if (!target) {
-                            console.warn(`[Monitor] Key path '${key}' is invalid`)
-                            continue;
-                        }
-                    }
-                    property.bindingTarget = bindingTarget;
-
+                if (property.title === undefined) {
+                    // Display leaf key as title
+                    var lastDotIndex = key.lastIndexOf(".");
+                    property.title = (lastDotIndex === -1) ? key : key.slice(lastDotIndex + 1);
                 }
 
                 if (!property.hasOwnProperty('monitor')) {
@@ -139,4 +128,3 @@ var AddProperties = function (tweaker, properties, target, monitor) {
 }
 
 export default AddRows;
-
