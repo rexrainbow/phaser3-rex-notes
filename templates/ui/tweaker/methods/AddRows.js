@@ -110,7 +110,7 @@ var AddProperties = function (tweaker, properties, target, monitor) {
                 delete property.$key;
 
                 var resolved = ResolveKeyPath(target, key);
-                if (!resolved.valid) {
+                if (!resolved) {
                     console.warn(`[Tweaker] Key path '${keyPath}' is invalid`);
                     continue;
                 }

@@ -1,7 +1,10 @@
 var ResolveKeyPath = function (target, keyPath) {
+    if (!target) {
+        return false;
+    }
+
     var bindingTarget = target;
     var bindingKey = keyPath;
-    var valid = true;
 
     if (bindingTarget && (typeof (keyPath) === 'string') && (keyPath.indexOf('.') !== -1)) {
         var keys = keyPath.split('.');
@@ -9,16 +12,14 @@ var ResolveKeyPath = function (target, keyPath) {
         for (var i = 0, cnt = keys.length; i < cnt; i++) {
             bindingTarget = bindingTarget[keys[i]];
             if (!bindingTarget) {
-                valid = false;
-                break;
+                return false;
             }
         }
     }
 
     return {
         target: bindingTarget,
-        key: bindingKey,
-        valid: valid
+        key: bindingKey
     };
 }
 

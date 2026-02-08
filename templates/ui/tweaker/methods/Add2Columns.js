@@ -7,10 +7,7 @@ var AddSplit = function (config) {
         config = {};
     }
 
-    var splitPanelStyle = GetValue(this.styles, '2columns');
-    if (!splitPanelStyle) {
-        splitPanelStyle = GetValue(this.styles, 'two-columns') || {};
-    }
+    var splitPanelStyle = GetValue(this.styles, '2columns') || {};
     splitPanelStyle.tweaker = this.styles;
     splitPanelStyle.root = this.root;
     var splitPanels = CreateSplitPanels(this, config, splitPanelStyle);
