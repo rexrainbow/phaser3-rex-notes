@@ -40,11 +40,6 @@ var CreateSplitPanels = function (parent, config, style) {
     var backgroundStyle = GetValue(style, 'background', undefined);
     var background = CreateBackground(scene, backgroundConfig || {}, backgroundStyle || {});
 
-    var space = GetValue(config, 'space', undefined);
-    if (space === undefined) {
-        space = GetValue(style, 'space', undefined);
-    }
-
     var splitPanels = new SplitPanels(scene, {
         header: title,
         background: background,
@@ -54,7 +49,7 @@ var CreateSplitPanels = function (parent, config, style) {
         splitRatio: GetValue(config, 'splitRatio', 0.5),
         minLeftPanelWidth: GetValue(config, 'minLeftPanelWidth', 0),
         minRightPanelWidth: GetValue(config, 'minRightPanelWidth', 0),
-        space: space,
+        space: GetValue(config, 'space', undefined, style),
 
         alignTitle: style.root.alignTitle
     });

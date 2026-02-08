@@ -36,17 +36,8 @@ var GenerateTweakerShellClass = function (config) {
             this.styles = GetValue(config, 'styles') || {};
             this.styles.orientation = this.orientation;
 
-            var itemWidth = GetValue(config, 'itemWidth');
-            if (itemWidth === undefined) {
-                itemWidth = GetValue(this.styles, 'itemWidth', 0);
-            }
-            this.itemWidth = itemWidth;
-
-            var itemHeight = GetValue(config, 'itemHeight');
-            if (itemHeight === undefined) {
-                itemHeight = GetValue(this.styles, 'itemHeight', 0);
-            }
-            this.itemHeight = itemHeight;
+            this.itemWidth = GetValue(config, 'itemWidth', 0, this.styles);
+            this.itemHeight = GetValue(config, 'itemHeight', 0, this.styles);
 
             // Set inputRow.alignTitle
             if (this.isRoot) {
