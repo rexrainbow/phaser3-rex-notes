@@ -1,16 +1,36 @@
+import ResolveTarget from './ResolveTarget.js';
 import CreateInputRow from '../builders/CreateInputRow.js';
 
 var AddInput = function (object, key, config) {
     if (arguments.length === 1) {
         config = object;
-        object = config.bindingTarget;
-        key = config.bindingKey;
+        var resolved = ResolveTarget(config.bindingTarget, config.bindingKey);
+        if (!resolved) {
+            // Skip this input
+            console.warn(`[Tweaker] Key path '${config.bindingKey}' is invalid`);
+            return this;
+        }
+
+        config.bindingTarget = resolved.target;
+        config.bindingKey = resolved.key;
+        object = resolved.target;
+        key = resolved.key;
+
     } else {
+        var resolved = ResolveTarget(object, key);
+        if (!resolved) {
+            // Skip this input
+            console.warn(`[Tweaker] Key path '${key}' is invalid`);
+            return this;
+        }
+
         if (config === undefined) {
             config = {};
         }
-        config.bindingTarget = object;
-        config.bindingKey = key;
+        config.bindingTarget = resolved.target;
+        config.bindingKey = resolved.key;
+        object = resolved.target;
+        key = resolved.key;
     }
 
     if (!config.title) {

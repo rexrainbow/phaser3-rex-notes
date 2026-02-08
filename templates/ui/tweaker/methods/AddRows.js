@@ -1,5 +1,5 @@
 import DeepClone from '../../../../plugins/utils/object/DeepClone.js';
-import ResolveKeyPath from './ResolveKeyPath.js';
+import ResolveTarget from './ResolveTarget.js';
 
 var AddRows = function (properties, target, monitor) {
     if (typeof (target) === 'boolean') {
@@ -109,7 +109,7 @@ var AddProperties = function (tweaker, properties, target, monitor) {
                 var key = property.$key;
                 delete property.$key;
 
-                var resolved = ResolveKeyPath(target, key);
+                var resolved = ResolveTarget(target, key);
                 if (!resolved) {
                     console.warn(`[Tweaker] Key path '${keyPath}' is invalid`);
                     continue;

@@ -1,4 +1,4 @@
-var ResolveKeyPath = function (target, keyPath) {
+var ResolveTarget = function (target, keyPath) {
     if (!target) {
         return false;
     }
@@ -23,4 +23,4 @@ var ResolveKeyPath = function (target, keyPath) {
     };
 }
 
-export default ResolveKeyPath;
+export default ResolveTarget;
