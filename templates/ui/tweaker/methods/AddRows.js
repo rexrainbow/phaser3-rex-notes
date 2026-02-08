@@ -1,4 +1,5 @@
 import DeepClone from '../../../../plugins/utils/object/DeepClone.js';
+import ResolveKeyPath from './ResolveKeyPath.js';
 
 var AddRows = function (properties, target, monitor) {
     if (typeof (target) === 'boolean') {
@@ -107,26 +108,15 @@ var AddProperties = function (tweaker, properties, target, monitor) {
             default:
                 var key = property.$key;
                 delete property.$key;
-                if (key.indexOf('.') === -1) {
-                    property.bindingTarget = target;
-                    property.bindingKey = key;
 
-                } else {
-                    var keys = key.split('.');
-
-                    property.bindingKey = keys.pop();
-
-                    var bindingTarget = target;
-                    for (var k = 0, kcnt = keys.length; k < kcnt; k++) {
-                        bindingTarget = bindingTarget[keys[k]];
-                        if (!target) {
-                            console.warn(`[Monitor] Key path '${key}' is invalid`)
-                            continue;
-                        }
-                    }
-                    property.bindingTarget = bindingTarget;
-
+                var resolved = ResolveKeyPath(target, key);
+                if (!resolved.valid) {
+                    console.warn(`[Tweaker] Key path '${keyPath}' is invalid`);
+                    continue;
                 }
+
+                property.bindingTarget = resolved.target;
+                property.bindingKey = resolved.key;
 
                 if (!property.hasOwnProperty('monitor')) {
                     property.monitor = monitor;
