@@ -16,7 +16,10 @@ var AddSplit = function (config) {
 
     this.add(
         splitPanels,
-        { expand: true }
+        {
+            proportion: (splitPanels.minWidth === 0) ? 1 : 0,
+            expand: true
+        }
     );
 
     splitPanels.setTitle(config);

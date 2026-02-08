@@ -18,7 +18,10 @@ var AddTab = function (config) {
     // Add tab
     this.add(
         tab,
-        { expand: true }
+        {
+            proportion: (tab.minWidth === 0) ? 1 : 0,
+            expand: true
+        }
     );
 
     var pagesConfig = GetValue(config, 'pages') || [];

@@ -19,7 +19,10 @@ var AddButtons = function (config) {
     // Add buttons
     this.add(
         buttons,
-        { expand: true }
+        {
+            proportion: (buttons.minWidth === 0) ? 1 : 0,
+            expand: true
+        }
     );
 
     // Set binding target
