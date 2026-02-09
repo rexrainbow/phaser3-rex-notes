@@ -1,4 +1,5 @@
 import CreateInputRow from '../builders/CreateInputRow.js';
+import GetLeafKey from '../../../../plugins/utils/string/GetLeafKey.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -16,7 +17,8 @@ var AddInput = function (target, bindingKey, config) {
     }
 
     if (!config.title) {
-        config.title = bindingKey;
+        // Display leaf key as title
+        config.title = GetLeafKey(bindingKey);
     }
 
     config.value = GetValue(target, bindingKey, undefined);

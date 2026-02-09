@@ -111,12 +111,6 @@ var AddProperties = function (tweaker, properties, target, monitor) {
                 property.bindingTarget = target;
                 property.bindingKey = key;
 
-                if (property.title === undefined) {
-                    // Display leaf key as title
-                    var lastDotIndex = key.lastIndexOf(".");
-                    property.title = (lastDotIndex === -1) ? key : key.slice(lastDotIndex + 1);
-                }
-
                 if (!property.hasOwnProperty('monitor')) {
                     property.monitor = monitor;
                 }
