@@ -90,6 +90,37 @@ declare namespace Tweaker {
      * Input row style configuration.
      */
     interface IInputRowStyle {
+        /** Fixed width of the input row. */
+        width?: number,
+        /** Fixed height of the input row. */
+        height?: number,
+
+        /**
+         * Row layout orientation.
+         */
+        orientation?: 0 | 1 | 'x' | 'y',
+
+        /** True to enable right-to-left layout. */
+        rtl?: boolean,
+
+        /**
+         * Spacing configuration for the input row.
+         */
+        space?: {
+            /** Left space. */
+            left?: number,
+            /** Right space. */
+            right?: number,
+            /** Top space. */
+            top?: number,
+            /** Bottom space. */
+            bottom?: number,
+            /** Space between title and input field. */
+            title?: number,
+            /** Space between items. */
+            item?: number,
+        },
+
         /** Background style of each input row. */
         background?: CreateBackground.IConfig,
 
@@ -98,6 +129,8 @@ declare namespace Tweaker {
 
         /** Single-line text input style. */
         inputText?: InputText.IConfig,
+        /** Alias of inputText for numeric inputs. */
+        inputNumber?: InputText.IConfig,
 
         /** Multi-line text input style. */
         inputTextArea?: InputTextArea.IConfig,
@@ -314,7 +347,8 @@ declare namespace Tweaker {
     /**
      * Base configuration for adding an input row.
      */
-    interface IAddInputConfig {
+    interface TweakerCustomInputConfig {}
+    interface IAddInputConfig extends TweakerCustomInputConfig {
         /** Object that owns the edited property. */
         bindingTarget?: Object,
         /** Property name on binding target. */
@@ -846,14 +880,14 @@ declare class Tweaker extends Sizer {
     /**
      * Add an input row bound to a target object key.
      *
-     * @param object - Binding target object.
-     * @param key - Binding key.
+     * @param target - Binding target object.
+     * @param bindingKey - Binding key.
      * @param config - Optional input configuration.
      * @returns This tweaker instance.
      */
     addInput(
-        object: Object,
-        key: string,
+        target: Object,
+        bindingKey: string,
         config?: Tweaker.IAddInputConfig
     ): this;
 
