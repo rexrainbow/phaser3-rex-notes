@@ -65,6 +65,12 @@ class InputRow extends Sizer {
     }
 
     setTitle(config) {
+        if (typeof (config) === 'string') {
+            config = { text: config };
+        } else {
+            config = (config) ? DeepClone(config) : {};
+        }
+
         var title = this.childrenMap.title;
         title.setTitle(config);
         return this;

@@ -14,19 +14,21 @@ const DefaultSplitStyle = {
 var CreateSplitPanels = function (parent, config, style) {
     var scene = parent.scene;
 
+    // title
+    var titleStyle = GetValue(style, 'title') || {};
+    var title = new Title(scene, titleStyle);
+    scene.add.existing(title);
+
+    // left and right tweaker panels with background
     var tweakerConfig = {
         root: GetValue(style, 'root'),
         styles: GetValue(style, 'tweaker'),
         space: GetValue(style, 'space') || {}
     }
-
     var leftPanel = parent.createTweaker(tweakerConfig);
     var rightPanel = parent.createTweaker(tweakerConfig);
 
-    var titleStyle = GetValue(style, 'title') || {};
-    var title = new Title(scene, titleStyle);
-    scene.add.existing(title);
-
+    // splitter
     var splitterConfig = GetValue(config, 'splitter', undefined);
     var splitterStyle = GetValue(style, 'splitter', undefined);
     var splitter;
@@ -36,16 +38,16 @@ var CreateSplitPanels = function (parent, config, style) {
     }
     splitter = CreateBackground(scene, splitterConfig || {}, splitterStyle || {});
 
-    var backgroundConfig = GetValue(config, 'background', undefined);
-    var backgroundStyle = GetValue(style, 'background', undefined);
-    var background = CreateBackground(scene, backgroundConfig || {}, backgroundStyle || {});
+    // background
+    var backgroundStyle = GetValue(style, 'background');
+    var background = CreateBackground(scene, config, backgroundStyle);
 
     var splitPanels = new SplitPanels(scene, {
         header: title,
-        background: background,
         leftPanel: leftPanel,
         rightPanel: rightPanel,
         splitter: splitter,
+        background: background,
         splitRatio: GetValue(config, 'splitRatio', 0.5),
         minLeftPanelWidth: GetValue(config, 'minLeftPanelWidth', 0),
         minRightPanelWidth: GetValue(config, 'minRightPanelWidth', 0),

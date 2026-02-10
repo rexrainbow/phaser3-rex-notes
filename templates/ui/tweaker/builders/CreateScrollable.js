@@ -8,11 +8,12 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 var CreateScrollable = function (parent, config, style) {
     var scene = parent.scene;
 
-    // Create Folder-title
+    // Scrollable-title
     var titleStyle = GetValue(style, 'title') || {};
     var title = new Title(scene, titleStyle);
     scene.add.existing(title);
 
+    // panel
     var tweakerConfig = {
         root: GetValue(style, 'root'),
         styles: GetValue(style, 'tweaker'),
@@ -20,6 +21,7 @@ var CreateScrollable = function (parent, config, style) {
     }
     var child = parent.createTweaker(tweakerConfig);
 
+    // slider
     var sliderStyle = GetValue(style, 'slider');
     if (sliderStyle) {
         sliderStyle = DeepClone(sliderStyle);
@@ -33,6 +35,7 @@ var CreateScrollable = function (parent, config, style) {
         }
     }
 
+    // background
     var backgroundStyle = GetValue(style, 'background');
     var background = CreateBackground(scene, config, backgroundStyle);
 

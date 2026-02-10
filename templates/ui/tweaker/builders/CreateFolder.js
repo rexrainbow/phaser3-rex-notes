@@ -20,6 +20,7 @@ var CreateFolder = function (parent, config, style) {
             title.setExpandedState(false);
         })
 
+    // tweaker panel
     var tweakerConfig = {
         root: GetValue(style, 'root'),
         styles: GetValue(style, 'tweaker'),
@@ -27,6 +28,7 @@ var CreateFolder = function (parent, config, style) {
     }
     var child = parent.createTweaker(tweakerConfig);
 
+    // background
     var backgroundStyle = GetValue(style, 'background');
     var background = CreateBackground(scene, config, backgroundStyle);
 

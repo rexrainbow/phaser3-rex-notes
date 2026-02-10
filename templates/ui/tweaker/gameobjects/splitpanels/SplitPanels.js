@@ -21,14 +21,17 @@ class SplitPanels extends SplitPanelsBase {
     }
 
     setTitle(config) {
-        var header = this.childrenMap.header;
+        if (typeof (config) === 'string') {
+            config = { text: config };
+        } else {
+            config = (config) ? DeepClone(config) : {};
+        }
 
-        if (header) {
-            if (config.title || config.icon) {
-                header.show().setTitle(config);
-            } else {
-                header.hide();
-            }
+        var title = this.childrenMap.header;
+        if (config.text || config.title || config.icon) {
+            title.show().setTitle(config);
+        } else {
+            title.hide();
         }
 
         return this;

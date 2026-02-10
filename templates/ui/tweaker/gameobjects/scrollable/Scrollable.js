@@ -9,9 +9,14 @@ class Scrollable extends ScrollableBase {
     }
 
     setTitle(config) {
-        var title = this.childrenMap.header;
+        if (typeof (config) === 'string') {
+            config = { text: config };
+        } else {
+            config = (config) ? DeepClone(config) : {};
+        }
 
-        if (config.title || config.icon) {
+        var title = this.childrenMap.header;
+        if (config.text || config.title || config.icon) {
             title.show().setTitle(config);
         } else {
             title.hide();
