@@ -1,9 +1,8 @@
-var GetValue = function (source, key, defaultValue) {
-    if (source === null || typeof source !== 'object') {
-        return defaultValue;
-    }
+var GetValue = function (source, key, defaultValue, altSource) {
+    var isValidSource = source && (typeof source === 'object' || typeof source === 'function');
+    var isValidAltSource = altSource && (typeof altSource === 'object' || typeof altSource === 'function')
 
-    if (typeof key !== 'string' && typeof key !== 'number') {
+    if (!isValidSource && !isValidAltSource) {
         return defaultValue;
     }
 
@@ -12,8 +11,11 @@ var GetValue = function (source, key, defaultValue) {
     // Shortcut:
     // If obj[keyPath] can be read (including prototype chain), return it directly.
     // This also supports literal keys like "a.b".
-    if (keyPath in source) {
+    if (isValidSource && (keyPath in source)) {
         return source[keyPath];
+    }
+    if (isValidAltSource && (keyPath in altSource)) {
+        return altSource[keyPath];
     }
 
     // If there is no dot, we already know it's missing.
@@ -22,23 +24,55 @@ var GetValue = function (source, key, defaultValue) {
     }
 
     var keys = keyPath.split('.');
-    var parent = source;
 
-    for (var index = 0; index < keys.length; index++) {
-        var propertyKey = keys[index];
-
-        if (parent === null || typeof parent !== 'object') {
-            return defaultValue;
-        }
-
-        if (propertyKey in parent) {
-            parent = parent[propertyKey];
-        } else {
-            return defaultValue;
+    // 1) Try source path first
+    if (isValidSource) {
+        var sourceResult = WalkPath(source, keys, defaultValue);
+        if (sourceResult.found) {
+            return sourceResult.value;
         }
     }
 
-    return parent;
+    // 2) Then try altSource path
+    if (isValidAltSource) {
+        var altSourceResult = WalkPath(altSource, keys, defaultValue);
+        if (altSourceResult.found) {
+            return altSourceResult.value;
+        }
+    }
+
+    return defaultValue;
 };
+
+
+var WalkPath = function (source, keys, defaultValue) {
+    var parent = source;
+    var value = defaultValue;
+
+    var found;
+    for (var index = 0, cnt = keys.length; index < cnt; index++) {
+        var partKey = keys[index];
+
+        if (parent && (typeof parent === 'object' || typeof parent === 'function')) {
+            found = (partKey in parent);
+        } else {
+            found = false;
+        }
+
+        if (!found) {
+            WalkPathResult.found = false;
+            return WalkPathResult;
+        }
+
+        value = parent[partKey];
+        parent = value;
+    }
+
+    WalkPathResult.found = true;
+    WalkPathResult.value = value;
+    return WalkPathResult;
+};
+
+var WalkPathResult = {}
 
 export default GetValue;
