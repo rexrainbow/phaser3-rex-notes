@@ -1,5 +1,6 @@
+import CreateTitleLabel from './CreateTitleLabel.js';
 import Wrap from '../gameobjects/wrap/Wrap.js';
-import Title from '../gameobjects/label/Title.js';
+import CreateBackground from './CreateBackground.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -9,8 +10,7 @@ var CreateWrap = function (parent, config, style) {
     var scene = parent.scene;
 
     // title    
-    var title = new Title(scene, (style.title || {}));
-    scene.add.existing(title);
+    var title = CreateTitleLabel(scene, undefined, (style.title || {}));
 
     var tweakerConfig = {
         root: style.root,

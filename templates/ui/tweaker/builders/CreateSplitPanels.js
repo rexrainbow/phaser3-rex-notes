@@ -1,6 +1,6 @@
+import CreateTitleLabel from './CreateTitleLabel.js';
 import CreateBackground from './CreateBackground.js';
 import SplitPanels from '../gameobjects/splitpanels/SplitPanels.js';
-import Title from '../gameobjects/label/Title.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -18,8 +18,7 @@ var CreateSplitPanels = function (parent, config, style) {
     var scene = parent.scene;
 
     // title
-    var title = new Title(scene, (style.title || {}));
-    scene.add.existing(title);
+    var title = CreateTitleLabel(scene, (style.title || {}));
 
     // left and right tweaker panels with background
     var tweakerConfig = {

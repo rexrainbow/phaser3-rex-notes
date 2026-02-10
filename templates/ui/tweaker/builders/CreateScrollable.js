@@ -1,4 +1,4 @@
-import Title from '../gameobjects/label/Title.js';
+import CreateTitleLabel from './CreateTitleLabel.js';
 import CreateBackground from './CreateBackground.js';
 import Scrollable from '../gameobjects/scrollable/Scrollable.js';
 import DeepClone from '../../../../plugins/utils/object/DeepClone.js';
@@ -12,8 +12,7 @@ var CreateScrollable = function (parent, config, style) {
     var scene = parent.scene;
 
     // Scrollable-title
-    var title = new Title(scene, (style.title || {}));
-    scene.add.existing(title);
+    var title = CreateTitleLabel(scene, undefined, (style.title || {}));
 
     // panel
     var tweakerConfig = {
