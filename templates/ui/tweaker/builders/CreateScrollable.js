@@ -6,23 +6,24 @@ import DeepClone from '../../../../plugins/utils/object/DeepClone.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 var CreateScrollable = function (parent, config, style) {
+    if (!config) { config = {}; }
+    if (!style) { style = {}; }
+
     var scene = parent.scene;
 
     // Scrollable-title
-    var titleStyle = GetValue(style, 'title') || {};
-    var title = new Title(scene, titleStyle);
+    var title = new Title(scene, (style.title || {}));
     scene.add.existing(title);
 
     // panel
     var tweakerConfig = {
-        root: GetValue(style, 'root'),
-        styles: GetValue(style, 'tweaker'),
-        space: GetValue(style, 'space') || {}
+        root: style.root,
+        styles: style.tweaker,
     }
     var child = parent.createTweaker(tweakerConfig);
 
     // slider
-    var sliderStyle = GetValue(style, 'slider');
+    var sliderStyle = style.slider;
     if (sliderStyle) {
         sliderStyle = DeepClone(sliderStyle);
         var trackStyle = sliderStyle.track;
@@ -36,8 +37,7 @@ var CreateScrollable = function (parent, config, style) {
     }
 
     // background
-    var backgroundStyle = GetValue(style, 'background');
-    var background = CreateBackground(scene, config, backgroundStyle);
+    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
     var scrollable = new Scrollable(scene, {
         scrollMode: 0,
@@ -57,7 +57,7 @@ var CreateScrollable = function (parent, config, style) {
 
         height: GetValue(config, 'height', 0),
 
-        space: GetValue(style, 'space', undefined),
+        space: style.space,
     })
     scene.add.existing(scrollable);
 

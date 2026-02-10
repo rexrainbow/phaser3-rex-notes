@@ -21,12 +21,6 @@ class SplitPanels extends SplitPanelsBase {
     }
 
     setTitle(config) {
-        if (typeof (config) === 'string') {
-            config = { text: config };
-        } else {
-            config = (config) ? DeepClone(config) : {};
-        }
-
         var title = this.childrenMap.header;
         if (config.text || config.title || config.icon) {
             title.show().setTitle(config);

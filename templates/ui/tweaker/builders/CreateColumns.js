@@ -5,17 +5,19 @@ import CreateBackground from './CreateBackground.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 var CreateColumns = function (parent, config, style) {
+    if (!config) { config = {}; }
+    if (!style) { style = {}; }
+
     var scene = parent.scene;
 
-    // title
-    var titleStyle = GetValue(style, 'title') || {};
-    var title = new Title(scene, titleStyle);
+    // title    
+    var title = new Title(scene, (style.title || {}));
     scene.add.existing(title);
 
     // columns, each column has a tweaker panel
     var tweakerConfig = {
-        root: GetValue(style, 'root'),
-        styles: GetValue(style, 'tweaker')
+        root: style.root,
+        styles: style.tweaker,
     }
 
     var columnConfigArray = GetValue(config, 'columns', 2);
@@ -38,14 +40,13 @@ var CreateColumns = function (parent, config, style) {
     }
 
     // background
-    var backgroundStyle = GetValue(style, 'background');
-    var background = CreateBackground(scene, config, backgroundStyle);
+    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
     var columns = new Columns(scene, {
         title: title,
         columns: columnConfigArray,
         background: background,
-        space: GetValue(style, 'space'),
+        space: style.space,
 
         alignTitle: style.root.alignTitle
     });

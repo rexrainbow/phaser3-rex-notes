@@ -78,12 +78,6 @@ class Columns extends Sizer {
     }
 
     setTitle(config) {
-        if (typeof (config) === 'string') {
-            config = { text: config };
-        } else {
-            config = (config) ? DeepClone(config) : {};
-        }
-
         var title = this.childrenMap.title;
 
         if (config.text || config.title || config.icon) {

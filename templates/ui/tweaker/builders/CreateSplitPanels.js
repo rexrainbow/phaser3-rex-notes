@@ -12,35 +12,35 @@ const DefaultSplitStyle = {
 };
 
 var CreateSplitPanels = function (parent, config, style) {
+    if (!config) { config = {}; }
+    if (!style) { style = {}; }
+
     var scene = parent.scene;
 
     // title
-    var titleStyle = GetValue(style, 'title') || {};
-    var title = new Title(scene, titleStyle);
+    var title = new Title(scene, (style.title || {}));
     scene.add.existing(title);
 
     // left and right tweaker panels with background
     var tweakerConfig = {
-        root: GetValue(style, 'root'),
-        styles: GetValue(style, 'tweaker'),
-        space: GetValue(style, 'space') || {}
+        root: style.root,
+        styles: style.tweaker,
     }
     var leftPanel = parent.createTweaker(tweakerConfig);
     var rightPanel = parent.createTweaker(tweakerConfig);
 
     // splitter
-    var splitterConfig = GetValue(config, 'splitter', undefined);
-    var splitterStyle = GetValue(style, 'splitter', undefined);
+    var splitterConfig = config.splitter;
+    var splitterStyle = style.splitter;
     var splitter;
     if (!splitterConfig && !splitterStyle) {
         // Default splitStyle
-        splitterConfig = DefaultSplitStyle;
+        splitterStyle = DefaultSplitStyle;
     }
-    splitter = CreateBackground(scene, splitterConfig || {}, splitterStyle || {});
+    splitter = CreateBackground(scene, (splitterConfig || {}), (splitterStyle || {}));
 
     // background
-    var backgroundStyle = GetValue(style, 'background');
-    var background = CreateBackground(scene, config, backgroundStyle);
+    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
     var splitPanels = new SplitPanels(scene, {
         header: title,
@@ -51,7 +51,7 @@ var CreateSplitPanels = function (parent, config, style) {
         splitRatio: GetValue(config, 'splitRatio', 0.5),
         minLeftPanelWidth: GetValue(config, 'minLeftPanelWidth', 0),
         minRightPanelWidth: GetValue(config, 'minRightPanelWidth', 0),
-        space: GetValue(config, 'space', undefined, style),
+        space: style.space,
 
         alignTitle: style.root.alignTitle
     });

@@ -10,11 +10,7 @@ class Title extends Label {
     }
 
     setTitle(config) {
-        if (typeof (config) === 'string') {
-            config = { text: config };
-        } else {
-            config = (config) ? DeepClone(config) : {};
-        }
+        config = (config) ? DeepClone(config) : {};
 
         if (config.hasOwnProperty('text')) {
             // Do nothing
