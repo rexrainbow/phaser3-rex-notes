@@ -1,40 +1,44 @@
 var GetValue = function (source, key, defaultValue) {
-    if (!source || typeof source === 'number') {
+    if (source === null || typeof source !== 'object') {
         return defaultValue;
     }
 
-    if (typeof (key) === 'string') {
-        if (source.hasOwnProperty(key)) {
-            return source[key];
+    if (typeof key !== 'string' && typeof key !== 'number') {
+        return defaultValue;
+    }
+
+    var keyPath = String(key);
+
+    // Shortcut:
+    // If obj[keyPath] can be read (including prototype chain), return it directly.
+    // This also supports literal keys like "a.b".
+    if (keyPath in source) {
+        return source[keyPath];
+    }
+
+    // If there is no dot, we already know it's missing.
+    if (keyPath.indexOf('.') === -1) {
+        return defaultValue;
+    }
+
+    var keys = keyPath.split('.');
+    var parent = source;
+
+    for (var index = 0; index < keys.length; index++) {
+        var propertyKey = keys[index];
+
+        if (parent === null || typeof parent !== 'object') {
+            return defaultValue;
         }
-        if (key.indexOf('.') !== -1) {
-            key = key.split('.');
+
+        if (propertyKey in parent) {
+            parent = parent[propertyKey];
         } else {
             return defaultValue;
         }
     }
 
-    var keys = key;
-    var parent = source;
-    var value = defaultValue;
-
-    //  Use for loop here so we can break early
-    for (var i = 0; i < keys.length; i++) {
-        key = keys[i];
-        if (parent.hasOwnProperty(key)) {
-            //  Yes it has a key property, let's carry on down
-            value = parent[key];
-
-            parent = value;
-        }
-        else {
-            //  Can't go any further, so reset to default
-            value = defaultValue;
-            break;
-        }
-    }
-
-    return value;
+    return parent;
 };
 
 export default GetValue;

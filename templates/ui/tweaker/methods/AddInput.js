@@ -1,7 +1,6 @@
 import CreateInputRow from '../builders/CreateInputRow.js';
+import GetValue from '../../../../plugins/utils/object/GetValue.js';
 import GetLeafKey from '../../../../plugins/utils/string/GetLeafKey.js';
-
-const GetValue = Phaser.Utils.Objects.GetValue;
 
 var AddInput = function (target, bindingKey, config) {
     if (arguments.length === 1) {
