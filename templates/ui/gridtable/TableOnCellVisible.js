@@ -4,11 +4,12 @@ var TableOnCellVisible = function (table) {
         var scope = this.createCellContainerCallbackScope;
         cell.item = this.items[cell.index];
         cell.items = this.items;
+        cell.gridTable = this;
         var cellContainer;
         if (scope) {
-            cellContainer = callback.call(scope, cell, cellContainer, table);
+            cellContainer = callback.call(scope, cell, cellContainer, this);
         } else {
-            cellContainer = callback(cell, cellContainer, table);
+            cellContainer = callback(cell, cellContainer, this);
         }
 
         if (cellContainer) {
@@ -22,6 +23,7 @@ var TableOnCellVisible = function (table) {
 
         cell.item = undefined;
         cell.items = undefined;
+        cell.gridTable = undefined;
         cell.setContainer(cellContainer);
     }, this);
 }

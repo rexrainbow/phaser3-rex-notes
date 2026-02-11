@@ -7,9 +7,16 @@ export default GridTable;
 declare namespace GridTable {
 
     /**
-     * Cell type from grid table core.
+     * Interface of Cell
      */
-    type CellType = GridTableCore.Cell;
+    interface ICell extends GridTableCore.Cell {
+        /** Item data associated with this cell. */
+        item: unknown,
+        /** Full items array backing the grid table. */
+        items: unknown[],
+        /** Owning grid table instance. */
+        gridTable: GridTable,
+    }
 
     /**
      * Callback to create or update a cell container.
@@ -18,8 +25,9 @@ declare namespace GridTable {
      * @returns The created or updated container.
      */
     type CreateCellContainerCallbackType = (
-        cell: CellType,
-        cellContainer: Phaser.GameObjects.GameObject | null
+        cell: ICell,
+        cellContainer: Phaser.GameObjects.GameObject | null,
+        gridTable: GridTable,
     ) => Phaser.GameObjects.GameObject | null;
 
     interface IConfig extends Scrollable.IConfig {

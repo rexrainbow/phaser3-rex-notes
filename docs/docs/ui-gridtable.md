@@ -243,13 +243,14 @@ var table = scene.rexUI.add.gridTable({
         footer: 'center',
     },
 
-    createCellContainerCallback: function(cell, cellContainer) {
+    createCellContainerCallback: function(cell, cellContainer, gridTable) {
         var scene = cell.scene,
             width = cell.width,
             height = cell.height,
             item = cell.item,
             items = cell.items,
-            index = cell.index;
+            index = cell.index,
+            // gridTable = cell.gridTable;
         if (cellContainer === null) { // No reusable cell container, create a new one
             // cellContainer = scene.rexUI.add.label();
         }
@@ -393,6 +394,7 @@ var table = scene.rexUI.add.gridTable({
         - `cell.item` : Item of this cell to display.
         - `cell.items` : Array of item data for each cell, equal to `items` parameter.
         - `cell.index` : Index of this cell.
+        - `cell.gridTable` : Reference of This GridTable instance.
     - Alignment of cellContainer : 
         ```javascript
         cell.setCellContainerAlign(align);
