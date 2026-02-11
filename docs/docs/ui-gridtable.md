@@ -533,6 +533,11 @@ See also - [dirty](ui-basesizer.md#dirty)
     ```javascript
     var container = table.getCellContainer(cellIndex);
     ```
+- Get all (visible) cell container
+    ```javascript
+    var containers = table.getAllCellContainers();
+    // var out = table.getAllCellContainers(out);
+    ```
 
 ### Reset size of all cells
 

@@ -248,6 +248,19 @@ class GridTable extends ContainerLite {
         return container;
     }
 
+    getAllCellContainers(out) {
+        if (out === undefined) {
+            out = [];
+        }
+        this.iterateVisibleCell(function (cell) {
+            var cellContainer = (cell) ? cell.getContainer() : null;
+            if (cellContainer) {
+                out.push(cellContainer);
+            }
+        })
+        return out;
+    }
+
     get cellsCount() {
         return this.table.cellsCount;
     }

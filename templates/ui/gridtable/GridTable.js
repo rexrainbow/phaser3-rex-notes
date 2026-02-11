@@ -112,6 +112,10 @@ class GridTable extends Scrollable {
         return table.getCellContainer(cellIdx);
     }
 
+    getAllCellContainers(out) {
+        return table.getAllCellContainers(out);
+    }
+
     updateVisibleCell(cellIdx) {
         var table = this.childrenMap.child;
         return table.updateVisibleCell(cellIdx);
