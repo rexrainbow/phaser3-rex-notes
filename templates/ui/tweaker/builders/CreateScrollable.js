@@ -1,7 +1,7 @@
 import CreateTitleLabel from './CreateTitleLabel.js';
+import CreateSlider from './CreateSlider.js';
 import CreateBackground from './CreateBackground.js';
 import Scrollable from '../gameobjects/scrollable/Scrollable.js';
-import DeepClone from '../../../../plugins/utils/object/DeepClone.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -11,7 +11,7 @@ var CreateScrollable = function (parent, config, style) {
 
     var scene = parent.scene;
 
-    // Scrollable-title
+    // title
     var title = CreateTitleLabel(scene, undefined, (style.title || {}));
 
     // panel
@@ -22,18 +22,7 @@ var CreateScrollable = function (parent, config, style) {
     var child = parent.createTweaker(tweakerConfig);
 
     // slider
-    var sliderStyle = style.slider;
-    if (sliderStyle) {
-        sliderStyle = DeepClone(sliderStyle);
-        var trackStyle = sliderStyle.track;
-        if (trackStyle) {
-            sliderStyle.track = CreateBackground(scene, config, trackStyle);
-        }
-        var thumbStyle = sliderStyle.thumb;
-        if (thumbStyle) {
-            sliderStyle.thumb = CreateBackground(scene, config, thumbStyle);
-        }
-    }
+    var slider = CreateSlider(scene, config.slider, style.slider);
 
     // background
     var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
@@ -50,7 +39,7 @@ var CreateScrollable = function (parent, config, style) {
             },
         },
 
-        slider: sliderStyle,
+        slider: slider,
 
         background: background,
 
