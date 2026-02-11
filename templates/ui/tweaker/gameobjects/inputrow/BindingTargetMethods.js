@@ -1,6 +1,5 @@
+import GetValue from '../../../../../plugins/utils/object/GetValue.js';
 import SetValue from '../../../../../plugins/utils/object/SetValue.js';
-
-const GetValue = Phaser.Utils.Objects.GetValue;
 
 export default {
     setupBinding() {
