@@ -23,10 +23,6 @@ class Demo extends Phaser.Scene {
             .setPosition(0, 0)
             .setOrigin(0)
             .addArrayTable(target, 'items', {
-                space: {
-                    cell: { top: 3, bottom: 3 }
-                },
-
                 $properties: [
                     { $key: 'name' },
                     { $key: 'a' },
@@ -246,6 +242,11 @@ var CreatePanel = function (scene) {
 
             arrayTable: {
                 height: 200,
+
+                space: {
+                    table: 10,
+                    cell: { top: 3, bottom: 3 },
+                },
 
                 slider: {
                     track: {

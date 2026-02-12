@@ -6,6 +6,7 @@ import CreateBackground from '../CreateBackground.js';
 import GenerateCreateCellContainerCallback from './GenerateCreateCellContainerCallback.js';
 import DeepClone from '../../../../../plugins/utils/object/DeepClone.js';
 import SetValue from '../../../../../plugins/utils/object/SetValue.js';
+import Merge from '../../../../../plugins/utils/object/Merge.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -113,7 +114,7 @@ var CreateArrayTable = function (parent, config, style) {
         background: background,
 
         height: GetValue(config, 'height', 0, style),
-        space: GetValue(config, 'space', undefined, style),
+        space: Merge((config.space || {}), (style.space || {})),
 
         createCellContainerCallback: GenerateCreateCellContainerCallback(parent, config, style),
     });
