@@ -60,9 +60,9 @@ var GenerateTweakerShellClass = function (config) {
             }
 
             if ((this.isRoot && (this.orientation === 1)) || isWrapMode) {
-                this.alignInputRowTitleStartFlag = this.root.alignTitle;
+                this.setAlignInputRowTitleEnable(this.root.alignTitle);
             } else {
-                this.alignInputRowTitleStartFlag = false;
+                this.setAlignInputRowTitleEnable(false);
             }
 
 
@@ -74,6 +74,14 @@ var GenerateTweakerShellClass = function (config) {
 
         get isRoot() {
             return this.root === this;
+        }
+
+        setAlignInputRowTitleEnable(enable) {
+            if (enable === undefined) {
+                enable = true;
+            }
+            this.alignInputRowTitleStartFlag = enable;
+            return this;
         }
 
         preLayout() {

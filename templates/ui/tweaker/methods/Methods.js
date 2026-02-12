@@ -6,6 +6,7 @@ import AddColumns from './AddColumns.js';
 import Add2Columns from './Add2Columns.js';
 import AddWrap from './AddWrap.js';
 import AddScrollable from './AddScrollable.js';
+import AddArrayTable from './AddArrayTable.js';
 import AddInput from './AddInput.js';
 import AddButtons from './AddButtons.js';
 import AddButton from './AddButton.js';
@@ -25,6 +26,7 @@ var methods = {
     add2Columns: Add2Columns,
     addWrap: AddWrap,
     addScrollable: AddScrollable,
+    addArrayTable: AddArrayTable,
     addInput: AddInput,
     addButtons: AddButtons,
     addButton: AddButton,

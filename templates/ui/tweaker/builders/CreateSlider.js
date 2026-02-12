@@ -6,6 +6,10 @@ var CreateSlider = function (scene, config, style) {
         return undefined;
     }
 
+    if (!config) {
+        config = {};
+    }
+
     var slider = (style) ? DeepClone(style) : {};
 
     var trackStyle = style.track;

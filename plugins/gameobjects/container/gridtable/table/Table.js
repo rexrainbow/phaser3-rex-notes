@@ -3,6 +3,7 @@ import Pool from '../../../../pool.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const SpliceOne = Phaser.Utils.Array.SpliceOne;
+const DefaultCellSize = 60;
 
 class Table {
     constructor(parent, config) {
@@ -22,12 +23,12 @@ class Table {
 
         var cellHeight = o.cellHeight;
         if (cellHeight === undefined) {
-            cellHeight = 60;
+            cellHeight = DefaultCellSize;
         }
 
         var cellWidth = o.cellWidth;
         if (cellWidth === undefined) {
-            cellWidth = 60;
+            cellWidth = DefaultCellSize;
         }
 
         this.setDefaultCellHeight(cellHeight);

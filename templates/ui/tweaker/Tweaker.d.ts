@@ -12,6 +12,7 @@ import InputTextArea from '../textareainput/TextAreaInput';
 import Checkbox from '../checkbox/Checkbox';
 import ToggleSwitch from '../toggleswitch/ToggleSwitch';
 import ColorInput from '../colorinput/colorinput/ColorInput';
+import GridTable from '../gridtable/GridTable';
 
 export default Tweaker;
 
@@ -244,8 +245,8 @@ declare namespace Tweaker {
             /** Optional columns title style. */
             title?: SimpleLabel.IConfig,
 
-            /** Columns background style per column or shared. */
-            background?: CreateBackground.IConfig | CreateBackground.IConfig[],
+            /** Columns background style. */
+            background?: CreateBackground.IConfig,
 
             /** Spacing around columns layout. */
             space?: {
@@ -306,12 +307,18 @@ declare namespace Tweaker {
 
             /** Vertical slider style of scrollable container. */
             slider?: {
+                /** Track game object configuration. */
                 track: CreateBackground.IConfig,
+                /** Thumb game object configuration. */
                 thumb: CreateBackground.IConfig,
 
+                /** Set to true to hide slider when content is not scrollable. */
                 hideUnscrollableSlider?: boolean,
+                /** Set to true to disable dragging when content is not scrollable. */
                 disableUnscrollableDrag?: boolean,
+                /** Set to true to adapt thumb size to current content size. */
                 adaptThumbSize?: boolean,
+                /** Minimum size of the slider thumb. */
                 minThumbSize?: number,
             },
 
@@ -319,6 +326,44 @@ declare namespace Tweaker {
             space?: {
                 panel?: number
             },
+        },
+
+        /** Array table container style. */
+        arrayTable?: {
+            /** Optional array table title style. */
+            title?: SimpleLabel.IConfig,
+
+            /** Array table background style. */
+            background?: CreateBackground.IConfig,
+
+            /** Vertical slider style of array-table container. */
+            slider?: {
+                /** Track game object configuration. */
+                track: CreateBackground.IConfig,
+                /** Thumb game object configuration. */
+                thumb: CreateBackground.IConfig,
+
+                /** Set to true to hide slider when content is not scrollable. */
+                hideUnscrollableSlider?: boolean,
+                /** Set to true to disable dragging when content is not scrollable. */
+                disableUnscrollableDrag?: boolean,
+                /** Set to true to adapt thumb size to current content size. */
+                adaptThumbSize?: boolean,
+                /** Minimum size of the slider thumb. */
+                minThumbSize?: number,
+            },
+
+            /** Space configuration for array table. */
+            space?: GridTable.IConfig['space'],
+
+            /** Style for index label in each cell. */
+            index?: SimpleLabel.IConfig,
+
+            /** Style for delete button in each cell. */
+            deleteButton?: SimpleLabel.IConfig,
+
+            /** Footer input row style for add button. */
+            inputRow?: IInputRowStyle,
         },
 
         /** Separator style between rows. */
@@ -347,7 +392,7 @@ declare namespace Tweaker {
     /**
      * Base configuration for adding an input row.
      */
-    interface TweakerCustomInputConfig {}
+    interface TweakerCustomInputConfig { }
     interface IAddInputConfig extends TweakerCustomInputConfig {
         /** Object that owns the edited property. */
         bindingTarget?: Object,
@@ -599,6 +644,80 @@ declare namespace Tweaker {
         height?: string,
 
         /** Optional scrollable key for lookup. */
+        key?: string,
+    }
+
+    /**
+     * Configuration for adding an array table.
+     */
+    interface IAddArrayConfig {
+        /** Optional title shown above the array table. */
+        title?: string,
+        /** Optional icon texture key shown in title. */
+        icon?: string,
+        /** Optional icon frame name. */
+        iconFrame?: string,
+        /** Optional icon display size. */
+        iconSize?: number,
+
+        /** Binding target object for the array items. */
+        target?: Object,
+        /** Binding target object for the array items. */
+        bindingTarget?: Object,
+        /** Key path to the array field on the binding target. */
+        bindingKey?: string,
+
+        /** Internal binding key path. */
+        bindingKeyPath?: string,
+
+        /** Initial items array when not bound. */
+        items?: unknown[],
+
+        /** Property descriptors for each item. */
+        $properties: IAddInputRowProperty[],
+
+        /** Set to true to monitor input values. */
+        monitor?: boolean,
+
+        /** Table configuration. */
+        table?: GridTable.IConfig['table'],
+        /** Table configuration alias. */
+        tableConfig?: GridTable.IConfig['table'],
+
+        /** Space configuration. */
+        space?: GridTable.IConfig['space'],
+
+        /**
+         * Index label template or formatter.
+         * Use "${i}" in template string to inject index.
+         */
+        indexLabel?: string | ((index: number, item: unknown, items: unknown[]) => string),
+
+        /** Label content for delete button in each cell. */
+        deleteItemLabel?: string | SimpleLabel.IResetDisplayContentConfig,
+
+        /**
+         * Label content for add button in footer.
+         * Set to null to hide footer.
+         */
+        addItemLabel?: string | SimpleLabel.IResetDisplayContentConfig | null,
+
+        /** Callback invoked after item is added. */
+        onAdd?: (item: unknown, index: number) => void,
+        /** Callback invoked after item is removed. */
+        onRemove?: (item: unknown, index: number) => void,
+
+        /**
+         * Create a default item when adding.
+         * @param properties - Property descriptors of the item.
+         */
+        createDefaultItem?: (
+            properties: IAddInputRowProperty[]
+        ) => unknown,
+
+        /**
+         * Lookup key when adding to children map.
+         */
         key?: string,
     }
 
@@ -858,6 +977,14 @@ declare class Tweaker extends Sizer {
     readonly isRoot: boolean;
 
     /**
+     * Enable or disable automatic alignment of input-row title width.
+     *
+     * @param enable - Set to true to align titles to the maximum title width.
+     * @returns This tweaker instance.
+     */
+    setAlignInputRowTitleEnable(enable?: boolean): this;
+
+    /**
      * Register an input handler.
      *
      * @param config - Input handler configuration.
@@ -987,6 +1114,16 @@ declare class Tweaker extends Sizer {
     addScrollable(
         config: Tweaker.IAddScrollableConfig
     ): Tweaker;
+
+    /**
+     * Add an array table for editing list items.
+     *
+     * @param config - Array table configuration.
+     * @returns Created array table.
+     */
+    addArrayTable(
+        config: Tweaker.IAddArrayConfig
+    ): this;
 
     /**
      * Add rows from declarative properties with optional target and monitor.
