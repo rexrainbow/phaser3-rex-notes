@@ -42,8 +42,6 @@ var CreateArrayTable = function (parent, config, style) {
     var tableConfig = GetValue(config, 'table', undefined, style) || {};
     tableConfig.reuseCellContainer = true;
     tableConfig.enableLayer = true;
-    tableConfig.cellHeight = 1;
-    tableConfig.columns = 1;
 
     var properties = config['$properties'] || [];
 

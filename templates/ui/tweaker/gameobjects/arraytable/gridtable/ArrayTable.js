@@ -10,6 +10,8 @@ class ArrayTable extends GridTable {
         super(scene, config);
         this.type = 'rexTweaker.ArrayTable';
 
+        this.resetCellSizeFlag = true;
+
     }
 
     destroy(fromScene) {
@@ -21,6 +23,19 @@ class ArrayTable extends GridTable {
         this.stopMonitorTarget();
 
         super.destroy(fromScene);
+    }
+
+    setItems(items, updateTable) {
+        if (this.resetCellSizeFlag && (items.length > 0)) {
+            this.resetCellSizeFlag = false;
+            super.setItems(items, false);
+            this.resetCellSizeFromCell();
+
+        } else {
+            super.setItems(items, updateTable);
+
+        }
+        return this;
     }
 
     setTitle(config) {

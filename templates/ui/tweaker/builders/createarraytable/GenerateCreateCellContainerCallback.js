@@ -100,11 +100,15 @@ var GenerateCreateCellContainerCallback = function (parent, config, style) {
             });
         }
 
-        cellContainer.setMinSize(width, height);
+        cell.setCellContainerAlign('center');
 
-        cellContainer.setIndexLabel(indexLabelCallback(index, item, items));
-
-        cellContainer.setItem(item); // Also setBindingTarget
+        cellContainer
+            .setMinSize(width, 0)
+            .setIndexLabel(indexLabelCallback(index, item, items))
+            .setItem(item) // Also setBindingTarget
+            .setDirty()
+            .layout()
+            .setDirty(false)
 
         return cellContainer;
     }
