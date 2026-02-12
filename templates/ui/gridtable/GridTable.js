@@ -6,6 +6,7 @@ import TableOnCellVisible from './TableOnCellVisible.js';
 import TableSetInteractive from './input/TableSetInteractive.js';
 import NOOP from '../../../plugins/utils/object/NOOP.js';
 import SetItems from './SetItems.js';
+import Refresh from './Refresh.js';
 import ScrollMethods from './ScrollMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -75,7 +76,7 @@ class GridTable extends Scrollable {
             TableSetInteractive.call(this, table, tableConfig);
         }
 
-        this.setItems(GetValue(config, 'items', []), false);
+        this.setItems(GetValue(config, 'items'), false);
 
         scene.game.events.on('poststep', this.onPostStep, this);
     }
@@ -127,6 +128,12 @@ class GridTable extends Scrollable {
         return this;
     }
 
+    resetCellSizeFromCell(cellIndex) {
+        var table = this.childrenMap.child;
+        table.resetCellSizeFromCell(cellIndex);
+        return this;
+    }
+
     onPostStep() {
         if (this.resizeControllerFlag) {
             this.resizeController();
@@ -141,7 +148,8 @@ class GridTable extends Scrollable {
 }
 
 var methods = {
-    setItems: SetItems
+    setItems: SetItems,
+    refresh: Refresh,
 }
 Object.assign(
     GridTable.prototype,

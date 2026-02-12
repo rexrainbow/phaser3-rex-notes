@@ -20,6 +20,7 @@ import RemoveCells from './RemoveCells.js';
 import SetColumnCount from './SetColumnCount.js';
 import SetGridSize from './SetGridSize.js';
 import UpdateVisibleCell from './UpdateVisibleCell';
+import ResetCellSizeFromCell from './ResetCellSizeFromCell.js';
 
 var methods = {
     setTableOY: SetTableOY,
@@ -46,7 +47,8 @@ var methods = {
     removeCells: RemoveCells,
     setColumnCount: SetColumnCount,
     setGridSize: SetGridSize,
-    updateVisibleCell: UpdateVisibleCell
+    updateVisibleCell: UpdateVisibleCell,
+    resetCellSizeFromCell: ResetCellSizeFromCell
 }
 
 Object.assign(

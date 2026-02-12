@@ -13,8 +13,7 @@ var SetItems = function (items, updateTable) {
     table.setCellsCount(this.items.length);
 
     if (updateTable) {
-        table.updateTable(true);
-        this.resizeController();
+        this.refresh();
     }
 
     return this;
