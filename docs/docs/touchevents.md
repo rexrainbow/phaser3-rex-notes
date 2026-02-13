@@ -553,3 +553,8 @@ Touch-position = (current-touch-position * smooth-factor) + (previous-touch-posi
     ```javascript
     scene.input.setPollRate(rate);
     ```
+
+## Priority of touch detection
+
+- [Container](container.md): A container and its children can both handle touch input, with the children taking priority over the container itself.
+- [Layer](layer.md): A layer cannot handle touch input itself, but its children can.
