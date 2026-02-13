@@ -13,9 +13,15 @@ var TableOnCellVisible = function (table) {
         }
 
         if (cellContainer) {
-            if ((cell.cellContainerAlign == null) && cellContainer.setOrigin) {
-                cellContainer.setOrigin(0);
+            if (cell.cellContainerAlign == null) {
+                if (cellContainer.isRexSizer && !cellContainer.dirty) {
+                    cellContainer.changeOrigin(0); // Won't be layout later
+                } else if (cellContainer.setOrigin) {
+                    cellContainer.setOrigin(0);
+                }
+
             }
+
             if (cellContainer.isRexSizer) {
                 cellContainer.layout(); // Use original size
             }
