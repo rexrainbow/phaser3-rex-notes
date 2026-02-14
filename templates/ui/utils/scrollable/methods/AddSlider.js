@@ -196,13 +196,9 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
 
         if (child.isRexContainerLite) {
             // Send touch detection sensor to back
-            var privateRenderLayer = child.privateRenderLayer;
-            if (!privateRenderLayer) {
+            if (!child.layerRendererEnable) {
                 // Normal mode
                 child.sendChildToBack(child);
-            } else {
-                // Move privateRenderLayer above
-                child.moveDepthAbove(privateRenderLayer);
             }
         }
     }

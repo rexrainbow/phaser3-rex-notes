@@ -909,22 +909,22 @@ declare class ContainerLite extends Base {
     removeFromLayer(addToScene?: boolean): this;
 
     /**
-     * Return true if a layer is enabled.
-     * @returns True if a layer is enabled.
+     * Return true if renderer layer is enabled.
+     * @returns True if renderer layer is enabled.
      */
     hasLayer(): boolean;
 
     /**
-     * Enable a layer for this container.
+     * Enable renderer layer
      * @returns This instance.
      */
     enableLayer(): this;
 
     /**
-     * Get the current layer.
-     * @returns The current layer.
+     * Backward compatible, enable renderer layer and return containerlite itself
+     * @returns This instance.
      */
-    getLayer(): Phaser.GameObjects.Layer;
+    getLayer(): this;
 
     /**
      * Snapshot to a render texture.

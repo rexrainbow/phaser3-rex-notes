@@ -16,7 +16,7 @@ import Depth from './Depth.js';
 import Children from './Children.js';
 import Tween from './Tween.js';
 import P3Container from './P3Container.js';
-import RenderLayer from './RenderLayer.js';
+import RendererLayer from './RendererLayer.js';
 import RenderTexture from './RenderTexture.js';
 
 import DrawBounds from './DrawBounds.js';
@@ -47,7 +47,7 @@ Object.assign(
     Children,
     Tween,
     P3Container,
-    RenderLayer,
+    RendererLayer,
     RenderTexture,
 );
 

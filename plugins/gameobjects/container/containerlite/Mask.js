@@ -24,34 +24,39 @@ export default {
         return this;
     },
 
-    clearMask(destroyMask) {
-        if (destroyMask === undefined) {
-            destroyMask = false;
-        }
-
-        var self = this;
-
-        // Clear current mask
-        this._mask = null;
-
-        this.setChildMaskVisible(this);
-        // Also set maskVisible to `true`
-
-        this.children.forEach(function (child) {
+    // Internal use
+    clearChildrenMask() {
+        var children = this.children;
+        for (var i = 0, cnt = children.length; i < cnt; i++) {
+            var child = children[i];
             // Clear child's mask
             if (child.clearMask) {
                 child.clearMask(false);
             }
 
             if (!child.hasOwnProperty('isRexContainerLite')) {
-                self.setChildMaskVisible(child);
+                this.setChildMaskVisible(child);
                 // Set child's maskVisible to `true`
             }
-        });
-
-        if (destroyMask && this.mask) {
-            this.mask.destroy();
         }
+        return this;
+    },
+
+    clearMask(destroyMask) {
+        if (destroyMask === undefined) {
+            destroyMask = false;
+        }
+
+        // Clear current mask
+        if (destroyMask && this.mask) {
+            mask.destroy();
+        }
+        this._mask = null;
+
+        this.setChildMaskVisible(this);
+        // Also set maskVisible to `true`
+
+        this.clearChildrenMask();
 
         return this;
     },

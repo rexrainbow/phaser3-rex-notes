@@ -19,7 +19,6 @@ class ContainerLite extends Base {
         this._scrollFactorX = 1;
         this._scrollFactorY = 1;
         this._cameraFilter = 0;
-        this.privateRenderLayer = undefined;
 
         if (children) {
             this.add(children);
@@ -34,11 +33,6 @@ class ContainerLite extends Base {
 
         this.syncChildrenEnable = false; // Don't sync properties changing anymore
         super.destroy(fromScene);
-
-        if (this.privateRenderLayer && this.privateRenderLayer.scene) {
-            this.privateRenderLayer.list.length = 0;  // Remove all children without trigger callback
-            this.privateRenderLayer.destroy();
-        }
     }
 
     resize(width, height) {
@@ -180,7 +174,11 @@ class ContainerLite extends Base {
         }
         this._mask = mask;
 
-        this.syncMask();
+        if (!this.layerRendererEnable) {
+            this.syncMask();
+        } else {
+            // this.clearChildrenMask();
+        }
     }
 
     // Override

@@ -12,10 +12,6 @@ export default {
         }
         this.setParent(gameObject, null);
 
-        if (!destroyChild) {
-            this.removeFromRenderLayer(gameObject);
-        }
-
         BaseRemove.call(this, gameObject, destroyChild);
         return this;
     },
@@ -27,10 +23,6 @@ export default {
         }
         this.setParent(gameObject, null);
 
-        if (!destroyChild) {
-            this.removeFromRenderLayer(gameObject);
-        }
-
         BaseRemove.call(this, gameObject, destroyChild);
         return this;
     },
@@ -40,10 +32,6 @@ export default {
         for (var i = 0, cnt = children.length; i < cnt; i++) {
             var child = children[i];
             this.setParent(child, null);
-
-            if (!destroyChild) {
-                this.removeFromRenderLayer(child);
-            }
         }
         BaseClear.call(this, destroyChild);
         return this;

@@ -18,7 +18,6 @@ export default {
 
         this.setMaskUpdateMode(GetValue(config, 'updateMode', 0));
         this.enableChildrenMask(GetValue(config, 'padding', 0));
-        this.setMaskLayer(GetValue(config, 'layer', undefined));
 
         this.onMaskGameObjectVisible = GetValue(config, 'onVisible');
         this.onMaskGameObjectInvisible = GetValue(config, 'onInvisible');
@@ -76,12 +75,6 @@ export default {
         return this;
     },
 
-    setMaskLayer(layer) {
-        // To reduce amount of masked game object
-        this.maskLayer = layer;
-        return this;
-    },
-
     maskChildren() {
         if (
             (!this.childrenMask) ||                // No childrenMask
@@ -91,16 +84,11 @@ export default {
             return this;
         }
 
-        if (this.privateRenderLayer) {
-            this.privateRenderLayer.setMask(this.childrenMask);
-
-        } else if (this.maskLayer) {
-            // 1. Add parent and children into layer
-            this.addToLayer(this.maskLayer);
-            // 2. Mask this layer
-            this.maskLayer.setMask(this.childrenMask);
+        if (this.layerRendererEnable) {
+            this.setMask(this.childrenMask);
 
         } else {
+            // Assume that all children are at scene's displayList
             MaskChildren({
                 parent: this,
                 mask: this.childrenMask,
