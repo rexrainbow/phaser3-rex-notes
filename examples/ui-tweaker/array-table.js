@@ -17,7 +17,7 @@ class Demo extends Phaser.Scene {
 
     create() {
         var target = {
-            items: CreateItems(10)
+            items: CreateItems(2)
         }
         var panel = CreatePanel(this)
             .setPosition(0, 0)
@@ -27,7 +27,11 @@ class Demo extends Phaser.Scene {
                     { $key: 'name' },
                     { $key: 'a' },
                     { $key: 'b' },
-                ]
+                ],
+
+                createDefaultItem() {
+                    return CreateItems(1)[0]
+                }
             })
             .layout();
 
@@ -245,7 +249,11 @@ var CreatePanel = function (scene) {
 
                 space: {
                     table: 10,
-                    cell: { top: 3, bottom: 3 },
+                    cell: {
+                        top: 5, bottom: 5,
+                        index: 10, tweaker: 5,
+                    },
+                    header: 5, footer: 5,
                 },
 
                 slider: {

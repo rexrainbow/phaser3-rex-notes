@@ -1,35 +1,13 @@
 import ArrayTable from '../../gameobjects/arraytable/gridtable/ArrayTable.js';
 import CreateTitleLabel from '../CreateTitleLabel.js';
 import CreateSlider from '../CreateSlider.js';
-import CreateButtons from '../CreateButtons.js';
+import CreateAddButton from './CreateAddButton.js';
 import CreateBackground from '../CreateBackground.js';
+import Sizer from '../../../sizer/Sizer.js';
 import GenerateCreateCellContainerCallback from './GenerateCreateCellContainerCallback.js';
-import DeepClone from '../../../../../plugins/utils/object/DeepClone.js';
-import SetValue from '../../../../../plugins/utils/object/SetValue.js';
 import Merge from '../../../../../plugins/utils/object/Merge.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
-
-var CreateDefaultItem = function (properties) {
-    var item = {};
-
-    for (var i = 0, cnt = properties.length; i < cnt; i++) {
-        var property = properties[i];
-        var keyPath = property.$key;
-        if (!keyPath) {
-            continue;
-        }
-
-        if (!property.hasOwnProperty('defaultValue')) {
-            continue;
-        }
-
-        var defaultValue = DeepClone(property.defaultValue);
-        SetValue(item, keyPath, defaultValue);
-    }
-
-    return item;
-}
 
 var CreateArrayTable = function (parent, config, style) {
     if (!config) { config = {}; }
@@ -44,70 +22,29 @@ var CreateArrayTable = function (parent, config, style) {
     tableConfig.reuseCellContainer = true;
     tableConfig.enableLayer = true;
 
-    var properties = config['$properties'] || [];
-
-    var addItemLabel = GetValue(config, 'addItemLabel', 'Add');
-
-    // var onAdd = GetValue(config, 'onAdd', undefined);
-
-    var arrayTable;
-
-    // var createDefaultItem = GetValue(config, 'createDefaultItem', undefined);
-    // if (typeof (createDefaultItem) !== 'function') {
-    //     createDefaultItem = CreateDefaultItem;
-    // }
-    // var bindingTarget = GetValue(config, 'bindingTarget', undefined);
-    // var bindingKey = GetValue(config, 'bindingKey', undefined);
-    // footer, add item button
-    //var footer = null;
-    //if (addItemLabel !== null) {
-    //    var footerConfig = {
-    //        title: '',
-    //        buttons: [{
-    //            label: addItemLabel,
-    //            callback: function () {
-    //                var currentItems = (arrayTable) ? arrayTable.items : items;
-    //                if (!Array.isArray(currentItems)) {
-    //                    currentItems = [];
-    //                }
-    //
-    //                var newItem = createDefaultItem(properties);
-    //                currentItems.push(newItem);
-    //
-    //                if (bindingTarget && (bindingKey !== undefined)) {
-    //                    bindingTarget[bindingKey] = currentItems;
-    //                }
-    //
-    //                if (onAdd) {
-    //                    onAdd(newItem, currentItems.length - 1);
-    //                }
-    //
-    //                if (arrayTable) {
-    //                    arrayTable.setItems(currentItems);
-    //                }
-    //            }
-    //        }]
-    //    };
-    //
-    //    var inputRowStyle = GetValue(style, 'inputRow', undefined);
-    //    if (!inputRowStyle) {
-    //        inputRowStyle = GetValue(style, 'tweaker.inputRow', {});
-    //    }
-    //    footer = CreateButtons(scene, footerConfig, inputRowStyle);
-    //}
-
     // slider
     var slider = CreateSlider(scene, config.slider, style.slider);
+
+    var addButton = CreateAddButton(scene, config, style);
+    var footer = new Sizer(scene);
+    scene.add.existing(footer);
+    footer
+        .addSpace()
+        .add(
+            addButton,
+            { proportion: 0, expand: true }
+        )
 
     // background
     var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
-    arrayTable = new ArrayTable(scene, {
+    var arrayTable = new ArrayTable(scene, {
         table: tableConfig,
 
         header: title,
 
-        //footer: footer,
+        footer: footer,
+        addButton: addButton,
 
         slider: slider,
 

@@ -2,6 +2,8 @@ import GridTable from '../../../../gridtable/GridTable.js';
 import BindingTargetMethods from './BindingTargetMethods.js';
 import MonitorTargetMethods from './MonitorTargetMethods.js';
 import InputRowTitleWidthMethods from './InputRowTitleWidthMethods.js';
+import InstallAddButton from './InstallAddButton.js';
+import { WaitComplete } from '../../../../utils/WaitEvent.js';
 
 const RemoveItem = Phaser.Utils.Array.Remove;
 
@@ -12,6 +14,7 @@ class ArrayTable extends GridTable {
 
         this.resetCellSizeFlag = true;
 
+        InstallAddButton.call(this, config);
     }
 
     destroy(fromScene) {
@@ -52,9 +55,49 @@ class ArrayTable extends GridTable {
 
     deleteItem(item) {
         // Called by CellContainer.onDeleteItem
-        RemoveItem(this.items, item);
-        this.refresh();
+        var items = this.items;
+        var index = items.indexOf(item);
+        if (index === -1) {
+            return;
+        }
+
+        var gridTable = this;
+        var onComplete = function () {
+            RemoveItem(items, item);
+            gridTable.refresh(); // Invoke *createCellContainerCallback* for each cell again
+        }
+
+        var cellContainer = this.getCellContainer(index);
+        if (!cellContainer) {
+            onComplete();
+            return;
+        }
+
+        this.scene.tweens.add({
+            targets: cellContainer,
+            // scaleY: 0,
+            alpha: 0,
+            duration: 500,
+
+            onUpdate: function () {
+                // gridTable.refresh();
+            },
+
+            onComplete: onComplete,
+        })
     }
+
+    addItem(item) {
+        // Calleed by add-button clicking
+        this.items.push(item);
+
+        this
+            .refresh()
+            .scrollToBottom()
+
+        return this;
+    }
+
 }
 
 Object.assign(
