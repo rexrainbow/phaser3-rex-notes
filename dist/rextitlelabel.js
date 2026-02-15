@@ -30,6 +30,213 @@
         IsChecked = true;
     };
 
+    var WebGLRenderer$1 = function (renderer, container, camera) {
+        camera.addToRenderList(container);
+
+        if (!container.layerRendererEnable) {
+            return;
+        }
+
+        // Won't apply container's alpha to children
+
+        var rendererLayer = container.rendererLayer;
+
+        if (!rendererLayer) {
+            return;
+        }
+
+        var children = rendererLayer.list;
+        var childCount = children.length;
+
+        if (childCount === 0) {
+            return;
+        }
+
+        rendererLayer.depthSort();
+
+        renderer.pipelines.preBatch(container);
+
+        var layerHasBlendMode = (container.blendMode !== -1);
+
+        if (!layerHasBlendMode) {
+            //  If Layer is SKIP_TEST then set blend mode to be Normal
+            renderer.setBlendMode(0);
+        }
+
+        for (var i = 0; i < childCount; i++) {
+            var child = children[i];
+
+            if (!child.willRender(camera)) {
+                continue;
+            }
+
+            if (!layerHasBlendMode && child.blendMode !== renderer.currentBlendMode) {
+                //  If Layer doesn't have its own blend mode, then a child can have one
+                renderer.setBlendMode(child.blendMode);
+            }
+
+            var mask = child.mask;
+
+            if (mask) {
+                mask.preRenderWebGL(renderer, child, camera);
+            }
+
+            var type = child.type;
+
+            if (type !== renderer.currentType) {
+                renderer.newType = true;
+                renderer.currentType = type;
+            }
+
+            renderer.nextTypeMatch = (i < childCount - 1) ? (children[i + 1].type === renderer.currentType) : false;
+
+            //  Render
+            child.renderWebGL(renderer, child, camera);
+
+            if (mask) {
+                mask.postRenderWebGL(renderer, camera);
+            }
+
+            renderer.newType = false;
+        }
+
+        renderer.pipelines.postBatch(container);
+    };
+
+    var CanvasRenderer$1 = function (renderer, container, camera) {
+        camera.addToRenderList(container);
+
+        if (!container.layerRendererEnable) {
+            return;
+        }
+
+        // Won't apply container's alpha to children
+
+        var rendererLayer = container.rendererLayer;
+
+        if (!rendererLayer) {
+            return;
+        }
+
+        var children = rendererLayer.list;
+
+        if (children.length === 0) {
+            return;
+        }
+
+        rendererLayer.depthSort();
+
+        var layerHasBlendMode = (container.blendMode !== -1);
+
+        if (!layerHasBlendMode) {
+            //  If Layer is SKIP_TEST then set blend mode to be Normal
+            renderer.setBlendMode(0);
+        }
+
+        if (container.mask) {
+            container.mask.preRenderCanvas(renderer, null, camera);
+        }
+
+        for (var i = 0; i < children.length; i++) {
+            var child = children[i];
+
+            if (!child.willRender(camera)) {
+                continue;
+            }
+
+            if (!layerHasBlendMode && child.blendMode !== renderer.currentBlendMode) {
+                //  If Layer doesn't have its own blend mode, then a child can have one
+                renderer.setBlendMode(child.blendMode);
+            }
+
+            //  Render
+            child.renderCanvas(renderer, child, camera);
+        }
+
+        if (container.mask) {
+            container.mask.postRenderCanvas(renderer);
+        }
+    };
+
+    var Renderer = {
+        renderWebGL: WebGLRenderer$1,
+        renderCanvas: CanvasRenderer$1
+
+    };
+
+    const List = Phaser.Structs.List;
+    const StableSort = Phaser.Utils.Array.StableSort;
+    const GameObjectEvents = Phaser.GameObjects.Events;
+    const SceneEvents = Phaser.Scenes.Events;
+
+    class ChildrenDisplayList extends List {
+        constructor(parent) {
+            super(parent.scene);
+
+            this.parent = parent;
+            this.scene = parent.scene;
+            this.events = this.scene.sys.events;
+            this.active = false;
+            this.sortChildrenFlag = false;
+
+            this.addCallback = this.addChildCallback;
+            this.removeCallback = this.removeChildCallback;
+        }
+
+        addChildCallback(gameObject) {
+            var displayList = gameObject.displayList;
+
+            if (displayList && displayList !== this) {
+                gameObject.removeFromDisplayList();
+            }
+
+            if (gameObject.parentContainer) {
+                gameObject.parentContainer.remove(gameObject);
+            }
+
+            if (!gameObject.displayList) {
+                this.queueDepthSort();
+
+                gameObject.displayList = this;
+
+                gameObject.emit(GameObjectEvents.ADDED_TO_SCENE, gameObject, this.scene);
+                this.events.emit(SceneEvents.ADDED_TO_SCENE, gameObject, this.scene);
+            }
+        }
+
+        removeChildCallback(gameObject) {
+            this.queueDepthSort();
+
+            if (gameObject.displayList === this) {
+                gameObject.displayList = null;
+            }
+
+            gameObject.emit(GameObjectEvents.REMOVED_FROM_SCENE, gameObject, this.scene);
+            this.events.emit(SceneEvents.REMOVED_FROM_SCENE, gameObject, this.scene);
+        }
+
+        queueDepthSort() {
+            this.sortChildrenFlag = true;
+            return this;
+        }
+
+        depthSort() {
+            if (!this.sortChildrenFlag || this.list.length < 2) {
+                this.sortChildrenFlag = false;
+                return this;
+            }
+
+            StableSort(this.list, this.sortByDepth);
+            this.sortChildrenFlag = false;
+
+            return this;
+        }
+
+        sortByDepth(childA, childB) {
+            return childA._depth - childB._depth;
+        }
+    }
+
     CheckP3Version();
 
     const Zone$1 = Phaser.GameObjects.Zone;
@@ -52,6 +259,14 @@
             }
             super(scene, x, y, width, height);
             this.children = [];
+
+            /*
+            Internal layer-like renderer
+            All children will be put into this internal layer, instead of displayList of scene,
+            and Base/ContainerLite will be very bottom of all children
+            */
+            this.layerRendererEnable = false;
+            this.rendererLayer = undefined;
         }
 
         destroy(fromScene) {
@@ -66,7 +281,10 @@
                 for (var i = this.children.length - 1; i >= 0; i--) {
                     child = this.children[i];
                     if (!child.parentContainer &&  // Not in container
-                        !child.displayList         // Not in scene, neither in layer
+                        (
+                            !child.displayList ||   // Not in any display list
+                            (child.displayList === this.rendererLayer) // In internal children display list
+                        )
                     ) {
                         // Destroy child which is not in scene, container, or layer manually
                         child.destroy(fromScene);
@@ -77,6 +295,8 @@
             // Destroy/remove children
             this.clear(!fromScene);
             super.destroy(fromScene);
+
+            this.rendererLayer = undefined;
         }
 
         contains(gameObject) {
@@ -84,27 +304,42 @@
         }
 
         add(gameObjects) {
-            var parent = this;
             AddItem(this.children, gameObjects, 0,
                 // Callback of item added
                 function (gameObject) {
-                    gameObject.once('destroy', parent.onChildDestroy, parent);
+                    gameObject.once('destroy', this.onChildDestroy, this);
+                    this.addChildCallback(gameObject);
                 }, this);
             return this;
         }
 
         remove(gameObjects, destroyChild) {
-            var parent = this;
             RemoveItem$6(this.children, gameObjects,
                 // Callback of item removed
                 function (gameObject) {
-                    gameObject.off('destroy', parent.onChildDestroy, parent);
+                    gameObject.off('destroy', this.onChildDestroy, this);
+                    this.removeChildCallback(gameObject, destroyChild);
                     if (destroyChild) {
                         gameObject.destroy();
                     }
-                }
-            );
+                }, this);
             return this;
+        }
+
+        // Overwrite it
+        addChildCallback(gameObject) {
+            var layer = this.rendererLayer;
+            if (layer) {
+                layer.add(gameObject); // will invoke rendererLayer.queueDepthSort()
+            }
+        }
+
+        // Overwrite it
+        removeChildCallback(gameObject, destroyChild) {
+            var layer = this.rendererLayer;
+            if (layer) {
+                layer.remove(gameObject); // will invoke rendererLayer.queueDepthSort()
+            }
         }
 
         onChildDestroy(child, fromScene) {
@@ -113,16 +348,43 @@
         }
 
         clear(destroyChild) {
-            var parent = this;
             var gameObject;
-            for (var i = 0, cnt = this.children.length; i < cnt; i++) {
-                gameObject = this.children[i];
-                gameObject.off('destroy', parent.onChildDestroy, parent);
+            var children = this.children.slice();
+            for (var i = 0, cnt = children.length; i < cnt; i++) {
+                gameObject = children[i];
+
+                if (!gameObject) {
+                    continue;
+                }
+
+                gameObject.off('destroy', this.onChildDestroy, this);
+                this.removeChildCallback(gameObject, destroyChild);
                 if (destroyChild) {
                     gameObject.destroy();
                 }
             }
             this.children.length = 0;
+
+            return this;
+        }
+
+        enableLayerRenderer() {
+            if (this.layerRendererEnable) {
+                return this;
+            }
+
+            this.layerRendererEnable = true;
+
+            var rendererLayer = new ChildrenDisplayList(this);
+
+            this.rendererLayer = rendererLayer;
+
+            for (var i = 0, cnt = this.children.length; i < cnt; i++) {
+                this.addChildCallback(this.children[i]);
+            }
+
+            rendererLayer.queueDepthSort();
+
             return this;
         }
     };
@@ -133,6 +395,11 @@
             Components$1.Alpha,
             Components$1.Flip
         ]
+    );
+
+    Object.assign(
+        Base$2.prototype,
+        Renderer,
     );
 
     var GetParent$1 = function (gameObject, name) {
@@ -334,8 +601,6 @@
         if (state.syncDisplayList) {
             this.addToPatentLayer(gameObject);     // Sync parent's layer to child
         }
-
-        this.addToRenderLayer(gameObject);         // Sync parent's render-layer
     };
 
     var AddChild$2 = {
@@ -407,10 +672,6 @@
             }
             this.setParent(gameObject, null);
 
-            if (!destroyChild) {
-                this.removeFromRenderLayer(gameObject);
-            }
-
             BaseRemove.call(this, gameObject, destroyChild);
             return this;
         },
@@ -422,10 +683,6 @@
             }
             this.setParent(gameObject, null);
 
-            if (!destroyChild) {
-                this.removeFromRenderLayer(gameObject);
-            }
-
             BaseRemove.call(this, gameObject, destroyChild);
             return this;
         },
@@ -435,10 +692,6 @@
             for (var i = 0, cnt = children.length; i < cnt; i++) {
                 var child = children[i];
                 this.setParent(child, null);
-
-                if (!destroyChild) {
-                    this.removeFromRenderLayer(child);
-                }
             }
             BaseClear.call(this, destroyChild);
             return this;
@@ -1004,34 +1257,39 @@
             return this;
         },
 
-        clearMask(destroyMask) {
-            if (destroyMask === undefined) {
-                destroyMask = false;
-            }
-
-            var self = this;
-
-            // Clear current mask
-            this._mask = null;
-
-            this.setChildMaskVisible(this);
-            // Also set maskVisible to `true`
-
-            this.children.forEach(function (child) {
+        // Internal use
+        clearChildrenMask() {
+            var children = this.children;
+            for (var i = 0, cnt = children.length; i < cnt; i++) {
+                var child = children[i];
                 // Clear child's mask
                 if (child.clearMask) {
                     child.clearMask(false);
                 }
 
                 if (!child.hasOwnProperty('isRexContainerLite')) {
-                    self.setChildMaskVisible(child);
+                    this.setChildMaskVisible(child);
                     // Set child's maskVisible to `true`
                 }
-            });
-
-            if (destroyMask && this.mask) {
-                this.mask.destroy();
             }
+            return this;
+        },
+
+        clearMask(destroyMask) {
+            if (destroyMask === undefined) {
+                destroyMask = false;
+            }
+
+            // Clear current mask
+            if (destroyMask && this.mask) {
+                mask.destroy();
+            }
+            this._mask = null;
+
+            this.setChildMaskVisible(this);
+            // Also set maskVisible to `true`
+
+            this.clearChildrenMask();
 
             return this;
         },
@@ -1105,12 +1363,16 @@
     var Depth = {
         setDepth(value, containerOnly) {
             this.depth = value;
-            if (!containerOnly && this.children) {
-                var children = this.getAllChildren();
-                for (var i = 0, cnt = children.length; i < cnt; i++) {
-                    children[i].depth = value;
+
+            if (!this.layerRendererEnable) {
+                if (!containerOnly && this.children) {
+                    var children = this.getAllChildren();
+                    for (var i = 0, cnt = children.length; i < cnt; i++) {
+                        children[i].depth = value;
+                    }
                 }
             }
+            // else: children are inside rendererLayer, not in scene's display list
             return this;
         },
 
@@ -1124,12 +1386,16 @@
 
         incDepth(inc) {
             this.depth += inc;
-            if (this.children) {
-                var children = this.getAllChildren();
-                for (var i = 0, cnt = children.length; i < cnt; i++) {
-                    children[i].depth += inc;
+
+            if (!this.layerRendererEnable) {
+                if (this.children) {
+                    var children = this.getAllChildren();
+                    for (var i = 0, cnt = children.length; i < cnt; i++) {
+                        children[i].depth += inc;
+                    }
                 }
             }
+            // else: children are inside rendererLayer, not in scene's display list
             return this;
         },
 
@@ -1139,14 +1405,22 @@
                 return this;
             }
 
-            var children = this.getAllChildren([this]);
-            SortGameObjectsByDepth(children, false);
-            for (var i = 0, cnt = children.length; i < cnt; i++) {
-                var child = children[i];
-                if (displayList.exists(child)) {
-                    displayList.bringToTop(child);
+            if (!this.layerRendererEnable) {
+                var children = this.getAllChildren([this]);
+                SortGameObjectsByDepth(children, false);
+                for (var i = 0, cnt = children.length; i < cnt; i++) {
+                    var child = children[i];
+                    if (displayList.exists(child)) {
+                        displayList.bringToTop(child);
+                    }
                 }
+            } else {
+                if (displayList.exists(this)) {
+                    displayList.bringToTop(this);
+                }
+                // children are inside rendererLayer, not in scene's display list
             }
+
             return this;
         },
 
@@ -1160,13 +1434,20 @@
                 return this;
             }
 
-            var children = this.getAllChildren([this]);
-            SortGameObjectsByDepth(children, true);
-            for (var i = 0, cnt = children.length; i < cnt; i++) {
-                var child = children[i];
-                if (displayList.exists(child)) {
-                    displayList.sendToBack(child);
+            if (!this.layerRendererEnable) {
+                var children = this.getAllChildren([this]);
+                SortGameObjectsByDepth(children, true);
+                for (var i = 0, cnt = children.length; i < cnt; i++) {
+                    var child = children[i];
+                    if (displayList.exists(child)) {
+                        displayList.sendToBack(child);
+                    }
                 }
+            } else {
+                if (displayList.exists(this)) {
+                    displayList.sendToBack(this);
+                }
+                // children are inside rendererLayer, not in scene's display list
             }
             return this;
         },
@@ -1186,14 +1467,21 @@
                 return this;
             }
 
-            var children = this.getAllChildren([this]);
-            SortGameObjectsByDepth(children, false);
-            for (var i = 0, cnt = children.length; i < cnt; i++) {
-                var child = children[i];
-                if (displayList.exists(child)) {
-                    displayList.moveBelow(gameObject, child);
-                    break;
+            if (!this.layerRendererEnable) {
+                var children = this.getAllChildren([this]);
+                SortGameObjectsByDepth(children, false);
+                for (var i = 0, cnt = children.length; i < cnt; i++) {
+                    var child = children[i];
+                    if (displayList.exists(child)) {
+                        displayList.moveBelow(gameObject, child);
+                        break;
+                    }
                 }
+            } else {
+                if (displayList.exists(this)) {
+                    displayList.moveBelow(gameObject, this);
+                }
+                // children are inside rendererLayer, not in scene's display list
             }
             return this;
         },
@@ -1213,14 +1501,21 @@
                 return this;
             }
 
-            var children = this.getAllChildren([this]);
-            SortGameObjectsByDepth(children, true);
-            for (var i = 0, cnt = children.length; i < cnt; i++) {
-                var child = children[i];
-                if (displayList.exists(child)) {
-                    displayList.moveAbove(gameObject, child);
-                    break;
+            if (!this.layerRendererEnable) {
+                var children = this.getAllChildren([this]);
+                SortGameObjectsByDepth(children, true);
+                for (var i = 0, cnt = children.length; i < cnt; i++) {
+                    var child = children[i];
+                    if (displayList.exists(child)) {
+                        displayList.moveAbove(gameObject, child);
+                        break;
+                    }
                 }
+            } else {
+                if (displayList.exists(this)) {
+                    displayList.moveAbove(gameObject, this);
+                }
+                // children are inside rendererLayer, not in scene's display list
             }
             return this;
         },
@@ -1230,19 +1525,30 @@
         },
 
         bringChildToTop(child) {
+            if ((child === this) && (this.layerRendererEnable)) {
+                // containterLite is at the very bottom, can't move it to top
+                return this;
+            }
+
             var gameObjects;
-            if ((child !== this) && child.isRexContainerLite) {
+            if ((child !== this) && child.isRexContainerLite && (!child.layerRendererEnable)) {
                 gameObjects = child.getAllChildren([child]);
                 gameObjects = FilterDisplayGameObjects(gameObjects);
                 gameObjects = SortGameObjectsByDepth(gameObjects, false);
+
             } else {
                 gameObjects = [child];
             }
 
-            var children = this.getAllChildren([this]);
-            children = FilterDisplayGameObjects(children);
-            children = SortGameObjectsByDepth(children, false);
-            var topChild = children[children.length - 1];
+            var topChild;
+            if (!this.layerRendererEnable) {
+                var children = this.getAllChildren([this]);
+                children = FilterDisplayGameObjects(children);
+                children = SortGameObjectsByDepth(children, false);
+                topChild = children[children.length - 1];
+            } else {
+                topChild = this;
+            }
 
             for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
                 var gameObject = gameObjects[i];
@@ -1261,8 +1567,13 @@
         },
 
         sendChildToBack(child) {
+            if ((child === this) && (this.layerRendererEnable)) {
+                // containterLite is at the very bottom, do nothing
+                return this;
+            }
+
             var gameObjects;
-            if ((child !== this) && child.isRexContainerLite) {
+            if ((child !== this) && child.isRexContainerLite && (!child.layerRendererEnable)) {
                 gameObjects = child.getAllChildren([child]);
                 gameObjects = FilterDisplayGameObjects(gameObjects);
                 gameObjects = SortGameObjectsByDepth(gameObjects, false);
@@ -1270,10 +1581,15 @@
                 gameObjects = [child];
             }
 
-            var children = this.getAllChildren([this]);
-            children = FilterDisplayGameObjects(children);
-            children = SortGameObjectsByDepth(children, false);
-            var bottomChild = children[0];
+            var bottomChild;
+            if (!this.layerRendererEnable) {
+                var children = this.getAllChildren([this]);
+                children = FilterDisplayGameObjects(children);
+                children = SortGameObjectsByDepth(children, false);
+                bottomChild = children[0];
+            } else {
+                bottomChild = this;
+            }
 
             for (var i = gameObjects.length - 1; i >= 0; i--) {
                 var gameObject = gameObjects[i];
@@ -1566,11 +1882,7 @@
         },
     };
 
-    const ContainerClass = Phaser.GameObjects.Container;
-
-    var IsContainerGameObject = function (gameObject) {
-        return (gameObject instanceof ContainerClass);
-    };
+    Phaser.GameObjects.Container;
 
     const LayerClass$1 = Phaser.GameObjects.Layer;
 
@@ -1620,10 +1932,6 @@
 
     var P3Container$2 = {
         addToContainer(p3Container) {
-            if (!IsContainerGameObject(p3Container)) {
-                return this;
-            }
-
             this._setParentContainerFlag = true;
             AddToContainer.call(this, p3Container);
             this._setParentContainerFlag = false;
@@ -1631,10 +1939,6 @@
         },
 
         addToLayer(layer) {
-            if (!IsLayerGameObject(layer)) {
-                return this;
-            }
-
             AddToContainer.call(this, layer);
 
             return this;
@@ -1731,70 +2035,63 @@
         }
     };
 
-    var RenderLayer = {
+    var GetRendererLayer = function () {
+        // This containerLite has rendererLayer
+        if (this.rendererLayer) {
+            return this.rendererLayer;
+        }
+
+        // One of parent is layerRendererEnable
+        var parent = this.getParent();
+        while (parent) {
+            if (parent.rendererLayer) {
+                return parent.rendererLayer;
+            }
+
+            parent = parent.getParent();
+        }
+
+        return null;
+    };
+
+    var RendererLayer = {
         hasLayer() {
-            return !!this.privateRenderLayer;
+            return this.layerRendererEnable;
         },
 
         enableLayer() {
-            if (this.hasLayer()) {
-                return this;
-            }
-
-            var layer = this.scene.add.layer();
-            // layer.name = (this.name) ? `${this.name}.privateLayer` : 'privateLayer';
-
-            this.moveDepthBelow(layer);
-
-            this.addToLayer(layer);
-
-            this.privateRenderLayer = layer;
-
+            this.enableLayerRenderer();
             return this;
         },
 
+        // Backward compatible
         getLayer() {
-            if (!this.hasLayer()) {
-                this.enableLayer();
-            }
-
-            return this.privateRenderLayer;
+            this.enableLayerRenderer();
+            return this;
         },
 
-        getRenderLayer() {
-            // This containerLite has a layer
-            if (this.hasLayer()) {
-                return this.privateRenderLayer;
+        // Override Base.addChildCallback
+        addChildCallback(gameObject) {
+            /* Base.addChildCallback:
+            var layer = this.rendererLayer;
+            if (layer) {
+                layer.add(gameObject); // will invoke rendererLayer.queueDepthSort()
             }
+            */
 
-            // One of parent container has a layer
-            var parent = this.getParent();
-            while (parent) {
-                var layer = parent.privateRenderLayer;
-                if (layer) {
-                    return layer;
-                }
-                parent = parent.getParent();
-            }
-
-            return null;
-        },
-
-        // Internal method for adding child
-        addToRenderLayer(gameObject) {
             // Don't add to layer if gameObject is not in any displayList
             if (!gameObject.displayList) {
-                return this;
+                return;
             }
 
-            // Move gameObject from scene to layer
-            var layer = this.getRenderLayer();
+            // Move gameObject from scene to layer (rendererLayer)
+            var layer = GetRendererLayer.call(this);
             if (!layer) {
-                return this;
+                return;
             }
 
             if (layer === gameObject.displayList) {
-                return this;
+                return;
             }
 
             if (gameObject.isRexContainerLite) {
@@ -1807,17 +2104,22 @@
 
             var state = GetLocalState(gameObject);
             state.layer = layer;
-
-            return this;
         },
 
-        // Internal method for removing child
-        removeFromRenderLayer(gameObject) {
+        // Override Base.removeChildCallback
+        removeChildCallback(gameObject, destroyChild) {
+            /* Base.removeChildCallback:
+            var layer = this.rendererLayer;
+            if (layer) {
+                layer.remove(gameObject); // will invoke rendererLayer.queueDepthSort()
+            }
+            */
+
             // Move gameObject from layer to scene
             var state = GetLocalState(gameObject);
             var layer = state.layer;
             if (!layer) {
-                return this;
+                return;
             }
 
             if (gameObject.isRexContainerLite) {
@@ -1829,8 +2131,6 @@
             }
 
             state.layer = null;
-
-            return this;
         },
     };
 
@@ -2391,7 +2691,7 @@
         Children,
         Tween,
         P3Container$2,
-        RenderLayer,
+        RendererLayer,
         RenderTexture,
     );
 
@@ -2412,7 +2712,6 @@
             this._scrollFactorX = 1;
             this._scrollFactorY = 1;
             this._cameraFilter = 0;
-            this.privateRenderLayer = undefined;
 
             if (children) {
                 this.add(children);
@@ -2427,11 +2726,6 @@
 
             this.syncChildrenEnable = false; // Don't sync properties changing anymore
             super.destroy(fromScene);
-
-            if (this.privateRenderLayer && this.privateRenderLayer.scene) {
-                this.privateRenderLayer.list.length = 0;  // Remove all children without trigger callback
-                this.privateRenderLayer.destroy();
-            }
         }
 
         resize(width, height) {
@@ -2573,7 +2867,9 @@
             }
             this._mask = mask;
 
-            this.syncMask();
+            if (!this.layerRendererEnable) {
+                this.syncMask();
+            }
         }
 
         // Override
@@ -7266,44 +7562,82 @@
         },
     };
 
-    var GetValue$B = function (source, key, defaultValue) {
-        if (!source || typeof source === 'number') {
+    var GetValue$B = function (source, key, defaultValue, altSource) {
+        var isValidSource = source && (typeof source === 'object' || typeof source === 'function');
+        var isValidAltSource = altSource && (typeof altSource === 'object' || typeof altSource === 'function');
+
+        if (!isValidSource && !isValidAltSource) {
             return defaultValue;
         }
 
-        if (typeof (key) === 'string') {
-            if (source.hasOwnProperty(key)) {
-                return source[key];
-            }
-            if (key.indexOf('.') !== -1) {
-                key = key.split('.');
-            } else {
-                return defaultValue;
+        var keyPath = String(key);
+
+        // Shortcut:
+        // If obj[keyPath] can be read (including prototype chain), return it directly.
+        // This also supports literal keys like "a.b".
+        if (isValidSource && (keyPath in source)) {
+            return source[keyPath];
+        }
+        if (isValidAltSource && (keyPath in altSource)) {
+            return altSource[keyPath];
+        }
+
+        // If there is no dot, we already know it's missing.
+        if (keyPath.indexOf('.') === -1) {
+            return defaultValue;
+        }
+
+        var keys = keyPath.split('.');
+
+        // 1) Try source path first
+        if (isValidSource) {
+            var sourceResult = WalkPath(source, keys, defaultValue);
+            if (sourceResult.found) {
+                return sourceResult.value;
             }
         }
 
-        var keys = key;
+        // 2) Then try altSource path
+        if (isValidAltSource) {
+            var altSourceResult = WalkPath(altSource, keys, defaultValue);
+            if (altSourceResult.found) {
+                return altSourceResult.value;
+            }
+        }
+
+        return defaultValue;
+    };
+
+
+    var WalkPath = function (source, keys, defaultValue) {
         var parent = source;
         var value = defaultValue;
 
-        //  Use for loop here so we can break early
-        for (var i = 0; i < keys.length; i++) {
-            key = keys[i];
-            if (parent.hasOwnProperty(key)) {
-                //  Yes it has a key property, let's carry on down
-                value = parent[key];
+        var found;
+        for (var index = 0, cnt = keys.length; index < cnt; index++) {
+            var partKey = keys[index];
 
-                parent = value;
+            if (parent && (typeof parent === 'object' || typeof parent === 'function')) {
+                found = (partKey in parent);
+            } else {
+                found = false;
             }
-            else {
-                //  Can't go any further, so reset to default
-                value = defaultValue;
-                break;
+
+            if (!found) {
+                WalkPathResult.found = false;
+                return WalkPathResult;
             }
+
+            value = parent[partKey];
+            parent = value;
         }
 
-        return value;
+        WalkPathResult.found = true;
+        WalkPathResult.value = value;
+        return WalkPathResult;
     };
+
+    var WalkPathResult = {};
 
     const StateProperties$1 = ['next', 'exit', 'enter'];
 
@@ -12756,7 +13090,27 @@
             }
             this.insert(index, gameObject, proportion, align, paddingConfig, expand, childKey, minSize);
             return this;
-        }
+        },
+
+        insertAfter(baseGameObject, gameObject, proportion, align, paddingConfig, expand, childKey, minSize) {
+            var index = this.sizerChildren.indexOf(baseGameObject);
+            if (index === -1) {
+                index = this.sizerChildren.length - 1;
+            }
+
+            this.insert(index + 1, gameObject, proportion, align, paddingConfig, expand, childKey, minSize);
+            return this;
+        },
+
+        insertBefore(baseGameObject, gameObject, proportion, align, paddingConfig, expand, childKey, minSize) {
+            var index = this.sizerChildren.indexOf(baseGameObject);
+            if (index === -1) {
+                index = this.sizerChildren.length - 1;
+            }
+
+            this.insert(index, gameObject, proportion, align, paddingConfig, expand, childKey, minSize);
+            return this;
+        },
     };
 
     const ContainerClear = ContainerLite.prototype.clear;
