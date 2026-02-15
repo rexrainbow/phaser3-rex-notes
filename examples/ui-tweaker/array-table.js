@@ -72,6 +72,12 @@ var CreatePanel = function (scene) {
             },
 
             inputRow: {
+                proportion: {
+                    title: 1,
+                    inputField: 3,
+                    range: { slider: 2, inputText: 1 }
+                },
+
                 background: {
                     strokeColor: COLOR_MAIN
                 },
