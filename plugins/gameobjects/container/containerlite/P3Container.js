@@ -44,10 +44,6 @@ var RemoveFromContainer = function (p3Container, descending, addToScene) {
 
 export default {
     addToContainer(p3Container) {
-        if (!IsContainerGameObject(p3Container)) {
-            return this;
-        }
-
         this._setParentContainerFlag = true;
         AddToContainer.call(this, p3Container);
         this._setParentContainerFlag = false;
@@ -55,10 +51,6 @@ export default {
     },
 
     addToLayer(layer) {
-        if (!IsLayerGameObject(layer)) {
-            return this;
-        }
-
         AddToContainer.call(this, layer);
 
         return this;
