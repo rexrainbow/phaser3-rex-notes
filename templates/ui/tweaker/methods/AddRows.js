@@ -51,7 +51,6 @@ var AddProperties = function (tweaker, properties, target, monitor) {
                 break;
 
             case '2columns':
-            case 'two-columns':
                 var splitPanels = tweaker.add2Columns(property);
                 var leftProperties, rightProperties;
                 if (property.columns) {
@@ -88,6 +87,19 @@ var AddProperties = function (tweaker, properties, target, monitor) {
             case 'scrollable':
                 var scrollable = tweaker.addScrollable(property);
                 AddProperties(scrollable, property.$properties, target, monitor);
+                break;
+
+            case 'arrayTable':
+                var key = property.$key;
+                delete property.$key;
+
+                property.bindingTarget = target;
+                property.bindingKey = key;
+
+                if (!property.hasOwnProperty('monitor')) {
+                    property.monitor = monitor;
+                }
+                tweaker.addArrayTable(property);
                 break;
 
             case 'separator':

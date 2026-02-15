@@ -76634,6 +76634,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     var InstallAddButton = function (config) {
         var button = config.addButton;
+        if (!button) {
+            return;
+        }
+
         var createDefaultItemCallback = button.createDefaultItem;
 
         button.onClick(function () {
@@ -76723,6 +76727,11 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
     };
 
     var CreateAddButton = function (parent, config, style) {
+        var createDefaultItem = GetValue$o(config, 'createDefaultItem', DefaultCallback);
+        if (!createDefaultItem) {
+            return null;
+        }
+
         var scene = parent;
 
         var addButtonStyle = GetValue$o(style, 'add');
@@ -77088,15 +77097,18 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         // slider
         var slider = CreateSlider$1(scene, config.slider, style.slider);
 
+        var footer;
         var addButton = CreateAddButton(scene, config, style);
-        var footer = new Sizer(scene);
-        scene.add.existing(footer);
-        footer
-            .addSpace()
-            .add(
-                addButton,
-                { proportion: 0, expand: true }
-            );
+        if (addButton) {
+            footer = new Sizer(scene);
+            scene.add.existing(footer);
+            footer
+                .addSpace()
+                .add(
+                    addButton,
+                    { proportion: 0, expand: true }
+                );
+        }
 
         // background
         var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
@@ -77120,9 +77132,12 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         });
         scene.add.existing(arrayTable);
 
-        arrayTable
-            .bringChildToTop(title)
-            .bringChildToTop(footer);
+        if (title) {
+            arrayTable.bringChildToTop(title);
+        }
+        if (footer) {
+            arrayTable.bringChildToTop(footer);
+        }
 
         return arrayTable;
     };
@@ -77937,7 +77952,6 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                     break;
 
                 case '2columns':
-                case 'two-columns':
                     var splitPanels = tweaker.add2Columns(property);
                     var leftProperties, rightProperties;
                     if (property.columns) {
@@ -77974,6 +77988,19 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 case 'scrollable':
                     var scrollable = tweaker.addScrollable(property);
                     AddProperties(scrollable, property.$properties, target, monitor);
+                    break;
+
+                case 'arrayTable':
+                    var key = property.$key;
+                    delete property.$key;
+
+                    property.bindingTarget = target;
+                    property.bindingKey = key;
+
+                    if (!property.hasOwnProperty('monitor')) {
+                        property.monitor = monitor;
+                    }
+                    tweaker.addArrayTable(property);
                     break;
 
                 case 'separator':

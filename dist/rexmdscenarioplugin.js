@@ -57615,6 +57615,10 @@
 
 	var InstallAddButton = function (config) {
 	    var button = config.addButton;
+	    if (!button) {
+	        return;
+	    }
+
 	    var createDefaultItemCallback = button.createDefaultItem;
 
 	    button.onClick(function () {
@@ -57704,6 +57708,11 @@
 	};
 
 	var CreateAddButton = function (parent, config, style) {
+	    var createDefaultItem = GetValue$19(config, 'createDefaultItem', DefaultCallback);
+	    if (!createDefaultItem) {
+	        return null;
+	    }
+
 	    var scene = parent;
 
 	    var addButtonStyle = GetValue$19(style, 'add');
@@ -58083,15 +58092,18 @@
 	    // slider
 	    var slider = CreateSlider$1(scene, config.slider, style.slider);
 
+	    var footer;
 	    var addButton = CreateAddButton(scene, config, style);
-	    var footer = new Sizer(scene);
-	    scene.add.existing(footer);
-	    footer
-	        .addSpace()
-	        .add(
-	            addButton,
-	            { proportion: 0, expand: true }
-	        );
+	    if (addButton) {
+	        footer = new Sizer(scene);
+	        scene.add.existing(footer);
+	        footer
+	            .addSpace()
+	            .add(
+	                addButton,
+	                { proportion: 0, expand: true }
+	            );
+	    }
 
 	    // background
 	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
@@ -58115,9 +58127,12 @@
 	    });
 	    scene.add.existing(arrayTable);
 
-	    arrayTable
-	        .bringChildToTop(title)
-	        .bringChildToTop(footer);
+	    if (title) {
+	        arrayTable.bringChildToTop(title);
+	    }
+	    if (footer) {
+	        arrayTable.bringChildToTop(footer);
+	    }
 
 	    return arrayTable;
 	};
@@ -58932,7 +58947,6 @@
 	                break;
 
 	            case '2columns':
-	            case 'two-columns':
 	                var splitPanels = tweaker.add2Columns(property);
 	                var leftProperties, rightProperties;
 	                if (property.columns) {
@@ -58969,6 +58983,19 @@
 	            case 'scrollable':
 	                var scrollable = tweaker.addScrollable(property);
 	                AddProperties(scrollable, property.$properties, target, monitor);
+	                break;
+
+	            case 'arrayTable':
+	                var key = property.$key;
+	                delete property.$key;
+
+	                property.bindingTarget = target;
+	                property.bindingKey = key;
+
+	                if (!property.hasOwnProperty('monitor')) {
+	                    property.monitor = monitor;
+	                }
+	                tweaker.addArrayTable(property);
 	                break;
 
 	            case 'separator':

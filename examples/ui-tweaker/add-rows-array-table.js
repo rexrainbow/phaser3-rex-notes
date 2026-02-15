@@ -19,21 +19,27 @@ class Demo extends Phaser.Scene {
         var target = {
             items: CreateItems(10)
         }
-        var panel = CreatePanel(this)
-            .setPosition(0, 0)
-            .setOrigin(0)
-            .addArrayTable(target, 'items', {
+
+        var properties = [
+            {
+                $type: 'arrayTable',
+                $key: 'items',
                 $properties: [
                     { $key: 'name' },
                     { $key: 'a' },
                     { $key: 'b' },
                 ],
-
                 createDefaultItem() {
                     return CreateItems(1)[0]
                 }
-            })
-            .layout();
+            }
+        ]
+
+        var panel = CreatePanel(this)
+            .addRows(properties, target, true)
+            .setOrigin(0.5, 0)
+            .setPosition(400, 0)
+            .layout()
 
     }
 

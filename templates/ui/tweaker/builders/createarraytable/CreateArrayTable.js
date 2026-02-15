@@ -25,15 +25,18 @@ var CreateArrayTable = function (parent, config, style) {
     // slider
     var slider = CreateSlider(scene, config.slider, style.slider);
 
+    var footer;
     var addButton = CreateAddButton(scene, config, style);
-    var footer = new Sizer(scene);
-    scene.add.existing(footer);
-    footer
-        .addSpace()
-        .add(
-            addButton,
-            { proportion: 0, expand: true }
-        )
+    if (addButton) {
+        footer = new Sizer(scene);
+        scene.add.existing(footer);
+        footer
+            .addSpace()
+            .add(
+                addButton,
+                { proportion: 0, expand: true }
+            )
+    }
 
     // background
     var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
@@ -57,9 +60,12 @@ var CreateArrayTable = function (parent, config, style) {
     });
     scene.add.existing(arrayTable);
 
-    arrayTable
-        .bringChildToTop(title)
-        .bringChildToTop(footer)
+    if (title) {
+        arrayTable.bringChildToTop(title)
+    }
+    if (footer) {
+        arrayTable.bringChildToTop(footer)
+    }
 
     return arrayTable;
 }

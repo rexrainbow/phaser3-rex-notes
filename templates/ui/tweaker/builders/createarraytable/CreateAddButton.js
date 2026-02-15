@@ -7,6 +7,11 @@ var DefaultCallback = function () {
 }
 
 var CreateAddButton = function (parent, config, style) {
+    var createDefaultItem = GetValue(config, 'createDefaultItem', DefaultCallback);
+    if (!createDefaultItem) {
+        return null;
+    }
+
     var scene = parent;
 
     var addButtonStyle = GetValue(style, 'add');
