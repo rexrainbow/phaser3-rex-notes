@@ -1,7 +1,5 @@
 var Refresh = function () {
-    var table = this.childrenMap.child;
-    table.updateTable(true);
-    this.resizeController();
+    this.setItems(this.items);
     return this;
 }
 
