@@ -31,9 +31,23 @@ class CellContainer extends Sizer {
         return this;
     }
 
-    onDeleteItem() {
-        this.gridTable.deleteItem(this.cellItem);
-        this.cellItem = undefined;
+    onClickDeleteButton() {
+        // Called by clicking delete button
+        if (!this.gridTable.isInTouching('mask')) {
+            return;
+        }
+
+        var self = this;
+        this.tweenSelf({
+            alpha: 0,
+            scaleY: 0,
+            duration: 500,
+            onComplete() {
+                var cellItem = self.cellItem;
+                self.cellItem = undefined;
+                self.gridTable.deleteItem(cellItem);
+            },
+        })
     }
 
     setIndexLabel(content) {
@@ -62,6 +76,7 @@ class CellContainer extends Sizer {
             this.setBindingTarget();
         }
     }
+
 }
 
 var Methods = {

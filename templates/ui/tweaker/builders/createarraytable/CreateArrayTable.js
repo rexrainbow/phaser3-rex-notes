@@ -57,6 +57,10 @@ var CreateArrayTable = function (parent, config, style) {
     });
     scene.add.existing(arrayTable);
 
+    arrayTable
+        .bringChildToTop(title)
+        .bringChildToTop(footer)
+
     return arrayTable;
 }
 

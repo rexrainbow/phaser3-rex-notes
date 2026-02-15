@@ -17,7 +17,7 @@ class Demo extends Phaser.Scene {
 
     create() {
         var target = {
-            items: CreateItems(2)
+            items: CreateItems(10)
         }
         var panel = CreatePanel(this)
             .setPosition(0, 0)

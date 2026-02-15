@@ -1,5 +1,6 @@
 import ContainerLite from '../../container/containerlite/ContainerLite.js';
 import Table from './table/Table.js';
+import MaskToGameObject from '../../../utils/mask/MaskToGameObject.js';
 import Methods from './methods/Methods.js';
 
 const Group = Phaser.GameObjects.Group;
@@ -43,6 +44,10 @@ class GridTable extends ContainerLite {
         }
 
         this.setupChildrenMask(GetValue(config, 'mask', undefined));
+
+        if (this.childrenMask) {
+            this.maskGameObject = MaskToGameObject(this.childrenMask);
+        }
 
         this.setScrollMode(GetValue(config, 'scrollMode', 0));
         this.setClampMode(GetValue(config, 'clampTableOXY', true));

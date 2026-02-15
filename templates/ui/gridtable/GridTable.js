@@ -58,7 +58,7 @@ class GridTable extends Scrollable {
         super(scene, config);
 
         this.addChildrenMap('table', table);
-        this.addChildrenMap('tableLayer', table.maskLayer);
+        this.addChildrenMap('mask', table.maskGameObject);
 
         this.eventEmitter = GetValue(config, 'eventEmitter', this);
         var callback = GetValue(config, 'createCellContainerCallback', NOOP);

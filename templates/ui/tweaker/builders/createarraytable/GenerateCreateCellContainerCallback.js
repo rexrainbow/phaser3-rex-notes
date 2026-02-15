@@ -103,9 +103,10 @@ var GenerateCreateCellContainerCallback = function (parent, config, style) {
         cell.setCellContainerAlign('center');
 
         cellContainer
-            .setMinSize(width, 0)
             .setIndexLabel(indexLabelCallback(index, item, items))
             .setItem(item) // Also setBindingTarget
+            .setMinSize(width, 0)
+            .setOrigin(0.5, 0)
             .setDirty()
             .layout()
             .setDirty(false)

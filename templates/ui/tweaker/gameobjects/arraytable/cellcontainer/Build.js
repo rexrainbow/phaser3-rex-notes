@@ -38,8 +38,8 @@ var Build = function (config) {
     this.addChildrenMap('delete', deleteButton);
 
     deleteButton
-        .offClick(this.onDeleteItem, this)
-        .onClick(this.onDeleteItem, this)
+        .offClick(this.onClickDeleteButton, this)
+        .onClick(this.onClickDeleteButton, this)
 
     return this;
 }
