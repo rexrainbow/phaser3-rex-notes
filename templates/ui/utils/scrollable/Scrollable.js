@@ -24,41 +24,20 @@ class Scrollable extends Sizer {
         var background = GetValue(config, 'background', undefined);
         if (background) {
             this.addBackground(background);
-        }
-
-        var header = GetValue(config, 'header', undefined);
-        if (header) {
-            var align = GetValue(config, 'align.header', 'center');
-            var headerSpace = GetValue(config, 'space.header', 0);
-            var padding;
-            if (!isRevererXY) {
-                padding = { bottom: headerSpace };
-            } else {
-                padding = { right: headerSpace };
-            }
-            this.add(header,
-                {
-                    proportion: 0,
-                    align: align,
-                    padding: padding,
-                    expand: GetValue(config, 'expand.header', true)
-                }
-            );
+            this.addChildrenMap('background', background);
         }
 
         var scrollableSizer = CreateScrollableSizer(this, config);
-        if (scrollableSizer) {
-            this.add(scrollableSizer,
-                {
-                    proportion: 1,
-                    align: 'center',
-                    padding: 0,
-                    expand: true
-                }
-            );
-        }
+        this.add(scrollableSizer,
+            {
+                proportion: 1,
+                align: 'center',
+                padding: 0,
+                expand: true
+            }
+        );
+        this.addChildrenMap('scrollableSizer', scrollableSizer);
 
-        var footer = GetValue(config, 'footer', undefined);
         if (footer) {
             var align = GetValue(config, 'align.footer', 'center');
             var footerSpace = GetValue(config, 'space.footer', 0);
@@ -78,9 +57,21 @@ class Scrollable extends Sizer {
             );
         }
 
-        this.addChildrenMap('background', background);
-        this.addChildrenMap('header', header);
-        this.addChildrenMap('footer', footer);
+        var header = GetValue(config, 'header', undefined);
+        if (header) {
+            var headerSpace = GetValue(config, 'space.header', 0);
+            var headerAlign = GetValue(config, 'align.header', 'center');
+            var headerExpand = GetValue(config, 'expand.header', true)
+            this.addHeader(header, headerSpace, headerAlign, headerExpand);
+        }
+
+        var footer = GetValue(config, 'footer', undefined);
+        if (footer) {
+            var footerSpace = GetValue(config, 'space.footer', 0);
+            var footerAlign = GetValue(config, 'align.footer', 'center');
+            var footerExpand = GetValue(config, 'expand.footer', true)
+            this.addFooter(footer, footerSpace, footerAlign, footerExpand);
+        }
 
         this.runLayoutFlag = false;
 
