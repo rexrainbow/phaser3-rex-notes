@@ -700,6 +700,8 @@ See [base sizer object](ui-basesizer.md), [container-lite](containerlite.md).
 
 ### Events
 
+#### Pointer on cell
+
 - Pointer-down cell
     ```javascript
     table.on('cell.down', function(cellContainer, cellIndex, pointer, event) {
@@ -795,7 +797,7 @@ See [base sizer object](ui-basesizer.md), [container-lite](containerlite.md).
         })
         ```
 
-#### Interactive with child of cell
+Interactive with child of cell
 
 ```javascript
 table.on('cell.click', function(cellContainer, cellIndex, pointer, event) {
@@ -808,6 +810,12 @@ table.on('cell.click', function(cellContainer, cellIndex, pointer, event) {
 ```
 
 [Reference of `isPointerInBounds` method](ui-basesizer.md#is-pointer-in-bounds)
+
+#### Individual input events
+
+Register events on elements of cell container
+
+Test if pointer is inside the mask of grid table via [`table.isInTouching('mask')`](ui-basesizer.md#is-in-touching), during input events' callback.
 
 ### Get element
 

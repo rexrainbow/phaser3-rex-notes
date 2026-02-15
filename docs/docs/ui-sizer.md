@@ -379,6 +379,56 @@ or
 sizer.insertAtPosition(x, y, index, child, proportion, align, padding, expand, key);
 ```
 
+### Insert before
+
+```javascript
+sizer.insertBefore(baseChild, child, 
+    {
+        proportion: 0,
+        align: 'center',
+        padding: {left: 0, right: 0, top: 0, bottom: 0},
+        expand: false,
+        key: undefined,
+        minWidth: undefined,
+        minHeight: undefined,
+        fitRatio: 0,
+    }
+);
+```
+
+or
+
+```javascript
+sizer.insertBefore(baseChild, child, proportion, align, padding, expand, key);
+```
+
+- `baseChild` : Insert `child` before this game object.
+
+### Insert after
+
+```javascript
+sizer.insertAfter(baseChild, child, 
+    {
+        proportion: 0,
+        align: 'center',
+        padding: {left: 0, right: 0, top: 0, bottom: 0},
+        expand: false,
+        key: undefined,
+        minWidth: undefined,
+        minHeight: undefined,
+        fitRatio: 0,
+    }
+);
+```
+
+or
+
+```javascript
+sizer.insertAfter(baseChild, child, proportion, align, padding, expand, key);
+```
+
+- `baseChild` : Insert `child` after this game object.
+
 ### Add space
 
 -  Add a stretchable space.

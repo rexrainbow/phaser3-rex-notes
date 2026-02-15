@@ -278,6 +278,32 @@ declare class Sizer extends BaseSizer {
     ): this;
 
     /**
+     * Insert a child before an existing child with config.
+     * @param baseGameObject - Existing child used as insertion anchor.
+     * @param gameObject - The child to insert.
+     * @param config - Add configuration.
+     * @returns This instance.
+     */
+    insertBefore(
+        baseGameObject: Phaser.GameObjects.GameObject,
+        gameObject: Phaser.GameObjects.GameObject,
+        config?: Sizer.IAddConfig
+    ): this;
+
+    /**
+     * Insert a child after an existing child with config.
+     * @param baseGameObject - Existing child used as insertion anchor.
+     * @param gameObject - The child to insert.
+     * @param config - Add configuration.
+     * @returns This instance.
+     */
+    insertAfter(
+        baseGameObject: Phaser.GameObjects.GameObject,
+        gameObject: Phaser.GameObjects.GameObject,
+        config?: Sizer.IAddConfig
+    ): this;
+
+    /**
      * Insert a child with individual settings.
      * @param index - Insert index.
      * @param gameObject - The child to insert.
@@ -290,6 +316,48 @@ declare class Sizer extends BaseSizer {
      */
     insert(
         index: number,
+        gameObject: Phaser.GameObjects.GameObject,
+        proportion?: number,
+        align?: Sizer.AlignTypes,
+        padding?: Sizer.PaddingTypes,
+        expand?: boolean,
+        key?: string
+    ): this;
+
+    /**
+     * Insert a child before an existing child with individual settings.
+     * @param baseGameObject - Existing child used as insertion anchor.
+     * @param gameObject - The child to insert.
+     * @param proportion - Proportion for sizing.
+     * @param align - Alignment for the child.
+     * @param padding - Padding around the child.
+     * @param expand - True to expand the child.
+     * @param key - Optional key to register the child.
+     * @returns This instance.
+     */
+    insertBefore(
+        baseGameObject: Phaser.GameObjects.GameObject,
+        gameObject: Phaser.GameObjects.GameObject,
+        proportion?: number,
+        align?: Sizer.AlignTypes,
+        padding?: Sizer.PaddingTypes,
+        expand?: boolean,
+        key?: string
+    ): this;
+
+    /**
+     * Insert a child after an existing child with individual settings.
+     * @param baseGameObject - Existing child used as insertion anchor.
+     * @param gameObject - The child to insert.
+     * @param proportion - Proportion for sizing.
+     * @param align - Alignment for the child.
+     * @param padding - Padding around the child.
+     * @param expand - True to expand the child.
+     * @param key - Optional key to register the child.
+     * @returns This instance.
+     */
+    insertAfter(
+        baseGameObject: Phaser.GameObjects.GameObject,
         gameObject: Phaser.GameObjects.GameObject,
         proportion?: number,
         align?: Sizer.AlignTypes,

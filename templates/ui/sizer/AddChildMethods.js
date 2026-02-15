@@ -192,5 +192,25 @@ export default {
         }
         this.insert(index, gameObject, proportion, align, paddingConfig, expand, childKey, minSize);
         return this;
-    }
+    },
+
+    insertAfter(baseGameObject, gameObject, proportion, align, paddingConfig, expand, childKey, minSize) {
+        var index = this.sizerChildren.indexOf(baseGameObject);
+        if (index === -1) {
+            index = this.sizerChildren.length - 1;
+        }
+
+        this.insert(index + 1, gameObject, proportion, align, paddingConfig, expand, childKey, minSize);
+        return this;
+    },
+
+    insertBefore(baseGameObject, gameObject, proportion, align, paddingConfig, expand, childKey, minSize) {
+        var index = this.sizerChildren.indexOf(baseGameObject);
+        if (index === -1) {
+            index = this.sizerChildren.length - 1;
+        }
+
+        this.insert(index, gameObject, proportion, align, paddingConfig, expand, childKey, minSize);
+        return this;
+    },
 }
