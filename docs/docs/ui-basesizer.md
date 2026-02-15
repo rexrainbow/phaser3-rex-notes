@@ -1578,19 +1578,17 @@ For example, anchor game object's left bound to viewport's left+10, and centerY 
 !!! note
     `container.add(sizer)`, or `layer.add(sizer)` won't add children of sizer.
 
-### Layer
+### Renderer layer
 
-A sizer can have a [layer](layer.md). 
-Current children and new children will draw on this layer, instead of display list of scene.
+A sizer/containerLite can have an internal renderer layer.
+All children will be put into this internal layer, instead of displayList of scene,
+and ContainerLite will be very bottom of all children.
 
-- Enable layer. Do nothing if layer is existed.
-    ```javascript
-    sizer.enableLayer();
-    ```
-- Get layer game object. Will enable layer if layer is not existed.
-    ```javascript
-    var layer = sizer.getLayer();
-    ```
+Enable renderer layer before adding any child.
+
+```javascript
+container.enableLayer();
+```
 
 ### Shader effects
 
