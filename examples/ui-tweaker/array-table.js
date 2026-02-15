@@ -256,7 +256,7 @@ var CreatePanel = function (scene) {
                 space: {
                     table: 10,
                     cell: {
-                        top: 5, bottom: 5,
+                        top: 5, bottom: 5, left: 5,
                         index: 10, tweaker: 5,
                     },
                     header: 5, footer: 5,
@@ -272,6 +272,10 @@ var CreatePanel = function (scene) {
                         width: 16, height: 16,
                     },
                 },
+
+                index: {
+                    width: 25,
+                }
             },
 
             separator: {
