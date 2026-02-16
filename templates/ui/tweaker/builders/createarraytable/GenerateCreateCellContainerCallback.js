@@ -1,7 +1,5 @@
 import CreateTitleLabel from '../CreateTitleLabel.js';
-import ButtonStyleBase from './ButtonStyleBase.js';
-import DeepClone from '../../../../../plugins/utils/object/DeepClone.js';
-import CreateLabel from '../../../utils/build/CreateLabel.js';
+import CreateDeleteButton from './CreateDeleteButton.js';
 import CreateBackground from '../CreateBackground.js';
 import CellContainer from '../../gameobjects/arraytable/cellcontainer/CellContainer.js';
 
@@ -16,8 +14,7 @@ var CreateCellContainer = function (parent, cell, config) {
         space,
         gridTable,
         indexStyle,
-        deleteButtonStyle,
-        deleteItemLabel,
+        createDeleteButton,
         tweakerConfig,
         tweakerAddRowsParameters,
         backgroundStyle,
@@ -25,10 +22,7 @@ var CreateCellContainer = function (parent, cell, config) {
 
     var indexLabel = CreateTitleLabel(scene, undefined, indexStyle);
 
-    var deleteButton = CreateLabel(scene, deleteButtonStyle);
-    if (deleteItemLabel) {
-        deleteButton.resetDisplayContent(deleteItemLabel);
-    }
+    var deleteButton = createDeleteButton(scene);
 
     var inputTweaker = parent.createTweaker(tweakerConfig)
         .setAlignInputRowTitleEnable(true)
@@ -67,13 +61,8 @@ var GenerateCreateCellContainerCallback = function (parent, config, style) {
         }
     }
 
-    var deleteButtonStyle = GetValue(style, 'deleteButton');
-    var deleteItemLabel;
-    if (deleteButtonStyle) {
-        deleteButtonStyle = Object.assign(DeepClone(ButtonStyleBase), deleteButtonStyle);
-    } else {
-        deleteButtonStyle = GetValue(style, 'tweaker.inputRow.button') || {};
-        deleteItemLabel = GetValue(config, 'deleteLabel', 'X');
+    var createDeleteButton = function (scene) {
+        return CreateDeleteButton(scene, config, style);
     }
 
     var tweakerConfig = {
@@ -99,8 +88,7 @@ var GenerateCreateCellContainerCallback = function (parent, config, style) {
                 space,
                 gridTable,
                 indexStyle,
-                deleteButtonStyle,
-                deleteItemLabel,
+                createDeleteButton,
                 tweakerConfig,
                 tweakerAddRowsParameters,
                 backgroundStyle,
