@@ -354,16 +354,29 @@ declare namespace Tweaker {
             },
 
             /** Space configuration for array table. */
-            space?: GridTable.IConfig['space'],
+            space?: GridTable.IConfig['space'] & {
+                cell?: {
+                    left?: number,
+                    right?: number,
+                    top?: number,
+                    bottom?: number,
+                    index?: number,
+                    tweaker?: number,
+                    delete?: number,
+                }
+            },
 
             /** Style for index label in each cell. */
             index?: SimpleLabel.IConfig,
 
-            /** Style for delete button in each cell. */
-            deleteButton?: SimpleLabel.IConfig,
+            /** Style for add button in footer. */
+            add?: SimpleLabel.IConfig,
 
-            /** Footer input row style for add button. */
-            inputRow?: IInputRowStyle,
+            /** Style for delete button in each cell. */
+            delete?: SimpleLabel.IConfig,
+
+            /** Style for cell background. */
+            cellBackground?: CreateBackground.IConfig,
         },
 
         /** Separator style between rows. */
@@ -650,7 +663,7 @@ declare namespace Tweaker {
     /**
      * Configuration for adding an array table.
      */
-    interface IAddArrayConfig {
+    interface IAddArrayTableConfig {
         /** Optional title shown above the array table. */
         title?: string,
         /** Optional icon texture key shown in title. */
@@ -661,64 +674,86 @@ declare namespace Tweaker {
         iconSize?: number,
 
         /** Binding target object for the array items. */
-        target?: Object,
-        /** Binding target object for the array items. */
         bindingTarget?: Object,
         /** Key path to the array field on the binding target. */
         bindingKey?: string,
 
-        /** Internal binding key path. */
-        bindingKeyPath?: string,
-
-        /** Initial items array when not bound. */
-        items?: unknown[],
-
         /** Property descriptors for each item. */
-        $properties: IAddInputRowProperty[],
+        $properties?: RowsPropertyType[],
 
         /** Set to true to monitor input values. */
         monitor?: boolean,
 
+        /** Height of array table. */
+        height?: number,
+
+        /** Background configuration of array table. */
+        background?: CreateBackground.IConfig,
+
         /** Table configuration. */
         table?: GridTable.IConfig['table'],
-        /** Table configuration alias. */
-        tableConfig?: GridTable.IConfig['table'],
+
+        /** Slider configuration. */
+        slider?: {
+            track?: CreateBackground.IConfig,
+            thumb?: CreateBackground.IConfig,
+
+            hideUnscrollableSlider?: boolean,
+            disableUnscrollableDrag?: boolean,
+            adaptThumbSize?: boolean,
+            minThumbSize?: number,
+        },
 
         /** Space configuration. */
-        space?: GridTable.IConfig['space'],
+        space?: GridTable.IConfig['space'] & {
+            cell?: {
+                left?: number,
+                right?: number,
+                top?: number,
+                bottom?: number,
+                index?: number,
+                tweaker?: number,
+                delete?: number,
+            }
+        },
 
         /**
          * Index label template or formatter.
-         * Use "${i}" in template string to inject index.
+         * Use `%1` for index and `%2` for total-count in template string.
          */
-        indexLabel?: string | ((index: number, item: unknown, items: unknown[]) => string),
+        indexLabel?: string | ((index: number, item: unknown, items: unknown[]) => string | Record<string, any>),
 
         /** Label content for delete button in each cell. */
-        deleteItemLabel?: string | SimpleLabel.IResetDisplayContentConfig,
+        deleteLabel?: string | SimpleLabel.IResetDisplayContentConfig,
 
         /**
          * Label content for add button in footer.
-         * Set to null to hide footer.
+         * Set `createDefaultItem` to null/false to hide add button.
          */
-        addItemLabel?: string | SimpleLabel.IResetDisplayContentConfig | null,
-
-        /** Callback invoked after item is added. */
-        onAdd?: (item: unknown, index: number) => void,
-        /** Callback invoked after item is removed. */
-        onRemove?: (item: unknown, index: number) => void,
+        addLabel?: string | SimpleLabel.IResetDisplayContentConfig,
 
         /**
          * Create a default item when adding.
-         * @param properties - Property descriptors of the item.
          */
-        createDefaultItem?: (
-            properties: IAddInputRowProperty[]
-        ) => unknown,
+        createDefaultItem?: (() => unknown) | false | null,
 
         /**
          * Lookup key when adding to children map.
          */
         key?: string,
+    }
+
+    /**
+     * Backward-compatible alias.
+     */
+    type IAddArrayConfig = IAddArrayTableConfig;
+
+    /**
+     * Config for single-argument addArrayTable(config).
+     */
+    interface IAddArrayTableBoundConfig extends IAddArrayTableConfig {
+        bindingTarget: Object,
+        bindingKey: string,
     }
 
     /**
@@ -872,6 +907,18 @@ declare namespace Tweaker {
     }
 
     /**
+     * Declarative property row for array-table layout.
+     */
+    interface IAddArrayTableRowProperty extends IAddArrayTableConfig {
+        /** Row type discriminator. */
+        $type: 'arrayTable',
+        /** Optional array-table-level binding target. */
+        $target?: Object,
+        /** Binding key path of array field. */
+        $key: string,
+    }
+
+    /**
      * Declarative property row for a separator.
      */
     interface IAddSeparatorRowProperty {
@@ -900,6 +947,7 @@ declare namespace Tweaker {
      */
     type RowsPropertyType = IAddInputRowProperty |
         IAddFolderRowProperty | IAddTabRowProperty | IAddColumnsRowProperty | IAdd2ColumnsRowProperty | IAddWrapRowProperty | IAddScrollableRowProperty |
+        IAddArrayTableRowProperty |
         IAddSeparatorRowProperty | IAddButtonRowProperty | IAddButtonsRowProperty;
 
     /**
@@ -1118,11 +1166,25 @@ declare class Tweaker extends Sizer {
     /**
      * Add an array table for editing list items.
      *
-     * @param config - Array table configuration.
-     * @returns Created array table.
+     * @param target - Binding target object.
+     * @param bindingKey - Binding key path.
+     * @param config - Optional array table configuration.
+     * @returns This tweaker instance.
      */
     addArrayTable(
-        config: Tweaker.IAddArrayConfig
+        target: Object,
+        bindingKey: string,
+        config?: Tweaker.IAddArrayTableConfig
+    ): this;
+
+    /**
+     * Add an array table for editing list items.
+     *
+     * @param config - Array table configuration.
+     * @returns This tweaker instance.
+     */
+    addArrayTable(
+        config: Tweaker.IAddArrayTableBoundConfig
     ): this;
 
     /**

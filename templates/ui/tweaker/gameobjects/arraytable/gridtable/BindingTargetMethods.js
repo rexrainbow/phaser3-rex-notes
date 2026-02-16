@@ -4,11 +4,16 @@ export default {
     setBindingTarget(target, bindingKey) {
         this.bindingTarget = target;
 
-        if (bindingKey !== undefined) {
+        if (arguments.length === 2) {
             this.setBindingTargetKey(bindingKey);
         }
 
-        var items = GetValue(target, bindingKey);
+        var items;
+        if (!this.isRootTarget) {
+            items = GetValue(target, bindingKey);
+        } else {
+            items = target;
+        }
         this.setItems(items);
 
         return this;
@@ -16,6 +21,7 @@ export default {
 
     setBindingTargetKey(bindingKey) {
         this.bindTargetKey = bindingKey;
+        this.isRootTarget = (!bindingKey) || (bindingKey === '');
         return this;
     },
 }

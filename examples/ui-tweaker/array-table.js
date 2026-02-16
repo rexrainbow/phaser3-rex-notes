@@ -16,13 +16,11 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var target = {
-            items: CreateItems(10)
-        }
+        var target = CreateItems(10)
         var panel = CreatePanel(this)
             .setPosition(0, 0)
             .setOrigin(0)
-            .addArrayTable(target, 'items', {
+            .addArrayTable(target, null, {
                 $properties: [
                     { $key: 'name' },
                     { $key: 'a' },

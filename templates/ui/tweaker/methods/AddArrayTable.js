@@ -17,12 +17,22 @@ var AddArrayTable = function (target, bindingKey, config) {
         config.bindingKey = bindingKey;
     }
 
+    var isRootTarget = (!bindingKey) || (bindingKey === '');
+
     if (!config.title) {
         // Display leaf key as title
-        config.title = GetLeafKey(bindingKey);
+        if (!isRootTarget) {
+            config.title = GetLeafKey(bindingKey);
+        } else {
+            config.title = 'Root';
+        }
     }
 
-    config.value = GetValue(target, bindingKey, undefined) || [];
+    if (!isRootTarget) {
+        config.value = GetValue(target, bindingKey, undefined) || [];
+    } else {
+        config.value = target;
+    }
 
     var arrayTableStyle = GetValue(this.styles, 'arrayTable') || {};
     arrayTableStyle.tweaker = this.styles;
