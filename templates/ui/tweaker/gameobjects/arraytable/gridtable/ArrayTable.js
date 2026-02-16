@@ -3,6 +3,7 @@ import BindingTargetMethods from './BindingTargetMethods.js';
 import MonitorTargetMethods from './MonitorTargetMethods.js';
 import InputRowTitleWidthMethods from './InputRowTitleWidthMethods.js';
 import InstallAddButton from './InstallAddButton.js';
+import InstallClearButton from './InstallClearButton.js';
 
 const RemoveItem = Phaser.Utils.Array.Remove;
 
@@ -13,6 +14,7 @@ class ArrayTable extends GridTable {
 
         this.resetCellSizeFlag = true;
 
+        InstallClearButton.call(this, config);
         InstallAddButton.call(this, config);
     }
 
@@ -66,6 +68,13 @@ class ArrayTable extends GridTable {
             .refresh()
             .scrollToBottom()
 
+        return this;
+    }
+
+    clearItems() {
+        // Called by clear-button clicking
+        this.items.length = 0;
+        this.refresh();
         return this;
     }
 

@@ -364,6 +364,7 @@ declare namespace Tweaker {
                     tweaker?: number,
                     delete?: number,
                 }
+                button?: number,
             },
 
             /** Style for index label in each cell. */
@@ -371,6 +372,9 @@ declare namespace Tweaker {
 
             /** Style for add button in footer. */
             add?: SimpleLabel.IConfig,
+
+            /** Style for clear button in footer. */
+            clear?: SimpleLabel.IConfig,
 
             /** Style for delete button in each cell. */
             delete?: SimpleLabel.IConfig,
@@ -714,6 +718,7 @@ declare namespace Tweaker {
                 index?: number,
                 tweaker?: number,
                 delete?: number,
+                button?: number,
             }
         },
 
@@ -731,6 +736,12 @@ declare namespace Tweaker {
          * Set `createDefaultItem` to null/false to hide add button.
          */
         addLabel?: string | SimpleLabel.IResetDisplayContentConfig,
+
+        /** Label content for clear button in footer. */
+        clearLabel?: string | SimpleLabel.IResetDisplayContentConfig,
+
+        /** Set to false to hide clear button. */
+        clearItems?: boolean,
 
         /**
          * Create a default item when adding.

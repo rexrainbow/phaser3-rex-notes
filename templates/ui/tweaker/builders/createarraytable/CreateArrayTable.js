@@ -2,6 +2,7 @@ import ArrayTable from '../../gameobjects/arraytable/gridtable/ArrayTable.js';
 import CreateTitleLabel from '../CreateTitleLabel.js';
 import CreateSlider from '../CreateSlider.js';
 import CreateAddButton from './CreateAddButton.js';
+import CreateClearButton from './CreateClearButton.js';
 import CreateBackground from '../CreateBackground.js';
 import Sizer from '../../../sizer/Sizer.js';
 import GenerateCreateCellContainerCallback from './GenerateCreateCellContainerCallback.js';
@@ -26,16 +27,31 @@ var CreateArrayTable = function (parent, config, style) {
     var slider = CreateSlider(scene, config.slider, style.slider);
 
     var footer;
+    var clearButton = CreateClearButton(scene, config, style);
     var addButton = CreateAddButton(scene, config, style);
-    if (addButton) {
-        footer = new Sizer(scene);
+    if (clearButton || addButton) {
+        footer = new Sizer(scene, {
+            space: {
+                item: GetValue(config, 'space.button', 0, style)
+            }
+        });
         scene.add.existing(footer);
-        footer
-            .addSpace()
-            .add(
+
+        if (clearButton) {
+            footer.add(
+                clearButton,
+                { proportion: 0, expand: true }
+            );
+        }
+
+        footer.addSpace();
+
+        if (addButton) {
+            footer.add(
                 addButton,
                 { proportion: 0, expand: true }
-            )
+            );
+        }
     }
 
     // background
@@ -47,6 +63,7 @@ var CreateArrayTable = function (parent, config, style) {
         header: title,
 
         footer: footer,
+        clearButton: clearButton,
         addButton: addButton,
 
         slider: slider,
