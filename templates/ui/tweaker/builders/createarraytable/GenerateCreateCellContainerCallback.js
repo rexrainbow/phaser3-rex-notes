@@ -1,4 +1,6 @@
 import CreateTitleLabel from '../CreateTitleLabel.js';
+import ButtonStyleBase from './ButtonStyleBase.js';
+import DeepClone from '../../../../../plugins/utils/object/DeepClone.js';
 import CreateLabel from '../../../utils/build/CreateLabel.js';
 import CreateBackground from '../CreateBackground.js';
 import CellContainer from '../../gameobjects/arraytable/cellcontainer/CellContainer.js';
@@ -24,7 +26,9 @@ var CreateCellContainer = function (parent, cell, config) {
     var indexLabel = CreateTitleLabel(scene, undefined, indexStyle);
 
     var deleteButton = CreateLabel(scene, deleteButtonStyle);
-    deleteButton.resetDisplayContent(deleteItemLabel);
+    if (deleteItemLabel) {
+        deleteButton.resetDisplayContent(deleteItemLabel);
+    }
 
     var inputTweaker = parent.createTweaker(tweakerConfig)
         .setAlignInputRowTitleEnable(true)
@@ -63,11 +67,14 @@ var GenerateCreateCellContainerCallback = function (parent, config, style) {
         }
     }
 
-    var deleteButtonStyle = GetValue(style, 'delete');
-    if (!deleteButtonStyle) {
+    var deleteButtonStyle = GetValue(style, 'deleteButton');
+    var deleteItemLabel;
+    if (deleteButtonStyle) {
+        deleteButtonStyle = Object.assign(DeepClone(ButtonStyleBase), deleteButtonStyle);
+    } else {
         deleteButtonStyle = GetValue(style, 'tweaker.inputRow.button') || {};
+        deleteItemLabel = GetValue(config, 'deleteLabel', 'X');
     }
-    var deleteItemLabel = GetValue(config, 'deleteLabel', 'X');
 
     var tweakerConfig = {
         root: GetValue(style, 'root'),

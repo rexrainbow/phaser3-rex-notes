@@ -1,3 +1,5 @@
+import ButtonStyleBase from './ButtonStyleBase.js';
+import DeepClone from '../../../../../plugins/utils/object/DeepClone.js';
 import CreateLabel from '../../../utils/build/CreateLabel.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -14,14 +16,17 @@ var CreateAddButton = function (parent, config, style) {
 
     var scene = parent;
 
-    var addButtonStyle = GetValue(style, 'add');
-    if (!addButtonStyle) {
+    var addButton;
+    var addButtonStyle = style.addButton;
+    if (addButtonStyle) {
+        addButtonStyle = Object.assign(DeepClone(ButtonStyleBase), addButtonStyle);
+        addButton = CreateLabel(scene, addButtonStyle);
+    } else {
         addButtonStyle = GetValue(style, 'tweaker.inputRow.button') || {};
+        addButton = CreateLabel(scene, addButtonStyle);
+        addButton.resetDisplayContent(GetValue(config, 'addLabel', 'Add'));
     }
-    var addItemLabel = GetValue(config, 'addLabel', 'Add');
 
-    var addButton = CreateLabel(scene, addButtonStyle);
-    addButton.resetDisplayContent(addItemLabel);
     addButton.createDefaultItem = GetValue(config, 'createDefaultItem', DefaultCallback);
 
     return addButton;

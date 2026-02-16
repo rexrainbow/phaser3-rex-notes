@@ -13,7 +13,12 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() { }
+    preload() {
+        this.load.image('add', 'assets/images/add.png');
+        this.load.image('delete', 'assets/images/delete.png');
+        this.load.image('delete2', 'assets/images/delete2.png');
+        this.load.image('arrow-down', 'assets/images/arrow-down.png');
+    }
 
     create() {
         var target = CreateItems(10)
@@ -272,7 +277,39 @@ var CreatePanel = function (scene) {
 
                 index: {
                     width: 25,
-                }
+                },
+
+                deleteButton: {
+                    icon: { key: 'delete', },
+                    iconSize: 20,
+                    background: {
+                        color: COLOR_DARK,
+                        strokeColor: COLOR_LIGHT,
+                    },
+
+                },
+
+                addButton: {
+                    space: { left: 5, right: 5, top: 5, bottom: 5 },
+                    icon: { key: 'add', },
+                    iconSize: 24,
+                    background: {
+                        color: COLOR_DARK,
+                        strokeColor: COLOR_LIGHT,
+                    },
+
+                },
+
+                clearButton: {
+                    space: { left: 5, right: 5, top: 5, bottom: 5 },
+                    icon: { key: 'delete2', },
+                    iconSize: 24,
+                    background: {
+                        color: COLOR_DARK,
+                        strokeColor: COLOR_LIGHT,
+                    },
+
+                },
             },
 
             separator: {

@@ -371,13 +371,13 @@ declare namespace Tweaker {
             index?: SimpleLabel.IConfig,
 
             /** Style for add button in footer. */
-            add?: SimpleLabel.IConfig,
+            addButton?: SimpleLabel.IConfig,
 
             /** Style for clear button in footer. */
-            clear?: SimpleLabel.IConfig,
+            clearButton?: SimpleLabel.IConfig,
 
             /** Style for delete button in each cell. */
-            delete?: SimpleLabel.IConfig,
+            deleteButton?: SimpleLabel.IConfig,
 
             /** Style for cell background. */
             cellBackground?: CreateBackground.IConfig,
