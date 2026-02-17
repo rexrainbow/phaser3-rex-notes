@@ -34,7 +34,9 @@ class Demo extends Phaser.Scene {
 
                 createDefaultItem() {
                     return CreateItems(1)[0]
-                }
+                },
+
+                inputRowProportion: 1,
             })
             .layout();
 
@@ -74,6 +76,7 @@ var CreatePanel = function (scene) {
             },
 
             inputRow: {
+                space: { top: 5, bottom: 5 },
                 proportion: {
                     title: 1,
                     inputField: 3,
@@ -253,15 +256,20 @@ var CreatePanel = function (scene) {
             },
 
             arrayTable: {
-                height: 200,
+                height: 260,
 
                 space: {
+                    left: 10, right: 10, top: 10, bottom: 10,
                     table: 10,
                     cell: {
                         top: 5, bottom: 5, left: 5,
                         index: 10, tweaker: 5,
                     },
                     header: 5, footer: 5,
+                },
+
+                background: {
+                    strokeColor: COLOR_MAIN,
                 },
 
                 slider: {
@@ -289,10 +297,32 @@ var CreatePanel = function (scene) {
 
                 },
 
+                moveUpButton: {
+                    //space: { left: 5, right: 5, top: 5, bottom: 5 },
+                    icon: { key: 'arrow-down', flipY: true },
+                    iconSize: 16,
+                    background: {
+                        color: COLOR_DARK,
+                        strokeColor: COLOR_LIGHT,
+                    },
+
+                },
+
+                moveDownButton: {
+                    //space: { left: 5, right: 5, top: 5, bottom: 5 },
+                    icon: { key: 'arrow-down' },
+                    iconSize: 16,
+                    background: {
+                        color: COLOR_DARK,
+                        strokeColor: COLOR_LIGHT,
+                    },
+
+                },
+
                 addButton: {
                     space: { left: 5, right: 5, top: 5, bottom: 5 },
                     icon: { key: 'add', },
-                    iconSize: 24,
+                    iconSize: 20,
                     background: {
                         color: COLOR_DARK,
                         strokeColor: COLOR_LIGHT,
@@ -310,6 +340,7 @@ var CreatePanel = function (scene) {
                     },
 
                 },
+
             },
 
             separator: {

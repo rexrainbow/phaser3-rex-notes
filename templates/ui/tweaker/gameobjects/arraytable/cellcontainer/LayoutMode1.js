@@ -3,6 +3,7 @@ import CreatExpandContainer from './CreatExpandContainer.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 var LayoutMode1 = function (config) {
+    var scene = this.scene;
     var indexLabel = config.indexLabel;
     var inputTweaker = config.inputTweaker;
     var deleteButton = config.deleteButton;

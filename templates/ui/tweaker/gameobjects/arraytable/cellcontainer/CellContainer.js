@@ -1,5 +1,6 @@
 import Sizer from '../../../../sizer/Sizer.js';
 import Build from './Build.js';
+import OnClickButtonMethods from './OnClickButtonMethods.js';
 
 class CellContainer extends Sizer {
     constructor(scene, config) {
@@ -29,25 +30,6 @@ class CellContainer extends Sizer {
         this.cellItem = item;
         this.setBindingTarget(item);
         return this;
-    }
-
-    onClickDeleteButton() {
-        // Called by clicking delete button
-        if (!this.gridTable.isInTouching('mask')) {
-            return;
-        }
-
-        var self = this;
-        this.tweenSelf({
-            alpha: 0,
-            scaleY: 0,
-            duration: 500,
-            onComplete() {
-                var cellItem = self.cellItem;
-                self.cellItem = undefined;
-                self.gridTable.deleteItem(cellItem);
-            },
-        })
     }
 
     setIndexLabel(content) {
@@ -85,7 +67,8 @@ var Methods = {
 
 Object.assign(
     CellContainer.prototype,
-    Methods
+    Methods,
+    OnClickButtonMethods,
 )
 
 export default CellContainer;

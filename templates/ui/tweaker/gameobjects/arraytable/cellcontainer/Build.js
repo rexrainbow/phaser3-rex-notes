@@ -14,12 +14,16 @@ var Build = function (config) {
     var indexLabel = config.indexLabel;
     var inputTweaker = config.inputTweaker;
     var deleteButton = config.deleteButton;
+    var moveUpButton = config.moveUpButton;
+    var moveDownButton = config.moveDownButton;
 
     // Remove from parent
     RemoveFromParent(background);
     RemoveFromParent(indexLabel);
     RemoveFromParent(inputTweaker);
     RemoveFromParent(deleteButton);
+    RemoveFromParent(moveUpButton);
+    RemoveFromParent(moveDownButton);
 
     this.clear(true);
 
@@ -36,10 +40,20 @@ var Build = function (config) {
     this.addChildrenMap('index', indexLabel);
     this.addChildrenMap('inputTweaker', inputTweaker);
     this.addChildrenMap('delete', deleteButton);
+    this.addChildrenMap('moveUp', moveUpButton);
+    this.addChildrenMap('moveDown', moveDownButton);
 
     deleteButton
         .offClick(this.onClickDeleteButton, this)
         .onClick(this.onClickDeleteButton, this)
+
+    moveUpButton
+        .offClick(this.onClickMoveUpButton, this)
+        .onClick(this.onClickMoveUpButton, this)
+
+    moveDownButton
+        .offClick(this.onClickMoveDownButton, this)
+        .onClick(this.onClickMoveDownButton, this)
 
     return this;
 }

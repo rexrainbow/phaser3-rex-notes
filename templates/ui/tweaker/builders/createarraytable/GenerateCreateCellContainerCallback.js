@@ -1,5 +1,7 @@
 import CreateTitleLabel from '../CreateTitleLabel.js';
 import CreateDeleteButton from './CreateDeleteButton.js';
+import CreateMoveUpButton from './CreateMoveUpButton.js';
+import CreateMoveDownButton from './CreateMoveDownButton.js';
 import CreateBackground from '../CreateBackground.js';
 import CellContainer from '../../gameobjects/arraytable/cellcontainer/CellContainer.js';
 
@@ -15,6 +17,8 @@ var CreateCellContainer = function (parent, cell, config) {
         gridTable,
         indexStyle,
         createDeleteButton,
+        createMoveUpButton,
+        createMoveDownButton,
         tweakerConfig,
         tweakerAddRowsParameters,
         backgroundStyle,
@@ -23,6 +27,10 @@ var CreateCellContainer = function (parent, cell, config) {
     var indexLabel = CreateTitleLabel(scene, undefined, indexStyle);
 
     var deleteButton = createDeleteButton(scene);
+
+    var moveUpButton = createMoveUpButton(scene);
+
+    var moveDownButton = createMoveDownButton(scene);
 
     var inputTweaker = parent.createTweaker(tweakerConfig)
         .setAlignInputRowTitleEnable(true)
@@ -37,7 +45,9 @@ var CreateCellContainer = function (parent, cell, config) {
         background,
         indexLabel,
         inputTweaker,
-        deleteButton
+        deleteButton,
+        moveUpButton,
+        moveDownButton,
     })
     scene.add.existing(cellContainer);
 
@@ -65,6 +75,14 @@ var GenerateCreateCellContainerCallback = function (parent, config, style) {
         return CreateDeleteButton(scene, config, style);
     }
 
+    var createMoveUpButton = function (scene) {
+        return CreateMoveUpButton(scene, config, style);
+    }
+
+    var createMoveDownButton = function (scene) {
+        return CreateMoveDownButton(scene, config, style);
+    }
+
     var tweakerConfig = {
         root: GetValue(style, 'root'),
         styles: GetValue(style, 'tweaker'),
@@ -89,6 +107,8 @@ var GenerateCreateCellContainerCallback = function (parent, config, style) {
                 gridTable,
                 indexStyle,
                 createDeleteButton,
+                createMoveUpButton,
+                createMoveDownButton,
                 tweakerConfig,
                 tweakerAddRowsParameters,
                 backgroundStyle,

@@ -59,6 +59,7 @@ var CreateArrayTable = function (parent, config, style) {
 
     var arrayTable = new ArrayTable(scene, {
         table: tableConfig,
+        clampChildOY: true,
 
         header: title,
 

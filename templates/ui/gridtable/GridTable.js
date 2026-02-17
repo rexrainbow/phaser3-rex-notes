@@ -114,6 +114,7 @@ class GridTable extends Scrollable {
     }
 
     getAllCellContainers(out) {
+        var table = this.childrenMap.child;
         return table.getAllCellContainers(out);
     }
 

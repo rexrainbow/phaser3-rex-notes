@@ -1,2 +1,2 @@
-const StyleBase = { text: null, action: null };
-export default StyleBase;
+const ButtonStyleBase = { text: null, action: null };
+export default ButtonStyleBase;

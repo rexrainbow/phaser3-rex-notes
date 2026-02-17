@@ -4,8 +4,7 @@ import MonitorTargetMethods from './MonitorTargetMethods.js';
 import InputRowTitleWidthMethods from './InputRowTitleWidthMethods.js';
 import InstallAddButton from './InstallAddButton.js';
 import InstallClearButton from './InstallClearButton.js';
-
-const RemoveItem = Phaser.Utils.Array.Remove;
+import OnClickButtonMethods from './OnClickButtonMethods.js';
 
 class ArrayTable extends GridTable {
     constructor(scene, config) {
@@ -54,30 +53,6 @@ class ArrayTable extends GridTable {
         return this;
     }
 
-    deleteItem(item) {
-        // Called by CellContainer.onDeleteItem
-        RemoveItem(this.items, item);
-        this.refresh(); // Invoke *createCellContainerCallback* for each cell again
-    }
-
-    addItem(item) {
-        // Calleed by add-button clicking
-        this.items.push(item);
-
-        this
-            .refresh()
-            .scrollToBottom()
-
-        return this;
-    }
-
-    clearItems() {
-        // Called by clear-button clicking
-        this.items.length = 0;
-        this.refresh();
-        return this;
-    }
-
 }
 
 Object.assign(
@@ -85,6 +60,7 @@ Object.assign(
     BindingTargetMethods,
     MonitorTargetMethods,
     InputRowTitleWidthMethods,
+    OnClickButtonMethods,
 )
 
 export default ArrayTable;
