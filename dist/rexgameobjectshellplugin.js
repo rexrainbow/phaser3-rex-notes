@@ -5788,12 +5788,38 @@
             return this;
         },
 
+        setChildScaleX(child, scaleX) {
+            child.scaleX = scaleX;
+            this.resetChildScaleState(child);
+            return this;
+        },
+
+        setChildScaleY(child, scaleY) {
+            child.scaleY = scaleY;
+            this.resetChildScaleState(child);
+            return this;
+        },
+
         setChildLocalScale(child, scaleX, scaleY) {
             if (scaleY === undefined) {
                 scaleY = scaleX;
             }
             var state = GetLocalState(child);
             state.scaleX = scaleX;
+            state.scaleY = scaleY;
+            this.updateChildScale(child);
+            return this;
+        },
+
+        setChildLocalScaleX(child, scaleX) {
+            var state = GetLocalState(child);
+            state.scaleX = scaleX;
+            this.updateChildScale(child);
+            return this;
+        },
+
+        setChildLocalScaleY(child, scaleY) {
+            var state = GetLocalState(child);
             state.scaleY = scaleY;
             this.updateChildScale(child);
             return this;
@@ -46187,9 +46213,13 @@
             // Last cell will be shown
             var newItemIndex = this.items.length - 1;
             var cellContainer = this.getCellContainer(newItemIndex);
+            this
+                .setChildLocalAlpha(cellContainer, 0)
+                .setChildLocalScale(cellContainer, 1, 0);
+
             cellContainer.tweenSelf({
-                alpha: { from: 0, to: 1 },
-                scaleY: { from: 0, to: 1 },
+                alpha: 1,
+                scaleY: 1,
                 duration: 500,
             });
             return this;

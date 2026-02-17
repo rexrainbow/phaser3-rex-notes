@@ -1825,12 +1825,38 @@
             return this;
         },
 
+        setChildScaleX(child, scaleX) {
+            child.scaleX = scaleX;
+            this.resetChildScaleState(child);
+            return this;
+        },
+
+        setChildScaleY(child, scaleY) {
+            child.scaleY = scaleY;
+            this.resetChildScaleState(child);
+            return this;
+        },
+
         setChildLocalScale(child, scaleX, scaleY) {
             if (scaleY === undefined) {
                 scaleY = scaleX;
             }
             var state = GetLocalState(child);
             state.scaleX = scaleX;
+            state.scaleY = scaleY;
+            this.updateChildScale(child);
+            return this;
+        },
+
+        setChildLocalScaleX(child, scaleX) {
+            var state = GetLocalState(child);
+            state.scaleX = scaleX;
+            this.updateChildScale(child);
+            return this;
+        },
+
+        setChildLocalScaleY(child, scaleY) {
+            var state = GetLocalState(child);
             state.scaleY = scaleY;
             this.updateChildScale(child);
             return this;

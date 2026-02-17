@@ -21,9 +21,13 @@ export default {
         // Last cell will be shown
         var newItemIndex = this.items.length - 1;
         var cellContainer = this.getCellContainer(newItemIndex);
+        this
+            .setChildLocalAlpha(cellContainer, 0)
+            .setChildLocalScale(cellContainer, 1, 0)
+
         cellContainer.tweenSelf({
-            alpha: { from: 0, to: 1 },
-            scaleY: { from: 0, to: 1 },
+            alpha: 1,
+            scaleY: 1,
             duration: 500,
         })
         return this;
