@@ -4,14 +4,14 @@ import Base from './Base';
 export default ContainerLite;
 
 declare namespace ContainerLite {
-/**
- * Snapshot of a child's local state inside this container.
- * @remarks Used to preserve and restore per-child local values.
- */
-interface ILocalState {
     /**
-     * Owning container.
+     * Snapshot of a child's local state inside this container.
+     * @remarks Used to preserve and restore per-child local values.
      */
+    interface ILocalState {
+        /**
+         * Owning container.
+         */
         parent: ContainerLite,
         /**
          * Child game object.
@@ -68,11 +68,11 @@ interface ILocalState {
         active: boolean,
     }
 
-/**
- * Sync flags used when adding or pinning children.
- * @remarks Control which properties are synced to the container.
- */
-interface IAddChildConfig {
+    /**
+     * Sync flags used when adding or pinning children.
+     * @remarks Control which properties are synced to the container.
+     */
+    interface IAddChildConfig {
         /**
          * Sync local position to world position.
          */
@@ -104,11 +104,11 @@ interface IAddChildConfig {
 
     }
 
-/**
- * Options for drawBounds().
- * @remarks Configure how bounds are rendered.
- */
-interface IDrawBoundsConfig {
+    /**
+     * Options for drawBounds().
+     * @remarks Configure how bounds are rendered.
+     */
+    interface IDrawBoundsConfig {
         /**
          * Draw container bounds.
          */
@@ -351,6 +351,28 @@ declare class ContainerLite extends Base {
     ): this;
 
     /**
+     * Set child scale x in world space.
+     * @param child - The child to update.
+     * @param scaleX - World scale x.
+     * @returns This instance.
+     */
+    setChildScaleX(
+        child: Phaser.GameObjects.GameObject,
+        scaleX: number
+    ): this;
+
+    /**
+     * Set child scale y in world space.
+     * @param child - The child to update.
+     * @param scaleY - World scale y.
+     * @returns This instance.
+     */
+    setChildScaleY(
+        child: Phaser.GameObjects.GameObject,
+        scaleY: number
+    ): this;
+
+    /**
      * Set child scale in local space.
      * @param child - The child to update.
      * @param scaleX - Local scale x.
@@ -360,6 +382,28 @@ declare class ContainerLite extends Base {
     setChildLocalScale(
         child: Phaser.GameObjects.GameObject,
         scaleX: number,
+        scaleY: number
+    ): this;
+
+    /**
+     * Set child scale x in local space.
+     * @param child - The child to update.
+     * @param scaleX - Local scale x.
+     * @returns This instance.
+     */
+    setChildLocalScaleX(
+        child: Phaser.GameObjects.GameObject,
+        scaleX: number
+    ): this;
+
+    /**
+     * Set child scale y in local space.
+     * @param child - The child to update.
+     * @param scaleY - Local scale y.
+     * @returns This instance.
+     */
+    setChildLocalScaleY(
+        child: Phaser.GameObjects.GameObject,
         scaleY: number
     ): this;
 
