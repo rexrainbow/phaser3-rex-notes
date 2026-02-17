@@ -35,8 +35,6 @@ class Demo extends Phaser.Scene {
                 createDefaultItem() {
                     return CreateItems(1)[0]
                 },
-
-                inputRowProportion: 1,
             })
             .layout();
 

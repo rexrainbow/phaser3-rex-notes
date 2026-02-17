@@ -4,17 +4,21 @@ export default {
     deleteItem(item) {
         // Called by CellContainer.onDeleteItem
         RemoveItem(this.items, item);
+        this.lastItemsCount = this.items.length; // Prevent monitor triggering
+
         this.refresh(); // Invoke createCellContainerCallback for each cell again
     },
 
     addItem(item) {
         // Calleed by add-button clicking
         this.items.push(item);
+        this.lastItemsCount = this.items.length; // Prevent monitor triggering
 
         this
             .refresh()
             .scrollToBottom()
 
+        // Last cell will be shown
         var newItemIndex = this.items.length - 1;
         var cellContainer = this.getCellContainer(newItemIndex);
         cellContainer.tweenSelf({
@@ -36,6 +40,7 @@ export default {
                     duration: 500,
                     onComplete() {
                         self.items.length = 0;
+                        self.lastItemsCount = self.items.length; // Prevent monitor triggering
                         self.refresh();
                     }
                 })

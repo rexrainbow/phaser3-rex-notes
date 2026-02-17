@@ -12,6 +12,7 @@ class ArrayTable extends GridTable {
         this.type = 'rexTweaker.ArrayTable';
 
         this.resetCellSizeFlag = true;
+        this.lastItemsCount = undefined; // For monitor
 
         InstallClearButton.call(this, config);
         InstallAddButton.call(this, config);
