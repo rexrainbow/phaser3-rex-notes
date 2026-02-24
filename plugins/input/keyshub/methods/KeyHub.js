@@ -1,4 +1,5 @@
 import KeyMap from '../../../utils/input/KeyMap.js';
+import CreateFakeKeyboardEvent from '../../../utils/input/CreateFakeKeyboardEvent.js';
 
 const Key = Phaser.Input.Keyboard.Key;
 const AddItem = Phaser.Utils.Array.Add;
@@ -29,7 +30,7 @@ class KeyHub extends Key {
 
             keyObject.refKeyHub = this;
 
-            this.update(FakeEvent);
+            this.update();
 
             this.plugin.emit('plug', this.key, keyObject);
         }, this);
@@ -49,7 +50,7 @@ class KeyHub extends Key {
 
             keyObject.refKeyHub = undefined;
 
-            this.update(FakeEvent);
+            this.update();
 
             this.plugin.emit('unplug', this.key, keyObject);
         }, this);
@@ -69,7 +70,7 @@ class KeyHub extends Key {
 
         this.ports.length = 0;
 
-        this.update(FakeEvent);
+        this.update();
 
         return this;
     }
@@ -79,6 +80,9 @@ class KeyHub extends Key {
     }
 
     update(event) {
+        if (!event) {
+            event = CreateFakeKeyboardEvent();
+        }
         //  Override the default functions (it's too late for the browser to use them anyway, so we may as well)
         if (event.cancelled === undefined) {
             //  Event allowed to flow across all handlers in this Scene, and any other Scene in the Scene list
@@ -110,7 +114,7 @@ class KeyHub extends Key {
         }
 
         if (this.isDown !== isDown) {
-            event = FakeEvent;
+            event = CreateFakeKeyboardEvent();;
             event.timeStamp = Date.now();
             event.keyCode = this.keyCode;
 
@@ -134,15 +138,5 @@ class KeyHub extends Key {
         event.cancelled = 0;
     }
 }
-
-var FakeEvent = {
-    timeStamp: 0,
-    keyCode: 0,
-    altKey: false,
-    ctrlKey: false,
-    shiftKey: false,
-    metaKey: false,
-    location: 0,
-};
 
 export default KeyHub;

@@ -1,15 +1,14 @@
+import PointerToCellIndex from './PointerToCellIndex.js';
+
 var EmitCellEvent = function (eventEmitter, eventName, table, worldX, worldY, pointer, event) {
-    var cellIndex;
+    var cellIndex = null;
     if (worldY === undefined) {
         cellIndex = worldX;
     } else {
-        var camera = pointer.camera;
-        var px = worldX + camera.scrollX * (table.scrollFactorX - 1);
-        var py = worldY + camera.scrollY * (table.scrollFactorY - 1);
-        cellIndex = table.pointToCellIndex(px, py);
+        cellIndex = PointerToCellIndex(table, pointer, worldX, worldY);
 
     }
-    if ((cellIndex === null) || (cellIndex === undefined)) {
+    if (cellIndex === null) {
         return;
     }
     var cellContainer = table.getCellContainer(cellIndex);

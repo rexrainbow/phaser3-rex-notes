@@ -14,6 +14,8 @@ class Columns extends Sizer {
         super(scene, config);
         this.type = 'rexTweaker.Columns';
 
+        this.alignInputRowTitleStartFlag = GetValue(config, 'alignTitle');
+
         // Add elements
         var background = GetValue(config, 'background', undefined);
         var title = GetValue(config, 'title', undefined);
@@ -67,10 +69,18 @@ class Columns extends Sizer {
         this.addChildrenMap('columns', columnsSizer.childrenMap.items);
     }
 
+    preLayout() {
+        super.preLayout();
+
+        if (this.alignInputRowTitleStartFlag) {
+            this.setInputRowTitleWidth(this.getMaxInputRowTitleWidth());
+        }
+    }
+
     setTitle(config) {
         var title = this.childrenMap.title;
 
-        if (config.title || config.icon) {
+        if (config.text || config.title || config.icon) {
             title.show().setTitle(config);
         } else {
             title.hide();

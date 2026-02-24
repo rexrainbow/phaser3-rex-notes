@@ -1,4 +1,5 @@
-const GetValue = Phaser.Utils.Objects.GetValue;
+import GetValue from '../../../../../plugins/utils/object/GetValue.js';
+import SetValue from '../../../../../plugins/utils/object/SetValue.js';
 
 export default {
     setupBinding() {
@@ -24,25 +25,25 @@ export default {
         return this;
     },
 
-    setBindingTarget(target, key) {
+    setBindingTarget(target, bindingKey) {
         this.bindingTarget = target;
 
-        if (key !== undefined) {
-            this.setBindingTargetKey(key);
+        if (arguments.length === 2) {
+            this.setBindingTargetKey(bindingKey);
         }
 
         this.syncTargetValue();
 
         var inputField = this.childrenMap.inputField;
         if (inputField.onBindTarget) {
-            inputField.onBindTarget(target, key);
+            inputField.onBindTarget(target, bindingKey);
         }
 
         return this;
     },
 
-    setBindingTargetKey(key) {
-        this.bindTargetKey = key;
+    setBindingTargetKey(bindingKey) {
+        this.bindTargetKey = bindingKey;
         return this;
     },
 
@@ -58,7 +59,7 @@ export default {
         }
 
         if (this.bindTargetKey != null) {
-            return this.bindingTarget[this.bindTargetKey];
+            return GetValue(this.bindingTarget, this.bindTargetKey);
         }
 
         if (this.onGetValue) {
@@ -74,7 +75,7 @@ export default {
         }
 
         if (this.bindTargetKey != null) {
-            this.bindingTarget[this.bindTargetKey] = value;
+            SetValue(this.bindingTarget, this.bindTargetKey, value);
             return this;
         }
 

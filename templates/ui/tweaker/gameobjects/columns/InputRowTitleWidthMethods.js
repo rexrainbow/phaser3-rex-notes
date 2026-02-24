@@ -1,21 +1,17 @@
 export default {
     getMaxInputRowTitleWidth() {
-        var maxTitleWidth = 0;
-        var children = this.childrenMap.columns;  // tweaker array
-        for (var i = 0, cnt = children.length; i < cnt; i++) {
-            maxTitleWidth = Math.max(maxTitleWidth, children[i].getMaxInputRowTitleWidth());
-        }
-
-        return maxTitleWidth + this.getInnerPadding('left');
+        // Skip counting tile width of this columns
+        return 0;
     },
 
     setInputRowTitleWidth(width) {
-        width -= this.getInnerPadding('left');
-
+        // Align all titles in a column
         var children = this.childrenMap.columns;  // tweaker array
         for (var i = 0, cnt = children.length; i < cnt; i++) {
-            children[i].setInputRowTitleWidth(width);
+            var child = children[i]; // Assume that child is not another columns
+            child.setInputRowTitleWidth(child.getMaxInputRowTitleWidth());
         }
+
         return this;
     }
 }

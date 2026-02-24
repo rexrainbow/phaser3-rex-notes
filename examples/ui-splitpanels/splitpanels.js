@@ -22,11 +22,23 @@ class Demo extends Phaser.Scene {
     create() {
         var ui = this.rexUI.add.splitPanels({
             x: 400, y: 300,
-            width: 600, height: 300,
+            width: 600, height: 360,
 
             space: {
                 item: 10
             },
+
+            header: this.rexUI.add.label({
+                height: 30,
+                background: this.rexUI.add.roundRectangle(0, 0, 20, 20, 0, COLOR_DARK),
+                text: this.add.text(0, 0, 'Header'),
+            }),
+            
+            footer: this.rexUI.add.label({
+                height: 30,
+                background: this.rexUI.add.roundRectangle(0, 0, 20, 20, 0, COLOR_DARK),
+                text: this.add.text(0, 0, 'Footer'),
+            }),
 
             leftPanel: this.add.rectangle(0, 0, 1, 1, COLOR_LIGHT),
             rightPanel: CreateRightPanel(this),

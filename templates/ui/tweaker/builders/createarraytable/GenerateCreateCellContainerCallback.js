@@ -1,0 +1,135 @@
+import CreateTitleLabel from '../CreateTitleLabel.js';
+import CreateDeleteButton from './CreateDeleteButton.js';
+import CreateMoveUpButton from './CreateMoveUpButton.js';
+import CreateMoveDownButton from './CreateMoveDownButton.js';
+import CreateBackground from '../CreateBackground.js';
+import CellContainer from '../../gameobjects/arraytable/cellcontainer/CellContainer.js';
+
+const GetValue = Phaser.Utils.Objects.GetValue;
+const Format = Phaser.Utils.String.Format;
+
+var CreateCellContainer = function (parent, cell, config) {
+    var scene = parent.scene;
+
+    // Create elements
+    var {
+        space,
+        gridTable,
+        indexStyle,
+        createDeleteButton,
+        createMoveUpButton,
+        createMoveDownButton,
+        tweakerConfig,
+        tweakerAddRowsParameters,
+        backgroundStyle,
+    } = config;
+
+    var indexLabel = CreateTitleLabel(scene, undefined, indexStyle);
+
+    var deleteButton = createDeleteButton(scene);
+
+    var moveUpButton = createMoveUpButton(scene);
+
+    var moveDownButton = createMoveDownButton(scene);
+
+    var inputTweaker = parent.createTweaker(tweakerConfig)
+        .setAlignInputRowTitleEnable(true)
+        .addRows(tweakerAddRowsParameters.properties, cell.item, tweakerAddRowsParameters.monitor);
+
+    var background = CreateBackground(scene, {}, backgroundStyle);
+
+    // Assemble elements
+    var cellContainer = new CellContainer(scene, {
+        space,
+        gridTable,
+        background,
+        indexLabel,
+        inputTweaker,
+        deleteButton,
+        moveUpButton,
+        moveDownButton,
+    })
+    scene.add.existing(cellContainer);
+
+    return cellContainer;
+}
+
+var GenerateCreateCellContainerCallback = function (parent, config, style) {
+    // Prepare parameters
+    var space = GetValue(config, 'space.cell', undefined, style) || {};
+
+    var indexStyle = GetValue(style, 'index');
+    if (!indexStyle) {
+        indexStyle = GetValue(style, 'tweaker.inputRow.title') || {};
+    }
+    var indexLabelCallback = GetValue(config, 'indexLabel', '%1');
+    if (typeof (indexLabelCallback) === 'string') {
+        var indexLabelTemplate = indexLabelCallback;
+        indexLabelCallback = function (index, item, items) {
+            // %1=index, %2=total
+            return { 'title': Format(indexLabelTemplate, [index, items.length]) };
+        }
+    }
+
+    var createDeleteButton = function (scene) {
+        return CreateDeleteButton(scene, config, style);
+    }
+
+    var createMoveUpButton = function (scene) {
+        return CreateMoveUpButton(scene, config, style);
+    }
+
+    var createMoveDownButton = function (scene) {
+        return CreateMoveDownButton(scene, config, style);
+    }
+
+    var tweakerConfig = {
+        root: GetValue(style, 'root'),
+        styles: GetValue(style, 'tweaker'),
+    };
+
+    var properties = GetValue(config, '$properties') || [];
+    var monitor = GetValue(config, 'monitor', false);
+    var tweakerAddRowsParameters = { properties, monitor };
+
+    var backgroundStyle = GetValue(style, 'cellBackground');
+
+    var callback = function (cell, cellContainer, gridTable) {
+        var width = cell.width;
+        var height = cell.height;
+        var item = cell.item;
+        var items = cell.items;
+        var index = cell.index;
+
+        if (cellContainer === null) {
+            cellContainer = CreateCellContainer(parent, cell, {
+                space,
+                gridTable,
+                indexStyle,
+                createDeleteButton,
+                createMoveUpButton,
+                createMoveDownButton,
+                tweakerConfig,
+                tweakerAddRowsParameters,
+                backgroundStyle,
+            });
+        }
+
+        cell.setCellContainerAlign('center');
+
+        cellContainer
+            .setIndexLabel(indexLabelCallback(index, item, items))
+            .setItem(item) // Also setBindingTarget
+            .setMinSize(width, 0)
+            .setOrigin(0.5, 0)
+            .setDirty()
+            .layout()
+            .setDirty(false)
+
+        return cellContainer;
+    }
+
+    return callback;
+}
+
+export default GenerateCreateCellContainerCallback;

@@ -532,4 +532,36 @@ declare class Scrollable extends Sizer {
      * True if content overflows horizontally.
      */
     readonly isOverflowX: boolean;
+
+    /**
+     * Add or replace the header object before the scrollable content.
+     *
+     * @param header - Header game object.
+     * @param space - Spacing between header and content.
+     * @param align - Header alignment in sizer layout.
+     * @param expand - Set to true to expand header on the cross axis.
+     * @returns This instance.
+     */
+    addHeader(
+        header: Phaser.GameObjects.GameObject,
+        space?: number,
+        align?: Scrollable.AlignTypes,
+        expand?: boolean
+    ): this;
+
+    /**
+     * Add or replace the footer object after the scrollable content.
+     *
+     * @param footer - Footer game object.
+     * @param space - Spacing between footer and content.
+     * @param align - Footer alignment in sizer layout.
+     * @param expand - Set to true to expand footer on the cross axis.
+     * @returns This instance.
+     */
+    addFooter(
+        footer: Phaser.GameObjects.GameObject,
+        space?: number,
+        align?: Scrollable.AlignTypes,
+        expand?: boolean
+    ): this;
 }

@@ -23,7 +23,7 @@ class Demo extends Phaser.Scene {
 
         var properties = [
             {
-                $type: 'columns',
+                $type: '2columns',
                 columns: [
                     {
                         $properties: [
@@ -274,6 +274,13 @@ var CreatePanel = function (scene) {
                 height: 5,
                 color: COLOR_DARK
             },
+
+            '2columns': {
+                splitter: {
+                    width: 20,
+                    color: COLOR_DARK
+                }
+            }
         },
     })
 }

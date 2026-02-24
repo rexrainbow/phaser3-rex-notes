@@ -24,12 +24,14 @@ var myMethod = function(config) {
 - Retrieves a value from an object.
     ```javascript
     var value = Phaser.Utils.Objects.GetValue(source, key, defaultValue);
+    // var value = Phaser.Utils.Objects.GetValue(source, key, defaultValue, altSource);
     ```
     - `source` : Configuration object.
     - `key` : The name of the property to retrieve from the object. For example,
         - Property `source.name`, key = `name`
         - Property `source.position.x`, key = `position.x`
     - `defaultValue` : The value to return if the `key` isn't found in the `source` object.
+    - `altSource` : An alternative object to retrieve the value from. If the property exists in `source` then `altSource` will not be used.
 - Finds the key within the *top level* of the source object, or returns `defaultValue`.
     ```javascript
     var value = Phaser.Utils.Objects.GetFastValue(source, key, defaultValue);

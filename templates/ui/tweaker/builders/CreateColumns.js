@@ -1,24 +1,22 @@
 import Columns from '../gameobjects/columns/Columns.js';
-import Title from '../gameobjects/label/Title.js';
+import CreateTitleLabel from './CreateTitleLabel.js';
+import CreateBackground from './CreateBackground.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 var CreateColumns = function (parent, config, style) {
+    if (!config) { config = {}; }
+    if (!style) { style = {}; }
+
     var scene = parent.scene;
 
-    // Create title
-    var titleStyle = GetValue(style, 'title') || {};
-    var title = new Title(scene, titleStyle);
-    scene.add.existing(title);
+    // title    
+    var title = CreateTitleLabel(scene, undefined, style.title);
 
+    // columns, each column has a tweaker panel
     var tweakerConfig = {
-        root: GetValue(style, 'root'),
-        styles: GetValue(style, 'tweaker')
-    }
-
-    var backgroundStyle = GetValue(style, 'background');
-    if (backgroundStyle && !Array.isArray(backgroundStyle)) {
-        backgroundStyle = [backgroundStyle];
+        root: style.root,
+        styles: style.tweaker,
     }
 
     var columnConfigArray = GetValue(config, 'columns', 2);
@@ -33,10 +31,6 @@ var CreateColumns = function (parent, config, style) {
     for (var i = 0, cnt = columnConfigArray.length; i < cnt; i++) {
         var columnConfig = columnConfigArray[i];
 
-        if (backgroundStyle) {
-            tweakerConfig.background = backgroundStyle[i % backgroundStyle.length];
-        }
-
         tweakerConfig.width = GetValue(columnConfig, 'width', 0)
 
         var tweakerChild = parent.createTweaker(tweakerConfig);
@@ -44,10 +38,16 @@ var CreateColumns = function (parent, config, style) {
         columnConfig.child = tweakerChild;
     }
 
+    // background
+    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
+
     var columns = new Columns(scene, {
         title: title,
         columns: columnConfigArray,
-        space: GetValue(style, 'space'),
+        background: background,
+        space: style.space,
+
+        alignTitle: style.root.alignTitle
     });
     scene.add.existing(columns);
 

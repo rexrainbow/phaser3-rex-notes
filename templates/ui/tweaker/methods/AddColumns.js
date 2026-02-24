@@ -23,7 +23,10 @@ var AddColumns = function (config) {
     // Add columns
     this.add(
         columns,
-        { expand: true }
+        {
+            proportion: (columns.minWidth === 0) ? 1 : 0,
+            expand: true
+        }
     );
 
     // Set content

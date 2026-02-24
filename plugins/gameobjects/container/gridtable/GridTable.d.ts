@@ -480,6 +480,12 @@ declare class GridTable extends ContainerLite {
      * @returns This instance.
      */
     resetAllCellsSize(width: number, height: number): this;
+    /**
+     * Measure a reference cell container from a cell, then reset all cell sizes.
+     * @param cellIndex - Cell index used to build the reference container.
+     * @returns This instance.
+     */
+    resetCellSizeFromCell(cellIndex?: number): this;
 
     /**
      * Iterate visible cells with a callback.

@@ -90,8 +90,6 @@ var SyncDisplayList = function (gameObject, state) {
     if (state.syncDisplayList) {
         this.addToPatentLayer(gameObject);     // Sync parent's layer to child
     }
-
-    this.addToRenderLayer(gameObject);         // Sync parent's render-layer
 }
 
 export default {

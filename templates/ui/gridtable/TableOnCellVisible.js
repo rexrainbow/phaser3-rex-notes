@@ -4,17 +4,24 @@ var TableOnCellVisible = function (table) {
         var scope = this.createCellContainerCallbackScope;
         cell.item = this.items[cell.index];
         cell.items = this.items;
+        cell.gridTable = this;
         var cellContainer;
         if (scope) {
-            cellContainer = callback.call(scope, cell, cellContainer, table);
+            cellContainer = callback.call(scope, cell, cellContainer, this);
         } else {
-            cellContainer = callback(cell, cellContainer, table);
+            cellContainer = callback(cell, cellContainer, this);
         }
 
         if (cellContainer) {
-            if ((cell.cellContainerAlign == null) && cellContainer.setOrigin) {
-                cellContainer.setOrigin(0);
+            if (cell.cellContainerAlign == null) {
+                if (cellContainer.isRexSizer && !cellContainer.dirty) {
+                    cellContainer.changeOrigin(0); // Won't be layout later
+                } else if (cellContainer.setOrigin) {
+                    cellContainer.setOrigin(0);
+                }
+
             }
+
             if (cellContainer.isRexSizer) {
                 cellContainer.layout(); // Use original size
             }
@@ -22,6 +29,7 @@ var TableOnCellVisible = function (table) {
 
         cell.item = undefined;
         cell.items = undefined;
+        cell.gridTable = undefined;
         cell.setContainer(cellContainer);
     }, this);
 }

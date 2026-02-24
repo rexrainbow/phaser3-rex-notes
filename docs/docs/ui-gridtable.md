@@ -128,6 +128,9 @@ var table = scene.rexUI.add.gridTable({
         reuseCellContainer: false,
         // startFromBottom: false,
 
+        // over: {
+        //     mode: 'pointer',  // 'pointer' or 'boundary'
+        // },
         // click: undefined,
         // tap: undefined,
         // press: undefined,
@@ -243,13 +246,14 @@ var table = scene.rexUI.add.gridTable({
         footer: 'center',
     },
 
-    createCellContainerCallback: function(cell, cellContainer) {
+    createCellContainerCallback: function(cell, cellContainer, gridTable) {
         var scene = cell.scene,
             width = cell.width,
             height = cell.height,
             item = cell.item,
             items = cell.items,
-            index = cell.index;
+            index = cell.index,
+            // gridTable = cell.gridTable;
         if (cellContainer === null) { // No reusable cell container, create a new one
             // cellContainer = scene.rexUI.add.label();
         }
@@ -324,14 +328,24 @@ var table = scene.rexUI.add.gridTable({
         - `false` : Start from top. Default behavior.
         - `true` : If cells' height is less then a page, align cells to bottom.
     - `table.interactive` : Set `true` to install touch events (tap/press/over/out/click). Default value is `true`.
+    - `table.over` : Pointer-over behavior configuration, if `table.interactive` is `true`.
+        - `undefined` : Use default over behavior.
+        - `false` : Disable Pointer-over detector.
+        - `table.over.mode` :
+            - `undefined`, or `'pointer'` : Use table input events (`pointermove`, `pointerover`, `pointerout`) to detect over/out.
+            - `'boundary'` : Use global `pointermove` boundary testing.          
     - `table.click` : [Configuration of cell-click behavior](button.md#create-instance), if `table.interactive` is `true`.
         - `undefined` : Use default click behavior.
+        - `false` : Disable click events.
     - `table.tap` : [Configuration of cell-tap behavior](gesture-tap.md#create-instance), if `table.interactive` is `true`.
         - `undefined` : Use default tap behavior.
+        - `false` : Disable tap events.
     - `table.press` : [Configuration of cell-press behavior](gesture-press.md#create-instance), if `table.interactive` is `true`.
         - `undefined` : Use default press behavior.
+        - `false` : Disable press events.
     - `table.swipe` : [Configuration of cell-swipe behavior](gesture-swipe.md#create-instance), if `table.interactive` is `true`.
         - `undefined` : Use default swipe behavior.
+        - `false` : Disable swipe events.
 - `slider` : Componments of slider, optional.
     - `slider.background` : Game object of slider background, optional.
     - `slider.track` : Game object of track.
@@ -393,6 +407,7 @@ var table = scene.rexUI.add.gridTable({
         - `cell.item` : Item of this cell to display.
         - `cell.items` : Array of item data for each cell, equal to `items` parameter.
         - `cell.index` : Index of this cell.
+        - `cell.gridTable` : Reference of This GridTable instance.
     - Alignment of cellContainer : 
         ```javascript
         cell.setCellContainerAlign(align);
@@ -530,6 +545,11 @@ See also - [dirty](ui-basesizer.md#dirty)
 - Get
     ```javascript
     var container = table.getCellContainer(cellIndex);
+    ```
+- Get all (visible) cell container
+    ```javascript
+    var containers = table.getAllCellContainers();
+    // var out = table.getAllCellContainers(out);
     ```
 
 ### Reset size of all cells
@@ -693,6 +713,8 @@ See [base sizer object](ui-basesizer.md), [container-lite](containerlite.md).
 
 ### Events
 
+#### Pointer on cell
+
 - Pointer-down cell
     ```javascript
     table.on('cell.down', function(cellContainer, cellIndex, pointer, event) {
@@ -788,7 +810,7 @@ See [base sizer object](ui-basesizer.md), [container-lite](containerlite.md).
         })
         ```
 
-#### Interactive with child of cell
+Interactive with child of cell
 
 ```javascript
 table.on('cell.click', function(cellContainer, cellIndex, pointer, event) {
@@ -801,6 +823,12 @@ table.on('cell.click', function(cellContainer, cellIndex, pointer, event) {
 ```
 
 [Reference of `isPointerInBounds` method](ui-basesizer.md#is-pointer-in-bounds)
+
+#### Individual input events
+
+Register events on elements of cell container
+
+Test if pointer is inside the mask of grid table via [`table.isInTouching('mask')`](ui-basesizer.md#is-in-touching), during input events' callback.
 
 ### Get element
 

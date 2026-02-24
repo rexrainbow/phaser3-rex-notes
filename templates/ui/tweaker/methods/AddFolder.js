@@ -19,7 +19,10 @@ var AddFolder = function (config) {
     // Add folder
     this.add(
         folder,
-        { expand: true }
+        {
+            proportion: (folder.minWidth === 0) ? 1 : 0,
+            expand: true
+        }
     );
 
     // Set content

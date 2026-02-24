@@ -1,39 +1,37 @@
+import CreateTitleLabel from './CreateTitleLabel.js';
 import Wrap from '../gameobjects/wrap/Wrap.js';
-import Title from '../gameobjects/label/Title.js';
+import CreateBackground from './CreateBackground.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 var CreateWrap = function (parent, config, style) {
+    if (!config) { config = {}; }
+    if (!style) { style = {}; }
     var scene = parent.scene;
 
-    // Create title
-    var titleStyle = GetValue(style, 'title') || {};
-    var title = new Title(scene, titleStyle);
-    scene.add.existing(title);
+    // title    
+    var title = CreateTitleLabel(scene, undefined, (style.title || {}));
 
-    var itemWidth = GetValue(style, 'itemWidth', 0);
-    var itemHeight = GetValue(style, 'itemHeight', 0);
     var tweakerConfig = {
-        root: GetValue(style, 'root'),
-        styles: GetValue(style, 'tweaker'),
-        space: GetValue(style, 'space'),
+        root: style.root,
+        styles: style.tweaker,
+        space: style.space,
         align: GetValue(style, 'align', 5),
 
         wrap: true,
-        itemWidth: GetValue(config, 'itemWidth', itemWidth),
-        itemHeight: GetValue(config, 'itemHeight', itemHeight),
-    }
-
-    var backgroundStyle = GetValue(style, 'background');
-    if (backgroundStyle && !Array.isArray(backgroundStyle)) {
-        backgroundStyle = [backgroundStyle];
+        itemWidth: GetValue(config, 'itemWidth', 0, style),
+        itemHeight: GetValue(config, 'itemHeight', 0, style),
     }
 
     var tweakerChild = parent.createTweaker(tweakerConfig);
 
+    // background
+    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
+
     var wrap = new Wrap(scene, {
         title: title,
         child: tweakerChild,
+        background: background,
     });
     scene.add.existing(wrap);
 

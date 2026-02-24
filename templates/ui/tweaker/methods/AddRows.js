@@ -50,9 +50,56 @@ var AddProperties = function (tweaker, properties, target, monitor) {
                 }
                 break;
 
+            case '2columns':
+                var splitPanels = tweaker.add2Columns(property);
+                var leftProperties, rightProperties;
+                if (property.columns) {
+                    var columns = property.columns;
+                    if (columns[0] && columns[0].$properties) {
+                        leftProperties = columns[0].$properties;
+                    }
+                    if (columns[1] && columns[1].$properties) {
+                        rightProperties = columns[1].$properties;
+                    }
+                } else {
+                    if (property.left && property.left.$properties) {
+                        leftProperties = property.left.$properties;
+                    }
+                    if (property.right && property.right.$properties) {
+                        rightProperties = property.right.$properties;
+                    }
+                }
+
+                if (leftProperties) {
+                    AddProperties(splitPanels.left, leftProperties, target, monitor);
+                }
+                if (rightProperties) {
+                    AddProperties(splitPanels.right, rightProperties, target, monitor);
+                }
+
+                break;
+
+            case 'wrap':
+                var wrap = tweaker.addWrap(property);
+                AddProperties(wrap, property.$properties, target, monitor);
+                break;
+
             case 'scrollable':
                 var scrollable = tweaker.addScrollable(property);
                 AddProperties(scrollable, property.$properties, target, monitor);
+                break;
+
+            case 'arrayTable':
+                var key = property.$key;
+                delete property.$key;
+
+                property.bindingTarget = target;
+                property.bindingKey = key;
+
+                if (!property.hasOwnProperty('monitor')) {
+                    property.monitor = monitor;
+                }
+                tweaker.addArrayTable(property);
                 break;
 
             case 'separator':
@@ -72,26 +119,9 @@ var AddProperties = function (tweaker, properties, target, monitor) {
             default:
                 var key = property.$key;
                 delete property.$key;
-                if (key.indexOf('.') === -1) {
-                    property.bindingTarget = target;
-                    property.bindingKey = key;
 
-                } else {
-                    var keys = key.split('.');
-
-                    property.bindingKey = keys.pop();
-
-                    var bindingTarget = target;
-                    for (var k = 0, kcnt = keys.length; k < kcnt; k++) {
-                        bindingTarget = bindingTarget[keys[k]];
-                        if (!target) {
-                            console.warn(`[Monitor] Key path '${key}' is invalid`)
-                            continue;
-                        }
-                    }
-                    property.bindingTarget = bindingTarget;
-
-                }
+                property.bindingTarget = target;
+                property.bindingKey = key;
 
                 if (!property.hasOwnProperty('monitor')) {
                     property.monitor = monitor;
@@ -104,4 +134,3 @@ var AddProperties = function (tweaker, properties, target, monitor) {
 }
 
 export default AddRows;
-

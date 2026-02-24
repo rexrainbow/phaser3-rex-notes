@@ -585,27 +585,17 @@ scene.tweens.add(tweenConfig);
     container.sendChildToBack(gameObject);
     ```
 
-### Render layer
+### Renderer layer
 
-A containerLite can have a [layer](layer.md). 
-Current children and new children will draw on this layer, instead of display list of scene.
+A containerLite can have an internal renderer layer.
+All children will be put into this internal layer, instead of displayList of scene,
+and ContainerLite will be very bottom of all children.
 
-- Enable layer. Do nothing if layer is existed.
-    ```javascript
-    container.enableLayer();
-    ```
-- Get layer game object. Will enable layer if layer is not existed.
-    ```javascript
-    var layer = container.getLayer();
-    ```
-- Get layer game object, without enable layer.
-    ```javascript
-    var layer = container.privateRenderLayer;
-    ```
-- Has layer game object
-    ```javascript
-    var hasLayer = container.hasLayer();
-    ```
+Enable renderer layer before adding any child.
+
+```javascript
+container.enableLayer();
+```
 
 ### Mask
 

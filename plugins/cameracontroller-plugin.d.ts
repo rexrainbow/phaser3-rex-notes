@@ -6,7 +6,7 @@ import {
     MouseWheelZoom
 } from './cameracontroller';
 
-export default class LifeTimePlugin extends Phaser.Plugins.BasePlugin {
+export default class CameraControllerPlugin extends Phaser.Plugins.BasePlugin {
     add(
         scene: Phaser.Scene,
         config?: ControllerPack.IConfig

@@ -1,5 +1,6 @@
 import ContainerLite from '../../container/containerlite/ContainerLite.js';
 import Table from './table/Table.js';
+import MaskToGameObject from '../../../utils/mask/MaskToGameObject.js';
 import Methods from './methods/Methods.js';
 
 const Group = Phaser.GameObjects.Group;
@@ -42,6 +43,10 @@ class GridTable extends ContainerLite {
         }
 
         this.setupChildrenMask(GetValue(config, 'mask', undefined));
+
+        if (this.childrenMask) {
+            this.maskGameObject = MaskToGameObject(this.childrenMask);
+        }
 
         this.setScrollMode(GetValue(config, 'scrollMode', 0));
         this.setClampMode(GetValue(config, 'clampTableOXY', true));
@@ -247,6 +252,19 @@ class GridTable extends ContainerLite {
         return container;
     }
 
+    getAllCellContainers(out) {
+        if (out === undefined) {
+            out = [];
+        }
+        this.iterateVisibleCell(function (cell) {
+            var cellContainer = (cell) ? cell.getContainer() : null;
+            if (cellContainer) {
+                out.push(cellContainer);
+            }
+        })
+        return out;
+    }
+
     get cellsCount() {
         return this.table.cellsCount;
     }
@@ -367,20 +385,32 @@ class GridTable extends ContainerLite {
         return w;
     }
 
-    get bottomLeftY() {
-        return -(this.displayHeight * this.originY) + this.displayHeight;
+    get topLeftX() {
+        return -(this.displayWidth * this.originX);
+    }
+    get topLeftY() {
+        return -(this.displayHeight * this.originY);
     }
 
     get topRightX() {
         return -(this.displayWidth * this.originX) + this.displayWidth;
     }
-
-    get topLeftX() {
-        return -(this.displayWidth * this.originX);
+    get topRightY() {
+        return this.topLeftY;
     }
 
-    get topLeftY() {
-        return -(this.displayHeight * this.originY)
+    get bottomLeftY() {
+        return -(this.displayHeight * this.originY) + this.displayHeight;
+    }
+    get bottomLeftX() {
+        return this.topLeftX;
+    }
+
+    get bottomRightX() {
+        return this.topRightX;
+    }
+    get bottomRightY() {
+        return this.bottomLeftY;
     }
 
     get bottomBound() {

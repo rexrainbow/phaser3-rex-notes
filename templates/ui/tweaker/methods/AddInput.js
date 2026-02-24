@@ -1,27 +1,26 @@
 import CreateInputRow from '../builders/CreateInputRow.js';
+import GetValue from '../../../../plugins/utils/object/GetValue.js';
+import GetLeafKey from '../../../../plugins/utils/string/GetLeafKey.js';
 
-var AddInput = function (object, key, config) {
+var AddInput = function (target, bindingKey, config) {
     if (arguments.length === 1) {
-        config = object;
-        object = config.bindingTarget;
-        key = config.bindingKey;
+        config = target;
+        target = config.bindingTarget;
+        bindingKey = config.bindingKey;
     } else {
         if (config === undefined) {
             config = {};
         }
-        config.bindingTarget = object;
-        config.bindingKey = key;
+        config.bindingTarget = target;
+        config.bindingKey = bindingKey;
     }
 
     if (!config.title) {
-        config.title = key;
+        // Display leaf key as title
+        config.title = GetLeafKey(bindingKey);
     }
 
-    if (config.bindingTarget && config.bindingKey) {
-        config.value = config.bindingTarget[config.bindingKey];
-    } else {
-        config.value = undefined;
-    }
+    config.value = GetValue(target, bindingKey, undefined);
 
     // Create InputRow
     var inputRowStyle = this.styles.inputRow || {};
@@ -80,7 +79,7 @@ var AddInput = function (object, key, config) {
 
     // Bind target
     inputSizer.setAutoUpdateEnable(config.autoUpdate);
-    inputSizer.setBindingTarget(object, key);
+    inputSizer.setBindingTarget(target, bindingKey);
 
     if (config.monitor) {
         inputSizer.startMonitorTarget();

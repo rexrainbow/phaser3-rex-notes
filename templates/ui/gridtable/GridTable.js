@@ -6,7 +6,9 @@ import TableOnCellVisible from './TableOnCellVisible.js';
 import TableSetInteractive from './input/TableSetInteractive.js';
 import NOOP from '../../../plugins/utils/object/NOOP.js';
 import SetItems from './SetItems.js';
+import Refresh from './Refresh.js';
 import ScrollMethods from './ScrollMethods.js';
+import PointerOverTestMethods from './input/PointerOverTestMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -57,7 +59,7 @@ class GridTable extends Scrollable {
         super(scene, config);
 
         this.addChildrenMap('table', table);
-        this.addChildrenMap('tableLayer', table.maskLayer);
+        this.addChildrenMap('mask', table.maskGameObject);
 
         this.eventEmitter = GetValue(config, 'eventEmitter', this);
         var callback = GetValue(config, 'createCellContainerCallback', NOOP);
@@ -75,7 +77,7 @@ class GridTable extends Scrollable {
             TableSetInteractive.call(this, table, tableConfig);
         }
 
-        this.setItems(GetValue(config, 'items', []), false);
+        this.setItems(GetValue(config, 'items'), false);
 
         scene.game.events.on('poststep', this.onPostStep, this);
     }
@@ -112,6 +114,11 @@ class GridTable extends Scrollable {
         return table.getCellContainer(cellIdx);
     }
 
+    getAllCellContainers(out) {
+        var table = this.childrenMap.child;
+        return table.getAllCellContainers(out);
+    }
+
     updateVisibleCell(cellIdx) {
         var table = this.childrenMap.child;
         return table.updateVisibleCell(cellIdx);
@@ -120,6 +127,12 @@ class GridTable extends Scrollable {
     resetAllCellsSize(width, height) {
         var table = this.childrenMap.child;
         table.resetAllCellsSize(width, height);
+        return this;
+    }
+
+    resetCellSizeFromCell(cellIndex) {
+        var table = this.childrenMap.child;
+        table.resetCellSizeFromCell(cellIndex);
         return this;
     }
 
@@ -137,11 +150,13 @@ class GridTable extends Scrollable {
 }
 
 var methods = {
-    setItems: SetItems
+    setItems: SetItems,
+    refresh: Refresh,
 }
 Object.assign(
     GridTable.prototype,
     ScrollMethods,
+    PointerOverTestMethods,
     methods,
 );
 

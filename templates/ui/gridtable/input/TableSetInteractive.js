@@ -6,6 +6,7 @@ import PressCell from './PressCell.js';
 import SwipeCell from './SwipeCell.js';
 
 var TableSetInteractive = function (table, tableConfig) {
+    // Attach touch detector on table
     table.setInteractive();
     
     PointerUpDownCell.call(this, table, tableConfig);

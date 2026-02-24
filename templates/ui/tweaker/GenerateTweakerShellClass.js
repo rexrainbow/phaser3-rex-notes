@@ -36,39 +36,33 @@ var GenerateTweakerShellClass = function (config) {
             this.styles = GetValue(config, 'styles') || {};
             this.styles.orientation = this.orientation;
 
-            var itemWidth = GetValue(config, 'itemWidth');
-            if (itemWidth === undefined) {
-                itemWidth = GetValue(this.styles, 'itemWidth', 0);
-            }
-            this.itemWidth = itemWidth;
+            this.itemWidth = GetValue(config, 'itemWidth', 0, this.styles);
+            this.itemHeight = GetValue(config, 'itemHeight', 0, this.styles);
 
-            var itemHeight = GetValue(config, 'itemHeight');
-            if (itemHeight === undefined) {
-                itemHeight = GetValue(this.styles, 'itemHeight', 0);
-            }
-            this.itemHeight = itemHeight;
-
-            if (
-                isWrapMode ||
-                ((this.root === this) && (this.orientation === 1))
-            ) {
-
+            // Set inputRow.alignTitle
+            if (this.isRoot) {
                 var alignTitle = GetValue(config, 'inputRow.alignTitle');
                 if (alignTitle === undefined) {
+                    // alignTitle if inputRow.proportion.title is not 0 (eg. 1)
                     var titleProportion = GetValue(this.styles, 'inputRow.proportion.title');
                     alignTitle = (!titleProportion);
+                    SetValue(config, 'inputRow.alignTitle', alignTitle);
 
                 } else {
-                    if (alignTitle) {  // Override title proportion to 0
+                    // not alignTitle, set title proportion to 0
+                    if (!alignTitle) {  // Override title proportion to 0
                         SetValue(this.styles, 'inputRow.proportion.title', 0);
                     }
 
                 }
-                this.alignInputRowTitleStartFlag = alignTitle;
 
+                this.alignTitle = alignTitle;
+            }
+
+            if ((this.isRoot && (this.orientation === 1)) || isWrapMode) {
+                this.setAlignInputRowTitleEnable(this.root.alignTitle);
             } else {
-                this.alignInputRowTitleStartFlag = false;
-
+                this.setAlignInputRowTitleEnable(false);
             }
 
 
@@ -76,6 +70,18 @@ var GenerateTweakerShellClass = function (config) {
             if (background) {
                 this.addBackground(background);
             }
+        }
+
+        get isRoot() {
+            return this.root === this;
+        }
+
+        setAlignInputRowTitleEnable(enable) {
+            if (enable === undefined) {
+                enable = true;
+            }
+            this.alignInputRowTitleStartFlag = enable;
+            return this;
         }
 
         preLayout() {

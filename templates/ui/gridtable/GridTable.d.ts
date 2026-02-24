@@ -1,15 +1,26 @@
 // import * as Phaser from 'phaser';
 import Scrollable from '../utils/scrollable/Scrollable';
 import GridTableCore from '../../../plugins/gridtable'
+import Button from '../../../plugins/input/button/Button';
+import Tap from '../../../plugins/input/gestures/tap/Tap';
+import Press from '../../../plugins/input/gestures/press/Press';
+import Swipe from '../../../plugins/input/gestures/swipe/Swipe';
 
 export default GridTable;
 
 declare namespace GridTable {
 
     /**
-     * Cell type from grid table core.
+     * Interface of Cell
      */
-    type CellType = GridTableCore.Cell;
+    interface ICell extends GridTableCore.Cell {
+        /** Item data associated with this cell. */
+        item: unknown,
+        /** Full items array backing the grid table. */
+        items: unknown[],
+        /** Owning grid table instance. */
+        gridTable: GridTable,
+    }
 
     /**
      * Callback to create or update a cell container.
@@ -18,9 +29,23 @@ declare namespace GridTable {
      * @returns The created or updated container.
      */
     type CreateCellContainerCallbackType = (
-        cell: CellType,
-        cellContainer: Phaser.GameObjects.GameObject | null
+        cell: ICell,
+        cellContainer: Phaser.GameObjects.GameObject | null,
+        gridTable: GridTable,
     ) => Phaser.GameObjects.GameObject | null;
+
+    /**
+     * Pointer-over detection configuration for table cells.
+     */
+    interface IOverCellConfig {
+        /**
+         * Pointer-over test mode.
+         *
+         * - `undefined` or `pointer`: Use table input events.
+         * - `boundary`: Use global pointer-move boundary test.
+         */
+        mode?: 'pointer' | 'boundary',
+    }
 
     interface IConfig extends Scrollable.IConfig {
         /**
@@ -119,9 +144,29 @@ declare namespace GridTable {
              */
             mask?: GridTableCore.MaskConfig,
             /**
-             * True to enable cell interaction.
+             * Set to true to enable table interactions.
              */
             interactive?: boolean,
+            /**
+             * Click behavior configuration, or false to disable click events.
+             */
+            click?: Button.IConfig | false,
+            /**
+             * Pointer-over detection behavior configuration.
+             */
+            over?: IOverCellConfig | false,
+            /**
+             * Tap gesture configuration, or false to disable tap events.
+             */
+            tap?: Tap.IConfig | false,
+            /**
+             * Press gesture configuration, or false to disable press events.
+             */
+            press?: Press.IConfig | false,
+            /**
+             * Swipe gesture configuration, or false to disable swipe events.
+             */
+            swipe?: Swipe.IConfig | false,
             /**
              * True to reuse cell containers.
              */
@@ -194,6 +239,14 @@ declare class GridTable extends Scrollable {
      * @returns The cell container or null.
      */
     getCellContainer(cellIndex: number): Phaser.GameObjects.GameObject | null;
+
+    /**
+     * Get all cell containers.
+     *
+     * @param out - Optional array to receive the containers.
+     * @returns The array of cell containers.
+     */
+    getAllCellContainers(out?: Phaser.GameObjects.GameObject[]): Phaser.GameObjects.GameObject[];
     /**
      * Current start row index.
      */
@@ -206,6 +259,12 @@ declare class GridTable extends Scrollable {
      * @returns This instance.
      */
     resetAllCellsSize(width: number, height: number): this;
+    /**
+     * Measure a reference cell container from a cell, then reset all cell sizes.
+     * @param cellIndex - Cell index used to build the reference container.
+     * @returns This instance.
+     */
+    resetCellSizeFromCell(cellIndex?: number): this;
 
     /**
      * Scroll to a row.

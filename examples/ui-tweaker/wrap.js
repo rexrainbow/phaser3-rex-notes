@@ -21,82 +21,48 @@ class Demo extends Phaser.Scene {
 
         gameObject.description = 'A Circle Game object';
 
-        var panel = CreatePanel(this)
+        var properties = [
+            {
+                $type: 'wrap',
+                itemWidth: 235,
+                $properties: [
+                    {
+                        $key: 'x',
+                        min: 0, max: 800,
+                        format: function (value) {
+                            return value.toFixed(2);
+                        }
+                    },
+                    {
+                        $key: 'y',
+                        options: [
+                            { text: 'top', value: 0 },
+                            { text: 'center', value: 300 },
+                            { text: 'bottom', value: 600 },
+                        ]
+                    },
+                    {
+                        $key: 'radius',
+                        title: 'size',
+                        options: [
+                            { text: 'L', value: 40 },
+                            { text: 'M', value: 20 },
+                            { text: 'S', value: 10 },
+                        ],
+                        view: 'buttons'
+                    },
+                    { $key: 'fillColor', title: 'color', view: 'color', monitor: true },
+                    { $key: 'strokeColor', title: 'stroke', view: 'color', monitor: true },
+                    { $key: 'lineWidth', title: 'stroke-\nwidth', view: 'incdec', min: 0, max: 10 }
+                ]
+            },
+            { $key: 'description', view: 'textarea', orientation: 'y' },
+        ]
+
+        CreatePanel(this)
+            .addRows(properties, gameObject, false)
             .setOrigin(0.5, 0)
             .setPosition(400, 0)
-
-        var wrap = panel
-            .addWrap({ itemWidth: 235 })
-
-        wrap
-            .addInput(
-                gameObject, 'x',
-                {
-                    min: 0, max: 800,           // Range
-                    format(value) {             // Formatter of text
-                        return value.toFixed(2);
-                    },
-                    // inputTextReadOnly: true  // Uneditable
-                }
-            )
-            .addInput(
-                gameObject, 'y',
-                {
-                    options: [                  // List options
-                        { text: 'top', value: 0 },
-                        { text: 'center', value: 300 },
-                        { text: 'bottom', value: 600 },
-                    ]
-                    // Default list is dropdown-list
-                }
-            )
-            .addInput(
-                gameObject, 'radius',
-                {
-                    title: 'size',              // Custom title
-                    options: [                  // List options
-                        { text: 'L', value: 40 },
-                        { text: 'M', value: 20 },
-                        { text: 'S', value: 10 },
-                    ],
-                    view: 'buttons'             // Buttons list
-                }
-            )
-            .addInput(
-                gameObject, 'fillColor',
-                {
-                    title: 'color',             // Custom title
-                    view: 'color',
-                    monitor: true,
-                }
-            )
-            .addInput(
-                gameObject, 'strokeColor',
-                {
-                    title: 'stroke',            // Custom title
-                    view: 'color',
-                    monitor: true,
-                }
-            )
-            .addInput(
-                gameObject, 'lineWidth',
-                {
-                    title: 'stroke-\nwidth',    // Custom title
-                    view: 'incdec',
-                    min: 0, max: 10
-                }
-            )
-
-        panel
-            .addInput(
-                gameObject, 'description',
-                {
-                    view: 'textarea',
-                    orientation: 'y',
-                }
-            )
-
-        panel
             .layout()
         //.drawBounds(this.add.graphics(), 0xff0000);
 

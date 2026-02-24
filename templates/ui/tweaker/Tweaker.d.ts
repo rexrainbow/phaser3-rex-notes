@@ -6,11 +6,13 @@ import SimpleLabel from '../simplelabel/SimpleLabel';
 import Buttons from '../buttons/Buttons';
 import FixWidthButtons from '../fixwidthbuttons/FixWidthButtons';
 import Pages from '../pages/Pages';
+import SplitPanels from '../splitpanels/SplitPanels';
 import InputText from '../canvasinput/CanvasInput';
 import InputTextArea from '../textareainput/TextAreaInput';
 import Checkbox from '../checkbox/Checkbox';
 import ToggleSwitch from '../toggleswitch/ToggleSwitch';
 import ColorInput from '../colorinput/colorinput/ColorInput';
+import GridTable from '../gridtable/GridTable';
 
 export default Tweaker;
 
@@ -89,6 +91,37 @@ declare namespace Tweaker {
      * Input row style configuration.
      */
     interface IInputRowStyle {
+        /** Fixed width of the input row. */
+        width?: number,
+        /** Fixed height of the input row. */
+        height?: number,
+
+        /**
+         * Row layout orientation.
+         */
+        orientation?: 0 | 1 | 'x' | 'y',
+
+        /** True to enable right-to-left layout. */
+        rtl?: boolean,
+
+        /**
+         * Spacing configuration for the input row.
+         */
+        space?: {
+            /** Left space. */
+            left?: number,
+            /** Right space. */
+            right?: number,
+            /** Top space. */
+            top?: number,
+            /** Bottom space. */
+            bottom?: number,
+            /** Space between title and input field. */
+            title?: number,
+            /** Space between items. */
+            item?: number,
+        },
+
         /** Background style of each input row. */
         background?: CreateBackground.IConfig,
 
@@ -97,6 +130,8 @@ declare namespace Tweaker {
 
         /** Single-line text input style. */
         inputText?: InputText.IConfig,
+        /** Alias of inputText for numeric inputs. */
+        inputNumber?: InputText.IConfig,
 
         /** Multi-line text input style. */
         inputTextArea?: InputTextArea.IConfig,
@@ -210,8 +245,8 @@ declare namespace Tweaker {
             /** Optional columns title style. */
             title?: SimpleLabel.IConfig,
 
-            /** Columns background style per column or shared. */
-            background?: CreateBackground.IConfig | CreateBackground.IConfig[],
+            /** Columns background style. */
+            background?: CreateBackground.IConfig,
 
             /** Spacing around columns layout. */
             space?: {
@@ -222,6 +257,21 @@ declare namespace Tweaker {
                 column?: number,
                 title?: number,
             }
+        },
+
+        /** Split panels container style. */
+        '2columns'?: {
+            /** Optional title style. */
+            title?: SimpleLabel.IConfig,
+
+            /** Split panels background style. */
+            background?: CreateBackground.IConfig,
+
+            /** Splitter style. */
+            splitter?: CreateBackground.IConfig,
+
+            /** Spacing configuration for split panels. */
+            space?: SplitPanels.IConfig['space'],
         },
 
         /** Wrap container style. */
@@ -257,12 +307,18 @@ declare namespace Tweaker {
 
             /** Vertical slider style of scrollable container. */
             slider?: {
+                /** Track game object configuration. */
                 track: CreateBackground.IConfig,
+                /** Thumb game object configuration. */
                 thumb: CreateBackground.IConfig,
 
+                /** Set to true to hide slider when content is not scrollable. */
                 hideUnscrollableSlider?: boolean,
+                /** Set to true to disable dragging when content is not scrollable. */
                 disableUnscrollableDrag?: boolean,
+                /** Set to true to adapt thumb size to current content size. */
                 adaptThumbSize?: boolean,
+                /** Minimum size of the slider thumb. */
                 minThumbSize?: number,
             },
 
@@ -270,6 +326,61 @@ declare namespace Tweaker {
             space?: {
                 panel?: number
             },
+        },
+
+        /** Array table container style. */
+        arrayTable?: {
+            /** Optional array table title style. */
+            title?: SimpleLabel.IConfig,
+
+            /** Array table background style. */
+            background?: CreateBackground.IConfig,
+
+            /** Vertical slider style of array-table container. */
+            slider?: {
+                /** Track game object configuration. */
+                track: CreateBackground.IConfig,
+                /** Thumb game object configuration. */
+                thumb: CreateBackground.IConfig,
+
+                /** Set to true to hide slider when content is not scrollable. */
+                hideUnscrollableSlider?: boolean,
+                /** Set to true to disable dragging when content is not scrollable. */
+                disableUnscrollableDrag?: boolean,
+                /** Set to true to adapt thumb size to current content size. */
+                adaptThumbSize?: boolean,
+                /** Minimum size of the slider thumb. */
+                minThumbSize?: number,
+            },
+
+            /** Space configuration for array table. */
+            space?: GridTable.IConfig['space'] & {
+                cell?: {
+                    left?: number,
+                    right?: number,
+                    top?: number,
+                    bottom?: number,
+                    index?: number,
+                    tweaker?: number,
+                    delete?: number,
+                }
+                button?: number,
+            },
+
+            /** Style for index label in each cell. */
+            index?: SimpleLabel.IConfig,
+
+            /** Style for add button in footer. */
+            addButton?: SimpleLabel.IConfig,
+
+            /** Style for clear button in footer. */
+            clearButton?: SimpleLabel.IConfig,
+
+            /** Style for delete button in each cell. */
+            deleteButton?: SimpleLabel.IConfig,
+
+            /** Style for cell background. */
+            cellBackground?: CreateBackground.IConfig,
         },
 
         /** Separator style between rows. */
@@ -298,7 +409,8 @@ declare namespace Tweaker {
     /**
      * Base configuration for adding an input row.
      */
-    interface IAddInputConfig {
+    interface TweakerCustomInputConfig { }
+    interface IAddInputConfig extends TweakerCustomInputConfig {
         /** Object that owns the edited property. */
         bindingTarget?: Object,
         /** Property name on binding target. */
@@ -553,6 +665,162 @@ declare namespace Tweaker {
     }
 
     /**
+     * Configuration for adding an array table.
+     */
+    interface IAddArrayTableConfig {
+        /** Optional title shown above the array table. */
+        title?: string,
+        /** Optional icon texture key shown in title. */
+        icon?: string,
+        /** Optional icon frame name. */
+        iconFrame?: string,
+        /** Optional icon display size. */
+        iconSize?: number,
+
+        /** Binding target object for the array items. */
+        bindingTarget?: Object,
+        /** Key path to the array field on the binding target. */
+        bindingKey?: string,
+
+        /** Property descriptors for each item. */
+        $properties?: RowsPropertyType[],
+
+        /** Set to true to monitor input values. */
+        monitor?: boolean,
+
+        /** Height of array table. */
+        height?: number,
+
+        /** Background configuration of array table. */
+        background?: CreateBackground.IConfig,
+
+        /** Table configuration. */
+        table?: GridTable.IConfig['table'],
+
+        /** Slider configuration. */
+        slider?: {
+            track?: CreateBackground.IConfig,
+            thumb?: CreateBackground.IConfig,
+
+            hideUnscrollableSlider?: boolean,
+            disableUnscrollableDrag?: boolean,
+            adaptThumbSize?: boolean,
+            minThumbSize?: number,
+        },
+
+        /** Space configuration. */
+        space?: GridTable.IConfig['space'] & {
+            cell?: {
+                left?: number,
+                right?: number,
+                top?: number,
+                bottom?: number,
+                index?: number,
+                tweaker?: number,
+                delete?: number,
+                button?: number,
+            }
+        },
+
+        /**
+         * Index label template or formatter.
+         * Use `%1` for index and `%2` for total-count in template string.
+         */
+        indexLabel?: string | ((index: number, item: unknown, items: unknown[]) => string | Record<string, any>),
+
+        /** Label content for delete button in each cell. */
+        deleteLabel?: string | SimpleLabel.IResetDisplayContentConfig,
+
+        /**
+         * Label content for add button in footer.
+         * Set `createDefaultItem` to null/false to hide add button.
+         */
+        addLabel?: string | SimpleLabel.IResetDisplayContentConfig,
+
+        /** Label content for clear button in footer. */
+        clearLabel?: string | SimpleLabel.IResetDisplayContentConfig,
+
+        /** Set to false to hide clear button. */
+        clearItems?: boolean,
+
+        /**
+         * Create a default item when adding.
+         */
+        createDefaultItem?: (() => unknown) | false | null,
+
+        /**
+         * Lookup key when adding to children map.
+         */
+        key?: string,
+    }
+
+    /**
+     * Backward-compatible alias.
+     */
+    type IAddArrayConfig = IAddArrayTableConfig;
+
+    /**
+     * Config for single-argument addArrayTable(config).
+     */
+    interface IAddArrayTableBoundConfig extends IAddArrayTableConfig {
+        bindingTarget: Object,
+        bindingKey: string,
+    }
+
+    /**
+     * Configuration for a split panel section.
+     */
+    interface ISplitPanelConfig {
+        /** Optional panel key for lookup. */
+        key?: string,
+        /** Child rows inside this panel. */
+        $properties?: RowsPropertyType[]
+    }
+
+    /**
+     * Row configuration for split panels.
+     */
+    interface ISplitPanelRowConfig extends ISplitPanelConfig {
+        /** Child rows inside this panel. */
+        $properties: RowsPropertyType[]
+    }
+
+    /**
+     * Configuration for adding a split panels container.
+     */
+    interface IAddSplitConfig {
+        /** Optional title shown above panels. */
+        title?: string,
+        /** Left panel configuration. */
+        left?: ISplitPanelConfig,
+        /** Right panel configuration. */
+        right?: ISplitPanelConfig,
+
+        /** Split ratio between panels. */
+        splitRatio?: number,
+        /** Minimum width for left panel. */
+        minLeftPanelWidth?: number,
+        /** Minimum width for right panel. */
+        minRightPanelWidth?: number,
+
+        /** Split panels space configuration. */
+        space?: SplitPanels.IConfig['space'],
+
+        /** Background game object or config. */
+        background?: Phaser.GameObjects.GameObject | CreateBackground.IConfig,
+        /** Splitter game object or config. */
+        splitter?: Phaser.GameObjects.GameObject | CreateBackground.IConfig,
+    }
+
+    /**
+     * Result of add2Columns().
+     */
+    interface ISplitPanelsResult {
+        left: Tweaker,
+        right: Tweaker
+    }
+
+    /**
      * Declarative property row for a standard input control.
      */
     interface IAddInputRowProperty extends IAddInputConfig {
@@ -612,6 +880,20 @@ declare namespace Tweaker {
     }
 
     /**
+     * Declarative property row for split panels layout.
+     */
+    interface IAdd2ColumnsRowProperty extends IAddSplitConfig {
+        /** Row type discriminator. */
+        $type: '2columns',
+        /** Optional split-level binding target. */
+        $target?: Object,
+        /** Left panel configuration. */
+        left?: ISplitPanelRowConfig,
+        /** Right panel configuration. */
+        right?: ISplitPanelRowConfig,
+    }
+
+    /**
      * Declarative property row for wrap layout.
      */
     interface IAddWrapRowProperty extends IAddWrapConfig {
@@ -633,6 +915,18 @@ declare namespace Tweaker {
         $target?: Object,
         /** Child rows inside this scrollable container. */
         $properties: RowsPropertyType[]
+    }
+
+    /**
+     * Declarative property row for array-table layout.
+     */
+    interface IAddArrayTableRowProperty extends IAddArrayTableConfig {
+        /** Row type discriminator. */
+        $type: 'arrayTable',
+        /** Optional array-table-level binding target. */
+        $target?: Object,
+        /** Binding key path of array field. */
+        $key: string,
     }
 
     /**
@@ -663,7 +957,8 @@ declare namespace Tweaker {
      * Union of all declarative row property variants.
      */
     type RowsPropertyType = IAddInputRowProperty |
-        IAddFolderRowProperty | IAddTabRowProperty | IAddColumnsRowProperty | IAddScrollableRowProperty |
+        IAddFolderRowProperty | IAddTabRowProperty | IAddColumnsRowProperty | IAdd2ColumnsRowProperty | IAddWrapRowProperty | IAddScrollableRowProperty |
+        IAddArrayTableRowProperty |
         IAddSeparatorRowProperty | IAddButtonRowProperty | IAddButtonsRowProperty;
 
     /**
@@ -736,6 +1031,19 @@ declare class Tweaker extends Sizer {
     );
 
     /**
+     * True if this tweaker is the root instance.
+     */
+    readonly isRoot: boolean;
+
+    /**
+     * Enable or disable automatic alignment of input-row title width.
+     *
+     * @param enable - Set to true to align titles to the maximum title width.
+     * @returns This tweaker instance.
+     */
+    setAlignInputRowTitleEnable(enable?: boolean): this;
+
+    /**
      * Register an input handler.
      *
      * @param config - Input handler configuration.
@@ -758,14 +1066,14 @@ declare class Tweaker extends Sizer {
     /**
      * Add an input row bound to a target object key.
      *
-     * @param object - Binding target object.
-     * @param key - Binding key.
+     * @param target - Binding target object.
+     * @param bindingKey - Binding key.
      * @param config - Optional input configuration.
      * @returns This tweaker instance.
      */
     addInput(
-        object: Object,
-        key: string,
+        target: Object,
+        bindingKey: string,
         config?: Tweaker.IAddInputConfig
     ): this;
 
@@ -837,6 +1145,16 @@ declare class Tweaker extends Sizer {
     ): Tweaker[];
 
     /**
+     * Add 2-columns split panels and return left/right tweakers.
+     *
+     * @param config - Split panels configuration.
+     * @returns Left/right tweaker instances.
+     */
+    add2Columns(
+        config: Tweaker.IAddSplitConfig
+    ): Tweaker.ISplitPanelsResult;
+
+    /**
      * Add wrap container and return nested tweaker.
      *
      * @param config - Wrap configuration.
@@ -855,6 +1173,30 @@ declare class Tweaker extends Sizer {
     addScrollable(
         config: Tweaker.IAddScrollableConfig
     ): Tweaker;
+
+    /**
+     * Add an array table for editing list items.
+     *
+     * @param target - Binding target object.
+     * @param bindingKey - Binding key path.
+     * @param config - Optional array table configuration.
+     * @returns This tweaker instance.
+     */
+    addArrayTable(
+        target: Object,
+        bindingKey: string,
+        config?: Tweaker.IAddArrayTableConfig
+    ): this;
+
+    /**
+     * Add an array table for editing list items.
+     *
+     * @param config - Array table configuration.
+     * @returns This tweaker instance.
+     */
+    addArrayTable(
+        config: Tweaker.IAddArrayTableBoundConfig
+    ): this;
 
     /**
      * Add rows from declarative properties with optional target and monitor.

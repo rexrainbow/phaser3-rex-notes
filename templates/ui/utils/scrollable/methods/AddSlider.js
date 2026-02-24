@@ -196,7 +196,10 @@ var AddSlider = function (topPatent, sliderParent, axis, config) {
 
         if (child.isRexContainerLite) {
             // Send touch detection sensor to back
-            child.sendChildToBack(child);
+            if (!child.layerRendererEnable) {
+                // Normal mode
+                child.sendChildToBack(child);
+            }
         }
     }
 
