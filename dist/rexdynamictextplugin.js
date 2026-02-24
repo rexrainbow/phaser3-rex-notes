@@ -2923,8 +2923,9 @@
     };
 
     const CanvasPool = Phaser.Display.Canvas.CanvasPool;
+    const TintModes$1 = Phaser.TintModes;
 
-    var DrawFrameToCanvas = function (frame, canvas, x, y, width, height, color, autoRound) {
+    var DrawFrameToCanvas = function (frame, canvas, x, y, width, height, color, autoRound, tintMode) {
         if (x === undefined) { x = 0; }
         if (y === undefined) { y = 0; }
         if (width === undefined) { width = frame.cutWidth; }
@@ -2937,7 +2938,22 @@
 
         var context = canvas.getContext('2d', { willReadFrequently: true });
 
-        if (color) {
+        if (tintMode === true) {
+            tintMode = TintModes$1.FILL;
+        } else if (tintMode === false) {
+            tintMode = undefined;
+        }
+
+        if (color === undefined || color === null || typeof tintMode !== 'number') {
+            // Draw image directly
+            context.drawImage(
+                frame.source.image,
+                frame.cutX, frame.cutY, frame.cutWidth, frame.cutHeight,
+                x, y, width, height
+            );
+
+        } else {
+            // Apply effect
             // Draw image at tempCanvas
 
             // Get tempCanvas
@@ -2945,16 +2961,59 @@
 
             var tempContext = tempCanvas.getContext('2d', { willReadFrequently: true });
 
+            var sourceImage = frame.source.image;
+            var sourceX = frame.cutX;
+            var sourceY = frame.cutY;
+            var sourceWidth = frame.cutWidth;
+            var sourceHeight = frame.cutHeight;
+
             tempContext.drawImage(
-                frame.source.image,
-                frame.cutX, frame.cutY, frame.cutWidth, frame.cutHeight,
+                sourceImage,
+                sourceX, sourceY, sourceWidth, sourceHeight,
                 0, 0, width, height
             );
 
-            // Tint-fill
-            tempContext.globalCompositeOperation = 'source-in';
-            tempContext.fillStyle = color;
-            tempContext.fillRect(0, 0, width, height);
+            if (tintMode === TintModes$1.FILL) {
+                tempContext.globalCompositeOperation = 'source-in';
+                tempContext.fillStyle = color;
+                tempContext.fillRect(0, 0, width, height);
+            } else {
+                var compositeOperation = 'source-in';
+
+                switch (tintMode) {
+                    case TintModes$1.MULTIPLY:
+                        compositeOperation = 'multiply';
+                        break;
+                    case TintModes$1.ADD:
+                        compositeOperation = 'lighter';
+                        break;
+                    case TintModes$1.SCREEN:
+                        compositeOperation = 'screen';
+                        break;
+                    case TintModes$1.OVERLAY:
+                        compositeOperation = 'overlay';
+                        break;
+                    case TintModes$1.HARD_LIGHT:
+                        compositeOperation = 'hard-light';
+                        break;
+                }
+
+                if (compositeOperation === 'source-in') {
+                    tempContext.globalCompositeOperation = 'source-in';
+                    tempContext.fillStyle = color;
+                    tempContext.fillRect(0, 0, width, height);
+                } else {
+                    tempContext.globalCompositeOperation = compositeOperation;
+                    tempContext.fillStyle = color;
+                    tempContext.fillRect(0, 0, width, height);
+                    tempContext.globalCompositeOperation = 'destination-in';
+                    tempContext.drawImage(
+                        sourceImage,
+                        sourceX, sourceY, sourceWidth, sourceHeight,
+                        0, 0, width, height
+                    );
+                }
+            }
 
             // Draw tempCanvas at context
             context.drawImage(
@@ -2965,16 +3024,12 @@
 
             // Release tempCanvas
             CanvasPool.remove(tempCanvas);
-        } else {
-            context.drawImage(
-                frame.source.image,
-                frame.cutX, frame.cutY, frame.cutWidth, frame.cutHeight,
-                x, y, width, height
-            );
+
         }
+
     };
 
-    Phaser.Display.Canvas.CanvasPool;
+    const TintModes = Phaser.TintModes;
 
     class ImageData extends RenderBase {
         constructor(
@@ -3071,10 +3126,16 @@
         }
 
         renderContent() {
+            var tintMode = undefined;
+            if (this.color !== undefined && this.color !== null) {
+                tintMode = TintModes.FILL;
+            }
+            // TODO: Pass tintMode from paremeter
+
             DrawFrameToCanvas(
                 this.frameObj, this.canvas,
                 0, 0, this.frameWidth, this.frameHeight,
-                this.color, false
+                this.color, false, tintMode
             );
 
         }

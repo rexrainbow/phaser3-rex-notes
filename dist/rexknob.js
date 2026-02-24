@@ -31,7 +31,10 @@
         IsChecked = true;
     };
 
-    var WebGLRenderer$1 = function (renderer, container, camera) {
+    const SKIP_CHECK_BLEND_MODE$1 = Phaser.BlendModes.SKIP_CHECK;
+
+    var WebGLRenderer$1 = function (renderer, container, drawingContext, parentMatrix, renderStep, displayList, displayListIndex) {
+        var camera = drawingContext.camera;
         camera.addToRenderList(container);
 
         if (!container.layerRendererEnable) {
@@ -53,15 +56,17 @@
             return;
         }
 
+        var currentContext = drawingContext;
+
         rendererLayer.depthSort();
 
-        renderer.pipelines.preBatch(container);
+        var layerHasBlendMode = (container.blendMode !== SKIP_CHECK_BLEND_MODE$1);
 
-        var layerHasBlendMode = (container.blendMode !== -1);
-
-        if (!layerHasBlendMode) {
-            //  If Layer is SKIP_TEST then set blend mode to be Normal
-            renderer.setBlendMode(0);
+        if (!layerHasBlendMode && currentContext.blendMode !== 0) {
+            //  If Layer is SKIP_CHECK then set blend mode to Normal
+            currentContext = currentContext.getClone();
+            currentContext.setBlendMode(0);
+            currentContext.use();
         }
 
         for (var i = 0; i < childCount; i++) {
@@ -71,37 +76,24 @@
                 continue;
             }
 
-            if (!layerHasBlendMode && child.blendMode !== renderer.currentBlendMode) {
+            if (
+                !layerHasBlendMode &&
+                child.blendMode !== currentContext.blendMode &&
+                child.blendMode !== SKIP_CHECK_BLEND_MODE$1
+            ) {
                 //  If Layer doesn't have its own blend mode, then a child can have one
-                renderer.setBlendMode(child.blendMode);
+                currentContext = currentContext.getClone();
+                currentContext.setBlendMode(child.blendMode);
+                currentContext.use();
             }
 
-            var mask = child.mask;
-
-            if (mask) {
-                mask.preRenderWebGL(renderer, child, camera);
-            }
-
-            var type = child.type;
-
-            if (type !== renderer.currentType) {
-                renderer.newType = true;
-                renderer.currentType = type;
-            }
-
-            renderer.nextTypeMatch = (i < childCount - 1) ? (children[i + 1].type === renderer.currentType) : false;
-
-            //  Render
-            child.renderWebGL(renderer, child, camera);
-
-            if (mask) {
-                mask.postRenderWebGL(renderer, camera);
-            }
-
-            renderer.newType = false;
+            child.renderWebGLStep(renderer, child, currentContext, undefined, undefined, children, i);
         }
 
-        renderer.pipelines.postBatch(container);
+        // Release any remaining context.
+        if (currentContext !== drawingContext) {
+            currentContext.release();
+        }
     };
 
     var CanvasRenderer$1 = function (renderer, container, camera) {
@@ -243,6 +235,7 @@
     const Zone = Phaser.GameObjects.Zone;
     const AddItem = Phaser.Utils.Array.Add;
     const RemoveItem$3 = Phaser.Utils.Array.Remove;
+    const SKIP_CHECK_BLEND_MODE = Phaser.BlendModes.SKIP_CHECK;
 
     let Base$1 = class Base extends Zone {
         constructor(scene, x, y, width, height) {
@@ -268,6 +261,8 @@
             */
             this.layerRendererEnable = false;
             this.rendererLayer = undefined;
+
+            this.setBlendMode(SKIP_CHECK_BLEND_MODE);
         }
 
         destroy(fromScene) {

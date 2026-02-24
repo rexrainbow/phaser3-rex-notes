@@ -103,7 +103,7 @@ void main (void) {
       }
 
       // scanLineStrength
-      setScanStrength(value) {
+      setScanLineStrength(value) {
           this.scanLineStrength = value;
           return this;
       }

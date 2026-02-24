@@ -1019,11 +1019,13 @@
     };
 
     var TintMethods = {
-        setTintFill(value) {
-            if (value === undefined) {
-                value = false;
+        setTintFill(mode) {
+            if (mode === undefined || mode === true) {
+                mode = Phaser.TintModes.FILL;
+            } else if (mode === false) {
+                mode = Phaser.TintModes.MULTIPLY;
             }
-            this.tintFill = value;
+            this.tintFill = mode;
             return this;
         },
 
@@ -1033,7 +1035,8 @@
         },
 
         clearTint() {
-            this.setTint(0xffffff);
+            this.tint = 0xffffff;
+            this.tintFill = Phaser.TintModes.MULTIPLY;
             return this;
         }
     };
@@ -1466,7 +1469,7 @@
             this.alphaBuffer = null;
             this.colorBuffer = null;
 
-            this.tintFill = false;
+            this.tintFill = Phaser.TintModes.MULTIPLY;
 
             this.debugCallback = null;
             this.debugGraphic = null;
@@ -2122,72 +2125,74 @@
         return gameObject;
     }
 
-    var IsInValidKey = function (keys) {
-        return (keys == null) || (keys === '') || (keys.length === 0);
+    var IsNil = function (value) {
+        return value === null || value === undefined;
     };
 
-    var GetEntry = function (target, keys, defaultEntry) {
-        var entry = target;
-        if (IsInValidKey(keys)) ; else {
-            if (typeof (keys) === 'string') {
-                keys = keys.split('.');
-            }
-
-            var key;
-            for (var i = 0, cnt = keys.length; i < cnt; i++) {
-                key = keys[i];
-                if ((entry[key] == null) || (typeof (entry[key]) !== 'object')) {
-                    var newEntry;
-                    if (i === cnt - 1) {
-                        if (defaultEntry === undefined) {
-                            newEntry = {};
-                        } else {
-                            newEntry = defaultEntry;
-                        }
-                    } else {
-                        newEntry = {};
-                    }
-
-                    entry[key] = newEntry;
-                }
-
-                entry = entry[key];
-            }
-        }
-
-        return entry;
+    var IsObjectLike = function (value) {
+        return value !== null && typeof value === 'object';
     };
 
-    var SetValue = function (target, keys, value, delimiter) {
-        if (delimiter === undefined) {
-            delimiter = '.';
-        }
-
-        // no object
-        if (typeof (target) !== 'object') {
-            return;
-        }
-
-        // invalid key
-        else if (IsInValidKey(keys)) {
-            // don't erase target
-            if (value == null) {
-                return;
-            }
-            // set target to another object
-            else if (typeof (value) === 'object') {
-                target = value;
-            }
+    var NormalizePath = function (path, delimiter) {
+        if (Array.isArray(path)) ; else if (typeof path !== 'string') {
+            path = [];
+        } else if (path.trim() === '') {
+            path = [];
         } else {
-            if (typeof (keys) === 'string') {
-                keys = keys.split(delimiter);
-            }
+            path = path.split(delimiter).filter(Boolean);
+        }
+        return path;
+    };
 
-            var lastKey = keys.pop();
-            var entry = GetEntry(target, keys);
-            entry[lastKey] = value;
+    /**
+     * Set a nested value into target by path (mutates target).
+     *
+     * - If keys is a string and does NOT contain delimiter, write directly.
+     * - Intermediate non-plain-object values are always overwritten with {}.
+     *
+     * @param {object} target
+     * @param {string|string[]} keys
+     * @param {*} value
+     * @param {string} [delimiter='.']
+     * @returns {object} the same target reference
+     */
+    var SetValue = function (target, keys, value, delimiter = '.') {
+        if (!IsObjectLike(target)) {
+            return target;
         }
 
+        // Invalid key: no-op; don't replace root
+        if (IsNil(keys) || keys === '' || (Array.isArray(keys) && keys.length === 0)) {
+            return target;
+        }
+
+        // Fast path: single key
+        if (typeof keys === 'string' && keys.indexOf(delimiter) === -1) {
+            target[keys] = value;
+            return target;
+        }
+
+        var pathSegments = NormalizePath(keys, delimiter);
+        if (pathSegments.length === 0) {
+            return target;
+        }
+
+        var cursor = target;
+        var pathSegmentsCount = pathSegments.length;
+
+        for (var index = 0; index < pathSegmentsCount - 1; index++) {
+            var segment = pathSegments[index];
+            var next = cursor[segment];
+
+            if (!IsObjectLike(next)) {
+                // Force overwrite intermediates
+                cursor[segment] = {};
+            }
+
+            cursor = cursor[segment];
+        }
+
+        cursor[pathSegments[pathSegmentsCount - 1]] = value;
         return target;
     };
 
