@@ -1,5 +1,6 @@
 import MaskChildren from './MaskChildren.js';
 import AddChildMask from './AddChildMask.js';
+import { SetMask } from '../../../../utils/mask/MaskMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -82,7 +83,7 @@ export default {
         }
 
         if (this.layerRendererEnable) {
-            this.setMask(this.childrenMask);
+            SetMask(this, this.childrenMaskGameObject);
 
         } else {
             // Assume that all children are at scene's displayList

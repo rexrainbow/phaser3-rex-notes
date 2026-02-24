@@ -1,4 +1,7 @@
-var WebGLRenderer = function (renderer, container, camera) {
+const SKIP_CHECK_BLEND_MODE = Phaser.BlendModes.SKIP_CHECK;
+
+var WebGLRenderer = function (renderer, container, drawingContext, parentMatrix, renderStep, displayList, displayListIndex) {
+    var camera = drawingContext.camera;
     camera.addToRenderList(container);
 
     if (!container.layerRendererEnable) {
@@ -20,15 +23,17 @@ var WebGLRenderer = function (renderer, container, camera) {
         return;
     }
 
+    var currentContext = drawingContext;
+
     rendererLayer.depthSort();
 
-    renderer.pipelines.preBatch(container);
+    var layerHasBlendMode = (container.blendMode !== SKIP_CHECK_BLEND_MODE);
 
-    var layerHasBlendMode = (container.blendMode !== -1);
-
-    if (!layerHasBlendMode) {
-        //  If Layer is SKIP_TEST then set blend mode to be Normal
-        renderer.setBlendMode(0);
+    if (!layerHasBlendMode && currentContext.blendMode !== 0) {
+        //  If Layer is SKIP_CHECK then set blend mode to Normal
+        currentContext = currentContext.getClone();
+        currentContext.setBlendMode(0);
+        currentContext.use();
     }
 
     for (var i = 0; i < childCount; i++) {
@@ -38,37 +43,24 @@ var WebGLRenderer = function (renderer, container, camera) {
             continue;
         }
 
-        if (!layerHasBlendMode && child.blendMode !== renderer.currentBlendMode) {
+        if (
+            !layerHasBlendMode &&
+            child.blendMode !== currentContext.blendMode &&
+            child.blendMode !== SKIP_CHECK_BLEND_MODE
+        ) {
             //  If Layer doesn't have its own blend mode, then a child can have one
-            renderer.setBlendMode(child.blendMode);
+            currentContext = currentContext.getClone();
+            currentContext.setBlendMode(child.blendMode);
+            currentContext.use();
         }
 
-        var mask = child.mask;
-
-        if (mask) {
-            mask.preRenderWebGL(renderer, child, camera);
-        }
-
-        var type = child.type;
-
-        if (type !== renderer.currentType) {
-            renderer.newType = true;
-            renderer.currentType = type;
-        }
-
-        renderer.nextTypeMatch = (i < childCount - 1) ? (children[i + 1].type === renderer.currentType) : false;
-
-        //  Render
-        child.renderWebGL(renderer, child, camera);
-
-        if (mask) {
-            mask.postRenderWebGL(renderer, camera);
-        }
-
-        renderer.newType = false;
+        child.renderWebGLStep(renderer, child, currentContext, undefined, undefined, children, i);
     }
 
-    renderer.pipelines.postBatch(container);
+    // Release any remaining context.
+    if (currentContext !== drawingContext) {
+        currentContext.release();
+    }
 };
 
 export default WebGLRenderer;
