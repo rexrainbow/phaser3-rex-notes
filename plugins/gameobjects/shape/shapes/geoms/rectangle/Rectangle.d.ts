@@ -1,9 +1,29 @@
 import BaseGeom from "../base/BaseGeom";
+import type {
+    DashPatternConfig as StrokeDashPatternConfig,
+    DashPatternType as StrokeDashPatternType,
+    IStrokePathMethods,
+    IStrokePathState,
+} from "../../../utils/strokepath/StrokePathMethods";
+
+export default Rectangle;
+
+declare namespace Rectangle {
+    /**
+     * Auto dash pattern configuration.
+     */
+    type DashPatternConfig = StrokeDashPatternConfig;
+
+    /**
+     * Dash pattern definition.
+     */
+    type DashPatternType = StrokeDashPatternType;
+}
 
 /**
  * Rectangle geometry.
  */
-export default class Rectangle extends BaseGeom {
+declare class Rectangle extends BaseGeom {
     /**
      * Create a rectangle.
      * @param x - Top-left x.
@@ -75,4 +95,7 @@ export default class Rectangle extends BaseGeom {
      */
     centerY: number;
 
+}
+
+interface Rectangle extends IStrokePathMethods, IStrokePathState {
 }

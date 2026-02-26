@@ -609,7 +609,6 @@
                         continue;
                     }
 
-                    debugger
                     this.complete();
                     return this;
                 }

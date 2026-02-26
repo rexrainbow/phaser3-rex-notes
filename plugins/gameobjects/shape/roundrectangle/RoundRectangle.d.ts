@@ -1,4 +1,5 @@
 // import * as Phaser from 'phaser';
+import PolygnBase from '../utils/polygonbase/PolygnBase';
 
 export default RoundRectangle;
 
@@ -120,7 +121,7 @@ declare namespace RoundRectangle {
 /**
  * Rounded rectangle shape game object.
  */
-declare class RoundRectangle extends Phaser.GameObjects.Shape {
+declare class RoundRectangle extends PolygnBase {
     /**
      * Create a rounded rectangle.
      * @param scene - The Scene to which this object belongs.

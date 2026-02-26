@@ -1,5 +1,5 @@
-import FillPathWebGL from '../../utils/render/FillPathWebGL.js';
-import StrokePathWebGL from '../../utils/render/StrokePathWebGL.js';
+import FillPathWebGL from '../../render/FillPathWebGL.js';
+import StrokePathWebGL from '../../render/StrokePathWebGL.js';
 
 const GetCalcMatrix = Phaser.GameObjects.GetCalcMatrix;
 

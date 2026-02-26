@@ -231,7 +231,6 @@ class MoveTo extends TickTask {
                     continue;
                 }
 
-                debugger
                 this.complete();
                 return this;
             }

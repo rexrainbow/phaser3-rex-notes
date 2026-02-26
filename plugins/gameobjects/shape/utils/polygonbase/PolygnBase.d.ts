@@ -1,14 +1,13 @@
-import BaseGeom from '../base/BaseGeom';
 import type {
     DashPatternConfig as StrokeDashPatternConfig,
     DashPatternType as StrokeDashPatternType,
     IStrokePathMethods,
     IStrokePathState,
-} from '../../../utils/strokepath/StrokePathMethods';
+} from "../strokepath/StrokePathMethods";
 
-export default PathBase;
+export default PolygnBase;
 
-declare namespace PathBase {
+declare namespace PolygnBase {
     /**
      * Auto dash pattern configuration.
      */
@@ -21,14 +20,11 @@ declare namespace PathBase {
 }
 
 /**
- * Base class for path-based geometries.
+ * Base polygon shape with shared stroke-path behavior.
  */
-declare class PathBase extends BaseGeom {
-    /**
-     * True if the path should be closed.
-     */
-    closePath: boolean;
+declare class PolygnBase extends Phaser.GameObjects.Shape {
+
 }
 
-interface PathBase extends IStrokePathMethods, IStrokePathState {
+interface PolygnBase extends IStrokePathMethods, IStrokePathState {
 }

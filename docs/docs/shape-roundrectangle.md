@@ -364,6 +364,33 @@ var rect = scene.add.rexRoundRectangle({
                 }
 
 
+### Dashed
+
+- Set dash pattern
+    ```javascript
+    rect.setDashPattern(pattern, offset);
+    ```
+    - `pattern` :
+        - An array 
+            - `[drawLength, skipLength]`, or 
+            - `[drawLengthA, skipLengthA, drawLengthB, skipLengthB, ...]`
+        - An plain object
+            ```javascript
+            {
+                segments: 10,
+                drawRatio: 0.5
+            }
+            ```
+    - `offset` : Offset of 1st dashed segment. Default value is `0`
+- Clear dashed
+    ```javascript
+    rect.setDashed(false);
+    ```
+    or
+    ```javascript
+    rect.clearDashPattern();
+    ```
+
 ### Iteration
 
 - Get

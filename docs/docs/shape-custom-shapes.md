@@ -320,6 +320,30 @@ Shape data will be updated during rendering, or call `shape.updateData()` to upd
         ```javascript
         shape.fillStyle().lineStyle();
         ```
+- Dashed
+    - Set dash pattern
+        ```javascript
+        shape.setDashPattern(pattern, offset);
+        ```
+        - `pattern` :
+            - An array 
+                - `[drawLength, skipLength]`, or 
+                - `[drawLengthA, skipLengthA, drawLengthB, skipLengthB, ...]`
+            - An plain object
+                ```javascript
+                {
+                    segments: 10,
+                    drawRatio: 0.5
+                }
+                ```
+    - Clear dashed
+        ```javascript
+        shape.setDashed(false);
+        ```
+        or
+        ```javascript
+        shape.clearDashPattern();
+        ```
 - Visible
     - Get
         ```javascript

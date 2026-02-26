@@ -1,4 +1,10 @@
 import BaseShapes from '../shapes/BaseShapes';
+import type {
+    DashPatternConfig as StrokeDashPatternConfig,
+    DashPatternType as StrokeDashPatternType,
+    IStrokePathConfigMethods,
+    IStrokePathState,
+} from '../utils/strokepath/StrokePathMethods';
 
 // import * as Phaser from 'phaser';
 export default Line;
@@ -17,6 +23,16 @@ declare namespace Line {
      * Endpoint shape type.
      */
     type EndPointType = 0 | 'none' | 1 | 'triangle' | 2 | 'dot' | 3 | 'box' | 4 | 'diamond';
+
+    /**
+     * Auto dash pattern configuration.
+     */
+    type DashPatternConfig = StrokeDashPatternConfig;
+
+    /**
+     * Dash pattern definition.
+     */
+    type DashPatternType = StrokeDashPatternType;
 
     interface IConfig {
         /**
@@ -101,6 +117,15 @@ declare namespace Line {
          * Tail stroke alpha.
          */
         tailStrokeAlpha?: number,
+
+        /**
+         * Dash pattern definition for line stroke.
+         */
+        dashPattern?: DashPatternType,
+        /**
+         * Dash offset along the line path.
+         */
+        dashOffset?: number,
     }
 }
 
@@ -239,4 +264,7 @@ declare class Line extends BaseShapes {
         color?: number,
         alpha?: number
     ): this;
+}
+
+interface Line extends IStrokePathConfigMethods, IStrokePathState {
 }

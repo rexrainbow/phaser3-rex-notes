@@ -1,4 +1,5 @@
 // import * as Phaser from 'phaser';
+import PolygnBase from '../utils/polygonbase/PolygnBase';
 
 export default Quad;
 
@@ -128,7 +129,7 @@ declare namespace Quad {
 /**
  * Quad shape with adjustable corners and side control points.
  */
-declare class Quad extends Phaser.GameObjects.Shape {
+declare class Quad extends PolygnBase {
     /**
      * Create a quad.
      * @param scene - The Scene to which this object belongs.

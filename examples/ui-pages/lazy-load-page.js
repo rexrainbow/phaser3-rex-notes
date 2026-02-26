@@ -19,21 +19,18 @@ class Demo extends Phaser.Scene {
             .setPosition(400, 300)
             .layout()
 
-        ui.getElement('tabs').on('button.statechange', function (button, index, value, previousValue) {
-            // Style of button
-            var background = button.getElement('background');
-            if (value) {
-                background.setStrokeStyle(2, COLOR_LIGHT);
-            } else {
-                background.setStrokeStyle();
-            }
+        ui.getElement('pages').swapPage('0')
 
+        ui.getElement('tabs').on('button.click', function (button, index, pointer, event) {
             // Swap page
-            if (value) {
-                ui.getElement('pages').swapPage(button.name);
+            var pages = ui.getElement('pages');
+            var pageIndex = parseInt(pages.currentKey);
+            pageIndex += (index === 0) ? -1 : 1;
+            if (pageIndex < 0) {
+                return;
             }
+            pages.swapPage(pageIndex.toString());
         })
-            .emitButtonClick(0);
     }
 
     update() { }
@@ -77,52 +74,34 @@ var CreateButtons = function (scene) {
         space: { item: 3 },
 
         buttons: [
-            CreateLabel(scene, 'Page0').setName('page0'),
-            CreateLabel(scene, 'Page1').setName('page1'),
-            CreateLabel(scene, 'Page2').setName('page2'),
+            CreateLabel(scene, 'Previous page'),
+            CreateLabel(scene, 'Next page'),
         ],
-
-        buttonsType: 'radio'
     })
 }
 
-const content = `Phaser is a fast, free, and fun open source HTML5 game framework that offers WebGL and Canvas rendering across desktop and mobile web browsers. Games can be compiled to iOS, Android and native apps by using 3rd party tools. You can use JavaScript or TypeScript for development.`;
-var CreatePage = function (scene) {
-    return scene.rexUI.add.textArea({
+var CreatePage = function (scene, index) {
+    return scene.rexUI.add.label({
         text: scene.rexUI.add.BBCodeText(0, 0, '', { fontSize: 24 }),
-        slider: {
-            track: scene.rexUI.add.roundRectangle(0, 0, 20, 0, 10, COLOR_MAIN),
-            thumb: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 13, COLOR_LIGHT)
-        },
-
-        content: `\
-${content}
-....
-[color=green]${content}[/color]
-....
-[color=cadetblue]${content}[/color]
-....
-[color=yellow]${content}[/color]\
-`
-    })
+    }).setText(`This is page ${index}`)
 }
 
 var CreatePages = function (scene) {
     return scene.rexUI.add.pages({
+        swapMode: 'destroy',
         fadeIn: 500
     })
-        .add(
-            CreatePage(scene),
-            { key: 'page0', expand: true }
-        )
-        .add(
-            CreatePage(scene),
-            { key: 'page1', expand: true }
-        )
-        .add(
-            CreatePage(scene),
-            { key: 'page2', expand: true }
-        )
+        .on('createpage', function (key, pages) {
+            pages
+                .addPage(
+                    CreatePage(scene, key),
+                    { key: key, align: 'left-top', expand: false }
+                )
+
+            pages.getTopmostSizer()
+                .layout()
+        })
+
 }
 
 

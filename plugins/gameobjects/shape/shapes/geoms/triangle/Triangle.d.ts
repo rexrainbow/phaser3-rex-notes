@@ -1,9 +1,29 @@
 import BaseGeom from "../base/BaseGeom";
+import type {
+    DashPatternConfig as StrokeDashPatternConfig,
+    DashPatternType as StrokeDashPatternType,
+    IStrokePathMethods,
+    IStrokePathState,
+} from "../../../utils/strokepath/StrokePathMethods";
+
+export default Triangle;
+
+declare namespace Triangle {
+    /**
+     * Auto dash pattern configuration.
+     */
+    type DashPatternConfig = StrokeDashPatternConfig;
+
+    /**
+     * Dash pattern definition.
+     */
+    type DashPatternType = StrokeDashPatternType;
+}
 
 /**
  * Triangle geometry.
  */
-export default class Triangle extends BaseGeom {
+declare class Triangle extends BaseGeom {
     /**
      * Create a triangle.
      * @param x0 - Point 0 x.
@@ -78,4 +98,7 @@ export default class Triangle extends BaseGeom {
      * Point 2 y.
      */
     y2: number;
+}
+
+interface Triangle extends IStrokePathMethods, IStrokePathState {
 }

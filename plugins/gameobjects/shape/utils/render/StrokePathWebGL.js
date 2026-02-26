@@ -1,56 +1,96 @@
 /*
-shapeData: {
+src: {
     strokeColor,
     strokeAlpha,
     pathData,
     lineWidth,
-    closePath
+    closePath,
+    isDashed,
+    strokePathData,
+    strokePathMask
 }
 */
 var Utils = Phaser.Renderer.WebGL.Utils;
 
-var StrokePathWebGL = function (drawingContext, submitter, matrix, gameObject, shapeData, alpha, dx, dy) {
-    var strokeTintColor = Utils.getTintAppendFloatAlpha(shapeData.strokeColor, shapeData.strokeAlpha * alpha);
+var StrokePathWebGL = function (pipeline, src, alpha, dx, dy) {
+    var strokeTint = pipeline.strokeTint;
+    var strokeTintColor = Utils.getTintAppendFloatAlpha(src.strokeColor, src.strokeAlpha * alpha);
 
-    var path = shapeData.pathData;
+    strokeTint.TL = strokeTintColor;
+    strokeTint.TR = strokeTintColor;
+    strokeTint.BL = strokeTintColor;
+    strokeTint.BR = strokeTintColor;
+
+    var isDashed = src.isDashed && !!src.strokePathData;
+    var path = (!isDashed) ? src.pathData : src.strokePathData;
     var pathLength = path.length - 1;
-    var lineWidth = shapeData.lineWidth;
-    var openPath = !shapeData.closePath;
+    var lineWidth = src.lineWidth;
+    var halfLineWidth = lineWidth / 2;
 
-    var strokePath = gameObject.customRenderNodes.StrokePath || gameObject.defaultRenderNodes.StrokePath;
+    var px1 = path[0] - dx;
+    var py1 = path[1] - dy;
+    var px2, py2;
 
-    var pointPath = [];
-
-    // Don't add the last point to open paths.
-    if (openPath) {
+    if (!src.closePath) {
         pathLength -= 2;
     }
 
-    for (var i = 0; i < pathLength; i += 2) {
-        var x = path[i] - dx;
-        var y = path[i + 1] - dy;
-        if (i > 0) {
-            if (x === path[i - 2] && y === path[i - 1]) {
-                // Duplicate point, skip it
-                continue;
-            }
+    if (!isDashed) {
+        // Default behavior
+        for (var i = 2; i < pathLength; i += 2) {
+            px2 = path[i] - dx;
+            py2 = path[i + 1] - dy;
+
+            pipeline.batchLine(
+                px1,
+                py1,
+                px2,
+                py2,
+                halfLineWidth,
+                halfLineWidth,
+                lineWidth,
+                i - 2,
+                (src.closePath) ? (i === pathLength - 1) : false
+            );
+
+            px1 = px2;
+            py1 = py2;
         }
-        pointPath.push({
-            x: x,
-            y: y,
-            width: lineWidth
-        });
+
+    } else {
+        // Draw dashed line
+        var strokePathMask = src.strokePathMask;
+        var drawMaskIdx = 0;
+        var segLineIdx = 0;
+        for (var i = 2; i < pathLength; i += 2) {
+            px2 = path[i] - dx;
+            py2 = path[i + 1] - dy;
+
+            if (strokePathMask[drawMaskIdx]) {
+                pipeline.batchLine(
+                    px1,
+                    py1,
+                    px2,
+                    py2,
+                    halfLineWidth,
+                    halfLineWidth,
+                    lineWidth,
+                    segLineIdx,
+                    false
+                );
+                segLineIdx++;
+
+            } else {
+                segLineIdx = 0;
+
+            }
+
+            px1 = px2;
+            py1 = py2;
+            drawMaskIdx++;
+        }
     }
 
-    strokePath.run(
-        drawingContext,
-        submitter,
-        pointPath,
-        lineWidth,
-        openPath,
-        matrix,
-        strokeTintColor, strokeTintColor, strokeTintColor, strokeTintColor
-    );
 };
 
 export default StrokePathWebGL;

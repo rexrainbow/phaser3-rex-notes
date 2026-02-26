@@ -1,9 +1,11 @@
 import BaseGeom from '../base/BaseGeom.js';
+import FillPathWebGL from '../../../utils/render/FillPathWebGL.js';
 import StrokePathWebGL from '../../../utils/render/StrokePathWebGL.js';
-import FillStyleCanvas from '../../../utils/render/FillStyleCanvas.js';
-import LineStyleCanvas from '../../../utils/render/LineStyleCanvas.js';
+import FillPathCanvas from '../../../utils/render/FillPathCanvas.js';
+import StrokePathCanvas from '../../../utils/render/StrokePathCanvas.js';
+import StrokePathMethods from '../../../utils/strokepath/StrokePathMethods.js';
 
-var Utils = Phaser.Renderer.WebGL.Utils;
+const Earcut = Phaser.Geom.Polygon.Earcut;
 
 class Triangle extends BaseGeom {
     constructor(x0, y0, x1, y1, x2, y2) {
@@ -17,6 +19,14 @@ class Triangle extends BaseGeom {
         super();
 
         this.pathData = [];
+
+        this.isDashed = false;
+        this.strokePathData = undefined;
+        this.strokePathMask = undefined;
+        this.dashPattern = undefined;
+        this.dashOffset = 0;
+
+        this.pathIndexes = [];
         this.closePath = true;
 
         this.setP0(x0, y0);
@@ -103,71 +113,38 @@ class Triangle extends BaseGeom {
         this.pathData.push(this.x1, this.y1);
         this.pathData.push(this.x2, this.y2);
         this.pathData.push(this.x0, this.y0);
+        this.pathIndexes = Earcut(this.pathData);
 
         super.updateData();
+
+        this.buildStrokePath();
         return this;
     }
 
-    webglRender(drawingContext, submitter, calcMatrix, gameObject, alpha, dx, dy) {
+    webglRender(pipeline, calcMatrix, alpha, dx, dy) {
         if (this.isFilled) {
-            var fillTintColor = Utils.getTintAppendFloatAlpha(this.fillColor, this.fillAlpha * alpha);
-
-            var x0 = this.x0 - dx;
-            var y0 = this.y0 - dy;
-            var x1 = this.x1 - dx;
-            var y1 = this.y1 - dy;
-            var x2 = this.x2 - dx;
-            var y2 = this.y2 - dy;
-
-            var FillTri = gameObject.customRenderNodes.FillTri || gameObject.defaultRenderNodes.FillTri;
-
-            FillTri.run(
-                drawingContext,
-                calcMatrix,
-                submitter,
-                x0,
-                y0,
-                x1,
-                y1,
-                x2,
-                y2,
-                fillTintColor,
-                fillTintColor,
-                fillTintColor
-            );
+            FillPathWebGL(pipeline, calcMatrix, this, alpha, dx, dy);
         }
 
         if (this.isStroked) {
-            StrokePathWebGL(drawingContext, submitter, calcMatrix, gameObject, this, alpha, dx, dy);
+            StrokePathWebGL(pipeline, this, alpha, dx, dy);
         }
     }
 
     canvasRender(ctx, dx, dy) {
-        var x1 = this.x1 - dx;
-        var y1 = this.y1 - dy;
-        var x2 = this.x2 - dx;
-        var y2 = this.y2 - dy;
-        var x3 = this.x3 - dx;
-        var y3 = this.y3 - dy;
-
-        ctx.beginPath();
-
-        ctx.moveTo(x1, y1);
-        ctx.lineTo(x2, y2);
-        ctx.lineTo(x3, y3);
-
-        ctx.closePath();
-
         if (this.isFilled) {
-            FillStyleCanvas(ctx, this);
-            ctx.fill();
+            FillPathCanvas(ctx, this, dx, dy);
         }
 
         if (this.isStroked) {
-            LineStyleCanvas(ctx, this);
-            ctx.stroke();
+            StrokePathCanvas(ctx, this, dx, dy);
         }
     }
 }
+
+Object.assign(
+    Triangle.prototype,
+    StrokePathMethods,
+)
 
 export default Triangle;

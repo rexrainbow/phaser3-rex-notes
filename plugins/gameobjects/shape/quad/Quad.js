@@ -1,4 +1,4 @@
-import PolygnBase from '../roundrectangle/PolygnBase.js';
+import PolygnBase from '../utils/polygonbase/PolygnBase.js';
 import PointMethods from './methods/PointMethods.js';
 import QuadGeom from './methods/QuadGeom.js';
 import LineTo from '../../../geom/pathdata/LineTo.js';
@@ -33,6 +33,7 @@ class Quad extends PolygnBase {
 
         var geom = new QuadGeom();  // Configurate it later
         super(scene, 'rexQuadShape', geom);
+        this.init();
 
         geom.setTo(0, 0, width, height);
 
@@ -135,6 +136,8 @@ class Quad extends PolygnBase {
 
         pathData.push(pathData[0], pathData[1]); // Repeat first point to close curve
         this.pathIndexes = Earcut(pathData);
+
+        super.updateData();
 
         return this;
     }

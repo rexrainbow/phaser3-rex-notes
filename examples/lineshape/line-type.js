@@ -35,7 +35,10 @@ var CreateLine = function (scene, x, y, lineType, graphics) {
 
         headShape: 'diamond', headSize: 30, headColor: 0x0000ff,
         tailShape: 'triangle', tailColor: 0xff0000,
+
+        dashPattern: [10, 10]
     }).setPosition(x, y)
+
     graphics.lineStyle(2, 0xff0000, 0.5).strokeRectShape(line.getBounds());
 
     var points = line.getPoints();

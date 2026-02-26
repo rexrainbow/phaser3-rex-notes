@@ -1,4 +1,4 @@
-import PolygnBase from './PolygnBase.js';
+import PolygnBase from '../utils/polygonbase/PolygnBase.js';
 import RoundRectangleGeom from '../../../geom/roundrectangle/RoundRectangle.js';
 import IsArcCorner from '../utils/IsArcCorner.js';
 import LineTo from '../../../geom/pathdata/LineTo.js';
@@ -38,6 +38,7 @@ class RoundRectangle extends PolygnBase {
 
         var geom = new RoundRectangleGeom();  // Configurate it later
         super(scene, 'rexRoundRectangleShape', geom);
+        this.init();
 
         this.setShapeType(shapeType);
 
@@ -141,6 +142,9 @@ class RoundRectangle extends PolygnBase {
 
         pathData.push(pathData[0], pathData[1]); // Repeat first point to close curve
         this.pathIndexes = Earcut(pathData);
+
+        super.updateData();
+
         return this;
     }
 

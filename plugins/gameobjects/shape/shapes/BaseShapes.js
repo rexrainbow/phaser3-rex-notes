@@ -169,7 +169,6 @@ class BaseShapes extends Shape {
         this.isSizeChanged = false;
         this.dirty = false;
 
-
         return this;
     }
 

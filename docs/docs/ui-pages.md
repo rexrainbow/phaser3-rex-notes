@@ -9,6 +9,7 @@ A container with pages, only current page is visible.
 
 - [Pages](https://codepen.io/rexrainbow/pen/vPWzBa)
 - [Tabpage](https://codepen.io/rexrainbow/pen/RwQjVNy)
+- [Lazy-create-page](https://codepen.io/rexrainbow/pen/RNGNRWb)
 
 ## Usage
 
@@ -115,8 +116,8 @@ var pages = scene.rexUI.add.pages({
 - `space` : Pads spaces.
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
 - `swapMode` : Set to invisible or destroy swapped page.
-    - `0`, `'invisible'` : Set swapped page to invisible.
-    - `1`, `'destroy'` : Destroy swapped page.
+    - `0`, `'invisible'` : Set swapped page to invisible. Default behavior.
+    - `1`, `'destroy'` : Destroy swapped page. Use with the [`'createpage'` event](#events).
 - `fadeIn` : Fade-in duration of current page.
     - `0` : No fade-in effect. Default behavior.
 - `name` : Set name of this game object.
@@ -294,6 +295,14 @@ See [base sizer object](ui-basesizer.md), [container-lite](containerlite.md).
 
 ### Events
 
+- Lazy-create page instance. Triggered when page is not found, create page instance and add it to pages under this event
+    ```javascript
+    pages.on('createpage', function(key, pages){
+        // var page = ...
+        pages.addPage(page, key, align, padding, expand);
+        pages.getTopmostSizer().layout();
+    })
+    ```
 - Set page invisible, triggered when page is swapped out.
     ```javascript
     pages.on('pageinvisible', function(pageObject, key, pages) {

@@ -7,6 +7,7 @@ class Line extends BaseShapes {
         var lineType, pointRadius;
         var headShape, headSize, headColor, headAlpha, headStrokeWidth, headStrokeColor, headStrokeAlpha;
         var tailShape, tailSize, tailColor, tailAlpha, tailStrokeWidth, tailStrokeColor, tailStrokeAlpha;
+        var dashPattern, dashOffset;
         if (points !== undefined) {
             if (typeof (points) === 'number') {
                 lineType = alpha
@@ -45,6 +46,8 @@ class Line extends BaseShapes {
         tailStrokeColor = config.tailStrokeColor;
         tailStrokeAlpha = config.tailStrokeAlpha;
 
+        dashPattern = config.dashPattern;
+        dashOffset = config.dashOffset;
 
         if (points === undefined) { points = []; }
         if (lineWidth === undefined) { lineWidth = 2; }
@@ -83,6 +86,8 @@ class Line extends BaseShapes {
         this.setTailSize(tailSize);
         this.setTailFillStyle(tailColor, tailAlpha);
         this.setTailStrokeStyle(tailStrokeWidth, tailStrokeColor, tailStrokeAlpha);
+
+        this.setDashPattern(dashPattern, dashOffset);
 
         this.buildShapes();
 

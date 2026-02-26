@@ -97,5 +97,8 @@ export default {
         this.bounds = GetBounds.call(this, body.pathData, true);
         SetSizeFromBounds.call(this);
 
+        if (hasPath) {
+            body.setDashPattern(this.dashPattern, this.dashOffset);
+        }
     }
 }

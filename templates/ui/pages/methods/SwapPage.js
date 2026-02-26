@@ -16,6 +16,7 @@ var SwapPage = function (key, fadeInDuration) {
 
     if (key && !this.sizerChildren.hasOwnProperty(key)) {
         this.emit('createpage', key, this);
+        // Invoke 'this.addPage(child, key, align, padding, expand)' under this event
     }
 
     this._currentKey = key;

@@ -105,6 +105,12 @@ class Demo extends Phaser.Scene {
             },
             iteration: 0
         }, 0x008888);
+
+        // Round-rectangle
+        this.add.rexRoundRectangle(700, 460, 100, 100, 30)
+            .setFillStyle(0x008888, 0.75)
+            .setStrokeStyle(4, 0x33CCCC, 1)
+            .setDashPattern([10, 10])
     }
 
     update() { }

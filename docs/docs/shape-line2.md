@@ -114,6 +114,9 @@ var line = scene.add.rexLineShape(points, lineWidth, color, alpha, {
     tailStrokeWidth: undefined,
     tailStrokeColor: undefined,
     tailStrokeAlpha: 1,
+
+    dashPattern: undefined,
+    dashOffset: undefined,
 });
 ```
 
@@ -143,6 +146,9 @@ var line = scene.add.rexLineShape({
     tailStrokeWidth: undefined,
     tailStrokeColor: undefined,
     tailStrokeAlpha: 1,
+
+    dashPattern: undefined,
+    dashOffset: undefined,
 });
 ```
 
@@ -166,7 +172,18 @@ var line = scene.add.rexLineShape({
 - `headSize`, `tailSize` : Size of end point, default value is `lineWidth * 4`
 - `headColor`, `headAlpha`, `tailColor`, `tailAlpha` : Fill style of end point
 - `headStrokeWidth`, `headStrokeColor`, `headStrokeAlpha`, `tailStrokeWidth`, `tailStrokeColor`, `tailStrokeAlpha` : Stroke style of end point
-
+- `dashPattern` : Default style is solid line.
+    - An array 
+        - `[drawLength, skipLength]`, or 
+        - `[drawLengthA, skipLengthA, drawLengthB, skipLengthB, ...]`
+    - An plain object
+        ```javascript
+        {
+            segments: 10,
+            drawRatio: 0.5
+        }
+        ```
+- `dashOffset` : Offset of 1st dashed segment. Default value is `0`
 
 ### Custom class
 
@@ -269,6 +286,33 @@ var line = scene.add.rexLineShape({
         - `1` or `'spline'` : Spline line type.
         - `2` or `'polyline'`, `'poly'` : Polygon line type.
         - `3` or `'straightline'`, `'straight'` : Straight line type.
+
+### Dashed
+
+- Set dash pattern
+    ```javascript
+    line.setDashPattern(pattern, offset);
+    ```
+    - `pattern` :
+        - An array 
+            - `[drawLength, skipLength]`, or 
+            - `[drawLengthA, skipLengthA, drawLengthB, skipLengthB, ...]`
+        - An plain object
+            ```javascript
+            {
+                segments: 10,
+                drawRatio: 0.5
+            }
+            ```
+    - `offset` : Offset of 1st dashed segment. Default value is `0`
+- Clear dashed
+    ```javascript
+    line.setDashed(false);
+    ```
+    or
+    ```javascript
+    line.clearDashPattern();
+    ```
 
 ### Input event
 

@@ -1,8 +1,17 @@
 import Render from './render/Render.js';
+import StrokePathMethods from '../strokepath/StrokePathMethods.js';
 
 const Shape = Phaser.GameObjects.Shape;
 
 class PolygnBase extends Shape {
+    init() {
+        this.isDashed = false;
+        this.strokePathData = undefined;
+        this.strokePathMask = undefined;
+        this.dashPattern = undefined;
+        this.dashOffset = 0;
+    }
+
     get fillColor() {
         return this._fillColor;
     }
@@ -74,6 +83,8 @@ class PolygnBase extends Shape {
     }
 
     updateData() {
+        // Update this.pathData
+        this.buildStrokePath();
         return this;
     }
 
@@ -109,6 +120,7 @@ class PolygnBase extends Shape {
 
 Object.assign(
     PolygnBase.prototype,
+    StrokePathMethods,
     Render
 );
 
