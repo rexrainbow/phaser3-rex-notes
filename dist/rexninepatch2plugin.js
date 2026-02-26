@@ -1456,7 +1456,7 @@
         }
 
         // Override
-        webglRender(pipeline, calcMatrix, alpha, dx, dy, texture, textureUnit, roundPixels) {
+        webglRender(submitter, drawingContext, parentMatrix, calcMatrix, alpha, dx, dy) {
         }
         // Override
         canvasRender(ctx, dx, dy, roundPixels) {
@@ -1473,7 +1473,7 @@
     var tempTexturer = {};
     var tempTinter = {};
 
-    var WebglRender = function (Submitter, drawingContext, parentMatrix, calcMatrix, alpha, dx, dy) {
+    var WebglRender = function (submitter, drawingContext, parentMatrix, calcMatrix, alpha, dx, dy) {
         var frame = this.frame;
         if (!frame) {
             return;
@@ -1551,7 +1551,7 @@
         tempTinter.tintTopRight = tint;
         tempTinter.tintBottomRight = tint;
 
-        Submitter.run(
+        submitter.run(
             drawingContext,
             this.parent,
             parentMatrix,

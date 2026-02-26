@@ -1,5 +1,5 @@
 /*
-src: {
+shapeData: {
     strokeColor,
     strokeAlpha,
     pathData,

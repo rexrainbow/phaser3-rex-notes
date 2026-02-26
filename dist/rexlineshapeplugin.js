@@ -247,7 +247,6 @@
             this.isSizeChanged = false;
             this.dirty = false;
 
-
             return this;
         }
 
@@ -625,13 +624,13 @@
     }
     */
 
-    var Utils$1 = Phaser.Renderer.WebGL.Utils;
+    var Utils$2 = Phaser.Renderer.WebGL.Utils;
 
     var FillPathWebGL = function (drawingContext, submitter, calcMatrix, gameObject, shapeData, alpha, dx, dy) {
         // This is very similar to the FillPath RenderNode, but it already
         // has access to the Earcut indexes, so it doesn't need to calculate them.
 
-        var fillTintColor = Utils$1.getTintAppendFloatAlpha(shapeData.fillColor, shapeData.fillAlpha * alpha);
+        var fillTintColor = Utils$2.getTintAppendFloatAlpha(shapeData.fillColor, shapeData.fillAlpha * alpha);
 
         var path = shapeData.pathData;
         var pathIndexes = shapeData.pathIndexes;
@@ -672,53 +671,122 @@
         strokeAlpha,
         pathData,
         lineWidth,
-        closePath
+        closePath,
+        isDashed,
+        strokePathData,
+        strokePathMask
     }
     */
-    var Utils = Phaser.Renderer.WebGL.Utils;
+    var Utils$1 = Phaser.Renderer.WebGL.Utils;
 
-    var StrokePathWebGL = function (drawingContext, submitter, matrix, gameObject, shapeData, alpha, dx, dy) {
-        var strokeTintColor = Utils.getTintAppendFloatAlpha(shapeData.strokeColor, shapeData.strokeAlpha * alpha);
-
-        var path = shapeData.pathData;
-        var pathLength = path.length - 1;
-        var lineWidth = shapeData.lineWidth;
-        var openPath = !shapeData.closePath;
-
+    var StrokePathWebGL = function (drawingContext, submitter, calcMatrix, gameObject, shapeData, alpha, dx, dy) {
+        var strokeTintColor = Utils$1.getTintAppendFloatAlpha(shapeData.strokeColor, shapeData.strokeAlpha * alpha);
         var strokePath = gameObject.customRenderNodes.StrokePath || gameObject.defaultRenderNodes.StrokePath;
 
-        var pointPath = [];
+        var lineWidth = shapeData.lineWidth;
+        var openPath = !shapeData.closePath;
+        var isDashed = shapeData.isDashed && !!shapeData.strokePathData && !!shapeData.strokePathMask;
 
-        // Don't add the last point to open paths.
-        if (openPath) {
-            pathLength -= 2;
-        }
-
-        for (var i = 0; i < pathLength; i += 2) {
-            var x = path[i] - dx;
-            var y = path[i + 1] - dy;
-            if (i > 0) {
-                if (x === path[i - 2] && y === path[i - 1]) {
-                    // Duplicate point, skip it
-                    continue;
-                }
+        // Helper method
+        var RunStrokePath = function (pointPath, pathIsOpen) {
+            if (pointPath.length < 2) {
+                return;
             }
-            pointPath.push({
-                x: x,
-                y: y,
-                width: lineWidth
-            });
+
+            strokePath.run(
+                drawingContext,
+                submitter,
+                pointPath,
+                lineWidth,
+                pathIsOpen,
+                calcMatrix,
+                strokeTintColor,
+                strokeTintColor,
+                strokeTintColor,
+                strokeTintColor
+            );
+        };
+
+        if (!isDashed) {
+            // Default behavior
+            var path = shapeData.pathData;
+            if (!path || path.length < 4) {
+                return;
+            }
+            var pathLength = path.length - 1;
+
+            // Don't add the last point to open paths.
+            if (openPath) {
+                pathLength -= 2;
+            }
+
+            var pointPath = [];
+            for (var i = 0; i < pathLength; i += 2) {
+                pointPath.push({
+                    x: path[i] - dx,
+                    y: path[i + 1] - dy,
+                    width: lineWidth
+                });
+            }
+
+            RunStrokePath(pointPath, openPath);
+
+        } else {
+            // Dashed path data is a sequence of segment endpoints with a per-segment draw mask.
+            var dashedPath = shapeData.strokePathData;
+            if (!dashedPath || dashedPath.length < 4) {
+                return;
+            }
+            var strokePathMask = shapeData.strokePathMask;
+            var dashedPathLength = dashedPath.length - 1;
+
+            if (openPath) {
+                dashedPathLength -= 2;
+            }
+
+            var px1 = dashedPath[0] - dx;
+            var py1 = dashedPath[1] - dy;
+
+            var drawMaskIdx = 0;
+            var pointPath = [];
+
+            for (var j = 2; j < dashedPathLength; j += 2) {
+                var px2 = dashedPath[j] - dx;
+                var py2 = dashedPath[j + 1] - dy;
+
+                // Build continuous line segments (pointPath)
+                if (strokePathMask[drawMaskIdx]) {
+                    if (
+                        pointPath.length === 0 ||
+                        pointPath[pointPath.length - 1].x !== px1 ||
+                        pointPath[pointPath.length - 1].y !== py1
+                    ) {
+                        pointPath.push({
+                            x: px1,
+                            y: py1,
+                            width: lineWidth
+                        });
+                    }
+
+                    pointPath.push({
+                        x: px2,
+                        y: py2,
+                        width: lineWidth
+                    });
+                } else {
+                    RunStrokePath(pointPath, true);
+                    pointPath = [];
+
+                }
+
+                px1 = px2;
+                py1 = py2;
+                drawMaskIdx++;
+            }
+
+            RunStrokePath(pointPath, true);
         }
 
-        strokePath.run(
-            drawingContext,
-            submitter,
-            pointPath,
-            lineWidth,
-            openPath,
-            matrix,
-            strokeTintColor, strokeTintColor, strokeTintColor, strokeTintColor
-        );
     };
 
     var FillStyleCanvas = function (ctx, src, altColor, altAlpha)
@@ -731,6 +799,45 @@
         var blue = (fillColor & 0xFF);
 
         ctx.fillStyle = 'rgba(' + red + ',' + green + ',' + blue + ',' + fillAlpha + ')';
+    };
+
+    /*
+    src: {
+        fillColor,
+        fillAlpha,
+        pathData,
+        closePath
+    }
+    */
+    var FillPathCanvas = function (ctx, src, dx, dy) {
+        var path = src.pathData;
+        if (!path || (path.length < 4)) {
+            return;
+        }
+
+        var pathLength = path.length - 1;
+        var px1 = path[0] - dx;
+        var py1 = path[1] - dy;
+
+        ctx.beginPath();
+        ctx.moveTo(px1, py1);
+
+        if (!src.closePath) {
+            pathLength -= 2;
+        }
+
+        for (var i = 2; i < pathLength; i += 2) {
+            var px2 = path[i] - dx;
+            var py2 = path[i + 1] - dy;
+            ctx.lineTo(px2, py2);
+        }
+
+        if (src.closePath) {
+            ctx.closePath();
+        }
+
+        FillStyleCanvas(ctx, src);
+        ctx.fill();
     };
 
     var LineStyleCanvas = function (ctx, src, altColor, altAlpha)
@@ -746,21 +853,389 @@
         ctx.lineWidth = src.lineWidth;
     };
 
-    const Earcut = Phaser.Geom.Polygon.Earcut;
+    /*
+    src: {
+        strokeColor,
+        strokeAlpha,
+        pathData,
+        lineWidth,
+        closePath,
+        isDashed,
+        strokePathData,
+        strokePathMask
+    }
+    */
+    var StrokePathCanvas = function (ctx, src, dx, dy) {
+        var isDashed = src.isDashed && !!src.strokePathData;
+        var path = (!isDashed) ? src.pathData : src.strokePathData;
+        if (!path || (path.length < 4)) {
+            return;
+        }
+
+        var pathLength = path.length - 1;
+        var px1 = path[0] - dx;
+        var py1 = path[1] - dy;
+
+        LineStyleCanvas(ctx, src);
+        ctx.beginPath();
+
+        if (!src.closePath) {
+            pathLength -= 2;
+        }
+
+        if (!isDashed) {
+            // Default behavior
+            ctx.moveTo(px1, py1);
+            for (var i = 2; i < pathLength; i += 2) {
+                var px2 = path[i] - dx;
+                var py2 = path[i + 1] - dy;
+                ctx.lineTo(px2, py2);
+            }
+
+            if (src.closePath) {
+                ctx.closePath();
+            }
+
+        } else {
+            // Draw dashed line
+            var strokePathMask = src.strokePathMask;
+            var drawMaskIdx = 0;
+
+            for (var i = 2; i < pathLength; i += 2) {
+                var px2 = path[i] - dx;
+                var py2 = path[i + 1] - dy;
+
+                if (strokePathMask[drawMaskIdx]) {
+                    ctx.moveTo(px1, py1);
+                    ctx.lineTo(px2, py2);
+                }
+
+                px1 = px2;
+                py1 = py2;
+                drawMaskIdx++;
+            }
+        }
+
+        ctx.stroke();
+    };
+
+    const EPSILON = 1e-6;
+    const DEFAULT_SEGMENT_COUNT = 10;
+    const DEFAULT_DRAW_RATIO = 0.5;
+
+    var NormalizeDashArray = function (dashPattern) {
+        if (!Array.isArray(dashPattern)) {
+            return null;
+        }
+
+        var normalized = [];
+        for (var i = 0, cnt = dashPattern.length; i < cnt; i++) {
+            var d = Number(dashPattern[i]);
+            if (isFinite(d) && (d > 0)) {
+                normalized.push(d);
+            }
+        }
+
+        return (normalized.length > 0) ? normalized : null;
+    };
+
+    var BuildAutoDashPattern = function (dashPattern, totalPathLength) {
+        var {
+            segments = DEFAULT_SEGMENT_COUNT,
+            drawRatio = DEFAULT_DRAW_RATIO
+        } = dashPattern;
+
+        segments = Math.round(segments);
+        if (!isFinite(segments) || (segments <= 0)) {
+            return null;
+        }
+
+        if (!(totalPathLength > EPSILON)) {
+            return null;
+        }
+
+        var segmentLength = totalPathLength / segments;
+        if (!(segmentLength > EPSILON)) {
+            return null;
+        }
+
+        drawRatio = Math.max(0, Math.min(1, drawRatio));
+
+        if (drawRatio >= (1 - EPSILON)) {
+            // 100% draw ratio becomes a solid stroke.
+            return null;
+        }
+
+        var drawLength = segmentLength * drawRatio;
+        if (drawLength <= EPSILON) {
+            drawLength = EPSILON;
+        }
+
+        var gapLength = segmentLength - drawLength;
+        if (gapLength <= EPSILON) {
+            return null;
+        }
+
+        return [drawLength, gapLength];
+    };
+
+    var NormalizeDashPattern = function (dashPattern, totalPathLength) {
+        return NormalizeDashArray(dashPattern) || BuildAutoDashPattern(dashPattern, totalPathLength);
+    };
+
+    var WrapOffset = function (offset, totalLength) {
+        if (!isFinite(offset)) {
+            offset = 0;
+        }
+
+        offset = offset % totalLength;
+        if (offset < 0) {
+            offset += totalLength;
+        }
+
+        return offset;
+    };
+
+    var ForEachStrokeSegment = function (pathData, closePath, callback) {
+        if ((!pathData) || (pathData.length < 4)) {
+            return;
+        }
+
+        var pathLength = pathData.length - 1;
+        if (!closePath) {
+            pathLength -= 2;
+        }
+
+        if (pathLength < 2) {
+            return;
+        }
+
+        var px1 = pathData[0];
+        var py1 = pathData[1];
+
+        for (var i = 2; i < pathLength; i += 2) {
+            var px2 = pathData[i];
+            var py2 = pathData[i + 1];
+
+            callback(px1, py1, px2, py2);
+
+            px1 = px2;
+            py1 = py2;
+        }
+    };
+
+    var GetTotalPathLength = function (pathData, closePath) {
+        var totalLength = 0;
+        ForEachStrokeSegment(pathData, closePath, function (x0, y0, x1, y1) {
+            var dx = x1 - x0;
+            var dy = y1 - y0;
+            totalLength += Math.sqrt((dx * dx) + (dy * dy));
+        });
+        return totalLength;
+    };
+
+    var BuildDashStroke = function (pathData, config, out) {
+        if (config === undefined) {
+            config = {};
+        }
+        if (out === undefined) {
+            out = {};
+        }
+
+        var {
+            closePath = false,
+            dashPattern,
+            dashOffset = 0,
+        } = config;
+
+        var totalPathLength = GetTotalPathLength(pathData, closePath);
+        dashPattern = NormalizeDashPattern(dashPattern, totalPathLength);
+
+        // No valid dash pattern -> keep original stroke path, disable mask.
+        if (dashPattern === null) {
+            return null;
+        }
+
+        var strokePathData = [];
+        var strokePathMask = [];
+
+        var totalPatternLength = 0;
+        for (var i = 0, cnt = dashPattern.length; i < cnt; i++) {
+            totalPatternLength += dashPattern[i];
+        }
+
+        if (totalPatternLength <= EPSILON) {
+            out.strokePathData = (pathData) ? pathData.slice() : [];
+            out.strokePathMask = undefined;
+            return out;
+        }
+
+        var patternIndex = 0;
+        var draw = true;  // Pattern starts from a draw segment.
+        var patternRemain = dashPattern[patternIndex];
+
+        var AdvancePattern = function () {
+            patternIndex = (patternIndex + 1) % dashPattern.length;
+            draw = !draw;
+            patternRemain = dashPattern[patternIndex];
+        };
+
+        var offset = WrapOffset(dashOffset, totalPatternLength);
+        while (offset > EPSILON) {
+            if (offset < (patternRemain - EPSILON)) {
+                patternRemain -= offset;
+                offset = 0;
+            } else {
+                offset -= patternRemain;
+                AdvancePattern();
+            }
+        }
+
+        var PushSegment = function (x0, y0, x1, y1, drawState) {
+            if (strokePathData.length === 0) {
+                strokePathData.push(x0, y0);
+            } else {
+                var lastX = strokePathData[strokePathData.length - 2];
+                var lastY = strokePathData[strokePathData.length - 1];
+                if ((lastX !== x0) || (lastY !== y0)) {
+                    strokePathData.push(x0, y0);
+                }
+            }
+
+            strokePathData.push(x1, y1);
+            strokePathMask.push(drawState ? 1 : 0);
+        };
+
+        ForEachStrokeSegment(pathData, closePath, function (x0, y0, x1, y1) {
+            var dx = x1 - x0;
+            var dy = y1 - y0;
+            var segLength = Math.sqrt((dx * dx) + (dy * dy));
+
+            if (segLength <= EPSILON) {
+                return;
+            }
+
+            var traveled = 0;
+            while (traveled < (segLength - EPSILON)) {
+                var step = Math.min(patternRemain, segLength - traveled);
+                if (step <= EPSILON) {
+                    AdvancePattern();
+                    continue;
+                }
+
+                var t0 = traveled / segLength;
+                var t1 = (traveled + step) / segLength;
+
+                var sx = x0 + (dx * t0);
+                var sy = y0 + (dy * t0);
+                var ex = x0 + (dx * t1);
+                var ey = y0 + (dy * t1);
+
+                PushSegment(sx, sy, ex, ey, draw);
+
+                traveled += step;
+                patternRemain -= step;
+                if (patternRemain <= EPSILON) {
+                    AdvancePattern();
+                }
+            }
+        });
+
+        // Keep the existing open-path convention in StrokePathWebGL:
+        // an extra tail point is ignored by the renderer when closePath=false.
+        if (!closePath && (strokePathData.length >= 2)) {
+            strokePathData.push(
+                strokePathData[strokePathData.length - 2],
+                strokePathData[strokePathData.length - 1]
+            );
+        }
+
+        out.strokePathData = strokePathData;
+        out.strokePathMask = strokePathMask;
+
+        return out;
+    };
+
+    var SetDashPattern = function (dashPattern, dashOffset) {
+        // dashPattern: [draw, gap] , or {segments, drawRatio}
+        this.dashPattern = dashPattern;
+        this.dashOffset = dashOffset || 0;
+        this.isDashed = !!dashPattern;
+        return this;
+    };
+
+    var ClearDashPattern = function () {
+        this.setDashPattern();
+        return this;
+    };
+
+    var SetDashed = function (enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+
+        this.isDashed = enable;
+        return this;
+    };
+
+    var BuildStrokePath = function () {
+        if (this.isDashed) {
+            var result = BuildDashStroke(this.pathData, {
+                closePath: this.closePath,
+                dashPattern: this.dashPattern,
+                dashOffset: this.dashOffset
+            }, this);
+
+            if (result) {
+                this.strokePathData = result.strokePathData;
+                this.strokePathMask = result.strokePathMask;
+            } else {
+                this.isDashed = false;
+            }
+
+        }
+
+        return this;
+    };
+
+    var StrokePathConfigMethods = {
+        setDashPattern: SetDashPattern,
+        clearDashPattern: ClearDashPattern,
+        setDashed: SetDashed
+    };
+
+    var Methods$1 = {
+        buildStrokePath: BuildStrokePath
+    };
+    Object.assign(
+        Methods$1,
+        StrokePathConfigMethods,
+    );
+
+    const Earcut$1 = Phaser.Geom.Polygon.Earcut;
 
     class PathBase extends BaseGeom {
         constructor() {
             super();
 
             this.pathData = [];
+
+            this.isDashed = false;
+            this.strokePathData = undefined;
+            this.strokePathMask = undefined;
+            this.dashPattern = undefined;
+            this.dashOffset = 0;
+
             this.pathIndexes = [];
             this.closePath = false;
         }
 
         updateData() {
-            this.pathIndexes = Earcut(this.pathData);
+            this.pathIndexes = Earcut$1(this.pathData);
 
             super.updateData();
+
+            this.buildStrokePath();
             return this;
         }
 
@@ -775,42 +1250,20 @@
         }
 
         canvasRender(ctx, dx, dy) {
-            var path = this.pathData;
-            var pathLength = path.length - 1;
-
-            var px1 = path[0] - dx;
-            var py1 = path[1] - dy;
-
-            ctx.beginPath();
-
-            ctx.moveTo(px1, py1);
-
-            if (!this.closePath) {
-                pathLength -= 2;
-            }
-
-            for (var i = 2; i < pathLength; i += 2) {
-                var px2 = path[i] - dx;
-                var py2 = path[i + 1] - dy;
-                ctx.lineTo(px2, py2);
-            }
-
-            if (this.closePath) {
-                ctx.closePath();
-            }
-
-
             if (this.isFilled) {
-                FillStyleCanvas(ctx, this);
-                ctx.fill();
+                FillPathCanvas(ctx, this, dx, dy);
             }
 
             if (this.isStroked) {
-                LineStyleCanvas(ctx, this);
-                ctx.stroke();
+                StrokePathCanvas(ctx, this, dx, dy);
             }
         }
     }
+
+    Object.assign(
+        PathBase.prototype,
+        Methods$1,
+    );
 
     var LineTo = function (x, y, pathData) {
         var cnt = pathData.length;
@@ -1544,11 +1997,305 @@
         }
     }
 
-    Phaser.Renderer.WebGL.Utils;
+    var Utils = Phaser.Renderer.WebGL.Utils;
+
+    let Rectangle$2 = class Rectangle extends BaseGeom {
+        constructor(x, y, width, height) {
+            if (x === undefined) { x = 0; }
+            if (y === undefined) { y = 0; }
+            if (width === undefined) { width = 0; }
+            if (height === undefined) { height = width; }
+
+            super();
+
+            this.pathData = [];
+
+            this.isDashed = false;
+            this.strokePathData = undefined;
+            this.strokePathMask = undefined;
+            this.dashPattern = undefined;
+            this.dashOffset = 0;
+
+            this.closePath = true;
+
+            this.setTopLeftPosition(x, y);
+            this.setSize(width, height);
+        }
+
+        get x() {
+            return this._x;
+        }
+
+        set x(value) {
+            this.dirty = this.dirty || (this._x !== value);
+            this._x = value;
+        }
+
+        get y() {
+            return this._y;
+        }
+
+        set y(value) {
+            this.dirty = this.dirty || (this._y !== value);
+            this._y = value;
+        }
+
+        setTopLeftPosition(x, y) {
+            this.x = x;
+            this.y = y;
+            return this;
+        }
+
+        get width() {
+            return this._width;
+        }
+
+        set width(value) {
+            this.dirty = this.dirty || (this._width !== value);
+            this._width = value;
+        }
+
+        get height() {
+            return this._height;
+        }
+
+        set height(value) {
+            this.dirty = this.dirty || (this._height !== value);
+            this._height = value;
+        }
+
+        setSize(width, height) {
+            this.width = width;
+            this.height = height;
+            return this;
+        }
+
+        get centerX() {
+            return this.x + (this.width / 2);
+        }
+
+        set centerX(value) {
+            this.x = value - (this.width / 2);
+        }
+
+        get centerY() {
+            return this.y + (this.height / 2);
+        }
+
+        set centerY(value) {
+            this.y = value - (this.height / 2);
+        }
+
+        setCenterPosition(x, y) {
+            this.centerX = x;
+            this.centerY = y;
+            return this;
+        }
+
+        updateData() {
+            this.pathData.length = 0;
+            var x0 = this.x,
+                x1 = x0 + this.width,
+                y0 = this.y,
+                y1 = y0 + this.height;
+            this.pathData.push(x0, y0);
+            this.pathData.push(x1, y0);
+            this.pathData.push(x1, y1);
+            this.pathData.push(x0, y1);
+            this.pathData.push(x0, y0);
+
+            super.updateData();
+
+            this.buildStrokePath();
+            return this;
+        }
+
+        webglRender(drawingContext, submitter, calcMatrix, gameObject, alpha, dx, dy) {
+            if (this.isFilled) {
+                var fillTintColor = Utils.getTintAppendFloatAlpha(this.fillColor, this.fillAlpha * alpha);
+
+                var FillRect = gameObject.customRenderNodes.FillRect || gameObject.defaultRenderNodes.FillRect;
+
+                FillRect.run(
+                    drawingContext,
+                    calcMatrix,
+                    submitter,
+                    -dx + this.x,
+                    -dy + this.y,
+                    this.width,
+                    this.height,
+                    fillTintColor,
+                    fillTintColor,
+                    fillTintColor,
+                    fillTintColor
+                );
+            }
+
+            if (this.isStroked) {
+                StrokePathWebGL(drawingContext, submitter, calcMatrix, gameObject, this, alpha, dx, dy);
+            }
+        }
+
+        canvasRender(ctx, dx, dy) {
+            if (this.isFilled) {
+                FillStyleCanvas(ctx, this);
+                ctx.fillRect(-dx, -dy, this.width, this.height);
+            }
+
+            if (this.isStroked) {
+                StrokePathCanvas(ctx, this, dx, dy);
+            }
+        }
+    };
+
+    Object.assign(
+        Rectangle$2.prototype,
+        Methods$1,
+    );
 
     Phaser.Utils.Objects.GetValue;
 
-    Phaser.Renderer.WebGL.Utils;
+    const Earcut = Phaser.Geom.Polygon.Earcut;
+
+    class Triangle extends BaseGeom {
+        constructor(x0, y0, x1, y1, x2, y2) {
+            if (x0 === undefined) { x0 = 0; }
+            if (y0 === undefined) { y0 = 0; }
+            if (x1 === undefined) { x1 = 0; }
+            if (y1 === undefined) { y1 = 0; }
+            if (x2 === undefined) { x2 = 0; }
+            if (y2 === undefined) { y2 = 0; }
+
+            super();
+
+            this.pathData = [];
+
+            this.isDashed = false;
+            this.strokePathData = undefined;
+            this.strokePathMask = undefined;
+            this.dashPattern = undefined;
+            this.dashOffset = 0;
+
+            this.pathIndexes = [];
+            this.closePath = true;
+
+            this.setP0(x0, y0);
+            this.setP1(x1, y1);
+            this.setP2(x2, y2);
+        }
+
+        get x0() {
+            return this._x0;
+        }
+
+        set x0(value) {
+            this.dirty = this.dirty || (this._x0 !== value);
+            this._x0 = value;
+        }
+
+        get y0() {
+            return this._y0;
+        }
+
+        set y0(value) {
+            this.dirty = this.dirty || (this._y0 !== value);
+            this._y0 = value;
+        }
+
+        setP0(x, y) {
+            this.x0 = x;
+            this.y0 = y;
+            return this;
+        }
+
+        get x1() {
+            return this._x1;
+        }
+
+        set x1(value) {
+            this.dirty = this.dirty || (this._x1 !== value);
+            this._x1 = value;
+        }
+
+        get y1() {
+            return this._y1;
+        }
+
+        set y1(value) {
+            this.dirty = this.dirty || (this._y1 !== value);
+            this._y1 = value;
+        }
+
+        setP1(x, y) {
+            this.x1 = x;
+            this.y1 = y;
+            return this;
+        }
+
+        get x2() {
+            return this._x2;
+        }
+
+        set x2(value) {
+            this.dirty = this.dirty || (this._x2 !== value);
+            this._x2 = value;
+        }
+
+        get y2() {
+            return this._y2;
+        }
+
+        set y2(value) {
+            this.dirty = this.dirty || (this._y2 !== value);
+            this._y2 = value;
+        }
+
+        setP2(x, y) {
+            this.dirty = this.dirty || (this.x2 !== x) || (this.y2 !== y);
+            this.x2 = x;
+            this.y2 = y;
+            return this;
+        }
+
+        updateData() {
+            this.pathData.length = 0;
+            this.pathData.push(this.x0, this.y0);
+            this.pathData.push(this.x1, this.y1);
+            this.pathData.push(this.x2, this.y2);
+            this.pathData.push(this.x0, this.y0);
+            this.pathIndexes = Earcut(this.pathData);
+
+            super.updateData();
+
+            this.buildStrokePath();
+            return this;
+        }
+
+        webglRender(drawingContext, submitter, calcMatrix, gameObject, alpha, dx, dy) {
+            if (this.isFilled) {
+                FillPathWebGL(drawingContext, submitter, calcMatrix, gameObject, this, alpha, dx, dy);
+            }
+
+            if (this.isStroked) {
+                StrokePathWebGL(drawingContext, submitter, calcMatrix, gameObject, this, alpha, dx, dy);
+            }
+        }
+
+        canvasRender(ctx, dx, dy) {
+            if (this.isFilled) {
+                FillPathCanvas(ctx, this, dx, dy);
+            }
+
+            if (this.isStroked) {
+                StrokePathCanvas(ctx, this, dx, dy);
+            }
+        }
+    }
+
+    Object.assign(
+        Triangle.prototype,
+        Methods$1,
+    );
 
     var DrawQuadraticBezierCurve = function (line) {
         var points = this.points;
@@ -1851,6 +2598,9 @@
             this.bounds = GetBounds.call(this, body.pathData, true);
             SetSizeFromBounds.call(this);
 
+            if (hasPath) {
+                body.setDashPattern(this.dashPattern, this.dashOffset);
+            }
         }
     };
 
@@ -1921,7 +2671,8 @@
         Methods,
         EndPointsMethods,
         ShapesUpdateMethods,
-        SetInteractiveMethods
+        SetInteractiveMethods,
+        StrokePathConfigMethods
     );
 
     class Line extends BaseShapes {
@@ -1929,6 +2680,7 @@
             var lineType, pointRadius;
             var headShape, headSize, headColor, headAlpha, headStrokeWidth, headStrokeColor, headStrokeAlpha;
             var tailShape, tailSize, tailColor, tailAlpha, tailStrokeWidth, tailStrokeColor, tailStrokeAlpha;
+            var dashPattern, dashOffset;
             if (points !== undefined) {
                 if (typeof (points) === 'number') {
                     lineType = alpha;
@@ -1967,6 +2719,8 @@
             tailStrokeColor = config.tailStrokeColor;
             tailStrokeAlpha = config.tailStrokeAlpha;
 
+            dashPattern = config.dashPattern;
+            dashOffset = config.dashOffset;
 
             if (points === undefined) { points = []; }
             if (lineWidth === undefined) { lineWidth = 2; }
@@ -2003,6 +2757,8 @@
             this.setTailSize(tailSize);
             this.setTailFillStyle(tailColor, tailAlpha);
             this.setTailStrokeStyle(tailStrokeWidth, tailStrokeColor, tailStrokeAlpha);
+
+            this.setDashPattern(dashPattern, dashOffset);
 
             this.buildShapes();
 
