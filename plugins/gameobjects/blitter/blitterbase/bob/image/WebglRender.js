@@ -8,7 +8,7 @@ var tempTransformer = {
 var tempTexturer = {};
 var tempTinter = {};
 
-var WebglRender = function (Submitter, drawingContext, parentMatrix, calcMatrix, alpha, dx, dy) {
+var WebglRender = function (submitter, drawingContext, parentMatrix, calcMatrix, alpha, dx, dy) {
     var frame = this.frame;
     if (!frame) {
         return;
@@ -88,7 +88,7 @@ var WebglRender = function (Submitter, drawingContext, parentMatrix, calcMatrix,
     tempTinter.tintTopRight = tint;
     tempTinter.tintBottomRight = tint;
 
-    Submitter.run(
+    submitter.run(
         drawingContext,
         this.parent,
         parentMatrix,
