@@ -1600,7 +1600,7 @@ container.enableLayer();
 
 ### Shader effects
 
-Apply post-fx pipeline on [layer of sizer](ui-basesizer.md#layer).
+Apply post-fx pipeline on [layer of sizer](ui-basesizer.md#renderer-layer).
 
 ### Snapshot
 

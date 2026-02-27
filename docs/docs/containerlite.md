@@ -614,7 +614,7 @@ container.enableLayer();
 
 ### Shader effects
 
-Apply [filter effect](shader-builtin.md) on [layer of containerLite](containerlite.md#render-layer).
+Apply [filter effect](shader-builtin.md) on [layer of containerLite](containerlite.md#renderer-layer).
 
 ### Snapshot
 
