@@ -106,11 +106,21 @@ class Demo extends Phaser.Scene {
             iteration: 0
         }, 0x008888);
 
-        // Round-rectangle
-        this.add.rexRoundRectangle(700, 460, 100, 100, 30)
-            .setFillStyle(0x008888, 0.75)
-            .setStrokeStyle(4, 0x33CCCC, 1)
-            .setDashPattern([10, 10])
+        // Dash stroke style
+        this.add.rexRoundRectangle({
+            x: 700, y: 460,
+            width: 100, height: 100, radius: 30,
+            color: 0x008888, alpha: 0.75,
+            strokeColor: 0x33CCCC, strokeAlpha: 1, strokeWidth: 4,
+            dashPattern: [20, 20],
+        })
+            .setInteractive()
+            .on('pointerout', function () {
+                this.setDashed(true);
+            })
+            .on('pointerover', function () {
+                this.setDashed(false);
+            })
     }
 
     update() { }

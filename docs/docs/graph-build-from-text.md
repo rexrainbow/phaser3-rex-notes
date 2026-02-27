@@ -93,6 +93,7 @@ scene.rexGraph.buildGraphFromText(graph, {
     onCreateEdgeGameObject(scene, id, parameters) {
         return gameObject;
     },
+    dashPattern: [5, 5],
 
     text: text
 });
@@ -115,7 +116,8 @@ scene.rexGraph.buildGraphFromText(graph, {
             width = 2,
             type = 'poly',
             head = 'none',
-            tail = 'none,'
+            tail = 'none',
+            $dashed = false,
         } = parameters;
         var gameObject = new Line(scene, {
             color: color,
@@ -123,6 +125,7 @@ scene.rexGraph.buildGraphFromText(graph, {
             lineType: type,
             headShape: head,
             tailShape: tail,
+            dashPattern: ($dashed) ? [5, 5] : undefined
         })
         scene.add.existing(gameObject);
         return gameObject;
@@ -130,6 +133,7 @@ scene.rexGraph.buildGraphFromText(graph, {
     ```
     - `gameObject` : [Line-shape](shape-line2.md)
     - `parameters` : See [Syntax of text](#syntax-of-text)
+- `dashPattern` : [Dash pattern](shape-line2.md#dashed) of line object. Default value is `[5, 5]`
 - `text` : See [Syntax of text](#syntax-of-text)
 
 
@@ -146,7 +150,7 @@ NODE [
 A [label=A, elk.layered.priority=1]
 B [label=B]
 
-A -> B -> C [color=0xFF0000]
+A -.> B -.> C [color=0xFF0000]
 A -> * -> D
 
 E -> *1 -> F
@@ -262,6 +266,18 @@ graph.addEdge(graph.createInvisibleEdge());
 
 See also [ELK layout](graph-elk-layout.md#layout-alignment-assistant)
 
+#### Dashed edge
+
+```
+<nodeA> -.> <nodeB>
+```
+
+- Render a dashed edge.
+- Works with edge chains too. Example:
+    ```text
+    A -.> B -.> C
+    ```
+
 #### Attribute Blocks
 
 ```
@@ -321,6 +337,7 @@ A -> B
 | Edge attributes | `A -> B [key=value]`   | Attributes applied to all edges in the chain  |
 | Dummy node      | `*` or `*name`         | Invisible node for layout                     |
 | Invisible edge  | `A *> B`               | Hidden edge for layout                        |
+| Dashed edge     | `A -.> B`              | Dashed edge                                   |
 | Comment         | `#`, `//`, `/* ... */` | Ignored                                       |
 | Statement end   | `;` or newline         | Both accepted                                 |
 
@@ -339,9 +356,10 @@ B [label="Middle"]
 C [label="End"]
 
 # Define edges
-A -> B -> C [color=0xFF0000]   # Colored chain
+A -.> B -.> C [color=0xFF0000] # Colored chain with dashed edge
 A -> * -> D                    # Dummy node between A and D
 E -> *1 -> F                   # Named dummy node used twice
 G -> *1                        # Reuse *1 again
 H *> I                         # Invisible edge
+
 ```

@@ -114,6 +114,16 @@ declare namespace RoundRectangle {
          * Shape type.
          */
         shape?: 0 | 'rectangle' | 1 | 'circle',
+
+        /**
+         * Dash pattern definition.
+         */
+        dashPattern?: PolygnBase.DashPatternType,
+
+        /**
+         * Dash offset along the path.
+         */
+        dashOffset?: number,
     }
 
 }

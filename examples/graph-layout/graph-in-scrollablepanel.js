@@ -22,9 +22,9 @@ EDGE [color=0x008800,
 
 A [color=0xFFFF00]
 
-A -> B -> C -> H -> I
+A -.> B -.> C -.> H -> I
 A -> D -> E -> H -> I
-A -> F -> * -> G -> I
+A -> F -.> * -.> G -> I
 J -> K -> L -> * -> I
 * *> M -> * -> * -> I
 O -> P -> Q -> R -> S
@@ -66,9 +66,8 @@ var BuildGraph = async function (panel, text) {
     container.setVisible(false);
 
     scene.rexGraph.buildGraphFromText(graph, {
-        onCreateNodeGameObject(scene, id, parameters) {
-            return CreateNode(scene, id, parameters);
-        },
+        onCreateNodeGameObject: CreateNode,
+        // dashPattern: [10, 10],
 
         text: text
     })

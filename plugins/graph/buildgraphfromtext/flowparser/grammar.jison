@@ -23,6 +23,7 @@
 "="                                             return '='
 ";"                                             return ';'
 
+"-.>"                                           return 'DASHED_ARROW'
 "->"                                            return '->'
 "*>"                                            return 'INVIS_ARROW'
 \*[A-Za-z0-9_]+                                 return 'STAR_NAMED'
@@ -332,9 +333,13 @@ edge_statement
         var chainBase = merged(currentDefaults.edge, chainParams);
         for (var i = 0; i < $1.edgePairs.length; i += 1) {
           var pair = $1.edgePairs[i];
-          var perPair = pair.$invisible
-            ? merged(chainBase, { render: false, $invisible: true, 'elk.edge.thickness': 0 })
-            : chainBase;
+          var perPair = chainBase;
+          if (pair.$dashed) {
+            perPair = merged(perPair, { $dashed: true });
+          }
+          if (pair.$invisible) {
+            perPair = merged(perPair, { render: false, $invisible: true, 'elk.edge.thickness': 0 });
+          }
           addEdge(pair.sourceId, pair.targetId, perPair);
         }
       }
@@ -359,6 +364,15 @@ edge_chain
           edgePairs: [{ sourceId: $1.id, targetId: $3.id, $invisible: true }]
         };
       }
+  | node_ref DASHED_ARROW node_ref
+      {
+        ensureNode($1.id, $1.parameters);
+        ensureNode($3.id, $3.parameters);
+        $$ = {
+          lastNodeId: $3.id,
+          edgePairs: [{ sourceId: $1.id, targetId: $3.id, $dashed: true }]
+        };
+      }
   | edge_chain '->' node_ref
       {
         ensureNode($3.id, $3.parameters);
@@ -369,6 +383,12 @@ edge_chain
       {
         ensureNode($3.id, $3.parameters);
         $1.edgePairs.push({ sourceId: $1.lastNodeId, targetId: $3.id, $invisible: true });
+        $$ = { lastNodeId: $3.id, edgePairs: $1.edgePairs };
+      }
+  | edge_chain DASHED_ARROW node_ref
+      {
+        ensureNode($3.id, $3.parameters);
+        $1.edgePairs.push({ sourceId: $1.lastNodeId, targetId: $3.id, $dashed: true });
         $$ = { lastNodeId: $3.id, edgePairs: $1.edgePairs };
       }
   ;

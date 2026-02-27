@@ -92,7 +92,10 @@ var rect = scene.add.rexRoundRectangle({
 
     strokeColor: undefined,
     strokeAlpha: undefined,
-    strokeWidth: 2
+    strokeWidth: 2,
+
+    dashPattern: undefined,
+    dashOffset: undefined,
 });
 ```
 
@@ -159,7 +162,18 @@ var rect = scene.add.rexRoundRectangle({
                 - `< 0` : Concave round corner
             - `iteration` : Number of interpolation points in each round corner. Default value is `4`.
                 - `0` : Draw a straight line instead of arc.
-
+- `dashPattern` : Default style is solid line.
+    - An array 
+        - `[drawLength, skipLength]`, or 
+        - `[drawLengthA, skipLengthA, drawLengthB, skipLengthB, ...]`
+    - An plain object
+        ```javascript
+        {
+            segments: 10,
+            drawRatio: 0.5
+        }
+        ```
+- `dashOffset` : Offset of 1st dashed segment. Default value is `0`
 
 #### Deform
 

@@ -14429,6 +14429,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#dashed-edge" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dashed edge
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#attribute-blocks" class="md-nav__link">
     <span class="md-ellipsis">
       Attribute Blocks
@@ -15307,6 +15316,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#dashed-edge" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dashed edge
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#attribute-blocks" class="md-nav__link">
     <span class="md-ellipsis">
       Attribute Blocks
@@ -15460,6 +15478,7 @@
 <span class="w">    </span><span class="nx">onCreateEdgeGameObject</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="nx">id</span><span class="p">,</span><span class="w"> </span><span class="nx">parameters</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">gameObject</span><span class="p">;</span>
 <span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nx">dashPattern</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="mf">5</span><span class="p">,</span><span class="w"> </span><span class="mf">5</span><span class="p">],</span>
 
 <span class="w">    </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="nx">text</span>
 <span class="p">});</span>
@@ -15482,7 +15501,8 @@
 <span class="w">        </span><span class="nx">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;poly&#39;</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">head</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;none&#39;</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">tail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;none,&#39;</span>
+<span class="w">        </span><span class="nx">tail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;none&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">$dashed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 <span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">parameters</span><span class="p">;</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">gameObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Line</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="nx">color</span><span class="p">,</span>
@@ -15490,6 +15510,7 @@
 <span class="w">        </span><span class="nx">lineType</span><span class="o">:</span><span class="w"> </span><span class="nx">type</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">headShape</span><span class="o">:</span><span class="w"> </span><span class="nx">head</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">tailShape</span><span class="o">:</span><span class="w"> </span><span class="nx">tail</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">dashPattern</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">$dashed</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="p">[</span><span class="mf">5</span><span class="p">,</span><span class="w"> </span><span class="mf">5</span><span class="p">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span>
 <span class="w">    </span><span class="p">})</span>
 <span class="w">    </span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">gameObject</span><span class="p">;</span>
@@ -15499,6 +15520,7 @@
 <li><code>parameters</code> : See <a href="#syntax-of-text">Syntax of text</a></li>
 </ul>
 </li>
+<li><code>dashPattern</code> : <a href="../shape-line2/#dashed">Dash pattern</a> of line object. Default value is <code>[5, 5]</code></li>
 <li><code>text</code> : See <a href="#syntax-of-text">Syntax of text</a></li>
 </ul>
 <h3 id="syntax-of-text">Syntax of Text<a class="headerlink" href="#syntax-of-text" title="Permanent link">&para;</a></h3>
@@ -15511,7 +15533,7 @@
 A [label=A, elk.layered.priority=1]
 B [label=B]
 
-A -&gt; B -&gt; C [color=0xFF0000]
+A -.&gt; B -.&gt; C [color=0xFF0000]
 A -&gt; * -&gt; D
 
 E -&gt; *1 -&gt; F
@@ -15596,6 +15618,15 @@ G -&gt; *1           # Reuses the same named dummy node
 <div class="highlight"><pre><span></span><code><span class="nx">graph</span><span class="p">.</span><span class="nx">addEdge</span><span class="p">(</span><span class="nx">graph</span><span class="p">.</span><span class="nx">createInvisibleEdge</span><span class="p">());</span>
 </code></pre></div>
 <p>See also <a href="../graph-elk-layout/#layout-alignment-assistant">ELK layout</a></p>
+<h4 id="dashed-edge">Dashed edge<a class="headerlink" href="#dashed-edge" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>&lt;nodeA&gt; -.&gt; &lt;nodeB&gt;
+</code></pre></div>
+<ul>
+<li>Render a dashed edge.</li>
+<li>Works with edge chains too. Example:
+    <div class="highlight"><pre><span></span><code>A -.&gt; B -.&gt; C
+</code></pre></div></li>
+</ul>
 <h4 id="attribute-blocks">Attribute Blocks<a class="headerlink" href="#attribute-blocks" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code>[key=value, key2=value2, ...]
 </code></pre></div>
@@ -15683,6 +15714,11 @@ A -&gt; B
 <td>Hidden edge for layout</td>
 </tr>
 <tr>
+<td>Dashed edge</td>
+<td><code>A -.&gt; B</code></td>
+<td>Dashed edge</td>
+</tr>
+<tr>
 <td>Comment</td>
 <td><code>#</code>, <code>//</code>, <code>/* ... */</code></td>
 <td>Ignored</td>
@@ -15706,7 +15742,7 @@ B [label=&quot;Middle&quot;]
 C [label=&quot;End&quot;]
 
 # Define edges
-A -&gt; B -&gt; C [color=0xFF0000]   # Colored chain
+A -.&gt; B -.&gt; C [color=0xFF0000] # Colored chain with dashed edge
 A -&gt; * -&gt; D                    # Dummy node between A and D
 E -&gt; *1 -&gt; F                   # Named dummy node used twice
 G -&gt; *1                        # Reuse *1 again

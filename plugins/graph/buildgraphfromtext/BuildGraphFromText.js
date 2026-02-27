@@ -1,14 +1,18 @@
 import { Parser } from './flowparser/parser.js';
-import DefaultCreateEdgeGameObjectCallback from './methods/DefaultCreateEdgeGameObjectCallback.js';
+import GetDefaultCreateEdgeGameObjectCallback from './methods/GetDefaultCreateEdgeGameObjectCallback.js';
 
 var BuildGraphFromText = function (graph, config) {
     graph.clear();
 
     var {
         onCreateNodeGameObject,
-        onCreateEdgeGameObject = DefaultCreateEdgeGameObjectCallback,
+        onCreateEdgeGameObject,
         text
     } = config;
+
+    if (!onCreateEdgeGameObject) {
+        onCreateEdgeGameObject = GetDefaultCreateEdgeGameObjectCallback(config);
+    }
 
     var { nodes, edges } = new Parser().parse(text);
 

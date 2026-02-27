@@ -15463,7 +15463,10 @@
 
 <span class="w">    </span><span class="nx">strokeColor</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">strokeAlpha</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">strokeWidth</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span>
+<span class="w">    </span><span class="nx">strokeWidth</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span>
+
+<span class="w">    </span><span class="nx">dashPattern</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">dashOffset</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 <span class="p">});</span>
 </code></pre></div>
 <ul>
@@ -15536,6 +15539,21 @@
 </li>
 </ul>
 </li>
+<li><code>dashPattern</code> : Default style is solid line.<ul>
+<li>An array <ul>
+<li><code>[drawLength, skipLength]</code>, or </li>
+<li><code>[drawLengthA, skipLengthA, drawLengthB, skipLengthB, ...]</code></li>
+</ul>
+</li>
+<li>An plain object
+    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nx">segments</span><span class="o">:</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">drawRatio</span><span class="o">:</span><span class="w"> </span><span class="mf">0.5</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li><code>dashOffset</code> : Offset of 1<sup>st</sup> dashed segment. Default value is <code>0</code></li>
 </ul>
 <h4 id="deform">Deform<a class="headerlink" href="#deform" title="Permanent link">&para;</a></h4>
 <ul>

@@ -1,4 +1,4 @@
-import parser from '../../plugins/graph/buildgraphfromtext/flowparser.js';
+import parser from '../../plugins/graph/buildgraphfromtext/flowparser/parser.js';
 
 var expression = `
 NODE [padding=3]
@@ -6,7 +6,7 @@ NODE [padding=3]
 A [label=A, elk.layered.priority=1]
 B [label=B]
 
-A -> B -> C
+A -.> B -> C
 A -> * -> D [color=0xFF0000]
 C -> E ; D -> E
 `
