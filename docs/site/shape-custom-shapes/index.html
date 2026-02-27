@@ -15961,6 +15961,34 @@ or
 </code></pre></div></li>
 </ul>
 </li>
+<li>Dashed<ul>
+<li>Set dash pattern
+    <div class="highlight"><pre><span></span><code><span class="nx">shape</span><span class="p">.</span><span class="nx">setDashPattern</span><span class="p">(</span><span class="nx">pattern</span><span class="p">,</span><span class="w"> </span><span class="nx">offset</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>pattern</code> :<ul>
+<li>An array <ul>
+<li><code>[drawLength, skipLength]</code>, or </li>
+<li><code>[drawLengthA, skipLengthA, drawLengthB, skipLengthB, ...]</code></li>
+</ul>
+</li>
+<li>An plain object
+    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nx">segments</span><span class="o">:</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">drawRatio</span><span class="o">:</span><span class="w"> </span><span class="mf">0.5</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Clear dashed
+    <div class="highlight"><pre><span></span><code><span class="nx">shape</span><span class="p">.</span><span class="nx">setDashed</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">shape</span><span class="p">.</span><span class="nx">clearDashPattern</span><span class="p">();</span>
+</code></pre></div></li>
+</ul>
+</li>
 <li>Visible<ul>
 <li>Get
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">visible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">shape</span><span class="p">.</span><span class="nx">visible</span><span class="p">;</span>

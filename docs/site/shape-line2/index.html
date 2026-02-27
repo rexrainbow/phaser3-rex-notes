@@ -3265,6 +3265,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#dashed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dashed
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#input-event" class="md-nav__link">
     <span class="md-ellipsis">
       Input event
@@ -15277,6 +15286,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#dashed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dashed
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#input-event" class="md-nav__link">
     <span class="md-ellipsis">
       Input event
@@ -15436,6 +15454,9 @@
 <span class="w">    </span><span class="nx">tailStrokeWidth</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">tailStrokeColor</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">tailStrokeAlpha</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
+
+<span class="w">    </span><span class="nx">dashPattern</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">dashOffset</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 <span class="p">});</span>
 </code></pre></div>
 <p>or </p>
@@ -15462,6 +15483,9 @@
 <span class="w">    </span><span class="nx">tailStrokeWidth</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">tailStrokeColor</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">tailStrokeAlpha</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
+
+<span class="w">    </span><span class="nx">dashPattern</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">dashOffset</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
 <span class="p">});</span>
 </code></pre></div>
 <ul>
@@ -15491,6 +15515,21 @@
 <li><code>headSize</code>, <code>tailSize</code> : Size of end point, default value is <code>lineWidth * 4</code></li>
 <li><code>headColor</code>, <code>headAlpha</code>, <code>tailColor</code>, <code>tailAlpha</code> : Fill style of end point</li>
 <li><code>headStrokeWidth</code>, <code>headStrokeColor</code>, <code>headStrokeAlpha</code>, <code>tailStrokeWidth</code>, <code>tailStrokeColor</code>, <code>tailStrokeAlpha</code> : Stroke style of end point</li>
+<li><code>dashPattern</code> : Default style is solid line.<ul>
+<li>An array <ul>
+<li><code>[drawLength, skipLength]</code>, or </li>
+<li><code>[drawLengthA, skipLengthA, drawLengthB, skipLengthB, ...]</code></li>
+</ul>
+</li>
+<li>An plain object
+    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nx">segments</span><span class="o">:</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">drawRatio</span><span class="o">:</span><span class="w"> </span><span class="mf">0.5</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li><code>dashOffset</code> : Offset of 1<sup>st</sup> dashed segment. Default value is <code>0</code></li>
 </ul>
 <h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
 <ul>
@@ -15598,6 +15637,35 @@
 </li>
 </ul>
 </li>
+</ul>
+<h3 id="dashed">Dashed<a class="headerlink" href="#dashed" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Set dash pattern
+    <div class="highlight"><pre><span></span><code><span class="nx">line</span><span class="p">.</span><span class="nx">setDashPattern</span><span class="p">(</span><span class="nx">pattern</span><span class="p">,</span><span class="w"> </span><span class="nx">offset</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>pattern</code> :<ul>
+<li>An array <ul>
+<li><code>[drawLength, skipLength]</code>, or </li>
+<li><code>[drawLengthA, skipLengthA, drawLengthB, skipLengthB, ...]</code></li>
+</ul>
+</li>
+<li>An plain object
+    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nx">segments</span><span class="o">:</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">drawRatio</span><span class="o">:</span><span class="w"> </span><span class="mf">0.5</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li><code>offset</code> : Offset of 1<sup>st</sup> dashed segment. Default value is <code>0</code></li>
+</ul>
+</li>
+<li>Clear dashed
+    <div class="highlight"><pre><span></span><code><span class="nx">line</span><span class="p">.</span><span class="nx">setDashed</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">line</span><span class="p">.</span><span class="nx">clearDashPattern</span><span class="p">();</span>
+</code></pre></div></li>
 </ul>
 <h3 id="input-event">Input event<a class="headerlink" href="#input-event" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">line</span>

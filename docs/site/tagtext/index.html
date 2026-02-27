@@ -2737,6 +2737,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#scroll" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scroll
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#left-margin-of-text" class="md-nav__link">
     <span class="md-ellipsis">
       Left margin of text
@@ -15517,6 +15526,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#scroll" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scroll
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#left-margin-of-text" class="md-nav__link">
     <span class="md-ellipsis">
       Left margin of text
@@ -15757,9 +15775,10 @@
 <span class="w">    </span><span class="p">},</span>
 <span class="w">    </span><span class="nx">maxLines</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">lineSpacing</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">letterSpacing</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">fixedWidth</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">fixedHeight</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">lineSpacing</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">fixedLineHeightMode</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">testString</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;|MÉqgy&#39;</span><span class="p">,</span>
 
 <span class="w">    </span><span class="nx">wrap</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
@@ -16214,6 +16233,24 @@
 </code></pre></div></li>
 <li>Set
     <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setFixedSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h3 id="scroll">Scroll<a class="headerlink" href="#scroll" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">txt</span><span class="p">.</span><span class="nx">t</span><span class="p">;</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">scrollY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">txt</span><span class="p">.</span><span class="nx">scrollY</span><span class="p">;</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">top</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">txt</span><span class="p">.</span><span class="nx">topScrollY</span><span class="p">;</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">bottom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">txt</span><span class="p">.</span><span class="nx">bottomScrollY</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setT</span><span class="p">(</span><span class="mf">0.5</span><span class="p">);</span><span class="w">        </span><span class="c1">// normalized</span>
+<span class="nx">txt</span><span class="p">.</span><span class="nx">addT</span><span class="p">(</span><span class="mf">0.1</span><span class="p">);</span>
+<span class="nx">txt</span><span class="p">.</span><span class="nx">setScrollY</span><span class="p">(</span><span class="o">-</span><span class="mf">100</span><span class="p">);</span><span class="w"> </span><span class="c1">// pixels</span>
+<span class="nx">txt</span><span class="p">.</span><span class="nx">addScrollY</span><span class="p">(</span><span class="o">-</span><span class="mf">20</span><span class="p">);</span>
+</code></pre></div>
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">scrollToTop</span><span class="p">();</span>
+<span class="nx">txt</span><span class="p">.</span><span class="nx">scrollToBottom</span><span class="p">();</span>
 </code></pre></div></li>
 </ul>
 <h3 id="left-margin-of-text">Left margin of text<a class="headerlink" href="#left-margin-of-text" title="Permanent link">&para;</a></h3>

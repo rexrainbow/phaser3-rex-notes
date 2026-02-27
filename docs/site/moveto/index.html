@@ -5061,6 +5061,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#clear-targets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Clear targets
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#pause-resume-stop-moving" class="md-nav__link">
     <span class="md-ellipsis">
       Pause, Resume, stop moving
@@ -15244,6 +15253,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#clear-targets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Clear targets
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#pause-resume-stop-moving" class="md-nav__link">
     <span class="md-ellipsis">
       Pause, Resume, stop moving
@@ -15377,12 +15395,14 @@
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">moveTo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexMoveTo&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// speed: 400,</span>
-<span class="w">    </span><span class="c1">// rotateToTarget: false</span>
+<span class="w">    </span><span class="c1">// rotateToTarget: false,</span>
+<span class="w">    </span><span class="c1">// appendMode: false</span>
 <span class="p">});</span>
 </code></pre></div>
 <ul>
 <li><code>speed</code> : Moving speed, pixels in second.</li>
 <li><code>rotateToTarget</code> : Set true to change angle towards path.</li>
+<li><code>appendMode</code> : Set true to queue new targets when already moving, for smoother motion.</li>
 </ul>
 <h3 id="start-moving">Start moving<a class="headerlink" href="#start-moving" title="Permanent link">&para;</a></h3>
 <ul>
@@ -15397,6 +15417,7 @@
 <span class="p">});</span>
 </code></pre></div><ul>
 <li><code>x</code> , <code>y</code> : Target position    </li>
+<li>Behavior by <code>appendMode</code> : When true, add target to queue if already moving. When false, replace current target.</li>
 </ul>
 </li>
 <li>Move from start position to current position
@@ -15438,11 +15459,18 @@
     <div class="highlight"><pre><span></span><code><span class="nx">moveTo</span><span class="p">.</span><span class="nx">enable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
+<h3 id="clear-targets">Clear targets<a class="headerlink" href="#clear-targets" title="Permanent link">&para;</a></h3>
+<p>Clear queued targets for <code>appendMode</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">moveTo</span><span class="p">.</span><span class="nx">clearTargets</span><span class="p">();</span>
+</code></pre></div>
 <h3 id="pause-resume-stop-moving">Pause, Resume, stop moving<a class="headerlink" href="#pause-resume-stop-moving" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">moveTo</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
 <span class="nx">moveTo</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
 <span class="nx">moveTo</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
 </code></pre></div>
+<ul>
+<li><code>moveTo.stop()</code> : Stop moving, call <code>moveTo.clearTargets()</code> to clear targets.</li>
+</ul>
 <h3 id="set-speed">Set speed<a class="headerlink" href="#set-speed" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">moveTo</span><span class="p">.</span><span class="nx">setSpeed</span><span class="p">(</span><span class="nx">speed</span><span class="p">);</span>
 <span class="c1">// moveTo.speed = speed;</span>

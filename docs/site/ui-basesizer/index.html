@@ -12306,9 +12306,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#layer" class="md-nav__link">
+  <a href="#renderer-layer" class="md-nav__link">
     <span class="md-ellipsis">
-      Layer
+      Renderer layer
     </span>
   </a>
   
@@ -15915,9 +15915,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#layer" class="md-nav__link">
+  <a href="#renderer-layer" class="md-nav__link">
     <span class="md-ellipsis">
-      Layer
+      Renderer layer
     </span>
   </a>
   
@@ -17492,19 +17492,15 @@ Use <a href="../ui-buttons/">Button</a> if user needs to enable/disable input be
 <p class="admonition-title">Note</p>
 <p><code>container.add(sizer)</code>, or <code>layer.add(sizer)</code> won't add children of sizer.</p>
 </div>
-<h3 id="layer">Layer<a class="headerlink" href="#layer" title="Permanent link">&para;</a></h3>
-<p>A sizer can have a <a href="../layer/">layer</a>. 
-Current children and new children will draw on this layer, instead of display list of scene.</p>
-<ul>
-<li>Enable layer. Do nothing if layer is existed.
-    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">enableLayer</span><span class="p">();</span>
-</code></pre></div></li>
-<li>Get layer game object. Will enable layer if layer is not existed.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">layer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">sizer</span><span class="p">.</span><span class="nx">getLayer</span><span class="p">();</span>
-</code></pre></div></li>
-</ul>
+<h3 id="renderer-layer">Renderer layer<a class="headerlink" href="#renderer-layer" title="Permanent link">&para;</a></h3>
+<p>A sizer/containerLite can have an internal renderer layer.
+All children will be put into this internal layer, instead of displayList of scene,
+and ContainerLite will be very bottom of all children.</p>
+<p>Enable renderer layer before adding any child.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">enableLayer</span><span class="p">();</span>
+</code></pre></div>
 <h3 id="shader-effects">Shader effects<a class="headerlink" href="#shader-effects" title="Permanent link">&para;</a></h3>
-<p>Apply post-fx pipeline on <a href="./#layer">layer of sizer</a>.</p>
+<p>Apply post-fx pipeline on <a href="./#renderer-layer">layer of sizer</a>.</p>
 <h3 id="snapshot">Snapshot<a class="headerlink" href="#snapshot" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Draw all visible children on a <a href="../rendertexture/">render-texture</a>.

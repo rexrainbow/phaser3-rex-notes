@@ -15346,6 +15346,7 @@
 <ul>
 <li><a href="https://codepen.io/rexrainbow/pen/vPWzBa">Pages</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/RwQjVNy">Tabpage</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/RNGNRWb">Lazy-create-page</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-pages">Sample code</a></p>
@@ -15451,8 +15452,8 @@
 </ul>
 </li>
 <li><code>swapMode</code> : Set to invisible or destroy swapped page.<ul>
-<li><code>0</code>, <code>'invisible'</code> : Set swapped page to invisible.</li>
-<li><code>1</code>, <code>'destroy'</code> : Destroy swapped page.</li>
+<li><code>0</code>, <code>'invisible'</code> : Set swapped page to invisible. Default behavior.</li>
+<li><code>1</code>, <code>'destroy'</code> : Destroy swapped page. Use with the <a href="#events"><code>'createpage'</code> event</a>.</li>
 </ul>
 </li>
 <li><code>fadeIn</code> : Fade-in duration of current page.<ul>
@@ -15464,7 +15465,7 @@
 <li><code>sizerEvents</code> : Set <code>true</code> to fire <a href="../ui-basesizer/#events">sizer events</a>. Default value is <code>false</code>.</li>
 <li><code>enableLayer</code> : <ul>
 <li><code>false</code> : Add child game objects into scene's display list. Default behavior.</li>
-<li><code>true</code> : Add child game objects into an internal <a href="../layer/">layer game object</a>. <a href="../containerlite/#render-layer">See also</a>.</li>
+<li><code>true</code> : Add child game objects into an internal <a href="../layer/">layer game object</a>. <a href="../containerlite/#renderer-layer">See also</a>.</li>
 </ul>
 </li>
 </ul>
@@ -15627,6 +15628,13 @@
 <p>See <a href="../ui-basesizer/">base sizer object</a>, <a href="../containerlite/">container-lite</a>.</p>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
+<li>Lazy-create page instance. Triggered when page is not found, create page instance and add it to pages under this event
+    <div class="highlight"><pre><span></span><code><span class="nx">pages</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;createpage&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">pages</span><span class="p">){</span>
+<span class="w">    </span><span class="c1">// var page = ...</span>
+<span class="w">    </span><span class="nx">pages</span><span class="p">.</span><span class="nx">addPage</span><span class="p">(</span><span class="nx">page</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">align</span><span class="p">,</span><span class="w"> </span><span class="nx">padding</span><span class="p">,</span><span class="w"> </span><span class="nx">expand</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">pages</span><span class="p">.</span><span class="nx">getTopmostSizer</span><span class="p">().</span><span class="nx">layout</span><span class="p">();</span>
+<span class="p">})</span>
+</code></pre></div></li>
 <li>Set page invisible, triggered when page is swapped out.
     <div class="highlight"><pre><span></span><code><span class="nx">pages</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pageinvisible&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">pageObject</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">pages</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// ...</span>
