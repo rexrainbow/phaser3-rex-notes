@@ -32,9 +32,22 @@ var CreateCellContainer = function (parent, cell, config) {
 
     var moveDownButton = createMoveDownButton(scene);
 
+    var properties = tweakerAddRowsParameters.properties;
+    var isObjectItem = (properties.length >= 1) && (properties[0].hasOwnProperty('$key'));
+    var target;
+    if (isObjectItem) {
+        target = cell.item;
+    } else {
+        target = cell.items;
+        properties = [{
+            ...properties[0],
+            title: false,     // No title label
+            $key: cell.index
+        }];
+    }
     var inputTweaker = parent.createTweaker(tweakerConfig)
-        .setAlignInputRowTitleEnable(true)
-        .addRows(tweakerAddRowsParameters.properties, cell.item, tweakerAddRowsParameters.monitor);
+        .setAlignInputRowTitleEnable(isObjectItem)
+        .addRows(properties, target, tweakerAddRowsParameters.monitor);
 
     var background = CreateBackground(scene, {}, backgroundStyle);
 
@@ -88,7 +101,7 @@ var GenerateCreateCellContainerCallback = function (parent, config, style) {
         styles: GetValue(style, 'tweaker'),
     };
 
-    var properties = GetValue(config, '$properties') || [];
+    var properties = GetValue(config, '$properties') || [{}];
     var monitor = GetValue(config, 'monitor', false);
     var tweakerAddRowsParameters = { properties, monitor };
 
@@ -119,10 +132,11 @@ var GenerateCreateCellContainerCallback = function (parent, config, style) {
 
         cellContainer
             .setIndexLabel(indexLabelCallback(index, item, items))
-            .setItem(item) // Also setBindingTarget
+            .setItem(items, index) // Also setBindingTarget
+            // layout
             .setMinSize(width, 0)
             .setOrigin(0.5, 0)
-            .setDirty()
+            .setDirty(true)
             .layout()
             .setDirty(false)
 

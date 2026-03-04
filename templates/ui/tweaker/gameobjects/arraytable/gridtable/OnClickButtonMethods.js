@@ -1,9 +1,9 @@
 const RemoveItem = Phaser.Utils.Array.Remove;
 
 export default {
-    deleteItem(item) {
+    deleteItemByIndex(index) {
         // Called by CellContainer.onDeleteItem
-        RemoveItem(this.items, item);
+        this.items.splice(index, 1);
         this.lastItemsCount = this.items.length; // Prevent monitor triggering
 
         this.refresh(); // Invoke createCellContainerCallback for each cell again        

@@ -1,6 +1,6 @@
 export default {
     deleteItemWithTransition(cellContainer) {
-        if (!cellContainer || !cellContainer.cellItem) {
+        if (!cellContainer || (cellContainer.cellIndex == null)) {
             return this;
         }
 
@@ -10,9 +10,9 @@ export default {
             scaleY: 0,
             duration: 500,
             onComplete() {
-                var cellItem = cellContainer.cellItem;
-                cellContainer.cellItem = undefined;
-                self.deleteItem(cellItem);
+                var cellIndex = cellContainer.cellIndex;
+                cellContainer.cellIndex = undefined;
+                self.deleteItemByIndex(cellIndex);
                 self.resetPointerOver();
             },
         })
