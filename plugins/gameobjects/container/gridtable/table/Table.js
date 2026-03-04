@@ -225,6 +225,7 @@ class Table {
     }
 
     colRowToCellIndex(colIdx, rowIdx) {
+        // Return a number cell index, or null if (colIdx, rowIdx) is out of range
         if (
             (colIdx < 0) || (colIdx >= this.colCount) ||
             (rowIdx < 0) || (rowIdx >= this.rowCount)
