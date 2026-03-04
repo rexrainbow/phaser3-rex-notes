@@ -330,11 +330,17 @@ declare namespace Tweaker {
 
         /** Array table container style. */
         arrayTable?: {
+            /** Default height of array table. */
+            height?: number,
+
             /** Optional array table title style. */
             title?: SimpleLabel.IConfig,
 
             /** Array table background style. */
             background?: CreateBackground.IConfig,
+
+            /** Default table configuration. */
+            table?: GridTable.IConfig['table'],
 
             /** Vertical slider style of array-table container. */
             slider?: {
@@ -378,6 +384,12 @@ declare namespace Tweaker {
 
             /** Style for delete button in each cell. */
             deleteButton?: SimpleLabel.IConfig,
+
+            /** Style for move-up button in each cell. */
+            moveUpButton?: SimpleLabel.IConfig,
+
+            /** Style for move-down button in each cell. */
+            moveDownButton?: SimpleLabel.IConfig,
 
             /** Style for cell background. */
             cellBackground?: CreateBackground.IConfig,
@@ -685,10 +697,13 @@ declare namespace Tweaker {
         /** Binding target object for the array items. */
         bindingTarget?: Object,
         /** Key path to the array field on the binding target. */
-        bindingKey?: string,
+        bindingKey?: string | null,
 
-        /** Property descriptors for each item. */
-        $properties?: RowsPropertyType[] | RowsPropertyType,
+        /**
+         * Property descriptors for each item.
+         * Supports primitive-item shorthand via a single input-row config.
+         */
+        $properties?: RowsPropertyType[] | RowsPropertyType | IAddInputConfig,
 
         /** Set to true to monitor input values. */
         monitor?: boolean,
@@ -723,8 +738,8 @@ declare namespace Tweaker {
                 index?: number,
                 tweaker?: number,
                 delete?: number,
-                button?: number,
-            }
+            },
+            button?: number,
         },
 
         /**
@@ -735,6 +750,12 @@ declare namespace Tweaker {
 
         /** Label content for delete button in each cell. */
         deleteLabel?: string | SimpleLabel.IResetDisplayContentConfig,
+
+        /** Label content for move-up button in each cell. */
+        moveUpLabel?: string | SimpleLabel.IResetDisplayContentConfig,
+
+        /** Label content for move-down button in each cell. */
+        moveDownLabel?: string | SimpleLabel.IResetDisplayContentConfig,
 
         /**
          * Label content for add button in footer.
@@ -769,7 +790,7 @@ declare namespace Tweaker {
      */
     interface IAddArrayTableBoundConfig extends IAddArrayTableConfig {
         bindingTarget: Object,
-        bindingKey: string,
+        bindingKey?: string | null,
     }
 
     /**
@@ -931,7 +952,7 @@ declare namespace Tweaker {
         /** Optional array-table-level binding target. */
         $target?: Object,
         /** Binding key path of array field. */
-        $key: string,
+        $key?: string | null,
     }
 
     /**
@@ -1197,7 +1218,7 @@ declare class Tweaker extends Sizer {
      */
     addArrayTable(
         target: Object,
-        bindingKey: string,
+        bindingKey: string | null,
         config?: Tweaker.IAddArrayTableConfig
     ): this;
 
