@@ -446,7 +446,7 @@ declare namespace Tweaker {
         iconSize?: number,
 
         /** Text shown on the row title. */
-        title?: string,
+        title?: string | null | false,
 
         /** Orientation used by this row layout. */
         orientation?: Sizer.OrientationTypes,

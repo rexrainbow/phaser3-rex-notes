@@ -1176,6 +1176,8 @@ tweaker.addButton({
 - `icon`, `iconFrame` : Texture key, frame name of icon on title-label.
 - `iconSize` : Fixed icon size
 - `title` : Display text of title-label.
+    - `undefined` : Title label with default string `''`.
+    - `false` or `null` : No title label.
 - `label` : Display text of button, [a string or a plain object](ui-label.md#reset-display-content).
     ```javascript
     {
@@ -1236,6 +1238,8 @@ tweaker.addButtons({
 - `icon`, `iconFrame` : Texture key, frame name of icon on title-label.
 - `iconSize` : Fixed icon size
 - `title` : Display text of title-label.
+    - `undefined` : Title label with default string `''`.
+    - `false` or `null` : No title label.
 - `buttons` : Array of button label and button callback
     ```javascript
     {
