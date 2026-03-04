@@ -102,7 +102,10 @@ var GenerateCreateCellContainerCallback = function (parent, config, style) {
         expandInputRowHeight: true,
     };
 
-    var properties = GetValue(config, '$properties') || [{}];
+    var properties = GetValue(config, '$properties') || {};
+    if (!Array.isArray(properties)) {
+        properties = [properties];
+    }
     var monitor = GetValue(config, 'monitor', false);
     var tweakerAddRowsParameters = { properties, monitor };
 

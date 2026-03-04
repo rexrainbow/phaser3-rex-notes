@@ -21,11 +21,10 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var target = CreateItems(10)
         var panel = CreatePanel(this)
             .setPosition(0, 0)
             .setOrigin(0)
-            .addArrayTable(target, null, {
+            .addArrayTable(CreateObjectItems(10), null, {
                 $properties: [
                     { $key: 'name' },
                     { $key: 'a' },
@@ -33,7 +32,19 @@ class Demo extends Phaser.Scene {
                 ],
 
                 createDefaultItem() {
-                    return CreateItems(1)[0]
+                    return CreateObjectItems(1)[0]
+                },
+            })
+            .layout();
+
+        var panel = CreatePanel(this)
+            .setPosition(400, 0)
+            .setOrigin(0)
+            .addArrayTable(CreateNumberItems(10), null, {
+                $properties: { min: -10, max: 10 }, // Or remove this key
+
+                createDefaultItem() {
+                    return CreateNumberItems(1)[0]
                 },
             })
             .layout();
@@ -44,7 +55,7 @@ class Demo extends Phaser.Scene {
     }
 }
 
-var CreateItems = function (amount) {
+var CreateObjectItems = function (amount) {
     var items = [];
     for (var i = 0; i < amount; i++) {
         items.push({
@@ -54,6 +65,14 @@ var CreateItems = function (amount) {
             b: 20 + i,
             c: false,
         })
+    }
+    return items;
+}
+
+var CreateNumberItems = function (amount) {
+    var items = [];
+    for (var i = 0; i < amount; i++) {
+        items.push(0)
     }
     return items;
 }

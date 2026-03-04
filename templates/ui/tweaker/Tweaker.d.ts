@@ -688,7 +688,7 @@ declare namespace Tweaker {
         bindingKey?: string,
 
         /** Property descriptors for each item. */
-        $properties?: RowsPropertyType[],
+        $properties?: RowsPropertyType[] | RowsPropertyType,
 
         /** Set to true to monitor input values. */
         monitor?: boolean,
