@@ -28,7 +28,7 @@ export default {
     setBindingTarget(target, bindingKey) {
         this.bindingTarget = target;
 
-        if (arguments.length === 2) {
+        if (bindingKey !== undefined) {
             this.setBindingTargetKey(bindingKey);
         }
 
