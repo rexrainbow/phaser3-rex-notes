@@ -17,7 +17,11 @@ var CreateInputRow = function (scene, config, style) {
     }
 
     // Title
-    var inputTitle = CreateTitleLabel(scene, config, (style.title || {}));
+    var inputTitle;
+    if ((config.title) !== false && (config.title !== null)) {
+        var titleStyle = style.title || {};
+        inputTitle = CreateTitleLabel(scene, config, titleStyle);
+    }
 
     // Background
     var background = CreateBackground(scene, (config.background || {}), (style.background || {}));

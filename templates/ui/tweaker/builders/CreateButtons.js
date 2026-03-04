@@ -7,14 +7,13 @@ import InputRow from '../gameobjects/inputrow/InputRow.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 var CreateButtons = function (scene, config, style) {
-    if (!config) {
-        config = {};
-    }
+    if (!config) { config = {}; }
+    if (!style) { style = {}; }
 
     // Title
     var title;
     if ((config.title) !== false && (config.title !== null)) {
-        var titleStyle = GetValue(style, 'title') || {};
+        var titleStyle = style.title || {};
         title = CreateTitleLabel(scene, config, titleStyle);
     }
 

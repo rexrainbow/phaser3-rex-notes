@@ -15,7 +15,7 @@ var AddInput = function (target, bindingKey, config) {
         config.bindingKey = bindingKey;
     }
 
-    if (!config.title) {
+    if (config.title === undefined) {
         // Display leaf key as title
         config.title = GetLeafKey(bindingKey);
     }
