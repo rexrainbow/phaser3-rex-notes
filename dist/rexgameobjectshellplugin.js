@@ -4788,7 +4788,10 @@
         }
 
         // Fast path: single key
-        if (typeof keys === 'string' && keys.indexOf(delimiter) === -1) {
+        if (
+            (typeof keys === 'string' && keys.indexOf(delimiter) === -1) ||
+            (typeof keys === 'number')
+        ) {
             target[keys] = value;
             return target;
         }
@@ -5061,7 +5064,7 @@
 
     const Zone$2 = Phaser.GameObjects.Zone;
     const AddItem = Phaser.Utils.Array.Add;
-    const RemoveItem$c = Phaser.Utils.Array.Remove;
+    const RemoveItem$b = Phaser.Utils.Array.Remove;
 
     let Base$2 = class Base extends Zone$2 {
         constructor(scene, x, y, width, height) {
@@ -5134,7 +5137,7 @@
         }
 
         remove(gameObjects, destroyChild) {
-            RemoveItem$c(this.children, gameObjects,
+            RemoveItem$b(this.children, gameObjects,
                 // Callback of item removed
                 function (gameObject) {
                     gameObject.off('destroy', this.onChildDestroy, this);
@@ -10886,7 +10889,7 @@
         return gameObject;
     };
 
-    const RemoveItem$b = Phaser.Utils.Array.Remove;
+    const RemoveItem$a = Phaser.Utils.Array.Remove;
 
     var AddMethods$1 = {
         addGO(name, gameObject) {
@@ -10907,7 +10910,7 @@
             gameObject
                 .setName(name)
                 .once('destroy', function () {
-                    RemoveItem$b(this.removedGOs, gameObject);
+                    RemoveItem$a(this.removedGOs, gameObject);
                     if (this.isEmpty) {
                         this.emit('empty');
                     }
@@ -12533,7 +12536,7 @@
         }
     };
 
-    const RemoveItem$a = Phaser.Utils.Array.Remove;
+    const RemoveItem$9 = Phaser.Utils.Array.Remove;
     const ContainerRemove = ContainerLite.prototype.remove;
     const GetParentSizer$1 = GetParentSizerMethods.getParentSizer;
 
@@ -12548,7 +12551,7 @@
         }
 
         if (this.isBackground(gameObject)) {
-            RemoveItem$a(this.backgroundChildren, gameObject);
+            RemoveItem$9(this.backgroundChildren, gameObject);
         }
         ContainerRemove.call(this, gameObject, destroyChild);
 
@@ -12560,7 +12563,7 @@
         return this;
     };
 
-    const RemoveItem$9 = Phaser.Utils.Array.Remove;
+    const RemoveItem$8 = Phaser.Utils.Array.Remove;
     const GetParentSizer = GetParentSizerMethods.getParentSizer;
 
     var RemoveChildMethods$6 = {
@@ -12581,7 +12584,7 @@
                 return this;
             }
 
-            RemoveItem$9(this.backgroundChildren, gameObject);
+            RemoveItem$8(this.backgroundChildren, gameObject);
             RemoveChild$1.call(this, gameObject, destroyChild);
             return this;
         },
@@ -15088,7 +15091,7 @@
         }
     };
 
-    var RemoveItem$8 = Phaser.Utils.Array.Remove;
+    var RemoveItem$7 = Phaser.Utils.Array.Remove;
 
     var OnInitDelayCallTimers = function (gameObject) {
         gameObject._delayCallTimers = [];
@@ -15113,7 +15116,7 @@
             var timer;
             var self = this;
             var OnTimeOut = function () {
-                RemoveItem$8(self._delayCallTimers, timer);
+                RemoveItem$7(self._delayCallTimers, timer);
                 if (scope) {
                     callback.call(scope);
                 } else {
@@ -18699,7 +18702,7 @@
         return this;
     };
 
-    const RemoveItem$7 = Phaser.Utils.Array.Remove;
+    const RemoveItem$6 = Phaser.Utils.Array.Remove;
 
     var RemoveChildMethods$5 = {
         remove(gameObject, destroyChild) {
@@ -18707,7 +18710,7 @@
                 return this;
             }
 
-            RemoveItem$7(this.sizerChildren, gameObject);
+            RemoveItem$6(this.sizerChildren, gameObject);
             RemoveChild$1.call(this, gameObject, destroyChild);
             return this;
         },
@@ -19532,14 +19535,14 @@
         }
     };
 
-    const RemoveItem$6 = Phaser.Utils.Array.Remove;
+    const RemoveItem$5 = Phaser.Utils.Array.Remove;
 
     var RemoveChildMethods$4 = {
         remove(gameObject, destroyChild) {
             if (this.getParentSizer(gameObject) !== this) {
                 return this;
             }
-            RemoveItem$6(this.sizerChildren, gameObject);
+            RemoveItem$5(this.sizerChildren, gameObject);
             RemoveChild$1.call(this, gameObject, destroyChild);
             return this;
         },
@@ -22838,11 +22841,11 @@
         return this;
     };
 
-    const RemoveItem$5 = Phaser.Utils.Array.Remove;
+    const RemoveItem$4 = Phaser.Utils.Array.Remove;
 
     var RemoveChild = function (child) {
         this.poolManager.free(child);
-        RemoveItem$5(this.children, child);
+        RemoveItem$4(this.children, child);
         this.lastAppendedChildren.length = 0;
         this.lastOverChild = null;
         this.dirty = true;
@@ -22858,10 +22861,10 @@
         return this;
     };
 
-    const RemoveItem$4 = Phaser.Utils.Array.Remove;
+    const RemoveItem$3 = Phaser.Utils.Array.Remove;
 
     var PopChild = function (child) {
-        RemoveItem$4(this.children, child);
+        RemoveItem$3(this.children, child);
         this.lastAppendedChildren.length = 0;
         this.lastOverChild = null;
         this.dirty = true;
@@ -27007,7 +27010,7 @@
     };
 
     const Shape = Phaser.GameObjects.Shape;
-    const RemoveItem$3 = Phaser.Utils.Array.Remove;
+    const RemoveItem$2 = Phaser.Utils.Array.Remove;
 
     class BaseShapes extends Shape {
         constructor(scene, x, y, width, height) {
@@ -27206,7 +27209,7 @@
             var shape = this.getShape(name);
             if (shape) {
                 delete this.shapes[name];
-                RemoveItem$3(this.geom, shape);
+                RemoveItem$2(this.geom, shape);
             }
             return this;
         }
@@ -40766,7 +40769,7 @@
         }
     };
 
-    const RemoveItem$2 = Phaser.Utils.Array.Remove;
+    const RemoveItem$1 = Phaser.Utils.Array.Remove;
 
     var RemoveMethods = {
         remove(gameObject) {
@@ -40774,7 +40777,7 @@
                 delete gameObject.selected;
             }
 
-            RemoveItem$2(this.buttons, gameObject);
+            RemoveItem$1(this.buttons, gameObject);
 
             return this;
         },
@@ -45274,6 +45277,7 @@
         }
 
         colRowToCellIndex(colIdx, rowIdx) {
+            // Return a number cell index, or null if (colIdx, rowIdx) is out of range
             if (
                 (colIdx < 0) || (colIdx >= this.colCount) ||
                 (rowIdx < 0) || (rowIdx >= this.rowCount)
@@ -45545,29 +45549,27 @@
             cellTLX = startCellTLX;
         var startCellTLY = this.getCellTLY(rowIndex) + tableOYOffset,
             cellTLY = startCellTLY;
-        while ((cellTLY < bottomBound) && (cellIdx <= lastIdx)) {
-            if (this.table.isValidCellIdx(cellIdx)) {
-                var cell = table.getCell(cellIdx, true);
-                this.visibleCells.set(cell);
-                if (!this.preVisibleCells.contains(cell)) {
-                    this.showCell(cell);
-                }
+        while ((cellTLY < bottomBound) && (cellIdx !== null) && (cellIdx <= lastIdx)) {
+            var cell = table.getCell(cellIdx, true);
+            this.visibleCells.set(cell);
+            if (!this.preVisibleCells.contains(cell)) {
+                this.showCell(cell);
+            }
 
-                var x, y;
-                if (this.scrollMode === 0) {
-                    x = cellTLX;
-                    y = cellTLY;
-                } else {
-                    x = cellTLY;
-                    y = cellTLX;
-                }
-                if (cell.cellContainerAlign == null) {
-                    cell.setXY(x, y);
-                } else {
-                    var cellContainer = cell.getContainer();
-                    AlignIn(cellContainer, x, y, cell.width, cell.height, cell.cellContainerAlign);
-                    cell.setXY(cellContainer.x, cellContainer.y);
-                }
+            var x, y;
+            if (this.scrollMode === 0) {
+                x = cellTLX;
+                y = cellTLY;
+            } else {
+                x = cellTLY;
+                y = cellTLX;
+            }
+            if (cell.cellContainerAlign == null) {
+                cell.setXY(x, y);
+            } else {
+                var cellContainer = cell.getContainer();
+                AlignIn(cellContainer, x, y, cell.width, cell.height, cell.cellContainerAlign);
+                cell.setXY(cellContainer.x, cellContainer.y);
             }
 
             if ((cellTLX < rightBound) && (columnIndex < lastColIdx)) {
@@ -45582,6 +45584,7 @@
             }
 
             cellIdx = table.colRowToCellIndex(columnIndex, rowIndex);
+            // Return a number cell index, or null if (colIdx, rowIdx) is out of range
         }
 
         // Restore scale
@@ -46491,12 +46494,17 @@
 
     // Return null if (x, y) is out of any cell, or that cell is invisible
     var PointerToCellIndex = function (table, pointer, worldX, worldY) {
+        var camera = pointer.camera;
+        if (!camera) {
+            // Why camera is undefined here?
+            return null;
+        }
+
         if (worldX === undefined) {
             worldX = pointer.worldX;
             worldY = pointer.worldY;
         }
 
-        var camera = pointer.camera;
         var x = worldX + camera.scrollX * (table.scrollFactorX - 1);
         var y = worldY + camera.scrollY * (table.scrollFactorY - 1);
         var cellIndex = table.pointToCellIndex(x, y);
@@ -47018,12 +47026,12 @@
             });
     };
 
-    const RemoveItem$1 = Phaser.Utils.Array.Remove;
+    Phaser.Utils.Array.Remove;
 
     var OnClickButtonMethods$1 = {
-        deleteItem(item) {
+        deleteItemByIndex(index) {
             // Called by CellContainer.onDeleteItem
-            RemoveItem$1(this.items, item);
+            this.items.splice(index, 1);
             this.lastItemsCount = this.items.length; // Prevent monitor triggering
 
             this.refresh(); // Invoke createCellContainerCallback for each cell again        
@@ -47052,7 +47060,7 @@
 
     var TransitionMethods = {
         deleteItemWithTransition(cellContainer) {
-            if (!cellContainer || !cellContainer.cellItem) {
+            if (!cellContainer || (cellContainer.cellIndex == null)) {
                 return this;
             }
 
@@ -47062,9 +47070,9 @@
                 scaleY: 0,
                 duration: 500,
                 onComplete() {
-                    var cellItem = cellContainer.cellItem;
-                    cellContainer.cellItem = undefined;
-                    self.deleteItem(cellItem);
+                    var cellIndex = cellContainer.cellIndex;
+                    cellContainer.cellIndex = undefined;
+                    self.deleteItemByIndex(cellIndex);
                     self.resetPointerOver();
                 },
             });
@@ -47517,11 +47525,7 @@
                 return;
             }
 
-            var currentIndex = items.indexOf(this.cellItem);
-            if (currentIndex === -1) {
-                return;
-            }
-
+            var currentIndex = this.cellIndex;
             var targetIndex = (currentIndex === 0) ? (items.length - 1) : (currentIndex - 1);
             var tmp = items[currentIndex];
             items[currentIndex] = items[targetIndex];
@@ -47542,11 +47546,7 @@
                 return;
             }
 
-            var currentIndex = items.indexOf(this.cellItem);
-            if (currentIndex === -1) {
-                return;
-            }
-
+            var currentIndex = this.cellIndex;
             var targetIndex = (currentIndex === (items.length - 1)) ? 0 : (currentIndex + 1);
             var tmp = items[currentIndex];
             items[currentIndex] = items[targetIndex];
@@ -47595,9 +47595,17 @@
             this.build(config);
         }
 
-        setItem(item) {
-            this.cellItem = item;
-            this.setBindingTarget(item);
+        setItem(items, index) {
+            var item = items[index];
+
+            this.cellIndex = index;
+
+            if (typeof item === 'object') {
+                this.setBindingTarget(item);
+            } else {
+                this.setBindingTarget(items, index);
+            }
+
             return this;
         }
 
@@ -47611,8 +47619,8 @@
             return this;
         }
 
-        setBindingTarget(target) {
-            this.childrenMap.inputTweaker.setBindingTarget(target);
+        setBindingTarget(target, key) {
+            this.childrenMap.inputTweaker.setBindingTarget(target, key);
             return this;
         }
 
@@ -47668,9 +47676,22 @@
 
         var moveDownButton = createMoveDownButton(scene);
 
+        var properties = tweakerAddRowsParameters.properties;
+        var isObjectItem = (properties.length >= 1) && (properties[0].hasOwnProperty('$key'));
+        var target;
+        if (isObjectItem) {
+            target = cell.item;
+        } else {
+            target = cell.items;
+            properties = [{
+                ...properties[0],
+                title: false,     // No title label
+                $key: cell.index
+            }];
+        }
         var inputTweaker = parent.createTweaker(tweakerConfig)
-            .setAlignInputRowTitleEnable(true)
-            .addRows(tweakerAddRowsParameters.properties, cell.item, tweakerAddRowsParameters.monitor);
+            .setAlignInputRowTitleEnable(isObjectItem)
+            .addRows(properties, target, tweakerAddRowsParameters.monitor);
 
         var background = CreateBackground$1(scene, {}, backgroundStyle);
 
@@ -47722,9 +47743,13 @@
         var tweakerConfig = {
             root: GetValue$z(style, 'root'),
             styles: GetValue$z(style, 'tweaker'),
+            expandInputRowHeight: true,
         };
 
-        var properties = GetValue$z(config, '$properties') || [];
+        var properties = GetValue$z(config, '$properties') || {};
+        if (!Array.isArray(properties)) {
+            properties = [properties];
+        }
         var monitor = GetValue$z(config, 'monitor', false);
         var tweakerAddRowsParameters = { properties, monitor };
 
@@ -47755,10 +47780,11 @@
 
             cellContainer
                 .setIndexLabel(indexLabelCallback(index, item, items))
-                .setItem(item) // Also setBindingTarget
+                .setItem(items, index) // Also setBindingTarget
+                // layout
                 .setMinSize(width, 0)
                 .setOrigin(0.5, 0)
-                .setDirty()
+                .setDirty(true)
                 .layout()
                 .setDirty(false);
 
@@ -47936,7 +47962,7 @@
         setBindingTarget(target, bindingKey) {
             this.bindingTarget = target;
 
-            if (arguments.length === 2) {
+            if (bindingKey !== undefined) {
                 this.setBindingTargetKey(bindingKey);
             }
 
@@ -48083,22 +48109,24 @@
             this.bindTargetKey = undefined;
             this.autoUpdateEnable = true;
 
-            var inputTitle = config.inputTitle;
+            var inputTitle = config.inputTitle; // A game object, or undefined/null/false
             var inputField = config.inputField;
             var background = config.background;
 
-            var proportion = GetValue$w(config, 'proportion.title', 0);
-            var titleSpace = GetValue$w(config, 'space.title', 0);
-            var padding;
-            if (this.orientation === 0) {
-                padding = { right: titleSpace };
-            } else {
-                padding = { bottom: titleSpace };
+            if (inputTitle) {
+                var proportion = GetValue$w(config, 'proportion.title', 0);
+                var titleSpace = GetValue$w(config, 'space.title', 0);
+                var padding;
+                if (this.orientation === 0) {
+                    padding = { right: titleSpace };
+                } else {
+                    padding = { bottom: titleSpace };
+                }
+                this.add(
+                    inputTitle,
+                    { proportion: proportion, expand: true, padding: padding }
+                );
             }
-            this.add(
-                inputTitle,
-                { proportion: proportion, expand: true, padding: padding }
-            );
 
             var defaultProportion = inputField.defaultProportion;
             if (defaultProportion === undefined) {
@@ -48135,6 +48163,10 @@
 
         setTitle(config) {
             var title = this.childrenMap.title;
+            if (!title) {
+                return this;
+            }
+
             title.setTitle(config);
             return this;
         }
@@ -48356,7 +48388,11 @@
         }
 
         // Title
-        var inputTitle = CreateTitleLabel(scene, config, (style.title || {}));
+        var inputTitle;
+        if ((config.title) !== false && (config.title !== null)) {
+            var titleStyle = style.title || {};
+            inputTitle = CreateTitleLabel(scene, config, titleStyle);
+        }
 
         // Background
         var background = CreateBackground$1(scene, (config.background || {}), (style.background || {}));
@@ -48391,7 +48427,7 @@
             config.bindingKey = bindingKey;
         }
 
-        if (!config.title) {
+        if (config.title === undefined) {
             // Display leaf key as title
             config.title = GetLeafKey(bindingKey);
         }
@@ -48422,7 +48458,7 @@
         if (!this.isWrapMode) {
             var proportion;
             if (this.orientation === 1) { // y
-                proportion = 0;
+                proportion = (this.expandInputRowHeight) ? 1 : 0;
             } else { // x
                 proportion = (this.itemWidth > 0) ? 0 : 1;
 
@@ -48488,9 +48524,15 @@
     const GetValue$u = Phaser.Utils.Objects.GetValue;
 
     var CreateButtons$2 = function (scene, config, style) {
+        if (!config) { config = {}; }
+        if (!style) { style = {}; }
+
         // Title
-        var titleStyle = GetValue$u(style, 'title') || {};
-        var title = CreateTitleLabel(scene, config, titleStyle);
+        var title;
+        if ((config.title) !== false && (config.title !== null)) {
+            var titleStyle = style.title || {};
+            title = CreateTitleLabel(scene, config, titleStyle);
+        }
 
         // Buttons
         var buttonsConfig = config.buttons;
@@ -48748,7 +48790,8 @@
         }
     };
 
-    var SetBindingTarget = function (target) {
+    var SetBindingTarget = function (target, key) {
+        // Use key only if there has single inputRow
         var children = this.sizerChildren;
         for (var i = 0, cnt = children.length; i < cnt; i++) {
             var child = children[i];
@@ -48756,7 +48799,7 @@
                 continue;
             }
 
-            child.setBindingTarget(target);
+            child.setBindingTarget(target, key);
         }
 
         return this;
@@ -48844,6 +48887,7 @@
                 // Create sizer
                 super(scene, config);
                 this.type = 'rexTweakerShell';
+
                 this.isWrapMode = isWrapMode;
 
                 if (!config.root) {
@@ -48886,6 +48930,7 @@
                     this.setAlignInputRowTitleEnable(false);
                 }
 
+                this.setExpandInputRowHeightEnable(GetValue$r(config, 'expandInputRowHeight', false));
 
                 var background = CreateBackground$1(scene, undefined, config.background);
                 if (background) {
@@ -48902,6 +48947,14 @@
                     enable = true;
                 }
                 this.alignInputRowTitleStartFlag = enable;
+                return this;
+            }
+
+            setExpandInputRowHeightEnable(enable) {
+                if (enable === undefined) {
+                    enable = true;
+                }
+                this.expandInputRowHeight = enable;
                 return this;
             }
 
