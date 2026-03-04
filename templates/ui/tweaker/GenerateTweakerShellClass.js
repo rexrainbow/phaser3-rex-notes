@@ -23,6 +23,7 @@ var GenerateTweakerShellClass = function (config) {
             // Create sizer
             super(scene, config);
             this.type = 'rexTweakerShell';
+
             this.isWrapMode = isWrapMode;
 
             if (!config.root) {
@@ -65,6 +66,7 @@ var GenerateTweakerShellClass = function (config) {
                 this.setAlignInputRowTitleEnable(false);
             }
 
+            this.setExpandInputRowHeightEnable(GetValue(config, 'expandInputRowHeight', false));
 
             var background = CreateBackground(scene, undefined, config.background);
             if (background) {
@@ -81,6 +83,14 @@ var GenerateTweakerShellClass = function (config) {
                 enable = true;
             }
             this.alignInputRowTitleStartFlag = enable;
+            return this;
+        }
+
+        setExpandInputRowHeightEnable(enable) {
+            if (enable === undefined) {
+                enable = true;
+            }
+            this.expandInputRowHeight = enable;
             return this;
         }
 

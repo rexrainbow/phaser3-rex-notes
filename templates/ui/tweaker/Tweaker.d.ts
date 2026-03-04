@@ -401,9 +401,14 @@ declare namespace Tweaker {
      */
     interface IConfig extends Sizer.IConfig {
         /** Preferred style field. */
-        styles: IStyle,
+        styles?: IStyle,
         /** Legacy style field. */
-        style: IStyle,
+        style?: IStyle,
+
+        /**
+         * Set to true to let input rows expand their height in layout.
+         */
+        expandInputRowHeight?: boolean,
     }
 
     /**
@@ -1042,6 +1047,14 @@ declare class Tweaker extends Sizer {
      * @returns This tweaker instance.
      */
     setAlignInputRowTitleEnable(enable?: boolean): this;
+
+    /**
+     * Enable or disable input-row height expansion behavior.
+     *
+     * @param enable - Set to true to expand input-row height in layout.
+     * @returns This tweaker instance.
+     */
+    setExpandInputRowHeightEnable(enable?: boolean): this;
 
     /**
      * Register an input handler.

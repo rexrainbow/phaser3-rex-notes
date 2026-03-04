@@ -99,6 +99,7 @@ var GenerateCreateCellContainerCallback = function (parent, config, style) {
     var tweakerConfig = {
         root: GetValue(style, 'root'),
         styles: GetValue(style, 'tweaker'),
+        expandInputRowHeight: true,
     };
 
     var properties = GetValue(config, '$properties') || [{}];
