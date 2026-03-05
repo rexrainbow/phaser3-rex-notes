@@ -375,6 +375,8 @@ declare namespace Tweaker {
 
             /** Style for index label in each cell. */
             index?: SimpleLabel.IConfig,
+            /** Style for display-name label in each cell of detail view. */
+            displayName?: SimpleLabel.IConfig,
 
             /** Style for add button in footer. */
             addButton?: SimpleLabel.IConfig,
@@ -685,6 +687,9 @@ declare namespace Tweaker {
      * Configuration for adding an array table.
      */
     interface IAddArrayTableConfig {
+        /** Array-table view mode. Set to `'detail'` for list-detail layout. */
+        view?: string,
+
         /** Optional title shown above the array table. */
         title?: string,
         /** Optional icon texture key shown in title. */
@@ -747,6 +752,11 @@ declare namespace Tweaker {
          * Use `%1` for index and `%2` for total-count in template string.
          */
         indexLabel?: string | ((index: number, item: unknown, items: unknown[]) => string | Record<string, any>),
+
+        /**
+         * Display-name label template or formatter for detail view.
+         */
+        displayNameLabel?: string | ((index: number, item: unknown, items: unknown[]) => string | Record<string, any>),
 
         /** Label content for delete button in each cell. */
         deleteLabel?: string | SimpleLabel.IResetDisplayContentConfig,

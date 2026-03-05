@@ -76,13 +76,6 @@ var CreateArrayTable = function (parent, config, style) {
     });
     scene.add.existing(arrayTable);
 
-    if (title) {
-        arrayTable.bringChildToTop(title)
-    }
-    if (footer) {
-        arrayTable.bringChildToTop(footer)
-    }
-
     return arrayTable;
 }
 

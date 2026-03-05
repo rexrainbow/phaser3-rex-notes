@@ -1,5 +1,6 @@
 import GetLeafKey from '../../../../plugins/utils/string/GetLeafKey.js';
 import CreateArrayTable from '../builders/createarraytable/CreateArrayTable.js';
+import CreateListDetail from '../builders/createlistdetail/CreateListDetail.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -37,7 +38,26 @@ var AddArrayTable = function (target, bindingKey, config) {
     var arrayTableStyle = GetValue(this.styles, 'arrayTable') || {};
     arrayTableStyle.tweaker = this.styles;
     arrayTableStyle.root = this.root;
-    var arrayTable = CreateArrayTable(this, config, arrayTableStyle);
+
+    var createArrayTableCallback;
+    var view = GetValue(config, 'view');
+    switch (view) {
+        case 'detail':
+            // detail mode is only for object item
+            var properties = config.$properties;
+            var isObjectItem = Array.isArray(properties) && (properties.length >= 1) && properties[0].hasOwnProperty('$key');
+            if (isObjectItem) {
+                createArrayTableCallback = CreateListDetail;
+            } else {
+                createArrayTableCallback = CreateArrayTable;
+            }
+            break;
+        default:
+            createArrayTableCallback = CreateArrayTable;
+            break;
+    }
+    var arrayTable = createArrayTableCallback(this, config, arrayTableStyle);
+
     delete arrayTableStyle.tweaker;
     delete arrayTableStyle.root;
 

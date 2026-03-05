@@ -9,14 +9,14 @@ import OnClickButtonMethods from './OnClickButtonMethods.js';
 import TransitionMethods from './TransitionMethods.js';
 import SetValue from '../../../../../../plugins/utils/object/SetValue.js';
 
-class ArrayTable extends GridTable {
+class ListTable extends GridTable {
     constructor(scene, config) {
         SetValue(config, 'reuseCellContainer', true);
         SetValue(config, 'table.enableLayer', true);
         SetValue(config, 'table.over.mode', 'boundary');
 
         super(scene, config);
-        this.type = 'rexTweaker.ArrayTable';
+        this.type = 'rexTweaker.ListDetail.ListTable';
 
         this.resetCellSizeFlag = true;
         this.lastItemsCount = undefined; // For monitor
@@ -25,13 +25,9 @@ class ArrayTable extends GridTable {
         InstallAddButton.call(this, config);
         InstallCellInteractiveEvents.call(this, config);
 
-        var header = this.childrenMap.header;
-        if (header) {
-            this.bringChildToTop(header)
-        }
         var footer = this.childrenMap.footer;
         if (footer) {
-            this.bringChildToTop(footer)
+            this.bringChildToTop(footer);
         }
     }
 
@@ -74,7 +70,7 @@ class ArrayTable extends GridTable {
 }
 
 Object.assign(
-    ArrayTable.prototype,
+    ListTable.prototype,
     BindingTargetMethods,
     MonitorTargetMethods,
     InputRowTitleWidthMethods,
@@ -82,4 +78,4 @@ Object.assign(
     TransitionMethods,
 )
 
-export default ArrayTable;
+export default ListTable;

@@ -5,8 +5,8 @@ import SplitPanels from '../gameobjects/splitpanels/SplitPanels.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 const DefaultSplitStyle = {
-    width: 8,
-    height: 8,
+    width: 10,
+    height: 10,
     color: 0x0,
     alpha: 0.001
 };

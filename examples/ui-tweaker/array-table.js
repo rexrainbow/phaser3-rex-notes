@@ -21,7 +21,7 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var panel = CreatePanel(this)
+        var panel0 = CreatePanel(this)
             .setPosition(0, 0)
             .setOrigin(0)
             .addArrayTable(CreateObjectItems(10), null, {
@@ -37,7 +37,7 @@ class Demo extends Phaser.Scene {
             })
             .layout();
 
-        var panel = CreatePanel(this)
+        var panel1 = CreatePanel(this)
             .setPosition(400, 0)
             .setOrigin(0)
             .addArrayTable(CreateNumberItems(10), null, {
@@ -48,6 +48,40 @@ class Demo extends Phaser.Scene {
                 },
             })
             .layout();
+
+        var panel2 = CreatePanel(this)
+            .setPosition(0, 300)
+            .setOrigin(0)
+            .addArrayTable(CreateComplexItems(10), null, {
+                view: 'detail',
+                $properties: [
+                    { $key: 'name', title: 'Name', view: 'string', },
+                    { $key: 'description', title: 'Descr-\niption', view: 'textarea', height: 100 },
+                    { $key: 'a', view: 'number' },
+                    { $key: 'b', view: 'number' },
+                    { $key: 'c', view: 'boolean' },
+                    { $key: 'd', view: 'number' },
+                    { $key: 'e', view: 'number' },
+                    { $key: 'f', view: 'number' },
+                    { $key: 'g', view: 'number' },
+                    { $key: 'h', view: 'number' },
+                ],
+
+                createDefaultItem() {
+                    return CreateComplexItems(1)[0]
+                },
+
+                displayNameLabel(index, item, items) {
+                    return {
+                        text: item.name
+                    }
+                },
+
+                splitRatio: 0.4
+            })
+            .setMinWidth(600)
+            .layout();
+
 
     }
 
@@ -73,6 +107,25 @@ var CreateNumberItems = function (amount) {
     var items = [];
     for (var i = 0; i < amount; i++) {
         items.push(0)
+    }
+    return items;
+}
+
+var CreateComplexItems = function (amount) {
+    var items = [];
+    for (var i = 0; i < amount; i++) {
+        items.push({
+            name: `Item ${i}`,
+            description: `Item ${i}`,
+            a: 10 + i,
+            b: 20 + i,
+            c: false,
+            d: 30 + i,
+            e: 40 + i,
+            f: 50 + i,
+            g: 60 + i,
+            h: 70 + i,
+        })
     }
     return items;
 }
@@ -277,7 +330,7 @@ var CreatePanel = function (scene) {
 
                 space: {
                     left: 10, right: 10, top: 10, bottom: 10,
-                    table: 10,
+                    table: 10, splitter: 5,
                     cell: {
                         top: 5, bottom: 5, left: 5,
                         index: 10, tweaker: 5,
@@ -298,6 +351,12 @@ var CreatePanel = function (scene) {
                         color: COLOR_LIGHT,
                         width: 16, height: 16,
                     },
+                },
+
+                splitter: {
+                    width: 10,
+                    color: COLOR_MAIN,
+                    alpha: 1
                 },
 
                 cellBackground: {
