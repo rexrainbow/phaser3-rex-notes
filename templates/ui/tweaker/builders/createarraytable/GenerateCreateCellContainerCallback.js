@@ -1,8 +1,8 @@
-import CreateTitleLabel from '../CreateTitleLabel.js';
-import CreateDeleteButton from './CreateDeleteButton.js';
-import CreateMoveUpButton from './CreateMoveUpButton.js';
-import CreateMoveDownButton from './CreateMoveDownButton.js';
-import CreateBackground from '../CreateBackground.js';
+import CreateTitleLabel from '../utils/CreateTitleLabel.js';
+import CreateDeleteButton from '../utils/CreateDeleteButton.js';
+import CreateMoveUpButton from '../utils/CreateMoveUpButton.js';
+import CreateMoveDownButton from '../utils/CreateMoveDownButton.js';
+import CreateBackground from '../utils/CreateBackground.js';
 import CellContainer from '../../gameobjects/arraytable/cellcontainer/CellContainer.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;

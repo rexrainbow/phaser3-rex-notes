@@ -1,4 +1,4 @@
-import CreateBackground from './CreateBackground.js';
+import CreateBackground from './utils/CreateBackground.js';
 import DeepClone from '../../../../plugins/utils/object/DeepClone.js';
 
 var CreateSlider = function (scene, config, style) {

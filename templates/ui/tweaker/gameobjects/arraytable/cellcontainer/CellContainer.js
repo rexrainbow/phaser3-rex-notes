@@ -8,11 +8,13 @@ class CellContainer extends Sizer {
         /*
         config: {
             space,
+            gridTable,
             background,
             indexLabel,
             inputTweaker,
             deleteButton,
-            gridTable,
+            moveUpButton,
+            moveDownButton,
         }
         */
 

@@ -1,7 +1,7 @@
 import Sizer from '../sizer/Sizer.js';
 import FixWidthSizer from '../fixwidthsizer/FixWidthSizer.js';
 import Methods from './methods/Methods.js';
-import CreateBackground from './builders/CreateBackground.js';
+import CreateBackground from './builders/utils/CreateBackground.js';
 import SetValue from '../../../plugins/utils/object/SetValue.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;

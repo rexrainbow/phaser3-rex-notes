@@ -1,6 +1,6 @@
 import InputRow from '../gameobjects/inputrow/InputRow.js';
-import CreateBackground from './CreateBackground.js';
-import CreateTitleLabel from './CreateTitleLabel.js';
+import CreateBackground from './utils/CreateBackground.js';
+import CreateTitleLabel from './utils/CreateTitleLabel.js';
 import CreateInputField from './CreateInputField.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
