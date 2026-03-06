@@ -75,7 +75,7 @@ var GenerateCreateCellContainerCallback = function (parent, config, style) {
     var displayNameLabelCallback = GetValue(config, 'displayNameLabel');
     if (!displayNameLabelCallback) {
         displayNameLabelCallback = function (index, item, items) {
-            return { 'title': '' };  // Display nothing
+            return { text: '' };  // Display nothing
         }
     }
 

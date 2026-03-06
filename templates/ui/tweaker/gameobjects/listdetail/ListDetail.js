@@ -102,6 +102,9 @@ class ListDetail extends SplitPanels {
         listTable
             .on('select', this.onSelectCell, this)
             .on('items.change', this.onItemsChange, this);
+
+        editor
+            .on('valuechange', this.onEditorValueChange, this);
     }
 
     onSelectCell(cellContainer, cellIndex) {
@@ -179,6 +182,22 @@ class ListDetail extends SplitPanels {
         if (nextIndex !== undefined) {
             this.selectItem(nextIndex, false);
         }
+    }
+
+    onEditorValueChange(value, oldValue, bindingTarget, bindingKey) {
+        if (!bindingTarget) {
+            return;
+        }
+
+        var listTable = this.leftPanel;
+        var items = listTable.items;
+        var index = items.indexOf(bindingTarget);
+        if (index === -1) {
+            return;
+        }
+
+        // Re-run cell callback so displayNameLabel(index, item, items) can be updated.
+        listTable.updateVisibleCell(index);
     }
 
     selectItem(index, scrollToRow) {
