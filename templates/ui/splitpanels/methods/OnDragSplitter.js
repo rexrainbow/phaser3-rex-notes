@@ -9,8 +9,8 @@ var OnDragSplitter = function () {
         splitterSizerPadding = this.getSizerConfig(splitter).padding,
         secondChildSizerPadding = this.getSizerConfig(secondPanel).padding;
 
-    var splitSizerOrientation = (this.orientation === 0) ? 1 : 0;
-    if (splitSizerOrientation === 0) {
+    var splitterSizer = this.childrenMap.splitterSizer;
+    if (splitterSizer.orientation === 0) { // left-right panels
         var firstChildInnerLeft = this.innerLeft + firstChildSizerPadding.left;
         var secondChildInnerRight = this.innerRight - secondChildSizerPadding.right;
 
@@ -36,7 +36,7 @@ var OnDragSplitter = function () {
 
         this.setSplitRatio(firstChildInnerWidth / totalChildrenInnerWidth);
 
-    } else {
+    } else { // top-bottom panels
         var firstChildInnerTop = this.innerTop + firstChildSizerPadding.top;
         var secondChildInnerBottom = this.innerBottom - secondChildSizerPadding.bottom;
 

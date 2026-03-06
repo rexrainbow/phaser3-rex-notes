@@ -10,7 +10,9 @@ const Clamp = Phaser.Math.Clamp;
 class ListDetail extends SplitPanels {
     constructor(scene, config) {
         var {
+            isHorizontalView,
             space = {},
+            height,
             header,
             splitter,
             background,
@@ -26,6 +28,12 @@ class ListDetail extends SplitPanels {
             // Editor at right panel
             editor,
             editorSlider,
+
+            splitRatio,
+            minLeftPanelWidth,
+            minRightPanelWidth,
+            minTopPanelWidth,
+            minBottomPanelWidth,
         } = config;
 
         // ListTable at left panel
@@ -70,19 +78,25 @@ class ListDetail extends SplitPanels {
         scene.add.existing(scrollable);
 
         super(scene, {
+            orientation: 1,
             header: header,
 
-            leftPanel: listTable,
-            rightPanel: scrollable,
+            leftPanel: (isHorizontalView) ? listTable : undefined,
+            topPanel: (isHorizontalView) ? undefined : listTable,
+
+            rightPanel: (isHorizontalView) ? scrollable : undefined,
+            bottomPanel: (isHorizontalView) ? undefined : scrollable,
 
             splitter: splitter,
-            splitRatio: GetValue(config, 'splitRatio', 0.5),
-            minLeftPanelWidth: GetValue(config, 'minLeftPanelWidth', 0),
-            minRightPanelWidth: GetValue(config, 'minRightPanelWidth', 0),
+            splitRatio: splitRatio,
+            minLeftPanelWidth: minLeftPanelWidth,
+            minRightPanelWidth: minRightPanelWidth,
+            minTopPanelWidth: minTopPanelWidth,
+            minBottomPanelWidth: minBottomPanelWidth,
 
             background: background,
 
-            height: GetValue(config, 'height', 0),
+            height: height,
             space: {
                 left: space.left,
                 right: space.right,
@@ -90,6 +104,8 @@ class ListDetail extends SplitPanels {
                 bottom: space.bottom,
                 leftPanelRight: space.splitter,
                 rightPanelLeft: space.splitter,
+                topPanelBottom: space.splitter,
+                bottomPanelTop: space.splitter,
                 // more...
             },
         });

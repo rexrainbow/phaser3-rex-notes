@@ -40,9 +40,15 @@ var AddArrayTable = function (target, bindingKey, config) {
     arrayTableStyle.root = this.root;
 
     var createArrayTableCallback;
-    var view = GetValue(config, 'view');
+    var view = GetValue(config, 'view', 'inline');
+    if (view === 'detail') {  // Default detail view is vertical
+        view = 'detail-v';
+    }
+    view = view.toLowerCase();
+    config.view = view;
     switch (view) {
-        case 'detail':
+        case 'detail-v':  // vertical
+        case 'detail-h':  // horizontal
             // detail mode is only for object item
             var properties = config.$properties;
             var isObjectItem = Array.isArray(properties) && (properties.length >= 1) && properties[0].hasOwnProperty('$key');
@@ -52,6 +58,8 @@ var AddArrayTable = function (target, bindingKey, config) {
                 createArrayTableCallback = CreateArrayTable;
             }
             break;
+
+        case 'inline':
         default:
             createArrayTableCallback = CreateArrayTable;
             break;

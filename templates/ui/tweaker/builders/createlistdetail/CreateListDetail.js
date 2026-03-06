@@ -86,6 +86,8 @@ var CreateListDetail = function (parent, config, style) {
     var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
     var listDetail = new ListDetail(scene, {
+        isHorizontalView: (config.view === 'detail-h'),
+
         header: title,
 
         // ListTable at left panel
@@ -103,8 +105,11 @@ var CreateListDetail = function (parent, config, style) {
         // Splitter between left and right panel
         splitter: splitter,
         splitRatio: GetValue(config, 'splitRatio', 0.5),
+
         minLeftPanelWidth: GetValue(config, 'minLeftPanelWidth', 0),
         minRightPanelWidth: GetValue(config, 'minRightPanelWidth', 0),
+        minTopPanelWidth: GetValue(config, 'minTopPanelWidth', 0),
+        minBottomPanelWidth: GetValue(config, 'minBottomPanelWidth', 0),
 
         // background of panels
         background: background,

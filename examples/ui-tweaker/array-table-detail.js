@@ -21,33 +21,39 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var panel0 = CreatePanel(this)
+        var isVerticalView = true;
+        CreatePanel(this, isVerticalView)
             .setPosition(0, 0)
             .setOrigin(0)
-            .addArrayTable(CreateObjectItems(10), null, {
+            .addArrayTable(CreateComplexItems(10), null, {
+                view: (isVerticalView) ? 'detail-V' : 'detail-H',
                 $properties: [
-                    { $key: 'name' },
-                    { $key: 'a' },
-                    { $key: 'b' },
+                    { $key: 'name', title: 'Name', view: 'string', },
+                    { $key: 'description', title: 'Descr-\niption', view: 'textarea', height: 100 },
+                    { $key: 'a', view: 'number' },
+                    { $key: 'b', view: 'number' },
+                    { $key: 'c', view: 'boolean' },
+                    { $key: 'd', view: 'number' },
+                    { $key: 'e', view: 'number' },
+                    { $key: 'f', view: 'number' },
+                    { $key: 'g', view: 'number' },
+                    { $key: 'h', view: 'number' },
                 ],
 
                 createDefaultItem() {
-                    return CreateObjectItems(1)[0]
+                    return CreateComplexItems(1)[0]
                 },
+
+                displayNameLabel(index, item, items) {
+                    return {
+                        text: item.name
+                    }
+                },
+
+                splitRatio: (isVerticalView) ? 0.5 : 0.4
             })
             .layout();
 
-        var panel1 = CreatePanel(this)
-            .setPosition(400, 0)
-            .setOrigin(0)
-            .addArrayTable(CreateNumberItems(10), null, {
-                $properties: { min: -10, max: 10 }, // Or remove this key
-
-                createDefaultItem() {
-                    return CreateNumberItems(1)[0]
-                },
-            })
-            .layout();
 
     }
 
@@ -55,7 +61,7 @@ class Demo extends Phaser.Scene {
     }
 }
 
-var CreateObjectItems = function (amount) {
+var CreateComplexItems = function (amount) {
     var items = [];
     for (var i = 0; i < amount; i++) {
         items.push({
@@ -64,22 +70,19 @@ var CreateObjectItems = function (amount) {
             a: 10 + i,
             b: 20 + i,
             c: false,
+            d: 30 + i,
+            e: 40 + i,
+            f: 50 + i,
+            g: 60 + i,
+            h: 70 + i,
         })
     }
     return items;
 }
 
-var CreateNumberItems = function (amount) {
-    var items = [];
-    for (var i = 0; i < amount; i++) {
-        items.push(0)
-    }
-    return items;
-}
-
-var CreatePanel = function (scene) {
+var CreatePanel = function (scene, isVerticalView) {
     return scene.rexUI.add.tweaker({
-        width: 340,
+        width: (isVerticalView) ? 400 : 600,
 
         styles: {
             space: {
@@ -273,7 +276,7 @@ var CreatePanel = function (scene) {
             },
 
             arrayTable: {
-                height: 260,
+                height: (isVerticalView) ? 500 : 300,
 
                 space: {
                     left: 10, right: 10, top: 10, bottom: 10,
