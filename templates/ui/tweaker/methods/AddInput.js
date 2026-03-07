@@ -15,7 +15,7 @@ var AddInput = function (target, bindingKey, config) {
         config.bindingKey = bindingKey;
     }
 
-    if (!config.title) {
+    if (config.title === undefined) {
         // Display leaf key as title
         config.title = GetLeafKey(bindingKey);
     }
@@ -46,7 +46,7 @@ var AddInput = function (target, bindingKey, config) {
     if (!this.isWrapMode) {
         var proportion;
         if (this.orientation === 1) { // y
-            proportion = 0;
+            proportion = (this.expandInputRowHeight) ? 1 : 0;
         } else { // x
             proportion = (this.itemWidth > 0) ? 0 : 1;
 

@@ -1,5 +1,5 @@
 import CreateRoundRectangle from '../../utils/build/CreateRoundRectangle.js';
-import CreateTitleLabel from './CreateTitleLabel.js';
+import CreateTitleLabel from './utils/CreateTitleLabel.js';
 import CreateLabel from '../../utils/build/CreateLabel.js';
 import CreateButtonsSizer from '../gameobjects/utils/CreateButtons.js';
 import InputRow from '../gameobjects/inputrow/InputRow.js';
@@ -7,9 +7,15 @@ import InputRow from '../gameobjects/inputrow/InputRow.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 var CreateButtons = function (scene, config, style) {
+    if (!config) { config = {}; }
+    if (!style) { style = {}; }
+
     // Title
-    var titleStyle = GetValue(style, 'title') || {};
-    var title = CreateTitleLabel(scene, config, titleStyle);
+    var title;
+    if ((config.title) !== false && (config.title !== null)) {
+        var titleStyle = style.title || {};
+        title = CreateTitleLabel(scene, config, titleStyle);
+    }
 
     // Buttons
     var buttonsConfig = config.buttons;

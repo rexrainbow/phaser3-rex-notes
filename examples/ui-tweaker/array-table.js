@@ -21,11 +21,10 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var target = CreateItems(10)
-        var panel = CreatePanel(this)
+        var panel0 = CreatePanel(this)
             .setPosition(0, 0)
             .setOrigin(0)
-            .addArrayTable(target, null, {
+            .addArrayTable(CreateObjectItems(10), null, {
                 $properties: [
                     { $key: 'name' },
                     { $key: 'a' },
@@ -33,7 +32,19 @@ class Demo extends Phaser.Scene {
                 ],
 
                 createDefaultItem() {
-                    return CreateItems(1)[0]
+                    return CreateObjectItems(1)[0]
+                },
+            })
+            .layout();
+
+        var panel1 = CreatePanel(this)
+            .setPosition(400, 0)
+            .setOrigin(0)
+            .addArrayTable(CreateNumberItems(10), null, {
+                $properties: { min: -10, max: 10 }, // Or remove this key
+
+                createDefaultItem() {
+                    return CreateNumberItems(1)[0]
                 },
             })
             .layout();
@@ -44,7 +55,7 @@ class Demo extends Phaser.Scene {
     }
 }
 
-var CreateItems = function (amount) {
+var CreateObjectItems = function (amount) {
     var items = [];
     for (var i = 0; i < amount; i++) {
         items.push({
@@ -54,6 +65,14 @@ var CreateItems = function (amount) {
             b: 20 + i,
             c: false,
         })
+    }
+    return items;
+}
+
+var CreateNumberItems = function (amount) {
+    var items = [];
+    for (var i = 0; i < amount; i++) {
+        items.push(0)
     }
     return items;
 }
@@ -258,7 +277,7 @@ var CreatePanel = function (scene) {
 
                 space: {
                     left: 10, right: 10, top: 10, bottom: 10,
-                    table: 10,
+                    table: 10, splitter: 5,
                     cell: {
                         top: 5, bottom: 5, left: 5,
                         index: 10, tweaker: 5,
@@ -279,6 +298,13 @@ var CreatePanel = function (scene) {
                         color: COLOR_LIGHT,
                         width: 16, height: 16,
                     },
+                },
+
+                splitter: {
+                    width: 10,
+                    height: 10,
+                    color: COLOR_MAIN,
+                    alpha: 1
                 },
 
                 cellBackground: {

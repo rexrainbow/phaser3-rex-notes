@@ -77,6 +77,32 @@ class Demo extends Phaser.Scene {
 
                 wrap: true
             })
+            .addButtons({
+                title: false,
+
+                buttons: [
+                    {
+                        label: 'Button D0',
+                        callback: function () {
+                            print.text += 'Click Button D0\n';
+                        }
+                    },
+                    {
+                        label: 'Button D1',
+                        callback: function () {
+                            print.text += 'Click Button D1\n';
+                        }
+                    },
+                    {
+                        label: 'Button D2',
+                        callback: function () {
+                            print.text += 'Click Button D2\n';
+                        },
+                    },
+                ],
+
+                wrap: true
+            })
             .setPosition(400, 300)
             .layout()
 

@@ -1,6 +1,6 @@
-import CreateTitleLabel from './CreateTitleLabel.js';
+import CreateTitleLabel from './utils/CreateTitleLabel.js';
 import Wrap from '../gameobjects/wrap/Wrap.js';
-import CreateBackground from './CreateBackground.js';
+import CreateBackground from './utils/CreateBackground.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 

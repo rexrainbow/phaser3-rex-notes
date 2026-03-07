@@ -14,22 +14,24 @@ class InputRow extends Sizer {
         this.bindTargetKey = undefined;
         this.autoUpdateEnable = true;
 
-        var inputTitle = config.inputTitle;
+        var inputTitle = config.inputTitle; // A game object, or undefined/null/false
         var inputField = config.inputField;
         var background = config.background;
 
-        var proportion = GetValue(config, 'proportion.title', 0);
-        var titleSpace = GetValue(config, 'space.title', 0);
-        var padding;
-        if (this.orientation === 0) {
-            padding = { right: titleSpace };
-        } else {
-            padding = { bottom: titleSpace };
+        if (inputTitle) {
+            var proportion = GetValue(config, 'proportion.title', 0);
+            var titleSpace = GetValue(config, 'space.title', 0);
+            var padding;
+            if (this.orientation === 0) {
+                padding = { right: titleSpace };
+            } else {
+                padding = { bottom: titleSpace };
+            }
+            this.add(
+                inputTitle,
+                { proportion: proportion, expand: true, padding: padding }
+            );
         }
-        this.add(
-            inputTitle,
-            { proportion: proportion, expand: true, padding: padding }
-        );
 
         var defaultProportion = inputField.defaultProportion;
         if (defaultProportion === undefined) {
@@ -66,6 +68,10 @@ class InputRow extends Sizer {
 
     setTitle(config) {
         var title = this.childrenMap.title;
+        if (!title) {
+            return this;
+        }
+
         title.setTitle(config);
         return this;
     }

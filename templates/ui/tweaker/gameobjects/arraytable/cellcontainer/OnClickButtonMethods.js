@@ -18,11 +18,7 @@ export default {
             return;
         }
 
-        var currentIndex = items.indexOf(this.cellItem);
-        if (currentIndex === -1) {
-            return;
-        }
-
+        var currentIndex = this.cellIndex;
         var targetIndex = (currentIndex === 0) ? (items.length - 1) : (currentIndex - 1);
         var tmp = items[currentIndex];
         items[currentIndex] = items[targetIndex];
@@ -43,11 +39,7 @@ export default {
             return;
         }
 
-        var currentIndex = items.indexOf(this.cellItem);
-        if (currentIndex === -1) {
-            return;
-        }
-
+        var currentIndex = this.cellIndex;
         var targetIndex = (currentIndex === (items.length - 1)) ? 0 : (currentIndex + 1);
         var tmp = items[currentIndex];
         items[currentIndex] = items[targetIndex];

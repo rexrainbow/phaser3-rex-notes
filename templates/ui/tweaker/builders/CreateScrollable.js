@@ -1,6 +1,6 @@
-import CreateTitleLabel from './CreateTitleLabel.js';
+import CreateTitleLabel from './utils/CreateTitleLabel.js';
 import CreateSlider from './CreateSlider.js';
-import CreateBackground from './CreateBackground.js';
+import CreateBackground from './utils/CreateBackground.js';
 import Scrollable from '../gameobjects/scrollable/Scrollable.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;

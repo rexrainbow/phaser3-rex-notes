@@ -8,10 +8,12 @@ const Clamp = Phaser.Math.Clamp;
 
 class SplitPanels extends Sizer {
     constructor(scene, config) {
+        var panelOrientation = (config.leftPanel) ? 0 : 1;
+
         if (!config.hasOwnProperty('orientation')) {
-            config.orientation = (config.hasOwnProperty('leftPanel')) ? 1 : 0;
+            // Default orientation
+            config.orientation = (panelOrientation) ? 0 : 1;
         }
-        var splitSizerOrientation = (config.orientation === 1) ? 0 : 1;
 
         super(scene, config);
         this.type = 'rexSplit';
@@ -47,7 +49,7 @@ class SplitPanels extends Sizer {
         // SplitSizer
         var firstChildKey, secondChildKey;
         var minFirstChildSizeKey, minSecondChildSizeKey;
-        if (splitSizerOrientation === 0) { // x
+        if (panelOrientation === 0) { // x
             firstChildKey = 'leftPanel';
             secondChildKey = 'rightPanel';
             minFirstChildSizeKey = 'minLeftPanelWidth';
@@ -64,7 +66,7 @@ class SplitPanels extends Sizer {
         var secondChild = GetValue(config, secondChildKey, undefined);
         var spaceConfig = GetValue(config, 'space', undefined);
 
-        var splitterSizer = new Sizer(scene, { orientation: splitSizerOrientation });
+        var splitterSizer = new Sizer(scene, { orientation: panelOrientation });
         scene.add.existing(splitterSizer);
         this.add(splitterSizer, { proportion: 1, expand: true });
 
@@ -144,7 +146,7 @@ class SplitPanels extends Sizer {
         this.setSplitRatio(GetValue(config, 'splitRatio', 0.5));
 
         this.splitterDragBehavior = new Drag(splitter, {
-            axis: (splitSizerOrientation === 0) ? 1 : 2,
+            axis: (panelOrientation === 0) ? 1 : 2,
         });
 
         splitter
@@ -201,7 +203,7 @@ class SplitPanels extends Sizer {
         var splitterSizer = this.childrenMap.splitterSizer;
         return splitterSizer.sizerChildren[2];
     }
-    
+
     get bottomPanel() {
         return this.rightPanel;
     }

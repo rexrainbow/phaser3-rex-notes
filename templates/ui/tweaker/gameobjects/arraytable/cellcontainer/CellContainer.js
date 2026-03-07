@@ -8,11 +8,13 @@ class CellContainer extends Sizer {
         /*
         config: {
             space,
+            gridTable,
             background,
             indexLabel,
             inputTweaker,
             deleteButton,
-            gridTable,
+            moveUpButton,
+            moveDownButton,
         }
         */
 
@@ -27,9 +29,17 @@ class CellContainer extends Sizer {
         this.build(config);
     }
 
-    setItem(item) {
-        this.cellItem = item;
-        this.setBindingTarget(item);
+    setItem(items, index) {
+        var item = items[index];
+
+        this.cellIndex = index;
+
+        if (typeof item === 'object') {
+            this.setBindingTarget(item);
+        } else {
+            this.setBindingTarget(items, index);
+        }
+
         return this;
     }
 
@@ -43,8 +53,8 @@ class CellContainer extends Sizer {
         return this;
     }
 
-    setBindingTarget(target) {
-        this.childrenMap.inputTweaker.setBindingTarget(target);
+    setBindingTarget(target, key) {
+        this.childrenMap.inputTweaker.setBindingTarget(target, key);
         return this;
     }
 

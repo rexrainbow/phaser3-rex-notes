@@ -42,3 +42,7 @@
 - Folder `examples` : Test code of plugins
 - Folder `docs` : Some notes of phaser3, and my plugins.
     - `site\index.html` : Entry point.
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=rexrainbow/phaser3-rex-notes&type=date&legend=top-left)](https://www.star-history.com/#rexrainbow/phaser3-rex-notes&type=date&legend=top-left)

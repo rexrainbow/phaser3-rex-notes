@@ -1,8 +1,8 @@
-import CreateTitleLabel from '../CreateTitleLabel.js';
-import CreateDeleteButton from './CreateDeleteButton.js';
-import CreateMoveUpButton from './CreateMoveUpButton.js';
-import CreateMoveDownButton from './CreateMoveDownButton.js';
-import CreateBackground from '../CreateBackground.js';
+import CreateTitleLabel from '../utils/CreateTitleLabel.js';
+import CreateDeleteButton from '../utils/CreateDeleteButton.js';
+import CreateMoveUpButton from '../utils/CreateMoveUpButton.js';
+import CreateMoveDownButton from '../utils/CreateMoveDownButton.js';
+import CreateBackground from '../utils/CreateBackground.js';
 import CellContainer from '../../gameobjects/arraytable/cellcontainer/CellContainer.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -32,9 +32,22 @@ var CreateCellContainer = function (parent, cell, config) {
 
     var moveDownButton = createMoveDownButton(scene);
 
+    var properties = tweakerAddRowsParameters.properties;
+    var isObjectItem = (properties.length >= 1) && (properties[0].hasOwnProperty('$key'));
+    var target;
+    if (isObjectItem) {
+        target = cell.item;
+    } else {
+        target = cell.items;
+        properties = [{
+            ...properties[0],
+            title: false,     // No title label
+            $key: cell.index
+        }];
+    }
     var inputTweaker = parent.createTweaker(tweakerConfig)
-        .setAlignInputRowTitleEnable(true)
-        .addRows(tweakerAddRowsParameters.properties, cell.item, tweakerAddRowsParameters.monitor);
+        .setAlignInputRowTitleEnable(isObjectItem)
+        .addRows(properties, target, tweakerAddRowsParameters.monitor);
 
     var background = CreateBackground(scene, {}, backgroundStyle);
 
@@ -86,9 +99,13 @@ var GenerateCreateCellContainerCallback = function (parent, config, style) {
     var tweakerConfig = {
         root: GetValue(style, 'root'),
         styles: GetValue(style, 'tweaker'),
+        expandInputRowHeight: true,
     };
 
-    var properties = GetValue(config, '$properties') || [];
+    var properties = GetValue(config, '$properties') || {};
+    if (!Array.isArray(properties)) {
+        properties = [properties];
+    }
     var monitor = GetValue(config, 'monitor', false);
     var tweakerAddRowsParameters = { properties, monitor };
 
@@ -119,10 +136,11 @@ var GenerateCreateCellContainerCallback = function (parent, config, style) {
 
         cellContainer
             .setIndexLabel(indexLabelCallback(index, item, items))
-            .setItem(item) // Also setBindingTarget
+            .setItem(items, index) // Also setBindingTarget
+            // layout
             .setMinSize(width, 0)
             .setOrigin(0.5, 0)
-            .setDirty()
+            .setDirty(true)
             .layout()
             .setDirty(false)
 

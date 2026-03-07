@@ -75,3 +75,42 @@ Before making any modifications in this repository:
 3. Follow the most specific applicable rules before starting any edits.
 
 Do not begin modifications until the relevant contribution rules are understood.
+
+## Code Generation Style
+
+Unless the applicable `CONTRIBUTING.md` section says otherwise, follow these control-flow rules when generating or refactoring code:
+
+- Keep early returns for guard clauses only, such as invalid input, error handling, precondition failure, or no-op cases.
+- Keep a single-sided `if` when the condition controls optional extra work and the false case intentionally does nothing.
+- Use `if (...) { ... } else { ... }` for mode branching, where both branches are normal execution paths and the false case has its own explicit behavior.
+- Do not emulate an `else` branch by writing `if (cond) { ... return; }` followed by the alternative path, unless the return is a guard clause.
+- When refactoring two-branch normal flow, prefer an explicit `if/else` structure over early-return flattening.
+
+Example:
+
+Good:
+```js
+if (useFastPath) {
+  runFastPath();
+} else {
+  runSafePath();
+}
+```
+
+Also good:
+
+```js
+if (!input) {
+  return;
+}
+processInput(input);
+```
+
+Avoid:
+```js
+if (useFastPath) {
+  runFastPath();
+  return;
+}
+runSafePath();
+```

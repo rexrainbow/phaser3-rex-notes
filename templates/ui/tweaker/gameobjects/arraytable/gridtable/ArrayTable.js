@@ -24,6 +24,15 @@ class ArrayTable extends GridTable {
         InstallClearButton.call(this, config);
         InstallAddButton.call(this, config);
         InstallCellInteractiveEvents.call(this, config);
+
+        var header = this.childrenMap.header;
+        if (header) {
+            this.bringChildToTop(header)
+        }
+        var footer = this.childrenMap.footer;
+        if (footer) {
+            this.bringChildToTop(footer)
+        }
     }
 
     destroy(fromScene) {

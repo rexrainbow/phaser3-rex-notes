@@ -1,6 +1,6 @@
 import Columns from '../gameobjects/columns/Columns.js';
-import CreateTitleLabel from './CreateTitleLabel.js';
-import CreateBackground from './CreateBackground.js';
+import CreateTitleLabel from './utils/CreateTitleLabel.js';
+import CreateBackground from './utils/CreateBackground.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 

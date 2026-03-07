@@ -1176,6 +1176,8 @@ tweaker.addButton({
 - `icon`, `iconFrame` : Texture key, frame name of icon on title-label.
 - `iconSize` : Fixed icon size
 - `title` : Display text of title-label.
+    - `undefined` : Title label with default string `''`.
+    - `false` or `null` : No title label.
 - `label` : Display text of button, [a string or a plain object](ui-label.md#reset-display-content).
     ```javascript
     {
@@ -1236,6 +1238,8 @@ tweaker.addButtons({
 - `icon`, `iconFrame` : Texture key, frame name of icon on title-label.
 - `iconSize` : Fixed icon size
 - `title` : Display text of title-label.
+    - `undefined` : Title label with default string `''`.
+    - `false` or `null` : No title label.
 - `buttons` : Array of button label and button callback
     ```javascript
     {
@@ -1432,10 +1436,64 @@ var childTweaker = tweaker.addScrollable({
     - A number : Height of this [Scrollable(Panel)](ui-scrollablepanel.md).
     - `undefined`, or `0` : Expand this scrollable(Panel).
 
-
 See [Style of scrollable](#style-of-scrollable)
 
+### Add Array table
 
+Array table is a [grid-table](ui-gridtable.md) contains sub-tweaker panel for each cell.
+
+```javascript
+tweaker.addArrayTable(target, bindingKey, {
+    $properties: [
+        {$key: ...},
+    ],
+
+    // or
+    // $properties: {},
+
+    createDefaultItem() {
+        return item; // An object or number, string, boolean
+    }
+
+});
+```
+
+or
+
+```javascript
+tweaker.addArrayTable({
+    // title: title,
+
+    // bindingTarget:
+    // bindingKey:
+    
+    // $properties: [ {$key: ...}, ... ],  // or
+    // $properties: {...},
+
+    // monitor: 
+
+    // createDefaultItem() { return item; /* An object or number, string, boolean */ }
+
+    // height: 0
+});
+```
+
+- `title` Title of array table.
+    - A string : Title string.
+- `$properties` :
+    - Item is an object : A list of properties, see [Add rows](#add-rows)
+    - Item is a number, string, or boolean : A property, or `undefined`
+- `createDefaultItem` : Callback when adding a new item to array table.
+    ```javascript
+    function() {
+        return item; /* An object or number, string, boolean */
+    }
+    ```
+- `height` :
+    - A number : Height of this [Scrollable(Panel)](ui-scrollablepanel.md).
+    - `undefined`, or `0` : Expand this scrollable(Panel).
+
+See [Style of array table](#style-of-array-table)
 
 ### Add rows
 
@@ -1569,6 +1627,9 @@ tweaker.addRows(properties, target);
         ```
         - `$target` : Override `target` value pass to remainder `$properties`.
             - `undefined` : Use previous `target` value. Default behavior.
+    - ArrayTable
+        ```javascript
+        ```
 - `monitor` : 
     - `false` : Don't update input text every tick from target.
     - `true` : Update input text from current object, in `postupdate` event of scene. Default behavior.
@@ -3685,6 +3746,192 @@ Style of scrollable is defined in
             space: {
                 panel:0, 
             }
+        }
+    }
+}
+```
+
+#### Style of array table
+
+Style of array table is defined in 
+
+- `styles.arrayTable`
+
+```javascript
+{
+    // style: {...}
+    styles: {
+        arrayTable: {
+            // height: 0,
+
+            title: {
+                background: {
+                    radius: 0,
+                    // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
+
+                    color: undefined,
+                    alpha: undefined,
+                    strokeColor: undefined,
+                    strokeAlpha: undefined,
+                    strokeWidth: undefined,
+                },
+
+                text: {
+                    fontFamily: 'Courier',
+                    fontSize: '16px',
+                    fontStyle: '',
+                    backgroundColor: null,
+                    color: '#fff',
+                    stroke: '#fff',
+                    strokeThickness: 0,
+                    shadow: {
+                        offsetX: 0,
+                        offsetY: 0,
+                        color: '#000',
+                        blur: 0,
+                        stroke: false,
+                        fill: false
+                    },
+                    padding: {
+                        left: 0,
+                        right: 0,
+                        top: 0,
+                        bottom: 0,
+                    },
+                    // more text styles
+                },
+
+                iconSize: undefined,
+                iconWidth: undefined, iconHeight: undefined,
+
+                space: {
+                    left: 0, right: 0, top: 0, bottom:0,
+                    icon: 0, text: 0
+                },
+            },
+
+            background: {
+                radius: 0,
+                // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
+
+                color: undefined,
+                alpha: undefined,
+                strokeColor: undefined,
+                strokeAlpha: undefined,
+                strokeWidth: undefined,
+            },
+
+            // Splitter between list-table(left) and editor(right) in detail view
+            splitter: {
+                width: 10,
+                height: 10,
+                color: 0x0,
+                alpha: 0.001
+            },
+
+            table: {
+                // width: undefined,
+                // height: undefined,
+                // cellWidth: undefined,
+                // cellHeight: undefined,
+                // columns: 1,
+                // mask: {
+                //     padding: 1
+                // },
+                // interactive: true,
+                // click: undefined,
+                // over: {
+                //     mode: 'pointer'  // or 'boundary'
+                // },
+                // tap: undefined,
+                // press: undefined,
+                // swipe: undefined,
+                // reuseCellContainer: true,
+                // enableLayer: true,
+            },
+
+            slider: {
+                track: {
+                    width: 1, height: 1,
+                    radius: 0,
+                    color: undefined, alpha: 1,
+                    strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,
+                    shape: undefined
+                },
+
+                thumb: {
+                    width: 1, height: 1,
+                    radius: 0,
+                    color: undefined, alpha: 1,
+                    strokeColor: undefined, strokeAlpha: 1, strokeWidth: 2,
+                    shape: undefined
+                },
+
+                // hideUnscrollableSlider: false,
+                // disableUnscrollableDrag: false,
+                // adaptThumbSize: false,
+                // minThumbSize: undefined,
+            },
+
+            space: {
+                left: 0,
+                right: 0,
+                top: 0,
+                bottom: 0,
+
+                table: 0,
+                sliderX: 0,
+                sliderY: 0,
+                header: 0,
+                footer: 0,
+
+                cell: {
+                    left: 0,
+                    right: 0,
+                    top: 0,
+                    bottom: 0,
+                    index: 0,
+                    tweaker: 0,
+                    delete: 0,
+                },
+
+                // Space between clear/add buttons in footer
+                button: 0,
+            },
+
+            // Label style config
+            index: {},
+            displayName: {},
+            addButton: {},
+            clearButton: {},
+            deleteButton: {},
+            moveUpButton: {},
+            moveDownButton: {},
+
+            // Styles of editor panel in detail view
+            editorToolbar: {
+                // Header labels
+                index: {},
+                displayName: {},
+
+                // Footer toolbar buttons
+                deleteButton: {},
+                duplicateButton: {},
+                resetButton: {},
+                previousButton: {},
+                nextButton: {},
+            },
+
+            cellBackground: {
+                radius: 0,
+                // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
+
+                color: undefined,
+                alpha: undefined,
+                strokeColor: undefined,
+                strokeAlpha: undefined,
+                strokeWidth: undefined,
+            },
         }
     }
 }

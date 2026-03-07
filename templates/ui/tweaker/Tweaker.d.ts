@@ -330,11 +330,20 @@ declare namespace Tweaker {
 
         /** Array table container style. */
         arrayTable?: {
+            /** Default height of array table. */
+            height?: number,
+
             /** Optional array table title style. */
             title?: SimpleLabel.IConfig,
 
             /** Array table background style. */
             background?: CreateBackground.IConfig,
+
+            /** Splitter style between list-table and editor panel in detail view. */
+            splitter?: CreateBackground.IConfig,
+
+            /** Default table configuration. */
+            table?: GridTable.IConfig['table'],
 
             /** Vertical slider style of array-table container. */
             slider?: {
@@ -369,6 +378,30 @@ declare namespace Tweaker {
 
             /** Style for index label in each cell. */
             index?: SimpleLabel.IConfig,
+            /** Style for display-name label in each cell of detail view. */
+            displayName?: SimpleLabel.IConfig,
+
+            /**
+             * Styles for editor panel title/footer controls in detail view.
+             * `index` and `displayName` are used by editor header labels.
+             */
+            editorToolbar?: {
+                /** Style for index label in editor header. */
+                index?: SimpleLabel.IConfig,
+                /** Style for display-name label in editor header. */
+                displayName?: SimpleLabel.IConfig,
+
+                /** Style for delete button in editor footer toolbar. */
+                deleteButton?: SimpleLabel.IConfig,
+                /** Style for duplicate button in editor footer toolbar. */
+                duplicateButton?: SimpleLabel.IConfig,
+                /** Style for reset button in editor footer toolbar. */
+                resetButton?: SimpleLabel.IConfig,
+                /** Style for previous button in editor footer toolbar. */
+                previousButton?: SimpleLabel.IConfig,
+                /** Style for next button in editor footer toolbar. */
+                nextButton?: SimpleLabel.IConfig,
+            },
 
             /** Style for add button in footer. */
             addButton?: SimpleLabel.IConfig,
@@ -378,6 +411,12 @@ declare namespace Tweaker {
 
             /** Style for delete button in each cell. */
             deleteButton?: SimpleLabel.IConfig,
+
+            /** Style for move-up button in each cell. */
+            moveUpButton?: SimpleLabel.IConfig,
+
+            /** Style for move-down button in each cell. */
+            moveDownButton?: SimpleLabel.IConfig,
 
             /** Style for cell background. */
             cellBackground?: CreateBackground.IConfig,
@@ -401,9 +440,14 @@ declare namespace Tweaker {
      */
     interface IConfig extends Sizer.IConfig {
         /** Preferred style field. */
-        styles: IStyle,
+        styles?: IStyle,
         /** Legacy style field. */
-        style: IStyle,
+        style?: IStyle,
+
+        /**
+         * Set to true to let input rows expand their height in layout.
+         */
+        expandInputRowHeight?: boolean,
     }
 
     /**
@@ -446,7 +490,7 @@ declare namespace Tweaker {
         iconSize?: number,
 
         /** Text shown on the row title. */
-        title?: string,
+        title?: string | null | false,
 
         /** Orientation used by this row layout. */
         orientation?: Sizer.OrientationTypes,
@@ -668,6 +712,9 @@ declare namespace Tweaker {
      * Configuration for adding an array table.
      */
     interface IAddArrayTableConfig {
+        /** Array-table view mode. Set to `'detail'` for list-detail layout. */
+        view?: string,
+
         /** Optional title shown above the array table. */
         title?: string,
         /** Optional icon texture key shown in title. */
@@ -680,10 +727,13 @@ declare namespace Tweaker {
         /** Binding target object for the array items. */
         bindingTarget?: Object,
         /** Key path to the array field on the binding target. */
-        bindingKey?: string,
+        bindingKey?: string | null,
 
-        /** Property descriptors for each item. */
-        $properties?: RowsPropertyType[],
+        /**
+         * Property descriptors for each item.
+         * Supports primitive-item shorthand via a single input-row config.
+         */
+        $properties?: RowsPropertyType[] | RowsPropertyType | IAddInputConfig,
 
         /** Set to true to monitor input values. */
         monitor?: boolean,
@@ -718,8 +768,8 @@ declare namespace Tweaker {
                 index?: number,
                 tweaker?: number,
                 delete?: number,
-                button?: number,
-            }
+            },
+            button?: number,
         },
 
         /**
@@ -728,8 +778,19 @@ declare namespace Tweaker {
          */
         indexLabel?: string | ((index: number, item: unknown, items: unknown[]) => string | Record<string, any>),
 
+        /**
+         * Display-name label template or formatter for detail view.
+         */
+        displayNameLabel?: string | ((index: number, item: unknown, items: unknown[]) => string | Record<string, any>),
+
         /** Label content for delete button in each cell. */
         deleteLabel?: string | SimpleLabel.IResetDisplayContentConfig,
+
+        /** Label content for move-up button in each cell. */
+        moveUpLabel?: string | SimpleLabel.IResetDisplayContentConfig,
+
+        /** Label content for move-down button in each cell. */
+        moveDownLabel?: string | SimpleLabel.IResetDisplayContentConfig,
 
         /**
          * Label content for add button in footer.
@@ -764,7 +825,7 @@ declare namespace Tweaker {
      */
     interface IAddArrayTableBoundConfig extends IAddArrayTableConfig {
         bindingTarget: Object,
-        bindingKey: string,
+        bindingKey?: string | null,
     }
 
     /**
@@ -926,7 +987,7 @@ declare namespace Tweaker {
         /** Optional array-table-level binding target. */
         $target?: Object,
         /** Binding key path of array field. */
-        $key: string,
+        $key?: string | null,
     }
 
     /**
@@ -1042,6 +1103,14 @@ declare class Tweaker extends Sizer {
      * @returns This tweaker instance.
      */
     setAlignInputRowTitleEnable(enable?: boolean): this;
+
+    /**
+     * Enable or disable input-row height expansion behavior.
+     *
+     * @param enable - Set to true to expand input-row height in layout.
+     * @returns This tweaker instance.
+     */
+    setExpandInputRowHeightEnable(enable?: boolean): this;
 
     /**
      * Register an input handler.
@@ -1184,7 +1253,7 @@ declare class Tweaker extends Sizer {
      */
     addArrayTable(
         target: Object,
-        bindingKey: string,
+        bindingKey: string | null,
         config?: Tweaker.IAddArrayTableConfig
     ): this;
 

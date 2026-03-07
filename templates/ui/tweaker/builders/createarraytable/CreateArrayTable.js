@@ -1,9 +1,9 @@
 import ArrayTable from '../../gameobjects/arraytable/gridtable/ArrayTable.js';
-import CreateTitleLabel from '../CreateTitleLabel.js';
+import CreateTitleLabel from '../utils/CreateTitleLabel.js';
 import CreateSlider from '../CreateSlider.js';
-import CreateAddButton from './CreateAddButton.js';
-import CreateClearButton from './CreateClearButton.js';
-import CreateBackground from '../CreateBackground.js';
+import CreateAddButton from '../utils/CreateAddButton.js';
+import CreateClearButton from '../utils/CreateClearButton.js';
+import CreateBackground from '../utils/CreateBackground.js';
 import Sizer from '../../../sizer/Sizer.js';
 import GenerateCreateCellContainerCallback from './GenerateCreateCellContainerCallback.js';
 import Merge from '../../../../../plugins/utils/object/Merge.js';
@@ -75,13 +75,6 @@ var CreateArrayTable = function (parent, config, style) {
         createCellContainerCallback: GenerateCreateCellContainerCallback(parent, config, style),
     });
     scene.add.existing(arrayTable);
-
-    if (title) {
-        arrayTable.bringChildToTop(title)
-    }
-    if (footer) {
-        arrayTable.bringChildToTop(footer)
-    }
 
     return arrayTable;
 }

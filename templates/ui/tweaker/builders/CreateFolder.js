@@ -1,5 +1,5 @@
 import FolderTitle from '../gameobjects/label/FolderTitle.js';
-import CreateBackground from './CreateBackground.js';
+import CreateBackground from './utils/CreateBackground.js';
 import Folder from '../gameobjects/folder/Folder.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;

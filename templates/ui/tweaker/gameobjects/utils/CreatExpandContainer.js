@@ -1,4 +1,4 @@
-import Sizer from '../../../../sizer/Sizer.js';
+import Sizer from '../../../sizer/Sizer.js';
 
 var CreatExpandContainer = function (scene, orientation) {
     var container = new Sizer(scene, {

@@ -20,10 +20,14 @@ var GenerateInputFieldClass = function (BaseClass) {
             return this._value;
         }
 
-        get root() {
+        get tweaker() {
             var inputRow = this.getParentSizer();
             var tweaker = inputRow.getParentSizer();
-            return tweaker.root;
+            return tweaker;
+        }
+
+        get root() {
+            return this.tweaker.root;
         }
 
         onBindTarget(target, key) {
@@ -74,7 +78,9 @@ var GenerateInputFieldClass = function (BaseClass) {
             if (!this.syncValueFlag) {
                 var bindingTarget = this.bindingTarget;
                 var bindingKey = this.bindingKey;
+                // Emit event from this input field, current tweaker, and root tweaker
                 this.emit('valuechange', value, oldValue, bindingTarget, bindingKey);
+                this.tweaker.emit('valuechange', value, oldValue, bindingTarget, bindingKey);
                 this.root.emit('valuechange', value, oldValue, bindingTarget, bindingKey);
             }
         }

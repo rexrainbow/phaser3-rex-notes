@@ -20592,7 +20592,10 @@
         }
 
         // Fast path: single key
-        if (typeof keys === 'string' && keys.indexOf(delimiter) === -1) {
+        if (
+            (typeof keys === 'string' && keys.indexOf(delimiter) === -1) ||
+            (typeof keys === 'number')
+        ) {
             target[keys] = value;
             return target;
         }
@@ -38812,25 +38815,6 @@ void main (void) {
                 }
             );
             this.addChildrenMap('scrollableSizer', scrollableSizer);
-
-            if (footer) {
-                var align = GetValue$9(config, 'align.footer', 'center');
-                var footerSpace = GetValue$9(config, 'space.footer', 0);
-                var padding;
-                if (!isRevererXY) {
-                    padding = { top: footerSpace };
-                } else {
-                    padding = { left: footerSpace };
-                }
-                this.add(footer,
-                    {
-                        proportion: 0,
-                        align: align,
-                        padding: padding,
-                        expand: GetValue$9(config, 'expand.footer', true)
-                    }
-                );
-            }
 
             var header = GetValue$9(config, 'header', undefined);
             if (header) {
