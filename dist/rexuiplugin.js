@@ -320,12 +320,12 @@
     };
 
     const IsPlainObject$X = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$49 = Phaser.Utils.Objects.GetValue;
+    const GetValue$4l = Phaser.Utils.Objects.GetValue;
 
     var SetStretchMode = function(mode) {
         if (IsPlainObject$X(mode)) {
-            this.stretchMode.edge = parseMode(GetValue$49(mode, 'edge', 0));
-            this.stretchMode.internal = parseMode(GetValue$49(mode, 'internal', 0));
+            this.stretchMode.edge = parseMode(GetValue$4l(mode, 'edge', 0));
+            this.stretchMode.internal = parseMode(GetValue$4l(mode, 'internal', 0));
         } else {
             mode = parseMode(mode);
             this.stretchMode.edge = mode;
@@ -378,7 +378,7 @@
         //  NOOP
     };
 
-    var Methods$o = {
+    var Methods$p = {
         _beginDraw: NOOP,
         _drawImage: NOOP,
         _drawTileSprite: NOOP,
@@ -394,66 +394,66 @@
     };
 
     const IsPlainObject$W = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$48 = Phaser.Utils.Objects.GetValue;
+    const GetValue$4k = Phaser.Utils.Objects.GetValue;
 
     var NinePatchBase = function (GOClass, type) {
         class NinePatch extends GOClass {
             constructor(scene, x, y, width, height, key, baseFrame, columns, rows, config) {
                 if (IsPlainObject$W(x)) {
                     config = x;
-                    x = GetValue$48(config, 'x', 0);
-                    y = GetValue$48(config, 'y', 0);
-                    width = GetValue$48(config, 'width', 1);
-                    height = GetValue$48(config, 'height', 1);
-                    key = GetValue$48(config, 'key', undefined);
-                    baseFrame = GetValue$48(config, 'baseFrame', undefined);
-                    columns = GetValue$48(config, 'columns', undefined);
-                    rows = GetValue$48(config, 'rows', undefined);
+                    x = GetValue$4k(config, 'x', 0);
+                    y = GetValue$4k(config, 'y', 0);
+                    width = GetValue$4k(config, 'width', 1);
+                    height = GetValue$4k(config, 'height', 1);
+                    key = GetValue$4k(config, 'key', undefined);
+                    baseFrame = GetValue$4k(config, 'baseFrame', undefined);
+                    columns = GetValue$4k(config, 'columns', undefined);
+                    rows = GetValue$4k(config, 'rows', undefined);
                 } else if (IsPlainObject$W(width)) {
                     config = width;
-                    width = GetValue$48(config, 'width', 1);
-                    height = GetValue$48(config, 'height', 1);
-                    key = GetValue$48(config, 'key', undefined);
-                    baseFrame = GetValue$48(config, 'baseFrame', undefined);
-                    columns = GetValue$48(config, 'columns', undefined);
-                    rows = GetValue$48(config, 'rows', undefined);
+                    width = GetValue$4k(config, 'width', 1);
+                    height = GetValue$4k(config, 'height', 1);
+                    key = GetValue$4k(config, 'key', undefined);
+                    baseFrame = GetValue$4k(config, 'baseFrame', undefined);
+                    columns = GetValue$4k(config, 'columns', undefined);
+                    rows = GetValue$4k(config, 'rows', undefined);
                 } else if (IsPlainObject$W(key)) {
                     config = key;
-                    key = GetValue$48(config, 'key', undefined);
-                    baseFrame = GetValue$48(config, 'baseFrame', undefined);
-                    columns = GetValue$48(config, 'columns', undefined);
-                    rows = GetValue$48(config, 'rows', undefined);
+                    key = GetValue$4k(config, 'key', undefined);
+                    baseFrame = GetValue$4k(config, 'baseFrame', undefined);
+                    columns = GetValue$4k(config, 'columns', undefined);
+                    rows = GetValue$4k(config, 'rows', undefined);
                 } else if (IsPlainObject$W(baseFrame)) {
                     config = baseFrame;
-                    baseFrame = GetValue$48(config, 'baseFrame', undefined);
-                    columns = GetValue$48(config, 'columns', undefined);
-                    rows = GetValue$48(config, 'rows', undefined);
+                    baseFrame = GetValue$4k(config, 'baseFrame', undefined);
+                    columns = GetValue$4k(config, 'columns', undefined);
+                    rows = GetValue$4k(config, 'rows', undefined);
                 } else if (Array.isArray(baseFrame)) {
                     config = rows;
                     rows = columns;
                     columns = baseFrame;
-                    baseFrame = GetValue$48(config, 'baseFrame', undefined);
+                    baseFrame = GetValue$4k(config, 'baseFrame', undefined);
                 } else if (IsPlainObject$W(columns)) {
                     config = columns;
-                    columns = GetValue$48(config, 'columns', undefined);
-                    rows = GetValue$48(config, 'rows', undefined);
+                    columns = GetValue$4k(config, 'columns', undefined);
+                    rows = GetValue$4k(config, 'rows', undefined);
                 }
 
                 if (baseFrame === undefined) {
-                    baseFrame = GetValue$48(config, 'frame', undefined);
+                    baseFrame = GetValue$4k(config, 'frame', undefined);
                 }
 
                 if (columns === undefined) {
-                    var leftWidth = GetValue$48(config, 'leftWidth', undefined);
-                    var rightWidth = GetValue$48(config, 'rightWidth', undefined);
+                    var leftWidth = GetValue$4k(config, 'leftWidth', undefined);
+                    var rightWidth = GetValue$4k(config, 'rightWidth', undefined);
                     if ((leftWidth !== undefined) && (rightWidth !== undefined)) {
                         columns = [leftWidth, undefined, rightWidth];
                     }
                 }
 
                 if (rows === undefined) {
-                    var topHeight = GetValue$48(config, 'topHeight', undefined);
-                    var bottomHeight = GetValue$48(config, 'bottomHeight', undefined);
+                    var topHeight = GetValue$4k(config, 'topHeight', undefined);
+                    var bottomHeight = GetValue$4k(config, 'bottomHeight', undefined);
                     if ((topHeight !== undefined) && (bottomHeight !== undefined)) {
                         rows = [topHeight, undefined, bottomHeight];
                     }
@@ -472,13 +472,13 @@
                 this._tileSprite = undefined; // Reserved for drawing image
                 this._image = undefined; // Reserved for drawing image
 
-                this.setGetFrameNameCallback(GetValue$48(config, 'getFrameNameCallback', undefined));
-                this.setStretchMode(GetValue$48(config, 'stretchMode', 0));
-                this.setPreserveRatio(GetValue$48(config, 'preserveRatio', true));
+                this.setGetFrameNameCallback(GetValue$4k(config, 'getFrameNameCallback', undefined));
+                this.setStretchMode(GetValue$4k(config, 'stretchMode', 0));
+                this.setPreserveRatio(GetValue$4k(config, 'preserveRatio', true));
 
-                var maxFixedPartScale = GetValue$48(config, 'maxFixedPartScale', 1);
-                var maxFixedPartScaleX = GetValue$48(config, 'maxFixedPartScaleX', maxFixedPartScale);
-                var maxFixedPartScaleY = GetValue$48(config, 'maxFixedPartScaleY', undefined);
+                var maxFixedPartScale = GetValue$4k(config, 'maxFixedPartScale', 1);
+                var maxFixedPartScaleX = GetValue$4k(config, 'maxFixedPartScaleX', maxFixedPartScale);
+                var maxFixedPartScaleY = GetValue$4k(config, 'maxFixedPartScaleY', undefined);
                 this.setMaxFixedPartScale(maxFixedPartScaleX, maxFixedPartScaleY);
 
                 this.setBaseTexture(key, baseFrame, columns, rows);
@@ -536,7 +536,7 @@
 
         Object.assign(
             NinePatch.prototype,
-            Methods$o
+            Methods$p
         );
 
         return NinePatch;
@@ -614,13 +614,13 @@
     let NinePatch$1 = class NinePatch extends NinePatchBase(RenderTexture$2, 'rexNinePatch') {
     };
 
-    var Methods$n = {
+    var Methods$o = {
         _drawImage: DrawImage$2,
         _drawTileSprite: DrawTileSprite$1,
     };
     Object.assign(
         NinePatch$1.prototype,
-        Methods$n
+        Methods$o
     );
 
     var IsNil = function (value) {
@@ -919,12 +919,12 @@
         }
     }
 
-    const GetValue$47 = Phaser.Utils.Objects.GetValue;
+    const GetValue$4j = Phaser.Utils.Objects.GetValue;
 
     var Pools$1 = {};
     let PoolManager$1 = class PoolManager {
         constructor(config) {
-            this.pools = GetValue$47(config, 'pools', Pools$1);
+            this.pools = GetValue$4j(config, 'pools', Pools$1);
         }
 
         destroy() {
@@ -994,7 +994,7 @@
 
     const GameObject$4 = Phaser.GameObjects.GameObject;
     const IsPlainObject$V = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$46 = Phaser.Utils.Objects.GetValue;
+    const GetValue$4i = Phaser.Utils.Objects.GetValue;
     const List$1 = Phaser.Structs.List;
     const StableSort$1 = Phaser.Utils.Array.StableSort;
 
@@ -1002,10 +1002,10 @@
         constructor(scene, x, y, texture, frame, config) {
             if (IsPlainObject$V(x)) {
                 config = x;
-                x = GetValue$46(config, 'x', 0);
-                y = GetValue$46(config, 'y', 0);
-                texture = GetValue$46(config, 'texture');
-                frame = GetValue$46(config, 'frame');
+                x = GetValue$4i(config, 'x', 0);
+                y = GetValue$4i(config, 'y', 0);
+                texture = GetValue$4i(config, 'texture');
+                frame = GetValue$4i(config, 'frame');
             }
 
             if (x === undefined) {
@@ -1022,7 +1022,7 @@
             this.displayListDirty = false;
             this.lastAppendedChildren = [];
 
-            var reuseBob = GetValue$46(config, 'reuseBob', true);
+            var reuseBob = GetValue$4i(config, 'reuseBob', true);
             this.poolManager = (reuseBob) ? (new PoolManager$1(config)) : undefined;
 
             this.setTexture(texture, frame);
@@ -1103,7 +1103,7 @@
 
     const ImageTypeName$1 = 'image';
 
-    var GetValue$45 = function (source, key, defaultValue, altSource) {
+    var GetValue$4h = function (source, key, defaultValue, altSource) {
         var isValidSource = source && (typeof source === 'object' || typeof source === 'function');
         var isValidAltSource = altSource && (typeof altSource === 'object' || typeof altSource === 'function');
 
@@ -1219,7 +1219,7 @@
 
         getData(key, defaultValue) {
             this.enableData();
-            return (key === undefined) ? this.data : GetValue$45(this.data, key, defaultValue);
+            return (key === undefined) ? this.data : GetValue$4h(this.data, key, defaultValue);
         },
 
         incData(key, inc, defaultValue) {
@@ -1328,7 +1328,7 @@
 
     const DegToRad$i = Phaser.Math.DegToRad;
     const RadToDeg$e = Phaser.Math.RadToDeg;
-    const GetValue$44 = Phaser.Utils.Objects.GetValue;
+    const GetValue$4g = Phaser.Utils.Objects.GetValue;
 
     let RenderBase$1 = class RenderBase extends Base$4 {
 
@@ -1570,11 +1570,11 @@
             }
 
             // ScaleX, ScaleY
-            var width = GetValue$44(o, 'width', undefined);
-            var height = GetValue$44(o, 'height', undefined);
-            var scale = GetValue$44(o, 'scale', undefined);
-            var scaleX = GetValue$44(o, 'scaleX', scale);
-            var scaleY = GetValue$44(o, 'scaleY', scale);
+            var width = GetValue$4g(o, 'width', undefined);
+            var height = GetValue$4g(o, 'height', undefined);
+            var scale = GetValue$4g(o, 'scale', undefined);
+            var scaleX = GetValue$4g(o, 'scaleX', scale);
+            var scaleY = GetValue$4g(o, 'scaleY', scale);
 
             if (width !== undefined) {
                 if ((height === undefined) && (scaleY === undefined)) {
@@ -1600,7 +1600,7 @@
                 this.setDisplayHeight(o.displayHeight);
             }
 
-            var origin = GetValue$44(o, 'origin', undefined);
+            var origin = GetValue$4g(o, 'origin', undefined);
             if (origin !== undefined) {
                 this.setOrigin(origin);
             } else {
@@ -2083,7 +2083,7 @@
 
     };
 
-    var Methods$m = {
+    var Methods$n = {
         _drawImage: DrawImage$1,
         _drawTileSprite: DrawTileSprite,
     };
@@ -2098,7 +2098,7 @@
 
     Object.assign(
         NinePatch.prototype,
-        Methods$m
+        Methods$n
     );
 
     ObjectFactory.register('ninePatch2', function (x, y, width, height, key, columns, rows, config) {
@@ -2730,11 +2730,11 @@
         setDashed: SetDashed
     };
 
-    var Methods$l = {
+    var Methods$m = {
         buildStrokePath: BuildStrokePath
     };
     Object.assign(
-        Methods$l,
+        Methods$m,
         StrokePathConfigMethods,
     );
 
@@ -2857,11 +2857,11 @@
 
     Object.assign(
         PolygnBase.prototype,
-        Methods$l,
+        Methods$m,
         Render$3
     );
 
-    const GetValue$43 = Phaser.Utils.Objects.GetValue;
+    const GetValue$4f = Phaser.Utils.Objects.GetValue;
 
     let RoundRectangle$3 = class RoundRectangle {
         constructor(x, y, width, height, radiusConfig) {
@@ -2952,15 +2952,15 @@
                 defaultRadiusX = value;
                 defaultRadiusY = value;
             } else {
-                defaultRadiusX = GetValue$43(value, 'x', 0);
-                defaultRadiusY = GetValue$43(value, 'y', 0);
+                defaultRadiusX = GetValue$4f(value, 'x', 0);
+                defaultRadiusY = GetValue$4f(value, 'y', 0);
             }
 
             var radius = this.cornerRadius;
-            radius.tl = GetRadius(GetValue$43(value, 'tl', undefined), defaultRadiusX, defaultRadiusY);
-            radius.tr = GetRadius(GetValue$43(value, 'tr', undefined), defaultRadiusX, defaultRadiusY);
-            radius.bl = GetRadius(GetValue$43(value, 'bl', undefined), defaultRadiusX, defaultRadiusY);
-            radius.br = GetRadius(GetValue$43(value, 'br', undefined), defaultRadiusX, defaultRadiusY);
+            radius.tl = GetRadius(GetValue$4f(value, 'tl', undefined), defaultRadiusX, defaultRadiusY);
+            radius.tr = GetRadius(GetValue$4f(value, 'tr', undefined), defaultRadiusX, defaultRadiusY);
+            radius.bl = GetRadius(GetValue$4f(value, 'bl', undefined), defaultRadiusX, defaultRadiusY);
+            radius.br = GetRadius(GetValue$4f(value, 'br', undefined), defaultRadiusX, defaultRadiusY);
         }
 
         get radiusTL() {
@@ -3023,8 +3023,8 @@
             radius.x = value;
             radius.y = value;
         } else {
-            radius.x = GetValue$43(value, 'x', 0);
-            radius.y = GetValue$43(value, 'y', 0);
+            radius.x = GetValue$4f(value, 'x', 0);
+            radius.y = GetValue$4f(value, 'y', 0);
         }
 
         SetConvex(radius);
@@ -3078,7 +3078,7 @@
     };
 
     const IsPlainObject$T = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$42 = Phaser.Utils.Objects.GetValue;
+    const GetValue$4e = Phaser.Utils.Objects.GetValue;
     const Earcut$3 = Phaser.Geom.Polygon.Earcut;
 
     let RoundRectangle$2 = class RoundRectangle extends PolygnBase {
@@ -3120,14 +3120,14 @@
             this.setShapeType(shapeType);
 
             if (this.shapeType === 0) {
-                var radius = GetValue$42(radiusConfig, 'radius', radiusConfig);
+                var radius = GetValue$4e(radiusConfig, 'radius', radiusConfig);
                 geom.setTo(0, 0, width, height, radius);
             } else {
                 var radius = { x: (width / 2), y: (height / 2) };
                 geom.setTo(0, 0, width, height, radius);
             }
 
-            this.setIteration(GetValue$42(radiusConfig, 'iteration', undefined));
+            this.setIteration(GetValue$4e(radiusConfig, 'iteration', undefined));
             this.setPosition(x, y);
 
             this.setFillStyle(fillColor, fillAlpha);
@@ -4141,7 +4141,7 @@
         );
     };
 
-    const GetValue$41 = Phaser.Utils.Objects.GetValue;
+    const GetValue$4d = Phaser.Utils.Objects.GetValue;
 
     let RoundRectangle$1 = class RoundRectangle extends Canvas$1 {
         constructor(
@@ -4163,8 +4163,8 @@
             super(scene, x, y, width, height, resolution);
             this.type = 'rexRoundRectangleCanvas';
 
-            var radius = GetValue$41(radiusConfig, 'radius', radiusConfig);
-            var iteration = GetValue$41(radiusConfig, 'iteration', undefined);
+            var radius = GetValue$4d(radiusConfig, 'radius', radiusConfig);
+            var iteration = GetValue$4d(radiusConfig, 'iteration', undefined);
             this.setRadius(radius);
             this.setIteration(iteration);
             this.setFillStyle(fillStyle, fillColor2, isHorizontalGradient);
@@ -4601,7 +4601,7 @@
     };
 
     const IsPlainObject$S = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$40 = Phaser.Utils.Objects.GetValue;
+    const GetValue$4c = Phaser.Utils.Objects.GetValue;
     const Linear$q = Phaser.Math.Linear;
     const Earcut$2 = Phaser.Geom.Polygon.Earcut;
 
@@ -4644,24 +4644,24 @@
             this.setStrokeStyle(strokeWidth, strokeColor, strokeAlpha);
 
             this
-                .setTLPosition(GetValue$40(config, 'tlx', 0), GetValue$40(config, 'tly', 0))
-                .setTRPosition(GetValue$40(config, 'trx', 0), GetValue$40(config, 'try', 0))
-                .setBLPosition(GetValue$40(config, 'blx', 0), GetValue$40(config, 'bly', 0))
-                .setBRPosition(GetValue$40(config, 'brx', 0), GetValue$40(config, 'bry', 0));
+                .setTLPosition(GetValue$4c(config, 'tlx', 0), GetValue$4c(config, 'tly', 0))
+                .setTRPosition(GetValue$4c(config, 'trx', 0), GetValue$4c(config, 'try', 0))
+                .setBLPosition(GetValue$4c(config, 'blx', 0), GetValue$4c(config, 'bly', 0))
+                .setBRPosition(GetValue$4c(config, 'brx', 0), GetValue$4c(config, 'bry', 0));
 
-            var leftSidePoints = GetValue$40(config, 'leftSidePoints');
+            var leftSidePoints = GetValue$4c(config, 'leftSidePoints');
             if (leftSidePoints) {
                 this.insertLeftSidePoint(leftSidePoints);
             }
-            var topSidePoints = GetValue$40(config, 'topSidePoints');
+            var topSidePoints = GetValue$4c(config, 'topSidePoints');
             if (topSidePoints) {
                 this.insertTopSidePoint(topSidePoints);
             }
-            var rightSidePoints = GetValue$40(config, 'rightSidePoints');
+            var rightSidePoints = GetValue$4c(config, 'rightSidePoints');
             if (rightSidePoints) {
                 this.insertRightSidePoint(rightSidePoints);
             }
-            var bottomSidePoints = GetValue$40(config, 'bottomSidePoints');
+            var bottomSidePoints = GetValue$4c(config, 'bottomSidePoints');
             if (bottomSidePoints) {
                 this.insertBottomSidePoint(bottomSidePoints);
             }
@@ -5403,7 +5403,7 @@
     };
 
     const GetAdvancedValue$6 = Phaser.Utils.Objects.GetAdvancedValue;
-    const GetValue$3$ = Phaser.Utils.Objects.GetValue;
+    const GetValue$4b = Phaser.Utils.Objects.GetValue;
 
     let TextStyle$1 = class TextStyle {
         constructor(text, style, propertyMap) {
@@ -5528,7 +5528,7 @@
 
                 if (key === 'wrapCallback' || key === 'wrapCallbackScope') {
                     // Callback & scope should be set without processing the values
-                    this[key] = GetValue$3$(style, objKey, defaultValue);
+                    this[key] = GetValue$4b(style, objKey, defaultValue);
                 } else {
                     var value = GetAdvancedValue$6(style, objKey, defaultValue);
                     if (postCallback) {
@@ -5540,7 +5540,7 @@
             }
 
             //  Allow for 'font' override
-            var font = GetValue$3$(style, 'font', null);
+            var font = GetValue$4b(style, 'font', null);
 
             if (font === null) {
                 this._font = this.fontStyle + ' ' + this.fontSize + ' ' + this.fontFamily;
@@ -5549,21 +5549,21 @@
             }
 
             //  Allow for 'fill' to be used in place of 'color'
-            var fill = GetValue$3$(style, 'fill', null);
+            var fill = GetValue$4b(style, 'fill', null);
 
             if (fill !== null) {
                 this.color = GetStyle(fill);
             }
 
-            var metrics = GetValue$3$(style, 'metrics', false);
+            var metrics = GetValue$4b(style, 'metrics', false);
 
             //  Provide optional TextMetrics in the style object to avoid the canvas look-up / scanning
             //  Doing this is reset if you then change the font of this TextStyle after creation
             if (metrics) {
                 this.metrics = {
-                    ascent: GetValue$3$(metrics, 'ascent', 0),
-                    descent: GetValue$3$(metrics, 'descent', 0),
-                    fontSize: GetValue$3$(metrics, 'fontSize', 0)
+                    ascent: GetValue$4b(metrics, 'ascent', 0),
+                    descent: GetValue$4b(metrics, 'descent', 0),
+                    fontSize: GetValue$4b(metrics, 'fontSize', 0)
                 };
             } else if (updateText || (!this.metrics)) {
                 this.metrics = MeasureText(this);
@@ -5630,9 +5630,9 @@
                 this.fontSize = '';
                 this.fontStyle = '';
             } else {
-                this.fontFamily = GetValue$3$(font, 'fontFamily', 'Courier');
-                this.fontSize = GetValue$3$(font, 'fontSize', '16px');
-                this.fontStyle = GetValue$3$(font, 'fontStyle', '');
+                this.fontFamily = GetValue$4b(font, 'fontFamily', 'Courier');
+                this.fontSize = GetValue$4b(font, 'fontSize', '16px');
+                this.fontStyle = GetValue$4b(font, 'fontStyle', '');
             }
 
             return this.update(true);
@@ -5988,9 +5988,9 @@
                     this.fontSize = '';
                     this.fontStyle = '';
                 } else {
-                    this.fontFamily = GetValue$3$(font, 'fontFamily', this.fontFamily);
-                    this.fontSize = GetValue$3$(font, 'fontSize', this.fontSize);
-                    this.fontStyle = GetValue$3$(font, 'fontStyle', this.fontStyle);
+                    this.fontFamily = GetValue$4b(font, 'fontFamily', this.fontFamily);
+                    this.fontSize = GetValue$4b(font, 'fontSize', this.fontSize);
+                    this.fontStyle = GetValue$4b(font, 'fontStyle', this.fontStyle);
                 }
             }
 
@@ -6359,7 +6359,7 @@
 
     };
 
-    const GetValue$3_ = Phaser.Utils.Objects.GetValue;
+    const GetValue$4a = Phaser.Utils.Objects.GetValue;
     const NO_NEWLINE$3 = CONST.NO_NEWLINE;
     const RAW_NEWLINE$1 = CONST.RAW_NEWLINE;
 
@@ -6370,25 +6370,25 @@
         }
 
         resetFromJSON(o) { // (txt, x, y, width, height, ascent, descent, prop, newLineMode, startIndex)
-            this.text = GetValue$3_(o, 'text', '');
-            this.x = GetValue$3_(o, 'x', 0);
-            this.y = GetValue$3_(o, 'y', 0);
-            this.width = GetValue$3_(o, 'width', 0);
-            this.ascent = GetValue$3_(o, 'ascent', 0);
-            this.descent = GetValue$3_(o, 'descent', 0);
-            var height = GetValue$3_(o, 'height', null);
+            this.text = GetValue$4a(o, 'text', '');
+            this.x = GetValue$4a(o, 'x', 0);
+            this.y = GetValue$4a(o, 'y', 0);
+            this.width = GetValue$4a(o, 'width', 0);
+            this.ascent = GetValue$4a(o, 'ascent', 0);
+            this.descent = GetValue$4a(o, 'descent', 0);
+            var height = GetValue$4a(o, 'height', null);
             if (height == null) {
                 height = this.ascent + this.descent;
             }
             this.height = height;
 
-            var prop = GetValue$3_(o, 'prop', null);
+            var prop = GetValue$4a(o, 'prop', null);
             if (prop === null) {
                 prop = {};
             }
             this.prop = prop;
-            this.newLineMode = GetValue$3_(o, 'newLineMode', 0);
-            this.startIndex = GetValue$3_(o, 'startIndex', 0);
+            this.newLineMode = GetValue$4a(o, 'newLineMode', 0);
+            this.startIndex = GetValue$4a(o, 'startIndex', 0);
         }
 
         get plainText() {
@@ -7281,7 +7281,7 @@
         }
     };
 
-    const GetValue$3Z = Phaser.Utils.Objects.GetValue;
+    const GetValue$49 = Phaser.Utils.Objects.GetValue;
     const NO_WRAP = CONST.NO_WRAP;
     const NO_NEWLINE = CONST.NO_NEWLINE;
     const WRAPPED_NEWLINE = CONST.WRAPPED_NEWLINE;
@@ -7290,10 +7290,10 @@
         constructor(config) {
             this.parent = config.parent;
             this.scene = this.parent.scene;
-            this.context = GetValue$3Z(config, 'context', null);
+            this.context = GetValue$49(config, 'context', null);
             this.canvas = this.context.canvas;
-            this.parser = GetValue$3Z(config, 'parser', null);
-            this.defaultStyle = GetValue$3Z(config, 'style', null);
+            this.parser = GetValue$49(config, 'parser', null);
+            this.defaultStyle = GetValue$49(config, 'style', null);
             this.autoRound = true;
 
             this.pensPool = config.pensPool;                     // Required
@@ -7758,7 +7758,7 @@
     }
 
     const IsPlainObject$R = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$3Y = Phaser.Utils.Objects.GetValue;
+    const GetValue$48 = Phaser.Utils.Objects.GetValue;
 
     var AddImage$1 = function (key, config) {
         if (IsPlainObject$R(key)) {
@@ -7796,12 +7796,12 @@
             frame: frameKey,
             width: width,
             height: height,
-            y: GetValue$3Y(config, 'y', 0),
-            left: GetValue$3Y(config, 'left', 0),
-            right: GetValue$3Y(config, 'right', 0),
-            originX: GetValue$3Y(config, 'originX', 0),
-            originY: GetValue$3Y(config, 'originY', 0),
-            tintFill: GetValue$3Y(config, 'tintFill', false),
+            y: GetValue$48(config, 'y', 0),
+            left: GetValue$48(config, 'left', 0),
+            right: GetValue$48(config, 'right', 0),
+            originX: GetValue$48(config, 'originX', 0),
+            originY: GetValue$48(config, 'originY', 0),
+            tintFill: GetValue$48(config, 'tintFill', false),
         };
     };
 
@@ -7990,11 +7990,11 @@
     const AddToDOM = Phaser.DOM.AddToDOM;
     const CanvasPool = Phaser.Display.Canvas.CanvasPool;
     const GameObject$1 = Phaser.GameObjects.GameObject;
-    const GetValue$3X = Phaser.Utils.Objects.GetValue;
+    const GetValue$47 = Phaser.Utils.Objects.GetValue;
     const RemoveFromDOM$1 = Phaser.DOM.RemoveFromDOM;
     const SPLITREGEXP = CONST.SPLITREGEXP;
     const UUID$4 = Phaser.Utils.String.UUID;
-    const Clamp$h = Phaser.Math.Clamp;
+    const Clamp$i = Phaser.Math.Clamp;
 
     // Reuse objects can increase performance
     var SharedPensPools = null;
@@ -8005,10 +8005,10 @@
         constructor(scene, x, y, text, style, type, parser) {
             if (IsPlainObject$Q(x)) {
                 var config = x;
-                x = GetValue$3X(config, 'x', 0);
-                y = GetValue$3X(config, 'y', 0);
-                text = GetValue$3X(config, 'text', '');
-                style = GetValue$3X(config, 'style');
+                x = GetValue$47(config, 'x', 0);
+                y = GetValue$47(config, 'y', 0);
+                text = GetValue$47(config, 'text', '');
+                style = GetValue$47(config, 'style');
             }
             if (x === undefined) {
                 x = 0;
@@ -8046,7 +8046,7 @@
             }
             this.style = new TextStyle$1(this, style);
 
-            var imageData = GetValue$3X(style, 'images', undefined);
+            var imageData = GetValue$47(style, 'images', undefined);
             if (imageData) {
                 this.addImage(imageData);
             }
@@ -8094,7 +8094,7 @@
                 this.frame.source.glTexture = null;
             }
 
-            var sharedPoolMode = GetValue$3X(style, 'sharedPool', true);
+            var sharedPoolMode = GetValue$47(style, 'sharedPool', true);
 
             var pensPool, linesPool, wrapTextLinesPool;
             if (sharedPoolMode) {
@@ -8143,9 +8143,9 @@
 
             this.setText(text);
 
-            this.setUrlTagCursorStyle(GetValue$3X(style, 'urlTagCursorStyle', 'pointer'));
+            this.setUrlTagCursorStyle(GetValue$47(style, 'urlTagCursorStyle', 'pointer'));
 
-            if (GetValue$3X(style, 'interactive', false)) {
+            if (GetValue$47(style, 'interactive', false)) {
                 this.setInteractive();
             }
         }
@@ -8205,7 +8205,7 @@
                 clamp = false;
             }
             if (clamp) {
-                value = Clamp$h(value, this.bottomScrollY, this.topScrollY);
+                value = Clamp$i(value, this.bottomScrollY, this.topScrollY);
             }
 
             this.scrollY = value;
@@ -8233,7 +8233,7 @@
                 clamp = false;
             }
             if (clamp) {
-                value = Clamp$h(value, 0, 1);
+                value = Clamp$i(value, 0, 1);
             }
 
             var scrollY = this.bottomScrollY * value;
@@ -8332,24 +8332,24 @@
                 var config = left;
 
                 //  If they specify x and/or y this applies to all
-                var x = GetValue$3X(config, 'x', null);
+                var x = GetValue$47(config, 'x', null);
 
                 if (x !== null) {
                     left = x;
                     right = x;
                 } else {
-                    left = GetValue$3X(config, 'left', 0);
-                    right = GetValue$3X(config, 'right', left);
+                    left = GetValue$47(config, 'left', 0);
+                    right = GetValue$47(config, 'right', left);
                 }
 
-                var y = GetValue$3X(config, 'y', null);
+                var y = GetValue$47(config, 'y', null);
 
                 if (y !== null) {
                     top = y;
                     bottom = y;
                 } else {
-                    top = GetValue$3X(config, 'top', 0);
-                    bottom = GetValue$3X(config, 'bottom', top);
+                    top = GetValue$47(config, 'top', 0);
+                    bottom = GetValue$47(config, 'bottom', top);
                 }
             } else {
                 if (left === undefined) {
@@ -9336,11 +9336,11 @@
         return Object.assign({}, TagRegexSave);
     };
 
-    const GetValue$3W = Phaser.Utils.Objects.GetValue;
+    const GetValue$46 = Phaser.Utils.Objects.GetValue;
 
     let Parser$2 = class Parser {
         constructor(style) {
-            var delimiters = GetValue$3W(style, 'delimiters', '[]');
+            var delimiters = GetValue$46(style, 'delimiters', '[]');
             this.tagRegex = GetTagRegex(delimiters);
             this.delimiters = delimiters;
         }
@@ -9753,11 +9753,11 @@
     var RE_STYLE = /<\s*style=["|']([^"|']+)["|']\s*\>([\s\S]*?)<\s*\/style\s*\>/;
     var RE_SPACE = /^\s+|\s+$/;
 
-    const GetValue$3V = Phaser.Utils.Objects.GetValue;
+    const GetValue$45 = Phaser.Utils.Objects.GetValue;
 
     class TagText extends Text {
         constructor(scene, x, y, text, style) {
-            var tags = GetValue$3V(style, 'tags', undefined);
+            var tags = GetValue$45(style, 'tags', undefined);
             var parser = new Parser$1(tags);
             super(scene, x, y, text, style, 'rexTagText', parser);
         }
@@ -9793,7 +9793,7 @@
 
     SetValue(window, 'RexPlugins.UI.TagText', TagText);
 
-    const GetValue$3U = Phaser.Utils.Objects.GetValue;
+    const GetValue$44 = Phaser.Utils.Objects.GetValue;
 
     var GetPadding$1 = function (padding, key) {
         if (key === undefined) {
@@ -9819,10 +9819,10 @@
             padding.top = key;
             padding.bottom = key;
         } else {
-            padding.left = GetValue$3U(key, 'left', 0);
-            padding.right = GetValue$3U(key, 'right', 0);
-            padding.top = GetValue$3U(key, 'top', 0);
-            padding.bottom = GetValue$3U(key, 'bottom', 0);
+            padding.left = GetValue$44(key, 'left', 0);
+            padding.right = GetValue$44(key, 'right', 0);
+            padding.top = GetValue$44(key, 'top', 0);
+            padding.bottom = GetValue$44(key, 'bottom', 0);
         }
         return padding;
     };
@@ -10081,19 +10081,19 @@
         return GetBobWorldPosition(this.parent, this, offsetX, offsetY, out);
     };
 
-    var Methods$k = {
+    var Methods$l = {
         contains: Contains$2,
         getWorldPosition: GetWorldPosition,
     };
 
     Object.assign(
-        Methods$k,
+        Methods$l,
         RenderMethods
     );
 
     const DegToRad$f = Phaser.Math.DegToRad;
     const RadToDeg$d = Phaser.Math.RadToDeg;
-    const GetValue$3T = Phaser.Utils.Objects.GetValue;
+    const GetValue$43 = Phaser.Utils.Objects.GetValue;
 
     class RenderBase extends Base$3 {
         constructor(parent, type) {
@@ -10347,10 +10347,10 @@
             }
 
             // ScaleX, ScaleY
-            var width = GetValue$3T(o, 'width', undefined);
-            var height = GetValue$3T(o, 'height', undefined);
-            var scaleX = GetValue$3T(o, 'scaleX', undefined);
-            var scaleY = GetValue$3T(o, 'scaleY', undefined);
+            var width = GetValue$43(o, 'width', undefined);
+            var height = GetValue$43(o, 'height', undefined);
+            var scaleX = GetValue$43(o, 'scaleX', undefined);
+            var scaleY = GetValue$43(o, 'scaleY', undefined);
 
             if (width !== undefined) {
                 if ((height === undefined) && (scaleY === undefined)) {
@@ -10444,7 +10444,7 @@
 
     Object.assign(
         RenderBase.prototype,
-        Methods$k,
+        Methods$l,
     );
 
     var GetProperty = function (name, config, defaultConfig) {
@@ -10455,7 +10455,7 @@
         }
     };
 
-    const GetValue$3S = Phaser.Utils.Objects.GetValue;
+    const GetValue$42 = Phaser.Utils.Objects.GetValue;
 
     class Background extends RenderBase {
         constructor(parent, config) {
@@ -10464,19 +10464,19 @@
             this.setScrollFactor(0);
 
             this.setColor(
-                GetValue$3S(config, 'color', null),
-                GetValue$3S(config, 'color2', null),
-                GetValue$3S(config, 'horizontalGradient', true)
+                GetValue$42(config, 'color', null),
+                GetValue$42(config, 'color2', null),
+                GetValue$42(config, 'horizontalGradient', true)
             );
 
             this.setStroke(
-                GetValue$3S(config, 'stroke', null),
-                GetValue$3S(config, 'strokeThickness', 2)
+                GetValue$42(config, 'stroke', null),
+                GetValue$42(config, 'strokeThickness', 2)
             );
 
             this.setCornerRadius(
-                GetValue$3S(config, 'cornerRadius', 0),
-                GetValue$3S(config, 'cornerIteration', null)
+                GetValue$42(config, 'cornerRadius', 0),
+                GetValue$42(config, 'cornerIteration', null)
             );
         }
 
@@ -10620,7 +10620,7 @@
         }
     }
 
-    const GetValue$3R = Phaser.Utils.Objects.GetValue;
+    const GetValue$41 = Phaser.Utils.Objects.GetValue;
 
     class InnerBounds extends RenderBase {
         constructor(parent, config) {
@@ -10629,14 +10629,14 @@
             this.setScrollFactor(0);
 
             this.setColor(
-                GetValue$3R(config, 'color', null),
-                GetValue$3R(config, 'color2', null),
-                GetValue$3R(config, 'horizontalGradient', true)
+                GetValue$41(config, 'color', null),
+                GetValue$41(config, 'color2', null),
+                GetValue$41(config, 'horizontalGradient', true)
             );
 
             this.setStroke(
-                GetValue$3R(config, 'stroke', null),
-                GetValue$3R(config, 'strokeThickness', 2)
+                GetValue$41(config, 'stroke', null),
+                GetValue$41(config, 'strokeThickness', 2)
             );
         }
 
@@ -10716,14 +10716,14 @@
             if (o.hasOwnProperty('color')) {
                 this.setColor(
                     o.color,
-                    GetValue$3R(o, 'color2', null),
-                    GetValue$3R(o, 'horizontalGradient', true)
+                    GetValue$41(o, 'color2', null),
+                    GetValue$41(o, 'horizontalGradient', true)
                 );
             }
             if (o.hasOwnProperty('stroke')) {
                 this.setStroke(
                     o.stroke,
-                    GetValue$3R(o, 'strokeThickness', 2)
+                    GetValue$41(o, 'strokeThickness', 2)
                 );
             }
         }
@@ -10763,7 +10763,7 @@
         }
     }
 
-    const GetValue$3Q = Phaser.Utils.Objects.GetValue;
+    const GetValue$40 = Phaser.Utils.Objects.GetValue;
 
     class TextStyle {
         constructor(parent, config) {
@@ -10795,35 +10795,35 @@
         }
 
         set(o) {
-            this.setBold(GetValue$3Q(o, 'bold', false));
-            this.setItalic(GetValue$3Q(o, 'italic', false));
-            this.setFontSize(GetValue$3Q(o, 'fontSize', '16px'));
-            this.setFontFamily(GetValue$3Q(o, 'fontFamily', 'Courier'));
-            this.setColor(GetValue$3Q(o, 'color', '#fff'));
+            this.setBold(GetValue$40(o, 'bold', false));
+            this.setItalic(GetValue$40(o, 'italic', false));
+            this.setFontSize(GetValue$40(o, 'fontSize', '16px'));
+            this.setFontFamily(GetValue$40(o, 'fontFamily', 'Courier'));
+            this.setColor(GetValue$40(o, 'color', '#fff'));
             this.setStrokeStyle(
-                GetValue$3Q(o, 'stroke', null),
-                GetValue$3Q(o, 'strokeThickness', 0)
+                GetValue$40(o, 'stroke', null),
+                GetValue$40(o, 'strokeThickness', 0)
             );
             this.setShadow(
-                GetValue$3Q(o, 'shadowColor', null),
-                GetValue$3Q(o, 'shadowOffsetX', 0),
-                GetValue$3Q(o, 'shadowOffsetY', 0),
-                GetValue$3Q(o, 'shadowBlur', 0)
+                GetValue$40(o, 'shadowColor', null),
+                GetValue$40(o, 'shadowOffsetX', 0),
+                GetValue$40(o, 'shadowOffsetY', 0),
+                GetValue$40(o, 'shadowBlur', 0)
             );
             this.setOffset(
-                GetValue$3Q(o, 'offsetX', 0),
-                GetValue$3Q(o, 'offsetY', 0)
+                GetValue$40(o, 'offsetX', 0),
+                GetValue$40(o, 'offsetY', 0)
             );
             this.setSpace(
-                GetValue$3Q(o, 'leftSpace', 0),
-                GetValue$3Q(o, 'rightSpace', 0)
+                GetValue$40(o, 'leftSpace', 0),
+                GetValue$40(o, 'rightSpace', 0)
             );
-            this.setAlign(GetValue$3Q(o, 'align', undefined));
-            this.setBackgroundColor(GetValue$3Q(o, 'backgroundColor', null));
-            this.setBackgroundHeight(GetValue$3Q(o, 'backgroundHeight', undefined));
-            this.setBackgroundBottomY(GetValue$3Q(o, 'backgroundBottomY', undefined));
-            this.setBackgroundLeftX(GetValue$3Q(o, 'backgroundLeftX', 0));
-            this.setBackgroundRightX(GetValue$3Q(o, 'backgroundRightX', 0));
+            this.setAlign(GetValue$40(o, 'align', undefined));
+            this.setBackgroundColor(GetValue$40(o, 'backgroundColor', null));
+            this.setBackgroundHeight(GetValue$40(o, 'backgroundHeight', undefined));
+            this.setBackgroundBottomY(GetValue$40(o, 'backgroundBottomY', undefined));
+            this.setBackgroundLeftX(GetValue$40(o, 'backgroundLeftX', 0));
+            this.setBackgroundRightX(GetValue$40(o, 'backgroundRightX', 0));
 
             return this;
         }
@@ -12326,24 +12326,24 @@
 
     var Result = {};
 
-    const GetValue$3P = Phaser.Utils.Objects.GetValue;
+    const GetValue$3$ = Phaser.Utils.Objects.GetValue;
 
     var RunWordWrap$1 = function (config) {
         // Parse parameters
-        var startIndex = GetValue$3P(config, 'start', 0);
+        var startIndex = GetValue$3$(config, 'start', 0);
 
-        SetPadding$1(this.wrapPadding, GetValue$3P(config, 'padding', 0));
+        SetPadding$1(this.wrapPadding, GetValue$3$(config, 'padding', 0));
         var paddingVertical = this.padding.top + this.padding.bottom + this.wrapPadding.top + this.wrapPadding.bottom;
         var paddingHorizontal = this.padding.left + this.padding.right + this.wrapPadding.left + this.wrapPadding.right;
 
         // Get lineHeight, maxLines
-        var lineHeight = GetValue$3P(config, 'lineHeight');
-        var ascent = GetValue$3P(config, 'ascent', lineHeight);
+        var lineHeight = GetValue$3$(config, 'lineHeight');
+        var ascent = GetValue$3$(config, 'ascent', lineHeight);
         var maxLines;
         if (lineHeight === undefined) {
             // Calculate lineHeight
-            var useDefaultTextHeight = GetValue$3P(config, 'useDefaultTextHeight', false);
-            maxLines = GetValue$3P(config, 'maxLines', 0);
+            var useDefaultTextHeight = GetValue$3$(config, 'useDefaultTextHeight', false);
+            maxLines = GetValue$3$(config, 'maxLines', 0);
             if ((this.fixedHeight > 0) && (!useDefaultTextHeight)) {
                 var innerHeight = this.fixedHeight - paddingVertical;
                 if (maxLines > 0) {
@@ -12366,13 +12366,13 @@
             // Calculate maxLines
             if (this.fixedHeight > 0) {
                 // Calculate maxLines via lineHeight, in fixedHeight mode
-                maxLines = GetValue$3P(config, 'maxLines');
+                maxLines = GetValue$3$(config, 'maxLines');
                 if (maxLines === undefined) {
                     var innerHeight = this.fixedHeight - paddingVertical;
                     maxLines = Math.floor(innerHeight / lineHeight);
                 }
             } else {
-                maxLines = GetValue$3P(config, 'maxLines', 0); // Default is show all lines
+                maxLines = GetValue$3$(config, 'maxLines', 0); // Default is show all lines
             }
 
         }
@@ -12384,9 +12384,9 @@
 
         var showAllLines = (maxLines === 0);
 
-        var wrapMode = GetValue$3P(config, 'wrapMode');
+        var wrapMode = GetValue$3$(config, 'wrapMode');
         if (wrapMode === undefined) {
-            var charWrap = GetValue$3P(config, 'charWrap', false);
+            var charWrap = GetValue$3$(config, 'charWrap', false);
             wrapMode = (charWrap) ? 'char' : 'word';
         }
         if (typeof (wrapMode) === 'string') {
@@ -12394,7 +12394,7 @@
         }
 
         // Get wrapWidth
-        var wrapWidth = GetValue$3P(config, 'wrapWidth', undefined);
+        var wrapWidth = GetValue$3$(config, 'wrapWidth', undefined);
         if (wrapWidth === undefined) {
             if (this.fixedWidth > 0) {
                 wrapWidth = this.fixedWidth - paddingHorizontal;
@@ -12404,11 +12404,11 @@
             }
         }
 
-        var letterSpacing = GetValue$3P(config, 'letterSpacing', 0);
+        var letterSpacing = GetValue$3$(config, 'letterSpacing', 0);
 
-        var hAlign = GetValue$3P(config, 'hAlign', 0);
-        var vAlign = GetValue$3P(config, 'vAlign', 0);
-        var justifyPercentage = GetValue$3P(config, 'justifyPercentage', 0.25);
+        var hAlign = GetValue$3$(config, 'hAlign', 0);
+        var vAlign = GetValue$3$(config, 'vAlign', 0);
+        var justifyPercentage = GetValue$3$(config, 'justifyPercentage', 0.25);
 
         var result = CreateWrapResultData({
             // Override properties
@@ -12608,21 +12608,21 @@
         }
     };
 
-    const GetValue$3O = Phaser.Utils.Objects.GetValue;
+    const GetValue$3_ = Phaser.Utils.Objects.GetValue;
 
     var RunVerticalWrap$1 = function (config) {
         // Parse parameters
-        var startIndex = GetValue$3O(config, 'start', 0);
+        var startIndex = GetValue$3_(config, 'start', 0);
 
-        SetPadding$1(this.wrapPadding, GetValue$3O(config, 'padding', 0));
+        SetPadding$1(this.wrapPadding, GetValue$3_(config, 'padding', 0));
         var paddingVertical = this.padding.top + this.padding.bottom + this.wrapPadding.top + this.wrapPadding.bottom;
         var paddingHorizontal = this.padding.left + this.padding.right + this.wrapPadding.left + this.wrapPadding.right;
 
-        var lineWidth = GetValue$3O(config, 'lineWidth', undefined);
+        var lineWidth = GetValue$3_(config, 'lineWidth', undefined);
         var maxLines;
         if (lineWidth === undefined) {
             // Calculate lineWidth via maxLines, in fixedWidth mode
-            maxLines = GetValue$3O(config, 'maxLines', 0);
+            maxLines = GetValue$3_(config, 'maxLines', 0);
             if (this.fixedWidth > 0) {
                 var innerWidth = this.fixedWidth - paddingHorizontal;
                 lineWidth = innerWidth / maxLines;
@@ -12632,22 +12632,22 @@
         } else {
             if (this.fixedWidth > 0) {
                 // Calculate maxLines via lineWidth, in fixedWidth mode
-                maxLines = GetValue$3O(config, 'maxLines', undefined);
+                maxLines = GetValue$3_(config, 'maxLines', undefined);
                 if (maxLines === undefined) {
                     var innerWidth = this.fixedWidth - paddingHorizontal;
                     maxLines = Math.floor(innerWidth / lineWidth) + 1;
                 }
             } else {
-                maxLines = GetValue$3O(config, 'maxLines', 0); // Default is show all lines
+                maxLines = GetValue$3_(config, 'maxLines', 0); // Default is show all lines
             }
 
         }
         var showAllLines = (maxLines === 0);
 
         // Get fixedCharacterHeight
-        var fixedCharacterHeight = GetValue$3O(config, 'fixedCharacterHeight', undefined);
+        var fixedCharacterHeight = GetValue$3_(config, 'fixedCharacterHeight', undefined);
         if (fixedCharacterHeight === undefined) {
-            var charPerLine = GetValue$3O(config, 'charPerLine', undefined);
+            var charPerLine = GetValue$3_(config, 'charPerLine', undefined);
             if (charPerLine !== undefined) {
                 var innerHeight = this.fixedHeight - paddingVertical;
                 fixedCharacterHeight = Math.floor(innerHeight / charPerLine);
@@ -12655,7 +12655,7 @@
         }
 
         // Get wrapHeight
-        var wrapHeight = GetValue$3O(config, 'wrapHeight', undefined);
+        var wrapHeight = GetValue$3_(config, 'wrapHeight', undefined);
         if (wrapHeight === undefined) {
             if (this.fixedHeight > 0) {
                 wrapHeight = this.fixedHeight - paddingVertical;
@@ -12664,11 +12664,11 @@
             }
         }
 
-        var letterSpacing = GetValue$3O(config, 'letterSpacing', 0);
+        var letterSpacing = GetValue$3_(config, 'letterSpacing', 0);
 
-        var rtl = GetValue$3O(config, 'rtl', true);
-        var hAlign = GetValue$3O(config, 'hAlign', rtl ? 2 : 0);
-        var vAlign = GetValue$3O(config, 'vAlign', 0);
+        var rtl = GetValue$3_(config, 'rtl', true);
+        var hAlign = GetValue$3_(config, 'hAlign', rtl ? 2 : 0);
+        var vAlign = GetValue$3_(config, 'vAlign', 0);
 
         var result = CreateWrapResultData({
             // Override properties
@@ -12801,12 +12801,12 @@
         return RunVerticalWrap$1.call(this, Merge$5(config, this.wrapConfig));
     };
 
-    const GetValue$3N = Phaser.Utils.Objects.GetValue;
+    const GetValue$3Z = Phaser.Utils.Objects.GetValue;
 
     var RunWrap = function (config) {
-        var wrapCallback = GetValue$3N(this.wrapConfig, 'callback');
+        var wrapCallback = GetValue$3Z(this.wrapConfig, 'callback');
         if (!wrapCallback) {
-            wrapCallback = GetValue$3N(config, 'callback', this.runWordWrap);
+            wrapCallback = GetValue$3Z(config, 'callback', this.runWordWrap);
         }
         if (typeof (wrapCallback) === 'string') {
             wrapCallback = this[wrapCallback];
@@ -13342,7 +13342,7 @@
         },
     };
 
-    var Methods$j = {
+    var Methods$k = {
         setFixedSize: SetFixedSize,
         setPadding: SetPadding,
         getPadding: GetPadding,
@@ -13400,7 +13400,7 @@
     };
 
     Object.assign(
-        Methods$j,
+        Methods$k,
 
         MoveChildMethods,
         BackgroundMethods,
@@ -13452,25 +13452,25 @@
     }
 
     const IsPlainObject$P = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$3M = Phaser.Utils.Objects.GetValue;
+    const GetValue$3Y = Phaser.Utils.Objects.GetValue;
 
     class DynamicText extends Canvas$1 {
         constructor(scene, x, y, fixedWidth, fixedHeight, resolution, config) {
             if (IsPlainObject$P(x)) {
                 config = x;
-                x = GetValue$3M(config, 'x', 0);
-                y = GetValue$3M(config, 'y', 0);
-                fixedWidth = GetValue$3M(config, 'width', 0);
-                fixedHeight = GetValue$3M(config, 'height', 0);
-                resolution = GetValue$3M(config, 'resolution', 1);
+                x = GetValue$3Y(config, 'x', 0);
+                y = GetValue$3Y(config, 'y', 0);
+                fixedWidth = GetValue$3Y(config, 'width', 0);
+                fixedHeight = GetValue$3Y(config, 'height', 0);
+                resolution = GetValue$3Y(config, 'resolution', 1);
             } else if (IsPlainObject$P(fixedWidth)) {
                 config = fixedWidth;
-                fixedWidth = GetValue$3M(config, 'width', 0);
-                fixedHeight = GetValue$3M(config, 'height', 0);
-                resolution = GetValue$3M(config, 'resolution', 1);
+                fixedWidth = GetValue$3Y(config, 'width', 0);
+                fixedHeight = GetValue$3Y(config, 'height', 0);
+                resolution = GetValue$3Y(config, 'resolution', 1);
             } else if (IsPlainObject$P(resolution)) {
                 config = resolution;
-                resolution = GetValue$3M(config, 'resolution', 1);
+                resolution = GetValue$3Y(config, 'resolution', 1);
             }
 
             var width = (fixedWidth === 0) ? 1 : fixedWidth;
@@ -13481,26 +13481,26 @@
             this.padding = SetPadding$1();
             this.wrapPadding = SetPadding$1();
 
-            var textStyleConfig = GetValue$3M(config, 'style', undefined);
+            var textStyleConfig = GetValue$3Y(config, 'style', undefined);
             this.defaultTextStyle = new TextStyle(null, textStyleConfig);
             this.textStyle = this.defaultTextStyle.clone();
-            this.setTestString(GetValue$3M(config, 'testString', '|MÉqgy'));
+            this.setTestString(GetValue$3Y(config, 'testString', '|MÉqgy'));
 
             this._textOX = 0;
             this._textOY = 0;
-            this.background = new Background(this, GetValue$3M(config, 'background', undefined));
-            this.innerBounds = new InnerBounds(this, GetValue$3M(config, 'innerBounds', undefined));
+            this.background = new Background(this, GetValue$3Y(config, 'background', undefined));
+            this.innerBounds = new InnerBounds(this, GetValue$3Y(config, 'innerBounds', undefined));
             this.children = [];
             this.lastAppendedChildren = [];
             this.lastOverChild = null;
             this.poolManager = new PoolManager(config);
 
             this.setFixedSize(fixedWidth, fixedHeight);
-            this.setPadding(GetValue$3M(config, 'padding', 0));
-            this.setWrapConfig(GetValue$3M(config, 'wrap', undefined));
-            this.setChildrenInteractiveEnable(GetValue$3M(config, 'childrenInteractive', false));
+            this.setPadding(GetValue$3Y(config, 'padding', 0));
+            this.setWrapConfig(GetValue$3Y(config, 'wrap', undefined));
+            this.setChildrenInteractiveEnable(GetValue$3Y(config, 'childrenInteractive', false));
 
-            var text = GetValue$3M(config, 'text', undefined);
+            var text = GetValue$3Y(config, 'text', undefined);
             if (text) {
                 this.setText(text);
             }
@@ -13545,7 +13545,7 @@
 
     Object.assign(
         DynamicText.prototype,
-        Methods$j
+        Methods$k
     );
 
     ObjectFactory.register('dynamicText', function (x, y, width, height, config) {
@@ -16889,19 +16889,19 @@
         return output;
     };
 
-    const GetValue$3L = Phaser.Utils.Objects.GetValue;
+    const GetValue$3X = Phaser.Utils.Objects.GetValue;
 
     var DrawBounds$2 = function (gameObjects, graphics, config) {
         var strokeColor, lineWidth, fillColor, fillAlpha, padding, includeParent;
         if (typeof (config) === 'number') {
             strokeColor = config;
         } else {
-            strokeColor = GetValue$3L(config, 'color');
-            lineWidth = GetValue$3L(config, 'lineWidth');
-            fillColor = GetValue$3L(config, 'fillColor');
-            fillAlpha = GetValue$3L(config, 'fillAlpha');
-            padding = GetValue$3L(config, 'padding');
-            includeParent = GetValue$3L(config, 'includeParent');
+            strokeColor = GetValue$3X(config, 'color');
+            lineWidth = GetValue$3X(config, 'lineWidth');
+            fillColor = GetValue$3X(config, 'fillColor');
+            fillAlpha = GetValue$3X(config, 'fillAlpha');
+            padding = GetValue$3X(config, 'padding');
+            includeParent = GetValue$3X(config, 'includeParent');
         }
 
         if (strokeColor === undefined) { strokeColor = 0xffffff; }
@@ -17020,12 +17020,12 @@
         }
     };
 
-    var Methods$i = {
+    var Methods$j = {
         drawGameObjectsBounds: DrawGameObjectsBounds,
     };
 
     Object.assign(
-        Methods$i,
+        Methods$j,
         GetMethods,
         AddMethods$1,
         RemoveMethods$1,
@@ -17065,48 +17065,48 @@
 
     var globRect = new Rectangle$3();
 
-    const GetValue$3K = Phaser.Utils.Objects.GetValue;
+    const GetValue$3W = Phaser.Utils.Objects.GetValue;
 
     class GOManager {
         constructor(scene, config) {
             this.scene = scene;
 
-            this.BobClass = GetValue$3K(config, 'BobClass', BobBase);
+            this.BobClass = GetValue$3W(config, 'BobClass', BobBase);
             this.setCreateGameObjectCallback(
-                GetValue$3K(config, 'createGameObject'),
-                GetValue$3K(config, 'createGameObjectScope')
+                GetValue$3W(config, 'createGameObject'),
+                GetValue$3W(config, 'createGameObjectScope')
             );
-            this.setEventEmitter(GetValue$3K(config, 'eventEmitter', undefined));
+            this.setEventEmitter(GetValue$3W(config, 'eventEmitter', undefined));
 
-            this.setGameObjectDepth(GetValue$3K(config, 'depth', undefined));
+            this.setGameObjectDepth(GetValue$3W(config, 'depth', undefined));
 
-            var fadeConfig = GetValue$3K(config, 'fade', 500);
+            var fadeConfig = GetValue$3W(config, 'fade', 500);
             if (typeof (fadeConfig) === 'number') {
                 this.setGOFadeMode();
                 this.setGOFadeTime(fadeConfig);
             } else {
-                this.setGOFadeMode(GetValue$3K(fadeConfig, 'mode'));
-                this.setGOFadeTime(GetValue$3K(fadeConfig, 'time', 500));
+                this.setGOFadeMode(GetValue$3W(fadeConfig, 'mode'));
+                this.setGOFadeTime(GetValue$3W(fadeConfig, 'time', 500));
             }
 
-            var viewportCoordinateConfig = GetValue$3K(config, 'viewportCoordinate', false);
+            var viewportCoordinateConfig = GetValue$3W(config, 'viewportCoordinate', false);
             if (viewportCoordinateConfig !== false) {
-                this.setViewportCoordinateEnable(GetValue$3K(config, 'enable', true));
-                this.setViewport(GetValue$3K(viewportCoordinateConfig, 'viewport'));
+                this.setViewportCoordinateEnable(GetValue$3W(config, 'enable', true));
+                this.setViewport(GetValue$3W(viewportCoordinateConfig, 'viewport'));
             } else {
                 this.setViewportCoordinateEnable(false);
             }
 
-            var effectPropertiesConfig = GetValue$3K(config, 'effectProperties', false);
+            var effectPropertiesConfig = GetValue$3W(config, 'effectProperties', false);
             this.setEffectPropertiesConfig(effectPropertiesConfig);
 
-            this.setSymbols(GetValue$3K(config, 'symbols'));
+            this.setSymbols(GetValue$3W(config, 'symbols'));
 
             this.bobs = {};
             this.removedGOs = [];
             this._timeScale = 1;
 
-            this.name = GetValue$3K(config, 'name');
+            this.name = GetValue$3W(config, 'name');
         }
 
         destroy(fromScene) {
@@ -17190,7 +17190,7 @@
     Object.assign(
         GOManager.prototype,
         EventEmitterMethods$1,
-        Methods$i
+        Methods$j
     );
 
     const GameObjectClass = Phaser.GameObjects.GameObject;
@@ -17573,7 +17573,7 @@
         CameraMethods,
     );
 
-    const GetValue$3J = Phaser.Utils.Objects.GetValue;
+    const GetValue$3V = Phaser.Utils.Objects.GetValue;
 
     class LayerManager extends GOManager {
         constructor(scene, config) {
@@ -17593,10 +17593,10 @@
 
             super(scene, config);
 
-            var rootLayer = GetValue$3J(config, 'rootLayer');
+            var rootLayer = GetValue$3V(config, 'rootLayer');
             this.setRootLayer(rootLayer);
 
-            var initLayers = GetValue$3J(config, 'layers');
+            var initLayers = GetValue$3V(config, 'layers');
             if (initLayers) {
                 for (var i = 0, cnt = initLayers.length; i < cnt; i++) {
                     var layerConfig = initLayers[i];
@@ -17608,8 +17608,8 @@
                         this.add(layerName);
 
                         var scrollFactor = layerConfig.scrollFactor;
-                        var scrollFactorX = GetValue$3J(layerConfig, 'scrollFactorX', scrollFactor);
-                        var scrollFactorY = GetValue$3J(layerConfig, 'scrollFactorY', scrollFactor);
+                        var scrollFactorX = GetValue$3V(layerConfig, 'scrollFactorX', scrollFactor);
+                        var scrollFactorY = GetValue$3V(layerConfig, 'scrollFactorY', scrollFactor);
                         if (scrollFactorX !== undefined) {
                             this.setScrollFactor(layerName, scrollFactorX, scrollFactorY);
                         }
@@ -17714,7 +17714,7 @@
         }
     };
 
-    const GetValue$3I = Phaser.Utils.Objects.GetValue;
+    const GetValue$3U = Phaser.Utils.Objects.GetValue;
 
     class ComponentBase {
         constructor(parent, config) {
@@ -17723,7 +17723,7 @@
             this.isShutdown = false;
 
             // Event emitter, default is private event emitter
-            this.setEventEmitter(GetValue$3I(config, 'eventEmitter', true));
+            this.setEventEmitter(GetValue$3U(config, 'eventEmitter', true));
 
             // Register callback of parent destroy event, also see `shutdown` method
             if (this.parent) {
@@ -17800,7 +17800,7 @@
         EventEmitterMethods$1
     );
 
-    const GetValue$3H = Phaser.Utils.Objects.GetValue;
+    const GetValue$3T = Phaser.Utils.Objects.GetValue;
 
     class TickTask extends ComponentBase {
         constructor(parent, config) {
@@ -17809,7 +17809,7 @@
             this._isRunning = false;
             this.isPaused = false;
             this.tickingState = false;
-            this.setTickingMode(GetValue$3H(config, 'tickingMode', 1));
+            this.setTickingMode(GetValue$3T(config, 'tickingMode', 1));
             // boot() later
         }
 
@@ -17913,7 +17913,7 @@
         'always': 2
     };
 
-    const GetValue$3G = Phaser.Utils.Objects.GetValue;
+    const GetValue$3S = Phaser.Utils.Objects.GetValue;
 
     class SceneUpdateTickTask extends TickTask {
         constructor(parent, config) {
@@ -17924,7 +17924,7 @@
 
             // If this.scene is not available, use game's 'step' event
             var defaultEventName = (this.scene) ? 'update' : 'step';
-            this.tickEventName = GetValue$3G(config, 'tickEventName', defaultEventName);
+            this.tickEventName = GetValue$3S(config, 'tickEventName', defaultEventName);
             this.isSceneTicker = !IsGameUpdateEvent(this.tickEventName);
 
         }
@@ -17960,8 +17960,8 @@
         return (eventName === 'step') || (eventName === 'poststep');
     };
 
-    const GetValue$3F = Phaser.Utils.Objects.GetValue;
-    const Clamp$g = Phaser.Math.Clamp;
+    const GetValue$3R = Phaser.Utils.Objects.GetValue;
+    const Clamp$h = Phaser.Math.Clamp;
 
     let Timer$1 = class Timer {
         constructor(config) {
@@ -17969,15 +17969,15 @@
         }
 
         resetFromJSON(o) {
-            this.state = GetValue$3F(o, 'state', IDLE$8);
-            this.timeScale = GetValue$3F(o, 'timeScale', 1);
-            this.delay = GetValue$3F(o, 'delay', 0);
-            this.repeat = GetValue$3F(o, 'repeat', 0);
-            this.repeatCounter = GetValue$3F(o, 'repeatCounter', 0);
-            this.repeatDelay = GetValue$3F(o, 'repeatDelay', 0);
-            this.duration = GetValue$3F(o, 'duration', 0);
-            this.nowTime = GetValue$3F(o, 'nowTime', 0);
-            this.justRestart = GetValue$3F(o, 'justRestart', false);
+            this.state = GetValue$3R(o, 'state', IDLE$8);
+            this.timeScale = GetValue$3R(o, 'timeScale', 1);
+            this.delay = GetValue$3R(o, 'delay', 0);
+            this.repeat = GetValue$3R(o, 'repeat', 0);
+            this.repeatCounter = GetValue$3R(o, 'repeatCounter', 0);
+            this.repeatDelay = GetValue$3R(o, 'repeatDelay', 0);
+            this.duration = GetValue$3R(o, 'duration', 0);
+            this.nowTime = GetValue$3R(o, 'nowTime', 0);
+            this.justRestart = GetValue$3R(o, 'justRestart', false);
         }
 
         toJSON() {
@@ -18087,11 +18087,11 @@
                     t = 1;
                     break;
             }
-            return Clamp$g(t, 0, 1);
+            return Clamp$h(t, 0, 1);
         }
 
         set t(value) {
-            value = Clamp$g(value, -1, 1);
+            value = Clamp$h(value, -1, 1);
             if (value < 0) {
                 this.state = DELAY;
                 this.nowTime = -this.delay * value;
@@ -18185,19 +18185,19 @@
 
     }
 
-    const GetValue$3E = Phaser.Utils.Objects.GetValue;
+    const GetValue$3Q = Phaser.Utils.Objects.GetValue;
     const GetAdvancedValue$5 = Phaser.Utils.Objects.GetAdvancedValue;
     const GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
 
     class EaseValueTaskBase extends TimerTickTask {
         resetFromJSON(o) {
-            this.timer.resetFromJSON(GetValue$3E(o, 'timer'));
-            this.setEnable(GetValue$3E(o, 'enable', true));
-            this.setTarget(GetValue$3E(o, 'target', this.parent));
+            this.timer.resetFromJSON(GetValue$3Q(o, 'timer'));
+            this.setEnable(GetValue$3Q(o, 'enable', true));
+            this.setTarget(GetValue$3Q(o, 'target', this.parent));
             this.setDelay(GetAdvancedValue$5(o, 'delay', 0));
             this.setDuration(GetAdvancedValue$5(o, 'duration', 1000));
-            this.setEase(GetValue$3E(o, 'ease', 'Linear'));
-            this.setRepeat(GetValue$3E(o, 'repeat', 0));
+            this.setEase(GetValue$3Q(o, 'ease', 'Linear'));
+            this.setRepeat(GetValue$3Q(o, 'repeat', 0));
 
             return this;
         }
@@ -18322,7 +18322,7 @@
         return (object instanceof SoundObjectClass);
     };
 
-    const GetValue$3D = Phaser.Utils.Objects.GetValue;
+    const GetValue$3P = Phaser.Utils.Objects.GetValue;
     const GetAdvancedValue$4 = Phaser.Utils.Objects.GetAdvancedValue;
     const Linear$p = Phaser.Math.Linear;
 
@@ -18348,8 +18348,8 @@
 
         resetFromJSON(o) {
             super.resetFromJSON(o);
-            this.setMode(GetValue$3D(o, 'mode', 0));
-            this.setEnable(GetValue$3D(o, 'enable', true));
+            this.setMode(GetValue$3P(o, 'mode', 0));
+            this.setEnable(GetValue$3P(o, 'enable', true));
             this.setVolumeRange(
                 GetAdvancedValue$4(o, 'volume.start', this.parent.volume),
                 GetAdvancedValue$4(o, 'volume.end', 0)
@@ -18495,7 +18495,7 @@
         return sound;
     };
 
-    const GetValue$3C = Phaser.Utils.Objects.GetValue;
+    const GetValue$3O = Phaser.Utils.Objects.GetValue;
 
     var BackgroundMusicMethods = {
         setBackgroundMusicLoop(value) {
@@ -18555,11 +18555,11 @@
             this.stopBackgroundMusic(); // Stop previous background music
 
             var music = this.sound.add(key, {
-                loop: GetValue$3C(config, 'loop', this.backgroundMusicLoop),
-                mute: GetValue$3C(config, 'mute', this.backgroundMusicMute),
-                volume: GetValue$3C(config, 'volume', this.backgroundMusicVolume),
-                detune: GetValue$3C(config, 'detune', 0),
-                rate: GetValue$3C(config, 'rate', 1),
+                loop: GetValue$3O(config, 'loop', this.backgroundMusicLoop),
+                mute: GetValue$3O(config, 'mute', this.backgroundMusicMute),
+                volume: GetValue$3O(config, 'volume', this.backgroundMusicVolume),
+                detune: GetValue$3O(config, 'detune', 0),
+                rate: GetValue$3O(config, 'rate', 1),
             });
 
             this.setCurrentBackgroundMusic(music);
@@ -18667,7 +18667,7 @@
 
     };
 
-    const GetValue$3B = Phaser.Utils.Objects.GetValue;
+    const GetValue$3N = Phaser.Utils.Objects.GetValue;
 
     var BackgroundMusic2Methods = {
         setBackgroundMusic2Loop(value) {
@@ -18727,11 +18727,11 @@
             this.stopBackgroundMusic2(); // Stop previous background music
 
             var music = this.sound.add(key, {
-                loop: GetValue$3B(config, 'loop', this.backgroundMusicLoop),
-                mute: GetValue$3B(config, 'mute', this.backgroundMusic2Mute),
-                volume: GetValue$3B(config, 'volume', this.backgroundMusic2Volume),
-                detune: GetValue$3B(config, 'detune', 0),
-                rate: GetValue$3B(config, 'rate', 1),
+                loop: GetValue$3N(config, 'loop', this.backgroundMusicLoop),
+                mute: GetValue$3N(config, 'mute', this.backgroundMusic2Mute),
+                volume: GetValue$3N(config, 'volume', this.backgroundMusic2Volume),
+                detune: GetValue$3N(config, 'detune', 0),
+                rate: GetValue$3N(config, 'rate', 1),
             });
 
             this.setCurrentBackgroundMusic2(music);
@@ -18837,7 +18837,7 @@
     };
 
     const RemoveItem$a = Phaser.Utils.Array.Remove;
-    const GetValue$3A = Phaser.Utils.Objects.GetValue;
+    const GetValue$3M = Phaser.Utils.Objects.GetValue;
 
     var SoundEffectsMethods = {
 
@@ -18856,10 +18856,10 @@
             }
 
             var music = this.sound.add(key, {
-                mute: GetValue$3A(config, 'mute', this.soundEffectsMute),
-                volume: GetValue$3A(config, 'volume', this.soundEffectsVolume),
-                detune: GetValue$3A(config, 'detune', 0),
-                rate: GetValue$3A(config, 'rate', 1),
+                mute: GetValue$3M(config, 'mute', this.soundEffectsMute),
+                volume: GetValue$3M(config, 'volume', this.soundEffectsVolume),
+                detune: GetValue$3M(config, 'detune', 0),
+                rate: GetValue$3M(config, 'rate', 1),
             });
 
 
@@ -19006,7 +19006,7 @@
     };
 
     const RemoveItem$9 = Phaser.Utils.Array.Remove;
-    const GetValue$3z = Phaser.Utils.Objects.GetValue;
+    const GetValue$3L = Phaser.Utils.Objects.GetValue;
 
     var SoundEffects2Methods = {
 
@@ -19025,10 +19025,10 @@
             }
 
             var music = this.sound.add(key, {
-                mute: GetValue$3z(config, 'mute', this.soundEffects2Mute),
-                volume: GetValue$3z(config, 'volume', this.soundEffects2Volume),
-                detune: GetValue$3z(config, 'detune', 0),
-                rate: GetValue$3z(config, 'rate', 1),
+                mute: GetValue$3L(config, 'mute', this.soundEffects2Mute),
+                volume: GetValue$3L(config, 'volume', this.soundEffects2Volume),
+                detune: GetValue$3L(config, 'detune', 0),
+                rate: GetValue$3L(config, 'rate', 1),
             });
 
             this.soundEffects2.push(music);
@@ -19173,19 +19173,19 @@
         },
     };
 
-    var Methods$h = {
+    var Methods$i = {
         hasAudio: HasaAudio
     };
 
     Object.assign(
-        Methods$h,
+        Methods$i,
         BackgroundMusicMethods,
         BackgroundMusic2Methods,
         SoundEffectsMethods,
         SoundEffects2Methods,
     );
 
-    const GetValue$3y = Phaser.Utils.Objects.GetValue;
+    const GetValue$3K = Phaser.Utils.Objects.GetValue;
 
     class SoundManager {
         constructor(game, config) {
@@ -19193,33 +19193,33 @@
 
             // Background music will be (fade out)destroyed when play next one.
             this.backgroundMusic = undefined;
-            this._backgroundMusicVolume = GetValue$3y(config, 'bgm.volume', 1);
-            this._backgroundMusicMute = GetValue$3y(config, 'bgm.mute', false);
+            this._backgroundMusicVolume = GetValue$3K(config, 'bgm.volume', 1);
+            this._backgroundMusicMute = GetValue$3K(config, 'bgm.mute', false);
 
-            this.setBackgroundMusicLoop(GetValue$3y(config, 'bgm.loop', true));
-            this.setBackgroundMusicFadeTime(GetValue$3y(config, 'bgm.fade', 500));
+            this.setBackgroundMusicLoop(GetValue$3K(config, 'bgm.loop', true));
+            this.setBackgroundMusicFadeTime(GetValue$3K(config, 'bgm.fade', 500));
 
             this.backgroundMusic2 = undefined;
-            this._backgroundMusic2Volume = GetValue$3y(config, 'bgm2.volume', 1);
-            this._backgroundMusic2Mute = GetValue$3y(config, 'bgm2.mute', false);
+            this._backgroundMusic2Volume = GetValue$3K(config, 'bgm2.volume', 1);
+            this._backgroundMusic2Mute = GetValue$3K(config, 'bgm2.mute', false);
 
-            this.setBackgroundMusic2Loop(GetValue$3y(config, 'bgm2.loop', true));
-            this.setBackgroundMusic2FadeTime(GetValue$3y(config, 'bgm2.fade', 500));
+            this.setBackgroundMusic2Loop(GetValue$3K(config, 'bgm2.loop', true));
+            this.setBackgroundMusic2FadeTime(GetValue$3K(config, 'bgm2.fade', 500));
 
             // Sound effect will be destroyed when completed
             this.soundEffects = [];
-            this._soundEffectsVolume = GetValue$3y(config, 'soundEffect.volume', 1);
+            this._soundEffectsVolume = GetValue$3K(config, 'soundEffect.volume', 1);
 
             this.soundEffects2 = [];
-            this._soundEffects2Volume = GetValue$3y(config, 'soundEffect2.volume', 1);
+            this._soundEffects2Volume = GetValue$3K(config, 'soundEffect2.volume', 1);
 
 
-            var initialBackgroundMusic = GetValue$3y(config, 'bgm.initial', undefined);
+            var initialBackgroundMusic = GetValue$3K(config, 'bgm.initial', undefined);
             if (initialBackgroundMusic) {
                 this.setCurrentBackgroundMusic(initialBackgroundMusic);
             }
 
-            var initialBackgroundMusic2 = GetValue$3y(config, 'bgm2.initial', undefined);
+            var initialBackgroundMusic2 = GetValue$3K(config, 'bgm2.initial', undefined);
             if (initialBackgroundMusic2) {
                 this.setCurrentBackgroundMusic2(initialBackgroundMusic2);
             }
@@ -19363,10 +19363,10 @@
 
     Object.assign(
         SoundManager.prototype,
-        Methods$h
+        Methods$i
     );
 
-    const GetValue$3x = Phaser.Utils.Objects.GetValue;
+    const GetValue$3J = Phaser.Utils.Objects.GetValue;
 
     class BaseClock extends TickTask {
         constructor(parent, config) {
@@ -19377,9 +19377,9 @@
         }
 
         resetFromJSON(o) {
-            this.isRunning = GetValue$3x(o, 'isRunning', false);
-            this.timeScale = GetValue$3x(o, 'timeScale', 1);
-            this.now = GetValue$3x(o, 'now', 0);
+            this.isRunning = GetValue$3J(o, 'isRunning', false);
+            this.timeScale = GetValue$3J(o, 'timeScale', 1);
+            this.now = GetValue$3J(o, 'now', 0);
             return this;
         }
 
@@ -19462,7 +19462,7 @@
         return t;
     };
 
-    const Clamp$f = Phaser.Math.Clamp;
+    const Clamp$g = Phaser.Math.Clamp;
 
     class Timer {
         constructor(timeline, config) {
@@ -19548,7 +19548,7 @@
 
         getProgress() {
             var value = 1 - (this.remainder / this.duration);
-            value = Clamp$f(value, 0, 1);
+            value = Clamp$g(value, 0, 1);
             if (this.yoyo) {
                 value = Yoyo$1(value);
             }
@@ -19556,7 +19556,7 @@
         }
 
         setProgress(value) {
-            value = Clamp$f(value, 0, 1);
+            value = Clamp$g(value, 0, 1);
             this.remainder = this.duration * (1 - value);
         }
 
@@ -19604,7 +19604,7 @@
         }
     };
 
-    const GetValue$3w = Phaser.Utils.Objects.GetValue;
+    const GetValue$3I = Phaser.Utils.Objects.GetValue;
     const TimerPool = new TimerPool$1();
 
     class Timeline extends Clock {
@@ -19613,7 +19613,7 @@
 
             this.addedTimers = [];
             this.timers = [];
-            this.timerPool = GetValue$3w(config, 'pool', TimerPool);
+            this.timerPool = GetValue$3I(config, 'pool', TimerPool);
         }
 
         shutdown() {
@@ -20210,11 +20210,11 @@
         constructor(parent, config) {
             super(parent);
 
-            this.waitCompleteEventName = GetValue$45(config, 'completeEventName', this.waitCompleteEventName);
+            this.waitCompleteEventName = GetValue$4h(config, 'completeEventName', this.waitCompleteEventName);
 
-            this.setClickTarget(GetValue$45(config, 'clickTarget', this.scene));
-            this.setClickShortcutKeys(GetValue$45(config, 'clickShortcutKeys', undefined));
-            this.setCameraTarget(GetValue$45(config, 'camera', this.scene.cameras.main));
+            this.setClickTarget(GetValue$4h(config, 'clickTarget', this.scene));
+            this.setClickShortcutKeys(GetValue$4h(config, 'clickShortcutKeys', undefined));
+            this.setCameraTarget(GetValue$4h(config, 'camera', this.scene.cameras.main));
         }
 
         get clickTarget() {
@@ -20258,7 +20258,7 @@
         methods$D,
     );
 
-    const GetValue$3v = Phaser.Utils.Objects.GetValue;
+    const GetValue$3H = Phaser.Utils.Objects.GetValue;
 
     var InitManagers = function (scene, config) {
         this.clickTarget = undefined;
@@ -20269,19 +20269,19 @@
 
         this.gameObjectManagers = {};
 
-        var layerNames = GetValue$3v(config, 'layers', false);
+        var layerNames = GetValue$3H(config, 'layers', false);
         if (layerNames !== false) {
             var layerManager = new LayerManager(scene, {
                 name: 'LAYER',
                 layers: layerNames,
-                rootLayer: GetValue$3v(config, 'rootLayer', undefined),
-                depth: GetValue$3v(config, 'layerDepth', undefined)
+                rootLayer: GetValue$3H(config, 'rootLayer', undefined),
+                depth: GetValue$3H(config, 'layerDepth', undefined)
             });
             this.addGameObjectManager(layerManager);
             this.layerManager = layerManager;
         }
 
-        var soundManagerConfig = GetValue$3v(config, 'sounds');
+        var soundManagerConfig = GetValue$3H(config, 'sounds');
         if (soundManagerConfig !== false) {
             this.soundManager = new SoundManager(scene, soundManagerConfig);
         }
@@ -21023,20 +21023,20 @@
     let BracketParser$1 = class BracketParser {
         constructor(config) {
             // Event emitter
-            this.setEventEmitter(GetValue$45(config, 'eventEmitter', undefined));
+            this.setEventEmitter(GetValue$4h(config, 'eventEmitter', undefined));
 
             // Value convert
-            this.setValueConverter(GetValue$45(config, 'valueConvert', true));
+            this.setValueConverter(GetValue$4h(config, 'valueConvert', true));
             // Loop
-            this.setLoopEnable(GetValue$45(config, 'loop', false));
+            this.setLoopEnable(GetValue$4h(config, 'loop', false));
 
             // Brackets and generate regex
-            this.setMultipleLinesTagEnable(GetValue$45(config, 'multipleLinesTag', false));
-            var delimiters = GetValue$45(config, 'delimiters', '<>');
+            this.setMultipleLinesTagEnable(GetValue$4h(config, 'multipleLinesTag', false));
+            var delimiters = GetValue$4h(config, 'delimiters', '<>');
             this.setDelimiters(delimiters[0], delimiters[1]);
 
             // Translate tagName callback
-            this.setTranslateTagNameCallback(GetValue$45(config, 'translateTagNameCallback'));
+            this.setTranslateTagNameCallback(GetValue$4h(config, 'translateTagNameCallback'));
 
             this.isRunning = false;
             this.isPaused = false;
@@ -21307,10 +21307,10 @@
             super(config);
 
             // Parameters for regex
-            this.setTagExpression(GetValue$45(config, 'regex.tag', undefined));
-            this.setValueExpression(GetValue$45(config, 'regex.value', undefined));
+            this.setTagExpression(GetValue$4h(config, 'regex.tag', undefined));
+            this.setValueExpression(GetValue$4h(config, 'regex.value', undefined));
             // Brackets and generate regex
-            var delimiters = GetValue$45(config, 'delimiters', '<>');
+            var delimiters = GetValue$4h(config, 'delimiters', '<>');
             this.setDelimiters(delimiters[0], delimiters[1]);
         }
 
@@ -22749,7 +22749,7 @@
         return lines.join('');
     };
 
-    const GetValue$3u = Phaser.Utils.Objects.GetValue;
+    const GetValue$3G = Phaser.Utils.Objects.GetValue;
 
     class Parser extends BracketParser {
         constructor(textPlayer, config) {
@@ -22763,7 +22763,7 @@
 
             AddParseCallbacks(textPlayer, this, config);
 
-            this.setCommentLineStartSymbol(GetValue$3u(config, 'comment', '//'));
+            this.setCommentLineStartSymbol(GetValue$3G(config, 'comment', '//'));
             this.setContentOutputEnable();
         }
 
@@ -23205,7 +23205,7 @@
         return this;
     };
 
-    var Methods$g = {
+    var Methods$h = {
         fadeOutPage: FadeOutPage,
         start: Start$1,
         typing: Typing,
@@ -23222,11 +23222,11 @@
     };
 
     Object.assign(
-        Methods$g,
+        Methods$h,
         TypingSpeedMethods$1
     );
 
-    const GetValue$3t = Phaser.Utils.Objects.GetValue;
+    const GetValue$3F = Phaser.Utils.Objects.GetValue;
 
     class TypeWriter {
         constructor(textPlayer, config) {
@@ -23240,14 +23240,14 @@
             this.setIgnoreWait(false);
             this.setSkipTypingAnimation(false);
 
-            this.setTypingStartCallback(GetValue$3t(config, 'onTypingStart', SetChildrenInvisible));
-            this.setDefaultTypingSpeed(GetValue$3t(config, 'speed', 250));
+            this.setTypingStartCallback(GetValue$3F(config, 'onTypingStart', SetChildrenInvisible));
+            this.setDefaultTypingSpeed(GetValue$3F(config, 'speed', 250));
             this.setTypingSpeed();
-            this.setSkipSpaceEnable(GetValue$3t(config, 'skipSpace', false));
-            this.setAnimationConfig(GetValue$3t(config, 'animation', undefined));
-            this.setMinSizeEnable(GetValue$3t(config, 'minSizeEnable', false));
+            this.setSkipSpaceEnable(GetValue$3F(config, 'skipSpace', false));
+            this.setAnimationConfig(GetValue$3F(config, 'animation', undefined));
+            this.setMinSizeEnable(GetValue$3F(config, 'minSizeEnable', false));
 
-            this.setFadeOutPageCallback(GetValue$3t(config, 'fadeOutPage'));
+            this.setFadeOutPageCallback(GetValue$3F(config, 'fadeOutPage'));
 
         }
 
@@ -23339,7 +23339,7 @@
     Object.assign(
         TypeWriter.prototype,
         EventEmitterMethods$1,
-        Methods$g,
+        Methods$h,
     );
 
     class SpriteBob extends BobBase {
@@ -23413,9 +23413,9 @@
         },
     };
 
-    var Methods$f = {};
+    var Methods$g = {};
     Object.assign(
-        Methods$f,
+        Methods$g,
         AnimationMethods
     );
 
@@ -23463,7 +23463,7 @@
 
     Object.assign(
         SpriteManager.prototype,
-        Methods$f
+        Methods$g
     );
 
     var IsPlayAnimationTag = function (tags, goType) {
@@ -24219,7 +24219,7 @@
         },
     };
 
-    var Methods$e = {
+    var Methods$f = {
         setClickTarget: SetClickTarget,
         setCameraTarget: SetCameraTarget,
         setNextPageInput: SetNextPageInput,
@@ -24232,7 +24232,7 @@
     };
 
     Object.assign(
-        Methods$e,
+        Methods$f,
         GameObjectManagerMethods,
         PlayMethods,
         PauseMethods,
@@ -24249,7 +24249,7 @@
     };
 
     const IsPlainObject$O = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$3s = Phaser.Utils.Objects.GetValue;
+    const GetValue$3E = Phaser.Utils.Objects.GetValue;
 
     class TextPlayer extends Extend(DynamicText) {
         constructor(scene, x, y, fixedWidth, fixedHeight, config) {
@@ -24271,23 +24271,23 @@
 
             this.initManagers(scene, config);
 
-            this.parser = new Parser(this, GetValue$3s(config, 'parser', undefined));
+            this.parser = new Parser(this, GetValue$3E(config, 'parser', undefined));
 
-            this.typeWriter = new TypeWriter(this, GetValue$3s(config, 'typing', undefined));
+            this.typeWriter = new TypeWriter(this, GetValue$3E(config, 'typing', undefined));
 
             this._imageManager = undefined;
-            var imageData = GetValue$3s(config, 'images', undefined);
+            var imageData = GetValue$3E(config, 'images', undefined);
             if (imageData) {
                 this.addImage(imageData);
             }
 
-            var spriteManagerConfig = GetValue$3s(config, 'sprites');
+            var spriteManagerConfig = GetValue$3E(config, 'sprites');
             if ((spriteManagerConfig !== false) && (spriteManagerConfig !== null)) {
                 AddSpriteManager.call(this, spriteManagerConfig);
             }
 
-            this.setIgnoreNextPageInput(GetValue$3s(config, 'ignoreNextPageInput', false));
-            this.setNextPageInput(GetValue$3s(config, 'nextPageInput', null));
+            this.setIgnoreNextPageInput(GetValue$3E(config, 'ignoreNextPageInput', false));
+            this.setNextPageInput(GetValue$3E(config, 'nextPageInput', null));
 
             this.isPlaying = false;
 
@@ -24362,7 +24362,7 @@
 
     Object.assign(
         TextPlayer.prototype,
-        Methods$e
+        Methods$f
     );
 
     ObjectFactory.register('textPlayer', function (x, y, width, height, config) {
@@ -24505,7 +24505,7 @@
         LastOpenedEditor$1 = undefined;
     };
 
-    const GetValue$3r = Phaser.Utils.Objects.GetValue;
+    const GetValue$3D = Phaser.Utils.Objects.GetValue;
 
     var SetProperties = function (properties, config, out) {
         if (out === undefined) {
@@ -24515,7 +24515,7 @@
         var property, value;
         for (var key in properties) {
             property = properties[key];  // [propName, defaultValue]
-            value = GetValue$3r(config, key, property[1]);
+            value = GetValue$3D(config, key, property[1]);
             if (value !== undefined) {
                 out[property[0]] = value;
             }
@@ -24621,13 +24621,13 @@
 
     };
 
-    const GetValue$3q = Phaser.Utils.Objects.GetValue;
+    const GetValue$3C = Phaser.Utils.Objects.GetValue;
 
     var CreateElement = function (parent, config) {
         var element;
-        var textType = GetValue$3q(config, 'inputType', undefined);
+        var textType = GetValue$3C(config, 'inputType', undefined);
         if (textType === undefined) {
-            textType = GetValue$3q(config, 'type', 'text');
+            textType = GetValue$3C(config, 'type', 'text');
         }
         if (textType === 'textarea') {
             element = document.createElement('textarea');
@@ -24637,7 +24637,7 @@
             element.type = textType;
         }
 
-        var style = GetValue$3q(config, 'style', undefined);
+        var style = GetValue$3C(config, 'style', undefined);
         // Apply other style properties
         var elementStyle = element.style;
         SetProperties(StyleProperties$1, style, elementStyle);
@@ -24712,40 +24712,40 @@
         return this;
     };
 
-    var Methods$d = {
+    var Methods$e = {
         open: Open$2,
         close: Close$1,
     };
 
-    const GetValue$3p = Phaser.Utils.Objects.GetValue;
+    const GetValue$3B = Phaser.Utils.Objects.GetValue;
 
     class HiddenTextEditBase extends ComponentBase {
         constructor(gameObject, config) {
             super(gameObject);
             // this.parent = gameObject;
 
-            var textType = GetValue$3p(config, 'inputType', undefined);
+            var textType = GetValue$3B(config, 'inputType', undefined);
             if (textType === undefined) {
-                textType = GetValue$3p(config, 'type', 'text');
+                textType = GetValue$3B(config, 'type', 'text');
             }
 
-            this.setEnterCloseEnable(GetValue$3p(config, 'enterClose', (textType !== 'textarea')));
+            this.setEnterCloseEnable(GetValue$3B(config, 'enterClose', (textType !== 'textarea')));
 
-            var onOpen = GetValue$3p(config, 'onOpen', undefined);
+            var onOpen = GetValue$3B(config, 'onOpen', undefined);
             if (!onOpen) {
-                onOpen = GetValue$3p(config, 'onFocus', undefined);
+                onOpen = GetValue$3B(config, 'onFocus', undefined);
             }
             this.onOpenCallback = onOpen;
 
-            this.clickOutSideTarget = GetValue$3p(config, 'clickOutSideTarget', undefined);
+            this.clickOutSideTarget = GetValue$3B(config, 'clickOutSideTarget', undefined);
 
-            var onClose = GetValue$3p(config, 'onClose', undefined);
+            var onClose = GetValue$3B(config, 'onClose', undefined);
             if (!onClose) {
-                onClose = GetValue$3p(config, 'onBlur', undefined);
+                onClose = GetValue$3B(config, 'onBlur', undefined);
             }
             this.onCloseCallback = onClose;
 
-            this.onUpdateCallback = GetValue$3p(config, 'onUpdate', undefined);
+            this.onUpdateCallback = GetValue$3B(config, 'onUpdate', undefined);
 
             this.isOpened = false;
 
@@ -25067,7 +25067,7 @@
 
     Object.assign(
         HiddenTextEditBase.prototype,
-        Methods$d,
+        Methods$e,
     );
 
     var NumberInputUpdateCallback = function (text, textObject, hiddenInputText) {
@@ -25268,14 +25268,14 @@
         hiddenTextEdit.prevCursorPosition = null;
     };
 
-    const GetValue$3o = Phaser.Utils.Objects.GetValue;
+    const GetValue$3A = Phaser.Utils.Objects.GetValue;
 
     let HiddenTextEdit$1 = class HiddenTextEdit extends HiddenTextEditBase {
         constructor(gameObject, config) {
             super(gameObject, config);
             // this.parent = gameObject;
 
-            this.setSelectAllWhenFocusEnable(GetValue$3o(config, 'selectAll', false));
+            this.setSelectAllWhenFocusEnable(GetValue$3A(config, 'selectAll', false));
 
             this.cursorMoveStartIndex = null;
             this.prevCursorPosition = null;
@@ -25394,7 +25394,7 @@
         }
     };
 
-    const GetValue$3n = Phaser.Utils.Objects.GetValue;
+    const GetValue$3z = Phaser.Utils.Objects.GetValue;
     const PropertiesList = [
         'inputType',
         'onOpen', 'clickOutSideTarget', 'onFocus', 'onClose', 'onBlur', 'onUpdate',
@@ -25403,7 +25403,7 @@
     ];
 
     var CreateHiddenTextEdit = function (parent, parentConfig) {
-        var config = GetValue$3n(parentConfig, 'edit');
+        var config = GetValue$3z(parentConfig, 'edit');
         if (config === undefined) {
             config = {};
         }
@@ -26253,7 +26253,7 @@
 
     };
 
-    const Clamp$e = Phaser.Math.Clamp;
+    const Clamp$f = Phaser.Math.Clamp;
 
     var GetIndex = function (characterCountOfLines, position) {
         var result = { lineIndex: 0, position: 0 };
@@ -26303,7 +26303,7 @@
             }
 
             // Move cursor to previous character
-            var position = Clamp$e(this.cursorPosition - 1, 0, this.inputText.length);
+            var position = Clamp$f(this.cursorPosition - 1, 0, this.inputText.length);
             this.setCursorPosition(position);
 
             return this;
@@ -26315,7 +26315,7 @@
             }
 
             // Move cursor to next character
-            var position = Clamp$e(this.cursorPosition + 1, 0, this.inputText.length);
+            var position = Clamp$f(this.cursorPosition + 1, 0, this.inputText.length);
             this.setCursorPosition(position);
 
             return this;
@@ -26329,7 +26329,7 @@
             var result = GetIndex(this.characterCountOfLines, this.cursorPosition);
             result.lineIndex -= 1;
 
-            var position = Clamp$e(GetPosition(this.characterCountOfLines, result), 0, this.inputText.length);
+            var position = Clamp$f(GetPosition(this.characterCountOfLines, result), 0, this.inputText.length);
             this.setCursorPosition(position);
 
             return this;
@@ -26343,7 +26343,7 @@
             var result = GetIndex(this.characterCountOfLines, this.cursorPosition);
             result.lineIndex += 1;
 
-            var position = Clamp$e(GetPosition(this.characterCountOfLines, result), 0, this.inputText.length);
+            var position = Clamp$f(GetPosition(this.characterCountOfLines, result), 0, this.inputText.length);
             this.setCursorPosition(position);
 
             return this;
@@ -26761,7 +26761,7 @@
         return GetGame(game).loop.delta;
     };
 
-    const GetValue$3m = Phaser.Utils.Objects.GetValue;
+    const GetValue$3y = Phaser.Utils.Objects.GetValue;
     const Wrap$3 = Phaser.Math.Wrap;
 
     class HiddenTextEdit extends HiddenTextEditBase {
@@ -26777,8 +26777,8 @@
             super(gameObject, config);
             // this.parent = gameObject;
 
-            this.setCursor(GetValue$3m(config, 'cursor', '|'));
-            this.setCursorFlashDuration(GetValue$3m(config, 'cursorFlashDuration', 1000));
+            this.setCursor(GetValue$3y(config, 'cursor', '|'));
+            this.setCursorFlashDuration(GetValue$3y(config, 'cursorFlashDuration', 1000));
             this.cursorFlashTimer = 0;
 
         }
@@ -27380,7 +27380,7 @@
 
     Object.assign(
         PathBase.prototype,
-        Methods$l,
+        Methods$m,
     );
 
     Phaser.Math.DegToRad;
@@ -28525,10 +28525,10 @@
 
     Object.assign(
         Rectangle$2.prototype,
-        Methods$l,
+        Methods$m,
     );
 
-    const GetValue$3l = Phaser.Utils.Objects.GetValue;
+    const GetValue$3x = Phaser.Utils.Objects.GetValue;
 
     class RoundRectangle extends PathBase {
         constructor(x, y, width, height, radius, iterations) {
@@ -28674,10 +28674,10 @@
                 this.radiusBL = value;
                 this.radiusBR = value;
             } else {
-                this.radiusTL = GetValue$3l(value, 'tl', 0);
-                this.radiusTR = GetValue$3l(value, 'tr', 0);
-                this.radiusBL = GetValue$3l(value, 'bl', 0);
-                this.radiusBR = GetValue$3l(value, 'br', 0);
+                this.radiusTL = GetValue$3x(value, 'tl', 0);
+                this.radiusTR = GetValue$3x(value, 'tr', 0);
+                this.radiusBL = GetValue$3x(value, 'bl', 0);
+                this.radiusBR = GetValue$3x(value, 'br', 0);
             }
         }
 
@@ -28922,7 +28922,7 @@
 
     Object.assign(
         Triangle$1.prototype,
-        Methods$l,
+        Methods$m,
     );
 
     var ShapesUpdateMethods$4 = {
@@ -28998,7 +28998,7 @@
         }
     };
 
-    const GetValue$3k = Phaser.Utils.Objects.GetValue;
+    const GetValue$3w = Phaser.Utils.Objects.GetValue;
     const Linear$n = Phaser.Math.Linear;
 
     class EaseValueTask extends EaseValueTaskBase {
@@ -29017,16 +29017,16 @@
             }
 
             var target = this.target;
-            this.propertyKey = GetValue$3k(config, 'key', 'value');
+            this.propertyKey = GetValue$3w(config, 'key', 'value');
             var currentValue = target[this.propertyKey];
-            this.fromValue = GetValue$3k(config, 'from', currentValue);
-            this.toValue = GetValue$3k(config, 'to', currentValue);
+            this.fromValue = GetValue$3w(config, 'from', currentValue);
+            this.toValue = GetValue$3w(config, 'to', currentValue);
 
-            this.setEase(GetValue$3k(config, 'ease', this.ease));
-            this.setDuration(GetValue$3k(config, 'duration', this.duration));
-            this.setRepeat(GetValue$3k(config, 'repeat', 0));
-            this.setDelay(GetValue$3k(config, 'delay', 0));
-            this.setRepeatDelay(GetValue$3k(config, 'repeatDelay', 0));
+            this.setEase(GetValue$3w(config, 'ease', this.ease));
+            this.setDuration(GetValue$3w(config, 'duration', this.duration));
+            this.setRepeat(GetValue$3w(config, 'repeat', 0));
+            this.setDelay(GetValue$3w(config, 'delay', 0));
+            this.setRepeatDelay(GetValue$3w(config, 'repeatDelay', 0));
 
             this.timer
                 .setDuration(this.duration)
@@ -29097,21 +29097,21 @@
     const DefaultBoxFillColor = 0x005cb2;
     const DefaultCheckerColor = 0xffffff;
 
-    const GetValue$3j = Phaser.Utils.Objects.GetValue;
+    const GetValue$3v = Phaser.Utils.Objects.GetValue;
     const IsPlainObject$M = Phaser.Utils.Objects.IsPlainObject;
 
     class CheckboxShape extends BaseShapes {
         constructor(scene, x, y, width, height, color, config) {
             if (IsPlainObject$M(x)) {
                 config = x;
-                x = GetValue$3j(config, 'x', 0);
-                y = GetValue$3j(config, 'y', 0);
-                width = GetValue$3j(config, 'width', 2);
-                height = GetValue$3j(config, 'height', 2);
-                color = GetValue$3j(config, 'color', DefaultBoxFillColor);
+                x = GetValue$3v(config, 'x', 0);
+                y = GetValue$3v(config, 'y', 0);
+                width = GetValue$3v(config, 'width', 2);
+                height = GetValue$3v(config, 'height', 2);
+                color = GetValue$3v(config, 'color', DefaultBoxFillColor);
             } else if (IsPlainObject$M(color)) {
                 config = color;
-                color = GetValue$3j(config, 'color', DefaultBoxFillColor);
+                color = GetValue$3v(config, 'color', DefaultBoxFillColor);
             }
 
             super(scene, x, y, width, height);
@@ -29122,54 +29122,54 @@
             }
 
             this.setBoxShape(
-                GetValue$3j(config, 'circleBox', false),
+                GetValue$3v(config, 'circleBox', false),
             );
 
             this.setBoxFillStyle(
                 color,
-                GetValue$3j(config, 'boxFillAlpha', 1)
+                GetValue$3v(config, 'boxFillAlpha', 1)
             );
 
             this.setUncheckedBoxFillStyle(
-                GetValue$3j(config, 'uncheckedColor', null),
-                GetValue$3j(config, 'uncheckedBoxFillAlpha', 1)
+                GetValue$3v(config, 'uncheckedColor', null),
+                GetValue$3v(config, 'uncheckedBoxFillAlpha', 1)
             );
 
             this.setBoxStrokeStyle(
-                GetValue$3j(config, 'boxLineWidth', 4),
-                GetValue$3j(config, 'boxStrokeColor', color),
-                GetValue$3j(config, 'boxStrokeAlpha', 1)
+                GetValue$3v(config, 'boxLineWidth', 4),
+                GetValue$3v(config, 'boxStrokeColor', color),
+                GetValue$3v(config, 'boxStrokeAlpha', 1)
             );
 
             this.setUncheckedBoxStrokeStyle(
                 this.boxLineWidth,
-                GetValue$3j(config, 'uncheckedBoxStrokeColor', this.boxStrokeColor),
-                GetValue$3j(config, 'uncheckedBoxStrokeAlpha', this.boxStrokeAlpha)
+                GetValue$3v(config, 'uncheckedBoxStrokeColor', this.boxStrokeColor),
+                GetValue$3v(config, 'uncheckedBoxStrokeAlpha', this.boxStrokeAlpha)
             );
 
 
             this.setCheckerStyle(
-                GetValue$3j(config, 'checkerColor', DefaultCheckerColor),
-                GetValue$3j(config, 'checkerAlpha', 1)
+                GetValue$3v(config, 'checkerColor', DefaultCheckerColor),
+                GetValue$3v(config, 'checkerAlpha', 1)
             );
 
             this.setBoxSize(
-                GetValue$3j(config, 'boxSize', 1)
+                GetValue$3v(config, 'boxSize', 1)
             );
 
             this.setCheckerSize(
-                GetValue$3j(config, 'checkerSize', 1)
+                GetValue$3v(config, 'checkerSize', 1)
             );
 
             this.setCheckerAnimationDuration(
-                GetValue$3j(config, 'animationDuration', 150)
+                GetValue$3v(config, 'animationDuration', 150)
             );
 
             this.buildShapes();
 
-            var value = GetValue$3j(config, 'checked');
+            var value = GetValue$3v(config, 'checked');
             if (value === undefined) {
-                value = GetValue$3j(config, 'value', false);
+                value = GetValue$3v(config, 'value', false);
             }
             this.setValue(value);
         }
@@ -29247,7 +29247,7 @@
         methods$C,
     );
 
-    const GetValue$3i = Phaser.Utils.Objects.GetValue;
+    const GetValue$3u = Phaser.Utils.Objects.GetValue;
 
     class Button extends ComponentBase {
         constructor(gameObject, config) {
@@ -29255,7 +29255,7 @@
             // this.parent = gameObject;
 
             this._enable = undefined;
-            gameObject.setInteractive(GetValue$3i(config, "inputConfig", undefined));
+            gameObject.setInteractive(GetValue$3u(config, "inputConfig", undefined));
             this.resetFromJSON(config);
             this.boot();
         }
@@ -29265,10 +29265,10 @@
             this.lastClickTime = undefined;
             this.isDown = false;
             this.isOver = false;
-            this.setEnable(GetValue$3i(o, "enable", true));
-            this.setMode(GetValue$3i(o, "mode", 1));
-            this.setClickInterval(GetValue$3i(o, "clickInterval", 100));
-            this.setDragThreshold(GetValue$3i(o, 'threshold', undefined));
+            this.setEnable(GetValue$3u(o, "enable", true));
+            this.setMode(GetValue$3u(o, "mode", 1));
+            this.setClickInterval(GetValue$3u(o, "clickInterval", 100));
+            this.setDragThreshold(GetValue$3u(o, 'threshold', undefined));
             return this;
         }
 
@@ -29463,31 +29463,31 @@
         pointerup: 1,
     };
 
-    const GetValue$3h = Phaser.Utils.Objects.GetValue;
+    const GetValue$3t = Phaser.Utils.Objects.GetValue;
     const IsPlainObject$L = Phaser.Utils.Objects.IsPlainObject;
 
     class Checkbox extends CheckboxShape {
         constructor(scene, x, y, width, height, color, config) {
             if (IsPlainObject$L(x)) {
                 config = x;
-                x = GetValue$3h(config, 'x', 0);
-                y = GetValue$3h(config, 'y', 0);
-                width = GetValue$3h(config, 'width', 2);
-                height = GetValue$3h(config, 'height', 2);
-                color = GetValue$3h(config, 'color', DefaultBoxFillColor);
+                x = GetValue$3t(config, 'x', 0);
+                y = GetValue$3t(config, 'y', 0);
+                width = GetValue$3t(config, 'width', 2);
+                height = GetValue$3t(config, 'height', 2);
+                color = GetValue$3t(config, 'color', DefaultBoxFillColor);
             } else if (IsPlainObject$L(color)) {
                 config = color;
-                color = GetValue$3h(config, 'color', DefaultBoxFillColor);
+                color = GetValue$3t(config, 'color', DefaultBoxFillColor);
             }
 
             super(scene, x, y, width, height, color, config);
 
-            this._click = new Button(this, GetValue$3h(config, 'click'));
+            this._click = new Button(this, GetValue$3t(config, 'click'));
             this._click.on('click', function () {
                 this.toggleValue();
             }, this);
 
-            this.setReadOnly(GetValue$3h(config, 'readOnly', false));
+            this.setReadOnly(GetValue$3t(config, 'readOnly', false));
         }
 
         get readOnly() {
@@ -29764,7 +29764,7 @@
         return ((shade & 0xff) << 16) | ((shade & 0xff) << 8) | ((shade & 0xff));
     };
 
-    const GetValue$3g = Phaser.Utils.Objects.GetValue;
+    const GetValue$3s = Phaser.Utils.Objects.GetValue;
     const IsPlainObject$K = Phaser.Utils.Objects.IsPlainObject;
     const DefaultTrackFillColor = 0x005cb2;
     const DefaultThumbFillColor = 0xffffff;
@@ -29773,14 +29773,14 @@
         constructor(scene, x, y, width, height, color, config) {
             if (IsPlainObject$K(x)) {
                 config = x;
-                x = GetValue$3g(config, 'x', 0);
-                y = GetValue$3g(config, 'y', 0);
-                width = GetValue$3g(config, 'width', 2);
-                height = GetValue$3g(config, 'height', 2);
-                color = GetValue$3g(config, 'color', DefaultTrackFillColor);
+                x = GetValue$3s(config, 'x', 0);
+                y = GetValue$3s(config, 'y', 0);
+                width = GetValue$3s(config, 'width', 2);
+                height = GetValue$3s(config, 'height', 2);
+                color = GetValue$3s(config, 'color', DefaultTrackFillColor);
             } else if (IsPlainObject$K(color)) {
                 config = color;
-                color = GetValue$3g(config, 'color', DefaultTrackFillColor);
+                color = GetValue$3s(config, 'color', DefaultTrackFillColor);
             }
 
             super(scene, x, y, width, height);
@@ -29792,53 +29792,53 @@
 
             this.setTrackFillStyle(
                 color,
-                GetValue$3g(config, 'trackFillAlpha', 1)
+                GetValue$3s(config, 'trackFillAlpha', 1)
             );
 
             this.setFalseValueTrackFillStyle(
-                GetValue$3g(config, 'falseValueTrackColor', GrayScale(color)),
-                GetValue$3g(config, 'falseValueTrackFillAlpha', 1)
+                GetValue$3s(config, 'falseValueTrackColor', GrayScale(color)),
+                GetValue$3s(config, 'falseValueTrackFillAlpha', 1)
             );
 
             this.setThumbStyle(
-                GetValue$3g(config, 'thumbColor', DefaultThumbFillColor),
-                GetValue$3g(config, 'thumbAlpha', 1)
+                GetValue$3s(config, 'thumbColor', DefaultThumbFillColor),
+                GetValue$3s(config, 'thumbAlpha', 1)
             );
 
             this.setTrackSize(
-                GetValue$3g(config, 'trackWidth', 0.9),
-                GetValue$3g(config, 'trackHeight', 0.5),
+                GetValue$3s(config, 'trackWidth', 0.9),
+                GetValue$3s(config, 'trackHeight', 0.5),
             );
 
             this.setTrackRadius(
-                GetValue$3g(config, 'trackRadius', this.trackHeight * 0.5)
+                GetValue$3s(config, 'trackRadius', this.trackHeight * 0.5)
             );
 
-            var thumbHeight = GetValue$3g(config, 'thumbHeight', undefined);
-            var thumbWidth = GetValue$3g(config, 'thumbWidth', thumbHeight);
+            var thumbHeight = GetValue$3s(config, 'thumbHeight', undefined);
+            var thumbWidth = GetValue$3s(config, 'thumbWidth', thumbHeight);
             if (thumbWidth === undefined) {
                 thumbWidth = this.trackHeight * 0.9;
             }
             this.setThumbSize(thumbWidth, thumbHeight);
 
             this.setThumbRadius(
-                GetValue$3g(config, 'thumbRadius', this.thumbHeight * 0.5)
+                GetValue$3s(config, 'thumbRadius', this.thumbHeight * 0.5)
             );
 
             this.setThumbPosition(
-                GetValue$3g(config, 'thumbLeft', 0.3),
-                GetValue$3g(config, 'thumbRight', undefined),
+                GetValue$3s(config, 'thumbLeft', 0.3),
+                GetValue$3s(config, 'thumbRight', undefined),
             );
 
-            this.setRTL(GetValue$3g(config, 'rtl', false));
+            this.setRTL(GetValue$3s(config, 'rtl', false));
 
             this.setToggleAnimationDuration(
-                GetValue$3g(config, 'animationDuration', 150)
+                GetValue$3s(config, 'animationDuration', 150)
             );
 
             this.buildShapes();
 
-            this.setValue(GetValue$3g(config, 'value', false), 0);
+            this.setValue(GetValue$3s(config, 'value', false), 0);
 
         }
 
@@ -29899,18 +29899,18 @@
         methods$B,
     );
 
-    const GetValue$3f = Phaser.Utils.Objects.GetValue;
+    const GetValue$3r = Phaser.Utils.Objects.GetValue;
 
     class ToggleSwitch extends ToggleSwitchShape {
         constructor(scene, x, y, width, height, color, config) {
             super(scene, x, y, width, height, color, config);
 
-            this._click = new Button(this, GetValue$3f(config, 'click'));
+            this._click = new Button(this, GetValue$3r(config, 'click'));
             this._click.on('click', function () {
                 this.toggleValue();
             }, this);
 
-            this.setReadOnly(GetValue$3f(config, 'readOnly', false));
+            this.setReadOnly(GetValue$3r(config, 'readOnly', false));
         }
 
         get readOnly() {
@@ -30007,7 +30007,7 @@
 
     SetValue(window, 'RexPlugins.UI.Canvas', Canvas);
 
-    const GetValue$3e = Phaser.Utils.Objects.GetValue;
+    const GetValue$3q = Phaser.Utils.Objects.GetValue;
 
     class CircleMaskImage extends Canvas$1 {
         constructor(scene, x, y, key, frame, config) {
@@ -30029,12 +30029,12 @@
                 };
             }
 
-            var maskType = GetValue$3e(config, 'maskType', 0);
-            var backgroundColor = GetValue$3e(config, 'backgroundColor', undefined);
-            var strokeColor = GetValue$3e(config, 'strokeColor', undefined);
+            var maskType = GetValue$3q(config, 'maskType', 0);
+            var backgroundColor = GetValue$3q(config, 'backgroundColor', undefined);
+            var strokeColor = GetValue$3q(config, 'strokeColor', undefined);
 
             var defaultStrokeWidth = (strokeColor != null) ? 10 : 0;
-            var strokeWidth = GetValue$3e(config, 'strokeWidth', defaultStrokeWidth);
+            var strokeWidth = GetValue$3q(config, 'strokeWidth', defaultStrokeWidth);
 
             if (maskType === undefined) {
                 maskType = 0;
@@ -30088,8 +30088,8 @@
                     break;
 
                 case 2:
-                    var radiusConfig = GetValue$3e(config, 'radius', 0);
-                    var iteration = GetValue$3e(config, 'iteration', undefined);
+                    var radiusConfig = GetValue$3q(config, 'radius', 0);
+                    var iteration = GetValue$3q(config, 'iteration', undefined);
 
                     AddRoundRectanglePath(
                         ctx,
@@ -30145,7 +30145,7 @@
 
     SetValue(window, 'RexPlugins.UI.CircleMaskImage', CircleMaskImage);
 
-    const GetValue$3d = Phaser.Utils.Objects.GetValue;
+    const GetValue$3p = Phaser.Utils.Objects.GetValue;
 
     class AlphaMaskImage extends Canvas$1 {
         constructor(scene, x, y, key, frame, config) {
@@ -30170,11 +30170,11 @@
                 };
             }
 
-            var maskKey = GetValue$3d(config, 'mask.key');
-            var maskFrame = GetValue$3d(config, 'mask.frame');
-            var invertMaskAlpha = GetValue$3d(config, 'mask.invertAlpha', false);
-            var maskScale = GetValue$3d(config, 'mask.scale');
-            var backgroundColor = GetValue$3d(config, 'backgroundColor');
+            var maskKey = GetValue$3p(config, 'mask.key');
+            var maskFrame = GetValue$3p(config, 'mask.frame');
+            var invertMaskAlpha = GetValue$3p(config, 'mask.invertAlpha', false);
+            var maskScale = GetValue$3p(config, 'mask.scale');
+            var backgroundColor = GetValue$3p(config, 'backgroundColor');
 
             if (maskKey) {
                 this._maskKey = maskKey;
@@ -30357,24 +30357,24 @@
         },
     };
 
-    const GetValue$3c = Phaser.Utils.Objects.GetValue;
-    const Clamp$d = Phaser.Math.Clamp;
+    const GetValue$3o = Phaser.Utils.Objects.GetValue;
+    const Clamp$e = Phaser.Math.Clamp;
 
     function ProgressBase (BaseClass) {
         class ProgressBase extends BaseClass {
             bootProgressBase(config) {
-                this.eventEmitter = GetValue$3c(config, 'eventEmitter', this);
+                this.eventEmitter = GetValue$3o(config, 'eventEmitter', this);
 
-                var callback = GetValue$3c(config, 'valuechangeCallback', null);
+                var callback = GetValue$3o(config, 'valuechangeCallback', null);
                 if (callback !== null) {
-                    var scope = GetValue$3c(config, 'valuechangeCallbackScope', undefined);
+                    var scope = GetValue$3o(config, 'valuechangeCallbackScope', undefined);
                     this.eventEmitter.on('valuechange', callback, scope);
                 }
 
                 this
                     .setEaseValuePropName('value')
-                    .setEaseValueDuration(GetValue$3c(config, 'easeValue.duration', 0))
-                    .setEaseValueFunction(GetValue$3c(config, 'easeValue.ease', 'Linear'));
+                    .setEaseValueDuration(GetValue$3o(config, 'easeValue.duration', 0))
+                    .setEaseValueFunction(GetValue$3o(config, 'easeValue.ease', 'Linear'));
 
                 return this;
             }
@@ -30384,7 +30384,7 @@
             }
 
             set value(value) {
-                value = Clamp$d(value, 0, 1);
+                value = Clamp$e(value, 0, 1);
 
                 var oldValue = this._value;
                 var valueChanged = (oldValue != value);
@@ -30493,9 +30493,9 @@
         }
     };
 
-    const GetValue$3b = Phaser.Utils.Objects.GetValue;
+    const GetValue$3n = Phaser.Utils.Objects.GetValue;
     const IsPlainObject$J = Phaser.Utils.Objects.IsPlainObject;
-    const Clamp$c = Phaser.Math.Clamp;
+    const Clamp$d = Phaser.Math.Clamp;
 
     const DefaultStartAngle$1 = Phaser.Math.DegToRad(270);
 
@@ -30506,18 +30506,18 @@
             var centerColor, centerAlpha;
             if (IsPlainObject$J(x)) {
                 config = x;
-                x = GetValue$3b(config, 'x', 0);
-                y = GetValue$3b(config, 'y', 0);
-                radius = GetValue$3b(config, 'radius', 1);
-                barColor = GetValue$3b(config, 'barColor', undefined);
-                value = GetValue$3b(config, 'value', 0);
+                x = GetValue$3n(config, 'x', 0);
+                y = GetValue$3n(config, 'y', 0);
+                radius = GetValue$3n(config, 'radius', 1);
+                barColor = GetValue$3n(config, 'barColor', undefined);
+                value = GetValue$3n(config, 'value', 0);
             }
 
-            barAlpha = GetValue$3b(config, 'barAlpha', 1);
-            trackColor = GetValue$3b(config, 'trackColor', undefined);
-            trackAlpha = GetValue$3b(config, 'trackAlpha', 1);
-            centerColor = GetValue$3b(config, 'centerColor', undefined);
-            centerAlpha = GetValue$3b(config, 'centerAlpha', 1);
+            barAlpha = GetValue$3n(config, 'barAlpha', 1);
+            trackColor = GetValue$3n(config, 'trackColor', undefined);
+            trackAlpha = GetValue$3n(config, 'trackAlpha', 1);
+            centerColor = GetValue$3n(config, 'centerColor', undefined);
+            centerAlpha = GetValue$3n(config, 'centerAlpha', 1);
 
             if (radius === undefined) { radius = 1; }
 
@@ -30532,11 +30532,11 @@
             this.setBarColor(barColor, barAlpha);
             this.setCenterColor(centerColor, centerAlpha);
 
-            this.setThickness(GetValue$3b(config, 'thickness', 0.2));
-            this.setStartAngle(GetValue$3b(config, 'startAngle', DefaultStartAngle$1));
-            this.setAnticlockwise(GetValue$3b(config, 'anticlockwise', false));
+            this.setThickness(GetValue$3n(config, 'thickness', 0.2));
+            this.setStartAngle(GetValue$3n(config, 'startAngle', DefaultStartAngle$1));
+            this.setAnticlockwise(GetValue$3n(config, 'anticlockwise', false));
 
-            this.iterations = GetValue$3b(config, 'iterations', 128);
+            this.iterations = GetValue$3n(config, 'iterations', 128);
 
             this.buildShapes();
 
@@ -30663,7 +30663,7 @@
         }
 
         set thickness(value) {
-            value = Clamp$c(value, 0, 1);
+            value = Clamp$d(value, 0, 1);
             this.dirty = this.dirty || (this._thickness != value);
             this._thickness = value;
         }
@@ -31008,9 +31008,9 @@
         }
     };
 
-    const GetValue$3a = Phaser.Utils.Objects.GetValue;
+    const GetValue$3m = Phaser.Utils.Objects.GetValue;
     const IsPlainObject$I = Phaser.Utils.Objects.IsPlainObject;
-    const Clamp$b = Phaser.Math.Clamp;
+    const Clamp$c = Phaser.Math.Clamp;
 
     const DefaultStartAngle = Phaser.Math.DegToRad(270);
     const PI2 = Phaser.Math.PI2;
@@ -31019,15 +31019,15 @@
         constructor(scene, x, y, radius, barColor, value, config) {
             if (IsPlainObject$I(x)) {
                 config = x;
-                x = GetValue$3a(config, 'x', 0);
-                y = GetValue$3a(config, 'y', 0);
-                radius = GetValue$3a(config, 'radius', 1);
-                barColor = GetValue$3a(config, 'barColor', undefined);
-                value = GetValue$3a(config, 'value', 0);
+                x = GetValue$3m(config, 'x', 0);
+                y = GetValue$3m(config, 'y', 0);
+                radius = GetValue$3m(config, 'radius', 1);
+                barColor = GetValue$3m(config, 'barColor', undefined);
+                value = GetValue$3m(config, 'value', 0);
             }
 
             var width = radius * 2;
-            var resolution = GetValue$3a(config, 'resolution', 1);
+            var resolution = GetValue$3m(config, 'resolution', 1);
 
             super(scene, x, y, width, width, resolution);
             this.type = 'rexCircularProgressCanvas';
@@ -31035,18 +31035,18 @@
             this.bootProgressBase(config);
 
             this.setRadius(radius);
-            this.setTrackColor(GetValue$3a(config, 'trackColor', undefined));
+            this.setTrackColor(GetValue$3m(config, 'trackColor', undefined));
             this.setBarColor(barColor);
-            this.setBarColor2(GetValue$3a(config, 'barColor2', undefined));
-            this.setCenterColor(GetValue$3a(config, 'centerColor', undefined));
+            this.setBarColor2(GetValue$3m(config, 'barColor2', undefined));
+            this.setCenterColor(GetValue$3m(config, 'centerColor', undefined));
 
-            this.setThickness(GetValue$3a(config, 'thickness', 0.2));
+            this.setThickness(GetValue$3m(config, 'thickness', 0.2));
 
-            this.setAnticlockwise(GetValue$3a(config, 'anticlockwise', false));
+            this.setAnticlockwise(GetValue$3m(config, 'anticlockwise', false));
 
-            this.setStartAngle(GetValue$3a(config, 'startAngle', DefaultStartAngle));
+            this.setStartAngle(GetValue$3m(config, 'startAngle', DefaultStartAngle));
 
-            var endAngle = GetValue$3a(config, 'endAngle');
+            var endAngle = GetValue$3m(config, 'endAngle');
             if (endAngle === undefined) {
                 if (this.anticlockwise) {
                     endAngle = this.startAngle - PI2;
@@ -31054,27 +31054,27 @@
                     endAngle = this.startAngle + PI2;
                 }
             }
-            this.setEndAngle(GetValue$3a(config, 'endAngle', endAngle));
+            this.setEndAngle(GetValue$3m(config, 'endAngle', endAngle));
 
-            this.setTextColor(GetValue$3a(config, 'textColor', undefined));
+            this.setTextColor(GetValue$3m(config, 'textColor', undefined));
             this.setTextStrokeColor(
-                GetValue$3a(config, 'textStrokeColor', undefined),
-                GetValue$3a(config, 'textStrokeThickness', undefined)
+                GetValue$3m(config, 'textStrokeColor', undefined),
+                GetValue$3m(config, 'textStrokeThickness', undefined)
             );
 
-            var textFont = GetValue$3a(config, 'textFont', undefined);
+            var textFont = GetValue$3m(config, 'textFont', undefined);
             if (textFont) {
                 this.setTextFont(textFont);
             } else {
                 this.setTextFont(
-                    GetValue$3a(config, 'textSize', '16px'),
-                    GetValue$3a(config, 'textFamily', 'Courier'),
-                    GetValue$3a(config, 'textStyle', '')
+                    GetValue$3m(config, 'textSize', '16px'),
+                    GetValue$3m(config, 'textFamily', 'Courier'),
+                    GetValue$3m(config, 'textStyle', '')
                 );
             }
             this.setTextFormatCallback(
-                GetValue$3a(config, 'textFormatCallback', undefined),
-                GetValue$3a(config, 'textFormatCallbackScope', undefined)
+                GetValue$3m(config, 'textFormatCallback', undefined),
+                GetValue$3m(config, 'textFormatCallbackScope', undefined)
             );
 
             this.setValue(value);
@@ -31205,7 +31205,7 @@
         }
 
         set thickness(value) {
-            value = Clamp$b(value, 0, 1);
+            value = Clamp$c(value, 0, 1);
             this.dirty = this.dirty || (this._thickness != value);
             this._thickness = value;
         }
@@ -31426,7 +31426,7 @@
         return lines;
     };
 
-    const GetValue$39 = Phaser.Utils.Objects.GetValue;
+    const GetValue$3l = Phaser.Utils.Objects.GetValue;
     const IsPlainObject$H = Phaser.Utils.Objects.IsPlainObject;
 
     let LineProgress$1 = class LineProgress extends ProgressBase(BaseShapes) {
@@ -31470,13 +31470,13 @@
                 .addShape((new Lines()).setName('bar'))
                 .addShape((new Lines()).setName('trackStroke'));
 
-            this.setTrackColor(GetValue$39(config, 'trackColor', undefined));
+            this.setTrackColor(GetValue$3l(config, 'trackColor', undefined));
             this.setBarColor(barColor);
-            this.setTrackStroke(GetValue$39(config, 'trackStrokeThickness', 2), GetValue$39(config, 'trackStrokeColor', undefined));
+            this.setTrackStroke(GetValue$3l(config, 'trackStrokeThickness', 2), GetValue$3l(config, 'trackStrokeColor', undefined));
 
-            this.setSkewX(GetValue$39(config, 'skewX', 0));
+            this.setSkewX(GetValue$3l(config, 'skewX', 0));
 
-            this.setRTL(GetValue$39(config, 'rtl', false));
+            this.setRTL(GetValue$3l(config, 'rtl', false));
 
             this.setValue(value);
         }
@@ -31567,13 +31567,13 @@
 
     };
 
-    var Methods$c = {
+    var Methods$d = {
         updateShapes: UpdateShapes$1,
     };
 
     Object.assign(
         LineProgress$1.prototype,
-        Methods$c,
+        Methods$d,
     );
 
     ObjectFactory.register('lineProgress', function (x, y, width, height, barColor, value, config) {
@@ -32010,7 +32010,7 @@
         return orientation;
     };
 
-    const GetValue$38 = Phaser.Utils.Objects.GetValue;
+    const GetValue$3k = Phaser.Utils.Objects.GetValue;
     const IsPlainObject$G = Phaser.Utils.Objects.IsPlainObject;
 
     class RoundRectangleProgress extends ProgressBase(BaseShapes) {
@@ -32059,16 +32059,16 @@
                 .addShape((new Lines()).setName('bar'))
                 .addShape((new Lines()).setName('trackStroke'));
 
-            this.setTrackColor(GetValue$38(config, 'trackColor', undefined));
+            this.setTrackColor(GetValue$3k(config, 'trackColor', undefined));
             this.setBarColor(barColor);
-            this.setTrackStroke(GetValue$38(config, 'trackStrokeThickness', 2), GetValue$38(config, 'trackStrokeColor', undefined));
+            this.setTrackStroke(GetValue$3k(config, 'trackStrokeThickness', 2), GetValue$3k(config, 'trackStrokeColor', undefined));
 
-            this.setOrientation(GetValue$38(config, 'orientation', 0));
-            this.setRTL(GetValue$38(config, 'rtl', false));
+            this.setOrientation(GetValue$3k(config, 'orientation', 0));
+            this.setRTL(GetValue$3k(config, 'rtl', false));
 
             this.setRadius(radiusConfig);
 
-            this.setIteration(GetValue$38(radiusConfig, 'iteration', undefined));
+            this.setIteration(GetValue$3k(radiusConfig, 'iteration', undefined));
 
             this.setValue(value);
         }
@@ -32284,13 +32284,13 @@
         }
     }
 
-    var Methods$b = {
+    var Methods$c = {
         updateShapes: UpdateShapes,
     };
 
     Object.assign(
         RoundRectangleProgress.prototype,
-        Methods$b,
+        Methods$c,
     );
 
     ObjectFactory.register('roundRectanleProgress', function (x, y, width, height, radiusConfig, barColor, value, config) {
@@ -32487,32 +32487,32 @@
         return out;
     };
 
-    const GetValue$37 = Phaser.Utils.Objects.GetValue;
+    const GetValue$3j = Phaser.Utils.Objects.GetValue;
     const IsPlainObject$F = Phaser.Utils.Objects.IsPlainObject;
 
     class LineProgress extends ProgressBase(Canvas$1) {
         constructor(scene, x, y, width, height, barColor, value, config) {
             if (IsPlainObject$F(x)) {
                 config = x;
-                x = GetValue$37(config, 'x', 0);
-                y = GetValue$37(config, 'y', 0);
-                width = GetValue$37(config, 'width', 2);
-                height = GetValue$37(config, 'height', 2);
-                barColor = GetValue$37(config, 'barColor', undefined);
-                value = GetValue$37(config, 'value', 0);
+                x = GetValue$3j(config, 'x', 0);
+                y = GetValue$3j(config, 'y', 0);
+                width = GetValue$3j(config, 'width', 2);
+                height = GetValue$3j(config, 'height', 2);
+                barColor = GetValue$3j(config, 'barColor', undefined);
+                value = GetValue$3j(config, 'value', 0);
             } else if (IsPlainObject$F(width)) {
                 config = width;
-                width = GetValue$37(config, 'width', 2);
-                height = GetValue$37(config, 'height', 2);
-                barColor = GetValue$37(config, 'barColor', undefined);
-                value = GetValue$37(config, 'value', 0);
+                width = GetValue$3j(config, 'width', 2);
+                height = GetValue$3j(config, 'height', 2);
+                barColor = GetValue$3j(config, 'barColor', undefined);
+                value = GetValue$3j(config, 'value', 0);
             } else if (IsPlainObject$F(barColor)) {
                 config = barColor;
-                barColor = GetValue$37(config, 'barColor', undefined);
-                value = GetValue$37(config, 'value', 0);
+                barColor = GetValue$3j(config, 'barColor', undefined);
+                value = GetValue$3j(config, 'value', 0);
             }
 
-            var resolution = GetValue$37(config, 'resolution', 1);
+            var resolution = GetValue$3j(config, 'resolution', 1);
 
             super(scene, x, y, width, height, resolution);
             this.type = 'rexLineProgressCanvas';
@@ -32521,17 +32521,17 @@
 
             this.bootProgressBase(config);
 
-            this.setTrackColor(GetValue$37(config, 'trackColor', undefined));
+            this.setTrackColor(GetValue$3j(config, 'trackColor', undefined));
             this.setBarColor(
                 barColor,
-                GetValue$37(config, 'barColor2', undefined),
-                GetValue$37(config, 'isHorizontalGradient', undefined)
+                GetValue$3j(config, 'barColor2', undefined),
+                GetValue$3j(config, 'isHorizontalGradient', undefined)
             );
-            this.setTrackStroke(GetValue$37(config, 'trackStrokeThickness', 2), GetValue$37(config, 'trackStrokeColor', undefined));
+            this.setTrackStroke(GetValue$3j(config, 'trackStrokeThickness', 2), GetValue$3j(config, 'trackStrokeColor', undefined));
 
-            this.setSkewX(GetValue$37(config, 'skewX', 0));
+            this.setSkewX(GetValue$3j(config, 'skewX', 0));
 
-            this.setRTL(GetValue$37(config, 'rtl', false));
+            this.setRTL(GetValue$3j(config, 'rtl', false));
 
             this.setValue(value);
         }
@@ -32826,7 +32826,7 @@
 
     };
 
-    const GetValue$36 = Phaser.Utils.Objects.GetValue;
+    const GetValue$3i = Phaser.Utils.Objects.GetValue;
     const IsPlainObject$E = Phaser.Utils.Objects.IsPlainObject;
     const DegToRad$9 = Phaser.Math.DegToRad;
     const RadToDeg$7 = Phaser.Math.RadToDeg;
@@ -32968,26 +32968,26 @@
                 var config = left;
 
                 //  If they specify x and/or y this applies to all
-                var x = GetValue$36(config, 'x', null);
+                var x = GetValue$3i(config, 'x', null);
 
                 if (x !== null) {
                     left = x;
                     right = x;
                 }
                 else {
-                    left = GetValue$36(config, 'left', 0);
-                    right = GetValue$36(config, 'right', left);
+                    left = GetValue$3i(config, 'left', 0);
+                    right = GetValue$3i(config, 'right', left);
                 }
 
-                var y = GetValue$36(config, 'y', null);
+                var y = GetValue$3i(config, 'y', null);
 
                 if (y !== null) {
                     top = y;
                     bottom = y;
                 }
                 else {
-                    top = GetValue$36(config, 'top', 0);
-                    bottom = GetValue$36(config, 'bottom', top);
+                    top = GetValue$3i(config, 'top', 0);
+                    bottom = GetValue$3i(config, 'bottom', top);
                 }
             }
             else {
@@ -33572,7 +33572,7 @@
         }
     };
 
-    const GetValue$35 = Phaser.Utils.Objects.GetValue;
+    const GetValue$3h = Phaser.Utils.Objects.GetValue;
     const BaseAdd = Base$2.prototype.add;
 
     var Add$8 = function (gameObject, config) {
@@ -33644,13 +33644,13 @@
             state.syncCameraFilter = config;
             state.syncDisplayList = config;
         } else {
-            state.syncPosition = GetValue$35(config, 'syncPosition', true);
-            state.syncRotation = GetValue$35(config, 'syncRotation', true);
-            state.syncScale = GetValue$35(config, 'syncScale', true);
-            state.syncAlpha = GetValue$35(config, 'syncAlpha', true);
-            state.syncScrollFactor = GetValue$35(config, 'syncScrollFactor', true);
-            state.syncCameraFilter = GetValue$35(config, 'syncCameraFilter', true);
-            state.syncDisplayList = GetValue$35(config, 'syncDisplayList', true);
+            state.syncPosition = GetValue$3h(config, 'syncPosition', true);
+            state.syncRotation = GetValue$3h(config, 'syncRotation', true);
+            state.syncScale = GetValue$3h(config, 'syncScale', true);
+            state.syncAlpha = GetValue$3h(config, 'syncAlpha', true);
+            state.syncScrollFactor = GetValue$3h(config, 'syncScrollFactor', true);
+            state.syncCameraFilter = GetValue$3h(config, 'syncCameraFilter', true);
+            state.syncDisplayList = GetValue$3h(config, 'syncDisplayList', true);
         }
 
     };
@@ -35199,7 +35199,7 @@
 
     var GlobRect$1;
 
-    var GetValue$34 = Phaser.Utils.Objects.GetValue;
+    var GetValue$3g = Phaser.Utils.Objects.GetValue;
 
     var Snapshot = function (config) {
         if (!config) {
@@ -35209,13 +35209,13 @@
         var gameObjects = config.gameObjects;
         var renderTexture = config.renderTexture;  // renderTexture, or dynamicTexture
         var saveTexture = config.saveTexture;
-        var x = GetValue$34(config, 'x', undefined);
-        var y = GetValue$34(config, 'y', undefined);
-        var width = GetValue$34(config, 'width', undefined);
-        var height = GetValue$34(config, 'height', undefined);
-        var originX = GetValue$34(config, 'originX', 0);
-        var originY = GetValue$34(config, 'originY', 0);
-        var padding = GetValue$34(config, 'padding', 0);
+        var x = GetValue$3g(config, 'x', undefined);
+        var y = GetValue$3g(config, 'y', undefined);
+        var width = GetValue$3g(config, 'width', undefined);
+        var height = GetValue$3g(config, 'height', undefined);
+        var originX = GetValue$3g(config, 'originX', 0);
+        var originY = GetValue$3g(config, 'originY', 0);
+        var padding = GetValue$3g(config, 'padding', 0);
 
         var scrollX, scrollY;
         if ((width === undefined) || (height === undefined) || (x === undefined) || (y === undefined)) {
@@ -35325,12 +35325,12 @@
         }
     };
 
-    const GetValue$33 = Phaser.Utils.Objects.GetValue;
+    const GetValue$3f = Phaser.Utils.Objects.GetValue;
 
     var DrawBounds$1 = function (graphics, config) {
-        var drawContainer = GetValue$33(config, 'drawContainer', true);
+        var drawContainer = GetValue$3f(config, 'drawContainer', true);
 
-        var gameObjects = GetValue$33(config, 'children');
+        var gameObjects = GetValue$3f(config, 'children');
         if (gameObjects === undefined) {
             gameObjects = this.getAllVisibleChildren([this]);
         }
@@ -36069,7 +36069,7 @@
         QuickSet(child, globZone, align);
     };
 
-    const GetValue$32 = Phaser.Utils.Objects.GetValue;
+    const GetValue$3e = Phaser.Utils.Objects.GetValue;
     const Group$1 = Phaser.GameObjects.Group;
     const P3Container = Phaser.GameObjects.Container;
 
@@ -36081,13 +36081,13 @@
         if (typeof (config) === 'number') {
             color = config;
         } else {
-            color = GetValue$32(config, 'color');
-            lineWidth = GetValue$32(config, 'lineWidth');
-            var nameTextConfig = GetValue$32(config, 'name', false);
+            color = GetValue$3e(config, 'color');
+            lineWidth = GetValue$3e(config, 'lineWidth');
+            var nameTextConfig = GetValue$3e(config, 'name', false);
             if (nameTextConfig) {
-                createTextCallback = GetValue$32(nameTextConfig, 'createTextCallback', DefaultCreateTextCallback);
-                createTextCallbackScope = GetValue$32(nameTextConfig, 'createTextCallbackScope', undefined);
-                textAlign = GetValue$32(nameTextConfig, 'align', 'left-top');
+                createTextCallback = GetValue$3e(nameTextConfig, 'createTextCallback', DefaultCreateTextCallback);
+                createTextCallbackScope = GetValue$3e(nameTextConfig, 'createTextCallbackScope', undefined);
+                textAlign = GetValue$3e(nameTextConfig, 'align', 'left-top');
                 if (typeof (textAlign) === 'string') {
                     textAlign = AlignConst[textAlign];
                 }
@@ -36177,7 +36177,7 @@
 
     var GlobRect = undefined;
 
-    const GetValue$31 = Phaser.Utils.Objects.GetValue;
+    const GetValue$3d = Phaser.Utils.Objects.GetValue;
 
     var GetBoundsConfig$1 = function (config, out) {
         if (config === undefined) {
@@ -36193,10 +36193,10 @@
             out.top = config;
             out.bottom = config;
         } else {
-            out.left = GetValue$31(config, 'left', 0);
-            out.right = GetValue$31(config, 'right', 0);
-            out.top = GetValue$31(config, 'top', 0);
-            out.bottom = GetValue$31(config, 'bottom', 0);
+            out.left = GetValue$3d(config, 'left', 0);
+            out.right = GetValue$3d(config, 'right', 0);
+            out.top = GetValue$3d(config, 'top', 0);
+            out.bottom = GetValue$3d(config, 'bottom', 0);
         }
         return out;
     };
@@ -37104,7 +37104,7 @@
         ResizeGameObject(gameObject, width, height);
     };
 
-    const GetValue$30 = Phaser.Utils.Objects.GetValue;
+    const GetValue$3c = Phaser.Utils.Objects.GetValue;
 
     class Anchor extends ComponentBase {
         constructor(gameObject, config) {
@@ -37215,12 +37215,12 @@
             this.setSizePadding(paddingWidth, paddingHeight);
             this.setAspectRatio(aspectRatio);
 
-            var onResizeCallback = GetValue$30(o, 'onResizeCallback', DefaultResizeCallback);
-            var onResizeCallbackScope = GetValue$30(o, 'onResizeCallbackScope');
+            var onResizeCallback = GetValue$3c(o, 'onResizeCallback', DefaultResizeCallback);
+            var onResizeCallbackScope = GetValue$3c(o, 'onResizeCallbackScope');
             this.setResizeCallback(onResizeCallback, onResizeCallbackScope);
 
-            var onUpdateViewportCallback = GetValue$30(o, 'onUpdateViewportCallback');
-            var onUpdateViewportCallbackScope = GetValue$30(o, 'onUpdateViewportCallbackScope');
+            var onUpdateViewportCallback = GetValue$3c(o, 'onUpdateViewportCallback');
+            var onUpdateViewportCallbackScope = GetValue$3c(o, 'onUpdateViewportCallbackScope');
             this.setUpdateViewportCallback(onUpdateViewportCallback, onUpdateViewportCallbackScope);
 
             this.autoAnchor(o.enable);
@@ -37427,7 +37427,7 @@
         return this;
     };
 
-    const GetValue$2$ = Phaser.Utils.Objects.GetValue;
+    const GetValue$3b = Phaser.Utils.Objects.GetValue;
     const GetAdvancedValue$3 = Phaser.Utils.Objects.GetAdvancedValue;
     const Linear$h = Phaser.Math.Linear;
 
@@ -37447,7 +37447,7 @@
         resetFromJSON(o) {
             super.resetFromJSON(o);
 
-            this.setMode(GetValue$2$(o, 'mode', 0));
+            this.setMode(GetValue$3b(o, 'mode', 0));
             this.setScaleRange(
                 GetAdvancedValue$3(o, 'start', undefined),
                 GetAdvancedValue$3(o, 'end', 0)
@@ -37826,7 +37826,7 @@
         });
     };
 
-    const GetValue$2_ = Phaser.Utils.Objects.GetValue;
+    const GetValue$3a = Phaser.Utils.Objects.GetValue;
     const GetAdvancedValue$2 = Phaser.Utils.Objects.GetAdvancedValue;
     const Linear$g = Phaser.Math.Linear;
 
@@ -37843,7 +37843,7 @@
         resetFromJSON(o) {
             super.resetFromJSON(o);
 
-            this.setMode(GetValue$2_(o, 'mode', 0));
+            this.setMode(GetValue$3a(o, 'mode', 0));
             this.setAlphaRange(
                 GetAdvancedValue$2(o, 'start', this.parent.alpha),
                 GetAdvancedValue$2(o, 'end', 0)
@@ -38075,7 +38075,7 @@
         });
     };
 
-    const GetValue$2Z = Phaser.Utils.Objects.GetValue;
+    const GetValue$39 = Phaser.Utils.Objects.GetValue;
     const GetAdvancedValue$1 = Phaser.Utils.Objects.GetAdvancedValue;
     const Linear$f = Phaser.Math.Linear;
 
@@ -38092,7 +38092,7 @@
         resetFromJSON(o) {
             super.resetFromJSON(o);
 
-            this.setMode(GetValue$2Z(o, 'mode', 0));
+            this.setMode(GetValue$39(o, 'mode', 0));
 
             if (o && (o.hasOwnProperty('x') || o.hasOwnProperty('y'))) {
                 var endX = GetAdvancedValue$1(o, 'x', undefined);
@@ -38409,7 +38409,7 @@
         });
     };
 
-    const GetValue$2Y = Phaser.Utils.Objects.GetValue;
+    const GetValue$38 = Phaser.Utils.Objects.GetValue;
 
     class ShakePosition extends TickTask {
         constructor(gameObject, config) {
@@ -38422,16 +38422,16 @@
         }
 
         resetFromJSON(o) {
-            this.timer.resetFromJSON(GetValue$2Y(o, 'timer'));
-            this.setEnable(GetValue$2Y(o, 'enable', true));
-            this.setMode(GetValue$2Y(o, 'mode', 1));
-            this.isRunning = GetValue$2Y(o, 'isRunning', false);
-            this.setMagnitudeMode(GetValue$2Y(o, 'magnitudeMode', 1));
-            this.setAxisMode(GetValue$2Y(o, "axis", 0));
-            this.setDuration(GetValue$2Y(o, 'duration', 500));
-            this.setMagnitude(GetValue$2Y(o, 'magnitude', 10));
-            this.ox = GetValue$2Y(o, 'ox', undefined);
-            this.oy = GetValue$2Y(o, 'oy', undefined);
+            this.timer.resetFromJSON(GetValue$38(o, 'timer'));
+            this.setEnable(GetValue$38(o, 'enable', true));
+            this.setMode(GetValue$38(o, 'mode', 1));
+            this.isRunning = GetValue$38(o, 'isRunning', false);
+            this.setMagnitudeMode(GetValue$38(o, 'magnitudeMode', 1));
+            this.setAxisMode(GetValue$38(o, "axis", 0));
+            this.setDuration(GetValue$38(o, 'duration', 500));
+            this.setMagnitude(GetValue$38(o, 'magnitude', 10));
+            this.ox = GetValue$38(o, 'ox', undefined);
+            this.oy = GetValue$38(o, 'oy', undefined);
             return this;
         }
 
@@ -38532,8 +38532,8 @@
         start(duration, magnitude) {
             if (typeof (duration) !== 'number') {
                 var config = duration;
-                magnitude = GetValue$2Y(config, 'magnitude', undefined);
-                duration = GetValue$2Y(config, 'duration', undefined);
+                magnitude = GetValue$38(config, 'magnitude', undefined);
+                duration = GetValue$38(config, 'duration', undefined);
             }
             if (magnitude !== undefined) {
                 this.setMagnitude(magnitude);
@@ -38991,13 +38991,13 @@
         */
         constructor(config) {
             // Attach get-next-state function
-            var states = GetValue$45(config, 'states', undefined);
+            var states = GetValue$4h(config, 'states', undefined);
             if (states) {
                 this.addStates(states);
             }
 
             // Attach extend members
-            var extend = GetValue$45(config, 'extend', undefined);
+            var extend = GetValue$4h(config, 'extend', undefined);
             if (extend) {
                 for (var name in extend) {
                     if (!this.hasOwnProperty(name) || this[name] === undefined) {
@@ -39007,8 +39007,8 @@
             }
 
             // Event emitter
-            var eventEmitter = GetValue$45(config, 'eventEmitter', undefined);
-            var EventEmitterClass = GetValue$45(config, 'EventEmitterClass', undefined);
+            var eventEmitter = GetValue$4h(config, 'eventEmitter', undefined);
+            var EventEmitterClass = GetValue$4h(config, 'EventEmitterClass', undefined);
             this.setEventEmitter(eventEmitter, EventEmitterClass);
 
             this._stateLock = false;
@@ -39024,9 +39024,9 @@
         }
 
         resetFromJSON(o) {
-            this.setEnable(GetValue$45(o, 'enable', true));
-            this.start(GetValue$45(o, 'start', undefined));
-            var init = GetValue$45(o, 'init', undefined);
+            this.setEnable(GetValue$4h(o, 'enable', true));
+            this.start(GetValue$4h(o, 'start', undefined));
+            var init = GetValue$4h(o, 'init', undefined);
             if (init) {
                 init.call(this);
             }
@@ -39256,7 +39256,7 @@
 
         resetFromJSON(o) {
             super.resetFromJSON(o);
-            this._scene = GetValue$45(o, 'scene', undefined);
+            this._scene = GetValue$4h(o, 'scene', undefined);
             return this;
         }
 
@@ -39589,7 +39589,7 @@
         CloseMethods,
     );
 
-    const GetValue$2X = Phaser.Utils.Objects.GetValue;
+    const GetValue$37 = Phaser.Utils.Objects.GetValue;
 
     class OpenCloseTransition extends ComponentBase {
         constructor(gameObject, config) {
@@ -39597,17 +39597,17 @@
             // this.parent = gameObject;
             // this.scene
 
-            this.setTransitInTime(GetValue$2X(config, 'duration.in', 200));
-            this.setTransitOutTime(GetValue$2X(config, 'duration.out', 200));
-            this.setTransitInCallback(GetValue$2X(config, 'transitIn'));
-            this.setTransitOutCallback(GetValue$2X(config, 'transitOut'));
+            this.setTransitInTime(GetValue$37(config, 'duration.in', 200));
+            this.setTransitOutTime(GetValue$37(config, 'duration.out', 200));
+            this.setTransitInCallback(GetValue$37(config, 'transitIn'));
+            this.setTransitOutCallback(GetValue$37(config, 'transitOut'));
 
-            this.oneShotMode = GetValue$2X(config, 'destroy', false);
+            this.oneShotMode = GetValue$37(config, 'destroy', false);
 
             this.delayCallTimer = undefined;
             this._state = new State$1(this, {
                 eventEmitter: false,
-                initState: GetValue$2X(config, 'initState', 'IDLE')
+                initState: GetValue$37(config, 'initState', 'IDLE')
             });
             this.openEventData = undefined;
             this.closeEventData = undefined;
@@ -39659,7 +39659,7 @@
         }
     }
 
-    const GetValue$2W = Phaser.Utils.Objects.GetValue;
+    const GetValue$36 = Phaser.Utils.Objects.GetValue;
 
     class TouchEventStop extends ComponentBase {
         constructor(gameObject, config) {
@@ -39672,9 +39672,9 @@
         }
 
         resetFromJSON(o) {
-            this.setHitAreaMode(GetValue$2W(o, 'hitAreaMode', 0));
-            this.setEnable(GetValue$2W(o, 'enable', true));
-            this.setStopMode(GetValue$2W(o, 'stopAllLevels', true));
+            this.setHitAreaMode(GetValue$36(o, 'hitAreaMode', 0));
+            this.setEnable(GetValue$36(o, 'enable', true));
+            this.setStopMode(GetValue$36(o, 'stopAllLevels', true));
             return this;
         }
 
@@ -39763,12 +39763,12 @@
         fullWindow: 1
     };
 
-    const GetValue$2V = Phaser.Utils.Objects.GetValue;
+    const GetValue$35 = Phaser.Utils.Objects.GetValue;
 
     class Cover extends FullWindowRectangle {
         constructor(scene, config) {
-            var fillColor = GetValue$2V(config, 'color', 0x0);
-            var fillAlpha = GetValue$2V(config, 'alpha', 0.8);
+            var fillColor = GetValue$35(config, 'color', 0x0);
+            var fillAlpha = GetValue$35(config, 'alpha', 0.8);
             super(scene, fillColor, fillAlpha);
 
             this.touchEventStop = new TouchEventStop(this, { hitAreaMode: 1 });
@@ -39865,7 +39865,7 @@
         return true;
     };
 
-    const GetValue$2U = Phaser.Utils.Objects.GetValue;
+    const GetValue$34 = Phaser.Utils.Objects.GetValue;
 
     let Modal$3 = class Modal extends OpenCloseTransition {
         constructor(gameObject, config) {
@@ -39879,26 +39879,26 @@
                 config.transitOut = TransitionMode$1.scaleDown;
             }
 
-            config.destroy = GetValue$2U(config, 'destroy', true);
+            config.destroy = GetValue$34(config, 'destroy', true);
 
             super(gameObject, config);
             // this.parent = gameObject;
             // this.scene
 
             // Cover : key of modal, to block touch input        
-            var coverConfig = GetValue$2U(config, 'cover');
+            var coverConfig = GetValue$34(config, 'cover');
             this.cover = (coverConfig !== false) ? CreateCover(gameObject, coverConfig) : undefined;
             if (this.cover) {
-                this.setCoverTransitInCallback(GetValue$2U(coverConfig, 'transitIn', DefaultCoverTransitInCallback));
-                this.setCoverTransitOutCallback(GetValue$2U(coverConfig, 'transitOut', DefaultCoverTransitOutCallback));
+                this.setCoverTransitInCallback(GetValue$34(coverConfig, 'transitIn', DefaultCoverTransitInCallback));
+                this.setCoverTransitOutCallback(GetValue$34(coverConfig, 'transitOut', DefaultCoverTransitOutCallback));
             }
 
             // Close conditions:
-            var touchOutsideClose = GetValue$2U(config, 'touchOutsideClose', false);
-            var timeOutDuration = GetValue$2U(config, 'duration.hold', -1);
-            var timeOutClose = GetValue$2U(config, 'timeOutClose', (timeOutDuration >= 0));
-            var anyTouchClose = GetValue$2U(config, 'anyTouchClose', false);
-            var manualClose = GetValue$2U(config, 'manualClose', false);
+            var touchOutsideClose = GetValue$34(config, 'touchOutsideClose', false);
+            var timeOutDuration = GetValue$34(config, 'duration.hold', -1);
+            var timeOutClose = GetValue$34(config, 'timeOutClose', (timeOutDuration >= 0));
+            var anyTouchClose = GetValue$34(config, 'anyTouchClose', false);
+            var manualClose = GetValue$34(config, 'manualClose', false);
 
             if (manualClose) {
                 touchOutsideClose = false;
@@ -39923,7 +39923,7 @@
                 this.once('open', this.touchOutsideClose, this);
             }
 
-            if (GetValue$2U(config, 'openOnStart', true)) {
+            if (GetValue$34(config, 'openOnStart', true)) {
                 // Run this.requestOpen() next tick
                 // User can register events before this.requestOpen()
                 this.delayCall(0, this.requestOpen, this);
@@ -40626,7 +40626,7 @@
         }
     };
 
-    const GetValue$2T = Phaser.Utils.Objects.GetValue;
+    const GetValue$33 = Phaser.Utils.Objects.GetValue;
 
     class ClickOutside extends ComponentBase {
         constructor(gameObject, config) {
@@ -40635,7 +40635,7 @@
 
             this._enable = undefined;
 
-            var inputConfig = GetValue$2T(config, "inputConfig", undefined);
+            var inputConfig = GetValue$33(config, "inputConfig", undefined);
             if (inputConfig) {
                 gameObject.setInteractive(inputConfig);
             }
@@ -40647,10 +40647,10 @@
         resetFromJSON(o) {
             this.pointer = undefined;
             this.lastClickTime = undefined;
-            this.setEnable(GetValue$2T(o, "enable", true));
-            this.setMode(GetValue$2T(o, "mode", 1));
-            this.setClickInterval(GetValue$2T(o, "clickInterval", 100));
-            this.setDragThreshold(GetValue$2T(o, 'threshold', undefined));
+            this.setEnable(GetValue$33(o, "enable", true));
+            this.setMode(GetValue$33(o, "mode", 1));
+            this.setClickInterval(GetValue$33(o, "clickInterval", 100));
+            this.setDragThreshold(GetValue$33(o, 'threshold', undefined));
             return this;
         }
 
@@ -40946,7 +40946,7 @@
 
     }
 
-    const GetValue$2S = Phaser.Utils.Objects.GetValue;
+    const GetValue$32 = Phaser.Utils.Objects.GetValue;
 
     class InTouching extends ComponentBase {
         constructor(gameObject, config) {
@@ -40955,7 +40955,7 @@
 
             this._enable = undefined;
             this.cooldown = new Cooldown();
-            this.parent.setInteractive(GetValue$2S(config, 'inputConfig', undefined));
+            this.parent.setInteractive(GetValue$32(config, 'inputConfig', undefined));
             this.resetFromJSON(config);
             this.boot();
         }
@@ -40964,8 +40964,8 @@
             this.pointer = undefined;
             this.prevIsInTouch = false;
             this.isInTouching = false;
-            this.setEnable(GetValue$2S(o, 'enable', true));
-            this.setCooldown(GetValue$2S(o, 'cooldown', undefined));
+            this.setEnable(GetValue$32(o, 'enable', true));
+            this.setCooldown(GetValue$32(o, 'cooldown', undefined));
             return this;
         }
 
@@ -41284,10 +41284,10 @@
         eventEmitter.emit(eventName, child, pointer, event);
     };
 
-    const GetValue$2R = Phaser.Utils.Objects.GetValue;
+    const GetValue$31 = Phaser.Utils.Objects.GetValue;
 
     var DownChild = function (config) {
-        var downConfig = GetValue$2R(config, 'down', undefined);
+        var downConfig = GetValue$31(config, 'down', undefined);
         if (downConfig === false) {
             return;
         } else if (downConfig === true) {
@@ -41311,10 +41311,10 @@
         );
     };
 
-    const GetValue$2Q = Phaser.Utils.Objects.GetValue;
+    const GetValue$30 = Phaser.Utils.Objects.GetValue;
 
     var UpChild = function (config) {
-        var upConfig = GetValue$2Q(config, 'up', undefined);
+        var upConfig = GetValue$30(config, 'up', undefined);
         if (upConfig === false) {
             return;
         } else if (upConfig === true) {
@@ -41338,10 +41338,10 @@
         );
     };
 
-    const GetValue$2P = Phaser.Utils.Objects.GetValue;
+    const GetValue$2$ = Phaser.Utils.Objects.GetValue;
 
     var OverChild = function (config) {
-        var overConfig = GetValue$2P(config, 'over', undefined);
+        var overConfig = GetValue$2$(config, 'over', undefined);
         if (overConfig === false) {
             return;
         } else if (overConfig === true) {
@@ -41404,10 +41404,10 @@
         );
     };
 
-    const GetValue$2O = Phaser.Utils.Objects.GetValue;
+    const GetValue$2_ = Phaser.Utils.Objects.GetValue;
 
     var ClickChild = function (config) {
-        var clickConfig = GetValue$2O(config, 'click', undefined);
+        var clickConfig = GetValue$2_(config, 'click', undefined);
         if (clickConfig === false) {
             return;
         } else if (clickConfig === true) {
@@ -41435,7 +41435,7 @@
         }, this);
     };
 
-    const GetValue$2N = Phaser.Utils.Objects.GetValue;
+    const GetValue$2Z = Phaser.Utils.Objects.GetValue;
 
     class OnePointerTracer extends TickTask {
         constructor(gameObject, config) {
@@ -41447,7 +41447,7 @@
 
             this.gameObject = gameObject;
             if (gameObject) {
-                gameObject.setInteractive(GetValue$2N(config, 'inputConfig', undefined));
+                gameObject.setInteractive(GetValue$2Z(config, 'inputConfig', undefined));
             }
             this._enable = undefined;
             this.resetFromJSON(config);
@@ -41455,11 +41455,11 @@
         }
 
         resetFromJSON(o) {
-            this.setEnable(GetValue$2N(o, 'enable', true));
+            this.setEnable(GetValue$2Z(o, 'enable', true));
 
             this.setDetectBounds();
             if (this.gameObject === undefined) {
-                this.setDetectBounds(GetValue$2N(o, 'bounds', undefined));
+                this.setDetectBounds(GetValue$2Z(o, 'bounds', undefined));
             } else {
                 this.setDetectBounds();
             }
@@ -41691,7 +41691,7 @@
 
     const IDLE$7 = 'IDLE';
 
-    const GetValue$2M = Phaser.Utils.Objects.GetValue;
+    const GetValue$2Y = Phaser.Utils.Objects.GetValue;
     const DistanceBetween$5 = Phaser.Math.Distance.Between;
 
     class Tap extends OnePointerTracer {
@@ -41744,17 +41744,17 @@
 
         resetFromJSON(o) {
             super.resetFromJSON(o);
-            this.setHoldTime(GetValue$2M(o, 'time', 250)); // min-hold-time of Press is 251
-            this.setTapInterval(GetValue$2M(o, 'tapInterval', 200));
-            this.setDragThreshold(GetValue$2M(o, 'threshold', 9));
-            this.setTapOffset(GetValue$2M(o, 'tapOffset', 10));
+            this.setHoldTime(GetValue$2Y(o, 'time', 250)); // min-hold-time of Press is 251
+            this.setTapInterval(GetValue$2Y(o, 'tapInterval', 200));
+            this.setDragThreshold(GetValue$2Y(o, 'threshold', 9));
+            this.setTapOffset(GetValue$2Y(o, 'tapOffset', 10));
 
-            var taps = GetValue$2M(o, 'taps', undefined);
+            var taps = GetValue$2Y(o, 'taps', undefined);
             if (taps !== undefined) {
                 this.setTaps(taps);
             } else {
-                this.setMaxTaps(GetValue$2M(o, 'maxTaps', undefined));
-                this.setMinTaps(GetValue$2M(o, 'minTaps', undefined));
+                this.setMaxTaps(GetValue$2Y(o, 'maxTaps', undefined));
+                this.setMinTaps(GetValue$2Y(o, 'minTaps', undefined));
             }
             return this;
         }
@@ -41891,7 +41891,7 @@
     const BEGIN$5 = 'BEGIN';
     const RECOGNIZED$5 = 'RECOGNIZED';
 
-    const GetValue$2L = Phaser.Utils.Objects.GetValue;
+    const GetValue$2X = Phaser.Utils.Objects.GetValue;
 
     class Press extends OnePointerTracer {
         constructor(gameObject, config) {
@@ -41943,8 +41943,8 @@
 
         resetFromJSON(o) {
             super.resetFromJSON(o);
-            this.setDragThreshold(GetValue$2L(o, 'threshold', 9));
-            this.setHoldTime(GetValue$2L(o, 'time', 251));
+            this.setDragThreshold(GetValue$2X(o, 'threshold', 9));
+            this.setHoldTime(GetValue$2X(o, 'time', 251));
             return this;
         }
 
@@ -42005,7 +42005,7 @@
     const BEGIN$4 = 'BEGIN';
     const RECOGNIZED$4 = 'RECOGNIZED';
 
-    const GetValue$2K = Phaser.Utils.Objects.GetValue;
+    const GetValue$2W = Phaser.Utils.Objects.GetValue;
 
     class Pan extends OnePointerTracer {
         constructor(gameObject, config) {
@@ -42052,7 +42052,7 @@
 
         resetFromJSON(o) {
             super.resetFromJSON(o);
-            this.setDragThreshold(GetValue$2K(o, 'threshold', 10));
+            this.setDragThreshold(GetValue$2W(o, 'threshold', 10));
             return this;
         }
 
@@ -42249,7 +42249,7 @@
 
     var globOut = {};
 
-    const GetValue$2J = Phaser.Utils.Objects.GetValue;
+    const GetValue$2V = Phaser.Utils.Objects.GetValue;
     const RadToDeg$5 = Phaser.Math.RadToDeg;
 
     class Swipe extends OnePointerTracer {
@@ -42303,9 +42303,9 @@
 
         resetFromJSON(o) {
             super.resetFromJSON(o);
-            this.setDragThreshold(GetValue$2J(o, 'threshold', 10));
-            this.setVelocityThreshold(GetValue$2J(o, 'velocityThreshold', 1000));
-            this.setDirectionMode(GetValue$2J(o, 'dir', '8dir'));
+            this.setDragThreshold(GetValue$2V(o, 'threshold', 10));
+            this.setVelocityThreshold(GetValue$2V(o, 'velocityThreshold', 1000));
+            this.setDirectionMode(GetValue$2V(o, 'dir', '8dir'));
             return this;
         }
 
@@ -42399,7 +42399,7 @@
     const BEGIN$2 = 'BEGIN';
     const RECOGNIZED$2 = 'RECOGNIZED';
 
-    const GetValue$2I = Phaser.Utils.Objects.GetValue;
+    const GetValue$2U = Phaser.Utils.Objects.GetValue;
     const SpliceOne$2 = Phaser.Utils.Array.SpliceOne;
     const DistanceBetween$3 = Phaser.Math.Distance.Between;
     const AngleBetween = Phaser.Math.Angle.Between;
@@ -42419,11 +42419,11 @@
             this.scene = scene;
             this.gameObject = gameObject;
             if (gameObject) {
-                gameObject.setInteractive(GetValue$2I(config, 'inputConfig', undefined));
+                gameObject.setInteractive(GetValue$2U(config, 'inputConfig', undefined));
             }
 
             // Event emitter
-            this.setEventEmitter(GetValue$2I(config, 'eventEmitter', undefined));
+            this.setEventEmitter(GetValue$2U(config, 'eventEmitter', undefined));
 
             this._enable = undefined;
             this.pointers = [];
@@ -42433,8 +42433,8 @@
         }
 
         resetFromJSON(o) {
-            this.setEnable(GetValue$2I(o, "enable", true));
-            this.bounds = GetValue$2I(o, 'bounds', undefined);
+            this.setEnable(GetValue$2U(o, "enable", true));
+            this.bounds = GetValue$2U(o, 'bounds', undefined);
 
             this.tracerState = TOUCH0$1;
             this.pointers.length = 0;
@@ -42766,7 +42766,7 @@
 
     const IDLE$2 = 'IDLE';
 
-    const GetValue$2H = Phaser.Utils.Objects.GetValue;
+    const GetValue$2T = Phaser.Utils.Objects.GetValue;
 
     class Pinch extends TwoPointersTracer {
         constructor(gameObject, config) {
@@ -42802,7 +42802,7 @@
 
         resetFromJSON(o) {
             super.resetFromJSON(o);
-            this.setDragThreshold(GetValue$2H(o, 'threshold', 0));
+            this.setDragThreshold(GetValue$2T(o, 'threshold', 0));
             return this;
         }
 
@@ -42912,7 +42912,7 @@
         return this;
     };
 
-    const GetValue$2G = Phaser.Utils.Objects.GetValue;
+    const GetValue$2S = Phaser.Utils.Objects.GetValue;
     const WrapDegrees$1 = Phaser.Math.Angle.WrapDegrees; // Wrap degrees: -180 to 180 
     const ShortestBetween$1 = Phaser.Math.Angle.ShortestBetween;
     const RadToDeg$4 = Phaser.Math.RadToDeg;
@@ -42952,7 +42952,7 @@
 
         resetFromJSON(o) {
             super.resetFromJSON(o);
-            this.setDragThreshold(GetValue$2G(o, 'threshold', 0));
+            this.setDragThreshold(GetValue$2S(o, 'threshold', 0));
             return this;
         }
 
@@ -43021,10 +43021,10 @@
     const BEGIN = 'BEGIN';
     const RECOGNIZED = 'RECOGNIZED';
 
-    const GetValue$2F = Phaser.Utils.Objects.GetValue;
+    const GetValue$2R = Phaser.Utils.Objects.GetValue;
 
     var TapChild = function (config) {
-        var tapConfig = GetValue$2F(config, 'tap', undefined);
+        var tapConfig = GetValue$2R(config, 'tap', undefined);
         if (tapConfig === false) {
             return;
         } else if (tapConfig === true) {
@@ -43055,10 +43055,10 @@
             }, this);
     };
 
-    const GetValue$2E = Phaser.Utils.Objects.GetValue;
+    const GetValue$2Q = Phaser.Utils.Objects.GetValue;
 
     var PressChild = function (config) {
-        var pressConfig = GetValue$2E(config, 'press', undefined);
+        var pressConfig = GetValue$2Q(config, 'press', undefined);
         if (pressConfig === false) {
             return;
         } else if (pressConfig === true) {
@@ -43090,10 +43090,10 @@
             }, this);
     };
 
-    const GetValue$2D = Phaser.Utils.Objects.GetValue;
+    const GetValue$2P = Phaser.Utils.Objects.GetValue;
 
     var SwipeChild = function (config) {
-        var swipeConfig = GetValue$2D(config, 'swipe', undefined);
+        var swipeConfig = GetValue$2P(config, 'swipe', undefined);
         if (swipeConfig === false) {
             return;
         } else if (swipeConfig === true) {
@@ -43136,20 +43136,20 @@
             }, this);
     };
 
-    const GetValue$2C = Phaser.Utils.Objects.GetValue;
+    const GetValue$2O = Phaser.Utils.Objects.GetValue;
 
     var SetChildrenInteractive$1 = function (gameObject, config) {
         gameObject.setInteractive();
 
-        if (GetValue$2C(config, 'dropZone', false)) {
+        if (GetValue$2O(config, 'dropZone', false)) {
             gameObject.input.dropZone = true;
         }
 
         gameObject._childrenInteractive = {
-            targetSizers: GetValue$2C(config, 'targets', [gameObject]),
-            targetMode: GetValue$2C(config, 'targetMode', 'parent'),
-            eventEmitter: GetValue$2C(config, 'eventEmitter', gameObject),
-            eventNamePrefix: GetValue$2C(config, 'inputEventPrefix', 'child.')
+            targetSizers: GetValue$2O(config, 'targets', [gameObject]),
+            targetMode: GetValue$2O(config, 'targetMode', 'parent'),
+            eventEmitter: GetValue$2O(config, 'eventEmitter', gameObject),
+            eventNamePrefix: GetValue$2O(config, 'inputEventPrefix', 'child.')
         };
 
         DownChild.call(gameObject, config);
@@ -43243,20 +43243,20 @@
         BindEventMethods,
     );
 
-    const GetValue$2B = Phaser.Utils.Objects.GetValue;
+    const GetValue$2N = Phaser.Utils.Objects.GetValue;
 
     let Base$1 = class Base extends ContainerLite {
         constructor(scene, x, y, minWidth, minHeight, config) {
             super(scene, x, y, 1, 1);
             this.isRexSizer = true;
 
-            var origin = GetValue$2B(config, 'origin', 0.5);
-            var originX = GetValue$2B(config, 'originX', origin);
-            var originY = GetValue$2B(config, 'originY', origin);
+            var origin = GetValue$2N(config, 'origin', 0.5);
+            var originX = GetValue$2N(config, 'originX', origin);
+            var originY = GetValue$2N(config, 'originY', origin);
             this.setOrigin(originX, originY);
 
             this.setMinSize(minWidth, minHeight);
-            this.setName(GetValue$2B(config, 'name', ''));
+            this.setName(GetValue$2N(config, 'name', ''));
             this.rexSizer = {};
             this.space = {};
             this.backgroundChildren = undefined;
@@ -43269,22 +43269,22 @@
 
             this.enableLayoutWarn(false);
 
-            var anchorConfig = GetValue$2B(config, 'anchor', undefined);
+            var anchorConfig = GetValue$2N(config, 'anchor', undefined);
             if (anchorConfig) {
                 this.setAnchor(anchorConfig);
             }
 
-            this.setInnerPadding(GetValue$2B(config, 'space', 0));
+            this.setInnerPadding(GetValue$2N(config, 'space', 0));
 
-            var draggable = GetValue$2B(config, 'draggable', false);
+            var draggable = GetValue$2N(config, 'draggable', false);
             if (draggable) {
                 this.setDraggable(draggable);
             }
 
-            this.setSizerEventsEnable(GetValue$2B(config, 'sizerEvents', false));
+            this.setSizerEventsEnable(GetValue$2N(config, 'sizerEvents', false));
             this.setDirty(true);
 
-            if (GetValue$2B(config, 'enableLayer', false)) {
+            if (GetValue$2N(config, 'enableLayer', false)) {
                 this.enableLayer();
             }
         }
@@ -43729,7 +43729,7 @@
     var targetSize = {};
 
     const IsPlainObject$w = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$2A = Phaser.Utils.Objects.GetValue;
+    const GetValue$2M = Phaser.Utils.Objects.GetValue;
     const ALIGN_CENTER$3 = Phaser.Display.Align.CENTER;
     const UUID$3 = Phaser.Utils.String.UUID;
 
@@ -43740,23 +43740,23 @@
 
         if (IsPlainObject$w(childKey)) {
             var config = childKey;
-            childKey = GetValue$2A(config, 'key', undefined);
-            align = GetValue$2A(config, 'align', ALIGN_CENTER$3);
-            padding = GetValue$2A(config, 'padding', 0);
-            expand = GetValue$2A(config, 'expand', true);
+            childKey = GetValue$2M(config, 'key', undefined);
+            align = GetValue$2M(config, 'align', ALIGN_CENTER$3);
+            padding = GetValue$2M(config, 'padding', 0);
+            expand = GetValue$2M(config, 'expand', true);
 
             if (!gameObject.isRexSizer) {
                 // Get minWidth,minHeight from config
-                minWidth = GetValue$2A(config, 'minWidth', gameObject._minWidth);
-                minHeight = GetValue$2A(config, 'minHeight', gameObject._minHeighted);
+                minWidth = GetValue$2M(config, 'minWidth', gameObject._minWidth);
+                minHeight = GetValue$2M(config, 'minHeight', gameObject._minHeighted);
             }
 
-            offsetX = GetValue$2A(config, 'offsetX', 0);
-            offsetY = GetValue$2A(config, 'offsetY', 0);
-            offsetOriginX = GetValue$2A(config, 'offsetOriginX', 0);
-            offsetOriginY = GetValue$2A(config, 'offsetOriginY', 0);
+            offsetX = GetValue$2M(config, 'offsetX', 0);
+            offsetY = GetValue$2M(config, 'offsetY', 0);
+            offsetOriginX = GetValue$2M(config, 'offsetOriginX', 0);
+            offsetOriginY = GetValue$2M(config, 'offsetOriginY', 0);
 
-            aspectRatio = GetValue$2A(config, 'aspectRatio', 0);
+            aspectRatio = GetValue$2M(config, 'aspectRatio', 0);
         }
 
         var hasValidKey = (childKey !== undefined);
@@ -43823,8 +43823,8 @@
         config.padding = GetBoundsConfig$1(padding);
 
         if (IsPlainObject$w(expand)) {
-            config.expandWidth = GetValue$2A(expand, 'width', false);
-            config.expandHeight = GetValue$2A(expand, 'height', false);
+            config.expandWidth = GetValue$2M(expand, 'width', false);
+            config.expandHeight = GetValue$2M(expand, 'height', false);
         } else {
             config.expandWidth = expand;
             config.expandHeight = expand;
@@ -43962,20 +43962,20 @@
     };
 
     const IsPlainObject$v = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$2z = Phaser.Utils.Objects.GetValue;
+    const GetValue$2L = Phaser.Utils.Objects.GetValue;
 
     class OverlapSizer extends Base$1 {
         constructor(scene, x, y, minWidth, minHeight, config) {
             if (IsPlainObject$v(x)) {
                 config = x;
-                x = GetValue$2z(config, 'x', 0);
-                y = GetValue$2z(config, 'y', 0);
-                minWidth = GetValue$2z(config, 'width', undefined);
-                minHeight = GetValue$2z(config, 'height', undefined);
+                x = GetValue$2L(config, 'x', 0);
+                y = GetValue$2L(config, 'y', 0);
+                minWidth = GetValue$2L(config, 'width', undefined);
+                minHeight = GetValue$2L(config, 'height', undefined);
             } else if (IsPlainObject$v(minWidth)) {
                 config = minWidth;
-                minWidth = GetValue$2z(config, 'width', undefined);
-                minHeight = GetValue$2z(config, 'height', undefined);
+                minWidth = GetValue$2L(config, 'width', undefined);
+                minHeight = GetValue$2L(config, 'height', undefined);
             }
 
             super(scene, x, y, minWidth, minHeight, config);
@@ -44172,7 +44172,7 @@
         updateText: UpdateText
     };
 
-    const GetValue$2y = Phaser.Utils.Objects.GetValue;
+    const GetValue$2K = Phaser.Utils.Objects.GetValue;
     const SnapTo$3 = Phaser.Math.Snap.To;
 
     class Knob extends ProgressBase(OverlapSizer) {
@@ -44188,8 +44188,8 @@
             this.bootProgressBase(config);
 
             // Add elements
-            var background = GetValue$2y(config, 'background', undefined);
-            var textObject = GetValue$2y(config, 'text', undefined);
+            var background = GetValue$2K(config, 'background', undefined);
+            var textObject = GetValue$2K(config, 'text', undefined);
 
             if (background) {
                 this.addBackground(background);
@@ -44200,15 +44200,15 @@
                 config.textColor = undefined;
                 config.textStrokeColor = undefined;
                 this.setTextFormatCallback(
-                    GetValue$2y(config, 'textFormatCallback', undefined),
-                    GetValue$2y(config, 'textFormatCallbackScope', undefined)
+                    GetValue$2K(config, 'textFormatCallback', undefined),
+                    GetValue$2K(config, 'textFormatCallbackScope', undefined)
                 );
                 config.textFormatCallback = undefined;
                 config.textFormatCallbackScope = undefined;
             }
             // Create circular progress object
             var knob = new CircularProgress(scene, config);
-            knob.setDepth(GetValue$2y(config, 'knobDepth', 0));
+            knob.setDepth(GetValue$2K(config, 'knobDepth', 0));
             knob._value = -1; // To trigger text updating
             scene.add.existing(knob);
 
@@ -44222,13 +44222,13 @@
             this.addChildrenMap('knob', knob);
             this.addChildrenMap('text', textObject);
 
-            this.setEnable(GetValue$2y(config, 'enable', undefined));
+            this.setEnable(GetValue$2K(config, 'enable', undefined));
 
-            this.setGap(GetValue$2y(config, 'gap', undefined));
-            this.setValue(GetValue$2y(config, 'value', 0), GetValue$2y(config, 'min', undefined), GetValue$2y(config, 'max', undefined));
+            this.setGap(GetValue$2K(config, 'gap', undefined));
+            this.setValue(GetValue$2K(config, 'value', 0), GetValue$2K(config, 'min', undefined), GetValue$2K(config, 'max', undefined));
 
             // Input
-            var inputMode = GetValue$2y(config, 'input', 0);
+            var inputMode = GetValue$2K(config, 'input', 0);
             if (typeof (inputMode) === 'string') {
                 inputMode = INPUTMODE$1[inputMode];
             }
@@ -44309,7 +44309,7 @@
         triangle: Triangle$1
     };
 
-    const GetValue$2x = Phaser.Utils.Objects.GetValue;
+    const GetValue$2J = Phaser.Utils.Objects.GetValue;
     const IsPlainObject$u = Phaser.Utils.Objects.IsPlainObject;
 
     const ClearAll = function () {
@@ -44330,7 +44330,7 @@
         },
 
         buildShapes(config) {
-            var createCallback = GetValue$2x(config, 'create', undefined);
+            var createCallback = GetValue$2J(config, 'create', undefined);
 
             if (IsPlainObject$u(createCallback)) {
                 var shapes = createCallback;
@@ -44367,7 +44367,7 @@
 
             }
 
-            this.setUpdateShapesCallback(GetValue$2x(config, 'update'));
+            this.setUpdateShapesCallback(GetValue$2J(config, 'update'));
         },
 
         setUpdateShapesCallback(callback) {
@@ -44384,21 +44384,21 @@
         }
     };
 
-    const GetValue$2w = Phaser.Utils.Objects.GetValue;
+    const GetValue$2I = Phaser.Utils.Objects.GetValue;
     const IsPlainObject$t = Phaser.Utils.Objects.IsPlainObject;
 
     class CustomShapes extends BaseShapes {
         constructor(scene, x, y, width, height, config) {
             if (IsPlainObject$t(x)) {
                 config = x;
-                x = GetValue$2w(config, 'x', 0);
-                y = GetValue$2w(config, 'y', 0);
-                width = GetValue$2w(config, 'width', 2);
-                height = GetValue$2w(config, 'height', 2);
+                x = GetValue$2I(config, 'x', 0);
+                y = GetValue$2I(config, 'y', 0);
+                width = GetValue$2I(config, 'width', 2);
+                height = GetValue$2I(config, 'height', 2);
             }
 
             super(scene, x, y, width, height);
-            this.type = GetValue$2w(config, 'type', 'rexCustomShapes');
+            this.type = GetValue$2I(config, 'type', 'rexCustomShapes');
             this.buildShapes(config);
         }
 
@@ -44433,17 +44433,17 @@
 
     SetValue(window, 'RexPlugins.UI.CustomShapes', CustomShapes);
 
-    const GetValue$2v = Phaser.Utils.Objects.GetValue;
+    const GetValue$2H = Phaser.Utils.Objects.GetValue;
     const IsPlainObject$s = Phaser.Utils.Objects.IsPlainObject;
 
     class CustomProgress extends ProgressBase(CustomShapes) {
         constructor(scene, x, y, width, height, config) {
             if (IsPlainObject$s(x)) {
                 config = x;
-                x = GetValue$2v(config, 'x', 0);
-                y = GetValue$2v(config, 'y', 0);
-                width = GetValue$2v(config, 'width', 2);
-                height = GetValue$2v(config, 'height', 2);
+                x = GetValue$2H(config, 'x', 0);
+                y = GetValue$2H(config, 'y', 0);
+                width = GetValue$2H(config, 'width', 2);
+                height = GetValue$2H(config, 'height', 2);
             }
             if (config === undefined) {
                 config = {};
@@ -44456,7 +44456,7 @@
 
             this.bootProgressBase(config);
 
-            this.setValue(GetValue$2v(config, 'value', 0));
+            this.setValue(GetValue$2H(config, 'value', 0));
         }
 
         get centerX() {
@@ -44545,14 +44545,14 @@
         resume: Resume
     };
 
-    const GetValue$2u = Phaser.Utils.Objects.GetValue;
+    const GetValue$2G = Phaser.Utils.Objects.GetValue;
 
     class Base extends BaseShapes {
         constructor(scene, config) {
-            var x = GetValue$2u(config, 'x', 0);
-            var y = GetValue$2u(config, 'y', 0);
-            var width = GetValue$2u(config, 'width', 64);
-            var height = GetValue$2u(config, 'height', 64);
+            var x = GetValue$2G(config, 'x', 0);
+            var y = GetValue$2G(config, 'y', 0);
+            var width = GetValue$2G(config, 'width', 64);
+            var height = GetValue$2G(config, 'height', 64);
 
             super(scene, x, y, width, height);
 
@@ -44560,7 +44560,7 @@
 
             this.buildShapes(config);
 
-            if (GetValue$2u(config, 'start', true)) {
+            if (GetValue$2G(config, 'start', true)) {
                 this.start();
             }
         }
@@ -44573,22 +44573,22 @@
             var defaultValue;
 
             defaultValue = (setDefaults) ? 1000 : this.duration;
-            this.setDuration(GetValue$2u(config, 'duration', defaultValue));
+            this.setDuration(GetValue$2G(config, 'duration', defaultValue));
 
             defaultValue = (setDefaults) ? 'Linear' : this.ease;
-            this.setEase(GetValue$2u(config, 'ease', defaultValue));
+            this.setEase(GetValue$2G(config, 'ease', defaultValue));
 
             defaultValue = (setDefaults) ? 0 : this.delay;
-            this.setDelay(GetValue$2u(config, 'delay', defaultValue));
+            this.setDelay(GetValue$2G(config, 'delay', defaultValue));
 
             defaultValue = (setDefaults) ? 0 : this.repeatDelay;
-            this.setRepeatDelay(GetValue$2u(config, 'repeatDelay', defaultValue));
+            this.setRepeatDelay(GetValue$2G(config, 'repeatDelay', defaultValue));
 
             defaultValue = (setDefaults) ? 0xffffff : this.color;
-            this.setColor(GetValue$2u(config, 'color', defaultValue));
+            this.setColor(GetValue$2G(config, 'color', defaultValue));
 
             defaultValue = (setDefaults) ? 0 : this.value;
-            this.setValue(GetValue$2u(config, 'value', defaultValue));
+            this.setValue(GetValue$2G(config, 'value', defaultValue));
 
             return this;
         }
@@ -45663,14 +45663,14 @@
         }
     };
 
-    const GetValue$2t = Phaser.Utils.Objects.GetValue;
+    const GetValue$2F = Phaser.Utils.Objects.GetValue;
 
     class AIO extends Base {
         constructor(scene, config) {
             super(scene, config);
             this.type = 'rexSpinnerAIO';
 
-            this.setAnimationMode(GetValue$2t(config, 'animationMode'));
+            this.setAnimationMode(GetValue$2F(config, 'animationMode'));
         }
     }
 
@@ -45729,7 +45729,7 @@
     };
 
     const IsPlainObject$r = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$2s = Phaser.Utils.Objects.GetValue;
+    const GetValue$2E = Phaser.Utils.Objects.GetValue;
     const GetRandomItem = Phaser.Utils.Array.GetRandom;
 
     var DirMode = {
@@ -45747,7 +45747,7 @@
         return defaultValue;
     };
 
-    var TransitionMethods$1 = {
+    var TransitionMethods$2 = {
         setTransitionDirection(dir) {
             if (typeof (dir) === 'string') {
                 dir = DirMode[dir];
@@ -45792,10 +45792,10 @@
 
             if (IsPlainObject$r(texture)) {
                 var config = texture;
-                texture = GetValue$2s(config, 'key', undefined);
-                frame = GetValue$2s(config, 'frame', undefined);
+                texture = GetValue$2E(config, 'key', undefined);
+                frame = GetValue$2E(config, 'frame', undefined);
 
-                mode = GetValue$2s(config, 'mode');
+                mode = GetValue$2E(config, 'mode');
                 if (Array.isArray(mode)) {
                     mode = GetRandomItem(mode);
                 }
@@ -46030,7 +46030,7 @@
         return this.geom.contains(x, y);
     };
 
-    var Methods$a = {
+    var Methods$b = {
         setPosition: SetPosition$1,
         resize: Resize$1,
         setOrigin: SetOrigin,
@@ -46070,7 +46070,7 @@
 
     Object.assign(
         DefaultMaskGraphics.prototype,
-        Methods$a
+        Methods$b
     );
 
     var MaskMethods = {
@@ -46253,7 +46253,7 @@
         }
     };
 
-    const GetValue$2r = Phaser.Utils.Objects.GetValue;
+    const GetValue$2D = Phaser.Utils.Objects.GetValue;
     const DefaultImageClass = Phaser.GameObjects.Image;
     const IsPlainObject$q = Phaser.Utils.Objects.IsPlainObject;
     const RotateAround$2 = Phaser.Math.RotateAround;
@@ -46261,26 +46261,26 @@
     var GridCutImage = function (gameObject, columns, rows, config) {
         if (IsPlainObject$q(columns)) {
             config = columns;
-            columns = GetValue$2r(config, 'columns', 1);
-            rows = GetValue$2r(config, 'rows', 1);
+            columns = GetValue$2D(config, 'columns', 1);
+            rows = GetValue$2D(config, 'rows', 1);
         }
 
-        var createImageCallback = GetValue$2r(config, 'createImageCallback');
+        var createImageCallback = GetValue$2D(config, 'createImageCallback');
         if (!createImageCallback) {
-            var ImageClass = GetValue$2r(config, 'ImageClass', DefaultImageClass);
+            var ImageClass = GetValue$2D(config, 'ImageClass', DefaultImageClass);
             createImageCallback = function (scene, key, frame) {
                 return new ImageClass(scene, 0, 0, key, frame);
             };
         }
 
-        var originX = GetValue$2r(config, 'originX', 0.5);
-        var originY = GetValue$2r(config, 'originY', 0.5);
+        var originX = GetValue$2D(config, 'originX', 0.5);
+        var originY = GetValue$2D(config, 'originY', 0.5);
 
-        var addToScene = GetValue$2r(config, 'add', true);
+        var addToScene = GetValue$2D(config, 'add', true);
 
-        var align = GetValue$2r(config, 'align', addToScene);
+        var align = GetValue$2D(config, 'align', addToScene);
 
-        var imageObjectPool = GetValue$2r(config, 'objectPool', undefined);
+        var imageObjectPool = GetValue$2D(config, 'objectPool', undefined);
 
         var scene = gameObject.scene;
         var texture = gameObject.texture;
@@ -46432,7 +46432,7 @@
     Object.assign(
         methods$s,
         SetTransitionCallbackMethods,
-        TransitionMethods$1,
+        TransitionMethods$2,
         MaskMethods,
         GridCutMethods,
         FlipMethods
@@ -46452,24 +46452,24 @@
     };
 
     const IsPlainObject$p = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$2q = Phaser.Utils.Objects.GetValue;
-    const Clamp$a = Phaser.Math.Clamp;
+    const GetValue$2C = Phaser.Utils.Objects.GetValue;
+    const Clamp$b = Phaser.Math.Clamp;
 
     class TransitionImage extends ContainerLite {
         constructor(scene, x, y, texture, frame, config) {
             if (IsPlainObject$p(x)) {
                 config = x;
-                x = GetValue$2q(config, 'x', 0);
-                y = GetValue$2q(config, 'y', 0);
-                texture = GetValue$2q(config, 'key', undefined);
-                frame = GetValue$2q(config, 'frame', undefined);
+                x = GetValue$2C(config, 'x', 0);
+                y = GetValue$2C(config, 'y', 0);
+                texture = GetValue$2C(config, 'key', undefined);
+                frame = GetValue$2C(config, 'frame', undefined);
             } else if (IsPlainObject$p(frame)) {
                 config = frame;
                 frame = undefined;
             }
 
-            var backImage = GetValue$2q(config, 'back', undefined);
-            var frontImage = GetValue$2q(config, 'front', undefined);
+            var backImage = GetValue$2C(config, 'back', undefined);
+            var frontImage = GetValue$2C(config, 'front', undefined);
             if (!backImage) {
                 backImage = scene.add.image(x, y, texture, frame);
             }
@@ -46477,8 +46477,8 @@
                 frontImage = scene.add.image(x, y, texture, frame);
             }
 
-            var width = GetValue$2q(config, 'width', undefined);
-            var height = GetValue$2q(config, 'height', undefined);
+            var width = GetValue$2C(config, 'width', undefined);
+            var height = GetValue$2C(config, 'height', undefined);
             var scaleMode = ((width !== undefined) && (height !== undefined)) ? 1 : 0;
 
             if (width === undefined) {
@@ -46493,7 +46493,7 @@
             this._flipX = false;
             this._flipY = false;
 
-            scaleMode = GetValue$2q(config, 'scaleMode', scaleMode);
+            scaleMode = GetValue$2C(config, 'scaleMode', scaleMode);
             if (typeof (scaleMode) === 'string') {
                 scaleMode = ScaleModeMap[scaleMode];
             }
@@ -46512,10 +46512,10 @@
             this.currentTransitionMode = undefined;
 
             // Transition parameters
-            var onStart = GetValue$2q(config, 'onStart', undefined);
-            var onProgress = GetValue$2q(config, 'onProgress', undefined);
-            var onComplete = GetValue$2q(config, 'onComplete', undefined);
-            var dir = GetValue$2q(config, 'dir', 0);
+            var onStart = GetValue$2C(config, 'onStart', undefined);
+            var onProgress = GetValue$2C(config, 'onProgress', undefined);
+            var onComplete = GetValue$2C(config, 'onComplete', undefined);
+            var dir = GetValue$2C(config, 'dir', 0);
             if ((onStart === undefined) && (onProgress === undefined) && (onComplete === undefined)) {
                 onStart = OnStart;
                 onProgress = OnProgress;
@@ -46526,21 +46526,21 @@
             this
                 .setTransitionStartCallback(
                     onStart,
-                    GetValue$2q(config, 'onStartScope', undefined)
+                    GetValue$2C(config, 'onStartScope', undefined)
                 )
                 .setTransitionProgressCallback(
                     onProgress,
-                    GetValue$2q(config, 'onProgressScope', undefined)
+                    GetValue$2C(config, 'onProgressScope', undefined)
                 )
                 .setTransitionCompleteCallback(
                     onComplete,
-                    GetValue$2q(config, 'onCompleteScope', undefined)
+                    GetValue$2C(config, 'onCompleteScope', undefined)
                 )
                 .setTransitionDirection(dir)
-                .setDuration(GetValue$2q(config, 'duration', 1000))
-                .setEaseFunction(GetValue$2q(config, 'ease', 'Linear'));
+                .setDuration(GetValue$2C(config, 'duration', 1000))
+                .setEaseFunction(GetValue$2C(config, 'ease', 'Linear'));
 
-            var maskGameObject = GetValue$2q(config, 'mask', undefined);
+            var maskGameObject = GetValue$2C(config, 'mask', undefined);
             if (maskGameObject) {
                 this.setMaskGameObject(maskGameObject);
             }
@@ -46673,7 +46673,7 @@
         }
 
         set t(value) {
-            value = Clamp$a(value, 0, 1);
+            value = Clamp$b(value, 0, 1);
             if (this._t === value) {
                 return;
             }
@@ -47884,8 +47884,8 @@ void main () {
 `;
 
     const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
-    const GetValue$2p = Phaser.Utils.Objects.GetValue;
-    const Clamp$9 = Phaser.Math.Clamp;
+    const GetValue$2B = Phaser.Utils.Objects.GetValue;
+    const Clamp$a = Phaser.Math.Clamp;
 
     class DissolvePostFxPipeline extends PostFXPipeline {
         constructor(game) {
@@ -47912,11 +47912,11 @@ void main () {
         }
 
         resetFromJSON(o) {
-            this.setProgress(GetValue$2p(o, 'progress', 0));
-            this.setTransitionTargetTexture(GetValue$2p(o, 'toTexture', '__DEFAULT'), GetValue$2p(o, 'toFrame', undefined), GetValue$2p(o, 'resizeMode', 1));
-            this.setNoise(GetValue$2p(o, 'noiseX', undefined), GetValue$2p(o, 'noiseY', undefined), GetValue$2p(o, 'noiseZ', undefined));
-            this.setFromEdge(GetValue$2p(o, 'fromEdgeStart', 0.01), GetValue$2p(o, 'fromEdgeWidth', 0.05));
-            this.setToEdge(GetValue$2p(o, 'toEdgeStart', 0.01), GetValue$2p(o, 'toEdgeWidth', 0.05));
+            this.setProgress(GetValue$2B(o, 'progress', 0));
+            this.setTransitionTargetTexture(GetValue$2B(o, 'toTexture', '__DEFAULT'), GetValue$2B(o, 'toFrame', undefined), GetValue$2B(o, 'resizeMode', 1));
+            this.setNoise(GetValue$2B(o, 'noiseX', undefined), GetValue$2B(o, 'noiseY', undefined), GetValue$2B(o, 'noiseZ', undefined));
+            this.setFromEdge(GetValue$2B(o, 'fromEdgeStart', 0.01), GetValue$2B(o, 'fromEdgeWidth', 0.05));
+            this.setToEdge(GetValue$2B(o, 'toEdgeStart', 0.01), GetValue$2B(o, 'toEdgeWidth', 0.05));
             return this;
         }
 
@@ -47954,7 +47954,7 @@ void main () {
         }
 
         set progress(value) {
-            this._progress = Clamp$9(value, 0, 1);
+            this._progress = Clamp$a(value, 0, 1);
         }
 
         setProgress(value) {
@@ -48241,22 +48241,22 @@ void main () {
     };
 
     const IsPlainObject$o = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$2o = Phaser.Utils.Objects.GetValue;
+    const GetValue$2A = Phaser.Utils.Objects.GetValue;
 
     class ImageBox extends ContainerLite {
         constructor(scene, x, y, texture, frame, config) {
             if (IsPlainObject$o(x)) {
                 config = x;
-                x = GetValue$2o(config, 'x', 0);
-                y = GetValue$2o(config, 'y', 0);
-                texture = GetValue$2o(config, 'key', undefined);
-                frame = GetValue$2o(config, 'frame', undefined);
+                x = GetValue$2A(config, 'x', 0);
+                y = GetValue$2A(config, 'y', 0);
+                texture = GetValue$2A(config, 'key', undefined);
+                frame = GetValue$2A(config, 'frame', undefined);
             } else if (IsPlainObject$o(frame)) {
                 config = frame;
                 frame = undefined;
             }
 
-            var image = GetValue$2o(config, 'image');
+            var image = GetValue$2A(config, 'image');
             if (!image) {
                 image = scene.add.image(x, y, texture, frame);
                 if (texture === undefined) {
@@ -48269,7 +48269,7 @@ void main () {
             super(scene, x, y, 1, 1);
             this.type = 'rexImageBox';
 
-            var background = GetValue$2o(config, 'background');
+            var background = GetValue$2A(config, 'background');
             if (background) {
                 this.add(background);
             }
@@ -48278,10 +48278,10 @@ void main () {
             this.add(image);
             this.image = image;
 
-            this.scaleUp = GetValue$2o(config, 'scaleUp', false);
+            this.scaleUp = GetValue$2A(config, 'scaleUp', false);
 
-            var width = GetValue$2o(config, 'width', image.width);
-            var height = GetValue$2o(config, 'height', image.height);
+            var width = GetValue$2A(config, 'width', image.width);
+            var height = GetValue$2A(config, 'height', image.height);
             this.resize(width, height);
 
         }
@@ -48455,11 +48455,11 @@ void main () {
         select: 'select',
     };
 
-    const GetValue$2n = Phaser.Utils.Objects.GetValue;
+    const GetValue$2z = Phaser.Utils.Objects.GetValue;
 
     var RouteEvents = function (gameObject, element, elementEvents, config) {
-        var preventDefault = GetValue$2n(config, 'preventDefault', false);
-        var preTest = GetValue$2n(config, 'preTest');
+        var preventDefault = GetValue$2z(config, 'preventDefault', false);
+        var preTest = GetValue$2z(config, 'preTest');
         for (let elementEventName in elementEvents) {  // Note: Don't use `var` here
             element.addEventListener(elementEventName, function (e) {
                 if (!preTest || preTest(gameObject, elementEventName)) {
@@ -48475,20 +48475,20 @@ void main () {
 
     const DOMElement$2 = Phaser.GameObjects.DOMElement;
     const IsPlainObject$n = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$2m = Phaser.Utils.Objects.GetValue;
+    const GetValue$2y = Phaser.Utils.Objects.GetValue;
 
     class InputText extends DOMElement$2 {
         constructor(scene, x, y, width, height, config) {
             if (IsPlainObject$n(x)) {
                 config = x;
-                x = GetValue$2m(config, 'x', 0);
-                y = GetValue$2m(config, 'y', 0);
-                width = GetValue$2m(config, 'width', 0);
-                height = GetValue$2m(config, 'height', 0);
+                x = GetValue$2y(config, 'x', 0);
+                y = GetValue$2y(config, 'y', 0);
+                width = GetValue$2y(config, 'width', 0);
+                height = GetValue$2y(config, 'height', 0);
             } else if (IsPlainObject$n(width)) {
                 config = width;
-                width = GetValue$2m(config, 'width', 0);
-                height = GetValue$2m(config, 'height', 0);
+                width = GetValue$2y(config, 'width', 0);
+                height = GetValue$2y(config, 'height', 0);
             }
 
             if (config === undefined) {
@@ -48496,9 +48496,9 @@ void main () {
             }
 
             var element;
-            var textType = GetValue$2m(config, 'inputType', undefined);
+            var textType = GetValue$2y(config, 'inputType', undefined);
             if (textType === undefined) {
-                textType = GetValue$2m(config, 'type', 'text');
+                textType = GetValue$2y(config, 'type', 'text');
             }
 
             if (textType === 'textarea') {
@@ -48511,7 +48511,7 @@ void main () {
 
             SetProperties(ElementProperties, config, element);
 
-            var style = GetValue$2m(config, 'style', undefined);
+            var style = GetValue$2y(config, 'style', undefined);
             style = SetProperties(StyleProperties, config, style);
             // Apply other style properties
             var elementStyle = element.style;
@@ -48538,7 +48538,7 @@ void main () {
             // Don't propagate touch/mouse events to parent(game canvas)
             StopPropagationTouchEvents(element);
 
-            if (GetValue$2m(config, 'selectAll', false)) {
+            if (GetValue$2y(config, 'selectAll', false)) {
                 this.selectAll();
             }
 
@@ -48774,14 +48774,14 @@ void main () {
 
     SetValue(window, 'RexPlugins.UI.InputText', InputText);
 
-    const GetValue$2l = Phaser.Utils.Objects.GetValue;
+    const GetValue$2x = Phaser.Utils.Objects.GetValue;
 
     var CreateFileInput = function (game, config) {
         var fileInput = document.createElement('input');
         fileInput.type = 'file';
 
-        var accept = GetValue$2l(config, 'accept', '');
-        var multiple = GetValue$2l(config, 'multiple', false);
+        var accept = GetValue$2x(config, 'accept', '');
+        var multiple = GetValue$2x(config, 'multiple', false);
 
         fileInput.setAttribute('accept', accept);
         if (multiple) {
@@ -48821,12 +48821,12 @@ void main () {
     // Note: Not working in iOS9+
 
 
-    const GetValue$2k = Phaser.Utils.Objects.GetValue;
+    const GetValue$2w = Phaser.Utils.Objects.GetValue;
     const RemoveFromDOM = Phaser.DOM.RemoveFromDOM;
 
     var Open$1 = function (game, config) {
         // game: game, scene, or game object
-        var closeDelay = GetValue$2k(config, 'closeDelay', 200);
+        var closeDelay = GetValue$2w(config, 'closeDelay', 200);
         var fileInput = CreateFileInput(game, config);
         fileInput.click();
         return ClickPromise({ game, fileInput, closeDelay })
@@ -48935,20 +48935,20 @@ void main () {
 
     const DOMElement$1 = Phaser.GameObjects.DOMElement;
     const IsPlainObject$m = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$2j = Phaser.Utils.Objects.GetValue;
+    const GetValue$2v = Phaser.Utils.Objects.GetValue;
 
     class FileChooser extends DOMElement$1 {
         constructor(scene, x, y, width, height, config) {
             if (IsPlainObject$m(x)) {
                 config = x;
-                x = GetValue$2j(config, 'x', 0);
-                y = GetValue$2j(config, 'y', 0);
-                width = GetValue$2j(config, 'width', 0);
-                height = GetValue$2j(config, 'height', 0);
+                x = GetValue$2v(config, 'x', 0);
+                y = GetValue$2v(config, 'y', 0);
+                width = GetValue$2v(config, 'width', 0);
+                height = GetValue$2v(config, 'height', 0);
             } else if (IsPlainObject$m(width)) {
                 config = width;
-                width = GetValue$2j(config, 'width', 0);
-                height = GetValue$2j(config, 'height', 0);
+                width = GetValue$2v(config, 'width', 0);
+                height = GetValue$2v(config, 'height', 0);
             }
 
             // Create a hidden file input
@@ -48961,7 +48961,7 @@ void main () {
             var labelElement = document.createElement('label');
             labelElement.appendChild(inputElement);
 
-            var style = GetValue$2j(config, 'style', undefined);
+            var style = GetValue$2v(config, 'style', undefined);
             super(scene, x, y, labelElement, style);
             this.type = 'rexFileChooser';
             this.resetFromJSON(config);
@@ -48973,7 +48973,7 @@ void main () {
                 self.emit('change', self);
             };
 
-            this.setCloseDelay(GetValue$2j(config, 'closeDelay', 200));
+            this.setCloseDelay(GetValue$2v(config, 'closeDelay', 200));
             inputElement.onclick = function () {
                 ClickPromise({
                     game: scene,
@@ -48987,8 +48987,8 @@ void main () {
         }
 
         resetFromJSON(config) {
-            this.setAccept(GetValue$2j(config, 'accept', ''));
-            this.setMultiple(GetValue$2j(config, 'multiple', false));
+            this.setAccept(GetValue$2v(config, 'accept', ''));
+            this.setMultiple(GetValue$2v(config, 'multiple', false));
             return this;
         }
 
@@ -49097,13 +49097,13 @@ void main () {
         },
     };
 
-    var Methods$9 = {
+    var Methods$a = {
         resize: Resize,
         syncTo: SyncTo,
     };
 
     Object.assign(
-        Methods$9,
+        Methods$a,
         DropEnableMethods,
         FilterMethods,
         LoadFileMethods,
@@ -49118,20 +49118,20 @@ void main () {
 
     const DOMElement = Phaser.GameObjects.DOMElement;
     const IsPlainObject$l = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$2i = Phaser.Utils.Objects.GetValue;
+    const GetValue$2u = Phaser.Utils.Objects.GetValue;
 
     class FileDropZone extends DOMElement {
         constructor(scene, x, y, width, height, config) {
             if (IsPlainObject$l(x)) {
                 config = x;
-                x = GetValue$2i(config, 'x', 0);
-                y = GetValue$2i(config, 'y', 0);
-                width = GetValue$2i(config, 'width', 0);
-                height = GetValue$2i(config, 'height', 0);
+                x = GetValue$2u(config, 'x', 0);
+                y = GetValue$2u(config, 'y', 0);
+                width = GetValue$2u(config, 'width', 0);
+                height = GetValue$2u(config, 'height', 0);
             } else if (IsPlainObject$l(width)) {
                 config = width;
-                width = GetValue$2i(config, 'width', 0);
-                height = GetValue$2i(config, 'height', 0);
+                width = GetValue$2u(config, 'width', 0);
+                height = GetValue$2u(config, 'height', 0);
             }
 
             if (config === undefined) {
@@ -49140,15 +49140,15 @@ void main () {
 
             var element = document.createElement('div');
 
-            var style = GetValue$2i(config, 'style', undefined);
+            var style = GetValue$2u(config, 'style', undefined);
             super(scene, x, y, element, style);
             this.type = 'rexFileDropZone';
             this.resize(width, height);
 
             this._files = [];
-            this.setDropEnable(GetValue$2i(config, 'dropEnable', true));
+            this.setDropEnable(GetValue$2u(config, 'dropEnable', true));
 
-            var filters = GetValue$2i(config, 'filters');
+            var filters = GetValue$2u(config, 'filters');
             if (filters) {
                 this.addFilters(filters);
             }
@@ -49190,7 +49190,7 @@ void main () {
 
     Object.assign(
         FileDropZone.prototype,
-        Methods$9,
+        Methods$a,
     );
 
     ObjectFactory.register('fileDropZone', function (config) {
@@ -49759,7 +49759,7 @@ void main () {
     };
 
     const IsPlainObject$k = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$2h = Phaser.Utils.Objects.GetValue;
+    const GetValue$2t = Phaser.Utils.Objects.GetValue;
     const ALIGN_CENTER$2 = Phaser.Display.Align.CENTER;
     const PROPORTIONMODE = {
         min: 0,
@@ -49786,24 +49786,24 @@ void main () {
             proportion = PROPORTIONMODE[proportion];
         } else if (IsPlainObject$k(proportion)) {
             var config = proportion;
-            proportion = GetValue$2h(config, 'proportion', undefined);
-            align = GetValue$2h(config, 'align', ALIGN_CENTER$2);
-            paddingConfig = GetValue$2h(config, 'padding', 0);
-            expand = GetValue$2h(config, 'expand', false);
-            childKey = GetValue$2h(config, 'key', undefined);
-            index = GetValue$2h(config, 'index', undefined);
+            proportion = GetValue$2t(config, 'proportion', undefined);
+            align = GetValue$2t(config, 'align', ALIGN_CENTER$2);
+            paddingConfig = GetValue$2t(config, 'padding', 0);
+            expand = GetValue$2t(config, 'expand', false);
+            childKey = GetValue$2t(config, 'key', undefined);
+            index = GetValue$2t(config, 'index', undefined);
 
             if (!gameObject.isRexSizer) {
-                minWidth = GetValue$2h(config, 'minWidth', undefined);
-                minHeight = GetValue$2h(config, 'minHeight', undefined);
+                minWidth = GetValue$2t(config, 'minWidth', undefined);
+                minHeight = GetValue$2t(config, 'minHeight', undefined);
             }
 
-            fitRatio = GetValue$2h(config, 'fitRatio', 0);  // width/height
+            fitRatio = GetValue$2t(config, 'fitRatio', 0);  // width/height
 
-            offsetX = GetValue$2h(config, 'offsetX', 0);
-            offsetY = GetValue$2h(config, 'offsetY', 0);
-            offsetOriginX = GetValue$2h(config, 'offsetOriginX', 0);
-            offsetOriginY = GetValue$2h(config, 'offsetOriginY', 0);
+            offsetX = GetValue$2t(config, 'offsetX', 0);
+            offsetY = GetValue$2t(config, 'offsetY', 0);
+            offsetOriginX = GetValue$2t(config, 'offsetOriginX', 0);
+            offsetOriginY = GetValue$2t(config, 'offsetOriginY', 0);
         }
 
         if (typeof (align) === 'string') {
@@ -50156,25 +50156,25 @@ void main () {
     };
 
     const IsPlainObject$j = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$2g = Phaser.Utils.Objects.GetValue;
+    const GetValue$2s = Phaser.Utils.Objects.GetValue;
 
     class Sizer extends Base$1 {
         constructor(scene, x, y, minWidth, minHeight, orientation, config) {
             if (IsPlainObject$j(x)) {
                 config = x;
-                x = GetValue$2g(config, 'x', 0);
-                y = GetValue$2g(config, 'y', 0);
-                minWidth = GetValue$2g(config, 'width', undefined);
-                minHeight = GetValue$2g(config, 'height', undefined);
-                orientation = GetValue$2g(config, 'orientation', 0);
+                x = GetValue$2s(config, 'x', 0);
+                y = GetValue$2s(config, 'y', 0);
+                minWidth = GetValue$2s(config, 'width', undefined);
+                minHeight = GetValue$2s(config, 'height', undefined);
+                orientation = GetValue$2s(config, 'orientation', 0);
             } else if (IsPlainObject$j(minWidth)) {
                 config = minWidth;
-                minWidth = GetValue$2g(config, 'width', undefined);
-                minHeight = GetValue$2g(config, 'height', undefined);
-                orientation = GetValue$2g(config, 'orientation', 0);
+                minWidth = GetValue$2s(config, 'width', undefined);
+                minHeight = GetValue$2s(config, 'height', undefined);
+                orientation = GetValue$2s(config, 'orientation', 0);
             } else if (IsPlainObject$j(orientation)) {
                 config = orientation;
-                orientation = GetValue$2g(config, 'orientation', 0);
+                orientation = GetValue$2s(config, 'orientation', 0);
             }
 
             if (orientation === undefined) {
@@ -50185,9 +50185,9 @@ void main () {
             this.type = 'rexSizer';
             this.sizerChildren = [];
             this.setOrientation(orientation);
-            this.setItemSpacing(GetValue$2g(config, 'space.item', 0));
-            this.setStartChildIndex(GetValue$2g(config, 'startChildIndex', 0));
-            this.setRTL(GetValue$2g(config, 'rtl', false));
+            this.setItemSpacing(GetValue$2s(config, 'space.item', 0));
+            this.setStartChildIndex(GetValue$2s(config, 'startChildIndex', 0));
+            this.setRTL(GetValue$2s(config, 'rtl', false));
 
             this.addChildrenMap('items', this.sizerChildren);
         }
@@ -50843,7 +50843,7 @@ void main () {
         style.update(false);
     };
 
-    const GetValue$2f = Phaser.Utils.Objects.GetValue;
+    const GetValue$2r = Phaser.Utils.Objects.GetValue;
 
     var FontSizeExpandText = function (textObject, config) {
         if (typeof (config) === 'number') {
@@ -50852,9 +50852,9 @@ void main () {
             };
         }
 
-        var minWidth = GetValue$2f(config, 'minWidth', 0);
-        var minHeight = GetValue$2f(config, 'minHeight', 0);
-        var fitHeight = GetValue$2f(config, 'fitHeight', false);
+        var minWidth = GetValue$2r(config, 'minWidth', 0);
+        var minHeight = GetValue$2r(config, 'minHeight', 0);
+        var fitHeight = GetValue$2r(config, 'fitHeight', false);
 
         textObject._minWidth = minWidth;
         textObject._minHeight = minHeight;
@@ -50898,7 +50898,7 @@ void main () {
         return textObject;
     };
 
-    const GetValue$2e = Phaser.Utils.Objects.GetValue;
+    const GetValue$2q = Phaser.Utils.Objects.GetValue;
 
     class Label extends LabelBase {
         constructor(scene, config) {
@@ -50911,14 +50911,14 @@ void main () {
             this.type = 'rexLabel';
 
             // Add elements
-            var background = GetValue$2e(config, 'background', undefined);
-            var icon = GetValue$2e(config, 'icon', undefined);
-            var iconMask = GetValue$2e(config, 'iconMask', undefined);
-            var text = GetValue$2e(config, 'text', undefined);
-            var action = GetValue$2e(config, 'action', undefined);
-            var actionMask = GetValue$2e(config, 'actionMask', undefined);
+            var background = GetValue$2q(config, 'background', undefined);
+            var icon = GetValue$2q(config, 'icon', undefined);
+            var iconMask = GetValue$2q(config, 'iconMask', undefined);
+            var text = GetValue$2q(config, 'text', undefined);
+            var action = GetValue$2q(config, 'action', undefined);
+            var actionMask = GetValue$2q(config, 'actionMask', undefined);
             // Align
-            var align = GetValue$2e(config, 'align', undefined); // undefined/left/top: no space
+            var align = GetValue$2q(config, 'align', undefined); // undefined/left/top: no space
 
 
             if (background) {
@@ -50930,23 +50930,23 @@ void main () {
                 if (this.orientation === 0) {
                     if (text || action) {
                         padding = {
-                            right: GetValue$2e(config, 'space.icon', 0),
-                            top: GetValue$2e(config, 'space.iconTop', 0),
-                            bottom: GetValue$2e(config, 'space.iconBottom', 0),
-                            left: GetValue$2e(config, 'space.iconLeft', 0),
+                            right: GetValue$2q(config, 'space.icon', 0),
+                            top: GetValue$2q(config, 'space.iconTop', 0),
+                            bottom: GetValue$2q(config, 'space.iconBottom', 0),
+                            left: GetValue$2q(config, 'space.iconLeft', 0),
                         };
                     }
                 } else {
                     if (text || action) {
                         padding = {
-                            bottom: GetValue$2e(config, 'space.icon', 0),
-                            left: GetValue$2e(config, 'space.iconLeft', 0),
-                            right: GetValue$2e(config, 'space.iconRight', 0),
-                            top: GetValue$2e(config, 'space.iconTop', 0),
+                            bottom: GetValue$2q(config, 'space.icon', 0),
+                            left: GetValue$2q(config, 'space.iconLeft', 0),
+                            right: GetValue$2q(config, 'space.iconRight', 0),
+                            top: GetValue$2q(config, 'space.iconTop', 0),
                         };
                     }
                 }
-                var fitRatio = GetValue$2e(config, 'squareFitIcon', false) ? 1 : 0;
+                var fitRatio = GetValue$2q(config, 'squareFitIcon', false) ? 1 : 0;
 
                 this.add(
                     icon,
@@ -50958,18 +50958,18 @@ void main () {
                 }
 
                 if (!fitRatio) {
-                    var iconSize = GetValue$2e(config, 'iconSize', undefined);
+                    var iconSize = GetValue$2q(config, 'iconSize', undefined);
                     this.setIconSize(
-                        GetValue$2e(config, 'iconWidth', iconSize),
-                        GetValue$2e(config, 'iconHeight', iconSize)
+                        GetValue$2q(config, 'iconWidth', iconSize),
+                        GetValue$2q(config, 'iconHeight', iconSize)
                     );
                 }
             }
 
 
             if (text) {
-                var wrapText = GetValue$2e(config, 'wrapText', false);
-                var adjustTextFontSize = GetValue$2e(config, 'adjustTextFontSize', false);
+                var wrapText = GetValue$2q(config, 'wrapText', false);
+                var adjustTextFontSize = GetValue$2q(config, 'adjustTextFontSize', false);
                 if (wrapText) {
                     if (wrapText === true) {
                         wrapText = 'word';
@@ -50985,9 +50985,9 @@ void main () {
 
                 }
 
-                var textSpace = GetValue$2e(config, 'space.text', 0);
-                var expandTextWidth = GetValue$2e(config, 'expandTextWidth', false);
-                var expandTextHeight = GetValue$2e(config, 'expandTextHeight', false);
+                var textSpace = GetValue$2q(config, 'space.text', 0);
+                var expandTextWidth = GetValue$2q(config, 'expandTextWidth', false);
+                var expandTextHeight = GetValue$2q(config, 'expandTextHeight', false);
                 var proportion, padding, expand;
                 if (this.orientation === 0) {
                     proportion = (expandTextWidth) ? 1 : 0;
@@ -51013,18 +51013,18 @@ void main () {
                 var padding;
                 if (this.orientation === 0) {
                     padding = {
-                        top: GetValue$2e(config, 'space.actionTop', 0),
-                        bottom: GetValue$2e(config, 'space.actionBottom', 0),
-                        right: GetValue$2e(config, 'space.actionRight', 0),
+                        top: GetValue$2q(config, 'space.actionTop', 0),
+                        bottom: GetValue$2q(config, 'space.actionBottom', 0),
+                        right: GetValue$2q(config, 'space.actionRight', 0),
                     };
                 } else {
                     padding = {
-                        left: GetValue$2e(config, 'space.actionLeft', 0),
-                        right: GetValue$2e(config, 'space.actionRight', 0),
-                        bottom: GetValue$2e(config, 'space.actionBottom', 0),
+                        left: GetValue$2q(config, 'space.actionLeft', 0),
+                        right: GetValue$2q(config, 'space.actionRight', 0),
+                        bottom: GetValue$2q(config, 'space.actionBottom', 0),
                     };
                 }
-                var fitRatio = GetValue$2e(config, 'squareFitAction', false) ? 1 : 0;
+                var fitRatio = GetValue$2q(config, 'squareFitAction', false) ? 1 : 0;
                 this.add(
                     action,
                     { proportion: 0, padding: padding, fitRatio: fitRatio }
@@ -51035,10 +51035,10 @@ void main () {
                 }
 
                 if (!fitRatio) {
-                    var actionSize = GetValue$2e(config, 'actionSize');
+                    var actionSize = GetValue$2q(config, 'actionSize');
                     this.setActionSize(
-                        GetValue$2e(config, 'actionWidth', actionSize),
-                        GetValue$2e(config, 'actionHeight', actionSize)
+                        GetValue$2q(config, 'actionWidth', actionSize),
+                        GetValue$2q(config, 'actionHeight', actionSize)
                     );
                 }
             }
@@ -51054,19 +51054,19 @@ void main () {
         }
     }
 
-    const GetValue$2d = Phaser.Utils.Objects.GetValue;
+    const GetValue$2p = Phaser.Utils.Objects.GetValue;
 
     var CreateCanvas = function (scene, config) {
-        var canvasConfig = GetValue$2d(config, 'canvas');
-        var width = GetValue$2d(canvasConfig, 'width', 128);
-        var height = GetValue$2d(canvasConfig, 'height', 128);
+        var canvasConfig = GetValue$2p(config, 'canvas');
+        var width = GetValue$2p(canvasConfig, 'width', 128);
+        var height = GetValue$2p(canvasConfig, 'height', 128);
 
         var canvas = new Canvas(scene, 0, 0, width, height);
         scene.add.existing(canvas);
 
-        var key = GetValue$2d(canvasConfig, 'key');
-        var frame = GetValue$2d(canvasConfig, 'frame');
-        var fillColor = GetValue$2d(canvasConfig, 'fill');
+        var key = GetValue$2p(canvasConfig, 'key');
+        var frame = GetValue$2p(canvasConfig, 'frame');
+        var fillColor = GetValue$2p(canvasConfig, 'fill');
         if (fillColor !== undefined) {
             canvas.fill(fillColor);
         } else if (key !== undefined) {
@@ -51081,8 +51081,8 @@ void main () {
 
     var CreateImageBox = function (scene, config) {
         var icon = new ImageBox(scene, {
-            scaleUp: GetValue$2d(config, 'scaleUpIcon', false),
-            background: GetValue$2d(config, 'iconBackground'),
+            scaleUp: GetValue$2p(config, 'scaleUpIcon', false),
+            background: GetValue$2p(config, 'iconBackground'),
             image: CreateCanvas(scene, config)
         });
         scene.add.existing(icon);
@@ -51090,10 +51090,10 @@ void main () {
         return icon;
     };
 
-    const GetValue$2c = Phaser.Utils.Objects.GetValue;
+    const GetValue$2o = Phaser.Utils.Objects.GetValue;
 
     var GetClickTarget = function (parent, config) {
-        var clickTarget = GetValue$2c(config, 'clickTarget', this);
+        var clickTarget = GetValue$2o(config, 'clickTarget', this);
         if (typeof (clickTarget) === 'string') {
             clickTarget = parent.getElement(clickTarget);
         }
@@ -51101,7 +51101,7 @@ void main () {
         return clickTarget;
     };
 
-    const GetValue$2b = Phaser.Utils.Objects.GetValue;
+    const GetValue$2n = Phaser.Utils.Objects.GetValue;
 
     var CreateClickBehavior = function (parent, config) {
         var clickTarget = GetClickTarget(parent, config);
@@ -51109,7 +51109,7 @@ void main () {
             return undefined;
         }
 
-        var clickConfig = GetValue$2b(config, 'click');
+        var clickConfig = GetValue$2n(config, 'click');
         var clickBehavior = new Button(clickTarget, clickConfig);
         clickBehavior.on('click', parent.open, parent);
 
@@ -51214,7 +51214,7 @@ void main () {
         OpenMethods
     );
 
-    const GetValue$2a = Phaser.Utils.Objects.GetValue;
+    const GetValue$2m = Phaser.Utils.Objects.GetValue;
 
     /*
     Label :
@@ -51239,7 +51239,7 @@ void main () {
 
             this.clickTarget = GetClickTarget(this, config);
             if (this.clickTarget) {
-                if (!GetValue$2a(config, 'domButton', true)) {
+                if (!GetValue$2m(config, 'domButton', true)) {
                     this.clickBehavior = CreateClickBehavior(this, config);
                 } else {
                     this.fileChooser = CreateFileChooser(this);
@@ -51330,21 +51330,21 @@ void main () {
         }
     };
 
-    const GetValue$29 = Phaser.Utils.Objects.GetValue;
+    const GetValue$2l = Phaser.Utils.Objects.GetValue;
 
     class StyleManager extends ComponentBase {
         constructor(gameObject, config) {
             super(gameObject, config);
             // this.parent = gameObject;
 
-            this.style = GetValue$29(config, 'style', this);
+            this.style = GetValue$2l(config, 'style', this);
 
-            var propertiesMap = GetValue$29(config, 'propertiesMap');
+            var propertiesMap = GetValue$2l(config, 'propertiesMap');
             this.activeStyle = ExtractStyle(config, 'active', propertiesMap);
             this.hoverStyle = ExtractStyle(config, 'hover', propertiesMap);
             this.disableStyle = ExtractStyle(config, 'disable', propertiesMap);
 
-            this.onModifyStyle = GetValue$29(config, 'onModifyStyle');
+            this.onModifyStyle = GetValue$2l(config, 'onModifyStyle');
         }
 
         getStyle(keys) {
@@ -51454,7 +51454,7 @@ void main () {
     };
 
     const PhaserImage = Phaser.GameObjects.Image;
-    const GetValue$28 = Phaser.Utils.Objects.GetValue;
+    const GetValue$2k = Phaser.Utils.Objects.GetValue;
 
     class StatesImage extends PhaserImage {
         constructor(scene, config) {
@@ -51462,14 +51462,14 @@ void main () {
                 config = {};
             }
 
-            var x = GetValue$28(config, 'x', 0);
-            var y = GetValue$28(config, 'y', 0);
-            var key = GetValue$28(config, 'key', '');
-            var frame = GetValue$28(config, 'frame', undefined);
+            var x = GetValue$2k(config, 'x', 0);
+            var y = GetValue$2k(config, 'y', 0);
+            var key = GetValue$2k(config, 'key', '');
+            var frame = GetValue$2k(config, 'frame', undefined);
             super(scene, x, y, key, frame);
             this.type = 'rexStatesImage';
 
-            var effectConfig = GetValue$28(config, 'effects', true);
+            var effectConfig = GetValue$2k(config, 'effects', true);
             if (effectConfig) {
                 AddEffectProperties(this, effectConfig);
             }
@@ -51589,7 +51589,7 @@ void main () {
     };
 
     const PhaserNineSlice = Phaser.GameObjects.NineSlice;
-    const GetValue$27 = Phaser.Utils.Objects.GetValue;
+    const GetValue$2j = Phaser.Utils.Objects.GetValue;
 
     class StatesNineSlice extends PhaserNineSlice {
         constructor(scene, config) {
@@ -51597,20 +51597,20 @@ void main () {
                 config = {};
             }
 
-            var x = GetValue$27(config, 'x', 0);
-            var y = GetValue$27(config, 'y', 0);
-            var key = GetValue$27(config, 'key', null);
-            var frame = GetValue$27(config, 'frame', null);
-            var width = GetValue$27(config, 'width', 0);
-            var height = GetValue$27(config, 'height', 0);
-            var leftWidth = GetValue$27(config, 'leftWidth', 0);
-            var rightWidth = GetValue$27(config, 'rightWidth', 0);
-            var topHeight = GetValue$27(config, 'topHeight', 0);
-            var bottomHeight = GetValue$27(config, 'bottomHeight', 0);
+            var x = GetValue$2j(config, 'x', 0);
+            var y = GetValue$2j(config, 'y', 0);
+            var key = GetValue$2j(config, 'key', null);
+            var frame = GetValue$2j(config, 'frame', null);
+            var width = GetValue$2j(config, 'width', 0);
+            var height = GetValue$2j(config, 'height', 0);
+            var leftWidth = GetValue$2j(config, 'leftWidth', 0);
+            var rightWidth = GetValue$2j(config, 'rightWidth', 0);
+            var topHeight = GetValue$2j(config, 'topHeight', 0);
+            var bottomHeight = GetValue$2j(config, 'bottomHeight', 0);
             super(scene, x, y, key, frame, width, height, leftWidth, rightWidth, topHeight, bottomHeight);
             this.type = 'rexStatesNineSlice';
 
-            var effectConfig = GetValue$27(config, 'effects', true);
+            var effectConfig = GetValue$2j(config, 'effects', true);
             if (effectConfig) {
                 AddEffectProperties(this, effectConfig);
             }
@@ -51690,7 +51690,7 @@ void main () {
         }
     };
 
-    const GetValue$26 = Phaser.Utils.Objects.GetValue;
+    const GetValue$2i = Phaser.Utils.Objects.GetValue;
 
     class StatesNinePatch extends NinePatch$1 {
         constructor(scene, config) {
@@ -51701,7 +51701,7 @@ void main () {
             super(scene, config);
             this.type = 'rexStatesNinePatch';
 
-            var effectConfig = GetValue$26(config, 'effects', true);
+            var effectConfig = GetValue$2i(config, 'effects', true);
             if (effectConfig) {
                 AddEffectProperties(this, effectConfig);
             }
@@ -51729,7 +51729,7 @@ void main () {
     SetValue(window, 'RexPlugins.UI.StatesNinePatch', StatesNinePatch);
 
     const PhaserText = Phaser.GameObjects.Text;
-    const GetValue$25 = Phaser.Utils.Objects.GetValue;
+    const GetValue$2h = Phaser.Utils.Objects.GetValue;
 
     class StatesText extends PhaserText {
         constructor(scene, config) {
@@ -51737,9 +51737,9 @@ void main () {
                 config = {};
             }
 
-            var x = GetValue$25(config, 'x', 0);
-            var y = GetValue$25(config, 'y', 0);
-            var text = GetValue$25(config, 'text', '');
+            var x = GetValue$2h(config, 'x', 0);
+            var y = GetValue$2h(config, 'y', 0);
+            var text = GetValue$2h(config, 'text', '');
             super(scene, x, y, text, config);
             this.type = 'rexStatesText';
 
@@ -51840,7 +51840,7 @@ void main () {
     }
 
     const PhaserBitmapText = Phaser.GameObjects.BitmapText;
-    const GetValue$24 = Phaser.Utils.Objects.GetValue;
+    const GetValue$2g = Phaser.Utils.Objects.GetValue;
 
     class StatesBitmapText extends PhaserBitmapText {
         constructor(scene, config) {
@@ -51848,12 +51848,12 @@ void main () {
                 config = {};
             }
 
-            var x = GetValue$24(config, 'x', 0);
-            var y = GetValue$24(config, 'y', 0);
-            var font = GetValue$24(config, 'font', '');
-            var size = GetValue$24(config, 'fontSize', false);
-            var align = GetValue$24(config, 'align', 0);
-            var tint = GetValue$24(config, 'tint');
+            var x = GetValue$2g(config, 'x', 0);
+            var y = GetValue$2g(config, 'y', 0);
+            var font = GetValue$2g(config, 'font', '');
+            var size = GetValue$2g(config, 'fontSize', false);
+            var align = GetValue$2g(config, 'align', 0);
+            var tint = GetValue$2g(config, 'tint');
             super(scene, x, y, font, '', size, align);
             this.type = 'rexStatesBitmapText';
 
@@ -51861,7 +51861,7 @@ void main () {
                 this.setTint(tint);
             }
 
-            var effectConfig = GetValue$24(config, 'effects', true);
+            var effectConfig = GetValue$2g(config, 'effects', true);
             if (effectConfig) {
                 AddEffectProperties(this, effectConfig);
             }
@@ -52558,7 +52558,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
     };
 
     const IsPlainObject$i = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$23 = Phaser.Utils.Objects.GetValue;
+    const GetValue$2f = Phaser.Utils.Objects.GetValue;
     const ALIGN_CENTER$1 = Phaser.Display.Align.CENTER;
 
 
@@ -52614,17 +52614,17 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         AddChild$1.call(this, gameObject);
         if (IsPlainObject$i(columnIndex)) {
             var config = columnIndex;
-            columnIndex = GetValue$23(config, 'column', undefined);
-            rowIndex = GetValue$23(config, 'row', undefined);
-            align = GetValue$23(config, 'align', ALIGN_CENTER$1);
-            paddingConfig = GetValue$23(config, 'padding', 0);
-            expand = GetValue$23(config, 'expand', false);
-            childKey = GetValue$23(config, 'key', undefined);
+            columnIndex = GetValue$2f(config, 'column', undefined);
+            rowIndex = GetValue$2f(config, 'row', undefined);
+            align = GetValue$2f(config, 'align', ALIGN_CENTER$1);
+            paddingConfig = GetValue$2f(config, 'padding', 0);
+            expand = GetValue$2f(config, 'expand', false);
+            childKey = GetValue$2f(config, 'key', undefined);
 
-            offsetX = GetValue$23(config, 'offsetX', 0);
-            offsetY = GetValue$23(config, 'offsetY', 0);
-            offsetOriginX = GetValue$23(config, 'offsetOriginX', 0);
-            offsetOriginY = GetValue$23(config, 'offsetOriginY', 0);
+            offsetX = GetValue$2f(config, 'offsetX', 0);
+            offsetY = GetValue$2f(config, 'offsetY', 0);
+            offsetOriginX = GetValue$2f(config, 'offsetOriginX', 0);
+            offsetOriginY = GetValue$2f(config, 'offsetOriginY', 0);
         }
 
         // Get insert index
@@ -52676,8 +52676,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         config.padding = GetBoundsConfig$1(paddingConfig);
 
         if (IsPlainObject$i(expand)) {
-            config.expandWidth = GetValue$23(expand, 'width', false);
-            config.expandHeight = GetValue$23(expand, 'height', false);
+            config.expandWidth = GetValue$2f(expand, 'width', false);
+            config.expandHeight = GetValue$2f(expand, 'height', false);
         } else {
             config.expandWidth = expand;
             config.expandHeight = expand;
@@ -52806,7 +52806,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
     };
 
-    const GetValue$22 = Phaser.Utils.Objects.GetValue;
+    const GetValue$2e = Phaser.Utils.Objects.GetValue;
 
     var ResetGrid = function (
         columnCount, rowCount,
@@ -52854,8 +52854,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         this.rowHeight.length = rowCount;
 
         // space
-        this.setColumnSpace(GetValue$22(space, 'column', 0));
-        this.setRowSpace(GetValue$22(space, 'row', 0));
+        this.setColumnSpace(GetValue$2e(space, 'column', 0));
+        this.setRowSpace(GetValue$2e(space, 'row', 0));
 
         var scene = this.scene;
         var createCellContainerCallback = this.createCellContainerCallback;
@@ -52994,59 +52994,59 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
     };
 
     const IsPlainObject$h = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$21 = Phaser.Utils.Objects.GetValue;
+    const GetValue$2d = Phaser.Utils.Objects.GetValue;
 
     class GridSizer extends Base$1 {
         constructor(scene, x, y, minWidth, minHeight, columnCount, rowCount, columnProportions, rowProportions, config) {
             if (IsPlainObject$h(x)) {
                 config = x;
-                x = GetValue$21(config, 'x', 0);
-                y = GetValue$21(config, 'y', 0);
-                minWidth = GetValue$21(config, 'width', undefined);
-                minHeight = GetValue$21(config, 'height', undefined);
-                columnCount = GetValue$21(config, 'column', (config.col || 0));
-                rowCount = GetValue$21(config, 'row', 0);
-                columnProportions = GetValue$21(config, 'columnProportions', 0);
-                rowProportions = GetValue$21(config, 'rowProportions', 0);
+                x = GetValue$2d(config, 'x', 0);
+                y = GetValue$2d(config, 'y', 0);
+                minWidth = GetValue$2d(config, 'width', undefined);
+                minHeight = GetValue$2d(config, 'height', undefined);
+                columnCount = GetValue$2d(config, 'column', (config.col || 0));
+                rowCount = GetValue$2d(config, 'row', 0);
+                columnProportions = GetValue$2d(config, 'columnProportions', 0);
+                rowProportions = GetValue$2d(config, 'rowProportions', 0);
             } else if (IsPlainObject$h(minWidth)) {
                 config = minWidth;
-                minWidth = GetValue$21(config, 'width', undefined);
-                minHeight = GetValue$21(config, 'height', undefined);
-                columnCount = GetValue$21(config, 'column', (config.col || 0));
-                rowCount = GetValue$21(config, 'row', 0);
-                columnProportions = GetValue$21(config, 'columnProportions', 0);
-                rowProportions = GetValue$21(config, 'rowProportions', 0);
+                minWidth = GetValue$2d(config, 'width', undefined);
+                minHeight = GetValue$2d(config, 'height', undefined);
+                columnCount = GetValue$2d(config, 'column', (config.col || 0));
+                rowCount = GetValue$2d(config, 'row', 0);
+                columnProportions = GetValue$2d(config, 'columnProportions', 0);
+                rowProportions = GetValue$2d(config, 'rowProportions', 0);
             } else if (IsPlainObject$h(columnCount)) {
                 config = columnCount;
-                columnCount = GetValue$21(config, 'column', (config.col || 0));
-                rowCount = GetValue$21(config, 'row', 0);
-                columnProportions = GetValue$21(config, 'columnProportions', 0);
-                rowProportions = GetValue$21(config, 'rowProportions', 0);
+                columnCount = GetValue$2d(config, 'column', (config.col || 0));
+                rowCount = GetValue$2d(config, 'row', 0);
+                columnProportions = GetValue$2d(config, 'columnProportions', 0);
+                rowProportions = GetValue$2d(config, 'rowProportions', 0);
             } else if (IsPlainObject$h(columnProportions)) {
                 config = columnProportions;
-                columnProportions = GetValue$21(config, 'columnProportions', 0);
-                rowProportions = GetValue$21(config, 'rowProportions', 0);
+                columnProportions = GetValue$2d(config, 'columnProportions', 0);
+                rowProportions = GetValue$2d(config, 'rowProportions', 0);
             }
             super(scene, x, y, minWidth, minHeight, config);
 
             this.type = 'rexGridSizer';
             this.sizerChildren = [];
             this.addChildrenMap('items', this.sizerChildren);
-            this.setCreateCellContainerCallback(GetValue$21(config, 'createCellContainerCallback'));
+            this.setCreateCellContainerCallback(GetValue$2d(config, 'createCellContainerCallback'));
 
             this.setIndentLeft(
-                GetValue$21(config, 'space.indentLeftOdd', 0),
-                GetValue$21(config, 'space.indentLeftEven', 0)
+                GetValue$2d(config, 'space.indentLeftOdd', 0),
+                GetValue$2d(config, 'space.indentLeftEven', 0)
             );
             this.setIndentTop(
-                GetValue$21(config, 'space.indentTopOdd', 0),
-                GetValue$21(config, 'space.indentTopEven', 0)
+                GetValue$2d(config, 'space.indentTopOdd', 0),
+                GetValue$2d(config, 'space.indentTopEven', 0)
             );
 
             this.resetGrid(
                 columnCount, rowCount,
                 columnProportions, rowProportions,
-                GetValue$21(config, 'space', undefined)
+                GetValue$2d(config, 'space', undefined)
             );
 
         }
@@ -53607,7 +53607,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
     };
 
     const IsPlainObject$g = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$20 = Phaser.Utils.Objects.GetValue;
+    const GetValue$2c = Phaser.Utils.Objects.GetValue;
     const ALIGN_CENTER = Phaser.Display.Align.CENTER;
 
     var Add$3 = function (gameObject, paddingConfig, childKey, index) {
@@ -53623,14 +53623,14 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
         if (IsPlainObject$g(paddingConfig)) {
             var config = paddingConfig;
-            paddingConfig = GetValue$20(config, 'padding', 0);
-            childKey = GetValue$20(config, 'key', undefined);
-            index = GetValue$20(config, 'index', undefined);
+            paddingConfig = GetValue$2c(config, 'padding', 0);
+            childKey = GetValue$2c(config, 'key', undefined);
+            index = GetValue$2c(config, 'index', undefined);
 
-            offsetX = GetValue$20(config, 'offsetX', 0);
-            offsetY = GetValue$20(config, 'offsetY', 0);
-            offsetOriginX = GetValue$20(config, 'offsetOriginX', 0);
-            offsetOriginY = GetValue$20(config, 'offsetOriginY', 0);
+            offsetX = GetValue$2c(config, 'offsetX', 0);
+            offsetY = GetValue$2c(config, 'offsetY', 0);
+            offsetOriginX = GetValue$2c(config, 'offsetOriginX', 0);
+            offsetOriginY = GetValue$2c(config, 'offsetOriginY', 0);
         }
         if (paddingConfig === undefined) {
             paddingConfig = 0;
@@ -53817,20 +53817,20 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
     };
 
     const IsPlainObject$f = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$1$ = Phaser.Utils.Objects.GetValue;
+    const GetValue$2b = Phaser.Utils.Objects.GetValue;
 
     class FixWidthSizer extends Base$1 {
         constructor(scene, x, y, minWidth, minHeight, config) {
             if (IsPlainObject$f(x)) {
                 config = x;
-                x = GetValue$1$(config, 'x', 0);
-                y = GetValue$1$(config, 'y', 0);
-                minWidth = GetValue$1$(config, 'width', undefined);
-                minHeight = GetValue$1$(config, 'height', undefined);
+                x = GetValue$2b(config, 'x', 0);
+                y = GetValue$2b(config, 'y', 0);
+                minWidth = GetValue$2b(config, 'width', undefined);
+                minHeight = GetValue$2b(config, 'height', undefined);
             } else if (IsPlainObject$f(minWidth)) {
                 config = minWidth;
-                minWidth = GetValue$1$(config, 'width', undefined);
-                minHeight = GetValue$1$(config, 'height', undefined);
+                minWidth = GetValue$2b(config, 'width', undefined);
+                minHeight = GetValue$2b(config, 'height', undefined);
             }
 
             super(scene, x, y, minWidth, minHeight, config);
@@ -53839,20 +53839,20 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
             this.runChildrenWrapFlag = true;
 
-            this.setOrientation(GetValue$1$(config, 'orientation', 0));
-            this.setItemSpacing(GetValue$1$(config, 'space.item', 0));
-            this.setLineSpacing(GetValue$1$(config, 'space.line', 0));
+            this.setOrientation(GetValue$2b(config, 'orientation', 0));
+            this.setItemSpacing(GetValue$2b(config, 'space.item', 0));
+            this.setLineSpacing(GetValue$2b(config, 'space.line', 0));
             this.setIntentLeft(
-                GetValue$1$(config, 'space.indentLeftOdd', 0),
-                GetValue$1$(config, 'space.indentLeftEven', 0)
+                GetValue$2b(config, 'space.indentLeftOdd', 0),
+                GetValue$2b(config, 'space.indentLeftEven', 0)
             );
             this.setIntentTop(
-                GetValue$1$(config, 'space.indentTopOdd', 0),
-                GetValue$1$(config, 'space.indentTopEven', 0)
+                GetValue$2b(config, 'space.indentTopOdd', 0),
+                GetValue$2b(config, 'space.indentTopEven', 0)
             );
-            this.setAlign(GetValue$1$(config, 'align', 0));
-            this.setJustifyPercentage(GetValue$1$(config, 'justifyPercentage', 0.25));
-            this.setRTL(GetValue$1$(config, 'rtl', false));
+            this.setAlign(GetValue$2b(config, 'align', 0));
+            this.setJustifyPercentage(GetValue$2b(config, 'justifyPercentage', 0.25));
+            this.setRTL(GetValue$2b(config, 'rtl', false));
 
             this.wrapResult = undefined;  // {lines, width, height}
 
@@ -54348,7 +54348,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     };
 
-    const Clamp$8 = Phaser.Math.Clamp;
+    const Clamp$9 = Phaser.Math.Clamp;
 
     var ChildPositionMethods = {
         setChildOY(value, clamp) {
@@ -54356,7 +54356,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 clamp = false;
             }
             if (clamp) {
-                value = Clamp$8(value, this.bottomChildOY, this.topChildOY);
+                value = Clamp$9(value, this.bottomChildOY, this.topChildOY);
             }
             this.childOY = value;
             return this;
@@ -54372,7 +54372,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 clamp = false;
             }
             if (clamp) {
-                value = Clamp$8(value, 0, 1);
+                value = Clamp$9(value, 0, 1);
             }
             this.t = value;
             return this;
@@ -54408,7 +54408,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 clamp = false;
             }
             if (clamp) {
-                value = Clamp$8(value, this.leftChildOX, this.rightChildOX);
+                value = Clamp$9(value, this.leftChildOX, this.rightChildOX);
             }
             this.childOX = value;
             return this;
@@ -54424,7 +54424,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 clamp = false;
             }
             if (clamp) {
-                value = Clamp$8(value, 0, 1);
+                value = Clamp$9(value, 0, 1);
             }
             this.s = value;
             return this;
@@ -54457,7 +54457,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     };
 
-    var Methods$8 = {
+    var Methods$9 = {
         addHeader: AddHeader,
         addFooter: AddFooter,
         resizeController: ResizeController,
@@ -54465,7 +54465,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
     };
 
     Object.assign(
-        Methods$8,
+        Methods$9,
         ChildPositionMethods
     );
 
@@ -54515,13 +54515,13 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return scrollMode;
     };
 
-    const GetValue$1_ = Phaser.Utils.Objects.GetValue;
+    const GetValue$2a = Phaser.Utils.Objects.GetValue;
 
     var AddChild = function (topPatent, childParent, config) {
-        var childConfig = GetValue$1_(config, 'child');
-        var child = GetValue$1_(childConfig, 'gameObject', undefined);
+        var childConfig = GetValue$2a(config, 'child');
+        var child = GetValue$2a(childConfig, 'gameObject', undefined);
         if (child) {
-            var childSpace = GetValue$1_(config, 'space.child', 0);
+            var childSpace = GetValue$2a(config, 'space.child', 0);
             topPatent.childMargin = {};
             var childMargin = topPatent.childMargin;
             var childPadding = {};
@@ -54547,26 +54547,26 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             } else {
                 switch (topPatent.scrollMode) {
                     case 0:
-                        childMargin.top = GetValue$1_(childSpace, 'top', 0);
-                        childMargin.bottom = GetValue$1_(childSpace, 'bottom', 0);
+                        childMargin.top = GetValue$2a(childSpace, 'top', 0);
+                        childMargin.bottom = GetValue$2a(childSpace, 'bottom', 0);
 
-                        childPadding.left = GetValue$1_(childSpace, 'left', 0);
-                        childPadding.right = GetValue$1_(childSpace, 'right', 0);
+                        childPadding.left = GetValue$2a(childSpace, 'left', 0);
+                        childPadding.right = GetValue$2a(childSpace, 'right', 0);
                         break;
 
                     case 1:
-                        childMargin.top = GetValue$1_(childSpace, 'left', 0);
-                        childMargin.bottom = GetValue$1_(childSpace, 'right', 0);
+                        childMargin.top = GetValue$2a(childSpace, 'left', 0);
+                        childMargin.bottom = GetValue$2a(childSpace, 'right', 0);
 
-                        childPadding.top = GetValue$1_(childSpace, 'top', 0);
-                        childPadding.bottom = GetValue$1_(childSpace, 'bottom', 0);
+                        childPadding.top = GetValue$2a(childSpace, 'top', 0);
+                        childPadding.bottom = GetValue$2a(childSpace, 'bottom', 0);
                         break;
 
                     default: // 2
-                        childMargin.top = GetValue$1_(childSpace, 'top', 0);
-                        childMargin.bottom = GetValue$1_(childSpace, 'bottom', 0);
-                        childMargin.left = GetValue$1_(childSpace, 'left', 0);
-                        childMargin.right = GetValue$1_(childSpace, 'right', 0);
+                        childMargin.top = GetValue$2a(childSpace, 'top', 0);
+                        childMargin.bottom = GetValue$2a(childSpace, 'bottom', 0);
+                        childMargin.left = GetValue$2a(childSpace, 'left', 0);
+                        childMargin.right = GetValue$2a(childSpace, 'right', 0);
                         break;
 
                 }
@@ -54576,11 +54576,11 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 {
                     column: 1,
                     row: 1,
-                    align: GetValue$1_(childConfig, 'align', 'center'),
+                    align: GetValue$2a(childConfig, 'align', 'center'),
                     padding: childPadding,
                     expand: {
-                        width: GetValue$1_(childConfig, 'expandWidth', true),  // Private
-                        height: GetValue$1_(childConfig, 'expandHeight', true) // Private
+                        width: GetValue$2a(childConfig, 'expandWidth', true),  // Private
+                        height: GetValue$2a(childConfig, 'expandHeight', true) // Private
                     }
                 }
             );
@@ -54643,12 +54643,12 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
     };
 
-    const GetValue$1Z = Phaser.Utils.Objects.GetValue;
+    const GetValue$29 = Phaser.Utils.Objects.GetValue;
 
     var RegisterInputEvents = function (config) {
         this.inputActive = false;
 
-        var inputMode = GetValue$1Z(config, 'input', 0);
+        var inputMode = GetValue$29(config, 'input', 0);
         if (typeof (inputMode) === 'string') {
             inputMode = INPUTMODE[inputMode];
         }
@@ -54881,9 +54881,9 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         this.resetChildPositionState(indicator);
     };
 
-    const GetValue$1Y = Phaser.Utils.Objects.GetValue;
+    const GetValue$28 = Phaser.Utils.Objects.GetValue;
     const IsPlainObject$e = Phaser.Utils.Objects.IsPlainObject;
-    const Clamp$7 = Phaser.Math.Clamp;
+    const Clamp$8 = Phaser.Math.Clamp;
     const SnapTo$2 = Phaser.Math.Snap.To;
 
     class Slider extends ProgressBase(Sizer) {
@@ -54894,13 +54894,13 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
             this.bootProgressBase(config);
 
-            this.reverseAxis = GetValue$1Y(config, 'reverseAxis', false);
+            this.reverseAxis = GetValue$28(config, 'reverseAxis', false);
 
             // Add elements
-            var background = GetValue$1Y(config, 'background', undefined);
-            var track = GetValue$1Y(config, 'track', undefined);
-            var indicator = GetValue$1Y(config, 'indicator', undefined);
-            var thumb = GetValue$1Y(config, 'thumb', undefined);
+            var background = GetValue$28(config, 'background', undefined);
+            var track = GetValue$28(config, 'track', undefined);
+            var indicator = GetValue$28(config, 'indicator', undefined);
+            var thumb = GetValue$28(config, 'thumb', undefined);
 
             if (background) {
                 if (IsPlainObject$e(background)) {
@@ -54936,8 +54936,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 }
                 this.pin(thumb); // Put into container but not layout it
 
-                var thumbOffsetX = GetValue$1Y(config, 'thumbOffsetX', 0);
-                var thumbOffsetY = GetValue$1Y(config, 'thumbOffsetY', 0);
+                var thumbOffsetX = GetValue$28(config, 'thumbOffsetX', 0);
+                var thumbOffsetY = GetValue$28(config, 'thumbOffsetY', 0);
                 this.setThumbOffset(thumbOffsetX, thumbOffsetY);
             }
 
@@ -54946,18 +54946,18 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this.addChildrenMap('indicator', indicator);
             this.addChildrenMap('thumb', thumb);
 
-            this.setEnable(GetValue$1Y(config, 'enable', undefined));
+            this.setEnable(GetValue$28(config, 'enable', undefined));
 
-            var gap = GetValue$1Y(config, 'tick', undefined);
+            var gap = GetValue$28(config, 'tick', undefined);
             if (gap === undefined) {
-                gap = GetValue$1Y(config, 'gap', undefined);
+                gap = GetValue$28(config, 'gap', undefined);
             }
             this.setGap(gap);
 
             // Input
             RegisterInputEvents.call(this, config);
 
-            this.setValue(GetValue$1Y(config, 'value', 0), GetValue$1Y(config, 'min', undefined), GetValue$1Y(config, 'max', undefined));
+            this.setValue(GetValue$28(config, 'value', 0), GetValue$28(config, 'min', undefined), GetValue$28(config, 'max', undefined));
 
         }
 
@@ -55008,7 +55008,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 value = SnapTo$2(value, this.gap);
             }
             var oldValue = this._value;
-            this._value = Clamp$7(value, 0, 1);
+            this._value = Clamp$8(value, 0, 1);
 
             if (oldValue !== this._value) {
                 this.updateThumb(this._value);
@@ -55037,7 +55037,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         methods$i,
     );
 
-    const GetValue$1X = Phaser.Utils.Objects.GetValue;
+    const GetValue$27 = Phaser.Utils.Objects.GetValue;
 
     class ScrollBar extends Sizer {
         constructor(scene, config) {
@@ -55046,14 +55046,14 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this.type = 'rexScrollBar';
 
             // Add elements
-            var background = GetValue$1X(config, 'background', undefined);
+            var background = GetValue$27(config, 'background', undefined);
 
-            var buttonsConfig = GetValue$1X(config, 'buttons', undefined);
-            var button0 = GetValue$1X(buttonsConfig, 'top', GetValue$1X(buttonsConfig, 'left', undefined));
-            var button1 = GetValue$1X(buttonsConfig, 'bottom', GetValue$1X(buttonsConfig, 'right', undefined));
+            var buttonsConfig = GetValue$27(config, 'buttons', undefined);
+            var button0 = GetValue$27(buttonsConfig, 'top', GetValue$27(buttonsConfig, 'left', undefined));
+            var button1 = GetValue$27(buttonsConfig, 'bottom', GetValue$27(buttonsConfig, 'right', undefined));
 
             var slider,
-                sliderConfig = GetValue$1X(config, 'slider', undefined);
+                sliderConfig = GetValue$27(config, 'slider', undefined);
 
             if (background) {
                 this.addBackground(background);
@@ -55080,10 +55080,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
                 var proportion;
                 if (this.orientation === 0) {
-                    var sliderWidth = GetValue$1X(sliderConfig, 'width', undefined);
+                    var sliderWidth = GetValue$27(sliderConfig, 'width', undefined);
                     proportion = (sliderWidth === undefined) ? 1 : 0;
                 } else {
-                    var sliderHeight = GetValue$1X(sliderConfig, 'height', undefined);
+                    var sliderHeight = GetValue$27(sliderConfig, 'height', undefined);
                     proportion = (sliderHeight === undefined) ? 1 : 0;
                 }
 
@@ -55117,14 +55117,14 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this.addChildrenMap('slider', slider);
             this.addChildrenMap('buttons', buttons);
 
-            var callback = GetValue$1X(config, 'valuechangeCallback', null);
+            var callback = GetValue$27(config, 'valuechangeCallback', null);
             if (callback !== null) {
-                var scope = GetValue$1X(config, 'valuechangeCallbackScope', undefined);
+                var scope = GetValue$27(config, 'valuechangeCallbackScope', undefined);
                 this.on('valuechange', callback, scope);
             }
-            this.setEnable(GetValue$1X(config, 'enable', undefined));
-            this.setValue(GetValue$1X(config, 'value', 0));
-            this.setScrollStep(GetValue$1X(buttonsConfig, 'step', 0.01));
+            this.setEnable(GetValue$27(config, 'enable', undefined));
+            this.setValue(GetValue$27(config, 'value', 0));
+            this.setScrollStep(GetValue$27(buttonsConfig, 'step', 0.01));
         }
 
         setScrollStep(value) {
@@ -55525,7 +55525,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         // BACK
     }
 
-    const GetValue$1W = Phaser.Utils.Objects.GetValue;
+    const GetValue$26 = Phaser.Utils.Objects.GetValue;
     const DistanceBetween$1 = Phaser.Math.Distance.Between;
 
     class DragSpeed extends ComponentBase {
@@ -55535,10 +55535,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
             this._enable = undefined;
 
-            this.rectBoundsInteractive = GetValue$1W(config, 'rectBoundsInteractive', false);
+            this.rectBoundsInteractive = GetValue$26(config, 'rectBoundsInteractive', false);
 
             if (!this.rectBoundsInteractive) {
-                gameObject.setInteractive(GetValue$1W(config, "inputConfig", undefined));
+                gameObject.setInteractive(GetValue$26(config, "inputConfig", undefined));
             }
 
             this.resetFromJSON(config);
@@ -55556,9 +55556,9 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this.localX = undefined;
             this.localY = undefined;
             this.justMoved = false;
-            this.setEnable(GetValue$1W(o, 'enable', true));
-            this.holdThreshold = GetValue$1W(o, 'holdThreshold', 50); // ms
-            this.pointerOutReleaseEnable = GetValue$1W(o, 'pointerOutRelease', true);
+            this.setEnable(GetValue$26(o, 'enable', true));
+            this.holdThreshold = GetValue$26(o, 'holdThreshold', 50); // ms
+            this.pointerOutReleaseEnable = GetValue$26(o, 'pointerOutRelease', true);
             return this;
         }
 
@@ -55785,7 +55785,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
     }
 
-    const GetValue$1V = Phaser.Utils.Objects.GetValue;
+    const GetValue$25 = Phaser.Utils.Objects.GetValue;
 
     class Movement {
         constructor(config) {
@@ -55793,9 +55793,9 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
 
         resetFromJSON(o) {
-            this.setValue(GetValue$1V(o, 'value', 0));
-            this.setSpeed(GetValue$1V(o, 'speed', 0));
-            this.setAcceleration(GetValue$1V(o, 'acceleration', 0));
+            this.setValue(GetValue$25(o, 'value', 0));
+            this.setSpeed(GetValue$25(o, 'speed', 0));
+            this.setAcceleration(GetValue$25(o, 'acceleration', 0));
             return this;
         }
 
@@ -55920,25 +55920,25 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
     }
 
-    const GetValue$1U = Phaser.Utils.Objects.GetValue;
-    const Clamp$6 = Phaser.Math.Clamp;
+    const GetValue$24 = Phaser.Utils.Objects.GetValue;
+    const Clamp$7 = Phaser.Math.Clamp;
 
     class Scroller extends ComponentBase {
         constructor(gameObject, config) {
             super(gameObject, config);
             // this.parent = gameObject;
 
-            var enable = GetValue$1U(config, 'enable', true);
+            var enable = GetValue$24(config, 'enable', true);
             this._state = new State(this, {
                 enable: enable,
                 eventEmitter: false,
             });
 
             var drapSpeedConfig = {
-                rectBoundsInteractive: GetValue$1U(config, 'rectBoundsInteractive', false),
-                inputConfig: GetValue$1U(config, 'inputConfig', undefined),
+                rectBoundsInteractive: GetValue$24(config, 'rectBoundsInteractive', false),
+                inputConfig: GetValue$24(config, 'inputConfig', undefined),
                 enable: enable,
-                pointerOutRelease: GetValue$1U(config, 'pointerOutRelease', true),
+                pointerOutRelease: GetValue$24(config, 'pointerOutRelease', true),
                 eventEmitter: false,
             };
             this.dragState = new DragSpeed(gameObject, drapSpeedConfig);
@@ -55947,21 +55947,21 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this._value = undefined;
             this._slowDown = new SlowDown();
 
-            this.setSnapStep(GetValue$1U(config, 'snapStep', undefined));
+            this.setSnapStep(GetValue$24(config, 'snapStep', undefined));
 
-            var callback = GetValue$1U(config, 'valuechangeCallback', null);
+            var callback = GetValue$24(config, 'valuechangeCallback', null);
             if (callback !== null) {
-                var scope = GetValue$1U(config, 'valuechangeCallbackScope', undefined);
+                var scope = GetValue$24(config, 'valuechangeCallbackScope', undefined);
                 this.on('valuechange', callback, scope);
             }
-            callback = GetValue$1U(config, 'overmaxCallback', null);
+            callback = GetValue$24(config, 'overmaxCallback', null);
             if (callback !== null) {
-                var scope = GetValue$1U(config, 'overmaxCallbackScope', undefined);
+                var scope = GetValue$24(config, 'overmaxCallbackScope', undefined);
                 this.on('overmax', callback, scope);
             }
-            callback = GetValue$1U(config, 'overminCallback', null);
+            callback = GetValue$24(config, 'overminCallback', null);
             if (callback !== null) {
-                var scope = GetValue$1U(config, 'overminCallbackScope', undefined);
+                var scope = GetValue$24(config, 'overminCallbackScope', undefined);
                 this.on('overmin', callback, scope);
             }
 
@@ -55970,23 +55970,23 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
 
         resetFromJSON(o) {
-            this.setOrientationMode(GetValue$1U(o, 'orientation', 0));
-            this.setDragThreshold(GetValue$1U(o, 'threshold', 10));
-            this.setSlidingDeceleration(GetValue$1U(o, 'slidingDeceleration', 5000));
-            this.setBackDeceleration(GetValue$1U(o, 'backDeceleration', 2000));
+            this.setOrientationMode(GetValue$24(o, 'orientation', 0));
+            this.setDragThreshold(GetValue$24(o, 'threshold', 10));
+            this.setSlidingDeceleration(GetValue$24(o, 'slidingDeceleration', 5000));
+            this.setBackDeceleration(GetValue$24(o, 'backDeceleration', 2000));
 
-            var dragRate = GetValue$1U(o, 'dragRate', 1);
-            dragRate = dragRate * (GetValue$1U(o, 'dragReverse', false) ? -1 : 1);
+            var dragRate = GetValue$24(o, 'dragRate', 1);
+            dragRate = dragRate * (GetValue$24(o, 'dragReverse', false) ? -1 : 1);
             this.setDragRate(dragRate);
 
-            var bounds = GetValue$1U(o, 'bounds', undefined);
+            var bounds = GetValue$24(o, 'bounds', undefined);
             if (bounds) {
                 this.setBounds(bounds);
             } else {
-                this.setBounds(GetValue$1U(o, 'max', 0), GetValue$1U(o, 'min', 0));
+                this.setBounds(GetValue$24(o, 'max', 0), GetValue$24(o, 'min', 0));
             }
-            this.setValue(GetValue$1U(o, 'value', this.maxValue || 0));
-            this.setEnable(GetValue$1U(o, "enable", true));
+            this.setValue(GetValue$24(o, 'value', this.maxValue || 0));
+            this.setEnable(GetValue$24(o, "enable", true));
             return this;
         }
 
@@ -56125,7 +56125,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             }
 
             if (clamp) {
-                value = Clamp$6(value, this.minValue, this.maxValue);
+                value = Clamp$7(value, this.minValue, this.maxValue);
             }
 
             this.value = value;
@@ -56218,7 +56218,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         horizontal: 1,
     };
 
-    const GetValue$1T = Phaser.Utils.Objects.GetValue;
+    const GetValue$23 = Phaser.Utils.Objects.GetValue;
 
     class MouseWheelScroller extends ComponentBase {
         constructor(gameObject, config) {
@@ -56226,7 +56226,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             // this.parent = gameObject;
 
             if (this.parent !== this.scene) {
-                this.focusMode = GetValue$1T(config, 'focus', true);
+                this.focusMode = GetValue$23(config, 'focus', true);
             } else {
                 this.focusMode = false;
             }
@@ -56235,8 +56235,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 this.focusMode = (this.focusMode) ? 1 : 0;
             }
 
-            this.setSpeed(GetValue$1T(config, 'speed', 0.1));
-            this.setEnable(GetValue$1T(config, 'enable', true));
+            this.setSpeed(GetValue$23(config, 'speed', 0.1));
+            this.setEnable(GetValue$23(config, 'enable', true));
 
             switch (this.focusMode) {
                 case 0:
@@ -56246,7 +56246,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
                 default:  // case 1
                     gameObject
-                        .setInteractive(GetValue$1T(config, "inputConfig", undefined))
+                        .setInteractive(GetValue$23(config, "inputConfig", undefined))
                         .on('wheel', function (pointer, dx, dy, dz, event) {
                             this.tryScroll(dy);
                         }, this);
@@ -56302,7 +56302,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
     }
 
-    const GetValue$1S = Phaser.Utils.Objects.GetValue;
+    const GetValue$22 = Phaser.Utils.Objects.GetValue;
     const SnapTo = Phaser.Math.Snap.To;
 
     var AddSlider = function (topPatent, sliderParent, axis, config) {
@@ -56314,11 +56314,11 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         var snapStep;
         var snapStepKey = `snapStep${axis}`;
         if (isScrollXYMode) {
-            snapStep = GetValue$1S(config, snapStepKey, undefined);
+            snapStep = GetValue$22(config, snapStepKey, undefined);
         } else {
-            var snapStep = GetValue$1S(config, 'snapStep', undefined);
+            var snapStep = GetValue$22(config, 'snapStep', undefined);
             if (snapStep === undefined) {
-                snapStep = GetValue$1S(config, snapStepKey, undefined);
+                snapStep = GetValue$22(config, snapStepKey, undefined);
             }
         }
         topPatent[snapStepKey] = snapStep;
@@ -56326,12 +56326,12 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         var sliderConfig, slider;
         var sliderConfigKey = `slider${axis}`;
         if (isScrollXYMode) {
-            sliderConfig = GetValue$1S(config, sliderConfigKey, undefined);
+            sliderConfig = GetValue$22(config, sliderConfigKey, undefined);
         } else {
             if (config.hasOwnProperty(sliderConfigKey)) {
-                sliderConfig = GetValue$1S(config, sliderConfigKey, undefined);
+                sliderConfig = GetValue$22(config, sliderConfigKey, undefined);
             } else {
-                sliderConfig = GetValue$1S(config, 'slider', undefined);
+                sliderConfig = GetValue$22(config, 'slider', undefined);
             }
         }
 
@@ -56345,7 +56345,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
             var column, row, padding;
 
-            var sliderPosition = GetValue$1S(sliderConfig, 'position', 0);
+            var sliderPosition = GetValue$22(sliderConfig, 'position', 0);
             if (typeof (sliderPosition) === 'string') {
                 sliderPosition = SLIDER_POSITION_MAP[sliderPosition];
             }
@@ -56355,15 +56355,15 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             2. space.slider
             3. space.child
             */
-            var sliderPadding = GetValue$1S(config, `space.slider${axis}`, undefined);
+            var sliderPadding = GetValue$22(config, `space.slider${axis}`, undefined);
             var childPadding;  // Legacy
             if (sliderPadding === undefined) {
-                sliderPadding = GetValue$1S(config, 'space.slider', undefined);
+                sliderPadding = GetValue$22(config, 'space.slider', undefined);
                 if (sliderPadding === undefined) {
                     if (isScrollXYMode) {
                         sliderPadding = 0;
                     } else {
-                        childPadding = GetValue$1S(config, 'space.child', 0);
+                        childPadding = GetValue$22(config, 'space.child', 0);
                     }
                 }
             }
@@ -56389,7 +56389,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                         if (isNumberChildPadding) {
                             padding = { left: childPadding };
                         } else {
-                            padding = { left: GetValue$1S(childPadding, 'right', 0) };
+                            padding = { left: GetValue$22(childPadding, 'right', 0) };
                         }
                     }
 
@@ -56403,7 +56403,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                         if (isNumberChildPadding) {
                             padding = { right: childPadding };
                         } else {
-                            padding = { right: GetValue$1S(childPadding, 'left', 0) };
+                            padding = { right: GetValue$22(childPadding, 'left', 0) };
                         }
                     }
                 }
@@ -56419,7 +56419,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                         if (isNumberChildPadding) {
                             padding = { top: childPadding };
                         } else {
-                            padding = { top: GetValue$1S(childPadding, 'bottom', 0) };
+                            padding = { top: GetValue$22(childPadding, 'bottom', 0) };
                         }
                     }
 
@@ -56433,7 +56433,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                         if (isNumberChildPadding) {
                             padding = { bottom: childPadding };
                         } else {
-                            padding = { bottom: GetValue$1S(childPadding, 'top', 0) };
+                            padding = { bottom: GetValue$22(childPadding, 'top', 0) };
                         }
                     }
                 }
@@ -56449,10 +56449,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 }
             );
 
-            topPatent[`hideUnscrollableSlider${axis}`] = GetValue$1S(sliderConfig, 'hideUnscrollableSlider', false);
-            topPatent[`disableUnscrollableDrag${axis}`] = GetValue$1S(sliderConfig, 'disableUnscrollableDrag', false);
-            topPatent[`adaptThumb${axis}SizeMode`] = GetValue$1S(sliderConfig, 'adaptThumbSize', false);
-            topPatent[`minThumb${axis}Size`] = GetValue$1S(sliderConfig, 'minThumbSize', undefined);
+            topPatent[`hideUnscrollableSlider${axis}`] = GetValue$22(sliderConfig, 'hideUnscrollableSlider', false);
+            topPatent[`disableUnscrollableDrag${axis}`] = GetValue$22(sliderConfig, 'disableUnscrollableDrag', false);
+            topPatent[`adaptThumb${axis}SizeMode`] = GetValue$22(sliderConfig, 'adaptThumbSize', false);
+            topPatent[`minThumb${axis}Size`] = GetValue$22(sliderConfig, 'minThumbSize', undefined);
 
         } else {
             topPatent[`hideUnscrollableSlider${axis}`] = false;
@@ -56462,7 +56462,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
 
         // 0=gameObject, 1=rectBounds
-        var scrollDetectionMode = GetValue$1S(config, 'scrollDetectionMode');
+        var scrollDetectionMode = GetValue$22(config, 'scrollDetectionMode');
         if (typeof (scrollDetectionMode) === 'string') {
             scrollDetectionMode = SCROLLDECTIONMODE_MAP[scrollDetectionMode];
         }
@@ -56470,12 +56470,12 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         var scrollerConfig, scroller;
         var scrollerConfigKey = `scroller${axis}`;
         if (isScrollXYMode) {
-            scrollerConfig = GetValue$1S(config, scrollerConfigKey, true);
+            scrollerConfig = GetValue$22(config, scrollerConfigKey, true);
         } else {
             if (config.hasOwnProperty(scrollerConfigKey)) {
-                scrollerConfig = GetValue$1S(config, scrollerConfigKey, true);
+                scrollerConfig = GetValue$22(config, scrollerConfigKey, true);
             } else {
-                scrollerConfig = GetValue$1S(config, 'scroller', true);
+                scrollerConfig = GetValue$22(config, 'scroller', true);
             }
         }
 
@@ -56503,7 +56503,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             }
         }
 
-        var mouseWheelScrollerConfig = GetValue$1S(config, ((isScrollXYMode) ? `mouseWheelScroller${axis}` : 'mouseWheelScroller'), false),
+        var mouseWheelScrollerConfig = GetValue$22(config, ((isScrollXYMode) ? `mouseWheelScroller${axis}` : 'mouseWheelScroller'), false),
             mouseWheelScroller;
         if (mouseWheelScrollerConfig && child) {
             if (scrollDetectionMode !== undefined) {
@@ -56606,23 +56606,23 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         rectBounds: 1,
     };
 
-    const GetValue$1R = Phaser.Utils.Objects.GetValue;
+    const GetValue$21 = Phaser.Utils.Objects.GetValue;
 
     var CreateScrollableSizer = function (parent, config) {
         var scene = parent.scene;
 
         var columnProportions = [0, 1, 0],
             rowProportions = [0, 1, 0];
-        var parentMinWidth = GetValue$1R(config, 'width');
-        var parentMinHeight = GetValue$1R(config, 'height');
+        var parentMinWidth = GetValue$21(config, 'width');
+        var parentMinHeight = GetValue$21(config, 'height');
         if (!parentMinWidth) {
-            var expandChildWidth = GetValue$1R(config, 'child.expandWidth', true);
+            var expandChildWidth = GetValue$21(config, 'child.expandWidth', true);
             if (!expandChildWidth) {
                 columnProportions[1] = 0;  // Calculate parent's width by child's width
             }
         }
         if (!parentMinHeight) {
-            var expandChildHeight = GetValue$1R(config, 'child.expandHeight', true);
+            var expandChildHeight = GetValue$21(config, 'child.expandHeight', true);
             if (!expandChildHeight) {
                 rowProportions[1] = 0;    // Calculate parent's height by child's height
             }
@@ -56653,7 +56653,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return scrollableSizer;
     };
 
-    const GetValue$1Q = Phaser.Utils.Objects.GetValue;
+    const GetValue$20 = Phaser.Utils.Objects.GetValue;
 
     let Scrollable$1 = class Scrollable extends Sizer {
         constructor(scene, config) {
@@ -56666,12 +56666,12 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             var isRevererXY = (scrollMode === 1);
             config.orientation = (!isRevererXY) ? 1 : 0;
             super(scene, config);
-            this.type = GetValue$1Q(config, 'type', 'rexScrollable');
+            this.type = GetValue$20(config, 'type', 'rexScrollable');
             this.scrollMode = scrollMode;
 
             // Add elements
             // Background
-            var background = GetValue$1Q(config, 'background', undefined);
+            var background = GetValue$20(config, 'background', undefined);
             if (background) {
                 this.addBackground(background);
                 this.addChildrenMap('background', background);
@@ -56688,38 +56688,19 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             );
             this.addChildrenMap('scrollableSizer', scrollableSizer);
 
-            if (footer) {
-                var align = GetValue$1Q(config, 'align.footer', 'center');
-                var footerSpace = GetValue$1Q(config, 'space.footer', 0);
-                var padding;
-                if (!isRevererXY) {
-                    padding = { top: footerSpace };
-                } else {
-                    padding = { left: footerSpace };
-                }
-                this.add(footer,
-                    {
-                        proportion: 0,
-                        align: align,
-                        padding: padding,
-                        expand: GetValue$1Q(config, 'expand.footer', true)
-                    }
-                );
-            }
-
-            var header = GetValue$1Q(config, 'header', undefined);
+            var header = GetValue$20(config, 'header', undefined);
             if (header) {
-                var headerSpace = GetValue$1Q(config, 'space.header', 0);
-                var headerAlign = GetValue$1Q(config, 'align.header', 'center');
-                var headerExpand = GetValue$1Q(config, 'expand.header', true);
+                var headerSpace = GetValue$20(config, 'space.header', 0);
+                var headerAlign = GetValue$20(config, 'align.header', 'center');
+                var headerExpand = GetValue$20(config, 'expand.header', true);
                 this.addHeader(header, headerSpace, headerAlign, headerExpand);
             }
 
-            var footer = GetValue$1Q(config, 'footer', undefined);
+            var footer = GetValue$20(config, 'footer', undefined);
             if (footer) {
-                var footerSpace = GetValue$1Q(config, 'space.footer', 0);
-                var footerAlign = GetValue$1Q(config, 'align.footer', 'center');
-                var footerExpand = GetValue$1Q(config, 'expand.footer', true);
+                var footerSpace = GetValue$20(config, 'space.footer', 0);
+                var footerAlign = GetValue$20(config, 'align.footer', 'center');
+                var footerExpand = GetValue$20(config, 'expand.footer', true);
                 this.addFooter(footer, footerSpace, footerAlign, footerExpand);
             }
 
@@ -57121,7 +57102,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
     // mixin
     Object.assign(
         Scrollable$1.prototype,
-        Methods$8
+        Methods$9
     );
 
     var TextToLines = function (textObject, text, lines) {
@@ -57189,21 +57170,21 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
     };
 
     const IsPlainObject$d = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$1P = Phaser.Utils.Objects.GetValue;
+    const GetValue$1$ = Phaser.Utils.Objects.GetValue;
     const ALIGN_LEFTTOP$1 = Phaser.Display.Align.TOP_LEFT;
 
     class BaseTextBlock extends Base$1 {
         constructor(scene, x, y, minWidth, minHeight, config) {
             if (IsPlainObject$d(x)) {
                 config = x;
-                x = GetValue$1P(config, 'x', 0);
-                y = GetValue$1P(config, 'y', 0);
-                minWidth = GetValue$1P(config, 'width', undefined);
-                minHeight = GetValue$1P(config, 'height', undefined);
+                x = GetValue$1$(config, 'x', 0);
+                y = GetValue$1$(config, 'y', 0);
+                minWidth = GetValue$1$(config, 'width', undefined);
+                minHeight = GetValue$1$(config, 'height', undefined);
             } else if (IsPlainObject$d(minWidth)) {
                 config = minWidth;
-                minWidth = GetValue$1P(config, 'width', undefined);
-                minHeight = GetValue$1P(config, 'height', undefined);
+                minWidth = GetValue$1$(config, 'width', undefined);
+                minHeight = GetValue$1$(config, 'height', undefined);
             }
 
             super(scene, x, y, minWidth, minHeight, config);
@@ -57216,23 +57197,23 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this._textObjectRealHeight = 0;
             this.linesCount = 0;
 
-            this.text = GetValue$1P(config, 'content', '');
+            this.text = GetValue$1$(config, 'content', '');
             this._textOY = 0;
             this.execeedTopState = false;
             this.execeedBottomState = false;
 
-            this.setClampMode(GetValue$1P(config, 'clampTextOY', true));
+            this.setClampMode(GetValue$1$(config, 'clampTextOY', true));
 
-            this.alwaysScrollable = GetValue$1P(config, 'alwaysScrollable', false);
+            this.alwaysScrollable = GetValue$1$(config, 'alwaysScrollable', false);
 
             // Add elements
-            var background = GetValue$1P(config, 'background', undefined);
-            var textObject = GetValue$1P(config, 'text', undefined);
+            var background = GetValue$1$(config, 'background', undefined);
+            var textObject = GetValue$1$(config, 'text', undefined);
             if (textObject === undefined) {
                 textObject = CreateDefaultTextObject(scene);
             }
-            this.textCropEnable = GetValue$1P(config, 'textCrop', !!textObject.setCrop);
-            var textMaskEnable = GetValue$1P(config, 'textMask', !this.textCropEnable);
+            this.textCropEnable = GetValue$1$(config, 'textCrop', !!textObject.setCrop);
+            var textMaskEnable = GetValue$1$(config, 'textMask', !this.textCropEnable);
 
             if (background) {
                 this.addBackground(background);
@@ -57895,7 +57876,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
     };
 
-    const GetValue$1O = Phaser.Utils.Objects.GetValue;
+    const GetValue$1_ = Phaser.Utils.Objects.GetValue;
 
     class TextArea extends Scrollable$1 {
         constructor(scene, config) {
@@ -57904,12 +57885,12 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             }
 
             // Create text-block
-            var textObject = GetValue$1O(config, 'text', undefined);
-            var textWidth = GetValue$1O(config, 'textWidth', undefined);
-            var textHeight = GetValue$1O(config, 'textHeight', undefined);
-            var textCrop = GetValue$1O(config, 'textCrop', !!textObject.setCrop);
-            var textMask = GetValue$1O(config, 'textMask', !textCrop);
-            var content = GetValue$1O(config, 'content', '');
+            var textObject = GetValue$1_(config, 'text', undefined);
+            var textWidth = GetValue$1_(config, 'textWidth', undefined);
+            var textHeight = GetValue$1_(config, 'textHeight', undefined);
+            var textCrop = GetValue$1_(config, 'textCrop', !!textObject.setCrop);
+            var textMask = GetValue$1_(config, 'textMask', !textCrop);
+            var content = GetValue$1_(config, 'content', '');
             var textBlockConfig = {
                 width: textWidth,
                 height: textHeight,
@@ -57917,8 +57898,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 textMask: textMask,
                 textCrop: textCrop && !textMask,
                 content: content,
-                clampTextOY: GetValue$1O(config, 'clampChildOY', false),
-                alwaysScrollable: GetValue$1O(config, 'alwaysScrollable', false),
+                clampTextOY: GetValue$1_(config, 'clampChildOY', false),
+                alwaysScrollable: GetValue$1_(config, 'alwaysScrollable', false),
             };
             var textBlock;
             if (textObject && (GetTextObjectType(textObject) === TagTextType)) {
@@ -57938,9 +57919,9 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 expandWidth: (textWidth === undefined),
                 expandHeight: (textHeight === undefined),
             };
-            var spaceConfig = GetValue$1O(config, 'space', undefined);
+            var spaceConfig = GetValue$1_(config, 'space', undefined);
             if (spaceConfig) {
-                spaceConfig.child = GetValue$1O(spaceConfig, 'text', 0);
+                spaceConfig.child = GetValue$1_(spaceConfig, 'text', 0);
             }
 
             super(scene, config);
@@ -57975,15 +57956,15 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         ScrollMethods$2,
     );
 
-    const GetValue$1N = Phaser.Utils.Objects.GetValue;
+    const GetValue$1Z = Phaser.Utils.Objects.GetValue;
 
     var CreateTextArea = function (scene, config, creators) {
         config = (config) ? DeepClone(config) : {};
 
-        var createBackground = GetValue$1N(creators, 'background', CreateBackground$2);
-        var createText = GetValue$1N(creators, 'text', CreateText);
-        var createTrack = GetValue$1N(creators, 'track', CreateBackground$2);
-        var createThumb = GetValue$1N(creators, 'thumb', CreateBackground$2);
+        var createBackground = GetValue$1Z(creators, 'background', CreateBackground$2);
+        var createText = GetValue$1Z(creators, 'text', CreateText);
+        var createTrack = GetValue$1Z(creators, 'track', CreateBackground$2);
+        var createThumb = GetValue$1Z(creators, 'thumb', CreateBackground$2);
 
         if (createBackground) {
             config.background = createBackground(scene, config.background);
@@ -58107,15 +58088,15 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return gameObject;
     };
 
-    const GetValue$1M = Phaser.Utils.Objects.GetValue;
+    const GetValue$1Y = Phaser.Utils.Objects.GetValue;
 
     var BuildLabelConfig = function (scene, config, creators) {
         config = (config) ? DeepClone(config) : {};
 
-        var createBackground = GetValue$1M(creators, 'background', CreateBackground$2);
-        var createText = GetValue$1M(creators, 'text', CreateText);
-        var createIcon = GetValue$1M(creators, 'icon', CreateImage);
-        var createAction = GetValue$1M(creators, 'action', CreateImage);
+        var createBackground = GetValue$1Y(creators, 'background', CreateBackground$2);
+        var createText = GetValue$1Y(creators, 'text', CreateText);
+        var createIcon = GetValue$1Y(creators, 'icon', CreateImage);
+        var createAction = GetValue$1Y(creators, 'action', CreateImage);
 
         if ((config.background !== null) && createBackground) {
             config.background = createBackground(scene, config.background);
@@ -58195,44 +58176,44 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
     */
 
 
-    const GetValue$1L = Phaser.Utils.Objects.GetValue;
+    const GetValue$1X = Phaser.Utils.Objects.GetValue;
 
-    var LayoutMode0$3 = function (config) {
+    var LayoutMode0$4 = function (config) {
         var scene = this.scene;
 
-        var orientation = GetValue$1L(config, 'orientation', 0);
+        var orientation = GetValue$1X(config, 'orientation', 0);
         this.setOrientation(orientation);
 
         // Add elements
-        var icon = GetValue$1L(config, 'icon', undefined);
-        var iconMask = GetValue$1L(config, 'iconMask', undefined);
-        var innerBackground = GetValue$1L(config, 'innerBackground', undefined);
-        var title = GetValue$1L(config, 'title', undefined);
-        var separator = GetValue$1L(config, 'separator', undefined);
-        var text = GetValue$1L(config, 'text', undefined);
-        var action = GetValue$1L(config, 'action', undefined);
-        var actionMask = GetValue$1L(config, 'actionMask', undefined);
+        var icon = GetValue$1X(config, 'icon', undefined);
+        var iconMask = GetValue$1X(config, 'iconMask', undefined);
+        var innerBackground = GetValue$1X(config, 'innerBackground', undefined);
+        var title = GetValue$1X(config, 'title', undefined);
+        var separator = GetValue$1X(config, 'separator', undefined);
+        var text = GetValue$1X(config, 'text', undefined);
+        var action = GetValue$1X(config, 'action', undefined);
+        var actionMask = GetValue$1X(config, 'actionMask', undefined);
 
 
         if (icon) {
-            var align = GetValue$1L(config, 'align.icon', 'center');
+            var align = GetValue$1X(config, 'align.icon', 'center');
             var padding;
             if (this.orientation === 0) {
                 padding = {
-                    right: GetValue$1L(config, 'space.icon', 0),
-                    top: GetValue$1L(config, 'space.iconTop', 0),
-                    bottom: GetValue$1L(config, 'space.iconBottom', 0),
-                    left: GetValue$1L(config, 'space.iconLeft', 0),
+                    right: GetValue$1X(config, 'space.icon', 0),
+                    top: GetValue$1X(config, 'space.iconTop', 0),
+                    bottom: GetValue$1X(config, 'space.iconBottom', 0),
+                    left: GetValue$1X(config, 'space.iconLeft', 0),
                 };
             } else {
                 padding = {
-                    bottom: GetValue$1L(config, 'space.icon', 0),
-                    left: GetValue$1L(config, 'space.iconLeft', 0),
-                    right: GetValue$1L(config, 'space.iconRight', 0),
-                    top: GetValue$1L(config, 'space.iconTop', 0),
+                    bottom: GetValue$1X(config, 'space.icon', 0),
+                    left: GetValue$1X(config, 'space.iconLeft', 0),
+                    right: GetValue$1X(config, 'space.iconRight', 0),
+                    top: GetValue$1X(config, 'space.iconTop', 0),
                 };
             }
-            var fitRatio = GetValue$1L(config, 'squareFitIcon', false) ? 1 : 0;
+            var fitRatio = GetValue$1X(config, 'squareFitIcon', false) ? 1 : 0;
 
             this.add(
                 icon,
@@ -58244,10 +58225,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             }
 
             if (!fitRatio) {
-                var iconSize = GetValue$1L(config, 'iconSize', undefined);
+                var iconSize = GetValue$1X(config, 'iconSize', undefined);
                 this.setIconSize(
-                    GetValue$1L(config, 'iconWidth', iconSize),
-                    GetValue$1L(config, 'iconHeight', iconSize)
+                    GetValue$1X(config, 'iconWidth', iconSize),
+                    GetValue$1X(config, 'iconHeight', iconSize)
                 );
             }
         }
@@ -58261,19 +58242,19 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             innerSizer.addBackground(innerBackground);
         }
 
-        var separatorSpace = GetValue$1L(config, 'space.separator', 0);
+        var separatorSpace = GetValue$1X(config, 'space.separator', 0);
 
         if (title) {
-            var align = GetValue$1L(config, 'align.title', 'left');
-            var expandTitleWidth = GetValue$1L(config, 'expandTitleWidth', false);
-            var expandTitleHeight = GetValue$1L(config, 'expandTitleHeight', false);
+            var align = GetValue$1X(config, 'align.title', 'left');
+            var expandTitleWidth = GetValue$1X(config, 'expandTitleWidth', false);
+            var expandTitleHeight = GetValue$1X(config, 'expandTitleHeight', false);
             var proportion, padding, expand;
             proportion = (expandTitleHeight) ? 1 : 0;
             expand = expandTitleWidth;
             padding = {
-                bottom: (!separator && text) ? GetValue$1L(config, 'space.title', separatorSpace) : 0,
-                left: GetValue$1L(config, 'space.titleLeft', 0),
-                right: GetValue$1L(config, 'space.titleRight', 0),
+                bottom: (!separator && text) ? GetValue$1X(config, 'space.title', separatorSpace) : 0,
+                left: GetValue$1X(config, 'space.titleLeft', 0),
+                right: GetValue$1X(config, 'space.titleRight', 0),
             };
             innerSizer.add(
                 title,
@@ -58285,8 +58266,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             var padding = {
                 top: (title) ? separatorSpace : 0,
                 bottom: (text) ? separatorSpace : 0,
-                left: GetValue$1L(config, 'space.separatorLeft', 0),
-                right: GetValue$1L(config, 'space.separatorRight', 0),
+                left: GetValue$1X(config, 'space.separatorLeft', 0),
+                right: GetValue$1X(config, 'space.separatorRight', 0),
             };
             innerSizer.add(
                 separator,
@@ -58296,15 +58277,15 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
 
         if (text) {
-            var align = GetValue$1L(config, 'align.text', 'left');
-            var expandTextWidth = GetValue$1L(config, 'expandTextWidth', false);
-            var expandTextHeight = GetValue$1L(config, 'expandTextHeight', false);
+            var align = GetValue$1X(config, 'align.text', 'left');
+            var expandTextWidth = GetValue$1X(config, 'expandTextWidth', false);
+            var expandTextHeight = GetValue$1X(config, 'expandTextHeight', false);
             var proportion, padding, expand;
             proportion = (expandTextHeight) ? 1 : 0;
             expand = expandTextWidth;
             padding = {
-                left: GetValue$1L(config, 'space.textLeft', 0),
-                right: GetValue$1L(config, 'space.textRight', 0),
+                left: GetValue$1X(config, 'space.textLeft', 0),
+                right: GetValue$1X(config, 'space.textRight', 0),
             };
             innerSizer.add(
                 text,
@@ -58315,7 +58296,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         var padding = undefined;
         if (action) {
             padding = {
-                right: GetValue$1L(config, 'space.text', 0)
+                right: GetValue$1X(config, 'space.text', 0)
             };
         }
         this.add(
@@ -58325,22 +58306,22 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         // InnerSizer : title, separator, text
 
         if (action) {
-            var align = GetValue$1L(config, 'align.action', 'center');
+            var align = GetValue$1X(config, 'align.action', 'center');
             var padding;
             if (this.orientation === 0) {
                 padding = {
-                    top: GetValue$1L(config, 'space.actionTop', 0),
-                    bottom: GetValue$1L(config, 'space.actionBottom', 0),
-                    right: GetValue$1L(config, 'space.actionRight', 0),
+                    top: GetValue$1X(config, 'space.actionTop', 0),
+                    bottom: GetValue$1X(config, 'space.actionBottom', 0),
+                    right: GetValue$1X(config, 'space.actionRight', 0),
                 };
             } else {
                 padding = {
-                    left: GetValue$1L(config, 'space.actionLeft', 0),
-                    right: GetValue$1L(config, 'space.actionRight', 0),
-                    bottom: GetValue$1L(config, 'space.actionBottom', 0),
+                    left: GetValue$1X(config, 'space.actionLeft', 0),
+                    right: GetValue$1X(config, 'space.actionRight', 0),
+                    bottom: GetValue$1X(config, 'space.actionBottom', 0),
                 };
             }
-            var fitRatio = GetValue$1L(config, 'squareFitAction', false) ? 1 : 0;
+            var fitRatio = GetValue$1X(config, 'squareFitAction', false) ? 1 : 0;
 
             this.add(
                 action,
@@ -58352,10 +58333,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             }
 
             if (!fitRatio) {
-                var actionSize = GetValue$1L(config, 'actionSize');
+                var actionSize = GetValue$1X(config, 'actionSize');
                 this.setActionSize(
-                    GetValue$1L(config, 'actionWidth', actionSize),
-                    GetValue$1L(config, 'actionHeight', actionSize)
+                    GetValue$1X(config, 'actionWidth', actionSize),
+                    GetValue$1X(config, 'actionHeight', actionSize)
                 );
             }
         }
@@ -58381,36 +58362,36 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
     */
 
 
-    const GetValue$1K = Phaser.Utils.Objects.GetValue;
+    const GetValue$1W = Phaser.Utils.Objects.GetValue;
 
-    var LayoutMode1$2 = function (config) {
+    var LayoutMode1$3 = function (config) {
         this.setOrientation(1);
         this.setRTL(false);
 
         var scene = this.scene;
 
         // Add elements
-        var title = GetValue$1K(config, 'title', undefined);
-        var separator = GetValue$1K(config, 'separator', undefined);
-        var innerBackground = GetValue$1K(config, 'innerBackground', undefined);
-        var icon = GetValue$1K(config, 'icon', undefined);
-        var iconMask = GetValue$1K(config, 'iconMask', undefined);
-        var text = GetValue$1K(config, 'text', undefined);
-        var action = GetValue$1K(config, 'action', undefined);
-        var actionMask = GetValue$1K(config, 'actionMask', undefined);
+        var title = GetValue$1W(config, 'title', undefined);
+        var separator = GetValue$1W(config, 'separator', undefined);
+        var innerBackground = GetValue$1W(config, 'innerBackground', undefined);
+        var icon = GetValue$1W(config, 'icon', undefined);
+        var iconMask = GetValue$1W(config, 'iconMask', undefined);
+        var text = GetValue$1W(config, 'text', undefined);
+        var action = GetValue$1W(config, 'action', undefined);
+        var actionMask = GetValue$1W(config, 'actionMask', undefined);
 
 
         if (title) {
-            var align = GetValue$1K(config, 'align.title', 'left');
-            var expandTitleWidth = GetValue$1K(config, 'expandTitleWidth', false);
-            var expandTitleHeight = GetValue$1K(config, 'expandTitleHeight', false);
+            var align = GetValue$1W(config, 'align.title', 'left');
+            var expandTitleWidth = GetValue$1W(config, 'expandTitleWidth', false);
+            var expandTitleHeight = GetValue$1W(config, 'expandTitleHeight', false);
             var proportion, padding, expand;
             proportion = (expandTitleHeight) ? 1 : 0;
             expand = expandTitleWidth;
             padding = {
-                bottom: GetValue$1K(config, 'space.title', 0),
-                left: GetValue$1K(config, 'space.titleLeft', 0),
-                right: GetValue$1K(config, 'space.titleRight', 0),
+                bottom: GetValue$1W(config, 'space.title', 0),
+                left: GetValue$1W(config, 'space.titleLeft', 0),
+                right: GetValue$1W(config, 'space.titleRight', 0),
             };
             this.add(
                 title,
@@ -58419,12 +58400,12 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
 
         if (separator) {
-            var separatorSpace = GetValue$1K(config, 'space.separator', 0);
+            var separatorSpace = GetValue$1W(config, 'space.separator', 0);
             var padding = {
                 top: (title) ? separatorSpace : 0,
                 bottom: (text) ? separatorSpace : 0,
-                left: GetValue$1K(config, 'space.separatorLeft', 0),
-                right: GetValue$1K(config, 'space.separatorRight', 0),
+                left: GetValue$1W(config, 'space.separatorLeft', 0),
+                right: GetValue$1W(config, 'space.separatorRight', 0),
             };
             this.add(
                 separator,
@@ -58433,16 +58414,16 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             );
         }
 
-        var orientation = GetValue$1K(config, 'orientation', 0);
+        var orientation = GetValue$1W(config, 'orientation', 0);
         var innerSizer = new Sizer(scene, {
             orientation: orientation,
-            rtl: GetValue$1K(config, 'rtl', false),
+            rtl: GetValue$1W(config, 'rtl', false),
 
             space: {
-                left: GetValue$1K(config, 'space.innerLeft', 0),
-                right: GetValue$1K(config, 'space.innerRight', 0),
-                top: GetValue$1K(config, 'space.innerTop', 0),
-                bottom: GetValue$1K(config, 'space.innerBottom', 0),
+                left: GetValue$1W(config, 'space.innerLeft', 0),
+                right: GetValue$1W(config, 'space.innerRight', 0),
+                top: GetValue$1W(config, 'space.innerTop', 0),
+                bottom: GetValue$1W(config, 'space.innerBottom', 0),
             }
         });
         if (innerBackground) {
@@ -58455,24 +58436,24 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         );
 
         if (icon) {
-            var align = GetValue$1K(config, 'align.icon', 'center');
+            var align = GetValue$1W(config, 'align.icon', 'center');
             var padding;
             if (innerSizer.orientation === 0) {
                 padding = {
-                    right: GetValue$1K(config, 'space.icon', 0),
-                    top: GetValue$1K(config, 'space.iconTop', 0),
-                    bottom: GetValue$1K(config, 'space.iconBottom', 0),
-                    left: GetValue$1K(config, 'space.iconLeft', 0),
+                    right: GetValue$1W(config, 'space.icon', 0),
+                    top: GetValue$1W(config, 'space.iconTop', 0),
+                    bottom: GetValue$1W(config, 'space.iconBottom', 0),
+                    left: GetValue$1W(config, 'space.iconLeft', 0),
                 };
             } else {
                 padding = {
-                    bottom: GetValue$1K(config, 'space.icon', 0),
-                    left: GetValue$1K(config, 'space.iconLeft', 0),
-                    right: GetValue$1K(config, 'space.iconRight', 0),
-                    top: GetValue$1K(config, 'space.iconTop', 0),
+                    bottom: GetValue$1W(config, 'space.icon', 0),
+                    left: GetValue$1W(config, 'space.iconLeft', 0),
+                    right: GetValue$1W(config, 'space.iconRight', 0),
+                    top: GetValue$1W(config, 'space.iconTop', 0),
                 };
             }
-            var fitRatio = GetValue$1K(config, 'squareFitIcon', false) ? 1 : 0;
+            var fitRatio = GetValue$1W(config, 'squareFitIcon', false) ? 1 : 0;
 
             innerSizer.add(
                 icon,
@@ -58484,19 +58465,19 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             }
 
             if (!fitRatio) {
-                var iconSize = GetValue$1K(config, 'iconSize', undefined);
+                var iconSize = GetValue$1W(config, 'iconSize', undefined);
                 this.setIconSize(
-                    GetValue$1K(config, 'iconWidth', iconSize),
-                    GetValue$1K(config, 'iconHeight', iconSize)
+                    GetValue$1W(config, 'iconWidth', iconSize),
+                    GetValue$1W(config, 'iconHeight', iconSize)
                 );
             }
         }
 
         if (text) {
-            var align = GetValue$1K(config, 'align.text', 'left');
-            var textSpace = GetValue$1K(config, 'space.text', 0);
-            var expandTextWidth = GetValue$1K(config, 'expandTextWidth', false);
-            var expandTextHeight = GetValue$1K(config, 'expandTextHeight', false);
+            var align = GetValue$1W(config, 'align.text', 'left');
+            var textSpace = GetValue$1W(config, 'space.text', 0);
+            var expandTextWidth = GetValue$1W(config, 'expandTextWidth', false);
+            var expandTextHeight = GetValue$1W(config, 'expandTextHeight', false);
             var proportion, padding, expand;
             if (innerSizer.orientation === 0) {
                 proportion = (expandTextWidth) ? 1 : 0;
@@ -58521,22 +58502,22 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
 
         if (action) {
-            var align = GetValue$1K(config, 'align.action', 'center');
+            var align = GetValue$1W(config, 'align.action', 'center');
             var padding;
             if (innerSizer.orientation === 0) {
                 padding = {
-                    top: GetValue$1K(config, 'space.actionTop', 0),
-                    bottom: GetValue$1K(config, 'space.actionBottom', 0),
-                    right: GetValue$1K(config, 'space.actionRight', 0),
+                    top: GetValue$1W(config, 'space.actionTop', 0),
+                    bottom: GetValue$1W(config, 'space.actionBottom', 0),
+                    right: GetValue$1W(config, 'space.actionRight', 0),
                 };
             } else {
                 padding = {
-                    left: GetValue$1K(config, 'space.actionLeft', 0),
-                    right: GetValue$1K(config, 'space.actionRight', 0),
-                    bottom: GetValue$1K(config, 'space.actionBottom', 0),
+                    left: GetValue$1W(config, 'space.actionLeft', 0),
+                    right: GetValue$1W(config, 'space.actionRight', 0),
+                    bottom: GetValue$1W(config, 'space.actionBottom', 0),
                 };
             }
-            var fitRatio = GetValue$1K(config, 'squareFitAction', false) ? 1 : 0;
+            var fitRatio = GetValue$1W(config, 'squareFitAction', false) ? 1 : 0;
 
             innerSizer.add(
                 action,
@@ -58548,10 +58529,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             }
 
             if (!fitRatio) {
-                var actionSize = GetValue$1K(config, 'actionSize');
+                var actionSize = GetValue$1W(config, 'actionSize');
                 this.setActionSize(
-                    GetValue$1K(config, 'actionWidth', actionSize),
-                    GetValue$1K(config, 'actionHeight', actionSize)
+                    GetValue$1W(config, 'actionWidth', actionSize),
+                    GetValue$1W(config, 'actionHeight', actionSize)
                 );
             }
         }
@@ -58567,8 +58548,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         this.addChildrenMap('actionMask', actionMask);
     };
 
-    const GetValue$1J = Phaser.Utils.Objects.GetValue;
-    const LayoutCallbacks$2 = [LayoutMode0$3, LayoutMode1$2];
+    const GetValue$1V = Phaser.Utils.Objects.GetValue;
+    const LayoutCallbacks$3 = [LayoutMode0$4, LayoutMode1$3];
 
     class TitleLabel extends LabelBase {
         constructor(scene, config) {
@@ -58581,18 +58562,18 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this.type = 'rexTitleLabel';
 
             // Add Background
-            var background = GetValue$1J(config, 'background', undefined);
+            var background = GetValue$1V(config, 'background', undefined);
             if (background) {
                 this.addBackground(background);
             }
 
             // Wrap title, text
-            var title = GetValue$1J(config, 'title', undefined);
-            var text = GetValue$1J(config, 'text', undefined);
+            var title = GetValue$1V(config, 'title', undefined);
+            var text = GetValue$1V(config, 'text', undefined);
 
             if (title) {
-                var wrapTitle = GetValue$1J(config, 'wrapTitle', false);
-                var adjustTitleFontSize = GetValue$1J(config, 'adjustTitleFontSize', false);
+                var wrapTitle = GetValue$1V(config, 'wrapTitle', false);
+                var adjustTitleFontSize = GetValue$1V(config, 'adjustTitleFontSize', false);
                 if (wrapTitle) {
                     if (wrapTitle === true) {
                         wrapTitle = 'word';
@@ -58611,8 +58592,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             }
 
             if (text) {
-                var wrapText = GetValue$1J(config, 'wrapText', false);
-                var adjustTextFontSize = GetValue$1J(config, 'adjustTextFontSize', false);
+                var wrapText = GetValue$1V(config, 'wrapText', false);
+                var adjustTextFontSize = GetValue$1V(config, 'adjustTextFontSize', false);
                 if (wrapText) {
                     if (wrapText === true) {
                         wrapText = 'word';
@@ -58630,8 +58611,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 }
             }
 
-            var layoutMode = GetValue$1J(config, 'layoutMode', 0);
-            var layoutCallback = LayoutCallbacks$2[layoutMode] || LayoutCallbacks$2[0];
+            var layoutMode = GetValue$1V(config, 'layoutMode', 0);
+            var layoutCallback = LayoutCallbacks$3[layoutMode] || LayoutCallbacks$3[0];
             layoutCallback.call(this, config);
 
             // Elements : title, separator, innerBackground,
@@ -58696,12 +58677,12 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     SetValue(window, 'RexPlugins.UI.TitleLabel', TitleLabel);
 
-    const GetValue$1I = Phaser.Utils.Objects.GetValue;
+    const GetValue$1U = Phaser.Utils.Objects.GetValue;
 
     var BuildTitleLabelConfig = function (scene, config, creators) {
-        var createInnerBackground = GetValue$1I(creators, 'innerBackground', CreateBackground$2);
-        var createSeparator = GetValue$1I(creators, 'separator', CreateBackground$2);
-        var createTitle = GetValue$1I(creators, 'title', CreateText);
+        var createInnerBackground = GetValue$1U(creators, 'innerBackground', CreateBackground$2);
+        var createSeparator = GetValue$1U(creators, 'separator', CreateBackground$2);
+        var createTitle = GetValue$1U(creators, 'title', CreateText);
 
         var innerBackground, separator;
 
@@ -58789,21 +58770,21 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     SetValue(window, 'RexPlugins.UI.SimpleTitleLabel', SimpleTitleLabel);
 
-    const GetValue$1H = Phaser.Utils.Objects.GetValue;
+    const GetValue$1T = Phaser.Utils.Objects.GetValue;
     const IsPlainObject$c = Phaser.Utils.Objects.IsPlainObject;
 
-    var Build$2 = function (scene, config) {
+    var Build$3 = function (scene, config) {
         // Add elements
-        var background = GetValue$1H(config, 'background', undefined);
-        var icon = GetValue$1H(config, 'icon', undefined);
-        var iconMask = GetValue$1H(config, 'iconMask', undefined);
-        var nameText = GetValue$1H(config, 'nameText', undefined);
-        var valueText = GetValue$1H(config, 'valueText', undefined);
-        var bar = GetValue$1H(config, 'bar', undefined);
-        var action = GetValue$1H(config, 'action', undefined);
-        var actionMask = GetValue$1H(config, 'actionMask', undefined);
+        var background = GetValue$1T(config, 'background', undefined);
+        var icon = GetValue$1T(config, 'icon', undefined);
+        var iconMask = GetValue$1T(config, 'iconMask', undefined);
+        var nameText = GetValue$1T(config, 'nameText', undefined);
+        var valueText = GetValue$1T(config, 'valueText', undefined);
+        var bar = GetValue$1T(config, 'bar', undefined);
+        var action = GetValue$1T(config, 'action', undefined);
+        var actionMask = GetValue$1T(config, 'actionMask', undefined);
 
-        var isLineBar = (GetValue$1H(config, 'barShape', 'line') === 'line');
+        var isLineBar = (GetValue$1T(config, 'barShape', 'line') === 'line');
         if (IsPlainObject$c(bar)) {
             var BarClass = (isLineBar) ? LineProgress : CircularProgress;
             bar = new BarClass(scene, bar);
@@ -58828,17 +58809,17 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             if (this.orientation === 0) {
                 if (hasTextSizer || action) {
                     padding = {
-                        right: GetValue$1H(config, 'space.icon', 0),
-                        top: GetValue$1H(config, 'space.iconTop', 0),
-                        bottom: GetValue$1H(config, 'space.iconBottom', 0),
+                        right: GetValue$1T(config, 'space.icon', 0),
+                        top: GetValue$1T(config, 'space.iconTop', 0),
+                        bottom: GetValue$1T(config, 'space.iconBottom', 0),
                     };
                 }
             } else {
                 if (hasTextSizer || action) {
                     padding = {
-                        bottom: GetValue$1H(config, 'space.icon', 0),
-                        left: GetValue$1H(config, 'space.iconLeft', 0),
-                        right: GetValue$1H(config, 'space.iconRight', 0),
+                        bottom: GetValue$1T(config, 'space.icon', 0),
+                        left: GetValue$1T(config, 'space.iconLeft', 0),
+                        right: GetValue$1T(config, 'space.iconRight', 0),
                     };
                 }
             }
@@ -58871,7 +58852,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                     }
                     nameText.setOrigin(0, nameText.originY);
                     var padding = {
-                        left: GetValue$1H(config, 'space.name', 0),
+                        left: GetValue$1T(config, 'space.name', 0),
                     };
                     nameValueSizer.add(
                         nameText,
@@ -58889,7 +58870,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                     nameValueSizer.addSpace();
 
                     var padding = {
-                        right: GetValue$1H(config, 'space.value', 0),
+                        right: GetValue$1T(config, 'space.value', 0),
                     };
                     nameValueSizer.add(
                         valueText,
@@ -58897,8 +58878,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                     );
 
                     this.setValueTextFormatCallback(
-                        GetValue$1H(config, 'valueTextFormatCallback', DefaultValueTextFormatCallback),
-                        GetValue$1H(config, 'valueTextFormatCallbackScope', undefined)
+                        GetValue$1T(config, 'valueTextFormatCallback', DefaultValueTextFormatCallback),
+                        GetValue$1T(config, 'valueTextFormatCallbackScope', undefined)
                     );
                 }
 
@@ -58910,15 +58891,15 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
             if (bar) {
                 if (isLineBar) {
-                    var paddingTop = (nameValueSizer) ? GetValue$1H(config, 'space.bar') : 0;
+                    var paddingTop = (nameValueSizer) ? GetValue$1T(config, 'space.bar') : 0;
                     if (paddingTop === undefined) {
-                        paddingTop = GetValue$1H(config, 'space.barTop', 0);
+                        paddingTop = GetValue$1T(config, 'space.barTop', 0);
                     }
                     var padding = {
                         top: paddingTop,
-                        bottom: GetValue$1H(config, 'space.barBottom', 0),
-                        left: GetValue$1H(config, 'space.barLeft', 0),
-                        right: GetValue$1H(config, 'space.barRight', 0),
+                        bottom: GetValue$1T(config, 'space.barBottom', 0),
+                        left: GetValue$1T(config, 'space.barLeft', 0),
+                        right: GetValue$1T(config, 'space.barRight', 0),
                     };
                     textSizer.add(
                         bar,
@@ -58926,10 +58907,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                     );
                 } else {
                     var padding = {
-                        top: GetValue$1H(config, 'space.barTop', 0),
-                        bottom: GetValue$1H(config, 'space.barBottom', 0),
-                        left: GetValue$1H(config, 'space.barLeft', 0),
-                        right: GetValue$1H(config, 'space.barRight', 0),
+                        top: GetValue$1T(config, 'space.barTop', 0),
+                        bottom: GetValue$1T(config, 'space.barBottom', 0),
+                        left: GetValue$1T(config, 'space.barLeft', 0),
+                        right: GetValue$1T(config, 'space.barRight', 0),
                     };
                     this.addBackground(bar, padding);
                 }
@@ -58938,10 +58919,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             var padding = undefined;
             if (action) {
                 padding = {
-                    right: GetValue$1H(config, 'space.text', 0)
+                    right: GetValue$1T(config, 'space.text', 0)
                 };
             }
-            var textAlign = GetValue$1H(config, 'align.text', 'bottom');
+            var textAlign = GetValue$1T(config, 'align.text', 'bottom');
             this.add(
                 textSizer,
                 { proportion: 1, align: textAlign, padding: padding }
@@ -58952,13 +58933,13 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             var padding;
             if (this.orientation === 0) {
                 padding = {
-                    top: GetValue$1H(config, 'space.actionTop', 0),
-                    bottom: GetValue$1H(config, 'space.actionBottom', 0),
+                    top: GetValue$1T(config, 'space.actionTop', 0),
+                    bottom: GetValue$1T(config, 'space.actionBottom', 0),
                 };
             } else {
                 padding = {
-                    left: GetValue$1H(config, 'space.actionLeft', 0),
-                    right: GetValue$1H(config, 'space.actionRight', 0),
+                    left: GetValue$1T(config, 'space.actionLeft', 0),
+                    right: GetValue$1T(config, 'space.actionRight', 0),
                 };
             }
 
@@ -58986,7 +58967,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return value.toString();
     };
 
-    const Clamp$5 = Phaser.Math.Clamp;
+    const Clamp$6 = Phaser.Math.Clamp;
 
     var SetValueMethods = {
         setValueTextFormatCallback(callback, scope) {
@@ -59038,7 +59019,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 this.maxValue = max;
             }
 
-            value = Clamp$5(value, min, max);
+            value = Clamp$6(value, min, max);
             this.value = value;
             this.updateValueText(value, min, max);
             this.setBarValue(value, min, max);
@@ -59085,7 +59066,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             super(scene, config);
             this.type = 'rexNameValueLabel';
 
-            Build$2.call(this, scene, config);
+            Build$3.call(this, scene, config);
 
             this.setEaseValueDuration(1000);
         }
@@ -59245,11 +59226,11 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         constructor(config) {
             super();
 
-            this.setTable(GetValue$45(config, 'table'));
-            this.setMaxLevel(GetValue$45(config, 'maxLevel'));
+            this.setTable(GetValue$4h(config, 'table'));
+            this.setMaxLevel(GetValue$4h(config, 'maxLevel'));
 
-            var exp = GetValue$45(config, 'exp', 0);
-            var level = GetValue$45(config, 'level', undefined);
+            var exp = GetValue$4h(config, 'exp', 0);
+            var level = GetValue$4h(config, 'level', undefined);
             if ((level !== undefined) && !this.checkLevel(level, exp)) {
                 console.error(`Level ${level} and Exp ${exp} are mismatch`);
                 level = undefined;
@@ -59451,7 +59432,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
     }
 
     var RunCommands = function (queue, scope, config) {
-        var reverse = GetValue$45(config, 'reverse', false);
+        var reverse = GetValue$4h(config, 'reverse', false);
 
         var retVal;
         if (IsArray(queue[0])) {
@@ -59472,8 +59453,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
     };
 
     var RunCommand = function (cmd, scope, config) {
-        var argsConvert = GetValue$45(config, 'argsConvert', undefined);
-        var argsConvertScope = GetValue$45(config, 'argsConvertScope', undefined);
+        var argsConvert = GetValue$4h(config, 'argsConvert', undefined);
+        var argsConvertScope = GetValue$4h(config, 'argsConvertScope', undefined);
 
         var fnName = cmd[0];
 
@@ -59497,7 +59478,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         if (typeof (fnName) === 'string') {
             fn = scope[fnName];
             if (fn == null) {
-                fn = GetValue$45(scope, fnName, null);
+                fn = GetValue$4h(scope, fnName, null);
             }
         } else {
             fn = fnName;
@@ -59508,13 +59489,13 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
     };
     var ARGS = []; // reuse this array
 
-    const GetValue$1G = Phaser.Utils.Objects.GetValue;
+    const GetValue$1S = Phaser.Utils.Objects.GetValue;
 
     class Player extends ComponentBase {
         constructor(parent, config) {
             super(parent, config);
 
-            var clock = GetValue$1G(config, 'clock', undefined);
+            var clock = GetValue$1S(config, 'clock', undefined);
             if (!clock) {
                 clock = new Clock(parent);
             }
@@ -59527,14 +59508,14 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
 
         resetFromJSON(o) {
-            this.clock.resetFromJSON(GetValue$1G(o, 'clock', undefined));
-            this.state = GetValue$1G(o, 'state', 0); // 0=idle, 1=run, 2=completed
-            this.commands = GetValue$1G(o, 'commands', []); // [[time, cmds], [time, cmds], ...]
-            this.scope = GetValue$1G(o, 'scope', undefined);
-            this.setTimeUnit(GetValue$1G(o, 'timeUnit', 0));
-            this.setDtMode(GetValue$1G(o, 'dtMode', 0));
-            this.index = GetValue$1G(o, 'index', 0);
-            this.nextTime = GetValue$1G(o, 'nextTime', 0);
+            this.clock.resetFromJSON(GetValue$1S(o, 'clock', undefined));
+            this.state = GetValue$1S(o, 'state', 0); // 0=idle, 1=run, 2=completed
+            this.commands = GetValue$1S(o, 'commands', []); // [[time, cmds], [time, cmds], ...]
+            this.scope = GetValue$1S(o, 'scope', undefined);
+            this.setTimeUnit(GetValue$1S(o, 'timeUnit', 0));
+            this.setDtMode(GetValue$1S(o, 'dtMode', 0));
+            this.index = GetValue$1S(o, 'index', 0);
+            this.nextTime = GetValue$1S(o, 'nextTime', 0);
             return this;
         }
 
@@ -59565,11 +59546,11 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
         load(commands, scope, config) {
             this.stop();
-            var timeUnit = GetValue$1G(config, 'timeUnit', undefined);
+            var timeUnit = GetValue$1S(config, 'timeUnit', undefined);
             if (timeUnit !== undefined) {
                 this.setTimeUnit(timeUnit);
             }
-            var dtMode = GetValue$1G(config, 'dtMode', undefined);
+            var dtMode = GetValue$1S(config, 'dtMode', undefined);
             if (dtMode !== undefined) {
                 this.setDtMode(dtMode);
             }
@@ -59830,7 +59811,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
     };
 
-    const GetValue$1F = Phaser.Utils.Objects.GetValue;
+    const GetValue$1R = Phaser.Utils.Objects.GetValue;
 
     class ExpBar extends NameValueLabel {
         constructor(scene, config) {
@@ -59838,9 +59819,9 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
             this.type = 'rexExpBar';
 
-            this.setTotalEaseDuration(GetValue$1F(config, 'easeDuration', 1000));
+            this.setTotalEaseDuration(GetValue$1R(config, 'easeDuration', 1000));
 
-            this.levelCounter = new LevelCounter(GetValue$1F(config, 'levelCounter'));
+            this.levelCounter = new LevelCounter(GetValue$1R(config, 'levelCounter'));
 
             this.player = new Player(this, {
                 scope: this,
@@ -60208,7 +60189,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
     };
 
-    const GetValue$1E = Phaser.Utils.Objects.GetValue;
+    const GetValue$1Q = Phaser.Utils.Objects.GetValue;
 
     var ButtonsTypeMethods = {
         setButtonsType(config) {
@@ -60216,7 +60197,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 config = {};
             }
 
-            var buttonsType = GetValue$1E(config, 'buttonsType', config.type);
+            var buttonsType = GetValue$1Q(config, 'buttonsType', config.type);
             this.buttonsType = buttonsType;
 
             if (!this.buttonsType) {
@@ -60225,11 +60206,11 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
             // Assign this.setValueCallback, this.setValueCallbackScope
             var setValueCallback, setValueCallbackScope;
-            setValueCallback = GetValue$1E(config, 'setValueCallback', undefined);
-            setValueCallbackScope = GetValue$1E(config, 'setValueCallbackScope', undefined);
+            setValueCallback = GetValue$1Q(config, 'setValueCallback', undefined);
+            setValueCallbackScope = GetValue$1Q(config, 'setValueCallbackScope', undefined);
             if (setValueCallback === undefined) {
-                setValueCallback = GetValue$1E(config, 'setButtonStateCallback', undefined);
-                setValueCallbackScope = GetValue$1E(config, 'setButtonStateCallbackScope', undefined);
+                setValueCallback = GetValue$1Q(config, 'setButtonStateCallback', undefined);
+                setValueCallbackScope = GetValue$1Q(config, 'setButtonStateCallbackScope', undefined);
             }
             this.setValueCallback = setValueCallback;
             this.setValueCallbackScope = setValueCallbackScope;
@@ -60607,7 +60588,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
     };
 
-    const GetValue$1D = Phaser.Utils.Objects.GetValue;
+    const GetValue$1P = Phaser.Utils.Objects.GetValue;
 
     let Buttons$1 = class Buttons extends Sizer {
         constructor(scene, config) {
@@ -60625,19 +60606,19 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this.type = 'rexButtons';
             this.buttonGroup = new ButtonGroup({
                 parent: this,
-                eventEmitter: GetValue$1D(config, 'eventEmitter', this),
-                groupName: GetValue$1D(config, 'groupName', undefined),
-                clickConfig: GetValue$1D(config, 'click', undefined)
+                eventEmitter: GetValue$1P(config, 'eventEmitter', this),
+                groupName: GetValue$1P(config, 'groupName', undefined),
+                clickConfig: GetValue$1P(config, 'click', undefined)
             })
                 .setButtonsType(config);
 
             // Add elements
-            var background = GetValue$1D(config, 'background', undefined);
-            var buttons = GetValue$1D(config, 'buttons', undefined);
+            var background = GetValue$1P(config, 'background', undefined);
+            var buttons = GetValue$1P(config, 'buttons', undefined);
 
             // Buttons properties
-            this.buttonsExpand = GetValue$1D(config, 'expand', false);
-            this.buttonsAlign = GetValue$1D(config, 'align', undefined); // undefined/left/top: no space                
+            this.buttonsExpand = GetValue$1P(config, 'expand', false);
+            this.buttonsAlign = GetValue$1P(config, 'align', undefined); // undefined/left/top: no space                
 
             if (background) {
                 this.addBackground(background);
@@ -60760,18 +60741,18 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
     };
 
-    const GetValue$1C = Phaser.Utils.Objects.GetValue;
+    const GetValue$1O = Phaser.Utils.Objects.GetValue;
 
     class GridButtons extends GridSizer {
         constructor(scene, config) {
             if (config === undefined) {
                 config = {};
             }
-            var rowCount = GetValue$1C(config, 'row', 0);
-            var columnCount = GetValue$1C(config, 'column', (config.col || 0));
-            var createCellContainerCallback = GetValue$1C(config, 'createCellContainerCallback');
-            var buttons = GetValue$1C(config, 'buttons', undefined);
-            var buttonsExpand = GetValue$1C(config, 'expand', true);
+            var rowCount = GetValue$1O(config, 'row', 0);
+            var columnCount = GetValue$1O(config, 'column', (config.col || 0));
+            var createCellContainerCallback = GetValue$1O(config, 'createCellContainerCallback');
+            var buttons = GetValue$1O(config, 'buttons', undefined);
+            var buttonsExpand = GetValue$1O(config, 'expand', true);
             var buttonProportion = (buttonsExpand) ? 1 : 0;
 
             if (createCellContainerCallback) {
@@ -60794,18 +60775,18 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this.type = 'rexGridButtons';
             this.buttonGroup = new ButtonGroup({
                 parent: this,
-                eventEmitter: GetValue$1C(config, 'eventEmitter', this),
-                groupName: GetValue$1C(config, 'groupName', undefined),
-                clickConfig: GetValue$1C(config, 'click', undefined)
+                eventEmitter: GetValue$1O(config, 'eventEmitter', this),
+                groupName: GetValue$1O(config, 'groupName', undefined),
+                clickConfig: GetValue$1O(config, 'click', undefined)
             })
                 .setButtonsType(config);
 
             // Add elements
-            var background = GetValue$1C(config, 'background', undefined);
+            var background = GetValue$1O(config, 'background', undefined);
 
             // Buttons properties
             this.buttonsExpand = buttonsExpand;
-            GetValue$1C(config, 'space', undefined);
+            GetValue$1O(config, 'space', undefined);
 
             if (background) {
                 this.addBackground(background);
@@ -60973,7 +60954,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
     };
 
-    const GetValue$1B = Phaser.Utils.Objects.GetValue;
+    const GetValue$1N = Phaser.Utils.Objects.GetValue;
 
     class Buttons extends FixWidthSizer {
         constructor(scene, config) {
@@ -60991,18 +60972,18 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this.type = 'rexFixWidthButtons';
             this.buttonGroup = new ButtonGroup({
                 parent: this,
-                eventEmitter: GetValue$1B(config, 'eventEmitter', this),
-                groupName: GetValue$1B(config, 'groupName', undefined),
-                clickConfig: GetValue$1B(config, 'click', undefined)
+                eventEmitter: GetValue$1N(config, 'eventEmitter', this),
+                groupName: GetValue$1N(config, 'groupName', undefined),
+                clickConfig: GetValue$1N(config, 'click', undefined)
             })
                 .setButtonsType(config);
 
             // Add elements
-            var background = GetValue$1B(config, 'background', undefined);
-            var buttons = GetValue$1B(config, 'buttons', undefined);
+            var background = GetValue$1N(config, 'background', undefined);
+            var buttons = GetValue$1N(config, 'buttons', undefined);
 
             // Buttons properties
-            this.buttonsAlign = GetValue$1B(config, 'align', undefined);
+            this.buttonsAlign = GetValue$1N(config, 'align', undefined);
 
             if (background) {
                 this.addBackground(background);
@@ -61082,7 +61063,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     };
 
-    const GetValue$1A = Phaser.Utils.Objects.GetValue;
+    const GetValue$1M = Phaser.Utils.Objects.GetValue;
 
     class FileSelectorButton extends Label {
         constructor(scene, config) {
@@ -61095,8 +61076,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
             this.addChildrenMap('fileChooser', fileChooser);
 
-            this.setAccept(GetValue$1A(config, 'accept', ''));
-            this.setMultiple(GetValue$1A(config, 'multiple', false));
+            this.setAccept(GetValue$1M(config, 'accept', ''));
+            this.setMultiple(GetValue$1M(config, 'multiple', false));
 
             fileChooser
                 .on('change', function (gameObject) {
@@ -61551,15 +61532,15 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
     };
 
-    var Methods$7 = {};
+    var Methods$8 = {};
 
     Object.assign(
-        Methods$7,
+        Methods$8,
         ButtonMethods$1,
         ModalMethods,
     );
 
-    const GetValue$1z = Phaser.Utils.Objects.GetValue;
+    const GetValue$1L = Phaser.Utils.Objects.GetValue;
 
     class Dialog extends Sizer {
         constructor(scene, config) {
@@ -61570,24 +61551,24 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             config.orientation = 1; // Top to bottom
             super(scene, config);
             this.type = 'rexDialog';
-            this.eventEmitter = GetValue$1z(config, 'eventEmitter', this);
+            this.eventEmitter = GetValue$1L(config, 'eventEmitter', this);
 
             // Add elements
-            var background = GetValue$1z(config, 'background', undefined);
-            var title = GetValue$1z(config, 'title', undefined);
-            var toolbar = GetValue$1z(config, 'toolbar', undefined);
-            var toolbarBackground = GetValue$1z(config, 'toolbarBackground', undefined);
-            var leftToolbar = GetValue$1z(config, 'leftToolbar', undefined);
-            var leftToolbarBackground = GetValue$1z(config, 'leftToolbarBackground', undefined);
-            var content = GetValue$1z(config, 'content', undefined);
-            var description = GetValue$1z(config, 'description', undefined);
+            var background = GetValue$1L(config, 'background', undefined);
+            var title = GetValue$1L(config, 'title', undefined);
+            var toolbar = GetValue$1L(config, 'toolbar', undefined);
+            var toolbarBackground = GetValue$1L(config, 'toolbarBackground', undefined);
+            var leftToolbar = GetValue$1L(config, 'leftToolbar', undefined);
+            var leftToolbarBackground = GetValue$1L(config, 'leftToolbarBackground', undefined);
+            var content = GetValue$1L(config, 'content', undefined);
+            var description = GetValue$1L(config, 'description', undefined);
             var choicesSizer;
-            var choices = GetValue$1z(config, 'choices', undefined);
-            var choicesBackground = GetValue$1z(config, 'choicesBackground', undefined);
+            var choices = GetValue$1L(config, 'choices', undefined);
+            var choicesBackground = GetValue$1L(config, 'choicesBackground', undefined);
             var actionsSizer;
-            var actions = GetValue$1z(config, 'actions', undefined);
-            var actionsBackground = GetValue$1z(config, 'actionsBackground', undefined);
-            var clickConfig = GetValue$1z(config, 'click', undefined);
+            var actions = GetValue$1L(config, 'actions', undefined);
+            var actionsBackground = GetValue$1L(config, 'actionsBackground', undefined);
+            var clickConfig = GetValue$1L(config, 'click', undefined);
 
             if (background) {
                 this.addBackground(background);
@@ -61600,7 +61581,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                     background: toolbarBackground,
                     buttons: toolbar,
                     orientation: 0, // Left-right
-                    space: { item: GetValue$1z(config, 'space.toolbarItem', 0) },
+                    space: { item: GetValue$1L(config, 'space.toolbarItem', 0) },
                     click: clickConfig,
                     eventEmitter: this.eventEmitter,
                 });
@@ -61614,7 +61595,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                     background: leftToolbarBackground,
                     buttons: leftToolbar,
                     orientation: 0, // Left-right
-                    space: { item: GetValue$1z(config, 'space.leftToolbarItem', 0) },
+                    space: { item: GetValue$1L(config, 'space.leftToolbarItem', 0) },
                     click: clickConfig,
                     eventEmitter: this.eventEmitter,
                 });
@@ -61623,8 +61604,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
             // title or toolbar or leftToolbar
             if (title || toolbar || leftToolbar) {
-                var titleExpandWidth = !!title && GetValue$1z(config, 'expand.title', true);
-                var titleAlign = GetValue$1z(config, 'align.title', 'center');
+                var titleExpandWidth = !!title && GetValue$1L(config, 'expand.title', true);
+                var titleAlign = GetValue$1L(config, 'align.title', 'center');
                 var useOverlapSizer =
                     // Has title, title is not exapnd-width, title align to center
                     (title && !titleExpandWidth && (titleAlign === 'center')) ||
@@ -61658,8 +61639,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                     }
 
                     var padding = {
-                        left: GetValue$1z(config, 'space.titleLeft', 0),
-                        right: GetValue$1z(config, 'space.titleRight', 0)
+                        left: GetValue$1L(config, 'space.titleLeft', 0),
+                        right: GetValue$1L(config, 'space.titleRight', 0)
                     };
                     var proportion = (titleExpandWidth) ? 1 : 0;
                     titleSizer.add(
@@ -61689,11 +61670,11 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 var padding;
                 if (content || description || choices || actions) {
                     padding = {
-                        bottom: GetValue$1z(config, 'space.title', 0),
-                        top: GetValue$1z(config, 'space.titleTop', 0)
+                        bottom: GetValue$1L(config, 'space.title', 0),
+                        top: GetValue$1L(config, 'space.titleTop', 0)
                     };
                 }
-                var proportion = GetValue$1z(config, 'proportion.title', 0);
+                var proportion = GetValue$1L(config, 'proportion.title', 0);
                 this.add(
                     titleSizer,
                     { padding: padding, proportion: proportion, expand: true }
@@ -61701,15 +61682,15 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             }
 
             if (content) {
-                var align = GetValue$1z(config, 'align.content', 'center');
-                var contentSpace = GetValue$1z(config, 'space.content', 0);
+                var align = GetValue$1L(config, 'align.content', 'center');
+                var contentSpace = GetValue$1L(config, 'space.content', 0);
                 var padding = {
-                    left: GetValue$1z(config, 'space.contentLeft', 0),
-                    right: GetValue$1z(config, 'space.contentRight', 0),
+                    left: GetValue$1L(config, 'space.contentLeft', 0),
+                    right: GetValue$1L(config, 'space.contentRight', 0),
                     bottom: ((description || choices || actions) ? contentSpace : 0)
                 };
-                var proportion = GetValue$1z(config, 'proportion.content', 0);
-                var expand = GetValue$1z(config, 'expand.content', true);
+                var proportion = GetValue$1L(config, 'proportion.content', 0);
+                var expand = GetValue$1L(config, 'expand.content', true);
                 this.add(
                     content,
                     { align: align, padding: padding, proportion: proportion, expand: expand }
@@ -61717,15 +61698,15 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             }
 
             if (description) {
-                var align = GetValue$1z(config, 'align.description', 'center');
-                var descriptionSpace = GetValue$1z(config, 'space.description', 0);
+                var align = GetValue$1L(config, 'align.description', 'center');
+                var descriptionSpace = GetValue$1L(config, 'space.description', 0);
                 var padding = {
-                    left: GetValue$1z(config, 'space.descriptionLeft', 0),
-                    right: GetValue$1z(config, 'space.descriptionRight', 0),
+                    left: GetValue$1L(config, 'space.descriptionLeft', 0),
+                    right: GetValue$1L(config, 'space.descriptionRight', 0),
                     bottom: ((choices || actions) ? descriptionSpace : 0)
                 };
-                var proportion = GetValue$1z(config, 'proportion.description', 0);
-                var expand = GetValue$1z(config, 'expand.description', true);
+                var proportion = GetValue$1L(config, 'proportion.description', 0);
+                var expand = GetValue$1L(config, 'expand.description', true);
                 this.add(
                     description,
                     { align: align, padding: padding, proportion: proportion, expand: expand }
@@ -61733,7 +61714,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             }
 
             if (choices) {
-                var choicesType = GetValue$1z(config, 'choicesType', '').split('-');
+                var choicesType = GetValue$1L(config, 'choicesType', '').split('-');
                 var ButtonsClass = Contains(choicesType, 'wrap') ? Buttons :
                     Contains(choicesType, 'grid') ? GridButtons :
                         Buttons$1;
@@ -61741,25 +61722,25 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                     Contains(choicesType, 'checkboxes') ? 'checkboxes' : undefined;
 
                 var space = {
-                    left: GetValue$1z(config, 'space.choicesBackgroundLeft', 0),
-                    right: GetValue$1z(config, 'space.choicesBackgroundRight', 0),
-                    top: GetValue$1z(config, 'space.choicesBackgroundTop', 0),
-                    bottom: GetValue$1z(config, 'space.choicesBackgroundBottom', 0),
+                    left: GetValue$1L(config, 'space.choicesBackgroundLeft', 0),
+                    right: GetValue$1L(config, 'space.choicesBackgroundRight', 0),
+                    top: GetValue$1L(config, 'space.choicesBackgroundTop', 0),
+                    bottom: GetValue$1L(config, 'space.choicesBackgroundBottom', 0),
                 };
-                var itemSpace = GetValue$1z(config, 'space.choice', 0);
+                var itemSpace = GetValue$1L(config, 'space.choice', 0);
                 if (ButtonsClass === Buttons$1) {
                     space.item = itemSpace;
                 } else if (ButtonsClass === Buttons) {
                     space.item = itemSpace;
-                    space.line = GetValue$1z(config, 'space.choiceLine', itemSpace);
+                    space.line = GetValue$1L(config, 'space.choiceLine', itemSpace);
                 } else {  // GridButtons
-                    space.column = GetValue$1z(config, 'space.choiceColumn', itemSpace);
-                    space.row = GetValue$1z(config, 'space.choiceRow', itemSpace);
+                    space.column = GetValue$1L(config, 'space.choiceColumn', itemSpace);
+                    space.row = GetValue$1L(config, 'space.choiceRow', itemSpace);
                 }
 
                 var choicesConfig = {
-                    width: GetValue$1z(config, 'choicesWidth', undefined),
-                    height: GetValue$1z(config, 'choicesHeight', undefined),
+                    width: GetValue$1L(config, 'choicesWidth', undefined),
+                    height: GetValue$1L(config, 'choicesHeight', undefined),
                     groupName: 'choices',
                     buttonsType: buttonsType,
                     background: choicesBackground,
@@ -61767,8 +61748,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                     space: space,
                     click: clickConfig,
                     eventEmitter: this.eventEmitter,
-                    setValueCallback: GetValue$1z(config, 'choicesSetValueCallback', undefined),
-                    setValueCallbackScope: GetValue$1z(config, 'choicesSetValueCallbackScope', undefined)
+                    setValueCallback: GetValue$1L(config, 'choicesSetValueCallback', undefined),
+                    setValueCallbackScope: GetValue$1L(config, 'choicesSetValueCallbackScope', undefined)
                 };
 
                 if (ButtonsClass === Buttons$1) {
@@ -61777,15 +61758,15 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
                 choicesSizer = new ButtonsClass(scene, choicesConfig);
                 scene.add.existing(choicesSizer);
-                var choicesSpace = GetValue$1z(config, 'space.choices', 0);
+                var choicesSpace = GetValue$1L(config, 'space.choices', 0);
                 var padding = {
-                    left: GetValue$1z(config, 'space.choicesLeft', 0),
-                    right: GetValue$1z(config, 'space.choicesRight', 0),
+                    left: GetValue$1L(config, 'space.choicesLeft', 0),
+                    right: GetValue$1L(config, 'space.choicesRight', 0),
                     bottom: ((actions) ? choicesSpace : 0)
                 };
-                var align = GetValue$1z(config, 'align.choices', 'center');
-                var proportion = GetValue$1z(config, 'proportion.choices', 0);
-                var expand = GetValue$1z(config, 'expand.choices', true);
+                var align = GetValue$1L(config, 'align.choices', 'center');
+                var proportion = GetValue$1L(config, 'proportion.choices', 0);
+                var expand = GetValue$1L(config, 'expand.choices', true);
                 this.add(
                     choicesSizer,
                     { align: align, padding: padding, proportion: proportion, expand: expand }
@@ -61800,19 +61781,19 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                     background: actionsBackground,
                     buttons: actions,
                     orientation: 0, // Left-right
-                    space: { item: GetValue$1z(config, 'space.action', 0) },
-                    expand: GetValue$1z(config, 'expand.actions', false),
-                    align: GetValue$1z(config, 'align.actions', 'center'),
+                    space: { item: GetValue$1L(config, 'space.action', 0) },
+                    expand: GetValue$1L(config, 'expand.actions', false),
+                    align: GetValue$1L(config, 'align.actions', 'center'),
                     click: clickConfig,
                     eventEmitter: this.eventEmitter,
                 });
                 scene.add.existing(actionsSizer);
                 var padding = {
-                    left: GetValue$1z(config, 'space.actionsLeft', 0),
-                    right: GetValue$1z(config, 'space.actionsRight', 0),
-                    bottom: GetValue$1z(config, 'space.actionsBottom', 0),
+                    left: GetValue$1L(config, 'space.actionsLeft', 0),
+                    right: GetValue$1L(config, 'space.actionsRight', 0),
+                    bottom: GetValue$1L(config, 'space.actionsBottom', 0),
                 };
-                var proportion = GetValue$1z(config, 'proportion.action', 0);
+                var proportion = GetValue$1L(config, 'proportion.action', 0);
                 this.add(
                     actionsSizer,
                     { align: 'center', padding: padding, proportion: proportion, expand: true }
@@ -61862,7 +61843,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     Object.assign(
         Dialog.prototype,
-        Methods$7
+        Methods$8
     );
 
     ObjectFactory.register('dialog', function (config) {
@@ -62080,13 +62061,13 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         },
     };
 
-    var Methods$6 = {
+    var Methods$7 = {
         resetDisplayContent: ResetDisplayContent$1,
         modal: Modal$1,
     };
 
     Object.assign(
-        Methods$6,
+        Methods$7,
         SetButtonIndexMethods,
     );
 
@@ -62130,10 +62111,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     };
 
-    const GetValue$1y = Phaser.Utils.Objects.GetValue;
+    const GetValue$1K = Phaser.Utils.Objects.GetValue;
 
     var CreateContent$1 = function (scene, config, creators) {
-        var type = GetValue$1y(config, '$type');
+        var type = GetValue$1K(config, '$type');
         if (type === undefined) {
             if (config &&
                 (config.hasOwnProperty('slider') || config.hasOwnProperty('scroller'))
@@ -62158,7 +62139,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return gameObject;
     };
 
-    const GetValue$1x = Phaser.Utils.Objects.GetValue;
+    const GetValue$1J = Phaser.Utils.Objects.GetValue;
 
     class ConfirmDialog extends Dialog {
         constructor(scene, config, creators) {
@@ -62168,7 +62149,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 creators = {};
             }
 
-            var createBackground = GetValue$1x(creators, 'background', CreateBackground$2);
+            var createBackground = GetValue$1J(creators, 'background', CreateBackground$2);
             config.background = createBackground(scene, config.background);
 
             config.title = CreateLabel(scene, config.title, creators.title);
@@ -62239,8 +62220,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             RegisterEvents.call(this);
 
             // Assign button index for comfirm, cancel events
-            this.setConfirmButtonIndex(GetValue$1x(config, 'confirmButtonIndex', 0));
-            this.setCancelButtonIndex(GetValue$1x(config, 'cancelButtonIndex', 1));
+            this.setConfirmButtonIndex(GetValue$1J(config, 'confirmButtonIndex', 0));
+            this.setCancelButtonIndex(GetValue$1J(config, 'cancelButtonIndex', 1));
 
             this.modalStyle = config.modal || {};
         }
@@ -62248,7 +62229,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     Object.assign(
         ConfirmDialog.prototype,
-        Methods$6
+        Methods$7
     );
 
     ObjectFactory.register('confirmDialog', function (config, creators) {
@@ -62259,7 +62240,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     SetValue(window, 'RexPlugins.UI.ConfirmDialog', ConfirmDialog);
 
-    const GetValue$1w = Phaser.Utils.Objects.GetValue;
+    const GetValue$1I = Phaser.Utils.Objects.GetValue;
 
     var ConfirmAction = function (scene, config) {
         var dialog = config.dialog;
@@ -62273,8 +62254,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
 
         dialog
-            .setConfirmButtonIndex(GetValue$1w(config, 'confirmButtonIndex', 0))
-            .setCancelButtonIndex(GetValue$1w(config, 'cancelButtonIndex', 1))
+            .setConfirmButtonIndex(GetValue$1I(config, 'confirmButtonIndex', 0))
+            .setCancelButtonIndex(GetValue$1I(config, 'cancelButtonIndex', 1))
             .resetDisplayContent(config.content)
             .layout();
 
@@ -62552,16 +62533,16 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return inputText;
     };
 
-    const GetValue$1v = Phaser.Utils.Objects.GetValue;
+    const GetValue$1H = Phaser.Utils.Objects.GetValue;
 
     var CreateContent = function (scene, config, creators) {
         // Names-sizer as content
-        var layoutMode = GetOrientationMode(GetValue$1v(config, 'layoutMode', 0));
+        var layoutMode = GetOrientationMode(GetValue$1H(config, 'layoutMode', 0));
         var isHorizontalLayout = layoutMode === 0;
         var nameSizer = new Sizer(scene, {
             orientation: layoutMode,
             space: {
-                item: GetValue$1v(config, 'space.firstName', 0)
+                item: GetValue$1H(config, 'space.firstName', 0)
             }
         });
         scene.add.existing(nameSizer);
@@ -62570,21 +62551,21 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         var firstNameSizer = new Sizer(scene, { orientation: 'x' });
         scene.add.existing(firstNameSizer);
 
-        var firstNameTitleConfig = GetValue$1v(config, 'firstNameTitle', config.nameTitle);
+        var firstNameTitleConfig = GetValue$1H(config, 'firstNameTitle', config.nameTitle);
         var firstNameTitle = CreateLabel(scene, firstNameTitleConfig, creators.firstNameTitle || creators.nameTitle);
         firstNameSizer.add(
             firstNameTitle,
             {
                 expand: true,
-                proportion: GetValue$1v(config, 'proportion.firstNameTitle', 0),
+                proportion: GetValue$1H(config, 'proportion.firstNameTitle', 0),
                 padding: {
-                    right: GetValue$1v(config, 'space.firstNameTitle', 0)
+                    right: GetValue$1H(config, 'space.firstNameTitle', 0)
                 },
             }
         );
 
         var defaultNameInputConfig = config.nameInput || {};
-        var firstNameInputConfig = GetValue$1v(config, 'firstNameInput', defaultNameInputConfig);
+        var firstNameInputConfig = GetValue$1H(config, 'firstNameInput', defaultNameInputConfig);
         var firstNameInput = CreateInputText$1(scene, firstNameInputConfig, creators.firstNameInput || creators.nameInput);
         var expandFirstNameSizer = !firstNameInputConfig.hasOwnProperty('width');
         firstNameSizer.add(
@@ -62599,20 +62580,20 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         var lastNameSizer = new Sizer(scene, { orientation: 'x' });
         scene.add.existing(lastNameSizer);
 
-        var lastNameTitleConfig = GetValue$1v(config, 'lastNameTitle', config.nameTitle);
+        var lastNameTitleConfig = GetValue$1H(config, 'lastNameTitle', config.nameTitle);
         var lastNameTitle = CreateLabel(scene, lastNameTitleConfig, creators.lastNameTitle || creators.nameTitle);
         lastNameSizer.add(
             lastNameTitle,
             {
                 expand: true,
-                proportion: GetValue$1v(config, 'proportion.lastNameTitle', 0),
+                proportion: GetValue$1H(config, 'proportion.lastNameTitle', 0),
                 padding: {
-                    right: GetValue$1v(config, 'space.lastNameTitle', 0)
+                    right: GetValue$1H(config, 'space.lastNameTitle', 0)
                 }
             }
         );
 
-        var lastNameInputConfig = GetValue$1v(config, 'firstNameInput', defaultNameInputConfig);
+        var lastNameInputConfig = GetValue$1H(config, 'firstNameInput', defaultNameInputConfig);
         var lastNameInput = CreateInputText$1(scene, lastNameInputConfig, creators.lastNameInput || creators.nameInput);
         var expandLastNameSizer = !lastNameInputConfig.hasOwnProperty('width');
         lastNameSizer.add(
@@ -62628,7 +62609,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             // First | Last
 
             var defaultFirstNameProportion = (expandFirstNameSizer) ? 1 : 0;
-            var firstNameProportion = GetValue$1v(config, 'proportion.firstName', defaultFirstNameProportion);
+            var firstNameProportion = GetValue$1H(config, 'proportion.firstName', defaultFirstNameProportion);
             nameSizer.add(
                 firstNameSizer,
                 {
@@ -62638,7 +62619,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             );
 
             var defaultLastNameProportion = (expandLastNameSizer) ? 1 : 0;
-            var lastNameProportion = GetValue$1v(config, 'proportion.lastName', defaultLastNameProportion);
+            var lastNameProportion = GetValue$1H(config, 'proportion.lastName', defaultLastNameProportion);
             nameSizer.add(
                 lastNameSizer,
                 {
@@ -62673,7 +62654,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return nameSizer;
     };
 
-    const GetValue$1u = Phaser.Utils.Objects.GetValue;
+    const GetValue$1G = Phaser.Utils.Objects.GetValue;
 
     class NameInputDialog extends Dialog {
         constructor(scene, config, creators) {
@@ -62702,7 +62683,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
 
             // Background
-            var createBackground = GetValue$1u(creators, 'background', CreateBackground$2);
+            var createBackground = GetValue$1G(creators, 'background', CreateBackground$2);
             config.background = createBackground(scene, config.background);
 
             // Title
@@ -62789,18 +62770,18 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         parent.remove(gameObject, destroyChild);
     };
 
-    const GetValue$1t = Phaser.Utils.Objects.GetValue;
+    const GetValue$1F = Phaser.Utils.Objects.GetValue;
 
     var GetAddChildConfig = function (config, key, defaultValues) {
-        var proportion = GetValue$1t(config, `proportion.${key}`, defaultValues.proportion);
-        var align = GetValue$1t(config, `align.${key}`, 'center');
-        var padding = GetValue$1t(config, `space.${key}`, undefined);
+        var proportion = GetValue$1F(config, `proportion.${key}`, defaultValues.proportion);
+        var align = GetValue$1F(config, `align.${key}`, 'center');
+        var padding = GetValue$1F(config, `space.${key}`, undefined);
         if ((typeof (padding) === 'number') && defaultValues.paddingKey) {
             var paddingNum = padding;
             padding = {};
             padding[defaultValues.paddingKey] = paddingNum;
         }
-        var expand = GetValue$1t(config, `expand.${key}`, true);
+        var expand = GetValue$1F(config, `expand.${key}`, true);
 
         return {
             proportion: proportion,
@@ -62871,7 +62852,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
     */
 
 
-    var LayoutMode0$2 = function (config) {
+    var LayoutMode0$3 = function (config) {
         var scene = this.scene;
 
         // Add Header
@@ -62921,7 +62902,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
     */
 
 
-    var LayoutMode1$1 = function (config) {
+    var LayoutMode1$2 = function (config) {
         var scene = this.scene;
 
         // Add Header
@@ -63052,7 +63033,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
     */
 
 
-    var LayoutMode0$1 = function (config) {
+    var LayoutMode0$2 = function (config) {
         var scene = this.scene;
 
         // Add Header
@@ -63102,10 +63083,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     };
 
-    const GetValue$1s = Phaser.Utils.Objects.GetValue;
-    const LayoutCallbacks$1 = [LayoutMode0$2, LayoutMode1$1, LayoutMode2, LayoutMode0$1];
+    const GetValue$1E = Phaser.Utils.Objects.GetValue;
+    const LayoutCallbacks$2 = [LayoutMode0$3, LayoutMode1$2, LayoutMode2, LayoutMode0$2];
 
-    var Build$1 = function (config) {
+    var Build$2 = function (config) {
         if (config === undefined) {
             config = {};
         }
@@ -63132,11 +63113,11 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this.addBackground(background);
         }
 
-        var layoutMode = GetValue$1s(config, 'layoutMode', 0);
+        var layoutMode = GetValue$1E(config, 'layoutMode', 0);
         if (typeof (layoutMode) === 'string') {
             layoutMode = LayoutModesMap[layoutMode.toUpperCase()];
         }
-        var layoutCallback = LayoutCallbacks$1[layoutMode] || LayoutCallbacks$1[0];
+        var layoutCallback = LayoutCallbacks$2[layoutMode] || LayoutCallbacks$2[0];
         layoutCallback.call(this, config);
 
         this.addChildrenMap('background', background);
@@ -63172,7 +63153,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
     }
 
     var methods$f = {
-        build: Build$1,
+        build: Build$2,
     };
 
     Object.assign(
@@ -63459,7 +63440,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         },
     };
 
-    const GetValue$1r = Phaser.Utils.Objects.GetValue;
+    const GetValue$1D = Phaser.Utils.Objects.GetValue;
 
     class Tabs extends GridSizer {
         constructor(scene, config) {
@@ -63472,7 +63453,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             config.columnProportions = [0, 0, 0];
             config.rowProportions = [0, 0, 0];
 
-            var expandPanel = GetValue$1r(config, 'expand.panel', false);
+            var expandPanel = GetValue$1D(config, 'expand.panel', false);
             if (expandPanel) {
                 config.columnProportions[1] = 1;
                 config.rowProportions[1] = 1;
@@ -63480,24 +63461,24 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
             super(scene, config);
             this.type = 'rexTabs';
-            this.eventEmitter = GetValue$1r(config, 'eventEmitter', this);
+            this.eventEmitter = GetValue$1D(config, 'eventEmitter', this);
 
             // Add elements
-            var background = GetValue$1r(config, 'background', undefined);
-            var panel = GetValue$1r(config, 'panel', undefined);
-            var leftButtons = GetValue$1r(config, 'leftButtons', undefined);
-            var leftButtonsBackground = GetValue$1r(config, 'leftButtonsBackground', undefined);
+            var background = GetValue$1D(config, 'background', undefined);
+            var panel = GetValue$1D(config, 'panel', undefined);
+            var leftButtons = GetValue$1D(config, 'leftButtons', undefined);
+            var leftButtonsBackground = GetValue$1D(config, 'leftButtonsBackground', undefined);
             var leftButtonsSizer;
-            var rightButtons = GetValue$1r(config, 'rightButtons', undefined);
-            var rightButtonsBackground = GetValue$1r(config, 'rightButtonsBackground', undefined);
+            var rightButtons = GetValue$1D(config, 'rightButtons', undefined);
+            var rightButtonsBackground = GetValue$1D(config, 'rightButtonsBackground', undefined);
             var rightButtonsSizer;
-            var topButtons = GetValue$1r(config, 'topButtons', undefined);
-            var topButtonsBackground = GetValue$1r(config, 'topButtonsBackground', undefined);
+            var topButtons = GetValue$1D(config, 'topButtons', undefined);
+            var topButtonsBackground = GetValue$1D(config, 'topButtonsBackground', undefined);
             var topButtonsSizer;
-            var bottomButtons = GetValue$1r(config, 'bottomButtons', undefined);
-            var bottomButtonsBackground = GetValue$1r(config, 'bottomButtonsBackground', undefined);
+            var bottomButtons = GetValue$1D(config, 'bottomButtons', undefined);
+            var bottomButtonsBackground = GetValue$1D(config, 'bottomButtonsBackground', undefined);
             var bottomButtonsSizer;
-            var clickConfig = GetValue$1r(config, 'click', undefined);
+            var clickConfig = GetValue$1D(config, 'click', undefined);
 
             if (background) {
                 this.addBackground(background);
@@ -63514,10 +63495,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             }
 
             if (leftButtons) {
-                var leftButtonsOffset = GetValue$1r(config, 'space.leftButtonsOffset', 0);
-                var leftButtonSpace = GetValue$1r(config, 'space.leftButton', 0);
-                var leftButtonExpand = GetValue$1r(config, 'expand.leftButtons', false);
-                var leftButtonsAlign = GetValue$1r(config, 'align.leftButtons', 'top');
+                var leftButtonsOffset = GetValue$1D(config, 'space.leftButtonsOffset', 0);
+                var leftButtonSpace = GetValue$1D(config, 'space.leftButton', 0);
+                var leftButtonExpand = GetValue$1D(config, 'expand.leftButtons', false);
+                var leftButtonsAlign = GetValue$1D(config, 'align.leftButtons', 'top');
                 leftButtonsSizer = new Buttons$1(scene, {
                     groupName: 'left',
                     background: leftButtonsBackground,
@@ -63540,10 +63521,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             }
 
             if (rightButtons) {
-                var rightButtonsOffset = GetValue$1r(config, 'space.rightButtonsOffset', 0);
-                var rightButtonSpace = GetValue$1r(config, 'space.rightButton', 0);
-                var rightButtonExpand = GetValue$1r(config, 'expand.rightButtons', false);
-                var rightButtonsAlign = GetValue$1r(config, 'align.rightButtons', 'top');
+                var rightButtonsOffset = GetValue$1D(config, 'space.rightButtonsOffset', 0);
+                var rightButtonSpace = GetValue$1D(config, 'space.rightButton', 0);
+                var rightButtonExpand = GetValue$1D(config, 'expand.rightButtons', false);
+                var rightButtonsAlign = GetValue$1D(config, 'align.rightButtons', 'top');
                 rightButtonsSizer = new Buttons$1(scene, {
                     groupName: 'right',
                     background: rightButtonsBackground,
@@ -63566,10 +63547,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             }
 
             if (topButtons) {
-                var toptButtonsOffset = GetValue$1r(config, 'space.topButtonsOffset', 0);
-                var topButtonSpace = GetValue$1r(config, 'space.topButton', 0);
-                var topButtonExpand = GetValue$1r(config, 'expand.topButtons', false);
-                var topButtonsAlign = GetValue$1r(config, 'align.topButtons', 'left');
+                var toptButtonsOffset = GetValue$1D(config, 'space.topButtonsOffset', 0);
+                var topButtonSpace = GetValue$1D(config, 'space.topButton', 0);
+                var topButtonExpand = GetValue$1D(config, 'expand.topButtons', false);
+                var topButtonsAlign = GetValue$1D(config, 'align.topButtons', 'left');
                 topButtonsSizer = new Buttons$1(scene, {
                     groupName: 'top',
                     background: topButtonsBackground,
@@ -63577,7 +63558,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                     orientation: 'x', // Left-Right
                     space: { item: topButtonSpace },
                     expand: topButtonExpand,
-                    align: GetValue$1r(config, 'align.topButtons', undefined),
+                    align: GetValue$1D(config, 'align.topButtons', undefined),
                     click: clickConfig,
                     eventEmitter: this.eventEmitter,
                 });
@@ -63593,10 +63574,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             }
 
             if (bottomButtons) {
-                var bottomButtonsOffset = GetValue$1r(config, 'space.bottomButtonsOffset', 0);
-                var bottomButtonSpace = GetValue$1r(config, 'space.bottomButton', 0);
-                var bottomButtonExpand = GetValue$1r(config, 'expand.bottomButtons', false);
-                var bottomButtonsAlign = GetValue$1r(config, 'align.bottomButtons', 'left');
+                var bottomButtonsOffset = GetValue$1D(config, 'space.bottomButtonsOffset', 0);
+                var bottomButtonSpace = GetValue$1D(config, 'space.bottomButton', 0);
+                var bottomButtonExpand = GetValue$1D(config, 'expand.bottomButtons', false);
+                var bottomButtonsAlign = GetValue$1D(config, 'align.bottomButtons', 'left');
                 bottomButtonsSizer = new Buttons$1(scene, {
                     groupName: 'bottom',
                     background: bottomButtonsBackground,
@@ -63604,7 +63585,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                     orientation: 'x', // Left-Right
                     space: { item: bottomButtonSpace },
                     expand: bottomButtonExpand,
-                    align: GetValue$1r(config, 'align.bottomButtons', undefined),
+                    align: GetValue$1D(config, 'align.bottomButtons', undefined),
                     click: clickConfig,
                     eventEmitter: this.eventEmitter,
                 });
@@ -63851,7 +63832,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         DataMethods$2
     );
 
-    const GetValue$1q = Phaser.Utils.Objects.GetValue;
+    const GetValue$1C = Phaser.Utils.Objects.GetValue;
     const SpliceOne = Phaser.Utils.Array.SpliceOne;
     const DefaultCellSize = 60;
 
@@ -63883,8 +63864,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
             this.setDefaultCellHeight(cellHeight);
             this.setDefaultCellWidth(cellWidth);
-            this.initCells(GetValue$1q(o, 'cellsCount', 0));
-            this.setColumnCount(GetValue$1q(o, 'columns', 1));
+            this.initCells(GetValue$1C(o, 'cellsCount', 0));
+            this.setColumnCount(GetValue$1C(o, 'columns', 1));
             return this;
         }
 
@@ -64475,7 +64456,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     };
 
-    const GetValue$1p = Phaser.Utils.Objects.GetValue;
+    const GetValue$1B = Phaser.Utils.Objects.GetValue;
 
     const MASKUPDATEMODE = {
         update: 0,
@@ -64489,12 +64470,12 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 return this;
             }
 
-            this.setMaskUpdateMode(GetValue$1p(config, 'updateMode', 0));
-            this.enableChildrenMask(GetValue$1p(config, 'padding', 0));
+            this.setMaskUpdateMode(GetValue$1B(config, 'updateMode', 0));
+            this.enableChildrenMask(GetValue$1B(config, 'padding', 0));
 
-            this.onMaskGameObjectVisible = GetValue$1p(config, 'onVisible');
-            this.onMaskGameObjectInvisible = GetValue$1p(config, 'onInvisible');
-            this.maskGameObjectCallbackScope = GetValue$1p(config, 'scope');
+            this.onMaskGameObjectVisible = GetValue$1B(config, 'onVisible');
+            this.onMaskGameObjectInvisible = GetValue$1B(config, 'onInvisible');
+            this.maskGameObjectCallbackScope = GetValue$1B(config, 'scope');
 
             this.startMaskUpdate();
 
@@ -64852,7 +64833,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return this;
     };
 
-    const Clamp$4 = Phaser.Math.Clamp;
+    const Clamp$5 = Phaser.Math.Clamp;
 
     var InsertNewCells = function (cellIdx, count) {
         if (typeof (cellIdx) === 'object') {
@@ -64864,7 +64845,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         if (count <= 0) {
             return this;
         }
-        cellIdx = Clamp$4(cellIdx, 0, this.cellsCount);
+        cellIdx = Clamp$5(cellIdx, 0, this.cellsCount);
         this.table.insertNewCells(cellIdx, count);
         return this;
     };
@@ -65015,7 +64996,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     const Group = Phaser.GameObjects.Group;
     const Set = Phaser.Structs.Set;
-    const GetValue$1o = Phaser.Utils.Objects.GetValue;
+    const GetValue$1A = Phaser.Utils.Objects.GetValue;
 
     let GridTable$1 = class GridTable extends ContainerLite {
         constructor(scene, x, y, width, height, config) {
@@ -65033,35 +65014,35 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this.execeedLeftState = false;
             this.execeedRightState = false;
 
-            var reuseCellContainer = GetValue$1o(config, 'reuseCellContainer', false);
+            var reuseCellContainer = GetValue$1A(config, 'reuseCellContainer', false);
             if (reuseCellContainer) {
                 this.cellContainersPool = new Group(scene); // Don't add Group into update list, I will destroy it manually
             }
 
-            var callback = GetValue$1o(config, 'cellVisibleCallback', null);
+            var callback = GetValue$1A(config, 'cellVisibleCallback', null);
             if (callback !== null) {
-                var scope = GetValue$1o(config, 'cellVisibleCallbackScope', undefined);
+                var scope = GetValue$1A(config, 'cellVisibleCallbackScope', undefined);
                 this.on('cellvisible', callback, scope);
             }
-            callback = GetValue$1o(config, 'cellInvisibleCallback', null);
+            callback = GetValue$1A(config, 'cellInvisibleCallback', null);
             if (callback !== null) {
-                var scope = GetValue$1o(config, 'cellInvisibleCallbackScope', undefined);
+                var scope = GetValue$1A(config, 'cellInvisibleCallbackScope', undefined);
                 this.on('cellinvisible', callback, scope);
             }
 
-            if (GetValue$1o(config, 'enableLayer', false)) {
+            if (GetValue$1A(config, 'enableLayer', false)) {
                 this.enableLayer();
             }
 
-            this.setupChildrenMask(GetValue$1o(config, 'mask', undefined));
+            this.setupChildrenMask(GetValue$1A(config, 'mask', undefined));
 
             if (this.childrenMask) {
                 this.maskGameObject = MaskToGameObject(this.childrenMask);
             }
 
-            this.setScrollMode(GetValue$1o(config, 'scrollMode', 0));
-            this.setClampMode(GetValue$1o(config, 'clampTableOXY', true));
-            this.setStartFromBottomEnable(GetValue$1o(config, 'startFromBottom', false));
+            this.setScrollMode(GetValue$1A(config, 'scrollMode', 0));
+            this.setClampMode(GetValue$1A(config, 'clampTableOXY', true));
+            this.setStartFromBottomEnable(GetValue$1A(config, 'startFromBottom', false));
 
             // Pre-process cell size
             var cellWidth, cellHeight, columns;
@@ -65073,10 +65054,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             } else {  // scroll x
                 cellWidth = config.cellHeight;
                 cellHeight = config.cellWidth;
-                columns = GetValue$1o(config, 'rows', config.columns);
+                columns = GetValue$1A(config, 'rows', config.columns);
             }
 
-            this.fixedCellSize = GetValue$1o(config, 'fixedCellSize', false);
+            this.fixedCellSize = GetValue$1A(config, 'fixedCellSize', false);
             this.expandCellSize = (!this.fixedCellSize) && (cellWidth === undefined);
 
             if (!columns) {
@@ -65615,15 +65596,15 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             }, this);
     };
 
-    const GetValue$1n = Phaser.Utils.Objects.GetValue;
+    const GetValue$1z = Phaser.Utils.Objects.GetValue;
 
     var OverCell = function (table, tableConfig) {
-        var overConfig = GetValue$1n(tableConfig, 'over', true);
+        var overConfig = GetValue$1z(tableConfig, 'over', true);
         if (overConfig === false) {
             return;
         }
 
-        var overTestMode = GetValue$1n(overConfig, 'mode', undefined);
+        var overTestMode = GetValue$1z(overConfig, 'mode', undefined);
 
         if (overTestMode === 'boundary') {
             // Use global input detecting
@@ -65650,10 +65631,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
     };
 
-    const GetValue$1m = Phaser.Utils.Objects.GetValue;
+    const GetValue$1y = Phaser.Utils.Objects.GetValue;
 
     var ClickCell = function (table, tableConfig) {
-        var buttonConfig = GetValue$1m(tableConfig, 'click', undefined);
+        var buttonConfig = GetValue$1y(tableConfig, 'click', undefined);
         if (buttonConfig === false) {
             return;
         } else if (buttonConfig === undefined) {
@@ -65666,10 +65647,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }, this);
     };
 
-    const GetValue$1l = Phaser.Utils.Objects.GetValue;
+    const GetValue$1x = Phaser.Utils.Objects.GetValue;
 
     var TapCell = function (table, tableConfig) {
-        var tapConfig = GetValue$1l(tableConfig, 'tap', undefined);
+        var tapConfig = GetValue$1x(tableConfig, 'tap', undefined);
         if (tapConfig === false) {
             return;
         }
@@ -65682,10 +65663,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             }, this);
     };
 
-    const GetValue$1k = Phaser.Utils.Objects.GetValue;
+    const GetValue$1w = Phaser.Utils.Objects.GetValue;
 
     var PressCell = function (table, tableConfig) {
-        var pressConfig = GetValue$1k(tableConfig, 'press', undefined);
+        var pressConfig = GetValue$1w(tableConfig, 'press', undefined);
         if (pressConfig === false) {
             return;
         }
@@ -65700,10 +65681,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             }, this);
     };
 
-    const GetValue$1j = Phaser.Utils.Objects.GetValue;
+    const GetValue$1v = Phaser.Utils.Objects.GetValue;
 
     var SwipeCell = function (table, tableConfig) {
-        var swipeConfig = GetValue$1j(tableConfig, 'swipe', undefined);
+        var swipeConfig = GetValue$1v(tableConfig, 'swipe', undefined);
         if (swipeConfig === false) {
             return;
         } else if (swipeConfig === undefined) {
@@ -65847,7 +65828,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
     };
 
-    const GetValue$1i = Phaser.Utils.Objects.GetValue;
+    const GetValue$1u = Phaser.Utils.Objects.GetValue;
 
     class GridTable extends Scrollable$1 {
         constructor(scene, config) {
@@ -65857,14 +65838,14 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
             // Create grid table core
             var scrollMode = GetScrollMode(config);
-            var tableConfig = GetValue$1i(config, 'table', undefined);
+            var tableConfig = GetValue$1u(config, 'table', undefined);
             if (tableConfig === undefined) {
                 tableConfig = {};
             }
             tableConfig.scrollMode = (scrollMode === 2) ? 0 : scrollMode;
-            tableConfig.clampTableOXY = GetValue$1i(config, 'clampChildOY', false);
-            var tableWidth = GetValue$1i(tableConfig, 'width', undefined);
-            var tableHeight = GetValue$1i(tableConfig, 'height', undefined);
+            tableConfig.clampTableOXY = GetValue$1u(config, 'clampChildOY', false);
+            var tableWidth = GetValue$1u(tableConfig, 'width', undefined);
+            var tableHeight = GetValue$1u(tableConfig, 'height', undefined);
             var table = new GridTable$1(scene, 0, 0, tableWidth, tableHeight, tableConfig);
             scene.add.existing(table); // Important: Add to display list for touch detecting
             var expandWidth, expandHeight;
@@ -65888,9 +65869,9 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 expandWidth: expandWidth,
                 expandHeight: expandHeight,
             };
-            var spaceConfig = GetValue$1i(config, 'space', undefined);
+            var spaceConfig = GetValue$1u(config, 'space', undefined);
             if (spaceConfig) {
-                spaceConfig.child = GetValue$1i(spaceConfig, 'table', 0);
+                spaceConfig.child = GetValue$1u(spaceConfig, 'table', 0);
             }
 
             super(scene, config);
@@ -65898,9 +65879,9 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this.addChildrenMap('table', table);
             this.addChildrenMap('mask', table.maskGameObject);
 
-            this.eventEmitter = GetValue$1i(config, 'eventEmitter', this);
-            var callback = GetValue$1i(config, 'createCellContainerCallback', NOOP);
-            var scope = GetValue$1i(config, 'createCellContainerCallbackScope', undefined);
+            this.eventEmitter = GetValue$1u(config, 'eventEmitter', this);
+            var callback = GetValue$1u(config, 'createCellContainerCallback', NOOP);
+            var scope = GetValue$1u(config, 'createCellContainerCallbackScope', undefined);
             this.setCreateCellContainerCallback(callback, scope);
             TableOnCellVisible.call(this, table);
 
@@ -65910,11 +65891,11 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 this.resizeControllerFlag = true;
             }, this);
 
-            if (GetValue$1i(tableConfig, 'interactive', true)) {
+            if (GetValue$1u(tableConfig, 'interactive', true)) {
                 TableSetInteractive.call(this, table, tableConfig);
             }
 
-            this.setItems(GetValue$1i(config, 'items'), false);
+            this.setItems(GetValue$1u(config, 'items'), false);
 
             scene.game.events.on('poststep', this.onPostStep, this);
         }
@@ -66138,14 +66119,14 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return this;
     };
 
-    var Methods$5 = {
+    var Methods$6 = {
         expandSubMenu: ExpandSubMenu,
         collapse: Collapse,
         collapseSubMenu: CollapseSubMenu,
     };
 
     Object.assign(
-        Methods$5,
+        Methods$6,
         SetTransitCallbackMethods,
         DelayCallMethods
     );
@@ -66259,7 +66240,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
     };
 
-    const GetValue$1h = Phaser.Utils.Objects.GetValue;
+    const GetValue$1t = Phaser.Utils.Objects.GetValue;
 
     class Menu extends Buttons$1 {
         constructor(scene, config) {
@@ -66277,16 +66258,16 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             var parentMenu = config._parentMenu;
             var parentButton = config._parentButton;
             // Popup, root menu can be static, sub-menus are always popup.
-            var popUp = GetValue$1h(config, 'popup', true);
+            var popUp = GetValue$1t(config, 'popup', true);
             // Items
-            var items = GetValue$1h(config, 'items', undefined);
+            var items = GetValue$1t(config, 'items', undefined);
             // Background
-            var createBackgroundCallback = GetValue$1h(config, 'createBackgroundCallback', undefined);
-            var createBackgroundCallbackScope = GetValue$1h(config, 'createBackgroundCallbackScope', undefined);
+            var createBackgroundCallback = GetValue$1t(config, 'createBackgroundCallback', undefined);
+            var createBackgroundCallbackScope = GetValue$1t(config, 'createBackgroundCallbackScope', undefined);
             config.background = CreateBackground$1(scene, items, createBackgroundCallback, createBackgroundCallbackScope);
             // Buttons
-            var createButtonCallback = GetValue$1h(config, 'createButtonCallback', undefined);
-            var createButtonCallbackScope = GetValue$1h(config, 'createButtonCallbackScope', undefined);
+            var createButtonCallback = GetValue$1t(config, 'createButtonCallback', undefined);
+            var createButtonCallbackScope = GetValue$1t(config, 'createButtonCallbackScope', undefined);
             config.buttons = CreateButtons$4(scene, items, createButtonCallback, createButtonCallbackScope);
 
             super(scene, config);
@@ -66315,7 +66296,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                     ((this.x < bounds.centerX) ? SUBMENU_RIGHT : SUBMENU_LEFT)
                 ];
                 // Overwrite subMenuSide value if given
-                var subMenuSide = GetValue$1h(config, 'subMenuSide', undefined);
+                var subMenuSide = GetValue$1t(config, 'subMenuSide', undefined);
                 if (subMenuSide !== undefined) {
                     if (typeof (subMenuSide) === 'string') {
                         subMenuSide = SubMenuSideMode[subMenuSide];
@@ -66323,26 +66304,26 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                     this.subMenuSide[this.orientation] = subMenuSide;
                 }
                 // ToggleOrientation mode
-                this.toggleOrientation = GetValue$1h(config, 'toggleOrientation', false);
+                this.toggleOrientation = GetValue$1t(config, 'toggleOrientation', false);
                 // Expand mode
-                this.expandEventName = GetValue$1h(config, 'expandEvent', 'button.click');
+                this.expandEventName = GetValue$1t(config, 'expandEvent', 'button.click');
                 // Transition
-                this.easeIn = ParseEaseConfig(this, GetValue$1h(config, 'easeIn', 0));
-                this.easeOut = ParseEaseConfig(this, GetValue$1h(config, 'easeOut', 0));
-                this.setTransitInCallback(GetValue$1h(config, 'transitIn'));
-                this.setTransitOutCallback(GetValue$1h(config, 'transitOut'));
+                this.easeIn = ParseEaseConfig(this, GetValue$1t(config, 'easeIn', 0));
+                this.easeOut = ParseEaseConfig(this, GetValue$1t(config, 'easeOut', 0));
+                this.setTransitInCallback(GetValue$1t(config, 'transitIn'));
+                this.setTransitOutCallback(GetValue$1t(config, 'transitOut'));
                 // Callbacks
                 this.createBackgroundCallback = createBackgroundCallback;
                 this.createBackgroundCallbackScope = createBackgroundCallbackScope;
                 this.createButtonCallback = createButtonCallback;
                 this.createButtonCallbackScope = createButtonCallbackScope;
                 // Children key
-                this.childrenKey = GetValue$1h(config, 'childrenKey', 'children');
+                this.childrenKey = GetValue$1t(config, 'childrenKey', 'children');
                 // Event flag
                 this._isPassedEvent = false;
 
                 // pointerdown-outside-collapse
-                this.pointerDownOutsideCollapsing = GetValue$1h(config, 'pointerDownOutsideCollapsing', true);
+                this.pointerDownOutsideCollapsing = GetValue$1t(config, 'pointerDownOutsideCollapsing', true);
                 if (this.pointerDownOutsideCollapsing) {
                     scene.input.on('pointerdown', this.onPointerDownOutside, this);
                 }
@@ -66454,7 +66435,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     Object.assign(
         Menu.prototype,
-        Methods$5
+        Methods$6
     );
 
     ObjectFactory.register('menu', function (config) {
@@ -66796,21 +66777,21 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
     );
 
     const IsPlainObject$b = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$1g = Phaser.Utils.Objects.GetValue;
+    const GetValue$1s = Phaser.Utils.Objects.GetValue;
     const ALIGN_LEFTTOP = Phaser.Display.Align.TOP_LEFT;
 
     class ScrollableBlock extends Base$1 {
         constructor(scene, x, y, minWidth, minHeight, config) {
             if (IsPlainObject$b(x)) {
                 config = x;
-                x = GetValue$1g(config, 'x', 0);
-                y = GetValue$1g(config, 'y', 0);
-                minWidth = GetValue$1g(config, 'width', undefined);
-                minHeight = GetValue$1g(config, 'height', undefined);
+                x = GetValue$1s(config, 'x', 0);
+                y = GetValue$1s(config, 'y', 0);
+                minWidth = GetValue$1s(config, 'width', undefined);
+                minHeight = GetValue$1s(config, 'height', undefined);
             } else if (IsPlainObject$b(minWidth)) {
                 config = minWidth;
-                minWidth = GetValue$1g(config, 'width', undefined);
-                minHeight = GetValue$1g(config, 'height', undefined);
+                minWidth = GetValue$1s(config, 'width', undefined);
+                minHeight = GetValue$1s(config, 'height', undefined);
             }
             super(scene, x, y, minWidth, minHeight, config);
 
@@ -66824,18 +66805,18 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this.execeedLeftState = false;
             this.execeedRightState = false;
 
-            this.setScrollMode(GetValue$1g(config, 'scrollMode', 0));
+            this.setScrollMode(GetValue$1s(config, 'scrollMode', 0));
 
-            var clampChildOY = GetValue$1g(config, 'clampChildOY', true);
-            var clampChildOX = GetValue$1g(config, 'clampChildOX', clampChildOY);
+            var clampChildOY = GetValue$1s(config, 'clampChildOY', true);
+            var clampChildOX = GetValue$1s(config, 'clampChildOX', clampChildOY);
             this.setClampMode(clampChildOY, clampChildOX);
 
             // Add elements
             // No background object, and child does not have padding
-            var child = GetValue$1g(config, 'child', undefined);
-            var expand = GetValue$1g(config, 'expand', true);
+            var child = GetValue$1s(config, 'child', undefined);
+            var expand = GetValue$1s(config, 'expand', true);
 
-            var childOrigin0 = GetValue$1g(config, 'childOrigin0', true);
+            var childOrigin0 = GetValue$1s(config, 'childOrigin0', true);
             if (childOrigin0 && child.setOrigin) {
                 child.setOrigin(0);
             }
@@ -66849,7 +66830,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this.child = child;
 
             // Create mask of child object
-            var maskConfig = GetValue$1g(config, 'mask');
+            var maskConfig = GetValue$1s(config, 'mask');
             this.setupChildrenMask(maskConfig);
 
             if (this.childrenMask) {
@@ -67260,7 +67241,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return delta;
     };
 
-    const GetValue$1f = Phaser.Utils.Objects.GetValue;
+    const GetValue$1r = Phaser.Utils.Objects.GetValue;
 
     class ScrollablePanel extends Scrollable$1 {
         constructor(scene, config) {
@@ -67270,13 +67251,13 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
             // Create scrollable-block
             var scrollMode = GetScrollMode(config);
-            var panelConfig = GetValue$1f(config, 'panel', undefined);
+            var panelConfig = GetValue$1r(config, 'panel', undefined);
             if (panelConfig === undefined) {
                 panelConfig = {};
             }
             panelConfig.scrollMode = scrollMode;
-            panelConfig.clampChildOY = GetValue$1f(config, 'clampChildOY', false);
-            panelConfig.clampChildOX = GetValue$1f(config, 'clampChildOX', false);
+            panelConfig.clampChildOY = GetValue$1r(config, 'clampChildOY', false);
+            panelConfig.clampChildOX = GetValue$1r(config, 'clampChildOX', false);
             var scrollableBlock = new ScrollableBlock(scene, panelConfig);
             scene.add.existing(scrollableBlock); // Important: Add to display list for touch detecting
 
@@ -67284,13 +67265,13 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 expandPanelHeight;
             switch (scrollMode) {
                 case 0:
-                    expandPanelWidth = GetValue$1f(config, 'expand.panel', true);
+                    expandPanelWidth = GetValue$1r(config, 'expand.panel', true);
                     expandPanelHeight = true;
                     break;
 
                 case 1:
                     expandPanelWidth = true;
-                    expandPanelHeight = GetValue$1f(config, 'expand.panel', true);
+                    expandPanelHeight = GetValue$1r(config, 'expand.panel', true);
                     break;
 
                 default: // 2
@@ -67304,11 +67285,11 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 gameObject: scrollableBlock,
                 expandWidth: expandPanelWidth,
                 expandHeight: expandPanelHeight,
-                align: GetValue$1f(config, 'align.panel', 'center')
+                align: GetValue$1r(config, 'align.panel', 'center')
             };
-            var spaceConfig = GetValue$1f(config, 'space', undefined);
+            var spaceConfig = GetValue$1r(config, 'space', undefined);
             if (spaceConfig) {
-                spaceConfig.child = GetValue$1f(spaceConfig, 'panel', 0);
+                spaceConfig.child = GetValue$1r(spaceConfig, 'panel', 0);
             }
             super(scene, config);
 
@@ -67345,7 +67326,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         methods$a,
     );
 
-    const GetValue$1e = Phaser.Utils.Objects.GetValue;
+    const GetValue$1q = Phaser.Utils.Objects.GetValue;
 
     var CreateListPanel = function () {
         var scene = this.scene;
@@ -67445,7 +67426,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                     mouseWheelScroller: this.listMouseWheelScrollerConfig,
 
                     space: {
-                        panel: GetValue$1e(this.listSpace, 'panel', 0),
+                        panel: GetValue$1q(this.listSpace, 'panel', 0),
                     },
                 });
                 scene.add.existing(listPanel);
@@ -67539,32 +67520,32 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     var GetValueFromAliasKeys = function (source, key0, key1, key2, defaultValue) {
         if (HasValue(source, key0)) {
-            return GetValue$45(source, key0);
+            return GetValue$4h(source, key0);
         } else if (key1 && HasValue(source, key1)) {
-            return GetValue$45(source, key1);
+            return GetValue$4h(source, key1);
         } else if (key2 && HasValue(source, key2)) {
-            return GetValue$45(source, key2);
+            return GetValue$4h(source, key2);
         } else {
             return defaultValue;
         }
 
     };
 
-    const GetValue$1d = Phaser.Utils.Objects.GetValue;
+    const GetValue$1p = Phaser.Utils.Objects.GetValue;
 
     var SetPosition = function (gameObject, config) {
-        var expandDirection = GetValue$1d(config, 'expandDirection', undefined);
+        var expandDirection = GetValue$1p(config, 'expandDirection', undefined);
         if (typeof (expandDirection) === 'string') {
             expandDirection = ExpandDirections[expandDirection];
         }
         var alignTargetX = GetValueFromAliasKeys(config, 'alignTarget', 'alignTargetX');
-        var alignTargetY = GetValue$1d(config, 'alignTargetY', alignTargetX);
-        var alignOffsetX = GetValue$1d(config, 'alignOffsetX', 0);
-        var alignOffsetY = GetValue$1d(config, 'alignOffsetY', 0);
-        var alignSide = GetValue$1d(config, 'alignSide', '');
+        var alignTargetY = GetValue$1p(config, 'alignTargetY', alignTargetX);
+        var alignOffsetX = GetValue$1p(config, 'alignOffsetX', 0);
+        var alignOffsetY = GetValue$1p(config, 'alignOffsetY', 0);
+        var alignSide = GetValue$1p(config, 'alignSide', '');
         var alignRight = alignSide.includes('right');
 
-        var positionBounds = GetValue$1d(config, 'bounds');
+        var positionBounds = GetValue$1p(config, 'bounds');
 
         // Expand direction
         var isExpandDown = (expandDirection === 0);
@@ -67611,7 +67592,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         up: 1
     };
 
-    const GetValue$1c = Phaser.Utils.Objects.GetValue;
+    const GetValue$1o = Phaser.Utils.Objects.GetValue;
 
     class DropDown extends OpenCloseTransition {
         constructor(gameObject, config) {
@@ -67644,8 +67625,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             }
 
             // Close conditions:
-            var touchOutsideClose = GetValue$1c(config, 'touchOutsideClose', false);
-            var anyTouchClose = GetValue$1c(config, 'anyTouchClose', false);
+            var touchOutsideClose = GetValue$1o(config, 'touchOutsideClose', false);
+            var anyTouchClose = GetValue$1o(config, 'anyTouchClose', false);
 
             if (anyTouchClose) {
                 touchOutsideClose = false;
@@ -67895,7 +67876,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
     };
 
-    var Methods$4 = {
+    var Methods$5 = {
         openListPanel: OpenListPanel,
         closeListPanel: CloseListPanel,
         toggleListPanel: ToggleListPanel,
@@ -67904,12 +67885,12 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
     };
 
     Object.assign(
-        Methods$4,
+        Methods$5,
         methods$c,
         FocusButtonMethods,
     );
 
-    const GetValue$1b = Phaser.Utils.Objects.GetValue;
+    const GetValue$1n = Phaser.Utils.Objects.GetValue;
 
     class DropDownList extends Label {
         constructor(scene, config) {
@@ -67919,38 +67900,38 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this.listPanel = undefined;
             this.currentOverIndex = undefined;
 
-            this.setOptions(GetValue$1b(config, 'options'));
+            this.setOptions(GetValue$1n(config, 'options'));
 
-            var listConfig = GetValue$1b(config, 'list');
-            this.setWrapEnable(GetValue$1b(listConfig, 'wrap', false));
-            this.setCreateButtonCallback(GetValue$1b(listConfig, 'createButtonCallback'));
-            this.setCreateListBackgroundCallback(GetValue$1b(listConfig, 'createBackgroundCallback'));
-            this.setCreateListSliderTrackCallback(GetValue$1b(listConfig, 'createTrackCallback'));
-            this.setCreateListSliderThumbCallback(GetValue$1b(listConfig, 'createThumbCallback'));
-            this.setListSliderAdaptThumbSizeEnable(GetValue$1b(listConfig, 'sliderAdaptThumbSize', false));
-            this.setListScrollerConfig(GetValue$1b(listConfig, 'scroller'));
-            this.setListMouseWheelScrollerConfig(GetValue$1b(listConfig, 'mouseWheelScroller'));
-            this.setButtonClickCallback(GetValue$1b(listConfig, 'onButtonClick'));
-            this.setButtonOverCallback(GetValue$1b(listConfig, 'onButtonOver'));
-            this.setButtonOutCallback(GetValue$1b(listConfig, 'onButtonOut'));
-            this.setListExpandDirection(GetValue$1b(listConfig, 'expandDirection'));
-            this.setListEaseInDuration(GetValue$1b(listConfig, 'easeIn', 500));
-            this.setListEaseOutDuration(GetValue$1b(listConfig, 'easeOut', 100));
-            this.setListTransitInCallback(GetValue$1b(listConfig, 'transitIn'));
-            this.settListTransitOutCallback(GetValue$1b(listConfig, 'transitOut'));
-            this.setListMaxHeight(GetValue$1b(listConfig, 'maxHeight', 0));
-            this.setListSize(GetValue$1b(listConfig, 'width'), GetValue$1b(listConfig, 'height', 0));
-            this.setListAlignmentMode(GetValue$1b(listConfig, 'alignParent', 'text'));
-            this.setListAlignmentSide(GetValue$1b(listConfig, 'alignSide', ''));
-            this.setListBounds(GetValue$1b(listConfig, 'bounds'));
-            this.setListSpace(GetValue$1b(listConfig, 'space'));
-            this.setListDraggable(GetValue$1b(listConfig, 'draggable', false));
+            var listConfig = GetValue$1n(config, 'list');
+            this.setWrapEnable(GetValue$1n(listConfig, 'wrap', false));
+            this.setCreateButtonCallback(GetValue$1n(listConfig, 'createButtonCallback'));
+            this.setCreateListBackgroundCallback(GetValue$1n(listConfig, 'createBackgroundCallback'));
+            this.setCreateListSliderTrackCallback(GetValue$1n(listConfig, 'createTrackCallback'));
+            this.setCreateListSliderThumbCallback(GetValue$1n(listConfig, 'createThumbCallback'));
+            this.setListSliderAdaptThumbSizeEnable(GetValue$1n(listConfig, 'sliderAdaptThumbSize', false));
+            this.setListScrollerConfig(GetValue$1n(listConfig, 'scroller'));
+            this.setListMouseWheelScrollerConfig(GetValue$1n(listConfig, 'mouseWheelScroller'));
+            this.setButtonClickCallback(GetValue$1n(listConfig, 'onButtonClick'));
+            this.setButtonOverCallback(GetValue$1n(listConfig, 'onButtonOver'));
+            this.setButtonOutCallback(GetValue$1n(listConfig, 'onButtonOut'));
+            this.setListExpandDirection(GetValue$1n(listConfig, 'expandDirection'));
+            this.setListEaseInDuration(GetValue$1n(listConfig, 'easeIn', 500));
+            this.setListEaseOutDuration(GetValue$1n(listConfig, 'easeOut', 100));
+            this.setListTransitInCallback(GetValue$1n(listConfig, 'transitIn'));
+            this.settListTransitOutCallback(GetValue$1n(listConfig, 'transitOut'));
+            this.setListMaxHeight(GetValue$1n(listConfig, 'maxHeight', 0));
+            this.setListSize(GetValue$1n(listConfig, 'width'), GetValue$1n(listConfig, 'height', 0));
+            this.setListAlignmentMode(GetValue$1n(listConfig, 'alignParent', 'text'));
+            this.setListAlignmentSide(GetValue$1n(listConfig, 'alignSide', ''));
+            this.setListBounds(GetValue$1n(listConfig, 'bounds'));
+            this.setListSpace(GetValue$1n(listConfig, 'space'));
+            this.setListDraggable(GetValue$1n(listConfig, 'draggable', false));
 
             this.setValueChangeCallback(
-                GetValue$1b(config, 'setValueCallback'),
-                GetValue$1b(config, 'setValueCallbackScope')
+                GetValue$1n(config, 'setValueCallback'),
+                GetValue$1n(config, 'setValueCallbackScope')
             );
-            this.setValue(GetValue$1b(config, 'value'));
+            this.setValue(GetValue$1n(config, 'value'));
 
             this.onClick(this.toggleListPanel, this);
         }
@@ -68022,7 +68003,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     Object.assign(
         DropDownList.prototype,
-        Methods$4,
+        Methods$5,
     );
 
     ObjectFactory.register('dropDownList', function (config) {
@@ -68306,7 +68287,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     };
 
-    const Clamp$3 = Phaser.Math.Clamp;
+    const Clamp$4 = Phaser.Math.Clamp;
 
     var GetPageMethods = {
 
@@ -68318,7 +68299,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         },
 
         setPageIndex(idx) {
-            idx = Clamp$3(idx, 0, this.lastPageIndex);
+            idx = Clamp$4(idx, 0, this.lastPageIndex);
             this.pageIndex = idx;
             this.startLineIndex = this.pageStartIndexes[idx];
             this.endLineIndex = this.pageStartIndexes[idx + 1];
@@ -68358,7 +68339,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                     return this;
                 }
                 var lastStartLineIndex = this.getLastStartLineIndexByHeight(pageHeight);
-                idx = Clamp$3(idx, 0, lastStartLineIndex);
+                idx = Clamp$4(idx, 0, lastStartLineIndex);
                 this.startLineIndex = idx;
                 var endLineIndex = this.getLineIndexByHeight(this.startLineIndex, pageHeight);
                 if (endLineIndex <= idx) {
@@ -68368,7 +68349,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
             } else {
                 var lastStartLineIndex = Math.max(this.totalLinesCount - this.pageLinesCount, 0);
-                idx = Clamp$3(idx, 0, lastStartLineIndex);
+                idx = Clamp$4(idx, 0, lastStartLineIndex);
 
                 this.startLineIndex = idx;
                 this.endLineIndex = idx + this.pageLinesCount;
@@ -68482,18 +68463,18 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
     };
 
-    var Methods$3 = {   
+    var Methods$4 = {   
         getLines: GetLines,
     };
 
     Object.assign(
-        Methods$3,
+        Methods$4,
         SetContentMethods,
         GetPageMethods,
         ShowMethods
     );
 
-    const GetValue$1a = Phaser.Utils.Objects.GetValue;
+    const GetValue$1m = Phaser.Utils.Objects.GetValue;
     Phaser.Math.Clamp;
 
     class TextPage extends ComponentBase {
@@ -68517,14 +68498,14 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
 
         resetFromJSON(o) {
-            this.setMaxLines(GetValue$1a(o, 'maxLines', undefined));
-            this.setPageBreak(GetValue$1a(o, 'pageBreak', '\f\n'));
-            this.setText(GetValue$1a(o, 'text', ''));
+            this.setMaxLines(GetValue$1m(o, 'maxLines', undefined));
+            this.setPageBreak(GetValue$1m(o, 'pageBreak', '\f\n'));
+            this.setText(GetValue$1m(o, 'text', ''));
 
-            this.startLineIndex = GetValue$1a(o, 'start', -1);
-            this.endLineIndex = GetValue$1a(o, 'end', undefined);
+            this.startLineIndex = GetValue$1m(o, 'start', -1);
+            this.endLineIndex = GetValue$1m(o, 'end', undefined);
 
-            var pageIndex = GetValue$1a(o, 'page');
+            var pageIndex = GetValue$1m(o, 'page');
             if (pageIndex === undefined) {
                 this.resetIndex();
             } else {
@@ -68766,7 +68747,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     Object.assign(
         TextPage.prototype,
-        Methods$3,
+        Methods$4,
     );
 
     var SetTextMethods$1 = {
@@ -68984,7 +68965,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
     };
 
     const GetFastValue = Phaser.Utils.Objects.GetFastValue;
-    const GetValue$19 = Phaser.Utils.Objects.GetValue;
+    const GetValue$1l = Phaser.Utils.Objects.GetValue;
 
     class TextTyping extends ComponentBase {
         constructor(gameObject, config) {
@@ -68996,9 +68977,9 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
 
         resetFromJSON(o) {
-            this.setTextWrapEnable(GetValue$19(o, 'wrap', false));
-            this.setTypeMode(GetValue$19(o, 'typeMode', 0));
-            this.setTypingSpeed(GetValue$19(o, 'speed', 333));
+            this.setTextWrapEnable(GetValue$1l(o, 'wrap', false));
+            this.setTypeMode(GetValue$1l(o, 'typeMode', 0));
+            this.setTypingSpeed(GetValue$1l(o, 'speed', 333));
             this.setTextCallback = GetFastValue(o, 'setTextCallback', null);
             this.setTextCallbackScope = GetFastValue(o, 'setTextCallbackScope', null);
 
@@ -69165,7 +69146,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         methods$9
     );
 
-    const GetValue$18 = Phaser.Utils.Objects.GetValue;
+    const GetValue$1k = Phaser.Utils.Objects.GetValue;
 
     var TextBoxBase = function (GOClass, type) {
         if (type === undefined) {
@@ -69182,8 +69163,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 var text = this.childrenMap.text;
 
                 // Expand text size
-                var expandTextWidth = GetValue$18(config, 'expandTextWidth', false);
-                var expandTextHeight = GetValue$18(config, 'expandTextHeight', false);
+                var expandTextWidth = GetValue$1k(config, 'expandTextWidth', false);
+                var expandTextHeight = GetValue$1k(config, 'expandTextHeight', false);
                 if (expandTextWidth || expandTextHeight) {
                     var textObjectType = GetTextObjectType(text);
                     switch (textObjectType) {
@@ -69219,9 +69200,9 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 }
 
                 // Build typing and page behaviors
-                this.setTypingMode(GetValue$18(config, 'typingMode', 'page'));
-                this.page = new TextPage(text, GetValue$18(config, 'page', undefined));
-                this.typing = new TextTyping(text, GetValue$18(config, 'typing', config.type));
+                this.setTypingMode(GetValue$1k(config, 'typingMode', 'page'));
+                this.page = new TextPage(text, GetValue$1k(config, 'page', undefined));
+                this.typing = new TextTyping(text, GetValue$1k(config, 'typing', config.type));
                 this.typing
                     .on('complete', this.onTypingComplete, this)
                     .on('type', this.onType, this)
@@ -69533,7 +69514,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     SetValue(window, 'RexPlugins.UI.SimpleTextBox', SimpleTextBox);
 
-    const GetValue$17 = Phaser.Utils.Objects.GetValue;
+    const GetValue$1j = Phaser.Utils.Objects.GetValue;
 
     class NumberBar extends Sizer {
         constructor(scene, config) {
@@ -69542,15 +69523,15 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this.type = 'rexNumberBar';
 
             // Add elements
-            var background = GetValue$17(config, 'background', undefined);
-            var icon = GetValue$17(config, 'icon', undefined);
-            var iconMask = GetValue$17(config, 'iconMask', undefined);
-            var sliderConfig = GetValue$17(config, 'slider', undefined);
-            var text = GetValue$17(config, 'text', undefined);
+            var background = GetValue$1j(config, 'background', undefined);
+            var icon = GetValue$1j(config, 'icon', undefined);
+            var iconMask = GetValue$1j(config, 'iconMask', undefined);
+            var sliderConfig = GetValue$1j(config, 'slider', undefined);
+            var text = GetValue$1j(config, 'text', undefined);
 
             // Space
-            var iconSpace = GetValue$17(config, 'space.icon', 0);
-            var sliderSpace = GetValue$17(config, 'space.slider', 0);
+            var iconSpace = GetValue$1j(config, 'space.icon', 0);
+            var sliderSpace = GetValue$1j(config, 'space.slider', 0);
 
             if (background) {
                 this.addBackground(background);
@@ -69605,10 +69586,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
                 var proportion;
                 if (this.orientation === 0) {
-                    var sliderWidth = GetValue$17(sliderConfig, 'width', undefined);
+                    var sliderWidth = GetValue$1j(sliderConfig, 'width', undefined);
                     proportion = (sliderWidth === undefined) ? 1 : 0;
                 } else {
-                    var sliderHeight = GetValue$17(sliderConfig, 'height', undefined);
+                    var sliderHeight = GetValue$1j(sliderConfig, 'height', undefined);
                     proportion = (sliderHeight === undefined) ? 1 : 0;
                 }
 
@@ -69632,13 +69613,13 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this.addChildrenMap('slider', slider);
             this.addChildrenMap('text', text);
 
-            var callback = GetValue$17(config, 'valuechangeCallback', null);
+            var callback = GetValue$1j(config, 'valuechangeCallback', null);
             if (callback !== null) {
-                var scope = GetValue$17(config, 'valuechangeCallbackScope', undefined);
+                var scope = GetValue$1j(config, 'valuechangeCallbackScope', undefined);
                 this.on('valuechange', callback, scope);
             }
-            this.setEnable(GetValue$17(config, 'enable', undefined));
-            this.setValue(GetValue$17(config, 'value', 0));
+            this.setEnable(GetValue$1j(config, 'enable', undefined));
+            this.setValue(GetValue$1j(config, 'value', 0));
         }
 
         get enable() {
@@ -69776,7 +69757,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     SetValue(window, 'RexPlugins.UI.ScrollBar', ScrollBar);
 
-    const GetValue$16 = Phaser.Utils.Objects.GetValue;
+    const GetValue$1i = Phaser.Utils.Objects.GetValue;
     const BadgeKeys = {
         leftTop: 'left-top', centerTop: 'center-top', rightTop: 'right-top',
         leftCenter: 'left-center', center: 'center', rightCenter: 'right-center',
@@ -69790,14 +69771,14 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this.type = 'rexBadge';
 
             // Add elements
-            var background = GetValue$16(config, 'background', undefined);
+            var background = GetValue$1i(config, 'background', undefined);
             if (background) {
                 this.addBackground(background);
             }
             this.addChildrenMap('background', background);
 
             // Base item
-            var main = GetValue$16(config, 'main', undefined);
+            var main = GetValue$1i(config, 'main', undefined);
             if (main) {
                 this.add(main, {
                     key: 'main',
@@ -69809,7 +69790,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
             // Badges
             for (var key in BadgeKeys) {
-                var badge = GetValue$16(config, key, undefined);
+                var badge = GetValue$1i(config, key, undefined);
                 if (badge) {
                     this.add(badge, {
                         key: key,
@@ -69904,7 +69885,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         AddChildMethods,
     );
 
-    const GetValue$15 = Phaser.Utils.Objects.GetValue;
+    const GetValue$1h = Phaser.Utils.Objects.GetValue;
 
     class Pages extends OverlapSizer {
         constructor(scene, config) {
@@ -69913,8 +69894,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this.childrenMap = this.sizerChildren;
             this._previousKey = undefined;
             this._currentKey = undefined;
-            this.setSwapMode(GetValue$15(config, 'swapMode', 0));
-            this.setFadeInDuration(GetValue$15(config, 'fadeIn', 0));
+            this.setSwapMode(GetValue$1h(config, 'swapMode', 0));
+            this.setFadeInDuration(GetValue$1h(config, 'fadeIn', 0));
         }
 
         setSwapMode(mode) {
@@ -70016,7 +69997,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
     };
 
     const IsPlainObject$a = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$14 = Phaser.Utils.Objects.GetValue;
+    const GetValue$1g = Phaser.Utils.Objects.GetValue;
     const GenerateGridVerts = Phaser.Geom.Mesh.GenerateGridVerts;
     const RadToDeg$2 = Phaser.Math.RadToDeg;
     const DegToRad$3 = Phaser.Math.DegToRad;
@@ -70028,10 +70009,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         constructor(scene, x, y, key, frame, config) {
             if (IsPlainObject$a(x)) {
                 config = x;
-                x = GetValue$14(config, 'x', 0);
-                y = GetValue$14(config, 'y', 0);
-                key = GetValue$14(config, 'key', null);
-                frame = GetValue$14(config, 'frame', null);
+                x = GetValue$1g(config, 'x', 0);
+                y = GetValue$1g(config, 'y', 0);
+                key = GetValue$1g(config, 'key', null);
+                frame = GetValue$1g(config, 'frame', null);
             }
 
             super(scene, x, y, key, frame);
@@ -70040,10 +70021,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
             this.resetPerspective();
             this.panZ(PanZ);
-            this.hideCCW = GetValue$14(config, 'hideCCW', true);
+            this.hideCCW = GetValue$1g(config, 'hideCCW', true);
 
-            var gridWidth = GetValue$14(config, 'gridWidth', 0);
-            var gridHeight = GetValue$14(config, 'gridHeight', gridWidth);
+            var gridWidth = GetValue$1g(config, 'gridWidth', 0);
+            var gridHeight = GetValue$1g(config, 'gridHeight', gridWidth);
             this.resetVerts(gridWidth, gridHeight);
 
             this.prevFrame = this.frame;
@@ -70218,16 +70199,16 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
     };
 
     const IsPlainObject$9 = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$13 = Phaser.Utils.Objects.GetValue;
+    const GetValue$1f = Phaser.Utils.Objects.GetValue;
 
     class RenderTexture extends Image$2 {
         constructor(scene, x, y, width, height, config) {
             if (IsPlainObject$9(x)) {
                 config = x;
-                x = GetValue$13(config, 'x', 0);
-                y = GetValue$13(config, 'y', 0);
-                width = GetValue$13(config, 'width', 32);
-                height = GetValue$13(config, 'height', 32);
+                x = GetValue$1f(config, 'x', 0);
+                y = GetValue$1f(config, 'y', 0);
+                width = GetValue$1f(config, 'width', 32);
+                height = GetValue$1f(config, 'height', 32);
             }
 
             // dynamic-texture -> quad-image
@@ -70521,7 +70502,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
     };
 
-    const GetValue$12 = Phaser.Utils.Objects.GetValue;
+    const GetValue$1e = Phaser.Utils.Objects.GetValue;
     const Linear$2 = Phaser.Math.Linear;
 
     let Flip$1 = class Flip extends EaseValueTaskBase {
@@ -70536,10 +70517,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
         resetFromJSON(o) {
             super.resetFromJSON(o);
-            this.setEase(GetValue$12(o, 'ease', 'Cubic'));
+            this.setEase(GetValue$1e(o, 'ease', 'Cubic'));
 
-            this.setFrontToBackDirection(GetValue$12(o, 'frontToBack', 0));
-            this.setBackToFrontDirection(GetValue$12(o, 'backToFront', 1));
+            this.setFrontToBackDirection(GetValue$1e(o, 'frontToBack', 0));
+            this.setBackToFrontDirection(GetValue$1e(o, 'backToFront', 1));
             return this;
         }
 
@@ -70641,7 +70622,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
     };
 
     const IsPlainObject$7 = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$11 = Phaser.Utils.Objects.GetValue;
+    const GetValue$1d = Phaser.Utils.Objects.GetValue;
 
     const FaceNames = ['back', 'front'];
 
@@ -70649,16 +70630,16 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         constructor(scene, x, y, config) {
             if (IsPlainObject$7(x)) {
                 config = x;
-                x = GetValue$11(config, 'x', 0);
-                y = GetValue$11(config, 'y', 0);
+                x = GetValue$1d(config, 'x', 0);
+                y = GetValue$1d(config, 'y', 0);
             }
 
             var faces = CreateFaces(scene, config, FaceNames);
             var backFace = faces.back;
             var frontFace = faces.front;
 
-            var width = GetValue$11(config, 'width');
-            var height = GetValue$11(config, 'height');
+            var width = GetValue$1d(config, 'width');
+            var height = GetValue$1d(config, 'height');
             if ((width === undefined) || (height === undefined)) {
                 if (width === undefined) {
                     var frontFaceWidth = (frontFace) ? frontFace.width : 0;
@@ -70684,15 +70665,15 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 this[`${name}Face`] = face;
             }, this);
 
-            var flipConfig = GetValue$11(config, 'flip', undefined);
+            var flipConfig = GetValue$1d(config, 'flip', undefined);
             if (flipConfig !== false) {
                 this.flip = new Flip$1(this, flipConfig);
             }
 
-            this.setOrientation(GetValue$11(config, 'orientation', 0));
+            this.setOrientation(GetValue$1d(config, 'orientation', 0));
             LayoutFaces(this, faces);
 
-            this.setFace(GetValue$11(config, 'face', 0));
+            this.setFace(GetValue$1d(config, 'face', 0));
         }
 
         get rotationX() {
@@ -70814,12 +70795,12 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
     Phaser.Utils.Objects.GetValue;
     Phaser.Math.Wrap;
 
-    const GetValue$10 = Phaser.Utils.Objects.GetValue;
+    const GetValue$1c = Phaser.Utils.Objects.GetValue;
 
     var Init = function (parentContainer, rtOwner, config) {
         rtOwner.visibleSibling = [];
         rtOwner.isRunning = false;
-        rtOwner.useParentBounds = GetValue$10(config, 'useParentBounds', false);
+        rtOwner.useParentBounds = GetValue$1c(config, 'useParentBounds', false);
 
         rtOwner
             .setPosition(parentContainer.x, parentContainer.y)
@@ -70927,12 +70908,12 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
     }
 
-    const GetValue$$ = Phaser.Utils.Objects.GetValue;
+    const GetValue$1b = Phaser.Utils.Objects.GetValue;
 
     var CreatePerspectiveCardMesh = function (config) {
         var scene = this.scene;
 
-        this.setSnapshotPadding(GetValue$$(config, 'snapshotPadding', 0));
+        this.setSnapshotPadding(GetValue$1b(config, 'snapshotPadding', 0));
 
         config = Clone$2(config);
         // Remove size config
@@ -71030,7 +71011,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     };
 
-    const GetValue$_ = Phaser.Utils.Objects.GetValue;
+    const GetValue$1a = Phaser.Utils.Objects.GetValue;
 
     class PerspectiveCard extends OverlapSizer {
         constructor(scene, config) {
@@ -71039,14 +71020,14 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
             // Layout faces
             var backFace = config.back;
-            var backFaceExpand = GetValue$_(config, 'expand.back', true);
+            var backFaceExpand = GetValue$1a(config, 'expand.back', true);
             this.add(
                 backFace,
                 { key: 'back', expand: backFaceExpand }
             );
 
             var frontFace = config.front;
-            var frontFaceExpand = GetValue$_(config, 'expand.front', true);
+            var frontFaceExpand = GetValue$1a(config, 'expand.front', true);
             this.add(
                 frontFace,
                 { key: 'front', expand: frontFaceExpand }
@@ -71215,15 +71196,15 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
     };
 
     const IsPlainObject$6 = Phaser.Utils.Objects.IsPlainObject;
-    const GetValue$Z = Phaser.Utils.Objects.GetValue;
+    const GetValue$19 = Phaser.Utils.Objects.GetValue;
     const UUID$2 = Phaser.Utils.String.UUID;
 
     var AddPage = function (key, tabGameObject, pageGameObject) {
         if (IsPlainObject$6(key)) {
             var config = key;
-            key = GetValue$Z(config, 'key');
-            tabGameObject = GetValue$Z(config, 'tab');
-            pageGameObject = GetValue$Z(config, 'page');
+            key = GetValue$19(config, 'key');
+            tabGameObject = GetValue$19(config, 'tab');
+            pageGameObject = GetValue$19(config, 'page');
         }
 
         if (!key) {
@@ -71401,7 +71382,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         TabPaddingMethods,
     );
 
-    const GetValue$Y = Phaser.Utils.Objects.GetValue;
+    const GetValue$18 = Phaser.Utils.Objects.GetValue;
     const SizerAdd = GridSizer.prototype.add;
 
     let TabPages$1 = class TabPages extends GridSizer {
@@ -71415,7 +71396,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             config.columnProportions = [0, 0, 0];
             config.rowProportions = [0, 0, 0];
 
-            var expandPages = GetValue$Y(config, 'expand.pages', true);
+            var expandPages = GetValue$18(config, 'expand.pages', true);
             if (expandPages) {
                 config.columnProportions[1] = 1;
                 config.rowProportions[1] = 1;
@@ -71425,32 +71406,32 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this.type = 'rexTabPages';
 
             // Add elements
-            var background = GetValue$Y(config, 'background', undefined);
+            var background = GetValue$18(config, 'background', undefined);
             if (background) {
                 this.addBackground(background);
             }
 
-            var pagesConfig = GetValue$Y(config, 'pages');
+            var pagesConfig = GetValue$18(config, 'pages');
             var pages = new Pages(scene, pagesConfig);
             scene.add.existing(pages);
 
-            var tabsPosition = GetValue$Y(config, 'tabsPosition', undefined);
+            var tabsPosition = GetValue$18(config, 'tabsPosition', undefined);
             if (tabsPosition === undefined) {
-                tabsPosition = GetValue$Y(config, 'tabPosition', 'top');
+                tabsPosition = GetValue$18(config, 'tabPosition', 'top');
             }
 
-            var wrapTabs = GetValue$Y(config, 'wrapTabs', false);
+            var wrapTabs = GetValue$18(config, 'wrapTabs', false);
 
             var ButtonsClass = (wrapTabs) ? Buttons : Buttons$1;
 
-            var tabsConfig = GetValue$Y(config, 'tabs', undefined);
+            var tabsConfig = GetValue$18(config, 'tabs', undefined);
             if (tabsConfig === undefined) {
                 tabsConfig = {};
             }
             tabsConfig.orientation = ((tabsPosition === 'top') || (tabsPosition === 'bottom')) ? 'x' : 'y';
             tabsConfig.buttonsType = 'radio';
             if (!wrapTabs && !tabsConfig.hasOwnProperty('expand')) {
-                tabsConfig.expand = GetValue$Y(config, 'expand.tabs', false);
+                tabsConfig.expand = GetValue$18(config, 'expand.tabs', false);
             }
             var tabs = new ButtonsClass(scene, tabsConfig);
             scene.add.existing(tabs);
@@ -71463,7 +71444,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             });
 
             var tabColumnIndex, tabRowIndex;
-            var tabPadding = GetValue$Y(config, 'space.item', 0);  // Backward compatible
+            var tabPadding = GetValue$18(config, 'space.item', 0);  // Backward compatible
             switch (tabsPosition) {
                 case 'top':
                     tabColumnIndex = 1;
@@ -71493,8 +71474,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             SizerAdd.call(this, tabs, {
                 column: tabColumnIndex, row: tabRowIndex,
                 padding: tabPadding,
-                expand: (wrapTabs) ? true : GetValue$Y(config, 'expand.tabs', false),
-                align: GetValue$Y(config, 'align.tabs', 'left')
+                expand: (wrapTabs) ? true : GetValue$18(config, 'expand.tabs', false),
+                align: GetValue$18(config, 'align.tabs', 'left')
             });
 
             this.addChildrenMap('background', background);
@@ -71714,7 +71695,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
     };
 
-    const GetValue$X = Phaser.Utils.Objects.GetValue;
+    const GetValue$17 = Phaser.Utils.Objects.GetValue;
 
     let Folder$1 = class Folder extends Sizer {
         constructor(scene, config) {
@@ -71742,12 +71723,12 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 this.addBackground(background);
             }
 
-            var spaceConfig = GetValue$X(config, 'space');
+            var spaceConfig = GetValue$17(config, 'space');
 
             // title
             var defaultAlign = (this.orientation === 1) ? 'left' : 'top';
-            var align = GetValue$X(config, 'align.title', defaultAlign);
-            var expand = GetValue$X(config, 'expand.title', true);
+            var align = GetValue$17(config, 'align.title', defaultAlign);
+            var expand = GetValue$17(config, 'expand.title', true);
             this.add(
                 title,
                 {
@@ -71755,16 +71736,16 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                     align: align,
                     expand: expand,
                     padding: {
-                        left: GetValue$X(spaceConfig, 'titleLeft', 0),
-                        right: GetValue$X(spaceConfig, 'titleRight', 0),
-                        top: GetValue$X(spaceConfig, 'titleTop', 0),
-                        bottom: GetValue$X(spaceConfig, 'titleBottom', 0)
+                        left: GetValue$17(spaceConfig, 'titleLeft', 0),
+                        right: GetValue$17(spaceConfig, 'titleRight', 0),
+                        top: GetValue$17(spaceConfig, 'titleTop', 0),
+                        bottom: GetValue$17(spaceConfig, 'titleBottom', 0)
                     }
                 }
             );
 
-            var toggleByTarget = GetValue$X(config, 'toggleByTarget', undefined);
-            var toggleClickConfig = GetValue$X(config, 'toggleClickConfig');
+            var toggleByTarget = GetValue$17(config, 'toggleByTarget', undefined);
+            var toggleClickConfig = GetValue$17(config, 'toggleClickConfig');
 
             if (toggleByTarget === undefined) {
                 toggleByTarget = title;
@@ -71783,14 +71764,14 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             // child
             this.childTransition = new Transition(child);
 
-            var customOrigin = GetValue$X(config, 'customChildOrigin', false);
+            var customOrigin = GetValue$17(config, 'customChildOrigin', false);
             if (!customOrigin) {
                 var origin = (!this.rtl) ? 0 : 1;
                 child.setOrigin(origin);
             }
 
-            var align = GetValue$X(config, 'align.child', 'left');
-            var expand = GetValue$X(config, 'expand.child', true);
+            var align = GetValue$17(config, 'align.child', 'left');
+            var expand = GetValue$17(config, 'expand.child', true);
             var proportion = (expand) ? 1 : 0;
             this.add(
                 child,
@@ -71799,10 +71780,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                     align: align,
                     expand: expand,
                     padding: {
-                        left: GetValue$X(spaceConfig, 'childLeft', 0),
-                        right: GetValue$X(spaceConfig, 'childRight', 0),
-                        top: GetValue$X(spaceConfig, 'childTop', 0),
-                        bottom: GetValue$X(spaceConfig, 'childBottom', 0)
+                        left: GetValue$17(spaceConfig, 'childLeft', 0),
+                        right: GetValue$17(spaceConfig, 'childRight', 0),
+                        top: GetValue$17(spaceConfig, 'childTop', 0),
+                        bottom: GetValue$17(spaceConfig, 'childBottom', 0)
                     }
                 }
             );
@@ -71812,11 +71793,11 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this.addChildrenMap('background', background);
 
             var transitionConfig = config.transition;
-            this.setTransitionDuration(GetValue$X(transitionConfig, 'duration', 200));
-            this.setExpandCallback(GetValue$X(transitionConfig, 'expandCallback', undefined));
-            this.setCollapseCallback(GetValue$X(transitionConfig, 'collapseCallback', undefined));
+            this.setTransitionDuration(GetValue$17(transitionConfig, 'duration', 200));
+            this.setExpandCallback(GetValue$17(transitionConfig, 'expandCallback', undefined));
+            this.setCollapseCallback(GetValue$17(transitionConfig, 'collapseCallback', undefined));
 
-            this.reLayoutTarget = GetValue$X(config, 'reLayoutTarget', undefined);
+            this.reLayoutTarget = GetValue$17(config, 'reLayoutTarget', undefined);
 
             var onExpandStart = config.onExpandStart;
             if (onExpandStart) {
@@ -71838,7 +71819,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 this.on('collapse.complete', onCollapseComplete);
             }
 
-            var expanded = GetValue$X(config, 'expanded', undefined);
+            var expanded = GetValue$17(config, 'expanded', undefined);
             if (expanded !== undefined) {
                 this.setExpandedState(expanded);
             }
@@ -72077,7 +72058,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return gameObject;
     };
 
-    const GetValue$W = Phaser.Utils.Objects.GetValue;
+    const GetValue$16 = Phaser.Utils.Objects.GetValue;
 
     class Node extends ExtendNodeClass(Sizer) {
         constructor(scene, config, createCallbackData) {
@@ -72086,17 +72067,17 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             super(scene, {
                 orientation: 'x',
                 space: {
-                    left: GetValue$W(spaceConfig, 'nodeLeft', 0),
-                    right: GetValue$W(spaceConfig, 'nodeRight', 0),
-                    top: GetValue$W(spaceConfig, 'nodeTop', 0),
-                    bottom: GetValue$W(spaceConfig, 'nodeBottom', 0)
+                    left: GetValue$16(spaceConfig, 'nodeLeft', 0),
+                    right: GetValue$16(spaceConfig, 'nodeRight', 0),
+                    top: GetValue$16(spaceConfig, 'nodeTop', 0),
+                    bottom: GetValue$16(spaceConfig, 'nodeBottom', 0)
                 }
             });
             this.type = 'rexTreeNode';
 
             var background = CreateGameObjectFromConfig(
                 scene,
-                GetValue$W(config, 'nodeBackground'),  // config
+                GetValue$16(config, 'nodeBackground'),  // config
                 createCallbackData,                  // callbackData
                 DefaultCreateBackgroundCallback,     // defaultCallback
                 false                                // isRequired
@@ -72104,7 +72085,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
             var nodeBody = CreateGameObjectFromConfig(
                 scene,
-                GetValue$W(config, 'nodeBody'),  // config
+                GetValue$16(config, 'nodeBody'),  // config
                 createCallbackData,            // callbackData
                 DefaultCreateNodeBodyCallback, // defaultCallback
                 true                           // isRequired
@@ -72371,7 +72352,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return gameObject;
     };
 
-    const GetValue$V = Phaser.Utils.Objects.GetValue;
+    const GetValue$15 = Phaser.Utils.Objects.GetValue;
 
     var CreateTitleSizer = function (scene, config) {
         var nodeSizer = new Node(scene, config, { isLeaf: false });
@@ -72379,7 +72360,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
         var toggleButton = CreateGameObjectFromConfig(
             scene,
-            GetValue$V(config, 'toggleButton'),  // config
+            GetValue$15(config, 'toggleButton'),  // config
             { isLeaf: false },                 // callbackData
             DefaultCreateToggleButtonCallback, // defaultCallback
             true                               // isRequired
@@ -72388,7 +72369,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         nodeSizer.insert(0, toggleButton,
             {
                 padding: {
-                    right: GetValue$V(config, 'space.toggleButton', 0)
+                    right: GetValue$15(config, 'space.toggleButton', 0)
                 },
                 fitRatio: 1,
             }
@@ -72399,17 +72380,17 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return nodeSizer;
     };
 
-    const GetValue$U = Phaser.Utils.Objects.GetValue;
+    const GetValue$14 = Phaser.Utils.Objects.GetValue;
 
     var CreateChildrenSizer = function (scene, config) {
         var childrenSizer = new Sizer(scene, {
-            orientation: GetValue$U(config, 'childrenOrientation', 'y')
+            orientation: GetValue$14(config, 'childrenOrientation', 'y')
         });
         scene.add.existing(childrenSizer);
 
         var childrenBackground = CreateGameObjectFromConfig(
             scene,
-            GetValue$U(config, 'childrenBackground'),  // config
+            GetValue$14(config, 'childrenBackground'),  // config
             { isLeaf: false },                       // callbackData
             DefaultCreateBackgroundCallback,         // defaultCallback
             false                                    // isRequired
@@ -72438,7 +72419,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return config;
     };
 
-    const GetValue$T = Phaser.Utils.Objects.GetValue;
+    const GetValue$13 = Phaser.Utils.Objects.GetValue;
 
     class Tree extends ExtendNodeClass(Folder$1) {
         constructor(scene, config) {
@@ -72448,7 +72429,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
             var background = CreateGameObjectFromConfig(
                 scene,
-                GetValue$T(config, 'background'),   // config
+                GetValue$13(config, 'background'),   // config
                 { isLeaf: false },                // callbackData
                 DefaultCreateBackgroundCallback,  // defaultCallback
                 false                             // isRequired
@@ -72461,15 +72442,15 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             var toggleButton = title.childrenMap.toggleButton;
             var nodeBody = title.childrenMap.nodeBody;
 
-            var orientation = GetOrientationMode(GetValue$T(config, 'orientation', 'y'));
+            var orientation = GetOrientationMode(GetValue$13(config, 'orientation', 'y'));
 
             var spaceConfig = config.space;
             if (spaceConfig) {
-                var indent = GetValue$T(spaceConfig, 'indent', 0);
-                spaceConfig.childLeft = GetValue$T(spaceConfig, 'indentLeft', (orientation === 1) ? indent : 0);
-                spaceConfig.childRight = GetValue$T(spaceConfig, 'indentRight', 0);
-                spaceConfig.childTop = GetValue$T(spaceConfig, 'indentTop', (orientation === 0) ? indent : 0);
-                spaceConfig.childBottom = GetValue$T(spaceConfig, 'indentBottom', 0);
+                var indent = GetValue$13(spaceConfig, 'indent', 0);
+                spaceConfig.childLeft = GetValue$13(spaceConfig, 'indentLeft', (orientation === 1) ? indent : 0);
+                spaceConfig.childRight = GetValue$13(spaceConfig, 'indentRight', 0);
+                spaceConfig.childTop = GetValue$13(spaceConfig, 'indentTop', (orientation === 0) ? indent : 0);
+                spaceConfig.childBottom = GetValue$13(spaceConfig, 'indentBottom', 0);
             }
 
             var folderConfig = {
@@ -72520,7 +72501,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             // Run this callback after adding to parent tree    
             var tree = this;
             tree._postAddCallback = function () {
-                var expanded = GetValue$T(config, 'expanded', true);
+                var expanded = GetValue$13(config, 'expanded', true);
                 if (expanded !== undefined) {
                     tree.setExpandedState(expanded);
                 }
@@ -72683,7 +72664,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         GetTreeMethods,
     );
 
-    const GetValue$S = Phaser.Utils.Objects.GetValue;
+    const GetValue$12 = Phaser.Utils.Objects.GetValue;
 
     // TODO extend from TreeNode
     class Trees extends Sizer {
@@ -72700,7 +72681,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
             this.treesMap = {};
 
-            this.treeConfig = GetValue$S(config, 'tree');
+            this.treeConfig = GetValue$12(config, 'tree');
         }
 
         destroy(fromScene) {
@@ -72802,7 +72783,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
     };
 
-    const GetValue$R = Phaser.Utils.Objects.GetValue;
+    const GetValue$11 = Phaser.Utils.Objects.GetValue;
 
     class TextAreaInput extends Scrollable$1 {
         constructor(scene, config) {
@@ -72811,7 +72792,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             }
 
             // Create inputText
-            var inputTextConfig = GetValue$R(config, 'text');
+            var inputTextConfig = GetValue$11(config, 'text');
             var inputText;
             if (IsGameObject(inputTextConfig)) {
                 inputText = inputTextConfig;
@@ -72844,9 +72825,9 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 expandWidth: expandInputTextWidth,
                 expandHeight: expandInputTextHeight,
             };
-            var spaceConfig = GetValue$R(config, 'space', undefined);
+            var spaceConfig = GetValue$11(config, 'space', undefined);
             if (spaceConfig) {
-                spaceConfig.child = GetValue$R(spaceConfig, 'text', 0);
+                spaceConfig.child = GetValue$11(spaceConfig, 'text', 0);
             }
             config.scroller = false; // No scroller supported
 
@@ -72888,7 +72869,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 }, this);
 
             // Set initial text if given
-            var content = GetValue$R(config, 'content', undefined);
+            var content = GetValue$11(config, 'content', undefined);
             if (content) {
                 this.setText(content);
             }
@@ -73149,7 +73130,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
     };
 
-    const GetValue$Q = Phaser.Utils.Objects.GetValue;
+    const GetValue$10 = Phaser.Utils.Objects.GetValue;
 
     class Toast extends Label {
         constructor(scene, config) {
@@ -73162,11 +73143,11 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             super(scene, config);
             this.type = 'rexToast';
 
-            this.setTransitInTime(GetValue$Q(config, 'duration.in', 200));
-            this.setDisplayTime(GetValue$Q(config, 'duration.hold', 1200));
-            this.setTransitOutTime(GetValue$Q(config, 'duration.out', 200));
-            this.setTransitInCallback(GetValue$Q(config, 'transitIn', TransitionMode.popUp));
-            this.setTransitOutCallback(GetValue$Q(config, 'transitOut', TransitionMode.scaleDown));
+            this.setTransitInTime(GetValue$10(config, 'duration.in', 200));
+            this.setDisplayTime(GetValue$10(config, 'duration.hold', 1200));
+            this.setTransitOutTime(GetValue$10(config, 'duration.out', 200));
+            this.setTransitInCallback(GetValue$10(config, 'transitIn', TransitionMode.popUp));
+            this.setTransitOutCallback(GetValue$10(config, 'transitOut', TransitionMode.scaleDown));
 
             this.player = new Player(this, { dtMode: 1 });
             this.messages = [];
@@ -73448,9 +73429,9 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
     };
 
-    var Methods$2 = {};
+    var Methods$3 = {};
     Object.assign(
-        Methods$2,
+        Methods$3,
         ConfigurationMethods,
         MessageMethods
     );
@@ -73484,7 +73465,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
     };
 
-    const GetValue$P = Phaser.Utils.Objects.GetValue;
+    const GetValue$$ = Phaser.Utils.Objects.GetValue;
 
     class ToastQueue extends Sizer {
         constructor(scene, config) {
@@ -73497,19 +73478,19 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             super(scene, config);
             this.type = 'rexToastQueue';
 
-            this.setCreateMessageLabelCallback(GetValue$P(config, 'createMessageLabelCallback'));
-            this.setQueueDirection(GetValue$P(config, 'queueDirection', 1));        
-            this.setTransitInTime(GetValue$P(config, 'duration.in', 200));
-            this.setDisplayTime(GetValue$P(config, 'duration.hold', 2000));
-            this.setTransitOutTime(GetValue$P(config, 'duration.out', 200));
-            this.setTransitInCallback(GetValue$P(config, 'transitIn', DefaultTransitionCallbacks.transitIn));
-            this.setTransitOutCallback(GetValue$P(config, 'transitOut', DefaultTransitionCallbacks.transitOut));
+            this.setCreateMessageLabelCallback(GetValue$$(config, 'createMessageLabelCallback'));
+            this.setQueueDirection(GetValue$$(config, 'queueDirection', 1));        
+            this.setTransitInTime(GetValue$$(config, 'duration.in', 200));
+            this.setDisplayTime(GetValue$$(config, 'duration.hold', 2000));
+            this.setTransitOutTime(GetValue$$(config, 'duration.out', 200));
+            this.setTransitInCallback(GetValue$$(config, 'transitIn', DefaultTransitionCallbacks.transitIn));
+            this.setTransitOutCallback(GetValue$$(config, 'transitOut', DefaultTransitionCallbacks.transitOut));
         }
     }
 
     Object.assign(
         ToastQueue.prototype,
-        Methods$2
+        Methods$3
     );
 
     ObjectFactory.register('toastQueue', function (config) {
@@ -73556,9 +73537,9 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
     };
 
-    const GetValue$O = Phaser.Utils.Objects.GetValue;
+    const GetValue$_ = Phaser.Utils.Objects.GetValue;
     const IsPlainObject$5 = Phaser.Utils.Objects.IsPlainObject;
-    const Clamp$2 = Phaser.Math.Clamp;
+    const Clamp$3 = Phaser.Math.Clamp;
 
     let ColorInput$1 = class ColorInput extends Sizer {
         constructor(scene, config) {
@@ -73570,16 +73551,16 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this.type = 'rexColorInputLite';
 
             // Add elements
-            var background = GetValue$O(config, 'background', undefined);
+            var background = GetValue$_(config, 'background', undefined);
 
-            var swatchConfig = GetValue$O(config, 'swatch');
+            var swatchConfig = GetValue$_(config, 'swatch');
             var swatchSize;
             if (IsPlainObject$5(swatchConfig)) {
-                swatchSize = GetValue$O(swatchConfig, 'size');
+                swatchSize = GetValue$_(swatchConfig, 'size');
             }
-            var swatch = CreateSwatch(scene, GetValue$O(config, 'swatch'));
+            var swatch = CreateSwatch(scene, GetValue$_(config, 'swatch'));
 
-            var inputTextConfig = GetValue$O(config, 'inputText', {});
+            var inputTextConfig = GetValue$_(config, 'inputText', {});
             var inputText;
             if (inputTextConfig) {
                 inputText = CreateInputText$1(scene, inputTextConfig);
@@ -73590,13 +73571,13 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             }
 
             if (swatch) {
-                swatchSize = GetValue$O(config, 'swatchSize', swatchSize);
+                swatchSize = GetValue$_(config, 'swatchSize', swatchSize);
                 var squareExpandSwatch;
                 if (swatchSize !== undefined) {
                     ResizeGameObject(swatch, swatchSize, swatchSize);
                     squareExpandSwatch = false;
                 } else {
-                    squareExpandSwatch = GetValue$O(config, 'squareExpandSwatch', true);
+                    squareExpandSwatch = GetValue$_(config, 'squareExpandSwatch', true);
                 }
 
                 var fitRatio = (squareExpandSwatch) ? 1 : 0;
@@ -73607,8 +73588,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             }
 
             if (inputText) {
-                var proportion = (GetValue$O(inputTextConfig, 'width') === undefined) ? 1 : 0;
-                var expand = (GetValue$O(inputTextConfig, 'height') === undefined) ? true : false;
+                var proportion = (GetValue$_(inputTextConfig, 'width') === undefined) ? 1 : 0;
+                var expand = (GetValue$_(inputTextConfig, 'height') === undefined) ? true : false;
                 this.add(
                     inputText,
                     { proportion: proportion, expand: expand }
@@ -73626,13 +73607,13 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 }, this);
             }
 
-            var callback = GetValue$O(config, 'valuechangeCallback', null);
+            var callback = GetValue$_(config, 'valuechangeCallback', null);
             if (callback !== null) {
-                var scope = GetValue$O(config, 'valuechangeCallbackScope', undefined);
+                var scope = GetValue$_(config, 'valuechangeCallbackScope', undefined);
                 this.on('valuechange', callback, scope);
             }
 
-            this.setValue(GetValue$O(config, 'value', 0x0));
+            this.setValue(GetValue$_(config, 'value', 0x0));
         }
 
         get value() {
@@ -73650,7 +73631,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                     return;
                 }
             } else {
-                value = Clamp$2(Math.floor(value), 0, 0xffffff);
+                value = Clamp$3(Math.floor(value), 0, 0xffffff);
             }
 
             if (this._value === value) {
@@ -74232,7 +74213,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
     }
 
-    const GetValue$N = Phaser.Utils.Objects.GetValue;
+    const GetValue$Z = Phaser.Utils.Objects.GetValue;
 
     class ColorPicker extends Sizer {
         constructor(scene, config) {
@@ -74241,7 +74222,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this.freezePalettes = false;
 
             // orientation
-            var hPalettePosition = GetValue$N(config, 'hPalette.position', 0);
+            var hPalettePosition = GetValue$Z(config, 'hPalette.position', 0);
             if (typeof (hPalettePosition) === 'string') {
                 hPalettePosition = HPalettePositionNamesMap[hPalettePosition];
             }
@@ -74253,18 +74234,18 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this.setOrientation(orientation);
 
             // Add elements
-            var background = GetValue$N(config, 'background', undefined);
+            var background = GetValue$Z(config, 'background', undefined);
 
             var hPaletteWidth, hPaletteHeight;
             if (this.orientation === 0) {
-                var hPaletteWidth = GetValue$N(config, 'hPalette.width', undefined);
+                var hPaletteWidth = GetValue$Z(config, 'hPalette.width', undefined);
                 if (hPaletteWidth === undefined) {
-                    hPaletteWidth = GetValue$N(config, 'hPalette.size', 10);
+                    hPaletteWidth = GetValue$Z(config, 'hPalette.size', 10);
                 }
             } else {
-                hPaletteHeight = GetValue$N(config, 'hPalette.height', undefined);
+                hPaletteHeight = GetValue$Z(config, 'hPalette.height', undefined);
                 if (hPaletteHeight === undefined) {
-                    hPaletteHeight = GetValue$N(config, 'hPalette.size', 10);
+                    hPaletteHeight = GetValue$Z(config, 'hPalette.size', 10);
                 }
             }
 
@@ -74274,8 +74255,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             });
             scene.add.existing(hPalette);
 
-            var svPaletteWidth = GetValue$N(config, 'svPalette.width', undefined);
-            var svPaletteHeight = GetValue$N(config, 'svPalette.height', undefined);
+            var svPaletteWidth = GetValue$Z(config, 'svPalette.width', undefined);
+            var svPaletteHeight = GetValue$Z(config, 'svPalette.height', undefined);
 
             var svPalette = new SVPalette(scene, {
                 width: svPaletteWidth,
@@ -74328,13 +74309,13 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this.addChildrenMap('hPalette', hPalette);
             this.addChildrenMap('svPalette', svPalette);
 
-            var callback = GetValue$N(config, 'valuechangeCallback', null);
+            var callback = GetValue$Z(config, 'valuechangeCallback', null);
             if (callback !== null) {
-                var scope = GetValue$N(config, 'valuechangeCallbackScope', undefined);
+                var scope = GetValue$Z(config, 'valuechangeCallbackScope', undefined);
                 this.on('valuechange', callback, scope);
             }
 
-            this.setValue(GetValue$N(config, 'value', 0xffffff));
+            this.setValue(GetValue$Z(config, 'value', 0xffffff));
         }
 
         get value() {
@@ -74398,11 +74379,11 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         right: 3
     };
 
-    const GetValue$M = Phaser.Utils.Objects.GetValue;
+    const GetValue$Y = Phaser.Utils.Objects.GetValue;
     const Color = Phaser.Display.Color;
     const ColorToRGBA = Phaser.Display.Color.ColorToRGBA;
     const HSVToRGB = Phaser.Display.Color.HSVToRGB;
-    const Clamp$1 = Phaser.Math.Clamp;
+    const Clamp$2 = Phaser.Math.Clamp;
 
     class ColorComponents extends Sizer {
         constructor(scene, config) {
@@ -74416,9 +74397,9 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this.colorObject = new Color();
 
             // Add elements
-            var background = GetValue$M(config, 'background', undefined);
+            var background = GetValue$Y(config, 'background', undefined);
 
-            var formatLabel = GetValue$M(config, 'formatLabel', undefined);
+            var formatLabel = GetValue$Y(config, 'formatLabel', undefined);
             if (!IsGameObject(formatLabel)) {
                 formatLabel = CreateLabel(scene, formatLabel)
                     .resetDisplayContent();
@@ -74430,7 +74411,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 components.push(config.inputText1);
                 components.push(config.inputText2);
             } else {
-                var inputTextConfig = GetValue$M(config, 'inputText');
+                var inputTextConfig = GetValue$Y(config, 'inputText');
                 for (var i = 0; i < 3; i++) {
                     var inputText = CreateInputText$1(scene, inputTextConfig)
                         .setMaxLength(3)
@@ -74444,16 +74425,16 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 this.addBackground(background);
             }
 
-            var proportion = GetValue$M(config, 'proportion.formatLabel', 0);
+            var proportion = GetValue$Y(config, 'proportion.formatLabel', 0);
             var defaultExpand = (formatLabel.isRexContainerLite) ? true : false;
-            var expand = GetValue$M(config, 'expand.formatLabel', defaultExpand);
+            var expand = GetValue$Y(config, 'expand.formatLabel', defaultExpand);
             this.add(
                 formatLabel,
                 { proportion: proportion, expand: expand }
             );
 
-            var proportion = (GetValue$M(inputTextConfig, 'width') === undefined) ? 1 : 0;
-            var expand = (GetValue$M(inputTextConfig, 'height') === undefined) ? true : false;
+            var proportion = (GetValue$Y(inputTextConfig, 'width') === undefined) ? 1 : 0;
+            var expand = (GetValue$Y(inputTextConfig, 'height') === undefined) ? true : false;
             for (var i = 0, cnt = components.length; i < cnt; i++) {
                 this.add(
                     components[i],
@@ -74474,14 +74455,14 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 }, this);
             }
 
-            var callback = GetValue$M(config, 'valuechangeCallback', null);
+            var callback = GetValue$Y(config, 'valuechangeCallback', null);
             if (callback !== null) {
-                var scope = GetValue$M(config, 'valuechangeCallbackScope', undefined);
+                var scope = GetValue$Y(config, 'valuechangeCallbackScope', undefined);
                 this.on('valuechange', callback, scope);
             }
 
             formatLabel.setText('RGB');
-            this.setValue(GetValue$M(config, 'value', 0xffffff));
+            this.setValue(GetValue$Y(config, 'value', 0xffffff));
         }
 
         get value() {
@@ -74489,7 +74470,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
 
         set value(value) {
-            value = Clamp$1(Math.floor(value), 0, 0xffffff);
+            value = Clamp$2(Math.floor(value), 0, 0xffffff);
 
             if (this._value === value) {
                 return;
@@ -74565,21 +74546,21 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         updateColorObject() {
             var components = this.childrenMap.components;
             if (this.colorFormat === 'RGB') {
-                var red = Clamp$1(components[0].value, 0, 255);
-                var green = Clamp$1(components[1].value, 0, 255);
-                var blue = Clamp$1(components[2].value, 0, 255);
+                var red = Clamp$2(components[0].value, 0, 255);
+                var green = Clamp$2(components[1].value, 0, 255);
+                var blue = Clamp$2(components[2].value, 0, 255);
                 this.colorObject.setTo(red, green, blue);
             } else {
-                var h = Clamp$1(components[0].value, 0, 359) / 360;
-                var s = Clamp$1(components[1].value, 0, 100) / 100;
-                var v = Clamp$1(components[2].value, 0, 100) / 100;
+                var h = Clamp$2(components[0].value, 0, 359) / 360;
+                var s = Clamp$2(components[1].value, 0, 100) / 100;
+                var v = Clamp$2(components[2].value, 0, 100) / 100;
                 this.colorObject.setFromRGB(HSVToRGB(h, s, v));
             }
             return this;
         }
     }
 
-    const GetValue$L = Phaser.Utils.Objects.GetValue;
+    const GetValue$X = Phaser.Utils.Objects.GetValue;
 
     class ColorPickerPanel extends Sizer {
         constructor(scene, config) {
@@ -74592,13 +74573,13 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this.type = 'rexColorInput.ColorPickerPanel';
 
             // Add elements
-            var background = GetValue$L(config, 'background', undefined);
+            var background = GetValue$X(config, 'background', undefined);
 
             var colorPicker = new ColorPicker(scene, {
                 hPalette: config.hPalette || {},
                 svPalette: config.svPalette || {},
                 space: {
-                    item: GetValue$L(config, 'space.hPalette', 8)
+                    item: GetValue$X(config, 'space.hPalette', 8)
                 }
             });
             scene.add.existing(colorPicker);
@@ -74642,7 +74623,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 }, this);
             }
 
-            this.setValue(GetValue$L(config, 'value', 0xffffff));
+            this.setValue(GetValue$X(config, 'value', 0xffffff));
         }
 
         get value() {
@@ -74785,7 +74766,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         methods$4,
     );
 
-    const GetValue$K = Phaser.Utils.Objects.GetValue;
+    const GetValue$W = Phaser.Utils.Objects.GetValue;
 
     class ColorInput extends ColorInput$1 {
         constructor(scene, config) {
@@ -74807,30 +74788,30 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
             if (hasColorPicker) {
                 this.setColorPickerSize(
-                    GetValue$K(colorPickerConfig, 'width', 160),
-                    GetValue$K(colorPickerConfig, 'height', 170)
+                    GetValue$W(colorPickerConfig, 'width', 160),
+                    GetValue$W(colorPickerConfig, 'height', 170)
                 );
 
                 var createBackgroundCallback;
-                var background = GetValue$K(colorPickerConfig, 'background');
+                var background = GetValue$W(colorPickerConfig, 'background');
                 if (background) {
                     createBackgroundCallback = function (scene) {
                         return CreateBackground$2(scene, background);
                     };
                 } else {
-                    createBackgroundCallback = GetValue$K(colorPickerConfig, 'createBackgroundCallback');
+                    createBackgroundCallback = GetValue$W(colorPickerConfig, 'createBackgroundCallback');
                 }
                 this.setCreateColorPickerBackgroundCallback(createBackgroundCallback);
 
-                this.setColorPickerHPalettePosition(GetValue$K(colorPickerConfig, 'hPalettePosition', 0));
-                this.setColorPickerExpandDirection(GetValue$K(colorPickerConfig, 'expandDirection'));
-                this.setColorPickerEaseInDuration(GetValue$K(colorPickerConfig, 'easeIn', 200));
-                this.setColorPickerEaseOutDuration(GetValue$K(colorPickerConfig, 'easeOut', 200));
-                this.setColorPickerTransitInCallback(GetValue$K(colorPickerConfig, 'transitIn'));
-                this.setColorPickerTransitOutCallback(GetValue$K(colorPickerConfig, 'transitOut'));
-                this.setColorPickerBounds(GetValue$K(colorPickerConfig, 'bounds'));
+                this.setColorPickerHPalettePosition(GetValue$W(colorPickerConfig, 'hPalettePosition', 0));
+                this.setColorPickerExpandDirection(GetValue$W(colorPickerConfig, 'expandDirection'));
+                this.setColorPickerEaseInDuration(GetValue$W(colorPickerConfig, 'easeIn', 200));
+                this.setColorPickerEaseOutDuration(GetValue$W(colorPickerConfig, 'easeOut', 200));
+                this.setColorPickerTransitInCallback(GetValue$W(colorPickerConfig, 'transitIn'));
+                this.setColorPickerTransitOutCallback(GetValue$W(colorPickerConfig, 'transitOut'));
+                this.setColorPickerBounds(GetValue$W(colorPickerConfig, 'bounds'));
 
-                var colorPickerSpaceConfig = GetValue$K(colorPickerConfig, 'space');
+                var colorPickerSpaceConfig = GetValue$W(colorPickerConfig, 'space');
                 if (colorPickerSpaceConfig === undefined) {
                     colorPickerSpaceConfig = { left: 10, right: 10, top: 10, bottom: 10, item: 8 };
                 }
@@ -74840,17 +74821,17 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             var colorComponentsConfig = config.colorComponents;
             var hasColorComponents = (colorComponentsConfig !== false) && (colorComponentsConfig !== null);
             if (hasColorPicker && hasColorComponents) {
-                this.setColorComponentsHeight(GetValue$K(colorComponentsConfig, 'height', 30));
+                this.setColorComponentsHeight(GetValue$W(colorComponentsConfig, 'height', 30));
 
-                this.setColorComponentsFormatLabelConfig(GetValue$K(colorComponentsConfig, 'formatLabel'));
+                this.setColorComponentsFormatLabelConfig(GetValue$W(colorComponentsConfig, 'formatLabel'));
 
-                var colorComponentsInputTextConfig = GetValue$K(colorComponentsConfig, 'inputText');
+                var colorComponentsInputTextConfig = GetValue$W(colorComponentsConfig, 'inputText');
                 if (!colorComponentsInputTextConfig) {
-                    colorComponentsInputTextConfig = GetValue$K(config, 'inputText');
+                    colorComponentsInputTextConfig = GetValue$W(config, 'inputText');
                 }
                 this.setColorComponentsInputTextConfig(colorComponentsInputTextConfig);
 
-                var colorComponentsSpace = GetValue$K(colorComponentsConfig, 'space');
+                var colorComponentsSpace = GetValue$W(colorComponentsConfig, 'space');
                 if (colorComponentsSpace === undefined) {
                     colorComponentsSpace = { item: 8 };
                 }
@@ -74938,7 +74919,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return false;
     };
 
-    const GetValue$J = Phaser.Utils.Objects.GetValue;
+    const GetValue$V = Phaser.Utils.Objects.GetValue;
     const DistanceBetween = Phaser.Math.Distance.Between;
     const RotateAroundDistance = Phaser.Math.RotateAroundDistance;
 
@@ -74949,16 +74930,16 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             // this.parent = gameObject;
 
             this._enable = undefined;
-            gameObject.setInteractive(GetValue$J(config, "inputConfig", undefined));
+            gameObject.setInteractive(GetValue$V(config, "inputConfig", undefined));
             this.resetFromJSON(config);
             this.boot();
         }
 
         resetFromJSON(o) {
             this.pointer = undefined;
-            this.setEnable(GetValue$J(o, "enable", true));
-            this.setAxisMode(GetValue$J(o, "axis", 0));
-            this.setAxisRotation(GetValue$J(o, "rotation", 0));
+            this.setEnable(GetValue$V(o, "enable", true));
+            this.setAxisMode(GetValue$V(o, "axis", 0));
+            this.setAxisRotation(GetValue$V(o, "rotation", 0));
             return this;
         }
 
@@ -75123,8 +75104,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             splitterSizerPadding = this.getSizerConfig(splitter).padding,
             secondChildSizerPadding = this.getSizerConfig(secondPanel).padding;
 
-        var splitSizerOrientation = (this.orientation === 0) ? 1 : 0;
-        if (splitSizerOrientation === 0) {
+        var splitterSizer = this.childrenMap.splitterSizer;
+        if (splitterSizer.orientation === 0) { // left-right panels
             var firstChildInnerLeft = this.innerLeft + firstChildSizerPadding.left;
             var secondChildInnerRight = this.innerRight - secondChildSizerPadding.right;
 
@@ -75150,7 +75131,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
             this.setSplitRatio(firstChildInnerWidth / totalChildrenInnerWidth);
 
-        } else {
+        } else { // top-bottom panels
             var firstChildInnerTop = this.innerTop + firstChildSizerPadding.top;
             var secondChildInnerBottom = this.innerBottom - secondChildSizerPadding.bottom;
 
@@ -75186,32 +75167,34 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             .setMinSize(minWidthSave, minHeightSave);
     };
 
-    const GetValue$I = Phaser.Utils.Objects.GetValue;
-    const Clamp = Phaser.Math.Clamp;
+    const GetValue$U = Phaser.Utils.Objects.GetValue;
+    const Clamp$1 = Phaser.Math.Clamp;
 
 
     let SplitPanels$1 = class SplitPanels extends Sizer {
         constructor(scene, config) {
+            var panelOrientation = (config.leftPanel) ? 0 : 1;
+
             if (!config.hasOwnProperty('orientation')) {
-                config.orientation = (config.hasOwnProperty('leftPanel')) ? 1 : 0;
+                // Default orientation
+                config.orientation = (panelOrientation) ? 0 : 1;
             }
-            var splitSizerOrientation = (config.orientation === 1) ? 0 : 1;
 
             super(scene, config);
             this.type = 'rexSplit';
 
             // Add elements
             // Background
-            var background = GetValue$I(config, 'background', undefined);
+            var background = GetValue$U(config, 'background', undefined);
             if (background) {
                 this.addBackground(background);
             }
 
             // Header
-            var header = GetValue$I(config, 'header', undefined);
+            var header = GetValue$U(config, 'header', undefined);
             if (header) {
-                var align = GetValue$I(config, 'align.header', 'center');
-                var headerSpace = GetValue$I(config, 'space.header', 0);
+                var align = GetValue$U(config, 'align.header', 'center');
+                var headerSpace = GetValue$U(config, 'space.header', 0);
                 var padding;
                 if (config.orientation === 0) {
                     padding = { bottom: headerSpace };
@@ -75223,7 +75206,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                         proportion: 0,
                         align: align,
                         padding: padding,
-                        expand: GetValue$I(config, 'expand.header', true)
+                        expand: GetValue$U(config, 'expand.header', true)
                     }
                 );
             }
@@ -75231,7 +75214,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             // SplitSizer
             var firstChildKey, secondChildKey;
             var minFirstChildSizeKey, minSecondChildSizeKey;
-            if (splitSizerOrientation === 0) { // x
+            if (panelOrientation === 0) { // x
                 firstChildKey = 'leftPanel';
                 secondChildKey = 'rightPanel';
                 minFirstChildSizeKey = 'minLeftPanelWidth';
@@ -75243,12 +75226,12 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 minSecondChildSizeKey = 'minBottomPanelHeight';
             }
 
-            var firstChild = GetValue$I(config, firstChildKey, undefined);
-            var splitter = GetValue$I(config, 'splitter', undefined);
-            var secondChild = GetValue$I(config, secondChildKey, undefined);
-            var spaceConfig = GetValue$I(config, 'space', undefined);
+            var firstChild = GetValue$U(config, firstChildKey, undefined);
+            var splitter = GetValue$U(config, 'splitter', undefined);
+            var secondChild = GetValue$U(config, secondChildKey, undefined);
+            var spaceConfig = GetValue$U(config, 'space', undefined);
 
-            var splitterSizer = new Sizer(scene, { orientation: splitSizerOrientation });
+            var splitterSizer = new Sizer(scene, { orientation: panelOrientation });
             scene.add.existing(splitterSizer);
             this.add(splitterSizer, { proportion: 1, expand: true });
 
@@ -75258,10 +75241,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                     proportion: 1,
                     expand: true,
                     padding: {
-                        left: GetValue$I(spaceConfig, `${firstChildKey}Left`, 0),
-                        right: GetValue$I(spaceConfig, `${firstChildKey}Right`, 0),
-                        top: GetValue$I(spaceConfig, `${firstChildKey}Top`, 0),
-                        bottom: GetValue$I(spaceConfig, `${firstChildKey}Bottom`, 0),
+                        left: GetValue$U(spaceConfig, `${firstChildKey}Left`, 0),
+                        right: GetValue$U(spaceConfig, `${firstChildKey}Right`, 0),
+                        top: GetValue$U(spaceConfig, `${firstChildKey}Top`, 0),
+                        bottom: GetValue$U(spaceConfig, `${firstChildKey}Bottom`, 0),
                     }
                 }
             );
@@ -75271,10 +75254,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                     proportion: 0,
                     expand: true,
                     padding: {
-                        left: GetValue$I(spaceConfig, 'splitterLeft', 0),
-                        right: GetValue$I(spaceConfig, 'splitterRight', 0),
-                        top: GetValue$I(spaceConfig, 'splitterTop', 0),
-                        bottom: GetValue$I(spaceConfig, 'splitterBottom', 0),
+                        left: GetValue$U(spaceConfig, 'splitterLeft', 0),
+                        right: GetValue$U(spaceConfig, 'splitterRight', 0),
+                        top: GetValue$U(spaceConfig, 'splitterTop', 0),
+                        bottom: GetValue$U(spaceConfig, 'splitterBottom', 0),
                     }
                 }
             );
@@ -75285,19 +75268,19 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                     proportion: 1,
                     expand: true,
                     padding: {
-                        left: GetValue$I(spaceConfig, `${secondChildKey}Left`, 0),
-                        right: GetValue$I(spaceConfig, `${secondChildKey}Right`, 0),
-                        top: GetValue$I(spaceConfig, `${secondChildKey}Top`, 0),
-                        bottom: GetValue$I(spaceConfig, `${secondChildKey}Bottom`, 0),
+                        left: GetValue$U(spaceConfig, `${secondChildKey}Left`, 0),
+                        right: GetValue$U(spaceConfig, `${secondChildKey}Right`, 0),
+                        top: GetValue$U(spaceConfig, `${secondChildKey}Top`, 0),
+                        bottom: GetValue$U(spaceConfig, `${secondChildKey}Bottom`, 0),
                     }
                 }
             );
 
             // Footer
-            var footer = GetValue$I(config, 'footer', undefined);
+            var footer = GetValue$U(config, 'footer', undefined);
             if (footer) {
-                var align = GetValue$I(config, 'align.footer', 'center');
-                var footerSpace = GetValue$I(config, 'space.footer', 0);
+                var align = GetValue$U(config, 'align.footer', 'center');
+                var footerSpace = GetValue$U(config, 'space.footer', 0);
                 var padding;
                 if (config.orientation === 0) {
                     padding = { top: footerSpace };
@@ -75309,7 +75292,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                         proportion: 0,
                         align: align,
                         padding: padding,
-                        expand: GetValue$I(config, 'expand.footer', true)
+                        expand: GetValue$U(config, 'expand.footer', true)
                     }
                 );
             }
@@ -75323,12 +75306,12 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this.addChildrenMap('splitter', splitter);
             this.addChildrenMap(secondChildKey, secondChild);
 
-            this.minFirstChildSize = GetValue$I(config, minFirstChildSizeKey, 0);
-            this.minSecondChildSize = GetValue$I(config, minSecondChildSizeKey, 0);
-            this.setSplitRatio(GetValue$I(config, 'splitRatio', 0.5));
+            this.minFirstChildSize = GetValue$U(config, minFirstChildSizeKey, 0);
+            this.minSecondChildSize = GetValue$U(config, minSecondChildSizeKey, 0);
+            this.setSplitRatio(GetValue$U(config, 'splitRatio', 0.5));
 
             this.splitterDragBehavior = new Drag(splitter, {
-                axis: (splitSizerOrientation === 0) ? 1 : 2,
+                axis: (panelOrientation === 0) ? 1 : 2,
             });
 
             splitter
@@ -75385,7 +75368,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             var splitterSizer = this.childrenMap.splitterSizer;
             return splitterSizer.sizerChildren[2];
         }
-        
+
         get bottomPanel() {
             return this.rightPanel;
         }
@@ -75447,7 +75430,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
 
         set splitRatio(value) {
-            value = Clamp(value, 0, 1);
+            value = Clamp$1(value, 0, 1);
             if (this._splitRatio === value) {
                 return;
             }
@@ -75895,7 +75878,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         Move
     );
 
-    const GetValue$H = Phaser.Utils.Objects.GetValue;
+    const GetValue$T = Phaser.Utils.Objects.GetValue;
 
     class Sides extends OverlapSizer {
         constructor(scene, config) {
@@ -75906,14 +75889,14 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this.currentChildKey = undefined;
 
             // Callbacks
-            var showChildCallback = GetValue$H(config, 'showChildCallback', undefined);
+            var showChildCallback = GetValue$T(config, 'showChildCallback', undefined);
             if (showChildCallback) { // Has showChildCallback, and hideChildCallback
                 if (IsFunction(showChildCallback)) { // Custom callbacks
-                    var showChildCallbackScope = GetValue$H(config, 'showChildCallbackScope', undefined);
+                    var showChildCallbackScope = GetValue$T(config, 'showChildCallbackScope', undefined);
                     this.on('showchild', showChildCallback, showChildCallbackScope);
 
-                    var hideChildCallback = GetValue$H(config, 'hideChildCallback', undefined);
-                    var hideChildCallbackScope = GetValue$H(config, 'hideChildCallbackScope', undefined);
+                    var hideChildCallback = GetValue$T(config, 'hideChildCallback', undefined);
+                    var hideChildCallbackScope = GetValue$T(config, 'hideChildCallbackScope', undefined);
                     this.on('hidechild', hideChildCallback, hideChildCallbackScope);
                 } else { // Default callbacks
                     var defaultCallbacks = GetDefaultCallbacks(showChildCallback);
@@ -75923,12 +75906,12 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             }
 
             // Add elements
-            var background = GetValue$H(config, 'background', undefined);
-            var panel = GetValue$H(config, 'panel', undefined);
-            var leftSide = GetValue$H(config, 'leftSide', undefined);
-            var rightSide = GetValue$H(config, 'rightSide', undefined);
-            var topSide = GetValue$H(config, 'topSide', undefined);
-            var bottomSide = GetValue$H(config, 'bottomSide', undefined);
+            var background = GetValue$T(config, 'background', undefined);
+            var panel = GetValue$T(config, 'panel', undefined);
+            var leftSide = GetValue$T(config, 'leftSide', undefined);
+            var rightSide = GetValue$T(config, 'rightSide', undefined);
+            var topSide = GetValue$T(config, 'topSide', undefined);
+            var bottomSide = GetValue$T(config, 'bottomSide', undefined);
 
             if (background) {
                 this.addBackground(background);
@@ -75937,19 +75920,19 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 this.add(panel, 'panel', 'center', 0, true);
             }
             if (leftSide) {
-                var expand = GetValue$H(config, 'expand.left', true);
+                var expand = GetValue$T(config, 'expand.left', true);
                 this.add(leftSide, 'leftSide', 'left-top', 0, { height: expand });
             }
             if (rightSide) {
-                var expand = GetValue$H(config, 'expand.right', true);
+                var expand = GetValue$T(config, 'expand.right', true);
                 this.add(rightSide, 'rightSide', 'right-top', 0, { height: expand });
             }
             if (topSide) {
-                var expand = GetValue$H(config, 'expand.top', true);
+                var expand = GetValue$T(config, 'expand.top', true);
                 this.add(topSide, 'topSide', 'left-top', 0, { width: expand });
             }
             if (bottomSide) {
-                var expand = GetValue$H(config, 'expand.bottom', true);
+                var expand = GetValue$T(config, 'expand.bottom', true);
                 this.add(bottomSide, 'bottomSide', 'left-bottom', 0, { width: expand });
             }
         }
@@ -76011,7 +75994,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return this;
     };
 
-    class Title extends Label {
+    let Title$1 = class Title extends Label {
         constructor(scene, config) {
             config = BuildLabelConfig(scene, config);
             super(scene, config);
@@ -76031,9 +76014,9 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
             return this;
         }
-    }
+    };
 
-    class FolderTitle extends Title {
+    class FolderTitle extends Title$1 {
         constructor(scene, config) {
             if (config === undefined) {
                 config = {};
@@ -76110,7 +76093,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return CreateBackground$2(scene, Merge$1(config, style));
     };
 
-    var BindingTargetMethods$7 = {
+    var BindingTargetMethods$9 = {
         setBindingTarget(target) {
             var child = this.childrenMap.child;  // tweaker
             child.setBindingTarget(target);
@@ -76118,7 +76101,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         },
     };
 
-    var InputRowTitleWidthMethods$6 = {
+    var InputRowTitleWidthMethods$8 = {
         getMaxInputRowTitleWidth() {
             var child = this.childrenMap.child;  // tweaker
             var titleWidth = child.getMaxInputRowTitleWidth();
@@ -76155,11 +76138,11 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     Object.assign(
         Folder.prototype,
-        BindingTargetMethods$7,
-        InputRowTitleWidthMethods$6,
+        BindingTargetMethods$9,
+        InputRowTitleWidthMethods$8,
     );
 
-    const GetValue$G = Phaser.Utils.Objects.GetValue;
+    const GetValue$S = Phaser.Utils.Objects.GetValue;
 
     var CreateFolder = function (parent, config, style) {
         if (!config) { config = {}; }
@@ -76196,7 +76179,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             space: style.space,
 
             transition: {
-                duration: GetValue$G(style, 'transition.duration', 200)
+                duration: GetValue$S(style, 'transition.duration', 200)
             },
         });
         scene.add.existing(folder);
@@ -76204,7 +76187,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return folder;
     };
 
-    const GetValue$F = Phaser.Utils.Objects.GetValue;
+    const GetValue$R = Phaser.Utils.Objects.GetValue;
 
     var AddFolder = function (config) {
         if (config === undefined) {
@@ -76212,7 +76195,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
 
         // Create folder
-        var folderStyle = GetValue$F(this.styles, 'folder') || {};
+        var folderStyle = GetValue$R(this.styles, 'folder') || {};
         folderStyle.tweaker = this.styles;
         folderStyle.root = this.root;
         var folder = CreateFolder(this, config, folderStyle);
@@ -76232,7 +76215,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         // Set content
         folder.setTitle(config);
 
-        var expanded = GetValue$F(config, 'expanded', true);
+        var expanded = GetValue$R(config, 'expanded', true);
         if (expanded !== undefined) {
             folder.setExpandedState(expanded);
         }
@@ -76246,7 +76229,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return childTweaker;
     };
 
-    var BindingTargetMethods$6 = {
+    var BindingTargetMethods$8 = {
         setBindingTarget(target) {
             var children = this.childrenMap.pages.children;
             for (var i = 0, cnt = children.length; i < cnt; i++) {
@@ -76256,7 +76239,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         },
     };
 
-    var InputRowTitleWidthMethods$5 = {
+    var InputRowTitleWidthMethods$7 = {
         getMaxInputRowTitleWidth() {
             var maxTitleWidth = 0;
             var children = this.childrenMap.pages.children;  // tweaker array
@@ -76287,8 +76270,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     Object.assign(
         TabPages.prototype,
-        BindingTargetMethods$6,
-        InputRowTitleWidthMethods$5,
+        BindingTargetMethods$8,
+        InputRowTitleWidthMethods$7,
     );
 
     Phaser.Utils.Objects.GetValue;
@@ -76329,7 +76312,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return tabPages;
     };
 
-    const GetValue$E = Phaser.Utils.Objects.GetValue;
+    const GetValue$Q = Phaser.Utils.Objects.GetValue;
 
     var AddTab = function (config) {
         if (config === undefined) {
@@ -76337,7 +76320,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
 
         // Create tab
-        var tabStyle = GetValue$E(this.styles, 'tab') || {};
+        var tabStyle = GetValue$Q(this.styles, 'tab') || {};
         tabStyle.tweaker = this.styles;
         tabStyle.root = this.root;
         var tab = CreateTab(this, config, tabStyle);
@@ -76353,7 +76336,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             }
         );
 
-        var pagesConfig = GetValue$E(config, 'pages') || [];
+        var pagesConfig = GetValue$Q(config, 'pages') || [];
         var pages = [];
         var shownPageIndex = 0;
         for (var i = 0, cnt = pagesConfig.length; i < cnt; i++) {
@@ -76377,7 +76360,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return pages;
     };
 
-    var BindingTargetMethods$5 = {
+    var BindingTargetMethods$7 = {
         setBindingTarget(target) {
             var children = this.childrenMap.columns;
             for (var i = 0, cnt = children.length; i < cnt; i++) {
@@ -76387,7 +76370,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         },
     };
 
-    var InputRowTitleWidthMethods$4 = {
+    var InputRowTitleWidthMethods$6 = {
         getMaxInputRowTitleWidth() {
             // Skip counting tile width of this columns
             return 0;
@@ -76405,7 +76388,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
     };
 
-    const GetValue$D = Phaser.Utils.Objects.GetValue;
+    const GetValue$P = Phaser.Utils.Objects.GetValue;
 
     class Columns extends Sizer {
         constructor(scene, config) {
@@ -76417,11 +76400,11 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             super(scene, config);
             this.type = 'rexTweaker.Columns';
 
-            this.alignInputRowTitleStartFlag = GetValue$D(config, 'alignTitle');
+            this.alignInputRowTitleStartFlag = GetValue$P(config, 'alignTitle');
 
             // Add elements
-            var background = GetValue$D(config, 'background', undefined);
-            var title = GetValue$D(config, 'title', undefined);
+            var background = GetValue$P(config, 'background', undefined);
+            var title = GetValue$P(config, 'title', undefined);
 
             if (background) {
                 this.addBackground(background);
@@ -76433,7 +76416,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                     {
                         expand: true,
                         space: {
-                            bottom: GetValue$D(config, 'space.title', 0)
+                            bottom: GetValue$P(config, 'space.title', 0)
                         }
                     }
                 );
@@ -76442,12 +76425,12 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             var columnsSizer = new Sizer(scene, {
                 orientation: 'x',
                 space: {
-                    item: GetValue$D(config, 'space.column', 0)
+                    item: GetValue$P(config, 'space.column', 0)
                 }
             });
             scene.add.existing(columnsSizer);
 
-            var columnConfigArray = GetValue$D(config, 'columns', undefined);
+            var columnConfigArray = GetValue$P(config, 'columns', undefined);
             var columnConfig;
             var columnChild;
             for (var i = 0, cnt = columnConfigArray.length; i < cnt; i++) {
@@ -76457,7 +76440,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                     columnConfig.child,
                     {
                         proportion: (columnChild.minWidth === 0) ? 1 : 0,
-                        expand: GetValue$D(columnConfig, 'expand', true)
+                        expand: GetValue$P(columnConfig, 'expand', true)
                     }
                 );
             }
@@ -76503,18 +76486,18 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     Object.assign(
         Columns.prototype,
-        BindingTargetMethods$5,
-        InputRowTitleWidthMethods$4,
+        BindingTargetMethods$7,
+        InputRowTitleWidthMethods$6,
     );
 
     var CreateTitleLabel = function (scene, config, style) {
-        var gameObject = new Title(scene, style);
+        var gameObject = new Title$1(scene, style);
         scene.add.existing(gameObject);
 
         return gameObject;
     };
 
-    const GetValue$C = Phaser.Utils.Objects.GetValue;
+    const GetValue$O = Phaser.Utils.Objects.GetValue;
 
     var CreateColumns = function (parent, config, style) {
         if (!config) { config = {}; }
@@ -76531,7 +76514,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             styles: style.tweaker,
         };
 
-        var columnConfigArray = GetValue$C(config, 'columns', 2);
+        var columnConfigArray = GetValue$O(config, 'columns', 2);
         if (typeof (columnConfigArray) === 'number') {
             var columnCount = columnConfigArray;
             columnConfigArray = [];
@@ -76543,7 +76526,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         for (var i = 0, cnt = columnConfigArray.length; i < cnt; i++) {
             var columnConfig = columnConfigArray[i];
 
-            tweakerConfig.width = GetValue$C(columnConfig, 'width', 0);
+            tweakerConfig.width = GetValue$O(columnConfig, 'width', 0);
 
             var tweakerChild = parent.createTweaker(tweakerConfig);
 
@@ -76566,7 +76549,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return columns;
     };
 
-    const GetValue$B = Phaser.Utils.Objects.GetValue;
+    const GetValue$N = Phaser.Utils.Objects.GetValue;
 
     var AddColumns = function (config) {
         if (config === undefined) {
@@ -76579,7 +76562,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
 
         // Create columns
-        var columnsStyle = GetValue$B(this.styles, 'columns') || {};
+        var columnsStyle = GetValue$N(this.styles, 'columns') || {};
         columnsStyle.tweaker = this.styles;
         columnsStyle.root = this.root;
         var columns = CreateColumns(this, config, columnsStyle);
@@ -76598,7 +76581,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         // Set content
         columns.setTitle(config);
 
-        var columnConfigArray = GetValue$B(config, 'columns', undefined);
+        var columnConfigArray = GetValue$N(config, 'columns', undefined);
         if (columnConfigArray && Array.isArray(columnConfigArray)) {
             for (var i = 0, cnt = columnConfigArray.length; i < cnt; i++) {
                 var key = columnConfigArray[i].key;
@@ -76611,7 +76594,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return columns.getColumns();
     };
 
-    var BindingTargetMethods$4 = {
+    var BindingTargetMethods$6 = {
         setBindingTarget(target) {
             var leftPanel = this.leftPanel;
             var rightPanel = this.rightPanel;
@@ -76625,7 +76608,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         },
     };
 
-    var InputRowTitleWidthMethods$3 = {
+    var InputRowTitleWidthMethods$5 = {
         getMaxInputRowTitleWidth() {
             // Skip counting tile width of this columns
             return 0;
@@ -76646,14 +76629,14 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
     };
 
-    const GetValue$A = Phaser.Utils.Objects.GetValue;
+    const GetValue$M = Phaser.Utils.Objects.GetValue;
 
     class SplitPanels extends SplitPanels$1 {
         constructor(scene, config) {
             super(scene, config);
             this.type = 'rexTweaker.SplitPanels';
 
-            this.alignInputRowTitleStartFlag = GetValue$A(config, 'alignTitle');
+            this.alignInputRowTitleStartFlag = GetValue$M(config, 'alignTitle');
         }
 
         preLayout() {
@@ -76678,15 +76661,15 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     Object.assign(
         SplitPanels.prototype,
-        BindingTargetMethods$4,
-        InputRowTitleWidthMethods$3,
+        BindingTargetMethods$6,
+        InputRowTitleWidthMethods$5,
     );
 
-    const GetValue$z = Phaser.Utils.Objects.GetValue;
+    const GetValue$L = Phaser.Utils.Objects.GetValue;
 
-    const DefaultSplitStyle = {
-        width: 8,
-        height: 8,
+    const DefaultSplitStyle$1 = {
+        width: 10,
+        height: 10,
         color: 0x0,
         alpha: 0.001
     };
@@ -76714,7 +76697,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         var splitter;
         if (!splitterConfig && !splitterStyle) {
             // Default splitStyle
-            splitterStyle = DefaultSplitStyle;
+            splitterStyle = DefaultSplitStyle$1;
         }
         splitter = CreateBackground(scene, (splitterConfig || {}), (splitterStyle || {}));
 
@@ -76727,9 +76710,9 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             rightPanel: rightPanel,
             splitter: splitter,
             background: background,
-            splitRatio: GetValue$z(config, 'splitRatio', 0.5),
-            minLeftPanelWidth: GetValue$z(config, 'minLeftPanelWidth', 0),
-            minRightPanelWidth: GetValue$z(config, 'minRightPanelWidth', 0),
+            splitRatio: GetValue$L(config, 'splitRatio', 0.5),
+            minLeftPanelWidth: GetValue$L(config, 'minLeftPanelWidth', 0),
+            minRightPanelWidth: GetValue$L(config, 'minRightPanelWidth', 0),
             space: style.space,
 
             alignTitle: style.root.alignTitle
@@ -76739,14 +76722,14 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return splitPanels;
     };
 
-    const GetValue$y = Phaser.Utils.Objects.GetValue;
+    const GetValue$K = Phaser.Utils.Objects.GetValue;
 
     var AddSplit = function (config) {
         if (config === undefined) {
             config = {};
         }
 
-        var splitPanelStyle = GetValue$y(this.styles, '2columns') || {};
+        var splitPanelStyle = GetValue$K(this.styles, '2columns') || {};
         splitPanelStyle.tweaker = this.styles;
         splitPanelStyle.root = this.root;
         var splitPanels = CreateSplitPanels(this, config, splitPanelStyle);
@@ -76766,12 +76749,12 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         var leftPanel = splitPanels.childrenMap.leftPanel;
         var rightPanel = splitPanels.childrenMap.rightPanel;
 
-        var leftConfig = GetValue$y(config, 'left', undefined);
+        var leftConfig = GetValue$K(config, 'left', undefined);
         if (leftConfig && leftConfig.key) {
             this.root.addChildrenMap(leftConfig.key, leftPanel);
         }
 
-        var rightConfig = GetValue$y(config, 'right', undefined);
+        var rightConfig = GetValue$K(config, 'right', undefined);
         if (rightConfig && rightConfig.key) {
             this.root.addChildrenMap(rightConfig.key, rightPanel);
         }
@@ -76782,7 +76765,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         };
     };
 
-    var BindingTargetMethods$3 = {
+    var BindingTargetMethods$5 = {
         setBindingTarget(target) {
             var children = this.childrenMap.child;
             for (var i = 0, cnt = children.length; i < cnt; i++) {
@@ -76792,7 +76775,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         },
     };
 
-    var InputRowTitleWidthMethods$2 = {
+    var InputRowTitleWidthMethods$4 = {
         getMaxInputRowTitleWidth() {
             // Ignore Title of InputRows
             return 0;
@@ -76804,7 +76787,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
     };
 
-    const GetValue$x = Phaser.Utils.Objects.GetValue;
+    const GetValue$J = Phaser.Utils.Objects.GetValue;
 
     class Wrap extends Sizer {
         constructor(scene, config) {
@@ -76817,8 +76800,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this.type = 'rexTweaker.Wrap';
 
             // Add elements
-            var background = GetValue$x(config, 'background', undefined);
-            var title = GetValue$x(config, 'title', undefined);
+            var background = GetValue$J(config, 'background', undefined);
+            var title = GetValue$J(config, 'title', undefined);
 
             if (background) {
                 this.addBackground(background);
@@ -76830,13 +76813,13 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                     {
                         expand: true,
                         space: {
-                            bottom: GetValue$x(config, 'space.title', 0)
+                            bottom: GetValue$J(config, 'space.title', 0)
                         }
                     }
                 );
             }
 
-            var child = GetValue$x(config, 'child', undefined);
+            var child = GetValue$J(config, 'child', undefined);
             this.add(
                 child,
                 { expand: true }
@@ -76861,11 +76844,11 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     Object.assign(
         Wrap.prototype,
-        BindingTargetMethods$3,
-        InputRowTitleWidthMethods$2,
+        BindingTargetMethods$5,
+        InputRowTitleWidthMethods$4,
     );
 
-    const GetValue$w = Phaser.Utils.Objects.GetValue;
+    const GetValue$I = Phaser.Utils.Objects.GetValue;
 
     var CreateWrap = function (parent, config, style) {
         if (!config) { config = {}; }
@@ -76879,11 +76862,11 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             root: style.root,
             styles: style.tweaker,
             space: style.space,
-            align: GetValue$w(style, 'align', 5),
+            align: GetValue$I(style, 'align', 5),
 
             wrap: true,
-            itemWidth: GetValue$w(config, 'itemWidth', 0, style),
-            itemHeight: GetValue$w(config, 'itemHeight', 0, style),
+            itemWidth: GetValue$I(config, 'itemWidth', 0, style),
+            itemHeight: GetValue$I(config, 'itemHeight', 0, style),
         };
 
         var tweakerChild = parent.createTweaker(tweakerConfig);
@@ -76901,7 +76884,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return wrap;
     };
 
-    const GetValue$v = Phaser.Utils.Objects.GetValue;
+    const GetValue$H = Phaser.Utils.Objects.GetValue;
 
     var AddWrap = function (config) {
         if (config === undefined) {
@@ -76909,7 +76892,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
 
         // Create wrap
-        var wrapStyle = GetValue$v(this.styles, 'wrap') || {};
+        var wrapStyle = GetValue$H(this.styles, 'wrap') || {};
         wrapStyle.tweaker = this.styles;
         wrapStyle.root = this.root;
         var wrap = CreateWrap(this, config, wrapStyle);
@@ -76960,7 +76943,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return slider;
     };
 
-    var BindingTargetMethods$2 = {
+    var BindingTargetMethods$4 = {
         setBindingTarget(target) {
             var child = this.childrenMap.panel;  // tweaker
             child.setBindingTarget(target);
@@ -76968,7 +76951,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         },
     };
 
-    var InputRowTitleWidthMethods$1 = {
+    var InputRowTitleWidthMethods$3 = {
         getMaxInputRowTitleWidth() {
             var child = this.childrenMap.panel;  // tweaker
             var titleWidth = child.getMaxInputRowTitleWidth();
@@ -77004,11 +76987,11 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     Object.assign(
         Scrollable.prototype,
-        BindingTargetMethods$2,
-        InputRowTitleWidthMethods$1,
+        BindingTargetMethods$4,
+        InputRowTitleWidthMethods$3,
     );
 
-    const GetValue$u = Phaser.Utils.Objects.GetValue;
+    const GetValue$G = Phaser.Utils.Objects.GetValue;
 
     var CreateScrollable = function (parent, config, style) {
         if (!config) { config = {}; }
@@ -77048,7 +77031,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
             background: background,
 
-            height: GetValue$u(config, 'height', 0),
+            height: GetValue$G(config, 'height', 0),
 
             space: style.space,
         });
@@ -77057,7 +77040,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return scrollable;
     };
 
-    const GetValue$t = Phaser.Utils.Objects.GetValue;
+    const GetValue$F = Phaser.Utils.Objects.GetValue;
 
     var AddScrollable = function (config) {
         if (config === undefined) {
@@ -77065,7 +77048,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
 
         // Create scrollable
-        var scrollableStyle = GetValue$t(this.styles, 'scrollable') || {};
+        var scrollableStyle = GetValue$F(this.styles, 'scrollable') || {};
         scrollableStyle.tweaker = this.styles;
         scrollableStyle.root = this.root;
         var scrollable = CreateScrollable(this, config, scrollableStyle);
@@ -77100,7 +77083,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return leafKey;
     };
 
-    var BindingTargetMethods$1 = {
+    var BindingTargetMethods$3 = {
         setBindingTarget(target, bindingKey) {
             this.bindingTarget = target;
 
@@ -77110,7 +77093,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
             var items;
             if (!this.isRootTarget) {
-                items = GetValue$45(target, bindingKey);
+                items = GetValue$4h(target, bindingKey);
             } else {
                 items = target;
             }
@@ -77126,7 +77109,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         },
     };
 
-    var MonitorTargetMethods$1 = {
+    var MonitorTargetMethods$2 = {
         startMonitorTarget() {
             if (this.isMonitoring) {
                 return this;
@@ -77161,7 +77144,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         },
     };
 
-    var InputRowTitleWidthMethods = {
+    var InputRowTitleWidthMethods$2 = {
         getMaxInputRowTitleWidth() {
             return 0;
         },
@@ -77171,12 +77154,13 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
     };
 
-    var InstallAddButton = function (config) {
+    var InstallAddButton$1 = function (config) {
         var button = config.addButton;
         if (!button) {
             return;
         }
 
+        // See utils/CreateAddButton.js
         var createDefaultItemCallback = button.createDefaultItem;
 
         button.onClick(function () {
@@ -77185,7 +77169,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }, this);
     };
 
-    var InstallClearButton = function (config) {
+    var InstallClearButton$1 = function (config) {
         var button = config.clearButton;
         if (!button) {
             return;
@@ -77196,7 +77180,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }, this);
     };
 
-    var InstallCellInteractiveEvents = function (config) {
+    var InstallCellInteractiveEvents$1 = function (config) {
         this
             .on('cell.over', function (cellContainer, cellIndex) {
                 cellContainer.onOver();
@@ -77206,9 +77190,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             });
     };
 
-    Phaser.Utils.Array.Remove;
-
-    var OnClickButtonMethods$1 = {
+    var OnClickButtonMethods$3 = {
         deleteItemByIndex(index) {
             // Called by CellContainer.onDeleteItem
             this.items.splice(index, 1);
@@ -77238,7 +77220,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     };
 
-    var TransitionMethods = {
+    var TransitionMethods$1 = {
         deleteItemWithTransition(cellContainer) {
             if (!cellContainer || (cellContainer.cellIndex == null)) {
                 return this;
@@ -77332,9 +77314,18 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this.resetCellSizeFlag = true;
             this.lastItemsCount = undefined; // For monitor
 
-            InstallClearButton.call(this, config);
-            InstallAddButton.call(this, config);
-            InstallCellInteractiveEvents.call(this, config);
+            InstallClearButton$1.call(this, config);
+            InstallAddButton$1.call(this, config);
+            InstallCellInteractiveEvents$1.call(this, config);
+
+            var header = this.childrenMap.header;
+            if (header) {
+                this.bringChildToTop(header);
+            }
+            var footer = this.childrenMap.footer;
+            if (footer) {
+                this.bringChildToTop(footer);
+            }
         }
 
         destroy(fromScene) {
@@ -77377,23 +77368,23 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     Object.assign(
         ArrayTable.prototype,
-        BindingTargetMethods$1,
-        MonitorTargetMethods$1,
-        InputRowTitleWidthMethods,
-        OnClickButtonMethods$1,
-        TransitionMethods,
+        BindingTargetMethods$3,
+        MonitorTargetMethods$2,
+        InputRowTitleWidthMethods$2,
+        OnClickButtonMethods$3,
+        TransitionMethods$1,
     );
 
     const ButtonStyleBase = { text: null, action: null };
 
-    const GetValue$s = Phaser.Utils.Objects.GetValue;
+    const GetValue$E = Phaser.Utils.Objects.GetValue;
 
     var DefaultCallback = function () {
         return {};
     };
 
     var CreateAddButton = function (parent, config, style) {
-        var createDefaultItem = GetValue$s(config, 'createDefaultItem', DefaultCallback);
+        var createDefaultItem = GetValue$E(config, 'createDefaultItem', DefaultCallback);
         if (!createDefaultItem) {
             return null;
         }
@@ -77406,20 +77397,20 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             addButtonStyle = Object.assign(DeepClone(ButtonStyleBase), addButtonStyle);
             addButton = CreateLabel(scene, addButtonStyle);
         } else {
-            addButtonStyle = GetValue$s(style, 'tweaker.inputRow.button') || {};
+            addButtonStyle = GetValue$E(style, 'tweaker.inputRow.button') || {};
             addButton = CreateLabel(scene, addButtonStyle);
-            addButton.resetDisplayContent(GetValue$s(config, 'addLabel', 'Add'));
+            addButton.resetDisplayContent(GetValue$E(config, 'addLabel', 'Add'));
         }
 
-        addButton.createDefaultItem = GetValue$s(config, 'createDefaultItem', DefaultCallback);
+        addButton.createDefaultItem = GetValue$E(config, 'createDefaultItem', DefaultCallback);
 
         return addButton;
     };
 
-    const GetValue$r = Phaser.Utils.Objects.GetValue;
+    const GetValue$D = Phaser.Utils.Objects.GetValue;
 
     var CreateClearButton = function (parent, config, style) {
-        var clearItems = GetValue$r(config, 'clearItems', true);
+        var clearItems = GetValue$D(config, 'clearItems', true);
         if (!clearItems) {
             return null;
         }
@@ -77432,26 +77423,26 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             clearButtonStyle = Object.assign(DeepClone(ButtonStyleBase), clearButtonStyle);
             clearButton = CreateLabel(scene, clearButtonStyle);
         } else {
-            clearButtonStyle = GetValue$r(style, 'tweaker.inputRow.button') || {};
+            clearButtonStyle = GetValue$D(style, 'tweaker.inputRow.button') || {};
             clearButton = CreateLabel(scene, clearButtonStyle);
-            clearButton.resetDisplayContent(GetValue$r(config, 'clearLabel', 'Clear'));
+            clearButton.resetDisplayContent(GetValue$D(config, 'clearLabel', 'Clear'));
         }
 
         return clearButton;
     };
 
-    const GetValue$q = Phaser.Utils.Objects.GetValue;
+    const GetValue$C = Phaser.Utils.Objects.GetValue;
 
     var CreateDeleteButton = function (scene, config, style) {
-        var deleteButtonStyle = GetValue$q(style, 'deleteButton');
+        var deleteButtonStyle = GetValue$C(style, 'deleteButton');
         var deleteLabel;
 
         if (deleteButtonStyle) {
             // If using dedicated delete-button style, keep its own display content config.
             deleteButtonStyle = Object.assign(DeepClone(ButtonStyleBase), deleteButtonStyle);
         } else {
-            deleteButtonStyle = GetValue$q(style, 'tweaker.inputRow.button') || {};
-            deleteLabel = GetValue$q(config, 'deleteLabel', 'X');
+            deleteButtonStyle = GetValue$C(style, 'tweaker.inputRow.button') || {};
+            deleteLabel = GetValue$C(config, 'deleteLabel', 'X');
         }
 
         var deleteButton = CreateLabel(scene, deleteButtonStyle);
@@ -77462,18 +77453,18 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return deleteButton;
     };
 
-    const GetValue$p = Phaser.Utils.Objects.GetValue;
+    const GetValue$B = Phaser.Utils.Objects.GetValue;
 
     var CreateMoveUpButton = function (scene, config, style) {
-        var moveUpButtonStyle = GetValue$p(style, 'moveUpButton');
+        var moveUpButtonStyle = GetValue$B(style, 'moveUpButton');
         var moveUpLabel;
 
         if (moveUpButtonStyle) {
             // If using dedicated moveUp-button style, keep its own display content config.
             moveUpButtonStyle = Object.assign(DeepClone(ButtonStyleBase), moveUpButtonStyle);
         } else {
-            moveUpButtonStyle = GetValue$p(style, 'tweaker.inputRow.button') || {};
-            moveUpLabel = GetValue$p(config, 'moveUpLabel', 'Up');
+            moveUpButtonStyle = GetValue$B(style, 'tweaker.inputRow.button') || {};
+            moveUpLabel = GetValue$B(config, 'moveUpLabel', 'Up');
         }
 
         var moveUpButton = CreateLabel(scene, moveUpButtonStyle);
@@ -77484,18 +77475,18 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return moveUpButton;
     };
 
-    const GetValue$o = Phaser.Utils.Objects.GetValue;
+    const GetValue$A = Phaser.Utils.Objects.GetValue;
 
     var CreateMoveDownButton = function (scene, config, style) {
-        var moveDownButtonStyle = GetValue$o(style, 'moveDownButton');
+        var moveDownButtonStyle = GetValue$A(style, 'moveDownButton');
         var moveDownLabel;
 
         if (moveDownButtonStyle) {
             // If using dedicated moveDown-button style, keep its own display content config.
             moveDownButtonStyle = Object.assign(DeepClone(ButtonStyleBase), moveDownButtonStyle);
         } else {
-            moveDownButtonStyle = GetValue$o(style, 'tweaker.inputRow.button') || {};
-            moveDownLabel = GetValue$o(config, 'moveDownLabel', 'Down');
+            moveDownButtonStyle = GetValue$A(style, 'tweaker.inputRow.button') || {};
+            moveDownLabel = GetValue$A(config, 'moveDownLabel', 'Down');
         }
 
         var moveDownButton = CreateLabel(scene, moveDownButtonStyle);
@@ -77514,9 +77505,9 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return container;
     };
 
-    const GetValue$n = Phaser.Utils.Objects.GetValue;
+    const GetValue$z = Phaser.Utils.Objects.GetValue;
 
-    var LayoutMode0 = function (config) {
+    var LayoutMode0$1 = function (config) {
         var scene = this.scene;
         var indexLabel = config.indexLabel;
         var inputTweaker = config.inputTweaker;
@@ -77532,7 +77523,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             {
                 proportion: 0, expand: true,
                 padding: {
-                    right: GetValue$n(space, 'index', 0)
+                    right: GetValue$z(space, 'index', 0)
                 }
             }
         );
@@ -77542,7 +77533,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             {
                 proportion: 1, expand: true,
                 padding: {
-                    right: GetValue$n(space, 'tweaker', 0)
+                    right: GetValue$z(space, 'tweaker', 0)
                 }
             }
         );
@@ -77569,9 +77560,9 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         );
     };
 
-    const GetValue$m = Phaser.Utils.Objects.GetValue;
+    const GetValue$y = Phaser.Utils.Objects.GetValue;
 
-    var LayoutMode1 = function (config) {
+    var LayoutMode1$1 = function (config) {
         var scene = this.scene;
         var indexLabel = config.indexLabel;
         var inputTweaker = config.inputTweaker;
@@ -77586,7 +77577,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             {
                 proportion: 0, expand: true,
                 padding: {
-                    bottom: GetValue$m(space, 'index', 0)
+                    bottom: GetValue$y(space, 'index', 0)
                 }
             }
         );
@@ -77615,10 +77606,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         );
     };
 
-    const GetValue$l = Phaser.Utils.Objects.GetValue;
-    const LayoutCallbacks = [LayoutMode0, LayoutMode1];
+    const GetValue$x = Phaser.Utils.Objects.GetValue;
+    const LayoutCallbacks$1 = [LayoutMode0$1, LayoutMode1$1];
 
-    var Build = function (config) {
+    var Build$1 = function (config) {
         if (config === undefined) {
             config = {};
         }
@@ -77645,8 +77636,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             this.addBackground(background);
         }
 
-        var layoutMode = GetValue$l(config, 'layoutMode', 0);
-        var layoutCallback = LayoutCallbacks[layoutMode] || LayoutCallbacks[0];
+        var layoutMode = GetValue$x(config, 'layoutMode', 0);
+        var layoutCallback = LayoutCallbacks$1[layoutMode] || LayoutCallbacks$1[0];
         layoutCallback.call(this, config);
 
         this.addChildrenMap('background', background);
@@ -77671,7 +77662,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return this;
     };
 
-    var OnClickButtonMethods = {
+    var OnClickButtonMethods$2 = {
         onClickDeleteButton() {
             // Called by clicking delete button
             if (!this.gridTable.isInTouching('mask')) {
@@ -77725,7 +77716,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     };
 
-    var OnPointerOverOutMethods = {
+    var OnPointerOverOutMethods$1 = {
         onOver() {
             var background = this.getElement('background');
             background.setHoverState(true);
@@ -77737,16 +77728,18 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         },
     };
 
-    class CellContainer extends Sizer {
+    let CellContainer$1 = class CellContainer extends Sizer {
         constructor(scene, config) {
             /*
             config: {
                 space,
+                gridTable,
                 background,
                 indexLabel,
                 inputTweaker,
                 deleteButton,
-                gridTable,
+                moveUpButton,
+                moveDownButton,
             }
             */
 
@@ -77802,23 +77795,23 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             }
         }
 
-    }
+    };
 
-    var Methods$1 = {
-        build: Build
+    var Methods$2 = {
+        build: Build$1
     };
 
     Object.assign(
-        CellContainer.prototype,
-        Methods$1,
-        OnClickButtonMethods,
-        OnPointerOverOutMethods,
+        CellContainer$1.prototype,
+        Methods$2,
+        OnClickButtonMethods$2,
+        OnPointerOverOutMethods$1,
     );
 
-    const GetValue$k = Phaser.Utils.Objects.GetValue;
-    const Format = Phaser.Utils.String.Format;
+    const GetValue$w = Phaser.Utils.Objects.GetValue;
+    const Format$1 = Phaser.Utils.String.Format;
 
-    var CreateCellContainer = function (parent, cell, config) {
+    var CreateCellContainer$1 = function (parent, cell, config) {
         var scene = parent.scene;
 
         // Create elements
@@ -77862,7 +77855,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         var background = CreateBackground(scene, {}, backgroundStyle);
 
         // Assemble elements
-        var cellContainer = new CellContainer(scene, {
+        var cellContainer = new CellContainer$1(scene, {
             space,
             gridTable,
             background,
@@ -77877,20 +77870,20 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return cellContainer;
     };
 
-    var GenerateCreateCellContainerCallback = function (parent, config, style) {
+    var GenerateCreateCellContainerCallback$1 = function (parent, config, style) {
         // Prepare parameters
-        var space = GetValue$k(config, 'space.cell', undefined, style) || {};
+        var space = GetValue$w(config, 'space.cell', undefined, style) || {};
 
-        var indexStyle = GetValue$k(style, 'index');
+        var indexStyle = GetValue$w(style, 'index');
         if (!indexStyle) {
-            indexStyle = GetValue$k(style, 'tweaker.inputRow.title') || {};
+            indexStyle = GetValue$w(style, 'tweaker.inputRow.title') || {};
         }
-        var indexLabelCallback = GetValue$k(config, 'indexLabel', '%1');
+        var indexLabelCallback = GetValue$w(config, 'indexLabel', '%1');
         if (typeof (indexLabelCallback) === 'string') {
             var indexLabelTemplate = indexLabelCallback;
             indexLabelCallback = function (index, item, items) {
                 // %1=index, %2=total
-                return { 'title': Format(indexLabelTemplate, [index, items.length]) };
+                return { 'title': Format$1(indexLabelTemplate, [index, items.length]) };
             };
         }
 
@@ -77907,19 +77900,19 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         };
 
         var tweakerConfig = {
-            root: GetValue$k(style, 'root'),
-            styles: GetValue$k(style, 'tweaker'),
+            root: GetValue$w(style, 'root'),
+            styles: GetValue$w(style, 'tweaker'),
             expandInputRowHeight: true,
         };
 
-        var properties = GetValue$k(config, '$properties') || {};
+        var properties = GetValue$w(config, '$properties') || {};
         if (!Array.isArray(properties)) {
             properties = [properties];
         }
-        var monitor = GetValue$k(config, 'monitor', false);
+        var monitor = GetValue$w(config, 'monitor', false);
         var tweakerAddRowsParameters = { properties, monitor };
 
-        var backgroundStyle = GetValue$k(style, 'cellBackground');
+        var backgroundStyle = GetValue$w(style, 'cellBackground');
 
         var callback = function (cell, cellContainer, gridTable) {
             var width = cell.width;
@@ -77929,7 +77922,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             var index = cell.index;
 
             if (cellContainer === null) {
-                cellContainer = CreateCellContainer(parent, cell, {
+                cellContainer = CreateCellContainer$1(parent, cell, {
                     space,
                     gridTable,
                     indexStyle,
@@ -77960,7 +77953,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return callback;
     };
 
-    const GetValue$j = Phaser.Utils.Objects.GetValue;
+    const GetValue$v = Phaser.Utils.Objects.GetValue;
 
     var CreateArrayTable = function (parent, config, style) {
         if (!config) { config = {}; }
@@ -77971,7 +77964,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         var title = CreateTitleLabel(scene, undefined, (style.title || {}));
 
         // table config
-        var tableConfig = GetValue$j(config, 'table', undefined, style) || {};
+        var tableConfig = GetValue$v(config, 'table', undefined, style) || {};
 
         // slider
         var slider = CreateSlider$1(scene, config.slider, style.slider);
@@ -77982,7 +77975,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         if (clearButton || addButton) {
             footer = new Sizer(scene, {
                 space: {
-                    item: GetValue$j(config, 'space.button', 0, style)
+                    item: GetValue$v(config, 'space.button', 0, style)
                 }
             });
             scene.add.existing(footer);
@@ -78021,21 +78014,1692 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
             background: background,
 
-            height: GetValue$j(config, 'height', 0, style),
+            height: GetValue$v(config, 'height', 0, style),
             space: Merge$1((config.space || {}), (style.space || {})),
 
-            createCellContainerCallback: GenerateCreateCellContainerCallback(parent, config, style),
+            createCellContainerCallback: GenerateCreateCellContainerCallback$1(parent, config, style),
         });
         scene.add.existing(arrayTable);
 
-        if (title) {
-            arrayTable.bringChildToTop(title);
+        return arrayTable;
+    };
+
+    var BindingTargetMethods$2 = {
+        setBindingTarget(target, bindingKey) {
+            // ListTable panel (left panel)
+            if (arguments.length >= 2) {
+                this.leftPanel.setBindingTarget(target, bindingKey);
+            } else {
+                this.leftPanel.setBindingTarget(target);
+            }
+
+            var items = this.leftPanel.items;
+            if (items.length > 0) {
+                this.selectItem(0, false);
+            } else {
+                this.clearSelection();
+            }
+
+            return this;
+        },
+
+        startMonitorTarget() {
+            this.leftPanel.startMonitorTarget();
+            return this;
+        },
+
+        stopMonitorTarget() {
+            this.leftPanel.stopMonitorTarget();
+            return this;
+        },
+    };
+
+    // Do we need sync title width width other input rows?
+    // ArrayTable element does not propagate title width
+    var InputRowTitleWidthMethods$1 = {
+        getMaxInputRowTitleWidth() {
+            return 0;
+        },
+
+        setInputRowTitleWidth(width) {
+            return this;
         }
-        if (footer) {
-            arrayTable.bringChildToTop(footer);
+    };
+
+    const GetValue$u = Phaser.Utils.Objects.GetValue;
+
+    class Title extends Sizer {
+        constructor(scene, config) {
+            super(scene, {
+                orientation: 0,
+            });
+            this.type = 'rexTweaker.ListDetail.EditorContainer.Title';
+
+            var indexLabel = GetValue$u(config, 'editorIndexLabel');
+            var displayNameLabel = GetValue$u(config, 'editorDisplayNameLabel');
+
+            if (indexLabel) {
+                this.add(
+                    indexLabel,
+                    { proportion: 0, expand: true }
+                );
+            }
+
+            if (displayNameLabel) {
+                this.add(
+                    displayNameLabel,
+                    { proportion: 1, expand: true }
+                );
+            }
+
+            this.addChildrenMap('index', indexLabel);
+            this.addChildrenMap('displayName', displayNameLabel);
         }
 
-        return arrayTable;
+        setTitle(indexConfig, displayNameConfig) {
+            SetLabel(this.childrenMap.index, indexConfig);
+            SetLabel(this.childrenMap.displayName, displayNameConfig);
+
+            return this;
+        }
+    }
+
+    var SetLabel = function (label, config) {
+        if (!label) {
+            return;
+        }
+
+        if (config === undefined) {
+            config = '';
+        }
+
+        if (typeof (config) === 'string') {
+            label.setText(config);
+        } else {
+            label.setTitle(config);
+        }
+    };
+
+    const GetValue$t = Phaser.Utils.Objects.GetValue;
+
+    class Toolbar extends Sizer {
+        constructor(scene, config) {
+            super(scene, {
+                orientation: 0,
+            });
+            this.type = 'rexTweaker.ListDetail.EditorContainer.Toolbar';
+
+            var deleteButton = GetValue$t(config, 'editorDeleteButton');
+            var duplicateButton = GetValue$t(config, 'editorDuplicateButton');
+            var resetButton = GetValue$t(config, 'editorResetButton');
+
+            // Align to right side
+            this.addSpace();
+
+            if (deleteButton) {
+                this.add(
+                    deleteButton,
+                    { proportion: 0, expand: true }
+                );
+            }
+
+            if (duplicateButton) {
+                this.add(
+                    duplicateButton,
+                    { proportion: 0, expand: true }
+                );
+            }
+
+            if (resetButton) {
+                this.add(
+                    resetButton,
+                    { proportion: 0, expand: true }
+                );
+            }
+
+        }
+
+    }
+
+    class EditorContainer extends Scrollable {
+        constructor(scene, config) {
+            if (config === undefined) {
+                config = {};
+            }
+
+            var title = new Title(scene, config);
+            scene.add.existing(title);
+            SetValue(config, 'header', title);
+            SetValue(config, 'expand.header', true);
+
+            var toolbar;
+            if (HasToolbar(config)) {
+                toolbar = new Toolbar(scene, config);
+                scene.add.existing(toolbar);
+
+                if (toolbar) {
+                    SetValue(config, 'footer', toolbar);
+                    SetValue(config, 'expand.footer', true);
+                }
+            }
+
+            super(scene, config);
+            this.type = 'rexTweaker.ListDetail.EditorContainer';
+
+            this.addChildrenMap('title', title);
+            this.addChildrenMap('toolbar', toolbar);
+
+            var deleteButton = config.editorDeleteButton;
+            var duplicateButton = config.editorDuplicateButton;
+            var resetButton = config.editorResetButton;
+            this.addChildrenMap('deleteButton', deleteButton);
+            this.addChildrenMap('duplicateButton', duplicateButton);
+            this.addChildrenMap('resetButton', resetButton);
+
+            if (deleteButton) {
+                deleteButton
+                    .offClick(this.onClickDeleteButton, this)
+                    .onClick(this.onClickDeleteButton, this);
+            }
+
+            if (duplicateButton) {
+                duplicateButton
+                    .offClick(this.onClickDuplicateButton, this)
+                    .onClick(this.onClickDuplicateButton, this);
+            }
+
+            if (resetButton) {
+                resetButton
+                    .offClick(this.onClickResetButton, this)
+                    .onClick(this.onClickResetButton, this);
+            }
+        }
+
+        onClickDeleteButton() {
+            this.emit('toolbar.delete');
+        }
+
+        onClickDuplicateButton() {
+            this.emit('toolbar.duplicate');
+        }
+
+        onClickResetButton() {
+            this.emit('toolbar.reset');
+        }
+
+        setTitle(indexConfig, displayNameConfig) {
+            var title = this.childrenMap.header;
+            title.setTitle(indexConfig, displayNameConfig);
+            return this;
+        }
+    }
+
+    var HasToolbar = function (config) {
+        return !!config.editorDeleteButton || !!config.editorDuplicateButton || !!config.editorResetButton;
+    };
+
+    var BindingTargetMethods$1 = {
+        setBindingTarget(target, bindingKey) {
+            this.bindingTarget = target;
+
+            if (arguments.length === 2) {
+                this.setBindingTargetKey(bindingKey);
+            }
+
+            var items;
+            if (!this.isRootTarget) {
+                items = GetValue$4h(target, bindingKey);
+            } else {
+                items = target;
+            }
+            this.setItems(items);
+
+            return this;
+        },
+
+        setBindingTargetKey(bindingKey) {
+            this.bindTargetKey = bindingKey;
+            this.isRootTarget = (!bindingKey) || (bindingKey === '');
+            return this;
+        },
+    };
+
+    var MonitorTargetMethods$1 = {
+        startMonitorTarget() {
+            if (this.isMonitoring) {
+                return this;
+            }
+
+            // Monitor items length
+            this.lastItemsCount = (this.items) ? this.items.length : 0;
+
+            this.isMonitoring = true;        
+            this.scene.events.on('postupdate', this.onMonitorTarget, this);
+            return this;
+        },
+
+        stopMonitorTarget() {
+            if (!this.isMonitoring) {
+                return this;
+            }
+
+            this.isMonitoring = false;
+            this.scene.events.off('postupdate', this.onMonitorTarget, this);
+            return this;
+        },
+
+        onMonitorTarget() {
+            var lastItemsCount = (this.items) ? this.items.length : 0;
+            if (this.lastItemsCount === lastItemsCount) {
+                return;
+            }
+
+            this.lastItemsCount = lastItemsCount;
+            this.refresh();
+            this.emit('items.change', 'monitor');
+        },
+    };
+
+    var InputRowTitleWidthMethods = {
+        getMaxInputRowTitleWidth() {
+            return 0;
+        },
+
+        setInputRowTitleWidth(width) {
+            return this;
+        }
+    };
+
+    var InstallAddButton = function (config) {
+        var button = config.addButton;
+        if (!button) {
+            return;
+        }
+
+        // See utils/CreateAddButton.js
+        var createDefaultItemCallback = button.createDefaultItem;
+
+        button.onClick(function () {
+            var item = createDefaultItemCallback();
+            this.addItemWithTransition(item);
+        }, this);
+    };
+
+    var InstallClearButton = function (config) {
+        var button = config.clearButton;
+        if (!button) {
+            return;
+        }
+
+        button.onClick(function () {
+            this.clearItemsWithTransition();
+        }, this);
+    };
+
+    var InstallCellInteractiveEvents = function (config) {
+        this
+            .on('cell.click', function (cellContainer, cellIndex) {
+                this.emit('select', cellContainer, cellIndex);
+            }, this)
+            .on('cell.over', function (cellContainer, cellIndex) {
+                cellContainer.onOver();
+            })
+            .on('cell.out', function (cellContainer, cellIndex) {
+                cellContainer.onOut();
+            });
+    };
+
+    var OnClickButtonMethods$1 = {
+        deleteItemByIndex(index) {
+            // Called by CellContainer.onDeleteItem
+            var removedItem = this.items[index];
+            this.items.splice(index, 1);
+            this.lastItemsCount = this.items.length; // Prevent monitor triggering
+
+            this.refresh(); // Invoke createCellContainerCallback for each cell again        
+            this.emit('items.change', 'delete', {
+                index: index,
+                item: removedItem
+            });
+            return this;
+        },
+
+        addItem(item) {
+            // Called by add-button clicking
+            this.items.push(item);
+            this.lastItemsCount = this.items.length; // Prevent monitor triggering
+
+            this.refresh();
+            this.emit('items.change', 'add', {
+                index: this.items.length - 1,
+                item: item
+            });
+            return this;
+        },
+
+        clearItems() {
+            // Called by clear-button clicking
+            this.items.length = 0;
+            this.lastItemsCount = this.items.length; // Prevent monitor triggering
+
+            this.refresh();
+            this.emit('items.change', 'clear');
+            return this;
+        },
+
+    };
+
+    var TransitionMethods = {
+        deleteItemWithTransition(cellContainer) {
+            if (!cellContainer || (cellContainer.cellIndex == null)) {
+                return this;
+            }
+
+            var self = this;
+            cellContainer.tweenSelf({
+                alpha: 0,
+                scaleY: 0,
+                duration: 500,
+                onComplete() {
+                    var cellIndex = cellContainer.cellIndex;
+                    cellContainer.cellIndex = undefined;
+                    self.deleteItemByIndex(cellIndex);
+                    self.resetPointerOver();
+                },
+            });
+
+            return this;
+        },
+
+        addItemWithTransition(item) {
+            this.addItem(item);
+            this.scrollToBottom();
+
+            // Last cell will be shown
+            var newItemIndex = this.items.length - 1;
+            var cellContainer = this.getCellContainer(newItemIndex);
+            if (!cellContainer) {
+                this.resetPointerOver();
+                return this;
+            }
+
+            this
+                .setChildLocalAlpha(cellContainer, 0)
+                .setChildLocalScale(cellContainer, 1, 0);
+
+            var self = this;
+            cellContainer.tweenSelf({
+                alpha: 1,
+                scaleY: 1,
+                duration: 500,
+                onComplete() {
+                    self.resetPointerOver();
+                }
+            });
+
+            return this;
+        },
+
+        clearItemsWithTransition() {
+            var cellContainers = this.getAllCellContainers();
+            if (!cellContainers || (cellContainers.length === 0)) {
+                this.clearItems();
+                this.resetPointerOver();
+                return this;
+            }
+
+            var self = this;
+            for (var i = 0, cnt = cellContainers.length; i < cnt; i++) {
+                if (i === 0) {
+                    cellContainers[i].tweenSelf({
+                        alpha: 0,
+                        duration: 500,
+                        onComplete() {
+                            self.clearItems();
+                            self.resetPointerOver();
+                        }
+                    });
+                } else {
+                    cellContainers[i].tweenSelf({
+                        alpha: 0,
+                        duration: 490,
+                    });
+                }
+            }
+
+            return this;
+        },
+    };
+
+    class ListTable extends GridTable {
+        constructor(scene, config) {
+            SetValue(config, 'reuseCellContainer', true);
+            SetValue(config, 'table.enableLayer', true);
+            SetValue(config, 'table.over.mode', 'boundary');
+
+            super(scene, config);
+            this.type = 'rexTweaker.ListDetail.ListTable';
+
+            this.resetCellSizeFlag = true;
+            this.lastItemsCount = undefined; // For monitor
+
+            InstallClearButton.call(this, config);
+            InstallAddButton.call(this, config);
+            InstallCellInteractiveEvents.call(this, config);
+
+            var footer = this.childrenMap.footer;
+            if (footer) {
+                this.bringChildToTop(footer);
+            }
+        }
+
+        destroy(fromScene) {
+            //  This Game Object has already been destroyed
+            if (!this.scene || this.ignoreDestroy) {
+                return;
+            }
+
+            this.stopMonitorTarget();
+
+            super.destroy(fromScene);
+        }
+
+        setItems(items, updateTable) {
+            if (this.resetCellSizeFlag && (items.length > 0)) {
+                this.resetCellSizeFlag = false;
+                super.setItems(items, false);
+                this.resetCellSizeFromCell();
+
+            } else {
+                super.setItems(items, updateTable);
+
+            }
+            return this;
+        }
+
+        setTitle(config) {
+            var title = this.childrenMap.header;
+
+            if (config.title || config.icon) {
+                title.show().setTitle(config);
+            } else {
+                title.hide();
+            }
+
+            return this;
+        }
+
+    }
+
+    Object.assign(
+        ListTable.prototype,
+        BindingTargetMethods$1,
+        MonitorTargetMethods$1,
+        InputRowTitleWidthMethods,
+        OnClickButtonMethods$1,
+        TransitionMethods,
+    );
+
+    var DeepMerge = function (toObj, fromObj) {
+        if (fromObj === undefined) {
+            return toObj;
+        }
+
+        for (var key in fromObj) {
+            if (!toObj.hasOwnProperty(key)) {
+                // Only add nonexistent property
+                toObj[key] = DeepClone(fromObj[key]);
+            } else {
+                var value = toObj[key];
+                if (value && (typeof (value) === 'object')) {
+                    DeepMerge(value, fromObj[key]);
+                }
+            }
+        }
+        return toObj;
+    };
+
+    const GetValue$s = Phaser.Utils.Objects.GetValue;
+    const Clamp = Phaser.Math.Clamp;
+
+    class ListDetail extends SplitPanels$1 {
+        constructor(scene, config) {
+            var {
+                isHorizontalView,
+                space = {},
+                height,
+                header,
+                splitter,
+                background,
+
+                // ListTable at left panel
+                listTableConfig,
+                createListCellContainerCallback,
+                listTableSlider,
+                listTableFooter,
+                clearButton,
+                addButton,
+
+                // Editor at right panel
+                editor,
+                editorSlider,
+                // Title (header)
+                editorIndexLabel,
+                editorDisplayNameLabel,
+                indexLabelCallback,
+                displayNameLabelCallback,
+                // Toolbar (footer)
+                editorDeleteButton,
+                editorDuplicateButton,
+                editorResetButton,
+
+                splitRatio,
+                minLeftPanelWidth,
+                minRightPanelWidth,
+                minTopPanelWidth,
+                minBottomPanelWidth,
+            } = config;
+
+            // ListTable at left panel
+            var listTable = new ListTable(scene, {
+                table: listTableConfig,
+                clampChildOY: true,
+
+                footer: listTableFooter,
+                clearButton: clearButton,
+                addButton: addButton,
+
+                slider: listTableSlider,
+
+                createCellContainerCallback: createListCellContainerCallback,
+
+                space: {
+                    table: space.table,
+                    footer: space.footer,
+                    // more...
+                }
+            });
+            scene.add.existing(listTable);
+
+            // Editor at right panel
+            var editorContainer = new EditorContainer(scene, {
+                scrollMode: 0,
+
+                panel: {
+                    child: editor,
+                    mask: {
+                        padding: 1,
+                    },
+                },
+
+                slider: editorSlider,
+
+                editorIndexLabel: editorIndexLabel,
+                editorDisplayNameLabel: editorDisplayNameLabel,
+
+                editorDeleteButton: editorDeleteButton,
+                editorDuplicateButton: editorDuplicateButton,
+                editorResetButton: editorResetButton,
+
+                space: {
+                    panel: space.table,
+                    header: space.header,
+                    footer: space.footer,
+                }
+            });
+            scene.add.existing(editorContainer);
+
+            super(scene, {
+                orientation: 1,
+                header: header,
+
+                leftPanel: (isHorizontalView) ? listTable : undefined,
+                topPanel: (isHorizontalView) ? undefined : listTable,
+
+                rightPanel: (isHorizontalView) ? editorContainer : undefined,
+                bottomPanel: (isHorizontalView) ? undefined : editorContainer,
+
+                splitter: splitter,
+                splitRatio: splitRatio,
+                minLeftPanelWidth: minLeftPanelWidth,
+                minRightPanelWidth: minRightPanelWidth,
+                minTopPanelWidth: minTopPanelWidth,
+                minBottomPanelWidth: minBottomPanelWidth,
+
+                background: background,
+
+                height: height,
+                space: {
+                    left: space.left,
+                    right: space.right,
+                    top: space.top,
+                    bottom: space.bottom,
+                    leftPanelRight: space.splitter,
+                    rightPanelLeft: space.splitter,
+                    topPanelBottom: space.splitter,
+                    bottomPanelTop: space.splitter,
+                    // more...
+                },
+            });
+            this.type = 'rexTweaker.ListDetail';
+
+            this.alignInputRowTitleStartFlag = GetValue$s(config, 'alignTitle');
+            this.selectedItem = undefined;
+            this.selectedIndex = undefined;
+            this.indexLabelCallback = indexLabelCallback;
+            this.displayNameLabelCallback = displayNameLabelCallback;
+
+            listTable
+                .on('select', this.onSelectCell, this)
+                .on('items.change', this.onItemsChange, this);
+
+            editorContainer
+                .on('toolbar.delete', this.onToolbarDelete, this)
+                .on('toolbar.duplicate', this.onToolbarDuplicate, this)
+                .on('toolbar.reset', this.onToolbarReset, this);
+
+            editor
+                .on('valuechange', this.onEditorValueChange, this);
+        }
+
+        onSelectCell(cellContainer, cellIndex) {
+            // cellContainer in ListTable (left panel)
+            this.selectItem(cellIndex);
+        }
+
+        onItemsChange(changeType, detail) {
+            // Get selected index -> Update selected index and selected item
+            /*
+            changeType , detail: 
+            - move , {fromIndex, toIndex}
+            - delete , {index, item}
+            - add , {index, item}
+            - clear
+            - monitor
+            */
+
+            var listTable = this.leftPanel;
+            var items = listTable.items;
+
+            if (items.length === 0) {
+                // Select no item
+                this.clearSelection();
+                return;
+            }
+
+            var nextIndex;
+            var selectedItem = this.selectedItem;
+            if (selectedItem !== undefined) {
+                nextIndex = items.indexOf(selectedItem);
+                // Invalid index
+                if (nextIndex === -1) {
+                    nextIndex = undefined;
+                }
+            }
+
+            var selectedIndex = this.selectedIndex;
+            if (selectedIndex == null) {
+                nextIndex = (changeType === 'add') ? detail.index : 0;
+
+            } else {
+                switch (changeType) {
+                    case 'delete':
+                        if (detail.index < selectedIndex) {
+                            nextIndex = selectedIndex - 1;
+                        } else {
+                            nextIndex = selectedIndex;
+                        }
+                        break;
+
+                    case 'move':
+                        var fromIndex = detail.fromIndex;
+                        var toIndex = detail.toIndex;
+                        if (selectedIndex === fromIndex) {
+                            nextIndex = toIndex;
+                        } else if (selectedIndex === toIndex) {
+                            nextIndex = fromIndex;
+                        } else {
+                            nextIndex = selectedIndex;
+                        }
+                        break;
+
+                    case 'clear':
+                        this.clearSelection();
+                        return;
+
+                    default:
+                        nextIndex = selectedIndex;
+                        break;
+                }
+
+            }
+
+            if (nextIndex !== undefined) {
+                this.selectItem(nextIndex, false);
+            }
+        }
+
+        onEditorValueChange(value, oldValue, bindingTarget, bindingKey) {
+            if (!bindingTarget) {
+                return;
+            }
+
+            var listTable = this.leftPanel;
+            var items = listTable.items;
+            var index = items.indexOf(bindingTarget);
+            if (index === -1) {
+                return;
+            }
+
+            // Re-run cell callback so displayNameLabel(index, item, items) can be updated.
+            listTable.updateVisibleCell(index);
+            this.updateEditorTitle(index, bindingTarget, items);
+        }
+
+        onToolbarDelete() {
+            var index = this.selectedIndex;
+            if (index == null) {
+                return;
+            }
+
+            var listTable = this.leftPanel;
+            var cellContainer = listTable.getCellContainer(index);
+            if (cellContainer) {
+                listTable.deleteItemWithTransition(cellContainer);
+                return;
+            }
+
+            listTable.deleteItemByIndex(index);
+            if (listTable.resetPointerOver) {
+                listTable.resetPointerOver();
+            }
+        }
+
+        onToolbarDuplicate() {
+            var index = this.selectedIndex;
+            if (index == null) {
+                return;
+            }
+
+            var listTable = this.leftPanel;
+            var items = listTable.items;
+            var currentItem = items[index];
+            if (!IsObjectValue(currentItem)) {
+                console.error('[Tweaker][ListDetail] Duplicate aborted. Current selected item is not an object. This is an application-level design error.');
+                return;
+            }
+
+            var defaultItem = this.createDefaultItemFromToolbar('duplicateButton', 'Duplicate');
+            if (!defaultItem) {
+                return;
+            }
+
+            // Start from current item, then fill missing keys from default item.
+            var newItem = DeepClone(currentItem);
+            DeepMerge(newItem, defaultItem);
+
+            var insertIndex = index + 1;
+            items.splice(insertIndex, 0, newItem);
+            listTable.lastItemsCount = items.length;
+            listTable.refresh();
+            listTable.emit('items.change', 'add', {
+                index: insertIndex,
+                item: newItem
+            });
+
+            this.selectItem(insertIndex, true);
+        }
+
+        onToolbarReset() {
+            var index = this.selectedIndex;
+            if (index == null) {
+                return;
+            }
+
+            var listTable = this.leftPanel;
+            var items = listTable.items;
+            var currentItem = items[index];
+            if (!IsObjectValue(currentItem)) {
+                console.error('[Tweaker][ListDetail] Reset aborted. Current selected item is not an object. This is an application-level design error.');
+                return;
+            }
+
+            var defaultItem = this.createDefaultItemFromToolbar('resetButton', 'Reset');
+            if (!defaultItem) {
+                return;
+            }
+
+            // Clear all existing keys, then apply default keys in-place.
+            for (var key in currentItem) {
+                if (currentItem.hasOwnProperty(key)) {
+                    delete currentItem[key];
+                }
+            }
+            DeepMerge(currentItem, defaultItem);
+
+            // Refresh editor and list row display.
+            this.rightPanel.setBindingTarget(currentItem);
+            listTable.updateVisibleCell(index);
+            this.updateEditorTitle(index, currentItem, items);
+        }
+
+        createDefaultItemFromToolbar(buttonKey, actionName) {
+            var editorContainer = this.rightPanel;
+            var button = editorContainer.childrenMap[buttonKey];
+            var callback = (button) ? button.createDefaultItem : undefined;
+            if (!callback) {
+                console.error(`[Tweaker][ListDetail] ${actionName} aborted. createDefaultItem is required and should return an object. This is an application-level design error.`);
+                return null;
+            }
+
+            var defaultItem = callback();
+            if (!IsObjectValue(defaultItem)) {
+                var valueType = (defaultItem === null) ? 'null' : typeof (defaultItem);
+                console.error(`[Tweaker][ListDetail] ${actionName} aborted. createDefaultItem() returned ${valueType}, expected object. This is an application-level design error.`);
+                return null;
+            }
+
+            return defaultItem;
+        }
+
+        selectItem(index, scrollToRow) {
+            if (scrollToRow === undefined) {
+                scrollToRow = false;
+            }
+
+            var listTable = this.leftPanel;
+            var items = listTable.items;
+            if (items.length === 0) {
+                return this.clearSelection();
+            }
+
+            index = Clamp(index, 0, items.length - 1);
+
+            this.selectedIndex = index;
+            this.selectedItem = items[index];
+
+            listTable.selectedIndex = index;
+            this.rightPanel.setBindingTarget(this.selectedItem);
+            this.updateEditorTitle(index, this.selectedItem, items);
+
+            if (scrollToRow) {
+                listTable.scrollToRow(index);
+            }
+
+            this.updateVisibleCellSelection();
+
+            this.emit('selectitem', this.selectedItem, index, items);
+            return this;
+        }
+
+        clearSelection() {
+            this.selectedIndex = undefined;
+            this.selectedItem = undefined;
+
+            var listTable = this.leftPanel;
+            listTable.selectedIndex = undefined;
+            this.rightPanel.setBindingTarget(undefined);
+            this.updateEditorTitle();
+
+            this.updateVisibleCellSelection();
+            this.emit('selectitem', undefined, undefined, listTable.items);
+            return this;
+        }
+
+        updateEditorTitle(index, item, items) {
+            if (index === undefined) {
+                this.rightPanel.setTitle(undefined, undefined);
+                return this;
+            }
+
+            if (items === undefined) {
+                items = this.leftPanel.items;
+            }
+
+            var indexLabelCallback = this.indexLabelCallback;
+            var indexConfig = (indexLabelCallback) ? indexLabelCallback(index, item, items) : undefined;
+
+            var displayNameLabelCallback = this.displayNameLabelCallback;
+            var displayNameConfig = (displayNameLabelCallback) ? displayNameLabelCallback(index, item, items) : undefined;
+
+            this.rightPanel.setTitle(indexConfig, displayNameConfig);
+
+            return this;
+        }
+
+        updateVisibleCellSelection() {
+            var listTable = this.leftPanel;
+            var cellContainers = listTable.getAllCellContainers();
+            for (var i = 0, cnt = cellContainers.length; i < cnt; i++) {
+                var cellContainer = cellContainers[i];
+                cellContainer.setSelectedState(cellContainer.cellIndex === this.selectedIndex);
+            }
+
+            return this;
+        }
+
+        preLayout() {
+            super.preLayout();
+
+            if (this.alignInputRowTitleStartFlag) {
+                this.setInputRowTitleWidth(this.getMaxInputRowTitleWidth());
+            }
+        }
+
+        setTitle(config) {
+            var title = this.childrenMap.header;
+            if (config.text || config.title || config.icon) {
+                title.show().setTitle(config);
+            } else {
+                title.hide();
+            }
+
+            return this;
+        }
+    }
+
+    var IsObjectValue = function (value) {
+        return !!value && (typeof (value) === 'object') && !Array.isArray(value);
+    };
+
+    Object.assign(
+        ListDetail.prototype,
+        BindingTargetMethods$2,
+        InputRowTitleWidthMethods$1,
+    );
+
+    const GetValue$r = Phaser.Utils.Objects.GetValue;
+    const Format = Phaser.Utils.String.Format;
+
+    var GetIndexLabelStyle = function (style) {
+        var indexStyle = GetValue$r(style, 'index');
+
+        if (!indexStyle) {
+            indexStyle = GetValue$r(style, 'tweaker.inputRow.title') || {};
+        }
+
+        return indexStyle;
+    };
+
+    var GetIndexLabelCallback = function (config) {
+        var indexLabelCallback = GetValue$r(config, 'indexLabel', '%1');
+        if (typeof (indexLabelCallback) === 'string') {
+            var indexLabelTemplate = indexLabelCallback;
+            indexLabelCallback = function (index, item, items) {
+                // %1=index, %2=total
+                return { 'title': Format(indexLabelTemplate, [index, items.length]) };
+            };
+        }
+
+        return indexLabelCallback;
+    };
+
+    var CreateIndexLabel = function (scene, style) {
+        return CreateTitleLabel(scene, undefined, style);
+    };
+
+    const GetValue$q = Phaser.Utils.Objects.GetValue;
+
+    var GetDisplayNameStyle = function (style) {
+        var displayNameStyle = GetValue$q(style, 'displayName');
+
+        if (!displayNameStyle) {
+            displayNameStyle = GetValue$q(style, 'tweaker.inputRow.title') || {};
+        }
+
+        return displayNameStyle;
+    };
+
+    var GetDisplayNameLabelCallback = function (config) {
+        var displayNameLabelCallback = GetValue$q(config, 'displayNameLabel');
+        if (!displayNameLabelCallback) {
+            displayNameLabelCallback = function (index, item, items) {
+                return { text: '' };  // Display nothing
+            };
+        }
+
+        return displayNameLabelCallback;
+    };
+
+    var CreateDisplayNameLabel = function (scene, style) {
+        return CreateTitleLabel(scene, undefined, style);
+    };
+
+    const GetValue$p = Phaser.Utils.Objects.GetValue;
+
+    var LayoutMode0 = function (config) {
+        var scene = this.scene;
+        var indexLabel = config.indexLabel;
+        var displayNameLabel = config.displayNameLabel;
+        var deleteButton = config.deleteButton;
+        var moveUpButton = config.moveUpButton;
+        var moveDownButton = config.moveDownButton;
+        var space = config.space || {};
+
+        this.orientation = 0;
+
+        this.add(
+            indexLabel,
+            {
+                proportion: 0, expand: true,
+                padding: {
+                    right: GetValue$p(space, 'index', 0)
+                }
+            }
+        );
+
+        this.add(
+            displayNameLabel,
+            {
+                proportion: 1, expand: true,
+                padding: {
+                    right: GetValue$p(space, 'tweaker', 0)
+                }
+            }
+        );
+
+        var moveUpDownButtons = CreatExpandContainer(scene, 1);
+        moveUpDownButtons
+            .add(
+                moveUpButton,
+                { proportion: 1, expand: true }
+            )
+            .add(
+                moveDownButton,
+                { proportion: 1, expand: true }
+            );
+
+        this.add(
+            moveUpDownButtons,
+            { proportion: 0, expand: true }
+        );
+
+        this.add(
+            deleteButton,
+            { proportion: 0, expand: true }
+        );
+    };
+
+    const GetValue$o = Phaser.Utils.Objects.GetValue;
+
+    var LayoutMode1 = function (config) {
+        var scene = this.scene;
+        var indexLabel = config.indexLabel;
+        var displayNameLabel = config.displayNameLabel;
+        var deleteButton = config.deleteButton;
+        var space = config.space || {};
+
+        this.orientation = 1;
+
+        var header = CreatExpandContainer(scene, 0);
+        this.add(
+            header,
+            {
+                proportion: 0, expand: true,
+                padding: {
+                    bottom: GetValue$o(space, 'index', 0)
+                }
+            }
+        );
+
+        header
+            .add(
+                indexLabel,
+                {
+                    proportion: 0, expand: true,
+
+                }
+            )
+            .addSpace()
+            .add(
+                deleteButton,
+                {
+                    proportion: 0, expand: true,
+                }
+            );
+
+        this.add(
+            displayNameLabel,
+            {
+                proportion: 1, expand: true,
+            }
+        );
+    };
+
+    const GetValue$n = Phaser.Utils.Objects.GetValue;
+    const LayoutCallbacks = [LayoutMode0, LayoutMode1];
+
+    var Build = function (config) {
+        if (config === undefined) {
+            config = {};
+        }
+
+        var background = config.background;
+        var indexLabel = config.indexLabel;
+        var displayNameLabel = config.displayNameLabel;
+        var deleteButton = config.deleteButton;
+        var moveUpButton = config.moveUpButton;
+        var moveDownButton = config.moveDownButton;
+
+        // Remove from parent
+        RemoveFromParent(background);
+        RemoveFromParent(indexLabel);
+        RemoveFromParent(displayNameLabel);
+        RemoveFromParent(deleteButton);
+        RemoveFromParent(moveUpButton);
+        RemoveFromParent(moveDownButton);
+
+        this.clear(true);
+
+        // Add Background
+        if (background) {
+            this.addBackground(background);
+        }
+
+        var layoutMode = GetValue$n(config, 'layoutMode', 0);
+        var layoutCallback = LayoutCallbacks[layoutMode] || LayoutCallbacks[0];
+        layoutCallback.call(this, config);
+
+        this.addChildrenMap('background', background);
+        this.addChildrenMap('index', indexLabel);
+        this.addChildrenMap('displayName', displayNameLabel);
+        this.addChildrenMap('delete', deleteButton);
+        this.addChildrenMap('moveUp', moveUpButton);
+        this.addChildrenMap('moveDown', moveDownButton);
+
+        deleteButton
+            .offClick(this.onClickDeleteButton, this)
+            .onClick(this.onClickDeleteButton, this);
+
+        moveUpButton
+            .offClick(this.onClickMoveUpButton, this)
+            .onClick(this.onClickMoveUpButton, this);
+
+        moveDownButton
+            .offClick(this.onClickMoveDownButton, this)
+            .onClick(this.onClickMoveDownButton, this);
+
+        return this;
+    };
+
+    var OnClickButtonMethods = {
+        onClickDeleteButton() {
+            // Called by clicking delete button
+            if (!this.gridTable.isInTouching('mask')) {
+                return;
+            }
+
+            this.gridTable.deleteItemWithTransition(this);
+        },
+
+        onClickMoveUpButton() {
+            if (!this.gridTable.isInTouching('mask')) {
+                return;
+            }
+
+            var items = this.gridTable.items;
+            if (!items || (items.length <= 1)) {
+                return;
+            }
+
+            var currentIndex = this.cellIndex;
+            var targetIndex = (currentIndex === 0) ? (items.length - 1) : (currentIndex - 1);
+            var tmp = items[currentIndex];
+            items[currentIndex] = items[targetIndex];
+            items[targetIndex] = tmp;
+
+            this.gridTable
+                .refresh()
+                .scrollToRow(targetIndex);
+
+            this.gridTable.emit('items.change', 'move', {
+                fromIndex: currentIndex,
+                toIndex: targetIndex
+            });
+        },
+
+        onClickMoveDownButton() {
+            if (!this.gridTable.isInTouching('mask')) {
+                return;
+            }
+
+            var items = this.gridTable.items;
+            if (!items || (items.length <= 1)) {
+                return;
+            }
+
+            var currentIndex = this.cellIndex;
+            var targetIndex = (currentIndex === (items.length - 1)) ? 0 : (currentIndex + 1);
+            var tmp = items[currentIndex];
+            items[currentIndex] = items[targetIndex];
+            items[targetIndex] = tmp;
+
+            this.gridTable
+                .refresh()
+                .scrollToRow(targetIndex);
+
+            this.gridTable.emit('items.change', 'move', {
+                fromIndex: currentIndex,
+                toIndex: targetIndex
+            });
+        },
+
+    };
+
+    var OnPointerOverOutMethods = {
+        onOver() {
+            var background = this.getElement('background');
+            background.setHoverState(true);
+        },
+
+        onOut() {
+            var background = this.getElement('background');
+            background.setHoverState(false);
+        },
+    };
+
+    class CellContainer extends Sizer {
+        constructor(scene, config) {
+            /*
+            config: {
+                space,
+                gridTable,
+                background,
+                indexLabel,
+                displayNameLabel,
+                deleteButton,
+                moveUpButton,
+                moveDownButton,
+            }
+            */
+
+            // Create sizer
+            super(scene, {
+                space: config.space
+            });
+            this.type = 'rexTweaker.ListDetail.ListTable.CellContainer';
+
+            this.gridTable = config.gridTable;
+
+            this.build(config);
+        }
+
+        setItem(items, index) {
+            var item = items[index];
+
+            this.cellIndex = index;
+
+            // item is an object
+            this.setBindingTarget(item);
+
+            return this;
+        }
+
+        setIndexLabel(content) {
+            var indexLabel = this.childrenMap.index;
+            if (typeof (content) === 'string') {
+                indexLabel.setText(content);
+            } else {
+                indexLabel.setTitle(content);
+            }
+            return this;
+        }
+
+        setDisplayNameLabel(content) {
+            var displayNameLabel = this.childrenMap.displayName;
+            if (typeof (content) === 'string') {
+                displayNameLabel.setText(content);
+            } else {
+                displayNameLabel.setTitle(content);
+            }
+            return this;
+        }
+
+        setBindingTarget(target, key) {
+            this.bindingTarget = target;
+            this.bindingKey = key;
+            return this;
+        }
+
+        setSelectedState(enable) {
+            var background = this.childrenMap.background;
+            if (background.setActiveState) {
+                background.setActiveState(enable);
+            }
+            return this;
+        }
+
+        get visible() {
+            return super.visible;
+        }
+
+        set visible(value) {
+            super.visible = value;
+
+            if (!value) {
+                this.setBindingTarget();
+            }
+        }
+
+    }
+
+    var Methods$1 = {
+        build: Build
+    };
+
+    Object.assign(
+        CellContainer.prototype,
+        Methods$1,
+        OnClickButtonMethods,
+        OnPointerOverOutMethods,
+    );
+
+    const GetValue$m = Phaser.Utils.Objects.GetValue;
+
+
+    var CreateCellContainer = function (parent, cell, config) {
+        var scene = parent.scene;
+
+        // Create elements
+        var {
+            space,
+            gridTable,
+            indexStyle,
+            displayNameStyle,
+            createDeleteButton,
+            createMoveUpButton,
+            createMoveDownButton,
+            backgroundStyle,
+        } = config;
+
+        var indexLabel = CreateIndexLabel(scene, indexStyle);
+
+        var displayNameLabel = CreateDisplayNameLabel(scene, displayNameStyle);
+
+        var deleteButton = createDeleteButton(scene);
+
+        var moveUpButton = createMoveUpButton(scene);
+
+        var moveDownButton = createMoveDownButton(scene);
+
+        var background = CreateBackground(scene, {}, backgroundStyle);
+
+        // Assemble elements
+        var cellContainer = new CellContainer(scene, {
+            space,
+            gridTable,
+            background,
+            indexLabel,
+            displayNameLabel,
+            deleteButton,
+            moveUpButton,
+            moveDownButton,
+        });
+        scene.add.existing(cellContainer);
+
+        return cellContainer;
+    };
+
+    var GenerateCreateCellContainerCallback = function (parent, config, style) {
+        // Prepare parameters
+        var space = GetValue$m(config, 'space.cell', undefined, style) || {};
+
+        var indexStyle = GetIndexLabelStyle(style);
+        var indexLabelCallback = GetIndexLabelCallback(config);
+
+        var displayNameStyle = GetDisplayNameStyle(style);
+        var displayNameLabelCallback = GetDisplayNameLabelCallback(config);
+
+        var createDeleteButton = function (scene) {
+            return CreateDeleteButton(scene, config, style);
+        };
+
+        var createMoveUpButton = function (scene) {
+            return CreateMoveUpButton(scene, config, style);
+        };
+
+        var createMoveDownButton = function (scene) {
+            return CreateMoveDownButton(scene, config, style);
+        };
+
+        var backgroundStyle = GetValue$m(style, 'cellBackground');
+
+        var callback = function (cell, cellContainer, gridTable) {
+            var width = cell.width;
+            cell.height;
+            var item = cell.item;
+            var items = cell.items;
+            var index = cell.index;
+
+            if (cellContainer === null) {
+                cellContainer = CreateCellContainer(parent, cell, {
+                    space,
+                    gridTable,
+                    indexStyle,
+                    displayNameStyle,
+                    createDeleteButton,
+                    createMoveUpButton,
+                    createMoveDownButton,
+                    backgroundStyle,
+                });
+            }
+
+            cell.setCellContainerAlign('center');
+
+            cellContainer
+                .setIndexLabel(indexLabelCallback(index, item, items))
+                .setDisplayNameLabel(displayNameLabelCallback(index, item, items))
+                .setItem(items, index) // Also setBindingTarget
+                .setSelectedState(index === gridTable.selectedIndex)
+                // layout
+                .setMinSize(width, 0)
+                .setOrigin(0.5, 0)
+                .setDirty(true)
+                .layout()
+                .setDirty(false);
+
+            return cellContainer;
+        };
+
+        return callback;
+    };
+
+    const GetValue$l = Phaser.Utils.Objects.GetValue;
+
+    var CreateDuplicateButton = function (scene, config, style) {
+        var duplicateButtonStyle = GetValue$l(style, 'duplicateButton');
+        var duplicateLabel;
+
+        if (duplicateButtonStyle) {
+            // If using dedicated duplicate-button style, keep its own display content config.
+            duplicateButtonStyle = Object.assign(DeepClone(ButtonStyleBase), duplicateButtonStyle);
+        } else {
+            duplicateButtonStyle = GetValue$l(style, 'tweaker.inputRow.button') || {};
+            duplicateLabel = GetValue$l(config, 'duplicateLabel', 'Duplicate');
+        }
+
+        var duplicateButton = CreateLabel(scene, duplicateButtonStyle);
+        if (duplicateLabel) {
+            duplicateButton.resetDisplayContent(duplicateLabel);
+        }
+
+        return duplicateButton;
+    };
+
+    const GetValue$k = Phaser.Utils.Objects.GetValue;
+
+    var CreateResetButton = function (scene, config, style) {
+        var resetButtonStyle = GetValue$k(style, 'resetButton');
+        var resetLabel;
+
+        if (resetButtonStyle) {
+            // If using dedicated reset-button style, keep its own display content config.
+            resetButtonStyle = Object.assign(DeepClone(ButtonStyleBase), resetButtonStyle);
+        } else {
+            resetButtonStyle = GetValue$k(style, 'tweaker.inputRow.button') || {};
+            resetLabel = GetValue$k(config, 'resetLabel', 'Reset');
+        }
+
+        var resetButton = CreateLabel(scene, resetButtonStyle);
+        if (resetLabel) {
+            resetButton.resetDisplayContent(resetLabel);
+        }
+
+        return resetButton;
+    };
+
+    const GetValue$j = Phaser.Utils.Objects.GetValue;
+
+    const DefaultSplitStyle = {
+        width: 10,
+        height: 10,
+        color: 0x0,
+        alpha: 0.001
+    };
+
+    var CreateListDetail = function (parent, config, style) {
+        if (!config) { config = {}; }
+        if (!style) { style = {}; }
+        var scene = parent.scene;
+
+        // title of split-panels
+        var title = CreateTitleLabel(scene, undefined, (style.title || {}));
+
+        // left panel of split-panels
+        // table config
+        var listTableConfig = GetValue$j(config, 'table', undefined, style) || {};
+        var createCellContainerCallback = GenerateCreateCellContainerCallback(parent, config, style);
+
+        // slider
+        var listTableSlider = CreateSlider$1(scene, config.slider, style.slider);
+
+        // footer
+        var listTableFooter;
+        var clearButton = CreateClearButton(scene, config, style);
+        var addButton = CreateAddButton(scene, config, style);
+        if (clearButton || addButton) {
+            listTableFooter = new Sizer(scene, {
+                space: {
+                    item: GetValue$j(config, 'space.button', 0, style)
+                }
+            });
+            scene.add.existing(listTableFooter);
+
+            if (clearButton) {
+                listTableFooter.add(
+                    clearButton,
+                    { proportion: 0, expand: true }
+                );
+            }
+
+            listTableFooter.addSpace();
+
+            if (addButton) {
+                listTableFooter.add(
+                    addButton,
+                    { proportion: 0, expand: true }
+                );
+            }
+        }
+        // left panel of split-panels
+
+        // right panel of split-panels
+        var editor = parent
+            .createTweaker({
+                root: style.root,
+                styles: style.tweaker,
+            })
+            .addRows(config.$properties, GetValue$j(config, 'monitor', false));
+        // slider
+        var editorSlider = CreateSlider$1(scene, config.slider, style.slider);
+
+        var indexLabelCallback = GetIndexLabelCallback(config);
+        var displayNameLabelCallback = GetDisplayNameLabelCallback(config);
+
+        // toolbar buttons at editor footer
+        var editorToolbarStyle = GetValue$j(style, 'editorToolbar') || {};
+
+        var editorIndexLabelStyle = GetValue$j(editorToolbarStyle, 'index');
+        if (!editorIndexLabelStyle) {
+            editorIndexLabelStyle = GetIndexLabelStyle(style);
+        }
+        var editorIndexLabel = CreateIndexLabel(scene, editorIndexLabelStyle);
+
+        var editorDisplayNameStyle = GetValue$j(editorToolbarStyle, 'displayName');
+        if (!editorDisplayNameStyle) {
+            editorDisplayNameStyle = GetDisplayNameStyle(style);
+        }
+        var editorDisplayNameLabel = CreateDisplayNameLabel(scene, editorDisplayNameStyle);
+
+        var editorDeleteButton = CreateDeleteButton(scene, config, editorToolbarStyle);
+        var editorDuplicateButton = CreateDuplicateButton(scene, config, editorToolbarStyle);
+        var editorResetButton = CreateResetButton(scene, config, editorToolbarStyle);
+        var createDefaultItemCallback = GetValue$j(config, 'createDefaultItem');
+        if (editorDuplicateButton) {
+            editorDuplicateButton.createDefaultItem = createDefaultItemCallback;
+        }
+        if (editorResetButton) {
+            editorResetButton.createDefaultItem = createDefaultItemCallback;
+        }
+        // right panel of split-panels
+
+        // splitter
+        var splitterConfig = config.splitter;
+        var splitterStyle = style.splitter;
+        if (!splitterConfig && !splitterStyle) {
+            splitterStyle = DefaultSplitStyle;
+        }
+        var splitter = CreateBackground(scene, (splitterConfig || {}), (splitterStyle || {}));
+
+        // background of split-panels
+        var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
+
+        var listDetail = new ListDetail(scene, {
+            isHorizontalView: (config.view === 'detail-h'),
+
+            header: title,
+
+            // ListTable at left panel
+            listTableConfig: listTableConfig,
+            createListCellContainerCallback: createCellContainerCallback,
+            listTableSlider: listTableSlider,
+            listTableFooter: listTableFooter,
+            clearButton: clearButton,
+            addButton: addButton,
+
+            // Editor at right panel
+            editor: editor,
+            editorSlider: editorSlider,
+            // Title (header)
+            editorIndexLabel: editorIndexLabel,
+            editorDisplayNameLabel: editorDisplayNameLabel,
+            indexLabelCallback: indexLabelCallback,
+            displayNameLabelCallback: displayNameLabelCallback,
+            // Toolbar (footer)
+            editorDeleteButton: editorDeleteButton,
+            editorDuplicateButton: editorDuplicateButton,
+            editorResetButton: editorResetButton,
+
+            // Splitter between left and right panel
+            splitter: splitter,
+            splitRatio: GetValue$j(config, 'splitRatio', 0.5),
+
+            minLeftPanelWidth: GetValue$j(config, 'minLeftPanelWidth', 0),
+            minRightPanelWidth: GetValue$j(config, 'minRightPanelWidth', 0),
+            minTopPanelWidth: GetValue$j(config, 'minTopPanelWidth', 0),
+            minBottomPanelWidth: GetValue$j(config, 'minBottomPanelWidth', 0),
+
+            // background of panels
+            background: background,
+
+            height: GetValue$j(config, 'height', 0, style),
+            space: Merge$1((config.space || {}), (style.space || {})),
+
+            alignTitle: GetValue$j(style, 'root.alignTitle')
+        });
+        scene.add.existing(listDetail);
+
+        return listDetail;
     };
 
     const GetValue$i = Phaser.Utils.Objects.GetValue;
@@ -78074,7 +79738,34 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         var arrayTableStyle = GetValue$i(this.styles, 'arrayTable') || {};
         arrayTableStyle.tweaker = this.styles;
         arrayTableStyle.root = this.root;
-        var arrayTable = CreateArrayTable(this, config, arrayTableStyle);
+
+        var createArrayTableCallback;
+        var view = GetValue$i(config, 'view', 'inline');
+        if (view === 'detail') {  // Default detail view is vertical
+            view = 'detail-v';
+        }
+        view = view.toLowerCase();
+        config.view = view;
+        switch (view) {
+            case 'detail-v':  // vertical
+            case 'detail-h':  // horizontal
+                // detail mode is only for object item
+                var properties = config.$properties;
+                var isObjectItem = Array.isArray(properties) && (properties.length >= 1) && properties[0].hasOwnProperty('$key');
+                if (isObjectItem) {
+                    createArrayTableCallback = CreateListDetail;
+                } else {
+                    createArrayTableCallback = CreateArrayTable;
+                }
+                break;
+
+            case 'inline':
+            default:
+                createArrayTableCallback = CreateArrayTable;
+                break;
+        }
+        var arrayTable = createArrayTableCallback(this, config, arrayTableStyle);
+
         delete arrayTableStyle.tweaker;
         delete arrayTableStyle.root;
 
@@ -78148,8 +79839,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         },
 
         setValueCallbacks(config) {
-            this.onGetValue = GetValue$45(config, 'onGetValue');
-            this.onSetValue = GetValue$45(config, 'onSetValue');
+            this.onGetValue = GetValue$4h(config, 'onGetValue');
+            this.onSetValue = GetValue$4h(config, 'onSetValue');
             return this;
         },
 
@@ -78159,7 +79850,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             }
 
             if (this.bindTargetKey != null) {
-                return GetValue$45(this.bindingTarget, this.bindTargetKey);
+                return GetValue$4h(this.bindingTarget, this.bindTargetKey);
             }
 
             if (this.onGetValue) {
@@ -78374,10 +80065,14 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 return this._value;
             }
 
-            get root() {
+            get tweaker() {
                 var inputRow = this.getParentSizer();
                 var tweaker = inputRow.getParentSizer();
-                return tweaker.root;
+                return tweaker;
+            }
+
+            get root() {
+                return this.tweaker.root;
             }
 
             onBindTarget(target, key) {
@@ -78428,7 +80123,9 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 if (!this.syncValueFlag) {
                     var bindingTarget = this.bindingTarget;
                     var bindingKey = this.bindingKey;
+                    // Emit event from this input field, current tweaker, and root tweaker
                     this.emit('valuechange', value, oldValue, bindingTarget, bindingKey);
+                    this.tweaker.emit('valuechange', value, oldValue, bindingTarget, bindingKey);
                     this.root.emit('valuechange', value, oldValue, bindingTarget, bindingKey);
                 }
             }
@@ -78598,7 +80295,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             config.title = GetLeafKey(bindingKey);
         }
 
-        config.value = GetValue$45(target, bindingKey, undefined);
+        config.value = GetValue$4h(target, bindingKey, undefined);
 
         // Create InputRow
         var inputRowStyle = this.styles.inputRow || {};

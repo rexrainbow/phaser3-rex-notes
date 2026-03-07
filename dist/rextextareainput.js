@@ -23483,25 +23483,6 @@
             );
             this.addChildrenMap('scrollableSizer', scrollableSizer);
 
-            if (footer) {
-                var align = GetValue$e(config, 'align.footer', 'center');
-                var footerSpace = GetValue$e(config, 'space.footer', 0);
-                var padding;
-                if (!isRevererXY) {
-                    padding = { top: footerSpace };
-                } else {
-                    padding = { left: footerSpace };
-                }
-                this.add(footer,
-                    {
-                        proportion: 0,
-                        align: align,
-                        padding: padding,
-                        expand: GetValue$e(config, 'expand.footer', true)
-                    }
-                );
-            }
-
             var header = GetValue$e(config, 'header', undefined);
             if (header) {
                 var headerSpace = GetValue$e(config, 'space.header', 0);
