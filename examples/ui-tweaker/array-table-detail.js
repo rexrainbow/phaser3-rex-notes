@@ -313,9 +313,12 @@ var CreatePanel = function (scene, isVerticalView) {
                 },
 
                 cellBackground: {
+                    coloe: null,
                     strokeWidth: 0,
+                    'active.color': COLOR_LIGHT,
+                    'active.alpha': 0.3,
                     'hover.strokeColor': 0xffffff,
-                    'hover.strokeWidth': 2
+                    'hover.strokeWidth': 2,
                 },
 
                 index: {
