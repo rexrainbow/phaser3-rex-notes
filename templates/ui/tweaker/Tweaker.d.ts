@@ -339,6 +339,9 @@ declare namespace Tweaker {
             /** Array table background style. */
             background?: CreateBackground.IConfig,
 
+            /** Splitter style between list-table and editor panel in detail view. */
+            splitter?: CreateBackground.IConfig,
+
             /** Default table configuration. */
             table?: GridTable.IConfig['table'],
 
@@ -377,6 +380,28 @@ declare namespace Tweaker {
             index?: SimpleLabel.IConfig,
             /** Style for display-name label in each cell of detail view. */
             displayName?: SimpleLabel.IConfig,
+
+            /**
+             * Styles for editor panel title/footer controls in detail view.
+             * `index` and `displayName` are used by editor header labels.
+             */
+            editorToolbar?: {
+                /** Style for index label in editor header. */
+                index?: SimpleLabel.IConfig,
+                /** Style for display-name label in editor header. */
+                displayName?: SimpleLabel.IConfig,
+
+                /** Style for delete button in editor footer toolbar. */
+                deleteButton?: SimpleLabel.IConfig,
+                /** Style for duplicate button in editor footer toolbar. */
+                duplicateButton?: SimpleLabel.IConfig,
+                /** Style for reset button in editor footer toolbar. */
+                resetButton?: SimpleLabel.IConfig,
+                /** Style for previous button in editor footer toolbar. */
+                previousButton?: SimpleLabel.IConfig,
+                /** Style for next button in editor footer toolbar. */
+                nextButton?: SimpleLabel.IConfig,
+            },
 
             /** Style for add button in footer. */
             addButton?: SimpleLabel.IConfig,
