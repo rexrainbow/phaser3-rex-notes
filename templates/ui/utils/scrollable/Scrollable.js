@@ -38,25 +38,6 @@ class Scrollable extends Sizer {
         );
         this.addChildrenMap('scrollableSizer', scrollableSizer);
 
-        if (footer) {
-            var align = GetValue(config, 'align.footer', 'center');
-            var footerSpace = GetValue(config, 'space.footer', 0);
-            var padding;
-            if (!isRevererXY) {
-                padding = { top: footerSpace };
-            } else {
-                padding = { left: footerSpace };
-            }
-            this.add(footer,
-                {
-                    proportion: 0,
-                    align: align,
-                    padding: padding,
-                    expand: GetValue(config, 'expand.footer', true)
-                }
-            );
-        }
-
         var header = GetValue(config, 'header', undefined);
         if (header) {
             var headerSpace = GetValue(config, 'space.header', 0);
