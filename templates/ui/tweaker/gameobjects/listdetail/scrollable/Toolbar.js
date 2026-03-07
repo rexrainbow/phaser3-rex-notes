@@ -12,6 +12,8 @@ class Toolbar extends Sizer {
         var deleteButton = GetValue(config, 'editorDeleteButton');
         var duplicateButton = GetValue(config, 'editorDuplicateButton');
         var resetButton = GetValue(config, 'editorResetButton');
+        var previousButton = GetValue(config, 'editorPreviousButton');
+        var nextButton = GetValue(config, 'editorNextButton');
 
         // Align to right side
         if (deleteButton) {
@@ -33,6 +35,20 @@ class Toolbar extends Sizer {
         if (resetButton) {
             this.add(
                 resetButton,
+                { proportion: 0, expand: true }
+            );
+        }
+
+        if (previousButton) {
+            this.add(
+                previousButton,
+                { proportion: 0, expand: true }
+            );
+        }
+
+        if (nextButton) {
+            this.add(
+                nextButton,
                 { proportion: 0, expand: true }
             );
         }

@@ -9,6 +9,8 @@ import CreateClearButton from '../utils/CreateClearButton.js';
 import CreateDeleteButton from '../utils/CreateDeleteButton.js';
 import CreateDuplicateButton from '../utils/CreateDuplicateButton.js';
 import CreateResetButton from '../utils/CreateResetButton.js';
+import CreatePreviousButton from '../utils/CreatePreviousButton.js';
+import CreateNextButton from '../utils/CreateNextButton.js';
 import CreateBackground from '../utils/CreateBackground.js';
 import Sizer from '../../../sizer/Sizer.js';
 import Merge from '../../../../../plugins/utils/object/Merge.js';
@@ -99,6 +101,8 @@ var CreateListDetail = function (parent, config, style) {
     var editorDeleteButton = CreateDeleteButton(scene, config, editorToolbarStyle);
     var editorDuplicateButton = CreateDuplicateButton(scene, config, editorToolbarStyle);
     var editorResetButton = CreateResetButton(scene, config, editorToolbarStyle);
+    var editorPreviousButton = CreatePreviousButton(scene, config, editorToolbarStyle);
+    var editorNextButton = CreateNextButton(scene, config, editorToolbarStyle);
     var createDefaultItemCallback = GetValue(config, 'createDefaultItem');
     if (editorDuplicateButton) {
         editorDuplicateButton.createDefaultItem = createDefaultItemCallback;
@@ -144,6 +148,8 @@ var CreateListDetail = function (parent, config, style) {
         editorDeleteButton: editorDeleteButton,
         editorDuplicateButton: editorDuplicateButton,
         editorResetButton: editorResetButton,
+        editorPreviousButton: editorPreviousButton,
+        editorNextButton: editorNextButton,
 
         // Splitter between left and right panel
         splitter: splitter,

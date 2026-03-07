@@ -34,9 +34,13 @@ class EditorContainer extends Scrollable {
         var deleteButton = config.editorDeleteButton;
         var duplicateButton = config.editorDuplicateButton;
         var resetButton = config.editorResetButton;
+        var previousButton = config.editorPreviousButton;
+        var nextButton = config.editorNextButton;
         this.addChildrenMap('deleteButton', deleteButton);
         this.addChildrenMap('duplicateButton', duplicateButton);
         this.addChildrenMap('resetButton', resetButton);
+        this.addChildrenMap('previousButton', previousButton);
+        this.addChildrenMap('nextButton', nextButton);
 
         if (deleteButton) {
             deleteButton
@@ -55,6 +59,18 @@ class EditorContainer extends Scrollable {
                 .offClick(this.onClickResetButton, this)
                 .onClick(this.onClickResetButton, this);
         }
+
+        if (previousButton) {
+            previousButton
+                .offClick(this.onClickPreviousButton, this)
+                .onClick(this.onClickPreviousButton, this);
+        }
+
+        if (nextButton) {
+            nextButton
+                .offClick(this.onClickNextButton, this)
+                .onClick(this.onClickNextButton, this);
+        }
     }
 
     onClickDeleteButton() {
@@ -69,6 +85,14 @@ class EditorContainer extends Scrollable {
         this.emit('toolbar.reset');
     }
 
+    onClickPreviousButton() {
+        this.emit('toolbar.previous');
+    }
+
+    onClickNextButton() {
+        this.emit('toolbar.next');
+    }
+
     setTitle(indexConfig, displayNameConfig) {
         var title = this.childrenMap.header;
         title.setTitle(indexConfig, displayNameConfig);
@@ -77,7 +101,7 @@ class EditorContainer extends Scrollable {
 }
 
 var HasToolbar = function (config) {
-    return !!config.editorDeleteButton || !!config.editorDuplicateButton || !!config.editorResetButton;
+    return !!config.editorDeleteButton || !!config.editorDuplicateButton || !!config.editorResetButton || !!config.editorPreviousButton || !!config.editorNextButton;
 }
 
 export default EditorContainer;

@@ -412,6 +412,24 @@ var CreatePanel = function (scene, isVerticalView) {
                         },
 
                     },
+                    previousButton: {
+                        space: { left: 5, right: 5, top: 5, bottom: 5 },
+                        icon: { key: 'arrow-down', flipY: true },
+                        iconSize: 20,
+                        background: {
+                            color: COLOR_DARK,
+                            strokeColor: COLOR_LIGHT,
+                        },
+                    },
+                    nextButton: {
+                        space: { left: 5, right: 5, top: 5, bottom: 5 },
+                        icon: { key: 'arrow-down' },
+                        iconSize: 20,
+                        background: {
+                            color: COLOR_DARK,
+                            strokeColor: COLOR_LIGHT,
+                        },
+                    },
                 },
             },
 

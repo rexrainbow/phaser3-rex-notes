@@ -39,6 +39,8 @@ class ListDetail extends SplitPanels {
             editorDeleteButton,
             editorDuplicateButton,
             editorResetButton,
+            editorPreviousButton,
+            editorNextButton,
 
             splitRatio,
             minLeftPanelWidth,
@@ -87,6 +89,8 @@ class ListDetail extends SplitPanels {
             editorDeleteButton: editorDeleteButton,
             editorDuplicateButton: editorDuplicateButton,
             editorResetButton: editorResetButton,
+            editorPreviousButton: editorPreviousButton,
+            editorNextButton: editorNextButton,
 
             space: {
                 panel: space.table,
@@ -143,7 +147,9 @@ class ListDetail extends SplitPanels {
         editorContainer
             .on('toolbar.delete', this.onToolbarDelete, this)
             .on('toolbar.duplicate', this.onToolbarDuplicate, this)
-            .on('toolbar.reset', this.onToolbarReset, this);
+            .on('toolbar.reset', this.onToolbarReset, this)
+            .on('toolbar.previous', this.onToolbarPrevious, this)
+            .on('toolbar.next', this.onToolbarNext, this);
 
         editor
             .on('valuechange', this.onEditorValueChange, this);
@@ -328,6 +334,34 @@ class ListDetail extends SplitPanels {
         this.rightPanel.setBindingTarget(currentItem);
         listTable.updateVisibleCell(index);
         this.updateEditorTitle(index, currentItem, items);
+    }
+
+    onToolbarPrevious() {
+        var index = this.selectedIndex;
+        if (index == null) {
+            return;
+        }
+
+        if (index <= 0) {
+            return;
+        }
+
+        this.selectItem(index - 1, true);
+    }
+
+    onToolbarNext() {
+        var index = this.selectedIndex;
+        if (index == null) {
+            return;
+        }
+
+        var listTable = this.leftPanel;
+        var items = listTable.items;
+        if (index >= (items.length - 1)) {
+            return;
+        }
+
+        this.selectItem(index + 1, true);
     }
 
     createDefaultItemFromToolbar(buttonKey, actionName) {
