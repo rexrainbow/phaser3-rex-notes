@@ -18429,7 +18429,10 @@
         }
 
         // Fast path: single key
-        if (typeof keys === 'string' && keys.indexOf(delimiter) === -1) {
+        if (
+            (typeof keys === 'string' && keys.indexOf(delimiter) === -1) ||
+            (typeof keys === 'number')
+        ) {
             target[keys] = value;
             return target;
         }
@@ -24826,25 +24829,6 @@ void main (void) {
             );
             this.addChildrenMap('scrollableSizer', scrollableSizer);
 
-            if (footer) {
-                var align = GetValue$9(config, 'align.footer', 'center');
-                var footerSpace = GetValue$9(config, 'space.footer', 0);
-                var padding;
-                if (!isRevererXY) {
-                    padding = { top: footerSpace };
-                } else {
-                    padding = { left: footerSpace };
-                }
-                this.add(footer,
-                    {
-                        proportion: 0,
-                        align: align,
-                        padding: padding,
-                        expand: GetValue$9(config, 'expand.footer', true)
-                    }
-                );
-            }
-
             var header = GetValue$9(config, 'header', undefined);
             if (header) {
                 var headerSpace = GetValue$9(config, 'space.header', 0);
@@ -25715,6 +25699,7 @@ void main (void) {
         }
 
         colRowToCellIndex(colIdx, rowIdx) {
+            // Return a number cell index, or null if (colIdx, rowIdx) is out of range
             if (
                 (colIdx < 0) || (colIdx >= this.colCount) ||
                 (rowIdx < 0) || (rowIdx >= this.rowCount)
@@ -26565,29 +26550,27 @@ void main (void) {
             cellTLX = startCellTLX;
         var startCellTLY = this.getCellTLY(rowIndex) + tableOYOffset,
             cellTLY = startCellTLY;
-        while ((cellTLY < bottomBound) && (cellIdx <= lastIdx)) {
-            if (this.table.isValidCellIdx(cellIdx)) {
-                var cell = table.getCell(cellIdx, true);
-                this.visibleCells.add(cell);
-                if (!this.preVisibleCells.has(cell)) {
-                    this.showCell(cell);
-                }
+        while ((cellTLY < bottomBound) && (cellIdx !== null) && (cellIdx <= lastIdx)) {
+            var cell = table.getCell(cellIdx, true);
+            this.visibleCells.set(cell);
+            if (!this.preVisibleCells.contains(cell)) {
+                this.showCell(cell);
+            }
 
-                var x, y;
-                if (this.scrollMode === 0) {
-                    x = cellTLX;
-                    y = cellTLY;
-                } else {
-                    x = cellTLY;
-                    y = cellTLX;
-                }
-                if (cell.cellContainerAlign == null) {
-                    cell.setXY(x, y);
-                } else {
-                    var cellContainer = cell.getContainer();
-                    AlignIn(cellContainer, x, y, cell.width, cell.height, cell.cellContainerAlign);
-                    cell.setXY(cellContainer.x, cellContainer.y);
-                }
+            var x, y;
+            if (this.scrollMode === 0) {
+                x = cellTLX;
+                y = cellTLY;
+            } else {
+                x = cellTLY;
+                y = cellTLX;
+            }
+            if (cell.cellContainerAlign == null) {
+                cell.setXY(x, y);
+            } else {
+                var cellContainer = cell.getContainer();
+                AlignIn(cellContainer, x, y, cell.width, cell.height, cell.cellContainerAlign);
+                cell.setXY(cellContainer.x, cellContainer.y);
             }
 
             if ((cellTLX < rightBound) && (columnIndex < lastColIdx)) {
@@ -26602,6 +26585,7 @@ void main (void) {
             }
 
             cellIdx = table.colRowToCellIndex(columnIndex, rowIndex);
+            // Return a number cell index, or null if (colIdx, rowIdx) is out of range
         }
 
         // Restore scale
@@ -27539,12 +27523,17 @@ void main (void) {
 
     // Return null if (x, y) is out of any cell, or that cell is invisible
     var PointerToCellIndex = function (table, pointer, worldX, worldY) {
+        var camera = pointer.camera;
+        if (!camera) {
+            // Why camera is undefined here?
+            return null;
+        }
+
         if (worldX === undefined) {
             worldX = pointer.worldX;
             worldY = pointer.worldY;
         }
 
-        var camera = pointer.camera;
         var x = worldX + camera.scrollX * (table.scrollFactorX - 1);
         var y = worldY + camera.scrollY * (table.scrollFactorY - 1);
         var cellIndex = table.pointToCellIndex(x, y);
