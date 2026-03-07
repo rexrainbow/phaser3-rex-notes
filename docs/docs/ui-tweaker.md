@@ -3821,6 +3821,14 @@ Style of array table is defined in
                 strokeWidth: undefined,
             },
 
+            // Splitter between list-table(left) and editor(right) in detail view
+            splitter: {
+                width: 10,
+                height: 10,
+                color: 0x0,
+                alpha: 0.001
+            },
+
             table: {
                 // width: undefined,
                 // height: undefined,
@@ -3893,11 +3901,26 @@ Style of array table is defined in
 
             // Label style config
             index: {},
+            displayName: {},
             addButton: {},
             clearButton: {},
             deleteButton: {},
             moveUpButton: {},
             moveDownButton: {},
+
+            // Styles of editor panel in detail view
+            editorToolbar: {
+                // Header labels
+                index: {},
+                displayName: {},
+
+                // Footer toolbar buttons
+                deleteButton: {},
+                duplicateButton: {},
+                resetButton: {},
+                previousButton: {},
+                nextButton: {},
+            },
 
             cellBackground: {
                 radius: 0,

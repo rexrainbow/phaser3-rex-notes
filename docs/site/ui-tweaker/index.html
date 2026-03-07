@@ -13820,6 +13820,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#add-array-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add Array table
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#add-rows" class="md-nav__link">
     <span class="md-ellipsis">
       Add rows
@@ -13977,6 +13986,15 @@
   <a href="#style-of-scrollable" class="md-nav__link">
     <span class="md-ellipsis">
       Style of scrollable
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#style-of-array-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      Style of array table
     </span>
   </a>
   
@@ -15726,6 +15744,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#add-array-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add Array table
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#add-rows" class="md-nav__link">
     <span class="md-ellipsis">
       Add rows
@@ -15883,6 +15910,15 @@
   <a href="#style-of-scrollable" class="md-nav__link">
     <span class="md-ellipsis">
       Style of scrollable
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#style-of-array-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      Style of array table
     </span>
   </a>
   
@@ -17133,7 +17169,11 @@
 </li>
 <li><code>icon</code>, <code>iconFrame</code> : Texture key, frame name of icon on title-label.</li>
 <li><code>iconSize</code> : Fixed icon size</li>
-<li><code>title</code> : Display text of title-label.</li>
+<li><code>title</code> : Display text of title-label.<ul>
+<li><code>undefined</code> : Title label with default string <code>''</code>.</li>
+<li><code>false</code> or <code>null</code> : No title label.</li>
+</ul>
+</li>
 <li><code>label</code> : Display text of button, <a href="../ui-label/#reset-display-content">a string or a plain object</a>.
     <div class="highlight"><pre><span></span><code><span class="p">{</span>
 <span class="w">    </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span>
@@ -17191,7 +17231,11 @@
 </li>
 <li><code>icon</code>, <code>iconFrame</code> : Texture key, frame name of icon on title-label.</li>
 <li><code>iconSize</code> : Fixed icon size</li>
-<li><code>title</code> : Display text of title-label.</li>
+<li><code>title</code> : Display text of title-label.<ul>
+<li><code>undefined</code> : Title label with default string <code>''</code>.</li>
+<li><code>false</code> or <code>null</code> : No title label.</li>
+</ul>
+</li>
 <li><code>buttons</code> : Array of button label and button callback
     <div class="highlight"><pre><span></span><code><span class="p">{</span>
 <span class="w">    </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
@@ -17361,6 +17405,61 @@ actionSize: undefined,
 </li>
 </ul>
 <p>See <a href="#style-of-scrollable">Style of scrollable</a></p>
+<h3 id="add-array-table">Add Array table<a class="headerlink" href="#add-array-table" title="Permanent link">&para;</a></h3>
+<p>Array table is a <a href="../ui-gridtable/">grid-table</a> contains sub-tweaker panel for each cell.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">tweaker</span><span class="p">.</span><span class="nx">addArrayTable</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span><span class="w"> </span><span class="nx">bindingKey</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">$properties</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span><span class="nx">$key</span><span class="o">:</span><span class="w"> </span><span class="p">...},</span>
+<span class="w">    </span><span class="p">],</span>
+
+<span class="w">    </span><span class="c1">// or</span>
+<span class="w">    </span><span class="c1">// $properties: {},</span>
+
+<span class="w">    </span><span class="nx">createDefaultItem</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">item</span><span class="p">;</span><span class="w"> </span><span class="c1">// An object or number, string, boolean</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="p">});</span>
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="nx">tweaker</span><span class="p">.</span><span class="nx">addArrayTable</span><span class="p">({</span>
+<span class="w">    </span><span class="c1">// title: title,</span>
+
+<span class="w">    </span><span class="c1">// bindingTarget:</span>
+<span class="w">    </span><span class="c1">// bindingKey:</span>
+
+<span class="w">    </span><span class="c1">// $properties: [ {$key: ...}, ... ],  // or</span>
+<span class="w">    </span><span class="c1">// $properties: {...},</span>
+
+<span class="w">    </span><span class="c1">// monitor: </span>
+
+<span class="w">    </span><span class="c1">// createDefaultItem() { return item; /* An object or number, string, boolean */ }</span>
+
+<span class="w">    </span><span class="c1">// height: 0</span>
+<span class="p">});</span>
+</code></pre></div>
+<ul>
+<li><code>title</code> Title of array table.<ul>
+<li>A string : Title string.</li>
+</ul>
+</li>
+<li><code>$properties</code> :<ul>
+<li>Item is an object : A list of properties, see <a href="#add-rows">Add rows</a></li>
+<li>Item is a number, string, or boolean : A property, or <code>undefined</code></li>
+</ul>
+</li>
+<li><code>createDefaultItem</code> : Callback when adding a new item to array table.
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">item</span><span class="p">;</span><span class="w"> </span><span class="cm">/* An object or number, string, boolean */</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li><code>height</code> :<ul>
+<li>A number : Height of this <a href="../ui-scrollablepanel/">Scrollable(Panel)</a>.</li>
+<li><code>undefined</code>, or <code>0</code> : Expand this scrollable(Panel).</li>
+</ul>
+</li>
+</ul>
+<p>See <a href="#style-of-array-table">Style of array table</a></p>
 <h3 id="add-rows">Add rows<a class="headerlink" href="#add-rows" title="Permanent link">&para;</a></h3>
 <p>Add mutiple rows (input row, button, buttons, separator, folder, tab) in a single method</p>
 <div class="highlight"><pre><span></span><code><span class="nx">tweaker</span><span class="p">.</span><span class="nx">addRows</span><span class="p">(</span><span class="nx">properties</span><span class="p">,</span><span class="w"> </span><span class="nx">target</span><span class="p">);</span>
@@ -17508,6 +17607,9 @@ actionSize: undefined,
 </li>
 </ul>
 </li>
+<li>ArrayTable
+    <div class="highlight"><pre><span></span><code>
+</code></pre></div></li>
 </ul>
 </li>
 <li><code>monitor</code> : <ul>
@@ -19568,6 +19670,189 @@ actionSize: undefined,
 <span class="w">            </span><span class="nx">space</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                </span><span class="nx">panel</span><span class="o">:</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span>
 <span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="style-of-array-table">Style of array table<a class="headerlink" href="#style-of-array-table" title="Permanent link">&para;</a></h4>
+<p>Style of array table is defined in </p>
+<ul>
+<li><code>styles.arrayTable</code></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="c1">// style: {...}</span>
+<span class="w">    </span><span class="nx">styles</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">arrayTable</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// height: 0,</span>
+
+<span class="w">            </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">background</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nx">radius</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">                    </span><span class="c1">// radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}</span>
+
+<span class="w">                    </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">alpha</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">strokeColor</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">strokeAlpha</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">strokeWidth</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">                </span><span class="p">},</span>
+
+<span class="w">                </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nx">fontFamily</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Courier&#39;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">fontSize</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;16px&#39;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">fontStyle</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">backgroundColor</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">stroke</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">strokeThickness</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">shadow</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="nx">offsetX</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">                        </span><span class="nx">offsetY</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">                        </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;#000&#39;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nx">blur</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">                        </span><span class="nx">stroke</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">                        </span><span class="nx">fill</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">                    </span><span class="p">},</span>
+<span class="w">                    </span><span class="nx">padding</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="nx">left</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">                        </span><span class="nx">right</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">                        </span><span class="nx">top</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">                        </span><span class="nx">bottom</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">                    </span><span class="p">},</span>
+<span class="w">                    </span><span class="c1">// more text styles</span>
+<span class="w">                </span><span class="p">},</span>
+
+<span class="w">                </span><span class="nx">iconSize</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">iconWidth</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span><span class="nx">iconHeight</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+
+<span class="w">                </span><span class="nx">space</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nx">left</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">right</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">top</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">bottom</span><span class="o">:</span><span class="mf">0</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">icon</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">            </span><span class="p">},</span>
+
+<span class="w">            </span><span class="nx">background</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">radius</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">                </span><span class="c1">// radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}</span>
+
+<span class="w">                </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">alpha</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">strokeColor</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">strokeAlpha</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">strokeWidth</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">            </span><span class="p">},</span>
+
+<span class="w">            </span><span class="c1">// Splitter between list-table(left) and editor(right) in detail view</span>
+<span class="w">            </span><span class="nx">splitter</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">width</span><span class="o">:</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">height</span><span class="o">:</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="mh">0x0</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">alpha</span><span class="o">:</span><span class="w"> </span><span class="mf">0.001</span>
+<span class="w">            </span><span class="p">},</span>
+
+<span class="w">            </span><span class="nx">table</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// width: undefined,</span>
+<span class="w">                </span><span class="c1">// height: undefined,</span>
+<span class="w">                </span><span class="c1">// cellWidth: undefined,</span>
+<span class="w">                </span><span class="c1">// cellHeight: undefined,</span>
+<span class="w">                </span><span class="c1">// columns: 1,</span>
+<span class="w">                </span><span class="c1">// mask: {</span>
+<span class="w">                </span><span class="c1">//     padding: 1</span>
+<span class="w">                </span><span class="c1">// },</span>
+<span class="w">                </span><span class="c1">// interactive: true,</span>
+<span class="w">                </span><span class="c1">// click: undefined,</span>
+<span class="w">                </span><span class="c1">// over: {</span>
+<span class="w">                </span><span class="c1">//     mode: &#39;pointer&#39;  // or &#39;boundary&#39;</span>
+<span class="w">                </span><span class="c1">// },</span>
+<span class="w">                </span><span class="c1">// tap: undefined,</span>
+<span class="w">                </span><span class="c1">// press: undefined,</span>
+<span class="w">                </span><span class="c1">// swipe: undefined,</span>
+<span class="w">                </span><span class="c1">// reuseCellContainer: true,</span>
+<span class="w">                </span><span class="c1">// enableLayer: true,</span>
+<span class="w">            </span><span class="p">},</span>
+
+<span class="w">            </span><span class="nx">slider</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">track</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nx">width</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">radius</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span><span class="nx">alpha</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">strokeColor</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span><span class="nx">strokeAlpha</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">strokeWidth</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">shape</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span>
+<span class="w">                </span><span class="p">},</span>
+
+<span class="w">                </span><span class="nx">thumb</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nx">width</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">radius</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span><span class="nx">alpha</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">strokeColor</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span><span class="nx">strokeAlpha</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">strokeWidth</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">shape</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span>
+<span class="w">                </span><span class="p">},</span>
+
+<span class="w">                </span><span class="c1">// hideUnscrollableSlider: false,</span>
+<span class="w">                </span><span class="c1">// disableUnscrollableDrag: false,</span>
+<span class="w">                </span><span class="c1">// adaptThumbSize: false,</span>
+<span class="w">                </span><span class="c1">// minThumbSize: undefined,</span>
+<span class="w">            </span><span class="p">},</span>
+
+<span class="w">            </span><span class="nx">space</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">left</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">right</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">top</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">bottom</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+
+<span class="w">                </span><span class="nx">table</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">sliderX</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">sliderY</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">header</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">footer</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+
+<span class="w">                </span><span class="nx">cell</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nx">left</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">right</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">top</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">bottom</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">index</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">tweaker</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">                    </span><span class="ow">delete</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">                </span><span class="p">},</span>
+
+<span class="w">                </span><span class="c1">// Space between clear/add buttons in footer</span>
+<span class="w">                </span><span class="nx">button</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">            </span><span class="p">},</span>
+
+<span class="w">            </span><span class="c1">// Label style config</span>
+<span class="w">            </span><span class="nx">index</span><span class="o">:</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">            </span><span class="nx">displayName</span><span class="o">:</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">            </span><span class="nx">addButton</span><span class="o">:</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">            </span><span class="nx">clearButton</span><span class="o">:</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">            </span><span class="nx">deleteButton</span><span class="o">:</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">            </span><span class="nx">moveUpButton</span><span class="o">:</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">            </span><span class="nx">moveDownButton</span><span class="o">:</span><span class="w"> </span><span class="p">{},</span>
+
+<span class="w">            </span><span class="c1">// Styles of editor panel in detail view</span>
+<span class="w">            </span><span class="nx">editorToolbar</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// Header labels</span>
+<span class="w">                </span><span class="nx">index</span><span class="o">:</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">                </span><span class="nx">displayName</span><span class="o">:</span><span class="w"> </span><span class="p">{},</span>
+
+<span class="w">                </span><span class="c1">// Footer toolbar buttons</span>
+<span class="w">                </span><span class="nx">deleteButton</span><span class="o">:</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">                </span><span class="nx">duplicateButton</span><span class="o">:</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">                </span><span class="nx">resetButton</span><span class="o">:</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">                </span><span class="nx">previousButton</span><span class="o">:</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">                </span><span class="nx">nextButton</span><span class="o">:</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">            </span><span class="p">},</span>
+
+<span class="w">            </span><span class="nx">cellBackground</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">radius</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">                </span><span class="c1">// radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}</span>
+
+<span class="w">                </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">alpha</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">strokeColor</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">strokeAlpha</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">strokeWidth</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span>
+<span class="w">            </span><span class="p">},</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
