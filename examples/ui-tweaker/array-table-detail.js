@@ -18,11 +18,13 @@ class Demo extends Phaser.Scene {
         this.load.image('delete', 'assets/images/delete.png');
         this.load.image('delete2', 'assets/images/delete2.png');
         this.load.image('arrow-down', 'assets/images/arrow-down.png');
+        this.load.image('copy', 'assets/images/copy.png');
+        this.load.image('reset', 'assets/images/reset.png');
     }
 
     create() {
         var isVerticalView = true;
-        CreatePanel(this, isVerticalView)
+        var panel = CreatePanel(this, isVerticalView)
             .setPosition(0, 0)
             .setOrigin(0)
             .addArrayTable(CreateComplexItems(10), null, {
@@ -52,9 +54,9 @@ class Demo extends Phaser.Scene {
 
                 splitRatio: (isVerticalView) ? 0.5 : 0.4
             })
-            .layout();
+            .layout()
 
-
+        debugger
     }
 
     update() {
@@ -280,12 +282,12 @@ var CreatePanel = function (scene, isVerticalView) {
 
                 space: {
                     left: 10, right: 10, top: 10, bottom: 10,
-                    table: 10, splitter: 5,
+                    table: 10, splitter: 8,
                     cell: {
                         top: 5, bottom: 5, left: 5,
                         index: 10, tweaker: 5,
                     },
-                    header: 5, footer: 5,
+                    header: 10, footer: 10,
                 },
 
                 background: {
@@ -366,7 +368,7 @@ var CreatePanel = function (scene, isVerticalView) {
                 clearButton: {
                     space: { left: 5, right: 5, top: 5, bottom: 5 },
                     icon: { key: 'delete2', },
-                    iconSize: 24,
+                    iconSize: 20,
                     background: {
                         color: COLOR_DARK,
                         strokeColor: COLOR_LIGHT,
@@ -374,6 +376,43 @@ var CreatePanel = function (scene, isVerticalView) {
 
                 },
 
+                editorToolbar: {
+                    // title, header
+                    // index: {},
+                    // displayName: {},
+
+                    // toolbar, footer
+                    deleteButton: {
+                        space: { left: 5, right: 5, top: 5, bottom: 5 },
+                        icon: { key: 'delete', },
+                        iconSize: 20,
+                        background: {
+                            color: COLOR_DARK,
+                            strokeColor: COLOR_LIGHT,
+                        },
+
+                    },
+                    duplicateButton: {
+                        space: { left: 5, right: 5, top: 5, bottom: 5 },
+                        icon: { key: 'copy', },
+                        iconSize: 20,
+                        background: {
+                            color: COLOR_DARK,
+                            strokeColor: COLOR_LIGHT,
+                        },
+
+                    },
+                    resetButton: {
+                        space: { left: 5, right: 5, top: 5, bottom: 5 },
+                        icon: { key: 'reset', },
+                        iconSize: 20,
+                        background: {
+                            color: COLOR_DARK,
+                            strokeColor: COLOR_LIGHT,
+                        },
+
+                    },
+                },
             },
 
             separator: {

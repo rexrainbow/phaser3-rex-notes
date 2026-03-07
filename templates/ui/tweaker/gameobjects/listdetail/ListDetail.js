@@ -1,8 +1,10 @@
 import SplitPanels from '../../../splitpanels/SplitPanels.js';
 import BindingTargetMethods from './BindingTargetMethods.js';
 import InputRowTitleWidthMethods from './InputRowTitleWidthMethods.js';
-import Scrollable from '../scrollable/Scrollable.js';
+import EditorContainer from './scrollable/EditorContainer.js';
 import ListTable from './gridtable/ListTable.js';
+import DeepClone from '../../../../../plugins/utils/object/DeepClone.js';
+import DeepMerge from '../../../../../plugins/utils/object/DeepMerge.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Clamp = Phaser.Math.Clamp;
@@ -28,6 +30,9 @@ class ListDetail extends SplitPanels {
             // Editor at right panel
             editor,
             editorSlider,
+            editorDeleteButton,
+            editorDuplicateButton,
+            editorResetButton,
 
             splitRatio,
             minLeftPanelWidth,
@@ -58,7 +63,7 @@ class ListDetail extends SplitPanels {
         scene.add.existing(listTable);
 
         // Editor at right panel
-        var scrollable = new Scrollable(scene, {
+        var editorContainer = new EditorContainer(scene, {
             scrollMode: 0,
 
             panel: {
@@ -70,12 +75,17 @@ class ListDetail extends SplitPanels {
 
             slider: editorSlider,
 
+            editorDeleteButton: editorDeleteButton,
+            editorDuplicateButton: editorDuplicateButton,
+            editorResetButton: editorResetButton,
+
             space: {
                 panel: space.table,
-                // more...
+                header: space.header,
+                footer: space.footer,
             }
         });
-        scene.add.existing(scrollable);
+        scene.add.existing(editorContainer);
 
         super(scene, {
             orientation: 1,
@@ -84,8 +94,8 @@ class ListDetail extends SplitPanels {
             leftPanel: (isHorizontalView) ? listTable : undefined,
             topPanel: (isHorizontalView) ? undefined : listTable,
 
-            rightPanel: (isHorizontalView) ? scrollable : undefined,
-            bottomPanel: (isHorizontalView) ? undefined : scrollable,
+            rightPanel: (isHorizontalView) ? editorContainer : undefined,
+            bottomPanel: (isHorizontalView) ? undefined : editorContainer,
 
             splitter: splitter,
             splitRatio: splitRatio,
@@ -118,6 +128,11 @@ class ListDetail extends SplitPanels {
         listTable
             .on('select', this.onSelectCell, this)
             .on('items.change', this.onItemsChange, this);
+
+        editorContainer
+            .on('toolbar.delete', this.onToolbarDelete, this)
+            .on('toolbar.duplicate', this.onToolbarDuplicate, this)
+            .on('toolbar.reset', this.onToolbarReset, this);
 
         editor
             .on('valuechange', this.onEditorValueChange, this);
@@ -216,6 +231,111 @@ class ListDetail extends SplitPanels {
         listTable.updateVisibleCell(index);
     }
 
+    onToolbarDelete() {
+        var index = this.selectedIndex;
+        if (index == null) {
+            return;
+        }
+
+        var listTable = this.leftPanel;
+        var cellContainer = listTable.getCellContainer(index);
+        if (cellContainer) {
+            listTable.deleteItemWithTransition(cellContainer);
+            return;
+        }
+
+        listTable.deleteItemByIndex(index);
+        if (listTable.resetPointerOver) {
+            listTable.resetPointerOver();
+        }
+    }
+
+    onToolbarDuplicate() {
+        var index = this.selectedIndex;
+        if (index == null) {
+            return;
+        }
+
+        var listTable = this.leftPanel;
+        var items = listTable.items;
+        var currentItem = items[index];
+        if (!IsObjectValue(currentItem)) {
+            console.error('[Tweaker][ListDetail] Duplicate aborted. Current selected item is not an object. This is an application-level design error.');
+            return;
+        }
+
+        var defaultItem = this.createDefaultItemFromToolbar('duplicateButton', 'Duplicate');
+        if (!defaultItem) {
+            return;
+        }
+
+        // Start from current item, then fill missing keys from default item.
+        var newItem = DeepClone(currentItem);
+        DeepMerge(newItem, defaultItem);
+
+        var insertIndex = index + 1;
+        items.splice(insertIndex, 0, newItem);
+        listTable.lastItemsCount = items.length;
+        listTable.refresh();
+        listTable.emit('items.change', 'add', {
+            index: insertIndex,
+            item: newItem
+        });
+
+        this.selectItem(insertIndex, true);
+    }
+
+    onToolbarReset() {
+        var index = this.selectedIndex;
+        if (index == null) {
+            return;
+        }
+
+        var listTable = this.leftPanel;
+        var items = listTable.items;
+        var currentItem = items[index];
+        if (!IsObjectValue(currentItem)) {
+            console.error('[Tweaker][ListDetail] Reset aborted. Current selected item is not an object. This is an application-level design error.');
+            return;
+        }
+
+        var defaultItem = this.createDefaultItemFromToolbar('resetButton', 'Reset');
+        if (!defaultItem) {
+            return;
+        }
+
+        // Clear all existing keys, then apply default keys in-place.
+        for (var key in currentItem) {
+            if (currentItem.hasOwnProperty(key)) {
+                delete currentItem[key];
+            }
+        }
+        DeepMerge(currentItem, defaultItem);
+
+        // Refresh editor and list row display.
+        this.rightPanel.setBindingTarget(currentItem);
+        listTable.updateVisibleCell(index);
+    }
+
+    createDefaultItemFromToolbar(buttonKey, actionName) {
+        var editorContainer = this.rightPanel;
+        var button = editorContainer.childrenMap[buttonKey];
+        var callback = (button) ? button.createDefaultItem : undefined;
+        if (!callback) {
+            console.error(`[Tweaker][ListDetail] ${actionName} aborted. createDefaultItem is required and should return an object. This is an application-level design error.`);
+            return null;
+        }
+
+        var defaultItem = callback();
+        if (!IsObjectValue(defaultItem)) {
+            var valueType = (defaultItem === null) ? 'null' : typeof (defaultItem);
+            console.error(`[Tweaker][ListDetail] ${actionName} aborted. createDefaultItem() returned ${valueType}, expected object. This is an application-level design error.`);
+            return null;
+        }
+
+        return defaultItem;
+    }
+
     selectItem(index, scrollToRow) {
         if (scrollToRow === undefined) {
             scrollToRow = false;
@@ -287,6 +407,10 @@ class ListDetail extends SplitPanels {
 
         return this;
     }
+}
+
+var IsObjectValue = function (value) {
+    return !!value && (typeof (value) === 'object') && !Array.isArray(value);
 }
 
 Object.assign(

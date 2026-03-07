@@ -4,6 +4,9 @@ import CreateTitleLabel from '../utils/CreateTitleLabel.js';
 import CreateSlider from '../CreateSlider.js';
 import CreateAddButton from '../utils/CreateAddButton.js';
 import CreateClearButton from '../utils/CreateClearButton.js';
+import CreateDeleteButton from '../utils/CreateDeleteButton.js';
+import CreateDuplicateButton from '../utils/CreateDuplicateButton.js';
+import CreateResetButton from '../utils/CreateResetButton.js';
 import CreateBackground from '../utils/CreateBackground.js';
 import Sizer from '../../../sizer/Sizer.js';
 import Merge from '../../../../../plugins/utils/object/Merge.js';
@@ -72,6 +75,19 @@ var CreateListDetail = function (parent, config, style) {
         .addRows(config.$properties, GetValue(config, 'monitor', false));
     // slider
     var editorSlider = CreateSlider(scene, config.slider, style.slider);
+
+    // toolbar buttons at editor footer
+    var editorToolbarStyle = GetValue(style, 'editorToolbar') || {};
+    var editorDeleteButton = CreateDeleteButton(scene, config, editorToolbarStyle);
+    var editorDuplicateButton = CreateDuplicateButton(scene, config, editorToolbarStyle);
+    var editorResetButton = CreateResetButton(scene, config, editorToolbarStyle);
+    var createDefaultItemCallback = GetValue(config, 'createDefaultItem');
+    if (editorDuplicateButton) {
+        editorDuplicateButton.createDefaultItem = createDefaultItemCallback;
+    }
+    if (editorResetButton) {
+        editorResetButton.createDefaultItem = createDefaultItemCallback;
+    }
     // right panel of split-panels
 
     // splitter
@@ -101,6 +117,9 @@ var CreateListDetail = function (parent, config, style) {
         // Editor at right panel
         editor: editor,
         editorSlider: editorSlider,
+        editorDeleteButton: editorDeleteButton,
+        editorDuplicateButton: editorDuplicateButton,
+        editorResetButton: editorResetButton,
 
         // Splitter between left and right panel
         splitter: splitter,

@@ -1,4 +1,5 @@
-import CreateTitleLabel from '../utils/CreateTitleLabel.js';
+import { GetIndexLabelStyle, GetIndexLabelCallback, CreateIndexLabel } from './IndexLabelMethods.js';
+import { GetDisplayNameStyle, GetDisplayNameLabelCallback, CreateDisplayNameLabel } from './DisplayNameLabelMethods.js';
 import CreateDeleteButton from '../utils/CreateDeleteButton.js';
 import CreateMoveUpButton from '../utils/CreateMoveUpButton.js';
 import CreateMoveDownButton from '../utils/CreateMoveDownButton.js';
@@ -6,7 +7,7 @@ import CreateBackground from '../utils/CreateBackground.js';
 import CellContainer from '../../gameobjects/listdetail/cellcontainer/CellContainer.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
-const Format = Phaser.Utils.String.Format;
+
 
 var CreateCellContainer = function (parent, cell, config) {
     var scene = parent.scene;
@@ -23,9 +24,9 @@ var CreateCellContainer = function (parent, cell, config) {
         backgroundStyle,
     } = config;
 
-    var indexLabel = CreateTitleLabel(scene, undefined, indexStyle);
+    var indexLabel = CreateIndexLabel(scene, indexStyle);
 
-    var displayNameLabel = CreateTitleLabel(scene, undefined, displayNameStyle);
+    var displayNameLabel = CreateDisplayNameLabel(scene, displayNameStyle);
 
     var deleteButton = createDeleteButton(scene);
 
@@ -55,29 +56,11 @@ var GenerateCreateCellContainerCallback = function (parent, config, style) {
     // Prepare parameters
     var space = GetValue(config, 'space.cell', undefined, style) || {};
 
-    var indexStyle = GetValue(style, 'index');
-    if (!indexStyle) {
-        indexStyle = GetValue(style, 'tweaker.inputRow.title') || {};
-    }
-    var indexLabelCallback = GetValue(config, 'indexLabel', '%1');
-    if (typeof (indexLabelCallback) === 'string') {
-        var indexLabelTemplate = indexLabelCallback;
-        indexLabelCallback = function (index, item, items) {
-            // %1=index, %2=total
-            return { 'title': Format(indexLabelTemplate, [index, items.length]) };
-        }
-    }
+    var indexStyle = GetIndexLabelStyle(style);
+    var indexLabelCallback = GetIndexLabelCallback(config);
 
-    var displayNameStyle = GetValue(style, 'displayName');
-    if (!displayNameStyle) {
-        displayNameStyle = GetValue(style, 'tweaker.inputRow.title') || {};
-    }
-    var displayNameLabelCallback = GetValue(config, 'displayNameLabel');
-    if (!displayNameLabelCallback) {
-        displayNameLabelCallback = function (index, item, items) {
-            return { text: '' };  // Display nothing
-        }
-    }
+    var displayNameStyle = GetDisplayNameStyle(style);
+    var displayNameLabelCallback = GetDisplayNameLabelCallback(config);
 
     var createDeleteButton = function (scene) {
         return CreateDeleteButton(scene, config, style);
