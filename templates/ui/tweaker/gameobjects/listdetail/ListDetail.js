@@ -404,7 +404,7 @@ class ListDetail extends SplitPanels {
         this.updateEditorTitle(index, this.selectedItem, items);
 
         if (scrollToRow) {
-            listTable.scrollToRow(index);
+            listTable.scrollToRow(index, 500);
         }
 
         this.updateVisibleCellSelection();
