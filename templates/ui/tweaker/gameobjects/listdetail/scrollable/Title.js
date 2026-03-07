@@ -11,11 +11,46 @@ class Title extends Sizer {
 
         var indexLabel = GetValue(config, 'editorIndexLabel');
         var displayNameLabel = GetValue(config, 'editorDisplayNameLabel');
-        // More logic...
+
+        if (indexLabel) {
+            this.add(
+                indexLabel,
+                { proportion: 0, expand: true }
+            );
+        }
+
+        if (displayNameLabel) {
+            this.add(
+                displayNameLabel,
+                { proportion: 1, expand: true }
+            );
+        }
+
+        this.addChildrenMap('index', indexLabel);
+        this.addChildrenMap('displayName', displayNameLabel);
     }
 
     setTitle(indexConfig, displayNameConfig) {
+        SetLabel(this.childrenMap.index, indexConfig);
+        SetLabel(this.childrenMap.displayName, displayNameConfig);
+
         return this;
+    }
+}
+
+var SetLabel = function (label, config) {
+    if (!label) {
+        return;
+    }
+
+    if (config === undefined) {
+        config = '';
+    }
+
+    if (typeof (config) === 'string') {
+        label.setText(config);
+    } else {
+        label.setTitle(config);
     }
 }
 

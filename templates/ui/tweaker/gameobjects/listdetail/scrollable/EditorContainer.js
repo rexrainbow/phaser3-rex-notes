@@ -11,11 +11,12 @@ class EditorContainer extends Scrollable {
 
         var title = new Title(scene, config);
         scene.add.existing(title);
-        SetValue(config, 'header', toolbar);
+        SetValue(config, 'header', title);
         SetValue(config, 'expand.header', true);
 
+        var toolbar;
         if (HasToolbar(config)) {
-            var toolbar = new Toolbar(scene, config);
+            toolbar = new Toolbar(scene, config);
             scene.add.existing(toolbar);
 
             if (toolbar) {
@@ -27,6 +28,7 @@ class EditorContainer extends Scrollable {
         super(scene, config);
         this.type = 'rexTweaker.ListDetail.EditorContainer';
 
+        this.addChildrenMap('title', title);
         this.addChildrenMap('toolbar', toolbar);
 
         var deleteButton = config.editorDeleteButton;
@@ -37,15 +39,21 @@ class EditorContainer extends Scrollable {
         this.addChildrenMap('resetButton', resetButton);
 
         if (deleteButton) {
-            deleteButton.onClick(this.onClickDeleteButton, this);
+            deleteButton
+                .offClick(this.onClickDeleteButton, this)
+                .onClick(this.onClickDeleteButton, this);
         }
 
         if (duplicateButton) {
-            duplicateButton.onClick(this.onClickDuplicateButton, this);
+            duplicateButton
+                .offClick(this.onClickDuplicateButton, this)
+                .onClick(this.onClickDuplicateButton, this);
         }
 
         if (resetButton) {
-            resetButton.onClick(this.onClickResetButton, this);
+            resetButton
+                .offClick(this.onClickResetButton, this)
+                .onClick(this.onClickResetButton, this);
         }
     }
 
@@ -62,7 +70,8 @@ class EditorContainer extends Scrollable {
     }
 
     setTitle(indexConfig, displayNameConfig) {
-        // Invoke Title's setTitle method
+        var title = this.childrenMap.header;
+        title.setTitle(indexConfig, displayNameConfig);
         return this;
     }
 }

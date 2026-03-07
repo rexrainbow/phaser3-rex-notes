@@ -1,5 +1,7 @@
 import ListDetail from '../../gameobjects/listdetail/ListDetail.js';
 import GenerateCreateCellContainerCallback from './GenerateCreateCellContainerCallback.js';
+import { GetIndexLabelStyle, GetIndexLabelCallback, CreateIndexLabel } from './IndexLabelMethods.js';
+import { GetDisplayNameStyle, GetDisplayNameLabelCallback, CreateDisplayNameLabel } from './DisplayNameLabelMethods.js';
 import CreateTitleLabel from '../utils/CreateTitleLabel.js';
 import CreateSlider from '../CreateSlider.js';
 import CreateAddButton from '../utils/CreateAddButton.js';
@@ -76,8 +78,24 @@ var CreateListDetail = function (parent, config, style) {
     // slider
     var editorSlider = CreateSlider(scene, config.slider, style.slider);
 
+    var indexLabelCallback = GetIndexLabelCallback(config);
+    var displayNameLabelCallback = GetDisplayNameLabelCallback(config);
+
     // toolbar buttons at editor footer
     var editorToolbarStyle = GetValue(style, 'editorToolbar') || {};
+
+    var editorIndexLabelStyle = GetValue(editorToolbarStyle, 'index');
+    if (!editorIndexLabelStyle) {
+        editorIndexLabelStyle = GetIndexLabelStyle(style);
+    }
+    var editorIndexLabel = CreateIndexLabel(scene, editorIndexLabelStyle);
+
+    var editorDisplayNameStyle = GetValue(editorToolbarStyle, 'displayName');
+    if (!editorDisplayNameStyle) {
+        editorDisplayNameStyle = GetDisplayNameStyle(style);
+    }
+    var editorDisplayNameLabel = CreateDisplayNameLabel(scene, editorDisplayNameStyle);
+
     var editorDeleteButton = CreateDeleteButton(scene, config, editorToolbarStyle);
     var editorDuplicateButton = CreateDuplicateButton(scene, config, editorToolbarStyle);
     var editorResetButton = CreateResetButton(scene, config, editorToolbarStyle);
@@ -117,6 +135,12 @@ var CreateListDetail = function (parent, config, style) {
         // Editor at right panel
         editor: editor,
         editorSlider: editorSlider,
+        // Title (header)
+        editorIndexLabel: editorIndexLabel,
+        editorDisplayNameLabel: editorDisplayNameLabel,
+        indexLabelCallback: indexLabelCallback,
+        displayNameLabelCallback: displayNameLabelCallback,
+        // Toolbar (footer)
         editorDeleteButton: editorDeleteButton,
         editorDuplicateButton: editorDuplicateButton,
         editorResetButton: editorResetButton,

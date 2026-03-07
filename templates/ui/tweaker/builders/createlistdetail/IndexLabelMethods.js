@@ -3,12 +3,8 @@ import CreateTitleLabel from '../utils/CreateTitleLabel.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Format = Phaser.Utils.String.Format;
 
-var GetIndexLabelStyle = function (style, altStyle) {
+var GetIndexLabelStyle = function (style) {
     var indexStyle = GetValue(style, 'index');
-
-    if (!indexStyle && altStyle) {
-        indexStyle = GetValue(altStyle, 'tweaker.inputRow.title') || {};
-    }
 
     if (!indexStyle) {
         indexStyle = GetValue(style, 'tweaker.inputRow.title') || {};

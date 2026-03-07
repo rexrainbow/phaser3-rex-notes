@@ -56,7 +56,6 @@ class Demo extends Phaser.Scene {
             })
             .layout()
 
-        debugger
     }
 
     update() {

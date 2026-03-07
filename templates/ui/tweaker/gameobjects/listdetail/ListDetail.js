@@ -30,6 +30,12 @@ class ListDetail extends SplitPanels {
             // Editor at right panel
             editor,
             editorSlider,
+            // Title (header)
+            editorIndexLabel,
+            editorDisplayNameLabel,
+            indexLabelCallback,
+            displayNameLabelCallback,
+            // Toolbar (footer)
             editorDeleteButton,
             editorDuplicateButton,
             editorResetButton,
@@ -74,6 +80,9 @@ class ListDetail extends SplitPanels {
             },
 
             slider: editorSlider,
+
+            editorIndexLabel: editorIndexLabel,
+            editorDisplayNameLabel: editorDisplayNameLabel,
 
             editorDeleteButton: editorDeleteButton,
             editorDuplicateButton: editorDuplicateButton,
@@ -124,6 +133,8 @@ class ListDetail extends SplitPanels {
         this.alignInputRowTitleStartFlag = GetValue(config, 'alignTitle');
         this.selectedItem = undefined;
         this.selectedIndex = undefined;
+        this.indexLabelCallback = indexLabelCallback;
+        this.displayNameLabelCallback = displayNameLabelCallback;
 
         listTable
             .on('select', this.onSelectCell, this)
@@ -229,6 +240,7 @@ class ListDetail extends SplitPanels {
 
         // Re-run cell callback so displayNameLabel(index, item, items) can be updated.
         listTable.updateVisibleCell(index);
+        this.updateEditorTitle(index, bindingTarget, items);
     }
 
     onToolbarDelete() {
@@ -315,6 +327,7 @@ class ListDetail extends SplitPanels {
         // Refresh editor and list row display.
         this.rightPanel.setBindingTarget(currentItem);
         listTable.updateVisibleCell(index);
+        this.updateEditorTitle(index, currentItem, items);
     }
 
     createDefaultItemFromToolbar(buttonKey, actionName) {
@@ -354,6 +367,7 @@ class ListDetail extends SplitPanels {
 
         listTable.selectedIndex = index;
         this.rightPanel.setBindingTarget(this.selectedItem);
+        this.updateEditorTitle(index, this.selectedItem, items);
 
         if (scrollToRow) {
             listTable.scrollToRow(index);
@@ -372,9 +386,31 @@ class ListDetail extends SplitPanels {
         var listTable = this.leftPanel;
         listTable.selectedIndex = undefined;
         this.rightPanel.setBindingTarget(undefined);
+        this.updateEditorTitle();
 
         this.updateVisibleCellSelection();
         this.emit('selectitem', undefined, undefined, listTable.items);
+        return this;
+    }
+
+    updateEditorTitle(index, item, items) {
+        if (index === undefined) {
+            this.rightPanel.setTitle(undefined, undefined);
+            return this;
+        }
+
+        if (items === undefined) {
+            items = this.leftPanel.items;
+        }
+
+        var indexLabelCallback = this.indexLabelCallback;
+        var indexConfig = (indexLabelCallback) ? indexLabelCallback(index, item, items) : undefined;
+
+        var displayNameLabelCallback = this.displayNameLabelCallback;
+        var displayNameConfig = (displayNameLabelCallback) ? displayNameLabelCallback(index, item, items) : undefined;
+
+        this.rightPanel.setTitle(indexConfig, displayNameConfig);
+
         return this;
     }
 

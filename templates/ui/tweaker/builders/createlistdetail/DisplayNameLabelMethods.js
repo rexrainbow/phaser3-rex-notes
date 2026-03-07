@@ -2,12 +2,8 @@ import CreateTitleLabel from '../utils/CreateTitleLabel.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var GetDisplayNameStyle = function (style, altStyle) {
+var GetDisplayNameStyle = function (style) {
     var displayNameStyle = GetValue(style, 'displayName');
-
-    if (!displayNameStyle && altStyle) {
-        displayNameStyle = GetValue(altStyle, 'displayName');
-    }
 
     if (!displayNameStyle) {
         displayNameStyle = GetValue(style, 'tweaker.inputRow.title') || {};
