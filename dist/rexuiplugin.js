@@ -78134,14 +78134,14 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             var resetButton = GetValue$t(config, 'editorResetButton');
 
             // Align to right side
-            this.addSpace();
-
             if (deleteButton) {
                 this.add(
                     deleteButton,
                     { proportion: 0, expand: true }
                 );
             }
+
+            this.addSpace();
 
             if (duplicateButton) {
                 this.add(

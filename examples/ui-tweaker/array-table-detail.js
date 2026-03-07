@@ -111,6 +111,7 @@ var CreatePanel = function (scene, isVerticalView) {
                 title: {
                     space: { icon: 2 },
                     iconSize: 30,
+                    text: { padding: { top: 5 } }
                 },
 
                 inputText: {
