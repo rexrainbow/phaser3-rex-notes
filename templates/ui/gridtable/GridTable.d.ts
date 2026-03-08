@@ -267,15 +267,27 @@ declare class GridTable extends Scrollable {
     resetCellSizeFromCell(cellIndex?: number): this;
 
     /**
-     * Scroll to a row.
+     * Scroll to a row, optionally with easing animation.
      * @param rowIndex - Row index.
+     * @param duration - Duration in ms. Use 0 or undefined for immediate scroll.
+     * @param ease - Easing function name used when duration is greater than 0.
      * @returns This instance.
      */
-    scrollToRow(rowIndex: number): this;
+    scrollToRow(
+        rowIndex: number,
+        duration?: number,
+        ease?: string
+    ): this;
     /**
-     * Scroll to the next row.
+     * Scroll by row count from the current start row.
      * @param rowCount - Row count to move.
+     * @param duration - Duration in ms for scroll animation.
+     * @param ease - Easing function name used for scroll animation.
      * @returns This instance.
      */
-    scrollToNextRow(rowCount?: number): this;
+    scrollToNextRow(
+        rowCount?: number,
+        duration?: number,
+        ease?: string
+    ): this;
 }

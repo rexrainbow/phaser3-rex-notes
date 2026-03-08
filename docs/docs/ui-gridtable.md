@@ -629,13 +629,22 @@ table.resetAllCellsSize(width, height);
     ```javascript
     table.scrollToNextRow();
     ```
+    ```javascript
+    table.scrollToNextRow(1, duration);  // Ease scrolling
+    ```
 - Scroll to next n row
     ```javascript
     table.scrollToNextRow(n);
     ```
+    ```javascript
+    table.scrollToNextRow(n, duration);  // Ease scrolling
+    ```
 - Scroll to row
     ```javascript
     table.scrollToRow(rowIndex);
+    ```
+    ```javascript
+    table.scrollToRow(rowIndex, duration);  // Ease scrolling
     ```
 - Get current row index
     ```javascript

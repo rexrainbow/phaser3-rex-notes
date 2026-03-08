@@ -44840,15 +44840,37 @@ void main (void) {
     };
 
     var ScrollMethods$1 = {
-        scrollToRow(rowIndex) {
+        scrollToRow(rowIndex, duration, ease) {
+            var startChildOY = this.childOY;
+
             var table = this.childrenMap.child;
             table.scrollToRow(rowIndex);
+
+            if ((duration === undefined) || (duration <= 0)) {
+                this.updateController();
+
+            } else {
+                var endChildOY = this.childOY;
+
+                if (this._easeScrollChildOY === undefined) {
+                    this._easeScrollChildOY = new EaseValueTask(this);
+                }
+
+                this._easeScrollChildOY.restart({
+                    key: 'childOY',
+                    from: startChildOY,
+                    to: endChildOY,
+                    duration: duration,
+                    ease: ease
+                });
+            }
+
             return this;
         },
 
-        scrollToNextRow(rowCount) {
+        scrollToNextRow(rowCount, duration, ease) {
             var table = this.childrenMap.child;
-            table.scrollToNextRow(rowCount);
+            table.scrollToNextRow(rowCount, duration, ease);
             return this;
         }
     };
@@ -47003,7 +47025,7 @@ void main (void) {
             this.updateEditorTitle(index, this.selectedItem, items);
 
             if (scrollToRow) {
-                listTable.scrollToRow(index);
+                listTable.scrollToRow(index, 500);
             }
 
             this.updateVisibleCellSelection();
