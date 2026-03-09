@@ -1444,6 +1444,8 @@ Array table is a [grid-table](ui-gridtable.md) contains sub-tweaker panel for ea
 
 ```javascript
 tweaker.addArrayTable(target, bindingKey, {
+    // view: 'inline',
+
     $properties: [
         {$key: ...},
     ],
@@ -1462,6 +1464,10 @@ or
 
 ```javascript
 tweaker.addArrayTable({
+    // height: 0,
+
+    // view: 'inline',
+
     // title: title,
 
     // bindingTarget:
@@ -1472,12 +1478,24 @@ tweaker.addArrayTable({
 
     // monitor: 
 
-    // createDefaultItem() { return item; /* An object or number, string, boolean */ }
+    // createDefaultItem() { return item; /* An object or number, string, boolean */ },
 
-    // height: 0
+    // displayNameLabel(index, item, items) {
+    //     return { text: item.name };
+    // },
+
+    // splitRatio: 0.5,
+    
 });
 ```
 
+- `height` :
+    - A number : Height of this [Scrollable(Panel)](ui-scrollablepanel.md).
+    - `undefined`, or `0` : Expand this scrollable(Panel).
+- `view` : 
+    - `'inline'`, or `undefined` : Properties editor in each cell
+    - `'detail-v'`, or `'detail'` : List-detail in vertical view, properties editor in lower panel.
+    - `'detail-h'`, or `'detail'` : List-detail in horizontal view, properties editor in right panel.
 - `title` Title of array table.
     - A string : Title string.
 - `$properties` :
@@ -1489,9 +1507,14 @@ tweaker.addArrayTable({
         return item; /* An object or number, string, boolean */
     }
     ```
-- `height` :
-    - A number : Height of this [Scrollable(Panel)](ui-scrollablepanel.md).
-    - `undefined`, or `0` : Expand this scrollable(Panel).
+- `displayNameLabel` : Callback of rendering displayNameLabel (A [simpleLabel game object](ui-simplelabel.md)) used in `'detail'` view. 
+    ```javascript
+    function(index, item, items) {
+        return { text: item.name };
+    }
+    ```
+- `splitRatio` : Position of splitter. `0`~`1`. Default value is `0.5`. Used in `'detail'` view.
+
 
 See [Style of array table](#style-of-array-table)
 

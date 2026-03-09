@@ -712,8 +712,8 @@ declare namespace Tweaker {
      * Configuration for adding an array table.
      */
     interface IAddArrayTableConfig {
-        /** Array-table view mode. Set to `'detail'` for list-detail layout. */
-        view?: string,
+        /** Array-table view mode. */
+        view?: 'inline' | 'detail' | 'detail-v' | 'detail-h',
 
         /** Optional title shown above the array table. */
         title?: string,

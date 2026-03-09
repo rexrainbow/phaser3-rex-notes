@@ -94,13 +94,13 @@ var splitPanels = scene.rexUI.add.splitPanels({
 
     splitter: splitterGameObject,
 
-    minLeftPanelWidth: 0,
-    minTopPanelHeight: 0,
+    // minLeftPanelWidth: 0,
+    // minTopPanelHeight: 0,
 
-    minRightPanelWidth: 0,
-    minBottomPanelHeight: 0,
+    // minRightPanelWidth: 0,
+    // minBottomPanelHeight: 0,
 
-    splitRatio: 0.5
+    // splitRatio: 0.5
 
     
     space: {

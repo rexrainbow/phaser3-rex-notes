@@ -17423,6 +17423,8 @@ actionSize: undefined,
 <h3 id="add-array-table">Add Array table<a class="headerlink" href="#add-array-table" title="Permanent link">&para;</a></h3>
 <p>Array table is a <a href="../ui-gridtable/">grid-table</a> contains sub-tweaker panel for each cell.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">tweaker</span><span class="p">.</span><span class="nx">addArrayTable</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span><span class="w"> </span><span class="nx">bindingKey</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// view: &#39;inline&#39;,</span>
+
 <span class="w">    </span><span class="nx">$properties</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">        </span><span class="p">{</span><span class="nx">$key</span><span class="o">:</span><span class="w"> </span><span class="p">...},</span>
 <span class="w">    </span><span class="p">],</span>
@@ -17438,6 +17440,10 @@ actionSize: undefined,
 </code></pre></div>
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="nx">tweaker</span><span class="p">.</span><span class="nx">addArrayTable</span><span class="p">({</span>
+<span class="w">    </span><span class="c1">// height: 0,</span>
+
+<span class="w">    </span><span class="c1">// view: &#39;inline&#39;,</span>
+
 <span class="w">    </span><span class="c1">// title: title,</span>
 
 <span class="w">    </span><span class="c1">// bindingTarget:</span>
@@ -17448,12 +17454,28 @@ actionSize: undefined,
 
 <span class="w">    </span><span class="c1">// monitor: </span>
 
-<span class="w">    </span><span class="c1">// createDefaultItem() { return item; /* An object or number, string, boolean */ }</span>
+<span class="w">    </span><span class="c1">// createDefaultItem() { return item; /* An object or number, string, boolean */ },</span>
 
-<span class="w">    </span><span class="c1">// height: 0</span>
+<span class="w">    </span><span class="c1">// displayNameLabel(index, item, items) {</span>
+<span class="w">    </span><span class="c1">//     return { text: item.name };</span>
+<span class="w">    </span><span class="c1">// },</span>
+
+<span class="w">    </span><span class="c1">// splitRatio: 0.5,</span>
+
 <span class="p">});</span>
 </code></pre></div>
 <ul>
+<li><code>height</code> :<ul>
+<li>A number : Height of this <a href="../ui-scrollablepanel/">Scrollable(Panel)</a>.</li>
+<li><code>undefined</code>, or <code>0</code> : Expand this scrollable(Panel).</li>
+</ul>
+</li>
+<li><code>view</code> : <ul>
+<li><code>'inline'</code>, or <code>undefined</code> : Properties editor in each cell</li>
+<li><code>'detail-v'</code>, or <code>'detail'</code> : List-detail in vertical view, properties editor in lower panel.</li>
+<li><code>'detail-h'</code>, or <code>'detail'</code> : List-detail in horizontal view, properties editor in right panel.</li>
+</ul>
+</li>
 <li><code>title</code> Title of array table.<ul>
 <li>A string : Title string.</li>
 </ul>
@@ -17468,11 +17490,12 @@ actionSize: undefined,
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">item</span><span class="p">;</span><span class="w"> </span><span class="cm">/* An object or number, string, boolean */</span>
 <span class="p">}</span>
 </code></pre></div></li>
-<li><code>height</code> :<ul>
-<li>A number : Height of this <a href="../ui-scrollablepanel/">Scrollable(Panel)</a>.</li>
-<li><code>undefined</code>, or <code>0</code> : Expand this scrollable(Panel).</li>
-</ul>
-</li>
+<li><code>displayNameLabel</code> : Callback of rendering displayNameLabel (A <a href="../ui-simplelabel/">simpleLabel game object</a>) used in <code>'detail'</code> view. 
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span><span class="w"> </span><span class="nx">item</span><span class="p">,</span><span class="w"> </span><span class="nx">items</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="nx">item</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="p">};</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li><code>splitRatio</code> : Position of splitter. <code>0</code>~<code>1</code>. Default value is <code>0.5</code>. Used in <code>'detail'</code> view.</li>
 </ul>
 <p>See <a href="#style-of-array-table">Style of array table</a></p>
 <h3 id="add-rows">Add rows<a class="headerlink" href="#add-rows" title="Permanent link">&para;</a></h3>
