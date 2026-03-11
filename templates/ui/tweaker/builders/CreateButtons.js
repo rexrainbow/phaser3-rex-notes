@@ -1,4 +1,4 @@
-import CreateRoundRectangle from '../../utils/build/CreateRoundRectangle.js';
+import CreateBackground from './utils/CreateBackground.js';
 import CreateTitleLabel from './utils/CreateTitleLabel.js';
 import CreateLabel from '../../utils/build/CreateLabel.js';
 import CreateButtonsSizer from '../gameobjects/utils/CreateButtons.js';
@@ -9,6 +9,9 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 var CreateButtons = function (scene, config, style) {
     if (!config) { config = {}; }
     if (!style) { style = {}; }
+
+    // Background
+    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
     // Title
     var title;
@@ -37,9 +40,8 @@ var CreateButtons = function (scene, config, style) {
     });
     buttonsSizer.defaultProportion = 1;
 
-    // Background
-    var backgroundStyle = GetValue(style, 'background') || {};
-    var background = CreateRoundRectangle(scene, backgroundStyle);
+    // Border
+    var border = CreateBackground(scene, (config.border || {}), (style.border || {}));
 
     // InputRow
     var inputRow = new InputRow(scene, {
@@ -48,6 +50,7 @@ var CreateButtons = function (scene, config, style) {
         inputTitle: title,
         inputField: buttonsSizer,
         background: background,
+        border: border,
     })
     scene.add.existing(inputRow);
 

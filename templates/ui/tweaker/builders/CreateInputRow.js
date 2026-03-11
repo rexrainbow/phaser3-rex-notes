@@ -24,7 +24,7 @@ var CreateInputRow = function (scene, config, style) {
         inputTitle = CreateTitleLabel(scene, config, titleStyle);
     }
 
-    // Background
+    // Border
     var border = CreateBackground(scene, (config.border || {}), (style.border || {}));
 
     var inputRow = new InputRow(scene, {

@@ -61402,7 +61402,7 @@
 	        inputTitle = CreateTitleLabel(scene, config, titleStyle);
 	    }
 
-	    // Background
+	    // Border
 	    var border = CreateBackground(scene, (config.border || {}), (style.border || {}));
 
 	    var inputRow = new InputRow(scene, {
@@ -61513,13 +61513,6 @@
 	    return this;
 	};
 
-	var CreateRoundRectangle = function (scene, config) {
-	    var gameObject = new RoundRectangle$1(scene, config);
-	    scene.add.existing(gameObject);
-
-	    return gameObject;
-	};
-
 	const GetValue$11 = Phaser.Utils.Objects.GetValue;
 
 	var CreateButtons$3 = function (scene, config) {
@@ -61535,6 +61528,9 @@
 	var CreateButtons$2 = function (scene, config, style) {
 	    if (!config) { config = {}; }
 	    if (!style) { style = {}; }
+
+	    // Background
+	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
 	    // Title
 	    var title;
@@ -61563,9 +61559,8 @@
 	    });
 	    buttonsSizer.defaultProportion = 1;
 
-	    // Background
-	    var backgroundStyle = GetValue$10(style, 'background') || {};
-	    var background = CreateRoundRectangle(scene, backgroundStyle);
+	    // Border
+	    var border = CreateBackground(scene, (config.border || {}), (style.border || {}));
 
 	    // InputRow
 	    var inputRow = new InputRow(scene, {
@@ -61574,6 +61569,7 @@
 	        inputTitle: title,
 	        inputField: buttonsSizer,
 	        background: background,
+	        border: border,
 	    });
 	    scene.add.existing(inputRow);
 

@@ -80410,7 +80410,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             inputTitle = CreateTitleLabel(scene, config, titleStyle);
         }
 
-        // Background
+        // Border
         var border = CreateBackground(scene, (config.border || {}), (style.border || {}));
 
         var inputRow = new InputRow(scene, {
@@ -80521,13 +80521,6 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return this;
     };
 
-    var CreateRoundRectangle = function (scene, config) {
-        var gameObject = new RoundRectangle$2(scene, config);
-        scene.add.existing(gameObject);
-
-        return gameObject;
-    };
-
     const GetValue$g = Phaser.Utils.Objects.GetValue;
 
     var CreateButtons$2 = function (scene, config) {
@@ -80543,6 +80536,9 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
     var CreateButtons$1 = function (scene, config, style) {
         if (!config) { config = {}; }
         if (!style) { style = {}; }
+
+        // Background
+        var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
         // Title
         var title;
@@ -80571,9 +80567,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         });
         buttonsSizer.defaultProportion = 1;
 
-        // Background
-        var backgroundStyle = GetValue$f(style, 'background') || {};
-        var background = CreateRoundRectangle(scene, backgroundStyle);
+        // Border
+        var border = CreateBackground(scene, (config.border || {}), (style.border || {}));
 
         // InputRow
         var inputRow = new InputRow(scene, {
@@ -80582,6 +80577,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             inputTitle: title,
             inputField: buttonsSizer,
             background: background,
+            border: border,
         });
         scene.add.existing(inputRow);
 
