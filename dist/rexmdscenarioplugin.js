@@ -51591,6 +51591,9 @@
 
 	    var scene = parent.scene;
 
+	    // background
+	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
+
 	    // Create Folder-title
 	    var title = new FolderTitle(scene, (style.title || {}));
 	    scene.add.existing(title);
@@ -51609,9 +51612,6 @@
 	        styles: style.tweaker,
 	    };
 	    var child = parent.createTweaker(tweakerConfig);
-
-	    // background
-	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
 	    var folder = new Folder(scene, {
 	        title: title,
@@ -53862,6 +53862,9 @@
 
 	    var scene = parent.scene;
 
+	    // background
+	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
+
 	    // title    
 	    var title = CreateTitleLabel(scene, undefined, style.title);
 
@@ -53889,9 +53892,6 @@
 
 	        columnConfig.child = tweakerChild;
 	    }
-
-	    // background
-	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
 	    var columns = new Columns(scene, {
 	        title: title,
@@ -54599,6 +54599,9 @@
 
 	    var scene = parent.scene;
 
+	    // background
+	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
+
 	    // title
 	    var title = CreateTitleLabel(scene, (style.title || {}));
 
@@ -54619,9 +54622,6 @@
 	        splitterStyle = DefaultSplitStyle$1;
 	    }
 	    splitter = CreateBackground(scene, (splitterConfig || {}), (splitterStyle || {}));
-
-	    // background
-	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
 	    var splitPanels = new SplitPanels(scene, {
 	        header: title,
@@ -54772,7 +54772,11 @@
 	var CreateWrap = function (parent, config, style) {
 	    if (!config) { config = {}; }
 	    if (!style) { style = {}; }
+
 	    var scene = parent.scene;
+
+	    // background
+	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
 	    // title    
 	    var title = CreateTitleLabel(scene, undefined, (style.title || {}));
@@ -54789,9 +54793,6 @@
 	    };
 
 	    var tweakerChild = parent.createTweaker(tweakerConfig);
-
-	    // background
-	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
 	    var wrap = new Wrap(scene, {
 	        title: title,
@@ -55912,6 +55913,9 @@
 
 	    var scene = parent.scene;
 
+	    // background
+	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
+
 	    // title
 	    var title = CreateTitleLabel(scene, undefined, (style.title || {}));
 
@@ -55924,9 +55928,6 @@
 
 	    // slider
 	    var slider = CreateSlider$1(scene, config.slider, style.slider);
-
-	    // background
-	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
 	    var scrollable = new Scrollable(scene, {
 	        scrollMode: 0,
@@ -58841,6 +58842,8 @@
 	        backgroundStyle,
 	    } = config;
 
+	    var background = CreateBackground(scene, {}, backgroundStyle);
+
 	    var indexLabel = CreateTitleLabel(scene, undefined, indexStyle);
 
 	    var deleteButton = createDeleteButton(scene);
@@ -58865,9 +58868,7 @@
 	    var inputTweaker = parent.createTweaker(tweakerConfig)
 	        .setAlignInputRowTitleEnable(isObjectItem)
 	        .addRows(properties, target, tweakerAddRowsParameters.monitor);
-
-	    var background = CreateBackground(scene, {}, backgroundStyle);
-
+	    
 	    // Assemble elements
 	    var cellContainer = new CellContainer$1(scene, {
 	        space,
@@ -58972,7 +58973,11 @@
 	var CreateArrayTable = function (parent, config, style) {
 	    if (!config) { config = {}; }
 	    if (!style) { style = {}; }
+
 	    var scene = parent.scene;
+
+	    // background
+	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
 	    // title
 	    var title = CreateTitleLabel(scene, undefined, (style.title || {}));
@@ -59010,9 +59015,6 @@
 	            );
 	        }
 	    }
-
-	    // background
-	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
 	    var arrayTable = new ArrayTable(scene, {
 	        table: tableConfig,
@@ -60500,6 +60502,8 @@
 	        backgroundStyle,
 	    } = config;
 
+	    var background = CreateBackground(scene, {}, backgroundStyle);
+
 	    var indexLabel = CreateIndexLabel(scene, indexStyle);
 
 	    var displayNameLabel = CreateDisplayNameLabel(scene, displayNameStyle);
@@ -60509,8 +60513,6 @@
 	    var moveUpButton = createMoveUpButton(scene);
 
 	    var moveDownButton = createMoveDownButton(scene);
-
-	    var background = CreateBackground(scene, {}, backgroundStyle);
 
 	    // Assemble elements
 	    var cellContainer = new CellContainer(scene, {
@@ -60694,6 +60696,9 @@
 	    if (!style) { style = {}; }
 	    var scene = parent.scene;
 
+	    // background of split-panels
+	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
+
 	    // title of split-panels
 	    var title = CreateTitleLabel(scene, undefined, (style.title || {}));
 
@@ -60784,9 +60789,6 @@
 	        splitterStyle = DefaultSplitStyle;
 	    }
 	    var splitter = CreateBackground(scene, (splitterConfig || {}), (splitterStyle || {}));
-
-	    // background of split-panels
-	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
 	    var listDetail = new ListDetail(scene, {
 	        isHorizontalView: (config.view === 'detail-h'),
@@ -61105,6 +61107,7 @@
 	        var inputTitle = config.inputTitle; // A game object, or undefined/null/false
 	        var inputField = config.inputField;
 	        var background = config.background;
+	        var border = config.border;
 
 	        if (inputTitle) {
 	            var proportion = GetValue$12(config, 'proportion.title', 0);
@@ -61135,9 +61138,14 @@
 	            this.addBackground(background);
 	        }
 
+	        if (border) {
+	            this.addBackground(border);
+	        }
+
 	        this.addChildrenMap('title', inputTitle);
 	        this.addChildrenMap('inputField', inputField);
 	        this.addChildrenMap('background', background);
+	        this.addChildrenMap('border', border);
 
 	        this.setupBinding();
 
@@ -61373,11 +61381,12 @@
 	    return inputField;
 	};
 
-	Phaser.Utils.Objects.GetValue;
-
 	var CreateInputRow = function (scene, config, style) {
 	    if (!config) { config = {}; }
 	    if (!style) { style = {}; }
+
+	    // Background
+	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
 	    // InputField
 	    var inputField = CreateInputField.call(this, scene, config, style);
@@ -61394,7 +61403,7 @@
 	    }
 
 	    // Background
-	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
+	    var border = CreateBackground(scene, (config.border || {}), (style.border || {}));
 
 	    var inputRow = new InputRow(scene, {
 	        ...style,
@@ -61403,6 +61412,7 @@
 	        inputTitle: inputTitle,
 	        inputField: inputField,
 	        background: background,
+	        border: border,
 	    });
 	    scene.add.existing(inputRow);
 

@@ -76172,6 +76172,9 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
         var scene = parent.scene;
 
+        // background
+        var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
+
         // Create Folder-title
         var title = new FolderTitle(scene, (style.title || {}));
         scene.add.existing(title);
@@ -76190,9 +76193,6 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             styles: style.tweaker,
         };
         var child = parent.createTweaker(tweakerConfig);
-
-        // background
-        var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
         var folder = new Folder(scene, {
             title: title,
@@ -76527,6 +76527,9 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
         var scene = parent.scene;
 
+        // background
+        var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
+
         // title    
         var title = CreateTitleLabel(scene, undefined, style.title);
 
@@ -76554,9 +76557,6 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
             columnConfig.child = tweakerChild;
         }
-
-        // background
-        var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
         var columns = new Columns(scene, {
             title: title,
@@ -76702,6 +76702,9 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
         var scene = parent.scene;
 
+        // background
+        var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
+
         // title
         var title = CreateTitleLabel(scene, (style.title || {}));
 
@@ -76722,9 +76725,6 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             splitterStyle = DefaultSplitStyle$1;
         }
         splitter = CreateBackground(scene, (splitterConfig || {}), (splitterStyle || {}));
-
-        // background
-        var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
         var splitPanels = new SplitPanels(scene, {
             header: title,
@@ -76875,7 +76875,11 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
     var CreateWrap = function (parent, config, style) {
         if (!config) { config = {}; }
         if (!style) { style = {}; }
+
         var scene = parent.scene;
+
+        // background
+        var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
         // title    
         var title = CreateTitleLabel(scene, undefined, (style.title || {}));
@@ -76892,9 +76896,6 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         };
 
         var tweakerChild = parent.createTweaker(tweakerConfig);
-
-        // background
-        var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
         var wrap = new Wrap(scene, {
             title: title,
@@ -77021,6 +77022,9 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
         var scene = parent.scene;
 
+        // background
+        var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
+
         // title
         var title = CreateTitleLabel(scene, undefined, (style.title || {}));
 
@@ -77033,9 +77037,6 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
         // slider
         var slider = CreateSlider$1(scene, config.slider, style.slider);
-
-        // background
-        var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
         var scrollable = new Scrollable(scene, {
             scrollMode: 0,
@@ -77849,6 +77850,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             backgroundStyle,
         } = config;
 
+        var background = CreateBackground(scene, {}, backgroundStyle);
+
         var indexLabel = CreateTitleLabel(scene, undefined, indexStyle);
 
         var deleteButton = createDeleteButton(scene);
@@ -77873,9 +77876,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         var inputTweaker = parent.createTweaker(tweakerConfig)
             .setAlignInputRowTitleEnable(isObjectItem)
             .addRows(properties, target, tweakerAddRowsParameters.monitor);
-
-        var background = CreateBackground(scene, {}, backgroundStyle);
-
+        
         // Assemble elements
         var cellContainer = new CellContainer$1(scene, {
             space,
@@ -77980,7 +77981,11 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
     var CreateArrayTable = function (parent, config, style) {
         if (!config) { config = {}; }
         if (!style) { style = {}; }
+
         var scene = parent.scene;
+
+        // background
+        var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
         // title
         var title = CreateTitleLabel(scene, undefined, (style.title || {}));
@@ -78018,9 +78023,6 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 );
             }
         }
-
-        // background
-        var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
         var arrayTable = new ArrayTable(scene, {
             table: tableConfig,
@@ -79508,6 +79510,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             backgroundStyle,
         } = config;
 
+        var background = CreateBackground(scene, {}, backgroundStyle);
+
         var indexLabel = CreateIndexLabel(scene, indexStyle);
 
         var displayNameLabel = CreateDisplayNameLabel(scene, displayNameStyle);
@@ -79517,8 +79521,6 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         var moveUpButton = createMoveUpButton(scene);
 
         var moveDownButton = createMoveDownButton(scene);
-
-        var background = CreateBackground(scene, {}, backgroundStyle);
 
         // Assemble elements
         var cellContainer = new CellContainer(scene, {
@@ -79702,6 +79704,9 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         if (!style) { style = {}; }
         var scene = parent.scene;
 
+        // background of split-panels
+        var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
+
         // title of split-panels
         var title = CreateTitleLabel(scene, undefined, (style.title || {}));
 
@@ -79792,9 +79797,6 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             splitterStyle = DefaultSplitStyle;
         }
         var splitter = CreateBackground(scene, (splitterConfig || {}), (splitterStyle || {}));
-
-        // background of split-panels
-        var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
         var listDetail = new ListDetail(scene, {
             isHorizontalView: (config.view === 'detail-h'),
@@ -80113,6 +80115,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             var inputTitle = config.inputTitle; // A game object, or undefined/null/false
             var inputField = config.inputField;
             var background = config.background;
+            var border = config.border;
 
             if (inputTitle) {
                 var proportion = GetValue$h(config, 'proportion.title', 0);
@@ -80143,9 +80146,14 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                 this.addBackground(background);
             }
 
+            if (border) {
+                this.addBackground(border);
+            }
+
             this.addChildrenMap('title', inputTitle);
             this.addChildrenMap('inputField', inputField);
             this.addChildrenMap('background', background);
+            this.addChildrenMap('border', border);
 
             this.setupBinding();
 
@@ -80381,11 +80389,12 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return inputField;
     };
 
-    Phaser.Utils.Objects.GetValue;
-
     var CreateInputRow = function (scene, config, style) {
         if (!config) { config = {}; }
         if (!style) { style = {}; }
+
+        // Background
+        var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
         // InputField
         var inputField = CreateInputField.call(this, scene, config, style);
@@ -80402,7 +80411,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         }
 
         // Background
-        var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
+        var border = CreateBackground(scene, (config.border || {}), (style.border || {}));
 
         var inputRow = new InputRow(scene, {
             ...style,
@@ -80411,6 +80420,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             inputTitle: inputTitle,
             inputField: inputField,
             background: background,
+            border: border,
         });
         scene.add.existing(inputRow);
 
