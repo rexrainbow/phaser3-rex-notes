@@ -3,11 +3,12 @@ import CreateBackground from './utils/CreateBackground.js';
 import CreateTitleLabel from './utils/CreateTitleLabel.js';
 import CreateInputField from './CreateInputField.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-
 var CreateInputRow = function (scene, config, style) {
     if (!config) { config = {}; }
     if (!style) { style = {}; }
+
+    // Background
+    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
     // InputField
     var inputField = CreateInputField.call(this, scene, config, style);
@@ -24,7 +25,7 @@ var CreateInputRow = function (scene, config, style) {
     }
 
     // Background
-    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
+    var border = CreateBackground(scene, (config.border || {}), (style.border || {}));
 
     var inputRow = new InputRow(scene, {
         ...style,
@@ -33,6 +34,7 @@ var CreateInputRow = function (scene, config, style) {
         inputTitle: inputTitle,
         inputField: inputField,
         background: background,
+        border: border,
     });
     scene.add.existing(inputRow);
 

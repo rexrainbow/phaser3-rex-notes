@@ -104,7 +104,7 @@ var CreatePanel = function (scene, isVerticalView) {
                     range: { slider: 2, inputText: 1 }
                 },
 
-                background: {
+                border: {
                     strokeColor: COLOR_MAIN
                 },
 
@@ -116,7 +116,7 @@ var CreatePanel = function (scene, isVerticalView) {
 
                 inputText: {
                     background: {
-                        color: COLOR_DARK
+                        color: COLOR_DARK,
                     },
                     focusStyle: {
                         color: COLOR_MAIN,
@@ -316,7 +316,7 @@ var CreatePanel = function (scene, isVerticalView) {
                     coloe: null,
                     strokeWidth: 0,
                     'active.color': COLOR_LIGHT,
-                    'active.alpha': 0.3,
+                    'active.alpha': 0.5,
                     'hover.strokeColor': 0xffffff,
                     'hover.strokeWidth': 2,
                 },

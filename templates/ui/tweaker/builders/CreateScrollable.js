@@ -11,6 +11,9 @@ var CreateScrollable = function (parent, config, style) {
 
     var scene = parent.scene;
 
+    // background
+    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
+
     // title
     var title = CreateTitleLabel(scene, undefined, (style.title || {}));
 
@@ -23,9 +26,6 @@ var CreateScrollable = function (parent, config, style) {
 
     // slider
     var slider = CreateSlider(scene, config.slider, style.slider);
-
-    // background
-    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
     var scrollable = new Scrollable(scene, {
         scrollMode: 0,

@@ -29,6 +29,9 @@ var CreateListDetail = function (parent, config, style) {
     if (!style) { style = {}; }
     var scene = parent.scene;
 
+    // background of split-panels
+    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
+
     // title of split-panels
     var title = CreateTitleLabel(scene, undefined, (style.title || {}));
 
@@ -119,9 +122,6 @@ var CreateListDetail = function (parent, config, style) {
         splitterStyle = DefaultSplitStyle;
     }
     var splitter = CreateBackground(scene, (splitterConfig || {}), (splitterStyle || {}));
-
-    // background of split-panels
-    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
     var listDetail = new ListDetail(scene, {
         isHorizontalView: (config.view === 'detail-h'),

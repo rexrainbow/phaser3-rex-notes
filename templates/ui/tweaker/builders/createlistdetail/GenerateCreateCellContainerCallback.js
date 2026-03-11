@@ -24,6 +24,8 @@ var CreateCellContainer = function (parent, cell, config) {
         backgroundStyle,
     } = config;
 
+    var background = CreateBackground(scene, {}, backgroundStyle);
+
     var indexLabel = CreateIndexLabel(scene, indexStyle);
 
     var displayNameLabel = CreateDisplayNameLabel(scene, displayNameStyle);
@@ -33,8 +35,6 @@ var CreateCellContainer = function (parent, cell, config) {
     var moveUpButton = createMoveUpButton(scene);
 
     var moveDownButton = createMoveDownButton(scene);
-
-    var background = CreateBackground(scene, {}, backgroundStyle);
 
     // Assemble elements
     var cellContainer = new CellContainer(scene, {

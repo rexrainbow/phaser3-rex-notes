@@ -10,6 +10,9 @@ var CreateFolder = function (parent, config, style) {
 
     var scene = parent.scene;
 
+    // background
+    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
+
     // Create Folder-title
     var title = new FolderTitle(scene, (style.title || {}));
     scene.add.existing(title);
@@ -28,9 +31,6 @@ var CreateFolder = function (parent, config, style) {
         styles: style.tweaker,
     }
     var child = parent.createTweaker(tweakerConfig);
-
-    // background
-    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
     var folder = new Folder(scene, {
         title: title,

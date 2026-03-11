@@ -125,6 +125,9 @@ declare namespace Tweaker {
         /** Background style of each input row. */
         background?: CreateBackground.IConfig,
 
+        /** Border style of each input row. */
+        border?: CreateBackground.IConfig,
+
         /** Title label style of each input row. */
         title?: SimpleLabel.IConfig,
 

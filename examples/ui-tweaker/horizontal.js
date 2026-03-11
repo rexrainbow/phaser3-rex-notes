@@ -89,7 +89,7 @@ var CreatePanel = function (scene) {
             },
 
             inputRow: {
-                background: {
+                border: {
                     strokeColor: COLOR_MAIN
                 },
 

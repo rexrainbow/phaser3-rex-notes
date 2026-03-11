@@ -10,6 +10,9 @@ var CreateColumns = function (parent, config, style) {
 
     var scene = parent.scene;
 
+    // background
+    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
+
     // title    
     var title = CreateTitleLabel(scene, undefined, style.title);
 
@@ -37,9 +40,6 @@ var CreateColumns = function (parent, config, style) {
 
         columnConfig.child = tweakerChild;
     }
-
-    // background
-    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
     var columns = new Columns(scene, {
         title: title,

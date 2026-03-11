@@ -17,6 +17,7 @@ class InputRow extends Sizer {
         var inputTitle = config.inputTitle; // A game object, or undefined/null/false
         var inputField = config.inputField;
         var background = config.background;
+        var border = config.border;
 
         if (inputTitle) {
             var proportion = GetValue(config, 'proportion.title', 0);
@@ -47,9 +48,14 @@ class InputRow extends Sizer {
             this.addBackground(background);
         }
 
+        if (border) {
+            this.addBackground(border);
+        }
+
         this.addChildrenMap('title', inputTitle);
         this.addChildrenMap('inputField', inputField);
         this.addChildrenMap('background', background);
+        this.addChildrenMap('border', border);
 
         this.setupBinding();
 

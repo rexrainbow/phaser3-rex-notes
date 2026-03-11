@@ -1678,6 +1678,7 @@ Style of text-area input is defined in
 - `styles.inputRow.title`
 - `styles.inputRow.inputText` 
 - `styles.inputRow.background`
+- `styles.inputRow.border`
 
 ```javascript
 {
@@ -1685,6 +1686,17 @@ Style of text-area input is defined in
     styles: {
         inputRow: {
             background: {
+                radius: 0,
+                // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
+
+                color: undefined,
+                alpha: undefined,
+                strokeColor: undefined,
+                strokeAlpha: undefined,
+                strokeWidth: undefined,
+            },
+
+            border: {
                 radius: 0,
                 // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
 
@@ -1832,6 +1844,17 @@ Style of text-area input is defined in
     styles: {
         inputRow: {
             background: {
+                radius: 0,
+                // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
+
+                color: undefined,
+                alpha: undefined,
+                strokeColor: undefined,
+                strokeAlpha: undefined,
+                strokeWidth: undefined,
+            },
+
+            border: {
                 radius: 0,
                 // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
 

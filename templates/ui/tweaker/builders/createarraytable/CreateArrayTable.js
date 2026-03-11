@@ -13,7 +13,11 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 var CreateArrayTable = function (parent, config, style) {
     if (!config) { config = {}; }
     if (!style) { style = {}; }
+
     var scene = parent.scene;
+
+    // background
+    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
     // title
     var title = CreateTitleLabel(scene, undefined, (style.title || {}));
@@ -51,9 +55,6 @@ var CreateArrayTable = function (parent, config, style) {
             );
         }
     }
-
-    // background
-    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
     var arrayTable = new ArrayTable(scene, {
         table: tableConfig,

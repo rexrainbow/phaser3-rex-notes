@@ -24,6 +24,8 @@ var CreateCellContainer = function (parent, cell, config) {
         backgroundStyle,
     } = config;
 
+    var background = CreateBackground(scene, {}, backgroundStyle);
+
     var indexLabel = CreateTitleLabel(scene, undefined, indexStyle);
 
     var deleteButton = createDeleteButton(scene);
@@ -48,9 +50,7 @@ var CreateCellContainer = function (parent, cell, config) {
     var inputTweaker = parent.createTweaker(tweakerConfig)
         .setAlignInputRowTitleEnable(isObjectItem)
         .addRows(properties, target, tweakerAddRowsParameters.monitor);
-
-    var background = CreateBackground(scene, {}, backgroundStyle);
-
+    
     // Assemble elements
     var cellContainer = new CellContainer(scene, {
         space,

@@ -17,6 +17,9 @@ var CreateSplitPanels = function (parent, config, style) {
 
     var scene = parent.scene;
 
+    // background
+    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
+
     // title
     var title = CreateTitleLabel(scene, (style.title || {}));
 
@@ -37,9 +40,6 @@ var CreateSplitPanels = function (parent, config, style) {
         splitterStyle = DefaultSplitStyle;
     }
     splitter = CreateBackground(scene, (splitterConfig || {}), (splitterStyle || {}));
-
-    // background
-    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
     var splitPanels = new SplitPanels(scene, {
         header: title,
