@@ -51535,7 +51535,9 @@
 	var BindingTargetMethods$9 = {
 	    setBindingTarget(target) {
 	        var child = this.childrenMap.child;  // tweaker
-	        child.setBindingTarget(target);
+	        if (child.setBindingTarget) {
+	            child.setBindingTarget(target);
+	        }
 	        return this;
 	    },
 	};
@@ -51554,6 +51556,16 @@
 	        child.setInputRowTitleWidth(width);
 	        return this;
 	    }
+	};
+
+	var SetReadOnlyMethods$6 = {
+	    setReadOnly(value) {
+	        var child = this.childrenMap.child;  // tweaker
+	        if (child.setReadOnly) {
+	            child.setReadOnly(value);
+	        }
+	        return this;
+	    },
 	};
 
 	class Folder extends Folder$1 {
@@ -51579,6 +51591,7 @@
 	    Folder.prototype,
 	    BindingTargetMethods$9,
 	    InputRowTitleWidthMethods$8,
+	    SetReadOnlyMethods$6,
 	);
 
 	const GetValue$1_ = Phaser.Utils.Objects.GetValue;
@@ -53582,7 +53595,11 @@
 	    setBindingTarget(target) {
 	        var children = this.childrenMap.pages.children;
 	        for (var i = 0, cnt = children.length; i < cnt; i++) {
-	            children[i].setBindingTarget(target);
+	            var child = children[i];
+	            if (!child.setBindingTarget) {
+	                continue;
+	            }
+	            child.setBindingTarget(target);
 	        }
 	        return this;
 	    },
@@ -53610,6 +53627,20 @@
 	    }
 	};
 
+	var SetReadOnlyMethods$5 = {
+	    setReadOnly(value) {
+	        var children = this.childrenMap.pages.children;
+	        for (var i = 0, cnt = children.length; i < cnt; i++) {
+	            var child = children[i];
+	            if (!child.setReadOnly) {
+	                continue;
+	            }
+	            child.setReadOnly(value);
+	        }
+	        return this;
+	    },
+	};
+
 	class TabPages extends TabPages$1 {
 	    constructor(scene, config) {
 	        super(scene, config);
@@ -53621,6 +53652,7 @@
 	    TabPages.prototype,
 	    BindingTargetMethods$8,
 	    InputRowTitleWidthMethods$7,
+	    SetReadOnlyMethods$5,
 	);
 
 	var CreateLabel = function (scene, config, creators) {
@@ -53719,7 +53751,11 @@
 	    setBindingTarget(target) {
 	        var children = this.childrenMap.columns;
 	        for (var i = 0, cnt = children.length; i < cnt; i++) {
-	            children[i].setBindingTarget(target);
+	            var child = children[i];
+	            if (!child.setBindingTarget) {
+	                continue;
+	            }
+	            child.setBindingTarget(target);
 	        }
 	        return this;
 	    },
@@ -53741,6 +53777,20 @@
 
 	        return this;
 	    }
+	};
+
+	var SetReadOnlyMethods$4 = {
+	    setReadOnly(value) {
+	        var children = this.childrenMap.columns;
+	        for (var i = 0, cnt = children.length; i < cnt; i++) {
+	            var child = children[i];
+	            if (!child.setReadOnly) {
+	                continue;
+	            }
+	            child.setReadOnly(value);
+	        }
+	        return this;
+	    },
 	};
 
 	const GetValue$1P = Phaser.Utils.Objects.GetValue;
@@ -53843,6 +53893,7 @@
 	    Columns.prototype,
 	    BindingTargetMethods$7,
 	    InputRowTitleWidthMethods$6,
+	    SetReadOnlyMethods$4,
 	);
 
 	var CreateTitleLabel = function (scene, config, style) {
@@ -54515,10 +54566,10 @@
 	    setBindingTarget(target) {
 	        var leftPanel = this.leftPanel;
 	        var rightPanel = this.rightPanel;
-	        if (leftPanel) {
+	        if (leftPanel && leftPanel.setBindingTarget) {
 	            leftPanel.setBindingTarget(target);
 	        }
-	        if (rightPanel) {
+	        if (rightPanel && rightPanel.setBindingTarget) {
 	            rightPanel.setBindingTarget(target);
 	        }
 	        return this;
@@ -54544,6 +54595,20 @@
 
 	        return this;
 	    }
+	};
+
+	var SetReadOnlyMethods$3 = {
+	    setReadOnly(value) {
+	        var leftPanel = this.leftPanel;
+	        var rightPanel = this.rightPanel;
+	        if (leftPanel && leftPanel.setReadOnly) {
+	            leftPanel.setReadOnly(value);
+	        }
+	        if (rightPanel && rightPanel.setReadOnly) {
+	            rightPanel.setReadOnly(value);
+	        }
+	        return this;
+	    },
 	};
 
 	const GetValue$1K = Phaser.Utils.Objects.GetValue;
@@ -54580,6 +54645,7 @@
 	    SplitPanels.prototype,
 	    BindingTargetMethods$6,
 	    InputRowTitleWidthMethods$5,
+	    SetReadOnlyMethods$3,
 	);
 
 	const GetValue$1J = Phaser.Utils.Objects.GetValue;
@@ -54686,7 +54752,11 @@
 	    setBindingTarget(target) {
 	        var children = this.childrenMap.child;
 	        for (var i = 0, cnt = children.length; i < cnt; i++) {
-	            children[i].setBindingTarget(target);
+	            var child = children[i];
+	            if (!child.setBindingTarget) {
+	                continue;
+	            }
+	            child.setBindingTarget(target);
 	        }
 	        return this;
 	    },
@@ -54700,6 +54770,20 @@
 
 	    setInputRowTitleWidth(width) {
 	        // Ignore Title of InputRows
+	        return this;
+	    }
+	};
+
+	var SetReadOnlyMethods$2 = {
+	    setReadOnly(value) {
+	        var children = this.childrenMap.child;
+	        for (var i = 0, cnt = children.length; i < cnt; i++) {
+	            var child = children[i];
+	            if (!child.setReadOnly) {
+	                continue;
+	            }
+	            child.setReadOnly(value);
+	        }
 	        return this;
 	    }
 	};
@@ -54763,6 +54847,7 @@
 	    Wrap.prototype,
 	    BindingTargetMethods$5,
 	    InputRowTitleWidthMethods$4,
+	    SetReadOnlyMethods$2,
 	);
 
 	const GetValue$1G = Phaser.Utils.Objects.GetValue;
@@ -55858,7 +55943,9 @@
 	var BindingTargetMethods$4 = {
 	    setBindingTarget(target) {
 	        var child = this.childrenMap.panel;  // tweaker
-	        child.setBindingTarget(target);
+	        if (child.setBindingTarget) {
+	            child.setBindingTarget(target);
+	        }
 	        return this;
 	    },
 	};
@@ -55877,6 +55964,16 @@
 	        child.setInputRowTitleWidth(width);
 	        return this;
 	    }
+	};
+
+	var SetReadOnlyMethods$1 = {
+	    setReadOnly(value) {
+	        var child = this.childrenMap.panel;  // tweaker
+	        if (child.setReadOnly) {
+	            child.setReadOnly(value);
+	        }
+	        return this;
+	    },
 	};
 
 	class Scrollable extends ScrollablePanel {
@@ -55901,6 +55998,7 @@
 	    Scrollable.prototype,
 	    BindingTargetMethods$4,
 	    InputRowTitleWidthMethods$3,
+	    SetReadOnlyMethods$1,
 	);
 
 	const GetValue$1B = Phaser.Utils.Objects.GetValue;
@@ -58154,6 +58252,7 @@
 	};
 
 	var InstallAddButton$1 = function (config) {
+	    // this: ArrayTable
 	    var button = config.addButton;
 	    if (!button) {
 	        return;
@@ -58163,18 +58262,27 @@
 	    var createDefaultItemCallback = button.createDefaultItem;
 
 	    button.onClick(function () {
+	        if (this.readOnly) {
+	            return;
+	        }
+
 	        var item = createDefaultItemCallback();
 	        this.addItemWithTransition(item);
 	    }, this);
 	};
 
 	var InstallClearButton$1 = function (config) {
+	    // this: ArrayTable
 	    var button = config.clearButton;
 	    if (!button) {
 	        return;
 	    }
 
 	    button.onClick(function () {
+	        if (this.readOnly) {
+	            return;
+	        }
+
 	        this.clearItemsWithTransition();
 	    }, this);
 	};
@@ -58313,6 +58421,8 @@
 	        this.resetCellSizeFlag = true;
 	        this.lastItemsCount = undefined; // For monitor
 
+	        this.setReadOnly(false);
+
 	        InstallClearButton$1.call(this, config);
 	        InstallAddButton$1.call(this, config);
 	        InstallCellInteractiveEvents$1.call(this, config);
@@ -58363,6 +58473,20 @@
 	        return this;
 	    }
 
+	    setReadOnly(value) {
+	        if (value === undefined) {
+	            value = true;
+	        }
+
+	        this.readOnly = value;
+
+	        var cellConteiners = this.getAllCellContainers();
+	        for (var i = 0, cnt = cellConteiners.length; i < cnt; i++) {
+	            cellConteiners[i].setReadOnly(value);
+	        }
+
+	        return this;
+	    }
 	}
 
 	Object.assign(
@@ -58677,6 +58801,10 @@
 
 	var OnClickButtonMethods$2 = {
 	    onClickDeleteButton() {
+	        if (this.gridTable.readOnly) {
+	            return;
+	        }
+
 	        // Called by clicking delete button
 	        if (!this.gridTable.isInTouching('mask')) {
 	            return;
@@ -58686,6 +58814,10 @@
 	    },
 
 	    onClickMoveUpButton() {
+	        if (this.gridTable.readOnly) {
+	            return;
+	        }
+
 	        if (!this.gridTable.isInTouching('mask')) {
 	            return;
 	        }
@@ -58707,6 +58839,10 @@
 	    },
 
 	    onClickMoveDownButton() {
+	        if (this.gridTable.readOnly) {
+	            return;
+	        }
+
 	        if (!this.gridTable.isInTouching('mask')) {
 	            return;
 	        }
@@ -58778,6 +58914,8 @@
 	            this.setBindingTarget(items, index);
 	        }
 
+	        this.setReadOnly(this.gridTable.readOnly);
+
 	        return this;
 	    }
 
@@ -58806,6 +58944,11 @@
 	        if (!value) {
 	            this.setBindingTarget();
 	        }
+	    }
+
+	    setReadOnly(value) {
+	        this.childrenMap.inputTweaker.setReadOnly(value);
+	        return this;
 	    }
 
 	};
@@ -59041,10 +59184,12 @@
 	var BindingTargetMethods$2 = {
 	    setBindingTarget(target, bindingKey) {
 	        // ListTable panel (left panel)
-	        if (arguments.length >= 2) {
-	            this.leftPanel.setBindingTarget(target, bindingKey);
-	        } else {
-	            this.leftPanel.setBindingTarget(target);
+	        if (this.leftPanel && this.leftPanel.setBindingTarget) {
+	            if (arguments.length >= 2) {
+	                this.leftPanel.setBindingTarget(target, bindingKey);
+	            } else {
+	                this.leftPanel.setBindingTarget(target);
+	            }
 	        }
 
 	        var items = this.leftPanel.items;
@@ -59188,7 +59333,6 @@
 	        }
 
 	    }
-
 	}
 
 	class EditorContainer extends Scrollable {
@@ -59217,6 +59361,7 @@
 	        this.type = 'rexTweaker.ListDetail.EditorContainer';
 
 	        this.addChildrenMap('title', title);
+	        this.addChildrenMap('inputTweaker', config.editor);
 	        this.addChildrenMap('toolbar', toolbar);
 
 	        var deleteButton = config.editorDeleteButton;
@@ -59284,6 +59429,16 @@
 	    setTitle(indexConfig, displayNameConfig) {
 	        var title = this.childrenMap.header;
 	        title.setTitle(indexConfig, displayNameConfig);
+	        return this;
+	    }
+
+	    setReadOnly(value) {
+	        if (value === undefined) {
+	            value = true;
+	        }
+
+	        this.readOnly = value;
+	        this.childrenMap.inputTweaker.setReadOnly(value);
 	        return this;
 	    }
 	}
@@ -59365,6 +59520,7 @@
 	};
 
 	var InstallAddButton = function (config) {
+	    // this: ListTable
 	    var button = config.addButton;
 	    if (!button) {
 	        return;
@@ -59374,18 +59530,28 @@
 	    var createDefaultItemCallback = button.createDefaultItem;
 
 	    button.onClick(function () {
+	        if (this.readOnly) {
+	            return;
+	        }
+
 	        var item = createDefaultItemCallback();
 	        this.addItemWithTransition(item);
 	    }, this);
 	};
 
 	var InstallClearButton = function (config) {
+	    // this: ListTable
+
 	    var button = config.clearButton;
 	    if (!button) {
 	        return;
 	    }
 
 	    button.onClick(function () {
+	        if (this.readOnly) {
+	            return;
+	        }
+
 	        this.clearItemsWithTransition();
 	    }, this);
 	};
@@ -59583,6 +59749,15 @@
 	        return this;
 	    }
 
+	    setReadOnly(value) {
+	        if (value === undefined) {
+	            value = true;
+	        }
+
+	        this.readOnly = value;
+	        return this;
+	    }
+
 	}
 
 	Object.assign(
@@ -59611,6 +59786,160 @@
 	        }
 	    }
 	    return toObj;
+	};
+
+	var IsObjectValue = function (value) {
+	    return !!value && (typeof (value) === 'object') && !Array.isArray(value);
+	};
+
+	var OnToolbarMethods = {
+
+	    onToolbarDelete() {
+	        if (this.readOnly) {
+	            return;
+	        }
+
+	        var index = this.selectedIndex;
+	        if (index == null) {
+	            return;
+	        }
+
+	        var listTable = this.leftPanel;
+	        var cellContainer = listTable.getCellContainer(index);
+	        if (cellContainer) {
+	            listTable.deleteItemWithTransition(cellContainer);
+	            return;
+	        }
+
+	        listTable.deleteItemByIndex(index);
+	        if (listTable.resetPointerOver) {
+	            listTable.resetPointerOver();
+	        }
+	    },
+
+	    onToolbarDuplicate() {
+	        if (this.readOnly) {
+	            return;
+	        }
+
+	        var index = this.selectedIndex;
+	        if (index == null) {
+	            return;
+	        }
+
+	        var listTable = this.leftPanel;
+	        var items = listTable.items;
+	        var currentItem = items[index];
+	        if (!IsObjectValue(currentItem)) {
+	            console.error('[Tweaker][ListDetail] Duplicate aborted. Current selected item is not an object. This is an application-level design error.');
+	            return;
+	        }
+
+	        var defaultItem = this.createDefaultItemFromToolbar('duplicateButton', 'Duplicate');
+	        if (!defaultItem) {
+	            return;
+	        }
+
+	        // Start from current item, then fill missing keys from default item.
+	        var newItem = DeepClone(currentItem);
+	        DeepMerge(newItem, defaultItem);
+
+	        var insertIndex = index + 1;
+	        items.splice(insertIndex, 0, newItem);
+	        listTable.lastItemsCount = items.length;
+	        listTable.refresh();
+	        listTable.emit('items.change', 'add', {
+	            index: insertIndex,
+	            item: newItem
+	        });
+
+	        this.selectItem(insertIndex, true);
+	    },
+
+	    onToolbarReset() {
+	        if (this.readOnly) {
+	            return;
+	        }
+
+	        var index = this.selectedIndex;
+	        if (index == null) {
+	            return;
+	        }
+
+	        var listTable = this.leftPanel;
+	        var items = listTable.items;
+	        var currentItem = items[index];
+	        if (!IsObjectValue(currentItem)) {
+	            console.error('[Tweaker][ListDetail] Reset aborted. Current selected item is not an object. This is an application-level design error.');
+	            return;
+	        }
+
+	        var defaultItem = this.createDefaultItemFromToolbar('resetButton', 'Reset');
+	        if (!defaultItem) {
+	            return;
+	        }
+
+	        // Clear all existing keys, then apply default keys in-place.
+	        for (var key in currentItem) {
+	            if (currentItem.hasOwnProperty(key)) {
+	                delete currentItem[key];
+	            }
+	        }
+	        DeepMerge(currentItem, defaultItem);
+
+	        // Refresh editor and list row display.
+	        this.rightPanel.setBindingTarget(currentItem);
+	        listTable.updateVisibleCell(index);
+	        this.updateEditorTitle(index, currentItem, items);
+	    },
+
+	    onToolbarPrevious() {
+	        var index = this.selectedIndex;
+	        if (index == null) {
+	            return;
+	        }
+
+	        if (index <= 0) {
+	            return;
+	        }
+
+	        this.selectItem(index - 1, true);
+	    },
+
+	    onToolbarNext() {
+	        var index = this.selectedIndex;
+	        if (index == null) {
+	            return;
+	        }
+
+	        var listTable = this.leftPanel;
+	        var items = listTable.items;
+	        if (index >= (items.length - 1)) {
+	            return;
+	        }
+
+	        this.selectItem(index + 1, true);
+	    },
+
+	    createDefaultItemFromToolbar(buttonKey, actionName) {
+	        var editorContainer = this.rightPanel;
+	        var button = editorContainer.childrenMap[buttonKey];
+	        var callback = (button) ? button.createDefaultItem : undefined;
+	        if (!callback) {
+	            console.error(`[Tweaker][ListDetail] ${actionName} aborted. createDefaultItem is required and should return an object. This is an application-level design error.`);
+	            return null;
+	        }
+
+	        var defaultItem = callback();
+	        if (!IsObjectValue(defaultItem)) {
+	            var valueType = (defaultItem === null) ? 'null' : typeof (defaultItem);
+	            console.error(`[Tweaker][ListDetail] ${actionName} aborted. createDefaultItem() returned ${valueType}, expected object. This is an application-level design error.`);
+	            return null;
+	        }
+
+	        return defaultItem;
+	    },
+
 	};
 
 	const GetValue$1f = Phaser.Utils.Objects.GetValue;
@@ -59690,6 +60019,7 @@
 
 	            slider: editorSlider,
 
+	            editor: editor,
 	            editorIndexLabel: editorIndexLabel,
 	            editorDisplayNameLabel: editorDisplayNameLabel,
 
@@ -59856,140 +60186,6 @@
 	        this.updateEditorTitle(index, bindingTarget, items);
 	    }
 
-	    onToolbarDelete() {
-	        var index = this.selectedIndex;
-	        if (index == null) {
-	            return;
-	        }
-
-	        var listTable = this.leftPanel;
-	        var cellContainer = listTable.getCellContainer(index);
-	        if (cellContainer) {
-	            listTable.deleteItemWithTransition(cellContainer);
-	            return;
-	        }
-
-	        listTable.deleteItemByIndex(index);
-	        if (listTable.resetPointerOver) {
-	            listTable.resetPointerOver();
-	        }
-	    }
-
-	    onToolbarDuplicate() {
-	        var index = this.selectedIndex;
-	        if (index == null) {
-	            return;
-	        }
-
-	        var listTable = this.leftPanel;
-	        var items = listTable.items;
-	        var currentItem = items[index];
-	        if (!IsObjectValue(currentItem)) {
-	            console.error('[Tweaker][ListDetail] Duplicate aborted. Current selected item is not an object. This is an application-level design error.');
-	            return;
-	        }
-
-	        var defaultItem = this.createDefaultItemFromToolbar('duplicateButton', 'Duplicate');
-	        if (!defaultItem) {
-	            return;
-	        }
-
-	        // Start from current item, then fill missing keys from default item.
-	        var newItem = DeepClone(currentItem);
-	        DeepMerge(newItem, defaultItem);
-
-	        var insertIndex = index + 1;
-	        items.splice(insertIndex, 0, newItem);
-	        listTable.lastItemsCount = items.length;
-	        listTable.refresh();
-	        listTable.emit('items.change', 'add', {
-	            index: insertIndex,
-	            item: newItem
-	        });
-
-	        this.selectItem(insertIndex, true);
-	    }
-
-	    onToolbarReset() {
-	        var index = this.selectedIndex;
-	        if (index == null) {
-	            return;
-	        }
-
-	        var listTable = this.leftPanel;
-	        var items = listTable.items;
-	        var currentItem = items[index];
-	        if (!IsObjectValue(currentItem)) {
-	            console.error('[Tweaker][ListDetail] Reset aborted. Current selected item is not an object. This is an application-level design error.');
-	            return;
-	        }
-
-	        var defaultItem = this.createDefaultItemFromToolbar('resetButton', 'Reset');
-	        if (!defaultItem) {
-	            return;
-	        }
-
-	        // Clear all existing keys, then apply default keys in-place.
-	        for (var key in currentItem) {
-	            if (currentItem.hasOwnProperty(key)) {
-	                delete currentItem[key];
-	            }
-	        }
-	        DeepMerge(currentItem, defaultItem);
-
-	        // Refresh editor and list row display.
-	        this.rightPanel.setBindingTarget(currentItem);
-	        listTable.updateVisibleCell(index);
-	        this.updateEditorTitle(index, currentItem, items);
-	    }
-
-	    onToolbarPrevious() {
-	        var index = this.selectedIndex;
-	        if (index == null) {
-	            return;
-	        }
-
-	        if (index <= 0) {
-	            return;
-	        }
-
-	        this.selectItem(index - 1, true);
-	    }
-
-	    onToolbarNext() {
-	        var index = this.selectedIndex;
-	        if (index == null) {
-	            return;
-	        }
-
-	        var listTable = this.leftPanel;
-	        var items = listTable.items;
-	        if (index >= (items.length - 1)) {
-	            return;
-	        }
-
-	        this.selectItem(index + 1, true);
-	    }
-
-	    createDefaultItemFromToolbar(buttonKey, actionName) {
-	        var editorContainer = this.rightPanel;
-	        var button = editorContainer.childrenMap[buttonKey];
-	        var callback = (button) ? button.createDefaultItem : undefined;
-	        if (!callback) {
-	            console.error(`[Tweaker][ListDetail] ${actionName} aborted. createDefaultItem is required and should return an object. This is an application-level design error.`);
-	            return null;
-	        }
-
-	        var defaultItem = callback();
-	        if (!IsObjectValue(defaultItem)) {
-	            var valueType = (defaultItem === null) ? 'null' : typeof (defaultItem);
-	            console.error(`[Tweaker][ListDetail] ${actionName} aborted. createDefaultItem() returned ${valueType}, expected object. This is an application-level design error.`);
-	            return null;
-	        }
-
-	        return defaultItem;
-	    }
-
 	    selectItem(index, scrollToRow) {
 	        if (scrollToRow === undefined) {
 	            scrollToRow = false;
@@ -60084,16 +60280,23 @@
 
 	        return this;
 	    }
-	}
 
-	var IsObjectValue = function (value) {
-	    return !!value && (typeof (value) === 'object') && !Array.isArray(value);
-	};
+	    setReadOnly(value) {
+	        if (value === undefined) {
+	            value = true;
+	        }
+	        this.readOnly = value;
+	        this.leftPanel.setReadOnly(value);
+	        this.rightPanel.setReadOnly(value);
+	        return this;
+	    }
+	}
 
 	Object.assign(
 	    ListDetail.prototype,
 	    BindingTargetMethods$2,
 	    InputRowTitleWidthMethods$1,
+	    OnToolbarMethods,
 	);
 
 	const GetValue$1e = Phaser.Utils.Objects.GetValue;
@@ -60312,6 +60515,10 @@
 
 	var OnClickButtonMethods = {
 	    onClickDeleteButton() {
+	        if (this.gridTable.readOnly) {
+	            return;
+	        }
+
 	        // Called by clicking delete button
 	        if (!this.gridTable.isInTouching('mask')) {
 	            return;
@@ -60321,6 +60528,10 @@
 	    },
 
 	    onClickMoveUpButton() {
+	        if (this.gridTable.readOnly) {
+	            return;
+	        }
+
 	        if (!this.gridTable.isInTouching('mask')) {
 	            return;
 	        }
@@ -60347,6 +60558,10 @@
 	    },
 
 	    onClickMoveDownButton() {
+	        if (this.gridTable.readOnly) {
+	            return;
+	        }
+
 	        if (!this.gridTable.isInTouching('mask')) {
 	            return;
 	        }
@@ -60921,6 +61136,10 @@
 	        arrayTable.startMonitorTarget();
 	    }
 
+	    if (config.readOnly) {
+	        arrayTable.setReadOnly();
+	    }
+
 	    if (config.key) {
 	        this.root.addChildrenMap(config.key, arrayTable);
 	    }
@@ -61063,6 +61282,16 @@
 	    },
 	};
 
+	var SetReadOnlyMethods = {
+	    setReadOnly(value) {
+	        var inputField = this.childrenMap.inputField;
+	        if (inputField.setReadOnly) {
+	            inputField.setReadOnly(value);
+	        }
+	        return this;
+	    }
+	};
+
 	var MinTitleWidthMethods = {
 	    getMinTitleWidth() {
 	        var title = this.childrenMap.title;
@@ -61184,6 +61413,7 @@
 	    InputRow.prototype,
 	    BindingTargetMethods,
 	    MonitorTargetMethods,
+	    SetReadOnlyMethods,
 	    MinTitleWidthMethods,
 	);
 
@@ -61294,6 +61524,27 @@
 	            return this;
 	        }
 
+	        setReadOnly(value) {
+	            value = !!value;
+
+	            if (!this.setReadOnlyCallback) {
+	                return this;
+	            }
+
+	            this.setReadOnlyCallback(this, value);
+	            this._readOnly = value;
+
+	            return this;
+	        }
+
+	        get readOnly() {
+	            return this._readOnly;
+	        }
+
+	        set readOnly(value) {
+	            this.setReadOnly(value);
+	        }
+
 	        setup(config, setDefaults) {
 	            if (setDefaults === undefined) {
 	                setDefaults = false;
@@ -61314,6 +61565,7 @@
 	            return this;
 	        }
 
+	        // Internal usage
 	        setSetupCallback(callback) {
 	            this.setupCallback = callback;
 	            return this;
@@ -61343,6 +61595,11 @@
 	            this.validateCallback = callback;
 	            return this;
 	        }
+
+	        setSetReadOnlyCallback(callback) {
+	            this.setReadOnlyCallback = callback;
+	            return this;
+	        }
 	    }
 
 	    return InputFiled;
@@ -61358,11 +61615,13 @@
 	            inputField = new InputFieldClass(scene);
 	            scene.add.existing(inputField);
 
+	            // Decorate instance via installing callbacks
 	            inputField
 	                .setSetupCallback(handler.setup)
 	                .setFilterValueCallback(handler.filterValue)
 	                .setDisplayValueCallback(handler.displayValue)
-	                .setOnBindTargetCallback(handler.onBindTarget);
+	                .setOnBindTargetCallback(handler.onBindTarget)
+	                .setSetReadOnlyCallback(handler.setReadOnly);
 
 	            handler.build(inputField, style);
 
@@ -61500,6 +61759,10 @@
 	    inputSizer.setAutoUpdateEnable(config.autoUpdate);
 	    inputSizer.setBindingTarget(target, bindingKey);
 
+	    if (config.readOnly) {
+	        inputSizer.setReadOnly();
+	    }
+
 	    if (config.monitor) {
 	        inputSizer.startMonitorTarget();
 	    }
@@ -61557,6 +61820,16 @@
 	    });
 	    buttonsSizer.defaultProportion = 1;
 
+	    // ButtonsSizer does not have setReadOnly method
+	    buttonsSizer.setReadOnly = function (readOnly) {
+	        if (readOnly === undefined) {
+	            readOnly = true;
+	        }
+
+	        buttonsSizer.setButtonEnable(!readOnly);
+	        return this;
+	    };
+
 	    // Border
 	    var border = CreateBackground(scene, (config.border || {}), (style.border || {}));
 
@@ -61609,6 +61882,10 @@
 	    // Set binding target
 	    if (target) {
 	        buttons.setBindingTarget(target);
+	    }
+
+	    if (config.readOnly) {
+	        buttons.setReadOnly();
 	    }
 
 	    if (config.key) {
@@ -61983,6 +62260,31 @@
 	            return gameObject;
 	        }
 
+	        get readOnly() {
+	            return this._readOnly;
+	        }
+
+	        set readOnly(value) {
+	            value = !!value;
+	            var children = this.sizerChildren;
+	            for (var i = 0, cnt = children.length; i < cnt; i++) {
+	                var child = children[i];
+	                if (!child.setReadOnly) {
+	                    continue;
+	                }
+
+	                child.setReadOnly(value);
+	            }
+
+	        }
+
+	        setReadOnly(value) {
+	            if (value === undefined) {
+	                value = true;
+	            }
+	            this.readOnly = value;
+	            return this;
+	        }
 	    }
 
 	    Object.assign(
@@ -64234,13 +64536,25 @@
 	    return inputText;
 	};
 
-	var SetInputTextReadOnly$4 = function (gameObject, enable) {
-	    if (enable === undefined) {
-	        enable = true;
+	var SetInputTextReadOnly$4 = function (gameObject, readOnly, force) {
+	    if (readOnly === undefined) {
+	        readOnly = true;
+	    }
+
+	    if (force === undefined) {
+	        force = false;
 	    }
 
 	    var inputText = gameObject.childrenMap.inputText;
-	    inputText.setReadOnly(enable);
+
+	    if (force) {
+	        gameObject.inputTextReadOnly = readOnly;
+	        inputText.setReadOnly(readOnly);
+	    } else {
+	        if (!gameObject.inputTextReadOnly) {
+	            inputText.setReadOnly(readOnly);
+	        }
+	    }
 	};
 
 	var TextInputHandler = {
@@ -64276,7 +64590,7 @@
 	    // Callback inside `setup()`
 	    setup(gameObject, config, setDefaults) {
 	        if (setDefaults || config.hasOwnProperty('inputTextReadOnly')) {
-	            SetInputTextReadOnly$4(gameObject, !!config.inputTextReadOnly);
+	            SetInputTextReadOnly$4(gameObject, !!config.inputTextReadOnly, true);
 	        }
 	    },
 
@@ -64286,6 +64600,12 @@
 	        inputText.setText(gameObject.getFotmatText(value));
 	    },
 
+	    setReadOnly(gameObject, readOnly) {
+	        if (readOnly === undefined) {
+	            readOnly = true;
+	        }
+	        SetInputTextReadOnly$4(gameObject, readOnly);
+	    }
 	};
 
 	var InjectProperties = function (inputText) {
@@ -64526,13 +64846,25 @@
 	    return inputText;
 	};
 
-	var SetInputTextReadOnly$3 = function (gameObject, enable) {
-	    if (enable === undefined) {
-	        enable = true;
+	var SetInputTextReadOnly$3 = function (gameObject, readOnly, force) {
+	    if (readOnly === undefined) {
+	        readOnly = true;
+	    }
+
+	    if (force === undefined) {
+	        force = false;
 	    }
 
 	    var inputText = gameObject.childrenMap.inputText;
-	    inputText.setReadOnly(enable);
+
+	    if (force) {
+	        gameObject.inputTextReadOnly = readOnly;
+	        inputText.setReadOnly(readOnly);
+	    } else {
+	        if (!gameObject.inputTextReadOnly) {
+	            inputText.setReadOnly(readOnly);
+	        }
+	    }
 	};
 
 	var TextAreaInputHandler = {
@@ -64594,14 +64926,33 @@
 	        inputText.scrollToTop();
 	    },
 
+	    setReadOnly(gameObject, readOnly) {
+	        if (readOnly === undefined) {
+	            readOnly = true;
+	        }
+	        SetInputTextReadOnly$3(gameObject, readOnly);
+	    }
 	};
 
-	var SetInputTextReadOnly$2 = function (gameObject, enable) {
-	    if (enable === undefined) {
-	        enable = true;
+	var SetInputTextReadOnly$2 = function (gameObject, readOnly, force) {
+	    if (readOnly === undefined) {
+	        readOnly = true;
 	    }
+
+	    if (force === undefined) {
+	        force = false;
+	    }
+
 	    var inputText = gameObject.childrenMap.inputText;
-	    inputText.setReadOnly(enable);
+
+	    if (force) {
+	        gameObject.inputTextReadOnly = readOnly;
+	        inputText.setReadOnly(readOnly);
+	    } else {
+	        if (!gameObject.inputTextReadOnly) {
+	            inputText.setReadOnly(readOnly);
+	        }
+	    }
 	};
 
 	var NumberInputHandler = {
@@ -64638,7 +64989,7 @@
 	    // Callback inside `setup()`
 	    setup(gameObject, config, setDefaults) {
 	        if (setDefaults || config.hasOwnProperty('inputTextReadOnly')) {
-	            SetInputTextReadOnly$2(gameObject, !!config.inputTextReadOnly);
+	            SetInputTextReadOnly$2(gameObject, !!config.inputTextReadOnly, true);
 	        }
 
 	        gameObject.isFloatType = !config.int;
@@ -64658,6 +65009,13 @@
 	        var inputText = gameObject.childrenMap.inputText;
 	        inputText.setText(gameObject.getFotmatText(value));
 	    },
+
+	    setReadOnly(gameObject, readOnly) {
+	        if (readOnly === undefined) {
+	            readOnly = true;
+	        }
+	        SetInputTextReadOnly$2(gameObject, readOnly);
+	    }
 	};
 
 	var CreateSlider = function (scene, config) {
@@ -64680,13 +65038,34 @@
 	    slider.setGap(step, min, max);
 	};
 
-	var SetInputTextReadOnly$1 = function (gameObject, enable) {
-	    if (enable === undefined) {
-	        enable = true;
+	var SetInputTextReadOnly$1 = function (gameObject, readOnly, force) {
+	    if (readOnly === undefined) {
+	        readOnly = true;
+	    }
+
+	    if (force === undefined) {
+	        force = false;
 	    }
 
 	    var inputText = gameObject.childrenMap.inputText;
-	    inputText.setReadOnly(enable);
+
+	    if (force) {
+	        gameObject.inputTextReadOnly = readOnly;
+	        inputText.setReadOnly(readOnly);
+	    } else {
+	        if (!gameObject.inputTextReadOnly) {
+	            inputText.setReadOnly(readOnly);
+	        }
+	    }
+	};
+
+	var SetSliderReadOnly = function (gameObject, readOnly) {
+	    if (readOnly === undefined) {
+	        readOnly = true;
+	    }
+
+	    var slider = gameObject.childrenMap.slider;
+	    slider.setEnable(!readOnly);
 	};
 
 	var RangeInputHandler = {
@@ -64752,8 +65131,9 @@
 	            SetRange(gameObject, config.min, config.max, config.step);
 	        }
 
+	        // User can force inputText as readOnly field always, only use slider
 	        if (setDefaults || config.hasOwnProperty('inputTextReadOnly')) {
-	            SetInputTextReadOnly$1(gameObject, !!config.inputTextReadOnly);
+	            SetInputTextReadOnly$1(gameObject, !!config.inputTextReadOnly, true);
 	        }
 	    },
 
@@ -64766,6 +65146,14 @@
 	        inputText.setText('').setText(gameObject.getFotmatText(value));
 
 	    },
+
+	    setReadOnly(gameObject, readOnly) {
+	        if (readOnly === undefined) {
+	            readOnly = true;
+	        }
+	        SetInputTextReadOnly$1(gameObject, readOnly);
+	        SetSliderReadOnly(gameObject, readOnly);
+	    }
 	};
 
 	var CreateButtons$1 = function (scene, config) {
@@ -64776,13 +65164,34 @@
 
 	const GetValue$R = Phaser.Utils.Objects.GetValue;
 
-	var SetInputTextReadOnly = function (gameObject, enable) {
-	    if (enable === undefined) {
-	        enable = true;
+	var SetInputTextReadOnly = function (gameObject, readOnly, force) {
+	    if (readOnly === undefined) {
+	        readOnly = true;
+	    }
+
+	    if (force === undefined) {
+	        force = false;
 	    }
 
 	    var inputText = gameObject.childrenMap.inputText;
-	    inputText.setReadOnly(enable);
+
+	    if (force) {
+	        gameObject.inputTextReadOnly = readOnly;
+	        inputText.setReadOnly(readOnly);
+	    } else {
+	        if (!gameObject.inputTextReadOnly) {
+	            inputText.setReadOnly(readOnly);
+	        }
+	    }
+	};
+
+	var SetButtonsReadOnly$1 = function (gameObject, readOnly) {
+	    if (readOnly === undefined) {
+	        readOnly = true;
+	    }
+
+	    var buttons = gameObject.childrenMap.buttons;
+	    buttons.setButtonEnable(!readOnly);
 	};
 
 	var IncDecInputHandler = {
@@ -64868,15 +65277,16 @@
 	            gameObject.setValue(value);
 	        });
 
+	        gameObject.addChildrenMap('inputText', inputText);
 	        gameObject.addChildrenMap('incButton', incButton);
 	        gameObject.addChildrenMap('decButton', decButton);
-	        gameObject.addChildrenMap('inputText', inputText);
+	        gameObject.addChildrenMap('buttons', buttons);
 	    },
 
 	    // Callback inside `setup()`
 	    setup(gameObject, config, setDefaults) {
 	        if (setDefaults || config.hasOwnProperty('inputTextReadOnly')) {
-	            SetInputTextReadOnly(gameObject, !!config.inputTextReadOnly);
+	            SetInputTextReadOnly(gameObject, !!config.inputTextReadOnly, true);
 	        }
 
 	        if (setDefaults || config.hasOwnProperty('step')) {
@@ -64896,6 +65306,14 @@
 	        inputText.setText('').setText(gameObject.getFotmatText(value));
 
 	    },
+
+	    setReadOnly(gameObject, readOnly) {
+	        if (readOnly === undefined) {
+	            readOnly = true;
+	        }
+	        SetInputTextReadOnly(gameObject, readOnly);
+	        SetButtonsReadOnly$1(gameObject, readOnly);
+	    }
 	};
 
 	var CreateSwatch = function (scene, config) {
@@ -65098,6 +65516,27 @@
 
 	    setColor(color) {
 	        this.color = color;
+	        return this;
+	    }
+
+	    get readOnly() {
+	        return this._readOnly;
+	    }
+
+	    set readOnly(value) {
+	        var inputText = this.childrenMap.inputText;
+	        if (inputText) {
+	            inputText.setReadOnly(value);
+	        }
+
+	        this._readOnly = value;
+	    }
+
+	    setReadOnly(enable) {
+	        if (enable === undefined) {
+	            enable = true;
+	        }
+	        this.readOnly = enable;
 	        return this;
 	    }
 
@@ -66539,6 +66978,23 @@
 	            this.onClick(swatch, this.openColorPicker, this);
 	        }
 	    }
+
+	    get readOnly() {
+	        return this._readOnly;
+	    }
+
+	    set readOnly(value) {
+	        var swatch = this.childrenMap.swatch;
+	        if (swatch) {
+	            if (value) {
+	                this.disableClick(swatch);
+	            } else {
+	                this.enableClick(swatch);
+	            }
+	        }
+
+	        super.readOnly = value;
+	    }
 	}
 
 	Object.assign(
@@ -66561,6 +67017,15 @@
 	    var inputText = new ColorInput(scene, config);
 	    scene.add.existing(inputText);
 	    return inputText;
+	};
+
+	var SetColorInputReadOnly = function (gameObject, readOnly) {
+	    if (readOnly === undefined) {
+	        readOnly = true;
+	    }
+
+	    var colorInput = gameObject.childrenMap.colorInput;
+	    colorInput.setReadOnly(readOnly);
 	};
 
 	var ColorInputHandler = {
@@ -66604,6 +67069,13 @@
 	        var colorInput = gameObject.childrenMap.colorInput;
 	        colorInput.setValue(value);
 	    },
+
+	    setReadOnly(gameObject, readOnly) {
+	        if (readOnly === undefined) {
+	            readOnly = true;
+	        }
+	        SetColorInputReadOnly(gameObject, readOnly);
+	    }
 	};
 
 	var StyleMethods$1 = {
@@ -67031,6 +67503,15 @@
 	    return gameObject;
 	};
 
+	var SetCheckboxReadOnly = function (gameObject, readOnly) {
+	    if (readOnly === undefined) {
+	        readOnly = true;
+	    }
+
+	    var checkbox = gameObject.childrenMap.checkbox;
+	    checkbox.setReadOnly(readOnly);
+	};
+
 	var CheckboxInputHandler = {
 	    name: 'CheckboxInput',
 
@@ -67071,6 +67552,13 @@
 	    displayValue(gameObject, value) {
 	        var checkbox = gameObject.childrenMap.checkbox;
 	        checkbox.setValue(value);
+	    },
+
+	    setReadOnly(gameObject, readOnly) {
+	        if (readOnly === undefined) {
+	            readOnly = true;
+	        }
+	        SetCheckboxReadOnly(gameObject, readOnly);
 	    }
 	};
 
@@ -67507,6 +67995,15 @@
 	    return gameObject;
 	};
 
+	var SetToggleSwitchReadOnly = function (gameObject, readOnly) {
+	    if (readOnly === undefined) {
+	        readOnly = true;
+	    }
+
+	    var toggleSwitch = gameObject.childrenMap.toggleSwitch;
+	    toggleSwitch.setReadOnly(readOnly);
+	};
+
 	var ToggleSwitchInputHandler = {
 	    name: 'ToggleSwitchInput',
 
@@ -67551,6 +68048,13 @@
 	        var toggleSwitch = gameObject.childrenMap.toggleSwitch;
 	        toggleSwitch.setValue(value);
 	    },
+
+	    setReadOnly(gameObject, readOnly) {
+	        if (readOnly === undefined) {
+	            readOnly = true;
+	        }
+	        SetToggleSwitchReadOnly(gameObject, readOnly);
+	    }
 	};
 
 	var BuildListConfig = function (scene, config, creators) {
@@ -68282,6 +68786,19 @@
 	    list.setOptions(options);
 	};
 
+	var SetListReadOnly = function (gameObject, readOnly) {
+	    if (readOnly === undefined) {
+	        readOnly = true;
+	    }
+
+	    var list = gameObject.childrenMap.list;
+	    if (readOnly) {
+	        list.disableClick();
+	    } else {
+	        list.enableClick();
+	    }
+	};
+
 	var ListInputHandler = {
 	    name: 'ListInput',
 
@@ -68329,6 +68846,14 @@
 	            .setMinSize(0, 0);
 
 	    },
+
+	    setReadOnly(gameObject, readOnly) {
+	        if (readOnly === undefined) {
+	            readOnly = true;
+	        }
+
+	        SetListReadOnly(gameObject, readOnly);
+	    }
 	};
 
 	var SetButtonsActiveStateByIndex = function (buttons, index) {
@@ -68345,20 +68870,29 @@
 	const GetValue$D = Phaser.Utils.Objects.GetValue;
 
 	var SetOptions = function (gameObject, options) {
-	    var list = gameObject.childrenMap.list;
-	    list.options = options;
+	    var buttons = gameObject.childrenMap.buttons;
+	    buttons.options = options;
 
 	    var scene = gameObject.scene;
-	    var buttonConfig = list.buttonConfig;
-	    list.clearButtons(true);
+	    var buttonConfig = buttons.buttonConfig;
+	    buttons.clearButtons(true);
 	    for (var i = 0, cnt = options.length; i < cnt; i++) {
 	        var option = options[i];
 	        var button = CreateLabel(scene, buttonConfig)
 	            .setActiveState(false)
 	            .resetDisplayContent({ text: option.text });
 
-	        list.addButton(button);
+	        buttons.addButton(button);
 	    }
+	};
+
+	var SetButtonsReadOnly = function (gameObject, readOnly) {
+	    if (readOnly === undefined) {
+	        readOnly = true;
+	    }
+
+	    var buttons = gameObject.childrenMap.buttons;
+	    buttons.setButtonEnable(!readOnly);
 	};
 
 	var ButtonsInputHandler = {
@@ -68386,18 +68920,18 @@
 	        }
 	        delete buttonConfig.expand;
 
-	        var list = CreateButtons$1(scene, {
+	        var buttons = CreateButtons$1(scene, {
 	            expand: buttonExpand
 	        });
-	        list.buttonConfig = buttonConfig;
+	        buttons.buttonConfig = buttonConfig;
 
 	        gameObject.add(
-	            list,
-	            { proportion: 1, expand: true, key: 'list' }
+	            buttons,
+	            { proportion: 1, expand: true, key: 'buttons' }
 	        );
 
-	        list.on('button.click', function (button, index, pointer, event) {
-	            var option = list.options[index];
+	        buttons.on('button.click', function (button, index, pointer, event) {
+	            var option = buttons.options[index];
 	            if (!option) {
 	                return;  // ??
 	            }
@@ -68405,7 +68939,6 @@
 	            gameObject.setValue(option.value);
 	            gameObject._selectedIndex = undefined;
 	        });
-
 	    },
 
 	    // Callback inside `setup()`
@@ -68417,13 +68950,20 @@
 
 	    // Callback inside `setValue()`
 	    displayValue(gameObject, value) {
-	        var list = gameObject.childrenMap.list;
-	        var index = gameObject._selectedIndex;  // See list's 'button.click' event
+	        var buttons = gameObject.childrenMap.buttons;
+	        var index = gameObject._selectedIndex;  // See buttons's 'button.click' event
 	        if (index === undefined) {
-	            index = GetOptionIndex(list.options, value);
+	            index = GetOptionIndex(buttons.options, value);
 	        }
-	        SetButtonsActiveStateByIndex(list.childrenMap.buttons, index);
+	        SetButtonsActiveStateByIndex(buttons.childrenMap.buttons, index);
 	    },
+
+	    setReadOnly(gameObject, readOnly) {
+	        if (readOnly === undefined) {
+	            readOnly = true;
+	        }
+	        SetButtonsReadOnly(gameObject, readOnly);
+	    }
 	};
 
 	// string

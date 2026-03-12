@@ -1658,6 +1658,24 @@ tweaker.addRows(properties, target);
     - `true` : Update input text from current object, in `postupdate` event of scene. Default behavior.
 
 
+### Read only
+
+- Eanble readOnly
+    ```javascript
+    tweaker.setReadOnly();
+    // tweaker.readOnly = true;
+    ```
+- Disable readOnly (editable)
+    ```javascript
+    tweaker.setReadOnly(false);
+    // tweaker.readOnly = false;
+    ```
+- Is readOnly
+    ```javascript
+    var readOnly = tweaker.readOnly;
+    ```
+
+
 ### Layout children
 
 Arrange position of all elements.

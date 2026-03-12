@@ -21921,6 +21921,27 @@
             return this;
         }
 
+        get readOnly() {
+            return this._readOnly;
+        }
+
+        set readOnly(value) {
+            var inputText = this.childrenMap.inputText;
+            if (inputText) {
+                inputText.setReadOnly(value);
+            }
+
+            this._readOnly = value;
+        }
+
+        setReadOnly(enable) {
+            if (enable === undefined) {
+                enable = true;
+            }
+            this.readOnly = enable;
+            return this;
+        }
+
     };
 
     var methods$9 = {
@@ -39437,6 +39458,23 @@
             if (swatch && hasColorPicker) {
                 this.onClick(swatch, this.openColorPicker, this);
             }
+        }
+
+        get readOnly() {
+            return this._readOnly;
+        }
+
+        set readOnly(value) {
+            var swatch = this.childrenMap.swatch;
+            if (swatch) {
+                if (value) {
+                    this.disableClick(swatch);
+                } else {
+                    this.enableClick(swatch);
+                }
+            }
+
+            super.readOnly = value;
         }
     }
 

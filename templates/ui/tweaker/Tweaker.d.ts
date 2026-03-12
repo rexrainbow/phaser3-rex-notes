@@ -1116,6 +1116,18 @@ declare class Tweaker extends Sizer {
     setExpandInputRowHeightEnable(enable?: boolean): this;
 
     /**
+     * Set read-only mode for this tweaker and child controls that support it.
+     *
+     * @param value - Set to true to enable read-only mode.
+     * @returns This tweaker instance.
+     */
+    setReadOnly(value?: boolean): this;
+    /**
+     * True if this tweaker is in read-only mode.
+     */
+    readOnly: boolean;
+
+    /**
      * Register an input handler.
      *
      * @param config - Input handler configuration.

@@ -116,6 +116,31 @@ var GenerateTweakerShellClass = function (config) {
             return gameObject;
         }
 
+        get readOnly() {
+            return this._readOnly;
+        }
+
+        set readOnly(value) {
+            value = !!value;
+            var children = this.sizerChildren;
+            for (var i = 0, cnt = children.length; i < cnt; i++) {
+                var child = children[i];
+                if (!child.setReadOnly) {
+                    continue;
+                }
+
+                child.setReadOnly(value);
+            }
+
+        }
+
+        setReadOnly(value) {
+            if (value === undefined) {
+                value = true;
+            }
+            this.readOnly = value;
+            return this;
+        }
     }
 
     Object.assign(
