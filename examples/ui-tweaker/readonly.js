@@ -4,7 +4,6 @@ import UIPlugin from '../../templates/ui/ui-plugin.js';
 const COLOR_MAIN = 0x424242;
 const COLOR_LIGHT = 0x6d6d6d;
 const COLOR_DARK = 0x1b1b1b;
-const FONT_SIZE = 16;
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -14,83 +13,179 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
+        this.load.image('settings', 'assets/images/settings.png');
+        this.load.image('arrow-down', 'assets/images/arrow-down.png');
         this.load.image('add', 'assets/images/add.png');
         this.load.image('delete', 'assets/images/delete.png');
         this.load.image('delete2', 'assets/images/delete2.png');
-        this.load.image('arrow-down', 'assets/images/arrow-down.png');
-        this.load.image('copy', 'assets/images/copy.png');
-        this.load.image('reset', 'assets/images/reset.png');
+
     }
 
     create() {
-        var isVerticalView = true;
-        var panel = CreatePanel(this, isVerticalView)
+        var gameObject = this.add.circle(400, 300, 20, 0xff0000).setStrokeStyle(4, 0xffffff)
+            .setName('abc');
+
+        gameObject.description = 'A Circle Game object';
+        gameObject.items = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+        var panel = CreatePanel(this)
             .setPosition(0, 0)
             .setOrigin(0)
-            .addArrayTable(CreateComplexItems(10), null, {
-                view: (isVerticalView) ? 'detail-V' : 'detail-H',
-                $properties: [
-                    { $key: 'name', title: 'Name', view: 'string', },
-                    { $key: 'description', title: 'Descr-\niption', view: 'textarea', height: 100 },
-                    { $key: 'a', view: 'number' },
-                    { $key: 'b', view: 'number' },
-                    { $key: 'c', view: 'boolean' },
-                    { $key: 'd', view: 'number' },
-                    { $key: 'e', view: 'number' },
-                    { $key: 'f', view: 'number' },
-                    { $key: 'g', view: 'number' },
-                    { $key: 'h', view: 'number' },
-                ],
+            .layout();
 
-                createDefaultItem() {
-                    return CreateComplexItems(1)[0]
-                },
-
-                displayNameLabel(index, item, items) {
-                    return {
-                        text: item.name
-                    }
-                },
-
-                splitRatio: (isVerticalView) ? 0.5 : 0.4
+        panel
+            .addFolder({
+                title: 'Position',
+                expanded: false
             })
-            .layout()
+            .addInput(
+                gameObject, 'x',
+                {
+                    icon: 'settings',           // Title icon
+                    min: 0, max: 800,           // Range
+                    format(value) {             // Formatter of text
+                        return value.toFixed(2);
+                    },
+                    // inputTextReadOnly: true  // Uneditable
+                }
+            )
+            .addInput(
+                gameObject, 'y',
+                {
+                    icon: 'settings',           // Title icon
+                    options: [                  // List options
+                        { text: 'top', value: 0 },
+                        { text: 'center', value: 300 },
+                        { text: 'bottom', value: 600 },
+                    ]
+                    // Default list is dropdown-list
+                }
+            )
 
-        // panel.setReadOnly();
+        panel
+            .addInput(
+                gameObject, 'radius',
+                {
+                    icon: 'settings',           // Title icon
+                    title: 'size',              // Custom title
+                    options: [                  // List options
+                        { text: 'L', value: 40 },
+                        { text: 'M', value: 20 },
+                        { text: 'S', value: 10 },
+                    ],
+                    view: 'buttons'             // Buttons list
+                }
+            )
+            .addSeparator()
+
+        var pages = panel
+            .addTab({
+                pages: [
+                    { title: 'Display' },
+                    { title: 'Color' },
+                    { title: 'Description' },
+                    { title: 'Items' },
+                ]
+            })
+
+        pages[0]
+            .addInput(
+                gameObject, 'alpha',
+                {
+                    icon: 'settings',           // Title icon
+                }
+            )
+            .addInput(
+                gameObject, 'visible',
+                {
+                    icon: 'settings',           // Title icon
+                    // view: 'toggleSwitch'        // Toggle-switch
+                }
+            )
+
+        pages[1]
+            .addButton({
+                title: 'New-\ncolor',
+                icon: 'settings',             // Title icon
+
+                label: 'Random',
+                callback: function () {
+                    var fillColor = Phaser.Math.Between(0, 0x1000000);
+                    gameObject.fillColor = fillColor;
+                    gameObject.strokeColor = 0x1000000 - fillColor;
+                }
+            })
+            .addInput(
+                gameObject, 'fillColor',
+                {
+                    title: 'color',             // Custom title
+                    icon: 'settings',           // Title icon
+                    view: 'color',
+                    monitor: true,
+                }
+            )
+            .addInput(
+                gameObject, 'strokeColor',
+                {
+                    title: 'stroke',            // Custom title
+                    icon: 'settings',           // Title icon
+                    view: 'color',
+                    monitor: true,
+                }
+            )
+            .addInput(
+                gameObject, 'lineWidth',
+                {
+                    title: 'stroke-\nwidth',    // Custom title
+                    icon: 'settings',           // Title icon
+                    view: 'incdec',
+                    min: 0, max: 10
+                }
+            )
+
+        pages[2]
+            .addInput(
+                gameObject, 'description',
+                {
+                    icon: 'settings',           // Title icon
+                    view: 'textarea',
+                    orientation: 'y',
+                }
+            )
+
+        pages[3]
+            .addArrayTable(
+                gameObject, 'items',
+                {
+                    createDefaultItem() { return 0 }
+                }
+            )
+
+        panel
+            .addSeparator()
+            .addInput(
+                gameObject, 'name',
+                {
+                    icon: 'settings',           // Title icon
+                }
+            )
+
+        panel
+            .layout()
+        //.drawBounds(this.add.graphics(), 0xff0000);
+
+        panel.setReadOnly(true);
     }
 
     update() {
     }
 }
 
-var CreateComplexItems = function (amount) {
-    var items = [];
-    for (var i = 0; i < amount; i++) {
-        items.push({
-            name: `Item ${i}`,
-            description: `Item ${i}`,
-            a: 10 + i,
-            b: 20 + i,
-            c: false,
-            d: 30 + i,
-            e: 40 + i,
-            f: 50 + i,
-            g: 60 + i,
-            h: 70 + i,
-        })
-    }
-    return items;
-}
-
-var CreatePanel = function (scene, isVerticalView) {
+var CreatePanel = function (scene) {
     return scene.rexUI.add.tweaker({
-        width: (isVerticalView) ? 400 : 600,
+        width: 340,
 
         styles: {
-            space: {
-                left: 10, right: 10, top: 10, bottom: 10, item: 3
-            },
-
             background: {
                 radius: 10,
                 color: 0x0,
@@ -98,13 +193,6 @@ var CreatePanel = function (scene, isVerticalView) {
             },
 
             inputRow: {
-                space: { top: 5, bottom: 5 },
-                proportion: {
-                    title: 1,
-                    inputField: 3,
-                    range: { slider: 2, inputText: 1 }
-                },
-
                 border: {
                     strokeColor: COLOR_MAIN
                 },
@@ -112,12 +200,11 @@ var CreatePanel = function (scene, isVerticalView) {
                 title: {
                     space: { icon: 2 },
                     iconSize: 30,
-                    text: { padding: { top: 5 } }
                 },
 
                 inputText: {
                     background: {
-                        color: COLOR_DARK,
+                        color: COLOR_DARK
                     },
                     focusStyle: {
                         color: COLOR_MAIN,
@@ -279,16 +366,15 @@ var CreatePanel = function (scene, isVerticalView) {
             },
 
             arrayTable: {
-                height: (isVerticalView) ? 500 : 300,
 
                 space: {
                     left: 10, right: 10, top: 10, bottom: 10,
-                    table: 10, splitter: 8,
+                    table: 10, splitter: 5,
                     cell: {
                         top: 5, bottom: 5, left: 5,
                         index: 10, tweaker: 5,
                     },
-                    header: 10, footer: 10,
+                    header: 5, footer: 5,
                 },
 
                 background: {
@@ -380,61 +466,6 @@ var CreatePanel = function (scene, isVerticalView) {
 
                 },
 
-                editorToolbar: {
-                    // title, header
-                    // index: {},
-                    // displayName: {},
-
-                    // toolbar, footer
-                    deleteButton: {
-                        space: { left: 5, right: 5, top: 5, bottom: 5 },
-                        icon: { key: 'delete', },
-                        iconSize: 20,
-                        background: {
-                            color: COLOR_DARK,
-                            strokeColor: COLOR_LIGHT,
-                        },
-
-                    },
-                    duplicateButton: {
-                        space: { left: 5, right: 5, top: 5, bottom: 5 },
-                        icon: { key: 'copy', },
-                        iconSize: 20,
-                        background: {
-                            color: COLOR_DARK,
-                            strokeColor: COLOR_LIGHT,
-                        },
-
-                    },
-                    resetButton: {
-                        space: { left: 5, right: 5, top: 5, bottom: 5 },
-                        icon: { key: 'reset', },
-                        iconSize: 20,
-                        background: {
-                            color: COLOR_DARK,
-                            strokeColor: COLOR_LIGHT,
-                        },
-
-                    },
-                    previousButton: {
-                        space: { left: 5, right: 5, top: 5, bottom: 5 },
-                        icon: { key: 'arrow-down', flipY: true },
-                        iconSize: 20,
-                        background: {
-                            color: COLOR_DARK,
-                            strokeColor: COLOR_LIGHT,
-                        },
-                    },
-                    nextButton: {
-                        space: { left: 5, right: 5, top: 5, bottom: 5 },
-                        icon: { key: 'arrow-down' },
-                        iconSize: 20,
-                        background: {
-                            color: COLOR_DARK,
-                            strokeColor: COLOR_LIGHT,
-                        },
-                    },
-                },
             },
 
             separator: {
@@ -442,6 +473,9 @@ var CreatePanel = function (scene, isVerticalView) {
                 color: COLOR_DARK
             },
 
+            space: {
+                left: 10, right: 10, top: 10, bottom: 10, item: 3
+            }
         },
     })
 }

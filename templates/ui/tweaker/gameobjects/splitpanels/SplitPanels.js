@@ -1,6 +1,7 @@
 import SplitPanelsBase from '../../../splitpanels/SplitPanels.js';
 import BindingTargetMethods from './BindingTargetMethods.js';
 import InputRowTitleWidthMethods from './InputRowTitleWidthMethods.js';
+import SetReadOnlyMethods from './SetReadOnlyMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -36,6 +37,7 @@ Object.assign(
     SplitPanels.prototype,
     BindingTargetMethods,
     InputRowTitleWidthMethods,
+    SetReadOnlyMethods,
 )
 
 export default SplitPanels;

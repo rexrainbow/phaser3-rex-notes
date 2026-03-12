@@ -241,7 +241,7 @@ declare class GridTable extends Scrollable {
     getCellContainer(cellIndex: number): Phaser.GameObjects.GameObject | null;
 
     /**
-     * Get all cell containers.
+     * Get all visible cell containers.
      *
      * @param out - Optional array to receive the containers.
      * @returns The array of cell containers.

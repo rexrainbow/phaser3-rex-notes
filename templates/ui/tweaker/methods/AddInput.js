@@ -81,6 +81,10 @@ var AddInput = function (target, bindingKey, config) {
     inputSizer.setAutoUpdateEnable(config.autoUpdate);
     inputSizer.setBindingTarget(target, bindingKey);
 
+    if (config.readOnly) {
+        inputSizer.setReadOnly();
+    }
+
     if (config.monitor) {
         inputSizer.startMonitorTarget();
     }

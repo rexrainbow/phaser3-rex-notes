@@ -40,6 +40,8 @@ class CellContainer extends Sizer {
             this.setBindingTarget(items, index);
         }
 
+        this.setReadOnly(this.gridTable.readOnly);
+
         return this;
     }
 
@@ -68,6 +70,11 @@ class CellContainer extends Sizer {
         if (!value) {
             this.setBindingTarget();
         }
+    }
+
+    setReadOnly(value) {
+        this.childrenMap.inputTweaker.setReadOnly(value);
+        return this;
     }
 
 }

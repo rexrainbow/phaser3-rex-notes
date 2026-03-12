@@ -13,6 +13,7 @@ import AddButton from './AddButton.js';
 import AddSeparator from './AddSeparator.js';
 import AddRows from './AddRows.js';
 import SetBindingTarget from './SetBindingTarget.js';
+import SetReadOnly from './SetReadOnly.js';
 import GetMaxInputRowTitleWidth from './GetMaxInputRowTitleWidth.js';
 import SetInputRowTitleWidth from './SetInputRowTitleWidth.js';
 
@@ -34,6 +35,7 @@ var methods = {
     addRows: AddRows,
 
     setBindingTarget: SetBindingTarget,
+    setReadOnly: SetReadOnly,
 
     getMaxInputRowTitleWidth: GetMaxInputRowTitleWidth,
     setInputRowTitleWidth: SetInputRowTitleWidth,

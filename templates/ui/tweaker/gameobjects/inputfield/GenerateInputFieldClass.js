@@ -107,6 +107,27 @@ var GenerateInputFieldClass = function (BaseClass) {
             return this;
         }
 
+        setReadOnly(value) {
+            value = !!value;
+
+            if (!this.setReadOnlyCallback) {
+                return this;
+            }
+
+            this.setReadOnlyCallback(this, value);
+            this._readOnly = value;
+
+            return this;
+        }
+
+        get readOnly() {
+            return this._readOnly;
+        }
+
+        set readOnly(value) {
+            this.setReadOnly(value);
+        }
+
         setup(config, setDefaults) {
             if (setDefaults === undefined) {
                 setDefaults = false;
@@ -127,6 +148,7 @@ var GenerateInputFieldClass = function (BaseClass) {
             return this;
         }
 
+        // Internal usage
         setSetupCallback(callback) {
             this.setupCallback = callback;
             return this;
@@ -154,6 +176,11 @@ var GenerateInputFieldClass = function (BaseClass) {
 
         setValidateCallback(callback) {
             this.validateCallback = callback;
+            return this;
+        }
+
+        setSetReadOnlyCallback(callback) {
+            this.setReadOnlyCallback = callback;
             return this;
         }
     }

@@ -1,6 +1,7 @@
 import Sizer from '../../../sizer/Sizer.js';
 import BindingTargetMethods from './BindingTargetMethods.js';
 import MonitorTargetMethods from './MonitorTargetMethods.js';
+import SetReadOnlyMethods from './SetReadOnlyMethods.js';
 import MinTitleWidthMethods from './MinTitleWidthMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -96,6 +97,7 @@ Object.assign(
     InputRow.prototype,
     BindingTargetMethods,
     MonitorTargetMethods,
+    SetReadOnlyMethods,
     MinTitleWidthMethods,
 )
 

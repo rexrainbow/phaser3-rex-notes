@@ -1,5 +1,14 @@
 import CreateColorInput from './utils/CreateColorInput.js';
 
+var SetColorInputReadOnly = function (gameObject, readOnly) {
+    if (readOnly === undefined) {
+        readOnly = true;
+    }
+
+    var colorInput = gameObject.childrenMap.colorInput;
+    colorInput.setReadOnly(readOnly);
+}
+
 export default {
     name: 'ColorInput',
 
@@ -41,4 +50,11 @@ export default {
         var colorInput = gameObject.childrenMap.colorInput;
         colorInput.setValue(value);
     },
+
+    setReadOnly(gameObject, readOnly) {
+        if (readOnly === undefined) {
+            readOnly = true;
+        }
+        SetColorInputReadOnly(gameObject, readOnly);
+    }
 }

@@ -1,5 +1,14 @@
 import CreateToggleSwitch from './utils/CreateToggleSwitch.js';
 
+var SetToggleSwitchReadOnly = function (gameObject, readOnly) {
+    if (readOnly === undefined) {
+        readOnly = true;
+    }
+
+    var toggleSwitch = gameObject.childrenMap.toggleSwitch;
+    toggleSwitch.setReadOnly(readOnly);
+}
+
 export default {
     name: 'ToggleSwitchInput',
 
@@ -44,4 +53,11 @@ export default {
         var toggleSwitch = gameObject.childrenMap.toggleSwitch;
         toggleSwitch.setValue(value);
     },
+
+    setReadOnly(gameObject, readOnly) {
+        if (readOnly === undefined) {
+            readOnly = true;
+        }
+        SetToggleSwitchReadOnly(gameObject, readOnly);
+    }
 }

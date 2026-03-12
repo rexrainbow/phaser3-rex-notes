@@ -6,6 +6,19 @@ var SetOptions = function (gameObject, options) {
     list.setOptions(options);
 }
 
+var SetListReadOnly = function (gameObject, readOnly) {
+    if (readOnly === undefined) {
+        readOnly = true;
+    }
+
+    var list = gameObject.childrenMap.list;
+    if (readOnly) {
+        list.disableClick();
+    } else {
+        list.enableClick();
+    }
+}
+
 export default {
     name: 'ListInput',
 
@@ -53,4 +66,12 @@ export default {
             .setMinSize(0, 0);
 
     },
+
+    setReadOnly(gameObject, readOnly) {
+        if (readOnly === undefined) {
+            readOnly = true;
+        }
+
+        SetListReadOnly(gameObject, readOnly);
+    }
 }

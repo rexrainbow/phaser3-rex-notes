@@ -85,6 +85,10 @@ var AddArrayTable = function (target, bindingKey, config) {
         arrayTable.startMonitorTarget();
     }
 
+    if (config.readOnly) {
+        arrayTable.setReadOnly();
+    }
+
     if (config.key) {
         this.root.addChildrenMap(config.key, arrayTable);
     }

@@ -1,5 +1,14 @@
 import CreateCheckbox from './utils/CreateCheckbox.js';
 
+var SetCheckboxReadOnly = function (gameObject, readOnly) {
+    if (readOnly === undefined) {
+        readOnly = true;
+    }
+
+    var checkbox = gameObject.childrenMap.checkbox;
+    checkbox.setReadOnly(readOnly);
+}
+
 export default {
     name: 'CheckboxInput',
 
@@ -40,5 +49,12 @@ export default {
     displayValue(gameObject, value) {
         var checkbox = gameObject.childrenMap.checkbox;
         checkbox.setValue(value);
+    },
+
+    setReadOnly(gameObject, readOnly) {
+        if (readOnly === undefined) {
+            readOnly = true;
+        }
+        SetCheckboxReadOnly(gameObject, readOnly);
     }
 }

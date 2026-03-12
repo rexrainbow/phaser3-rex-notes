@@ -110,4 +110,18 @@ declare class ColorInputBase extends Sizer {
      * Current numeric color value.
      */
     color: number;
+
+    /**
+     * Enable or disable read-only mode of the input text.
+     *
+     * @param enable - Set to true to make the input read-only.
+     * @returns This component instance.
+     */
+    setReadOnly(
+        enable?: boolean
+    ): this;
+    /**
+     * True if the input text is read-only.
+     */
+    readOnly: boolean;
 }

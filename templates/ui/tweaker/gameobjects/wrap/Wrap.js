@@ -1,6 +1,7 @@
 import Sizer from '../../../sizer/Sizer.js';
 import BindingTargetMethods from './BindingTargetMethods.js';
 import InputRowTitleWidthMethods from './InputRowTitleWidthMethods.js';
+import SetReadOnlyMethods from './SetReadOnlyMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -61,6 +62,7 @@ Object.assign(
     Wrap.prototype,
     BindingTargetMethods,
     InputRowTitleWidthMethods,
+    SetReadOnlyMethods,
 )
 
 export default Wrap;

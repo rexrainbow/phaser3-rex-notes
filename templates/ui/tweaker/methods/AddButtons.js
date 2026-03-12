@@ -30,6 +30,10 @@ var AddButtons = function (config) {
         buttons.setBindingTarget(target);
     }
 
+    if (config.readOnly) {
+        buttons.setReadOnly();
+    }
+
     if (config.key) {
         this.root.addChildrenMap(config.key, buttons);
     }

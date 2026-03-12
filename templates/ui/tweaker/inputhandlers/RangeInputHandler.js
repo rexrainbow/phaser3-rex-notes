@@ -14,13 +14,34 @@ var SetRange = function (gameObject, min, max, step) {
     slider.setGap(step, min, max);
 }
 
-var SetInputTextReadOnly = function (gameObject, enable) {
-    if (enable === undefined) {
-        enable = true;
+var SetInputTextReadOnly = function (gameObject, readOnly, force) {
+    if (readOnly === undefined) {
+        readOnly = true;
+    }
+
+    if (force === undefined) {
+        force = false;
     }
 
     var inputText = gameObject.childrenMap.inputText;
-    inputText.setReadOnly(enable);
+
+    if (force) {
+        gameObject.inputTextReadOnly = readOnly;
+        inputText.setReadOnly(readOnly);
+    } else {
+        if (!gameObject.inputTextReadOnly) {
+            inputText.setReadOnly(readOnly);
+        }
+    }
+}
+
+var SetSliderReadOnly = function (gameObject, readOnly) {
+    if (readOnly === undefined) {
+        readOnly = true;
+    }
+
+    var slider = gameObject.childrenMap.slider;
+    slider.setEnable(!readOnly);
 }
 
 export default {
@@ -86,8 +107,9 @@ export default {
             SetRange(gameObject, config.min, config.max, config.step);
         }
 
+        // User can force inputText as readOnly field always, only use slider
         if (setDefaults || config.hasOwnProperty('inputTextReadOnly')) {
-            SetInputTextReadOnly(gameObject, !!config.inputTextReadOnly);
+            SetInputTextReadOnly(gameObject, !!config.inputTextReadOnly, true);
         }
     },
 
@@ -100,4 +122,12 @@ export default {
         inputText.setText('').setText(gameObject.getFotmatText(value));
 
     },
+
+    setReadOnly(gameObject, readOnly) {
+        if (readOnly === undefined) {
+            readOnly = true;
+        }
+        SetInputTextReadOnly(gameObject, readOnly);
+        SetSliderReadOnly(gameObject, readOnly);
+    }
 }

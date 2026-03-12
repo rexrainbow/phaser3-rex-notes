@@ -7,20 +7,29 @@ import SetButtonsActiveStateByIndex from './utils/SetButtonsActiveState.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 var SetOptions = function (gameObject, options) {
-    var list = gameObject.childrenMap.list;
-    list.options = options;
+    var buttons = gameObject.childrenMap.buttons;
+    buttons.options = options;
 
     var scene = gameObject.scene;
-    var buttonConfig = list.buttonConfig;
-    list.clearButtons(true);
+    var buttonConfig = buttons.buttonConfig;
+    buttons.clearButtons(true);
     for (var i = 0, cnt = options.length; i < cnt; i++) {
         var option = options[i];
         var button = CreateLabel(scene, buttonConfig)
             .setActiveState(false)
             .resetDisplayContent({ text: option.text })
 
-        list.addButton(button);
+        buttons.addButton(button);
     }
+}
+
+var SetButtonsReadOnly = function (gameObject, readOnly) {
+    if (readOnly === undefined) {
+        readOnly = true;
+    }
+
+    var buttons = gameObject.childrenMap.buttons;
+    buttons.setButtonEnable(!readOnly);
 }
 
 export default {
@@ -48,18 +57,18 @@ export default {
         }
         delete buttonConfig.expand;
 
-        var list = CreateButtons(scene, {
+        var buttons = CreateButtons(scene, {
             expand: buttonExpand
         });
-        list.buttonConfig = buttonConfig;
+        buttons.buttonConfig = buttonConfig;
 
         gameObject.add(
-            list,
-            { proportion: 1, expand: true, key: 'list' }
+            buttons,
+            { proportion: 1, expand: true, key: 'buttons' }
         );
 
-        list.on('button.click', function (button, index, pointer, event) {
-            var option = list.options[index];
+        buttons.on('button.click', function (button, index, pointer, event) {
+            var option = buttons.options[index];
             if (!option) {
                 return;  // ??
             }
@@ -67,7 +76,6 @@ export default {
             gameObject.setValue(option.value);
             gameObject._selectedIndex = undefined;
         });
-
     },
 
     // Callback inside `setup()`
@@ -79,11 +87,18 @@ export default {
 
     // Callback inside `setValue()`
     displayValue(gameObject, value) {
-        var list = gameObject.childrenMap.list;
-        var index = gameObject._selectedIndex;  // See list's 'button.click' event
+        var buttons = gameObject.childrenMap.buttons;
+        var index = gameObject._selectedIndex;  // See buttons's 'button.click' event
         if (index === undefined) {
-            index = GetOptionIndex(list.options, value);
+            index = GetOptionIndex(buttons.options, value);
         }
-        SetButtonsActiveStateByIndex(list.childrenMap.buttons, index);
+        SetButtonsActiveStateByIndex(buttons.childrenMap.buttons, index);
     },
+
+    setReadOnly(gameObject, readOnly) {
+        if (readOnly === undefined) {
+            readOnly = true;
+        }
+        SetButtonsReadOnly(gameObject, readOnly);
+    }
 }

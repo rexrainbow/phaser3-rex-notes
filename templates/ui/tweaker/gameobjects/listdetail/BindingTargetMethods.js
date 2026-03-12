@@ -1,10 +1,12 @@
 export default {
     setBindingTarget(target, bindingKey) {
         // ListTable panel (left panel)
-        if (arguments.length >= 2) {
-            this.leftPanel.setBindingTarget(target, bindingKey);
-        } else {
-            this.leftPanel.setBindingTarget(target);
+        if (this.leftPanel && this.leftPanel.setBindingTarget) {
+            if (arguments.length >= 2) {
+                this.leftPanel.setBindingTarget(target, bindingKey);
+            } else {
+                this.leftPanel.setBindingTarget(target);
+            }
         }
 
         var items = this.leftPanel.items;

@@ -140,6 +140,27 @@ class ColorInput extends Sizer {
         return this;
     }
 
+    get readOnly() {
+        return this._readOnly;
+    }
+
+    set readOnly(value) {
+        var inputText = this.childrenMap.inputText;
+        if (inputText) {
+            inputText.setReadOnly(value);
+        }
+
+        this._readOnly = value;
+    }
+
+    setReadOnly(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+        this.readOnly = enable;
+        return this;
+    }
+
 }
 
 export default ColorInput;

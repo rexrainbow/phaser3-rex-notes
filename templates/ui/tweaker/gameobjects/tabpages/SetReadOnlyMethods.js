@@ -1,12 +1,12 @@
 export default {
-    setBindingTarget(target) {
-        var children = this.childrenMap.child;
+    setReadOnly(value) {
+        var children = this.childrenMap.pages.children;
         for (var i = 0, cnt = children.length; i < cnt; i++) {
             var child = children[i];
-            if (!child.setBindingTarget) {
+            if (!child.setReadOnly) {
                 continue;
             }
-            child.setBindingTarget(target);
+            child.setReadOnly(value);
         }
         return this;
     },

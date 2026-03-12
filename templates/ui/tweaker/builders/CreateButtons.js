@@ -40,6 +40,16 @@ var CreateButtons = function (scene, config, style) {
     });
     buttonsSizer.defaultProportion = 1;
 
+    // ButtonsSizer does not have setReadOnly method
+    buttonsSizer.setReadOnly = function (readOnly) {
+        if (readOnly === undefined) {
+            readOnly = true;
+        }
+
+        buttonsSizer.setButtonEnable(!readOnly);
+        return this;
+    }
+
     // Border
     var border = CreateBackground(scene, (config.border || {}), (style.border || {}));
 

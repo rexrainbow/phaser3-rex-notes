@@ -10,11 +10,13 @@ var CreateInputField = function (scene, config, style) {
             inputField = new InputFieldClass(scene);
             scene.add.existing(inputField);
 
+            // Decorate instance via installing callbacks
             inputField
                 .setSetupCallback(handler.setup)
                 .setFilterValueCallback(handler.filterValue)
                 .setDisplayValueCallback(handler.displayValue)
                 .setOnBindTargetCallback(handler.onBindTarget)
+                .setSetReadOnlyCallback(handler.setReadOnly)
 
             handler.build(inputField, style);
 
