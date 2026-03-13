@@ -5,11 +5,11 @@ import Scrollable from '../gameobjects/scrollable/Scrollable.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var CreateScrollable = function (parent, config, style) {
+var CreateScrollable = function (tweaker, config, style) {
     if (!config) { config = {}; }
     if (!style) { style = {}; }
 
-    var scene = parent.scene;
+    var scene = tweaker.scene;
 
     // background
     var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
@@ -19,10 +19,10 @@ var CreateScrollable = function (parent, config, style) {
 
     // panel
     var tweakerConfig = {
-        root: style.root,
-        styles: style.tweaker,
+        root: tweaker.root,
+        styles: tweaker.styles,
     }
-    var child = parent.createTweaker(tweakerConfig);
+    var child = tweaker.createTweaker(tweakerConfig);
 
     // slider
     var slider = CreateSlider(scene, config.slider, style.slider);

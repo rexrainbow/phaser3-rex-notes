@@ -44,13 +44,13 @@ export default {
     },
 
     // Callback after `constructor()`
-    build(gameObject, style) {
+    build(gameObject, config, inputRowStyle, styles) {
         var scene = gameObject.scene;
 
         gameObject.type = 'rexTweaker.ButtonsInput';
 
         // TODO : DeepClone?
-        var buttonConfig = (style.button) ? DeepClone(style.button) : {};
+        var buttonConfig = (inputRowStyle.button) ? DeepClone(inputRowStyle.button) : {};
         var buttonExpand = GetValue(buttonConfig, 'expand', true);
         if (buttonExpand) {
             buttonConfig.align = 'center';

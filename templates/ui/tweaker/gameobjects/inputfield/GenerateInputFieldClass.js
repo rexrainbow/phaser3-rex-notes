@@ -20,12 +20,6 @@ var GenerateInputFieldClass = function (BaseClass) {
             return this._value;
         }
 
-        get tweaker() {
-            var inputRow = this.getParentSizer();
-            var tweaker = inputRow.getParentSizer();
-            return tweaker;
-        }
-
         get root() {
             return this.tweaker.root;
         }
@@ -128,6 +122,12 @@ var GenerateInputFieldClass = function (BaseClass) {
             this.setReadOnly(value);
         }
 
+        // Internal usage
+        setTweaker(tweaker) {
+            this.tweaker = tweaker;
+            return this;
+        }
+
         setup(config, setDefaults) {
             if (setDefaults === undefined) {
                 setDefaults = false;
@@ -148,7 +148,6 @@ var GenerateInputFieldClass = function (BaseClass) {
             return this;
         }
 
-        // Internal usage
         setSetupCallback(callback) {
             this.setupCallback = callback;
             return this;

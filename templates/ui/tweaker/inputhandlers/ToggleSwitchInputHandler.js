@@ -21,12 +21,12 @@ export default {
     },
 
     // Callback after `constructor()`
-    build(gameObject, style) {
+    build(gameObject, config, inputRowStyle, styles) {
         var scene = gameObject.scene;
 
         gameObject.type = 'rexTweaker.ToggleSwitchInput';
 
-        var toggleSwitchConfig = style.toggleSwitch;
+        var toggleSwitchConfig = inputRowStyle.toggleSwitch;
         var toggleSwitch = CreateToggleSwitch(scene, toggleSwitchConfig);
 
         var size = toggleSwitchConfig.size;

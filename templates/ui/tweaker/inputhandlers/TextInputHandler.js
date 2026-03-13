@@ -33,12 +33,12 @@ export default {
     },
 
     // Callback after `constructor()`
-    build(gameObject, style) {
+    build(gameObject, config, inputRowStyle, styles) {
         var scene = gameObject.scene;
 
         gameObject.type = 'rexTweaker.TextInput';
 
-        var inputTextConfig = style.inputText;
+        var inputTextConfig = inputRowStyle.inputText;
         var inputText = CreateInputText(scene, inputTextConfig);
 
         gameObject.add(

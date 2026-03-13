@@ -59,30 +59,30 @@ export default {
     },
 
     // Callback after `constructor()`
-    build(gameObject, style) {
+    build(gameObject, config, inputRowStyle, styles) {
         var scene = gameObject.scene;
 
         gameObject.type = 'rexTweaker.RangeInput';
 
-        var sliderConfig = style.slider;
+        var sliderConfig = inputRowStyle.slider;
         var trackSizeKey = (gameObject.orientation === 0) ? 'track.height' : 'track.width';
         var trackSize = GetValue(sliderConfig, trackSizeKey);
         var slider = CreateSlider(scene, sliderConfig);
 
-        var defaultProportion = (style.defaultExpandWidth) ? 2 : 0;
-        var proportion = GetValue(style, 'proportion.range.slider', defaultProportion);
+        var defaultProportion = (inputRowStyle.defaultExpandWidth) ? 2 : 0;
+        var proportion = GetValue(inputRowStyle, 'proportion.range.slider', defaultProportion);
         var expand = (trackSize === undefined);
         gameObject.add(
             slider,
             { proportion: proportion, expand: expand, key: 'slider' }
         );
 
-        var inputTextConfig = style.inputNumber || style.inputText;
+        var inputTextConfig = inputRowStyle.inputNumber || inputRowStyle.inputText;
         var inputText = CreateInputText(scene, inputTextConfig)
             .setNumberInput();
 
-        var defaultProportion = (style.defaultExpandWidth) ? 1 : 0;
-        var proportion = GetValue(style, 'proportion.range.inputText', defaultProportion);
+        var defaultProportion = (inputRowStyle.defaultExpandWidth) ? 1 : 0;
+        var proportion = GetValue(inputRowStyle, 'proportion.range.inputText', defaultProportion);
         gameObject.add(
             inputText,
             { proportion: proportion, expand: true, key: 'inputText' }

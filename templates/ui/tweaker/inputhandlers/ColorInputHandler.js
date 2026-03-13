@@ -20,17 +20,17 @@ export default {
     },
 
     // Callback after `constructor()`
-    build(gameObject, style) {
+    build(gameObject, config, inputRowStyle, styles) {
         var scene = gameObject.scene;
 
         gameObject.type = 'rexTweaker.ColorInput';
 
-        var colorInputConfig = style.colorInput;
+        var colorInputConfig = inputRowStyle.colorInput;
         if (colorInputConfig === undefined) {
             colorInputConfig = {};
         }
         if (!colorInputConfig.hasOwnProperty('inputText')) {
-            colorInputConfig.inputText = style.inputText;
+            colorInputConfig.inputText = inputRowStyle.inputText;
         }
         var colorInput = CreateColorInput(scene, colorInputConfig);
 

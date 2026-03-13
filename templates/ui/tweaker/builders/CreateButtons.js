@@ -6,9 +6,11 @@ import InputRow from '../gameobjects/inputrow/InputRow.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var CreateButtons = function (scene, config, style) {
+var CreateButtons = function (tweaker, config, style) {
     if (!config) { config = {}; }
     if (!style) { style = {}; }
+
+    var scene = tweaker.scene;
 
     // Background
     var background = CreateBackground(scene, (config.background || {}), (style.background || {}));

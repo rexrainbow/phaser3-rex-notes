@@ -11,11 +11,11 @@ const DefaultSplitStyle = {
     alpha: 0.001
 };
 
-var CreateSplitPanels = function (parent, config, style) {
+var CreateSplitPanels = function (tweaker, config, style) {
     if (!config) { config = {}; }
     if (!style) { style = {}; }
 
-    var scene = parent.scene;
+    var scene = tweaker.scene;
 
     // background
     var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
@@ -25,11 +25,11 @@ var CreateSplitPanels = function (parent, config, style) {
 
     // left and right tweaker panels with background
     var tweakerConfig = {
-        root: style.root,
-        styles: style.tweaker,
+        root: tweaker.root,
+        styles: tweaker.styles,
     }
-    var leftPanel = parent.createTweaker(tweakerConfig);
-    var rightPanel = parent.createTweaker(tweakerConfig);
+    var leftPanel = tweaker.createTweaker(tweakerConfig);
+    var rightPanel = tweaker.createTweaker(tweakerConfig);
 
     // splitter
     var splitterConfig = config.splitter;

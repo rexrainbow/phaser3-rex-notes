@@ -24,10 +24,10 @@ const DefaultSplitStyle = {
     alpha: 0.001
 };
 
-var CreateListDetail = function (parent, config, style) {
+var CreateListDetail = function (tweaker, config, style) {
     if (!config) { config = {}; }
     if (!style) { style = {}; }
-    var scene = parent.scene;
+    var scene = tweaker.scene;
 
     // background of split-panels
     var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
@@ -38,7 +38,7 @@ var CreateListDetail = function (parent, config, style) {
     // left panel of split-panels
     // table config
     var listTableConfig = GetValue(config, 'table', undefined, style) || {};
-    var createCellContainerCallback = GenerateCreateCellContainerCallback(parent, config, style);
+    var createCellContainerCallback = GenerateCreateCellContainerCallback(tweaker, config, style);
 
     // slider
     var listTableSlider = CreateSlider(scene, config.slider, style.slider);
@@ -74,10 +74,10 @@ var CreateListDetail = function (parent, config, style) {
     // left panel of split-panels
 
     // right panel of split-panels
-    var editor = parent
+    var editor = tweaker
         .createTweaker({
-            root: style.root,
-            styles: style.tweaker,
+            root: tweaker.root,
+            styles: tweaker.styles,
         })
         .addRows(config.$properties, GetValue(config, 'monitor', false));
     // slider

@@ -31,7 +31,7 @@ var AddInput = function (target, bindingKey, config) {
         inputRowStyle.defaultExpandWidth = true;
     }
 
-    var inputSizer = CreateInputRow.call(this, this.scene, config, inputRowStyle);
+    var inputSizer = CreateInputRow(this, config, inputRowStyle, this.styles);
     if (!inputSizer) {
         // Can't create inputField
         console.error(`[Tweaker] Can't add Input

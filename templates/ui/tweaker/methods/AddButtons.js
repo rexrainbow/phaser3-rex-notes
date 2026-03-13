@@ -14,7 +14,7 @@ var AddButtons = function (config) {
 
     // Create buttons
     var buttonsStyle = GetValue(this.styles, 'inputRow') || {};
-    var buttons = CreateButtons(scene, config, buttonsStyle);
+    var buttons = CreateButtons(this, config, buttonsStyle);
 
     // Add buttons
     this.add(

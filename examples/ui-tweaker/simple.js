@@ -15,6 +15,9 @@ class Demo extends Phaser.Scene {
     preload() {
         this.load.image('settings', 'assets/images/settings.png');
         this.load.image('arrow-down', 'assets/images/arrow-down.png');
+        this.load.image('add', 'assets/images/add.png');
+        this.load.image('delete', 'assets/images/delete.png');
+        this.load.image('delete2', 'assets/images/delete2.png');
     }
 
     create() {
@@ -22,6 +25,7 @@ class Demo extends Phaser.Scene {
             .setName('abc');
 
         gameObject.description = 'A Circle Game object';
+        gameObject.items = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
         var panel = CreatePanel(this)
             .setPosition(0, 0)
@@ -78,7 +82,8 @@ class Demo extends Phaser.Scene {
                 pages: [
                     { title: 'Display' },
                     { title: 'Color' },
-                    { title: 'Description' }
+                    { title: 'Description' },
+                    { title: 'Items' },
                 ]
             })
 
@@ -147,6 +152,15 @@ class Demo extends Phaser.Scene {
                 }
             )
 
+        pages[3]
+            .addInput(
+                gameObject, 'items',
+                {
+                    icon: 'settings',           // Title icon
+                    orientation: 'y',           // Set layout to vertical
+                }
+            )
+
         panel
             .addSeparator()
             .addInput(
@@ -183,8 +197,8 @@ var CreatePanel = function (scene) {
                 },
 
                 title: {
-                    space: { icon: 2 },
-                    iconSize: 30,
+                    space: { icon: 2, top: 5, bottom: 5 },
+                    iconSize: 24,
                 },
 
                 inputText: {
@@ -348,6 +362,110 @@ var CreatePanel = function (scene) {
                 pages: {
                     fadeIn: 300
                 },
+            },
+
+            arrayTable: {
+                height: 200,
+
+                space: {
+                    left: 10, right: 10, top: 10, bottom: 10,
+                    table: 10, splitter: 5,
+                    cell: {
+                        top: 5, bottom: 5, left: 5,
+                        index: 10, tweaker: 5,
+                    },
+                    header: 5, footer: 5,
+                },
+
+                background: {
+                    strokeColor: COLOR_MAIN,
+                },
+
+                slider: {
+                    track: {
+                        color: COLOR_DARK,
+                        width: 8, height: 8,
+                    },
+                    thumb: {
+                        color: COLOR_LIGHT,
+                        width: 16, height: 16,
+                    },
+                },
+
+                splitter: {
+                    width: 10,
+                    height: 10,
+                    color: COLOR_MAIN,
+                    alpha: 1
+                },
+
+                cellBackground: {
+                    coloe: null,
+                    strokeWidth: 0,
+                    'active.color': COLOR_LIGHT,
+                    'active.alpha': 0.5,
+                    'hover.strokeColor': 0xffffff,
+                    'hover.strokeWidth': 2,
+                },
+
+                index: {
+                    width: 25,
+                },
+
+                deleteButton: {
+                    icon: { key: 'delete', },
+                    iconSize: 20,
+                    background: {
+                        color: COLOR_DARK,
+                        strokeColor: COLOR_LIGHT,
+                    },
+
+                },
+
+                moveUpButton: {
+                    //space: { left: 5, right: 5, top: 5, bottom: 5 },
+                    icon: { key: 'arrow-down', flipY: true },
+                    iconSize: 16,
+                    background: {
+                        color: COLOR_DARK,
+                        strokeColor: COLOR_LIGHT,
+                    },
+
+                },
+
+                moveDownButton: {
+                    //space: { left: 5, right: 5, top: 5, bottom: 5 },
+                    icon: { key: 'arrow-down' },
+                    iconSize: 16,
+                    background: {
+                        color: COLOR_DARK,
+                        strokeColor: COLOR_LIGHT,
+                    },
+
+                },
+
+                addButton: {
+                    space: { left: 5, right: 5, top: 5, bottom: 5 },
+                    icon: { key: 'add', },
+                    iconSize: 20,
+                    background: {
+                        color: COLOR_DARK,
+                        strokeColor: COLOR_LIGHT,
+                    },
+
+                },
+
+                clearButton: {
+                    space: { left: 5, right: 5, top: 5, bottom: 5 },
+                    icon: { key: 'delete2', },
+                    iconSize: 20,
+                    background: {
+                        color: COLOR_DARK,
+                        strokeColor: COLOR_LIGHT,
+                    },
+
+                },
+
             },
 
             separator: {

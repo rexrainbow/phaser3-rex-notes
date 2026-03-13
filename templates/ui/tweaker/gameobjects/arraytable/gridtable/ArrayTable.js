@@ -64,7 +64,7 @@ class ArrayTable extends GridTable {
     setTitle(config) {
         var title = this.childrenMap.header;
 
-        if (config.title || config.icon) {
+        if (config && (config.title || config.icon)) {
             title.show().setTitle(config);
         } else {
             title.hide();

@@ -21,12 +21,12 @@ export default {
     },
 
     // Callback after `constructor()`
-    build(gameObject, style) {
+    build(gameObject, config, inputRowStyle, styles) {
         var scene = gameObject.scene;
 
         gameObject.type = 'rexTweaker.CheckboxInput';
 
-        var checkboxConfig = style.checkbox;
+        var checkboxConfig = inputRowStyle.checkbox;
         var checkbox = CreateCheckbox(scene, checkboxConfig);
 
         var size = checkboxConfig.size;

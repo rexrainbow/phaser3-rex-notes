@@ -33,20 +33,20 @@ export default {
     },
 
     // Callback after `constructor()`
-    build(gameObject, style) {
+    build(gameObject, config, inputRowStyle, styles) {
         var scene = gameObject.scene;
 
         this.type = 'rexTweaker.TextAreaInput';
 
-        var inputTextAreaConfig = style.inputTextArea;
+        var inputTextAreaConfig = inputRowStyle.inputTextArea;
         if (inputTextAreaConfig === undefined) {
             inputTextAreaConfig = {};
         }
         if (!inputTextAreaConfig.hasOwnProperty('text')) {
-            inputTextAreaConfig.text = style.inputText;
+            inputTextAreaConfig.text = inputRowStyle.inputText;
         }
         if (!inputTextAreaConfig.hasOwnProperty('slider')) {
-            inputTextAreaConfig.slider = style.slider;
+            inputTextAreaConfig.slider = inputRowStyle.slider;
         }
 
         var inputText = CreateInputTextArea(scene, inputTextAreaConfig);

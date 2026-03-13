@@ -149,15 +149,16 @@ class Demo extends Phaser.Scene {
                 {
                     icon: 'settings',           // Title icon
                     view: 'textarea',
-                    orientation: 'y',
+                    orientation: 'y',           // Set layout to vertical
                 }
             )
 
         pages[3]
-            .addArrayTable(
+            .addInput(
                 gameObject, 'items',
                 {
-                    createDefaultItem() { return 0 }
+                    icon: 'settings',           // Title icon
+                    orientation: 'y',           // Set layout to vertical
                 }
             )
 
@@ -198,8 +199,8 @@ var CreatePanel = function (scene) {
                 },
 
                 title: {
-                    space: { icon: 2 },
-                    iconSize: 30,
+                    space: { icon: 2, top: 5, bottom: 5 },
+                    iconSize: 24,
                 },
 
                 inputText: {
@@ -366,6 +367,7 @@ var CreatePanel = function (scene) {
             },
 
             arrayTable: {
+                height: 200,
 
                 space: {
                     left: 10, right: 10, top: 10, bottom: 10,

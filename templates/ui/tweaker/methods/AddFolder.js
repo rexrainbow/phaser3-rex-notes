@@ -9,12 +9,7 @@ var AddFolder = function (config) {
 
     // Create folder
     var folderStyle = GetValue(this.styles, 'folder') || {};
-    folderStyle.tweaker = this.styles;
-    folderStyle.root = this.root;
     var folder = CreateFolder(this, config, folderStyle);
-    delete folderStyle.tweaker;
-    delete folderStyle.root;
-
 
     // Add folder
     this.add(

@@ -4,11 +4,11 @@ import Folder from '../gameobjects/folder/Folder.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var CreateFolder = function (parent, config, style) {
+var CreateFolder = function (tweaker, config, style) {
     if (!config) { config = {}; }
     if (!style) { style = {}; }
 
-    var scene = parent.scene;
+    var scene = tweaker.scene;
 
     // background
     var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
@@ -27,10 +27,10 @@ var CreateFolder = function (parent, config, style) {
 
     // tweaker panel
     var tweakerConfig = {
-        root: style.root,
-        styles: style.tweaker,
+        root: tweaker.root,
+        styles: tweaker.styles,
     }
-    var child = parent.createTweaker(tweakerConfig);
+    var child = tweaker.createTweaker(tweakerConfig);
 
     var folder = new Folder(scene, {
         title: title,

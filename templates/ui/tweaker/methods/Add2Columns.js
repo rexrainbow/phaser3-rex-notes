@@ -8,11 +8,7 @@ var AddSplit = function (config) {
     }
 
     var splitPanelStyle = GetValue(this.styles, '2columns') || {};
-    splitPanelStyle.tweaker = this.styles;
-    splitPanelStyle.root = this.root;
     var splitPanels = CreateSplitPanels(this, config, splitPanelStyle);
-    delete splitPanelStyle.tweaker;
-    delete splitPanelStyle.root;
 
     this.add(
         splitPanels,

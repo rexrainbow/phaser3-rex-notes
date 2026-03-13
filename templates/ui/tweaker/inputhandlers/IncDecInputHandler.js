@@ -47,7 +47,7 @@ export default {
     },
 
     // Callback after `constructor()`
-    build(gameObject, style) {
+    build(gameObject, config, inputRowStyle, styles) {
         var scene = gameObject.scene;
 
         gameObject.type = 'rexTweaker.IncDecInput';
@@ -59,21 +59,21 @@ export default {
         - inputText, incButton, decButton
         */
 
-        var incDecConfig = GetValue(style, 'incDec') || {};
+        var incDecConfig = GetValue(inputRowStyle, 'incDec') || {};
         var buttonConfigBase = { text: null, action: null };
 
         // buttons
         var buttons = CreateButtons(scene, {
             expand: false
         });
-        var proportion = (style.defaultExpandWidth) ? 1 : 0;
+        var proportion = (inputRowStyle.defaultExpandWidth) ? 1 : 0;
         gameObject.add(
             buttons,
             { proportion: proportion, expand: true }
         );
 
         // inputText
-        var inputTextConfig = style.inputNumber || style.inputText;
+        var inputTextConfig = inputRowStyle.inputNumber || inputRowStyle.inputText;
         var inputText = CreateInputText(scene, inputTextConfig)
             .setNumberInput();
 
