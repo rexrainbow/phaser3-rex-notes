@@ -48,7 +48,7 @@ export default {
     build(gameObject, config, inputRowStyle, styles) {
         this.type = 'rexTweaker.ArrayInput';
 
-        var arrayTableConfig = inputRowStyle.numbers || styles.arrayTable || {};
+        var arrayTableConfig = inputRowStyle.arrayTable || styles.arrayTable || {};
 
         if (!config.hasOwnProperty('createDefaultItem')) {
             var view = config.view;
@@ -66,6 +66,11 @@ export default {
             arrayTable,
             { proportion: 1, expand: true, key: 'arrayTable' }
         )
+
+        // Set layout to vertical by default
+        if (!arrayTableConfig.hasOwnProperty('orientation') && !config.hasOwnProperty('orientation')) {
+            config.orientation = 1;
+        }
     },
 
     // Callback inside `setup()`

@@ -157,7 +157,6 @@ class Demo extends Phaser.Scene {
                 gameObject, 'items',
                 {
                     icon: 'settings',           // Title icon
-                    orientation: 'y',           // Set layout to vertical
                 }
             )
 

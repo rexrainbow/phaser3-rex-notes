@@ -51598,11 +51598,11 @@
 
 	const GetValue$1_ = Phaser.Utils.Objects.GetValue;
 
-	var CreateFolder = function (parent, config, style) {
+	var CreateFolder = function (tweaker, config, style) {
 	    if (!config) { config = {}; }
 	    if (!style) { style = {}; }
 
-	    var scene = parent.scene;
+	    var scene = tweaker.scene;
 
 	    // background
 	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
@@ -51621,10 +51621,10 @@
 
 	    // tweaker panel
 	    var tweakerConfig = {
-	        root: style.root,
-	        styles: style.tweaker,
+	        root: tweaker.root,
+	        styles: tweaker.styles,
 	    };
-	    var child = parent.createTweaker(tweakerConfig);
+	    var child = tweaker.createTweaker(tweakerConfig);
 
 	    var folder = new Folder(scene, {
 	        title: title,
@@ -51650,12 +51650,7 @@
 
 	    // Create folder
 	    var folderStyle = GetValue$1Z(this.styles, 'folder') || {};
-	    folderStyle.tweaker = this.styles;
-	    folderStyle.root = this.root;
 	    var folder = CreateFolder(this, config, folderStyle);
-	    delete folderStyle.tweaker;
-	    delete folderStyle.root;
-
 
 	    // Add folder
 	    this.add(
@@ -53665,18 +53660,18 @@
 
 	Phaser.Utils.Objects.GetValue;
 
-	var CreateTab = function (parent, config, style) {
+	var CreateTab = function (tweaker, config, style) {
 	    if (!config) { config = {}; }
 	    if (!style) { style = {}; }
-	    var scene = parent.scene;
+	    var scene = tweaker.scene;
 
 	    var tabPages = new TabPages(scene, style);
 	    scene.add.existing(tabPages);
 
 	    var tabConfig = style.tab;
 	    var tweakerConfig = {
-	        root: style.root,
-	        styles: style.tweaker,
+	        root: tweaker.root,
+	        styles: tweaker.styles,
 	    };
 	    var pages = config.pages || [];
 	    for (var i = 0, cnt = pages.length; i < cnt; i++) {
@@ -53686,7 +53681,7 @@
 	            tab: CreateLabel(scene, tabConfig)
 	                .setActiveState(false)
 	                .resetDisplayContent({ text: page.title }),
-	            page: parent.createTweaker(tweakerConfig)
+	            page: tweaker.createTweaker(tweakerConfig)
 	        });
 	    }
 
@@ -53710,11 +53705,7 @@
 
 	    // Create tab
 	    var tabStyle = GetValue$1Q(this.styles, 'tab') || {};
-	    tabStyle.tweaker = this.styles;
-	    tabStyle.root = this.root;
 	    var tab = CreateTab(this, config, tabStyle);
-	    delete tabStyle.tweaker;
-	    delete tabStyle.root;
 
 	    // Add tab
 	    this.add(
@@ -53907,11 +53898,11 @@
 
 	const GetValue$1O = Phaser.Utils.Objects.GetValue;
 
-	var CreateColumns = function (parent, config, style) {
+	var CreateColumns = function (tweaker, config, style) {
 	    if (!config) { config = {}; }
 	    if (!style) { style = {}; }
 
-	    var scene = parent.scene;
+	    var scene = tweaker.scene;
 
 	    // background
 	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
@@ -53921,8 +53912,8 @@
 
 	    // columns, each column has a tweaker panel
 	    var tweakerConfig = {
-	        root: style.root,
-	        styles: style.tweaker,
+	        root: tweaker.root,
+	        styles: tweaker.styles,
 	    };
 
 	    var columnConfigArray = GetValue$1O(config, 'columns', 2);
@@ -53939,7 +53930,7 @@
 
 	        tweakerConfig.width = GetValue$1O(columnConfig, 'width', 0);
 
-	        var tweakerChild = parent.createTweaker(tweakerConfig);
+	        var tweakerChild = tweaker.createTweaker(tweakerConfig);
 
 	        columnConfig.child = tweakerChild;
 	    }
@@ -53971,11 +53962,7 @@
 
 	    // Create columns
 	    var columnsStyle = GetValue$1N(this.styles, 'columns') || {};
-	    columnsStyle.tweaker = this.styles;
-	    columnsStyle.root = this.root;
 	    var columns = CreateColumns(this, config, columnsStyle);
-	    delete columnsStyle.tweaker;
-	    delete columnsStyle.root;
 
 	    // Add columns
 	    this.add(
@@ -54659,11 +54646,11 @@
 	    alpha: 0.001
 	};
 
-	var CreateSplitPanels = function (parent, config, style) {
+	var CreateSplitPanels = function (tweaker, config, style) {
 	    if (!config) { config = {}; }
 	    if (!style) { style = {}; }
 
-	    var scene = parent.scene;
+	    var scene = tweaker.scene;
 
 	    // background
 	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
@@ -54673,11 +54660,11 @@
 
 	    // left and right tweaker panels with background
 	    var tweakerConfig = {
-	        root: style.root,
-	        styles: style.tweaker,
+	        root: tweaker.root,
+	        styles: tweaker.styles,
 	    };
-	    var leftPanel = parent.createTweaker(tweakerConfig);
-	    var rightPanel = parent.createTweaker(tweakerConfig);
+	    var leftPanel = tweaker.createTweaker(tweakerConfig);
+	    var rightPanel = tweaker.createTweaker(tweakerConfig);
 
 	    // splitter
 	    var splitterConfig = config.splitter;
@@ -54715,11 +54702,7 @@
 	    }
 
 	    var splitPanelStyle = GetValue$1I(this.styles, '2columns') || {};
-	    splitPanelStyle.tweaker = this.styles;
-	    splitPanelStyle.root = this.root;
 	    var splitPanels = CreateSplitPanels(this, config, splitPanelStyle);
-	    delete splitPanelStyle.tweaker;
-	    delete splitPanelStyle.root;
 
 	    this.add(
 	        splitPanels,
@@ -54854,11 +54837,11 @@
 
 	const GetValue$1G = Phaser.Utils.Objects.GetValue;
 
-	var CreateWrap = function (parent, config, style) {
+	var CreateWrap = function (tweaker, config, style) {
 	    if (!config) { config = {}; }
 	    if (!style) { style = {}; }
 
-	    var scene = parent.scene;
+	    var scene = tweaker.scene;
 
 	    // background
 	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
@@ -54867,8 +54850,8 @@
 	    var title = CreateTitleLabel(scene, undefined, (style.title || {}));
 
 	    var tweakerConfig = {
-	        root: style.root,
-	        styles: style.tweaker,
+	        root: tweaker.root,
+	        styles: tweaker.styles,
 	        space: style.space,
 	        align: GetValue$1G(style, 'align', 5),
 
@@ -54877,7 +54860,7 @@
 	        itemHeight: GetValue$1G(config, 'itemHeight', 0, style),
 	    };
 
-	    var tweakerChild = parent.createTweaker(tweakerConfig);
+	    var tweakerChild = tweaker.createTweaker(tweakerConfig);
 
 	    var wrap = new Wrap(scene, {
 	        title: title,
@@ -54898,11 +54881,7 @@
 
 	    // Create wrap
 	    var wrapStyle = GetValue$1F(this.styles, 'wrap') || {};
-	    wrapStyle.tweaker = this.styles;
-	    wrapStyle.root = this.root;
 	    var wrap = CreateWrap(this, config, wrapStyle);
-	    delete wrapStyle.tweaker;
-	    delete wrapStyle.root;
 
 	    // Add wrap
 	    this.add(
@@ -56005,11 +55984,11 @@
 
 	const GetValue$1B = Phaser.Utils.Objects.GetValue;
 
-	var CreateScrollable = function (parent, config, style) {
+	var CreateScrollable = function (tweaker, config, style) {
 	    if (!config) { config = {}; }
 	    if (!style) { style = {}; }
 
-	    var scene = parent.scene;
+	    var scene = tweaker.scene;
 
 	    // background
 	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
@@ -56019,10 +55998,10 @@
 
 	    // panel
 	    var tweakerConfig = {
-	        root: style.root,
-	        styles: style.tweaker,
+	        root: tweaker.root,
+	        styles: tweaker.styles,
 	    };
-	    var child = parent.createTweaker(tweakerConfig);
+	    var child = tweaker.createTweaker(tweakerConfig);
 
 	    // slider
 	    var slider = CreateSlider$1(scene, config.slider, style.slider);
@@ -56061,12 +56040,7 @@
 
 	    // Create scrollable
 	    var scrollableStyle = GetValue$1A(this.styles, 'scrollable') || {};
-	    scrollableStyle.tweaker = this.styles;
-	    scrollableStyle.root = this.root;
 	    var scrollable = CreateScrollable(this, config, scrollableStyle);
-	    delete scrollableStyle.tweaker;
-	    delete scrollableStyle.root;
-
 
 	    // Add scrollable
 	    this.add(
@@ -58466,7 +58440,7 @@
 	    setTitle(config) {
 	        var title = this.childrenMap.header;
 
-	        if (config.title || config.icon) {
+	        if (config && (config.title || config.icon)) {
 	            title.show().setTitle(config);
 	        } else {
 	            title.hide();
@@ -58969,8 +58943,8 @@
 	const GetValue$1j = Phaser.Utils.Objects.GetValue;
 	const Format$1 = Phaser.Utils.String.Format;
 
-	var CreateCellContainer$1 = function (parent, cell, config) {
-	    var scene = parent.scene;
+	var CreateCellContainer$1 = function (tweaker, cell, config) {
+	    var scene = tweaker.scene;
 
 	    // Create elements
 	    var {
@@ -59008,10 +58982,11 @@
 	            $key: cell.index
 	        }];
 	    }
-	    var inputTweaker = parent.createTweaker(tweakerConfig)
+	    var inputTweaker = tweaker
+	        .createTweaker(tweakerConfig)
 	        .setAlignInputRowTitleEnable(isObjectItem)
 	        .addRows(properties, target, tweakerAddRowsParameters.monitor);
-	    
+
 	    // Assemble elements
 	    var cellContainer = new CellContainer$1(scene, {
 	        space,
@@ -59028,11 +59003,14 @@
 	    return cellContainer;
 	};
 
-	var GenerateCreateCellContainerCallback$1 = function (parent, config, style) {
+	var GenerateCreateCellContainerCallback$1 = function (tweaker, config, style) {
+	    if (style === undefined) {
+	        style = {};
+	    }
 	    // Prepare parameters
 	    var space = GetValue$1j(config, 'space.cell', undefined, style) || {};
 
-	    var indexStyle = GetValue$1j(style, 'index');
+	    var indexStyle = style.index;
 	    if (!indexStyle) {
 	        indexStyle = GetValue$1j(style, 'tweaker.inputRow.title') || {};
 	    }
@@ -59058,8 +59036,8 @@
 	    };
 
 	    var tweakerConfig = {
-	        root: GetValue$1j(style, 'root'),
-	        styles: GetValue$1j(style, 'tweaker'),
+	        root: tweaker.root,
+	        styles: tweaker.styles,
 	        expandInputRowHeight: true,
 	    };
 
@@ -59080,7 +59058,7 @@
 	        var index = cell.index;
 
 	        if (cellContainer === null) {
-	            cellContainer = CreateCellContainer$1(parent, cell, {
+	            cellContainer = CreateCellContainer$1(tweaker, cell, {
 	                space,
 	                gridTable,
 	                indexStyle,
@@ -59113,11 +59091,11 @@
 
 	const GetValue$1i = Phaser.Utils.Objects.GetValue;
 
-	var CreateArrayTable = function (parent, config, style) {
+	var CreateArrayTable = function (tweaker, config, style) {
 	    if (!config) { config = {}; }
 	    if (!style) { style = {}; }
 
-	    var scene = parent.scene;
+	    var scene = tweaker.scene;
 
 	    // background
 	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
@@ -59176,7 +59154,7 @@
 	        height: GetValue$1i(config, 'height', 0, style),
 	        space: Merge$2((config.space || {}), (style.space || {})),
 
-	        createCellContainerCallback: GenerateCreateCellContainerCallback$1(parent, config, style),
+	        createCellContainerCallback: GenerateCreateCellContainerCallback$1(tweaker, config, style),
 	    });
 	    scene.add.existing(arrayTable);
 
@@ -60906,10 +60884,10 @@
 	    alpha: 0.001
 	};
 
-	var CreateListDetail = function (parent, config, style) {
+	var CreateListDetail = function (tweaker, config, style) {
 	    if (!config) { config = {}; }
 	    if (!style) { style = {}; }
-	    var scene = parent.scene;
+	    var scene = tweaker.scene;
 
 	    // background of split-panels
 	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
@@ -60920,7 +60898,7 @@
 	    // left panel of split-panels
 	    // table config
 	    var listTableConfig = GetValue$14(config, 'table', undefined, style) || {};
-	    var createCellContainerCallback = GenerateCreateCellContainerCallback(parent, config, style);
+	    var createCellContainerCallback = GenerateCreateCellContainerCallback(tweaker, config, style);
 
 	    // slider
 	    var listTableSlider = CreateSlider$1(scene, config.slider, style.slider);
@@ -60956,10 +60934,10 @@
 	    // left panel of split-panels
 
 	    // right panel of split-panels
-	    var editor = parent
+	    var editor = tweaker
 	        .createTweaker({
-	            root: style.root,
-	            styles: style.tweaker,
+	            root: tweaker.root,
+	            styles: tweaker.styles,
 	        })
 	        .addRows(config.$properties, GetValue$14(config, 'monitor', false));
 	    // slider
@@ -61089,8 +61067,6 @@
 	    }
 
 	    var arrayTableStyle = GetValue$13(this.styles, 'arrayTable') || {};
-	    arrayTableStyle.tweaker = this.styles;
-	    arrayTableStyle.root = this.root;
 
 	    var createArrayTableCallback;
 	    var view = GetValue$13(config, 'view', 'inline');
@@ -61118,9 +61094,6 @@
 	            break;
 	    }
 	    var arrayTable = createArrayTableCallback(this, config, arrayTableStyle);
-
-	    delete arrayTableStyle.tweaker;
-	    delete arrayTableStyle.root;
 
 	    this.add(
 	        arrayTable,
@@ -61439,12 +61412,6 @@
 	            return this._value;
 	        }
 
-	        get tweaker() {
-	            var inputRow = this.getParentSizer();
-	            var tweaker = inputRow.getParentSizer();
-	            return tweaker;
-	        }
-
 	        get root() {
 	            return this.tweaker.root;
 	        }
@@ -61547,6 +61514,12 @@
 	            this.setReadOnly(value);
 	        }
 
+	        // Internal usage
+	        setTweaker(tweaker) {
+	            this.tweaker = tweaker;
+	            return this;
+	        }
+
 	        setup(config, setDefaults) {
 	            if (setDefaults === undefined) {
 	                setDefaults = false;
@@ -61567,7 +61540,6 @@
 	            return this;
 	        }
 
-	        // Internal usage
 	        setSetupCallback(callback) {
 	            this.setupCallback = callback;
 	            return this;
@@ -61607,9 +61579,10 @@
 	    return InputFiled;
 	};
 
-	var CreateInputField = function (scene, config, style) {
+	var CreateInputField = function (tweaker, config, inputRowStyle, styles) {
+	    var scene = tweaker.scene;
 	    var inputField;
-	    var inputHandlers = this.inputHandlers;
+	    var inputHandlers = tweaker.inputHandlers;
 	    for (var i = 0, cnt = inputHandlers.length; i < cnt; i++) {
 	        var handler = inputHandlers[i];
 	        if (handler.accept(config)) {
@@ -61619,13 +61592,14 @@
 
 	            // Decorate instance via installing callbacks
 	            inputField
+	                .setTweaker(tweaker)
 	                .setSetupCallback(handler.setup)
 	                .setFilterValueCallback(handler.filterValue)
 	                .setDisplayValueCallback(handler.displayValue)
 	                .setOnBindTargetCallback(handler.onBindTarget)
 	                .setSetReadOnlyCallback(handler.setReadOnly);
 
-	            handler.build(inputField, style);
+	            handler.build(inputField, config, inputRowStyle, styles);
 
 	            break;
 	        }
@@ -61640,15 +61614,17 @@
 	    return inputField;
 	};
 
-	var CreateInputRow = function (scene, config, style) {
+	var CreateInputRow = function (tweaker, config, inputRowStyle, styles) {
 	    if (!config) { config = {}; }
-	    if (!style) { style = {}; }
+	    if (!inputRowStyle) { inputRowStyle = {}; }
+
+	    var scene = tweaker.scene;
 
 	    // Background
-	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
+	    var background = CreateBackground(scene, (config.background || {}), (inputRowStyle.background || {}));
 
 	    // InputField
-	    var inputField = CreateInputField.call(this, scene, config, style);
+	    var inputField = CreateInputField(tweaker, config, inputRowStyle, styles);
 	    if (!inputField) {
 	        // Can't create inputField
 	        return null;
@@ -61657,16 +61633,16 @@
 	    // Title
 	    var inputTitle;
 	    if ((config.title) !== false && (config.title !== null)) {
-	        var titleStyle = style.title || {};
+	        var titleStyle = inputRowStyle.title || {};
 	        inputTitle = CreateTitleLabel(scene, config, titleStyle);
 	    }
 
 	    // Border
-	    var border = CreateBackground(scene, (config.border || {}), (style.border || {}));
+	    var border = CreateBackground(scene, (config.border || {}), (inputRowStyle.border || {}));
 
 	    var inputRow = new InputRow(scene, {
-	        ...style,
-	        ...config,  // config can overwrite style
+	        ...inputRowStyle,
+	        ...config,  // config can overwrite inputRowStyle
 
 	        inputTitle: inputTitle,
 	        inputField: inputField,
@@ -61711,7 +61687,7 @@
 	        inputRowStyle.defaultExpandWidth = true;
 	    }
 
-	    var inputSizer = CreateInputRow.call(this, this.scene, config, inputRowStyle);
+	    var inputSizer = CreateInputRow(this, config, inputRowStyle, this.styles);
 	    if (!inputSizer) {
 	        // Can't create inputField
 	        console.error(`[Tweaker] Can't add Input
@@ -61788,9 +61764,11 @@
 
 	const GetValue$10 = Phaser.Utils.Objects.GetValue;
 
-	var CreateButtons$2 = function (scene, config, style) {
+	var CreateButtons$2 = function (tweaker, config, style) {
 	    if (!config) { config = {}; }
 	    if (!style) { style = {}; }
+
+	    var scene = tweaker.scene;
 
 	    // Background
 	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
@@ -61863,14 +61841,14 @@
 	        config = {};
 	    }
 
-	    var scene = this.scene;
+	    this.scene;
 
 	    var target = config.bindingTarget;
 	    delete config.bindingTarget;
 
 	    // Create buttons
 	    var buttonsStyle = GetValue$$(this.styles, 'inputRow') || {};
-	    var buttons = CreateButtons$2(scene, config, buttonsStyle);
+	    var buttons = CreateButtons$2(this, config, buttonsStyle);
 
 	    // Add buttons
 	    this.add(
@@ -61913,7 +61891,8 @@
 	    return this;
 	};
 
-	var CreateSeparator = function (scene, config, style) {
+	var CreateSeparator = function (tweaker, config, style) {
+	    var scene = tweaker.scene;
 	    return CreateBackground$1(scene, Merge$2(config, style));
 	};
 
@@ -61924,11 +61903,9 @@
 	        config = {};
 	    }
 
-	    var scene = this.scene;
-
 	    // Create separator
 	    var separatorStyle = GetValue$_(this.styles, 'separator');
-	    var separator = CreateSeparator(scene, config, separatorStyle);
+	    var separator = CreateSeparator(this, config, separatorStyle);
 
 	    // Add separator
 	    this.add(
@@ -64571,12 +64548,12 @@
 	    },
 
 	    // Callback after `constructor()`
-	    build(gameObject, style) {
+	    build(gameObject, config, inputRowStyle, styles) {
 	        var scene = gameObject.scene;
 
 	        gameObject.type = 'rexTweaker.TextInput';
 
-	        var inputTextConfig = style.inputText;
+	        var inputTextConfig = inputRowStyle.inputText;
 	        var inputText = CreateInputText(scene, inputTextConfig);
 
 	        gameObject.add(
@@ -64881,20 +64858,20 @@
 	    },
 
 	    // Callback after `constructor()`
-	    build(gameObject, style) {
+	    build(gameObject, config, inputRowStyle, styles) {
 	        var scene = gameObject.scene;
 
 	        this.type = 'rexTweaker.TextAreaInput';
 
-	        var inputTextAreaConfig = style.inputTextArea;
+	        var inputTextAreaConfig = inputRowStyle.inputTextArea;
 	        if (inputTextAreaConfig === undefined) {
 	            inputTextAreaConfig = {};
 	        }
 	        if (!inputTextAreaConfig.hasOwnProperty('text')) {
-	            inputTextAreaConfig.text = style.inputText;
+	            inputTextAreaConfig.text = inputRowStyle.inputText;
 	        }
 	        if (!inputTextAreaConfig.hasOwnProperty('slider')) {
-	            inputTextAreaConfig.slider = style.slider;
+	            inputTextAreaConfig.slider = inputRowStyle.slider;
 	        }
 
 	        var inputText = CreateInputTextArea(scene, inputTextAreaConfig);
@@ -64969,12 +64946,12 @@
 	    },
 
 	    // Callback after `constructor()`
-	    build(gameObject, style) {
+	    build(gameObject, config, inputRowStyle, styles) {
 	        var scene = gameObject.scene;
 
 	        gameObject.type = 'rexTweaker.NumberInput';
 
-	        var inputTextConfig = style.inputNumber || style.inputText;
+	        var inputTextConfig = inputRowStyle.inputNumber || inputRowStyle.inputText;
 	        var inputText = CreateInputText(scene, inputTextConfig)
 	            .setNumberInput();
 
@@ -65085,30 +65062,30 @@
 	    },
 
 	    // Callback after `constructor()`
-	    build(gameObject, style) {
+	    build(gameObject, config, inputRowStyle, styles) {
 	        var scene = gameObject.scene;
 
 	        gameObject.type = 'rexTweaker.RangeInput';
 
-	        var sliderConfig = style.slider;
+	        var sliderConfig = inputRowStyle.slider;
 	        var trackSizeKey = (gameObject.orientation === 0) ? 'track.height' : 'track.width';
 	        var trackSize = GetValue$S(sliderConfig, trackSizeKey);
 	        var slider = CreateSlider(scene, sliderConfig);
 
-	        var defaultProportion = (style.defaultExpandWidth) ? 2 : 0;
-	        var proportion = GetValue$S(style, 'proportion.range.slider', defaultProportion);
+	        var defaultProportion = (inputRowStyle.defaultExpandWidth) ? 2 : 0;
+	        var proportion = GetValue$S(inputRowStyle, 'proportion.range.slider', defaultProportion);
 	        var expand = (trackSize === undefined);
 	        gameObject.add(
 	            slider,
 	            { proportion: proportion, expand: expand, key: 'slider' }
 	        );
 
-	        var inputTextConfig = style.inputNumber || style.inputText;
+	        var inputTextConfig = inputRowStyle.inputNumber || inputRowStyle.inputText;
 	        var inputText = CreateInputText(scene, inputTextConfig)
 	            .setNumberInput();
 
-	        var defaultProportion = (style.defaultExpandWidth) ? 1 : 0;
-	        var proportion = GetValue$S(style, 'proportion.range.inputText', defaultProportion);
+	        var defaultProportion = (inputRowStyle.defaultExpandWidth) ? 1 : 0;
+	        var proportion = GetValue$S(inputRowStyle, 'proportion.range.inputText', defaultProportion);
 	        gameObject.add(
 	            inputText,
 	            { proportion: proportion, expand: true, key: 'inputText' }
@@ -65208,7 +65185,7 @@
 	    },
 
 	    // Callback after `constructor()`
-	    build(gameObject, style) {
+	    build(gameObject, config, inputRowStyle, styles) {
 	        var scene = gameObject.scene;
 
 	        gameObject.type = 'rexTweaker.IncDecInput';
@@ -65220,21 +65197,21 @@
 	        - inputText, incButton, decButton
 	        */
 
-	        var incDecConfig = GetValue$R(style, 'incDec') || {};
+	        var incDecConfig = GetValue$R(inputRowStyle, 'incDec') || {};
 	        var buttonConfigBase = { text: null, action: null };
 
 	        // buttons
 	        var buttons = CreateButtons$1(scene, {
 	            expand: false
 	        });
-	        var proportion = (style.defaultExpandWidth) ? 1 : 0;
+	        var proportion = (inputRowStyle.defaultExpandWidth) ? 1 : 0;
 	        gameObject.add(
 	            buttons,
 	            { proportion: proportion, expand: true }
 	        );
 
 	        // inputText
-	        var inputTextConfig = style.inputNumber || style.inputText;
+	        var inputTextConfig = inputRowStyle.inputNumber || inputRowStyle.inputText;
 	        var inputText = CreateInputText(scene, inputTextConfig)
 	            .setNumberInput();
 
@@ -67041,17 +67018,17 @@
 	    },
 
 	    // Callback after `constructor()`
-	    build(gameObject, style) {
+	    build(gameObject, config, inputRowStyle, styles) {
 	        var scene = gameObject.scene;
 
 	        gameObject.type = 'rexTweaker.ColorInput';
 
-	        var colorInputConfig = style.colorInput;
+	        var colorInputConfig = inputRowStyle.colorInput;
 	        if (colorInputConfig === undefined) {
 	            colorInputConfig = {};
 	        }
 	        if (!colorInputConfig.hasOwnProperty('inputText')) {
-	            colorInputConfig.inputText = style.inputText;
+	            colorInputConfig.inputText = inputRowStyle.inputText;
 	        }
 	        var colorInput = CreateColorInput(scene, colorInputConfig);
 
@@ -67526,12 +67503,12 @@
 	    },
 
 	    // Callback after `constructor()`
-	    build(gameObject, style) {
+	    build(gameObject, config, inputRowStyle, styles) {
 	        var scene = gameObject.scene;
 
 	        gameObject.type = 'rexTweaker.CheckboxInput';
 
-	        var checkboxConfig = style.checkbox;
+	        var checkboxConfig = inputRowStyle.checkbox;
 	        var checkbox = CreateCheckbox(scene, checkboxConfig);
 
 	        var size = checkboxConfig.size;
@@ -68018,12 +67995,12 @@
 	    },
 
 	    // Callback after `constructor()`
-	    build(gameObject, style) {
+	    build(gameObject, config, inputRowStyle, styles) {
 	        var scene = gameObject.scene;
 
 	        gameObject.type = 'rexTweaker.ToggleSwitchInput';
 
-	        var toggleSwitchConfig = style.toggleSwitch;
+	        var toggleSwitchConfig = inputRowStyle.toggleSwitch;
 	        var toggleSwitch = CreateToggleSwitch(scene, toggleSwitchConfig);
 
 	        var size = toggleSwitchConfig.size;
@@ -68813,12 +68790,12 @@
 	    },
 
 	    // Callback after `constructor()`
-	    build(gameObject, style) {
+	    build(gameObject, config, inputRowStyle, styles) {
 	        var scene = gameObject.scene;
 
 	        gameObject.type = 'rexTweaker.ListInput';
 
-	        var list = CreateDropDownList(scene, style.list);
+	        var list = CreateDropDownList(scene, inputRowStyle.list);
 
 	        gameObject.add(
 	            list,
@@ -68909,13 +68886,13 @@
 	    },
 
 	    // Callback after `constructor()`
-	    build(gameObject, style) {
+	    build(gameObject, config, inputRowStyle, styles) {
 	        var scene = gameObject.scene;
 
 	        gameObject.type = 'rexTweaker.ButtonsInput';
 
 	        // TODO : DeepClone?
-	        var buttonConfig = (style.button) ? DeepClone(style.button) : {};
+	        var buttonConfig = (inputRowStyle.button) ? DeepClone(inputRowStyle.button) : {};
 	        var buttonExpand = GetValue$D(buttonConfig, 'expand', true);
 	        if (buttonExpand) {
 	            buttonConfig.align = 'center';
@@ -68968,6 +68945,102 @@
 	    }
 	};
 
+	var SetArrayTableReadOnly = function (gameObject, readOnly) {
+	    if (readOnly === undefined) {
+	        readOnly = true;
+	    }
+
+	    var arrayTable = gameObject.childrenMap.arrayTable;
+	    arrayTable.setReadOnly(readOnly);
+	};
+
+	var CreateDefaultNumberItem = function () { return 0; };
+	var CreateDefaultStringItem = function () { return ''; };
+
+	var ArrayInputHandler = {
+	    name: 'ArrayInput',
+
+	    accept(config) {
+	        if (config.hasOwnProperty('view')) {
+	            var view = config.view;
+	            return (view === 'numbers') || (view === 'strings') || (view === 'array');
+	        }
+
+	        var value = config.value;
+	        if (Array.isArray(value)) {
+	            var arrayType = typeof (value[0]);
+	            switch (arrayType) {
+	                case 'number':
+	                    config.view = 'numbers';
+	                    break;
+
+	                case 'strig':
+	                    config.view = 'strings';
+	                    break;
+
+	                default:
+	                    config.view = 'array';
+	                    break;
+	            }
+
+	            return true;
+	        } else {
+	            return false;
+	        }    },
+
+	    // Callback after `constructor()`
+	    build(gameObject, config, inputRowStyle, styles) {
+	        this.type = 'rexTweaker.ArrayInput';
+
+	        var arrayTableConfig = inputRowStyle.arrayTable || styles.arrayTable || {};
+
+	        if (!config.hasOwnProperty('createDefaultItem')) {
+	            var view = config.view;
+	            if (view === 'numbers') {
+	                config.createDefaultItem = CreateDefaultNumberItem;
+	            } else if (view === 'numbers') {
+	                config.createDefaultItem = CreateDefaultStringItem;
+	            }
+	        }
+
+	        var arrayTable = CreateArrayTable(gameObject.tweaker, config, arrayTableConfig)
+	            .setTitle(); // Hide title
+
+	        gameObject.add(
+	            arrayTable,
+	            { proportion: 1, expand: true, key: 'arrayTable' }
+	        );
+
+	        // Set layout to vertical by default
+	        if (!arrayTableConfig.hasOwnProperty('orientation') && !config.hasOwnProperty('orientation')) {
+	            config.orientation = 1;
+	        }
+	    },
+
+	    // Callback inside `setup()`
+	    setup(gameObject, config, setDefaults) {
+	    },
+
+	    // Callback inside `setValue()`
+	    displayValue(gameObject, value) {
+	        var arrayTable = gameObject.childrenMap.arrayTable;
+	        arrayTable.setItems(value, true);
+	    },
+
+	    // Callback inside `setBindingTarget()`
+	    onBindTarget(gameObject) {
+	        var arrayTable = gameObject.childrenMap.arrayTable;
+	        arrayTable.scrollToTop();
+	    },
+
+	    setReadOnly(gameObject, readOnly) {
+	        if (readOnly === undefined) {
+	            readOnly = true;
+	        }
+	        SetArrayTableReadOnly(gameObject, readOnly);
+	    }
+	};
+
 	// string
 
 	var RegisterDefaultInputHandlers = function () {
@@ -68985,7 +69058,9 @@
 	        .registerInputHandler(ToggleSwitchInputHandler)
 	        // options
 	        .registerInputHandler(ListInputHandler)
-	        .registerInputHandler(ButtonsInputHandler);
+	        .registerInputHandler(ButtonsInputHandler)
+	        // array
+	        .registerInputHandler(ArrayInputHandler);
 
 	};
 

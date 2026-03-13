@@ -1151,6 +1151,93 @@ tweaker.addInput({
     No `bindingKey` parameter in this case.
 
 
+#### Number or string array row
+
+`object[key]` is an array value.
+
+```javascript
+tweaker.addInput(object, key, {
+    // view: 'numbers',
+    // view: 'strings',
+    // view: 'array',
+
+    // icon: undefined,
+    // iconFrame: undefined,
+    // iconSize: undefined,
+
+    // title: undefined,
+
+    // orientation: 'x',
+
+    // monitor: false,
+    // readOnly: false,
+
+    // createDefaultItem() {
+    //     return item;  // A number, string, or any other array item
+    // },
+
+    // key: undefined,
+})
+```
+
+or
+
+```javascript
+tweaker.addInput({
+    bindingTarget: object,
+    bindingKey: key,
+    // view: 'numbers',
+    // view: 'strings',
+    // view: 'array',
+
+    // icon: undefined,
+    // iconFrame: undefined,
+    // iconSize: undefined,
+
+    // title: undefined,
+
+    // orientation: 'x',
+
+    // monitor: false,
+    // readOnly: false,
+
+    // createDefaultItem() {
+    //     return item;  // A number, string, or any other array item
+    // },
+
+    // key: undefined,
+})
+```
+
+- `bindingTarget` : Binding target object.
+    - Can bind target later via `tweaker.setBindingTarget(object)`.
+- `bindingKey` : Bind to target's property key. Necessary field
+- `view` :
+    - `'numbers'` : Array editor for number items.
+    - `'strings'` : Array editor for string items.
+    - `'array'` : Generic array editor.
+    - `undefined` : Auto-detect array item type from current value.
+- `icon`, `iconFrame` : Texture key, frame name of icon on title-label.
+- `iconSize` : Fixed icon size
+- `title` : Display text of title-label. Default value is equal to `key`.
+- `monitor` :
+    - `false` : Don't update array editor every tick from target. Default behavior.
+    - `true` : Update array editor from current object, in `postupdate` event of scene.
+- `readOnly` :
+    - `false` : Array editor is editable. Default behavior.
+    - `true` : Array editor is read-only.
+- `createDefaultItem` : Callback when adding a new item to array editor.
+    - Default value depends on `view`.
+        - `'numbers'` : Return `0`.
+        - `'strings'` : Return `''`.
+        - `'array'` : No default item.
+- `key` : Add this child into childMap, which could be read back by `tweaker.getElement(key)`.
+    - `undefined` : Don't add this child. Default value.
+
+
+See [Style of array table](#style-of-array-table)
+
+
 ### Add button
 
 ```javascript

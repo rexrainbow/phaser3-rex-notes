@@ -13742,6 +13742,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#number-or-string-array-row" class="md-nav__link">
+    <span class="md-ellipsis">
+      Number or string array row
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -15675,6 +15684,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#number-or-string-array-row" class="md-nav__link">
+    <span class="md-ellipsis">
+      Number or string array row
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -17163,6 +17181,98 @@
 <p class="admonition-title">Note</p>
 <p>No <code>bindingKey</code> parameter in this case.</p>
 </div>
+<h4 id="number-or-string-array-row">Number or string array row<a class="headerlink" href="#number-or-string-array-row" title="Permanent link">&para;</a></h4>
+<p><code>object[key]</code> is an array value.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">tweaker</span><span class="p">.</span><span class="nx">addInput</span><span class="p">(</span><span class="nx">object</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// view: &#39;numbers&#39;,</span>
+<span class="w">    </span><span class="c1">// view: &#39;strings&#39;,</span>
+<span class="w">    </span><span class="c1">// view: &#39;array&#39;,</span>
+
+<span class="w">    </span><span class="c1">// icon: undefined,</span>
+<span class="w">    </span><span class="c1">// iconFrame: undefined,</span>
+<span class="w">    </span><span class="c1">// iconSize: undefined,</span>
+
+<span class="w">    </span><span class="c1">// title: undefined,</span>
+
+<span class="w">    </span><span class="c1">// orientation: &#39;x&#39;,</span>
+
+<span class="w">    </span><span class="c1">// monitor: false,</span>
+<span class="w">    </span><span class="c1">// readOnly: false,</span>
+
+<span class="w">    </span><span class="c1">// createDefaultItem() {</span>
+<span class="w">    </span><span class="c1">//     return item;  // A number, string, or any other array item</span>
+<span class="w">    </span><span class="c1">// },</span>
+
+<span class="w">    </span><span class="c1">// key: undefined,</span>
+<span class="p">})</span>
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="nx">tweaker</span><span class="p">.</span><span class="nx">addInput</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">bindingTarget</span><span class="o">:</span><span class="w"> </span><span class="nx">object</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">bindingKey</span><span class="o">:</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span>
+<span class="w">    </span><span class="c1">// view: &#39;numbers&#39;,</span>
+<span class="w">    </span><span class="c1">// view: &#39;strings&#39;,</span>
+<span class="w">    </span><span class="c1">// view: &#39;array&#39;,</span>
+
+<span class="w">    </span><span class="c1">// icon: undefined,</span>
+<span class="w">    </span><span class="c1">// iconFrame: undefined,</span>
+<span class="w">    </span><span class="c1">// iconSize: undefined,</span>
+
+<span class="w">    </span><span class="c1">// title: undefined,</span>
+
+<span class="w">    </span><span class="c1">// orientation: &#39;x&#39;,</span>
+
+<span class="w">    </span><span class="c1">// monitor: false,</span>
+<span class="w">    </span><span class="c1">// readOnly: false,</span>
+
+<span class="w">    </span><span class="c1">// createDefaultItem() {</span>
+<span class="w">    </span><span class="c1">//     return item;  // A number, string, or any other array item</span>
+<span class="w">    </span><span class="c1">// },</span>
+
+<span class="w">    </span><span class="c1">// key: undefined,</span>
+<span class="p">})</span>
+</code></pre></div>
+<ul>
+<li><code>bindingTarget</code> : Binding target object.<ul>
+<li>Can bind target later via <code>tweaker.setBindingTarget(object)</code>.</li>
+</ul>
+</li>
+<li><code>bindingKey</code> : Bind to target's property key. Necessary field</li>
+<li><code>view</code> :<ul>
+<li><code>'numbers'</code> : Array editor for number items.</li>
+<li><code>'strings'</code> : Array editor for string items.</li>
+<li><code>'array'</code> : Generic array editor.</li>
+<li><code>undefined</code> : Auto-detect array item type from current value.</li>
+</ul>
+</li>
+<li><code>icon</code>, <code>iconFrame</code> : Texture key, frame name of icon on title-label.</li>
+<li><code>iconSize</code> : Fixed icon size</li>
+<li><code>title</code> : Display text of title-label. Default value is equal to <code>key</code>.</li>
+<li><code>monitor</code> :<ul>
+<li><code>false</code> : Don't update array editor every tick from target. Default behavior.</li>
+<li><code>true</code> : Update array editor from current object, in <code>postupdate</code> event of scene.</li>
+</ul>
+</li>
+<li><code>readOnly</code> :<ul>
+<li><code>false</code> : Array editor is editable. Default behavior.</li>
+<li><code>true</code> : Array editor is read-only.</li>
+</ul>
+</li>
+<li><code>createDefaultItem</code> : Callback when adding a new item to array editor.<ul>
+<li>Default value depends on <code>view</code>.<ul>
+<li><code>'numbers'</code> : Return <code>0</code>.</li>
+<li><code>'strings'</code> : Return <code>''</code>.</li>
+<li><code>'array'</code> : No default item.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>key</code> : Add this child into childMap, which could be read back by <code>tweaker.getElement(key)</code>.<ul>
+<li><code>undefined</code> : Don't add this child. Default value.</li>
+</ul>
+</li>
+</ul>
+<p>See <a href="#style-of-array-table">Style of array table</a></p>
 <h3 id="add-button">Add button<a class="headerlink" href="#add-button" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">tweaker</span><span class="p">.</span><span class="nx">addButton</span><span class="p">({</span>
 <span class="w">    </span><span class="c1">// bindingTarget: object,</span>
