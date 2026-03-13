@@ -68954,6 +68954,7 @@
 
 	var CreateDefaultNumberItem = function () { return 0; };
 	var CreateDefaultStringItem = function () { return ''; };
+	var CreateDefaultBooleanItem = function () { return false; };
 
 	var ArrayInputHandler = {
 	    name: 'ArrayInput',
@@ -68961,7 +68962,7 @@
 	    accept(config) {
 	        if (config.hasOwnProperty('view')) {
 	            var view = config.view;
-	            return (view === 'numbers') || (view === 'strings') || (view === 'array');
+	            return (view === 'numbers') || (view === 'strings') || (view === 'booleans') || (view === 'array');
 	        }
 
 	        var value = config.value;
@@ -68974,6 +68975,10 @@
 
 	                case 'strig':
 	                    config.view = 'strings';
+	                    break;
+
+	                case 'boolean':
+	                    config.view = 'booleans';
 	                    break;
 
 	                default:
@@ -68998,6 +69003,8 @@
 	                config.createDefaultItem = CreateDefaultNumberItem;
 	            } else if (view === 'numbers') {
 	                config.createDefaultItem = CreateDefaultStringItem;
+	            } else if (view === 'booleans') {
+	                config.createDefaultItem = CreateDefaultBooleanItem;
 	            }
 	        }
 

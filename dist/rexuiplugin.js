@@ -82309,6 +82309,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
     var CreateDefaultNumberItem = function () { return 0; };
     var CreateDefaultStringItem = function () { return ''; };
+    var CreateDefaultBooleanItem = function () { return false; };
 
     var ArrayInputHandler = {
         name: 'ArrayInput',
@@ -82316,7 +82317,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         accept(config) {
             if (config.hasOwnProperty('view')) {
                 var view = config.view;
-                return (view === 'numbers') || (view === 'strings') || (view === 'array');
+                return (view === 'numbers') || (view === 'strings') || (view === 'booleans') || (view === 'array');
             }
 
             var value = config.value;
@@ -82329,6 +82330,10 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
 
                     case 'strig':
                         config.view = 'strings';
+                        break;
+
+                    case 'boolean':
+                        config.view = 'booleans';
                         break;
 
                     default:
@@ -82353,6 +82358,8 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
                     config.createDefaultItem = CreateDefaultNumberItem;
                 } else if (view === 'numbers') {
                     config.createDefaultItem = CreateDefaultStringItem;
+                } else if (view === 'booleans') {
+                    config.createDefaultItem = CreateDefaultBooleanItem;
                 }
             }
 

@@ -173,7 +173,7 @@ declare namespace Tweaker {
         /** Increment/decrement control style. */
         incDec?: IIncDecConfig,
 
-        /** Array input style backed by an array table for `numbers`, `strings`, or `array` views. */
+        /** Array input style backed by an array table for `numbers`, `strings`, `booleans`, or `array` views. */
         numbers?: IStyle['arrayTable'],
 
         /** Proportion settings for row sections. */
@@ -488,7 +488,7 @@ declare namespace Tweaker {
         /**
          * Input view type name.
          *
-         * Use `'numbers'`, `'strings'`, or `'array'` to render an array editor.
+         * Use `'numbers'`, `'strings'`, `booleans`, or `'array'` to render an array editor.
          */
         view?: string,
 

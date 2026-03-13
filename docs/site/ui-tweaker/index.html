@@ -17186,6 +17186,7 @@
 <div class="highlight"><pre><span></span><code><span class="nx">tweaker</span><span class="p">.</span><span class="nx">addInput</span><span class="p">(</span><span class="nx">object</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// view: &#39;numbers&#39;,</span>
 <span class="w">    </span><span class="c1">// view: &#39;strings&#39;,</span>
+<span class="w">    </span><span class="c1">// view: &#39;booleans&#39;,</span>
 <span class="w">    </span><span class="c1">// view: &#39;array&#39;,</span>
 
 <span class="w">    </span><span class="c1">// icon: undefined,</span>
@@ -17212,6 +17213,7 @@
 <span class="w">    </span><span class="nx">bindingKey</span><span class="o">:</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span>
 <span class="w">    </span><span class="c1">// view: &#39;numbers&#39;,</span>
 <span class="w">    </span><span class="c1">// view: &#39;strings&#39;,</span>
+<span class="w">    </span><span class="c1">// view: &#39;booleans&#39;,</span>
 <span class="w">    </span><span class="c1">// view: &#39;array&#39;,</span>
 
 <span class="w">    </span><span class="c1">// icon: undefined,</span>
@@ -17241,6 +17243,7 @@
 <li><code>view</code> :<ul>
 <li><code>'numbers'</code> : Array editor for number items.</li>
 <li><code>'strings'</code> : Array editor for string items.</li>
+<li><code>'booleans'</code> : Array editor for boolean items.</li>
 <li><code>'array'</code> : Generic array editor.</li>
 <li><code>undefined</code> : Auto-detect array item type from current value.</li>
 </ul>
@@ -17262,6 +17265,7 @@
 <li>Default value depends on <code>view</code>.<ul>
 <li><code>'numbers'</code> : Return <code>0</code>.</li>
 <li><code>'strings'</code> : Return <code>''</code>.</li>
+<li><code>'booleans'</code> : Return <code>false</code>.</li>
 <li><code>'array'</code> : No default item.</li>
 </ul>
 </li>

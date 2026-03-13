@@ -1159,6 +1159,7 @@ tweaker.addInput({
 tweaker.addInput(object, key, {
     // view: 'numbers',
     // view: 'strings',
+    // view: 'booleans',
     // view: 'array',
 
     // icon: undefined,
@@ -1188,6 +1189,7 @@ tweaker.addInput({
     bindingKey: key,
     // view: 'numbers',
     // view: 'strings',
+    // view: 'booleans',
     // view: 'array',
 
     // icon: undefined,
@@ -1215,6 +1217,7 @@ tweaker.addInput({
 - `view` :
     - `'numbers'` : Array editor for number items.
     - `'strings'` : Array editor for string items.
+    - `'booleans'` : Array editor for boolean items.
     - `'array'` : Generic array editor.
     - `undefined` : Auto-detect array item type from current value.
 - `icon`, `iconFrame` : Texture key, frame name of icon on title-label.
@@ -1230,6 +1233,7 @@ tweaker.addInput({
     - Default value depends on `view`.
         - `'numbers'` : Return `0`.
         - `'strings'` : Return `''`.
+        - `'booleans'` : Return `false`.
         - `'array'` : No default item.
 - `key` : Add this child into childMap, which could be read back by `tweaker.getElement(key)`.
     - `undefined` : Don't add this child. Default value.
