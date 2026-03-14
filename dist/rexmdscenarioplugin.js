@@ -16159,15 +16159,34 @@
 	    return gameObjects;
 	};
 
-	var FilterDisplayGameObjects = function (gameObjects) {
+	var FilterDisplayGameObjects = function (gameObjects, referanceGameObject) {
+	    var targetDisplayList = (referanceGameObject) ? referanceGameObject.displayList : undefined;
+	    var targetParentContainer = (referanceGameObject) ? referanceGameObject.parentContainer : undefined;
+
 	    return gameObjects.filter(function (gameObject) {
-	        if (gameObject.displayList) {
-	            // Inside a scene or a layer
-	            return true;
-	        } else if (gameObject.parentContainer) {
-	            // Inside a container
+	        var displayList = gameObject.displayList;
+	        var parentContainer = gameObject.parentContainer;
+
+	        // Inside a scene or a layer, or
+	        // Inside a container
+	        if (!displayList && !parentContainer) {
+	            return false;
+	        }
+
+	        if (!referanceGameObject) {
 	            return true;
 	        }
+
+	        // At the same scene or layer, or
+	        if (displayList) {
+	            return (displayList === targetDisplayList);
+	        }
+	        // Inside the same container
+	        if (parentContainer) {
+	            return (parentContainer === targetParentContainer);
+	        }
+
+	        return false;
 	    })
 	};
 
@@ -16344,7 +16363,7 @@
 	        var gameObjects;
 	        if ((child !== this) && child.isRexContainerLite && (!child.layerRendererEnable)) {
 	            gameObjects = child.getAllChildren([child]);
-	            gameObjects = FilterDisplayGameObjects(gameObjects);
+	            gameObjects = FilterDisplayGameObjects(gameObjects, child);
 	            gameObjects = SortGameObjectsByDepth(gameObjects, false);
 
 	        } else {
@@ -16354,7 +16373,7 @@
 	        var topChild;
 	        if (!this.layerRendererEnable) {
 	            var children = this.getAllChildren([this]);
-	            children = FilterDisplayGameObjects(children);
+	            children = FilterDisplayGameObjects(children, child);
 	            children = SortGameObjectsByDepth(children, false);
 	            topChild = children[children.length - 1];
 	        } else {
@@ -16386,7 +16405,7 @@
 	        var gameObjects;
 	        if ((child !== this) && child.isRexContainerLite && (!child.layerRendererEnable)) {
 	            gameObjects = child.getAllChildren([child]);
-	            gameObjects = FilterDisplayGameObjects(gameObjects);
+	            gameObjects = FilterDisplayGameObjects(gameObjects, child);
 	            gameObjects = SortGameObjectsByDepth(gameObjects, false);
 	        } else {
 	            gameObjects = [child];
@@ -16395,7 +16414,7 @@
 	        var bottomChild;
 	        if (!this.layerRendererEnable) {
 	            var children = this.getAllChildren([this]);
-	            children = FilterDisplayGameObjects(children);
+	            children = FilterDisplayGameObjects(children, child);
 	            children = SortGameObjectsByDepth(children, false);
 	            bottomChild = children[0];
 	        } else {
@@ -55423,6 +55442,10 @@
 	        sizerConfig.align = ALIGN_LEFTTOP;
 	        sizerConfig.expand = expand;
 	        this.child = child;
+
+	        if (GetValue$1D(config, 'enableLayer', false)) {
+	            this.enableLayer();
+	        }
 
 	        // Create mask of child object
 	        var maskConfig = GetValue$1D(config, 'mask');

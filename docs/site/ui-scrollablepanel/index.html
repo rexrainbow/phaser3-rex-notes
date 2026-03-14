@@ -15609,6 +15609,7 @@
 <span class="w">            </span><span class="nx">padding</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="c1">// or {left, right, top, bottom}</span>
 <span class="w">            </span><span class="c1">// updateMode: 0,</span>
 <span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="c1">// enableLayer: false,</span>
 <span class="w">        </span><span class="nx">childOrigin0</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <span class="w">    </span><span class="p">}.</span>
 
@@ -15783,6 +15784,11 @@
 </ul>
 </li>
 <li><code>false</code> : No mask</li>
+</ul>
+</li>
+<li><code>panel.enableLayer</code> : <ul>
+<li><code>false</code> : Add children game objects into scene's display list. Default behavior.</li>
+<li><code>true</code> : Add children game objects into an internal <a href="../layer/">layer game object</a>. <a href="../containerlite/#add-to-container">See also</a>.</li>
 </ul>
 </li>
 <li><code>panel.childOrigin0</code> :<ul>
