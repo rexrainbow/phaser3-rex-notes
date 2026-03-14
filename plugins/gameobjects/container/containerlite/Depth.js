@@ -174,7 +174,7 @@ export default {
         var gameObjects;
         if ((child !== this) && child.isRexContainerLite && (!child.layerRendererEnable)) {
             gameObjects = child.getAllChildren([child]);
-            gameObjects = FilterDisplayGameObjects(gameObjects);
+            gameObjects = FilterDisplayGameObjects(gameObjects, child);
             gameObjects = SortGameObjectsByDepth(gameObjects, false);
 
         } else {
@@ -184,7 +184,7 @@ export default {
         var topChild;
         if (!this.layerRendererEnable) {
             var children = this.getAllChildren([this]);
-            children = FilterDisplayGameObjects(children);
+            children = FilterDisplayGameObjects(children, child);
             children = SortGameObjectsByDepth(children, false);
             topChild = children[children.length - 1];
         } else {
@@ -216,7 +216,7 @@ export default {
         var gameObjects;
         if ((child !== this) && child.isRexContainerLite && (!child.layerRendererEnable)) {
             gameObjects = child.getAllChildren([child]);
-            gameObjects = FilterDisplayGameObjects(gameObjects);
+            gameObjects = FilterDisplayGameObjects(gameObjects, child);
             gameObjects = SortGameObjectsByDepth(gameObjects, false);
         } else {
             gameObjects = [child];
@@ -225,7 +225,7 @@ export default {
         var bottomChild;
         if (!this.layerRendererEnable) {
             var children = this.getAllChildren([this]);
-            children = FilterDisplayGameObjects(children);
+            children = FilterDisplayGameObjects(children, child);
             children = SortGameObjectsByDepth(children, false);
             bottomChild = children[0];
         } else {

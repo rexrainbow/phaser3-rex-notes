@@ -119,6 +119,7 @@ var panel = scene.rexUI.add.scrollablePanel({
             padding: 0, // or {left, right, top, bottom}
             // updateMode: 0,
         },
+        // enableLayer: false,
         childOrigin0: true,
     }.
 
@@ -277,6 +278,9 @@ var panel = scene.rexUI.add.scrollablePanel({
             - `0`, or `'update'` : Apply mask only when scrolling. Default behavior.
             - `1`, or `'everyTick'` : Apply mask every tick. Use this mode if children game objects of panel are moved after scrolling and still been masked.
         - `false` : No mask
+    - `panel.enableLayer` : 
+        - `false` : Add children game objects into scene's display list. Default behavior.
+        - `true` : Add children game objects into an internal [layer game object](layer.md). [See also](containerlite.md#add-to-container).
     - `panel.childOrigin0` :
         - `true` : Change origin of penal game object to `(0, 0)`. Default behavior for backward compatible.
         - `false` : Ignore this feature.

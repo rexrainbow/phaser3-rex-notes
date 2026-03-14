@@ -109,6 +109,10 @@ declare namespace ScrollablePanel {
              */
             mask?: MaskConfig | boolean,
             /**
+             * True to enable layer support.
+             */
+            enableLayer?: boolean,
+            /**
              * True to keep original child origin.
              */
             childOrigin0?: boolean,
