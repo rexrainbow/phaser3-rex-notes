@@ -1,12 +1,24 @@
 import CreateInputTextArea from './utils/CreateInputTextArea.js';
 
-var SetInputTextReadOnly = function (gameObject, enable) {
-    if (enable === undefined) {
-        enable = true;
+var SetInputTextReadOnly = function (gameObject, readOnly, force) {
+    if (readOnly === undefined) {
+        readOnly = true;
+    }
+
+    if (force === undefined) {
+        force = false;
     }
 
     var inputText = gameObject.childrenMap.inputText;
-    inputText.setReadOnly(enable);
+
+    if (force) {
+        gameObject.inputTextReadOnly = readOnly;
+        inputText.setReadOnly(readOnly);
+    } else {
+        if (!gameObject.inputTextReadOnly) {
+            inputText.setReadOnly(readOnly);
+        }
+    }
 }
 
 export default {
@@ -21,20 +33,20 @@ export default {
     },
 
     // Callback after `constructor()`
-    build(gameObject, style) {
+    build(gameObject, config, inputRowStyle, styles) {
         var scene = gameObject.scene;
 
         this.type = 'rexTweaker.TextAreaInput';
 
-        var inputTextAreaConfig = style.inputTextArea;
+        var inputTextAreaConfig = inputRowStyle.inputTextArea;
         if (inputTextAreaConfig === undefined) {
             inputTextAreaConfig = {};
         }
         if (!inputTextAreaConfig.hasOwnProperty('text')) {
-            inputTextAreaConfig.text = style.inputText;
+            inputTextAreaConfig.text = inputRowStyle.inputText;
         }
         if (!inputTextAreaConfig.hasOwnProperty('slider')) {
-            inputTextAreaConfig.slider = style.slider;
+            inputTextAreaConfig.slider = inputRowStyle.slider;
         }
 
         var inputText = CreateInputTextArea(scene, inputTextAreaConfig);
@@ -68,4 +80,10 @@ export default {
         inputText.scrollToTop();
     },
 
+    setReadOnly(gameObject, readOnly) {
+        if (readOnly === undefined) {
+            readOnly = true;
+        }
+        SetInputTextReadOnly(gameObject, readOnly);
+    }
 }

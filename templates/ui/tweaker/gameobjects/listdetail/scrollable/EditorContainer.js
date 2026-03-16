@@ -29,6 +29,7 @@ class EditorContainer extends Scrollable {
         this.type = 'rexTweaker.ListDetail.EditorContainer';
 
         this.addChildrenMap('title', title);
+        this.addChildrenMap('inputTweaker', config.editor);
         this.addChildrenMap('toolbar', toolbar);
 
         var deleteButton = config.editorDeleteButton;
@@ -96,6 +97,16 @@ class EditorContainer extends Scrollable {
     setTitle(indexConfig, displayNameConfig) {
         var title = this.childrenMap.header;
         title.setTitle(indexConfig, displayNameConfig);
+        return this;
+    }
+
+    setReadOnly(value) {
+        if (value === undefined) {
+            value = true;
+        }
+
+        this.readOnly = value;
+        this.childrenMap.inputTweaker.setReadOnly(value);
         return this;
     }
 }

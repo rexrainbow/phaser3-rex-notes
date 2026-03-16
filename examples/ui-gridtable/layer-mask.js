@@ -36,7 +36,7 @@ class Demo extends Phaser.Scene {
                     padding: { top: 2, bottom: 2, left: 100, right: 100 }
                 },
 
-                enableLayer: true,
+                enableLayer: true,  // set true or false
                 reuseCellContainer: true,
             },
 
@@ -94,6 +94,9 @@ class Demo extends Phaser.Scene {
                 cellContainer.layout().setDepth(0);
             })
             .layout()
+
+        // change table.enableLayer value to true or false
+        console.log(this.children.list)
     }
 
     update() { }

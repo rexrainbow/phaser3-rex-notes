@@ -10,10 +10,14 @@ import Merge from '../../../../../plugins/utils/object/Merge.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var CreateArrayTable = function (parent, config, style) {
+var CreateArrayTable = function (tweaker, config, style) {
     if (!config) { config = {}; }
     if (!style) { style = {}; }
-    var scene = parent.scene;
+
+    var scene = tweaker.scene;
+
+    // background
+    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
     // title
     var title = CreateTitleLabel(scene, undefined, (style.title || {}));
@@ -52,9 +56,6 @@ var CreateArrayTable = function (parent, config, style) {
         }
     }
 
-    // background
-    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
-
     var arrayTable = new ArrayTable(scene, {
         table: tableConfig,
         clampChildOY: true,
@@ -72,7 +73,7 @@ var CreateArrayTable = function (parent, config, style) {
         height: GetValue(config, 'height', 0, style),
         space: Merge((config.space || {}), (style.space || {})),
 
-        createCellContainerCallback: GenerateCreateCellContainerCallback(parent, config, style),
+        createCellContainerCallback: GenerateCreateCellContainerCallback(tweaker, config, style),
     });
     scene.add.existing(arrayTable);
 

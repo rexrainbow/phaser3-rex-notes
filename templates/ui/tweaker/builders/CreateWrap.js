@@ -4,17 +4,21 @@ import CreateBackground from './utils/CreateBackground.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var CreateWrap = function (parent, config, style) {
+var CreateWrap = function (tweaker, config, style) {
     if (!config) { config = {}; }
     if (!style) { style = {}; }
-    var scene = parent.scene;
+
+    var scene = tweaker.scene;
+
+    // background
+    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
     // title    
     var title = CreateTitleLabel(scene, undefined, (style.title || {}));
 
     var tweakerConfig = {
-        root: style.root,
-        styles: style.tweaker,
+        root: tweaker.root,
+        styles: tweaker.styles,
         space: style.space,
         align: GetValue(style, 'align', 5),
 
@@ -23,10 +27,7 @@ var CreateWrap = function (parent, config, style) {
         itemHeight: GetValue(config, 'itemHeight', 0, style),
     }
 
-    var tweakerChild = parent.createTweaker(tweakerConfig);
-
-    // background
-    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
+    var tweakerChild = tweaker.createTweaker(tweakerConfig);
 
     var wrap = new Wrap(scene, {
         title: title,

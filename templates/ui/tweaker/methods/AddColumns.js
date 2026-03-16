@@ -14,11 +14,7 @@ var AddColumns = function (config) {
 
     // Create columns
     var columnsStyle = GetValue(this.styles, 'columns') || {};
-    columnsStyle.tweaker = this.styles;
-    columnsStyle.root = this.root;
     var columns = CreateColumns(this, config, columnsStyle);
-    delete columnsStyle.tweaker;
-    delete columnsStyle.root;
 
     // Add columns
     this.add(

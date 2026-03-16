@@ -81,6 +81,23 @@ class ColorInput extends ColorInputBase {
             this.onClick(swatch, this.openColorPicker, this);
         }
     }
+
+    get readOnly() {
+        return this._readOnly;
+    }
+
+    set readOnly(value) {
+        var swatch = this.childrenMap.swatch;
+        if (swatch) {
+            if (value) {
+                this.disableClick(swatch);
+            } else {
+                this.enableClick(swatch);
+            }
+        }
+
+        super.readOnly = value;
+    }
 }
 
 Object.assign(

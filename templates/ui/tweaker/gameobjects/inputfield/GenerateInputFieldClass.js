@@ -20,12 +20,6 @@ var GenerateInputFieldClass = function (BaseClass) {
             return this._value;
         }
 
-        get tweaker() {
-            var inputRow = this.getParentSizer();
-            var tweaker = inputRow.getParentSizer();
-            return tweaker;
-        }
-
         get root() {
             return this.tweaker.root;
         }
@@ -107,6 +101,33 @@ var GenerateInputFieldClass = function (BaseClass) {
             return this;
         }
 
+        setReadOnly(value) {
+            value = !!value;
+
+            if (!this.setReadOnlyCallback) {
+                return this;
+            }
+
+            this.setReadOnlyCallback(this, value);
+            this._readOnly = value;
+
+            return this;
+        }
+
+        get readOnly() {
+            return this._readOnly;
+        }
+
+        set readOnly(value) {
+            this.setReadOnly(value);
+        }
+
+        // Internal usage
+        setTweaker(tweaker) {
+            this.tweaker = tweaker;
+            return this;
+        }
+
         setup(config, setDefaults) {
             if (setDefaults === undefined) {
                 setDefaults = false;
@@ -154,6 +175,11 @@ var GenerateInputFieldClass = function (BaseClass) {
 
         setValidateCallback(callback) {
             this.validateCallback = callback;
+            return this;
+        }
+
+        setSetReadOnlyCallback(callback) {
+            this.setReadOnlyCallback = callback;
             return this;
         }
     }

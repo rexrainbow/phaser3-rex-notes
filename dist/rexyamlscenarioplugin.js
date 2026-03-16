@@ -16154,15 +16154,34 @@
 	    return gameObjects;
 	};
 
-	var FilterDisplayGameObjects = function (gameObjects) {
+	var FilterDisplayGameObjects = function (gameObjects, referanceGameObject) {
+	    var targetDisplayList = (referanceGameObject) ? referanceGameObject.displayList : undefined;
+	    var targetParentContainer = (referanceGameObject) ? referanceGameObject.parentContainer : undefined;
+
 	    return gameObjects.filter(function (gameObject) {
-	        if (gameObject.displayList) {
-	            // Inside a scene or a layer
-	            return true;
-	        } else if (gameObject.parentContainer) {
-	            // Inside a container
+	        var displayList = gameObject.displayList;
+	        var parentContainer = gameObject.parentContainer;
+
+	        // Inside a scene or a layer, or
+	        // Inside a container
+	        if (!displayList && !parentContainer) {
+	            return false;
+	        }
+
+	        if (!referanceGameObject) {
 	            return true;
 	        }
+
+	        // At the same scene or layer, or
+	        if (displayList) {
+	            return (displayList === targetDisplayList);
+	        }
+	        // Inside the same container
+	        if (parentContainer) {
+	            return (parentContainer === targetParentContainer);
+	        }
+
+	        return false;
 	    })
 	};
 
@@ -16339,7 +16358,7 @@
 	        var gameObjects;
 	        if ((child !== this) && child.isRexContainerLite && (!child.layerRendererEnable)) {
 	            gameObjects = child.getAllChildren([child]);
-	            gameObjects = FilterDisplayGameObjects(gameObjects);
+	            gameObjects = FilterDisplayGameObjects(gameObjects, child);
 	            gameObjects = SortGameObjectsByDepth(gameObjects, false);
 
 	        } else {
@@ -16349,7 +16368,7 @@
 	        var topChild;
 	        if (!this.layerRendererEnable) {
 	            var children = this.getAllChildren([this]);
-	            children = FilterDisplayGameObjects(children);
+	            children = FilterDisplayGameObjects(children, child);
 	            children = SortGameObjectsByDepth(children, false);
 	            topChild = children[children.length - 1];
 	        } else {
@@ -16381,7 +16400,7 @@
 	        var gameObjects;
 	        if ((child !== this) && child.isRexContainerLite && (!child.layerRendererEnable)) {
 	            gameObjects = child.getAllChildren([child]);
-	            gameObjects = FilterDisplayGameObjects(gameObjects);
+	            gameObjects = FilterDisplayGameObjects(gameObjects, child);
 	            gameObjects = SortGameObjectsByDepth(gameObjects, false);
 	        } else {
 	            gameObjects = [child];
@@ -16390,7 +16409,7 @@
 	        var bottomChild;
 	        if (!this.layerRendererEnable) {
 	            var children = this.getAllChildren([this]);
-	            children = FilterDisplayGameObjects(children);
+	            children = FilterDisplayGameObjects(children, child);
 	            children = SortGameObjectsByDepth(children, false);
 	            bottomChild = children[0];
 	        } else {
@@ -53076,7 +53095,9 @@ void main (void) {
 	var BindingTargetMethods$9 = {
 	    setBindingTarget(target) {
 	        var child = this.childrenMap.child;  // tweaker
-	        child.setBindingTarget(target);
+	        if (child.setBindingTarget) {
+	            child.setBindingTarget(target);
+	        }
 	        return this;
 	    },
 	};
@@ -53095,6 +53116,16 @@ void main (void) {
 	        child.setInputRowTitleWidth(width);
 	        return this;
 	    }
+	};
+
+	var SetReadOnlyMethods$6 = {
+	    setReadOnly(value) {
+	        var child = this.childrenMap.child;  // tweaker
+	        if (child.setReadOnly) {
+	            child.setReadOnly(value);
+	        }
+	        return this;
+	    },
 	};
 
 	class Folder extends Folder$1 {
@@ -53120,15 +53151,19 @@ void main (void) {
 	    Folder.prototype,
 	    BindingTargetMethods$9,
 	    InputRowTitleWidthMethods$8,
+	    SetReadOnlyMethods$6,
 	);
 
 	const GetValue$1_ = Phaser.Utils.Objects.GetValue;
 
-	var CreateFolder = function (parent, config, style) {
+	var CreateFolder = function (tweaker, config, style) {
 	    if (!config) { config = {}; }
 	    if (!style) { style = {}; }
 
-	    var scene = parent.scene;
+	    var scene = tweaker.scene;
+
+	    // background
+	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
 	    // Create Folder-title
 	    var title = new FolderTitle(scene, (style.title || {}));
@@ -53144,13 +53179,10 @@ void main (void) {
 
 	    // tweaker panel
 	    var tweakerConfig = {
-	        root: style.root,
-	        styles: style.tweaker,
+	        root: tweaker.root,
+	        styles: tweaker.styles,
 	    };
-	    var child = parent.createTweaker(tweakerConfig);
-
-	    // background
-	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
+	    var child = tweaker.createTweaker(tweakerConfig);
 
 	    var folder = new Folder(scene, {
 	        title: title,
@@ -53176,12 +53208,7 @@ void main (void) {
 
 	    // Create folder
 	    var folderStyle = GetValue$1Z(this.styles, 'folder') || {};
-	    folderStyle.tweaker = this.styles;
-	    folderStyle.root = this.root;
 	    var folder = CreateFolder(this, config, folderStyle);
-	    delete folderStyle.tweaker;
-	    delete folderStyle.root;
-
 
 	    // Add folder
 	    this.add(
@@ -55130,7 +55157,11 @@ void main (void) {
 	    setBindingTarget(target) {
 	        var children = this.childrenMap.pages.children;
 	        for (var i = 0, cnt = children.length; i < cnt; i++) {
-	            children[i].setBindingTarget(target);
+	            var child = children[i];
+	            if (!child.setBindingTarget) {
+	                continue;
+	            }
+	            child.setBindingTarget(target);
 	        }
 	        return this;
 	    },
@@ -55158,6 +55189,20 @@ void main (void) {
 	    }
 	};
 
+	var SetReadOnlyMethods$5 = {
+	    setReadOnly(value) {
+	        var children = this.childrenMap.pages.children;
+	        for (var i = 0, cnt = children.length; i < cnt; i++) {
+	            var child = children[i];
+	            if (!child.setReadOnly) {
+	                continue;
+	            }
+	            child.setReadOnly(value);
+	        }
+	        return this;
+	    },
+	};
+
 	class TabPages extends TabPages$1 {
 	    constructor(scene, config) {
 	        super(scene, config);
@@ -55169,6 +55214,7 @@ void main (void) {
 	    TabPages.prototype,
 	    BindingTargetMethods$8,
 	    InputRowTitleWidthMethods$7,
+	    SetReadOnlyMethods$5,
 	);
 
 	var CreateLabel = function (scene, config, creators) {
@@ -55179,18 +55225,18 @@ void main (void) {
 
 	Phaser.Utils.Objects.GetValue;
 
-	var CreateTab = function (parent, config, style) {
+	var CreateTab = function (tweaker, config, style) {
 	    if (!config) { config = {}; }
 	    if (!style) { style = {}; }
-	    var scene = parent.scene;
+	    var scene = tweaker.scene;
 
 	    var tabPages = new TabPages(scene, style);
 	    scene.add.existing(tabPages);
 
 	    var tabConfig = style.tab;
 	    var tweakerConfig = {
-	        root: style.root,
-	        styles: style.tweaker,
+	        root: tweaker.root,
+	        styles: tweaker.styles,
 	    };
 	    var pages = config.pages || [];
 	    for (var i = 0, cnt = pages.length; i < cnt; i++) {
@@ -55200,7 +55246,7 @@ void main (void) {
 	            tab: CreateLabel(scene, tabConfig)
 	                .setActiveState(false)
 	                .resetDisplayContent({ text: page.title }),
-	            page: parent.createTweaker(tweakerConfig)
+	            page: tweaker.createTweaker(tweakerConfig)
 	        });
 	    }
 
@@ -55224,11 +55270,7 @@ void main (void) {
 
 	    // Create tab
 	    var tabStyle = GetValue$1Q(this.styles, 'tab') || {};
-	    tabStyle.tweaker = this.styles;
-	    tabStyle.root = this.root;
 	    var tab = CreateTab(this, config, tabStyle);
-	    delete tabStyle.tweaker;
-	    delete tabStyle.root;
 
 	    // Add tab
 	    this.add(
@@ -55267,7 +55309,11 @@ void main (void) {
 	    setBindingTarget(target) {
 	        var children = this.childrenMap.columns;
 	        for (var i = 0, cnt = children.length; i < cnt; i++) {
-	            children[i].setBindingTarget(target);
+	            var child = children[i];
+	            if (!child.setBindingTarget) {
+	                continue;
+	            }
+	            child.setBindingTarget(target);
 	        }
 	        return this;
 	    },
@@ -55289,6 +55335,20 @@ void main (void) {
 
 	        return this;
 	    }
+	};
+
+	var SetReadOnlyMethods$4 = {
+	    setReadOnly(value) {
+	        var children = this.childrenMap.columns;
+	        for (var i = 0, cnt = children.length; i < cnt; i++) {
+	            var child = children[i];
+	            if (!child.setReadOnly) {
+	                continue;
+	            }
+	            child.setReadOnly(value);
+	        }
+	        return this;
+	    },
 	};
 
 	const GetValue$1P = Phaser.Utils.Objects.GetValue;
@@ -55391,6 +55451,7 @@ void main (void) {
 	    Columns.prototype,
 	    BindingTargetMethods$7,
 	    InputRowTitleWidthMethods$6,
+	    SetReadOnlyMethods$4,
 	);
 
 	var CreateTitleLabel = function (scene, config, style) {
@@ -55402,19 +55463,22 @@ void main (void) {
 
 	const GetValue$1O = Phaser.Utils.Objects.GetValue;
 
-	var CreateColumns = function (parent, config, style) {
+	var CreateColumns = function (tweaker, config, style) {
 	    if (!config) { config = {}; }
 	    if (!style) { style = {}; }
 
-	    var scene = parent.scene;
+	    var scene = tweaker.scene;
+
+	    // background
+	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
 	    // title    
 	    var title = CreateTitleLabel(scene, undefined, style.title);
 
 	    // columns, each column has a tweaker panel
 	    var tweakerConfig = {
-	        root: style.root,
-	        styles: style.tweaker,
+	        root: tweaker.root,
+	        styles: tweaker.styles,
 	    };
 
 	    var columnConfigArray = GetValue$1O(config, 'columns', 2);
@@ -55431,13 +55495,10 @@ void main (void) {
 
 	        tweakerConfig.width = GetValue$1O(columnConfig, 'width', 0);
 
-	        var tweakerChild = parent.createTweaker(tweakerConfig);
+	        var tweakerChild = tweaker.createTweaker(tweakerConfig);
 
 	        columnConfig.child = tweakerChild;
 	    }
-
-	    // background
-	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
 	    var columns = new Columns(scene, {
 	        title: title,
@@ -55466,11 +55527,7 @@ void main (void) {
 
 	    // Create columns
 	    var columnsStyle = GetValue$1N(this.styles, 'columns') || {};
-	    columnsStyle.tweaker = this.styles;
-	    columnsStyle.root = this.root;
 	    var columns = CreateColumns(this, config, columnsStyle);
-	    delete columnsStyle.tweaker;
-	    delete columnsStyle.root;
 
 	    // Add columns
 	    this.add(
@@ -56063,10 +56120,10 @@ void main (void) {
 	    setBindingTarget(target) {
 	        var leftPanel = this.leftPanel;
 	        var rightPanel = this.rightPanel;
-	        if (leftPanel) {
+	        if (leftPanel && leftPanel.setBindingTarget) {
 	            leftPanel.setBindingTarget(target);
 	        }
-	        if (rightPanel) {
+	        if (rightPanel && rightPanel.setBindingTarget) {
 	            rightPanel.setBindingTarget(target);
 	        }
 	        return this;
@@ -56092,6 +56149,20 @@ void main (void) {
 
 	        return this;
 	    }
+	};
+
+	var SetReadOnlyMethods$3 = {
+	    setReadOnly(value) {
+	        var leftPanel = this.leftPanel;
+	        var rightPanel = this.rightPanel;
+	        if (leftPanel && leftPanel.setReadOnly) {
+	            leftPanel.setReadOnly(value);
+	        }
+	        if (rightPanel && rightPanel.setReadOnly) {
+	            rightPanel.setReadOnly(value);
+	        }
+	        return this;
+	    },
 	};
 
 	const GetValue$1K = Phaser.Utils.Objects.GetValue;
@@ -56128,6 +56199,7 @@ void main (void) {
 	    SplitPanels.prototype,
 	    BindingTargetMethods$6,
 	    InputRowTitleWidthMethods$5,
+	    SetReadOnlyMethods$3,
 	);
 
 	const GetValue$1J = Phaser.Utils.Objects.GetValue;
@@ -56139,22 +56211,25 @@ void main (void) {
 	    alpha: 0.001
 	};
 
-	var CreateSplitPanels = function (parent, config, style) {
+	var CreateSplitPanels = function (tweaker, config, style) {
 	    if (!config) { config = {}; }
 	    if (!style) { style = {}; }
 
-	    var scene = parent.scene;
+	    var scene = tweaker.scene;
+
+	    // background
+	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
 	    // title
 	    var title = CreateTitleLabel(scene, (style.title || {}));
 
 	    // left and right tweaker panels with background
 	    var tweakerConfig = {
-	        root: style.root,
-	        styles: style.tweaker,
+	        root: tweaker.root,
+	        styles: tweaker.styles,
 	    };
-	    var leftPanel = parent.createTweaker(tweakerConfig);
-	    var rightPanel = parent.createTweaker(tweakerConfig);
+	    var leftPanel = tweaker.createTweaker(tweakerConfig);
+	    var rightPanel = tweaker.createTweaker(tweakerConfig);
 
 	    // splitter
 	    var splitterConfig = config.splitter;
@@ -56165,9 +56240,6 @@ void main (void) {
 	        splitterStyle = DefaultSplitStyle$1;
 	    }
 	    splitter = CreateBackground(scene, (splitterConfig || {}), (splitterStyle || {}));
-
-	    // background
-	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
 	    var splitPanels = new SplitPanels(scene, {
 	        header: title,
@@ -56195,11 +56267,7 @@ void main (void) {
 	    }
 
 	    var splitPanelStyle = GetValue$1I(this.styles, '2columns') || {};
-	    splitPanelStyle.tweaker = this.styles;
-	    splitPanelStyle.root = this.root;
 	    var splitPanels = CreateSplitPanels(this, config, splitPanelStyle);
-	    delete splitPanelStyle.tweaker;
-	    delete splitPanelStyle.root;
 
 	    this.add(
 	        splitPanels,
@@ -56234,7 +56302,11 @@ void main (void) {
 	    setBindingTarget(target) {
 	        var children = this.childrenMap.child;
 	        for (var i = 0, cnt = children.length; i < cnt; i++) {
-	            children[i].setBindingTarget(target);
+	            var child = children[i];
+	            if (!child.setBindingTarget) {
+	                continue;
+	            }
+	            child.setBindingTarget(target);
 	        }
 	        return this;
 	    },
@@ -56248,6 +56320,20 @@ void main (void) {
 
 	    setInputRowTitleWidth(width) {
 	        // Ignore Title of InputRows
+	        return this;
+	    }
+	};
+
+	var SetReadOnlyMethods$2 = {
+	    setReadOnly(value) {
+	        var children = this.childrenMap.child;
+	        for (var i = 0, cnt = children.length; i < cnt; i++) {
+	            var child = children[i];
+	            if (!child.setReadOnly) {
+	                continue;
+	            }
+	            child.setReadOnly(value);
+	        }
 	        return this;
 	    }
 	};
@@ -56311,21 +56397,26 @@ void main (void) {
 	    Wrap.prototype,
 	    BindingTargetMethods$5,
 	    InputRowTitleWidthMethods$4,
+	    SetReadOnlyMethods$2,
 	);
 
 	const GetValue$1G = Phaser.Utils.Objects.GetValue;
 
-	var CreateWrap = function (parent, config, style) {
+	var CreateWrap = function (tweaker, config, style) {
 	    if (!config) { config = {}; }
 	    if (!style) { style = {}; }
-	    var scene = parent.scene;
+
+	    var scene = tweaker.scene;
+
+	    // background
+	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
 	    // title    
 	    var title = CreateTitleLabel(scene, undefined, (style.title || {}));
 
 	    var tweakerConfig = {
-	        root: style.root,
-	        styles: style.tweaker,
+	        root: tweaker.root,
+	        styles: tweaker.styles,
 	        space: style.space,
 	        align: GetValue$1G(style, 'align', 5),
 
@@ -56334,10 +56425,7 @@ void main (void) {
 	        itemHeight: GetValue$1G(config, 'itemHeight', 0, style),
 	    };
 
-	    var tweakerChild = parent.createTweaker(tweakerConfig);
-
-	    // background
-	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
+	    var tweakerChild = tweaker.createTweaker(tweakerConfig);
 
 	    var wrap = new Wrap(scene, {
 	        title: title,
@@ -56358,11 +56446,7 @@ void main (void) {
 
 	    // Create wrap
 	    var wrapStyle = GetValue$1F(this.styles, 'wrap') || {};
-	    wrapStyle.tweaker = this.styles;
-	    wrapStyle.root = this.root;
 	    var wrap = CreateWrap(this, config, wrapStyle);
-	    delete wrapStyle.tweaker;
-	    delete wrapStyle.root;
 
 	    // Add wrap
 	    this.add(
@@ -56891,6 +56975,10 @@ void main (void) {
 	        sizerConfig.expand = expand;
 	        this.child = child;
 
+	        if (GetValue$1D(config, 'enableLayer', false)) {
+	            this.enableLayer();
+	        }
+
 	        // Create mask of child object
 	        this.setupChildrenMask(GetValue$1D(config, 'mask', undefined));
 	    }
@@ -57386,7 +57474,9 @@ void main (void) {
 	var BindingTargetMethods$4 = {
 	    setBindingTarget(target) {
 	        var child = this.childrenMap.panel;  // tweaker
-	        child.setBindingTarget(target);
+	        if (child.setBindingTarget) {
+	            child.setBindingTarget(target);
+	        }
 	        return this;
 	    },
 	};
@@ -57405,6 +57495,16 @@ void main (void) {
 	        child.setInputRowTitleWidth(width);
 	        return this;
 	    }
+	};
+
+	var SetReadOnlyMethods$1 = {
+	    setReadOnly(value) {
+	        var child = this.childrenMap.panel;  // tweaker
+	        if (child.setReadOnly) {
+	            child.setReadOnly(value);
+	        }
+	        return this;
+	    },
 	};
 
 	class Scrollable extends ScrollablePanel {
@@ -57429,31 +57529,32 @@ void main (void) {
 	    Scrollable.prototype,
 	    BindingTargetMethods$4,
 	    InputRowTitleWidthMethods$3,
+	    SetReadOnlyMethods$1,
 	);
 
 	const GetValue$1B = Phaser.Utils.Objects.GetValue;
 
-	var CreateScrollable = function (parent, config, style) {
+	var CreateScrollable = function (tweaker, config, style) {
 	    if (!config) { config = {}; }
 	    if (!style) { style = {}; }
 
-	    var scene = parent.scene;
+	    var scene = tweaker.scene;
+
+	    // background
+	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
 	    // title
 	    var title = CreateTitleLabel(scene, undefined, (style.title || {}));
 
 	    // panel
 	    var tweakerConfig = {
-	        root: style.root,
-	        styles: style.tweaker,
+	        root: tweaker.root,
+	        styles: tweaker.styles,
 	    };
-	    var child = parent.createTweaker(tweakerConfig);
+	    var child = tweaker.createTweaker(tweakerConfig);
 
 	    // slider
 	    var slider = CreateSlider$1(scene, config.slider, style.slider);
-
-	    // background
-	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
 	    var scrollable = new Scrollable(scene, {
 	        scrollMode: 0,
@@ -57489,12 +57590,7 @@ void main (void) {
 
 	    // Create scrollable
 	    var scrollableStyle = GetValue$1A(this.styles, 'scrollable') || {};
-	    scrollableStyle.tweaker = this.styles;
-	    scrollableStyle.root = this.root;
 	    var scrollable = CreateScrollable(this, config, scrollableStyle);
-	    delete scrollableStyle.tweaker;
-	    delete scrollableStyle.root;
-
 
 	    // Add scrollable
 	    this.add(
@@ -59710,6 +59806,7 @@ void main (void) {
 	};
 
 	var InstallAddButton$1 = function (config) {
+	    // this: ArrayTable
 	    var button = config.addButton;
 	    if (!button) {
 	        return;
@@ -59719,18 +59816,27 @@ void main (void) {
 	    var createDefaultItemCallback = button.createDefaultItem;
 
 	    button.onClick(function () {
+	        if (this.readOnly) {
+	            return;
+	        }
+
 	        var item = createDefaultItemCallback();
 	        this.addItemWithTransition(item);
 	    }, this);
 	};
 
 	var InstallClearButton$1 = function (config) {
+	    // this: ArrayTable
 	    var button = config.clearButton;
 	    if (!button) {
 	        return;
 	    }
 
 	    button.onClick(function () {
+	        if (this.readOnly) {
+	            return;
+	        }
+
 	        this.clearItemsWithTransition();
 	    }, this);
 	};
@@ -59869,6 +59975,8 @@ void main (void) {
 	        this.resetCellSizeFlag = true;
 	        this.lastItemsCount = undefined; // For monitor
 
+	        this.setReadOnly(false);
+
 	        InstallClearButton$1.call(this, config);
 	        InstallAddButton$1.call(this, config);
 	        InstallCellInteractiveEvents$1.call(this, config);
@@ -59910,7 +60018,7 @@ void main (void) {
 	    setTitle(config) {
 	        var title = this.childrenMap.header;
 
-	        if (config.title || config.icon) {
+	        if (config && (config.title || config.icon)) {
 	            title.show().setTitle(config);
 	        } else {
 	            title.hide();
@@ -59919,6 +60027,20 @@ void main (void) {
 	        return this;
 	    }
 
+	    setReadOnly(value) {
+	        if (value === undefined) {
+	            value = true;
+	        }
+
+	        this.readOnly = value;
+
+	        var cellConteiners = this.getAllCellContainers();
+	        for (var i = 0, cnt = cellConteiners.length; i < cnt; i++) {
+	            cellConteiners[i].setReadOnly(value);
+	        }
+
+	        return this;
+	    }
 	}
 
 	Object.assign(
@@ -60233,6 +60355,10 @@ void main (void) {
 
 	var OnClickButtonMethods$2 = {
 	    onClickDeleteButton() {
+	        if (this.gridTable.readOnly) {
+	            return;
+	        }
+
 	        // Called by clicking delete button
 	        if (!this.gridTable.isInTouching('mask')) {
 	            return;
@@ -60242,6 +60368,10 @@ void main (void) {
 	    },
 
 	    onClickMoveUpButton() {
+	        if (this.gridTable.readOnly) {
+	            return;
+	        }
+
 	        if (!this.gridTable.isInTouching('mask')) {
 	            return;
 	        }
@@ -60263,6 +60393,10 @@ void main (void) {
 	    },
 
 	    onClickMoveDownButton() {
+	        if (this.gridTable.readOnly) {
+	            return;
+	        }
+
 	        if (!this.gridTable.isInTouching('mask')) {
 	            return;
 	        }
@@ -60334,6 +60468,8 @@ void main (void) {
 	            this.setBindingTarget(items, index);
 	        }
 
+	        this.setReadOnly(this.gridTable.readOnly);
+
 	        return this;
 	    }
 
@@ -60364,6 +60500,11 @@ void main (void) {
 	        }
 	    }
 
+	    setReadOnly(value) {
+	        this.childrenMap.inputTweaker.setReadOnly(value);
+	        return this;
+	    }
+
 	};
 
 	var Methods$9 = {
@@ -60380,8 +60521,8 @@ void main (void) {
 	const GetValue$1j = Phaser.Utils.Objects.GetValue;
 	const Format$1 = Phaser.Utils.String.Format;
 
-	var CreateCellContainer$1 = function (parent, cell, config) {
-	    var scene = parent.scene;
+	var CreateCellContainer$1 = function (tweaker, cell, config) {
+	    var scene = tweaker.scene;
 
 	    // Create elements
 	    var {
@@ -60395,6 +60536,8 @@ void main (void) {
 	        tweakerAddRowsParameters,
 	        backgroundStyle,
 	    } = config;
+
+	    var background = CreateBackground(scene, {}, backgroundStyle);
 
 	    var indexLabel = CreateTitleLabel(scene, undefined, indexStyle);
 
@@ -60417,11 +60560,10 @@ void main (void) {
 	            $key: cell.index
 	        }];
 	    }
-	    var inputTweaker = parent.createTweaker(tweakerConfig)
+	    var inputTweaker = tweaker
+	        .createTweaker(tweakerConfig)
 	        .setAlignInputRowTitleEnable(isObjectItem)
 	        .addRows(properties, target, tweakerAddRowsParameters.monitor);
-
-	    var background = CreateBackground(scene, {}, backgroundStyle);
 
 	    // Assemble elements
 	    var cellContainer = new CellContainer$1(scene, {
@@ -60439,11 +60581,14 @@ void main (void) {
 	    return cellContainer;
 	};
 
-	var GenerateCreateCellContainerCallback$1 = function (parent, config, style) {
+	var GenerateCreateCellContainerCallback$1 = function (tweaker, config, style) {
+	    if (style === undefined) {
+	        style = {};
+	    }
 	    // Prepare parameters
 	    var space = GetValue$1j(config, 'space.cell', undefined, style) || {};
 
-	    var indexStyle = GetValue$1j(style, 'index');
+	    var indexStyle = style.index;
 	    if (!indexStyle) {
 	        indexStyle = GetValue$1j(style, 'tweaker.inputRow.title') || {};
 	    }
@@ -60469,8 +60614,8 @@ void main (void) {
 	    };
 
 	    var tweakerConfig = {
-	        root: GetValue$1j(style, 'root'),
-	        styles: GetValue$1j(style, 'tweaker'),
+	        root: tweaker.root,
+	        styles: tweaker.styles,
 	        expandInputRowHeight: true,
 	    };
 
@@ -60491,7 +60636,7 @@ void main (void) {
 	        var index = cell.index;
 
 	        if (cellContainer === null) {
-	            cellContainer = CreateCellContainer$1(parent, cell, {
+	            cellContainer = CreateCellContainer$1(tweaker, cell, {
 	                space,
 	                gridTable,
 	                indexStyle,
@@ -60524,10 +60669,14 @@ void main (void) {
 
 	const GetValue$1i = Phaser.Utils.Objects.GetValue;
 
-	var CreateArrayTable = function (parent, config, style) {
+	var CreateArrayTable = function (tweaker, config, style) {
 	    if (!config) { config = {}; }
 	    if (!style) { style = {}; }
-	    var scene = parent.scene;
+
+	    var scene = tweaker.scene;
+
+	    // background
+	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
 	    // title
 	    var title = CreateTitleLabel(scene, undefined, (style.title || {}));
@@ -60566,9 +60715,6 @@ void main (void) {
 	        }
 	    }
 
-	    // background
-	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
-
 	    var arrayTable = new ArrayTable(scene, {
 	        table: tableConfig,
 	        clampChildOY: true,
@@ -60586,7 +60732,7 @@ void main (void) {
 	        height: GetValue$1i(config, 'height', 0, style),
 	        space: Merge$2((config.space || {}), (style.space || {})),
 
-	        createCellContainerCallback: GenerateCreateCellContainerCallback$1(parent, config, style),
+	        createCellContainerCallback: GenerateCreateCellContainerCallback$1(tweaker, config, style),
 	    });
 	    scene.add.existing(arrayTable);
 
@@ -60596,10 +60742,12 @@ void main (void) {
 	var BindingTargetMethods$2 = {
 	    setBindingTarget(target, bindingKey) {
 	        // ListTable panel (left panel)
-	        if (arguments.length >= 2) {
-	            this.leftPanel.setBindingTarget(target, bindingKey);
-	        } else {
-	            this.leftPanel.setBindingTarget(target);
+	        if (this.leftPanel && this.leftPanel.setBindingTarget) {
+	            if (arguments.length >= 2) {
+	                this.leftPanel.setBindingTarget(target, bindingKey);
+	            } else {
+	                this.leftPanel.setBindingTarget(target);
+	            }
 	        }
 
 	        var items = this.leftPanel.items;
@@ -60743,7 +60891,6 @@ void main (void) {
 	        }
 
 	    }
-
 	}
 
 	class EditorContainer extends Scrollable {
@@ -60772,6 +60919,7 @@ void main (void) {
 	        this.type = 'rexTweaker.ListDetail.EditorContainer';
 
 	        this.addChildrenMap('title', title);
+	        this.addChildrenMap('inputTweaker', config.editor);
 	        this.addChildrenMap('toolbar', toolbar);
 
 	        var deleteButton = config.editorDeleteButton;
@@ -60839,6 +60987,16 @@ void main (void) {
 	    setTitle(indexConfig, displayNameConfig) {
 	        var title = this.childrenMap.header;
 	        title.setTitle(indexConfig, displayNameConfig);
+	        return this;
+	    }
+
+	    setReadOnly(value) {
+	        if (value === undefined) {
+	            value = true;
+	        }
+
+	        this.readOnly = value;
+	        this.childrenMap.inputTweaker.setReadOnly(value);
 	        return this;
 	    }
 	}
@@ -60920,6 +61078,7 @@ void main (void) {
 	};
 
 	var InstallAddButton = function (config) {
+	    // this: ListTable
 	    var button = config.addButton;
 	    if (!button) {
 	        return;
@@ -60929,18 +61088,28 @@ void main (void) {
 	    var createDefaultItemCallback = button.createDefaultItem;
 
 	    button.onClick(function () {
+	        if (this.readOnly) {
+	            return;
+	        }
+
 	        var item = createDefaultItemCallback();
 	        this.addItemWithTransition(item);
 	    }, this);
 	};
 
 	var InstallClearButton = function (config) {
+	    // this: ListTable
+
 	    var button = config.clearButton;
 	    if (!button) {
 	        return;
 	    }
 
 	    button.onClick(function () {
+	        if (this.readOnly) {
+	            return;
+	        }
+
 	        this.clearItemsWithTransition();
 	    }, this);
 	};
@@ -61138,6 +61307,15 @@ void main (void) {
 	        return this;
 	    }
 
+	    setReadOnly(value) {
+	        if (value === undefined) {
+	            value = true;
+	        }
+
+	        this.readOnly = value;
+	        return this;
+	    }
+
 	}
 
 	Object.assign(
@@ -61166,6 +61344,160 @@ void main (void) {
 	        }
 	    }
 	    return toObj;
+	};
+
+	var IsObjectValue = function (value) {
+	    return !!value && (typeof (value) === 'object') && !Array.isArray(value);
+	};
+
+	var OnToolbarMethods = {
+
+	    onToolbarDelete() {
+	        if (this.readOnly) {
+	            return;
+	        }
+
+	        var index = this.selectedIndex;
+	        if (index == null) {
+	            return;
+	        }
+
+	        var listTable = this.leftPanel;
+	        var cellContainer = listTable.getCellContainer(index);
+	        if (cellContainer) {
+	            listTable.deleteItemWithTransition(cellContainer);
+	            return;
+	        }
+
+	        listTable.deleteItemByIndex(index);
+	        if (listTable.resetPointerOver) {
+	            listTable.resetPointerOver();
+	        }
+	    },
+
+	    onToolbarDuplicate() {
+	        if (this.readOnly) {
+	            return;
+	        }
+
+	        var index = this.selectedIndex;
+	        if (index == null) {
+	            return;
+	        }
+
+	        var listTable = this.leftPanel;
+	        var items = listTable.items;
+	        var currentItem = items[index];
+	        if (!IsObjectValue(currentItem)) {
+	            console.error('[Tweaker][ListDetail] Duplicate aborted. Current selected item is not an object. This is an application-level design error.');
+	            return;
+	        }
+
+	        var defaultItem = this.createDefaultItemFromToolbar('duplicateButton', 'Duplicate');
+	        if (!defaultItem) {
+	            return;
+	        }
+
+	        // Start from current item, then fill missing keys from default item.
+	        var newItem = DeepClone(currentItem);
+	        DeepMerge(newItem, defaultItem);
+
+	        var insertIndex = index + 1;
+	        items.splice(insertIndex, 0, newItem);
+	        listTable.lastItemsCount = items.length;
+	        listTable.refresh();
+	        listTable.emit('items.change', 'add', {
+	            index: insertIndex,
+	            item: newItem
+	        });
+
+	        this.selectItem(insertIndex, true);
+	    },
+
+	    onToolbarReset() {
+	        if (this.readOnly) {
+	            return;
+	        }
+
+	        var index = this.selectedIndex;
+	        if (index == null) {
+	            return;
+	        }
+
+	        var listTable = this.leftPanel;
+	        var items = listTable.items;
+	        var currentItem = items[index];
+	        if (!IsObjectValue(currentItem)) {
+	            console.error('[Tweaker][ListDetail] Reset aborted. Current selected item is not an object. This is an application-level design error.');
+	            return;
+	        }
+
+	        var defaultItem = this.createDefaultItemFromToolbar('resetButton', 'Reset');
+	        if (!defaultItem) {
+	            return;
+	        }
+
+	        // Clear all existing keys, then apply default keys in-place.
+	        for (var key in currentItem) {
+	            if (currentItem.hasOwnProperty(key)) {
+	                delete currentItem[key];
+	            }
+	        }
+	        DeepMerge(currentItem, defaultItem);
+
+	        // Refresh editor and list row display.
+	        this.rightPanel.setBindingTarget(currentItem);
+	        listTable.updateVisibleCell(index);
+	        this.updateEditorTitle(index, currentItem, items);
+	    },
+
+	    onToolbarPrevious() {
+	        var index = this.selectedIndex;
+	        if (index == null) {
+	            return;
+	        }
+
+	        if (index <= 0) {
+	            return;
+	        }
+
+	        this.selectItem(index - 1, true);
+	    },
+
+	    onToolbarNext() {
+	        var index = this.selectedIndex;
+	        if (index == null) {
+	            return;
+	        }
+
+	        var listTable = this.leftPanel;
+	        var items = listTable.items;
+	        if (index >= (items.length - 1)) {
+	            return;
+	        }
+
+	        this.selectItem(index + 1, true);
+	    },
+
+	    createDefaultItemFromToolbar(buttonKey, actionName) {
+	        var editorContainer = this.rightPanel;
+	        var button = editorContainer.childrenMap[buttonKey];
+	        var callback = (button) ? button.createDefaultItem : undefined;
+	        if (!callback) {
+	            console.error(`[Tweaker][ListDetail] ${actionName} aborted. createDefaultItem is required and should return an object. This is an application-level design error.`);
+	            return null;
+	        }
+
+	        var defaultItem = callback();
+	        if (!IsObjectValue(defaultItem)) {
+	            var valueType = (defaultItem === null) ? 'null' : typeof (defaultItem);
+	            console.error(`[Tweaker][ListDetail] ${actionName} aborted. createDefaultItem() returned ${valueType}, expected object. This is an application-level design error.`);
+	            return null;
+	        }
+
+	        return defaultItem;
+	    },
+
 	};
 
 	const GetValue$1f = Phaser.Utils.Objects.GetValue;
@@ -61245,6 +61577,7 @@ void main (void) {
 
 	            slider: editorSlider,
 
+	            editor: editor,
 	            editorIndexLabel: editorIndexLabel,
 	            editorDisplayNameLabel: editorDisplayNameLabel,
 
@@ -61411,140 +61744,6 @@ void main (void) {
 	        this.updateEditorTitle(index, bindingTarget, items);
 	    }
 
-	    onToolbarDelete() {
-	        var index = this.selectedIndex;
-	        if (index == null) {
-	            return;
-	        }
-
-	        var listTable = this.leftPanel;
-	        var cellContainer = listTable.getCellContainer(index);
-	        if (cellContainer) {
-	            listTable.deleteItemWithTransition(cellContainer);
-	            return;
-	        }
-
-	        listTable.deleteItemByIndex(index);
-	        if (listTable.resetPointerOver) {
-	            listTable.resetPointerOver();
-	        }
-	    }
-
-	    onToolbarDuplicate() {
-	        var index = this.selectedIndex;
-	        if (index == null) {
-	            return;
-	        }
-
-	        var listTable = this.leftPanel;
-	        var items = listTable.items;
-	        var currentItem = items[index];
-	        if (!IsObjectValue(currentItem)) {
-	            console.error('[Tweaker][ListDetail] Duplicate aborted. Current selected item is not an object. This is an application-level design error.');
-	            return;
-	        }
-
-	        var defaultItem = this.createDefaultItemFromToolbar('duplicateButton', 'Duplicate');
-	        if (!defaultItem) {
-	            return;
-	        }
-
-	        // Start from current item, then fill missing keys from default item.
-	        var newItem = DeepClone(currentItem);
-	        DeepMerge(newItem, defaultItem);
-
-	        var insertIndex = index + 1;
-	        items.splice(insertIndex, 0, newItem);
-	        listTable.lastItemsCount = items.length;
-	        listTable.refresh();
-	        listTable.emit('items.change', 'add', {
-	            index: insertIndex,
-	            item: newItem
-	        });
-
-	        this.selectItem(insertIndex, true);
-	    }
-
-	    onToolbarReset() {
-	        var index = this.selectedIndex;
-	        if (index == null) {
-	            return;
-	        }
-
-	        var listTable = this.leftPanel;
-	        var items = listTable.items;
-	        var currentItem = items[index];
-	        if (!IsObjectValue(currentItem)) {
-	            console.error('[Tweaker][ListDetail] Reset aborted. Current selected item is not an object. This is an application-level design error.');
-	            return;
-	        }
-
-	        var defaultItem = this.createDefaultItemFromToolbar('resetButton', 'Reset');
-	        if (!defaultItem) {
-	            return;
-	        }
-
-	        // Clear all existing keys, then apply default keys in-place.
-	        for (var key in currentItem) {
-	            if (currentItem.hasOwnProperty(key)) {
-	                delete currentItem[key];
-	            }
-	        }
-	        DeepMerge(currentItem, defaultItem);
-
-	        // Refresh editor and list row display.
-	        this.rightPanel.setBindingTarget(currentItem);
-	        listTable.updateVisibleCell(index);
-	        this.updateEditorTitle(index, currentItem, items);
-	    }
-
-	    onToolbarPrevious() {
-	        var index = this.selectedIndex;
-	        if (index == null) {
-	            return;
-	        }
-
-	        if (index <= 0) {
-	            return;
-	        }
-
-	        this.selectItem(index - 1, true);
-	    }
-
-	    onToolbarNext() {
-	        var index = this.selectedIndex;
-	        if (index == null) {
-	            return;
-	        }
-
-	        var listTable = this.leftPanel;
-	        var items = listTable.items;
-	        if (index >= (items.length - 1)) {
-	            return;
-	        }
-
-	        this.selectItem(index + 1, true);
-	    }
-
-	    createDefaultItemFromToolbar(buttonKey, actionName) {
-	        var editorContainer = this.rightPanel;
-	        var button = editorContainer.childrenMap[buttonKey];
-	        var callback = (button) ? button.createDefaultItem : undefined;
-	        if (!callback) {
-	            console.error(`[Tweaker][ListDetail] ${actionName} aborted. createDefaultItem is required and should return an object. This is an application-level design error.`);
-	            return null;
-	        }
-
-	        var defaultItem = callback();
-	        if (!IsObjectValue(defaultItem)) {
-	            var valueType = (defaultItem === null) ? 'null' : typeof (defaultItem);
-	            console.error(`[Tweaker][ListDetail] ${actionName} aborted. createDefaultItem() returned ${valueType}, expected object. This is an application-level design error.`);
-	            return null;
-	        }
-
-	        return defaultItem;
-	    }
-
 	    selectItem(index, scrollToRow) {
 	        if (scrollToRow === undefined) {
 	            scrollToRow = false;
@@ -61639,16 +61838,23 @@ void main (void) {
 
 	        return this;
 	    }
-	}
 
-	var IsObjectValue = function (value) {
-	    return !!value && (typeof (value) === 'object') && !Array.isArray(value);
-	};
+	    setReadOnly(value) {
+	        if (value === undefined) {
+	            value = true;
+	        }
+	        this.readOnly = value;
+	        this.leftPanel.setReadOnly(value);
+	        this.rightPanel.setReadOnly(value);
+	        return this;
+	    }
+	}
 
 	Object.assign(
 	    ListDetail.prototype,
 	    BindingTargetMethods$2,
 	    InputRowTitleWidthMethods$1,
+	    OnToolbarMethods,
 	);
 
 	const GetValue$1e = Phaser.Utils.Objects.GetValue;
@@ -61867,6 +62073,10 @@ void main (void) {
 
 	var OnClickButtonMethods = {
 	    onClickDeleteButton() {
+	        if (this.gridTable.readOnly) {
+	            return;
+	        }
+
 	        // Called by clicking delete button
 	        if (!this.gridTable.isInTouching('mask')) {
 	            return;
@@ -61876,6 +62086,10 @@ void main (void) {
 	    },
 
 	    onClickMoveUpButton() {
+	        if (this.gridTable.readOnly) {
+	            return;
+	        }
+
 	        if (!this.gridTable.isInTouching('mask')) {
 	            return;
 	        }
@@ -61902,6 +62116,10 @@ void main (void) {
 	    },
 
 	    onClickMoveDownButton() {
+	        if (this.gridTable.readOnly) {
+	            return;
+	        }
+
 	        if (!this.gridTable.isInTouching('mask')) {
 	            return;
 	        }
@@ -62055,6 +62273,8 @@ void main (void) {
 	        backgroundStyle,
 	    } = config;
 
+	    var background = CreateBackground(scene, {}, backgroundStyle);
+
 	    var indexLabel = CreateIndexLabel(scene, indexStyle);
 
 	    var displayNameLabel = CreateDisplayNameLabel(scene, displayNameStyle);
@@ -62064,8 +62284,6 @@ void main (void) {
 	    var moveUpButton = createMoveUpButton(scene);
 
 	    var moveDownButton = createMoveDownButton(scene);
-
-	    var background = CreateBackground(scene, {}, backgroundStyle);
 
 	    // Assemble elements
 	    var cellContainer = new CellContainer(scene, {
@@ -62244,10 +62462,13 @@ void main (void) {
 	    alpha: 0.001
 	};
 
-	var CreateListDetail = function (parent, config, style) {
+	var CreateListDetail = function (tweaker, config, style) {
 	    if (!config) { config = {}; }
 	    if (!style) { style = {}; }
-	    var scene = parent.scene;
+	    var scene = tweaker.scene;
+
+	    // background of split-panels
+	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
 	    // title of split-panels
 	    var title = CreateTitleLabel(scene, undefined, (style.title || {}));
@@ -62255,7 +62476,7 @@ void main (void) {
 	    // left panel of split-panels
 	    // table config
 	    var listTableConfig = GetValue$14(config, 'table', undefined, style) || {};
-	    var createCellContainerCallback = GenerateCreateCellContainerCallback(parent, config, style);
+	    var createCellContainerCallback = GenerateCreateCellContainerCallback(tweaker, config, style);
 
 	    // slider
 	    var listTableSlider = CreateSlider$1(scene, config.slider, style.slider);
@@ -62291,10 +62512,10 @@ void main (void) {
 	    // left panel of split-panels
 
 	    // right panel of split-panels
-	    var editor = parent
+	    var editor = tweaker
 	        .createTweaker({
-	            root: style.root,
-	            styles: style.tweaker,
+	            root: tweaker.root,
+	            styles: tweaker.styles,
 	        })
 	        .addRows(config.$properties, GetValue$14(config, 'monitor', false));
 	    // slider
@@ -62339,9 +62560,6 @@ void main (void) {
 	        splitterStyle = DefaultSplitStyle;
 	    }
 	    var splitter = CreateBackground(scene, (splitterConfig || {}), (splitterStyle || {}));
-
-	    // background of split-panels
-	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
 	    var listDetail = new ListDetail(scene, {
 	        isHorizontalView: (config.view === 'detail-h'),
@@ -62427,8 +62645,6 @@ void main (void) {
 	    }
 
 	    var arrayTableStyle = GetValue$13(this.styles, 'arrayTable') || {};
-	    arrayTableStyle.tweaker = this.styles;
-	    arrayTableStyle.root = this.root;
 
 	    var createArrayTableCallback;
 	    var view = GetValue$13(config, 'view', 'inline');
@@ -62457,9 +62673,6 @@ void main (void) {
 	    }
 	    var arrayTable = createArrayTableCallback(this, config, arrayTableStyle);
 
-	    delete arrayTableStyle.tweaker;
-	    delete arrayTableStyle.root;
-
 	    this.add(
 	        arrayTable,
 	        {
@@ -62474,6 +62687,10 @@ void main (void) {
 
 	    if (config.monitor) {
 	        arrayTable.startMonitorTarget();
+	    }
+
+	    if (config.readOnly) {
+	        arrayTable.setReadOnly();
 	    }
 
 	    if (config.key) {
@@ -62618,6 +62835,16 @@ void main (void) {
 	    },
 	};
 
+	var SetReadOnlyMethods = {
+	    setReadOnly(value) {
+	        var inputField = this.childrenMap.inputField;
+	        if (inputField.setReadOnly) {
+	            inputField.setReadOnly(value);
+	        }
+	        return this;
+	    }
+	};
+
 	var MinTitleWidthMethods = {
 	    getMinTitleWidth() {
 	        var title = this.childrenMap.title;
@@ -62660,6 +62887,7 @@ void main (void) {
 	        var inputTitle = config.inputTitle; // A game object, or undefined/null/false
 	        var inputField = config.inputField;
 	        var background = config.background;
+	        var border = config.border;
 
 	        if (inputTitle) {
 	            var proportion = GetValue$12(config, 'proportion.title', 0);
@@ -62690,9 +62918,14 @@ void main (void) {
 	            this.addBackground(background);
 	        }
 
+	        if (border) {
+	            this.addBackground(border);
+	        }
+
 	        this.addChildrenMap('title', inputTitle);
 	        this.addChildrenMap('inputField', inputField);
 	        this.addChildrenMap('background', background);
+	        this.addChildrenMap('border', border);
 
 	        this.setupBinding();
 
@@ -62733,6 +62966,7 @@ void main (void) {
 	    InputRow.prototype,
 	    BindingTargetMethods,
 	    MonitorTargetMethods,
+	    SetReadOnlyMethods,
 	    MinTitleWidthMethods,
 	);
 
@@ -62754,12 +62988,6 @@ void main (void) {
 
 	        get value() {
 	            return this._value;
-	        }
-
-	        get tweaker() {
-	            var inputRow = this.getParentSizer();
-	            var tweaker = inputRow.getParentSizer();
-	            return tweaker;
 	        }
 
 	        get root() {
@@ -62843,6 +63071,33 @@ void main (void) {
 	            return this;
 	        }
 
+	        setReadOnly(value) {
+	            value = !!value;
+
+	            if (!this.setReadOnlyCallback) {
+	                return this;
+	            }
+
+	            this.setReadOnlyCallback(this, value);
+	            this._readOnly = value;
+
+	            return this;
+	        }
+
+	        get readOnly() {
+	            return this._readOnly;
+	        }
+
+	        set readOnly(value) {
+	            this.setReadOnly(value);
+	        }
+
+	        // Internal usage
+	        setTweaker(tweaker) {
+	            this.tweaker = tweaker;
+	            return this;
+	        }
+
 	        setup(config, setDefaults) {
 	            if (setDefaults === undefined) {
 	                setDefaults = false;
@@ -62892,14 +63147,20 @@ void main (void) {
 	            this.validateCallback = callback;
 	            return this;
 	        }
+
+	        setSetReadOnlyCallback(callback) {
+	            this.setReadOnlyCallback = callback;
+	            return this;
+	        }
 	    }
 
 	    return InputFiled;
 	};
 
-	var CreateInputField = function (scene, config, style) {
+	var CreateInputField = function (tweaker, config, inputRowStyle, styles) {
+	    var scene = tweaker.scene;
 	    var inputField;
-	    var inputHandlers = this.inputHandlers;
+	    var inputHandlers = tweaker.inputHandlers;
 	    for (var i = 0, cnt = inputHandlers.length; i < cnt; i++) {
 	        var handler = inputHandlers[i];
 	        if (handler.accept(config)) {
@@ -62907,13 +63168,16 @@ void main (void) {
 	            inputField = new InputFieldClass(scene);
 	            scene.add.existing(inputField);
 
+	            // Decorate instance via installing callbacks
 	            inputField
+	                .setTweaker(tweaker)
 	                .setSetupCallback(handler.setup)
 	                .setFilterValueCallback(handler.filterValue)
 	                .setDisplayValueCallback(handler.displayValue)
-	                .setOnBindTargetCallback(handler.onBindTarget);
+	                .setOnBindTargetCallback(handler.onBindTarget)
+	                .setSetReadOnlyCallback(handler.setReadOnly);
 
-	            handler.build(inputField, style);
+	            handler.build(inputField, config, inputRowStyle, styles);
 
 	            break;
 	        }
@@ -62928,14 +63192,17 @@ void main (void) {
 	    return inputField;
 	};
 
-	Phaser.Utils.Objects.GetValue;
-
-	var CreateInputRow = function (scene, config, style) {
+	var CreateInputRow = function (tweaker, config, inputRowStyle, styles) {
 	    if (!config) { config = {}; }
-	    if (!style) { style = {}; }
+	    if (!inputRowStyle) { inputRowStyle = {}; }
+
+	    var scene = tweaker.scene;
+
+	    // Background
+	    var background = CreateBackground(scene, (config.background || {}), (inputRowStyle.background || {}));
 
 	    // InputField
-	    var inputField = CreateInputField.call(this, scene, config, style);
+	    var inputField = CreateInputField(tweaker, config, inputRowStyle, styles);
 	    if (!inputField) {
 	        // Can't create inputField
 	        return null;
@@ -62944,20 +63211,21 @@ void main (void) {
 	    // Title
 	    var inputTitle;
 	    if ((config.title) !== false && (config.title !== null)) {
-	        var titleStyle = style.title || {};
+	        var titleStyle = inputRowStyle.title || {};
 	        inputTitle = CreateTitleLabel(scene, config, titleStyle);
 	    }
 
-	    // Background
-	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
+	    // Border
+	    var border = CreateBackground(scene, (config.border || {}), (inputRowStyle.border || {}));
 
 	    var inputRow = new InputRow(scene, {
-	        ...style,
-	        ...config,  // config can overwrite style
+	        ...inputRowStyle,
+	        ...config,  // config can overwrite inputRowStyle
 
 	        inputTitle: inputTitle,
 	        inputField: inputField,
 	        background: background,
+	        border: border,
 	    });
 	    scene.add.existing(inputRow);
 
@@ -62997,7 +63265,7 @@ void main (void) {
 	        inputRowStyle.defaultExpandWidth = true;
 	    }
 
-	    var inputSizer = CreateInputRow.call(this, this.scene, config, inputRowStyle);
+	    var inputSizer = CreateInputRow(this, config, inputRowStyle, this.styles);
 	    if (!inputSizer) {
 	        // Can't create inputField
 	        console.error(`[Tweaker] Can't add Input
@@ -63047,6 +63315,10 @@ void main (void) {
 	    inputSizer.setAutoUpdateEnable(config.autoUpdate);
 	    inputSizer.setBindingTarget(target, bindingKey);
 
+	    if (config.readOnly) {
+	        inputSizer.setReadOnly();
+	    }
+
 	    if (config.monitor) {
 	        inputSizer.startMonitorTarget();
 	    }
@@ -63056,13 +63328,6 @@ void main (void) {
 	    }
 
 	    return this;
-	};
-
-	var CreateRoundRectangle = function (scene, config) {
-	    var gameObject = new RoundRectangle$1(scene, config);
-	    scene.add.existing(gameObject);
-
-	    return gameObject;
 	};
 
 	const GetValue$11 = Phaser.Utils.Objects.GetValue;
@@ -63077,9 +63342,14 @@ void main (void) {
 
 	const GetValue$10 = Phaser.Utils.Objects.GetValue;
 
-	var CreateButtons$2 = function (scene, config, style) {
+	var CreateButtons$2 = function (tweaker, config, style) {
 	    if (!config) { config = {}; }
 	    if (!style) { style = {}; }
+
+	    var scene = tweaker.scene;
+
+	    // Background
+	    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
 	    // Title
 	    var title;
@@ -63108,9 +63378,18 @@ void main (void) {
 	    });
 	    buttonsSizer.defaultProportion = 1;
 
-	    // Background
-	    var backgroundStyle = GetValue$10(style, 'background') || {};
-	    var background = CreateRoundRectangle(scene, backgroundStyle);
+	    // ButtonsSizer does not have setReadOnly method
+	    buttonsSizer.setReadOnly = function (readOnly) {
+	        if (readOnly === undefined) {
+	            readOnly = true;
+	        }
+
+	        buttonsSizer.setButtonEnable(!readOnly);
+	        return this;
+	    };
+
+	    // Border
+	    var border = CreateBackground(scene, (config.border || {}), (style.border || {}));
 
 	    // InputRow
 	    var inputRow = new InputRow(scene, {
@@ -63119,6 +63398,7 @@ void main (void) {
 	        inputTitle: title,
 	        inputField: buttonsSizer,
 	        background: background,
+	        border: border,
 	    });
 	    scene.add.existing(inputRow);
 
@@ -63139,14 +63419,14 @@ void main (void) {
 	        config = {};
 	    }
 
-	    var scene = this.scene;
+	    this.scene;
 
 	    var target = config.bindingTarget;
 	    delete config.bindingTarget;
 
 	    // Create buttons
 	    var buttonsStyle = GetValue$$(this.styles, 'inputRow') || {};
-	    var buttons = CreateButtons$2(scene, config, buttonsStyle);
+	    var buttons = CreateButtons$2(this, config, buttonsStyle);
 
 	    // Add buttons
 	    this.add(
@@ -63160,6 +63440,10 @@ void main (void) {
 	    // Set binding target
 	    if (target) {
 	        buttons.setBindingTarget(target);
+	    }
+
+	    if (config.readOnly) {
+	        buttons.setReadOnly();
 	    }
 
 	    if (config.key) {
@@ -63185,7 +63469,8 @@ void main (void) {
 	    return this;
 	};
 
-	var CreateSeparator = function (scene, config, style) {
+	var CreateSeparator = function (tweaker, config, style) {
+	    var scene = tweaker.scene;
 	    return CreateBackground$1(scene, Merge$2(config, style));
 	};
 
@@ -63196,11 +63481,9 @@ void main (void) {
 	        config = {};
 	    }
 
-	    var scene = this.scene;
-
 	    // Create separator
 	    var separatorStyle = GetValue$_(this.styles, 'separator');
-	    var separator = CreateSeparator(scene, config, separatorStyle);
+	    var separator = CreateSeparator(this, config, separatorStyle);
 
 	    // Add separator
 	    this.add(
@@ -63534,6 +63817,31 @@ void main (void) {
 	            return gameObject;
 	        }
 
+	        get readOnly() {
+	            return this._readOnly;
+	        }
+
+	        set readOnly(value) {
+	            value = !!value;
+	            var children = this.sizerChildren;
+	            for (var i = 0, cnt = children.length; i < cnt; i++) {
+	                var child = children[i];
+	                if (!child.setReadOnly) {
+	                    continue;
+	                }
+
+	                child.setReadOnly(value);
+	            }
+
+	        }
+
+	        setReadOnly(value) {
+	            if (value === undefined) {
+	                value = true;
+	            }
+	            this.readOnly = value;
+	            return this;
+	        }
 	    }
 
 	    Object.assign(
@@ -65785,13 +66093,25 @@ void main (void) {
 	    return inputText;
 	};
 
-	var SetInputTextReadOnly$4 = function (gameObject, enable) {
-	    if (enable === undefined) {
-	        enable = true;
+	var SetInputTextReadOnly$4 = function (gameObject, readOnly, force) {
+	    if (readOnly === undefined) {
+	        readOnly = true;
+	    }
+
+	    if (force === undefined) {
+	        force = false;
 	    }
 
 	    var inputText = gameObject.childrenMap.inputText;
-	    inputText.setReadOnly(enable);
+
+	    if (force) {
+	        gameObject.inputTextReadOnly = readOnly;
+	        inputText.setReadOnly(readOnly);
+	    } else {
+	        if (!gameObject.inputTextReadOnly) {
+	            inputText.setReadOnly(readOnly);
+	        }
+	    }
 	};
 
 	var TextInputHandler = {
@@ -65806,12 +66126,12 @@ void main (void) {
 	    },
 
 	    // Callback after `constructor()`
-	    build(gameObject, style) {
+	    build(gameObject, config, inputRowStyle, styles) {
 	        var scene = gameObject.scene;
 
 	        gameObject.type = 'rexTweaker.TextInput';
 
-	        var inputTextConfig = style.inputText;
+	        var inputTextConfig = inputRowStyle.inputText;
 	        var inputText = CreateInputText(scene, inputTextConfig);
 
 	        gameObject.add(
@@ -65827,7 +66147,7 @@ void main (void) {
 	    // Callback inside `setup()`
 	    setup(gameObject, config, setDefaults) {
 	        if (setDefaults || config.hasOwnProperty('inputTextReadOnly')) {
-	            SetInputTextReadOnly$4(gameObject, !!config.inputTextReadOnly);
+	            SetInputTextReadOnly$4(gameObject, !!config.inputTextReadOnly, true);
 	        }
 	    },
 
@@ -65837,6 +66157,12 @@ void main (void) {
 	        inputText.setText(gameObject.getFotmatText(value));
 	    },
 
+	    setReadOnly(gameObject, readOnly) {
+	        if (readOnly === undefined) {
+	            readOnly = true;
+	        }
+	        SetInputTextReadOnly$4(gameObject, readOnly);
+	    }
 	};
 
 	var InjectProperties = function (inputText) {
@@ -66077,13 +66403,25 @@ void main (void) {
 	    return inputText;
 	};
 
-	var SetInputTextReadOnly$3 = function (gameObject, enable) {
-	    if (enable === undefined) {
-	        enable = true;
+	var SetInputTextReadOnly$3 = function (gameObject, readOnly, force) {
+	    if (readOnly === undefined) {
+	        readOnly = true;
+	    }
+
+	    if (force === undefined) {
+	        force = false;
 	    }
 
 	    var inputText = gameObject.childrenMap.inputText;
-	    inputText.setReadOnly(enable);
+
+	    if (force) {
+	        gameObject.inputTextReadOnly = readOnly;
+	        inputText.setReadOnly(readOnly);
+	    } else {
+	        if (!gameObject.inputTextReadOnly) {
+	            inputText.setReadOnly(readOnly);
+	        }
+	    }
 	};
 
 	var TextAreaInputHandler = {
@@ -66098,20 +66436,20 @@ void main (void) {
 	    },
 
 	    // Callback after `constructor()`
-	    build(gameObject, style) {
+	    build(gameObject, config, inputRowStyle, styles) {
 	        var scene = gameObject.scene;
 
 	        this.type = 'rexTweaker.TextAreaInput';
 
-	        var inputTextAreaConfig = style.inputTextArea;
+	        var inputTextAreaConfig = inputRowStyle.inputTextArea;
 	        if (inputTextAreaConfig === undefined) {
 	            inputTextAreaConfig = {};
 	        }
 	        if (!inputTextAreaConfig.hasOwnProperty('text')) {
-	            inputTextAreaConfig.text = style.inputText;
+	            inputTextAreaConfig.text = inputRowStyle.inputText;
 	        }
 	        if (!inputTextAreaConfig.hasOwnProperty('slider')) {
-	            inputTextAreaConfig.slider = style.slider;
+	            inputTextAreaConfig.slider = inputRowStyle.slider;
 	        }
 
 	        var inputText = CreateInputTextArea(scene, inputTextAreaConfig);
@@ -66145,14 +66483,33 @@ void main (void) {
 	        inputText.scrollToTop();
 	    },
 
+	    setReadOnly(gameObject, readOnly) {
+	        if (readOnly === undefined) {
+	            readOnly = true;
+	        }
+	        SetInputTextReadOnly$3(gameObject, readOnly);
+	    }
 	};
 
-	var SetInputTextReadOnly$2 = function (gameObject, enable) {
-	    if (enable === undefined) {
-	        enable = true;
+	var SetInputTextReadOnly$2 = function (gameObject, readOnly, force) {
+	    if (readOnly === undefined) {
+	        readOnly = true;
 	    }
+
+	    if (force === undefined) {
+	        force = false;
+	    }
+
 	    var inputText = gameObject.childrenMap.inputText;
-	    inputText.setReadOnly(enable);
+
+	    if (force) {
+	        gameObject.inputTextReadOnly = readOnly;
+	        inputText.setReadOnly(readOnly);
+	    } else {
+	        if (!gameObject.inputTextReadOnly) {
+	            inputText.setReadOnly(readOnly);
+	        }
+	    }
 	};
 
 	var NumberInputHandler = {
@@ -66167,12 +66524,12 @@ void main (void) {
 	    },
 
 	    // Callback after `constructor()`
-	    build(gameObject, style) {
+	    build(gameObject, config, inputRowStyle, styles) {
 	        var scene = gameObject.scene;
 
 	        gameObject.type = 'rexTweaker.NumberInput';
 
-	        var inputTextConfig = style.inputNumber || style.inputText;
+	        var inputTextConfig = inputRowStyle.inputNumber || inputRowStyle.inputText;
 	        var inputText = CreateInputText(scene, inputTextConfig)
 	            .setNumberInput();
 
@@ -66189,7 +66546,7 @@ void main (void) {
 	    // Callback inside `setup()`
 	    setup(gameObject, config, setDefaults) {
 	        if (setDefaults || config.hasOwnProperty('inputTextReadOnly')) {
-	            SetInputTextReadOnly$2(gameObject, !!config.inputTextReadOnly);
+	            SetInputTextReadOnly$2(gameObject, !!config.inputTextReadOnly, true);
 	        }
 
 	        gameObject.isFloatType = !config.int;
@@ -66209,6 +66566,13 @@ void main (void) {
 	        var inputText = gameObject.childrenMap.inputText;
 	        inputText.setText(gameObject.getFotmatText(value));
 	    },
+
+	    setReadOnly(gameObject, readOnly) {
+	        if (readOnly === undefined) {
+	            readOnly = true;
+	        }
+	        SetInputTextReadOnly$2(gameObject, readOnly);
+	    }
 	};
 
 	var CreateSlider = function (scene, config) {
@@ -66231,13 +66595,34 @@ void main (void) {
 	    slider.setGap(step, min, max);
 	};
 
-	var SetInputTextReadOnly$1 = function (gameObject, enable) {
-	    if (enable === undefined) {
-	        enable = true;
+	var SetInputTextReadOnly$1 = function (gameObject, readOnly, force) {
+	    if (readOnly === undefined) {
+	        readOnly = true;
+	    }
+
+	    if (force === undefined) {
+	        force = false;
 	    }
 
 	    var inputText = gameObject.childrenMap.inputText;
-	    inputText.setReadOnly(enable);
+
+	    if (force) {
+	        gameObject.inputTextReadOnly = readOnly;
+	        inputText.setReadOnly(readOnly);
+	    } else {
+	        if (!gameObject.inputTextReadOnly) {
+	            inputText.setReadOnly(readOnly);
+	        }
+	    }
+	};
+
+	var SetSliderReadOnly = function (gameObject, readOnly) {
+	    if (readOnly === undefined) {
+	        readOnly = true;
+	    }
+
+	    var slider = gameObject.childrenMap.slider;
+	    slider.setEnable(!readOnly);
 	};
 
 	var RangeInputHandler = {
@@ -66255,30 +66640,30 @@ void main (void) {
 	    },
 
 	    // Callback after `constructor()`
-	    build(gameObject, style) {
+	    build(gameObject, config, inputRowStyle, styles) {
 	        var scene = gameObject.scene;
 
 	        gameObject.type = 'rexTweaker.RangeInput';
 
-	        var sliderConfig = style.slider;
+	        var sliderConfig = inputRowStyle.slider;
 	        var trackSizeKey = (gameObject.orientation === 0) ? 'track.height' : 'track.width';
 	        var trackSize = GetValue$S(sliderConfig, trackSizeKey);
 	        var slider = CreateSlider(scene, sliderConfig);
 
-	        var defaultProportion = (style.defaultExpandWidth) ? 2 : 0;
-	        var proportion = GetValue$S(style, 'proportion.range.slider', defaultProportion);
+	        var defaultProportion = (inputRowStyle.defaultExpandWidth) ? 2 : 0;
+	        var proportion = GetValue$S(inputRowStyle, 'proportion.range.slider', defaultProportion);
 	        var expand = (trackSize === undefined);
 	        gameObject.add(
 	            slider,
 	            { proportion: proportion, expand: expand, key: 'slider' }
 	        );
 
-	        var inputTextConfig = style.inputNumber || style.inputText;
+	        var inputTextConfig = inputRowStyle.inputNumber || inputRowStyle.inputText;
 	        var inputText = CreateInputText(scene, inputTextConfig)
 	            .setNumberInput();
 
-	        var defaultProportion = (style.defaultExpandWidth) ? 1 : 0;
-	        var proportion = GetValue$S(style, 'proportion.range.inputText', defaultProportion);
+	        var defaultProportion = (inputRowStyle.defaultExpandWidth) ? 1 : 0;
+	        var proportion = GetValue$S(inputRowStyle, 'proportion.range.inputText', defaultProportion);
 	        gameObject.add(
 	            inputText,
 	            { proportion: proportion, expand: true, key: 'inputText' }
@@ -66303,8 +66688,9 @@ void main (void) {
 	            SetRange(gameObject, config.min, config.max, config.step);
 	        }
 
+	        // User can force inputText as readOnly field always, only use slider
 	        if (setDefaults || config.hasOwnProperty('inputTextReadOnly')) {
-	            SetInputTextReadOnly$1(gameObject, !!config.inputTextReadOnly);
+	            SetInputTextReadOnly$1(gameObject, !!config.inputTextReadOnly, true);
 	        }
 	    },
 
@@ -66317,6 +66703,14 @@ void main (void) {
 	        inputText.setText('').setText(gameObject.getFotmatText(value));
 
 	    },
+
+	    setReadOnly(gameObject, readOnly) {
+	        if (readOnly === undefined) {
+	            readOnly = true;
+	        }
+	        SetInputTextReadOnly$1(gameObject, readOnly);
+	        SetSliderReadOnly(gameObject, readOnly);
+	    }
 	};
 
 	var CreateButtons$1 = function (scene, config) {
@@ -66327,13 +66721,34 @@ void main (void) {
 
 	const GetValue$R = Phaser.Utils.Objects.GetValue;
 
-	var SetInputTextReadOnly = function (gameObject, enable) {
-	    if (enable === undefined) {
-	        enable = true;
+	var SetInputTextReadOnly = function (gameObject, readOnly, force) {
+	    if (readOnly === undefined) {
+	        readOnly = true;
+	    }
+
+	    if (force === undefined) {
+	        force = false;
 	    }
 
 	    var inputText = gameObject.childrenMap.inputText;
-	    inputText.setReadOnly(enable);
+
+	    if (force) {
+	        gameObject.inputTextReadOnly = readOnly;
+	        inputText.setReadOnly(readOnly);
+	    } else {
+	        if (!gameObject.inputTextReadOnly) {
+	            inputText.setReadOnly(readOnly);
+	        }
+	    }
+	};
+
+	var SetButtonsReadOnly$1 = function (gameObject, readOnly) {
+	    if (readOnly === undefined) {
+	        readOnly = true;
+	    }
+
+	    var buttons = gameObject.childrenMap.buttons;
+	    buttons.setButtonEnable(!readOnly);
 	};
 
 	var IncDecInputHandler = {
@@ -66348,7 +66763,7 @@ void main (void) {
 	    },
 
 	    // Callback after `constructor()`
-	    build(gameObject, style) {
+	    build(gameObject, config, inputRowStyle, styles) {
 	        var scene = gameObject.scene;
 
 	        gameObject.type = 'rexTweaker.IncDecInput';
@@ -66360,21 +66775,21 @@ void main (void) {
 	        - inputText, incButton, decButton
 	        */
 
-	        var incDecConfig = GetValue$R(style, 'incDec') || {};
+	        var incDecConfig = GetValue$R(inputRowStyle, 'incDec') || {};
 	        var buttonConfigBase = { text: null, action: null };
 
 	        // buttons
 	        var buttons = CreateButtons$1(scene, {
 	            expand: false
 	        });
-	        var proportion = (style.defaultExpandWidth) ? 1 : 0;
+	        var proportion = (inputRowStyle.defaultExpandWidth) ? 1 : 0;
 	        gameObject.add(
 	            buttons,
 	            { proportion: proportion, expand: true }
 	        );
 
 	        // inputText
-	        var inputTextConfig = style.inputNumber || style.inputText;
+	        var inputTextConfig = inputRowStyle.inputNumber || inputRowStyle.inputText;
 	        var inputText = CreateInputText(scene, inputTextConfig)
 	            .setNumberInput();
 
@@ -66419,15 +66834,16 @@ void main (void) {
 	            gameObject.setValue(value);
 	        });
 
+	        gameObject.addChildrenMap('inputText', inputText);
 	        gameObject.addChildrenMap('incButton', incButton);
 	        gameObject.addChildrenMap('decButton', decButton);
-	        gameObject.addChildrenMap('inputText', inputText);
+	        gameObject.addChildrenMap('buttons', buttons);
 	    },
 
 	    // Callback inside `setup()`
 	    setup(gameObject, config, setDefaults) {
 	        if (setDefaults || config.hasOwnProperty('inputTextReadOnly')) {
-	            SetInputTextReadOnly(gameObject, !!config.inputTextReadOnly);
+	            SetInputTextReadOnly(gameObject, !!config.inputTextReadOnly, true);
 	        }
 
 	        if (setDefaults || config.hasOwnProperty('step')) {
@@ -66447,6 +66863,14 @@ void main (void) {
 	        inputText.setText('').setText(gameObject.getFotmatText(value));
 
 	    },
+
+	    setReadOnly(gameObject, readOnly) {
+	        if (readOnly === undefined) {
+	            readOnly = true;
+	        }
+	        SetInputTextReadOnly(gameObject, readOnly);
+	        SetButtonsReadOnly$1(gameObject, readOnly);
+	    }
 	};
 
 	var CreateSwatch = function (scene, config) {
@@ -66649,6 +67073,27 @@ void main (void) {
 
 	    setColor(color) {
 	        this.color = color;
+	        return this;
+	    }
+
+	    get readOnly() {
+	        return this._readOnly;
+	    }
+
+	    set readOnly(value) {
+	        var inputText = this.childrenMap.inputText;
+	        if (inputText) {
+	            inputText.setReadOnly(value);
+	        }
+
+	        this._readOnly = value;
+	    }
+
+	    setReadOnly(enable) {
+	        if (enable === undefined) {
+	            enable = true;
+	        }
+	        this.readOnly = enable;
 	        return this;
 	    }
 
@@ -68090,6 +68535,23 @@ void main (void) {
 	            this.onClick(swatch, this.openColorPicker, this);
 	        }
 	    }
+
+	    get readOnly() {
+	        return this._readOnly;
+	    }
+
+	    set readOnly(value) {
+	        var swatch = this.childrenMap.swatch;
+	        if (swatch) {
+	            if (value) {
+	                this.disableClick(swatch);
+	            } else {
+	                this.enableClick(swatch);
+	            }
+	        }
+
+	        super.readOnly = value;
+	    }
 	}
 
 	Object.assign(
@@ -68114,6 +68576,15 @@ void main (void) {
 	    return inputText;
 	};
 
+	var SetColorInputReadOnly = function (gameObject, readOnly) {
+	    if (readOnly === undefined) {
+	        readOnly = true;
+	    }
+
+	    var colorInput = gameObject.childrenMap.colorInput;
+	    colorInput.setReadOnly(readOnly);
+	};
+
 	var ColorInputHandler = {
 	    name: 'ColorInput',
 
@@ -68125,17 +68596,17 @@ void main (void) {
 	    },
 
 	    // Callback after `constructor()`
-	    build(gameObject, style) {
+	    build(gameObject, config, inputRowStyle, styles) {
 	        var scene = gameObject.scene;
 
 	        gameObject.type = 'rexTweaker.ColorInput';
 
-	        var colorInputConfig = style.colorInput;
+	        var colorInputConfig = inputRowStyle.colorInput;
 	        if (colorInputConfig === undefined) {
 	            colorInputConfig = {};
 	        }
 	        if (!colorInputConfig.hasOwnProperty('inputText')) {
-	            colorInputConfig.inputText = style.inputText;
+	            colorInputConfig.inputText = inputRowStyle.inputText;
 	        }
 	        var colorInput = CreateColorInput(scene, colorInputConfig);
 
@@ -68155,6 +68626,13 @@ void main (void) {
 	        var colorInput = gameObject.childrenMap.colorInput;
 	        colorInput.setValue(value);
 	    },
+
+	    setReadOnly(gameObject, readOnly) {
+	        if (readOnly === undefined) {
+	            readOnly = true;
+	        }
+	        SetColorInputReadOnly(gameObject, readOnly);
+	    }
 	};
 
 	var StyleMethods$1 = {
@@ -68582,6 +69060,15 @@ void main (void) {
 	    return gameObject;
 	};
 
+	var SetCheckboxReadOnly = function (gameObject, readOnly) {
+	    if (readOnly === undefined) {
+	        readOnly = true;
+	    }
+
+	    var checkbox = gameObject.childrenMap.checkbox;
+	    checkbox.setReadOnly(readOnly);
+	};
+
 	var CheckboxInputHandler = {
 	    name: 'CheckboxInput',
 
@@ -68594,12 +69081,12 @@ void main (void) {
 	    },
 
 	    // Callback after `constructor()`
-	    build(gameObject, style) {
+	    build(gameObject, config, inputRowStyle, styles) {
 	        var scene = gameObject.scene;
 
 	        gameObject.type = 'rexTweaker.CheckboxInput';
 
-	        var checkboxConfig = style.checkbox;
+	        var checkboxConfig = inputRowStyle.checkbox;
 	        var checkbox = CreateCheckbox(scene, checkboxConfig);
 
 	        var size = checkboxConfig.size;
@@ -68622,6 +69109,13 @@ void main (void) {
 	    displayValue(gameObject, value) {
 	        var checkbox = gameObject.childrenMap.checkbox;
 	        checkbox.setValue(value);
+	    },
+
+	    setReadOnly(gameObject, readOnly) {
+	        if (readOnly === undefined) {
+	            readOnly = true;
+	        }
+	        SetCheckboxReadOnly(gameObject, readOnly);
 	    }
 	};
 
@@ -69058,6 +69552,15 @@ void main (void) {
 	    return gameObject;
 	};
 
+	var SetToggleSwitchReadOnly = function (gameObject, readOnly) {
+	    if (readOnly === undefined) {
+	        readOnly = true;
+	    }
+
+	    var toggleSwitch = gameObject.childrenMap.toggleSwitch;
+	    toggleSwitch.setReadOnly(readOnly);
+	};
+
 	var ToggleSwitchInputHandler = {
 	    name: 'ToggleSwitchInput',
 
@@ -69070,12 +69573,12 @@ void main (void) {
 	    },
 
 	    // Callback after `constructor()`
-	    build(gameObject, style) {
+	    build(gameObject, config, inputRowStyle, styles) {
 	        var scene = gameObject.scene;
 
 	        gameObject.type = 'rexTweaker.ToggleSwitchInput';
 
-	        var toggleSwitchConfig = style.toggleSwitch;
+	        var toggleSwitchConfig = inputRowStyle.toggleSwitch;
 	        var toggleSwitch = CreateToggleSwitch(scene, toggleSwitchConfig);
 
 	        var size = toggleSwitchConfig.size;
@@ -69102,6 +69605,13 @@ void main (void) {
 	        var toggleSwitch = gameObject.childrenMap.toggleSwitch;
 	        toggleSwitch.setValue(value);
 	    },
+
+	    setReadOnly(gameObject, readOnly) {
+	        if (readOnly === undefined) {
+	            readOnly = true;
+	        }
+	        SetToggleSwitchReadOnly(gameObject, readOnly);
+	    }
 	};
 
 	var BuildListConfig = function (scene, config, creators) {
@@ -69833,6 +70343,19 @@ void main (void) {
 	    list.setOptions(options);
 	};
 
+	var SetListReadOnly = function (gameObject, readOnly) {
+	    if (readOnly === undefined) {
+	        readOnly = true;
+	    }
+
+	    var list = gameObject.childrenMap.list;
+	    if (readOnly) {
+	        list.disableClick();
+	    } else {
+	        list.enableClick();
+	    }
+	};
+
 	var ListInputHandler = {
 	    name: 'ListInput',
 
@@ -69845,12 +70368,12 @@ void main (void) {
 	    },
 
 	    // Callback after `constructor()`
-	    build(gameObject, style) {
+	    build(gameObject, config, inputRowStyle, styles) {
 	        var scene = gameObject.scene;
 
 	        gameObject.type = 'rexTweaker.ListInput';
 
-	        var list = CreateDropDownList(scene, style.list);
+	        var list = CreateDropDownList(scene, inputRowStyle.list);
 
 	        gameObject.add(
 	            list,
@@ -69880,6 +70403,14 @@ void main (void) {
 	            .setMinSize(0, 0);
 
 	    },
+
+	    setReadOnly(gameObject, readOnly) {
+	        if (readOnly === undefined) {
+	            readOnly = true;
+	        }
+
+	        SetListReadOnly(gameObject, readOnly);
+	    }
 	};
 
 	var SetButtonsActiveStateByIndex = function (buttons, index) {
@@ -69896,20 +70427,29 @@ void main (void) {
 	const GetValue$D = Phaser.Utils.Objects.GetValue;
 
 	var SetOptions = function (gameObject, options) {
-	    var list = gameObject.childrenMap.list;
-	    list.options = options;
+	    var buttons = gameObject.childrenMap.buttons;
+	    buttons.options = options;
 
 	    var scene = gameObject.scene;
-	    var buttonConfig = list.buttonConfig;
-	    list.clearButtons(true);
+	    var buttonConfig = buttons.buttonConfig;
+	    buttons.clearButtons(true);
 	    for (var i = 0, cnt = options.length; i < cnt; i++) {
 	        var option = options[i];
 	        var button = CreateLabel(scene, buttonConfig)
 	            .setActiveState(false)
 	            .resetDisplayContent({ text: option.text });
 
-	        list.addButton(button);
+	        buttons.addButton(button);
 	    }
+	};
+
+	var SetButtonsReadOnly = function (gameObject, readOnly) {
+	    if (readOnly === undefined) {
+	        readOnly = true;
+	    }
+
+	    var buttons = gameObject.childrenMap.buttons;
+	    buttons.setButtonEnable(!readOnly);
 	};
 
 	var ButtonsInputHandler = {
@@ -69924,31 +70464,31 @@ void main (void) {
 	    },
 
 	    // Callback after `constructor()`
-	    build(gameObject, style) {
+	    build(gameObject, config, inputRowStyle, styles) {
 	        var scene = gameObject.scene;
 
 	        gameObject.type = 'rexTweaker.ButtonsInput';
 
 	        // TODO : DeepClone?
-	        var buttonConfig = (style.button) ? DeepClone(style.button) : {};
+	        var buttonConfig = (inputRowStyle.button) ? DeepClone(inputRowStyle.button) : {};
 	        var buttonExpand = GetValue$D(buttonConfig, 'expand', true);
 	        if (buttonExpand) {
 	            buttonConfig.align = 'center';
 	        }
 	        delete buttonConfig.expand;
 
-	        var list = CreateButtons$1(scene, {
+	        var buttons = CreateButtons$1(scene, {
 	            expand: buttonExpand
 	        });
-	        list.buttonConfig = buttonConfig;
+	        buttons.buttonConfig = buttonConfig;
 
 	        gameObject.add(
-	            list,
-	            { proportion: 1, expand: true, key: 'list' }
+	            buttons,
+	            { proportion: 1, expand: true, key: 'buttons' }
 	        );
 
-	        list.on('button.click', function (button, index, pointer, event) {
-	            var option = list.options[index];
+	        buttons.on('button.click', function (button, index, pointer, event) {
+	            var option = buttons.options[index];
 	            if (!option) {
 	                return;  // ??
 	            }
@@ -69956,7 +70496,6 @@ void main (void) {
 	            gameObject.setValue(option.value);
 	            gameObject._selectedIndex = undefined;
 	        });
-
 	    },
 
 	    // Callback inside `setup()`
@@ -69968,13 +70507,123 @@ void main (void) {
 
 	    // Callback inside `setValue()`
 	    displayValue(gameObject, value) {
-	        var list = gameObject.childrenMap.list;
-	        var index = gameObject._selectedIndex;  // See list's 'button.click' event
+	        var buttons = gameObject.childrenMap.buttons;
+	        var index = gameObject._selectedIndex;  // See buttons's 'button.click' event
 	        if (index === undefined) {
-	            index = GetOptionIndex(list.options, value);
+	            index = GetOptionIndex(buttons.options, value);
 	        }
-	        SetButtonsActiveStateByIndex(list.childrenMap.buttons, index);
+	        SetButtonsActiveStateByIndex(buttons.childrenMap.buttons, index);
 	    },
+
+	    setReadOnly(gameObject, readOnly) {
+	        if (readOnly === undefined) {
+	            readOnly = true;
+	        }
+	        SetButtonsReadOnly(gameObject, readOnly);
+	    }
+	};
+
+	var SetArrayTableReadOnly = function (gameObject, readOnly) {
+	    if (readOnly === undefined) {
+	        readOnly = true;
+	    }
+
+	    var arrayTable = gameObject.childrenMap.arrayTable;
+	    arrayTable.setReadOnly(readOnly);
+	};
+
+	var CreateDefaultNumberItem = function () { return 0; };
+	var CreateDefaultStringItem = function () { return ''; };
+	var CreateDefaultBooleanItem = function () { return false; };
+
+	var ArrayInputHandler = {
+	    name: 'ArrayInput',
+
+	    accept(config) {
+	        if (config.hasOwnProperty('view')) {
+	            var view = config.view;
+	            return (view === 'numbers') || (view === 'strings') || (view === 'booleans') || (view === 'array');
+	        }
+
+	        var value = config.value;
+	        if (Array.isArray(value)) {
+	            var arrayType = typeof (value[0]);
+	            switch (arrayType) {
+	                case 'number':
+	                    config.view = 'numbers';
+	                    break;
+
+	                case 'strig':
+	                    config.view = 'strings';
+	                    break;
+
+	                case 'boolean':
+	                    config.view = 'booleans';
+	                    break;
+
+	                default:
+	                    config.view = 'array';
+	                    break;
+	            }
+
+	            return true;
+	        } else {
+	            return false;
+	        }    },
+
+	    // Callback after `constructor()`
+	    build(gameObject, config, inputRowStyle, styles) {
+	        this.type = 'rexTweaker.ArrayInput';
+
+	        var arrayTableConfig = inputRowStyle.arrayTable || styles.arrayTable || {};
+
+	        if (!config.hasOwnProperty('createDefaultItem')) {
+	            var view = config.view;
+	            if (view === 'numbers') {
+	                config.createDefaultItem = CreateDefaultNumberItem;
+	            } else if (view === 'numbers') {
+	                config.createDefaultItem = CreateDefaultStringItem;
+	            } else if (view === 'booleans') {
+	                config.createDefaultItem = CreateDefaultBooleanItem;
+	            }
+	        }
+
+	        var arrayTable = CreateArrayTable(gameObject.tweaker, config, arrayTableConfig)
+	            .setTitle(); // Hide title
+
+	        gameObject.add(
+	            arrayTable,
+	            { proportion: 1, expand: true, key: 'arrayTable' }
+	        );
+
+	        // Set layout to vertical by default
+	        if (!arrayTableConfig.hasOwnProperty('orientation') && !config.hasOwnProperty('orientation')) {
+	            config.orientation = 1;
+	        }
+	    },
+
+	    // Callback inside `setup()`
+	    setup(gameObject, config, setDefaults) {
+	    },
+
+	    // Callback inside `setValue()`
+	    displayValue(gameObject, value) {
+	        var arrayTable = gameObject.childrenMap.arrayTable;
+	        arrayTable.setItems(value, true);
+	    },
+
+	    // Callback inside `setBindingTarget()`
+	    onBindTarget(gameObject) {
+	        var arrayTable = gameObject.childrenMap.arrayTable;
+	        arrayTable.scrollToTop();
+	    },
+
+	    setReadOnly(gameObject, readOnly) {
+	        if (readOnly === undefined) {
+	            readOnly = true;
+	        }
+	        SetArrayTableReadOnly(gameObject, readOnly);
+	    }
 	};
 
 	// string
@@ -69994,7 +70643,9 @@ void main (void) {
 	        .registerInputHandler(ToggleSwitchInputHandler)
 	        // options
 	        .registerInputHandler(ListInputHandler)
-	        .registerInputHandler(ButtonsInputHandler);
+	        .registerInputHandler(ButtonsInputHandler)
+	        // array
+	        .registerInputHandler(ArrayInputHandler);
 
 	};
 

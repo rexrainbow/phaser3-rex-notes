@@ -1,6 +1,7 @@
 import FolderBase from '../../../folder/Folder.js';
 import BindingTargetMethods from './BindingTargetMethods.js';
 import InputRowTitleWidthMethods from './InputRowTitleWidthMethods.js';
+import SetReadOnlyMethods from './SetReadOnlyMethods.js';
 
 class Folder extends FolderBase {
     constructor(scene, config) {
@@ -25,6 +26,7 @@ Object.assign(
     Folder.prototype,
     BindingTargetMethods,
     InputRowTitleWidthMethods,
+    SetReadOnlyMethods,
 )
 
 export default Folder;

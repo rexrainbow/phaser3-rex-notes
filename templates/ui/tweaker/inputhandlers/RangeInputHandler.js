@@ -14,13 +14,34 @@ var SetRange = function (gameObject, min, max, step) {
     slider.setGap(step, min, max);
 }
 
-var SetInputTextReadOnly = function (gameObject, enable) {
-    if (enable === undefined) {
-        enable = true;
+var SetInputTextReadOnly = function (gameObject, readOnly, force) {
+    if (readOnly === undefined) {
+        readOnly = true;
+    }
+
+    if (force === undefined) {
+        force = false;
     }
 
     var inputText = gameObject.childrenMap.inputText;
-    inputText.setReadOnly(enable);
+
+    if (force) {
+        gameObject.inputTextReadOnly = readOnly;
+        inputText.setReadOnly(readOnly);
+    } else {
+        if (!gameObject.inputTextReadOnly) {
+            inputText.setReadOnly(readOnly);
+        }
+    }
+}
+
+var SetSliderReadOnly = function (gameObject, readOnly) {
+    if (readOnly === undefined) {
+        readOnly = true;
+    }
+
+    var slider = gameObject.childrenMap.slider;
+    slider.setEnable(!readOnly);
 }
 
 export default {
@@ -38,30 +59,30 @@ export default {
     },
 
     // Callback after `constructor()`
-    build(gameObject, style) {
+    build(gameObject, config, inputRowStyle, styles) {
         var scene = gameObject.scene;
 
         gameObject.type = 'rexTweaker.RangeInput';
 
-        var sliderConfig = style.slider;
+        var sliderConfig = inputRowStyle.slider;
         var trackSizeKey = (gameObject.orientation === 0) ? 'track.height' : 'track.width';
         var trackSize = GetValue(sliderConfig, trackSizeKey);
         var slider = CreateSlider(scene, sliderConfig);
 
-        var defaultProportion = (style.defaultExpandWidth) ? 2 : 0;
-        var proportion = GetValue(style, 'proportion.range.slider', defaultProportion);
+        var defaultProportion = (inputRowStyle.defaultExpandWidth) ? 2 : 0;
+        var proportion = GetValue(inputRowStyle, 'proportion.range.slider', defaultProportion);
         var expand = (trackSize === undefined);
         gameObject.add(
             slider,
             { proportion: proportion, expand: expand, key: 'slider' }
         );
 
-        var inputTextConfig = style.inputNumber || style.inputText;
+        var inputTextConfig = inputRowStyle.inputNumber || inputRowStyle.inputText;
         var inputText = CreateInputText(scene, inputTextConfig)
             .setNumberInput();
 
-        var defaultProportion = (style.defaultExpandWidth) ? 1 : 0;
-        var proportion = GetValue(style, 'proportion.range.inputText', defaultProportion);
+        var defaultProportion = (inputRowStyle.defaultExpandWidth) ? 1 : 0;
+        var proportion = GetValue(inputRowStyle, 'proportion.range.inputText', defaultProportion);
         gameObject.add(
             inputText,
             { proportion: proportion, expand: true, key: 'inputText' }
@@ -86,8 +107,9 @@ export default {
             SetRange(gameObject, config.min, config.max, config.step);
         }
 
+        // User can force inputText as readOnly field always, only use slider
         if (setDefaults || config.hasOwnProperty('inputTextReadOnly')) {
-            SetInputTextReadOnly(gameObject, !!config.inputTextReadOnly);
+            SetInputTextReadOnly(gameObject, !!config.inputTextReadOnly, true);
         }
     },
 
@@ -100,4 +122,12 @@ export default {
         inputText.setText('').setText(gameObject.getFotmatText(value));
 
     },
+
+    setReadOnly(gameObject, readOnly) {
+        if (readOnly === undefined) {
+            readOnly = true;
+        }
+        SetInputTextReadOnly(gameObject, readOnly);
+        SetSliderReadOnly(gameObject, readOnly);
+    }
 }

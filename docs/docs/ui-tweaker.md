@@ -1151,6 +1151,97 @@ tweaker.addInput({
     No `bindingKey` parameter in this case.
 
 
+#### Number or string array row
+
+`object[key]` is an array value.
+
+```javascript
+tweaker.addInput(object, key, {
+    // view: 'numbers',
+    // view: 'strings',
+    // view: 'booleans',
+    // view: 'array',
+
+    // icon: undefined,
+    // iconFrame: undefined,
+    // iconSize: undefined,
+
+    // title: undefined,
+
+    // orientation: 'x',
+
+    // monitor: false,
+    // readOnly: false,
+
+    // createDefaultItem() {
+    //     return item;  // A number, string, or any other array item
+    // },
+
+    // key: undefined,
+})
+```
+
+or
+
+```javascript
+tweaker.addInput({
+    bindingTarget: object,
+    bindingKey: key,
+    // view: 'numbers',
+    // view: 'strings',
+    // view: 'booleans',
+    // view: 'array',
+
+    // icon: undefined,
+    // iconFrame: undefined,
+    // iconSize: undefined,
+
+    // title: undefined,
+
+    // orientation: 'x',
+
+    // monitor: false,
+    // readOnly: false,
+
+    // createDefaultItem() {
+    //     return item;  // A number, string, or any other array item
+    // },
+
+    // key: undefined,
+})
+```
+
+- `bindingTarget` : Binding target object.
+    - Can bind target later via `tweaker.setBindingTarget(object)`.
+- `bindingKey` : Bind to target's property key. Necessary field
+- `view` :
+    - `'numbers'` : Array editor for number items.
+    - `'strings'` : Array editor for string items.
+    - `'booleans'` : Array editor for boolean items.
+    - `'array'` : Generic array editor.
+    - `undefined` : Auto-detect array item type from current value.
+- `icon`, `iconFrame` : Texture key, frame name of icon on title-label.
+- `iconSize` : Fixed icon size
+- `title` : Display text of title-label. Default value is equal to `key`.
+- `monitor` :
+    - `false` : Don't update array editor every tick from target. Default behavior.
+    - `true` : Update array editor from current object, in `postupdate` event of scene.
+- `readOnly` :
+    - `false` : Array editor is editable. Default behavior.
+    - `true` : Array editor is read-only.
+- `createDefaultItem` : Callback when adding a new item to array editor.
+    - Default value depends on `view`.
+        - `'numbers'` : Return `0`.
+        - `'strings'` : Return `''`.
+        - `'booleans'` : Return `false`.
+        - `'array'` : No default item.
+- `key` : Add this child into childMap, which could be read back by `tweaker.getElement(key)`.
+    - `undefined` : Don't add this child. Default value.
+
+
+See [Style of array table](#style-of-array-table)
+
+
 ### Add button
 
 ```javascript
@@ -1658,6 +1749,24 @@ tweaker.addRows(properties, target);
     - `true` : Update input text from current object, in `postupdate` event of scene. Default behavior.
 
 
+### Read only
+
+- Eanble readOnly
+    ```javascript
+    tweaker.setReadOnly();
+    // tweaker.readOnly = true;
+    ```
+- Disable readOnly (editable)
+    ```javascript
+    tweaker.setReadOnly(false);
+    // tweaker.readOnly = false;
+    ```
+- Is readOnly
+    ```javascript
+    var readOnly = tweaker.readOnly;
+    ```
+
+
 ### Layout children
 
 Arrange position of all elements.
@@ -1678,6 +1787,7 @@ Style of text-area input is defined in
 - `styles.inputRow.title`
 - `styles.inputRow.inputText` 
 - `styles.inputRow.background`
+- `styles.inputRow.border`
 
 ```javascript
 {
@@ -1685,6 +1795,17 @@ Style of text-area input is defined in
     styles: {
         inputRow: {
             background: {
+                radius: 0,
+                // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
+
+                color: undefined,
+                alpha: undefined,
+                strokeColor: undefined,
+                strokeAlpha: undefined,
+                strokeWidth: undefined,
+            },
+
+            border: {
                 radius: 0,
                 // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
 
@@ -1832,6 +1953,17 @@ Style of text-area input is defined in
     styles: {
         inputRow: {
             background: {
+                radius: 0,
+                // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
+
+                color: undefined,
+                alpha: undefined,
+                strokeColor: undefined,
+                strokeAlpha: undefined,
+                strokeWidth: undefined,
+            },
+
+            border: {
                 radius: 0,
                 // radius: {tl: {x,y}, tr: {x,y}, bl: {x,y}, br: {x,y}}
 

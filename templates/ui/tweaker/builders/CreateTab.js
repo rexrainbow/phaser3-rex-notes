@@ -3,18 +3,18 @@ import CreateLabel from '../../utils/build/CreateLabel.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var CreateTab = function (parent, config, style) {
+var CreateTab = function (tweaker, config, style) {
     if (!config) { config = {}; }
     if (!style) { style = {}; }
-    var scene = parent.scene;
+    var scene = tweaker.scene;
 
     var tabPages = new TabPages(scene, style);
     scene.add.existing(tabPages);
 
     var tabConfig = style.tab;
     var tweakerConfig = {
-        root: style.root,
-        styles: style.tweaker,
+        root: tweaker.root,
+        styles: tweaker.styles,
     }
     var pages = config.pages || [];
     for (var i = 0, cnt = pages.length; i < cnt; i++) {
@@ -24,7 +24,7 @@ var CreateTab = function (parent, config, style) {
             tab: CreateLabel(scene, tabConfig)
                 .setActiveState(false)
                 .resetDisplayContent({ text: page.title }),
-            page: parent.createTweaker(tweakerConfig)
+            page: tweaker.createTweaker(tweakerConfig)
         })
     }
 

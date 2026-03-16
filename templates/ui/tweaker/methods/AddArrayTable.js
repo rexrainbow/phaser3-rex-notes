@@ -36,8 +36,6 @@ var AddArrayTable = function (target, bindingKey, config) {
     }
 
     var arrayTableStyle = GetValue(this.styles, 'arrayTable') || {};
-    arrayTableStyle.tweaker = this.styles;
-    arrayTableStyle.root = this.root;
 
     var createArrayTableCallback;
     var view = GetValue(config, 'view', 'inline');
@@ -66,9 +64,6 @@ var AddArrayTable = function (target, bindingKey, config) {
     }
     var arrayTable = createArrayTableCallback(this, config, arrayTableStyle);
 
-    delete arrayTableStyle.tweaker;
-    delete arrayTableStyle.root;
-
     this.add(
         arrayTable,
         {
@@ -83,6 +78,10 @@ var AddArrayTable = function (target, bindingKey, config) {
 
     if (config.monitor) {
         arrayTable.startMonitorTarget();
+    }
+
+    if (config.readOnly) {
+        arrayTable.setReadOnly();
     }
 
     if (config.key) {

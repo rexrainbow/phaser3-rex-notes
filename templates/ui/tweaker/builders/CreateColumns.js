@@ -4,19 +4,22 @@ import CreateBackground from './utils/CreateBackground.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var CreateColumns = function (parent, config, style) {
+var CreateColumns = function (tweaker, config, style) {
     if (!config) { config = {}; }
     if (!style) { style = {}; }
 
-    var scene = parent.scene;
+    var scene = tweaker.scene;
+
+    // background
+    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
     // title    
     var title = CreateTitleLabel(scene, undefined, style.title);
 
     // columns, each column has a tweaker panel
     var tweakerConfig = {
-        root: style.root,
-        styles: style.tweaker,
+        root: tweaker.root,
+        styles: tweaker.styles,
     }
 
     var columnConfigArray = GetValue(config, 'columns', 2);
@@ -33,13 +36,10 @@ var CreateColumns = function (parent, config, style) {
 
         tweakerConfig.width = GetValue(columnConfig, 'width', 0)
 
-        var tweakerChild = parent.createTweaker(tweakerConfig);
+        var tweakerChild = tweaker.createTweaker(tweakerConfig);
 
         columnConfig.child = tweakerChild;
     }
-
-    // background
-    var background = CreateBackground(scene, (config.background || {}), (style.background || {}));
 
     var columns = new Columns(scene, {
         title: title,

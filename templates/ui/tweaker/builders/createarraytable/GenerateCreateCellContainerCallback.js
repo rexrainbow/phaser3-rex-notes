@@ -8,8 +8,8 @@ import CellContainer from '../../gameobjects/arraytable/cellcontainer/CellContai
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Format = Phaser.Utils.String.Format;
 
-var CreateCellContainer = function (parent, cell, config) {
-    var scene = parent.scene;
+var CreateCellContainer = function (tweaker, cell, config) {
+    var scene = tweaker.scene;
 
     // Create elements
     var {
@@ -23,6 +23,8 @@ var CreateCellContainer = function (parent, cell, config) {
         tweakerAddRowsParameters,
         backgroundStyle,
     } = config;
+
+    var background = CreateBackground(scene, {}, backgroundStyle);
 
     var indexLabel = CreateTitleLabel(scene, undefined, indexStyle);
 
@@ -45,11 +47,10 @@ var CreateCellContainer = function (parent, cell, config) {
             $key: cell.index
         }];
     }
-    var inputTweaker = parent.createTweaker(tweakerConfig)
+    var inputTweaker = tweaker
+        .createTweaker(tweakerConfig)
         .setAlignInputRowTitleEnable(isObjectItem)
         .addRows(properties, target, tweakerAddRowsParameters.monitor);
-
-    var background = CreateBackground(scene, {}, backgroundStyle);
 
     // Assemble elements
     var cellContainer = new CellContainer(scene, {
@@ -67,11 +68,14 @@ var CreateCellContainer = function (parent, cell, config) {
     return cellContainer;
 }
 
-var GenerateCreateCellContainerCallback = function (parent, config, style) {
+var GenerateCreateCellContainerCallback = function (tweaker, config, style) {
+    if (style === undefined) {
+        style = {};
+    }
     // Prepare parameters
     var space = GetValue(config, 'space.cell', undefined, style) || {};
 
-    var indexStyle = GetValue(style, 'index');
+    var indexStyle = style.index;
     if (!indexStyle) {
         indexStyle = GetValue(style, 'tweaker.inputRow.title') || {};
     }
@@ -97,8 +101,8 @@ var GenerateCreateCellContainerCallback = function (parent, config, style) {
     }
 
     var tweakerConfig = {
-        root: GetValue(style, 'root'),
-        styles: GetValue(style, 'tweaker'),
+        root: tweaker.root,
+        styles: tweaker.styles,
         expandInputRowHeight: true,
     };
 
@@ -119,7 +123,7 @@ var GenerateCreateCellContainerCallback = function (parent, config, style) {
         var index = cell.index;
 
         if (cellContainer === null) {
-            cellContainer = CreateCellContainer(parent, cell, {
+            cellContainer = CreateCellContainer(tweaker, cell, {
                 space,
                 gridTable,
                 indexStyle,

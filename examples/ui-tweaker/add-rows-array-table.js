@@ -26,6 +26,21 @@ class Demo extends Phaser.Scene {
         }
 
         var properties = [
+
+            // ArrayTable as inputField, inside inputRow
+            // {
+            //     $key: 'items',
+            //     $properties: [
+            //         { $key: 'name' },
+            //         { $key: 'a' },
+            //         { $key: 'b' },
+            //     ],
+            //     createDefaultItem() {
+            //         return CreateItems(1)[0]
+            //     }
+            // },
+
+            // ArrayTable as inputRow
             {
                 $type: 'arrayTable',
                 $key: 'items',
@@ -89,7 +104,7 @@ var CreatePanel = function (scene) {
                     range: { slider: 2, inputText: 1 }
                 },
 
-                background: {
+                border: {
                     strokeColor: COLOR_MAIN
                 },
 

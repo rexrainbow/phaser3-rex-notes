@@ -55,6 +55,10 @@ class ScrollableBlock extends BaseSizer {
         sizerConfig.expand = expand;
         this.child = child;
 
+        if (GetValue(config, 'enableLayer', false)) {
+            this.enableLayer();
+        }
+
         // Create mask of child object
         this.setupChildrenMask(GetValue(config, 'mask', undefined));
     }

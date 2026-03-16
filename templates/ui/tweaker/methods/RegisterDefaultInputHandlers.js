@@ -12,6 +12,8 @@ import ToggleSwitchInputHandler from '../inputhandlers/ToggleSwitchInputHandler.
 // options
 import ListInputHandler from '../inputhandlers/ListInputHandler.js';
 import ButtonsInputHandler from '../inputhandlers/ButtonsInputHandler.js';
+// Array
+import ArrayInputHandler from '../inputhandlers/ArrayInputHandler.js';  // Number[] or string[]
 
 var RegisterDefaultInputHandlers = function () {
     this
@@ -29,6 +31,8 @@ var RegisterDefaultInputHandlers = function () {
         // options
         .registerInputHandler(ListInputHandler)
         .registerInputHandler(ButtonsInputHandler)
+        // array
+        .registerInputHandler(ArrayInputHandler)
 
 }
 

@@ -125,6 +125,9 @@ declare namespace Tweaker {
         /** Background style of each input row. */
         background?: CreateBackground.IConfig,
 
+        /** Border style of each input row. */
+        border?: CreateBackground.IConfig,
+
         /** Title label style of each input row. */
         title?: SimpleLabel.IConfig,
 
@@ -169,6 +172,9 @@ declare namespace Tweaker {
 
         /** Increment/decrement control style. */
         incDec?: IIncDecConfig,
+
+        /** Array input style backed by an array table for `numbers`, `strings`, `booleans`, or `array` views. */
+        numbers?: IStyle['arrayTable'],
 
         /** Proportion settings for row sections. */
         proportion?: {
@@ -479,7 +485,11 @@ declare namespace Tweaker {
             value: undefined
         ) => void,
 
-        /** Input view type name. */
+        /**
+         * Input view type name.
+         *
+         * Use `'numbers'`, `'strings'`, `booleans`, or `'array'` to render an array editor.
+         */
         view?: string,
 
         /** Texture key of the row icon. */
@@ -514,6 +524,9 @@ declare namespace Tweaker {
             /** Value to format for display. */
             value?: any
         ) => string,
+
+        /** Set to true to make the created input row read-only. */
+        readOnly?: boolean,
 
         /** Set to true to make input text read-only. */
         inputTextReadOnly?: boolean,
@@ -1111,6 +1124,18 @@ declare class Tweaker extends Sizer {
      * @returns This tweaker instance.
      */
     setExpandInputRowHeightEnable(enable?: boolean): this;
+
+    /**
+     * Set read-only mode for this tweaker and child controls that support it.
+     *
+     * @param value - Set to true to enable read-only mode.
+     * @returns This tweaker instance.
+     */
+    setReadOnly(value?: boolean): this;
+    /**
+     * True if this tweaker is in read-only mode.
+     */
+    readOnly: boolean;
 
     /**
      * Register an input handler.

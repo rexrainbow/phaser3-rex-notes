@@ -126,7 +126,7 @@ var CreatePanel = function (scene) {
             inputRow: {
                 space: { left: 10, title: 10 },
 
-                background: {
+                border: {
                     strokeColor: COLOR_MAIN
                 },
 

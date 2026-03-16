@@ -67,6 +67,15 @@ class ListTable extends GridTable {
         return this;
     }
 
+    setReadOnly(value) {
+        if (value === undefined) {
+            value = true;
+        }
+
+        this.readOnly = value;
+        return this;
+    }
+
 }
 
 Object.assign(

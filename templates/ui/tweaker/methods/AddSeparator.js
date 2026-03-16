@@ -7,11 +7,9 @@ var AddSeparator = function (config) {
         config = {};
     }
 
-    var scene = this.scene;
-
     // Create separator
     var separatorStyle = GetValue(this.styles, 'separator');
-    var separator = CreateSeparator(scene, config, separatorStyle);
+    var separator = CreateSeparator(this, config, separatorStyle);
 
     // Add separator
     this.add(

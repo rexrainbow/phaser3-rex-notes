@@ -9,11 +9,7 @@ var AddTab = function (config) {
 
     // Create tab
     var tabStyle = GetValue(this.styles, 'tab') || {};
-    tabStyle.tweaker = this.styles;
-    tabStyle.root = this.root;
     var tab = CreateTab(this, config, tabStyle);
-    delete tabStyle.tweaker;
-    delete tabStyle.root;
 
     // Add tab
     this.add(

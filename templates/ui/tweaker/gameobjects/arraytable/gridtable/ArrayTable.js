@@ -21,6 +21,8 @@ class ArrayTable extends GridTable {
         this.resetCellSizeFlag = true;
         this.lastItemsCount = undefined; // For monitor
 
+        this.setReadOnly(false);
+
         InstallClearButton.call(this, config);
         InstallAddButton.call(this, config);
         InstallCellInteractiveEvents.call(this, config);
@@ -62,7 +64,7 @@ class ArrayTable extends GridTable {
     setTitle(config) {
         var title = this.childrenMap.header;
 
-        if (config.title || config.icon) {
+        if (config && (config.title || config.icon)) {
             title.show().setTitle(config);
         } else {
             title.hide();
@@ -71,6 +73,20 @@ class ArrayTable extends GridTable {
         return this;
     }
 
+    setReadOnly(value) {
+        if (value === undefined) {
+            value = true;
+        }
+
+        this.readOnly = value;
+
+        var cellConteiners = this.getAllCellContainers();
+        for (var i = 0, cnt = cellConteiners.length; i < cnt; i++) {
+            cellConteiners[i].setReadOnly(value);
+        }
+
+        return this;
+    }
 }
 
 Object.assign(

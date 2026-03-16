@@ -54,7 +54,6 @@ class Toolbar extends Sizer {
         }
 
     }
-
 }
 
 export default Toolbar;

@@ -9,11 +9,7 @@ var AddWrap = function (config) {
 
     // Create wrap
     var wrapStyle = GetValue(this.styles, 'wrap') || {};
-    wrapStyle.tweaker = this.styles;
-    wrapStyle.root = this.root;
     var wrap = CreateWrap(this, config, wrapStyle);
-    delete wrapStyle.tweaker;
-    delete wrapStyle.root;
 
     // Add wrap
     this.add(

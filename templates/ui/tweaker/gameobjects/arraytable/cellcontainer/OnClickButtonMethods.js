@@ -1,5 +1,9 @@
 export default {
     onClickDeleteButton() {
+        if (this.gridTable.readOnly) {
+            return;
+        }
+
         // Called by clicking delete button
         if (!this.gridTable.isInTouching('mask')) {
             return;
@@ -9,6 +13,10 @@ export default {
     },
 
     onClickMoveUpButton() {
+        if (this.gridTable.readOnly) {
+            return;
+        }
+
         if (!this.gridTable.isInTouching('mask')) {
             return;
         }
@@ -30,6 +38,10 @@ export default {
     },
 
     onClickMoveDownButton() {
+        if (this.gridTable.readOnly) {
+            return;
+        }
+
         if (!this.gridTable.isInTouching('mask')) {
             return;
         }

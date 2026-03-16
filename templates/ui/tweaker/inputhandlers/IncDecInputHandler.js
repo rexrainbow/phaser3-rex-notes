@@ -5,13 +5,34 @@ import DeepClone from '../../../../plugins/utils/object/DeepClone.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var SetInputTextReadOnly = function (gameObject, enable) {
-    if (enable === undefined) {
-        enable = true;
+var SetInputTextReadOnly = function (gameObject, readOnly, force) {
+    if (readOnly === undefined) {
+        readOnly = true;
+    }
+
+    if (force === undefined) {
+        force = false;
     }
 
     var inputText = gameObject.childrenMap.inputText;
-    inputText.setReadOnly(enable);
+
+    if (force) {
+        gameObject.inputTextReadOnly = readOnly;
+        inputText.setReadOnly(readOnly);
+    } else {
+        if (!gameObject.inputTextReadOnly) {
+            inputText.setReadOnly(readOnly);
+        }
+    }
+}
+
+var SetButtonsReadOnly = function (gameObject, readOnly) {
+    if (readOnly === undefined) {
+        readOnly = true;
+    }
+
+    var buttons = gameObject.childrenMap.buttons;
+    buttons.setButtonEnable(!readOnly);
 }
 
 export default {
@@ -26,7 +47,7 @@ export default {
     },
 
     // Callback after `constructor()`
-    build(gameObject, style) {
+    build(gameObject, config, inputRowStyle, styles) {
         var scene = gameObject.scene;
 
         gameObject.type = 'rexTweaker.IncDecInput';
@@ -38,21 +59,21 @@ export default {
         - inputText, incButton, decButton
         */
 
-        var incDecConfig = GetValue(style, 'incDec') || {};
+        var incDecConfig = GetValue(inputRowStyle, 'incDec') || {};
         var buttonConfigBase = { text: null, action: null };
 
         // buttons
         var buttons = CreateButtons(scene, {
             expand: false
         });
-        var proportion = (style.defaultExpandWidth) ? 1 : 0;
+        var proportion = (inputRowStyle.defaultExpandWidth) ? 1 : 0;
         gameObject.add(
             buttons,
             { proportion: proportion, expand: true }
         );
 
         // inputText
-        var inputTextConfig = style.inputNumber || style.inputText;
+        var inputTextConfig = inputRowStyle.inputNumber || inputRowStyle.inputText;
         var inputText = CreateInputText(scene, inputTextConfig)
             .setNumberInput();
 
@@ -97,15 +118,16 @@ export default {
             gameObject.setValue(value);
         });
 
+        gameObject.addChildrenMap('inputText', inputText);
         gameObject.addChildrenMap('incButton', incButton);
         gameObject.addChildrenMap('decButton', decButton);
-        gameObject.addChildrenMap('inputText', inputText);
+        gameObject.addChildrenMap('buttons', buttons);
     },
 
     // Callback inside `setup()`
     setup(gameObject, config, setDefaults) {
         if (setDefaults || config.hasOwnProperty('inputTextReadOnly')) {
-            SetInputTextReadOnly(gameObject, !!config.inputTextReadOnly);
+            SetInputTextReadOnly(gameObject, !!config.inputTextReadOnly, true);
         }
 
         if (setDefaults || config.hasOwnProperty('step')) {
@@ -125,4 +147,12 @@ export default {
         inputText.setText('').setText(gameObject.getFotmatText(value));
 
     },
+
+    setReadOnly(gameObject, readOnly) {
+        if (readOnly === undefined) {
+            readOnly = true;
+        }
+        SetInputTextReadOnly(gameObject, readOnly);
+        SetButtonsReadOnly(gameObject, readOnly);
+    }
 }

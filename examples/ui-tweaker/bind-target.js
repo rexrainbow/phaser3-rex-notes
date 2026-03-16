@@ -200,7 +200,7 @@ var CreatePanel = function (scene) {
                     range: { slider: 2, inputText: 1 }
                 },
 
-                background: {
+                border: {
                     strokeColor: COLOR_MAIN
                 },
 
