@@ -153,6 +153,42 @@ var nameList = texture.getFrameNames(true);
 // nameList includes `__BASE`
 ```
 
+#### Set smooth-pixel-art
+
+!!! note
+    WebGL only.  
+    `smooth-pixel-art` preserves the blocky look of pixel art, but smooths the edges between texels when a texture is scaled up.  
+    It uses a special shader path and requires linear filtering.
+
+Difference from `pixel art`:
+
+- `pixel art` : Uses nearest-neighbor sampling for a crisp and fully blocky result. Best for classic pixel-art games.
+- `smooth-pixel-art` : Keeps the texels blocky, but antialiases the borders between them. This is mainly visible when objects are scaled up.
+
+```javascript
+texture.setSmoothPixelArt(true);
+```
+
+#### Set wrap mode
+
+!!! note
+    WebGL only.  
+    This method changes how the texture is sampled when UV coordinates go beyond the `0` to `1` range.  
+    For non-power-of-two textures, only `Phaser.Textures.WrapMode.CLAMP_TO_EDGE` is supported. Other wrap modes will be ignored.
+
+```javascript
+texture.setWrap(wrapModeS);
+// texture.setWrap(wrapModeS, wrapModeT);
+```
+
+- `wrapModeS` : The wrap mode for the S (horizontal) axis.
+- `wrapModeT` : The wrap mode for the T (vertical) axis.
+    - `undefined` : Use the same wrap mode as `wrapModeS`.
+- Wrap modes
+    - `Phaser.Textures.WrapMode.CLAMP_TO_EDGE` : Clamp sampling to the edge pixels of the texture.
+    - `Phaser.Textures.WrapMode.REPEAT` : Repeat the texture when sampling beyond the `0` to `1` range.
+    - `Phaser.Textures.WrapMode.MIRRORED_REPEAT` : Repeat the texture in alternating mirrored directions.
+
 ### Frame object
 
 ####　Get frame

@@ -118,7 +118,8 @@ scene.load.tilemapCSV(key, url);         // CSV
             // scene,
             // container: null,
             // key: null,
-            // frame: null
+            // frame: null,
+            // sortByY: false,
         }, useTileset);
         ```
         or
@@ -134,6 +135,7 @@ scene.load.tilemapCSV(key, url);         // CSV
         - `scene` : A Scene reference, passed to the Game Objects constructors. Default is map's scene.
         - `container` : Optional Container to which the Game Objects are added.
         - `key`, `frame` : Optional key of a Texture to be used.
+        - `sortByY` : Sort objects in layer by their y position. Objects with a higher y are displayed above objects with a lower y.
     - Create game objects by tile
         ```javascript
         var sprites = map.createFromTiles(indexes, replacements, spriteConfig);

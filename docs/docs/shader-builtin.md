@@ -8,6 +8,7 @@ Built-in filters.
 - [Blur](#blur) : 3 different levels of gaussian blur (low, medium and high) and custom distance and color.
 - [Bokeh](#bokeh) / [Tilt Shift](#tilt-shift) : A bokeh and tiltshift effect, with intensity, contrast and distance settings.
 - [Color Matrix](#colormatrix) : Add a ColorMatrix to any Game Object with access to all of its methods, such as `sepia`, `greyscale`, `lsd` and lots more.
+- [Combine Color Matrix](#combine-color-matrix) : Combine channels from base and transfer textures with color matrix control.
 - [Displacement](#displacement) : Use a displacement texture, such as a noise texture, to drastically (or subtly!) alter the appearance of a Game Object.
 - [Glow](#glow) : Add a smooth inner or outer glow, with custom distance, strength and color.
 - [Image Light](#image-light) : Image-based lighting from panorama environment maps and normal maps.
@@ -320,139 +321,123 @@ All Game Objects and camera support filters. These are effects applied after the
     camera.filters.internal.remove(controller);
     ```
     - Also destroy this controller.
+- Properties
+    ```javascript
+    var colorMatrix = controller.colorMatrix;
+    ```
+    - `colorMatrix` : See [color matrix](#color-matrix)
+
+
+### Combine Color Matrix
+
+Combine channels from the base input and a transfer texture.
+
+- Add filter controller to game object
+    ```javascript
+    var controller = gameObject
+        .enableFilters()
+        .filters.internal.addCombineColorMatrix(texture);
+    ```
+- Add filter controller to camera
+    ```javascript
+    var controller = camera
+        .filters.internal.addCombineColorMatrix(texture);
+    ```
+    - `texture` : Transfer texture key or texture instance.
+        - `undefined` : Use built-in `'__WHITE'` texture.
+- Disable filter controller
+    ```javascript
+    controller.setActive(false);
+    // controller.active = false;
+    ```
+- Remove filter controller
+    ```javascript
+    gameObject.filters.internal.remove(controller);
+    ```
+    ```javascript
+    camera.filters.internal.remove(controller);
+    ```
+    - Also destroy this controller.
+- Properties
+    ```javascript
+    var colorMatrixSelf = controller.colorMatrixSelf;
+    var colorMatrixTransfer = controller.colorMatrixTransfer;
+    controller.colorMatrixTransfer;
+    controller.additions = [r, g, b, a];
+    controller.multiplications = [r, g, b, a];
+    ```
+    - `colorMatrixSelf`, `colorMatrixTransfer` : See [color matrix](#color-matrix) 
+    - `additions` : Add weights of final channels. Default value is `[1, 1, 1, 0]`. See [How to use `additions` and `multiplications`](#how-to-use-additions-and-multiplications)
+    - `multiplications` : Multiply weights of final channels. Default value is `[0, 0, 0, 1]`. See [How to use `additions` and `multiplications`](#how-to-use-additions-and-multiplications)
 - Methods
-    - Brightness : Changes the brightness of this ColorMatrix by the given amount.
+    - Set transfer texture
         ```javascript
-        controller.colorMatrix.brightness(value, multiply);
+        controller.setTexture(texture);
         ```
-        - `value` : The amount of brightness to apply to this ColorMatrix. `0`(black)~`1`. Default value is `0`.
-        - `multiply` : Multiply the resulting ColorMatrix (`true`), or set it (`false`) ?
-            - `true` : Multiply the resulting.
-            - `false` : Set the resulting. Default behavior.
-    - Saturate : Changes the saturation of this ColorMatrix by the given amount.
+    - Configure common alpha transfer behavior
         ```javascript
-        controller.colorMatrix.saturate(value, multiply);
+        controller.setupAlphaTransfer(
+            colorSelf,
+            colorTransfer,
+            brightnessToAlphaSelf,
+            brightnessToAlphaTransfer,
+            brightnessToAlphaInverseSelf,
+            brightnessToAlphaInverseTransfer
+        );
         ```
-        - `value` :  The amount of saturation to apply to this ColorMatrix. Default value is `0`.
-        - `multiply` : Multiply the resulting ColorMatrix (`true`), or set it (`false`) ?
-            - `true` : Multiply the resulting.
-            - `false` : Set the resulting. Default behavior.
-    - Desaturate : Desaturates this ColorMatrix (removes color from it).
-        ```javascript
-        controller.colorMatrix.desaturate(value, multiply);
-        ```
-        - `multiply` : Multiply the resulting ColorMatrix (`true`), or set it (`false`) ?
-            - `true` : Multiply the resulting.
-            - `false` : Set the resulting. Default behavior.
-    - Hue : Rotates the hues of this ColorMatrix by the value given.
-        ```javascript
-        controller.colorMatrix.hue(rotation, multiply);
-        ```
-        - `rotation` : The amount of hue rotation to apply to this ColorMatrix, in degrees. Default value is `0`.
-        - `multiply` : Multiply the resulting ColorMatrix (`true`), or set it (`false`) ?
-            - `true` : Multiply the resulting.
-            - `false` : Set the resulting. Default behavior.
-    - Grayscale : Sets this ColorMatrix to be grayscale.
-        ```javascript
-        controller.colorMatrix.grayscale(value, multiply);
-        ```
-        - `value` : The grayscale scale `0`(black)~`1`. Default value is `1`.
-        - `multiply` : Multiply the resulting ColorMatrix (`true`), or set it (`false`) ?
-            - `true` : Multiply the resulting.
-            - `false` : Set the resulting. Default behavior.
-    - BlackWhite : Sets this ColorMatrix to be black and white.
-        ```javascript
-        controller.colorMatrix.blackWhite(multiply);
-        ```
-        - `multiply` : Multiply the resulting ColorMatrix (`true`), or set it (`false`) ?
-            - `true` : Multiply the resulting.
-            - `false` : Set the resulting. Default behavior.
-    - Contrast : Change the contrast of this ColorMatrix by the amount given.
-        ```javascript
-        controller.colorMatrix.contrast(value, multiply);
-        ```
-        - `value` : The amount of contrast to apply to this ColorMatrix. Default value is `0`.
-        - `multiply` : Multiply the resulting ColorMatrix (`true`), or set it (`false`) ?
-            - `true` : Multiply the resulting.
-            - `false` : Set the resulting. Default behavior.
-    - Negative : Converts this ColorMatrix to have negative values.
-        ```javascript
-        controller.colorMatrix.negative(multiply);
-        ```
-        - `multiply` : Multiply the resulting ColorMatrix (`true`), or set it (`false`) ?
-            - `true` : Multiply the resulting.
-            - `false` : Set the resulting. Default behavior.
-    - DesaturateLuminance : Apply a desaturated luminance to this ColorMatrix.
-        ```javascript
-        controller.colorMatrix.desaturateLuminance(multiply);
-        ```
-        - `multiply` : Multiply the resulting ColorMatrix (`true`), or set it (`false`) ?
-            - `true` : Multiply the resulting.
-            - `false` : Set the resulting. Default behavior.
-    - Sepia : Applies a sepia tone to this ColorMatrix.
-        ```javascript
-        controller.colorMatrix.sepia(multiply);
-        ```
-        - `multiply` : Multiply the resulting ColorMatrix (`true`), or set it (`false`) ?
-            - `true` : Multiply the resulting.
-            - `false` : Set the resulting. Default behavior.
-    - Night : Applies a night vision tone to this ColorMatrix.
-        ```javascript
-        controller.colorMatrix.night(intensity, multiply);
-        ```
-        - `intensity` : The intensity of this effect. Default value is `0.1`.
-        - `multiply` : Multiply the resulting ColorMatrix (`true`), or set it (`false`) ?
-            - `true` : Multiply the resulting.
-            - `false` : Set the resulting. Default behavior.
-    - LSD : Applies a trippy color tone to this ColorMatrix.
-        ```javascript
-        controller.colorMatrix.lsd(multiply);
-        ```
-        - `multiply` : Multiply the resulting ColorMatrix (`true`), or set it (`false`) ?
-            - `true` : Multiply the resulting.
-            - `false` : Set the resulting. Default behavior.
-    - Brown : Applies a brown tone to this ColorMatrix.
-        ```javascript
-        controller.colorMatrix.brown(multiply);
-        ```
-        - `multiply` : Multiply the resulting ColorMatrix (`true`), or set it (`false`) ?
-            - `true` : Multiply the resulting.
-            - `false` : Set the resulting. Default behavior.
-    - VintagePinhole : Applies a vintage pinhole color effect to this ColorMatrix.
-        ```javascript
-        controller.colorMatrix.vintagePinhole(multiply);
-        ```
-        - `multiply` : Multiply the resulting ColorMatrix (`true`), or set it (`false`) ?
-            - `true` : Multiply the resulting.
-            - `false` : Set the resulting. Default behavior.
-    - Kodachrome : Applies a kodachrome color effect to this ColorMatrix.
-        ```javascript
-        controller.colorMatrix.kodachrome(multiply);
-        ```
-        - `multiply` : Multiply the resulting ColorMatrix (`true`), or set it (`false`) ?
-            - `true` : Multiply the resulting.
-            - `false` : Set the resulting. Default behavior.
-    - Technicolor : Applies a technicolor color effect to this ColorMatrix.
-        ```javascript
-        controller.colorMatrix.technicolor(multiply);
-        ```
-        - `multiply` : Multiply the resulting ColorMatrix (`true`), or set it (`false`) ?
-            - `true` : Multiply the resulting.
-            - `false` : Set the resulting. Default behavior.
-    - Polaroid : Applies a polaroid color effect to this ColorMatrix.
-        ```javascript
-        controller.colorMatrix.polaroid(multiply);
-        ```
-        - `multiply` : Multiply the resulting ColorMatrix (`true`), or set it (`false`) ?
-            - `true` : Multiply the resulting.
-            - `false` : Set the resulting. Default behavior.
-    - ShiftToBGR : Shifts the values of this ColorMatrix into BGR order.
-        ```javascript
-        controller.colorMatrix.shiftToBGR(multiply);
-        ```
-        - `multiply` : Multiply the resulting ColorMatrix (`true`), or set it (`false`) ?
-            - `true` : Multiply the resulting.
-            - `false` : Set the resulting. Default behavior.
+        - `colorSelf` : 
+            - `true` : Keep color from the base image.
+        - `colorTransfer` :
+            - `true` : Keep color from the transfer texture.
+        - `brightnessToAlphaSelf` :
+            - `true` : Determine the base alpha from the base brightness
+        - `brightnessToAlphaTransfer` :
+            - `true` : Determine the transfer alpha from the transfer brightness.
+        - `brightnessToAlphaInverseSelf` :
+            - `true` : Determine the base alpha from the base brightness, inverted. This overrides `brightnessToAlphaSelf`.
+        - `brightnessToAlphaInverseTransfer` :
+            - `true` : Determine the transfer alpha from the transfer brightness, inverted. This overrides `brightnessToAlphaTransfer`.
+
+
+#### How to use `additions` and `multiplications`
+
+`additions` and `multiplications` control how the processed `self` and `transfer` results are merged per channel.
+
+For each output channel (`r`, `g`, `b`, `a`), the filter computes:
+
+```javascript
+output = (self + transfer) * additions + (self * transfer) * multiplications;
+```
+
+This means:
+
+- `additions` controls the additive part of the final result.
+- `multiplications` controls the multiplicative part of the final result.
+- Each array entry maps to one channel: `[r, g, b, a]`.
+- A value of `1` keeps that contribution; a value of `0` disables it.
+
+Examples:
+
+- `additions = [1, 1, 1, 1]`, `multiplications = [0, 0, 0, 0]`
+  Use when all channels should be combined by addition. Useful for overlay-like or glow-like texture merging.
+
+- `additions = [0, 0, 0, 0]`, `multiplications = [1, 1, 1, 1]`
+  Use when all channels should be combined by multiplication. Useful for masking, darkening, or intersection-like blending.
+
+- `additions = [1, 1, 1, 0]`, `multiplications = [0, 0, 0, 1]`
+  Use when RGB should be added, but alpha should be multiplied. This is useful when combining color from both textures while keeping visibility limited by both alpha channels.
+
+- `additions = [0, 0, 0, 1]`, `multiplications = [1, 1, 1, 0]`
+  Use when RGB should be multiplied, but alpha should be added. This is useful when a transfer texture acts like a lightmap or tint mask, while alpha remains more permissive.
+
+- RGB from `self`, alpha from `transfer`
+  A common setup when you want to preserve the base color but use another texture to define transparency, such as applying an external alpha mask.
+
+A simple rule of thumb:
+
+- Use `addition` when you want to layer or expand visible contribution.
+- Use `multiplication` when you want to restrict, mask, or darken the result.
+
 
 ### Displacement
 
@@ -925,3 +910,172 @@ gameObject.filters.internal.clear();
 camera.filters.internal.clear();
 ```
 
+### Color matrix
+
+- Brightness : Changes the brightness of this ColorMatrix by the given amount.
+    ```javascript
+    colorMatrix.brightness(value, multiply);
+    ```
+    - `value` : The amount of brightness to apply to this ColorMatrix. `0`(black)~`1`. Default value is `0`.
+    - `multiply` : Multiply the resulting ColorMatrix (`true`), or set it (`false`) ?
+        - `true` : Multiply the resulting.
+        - `false` : Set the resulting. Default behavior.
+- Saturate : Changes the saturation of this ColorMatrix by the given amount.
+    ```javascript
+    colorMatrix.saturate(value, multiply);
+    ```
+    - `value` :  The amount of saturation to apply to this ColorMatrix. Default value is `0`.
+    - `multiply` : Multiply the resulting ColorMatrix (`true`), or set it (`false`) ?
+        - `true` : Multiply the resulting.
+        - `false` : Set the resulting. Default behavior.
+- Desaturate : Desaturates this ColorMatrix (removes color from it).
+    ```javascript
+    colorMatrix.desaturate(multiply);
+    ```
+    - `multiply` : Multiply the resulting ColorMatrix (`true`), or set it (`false`) ?
+        - `true` : Multiply the resulting.
+        - `false` : Set the resulting. Default behavior.
+- Hue : Rotates the hues of this ColorMatrix by the value given.
+    ```javascript
+    colorMatrix.hue(rotation, multiply);
+    ```
+    - `rotation` : The amount of hue rotation to apply to this ColorMatrix, in degrees. Default value is `0`.
+    - `multiply` : Multiply the resulting ColorMatrix (`true`), or set it (`false`) ?
+        - `true` : Multiply the resulting.
+        - `false` : Set the resulting. Default behavior.
+- Grayscale : Sets this ColorMatrix to be grayscale.
+    ```javascript
+    colorMatrix.grayscale(value, multiply);
+    ```
+    - `value` : The grayscale scale `0`(black)~`1`. Default value is `1`.
+    - `multiply` : Multiply the resulting ColorMatrix (`true`), or set it (`false`) ?
+        - `true` : Multiply the resulting.
+        - `false` : Set the resulting. Default behavior.
+- BlackWhite : Sets this ColorMatrix to be black and white.
+    ```javascript
+    colorMatrix.blackWhite(multiply);
+    ```
+    - `multiply` : Multiply the resulting ColorMatrix (`true`), or set it (`false`) ?
+        - `true` : Multiply the resulting.
+        - `false` : Set the resulting. Default behavior.
+- Black : Sets this ColorMatrix to be black, only preserving alpha.
+    ```javascript
+    colorMatrix.black(multiply);
+    ```
+    - `multiply` : Multiply the resulting ColorMatrix (`true`), or set it (`false`) ?
+        - `true` : Multiply the resulting.
+        - `false` : Set the resulting. Default behavior.
+- Contrast : Change the contrast of this ColorMatrix by the amount given.
+    ```javascript
+    colorMatrix.contrast(value, multiply);
+    ```
+    - `value` : The amount of contrast to apply to this ColorMatrix. Default value is `0`.
+    - `multiply` : Multiply the resulting ColorMatrix (`true`), or set it (`false`) ?
+        - `true` : Multiply the resulting.
+        - `false` : Set the resulting. Default behavior.
+- Negative : Converts this ColorMatrix to have negative values.
+    ```javascript
+    colorMatrix.negative(multiply);
+    ```
+    - `multiply` : Multiply the resulting ColorMatrix (`true`), or set it (`false`) ?
+        - `true` : Multiply the resulting.
+        - `false` : Set the resulting. Default behavior.
+- DesaturateLuminance : Apply a desaturated luminance to this ColorMatrix.
+    ```javascript
+    colorMatrix.desaturateLuminance(multiply);
+    ```
+    - `multiply` : Multiply the resulting ColorMatrix (`true`), or set it (`false`) ?
+        - `true` : Multiply the resulting.
+        - `false` : Set the resulting. Default behavior.
+- Sepia : Applies a sepia tone to this ColorMatrix.
+    ```javascript
+    colorMatrix.sepia(multiply);
+    ```
+    - `multiply` : Multiply the resulting ColorMatrix (`true`), or set it (`false`) ?
+        - `true` : Multiply the resulting.
+        - `false` : Set the resulting. Default behavior.
+- Night : Applies a night vision tone to this ColorMatrix.
+    ```javascript
+    colorMatrix.night(intensity, multiply);
+    ```
+    - `intensity` : The intensity of this effect. Default value is `0.1`.
+    - `multiply` : Multiply the resulting ColorMatrix (`true`), or set it (`false`) ?
+        - `true` : Multiply the resulting.
+        - `false` : Set the resulting. Default behavior.
+- LSD : Applies a trippy color tone to this ColorMatrix.
+    ```javascript
+    colorMatrix.lsd(multiply);
+    ```
+    - `multiply` : Multiply the resulting ColorMatrix (`true`), or set it (`false`) ?
+        - `true` : Multiply the resulting.
+        - `false` : Set the resulting. Default behavior.
+- Brown : Applies a brown tone to this ColorMatrix.
+    ```javascript
+    colorMatrix.brown(multiply);
+    ```
+    - `multiply` : Multiply the resulting ColorMatrix (`true`), or set it (`false`) ?
+        - `true` : Multiply the resulting.
+        - `false` : Set the resulting. Default behavior.
+- VintagePinhole : Applies a vintage pinhole color effect to this ColorMatrix.
+    ```javascript
+    colorMatrix.vintagePinhole(multiply);
+    ```
+    - `multiply` : Multiply the resulting ColorMatrix (`true`), or set it (`false`) ?
+        - `true` : Multiply the resulting.
+        - `false` : Set the resulting. Default behavior.
+- Kodachrome : Applies a kodachrome color effect to this ColorMatrix.
+    ```javascript
+    colorMatrix.kodachrome(multiply);
+    ```
+    - `multiply` : Multiply the resulting ColorMatrix (`true`), or set it (`false`) ?
+        - `true` : Multiply the resulting.
+        - `false` : Set the resulting. Default behavior.
+- Technicolor : Applies a technicolor color effect to this ColorMatrix.
+    ```javascript
+    colorMatrix.technicolor(multiply);
+    ```
+    - `multiply` : Multiply the resulting ColorMatrix (`true`), or set it (`false`) ?
+        - `true` : Multiply the resulting.
+        - `false` : Set the resulting. Default behavior.
+- Polaroid : Applies a polaroid color effect to this ColorMatrix.
+    ```javascript
+    colorMatrix.polaroid(multiply);
+    ```
+    - `multiply` : Multiply the resulting ColorMatrix (`true`), or set it (`false`) ?
+        - `true` : Multiply the resulting.
+        - `false` : Set the resulting. Default behavior.
+- AlphaToBrightness : Replaces color with a grayscale version of alpha, where black represents transparency and white represents opacity, and sets alpha to full.
+    ```javascript
+    colorMatrix.alphaToBrightness(multiply);
+    ```
+    - `multiply` : Multiply the resulting ColorMatrix (`true`), or set it (`false`) ?
+        - `true` : Multiply the resulting.
+        - `false` : Set the resulting. Default behavior.
+- AlphaToBrightnessInverse : Replaces color with a grayscale version of alpha, where white represents transparency and black represents opacity, and sets alpha to full.
+    ```javascript
+    colorMatrix.alphaToBrightnessInverse(multiply);
+    ```
+    - `multiply` : Multiply the resulting ColorMatrix (`true`), or set it (`false`) ?
+        - `true` : Multiply the resulting.
+        - `false` : Set the resulting. Default behavior.
+- BrightnessToAlpha : Preserves RGB, but replaces alpha with the brightness of the color.
+    ```javascript
+    colorMatrix.brightnessToAlpha(multiply);
+    ```
+    - `multiply` : Multiply the resulting ColorMatrix (`true`), or set it (`false`) ?
+        - `true` : Multiply the resulting.
+        - `false` : Set the resulting. Default behavior.
+- BrightnessToAlphaInverse : Preserves RGB, but replaces alpha with the inverted brightness of the color.
+    ```javascript
+    colorMatrix.brightnessToAlphaInverse(multiply);
+    ```
+    - `multiply` : Multiply the resulting ColorMatrix (`true`), or set it (`false`) ?
+        - `true` : Multiply the resulting.
+        - `false` : Set the resulting. Default behavior.
+- ShiftToBGR : Shifts the values of this ColorMatrix into BGR order.
+    ```javascript
+    colorMatrix.shiftToBGR(multiply);
+    ```
+    - `multiply` : Multiply the resulting ColorMatrix (`true`), or set it (`false`) ?
+        - `true` : Multiply the resulting.
+        - `false` : Set the resulting. Default behavior.
