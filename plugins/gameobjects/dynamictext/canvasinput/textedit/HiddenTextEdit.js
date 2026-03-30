@@ -80,6 +80,11 @@ class HiddenTextEdit extends HiddenTextEditBase {
         var textObject = this.parent;
 
         var text = this.text;
+
+        if (textObject.isDisplayTextSeparated) { // Update raw text from input
+            textObject.updateRawText(text);
+        }
+
         if (this.onUpdateCallback) {
             var newText = this.onUpdateCallback(text, textObject, this);
             if (newText != null) {
@@ -88,7 +93,7 @@ class HiddenTextEdit extends HiddenTextEditBase {
         }
 
         if (textObject.text !== text) {
-            textObject.setText(text);
+            textObject.setText(text);  // Set display text
         }
 
         if (this.isOpened) {

@@ -152,6 +152,7 @@ var txt = scene.add.rexCanvasInput({
 
     childrenInteractive: false,
 
+    // rawText: null,
     text: '',
 
     wrap: {
@@ -184,8 +185,8 @@ var txt = scene.add.rexCanvasInput({
     // onClose: function (textObject, hiddenInputText) {
     // },
 
-    // onUpdate: function (text, textObject, hiddenInputText) {
-    //     return text;
+    // onUpdate: function (inputText, textObject, hiddenInputText) {
+    //     return displayText;
     // },   
 
     // onAddChar: function(child, index, canvasInput) {
@@ -225,6 +226,12 @@ var txt = scene.add.rexCanvasInput({
 });
 ```
 
+- `text` : Display text.
+- `rawText` : Initial raw text value. See [raw text](#raw-text).
+    - A string : Initial input text, and display text and input text are treated as separated values.
+      use `onUpdate` callback to return display text from input text.
+    - `null`, or `undefined` : Ignore this mode, default behavior. Display text and input text 
+      will be set to the same value.
 - `textArea` : 
     - `false` : Single line text input. Default behavior.
     - `true` : Multiple lines text input.
@@ -235,7 +242,7 @@ var txt = scene.add.rexCanvasInput({
         - `wrap.vAlign` : Default value is `'center'`
 - Parameters of hidden-text-editor
     - `inputType` : Type of element
-        - `'text'`, `'password'`, `'textarea'`, ...
+        - `'text'`, `'textarea'`, ...
     - `enterClose` : Set `true` to close input text when enter-key was pressed. Default value is `true`.
     - `readOnly` : 
         - `true` : un-editable.
@@ -257,11 +264,11 @@ var txt = scene.add.rexCanvasInput({
     - `onUpdate` : 
         - A callback invoked in each tick of editing.
             ```javascript
-            function (text, textObject) {
-                // return text;
+            function (inputText, textObject) {
+                // return displayText;
             }
             ```
-            - Can return a new string for text game object displaying.
+            - Can return a new string for text game object displaying. See also [raw text](#raw-text)
         - `'number'` : Only output number string.
     - `onAddChar` : Callback invoked when adding new [character child](dynamictext.md#character)
         ```javascript
@@ -488,6 +495,17 @@ var isOpened = txt.isOpened;
     ```javascript
     txt.setValue(value);
     // txt.value = value;
+    ```
+
+### Raw text
+
+- Set raw text and enable display/raw text separation mode.
+    ```javascript
+    txt.setRawText(value);
+    ```
+- Get raw text
+    ```javascript
+    var rawText = txt.rawText;
     ```
 
 ### Read only

@@ -95,17 +95,10 @@ var CreateLoginDialog = function (scene, config) {
             wrap: {
                 vAlign: 'center'
             },
-            text: markPassword(password),
-
-            onOpen(textObject, hiddenInputText) {
-                // Can't use passwordField.text because it is masked by dot
-                textObject.setInputText(password);
-            },
+            rawText: password, // raw text
+            text: markPassword(password),  // display text
 
             onUpdate(text, textObject, hiddenInputText) {
-                // Save password from input of hiddenEdit
-                password = text;
-
                 // Return masked string for textObject displaying
                 return markPassword(text);
             }
@@ -123,8 +116,9 @@ var CreateLoginDialog = function (scene, config) {
     })
         .setInteractive()
         .on('pointerdown', function () {
-            username = userNameField.text;
-            loginDialog.emit('login', username, password);
+            var usernameInput = userNameField.text;
+            var passwordInput = passwordField.getElement('text').rawText;
+            loginDialog.emit('login', usernameInput, passwordInput);
         });
 
     // Dialog and its children

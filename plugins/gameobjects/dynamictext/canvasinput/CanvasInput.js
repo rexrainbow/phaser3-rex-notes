@@ -8,12 +8,14 @@ import RegisterRangeStyle from './methods/RegisterRangeStyle.js';
 import RegisterFocusStyle from './methods/RegisterFocusStyle.js';
 import CreateInsertCursorChild from './methods/CreateInsertCursorChild.js';
 import SetText from './methods/SetText.js';
+import RawTextMethods from './methods/RawTextMethods.js';
 import { IsChar } from '../dynamictext/bob/Types.js';
 import SetTextOXYMethods from './methods/SetTextOXYMethods.js';
 import MoveCursorMethods from './methods/MoveCursorMethods.js';
 import IsEmpty from '../../../utils/object/IsEmpty.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+const GetValue = Phaser.Utils.Objects.GetValue;
 
 class CanvasInput extends DynamicText {
     constructor(scene, x, y, fixedWidth, fixedHeight, config) {
@@ -50,6 +52,8 @@ class CanvasInput extends DynamicText {
         this.characterCountOfLines = [];
 
         this._text;
+        this.isDisplayTextSeparated = false;
+        this._rawText = undefined;
 
         this.textEdit = CreateHiddenTextEdit(this, config);
 
@@ -109,6 +113,9 @@ class CanvasInput extends DynamicText {
 
         this.lastInsertCursor = CreateInsertCursorChild(this);
 
+        var rawText = GetValue(config, 'rawText', null);
+        this.setRawText(rawText);
+
         if (!text) {
             text = '';
         }
@@ -152,6 +159,10 @@ class CanvasInput extends DynamicText {
         SetText(this, value);
 
         this._text = value;
+    }
+
+    get rawText() {
+        return this.getRawText();
     }
 
     setText(text) {
@@ -409,6 +420,7 @@ var DefaultParseTextCallback = function (text) {
 Object.assign(
     CanvasInput.prototype,
     SetTextOXYMethods,
+    RawTextMethods,
     MoveCursorMethods,
 )
 

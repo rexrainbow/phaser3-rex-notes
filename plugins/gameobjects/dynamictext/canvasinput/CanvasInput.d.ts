@@ -236,6 +236,14 @@ declare namespace CanvasInput {
 
     interface IConfig extends DynamicText.IConfig {
         /**
+         * Initial raw text value.
+         * When set, display text and input text are treated as separated values.
+         * Use this for cases like password masking, where the canvas displays formatted text
+         * while the input keeps the original string.
+         */
+        rawText?: string;
+
+        /**
          * True to enable text area behavior.
          */
         textArea?: boolean;
@@ -407,6 +415,29 @@ declare class CanvasInput extends DynamicText {
      * @returns This instance.
      */
     setInputText(value: string): this;
+
+    /**
+     * Set raw text and enable display/raw text separation mode.
+     * In this mode, `displayText` may differ from the input value.
+     * If the editor is already opened, the input text will be updated immediately.
+     * Pass `null` or `undefined` to clear raw text and restore normal mode.
+     * @param value - Raw text value.
+     * @returns This instance.
+     */
+    setRawText(value?: string | null): this;
+
+    /**
+     * Clear raw text and disable display/raw text separation mode.
+     * If the editor is already opened, the hidden input text will be restored from display text.
+     * @returns This instance.
+     */
+    clearRawText(): this;
+
+    /**
+     * Current raw text.
+     * Returns the saved raw text in separation mode; otherwise returns current display text.
+     */
+    readonly rawText: string;
 
     /**
      * Set parse text callback.
