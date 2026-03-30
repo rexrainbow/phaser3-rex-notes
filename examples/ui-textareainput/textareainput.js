@@ -72,7 +72,7 @@ class Demo extends Phaser.Scene {
 
                 orientation: 0,
                 background: this.rexUI.add.roundRectangle(0, 0, 20, 20, 0, COLOR_DARK),
-                text: this.add.text(0, 0, 'Header'),
+                text: this.add.text(0, 0, 'Title'),
             }),
 
             footer: this.rexUI.add.label({
@@ -80,16 +80,20 @@ class Demo extends Phaser.Scene {
 
                 orientation: 0,
                 background: this.rexUI.add.roundRectangle(0, 0, 20, 20, 0, COLOR_DARK),
-                text: this.add.text(0, 0, 'Footer'),
+                text: this.add.text(0, 0, 'Send'),
             }),
 
             content: content,
         })
             .layout()
 
-            .on('textchange', function (text) {
-                console.log(`Content: '${text}'`)
-            })
+        // .on('textchange', function (text) {
+        //     console.log(`Content: '${text}'`)
+        // })
+
+        textArea.getElement('footer').onClick(function () {
+            console.log(textArea.text)
+        })
     }
 
     update() { }
