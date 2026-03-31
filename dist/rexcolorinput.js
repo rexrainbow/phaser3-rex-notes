@@ -20351,10 +20351,12 @@
             return this;
         }
 
-        updateDisplayText() {
+        updateDisplayText(text) {
             var textObject = this.parent;
 
-            var text = this.text;  // input text
+            if (!text) {
+                text = this.text;  // input text
+            }
 
             if (this.onUpdateCallback) {
                 var newText = this.onUpdateCallback(text, textObject, this);
@@ -21808,8 +21810,12 @@
             return this.getTextOXPercentage();
         }
 
-        updateEditor() {
-            this.textEdit.updateText();
+        updateFromEditor() {
+            // No user-input now
+            this.textEdit
+                .updateDisplayText(this.rawText)
+                .updateCursor();
+
             return this;
         }
 

@@ -420,8 +420,12 @@ class CanvasInput extends DynamicText {
         return this.getTextOXPercentage();
     }
 
-    updateEditor() {
-        this.textEdit.updateText();
+    updateFromEditor() {
+        // No user-input now
+        this.textEdit
+            .updateDisplayText(this.rawText)
+            .updateCursor();
+
         return this;
     }
 

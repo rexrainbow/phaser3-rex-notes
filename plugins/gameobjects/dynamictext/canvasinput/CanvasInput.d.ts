@@ -637,4 +637,11 @@ declare class CanvasInput extends DynamicText {
      */
     cursorMoveDown(): this;
 
+    /**
+     * Refresh the display from current `rawText`, with `onUpdate` callback,
+     * then update cursor/selection rendering.
+     * @returns This instance.
+     */
+    updateFromEditor(): this;
+
 }
