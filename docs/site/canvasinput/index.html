@@ -15954,11 +15954,16 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
 </ul>
 <h3 id="raw-text">Raw text<a class="headerlink" href="#raw-text" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Set raw text and enable display/raw text separation mode.
+<li>Set raw text and enable display/raw text separation mode. 
+  Useful when editing password.
     <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setRawText</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Get raw text
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">rawText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">txt</span><span class="p">.</span><span class="nx">rawText</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Update display text from <code>onUpdate</code> callback.
+  Useful when toggling password mask.
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">updateFromEditor</span><span class="p">();</span>
 </code></pre></div></li>
 </ul>
 <h3 id="read-only">Read only<a class="headerlink" href="#read-only" title="Permanent link">&para;</a></h3>

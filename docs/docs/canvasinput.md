@@ -499,13 +499,19 @@ var isOpened = txt.isOpened;
 
 ### Raw text
 
-- Set raw text and enable display/raw text separation mode.
+- Set raw text and enable display/raw text separation mode. 
+  Useful when editing password.
     ```javascript
     txt.setRawText(value);
     ```
 - Get raw text
     ```javascript
     var rawText = txt.rawText;
+    ```
+- Update display text from `onUpdate` callback.
+  Useful when toggling password mask.
+    ```javascript
+    txt.updateFromEditor();
     ```
 
 ### Read only
