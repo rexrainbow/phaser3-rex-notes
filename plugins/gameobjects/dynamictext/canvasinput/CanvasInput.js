@@ -37,6 +37,11 @@ class CanvasInput extends DynamicText {
             delete config.text;
         }
 
+        var rawText = config.rawText;
+        if (rawText) {
+            delete config.rawText;
+        }
+
         var focusStyle = ExtractByPrefix(config.background, 'focus');
         var cursorStyle = ExtractByPrefix(config.style, 'cursor');
         var rangeStyle = ExtractByPrefix(config.style, 'range');
@@ -113,7 +118,6 @@ class CanvasInput extends DynamicText {
 
         this.lastInsertCursor = CreateInsertCursorChild(this);
 
-        var rawText = GetValue(config, 'rawText', null);
         this.setRawText(rawText);
 
         if (!text) {
@@ -265,6 +269,11 @@ class CanvasInput extends DynamicText {
         return this;
     }
 
+    updateEditor() {
+        this.textEdit.updateText();
+        return this;
+    }
+
     get readOnly() {
         return this.textEdit.readOnly;
     }
@@ -409,6 +418,11 @@ class CanvasInput extends DynamicText {
 
     get s() {
         return this.getTextOXPercentage();
+    }
+
+    updateEditor() {
+        this.textEdit.updateText();
+        return this;
     }
 
 }

@@ -9,7 +9,9 @@ export default {
         this._rawText = value;
         this.isDisplayTextSeparated = true;
         if (this.isOpened) {
-            this.textEdit.setText(value);
+            this.textEdit
+                .setText(value)
+                .updateText();
         }
         return this;
     },
@@ -18,7 +20,9 @@ export default {
         this._rawText = undefined;
         this.isDisplayTextSeparated = false;
         if (this.isOpened) {
-            this.textEdit.setText(this.text);
+            this.textEdit
+                .setText(this.text)
+                .updateText();
         }
         return this;
     },

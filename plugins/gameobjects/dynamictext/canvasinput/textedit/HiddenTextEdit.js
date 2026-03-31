@@ -72,17 +72,34 @@ class HiddenTextEdit extends HiddenTextEditBase {
     initText() {
         var textObject = this.parent;
         this.prevCursorPosition = null;
-        this.setText(textObject.text);
+        this.setText(textObject.rawText);
         return this;
     }
 
+    // Invoking under 'postupdate' event of scene
     updateText() {
+        this.updateRawText();
+
+        this.updateDisplayText();
+
+        this.updateCursor();
+
+        return this;
+    }
+
+    updateRawText() {
         var textObject = this.parent;
 
-        var text = this.text;
+        textObject.updateRawText(this.text);  // Update raw text from input
 
-        if (textObject.isDisplayTextSeparated) { // Update raw text from input
-            textObject.updateRawText(text);
+        return this;
+    }
+
+    updateDisplayText(text) {
+        var textObject = this.parent;
+
+        if (!text) {
+            text = this.text;  // input text
         }
 
         if (this.onUpdateCallback) {
@@ -96,6 +113,10 @@ class HiddenTextEdit extends HiddenTextEditBase {
             textObject.setText(text);  // Set display text
         }
 
+        return this;
+    }
+
+    updateCursor() {
         if (this.isOpened) {
             if (this.selectionStart !== this.selectionEnd) {
                 ClearCursor(this);
