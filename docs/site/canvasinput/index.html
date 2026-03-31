@@ -2734,6 +2734,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#raw-text" class="md-nav__link">
+    <span class="md-ellipsis">
+      Raw text
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#read-only" class="md-nav__link">
     <span class="md-ellipsis">
       Read only
@@ -15355,6 +15364,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#raw-text" class="md-nav__link">
+    <span class="md-ellipsis">
+      Raw text
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#read-only" class="md-nav__link">
     <span class="md-ellipsis">
       Read only
@@ -15591,6 +15609,7 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
 
 <span class="w">    </span><span class="nx">childrenInteractive</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 
+<span class="w">    </span><span class="c1">// rawText: null,</span>
 <span class="w">    </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span>
 
 <span class="w">    </span><span class="nx">wrap</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
@@ -15623,8 +15642,8 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
 <span class="w">    </span><span class="c1">// onClose: function (textObject, hiddenInputText) {</span>
 <span class="w">    </span><span class="c1">// },</span>
 
-<span class="w">    </span><span class="c1">// onUpdate: function (text, textObject, hiddenInputText) {</span>
-<span class="w">    </span><span class="c1">//     return text;</span>
+<span class="w">    </span><span class="c1">// onUpdate: function (inputText, textObject, hiddenInputText) {</span>
+<span class="w">    </span><span class="c1">//     return displayText;</span>
 <span class="w">    </span><span class="c1">// },   </span>
 
 <span class="w">    </span><span class="c1">// onAddChar: function(child, index, canvasInput) {</span>
@@ -15664,6 +15683,14 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
 <span class="p">});</span>
 </code></pre></div>
 <ul>
+<li><code>text</code> : Display text.</li>
+<li><code>rawText</code> : Initial raw text value. See <a href="#raw-text">raw text</a>.<ul>
+<li>A string : Initial input text, and display text and input text are treated as separated values.
+  use <code>onUpdate</code> callback to return display text from input text.</li>
+<li><code>null</code>, or <code>undefined</code> : Ignore this mode, default behavior. Display text and input text 
+  will be set to the same value.</li>
+</ul>
+</li>
 <li><code>textArea</code> : <ul>
 <li><code>false</code> : Single line text input. Default behavior.</li>
 <li><code>true</code> : Multiple lines text input.</li>
@@ -15680,7 +15707,7 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
 </li>
 <li>Parameters of hidden-text-editor<ul>
 <li><code>inputType</code> : Type of element<ul>
-<li><code>'text'</code>, <code>'password'</code>, <code>'textarea'</code>, ...</li>
+<li><code>'text'</code>, <code>'textarea'</code>, ...</li>
 </ul>
 </li>
 <li><code>enterClose</code> : Set <code>true</code> to close input text when enter-key was pressed. Default value is <code>true</code>.</li>
@@ -15705,11 +15732,11 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
 </code></pre></div></li>
 <li><code>onUpdate</code> : <ul>
 <li>A callback invoked in each tick of editing.
-    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">text</span><span class="p">,</span><span class="w"> </span><span class="nx">textObject</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// return text;</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">inputText</span><span class="p">,</span><span class="w"> </span><span class="nx">textObject</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// return displayText;</span>
 <span class="p">}</span>
 </code></pre></div><ul>
-<li>Can return a new string for text game object displaying.</li>
+<li>Can return a new string for text game object displaying. See also <a href="#raw-text">raw text</a></li>
 </ul>
 </li>
 <li><code>'number'</code> : Only output number string.</li>
@@ -15938,6 +15965,20 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
 <li>Set. Conver any type of <code>value</code> to string.
     <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setValue</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
 <span class="c1">// txt.value = value;</span>
+</code></pre></div></li>
+</ul>
+<h3 id="raw-text">Raw text<a class="headerlink" href="#raw-text" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Set raw text and enable display/raw text separation mode. 
+  Useful when editing password.
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setRawText</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Get raw text
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">rawText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">txt</span><span class="p">.</span><span class="nx">rawText</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Update display text from <code>onUpdate</code> callback.
+  Useful when toggling password mask.
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">updateFromEditor</span><span class="p">();</span>
 </code></pre></div></li>
 </ul>
 <h3 id="read-only">Read only<a class="headerlink" href="#read-only" title="Permanent link">&para;</a></h3>

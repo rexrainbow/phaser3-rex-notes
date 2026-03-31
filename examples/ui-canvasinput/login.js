@@ -15,6 +15,7 @@ class Demo extends Phaser.Scene {
     preload() {
         this.load.image('user', './assets/images/person.png');
         this.load.image('password', './assets/images/key.png');
+        this.load.image('visibility', './assets/images/visibility.png');
     }
 
     create() {
@@ -41,10 +42,11 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 var CreateLoginDialog = function (scene, config) {
     var username = GetValue(config, 'username', '');
     var password = GetValue(config, 'password', '');
+    var hasPasswordMask = true;
     var title = GetValue(config, 'title', 'Welcome');
     var x = GetValue(config, 'x', 0);
     var y = GetValue(config, 'y', 0);
-    var width = GetValue(config, 'width', undefined);
+    var width = GetValue(config, 'width', 300);
     var height = GetValue(config, 'height', undefined);
 
     // Background object
@@ -60,7 +62,7 @@ var CreateLoginDialog = function (scene, config) {
         icon: scene.add.image(0, 0, 'user'),
 
         text: scene.rexUI.add.canvasInput({
-            width: 150, height: 36,
+            height: 36,
             style: {
                 fontSize: 20,
                 backgroundBottomY: 5,
@@ -73,6 +75,7 @@ var CreateLoginDialog = function (scene, config) {
             },
             text: username,
         }),
+        expandTextWidth: true,
 
         space: { top: 5, bottom: 5, left: 5, right: 5, icon: 10, }
     })
@@ -82,9 +85,10 @@ var CreateLoginDialog = function (scene, config) {
         orientation: 'x',
         background: scene.rexUI.add.roundRectangle(0, 0, 10, 10, 10).setStrokeStyle(2, COLOR_LIGHT),
         icon: scene.add.image(0, 0, 'password'),
+        action: scene.add.image(0, 0, 'visibility'),
 
         text: scene.rexUI.add.canvasInput({
-            width: 150, height: 36,
+            height: 36,
             style: {
                 fontSize: 20,
                 backgroundBottomY: 5,
@@ -95,24 +99,26 @@ var CreateLoginDialog = function (scene, config) {
             wrap: {
                 vAlign: 'center'
             },
-            text: markPassword(password),
-
-            onOpen(textObject, hiddenInputText) {
-                // Can't use passwordField.text because it is masked by dot
-                textObject.setInputText(password);
-            },
+            rawText: password, // raw text
+            text: markPassword(password),  // display text
 
             onUpdate(text, textObject, hiddenInputText) {
-                // Save password from input of hiddenEdit
-                password = text;
-
                 // Return masked string for textObject displaying
-                return markPassword(text);
+                return (hasPasswordMask) ? markPassword(text) : undefined;
             }
         }),
+        expandTextWidth: true,
 
-        space: { top: 5, bottom: 5, left: 5, right: 5, icon: 10, }
+        space: { top: 5, bottom: 5, left: 5, right: 5, icon: 10, text: 10, }
     })
+
+    var passwordInputCanvas = passwordField.getElement('text');
+    var passwordMaskToggleButton = passwordField.getElement('action')
+        .setInteractive()
+        .on('pointerdown', function () {
+            hasPasswordMask = !hasPasswordMask;
+            passwordInputCanvas.updateFromEditor();
+        })
 
     // Login button object
     var loginButton = scene.rexUI.add.label({
@@ -121,11 +127,11 @@ var CreateLoginDialog = function (scene, config) {
         text: scene.add.text(0, 0, 'Login', { fontSize: 20 }),
         space: { top: 8, bottom: 8, left: 8, right: 8 }
     })
-        .setInteractive()
-        .on('pointerdown', function () {
-            username = userNameField.text;
-            loginDialog.emit('login', username, password);
-        });
+        .onClick(function () {
+            var usernameInput = userNameField.text;
+            var passwordInput = passwordField.getElement('text').rawText;
+            loginDialog.emit('login', usernameInput, passwordInput);
+        })
 
     // Dialog and its children
     var loginDialog = scene.rexUI.add.sizer({

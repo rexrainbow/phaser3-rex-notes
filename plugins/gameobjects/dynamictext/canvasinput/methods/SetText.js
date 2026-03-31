@@ -41,7 +41,7 @@ var SetText = function (textObject, newText) {
 
     textObject.runWrap();
 
-    if (textObject.isOpened) {
+    if (textObject.isOpened && !textObject.isDisplayTextSeparated) {
         textObject.textEdit.setText(newText);
     }
 

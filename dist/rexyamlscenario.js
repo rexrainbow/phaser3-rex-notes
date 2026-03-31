@@ -73510,14 +73510,36 @@ void main () {
 	    initText() {
 	        var textObject = this.parent;
 	        this.prevCursorPosition = null;
-	        this.setText(textObject.text);
+	        this.setText(textObject.rawText);
 	        return this;
 	    }
 
+	    // Invoking under 'postupdate' event of scene
 	    updateText() {
+	        this.updateRawText();
+
+	        this.updateDisplayText();
+
+	        this.updateCursor();
+
+	        return this;
+	    }
+
+	    updateRawText() {
 	        var textObject = this.parent;
 
-	        var text = this.text;
+	        textObject.updateRawText(this.text);  // Update raw text from input
+
+	        return this;
+	    }
+
+	    updateDisplayText(text) {
+	        var textObject = this.parent;
+
+	        if (!text) {
+	            text = this.text;  // input text
+	        }
+
 	        if (this.onUpdateCallback) {
 	            var newText = this.onUpdateCallback(text, textObject, this);
 	            if (newText != null) {
@@ -73526,9 +73548,13 @@ void main () {
 	        }
 
 	        if (textObject.text !== text) {
-	            textObject.setText(text);
+	            textObject.setText(text);  // Set display text
 	        }
 
+	        return this;
+	    }
+
+	    updateCursor() {
 	        if (this.isOpened) {
 	            if (this.selectionStart !== this.selectionEnd) {
 	                ClearCursor(this);
@@ -74191,12 +74217,57 @@ void main () {
 
 	    textObject.runWrap();
 
-	    if (textObject.isOpened) {
+	    if (textObject.isOpened && !textObject.isDisplayTextSeparated) {
 	        textObject.textEdit.setText(newText);
 	    }
 
 	    textObject.emit('textchange', newText, textObject);
 
+	};
+
+	var RawTextMethods = {
+	    setRawText(value) {
+	        if (value == null) {
+	            this.clearRawText();
+	            return this;
+	        }
+
+	        value = value.toString();
+	        this._rawText = value;
+	        this.isDisplayTextSeparated = true;
+	        if (this.isOpened) {
+	            this.textEdit
+	                .setText(value)
+	                .updateText();
+	        }
+	        return this;
+	    },
+
+	    clearRawText() {
+	        this._rawText = undefined;
+	        this.isDisplayTextSeparated = false;
+	        if (this.isOpened) {
+	            this.textEdit
+	                .setText(this.text)
+	                .updateText();
+	        }
+	        return this;
+	    },
+
+	    getRawText() {
+	        return (this.isDisplayTextSeparated) ? this._rawText : this.text;
+	    },
+
+	    // Internal use
+	    updateRawText(value) {
+	        if (!this.isDisplayTextSeparated) {
+	            return this;
+	        }
+
+	        value = value.toString();
+	        this._rawText = value;
+	        return this;
+	    }
 	};
 
 	var SetTextOXYMethods = {
@@ -74326,6 +74397,7 @@ void main () {
 	};
 
 	const IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
+	Phaser.Utils.Objects.GetValue;
 
 	class CanvasInput extends DynamicText {
 	    constructor(scene, x, y, fixedWidth, fixedHeight, config) {
@@ -74347,6 +74419,11 @@ void main () {
 	            delete config.text;
 	        }
 
+	        var rawText = config.rawText;
+	        if (rawText) {
+	            delete config.rawText;
+	        }
+
 	        var focusStyle = ExtractByPrefix(config.background, 'focus');
 	        var cursorStyle = ExtractByPrefix(config.style, 'cursor');
 	        var rangeStyle = ExtractByPrefix(config.style, 'range');
@@ -74362,6 +74439,8 @@ void main () {
 	        this.characterCountOfLines = [];
 
 	        this._text;
+	        this.isDisplayTextSeparated = false;
+	        this._rawText = undefined;
 
 	        this.textEdit = CreateHiddenTextEdit(this, config);
 
@@ -74421,6 +74500,8 @@ void main () {
 
 	        this.lastInsertCursor = CreateInsertCursorChild(this);
 
+	        this.setRawText(rawText);
+
 	        if (!text) {
 	            text = '';
 	        }
@@ -74464,6 +74545,10 @@ void main () {
 	        SetText(this, value);
 
 	        this._text = value;
+	    }
+
+	    get rawText() {
+	        return this.getRawText();
 	    }
 
 	    setText(text) {
@@ -74563,6 +74648,11 @@ void main () {
 
 	    setValue(value) {
 	        this.value = value;
+	        return this;
+	    }
+
+	    updateEditor() {
+	        this.textEdit.updateText();
 	        return this;
 	    }
 
@@ -74712,6 +74802,15 @@ void main () {
 	        return this.getTextOXPercentage();
 	    }
 
+	    updateFromEditor() {
+	        // No user-input now
+	        this.textEdit
+	            .updateDisplayText(this.rawText)
+	            .updateCursor();
+
+	        return this;
+	    }
+
 	}
 
 	var DefaultParseTextCallback = function (text) {
@@ -74721,6 +74820,7 @@ void main () {
 	Object.assign(
 	    CanvasInput.prototype,
 	    SetTextOXYMethods,
+	    RawTextMethods,
 	    MoveCursorMethods,
 	);
 

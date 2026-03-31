@@ -8,12 +8,14 @@ import RegisterRangeStyle from './methods/RegisterRangeStyle.js';
 import RegisterFocusStyle from './methods/RegisterFocusStyle.js';
 import CreateInsertCursorChild from './methods/CreateInsertCursorChild.js';
 import SetText from './methods/SetText.js';
+import RawTextMethods from './methods/RawTextMethods.js';
 import { IsChar } from '../dynamictext/bob/Types.js';
 import SetTextOXYMethods from './methods/SetTextOXYMethods.js';
 import MoveCursorMethods from './methods/MoveCursorMethods.js';
 import IsEmpty from '../../../utils/object/IsEmpty.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+const GetValue = Phaser.Utils.Objects.GetValue;
 
 class CanvasInput extends DynamicText {
     constructor(scene, x, y, fixedWidth, fixedHeight, config) {
@@ -35,6 +37,11 @@ class CanvasInput extends DynamicText {
             delete config.text;
         }
 
+        var rawText = config.rawText;
+        if (rawText) {
+            delete config.rawText;
+        }
+
         var focusStyle = ExtractByPrefix(config.background, 'focus');
         var cursorStyle = ExtractByPrefix(config.style, 'cursor');
         var rangeStyle = ExtractByPrefix(config.style, 'range');
@@ -50,6 +57,8 @@ class CanvasInput extends DynamicText {
         this.characterCountOfLines = [];
 
         this._text;
+        this.isDisplayTextSeparated = false;
+        this._rawText = undefined;
 
         this.textEdit = CreateHiddenTextEdit(this, config);
 
@@ -109,6 +118,8 @@ class CanvasInput extends DynamicText {
 
         this.lastInsertCursor = CreateInsertCursorChild(this);
 
+        this.setRawText(rawText);
+
         if (!text) {
             text = '';
         }
@@ -152,6 +163,10 @@ class CanvasInput extends DynamicText {
         SetText(this, value);
 
         this._text = value;
+    }
+
+    get rawText() {
+        return this.getRawText();
     }
 
     setText(text) {
@@ -251,6 +266,11 @@ class CanvasInput extends DynamicText {
 
     setValue(value) {
         this.value = value;
+        return this;
+    }
+
+    updateEditor() {
+        this.textEdit.updateText();
         return this;
     }
 
@@ -400,6 +420,15 @@ class CanvasInput extends DynamicText {
         return this.getTextOXPercentage();
     }
 
+    updateFromEditor() {
+        // No user-input now
+        this.textEdit
+            .updateDisplayText(this.rawText)
+            .updateCursor();
+
+        return this;
+    }
+
 }
 
 var DefaultParseTextCallback = function (text) {
@@ -409,6 +438,7 @@ var DefaultParseTextCallback = function (text) {
 Object.assign(
     CanvasInput.prototype,
     SetTextOXYMethods,
+    RawTextMethods,
     MoveCursorMethods,
 )
 
