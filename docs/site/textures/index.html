@@ -6319,6 +6319,24 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#set-smooth-pixel-art" class="md-nav__link">
+    <span class="md-ellipsis">
+      Set smooth-pixel-art
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-wrap-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Set wrap mode
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -15329,6 +15347,24 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#set-smooth-pixel-art" class="md-nav__link">
+    <span class="md-ellipsis">
+      Set smooth-pixel-art
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-wrap-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Set wrap mode
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -15528,6 +15564,43 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">nameList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">texture</span><span class="p">.</span><span class="nx">getFrameNames</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
 <span class="c1">// nameList includes `__BASE`</span>
 </code></pre></div>
+<h4 id="set-smooth-pixel-art">Set smooth-pixel-art<a class="headerlink" href="#set-smooth-pixel-art" title="Permanent link">&para;</a></h4>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>WebGL only.<br />
+<code>smooth-pixel-art</code> preserves the blocky look of pixel art, but smooths the edges between texels when a texture is scaled up.<br />
+It uses a special shader path and requires linear filtering.</p>
+</div>
+<p>Difference from <code>pixel art</code>:</p>
+<ul>
+<li><code>pixel art</code> : Uses nearest-neighbor sampling for a crisp and fully blocky result. Best for classic pixel-art games.</li>
+<li><code>smooth-pixel-art</code> : Keeps the texels blocky, but antialiases the borders between them. This is mainly visible when objects are scaled up.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">setSmoothPixelArt</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+</code></pre></div>
+<h4 id="set-wrap-mode">Set wrap mode<a class="headerlink" href="#set-wrap-mode" title="Permanent link">&para;</a></h4>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>WebGL only.<br />
+This method changes how the texture is sampled when UV coordinates go beyond the <code>0</code> to <code>1</code> range.<br />
+For non-power-of-two textures, only <code>Phaser.Textures.WrapMode.CLAMP_TO_EDGE</code> is supported. Other wrap modes will be ignored.</p>
+</div>
+<div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">setWrap</span><span class="p">(</span><span class="nx">wrapModeS</span><span class="p">);</span>
+<span class="c1">// texture.setWrap(wrapModeS, wrapModeT);</span>
+</code></pre></div>
+<ul>
+<li><code>wrapModeS</code> : The wrap mode for the S (horizontal) axis.</li>
+<li><code>wrapModeT</code> : The wrap mode for the T (vertical) axis.<ul>
+<li><code>undefined</code> : Use the same wrap mode as <code>wrapModeS</code>.</li>
+</ul>
+</li>
+<li>Wrap modes<ul>
+<li><code>Phaser.Textures.WrapMode.CLAMP_TO_EDGE</code> : Clamp sampling to the edge pixels of the texture.</li>
+<li><code>Phaser.Textures.WrapMode.REPEAT</code> : Repeat the texture when sampling beyond the <code>0</code> to <code>1</code> range.</li>
+<li><code>Phaser.Textures.WrapMode.MIRRORED_REPEAT</code> : Repeat the texture in alternating mirrored directions.</li>
+</ul>
+</li>
+</ul>
 <h3 id="frame-object">Frame object<a class="headerlink" href="#frame-object" title="Permanent link">&para;</a></h3>
 <h4 id="get-frame">Get frame<a class="headerlink" href="#get-frame" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">getFrame</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">);</span>

@@ -7985,6 +7985,30 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#combine-color-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      Combine Color Matrix
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Combine Color Matrix">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-additions-and-multiplications" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to use additions and multiplications
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#displacement" class="md-nav__link">
     <span class="md-ellipsis">
       Displacement
@@ -8078,6 +8102,15 @@
   <a href="#remove-all-effects" class="md-nav__link">
     <span class="md-ellipsis">
       Remove all effects
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#color-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      Color matrix
     </span>
   </a>
   
@@ -15254,6 +15287,30 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#combine-color-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      Combine Color Matrix
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Combine Color Matrix">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-additions-and-multiplications" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to use additions and multiplications
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#displacement" class="md-nav__link">
     <span class="md-ellipsis">
       Displacement
@@ -15352,6 +15409,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#color-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      Color matrix
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -15387,6 +15453,7 @@
 <li><a href="#blur">Blur</a> : 3 different levels of gaussian blur (low, medium and high) and custom distance and color.</li>
 <li><a href="#bokeh">Bokeh</a> / <a href="#tilt-shift">Tilt Shift</a> : A bokeh and tiltshift effect, with intensity, contrast and distance settings.</li>
 <li><a href="#colormatrix">Color Matrix</a> : Add a ColorMatrix to any Game Object with access to all of its methods, such as <code>sepia</code>, <code>greyscale</code>, <code>lsd</code> and lots more.</li>
+<li><a href="#combine-color-matrix">Combine Color Matrix</a> : Combine channels from base and transfer textures with color matrix control.</li>
 <li><a href="#displacement">Displacement</a> : Use a displacement texture, such as a noise texture, to drastically (or subtly!) alter the appearance of a Game Object.</li>
 <li><a href="#glow">Glow</a> : Add a smooth inner or outer glow, with custom distance, strength and color.</li>
 <li><a href="#image-light">Image Light</a> : Image-based lighting from panorama environment maps and normal maps.</li>
@@ -15699,195 +15766,137 @@ Use <a href="../shader-p3fx/">p3-fx</a> to reintroduce unsupported features.</p>
 <li>Also destroy this controller.</li>
 </ul>
 </li>
+<li>Properties
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">colorMatrix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">controller</span><span class="p">.</span><span class="nx">colorMatrix</span><span class="p">;</span>
+</code></pre></div><ul>
+<li><code>colorMatrix</code> : See <a href="#color-matrix">color matrix</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="combine-color-matrix">Combine Color Matrix<a class="headerlink" href="#combine-color-matrix" title="Permanent link">&para;</a></h3>
+<p>Combine channels from the base input and a transfer texture.</p>
+<ul>
+<li>Add filter controller to game object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">gameObject</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">enableFilters</span><span class="p">()</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">filters</span><span class="p">.</span><span class="nx">internal</span><span class="p">.</span><span class="nx">addCombineColorMatrix</span><span class="p">(</span><span class="nx">texture</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Add filter controller to camera
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">camera</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">filters</span><span class="p">.</span><span class="nx">internal</span><span class="p">.</span><span class="nx">addCombineColorMatrix</span><span class="p">(</span><span class="nx">texture</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>texture</code> : Transfer texture key or texture instance.<ul>
+<li><code>undefined</code> : Use built-in <code>'__WHITE'</code> texture.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Disable filter controller
+    <div class="highlight"><pre><span></span><code><span class="nx">controller</span><span class="p">.</span><span class="nx">setActive</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+<span class="c1">// controller.active = false;</span>
+</code></pre></div></li>
+<li>Remove filter controller
+    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">filters</span><span class="p">.</span><span class="nx">internal</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">controller</span><span class="p">);</span>
+</code></pre></div>
+    <div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">filters</span><span class="p">.</span><span class="nx">internal</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">controller</span><span class="p">);</span>
+</code></pre></div><ul>
+<li>Also destroy this controller.</li>
+</ul>
+</li>
+<li>Properties
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">colorMatrixSelf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">controller</span><span class="p">.</span><span class="nx">colorMatrixSelf</span><span class="p">;</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">colorMatrixTransfer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">controller</span><span class="p">.</span><span class="nx">colorMatrixTransfer</span><span class="p">;</span>
+<span class="nx">controller</span><span class="p">.</span><span class="nx">colorMatrixTransfer</span><span class="p">;</span>
+<span class="nx">controller</span><span class="p">.</span><span class="nx">additions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="nx">r</span><span class="p">,</span><span class="w"> </span><span class="nx">g</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">];</span>
+<span class="nx">controller</span><span class="p">.</span><span class="nx">multiplications</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="nx">r</span><span class="p">,</span><span class="w"> </span><span class="nx">g</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">];</span>
+</code></pre></div><ul>
+<li><code>colorMatrixSelf</code>, <code>colorMatrixTransfer</code> : See <a href="#color-matrix">color matrix</a> </li>
+<li><code>additions</code> : Add weights of final channels. Default value is <code>[1, 1, 1, 0]</code>. See <a href="#how-to-use-additions-and-multiplications">How to use <code>additions</code> and <code>multiplications</code></a></li>
+<li><code>multiplications</code> : Multiply weights of final channels. Default value is <code>[0, 0, 0, 1]</code>. See <a href="#how-to-use-additions-and-multiplications">How to use <code>additions</code> and <code>multiplications</code></a></li>
+</ul>
+</li>
 <li>Methods<ul>
-<li>Brightness : Changes the brightness of this ColorMatrix by the given amount.
-    <div class="highlight"><pre><span></span><code><span class="nx">controller</span><span class="p">.</span><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">brightness</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">multiply</span><span class="p">);</span>
+<li>Set transfer texture
+    <div class="highlight"><pre><span></span><code><span class="nx">controller</span><span class="p">.</span><span class="nx">setTexture</span><span class="p">(</span><span class="nx">texture</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Configure common alpha transfer behavior
+    <div class="highlight"><pre><span></span><code><span class="nx">controller</span><span class="p">.</span><span class="nx">setupAlphaTransfer</span><span class="p">(</span>
+<span class="w">    </span><span class="nx">colorSelf</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">colorTransfer</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">brightnessToAlphaSelf</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">brightnessToAlphaTransfer</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">brightnessToAlphaInverseSelf</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">brightnessToAlphaInverseTransfer</span>
+<span class="p">);</span>
 </code></pre></div><ul>
-<li><code>value</code> : The amount of brightness to apply to this ColorMatrix. <code>0</code>(black)~<code>1</code>. Default value is <code>0</code>.</li>
-<li><code>multiply</code> : Multiply the resulting ColorMatrix (<code>true</code>), or set it (<code>false</code>) ?<ul>
-<li><code>true</code> : Multiply the resulting.</li>
-<li><code>false</code> : Set the resulting. Default behavior.</li>
+<li><code>colorSelf</code> : <ul>
+<li><code>true</code> : Keep color from the base image.</li>
 </ul>
 </li>
+<li><code>colorTransfer</code> :<ul>
+<li><code>true</code> : Keep color from the transfer texture.</li>
 </ul>
 </li>
-<li>Saturate : Changes the saturation of this ColorMatrix by the given amount.
-    <div class="highlight"><pre><span></span><code><span class="nx">controller</span><span class="p">.</span><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">saturate</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">multiply</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>value</code> :  The amount of saturation to apply to this ColorMatrix. Default value is <code>0</code>.</li>
-<li><code>multiply</code> : Multiply the resulting ColorMatrix (<code>true</code>), or set it (<code>false</code>) ?<ul>
-<li><code>true</code> : Multiply the resulting.</li>
-<li><code>false</code> : Set the resulting. Default behavior.</li>
+<li><code>brightnessToAlphaSelf</code> :<ul>
+<li><code>true</code> : Determine the base alpha from the base brightness</li>
 </ul>
 </li>
+<li><code>brightnessToAlphaTransfer</code> :<ul>
+<li><code>true</code> : Determine the transfer alpha from the transfer brightness.</li>
 </ul>
 </li>
-<li>Desaturate : Desaturates this ColorMatrix (removes color from it).
-    <div class="highlight"><pre><span></span><code><span class="nx">controller</span><span class="p">.</span><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">desaturate</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">multiply</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>multiply</code> : Multiply the resulting ColorMatrix (<code>true</code>), or set it (<code>false</code>) ?<ul>
-<li><code>true</code> : Multiply the resulting.</li>
-<li><code>false</code> : Set the resulting. Default behavior.</li>
+<li><code>brightnessToAlphaInverseSelf</code> :<ul>
+<li><code>true</code> : Determine the base alpha from the base brightness, inverted. This overrides <code>brightnessToAlphaSelf</code>.</li>
 </ul>
 </li>
-</ul>
-</li>
-<li>Hue : Rotates the hues of this ColorMatrix by the value given.
-    <div class="highlight"><pre><span></span><code><span class="nx">controller</span><span class="p">.</span><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">hue</span><span class="p">(</span><span class="nx">rotation</span><span class="p">,</span><span class="w"> </span><span class="nx">multiply</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>rotation</code> : The amount of hue rotation to apply to this ColorMatrix, in degrees. Default value is <code>0</code>.</li>
-<li><code>multiply</code> : Multiply the resulting ColorMatrix (<code>true</code>), or set it (<code>false</code>) ?<ul>
-<li><code>true</code> : Multiply the resulting.</li>
-<li><code>false</code> : Set the resulting. Default behavior.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Grayscale : Sets this ColorMatrix to be grayscale.
-    <div class="highlight"><pre><span></span><code><span class="nx">controller</span><span class="p">.</span><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">grayscale</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">multiply</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>value</code> : The grayscale scale <code>0</code>(black)~<code>1</code>. Default value is <code>1</code>.</li>
-<li><code>multiply</code> : Multiply the resulting ColorMatrix (<code>true</code>), or set it (<code>false</code>) ?<ul>
-<li><code>true</code> : Multiply the resulting.</li>
-<li><code>false</code> : Set the resulting. Default behavior.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>BlackWhite : Sets this ColorMatrix to be black and white.
-    <div class="highlight"><pre><span></span><code><span class="nx">controller</span><span class="p">.</span><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">blackWhite</span><span class="p">(</span><span class="nx">multiply</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>multiply</code> : Multiply the resulting ColorMatrix (<code>true</code>), or set it (<code>false</code>) ?<ul>
-<li><code>true</code> : Multiply the resulting.</li>
-<li><code>false</code> : Set the resulting. Default behavior.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Contrast : Change the contrast of this ColorMatrix by the amount given.
-    <div class="highlight"><pre><span></span><code><span class="nx">controller</span><span class="p">.</span><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">contrast</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">multiply</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>value</code> : The amount of contrast to apply to this ColorMatrix. Default value is <code>0</code>.</li>
-<li><code>multiply</code> : Multiply the resulting ColorMatrix (<code>true</code>), or set it (<code>false</code>) ?<ul>
-<li><code>true</code> : Multiply the resulting.</li>
-<li><code>false</code> : Set the resulting. Default behavior.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Negative : Converts this ColorMatrix to have negative values.
-    <div class="highlight"><pre><span></span><code><span class="nx">controller</span><span class="p">.</span><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">negative</span><span class="p">(</span><span class="nx">multiply</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>multiply</code> : Multiply the resulting ColorMatrix (<code>true</code>), or set it (<code>false</code>) ?<ul>
-<li><code>true</code> : Multiply the resulting.</li>
-<li><code>false</code> : Set the resulting. Default behavior.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>DesaturateLuminance : Apply a desaturated luminance to this ColorMatrix.
-    <div class="highlight"><pre><span></span><code><span class="nx">controller</span><span class="p">.</span><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">desaturateLuminance</span><span class="p">(</span><span class="nx">multiply</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>multiply</code> : Multiply the resulting ColorMatrix (<code>true</code>), or set it (<code>false</code>) ?<ul>
-<li><code>true</code> : Multiply the resulting.</li>
-<li><code>false</code> : Set the resulting. Default behavior.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Sepia : Applies a sepia tone to this ColorMatrix.
-    <div class="highlight"><pre><span></span><code><span class="nx">controller</span><span class="p">.</span><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">sepia</span><span class="p">(</span><span class="nx">multiply</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>multiply</code> : Multiply the resulting ColorMatrix (<code>true</code>), or set it (<code>false</code>) ?<ul>
-<li><code>true</code> : Multiply the resulting.</li>
-<li><code>false</code> : Set the resulting. Default behavior.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Night : Applies a night vision tone to this ColorMatrix.
-    <div class="highlight"><pre><span></span><code><span class="nx">controller</span><span class="p">.</span><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">night</span><span class="p">(</span><span class="nx">intensity</span><span class="p">,</span><span class="w"> </span><span class="nx">multiply</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>intensity</code> : The intensity of this effect. Default value is <code>0.1</code>.</li>
-<li><code>multiply</code> : Multiply the resulting ColorMatrix (<code>true</code>), or set it (<code>false</code>) ?<ul>
-<li><code>true</code> : Multiply the resulting.</li>
-<li><code>false</code> : Set the resulting. Default behavior.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>LSD : Applies a trippy color tone to this ColorMatrix.
-    <div class="highlight"><pre><span></span><code><span class="nx">controller</span><span class="p">.</span><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">lsd</span><span class="p">(</span><span class="nx">multiply</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>multiply</code> : Multiply the resulting ColorMatrix (<code>true</code>), or set it (<code>false</code>) ?<ul>
-<li><code>true</code> : Multiply the resulting.</li>
-<li><code>false</code> : Set the resulting. Default behavior.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Brown : Applies a brown tone to this ColorMatrix.
-    <div class="highlight"><pre><span></span><code><span class="nx">controller</span><span class="p">.</span><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">brown</span><span class="p">(</span><span class="nx">multiply</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>multiply</code> : Multiply the resulting ColorMatrix (<code>true</code>), or set it (<code>false</code>) ?<ul>
-<li><code>true</code> : Multiply the resulting.</li>
-<li><code>false</code> : Set the resulting. Default behavior.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>VintagePinhole : Applies a vintage pinhole color effect to this ColorMatrix.
-    <div class="highlight"><pre><span></span><code><span class="nx">controller</span><span class="p">.</span><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">vintagePinhole</span><span class="p">(</span><span class="nx">multiply</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>multiply</code> : Multiply the resulting ColorMatrix (<code>true</code>), or set it (<code>false</code>) ?<ul>
-<li><code>true</code> : Multiply the resulting.</li>
-<li><code>false</code> : Set the resulting. Default behavior.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Kodachrome : Applies a kodachrome color effect to this ColorMatrix.
-    <div class="highlight"><pre><span></span><code><span class="nx">controller</span><span class="p">.</span><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">kodachrome</span><span class="p">(</span><span class="nx">multiply</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>multiply</code> : Multiply the resulting ColorMatrix (<code>true</code>), or set it (<code>false</code>) ?<ul>
-<li><code>true</code> : Multiply the resulting.</li>
-<li><code>false</code> : Set the resulting. Default behavior.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Technicolor : Applies a technicolor color effect to this ColorMatrix.
-    <div class="highlight"><pre><span></span><code><span class="nx">controller</span><span class="p">.</span><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">technicolor</span><span class="p">(</span><span class="nx">multiply</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>multiply</code> : Multiply the resulting ColorMatrix (<code>true</code>), or set it (<code>false</code>) ?<ul>
-<li><code>true</code> : Multiply the resulting.</li>
-<li><code>false</code> : Set the resulting. Default behavior.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Polaroid : Applies a polaroid color effect to this ColorMatrix.
-    <div class="highlight"><pre><span></span><code><span class="nx">controller</span><span class="p">.</span><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">polaroid</span><span class="p">(</span><span class="nx">multiply</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>multiply</code> : Multiply the resulting ColorMatrix (<code>true</code>), or set it (<code>false</code>) ?<ul>
-<li><code>true</code> : Multiply the resulting.</li>
-<li><code>false</code> : Set the resulting. Default behavior.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>ShiftToBGR : Shifts the values of this ColorMatrix into BGR order.
-    <div class="highlight"><pre><span></span><code><span class="nx">controller</span><span class="p">.</span><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">shiftToBGR</span><span class="p">(</span><span class="nx">multiply</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>multiply</code> : Multiply the resulting ColorMatrix (<code>true</code>), or set it (<code>false</code>) ?<ul>
-<li><code>true</code> : Multiply the resulting.</li>
-<li><code>false</code> : Set the resulting. Default behavior.</li>
+<li><code>brightnessToAlphaInverseTransfer</code> :<ul>
+<li><code>true</code> : Determine the transfer alpha from the transfer brightness, inverted. This overrides <code>brightnessToAlphaTransfer</code>.</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 </li>
+</ul>
+<h4 id="how-to-use-additions-and-multiplications">How to use <code>additions</code> and <code>multiplications</code><a class="headerlink" href="#how-to-use-additions-and-multiplications" title="Permanent link">&para;</a></h4>
+<p><code>additions</code> and <code>multiplications</code> control how the processed <code>self</code> and <code>transfer</code> results are merged per channel.</p>
+<p>For each output channel (<code>r</code>, <code>g</code>, <code>b</code>, <code>a</code>), the filter computes:</p>
+<div class="highlight"><pre><span></span><code><span class="nx">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">self</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">transfer</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">additions</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="nx">self</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">transfer</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">multiplications</span><span class="p">;</span>
+</code></pre></div>
+<p>This means:</p>
+<ul>
+<li><code>additions</code> controls the additive part of the final result.</li>
+<li><code>multiplications</code> controls the multiplicative part of the final result.</li>
+<li>Each array entry maps to one channel: <code>[r, g, b, a]</code>.</li>
+<li>A value of <code>1</code> keeps that contribution; a value of <code>0</code> disables it.</li>
+</ul>
+<p>Examples:</p>
+<ul>
+<li>
+<p><code>additions = [1, 1, 1, 1]</code>, <code>multiplications = [0, 0, 0, 0]</code>
+  Use when all channels should be combined by addition. Useful for overlay-like or glow-like texture merging.</p>
+</li>
+<li>
+<p><code>additions = [0, 0, 0, 0]</code>, <code>multiplications = [1, 1, 1, 1]</code>
+  Use when all channels should be combined by multiplication. Useful for masking, darkening, or intersection-like blending.</p>
+</li>
+<li>
+<p><code>additions = [1, 1, 1, 0]</code>, <code>multiplications = [0, 0, 0, 1]</code>
+  Use when RGB should be added, but alpha should be multiplied. This is useful when combining color from both textures while keeping visibility limited by both alpha channels.</p>
+</li>
+<li>
+<p><code>additions = [0, 0, 0, 1]</code>, <code>multiplications = [1, 1, 1, 0]</code>
+  Use when RGB should be multiplied, but alpha should be added. This is useful when a transfer texture acts like a lightmap or tint mask, while alpha remains more permissive.</p>
+</li>
+<li>
+<p>RGB from <code>self</code>, alpha from <code>transfer</code>
+  A common setup when you want to preserve the base color but use another texture to define transparency, such as applying an external alpha mask.</p>
+</li>
+</ul>
+<p>A simple rule of thumb:</p>
+<ul>
+<li>Use <code>addition</code> when you want to layer or expand visible contribution.</li>
+<li>Use <code>multiplication</code> when you want to restrict, mask, or darken the result.</li>
 </ul>
 <h3 id="displacement">Displacement<a class="headerlink" href="#displacement" title="Permanent link">&para;</a></h3>
 <ul>
@@ -16346,6 +16355,245 @@ Use <a href="../shader-p3fx/">p3-fx</a> to reintroduce unsupported features.</p>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">filters</span><span class="p">.</span><span class="nx">internal</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
 </code></pre></div></p>
+<h3 id="color-matrix">Color matrix<a class="headerlink" href="#color-matrix" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Brightness : Changes the brightness of this ColorMatrix by the given amount.
+    <div class="highlight"><pre><span></span><code><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">brightness</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">multiply</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>value</code> : The amount of brightness to apply to this ColorMatrix. <code>0</code>(black)~<code>1</code>. Default value is <code>0</code>.</li>
+<li><code>multiply</code> : Multiply the resulting ColorMatrix (<code>true</code>), or set it (<code>false</code>) ?<ul>
+<li><code>true</code> : Multiply the resulting.</li>
+<li><code>false</code> : Set the resulting. Default behavior.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Saturate : Changes the saturation of this ColorMatrix by the given amount.
+    <div class="highlight"><pre><span></span><code><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">saturate</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">multiply</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>value</code> :  The amount of saturation to apply to this ColorMatrix. Default value is <code>0</code>.</li>
+<li><code>multiply</code> : Multiply the resulting ColorMatrix (<code>true</code>), or set it (<code>false</code>) ?<ul>
+<li><code>true</code> : Multiply the resulting.</li>
+<li><code>false</code> : Set the resulting. Default behavior.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Desaturate : Desaturates this ColorMatrix (removes color from it).
+    <div class="highlight"><pre><span></span><code><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">desaturate</span><span class="p">(</span><span class="nx">multiply</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>multiply</code> : Multiply the resulting ColorMatrix (<code>true</code>), or set it (<code>false</code>) ?<ul>
+<li><code>true</code> : Multiply the resulting.</li>
+<li><code>false</code> : Set the resulting. Default behavior.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Hue : Rotates the hues of this ColorMatrix by the value given.
+    <div class="highlight"><pre><span></span><code><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">hue</span><span class="p">(</span><span class="nx">rotation</span><span class="p">,</span><span class="w"> </span><span class="nx">multiply</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>rotation</code> : The amount of hue rotation to apply to this ColorMatrix, in degrees. Default value is <code>0</code>.</li>
+<li><code>multiply</code> : Multiply the resulting ColorMatrix (<code>true</code>), or set it (<code>false</code>) ?<ul>
+<li><code>true</code> : Multiply the resulting.</li>
+<li><code>false</code> : Set the resulting. Default behavior.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Grayscale : Sets this ColorMatrix to be grayscale.
+    <div class="highlight"><pre><span></span><code><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">grayscale</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">multiply</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>value</code> : The grayscale scale <code>0</code>(black)~<code>1</code>. Default value is <code>1</code>.</li>
+<li><code>multiply</code> : Multiply the resulting ColorMatrix (<code>true</code>), or set it (<code>false</code>) ?<ul>
+<li><code>true</code> : Multiply the resulting.</li>
+<li><code>false</code> : Set the resulting. Default behavior.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>BlackWhite : Sets this ColorMatrix to be black and white.
+    <div class="highlight"><pre><span></span><code><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">blackWhite</span><span class="p">(</span><span class="nx">multiply</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>multiply</code> : Multiply the resulting ColorMatrix (<code>true</code>), or set it (<code>false</code>) ?<ul>
+<li><code>true</code> : Multiply the resulting.</li>
+<li><code>false</code> : Set the resulting. Default behavior.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Black : Sets this ColorMatrix to be black, only preserving alpha.
+    <div class="highlight"><pre><span></span><code><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">black</span><span class="p">(</span><span class="nx">multiply</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>multiply</code> : Multiply the resulting ColorMatrix (<code>true</code>), or set it (<code>false</code>) ?<ul>
+<li><code>true</code> : Multiply the resulting.</li>
+<li><code>false</code> : Set the resulting. Default behavior.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Contrast : Change the contrast of this ColorMatrix by the amount given.
+    <div class="highlight"><pre><span></span><code><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">contrast</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">multiply</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>value</code> : The amount of contrast to apply to this ColorMatrix. Default value is <code>0</code>.</li>
+<li><code>multiply</code> : Multiply the resulting ColorMatrix (<code>true</code>), or set it (<code>false</code>) ?<ul>
+<li><code>true</code> : Multiply the resulting.</li>
+<li><code>false</code> : Set the resulting. Default behavior.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Negative : Converts this ColorMatrix to have negative values.
+    <div class="highlight"><pre><span></span><code><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">negative</span><span class="p">(</span><span class="nx">multiply</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>multiply</code> : Multiply the resulting ColorMatrix (<code>true</code>), or set it (<code>false</code>) ?<ul>
+<li><code>true</code> : Multiply the resulting.</li>
+<li><code>false</code> : Set the resulting. Default behavior.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>DesaturateLuminance : Apply a desaturated luminance to this ColorMatrix.
+    <div class="highlight"><pre><span></span><code><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">desaturateLuminance</span><span class="p">(</span><span class="nx">multiply</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>multiply</code> : Multiply the resulting ColorMatrix (<code>true</code>), or set it (<code>false</code>) ?<ul>
+<li><code>true</code> : Multiply the resulting.</li>
+<li><code>false</code> : Set the resulting. Default behavior.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Sepia : Applies a sepia tone to this ColorMatrix.
+    <div class="highlight"><pre><span></span><code><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">sepia</span><span class="p">(</span><span class="nx">multiply</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>multiply</code> : Multiply the resulting ColorMatrix (<code>true</code>), or set it (<code>false</code>) ?<ul>
+<li><code>true</code> : Multiply the resulting.</li>
+<li><code>false</code> : Set the resulting. Default behavior.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Night : Applies a night vision tone to this ColorMatrix.
+    <div class="highlight"><pre><span></span><code><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">night</span><span class="p">(</span><span class="nx">intensity</span><span class="p">,</span><span class="w"> </span><span class="nx">multiply</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>intensity</code> : The intensity of this effect. Default value is <code>0.1</code>.</li>
+<li><code>multiply</code> : Multiply the resulting ColorMatrix (<code>true</code>), or set it (<code>false</code>) ?<ul>
+<li><code>true</code> : Multiply the resulting.</li>
+<li><code>false</code> : Set the resulting. Default behavior.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>LSD : Applies a trippy color tone to this ColorMatrix.
+    <div class="highlight"><pre><span></span><code><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">lsd</span><span class="p">(</span><span class="nx">multiply</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>multiply</code> : Multiply the resulting ColorMatrix (<code>true</code>), or set it (<code>false</code>) ?<ul>
+<li><code>true</code> : Multiply the resulting.</li>
+<li><code>false</code> : Set the resulting. Default behavior.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Brown : Applies a brown tone to this ColorMatrix.
+    <div class="highlight"><pre><span></span><code><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">brown</span><span class="p">(</span><span class="nx">multiply</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>multiply</code> : Multiply the resulting ColorMatrix (<code>true</code>), or set it (<code>false</code>) ?<ul>
+<li><code>true</code> : Multiply the resulting.</li>
+<li><code>false</code> : Set the resulting. Default behavior.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>VintagePinhole : Applies a vintage pinhole color effect to this ColorMatrix.
+    <div class="highlight"><pre><span></span><code><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">vintagePinhole</span><span class="p">(</span><span class="nx">multiply</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>multiply</code> : Multiply the resulting ColorMatrix (<code>true</code>), or set it (<code>false</code>) ?<ul>
+<li><code>true</code> : Multiply the resulting.</li>
+<li><code>false</code> : Set the resulting. Default behavior.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Kodachrome : Applies a kodachrome color effect to this ColorMatrix.
+    <div class="highlight"><pre><span></span><code><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">kodachrome</span><span class="p">(</span><span class="nx">multiply</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>multiply</code> : Multiply the resulting ColorMatrix (<code>true</code>), or set it (<code>false</code>) ?<ul>
+<li><code>true</code> : Multiply the resulting.</li>
+<li><code>false</code> : Set the resulting. Default behavior.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Technicolor : Applies a technicolor color effect to this ColorMatrix.
+    <div class="highlight"><pre><span></span><code><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">technicolor</span><span class="p">(</span><span class="nx">multiply</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>multiply</code> : Multiply the resulting ColorMatrix (<code>true</code>), or set it (<code>false</code>) ?<ul>
+<li><code>true</code> : Multiply the resulting.</li>
+<li><code>false</code> : Set the resulting. Default behavior.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Polaroid : Applies a polaroid color effect to this ColorMatrix.
+    <div class="highlight"><pre><span></span><code><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">polaroid</span><span class="p">(</span><span class="nx">multiply</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>multiply</code> : Multiply the resulting ColorMatrix (<code>true</code>), or set it (<code>false</code>) ?<ul>
+<li><code>true</code> : Multiply the resulting.</li>
+<li><code>false</code> : Set the resulting. Default behavior.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>AlphaToBrightness : Replaces color with a grayscale version of alpha, where black represents transparency and white represents opacity, and sets alpha to full.
+    <div class="highlight"><pre><span></span><code><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">alphaToBrightness</span><span class="p">(</span><span class="nx">multiply</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>multiply</code> : Multiply the resulting ColorMatrix (<code>true</code>), or set it (<code>false</code>) ?<ul>
+<li><code>true</code> : Multiply the resulting.</li>
+<li><code>false</code> : Set the resulting. Default behavior.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>AlphaToBrightnessInverse : Replaces color with a grayscale version of alpha, where white represents transparency and black represents opacity, and sets alpha to full.
+    <div class="highlight"><pre><span></span><code><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">alphaToBrightnessInverse</span><span class="p">(</span><span class="nx">multiply</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>multiply</code> : Multiply the resulting ColorMatrix (<code>true</code>), or set it (<code>false</code>) ?<ul>
+<li><code>true</code> : Multiply the resulting.</li>
+<li><code>false</code> : Set the resulting. Default behavior.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>BrightnessToAlpha : Preserves RGB, but replaces alpha with the brightness of the color.
+    <div class="highlight"><pre><span></span><code><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">brightnessToAlpha</span><span class="p">(</span><span class="nx">multiply</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>multiply</code> : Multiply the resulting ColorMatrix (<code>true</code>), or set it (<code>false</code>) ?<ul>
+<li><code>true</code> : Multiply the resulting.</li>
+<li><code>false</code> : Set the resulting. Default behavior.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>BrightnessToAlphaInverse : Preserves RGB, but replaces alpha with the inverted brightness of the color.
+    <div class="highlight"><pre><span></span><code><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">brightnessToAlphaInverse</span><span class="p">(</span><span class="nx">multiply</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>multiply</code> : Multiply the resulting ColorMatrix (<code>true</code>), or set it (<code>false</code>) ?<ul>
+<li><code>true</code> : Multiply the resulting.</li>
+<li><code>false</code> : Set the resulting. Default behavior.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>ShiftToBGR : Shifts the values of this ColorMatrix into BGR order.
+    <div class="highlight"><pre><span></span><code><span class="nx">colorMatrix</span><span class="p">.</span><span class="nx">shiftToBGR</span><span class="p">(</span><span class="nx">multiply</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>multiply</code> : Multiply the resulting ColorMatrix (<code>true</code>), or set it (<code>false</code>) ?<ul>
+<li><code>true</code> : Multiply the resulting.</li>
+<li><code>false</code> : Set the resulting. Default behavior.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
 
 

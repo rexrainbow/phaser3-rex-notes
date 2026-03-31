@@ -16052,7 +16052,8 @@ layerB --&gt; tilesB["tiles"]</code></pre>
 <span class="w">    </span><span class="c1">// scene,</span>
 <span class="w">    </span><span class="c1">// container: null,</span>
 <span class="w">    </span><span class="c1">// key: null,</span>
-<span class="w">    </span><span class="c1">// frame: null</span>
+<span class="w">    </span><span class="c1">// frame: null,</span>
+<span class="w">    </span><span class="c1">// sortByY: false,</span>
 <span class="p">},</span><span class="w"> </span><span class="nx">useTileset</span><span class="p">);</span>
 </code></pre></div>
     or
@@ -16069,6 +16070,7 @@ layerB --&gt; tilesB["tiles"]</code></pre>
 <li><code>scene</code> : A Scene reference, passed to the Game Objects constructors. Default is map's scene.</li>
 <li><code>container</code> : Optional Container to which the Game Objects are added.</li>
 <li><code>key</code>, <code>frame</code> : Optional key of a Texture to be used.</li>
+<li><code>sortByY</code> : Sort objects in layer by their y position. Objects with a higher y are displayed above objects with a lower y.</li>
 </ul>
 </li>
 <li>Create game objects by tile
