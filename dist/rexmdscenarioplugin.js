@@ -58317,8 +58317,8 @@ void main (void) {
 	        cellTLY = startCellTLY;
 	    while ((cellTLY < bottomBound) && (cellIdx !== null) && (cellIdx <= lastIdx)) {
 	        var cell = table.getCell(cellIdx, true);
-	        this.visibleCells.set(cell);
-	        if (!this.preVisibleCells.contains(cell)) {
+	        this.visibleCells.add(cell);
+	        if (!this.preVisibleCells.has(cell)) {
 	            this.showCell(cell);
 	        }
 
