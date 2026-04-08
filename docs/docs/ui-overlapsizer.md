@@ -258,13 +258,20 @@ sizer.add(child, key, align, padding, expand, minWidth, minHeight, offsetX, offs
         }
         ```
 - `expand` :
-    - Boolean value
-        - `true` : Expand width and height of child. Default value.
-        - `false` : Don't expand width or height of child.
-    - A plain object
-        - `{width: true}` : Only expand width of child.
-        - `{height: true}` : only expand height of child.
-        - `{width: true, height: true}` : Expand width and height of child.
+    - `true`, or `1` : Expand width and height of child. Default value.
+    - `false`, or `0` : Keep current width and height of child.
+    - Other number value : Expand width and height of child via `parent.width * expand` and `parent.height * expand` 
+    - A plain object, to expand width or height separately
+        ```javascript
+        {
+            width: false,
+            height: false
+        }
+        ```
+        - `width`, `height` :
+            - `true`, or `1` : Expand width and height of child.
+            - `false`, or `0` : Keep current width and height of child. Default value.
+            - Other number value : Expand width and height of child via `parent.width * expand` and `parent.height * expand` 
 - `minWidth` : Minimum width of normal (non-sizer) game object, used when expand width mode. Default value is current display width.
 - `minHeight` : Minimum height of normal (non-sizer) game object, used when expand height mode. Default value is current display height.
 - `aspectRatio` : Keep aspect ratio after layout.

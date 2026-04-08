@@ -8,6 +8,19 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 const ALIGN_CENTER = Phaser.Display.Align.CENTER;
 const UUID = Phaser.Utils.String.UUID;
 
+var NormalizeExpand = function (value) {
+    var expandRatio;
+    if (value === true) {
+        expandRatio = 1;
+    } else if ((typeof (value) === 'number') && isFinite(value) && (value > 0)) {
+        expandRatio = value;
+    } else {
+        expandRatio = 0;
+    }
+
+    return expandRatio;
+}
+
 var Add = function (gameObject, childKey, align, padding, expand, minWidth, minHeight, offsetX, offsetY, aspectRatio) {
     var offsetOriginX, offsetOriginY;
 
@@ -98,9 +111,10 @@ var Add = function (gameObject, childKey, align, padding, expand, minWidth, minH
     config.padding = GetBoundsConfig(padding);
 
     if (IsPlainObject(expand)) {
-        config.expandWidth = GetValue(expand, 'width', false);
-        config.expandHeight = GetValue(expand, 'height', false);
+        config.expandWidth = NormalizeExpand(GetValue(expand, 'width', false));
+        config.expandHeight = NormalizeExpand(GetValue(expand, 'height', false));
     } else {
+        expand = NormalizeExpand(expand);
         config.expandWidth = expand;
         config.expandHeight = expand;
     }

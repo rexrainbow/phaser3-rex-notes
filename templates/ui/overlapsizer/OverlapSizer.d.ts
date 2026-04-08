@@ -18,6 +18,8 @@ declare namespace OverlapSizer {
      */
     type PaddingTypes = GetBoundsConfig.PaddingConfigType;
 
+    type ExpandType = boolean | number;
+
     interface IConfig extends BaseSizer.IConfig {
         /**
          * Initial x position.
@@ -73,16 +75,16 @@ declare namespace OverlapSizer {
         /**
          * Expand settings.
          */
-        expand?: boolean |
+        expand?: ExpandType |
         {
             /**
              * Expand width.
              */
-            width?: boolean,
+            width?: ExpandType,
             /**
              * Expand height.
              */
-            height?: boolean,
+            height?: ExpandType,
         },
 
         /**
@@ -179,16 +181,16 @@ declare class OverlapSizer extends BaseSizer {
         key?: string,
         align?: OverlapSizer.AlignTypes,
         padding?: OverlapSizer.PaddingTypes,
-        expand?: boolean |
+        expand?: OverlapSizer.ExpandType |
         {
             /**
              * Expand width.
              */
-            width?: boolean,
+            width?: OverlapSizer.ExpandType,
             /**
              * Expand height.
              */
-            height?: boolean,
+            height?: OverlapSizer.ExpandType,
         },
         minWidth?: number,
         minHeight?: number,
