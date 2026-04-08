@@ -1,9 +1,5 @@
 import Canvas from '../canvas/Canvas.js';
-import SetChart from './SetChart.js';
-import GetChartDataset from './GetChartDataset.js';
-import GetChartData from './GetChartData.js';
-import SetChartData from './SetChartData.js';
-import UpdateChart from './UpdateChart.js';
+import methods from './methods/Methods.js';
 
 // This plugin does not contain chart.js
 // Load chart.js in preload stage -
@@ -50,13 +46,6 @@ class Chart extends Canvas {
     }
 }
 
-var methods = {
-    setChart: SetChart,
-    getChartDataset: GetChartDataset,
-    getChartData: GetChartData,
-    setChartData: SetChartData,
-    updateChart: UpdateChart,
-}
 Object.assign(
     Chart.prototype,
     methods
