@@ -7,7 +7,11 @@ import methods from './methods/Methods.js';
 
 class Chart extends Canvas {
     constructor(scene, x, y, width, height, config) {
-        super(scene, x, y, width, height);
+        if (config === undefined) {
+            config = {};
+        }
+        var resolution = config.resolution;
+        super(scene, x, y, width, height, resolution);
         this.type = 'rexChart';
         this.chart = undefined;
 
