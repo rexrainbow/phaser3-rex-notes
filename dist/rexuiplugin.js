@@ -43690,10 +43690,11 @@
 
         var childWidth;
         var childConfig = child.rexSizer;
-        if (childConfig.expandWidth) {
+        var expandWidth = childConfig.expandWidth;
+        if (expandWidth) {
             var innerWidth = parentWidth - ((this.space.left + this.space.right) * this.scaleX);
             var padding = childConfig.padding;
-            childWidth = innerWidth - ((padding.left + padding.right) * this.scaleX);
+            childWidth = (innerWidth - ((padding.left + padding.right) * this.scaleX)) * expandWidth;
         }
         return childWidth;
     };
@@ -43705,10 +43706,11 @@
 
         var childHeight;
         var childConfig = child.rexSizer;
-        if (childConfig.expandHeight) {
+        var expandHeight = childConfig.expandHeight;
+        if (expandHeight) {
             var innerHeight = parentHeight - ((this.space.top + this.space.bottom) * this.scaleY);
             var padding = childConfig.padding;
-            childHeight = innerHeight - ((padding.top + padding.bottom) * this.scaleY);
+            childHeight = (innerHeight - ((padding.top + padding.bottom) * this.scaleY)) * expandHeight;
         }
         return childHeight;
     };
@@ -43852,6 +43854,19 @@
     const ALIGN_CENTER$3 = Phaser.Display.Align.CENTER;
     const UUID$3 = Phaser.Utils.String.UUID;
 
+    var NormalizeExpand = function (value) {
+        var expandRatio;
+        if (value === true) {
+            expandRatio = 1;
+        } else if ((typeof (value) === 'number') && isFinite(value) && (value > 0)) {
+            expandRatio = value;
+        } else {
+            expandRatio = 0;
+        }
+
+        return expandRatio;
+    };
+
     var Add$7 = function (gameObject, childKey, align, padding, expand, minWidth, minHeight, offsetX, offsetY, aspectRatio) {
         var offsetOriginX, offsetOriginY;
 
@@ -43942,9 +43957,10 @@
         config.padding = GetBoundsConfig$1(padding);
 
         if (IsPlainObject$w(expand)) {
-            config.expandWidth = GetValue$2O(expand, 'width', false);
-            config.expandHeight = GetValue$2O(expand, 'height', false);
+            config.expandWidth = NormalizeExpand(GetValue$2O(expand, 'width', false));
+            config.expandHeight = NormalizeExpand(GetValue$2O(expand, 'height', false));
         } else {
+            expand = NormalizeExpand(expand);
             config.expandWidth = expand;
             config.expandHeight = expand;
         }
@@ -52207,13 +52223,30 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
         return this;
     };
 
+    var methods$l = {
+        setChart: SetChart,
+        getChartDataset: GetChartDataset,
+        getChartData: GetChartData,
+        setChartData: SetChartData,
+        updateChart: UpdateChart,
+    };
+
     // This plugin does not contain chart.js
     // Load chart.js in preload stage -
     // scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/Chart.min.js');
 
+
+    var IsChartJsV2 = function (chart) {
+        return chart.resize.length === 1;
+    };
+
     let Chart$1 = class Chart extends Canvas {
         constructor(scene, x, y, width, height, config) {
-            super(scene, x, y, width, height);
+            if (config === undefined) {
+                config = {};
+            }
+            var resolution = config.resolution;
+            super(scene, x, y, width, height, resolution);
             this.type = 'rexChart';
             this.chart = undefined;
 
@@ -52242,23 +52275,25 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.
             super.resize(width, height);
 
             if (this.chart) {
+                var targetWidth = this.canvas.width;
+                var targetHeight = this.canvas.height;
+                var aspectRatio = (targetHeight) ? targetWidth / targetHeight : null;
                 var chart = this.chart;
-                chart.height = this.canvas.height;
-                chart.width = this.canvas.width;
-                chart.aspectRatio = (chart.height) ? chart.width / chart.height : null;
+
+                chart.width = targetWidth;
+                chart.height = targetHeight;
+                if (IsChartJsV2(chart)) { // v2                
+                    chart.aspectRatio = aspectRatio;
+                } else { // v3
+                    chart.options.aspectRatio = aspectRatio;
+                }
+
                 chart.update();
             }
             return this;
         }
     };
 
-    var methods$l = {
-        setChart: SetChart,
-        getChartDataset: GetChartDataset,
-        getChartData: GetChartData,
-        setChartData: SetChartData,
-        updateChart: UpdateChart,
-    };
     Object.assign(
         Chart$1.prototype,
         methods$l

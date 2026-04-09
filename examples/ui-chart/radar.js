@@ -31,128 +31,135 @@ class Demo extends Phaser.Scene {
             E: 50,
             F: 60,
         }
-        var card = new Card(this, 400, 300, data)
-            .layout();
+        var card = CreatePanel(this, 400, 300, 400, 500, data)
+            .layout()
+            .drawBounds(this.add.graphics(), 0xff0000)
 
     }
 
     update() { }
 }
 
-class Card extends RexPlugins.UI.Sizer {
-    constructor(scene, x, y, data) {
-        var background = scene.rexUI.add.roundRectangle(0, 0, 0, 0, 20, COLOR_MAIN);
+var CreateHeader = function (scene, name, title) {
+    var nameColor = Phaser.Display.Color.IntegerToColor(COLOR_LIGHT);
+    var titleColor = Phaser.Display.Color.IntegerToColor(COLOR_DARK);
+    var icon = scene.rexUI.add.roundRectangle(0, 0, 80, 80, 20, COLOR_LIGHT);
+    var nameText = scene.add.text(0, 0, name, {
+        fontSize: 28,
+        color: GetRGBAString(nameColor, 1),
+    });
+    var titleText = scene.add.text(0, 0, title, {
+        fontSize: 18,
+        fontStyle: 'italic',
+        color: GetRGBAString(titleColor, 1),
+    });
 
-        var nameColor = Phaser.Display.Color.IntegerToColor(COLOR_LIGHT);
-        var titleColor = Phaser.Display.Color.IntegerToColor(COLOR_DARK);
-        var icon = scene.rexUI.add.roundRectangle(0, 0, 80, 80, 20, COLOR_LIGHT);
-        var nameText = scene.add.text(0, 0, '', {
-            fontSize: 28,
-            color: GetRGBAString(nameColor, 1),
-        });
-        var titleText = scene.add.text(0, 0, '', {
-            fontSize: 18,
-            fontStyle: 'italic',
-            color: GetRGBAString(titleColor, 1),
-        });
+    var header = scene.rexUI.add.sizer({
+        orientation: 'x'
+    })
+        .add(icon,
+            { align: 'center', expand: false }
+        )
+        .add(
+            scene.rexUI.add.sizer({
+                orientation: 'y'
+            })
+                .add(
+                    nameText,
+                    { align: 'left', padding: { bottom: 10 }, expand: false }
+                )
+                .addSpace()
+                .add(
+                    titleText,
+                    { align: 'left', expand: false }
+                ),
 
-        var dataColor = Phaser.Display.Color.IntegerToColor(COLOR_LIGHT);
-        var gridColor = Phaser.Display.Color.IntegerToColor(COLOR_DARK);
-        var attributesChart = scene.rexUI.add.chart(0, 0, 240, 240, {
-            type: 'radar',
-            data: {
-                labels: ['A', 'B', 'C', 'D', 'E', 'F'],
-                datasets: [
-                    {
-                        backgroundColor: GetRGBAString(dataColor, 0.5),
-                        borderColor: GetRGBAString(dataColor, 1),
-                        pointBackgroundColor: GetRGBAString(dataColor, 1),
-                        data: [0, 0, 0, 0, 0]
-                    },
-                ]
-            },
-            options: {
-                legend: {
-                    display: false,
+            { proportion: 1, expand: true, padding: { left: 10 } }
+        )
+
+    return header;
+}
+
+var CreateRadarChart = function (scene, labels, data) {
+    var dataColor = Phaser.Display.Color.IntegerToColor(COLOR_LIGHT);
+    var gridColor = Phaser.Display.Color.IntegerToColor(COLOR_DARK);
+    var chart = scene.rexUI.add.chart(0, 0, 100, 100, {
+        type: 'radar',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    backgroundColor: GetRGBAString(dataColor, 0.5),
+                    borderColor: GetRGBAString(dataColor, 1),
+                    pointBackgroundColor: GetRGBAString(dataColor, 1),
+                    data: data
                 },
-                scale: {
-                    ticks: {
-                        min: 0,
-                        max: 100,
-                        fontColor: GetRGBAString(gridColor, 1),
-                        showLabelBackdrop: false,
-                    },
-                    pointLabels: {
-                        fontColor: GetRGBAString(gridColor, 1),
-                    },
-                    angleLines: {
-                        color: GetRGBAString(gridColor, 1),
-                    },
-                    gridLines: {
-                        color: GetRGBAString(gridColor, 1),
-                    }
+            ]
+        },
+        options: {
+            legend: {
+                display: false,
+            },
+            scale: {
+                ticks: {
+                    min: 0,
+                    max: 100,
+                    fontColor: GetRGBAString(gridColor, 1),
+                    showLabelBackdrop: false,
+                },
+                pointLabels: {
+                    fontColor: GetRGBAString(gridColor, 1),
+                    fontSize: 24
+                },
+                angleLines: {
+                    color: GetRGBAString(gridColor, 1),
+                },
+                gridLines: {
+                    color: GetRGBAString(gridColor, 1),
                 }
-            }
-        });
-
-        var header = scene.rexUI.add.sizer({
-            orientation: 'x'
-        })
-            .add(icon,
-                { align: 'center', padding: { right: 10 }, expand: false }
-            )
-            .add(
-                scene.rexUI.add.sizer({
-                    orientation: 'y'
-                })
-                    .add(
-                        nameText,
-                        { align: 'left', padding: { bottom: 10 }, expand: false }
-                    )
-                    .add(
-                        titleText,
-                        { align: 'left', expand: false }
-                    )
-            )
-
-        super(scene, {
-            x: x, y: y,
-            orientation: 'y',
-            space: { left: 20, right: 20, top: 20, bottom: 20, item: 10 }
-        });
-
-        this
-            .addBackground(background)
-            .add(
-                header,
-                { align: 'left', expand: false }
-            )
-            .add(
-                attributesChart,
-                { align: 'center', expand: false }
-            )
-
-        this.addChildrenMap('icon', icon);
-        this.addChildrenMap('name', nameText);
-        this.addChildrenMap('title', titleText);
-        this.addChildrenMap('attributes', attributesChart);
-
-        this.updateData(data);
-    }
-
-    updateData(data) {
-        this.getElement('name').text = GetValue(data, 'name', 'Name');
-        this.getElement('title').text = GetValue(data, 'title', 'Title');
-
-        var chart = this.getElement('attributes').chart;
-        var labels = chart.data.labels;
-        var dataset = chart.data.datasets[0].data;
-        for (var i = 0, cnt = labels.length; i < cnt; i++) {
-            dataset[i] = GetValue(data, labels[i], 0);
+            },
         }
-        chart.update();
-        return this;
+    });
+
+    return chart;
+}
+
+var CreatePanel = function (scene, x, y, width, height, data) {
+    var name = data.name || 'Name';
+    var title = data.title || 'Title';
+    delete data.name;
+    delete data.title;
+
+    var chartLabels = [];
+    var chartData = [];
+    for (var key in data) {
+        chartLabels.push(key);
+        chartData.push(data[key]);
     }
+
+    var background = scene.rexUI.add.roundRectangle(0, 0, 0, 0, 20, COLOR_MAIN);
+
+    var chart = CreateRadarChart(scene, chartLabels, chartData);
+
+    var header = CreateHeader(scene, name, title);
+
+    var panel = scene.rexUI.add.sizer({
+        x: x, y: y,
+        width: width, height: height,
+        orientation: 'y',
+        space: { left: 20, right: 20, top: 20, bottom: 20, item: 10 }
+    })
+        .addBackground(background)
+        .add(
+            header,
+            { align: 'left', expand: true }
+        )
+        .add(
+            chart,
+            { align: 'center', proportion: 1, expand: true }
+        )
+
+    return panel;
 }
 
 var GetRGBAString = function (color, alpha) {
