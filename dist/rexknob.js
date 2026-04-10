@@ -12503,10 +12503,11 @@
 
         var childWidth;
         var childConfig = child.rexSizer;
-        if (childConfig.expandWidth) {
+        var expandWidth = childConfig.expandWidth;
+        if (expandWidth) {
             var innerWidth = parentWidth - ((this.space.left + this.space.right) * this.scaleX);
             var padding = childConfig.padding;
-            childWidth = innerWidth - ((padding.left + padding.right) * this.scaleX);
+            childWidth = (innerWidth - ((padding.left + padding.right) * this.scaleX)) * expandWidth;
         }
         return childWidth;
     };
@@ -12518,10 +12519,11 @@
 
         var childHeight;
         var childConfig = child.rexSizer;
-        if (childConfig.expandHeight) {
+        var expandHeight = childConfig.expandHeight;
+        if (expandHeight) {
             var innerHeight = parentHeight - ((this.space.top + this.space.bottom) * this.scaleY);
             var padding = childConfig.padding;
-            childHeight = innerHeight - ((padding.top + padding.bottom) * this.scaleY);
+            childHeight = (innerHeight - ((padding.top + padding.bottom) * this.scaleY)) * expandHeight;
         }
         return childHeight;
     };
@@ -12672,6 +12674,19 @@
     const ALIGN_CENTER = Phaser.Display.Align.CENTER;
     const UUID$1 = Phaser.Utils.String.UUID;
 
+    var NormalizeExpand = function (value) {
+        var expandRatio;
+        if (value === true) {
+            expandRatio = 1;
+        } else if ((typeof (value) === 'number') && isFinite(value) && (value > 0)) {
+            expandRatio = value;
+        } else {
+            expandRatio = 0;
+        }
+
+        return expandRatio;
+    };
+
     var Add = function (gameObject, childKey, align, padding, expand, minWidth, minHeight, offsetX, offsetY, aspectRatio) {
         var offsetOriginX, offsetOriginY;
 
@@ -12762,9 +12777,10 @@
         config.padding = GetBoundsConfig(padding);
 
         if (IsPlainObject$2(expand)) {
-            config.expandWidth = GetValue$4(expand, 'width', false);
-            config.expandHeight = GetValue$4(expand, 'height', false);
+            config.expandWidth = NormalizeExpand(GetValue$4(expand, 'width', false));
+            config.expandHeight = NormalizeExpand(GetValue$4(expand, 'height', false));
         } else {
+            expand = NormalizeExpand(expand);
             config.expandWidth = expand;
             config.expandHeight = expand;
         }
