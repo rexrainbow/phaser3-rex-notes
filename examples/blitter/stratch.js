@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import BlitterPlugin from '../../plugins/blitter-plugin.js';
 import NinePatchPlugin from '../../plugins/ninepatch-plugin.js';
 

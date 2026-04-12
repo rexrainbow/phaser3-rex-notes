@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import { mask } from '../../../phaser/src/gameobjects/components/Mask';
 
 class Demo extends Phaser.Scene {

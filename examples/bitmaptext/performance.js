@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 
 var CreateBitmapText = function (scene, count) {
     var t0 = performance.now();
