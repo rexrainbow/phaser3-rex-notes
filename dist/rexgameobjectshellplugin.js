@@ -31197,7 +31197,7 @@ void main (void) {
                 this.type = type;
                 this
                     .setPosition(x, y)
-                    .setSize(width, height)
+                    .resize(width, height)
                     .setOrigin(0.5, 0.5);
 
                 this.columns = {};

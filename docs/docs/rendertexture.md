@@ -67,8 +67,11 @@ var rt = scene.make.renderTexture({
 ### Set size
 
 ```javascript
-rt.setSize(width, height);
+rt.reSize(width, height);
 ```
+
+!!! warning
+    `rt.setSize(width, height)` won't change size of dynamic-texture.
 
 
 ### Fill color
