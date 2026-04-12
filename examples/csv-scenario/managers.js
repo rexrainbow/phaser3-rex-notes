@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import CSVScenarioPlugin from '../../plugins/csvscenario-plugin.js';
 import ManagersBase from '../../plugins/logic/runcommands/managers/Managers.js';
 
