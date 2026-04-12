@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import CanvasDataPlugin from '../../plugins/canvasdata-plugin.js';
 import BBCodeTextPlugin from '../../plugins/bbcodetext-plugin.js';
 
