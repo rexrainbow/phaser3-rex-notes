@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import AchievementsPlugin from '../../plugins/achievements-plugin.js';
 
 class Demo extends Phaser.Scene {

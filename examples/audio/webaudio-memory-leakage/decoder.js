@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import { OggOpusDecoder, OggOpusDecoderWebWorker } from '../../../plugins/utils/audio/ogg-opus-decoder/ogg-opus-decoder.js';
 
 var Decode = async function (buffer, context) {
