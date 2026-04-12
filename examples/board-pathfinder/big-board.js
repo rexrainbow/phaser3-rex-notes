@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import BoardPlugin from '../../plugins/board-plugin.js';
 import FitToViewport from '../../plugins/utils/rendertexture/FitToViewport.js';
 import GetViewport from '../../plugins/utils/system/GetViewport.js';
