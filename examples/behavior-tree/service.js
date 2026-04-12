@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import BehaviorTreePlugin from '../../plugins/behaviortree-plugin.js';
 import ClockPlugin from '../../plugins/clock-plugin.js';
 
