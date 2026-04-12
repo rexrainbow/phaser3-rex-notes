@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import BracketParserPlugin from '../../plugins/bracketparser2-plugin.js';
 
 

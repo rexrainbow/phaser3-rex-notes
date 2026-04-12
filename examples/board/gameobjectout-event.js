@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import BoardPlugin from '../../plugins/board-plugin.js';
 
 const COLOR_MAIN = 0x4e342e;
