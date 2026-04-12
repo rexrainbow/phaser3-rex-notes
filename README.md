@@ -1,8 +1,8 @@
-# Notes of Phaser3 engine
+# Notes of Phaser4 engine
 
 ## Links
 
-### Phaser3
+### Phaser4
 
 - [FAQ](https://github.com/phaser-discord/community/blob/master/FAQ.md)
 - [Official discord channel](https://discord.gg/phaser)
