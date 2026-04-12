@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import midiParser from '../../plugins/utils/midi-parser/midi-parser.js';
 
 class Demo extends Phaser.Scene {

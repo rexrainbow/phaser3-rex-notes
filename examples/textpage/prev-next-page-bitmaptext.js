@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import TextPagePlugin from '../../plugins/textpage-plugin.js'
 
 class Demo extends Phaser.Scene {

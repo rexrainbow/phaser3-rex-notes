@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import WebFontLoaderPlugin from '../../plugins/webfontloader-plugin.js';
 
 class LoadFont extends Phaser.Scene {

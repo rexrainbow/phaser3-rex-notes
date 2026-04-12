@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import localforage from 'localforage';
 import AwaitLoaderPlugin from '../../plugins/awaitloader-plugin.js';
 

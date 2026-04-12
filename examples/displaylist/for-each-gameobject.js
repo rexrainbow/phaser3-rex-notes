@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import ForEachGameObjectInDisplayList from '../../plugins/utils/gameobject/displaylist/ForEachGameObjectInDisplayList';
 
 class Demo extends Phaser.Scene {

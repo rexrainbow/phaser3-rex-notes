@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import GridCut from '../../plugins/utils/texture/gridcut/GridCut.js';
 
 class Demo extends Phaser.Scene {

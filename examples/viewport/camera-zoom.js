@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import GetViewport from '../../plugins/utils/system/GetViewport.js';
 
 class Demo extends Phaser.Scene {

@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 
 class ScaneA extends Phaser.Scene {
     constructor() {

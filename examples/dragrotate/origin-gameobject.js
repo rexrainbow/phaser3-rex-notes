@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import DragRotatePlugin from '../../plugins/dragrotate-plugin.js';
 
 const ColorGray = 0x8e8e8e;

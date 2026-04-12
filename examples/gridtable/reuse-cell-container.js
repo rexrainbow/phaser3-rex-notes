@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import GridTablePlugin from '../../plugins/gridtable-plugin.js';
 
 const COLOR_MAIN = 0x4e342e;

@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import DynamicTextPlugin from '../../plugins/dynamictext-plugin.js';
 import GetNearestChild from '../../plugins/gameobjects/dynamictext/dynamictext/methods/GetNearestChild.js';
 

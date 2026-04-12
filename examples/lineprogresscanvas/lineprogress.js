@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import LineProgressCanvasPlugin from '../../plugins/lineprogresscanvas-plugin.js';
 import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 

@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import GamepadKeys from '../../plugins/input/gamepadkeys/GamepadKeys.js';
 
 

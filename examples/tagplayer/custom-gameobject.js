@@ -1,4 +1,4 @@
-import Phaser from 'phaser/src/phaser.js';
+import Phaser from '../../../phaser/src/phaser.js';
 import TagPlayerPlugin from '../../plugins/tagplayer-plugin.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 

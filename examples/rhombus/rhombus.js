@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import RhombusPlugin from '../../plugins/rhombus-plugin.js';
 
 class Demo extends Phaser.Scene {

@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import SoundManeger from '../../plugins/utils/audio/soundmanager/SoundManager.js';
 import { WaitEvent } from '../../plugins/utils/promise/WaitEvent.js';
 import DelaySceneTick from '../../plugins/utils/promise/DelaySceneTick.js';

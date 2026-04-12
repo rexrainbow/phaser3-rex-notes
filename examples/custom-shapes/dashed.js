@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import CustomShapesPlugin from '../../plugins/customshapes-plugin.js';
 
 

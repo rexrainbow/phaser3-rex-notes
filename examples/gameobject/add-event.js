@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import AddUpdateEvent from '../../plugins/utils/gameobject/addevent/AddUpdateEvent.js';
 
 class Demo extends Phaser.Scene {

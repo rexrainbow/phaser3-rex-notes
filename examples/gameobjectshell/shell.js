@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import GameObjectShellPlugin from '../../templates/gameobjectshell/gameobjectshell-plugin.js';
 
 const COLOR_MAIN = 0x424242;

@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import WaitEventsPlugin from '../../plugins/waitevents-plugin.js';
 import MoveToPlugin from '../../plugins/moveto-plugin.js';
 

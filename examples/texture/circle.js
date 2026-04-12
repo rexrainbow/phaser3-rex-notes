@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import CreateCircleTexture from '../../plugins/utils/texture/CreateCircleTexture.js';
 
 class Demo extends Phaser.Scene {

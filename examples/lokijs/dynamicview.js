@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import loki from 'lokijs/src/lokijs.js';
 
 class Demo extends Phaser.Scene {

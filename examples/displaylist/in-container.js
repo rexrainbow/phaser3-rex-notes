@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import DisplayListMethods from '../../plugins/utils/gameobject/displaylist/DisplayListMethods';
 
 Object.assign(

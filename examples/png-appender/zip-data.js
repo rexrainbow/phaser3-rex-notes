@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import PNGAppenderPlugin from '../../plugins/pngappender-plugin.js';
 import { deflate, inflate } from 'pako'
 

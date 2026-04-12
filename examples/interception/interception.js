@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import InterceptionPlugin from '../../plugins/interception-plugin.js';
 import BulletPlugin from '../../plugins/bullet-plugin.js';
 

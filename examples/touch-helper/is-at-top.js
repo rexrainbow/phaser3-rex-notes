@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import TouchHelperPlugin from '../../plugins/touchhelper-plugin';
 
 class Demo extends Phaser.Scene {

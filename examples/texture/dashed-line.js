@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import CreateDashedTexture from '../../plugins/utils/texture/CreateDashedTexture.js';
 
 class Demo extends Phaser.Scene {

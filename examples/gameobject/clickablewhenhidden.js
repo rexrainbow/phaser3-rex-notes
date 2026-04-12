@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import ClickableWhenHidden from '../../plugins/utils/gameobject/clickablewhenhidden/ClickableWhenHidden.js';
 
 class Demo extends Phaser.Scene {

@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import RandomPlacePlugin from '../../plugins/randomplace-plugin.js';
 
 class Demo extends Phaser.Scene {
