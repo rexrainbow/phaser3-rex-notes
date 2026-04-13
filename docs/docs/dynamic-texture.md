@@ -63,7 +63,9 @@ texture.draw(entries).render();
     - Game Objects use their own alpha and tint values when being drawn.
 
 !!! note
-    // Add draw(gameObject).render() constraint here
+    `texture.draw(gameObject)` stores the game object in the command buffer, then renders it later when calling `texture.render()`.
+    If this game object will be modified or reused before `texture.render()`, call `texture.draw(gameObject).render()` immediately.
+    If the game object state will stay unchanged until `texture.render()`, multiple `draw(gameObject)` calls can be batched safely.
 
 ### Erase
 

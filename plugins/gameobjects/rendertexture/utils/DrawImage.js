@@ -1,11 +1,16 @@
-import GetStampGameObject from './GetStampGameObject.js';
-
 var DrawImage = function (key, frame, x, y, width, height) {
-    var gameObject = GetStampGameObject(this, 'Image')
-        .setTexture(key, frame)
-        .setDisplaySize(width, height);
+    var textureFrame = this.scene.sys.textures.getFrame(key, frame);
 
-    this.draw(gameObject, x, y).render();
+    if (!textureFrame) {
+        return;
+    }
+
+    this.stamp(key, frame, x, y, {
+        originX: 0,
+        originY: 0,
+        scaleX: width / textureFrame.realWidth,
+        scaleY: height / textureFrame.realHeight
+    });
 }
 
 export default DrawImage;
