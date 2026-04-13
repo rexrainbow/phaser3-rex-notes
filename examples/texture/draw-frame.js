@@ -22,8 +22,10 @@ class Demo extends Phaser.Scene {
             var x = 36 * i,
                 y = 0;
             canvasTexture.drawFrame('icons', frameNames[i], x, y);
-            dynamicTexture.drawFrame('icons', frameNames[i], x, y);
+            dynamicTexture.stamp('icons', frameNames[i], x, y, { originX: 0, originY: 0 });
         }
+        // Update dynamicTexture
+        dynamicTexture.render()
 
         this.add.image(0, 0, 'canvas').setOrigin(0);
 

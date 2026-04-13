@@ -12,13 +12,6 @@ Canvas Dynamic Texture stored in [texture cache](textures.md), built-in object o
 var texture = scene.textures.addDynamicTexture(key, width, height);
 ```
 
-Disable `texture.isSpriteTexture` if this texture is not a base texture for Sprite Game Objects.
-
-```javascript
-texture.setIsSpriteTexture(false);
-// texture.isSpriteTexture = false;
-```
-
 ### Set size
 
 ```javascript
@@ -28,8 +21,8 @@ texture.setSize(width, height);
 ### Fill color
 
 ```javascript
-texture.fill(rgb);
-// texture.fill(rgb, alpha, x, y, width, height);
+texture.fill(rgb).render();
+// texture.fill(rgb, alpha, x, y, width, height).render();
 ```
 
 - `rgb` : The number color to fill this Dynamic Texture with.
@@ -39,19 +32,19 @@ texture.fill(rgb);
 ### Clear
 
 ```javascript
-texture.clear();
+texture.clear().render();
 ```
 
 ```javascript
-texture.clear(x, y, width, height);
+texture.clear(x, y, width, height).render();
 ```
 
 ### Draw game object
 
 ```javascript
-texture.draw(entries);
-// texture.draw(entries,x, y);
-// texture.draw(entries, x, y, alpha, tint);
+texture.draw(entries).render();
+// texture.draw(entries, x, y).render();
+// texture.draw(entries, x, y, alpha, tint).render();
 ```
 
 - `entries` : 
@@ -69,11 +62,14 @@ texture.draw(entries);
 - `alpha`, `tint` : Only used by Texture Frames.
     - Game Objects use their own alpha and tint values when being drawn.
 
+!!! note
+    // Add draw(gameObject).render() constraint here
+
 ### Erase
 
 ```javascript
-texture.erase(entries);
-// texture.erase(entries, x, y);
+texture.erase(entries).render();
+// texture.erase(entries, x, y).render();
 ```
 
 - `entries` : 
@@ -102,32 +98,35 @@ texture.stamp(key, frame, x, y, {
     scaleY: 1,
     originX: 0.5,
     originY: 0.5,
-    blendMode: 0,
-    erase: false,
-    skipBatch: false
-})
+    blendMode: 0
+}).render();
 ```
 
 or
 
 ```javascript
-texture.drawFrame(key, frame, x, y);
-// texture.drawFrame(key, frame, x, y, alpha, tint);
+texture.stamp(key, frame, x, y, {
+    alpha: 1,
+    tint: 0xffffff,
+    originX: 0.5,
+    originY: 0.5
+}).render();
 ```
 
 - `x`, `y` : Top-left position
+- `originX`, `originY` : The horizontal/vertical origin of the stamp. Default value is `0.5`/`0.5`.
 
 
 ### Draw repeat frames
 
 - Repeat frames full of size
     ```javascript
-    texture.repeat(key, frame);
+    texture.repeat(key, frame).render();
     ```
 - Repeat in an area
     ```javascript
-    texture.repeat(key, frame, x, y, width, height);
-    // texture.repeat(key, frame, x, y, width, height, alpha, tint, skipBatch);
+    texture.repeat(key, frame, x, y, width, height).render();
+    // texture.repeat(key, frame, x, y, width, height, config).render();
     ```
 
 ### Add frame
@@ -146,14 +145,10 @@ texture.add(name, sourceIndex, x, y, width, height);
 
 ### Batch draw
 
-1. Begin
-    ```javascript
-    texture.beginDraw();
-    ```
-2. Draw
+1. Draw
     - Draw game object
         ```javascript
-        texture.batchDraw(entries, x, y, alpha, tint);
+        texture.draw(entries, x, y, alpha, tint);
         ```
         - `entries` : 
             - Any renderable Game Object, such as a Sprite, Text, Graphics or TileSprite.
@@ -166,22 +161,29 @@ texture.add(name, sourceIndex, x, y, width, height);
             - A string. This is used to look-up the texture from the Texture Manager.
     - Draw frame
         ```javascript
-        texture.batchDrawFrame(key, frame, x, y, alpha, tint);
+        texture.stamp(key, frame, x, y, {
+            alpha: alpha,
+            tint: tint,
+            originX: 0.5,
+            originY: 0.5
+        });
         ```
     - Draw image
         ```javascript
         texture.stamp(key, frame, x, y, {
             // ...
-            skipBatch: true
-        })
+        });
         ```
     - Draw repeat images
         ```javascript
-        texture.repeat(key, frame, x, y, width, height, alpha, tint, true);
+        texture.repeat(key, frame, x, y, width, height, {
+            alpha: alpha,
+            tint: tint
+        });
         ```
-3. End
+2. End
     ```javascript
-    texture.endDraw();
+    texture.render();
     ```
 
 ### Internal camera
