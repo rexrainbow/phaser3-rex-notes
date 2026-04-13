@@ -30,6 +30,21 @@ class Demo extends Phaser.Scene {
                 .on('pointerdown', function () {
                     card.bringToTop();
                 }, this)
+                .on('pointerover', function () {
+                    card.glowController = card
+                        .getLayer()
+                        .enableFilters()
+                        .filters.internal.addGlow(0xff0000, 8, 0)
+                        .setPaddingOverride(null)
+                })
+                .on('pointerout', function () {
+                    if (!card.glowController) {
+                        return;
+                    }
+                    card.filters.internal.remove(card.glowController);
+                    card.glowController = null;
+                })
+
         }
 
         console.log(this.children.list)
@@ -55,6 +70,7 @@ var CreateCard = function (scene, x, y, name) {
         enableLayer: true,
         name: name
     })
+        // .enableLayer()
         .layout();
 }
 
