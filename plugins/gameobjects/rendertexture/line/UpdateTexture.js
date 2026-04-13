@@ -1,5 +1,6 @@
 import DrawImage from '../utils/DrawImage.js';
 import DrawTileSprite from '../utils/DrawTileSprite.js';
+import EndDraw from '../utils/EndDraw.js';
 
 const DistanceBetween = Phaser.Math.Distance.Between;
 const AngleBetween = Phaser.Math.Angle.Between;
@@ -11,7 +12,7 @@ var UpdateTexture = function () {
     this.redraw = false;
 
     // Note: Don't use clear method here
-    // this.clear();  // this.setSize(w,h) will clear content
+    // this.clear();  // this.resize(w,h) will clear content
 
     var lineStartFrame = this.lineStartFrame;
     var lineEndFrame = this.lineEndFrame;
@@ -41,17 +42,13 @@ var UpdateTexture = function () {
     if ((width <= 0) || (height <= 0)) {
         this
             .setPosition(this.x0, this.y0)
-            .setSize(1, 1)
+            .resize(1, 1)
             .setRotation(rotation);
         return this;
     }
 
-    if ((this.width === width) && (this.height === height)) {
-        this.setSize(width + 1, height + 1); // Force size changing, to clear content
-    }
-
     this
-        .setSize(width, height)
+        .resize(width, height)
         .setPosition(this.x0, this.y0)
         .setRotation(rotation)
         .setOrigin(0, 0); // Set origin to (0,0) before pasting textures
@@ -96,6 +93,8 @@ var UpdateTexture = function () {
 
     var originX = 1 - ((width - lineStartOffset) / width);
     this.setOrigin(originX, 0.5);
+
+    EndDraw.call(this);
 }
 
 export default UpdateTexture;

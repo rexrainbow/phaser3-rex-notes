@@ -542,71 +542,27 @@
         return NinePatch;
     };
 
-    const GameClass = Phaser.Game;
-    var IsGame = function (object) {
-        return (object instanceof GameClass);
-    };
-
-    const SceneClass = Phaser.Scene;
-    var IsSceneObject = function (object) {
-        return (object instanceof SceneClass);
-    };
-
-    var GetGame = function (object) {
-        if ((object == null) || (typeof (object) !== 'object')) {
-            return null;
-        } else if (IsGame(object)) {
-            return object;
-        } else if (IsGame(object.game)) {
-            return object.game;
-        } else if (IsSceneObject(object)) { // object = scene object
-            return object.sys.game;
-        } else if (IsSceneObject(object.scene)) { // object = game object
-            return object.scene.sys.game;
-        }
-    };
-
-    const GameObjectClasses = Phaser.GameObjects;
-
-    var GameObjects = undefined;
-
-    var GetStampGameObject = function (gameObject, className) {
-        if (!GameObjects) {
-            GameObjects = {};
-
-            GetGame(gameObject).events.once('destroy', function () {
-                for (var name in GameObjects) {
-                    GameObjects[name].destroy();
-                }
-                GameObjects = undefined;
-            });
-        }
-
-        if (!GameObjects.hasOwnProperty(className)) {
-            var scene = GetGame(gameObject).scene.systemScene;
-            var gameObject = new GameObjectClasses[className](scene);
-            gameObject.setOrigin(0);
-
-            GameObjects[className] = gameObject;
-        }
-
-        return GameObjects[className];
-    };
-
     var DrawImage$2 = function (key, frame, x, y, width, height) {
-        var gameObject = GetStampGameObject(this, 'Image')
-            .setTexture(key, frame)
-            .setDisplaySize(width, height);
+        var textureFrame = this.scene.sys.textures.getFrame(key, frame);
 
-        this.draw(gameObject, x, y).render();
+        if (!textureFrame) {
+            return;
+        }
+
+        this.stamp(key, frame, x, y, {
+            originX: 0,
+            originY: 0,
+            scaleX: width / textureFrame.realWidth,
+            scaleY: height / textureFrame.realHeight
+        });
     };
 
     var DrawTileSprite$1 = function (key, frame, x, y, width, height) {
-        var gameObject = GetStampGameObject(this, 'TileSprite')
-            .setTexture(key, frame)
-            .setSize(width, height);
+        this.repeat(key, frame, x, y, width, height);
+    };
 
-        this.draw(gameObject, x, y).render();
+    var EndDraw = function () {
+        this.render();
     };
 
     const RenderTexture$2 = Phaser.GameObjects.RenderTexture;
@@ -617,6 +573,7 @@
     var Methods$r = {
         _drawImage: DrawImage$2,
         _drawTileSprite: DrawTileSprite$1,
+        _endDraw: EndDraw,
     };
     Object.assign(
         NinePatch$1.prototype,
@@ -14585,6 +14542,30 @@
         AddClearEffectCallback(gameObject, 'blockySize');
 
         return gameObject;
+    };
+
+    const GameClass = Phaser.Game;
+    var IsGame = function (object) {
+        return (object instanceof GameClass);
+    };
+
+    const SceneClass = Phaser.Scene;
+    var IsSceneObject = function (object) {
+        return (object instanceof SceneClass);
+    };
+
+    var GetGame = function (object) {
+        if ((object == null) || (typeof (object) !== 'object')) {
+            return null;
+        } else if (IsGame(object)) {
+            return object;
+        } else if (IsGame(object.game)) {
+            return object.game;
+        } else if (IsSceneObject(object)) { // object = scene object
+            return object.sys.game;
+        } else if (IsSceneObject(object.scene)) { // object = game object
+            return object.scene.sys.game;
+        }
     };
 
     var RegisterFilter = function (game, FilterClass) {

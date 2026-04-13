@@ -158,12 +158,12 @@ class Line extends RenderTexture {
     }
 
     renderWebGL(renderer, src,  camera, parentMatrix) {
-        this.updateTexture();
+        src.updateTexture();
         super.renderWebGL(renderer, src,  camera, parentMatrix);
     }
 
     renderCanvas(renderer, src,  camera, parentMatrix) {
-        this.updateTexture();
+        src.updateTexture();
         super.renderCanvas(renderer, src,  camera, parentMatrix);
     }
 }

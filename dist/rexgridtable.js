@@ -22532,47 +22532,27 @@ void main (void) {
         return NinePatch;
     };
 
-    const GameObjectClasses = Phaser.GameObjects;
-
-    var GameObjects = undefined;
-
-    var GetStampGameObject = function (gameObject, className) {
-        if (!GameObjects) {
-            GameObjects = {};
-
-            GetGame(gameObject).events.once('destroy', function () {
-                for (var name in GameObjects) {
-                    GameObjects[name].destroy();
-                }
-                GameObjects = undefined;
-            });
-        }
-
-        if (!GameObjects.hasOwnProperty(className)) {
-            var scene = GetGame(gameObject).scene.systemScene;
-            var gameObject = new GameObjectClasses[className](scene);
-            gameObject.setOrigin(0);
-
-            GameObjects[className] = gameObject;
-        }
-
-        return GameObjects[className];
-    };
-
     var DrawImage = function (key, frame, x, y, width, height) {
-        var gameObject = GetStampGameObject(this, 'Image')
-            .setTexture(key, frame)
-            .setDisplaySize(width, height);
+        var textureFrame = this.scene.sys.textures.getFrame(key, frame);
 
-        this.draw(gameObject, x, y).render();
+        if (!textureFrame) {
+            return;
+        }
+
+        this.stamp(key, frame, x, y, {
+            originX: 0,
+            originY: 0,
+            scaleX: width / textureFrame.realWidth,
+            scaleY: height / textureFrame.realHeight
+        });
     };
 
     var DrawTileSprite = function (key, frame, x, y, width, height) {
-        var gameObject = GetStampGameObject(this, 'TileSprite')
-            .setTexture(key, frame)
-            .setSize(width, height);
+        this.repeat(key, frame, x, y, width, height);
+    };
 
-        this.draw(gameObject, x, y).render();
+    var EndDraw = function () {
+        this.render();
     };
 
     const RenderTexture = Phaser.GameObjects.RenderTexture;
@@ -22583,6 +22563,7 @@ void main (void) {
     var Methods$1 = {
         _drawImage: DrawImage,
         _drawTileSprite: DrawTileSprite,
+        _endDraw: EndDraw,
     };
     Object.assign(
         NinePatch.prototype,

@@ -4,71 +4,27 @@
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexlineplugin = factory());
 })(this, (function () { 'use strict';
 
-    const GameClass = Phaser.Game;
-    var IsGame = function (object) {
-        return (object instanceof GameClass);
-    };
-
-    const SceneClass = Phaser.Scene;
-    var IsSceneObject = function (object) {
-        return (object instanceof SceneClass);
-    };
-
-    var GetGame = function (object) {
-        if ((object == null) || (typeof (object) !== 'object')) {
-            return null;
-        } else if (IsGame(object)) {
-            return object;
-        } else if (IsGame(object.game)) {
-            return object.game;
-        } else if (IsSceneObject(object)) { // object = scene object
-            return object.sys.game;
-        } else if (IsSceneObject(object.scene)) { // object = game object
-            return object.scene.sys.game;
-        }
-    };
-
-    const GameObjectClasses = Phaser.GameObjects;
-
-    var GameObjects = undefined;
-
-    var GetStampGameObject = function (gameObject, className) {
-        if (!GameObjects) {
-            GameObjects = {};
-
-            GetGame(gameObject).events.once('destroy', function () {
-                for (var name in GameObjects) {
-                    GameObjects[name].destroy();
-                }
-                GameObjects = undefined;
-            });
-        }
-
-        if (!GameObjects.hasOwnProperty(className)) {
-            var scene = GetGame(gameObject).scene.systemScene;
-            var gameObject = new GameObjectClasses[className](scene);
-            gameObject.setOrigin(0);
-
-            GameObjects[className] = gameObject;
-        }
-
-        return GameObjects[className];
-    };
-
     var DrawImage = function (key, frame, x, y, width, height) {
-        var gameObject = GetStampGameObject(this, 'Image')
-            .setTexture(key, frame)
-            .setDisplaySize(width, height);
+        var textureFrame = this.scene.sys.textures.getFrame(key, frame);
 
-        this.draw(gameObject, x, y).render();
+        if (!textureFrame) {
+            return;
+        }
+
+        this.stamp(key, frame, x, y, {
+            originX: 0,
+            originY: 0,
+            scaleX: width / textureFrame.realWidth,
+            scaleY: height / textureFrame.realHeight
+        });
     };
 
     var DrawTileSprite = function (key, frame, x, y, width, height) {
-        var gameObject = GetStampGameObject(this, 'TileSprite')
-            .setTexture(key, frame)
-            .setSize(width, height);
+        this.repeat(key, frame, x, y, width, height);
+    };
 
-        this.draw(gameObject, x, y).render();
+    var EndDraw = function () {
+        this.render();
     };
 
     const DistanceBetween = Phaser.Math.Distance.Between;
@@ -81,7 +37,7 @@
         this.redraw = false;
 
         // Note: Don't use clear method here
-        // this.clear();  // this.setSize(w,h) will clear content
+        // this.clear();  // this.resize(w,h) will clear content
 
         var lineStartFrame = this.lineStartFrame;
         var lineEndFrame = this.lineEndFrame;
@@ -111,17 +67,13 @@
         if ((width <= 0) || (height <= 0)) {
             this
                 .setPosition(this.x0, this.y0)
-                .setSize(1, 1)
+                .resize(1, 1)
                 .setRotation(rotation);
             return this;
         }
 
-        if ((this.width === width) && (this.height === height)) {
-            this.setSize(width + 1, height + 1); // Force size changing, to clear content
-        }
-
         this
-            .setSize(width, height)
+            .resize(width, height)
             .setPosition(this.x0, this.y0)
             .setRotation(rotation)
             .setOrigin(0, 0); // Set origin to (0,0) before pasting textures
@@ -166,6 +118,8 @@
 
         var originX = 1 - ((width - lineStartOffset) / width);
         this.setOrigin(originX, 0.5);
+
+        EndDraw.call(this);
     };
 
     const RenderTexture = Phaser.GameObjects.RenderTexture;
@@ -326,12 +280,12 @@
         }
 
         renderWebGL(renderer, src,  camera, parentMatrix) {
-            this.updateTexture();
+            src.updateTexture();
             super.renderWebGL(renderer, src,  camera, parentMatrix);
         }
 
         renderCanvas(renderer, src,  camera, parentMatrix) {
-            this.updateTexture();
+            src.updateTexture();
             super.renderCanvas(renderer, src,  camera, parentMatrix);
         }
     }
