@@ -111,6 +111,7 @@ class Board extends RexPlugins.Board.Board {
         scene.add.renderTexture(0, 0, 800, 600)
             .setOrigin(0)
             .draw(gridGraphics)
+            .render()
             .setDepth(-1);
         gridGraphics.destroy()
 
