@@ -19,9 +19,9 @@ class Demo extends Phaser.Scene {
             .setSize(800, 600).setScale(0.75)
             .setPosition(400, 300)
 
-        image0.setMask(
-            maskGameObject.createGeometryMask()
-        );
+        image0
+            .enableFilters()
+            .filters.external.addMask(maskGameObject);
 
         maskGameObject
             .setEaseValueDuration(4000)

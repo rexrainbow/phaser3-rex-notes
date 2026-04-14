@@ -28,8 +28,10 @@ class Demo extends Phaser.Scene {
             .setPosition(leftX, topY)
             .fillStyle(0x000033, 1)
             .fillRect(0, 0, w, h)
-            .setInteractive(new Phaser.Geom.Rectangle(0, 0, w, h),
-                Phaser.Geom.Rectangle.Contains);
+            .setInteractive(
+                new Phaser.Geom.Rectangle(0, 0, w, h),
+                Phaser.Geom.Rectangle.Contains
+            );
 
 
         var s = '';
@@ -41,7 +43,9 @@ class Demo extends Phaser.Scene {
         }
 
         var txt = this.add.bitmapText(leftX, topY, 'gothic', s);
-        txt.setMask(bg.createGeometryMask());
+        txt
+            .enableFilters()
+            .filters.external.addMask(bg);
 
         var topBound = topY,
             bottomBound;

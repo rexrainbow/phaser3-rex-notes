@@ -95,7 +95,7 @@ class Demo extends Phaser.Scene {
             .layout()
 
         var tableBody = gridTable.getElement('table');
-        
+
         // 1. Create bitmap mask from a canvas
         var maskCanvas = this.rexUI.add.canvas(0, 0, tableBody.width, tableBody.height)
             .setPosition(tableBody.x, tableBody.y)
@@ -111,10 +111,12 @@ class Demo extends Phaser.Scene {
             context.fillStyle = gradient;
             context.fillRect(0, 0, maskCanvas.width, maskCanvas.height);
         });
-        var mask = maskCanvas.createBitmapMask();
 
-        // 2. Apply mask on tableBodyLayer
-        tableBody.getLayer().setMask(mask);
+        // 2. Apply mask on tableBody, which is a layer now, by `enableLayer: true`
+        tableBody
+            .enableFilters()
+            .filters.external.addMask(maskCanvas);
+
     }
 
     update() { }
