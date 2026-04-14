@@ -133,7 +133,7 @@ class Board extends RexPlugins.Board.Board {
     }
 
     clearPath() {
-        this.pathTexture.clear();
+        this.pathTexture.clear().render();
         return this;
     }
 
@@ -142,7 +142,8 @@ class Board extends RexPlugins.Board.Board {
             .strokePoints(this.tileXYArrayToWorldXYArray(tileXYArray));
         this.pathTexture
             .clear()
-            .draw(this.pathGraphics);
+            .draw(this.pathGraphics)
+            .render();
         this.pathGraphics.clear();
         return this;
     }

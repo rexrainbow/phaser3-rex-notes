@@ -92,6 +92,7 @@ class Board extends RexPlugins.Board.Board {
         scene.add.renderTexture(0, 0, 800, 600)
             .setOrigin(0)
             .draw(gridGraphics)
+            .render()
             .setDepth(-1);
         gridGraphics.destroy();
 
@@ -113,7 +114,8 @@ class Board extends RexPlugins.Board.Board {
             .strokePoints(this.tileXYArrayToWorldXYArray(tileXYArray));
         this.pathTexture
             .clear()
-            .draw(this.pathGraphics);
+            .draw(this.pathGraphics)
+            .render();
         this.pathGraphics.clear();
         return this;
     }
