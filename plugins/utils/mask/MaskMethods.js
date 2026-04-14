@@ -2,75 +2,77 @@ import IsWebGLRenderMode from '../system/IsWebGLRenderMode.js';
 
 const MaskController = Phaser.Filters.Mask;
 
-var CreateMaskObject = function (gameObject, invert) {
-    // invert : WebGL only feature
+var SetMask = function (gameObject, maskGameObject, invert, isLocalMask) {
+    if (IsWebGLRenderMode(gameObject)) {
+        // WEBGL mask
+        WebGLSetSharedMask(gameObject, maskGameObject, invert);
+    } else {
+        // CANVAS mask
+        CanvasSetMask(gameObject, maskGameObject);
+    }
 
-    // A gameObject can own a (WEBGL) MaskController, or a (CANVAS) GeometryMask
-    // Share this MaskController/GeometryMask for all mask target game object
-    var maskObject = gameObject._maskObject;
-    if (maskObject) {
+}
+
+var WebGLSetSharedMask = function (gameObject, maskGameObject, invert) {
+    // Share this mask filter controller for all mask target game object
+    var maskObject = maskGameObject._maskObject;
+    if (!maskObject) {
+        maskObject = new MaskController(maskGameObject.scene.cameras.main, maskGameObject, invert);
+        // camera, mask, invert, viewCamera, viewTransform, scaleFactor
+        maskGameObject._maskObject = maskObject;
+        // Destroy mask object when mask source game object is destroyed
+        maskGameObject.once('destroy', function () {
+            maskObject.destroy();
+            maskGameObject._maskObject = undefined;
+        });
+
+    } else {
         if ((invert !== undefined) && (maskObject.invert !== undefined)) {
             maskObject.invert = invert;
         }
-        return maskObject;
-    }
-
-    if (IsWebGLRenderMode(gameObject)) {
-        maskObject = new MaskController(gameObject.scene.cameras.main, gameObject, invert);
-
-    } else {
-        // CANVAS Only support GeometryMask
-        maskObject = gameObject.createGeometryMask();
 
     }
-
-    gameObject._maskObject = maskObject;
-
-    // Destroy mask object when mask source game object is destroyed
-    gameObject.once('destroy', function () {
-        maskObject.destroy();
-        gameObject._maskObject = undefined;
-    });
-
-    return maskObject;
-}
-
-var SetMask = function (gameObject, maskGameObject, invert) {
-    var maskObject = CreateMaskObject(maskGameObject, invert);
-    // A (WEBGL) MaskController, or a (CANVAS) GeometryMask
 
     if (gameObject.mask === maskObject) {
         // The same mask object
         return;
     }
 
-    if (IsWebGLRenderMode(gameObject)) {
-        // WEBGL mask
-        if (!gameObject.filters) {
-            if (!gameObject.enableFilters) {
-                return;
-            }
-
-            gameObject.enableFilters();
-        }
-
-        var filterList = gameObject.filters.external;
-        var list = filterList.list;
-
-        if (gameObject.mask) {
-            // Replace current mask controller
-            var index = list.indexOf(gameObject.mask);
-            list[index] = maskGameObject;
-        } else {
-            // Append mask controller
-            list.push(maskObject);
-        }
-
-    } else {
-        // CANVAS mask
-        if (!gameObject.setMask) {
+    if (!gameObject.filters) {
+        if (!gameObject.enableFilters) {
             return;
         }
+
+        gameObject.enableFilters();
+    }
+
+    var filterList = gameObject.filters.external;
+    var list = filterList.list;
+
+    if (gameObject.mask) {
+        // gameObject.mask !== maskObject
+        // Replace current mask controller
+        var index = list.indexOf(gameObject.mask);
+        list[index] = maskObject;
+    } else {
+        // Append mask controller
+        list.push(maskObject);
+    }
+
+    gameObject.mask = maskObject;
+}
+
+var CanvasSetMask = function (gameObject, maskGameObject) {
+    // Share this GeometryMask for all mask target game object
+    var maskObject = maskGameObject._maskObject;
+    if (!maskObject) {
+        maskObject = maskGameObject.createGeometryMask();
+        maskGameObject._maskObject = maskObject;
+        // Destroy mask object when mask source game object is destroyed
+        maskGameObject.once('destroy', function () {
+            maskObject.destroy();
+            maskGameObject._maskObject = undefined;
+        });
     }
 
     gameObject.mask = maskObject;
@@ -82,43 +84,35 @@ var ClearMask = function (gameObject) {
     }
 
     if (IsWebGLRenderMode(gameObject)) {
-        // WEBGL mask
-        var filterList = gameObject.filters.external;
-        var list = filterList.list;
-
-        // Remove current mask object from external filter list
-        var index = list.indexOf(gameObject.mask);
-        list.splice(index, 1);
+        WebglClearSharedMask(gameObject);
 
     } else {
-        // CANVAS mask
-        if (!gameObject.clearMask) {
-            return;
-        }
+        CanvasClearMask(gameObject);
+    }
 
+}
+
+var WebglClearSharedMask = function (gameObject) {
+    if (!gameObject.mask) {
+        return;
+    }
+    var filterList = gameObject.filters.external;
+    var list = filterList.list;
+
+    // Remove current mask object from external filter list
+    var index = list.indexOf(gameObject.mask);
+    if (index !== -1) {
+        list.splice(index, 1);
     }
 
     gameObject.mask = null;
 }
 
-var GetMaskGameObject = function (gameObject) {
-    var mask = gameObject.mask;
-    if (!mask) {
-        return null;
-    }
-
-    // WEBGL mask
-    if (mask.maskGameObject) {
-        return mask.maskGameObject;
-    }
-
-    // CANVAS mask   
-    return mask.geometryMask;
+var CanvasClearMask = function (gameObject) {
+    gameObject.mask = null;
 }
 
 export {
-    CreateMaskObject,
     SetMask,
     ClearMask,
-    GetMaskGameObject,
 }
