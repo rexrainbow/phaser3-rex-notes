@@ -1,6 +1,6 @@
 import phaser from '../../../phaser/src/phaser.js';
-import DefaultMask from '../../plugins/utils/mask/DefaultMask.js';
-import ContainerLite from '../../plugins/gameobjects/containerlite/ContainerLite.js';
+import DefaultMaskGraphics from '../../plugins/utils/mask/defaultmaskgraphics/DefaultMaskGraphics.js';
+import ContainerLite from '../../plugins/gameobjects/container/containerlite/ContainerLite.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -15,8 +15,10 @@ class Demo extends Phaser.Scene {
 
     create() {
         var image = this.add.image(400, 300, 'classroom');
-        var maskGameObject = new DefaultMask(image, 1);
-        image.setMask(maskGameObject.createGeometryMask());
+        var maskGameObject = new DefaultMaskGraphics(image, 1);
+        image
+            .enableFilters()
+            .filters.external.addMask(maskGameObject);
 
         var container = new ContainerLite(this, 400, 300, image.width, image.height, [image, maskGameObject]);
         this.add.existing(container);
