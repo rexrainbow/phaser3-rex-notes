@@ -13,12 +13,12 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var useDynamicTexture = false;
+        var useDynamicTexture = true;
         var frameManager = this.plugins.get('rexCanvasFrameManager').add(this,
             {
                 key: 'test',
-                width: 512, height: 512,
                 cellWidth: 64, cellHeight: 64,
+                width: 64 * 8, height: 64 * 8,
                 fillColor: (useDynamicTexture) ? 0x666666 : '#666666',
                 useDynamicTexture: useDynamicTexture,
             });
@@ -57,7 +57,7 @@ class Demo extends Phaser.Scene {
         // Paste image to frame manager
         for (var i = 0, cnt = dirCode.length; i < cnt; i++) {
             var c = dirCode.charAt(i);
-            image.setAngle(i * 90);
+            image.setAngle(i * 90).setAlpha((i + 1) * 0.25);
             frameManager.paste(c, image);
         }
         frameManager.updateTexture();

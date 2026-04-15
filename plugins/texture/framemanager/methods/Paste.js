@@ -103,6 +103,9 @@ var Paste = function (frameName, gameObject) {
     var rotation = (gameObject.rotation !== undefined) ? gameObject.rotation : 0;
     var originX = (gameObject.originX !== undefined) ? gameObject.originX : 0;
     var originY = (gameObject.originY !== undefined) ? gameObject.originY : 0;
+    var alpha = (gameObject.alpha !== undefined) ? gameObject.alpha : 1;
+    var flipX = !!gameObject.flipX;
+    var flipY = !!gameObject.flipY;
     var needRotatedBounds = NeedRotatedBounds(rotation);
 
     var bounds = {};
@@ -126,6 +129,12 @@ var Paste = function (frameName, gameObject) {
     if (this.useDynamicTexture) {
         var scaleX = ((gameObject.scaleX !== undefined) ? gameObject.scaleX : 1) / fitScale;
         var scaleY = ((gameObject.scaleY !== undefined) ? gameObject.scaleY : 1) / fitScale;
+        if (flipX) {
+            scaleX *= -1;
+        }
+        if (flipY) {
+            scaleY *= -1;
+        }
 
         drawCallback = function (texture, frameSize) {
             frameSize.width = bounds.width;
@@ -147,6 +156,8 @@ var Paste = function (frameName, gameObject) {
         var drawY = bounds.y;
         var left = -originX * drawWidth;
         var top = -originY * drawHeight;
+        var flipScaleX = (((gameObject.scaleX !== undefined) && (gameObject.scaleX < 0)) !== flipX) ? -1 : 1;
+        var flipScaleY = (((gameObject.scaleY !== undefined) && (gameObject.scaleY < 0)) !== flipY) ? -1 : 1;
 
         var srcCanvas = gameObject.canvas;
         var srcFrame = gameObject.frame;
@@ -156,8 +167,10 @@ var Paste = function (frameName, gameObject) {
                 frameSize.height = bounds.height;
 
                 context.save();
+                context.globalAlpha = alpha;
                 context.translate(drawX, drawY);
                 context.rotate(rotation);
+                context.scale(flipScaleX, flipScaleY);
 
                 if (srcCanvas) {
                     context.drawImage(srcCanvas, left, top, drawWidth, drawHeight);
