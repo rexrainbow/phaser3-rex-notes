@@ -106,7 +106,7 @@ class ImageData extends RenderBase {
         // TODO: Pass tintMode from paremeter
 
         DrawFrameToCanvas(
-            this.frameObj, this.canvas,
+            this.frameObj, this.context,
             0, 0, this.frameWidth, this.frameHeight,
             this.color, false, tintMode
         );

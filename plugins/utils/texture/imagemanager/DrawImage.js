@@ -25,7 +25,7 @@ var DrawImage = function (key, context, x, y, color, autoRound) {
     }
 
     DrawFrameToCanvas(
-        frame, context.canvas,
+        frame, context,
         x, y, width, height,
         color, autoRound, tintFill
     );
