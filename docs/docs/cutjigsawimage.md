@@ -81,7 +81,7 @@ var pieces = scene.plugins.get('rexCutJigsawImage').gridCut(gameObject, {
     rows: ,
     edgeWidth: , 
     edgeHeight: ,
-    useDynamicTexture: true,
+    useDynamicTexture: false,
 
     // drawShapeCallback: undefined,
     // edges: undefined,    
@@ -103,8 +103,20 @@ var pieces = scene.plugins.get('rexCutJigsawImage').gridCut(gameObject, {
 - `columns`, `rows` : Cut texture in `columns` x `rows` grids
 - `edgeWidth`, `edgeHeight` : Padding around piece.
 - `useDynamicTexture` : Generate frame of pieces on [dynamic texture](dynamic-texture.md) or [canvas texture](canvas-texture.md).
-    - `true` : Generate frame of pieces on [dynamic texture](dynamic-texture.md). Default value.
-    - `false` : Generate frame of pieces on [canvas texture](canvas-texture.md).
+    - `false` : Generate frame of pieces on [canvas texture](canvas-texture.md). Default value.- 
+        - Set `useDynamicTexture` to `false` when using `pixelPerfect` interactive mode.
+            ```javascript
+            piece
+                .setInteractive({
+                    draggable: true,
+                    pixelPerfect: true
+                })
+                .on('drag', function (pointer, dragX, dragY) {
+                    piece.setPosition(dragX, dragY);
+                    piece.scene.children.bringToTop(piece);
+                })
+            ```
+    - `true` : Generate frame of pieces on [dynamic texture](dynamic-texture.md).
 - `drawShapeCallback` : Callback of creating piece shape
     - `undefined` : Use default piece shape.
     - A function object

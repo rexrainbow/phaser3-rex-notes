@@ -52,7 +52,9 @@ var CreatePieces = function (scene, key, x, y) {
         piecesKey: 'pieces',
         columns: 8, rows: 6,
         edgeWidth: 15, edgeHeight: 15,
-        useDynamicTexture: false
+
+        // useDynamicTexture: true,  
+        // TextureManager.getPixelAlpha: The texture source must be Image, Canvas, or Video
     });
 
     sourceImage.destroy()

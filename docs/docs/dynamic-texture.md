@@ -118,6 +118,8 @@ texture.stamp(key, frame, x, y, {
 - `x`, `y` : Top-left position
 - `originX`, `originY` : The horizontal/vertical origin of the stamp. Default value is `0.5`/`0.5`.
 
+!!! note
+    This method ignores the `camera` property of the Dynamic Texture.
 
 ### Draw repeat frames
 

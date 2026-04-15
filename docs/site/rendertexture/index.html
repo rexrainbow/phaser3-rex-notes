@@ -3809,6 +3809,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#capture-game-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      Capture game object
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#erase" class="md-nav__link">
     <span class="md-ellipsis">
       Erase
@@ -15224,6 +15233,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#capture-game-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      Capture game object
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#erase" class="md-nav__link">
     <span class="md-ellipsis">
       Erase
@@ -15416,8 +15434,12 @@
 </code></pre></div></li>
 </ul>
 <h3 id="set-size">Set size<a class="headerlink" href="#set-size" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">rt</span><span class="p">.</span><span class="nx">setSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="nx">rt</span><span class="p">.</span><span class="nx">reSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">);</span>
 </code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code>rt.setSize(width, height)</code> won't change size of dynamic-texture.</p>
+</div>
 <h3 id="fill-color">Fill color<a class="headerlink" href="#fill-color" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">rt</span><span class="p">.</span><span class="nx">fill</span><span class="p">(</span><span class="nx">rgb</span><span class="p">);</span>
 <span class="c1">// rt.fill(rgb, alpha, x, y, width, height);</span>
@@ -15428,6 +15450,8 @@
 <li><code>x</code>, <code>y</code>, <code>width</code>, <code>height</code> : The area of the fill rectangle. Default behavior is filling whole size.</li>
 </ul>
 <h3 id="clear">Clear<a class="headerlink" href="#clear" title="Permanent link">&para;</a></h3>
+<p>Clears a portion or everything from this Render Texture by erasing it and 
+resetting it back to a blank, transparent, texture.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">rt</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="nx">rt</span><span class="p">.</span><span class="nx">clear</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">);</span>
@@ -15459,6 +15483,50 @@
 </ul>
 </li>
 </ul>
+<h3 id="capture-game-object">Capture game object<a class="headerlink" href="#capture-game-object" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">rt</span><span class="p">.</span><span class="nx">capture</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">transform</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;world&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="c1">// camera: undefined,</span>
+<span class="w">    </span><span class="c1">// x: gameObject.x,</span>
+<span class="w">    </span><span class="c1">// y: gameObject.y,</span>
+<span class="w">    </span><span class="c1">// alpha: gameObject.alpha,</span>
+<span class="w">    </span><span class="c1">// tint: gameObject.tint,</span>
+<span class="w">    </span><span class="c1">// angle: gameObject.angle,</span>
+<span class="w">    </span><span class="c1">// rotation: gameObject.rotation,</span>
+<span class="w">    </span><span class="c1">// scale: 1,</span>
+<span class="w">    </span><span class="c1">// scaleX: gameObject.scaleX,</span>
+<span class="w">    </span><span class="c1">// scaleY: gameObject.scaleY,</span>
+<span class="w">    </span><span class="c1">// originX: gameObject.originX,</span>
+<span class="w">    </span><span class="c1">// originY: gameObject.originY,</span>
+<span class="w">    </span><span class="c1">// blendMode: gameObject.blendMode</span>
+<span class="p">}).</span><span class="nx">render</span><span class="p">();</span>
+</code></pre></div>
+<ul>
+<li><code>gameObject</code> : Any renderable Game Object.</li>
+<li><code>transform</code> : The transform to use after applying other config settings. Default value is <code>'world'</code>.<ul>
+<li><code>'local'</code> : Use the game object's own transform directly.</li>
+<li><code>'world'</code> : Use <code>parentContainer</code> to compute world transform.</li>
+<li><code>TransformMatrix</code> : Use this matrix directly.</li>
+</ul>
+</li>
+<li><code>camera</code> : The camera to use when rendering the game object to the render texture. Default behavior is using render texture's internal camera.</li>
+<li><code>x</code>, <code>y</code> : Override the game object's position for this capture only.</li>
+<li><code>alpha</code>, <code>tint</code> : Override alpha/tint for this capture only.</li>
+<li><code>angle</code>, <code>rotation</code> : Override rotation for this capture only.<ul>
+<li>If <code>angle</code> is non-zero, <code>rotation</code> is ignored.</li>
+</ul>
+</li>
+<li><code>scale</code>, <code>scaleX</code>, <code>scaleY</code> : Override scale for this capture only.<ul>
+<li><code>scaleX</code>/<code>scaleY</code> will override <code>scale</code>.</li>
+</ul>
+</li>
+<li><code>originX</code>, <code>originY</code> : Override origin for this capture only.</li>
+<li><code>blendMode</code> : Override blend mode for this capture only.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Capture temporarily overrides these properties when rendering, then restores the original values after rendering.</p>
+</div>
 <h3 id="erase">Erase<a class="headerlink" href="#erase" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">rt</span><span class="p">.</span><span class="nx">erase</span><span class="p">(</span><span class="nx">entries</span><span class="p">).</span><span class="nx">render</span><span class="p">();</span>
 <span class="c1">// rt.erase(entries, x, y).render();</span>
@@ -15499,7 +15567,12 @@
 </code></pre></div>
 <ul>
 <li><code>x</code>, <code>y</code> : Top-left position</li>
+<li><code>originX</code>, <code>originY</code> : The horizontal/vertical origin of the stamp. Default value is <code>0.5</code>/<code>0.5</code>.</li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This method ignores the <code>camera</code> property of the Dynamic Texture.</p>
+</div>
 <h3 id="draw-repeat-frames">Draw repeat frames<a class="headerlink" href="#draw-repeat-frames" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Repeat frames full of size

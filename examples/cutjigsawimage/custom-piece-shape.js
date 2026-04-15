@@ -18,7 +18,7 @@ class Demo extends Phaser.Scene {
             piecesKey: 'pieces',
             columns: 8, rows: 6,
             edgeWidth: 20, edgeHeight: 20,
-            useDynamicTexture: false,
+            // useDynamicTexture: true,
             drawShapeCallback: DrawShapeCallback
         });
 
@@ -27,7 +27,7 @@ class Demo extends Phaser.Scene {
 
             piece
                 .enableFilters()
-                .filters.internal.addGlow(0xff0000, 2, 0)
+                .filters.internal.addGlow(0xff0000, 4, 0)
                 .setPaddingOverride(null)
         }
     }

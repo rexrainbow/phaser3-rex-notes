@@ -15227,7 +15227,7 @@
 <span class="w">    </span><span class="nx">rows</span><span class="o">:</span><span class="w"> </span><span class="p">,</span>
 <span class="w">    </span><span class="nx">edgeWidth</span><span class="o">:</span><span class="w"> </span><span class="p">,</span><span class="w"> </span>
 <span class="w">    </span><span class="nx">edgeHeight</span><span class="o">:</span><span class="w"> </span><span class="p">,</span>
-<span class="w">    </span><span class="nx">useDynamicTexture</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">useDynamicTexture</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 
 <span class="w">    </span><span class="c1">// drawShapeCallback: undefined,</span>
 <span class="w">    </span><span class="c1">// edges: undefined,    </span>
@@ -15251,8 +15251,21 @@
 <li><code>columns</code>, <code>rows</code> : Cut texture in <code>columns</code> x <code>rows</code> grids</li>
 <li><code>edgeWidth</code>, <code>edgeHeight</code> : Padding around piece.</li>
 <li><code>useDynamicTexture</code> : Generate frame of pieces on <a href="../dynamic-texture/">dynamic texture</a> or <a href="../canvas-texture/">canvas texture</a>.<ul>
-<li><code>true</code> : Generate frame of pieces on <a href="../dynamic-texture/">dynamic texture</a>. Default value.</li>
-<li><code>false</code> : Generate frame of pieces on <a href="../canvas-texture/">canvas texture</a>.</li>
+<li><code>false</code> : Generate frame of pieces on <a href="../canvas-texture/">canvas texture</a>. Default value.- <ul>
+<li>Set <code>useDynamicTexture</code> to <code>false</code> when using <code>pixelPerfect</code> interactive mode.
+    <div class="highlight"><pre><span></span><code><span class="nx">piece</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">setInteractive</span><span class="p">({</span>
+<span class="w">        </span><span class="nx">draggable</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">pixelPerfect</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;drag&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span><span class="w"> </span><span class="nx">dragX</span><span class="p">,</span><span class="w"> </span><span class="nx">dragY</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">piece</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">dragX</span><span class="p">,</span><span class="w"> </span><span class="nx">dragY</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">piece</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">bringToTop</span><span class="p">(</span><span class="nx">piece</span><span class="p">);</span>
+<span class="w">    </span><span class="p">})</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li><code>true</code> : Generate frame of pieces on <a href="../dynamic-texture/">dynamic texture</a>.</li>
 </ul>
 </li>
 <li><code>drawShapeCallback</code> : Callback of creating piece shape<ul>

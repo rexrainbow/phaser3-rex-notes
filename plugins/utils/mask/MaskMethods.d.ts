@@ -7,12 +7,15 @@
  * @param {Phaser.GameObjects.GameObject} gameObject - The target game object that will receive the mask.
  * @param {Phaser.GameObjects.GameObject} maskGameObject - The game object that provides the mask.
  * @param {boolean} [invert] - Set to `true` to invert the mask in WebGL mode.
+ * @param {boolean} [isLocalMask] - Set to `true` to create a local WebGL mask instead of a shared mask.
  * @returns {void}
  */
 declare function SetMask(
     gameObject: Phaser.GameObjects.GameObject,
-    invert?: boolean
-): Phaser.GameObjects.GameObject;
+    maskGameObject: Phaser.GameObjects.GameObject,
+    invert?: boolean,
+    isLocalMask?: boolean
+): void;
 
 /**
  * Remove the current mask from a game object.

@@ -15309,16 +15309,12 @@
 <h3 id="create-dynamic-texture">Create dynamic texture<a class="headerlink" href="#create-dynamic-texture" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">texture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">addDynamicTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">);</span>
 </code></pre></div>
-<p>Disable <code>texture.isSpriteTexture</code> if this texture is not a base texture for Sprite Game Objects.</p>
-<div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">setIsSpriteTexture</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
-<span class="c1">// texture.isSpriteTexture = false;</span>
-</code></pre></div>
 <h3 id="set-size">Set size<a class="headerlink" href="#set-size" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">setSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="fill-color">Fill color<a class="headerlink" href="#fill-color" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">fill</span><span class="p">(</span><span class="nx">rgb</span><span class="p">);</span>
-<span class="c1">// texture.fill(rgb, alpha, x, y, width, height);</span>
+<div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">fill</span><span class="p">(</span><span class="nx">rgb</span><span class="p">).</span><span class="nx">render</span><span class="p">();</span>
+<span class="c1">// texture.fill(rgb, alpha, x, y, width, height).render();</span>
 </code></pre></div>
 <ul>
 <li><code>rgb</code> : The number color to fill this Dynamic Texture with.</li>
@@ -15326,14 +15322,14 @@
 <li><code>x</code>, <code>y</code>, <code>width</code>, <code>height</code> : The area of the fill rectangle. Default behavior is filling whole size.</li>
 </ul>
 <h3 id="clear">Clear<a class="headerlink" href="#clear" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+<div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">clear</span><span class="p">().</span><span class="nx">render</span><span class="p">();</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">clear</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">clear</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">).</span><span class="nx">render</span><span class="p">();</span>
 </code></pre></div>
 <h3 id="draw-game-object">Draw game object<a class="headerlink" href="#draw-game-object" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">entries</span><span class="p">);</span>
-<span class="c1">// texture.draw(entries,x, y);</span>
-<span class="c1">// texture.draw(entries, x, y, alpha, tint);</span>
+<div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">entries</span><span class="p">).</span><span class="nx">render</span><span class="p">();</span>
+<span class="c1">// texture.draw(entries, x, y).render();</span>
+<span class="c1">// texture.draw(entries, x, y, alpha, tint).render();</span>
 </code></pre></div>
 <ul>
 <li><code>entries</code> : <ul>
@@ -15357,9 +15353,15 @@
 </ul>
 </li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>texture.draw(gameObject)</code> stores the game object in the command buffer, then renders it later when calling <code>texture.render()</code>.
+If this game object will be modified or reused before <code>texture.render()</code>, call <code>texture.draw(gameObject).render()</code> immediately.
+If the game object state will stay unchanged until <code>texture.render()</code>, multiple <code>draw(gameObject)</code> calls can be batched safely.</p>
+</div>
 <h3 id="erase">Erase<a class="headerlink" href="#erase" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">erase</span><span class="p">(</span><span class="nx">entries</span><span class="p">);</span>
-<span class="c1">// texture.erase(entries, x, y);</span>
+<div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">erase</span><span class="p">(</span><span class="nx">entries</span><span class="p">).</span><span class="nx">render</span><span class="p">();</span>
+<span class="c1">// texture.erase(entries, x, y).render();</span>
 </code></pre></div>
 <ul>
 <li><code>entries</code> : <ul>
@@ -15390,26 +15392,33 @@
 <span class="w">    </span><span class="nx">scaleY</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">originX</span><span class="o">:</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">originY</span><span class="o">:</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">blendMode</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">erase</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">skipBatch</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span>
-<span class="p">})</span>
+<span class="w">    </span><span class="nx">blendMode</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span>
+<span class="p">}).</span><span class="nx">render</span><span class="p">();</span>
 </code></pre></div>
 <p>or</p>
-<div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">drawFrame</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">);</span>
-<span class="c1">// texture.drawFrame(key, frame, x, y, alpha, tint);</span>
+<div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">stamp</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">alpha</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">tint</span><span class="o">:</span><span class="w"> </span><span class="mh">0xffffff</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">originX</span><span class="o">:</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">originY</span><span class="o">:</span><span class="w"> </span><span class="mf">0.5</span>
+<span class="p">}).</span><span class="nx">render</span><span class="p">();</span>
 </code></pre></div>
 <ul>
 <li><code>x</code>, <code>y</code> : Top-left position</li>
+<li><code>originX</code>, <code>originY</code> : The horizontal/vertical origin of the stamp. Default value is <code>0.5</code>/<code>0.5</code>.</li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This method ignores the <code>camera</code> property of the Dynamic Texture.</p>
+</div>
 <h3 id="draw-repeat-frames">Draw repeat frames<a class="headerlink" href="#draw-repeat-frames" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Repeat frames full of size
-    <div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">repeat</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">repeat</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">).</span><span class="nx">render</span><span class="p">();</span>
 </code></pre></div></li>
 <li>Repeat in an area
-    <div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">repeat</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">);</span>
-<span class="c1">// texture.repeat(key, frame, x, y, width, height, alpha, tint, skipBatch);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">repeat</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">).</span><span class="nx">render</span><span class="p">();</span>
+<span class="c1">// texture.repeat(key, frame, x, y, width, height, config).render();</span>
 </code></pre></div></li>
 </ul>
 <h3 id="add-frame">Add frame<a class="headerlink" href="#add-frame" title="Permanent link">&para;</a></h3>
@@ -15425,12 +15434,9 @@
 </ul>
 <h3 id="batch-draw">Batch draw<a class="headerlink" href="#batch-draw" title="Permanent link">&para;</a></h3>
 <ol>
-<li>Begin
-    <div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">beginDraw</span><span class="p">();</span>
-</code></pre></div></li>
 <li>Draw<ul>
 <li>Draw game object
-    <div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">batchDraw</span><span class="p">(</span><span class="nx">entries</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">alpha</span><span class="p">,</span><span class="w"> </span><span class="nx">tint</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">entries</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">alpha</span><span class="p">,</span><span class="w"> </span><span class="nx">tint</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>entries</code> : <ul>
 <li>Any renderable Game Object, such as a Sprite, Text, Graphics or TileSprite.</li>
@@ -15446,21 +15452,28 @@
 </ul>
 </li>
 <li>Draw frame
-    <div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">batchDrawFrame</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">alpha</span><span class="p">,</span><span class="w"> </span><span class="nx">tint</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">stamp</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">alpha</span><span class="o">:</span><span class="w"> </span><span class="nx">alpha</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">tint</span><span class="o">:</span><span class="w"> </span><span class="nx">tint</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">originX</span><span class="o">:</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">originY</span><span class="o">:</span><span class="w"> </span><span class="mf">0.5</span>
+<span class="p">});</span>
 </code></pre></div></li>
 <li>Draw image
     <div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">stamp</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// ...</span>
-<span class="w">    </span><span class="nx">skipBatch</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span>
-<span class="p">})</span>
+<span class="p">});</span>
 </code></pre></div></li>
 <li>Draw repeat images
-    <div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">repeat</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="nx">alpha</span><span class="p">,</span><span class="w"> </span><span class="nx">tint</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">repeat</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">frame</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">width</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">alpha</span><span class="o">:</span><span class="w"> </span><span class="nx">alpha</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">tint</span><span class="o">:</span><span class="w"> </span><span class="nx">tint</span>
+<span class="p">});</span>
 </code></pre></div></li>
 </ul>
 </li>
 <li>End
-    <div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">endDraw</span><span class="p">();</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span>
 </code></pre></div></li>
 </ol>
 <h3 id="internal-camera">Internal camera<a class="headerlink" href="#internal-camera" title="Permanent link">&para;</a></h3>

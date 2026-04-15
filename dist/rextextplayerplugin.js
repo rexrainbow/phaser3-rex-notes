@@ -11148,7 +11148,27 @@ void main (void) {
     const CanvasPool = Phaser.Display.Canvas.CanvasPool;
     const TintModes$3 = Phaser.TintModes;
 
-    var DrawFrameToCanvas = function (frame, canvas, x, y, width, height, color, autoRound, tintMode) {
+    var GetContext2D = function (canvasOrContext) {
+        if (
+            canvasOrContext &&
+            typeof canvasOrContext.drawImage === 'function' &&
+            canvasOrContext.canvas
+        ) {
+            return canvasOrContext; // already a context
+        }
+
+        if (
+            canvasOrContext &&
+            typeof canvasOrContext.getContext === 'function'
+        ) {
+            return canvasOrContext.getContext('2d', { willReadFrequently: true });
+        }
+
+        return null;
+    };
+
+
+    var DrawFrameToCanvas = function (frame, canvasOrContext, x, y, width, height, color, autoRound, tintMode) {
         if (x === undefined) { x = 0; }
         if (y === undefined) { y = 0; }
         if (width === undefined) { width = frame.cutWidth; }
@@ -11159,7 +11179,7 @@ void main (void) {
             y = Math.round(y);
         }
 
-        var context = canvas.getContext('2d', { willReadFrequently: true });
+        var context = GetContext2D(canvasOrContext);
 
         if (tintMode === true) {
             tintMode = TintModes$3.FILL;
@@ -11356,7 +11376,7 @@ void main (void) {
             // TODO: Pass tintMode from paremeter
 
             DrawFrameToCanvas(
-                this.frameObj, this.canvas,
+                this.frameObj, this.context,
                 0, 0, this.frameWidth, this.frameHeight,
                 this.color, false, tintMode
             );
@@ -16087,7 +16107,7 @@ void main (void) {
         }
 
         DrawFrameToCanvas(
-            frame, context.canvas,
+            frame, context,
             x, y, width, height,
             color, autoRound, tintFill
         );

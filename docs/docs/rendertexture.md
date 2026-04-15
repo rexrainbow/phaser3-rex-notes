@@ -88,6 +88,9 @@ rt.fill(rgb);
 
 ### Clear
 
+Clears a portion or everything from this Render Texture by erasing it and 
+resetting it back to a blank, transparent, texture.
+
 ```javascript
 rt.clear();
 ```
@@ -120,6 +123,45 @@ rt.draw(entries).render();
 - `alpha`, `tint` : Only used by Texture Frames.
     - Game Objects use their own alpha and tint values when being drawn.
 
+
+### Capture game object
+
+```javascript
+rt.capture(gameObject, {
+    transform: 'world',
+    // camera: undefined,
+    // x: gameObject.x,
+    // y: gameObject.y,
+    // alpha: gameObject.alpha,
+    // tint: gameObject.tint,
+    // angle: gameObject.angle,
+    // rotation: gameObject.rotation,
+    // scale: 1,
+    // scaleX: gameObject.scaleX,
+    // scaleY: gameObject.scaleY,
+    // originX: gameObject.originX,
+    // originY: gameObject.originY,
+    // blendMode: gameObject.blendMode
+}).render();
+```
+
+- `gameObject` : Any renderable Game Object.
+- `transform` : The transform to use after applying other config settings. Default value is `'world'`.
+    - `'local'` : Use the game object's own transform directly.
+    - `'world'` : Use `parentContainer` to compute world transform.
+    - `TransformMatrix` : Use this matrix directly.
+- `camera` : The camera to use when rendering the game object to the render texture. Default behavior is using render texture's internal camera.
+- `x`, `y` : Override the game object's position for this capture only.
+- `alpha`, `tint` : Override alpha/tint for this capture only.
+- `angle`, `rotation` : Override rotation for this capture only.
+    - If `angle` is non-zero, `rotation` is ignored.
+- `scale`, `scaleX`, `scaleY` : Override scale for this capture only.
+    - `scaleX`/`scaleY` will override `scale`.
+- `originX`, `originY` : Override origin for this capture only.
+- `blendMode` : Override blend mode for this capture only.
+
+!!! note
+    Capture temporarily overrides these properties when rendering, then restores the original values after rendering.
 
 ### Erase
 
@@ -162,6 +204,10 @@ rt.stamp(key, frame, x, y, {
 ```
 
 - `x`, `y` : Top-left position
+- `originX`, `originY` : The horizontal/vertical origin of the stamp. Default value is `0.5`/`0.5`.
+
+!!! note
+    This method ignores the `camera` property of the Dynamic Texture.
 
 
 ### Draw repeat frames

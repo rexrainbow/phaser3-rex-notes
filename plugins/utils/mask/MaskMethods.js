@@ -5,7 +5,12 @@ const MaskController = Phaser.Filters.Mask;
 var SetMask = function (gameObject, maskGameObject, invert, isLocalMask) {
     if (IsWebGLRenderMode(gameObject)) {
         // WEBGL mask
-        WebGLSetSharedMask(gameObject, maskGameObject, invert);
+        if (isLocalMask) {
+            WebGLSetLocalMask(gameObject, maskGameObject, invert);
+        } else {
+            WebGLSetSharedMask(gameObject, maskGameObject, invert);
+        }
+
     } else {
         // CANVAS mask
         CanvasSetMask(gameObject, maskGameObject);
@@ -18,6 +23,7 @@ var WebGLSetSharedMask = function (gameObject, maskGameObject, invert) {
     var maskObject = maskGameObject._maskObject;
     if (!maskObject) {
         maskObject = new MaskController(maskGameObject.scene.cameras.main, maskGameObject, invert);
+        maskObject.ignoreDestroy = true;
         // camera, mask, invert, viewCamera, viewTransform, scaleFactor
         maskGameObject._maskObject = maskObject;
         // Destroy mask object when mask source game object is destroyed
@@ -62,6 +68,22 @@ var WebGLSetSharedMask = function (gameObject, maskGameObject, invert) {
     gameObject.mask = maskObject;
 }
 
+var WebGLSetLocalMask = function (gameObject, maskGameObject, invert) {
+    if (!gameObject.filters) {
+        if (!gameObject.enableFilters) {
+            return;
+        }
+
+        gameObject.enableFilters();
+    }
+
+    if (gameObject.mask) {
+        WebGLClearLocalMask(gameObject);
+    }
+
+    gameObject.mask = gameObject.filters.internal.addMask(maskGameObject, invert, undefined, 'local');
+}
+
 var CanvasSetMask = function (gameObject, maskGameObject) {
     // Share this GeometryMask for all mask target game object
     var maskObject = maskGameObject._maskObject;
@@ -96,15 +118,15 @@ var WebglClearSharedMask = function (gameObject) {
     if (!gameObject.mask) {
         return;
     }
-    var filterList = gameObject.filters.external;
-    var list = filterList.list;
+    gameObject.filters.external.remove(gameObject.mask, false);
+    gameObject.mask = null;
+}
 
-    // Remove current mask object from external filter list
-    var index = list.indexOf(gameObject.mask);
-    if (index !== -1) {
-        list.splice(index, 1);
+var WebGLClearLocalMask = function (gameObject) {
+    if (!gameObject.mask) {
+        return;
     }
-
+    gameObject.filters.internal.remove(gameObject.mask, true);
     gameObject.mask = null;
 }
 

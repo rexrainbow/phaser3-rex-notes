@@ -1,4 +1,5 @@
-import GridCutImage from '../../../../actions/GridCutImage.js'
+import GridCutImage from '../../../../actions/GridCutImage.js';
+import { ClearMask } from '../../../../utils/mask/MaskMethods.js';
 
 export default {
     gridCutImage(gameObject, columns, rows, config) {
@@ -48,7 +49,7 @@ export default {
                 .setChildLocalScale(cellImage, 1)
                 .setChildLocalVisible(cellImage, false)
 
-            cellImage.clearMask();
+            ClearMask(cellImage);
 
             // Remove frame object
             frameName = cellImage.frame.name;

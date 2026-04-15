@@ -9,7 +9,7 @@ var CreatePieces = function (gameObject, {
     edgeWidth, edgeHeight,
     drawShapeCallback,
     edges,
-    useDynamicTexture = true,
+    useDynamicTexture = false,
 
     createImageCallback,
     ImageClass = DefaultImageClass,

@@ -4,6 +4,7 @@ Sample JigsawPiece, draw to FrameManager
 import JigsawPieceBase from './JigsawPieceBase.js';
 import DefaultDrawShapeCallback from './DefaultDrawShapeCallback.js';
 import ConvertEdgeMode from './ConvertEdgeMode.js';
+import { SetMask } from '../../../../utils/mask/MaskMethods.js';
 
 const RenderTexture = Phaser.GameObjects.RenderTexture;
 
@@ -17,8 +18,11 @@ class JigsawPieceRenderTexurue extends JigsawPieceBase(RenderTexture) {
 
         this.init(config);
 
-        var maskGraphics = scene.make.graphics({ add: false });
-        this.setMask(maskGraphics.createGeometryMask());
+        var maskGraphics = scene.make.graphics({
+            fillStyle: { color: 0xffffff, alpha: 1 },
+            add: false
+        });
+        SetMask(this, maskGraphics, undefined, true);
         this.maskGraphics = maskGraphics;
     }
 
@@ -43,13 +47,13 @@ class JigsawPieceRenderTexurue extends JigsawPieceBase(RenderTexture) {
 
         this.clear();
 
-        this.camera.setScroll(scrollX, scrollY);
-
-        this.stamp(this.sourceKey, undefined, 0, 0, {
-            originX: 0, originY: 0,
-        });
-
-        this.camera.setScroll(0, 0);
+        this.stamp(
+            this.sourceKey, undefined,
+            -scrollX, -scrollY,
+            {
+                originX: 0, originY: 0,
+            }
+        );
 
         this.maskGraphics.clear();
 
@@ -59,6 +63,8 @@ class JigsawPieceRenderTexurue extends JigsawPieceBase(RenderTexture) {
             this.edgeWidth, this.edgeHeight,
             edgeMode
         );
+
+        this.render();
 
         return this;
     }

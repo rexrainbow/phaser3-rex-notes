@@ -3172,22 +3172,23 @@
         }
 
         if (IsWebGLRenderMode(gameObject)) {
-            // WEBGL mask
-            var filterList = gameObject.filters.external;
-            var list = filterList.list;
-
-            // Remove current mask object from external filter list
-            var index = list.indexOf(gameObject.mask);
-            list.splice(index, 1);
+            WebglClearSharedMask(gameObject);
 
         } else {
-            // CANVAS mask
-            if (!gameObject.clearMask) {
-                return;
-            }
-
+            CanvasClearMask(gameObject);
         }
 
+    };
+
+    var WebglClearSharedMask = function (gameObject) {
+        if (!gameObject.mask) {
+            return;
+        }
+        gameObject.filters.external.remove(gameObject.mask, false);
+        gameObject.mask = null;
+    };
+
+    var CanvasClearMask = function (gameObject) {
         gameObject.mask = null;
     };
 

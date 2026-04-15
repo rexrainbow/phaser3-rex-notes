@@ -17,7 +17,7 @@ var GenerateFrames = function (scene, {
     edgeWidth, edgeHeight,
     edges,
     drawShapeCallback = DefaultDrawShapeCallback,
-    useDynamicTexture = true,
+    useDynamicTexture = false,
     getFrameNameCallback = DefaultGetFrameNameCallback
 }) {
 

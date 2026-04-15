@@ -20,7 +20,7 @@ class Demo extends Phaser.Scene {
 
             piece
                 .enableFilters()
-                .filters.internal.addGlow(0xff0000, 2, 0)
+                .filters.internal.addGlow(0xff0000, 4, 0)
                 .setPaddingOverride(null)
 
             piece
@@ -52,7 +52,10 @@ var CreatePieces = function (scene, key, x, y) {
         piecesKey: 'pieces',
         columns: 8, rows: 6,
         edgeWidth: 15, edgeHeight: 15,
-        useDynamicTexture: false,
+
+        // useDynamicTexture: true,  
+        // TextureManager.getPixelAlpha: The texture source must be Image, Canvas, or Video
+
         edges: {
             getRightEdge(c, r) { return 1; },
             getBottomEdge(c, r) { return 1; }

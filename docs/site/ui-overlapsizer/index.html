@@ -15593,15 +15593,21 @@
 </ul>
 </li>
 <li><code>expand</code> :<ul>
-<li>Boolean value<ul>
-<li><code>true</code> : Expand width and height of child. Default value.</li>
-<li><code>false</code> : Don't expand width or height of child.</li>
+<li><code>true</code>, or <code>1</code> : Expand width and height of child. Default value.</li>
+<li><code>false</code>, or <code>0</code> : Keep current width and height of child.</li>
+<li>Other number value : Expand width and height of child via <code>parent.width * expand</code> and <code>parent.height * expand</code> </li>
+<li>A plain object, to expand width or height separately
+    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nx">width</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">height</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li><code>width</code>, <code>height</code> :<ul>
+<li><code>true</code>, or <code>1</code> : Expand width and height of child.</li>
+<li><code>false</code>, or <code>0</code> : Keep current width and height of child. Default value.</li>
+<li>Other number value : Expand width and height of child via <code>parent.width * expand</code> and <code>parent.height * expand</code> </li>
 </ul>
 </li>
-<li>A plain object<ul>
-<li><code>{width: true}</code> : Only expand width of child.</li>
-<li><code>{height: true}</code> : only expand height of child.</li>
-<li><code>{width: true, height: true}</code> : Expand width and height of child.</li>
 </ul>
 </li>
 </ul>
