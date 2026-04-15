@@ -1,5 +1,3 @@
-import DynamicTextureClearRectangle from '../../../utils/texture/DynamicTextureClearRectangle.js';
-
 var Draw = function (frameName, callback, scope) {
     var index = this.getFrameIndex(frameName);
     if (index === -1) {
@@ -10,6 +8,7 @@ var Draw = function (frameName, callback, scope) {
         return this;
     }
 
+    // Clear frame space
     var tl = this.getTopLeftPosition(index),
         outerX = tl.x,
         outerY = tl.y,
@@ -19,6 +18,7 @@ var Draw = function (frameName, callback, scope) {
 
     ClearFrame.call(this, outerX, outerY, this.outerCellWidth, this.outerCellHeight);
 
+    // Draw frame
     var frameSize = {
         width: this.cellWidth,
         height: this.cellHeight
@@ -37,7 +37,7 @@ var Draw = function (frameName, callback, scope) {
 
 var ClearFrame = function (x, y, width, height) {
     if (this.useDynamicTexture) {
-        DynamicTextureClearRectangle(this.texture, x, y, width, height);
+        this.texture.clear(x, y, width, height);
     } else {
         this.context.clearRect(x, y, width, height);
     }
@@ -65,13 +65,18 @@ var DrawDynamicTexture = function (x, y, frameSize, callback, scope) {
 
     // Draw cell
     texture.camera.setScroll(-x, -y);
+
     if (scope) {
         callback.call(scope, texture, frameSize);
     } else {
         callback(texture, frameSize);
     }
-    texture.camera.setScroll(0, 0);
     // frameSize might be changed
+
+    texture.render();
+
+    texture.camera.setScroll(0, 0);
+
 }
 
 export default Draw;

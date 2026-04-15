@@ -78,7 +78,7 @@ class FrameManager {
 
         if (fillColor !== undefined) {
             if (useDynamicTexture) {
-                this.texture.fill(fillColor);
+                this.texture.fill(fillColor).render();
 
             } else {
                 var context = this.context;
@@ -143,7 +143,7 @@ class FrameManager {
 
     updateTexture() {
         if (this.useDynamicTexture) {
-
+            this.texture.render();
         } else {
             this.texture.refresh();
         }
