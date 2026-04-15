@@ -9,10 +9,11 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
+        this.load.image('mushroom', 'assets/images/mushroom.png');
     }
 
     create() {
-        var useDynamicTexture = true;
+        var useDynamicTexture = false;
         var frameManager = this.plugins.get('rexCanvasFrameManager').add(this,
             {
                 key: 'test',
@@ -27,7 +28,6 @@ class Demo extends Phaser.Scene {
 
         // A text object for drawing character
         var txt = this.make.text({
-            add: false,
             style: {
                 align: 'center',
                 fontSize: 64,
@@ -35,27 +35,43 @@ class Demo extends Phaser.Scene {
                 fixedHeight: 64,
                 padding: { top: 4 },
                 testString: '回'
-            }
+            },
+            add: false,
         });
 
-        // Draw character on text object then paste to canvas texture
+        // Image as character
+        var image = this.make.image({
+            key: 'mushroom',
+            add: false,
+        });
+
         var characters = '兒童樂園';
+        var dirCode = '↑→↓←';
+
+        // Draw character on text object then paste to frame manager
         for (var i = 0, cnt = characters.length; i < cnt; i++) {
             var c = characters.charAt(i);
             txt.setText(c)
             frameManager.paste(c, txt);
         }
+        // Paste image to frame manager
+        for (var i = 0, cnt = dirCode.length; i < cnt; i++) {
+            var c = dirCode.charAt(i);
+            image.setAngle(i * 90);
+            frameManager.paste(c, image);
+        }
         frameManager.updateTexture();
 
-        // Show frame by Image
-        for (var i = 0, cnt = characters.length; i < cnt; i++) {
-            var c = characters.charAt(i);
+        var testString = characters + dirCode;
+        // Show frame by Image        
+        for (var i = 0, cnt = testString.length; i < cnt; i++) {
+            var c = testString.charAt(i);
             this.add.image(50 + i * 64, 50, 'test', c);
         }
 
         // Add frames to bitmapfont, for bitmaptext
         frameManager.addToBitmapFont();
-        this.add.bitmapText(50, 100, 'test', '兒樂童園')
+        this.add.bitmapText(50, 100, 'test', testString)
             .setScale(0.5)
             .setCharacterTint(0, 1, false, 0xff0000)
             .setCharacterTint(-1, 1, false, 0x0000ff)
