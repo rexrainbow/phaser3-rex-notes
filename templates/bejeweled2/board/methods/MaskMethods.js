@@ -1,4 +1,5 @@
 import { SetMask } from '../../../../plugins/utils/mask/MaskMethods.js';
+import LayerGameObjectClassPatch from '../../../../plugins/utils/monkeypatch/LayerGameObjectClassPatch.js';
 
 const Graphics = Phaser.GameObjects.Graphics;
 
@@ -10,6 +11,7 @@ export default {
 
         if ((layer === undefined) || (layer === true)) {
             layer = this.scene.add.layer();
+            LayerGameObjectClassPatch(layer);
         }
         this.layer = layer;
         return this;
@@ -18,9 +20,9 @@ export default {
     resetBoardMask() {
         // Create Graphics game object, mask object
         if (!this.activateAreaMaskGameObject) {
-            this.activateAreaMaskGameObject = new Graphics(this.scene);
+            this.activateAreaMaskGameObject = this.scene.add.graphics().setVisible(true);
             this.enableBoardLayer();
-            SetMask(this.layer, this.activateAreaMaskGameObject);
+            SetMask(this.layer, this.activateAreaMaskGameObject, undefined, 'world');
         }
 
         // Draw Graphics game object, a rectangle of activate area
