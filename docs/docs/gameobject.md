@@ -20,6 +20,10 @@ Base class of all game object in phaser.
     }, scope);
     ```
     - `fromScene` : `true` if game object is destroyed during scene is shutdown. When scene is shutdown, all game objects will be destroyed.
+- Is destroyed
+    ```javascript
+    var isDestroyed = gameObject.isDestroyed;
+    ```
 
 ### Position
 

@@ -117,8 +117,10 @@ var CreateMenu = function (scene, x, y, items, onClick) {
             var scene = menu.scene;
 
             var maskGameObject = scene.add.circle(menu.x, menu.y, 0, 0x330000).setVisible(false);
-            maskGameObject.type = 'Graphics';
-            menu.setMask(maskGameObject.createGeometryMask());
+            var maskObject = menu
+                .enableLayer()   // Put children on layer
+                .enableFilters()
+                .filters.external.addMask(maskGameObject)
 
             var radius = Math.max(menu.width, menu.height) * 2;
             var tween = menu.scene.tweens.add({
@@ -126,7 +128,11 @@ var CreateMenu = function (scene, x, y, items, onClick) {
                 radius: { start: 0, to: radius },
                 duration: duration,
                 onComplete() {
-                    menu.clearMask(true);
+                    if (menu.filters) {
+                        menu.filters.external.remove(maskObject)
+                        // menu might be destroyed
+                    }
+                    maskObject.destroy();
                     maskGameObject.destroy();
                 }
             });

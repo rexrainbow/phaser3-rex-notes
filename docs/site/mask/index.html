@@ -6452,6 +6452,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="WEBGL render mode">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#shared-mask" class="md-nav__link">
+    <span class="md-ellipsis">
+      Shared mask
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#private-mask" class="md-nav__link">
+    <span class="md-ellipsis">
+      Private mask
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -15035,6 +15059,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="WEBGL render mode">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#shared-mask" class="md-nav__link">
+    <span class="md-ellipsis">
+      Shared mask
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#private-mask" class="md-nav__link">
+    <span class="md-ellipsis">
+      Private mask
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -15079,6 +15127,7 @@
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <h3 id="webgl-render-mode">WEBGL render mode<a class="headerlink" href="#webgl-render-mode" title="Permanent link">&para;</a></h3>
+<h4 id="shared-mask">Shared mask<a class="headerlink" href="#shared-mask" title="Permanent link">&para;</a></h4>
 <ol>
 <li>Create mask game object, from graphics (<a href="../graphics/">Graphics</a>), image (<a href="../image/">image</a>, <a href="../sprite/">sprite</a>, <a href="../bitmaptext/">bitmap text</a>, <a href="../particles/">particles</a>, <a href="../text/">text</a>),or <a href="../shader/">shader</a>
     <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">maskGameObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">GameObjects</span><span class="p">.</span><span class="nx">Graphics</span><span class="p">(</span><span class="nx">scene</span><span class="p">);</span><span class="w"> </span>
@@ -15094,6 +15143,29 @@
 </code></pre></div></li>
 <li>clear mask object
     <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">filters</span><span class="p">.</span><span class="nx">external</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">maskObject</span><span class="p">)</span>
+</code></pre></div></li>
+</ol>
+<h4 id="private-mask">Private mask<a class="headerlink" href="#private-mask" title="Permanent link">&para;</a></h4>
+<ol>
+<li>Create mask game object, from graphics (<a href="../graphics/">Graphics</a>), image (<a href="../image/">image</a>, <a href="../sprite/">sprite</a>, <a href="../bitmaptext/">bitmap text</a>, <a href="../particles/">particles</a>, <a href="../text/">text</a>),or <a href="../shader/">shader</a>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">maskGameObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">GameObjects</span><span class="p">.</span><span class="nx">Graphics</span><span class="p">(</span><span class="nx">scene</span><span class="p">);</span><span class="w"> </span>
+</code></pre></div></li>
+<li>Enable filter list
+    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">enableFilters</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Create mask object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">maskObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">gameObject</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">filters</span><span class="p">.</span><span class="nx">external</span><span class="p">.</span><span class="nx">addMask</span><span class="p">(</span><span class="nx">maskGameObject</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">// .filters.external.addMask(maskGameObject, invert, viewCamera, &#39;world&#39;, scaleFactor)</span>
+</code></pre></div>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">maskObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">gameObject</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">filters</span><span class="p">.</span><span class="nx">internal</span><span class="p">.</span><span class="nx">addMask</span><span class="p">(</span><span class="nx">maskGameObject</span><span class="p">,</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;local&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">undefined</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">// .filters.internal.addMask(maskGameObject, invert, viewCamera, &#39;local&#39;, scaleFactor)</span>
+</code></pre></div></li>
+<li>clear mask object
+    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">filters</span><span class="p">.</span><span class="nx">external</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">maskObject</span><span class="p">)</span>
+</code></pre></div>
+    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">filters</span><span class="p">.</span><span class="nx">internal</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">maskObject</span><span class="p">)</span>
 </code></pre></div></li>
 </ol>
 <h3 id="canvas-render-mode">CANVAS render mode<a class="headerlink" href="#canvas-render-mode" title="Permanent link">&para;</a></h3>

@@ -46,7 +46,7 @@ class Demo extends Phaser.Scene {
                 width: 200,
 
                 createBackgroundCallback: function (scene) {
-                    return scene.rexUI.add.roundRectangle(0, 0, 2, 2, 0, COLOR_DARK);
+                    return scene.rexUI.add.roundRectangle(0, 0, 2, 2, 0, COLOR_DARK).setName('bg');
                 },
                 createButtonCallback: function (scene, option, index, options) {
                     var text = option.text;
@@ -90,18 +90,25 @@ class Demo extends Phaser.Scene {
                 easeOut: 100,
                 transitIn: function (listPanel, duration) {
                     var scene = listPanel.scene;
-        
+
                     var maskGameObject = scene.add.circle(listPanel.x, listPanel.y, 0, 0x330000).setVisible(false);
-                    maskGameObject.type = 'Graphics';
-                    listPanel.setMask(maskGameObject.createGeometryMask());
-        
+
+                    var maskObject = listPanel
+                        .enableLayer()   // Put children on layer
+                        .enableFilters()
+                        .filters.external.addMask(maskGameObject)
+
                     var radius = Math.max(listPanel.width, listPanel.height) * 2;
                     var tween = listPanel.scene.tweens.add({
                         targets: maskGameObject,
                         radius: { start: 0, to: radius },
                         duration: duration,
                         onComplete() {
-                            listPanel.clearMask(true);
+                            if (listPanel.filters) {
+                                listPanel.filters.external.remove(maskObject)
+                                // listPanel might be destroyed
+                            }
+                            maskObject.destroy();
                             maskGameObject.destroy();
                         }
                     });

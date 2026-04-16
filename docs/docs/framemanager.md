@@ -138,6 +138,7 @@ frameManager.paste(frameName, gameObject);
 - `gameObject` : 
     - [Canvas-texture](canvas-texture.md) mode :
         - Game objects which has canvas, for example, [text](text.md), [bbcode text](bbcodetext.md), or [canvas](canvas.md).
+        - Game objects which has frame, for example, [image](image.md).
     - [Dynamic-texture](dynamic-texture.md) mode :
         -  Any render-able game object except :
             -  [Graphics](graphics.md) can't paste directly, because that Graphics game object does not have size. 
@@ -195,13 +196,11 @@ frameManager.addEmptyFrame(frameName);
 
 ### Update texture
 
-Update texture after adding frames, for [Canvas-texture](canvas-texture.md) mode.
+Update texture after adding frames.
 
 ```javascript
 frameManager.updateTexture();
 ```
-
-Do nothing in [Dynamic-texture](dynamic-texture.md) mode.
 
 ### Remove frame
 
