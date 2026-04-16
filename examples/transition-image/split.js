@@ -1,6 +1,6 @@
 import phaser from '../../../phaser/src/phaser.js';
 import TransitionImagePlugin from '../../plugins/transitionimage-plugin';
-import SplitPipelinePlugin from '../../plugins/splitpipeline-plugin.js'
+import SplitFilterPlugin from '../../plugins/splitfilter-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -37,52 +37,54 @@ class Demo extends Phaser.Scene {
 }
 
 var Split = function (transitionImage, key, frame) {
-    var scene = transitionImage.scene;
-    var postFxPlugin = scene.plugins.get('rexSplitPipelinePlugin');
-
+    var splitController;
     transitionImage.transit({
         key: key, frame: frame,
 
         duration: 2000, ease: 'Linear', dir: 'out', mask: true,
 
         onStart: function (parent, currentImage, nextImage, t) {
-            postFxPlugin.add(currentImage)
+            splitController = currentImage
+                .enableFilters()
+                .filters.internal.addRexSplit();
         },
         onProgress: function (parent, currentImage, nextImage, t) {
-            postFxPlugin.get(currentImage)[0]
-                .setSplit(currentImage.x, currentImage.y)
+            splitController
+                .setSplit(currentImage.width / 2, currentImage.height / 2)
                 .setSplittedWidth(currentImage.width * t)
                 .setSplittedHeight(currentImage.height * t)
                 .setAngle(180 * t)
         },
         onComplete: function (parent, currentImage, nextImage, t) {
-            postFxPlugin.remove(currentImage)
+            currentImage.filters.internal.remove(splitController);
+            splitController = null;
         },
     })
     return transitionImage;
 }
 
 var Aggregate = function (transitionImage, key, frame) {
-    var scene = transitionImage.scene;
-    var postFxPlugin = scene.plugins.get('rexSplitPipelinePlugin');
-
+    var splitController;
     transitionImage.transit({
         key: key, frame: frame,
 
         duration: 2000, ease: 'Cubic', dir: 'in', mask: true,
 
         onStart: function (parent, currentImage, nextImage, t) {
-            postFxPlugin.add(nextImage)
+            splitController = nextImage
+                .enableFilters()
+                .filters.internal.addRexSplit();
         },
         onProgress: function (parent, currentImage, nextImage, t) {
-            postFxPlugin.get(nextImage)[0]
-                .setSplit(nextImage.x, nextImage.y)
+            splitController
+                .setSplit(nextImage.width / 2, nextImage.height / 2)
                 .setSplittedWidth(nextImage.width * (1 - t))
                 .setSplittedHeight(nextImage.height * (1 - t))
                 .setAngle(180 * (1 - t))
         },
         onComplete: function (parent, currentImage, nextImage, t) {
-            postFxPlugin.remove(nextImage)
+            nextImage.filters.internal.remove(splitController);
+            splitController = null;
         },
     })
     return transitionImage;
@@ -106,8 +108,8 @@ var config = {
                 start: true
             },
             {
-                key: 'rexSplitPipelinePlugin',
-                plugin: SplitPipelinePlugin,
+                key: 'rexSplitFilter',
+                plugin: SplitFilterPlugin,
                 start: true
             }
         ]

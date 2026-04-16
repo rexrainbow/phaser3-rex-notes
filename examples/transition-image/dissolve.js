@@ -49,7 +49,7 @@ var Dissolve = function (transitionImage, key, frame) {
                 .filters.internal.addRexDissolve();
         },
         onProgress: function (parent, currentImage, nextImage, t) {
-            dissolveController.setProgress(t)
+            dissolveController.setProgress(t);
         },
         onComplete: function (parent, currentImage, nextImage, t) {
             currentImage.filters.internal.remove(dissolveController);
