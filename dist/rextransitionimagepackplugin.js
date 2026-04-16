@@ -4454,14 +4454,30 @@
 
     const MaskController = Phaser.Filters.Mask;
 
-    var SetMask = function (gameObject, maskGameObject, invert, isLocalMask) {
+    var SetMask = function (gameObject, maskGameObject, invert, maskType) {
         if (IsWebGLRenderMode(gameObject)) {
             // WEBGL mask
-            if (isLocalMask) {
-                WebGLSetLocalMask(gameObject, maskGameObject, invert);
-            } else {
-                WebGLSetSharedMask(gameObject, maskGameObject, invert);
+            // maskType = undefined('shared'), 'local', or 'world'
+            if (maskType === undefined) {
+                maskType = 'shared';
             }
+            maskGameObject._maskTpe = maskType;
+
+            switch (maskType) {
+                case 'local':
+                case 'world':
+                    WebGLSetPrivateMask(gameObject, maskGameObject, invert, maskType);
+                    break;
+
+                default: // shared
+                    WebGLSetSharedMask(gameObject, maskGameObject, invert);
+                    break;
+            }
+
+            /*
+            gameObject.mask
+            maskGameObject._maskTpe
+            */
 
         } else {
             // CANVAS mask
@@ -4520,7 +4536,7 @@
         gameObject.mask = maskObject;
     };
 
-    var WebGLSetLocalMask = function (gameObject, maskGameObject, invert) {
+    var WebGLSetPrivateMask = function (gameObject, maskGameObject, invert, maskType) {
         if (!gameObject.filters) {
             if (!gameObject.enableFilters) {
                 return;
@@ -4530,10 +4546,12 @@
         }
 
         if (gameObject.mask) {
-            WebGLClearLocalMask(gameObject);
+            ClearMask(gameObject);
         }
 
-        gameObject.mask = gameObject.filters.internal.addMask(maskGameObject, invert, undefined, 'local');
+        var filtersList = (maskType === 'local') ? gameObject.filters.internal : gameObject.filters.external;
+        var maskObject = filtersList.addMask(maskGameObject, invert, undefined, maskType);
+        gameObject.mask = maskObject;
     };
 
     var CanvasSetMask = function (gameObject, maskGameObject) {
@@ -4558,7 +4576,16 @@
         }
 
         if (IsWebGLRenderMode(gameObject)) {
-            WebglClearSharedMask(gameObject);
+            var maskTpe = gameObject.mask.maskGameObject._maskTpe;
+            switch (maskTpe) {
+                case 'local':
+                case 'world':
+                    WebGLClearPrivateMask(gameObject, maskTpe);
+                    break;
+                default: // shared
+                    WebglClearSharedMask(gameObject);
+                    break;
+            }
 
         } else {
             CanvasClearMask(gameObject);
@@ -4574,11 +4601,12 @@
         gameObject.mask = null;
     };
 
-    var WebGLClearLocalMask = function (gameObject) {
+    var WebGLClearPrivateMask = function (gameObject, maskTpe) {
         if (!gameObject.mask) {
             return;
         }
-        gameObject.filters.internal.remove(gameObject.mask, true);
+        var filtersList = (maskTpe === 'local') ? gameObject.filters.internal : gameObject.filters.external;
+        filtersList.remove(gameObject.mask, true);
         gameObject.mask = null;
     };
 
@@ -7260,6 +7288,28 @@
         return pathData;
     };
 
+    const ControlTypeQuadratic = 'quadratic';
+    const ControlTypeCubic = 'cubic';
+
+    var WarnPathTypeMismatch = function (methodName, expectedControlType) {
+        if (!this.pathTypeMismatchWarningEnable) {
+            return;
+        }
+
+        if ((typeof console === 'undefined') || !console.warn) {
+            return;
+        }
+
+        console.warn(
+            methodName +
+            ' path type mismatch: expected previous control type to be ' +
+            expectedControlType +
+            ', got ' +
+            (this.lastControlType || 'none') +
+            '. Falling back to current point as control point.'
+        );
+    };
+
     var AddPathMethods = {
         clear() {
             this.start();
@@ -7280,6 +7330,7 @@
             this.firstPointY = y;
             this.lastPointX = x;
             this.lastPointY = y;
+            this.resetControlPoint();
 
             return this;
         },
@@ -7297,6 +7348,7 @@
 
             this.lastPointX = x;
             this.lastPointY = y;
+            this.resetControlPoint();
             return this;
         },
 
@@ -7325,6 +7377,7 @@
 
             this.lastPointX = this.pathData[this.pathData.length - 2];
             this.lastPointY = this.pathData[this.pathData.length - 1];
+            this.resetControlPoint();
             return this;
         },
 
@@ -7342,6 +7395,28 @@
 
             this.lastPointX = x;
             this.lastPointY = y;
+            this.lastCX = cx;
+            this.lastCY = cy;
+            this.lastControlType = ControlTypeQuadratic;
+            return this;
+        },
+
+        smoothQuadraticBezierTo(x, y) {
+            var cx, cy;
+            if (this.lastControlType === ControlTypeQuadratic) {
+                cx = this.lastPointX * 2 - this.lastCX;
+                cy = this.lastPointY * 2 - this.lastCY;
+            } else {
+                WarnPathTypeMismatch.call(
+                    this,
+                    'smoothQuadraticBezierTo()',
+                    ControlTypeQuadratic
+                );
+                cx = this.lastPointX;
+                cy = this.lastPointY;
+            }
+
+            this.quadraticBezierTo(cx, cy, x, y);
             return this;
         },
 
@@ -7354,6 +7429,28 @@
 
             this.lastPointX = x;
             this.lastPointY = y;
+            this.lastCX = cx1;
+            this.lastCY = cy1;
+            this.lastControlType = ControlTypeCubic;
+            return this;
+        },
+
+        smoothCubicBezierTo(cx1, cy1, x, y) {
+            var cx0, cy0;
+            if (this.lastControlType === ControlTypeCubic) {
+                cx0 = this.lastPointX * 2 - this.lastCX;
+                cy0 = this.lastPointY * 2 - this.lastCY;
+            } else {
+                WarnPathTypeMismatch.call(
+                    this,
+                    'smoothCubicBezierTo()',
+                    ControlTypeCubic
+                );
+                cx0 = this.lastPointX;
+                cy0 = this.lastPointY;
+            }
+
+            this.cubicBezierTo(cx0, cy0, cx1, cy1, x, y);
             return this;
         },
 
@@ -7364,8 +7461,9 @@
                 this.pathData
             );
 
-            this.lastPointX = points[points.length-2];
-            this.lastPointY = points[points.length-1];
+            this.lastPointX = points[points.length - 2];
+            this.lastPointY = points[points.length - 1];
+            this.resetControlPoint();
             return this;
         },
 
@@ -7378,11 +7476,13 @@
             }
 
             this.closePath = true;
+            this.resetControlPoint();
             return this;
         },
 
         end() {
             DuplicateLast(this.pathData);
+            this.resetControlPoint();
             return this;
         },
 
@@ -7390,14 +7490,14 @@
 
     //import PointRotateAround from '../../utils/math/RotateAround.js';
 
-    const PointRotateAround = Phaser.Math.RotateAround;
+    const PointRotateAround$1 = Phaser.Math.RotateAround;
 
     var RotateAround = function (centerX, centerY, angle, pathData) {
         var point = { x: 0, y: 0 };
         for (var i = 0, cnt = pathData.length - 1; i < cnt; i += 2) {
             point.x = pathData[i];
             point.y = pathData[i + 1];
-            PointRotateAround(point, centerX, centerY, angle);
+            PointRotateAround$1(point, centerX, centerY, angle);
             pathData[i] = point.x;
             pathData[i + 1] = point.y;
         }
@@ -7425,7 +7525,7 @@
     };
 
     const DegToRad = Phaser.Math.DegToRad;
-    Phaser.Math.RotateAround;
+    const PointRotateAround = Phaser.Math.RotateAround;
 
     var TransformPointsMethods = {
         rotateAround(centerX, centerY, angle) {
@@ -7440,6 +7540,14 @@
             var pathDataCnt = this.pathData.length;
             this.lastPointX = this.pathData[pathDataCnt - 2];
             this.lastPointY = this.pathData[pathDataCnt - 1];
+
+            if (this.lastCX !== undefined) {
+                var point = { x: this.lastCX, y: this.lastCY };
+                PointRotateAround(point, centerX, centerY, angle);
+                this.lastCX = point.x;
+                this.lastCY = point.y;
+            }
+
             return this;
         },
 
@@ -7449,13 +7557,33 @@
             }
 
             Scale(centerX, centerY, scaleX, scaleY, this.pathData);
+            var pathDataCnt = this.pathData.length;
             this.lastPointX = this.pathData[pathDataCnt - 2];
             this.lastPointY = this.pathData[pathDataCnt - 1];
+
+            if (this.lastCX !== undefined) {
+                this.lastCX = ((this.lastCX - centerX) * scaleX) + centerX;
+                this.lastCY = ((this.lastCY - centerY) * scaleY) + centerY;
+            }
+
             return this;
         },
 
         offset(x, y) {
+            if (this.pathData.length === 0) {
+                return this;
+            }
+
             Offset(x, y, this.pathData);
+            var pathDataCnt = this.pathData.length;
+            this.lastPointX = this.pathData[pathDataCnt - 2];
+            this.lastPointY = this.pathData[pathDataCnt - 1];
+
+            if (this.lastCX !== undefined) {
+                this.lastCX += x;
+                this.lastCY += y;
+            }
+
             return this;
         }
 
@@ -7494,6 +7622,11 @@
             Copy(this.pathData, this.pathDataSave);
             this.pathDataSave = undefined;
             this.pathDataSaved = false;
+            this.firstPointX = this.pathData[0];
+            this.firstPointY = this.pathData[1];
+            this.lastPointX = this.pathData[this.pathData.length - 2];
+            this.lastPointY = this.pathData[this.pathData.length - 1];
+            this.resetControlPoint();
             return this;
         },
     };
@@ -7616,6 +7749,11 @@
             this.pathData.length = 0;
             AppendFromPathSegment(this.pathDataSave, this.accumulationLengths, startT, endT, this.pathData);
 
+            this.firstPointX = this.pathData[0];
+            this.firstPointY = this.pathData[1];
+            this.lastPointX = this.pathData[this.pathData.length - 2];
+            this.lastPointY = this.pathData[this.pathData.length - 1];
+            this.resetControlPoint();
             return this;
         },
 
@@ -7631,6 +7769,7 @@
             this.firstPointY = this.pathData[1];
             this.lastPointX = this.pathData[this.pathData.length - 2];
             this.lastPointY = this.pathData[this.pathData.length - 1];
+            this.resetControlPoint();
             return this;
         },
     };
@@ -7688,11 +7827,31 @@
             this.firstPointY = undefined;
             this.lastPointX = undefined;
             this.lastPointY = undefined;
+            this.lastCX = undefined;
+            this.lastCY = undefined;
+            this.lastControlType = undefined;
+            this.pathTypeMismatchWarningEnable = true;
             this.accumulationLengths = undefined;
         }
 
         setIterations(iterations) {
             this.iterations = iterations;
+            return this;
+        }
+
+        setPathTypeMismatchWarningEnable(enable) {
+            if (enable === undefined) {
+                enable = true;
+            }
+
+            this.pathTypeMismatchWarningEnable = enable;
+            return this;
+        }
+
+        resetControlPoint() {
+            this.lastCX = this.lastPointX;
+            this.lastCY = this.lastPointY;
+            this.lastControlType = undefined;
             return this;
         }
 
@@ -7732,6 +7891,11 @@
 
         setIterations(iterations) {
             this.iterations = iterations;
+            return this;
+        }
+
+        setPathTypeMismatchWarningEnable(enable) {
+            this.builder.setPathTypeMismatchWarningEnable(enable);
             return this;
         }
 
@@ -7799,8 +7963,22 @@
             return this;
         }
 
+        smoothQuadraticBezierTo(x, y) {
+            this.builder.smoothQuadraticBezierTo(x, y);
+
+            this.dirty = true;
+            return this;
+        }
+
         cubicBezierTo(cx0, cy0, cx1, cy1, x, y) {
             this.builder.cubicBezierTo(cx0, cy0, cx1, cy1, x, y);
+
+            this.dirty = true;
+            return this;
+        }
+
+        smoothCubicBezierTo(cx1, cy1, x, y) {
+            this.builder.smoothCubicBezierTo(cx1, cy1, x, y);
 
             this.dirty = true;
             return this;
