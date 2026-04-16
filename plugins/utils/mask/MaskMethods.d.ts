@@ -1,4 +1,13 @@
 /**
+ * WebGL mask placement mode.
+ *
+ * - `shared`: Share one mask controller from the mask source game object.
+ * - `local`: Add a private mask to the target's internal filter list.
+ * - `world`: Add a private mask to the target's external filter list.
+ */
+type MaskType = 'shared' | 'local' | 'world';
+
+/**
  * Apply a mask source game object to a target game object.
  *
  * The target receives either a WebGL `MaskController` or a Canvas
@@ -7,14 +16,14 @@
  * @param {Phaser.GameObjects.GameObject} gameObject - The target game object that will receive the mask.
  * @param {Phaser.GameObjects.GameObject} maskGameObject - The game object that provides the mask.
  * @param {boolean} [invert] - Set to `true` to invert the mask in WebGL mode.
- * @param {boolean} [isLocalMask] - Set to `true` to create a local WebGL mask instead of a shared mask.
+ * @param {MaskType} [maskType='shared'] - WebGL mask placement mode. Canvas mode always uses a shared `GeometryMask`.
  * @returns {void}
  */
 declare function SetMask(
     gameObject: Phaser.GameObjects.GameObject,
     maskGameObject: Phaser.GameObjects.GameObject,
     invert?: boolean,
-    isLocalMask?: boolean
+    maskType?: MaskType
 ): void;
 
 /**
@@ -31,6 +40,7 @@ declare function ClearMask(
 ): void;
 
 export {
+    MaskType,
     SetMask,
     ClearMask,
 }
