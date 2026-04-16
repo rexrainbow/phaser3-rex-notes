@@ -3,6 +3,7 @@ CheckP3Version();
 
 import Renderer from './renderer/Renderer.js';
 import ChildrenDisplayList from './renderer/ChildrenDisplayList.js';
+import AddToContainer from './p3container/AddToContainer.js';
 
 const Zone = Phaser.GameObjects.Zone;
 const AddItem = Phaser.Utils.Array.Add;
@@ -147,11 +148,11 @@ class Base extends Zone {
 
         this.rendererLayer = rendererLayer;
 
-        for (var i = 0, cnt = this.children.length; i < cnt; i++) {
-            this.addChildCallback(this.children[i]);
-        }
-
-        rendererLayer.queueDepthSort();
+        AddToContainer.call(this, rendererLayer, {
+            includeParent: false,
+            setLayerState: true,
+            clearDepthSort: true,
+        });
 
         return this;
     }

@@ -56,6 +56,7 @@ var CreateListPanel = function () {
 
     if (!isScrollable) {
         buttonConfig.height = height;
+        buttonConfig.background = background;
         buttons = CreateButtons(scene, buttonConfig, this.listWrapEnable);
         listPanel = buttons;
 
@@ -80,6 +81,8 @@ var CreateListPanel = function () {
             listPanel = new ScrollablePanel(scene, {
                 height: height,
                 scrollMode: 0,
+
+                background: background,
 
                 panel: {
                     child: buttons,
@@ -107,10 +110,6 @@ var CreateListPanel = function () {
             })
             scene.add.existing(listPanel);
         }
-    }
-
-    if (background) {
-        listPanel.addBackground(background, 'background');
     }
 
     if (this.listDraggable) {

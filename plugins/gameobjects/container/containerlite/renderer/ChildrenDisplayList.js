@@ -11,6 +11,7 @@ class ChildrenDisplayList extends List {
         this.scene = parent.scene;
         this.events = this.scene.sys.events;
         this.active = false;
+        this.isRexContainerLiteLayer = true;
         this.sortChildrenFlag = false;
 
         this.addCallback = this.addChildCallback;

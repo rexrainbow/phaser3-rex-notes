@@ -1,4 +1,5 @@
 import GetLocalState from './utils/GetLocalState.js';
+import AddToContainer from './p3container/AddToContainer.js';
 
 var GetRendererLayer = function () {
     // This containerLite has rendererLayer
@@ -61,7 +62,11 @@ export default {
 
         if (gameObject.isRexContainerLite) {
             // Add containerLite and its children
-            gameObject.addToLayer(layer);
+            AddToContainer.call(gameObject, layer, {
+                includeParent: true,
+                setLayerState: true,
+                clearDepthSort: false,
+            });
         } else {
             // Add gameObject directly
             layer.add(gameObject);

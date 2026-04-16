@@ -1,58 +1,29 @@
-import IsContainerGameObject from '../../../utils/system/IsContainerGameObject.js';
+import AddToContainer from './p3container/AddToContainer.js';
+import RemoveFromContainer from './p3container/RemoveFromContainer.js';
 import IsLayerGameObject from '../../../utils/system/IsLayerGameObject.js';
-import SortGameObjectsByDepth from '../../../utils/system/SortGameObjectsByDepth.js';
 
-var GetValidChildren = function (parent) {
-    var children = parent.getAllChildren([parent]);
-    children = children.filter(function (gameObject) {
-        return !!gameObject.displayList ||   // At scene's displayList or at a layer
-            !!gameObject.parentContainer;  // At a container
-    })
-    return children;
-}
-
-var AddToContainer = function (p3Container) {
-    var gameObjects = GetValidChildren(this);
-    // This containerLite parent should be considered.
-    if (gameObjects.indexOf(this) === -1) {
-        gameObjects.push(this);
-    }
-
-    SortGameObjectsByDepth(gameObjects);
-
-    p3Container.add(gameObjects);
-}
-
-var RemoveFromContainer = function (p3Container, descending, addToScene) {
-    if (!this.scene) {
-        // Destroyed
-        return;
-    }
-
-    var gameObjects = GetValidChildren(this);
-
-    SortGameObjectsByDepth(gameObjects, descending);
-
-    p3Container.remove(gameObjects);
-
-    if (addToScene) {
-        gameObjects.forEach(function (gameObject) {
-            gameObject.addToDisplayList();
-        });
-    }
+var IsLayer = function (gameObject) {
+    return gameObject && (IsLayerGameObject(gameObject) || gameObject.isRexContainerLiteLayer);
 }
 
 export default {
     addToContainer(p3Container) {
         this._setParentContainerFlag = true;
-        AddToContainer.call(this, p3Container);
+        AddToContainer.call(this, p3Container, {
+            includeParent: true,
+            setLayerState: false,
+            clearDepthSort: false,
+        });
         this._setParentContainerFlag = false;
         return this;
     },
 
     addToLayer(layer) {
-        AddToContainer.call(this, layer);
-
+        AddToContainer.call(this, layer, {
+            includeParent: true,
+            setLayerState: false,
+            clearDepthSort: false,
+        });
         return this;
     },
 
@@ -72,7 +43,7 @@ export default {
             addToScene = true;
         }
 
-        if (!IsLayerGameObject(this.displayList)) {
+        if (!IsLayer(this.displayList)) {
             return this;
         }
 
@@ -133,7 +104,7 @@ export default {
             return this;
         }
 
-        if (IsLayerGameObject(parentLayer)) {
+        if (IsLayer(parentLayer)) {
             if (gameObject.isRexContainerLite) {
                 // Add containerLite and its children
                 gameObject.addToLayer(parentLayer);
@@ -148,3 +119,5 @@ export default {
         return this;
     }
 }
+
+export { AddToContainer };
