@@ -22,7 +22,7 @@ class JigsawPieceRenderTexurue extends JigsawPieceBase(RenderTexture) {
             fillStyle: { color: 0xffffff, alpha: 1 },
             add: false
         });
-        SetMask(this, maskGraphics, undefined, true);
+        SetMask(this, maskGraphics, undefined, 'local');
         this.maskGraphics = maskGraphics;
     }
 

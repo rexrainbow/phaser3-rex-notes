@@ -49,7 +49,7 @@ class Demo extends Phaser.Scene {
         })
         */
 
-        camera
+        var controller = camera
             .filters.internal.addRexHorrifi({
                 enable: true,
 
