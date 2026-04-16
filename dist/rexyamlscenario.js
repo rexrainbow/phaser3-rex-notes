@@ -30231,6 +30231,7 @@ void main (void) {
 	        this.scene = parent.scene;
 	        this.events = this.scene.sys.events;
 	        this.active = false;
+	        this.isRexContainerLiteLayer = true;
 	        this.sortChildrenFlag = false;
 
 	        this.addCallback = this.addChildCallback;
@@ -30290,6 +30291,105 @@ void main (void) {
 	        return childA._depth - childB._depth;
 	    }
 	}
+
+	const DegToRad$8 = Phaser.Math.DegToRad;
+	const RadToDeg$4 = Phaser.Math.RadToDeg;
+
+	var GetLocalState = function (gameObject) {
+	    if (!gameObject.hasOwnProperty('rexContainer')) {
+	        var rexContainer = {
+	            parent: null, self: null, layer: null,
+	            x: 0, y: 0, syncPosition: true,
+	            rotation: 0, syncRotation: true,
+	            scaleX: 0, scaleY: 0, syncScale: true,
+	            alpha: 0, syncAlpha: true,
+	            syncScrollFactor: true,
+	            syncCameraFilter: true,
+	            syncDisplayList: true,
+	            visible: true,
+	            active: true,
+	        };
+
+	        Object.defineProperty(rexContainer, 'angle', {
+	            get: function () {
+	                return RadToDeg$4(this.rotation);
+	            },
+	            set: function (value) {
+	                this.rotation = DegToRad$8(value);
+	            }
+	        });
+	        Object.defineProperty(rexContainer, 'displayWidth', {
+	            get: function () {
+	                return gameObject.width * this.scaleX;
+	            },
+	            set: function (width) {
+	                this.scaleX = width / gameObject.width;
+	            }
+	        });
+	        Object.defineProperty(rexContainer, 'displayHeight', {
+	            get: function () {
+	                return gameObject.height * this.scaleY;
+	            },
+	            set: function (height) {
+	                this.scaleY = height / gameObject.height;
+	            }
+	        });
+
+	        gameObject.rexContainer = rexContainer;
+	    }
+	    return gameObject.rexContainer;
+	};
+
+	var GetValidChildren = function (parent, includeParent) {
+	    if (includeParent === undefined) {
+	        includeParent = true;
+	    }
+
+	    var children = parent.getAllChildren(includeParent ? [parent] : undefined);
+	    children = children.filter(function (gameObject) {
+	        return !!gameObject.displayList ||   // At scene's displayList or at a layer
+	            !!gameObject.parentContainer;  // At a container
+	    });
+	    return children;
+	};
+
+	var SetLayerState = function (gameObjects, layer) {
+	    for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+	        GetLocalState(gameObjects[i]).layer = layer;
+	    }
+	};
+
+	var AddToContainer = function (p3Container, config) {
+	    if (config === undefined) {
+	        config = {};
+	    }
+	    var {
+	        includeParent = false,
+	        setLayerState = false,
+	        clearDepthSort = false
+	    } = config;
+
+	    var gameObjects = GetValidChildren(this, includeParent);
+
+	    // This containerLite parent should be considered.
+	    if (includeParent && (gameObjects.indexOf(this) === -1)) {
+	        gameObjects.push(this);
+	    }
+
+	    SortGameObjectsByDepth(gameObjects);
+
+	    p3Container.add(gameObjects);
+
+	    if (setLayerState) {
+	        SetLayerState(gameObjects, p3Container);
+	    }
+
+	    if (clearDepthSort) {
+	        p3Container.sortChildrenFlag = false;
+	    }
+
+	    return gameObjects;
+	};
 
 	CheckP3Version();
 
@@ -30436,11 +30536,11 @@ void main (void) {
 
 	        this.rendererLayer = rendererLayer;
 
-	        for (var i = 0, cnt = this.children.length; i < cnt; i++) {
-	            this.addChildCallback(this.children[i]);
-	        }
-
-	        rendererLayer.queueDepthSort();
+	        AddToContainer.call(this, rendererLayer, {
+	            includeParent: false,
+	            setLayerState: true,
+	            clearDepthSort: true,
+	        });
 
 	        return this;
 	    }
@@ -30484,54 +30584,6 @@ void main (void) {
 	        parent = GetParent$1(parent);
 	    }
 	    return gameObject;
-	};
-
-	const DegToRad$8 = Phaser.Math.DegToRad;
-	const RadToDeg$4 = Phaser.Math.RadToDeg;
-
-	var GetLocalState = function (gameObject) {
-	    if (!gameObject.hasOwnProperty('rexContainer')) {
-	        var rexContainer = {
-	            parent: null, self: null, layer: null,
-	            x: 0, y: 0, syncPosition: true,
-	            rotation: 0, syncRotation: true,
-	            scaleX: 0, scaleY: 0, syncScale: true,
-	            alpha: 0, syncAlpha: true,
-	            syncScrollFactor: true,
-	            syncCameraFilter: true,
-	            syncDisplayList: true,
-	            visible: true,
-	            active: true,
-	        };
-
-	        Object.defineProperty(rexContainer, 'angle', {
-	            get: function () {
-	                return RadToDeg$4(this.rotation);
-	            },
-	            set: function (value) {
-	                this.rotation = DegToRad$8(value);
-	            }
-	        });
-	        Object.defineProperty(rexContainer, 'displayWidth', {
-	            get: function () {
-	                return gameObject.width * this.scaleX;
-	            },
-	            set: function (width) {
-	                this.scaleX = width / gameObject.width;
-	            }
-	        });
-	        Object.defineProperty(rexContainer, 'displayHeight', {
-	            get: function () {
-	                return gameObject.height * this.scaleY;
-	            },
-	            set: function (height) {
-	                this.scaleY = height / gameObject.height;
-	            }
-	        });
-
-	        gameObject.rexContainer = rexContainer;
-	    }
-	    return gameObject.rexContainer;
 	};
 
 	var Parent = {
@@ -31932,27 +31984,18 @@ void main (void) {
 	    },
 	};
 
-	Phaser.GameObjects.Container;
+	var ClearLayerState = function (gameObjects, layer) {
+	    for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+	        var gameObject = gameObjects[i];
+	        if (!gameObject.hasOwnProperty('rexContainer')) {
+	            continue;
+	        }
 
-	var GetValidChildren = function (parent) {
-	    var children = parent.getAllChildren([parent]);
-	    children = children.filter(function (gameObject) {
-	        return !!gameObject.displayList ||   // At scene's displayList or at a layer
-	            !!gameObject.parentContainer;  // At a container
-	    });
-	    return children;
-	};
-
-	var AddToContainer = function (p3Container) {
-	    var gameObjects = GetValidChildren(this);
-	    // This containerLite parent should be considered.
-	    if (gameObjects.indexOf(this) === -1) {
-	        gameObjects.push(this);
+	        var state = GetLocalState(gameObject);
+	        if (state.layer === layer) {
+	            state.layer = null;
+	        }
 	    }
-
-	    SortGameObjectsByDepth(gameObjects);
-
-	    p3Container.add(gameObjects);
 	};
 
 	var RemoveFromContainer = function (p3Container, descending, addToScene) {
@@ -31967,6 +32010,8 @@ void main (void) {
 
 	    p3Container.remove(gameObjects);
 
+	    ClearLayerState(gameObjects, p3Container);
+
 	    if (addToScene) {
 	        gameObjects.forEach(function (gameObject) {
 	            gameObject.addToDisplayList();
@@ -31974,17 +32019,28 @@ void main (void) {
 	    }
 	};
 
+	var IsLayer = function (gameObject) {
+	    return gameObject && (IsLayerGameObject(gameObject) || gameObject.isRexContainerLiteLayer);
+	};
+
 	var P3Container$1 = {
 	    addToContainer(p3Container) {
 	        this._setParentContainerFlag = true;
-	        AddToContainer.call(this, p3Container);
+	        AddToContainer.call(this, p3Container, {
+	            includeParent: true,
+	            setLayerState: false,
+	            clearDepthSort: false,
+	        });
 	        this._setParentContainerFlag = false;
 	        return this;
 	    },
 
 	    addToLayer(layer) {
-	        AddToContainer.call(this, layer);
-
+	        AddToContainer.call(this, layer, {
+	            includeParent: true,
+	            setLayerState: false,
+	            clearDepthSort: false,
+	        });
 	        return this;
 	    },
 
@@ -32004,7 +32060,7 @@ void main (void) {
 	            addToScene = true;
 	        }
 
-	        if (!IsLayerGameObject(this.displayList)) {
+	        if (!IsLayer(this.displayList)) {
 	            return this;
 	        }
 
@@ -32065,7 +32121,7 @@ void main (void) {
 	            return this;
 	        }
 
-	        if (IsLayerGameObject(parentLayer)) {
+	        if (IsLayer(parentLayer)) {
 	            if (gameObject.isRexContainerLite) {
 	                // Add containerLite and its children
 	                gameObject.addToLayer(parentLayer);
@@ -32140,7 +32196,11 @@ void main (void) {
 
 	        if (gameObject.isRexContainerLite) {
 	            // Add containerLite and its children
-	            gameObject.addToLayer(layer);
+	            AddToContainer.call(gameObject, layer, {
+	                includeParent: true,
+	                setLayerState: true,
+	                clearDepthSort: false,
+	            });
 	        } else {
 	            // Add gameObject directly
 	            layer.add(gameObject);
