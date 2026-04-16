@@ -3384,8 +3384,6 @@
         );
     };
 
-    Phaser.GameObjects.Graphics;
-
     var MaskMethods = {
         enableBoardLayer(layer) {
             if (this.layer) {
