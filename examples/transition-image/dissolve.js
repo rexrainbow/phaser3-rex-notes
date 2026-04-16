@@ -1,6 +1,6 @@
 import phaser from '../../../phaser/src/phaser.js';
 import TransitionImagePlugin from '../../plugins/transitionimage-plugin';
-import DissolvePipelinePlugin from '../../plugins/dissolvepipeline-plugin.js';
+import DisolveFilterPlugin from '../../plugins/dissolvefilter-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -37,23 +37,23 @@ class Demo extends Phaser.Scene {
 }
 
 var Dissolve = function (transitionImage, key, frame) {
-    var scene = transitionImage.scene;
-    var postFxPlugin = scene.plugins.get('rexDissolvePipelinePlugin');
-
+    var dissolveController;
     transitionImage.transit({
         key: key, frame: frame,
 
         duration: 2000, ease: 'Quad', dir: 'out',
 
         onStart: function (parent, currentImage, nextImage, t) {
-            postFxPlugin.add(currentImage)
+            dissolveController = currentImage
+                .enableFilters()
+                .filters.internal.addRexDissolve();
         },
         onProgress: function (parent, currentImage, nextImage, t) {
-            postFxPlugin.get(currentImage)[0]
-                .setProgress(t)
+            dissolveController.setProgress(t);
         },
         onComplete: function (parent, currentImage, nextImage, t) {
-            postFxPlugin.remove(currentImage)
+            currentImage.filters.internal.remove(dissolveController);
+            dissolveController = null;
         },
     })
     return transitionImage;
@@ -77,8 +77,8 @@ var config = {
                 start: true
             },
             {
-                key: 'rexDissolvePipelinePlugin',
-                plugin: DissolvePipelinePlugin,
+                key: 'rexDisolveFilter',
+                plugin: DisolveFilterPlugin,
                 start: true
             }
         ]

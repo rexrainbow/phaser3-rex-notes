@@ -1,8 +1,6 @@
 import { SetMask } from '../../../../plugins/utils/mask/MaskMethods.js';
 import LayerGameObjectClassPatch from '../../../../plugins/utils/monkeypatch/LayerGameObjectClassPatch.js';
 
-const Graphics = Phaser.GameObjects.Graphics;
-
 export default {
     enableBoardLayer(layer) {
         if (this.layer) {
