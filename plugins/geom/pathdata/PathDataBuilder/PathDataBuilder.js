@@ -21,11 +21,31 @@ class PathDataBuilder {
         this.firstPointY = undefined;
         this.lastPointX = undefined;
         this.lastPointY = undefined;
+        this.lastCX = undefined;
+        this.lastCY = undefined;
+        this.lastControlType = undefined;
+        this.pathTypeMismatchWarningEnable = true;
         this.accumulationLengths = undefined;
     }
 
     setIterations(iterations) {
         this.iterations = iterations;
+        return this;
+    }
+
+    setPathTypeMismatchWarningEnable(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+
+        this.pathTypeMismatchWarningEnable = enable;
+        return this;
+    }
+
+    resetControlPoint() {
+        this.lastCX = this.lastPointX;
+        this.lastCY = this.lastPointY;
+        this.lastControlType = undefined;
         return this;
     }
 

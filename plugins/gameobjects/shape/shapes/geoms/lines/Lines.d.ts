@@ -16,6 +16,13 @@ export default class Lines extends PathBase {
     iterations: number;
 
     /**
+     * Set path type mismatch warning enable.
+     * @param enable - True to print warning.
+     * @returns This instance.
+     */
+    setPathTypeMismatchWarningEnable(enable?: boolean): this;
+
+    /**
      * First point x.
      */
     firstPointX: number;
@@ -131,6 +138,17 @@ export default class Lines extends PathBase {
     ): this;
 
     /**
+     * Add a smooth quadratic bezier segment.
+     * @param x - End x.
+     * @param y - End y.
+     * @returns This instance.
+     */
+    smoothQuadraticBezierTo(
+        x: number,
+        y: number
+    ): this;
+
+    /**
      * Add a cubic bezier segment.
      * @param cx0 - First control x.
      * @param cy0 - First control y.
@@ -143,6 +161,21 @@ export default class Lines extends PathBase {
     cubicBezierTo(
         cx0: number,
         cy0: number,
+        cx1: number,
+        cy1: number,
+        x: number,
+        y: number
+    ): this;
+
+    /**
+     * Add a smooth cubic bezier segment.
+     * @param cx1 - Second control x.
+     * @param cy1 - Second control y.
+     * @param x - End x.
+     * @param y - End y.
+     * @returns This instance.
+     */
+    smoothCubicBezierTo(
         cx1: number,
         cy1: number,
         x: number,

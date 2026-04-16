@@ -118,6 +118,11 @@ export default {
         this.pathData.length = 0;
         AppendFromPathSegment(this.pathDataSave, this.accumulationLengths, startT, endT, this.pathData);
 
+        this.firstPointX = this.pathData[0];
+        this.firstPointY = this.pathData[1];
+        this.lastPointX = this.pathData[this.pathData.length - 2];
+        this.lastPointY = this.pathData[this.pathData.length - 1];
+        this.resetControlPoint();
         return this;
     },
 
@@ -133,6 +138,7 @@ export default {
         this.firstPointY = this.pathData[1];
         this.lastPointX = this.pathData[this.pathData.length - 2];
         this.lastPointY = this.pathData[this.pathData.length - 1];
+        this.resetControlPoint();
         return this;
     },
 }

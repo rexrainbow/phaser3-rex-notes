@@ -21,6 +21,11 @@ class Lines extends PathBase {
         return this;
     }
 
+    setPathTypeMismatchWarningEnable(enable) {
+        this.builder.setPathTypeMismatchWarningEnable(enable);
+        return this;
+    }
+
     get lastPointX() {
         return this.builder.lastPointX;
     }
@@ -85,8 +90,22 @@ class Lines extends PathBase {
         return this;
     }
 
+    smoothQuadraticBezierTo(x, y) {
+        this.builder.smoothQuadraticBezierTo(x, y);
+
+        this.dirty = true;
+        return this;
+    }
+
     cubicBezierTo(cx0, cy0, cx1, cy1, x, y) {
         this.builder.cubicBezierTo(cx0, cy0, cx1, cy1, x, y);
+
+        this.dirty = true;
+        return this;
+    }
+
+    smoothCubicBezierTo(cx1, cy1, x, y) {
+        this.builder.smoothCubicBezierTo(cx1, cy1, x, y);
 
         this.dirty = true;
         return this;

@@ -20,6 +20,11 @@ export default {
         Copy(this.pathData, this.pathDataSave);
         this.pathDataSave = undefined;
         this.pathDataSaved = false;
+        this.firstPointX = this.pathData[0];
+        this.firstPointY = this.pathData[1];
+        this.lastPointX = this.pathData[this.pathData.length - 2];
+        this.lastPointY = this.pathData[this.pathData.length - 1];
+        this.resetControlPoint();
         return this;
     },
 }
